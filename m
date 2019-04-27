@@ -2,56 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6939BB290
-	for <lists+samba-technical@lfdr.de>; Sat, 27 Apr 2019 05:44:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8B34B476
+	for <lists+samba-technical@lfdr.de>; Sat, 27 Apr 2019 22:18:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=sZbCaZd62RS0HQMtWC9xQRU9LnEXwU3GPpKJ1bKnoJA=; b=L/gvtaGVyc443r6os/yDT8W7GH
-	5GG7xFdl5patG9rNXueo9JH1oj3joFn9udmHT9677Iiqq1mqyS13u0utUG798HW1o3zPmwm/aGx6s
-	FNr/QD5ndmJJgbjtPI3FO12ABFYcEwQ5gp44+Z+rljdmo4ybfLMt3y5h81GCDLjzUay32mUBtljCv
-	sx37l3mckS7t0yafiRrG+rYSfovZWpai5OyKV2uc9Tv7hRiSz7CRAP0zUrcCj1a8LxuDY2TCD638o
-	W6+P3Ddjkzn1r5bHUpqUmx5tR0Na9yintFAWKmRfErXTk6a1rhTjUR6hzpLgphlnm2GVnW8l1apO5
-	3ZwU1UWQ==;
-Received: from localhost ([::1]:45524 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=X7nIKq30gmNteOhuVTtXwzawEY+p5Z4tJsssF9WMYtM=; b=Dr+ts5OVrVXu7U2XXc6K5FjWsl
+	HyG1Wsv6i3VpCTif63it3s39ctHRcFK/p6Qc9Tr6OtIP1PybfwCKYX7vz7LwKSxESsTCVLcP39Hjs
+	gg8KjoB5RT01dkxv8oCCS8uT7kcxQUhTfyhZeB44Hodk/tpDjhTfyqkXxY9QHVO0zIlhfTbo6haQN
+	3dHESnIEbKLjqkvLqZBn38WLm4/KvMQGsLWpCtcCIPJ1LauzDyQZuy6hghM8fUohPKU7Js13oIbVl
+	1VHARkLaKrVHy38Z2hthrd7FF2EoYI9GXp6MUXtDNldSkOZk94GoVNiQn5T4RpwnQ5r6+Fwv7k0tA
+	EKWNB7XQ==;
+Received: from localhost ([::1]:55780 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hKEFe-0034AS-Lz; Sat, 27 Apr 2019 03:43:46 +0000
-Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532]:43610) 
+	id 1hKTkr-00383v-LJ; Sat, 27 Apr 2019 20:17:01 +0000
+Received: from mail-yw1-xc41.google.com ([2607:f8b0:4864:20::c41]:44495) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hKEFZ-0034AF-54
- for samba-technical@lists.samba.org; Sat, 27 Apr 2019 03:43:44 +0000
-Received: by mail-pg1-x532.google.com with SMTP id z9so2479018pgu.10
- for <samba-technical@lists.samba.org>; Fri, 26 Apr 2019 20:43:39 -0700 (PDT)
+ (Exim) id 1hKTkm-00383o-1R
+ for samba-technical@lists.samba.org; Sat, 27 Apr 2019 20:16:58 +0000
+Received: by mail-yw1-xc41.google.com with SMTP id j4so2368900ywk.11
+ for <samba-technical@lists.samba.org>; Sat, 27 Apr 2019 13:16:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=sZbCaZd62RS0HQMtWC9xQRU9LnEXwU3GPpKJ1bKnoJA=;
- b=rOIAjWkezocb9LriJ43gCCSPA2z2AYHoJ1gXJ3oNcF2+xLjzZhbj/wdrOLtjd6LKZq
- XnftfjmwUgQjrKsGoPa1AskWLnL8myeiNO3GCFKrT4NsmsvjKMmMjgP7mcIvUPUDlVb+
- BApicCX/+SFFDRy3E0Dfj81koz5RqrCTlRaVgAJxPrwJrFFHv2gTcPM8xlPu4bpGurus
- STyxYJlNTP54FTFjneE8hui66Y0lkAdqcB5MHm2B9AJNSaFK+iRfo2CLel08yx3CcRqA
- Z1OFVhlpUDPjs9UZQavwPN4gPBXBp5gQzVSLGHycJhTeixuUMmwqd8/iHPshT/dNUN07
- K/xA==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=X7nIKq30gmNteOhuVTtXwzawEY+p5Z4tJsssF9WMYtM=;
+ b=YTdcDCKFP8Wusps0xQ2BYOOkrKX2CrNRaEUAoW3pFyzoE7aVcc7edu59oCKcG24nJ+
+ t/Me5myN59chQFA34FhFOmQG1fmH2ZOk3fofbvgNKEyfaxIvAbNrYBj6cWNXoAUlfTdU
+ GLEsxehnNKqlNZKGcakxWNaPTWq+XZkgb6nFap4fcoBc3bN3Odds9I+xneLqT9cnmcq5
+ Glw9qWjpfwvK1tfe4ib6jpxC0U3l8BlRPcjo7OaDrS0qH5diX6o86iZAbSaLPRGsBlnR
+ OlLgPppHxBGwjqbWnEeA5Bx7lZcjiD93pss3FBIie8vu6FpVnjFO9uuib+AigfiW1t2H
+ yroQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=sZbCaZd62RS0HQMtWC9xQRU9LnEXwU3GPpKJ1bKnoJA=;
- b=bLHkGHWfZuOA1naSgeEVdc0Rt5xpvCw+Rgs1gvvrQZ+4GQIJyJYHXj/y8bmEoIb9n0
- h51UufMzG4Kb+14fL1bryQZ20JYH53Xw38cVZsGxGn29ElxvIWYQUboWCjZYYVu+dO33
- nB3nhr5h3IH59lb76Sr5bZ9LEIFMf3qBCIm1nZ5RQ0H10tva1ldXBPjqKRJT8Vp96dVg
- 8+hGk911BDhc/KPO9s/yZMubRUHYjd0PPrR9Pk4NsEmgH6IW1593LPJ9LcCrp4ugBw+2
- 0sUvyo9awl3xLEW/HzEh334L5sY6ps075epkN11sGUPYM+ZezR+stycwm9o46gpEk1Nb
- P7nw==
-X-Gm-Message-State: APjAAAU3HANov4EW+qqSqq6XgtW0qKw26P9R1PkMBXX8gvR3LylI+fw3
- 70SLBJhmIOxMf3JSztDLosmGzAJTbj2/JaIgahA=
-X-Google-Smtp-Source: APXvYqx/gKxIw8coVqotCs0Qyl3DkTIPwjGV+5l30fi9VuYSqY7oeTrEX9eW8vYvNtys7WlRSecimE9ry2+wdAJTeBU=
-X-Received: by 2002:a62:528b:: with SMTP id g133mr5306107pfb.246.1556336613339; 
- Fri, 26 Apr 2019 20:43:33 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=X7nIKq30gmNteOhuVTtXwzawEY+p5Z4tJsssF9WMYtM=;
+ b=DY1w6GirtS7kbfnyBPhXkSsFk6hq6tLaN1oZ9XXBBzh+ZC78dkJ/o6XGSSw43aX4TI
+ 10ExE7WkrKplmaWhsfG+3l+YfLnTCmUcek09CW6q2unLqZccV+EbjMIPqx2aHLAD9T09
+ F4KXzt9Zm+BjVw/6pVAtm+63VC5NwbQ12pwoM0SwrZ38YMWc6kTP5bNUzqZszSe3O20g
+ byrsw/YUQvomK6rF8tRs1Eo8wtWPQB/IJIBfUTYwHXcmEwI5YkvJXIB7y+ZXO1EtQukr
+ JtRJI7XvxLHAOOZ3Iw/RROTi17jhYAtHE+N1H/ScBuH5r6s3bipdN25QWwRVZHz+amCM
+ LE3w==
+X-Gm-Message-State: APjAAAXh3p7otEJ6m5CF2+Pw6xXAshha+ShbYQu0rHkIC2IQga7iDfyB
+ LYlyMF5qxaiBrP0o2Avx5ZwOdUc90JfaSus7YuI=
+X-Google-Smtp-Source: APXvYqyMiv4Q75Gsfnaru5UqCRjb6WzLYfjr5aY84foN+Agu0n9ANzxebHWhVCwNu6rZLZknxtXrOi9aQoQvPkCGksc=
+X-Received: by 2002:a81:7c4:: with SMTP id 187mr44913328ywh.176.1556396214239; 
+ Sat, 27 Apr 2019 13:16:54 -0700 (PDT)
 MIME-Version: 1.0
-Date: Fri, 26 Apr 2019 20:43:22 -0700
-Message-ID: <CAH2r5mvtY513PT8dQDUthvRMGSggOD-nROg6r0Rt5MMNUnGUaA@mail.gmail.com>
-Subject: Add support for new Compression Negotiate Context
-To: CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="000000000000fd614905877ada9e"
+References: <CAOQ4uxjQdLrZXkpP30Pq_=Cckcb=mADrEwQUXmsG92r-gn2y5w@mail.gmail.com>
+ <379106947f859bdf5db4c6f9c4ab8c44f7423c08.camel@kernel.org>
+ <CAOQ4uxgewN=j3ju5MSowEvwhK1HqKG3n1hBRUQTi1W5asaO1dQ@mail.gmail.com>
+ <930108f76b89c93b2f1847003d9e060f09ba1a17.camel@kernel.org>
+ <CAOQ4uxgQsRaEOxz1aYzP1_1fzRpQbOm2-wuzG=ABAphPB=7Mxg@mail.gmail.com>
+ <20190426140023.GB25827@fieldses.org>
+ <CAOQ4uxhuxoEsoBbvenJ8eLGstPc4AH-msrxDC-tBFRhvDxRSNg@mail.gmail.com>
+ <20190426145006.GD25827@fieldses.org>
+ <e69d149c80187b84833fec369ad8a51247871f26.camel@kernel.org>
+In-Reply-To: <e69d149c80187b84833fec369ad8a51247871f26.camel@kernel.org>
+Date: Sat, 27 Apr 2019 16:16:42 -0400
+Message-ID: <CAOQ4uxjt+MkufaJWoqWSYZbejWa1nJEe8YYRroEBSb1jHjzkwQ@mail.gmail.com>
+Subject: Re: Better interop for NFS/SMB file share mode/reservation
+To: Jeff Layton <jlayton@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,142 +75,125 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Amir Goldstein via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Amir Goldstein <amir73il@gmail.com>
+Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ Linux NFS Mailing List <linux-nfs@vger.kernel.org>, Volker.Lendecke@sernet.de,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000fd614905877ada9e
-Content-Type: text/plain; charset="UTF-8"
+[adding back samba/nfs and fsdevel]
 
-Add support to negotiate the compression context, and also saved off
-to display in /proc/fs/cifs/DebugData.  Future patch will add use for
-it on the wire.
+On Fri, Apr 26, 2019 at 6:22 PM Jeff Layton <jlayton@kernel.org> wrote:
+>
+> On Fri, 2019-04-26 at 10:50 -0400, J. Bruce Fields wrote:
+> > On Fri, Apr 26, 2019 at 04:11:00PM +0200, Amir Goldstein wrote:
+> > > On Fri, Apr 26, 2019, 4:00 PM J. Bruce Fields <bfields@fieldses.org> wrote:
+> > >
+> > > > On Fri, Apr 26, 2019 at 03:50:46PM +0200, Amir Goldstein wrote:
+> > > > > On Fri, Feb 8, 2019, 5:03 PM Jeff Layton <jlayton@kernel.org> wrote:
+> > > > > > Share/deny open semantics are pretty similar across NFS and SMB (by
+> > > > > > design, really). If you intend to solve that use-case, what you really
+> > > > > > want is whole-file, shared/exclusive locks that are set atomically with
+> > > > > > the open call. O_EXLOCK and O_SHLOCK seem like a reasonable fit there.
+> > > > > >
+> > > > > > Then you could have SMB and NFS servers set these flags when opening
+> > > > > > files, and deal with the occasional denial at open time. Other
+> > > > > > applications won't be aware of them of course, but that's probably fine
+> > > > > > for most use-cases where you want this sort of protocol interop.
+> > > > >
+> > > > > Sorry for posting off list. Airport emails...
+> > > > > I looked at implemeting O_EXLOCK and O_SHLOCK and it looks doable.
+> > > > >
+> > > > > I was wondering if there is an inherent reason not to allow an exclusive
+> > > > > lock on a file that is open read-only.
+> > > > >
+> > > > > Samba seems to need it and currently flock and ofd locks won't allow it.
+> > > > > Do you thing it will be ok to allow it with O_EXLOCK?
+> > > >
+> > > > Somebody could deny everyone access to a shared resource that everyone
+> > > > needs to make progress, like /etc/passwd or a shared library.
+> > > >
+> > > > Have you looked at Pavel Shilovsky's O_DENY patches?  He had the feature
+> > > > off by default, with a mount option provided to turn it on.
+> > > >
+> > >
+> > > O_EXLOCK is advisory. It only aquired flock or ofd lock atomically with
+> > > open.
+> >
+> > Whoops, got it.
+> >
+> > Is that really adequate for open share locks, though?
+> >
+> > I assumed that Windows apps depend on the assumption that they're
+> > mandatory.  So e.g. if you can get a DENY_READ open on a shared library
+> > then you know you can update it without the risk of making someone else
+> > crash.
+> >
+>
+> I think this is (slightly) better than doing it internally like we do
+> today and would give you coherent locking between NFS and SMB. Other
+> applications wouldn't see them, but for a NAS-style deployment, that's
+> probably ok.
+>
 
-Note in /proc/fs/cifs/DebugData below (mounted to Windows 10) it defaulted
-to LZ77 compression algorithm.  See MS-SMB2 2.2.3.1 and and MS-XCA
+We can do a little bit better.
+We can make sure that O_DENY_WRITE (named for convenience) fails
+if file is currently open for write by anyone and similarly for O_DENY_READ.
+But if we cannot deny future non-cooperative opens what's the point?....
 
-Servers:
-Number of credits: 326 Dialect 0x311 COMPRESS_LZ77 signed
-1) Name: 192.168.92.17 Uses: 1 Capability: 0x300067    Session Status:
-1 TCP status: 1 Instance: 1
+> Any open by samba or nfsd would need to start setting O_SHLOCK, and deny
+> mode opens would have to set O_EXLOCK. We would actually need 2 per
+> inode though (one for read and one for write).
+>
 
+...the point is that O_DENY_NONE does not need to be implemented with
+a new type of lock object (O_WR_SHLOCK) its enough that it checks there
+are no relevant exclusive locks and the then inode->i_writecount and
+inode->i_readcount already provide enough context to cooperate with
+O_DENY_WRITE and O_DENY_READ.
 
--- 
+I need to see if incrementing inode->i_readcount on O_RDWR opens is
+possible (right now it only counts O_RDONLY opens).
+
+> I think these should probably be in their own "namespace" too. They
+> could use the same semantics as flock, but should sit on their own list
+> in file_lock_context.
+>
+
+I would much rather that they didn't. The reason is that new open flags
+are a backward compat problem. The way I want to solve it is this API:
+
+// On new kernel this will acquire OFD F_WRLCK atomically...
+fd = open(..., O_RDWR | O_EXLOCK);
+// ...check if it did acquire OFD lock
+fcntl(fd,  F_OFD_GETLK, ...);
+
+We'd need at least one new l_type F_EX_RDLCK and maybe also a new
+semantic F_EX_RDWRLCK, although similar in conflicts to F_WRLCK it can be
+acquired without FMODE_WRITE. Though I personally thing we can do without
+it if the only way to acquire F_WRLCK on readonly file is via new open flag.
+
+> That said, we could also look at a vfs-level mount option that would
+> make the kernel enforce these for any opener. That could also be useful,
+> and shouldn't be too hard to implement. Maybe even make it a vfsmount-
+> level option (like -o ro is).
+>
+
+Yeh, I am humbly going to leave this struggle to someone else.
+Not important enough IMO and completely independent effort to the
+advisory atomic open&lock API.
+
+> If you're denied, what error should you get back when you try to open
+> it? It should be something distinct. We may even want to add new error
+> codes for this.
+
+IMO EBUSY does the job. Its distinct because open is not expected
+to return EBUSY for regular files/dirs and when open is expected to
+return EBUSY for blockdev its for the exact same use case (i.e.
+exclusive write open is acquired by userspace tools).
+
 Thanks,
-
-Steve
-
---000000000000fd614905877ada9e
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-smb3-Negotiate-and-save-preferred-compression-algori.patch"
-Content-Disposition: attachment; 
-	filename="0001-smb3-Negotiate-and-save-preferred-compression-algori.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_juyymi9t0>
-X-Attachment-Id: f_juyymi9t0
-
-RnJvbSA3Zjg3YzZmYWY1NDcwNzFlMGU1MDNmNDMxMTM0OTAyNTQxMWUzZmRmIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHNtZnJlbmNoQGdtYWlsLmNvbT4KRGF0
-ZTogRnJpLCAyNiBBcHIgMjAxOSAyMDozNjowOCAtMDcwMApTdWJqZWN0OiBbUEFUQ0hdIFtzbWIz
-XSBOZWdvdGlhdGUgYW5kIHNhdmUgcHJlZmVycmVkIGNvbXByZXNzaW9uIGFsZ29yaXRobXMKCk5l
-dyBuZWdvdGlhdGUgY29udGV4dCAoMykgYWxsb3dzIHRoZSBzZXJ2ZXIgYW5kIGNsaWVudCB0bwpu
-ZWdvdGlhdGUgd2hpY2ggY29tcHJlc3Npb24gYWxnb3JpdGhtcyB0byB1c2UuIEFkZCBzdXBwb3J0
-CmZvciB0aGlzIGFuZCBzYXZlIGl0IG9mZiBpbiB0aGUgc2VydmVyIHN0cnVjdHVyZS4KCkFsc28g
-bm93IGRpc3BsYXllZCBpbiAvcHJvYy9mcy9jaWZzL0RlYnVnRGF0YSAoc2VlIGJlbG93IGV4YW1w
-bGUKdG8gV2luZG93cyAxMCkgd2hlcmUgY29tcHJlc3Npb24gYWxnb2lydGhtICJMWjc3IiB3YXMg
-bmVnb3RpYXRlZDoKClNlcnZlcnM6Ck51bWJlciBvZiBjcmVkaXRzOiAzMjYgRGlhbGVjdCAweDMx
-MSBDT01QUkVTU19MWjc3IHNpZ25lZAoxKSBOYW1lOiAxOTIuMTY4LjkyLjE3IFVzZXM6IDEgQ2Fw
-YWJpbGl0eTogMHgzMDAwNjcJU2Vzc2lvbiBTdGF0dXM6IDEgVENQIHN0YXR1czogMSBJbnN0YW5j
-ZTogMQoKU2VlIE1TLVhDQSBhbmQgTVMtU01CMiAyLjIuMy4xIGZvciBtb3JlIGRldGFpbHMuCgpT
-aWduZWQtb2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+Ci0tLQog
-ZnMvY2lmcy9jaWZzX2RlYnVnLmMgfCAgNiArKysrKysKIGZzL2NpZnMvY2lmc2dsb2IuaCAgIHwg
-IDEgKwogZnMvY2lmcy9zbWIycGR1LmMgICAgfCA0NyArKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrLQogZnMvY2lmcy9zbWIycGR1LmggICAgfCAgNyArKysrKy0tCiA0
-IGZpbGVzIGNoYW5nZWQsIDU4IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCgpkaWZmIC0t
-Z2l0IGEvZnMvY2lmcy9jaWZzX2RlYnVnLmMgYi9mcy9jaWZzL2NpZnNfZGVidWcuYwppbmRleCA1
-ZmYwYjNkNGM0ODQuLjZhNjlmMTFhYWNmNyAxMDA2NDQKLS0tIGEvZnMvY2lmcy9jaWZzX2RlYnVn
-LmMKKysrIGIvZnMvY2lmcy9jaWZzX2RlYnVnLmMKQEAgLTMzMiw2ICszMzIsMTIgQEAgc3RhdGlj
-IGludCBjaWZzX2RlYnVnX2RhdGFfcHJvY19zaG93KHN0cnVjdCBzZXFfZmlsZSAqbSwgdm9pZCAq
-dikKICNlbmRpZgogCQlzZXFfcHJpbnRmKG0sICJcbk51bWJlciBvZiBjcmVkaXRzOiAlZCBEaWFs
-ZWN0IDB4JXgiLAogCQkJc2VydmVyLT5jcmVkaXRzLCAgc2VydmVyLT5kaWFsZWN0KTsKKwkJaWYg
-KHNlcnZlci0+Y29tcHJlc3NfYWxnb3JpdGhtID09IFNNQjNfQ09NUFJFU1NfTFpOVDEpCisJCQlz
-ZXFfcHJpbnRmKG0sICIgQ09NUFJFU1NfTFpOVDEiKTsKKwkJZWxzZSBpZiAoc2VydmVyLT5jb21w
-cmVzc19hbGdvcml0aG0gPT0gU01CM19DT01QUkVTU19MWjc3KQorCQkJc2VxX3ByaW50ZihtLCAi
-IENPTVBSRVNTX0xaNzciKTsKKwkJZWxzZSBpZiAoc2VydmVyLT5jb21wcmVzc19hbGdvcml0aG0g
-PT0gU01CM19DT01QUkVTU19MWjc3X0hVRkYpCisJCQlzZXFfcHJpbnRmKG0sICIgQ09NUFJFU1Nf
-TFo3N19IVUZGIik7CiAJCWlmIChzZXJ2ZXItPnNpZ24pCiAJCQlzZXFfcHJpbnRmKG0sICIgc2ln
-bmVkIik7CiAJCWlmIChzZXJ2ZXItPnBvc2l4X2V4dF9zdXBwb3J0ZWQpCmRpZmYgLS1naXQgYS9m
-cy9jaWZzL2NpZnNnbG9iLmggYi9mcy9jaWZzL2NpZnNnbG9iLmgKaW5kZXggNWZmZTBlNTM4Y2Vj
-Li5kMjQ0YmNmYjQyNTIgMTAwNjQ0Ci0tLSBhL2ZzL2NpZnMvY2lmc2dsb2IuaAorKysgYi9mcy9j
-aWZzL2NpZnNnbG9iLmgKQEAgLTczNCw2ICs3MzQsNyBAQCBzdHJ1Y3QgVENQX1NlcnZlcl9JbmZv
-IHsKICNlbmRpZiAvKiBTVEFUUzIgKi8KIAl1bnNpZ25lZCBpbnQJbWF4X3JlYWQ7CiAJdW5zaWdu
-ZWQgaW50CW1heF93cml0ZTsKKwlfX3UxNgljb21wcmVzc19hbGdvcml0aG07CiAJX19sZTE2CWNp
-cGhlcl90eXBlOwogCSAvKiBzYXZlIGluaXRpdGFsIG5lZ3Byb3QgaGFzaCAqLwogCV9fdTgJcHJl
-YXV0aF9zaGFfaGFzaFtTTUIyX1BSRUFVVEhfSEFTSF9TSVpFXTsKZGlmZiAtLWdpdCBhL2ZzL2Np
-ZnMvc21iMnBkdS5jIGIvZnMvY2lmcy9zbWIycGR1LmMKaW5kZXggNjM0ODAwYzBiYzA2Li44MmUy
-YTI3YmNjYzAgMTAwNjQ0Ci0tLSBhL2ZzL2NpZnMvc21iMnBkdS5jCisrKyBiL2ZzL2NpZnMvc21i
-MnBkdS5jCkBAIC00NzIsNiArNDcyLDE5IEBAIGJ1aWxkX3ByZWF1dGhfY3R4dChzdHJ1Y3Qgc21i
-Ml9wcmVhdXRoX25lZ19jb250ZXh0ICpwbmVnX2N0eHQpCiAJcG5lZ19jdHh0LT5IYXNoQWxnb3Jp
-dGhtcyA9IFNNQjJfUFJFQVVUSF9JTlRFR1JJVFlfU0hBNTEyOwogfQogCitzdGF0aWMgdm9pZAor
-YnVpbGRfY29tcHJlc3Npb25fY3R4dChzdHJ1Y3Qgc21iMl9jb21wcmVzc2lvbl9jYXBhYmlsaXRp
-ZXNfY29udGV4dCAqcG5lZ19jdHh0KQoreworCXBuZWdfY3R4dC0+Q29udGV4dFR5cGUgPSBTTUIy
-X0NPTVBSRVNTSU9OX0NBUEFCSUxJVElFUzsKKwlwbmVnX2N0eHQtPkRhdGFMZW5ndGggPQorCQlj
-cHVfdG9fbGUxNihzaXplb2Yoc3RydWN0IHNtYjJfY29tcHJlc3Npb25fY2FwYWJpbGl0aWVzX2Nv
-bnRleHQpCisJCQkgIC0gc2l6ZW9mKHN0cnVjdCBzbWIyX25lZ19jb250ZXh0KSk7CisJcG5lZ19j
-dHh0LT5Db21wcmVzc2lvbkFsZ29yaXRobUNvdW50ID0gY3B1X3RvX2xlMTYoMyk7CisJcG5lZ19j
-dHh0LT5Db21wcmVzc2lvbkFsZ29yaXRobXNbMF0gPSBTTUIzX0NPTVBSRVNTX0xaNzc7CisJcG5l
-Z19jdHh0LT5Db21wcmVzc2lvbkFsZ29yaXRobXNbMV0gPSBTTUIzX0NPTVBSRVNTX0xaNzdfSFVG
-RjsKKwlwbmVnX2N0eHQtPkNvbXByZXNzaW9uQWxnb3JpdGhtc1syXSA9IFNNQjNfQ09NUFJFU1Nf
-TFpOVDE7Cit9CisKIHN0YXRpYyB2b2lkCiBidWlsZF9lbmNyeXB0X2N0eHQoc3RydWN0IHNtYjJf
-ZW5jcnlwdGlvbl9uZWdfY29udGV4dCAqcG5lZ19jdHh0KQogewpAQCAtNTM4LDEwICs1NTEsMTcg
-QEAgYXNzZW1ibGVfbmVnX2NvbnRleHRzKHN0cnVjdCBzbWIyX25lZ290aWF0ZV9yZXEgKnJlcSwK
-IAkqdG90YWxfbGVuICs9IGN0eHRfbGVuOwogCXBuZWdfY3R4dCArPSBjdHh0X2xlbjsKIAorCWJ1
-aWxkX2NvbXByZXNzaW9uX2N0eHQoKHN0cnVjdCBzbWIyX2NvbXByZXNzaW9uX2NhcGFiaWxpdGll
-c19jb250ZXh0ICopCisJCQkJcG5lZ19jdHh0KTsKKwljdHh0X2xlbiA9IERJVl9ST1VORF9VUCgK
-KwkJc2l6ZW9mKHN0cnVjdCBzbWIyX2NvbXByZXNzaW9uX2NhcGFiaWxpdGllc19jb250ZXh0KSwg
-OCkgKiA4OworCSp0b3RhbF9sZW4gKz0gY3R4dF9sZW47CisJcG5lZ19jdHh0ICs9IGN0eHRfbGVu
-OworCiAJYnVpbGRfcG9zaXhfY3R4dCgoc3RydWN0IHNtYjJfcG9zaXhfbmVnX2NvbnRleHQgKilw
-bmVnX2N0eHQpOwogCSp0b3RhbF9sZW4gKz0gc2l6ZW9mKHN0cnVjdCBzbWIyX3Bvc2l4X25lZ19j
-b250ZXh0KTsKIAotCXJlcS0+TmVnb3RpYXRlQ29udGV4dENvdW50ID0gY3B1X3RvX2xlMTYoMyk7
-CisJcmVxLT5OZWdvdGlhdGVDb250ZXh0Q291bnQgPSBjcHVfdG9fbGUxNig0KTsKIH0KIAogc3Rh
-dGljIHZvaWQgZGVjb2RlX3ByZWF1dGhfY29udGV4dChzdHJ1Y3Qgc21iMl9wcmVhdXRoX25lZ19j
-b250ZXh0ICpjdHh0KQpAQCAtNTU5LDYgKzU3OSwyOCBAQCBzdGF0aWMgdm9pZCBkZWNvZGVfcHJl
-YXV0aF9jb250ZXh0KHN0cnVjdCBzbWIyX3ByZWF1dGhfbmVnX2NvbnRleHQgKmN0eHQpCiAJCXBy
-aW50a19vbmNlKEtFUk5fV0FSTklORyAidW5rbm93biBTTUIzIGhhc2ggYWxnb3JpdGhtXG4iKTsK
-IH0KIAorc3RhdGljIHZvaWQgZGVjb2RlX2NvbXByZXNzX2N0eChzdHJ1Y3QgVENQX1NlcnZlcl9J
-bmZvICpzZXJ2ZXIsCisJCQkgc3RydWN0IHNtYjJfY29tcHJlc3Npb25fY2FwYWJpbGl0aWVzX2Nv
-bnRleHQgKmN0eHQpCit7CisJdW5zaWduZWQgaW50IGxlbiA9IGxlMTZfdG9fY3B1KGN0eHQtPkRh
-dGFMZW5ndGgpOworCisJLyogc2l6ZW9mIGNvbXByZXNzIGNvbnRleHQgaXMgYSBvbmUgZWxlbWVu
-dCBjb21wcmVzc2lvbiBjYXBiaWxpdHkgc3RydWN0ICovCisJaWYgKGxlbiA8IDEwKSB7CisJCXBy
-aW50a19vbmNlKEtFUk5fV0FSTklORyAic2VydmVyIHNlbnQgYmFkIGNvbXByZXNzaW9uIGNudHh0
-XG4iKTsKKwkJcmV0dXJuOworCX0KKwlpZiAobGUxNl90b19jcHUoY3R4dC0+Q29tcHJlc3Npb25B
-bGdvcml0aG1Db3VudCkgIT0gMSkgeworCQlwcmludGtfb25jZShLRVJOX1dBUk5JTkcgImlsbGVn
-YWwgU01CMyBjb21wcmVzcyBhbGdvcml0aG0gY291bnRcbiIpOworCQlyZXR1cm47CisJfQorCWlm
-IChsZTE2X3RvX2NwdShjdHh0LT5Db21wcmVzc2lvbkFsZ29yaXRobXNbMF0pID4gMykgeworCQlw
-cmludGtfb25jZShLRVJOX1dBUk5JTkcgInVua25vd24gY29tcHJlc3Npb24gYWxnb3JpdGhtXG4i
-KTsKKwkJcmV0dXJuOworCX0KKwlzZXJ2ZXItPmNvbXByZXNzX2FsZ29yaXRobSA9CisJCWxlMTZf
-dG9fY3B1KGN0eHQtPkNvbXByZXNzaW9uQWxnb3JpdGhtc1swXSk7Cit9CisKIHN0YXRpYyBpbnQg
-ZGVjb2RlX2VuY3J5cHRfY3R4KHN0cnVjdCBUQ1BfU2VydmVyX0luZm8gKnNlcnZlciwKIAkJCSAg
-ICAgIHN0cnVjdCBzbWIyX2VuY3J5cHRpb25fbmVnX2NvbnRleHQgKmN0eHQpCiB7CkBAIC02MjMs
-NiArNjY1LDkgQEAgc3RhdGljIGludCBzbWIzMTFfZGVjb2RlX25lZ19jb250ZXh0KHN0cnVjdCBz
-bWIyX25lZ290aWF0ZV9yc3AgKnJzcCwKIAkJZWxzZSBpZiAocGN0eC0+Q29udGV4dFR5cGUgPT0g
-U01CMl9FTkNSWVBUSU9OX0NBUEFCSUxJVElFUykKIAkJCXJjID0gZGVjb2RlX2VuY3J5cHRfY3R4
-KHNlcnZlciwKIAkJCQkoc3RydWN0IHNtYjJfZW5jcnlwdGlvbl9uZWdfY29udGV4dCAqKXBjdHgp
-OworCQllbHNlIGlmIChwY3R4LT5Db250ZXh0VHlwZSA9PSBTTUIyX0NPTVBSRVNTSU9OX0NBUEFC
-SUxJVElFUykKKwkJCWRlY29kZV9jb21wcmVzc19jdHgoc2VydmVyLAorCQkJCShzdHJ1Y3Qgc21i
-Ml9jb21wcmVzc2lvbl9jYXBhYmlsaXRpZXNfY29udGV4dCAqKXBjdHgpOwogCQllbHNlIGlmIChw
-Y3R4LT5Db250ZXh0VHlwZSA9PSBTTUIyX1BPU0lYX0VYVEVOU0lPTlNfQVZBSUxBQkxFKQogCQkJ
-c2VydmVyLT5wb3NpeF9leHRfc3VwcG9ydGVkID0gdHJ1ZTsKIAkJZWxzZQpkaWZmIC0tZ2l0IGEv
-ZnMvY2lmcy9zbWIycGR1LmggYi9mcy9jaWZzL3NtYjJwZHUuaAppbmRleCA4MjY4NmU5ZDllMDUu
-LmFmYTgzN2IzNDIyNiAxMDA2NDQKLS0tIGEvZnMvY2lmcy9zbWIycGR1LmgKKysrIGIvZnMvY2lm
-cy9zbWIycGR1LmgKQEAgLTMwMywxMCArMzAzLDEzIEBAIHN0cnVjdCBzbWIyX2VuY3J5cHRpb25f
-bmVnX2NvbnRleHQgewogI2RlZmluZSBTTUIzX0NPTVBSRVNTX0xaNzdfSFVGRgkweDAwMDMKIAog
-c3RydWN0IHNtYjJfY29tcHJlc3Npb25fY2FwYWJpbGl0aWVzX2NvbnRleHQgeworCV9fbGUxNglD
-b250ZXh0VHlwZTsgLyogMyAqLworCV9fbGUxNiAgRGF0YUxlbmd0aDsKKwlfX3UzMglSZXNlcnZl
-ZDsKIAlfX2xlMTYJQ29tcHJlc3Npb25BbGdvcml0aG1Db3VudDsKIAlfX3UxNglQYWRkaW5nOwot
-CV9fdTMyCVJlc2VydmVkOwotCV9fdTE2CUNvbXByZXNzaW9uQWxnb3JpdGhtc1sxXTsKKwlfX3Uz
-MglSZXNlcnZlZDE7CisJX191MTYJQ29tcHJlc3Npb25BbGdvcml0aG1zWzNdOwogfSBfX3BhY2tl
-ZDsKIAogLyoKLS0gCjIuMTcuMQoK
---000000000000fd614905877ada9e--
+Amir.
 
