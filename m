@@ -2,44 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FE30EB5B
-	for <lists+samba-technical@lfdr.de>; Mon, 29 Apr 2019 22:08:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE891EBB8
+	for <lists+samba-technical@lfdr.de>; Mon, 29 Apr 2019 22:38:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=m1vMdgooSktBrQx6H9EAWRj+PQBVj34YNMKkOE2kQGI=; b=S4GpTZuucKm7d2K5N3hfcL/y4O
-	puvCsgxafkrRLZYgQzgcOeIJK/tUPcn3yW5ITDUcLMpwGakHM4pxaKN1FWUK+heon/sCxkxc8Xq6L
-	igOl7fSsZfS2XbpoxrUtaFuCqFu8kDupzsla6YtwMLLurSztiglYeJeSiXHKe3kfEK2XEMxrtkoDW
-	3FchxzJBCck7D6OQfWvfe58M1YeunvQE1ynQD3c7RZeF9hADDKUA5owbCR5Dt8gkq2cIBz9zPxJS3
-	7GAzDL6Y4RuBvMixxi7sE6c+FfSisWimVIWEDhhkhAzJUtRJVQba+OIEkq0gAKH92BC7LBs64kXWv
-	/G34Vv0A==;
-Received: from localhost ([::1]:53100 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Date:Subject;
+	bh=e3ctk1HLt31U+rKqU1ENUhYekthOkLQ8J9lP38UPfGA=; b=dOHVt2O0wc6/t/qOULjJ31TZsz
+	AXCvRJGKhILjALfKQb6F6V8vZi+bbl/BmEol71aFE4tHBD7YK0TxtRKFvWoOHugnfp1jRBW+JiIFl
+	cuWNZdsL7ZWuykI8/cKsYc0CTMWJpjpq4I2yF4emQEAvliB89N9ZnvixKshZfxFlD0zoZnN9sGp57
+	ZU0ZBi0gPXKaNsUQPl6mQkCvwiZXQPg3biH+bA4lskM2P/EwWeOsbR1HqhoVhobVhb09ms12J42WR
+	/LPyOo8KLRPnjZL4enptRVHNLB6RrT9sBYHBQEkw72HpsiKJID1/SKCNTHjQRAV5myHuq0jZGdKG9
+	uutKD10w==;
+Received: from localhost ([::1]:56352 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hLCZW-003kPs-Pp; Mon, 29 Apr 2019 20:08:18 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:24456) 
+	id 1hLD1e-003krc-70; Mon, 29 Apr 2019 20:37:22 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:31814) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hLCZS-003kPl-Tr
- for samba-technical@lists.samba.org; Mon, 29 Apr 2019 20:08:16 +0000
+ (Exim) id 1hLD1a-003krB-5X
+ for samba-technical@lists.samba.org; Mon, 29 Apr 2019 20:37:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=m1vMdgooSktBrQx6H9EAWRj+PQBVj34YNMKkOE2kQGI=; b=qQ7czXd7zYcpZ3TUdUJh/CIafW
- kijeKdJat2UiLhAN1h8HI2MGcgBWAJGBBgEyE47PXV0T+2BFN/6wMihQ8Gri1Z598Mzc8Z1knYitt
- X38kr6WuroX5etk4ijs4+KQ8piA6f49SPyptslAYsdOMP4khEf/F2kQeskwE5lNKuOP4=;
+ s=42627210; h=To:Message-Id:Cc:Date:From;
+ bh=e3ctk1HLt31U+rKqU1ENUhYekthOkLQ8J9lP38UPfGA=; b=Tr2dWiiB52gco948fJV5uv0TcP
+ gyi/yoG8xIVa5gwdT8kcSr2OHpSOP/YuAZQFUTUw6b0w6ZYbbqHpfecpgYN9pJnurY/nIaEEQW13s
+ aI35szCrXgaqHd1Sd/uTlDWNTZsi3klFOFALCj9F2aPUYRuKNpyNQ4+5Mmy1zQAZwdKY=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hLCZS-0000EU-0Y; Mon, 29 Apr 2019 20:08:14 +0000
-Date: Mon, 29 Apr 2019 13:08:09 -0700
-To: Ralph =?iso-8859-1?Q?B=F6hme?= <slow@samba.org>
-Subject: Re: [PATCH] Revert "wafsamba: Enable warnings for missing field
- initializer"
-Message-ID: <20190429200808.GA26142@samba.org>
-References: <20190429193555.GA28948@samba.org>
- <634FD7C2-DD12-4714-9AE8-A95BD3EF40E9@samba.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <634FD7C2-DD12-4714-9AE8-A95BD3EF40E9@samba.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+ (Exim) id 1hLD1U-0000Xl-0s; Mon, 29 Apr 2019 20:37:12 +0000
+Content-Type: text/plain;
+	charset=us-ascii
+Mime-Version: 1.0 (Mac OS X Mail 12.2 \(3445.102.3\))
+Subject: Re: [PATCH] use current working directory instead of share path in
+ cephwrap_realpath
+In-Reply-To: <20190426204104.GA82610@jra4>
+Date: Mon, 29 Apr 2019 22:37:11 +0200
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <5E2F31D6-C2BE-4CF0-B486-E82B73B6E086@samba.org>
+References: <2ccf782c-f2fe-2ed7-23b6-fdf336b1d172@heinlein-support.de>
+ <20190426204104.GA82610@jra4>
+To: Robert Sander <r.sander@heinlein-support.de>
+X-Mailer: Apple Mail (2.3445.102.3)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,30 +53,54 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Christof Schmitt <cs@samba.org>
-Cc: Andreas Schneider <asn@samba.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: =?utf-8?Q?Ralph_B=C3=B6hme?= via samba-technical
+ <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?Q?Ralph_B=C3=B6hme?= <slow@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>,
+ Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Apr 29, 2019 at 09:51:53PM +0200, Ralph Böhme wrote:
-> Hey Christof
-> 
-> > Am 29.04.2019 um 21:36 schrieb Christof Schmitt <cs@samba.org>:
-> > 
-> > Revert the patch adding the warnings since that causes problems when
-> > compiling master on RHEL7. Many C99 initializers of nested structs
-> > are flagged as problematic, so it seems easier to remove the
-> > additional compiler checks.
-> 
-> sorry, didn't thought about older compilers...
-> 
-> Can we have a compiler check that ensures {0} works included with
-> nested structs and then only enable the -Wmissing-field-initializers
-> if it does?
 
-That should be doable. Let met try adding the check.
 
-Christof
+> Am 26.04.2019 um 22:41 schrieb Jeremy Allison via samba-technical =
+<samba-technical@lists.samba.org>:
+>=20
+> On Fri, Apr 26, 2019 at 10:36:24PM +0200, Robert Sander via =
+samba-technical wrote:
+>> Hi,
+>>=20
+>> reading symbolic links from a CephFS via vfs_ceph does not always =
+work.
+>> It looks like the CWD instead of the share path should be used to
+>> construct the real path.
+>=20
+> Yes, that's completely correct. Thanks a *LOT* for catching
+> that. I'll log a bug to track.
+>=20
+> We now change to $cwd to prevent symlink races
+> so handle->conn->connectpath isn't always the
+> directory we're in anymore.
+>=20
+>> Attached is a patch that changes this. Please review.
+>=20
+> RB+. Can I get a second Team reviewer please ?
+
++1
+
+Robert, your patch is missing a Signed-off tag. Can you please check out
+
+https://wiki.samba.org/index.php/CodeReview#commit_message_tags
+
+and let us know if you're happy with one of us adding the tag on your =
+behalf? You may as well update the patch and resubmit to the list. :)
+
+Thanks!
+-slow
+
+--=20
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+
 
