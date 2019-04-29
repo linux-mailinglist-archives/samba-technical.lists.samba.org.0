@@ -2,42 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D9C1ECC0
-	for <lists+samba-technical@lfdr.de>; Tue, 30 Apr 2019 00:27:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DE2EECC9
+	for <lists+samba-technical@lfdr.de>; Tue, 30 Apr 2019 00:32:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=sA09FBoPpkVYPV7VhhcEiSYhFqzxSh8nr0nNddyztyk=; b=Up9+ytAFtYDMT4KF1WYKPO7nh3
-	ZXXbzb5n1Hz6mKgJbTY7O4+1Uew8I+Zh8fPZU7xWFIJWpRSrGvgol0XbL1IXdgXTrEuVyWSf+cTmf
-	0XfiKD69GnBhVMrDGg0LDo/V6bVmQdoIl1vEg2sq0Ye8Dde3bPLBdGdjwQW7y4XJbPVXvNajZmjJz
-	bOuAVBZ0zvmMu1nq6Vei/VPxg03aQDnw61i2QYywTNycMYLfhD+GJhl9EDpoEIHNFa5mKpMLiXsfM
-	hqLocaaWdzaikSEV4FswtZJJ1hrPMDJF/0yycmdH0kPwrgiN8LgwFFU+2nizUl4OCErS/+0LIp+RV
-	usV1gucg==;
-Received: from localhost ([::1]:61044 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=K5CQ3+yK4DC4GChHjrsh7oZ4JNrOCSg0x8cu6UVbTQ0=; b=DmK3X8lH//m5ee3PVurz7+g16H
+	ODJrhA0d3xW59oZ442MrLHaYxRF7Hsc0wl3wMOGue7c4n4szqyyTsIWLgKBhDbdHv6Rfv0x9HEd7v
+	xxLni7agMfL00HnmGpXbTzDyCwGFdPA0z5XGHceizVZ84uvz69ncqZE7+IisNzQNwJtPVndY05fyY
+	oOJHt79sS6vY8BvK+vTj2QS+T3b/PzyF6zIqdlZhqKjmsFYlBmE5ZUy+um//dYA7PWthFefzmmwt1
+	KSG6etjVztlkZlNr0RuV4SiaxnsJDDOKuQsr7fysBuHOY6MNuVCEUh1ajQmGjYA1dTH8qLGJDeqrM
+	WuuvIQ5Q==;
+Received: from localhost ([::1]:61776 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hLEkD-003lWs-GT; Mon, 29 Apr 2019 22:27:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:57914) 
+	id 1hLEos-003ld1-UM; Mon, 29 Apr 2019 22:32:18 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:58964) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hLEk9-003lWl-S2
- for samba-technical@lists.samba.org; Mon, 29 Apr 2019 22:27:27 +0000
+ (Exim) id 1hLEoo-003lcu-Qk
+ for samba-technical@lists.samba.org; Mon, 29 Apr 2019 22:32:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=sA09FBoPpkVYPV7VhhcEiSYhFqzxSh8nr0nNddyztyk=; b=dd9gISvtb/ih5s/pM9NsRphFIw
- sA67MU9HTbr71hn9DBNBKIj1OH15yLJxJ7Gcg/pTjvFtLPlPytWACcGtT7KGJ/7C1VvD5vKN11xrD
- mcgxEYUya4rxHj1zL8jAs8h8Et3MPi0z8VvcUsqvBVM0MtN2m0fQKWvWg54AooPoxZj8=;
+ s=42627210; h=Message-ID:To:From:Date:CC;
+ bh=K5CQ3+yK4DC4GChHjrsh7oZ4JNrOCSg0x8cu6UVbTQ0=; b=ZYADmKKn+HJxdzyit9eMf3gg0x
+ GuzzRmVP1HnfWHqj5liiWVXUNYLm5tBxBEOGX2yskFrViTqZaDEpKCQnnFxYjv4Yg7WYXhIQohjwB
+ FWd/snoo0RJNw8bRUKvXDWTF82mvaIgDM0YBpPp07vQ+Fo7O2vNV9jTfo9Fj/bigM9Ik=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hLEk8-0001Ys-Rz; Mon, 29 Apr 2019 22:27:25 +0000
-Date: Mon, 29 Apr 2019 15:27:21 -0700
-To: Andrew Bartlett <abartlet@samba.org>
+ (Exim) id 1hLEoo-0001cw-0v; Mon, 29 Apr 2019 22:32:14 +0000
+Date: Mon, 29 Apr 2019 15:32:11 -0700
+To: Ralph =?iso-8859-1?Q?B=F6hme?= <slow@samba.org>,
+ Andreas Schneider <asn@samba.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Subject: Re: [PATCH] Revert "wafsamba: Enable warnings for missing field
  initializer"
-Message-ID: <20190429222719.GB18192@samba.org>
+Message-ID: <20190429223210.GA23900@samba.org>
 References: <20190429193555.GA28948@samba.org>
- <1556575702.25595.75.camel@samba.org>
+ <634FD7C2-DD12-4714-9AE8-A95BD3EF40E9@samba.org>
+ <20190429200808.GA26142@samba.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/mixed; boundary="OXfL5xGRrasGEqWY"
 Content-Disposition: inline
-In-Reply-To: <1556575702.25595.75.camel@samba.org>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20190429200808.GA26142@samba.org>
 User-Agent: Mutt/1.5.21 (2010-09-15)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
@@ -54,37 +58,88 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Christof Schmitt <cs@samba.org>
-Cc: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Apr 30, 2019 at 10:08:22AM +1200, Andrew Bartlett via samba-technical wrote:
-> On Mon, 2019-04-29 at 12:36 -0700, Christof Schmitt via samba-technical 
-> wrote:
-> > Revert the patch adding the warnings since that causes problems when
-> > compiling master on RHEL7. Many C99 initializers of nested structs are
-> > flagged as problematic, so it seems easier to remove the additional
-> > compiler checks.
+
+--OXfL5xGRrasGEqWY
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+
+On Mon, Apr 29, 2019 at 01:08:09PM -0700, Christof Schmitt via samba-technical wrote:
+> On Mon, Apr 29, 2019 at 09:51:53PM +0200, Ralph Böhme wrote:
+> > Hey Christof
+> > 
+> > > Am 29.04.2019 um 21:36 schrieb Christof Schmitt <cs@samba.org>:
+> > > 
+> > > Revert the patch adding the warnings since that causes problems when
+> > > compiling master on RHEL7. Many C99 initializers of nested structs
+> > > are flagged as problematic, so it seems easier to remove the
+> > > additional compiler checks.
+> > 
+> > sorry, didn't thought about older compilers...
+> > 
+> > Can we have a compiler check that ensures {0} works included with
+> > nested structs and then only enable the -Wmissing-field-initializers
+> > if it does?
 > 
-> Shouldn't older OS versions just not be compiled with --picky-
-> developer?
-> 
-> I don't mind if a test is added to wscript to detect and fail --picky-
-> developer on such hosts, but RHEL7 is actually just as old as Ubuntu
-> 14.04 which we just retired. 
+> That should be doable. Let met try adding the check.
 
-The main difference between Ubuntu 14.04 and RHEL7 seems to be the
-support cycle. I still see RHEL7 in commonly used.  I was wrong about
-"picky developer", the option is currently added for all developer
-builds.
-
-For the time being, I would like to keep the ability to build and test
-master on RHEL7. If others object, this is ok with me.
-
-> Hopefully RHEL8 is just around the corner.
-
-Maybe, but due to the long support cycle, RHEL7 will likely still be
-in common use for the next year or two.
+See attached patch. That works for me on RHEL7 (skipping the compiler
+option) and Fedora 29 (using the compiler option).
 
 Christof
+
+--OXfL5xGRrasGEqWY
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename=patch
+Content-Transfer-Encoding: quoted-printable
+
+=46rom 3c604521632a63a0baf210b6573812466435f024 Mon Sep 17 00:00:00 2001
+=46rom: Christof Schmitt <cs@samba.org>
+Date: Mon, 29 Apr 2019 13:07:08 -0700
+Subject: [PATCH] wafsamba: Add compiler check for missing field initializer
+ check
+
+cf79ee15 wafsamba: Enable warnings for missing field initializer
+
+enabled a compiler check for warnings about missing initializers for all
+developer builds. This fails with older compilers, e.g. gcc on RHEL7.
+Add a waf check around adding the compiler option to avoid the failure
+with older compilers.
+
+Signed-off-by: Christof Schmitt <cs@samba.org>
+---
+ buildtools/wafsamba/samba_autoconf.py | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/buildtools/wafsamba/samba_autoconf.py b/buildtools/wafsamba/sa=
+mba_autoconf.py
+index f2b049e40a7..06ec7da333a 100644
+--- a/buildtools/wafsamba/samba_autoconf.py
++++ b/buildtools/wafsamba/samba_autoconf.py
+@@ -731,7 +731,13 @@ def SAMBA_CONFIG_H(conf, path=3DNone):
+         conf.ADD_CFLAGS('-Wall', testflags=3DTrue)
+         conf.ADD_CFLAGS('-Wshadow', testflags=3DTrue)
+         conf.ADD_CFLAGS('-Wmissing-prototypes', testflags=3DTrue)
+-        conf.ADD_CFLAGS('-Wmissing-field-initializers', testflags=3DTrue)
++        if CHECK_CODE(conf,
++                      'struct a { int b; }; struct c { struct a d; } e =3D=
+ { };',
++                      'CHECK_C99_INIT',
++                      link=3DFalse,
++                      cflags=3D'-Wmissing-field-initializers -Werror=3Dmis=
+sing-field-initializers',
++                      msg=3D"Checking C99 init of nested structs."):
++            conf.ADD_CFLAGS('-Wmissing-field-initializers', testflags=3DTr=
+ue)
+         conf.ADD_CFLAGS('-Wcast-align -Wcast-qual', testflags=3DTrue)
+         conf.ADD_CFLAGS('-fno-common', testflags=3DTrue)
+=20
+--=20
+2.17.0
+
+
+--OXfL5xGRrasGEqWY--
 
