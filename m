@@ -2,47 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3011ED15
-	for <lists+samba-technical@lfdr.de>; Tue, 30 Apr 2019 00:58:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D9003ED47
+	for <lists+samba-technical@lfdr.de>; Tue, 30 Apr 2019 01:22:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=q7rBanYb+5AtUEpb6usdn5UCVBFvQBcKYzIotbGaLzc=; b=HBZbS+gh++vtJ7rOeC76Hp5gVX
-	HHYPZL7OVDKJGjAhq54nMnltcAbvk1i5dTdwCnpC8lJgri4xNo+aV10h4o2Uk9kRNWQMuiCDOfYBf
-	3/AMzGpiiAs4gAcGJa3WkOihE1qUvv8FI9hecauFc4+cRkXVbEk+lxz3DPDqibe0LiQhqD4rLssRW
-	v1zwf5vo7e+FQX/4tpWV/eIywH4zXXWfYVaGJCeCyBpzkjBjmAfsaQc4W+JTKnQilCz09NtG9fH2X
-	/q/Pes8tl/lMofV99JmoJSwhQyBBGMOnzzuDAXiRYFivWI84d6UudF0WO/t+gPYIkQxqQ0jsc8Oom
-	Sq1sIMRA==;
-Received: from localhost ([::1]:63250 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=u7YWOt+82KYN8jwvLn3infMBC18iICSmbt5EYoOTdvc=; b=6AIUosZyGGRVcmjT7r+geAXeDE
+	Rh77mGmPY/7P7bh7823M8SPwYSy7jydYIez9dzkUSskcY8A2LeAFC1NdrLnUMF4Vl/MgKfPjSSc5x
+	M6s3Ece8+ypaPCUhX24FEuBu0/bv6KNCuajpyg093u575u8t5RNlEyTZ6EOvtYOH+jXgGiePlNrNU
+	e0J6TCsVb2HIgSEXLDxseFsNG5COQUZYXvcPIrhH5WxhUe/B9dCzlKPSF7x8OO0t8OCAoJY3CJ5/B
+	11BwkmC0TUcst421kplYVA+Q/2LGF8JxQyR73QbgDxFoYw2FwrI56ewDo/slNxxy/O+bRUOlNP10q
+	f9x47gdg==;
+Received: from localhost ([::1]:63996 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hLFDz-003lpt-MX; Mon, 29 Apr 2019 22:58:15 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:64656) 
+	id 1hLFav-003lwb-Fx; Mon, 29 Apr 2019 23:21:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:22190) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hLFDv-003lpm-EM
- for samba-technical@lists.samba.org; Mon, 29 Apr 2019 22:58:13 +0000
+ (Exim) id 1hLFar-003lwU-20
+ for samba-technical@lists.samba.org; Mon, 29 Apr 2019 23:21:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:To:From:Message-ID:CC;
- bh=q7rBanYb+5AtUEpb6usdn5UCVBFvQBcKYzIotbGaLzc=; b=rLFkUMeU4LEz+IL4KJMqIxy4Cx
- V76EWUV7DGiXJUmygCEjXDev9ruaTZtzqf8XTYOMNPPeycpyx90ts603rkz2ylF177EJaMsMcjEf3
- exJBdI8VGSA/mLq0KJiYM8yxEbtwfoApciW4zx0xzCTumrDSe4YTosEAIleurRqGyOII=;
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=u7YWOt+82KYN8jwvLn3infMBC18iICSmbt5EYoOTdvc=; b=e1wBmj7qVpH2JxmxPhdvkYikTL
+ wtbAZzYQzi8SKk05aNHioCvcCCl6/DFwAe8725JhvgiRSQkMBYHZ1TN2vJBxoQXhhaH2tMgeAvkGp
+ YvbK1QL7cRIjYW3oboMCpktbTK6ySAS2MdERwkeApKLnEBa5f4gi5/LO4NGsImLJoLJ4=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1hLFDu-0001sr-0g; Mon, 29 Apr 2019 22:58:10 +0000
-Message-ID: <1556578686.25595.77.camel@samba.org>
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1hLFap-0002Ha-Vc; Mon, 29 Apr 2019 23:21:52 +0000
+Date: Mon, 29 Apr 2019 16:21:48 -0700
+To: Andrew Bartlett <abartlet@samba.org>
 Subject: Re: [PATCH] Revert "wafsamba: Enable warnings for missing field
  initializer"
-To: Christof Schmitt <cs@samba.org>, Ralph =?ISO-8859-1?Q?B=F6hme?=
- <slow@samba.org>, Andreas Schneider <asn@samba.org>, samba-technical
- <samba-technical@lists.samba.org>
-Date: Tue, 30 Apr 2019 10:58:06 +1200
-In-Reply-To: <20190429223210.GA23900@samba.org>
+Message-ID: <20190429232148.GA875@samba.org>
 References: <20190429193555.GA28948@samba.org>
  <634FD7C2-DD12-4714-9AE8-A95BD3EF40E9@samba.org>
- <20190429200808.GA26142@samba.org> <20190429223210.GA23900@samba.org>
-Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAACRklEQVRYw81YS67DIAwkVe8FPRm5menJeAu3lmUCbyBGKqsmRXjwb8Y5aq3hl9Yj/Nh6Tu0upZRS+EdKiV+e5+mJqMKLiHLORBRjzDmbc/hlvb1QD2k3sG84+dhhvF6vlzymlNY8dyBJzUdLjAwyvaeU8n6/2WHpu/xDRkREJI8cOBMgfuRQxhj58JzzbBwhQDFGA07M6/efE0MQxDHGFvpdQHy6MUxqtU4yezRcH0B4GfbM44BWGqOurF6Omz140a0ASimJvdbwZT32XrpRh5yuwY1d0vPrdNkv91+T8uBRG8l1uiX+JtsHxPNIWE27ugwTctTdHCIiYXvuy4P7IDl0CxAzl2xgZTJwgw+g3kGaHwYh5g2sljyrjIVEq4pYBg2Kq3yXZ5WxjfO7zF9jRdXrnLcEmlbTRnNpcT0gvpTScUC2HlOE2ipAvPuJanMT+Xc0PC4dFzu1DEO4HgczaS5kOnZ4vM7zxNU+mtRyRVPDgqyX3cdx8AQCCrQnfkV9VzMA9Ryg3ek8Sgsg3QX+nbz03Og5l10ytp6HusQUwpjd1rnsksbHlhjuVGdBAbWzIiJu5MvEFkA6OkiwBO4uQL3ADeQ9b57t74+FBo1s47IqpVxqBDcuQ66r94QQJOH2ctnAf9oZtdbZYejpi2bQEveO0sb2JXu09OJJrnpil4SV5G2N6Y+1QjL+gHSKDApHJoJWF3hW2fInh6lutGW216OPRBZtRZscwyQvI+KuTj3rp4VP1VsAcTobxgDngukqm3LPgmL8A4m377Y5OvTKAAAAAElFTkSuQmCC
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.22.6-1+deb9u1 
-Mime-Version: 1.0
+ <20190429200808.GA26142@samba.org>
+ <20190429223210.GA23900@samba.org>
+ <1556578686.25595.77.camel@samba.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <1556578686.25595.77.camel@samba.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -56,55 +56,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christof Schmitt <cs@samba.org>
+Cc: Andreas Schneider <asn@samba.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2019-04-29 at 15:32 -0700, Christof Schmitt via samba-technical 
-wrote:
-> On Mon, Apr 29, 2019 at 01:08:09PM -0700, Christof Schmitt via samba-technical wrote:
-> > On Mon, Apr 29, 2019 at 09:51:53PM +0200, Ralph BÃ¶hme wrote:
-> > > Hey Christof
-> > > 
-> > > > Am 29.04.2019 um 21:36 schrieb Christof Schmitt <cs@samba.org>:
+On Tue, Apr 30, 2019 at 10:58:06AM +1200, Andrew Bartlett wrote:
+> On Mon, 2019-04-29 at 15:32 -0700, Christof Schmitt via samba-technical 
+> wrote:
+> > On Mon, Apr 29, 2019 at 01:08:09PM -0700, Christof Schmitt via samba-technical wrote:
+> > > On Mon, Apr 29, 2019 at 09:51:53PM +0200, Ralph Böhme wrote:
+> > > > Hey Christof
 > > > > 
-> > > > Revert the patch adding the warnings since that causes problems when
-> > > > compiling master on RHEL7. Many C99 initializers of nested structs
-> > > > are flagged as problematic, so it seems easier to remove the
-> > > > additional compiler checks.
+> > > > > Am 29.04.2019 um 21:36 schrieb Christof Schmitt <cs@samba.org>:
+> > > > > 
+> > > > > Revert the patch adding the warnings since that causes problems when
+> > > > > compiling master on RHEL7. Many C99 initializers of nested structs
+> > > > > are flagged as problematic, so it seems easier to remove the
+> > > > > additional compiler checks.
+> > > > 
+> > > > sorry, didn't thought about older compilers...
+> > > > 
+> > > > Can we have a compiler check that ensures {0} works included with
+> > > > nested structs and then only enable the -Wmissing-field-initializers
+> > > > if it does?
 > > > 
-> > > sorry, didn't thought about older compilers...
-> > > 
-> > > Can we have a compiler check that ensures {0} works included with
-> > > nested structs and then only enable the -Wmissing-field-initializers
-> > > if it does?
+> > > That should be doable. Let met try adding the check.
 > > 
-> > That should be doable. Let met try adding the check.
+> > See attached patch. That works for me on RHEL7 (skipping the compiler
+> > option) and Fedora 29 (using the compiler option).
 > 
-> See attached patch. That works for me on RHEL7 (skipping the compiler
-> option) and Fedora 29 (using the compiler option).
+> Could you make this a merge request please, so we can see it working on
+> all the platforms tested there?
 
-Could you make this a merge request please, so we can see it working on
-all the platforms tested there?
+Yes. CI is running now at
+https://gitlab.com/samba-team/devel/samba/pipelines/59040252
 
-Also, could you please look into adding CentOS 7 as a supported
-platform via our bootstrap system so we don't regress here in the
-future?  There is partial support already, but it wasn't finished
-(mostly to avoid chasing two rabbits at once). 
+> Also, could you please look into adding CentOS 7 as a supported
+> platform via our bootstrap system so we don't regress here in the
+> future?  There is partial support already, but it wasn't finished
+> (mostly to avoid chasing two rabbits at once). 
 
-Thanks!
+That is a new area to me. I see that CentOS is listed under
+bootstrap/generated-dists/centos7/. Would the only missing piece be the
+centos7 entries in .gitlab-ci.yml, or am i missing something? I can give
+that a try tomorrow.
 
-Andrew Bartlett
-
--- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT   
-https://catalyst.net.nz/services/samba
-
-
-
-
+Christof
 
