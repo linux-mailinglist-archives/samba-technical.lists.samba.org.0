@@ -2,43 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 933A3F1B2
-	for <lists+samba-technical@lfdr.de>; Tue, 30 Apr 2019 09:59:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE8D3F1DB
+	for <lists+samba-technical@lfdr.de>; Tue, 30 Apr 2019 10:12:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=fcEVZ4UX2dgsGX+JhjmkzBjkH12wmYptbeEGJ7oAPZs=; b=lI0Ht7w5bSno18NjxTSE0jBUwR
-	I6l0iRAI2MOAnDEjVPbH9NmSl/WSeAfdCfYKBGgVDMPfiKOoRweQ1gTgSX7ZmQ63uaeqkdiRE/8Ep
-	5L5nPvlxUgseDDgqqPT1WsgwcvSpUGIuF6dMxrYDJljjd2LUR5U7ut6UroanT5m4TEP173tVZK6Q8
-	anCz5wP5H1Ytp9b+xtkKrfCA/S4fV56LL+zOWEsR1IcfsFSDpRBASGg5FXcKz0n+uBQ8Q4GBQb6kp
-	DzQZMckko+Ty2Yii6sb0y0jFQdQpWS6ADcPLbkKkZWYPi9VQSATsAztO8rde3xAcYVFVYVLANHNCX
-	2/LDOdEA==;
-Received: from localhost ([::1]:30796 helo=hr1.samba.org) 
+	bh=T88YzDCfdRRpRnlKh43Qlc+b4mJ+OnfqC7S9nbpXuZ4=; b=p+Oxnz3LbQ2ec99QwUKaxfjoqJ
+	UoauxRBefish+UPdRhbtSt0C0WeVJZf1ViJ0k5mUa/igsjbLu4CDMcQ6FCNy096ErhKkgZmPYHxGc
+	LZrGIcT75K7qteiHNDaNAu8s5Ot2ThOtGrRLgoypZpraqIFKrQFadccuxowg66XyDbTG5SBysT+f+
+	slCMWAUw+j1y3hmSYndkCpyE9JzB72Iu3mcb2HKhbIBG+5vedMWQnKRremJAC6/mejdXV2ftc971u
+	aI/LlLWZe36zuS5/ffLmwSbMnjQZtQzMNTdn5lIJ8tQ92pmpPWLwMssYkDpaDjEpF4zQi1nOyGrvU
+	8lttComQ==;
+Received: from localhost ([::1]:31574 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hLNf8-003oNT-8F; Tue, 30 Apr 2019 07:58:50 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:37840) 
+	id 1hLNsV-003oV6-Kh; Tue, 30 Apr 2019 08:12:39 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:41264) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hLNf4-003oNM-6K
- for samba-technical@lists.samba.org; Tue, 30 Apr 2019 07:58:48 +0000
+ (Exim) id 1hLNsS-003oUz-9o
+ for samba-technical@lists.samba.org; Tue, 30 Apr 2019 08:12:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Cc:To:From:Message-ID;
- bh=fcEVZ4UX2dgsGX+JhjmkzBjkH12wmYptbeEGJ7oAPZs=; b=Mw4m30d/7CJK8HeTsW8C3kpmbp
- KKeSpRMCwXljNtEYJGyrmM3wpuSyhwrpihca+DaYtzF0pcdjQTj9T49LOBCDO7ad3PjM50uFyAyzv
- Hj2OSX5EqT++hKUBI6F0+5tmxq2gvYcscE7ac1B/oQyZiARON7tdrN/UBLjt6modRDqw=;
+ s=42627210; h=Date:Message-ID:From:Cc:To;
+ bh=T88YzDCfdRRpRnlKh43Qlc+b4mJ+OnfqC7S9nbpXuZ4=; b=vRiWb9BVLTIgVJWYF6dRmg4j1O
+ OuaXFf1xgG0vm7zCykhRGQq+Wnk3wqEGX3Z6jKjOkxlxf/slageYACYHNUztf2tPU0RN0nUx11etp
+ xn/V34kkhZQYMz70PCshtVFwhHyfoTADViapzv2xUWTpOQG+MJ8NgxEbMSa289jy+b+E=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hLNf0-0007pB-W4; Tue, 30 Apr 2019 07:58:43 +0000
-Message-ID: <1556611116.21278.7.camel@samba.org>
-Subject: Re: getting centos7 into bootstrap and gitlab CI
-To: Andreas Schneider <asn@samba.org>
-Date: Tue, 30 Apr 2019 19:58:36 +1200
-In-Reply-To: <1634253.Q9F5WFE65d@magrathea.fritz.box>
-References: <20190429193555.GA28948@samba.org>
- <606612F7-D9E4-4043-BBDE-4A2C1CE0ABBB@samba.org>
- <1556598606.25595.91.camel@samba.org>
- <1634253.Q9F5WFE65d@magrathea.fritz.box>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.18.5.2-0ubuntu3.2 
-Mime-Version: 1.0
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hLNsR-00080O-Bz; Tue, 30 Apr 2019 08:12:35 +0000
+Subject: Re: Better interop for NFS/SMB file share mode/reservation
+To: Amir Goldstein <amir73il@gmail.com>,
+ Pavel Shilovskiy <pshilov@microsoft.com>
+References: <CAOQ4uxjQdLrZXkpP30Pq_=Cckcb=mADrEwQUXmsG92r-gn2y5w@mail.gmail.com>
+ <CAOQ4uxhuxoEsoBbvenJ8eLGstPc4AH-msrxDC-tBFRhvDxRSNg@mail.gmail.com>
+ <20190426145006.GD25827@fieldses.org>
+ <e69d149c80187b84833fec369ad8a51247871f26.camel@kernel.org>
+ <CAOQ4uxjt+MkufaJWoqWSYZbejWa1nJEe8YYRroEBSb1jHjzkwQ@mail.gmail.com>
+ <8504a05f2b0462986b3a323aec83a5b97aae0a03.camel@kernel.org>
+ <CAOQ4uxi6fQdp_RQKHp-i6Q-m-G1+384_DafF3QzYcUq4guLd6w@mail.gmail.com>
+ <1d5265510116ece75d6eb7af6314e6709e551c6e.camel@hammerspace.com>
+ <CAOQ4uxjUBRt99efZMY8EV6SAH+9eyf6t82uQuKWHQ56yjpjqMw@mail.gmail.com>
+ <95bc6ace0f46a1b1a38de9b536ce74faaa460182.camel@hammerspace.com>
+ <CAOQ4uxhQOLZ_Hyrnvu56iERPZ7CwfKti2U+OgyaXjM9acCN2LQ@mail.gmail.com>
+ <b4ee6b6f5544114c3974790a784c3e784e617ccf.camel@hammerspace.com>
+ <bc2f04c55ba9290fc48d5f2b909262171ca6a19f.camel@kernel.org>
+ <BYAPR21MB1303596634461C7D46B0A773B6390@BYAPR21MB1303.namprd21.prod.outlook.com>
+ <CAOQ4uxirAW91yUe1nQUPPmarmMSxr_pco8NqKWB4srwyvgnRRA@mail.gmail.com>
+Openpgp: preference=signencrypt
+Message-ID: <677e86ee-59b9-0826-481f-955074d164ed@samba.org>
+Date: Tue, 30 Apr 2019 11:12:28 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
+MIME-Version: 1.0
+In-Reply-To: <CAOQ4uxirAW91yUe1nQUPPmarmMSxr_pco8NqKWB4srwyvgnRRA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
@@ -53,72 +68,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: =?ISO-8859-1?Q?S=E9rgio?= Basto <sergio@serjux.com>,
- Christof Schmitt <cs@samba.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Uri Simchoni <uri@samba.org>
+Cc: "linux-nfs@vger.kernel.org" <linux-nfs@vger.kernel.org>,
+ "Volker.Lendecke@sernet.de" <Volker.Lendecke@sernet.de>,
+ Jeff Layton <jlayton@kernel.org>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ Trond Myklebust <trondmy@hammerspace.com>,
+ "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2019-04-30 at 08:38 +0200, Andreas Schneider via samba-
-technical wrote:
-> On Tuesday, April 30, 2019 6:30:06 AM CEST Andrew Bartlett wrote:
-> > 
-> > On Tue, 2019-04-30 at 06:21 +0200, Ralph Böhme wrote:
-> > > 
-> > > > 
-> > > > > 
-> > > > > Also, could you please look into adding CentOS 7 as a
-> > > > > supported
-> > > > > platform via our bootstrap system so we don't regress here in
-> > > > > the
-> > > > > future?  There is partial support already, but it wasn't
-> > > > > finished
-> > > > > (mostly to avoid chasing two rabbits at once).
-> > > > That is a new area to me. I see that CentOS is listed under
-> > > > bootstrap/generated-dists/centos7/. Would the only missing
-> > > > piece be the
-> > > > centos7 entries in .gitlab-ci.yml, or am i missing something? I
-> > > > can give
-> > > > that a try tomorrow.
-> > > that would be much appreciated and I can help with that, but it's
-> > > certainly not a requirement to get your patch for the missing-
-> > > field-
-> > > initializers in. I'll review later on.
-> > Thanks Ralph for offering to help.  It has been really cool to see
-> > so
-> > many folks stepping in to maintain and extend our package list.  It
-> > is
-> > lovely to have this task, but even more so the knowlege of how to
-> > do it
-> > practically, distributed around the team!
-> > 
-> > I totally agree this is not a pre-requisite, thanks for making that
-> > clear!
-> Here we go. Should be fine as GnuTLS and KRB5 are not that old as on
-> Ubuntu 
-> 14.04 :-)
+On 4/30/19 3:31 AM, Amir Goldstein via samba-technical wrote:
+>>
+>> About O_DENYDELETE: I don't understand how we may reach a good interop story without a proper implementation of this flag. Windows apps may set it and Samba needs to respect it. If an NFS client removes such an opened file, what will Samba tell the Windows client?
+>>
 > 
-> https://gitlab.com/samba-team/samba/merge_requests/399
+> Samba will tell the Windows client:
+> "Sorry, my administrator has decided to trade off interop with nfs on
+> share modes,
+> with DENY_DELETE functionality, so I cannot grant you DENY_DELETE that you
+> requested."
+> Not sure if that is workable. Samba developers need to chime in.
+> 
+> Thanks,
+> Amir.
+> 
 
-I've CC'ed Sérgio and Nico who recently had a thread about building
-modern Samba on CentOS7.  They may be able to help here.
+On Windows you don't ask for DENY_DELETE, you get it by default unless
+you ask to *allow* deletion. If you fopen() a file, even for
+reading-only, the MSVC standard C library would open it with delete
+denied because it does not explicitly request to allow it. My guess is
+that runtimes of other high-level languages behave that way too on
+Windows. That means pretty much everything would stop working.
 
-Their work is online at:
-https://github.com/sergiomb2/SambaAD
-https://github.com/nkadel/samba4repo
-
-Thanks to everyone working to show Samba master can be built and
-developed on CentOS7, much better to confirm this now than find out at
-RC4 ;-)
-
-Andrew Bartlett
--- 
-Andrew Bartlett                       http://samba.org/~abartlet/
-Authentication Developer, Samba Team  http://samba.org
-Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
-
-
-
+Thanks,
+Uri.
 
