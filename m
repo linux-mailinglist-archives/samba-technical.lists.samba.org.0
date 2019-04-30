@@ -2,34 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE8D3F1DB
-	for <lists+samba-technical@lfdr.de>; Tue, 30 Apr 2019 10:12:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C78CF2B6
+	for <lists+samba-technical@lfdr.de>; Tue, 30 Apr 2019 11:23:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=T88YzDCfdRRpRnlKh43Qlc+b4mJ+OnfqC7S9nbpXuZ4=; b=p+Oxnz3LbQ2ec99QwUKaxfjoqJ
-	UoauxRBefish+UPdRhbtSt0C0WeVJZf1ViJ0k5mUa/igsjbLu4CDMcQ6FCNy096ErhKkgZmPYHxGc
-	LZrGIcT75K7qteiHNDaNAu8s5Ot2ThOtGrRLgoypZpraqIFKrQFadccuxowg66XyDbTG5SBysT+f+
-	slCMWAUw+j1y3hmSYndkCpyE9JzB72Iu3mcb2HKhbIBG+5vedMWQnKRremJAC6/mejdXV2ftc971u
-	aI/LlLWZe36zuS5/ffLmwSbMnjQZtQzMNTdn5lIJ8tQ92pmpPWLwMssYkDpaDjEpF4zQi1nOyGrvU
-	8lttComQ==;
-Received: from localhost ([::1]:31574 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=O71BR93nfVKV7X+BaaevcM23d4NroedovEN8YpLCNFc=; b=B++HvAAGsyQdYGlFR/jL6K7560
+	oPS3IWRpGZUXlHUhvzY1MmVCvA9V/kCMB047BMpQOYGSU54VDx1Ds4cljZQLZ6RG91tF14a7uv5Ls
+	T/lAJxERpvywqqnfHa+UT3u8L4aaaagAQM8hcema7+jAG8ei/5cD3e3nU4i7TojFrU3+E0s9ASXYJ
+	9OfUK8cxKOjunK8RJ9PwJSLmicMRwtkw7MH7ngj0htifLwKaXjNkltHqbIFKdk4UKM+oghuEgUJLc
+	sjE7gCmeik08c169DGay7YZHSgOxxs+2jiglducFXUWRtf0SBPlVH8xSes3EEAQLG8zxdWxDkJsOR
+	F6LTo4UA==;
+Received: from localhost ([::1]:32790 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hLNsV-003oV6-Kh; Tue, 30 Apr 2019 08:12:39 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:41264) 
+	id 1hLOyN-003ohz-Ax; Tue, 30 Apr 2019 09:22:47 +0000
+Received: from mail-yw1-xc2e.google.com ([2607:f8b0:4864:20::c2e]:46929) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hLNsS-003oUz-9o
- for samba-technical@lists.samba.org; Tue, 30 Apr 2019 08:12:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:Cc:To;
- bh=T88YzDCfdRRpRnlKh43Qlc+b4mJ+OnfqC7S9nbpXuZ4=; b=vRiWb9BVLTIgVJWYF6dRmg4j1O
- OuaXFf1xgG0vm7zCykhRGQq+Wnk3wqEGX3Z6jKjOkxlxf/slageYACYHNUztf2tPU0RN0nUx11etp
- xn/V34kkhZQYMz70PCshtVFwhHyfoTADViapzv2xUWTpOQG+MJ8NgxEbMSa289jy+b+E=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hLNsR-00080O-Bz; Tue, 30 Apr 2019 08:12:35 +0000
-Subject: Re: Better interop for NFS/SMB file share mode/reservation
-To: Amir Goldstein <amir73il@gmail.com>,
- Pavel Shilovskiy <pshilov@microsoft.com>
+ (Exim) id 1hLOyI-003oh6-Ts
+ for samba-technical@lists.samba.org; Tue, 30 Apr 2019 09:22:45 +0000
+Received: by mail-yw1-xc2e.google.com with SMTP id v15so5340093ywe.13
+ for <samba-technical@lists.samba.org>; Tue, 30 Apr 2019 02:22:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=O71BR93nfVKV7X+BaaevcM23d4NroedovEN8YpLCNFc=;
+ b=JcInW5rB9D8GUPZ8eanzEAStA6lvRQhboAjNfLzzLdXysYXomWALWwxj8+wTzvVYpa
+ jLBy7vcbQaJD7mn8T5Sntys7faEG9YVKoEsGk7SwAh6x6cEYHNgmj8A2haTuJ+kyho0w
+ ZloKwHb4U+H7rrb30t5RK0fyGo//KfIGrV7iYEYDfmnKtk/4nU3zTb2cnI0ux3hc2VF5
+ MFyzzzTCYOA3bKMbJEnpkbcJGTbyxNno8ZMlD/MqkP3wKpg4r67bP3mhDMRpFThrIpcB
+ tP9+3s8Xdq/IhNwAbwJJBEstIfHnp22w7/Kbmxgi5D9Ezmvu6/T0JG1EBV0Vwc/j2rrY
+ X9Rg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=O71BR93nfVKV7X+BaaevcM23d4NroedovEN8YpLCNFc=;
+ b=IOfO9lIBhu7/f6WWnx/TNxQnf13a2FATxXQD4xVRZ7Y6OcahEueARJUWzvDUAGMxqc
+ zUiFSXmJfzKLfdwUXBg9Zw5SFleg55zWH+VQdxy7qGy+BpLAE3h75r4UQOQh/Cf7HTHO
+ mRcFjPI5vIOv6FwfXPICaKKnQtSVh9M9vmUuZGhS0ixcDlEOI4BNFRNHhElxz6+/c7PL
+ RPje/OJglQtKuxdP40oOvHMSe+oc527D7vh+7CyeLuyBdIELDJSPoSKNxOrj96ThnUce
+ kFXqXF8Sbx6MpTn7MEI8ls+L22OOroQsjAIJsUrugBBlKedbm/liAsYsLGtMQ4THMuN3
+ e2jw==
+X-Gm-Message-State: APjAAAX6G892lGfr4rjKXT7ekuVHc6Yvooxq6vUF7/SnAjf0ViiS9Oa9
+ OLsE0brqJbcsBEMZ4O/Ck+KL46mIdhpRPoT9p8U=
+X-Google-Smtp-Source: APXvYqyJZqlIcP4RcRxCE9J+CCDpDAOQezVG4wmzGr92TpdSb96QB+9P1jtwCzw83+ORzm1Cz6J4GtL1iisDo0MaJVw=
+X-Received: by 2002:a81:1150:: with SMTP id 77mr54593542ywr.241.1556616160900; 
+ Tue, 30 Apr 2019 02:22:40 -0700 (PDT)
+MIME-Version: 1.0
 References: <CAOQ4uxjQdLrZXkpP30Pq_=Cckcb=mADrEwQUXmsG92r-gn2y5w@mail.gmail.com>
  <CAOQ4uxhuxoEsoBbvenJ8eLGstPc4AH-msrxDC-tBFRhvDxRSNg@mail.gmail.com>
  <20190426145006.GD25827@fieldses.org>
@@ -45,16 +63,14 @@ References: <CAOQ4uxjQdLrZXkpP30Pq_=Cckcb=mADrEwQUXmsG92r-gn2y5w@mail.gmail.com>
  <bc2f04c55ba9290fc48d5f2b909262171ca6a19f.camel@kernel.org>
  <BYAPR21MB1303596634461C7D46B0A773B6390@BYAPR21MB1303.namprd21.prod.outlook.com>
  <CAOQ4uxirAW91yUe1nQUPPmarmMSxr_pco8NqKWB4srwyvgnRRA@mail.gmail.com>
-Openpgp: preference=signencrypt
-Message-ID: <677e86ee-59b9-0826-481f-955074d164ed@samba.org>
-Date: Tue, 30 Apr 2019 11:12:28 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
-MIME-Version: 1.0
-In-Reply-To: <CAOQ4uxirAW91yUe1nQUPPmarmMSxr_pco8NqKWB4srwyvgnRRA@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+ <677e86ee-59b9-0826-481f-955074d164ed@samba.org>
+In-Reply-To: <677e86ee-59b9-0826-481f-955074d164ed@samba.org>
+Date: Tue, 30 Apr 2019 05:22:29 -0400
+Message-ID: <CAOQ4uxiwDPDyQPrPkUzZCO8jkySRiSK+AZu1dxppXvVA4q6XnA@mail.gmail.com>
+Subject: Re: Better interop for NFS/SMB file share mode/reservation
+To: Uri Simchoni <uri@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,40 +84,70 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Uri Simchoni <uri@samba.org>
+From: Amir Goldstein via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Amir Goldstein <amir73il@gmail.com>
 Cc: "linux-nfs@vger.kernel.org" <linux-nfs@vger.kernel.org>,
  "Volker.Lendecke@sernet.de" <Volker.Lendecke@sernet.de>,
  Jeff Layton <jlayton@kernel.org>,
  "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
  Trond Myklebust <trondmy@hammerspace.com>,
- "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>
+ "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+ Pavel Shilovskiy <pshilov@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 4/30/19 3:31 AM, Amir Goldstein via samba-technical wrote:
->>
->> About O_DENYDELETE: I don't understand how we may reach a good interop story without a proper implementation of this flag. Windows apps may set it and Samba needs to respect it. If an NFS client removes such an opened file, what will Samba tell the Windows client?
->>
-> 
-> Samba will tell the Windows client:
-> "Sorry, my administrator has decided to trade off interop with nfs on
-> share modes,
-> with DENY_DELETE functionality, so I cannot grant you DENY_DELETE that you
-> requested."
-> Not sure if that is workable. Samba developers need to chime in.
-> 
-> Thanks,
-> Amir.
-> 
+On Tue, Apr 30, 2019 at 4:12 AM Uri Simchoni <uri@samba.org> wrote:
+>
+> On 4/30/19 3:31 AM, Amir Goldstein via samba-technical wrote:
+> >>
+> >> About O_DENYDELETE: I don't understand how we may reach a good interop=
+ story without a proper implementation of this flag. Windows apps may set i=
+t and Samba needs to respect it. If an NFS client removes such an opened fi=
+le, what will Samba tell the Windows client?
+> >>
+> >
+> > Samba will tell the Windows client:
+> > "Sorry, my administrator has decided to trade off interop with nfs on
+> > share modes,
+> > with DENY_DELETE functionality, so I cannot grant you DENY_DELETE that =
+you
+> > requested."
+> > Not sure if that is workable. Samba developers need to chime in.
+> >
+> > Thanks,
+> > Amir.
+> >
+>
+> On Windows you don't ask for DENY_DELETE, you get it by default unless
+> you ask to *allow* deletion. If you fopen() a file, even for
+> reading-only, the MSVC standard C library would open it with delete
+> denied because it does not explicitly request to allow it. My guess is
+> that runtimes of other high-level languages behave that way too on
+> Windows. That means pretty much everything would stop working.
+>
 
-On Windows you don't ask for DENY_DELETE, you get it by default unless
-you ask to *allow* deletion. If you fopen() a file, even for
-reading-only, the MSVC standard C library would open it with delete
-denied because it does not explicitly request to allow it. My guess is
-that runtimes of other high-level languages behave that way too on
-Windows. That means pretty much everything would stop working.
+I see. I was wondering about something else.
+Windows deletes a file by opening it for DELETE_ON_CLOSE
+and then "The file is to be deleted immediately after all of its handles ar=
+e
+closed, which includes the specified handle and any other open or
+duplicated handles.".
+What about hardlinks?
+Are open handles associate with a specific path? not a specific inode?
+
+I should note that Linux NFS client does something similar called silly
+rename. To unlink a file, rename it to temp name, then unlink temp name
+on last handle close to that file from that client.
+
+If, and its a very big if, samba could guess what the silly rename temp nam=
+e
+would be, DENY_DELETE could have been implement as creating a link
+to file with silly rename name.
+
+Of course we cannot rely on the NFS client to enforce the samba interop,
+but nfsd v4 server and samba could both use a similar technique to
+coordinate unlink/rename and DENY_DELETE.
 
 Thanks,
-Uri.
+Amir.
 
