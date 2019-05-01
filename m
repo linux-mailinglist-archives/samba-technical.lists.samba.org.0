@@ -2,46 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71DD5103B6
-	for <lists+samba-technical@lfdr.de>; Wed,  1 May 2019 03:37:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 541A4104EE
+	for <lists+samba-technical@lfdr.de>; Wed,  1 May 2019 06:34:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=Zf4pHG6MnFu6Nqz+EkPRLk1HfFyk7darOJMJ6ZB/IEI=; b=3SSKzJ0z/YyC1tSJhLHXhct4XT
-	IWPcW/HnPotjELU/JUWZIxpGGjg4Gau+oXwv6Ha4W+7rZXWxYdJ7xwP7WbMNFvP2WdYyG2Xwmb0xc
-	JrWX9LLspbSKoBnTV+YOqJ8mxdYh/emAVLr8NuU+tZ3nIKyzmmAhlcR0r/zdfACEuTnKwPzdTIIXH
-	V9o8k1IKyaubM8Wn0tcuLki39VW3fFhUBd5TsOuGWbGpEp/lDe6/fIlaPw0La47fKXJSX4I25OIrF
-	Rgot/7GZOVdTfcQNEQraXq7jbJYyo1KnIbtW+T36wH5XcBLX0vLo2QCFgzr+L9xC7n4J3X0XCRhuz
-	HqzIQSUA==;
-Received: from localhost ([::1]:37746 helo=hr1.samba.org) 
+	bh=LFVAMp3bFFjCRu8HxLUkAyCqEu59aMPhFJxzey4Iv0s=; b=znXkfO0/231agT3VV3+I6neujU
+	lEXkFhFx8SzVGBsCoMnUQHdidI3GcVZBmWHc8XLqdd/QKWvbg8mp3JxzQQJ+UJmqSuLCSBPU7zK+h
+	v0MQv9yDNcGBqEAA4zkCZQw99hqp7KQyG6Qm29enQl+s708cL5cylPXnlbYl66dRMyMx2dTSl+3KR
+	MdkU87xZJTWSO8IoUn+9///RomF/wMWUFsVY+YRRrd2/qntEdGkOjuODs5K/VuCNZts5rrnRvT9m1
+	JdC9P6WMjeszkHfOAj4LvIeUmimNA8RK3RjeSCQhru4lZHWQT5vFE86r0fG6/99GecmNlY3O9X2H7
+	rqjlwBsA==;
+Received: from localhost ([::1]:39664 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hLeBC-001kiZ-Pv; Wed, 01 May 2019 01:37:02 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:37006) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hLeAt-001kiS-JR
- for samba-technical@lists.samba.org; Wed, 01 May 2019 01:36:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Cc:To:From:Message-ID;
- bh=Zf4pHG6MnFu6Nqz+EkPRLk1HfFyk7darOJMJ6ZB/IEI=; b=l59V7YpXl5FLBHpHHjrN6zFhV1
- ctWPmuYDNr7kW1wZ1U2piTcNeJuu0W5g1rOuHeo/WRkCVp55VA2CwPn3GO1maRUJhiZmBogLORpAR
- qC/dDg7QE0zbezhwC/+6tDJQc499YVq7coyb4l62kLhh+Wjy/texk41WoglVJtsTY3HY=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1hLeAq-0000qn-NJ; Wed, 01 May 2019 01:36:41 +0000
-Message-ID: <1556674596.25595.100.camel@samba.org>
-Subject: Re: getting centos7 into bootstrap and gitlab CI
-To: Christof Schmitt <cs@samba.org>
-Date: Wed, 01 May 2019 13:36:36 +1200
-In-Reply-To: <20190430230454.GA22132@samba.org>
-References: <20190429193555.GA28948@samba.org>
- <2134250.fEHozF1qz7@magrathea.fritz.box>
- <20190430145845.6fcfb681@devstation.samdom.example.com>
- <3513637.hkN0grMHb1@magrathea.fritz.box>
- <1556649942.21278.15.camel@samba.org> <20190430230454.GA22132@samba.org>
-Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAACRklEQVRYw81YS67DIAwkVe8FPRm5menJeAu3lmUCbyBGKqsmRXjwb8Y5aq3hl9Yj/Nh6Tu0upZRS+EdKiV+e5+mJqMKLiHLORBRjzDmbc/hlvb1QD2k3sG84+dhhvF6vlzymlNY8dyBJzUdLjAwyvaeU8n6/2WHpu/xDRkREJI8cOBMgfuRQxhj58JzzbBwhQDFGA07M6/efE0MQxDHGFvpdQHy6MUxqtU4yezRcH0B4GfbM44BWGqOurF6Omz140a0ASimJvdbwZT32XrpRh5yuwY1d0vPrdNkv91+T8uBRG8l1uiX+JtsHxPNIWE27ugwTctTdHCIiYXvuy4P7IDl0CxAzl2xgZTJwgw+g3kGaHwYh5g2sljyrjIVEq4pYBg2Kq3yXZ5WxjfO7zF9jRdXrnLcEmlbTRnNpcT0gvpTScUC2HlOE2ipAvPuJanMT+Xc0PC4dFzu1DEO4HgczaS5kOnZ4vM7zxNU+mtRyRVPDgqyX3cdx8AQCCrQnfkV9VzMA9Ryg3ek8Sgsg3QX+nbz03Og5l10ytp6HusQUwpjd1rnsksbHlhjuVGdBAbWzIiJu5MvEFkA6OkiwBO4uQL3ADeQ9b57t74+FBo1s47IqpVxqBDcuQ66r94QQJOH2ctnAf9oZtdbZYejpi2bQEveO0sb2JXu09OJJrnpil4SV5G2N6Y+1QjL+gHSKDApHJoJWF3hW2fInh6lutGW216OPRBZtRZscwyQvI+KuTj3rp4VP1VsAcTobxgDngukqm3LPgmL8A4m377Y5OvTKAAAAAElFTkSuQmCC
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.22.6-1+deb9u1 
-Mime-Version: 1.0
+	id 1hLgwD-001l1t-7Q; Wed, 01 May 2019 04:33:45 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:37208) 
+ by hr1.samba.org with esmtps
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim) id 1hLgvz-001l1m-5A
+ for samba-technical@lists.samba.org; Wed, 01 May 2019 04:33:40 +0000
+Received: from [IPv6:2404:130:0:1000:c474:9b54:b7c9:4153] (unknown
+ [IPv6:2404:130:0:1000:c474:9b54:b7c9:4153])
+ (Authenticated sender: garming@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id D564080FCD; 
+ Wed,  1 May 2019 16:33:16 +1200 (NZST)
+Subject: Re: [WIP] [PATCH] ldb: new on-disk pack format
+To: Aaron Haslett <aaronhaslett@catalyst.net.nz>,
+ samba-technical <samba-technical@lists.samba.org>
+References: <09dfb485-0056-44f9-3baf-3ba38675758a@catalyst.net.nz>
+Openpgp: preference=signencrypt
+Message-ID: <01caab91-5ec4-392a-0227-c4782db5959e@catalyst.net.nz>
+Date: Wed, 1 May 2019 16:33:16 +1200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
+MIME-Version: 1.0
+In-Reply-To: <09dfb485-0056-44f9-3baf-3ba38675758a@catalyst.net.nz>
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -55,65 +51,63 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+From: Garming Sam via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Garming Sam <garming@catalyst.net.nz>
+Cc: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2019-04-30 at 16:04 -0700, Christof Schmitt wrote:
-> On Wed, May 01, 2019 at 06:45:42AM +1200, Andrew Bartlett via samba-technical wrote:
-> > On Tue, 2019-04-30 at 16:10 +0200, Andreas Schneider via samba-
-> > technical wrote:
-> > > On Tuesday, April 30, 2019 3:58:45 PM CEST Rowland Penny wrote:
-> > > > 
-> > > >  
-> > > > Quite right EPEL doesn't have python34-crypto or python34-dns, but
-> > > > it
-> > > > does have these:
-> > > > 
-> > > > https://www.mirrorservice.org/sites/dl.fedoraproject.org/pub/epel/7
-> > > > /x86_64/P
-> > > > ackages/p/python36-crypto-2.6.1-16.el7.x86_64.rpm
-> > > > https://www.mirrorservice.org/sites/dl.fedoraproject.org/pub/epel/7
-> > > > /x86_64/
-> > > > Packages/p/python36-dns-1.15.0-8.el7.noarch.rpm
-> > > 
-> > > I think we are more lucky once RHEL 7.7 is out :-)
-> > 
-> > Can we use this:
-> > https://centos.pkgs.org/7/epel-x86_64/python36-3.6.6-5.el7.x86_64.rpm.html
-> > 
-> > It would be very helpful if we could have a python 3.6 baseline.
-> 
-> I have a RHEL7 system and these python 3.6 rpms installed from EPEL:
-> 
-> $ rpm -qa | grep python36
-> python36-libs-3.6.6-5.el7.x86_64
-> python36-crypto-2.6.1-16.el7.x86_64
-> python36-devel-3.6.6-5.el7.x86_64
-> python36-3.6.6-5.el7.x86_64
-> python36-dns-1.15.0-8.el7.noarch
-> 
-> That seems sufficient to run the AD testenvs on master. If those can be
-> added to a CentOS7 image on gitlab, that might be sufficient to run the
-> tests.
+Some initial testing shows that the new format has 50% more throughput
+(for unpacking group-like objects with a few thousand (member) values
+like what happens in the LDAP bind). Or in other words it's 33% faster
+to finish a single call. It also leads to much better memory performance
+under load, which is harder to predict in terms of overall improvement.
 
-So I guess it should be mostly a matter of adding EPEL repo during
-bootstrap.  Currently it runs the same thing on all RPM based systems,
-but this can be changed.
+ldb_kv: Avoid memdup of database records in the case of base searches
 
-See bootstrap/config.py
+a76d2865372988c29baef42ecc4257e861692e7b
 
-Andrew Bartlett
--- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT   
-https://catalyst.net.nz/services/samba
+The pack format specifically helps only after patch which is already in
+master which avoids making a copy of a full database record, which in
+the case of large groups might be megabytes large. In such a database,
+the LDAP bind median performance does not actually appear that bad, but
+under even moderate (or even small) load binds can blow out to seconds
+long. With the new pack format, this should be more reliable and
+predictable (at least until the next bottleneck). Still working on some
+current numbers, but this was the observation during some PoC work.
 
+To Aaron: One more thing is that looking at the patches, avoiding the
+use of function pointers could be desirable given how hot this code is.
+I think the overall approach is fine (and you don't necessarily need to
+change it right now), but I don't know how much better or worse the
+compiler is in these cases, where these functions might be better off
+inlined. In theory, it's just a marginal improvement but maybe someone
+else could comment (Douglas?).
 
+Cheers,
 
+Garming
 
+On 30/04/19 2:25 PM, Aaron Haslett via samba-technical wrote:
+> Garming discovered poor performance when recursively calculating group
+> membership for a user during LDAP bind.  This WIP patch attempts to fix
+> the problem by separating values from the rest of the data in our LDB
+> pack format.  This should dramatically reduce the amount of data loaded
+> into cache while unpacking with flag LDB_UNPACK_DATA_FLAG_NO_DATA_ALLOC.
+>
+> Correctness testing is included and a CI run is here:
+>
+> https://gitlab.com/samba-team/devel/samba/pipelines/59051539
+>
+> To be done:
+>
+>   * Performance testing
+>   * Research into OpenLDAP's pack format and possible modifications to
+>     ours based on theirs
+>
+>
+> Thanks :)
+>
+> Aaron H.
+>
 
