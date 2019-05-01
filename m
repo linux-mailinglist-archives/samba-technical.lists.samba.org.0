@@ -2,57 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD36810640
-	for <lists+samba-technical@lfdr.de>; Wed,  1 May 2019 11:07:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25DC710BF3
+	for <lists+samba-technical@lfdr.de>; Wed,  1 May 2019 19:23:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=OEQnV+ykDx7BZeio2LrGXUH+m9oaZghKddgddMzlM88=; b=ghO36VYxkluG0qfgVbsnqZb26X
-	GjrYt7bOhSRrqRKo4SSfJI+yh6nQNetXiBv1PghthsmjoDZgOSnsGNIqnN2ExSm8MhcZqysiWuWgG
-	Jr2xx5RyRuom6u6HFw2pX0zLOqUpMoOgcZX4kWQRkJzx3a9mGmVuqv/ysmaTfXMpeg097bfLTMwey
-	QZ2mzap1WUagSNZxNSM6Qj/u+rdbWP/5eE2Xi280SFhf5v/QHRwz22Oi6QyoHHvQIR2agxLEIfjpN
-	ifkYt4ynB/0VDw1dwayDQ3H3ijAggtnGZUeDgm2J9QBk2/HHiZ1tuWWzXr6XNnb6L1Qa7sAANM2Wx
-	eKpLI6Lw==;
-Received: from localhost ([::1]:56444 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=46Vt22qBk4eMOOxPQY5Pu+Sxe2SIIh5OaLOpW1XsAmk=; b=kTUhTOGYfvDJboI7j8URTLvqhe
+	v8CqXk9PLqvNAPhTkS9aK+owgFRFJnKqvjOxzOsAijB+XniBwVx6ufYVoDqJw1ALRB5jK8LBJZBdz
+	cx7tXwgr3GYOXRJRFKFzWqPXqx/o7Vfc55sq7FIOsoZssuWHfavAg47gaPtswcLJH534iRprYscgg
+	KlLHlHa9WecdHp2+Kko6LElXr/6YTLJEcuagTcusUvBG8RFl3d+HMHLj5oUWCUuKiM1hbPWru2v/x
+	95brd8VRowSEY8hBOvQslpUMgA+SPuyppmpZDt1wdXLottLfC512nEQZbmaBTKlelsrt7BEViRd0t
+	lFqd++7Q==;
+Received: from localhost ([::1]:44878 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hLlCD-001ngv-MN; Wed, 01 May 2019 09:06:33 +0000
-Received: from mailhopper2.bazuin.nl ([195.134.173.123]:33144) 
+	id 1hLsw2-001sqH-Hv; Wed, 01 May 2019 17:22:22 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:43346) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hLlC9-001ngo-Lz
- for samba-technical@lists.samba.org; Wed, 01 May 2019 09:06:31 +0000
-X-Bazuin-en-Partners-MailScanner-Watermark: 1557306382.96798@JKej7ve+4Y/2plLWWcDx7Q
-X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
-X-Bazuin-en-Partners-MailScanner: Found to be clean
-X-Bazuin-en-Partners-MailScanner-ID: 5366612050D.A5E57
-X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
- Partners for more information
-Received: from ms249-lin-003.rotterdam.bazuin.nl
- (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
- by mailhopper2.bazuin.nl (Postfix) with ESMTP id 5366612050D
- for <samba-technical@lists.samba.org>; Wed,  1 May 2019 11:06:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
- s=mail20180308; t=1556701582;
- bh=OEQnV+ykDx7BZeio2LrGXUH+m9oaZghKddgddMzlM88=;
- h=Subject:From:To:Date:From;
- b=TQhOLG2kXRBIS31qZv2ahhO/RNtWcm8zvbgGZ7HjToOadMoiReAxeDAzxkoQtxYqC
- v0eU8mDaKttTc195pOwsTX5iOfcl1rKOXQkJH1yE/ZwYnAexzfjSrM1Ihk0tXivI22
- aPH0u4QsHCq8MIrHuIFIL1qKT6lQXgpX11DIQ7pIzchKbBonMgeB5Uz7QfsoAZLxhu
- aBov/nv+ILd1l/kjsBz5bNC3Gy+r6XD3Ta3kF85B4BRqqsf9L2LxxGwQJ1v5733GRo
- hGCkzjESF/qc47My7t9yVhUunPaxvoVA2ZaJKjWlfd3+xg6Q54Dow9eFmZXecnzk5g
- RacGalXkXPWXA==
-Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
- by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 742633AF8C
- for <samba-technical@lists.samba.org>; Wed,  1 May 2019 11:06:22 +0200 (CEST)
-Subject: Need a verificaton on ntp settings with apparmor for samba
-To: =?windows-1252?Q?samba-technical=40lists.samba.org?=
- <samba-technical@lists.samba.org>
-Date: Wed, 1 May 2019 11:06:22 +0200
-Mime-Version: 1.0
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
-X-Priority: 3 (Normal)
-X-Mailer: Zarafa 6.30.19-25148
-Thread-Index: AdT//SVGqjBRiOb4TF+aHGMeqSQ8EQ==
-Message-Id: <vmime.5cc9618e.2343.215bd6e214788f6e@ms249-lin-003.rotterdam.bazuin.nl>
+ (Exim) id 1hLsvs-001sq9-G0
+ for samba-technical@lists.samba.org; Wed, 01 May 2019 17:22:20 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=46Vt22qBk4eMOOxPQY5Pu+Sxe2SIIh5OaLOpW1XsAmk=; b=WHMFwU8fLJH32p17DkSHsCfawI
+ aEoi24X6PINA2CA3ye+zsa+CQ0L2flGSregtzl8NXYNYD2CPzMT7nhRsg3Mo33Wd2t8kDNpMBhQou
+ HcFEvCeZaUJNqGJTyYadMx/6LvbIaHQrOOMXF35UflSxl8nrkHJ/T92n2FWsYVHiTsb8=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hLsvp-0006GT-If; Wed, 01 May 2019 17:22:09 +0000
+Date: Wed, 1 May 2019 10:22:06 -0700
+To: Stefan Metzmacher <metze@samba.org>
+Subject: Re: smbd: implement SMB_FILE_NORMALIZED_NAME_INFORMATION handling
+Message-ID: <20190501172206.GC229765@jra4>
+References: <c1c3c497-fe35-000a-00eb-0cd653e25716@samba.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <c1c3c497-fe35-000a-00eb-0cd653e25716@samba.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -66,40 +50,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "=?windows-1252?Q?L.P.H._van_Belle?= via samba-technical"
- <samba-technical@lists.samba.org>
-Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hai guys,=20
-=20
-We found some things off in the ntp settings of chrony and ntp=20
-=20
-I dont know which parts are exact used buy samba and/or winbind in conjunction with ntp.=20
-=20
-we know these are correct.=20
-=20
- # To sign replies to MS-SNTP clients by the smbd daemon in /var/lib/samba
-/var/lib/samba/ntp_signd r,
-/var/lib/samba/ntp_signd/{,*} rw,
-=20
-I notice this one was in ntp its apparmor profile but not in chrony, is this one needed at all=3F=20
-# samba4 winbindd pipe
-/{,var/}run/samba/winbindd r,
-/{,var/}run/samba/winbindd/pipe r,
+On Tue, Apr 30, 2019 at 01:25:34PM +0200, Stefan Metzmacher via samba-technical wrote:
+> Hi,
+> 
+> I just created https://gitlab.com/samba-team/samba/merge_requests/400
+> with the patches to implement SMB_FILE_NORMALIZED_NAME_INFORMATION.
+> 
+> Windows 10 (1803 and higher) support and use
+> SMB_FILE_NORMALIZED_NAME_INFORMATION
+> calls over the network. As a fallback (in case the server don't support
+> it) the client traverses all path components, which is very expensive.
+> 
+> Implementing SMB_FILE_NORMALIZED_NAME_INFORMATION is very cheap for us
+> as the open already went through unix_convert() and we have the
+> information the client is asking for.
+> 
+> See also https://bugzilla.samba.org/show_bug.cgi?id=13919
+> 
+> Please review and push:-)
 
-And i've added this part in case its needed but again i can't tell if thats correct.=20
-# samba4 winbindd_privileged pipe
-/var/lib/samba/winbindd_privileged r,
-/var/lib/samba/winbindd/pipe r,
-
-Can someone verify these winbind parts.=20
-Then i can update the bug reports on this on Debian.=20
-
-Best regards,=20
-
-Louis
-
-
+RB+ and pushed. Thanks Metze, great work !
 
