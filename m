@@ -2,42 +2,78 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1773911289
-	for <lists+samba-technical@lfdr.de>; Thu,  2 May 2019 07:18:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D1FC11147C
+	for <lists+samba-technical@lfdr.de>; Thu,  2 May 2019 09:46:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=iO1HHjT9MfB+rk2krZXpON6c0hKPx/5fOIR+nUe8jqc=; b=HIqTzZraaAmWwXEZzN9mIREkoY
-	3WCWEKWdwfn8IE89eLjSo9JX0CMs/fGGeWAHyOoOsyg5HMeJvPp0LmwNxTIDL06yYGTi4ealHsmre
-	QnwYzoLL0lleD8w04F18LvxLxQEDXcxeJiM83Me8/OUIg0y2D3j/+8+ZA95vD1TTT7Hxb7ne8yx/U
-	/kWHCIcwWDV2El3neq+plnlEENLS0EbQVVpmE1FXzdS1QQXv9tLcdSoPaV7P2HOzMJn+NskbGqejf
-	wLms80tFAi7S/Tr5DEd6glyq6514179f+K9PtkZn5yOvO7EEzSE7ThDCeEnf/mvaxNH2tydeqG0oa
-	nuDc3XsA==;
-Received: from localhost ([::1]:63828 helo=hr1.samba.org) 
+	bh=wZTqXOF9HbaMjd9eTapc7hvYo3SHwuPuxOUMAYSQmJQ=; b=jw7jCg8jRPMylC+8ENzQ0bvBZO
+	+NWcW3IMThpwlC8FPxTijXQJo2Eq8h1tnhoYi1KnGlGufbTmJy3uYCyC555mYOCGX34Cz00qPxYLr
+	4zWd5PfoNQ97AsZZwO9dsskeIaevRjVvQf1yetRpN6qzNv6PUy3JeTrQgjxzlnTqZbsc0GzcMYvpT
+	T9mAYv282Xd4M97F2O+0VX8PI9+QBXS4eGWHNwCHbxY0L+uMBZkurwEcFASH3fXKvcwH6izKlJStb
+	KkXLU/HcBzuvaBP1ifaAbD4GACMUUrWhrqQ5vk4un+AplAD3fjbiWtx/jtPaNAtIKfyvrBxQHcnQx
+	HV/EIjAA==;
+Received: from localhost ([::1]:22254 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hM46K-001vxU-7S; Thu, 02 May 2019 05:17:44 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:34560) 
- by hr1.samba.org with esmtps
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim) id 1hM46F-001vxN-1W
- for samba-technical@lists.samba.org; Thu, 02 May 2019 05:17:42 +0000
-Received: from [IPv6:2404:130:0:1000:ed06:1c1d:e56c:b595] (unknown
- [IPv6:2404:130:0:1000:ed06:1c1d:e56c:b595])
- (Authenticated sender: timbeale@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 5076C81615; 
- Thu,  2 May 2019 17:17:28 +1200 (NZST)
-Subject: Re: dns_hub lingers
-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
- Samba Technical <samba-technical@lists.samba.org>
-References: <b49cf3d8-11a8-5972-9ccd-ef9c62591179@catalyst.net.nz>
+	id 1hM6QF-001x82-V5; Thu, 02 May 2019 07:46:28 +0000
+Received: from mx2.heinlein-support.de ([91.198.250.20]:55936
+ helo=mx1.heinlein-support.de) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1hM6QA-001x7v-3k
+ for samba-technical@lists.samba.org; Thu, 02 May 2019 07:46:24 +0000
+Received: from gerste.heinlein-support.de (gerste.heinlein-support.de
+ [91.198.250.173])
+ by mx1.heinlein-support.de (Postfix) with ESMTP id 71D2B2E0EB3
+ for <samba-technical@lists.samba.org>; Thu,  2 May 2019 09:46:14 +0200 (CEST)
+Received: from mx1.heinlein-support.de ([91.198.250.20])
+ by gerste.heinlein-support.de (gerste.heinlein-support.de [91.198.250.170])
+ (amavisd-new, port 10024)
+ with ESMTP id gsrEZ6jI9pQG for <samba-technical@lists.samba.org>;
+ Thu,  2 May 2019 09:46:12 +0200 (CEST)
+Received: from marchiv.heinlein-support.de (marchiv.heinlein-support.de
+ [91.198.250.63])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.heinlein-support.de (Postfix) with ESMTPS
+ for <samba-technical@lists.samba.org>; Thu,  2 May 2019 09:46:12 +0200 (CEST)
+Received: from MailAppDispatcher (localhost.localdomain [127.0.0.1])
+ by marchiv.heinlein-support.de (Postfix) with ESMTP id 0069848153
+ for <samba-technical@lists.samba.org>; Thu,  2 May 2019 09:46:11 +0200 (CEST)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by marchiv.heinlein-support.de (Postfix) with ESMTP id CC79448162
+ for <samba-technical@lists.samba.org>; Thu,  2 May 2019 09:46:11 +0200 (CEST)
+Received: from marchiv.heinlein-support.de ([127.0.0.1])
+ by localhost (marchiv.heinlein-support.de [127.0.0.1]) (amavisd-new,
+ port 10024)
+ with ESMTP id Hrpj-Fqvyyqf for <samba-technical@lists.samba.org>;
+ Thu,  2 May 2019 09:46:11 +0200 (CEST)
+Received: from plasma32.jpberlin.de (plasma32.jpberlin.de [80.241.57.8])
+ by marchiv.heinlein-support.de (Postfix) with ESMTPS
+ for <samba-technical@lists.samba.org>; Thu,  2 May 2019 09:46:11 +0200 (CEST)
+Received: from [192.168.102.183] (pD95825C1.dip0.t-ipconnect.de
+ [217.88.37.193])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ (Authenticated sender: r.sander@heinlein-support.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id 65CBD1003BC
+ for <samba-technical@lists.samba.org>; Thu,  2 May 2019 09:46:11 +0200 (CEST)
+Subject: Re: [PATCH] use current working directory instead of share path in
+ cephwrap_realpath
+To: samba-technical@lists.samba.org
+References: <2ccf782c-f2fe-2ed7-23b6-fdf336b1d172@heinlein-support.de>
+ <20190501221418.0a115c99@samba.org>
 Openpgp: preference=signencrypt
-Message-ID: <cd239312-98e0-6868-b547-aff94f4674e5@catalyst.net.nz>
-Date: Thu, 2 May 2019 17:17:27 +1200
+Organization: Heinlein Support GmbH
+X-Clacks-Overhead: GNU Terry Pratchett
+Message-ID: <6e3bd727-ec97-e707-fdd6-5799555823d6@heinlein-support.de>
+Date: Thu, 2 May 2019 09:46:06 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <b49cf3d8-11a8-5972-9ccd-ef9c62591179@catalyst.net.nz>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+In-Reply-To: <20190501221418.0a115c99@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="jUqGZyXVEBIs3ODaB7kXkIQEP0EUXfeEr"
+X-Mailarchiv-ID: 6276860
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,54 +87,128 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tim Beale via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Tim Beale <timbeale@catalyst.net.nz>
+From: Robert Sander via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Robert Sander <r.sander@heinlein-support.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I had a look at this a while ago. I think I came to the conclusion that
-it was only CTRL+C case that did this and the clean shutdown/pipe-close
-worked fine.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--jUqGZyXVEBIs3ODaB7kXkIQEP0EUXfeEr
+Content-Type: multipart/mixed; boundary="kNHxagFqdWRyExJTIcrJii7kVYJ8NGI6Z";
+ protected-headers="v1"
+From: Robert Sander <r.sander@heinlein-support.de>
+To: samba-technical@lists.samba.org
+Message-ID: <6e3bd727-ec97-e707-fdd6-5799555823d6@heinlein-support.de>
+Subject: Re: [PATCH] use current working directory instead of share path in
+ cephwrap_realpath
+References: <2ccf782c-f2fe-2ed7-23b6-fdf336b1d172@heinlein-support.de>
+ <20190501221418.0a115c99@samba.org>
+In-Reply-To: <20190501221418.0a115c99@samba.org>
 
-It looks like in the CTRL+C case, the samba processes disappear
-immediately, and so the usual graceful teardown_env_terminate() fails, e.g.
+--kNHxagFqdWRyExJTIcrJii7kVYJ8NGI6Z
+Content-Type: multipart/mixed;
+ boundary="------------DBA74B0CDD52E6D82BCBE9BE"
+Content-Language: de-DE
 
-^Cteardown_env(vampire_dc)
-Can't find pid for destination 'samba'
-'./bin/smbcontrol samba shutdown
---configfile=/home/timbeale/code/clean/samba/st/vampire_dc/etc/smb.conf'
-failed with '256'
-samba child process 143771, died with signal 2, without coredump
-/home/timbeale/code/clean/samba/selftest/selftest.pl: PID[143645]: Got
-SIGPIPE teardown environments.
+This is a multi-part message in MIME format.
+--------------DBA74B0CDD52E6D82BCBE9BE
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-It might be because the CTRL+C signal goes to the entire process group,
-which just kills samba. But perhaps the signal isn't getting to dns_hub,
-or python3 handles the SIGINT slightly differently?
+Hi,
 
-On 2/05/19 3:26 PM, Douglas Bagnall via samba-technical wrote:
-> I find that our newest and simplest dns server still has a few
-> surprises.
->
-> After a number of `make test`s, I end up with several dns_hub.py
-> processes hanging around (according to `ps faux |grep dns_hub`).
->
-> Looking inside, I see:
->
-> (gdb) py-bt
-> Traceback (most recent call first):
->   <built-in method acquire of _thread.lock object at remote 0x7f32fb272e18>
->   File "/usr/lib/python3.6/threading.py", line 1072, in
-> _wait_for_tstate_lock
->     elif lock.acquire(block, timeout):
->   File "/usr/lib/python3.6/threading.py", line 1056, in join
->     self._wait_for_tstate_lock()
->   File "/usr/lib/python3.6/threading.py", line 1294, in _shutdown
->     t.join()
->
-> I can look into this eventually if no dns_hub experts leap forward.
-> Garming thinks it has something to do with hitting control-C.
->
-> Douglas
->
+Thanks for your quick and positive feedback.
+I hope the patch has the correct format now.
+
+Kindest Regards
+--=20
+Robert Sander
+Heinlein Support GmbH
+Schwedter Str. 8/9b, 10119 Berlin
+
+https://www.heinlein-support.de
+
+Tel: 030 / 405051-43
+Fax: 030 / 405051-19
+
+Amtsgericht Berlin-Charlottenburg - HRB 93818 B
+Gesch=C3=A4ftsf=C3=BChrer: Peer Heinlein - Sitz: Berlin
+
+--------------DBA74B0CDD52E6D82BCBE9BE
+Content-Type: text/x-patch;
+ name="ceph-symlinks.patch"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="ceph-symlinks.patch"
+
+=46rom e39ed34985f9a8f17f716e2575b8553f0e644883 Mon Sep 17 00:00:00 2001
+From: Robert Sander <r.sander@heinlein-support.de>
+Date: Fri, 26 Apr 2019 17:52:58 +0200
+Subject: [PATCH] use current working directory instead of share path
+
+Bug: https://bugzilla.samba.org/show_bug.cgi?id=3D13918
+Signed-off-by: Robert Sander <r.sander@heinlein-support.de>
+---
+ source3/modules/vfs_ceph.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/source3/modules/vfs_ceph.c b/source3/modules/vfs_ceph.c
+index cf45fb4c919..57de8bc891a 100644
+--- a/source3/modules/vfs_ceph.c
++++ b/source3/modules/vfs_ceph.c
+@@ -1206,14 +1206,14 @@ static struct smb_filename *cephwrap_realpath(str=
+uct vfs_handle_struct *handle,
+        } else if ((len >=3D 2) && (path[0] =3D=3D '.') && (path[1] =3D=3D=
+ '/')) {
+                if (len =3D=3D 2) {
+                        r =3D asprintf(&result, "%s",
+-                                       handle->conn->connectpath);
++                                       handle->conn->cwd_fname->base_nam=
+e);
+                } else {
+                        r =3D asprintf(&result, "%s/%s",
+-                                       handle->conn->connectpath, &path[=
+2]);
++                                       handle->conn->cwd_fname->base_nam=
+e, &path[2]);
+                }
+        } else {
+                r =3D asprintf(&result, "%s/%s",
+-                               handle->conn->connectpath, path);
++                               handle->conn->cwd_fname->base_name, path)=
+;
+        }
+=20
+        if (r < 0) {
+--=20
+2.17.1
+
+
+--------------DBA74B0CDD52E6D82BCBE9BE--
+
+--kNHxagFqdWRyExJTIcrJii7kVYJ8NGI6Z--
+
+--jUqGZyXVEBIs3ODaB7kXkIQEP0EUXfeEr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIyBAEBCgAdFiEEhVXmaPzvl7l1erVE8LuRWCPeWygFAlzKoEIACgkQ8LuRWCPe
+WygGtQ/1GBMslFUROIOkcj5Vg3sQavy5+5b4tBVEykf1RLAQUprldwZppxy79+sv
+lJTV9uQ1ECqrJsKd/mo5ev+NzTjrxPM6oaykx0T88LiOPFqNDwJB2IdKnnEJHbyN
+aq7Bx5YycHPEw5KprXDRX+yGKvsL/3XwETrkVu2V9UwmDcwuLKgz/d39hyvT6DOf
+Wu0GfCBCnytRdNHsNfTYabpkmfbwqd9G4G9GijBQkqfmWUxGq6QEQK/opO5KpBEG
+CnTZTiWA2iVhl/w81Tc68hVuwB2exMgz+uDyA+jRFigwGTmzYh5nPsHBjJZPVjdb
+CnItiHc4I3L3j1CMqUEDt5sQvEwQMnNGEk2ljOHG0MS5Ys7bgOSOarEZBM9knumu
+a9YjuGxqqKqqgsEr3ArBniKVjvpbZ/anCvUvGWtrzMix9N5TI8tlrZDpgMj/Dk5q
+zzVcc9w/mMv47SWBZ7FF6CG7Qlhv4PvEAhiT1zR4dddCVSQ8us5fEpSgCDny/tUq
+Q+2UTbgSSY0AZVkipz30PHZnDbiogO7y6308rGy0V1X1oPRlO7Q8Fhp7v4vOZJS3
+rOS6OfY/zvd054c4sBvxy2a1c9E2iZgXFlNgeclMkW6/A8Pi8FNg2XPf/VO8GvvI
+t4bUBPJW8b2LON5UBWotSCWHXSKRxJYNNllkfEflldVQhj4laQ==
+=HLYU
+-----END PGP SIGNATURE-----
+
+--jUqGZyXVEBIs3ODaB7kXkIQEP0EUXfeEr--
 
