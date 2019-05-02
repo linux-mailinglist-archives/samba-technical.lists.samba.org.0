@@ -2,59 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 385E511C66
-	for <lists+samba-technical@lfdr.de>; Thu,  2 May 2019 17:14:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5207E11FD6
+	for <lists+samba-technical@lfdr.de>; Thu,  2 May 2019 18:13:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=ytkeotxqZMK+Pphx8YBNVSrBa2jJYvjrofY1/wEO/Ns=; b=RZrmK8u1pxBcag1JIlIbUcRX+w
-	a13GXCKHjqKs/rzHMW3OpUlI7k2fdsiFOrDrYexdDLHObgFVeO1yAnDjCp5Ovo0PlJvIBUcC3eIIV
-	0I/UPAhTfS0wPBtr50PQfqn8Zzxez3uF9uCRYE478XAnWzePK9nJpffvepEmTZriE2WhlcHFF3kHH
-	ccANkLdwV+JKmId08IyfEjU5yuGMqru4YTJxS3AfOP7dBcZwHpnA0sdfbmFnlQZkLbwnQLgQbu5jj
-	kqIG3prWWt/i5w7s/4XzO6BZq9vAizaRLBFzrRmKXNdozlj52FDp/TCH/75ypbSk8B/4Wlki/bhuC
-	MNWWo+Gw==;
-Received: from localhost ([::1]:26904 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=VuM0c/hbgvi1y3rlHKYVnjQnv4Da8SPRt1yYOsd9b4M=; b=f3cBLXX9bGkKncquATBRtLMuvL
+	lnDmoNSpRqglri17ZaB/3bL+V48w/vVF/m/y4qJFePBWJmrG/CIqBO3oDU+g/kvgGLi/1CZ9SVvmW
+	ALqSflvuu710sfKUYmQ0BCVcmSx1kQ5T/ksfgwBo6MYOOv8DT6dgpo+7Bvn35y44BXe4BdlRAfgf2
+	Kf6rbiYZCzjfjhheMRyjUaNYxkklPvUfK3GiQbDh9z5pyMSnxxzmwT48XFkWz6getIJSMUHs+kFgi
+	5fcTD5Yxsglmvm0SJYRMwkxDs4xkoX8vyL4FefA6FxnAfmJC0qInMLjdork3oncQPuH6zwQSvgP09
+	iRoUQu+w==;
+Received: from localhost ([::1]:35228 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hMDP3-0024aA-TK; Thu, 02 May 2019 15:13:41 +0000
-Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:46626) 
+	id 1hMEL1-0025jy-0N; Thu, 02 May 2019 16:13:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:45200) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hMDOz-0024a3-DL
- for samba-technical@lists.samba.org; Thu, 02 May 2019 15:13:39 +0000
-Received: by mail-pl1-x644.google.com with SMTP id bi2so1155978plb.13
- for <samba-technical@lists.samba.org>; Thu, 02 May 2019 08:13:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ytkeotxqZMK+Pphx8YBNVSrBa2jJYvjrofY1/wEO/Ns=;
- b=JlolP3VNtmB3piHgYExaILh0eaeOxzoKa+o453ZqajfxAFvKoQc6BLCOE75V5ReScE
- refIkDa20vnCkTZiqEkYTvrI0jqEEh2AXSNySkCe7iI69qIbcjROTlYKzM4Ba57b+FQK
- 02eBqdG37b38nBHCUVa9VLn9HTBOMFWMyQdTySHfwJgHS4PKg6+SzgakucErnmOLwuJo
- unnkASs6OnyWNP7qUB6BkC/H/MbJGmRJo2OSfr/7YlN2upBwcECQSdIes8RZkmzxzvE7
- agwihi4+d5t4uoL7qz6h0+NH6Z7J6XEuyJKC+OdEBIDw7Bk1CYl9bQM5B+GxKZ8u2nvD
- KUiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ytkeotxqZMK+Pphx8YBNVSrBa2jJYvjrofY1/wEO/Ns=;
- b=OlxoHfAM/oX7YmAujKVAzCVuwm7jald7LtzVLftKNqcD11ihCb99d4spDZKc334pZh
- JhAkkxfGdAlccQUsVUup54MghQgSLHETpA333Quuu7opfapAp2eahRxseuDzEdZUHS3p
- BUb1iaVii1DCh9zZk74gsGNlh7jazpwa4fQacNwAHHqdCYOsQu6XVvlj1EveZrsL8sY+
- g+GjlvIIAKbHXG3Y+3Jkjano3ayLaXAohu8vaysATS9cTmEsWjGPabbjTbkQwSFFCRlZ
- zGWDf6B3H+Gg1oQskQO0+otfoRjkLgLIk/Ania3NpO2ndXIl4Bkm3sdw5loMNvQolqW/
- w4LQ==
-X-Gm-Message-State: APjAAAVPjBxejUiMELzT5h7rq/UZU4ZyS9Vg4lw1jQCoxLcIgFxIgd5b
- QpeV9MV71s0gHydrPZfxHAKqYXktkrsU9dLDPqg=
-X-Google-Smtp-Source: APXvYqxRaVJ1ZvMD65K8iaD0idLyT/VtUkYbZ8zzx61uHRVijYtv/xeXUpqjfHikDuVpgLwynuVM9Erapx7YybujNYo=
-X-Received: by 2002:a17:902:b617:: with SMTP id
- b23mr4120030pls.73.1556810015180; 
- Thu, 02 May 2019 08:13:35 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190501205541.GC30899@veci.piliscsaba.redhat.com>
-In-Reply-To: <20190501205541.GC30899@veci.piliscsaba.redhat.com>
-Date: Thu, 2 May 2019 10:13:23 -0500
-Message-ID: <CAH2r5mt+j9ozVuvNB8qZ=KmnHHqT4Vyd6f_jKVY2232aECH04w@mail.gmail.com>
-Subject: Re: [RFC PATCH] network fs notification
-To: Miklos Szeredi <miklos@szeredi.hu>, CIFS <linux-cifs@vger.kernel.org>
+ (Exim) id 1hMEKw-0025jr-DW
+ for samba-technical@lists.samba.org; Thu, 02 May 2019 16:13:32 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:To:From:Message-ID:CC;
+ bh=VuM0c/hbgvi1y3rlHKYVnjQnv4Da8SPRt1yYOsd9b4M=; b=cMty0cC4HvddzAlNanDLHXhEq1
+ Jgd39rBhyjn/4FUGBtou1jsrHMGFHH7GehWOv5lSjHAKuzSk4xFO2DL705XvDdNlKO2OafykunXP4
+ 6B0VaoXBKORSgpnlFR8a+tmRd5C6EXZ2RjMVxuJbLn9XVGqYi/CVVT2TXeKeZQUE8jmE=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hMEKv-00038V-Cd; Thu, 02 May 2019 16:13:29 +0000
+Message-ID: <b04df37b39526bedddcb95992542026836835038.camel@samba.org>
+Subject: Re: [PROPOSAL] Release ldb with Samba on the 6-montly release cycle
+To: Andrew Bartlett <abartlet@samba.org>, Andreas Schneider <asn@samba.org>,
+ samba-technical@lists.samba.org
+Date: Thu, 02 May 2019 12:13:27 -0400
+In-Reply-To: <1556509193.25595.71.camel@samba.org>
+References: <1554694013.25595.6.camel@samba.org>
+ <1554971819.4812.88.camel@samba.org>
+ <3375324.H8Nz3ShdPD@magrathea.fritz.box>
+ <1555011274.4812.106.camel@samba.org>
+ <c06c2c6c113c64ddbd4974c8ca14355e94bd044a.camel@samba.org>
+ <1556509193.25595.71.camel@samba.org>
 Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.30.5 (3.30.5-1.fc29) 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,73 +56,147 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>,
- Amir Goldstein <amir73il@gmail.com>, Jan Kara <jack@suse.cz>
+From: Simo via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Simo <simo@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Adding linux-cifs
+On Mon, 2019-04-29 at 15:39 +1200, Andrew Bartlett wrote:
+> On Sat, 2019-04-13 at 16:35 -0400, Simo wrote:
+> > On Fri, 2019-04-12 at 07:34 +1200, Andrew Bartlett via samba-technical
+> > wrote:
+> > > On Thu, 2019-04-11 at 15:27 +0200, Andreas Schneider via samba-
+> > > technical wrote:
+> > > > On Thursday, April 11, 2019 10:36:59 AM CEST Andrew Bartlett via
+> > > > samba-
+> > > > technical wrote:
+> > > > > Looping back to the top of this thread to put a reduced proposal.
+> > > > > 
+> > > > > I've posted a new merge request here:
+> > > > > https://gitlab.com/samba-team/samba/merge_requests/374
+> > > > > 
+> > > > > The scope is reduced to aligning the ldb version with the main
+> > > > > Samba
+> > > > > version, so ldb would share the Samba release cycle.  There is no
+> > > > > merge
+> > > > > with the main Samba build, just a change to the version number
+> > > > > calculations (and so release process). 
+> > > > > 
+> > > > > The primary motivation here is to decouple ABI changes (eg adding a
+> > > > > new
+> > > > > function) from release points, and so slowing down to a 6-month
+> > > > > release
+> > > > > cycle matching the main release cadence of Samba so that new
+> > > > > features
+> > > > > have time to bake in master before they are released.
+> > > > 
+> > > > Yes, I absolutely agree that SO_VERSION number should be decoupled
+> > > > from 
+> > > > release version numbers. This should also be done for the other
+> > > > libraries.
+> > > > 
+> > > > 
+> > > > If I understand you correctly there will be a libldb release:
+> > > > 
+> > > > libldb-4.11 and then libldb-4.12
+> > > > 
+> > > > 
+> > > > Samba 4.11.1 and 4.11.2 will depend on libldb-4.11.
+> > > 
+> > > The current WIP patch has the main Samba version string directly used
+> > > for ldb, therefore allowing ldb to change during a release stream (eg
+> > > for a security release).
+> > > 
+> > > Please look carefully at the MR for the details, I would certainly not
+> > > wish any more miscommunication!  
+> > > 
+> > > > If I understood it correctly than this sounds like a good idea! :-)
+> > > 
+> > > Great!  I was sure we could find some common ground.
+> > > 
+> > > So from here we just need to know if this (eg) libldb-4.11 needs a
+> > > distinct tarball to be generated by the release team.  
+> > > 
+> > > Now that we are clear on what is being talked about, I have also re-
+> > > opened this:
+> > > 
+> > >  https://gitlab.com/samba-team/samba/merge_requests/371
+> > > 
+> > > If we decide not to burden the release team with a distinct tarball,
+> > > then distributors building ldb would just need to use the main samba
+> > > tarball and add a 'cd lib/ldb' to their build scripts. 
+> > > 
+> > > Finally, this is all just WIP proposals, other variations on this
+> > > approach are most welcome.  But if you do agree with any of the above
+> > > please mark that on the relevant MR so I can keep track.
+> > > 
+> > > Thank you very much for your thoughtful consideration of the above,
+> > 
+> > Creating a separate tarball should be an automatic process that takes
+> > no manual work, and will make life easier for people that just want to
+> > build *and* distribute ldb and nothing else.
+> 
+> Are you otherwise OK with the MR?
+> 
+> On the tarball question, is 'cd lib/ldb' in the ldb rpm build scripts
+> (and a larger tarball size) a particular engineering problem?
 
-Will take a look today - looks promising
+No, neither is cd lib; tar cf ldb-x.y.z.tar ldb/
 
-On Wed, May 1, 2019 at 3:55 PM Miklos Szeredi <miklos@szeredi.hu> wrote:
->
-> This is a really really trivial first iteration, but I think it's enough to
-> try out CIFS notification support.  Doesn't deal with mark deletion, but
-> that's best effort anyway: fsnotify() will filter out unneeded events.
->
-> Signed-off-by: Miklos Szeredi <mszeredi@redhat.com>
-> ---
->  fs/notify/fanotify/fanotify_user.c |    6 +++++-
->  fs/notify/inotify/inotify_user.c   |    2 ++
->  include/linux/fs.h                 |    1 +
->  3 files changed, 8 insertions(+), 1 deletion(-)
->
-> --- a/fs/notify/fanotify/fanotify_user.c
-> +++ b/fs/notify/fanotify/fanotify_user.c
-> @@ -1041,9 +1041,13 @@ static int do_fanotify_mark(int fanotify
->                 else if (mark_type == FAN_MARK_FILESYSTEM)
->                         ret = fanotify_add_sb_mark(group, mnt->mnt_sb, mask,
->                                                    flags, fsid);
-> -               else
-> +               else {
->                         ret = fanotify_add_inode_mark(group, inode, mask,
->                                                       flags, fsid);
-> +
-> +                       if (!ret && inode->i_op->notify_update)
-> +                               inode->i_op->notify_update(inode);
-> +               }
->                 break;
->         case FAN_MARK_REMOVE:
->                 if (mark_type == FAN_MARK_MOUNT)
-> --- a/fs/notify/inotify/inotify_user.c
-> +++ b/fs/notify/inotify/inotify_user.c
-> @@ -754,6 +754,8 @@ SYSCALL_DEFINE3(inotify_add_watch, int,
->
->         /* create/update an inode mark */
->         ret = inotify_update_watch(group, inode, mask);
-> +       if (!ret && inode->i_op->notify_update)
-> +               inode->i_op->notify_update(inode);
->         path_put(&path);
->  fput_and_out:
->         fdput(f);
-> --- a/include/linux/fs.h
-> +++ b/include/linux/fs.h
-> @@ -1852,6 +1852,7 @@ struct inode_operations {
->                            umode_t create_mode);
->         int (*tmpfile) (struct inode *, struct dentry *, umode_t);
->         int (*set_acl)(struct inode *, struct posix_acl *, int);
-> +       void (*notify_update)(struct inode *inode);
->  } ____cacheline_aligned;
->
->  static inline ssize_t call_read_iter(struct file *file, struct kiocb *kio,
+>   I've
+> tested and the independent ldb build works from the Samba tarball. Can
+> you spell out your specific concerns here a bit more?
 
+If you are distributing ldb source (for example because they have to
+given our license requires it) as a dependency you want to do just
+that, of course people can make the tarball themselves but then you
+risk having messy, unofficial tarballs around. 
 
+> It is just a pile of shell-scripting I would rather avoid tackling in
+> script/release.sh if I don't really need to.
+> 
+> Given the strength of the push-back I feel like there is something I'm
+> missing here, because while I had more radical ideas in my initial
+> writeup I've taken feedback and looked at the minimal practical change
+> which shouldn't badly break anyone but will make ldb development a
+> little more smooth. 
 
--- 
-Thanks,
+I honestly do not know what this changes in ldb development, but
+releasing a tarball surely won't make it harder.
 
-Steve
+> I don't propose to remove the ldb build system.  It also wasn't ever
+> proposed to remove the ABI checks or any of the public libraries.
+> 
+> Is the real concern here that ldb would loose one of the final elements
+> of it's 'independence' from Samba?
+
+It *is* used independently of Samba, so yeah it would be a sort of a
+backwards move to have people need go and do a bunch of unpacking and
+repacking by themselves each differently.
+
+This is also useful in CI systems for example, to reduce the amount of
+space and build time, etc...
+
+>   It is sad that the goal, that sub-
+> elements of samba would encourage new developers to work on contained
+> subsystems never really worked out.
+
+You should qualify this statement, what were the goals?
+
+As far as I can tell they are used independently so it worked.
+Sure we didn't get *tons* of development back, but we definitely got
+lots of testing and bugfixes (although that may have not been evident
+to you).
+
+>   But ldb has been an incredible
+> success!  Being the absolute core of the AD DC, with scale and utility
+> totally unimaginable to all of us involved in the early days, it has
+> the attention of a much larger team and far more testing then ever seen
+> before!
+> 
+> Thanks,
+> 
+> Andrew Bartlett
+> 
+
 
