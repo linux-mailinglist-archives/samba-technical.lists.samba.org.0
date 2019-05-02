@@ -2,78 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1FC11147C
-	for <lists+samba-technical@lfdr.de>; Thu,  2 May 2019 09:46:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 729CE11764
+	for <lists+samba-technical@lfdr.de>; Thu,  2 May 2019 12:41:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=wZTqXOF9HbaMjd9eTapc7hvYo3SHwuPuxOUMAYSQmJQ=; b=jw7jCg8jRPMylC+8ENzQ0bvBZO
-	+NWcW3IMThpwlC8FPxTijXQJo2Eq8h1tnhoYi1KnGlGufbTmJy3uYCyC555mYOCGX34Cz00qPxYLr
-	4zWd5PfoNQ97AsZZwO9dsskeIaevRjVvQf1yetRpN6qzNv6PUy3JeTrQgjxzlnTqZbsc0GzcMYvpT
-	T9mAYv282Xd4M97F2O+0VX8PI9+QBXS4eGWHNwCHbxY0L+uMBZkurwEcFASH3fXKvcwH6izKlJStb
-	KkXLU/HcBzuvaBP1ifaAbD4GACMUUrWhrqQ5vk4un+AplAD3fjbiWtx/jtPaNAtIKfyvrBxQHcnQx
-	HV/EIjAA==;
-Received: from localhost ([::1]:22254 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=BWEtj9ytkD7XjlEsYMqAYSGHkQyslesinbdu0RuXgkk=; b=2lQzV/ejxfLaNxtQYpcYYGz5rY
+	K/Uj5GEWgxKxvpiy1zEGP7DogG9zBj6WjpDPsrhZCJ3VwLv/u5uJuLu/UDyd0OVOZ/GQebJNTASVj
+	w6b/YnapNXI6X2k2psHA9fWdR/k3g3INHRHe4ABLUmFKlx9pDYdZ/DdkbxObG/BLxsYF3qQ6kwTRj
+	ygasf8TrRXM8OiGAEyfv1+dTsFRXSdY18LztzmB82jOkcOCWKOn8LeO5kb8QL/EZTJq5e4wQfoZc6
+	RF+T+ZtCmZtDxBapnWsl9YtNepIPoJKx6fBens3CZtqPuEi3xqivUDMp5kChnub1Mi402/wAmXH8Q
+	bdhWQZkA==;
+Received: from localhost ([::1]:43698 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hM6QF-001x82-V5; Thu, 02 May 2019 07:46:28 +0000
-Received: from mx2.heinlein-support.de ([91.198.250.20]:55936
- helo=mx1.heinlein-support.de) 
+	id 1hM99J-0020BF-3M; Thu, 02 May 2019 10:41:09 +0000
+Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:46605 helo=ozlabs.org) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hM6QA-001x7v-3k
- for samba-technical@lists.samba.org; Thu, 02 May 2019 07:46:24 +0000
-Received: from gerste.heinlein-support.de (gerste.heinlein-support.de
- [91.198.250.173])
- by mx1.heinlein-support.de (Postfix) with ESMTP id 71D2B2E0EB3
- for <samba-technical@lists.samba.org>; Thu,  2 May 2019 09:46:14 +0200 (CEST)
-Received: from mx1.heinlein-support.de ([91.198.250.20])
- by gerste.heinlein-support.de (gerste.heinlein-support.de [91.198.250.170])
- (amavisd-new, port 10024)
- with ESMTP id gsrEZ6jI9pQG for <samba-technical@lists.samba.org>;
- Thu,  2 May 2019 09:46:12 +0200 (CEST)
-Received: from marchiv.heinlein-support.de (marchiv.heinlein-support.de
- [91.198.250.63])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.heinlein-support.de (Postfix) with ESMTPS
- for <samba-technical@lists.samba.org>; Thu,  2 May 2019 09:46:12 +0200 (CEST)
-Received: from MailAppDispatcher (localhost.localdomain [127.0.0.1])
- by marchiv.heinlein-support.de (Postfix) with ESMTP id 0069848153
- for <samba-technical@lists.samba.org>; Thu,  2 May 2019 09:46:11 +0200 (CEST)
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by marchiv.heinlein-support.de (Postfix) with ESMTP id CC79448162
- for <samba-technical@lists.samba.org>; Thu,  2 May 2019 09:46:11 +0200 (CEST)
-Received: from marchiv.heinlein-support.de ([127.0.0.1])
- by localhost (marchiv.heinlein-support.de [127.0.0.1]) (amavisd-new,
- port 10024)
- with ESMTP id Hrpj-Fqvyyqf for <samba-technical@lists.samba.org>;
- Thu,  2 May 2019 09:46:11 +0200 (CEST)
-Received: from plasma32.jpberlin.de (plasma32.jpberlin.de [80.241.57.8])
- by marchiv.heinlein-support.de (Postfix) with ESMTPS
- for <samba-technical@lists.samba.org>; Thu,  2 May 2019 09:46:11 +0200 (CEST)
-Received: from [192.168.102.183] (pD95825C1.dip0.t-ipconnect.de
- [217.88.37.193])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (Client did not present a certificate)
- (Authenticated sender: r.sander@heinlein-support.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 65CBD1003BC
- for <samba-technical@lists.samba.org>; Thu,  2 May 2019 09:46:11 +0200 (CEST)
-Subject: Re: [PATCH] use current working directory instead of share path in
- cephwrap_realpath
-To: samba-technical@lists.samba.org
-References: <2ccf782c-f2fe-2ed7-23b6-fdf336b1d172@heinlein-support.de>
- <20190501221418.0a115c99@samba.org>
-Openpgp: preference=signencrypt
-Organization: Heinlein Support GmbH
-X-Clacks-Overhead: GNU Terry Pratchett
-Message-ID: <6e3bd727-ec97-e707-fdd6-5799555823d6@heinlein-support.de>
-Date: Thu, 2 May 2019 09:46:06 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
+ (Exim) id 1hM99C-0020B8-B1
+ for samba-technical@lists.samba.org; Thu, 02 May 2019 10:41:06 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 44vsHV1hFtz9s9y;
+ Thu,  2 May 2019 20:40:54 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
+ t=1556793654; bh=/d99CF5dso9pTtL25J+ZafXl1d/DEYRrEPqXFscjXMw=;
+ h=Date:From:To:Subject:From;
+ b=t5vM5kChzWIkSjMCL7X0a7X6jwNGpqdzmVQLaRGYcAc6BeBpMjKti2VFhnuwq60GD
+ a7E2JSzvdc2gGzH9TELnk5UxhPZWH4U0SM610NKV4bbW9mO49vQno/sQYj9cBrGe66
+ moGDP8IQ3JxjCekvxsVAMoaPWMd9LS7mTU1VErzFYR5bt1Jvw1w8sUMnryrvkTorjo
+ 0ESnLM8g6XE5zADdzqIv9/GHSPOg98P8dVpzKSsQFNfK7w/U4r+Q2Wq9YWeROkLKtY
+ 49KCOfKEC4zyBere79j2rq++scEmdX/le9k4z9sDyjyU/DqBcc72V+NZNlTqk2PMv3
+ nBUWw0+BioaZA==
+Date: Thu, 2 May 2019 20:40:52 +1000
+To: Samba Technical <samba-technical@lists.samba.org>
+Subject: [PATCH] Add logging of ctdbd CPU utilisation
+Message-ID: <20190502204052.4147c589@martins.ozlabs.org>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-In-Reply-To: <20190501221418.0a115c99@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="jUqGZyXVEBIs3ODaB7kXkIQEP0EUXfeEr"
-X-Mailarchiv-ID: 6276860
+Content-Type: multipart/mixed; boundary="MP_/gtzKQHm53sQ7TtktQKaeOf4"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -87,128 +54,219 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Robert Sander via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Robert Sander <r.sander@heinlein-support.de>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---jUqGZyXVEBIs3ODaB7kXkIQEP0EUXfeEr
-Content-Type: multipart/mixed; boundary="kNHxagFqdWRyExJTIcrJii7kVYJ8NGI6Z";
- protected-headers="v1"
-From: Robert Sander <r.sander@heinlein-support.de>
-To: samba-technical@lists.samba.org
-Message-ID: <6e3bd727-ec97-e707-fdd6-5799555823d6@heinlein-support.de>
-Subject: Re: [PATCH] use current working directory instead of share path in
- cephwrap_realpath
-References: <2ccf782c-f2fe-2ed7-23b6-fdf336b1d172@heinlein-support.de>
- <20190501221418.0a115c99@samba.org>
-In-Reply-To: <20190501221418.0a115c99@samba.org>
+--MP_/gtzKQHm53sQ7TtktQKaeOf4
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
---kNHxagFqdWRyExJTIcrJii7kVYJ8NGI6Z
-Content-Type: multipart/mixed;
- boundary="------------DBA74B0CDD52E6D82BCBE9BE"
-Content-Language: de-DE
+There have been situations where ctdbd spins at 100% of a CPU thread
+due to heavy contention for records.  However, without performance
+logs this can't be diagnosed.
 
-This is a multi-part message in MIME format.
---------------DBA74B0CDD52E6D82BCBE9BE
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+This patch will make ctdbd log CPU utilisation when it exceeds 90%.
 
-Hi,
+Pipeline: https://gitlab.com/samba-team/devel/samba/pipelines/59394125
 
-Thanks for your quick and positive feedback.
-I hope the patch has the correct format now.
+Please review and maybe push...
 
-Kindest Regards
---=20
-Robert Sander
-Heinlein Support GmbH
-Schwedter Str. 8/9b, 10119 Berlin
+peace & happiness,
+martin
 
-https://www.heinlein-support.de
+--MP_/gtzKQHm53sQ7TtktQKaeOf4
+Content-Type: text/x-patch
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename=ctdb-utilisation.patch
 
-Tel: 030 / 405051-43
-Fax: 030 / 405051-19
+From 5a7c2dacecbd2085e6de621530abd75fe697172a Mon Sep 17 00:00:00 2001
+From: Martin Schwenke <martin@meltin.net>
+Date: Fri, 18 Jan 2019 17:43:44 +1100
+Subject: [PATCH 1/2] ctdb-build: Add check for getrusage()
 
-Amtsgericht Berlin-Charlottenburg - HRB 93818 B
-Gesch=C3=A4ftsf=C3=BChrer: Peer Heinlein - Sitz: Berlin
-
---------------DBA74B0CDD52E6D82BCBE9BE
-Content-Type: text/x-patch;
- name="ceph-symlinks.patch"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
- filename="ceph-symlinks.patch"
-
-=46rom e39ed34985f9a8f17f716e2575b8553f0e644883 Mon Sep 17 00:00:00 2001
-From: Robert Sander <r.sander@heinlein-support.de>
-Date: Fri, 26 Apr 2019 17:52:58 +0200
-Subject: [PATCH] use current working directory instead of share path
-
-Bug: https://bugzilla.samba.org/show_bug.cgi?id=3D13918
-Signed-off-by: Robert Sander <r.sander@heinlein-support.de>
+Signed-off-by: Martin Schwenke <martin@meltin.net>
 ---
- source3/modules/vfs_ceph.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ ctdb/wscript | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/source3/modules/vfs_ceph.c b/source3/modules/vfs_ceph.c
-index cf45fb4c919..57de8bc891a 100644
---- a/source3/modules/vfs_ceph.c
-+++ b/source3/modules/vfs_ceph.c
-@@ -1206,14 +1206,14 @@ static struct smb_filename *cephwrap_realpath(str=
-uct vfs_handle_struct *handle,
-        } else if ((len >=3D 2) && (path[0] =3D=3D '.') && (path[1] =3D=3D=
- '/')) {
-                if (len =3D=3D 2) {
-                        r =3D asprintf(&result, "%s",
--                                       handle->conn->connectpath);
-+                                       handle->conn->cwd_fname->base_nam=
-e);
-                } else {
-                        r =3D asprintf(&result, "%s/%s",
--                                       handle->conn->connectpath, &path[=
-2]);
-+                                       handle->conn->cwd_fname->base_nam=
-e, &path[2]);
-                }
-        } else {
-                r =3D asprintf(&result, "%s/%s",
--                               handle->conn->connectpath, path);
-+                               handle->conn->cwd_fname->base_name, path)=
-;
-        }
-=20
-        if (r < 0) {
---=20
-2.17.1
+diff --git a/ctdb/wscript b/ctdb/wscript
+index 7873130d5ee..4f2fcbf69c9 100644
+--- a/ctdb/wscript
++++ b/ctdb/wscript
+@@ -180,6 +180,7 @@ def configure(conf):
+         Logs.error('Need sched_setscheduler()')
+         sys.exit(1)
+     conf.CHECK_FUNCS('mlockall')
++    conf.CHECK_FUNCS('getrusage', headers="sys/time.h sys/resource.h")
+ 
+     if not conf.CHECK_VARIABLE('ETIME', headers='errno.h'):
+         conf.DEFINE('ETIME', 'ETIMEDOUT')
+-- 
+2.20.1
 
 
---------------DBA74B0CDD52E6D82BCBE9BE--
+From ad945b2ae1e43020dfcf64b378e8183264f2bd4d Mon Sep 17 00:00:00 2001
+From: Martin Schwenke <martin@meltin.net>
+Date: Fri, 18 Jan 2019 17:46:37 +1100
+Subject: [PATCH 2/2] ctdb-daemon: Log when ctdbd CPU utilisation exceeds a
+ threshold
 
---kNHxagFqdWRyExJTIcrJii7kVYJ8NGI6Z--
+This is to help us notice when ctdbd is using the full capacity of a
+CPU, so is saturated.
 
---jUqGZyXVEBIs3ODaB7kXkIQEP0EUXfeEr
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+Signed-off-by: Martin Schwenke <martin@meltin.net>
+---
+ ctdb/server/ctdb_daemon.c | 123 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 123 insertions(+)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/ctdb/server/ctdb_daemon.c b/ctdb/server/ctdb_daemon.c
+index a8691388d4a..c5733bb2592 100644
+--- a/ctdb/server/ctdb_daemon.c
++++ b/ctdb/server/ctdb_daemon.c
+@@ -72,7 +72,126 @@ static void print_exit_message(void)
+ 	}
+ }
+ 
++#ifdef HAVE_GETRUSAGE
+ 
++struct cpu_check_threshold_data {
++	unsigned short percent;
++	struct timeval timeofday;
++	struct timeval ru_time;
++};
++
++static void ctdb_cpu_check_threshold(struct tevent_context *ev,
++				     struct tevent_timer *te,
++				     struct timeval tv,
++				     void *private_data)
++{
++	struct ctdb_context *ctdb = talloc_get_type_abort(
++		private_data, struct ctdb_context);
++	uint32_t interval = 60;
++
++	static unsigned short threshold = 0;
++	static struct cpu_check_threshold_data prev = {
++		.percent = 0,
++		.timeofday = { .tv_sec = 0 },
++		.ru_time = { .tv_sec = 0 },
++	};
++
++	struct rusage usage;
++	struct cpu_check_threshold_data curr = {
++		.percent = 0,
++	};
++	int64_t ru_time_diff, timeofday_diff;
++	bool first;
++	int ret;
++
++	/*
++	 * Cache the threshold so that we don't waste time checking
++	 * the environment variable every time
++	 */
++	if (threshold == 0) {
++		const char *t;
++
++		threshold = 90;
++
++		t = getenv("CTDB_TEST_CPU_USAGE_THRESHOLD");
++		if (t != NULL) {
++			int th;
++
++			th = atoi(t);
++			if (th <= 0 || th > 100) {
++				DBG_WARNING("Failed to parse env var: %s\n", t);
++			} else {
++				threshold = th;
++			}
++		}
++	}
++
++	ret = getrusage(RUSAGE_SELF, &usage);
++	if (ret != 0) {
++		DBG_WARNING("rusage() failed: %d\n", ret);
++		goto next;
++	}
++
++	/* Sum the system and user CPU usage */
++	curr.ru_time = timeval_sum(&usage.ru_utime, &usage.ru_stime);
++
++	curr.timeofday = tv;
++
++	first = timeval_is_zero(&prev.timeofday);
++	if (first) {
++		/* No previous values recorded so no calculation to do */
++		goto done;
++	}
++
++	timeofday_diff = usec_time_diff(&curr.timeofday, &prev.timeofday);
++	if (timeofday_diff <= 0) {
++		/*
++		 * Time went backwards or didn't progress so no (sane)
++		 * calculation can be done
++		 */
++		goto done;
++	}
++
++	ru_time_diff = usec_time_diff(&curr.ru_time, &prev.ru_time);
++
++	curr.percent = ru_time_diff * 100 / timeofday_diff;
++
++	if (curr.percent >= threshold) {
++		/* Log only if the utilisation changes */
++		if (curr.percent != prev.percent) {
++			D_WARNING("WARNING: CPU utilisation %hu%% >= "
++				  "threshold (%hu%%)\n",
++				  curr.percent,
++				  threshold);
++		}
++	} else {
++		/* Log if the utilisation falls below the threshold */
++		if (prev.percent >= threshold) {
++			D_WARNING("WARNING: CPU utilisation %hu%% < "
++				  "threshold (%hu%%)\n",
++				  curr.percent,
++				  threshold);
++		}
++	}
++
++done:
++	prev = curr;
++
++next:
++	tevent_add_timer(ctdb->ev, ctdb,
++			 timeval_current_ofs(interval, 0),
++			 ctdb_cpu_check_threshold,
++			 ctdb);
++}
++
++static void ctdb_start_cpu_check_threshold(struct ctdb_context *ctdb)
++{
++	tevent_add_timer(ctdb->ev, ctdb,
++			 timeval_current(),
++			 ctdb_cpu_check_threshold,
++			 ctdb);
++}
++#endif /* HAVE_GETRUSAGE */
+ 
+ static void ctdb_time_tick(struct tevent_context *ev, struct tevent_timer *te,
+ 				  struct timeval t, void *private_data)
+@@ -111,6 +230,10 @@ static void ctdb_start_periodic_events(struct ctdb_context *ctdb)
+ 
+ 	/* start listening to timer ticks */
+ 	ctdb_start_time_tickd(ctdb);
++
++#ifdef HAVE_GETRUSAGE
++	ctdb_start_cpu_check_threshold(ctdb);
++#endif /* HAVE_GETRUSAGE */
+ }
+ 
+ static void ignore_signal(int signum)
+-- 
+2.20.1
 
-iQIyBAEBCgAdFiEEhVXmaPzvl7l1erVE8LuRWCPeWygFAlzKoEIACgkQ8LuRWCPe
-WygGtQ/1GBMslFUROIOkcj5Vg3sQavy5+5b4tBVEykf1RLAQUprldwZppxy79+sv
-lJTV9uQ1ECqrJsKd/mo5ev+NzTjrxPM6oaykx0T88LiOPFqNDwJB2IdKnnEJHbyN
-aq7Bx5YycHPEw5KprXDRX+yGKvsL/3XwETrkVu2V9UwmDcwuLKgz/d39hyvT6DOf
-Wu0GfCBCnytRdNHsNfTYabpkmfbwqd9G4G9GijBQkqfmWUxGq6QEQK/opO5KpBEG
-CnTZTiWA2iVhl/w81Tc68hVuwB2exMgz+uDyA+jRFigwGTmzYh5nPsHBjJZPVjdb
-CnItiHc4I3L3j1CMqUEDt5sQvEwQMnNGEk2ljOHG0MS5Ys7bgOSOarEZBM9knumu
-a9YjuGxqqKqqgsEr3ArBniKVjvpbZ/anCvUvGWtrzMix9N5TI8tlrZDpgMj/Dk5q
-zzVcc9w/mMv47SWBZ7FF6CG7Qlhv4PvEAhiT1zR4dddCVSQ8us5fEpSgCDny/tUq
-Q+2UTbgSSY0AZVkipz30PHZnDbiogO7y6308rGy0V1X1oPRlO7Q8Fhp7v4vOZJS3
-rOS6OfY/zvd054c4sBvxy2a1c9E2iZgXFlNgeclMkW6/A8Pi8FNg2XPf/VO8GvvI
-t4bUBPJW8b2LON5UBWotSCWHXSKRxJYNNllkfEflldVQhj4laQ==
-=HLYU
------END PGP SIGNATURE-----
 
---jUqGZyXVEBIs3ODaB7kXkIQEP0EUXfeEr--
+--MP_/gtzKQHm53sQ7TtktQKaeOf4--
 
