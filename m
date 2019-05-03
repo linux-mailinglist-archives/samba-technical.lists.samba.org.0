@@ -2,40 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1212F128AF
-	for <lists+samba-technical@lfdr.de>; Fri,  3 May 2019 09:24:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D151C128E5
+	for <lists+samba-technical@lfdr.de>; Fri,  3 May 2019 09:32:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=ZWA3qjp7vfRIBlx92mtTis+3Ja9PrzzPWcCg5A3RdEs=; b=5N9iVlW+Oj39N2nhJzUQyD7l/M
-	wfm7xMP3roQHv5rOs2benrC+zY83n5uahlqRRwAed5W1LpZgozJlBLkWgKHftEmoHGX1Iq/5+HaBW
-	odLTYvW3L/ZD1kcjY2Fv5T3N6dguFToZIw+KtFnghpVkJ4jFf1rhesLf3Io9o8jb2j4DK5HDUl0ks
-	4yKxOVN0bctXw1AAeqOlifOwAnmmhjYg0t+0f6oundLMJMGdes3HLE715vZUS42abxQZjweqPbyax
-	c6yB2WxUMvWRSEZmLDFK14exb61pLxOcb2YC46Ff0raVOragXWC8onbYyWYUP/aIM+UC3km2I5BxD
-	qrKaV+iw==;
-Received: from localhost ([::1]:23786 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=u+58Htp6nZki+U2lRMTqCuuC0JqpQJVWDFAPCYqv4ic=; b=iDSfv+ZL7RvWsLlSoZ+yV5R3+s
+	eYwTwa+zfdl3xEAnWgqKe2oS9xpFathVQbdI+naMX88V2k+ufZtl6yTwn600lY4Q1N0e/+B9JedvJ
+	Hb25XLWdJErO/8AwPJ0aPvi1Ezm06TbAVyIAoY4OV2guqCJjYrNVEJ6Z8ROWbTaEtke3y+5Xi0s9q
+	qk0UvXgH46rml9n0m8P6lOZjlRLRfMOgivqFebZLAB2gSuNG+HVEHE4bXxQonnJ1X0rgr8VYJe2uy
+	hP3BPzjyIGyxHV2rk2FG8ea1DgxBJbhslQcx2IVtfQq/RQMiN0KULeWYj9UAQHvPacUCOMMMvH/6z
+	fTWqpo5A==;
+Received: from localhost ([::1]:26138 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hMSY6-002BSE-FR; Fri, 03 May 2019 07:24:02 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:43358) 
+	id 1hMSfu-002BmR-CA; Fri, 03 May 2019 07:32:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:44836) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hMSY1-002BS7-DF
- for samba-technical@lists.samba.org; Fri, 03 May 2019 07:23:59 +0000
+ (Exim) id 1hMSfo-002Blf-AX
+ for samba-technical@lists.samba.org; Fri, 03 May 2019 07:32:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:To:From:Message-ID:CC;
- bh=ZWA3qjp7vfRIBlx92mtTis+3Ja9PrzzPWcCg5A3RdEs=; b=YwweCJ+2B1IMsfqDr05d/JTMg6
- iGgT+BXb1UkeD+JjTSRKxogG6iSDEcGj80kudNpNpTTzYx7y0012F43UI4//DDTq35UVXjUZZO6Yj
- PPQBJX2IUr0on//CX6Wr+05jcL1fwRN6FcmWFKl7nosrkR6tBaY0HkZmkebkKcbk/hLM=;
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=u+58Htp6nZki+U2lRMTqCuuC0JqpQJVWDFAPCYqv4ic=; b=W5NjbhSok5fRAGvBxt7edSHEL8
+ gxxxVdX++tLHXDWlBVxEo5v+/ZJKxhfxfn0MtD8CuGnVYgsJXhxoziYuaH4Ujxl8bh7u7ofY6ZuCd
+ 7u1PE9tyvsVWpqrRSu6omw3jyNilTHIeps5F/MYeRYXHKRbkIFgDbq2/i6InqSd2cnyk=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hMSY0-0006uJ-Be
- for samba-technical@lists.samba.org; Fri, 03 May 2019 07:23:57 +0000
-Message-ID: <1556868232.2951.47.camel@samba.org>
-Subject: [PROPOSAL] Evict zlib
-To: samba-technical@lists.samba.org
-Date: Fri, 03 May 2019 19:23:52 +1200
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.18.5.2-0ubuntu3.2 
-Mime-Version: 1.0
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hMSfm-0007FV-LQ; Fri, 03 May 2019 07:31:58 +0000
+Date: Fri, 3 May 2019 10:31:56 +0300
+To: Andrew Bartlett <abartlet@samba.org>
+Subject: Re: [PROPOSAL] Release ldb with Samba on the 6-montly release cycle
+Message-ID: <20190503073156.GB5460@onega.vda.li>
+References: <1554694013.25595.6.camel@samba.org>
+ <1554971819.4812.88.camel@samba.org>
+ <3375324.H8Nz3ShdPD@magrathea.fritz.box>
+ <1555011274.4812.106.camel@samba.org>
+ <c06c2c6c113c64ddbd4974c8ca14355e94bd044a.camel@samba.org>
+ <1556509193.25595.71.camel@samba.org>
+ <b04df37b39526bedddcb95992542026836835038.camel@samba.org>
+ <1556822561.2951.25.camel@samba.org>
+ <20190503065538.GA5460@onega.vda.li>
+ <1556867924.2951.44.camel@samba.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <1556867924.2951.44.camel@samba.org>
+User-Agent: Mutt/1.11.4 (2019-03-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -49,30 +60,48 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Alexander Bokovoy <ab@samba.org>
+Cc: Simo <simo@samba.org>, Andreas Schneider <asn@samba.org>,
+ samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-It was recently pointed out that unused cryptography can be a pain for
-users of our tarball. Â I also recently did some work[1] where we
-documented the location of cryptography in Samba.
+On pe, 03 touko 2019, Andrew Bartlett via samba-technical wrote:
+> On Fri, 2019-05-03 at 09:55 +0300, Alexander Bokovoy wrote:
+> > 
+> > Basically, my personal opinion is that this situation is pushing more
+> > unjustified work into hands of our downstream consumers (vendors).
+> > I'm
+> > not talking about it on behalf of my employer, it is purely my own
+> > opinion, but I can see this an additional overhead for some.
+> 
+> So, perhaps this is a useful approach.  
+> 
+> First, stop tagging ldb versions in master. 
+> 
+> Second, merge MR 374 (which leaves the ability to produce tarballs, and
+> tests this in autobuild, but aligns the version numbers)
+> 
+> https://gitlab.com/samba-team/samba/merge_requests/374
+> 
+> Third, stop producing ldb tarballs in the release process.
+> 
+> I'm not convinced such downstream consumers that have the needs you
+> indicate above exist, but you suggest they do and I'm not sure we have
+> a good way to tell.   So perhaps they do and are forced into such
+> burdens, then I'm sure they will ask and we will know for sure. 
+> 
+> In that case either they can either run 'make dist' themselves or we
+> can, knowing they really exist.
+> 
+> How does that sound?
+I have hard time understanding how all these proposals from you differ.
 
-With GnuTLS being a requirement now, I think zlib is also a reasonable
-requirement and removing it would also remove some bad and un-used
-crypto from the tree.
-
-What do folks think?
-
-Andrew Bartlett
-
-[1]Â https://gitlab.com/catalyst-samba/samba-docs/wikis/cryptography/where-is-the-raw-crypto-implemented
+They all seems to hang around the willingness to not produce a proper libldb
+tarball at all. I think this is where we disagree. A version is a minor
+think in this context, at least to me.
 
 -- 
-Andrew Bartlett                       http://samba.org/~abartlet/
-Authentication Developer, Samba Team  http://samba.org
-Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
-
-
-
+/ Alexander Bokovoy
 
