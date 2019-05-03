@@ -2,49 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49150129FC
-	for <lists+samba-technical@lfdr.de>; Fri,  3 May 2019 10:44:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F017812CE5
+	for <lists+samba-technical@lfdr.de>; Fri,  3 May 2019 13:50:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=ply4k/0IFyAvKjWvD03fVBKIwIeUH6WgVo4K7p5gek0=; b=2NOFHYDc9qjpb7wiJv29Sn1W+Y
-	csQEVBefGVvctcaogKVILNYo8aTLWZ9QnsZgSihROv4+V7wyRuE3fF/RlDXHzxm40ydDaFqn8V9YR
-	1/5DO9wpw0zEg6y4uAcEMmbt0myKaR/sB+V0/AVGh5iYJzqjpnUuZd+qrJIoavzyogPUXzDY1/eQ8
-	do+3Ooe6EWvcfhDR/5OQAgfo0p59hjQgC9Rz6NcFhLHxon0AvwruIHeI2bMu14fbfWLxkqYpJPXTE
-	dA0N1+oIUBOjOsMz7bqjeQUKlByTvJDV2FyruuXy+AKbMXtdaEs5yEuGoCJp7CbOHG4NWdXGnV09a
-	ewQ0owiw==;
-Received: from localhost ([::1]:37032 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=hFcABAq0qYECN9Dq5nRtQZZO0UdBUK50sb6TyAa8GSo=; b=hvV0Gl+DBVtlwqDl5H8aoVU8h9
+	HNl6X2dSnDhaDjLaagyEccLt5dFJ41BM+1Evb2NIQ/f0qg2Mab804xiRnVn8HPFf2AAd9C7lE6VYF
+	VqHzP9QDljyg2p7bRkBG4GU9DTsBLWLUDgdCfgOZxk7buqJSQSDZkRCDcvaA4vaU5sNmCYP98lb9N
+	jHlxomylU29BDMOGaZcy2uO5DvRNL5jEJ0WUiO8JSHEFnJsLHXATeXmHM1uTy1xJoxhrJR/ra9pPQ
+	NTqAgGvCxoTISltWvf4WG8uKgf5Y5QT7A6vhDUSWUWJqNuvubdTw6Ahe+meGiPqcv4kprPXrl4onR
+	BtzJDImA==;
+Received: from localhost ([::1]:53814 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hMTn8-002DIj-RC; Fri, 03 May 2019 08:43:38 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:58582) 
+	id 1hMWgs-002Fjv-GR; Fri, 03 May 2019 11:49:22 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:45550) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hMTn4-002DIc-FJ
- for samba-technical@lists.samba.org; Fri, 03 May 2019 08:43:36 +0000
+ (Exim) id 1hMWgn-002Fjo-Vx
+ for samba-technical@lists.samba.org; Fri, 03 May 2019 11:49:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Cc:To:From:Message-ID;
- bh=ply4k/0IFyAvKjWvD03fVBKIwIeUH6WgVo4K7p5gek0=; b=lMdcAeuQCuPaSM0l/XqnAwKLF6
- emyeoXRlZyS1MNd7XmCHfOKEa7WxmEbQK3TH6eKP5UAIK8Q8TfrAbJP8jmtCTXEEhdNNefbFKBW/T
- wMFURrwNrygTes6T4O0E6z8YWk8yz8oBlIjU1sGzVRcQx1fZWbcmCKRG9urGsvhknrw8=;
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=hFcABAq0qYECN9Dq5nRtQZZO0UdBUK50sb6TyAa8GSo=; b=B9Pezs5AcD8whQCRYrNmRpfT8b
+ dgnuBQtfnfOCfa/8z3klFGlPtCfE5dRUOOhdEg8rY5gCoVA7GWXoFWhHH1a0Bu8dUz+6YDRBHZVUJ
+ FmaARDR4+USA+/EJL5so7TS+RMxbQ/rxt9SeUST5CSRKLLXXl3MQQx+79hGXq6XB3isU=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hMTn2-0001lw-V2; Fri, 03 May 2019 08:43:33 +0000
-Message-ID: <1556873008.2951.60.camel@samba.org>
-Subject: Re: [PROPOSAL] Release ldb with Samba on the 6-montly release cycle
-To: Alexander Bokovoy <ab@samba.org>
-Date: Fri, 03 May 2019 20:43:28 +1200
-In-Reply-To: <20190503073156.GB5460@onega.vda.li>
-References: <1554694013.25595.6.camel@samba.org>
- <1554971819.4812.88.camel@samba.org>
- <3375324.H8Nz3ShdPD@magrathea.fritz.box>
- <1555011274.4812.106.camel@samba.org>
- <c06c2c6c113c64ddbd4974c8ca14355e94bd044a.camel@samba.org>
- <1556509193.25595.71.camel@samba.org>
- <b04df37b39526bedddcb95992542026836835038.camel@samba.org>
- <1556822561.2951.25.camel@samba.org> <20190503065538.GA5460@onega.vda.li>
- <1556867924.2951.44.camel@samba.org> <20190503073156.GB5460@onega.vda.li>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.18.5.2-0ubuntu3.2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hMWgm-0000s9-SD; Fri, 03 May 2019 11:49:17 +0000
+Date: Fri, 3 May 2019 13:49:10 +0200
+To: Jeremy Allison <jra@samba.org>
+Subject: Re: [PATCH] Samba: CephFS Snapshots VFS module
+Message-ID: <20190503134910.72cfa80d@samba.org>
+In-Reply-To: <20190502210948.GA184424@jra4>
+References: <20190329184531.0c78e06b@echidna.suse.de>
+ <20190501232047.57ba6ffc@samba.org> <20190502210948.GA184424@jra4>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -58,87 +50,62 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Simo <simo@samba.org>, Andreas Schneider <asn@samba.org>,
- samba-technical@lists.samba.org
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
+Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2019-05-03 at 10:31 +0300, Alexander Bokovoy wrote:
-> On pe, 03 touko 2019, Andrew Bartlett via samba-technical wrote:
-> > 
-> > On Fri, 2019-05-03 at 09:55 +0300, Alexander Bokovoy wrote:
+On Thu, 2 May 2019 14:09:48 -0700, Jeremy Allison wrote:
+
+> On Wed, May 01, 2019 at 11:20:47PM +0200, David Disseldorp via samba-technical wrote:
+> > On Fri, 29 Mar 2019 18:45:31 +0100, David Disseldorp via samba-technical wrote:
+> >   
+> > > The attached patchset adds a new ceph_snapshots Samba VFS module which
+> > > handles snapshot enumeration and timewarp/@GMT token mapping.
 > > > 
-> > >  
-> > > Basically, my personal opinion is that this situation is pushing
-> > > more
-> > > unjustified work into hands of our downstream consumers
-> > > (vendors).
-> > > I'm
-> > > not talking about it on behalf of my employer, it is purely my
-> > > own
-> > > opinion, but I can see this an additional overhead for some.
-> > So, perhaps this is a useful approach.  
+> > > This patchset depends on a new CephFS virtual xattr to obtain the
+> > > snapshot creation time, which is pending merge:
+> > > https://tracker.ceph.com/issues/38838  
 > > 
-> > First, stop tagging ldb versions in master. 
+> > The Ceph changes have been merged upstream, so I'd like to proceed with
+> > this patchset in it's current state.
 > > 
-> > Second, merge MR 374 (which leaves the ability to produce tarballs,
-> > and
-> > tests this in autobuild, but aligns the version numbers)
-> > 
-> > https://gitlab.com/samba-team/samba/merge_requests/374
-> > 
-> > Third, stop producing ldb tarballs in the release process.
-> > 
-> > I'm not convinced such downstream consumers that have the needs you
-> > indicate above exist, but you suggest they do and I'm not sure we
-> > have
-> > a good way to tell.   So perhaps they do and are forced into such
-> > burdens, then I'm sure they will ask and we will know for sure. 
-> > 
-> > In that case either they can either run 'make dist' themselves or
-> > we
-> > can, knowing they really exist.
-> > 
-> > How does that sound?
-> I have hard time understanding how all these proposals from you
-> differ.
+> > Review/push appreciated.  
+> 
+> Quick question during review.
+> 
+> There are a several uses of:
+> 
+> +       char snaps_path[PATH_MAX + 1];
+> ..
+> +       ret = snprintf(snaps_path, sizeof(snaps_path), "%s/%s",
+> +                      parent_dir, snapdir);
+> 
+> You have a talloc context available (or talloc_tos()),
+> isn't it easier to just do a
+> 
+> char *snaps_path = NULL;
+> snaps_path = talloc_asprintf(mem_ctx,
+> 			"%s/%s",
+> 			parent_dir,
+> 			snapdir);
+> 
+> and then TALLOC_FREE after use ?
+> 
+> I'm not really worried about optimization here
+> (unless you've got the numbers), just that
+> talloc_asprintf() seems to be the idiom we
+> commonly use inside source3/smbd/open.c to
+> construct pathnames.
+> 
+> Not really a criticism, just wondered if
+> this was a concious decision here ?
 
-Not very much really, MR 374 is the version number, MR 371 removes the
-tarball generation.  It isn't a big change technically, but policy wise
-it seems to be a whole different thing. 
+Thanks for the feedback Jeremy.
+As these uses are just temporary buffers I decided to use the stack.
+I don't really have a strong preference here, though I'd normally like
+to avoid talloc_tos().
 
-> They all seems to hang around the willingness to not produce a proper
-> libldb
-> tarball at all. 
-
-I'm most concerned not to produce it during master development.
-
-> I think this is where we disagree. A version is a minor
-> think in this context, at least to me.
-
-Great, so can you review MR 374 for me?
-
-I'm happy to leave the tarballs as being generated.  There will be a
-few more because Samba tarballs come out more often than ldb has in the
-past, but as everybody keeps saying, that is just a script to run
-during the release.  
-
-I got hung up on avoiding those because of a comment from metze that I
-now can't find and may well have imagined. 
-
-I hope we are in agreement now,
-
-Thanks!
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett                       http://samba.org/~abartlet/
-Authentication Developer, Samba Team  http://samba.org
-Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
-
-
-
+Cheers, David
 
