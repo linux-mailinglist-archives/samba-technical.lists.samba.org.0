@@ -2,35 +2,36 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id A204212834
-	for <lists+samba-technical@lfdr.de>; Fri,  3 May 2019 08:56:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2817E1289A
+	for <lists+samba-technical@lfdr.de>; Fri,  3 May 2019 09:19:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=7h6eVmRKfWRQL+7JPGUaLchfHnHKRx/SXQvt89LErcs=; b=v4FOE/gxZiYYj1zaXIJNSrKymI
-	HzqrpwuMul6d4lkDft8uR78cr3zBLcZjwmL2dEKppS0hrtc5trL79rB5nMNzWicilB/XOgrrELa0S
-	lzZT4xb6WWbih++Mwjaat+wR811iCe3+d7p5+cbjyjXZgp3CvCe1R6fsVlYQiRCyC4itsTVLBwPw6
-	iUAWdX8MPGnvFZC82kJ6b+IVndJi5uAEx+TpjyNcZ2KnDRaN1m6C2+tVKI89HlMUonextJkNfZaC5
-	Ibw8orGwZVYGrc1p4PRx99cBh6LwIE/hUiGXwzKHQk72leltlLThtx+5PW5q7TeYQ4mwFjSIyk87/
-	8spksM5A==;
-Received: from localhost ([::1]:19770 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=cL3njbjsqn0wQ4JvI64DSZC9RNVURL3e3pmkie7u8o4=; b=Z+w4w0vMAt470QEcY8OoSaoc+L
+	RXTThHEBAapth++NFO+5+qJWWnZEwAwPp/s19Zvby/CYFjASfTp9UI9VxiLPyzIJdIY/V+FK0S6HU
+	t8MONMR1vG0wQZBy0aN7s0A4U67oKt9fJYz6YOvBsMMKKOHm4xWHIWS2Y2kJl+jYBNvebMh1YkWqy
+	lo9spjjfPB+AR4hqXiIHFsTEvyyfmu/ndemxx6AVHUe9m9HXZHfcnvIy9Ly3xADkUUxDGhoslTLgW
+	al1jVluvDEWlofcp4Zfx9y2Vck6Xq4T/MMXro+P/ae7InAK5gTGC3BPJjDXqfDnU6uhKyGf4ckxRr
+	XxL6KjlQ==;
+Received: from localhost ([::1]:23020 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hMS6p-002AtS-Ku; Fri, 03 May 2019 06:55:51 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:38252) 
+	id 1hMSTC-002BLp-Ln; Fri, 03 May 2019 07:18:58 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:42458) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hMS6h-002AtL-6Y
- for samba-technical@lists.samba.org; Fri, 03 May 2019 06:55:45 +0000
+ (Exim) id 1hMST7-002BLi-Bx
+ for samba-technical@lists.samba.org; Fri, 03 May 2019 07:18:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=7h6eVmRKfWRQL+7JPGUaLchfHnHKRx/SXQvt89LErcs=; b=VyG1QE7DaIdlQXhZxbLhsjHIs6
- XKarpKBWQ9Iam7tuBlybZiEA6U1IdJyADjulBuTfa/ti1No8wYH5nzxwynXmRsKIpSLk2wGXwh6K/
- AIXol7m2XylCACmh5ujgcYggtBtiOCGROlQN/xqKXVLlUOl55T6fi3lN/u/DxX6oy2Iw=;
+ s=42627210; h=Date:Cc:To:From:Message-ID;
+ bh=cL3njbjsqn0wQ4JvI64DSZC9RNVURL3e3pmkie7u8o4=; b=RRX3fV3sOccZ0o6mfhfTQ2GGHB
+ dZ1ft+QUn321VbIZfUS5F3SOl4ymtzNBYHuJkAcpNHIzxJPsbm4uvKSBriTWkovAZGTYT/5bNrzb1
+ b2RvuXMVIV63B08ljm95bjuYA90PgX7J94wYeYJS5aZDXc4RAsrLrvhMLPwI0USX+YFQ=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hMS6g-0005fo-0M; Fri, 03 May 2019 06:55:42 +0000
-Date: Fri, 3 May 2019 09:55:38 +0300
-To: Andrew Bartlett <abartlet@samba.org>
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1hMST4-0006gV-PZ; Fri, 03 May 2019 07:18:51 +0000
+Message-ID: <1556867924.2951.44.camel@samba.org>
 Subject: Re: [PROPOSAL] Release ldb with Samba on the 6-montly release cycle
-Message-ID: <20190503065538.GA5460@onega.vda.li>
+To: Alexander Bokovoy <ab@samba.org>
+Date: Fri, 03 May 2019 19:18:44 +1200
+In-Reply-To: <20190503065538.GA5460@onega.vda.li>
 References: <1554694013.25595.6.camel@samba.org>
  <1554971819.4812.88.camel@samba.org>
  <3375324.H8Nz3ShdPD@magrathea.fritz.box>
@@ -38,13 +39,11 @@ References: <1554694013.25595.6.camel@samba.org>
  <c06c2c6c113c64ddbd4974c8ca14355e94bd044a.camel@samba.org>
  <1556509193.25595.71.camel@samba.org>
  <b04df37b39526bedddcb95992542026836835038.camel@samba.org>
- <1556822561.2951.25.camel@samba.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+ <1556822561.2951.25.camel@samba.org> <20190503065538.GA5460@onega.vda.li>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.18.5.2-0ubuntu3.2 
+Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <1556822561.2951.25.camel@samba.org>
-User-Agent: Mutt/1.11.4 (2019-03-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -58,66 +57,49 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexander Bokovoy <ab@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Cc: Simo <simo@samba.org>, Andreas Schneider <asn@samba.org>,
  samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On pe, 03 touko 2019, Andrew Bartlett via samba-technical wrote:
-> > > � I've
-> > > tested and the independent ldb build works from the Samba tarball.
-> > > Can
-> > > you spell out your specific concerns here a bit more?
-> > If you are distributing ldb source (for example because they have to
-> > given our license requires it) as a dependency you want to do just
-> > that, of course people can make the tarball themselves but then you
-> > risk having messy, unofficial tarballs around.�
-> 
-> Does anybody do that?
-> 
-> I'm serious, can you show me someone other than a linux distributor who
-> already has to distribute Samba, who distributes ldb, or even a
-> consumer other than sssd and the late openchange?
-I have a bit of tangential answer but I think this is actually a valid
-argument:
+On Fri, 2019-05-03 at 09:55 +0300, Alexander Bokovoy wrote:
+> 
+> Basically, my personal opinion is that this situation is pushing more
+> unjustified work into hands of our downstream consumers (vendors).
+> I'm
+> not talking about it on behalf of my employer, it is purely my own
+> opinion, but I can see this an additional overhead for some.
 
-When a vendor has to deal with export compliance, even for opensource or
-free software, you need to perform export compliance checks for each
-software component. It means if ldb tarball is effectively samba
-tarball, it is subject to addtional cryptography export compliance
-checkes, at least for US-based companies.
+So, perhaps this is a useful approach.  
 
-Whether such vendor would be distributing ldb alone or with samba being
-present in the same commercial product is irrelevant -- it is going to
-amount to additional work. Debian's opinion on it is
-https://www.debian.org/legal/cryptoinmain.en.html and it has this
-particular point:
+First, stop tagging ldb versions in master. 
 
-"Under the new US Regulations, not only the open source, but also the
-compiled executable software derived from open source, is eligible for
-export under the same conditions as the open source itself, provided
-that the compiled executable is available without restriction and free
-of charge. Unfortunately, if you include the compiled executable
-software into a product that you distribute for a fee, then the
-resulting product is subject to all of the rules that apply to
-commercial software programs. For example, they must be submitted to BXA
-and NSA for a one-time technical review, described above."
+Second, merge MR 374 (which leaves the ability to produce tarballs, and
+tests this in autobuild, but aligns the version numbers)
 
-However, it is going to be a substantial effort to review libldb and
-samba archives even if libldb archive is a copy of samba archive -- I
-can only guess but at BXA/NSA sides this would amount to a separate
-investigation in each case (and would force a vendor to file a tracking
-record for libldb tarball shipping crypto implementations even if it is
-not used anywhere inside of the complied code of libldb).
+https://gitlab.com/samba-team/samba/merge_requests/374
 
-Basically, my personal opinion is that this situation is pushing more
-unjustified work into hands of our downstream consumers (vendors). I'm
-not talking about it on behalf of my employer, it is purely my own
-opinion, but I can see this an additional overhead for some.
+Third, stop producing ldb tarballs in the release process.
 
+I'm not convinced such downstream consumers that have the needs you
+indicate above exist, but you suggest they do and I'm not sure we have
+a good way to tell.   So perhaps they do and are forced into such
+burdens, then I'm sure they will ask and we will know for sure. 
+
+In that case either they can either run 'make dist' themselves or we
+can, knowing they really exist.
+
+How does that sound?
+
+Andrew Bartlett
 
 -- 
-/ Alexander Bokovoy
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+
+
+
 
