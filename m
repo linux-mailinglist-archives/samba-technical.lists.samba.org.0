@@ -2,89 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id B98B71339F
-	for <lists+samba-technical@lfdr.de>; Fri,  3 May 2019 20:34:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7210E131A5
+	for <lists+samba-technical@lfdr.de>; Fri,  3 May 2019 17:59:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=AaF2xGmMKEo5FJDdTrOyQaKRcbKSqw2PgK7WBJg3wyw=; b=H6nIN7vVT4KUxma5NztaAqyUmq
-	XwGjeoD/gMkhaRuofcg9IfzxDKAVcYzYaIN/lhBrzYL/9F/Kb3z8RDN28WqqNatW/QD4a2303glXK
-	w7XD8Jj5buMQeu/Raf0QDTt7lUqTDOtRIyPKhO9maueYuUebXb36WNcsZoJbk4enV45RyZfMH68Q+
-	2ks/v4n0Z1BJfI7u+YNn1jTdqGcOGDgZ9UxidpY8njPhP1PnXK90Vo+yGq8MNcNEWSZL3hmQgQzrB
-	dmGkURXb3CUn3I6vOOC+Oc9Y3ppktW1KZGLmL+GpLqreWQr3BlbBUcgwp/GUptTUaQJzYmKffVn9s
-	HQFciNDA==;
-Received: from localhost ([::1]:33394 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=SFmbaiTqrhlgaz7tQTg13WLUFcFTht0gLUXMdJ1yKQk=; b=fvhqdaLzgDUlE+hkMcDjI7H2xN
+	q5VbgT6C8ZxOz0eO3bQy1zSilOIO6yqQjCtYcn9a2aHGM3z4wxwBpCdNmLhItLvpLD0BTDF4NgNcb
+	PFUFl1Z61G6iUQ5WF5jbiVQzzZMd2EMPuZK22k+iCMATZb7vHUXEs1HSMMLfkNGDae+gXgJ0eBjVP
+	ZbQVt4FAHF93afLDLO/8F9c37SBzDTc/whCRaxPLo8Po3gmHJ9CQUP69bzMzia6XZGgq4dRSCVJZe
+	uzhJ7dGKaqG7oZt8N//Qgmsm7F13CHnqMqr0Ew7H2B5w911MV1d38OF82drQ/nHbQD2niEUDHOiCv
+	xAl9An8w==;
+Received: from localhost ([::1]:28598 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hMd01-002Jox-K7; Fri, 03 May 2019 18:33:33 +0000
-Received: from mail-eopbgr690120.outbound.protection.outlook.com
- ([40.107.69.120]:63651 helo=NAM04-CO1-obe.outbound.protection.outlook.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim) id 1hMczr-002Jop-Vw
- for samba-technical@lists.samba.org; Fri, 03 May 2019 18:33:31 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=testarcselector01; d=microsoft.com; cv=none;
- b=WDcppC4TXLE4sjl6q7IiuI4fG6leXuByWs6Lj/K+50CzsiJneYiEhMNWv2mMeacW/jV6UsebqoJN7+rxzXHD5baKZ5+BzGmDbGfX1Ue3IqBO3gLLDP0kvhwFictyMqwsdIHSxZZKC4XZgROa1cug5SSGEZU/8sAxx1yScQQq79E=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=testarcselector01;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AaF2xGmMKEo5FJDdTrOyQaKRcbKSqw2PgK7WBJg3wyw=;
- b=sRawLMgMn4A13045qrQfXRPZzSJln6ZhDya9XINM6klfC57KybGa7V9VcGEUwnSTYJIVBYljb9PhvV49En2Rmya6X+X2I1+KkqgzGBd0RW6H1Hr6ua/N3XrxqBWJT8S58AkcXpmfsCq9T5jDS0k3YVGsGmQ51KUp+MFlANwRHss=
-ARC-Authentication-Results: i=1; test.office365.com 1;spf=none;dmarc=none
- action=none header.from=microsoft.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AaF2xGmMKEo5FJDdTrOyQaKRcbKSqw2PgK7WBJg3wyw=;
- b=b2iSp5EvdYdmd3jxvXUcoe/VAsj+lyGhshBW9U0HBdZF9P8OH9SqDPzJwX0od2tWOks5318h84zF9o8dshzpFO68HDFxS/Mmy4Bt1tU+RYhInZ6sEmJDllZ3+om+vxiCFFMskeGZf05zvTx9mqp20497/0UNPKpN/ZUSBCBIM2o=
-Received: from CY4PR21MB0149.namprd21.prod.outlook.com (10.173.189.19) by
- CY4PR21MB0760.namprd21.prod.outlook.com (10.173.195.150) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id
- 15.20.1856.6; Fri, 3 May 2019 15:57:21 +0000
-Received: from CY4PR21MB0149.namprd21.prod.outlook.com
- ([fe80::557b:1240:94cb:8f77]) by CY4PR21MB0149.namprd21.prod.outlook.com
- ([fe80::557b:1240:94cb:8f77%9]) with mapi id 15.20.1878.004; Fri, 3 May 2019
- 15:57:21 +0000
-To: Jeremy Allison <jra@samba.org>, Steve French <smfrench@gmail.com>
-Subject: RE: [PATCH][SMB3] Add missing defines for new negotiate contexts
-Thread-Topic: [PATCH][SMB3] Add missing defines for new negotiate contexts
-Thread-Index: AQHU9gDJf2vMizjMXkSZLohRVXfnP6ZCKvuAgAYumJCAEUrw8A==
-Date: Fri, 3 May 2019 15:57:20 +0000
-Message-ID: <CY4PR21MB0149DC81B079BCD36D580AC5A0350@CY4PR21MB0149.namprd21.prod.outlook.com>
-References: <CAH2r5mvEYMEUjz8BDRUumn0yGq__VntNKx-8AzWcZgCDOJQv-Q@mail.gmail.com>
- <20190418172353.GB236057@jra4>
- <BN8PR21MB11863B736AA5D284CC213118A0220@BN8PR21MB1186.namprd21.prod.outlook.com>
-In-Reply-To: <BN8PR21MB11863B736AA5D284CC213118A0220@BN8PR21MB1186.namprd21.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Enabled=True;
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_SiteId=72f988bf-86f1-41af-91ab-2d7cd011db47;
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Owner=ttalpey@microsoft.com;
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_SetDate=2019-04-22T15:50:30.4876102Z;
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Name=General;
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Application=Microsoft Azure
- Information Protection;
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_ActionId=f0abb4e3-ff34-476d-93c6-1b868e8a85b8;
- MSIP_Label_f42aa342-8706-4288-bd11-ebb85995028c_Extended_MSFT_Method=Automatic
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=ttalpey@microsoft.com; 
-x-originating-ip: [2001:4898:80e8:b:d82a:7b3b:e387:5826]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 7ab1b744-8453-44b0-6145-08d6cfe006ac
-x-ms-office365-filtering-ht: Tenant
-x-ms-traffictypediagnostic: CY4PR21MB0760:
-x-ms-exchange-purlcount: 1
-x-ms-oob-tlc-oobclassifiers: OLM:8273;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: E3YIVP21+EhWmadAJaKUmCGw3xk5tbYpIuN4vCGa4ju0TQKLeYslmgQrZPRQPBKc8tcgLjDU5tu/HGO3oyRUc1dHEijdDzzyS22Mjb0o/U6fUQiIdgjpJ6mb+a2nRZDkRGPJ5bsaiiqs9acOqNA1AMbdGu/FtH5/fqonufbkIyPt1XZ1ttm7qNXws8MkemC3PWAjiG+Rtkrqt4CAEJpYO4SxmWVmVkqvo53NPqETxgP26vIjAR7MwUp0PrOmex/dN9uSX7xt1ul7LzxesshxHjR+TTQscyJqBuA4XbzGWP3/033uOUEzJbREBG5UD1NbUO59JbBsMduozyehEFxUDoubROZtN0d6evqWmA5zAy2/IfEQBpH47RywL713KrLQyqQ7QDD62FXf6LTPOk2aKLgxpv+H/zHx6hyVr15PwgU=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+	id 1hMaaQ-002J51-9n; Fri, 03 May 2019 15:58:58 +0000
+Received: from mail.pardus.org.tr ([193.140.98.156]:41278) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1hMaaM-002J4a-2S
+ for samba-technical@lists.samba.org; Fri, 03 May 2019 15:58:56 +0000
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.pardus.org.tr (Postfix) with ESMTP id F227C1F5257
+ for <samba-technical@lists.samba.org>; Fri,  3 May 2019 18:58:50 +0300 (+03)
+Received: from mail.pardus.org.tr ([127.0.0.1])
+ by localhost (mail.pardus.org.tr [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id zBxINJVIhalc for <samba-technical@lists.samba.org>;
+ Fri,  3 May 2019 18:58:50 +0300 (+03)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.pardus.org.tr (Postfix) with ESMTP id 3AC381F5259
+ for <samba-technical@lists.samba.org>; Fri,  3 May 2019 18:58:50 +0300 (+03)
+Received: from mail.pardus.org.tr ([127.0.0.1])
+ by localhost (mail.pardus.org.tr [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id MZh-eO-C2owS for <samba-technical@lists.samba.org>;
+ Fri,  3 May 2019 18:58:50 +0300 (+03)
+Received: from [172.16.103.12] (unknown [161.9.194.129])
+ by mail.pardus.org.tr (Postfix) with ESMTPSA id F3CBF1F5257
+ for <samba-technical@lists.samba.org>; Fri,  3 May 2019 18:58:49 +0300 (+03)
+Message-ID: <5CCC6539.4010105@pardus.org.tr>
+Date: Fri, 03 May 2019 18:58:49 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+ rv:31.0) Gecko/20100101 Thunderbird/31.5.0
 MIME-Version: 1.0
-X-OriginatorOrg: microsoft.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7ab1b744-8453-44b0-6145-08d6cfe006ac
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 72f988bf-86f1-41af-91ab-2d7cd011db47
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR21MB0760
+To: samba-technical@lists.samba.org
+Subject: Samba AD DC Password Expiry problem
+Content-Type: text/plain; charset=windows-1254; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.23
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -98,63 +59,123 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Tom Talpey <ttalpey@microsoft.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: =?windows-1254?Q?Izzet_Ayd=FDn?= via samba-technical
+ <samba-technical@lists.samba.org>
+Reply-To: =?windows-1254?Q?Izzet_Ayd=FDn?= <izzet.aydin@pardus.org.tr>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-> -----Original Message-----
-> From: linux-cifs-owner@vger.kernel.org <linux-cifs-owner@vger.kernel.org>=
- On
-> Behalf Of Tom Talpey
-> Sent: Monday, April 22, 2019 8:51 AM
-> To: Jeremy Allison <jra@samba.org>; Steve French <smfrench@gmail.com>
-> Cc: CIFS <linux-cifs@vger.kernel.org>; samba-technical <samba-
-> technical@lists.samba.org>
-> Subject: RE: [PATCH][SMB3] Add missing defines for new negotiate contexts
->=20
-> > -----Original Message-----
-> > From: linux-cifs-owner@vger.kernel.org <linux-cifs-owner@vger.kernel.or=
-g>
-> On
-> > Behalf Of Jeremy Allison
-> > Sent: Thursday, April 18, 2019 1:24 PM
-> > To: Steve French <smfrench@gmail.com>
-> > Cc: CIFS <linux-cifs@vger.kernel.org>; samba-technical <samba-
-> > technical@lists.samba.org>
-> > Subject: Re: [PATCH][SMB3] Add missing defines for new negotiate contex=
-ts
-> >
-> > On Thu, Apr 18, 2019 at 11:06:57AM -0500, Steve French via samba-techni=
-cal
-> > wrote:
-> > > See updated MS-SMB2 - two new negotiate contexts
-> >
-> > Link to latest update ? Is this a draft update
-> > or a full new version ?
->=20
-> The Windows protocol documents were updated on March 13 for the
-> upcoming "19H1" update cycle.
->=20
-> MS-SMB2 version page, with latest, diffs, etc:
->=20
-> https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/5606=
-ad47-5ee0-437a-817e-70c366052962
+Hello everyone,
 
-So, there was a defect in the published spec which we just corrected, there=
-'s a new
-update online at the above page.
+I am trying to force a user to change his password at login screen, ( 
+test2 is the username ) with the following command
 
-The value of the new compression contextid is actually "3", but the earlier=
- document
-incorrectly said "4". There were several other fixes and clarifications in =
-the pipeline
-which have also been included.
+samba-tool user setpassword test2 --must-change-at-next-login
 
-Redline diffs as well as the usual standard publication formats are availab=
-le.
+Client computer is configured and joined to domain. However, when i try 
+to login in lightdm, i see the following line in auth.log
 
-Tom.
+  pam_winbind(lightdm:auth): request wbcLogonUser failed: 
+WBC_ERR_AUTH_ERROR, PAM error: PAM_AUTHTOK_EXPIRED (27), NTSTATUS: 
+NT_STATUS_PASSWORD_EXPIRED, Error message was: Password expired
+
+but the user is still able to login.
+
+If i configure another client computer with gnome interface, i get the 
+same auth.log message, but in this case i see the password expired 
+message in gdm. Yet no user password change interrupts appears.
+
+I auto-configured my pam files with pam-auth-update. What can be the 
+error ?
+
+I add my pam and smb.conf files below
+
+Thanks
+/etc/pam.d/common-account
+::::::::::::::
+#
+# /etc/pam.d/common-account - authorization settings common to all services
+
+
+# here are the per-package modules (the "Primary" block)
+account    [success=2 new_authtok_reqd=done default=ignore] pam_unix.so
+account    [success=1 new_authtok_reqd=done default=ignore] pam_winbind.so
+# here's the fallback if no module succeeds
+account    requisite            pam_deny.so
+# prime the stack with a positive return value if there isn't one already;
+# this avoids us returning an error just because nothing sets a success code
+# since the modules above will each just jump around
+account    required            pam_permit.so
+# and here are more per-package modules (the "Additional" block)
+# end of pam-auth-update config
+
+/etc/pam.d/common-auth
+::::::::::::::
+
+# here are the per-package modules (the "Primary" block)
+auth    [success=2 default=ignore]    pam_unix.so nullok_secure
+auth    [success=1 default=ignore]    pam_winbind.so krb5_auth 
+krb5_ccache_type=FILE cached_login try_first_pass
+# here's the fallback if no module succeeds
+auth    requisite            pam_deny.so
+# prime the stack with a positive return value if there isn't one already;
+# this avoids us returning an error just because nothing sets a success code
+# since the modules above will each just jump around
+auth    required            pam_permit.so
+# and here are more per-package modules (the "Additional" block)
+# end of pam-auth-update config
+
+/etc/pam.d/common-password
+::::::::::::::
+
+# here are the per-package modules (the "Primary" block)
+password    [success=2 default=ignore]    pam_unix.so obscure sha512
+password    [success=1 default=ignore]    pam_winbind.so try_authtok 
+try_first_pass
+# here's the fallback if no module succeeds
+password    requisite            pam_deny.so
+# prime the stack with a positive return value if there isn't one already;
+# this avoids us returning an error just because nothing sets a success code
+# since the modules above will each just jump around
+password    required            pam_permit.so
+# and here are more per-package modules (the "Additional" block)
+password    optional    pam_gnome_keyring.so
+# end of pam-auth-update config
+
+/etc/pam.d/common-session
+::::::::::::::
+
+# here are the per-package modules (the "Primary" block)
+session    [default=1]            pam_permit.so
+# here's the fallback if no module succeeds
+session    requisite            pam_deny.so
+# prime the stack with a positive return value if there isn't one already;
+# this avoids us returning an error just because nothing sets a success code
+# since the modules above will each just jump around
+session    required            pam_permit.so
+# and here are more per-package modules (the "Additional" block)
+session    required    pam_unix.so
+session    optional            pam_winbind.so
+session    optional    pam_systemd.so
+session    optional            pam_mkhomedir.so
+# end of pam-auth-update config
+
+/etc/samba/smb.conf
+[global]
+realm = test.local
+workgroup = TEST
+security = ads
+password server = xxx.xx.xx.xx
+#wins server = IP of wins server
+security = ads
+idmap uid = 10000-20000
+idmap gid = 10000-20000
+template shell = /bin/bash
+winbind use default domain = yes
+winbind offline logon = false
+#winbind separator = +
+#allow trusted domains = Yes
+
+
+
 
