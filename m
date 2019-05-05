@@ -2,55 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A6ED142DC
-	for <lists+samba-technical@lfdr.de>; Mon,  6 May 2019 00:29:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA2D8142E8
+	for <lists+samba-technical@lfdr.de>; Mon,  6 May 2019 00:48:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=rD1Yv08Hv+vzxudJDCYCwQ/X/4r80KweD+kvN6bC3jk=; b=0J3kPMzpIJiooHr7GN4yZzKvrt
-	1R4U5YH/FcAN5Ipy1wgHxcbmnH6XbM5voAmHzV6FrlNHXBlXLgJSCOHCS5VP6T/ajCCTOAN+86SEP
-	2ZXLw1hPMNorrlMCc1Z6LuNheeAVLhvdQyuTav7pZEVUruA7yjdqMGLUMe06UY/1TcrJd+RPImxZ7
-	eWZKOTPOeyApJzuuqbX3Sh8k3+uvIeN8rj5jHbpWm0M5I1tAyvQNXwIW4GlnnxrlvIeAaYZyWqhP8
-	kd/9mCEF2IbKfdfaugpzxpGvEoPlafwLf1kxl+GSGXj3UAAfrXA1Q8l1Q3qCVku3D9AarZ9tWzyQB
-	lng1CFZQ==;
-Received: from localhost ([::1]:47848 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=ZzVvCEPbGJsgvbQRQwoNpQtTpLSX35VW/kFiRsc1eWY=; b=CXWoDjrO5oKpXCnHIYST6Lfl9I
+	lR9W0lVB8AbJ+PwLt+1zyTyEKDFrKkHXdCAJapZos351wEreYrcbeYUr9sGcnEi0aHePjJaW3zaP2
+	dl0yrM3PaweEnejD49Y/4/jRzHj2Atu4TByHFw0YqLHN/tuBiCvJJvDiZERmezdILJdb1fiyh1OEw
+	W8GRCcga0L1rF/XDIs0u4id2D8Mqh+pFIUfj4dvZGcRGCmQXy+l5GGalZmCzc2UylT3LxVxLKCyLH
+	+ctIMopY/z8xwTJPSjhrz+xV0D3J/ufGU51kRtiYeZBW2MejzpnFyaGJoe7VXh7RsFjNfYah6ec5T
+	LzxTRoJw==;
+Received: from localhost ([::1]:48602 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hNPdG-002UbX-0S; Sun, 05 May 2019 22:29:18 +0000
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429]:44568) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hNPdB-002UbQ-Di
- for samba-technical@lists.samba.org; Sun, 05 May 2019 22:29:15 +0000
-Received: by mail-pf1-x429.google.com with SMTP id y13so5677634pfm.11
- for <samba-technical@lists.samba.org>; Sun, 05 May 2019 15:29:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to:cc;
- bh=rD1Yv08Hv+vzxudJDCYCwQ/X/4r80KweD+kvN6bC3jk=;
- b=qjSYIVQMvCZJxnq9DpunzVOa0s27kPATZDONu/AkTVyezeBTuskaASTh1CkTbvoKUC
- 8fC+7hpPP/y7U9Pl0lVUGjeV+FmuEDBk+lchMTweqtmCW1AfVE7vJvaiBOyLuPspVt05
- w1HYy7Dc5FUOMszUi5ce2kQ5Xs+rbIDT4YDO20XANpjHberCNeqBz/SuCophaFiAuplW
- Usgv+Tgt7Nd0c2fnSs8KOdMAL2ly+Z1CVs6aJValwDUtr+cDiGznyXDY3nGt866X1/Tk
- BdByxamU8XgprqipH3BHuwv1MQPP/bokru5tQwYV1Ww9DYAj0VJ8UosPU7ufsDUap6lh
- NMVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
- bh=rD1Yv08Hv+vzxudJDCYCwQ/X/4r80KweD+kvN6bC3jk=;
- b=WW2ZHn46ewHBAZ7qfHrSUppyy25ODucR+dZ7F5qwgZouVPkc1Rfh0OzKhT2NbCOiMC
- yZqREXXO65DcmOTFCA4QvbEAvV9rjXwOBudp+ZdT6GDSxEL91ZwY1ZCKG0VYHZavLAMu
- Axo7I42Lrgsdge4MkvRLsy9b0tPV08yhPywEjnT/uCHrDNzL84GfSRa08bknmlWgQbot
- 2rvQlTOQAftxS3aFMfYJXnUkV9I1qz6dxJqFMesAWXM0p6lv/ZmaNyhsj2wEItpJ0VNh
- s2ghG9oi4KNcinwKUt1k4ojlJAb0EWvoMckyoAfY78AS6EI5mtI0nLlO4PQGOgpMJCgx
- t1XQ==
-X-Gm-Message-State: APjAAAWkvkBbQqo1QmM31h0TTMCXCj73Ni5CaJzxw/cMeSIUlIGVTzRa
- 7DhIyhx3v1zEFMuhGoaQpq8YRFVW8sKt5PmS+MTkSh92
-X-Google-Smtp-Source: APXvYqzHmxwMzw8+SUBGpd5ytn/U7nXw+Q/qPKxaN3qf8Ko2LJEj4INwkBf+sgFVByE58YOyxisB13J/Ea71nasSh/c=
-X-Received: by 2002:a62:479b:: with SMTP id p27mr29969265pfi.111.1557095351164; 
- Sun, 05 May 2019 15:29:11 -0700 (PDT)
+	id 1hNPvq-002Uie-5i; Sun, 05 May 2019 22:48:30 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:60944) 
+ by hr1.samba.org with esmtps
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim) id 1hNPvk-002UiX-Cw
+ for samba-technical@lists.samba.org; Sun, 05 May 2019 22:48:27 +0000
+Received: from [IPv6:2404:130:0:1000:d0be:cba3:501b:8223] (unknown
+ [IPv6:2404:130:0:1000:d0be:cba3:501b:8223])
+ (Authenticated sender: joeg@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 771BE810CF; 
+ Mon,  6 May 2019 10:48:04 +1200 (NZST)
+Subject: Re: getting centos7 into bootstrap and gitlab CI
+To: Christof Schmitt <cs@samba.org>, Andrew Bartlett <abartlet@samba.org>
+References: <20190429193555.GA28948@samba.org>
+ <2134250.fEHozF1qz7@magrathea.fritz.box>
+ <20190430145845.6fcfb681@devstation.samdom.example.com>
+ <3513637.hkN0grMHb1@magrathea.fritz.box>
+ <1556649942.21278.15.camel@samba.org> <20190430230454.GA22132@samba.org>
+ <1556674596.25595.100.camel@samba.org> <20190503233653.GA12691@samba.org>
+Openpgp: preference=signencrypt
+Message-ID: <30b5f26f-4458-2b4e-af04-e8b45ef9041f@catalyst.net.nz>
+Date: Mon, 6 May 2019 10:48:03 +1200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-Date: Sun, 5 May 2019 17:28:59 -0500
-Message-ID: <CAH2r5mt+ogjdc9w+ppvu+GwWfojFOK_izStTkOgjs07bXVbO2A@mail.gmail.com>
-Subject: [PATCH][SMB3] Add SMB3 protocol flags and structs for change notify
-To: CIFS <linux-cifs@vger.kernel.org>
-Content-Type: multipart/mixed; boundary="00000000000049ea1f05882b83f1"
+In-Reply-To: <20190503233653.GA12691@samba.org>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-AU
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,69 +55,96 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: joeg--- via samba-technical <samba-technical@lists.samba.org>
+Reply-To: "joeg@catalyst.net.nz" <joeg@catalyst.net.nz>
+Cc: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---00000000000049ea1f05882b83f1
-Content-Type: text/plain; charset="UTF-8"
 
-See MS-FSCC 2.6 and MS-SMB2 2.2.35
+On 4/05/19 11:36 AM, Christof Schmitt via samba-technical wrote:
+> On Wed, May 01, 2019 at 01:36:36PM +1200, Andrew Bartlett wrote:
+>> On Tue, 2019-04-30 at 16:04 -0700, Christof Schmitt wrote:
+>>> On Wed, May 01, 2019 at 06:45:42AM +1200, Andrew Bartlett via samba-t=
+echnical wrote:
+>>>> On Tue, 2019-04-30 at 16:10 +0200, Andreas Schneider via samba-
+>>>> technical wrote:
+>>>>> On Tuesday, April 30, 2019 3:58:45 PM CEST Rowland Penny wrote:
+>>>>>> =C2=A0
+>>>>>> Quite right EPEL doesn't have python34-crypto or python34-dns, but=
+
+>>>>>> it
+>>>>>> does have these:
+>>>>>>
+>>>>>> https://www.mirrorservice.org/sites/dl.fedoraproject.org/pub/epel/=
+7
+>>>>>> /x86_64/P
+>>>>>> ackages/p/python36-crypto-2.6.1-16.el7.x86_64.rpm
+>>>>>> https://www.mirrorservice.org/sites/dl.fedoraproject.org/pub/epel/=
+7
+>>>>>> /x86_64/
+>>>>>> Packages/p/python36-dns-1.15.0-8.el7.noarch.rpm
+>>>>> I think we are more lucky once RHEL 7.7 is out :-)
+>>>> Can we use this:
+>>>> https://centos.pkgs.org/7/epel-x86_64/python36-3.6.6-5.el7.x86_64.rp=
+m.html
+>>>>
+>>>> It would be very helpful if we could have a python 3.6 baseline.
+>>> I have a RHEL7 system and these python 3.6 rpms installed from EPEL:
+>>>
+>>> $ rpm -qa | grep python36
+>>> python36-libs-3.6.6-5.el7.x86_64
+>>> python36-crypto-2.6.1-16.el7.x86_64
+>>> python36-devel-3.6.6-5.el7.x86_64
+>>> python36-3.6.6-5.el7.x86_64
+>>> python36-dns-1.15.0-8.el7.noarch
+>>>
+>>> That seems sufficient to run the AD testenvs on master. If those can =
+be
+>>> added to a CentOS7 image on gitlab, that might be sufficient to run t=
+he
+>>> tests.
+>> So I guess it should be mostly a matter of adding EPEL repo during
+>> bootstrap.  Currently it runs the same thing on all RPM based systems,=
+
+>> but this can be changed.
+>>
+>> See bootstrap/config.py
+> I tried to fixup the patches from Andreas to use Python 3.6 in CentOS7
+> and force the new image build:
+> https://gitlab.com/samba-team/devel/samba/pipelines/59674602
+>
+> The centos7 image build seems to succeed, but then the centos7-samba-o3=
+
+> build does not start and only has:
+>
+> ERROR: Preparation failed: invalid reference format (executor_docker.go=
+:168:0s)
+> Will be retried in 3s ...
+> ERROR: Job failed (system failure): invalid reference format (executor_=
+docker.go:168:0s)
+>
+> Does that mean there is something wrong with the image or the tag?
+
+Hi Christof:
+
+This error is because $SAMBA_CI_CONTAINER_IMAGE_centos7 was not defined
+in .gitlab-ci.yml, so you get empty string for image.
+
+Also, your private jobs get stuck, because we replace the `private` tag
+to `samba-ci-private` but we can not have both.
+
+I fixed both issues and pushed to your branch, ci is in process now:
+
+https://gitlab.com/samba-team/devel/samba/pipelines/59867359
+
+>
+> Christof
+
+--=20
+Joe Guo
+joeg@catalyst.net.nz
+Catalyst IT
 
 
-
--- 
-Thanks,
-
-Steve
-
---00000000000049ea1f05882b83f1
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-smb3-Add-protocol-structs-for-change-notify-support.patch"
-Content-Disposition: attachment; 
-	filename="0001-smb3-Add-protocol-structs-for-change-notify-support.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_jvbicz2m0>
-X-Attachment-Id: f_jvbicz2m0
-
-RnJvbSBhZmU1NDg2YTMxMzMwYTE4MWViMGZkMTQwMGQ5ZDQxMjQyY2JiNTFkIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFN1biwgNSBNYXkgMjAxOSAxNzoyNToxMiAtMDUwMApTdWJqZWN0OiBbUEFUQ0hdIHNt
-YjM6IEFkZCBwcm90b2NvbCBzdHJ1Y3RzIGZvciBjaGFuZ2Ugbm90aWZ5IHN1cHBvcnQKCkFkZCB0
-aGUgU01CMyBwcm90b2NvbCBmbGFnIGRlZmluaXRpb25zIGFuZCBzdHJ1Y3RzIGZvcgpjaGFuZ2Ug
-bm90aWZ5LiAgRnV0dXJlIHBhdGNoZXMgd2lsbCBhZGQgdGhlIGhvb2tzIHRvCmFsbG93IGl0IHRv
-IGJlIGludm9rZWQgZnJvbSB0aGUgY2xpZW50LgoKU2VlIE1TLUZTQ0MgMi42IGFuZCBNUy1TTUIy
-IDIuMi4zNQoKU2lnbmVkLW9mZi1ieTogU3RldmUgRnJlbmNoIDxzdGZyZW5jaEBtaWNyb3NvZnQu
-Y29tPgotLS0KIGZzL2NpZnMvc21iMnBkdS5oIHwgMzQgKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKwogMSBmaWxlIGNoYW5nZWQsIDM0IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQg
-YS9mcy9jaWZzL3NtYjJwZHUuaCBiL2ZzL2NpZnMvc21iMnBkdS5oCmluZGV4IDg2OGIwMDU2ODA4
-Yy4uNmJiZmFlYzQyMjYzIDEwMDY0NAotLS0gYS9mcy9jaWZzL3NtYjJwZHUuaAorKysgYi9mcy9j
-aWZzL3NtYjJwZHUuaApAQCAtMTE0OCw2ICsxMTQ4LDQwIEBAIHN0cnVjdCBzbWIyX3dyaXRlX3Jz
-cCB7CiAJX191OCAgIEJ1ZmZlclsxXTsKIH0gX19wYWNrZWQ7CiAKKy8qIG5vdGlmeSBmbGFncyAq
-LworI2RlZmluZSBTTUIyX1dBVENIX1RSRUUJCQkweDAwMDEKKworLyogbm90aWZ5IGNvbXBsZXRp
-b24gZmlsdGVyIGZsYWdzLiBTZWUgTVMtRlNDQyAyLjYgYW5kIE1TLVNNQjIgMi4yLjM1ICovCisj
-ZGVmaW5lIEZJTEVfTk9USUZZX0NIQU5HRV9GSUxFX05BTUUJCTB4MDAwMDAwMDEKKyNkZWZpbmUg
-RklMRV9OT1RJRllfQ0hBTkdFX0RJUl9OQU1FCQkweDAwMDAwMDAyCisjZGVmaW5lIEZJTEVfTk9U
-SUZZX0NIQU5HRV9BVFRSSUJVVEVTCQkweDAwMDAwMDA0CisjZGVmaW5lIEZJTEVfTk9USUZZX0NI
-QU5HRV9TSVpFCQkJMHgwMDAwMDAwOAorI2RlZmluZSBGSUxFX05PVElGWV9DSEFOR0VfTEFTVF9X
-UklURQkJMHgwMDAwMDAxMAorI2RlZmluZSBGSUxFX05PVElGWV9DSEFOR0VfTEFTVF9BQ0NFU1MJ
-CTB4MDAwMDAwMjAKKyNkZWZpbmUgRklMRV9OT1RJRllfQ0hBTkdFX0NSRUFUSU9OCQkweDAwMDAw
-MDQwCisjZGVmaW5lIEZJTEVfTk9USUZZX0NIQU5HRV9FQQkJCTB4MDAwMDAwODAKKyNkZWZpbmUg
-RklMRV9OT1RJRllfQ0hBTkdFX1NFQ1VSSVRZCQkweDAwMDAwMTAwCisjZGVmaW5lIEZJTEVfTk9U
-SUZZX0NIQU5HRV9TVFJFQU1fTkFNRQkJMHgwMDAwMDIwMAorI2RlZmluZSBGSUxFX05PVElGWV9D
-SEFOR0VfU1RSRUFNX1NJWkUJCTB4MDAwMDA0MDAKKyNkZWZpbmUgRklMRV9OT1RJRllfQ0hBTkdF
-X1NUUkVBTV9XUklURQkJMHgwMDAwMDgwMAorCitzdHJ1Y3Qgc21iMl9jaGFuZ2Vfbm90aWZ5X3Jl
-cSB7CisJX19sZTE2CVN0cnVjdHVyZVNpemU7CisJX19sZTE2CUZsYWdzOworCV9fbGUzMglPdXRw
-dXRCdWZmZXJMZW5ndGg7CisJX191NjQJUGVyc2lzdGVudEZpbGVJZDsgLyogb3BhcXVlIGVuZGlh
-bm5lc3MgKi8KKwlfX3U2NAlWb2xhdGlsZUZpbGVJZDsgLyogb3BhcXVlIGVuZGlhbm5lc3MgKi8K
-KwlfX2xlMzIJQ29tcGxldGlvbkZpbHRlcjsKKwlfX3UzMglSZXNlcnZlZDsKK30gX19wYWNrZWQ7
-CisKK3N0cnVjdCBzbWIyX2NoYW5nZV9ub3RpZnlfcnNwIHsKKwlfX2xlMTYJU3RydWN0dXJlU2l6
-ZTsgIC8qIE11c3QgYmUgOSAqLworCV9fbGUxNglPdXRwdXRCdWZmZXJPZmZzZXQ7CisJX19sZTMy
-CU91dHB1dEJ1ZmZlckxlbmd0aDsKKwlfX3U4CUJ1ZmZlclsxXTsgLyogYXJyYXkgb2YgZmlsZSBu
-b3RpZnkgc3RydWN0cyAqLworfSBfX3BhY2tlZDsKKwogI2RlZmluZSBTTUIyX0xPQ0tGTEFHX1NI
-QVJFRF9MT0NLCTB4MDAwMQogI2RlZmluZSBTTUIyX0xPQ0tGTEFHX0VYQ0xVU0lWRV9MT0NLCTB4
-MDAwMgogI2RlZmluZSBTTUIyX0xPQ0tGTEFHX1VOTE9DSwkJMHgwMDA0Ci0tIAoyLjIwLjEKCg==
---00000000000049ea1f05882b83f1--
 
