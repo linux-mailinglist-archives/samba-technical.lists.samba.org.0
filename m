@@ -2,57 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB6D8158A0
-	for <lists+samba-technical@lfdr.de>; Tue,  7 May 2019 06:49:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8EC37158A1
+	for <lists+samba-technical@lfdr.de>; Tue,  7 May 2019 06:50:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=KMlI2sAc88+LAwNdw9huNXUA9arsnNk1IqVyqv88hPY=; b=SwcbzlF3K9mKZ1ph2c7WRTwthw
-	fq0pE4Q/HquUxJWBa8YNsBRLZryGlL1txj+0heZv82JM0obM+FVxbC0OsCM0ZJCmUFGeZrRafXW2w
-	gVN+BYX5pbPPvZd04k9JsBYWtnR+InjVoMOLt7UBtp0YG7F8jGUOqKNLmkW/qx3cKsiGbwSALKb8/
-	FWxyb/HcTDljVuXfBv2N4a9yKB4bi5OcbvviwGXqc9/met9np6X48MZFMks0k1tf5AXU3HEOEQ0jF
-	9WsfLJyKHNdHn4XBfs43tPM/QYFJEHhmSg/KoNFhXbyFEUlYlB1xgvhqjRw1eY9Ikyt9HnrngRiHN
-	mx0pFtlA==;
-Received: from localhost ([::1]:45430 helo=hr1.samba.org) 
+	bh=BufnoJNMJogpA6y/VRJBsAFVwDfizeLmZ7LIwKXtyYc=; b=fULKV6g10i3q5mRnBwZaem+Rvu
+	TQhsNUjDGr0lHwKdNh/CklX8tB6cBLhoM4e5ZG65pJdrdJrOP2uvsk0ubaipsfBNr/d26pRzCUi5D
+	Gm8Be5ORjfGV98yH5Jg8GuiRwyHizh6UHoNDTu6ccQ2gs/dfMawjZTwQhzzui9MsXBVC/q3MH3n7W
+	IvS6mpA0qE5q6o5cBLcYhcZWa831k8m4iefAju6DraYatCzDVz2N3B3HlKahTDbiSRaBC6G1iEZnI
+	bJAJX3ZZEDJqPjlVHW7uXScBPsuPCbDvMExTIJQFb4mAsdRRvTmVDr112nviXB4tjvrK9JY9lWVGd
+	FheJB+MA==;
+Received: from localhost ([::1]:46578 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hNs2w-002pA9-Ej; Tue, 07 May 2019 04:49:42 +0000
-Received: from mail-oi1-x241.google.com ([2607:f8b0:4864:20::241]:45263) 
+	id 1hNs3H-002pJU-Kd; Tue, 07 May 2019 04:50:03 +0000
+Received: from mail-ot1-x341.google.com ([2607:f8b0:4864:20::341]:33556) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hNs2r-002p94-3j
- for samba-technical@lists.samba.org; Tue, 07 May 2019 04:49:39 +0000
-Received: by mail-oi1-x241.google.com with SMTP id u3so5568672oic.12
- for <samba-technical@lists.samba.org>; Mon, 06 May 2019 21:49:36 -0700 (PDT)
+ (Exim) id 1hNs3C-002pJN-7I
+ for samba-technical@lists.samba.org; Tue, 07 May 2019 04:50:00 +0000
+Received: by mail-ot1-x341.google.com with SMTP id 66so4245803otq.0
+ for <samba-technical@lists.samba.org>; Mon, 06 May 2019 21:49:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=KMlI2sAc88+LAwNdw9huNXUA9arsnNk1IqVyqv88hPY=;
- b=bmo5sDRhHHB3/gmkNOtbsc9VhJjv58pXiD+JErU5FtdfBK5xsLKTq6+eZweE2D/Xeo
- WZKodOmPB1THs+AkeWd+QeInhz8YAHzgspA/LslRjK6dDFt1wpNS16fSXYj2q5CyU3cj
- ZcSU1eP2pcqEjKT6I+7+ZKIVv+UeDxdWIRGtsuzVeZjk4rz2swmkCvcA/gvXsjDkGdQG
- w4loGUA81SpD2UDN8ERRp2yDvR5wn4+WX2nPn2rMDJk1SORPZOHOlXVRF/kXIzGa8yhE
- 7OodvK2L4SwZidTKo6CCKUtIjYHiJxnXmZhF8xRJUfMiiixzcAL00zJx1f9EKv22XpB6
- 4juA==
+ :cc; bh=BufnoJNMJogpA6y/VRJBsAFVwDfizeLmZ7LIwKXtyYc=;
+ b=oleo+uiKJBsm29PP/kzoWUTzUJdVt6Q9I5+7TNcVozzczu+I2rbsm3ge9jeLVVaPb6
+ Mli4wK561FgSpHMzHAbkdvgYkus/DkUOsyaf/JWnsypmwuULhAlLe7RiL/7yHgiDvG++
+ pH9/onftXoOaKtsOz8xKN0wRXqQAqPg0KUl4LWFlHtMsSg+WHQXfCx6VdZhtWaBBz8Hr
+ Z5wzmZj2CItzYlUQY1H98lSkfa7wWsNyniR1MhRv4NLkWujCN9ZUe30P9+QHm0mCx39I
+ jxOuIECixr/PMEp/msiLeRe863ONV9e0D0eE/q/OXYmM8ZYabsRTIHC/vIXhCwILpzOB
+ 69Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=KMlI2sAc88+LAwNdw9huNXUA9arsnNk1IqVyqv88hPY=;
- b=hL0GrT78IBR+ccrgn3zsxGz5xKEec9gOPGpO+8YPOO+iBKaTQxfVhigClhu7P6QFbT
- 300+RxqlXYPyGfWOdH6k83YkvZP23D7j0b6gVg/l1LvTj1qmzx+O0Ajgyrw37GRYkjYw
- 75fiZuBB+y9VvyK6QhtG7hgVLnaUlgzbu48YSpc69gL3nGOO8M1CRnSWdkKGSMNLrhe6
- vpuqimDAiVGcCOB/PsDYNtwFJlgBukOGfD7+pppQ+AWwsIYbQoCB5PvhP0bxvGhLw+v1
- TN7a5th8HkmZxDYLB/gC85hHJXcozdOcRTtknahI207yAbIL+QLorsAycMghUVvA9rQb
- 3x2Q==
-X-Gm-Message-State: APjAAAVjfZ/ZvFUlt8aDp3LiwcY8mTZaspX9udq3CtlAU3c+EThQ6vqh
- HnlYW12eDxKR+Fy1Cr/G9aX3sm8Gd00s3soMYggY6w==
-X-Google-Smtp-Source: APXvYqwRD0K2GHi1UYqg+9YB2e44TV7b2ltd8taL1KYgDC+d6UJqnufpDcgxI9LQYpGWdeTz1DMmO1a70zyH8MlBf5M=
-X-Received: by 2002:aca:bdc4:: with SMTP id n187mr1242528oif.140.1557204575246; 
- Mon, 06 May 2019 21:49:35 -0700 (PDT)
+ bh=BufnoJNMJogpA6y/VRJBsAFVwDfizeLmZ7LIwKXtyYc=;
+ b=TCXQBXhwJ8NCkZagLhGXSnsYvWlWOdpq4/a9AA4xcoO4f/oXAIJXO2va7mZCkdMYaK
+ 42nBCigvuqOF3sOP6eS/BsPHBC8FtkX9BOIdyURB85jY/PcmN6g2usRRZ2RFL2G/wwDm
+ /3odZQCqXJn7wJ3W9Vqi3Jjn3chpcE1fGVbisTtFVeRjB7SSe+bVNZ1yy95apCn7tvrE
+ XM7KBNBG2vPYUmgjm5dB/kfhinNefPoDeuhC70GdTM1Ji6Qeucf2vFzw/Qt2tW3zTscl
+ RmvKtKG3KCvDAg4eFjj2Cw0syr/UX46e5oHHI2unj2KMnfY/6/xTR2HGGS/ag2QkO1IN
+ 27XQ==
+X-Gm-Message-State: APjAAAX9dzx9/Zgyy+PoUPjXBHRray7Gs1zBEq0y0Uyyenjv5QYUPWfA
+ uR49B1MK+rms1Rn6ZxpMOkKffNJ7VOYzYN5TY4U=
+X-Google-Smtp-Source: APXvYqy8ZC2C1grHzRV0Iz0baQ9ey3B1Q000UwiCCEkVjBXPI4HFNuk6XcW0mdGaqO25vyN0mXBAu1WJ7U/5IEQpkKY=
+X-Received: by 2002:a9d:6748:: with SMTP id w8mr20767330otm.198.1557204596021; 
+ Mon, 06 May 2019 21:49:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190502204600.089e54b9@martins.ozlabs.org>
-In-Reply-To: <20190502204600.089e54b9@martins.ozlabs.org>
-Date: Tue, 7 May 2019 14:49:24 +1000
-Message-ID: <CAJ+X7mSR3Op398fXsXBtQv0BG7k-H=sw5O0K4rm_kfSn__Zjuw@mail.gmail.com>
-Subject: Re: [PATCH] ctdb-tools: Fix ctdb dumpmemory to avoid printing
- trailing NUL (BZ 13923)
+References: <20190502204231.60f35912@martins.ozlabs.org>
+ <8D5F8F0CF9684655A019A5D8B63F3AD0@rotterdam.bazuin.nl>
+ <20190503111940.0043767e@martins.ozlabs.org>
+In-Reply-To: <20190503111940.0043767e@martins.ozlabs.org>
+Date: Tue, 7 May 2019 14:49:44 +1000
+Message-ID: <CAJ+X7mQkPZosagZvY0NijgVDL4m=5hRZNfeekXjup-3spLmu_A@mail.gmail.com>
+Subject: Re: [PATCH] ctdb-scripts: Drop script configuration variable
+ CTDB_MONITOR_SWAP_USAGE
 To: Martin Schwenke <martin@meltin.net>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
@@ -70,22 +72,42 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Amitay Isaacs via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Amitay Isaacs <amitay@gmail.com>
-Cc: Samba Technical <samba-technical@lists.samba.org>
+Cc: Samba Technical <samba-technical@lists.samba.org>, belle@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, May 2, 2019 at 8:46 PM Martin Schwenke via samba-technical
+On Fri, May 3, 2019 at 11:21 AM Martin Schwenke via samba-technical
 <samba-technical@lists.samba.org> wrote:
 >
-> This also fixes ctdb rdumpmemory.  A 2nd patch extends a test to also
-> test ctdb rdumpmemory.
+> Hi Louis,
 >
-> The next patch set depends on this one - the updates to the tests there
-> expose the problem fixed here.
+> On Thu, 2 May 2019 14:47:05 +0200, "L. van Belle via samba-technical"
+> <samba-technical@lists.samba.org> wrote:
 >
-> Pipeline: https://gitlab.com/samba-team/devel/samba/pipelines/59394125
+> > > Monitoring of swap is based on the idea that swap
+> > > space stacks on top of main memory, so that when a system starts
+> > > filling swap space then this is supposed to be a good sign that
+> > > the system is running out of memory.
+> >
+> > Not completely right in my option.
+> > Swap can be full while your ram is not.
 >
-> Please review and maybe push...
+> Right.  That means my commit message is no good because that is why
+> we're going to remove this configuration variable and no longer
+> separately monitor swap.  :-)
+>
+> New patch attached with updated commit message.
+>
+> > Maybe its good to check swappiness also, most distro's have default
+> > swappiness set to 60.
+> > The parameter value set to 60 means that "your kernel will swap when RAM
+> > reaches 40% capacity."
+> > 40% ! All other is used for caching and/or services.
+> >
+> > [...]
+>
+> This was something I was planning to look into and you've given me an
+> excellent explanation.  Thanks!
 >
 > peace & happiness,
 > martin
