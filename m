@@ -2,59 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EC37158A1
-	for <lists+samba-technical@lfdr.de>; Tue,  7 May 2019 06:50:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 733FE15A78
+	for <lists+samba-technical@lfdr.de>; Tue,  7 May 2019 07:47:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=BufnoJNMJogpA6y/VRJBsAFVwDfizeLmZ7LIwKXtyYc=; b=fULKV6g10i3q5mRnBwZaem+Rvu
-	TQhsNUjDGr0lHwKdNh/CklX8tB6cBLhoM4e5ZG65pJdrdJrOP2uvsk0ubaipsfBNr/d26pRzCUi5D
-	Gm8Be5ORjfGV98yH5Jg8GuiRwyHizh6UHoNDTu6ccQ2gs/dfMawjZTwQhzzui9MsXBVC/q3MH3n7W
-	IvS6mpA0qE5q6o5cBLcYhcZWa831k8m4iefAju6DraYatCzDVz2N3B3HlKahTDbiSRaBC6G1iEZnI
-	bJAJX3ZZEDJqPjlVHW7uXScBPsuPCbDvMExTIJQFb4mAsdRRvTmVDr112nviXB4tjvrK9JY9lWVGd
-	FheJB+MA==;
-Received: from localhost ([::1]:46578 helo=hr1.samba.org) 
+	bh=uqiIIxzAoiILnKW2WDXvUV+swFjTyQmX8vpgzwtmtZM=; b=WVJay0Ox05pUaMmhQqy/rLX0HS
+	pN+R3edxpbYXaNO224tU+BUhOxK4AGLtz5oOroKE74dBUvqUiI3byhxst0iwgj1iXC85a1NHIs1cL
+	i6IpcLHFqY9Xkag84ClMiLJP4hANS+WasNlodJ7+1RuUrXsAL3DsqulDI2nQtZucqGJ2p4EEf+OP9
+	KLVfX+H500RqMeevhaLlX/CSsn6v4B1cFbUsz8zUae8Ty1W4AZc/rYJdNWRthi6eLg0ihulPUut7N
+	ekXPNLzwZTNd1sbFLNqriEBeJD0B6jzLgybmFMwrlop2fQcF0q7DXmXYG34eIfMK/CZQmbPhQts5p
+	cZ9FCAkQ==;
+Received: from localhost ([::1]:50038 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hNs3H-002pJU-Kd; Tue, 07 May 2019 04:50:03 +0000
-Received: from mail-ot1-x341.google.com ([2607:f8b0:4864:20::341]:33556) 
+	id 1hNsvq-002ppH-87; Tue, 07 May 2019 05:46:26 +0000
+Received: from mail-ot1-x344.google.com ([2607:f8b0:4864:20::344]:46061) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hNs3C-002pJN-7I
- for samba-technical@lists.samba.org; Tue, 07 May 2019 04:50:00 +0000
-Received: by mail-ot1-x341.google.com with SMTP id 66so4245803otq.0
- for <samba-technical@lists.samba.org>; Mon, 06 May 2019 21:49:57 -0700 (PDT)
+ (Exim) id 1hNsvm-002ppA-Ij
+ for samba-technical@lists.samba.org; Tue, 07 May 2019 05:46:24 +0000
+Received: by mail-ot1-x344.google.com with SMTP id a10so13734948otl.12
+ for <samba-technical@lists.samba.org>; Mon, 06 May 2019 22:46:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=BufnoJNMJogpA6y/VRJBsAFVwDfizeLmZ7LIwKXtyYc=;
- b=oleo+uiKJBsm29PP/kzoWUTzUJdVt6Q9I5+7TNcVozzczu+I2rbsm3ge9jeLVVaPb6
- Mli4wK561FgSpHMzHAbkdvgYkus/DkUOsyaf/JWnsypmwuULhAlLe7RiL/7yHgiDvG++
- pH9/onftXoOaKtsOz8xKN0wRXqQAqPg0KUl4LWFlHtMsSg+WHQXfCx6VdZhtWaBBz8Hr
- Z5wzmZj2CItzYlUQY1H98lSkfa7wWsNyniR1MhRv4NLkWujCN9ZUe30P9+QHm0mCx39I
- jxOuIECixr/PMEp/msiLeRe863ONV9e0D0eE/q/OXYmM8ZYabsRTIHC/vIXhCwILpzOB
- 69Ow==
+ :cc; bh=uqiIIxzAoiILnKW2WDXvUV+swFjTyQmX8vpgzwtmtZM=;
+ b=ATV5UgCz05BgeDfqX2IBX+1MvmhJueajbsd5oNzaCKmdIJ4a1II8ul4ju40OXhXDp2
+ x6h9Q7HsQ030JPWdK67/WTP9oS+NTB6bG+GLbXT+JB8tZRE/qvdL/k1OS8F0FhK4stW3
+ c0kKHOOhSUvJDYiCq9Bk4Vt+cnmsiIBu8OSdfaidBm38iviFejd0Eb3zF1D1AMZv6CNu
+ 6L9D3ZP2+e0GHyQYRsOFT5LZPT1/DThTcrLewZzHograUVGMHRzqqXe4tjX11hOhGJ8+
+ +bqr1libvpToJK0SjGqmfvQUm6Uxza7PxR0pUe7f7tpBk1obFrZs3VwwY6fahhuAW1iJ
+ cRBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=BufnoJNMJogpA6y/VRJBsAFVwDfizeLmZ7LIwKXtyYc=;
- b=TCXQBXhwJ8NCkZagLhGXSnsYvWlWOdpq4/a9AA4xcoO4f/oXAIJXO2va7mZCkdMYaK
- 42nBCigvuqOF3sOP6eS/BsPHBC8FtkX9BOIdyURB85jY/PcmN6g2usRRZ2RFL2G/wwDm
- /3odZQCqXJn7wJ3W9Vqi3Jjn3chpcE1fGVbisTtFVeRjB7SSe+bVNZ1yy95apCn7tvrE
- XM7KBNBG2vPYUmgjm5dB/kfhinNefPoDeuhC70GdTM1Ji6Qeucf2vFzw/Qt2tW3zTscl
- RmvKtKG3KCvDAg4eFjj2Cw0syr/UX46e5oHHI2unj2KMnfY/6/xTR2HGGS/ag2QkO1IN
- 27XQ==
-X-Gm-Message-State: APjAAAX9dzx9/Zgyy+PoUPjXBHRray7Gs1zBEq0y0Uyyenjv5QYUPWfA
- uR49B1MK+rms1Rn6ZxpMOkKffNJ7VOYzYN5TY4U=
-X-Google-Smtp-Source: APXvYqy8ZC2C1grHzRV0Iz0baQ9ey3B1Q000UwiCCEkVjBXPI4HFNuk6XcW0mdGaqO25vyN0mXBAu1WJ7U/5IEQpkKY=
-X-Received: by 2002:a9d:6748:: with SMTP id w8mr20767330otm.198.1557204596021; 
- Mon, 06 May 2019 21:49:56 -0700 (PDT)
+ bh=uqiIIxzAoiILnKW2WDXvUV+swFjTyQmX8vpgzwtmtZM=;
+ b=EwOkpH546cv2SvTpe5z5kx3dkASia2tGZnM0kxRQqGi2qHnkTPaMRvPx7c0YvaeKwO
+ H7JO5p4X1Q+c/pDsikAVL9KMtlZP2iDkykVY1GadfJWAGJYMTcP9lmg3t8fD4S2yCmpI
+ Ob0FhrrubCG9v6URZfR+lIsZfT596Q+2yMKeGooH/RaEB7bMPuid/4HnJfAExUAM3Uy7
+ ZX67st7ooktPHZQkmz3JbyHTszcweYsXwUwYbJunwACDqjPqQxC1MIey6/f9lncx9829
+ JQzOSpCDZTALZAI9HYtOwp+RKHpJS/xZwbBIWsTTU0zgpVLw4WkOBm18uPMn/PAH4C/t
+ /RnQ==
+X-Gm-Message-State: APjAAAWyg4K3Qk754LISkopzXUT1RB2HB6W1OvwiR1evWop/5/IxN5bD
+ Qg2u4tG+9MQt9Qbe6YAgflj9Ujarc1mCmjpOZ0MsHg==
+X-Google-Smtp-Source: APXvYqx7xkio8lVwXXCXmZ7oX90phwoBAKkPVRp1VmTDkAXH/65C8Llde54OVhhkdsB6QX4hXZy5SekeRy1qrZ5ynVA=
+X-Received: by 2002:a9d:2f0:: with SMTP id 103mr18949594otl.126.1557207978226; 
+ Mon, 06 May 2019 22:46:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190502204231.60f35912@martins.ozlabs.org>
- <8D5F8F0CF9684655A019A5D8B63F3AD0@rotterdam.bazuin.nl>
- <20190503111940.0043767e@martins.ozlabs.org>
-In-Reply-To: <20190503111940.0043767e@martins.ozlabs.org>
-Date: Tue, 7 May 2019 14:49:44 +1000
-Message-ID: <CAJ+X7mQkPZosagZvY0NijgVDL4m=5hRZNfeekXjup-3spLmu_A@mail.gmail.com>
-Subject: Re: [PATCH] ctdb-scripts: Drop script configuration variable
- CTDB_MONITOR_SWAP_USAGE
+References: <20190502204929.58b02257@martins.ozlabs.org>
+ <20190505122820.66c3c5ab@martins.ozlabs.org>
+In-Reply-To: <20190505122820.66c3c5ab@martins.ozlabs.org>
+Date: Tue, 7 May 2019 15:46:06 +1000
+Message-ID: <CAJ+X7mTaF8kHF+m0fm5b9Sz9ibSN75Cka3k3TAdRtD3__cMyRA@mail.gmail.com>
+Subject: Re: [PATCH] CTDB test fixes (BZ13924)
 To: Martin Schwenke <martin@meltin.net>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
@@ -72,47 +70,30 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Amitay Isaacs via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Amitay Isaacs <amitay@gmail.com>
-Cc: Samba Technical <samba-technical@lists.samba.org>, belle@samba.org
+Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, May 3, 2019 at 11:21 AM Martin Schwenke via samba-technical
+On Sun, May 5, 2019 at 12:29 PM Martin Schwenke via samba-technical
 <samba-technical@lists.samba.org> wrote:
 >
-> Hi Louis,
->
-> On Thu, 2 May 2019 14:47:05 +0200, "L. van Belle via samba-technical"
+> On Thu, 2 May 2019 20:49:29 +1000, Martin Schwenke via samba-technical
 > <samba-technical@lists.samba.org> wrote:
 >
-> > > Monitoring of swap is based on the idea that swap
-> > > space stacks on top of main memory, so that when a system starts
-> > > filling swap space then this is supposed to be a good sign that
-> > > the system is running out of memory.
-> >
-> > Not completely right in my option.
-> > Swap can be full while your ram is not.
+> Please don't push this patch:
 >
-> Right.  That means my commit message is no good because that is why
-> we're going to remove this configuration variable and no longer
-> separately monitor swap.  :-)
+> > [PATCH 4/6] ctdb-tests: Wait to allow database attach/detach to take
+> >  effect
 >
-> New patch attached with updated commit message.
+> While it seems to be the right thing to do, I'm still seeing unexpected
+> failures in the detach test.  :-(
 >
-> > Maybe its good to check swappiness also, most distro's have default
-> > swappiness set to 60.
-> > The parameter value set to 60 means that "your kernel will swap when RAM
-> > reaches 40% capacity."
-> > 40% ! All other is used for caching and/or services.
-> >
-> > [...]
->
-> This was something I was planning to look into and you've given me an
-> excellent explanation.  Thanks!
->
-> peace & happiness,
-> martin
+> The rest are still good to go...
 
-Pushed to autobuild.
+There is another bug in attach/detach code related to client_id.  This
+will be fixed separately.
+
+Pushing the test changes to autobuild.,
 
 Amitay.
 
