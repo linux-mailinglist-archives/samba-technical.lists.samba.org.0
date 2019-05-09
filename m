@@ -2,48 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8ED1119503
-	for <lists+samba-technical@lfdr.de>; Fri, 10 May 2019 00:00:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A659E1959F
+	for <lists+samba-technical@lfdr.de>; Fri, 10 May 2019 01:20:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=hcHBaix+7npfTXEyMz3ZRD2eABjn+HM9TF//RD3/0BI=; b=uz/lO7ioYCVcYNUvMcpNXf7zBP
-	VLy1UfN2zQIhLuALwKrHXAKd7pumQ0sfrVgqDaI97VGMc9Wf385uMBiVRsLUu+3QUCLSoXOrw9B1B
-	ycOkwYTgmrx7Q+fXIrsbnTaIJYgE9YoZZmK6nxXs1e9cX/elURDhD4s2O1lQ5wuwEtV8jZm4wqt+3
-	kPEYcWQMrnwBye0B5jw5ufOrZJrxIBJN1DD8dqJbiT2FaLtR9KlAGlBef27XP9CV0NoPzAAx8L0+m
-	is5DlZSWckKx2NiRhQXAUPHKL8lg422ILYXweYNLdrASnWSfaq4VF1Nrn7Bpb+T8P/Ec0sSIVAkYU
-	CPZkqAaQ==;
-Received: from localhost ([::1]:58468 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=VMLJrwIjRyou/sc6ebVrWGyJEPcF9ornni9W329ukKs=; b=nZmamy7lBZpFj1I860h5fe0RLD
+	IYdx7zj1TS+1Fj1P/Na31pWDRbj0pwLt65LagdFWsfpVUcVdnDqjmYkZpEQXPr/IX/CiHCXGJxFj/
+	2pTo6t1QdpCJcLaHTbY61UZVta4HPTx4niejOFGcA6rQrMFJmqEWYtRAaOfH9ToM5ACOSBnlmql+H
+	TyxPdzUtTX8xfb+/0rDRm68wPTDpmMyCboJ38cqvz/ZNu3kOrvCvA8sBjtmwid7GcpwIn4x0VREzp
+	z+BufV/gjIQn+bJOA9xCtgvFN0ihuo4TbQ+nzXVWbDCG+DMelMFfKNG92hwx7L/1U6fNpVcnfvkYK
+	ddQMtz+A==;
+Received: from localhost ([::1]:59246 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hOr4s-003702-C6; Thu, 09 May 2019 21:59:46 +0000
-Received: from ozlabs.org ([203.11.71.1]:40743) 
+	id 1hOsKY-00379H-KW; Thu, 09 May 2019 23:20:02 +0000
+Received: from ozlabs.org ([203.11.71.1]:53987) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hOr4o-0036zv-0g
- for samba-technical@lists.samba.org; Thu, 09 May 2019 21:59:44 +0000
+ (Exim) id 1hOsKU-00379A-ED
+ for samba-technical@lists.samba.org; Thu, 09 May 2019 23:20:00 +0000
 Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 450S1D6Bxvz9sDn;
- Fri, 10 May 2019 07:59:28 +1000 (AEST)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 450Tnv4n8Jz9sB8;
+ Fri, 10 May 2019 09:19:45 +1000 (AEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1557439169; bh=hcHBaix+7npfTXEyMz3ZRD2eABjn+HM9TF//RD3/0BI=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=sxqhC2rj+IcZ3jRURMNwHLhlt0vRu8o1HcQBQMROUve+YacpdyBfCJ/urTLInW1Oh
- oD8PmMn3bHZBEFdgMYyFydBzHYtf9Zsg+bKc/fs3t0J8uiZnFwSLTSHrHkMqfeaOwK
- qdmgX0A0SHB9xW/XlUCxi8HT2lcpZZcqQc/7UK9AmyfZUFnkA5LGLiQSrtfhM8UaLh
- sUocqlvaZ4YCnW6zITemEks6bgREgmdWKwDGxjycBgSxbj1wAOx5gy1HAFK5TnXdxo
- j+KxcsLRr5S6cfsaVdJeTm7FPgQBRqzdDLYsKjJGmdn9mn+GIz0/aIs1VEEw+zoZs2
- xshksKBuz/+OA==
-Date: Fri, 10 May 2019 07:59:27 +1000
+ t=1557443987; bh=mwcOzvhG5MFCCobjpLv/4iNmFPe0WiBRyFSCJxP6WoM=;
+ h=Date:From:To:Subject:In-Reply-To:References:From;
+ b=plHXoTdHx6bCj4l20Jb+hBJz23POV8iYtAnFjQgUaOptC7wHnyCv9C7PKsYoSZaMl
+ mcsnBhuz48hzKuY1B+jXp7XoqL88+FBnI3GqxEWjWZ3yik7+ongZlFWDmuBUzC619i
+ 9l6ppk3Aypx00EMSjxhIV3Ds3gMmclWtHUBXdya7lo35VyankLhgBQAcgqrrOQ08jM
+ 3CVImqnawsPv619VnXbo/Od6QX8ZF6zxgOizI7NBCLYa5hlE+I/IrgTN4G9pfbHYfK
+ jvJm6gWy7k4rzMFraHjDJLaabA8q/nOO9YYn3oV8AZsTMTIfv9qjebSaOc+tsBXeRC
+ pTr9Fo+XNKkFQ==
+Date: Fri, 10 May 2019 09:19:43 +1000
 To: samba-technical@lists.samba.org
-Subject: Re: GSoC 2019: welcome Mairo Rufus
-Message-ID: <20190510075927.393c3c8d@martins.ozlabs.org>
-In-Reply-To: <20190509131420.17d98c62@samba.org>
-References: <20190509131420.17d98c62@samba.org>
+Subject: Re: [PATCH] ctdb-tests: Make reloadips tests more reliable (bug
+ #13924)
+Message-ID: <20190510091943.679a9cf0@martins.ozlabs.org>
+In-Reply-To: <20190508113114.2f6ff9f8@martins.ozlabs.org>
+References: <20190508113114.2f6ff9f8@martins.ozlabs.org>
 X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,21 +60,25 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: P Mairo <akoudanilo@gmail.com>, David Disseldorp <ddiss@samba.org>,
- =?UTF-8?B?QXVyw6lsaWVu?= Aptel <aaptel@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 9 May 2019 13:14:20 +0200, David Disseldorp via samba-technical
+On Wed, 8 May 2019 11:31:14 +1000, Martin Schwenke via samba-technical
 <samba-technical@lists.samba.org> wrote:
 
-> I'm very pleased to introduce Mairo Rufus, who joins us as a 2019
-> Google Summer of Code student. Mairo is assigned the task of
-> improving the smbcmp network capture diff utility[1], and will be
-> mentored by Aur=C3=A9lien.
-> Please make him feel welcome.
+> The "ctdb reloadips" can fail for a few reasons, including
+> colliding with a takeover run already in progress.  This was a
+> simplifying design decision.
+> 
+> The tests try to be careful, but there's a startup edge case where an
+> unexpected takeover run can be triggered, though it has been delayed
+> for a quite a while after startup.
 
-Welcome Mairo!
+Please hold this for a while.  This is still failing because it isn't
+retrying.
+
+Amitay, this is almost certainly an issue with matching the error
+message, which you queried the other day...
 
 peace & happiness,
 martin
