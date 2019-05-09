@@ -2,39 +2,38 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27540188A4
-	for <lists+samba-technical@lfdr.de>; Thu,  9 May 2019 13:06:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC1A7188C9
+	for <lists+samba-technical@lfdr.de>; Thu,  9 May 2019 13:14:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=HN2oouAk9p49E0qL6kff559MHkCEaGezxXoBWfq5RXI=; b=fqIFZolgiEBwhiIyQEiAT2v5Wg
-	y3cPIDnRevK6lDf09DneLPVF2b3K9b+kTZGaDYdZ5WaQgI65PU0dkZUM4dSggdoTeKCxrj3jFzSsE
-	QGAJSUsywkPE5lojy11qAvm9/D007v7FOGrlUThg/AXpNbAZVxYyBICvuOyJxCw47XZmYu3DHGi2t
-	GyOjL3hVTh6v0J8V7ugIpf4Pr5zg7YIdB6yxDeknI6BUc7+/cMzpMybTpK8bMdc6UKZn0xLBd7p2j
-	ebqfn8hAf6PTrsQYo8MqsFQSL6Q7HmDAdkuE0sWx8oRO0VsI2PG8nBj1H8QM2kXWYna7t5GJoht8J
-	4TSp9HxQ==;
-Received: from localhost ([::1]:44562 helo=hr1.samba.org) 
+	bh=iJz5DjxnEljwtap+uNhlDK+XlgWX1A76i+omJp6NB08=; b=ag5uV+sZUyRDM8cQqBsIx5cCC6
+	8cd4W0fi1hrIgDsKR+mnvsiUU8jXeJ5CcV8f+XD/BHM0jifTMIKOxggScwXbvurp7+eXsH2MUIs0F
+	08vGyHaYCC5qpbfleEoVbxvhVr97THNiEbXEkIAST4P9XRrL/p5i6bHog4I2MeUmDt6lSfW0miWU5
+	gpJJmHQ/Bwcua/2jh9roQ0fTjmag9dPm4GqnrL1VuJRkXvzG+KjI5FuWcJOmgJjyiujA3vmoKuzKO
+	pst05UEKAKsIQL0QddzOufKpPkEt2ZoLn+3my/FSHxXGDid7gf2ZHeI8IfLYFr31bJy1QZCKCcwcL
+	Qw7yJ5pw==;
+Received: from localhost ([::1]:45290 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hOgrD-0034by-VV; Thu, 09 May 2019 11:05:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:53908) 
+	id 1hOh0T-0034iM-Md; Thu, 09 May 2019 11:14:33 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:55498) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hOgr5-0034br-As
- for samba-technical@lists.samba.org; Thu, 09 May 2019 11:04:55 +0000
+ (Exim) id 1hOh0J-0034iF-EA
+ for samba-technical@lists.samba.org; Thu, 09 May 2019 11:14:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=HN2oouAk9p49E0qL6kff559MHkCEaGezxXoBWfq5RXI=; b=nXd4Epg9CmdAw19yq4j/5CqVZ2
- POpasWtK7yVoaM5izFnOofDvZMQZreFFNn6GXR4uyHH9YKcVHbm8WOoN7tPb+JnQJTUiRTlyVxUjk
- pnpU6KRkTtgaxd9751ShTbXBRgInHoyZCTrVrNnE0UJdm819UOL2hElODqzfdrVBO/JY=;
+ bh=iJz5DjxnEljwtap+uNhlDK+XlgWX1A76i+omJp6NB08=; b=sphUPCiEmJxObNCe4zGsyQxi+j
+ 0FyJFX1oTWZmEDW+gQ1nlCjdG/8N/CY8RFyiXlNDemycefdBK1X5uoS9bjw28yPrWHfojYpM8siaF
+ pQRX6cIDSk/FSj2KAK+Xf4WmCbhRCfp/H3EKoy7+yT/E9BmkxSEuat4rSpXBhr34z/6o=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hOgr2-0005lS-Pe; Thu, 09 May 2019 11:04:49 +0000
-Date: Thu, 9 May 2019 13:04:47 +0200
-To: Jeremy Allison <jra@samba.org>
-Subject: recvfile on streams
-Message-ID: <20190509110446.dad2siv6vvosl62z@inti>
+ (Exim) id 1hOh0I-00069A-70; Thu, 09 May 2019 11:14:22 +0000
+Date: Thu, 9 May 2019 13:14:20 +0200
+To: Samba Technical <samba-technical@lists.samba.org>
+Subject: GSoC 2019: welcome Mairo Rufus
+Message-ID: <20190509131420.17d98c62@samba.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
-User-Agent: NeoMutt/20180716
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -48,22 +47,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
+Cc: P Mairo <akoudanilo@gmail.com>,
+ =?UTF-8?B?QXVyw6lsaWVu?= Aptel <aaptel@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Jeremy,
+Hi,
 
-I've just filed <https://bugzilla.samba.org/show_bug.cgi?id=13938>.
+I'm very pleased to introduce Mairo Rufus, who joins us as a 2019
+Google Summer of Code student. Mairo is assigned the task of
+improving the smbcmp network capture diff utility[1], and will be
+mentored by Aur=C3=A9lien.
+Please make him feel welcome.
 
-What do you think?
+Cheers, David
 
--slow
-
--- 
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+1. https://wiki.samba.org/index.php/SoC/Ideas#Improve_smbcmp.2C_the_capture=
+_diff_tool
 
