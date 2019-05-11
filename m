@@ -2,42 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6BFE1A336
-	for <lists+samba-technical@lfdr.de>; Fri, 10 May 2019 20:59:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DE691A93C
+	for <lists+samba-technical@lfdr.de>; Sat, 11 May 2019 21:21:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=SXQwq/lxjEyftqRPeFlGKG5dzdIeLJ3dX9ac3uychuw=; b=2LhQtibJEKttqJ6Vjw5Y3pT/G5
-	9nqiuNfBQPdfpH0PTCAfQnJYcldmZuWzv2vrE5X6LLW6pzKeHe1b6cUe+tNjnFGD5u8kLnQBICKyZ
-	nntc+jfTcey0Jd9/C/QUz8avCuYJeEWT3I6xF1yhsZ/Sy35g2+9IdmmQDy+G5qjmGHeHIfT7yOEXz
-	XptzfnL9BqzRDOxv1XLQfOH7CCpF3538V3b3Wd4aqbntstxepY8cQrS+2Lvt0eUHfovGU7r9zUE8R
-	5DDIXAEtkFVSyJSVEuI/z5KNh7UywRZjlZL0ZDM76EDQIZoeTigy9ghNS+MW0C8iJyUVa4nk15wyv
-	aO71JQ5g==;
-Received: from localhost ([::1]:25826 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=U7FzWM/UOXxFyu2Wj4UwO6ko/00s4zfIDyl2O9sYWMM=; b=T/q1spBwJwcK49JTi5jFDCyxle
+	5M3l/xHoMtJZ6ibPazt4CY4bHjomFKb/S9nLJQvw4jLBLKyO1HTOIq4tcRyLglsca9/Ujj3rWWMvc
+	zxbtSMHyen2InOiSqZfBcbomiERigftG0oEImZ/V+p+QDp5qbcrhmEVHpCCfgcKMdNSJutXjCRHIi
+	Pzr8pPNbZAqH+5FZE1QDJ+C/H8IXp49c6qQoJzfjuV2IpiW27bUGGDkvwqyJ2u4NI+/a4bHZSImbq
+	csgZsprVOQ/gDFrSOqDdz3rRWq8jo4eApvjUxJbXmwS9RdThM8hf45+H40Ikd9bDIpoF4rR/eTc4s
+	4qYHX2IA==;
+Received: from localhost ([::1]:34284 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hPAjK-003AVb-4b; Fri, 10 May 2019 18:58:50 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:23922) 
+	id 1hPXXT-003D9F-Dt; Sat, 11 May 2019 19:20:07 +0000
+Received: from mail-yw1-xc41.google.com ([2607:f8b0:4864:20::c41]:36121) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hPAjF-003AVT-Oj
- for samba-technical@lists.samba.org; Fri, 10 May 2019 18:58:48 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=SXQwq/lxjEyftqRPeFlGKG5dzdIeLJ3dX9ac3uychuw=; b=aVMkA2TDGI6lb+zkbKfxTuNMkd
- adY+5blc9tXouJo16kXY6cBH51ctAODQWH27kZydJtU/xUrVSDXvcps2yaGz3E3IyHXJdXLkZ1KXz
- IIoiulSpM1IapH5czFUb1b187WC10CPeR8yrOTK758aT1hPFmUWZVgw9ZLiL4ZkKohsk=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hPAjE-0007Tl-JG; Fri, 10 May 2019 18:58:44 +0000
-Date: Fri, 10 May 2019 11:58:41 -0700
-To: David Disseldorp <ddiss@suse.de>
-Subject: Re: [PATCH] Samba: CephFS Snapshots VFS module
-Message-ID: <20190510185841.GA54524@jra4>
-References: <20190329184531.0c78e06b@echidna.suse.de>
- <20190508224740.GA21367@jra4> <20190510151601.798bee61@suse.de>
+ (Exim) id 1hPXXN-003D98-66
+ for samba-technical@lists.samba.org; Sat, 11 May 2019 19:20:04 +0000
+Received: by mail-yw1-xc41.google.com with SMTP id q185so7566400ywe.3
+ for <samba-technical@lists.samba.org>; Sat, 11 May 2019 12:20:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ixsystems-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=a+u723Dj7bV38zEFawI4pe2w6kN9d0zM9eJyTovebPY=;
+ b=Bedbmf0Wr4q3a/vCJfK3aY9saqgK6i6twhw4BFoq33z6xIBcO6rlWB1CAHFpVb24ll
+ ZtDzIlA42/QWfnM290S8l7B6QMvrInMncdO9DeGlRuwf2tLuwKy8zPYUb5nD5HNgSUgr
+ rEkEHEocLWaXx6+mf/HRinHv/Sf+U818vOgmuS+PduxXQ/ZlEDhZnecqTwmnewjKI4Ua
+ 70eEfBJdwWkflhMWTDR8mqBP7e+DBYNJ0gNRpm12EvkKXUMNwFw2zRUmF3ZK8NTn3YGL
+ CqSriHLc0aqoTVkBVUdPLOoQOoyCwMISIRO6VpgCC7+Gf9LqJyyXzZBnVTigsSyDxGjI
+ oIiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=a+u723Dj7bV38zEFawI4pe2w6kN9d0zM9eJyTovebPY=;
+ b=TE7tcRgC7FVAMwm1AEIyYOSXOuLCeGIBw8TXwTojNAvDH4BrppHuBrEKexXJQZi/HK
+ GpTjjrif9CT6wyvmSlEcjeaVSrNYzemKSPl9WOYVOHP5INUPEJfEjumjMW3bZsRiA1x0
+ VYPdEJdrwwydutZimMK7LKwXjvgAwyyErtOtKnYvff1LApT+FOKaybyDQTa0EaT194Cd
+ jSdii1buaJnIJrdlFIW+2grhLDh5Gyl6zecC6W3I+2BfKDFxN1YeP3jJuZ3dIT9hJtxY
+ Z9yIwKOQSxo59YiEMnnFlMd7b20nzS+WLCI4MONSn3loSA8ivA7PzCpwShtAgz64/SHX
+ PXGQ==
+X-Gm-Message-State: APjAAAXHh9LwWNzWg2p66nhz8ID0MmcqbxDEA10O9lA+DKsVutiozte4
+ nTK3VN+85ekXnQDVjGAAMhYCDsr/ShrQSLXS2cbt10Z2
+X-Google-Smtp-Source: APXvYqy7eQLqQuzh7818bI60JDD3PpRi1pL2u9Q5gStBp1yj4JDlVDCHCBXA2+gL4uT7IJUqxGmasRzE3oEQYhN4hfw=
+X-Received: by 2002:a81:83d7:: with SMTP id t206mr9398631ywf.146.1557602399045; 
+ Sat, 11 May 2019 12:19:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20190510151601.798bee61@suse.de>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Date: Sat, 11 May 2019 15:19:48 -0400
+Message-ID: <CAB5c7xr4d8oiKoeL3wYCcH860RTP3LY_FYTsBGC--ukGRiTa5A@mail.gmail.com>
+Subject: [PATCH] zfsacl: Fix ACL behavior issues with vfs_zfsacl
+To: samba-technical@lists.samba.org
+Content-Type: multipart/mixed; boundary="000000000000b2b8cf0588a191f9"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.23
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,119 +66,116 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: "ceph-devel@vger.kernel.org" <ceph-devel@vger.kernel.org>,
- Jeremy Allison via samba-technical <samba-technical@lists.samba.org>,
- jra@samba.org
+From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Walker <awalker@ixsystems.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, May 10, 2019 at 03:16:01PM +0200, David Disseldorp wrote:
-> On Wed, 8 May 2019 15:47:40 -0700, Jeremy Allison via samba-technical wrote:
-> 
-> > On Fri, Mar 29, 2019 at 06:45:31PM +0100, David Disseldorp via samba-technical wrote:
-> > > 
-> > > The attached patchset adds a new ceph_snapshots Samba VFS module which
-> > > handles snapshot enumeration and timewarp/@GMT token mapping.
-> > > 
-> > > Feedback appreciated.  
-> > 
-> > Mostly looks good - a few comments inline below. Hope you don't think
-> > I'm being too picky, push back if so. I really want this functionality, just
-> > want to make sure I can maintain it going forward.
-> 
-> Thanks for the review, Jeremy. I've attached a V2 patchset with the
-> changes below squashed in...
+--000000000000b2b8cf0588a191f9
+Content-Type: text/plain; charset="UTF-8"
 
-A couple of comments left (sorry) - in:
+This patch addresses two problems that we've seen with ZFS / samba users
+for a while.
+1) It's not possible in Windows explorer to disable inheritance. I've
+introduced a new zfsacl parameter "zfsacl:map_dacl_protected" to allow this.
 
-+static int ceph_snap_gmt_convert(struct vfs_handle_struct *handle,
-+                                    const char *name,
-+                                    time_t timestamp,
-+                                    char *_converted_buf,
-+                                    size_t buflen)
+2) If admins remove all special aces (owner@, group@, everyone@), then ZFS
+will automatically append them to the ACL of newly created subdirectories /
+files. In this case, it's just default ZFS inheritance behavior in the
+absence of inheritable special entries. I've introduced a new parameter
+"zfsacl:block_zfs_acl_chmod" to block this behavior. It does so by adding /
+maintaining a hidden empty inheriting everyone@ ACL entry "everyone@
+::fd:allow".
 
-You have:
+I believe they are both necessary to avoid POLA violations for Windows
+admins, but have made them default to off (so that we don't affect existing
+install base). I'm happy to make any changes you suggest.
 
-+       /*
-+        * found snapshot via parent. Append the child path component
-+        * that was trimmed... +1 for path separator.
-+        */
-+       if (strlen(_converted_buf) + 1 + strlen(trimmed) >= buflen) {
-+               return -EINVAL;
-+       }
-+       strncat(_converted_buf, "/", buflen);
-+       strncat(_converted_buf, trimmed, buflen);
+--000000000000b2b8cf0588a191f9
+Content-Type: application/octet-stream; 
+	name="Fix-ACL-behavior-issues-with-vfs_zfsacl.patch"
+Content-Disposition: attachment; 
+	filename="Fix-ACL-behavior-issues-with-vfs_zfsacl.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_jvjw0cy80>
+X-Attachment-Id: f_jvjw0cy80
 
-strncat is potentially dangerous here as it doesn't zero-terminate
-by default if there's no space. I'd be much happier with strlcat instead.
-
-Having said that, and looking at the arithmetic carefully I *think* it's
-safe as you exit on >= buflen. But I had to think
-about it carefully in the review. I don't want
-other people to have to do that :-).
-
-Can you change the comment to be:
-
-+       /*
-+        * found snapshot via parent. Append the child path component
-+        * that was trimmed... +1 for path separator + 1 for null termination.
-+        */
-+       if (strlen(_converted_buf) + 1 + strlen(trimmed) + 1 > buflen) {
-+               return -EINVAL;
-+       }
-
-Just to use the expected idion of '>' rather than the rarer
-'>=' when checking string overruns.
-
-So the result would be:
-
-+       /*
-+        * found snapshot via parent. Append the child path component
-+        * that was trimmed... +1 for path separator + 1 for null termination.
-+        */
-+       if (strlen(_converted_buf) + 1 + strlen(trimmed) + 1 > buflen) {
-+               return -EINVAL;
-+       }
-+       strlcat(_converted_buf, "/", buflen);
-+       strlcat(_converted_buf, trimmed, buflen);
-
-Second comment - in ceph_snap_gmt_opendir() you do:
-
-+       dir = SMB_VFS_NEXT_OPENDIR(handle, conv_smb_fname, mask, attr);
-+       saved_errno = errno;
-+       TALLOC_FREE(conv_smb_fname);
-+       errno = saved_errno;
-+       return dir;
-
-- NB, you're saving errno and restoring over the TALLOC_FREE(conv_smb_fname);
-I think that's the right thing to do (you never know
-if TALLOC_FREE might do a syscall to overwrite errno).
-
-I think you also need to do this in:
-
-ceph_snap_gmt_unlink()
-ceph_snap_gmt_chmod()
-ceph_snap_gmt_chown()
-ceph_snap_gmt_chdir()
-ceph_snap_gmt_ntimes()
-ceph_snap_gmt_readlink()
-ceph_snap_gmt_mknod()
-ceph_snap_gmt_realpath()
-ceph_snap_gmt_mkdir()
-ceph_snap_gmt_rmdir()
-ceph_snap_gmt_chflags()
-ceph_snap_gmt_getxattr()
-ceph_snap_gmt_listxattr()
-ceph_snap_gmt_removexattr()
-ceph_snap_gmt_setxattr()
-ceph_snap_gmt_disk_free()
-ceph_snap_gmt_get_quota()
-
-for consistency.
-
-Sorry for being picky, but I think we're getting there !
-
-Jeremy.
+RnJvbSBjZWZkODZhN2Q0Y2Q1YTlhNzNhNWMwYWU2ZTdlYzg5MDVhOTY3MmEwIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBhd2Fsa2VyIDxhd2Fsa2VyQGl4c3lzdGVtcy5jb20+CkRhdGU6
+IFNhdCwgMTEgTWF5IDIwMTkgMTU6MDA6MTggLTA0MDAKU3ViamVjdDogW1BBVENIXSBGaXggQUNM
+IGJlaGF2aW9yIGlzc3VlcyB3aXRoIHZmc196ZnNhY2wgLSBGaXggaXNzdWUKIHByZXZlbnRpbmcg
+dXNlcnMgZnJvbSBkaXNhYmxpbmcgaW5oZXJpdGFuY2Ugb24gQUNMcyAgIGJ5IGludHJvZHVjaW5n
+IG5ldwogcGFyYW1ldGVyIChtYXBfZGFjbF9wcm90ZWN0ZWQpIHRoYXQgc2V0cyB0aGUgICBkYWNs
+X3Byb3RlY3RlZCBmbGFnIGlmIG5vIEFDRXMKIGluIHRoZSBBQ0wgaGF2ZSBBQ0VfSU5IRVJJVEVE
+X0FDRS4gICBUaGlzIHJlcXVpcmVkIGEgZml4IGluIGxpYnN1bmFjbCB0byBhZGQKIHN1cHBvcnQg
+Zm9yIHRoZSBhZm9yZW1lbnRpb25lZCAgIGFjZS4gLSBBZGQgd29ya2Fyb3VuZCBmb3IgZGVmYXVs
+dCB6ZnMgYWNsCiBpbmhlcml0YW5jZSBiZWhhdmlvci4gSWYgdGhlcmUgICBhcmUgbm8gaW5oZXJp
+dGluZyBBQ0VzIGZvciBvd25lckAsIGdyb3VwQCwKIGV2ZXJ5b25lQCwgdGhlbiB6ZnNfYWNsX2No
+bW9kKCkgICB3aWxsIGJlIGNhbGxlZCwgYW5kIHRoZSBhZm9yZW1lbnRpb25lZCBBQ0VzCiB3aWxs
+IGJlIGFwcGVuZGVkIHRvIHRoZSBBQ0wsICAgd2hpY2ggZ2VuZXJhdGVzIGEgVUkgd2FybmluZyBp
+biB3aW5kb3dzIGFuZAogZnJ1c3RyYXRpb24gZm9yIEFkbWlucyB3aG8gICBoYXZlIGRlY2lkZWQg
+dGhleSBkb24ndCB3YW50IHRob3NlIEFDRXMuCiBQYXJhbWV0ZXIgaXMgKGJsb2NrX3pmc19hY2xf
+Y2htb2QpLgoKLS0tCiBzb3VyY2UzL21vZHVsZXMvdmZzX3pmc2FjbC5jIHwgNDMgKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwogMSBmaWxlIGNoYW5nZWQsIDQzIGlu
+c2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9zb3VyY2UzL21vZHVsZXMvdmZzX3pmc2FjbC5jIGIv
+c291cmNlMy9tb2R1bGVzL3Zmc196ZnNhY2wuYwppbmRleCAyYzVkODJhLi5lNDYxMTU0IDEwMDY0
+NAotLS0gYS9zb3VyY2UzL21vZHVsZXMvdmZzX3pmc2FjbC5jCisrKyBiL3NvdXJjZTMvbW9kdWxl
+cy92ZnNfemZzYWNsLmMKQEAgLTUxLDYgKzUxLDcgQEAgc3RhdGljIE5UU1RBVFVTIHpmc19nZXRf
+bnRfYWNsX2NvbW1vbihzdHJ1Y3QgY29ubmVjdGlvbl9zdHJ1Y3QgKmNvbm4sCiAJU01CX1NUUlVD
+VF9TVEFUIHNidWY7CiAJY29uc3QgU01CX1NUUlVDVF9TVEFUICpwc2J1ZiA9IE5VTEw7CiAJaW50
+IHJldDsKKwlib29sIGluaGVyaXRlZF9pc19wcmVzZW50ID0gRmFsc2U7CiAJYm9vbCBpc19kaXI7
+CiAKIAlpZiAoVkFMSURfU1RBVChzbWJfZm5hbWUtPnN0KSkgewpAQCAtNzAsNiArNzEsNyBAQCBz
+dGF0aWMgTlRTVEFUVVMgemZzX2dldF9udF9hY2xfY29tbW9uKHN0cnVjdCBjb25uZWN0aW9uX3N0
+cnVjdCAqY29ubiwKIAogCS8qIHJlYWQgdGhlIG51bWJlciBvZiBmaWxlIGFjZXMgKi8KIAlpZigo
+bmFjZXMgPSBhY2woc21iX2ZuYW1lLT5iYXNlX25hbWUsIEFDRV9HRVRBQ0xDTlQsIDAsIE5VTEwp
+KSA9PSAtMSkgeworCiAJCWlmKGVycm5vID09IEVOT1NZUykgewogCQkJREVCVUcoOSwgKCJhY2wo
+QUNFX0dFVEFDTENOVCwgJXMpOiBPcGVyYXRpb24gaXMgbm90ICIKIAkJCQkgICJzdXBwb3J0ZWQg
+b24gdGhlIGZpbGVzeXN0ZW0gd2hlcmUgdGhlIGZpbGUgIgpAQCAtMTA0LDYgKzEwNiwxMyBAQCBz
+dGF0aWMgTlRTVEFUVVMgemZzX2dldF9udF9hY2xfY29tbW9uKHN0cnVjdCBjb25uZWN0aW9uX3N0
+cnVjdCAqY29ubiwKIAkJYWNlcHJvcC5hY2VNYXNrICA9ICh1aW50MzJfdCkgYWNlYnVmW2ldLmFf
+YWNjZXNzX21hc2s7CiAJCWFjZXByb3Aud2hvLmlkICAgPSAodWludDMyX3QpIGFjZWJ1ZltpXS5h
+X3dobzsKIAorCQlpZiAoKGFjZXByb3AuYWNlRmxhZ3MgJiBBQ0VfRVZFUllPTkUpICYmCisJCSAg
+ICAobHBfcGFybV9ib29sKGNvbm4tPnBhcmFtcy0+c2VydmljZSwgInpmc2FjbCIsICJibG9ja196
+ZnNfYWNsX2NobW9kIiwgZmFsc2UpKSkgeworCQkJaWYgKCEoYWNlYnVmW2ldLmFfYWNjZXNzX21h
+c2sgJj0gQUNFX0FMTF9QRVJNUykpIHsKKwkJCQljb250aW51ZTsKKwkJCX0KKwkJfQorCiAJCS8q
+CiAJCSAqIFdpbmRvd3MgY2xpZW50cyBleHBlY3QgU1lOQyBvbiBhY2xzIHRvIGNvcnJlY3RseSBh
+bGxvdwogCQkgKiByZW5hbWUsIGNmIGJ1ZyAjNzkwOS4gQnV0IG5vdCBvbiBERU5ZIGFjZSBlbnRy
+aWVzLCBjZiBidWcKQEAgLTExNyw2ICsxMjYsMTEgQEAgc3RhdGljIE5UU1RBVFVTIHpmc19nZXRf
+bnRfYWNsX2NvbW1vbihzdHJ1Y3QgY29ubmVjdGlvbl9zdHJ1Y3QgKmNvbm4sCiAJCQlhY2Vwcm9w
+LmFjZU1hc2sgfD0gU01CX0FDRTRfREVMRVRFX0NISUxEOwogCQl9CiAKKyNpZmRlZiBBQ0VfSU5I
+RVJJVEVEX0FDRQorIAkJaWYoYWNlcHJvcC5hY2VGbGFncyAmIEFDRV9JTkhFUklURURfQUNFKSB7
+CisgCQkJaW5oZXJpdGVkX2lzX3ByZXNlbnQgPSB0cnVlOworIAkJfQorI2VuZGlmCiAJCWlmKGFj
+ZXByb3AuYWNlRmxhZ3MgJiBBQ0VfT1dORVIpIHsKIAkJCWFjZXByb3AuZmxhZ3MgPSBTTUJfQUNF
+NF9JRF9TUEVDSUFMOwogCQkJYWNlcHJvcC53aG8uc3BlY2lhbF9pZCA9IFNNQl9BQ0U0X1dIT19P
+V05FUjsKQEAgLTEzMyw2ICsxNDcsMTMgQEAgc3RhdGljIE5UU1RBVFVTIHpmc19nZXRfbnRfYWNs
+X2NvbW1vbihzdHJ1Y3QgY29ubmVjdGlvbl9zdHJ1Y3QgKmNvbm4sCiAJCQlyZXR1cm4gTlRfU1RB
+VFVTX05PX01FTU9SWTsKIAl9CiAKKyNpZmRlZiBBQ0VfSU5IRVJJVEVEX0FDRQorIAlpZiAoIWlu
+aGVyaXRlZF9pc19wcmVzZW50IAorCSAgICAmJiBscF9wYXJtX2Jvb2woY29ubi0+cGFyYW1zLT5z
+ZXJ2aWNlLCAiemZzYWNsIiwgIm1hcF9kYWNsX3Byb3RlY3RlZCIsIGZhbHNlKSl7CisJCURCR19E
+RUJVRygic2V0dGluZyBkYWNsX3Byb3RlY3RlZCBmbGFnIG9uICVzIFxuIiwgc21iX2ZuYW1lLT5i
+YXNlX25hbWUpOworCQlzbWJhY2w0X3NldF9jb250cm9sZmxhZ3MocGFjbCwgU0VDX0RFU0NfREFD
+TF9QUk9URUNURUR8U0VDX0RFU0NfU0VMRl9SRUxBVElWRSk7CisJfQorI2VuZGlmCiAJKnBwYWNs
+ID0gcGFjbDsKIAlyZXR1cm4gTlRfU1RBVFVTX09LOwogfQpAQCAtMTQxLDYgKzE2MiwyOCBAQCBz
+dGF0aWMgTlRTVEFUVVMgemZzX2dldF9udF9hY2xfY29tbW9uKHN0cnVjdCBjb25uZWN0aW9uX3N0
+cnVjdCAqY29ubiwKIHN0YXRpYyBib29sIHpmc19wcm9jZXNzX3NtYmFjbCh2ZnNfaGFuZGxlX3N0
+cnVjdCAqaGFuZGxlLCBmaWxlc19zdHJ1Y3QgKmZzcCwKIAkJCSAgICAgICBzdHJ1Y3QgU01CNEFD
+TF9UICpzbWJhY2wpCiB7CisKKwlpZiAobHBfcGFybV9ib29sKGhhbmRsZS0+Y29ubi0+cGFyYW1z
+LT5zZXJ2aWNlLCAiemZzYWNsIiwgImJsb2NrX3pmc19hY2xfY2htb2QiLCBmYWxzZSkpIHsKKwkJ
+U01CX0FDRTRQUk9QX1QgaGlkZGVuX2FjZTsKKwkJaWYgKFNfSVNESVIoZnNwLT5mc3BfbmFtZS0+
+c3Quc3RfZXhfbW9kZSkpIHsKKwkJCWhpZGRlbl9hY2UuZmxhZ3MgPSBTTUJfQUNFNF9JRF9TUEVD
+SUFMOworCQkJaGlkZGVuX2FjZS53aG8uaWQgPSBTTUJfQUNFNF9XSE9fRVZFUllPTkU7CisJCQlo
+aWRkZW5fYWNlLmFjZVR5cGUgPSBTTUJfQUNFNF9BQ0NFU1NfQUxMT1dFRF9BQ0VfVFlQRTsKKwkJ
+CWhpZGRlbl9hY2UuYWNlRmxhZ3MgPSAoU01CX0FDRTRfRklMRV9JTkhFUklUX0FDRXxTTUJfQUNF
+NF9ESVJFQ1RPUllfSU5IRVJJVF9BQ0UpOworCQkJaGlkZGVuX2FjZS5hY2VNYXNrID0gMDsKKwkJ
+CURCR19ERUJVRygiemZzYWNsOiBzZXR0aW5nIGVtcHR5IGV2ZXJ5b25lQCBhY2Ugb24gZGlyICAl
+cyBcbiIsIGZzcC0+ZnNwX25hbWUtPmJhc2VfbmFtZSk7CisJCX0gZWxzZSB7CisJCQloaWRkZW5f
+YWNlLmZsYWdzID0gU01CX0FDRTRfSURfU1BFQ0lBTDsKKwkJCWhpZGRlbl9hY2Uud2hvLmlkID0g
+U01CX0FDRTRfV0hPX0VWRVJZT05FOworCQkJaGlkZGVuX2FjZS5hY2VUeXBlID0gU01CX0FDRTRf
+QUNDRVNTX0FMTE9XRURfQUNFX1RZUEU7CisJCQloaWRkZW5fYWNlLmFjZUZsYWdzID0gMDsKKwkJ
+CWhpZGRlbl9hY2UuYWNlTWFzayA9IDA7CisJCQlEQkdfREVCVUcoInpmc2FjbDogc2V0dGluZyBl
+bXB0eSBldmVyeW9uZUAgYWNlIG9uIGZpbGUgICVzIFxuIiwgZnNwLT5mc3BfbmFtZS0+YmFzZV9u
+YW1lKTsKKwkJfQorCisgICAgICAgIAlzbWJfYWRkX2FjZTQoc21iYWNsLCAmaGlkZGVuX2FjZSk7
+CisJfQorCiAJaW50IG5hY2VzID0gc21iX2dldF9uYWNlcyhzbWJhY2wpLCBpOwogCWFjZV90ICph
+Y2VidWY7CiAJc3RydWN0IFNNQjRBQ0VfVCAqc21iYWNlOwotLSAKMS44LjMuMQoK
+--000000000000b2b8cf0588a191f9--
 
