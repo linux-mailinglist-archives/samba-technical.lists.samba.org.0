@@ -2,45 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C4871AE93
-	for <lists+samba-technical@lfdr.de>; Mon, 13 May 2019 02:27:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F7F71AF11
+	for <lists+samba-technical@lfdr.de>; Mon, 13 May 2019 05:10:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=cLZqJt+6QYsoSQ46Ho87V9wZYG6VrMuRlfRpsLY629Y=; b=leEKBGlocB8Yu2Hx86SzOMop3b
-	2ZqFS4MfEiohgboajrhs1hEaWVnQQTvfXSJmyUFOs4emvJtFJFKMoAFIF0qzj38PHNkFJZ/hp0rOX
-	uFKD021d5cYNOlNlMkRoBfs8fEXTUPWCLKKP3HfzI06nbwTciJhu4+857lJoZ9WTnfre2sWjOj4Xm
-	PDDywvePvlIDiVmzpPkYKZSvf2el9kG9UFq6CV+dRd+xPKRmI5WFMzbjICLrKwtQ12e2+uoOsIWnn
-	7D2RiSeszsjs7TGY+GVwEDe1/GDIPInAlqY7bzAGpLeoGuAZLk+0VuawMKur71Z837QWdDPHOXjYj
-	Vp5WRvcA==;
-Received: from localhost ([::1]:45376 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=E6zH3rJpOG2G9q/vDVwaMWN709ZMLluSnHCpIz0x0P4=; b=kpEZEc5y5nqvwOwtqeKOrTj+Xm
+	Ee1XpFKjJ1XkeAvc7DCA92Q2RxfbP2lEhPe22bZGiIip/iaHEcJIzVPjCti0bMVpkdL5kETKgYhD6
+	AaM3yBk38WB+DqBYZkHjyP1dRfSLpG3BczpnpqGrNyQVjgvlX3Z6YOvGkFJWY30kM0fm4j8pUkhss
+	xcUDkZBXH5HvnYjIHgF1z5BSz6fxlr/vkJPBlPzp72prTcRTXjaxbw4no5wxG4BBnikdkTLH2PB2a
+	JQ1jRZngjthV37j9P2AVnYxDbm+V7QDjOmt4zkvDG3To3Jeb+98iuEcYcZYcFb52CLHcUXSFmb4aj
+	oj1XYVKA==;
+Received: from localhost ([::1]:46150 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hPynm-003GIS-7O; Mon, 13 May 2019 00:26:46 +0000
-Received: from ozlabs.org ([203.11.71.1]:35073) 
+	id 1hQ1L6-003GV0-3W; Mon, 13 May 2019 03:09:20 +0000
+Received: from mail-oi1-x231.google.com ([2607:f8b0:4864:20::231]:40400) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hPynh-003GIL-G0
- for samba-technical@lists.samba.org; Mon, 13 May 2019 00:26:44 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 452M7S4Sr4z9s3q;
- Mon, 13 May 2019 10:26:28 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1557707189; bh=NP9oy1Inw6NNLPhuVy+NDCporLAX7do2yYAsW2BIrKo=;
- h=Date:From:To:Subject:From;
- b=TGfkIh/xfIqUK3a2oIprILHchcTvrcl5ZlKM4FNFa2RYB0NXFbBfjz8BkX+achaYw
- zVlwG3d/vLFxCBA64lUcX2sLoLSTc8eHGoEsIjc5dYyuiju1mkWdBHlaSo3qvLgwL2
- 0VLmWoOc+zH27W8LkvYa1es/S3VC+lSUNCNZIkXIOxBpOgjHddlEe4/96PY8CHs1Sz
- 0wy/h578aP6M9oVcP8uEb1X2VU3loycSVRPOo5yimtFuLKK3jg9JL4BpQdgiXwibRK
- 8NJvhAn2qHyLJ1TBiVqyf/d/HYv+5oSLdQ7i1G/CgYgGLbT8t365xRXvdq38uJKLGl
- IRqxmhi//3jjA==
-Date: Mon, 13 May 2019 10:26:27 +1000
-To: Samba Technical <samba-technical@lists.samba.org>
-Subject: PATCH: More CTDB test fixes (bug #13924)
-Message-ID: <20190513102627.299b1c0e@martins.ozlabs.org>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+ (Exim) id 1hQ1L1-003GUt-JI
+ for samba-technical@lists.samba.org; Mon, 13 May 2019 03:09:18 +0000
+Received: by mail-oi1-x231.google.com with SMTP id r136so8238403oie.7
+ for <samba-technical@lists.samba.org>; Sun, 12 May 2019 20:09:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=E6zH3rJpOG2G9q/vDVwaMWN709ZMLluSnHCpIz0x0P4=;
+ b=hs/+/wFimgPi29+s92M6trZ94IUPx3svsEhqiBZzMqUL4S4XeBNQ632ygMi4eapVN7
+ 58b8CZ/H36RnHOdG/FoYCgogzumCm8Ln7zC3LLfSNX4zq6oWUmPSHJB/79GiAZJ9R+J3
+ e3sIfY9iuqpt89TKTAtvkpoFHuozsMWhg7KdvSPg2c8AdJr9AqkNd4i2NDvsjhoFcEWG
+ HgKLUOuDfpGPWrCmNl6DnFCeRYS24/RJC+TWoy/HUE1qC6jVMmmVnTX/0UWLFyDq52pV
+ HW2JYltbBh7Ma2FRo8wQ6KKXQXytpTga65c0im2UPLDKJwNR1RDbEsbV4uaI7GuTk0G6
+ l+GA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=E6zH3rJpOG2G9q/vDVwaMWN709ZMLluSnHCpIz0x0P4=;
+ b=F5lL73QWcyYqrglxoUl8DinSW1jJsLt3DBr05aRVLS0mJkBFx1/k1pIzcC4UO4GAO7
+ 2Q08lvP82Z6qJLKEsXzCOCkEkPEDFhD/V3jJSIFgUJiAJthAvFNbMIpTfSYzvm8shQ+l
+ xpTNkj/4k6gMRM/brhFl/8ukAH0dMdZTjNYuTUXIdHbOYnzpfhsshoPafKTE+6QFfNs4
+ i22YTFF8iYQ5NEzWUjpiN689soLVBtx5JlxYDZdP/afNKXFbOCRMdW5w3RYm7fNec6Ha
+ UNYY2caSh0T8FGwjQEJtK/Fo7ICu5ZgnhZM/wAledxTwQzvgv+as76AYueu4N37uzJ4Z
+ akAg==
+X-Gm-Message-State: APjAAAVS8cmpxeAPUHYR7tPrMDntedyDVcF1Md+R1FLawnLiYuxywFmv
+ v8U/yCOffg1EmEWDfKrnidt6WKEB3h6CxfSTk/Nihw==
+X-Google-Smtp-Source: APXvYqwDTpw8/u/Kllz79cgsFE1feIk0D9xCMmv3br6IdIsJ47n1VVSkXsnBZ47BCQzx+cDLUpvbk8anWzwM6XFjflQ=
+X-Received: by 2002:aca:4781:: with SMTP id u123mr8304392oia.31.1557716952869; 
+ Sun, 12 May 2019 20:09:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="MP_/tnMSBkZnpFZQyDd5nKRAWm5"
+References: <20190513102627.299b1c0e@martins.ozlabs.org>
+In-Reply-To: <20190513102627.299b1c0e@martins.ozlabs.org>
+Date: Mon, 13 May 2019 13:09:01 +1000
+Message-ID: <CAJ+X7mRBSahEWmhcoP4HzrCDkXWz=1SNA=Nf6ONt4PV9rBTgVg@mail.gmail.com>
+Subject: Re: PATCH: More CTDB test fixes (bug #13924)
+To: Martin Schwenke <martin@meltin.net>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -54,88 +67,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
+From: Amitay Isaacs via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Amitay Isaacs <amitay@gmail.com>
+Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---MP_/tnMSBkZnpFZQyDd5nKRAWm5
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+On Mon, May 13, 2019 at 10:28 AM Martin Schwenke via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> A couple more CTDB test fixes.
+>
+> Please review and maybe push...
+>
+> peace & happiness,
+> martin
 
-A couple more CTDB test fixes.
+Pushed to autobuild.
 
-Please review and maybe push...
-
-peace & happiness,
-martin
-
---MP_/tnMSBkZnpFZQyDd5nKRAWm5
-Content-Type: text/x-patch
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename=BZ13924-even-more.patch
-
-From f5ee663b153ee84dc50b7bc7592cad98cfd96414 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Fri, 10 May 2019 19:22:16 +1000
-Subject: [PATCH 1/2] ctdb-tests: Actually restart if cluster doesn't become
- healthy
-
-BUG: https://bugzilla.samba.org/show_bug.cgi?id=13924
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/tests/scripts/integration.bash | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/ctdb/tests/scripts/integration.bash b/ctdb/tests/scripts/integration.bash
-index ce5bd576b24..32a729d0249 100644
---- a/ctdb/tests/scripts/integration.bash
-+++ b/ctdb/tests/scripts/integration.bash
-@@ -520,6 +520,7 @@ ctdb_init ()
- {
-     local i
-     for i in $(seq 1 5) ; do
-+	ctdb_stop_all >/dev/null 2>&1 || :
- 	ctdb_start_all || {
- 	    echo "Start failed.  Trying again in a few seconds..."
- 	    sleep_for 5
--- 
-2.20.1
-
-
-From c6026535cefbbc185a2f32f38a2af389b8b1eef1 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sun, 12 May 2019 07:52:13 +1000
-Subject: [PATCH 2/2] ctdb-tests: Remove old socket wrapper state directory
- during setup
-
-Otherwise, when looping tests for a long time, nodes are unable to
-connect to each other.
-
-BUG: https://bugzilla.samba.org/show_bug.cgi?id=13924
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/tests/local_daemons.sh | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/ctdb/tests/local_daemons.sh b/ctdb/tests/local_daemons.sh
-index 8fbef1922b9..58a762b426d 100755
---- a/ctdb/tests/local_daemons.sh
-+++ b/ctdb/tests/local_daemons.sh
-@@ -119,6 +119,7 @@ setup_socket_wrapper ()
- 	ln -s "$_socket_wrapper_so" "$_so"
- 
- 	_d="${directory}/sw"
-+	rm -rf "$_d"
- 	mkdir -p "$_d"
- }
- 
--- 
-2.20.1
-
-
---MP_/tnMSBkZnpFZQyDd5nKRAWm5--
+Amitay.
 
