@@ -2,58 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37CDB1D114
-	for <lists+samba-technical@lfdr.de>; Tue, 14 May 2019 23:12:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E2D11E419
+	for <lists+samba-technical@lfdr.de>; Tue, 14 May 2019 23:42:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=5HK6LtklZKGH421gmcApL4yH8ev/jh7IW3djR5lopgw=; b=MDIpVKqlAJY5RSikqiZ3LN38v8
-	B4cmhlh32OqitcK7qxV3oAa48Y7d/F6B/zpvIntalIpoT772bZu5h2z3BFaX6yF3ALDs4ajCzuToi
-	cUfjwc+nStiYpwXb/re6jXORKBVMivRt94g7wWgf4YrRtE4JzA5Ax2TlvZjh8F3Q8gN1RwkGZ1MsD
-	vb/mb/18b8UcLMegI+9ilg3aMGUCt9CPmywwIyRSoid7HvdnvT6A9ZzUdGmwMyQhWvpynkneLdY09
-	5702yKCoZbQWrJgErz9Hbg4L9gnksdQVkTDJZpkRbfRjlsbFlV03sPvPi0+/5hqTPA5AiDlmvrk+i
-	rTsnQjlg==;
-Received: from localhost ([::1]:56986 helo=hr1.samba.org) 
+	bh=5m8suSOXj3rzby4LAxsQcSwGgLVkjYeR9u7Qjs8sKQk=; b=xeWaDfyim3M0bXNcPPszkqBN1v
+	LERczY6jqeiY/MPZV8FYXo/BT9ebG9UO8hhf17O5rbb5xtTFps+Nvy7NgASbsfRlmOzyZSWPEPjQP
+	wcPSE5pXqvicr9Jxuy4vTXql4lE9stOqG+t2Tez7PqT3l3RXLYe7kMv2eGFJVXU6NPMwIRIbnOdYr
+	QHS03b6f0pZzy9uxLxKgCpCtdRdBpuVgIm0nMKi2slTMYauA7ZY7kRPdZzxCMfQGRngsm5a4X9L0c
+	wHBXPqiXhrqYykq6FupvhIu1YUYMis75zE/BxVFkC0a8VJofQ4Dr059BDI7+fEvzvjWMCEjkuF3PM
+	mzdhffrw==;
+Received: from localhost ([::1]:57828 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hQeib-003fDV-89; Tue, 14 May 2019 21:12:13 +0000
-Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:40906) 
+	id 1hQfB1-003fMV-DL; Tue, 14 May 2019 21:41:35 +0000
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:35357) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hQeiW-003fDO-Lx
- for samba-technical@lists.samba.org; Tue, 14 May 2019 21:12:10 +0000
-Received: by mail-lj1-x241.google.com with SMTP id d15so544731ljc.7
- for <samba-technical@lists.samba.org>; Tue, 14 May 2019 14:12:08 -0700 (PDT)
+ (Exim) id 1hQfAx-003fLw-3A
+ for samba-technical@lists.samba.org; Tue, 14 May 2019 21:41:33 +0000
+Received: by mail-lj1-x241.google.com with SMTP id m20so631770lji.2
+ for <samba-technical@lists.samba.org>; Tue, 14 May 2019 14:41:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=5HK6LtklZKGH421gmcApL4yH8ev/jh7IW3djR5lopgw=;
- b=dKwbqJc6C6lhuaCVZTUW26OKn8zL9FapIRRRZ98ruAxPUzpFY65+LkXuSqYRAO/rMR
- wofjKbtpNBpZipTh5qnJ/eH+pZ47J+IyZF4t1oyjXEY95Jm6o1ldXtWmWM0c8wSvHi0E
- 6b0O3DeL5GSFYUUSfs8Kb1142It4qw8DwUNvGhfouTYHQOfdBdVUbNV8e41+lV6yeSLn
- OQSSpRAQC8T1wh1LTw7puOP2vpAcIGu0B5KBMn6omhgAK/DnaXQcKgRYOewMvSZZRGsh
- p+CJj+UAshO4080ixCjUq9PkhcSi8xeUDT5IWyHASMRwyHx6ZXajyZeSqdtcqzc+iAUd
- gwNA==
+ bh=5m8suSOXj3rzby4LAxsQcSwGgLVkjYeR9u7Qjs8sKQk=;
+ b=c6TXiImMg/nQjL/P6h7bIbTERKpUGdYxZxwBURtDusJzfsXpEpr4/6fZP7DoX90W7B
+ 3EbUs92KZc+z7ty0fyBfxdWZZu9h5dc0Nfjwr2nYfYX0Wx1f5uZYyDgQ2IEDxc7Xg5y6
+ A/nz3dgWLg1ARdFYUh/0tgCraZNtf90bA+I+1yXAlaUW0EPfW+zhXpiwU91nul396Noa
+ 7qQXWJfFmRC5367OU7GjG2jUOkBhowtMBQI5d9/KXkFkaTaDhQtq1HJnykRHbOLS5/Tm
+ e93bIIxlm3Tqht5AHvjI4qWrglSR69H3mxvAOB7MeQAFOAZJPs2joxZIT+xXjnSj+LQk
+ XlKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=5HK6LtklZKGH421gmcApL4yH8ev/jh7IW3djR5lopgw=;
- b=XpafRra4KgpP6Gexb3UU87aPKAWPlY/f8XkOo9wOWGf8s/X07V8exIaPQKB6SO4jKI
- zs2nM4RYhE5BfvwhnEdptHPIZxcKllkQxV9XDhQkWGVGry7aI0vrEE81suo7/amqkzCQ
- me5X2Cjk1J9OfG/a/TGzzSoDK0CSc15N1PpygRlCDS9/jxeRzLndxOIpDx1V50Q2ml0D
- vNCBHBJ8k25ttwDaPDazm5cIhsR2LJJSgO4Aj3albuMT0AzvPuTIMS4fzQWEL+OmMaMH
- VjeLfpx6i1YZ4UZ48MiQsqIT1mr9uIxZENw/0x4E6DyFnWbSC6XUGyacN5z97yM85LRZ
- 1Fmg==
-X-Gm-Message-State: APjAAAVWvykTbCL+Er5i/WeY3/kciDx4vlpokANGdZ1/S5Ab6THvmQFM
- GjAYA0WPqe8AIwC07qJy+gfNiz13fON0tywNUA==
-X-Google-Smtp-Source: APXvYqxkuip2D74Iaik0DhKwZgR5cPse/BklawSVOzA4jrvdNT6zJd147/ff+853912d6dH99v3+R082z4X0xe6qF1Y=
-X-Received: by 2002:a2e:96da:: with SMTP id d26mr8743538ljj.9.1557868327733;
- Tue, 14 May 2019 14:12:07 -0700 (PDT)
+ bh=5m8suSOXj3rzby4LAxsQcSwGgLVkjYeR9u7Qjs8sKQk=;
+ b=uXMDQ4V9kQ042MO0OaRHmyU0XTx3AbrkFRRWT8wu33QmqH3+4Je0mn/VrmxDXqic9E
+ WgU+QINFgdN8qKL2OE3MPDvAl4nG+FrQ9/JGjByFRmwV7zlViOUuGloP+/lBSod/rNl3
+ xIGsAMvTQVG4tBmjPtaAACVULb4kyeL3yTt0NMKSpRm56ZnfHJUybmNKlTqYNnMDaGzd
+ UAnJXgALTTQLUMcGtC9TluV79RSTYb0N6mZcKEXyc/9oFTetuuWX8R2VZMFT0kFcX01g
+ LvpB6Ut94QRyGaRexyj8Lel9Yg2eUCGmpV5ukPgEoOYNUjqCO0F2Y2DV/R8/XGVLhFGj
+ wEEA==
+X-Gm-Message-State: APjAAAVCTMMYCPnS87QU7zbytFteDEjn9Dx3GS0hDQoEFS3AgWybsRRO
+ v+RWtRVA8gLWxFhuJIFF2AQDGToEl1bT8/XAeA==
+X-Google-Smtp-Source: APXvYqzJfN5/jEVrICMKNKf1Gbk6t97scfit5Or0E0rGafJU60pSgkm96WWXDbFmc/eogZh3Ay8RlJQmxCehuE6fsIo=
+X-Received: by 2002:a2e:994:: with SMTP id 142mr10090225ljj.192.1557870090361; 
+ Tue, 14 May 2019 14:41:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <1557806489-11272-1-git-send-email-longli@linuxonhyperv.com>
-In-Reply-To: <1557806489-11272-1-git-send-email-longli@linuxonhyperv.com>
-Date: Tue, 14 May 2019 14:11:56 -0700
-Message-ID: <CAKywueTP17C6khnDauXYOfs9CG35bvZq8pQeKzrMJvSBE=sPfg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] cifs:smbd When reconnecting to server, call
- smbd_destroy() after all MIDs have been called
+ <1557806489-11272-2-git-send-email-longli@linuxonhyperv.com>
+In-Reply-To: <1557806489-11272-2-git-send-email-longli@linuxonhyperv.com>
+Date: Tue, 14 May 2019 14:41:18 -0700
+Message-ID: <CAKywueSKyttaG8h_OrFE-ZCvDy_QCRQkdKQmW7m2wtrJ+fsT6Q@mail.gmail.com>
+Subject: Re: [PATCH 2/2] cifs:smbd Use the correct DMA direction when sending
+ data
 To: Long Li <longli@microsoft.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -83,93 +84,59 @@ xonhyperv.com>:
 >
 > From: Long Li <longli@microsoft.com>
 >
-> commit 214bab448476 ("cifs: Call MID callback before destroying transport=
-")
-> assumes that the MID callback should not take srv_mutex, this may not alw=
-ays
-> be true. SMB Direct requires the MID callback completed before calling
-> transport so all pending memory registration can be freed. So restore the
-> orignal calling sequence so TCP transport will use the same code, but mov=
-ing
-> smbd_destroy() after all MID has been called.
+> When sending data, use the DMA_TO_DEVICE to map buffers. Also log the num=
+ber
+> of requests in a compounding request from upper layer.
 >
-> fixes: 214bab448476 ("cifs: Call MID callback before destroying transport=
-")
 > Signed-off-by: Long Li <longli@microsoft.com>
 > ---
->  fs/cifs/connect.c | 37 ++++++++++++++++++++-----------------
->  1 file changed, 20 insertions(+), 17 deletions(-)
+>  fs/cifs/smbdirect.c | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
 >
-> diff --git a/fs/cifs/connect.c b/fs/cifs/connect.c
-> index 084756cfdaee..0b3ac8b76d18 100644
-> --- a/fs/cifs/connect.c
-> +++ b/fs/cifs/connect.c
-> @@ -528,6 +528,21 @@ cifs_reconnect(struct TCP_Server_Info *server)
->         /* do not want to be sending data on a socket we are freeing */
->         cifs_dbg(FYI, "%s: tearing down socket\n", __func__);
->         mutex_lock(&server->srv_mutex);
-> +       if (server->ssocket) {
-> +               cifs_dbg(FYI, "State: 0x%x Flags: 0x%lx\n",
-> +                        server->ssocket->state, server->ssocket->flags);
-> +               kernel_sock_shutdown(server->ssocket, SHUT_WR);
-> +               cifs_dbg(FYI, "Post shutdown state: 0x%x Flags: 0x%lx\n",
-> +                        server->ssocket->state, server->ssocket->flags);
-> +               sock_release(server->ssocket);
-> +               server->ssocket =3D NULL;
-> +       }
-> +       server->sequence_number =3D 0;
-> +       server->session_estab =3D false;
-> +       kfree(server->session_key.response);
-> +       server->session_key.response =3D NULL;
-> +       server->session_key.len =3D 0;
-> +       server->lstrp =3D jiffies;
->
->         /* mark submitted MIDs for retry and issue callback */
->         INIT_LIST_HEAD(&retry_list);
-> @@ -540,6 +555,7 @@ cifs_reconnect(struct TCP_Server_Info *server)
->                 list_move(&mid_entry->qhead, &retry_list);
->         }
->         spin_unlock(&GlobalMid_Lock);
-> +       mutex_unlock(&server->srv_mutex);
->
->         cifs_dbg(FYI, "%s: issuing mid callbacks\n", __func__);
->         list_for_each_safe(tmp, tmp2, &retry_list) {
-> @@ -548,24 +564,11 @@ cifs_reconnect(struct TCP_Server_Info *server)
->                 mid_entry->callback(mid_entry);
+> diff --git a/fs/cifs/smbdirect.c b/fs/cifs/smbdirect.c
+> index 251ef1223206..caac37b1de8c 100644
+> --- a/fs/cifs/smbdirect.c
+> +++ b/fs/cifs/smbdirect.c
+> @@ -903,7 +903,7 @@ static int smbd_create_header(struct smbd_connection =
+*info,
+>         request->sge[0].addr =3D ib_dma_map_single(info->id->device,
+>                                                  (void *)packet,
+>                                                  header_length,
+> -                                                DMA_BIDIRECTIONAL);
+> +                                                DMA_TO_DEVICE);
+>         if (ib_dma_mapping_error(info->id->device, request->sge[0].addr))=
+ {
+>                 mempool_free(request, info->request_mempool);
+>                 rc =3D -EIO;
+> @@ -1005,7 +1005,7 @@ static int smbd_post_send_sgl(struct smbd_connectio=
+n *info,
+>         for_each_sg(sgl, sg, num_sgs, i) {
+>                 request->sge[i+1].addr =3D
+>                         ib_dma_map_page(info->id->device, sg_page(sg),
+> -                              sg->offset, sg->length, DMA_BIDIRECTIONAL)=
+;
+> +                              sg->offset, sg->length, DMA_TO_DEVICE);
+>                 if (ib_dma_mapping_error(
+>                                 info->id->device, request->sge[i+1].addr)=
+) {
+>                         rc =3D -EIO;
+> @@ -2110,8 +2110,10 @@ int smbd_send(struct TCP_Server_Info *server,
+>                 goto done;
 >         }
 >
-> -       if (server->ssocket) {
-> -               cifs_dbg(FYI, "State: 0x%x Flags: 0x%lx\n",
-> -                        server->ssocket->state, server->ssocket->flags);
-> -               kernel_sock_shutdown(server->ssocket, SHUT_WR);
-> -               cifs_dbg(FYI, "Post shutdown state: 0x%x Flags: 0x%lx\n",
-> -                        server->ssocket->state, server->ssocket->flags);
-> -               sock_release(server->ssocket);
-> -               server->ssocket =3D NULL;
-> -       } else if (cifs_rdma_enabled(server))
-> +       if (cifs_rdma_enabled(server)) {
-> +               mutex_lock(&server->srv_mutex);
->                 smbd_destroy(server);
-> -       server->sequence_number =3D 0;
-> -       server->session_estab =3D false;
-> -       kfree(server->session_key.response);
-> -       server->session_key.response =3D NULL;
-> -       server->session_key.len =3D 0;
-> -       server->lstrp =3D jiffies;
-> -
-> -       mutex_unlock(&server->srv_mutex);
-> +               mutex_unlock(&server->srv_mutex);
-> +       }
+> -       rqst_idx =3D 0;
+> +       log_write(INFO, "num_rqst=3D%d total length=3D%u\n",
+> +                       num_rqst, remaining_data_length);
 >
->         do {
->                 try_to_freeze();
+> +       rqst_idx =3D 0;
+>  next_rqst:
+>         rqst =3D &rqst_array[rqst_idx];
+>         iov =3D rqst->rq_iov;
 > --
 > 2.17.1
 >
 
-Thanks for quickly fixing it!
-
-Reviewed-by: Pavel Shilovsky <pshilov@microsoft.com>
+Acked-by: Pavel Shilovsky <pshilov@microsoft.com>
 
 --
 Best regards,
