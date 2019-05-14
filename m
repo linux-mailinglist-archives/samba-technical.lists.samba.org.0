@@ -2,57 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA5751CF09
-	for <lists+samba-technical@lfdr.de>; Tue, 14 May 2019 20:26:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 003E11CF6F
+	for <lists+samba-technical@lfdr.de>; Tue, 14 May 2019 20:54:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=I0tAhqW6yUMPOm/LIzASliGwpq26e/Se1d4Qb/MDfZc=; b=vGorOWm2+9NtSmjBPkpJRA/Tpe
-	ajPizfkFSb7OxbYY2ewJDNrwY+tEgQMTjk3ZP+EC31Xri+qHVSkqWgO2vqEmo0UF53ym+2pdTdGOj
-	7HKouwdHfygALpVRjk9nCcWzqSBmTxK9i679EyrAp4vAHHfA+/Jh5mcq8xzjxUvdFVrCpqa7Ub2NC
-	jIfjmfkEEXqoTGtFowSe9uR2aOqZsLS4uJOVAnhA6gBs9UtNOqa7PF7ZkwuQTmKvk4ZBcYkC3DV1g
-	ovjI+EZfjGH3bMYssIqFs7SLwnM43Tm5FM8aC/Tr1ZyV6CXDDvtRLp1vdRbYpi7W9cBiwE0hZzjjv
-	F06zbYJA==;
-Received: from localhost ([::1]:39740 helo=hr1.samba.org) 
+	bh=6XITyiAwQAKA/fH0D5g+K8KSPnbM/a3UgeRiyo1wslM=; b=2Yzl2AZz/yCNBhhBs0dj/2Ya8K
+	H8QAmEf7pKECtVNJyVzYeDmU2G5LPcAbCdqhPjbT7I0B06o1ddgJhvET+50/gu8qpIMFPNS3zSW4O
+	trUz8Ht6VvyMKgtstGZgtlisHYh14gplRhw/Hseh2NuOsTN+DvC0AKyryBj4euBSfrzgumsz/kz6W
+	84DTzG1otP+9ei+rC0c0+IXu7f9MlOvcM2ej4i/lBYlNcwejfbt9ms0EeRAme02q0I8lOsJ1weDri
+	II9y+xnF14nC8LOJajonlnWB3+u+VcvR6PC2DpiBLGZB283nvbjsWTK5LwSCv2ktNS8lacmz3xQ4E
+	p0dMcxag==;
+Received: from localhost ([::1]:42962 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hQc7P-003clf-Mc; Tue, 14 May 2019 18:25:39 +0000
-Received: from mx0b-002c1b01.pphosted.com ([148.163.155.12]:40918) 
+	id 1hQcYf-003dCn-1J; Tue, 14 May 2019 18:53:49 +0000
+Received: from mx0a-002c1b01.pphosted.com ([148.163.151.68]:60024) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hQc7K-003clY-Jx
- for samba-technical@lists.samba.org; Tue, 14 May 2019 18:25:37 +0000
-Received: from pps.filterd (m0127842.ppops.net [127.0.0.1])
- by mx0b-002c1b01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4EHeHHh013741
- for <samba-technical@lists.samba.org>; Tue, 14 May 2019 10:52:27 -0700
+ (Exim) id 1hQcYZ-003dCg-QA
+ for samba-technical@lists.samba.org; Tue, 14 May 2019 18:53:46 +0000
+Received: from pps.filterd (m0127840.ppops.net [127.0.0.1])
+ by mx0a-002c1b01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x4EIAjno016220
+ for <samba-technical@lists.samba.org>; Tue, 14 May 2019 11:26:09 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com;
  h=from : to : subject
- : date : message-id : content-type : mime-version; s=proofpoint20171006;
- bh=He8y4l4sboxF146YJs1ECC32zO/ifWnJ/GT+RwXwNqs=;
- b=ceaMk29/nl/huJNHkzy8g0XN7tWCYmV7nG5AnkCyWXi8h9vIY/sWRmRV2+ABBpYHO5C/
- uJl3T4TCPRWdgVH/HP6ZS50DVIspzp7Qqgz+3i9AiaWQwTRwjIn8OhcqJpPB7MAcepnz
- msmuoA0nKaF8vcAwvG9gx8O+C1IbKGVaNGwGIUIocGdrdPoiadWDQgi69EJ4Iil5H+no
- d8/8Y++wvprA/1G2su6AglwguyYMFReInjPZNtFCpU27twwmjfWUlPnEgMtXLKqdPxuY
- OagYV8Yw3zaXiuSmntzUmoTurKXW2jftFNEQvQBCXQswaM9a+a8mBoVquNLfVNE0MD+1 iw== 
+ : date : message-id : references : in-reply-to : content-type :
+ mime-version; s=proofpoint20171006;
+ bh=kVjPVtbLAyqJTGkXK6qrR1fzPZmHGrQczpKlQSTjRqU=;
+ b=ZRrN2R2YupeIPlUmRBfelcObZEBXl1lbKgJH2CJ3w5kAACnVWTZRpvQNFSRPRmYWaF3V
+ btoksGjoI05oBXyibLOd7PnlzlHOXJyGoBl7j7FBkm/Op87UTaFoyfWgKPViZ/zJ7MdO
+ ttLR5QaeYI97mSDFaOnLPmqDBYYlaLy+QhTvQ23Bg3+g6fduqtM7RGFyEL25sUiOGbYH
+ nOAgP8HNwULGy+UyIRl7JVSvRKOoxWrj1iX5Oio9AsrrWzRaNtlph7bDIFbzJkJpTixh
+ Wa9iVerOrn9RXxNNHJFG0riAE0lg3YJjSTN70koicLqyELB5BzFxK8BB80IKbO1v3QxO rg== 
 Received: from nam03-dm3-obe.outbound.protection.outlook.com
- (mail-dm3nam03lp2058.outbound.protection.outlook.com [104.47.41.58])
- by mx0b-002c1b01.pphosted.com with ESMTP id 2sdwqe51h6-1
+ (mail-dm3nam03lp2057.outbound.protection.outlook.com [104.47.41.57])
+ by mx0a-002c1b01.pphosted.com with ESMTP id 2sfc9ga9yt-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
- for <samba-technical@lists.samba.org>; Tue, 14 May 2019 10:52:27 -0700
+ for <samba-technical@lists.samba.org>; Tue, 14 May 2019 11:26:09 -0700
 Received: from MW2PR02MB3722.namprd02.prod.outlook.com (52.132.177.31) by
- MW2PR02MB3852.namprd02.prod.outlook.com (52.132.178.17) with Microsoft SMTP
+ MW2PR02MB3804.namprd02.prod.outlook.com (52.132.177.157) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.1900.16; Tue, 14 May 2019 17:52:25 +0000
+ 15.20.1878.25; Tue, 14 May 2019 18:26:07 +0000
 Received: from MW2PR02MB3722.namprd02.prod.outlook.com
  ([fe80::ed70:69b9:b696:9bf4]) by MW2PR02MB3722.namprd02.prod.outlook.com
  ([fe80::ed70:69b9:b696:9bf4%3]) with mapi id 15.20.1878.024; Tue, 14 May 2019
- 17:52:25 +0000
+ 18:26:07 +0000
 To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Subject: [PATCH] s3:loadparm: Ensure to truncate FS Volume Label at multibyte
- boundary
+Subject: Re: [PATCH] s3:loadparm: Ensure to truncate FS Volume Label at
+ multibyte boundary
 Thread-Topic: [PATCH] s3:loadparm: Ensure to truncate FS Volume Label at
  multibyte boundary
-Thread-Index: AQHVCn3JZC4KMmd11U+fGF37tnpepA==
-Date: Tue, 14 May 2019 17:52:25 +0000
-Message-ID: <B15C9E07-0E0B-49CD-BDD8-0CD236C4F777@nutanix.com>
+Thread-Index: AQHVCn3JZC4KMmd11U+fGF37tnpepKZqeqgA
+Date: Tue, 14 May 2019 18:26:07 +0000
+Message-ID: <C15B0D71-E5FD-4071-8FCC-E63EBFC3003E@nutanix.com>
+References: <B15C9E07-0E0B-49CD-BDD8-0CD236C4F777@nutanix.com>
+In-Reply-To: <B15C9E07-0E0B-49CD-BDD8-0CD236C4F777@nutanix.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: yes
@@ -60,21 +63,22 @@ X-MS-TNEF-Correlator:
 user-agent: Microsoft-MacOutlook/10.10.2.180910
 x-originating-ip: [192.146.154.3]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: a09b943c-1b41-4318-82fe-08d6d894ec87
-x-ms-traffictypediagnostic: MW2PR02MB3852:
+x-ms-office365-filtering-correlation-id: 0a961e8c-8232-4ae5-91f5-08d6d899a1f1
+x-ms-traffictypediagnostic: MW2PR02MB3804:
+x-ms-exchange-purlcount: 1
 x-proofpoint-crosstenant: true
-x-ms-oob-tlc-oobclassifiers: OLM:7219;
+x-ms-oob-tlc-oobclassifiers: OLM:4502;
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: 7kBlp9uD4HMEUiqp48ndoItJGTPLsVQbntZpuwbbbmQlGg0lDrUS36p5gt6N9nUmqnOy6IFpnJ9TxUjHr71JFXTPnWOaYqlMK9sCKX7SW5g0QDsU4L/vPoNExmRX1wCwygCjLdWafU2SujFSpDNqR6FYyWSatKqQYF58JL496vc442D30mQn7p/6TCK+Q2+REUw0d6lje0BJpmpkUkczaB1BGmejNZio+K2rEApCiQven/gGfLkEE4bc+s2WHFj9NAITIzUDGrzfJl7hb4ACs9h1CUXG/4xkucsV87THfWomiul3Tow2DhzY5HJxJFvAwKCsg3h/DLOkr26y2kque+7ULZ5gTvodHt1EPrFcx/YU8qn9MDCzKPX1c4p68F7d0lytjsRPWYXqhDulDuz1yIko3Awwyrg9Mo+4QAQL2Q8=
+x-microsoft-antispam-message-info: uW2f9LN/v0sRf8sjUnGOAEMswxFm1mKrYGGDYZJSM/xBj/f8pdoBzw6BVaKN7sGT0tCzJqt1XSJkgxTJGRE6auvjBxC6UDHO4+o2OGcsU9uao8VDbxfzGzf7TkjnmrROkuxWoHMv7kQFJiGjhX+nxh850q7YOA+nsUDHkkSDBx/Ihj1FhVCZ4w3Srd/yzqDuyDLgJLq8bN4A70cAzhzPqZZwcjL+deLyMxaJx9GY2gWCc1LbfXwsLKLVlrVkmXun8aN7vCv3j+azmOZrZ5XY0mZzgIWAhzTTaknRoUE2vrI+XSDvEipIcS9PXbmYopoj9j8CnxNQzrU3Uvj6P7jKF09/QOPnoyTFMW7ZU528CE9/cvtDpr7rVukMlhFHcQA59JPJjQZUtffdzBcOyEvjMXCo5PPuTYIhRogqCWrRWtM=
 Content-Type: multipart/mixed;
- boundary="_002_B15C9E070E0B49CDBDD80CD236C4F777nutanixcom_"
+ boundary="_002_C15B0D71E5FD40718FCCE63EBFC3003Enutanixcom_"
 MIME-Version: 1.0
 X-OriginatorOrg: nutanix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a09b943c-1b41-4318-82fe-08d6d894ec87
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0a961e8c-8232-4ae5-91f5-08d6d899a1f1
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: bb047546-786f-4de1-bd75-24e5b6f79043
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW2PR02MB3852
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW2PR02MB3804
 X-Proofpoint-Spam-Reason: safe
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
@@ -94,39 +98,62 @@ Reply-To: Shyam Rathi <shyam.rathi@nutanix.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---_002_B15C9E070E0B49CDBDD80CD236C4F777nutanixcom_
+--_002_C15B0D71E5FD40718FCCE63EBFC3003Enutanixcom_
 Content-Type: text/plain; charset="utf-8"
-Content-ID: <1518BF087CA85F42957DBEDE37A5A355@namprd02.prod.outlook.com>
+Content-ID: <7802D91A3702254ABB6E8BEC37B28697@namprd02.prod.outlook.com>
 Content-Transfer-Encoding: base64
 
-Rm9yIEZTX1ZPTFVNRV9JTkZPL0ZTX0lORk8gb3BlcmF0aW9uLCBhIG1heGltdW0gb2YgMzIgY2hh
-cmFjdGVycyBhcmUNCnNlbnQgYmFjay4gSG93ZXZlciwgc2luY2UgU2FtYmEgY2hvcHMgb2ZmIGFu
-eSBzaGFyZSBuYW1lIHdpdGggPjMyDQpieXRlcyBhdCAzMiwgaXQgaXMgcG9zc2libGUgdGhhdCBh
-IG11bHRpLWJ5dGUgc2hhcmUgbmFtZSBjYW4gZ2V0IGNob3BwZWQNCm9mZiBiZXR3ZWVuIGEgZnVs
-bCBjaGFyYWN0ZXIuIFRoaXMgY2F1c2VzIHRoZSBzdHJpbmcgZGVjb2RpbmcgZm9yIHVuaWNvZGUN
-CmZhaWx1cmUgd2hpY2ggc2VuZHMgYmFjayBOVF9TVEFUVVNfSUxMRUdBTF9DSEFSQUNURVIgKEVJ
-TFNFUSkgdG8gdGhlIGNsaWVudA0KYXBwbGljYXRpb25zLg0KDQpPbiBXaW5kb3dzLCBOb3RlcGFk
-IGRvZXNuJ3QgbGlrZSBpdCwgYW5kIHJlZnVzZXMgdG8gb3BlbiBhIGZpbGUgaW4gdGhpcw0KY2Fz
-ZSBhbmQgZmFpbHMgd2l0aCB0aGUgZm9sbG93aW5nIGVycm9yOg0KDQogIEludmFsaWQgY2hhcmFj
-dGVyLiBGb3IgbXVsdGlieXRlIGNoYXJhY3RlciBzZXRzLCBvbmx5IHRoZSBsZWFkaW5nIGJ5dGUg
-aXMNCiAgaW5jbHVkZWQgd2l0aG91dCB0aGUgdHJhaWxpbmcgYnl0ZS4gRm9yIFVuaWNvZGUgY2hh
-cmFjdGVyIHNldHMsIGluY2x1ZGUNCiAgdGhlIGNoYXJhY3RlcnMgMHhGRkZGIGFuZCAweEZGRkUu
-DQoNClByb3Bvc2VkIGZpeDoNCi0gRmluZCB0aGUgbGFzdCBzdGFydGluZyBwb2ludCBvZiBhIG11
-bHRpYnl0ZSBjb2RlcG9pbnQgaWYgdGhlIGNoYXJhY3Rlcg0KICBhdCAzMm5kIGJ5dGUgaXMgYSBz
-dWJzZXF1ZW50IGJ5dGUgb2YgYSBNQiBjb2RlcG9pbnQuDQoNClJldmlld2VkLWJ5OiBIZW1hbnRo
-IFRodW1tYWxhIDxoZW1hbnRoLnRodW1tYWxhQG51dGFuaXguY29tPg0KU2lnbmVkLW9mZi1ieTog
-U2h5YW1zdW5kZXIgUmF0aGkgPHNoeWFtLnJhdGhpQG51dGFuaXguY29tPg0KDQoNClJlZ2FyZHMs
-DQoNCi1TaHlhbXN1bmRlciBSYXRoaSAoc2h5YW0ucmF0aGlAbnV0YW5peC5jb20pDQoNCg==
+aHR0cHM6Ly9idWd6aWxsYS5zYW1iYS5vcmcvc2hvd19idWcuY2dpP2lkPTEzOTQ3DQoNCg0KVG8g
+cmVwcm9kdWNlLCBjcmVhdGUgYSBzaGFyZSB3aXRoIGEgbmFtZSB3aGVyZSAzMm5kIGJ5dGUgaXMg
+bm90IHRoZSBmaXJzdCBieXRlIG9mIGEgbXV0bGlieXRlIGNoYXJhY3Rlci4gVXNpbmcgQ0pLIGNo
+YXJhY3RlcnMgKDMgYnl0ZXMgZWFjaCkgaXMgYSBwb3NzaWJsZSBhcHByb2FjaC4gRm9yIGV4YW1w
+bGUsIGNyZWF0aW5nIGEgc2hhcmUgd2l0aCBuYW1lIOyXkOydtOyXkO2UhOyXkOyKpOyCvOygkOyY
+pOyDneyEsSBhbmQgdHJ5aW5nIHRvIG9wZW4gYSB0eHQgZmlsZSBpbiBOb3RlcGFkIGdpdmVzIHRo
+ZSBmb2xsb3dpbmcgZXJyb3I6DQoNCiAgSW52YWxpZCBjaGFyYWN0ZXIuIEZvciBtdWx0aWJ5dGUg
+Y2hhcmFjdGVyIHNldHMsIG9ubHkgdGhlIGxlYWRpbmcgYnl0ZSBpcw0KICBpbmNsdWRlZCB3aXRo
+b3V0IHRoZSB0cmFpbGluZyBieXRlLiBGb3IgVW5pY29kZSBjaGFyYWN0ZXIgc2V0cywgaW5jbHVk
+ZQ0KICB0aGUgY2hhcmFjdGVycyAweEZGRkYgYW5kIDB4RkZGRS4NCg0KTG9va2luZyBhdCB3aXJl
+c2hhcmsgY2FwdHVyZSwgdGhlIGZvbGxvd2luZyBpcyBzZWVuIGFzIHNvdXJjZSBvZiB0aGlzIGlz
+c3VlOg0KDQogIEdldEluZm8gUmVxdWVzdCBGU19JTkZPL0ZpbGVGc1ZvbHVtZUluZm9ybWF0aW9u
+IEZpbGU6IFJhdGhpOVw/Pz8/Pz8/Pz8/Pw0KICBHZXRJbmZvIFJlc3BvbnNlLCBFcnJvcjogU1RB
+VFVTX0lMTEVHQUxfQ0hBUkFDVEVSDQoNClByb3Bvc2VkIHNvbHV0aW9uIGlzIHRvIHRydW5jYXRl
+IHRoZSBsYWJlbCBuYW1lIGF0IHRoZSBlbmQgb2YgYSBtdWx0aWJ5dGUgY2hhcmFjdGVyIGJlZm9y
+ZSB0aGUgMzJuZCBieXRlLg0KDQpQbGVhc2UgcmV2aWV3IGFuZCBzdWdnZXN0IGNoYW5nZXMsIGlt
+cHJvdmVtZW50cyBhbmQgb3RoZXIgYXBwcm9hY2hlcy4NCg0KUmVnYXJkcywNCi1TaHlhbXN1bmRl
+ciBSYXRoaSAobWFpbHRvOnNoeWFtLnJhdGhpQG51dGFuaXguY29tKQ0KDQoNCkZyb206IFNoeWFt
+IFJhdGhpIDxzaHlhbS5yYXRoaUBudXRhbml4LmNvbT4NCkRhdGU6IFR1ZXNkYXksIE1heSAxNCwg
+MjAxOSBhdCAxMDo1MiBBTQ0KVG86ICJzYW1iYS10ZWNobmljYWxAbGlzdHMuc2FtYmEub3JnIiA8
+c2FtYmEtdGVjaG5pY2FsQGxpc3RzLnNhbWJhLm9yZz4NClN1YmplY3Q6IFtQQVRDSF0gczM6bG9h
+ZHBhcm06IEVuc3VyZSB0byB0cnVuY2F0ZSBGUyBWb2x1bWUgTGFiZWwgYXQgbXVsdGlieXRlIGJv
+dW5kYXJ5DQoNCkZvciBGU19WT0xVTUVfSU5GTy9GU19JTkZPIG9wZXJhdGlvbiwgYSBtYXhpbXVt
+IG9mIDMyIGNoYXJhY3RlcnMgYXJlDQpzZW50IGJhY2suIEhvd2V2ZXIsIHNpbmNlIFNhbWJhIGNo
+b3BzIG9mZiBhbnkgc2hhcmUgbmFtZSB3aXRoID4zMg0KYnl0ZXMgYXQgMzIsIGl0IGlzIHBvc3Np
+YmxlIHRoYXQgYSBtdWx0aS1ieXRlIHNoYXJlIG5hbWUgY2FuIGdldCBjaG9wcGVkDQpvZmYgYmV0
+d2VlbiBhIGZ1bGwgY2hhcmFjdGVyLiBUaGlzIGNhdXNlcyB0aGUgc3RyaW5nIGRlY29kaW5nIGZv
+ciB1bmljb2RlDQpmYWlsdXJlIHdoaWNoIHNlbmRzIGJhY2sgTlRfU1RBVFVTX0lMTEVHQUxfQ0hB
+UkFDVEVSIChFSUxTRVEpIHRvIHRoZSBjbGllbnQNCmFwcGxpY2F0aW9ucy4NCg0KT24gV2luZG93
+cywgTm90ZXBhZCBkb2Vzbid0IGxpa2UgaXQsIGFuZCByZWZ1c2VzIHRvIG9wZW4gYSBmaWxlIGlu
+IHRoaXMNCmNhc2UgYW5kIGZhaWxzIHdpdGggdGhlIGZvbGxvd2luZyBlcnJvcjoNCg0KwqDCoElu
+dmFsaWQgY2hhcmFjdGVyLiBGb3IgbXVsdGlieXRlIGNoYXJhY3RlciBzZXRzLCBvbmx5IHRoZSBs
+ZWFkaW5nIGJ5dGUgaXMNCsKgwqBpbmNsdWRlZCB3aXRob3V0IHRoZSB0cmFpbGluZyBieXRlLiBG
+b3IgVW5pY29kZSBjaGFyYWN0ZXIgc2V0cywgaW5jbHVkZQ0KwqDCoHRoZSBjaGFyYWN0ZXJzIDB4
+RkZGRiBhbmQgMHhGRkZFLg0KDQpQcm9wb3NlZCBmaXg6DQotIEZpbmQgdGhlIGxhc3Qgc3RhcnRp
+bmcgcG9pbnQgb2YgYSBtdWx0aWJ5dGUgY29kZXBvaW50IGlmIHRoZSBjaGFyYWN0ZXINCsKgwqBh
+dCAzMm5kIGJ5dGUgaXMgYSBzdWJzZXF1ZW50IGJ5dGUgb2YgYSBNQiBjb2RlcG9pbnQuDQoNClJl
+dmlld2VkLWJ5OiBIZW1hbnRoIFRodW1tYWxhIDxtYWlsdG86aGVtYW50aC50aHVtbWFsYUBudXRh
+bml4LmNvbT4NClNpZ25lZC1vZmYtYnk6IFNoeWFtc3VuZGVyIFJhdGhpIDxtYWlsdG86c2h5YW0u
+cmF0aGlAbnV0YW5peC5jb20+DQoNCg0KUmVnYXJkcywNCg0KLVNoeWFtc3VuZGVyIFJhdGhpICht
+YWlsdG86c2h5YW0ucmF0aGlAbnV0YW5peC5jb20pDQoNCg0KDQo=
 
---_002_B15C9E070E0B49CDBDD80CD236C4F777nutanixcom_
+--_002_C15B0D71E5FD40718FCCE63EBFC3003Enutanixcom_
 Content-Type: application/octet-stream;
 	name="0001-s3-loadparm-Ensure-to-truncate-FS-Volume-Label-at-mu.patch"
 Content-Description:  0001-s3-loadparm-Ensure-to-truncate-FS-Volume-Label-at-mu.patch
 Content-Disposition: attachment;
 	filename="0001-s3-loadparm-Ensure-to-truncate-FS-Volume-Label-at-mu.patch";
-	size=2636; creation-date="Tue, 14 May 2019 17:52:24 GMT";
-	modification-date="Tue, 14 May 2019 17:52:24 GMT"
-Content-ID: <A20E373319BBE145AA56DC0F722C95BA@namprd02.prod.outlook.com>
+	size=2636; creation-date="Tue, 14 May 2019 18:26:07 GMT";
+	modification-date="Tue, 14 May 2019 18:26:07 GMT"
+Content-ID: <0CEBC9C22D5BB040B23AB16644C6817B@namprd02.prod.outlook.com>
 Content-Transfer-Encoding: base64
 
 RnJvbSA4NWRkM2E0MWE4YmQyNDljNmI1NmI1MGM0ZDVhY2ZjMDkwZmExODQyIE1vbiBTZXAgMTcg
@@ -177,5 +204,5 @@ eXRlIGd1YXJlbnRlZWQgbnVsbCB0ZXJtaW5hdGVkIHN0cmluZy4gKi8KKwlyZXQgPSB0YWxsb2Nf
 c3RybmR1cChjdHgsIGxhYmVsLCBlbmQpOwogCWlmICghcmV0KSB7CiAJCXJldHVybiAiIjsKIAl9
 CQkKLS0gCjEuOS40Cgo=
 
---_002_B15C9E070E0B49CDBDD80CD236C4F777nutanixcom_--
+--_002_C15B0D71E5FD40718FCCE63EBFC3003Enutanixcom_--
 
