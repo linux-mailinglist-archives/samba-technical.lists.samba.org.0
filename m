@@ -2,60 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E8741C1C7
+	by mail.lfdr.de (Postfix) with ESMTPS id 3524C1C1C8
 	for <lists+samba-technical@lfdr.de>; Tue, 14 May 2019 07:24:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=BfkqvrJuXKZ6SSiJ0kA1ARtUQINA7jbQj45kKGTlcJ4=; b=Ly7sqQiDPXFI3MNeAViReH3CpR
-	Y9Ed3XcesUeIC9NHBhQwX1BTAjLix7Edd3fgvRIbNQ7Orrl91q8rUDMe/ZugFabeF/2O1MSE19LW9
-	byGSrD1/xK+XTONADRMqpPbenoucCDOfP0VCBH30JCvxJ6/E3qcfbuaOzZDEmON62Fef/sUlFxeuK
-	km5gmIo/2hDRboob8bMwSWXrJ5HbU0XpTJ5TfgCt0ChA8pqpOwXjsLi84yEadlF+zCXgM68yr/3dj
-	SZDWfL0ihnE6kFz6bN5eji6mYKjYb0MdMB17a5iEFr0AD1DjzEbYcK4fGVKpUlPg/c7UoTv1QUhq8
-	pOabWb0A==;
-Received: from localhost ([::1]:58898 helo=hr1.samba.org) 
+	bh=njhZGLBrex8CU/6Ur8oVF/IdItNE864kB+Kwc8z13Jc=; b=o3mWjTSGg8lVSRAE9xfzZBlpb1
+	cI9VJCDefYsSE1Zjfw8Bv0HkGIRwsWsX0lvE1iz0oGuOlz1gsOd9rEclkiOecW/Ufvop4Iiv7ETMU
+	DDCWm0LJRZQNUDotkwr1SHryadcRorqsLeAPJagLWgdfXJYR4G5zkUcfS9xnf3/DBVIfrcvqpg1C3
+	uwdIH/6KR/dM5MtNsOHTMpuPEVQrx2uRSELS8U7wnqZ778W7CNeybppwwF8XBnq3WXKB4M0ZtUAga
+	6GF0WicWMYXTVEVHztTM47b1LQ0VldaeysnDKeXoRo/Jn9IUUH+DcCspP9a6atwbc94jAggTgL6Md
+	tq7OA9Yg==;
+Received: from localhost ([::1]:58980 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hQPv6-003RLC-JX; Tue, 14 May 2019 05:24:08 +0000
-Received: from mail-oi1-x244.google.com ([2607:f8b0:4864:20::244]:45479) 
+	id 1hQPvJ-003RM2-8Y; Tue, 14 May 2019 05:24:21 +0000
+Received: from mail-oi1-x242.google.com ([2607:f8b0:4864:20::242]:37326) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hQPv2-003RL5-5b
- for samba-technical@lists.samba.org; Tue, 14 May 2019 05:24:06 +0000
-Received: by mail-oi1-x244.google.com with SMTP id w144so5664800oie.12
- for <samba-technical@lists.samba.org>; Mon, 13 May 2019 22:24:03 -0700 (PDT)
+ (Exim) id 1hQPvD-003RLv-OC
+ for samba-technical@lists.samba.org; Tue, 14 May 2019 05:24:17 +0000
+Received: by mail-oi1-x242.google.com with SMTP id f4so3837817oib.4
+ for <samba-technical@lists.samba.org>; Mon, 13 May 2019 22:24:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=BfkqvrJuXKZ6SSiJ0kA1ARtUQINA7jbQj45kKGTlcJ4=;
- b=nvZbrdOeH+8Gkg9ohxEtrozI3s8SMak3XF8NO0QVDbRzlbNHrbI4IYlqan6DCcJBJU
- LBGcdazWQBUlaY537FiJ//IZMw3UpJRvhfuVBrdqkAuzSljDdCazhV04y8UFc/ueL48N
- uxbFwANVRY6UCiU6rMuBz9KjndsyOx48jCW/10QXkZ7Kg9VjyVzLEEs/XfIJAxYvTypz
- YkIMFrOTOmjCje3jyIWLmbuk6B9Jno2V6NzKu00KuGrAxqdsqsYVjKKt3ElLfRNrMBhE
- PiMIXd8AX4ZJEEMv8BryFWqox9M5cxywRJRi5NZhxTEOdXRumA6dq0+Dha8WtXOoOmtu
- h0cA==
+ :cc; bh=njhZGLBrex8CU/6Ur8oVF/IdItNE864kB+Kwc8z13Jc=;
+ b=swvxiy2ZTicfKDRpTR6k0LdX9CiDk9PiRzlmacZZ9yivstojVBSN7iuTubsCMmjoZI
+ j/uxIALlpWoP6qmUvP591vLLr5g9CcEOzuiJ14ZRjn4PLPWRKANqw6oF/z452fXo7IVS
+ B2xLtOoKO/ON7AJWiHeNmzHj+iAM6l8hdLAKnw1TRZVmHuHL3iXTFhE53eMti93fdA7v
+ udpxQtqUjVbBc9BflxdgP9Sqd1mZ5Ab7v+4aB4KmWk5YgiJn8WL67XpeHzhesESFQMLF
+ LcoUndcwEAzcIli/1m0oFkFTYBgRpzGp0cKhxPOmpRYktmXOcx8Cu6zFtm7pq5rkHmiU
+ 5xAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=BfkqvrJuXKZ6SSiJ0kA1ARtUQINA7jbQj45kKGTlcJ4=;
- b=U8J+AFSYtbwfMCK+E8D0pGBx0NKsG9Pn5qb9Rv25YDRg9MTVDekLPpMGxhZ0XWfQDn
- 2XMBrX2SiY+v2CSpY31XG/+2KYoHgN4Dd8sCCVno3wyQBusmXoDh+nCpYtL/CN3OYmeZ
- 2oH3ML+TF42MJPKNV/KinTes1pO67CsvlHM+ukCvtJ9sqXdSJ26C5mVmmTtvued2YdF0
- ExuQPx4OqJRy/NkhV5rw9GJDfl/3DEoy4qSrRz8Jd8Wg5fIA1P69O/PUIlrLcJaw0m+4
- kAQsgbTtYg5v9VKZuxmuxVEDQwRM2FPmgDo8yldrb8TAeL74P1j3aiS6g6CFapUoIhg5
- TrSg==
-X-Gm-Message-State: APjAAAWNP30jdbeGNvv4sWMbG3HBCemZmmKQBireMSUqtrxrCNx9S41g
- TuDa5h3iOjmoUkt7j9tx8CNhKHXHvWcFk+y1MpEJzg==
-X-Google-Smtp-Source: APXvYqwvFtR/35A8X5xmv4GSPnzBdraXojjvDgzd0tnj+tpJ3F0FTqYQ3pzYUP4LQhHMxSXOKR1EOE1/APFOrgSYrsw=
-X-Received: by 2002:aca:bcc1:: with SMTP id m184mr1768922oif.158.1557811440063; 
- Mon, 13 May 2019 22:24:00 -0700 (PDT)
+ bh=njhZGLBrex8CU/6Ur8oVF/IdItNE864kB+Kwc8z13Jc=;
+ b=NBwU1yjgtgVyDMIOPK0FulHNZLnXS9K54tzLLkujR3jo82NKjft4V90X/9BbL27ohe
+ D5Mw2WNuMJ3+Tl1r117WchpIZH4gc1CA+wgWMDo9hu+Vn3N0Q29TfpPQjQzldgznbivC
+ Tyfzy6wWoMvLtW8A25eXz5Rdbk/x3SCn5qQO/CQ96bYaGQRLwkOd+S+hKWLpm8s/+GRC
+ +MLiazAhJawo2oevzKRm1F9D1sVzS+pFLoNcI7eyRUfWsYrUTRmvc2Zb73LaosPxpxfP
+ cKWohOXJHmuTB4cZ3TA/hGJdj+O/g+e0tD+q7ZgfwJ3uQt4OqoiNkD+DSxJuiDdtNDL2
+ Ti7g==
+X-Gm-Message-State: APjAAAW8MjOtC2n1jm2dmdpxlL667JMmQAevDiB0X/yUmKU7YTf6Jfbc
+ IaEToLo87y+i5TxFG6jLFZX+kHDhvaFISaeEhW8wKw==
+X-Google-Smtp-Source: APXvYqw0B/7w1+Yy9/Bb65VdZysgD215zc/0PU402FLee+mw2BDPCofkYvE6ViRJMxtMwHbdbTDHisBfY7leXG6mRy8=
+X-Received: by 2002:aca:4781:: with SMTP id u123mr1817886oia.31.1557811453630; 
+ Mon, 13 May 2019 22:24:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190508113114.2f6ff9f8@martins.ozlabs.org>
- <20190510091943.679a9cf0@martins.ozlabs.org>
- <20190514144352.0cf3beba@martins.ozlabs.org>
- <20190514144604.45acd2eb@martins.ozlabs.org>
-In-Reply-To: <20190514144604.45acd2eb@martins.ozlabs.org>
-Date: Tue, 14 May 2019 15:23:48 +1000
-Message-ID: <CAJ+X7mQrUSAFJGG0R_io_fpRBjLoGwMZy2szFL9622Z+qhQjkA@mail.gmail.com>
-Subject: Re: [PATCH] ctdb-tests: Make reloadips tests more reliable (bug
- #13924)
+References: <20190514144801.2d476fdb@martins.ozlabs.org>
+In-Reply-To: <20190514144801.2d476fdb@martins.ozlabs.org>
+Date: Tue, 14 May 2019 15:24:02 +1000
+Message-ID: <CAJ+X7mTaHshazofyFr7tAFi+t8t9rBWbe61j7deS58wYjT-GXQ@mail.gmail.com>
+Subject: Re: [PATCH] Fix CTDB memory leaks (bug #13943)
 To: Martin Schwenke <martin@meltin.net>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
@@ -77,40 +73,14 @@ Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, May 14, 2019 at 2:46 PM Martin Schwenke via samba-technical
+On Tue, May 14, 2019 at 2:48 PM Martin Schwenke via samba-technical
 <samba-technical@lists.samba.org> wrote:
 >
-> On Tue, 14 May 2019 14:43:52 +1000, Martin Schwenke <martin@meltin.net>
-> wrote:
+> Fix 3 memory leaks in CTDB eventd and recoverd.
 >
-> > On Fri, 10 May 2019 09:19:43 +1000, Martin Schwenke via samba-technical
-> > <samba-technical@lists.samba.org> wrote:
-> >
-> > > On Wed, 8 May 2019 11:31:14 +1000, Martin Schwenke via samba-technical
-> > > <samba-technical@lists.samba.org> wrote:
-> > >
-> > > > The "ctdb reloadips" can fail for a few reasons, including
-> > > > colliding with a takeover run already in progress.  This was a
-> > > > simplifying design decision.
-> > > >
-> > > > The tests try to be careful, but there's a startup edge case where an
-> > > > unexpected takeover run can be triggered, though it has been delayed
-> > > > for a quite a while after startup.
-> > >
-> > > Please hold this for a while.  This is still failing because it isn't
-> > > retrying.
-> > >
-> > > Amitay, this is almost certainly an issue with matching the error
-> > > message, which you queried the other day...
-> >
-> > OK, the testcase changes were correct.  There was a bug in a previous
-> > patch that fixed try_command_on_node().
-> >
-> > Additional patch included here.
-> >
-> > Please review and maybe push...
+> Includes one patch from Amitay already reviewed by me.
 >
-> Sorry, wrong patch.  Correct patch now attached...
+> Please review and maybe push...
 >
 > peace & happiness,
 > martin
