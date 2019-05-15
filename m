@@ -2,38 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id E417A1E5D1
-	for <lists+samba-technical@lfdr.de>; Wed, 15 May 2019 01:52:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6843D1E762
+	for <lists+samba-technical@lfdr.de>; Wed, 15 May 2019 06:17:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=qHY9ligcHhKDpD6rFLv45quydY1BNAF175q3T4mklLA=; b=JJ5L1WknjxG/MuIpXN3f8IRUN9
-	2Cl5zUbQ2R8kWQQ+Hm8Jy8ZfeZyTsh93rPRFXjPZJ5UKYKzUd207qhJ64flV+2Hecis9lOQZ3uryO
-	dk9sxptddXGafy1KXvUmFHNrUvz+jAGEDGxisJ1hKas6+rzlrX2DS4Zbe3yuTNstOohBIYKc9kZL0
-	FkHVIeA7fV3L6U7w3QdTaeymwJb9c9gxFYK2ZZh+mP0LA32CXXtSKO+aaZofzOorv0e5D39uJydCf
-	3dYswd+s7QukqKuiY58mX0JqDBrTdyTqoHfS3miWz94D+7/mILtEY0IoPzgta4BbVjpby5kmzsefd
-	+QxTpV5w==;
-Received: from localhost ([::1]:58804 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=BfF/cEY+63NPFeE0nnGTP5s2FRqzna+7ou7Ez1fHZIc=; b=dK8n15aqUIkZHP5mz/RpZUpfRT
+	0NHmF5E9SeSCh2rrz8XzC8BjskVBeBR4ip029ZC5Ru5u1fQUujSdC7BML76GyFZKZf844sCOdF+/D
+	5RpdRzWZK+XPVQ8x6THfUB1m4Ux1n2zapbr42S19wSNQnbdFnYj+cZLjkHMtGSz5h7EYgc9kuXgzt
+	IfWNW/kNjW14HcENOX2qbERU/JlOW0fbEuKeaGDwIPUXm3Iv+I5Orp5EluPork92kqLp3cBYubBf3
+	Ex7fl/a2DlxK9rg3rCRL5KHYivckg3hMdER86TMWJzJAOe57iWgbNMELTdPZ+b0ZiE3pJZH5HeDUl
+	JVO8pg+w==;
+Received: from localhost ([::1]:60944 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hQhD1-003fbf-0v; Tue, 14 May 2019 23:51:47 +0000
-Received: from mx2.suse.de ([195.135.220.15]:43020 helo=mx1.suse.de) 
+	id 1hQlLB-003gBh-Kc; Wed, 15 May 2019 04:16:29 +0000
+Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:46529) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hQhCw-003fbY-RM
- for samba-technical@lists.samba.org; Tue, 14 May 2019 23:51:44 +0000
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 43DF8AE3C;
- Tue, 14 May 2019 23:51:34 +0000 (UTC)
-Date: Wed, 15 May 2019 01:51:32 +0200
-To: Jeremy Allison <jra@samba.org>
-Subject: Re: [PATCH] Samba: CephFS Snapshots VFS module
-Message-ID: <20190515015132.71466b98@suse.de>
-In-Reply-To: <20190514210030.GE210466@jra4>
-References: <20190329184531.0c78e06b@echidna.suse.de>
- <20190508224740.GA21367@jra4> <20190510151601.798bee61@suse.de>
- <20190510185841.GA54524@jra4> <20190513122738.78b2b566@suse.de>
- <20190514210030.GE210466@jra4>
+ (Exim) id 1hQlL6-003gBZ-Un
+ for samba-technical@lists.samba.org; Wed, 15 May 2019 04:16:27 +0000
+Received: by mail-pg1-x543.google.com with SMTP id t187so645119pgb.13
+ for <samba-technical@lists.samba.org>; Tue, 14 May 2019 21:16:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=BfF/cEY+63NPFeE0nnGTP5s2FRqzna+7ou7Ez1fHZIc=;
+ b=HgZC3RTNLZvlm/5XzxJnHy0w0DoRXtA9hOhW/m7ICcJe6KpAsPYLSDbM/AfdyQIZCJ
+ Zzp7n0ixLTO2jYKlR4aTa/tVxSc+DA9jyjnrJmqzY/6JhcAzthGuy50iS47h1yJmAIWc
+ zJtCMEt1W7jhsXC+Vr41ryqdE9u17c6BDht6vir9NmO7wyneSyri/fo+vVl6VdhyaPSF
+ CCbwAuzkWwcaQUCJf8a8j8vXj2YXGNWaKRbAJhTDIBxB8euBV30+K9y+mHurO2hwJlUH
+ OlmmIIT5rHNLo3Z/k7KecfL3CQnY+czWLYCb/ZB6FZkDryiPUfLEGt7BEsj0tnAdy1N4
+ Bd+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=BfF/cEY+63NPFeE0nnGTP5s2FRqzna+7ou7Ez1fHZIc=;
+ b=XXBzs96eYoIt0k6IuMTLYIeBwLkdvrSqea2ciWVLu34SutTgFPS76pdzBcMjuEvu59
+ bKe1PHiXBQd7bndX/xk7pyFtSjhN68Q7VyfnP7nnkB1M/rBAfYh9eU8Osb/t+3KZjWyr
+ zMvvKBzd/KT77QHRAVanZ6cBkad50NFunvtaJQQvHUg1eD++8oSmX4jMv/raSiyxohtI
+ dnF8USGH9KiYZNEqC/q3huMixZeKagHPL8P7atN2/TGKi9Us2CvqFD7Dvk0oOrURXUle
+ nC+jjBhQYGCtBiLBDQ9SAIFLN1zbSRHM6nRN6Y3wOKEwYf6q2Q8B5K4hTyH25GqCA6wm
+ //Sw==
+X-Gm-Message-State: APjAAAWISi3X89Hact+UNcDiTsOn8YH4Nw/B+CjTkQUd457PANCPJmh6
+ sQWfHp4lzn8QWXfjO/VTlqhgev1PkDdIi29Ehjc=
+X-Google-Smtp-Source: APXvYqy8nPnvB25D5BAaYVI6FfefnZ4fR45Aui9wsDJbBswv7PdAsPryss5lbt8sGLj3Q8NuYCkRq4fPmmMq9yOdyQE=
+X-Received: by 2002:a63:570d:: with SMTP id l13mr42080517pgb.55.1557893777809; 
+ Tue, 14 May 2019 21:16:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <1557806489-11272-1-git-send-email-longli@linuxonhyperv.com>
+ <1557806489-11272-2-git-send-email-longli@linuxonhyperv.com>
+In-Reply-To: <1557806489-11272-2-git-send-email-longli@linuxonhyperv.com>
+Date: Tue, 14 May 2019 23:16:06 -0500
+Message-ID: <CAH2r5ms4vU9PXceAemvzw2mQ1feTaKB_DbUHc72VZ8-Gb+X46A@mail.gmail.com>
+Subject: Re: [PATCH 2/2] cifs:smbd Use the correct DMA direction when sending
+ data
+To: Long Li <longli@microsoft.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -47,20 +69,69 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Disseldorp <ddiss@suse.de>
-Cc: "ceph-devel@vger.kernel.org" <ceph-devel@vger.kernel.org>,
- Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 14 May 2019 14:00:30 -0700, Jeremy Allison wrote:
+merged both patches into cifs-2.6.git for-next
 
-> If you're happy, please push ! Thanks for your patience
-> with the review, sorry it's been a bit of a struggle (but
-> as I said I *really* want this change :-).
+On Mon, May 13, 2019 at 11:02 PM <longli@linuxonhyperv.com> wrote:
+>
+> From: Long Li <longli@microsoft.com>
+>
+> When sending data, use the DMA_TO_DEVICE to map buffers. Also log the number
+> of requests in a compounding request from upper layer.
+>
+> Signed-off-by: Long Li <longli@microsoft.com>
+> ---
+>  fs/cifs/smbdirect.c | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
+>
+> diff --git a/fs/cifs/smbdirect.c b/fs/cifs/smbdirect.c
+> index 251ef1223206..caac37b1de8c 100644
+> --- a/fs/cifs/smbdirect.c
+> +++ b/fs/cifs/smbdirect.c
+> @@ -903,7 +903,7 @@ static int smbd_create_header(struct smbd_connection *info,
+>         request->sge[0].addr = ib_dma_map_single(info->id->device,
+>                                                  (void *)packet,
+>                                                  header_length,
+> -                                                DMA_BIDIRECTIONAL);
+> +                                                DMA_TO_DEVICE);
+>         if (ib_dma_mapping_error(info->id->device, request->sge[0].addr)) {
+>                 mempool_free(request, info->request_mempool);
+>                 rc = -EIO;
+> @@ -1005,7 +1005,7 @@ static int smbd_post_send_sgl(struct smbd_connection *info,
+>         for_each_sg(sgl, sg, num_sgs, i) {
+>                 request->sge[i+1].addr =
+>                         ib_dma_map_page(info->id->device, sg_page(sg),
+> -                              sg->offset, sg->length, DMA_BIDIRECTIONAL);
+> +                              sg->offset, sg->length, DMA_TO_DEVICE);
+>                 if (ib_dma_mapping_error(
+>                                 info->id->device, request->sge[i+1].addr)) {
+>                         rc = -EIO;
+> @@ -2110,8 +2110,10 @@ int smbd_send(struct TCP_Server_Info *server,
+>                 goto done;
+>         }
+>
+> -       rqst_idx = 0;
+> +       log_write(INFO, "num_rqst=%d total length=%u\n",
+> +                       num_rqst, remaining_data_length);
+>
+> +       rqst_idx = 0;
+>  next_rqst:
+>         rqst = &rqst_array[rqst_idx];
+>         iov = rqst->rq_iov;
+> --
+> 2.17.1
+>
 
-Pushed - thanks a lot for your thorough review Jeremy!
 
-Cheers, David
+-- 
+Thanks,
+
+Steve
 
