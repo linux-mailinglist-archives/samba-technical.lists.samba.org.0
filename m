@@ -2,86 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id C80961FC0A
-	for <lists+samba-technical@lfdr.de>; Wed, 15 May 2019 23:03:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ACDB81FC90
+	for <lists+samba-technical@lfdr.de>; Thu, 16 May 2019 00:27:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=2muHTEZwD6Jk7tpKeKKQ96ZNPutU3848vu1Ad5royIo=; b=fwiYNc04oll2Q47UMNzYDBuHTa
-	5bCrBt/6xJMYvdAvbX5AhFmDa8L2ckQvnSBsDtyhUysEp8ky0Z9YX4Qn+U2Q1lbZMDt5Gky1l3Ivq
-	BQ8Uiss+u9rZr+8mtkqdMhyDFRq1suswjteSm1rosWPYLyQChlqttSzCq1lDF26tjBR5QLJ39slh9
-	nRyvDHGORKr9UftwJWzMREo+4PTO5/cJpyul5sfR4YnzdUl86JgXsqAHTl+yMMQosqJyEt1uXJxed
-	8pBA9TQAb9nDYXcSxo+dkVuB+NEG/xUk1ZEH9v8v6avZNeo4FiY0r/kquqSL2kBPxIF9Rn4k0z/79
-	8egLWACw==;
-Received: from localhost ([::1]:35900 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=BI+5XxI12X2lRwb6h4wr8dsiBHIzz/BpYGz/CVy4Mc4=; b=Qtj1Gjk0G4a0nDf64vTZd7vlRz
+	vc0WiMYbEwM85inK4xHcWXr54vc65DxhW97Wl9as9ueKRv1F+ZJM9m3fu1XtOF12GAbhecI7y3LLa
+	s+HNuAmZwNF9dWbtF+JVDMAA9f9IQZLK+6PwInEQTgqZhO48OMzeAUwHr8fKaT1+yxnKCtQQitLGs
+	mWfFfsFbncsHbvgchOyECXvsKuqqd1dZJuwgvGpr5+ewBUKXqZcouOi3u+NIk99w/+dRLUWW/0LWa
+	2Yv6yjNwKC3MgmC+xVXwtE7XqNMlfguJUekr0TM0pGnucZumAoM01rA88kkBZDn87CzhVxsZg36ek
+	FRFuuDpg==;
+Received: from localhost ([::1]:39590 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hR13u-003s8G-Nv; Wed, 15 May 2019 21:03:42 +0000
-Received: from mx0a-002c1b01.pphosted.com ([148.163.151.68]:34114) 
+	id 1hR2M8-003snQ-DI; Wed, 15 May 2019 22:26:36 +0000
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:45120) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hR13p-003s89-87
- for samba-technical@lists.samba.org; Wed, 15 May 2019 21:03:40 +0000
-Received: from pps.filterd (m0127840.ppops.net [127.0.0.1])
- by mx0a-002c1b01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4FKteKV007699; Wed, 15 May 2019 14:03:33 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com;
- h=from : to : cc :
- subject : date : message-id : references : in-reply-to : content-type :
- mime-version; s=proofpoint20171006;
- bh=h4bHsPdy6ehCAcYEJPqtk1lQCVxLSeYnftUy7pgkdX8=;
- b=ZXwENWG4VNgDeUoiXQn+noyKcWMjKPUKSXkm6iVfKDDzgnqzbjVaySxeHyvB/2CtCy3s
- S6REN9RpbB5zr4GF4FH2AGelgDmLzSjnhq+w88tBsMkTbu4cW+/4D78Xy6iZGc3ZmTlQ
- i3uJ1V0/xYwg0px8MUQ5ns2v2yOFNJjAY2MgDZ1Xz6Qgujva8hfMOr3SlChHSY0ZlMfw
- 2iEPRDFXP6WwYCSqEkxjcyyBltxDcEb/qt8jtNQK/qhabA8Lkf20K29E0xfJWGSElCpQ
- SoU9/8IoWP9O775TXdbYENuhLIo6Gs1a7nih7fzE3axDe2tPCJxqDdNorxFyO2W25JJ8 mQ== 
-Received: from nam02-sn1-obe.outbound.protection.outlook.com
- (mail-sn1nam02lp2052.outbound.protection.outlook.com [104.47.36.52])
- by mx0a-002c1b01.pphosted.com with ESMTP id 2sg3j9a7um-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
- Wed, 15 May 2019 14:03:32 -0700
-Received: from SN1PR02MB3727.namprd02.prod.outlook.com (52.132.198.161) by
- SN1PR02MB3758.namprd02.prod.outlook.com (52.132.200.144) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.1900.16; Wed, 15 May 2019 21:03:30 +0000
-Received: from SN1PR02MB3727.namprd02.prod.outlook.com
- ([fe80::412c:7301:d5cc:83b3]) by SN1PR02MB3727.namprd02.prod.outlook.com
- ([fe80::412c:7301:d5cc:83b3%2]) with mapi id 15.20.1878.024; Wed, 15 May 2019
- 21:03:30 +0000
-To: Jeremy Allison <jra@samba.org>
-Subject: Re: [PATCH] s3:loadparm: Ensure to truncate FS Volume Label at
- multibyte boundary
-Thread-Topic: [PATCH] s3:loadparm: Ensure to truncate FS Volume Label at
- multibyte boundary
-Thread-Index: AQHVCn3JZC4KMmd11U+fGF37tnpepKZqeqgAgAIyT4D//4v/gA==
-Date: Wed, 15 May 2019 21:03:30 +0000
-Message-ID: <6A78E0E4-038B-42B9-8858-2A8E39F79584@nutanix.com>
-References: <B15C9E07-0E0B-49CD-BDD8-0CD236C4F777@nutanix.com>
- <C15B0D71-E5FD-4071-8FCC-E63EBFC3003E@nutanix.com>
- <20190515205841.GD253468@jra4>
-In-Reply-To: <20190515205841.GD253468@jra4>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Microsoft-MacOutlook/10.10.2.180910
-x-originating-ip: [192.146.154.3]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 282e2fbc-60f8-47ee-22b0-08d6d978c8de
-x-ms-traffictypediagnostic: SN1PR02MB3758:
-x-ms-exchange-purlcount: 3
-x-proofpoint-crosstenant: true
-x-ms-oob-tlc-oobclassifiers: OLM:3276;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: zvWVD02EQSlJhIEyLpV4iEhOArErqZn3ozpwt7amk4OYpRGFFEXqOK7OmdnWSpvmp0XwPtDWH4FyqFWKAhn3smHA69Zbo0fF+m+WxJYJdz5zugfSPTSVTE8LAqdv1he/7lkRWStsLQCsXuHgci3gCSkBELlKvJv0ebXAig2DZfwyRd2r3U6UnHtg0M8xpGmOXgVpdzzeBs6msawpTsHSkeU6gQeo3T4F0Ao/SOv0wdlvH6D2DY8ATJc4B6MinCsCp9EUIHfPSOlL+trJrvffFKpnGPfKV8+I2Wltz1T7H01YnOiemA1bZHNcb/4GM3rFZ5+bvyDH77S6HWeyfVPWoDULb4w3tCxoZwrf/X+4JJM6FK0HRW7phdibSq/N1wWRciRKCevqYuHjCdqhllEyKUH+372vf4hpHRkYaSJcPV4=
+ (Exim) id 1hR2M3-003snJ-BR
+ for samba-technical@lists.samba.org; Wed, 15 May 2019 22:26:33 +0000
+Received: by mail-lj1-x242.google.com with SMTP id r76so1207743lja.12
+ for <samba-technical@lists.samba.org>; Wed, 15 May 2019 15:26:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=BI+5XxI12X2lRwb6h4wr8dsiBHIzz/BpYGz/CVy4Mc4=;
+ b=kASEZCAmJ6x7vfVCdxHXiPm2z4vZO3NkJuKAjvUA4di/S3kmxI7yJcUadArWTSGKpL
+ flpaOZvsU32pP/7Oupuu67XHJecRHcSY8W+sbK1yM63am8jUQPDBuD9eUhQAUinAZkoO
+ 0ctD9R6ltTVnBaCyZcGERS7/qb08y+XNnSgSR9v7cAQi5VM9uAH3wQ23CkZ0vF2t8uN7
+ e2AeHm7U0VtIm8kbJHlpFpq3m/yr7Zj7A/w3OoAuI8ZhqlI/AoQt9ngJ9v8JZBK5zbEH
+ IP1yJo+yzcp+AqBlXM6uehBDbaaXDeWxGdYS3Gh7U/q2fNR5yHdFO0hmN0snP4NBVZjS
+ KBVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=BI+5XxI12X2lRwb6h4wr8dsiBHIzz/BpYGz/CVy4Mc4=;
+ b=W4IfeMHNC8Da/jUavdavCSW2hbVWPNAIPBfNilTTNuTpECMpKUQ0cVv+6uIVqaciU8
+ 8JO7ywHicdPNsmhi8qENjiOGuAjP3CL5j8N2dGukym5BDLB9HN+ISvYR7XFamoGqbwe1
+ 8xjlB9SpwbHe6XQ7CB5CQ2xhubchBU1Zw01G44Qsq9FEFZUGexc8KdJf7Z8LS2RHDYeV
+ zACd0wxFY/qMnGDJ9GSkwtivYG4Ojzt2diIoEl1hbzMAxiaOfzTlwOES6eA1dvxEB2Yo
+ bk+caVILHTdPCUGYhTiXQ25/ydbRKrC4yHMOrax1urE5UmOuaAn4IrLvF3AYr7Z3HP4W
+ swKw==
+X-Gm-Message-State: APjAAAW7VHSNPI6VVpq6n6JpMf8PTwzL/IXzvr1TM5HAR2Ka+TL67viB
+ 9b1qdomodc3Z/uvw9EAXATmfG6d46QRKYnXq6Q==
+X-Google-Smtp-Source: APXvYqy4NdkTYy5zjAt5CzvxBa9Vv7mWMfLF8QYKz17MP7z6QNLaJDiFFildHcyL0EcxI/paLqlXCK7gCtFfTQHdphI=
+X-Received: by 2002:a2e:994:: with SMTP id 142mr13721967ljj.192.1557959189767; 
+ Wed, 15 May 2019 15:26:29 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: nutanix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 282e2fbc-60f8-47ee-22b0-08d6d978c8de
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: bb047546-786f-4de1-bd75-24e5b6f79043
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN1PR02MB3758
-X-Proofpoint-Spam-Reason: safe
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.23
+References: <1557954545-17831-1-git-send-email-longli@linuxonhyperv.com>
+ <1557954545-17831-2-git-send-email-longli@linuxonhyperv.com>
+In-Reply-To: <1557954545-17831-2-git-send-email-longli@linuxonhyperv.com>
+Date: Wed, 15 May 2019 15:26:18 -0700
+Message-ID: <CAKywueSxXB3av+4qhi07u2VCMmRPxXTiFBHc4kt5gdRQZQTJXQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] cifs: Allocate memory for all iovs in smb2_ioctl
+To: Long Li <longli@microsoft.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -95,47 +70,102 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shyam Rathi via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shyam Rathi <shyam.rathi@nutanix.com>
-Cc: "asn@samba.org" <asn@samba.org>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- "ddiss@samba.org" <ddiss@samba.org>
+From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Shilovsky <piastryyy@gmail.com>
+Cc: Steve French <sfrench@samba.org>, linux-cifs <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ Kernel Mailing List <linux-kernel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-VGhhbmtzIGZvciB0aGUgY2hhbmdlcyBKZXJlbXkuIExvb2tzIEdvb2QgVG8gTWUhDQoNCg0KUmVn
-YXJkcywNCi1TaHlhbQ0KDQpGcm9tOiBKZXJlbXkgQWxsaXNvbiA8anJhQHNhbWJhLm9yZz4NClJl
-cGx5LVRvOiBKZXJlbXkgQWxsaXNvbiA8anJhQHNhbWJhLm9yZz4NCkRhdGU6IFdlZG5lc2RheSwg
-TWF5IDE1LCAyMDE5IGF0IDE6NTggUE0NClRvOiBTaHlhbSBSYXRoaSA8c2h5YW0ucmF0aGlAbnV0
-YW5peC5jb20+DQpDYzogInNhbWJhLXRlY2huaWNhbEBsaXN0cy5zYW1iYS5vcmciIDxzYW1iYS10
-ZWNobmljYWxAbGlzdHMuc2FtYmEub3JnPiwgInNsb3dAc2FtYmEub3JnIiA8c2xvd0BzYW1iYS5v
-cmc+LCAiYXNuQHNhbWJhLm9yZyIgPGFzbkBzYW1iYS5vcmc+LCAiZGRpc3NAc2FtYmEub3JnIiA8
-ZGRpc3NAc2FtYmEub3JnPg0KU3ViamVjdDogUmU6IFtQQVRDSF0gczM6bG9hZHBhcm06IEVuc3Vy
-ZSB0byB0cnVuY2F0ZSBGUyBWb2x1bWUgTGFiZWwgYXQgbXVsdGlieXRlIGJvdW5kYXJ5DQoNCk9u
-IFR1ZSwgTWF5IDE0LCAyMDE5IGF0IDA2OjI2OjA3UE0gKzAwMDAsIFNoeWFtIFJhdGhpIHZpYSBz
-YW1iYS10ZWNobmljYWwgd3JvdGU6DQpodHRwczovL3VybGRlZmVuc2UucHJvb2Zwb2ludC5jb20v
-djIvdXJsP3U9aHR0cHMtM0FfX2J1Z3ppbGxhLnNhbWJhLm9yZ19zaG93LTVGYnVnLmNnaS0zRmlk
-LTNEMTM5NDcmZD1Ed0lEYVEmYz1zODgzR3BVQ09DaEtPSGlvY1l0R2NnJnI9MDF4Y05pWVFKelJz
-UXBvVFJ1eGpHS2JIejg5Y2ZycmNVNzlxb3hkb2cyayZtPVNlSzdmNHl4NFJrM3FYOUtuc2dWeVRM
-cElqSGhNeVVXNzBqTWZLYTNiSHMmcz1Na2NZUmpLZFNSaG9BcjB1bG5DcUZUT1ViN0Y0OTg2MVRn
-QlprTm9kdDMwJmU9DQpUbyByZXByb2R1Y2UsIGNyZWF0ZSBhIHNoYXJlIHdpdGggYSBuYW1lIHdo
-ZXJlIDMybmQgYnl0ZSBpcyBub3QgdGhlIGZpcnN0IGJ5dGUgb2YgYSBtdXRsaWJ5dGUgY2hhcmFj
-dGVyLiBVc2luZyBDSksgY2hhcmFjdGVycyAoMyBieXRlcyBlYWNoKSBpcyBhIHBvc3NpYmxlIGFw
-cHJvYWNoLiBGb3IgZXhhbXBsZSwgY3JlYXRpbmcgYSBzaGFyZSB3aXRoIG5hbWUg7JeQ7J207JeQ
-7ZSE7JeQ7Iqk7IK87KCQ7Jik7IOd7ISxIGFuZCB0cnlpbmcgdG8gb3BlbiBhIHR4dCBmaWxlIGlu
-IE5vdGVwYWQgZ2l2ZXMgdGhlIGZvbGxvd2luZyBlcnJvcjoNCiAgIEludmFsaWQgY2hhcmFjdGVy
-LiBGb3IgbXVsdGlieXRlIGNoYXJhY3RlciBzZXRzLCBvbmx5IHRoZSBsZWFkaW5nIGJ5dGUgaXMN
-CiAgIGluY2x1ZGVkIHdpdGhvdXQgdGhlIHRyYWlsaW5nIGJ5dGUuIEZvciBVbmljb2RlIGNoYXJh
-Y3RlciBzZXRzLCBpbmNsdWRlDQogICB0aGUgY2hhcmFjdGVycyAweEZGRkYgYW5kIDB4RkZGRS4N
-Ckxvb2tpbmcgYXQgd2lyZXNoYXJrIGNhcHR1cmUsIHRoZSBmb2xsb3dpbmcgaXMgc2VlbiBhcyBz
-b3VyY2Ugb2YgdGhpcyBpc3N1ZToNCiAgIEdldEluZm8gUmVxdWVzdCBGU19JTkZPL0ZpbGVGc1Zv
-bHVtZUluZm9ybWF0aW9uIEZpbGU6IFJhdGhpOVw/Pz8/Pz8/Pz8/Pw0KICAgR2V0SW5mbyBSZXNw
-b25zZSwgRXJyb3I6IFNUQVRVU19JTExFR0FMX0NIQVJBQ1RFUg0KUHJvcG9zZWQgc29sdXRpb24g
-aXMgdG8gdHJ1bmNhdGUgdGhlIGxhYmVsIG5hbWUgYXQgdGhlIGVuZCBvZiBhIG11bHRpYnl0ZSBj
-aGFyYWN0ZXIgYmVmb3JlIHRoZSAzMm5kIGJ5dGUuDQpQbGVhc2UgcmV2aWV3IGFuZCBzdWdnZXN0
-IGNoYW5nZXMsIGltcHJvdmVtZW50cyBhbmQgb3RoZXIgYXBwcm9hY2hlcy4NClJlZ2FyZHMsDQot
-U2h5YW1zdW5kZXIgUmF0aGkgKG1haWx0bzpzaHlhbS5yYXRoaUBudXRhbml4LmNvbSkNCg0KQSBm
-ZXcgc2xpZ2h0IGNoYW5nZXMgdG8gbWFrZSB0aGluZ3MgY2xlYXJlciAodG8gbWUgYXQgbGVhc3Qg
-Oi0pLg0KQ2hhbmdlcyBhdHRhY2hlZCBhbmQgYnVnIElEIGFkZGVkIHRvIHRoZSBjb21taXQgbWVz
-c2FnZS4gTGV0IG1lDQprbm93IGlmIHlvdSdyZSBPSyB3aXRoIGl0Lg0KDQpSQisuIENhbiBJIGdl
-dCBhIHNlY29uZCBUZWFtIHJldmlld2VyID8NCg0KSmVyZW15Lg0KDQo=
+=D1=81=D1=80, 15 =D0=BC=D0=B0=D1=8F 2019 =D0=B3. =D0=B2 14:10, <longli@linu=
+xonhyperv.com>:
+>
+> From: Long Li <longli@microsoft.com>
+>
+> An IOCTL uses up to 2 iovs. The 1st iov is the command itself, the 2nd io=
+v is
+> optional data for that command. The 1st iov is always allocated on the he=
+ap
+> but the 2nd iov may point to a variable on the stack. This will trigger a=
+n
+> error when passing the 2nd iov for RDMA I/O.
+>
+> Fix this by allocating a buffer for the 2nd iov.
+>
+> Signed-off-by: Long Li <longli@microsoft.com>
+> ---
+>  fs/cifs/smb2pdu.c | 21 +++++++++++++++++++--
+>  1 file changed, 19 insertions(+), 2 deletions(-)
+>
+> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
+> index 29f011d8d8e2..710ceb875161 100644
+> --- a/fs/cifs/smb2pdu.c
+> +++ b/fs/cifs/smb2pdu.c
+> @@ -2538,11 +2538,25 @@ SMB2_ioctl_init(struct cifs_tcon *tcon, struct sm=
+b_rqst *rqst,
+>         struct kvec *iov =3D rqst->rq_iov;
+>         unsigned int total_len;
+>         int rc;
+> +       char *in_data_buf;
+>
+>         rc =3D smb2_plain_req_init(SMB2_IOCTL, tcon, (void **) &req, &tot=
+al_len);
+>         if (rc)
+>                 return rc;
+>
+> +       if (indatalen) {
+> +               /*
+> +                * indatalen is usually small at a couple of bytes max, s=
+o
+> +                * just allocate through generic pool
+> +                */
+> +               in_data_buf =3D kmalloc(indatalen, GFP_NOFS);
+> +               if (!in_data_buf) {
+> +                       cifs_small_buf_release(req);
+> +                       return -ENOMEM;
+> +               }
+> +               memcpy(in_data_buf, in_data, indatalen);
+> +       }
+> +
+>         req->CtlCode =3D cpu_to_le32(opcode);
+>         req->PersistentFileId =3D persistent_fid;
+>         req->VolatileFileId =3D volatile_fid;
+> @@ -2563,7 +2577,7 @@ SMB2_ioctl_init(struct cifs_tcon *tcon, struct smb_=
+rqst *rqst,
+>                        cpu_to_le32(offsetof(struct smb2_ioctl_req, Buffer=
+));
+>                 rqst->rq_nvec =3D 2;
+>                 iov[0].iov_len =3D total_len - 1;
+> -               iov[1].iov_base =3D in_data;
+> +               iov[1].iov_base =3D in_data_buf;
+>                 iov[1].iov_len =3D indatalen;
+>         } else {
+>                 rqst->rq_nvec =3D 1;
+> @@ -2605,8 +2619,11 @@ SMB2_ioctl_init(struct cifs_tcon *tcon, struct smb=
+_rqst *rqst,
+>  void
+>  SMB2_ioctl_free(struct smb_rqst *rqst)
+>  {
+> -       if (rqst && rqst->rq_iov)
+> +       if (rqst && rqst->rq_iov) {
+>                 cifs_small_buf_release(rqst->rq_iov[0].iov_base); /* requ=
+est */
+> +               if (rqst->rq_iov[1].iov_len)
+> +                       kfree(rqst->rq_iov[1].iov_base);
+> +       }
+>  }
+>
+>
+> --
+> 2.17.1
+>
+
+Looks correct.
+
+Reviewed-by: Pavel Shilovsky <pshilov@microsoft.com>
+
+--
+Best regards,
+Pavel Shilovsky
+
