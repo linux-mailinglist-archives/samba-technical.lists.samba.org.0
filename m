@@ -2,60 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6843D1E762
-	for <lists+samba-technical@lfdr.de>; Wed, 15 May 2019 06:17:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E9B71E7E6
+	for <lists+samba-technical@lfdr.de>; Wed, 15 May 2019 07:28:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=BfF/cEY+63NPFeE0nnGTP5s2FRqzna+7ou7Ez1fHZIc=; b=dK8n15aqUIkZHP5mz/RpZUpfRT
-	0NHmF5E9SeSCh2rrz8XzC8BjskVBeBR4ip029ZC5Ru5u1fQUujSdC7BML76GyFZKZf844sCOdF+/D
-	5RpdRzWZK+XPVQ8x6THfUB1m4Ux1n2zapbr42S19wSNQnbdFnYj+cZLjkHMtGSz5h7EYgc9kuXgzt
-	IfWNW/kNjW14HcENOX2qbERU/JlOW0fbEuKeaGDwIPUXm3Iv+I5Orp5EluPork92kqLp3cBYubBf3
-	Ex7fl/a2DlxK9rg3rCRL5KHYivckg3hMdER86TMWJzJAOe57iWgbNMELTdPZ+b0ZiE3pJZH5HeDUl
-	JVO8pg+w==;
-Received: from localhost ([::1]:60944 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=ReRfCoDnebF5cGT0v2d+P2RpFo56c1b+HGo43bdNnjo=; b=OQo+qUwzlM8SVwB3odtYzycIa1
+	glS7RaGh2j00s5e0dTwYCmaBhnCLUA+tR6pf58YSok6d7vceKZA1HvHJIYdqKEdTDN24QtIOCpRF9
+	mEOcKE/UMkEQ6pm26us6ak4vU1KFHqfGzK+XwoLykRMKulqYwJ1XOb6nuynA83BFJBnfvFOQ+OhKz
+	QvPVm/c0YXoa9NMFZj6wLxdVICVm7fMQY5WD8ZXwjB+sDQfeRGiVPqc6iJqqgaWJ9uLlZuind3G0X
+	OxakoYy16s+OgpqK1zVQECRx31RGWSXDEAw3iZSJC8cAfzvVFt3ClhBAWgx/bGNiQsbdqbw94qDag
+	+n06kHrg==;
+Received: from localhost ([::1]:61728 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hQlLB-003gBh-Kc; Wed, 15 May 2019 04:16:29 +0000
-Received: from mail-pg1-x543.google.com ([2607:f8b0:4864:20::543]:46529) 
+	id 1hQmRs-003hQk-J7; Wed, 15 May 2019 05:27:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:21810) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hQlL6-003gBZ-Un
- for samba-technical@lists.samba.org; Wed, 15 May 2019 04:16:27 +0000
-Received: by mail-pg1-x543.google.com with SMTP id t187so645119pgb.13
- for <samba-technical@lists.samba.org>; Tue, 14 May 2019 21:16:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=BfF/cEY+63NPFeE0nnGTP5s2FRqzna+7ou7Ez1fHZIc=;
- b=HgZC3RTNLZvlm/5XzxJnHy0w0DoRXtA9hOhW/m7ICcJe6KpAsPYLSDbM/AfdyQIZCJ
- Zzp7n0ixLTO2jYKlR4aTa/tVxSc+DA9jyjnrJmqzY/6JhcAzthGuy50iS47h1yJmAIWc
- zJtCMEt1W7jhsXC+Vr41ryqdE9u17c6BDht6vir9NmO7wyneSyri/fo+vVl6VdhyaPSF
- CCbwAuzkWwcaQUCJf8a8j8vXj2YXGNWaKRbAJhTDIBxB8euBV30+K9y+mHurO2hwJlUH
- OlmmIIT5rHNLo3Z/k7KecfL3CQnY+czWLYCb/ZB6FZkDryiPUfLEGt7BEsj0tnAdy1N4
- Bd+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=BfF/cEY+63NPFeE0nnGTP5s2FRqzna+7ou7Ez1fHZIc=;
- b=XXBzs96eYoIt0k6IuMTLYIeBwLkdvrSqea2ciWVLu34SutTgFPS76pdzBcMjuEvu59
- bKe1PHiXBQd7bndX/xk7pyFtSjhN68Q7VyfnP7nnkB1M/rBAfYh9eU8Osb/t+3KZjWyr
- zMvvKBzd/KT77QHRAVanZ6cBkad50NFunvtaJQQvHUg1eD++8oSmX4jMv/raSiyxohtI
- dnF8USGH9KiYZNEqC/q3huMixZeKagHPL8P7atN2/TGKi9Us2CvqFD7Dvk0oOrURXUle
- nC+jjBhQYGCtBiLBDQ9SAIFLN1zbSRHM6nRN6Y3wOKEwYf6q2Q8B5K4hTyH25GqCA6wm
- //Sw==
-X-Gm-Message-State: APjAAAWISi3X89Hact+UNcDiTsOn8YH4Nw/B+CjTkQUd457PANCPJmh6
- sQWfHp4lzn8QWXfjO/VTlqhgev1PkDdIi29Ehjc=
-X-Google-Smtp-Source: APXvYqy8nPnvB25D5BAaYVI6FfefnZ4fR45Aui9wsDJbBswv7PdAsPryss5lbt8sGLj3Q8NuYCkRq4fPmmMq9yOdyQE=
-X-Received: by 2002:a63:570d:: with SMTP id l13mr42080517pgb.55.1557893777809; 
- Tue, 14 May 2019 21:16:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <1557806489-11272-1-git-send-email-longli@linuxonhyperv.com>
- <1557806489-11272-2-git-send-email-longli@linuxonhyperv.com>
-In-Reply-To: <1557806489-11272-2-git-send-email-longli@linuxonhyperv.com>
-Date: Tue, 14 May 2019 23:16:06 -0500
-Message-ID: <CAH2r5ms4vU9PXceAemvzw2mQ1feTaKB_DbUHc72VZ8-Gb+X46A@mail.gmail.com>
-Subject: Re: [PATCH 2/2] cifs:smbd Use the correct DMA direction when sending
- data
-To: Long Li <longli@microsoft.com>
+ (Exim) id 1hQmRj-003hQd-5v
+ for samba-technical@lists.samba.org; Wed, 15 May 2019 05:27:22 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Cc:To:From:Message-ID;
+ bh=ReRfCoDnebF5cGT0v2d+P2RpFo56c1b+HGo43bdNnjo=; b=TYQYJWgXDgmJyKM87uNj9oSKv1
+ kjEQl/AdjETo+yfUtMs3OHFKuBm54NMVu3UdWwBVSwvajkylqL7adFrB7WGQKeQQrX5PCeXc92MJd
+ Z+fh1tISqFFkGfOyrWomZhA0k4X2ga6nCmJ5hOTN81QsVAkbJqJdtq9LfHQwc7sM9iVc=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hQmRe-0002vU-G7; Wed, 15 May 2019 05:27:15 +0000
+Message-ID: <1557898030.25245.8.camel@samba.org>
+Subject: Re: [WIP] [PATCH] ldb: new on-disk pack format
+To: Garming Sam <garming@catalyst.net.nz>, Aaron Haslett
+ <aaronhaslett@catalyst.net.nz>, samba-technical
+ <samba-technical@lists.samba.org>
+Date: Wed, 15 May 2019 17:27:10 +1200
+In-Reply-To: <01caab91-5ec4-392a-0227-c4782db5959e@catalyst.net.nz>
+References: <09dfb485-0056-44f9-3baf-3ba38675758a@catalyst.net.nz>
+ <01caab91-5ec4-392a-0227-c4782db5959e@catalyst.net.nz>
+Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAACRklEQVRYw81YS67DIAwkVe8FPRm5menJeAu3lmUCbyBGKqsmRXjwb8Y5aq3hl9Yj/Nh6Tu0upZRS+EdKiV+e5+mJqMKLiHLORBRjzDmbc/hlvb1QD2k3sG84+dhhvF6vlzymlNY8dyBJzUdLjAwyvaeU8n6/2WHpu/xDRkREJI8cOBMgfuRQxhj58JzzbBwhQDFGA07M6/efE0MQxDHGFvpdQHy6MUxqtU4yezRcH0B4GfbM44BWGqOurF6Omz140a0ASimJvdbwZT32XrpRh5yuwY1d0vPrdNkv91+T8uBRG8l1uiX+JtsHxPNIWE27ugwTctTdHCIiYXvuy4P7IDl0CxAzl2xgZTJwgw+g3kGaHwYh5g2sljyrjIVEq4pYBg2Kq3yXZ5WxjfO7zF9jRdXrnLcEmlbTRnNpcT0gvpTScUC2HlOE2ipAvPuJanMT+Xc0PC4dFzu1DEO4HgczaS5kOnZ4vM7zxNU+mtRyRVPDgqyX3cdx8AQCCrQnfkV9VzMA9Ryg3ek8Sgsg3QX+nbz03Og5l10ytp6HusQUwpjd1rnsksbHlhjuVGdBAbWzIiJu5MvEFkA6OkiwBO4uQL3ADeQ9b57t74+FBo1s47IqpVxqBDcuQ66r94QQJOH2ctnAf9oZtdbZYejpi2bQEveO0sb2JXu09OJJrnpil4SV5G2N6Y+1QjL+gHSKDApHJoJWF3hW2fInh6lutGW216OPRBZtRZscwyQvI+KuTj3rp4VP1VsAcTobxgDngukqm3LPgmL8A4m377Y5OvTKAAAAAElFTkSuQmCC
 Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.22.6-1+deb9u1 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,69 +54,54 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged both patches into cifs-2.6.git for-next
+On Wed, 2019-05-01 at 16:33 +1200, Garming Sam via samba-technical
+wrote:
+> Some initial testing shows that the new format has 50% more throughput
+> (for unpacking group-like objects with a few thousand (member) values
+> like what happens in the LDAP bind). Or in other words it's 33% faster
+> to finish a single call. It also leads to much better memory performance
+> under load, which is harder to predict in terms of overall improvement.
+> 
+> ldb_kv: Avoid memdup of database records in the case of base searches
+> 
+> a76d2865372988c29baef42ecc4257e861692e7b
 
-On Mon, May 13, 2019 at 11:02 PM <longli@linuxonhyperv.com> wrote:
->
-> From: Long Li <longli@microsoft.com>
->
-> When sending data, use the DMA_TO_DEVICE to map buffers. Also log the number
-> of requests in a compounding request from upper layer.
->
-> Signed-off-by: Long Li <longli@microsoft.com>
-> ---
->  fs/cifs/smbdirect.c | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
->
-> diff --git a/fs/cifs/smbdirect.c b/fs/cifs/smbdirect.c
-> index 251ef1223206..caac37b1de8c 100644
-> --- a/fs/cifs/smbdirect.c
-> +++ b/fs/cifs/smbdirect.c
-> @@ -903,7 +903,7 @@ static int smbd_create_header(struct smbd_connection *info,
->         request->sge[0].addr = ib_dma_map_single(info->id->device,
->                                                  (void *)packet,
->                                                  header_length,
-> -                                                DMA_BIDIRECTIONAL);
-> +                                                DMA_TO_DEVICE);
->         if (ib_dma_mapping_error(info->id->device, request->sge[0].addr)) {
->                 mempool_free(request, info->request_mempool);
->                 rc = -EIO;
-> @@ -1005,7 +1005,7 @@ static int smbd_post_send_sgl(struct smbd_connection *info,
->         for_each_sg(sgl, sg, num_sgs, i) {
->                 request->sge[i+1].addr =
->                         ib_dma_map_page(info->id->device, sg_page(sg),
-> -                              sg->offset, sg->length, DMA_BIDIRECTIONAL);
-> +                              sg->offset, sg->length, DMA_TO_DEVICE);
->                 if (ib_dma_mapping_error(
->                                 info->id->device, request->sge[i+1].addr)) {
->                         rc = -EIO;
-> @@ -2110,8 +2110,10 @@ int smbd_send(struct TCP_Server_Info *server,
->                 goto done;
->         }
->
-> -       rqst_idx = 0;
-> +       log_write(INFO, "num_rqst=%d total length=%u\n",
-> +                       num_rqst, remaining_data_length);
->
-> +       rqst_idx = 0;
->  next_rqst:
->         rqst = &rqst_array[rqst_idx];
->         iov = rqst->rq_iov;
-> --
-> 2.17.1
->
+Just a reminder to the list that we are still working on this.  It is
+really important for the 100,000 user case, our performance tests are
+unable to run (acceptably) without it, the responses just get too slow
+on the large DB.
 
+This is particularly due to the large number of user groups in that
+example DB.
 
+A set of patches to remove other inefficienies is in autobuild, but the
+main change now almost ready (just working out the upgrade process for
+example).
+
+At this stage we are thinking to have GUID indexed databases use the
+new pack format, with an upgrade on first use, exclusively.  This will
+avoid changes to non-Samba LDB users while keeping the test matrix
+compact.
+
+Aaron will post some updated patches soon.
+
+Thanks!
+
+Andrew Bartlett
 -- 
-Thanks,
+Andrew Bartlett
+https://samba.org/~abartlet/
+Authentication Developer, Samba Team         https://samba.org
+Samba Development and Support, Catalyst IT   
+https://catalyst.net.nz/services/samba
 
-Steve
+
+
+
 
