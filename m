@@ -2,59 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44AB41FDDC
-	for <lists+samba-technical@lfdr.de>; Thu, 16 May 2019 05:00:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A34581FF46
+	for <lists+samba-technical@lfdr.de>; Thu, 16 May 2019 07:57:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=wAnMT3wPbUftDQ9VRXJkEmAHdM6PJNXSjrEixjo7CHw=; b=k9IifxCNXoVf6Bgh8DXfDStNHh
-	cWwOnw4iCuuYUmseLRMQtehQgdV6qA/cLO6gQdEeSVXvXgJOO+7sf/TIwWiwzZqGx6DTNdgVN53LD
-	mj+SdrblAJw6WM9UmgKgo3XMjO05MCp426LQmskqfrdDAYY/5fXNqN7X8RGYNBCwZ6nh3krKnAPpV
-	D0ibPDQCCuZ+1tL5GVL+IidDIIr+yKBIPaGx6GhH3MJIZctLgi6jrXV9lP1yoN2Q+BIbvaXilYaTS
-	5emOZDEREuQIRgBuAOULEk1bnDoZSTz2maSQkA0saGLIm1BcD5+oPuXV+ytTnv7nCT7R6Pn7Pmi89
-	wnvEvcLQ==;
-Received: from localhost ([::1]:44050 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=F2UHeRQtpIfXoo6xT0eVHtHs1SWogZQkCXs0wuAVT14=; b=HapCNxYT7+HajbLjmYoc0M79ff
+	OvVBRAmd4rSiDg2rIQSn/H0v9/tAxJk6txcakwv5nd4sp5EOmEwIX6/U8ofX/zPeenuuIUkF+F82H
+	T+IDhN17ek2ijLGmzbrUPXgZ2gpYYf52FWiRcMcA3/aMV92Xj0umkqsymnbs+CJ+rk25v+P89F+qd
+	tkE2YVn/6v4tS+QS9fLrYtQ9TS0sWSJl2Cwodo2jS4Na0imqdl6OX3Mb1MKgVbazMS2EFKtB2/cqY
+	dDvMoBMuVxHNjyfYCuGeBQfBxfHHEA78EGQp3eMTlteE9Eae63Ab7yL15KKpiNyqp/so5F7mGd4Ap
+	FzeinYZg==;
+Received: from localhost ([::1]:45110 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hR6d8-003tsJ-Lk; Thu, 16 May 2019 03:00:26 +0000
-Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644]:34453) 
+	id 1hR9Nd-003uPj-8d; Thu, 16 May 2019 05:56:37 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::147:1]:46482) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hR6d0-003trz-HS
- for samba-technical@lists.samba.org; Thu, 16 May 2019 03:00:23 +0000
-Received: by mail-pl1-x644.google.com with SMTP id w7so848548plz.1
- for <samba-technical@lists.samba.org>; Wed, 15 May 2019 20:00:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=wAnMT3wPbUftDQ9VRXJkEmAHdM6PJNXSjrEixjo7CHw=;
- b=h4i4HSAGJR84UoKeK/j3ibfEiSl0Nae5/4egy2hqYp5rHK/2jW16GV7Qey53Al97vP
- r7bnqErxE3mgsEfE6logv/FDJh5K/lrkuZXOPcgwSVM+xFdnSNj1nBJKXcdIN3HhgnnB
- YdmwwkHf4NM6xBUCsa0naS3Y+eDjwvldeCEAgETr/HrWJi/uV0HVl7NEy/A+QHHL/fR4
- HzZdoX5Myb3QuHw37CFsXIMb3G1jd5hirXfEMj2Dwo0rVVRaYmi+7CP4STR+84i6sHc2
- iGyaaxMuOsyeT27LmyPCuw7If4G8G/eqPeeqKeR5k1ZNWBbxUSG1LyaofgEHkuTf3YZD
- aqlQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=wAnMT3wPbUftDQ9VRXJkEmAHdM6PJNXSjrEixjo7CHw=;
- b=hSDajnqjE5a/PmKm4ydpCw3o1Y0Gm/2/I+/QEBrCmFb5Xg1SxDSkNOJx3401h7HT0Q
- 7NRbgZgKCTP8MuO2qYukIQFB7v5f0j4g6AeDbHsVaC3TVCQ5Q4S2kcbFI+fTFer/faYx
- HQtvNU3Ak5JY1Usv8acBY+OSAZJ/piKJ6o4SlHCvpAvV7QFBj3+vuWZVINDI8tGBdCXq
- lKUQP9AYY/EjippvHvHtIZQGGhlkDIeHdVEqQSscWEd7x8Hs6vzHPAdu/SuJsbK9RW7I
- emLel75wkdHImH1F1+oO+z3vJCidNmId/cZrI2HLTrTm31/OX1J7O+lwVu95f3Bfiy7q
- 7eAQ==
-X-Gm-Message-State: APjAAAU0Ni8Rqs+ed3q1CKWouI+6CJiiqyQCC4Zc3Zmkv++4gM0coFqn
- 94jAPnSpIaTCWs6cROv4WRQQxdYzY1Dvf9Zzu+0=
-X-Google-Smtp-Source: APXvYqybsPMkPVEtKUFspQfYXb7gQWaPGXo8DDb+bCwfN7GobgQ49jKQ21DnWy2YMNVJW1YK1oj/1CIn6OoWtcQPDdA=
-X-Received: by 2002:a17:902:6bc2:: with SMTP id
- m2mr46813962plt.24.1557975616425; 
- Wed, 15 May 2019 20:00:16 -0700 (PDT)
+ (Exim) id 1hR9NY-003uPc-FX
+ for samba-technical@lists.samba.org; Thu, 16 May 2019 05:56:34 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=F2UHeRQtpIfXoo6xT0eVHtHs1SWogZQkCXs0wuAVT14=; b=aK4DDmvV4h7zdXJzVrB76RxPBF
+ hUwzzSyeaIx+PshG+T39Y5sz1AC4xwaHk5EO6TJkHtYc3jL/EyoHtBVB+TGj5CmML9KDj2uCFIKQg
+ f0IWzOoFjG6rxUwZR9pH9XkaZeMRWYZKnR+xNcP3TdUttHrHwyZyK5i0TwLRMHb3R3PU=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hR9NX-000663-OG; Thu, 16 May 2019 05:56:31 +0000
+Date: Thu, 16 May 2019 07:56:29 +0200
+To: Rikard Falkeborn <rikard.falkeborn@gmail.com>
+Subject: Re: [PATCH] lib:util: Fix tfork return value if sigprocmask fails
+Message-ID: <20190516055628.7ta65ravwnolyfjx@inti>
+References: <CADRDgG5Oh2GfCzrzZzHDhD6nzCqCLgctptdK7-stYqjwsOp96g@mail.gmail.com>
 MIME-Version: 1.0
-References: <1557954545-17831-1-git-send-email-longli@linuxonhyperv.com>
-In-Reply-To: <1557954545-17831-1-git-send-email-longli@linuxonhyperv.com>
-Date: Wed, 15 May 2019 22:00:05 -0500
-Message-ID: <CAH2r5mvuRaEJDVv6hXwWuegckvXjtTfbpkLGLXE8kb2h1s-xUg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] cifs: Don't match port on SMBDirect transport
-To: Long Li <longli@microsoft.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Disposition: inline
+In-Reply-To: <CADRDgG5Oh2GfCzrzZzHDhD6nzCqCLgctptdK7-stYqjwsOp96g@mail.gmail.com>
+User-Agent: NeoMutt/20180716
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,50 +50,25 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+On Sat, May 11, 2019 at 09:31:44PM +0200, Rikard Falkeborn via samba-technical wrote:
+>Returning a non-zero value from a function with bool as return value is
+>the same as returning true. Change the return value to false if
+>sigprocmask or pthread_sigmask fails to indicate failure.
 
-On Wed, May 15, 2019 at 4:09 PM <longli@linuxonhyperv.com> wrote:
->
-> From: Long Li <longli@microsoft.com>
->
-> SMBDirect manages its own ports in the transport layer, there is no need to
-> check the port to find a connection.
->
-> Signed-off-by: Long Li <longli@microsoft.com>
-> ---
->  fs/cifs/connect.c | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/fs/cifs/connect.c b/fs/cifs/connect.c
-> index 0b3ac8b76d18..8c4121da624e 100644
-> --- a/fs/cifs/connect.c
-> +++ b/fs/cifs/connect.c
-> @@ -2446,6 +2446,10 @@ match_port(struct TCP_Server_Info *server, struct sockaddr *addr)
->  {
->         __be16 port, *sport;
->
-> +       /* SMBDirect manages its own ports, don't match it here */
-> +       if (server->rdma)
-> +               return true;
-> +
->         switch (addr->sa_family) {
->         case AF_INET:
->                 sport = &((struct sockaddr_in *) &server->dstaddr)->sin_port;
-> --
-> 2.17.1
->
+thanks Rikard!
 
+Patch is obiously correct. Second team reviewer please?
+
+-slow
 
 -- 
-Thanks,
-
-Steve
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
