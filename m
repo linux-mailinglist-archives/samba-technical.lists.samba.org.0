@@ -2,57 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::443:1])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C3EE20F13
-	for <lists+samba-technical@lfdr.de>; Thu, 16 May 2019 21:12:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 30C7820F1D
+	for <lists+samba-technical@lfdr.de>; Thu, 16 May 2019 21:16:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=E3SfLe+GcgSZNgXopOIwpck3uH6EbiOEcMkiAlQeTSI=; b=gpBSJgNnB1sf8OLpEzXeqSlIT/
-	jjd4qOk8P2K5Lfa0MpU6I9LiPmVCCwkcB+sxKlAWgF63q5S9kesCPdWpNHO9RkD/VCz8sKQuRPEOw
-	Si9l8hdQKeygOavLK/UVucAbWVruMci1KGmpY2k5BSgTjmufaKovnn9Vx1uY36GgbQv3/EcbghNT1
-	WDgAaREs9oGRX2N84UHaj5B5nzQ0sOyaZA993q7S5hKQQQlJAT4J8SxqPAzbZ+XYU3fjNuP92JbMd
-	UjJai4/ZOYW4c91XCva1mFME0Vjq8qmAyGPDaW4hYNYb2C/uZAKoiX5nGcDPEucehA+tvTMl/GQlM
-	AI3WAcXQ==;
-Received: from localhost ([::1]:53516 helo=hr1.samba.org) 
+	bh=5d6i92EnUfaOW/t+0mSyYZrN14tDKwn35sWBCmslD1o=; b=gWc7z3zWj9urzxIKcAuSN6zauM
+	VwEJ8Gr65mLudlYMAwRwEdJtJ335nhQOtSebt8hjDSTFYuMEPWF3Dxg6UzcRS+02S5JHM21uJfjWg
+	NC7GZtB+yMujkfZ6Cq3KsoChid/lAzUS5cyo4IZ9d7rw2znUMeE9Pg0kqLoJQjRDnlV2ReNQSQLyJ
+	dLhVvlwBbp0mDdsgVCsU14QW+2vdWXvq6Hgex5G6mMn57H8rYNY8+V3fOLof/7axqrIJRP1lWo4FW
+	nrey6zehhraOCosyNm93sfTl/p1TM5EIhy0Z08CZ/KlVPwphXbj3osWnvPfblRs/+T4CkTozeQH21
+	TPoxIlnQ==;
+Received: from localhost ([::1]:54248 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hRLnQ-000AtI-9l; Thu, 16 May 2019 19:12:04 +0000
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e]:33967) 
+	id 1hRLrH-000AzZ-JJ; Thu, 16 May 2019 19:16:03 +0000
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e]:41570) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hRLnM-000AtB-2p
- for samba-technical@lists.samba.org; Thu, 16 May 2019 19:12:02 +0000
-Received: by mail-wm1-x32e.google.com with SMTP id j187so7709126wma.1
- for <samba-technical@lists.samba.org>; Thu, 16 May 2019 12:11:59 -0700 (PDT)
+ (Exim) id 1hRLrD-000AzS-PH
+ for samba-technical@lists.samba.org; Thu, 16 May 2019 19:16:01 +0000
+Received: by mail-wr1-x42e.google.com with SMTP id g12so4306351wro.8
+ for <samba-technical@lists.samba.org>; Thu, 16 May 2019 12:15:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:from:date:message-id:subject:to
  :content-transfer-encoding;
- bh=E3SfLe+GcgSZNgXopOIwpck3uH6EbiOEcMkiAlQeTSI=;
- b=kYp4DSAWBV/sJxAofR4YdYvF6OA/5LsmkhsftZ9kA+iIjF3FDgqLcPjFd+Lo3l3ZJ1
- mBuJbhJzvcNs19kEviD8MiMSufSdafzEKiOacLW0p8Tdusz3nHhx+ggqVMblP8WcsPid
- R6AUHBsp3wblDvwP45Yr4V3JKrSVZ4hdM9qQ+n6phvNuh8HlGI4Dpnc6yKXI5STE6e/Y
- xNGgELAR/Wwog67Hgp2yOYBt1Bzz5rlTZyiEQ4bYISfpKgzIp4+ziPLuBSfCYbVx3RXy
- 5BUbJVdu/gijz+fH4bdys5GSs4GSz66uT919rZVrTI1z6EDTa6pHJDpdOirzZykIFtY8
- qELg==
+ bh=5d6i92EnUfaOW/t+0mSyYZrN14tDKwn35sWBCmslD1o=;
+ b=SZD6gDd1Pf8Ve9SbLnStkAxnkY1tl27Xmt2Kuo5TtEPqAzQ/ePZf5ufYblgrjvOQpw
+ ykh50XrBlz0i9gNkZgs98E7DClevbxmkptpwYmxL7tR9+A5trpdKnfmJyshE1KeTN0Zn
+ IrzEvklkwpGD4f2flLejqi1PLX7SkP73wB8hw/V6X9wArk+7cOgnY0kFaatFllZ6o5cG
+ s5caS5fnjzOUs9sREuj9LHuk4hO/X5APhEQxQQJGrQPsZ263vFkTPE/xw6U9hjqiglp3
+ 0haknc6Usf2MyH6dN1JBMIT1CDS5Eo4Kio6C9cr2NMljT2NlD9wFQ31ZWmq+Ea/GhRhS
+ fTxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:from:date:message-id:subject:to
  :content-transfer-encoding;
- bh=E3SfLe+GcgSZNgXopOIwpck3uH6EbiOEcMkiAlQeTSI=;
- b=XdTGq9Rla/j1zE7nZtGimoXfdkdPWGba3of65DwIggZ7xmqcImqCeNyQcyiqVoy9uj
- 83uECE8K3RhXClKpAAj6c74cKPLaW7pF7lxaCg563ATeo/4aOKqo9qUpSwUusB/Bg00U
- dXvlf5eshBccqBY0kxjLaN1nLEiJY5nAYJ7rykBVuXJ7gt7zy+e3mlpzwkOQy60a0pTx
- p3VzkmoPE7kBwIS9av2mOe+z5ensesYoSi4tAn1f0ZFVgYktS8YLFfVOfw26zCbatrj3
- vpElQjWTChyxn8sQmsR1aK0uOGrp6yYXZ+H4wUl4HLybE/uGHnprFvx6CiI1Fk8Ps4Wn
- v2xg==
-X-Gm-Message-State: APjAAAVl6sgfeDySM0TKOlAsTvW4g2geavEARhEoj6kXya4qnCB6wMxe
- 7ePUlOBR9kxemMCUIuDsyaStmzRPRIy7zvwGA8IrgA6V
-X-Google-Smtp-Source: APXvYqwluiclvdSRiN2w0bSRjXbPs3yMOYdD19Rc7i7Vfu/b02cxNQAgQrXAzezELDpVgyFFP38GsZn8pgYC28vx2iI=
-X-Received: by 2002:a05:600c:22cc:: with SMTP id
- 12mr17288121wmg.141.1558033919084; 
- Thu, 16 May 2019 12:11:59 -0700 (PDT)
+ bh=5d6i92EnUfaOW/t+0mSyYZrN14tDKwn35sWBCmslD1o=;
+ b=kxdClkGlB6I+nVdTiKBXz7vKEHwtS8qYhl+Vhy2gk+f7M10yB0S77T8E7gyeNl3psY
+ XH7tYeKX4ZzrMtay6XfY6/zxXMMMVWqX79SfrwHVcJz79l2UTG4iWQoxDFVrfGK+hN84
+ uPGOr46oc+HojYLFYxhKmUOoHqFjS2qdB14UTb4stzrlRLKlK7z1gzAnWGCRkZzlnh8R
+ JLG8W+8dIYluwHo+DRmaysvC+B7c7bcKyjgAr4RgEWrqHD9xKDn9jThJKLGsayrPMBEM
+ j7BzBOILV19jfffW/ZFzYOXfUCc2iYuqAixlYs2iNXEGvrvt1wPMjy/t6iPd3X5xh/2N
+ JHqQ==
+X-Gm-Message-State: APjAAAWurfsXz7Cr4aKztWxYvwRlKofzeZkrtEgSPUmEzNR1xP7vpRvJ
+ k7Vw/grxBYpPhHaBXPO494oCWh8yETgrvfAutYzCMNfS
+X-Google-Smtp-Source: APXvYqwS5tsH0TvUbvVVaStArBwck4V0AvwDTe5Cv48C+eZj7d3bU5K73RKdThr1/FW5LDBep0RzwHKUT4owTjjKVyY=
+X-Received: by 2002:adf:c188:: with SMTP id x8mr20976126wre.256.1558034155016; 
+ Thu, 16 May 2019 12:15:55 -0700 (PDT)
 MIME-Version: 1.0
-Date: Thu, 16 May 2019 12:10:43 -0700
-Message-ID: <CACyXjPzjK8UBQastGWBNqQn8ehzwUajQ5_TYNQ7B+JpRQnCeYw@mail.gmail.com>
-Subject: If we are going to exit from smbd, we probably should issue a DBG_ERR
- not a DBG_WARNING
+Date: Thu, 16 May 2019 12:14:39 -0700
+Message-ID: <CACyXjPw5KdTqu1z+u5PzgYFCh3gsE6C8vPd+Yi0tnWLrLOHMzw@mail.gmail.com>
+Subject: Hitting Could not claim version: NT_STATUS_IO_TIMEOUT
 To: samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -76,24 +74,52 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 Hi folks,
 
-Came across an issue where smbd was silently exiting. Here is a patch:
+I am hitting the following (in 4.7.1) in a CTDB-setup, and am looking
+for hints on how to debug it.
 
-diff --git a/source3/smbd/server.c b/source3/smbd/server.c
-index 3ef7bef..3ac9be9 100644
---- a/source3/smbd/server.c
-+++ b/source3/smbd/server.c
-@@ -2101,7 +2101,7 @@ extern void build_options(bool screen);
-        if (lp_clustering() && !lp_allow_unsafe_cluster_upgrade()) {
-                status =3D smbd_claim_version(msg_ctx, samba_version_string=
-());
-                if (!NT_STATUS_IS_OK(status)) {
--                       DBG_WARNING("Could not claim version: %s\n",
-+                       DBG_ERR("Could not claim version: %s\n",
-                                    nt_errstr(status));
-                        return -1;
-                }
+--------------------
+[2019/05/16 18:49:24.648838,  5, pid=3D21261, effective(0, 0), real(0,
+0)] ../lib/dbwrap/dbwrap.c:160(dbwrap_check_lock_order)
+  check lock order 3 for g_lock.tdb
+[2019/05/16 18:49:24.648880, 10, pid=3D21261, effective(0, 0), real(0,
+0)] ../lib/dbwrap/dbwrap.c:115(debug_lock_order)
+  lock order:  1:<none> 2:<none> 3:g_lock.tdb
+[2019/05/16 18:49:24.648908, 10, pid=3D21261, effective(0, 0), real(0,
+0)] ../source3/lib/dbwrap/dbwrap_ctdb.c:1112(fetch_locked_internal)
+  Locking db 1294615339 key 73616D62615F76657273
+[2019/05/16 18:49:24.648935,  5, pid=3D21261, effective(0, 0), real(0,
+0)] ../lib/dbwrap/dbwrap.c:128(dbwrap_lock_order_state_destructor)
+  release lock order 3 for g_lock.tdb
+[2019/05/16 18:49:24.648958, 10, pid=3D21261, effective(0, 0), real(0,
+0)] ../lib/dbwrap/dbwrap.c:115(debug_lock_order)
+  lock order:  1:<none> 2:<none> 3:<none>
+[2019/05/16 18:49:24.648963, 10, pid=3D21261, effective(0, 0), real(0,
+0)] ../source3/lib/dbwrap/dbwrap_ctdb.c:980(db_ctdb_record_destr)
+  Unlocking db 1294615339 key 73616D62615F76657273
+[2019/05/16 18:49:24.648977,  1, pid=3D21261, effective(0, 0), real(0,
+0)] ../source3/smbd/server.c:1497(smbd_claim_version)
+  smbd_claim_version: g_lock_lock(G_LOCK_READ) failed: NT_STATUS_IO_TIMEOUT
+[2019/05/16 18:49:24.649000,  1, pid=3D21261, effective(0, 0), real(0,
+0)] ../source3/smbd/server.c:2024(main)
+  main: Could not claim version: NT_STATUS_IO_TIMEOUT
+---------------------
 
-Signed-off-by: Richard Sharpe <realrichardsharpe@gmail.com>
+This is a four-node ctdb setup which was upgraded recently, but as far
+as I can see all nodes are at the same version and the problem is
+grabbing the lock.
+
+This piece of code took the error path:
+
+        status =3D g_lock_lock(ctx, name, G_LOCK_READ,
+                             (struct timeval) { .tv_sec =3D 60 });
+        if (!NT_STATUS_IS_OK(status)) {
+                DBG_WARNING("g_lock_lock(G_LOCK_READ) failed: %s\n",
+                            nt_errstr(status));
+                TALLOC_FREE(ctx);
+                return status;
+        }
+
+Anyone have any idea what that is about or how to debug it further?
 
 --=20
 Regards,
