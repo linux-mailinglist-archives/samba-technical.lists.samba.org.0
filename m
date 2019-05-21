@@ -2,35 +2,35 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (unknown [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C571824876
-	for <lists+samba-technical@lfdr.de>; Tue, 21 May 2019 08:54:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04FD724881
+	for <lists+samba-technical@lfdr.de>; Tue, 21 May 2019 08:56:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=8X7o8tFhUCBBHUcM1EXgr6eqDNTT0YGDRacAFkNOSIs=; b=m8sOCZI0VMRbSO6lGCKwW4LmXy
-	su9uFnbMUhzdyi5dUGsWKxI6TIA7FGohAaXwG7+N0lNY4JKnWwn5BPKSet3N2TWsxaxQTN8Mf5pXm
-	5rbjfqoq5QWtb03CZv6Ca0fRzrFbKhEmxJDetUgP/agqahqd8YKYGb649K78QA/1NW9tj+Fg8JtxY
-	2RHJK3CgRFJDtRFojiOBI0+hbSqWtp6vO97eFAHr71TcZd0wKwbQ+yE2WfNk+/38WsfG/oh7ZH8TY
-	9m9E/FXT50XuD8eXWx5ZjA3g6VmCE/tPIFFKXLvccFnmVZ0P1xHPydULB40a6P9RMEs7g5dLiRm8I
-	udw4euQA==;
-Received: from localhost ([::1]:33086 helo=hr1.samba.org) 
+	bh=1U9PMQVAfpZUR4aA8ZFBRvWiW0d0kErQVszYt30pYbQ=; b=b+YGqI0Cue3CbVX1IusodagfPi
+	9w5Z6SZcFdpCKXRw9Wl27l6QlS2dBhLS7CJd2/qqHrBq9fafqbedkujxZGzaMUiYw5zSWPwHDmtoR
+	Ub3zM4/63jMwOH3RNY6/dSkOKwWVUG3re2+TlaFipFYgMej/bl6+WpWoxbQM8MwdoKDffZ5wHjShS
+	WqJJuRagGI+LeYsActjF0t1Rpz4H16obTcKH5uQ3UM8D1nwPXD3E9C1xuDx5IY26yFoxohbpfiwO9
+	uD0pAmdaFgzWYOpfCJpKfjsAIrfUIz1b6UtsVGmetW3kqq2RABqmmPgOrpYDl1vNNo++cSc2IgrZ9
+	TV+3XD+A==;
+Received: from localhost ([::1]:33822 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hSyfH-000ulp-Pq; Tue, 21 May 2019 06:54:23 +0000
-Received: from [2a01:4f8:192:486::147:1] (port=24738 helo=hr2.samba.org) 
+	id 1hSyhQ-000usF-RO; Tue, 21 May 2019 06:56:36 +0000
+Received: from [2a01:4f8:192:486::147:1] (port=25320 helo=hr2.samba.org) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hSyfC-000uli-JR
- for samba-technical@lists.samba.org; Tue, 21 May 2019 06:54:21 +0000
+ (Exim) id 1hSyhL-000us7-Pr
+ for samba-technical@lists.samba.org; Tue, 21 May 2019 06:56:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42627210; h=Message-ID:Date:Cc:To:From;
- bh=8X7o8tFhUCBBHUcM1EXgr6eqDNTT0YGDRacAFkNOSIs=; b=psS2lE3LDz15h5VExFyBmuXdSS
- wb18QJQZGjUKgZ7ZQZhvpagSoxF8X3R+W0/SCG47a4k669vyUS72JodG5zhCU3yYw9wlewC74ufDG
- iSkLE5gn/7l87fXGre1fB2K14Sb4KPgY+8Dw5yGjrUzqpOXLKCKV9NIHzvmr4lDp9uwY=;
+ bh=1U9PMQVAfpZUR4aA8ZFBRvWiW0d0kErQVszYt30pYbQ=; b=uasrV+OkED86YfIEupIqHUBobf
+ +/mOI8oovyCQl+oOVVizZa4Wymu9crpfzoupR95NBZKGwl+M2B4cVyRdVCGH4iVzHOfg5RxEHEBxI
+ CisOREqqfF/uaM6UBvPjIZf+7C3oa01eGE/rwQNwQatHOHNerlFFXGnphLfdhJ86Hyw4=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hSyf7-0000Ns-B4; Tue, 21 May 2019 06:54:13 +0000
+ (Exim) id 1hSyhG-0000Qj-Dc; Tue, 21 May 2019 06:56:26 +0000
 To: Martin Schwenke <martin@meltin.net>
 Subject: Re: New csbuild run
-Date: Tue, 21 May 2019 08:54:13 +0200
-Message-ID: <3206132.ajtiDnVues@magrathea.fritz.box>
+Date: Tue, 21 May 2019 08:56:26 +0200
+Message-ID: <4139832.O3Al6u4HZe@magrathea.fritz.box>
 In-Reply-To: <20190521162924.4444f055@martins.ozlabs.org>
 References: <1902926.C4UlyRiazf@magrathea.fritz.box>
  <4043444.PDZQgdqHAT@magrathea.fritz.box>
@@ -103,11 +103,9 @@ On Tuesday, May 21, 2019 8:29:24 AM CEST Martin Schwenke wrote:
 > can download it from.   Unfortunately, searching the internet for
 > "csbuild" finds too many other things.  :-(
 
-I just found:
+And packages are at:
 
-https://github.com/kdudka/csbuild-deb
-
-
+https://kdudka.fedorapeople.org/csbuild/dists/trusty/contrib/
 
 -- 
 Andreas Schneider                      asn@samba.org
