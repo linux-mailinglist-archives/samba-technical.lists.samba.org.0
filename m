@@ -2,35 +2,35 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (unknown [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA24A2486B
-	for <lists+samba-technical@lfdr.de>; Tue, 21 May 2019 08:51:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C571824876
+	for <lists+samba-technical@lfdr.de>; Tue, 21 May 2019 08:54:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=gG5yVBOC2bG1kJH51sIi9NCK+jr1aMQWHtzGgvU/P84=; b=GUEhFTGLizpJYXL+m11vu02Ghc
-	Iq8FqThX6xRETzfTybS8WITS84lN81Q+oiH/2IoFmwXYk064HofN/wrS1Ycq/ltNvtlVFhZgKVTIV
-	UfvTDZeB4stLB5F7xzKAjtB4ges2hu5rZyJvGr3rkgkngiuFsDo4f+N1NfCxyEIaA0ez623hyrpe/
-	UsKSSba/xGUNtJOtVeh7WDHTuR1U18rGyCrvvK1uO5v82rAF3MCTXUVcXNxi4D5QCiFCAYK6qq87D
-	lKBbEz3sVF1IpMuxrQERLY7CHA8DBNrCkqPIFwCKd065oK2SS4uq34iXcGEH5Y+gBQ9dI/BJdULB7
-	uxNTlrrQ==;
-Received: from localhost ([::1]:32340 helo=hr1.samba.org) 
+	bh=8X7o8tFhUCBBHUcM1EXgr6eqDNTT0YGDRacAFkNOSIs=; b=m8sOCZI0VMRbSO6lGCKwW4LmXy
+	su9uFnbMUhzdyi5dUGsWKxI6TIA7FGohAaXwG7+N0lNY4JKnWwn5BPKSet3N2TWsxaxQTN8Mf5pXm
+	5rbjfqoq5QWtb03CZv6Ca0fRzrFbKhEmxJDetUgP/agqahqd8YKYGb649K78QA/1NW9tj+Fg8JtxY
+	2RHJK3CgRFJDtRFojiOBI0+hbSqWtp6vO97eFAHr71TcZd0wKwbQ+yE2WfNk+/38WsfG/oh7ZH8TY
+	9m9E/FXT50XuD8eXWx5ZjA3g6VmCE/tPIFFKXLvccFnmVZ0P1xHPydULB40a6P9RMEs7g5dLiRm8I
+	udw4euQA==;
+Received: from localhost ([::1]:33086 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hSyc3-000ucJ-67; Tue, 21 May 2019 06:51:03 +0000
-Received: from [2a01:4f8:192:486::147:1] (port=23720 helo=hr2.samba.org) 
+	id 1hSyfH-000ulp-Pq; Tue, 21 May 2019 06:54:23 +0000
+Received: from [2a01:4f8:192:486::147:1] (port=24738 helo=hr2.samba.org) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hSybx-000ucC-A5
- for samba-technical@lists.samba.org; Tue, 21 May 2019 06:51:00 +0000
+ (Exim) id 1hSyfC-000uli-JR
+ for samba-technical@lists.samba.org; Tue, 21 May 2019 06:54:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42627210; h=Message-ID:Date:Cc:To:From;
- bh=gG5yVBOC2bG1kJH51sIi9NCK+jr1aMQWHtzGgvU/P84=; b=l0QjjCbhU0iE+SgMbBgwNQp9uD
- C3gaqJxdCGXHNc75xA0H5F/QKnCvZzkNyt9AHDcKRSmvEhe7M8pzc5uIAU7EHGl/tB4ZkG1KtDlkS
- M4Y5be/mNyzcRB4Upzgi2LWiob4XR25xfeoyvRgKRLsNDxB9PKOliRc9DiOcGBUMjzRs=;
+ bh=8X7o8tFhUCBBHUcM1EXgr6eqDNTT0YGDRacAFkNOSIs=; b=psS2lE3LDz15h5VExFyBmuXdSS
+ wb18QJQZGjUKgZ7ZQZhvpagSoxF8X3R+W0/SCG47a4k669vyUS72JodG5zhCU3yYw9wlewC74ufDG
+ iSkLE5gn/7l87fXGre1fB2K14Sb4KPgY+8Dw5yGjrUzqpOXLKCKV9NIHzvmr4lDp9uwY=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hSybr-0000Ja-Jt; Tue, 21 May 2019 06:50:51 +0000
+ (Exim) id 1hSyf7-0000Ns-B4; Tue, 21 May 2019 06:54:13 +0000
 To: Martin Schwenke <martin@meltin.net>
 Subject: Re: New csbuild run
-Date: Tue, 21 May 2019 08:50:51 +0200
-Message-ID: <1837370.ydoI62cGuG@magrathea.fritz.box>
+Date: Tue, 21 May 2019 08:54:13 +0200
+Message-ID: <3206132.ajtiDnVues@magrathea.fritz.box>
 In-Reply-To: <20190521162924.4444f055@martins.ozlabs.org>
 References: <1902926.C4UlyRiazf@magrathea.fritz.box>
  <4043444.PDZQgdqHAT@magrathea.fritz.box>
@@ -59,24 +59,55 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 On Tuesday, May 21, 2019 8:29:24 AM CEST Martin Schwenke wrote:
 > Hi Andreas,
-
-Hi Martin,
-
+> 
+> On Tue, 21 May 2019 08:19:26 +0200, Andreas Schneider <asn@samba.org>
+> 
+> wrote:
+> > On Tuesday, May 21, 2019 3:36:07 AM CEST Martin Schwenke wrote:
+> > > How can I run this locally on my laptop?
+> > 
+> > you need to install csbuild which is normally available on Fedora. You
+> > should use Fedora 29 or newer.
+> > 
+> > You can run it like this:
+> > 
+> > https://gitlab.com/samba-team/devel/samba/commit/
+> > 5e996a902488ecb3f6e6afcd528cfdd135038c50#587d266bb27a4dc3022bbed44dfa19849
+> > df3044c_228_289
+> > 
+> > Line 289-296
+> > 
+> > for 'make -j$(nproc)' you use e.g. 'make -j8'
+> > 
+> > You don't have to specify a commit range if you just want to get all
+> > errors. But normally it compare a range. It will create a diff what is
+> > new, fixed or currently not working.
+> > 
+> > for '--git-commit-range $CI_COMMIT_RANGE' you use for example:
+> >     --git-commit-range master-mybranch~20..master-mybranch
+> > 
+> > which will compare the last 20 commits. It is interesting once you fix
+> > something.
+> > 
+> > As csbuild also finds quite some false positives, the above command is
+> > interesting, because of the diff it just doesn't report them as 'new' if
+> > it is in both commits. So normally you only get newly introduced issues.
+> > 
+> > Does that answer your question?
+> 
+> Almost.  :-)
+> 
 > I run Debian, so is csbuild available from some other place than as a
 > package in Fedora?  I know that I could find a Fedora RPM
 > and unpack it, but I figure there must be a web site somewhere that I
 > can download it from.   Unfortunately, searching the internet for
 > "csbuild" finds too many other things.  :-(
 
-I only know Fedora which packages it. It is split into several projects:
+I just found:
 
-https://github.com/kdudka/cscppc
-https://github.com/kdudka/csmock
-https://github.com/kdudka/cswrap
-https://github.com/kdudka/csdiff
+https://github.com/kdudka/csbuild-deb
 
 
-	Andreas
 
 -- 
 Andreas Schneider                      asn@samba.org
