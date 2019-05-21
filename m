@@ -2,48 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (unknown [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A3D4245AB
-	for <lists+samba-technical@lfdr.de>; Tue, 21 May 2019 03:37:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8575124670
+	for <lists+samba-technical@lfdr.de>; Tue, 21 May 2019 05:46:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=E3PDmo/5AHlvbOgef9oLoYaOMjhDpQJHeqCmAS4HUNU=; b=sXpmHjo0rIDZiGKZVwKWW8CPMA
-	uZtwGBp58UalO1kefsMgMdXw2LOEb1EOVJfdnopL2yjpHM5eFE3ZCWLuyyydpQpCKRlfoJvCuZJWm
-	hKtZNiwgcXExhsNEAHzaxlHCiZgy6RjnUSrECvUKrNqLc5PDcTAQaLK0N0F5BsQ/+DafIyFt7BRwl
-	4ddNRbsruKfM90QLe5+JwfIYqtXpDONqUiWlZUxyvoRK1h7pCWw63cqXzh17BNKjNKFe9czr9ubV2
-	mhhXy3wD5KMYnibkHT1Buy6vII0yZ5XpLDSASPovZJNp1oc2L4KcZMYq+4PIUyGGUPTg2RditmACC
-	JzC9s7kA==;
-Received: from localhost ([::1]:25824 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=/7kyLjAjKp3vO3YkTwAqVjD4O5RgumF0HJqr2yogXL4=; b=WQrqGT9hP1VK7gt+i/imz9UZrt
+	D7blDvdCjtWVtsAGa0C2Zvx3wLYjjFTTvIbcOOhPCtZylcgk15FMx25IFgzTcpbKooADQpONxTudY
+	PcaBqy3EvkwWMKGo1AyTtVB0+WIw3n+bISUKVly8L30/8Gfbp1mLDVE0NmqC9/10GUebgMUJeND1P
+	xtaZplZiexGe+7tZDmUyUf2hS2tDCxZ/enkdn519uChw2NGg+9MaPP8z6YimeXgUB6aoeGM6BgamM
+	QNVCsPiLOVVr4o6ndr+juqZj7dC/Y9ofjqVbUZdG5lpVHQQz2lLb8BiIO6WowA+feQqrkScGyRFEO
+	U91/dvXA==;
+Received: from localhost ([::1]:29188 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hSthW-000scV-Es; Tue, 21 May 2019 01:36:22 +0000
-Received: from bilbo.ozlabs.org ([203.11.71.1]:40743 helo=ozlabs.org) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hSthQ-000scO-CJ
- for samba-technical@lists.samba.org; Tue, 21 May 2019 01:36:19 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 457JJ810vjz9s6w;
- Tue, 21 May 2019 11:36:08 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1558402568; bh=rM/zU+H/8U1w2NDx3AV2X+WYJ1x3zWJwmfVh6i72Dww=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=F4OAGAABW8f7vP5EMfRdiXEKxO6dUu9F4xnxlpCSV2DA9rGtr5RuR087q/tdOnk35
- 4RxTGmz96/KswEW/9aPxVBUWL7QI2FgK3A6j4KhiMr66mKzTZI7WMm3L5iWseRW4I8
- I4WfoouCPzxU4uBH3tVc+NJbAfEtbKkUWBh01pyoG5UvXCmzguhxriqJUfJuZxNRGo
- Q6EmSbl/8ZtmK6L3OLeeeb7d31sZv1I90i5EnAlDIw33gd2hUsTSdagdL23ofxgZDJ
- n93HJlVcj6KEk6tpR1K10CE630TUhllPPzlSSTtkUsUfv2c2pDC5w9z2Mu9iEOAdTq
- y9lR06M/T4RaQ==
-Date: Tue, 21 May 2019 11:36:07 +1000
-To: Andreas Schneider <asn@samba.org>
-Subject: Re: New csbuild run
-Message-ID: <20190521113607.55e693da@martins.ozlabs.org>
-In-Reply-To: <1902926.C4UlyRiazf@magrathea.fritz.box>
-References: <1902926.C4UlyRiazf@magrathea.fritz.box>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+	id 1hSvjD-000tL7-Co; Tue, 21 May 2019 03:46:15 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:43156) 
+ by hr1.samba.org with esmtps
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim) id 1hSvj8-000tL0-EZ
+ for samba-technical@lists.samba.org; Tue, 21 May 2019 03:46:13 +0000
+Received: from [IPv6:2404:130:0:1000:ed06:1c1d:e56c:b595] (unknown
+ [IPv6:2404:130:0:1000:ed06:1c1d:e56c:b595])
+ (Authenticated sender: timbeale@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 7719C810D0; 
+ Tue, 21 May 2019 15:45:51 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=catalyst; t=1558410351;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:openpgp:openpgp;
+ bh=/7kyLjAjKp3vO3YkTwAqVjD4O5RgumF0HJqr2yogXL4=;
+ b=S86dq8lfsn0m5liwud9keNxkgq2f8XqGU7aU6V1gz4f/BN1pDIUAXYwGgE9XrrE0j2w+og
+ SsFbBv/OyA+yG9ZGw4vTejN8VLnTPHwDzp4xoqs6pBmSwYgfZn+VLxrhtqQddDmlMc8EcY
+ ntMkHQT2N/RQ62zgqCPAHTYyxTI8Mbk=
+Subject: dcerpc.bare test is a bit flappy
+Openpgp: preference=signencrypt
+To: Gary Lockyer <gary@catalyst.net.nz>
+Message-ID: <e538c255-9698-0464-f4c1-4116c2ed8c6d@catalyst.net.nz>
+Date: Tue, 21 May 2019 15:45:50 +1200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=catalyst; t=1558410351;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:openpgp:openpgp;
+ bh=/7kyLjAjKp3vO3YkTwAqVjD4O5RgumF0HJqr2yogXL4=;
+ b=Y7TWJIhh1cvek1gRbdXzU6l7nta1CgBlqyqzgDg6YfF/wKTBHSKTpbbg0L7xdf8MNznhij
+ SV3CHCaWWjQcIbBqGP2o6C/XzDRQ9/kOu/Dqp+MML17mFTYXdppkZRpgtDjKCYJV3+xNDa
+ GMgPGAy8g4BAlf1nYwkAM8S2Dyw+5wU=
+ARC-Seal: i=1; s=catalyst; d=catalyst.net.nz; t=1558410351; a=rsa-sha256;
+ cv=none;
+ b=kRyxjczlZbC0aPx5DQKvdGALieHo/w7K6sS7HgSB7No1yjYJpteYtd5nhVsZf1pzMUuIiz
+ t5cq6QpLYkwmb4QVR1R0IGxNzSg6v2lC4QkikTBYVEAPDi9ZvZTEFHGmLtdCswSSD4E6M2
+ Ra6p4lU/z23DrQ1k4kIhbRvra9tDee4=
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=timbeale@catalyst.net.nz
+ smtp.mailfrom=timbeale@catalyst.net.nz
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -57,38 +74,38 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: samba-technical@lists.samba.org
+From: Tim Beale via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Tim Beale <timbeale@catalyst.net.nz>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Andreas,
+Hi Gary,
 
-On Fri, 17 May 2019 16:34:42 +0200, Andreas Schneider via
-samba-technical <samba-technical@lists.samba.org> wrote:
+I noticed the dcerpc.bare test is a bit flappy. I've seen it fail both
+in gitlab CI and running it locally. Usually it just gives me an error like:
 
-> I've started a new csbuild run with ctdb included:
-> 
-> https://gitlab.com/samba-team/devel/samba/-/jobs/214444970
-> 
-> csbuild normally checks a commit range for added errors. With a force push it 
-> will check the last 20 commits. This means it will go back 20 commits, compile 
-> everything, then checkout what you pushed and compare the diff of the output. 
-> If there are newly added errors, it will fail.
-> 
-> However it reports a huge amount of problems so that the log exceeds the 
-> allowed size of 8MB. However we should try to address the issues it finds to 
-> get to a smaller size.
-> 
-> I normally try to fix a few of those issues form time to time because it finds 
-> a lot of valid once. It will lead to a much better and cleaner codebase in the 
-> end!
-> 
-> Please help fixing those bugs.
+error:
+samba.tests.dcerpc.bare.samba.tests.dcerpc.bare.BareTestCase.test_two_contexts_tcp
+(samba.subunit.RemotedTestCase)(ad_dc_default:local) [
+Exception: was started but never finished!
+]
 
-How can I run this locally on my laptop?
+Sometimes the python test itself produces a segmentation fault.
 
-peace & happiness,
-martin
+It seems like it might be related to commit d65b7641c84976c543d 's4
+librpc rpc pyrpc: Ensure tevent_context deleted last'. On master, the
+test fails maybe 1 in 4 times I run it. I reverted this commit and ran
+it 20+ times without problem.
+
+To run the test locally, use:
+SELFTEST_TESTENV=ad_dc_default:local make testenv
+python3 -m samba.subunit.run  $LOADLIST samba.tests.dcerpc.bare 2>&1  |
+python3 /home/timbeale/code/samba/selftest/filter-subunit
+--fail-on-empty --prefix="samba.tests.dcerpc.bare."
+--suffix="(ad_dc_default:local)"
+
+Cheers,
+Tim
+
 
