@@ -2,42 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (unknown [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04FD724881
-	for <lists+samba-technical@lfdr.de>; Tue, 21 May 2019 08:56:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A8E72492C
+	for <lists+samba-technical@lfdr.de>; Tue, 21 May 2019 09:42:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=1U9PMQVAfpZUR4aA8ZFBRvWiW0d0kErQVszYt30pYbQ=; b=b+YGqI0Cue3CbVX1IusodagfPi
-	9w5Z6SZcFdpCKXRw9Wl27l6QlS2dBhLS7CJd2/qqHrBq9fafqbedkujxZGzaMUiYw5zSWPwHDmtoR
-	Ub3zM4/63jMwOH3RNY6/dSkOKwWVUG3re2+TlaFipFYgMej/bl6+WpWoxbQM8MwdoKDffZ5wHjShS
-	WqJJuRagGI+LeYsActjF0t1Rpz4H16obTcKH5uQ3UM8D1nwPXD3E9C1xuDx5IY26yFoxohbpfiwO9
-	uD0pAmdaFgzWYOpfCJpKfjsAIrfUIz1b6UtsVGmetW3kqq2RABqmmPgOrpYDl1vNNo++cSc2IgrZ9
-	TV+3XD+A==;
-Received: from localhost ([::1]:33822 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=ufCFAf2AWY+PFdtN/5bNPoMlbhpkfRQXhr4KBpcfawQ=; b=B8XEETTCZhIDQMrr4tY0dKCSyz
+	svr86gpteaiW2+lxh/dWu1y6nfrIdnR2sGFqVDqZTHEAWvVKJfd9afgnQsMrIvy21Fumm17Bs8QgC
+	Ci+9jYW5YpFY6mnJr2MP6BbXnZDvYwXoEsSUvDKRDitFgiMV//j9see1GE76rI+8Ll2bSRkHZdGIy
+	DKr1BnyR/fThwYuidNJhb5D6z91OkbRmcwq8fBhRTLN88tc2ZfCBqko9qRMBvrBDf5d6+rsuVfO6a
+	FYsDXAa5jbYb25Nh6Y/3YfEMq5ZZE3HRYRozOXwbP1KbKSYdxw2GD2ltyjDp3lY0qosJiQZc+IoXq
+	B33Flv5A==;
+Received: from localhost ([::1]:37042 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hSyhQ-000usF-RO; Tue, 21 May 2019 06:56:36 +0000
-Received: from [2a01:4f8:192:486::147:1] (port=25320 helo=hr2.samba.org) 
+	id 1hSzPZ-000vLa-60; Tue, 21 May 2019 07:42:13 +0000
+Received: from [2a01:4f8:192:486::147:1] (port=39508 helo=hr2.samba.org) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hSyhL-000us7-Pr
- for samba-technical@lists.samba.org; Tue, 21 May 2019 06:56:34 +0000
+ (Exim) id 1hSzPU-000vLT-AW
+ for samba-technical@lists.samba.org; Tue, 21 May 2019 07:42:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Date:Cc:To:From;
- bh=1U9PMQVAfpZUR4aA8ZFBRvWiW0d0kErQVszYt30pYbQ=; b=uasrV+OkED86YfIEupIqHUBobf
- +/mOI8oovyCQl+oOVVizZa4Wymu9crpfzoupR95NBZKGwl+M2B4cVyRdVCGH4iVzHOfg5RxEHEBxI
- CisOREqqfF/uaM6UBvPjIZf+7C3oa01eGE/rwQNwQatHOHNerlFFXGnphLfdhJ86Hyw4=;
+ s=42627210; h=Date:Message-ID:From:Cc:To;
+ bh=ufCFAf2AWY+PFdtN/5bNPoMlbhpkfRQXhr4KBpcfawQ=; b=sSnTSA+UiHE019rnUcNxg5aokq
+ 9SFQk5jxokD8YQsfonIJ1j5d+oVI2ZWla+9sdbJn/uNK5ubkJbF8RCFT3VstA5XHuYY5fch9Zf4/k
+ q24KECSuVTCfNFtCvOdC4icimFUbpoiN30G02h25ACQSYKcOkEnr1FPQlZpD5AYB4Jmc=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hSyhG-0000Qj-Dc; Tue, 21 May 2019 06:56:26 +0000
-To: Martin Schwenke <martin@meltin.net>
-Subject: Re: New csbuild run
-Date: Tue, 21 May 2019 08:56:26 +0200
-Message-ID: <4139832.O3Al6u4HZe@magrathea.fritz.box>
-In-Reply-To: <20190521162924.4444f055@martins.ozlabs.org>
-References: <1902926.C4UlyRiazf@magrathea.fritz.box>
- <4043444.PDZQgdqHAT@magrathea.fritz.box>
- <20190521162924.4444f055@martins.ozlabs.org>
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hSzPN-0000oP-PV; Tue, 21 May 2019 07:42:01 +0000
+Subject: Re: Samba 4.11 Freeze Date?
+To: Andrew Bartlett <abartlet@samba.org>
+References: <1554082801.4036.4.camel@samba.org>
+Openpgp: preference=signencrypt
+Organization: Samba Team
+Message-ID: <88c02bab-06fc-69b1-793a-dad6851804df@samba.org>
+Date: Tue, 21 May 2019 09:42:01 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+In-Reply-To: <1554082801.4036.4.camel@samba.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: de-DE
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,66 +54,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Karolin Seeger <kseeger@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tuesday, May 21, 2019 8:29:24 AM CEST Martin Schwenke wrote:
-> Hi Andreas,
-> 
-> On Tue, 21 May 2019 08:19:26 +0200, Andreas Schneider <asn@samba.org>
-> 
-> wrote:
-> > On Tuesday, May 21, 2019 3:36:07 AM CEST Martin Schwenke wrote:
-> > > How can I run this locally on my laptop?
-> > 
-> > you need to install csbuild which is normally available on Fedora. You
-> > should use Fedora 29 or newer.
-> > 
-> > You can run it like this:
-> > 
-> > https://gitlab.com/samba-team/devel/samba/commit/
-> > 5e996a902488ecb3f6e6afcd528cfdd135038c50#587d266bb27a4dc3022bbed44dfa19849
-> > df3044c_228_289
-> > 
-> > Line 289-296
-> > 
-> > for 'make -j$(nproc)' you use e.g. 'make -j8'
-> > 
-> > You don't have to specify a commit range if you just want to get all
-> > errors. But normally it compare a range. It will create a diff what is
-> > new, fixed or currently not working.
-> > 
-> > for '--git-commit-range $CI_COMMIT_RANGE' you use for example:
-> >     --git-commit-range master-mybranch~20..master-mybranch
-> > 
-> > which will compare the last 20 commits. It is interesting once you fix
-> > something.
-> > 
-> > As csbuild also finds quite some false positives, the above command is
-> > interesting, because of the diff it just doesn't report them as 'new' if
-> > it is in both commits. So normally you only get newly introduced issues.
-> > 
-> > Does that answer your question?
-> 
-> Almost.  :-)
-> 
-> I run Debian, so is csbuild available from some other place than as a
-> package in Fedora?  I know that I could find a Fedora RPM
-> and unpack it, but I figure there must be a web site somewhere that I
-> can download it from.   Unfortunately, searching the internet for
-> "csbuild" finds too many other things.  :-(
+Hi Andrew,
 
-And packages are at:
+Am 01.04.19 um 03:40 schrieb Andrew Bartlett:
+> I'm wondering if you have a suggested freeze date for Samba 4.11 yet?
+> 
+> It would be helpful for our planning to ensure we land features with
+> plenty of time.
 
-https://kdudka.fedorapeople.org/csbuild/dists/trusty/contrib/
+sorry for answering late.
+I just updated
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.11
+
+So July 9 will be freeze date.
+
+Karolin
 
 -- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
+Karolin Seeger			https://samba.org/~kseeger/
+Release Manager Samba Team	https://samba.org
+Team Lead Samba SerNet		https://sernet.de
 
