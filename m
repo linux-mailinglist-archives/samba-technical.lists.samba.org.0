@@ -2,37 +2,37 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BCC6F275A7
-	for <lists+samba-technical@lfdr.de>; Thu, 23 May 2019 07:44:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 151CC275AE
+	for <lists+samba-technical@lfdr.de>; Thu, 23 May 2019 07:46:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=7v7ReF7O+tAUKfnwdmPv9FQ5hdEuuaN8zcPS6O9I5xs=; b=wZ8CmCC37XIQhGHiHu+G110AEt
-	ALcxhdAW69gqVUOCA5JMoe+1gdqMbbqH3OyCuFo4sPQTQvrwvodlq/ClFXoR8RxSE2FUPnXmpHFuk
-	IuTFf+AipUDUtTsSlQ4CZcRgIbf0wOuoz64CTPwjBSYxLelvNxBBGcWLynvt4LPGthM1EBL3XyZ5E
-	ri4TAoiFSOKYdoUtmfq4w4cORRQSFFWHu0gziN+k7H791xkk9qwxlCH5QuWNsQx8oXsTi1gTgQJWg
-	9Wtguk0AlTOXRKWwMwwIiBpTRrifn7WozAYwwCp0nH1UXzclL5HbERRSmVjteWkdBWgyuF6HQTF56
-	PVl81GVA==;
-Received: from localhost ([::1]:27994 helo=hr1.samba.org) 
+	bh=6xH0DXxgwtxe8drtzWdiTfxfab3CXSEXiInGb2a6UwA=; b=ZlMGcaro15JGL/FWTRl9TDvDiH
+	be4kf/fGHq3EF35Rvw3Kk/ISON91OJpS/WvARJ+FbvATDxKbfBZIbpzjUeRasC4glPAEem0PPK7Mx
+	54doCEPOy7jWgRFvu8L6O4h6wIbkozmDueUrJ9y7USbTkVQJHf3OClF+0kZWwBJjTGPnJDXz7HtPZ
+	MsLTd8uqEb+2XBGjSIWwz1PNShUiMYe/1KX1d7KceD1MfY0suhaQlXNOTC6U025LoKmYKLHiHlJwj
+	eHn7KDyP9eLeJvWuEmPatr7j9CZLEUiu006B8/FgMNLY4PUepOZgdb5JWfLh/sr/Uq8qdFO3GmPVV
+	MKvMPOJQ==;
+Received: from localhost ([::1]:28728 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hTgVV-001O3P-DH; Thu, 23 May 2019 05:43:13 +0000
-Received: from [2a01:4f8:192:486::147:1] (port=41710 helo=hr2.samba.org) 
+	id 1hTgYX-001O9i-KO; Thu, 23 May 2019 05:46:21 +0000
+Received: from [2a01:4f8:192:486::147:1] (port=42512 helo=hr2.samba.org) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hTgVL-001O3I-Gm
- for samba-technical@lists.samba.org; Thu, 23 May 2019 05:43:11 +0000
+ (Exim) id 1hTgYT-001O9b-73
+ for samba-technical@lists.samba.org; Thu, 23 May 2019 05:46:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42627210; h=Message-ID:Date:To:From:CC;
- bh=7v7ReF7O+tAUKfnwdmPv9FQ5hdEuuaN8zcPS6O9I5xs=; b=gw8zepQG5BU5ZaJPfZiZ2VKryE
- 6NKeyFvcCOmjalczWoP1awz6c8/4TUAaCUVC8tpd7YxI4/zevaF6N+mmCagQUmAffP/pmW002VNZp
- Ny5JC6e06cB6r8xejmrYpiKX2ydFqUN6nQk5K5VjtuvOdIJNXHnDAjpcZslJbhG0Uh/w=;
+ bh=6xH0DXxgwtxe8drtzWdiTfxfab3CXSEXiInGb2a6UwA=; b=fWd3p89ouJjbeC07q+yYcjaTdZ
+ Y3eoTqYOF2Z44xjixrghNc6O87FHljC6SENwfjXMaAlOLDQWLjCD4mFWEqoLgsVdpApZ2n2Y4161J
+ i7Z/Dije99KGjSRY1CSIvHdIk3ngvTw5gAJKd9bccZh//doAqXnSHOtMmbl/51DQQRzE=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hTgVF-0004WQ-Rm; Thu, 23 May 2019 05:42:57 +0000
-To: samba-technical@lists.samba.org, Steve French <smfrench@gmail.com>
-Subject: Re: Kerberos and Samba client tools
-Date: Thu, 23 May 2019 07:42:57 +0200
-Message-ID: <2585169.WRIv5fHKiD@krikkit>
-In-Reply-To: <CAH2r5mvmJVe0i+aAidvpnmHPdxX=V6RJ0dYdQZfBY+K7zq2o5w@mail.gmail.com>
-References: <CAH2r5mvmJVe0i+aAidvpnmHPdxX=V6RJ0dYdQZfBY+K7zq2o5w@mail.gmail.com>
+ (Exim) id 1hTgYN-0004Yq-Ha; Thu, 23 May 2019 05:46:11 +0000
+To: samba-technical@lists.samba.org, Gary Lockyer <gary@catalyst.net.nz>
+Subject: Re: UBSAN warnings on calls to memcpy
+Date: Thu, 23 May 2019 07:46:11 +0200
+Message-ID: <1900817.20UiHFBjkS@krikkit>
+In-Reply-To: <80078990-84ab-4399-3b61-ee1dd908dc9c@catalyst.net.nz>
+References: <80078990-84ab-4399-3b61-ee1dd908dc9c@catalyst.net.nz>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
@@ -54,40 +54,28 @@ Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wednesday, 22 May 2019 16:52:16 CEST Steve French via samba-technical 
-wrote:
-> I was noticing that the username and/or password seems to be ignored
-> in different (and possibly confusing to users) ways on various client
-> tools (smbcacls and smbclient for example) when you specify -k (for
-> Kerberos authentication).
+On Thursday, 23 May 2019 05:20:40 CEST Gary Lockyer via samba-technical wrote:
+> One of the more common UBSAN errors is
+> "null pointer passed as argument 2, which is declared to never be null"
 
-Hi Steve!
+Hi Gary,
+ 
+> These are calls to memcpy where the source length is 0, and the data is
+> NULL. Adding an "if (length > 0) {" guard before the memcpy would fix
+> the warning.
+> 
+> I'm inclined to think we should do this, but also agree that it does
+> clutter the code. While the call to memcpy should be safe, removing the
+> warnings reduces the clutter and makes it less likely we'll miss a real
+> issue.
 
-> We probably need to figure out what behavior is expected - probably that
-> either 1) warn if you specify -U and -k together (since smbcacls ignores it
-> apparently) or
-> 2) actually use the -U when -k is specified to look for that specific
-> user in the kerberos credential cache, and if not found to prompt the
-> user for the kerberos password so we can authenticate (kinit or
-> equivalent) to Active Directory
+I think we should fix those. There will be other tools (csbuild) also 
+complaining about them ...
 
-this is a known issue and is also an issue with FIPS support I'm working on. I 
-will rewrite the code to offer a new option.
-
-	--use-kerberos=auto|yes|no
-
-Auto will be the default which means we try kerberos by default and fallback 
-to NTLM. YES means there will be no fallback and no means use NTLM.
-
--k will mostly be working as before to not break any scripts.
-
-So I have a lot of work ahead and hope that makes sense.
+I would guess that an optimizer could remove that if not needed.
 
 
-Best regards,
-
-
-   Andreas
+	Andreas
 
 
 
