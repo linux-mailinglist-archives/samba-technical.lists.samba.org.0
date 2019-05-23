@@ -2,70 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED55028482
-	for <lists+samba-technical@lfdr.de>; Thu, 23 May 2019 19:07:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44A4727ECF
+	for <lists+samba-technical@lfdr.de>; Thu, 23 May 2019 15:53:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=XtgmCyl6ifHZ+NgiED/3q2Nh+D46WjrCkAOEv7vW9Dk=; b=0pYHKxxWMLxaxmREITLSpephId
-	169cxxX36XnTyCJ3CNsRUEOYbhObZvNs2EbMrKkiF/yiaZS40IIWOCW8kt7OU60Ovc01RsyU/6BpW
-	eGhKEuSrOFh5bHt03oLqroQueU5c1pGA+5fcJYMJaUkCg+cO4/lS8w+AbszRWERH9d5D1/vuWGHE+
-	/BXEHjNXyNPy4BnKS8KzhN7JwJL6EXRXQ1Ep9yIjGdFySued9M0x5cE9Q3ApeG1Q+28JVBJnjda46
-	beMqmvC8KtkKYGz9Y0ZoCvdrEUPOMO0CIutOJqRe7hMfJSP8oa6kqoYhw7Qns7vNUeYVAc7ZLvY2W
-	Q+AkYBhQ==;
-Received: from localhost ([::1]:47320 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=PDb707NtZTM/aBvJ7yfXoIAOllAZeZbvC51CllKIU10=; b=AACmk8KDyO2rnqqXhrGLsgoZna
+	wPuOwEwmkDQmR46uZQba6mlsfczcX9GC/ZVh+BEiSPu8yABYeTm/edbTeYH3dyv34j6CnzH1mpfEf
+	pdnU0iWCgcprAda1Axp7v9yN5z6FMq8bLAkh/hBK80MpMxrNmWTA0Z0qRJ8fgAhKj2axmr0AV3fvL
+	z+v4DTLy7Sc6hm9dzCq/sHwW+J7zGUVqghvQjWcdnG2A8BAIoR19kZpNL18Tmi7TXqbRptft4JT8T
+	LR/H5REiz1MGaNHCq2Ic6s80Rsapd9oGUygBJ1HDxlcIa4LUbTDPO0KI1XOOSxyd/ErEJngQiFz9c
+	K7DtWSNQ==;
+Received: from localhost ([::1]:46264 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hTrAS-001Rgh-1z; Thu, 23 May 2019 17:06:12 +0000
-Received: from e2i64.smtp2go.com ([103.2.140.64]:56741) 
+	id 1hTo8a-001RLx-4x; Thu, 23 May 2019 13:52:04 +0000
+Received: from [2a01:4f8:192:486::147:1] (port=47290 helo=hr2.samba.org) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hTrAM-001Rga-S6
- for samba-technical@lists.samba.org; Thu, 23 May 2019 17:06:10 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=smtpcorp.com; s=a1-4; h=Feedback-ID:X-Smtpcorp-Track:Date:Message-ID:
- Subject:To:From:Reply-To:Sender:List-Unsubscribe;
- bh=XtgmCyl6ifHZ+NgiED/3q2Nh+D46WjrCkAOEv7vW9Dk=; b=FTuUeaYxV5ddrSDMEQL1Bj4i30
- +qWFK8x5z2MzEDCZA+R9hLideORg5yGJzYJghSE66ILnD0FVUfqwJ62H7irhoaxQkr0cinVvx1JTb
- FdwdWwmA/gU5jNaElKV0IBlsZ/gARnS+iblDL/xQ0poTW2ttHxWm/dQCd+E1E5sguhbxYUXhROJLt
- rJPx/+x40RrQOSkd8PhL+74bpRKCsZzyt6gcsS0uFecGKsI30mf90hPxuMLrgpFNASWKrCXY1eG93
- qACXQP0aIR4o+t7ChLvfZIvb/lfufyEJTYTDDOe68kV+Zi+4zJGXYyzG2wUTMBIgdgaUnzFU1gK9q
- bjEI3igw==;
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linagora.com;
- i=@linagora.com; 
- q=dns/txt; s=s266739; t=1558631167; h=from : subject : to : message-id 
- : date; bh=XtgmCyl6ifHZ+NgiED/3q2Nh+D46WjrCkAOEv7vW9Dk=; 
- b=i0m2LYNMTdIFlzh+DuI24lJiVW6Jt5xMCr9qEfHM449Jdv3zCUw8rS3x/vqjglHvF36mvw
- ivTc6elbwemrbfTl652U6QlcDmeDCzr3PtNthxN2QRT+M5e2MyUOpn8hxJtTmV4bLH7enCAt
- lOCg8DCIxHCo3bs/mA2R9Be7kuuY6ubkGpBJ6LMK+V5kWIKp/N/EpT91P+KdlNF/Kwyn1Eo0
- wPuTr7jV27ojDhVRNhBAfD8iv2opa3MIY3qqBAGPxyQgIPEOg7P/llLRO98/1KuLJ+/FG6jF
- UzD80JH07hoTsntNwsMzVT9nBO1FnjWPVgNR6B6y+GGq4myzeAVhUwvw==
-Received: from [10.66.228.43] (helo=SmtpCorp)
- by smtpcorp.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.91) (envelope-from <jrope@linagora.com>) id 1hTo5B-cp4Tr5-Qt
- for samba-technical@lists.samba.org; Thu, 23 May 2019 13:48:33 +0000
-Received: from [10.54.36.8] (helo=smtp.linagora.com)
- by smtpcorp.com with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.91) (envelope-from <jrope@linagora.com>) id 1hTo5A-wSERny-Nr
- for samba-technical@lists.samba.org; Thu, 23 May 2019 13:48:32 +0000
-Received: from [192.168.0.101] (ver27-4-78-199-57-193.fbx.proxad.net
- [78.199.57.193])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by smtp.linagora.com (Postfix) with ESMTPSA id 8000E4171B
- for <samba-technical@lists.samba.org>; Thu, 23 May 2019 15:48:31 +0200 (CEST)
-X-LINAGORA-Copy-Delivery-Done: 1
-To: samba-technical@lists.samba.org
-Subject: samba-tool fsmo transfer - uncaught exception
-Message-ID: <642f86fb-36b6-e647-ec52-e6e93bab2950@linagora.com>
-Date: Thu, 23 May 2019 15:48:31 +0200
+ (Exim) id 1hTo8V-001RLq-60
+ for samba-technical@lists.samba.org; Thu, 23 May 2019 13:52:01 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Message-ID:From:Cc:To;
+ bh=PDb707NtZTM/aBvJ7yfXoIAOllAZeZbvC51CllKIU10=; b=jQT2fftXW1Vl/reNYiELgEhGDI
+ bAQdHnm+R56DYFGJ1pENlDVsvy01XfBqMihRwQp+qgiET/FX3yfY3yBX08dxK3ncokjt+1Gylh3Tm
+ LL4zlEHh6XqX7Hcj8eNaXkg+SAzX48pdL+uVx4wpkHtafbdn2VbnKkSHXhE1uLppT+Rc=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hTo8N-0008Pq-5F; Thu, 23 May 2019 13:51:52 +0000
+Subject: Re: [PATCH][SMB3] Add missing defines for new negotiate contexts
+To: Tom Talpey <ttalpey@microsoft.com>, Jeremy Allison <jra@samba.org>,
+ Steve French <smfrench@gmail.com>
+References: <CAH2r5mvEYMEUjz8BDRUumn0yGq__VntNKx-8AzWcZgCDOJQv-Q@mail.gmail.com>
+ <20190418172353.GB236057@jra4>
+ <BN8PR21MB11863B736AA5D284CC213118A0220@BN8PR21MB1186.namprd21.prod.outlook.com>
+ <CY4PR21MB0149DC81B079BCD36D580AC5A0350@CY4PR21MB0149.namprd21.prod.outlook.com>
+Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
+Message-ID: <4591362b-cb4e-7e22-00a6-bf7239584957@samba.org>
+Date: Thu, 23 May 2019 15:51:13 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.6.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-Smtpcorp-Track: 1hTo5jwSERnyNr.5hSxNMSmE
-Feedback-ID: 266739m:266739aja3LFS:266739sZTo66v66W
-X-Report-Abuse: Please forward a copy of this message, including all headers, 
- to <abuse-report@smtp2go.com>
+In-Reply-To: <CY4PR21MB0149DC81B079BCD36D580AC5A0350@CY4PR21MB0149.namprd21.prod.outlook.com>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="mFFEKhsXWfIBEUS5bTWYk99HOukjRePUi"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,65 +57,90 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?UTF-8?Q?Julien_Rop=c3=a9?= via samba-technical
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?Julien_Rop=c3=a9?= <jrope@linagora.com>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--mFFEKhsXWfIBEUS5bTWYk99HOukjRePUi
+Content-Type: multipart/mixed; boundary="Q4zF25MSWowUMmT5aCjZ3NgdxiH8iFLuU";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Tom Talpey <ttalpey@microsoft.com>, Jeremy Allison <jra@samba.org>,
+ Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
+Message-ID: <4591362b-cb4e-7e22-00a6-bf7239584957@samba.org>
+Subject: Re: [PATCH][SMB3] Add missing defines for new negotiate contexts
+References: <CAH2r5mvEYMEUjz8BDRUumn0yGq__VntNKx-8AzWcZgCDOJQv-Q@mail.gmail.com>
+ <20190418172353.GB236057@jra4>
+ <BN8PR21MB11863B736AA5D284CC213118A0220@BN8PR21MB1186.namprd21.prod.outlook.com>
+ <CY4PR21MB0149DC81B079BCD36D580AC5A0350@CY4PR21MB0149.namprd21.prod.outlook.com>
+In-Reply-To: <CY4PR21MB0149DC81B079BCD36D580AC5A0350@CY4PR21MB0149.namprd21.prod.outlook.com>
 
-I have been confronted to a problem with role transfers for forestdns 
-and domaindns.
-Using the command "samba-tool fsmo transfer [...]", I get an error :
+--Q4zF25MSWowUMmT5aCjZ3NgdxiH8iFLuU
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-ERROR(<type 'exceptions.AttributeError'>): uncaught exception - 'module' 
-object has no attribute 'drs_utils'
-File "/usr/lib/python2.7/dist-packages/samba/netcmd/__init__.py", line 
-177, in _run
-return self.run(*args, **kwargs)
-File "/usr/lib/python2.7/dist-packages/samba/netcmd/fsmo.py", line 528, 
-in run
-transfer_dns_role(self.outf, sambaopts, credopts, role, samdb)
-File "/usr/lib/python2.7/dist-packages/samba/netcmd/fsmo.py", line 133, 
-in transfer_dns_role
-except samba.drs_utils.drsException as e:
+Hi Tom,
 
+>> The Windows protocol documents were updated on March 13 for the
+>> upcoming "19H1" update cycle.
+>>
+>> MS-SMB2 version page, with latest, diffs, etc:
+>>
+>> https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/5=
+606ad47-5ee0-437a-817e-70c366052962
+>=20
+> So, there was a defect in the published spec which we just corrected, t=
+here's a new
+> update online at the above page.
+>=20
+> The value of the new compression contextid is actually "3", but the ear=
+lier document
+> incorrectly said "4". There were several other fixes and clarifications=
+ in the pipeline
+> which have also been included.
+>=20
+> Redline diffs as well as the usual standard publication formats are ava=
+ilable.
 
+There's no server behavior defined for
+SMB2_NETNAME_NEGOTIATE_CONTEXT_ID. If there's none, why was it added at a=
+ll?
 
-This is using Samba 4.9.
-
-Looking on the net, I found several references of the same, dating as 
-far as 2016 :
-
-https://lists.samba.org/archive/samba/2016-September/203363.html
-
-https://lists.samba.org/archive/samba/2017-August/210120.html
-
-http://samba.2283325.n4.nabble.com/samba-4-7-0-AD-DC-FSMO-roles-transfer-error-td4725099.html
-
-
-
-These show the error was found in 4.5, 4.6 and 4.7.
-
-Each time, the solution was to modify the file 
-"[samba]/lib/python27/site-packages/samba/netcmd/fsmo.py", by adding the 
-line "import samba.drs_utils".
-I have verified that this fixes the issue for me.
+metze
 
 
-I understand the problem is not seen in every environment, but it still 
-seems to be there for some users.
-If this issue is known and the fix is so easy, why isn't it applied?
-If this is because there is something wrong with the environments of the 
-people that see it, what should they (we) do to fix it? Is editing the 
-code ourselves a good solution, or does that hide something else we 
-should look at in our environment?
 
 
-Best regards,
-Julien
+--Q4zF25MSWowUMmT5aCjZ3NgdxiH8iFLuU--
 
---
-Message envoyé grâce à OBM, la Communication Libre par Linagora
+--mFFEKhsXWfIBEUS5bTWYk99HOukjRePUi
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAlzmpVUACgkQDbX1YShp
+vVYhNRAAh6H/tLfGej+8sNPQx7thEJTKiIqdAoPEJL8P6aIjdZzGDRiV9GvPIJl2
+1TJWh0bfjzUIkYhwrokcvnBSM8g4pIGW4MNFwY3mp58p4/o+Xvct7TkGQ3hGOtf8
+zJQe0Vs/+NCpnw5LrCmVc/MnZ9VPg2UjFEsB5bjq5OLS8TSxP4VMx19ikucL8YEa
+YieWybGWmCYuTKGJWOJbn3DeFeIjkmpMrE4Ee81q2+ERM9VO0os4B0K2D9OYzOBk
+HHmFQ1Wo44j87k5DEyjyYkBSCsFbQeIXmb/TJKVuBc81gKE7UEAyLORMCiPvzCQq
+x0mzNXEoa0nDv8Moef4a6bTY0Xvgfyb7EaKOSc7Q/nnSNvNNYiWzvZEMbpCGAR+6
+EaEnerqOy2gNDb+QncqfB3gZG/AgqO4bwRqOVi01OohwaITtDwgLd391IAfFV0TS
+Pfztr3BmdfREu42oM2FEHBxNPUbGoNecO45+tsGhmcslgsme88vgfDXmdYnm3RQb
+9LtlxjQGcx8ccCR5tzauT611BJuaECFVkbFTod9N+CthCIXCwReVpXhCjx/9aC30
+gJYDrFw24w9zwdT4f5ZXkVxQlEndEUZQWiWYH0UtwWj4gAt+KegBZUhVAfu+ge3n
+4r84UsyaEHE0wWCezTHNs2viSeMJVbU13vmv7TtZttH3/S5Ce7Q=
+=SL/w
+-----END PGP SIGNATURE-----
+
+--mFFEKhsXWfIBEUS5bTWYk99HOukjRePUi--
 
