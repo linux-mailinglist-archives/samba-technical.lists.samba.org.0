@@ -2,46 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 116D228D9A
-	for <lists+samba-technical@lfdr.de>; Fri, 24 May 2019 01:07:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD8F528DE1
+	for <lists+samba-technical@lfdr.de>; Fri, 24 May 2019 01:34:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=Bh+ovhzdEVP67Vg/8o62NaiMYHoYL77GIEw9oxgHIEY=; b=ydgUoQJ2aoYeC/+mI9BMQRe6e3
-	y0mpKBQ+U9v5hvqk3OPCpXKmOHZ07hK6WvK1k+8PPKQQDf3Ar500XZElRc/4JEzkLDHO86bM6xPXh
-	P4v07oocivmKXtDzX4qUspqTac8YU7MJxifVytH7wcf6W6ByiYOmcKXMHBDvMkJTDe2op6qO6jvMJ
-	Y8wjclgd3GpjB4YVGYKlXWK4OZRUIJqfgSQDh7IPqHIgjTpuRcln8CwhE09va/u8sOGQwQXsFlBv7
-	gknmml3teYFYCOt4rd5TCZy6FU7MJVOWpGavgBrxXQRZrfxWfSi4MjA1OWTFLsO6oQN6LsOPjWoYV
-	hJW8eyxA==;
-Received: from localhost ([::1]:22392 helo=hr1.samba.org) 
+	bh=Zw2tIsDOU3tzgDZSv0fKMfBLYEIA+vy9g+pKec1VYvk=; b=WM7A8J02YsXlVdwGvzfUrFpXBS
+	1hVJzWwWoOiBNuMSpeHbMB7XdAIxdE5d2BDJuq9pxx8MNuD5WoqXKEvuVuh3xuDTEiAm0WT/l2SHA
+	y7oEekx177cAvQXDYV9IBMsZF8JC9WC4yv8Qos0Yi+wiZc/Zko2y3FrYeAKHcNMRCSnfKIloWVANj
+	mfsqJrTSb0ntDXFaUwiJBTd21aDHOCvPy3InGbThH9GgAHv3S70VVEk5f9axtkZ56Oj6yq3R815KB
+	fsEAgPrT80OTFj6sNRV0zRsiRc3oJucQJijDYDG96svHk0iSz3jxYD+FK5ewpqeUOqPuiuc0njCoN
+	m20sBC7Q==;
+Received: from localhost ([::1]:23138 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hTwnp-001Uyq-9Q; Thu, 23 May 2019 23:07:13 +0000
-Received: from [2a01:4f8:192:486::147:1] (port=60756 helo=hr2.samba.org) 
+	id 1hTxDi-001V6G-6k; Thu, 23 May 2019 23:33:58 +0000
+Received: from ozlabs.org ([203.11.71.1]:33981) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hTwnk-001Uyj-C8
- for samba-technical@lists.samba.org; Thu, 23 May 2019 23:07:10 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=Bh+ovhzdEVP67Vg/8o62NaiMYHoYL77GIEw9oxgHIEY=; b=VRpMiOYM6MLDdVBcl/tTr+137+
- zYfxf3/3Aj8XXUlTP4DcHV94/5KMOEoMDuSYN0dq/BlQXXjxxOiZlaR3xw2KaAItty6bqreX5rA0A
- kxAzMkAdmG/OZK+NZU8QqkSZNP8AAjvcNJJCwg78Z7BSz/UFf08G4OPQ5n5umcRQrkL0=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hTwnd-00048a-D4; Thu, 23 May 2019 23:07:01 +0000
-Date: Thu, 23 May 2019 16:06:58 -0700
-To: Tom Talpey <ttalpey@microsoft.com>
-Subject: Re: [PATCH][SMB3] Add missing defines for new negotiate contexts
-Message-ID: <20190523230658.GH244578@jra4>
-References: <CAH2r5mvEYMEUjz8BDRUumn0yGq__VntNKx-8AzWcZgCDOJQv-Q@mail.gmail.com>
- <20190418172353.GB236057@jra4>
- <BN8PR21MB11863B736AA5D284CC213118A0220@BN8PR21MB1186.namprd21.prod.outlook.com>
- <CY4PR21MB0149DC81B079BCD36D580AC5A0350@CY4PR21MB0149.namprd21.prod.outlook.com>
- <4591362b-cb4e-7e22-00a6-bf7239584957@samba.org>
- <CY4PR21MB014907F825DED7F5057E69E2A0010@CY4PR21MB0149.namprd21.prod.outlook.com>
+ (Exim) id 1hTxDd-001V69-Ht
+ for samba-technical@lists.samba.org; Thu, 23 May 2019 23:33:55 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4595RX2Jk9z9s4V;
+ Fri, 24 May 2019 09:33:44 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
+ t=1558654424; bh=x/Zzpit31Nf7dQJojqGMiPxihBdq7ZhNEuhxXdSh0Ug=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=TfwXKS7OKLgP1j2hpOgpuS+3lWDUtAz1aqWBrgtLAds6MQOu5obOM6Cemc2fhRpI2
+ dmJXeM8PUhQ2OK8Cv7AS3EThx5N4hj5hgBsgq2JosLg7HkDRAyUpClouHo8P71QEBR
+ GKg2Rz5z9+k4LK8iLNuY2vEMCLiJX9LUVd+FdHeGuDx6WljZ8WAbuFTFPu+4TS8j2J
+ FLa8GiCV5AKnJ2C7RLYeb8UNl4zvvh2vtHg+kNDwjQGy4LZp7DGa+N9wDk29nX6272
+ 4tPPOA3ezlNS0y0P86ikuWEVCHNbGSZqe0Z2/zmeUW3RyvNvUi0ZpyMAOWD1XDsC19
+ +zU8uIHcW+cow==
+Date: Fri, 24 May 2019 09:33:42 +1000
+To: Andreas Schneider <asn@samba.org>
+Subject: Re: New csbuild run
+Message-ID: <20190524093342.0616e494@martins.ozlabs.org>
+In-Reply-To: <5821468.3VxPKbcTHU@magrathea.fritz.box>
+References: <1902926.C4UlyRiazf@magrathea.fritz.box>
+ <df4e9e89-12cc-e8c2-7905-8dd6c401b31c@suse.com>
+ <20190522163104.5c7b8e98@martins.ozlabs.org>
+ <5821468.3VxPKbcTHU@magrathea.fritz.box>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CY4PR21MB014907F825DED7F5057E69E2A0010@CY4PR21MB0149.namprd21.prod.outlook.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -55,61 +60,21 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Stefan Metzmacher <metze@samba.org>, Steve French <smfrench@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>,
- CIFS <linux-cifs@vger.kernel.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: Noel Power <nopower@suse.com>, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, May 23, 2019 at 06:24:16PM +0000, Tom Talpey via samba-technical wrote:
-> > -----Original Message-----
-> > From: Stefan Metzmacher <metze@samba.org>
-> > Sent: Thursday, May 23, 2019 9:51 AM
-> > To: Tom Talpey <ttalpey@microsoft.com>; Jeremy Allison <jra@samba.org>;
-> > Steve French <smfrench@gmail.com>
-> > Cc: CIFS <linux-cifs@vger.kernel.org>; samba-technical <samba-
-> > technical@lists.samba.org>
-> > Subject: Re: [PATCH][SMB3] Add missing defines for new negotiate contexts
-> > 
-> > Hi Tom,
-> > 
-> > >> The Windows protocol documents were updated on March 13 for the
-> > >> upcoming "19H1" update cycle.
-> > >>
-> > >> MS-SMB2 version page, with latest, diffs, etc:
-> > >>
-> > >> https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-
-> > smb2/5606ad47-5ee0-437a-817e-70c366052962
-> > >
-> > > So, there was a defect in the published spec which we just corrected, there's a
-> > new
-> > > update online at the above page.
-> > >
-> > > The value of the new compression contextid is actually "3", but the earlier
-> > document
-> > > incorrectly said "4". There were several other fixes and clarifications in the
-> > pipeline
-> > > which have also been included.
-> > >
-> > > Redline diffs as well as the usual standard publication formats are available.
-> > 
-> > There's no server behavior defined for
-> > SMB2_NETNAME_NEGOTIATE_CONTEXT_ID. If there's none, why was it added
-> > at all?
-> 
-> It's an advisory payload, and can be used to direct the connection appropriately
-> by load balancers, servers hosting multiple names, and the like. It's basically the
-> same servername that will be presented later in SMB2_TREE_CONNECT, only it's
-> available early, prior to any SMB3 processing. Other possible uses are for logging
-> and diagnosis.
-> 
-> It has no actual function in the SMB3 protocol, so apart from defining the payload
-> it's not a matter for the MS-SMB2 document. We would hope, however, that clients
-> will include the context when sending SMB2_NEGOTIATE.
+On Wed, 22 May 2019 09:05:32 +0200, Andreas Schneider <asn@samba.org>
+wrote:
 
-IMHO Looks like a reinvention of the 'netbios name' field that
-allowed us to do clever things with the smb.conf 'netbios
-alias' parameter :-).
+> You can also replace docker with podman :-)
+
+podman doesn't appear to even be in Debian testing.
+
+I might try it under Docker...  ;-)
+
+peace & happiness,
+martin
 
