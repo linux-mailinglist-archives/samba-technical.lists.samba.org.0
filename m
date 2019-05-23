@@ -2,49 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17C2B27606
-	for <lists+samba-technical@lfdr.de>; Thu, 23 May 2019 08:34:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED55028482
+	for <lists+samba-technical@lfdr.de>; Thu, 23 May 2019 19:07:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=nAVhpVxh40pMMI5XYB/SoASNmj7abVy+7dRJahKmqsA=; b=zNLFwTCJQAi/yGisQO4qrzxMkC
-	SJFNERJVwIsFxm79rFnTkKTcnfRaXPaeLnvCWuXvALwsiCkppr4pyMGIahTJ8M8KHXsdrwgN3swwI
-	ae+PqYL3mUnxXF9jDjgUwI0KTqJRx4VHW9gSP3GtMtfc/Jz+gtqeYoG8llabkqbgEqWyUBgH76UWj
-	Ho/DSLtHp8xjenAVDq2+c1Qt+a4oUfQDriiNMf37d+yfiU4p8lzXxzlvMsdrPEFJBiJ7HmsyKatHi
-	BDxyXiHzh0835DQZWhQtlHxEw+SpfV2qNY30iWEIZWc2jfm9bTnLTv4zoya3Rp1VTL22Q4jmZ9aC2
-	JTi6pW7w==;
-Received: from localhost ([::1]:30206 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=XtgmCyl6ifHZ+NgiED/3q2Nh+D46WjrCkAOEv7vW9Dk=; b=0pYHKxxWMLxaxmREITLSpephId
+	169cxxX36XnTyCJ3CNsRUEOYbhObZvNs2EbMrKkiF/yiaZS40IIWOCW8kt7OU60Ovc01RsyU/6BpW
+	eGhKEuSrOFh5bHt03oLqroQueU5c1pGA+5fcJYMJaUkCg+cO4/lS8w+AbszRWERH9d5D1/vuWGHE+
+	/BXEHjNXyNPy4BnKS8KzhN7JwJL6EXRXQ1Ep9yIjGdFySued9M0x5cE9Q3ApeG1Q+28JVBJnjda46
+	beMqmvC8KtkKYGz9Y0ZoCvdrEUPOMO0CIutOJqRe7hMfJSP8oa6kqoYhw7Qns7vNUeYVAc7ZLvY2W
+	Q+AkYBhQ==;
+Received: from localhost ([::1]:47320 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hThJM-001OaP-0h; Thu, 23 May 2019 06:34:44 +0000
-Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:41649 helo=ozlabs.org) 
+	id 1hTrAS-001Rgh-1z; Thu, 23 May 2019 17:06:12 +0000
+Received: from e2i64.smtp2go.com ([103.2.140.64]:56741) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hThJ9-001OaH-DL
- for samba-technical@lists.samba.org; Thu, 23 May 2019 06:34:34 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 458fqN23wQz9s6w;
- Thu, 23 May 2019 16:34:24 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1558593264; bh=YtLT0doD4hdaBQf0Xt7K4ky/yRumXOnPlQNxqWJPhwc=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=KTw+MG8y+7f/GwvlniLZo+crRhd22uE3jD/dG8L7rFg/g7d9Qvsf1unuDmTs1yLrM
- 3CEKb5K0kjFsUAlkkJC0yg/1l/wehyVFNe03rz84leXd7V52AgftGjca79umLNR/n/
- j9GaezLaqJpfzjx9QMtoJNEzpPX8kATwY/kJVYDXHGhzWMHrNDcaSQ9hlA7ua6A3uJ
- ugU0OSnBfVh85LhGtjTXiOLgZCIxuEsClP/QHVauEl2HE668SsKlkWzyKZzgDRJtmP
- DLw8vmPePo0m6YxBOwH+Atf9SN+6iI/Uu/eySzX8YVHwqVQUBx0yZNSJpDl5/USyzW
- POZovb2AsDzvg==
-Date: Thu, 23 May 2019 16:34:23 +1000
-To: Richard Sharpe <realrichardsharpe@gmail.com>
-Subject: Re: Hitting Could not claim version: NT_STATUS_IO_TIMEOUT
-Message-ID: <20190523163423.2c8cee71@martins.ozlabs.org>
-In-Reply-To: <20190523162722.56831c89@martins.ozlabs.org>
-References: <CACyXjPw5KdTqu1z+u5PzgYFCh3gsE6C8vPd+Yi0tnWLrLOHMzw@mail.gmail.com>
- <20190523162722.56831c89@martins.ozlabs.org>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+ (Exim) id 1hTrAM-001Rga-S6
+ for samba-technical@lists.samba.org; Thu, 23 May 2019 17:06:10 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=smtpcorp.com; s=a1-4; h=Feedback-ID:X-Smtpcorp-Track:Date:Message-ID:
+ Subject:To:From:Reply-To:Sender:List-Unsubscribe;
+ bh=XtgmCyl6ifHZ+NgiED/3q2Nh+D46WjrCkAOEv7vW9Dk=; b=FTuUeaYxV5ddrSDMEQL1Bj4i30
+ +qWFK8x5z2MzEDCZA+R9hLideORg5yGJzYJghSE66ILnD0FVUfqwJ62H7irhoaxQkr0cinVvx1JTb
+ FdwdWwmA/gU5jNaElKV0IBlsZ/gARnS+iblDL/xQ0poTW2ttHxWm/dQCd+E1E5sguhbxYUXhROJLt
+ rJPx/+x40RrQOSkd8PhL+74bpRKCsZzyt6gcsS0uFecGKsI30mf90hPxuMLrgpFNASWKrCXY1eG93
+ qACXQP0aIR4o+t7ChLvfZIvb/lfufyEJTYTDDOe68kV+Zi+4zJGXYyzG2wUTMBIgdgaUnzFU1gK9q
+ bjEI3igw==;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linagora.com;
+ i=@linagora.com; 
+ q=dns/txt; s=s266739; t=1558631167; h=from : subject : to : message-id 
+ : date; bh=XtgmCyl6ifHZ+NgiED/3q2Nh+D46WjrCkAOEv7vW9Dk=; 
+ b=i0m2LYNMTdIFlzh+DuI24lJiVW6Jt5xMCr9qEfHM449Jdv3zCUw8rS3x/vqjglHvF36mvw
+ ivTc6elbwemrbfTl652U6QlcDmeDCzr3PtNthxN2QRT+M5e2MyUOpn8hxJtTmV4bLH7enCAt
+ lOCg8DCIxHCo3bs/mA2R9Be7kuuY6ubkGpBJ6LMK+V5kWIKp/N/EpT91P+KdlNF/Kwyn1Eo0
+ wPuTr7jV27ojDhVRNhBAfD8iv2opa3MIY3qqBAGPxyQgIPEOg7P/llLRO98/1KuLJ+/FG6jF
+ UzD80JH07hoTsntNwsMzVT9nBO1FnjWPVgNR6B6y+GGq4myzeAVhUwvw==
+Received: from [10.66.228.43] (helo=SmtpCorp)
+ by smtpcorp.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.91) (envelope-from <jrope@linagora.com>) id 1hTo5B-cp4Tr5-Qt
+ for samba-technical@lists.samba.org; Thu, 23 May 2019 13:48:33 +0000
+Received: from [10.54.36.8] (helo=smtp.linagora.com)
+ by smtpcorp.com with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.91) (envelope-from <jrope@linagora.com>) id 1hTo5A-wSERny-Nr
+ for samba-technical@lists.samba.org; Thu, 23 May 2019 13:48:32 +0000
+Received: from [192.168.0.101] (ver27-4-78-199-57-193.fbx.proxad.net
+ [78.199.57.193])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by smtp.linagora.com (Postfix) with ESMTPSA id 8000E4171B
+ for <samba-technical@lists.samba.org>; Thu, 23 May 2019 15:48:31 +0200 (CEST)
+X-LINAGORA-Copy-Delivery-Done: 1
+To: samba-technical@lists.samba.org
+Subject: samba-tool fsmo transfer - uncaught exception
+Message-ID: <642f86fb-36b6-e647-ec52-e6e93bab2950@linagora.com>
+Date: Thu, 23 May 2019 15:48:31 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-Smtpcorp-Track: 1hTo5jwSERnyNr.5hSxNMSmE
+Feedback-ID: 266739m:266739aja3LFS:266739sZTo66v66W
+X-Report-Abuse: Please forward a copy of this message, including all headers, 
+ to <abuse-report@smtp2go.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -58,95 +79,65 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: samba-technical@lists.samba.org
+From: =?UTF-8?Q?Julien_Rop=c3=a9?= via samba-technical
+ <samba-technical@lists.samba.org>
+Reply-To: =?UTF-8?Q?Julien_Rop=c3=a9?= <jrope@linagora.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 23 May 2019 16:27:22 +1000, Martin Schwenke <martin@meltin.net>
-wrote:
+Hi,
 
-> On Thu, 16 May 2019 12:14:39 -0700, Richard Sharpe via samba-technical
-> <samba-technical@lists.samba.org> wrote:
-> 
-> > I am hitting the following (in 4.7.1) in a CTDB-setup, and am looking
-> > for hints on how to debug it.
-> > 
-> > --------------------
-> > [2019/05/16 18:49:24.648838,  5, pid=21261, effective(0, 0), real(0,
-> > 0)] ../lib/dbwrap/dbwrap.c:160(dbwrap_check_lock_order)
-> >   check lock order 3 for g_lock.tdb
-> > [2019/05/16 18:49:24.648880, 10, pid=21261, effective(0, 0), real(0,
-> > 0)] ../lib/dbwrap/dbwrap.c:115(debug_lock_order)
-> >   lock order:  1:<none> 2:<none> 3:g_lock.tdb
-> > [2019/05/16 18:49:24.648908, 10, pid=21261, effective(0, 0), real(0,
-> > 0)] ../source3/lib/dbwrap/dbwrap_ctdb.c:1112(fetch_locked_internal)
-> >   Locking db 1294615339 key 73616D62615F76657273
-> > [2019/05/16 18:49:24.648935,  5, pid=21261, effective(0, 0), real(0,
-> > 0)] ../lib/dbwrap/dbwrap.c:128(dbwrap_lock_order_state_destructor)
-> >   release lock order 3 for g_lock.tdb
-> > [2019/05/16 18:49:24.648958, 10, pid=21261, effective(0, 0), real(0,
-> > 0)] ../lib/dbwrap/dbwrap.c:115(debug_lock_order)
-> >   lock order:  1:<none> 2:<none> 3:<none>
-> > [2019/05/16 18:49:24.648963, 10, pid=21261, effective(0, 0), real(0,
-> > 0)] ../source3/lib/dbwrap/dbwrap_ctdb.c:980(db_ctdb_record_destr)
-> >   Unlocking db 1294615339 key 73616D62615F76657273
-> > [2019/05/16 18:49:24.648977,  1, pid=21261, effective(0, 0), real(0,
-> > 0)] ../source3/smbd/server.c:1497(smbd_claim_version)
-> >   smbd_claim_version: g_lock_lock(G_LOCK_READ) failed: NT_STATUS_IO_TIMEOUT
-> > [2019/05/16 18:49:24.649000,  1, pid=21261, effective(0, 0), real(0,
-> > 0)] ../source3/smbd/server.c:2024(main)
-> >   main: Could not claim version: NT_STATUS_IO_TIMEOUT
-> > ---------------------
-> > 
-> > This is a four-node ctdb setup which was upgraded recently, but as far
-> > as I can see all nodes are at the same version and the problem is
-> > grabbing the lock.
-> > 
-> > This piece of code took the error path:
-> > 
-> >         status = g_lock_lock(ctx, name, G_LOCK_READ,
-> >                              (struct timeval) { .tv_sec = 60 });
-> >         if (!NT_STATUS_IS_OK(status)) {
-> >                 DBG_WARNING("g_lock_lock(G_LOCK_READ) failed: %s\n",
-> >                             nt_errstr(status));
-> >                 TALLOC_FREE(ctx);
-> >                 return status;
-> >         }
-> > 
-> > Anyone have any idea what that is about or how to debug it further?  
-> 
-> Just so you have a reply, we have seen a variant of this
-> (G_LOCK_WRITE failed) in our nightly testing but haven't been able
-> to understand it.  We are looking at.
-> 
-> The logs usually show smbd_claim_version() timing out on all 4 nodes
-> about 60 seconds after starting, with at least 2 nodes having the
-> problem at the same time.  Occasionally this is seen on only a single
-> node.
-> 
-> Before commit 97ad353a67ce0232d7ca5637f1bf8886e2df1aca fixed a bug in
-> the CTDB test scripts we could see this continuing for a long time as
-> ctdbd restarted smbd on nodes independently when the startup event
-> timed out... but there may have 1 smbd alive at all times, meaning that
-> (perhaps) g_lock.tdb didn't get wiped.
-> 
-> However, it didn't propagate from test to test, so when ctdbd was shut
-> down on all nodes and then started again, the problem went away,
-> presumably due to g_lock.tdb being wiped.
-> 
-> Commit 97ad353a67ce0232d7ca5637f1bf8886e2df1aca will probably hide this
-> now in our testing, because ctdbd will be restarted simultaneously on
-> all nodes if the cluster does not become healthy.
-> 
-> That's about all we know right now...  :-(
+I have been confronted to a problem with role transfers for forestdns 
+and domaindns.
+Using the command "samba-tool fsmo transfer [...]", I get an error :
 
-Oh!  One more thing.  If ctdbd were trying to migrate a record and was
-unable to take a record lock for more than 10 seconds then it should
-log a message saying "Unable to get RECORD lock on database ...".
-However, we don't see that.
+ERROR(<type 'exceptions.AttributeError'>): uncaught exception - 'module' 
+object has no attribute 'drs_utils'
+File "/usr/lib/python2.7/dist-packages/samba/netcmd/__init__.py", line 
+177, in _run
+return self.run(*args, **kwargs)
+File "/usr/lib/python2.7/dist-packages/samba/netcmd/fsmo.py", line 528, 
+in run
+transfer_dns_role(self.outf, sambaopts, credopts, role, samdb)
+File "/usr/lib/python2.7/dist-packages/samba/netcmd/fsmo.py", line 133, 
+in transfer_dns_role
+except samba.drs_utils.drsException as e:
 
-peace & happiness,
-martin
+
+
+This is using Samba 4.9.
+
+Looking on the net, I found several references of the same, dating as 
+far as 2016 :
+
+https://lists.samba.org/archive/samba/2016-September/203363.html
+
+https://lists.samba.org/archive/samba/2017-August/210120.html
+
+http://samba.2283325.n4.nabble.com/samba-4-7-0-AD-DC-FSMO-roles-transfer-error-td4725099.html
+
+
+
+These show the error was found in 4.5, 4.6 and 4.7.
+
+Each time, the solution was to modify the file 
+"[samba]/lib/python27/site-packages/samba/netcmd/fsmo.py", by adding the 
+line "import samba.drs_utils".
+I have verified that this fixes the issue for me.
+
+
+I understand the problem is not seen in every environment, but it still 
+seems to be there for some users.
+If this issue is known and the fix is so easy, why isn't it applied?
+If this is because there is something wrong with the environments of the 
+people that see it, what should they (we) do to fix it? Is editing the 
+code ourselves a good solution, or does that hide something else we 
+should look at in our environment?
+
+
+Best regards,
+Julien
+
+--
+Message envoyé grâce à OBM, la Communication Libre par Linagora
 
