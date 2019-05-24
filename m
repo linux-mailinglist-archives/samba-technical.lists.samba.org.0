@@ -2,46 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 422C829317
-	for <lists+samba-technical@lfdr.de>; Fri, 24 May 2019 10:30:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A004295C8
+	for <lists+samba-technical@lfdr.de>; Fri, 24 May 2019 12:28:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=V7goFAuyjhOYnxLTGAA07VfwfWK1XNvmlZBxBNMXiio=; b=oBkiTW7w6XjNh0EvhDqGD/MH/0
-	7nGUfPg8xDgbEHopQzznySn4bECVv+/A47ht314oNoj1wJess17kpm4uGNOc8USds1vHcw7oACy9f
-	/DHV146oQylCyE8WUx6IH6iiM3Dm5vHZLPlUn1UZUmI6QY4XYBovW3jS3P9QaBZncPEk/IKItVnx4
-	J+0v4yZ4uY3jshnt+zTaA+ZPNF1SMAg3NiuxneRiaOaOm5DJiXRxdOoWCVOrDBJvuDGtCHyOs4fRn
-	rK+gPgloU36q5WpJL4OslMyUPkG/qZhfWLfo9NRQr4JitIGz76oB0b8Htf6d7IovRovWgYmz/Mb+R
-	HMMgwpzw==;
-Received: from localhost ([::1]:40588 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=UXjT5hwfRWXTTcyvR2mtEFjR3zOgWXAInkRdvNYt8TE=; b=SF29nh6jgE1Yd46BriDjpFqgJY
+	cGOhW6BOpP2vJKzUJ95RwujrcdQE8FrueR6/KOWHPLKGgLkhIN9lr3SgU1LMj0UVWAsvrF8BaOl+M
+	AFO14GhIN71X1ezAWlaFzF3BvpnXG0NOb0GGfilmIMU5+rzSZ29cCT0Zn6NoZ3jWiles/rmnWclM3
+	7go5J6Xto5PL5YTRtaHV0bn1uzb2BUi5bilzGvboWfO/01IfwIs92JL8t67rugQz33cfm60f60o/B
+	34xk8g9qDi6lc8ZZLKG1mQzfLc4H5qLBmuZjuw22WmAQPO/I1ypgD60WMOHYwksSWxLRW1dChAxWL
+	McfiW7Lw==;
+Received: from localhost ([::1]:46434 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hU5Zu-001YC1-MW; Fri, 24 May 2019 08:29:26 +0000
-Received: from [2a01:4f8:192:486::147:1] (port=36408 helo=hr2.samba.org) 
+	id 1hU7QM-001Z4m-4D; Fri, 24 May 2019 10:27:42 +0000
+Received: from [2a01:4f8:192:486::147:1] (port=21956 helo=hr2.samba.org) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hU5Zq-001YBu-Du
- for samba-technical@lists.samba.org; Fri, 24 May 2019 08:29:24 +0000
+ (Exim) id 1hU7QI-001Z4O-1u
+ for samba-technical@lists.samba.org; Fri, 24 May 2019 10:27:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:To:CC;
- bh=V7goFAuyjhOYnxLTGAA07VfwfWK1XNvmlZBxBNMXiio=; b=pBiZFSMWg0FrozwUlIk2tdZtcb
- mBbFR77hhHVf23H9UaIYxN0wZMaUGcNfc2f9nleMFGGfGJHvAp1NMJZpBegMfkjeLvG34lJtfDJyP
- 0DoHsimhi306wmV5xXBUH2YN5DaS1dSx6nwz1TO1q6RdWQA6IZ9p+p97lSMakKK7kNXY=;
+ s=42627210; h=Date:Message-ID:From:Cc:To;
+ bh=UXjT5hwfRWXTTcyvR2mtEFjR3zOgWXAInkRdvNYt8TE=; b=QsKKw8tAG1vN3Y/jZ+iMK7l42o
+ BykQnpO1Gb1ku6FYkYM3CPev6jhu1pJYHvPU0xOqcVIBEbDi80aotSafs91/OoPFaTOKQpzKGI8h8
+ zBVm8hDn2HqWmbp5zsMQLkWGyQB1pfMV4q1vT8p36u1/puglrC6mNLsxeutCCLiUDpOc=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1hU5Zj-0008Ly-Pn
- for samba-technical@lists.samba.org; Fri, 24 May 2019 08:29:15 +0000
-Subject: Re: samba-tool fsmo transfer - uncaught exception
-To: samba-technical@lists.samba.org
-References: <642f86fb-36b6-e647-ec52-e6e93bab2950@linagora.com>
- <b2b6f46b-c819-c917-37f7-ead663bf4cf4@samba.org>
- <1c97651b-c97b-6f38-249b-aff5a091b24e@linagora.com>
-Message-ID: <4f70f827-6b7d-ff57-beaa-6519a8d80633@samba.org>
-Date: Fri, 24 May 2019 09:29:15 +0100
+ (Exim) id 1hU7QB-0000Y9-7l; Fri, 24 May 2019 10:27:31 +0000
+To: Tom Talpey <ttalpey@microsoft.com>, Jeremy Allison <jra@samba.org>,
+ Steve French <smfrench@gmail.com>
+References: <CAH2r5mvEYMEUjz8BDRUumn0yGq__VntNKx-8AzWcZgCDOJQv-Q@mail.gmail.com>
+ <20190418172353.GB236057@jra4>
+ <BN8PR21MB11863B736AA5D284CC213118A0220@BN8PR21MB1186.namprd21.prod.outlook.com>
+ <CY4PR21MB0149DC81B079BCD36D580AC5A0350@CY4PR21MB0149.namprd21.prod.outlook.com>
+ <4591362b-cb4e-7e22-00a6-bf7239584957@samba.org>
+ <CY4PR21MB014907F825DED7F5057E69E2A0010@CY4PR21MB0149.namprd21.prod.outlook.com>
+Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
+Subject: Re: [PATCH][SMB3] Add missing defines for new negotiate contexts
+Message-ID: <edd1ac0f-abe3-58b2-09c1-736d45c3ff31@samba.org>
+Date: Fri, 24 May 2019 12:27:26 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <1c97651b-c97b-6f38-249b-aff5a091b24e@linagora.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
+In-Reply-To: <CY4PR21MB014907F825DED7F5057E69E2A0010@CY4PR21MB0149.namprd21.prod.outlook.com>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="bobSvmW4MotmI6nHposFC5KSlmO3PsJC8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -55,42 +59,91 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 24/05/2019 08:00, Julien Ropé via samba-technical wrote:
-> > Can I ask just what is the exact command you are running ?
->
->
-> Here they are :
->
-> samba-tool fsmo transfer --role= forestedns -U administrator
->
-> samba-tool fsmo transfer --role= domaindns -U administrator
->
->
-> Transferring other roles doesn't cause an issue, but as I understand, 
-> only the DNS-related roles require the drs_utils module.
->
->
-> Note that the transfer seems to be effective in the end, as shown with 
-> the command "samba-tool fsmo show". But this exception makes me think 
-> that something did not complete.
->
->
-It seems to be failing whilst trying to replicate the changes, which 
-shouldn't be a big problem, because normal replication should do it.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--bobSvmW4MotmI6nHposFC5KSlmO3PsJC8
+Content-Type: multipart/mixed; boundary="gCHM7wOOnv9lomLEadGK8Nu7KFkrbDwjo";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Tom Talpey <ttalpey@microsoft.com>, Jeremy Allison <jra@samba.org>,
+ Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
+Message-ID: <edd1ac0f-abe3-58b2-09c1-736d45c3ff31@samba.org>
+Subject: Re: [PATCH][SMB3] Add missing defines for new negotiate contexts
+References: <CAH2r5mvEYMEUjz8BDRUumn0yGq__VntNKx-8AzWcZgCDOJQv-Q@mail.gmail.com>
+ <20190418172353.GB236057@jra4>
+ <BN8PR21MB11863B736AA5D284CC213118A0220@BN8PR21MB1186.namprd21.prod.outlook.com>
+ <CY4PR21MB0149DC81B079BCD36D580AC5A0350@CY4PR21MB0149.namprd21.prod.outlook.com>
+ <4591362b-cb4e-7e22-00a6-bf7239584957@samba.org>
+ <CY4PR21MB014907F825DED7F5057E69E2A0010@CY4PR21MB0149.namprd21.prod.outlook.com>
+In-Reply-To: <CY4PR21MB014907F825DED7F5057E69E2A0010@CY4PR21MB0149.namprd21.prod.outlook.com>
 
-What I am struggling to get my head around is, why does 'import samba' 
-fail when 'import samba.drs_utils' doesn't ?
+--gCHM7wOOnv9lomLEadGK8Nu7KFkrbDwjo
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-If you run 'pydoc samba', you will find that 'drs_utils' is part of 
-'samba', so should be available, especially as the full path is used 
-'samba.drs_utils'
+Hi Tom,
 
-Rowland
+> It's an advisory payload, and can be used to direct the connection appr=
+opriately
+> by load balancers, servers hosting multiple names, and the like. It's b=
+asically the
+> same servername that will be presented later in SMB2_TREE_CONNECT, only=
+ it's
+> available early, prior to any SMB3 processing. Other possible uses are =
+for logging
+> and diagnosis.
+
+Ok, I think it should be explicitly stated, otherwise it's a bit
+confusing, if it's completely missing from 3.3.5.4 Receiving an SMB2
+NEGOTIATE Request.
+
+> It has no actual function in the SMB3 protocol, so apart from defining =
+the payload
+> it's not a matter for the MS-SMB2 document. We would hope, however, tha=
+t clients
+> will include the context when sending SMB2_NEGOTIATE.
+
+This might be an information leak if client or server require
+encryption, as the unc in the tree connect is encrypted and the
+negotiate value isn't. On the other side it's likely that the target
+principal name is already visible in a kerberos ticket or the
+NTLMSSP MsvAvTargetName.
+
+metze
 
 
+--gCHM7wOOnv9lomLEadGK8Nu7KFkrbDwjo--
+
+--bobSvmW4MotmI6nHposFC5KSlmO3PsJC8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAlznxw4ACgkQDbX1YShp
+vVa4FA/9HORQ7XXubah4jCH1aUMdwKiNpIuMCkV8jnZBzNI8QXMZ5adEKlatNeE6
+SIw/wtTQTrfqzracloIXnSuv1l65x7IqjklspJ9pqjs8Ll1ZSRiVpcM/ebAvdYcK
+0Vx/wl9XIYWtebaq3pPoaQnRZwjggypNj2o6DgOH2w+GnZt43jl0kfvZ/ClNGwpP
+fL4oXRJbZi8YSKq63UXz0ePiitY9uU7i+Wx2OgXi/T4Oa7uPWFPjMWWGKgOajhKE
+3/kRhyo2iOWZ0pxWSCUJexYmC7vFHxwgmP7DvFiMr/qVYogNN3YxdyYeAL9fe+vv
+OlvHg6d6NrZzYfzvPq5GEweFmQ+gdSjF1b4r7fmnsuJ8SeVPp4cO9p8qsGW9hX2d
+5xjUa5gY/SqVzPnV9lIc/YCnMaGWkhYVamxB9es3aBB4VT0WKblwCZ9ZZg94bUWk
+vRd3gsUDq70Zy0/arVc+JMhjGoKaE4oENxWYxRpqV0l+y3nTV5t6/2i2JUAKSX1a
+l32amNg+1cDEnBgRX5udVl3LWlw/Llq3CUK/sG3JvMyF+TE3zMWNTVu1mVZYREnf
+PAT77z5Edx10I6KQClNfHV2joWS8KCzQWSbwTZwhGPxE4sQWmgifHKFz3PY+N0DF
+nxycYiqhAWLvdKm27MfV53MwyZzFJuFHspo4b8POn4qjO7Io/m4=
+=UrKO
+-----END PGP SIGNATURE-----
+
+--bobSvmW4MotmI6nHposFC5KSlmO3PsJC8--
 
