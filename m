@@ -2,44 +2,73 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6389528F3B
-	for <lists+samba-technical@lfdr.de>; Fri, 24 May 2019 04:43:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0162D29169
+	for <lists+samba-technical@lfdr.de>; Fri, 24 May 2019 09:01:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=xhCiwSqQ4e6ESDBKK01OOlfyhsT82G6jy4qtYF0BEEE=; b=tF7DekMN75MODVi31JHXkuLOMt
-	p2LzdPoSrJHeiJLphrJt6Qhx/zrkv1MRDGy9wVAxTtEDERQ99RqNumrwtwJbn5YiP6ou+jHkHxiF/
-	PXqQY4CVRUgY5zpYYgS8jzrlE7RbbLLy9dQRo+Jn+t3wcQX8sxkO+y7HtZEv+idnX1H6xF0UcxeGz
-	aKHh4+8vDL03wD6sUPyV63a38ZmbeacfQsyLYav2aXuBasZD3z/NN2qiIe36rH72uNgV4GYoqVygq
-	O5+c17YuHaItYciODxm4R0LdXDKXu3w+9eYgE9gWIHUUlxzCDOxq4ZXHUR47/vilAcT/CFnjeNTIP
-	PwNJxzXw==;
-Received: from localhost ([::1]:30434 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=lMNjtLPw1YoBvRwzMXi8V6g4HjkkBvxJ/oVb0D/ySJo=; b=L0sO2eUKG9iJncn9uOJyP9iW9H
+	YNofV228uqa7PmWIO0hVWb/VZJIvNnrG9/ogGnP+2mqG0b032AXWWWYX2D0EJsDAjkDVXxrhqNRfu
+	IxO8j3WZXRE6xOwdzelKL+EKf+rePJ0TTao9bKl0dGgnyADAKwhEY+jg0ZXVtmd3prl0Lc6pCgVYu
+	R6KVqUub1VUAnrH5CmeWUp53xAXZFOSqtkADWjrox0i7e9jFUx7dxlPyMaX2b7rmZ0udjZDOi1Qm1
+	iq4n5K1DmH8qdOE//mCoMlTMos1iXgoTrbSNNdPJNLOiV1NYdNhfolalM0EtO8ixXbjdc/cL1nCOa
+	s1/rkp2Q==;
+Received: from localhost ([::1]:33988 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hU0AT-001WE5-B1; Fri, 24 May 2019 02:42:49 +0000
-Received: from [2a01:4f8:192:486::147:1] (port=51250 helo=hr2.samba.org) 
+	id 1hU4C7-001XAD-C0; Fri, 24 May 2019 07:00:47 +0000
+Received: from e2i64.smtp2go.com ([103.2.140.64]:46395) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hU0AO-001WDy-W3
- for samba-technical@lists.samba.org; Fri, 24 May 2019 02:42:47 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=xhCiwSqQ4e6ESDBKK01OOlfyhsT82G6jy4qtYF0BEEE=; b=VC4/uf6Om3vO4gk6FXDRSkG+io
- q6JgWr9+YdbZ2Vu6vVh3uq94v1xmpgZ0vwEGRpD4UrB4hXP+GVj4JLfSZJvBpmqmA5Ff7eRWymJd2
- ZeIR+zghVVEWPJenXty3gkvNgD7n2jD+I6s/4vUsYLBNrUBb5G8TGWi4qmq3O5KdC/Kc=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hU0AI-0005P4-HK; Fri, 24 May 2019 02:42:38 +0000
-Date: Thu, 23 May 2019 19:42:32 -0700
-To: Shyam Rathi <shyam.rathi@nutanix.com>
-Subject: Re: [PATCH] s3:notifyd: Handle sigup in notifyd to reparse smb.conf
-Message-ID: <20190524024232.GA14980@jeremy-acer>
-References: <E869C7C5-1589-4AA2-BFF2-BD27F1C52D8C@nutanix.com>
- <20190524000405.GJ244578@jra4>
- <38917416-A93A-4B3B-9F44-B1B2D4087C03@nutanix.com>
+ (Exim) id 1hU4Bu-001XA6-MJ
+ for samba-technical@lists.samba.org; Fri, 24 May 2019 07:00:38 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=smtpcorp.com; s=a1-4; h=Feedback-ID:X-Smtpcorp-Track:Date:Message-ID:From:
+ To:Subject:Reply-To:Sender:List-Unsubscribe;
+ bh=lMNjtLPw1YoBvRwzMXi8V6g4HjkkBvxJ/oVb0D/ySJo=; b=K6oqsR94HC73+Z5csdhp001xz5
+ vLfTbhhP7+AHZWxWSXaYwZ7e0NvJz40Rc/ZH9narBLHTAXSucdKJK6eYtQnZDY77cyHIO9OA89RSJ
+ qQL9jdqIzTSAEOphc/l1SF+C31GdfmSn6BoRlb6pxwYvZniY66tYLHp5sS+Q9DGqIvoHGkC7v7bdB
+ wSODgqApT1xie9AEPM2A6NomvBpdVIZayj8NpiK8lpx6PTRhOHdNEvp0DwYkRS9qqBejB6U7OcNGj
+ z9pNqUrCvwVuGT2aQSLXTAMr94HNOFYc2PSq2kmFViDa2yeEQl8l/DpS+KqDocPRIE+vt0sGRTX8j
+ N9VdIluw==;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linagora.com;
+ i=@linagora.com; 
+ q=dns/txt; s=s266739; t=1558681234; h=from : subject : to : message-id 
+ : date; bh=lMNjtLPw1YoBvRwzMXi8V6g4HjkkBvxJ/oVb0D/ySJo=; 
+ b=h5rSM6wBRqvOcUdXXGGRM/zdbh9daln6pfvGlD3VFBrJcggTRoL6UklZDEj2K2Q9xgJGZ2
+ ZQQ0P/Zn48pUJlyaLeVzp35tpp1YqSRCZ+lJwU4/mnCPJyb81R8upFwa1T0kZYmIIIfk/XEH
+ ZqcVyWM69A+zOGVeLO/jmvQyECbFaCJncFvyRtEwo439wg+zoglVcGaFMtnD31J88ELJGmg0
+ nWYVPVgeCobTDlFlJZi9Sq7XXnYGrjyeXuoE25+S9rNGBti6N5iSgIQQc+0d3kCVzfC8EXsG
+ cFeHQCLDx5HhwVh19PGZYKD9vIfr3feu1NxP3RD2jDkt3MdBaPr5wNdg==
+Received: from [10.173.255.233] (helo=SmtpCorp)
+ by smtpcorp.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.91) (envelope-from <jrope@linagora.com>) id 1hU4Br-cp4ZWX-DZ
+ for samba-technical@lists.samba.org; Fri, 24 May 2019 07:00:31 +0000
+Received: from [10.54.36.8] (helo=smtp.linagora.com)
+ by smtpcorp.com with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.91) (envelope-from <jrope@linagora.com>) id 1hU4Bq-IbZspE-By
+ for samba-technical@lists.samba.org; Fri, 24 May 2019 07:00:30 +0000
+Received: from [192.168.0.101] (ver27-4-78-199-57-193.fbx.proxad.net
+ [78.199.57.193])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by smtp.linagora.com (Postfix) with ESMTPSA id B28BF41746
+ for <samba-technical@lists.samba.org>; Fri, 24 May 2019 09:00:28 +0200 (CEST)
+Subject: Re: samba-tool fsmo transfer - uncaught exception
+To: samba-technical@lists.samba.org
+References: <642f86fb-36b6-e647-ec52-e6e93bab2950@linagora.com>
+ <b2b6f46b-c819-c917-37f7-ead663bf4cf4@samba.org>
+X-LINAGORA-Copy-Delivery-Done: 1
+Message-ID: <1c97651b-c97b-6f38-249b-aff5a091b24e@linagora.com>
+Date: Fri, 24 May 2019 09:00:28 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+In-Reply-To: <b2b6f46b-c819-c917-37f7-ead663bf4cf4@samba.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <38917416-A93A-4B3B-9F44-B1B2D4087C03@nutanix.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Language: fr
+X-Smtpcorp-Track: 1hl4UqmPZspEUy.5yaeWUJLg
+Feedback-ID: 266739m:266739aja3LFS:266739sW2zttGd57
+X-Report-Abuse: Please forward a copy of this message, including all headers, 
+ to <abuse-report@smtp2go.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,56 +82,98 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+From: =?UTF-8?Q?Julien_Rop=c3=a9?= via samba-technical
+ <samba-technical@lists.samba.org>
+Reply-To: =?UTF-8?Q?Julien_Rop=c3=a9?= <jrope@linagora.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, May 24, 2019 at 12:18:36AM +0000, Shyam Rathi via samba-technical wrote:
-> Thanks for the review Jeremy. Responses inline below.
-> 
-> +†††††† DEBUG(2,("notifyd: Reloading services after SIGHUP\n"));
-> 
-> 	^^^^
-> 	Please use either the DBG_WARNING or DBG_NOTICE macros
-> 	to ensure consistency in new debug info levels.
-> 
-> 		---- I'll make the change.
+ > Can I ask just what is the exact command you are running ?
 
-Thanks !
 
-> +†††††† become_root();
-> +†††††† reload_services(NULL, NULL, false);
-> +†††††† unbecome_root();
-> 
-> 	^^^^^^^
-> 
-> Does notifyd need become_root()/unbecome_root()
-> pairs ? Isn't it always invoked when smbd is root
-> and stays as such ?
-> 
-> 		---- The sighup handler for parent smbd calls
-> 			"change_to_root_user()" before calling
-> 			reload_services(). For many other binaries,
-> 			either reload_services() or (un)become_root
-> 			is called first. I mainly kept the same
-> 			behavior. I'm not fully sure about its purpose
-> 			at this place.
+Here they are :
 
-None of the notifyd code ever changes credentials,
-so when it runs as root it'll stay that way.
+samba-tool fsmo transfer --role= forestedns -U administrator
 
-smbd has to change_to_root_user() inside the signal
-handler as it often changes credentials to the current
-attached user, so might not be currently running as
-root.
+samba-tool fsmo transfer --role= domaindns -U administrator
 
-I don't think you have the same problem inside notifyd
-so you can drop the become_root()/unbecome_root() I
-think.
 
-Test it once you've made the change to make sure :-).
+Transferring other roles doesn't cause an issue, but as I understand, 
+only the DNS-related roles require the drs_utils module.
 
-Jeremy.
+
+Note that the transfer seems to be effective in the end, as shown with 
+the command "samba-tool fsmo show". But this exception makes me think 
+that something did not complete.
+
+
+
+Le 23/05/2019 √† 19:38, Rowland penny via samba-technical a √©crit¬†:
+> On 23/05/2019 14:48, Julien Rop√© via samba-technical wrote:
+>> Hi,
+>>
+>> I have been confronted to a problem with role transfers for forestdns 
+>> and domaindns.
+>> Using the command "samba-tool fsmo transfer [...]", I get an error :
+>>
+>> ERROR(<type 'exceptions.AttributeError'>): uncaught exception - 
+>> 'module' object has no attribute 'drs_utils'
+>> File "/usr/lib/python2.7/dist-packages/samba/netcmd/__init__.py", 
+>> line 177, in _run
+>> return self.run(*args, **kwargs)
+>> File "/usr/lib/python2.7/dist-packages/samba/netcmd/fsmo.py", line 
+>> 528, in run
+>> transfer_dns_role(self.outf, sambaopts, credopts, role, samdb)
+>> File "/usr/lib/python2.7/dist-packages/samba/netcmd/fsmo.py", line 
+>> 133, in transfer_dns_role
+>> except samba.drs_utils.drsException as e:
+>>
+>>
+>>
+>> This is using Samba 4.9.
+>>
+>> Looking on the net, I found several references of the same, dating as 
+>> far as 2016 :
+>>
+>> https://lists.samba.org/archive/samba/2016-September/203363.html
+>>
+>> https://lists.samba.org/archive/samba/2017-August/210120.html
+>>
+>> http://samba.2283325.n4.nabble.com/samba-4-7-0-AD-DC-FSMO-roles-transfer-error-td4725099.html 
+>>
+>>
+>>
+>>
+>> These show the error was found in 4.5, 4.6 and 4.7.
+>>
+>> Each time, the solution was to modify the file 
+>> "[samba]/lib/python27/site-packages/samba/netcmd/fsmo.py", by adding 
+>> the line "import samba.drs_utils".
+>> I have verified that this fixes the issue for me.
+>>
+>>
+>> I understand the problem is not seen in every environment, but it 
+>> still seems to be there for some users.
+>> If this issue is known and the fix is so easy, why isn't it applied?
+>> If this is because there is something wrong with the environments of 
+>> the people that see it, what should they (we) do to fix it? Is 
+>> editing the code ourselves a good solution, or does that hide 
+>> something else we should look at in our environment?
+>>
+> Can I ask just what is the exact command you are running ?
+>
+> Rowland
+>
+>
+>
+>
+>
+-- 
+Julien ROP√â
+Support OSSA
+T√©l : 06.38.99.80.22 / 01 46 96 63 63
+Courriel : jrope@linagora.com
+www.linagora.com
+--
+Message envoy√© gr√¢ce √† OBM, la Communication Libre par Linagora
 
