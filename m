@@ -2,47 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9949F2AF0E
-	for <lists+samba-technical@lfdr.de>; Mon, 27 May 2019 08:59:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CF1E2AF0F
+	for <lists+samba-technical@lfdr.de>; Mon, 27 May 2019 08:59:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=QRymIhKNXcgdzkepzkmFAMSEKp/p0yyxh5N3hf4yLWo=; b=hGYH9fFQRhVJ6KKGyhoKQlfKLe
-	iuruD0ivl1+GX6ehN6QEvR26ggETDZMxSRgXHECU7vRnivFnkLzNl9s/Tr87LlhyZLjmiPU6EyM8B
-	IoTL+HgTQdDHIXrJ5b4nHQfPaulhzl+8QC861R4vUKsyIhAF5Ko5/fo/A9a2BNNIlaCXvVgAPmse2
-	stZFfVv8FMaKdlb+aC3dnAkO0ITF5MOjlGbiNY1xe425tYVX5OhwyFZ4Mw+3P8b6SUaEtWnRfhvrC
-	YUfCB/pcFh+aDd3AnmmQMaISj8CgUsr8Ue+hfys/g8TFFB72BoHpu+uoSi0U4qSeqYYtrxlt9uR2I
-	/8JTBfGw==;
-Received: from localhost ([::1]:28012 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=Qst4ELpe/RVVlrwSeu0pnvqlbU+reryJzyd+2UfA+YA=; b=1Hh4sRQmoo3/bO/cEOzLRJpgmB
+	ZfBVcZvdY5JdkRLhOFQSVFtWBvIbi8j2YxiFK/hOaqbI0A86BmJyzXO6bPTwG8hYnv2qqeoCiks/y
+	3tntHfH0sLn/IIVcw9Xwz0uQ+KZTttUickiZ6egTVS50unYTPLgSqmOg5VFDh3Ee7SAPdedPaM+Gz
+	fAS7jxiLxjXpHmOh7yvM6YyAhriQJHCz/1B7Ejay5YMnIWfqYLAmPf9s2MHc8dMQWyDbqP3HTsvoz
+	nD+DnxnekrxvtSNFes5sN9YVJtJvhuJrPUugWlUXtYLSG7EMtpPdLt7XT+0PiN+tPVXi8fDTq6o/M
+	8IE/GQJg==;
+Received: from localhost ([::1]:28750 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hV9az-0025Xy-9w; Mon, 27 May 2019 06:58:57 +0000
-Received: from [2a01:4f8:192:486::147:1] (port=38834 helo=hr2.samba.org) 
+	id 1hV9bl-0025e8-5N; Mon, 27 May 2019 06:59:45 +0000
+Received: from [2a01:4f8:192:486::147:1] (port=39050 helo=hr2.samba.org) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hV9au-0025Xr-23
- for samba-technical@lists.samba.org; Mon, 27 May 2019 06:58:54 +0000
+ (Exim) id 1hV9be-0025e1-Eh
+ for samba-technical@lists.samba.org; Mon, 27 May 2019 06:59:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:Cc:To;
- bh=QRymIhKNXcgdzkepzkmFAMSEKp/p0yyxh5N3hf4yLWo=; b=Hk97gN0KOt/k1nzM+TL1DNzDXA
- L/b+UPTdEWxEbNUU57kelA23+/zbVxP0SD8ixbPLTT6CWAGbKvMmaDUvW4jO0U2NHviDKC3ugEG+q
- FIYXm62oKqIWPqIeFs5L1wEwU10oWoxxRCzp5NEOFCuIMHPeKTwHl8Btvj3CAQV0fXS0=;
+ s=42627210; h=Date:Message-ID:From:To:CC;
+ bh=Qst4ELpe/RVVlrwSeu0pnvqlbU+reryJzyd+2UfA+YA=; b=FpP8xzgCdk2tv2iYFlueW053Sh
+ PhhDE1k/F5HdZJxYedyTPPEv+UjxocX/5okoX2vKx/Dzrqzm/3nA+X/hTsCHtCiNpvdsez60YJulj
+ /nGdlV2qKGBXmZirckOTVqPjl+WT4EVUP6bkPPDkpx2At70LCc6xlRgDdNWc8hvlXuPQ=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hV9an-0003du-NG; Mon, 27 May 2019 06:58:45 +0000
-Subject: Re: Kerberos and Samba client tools
-To: Andreas Schneider <asn@samba.org>, Steve French <smfrench@gmail.com>
-References: <CAH2r5mvmJVe0i+aAidvpnmHPdxX=V6RJ0dYdQZfBY+K7zq2o5w@mail.gmail.com>
- <2585169.WRIv5fHKiD@krikkit>
- <CAH2r5mtRNey4Fx5-ZsrCu4Omgn-bVrmq0zKkprZ4=mrRSb6BOA@mail.gmail.com>
- <11826585.dasZr9x98r@krikkit>
-Openpgp: preference=signencrypt
-Message-ID: <9fb4fd78-5f0a-cc15-ba8c-e86d8227895e@samba.org>
-Date: Mon, 27 May 2019 09:58:39 +0300
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hV9bY-0003fZ-Vu; Mon, 27 May 2019 06:59:33 +0000
+Subject: Re: [PATCH] Re: samba-tool fsmo transfer - uncaught exception
+To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
+ samba-technical@lists.samba.org, =?UTF-8?Q?Julien_Rop=c3=a9?=
+ <jrope@linagora.com>
+References: <642f86fb-36b6-e647-ec52-e6e93bab2950@linagora.com>
+ <b2b6f46b-c819-c917-37f7-ead663bf4cf4@samba.org>
+ <1c97651b-c97b-6f38-249b-aff5a091b24e@linagora.com>
+ <4f70f827-6b7d-ff57-beaa-6519a8d80633@samba.org>
+ <c636364e-f0d9-5c50-4d8e-dddfdda43a67@catalyst.net.nz>
+ <9e8c741c-e144-0cdf-2136-d72b8764f2a3@samba.org>
+ <228e33ff-1224-fb1e-2f30-60d8934d5675@catalyst.net.nz>
+Message-ID: <1e16699e-5067-325a-ba19-eb05013ffd5d@samba.org>
+Date: Mon, 27 May 2019 07:59:32 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <11826585.dasZr9x98r@krikkit>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <228e33ff-1224-fb1e-2f30-60d8934d5675@catalyst.net.nz>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -56,65 +60,50 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Uri Simchoni <uri@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 5/26/19 9:26 PM, Andreas Schneider via samba-technical wrote:
-> On Friday, 24 May 2019 19:30:33 CEST Steve French wrote:
->> A related question (to your "--user-kerberos=yes" (or auto) is "which
->> ticket will it use" and "can you get a ticket on the fly by specifying
->> this with userid and password" and can you override which users ticket
->> will be used in SMB3 session setup?
-> 
-> --use-kerberos=auto
-> 
->   Check for a credential cache and try to authenticate. If it fails ask for a
->   password for the user who executed the client tool.
-> 
->   -U check for a ticket of that user, if not available ask for a password
-> 
-> --use-kerberos=yes
-> 
->   Use the credential cache
-> 
->   -U use the credential cache and check for a ticket for that user
-> 
-> --use-kerberos=no
-> 
->   ask for a password for the user who executed the client tool
-> 
->   -U ask for a password for the given user or use the one supplied on the
->      commandline
-> 
-> 
-> Makes sense?
-> 
-> Comments welcome.
-> 
-> 
-> 	Andreas
-> 
-> 
-> 
+On 27/05/2019 02:28, Douglas Bagnall wrote:
+> On 26/05/19 11:22 PM, Rowland penny wrote:
+>
+>> How do you test for something that works on some computers, but not on
+>> others ?
+> With Gitlab CI.
+>
+>> Which is correct, it working, or it not working ?
+> Well, when I go
+>
+> PYTHONPATH=bin/python python3 -c 'import samba; samba.drs_utils.drsException'
+>
+> I get "module 'samba' has no attribute 'drs_utils'".
+>
+> Maybe Python 2 was different.
+>
+>> If you have a problem with the test, take it up with Andrew, I initially
+>> created the script following his advice, he later 'improved' it, obviously
+>> not enough ;-)
+> Yes. It only tests 'samba-tool fsmo show', not 'seize' and 'transfer'.
+That is what Andrew wanted at the time, feel free to extend the test.
+>
+>> Anyway, NACK to your patch, but only because you haven't remove the
+>> 'import samba' line.
+> OK, though I don't it would work with the line removed.
+> For example, it would break
+>
+>          forest_dn = samba.dn_from_dns_name(samdb.forest_dns_name())
+>
+> and it *might* break other things too because, as discussed, Python
+> imports can be a bit weird with unexpected side-effects.
+>
+> cheers,
+> Douglas
 
-I like the idea that it's clear how tickets are being searched and that
-there are options that cause the search not to be "everywhere".
+So how do you propose to test for this ? When having just 'import samba' 
+fails for 'samba.drs_utils' but works for 'samba.dn_from_dns_name' ? To 
+me, this looks like a bug in python.
 
-How does that interact with -k switch?
+Rowland
 
-Specifically, when we ask for a password, what do we do with it? Do we
-only use NTLMSSP (as --use-kerberos=no implies)?
-
-If the --use-kerberos param mainly decides how Kerberos finds its
-tickets, then perhaps it's a misnomer (--use-krb-ccache ?). If OTOH
---use-kerberos=no really means "do not use Kerberos", then we seem to
-lose the ability to use Kerberos to obtain credentials into a memory
-ccache, based on the username and password, and authenticate with those
-credentials.
-
-Thanks,
-Uri.
 
