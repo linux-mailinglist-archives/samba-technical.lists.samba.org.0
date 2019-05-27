@@ -2,83 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 997572ACC9
-	for <lists+samba-technical@lfdr.de>; Mon, 27 May 2019 03:29:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 26CC12AEC7
+	for <lists+samba-technical@lfdr.de>; Mon, 27 May 2019 08:36:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=v4Jj9+SKcFkr1MLnSvkbFBN3jXyK+u+h8qGa3W5S850=; b=WQv86l0sdwHLYrCUOsSIQRNQou
-	4C/Tn508VBiqlrWHkGUxVSx8CUFaxlqnU6HzvB1bZSfQvr+a4ZSXdnx415nIie6VKG+jG9Dl6XxJL
-	4ahYECQfjRbWF3Mhm3GDi+Dz+p0W65NXowaYvi2xq75RQCnOdPW6UXTCrjbhBzJ5Wsi5BH35zMkaU
-	BRa5DG4Im3aK//BA+R0AGjnYdKf4CVM5pQ15UkobAJsZi5hvSpESbqJJR+3fvWDTW1PDZSO3Zul69
-	aNMcuW8fE71bAgk7hCgYjqlpVwG5/Np88tFXFN4Ry1uSRYPklwl1XVH7KiHLHmlg5jcbSTCC64KjV
-	GXgAnyqw==;
-Received: from localhost ([::1]:25524 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=mFJ8MZzzScrHAntdoq9VHrN483YO5dXNlu71FJxIDpo=; b=JAyC99oP5NxyslRx0OTdHqKt3B
+	LN+GrjS93NPD5pfUWA0A3OewD1P5b06wHrfqWJkE4v1bYnYynWrIW0ZdrLlWYVqerFbHmmrfaaAHo
+	NH0SZxwiokLgJPTP5IPeqNzL4Eh61eh62AOrJzAgi6cfpPNpkjhISHqYG2eTUQsmt/5RbdZ3/ic1p
+	BYFF1lBxAWxf5Q9tApmFKVSnovxw31pqT7JiB+6lKEcu4LaIK7Jxlrqu8bxn0vm2tVWu9hVdfCLsn
+	qQO/TEDCV+GEQdgRB5IJ1lfZ9X/ss9fQ6f5bK8sInJav4Nx0U7IbflZ9aseA3XnBEXXdixXgauvbP
+	M7dJq6Ew==;
+Received: from localhost ([::1]:26972 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hV4RG-0023lb-8W; Mon, 27 May 2019 01:28:34 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz
- ([2404:130:4080::4]:50592) 
+	id 1hV9Eg-0025Ms-Vq; Mon, 27 May 2019 06:35:55 +0000
+Received: from [2a01:4f8:192:486::147:1] (port=32198 helo=hr2.samba.org) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hV4R3-0023lU-RC
- for samba-technical@lists.samba.org; Mon, 27 May 2019 01:28:27 +0000
-Received: from [10.60.67.187] (unknown [203.97.87.169])
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 828B6810E7; 
- Mon, 27 May 2019 13:28:11 +1200 (NZST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1558920492;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=v4Jj9+SKcFkr1MLnSvkbFBN3jXyK+u+h8qGa3W5S850=;
- b=iMTMDgx49d7I4Annrk9zJYcIfrlPr/pzZ/QqmbI58+CiWx5CW/F/GuRquwy1AJWK7ZCV6p
- qbmm6Tu8OXxjg0xIeeNlbKP5EjrjkOKV8bo3+5MyvjkIaUl/rINYPWK4wRcv2riIfV8A9a
- sClUifOmzCB6nnZAcEMCadjT5nDcLhCog80s8vWaiXA8O5HKx7S40Ujf1GYahitItyD/C5
- pllYZVLVyka4N7CBnvf7GB3zVp5dLBfQGPPx3IsC623H/fLaVWrFOsk2IrkCogIIRqcSNZ
- QwrP3+M4cvp8q8P8/WGIld2ph+j/CNkxHAB7EUZjAhPHgDvCaNPpNqQjra4tZA==
-Subject: Re: [PATCH] Re: samba-tool fsmo transfer - uncaught exception
-To: Rowland penny <rpenny@samba.org>, samba-technical@lists.samba.org,
- =?UTF-8?Q?Julien_Rop=c3=a9?= <jrope@linagora.com>
-References: <642f86fb-36b6-e647-ec52-e6e93bab2950@linagora.com>
- <b2b6f46b-c819-c917-37f7-ead663bf4cf4@samba.org>
- <1c97651b-c97b-6f38-249b-aff5a091b24e@linagora.com>
- <4f70f827-6b7d-ff57-beaa-6519a8d80633@samba.org>
- <c636364e-f0d9-5c50-4d8e-dddfdda43a67@catalyst.net.nz>
- <9e8c741c-e144-0cdf-2136-d72b8764f2a3@samba.org>
-Message-ID: <228e33ff-1224-fb1e-2f30-60d8934d5675@catalyst.net.nz>
-Date: Mon, 27 May 2019 13:28:10 +1200
+ (Exim) id 1hV9EV-0025Ml-6o
+ for samba-technical@lists.samba.org; Mon, 27 May 2019 06:35:46 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Message-ID:From:Cc:To;
+ bh=mFJ8MZzzScrHAntdoq9VHrN483YO5dXNlu71FJxIDpo=; b=JU4sWHVSN3kOf15g6dRN2Y1FO3
+ TrlMfsxnpCgoSFUqv6mbGXb8mL46N1K3UH/QDBGN26xPfFGzGvVfI3f6FVuI7fYxYMVCVp+cnuLo1
+ OsI1EKK4gcC1fTDIpqx++eHYZ4aK013R/mzEu39H6giP64BmypCzlKjDb0ymLy87BqUw=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hV9EF-0003Rr-Up; Mon, 27 May 2019 06:35:28 +0000
+To: Andreas Schneider <asn@samba.org>, Steve French <smfrench@gmail.com>
+References: <CAH2r5mvmJVe0i+aAidvpnmHPdxX=V6RJ0dYdQZfBY+K7zq2o5w@mail.gmail.com>
+ <2585169.WRIv5fHKiD@krikkit>
+ <CAH2r5mtRNey4Fx5-ZsrCu4Omgn-bVrmq0zKkprZ4=mrRSb6BOA@mail.gmail.com>
+ <11826585.dasZr9x98r@krikkit>
+Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
+Subject: Re: Kerberos and Samba client tools
+Message-ID: <d15e25db-5bf8-150c-7a61-04ea1d2af1ad@samba.org>
+Date: Mon, 27 May 2019 08:35:20 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <9e8c741c-e144-0cdf-2136-d72b8764f2a3@samba.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1558920492;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=v4Jj9+SKcFkr1MLnSvkbFBN3jXyK+u+h8qGa3W5S850=;
- b=Zw1xZUl/AKM/lKXEYj+dEhsHKSflKRPg2FY8EB+NqxIXTHI52ZjDtVKkRpNmnG5OfZfXse
- N7Kl9H1P3MOldjJ98Fhwei2t45Lm3rjygnrbEZXL9ymd9fNdMXTJALMXc06ozU90g/8IdO
- WsSJOM37ETHI29Mkm2+HoKPybKqZKrKWs1cn95mE/WA5NXjuLZHe1lFDkH1awy/1hyUiqV
- MLvLIrowFYj6FFLXWU2Yn1LeymPUL5SKQzssNPIeBn3BwkoOf9GV79OBkKDDXSYZFu7dLg
- 6LYyZJhwbzNU8CRUskqmIH+lJV0Y3IKbUisj7vhU0obv+WjxZ6MjUbRN8/L59g==
-ARC-Seal: i=1; s=default; d=catalyst.net.nz; t=1558920492; a=rsa-sha256;
- cv=none;
- b=jcHZey9vDftmYnOov2oCcs38MHWgb63NXpvBJD6Y4LE1wCDCgYOg5GMtz1hUxkPfEQHsbx
- Dx1eJBWacvr37PldnhVkymZnktGjIlx6yyEFIEYJogPLmooRB/gzLu9u8bQoeOnDHSLQoq
- lHVittR+hWw0bG49GglaqtZ17lepi1XN6Qp/WkeYvBDEIrfvgW9XaJ29uVmnvz+qGorCpe
- F4k0crt3cwWDnL3T150LIFDXjeBcQqaLhf5bmyMHk86Pl+rIbpmYekm5wqK7s5W7NoCffY
- bmodAm33V1Syg5jOO42T/44G5uwVhAsd1Ywizrz116xcntJPkVGx4HeTOeonsA==
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=douglasb@catalyst.net.nz
- smtp.mailfrom=douglas.bagnall@catalyst.net.nz
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=douglasb@catalyst.net.nz
- smtp.mailfrom=douglas.bagnall@catalyst.net.nz
+In-Reply-To: <11826585.dasZr9x98r@krikkit>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="UYbigwVtDeLji541R8RoItvRLY1rxAo5A"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -92,46 +56,109 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 26/05/19 11:22 PM, Rowland penny wrote:
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--UYbigwVtDeLji541R8RoItvRLY1rxAo5A
+Content-Type: multipart/mixed; boundary="1I40elKGKbmkDE0TwKSrkb7vJfytZc6Eo";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Andreas Schneider <asn@samba.org>, Steve French <smfrench@gmail.com>
+Cc: samba-technical <samba-technical@lists.samba.org>
+Message-ID: <d15e25db-5bf8-150c-7a61-04ea1d2af1ad@samba.org>
+Subject: Re: Kerberos and Samba client tools
+References: <CAH2r5mvmJVe0i+aAidvpnmHPdxX=V6RJ0dYdQZfBY+K7zq2o5w@mail.gmail.com>
+ <2585169.WRIv5fHKiD@krikkit>
+ <CAH2r5mtRNey4Fx5-ZsrCu4Omgn-bVrmq0zKkprZ4=mrRSb6BOA@mail.gmail.com>
+ <11826585.dasZr9x98r@krikkit>
+In-Reply-To: <11826585.dasZr9x98r@krikkit>
 
->
-> How do you test for something that works on some computers, but not on
-> others ?
+--1I40elKGKbmkDE0TwKSrkb7vJfytZc6Eo
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-With Gitlab CI.
+Am 26.05.19 um 20:26 schrieb Andreas Schneider via samba-technical:
+> On Friday, 24 May 2019 19:30:33 CEST Steve French wrote:
+>> A related question (to your "--user-kerberos=3Dyes" (or auto) is "whic=
+h
+>> ticket will it use" and "can you get a ticket on the fly by specifying=
 
-> Which is correct, it working, or it not working ?
+>> this with userid and password" and can you override which users ticket=
 
-Well, when I go
+>> will be used in SMB3 session setup?
+>=20
+> --use-kerberos=3Dauto
+>=20
+>   Check for a credential cache and try to authenticate. If it fails ask=
+ for a
+>   password for the user who executed the client tool.
+>=20
+>   -U check for a ticket of that user, if not available ask for a passwo=
+rd
+>=20
+> --use-kerberos=3Dyes
+>=20
+>   Use the credential cache
+>=20
+>   -U use the credential cache and check for a ticket for that user
 
-PYTHONPATH=bin/python python3 -c 'import samba; samba.drs_utils.drsException'
+We also need to ask for password here too if there's not ticket.
 
-I get "module 'samba' has no attribute 'drs_utils'".
+> --use-kerberos=3Dno
+>=20
+>   ask for a password for the user who executed the client tool
+>=20
+>   -U ask for a password for the given user or use the one supplied on t=
+he
+>      commandline
+>=20
+>=20
+> Makes sense?
 
-Maybe Python 2 was different.
+We also need the --krb5-ccache option, which should allow "none" (as
+default), which means we should use just a memory ccache instead of a
+ccache in the system. And "system" which will select the default ccache
+from the system.
 
-> If you have a problem with the test, take it up with Andrew, I initially
-> created the script following his advice, he later 'improved' it, obviously
-> not enough ;-)
+If we use a system krb5 ccache we should only use kerberos
+and adjust the username, principal, ... from that ccache.
 
-Yes. It only tests 'samba-tool fsmo show', not 'seize' and 'transfer'.
+I think we should also be able to use the winbindd ccache (currently
+only used for ntlmssp) for kerberos.
 
-> Anyway, NACK to your patch, but only because you haven't remove the
-> 'import samba' line.
+The key thing is that we don't silently use something unexpected.
 
-OK, though I don't it would work with the line removed.
-For example, it would break
+metze
 
-        forest_dn = samba.dn_from_dns_name(samdb.forest_dns_name())
 
-and it *might* break other things too because, as discussed, Python
-imports can be a bit weird with unexpected side-effects.
+--1I40elKGKbmkDE0TwKSrkb7vJfytZc6Eo--
 
-cheers,
-Douglas
+--UYbigwVtDeLji541R8RoItvRLY1rxAo5A
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAlzrhSwACgkQDbX1YShp
+vVbYew/8C1oJrYLSBo0jBGgsXqPFyriUcQ5+nFzCXhuBqSCv6n+3jEtvW/wDlbyj
+IdqpPiC8T0w0d8oajzscYSJidxgWWzpICipdc2t8fiAq5eQiV85nJInyADJ6U321
+KOoKZ3/DuLdE5JDy5wTfdpFxfjkT04MxelEy04YNPXJlPeMNSwb93/tMnv40gAZg
+iSCaFCBSfo6TWbH6xYPgCKmhyVU9Z25qeQJmxfI+SgdUtsn43xF71YMx0WR0dh+p
+IUvOvl4UaowVld3UNxvG9ZzDW27AFogKMMlle/PfcI8YIDtPCzAvYat3Mw4QcK3m
+xvWWrwcrUCB+GXjLrag93vpMmqGjVDSweHiMROIyDQL08+N/GKhdmbeA7hhUTeVb
+Pm/HpPWYJhkWxlBC1U7mRB6ZxXoyUMZaT+auwws9oUWQ2K87JLofqosyOb5tUcXU
+x/pSXQoVOJm1J6KGv4jAeINZJo69/itROPD/D/jXp1MsM1uYC4yFEDaiR//QA7Jx
+dRVdTuSYiCpG0QUFm4cQ4LZn7kttT7R6ytqsOd0eakN3ZFVOlnMc5tpIOGHnNF04
+0jOkdufU8HaOcl9lKEodbUmAryO3k1bvujfS18J483avRCENTlug5WGx10iRttC5
+a/mLJzEsDAJAP29H0e2lDS47PbMON6rLs6XwePQ6e1I25G+6KFI=
+=cJgW
+-----END PGP SIGNATURE-----
+
+--UYbigwVtDeLji541R8RoItvRLY1rxAo5A--
 
