@@ -2,55 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B986B2AFC1
-	for <lists+samba-technical@lfdr.de>; Mon, 27 May 2019 10:08:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 684B02B02B
+	for <lists+samba-technical@lfdr.de>; Mon, 27 May 2019 10:27:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=62xw6q0+tPoeC98fT+3dlK8+6JLcZ0I1A1tfFEBY/dQ=; b=rbTaHUYBusZUZTe0AzVRehc1Hd
-	WO5LVlhxaigMzTl2oiFfmJ1+zB12jtfFuDtBwTF0spNj/7CwdnHgbG3FKhxpatNfDGDm1Alg8XIHV
-	LeAEgm0uA/iua3Tbg3D4yOSDxKU0blD4G5VZdSS7uHBxyRmnvt9iPwnoNABDmK3RXNF2SpM+KwH9f
-	HEQEbe8WFAxsw26uL+0Vhk6HUkdwVDJxosd52P4TvjKWoPDFQrKXokcOfIjxNF9UufqoPdnKOEq0R
-	pnOhy4bzttS982pTeacELOVLhij2eZ8lImRt+SoOdFOLgt+mKSi+jNXvzUMT6ItEkwPg5F44QGvvm
-	/jmqmS1w==;
-Received: from localhost ([::1]:43338 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=4489KDZtj7MPq8HoYV24EvbcTrj4sRfjw00sQMEmLb4=; b=v6jcW20I1U2TVPb5TvWCKyUJSK
+	rA725tXumTWNJgwb9g/htEruRKc9XRaevyJXOPx0w5AnzjsN+iQu3A6t4AluPLg4iopeCnfVO51T6
+	SnNFvUpFZShqb7LDKbn+0fmMWZnxy3s9m9irTBpsY75N/2rfw4L4miyJHN/J0uprF5JU78rJJwmgu
+	BsUrWRZ83EO1tqX4GXqCqWJuOFfNRK1yuHYQPyPponQNQfnuYFAvYaMwpBJmNrTZBKEz/iKZ9R6vM
+	/nM5+J0efasO0+q5DsoosgYe3vr0apMWje5aOHfJBN74qnRiGBtF4BhyWSInNDm/VkJB7Ocj5/G/G
+	Fkg+GTxA==;
+Received: from localhost ([::1]:46552 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hVAfc-0027rM-V8; Mon, 27 May 2019 08:07:49 +0000
-Received: from mail-pg1-f180.google.com ([209.85.215.180]:37988) 
+	id 1hVAyi-0028Id-RK; Mon, 27 May 2019 08:27:32 +0000
+Received: from [2a01:4f8:192:486::147:1] (port=14116 helo=hr2.samba.org) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hVAfX-0027rD-Tr
- for samba-technical@lists.samba.org; Mon, 27 May 2019 08:07:46 +0000
-Received: by mail-pg1-f180.google.com with SMTP id v11so8669746pgl.5
- for <samba-technical@lists.samba.org>; Mon, 27 May 2019 01:07:43 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:to:from:subject:message-id:date:user-agent
- :mime-version:content-language;
- bh=62xw6q0+tPoeC98fT+3dlK8+6JLcZ0I1A1tfFEBY/dQ=;
- b=Oh5UbNtGuipIPzRxJ7MovXZk6IoKv74umXyfUfpKrl8nLQ4Q/jf+Etbc62nuPmLIA1
- NLsMy0Drp7FYK2xtW9O7dtzr9vl2LIWreDvPLErVFCKwZ8MQvoRAS+kbrG5ILOsq1ziE
- oCv0l/EB8w6BwK6sjPzmlsEIgh0/kooFoER7DukLqGQsf+KGRTKI7K9aKeHE+JrzyUQ9
- ZQVkD0Vz1yVqXJDmlzR9Tar061ZgrBQLYA6GoAGr+TCdhelc5Q7Gxqpzu8c0bJOkU8vb
- Ydwja7IKb+r5tK71Emw5FbCnPBCzHES82AnfyXlP1vpjVn5yYzcT0PmKshxKqphgl8c7
- kB+w==
-X-Gm-Message-State: APjAAAVOgxyq83yUnJCF9HzObUlOjMGZEzGUd8Si2ot3OBkqjIt91078
- M/c5OylZ8CU7KzO/dKiI5JcF4Kos/iY=
-X-Google-Smtp-Source: APXvYqwU2KM/phXaFcZNHUFCGqIUL9eUoSMqZcDqzFz27A1CruQUETFRb/M4zGk0IcGDeNpfZVHKcQ==
-X-Received: by 2002:a65:5003:: with SMTP id f3mr122569235pgo.336.1558944461189; 
- Mon, 27 May 2019 01:07:41 -0700 (PDT)
-Received: from amitkuma.pnq.csb ([125.16.200.50])
- by smtp.gmail.com with ESMTPSA id s66sm27670155pfb.37.2019.05.27.01.07.39
- for <samba-technical@lists.samba.org>
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 27 May 2019 01:07:40 -0700 (PDT)
-To: samba-technical@lists.samba.org
-Subject: [PATCH]: winbind handling NULL sids (bug #13914)
-Message-ID: <b7d91e0e-e654-3452-37a0-dfbda4936296@redhat.com>
-Date: Mon, 27 May 2019 13:37:38 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ (Exim) id 1hVAye-0028IW-CE
+ for samba-technical@lists.samba.org; Mon, 27 May 2019 08:27:31 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=4489KDZtj7MPq8HoYV24EvbcTrj4sRfjw00sQMEmLb4=; b=dnK8YY1z6+p7Ga4i2cSgNNcg7a
+ YEvjvxVd+hXobDId/z+aI2myqn59EBULmWBweZ7Bzh4TOZ9UL3J7Y81zPsPjo2B4oaV6UFoclQbKz
+ L0QniNz7gG2ijUuh1DUDglEQrXsadOqkEUyQVWKbAAIslWgliOWIEa5V2UtGu8yEHjbE=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hVAyY-0004RH-AS; Mon, 27 May 2019 08:27:22 +0000
+Date: Mon, 27 May 2019 11:27:19 +0300
+To: Rowland penny <rpenny@samba.org>
+Subject: Re: [PATCH] Re: samba-tool fsmo transfer - uncaught exception
+Message-ID: <20190527082719.GA4871@onega.vda.li>
+References: <642f86fb-36b6-e647-ec52-e6e93bab2950@linagora.com>
+ <b2b6f46b-c819-c917-37f7-ead663bf4cf4@samba.org>
+ <1c97651b-c97b-6f38-249b-aff5a091b24e@linagora.com>
+ <4f70f827-6b7d-ff57-beaa-6519a8d80633@samba.org>
+ <c636364e-f0d9-5c50-4d8e-dddfdda43a67@catalyst.net.nz>
+ <9e8c741c-e144-0cdf-2136-d72b8764f2a3@samba.org>
+ <228e33ff-1224-fb1e-2f30-60d8934d5675@catalyst.net.nz>
+ <1e16699e-5067-325a-ba19-eb05013ffd5d@samba.org>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------33F5EB659B717F3958280D1E"
-Content-Language: en-US
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1e16699e-5067-325a-ba19-eb05013ffd5d@samba.org>
+User-Agent: Mutt/1.11.4 (2019-03-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,72 +57,62 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Amit Kumar via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Amit Kumar <amitkuma@redhat.com>
+From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Alexander Bokovoy <ab@samba.org>
+Cc: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
+ Julien =?iso-8859-1?Q?Rop=E9?= <jrope@linagora.com>,
+ samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a multi-part message in MIME format.
---------------33F5EB659B717F3958280D1E
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+On ma, 27 touko 2019, Rowland penny via samba-technical wrote:
+> On 27/05/2019 02:28, Douglas Bagnall wrote:
+> > On 26/05/19 11:22 PM, Rowland penny wrote:
+> > 
+> > > How do you test for something that works on some computers, but not on
+> > > others ?
+> > With Gitlab CI.
+> > 
+> > > Which is correct, it working, or it not working ?
+> > Well, when I go
+> > 
+> > PYTHONPATH=bin/python python3 -c 'import samba; samba.drs_utils.drsException'
+> > 
+> > I get "module 'samba' has no attribute 'drs_utils'".
+> > 
+> > Maybe Python 2 was different.
+> > 
+> > > If you have a problem with the test, take it up with Andrew, I initially
+> > > created the script following his advice, he later 'improved' it, obviously
+> > > not enough ;-)
+> > Yes. It only tests 'samba-tool fsmo show', not 'seize' and 'transfer'.
+> That is what Andrew wanted at the time, feel free to extend the test.
+> > 
+> > > Anyway, NACK to your patch, but only because you haven't remove the
+> > > 'import samba' line.
+> > OK, though I don't it would work with the line removed.
+> > For example, it would break
+> > 
+> >          forest_dn = samba.dn_from_dns_name(samdb.forest_dns_name())
+> > 
+> > and it *might* break other things too because, as discussed, Python
+> > imports can be a bit weird with unexpected side-effects.
+> > 
+> > cheers,
+> > Douglas
+> 
+> So how do you propose to test for this ? When having just 'import samba'
+> fails for 'samba.drs_utils' but works for 'samba.dn_from_dns_name' ? To me,
+> this looks like a bug in python.
+https://docs.python.org/3/reference/import.html is the canonical
+documentation on how module import works. When you do 'import samba',
+you are importing samba/__init__.py implicitly. That file defines what
+is in the 'samba' namespace as imported. It has no references to
+'drs_utils' so the only ways to get 'samba.drs_utils' is to do 'from
+samba import drs_utils' or 'import samba.drs_utils' explicitly -- in the
+former case we'll get drs_utils directly, in the latter --
+samba.drs_utils.
 
-
-
---------------33F5EB659B717F3958280D1E
-Content-Type: text/x-patch;
- name="001-winbind-null-sid-handling.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="001-winbind-null-sid-handling.patch"
-
-winbind should not abort on receiving NULL sid.
-
-Presently if the trusted domain has no SID, winbindd just aborts the session. This happens with MIT Kerberos realm added as trust to AD.
-This code change will make winbind skip NULL sid instead of aborting the request, winbind will process the remaining trusted domain SIDs.
-
-BUG: https://bugzilla.samba.org/show_bug.cgi?id=13914
-
-Signed-off-by: Amit Kumar <amitkuma@redhat.com>
-
-diff -up samba-4.10.4/source3/winbindd/winbindd_rpc.c.amit_patch samba-4.10.4/source3/winbindd/winbindd_rpc.c
---- samba-4.10.4/source3/winbindd/winbindd_rpc.c.amit_patch     2019-05-28 01:27:23.223946791 +0530
-+++ samba-4.10.4/source3/winbindd/winbindd_rpc.c        2019-05-28 01:30:00.375826959 +0530
-@@ -958,24 +958,25 @@ NTSTATUS rpc_trusted_domains(TALLOC_CTX
-                                trust->dns_name = talloc_move(array,
-                                                              &dom_list_ex.domains[i].domain_name.string);
-                                if (dom_list_ex.domains[i].sid == NULL) {
--                                       DEBUG(0, ("Trusted Domain %s has no SID, aborting!\n", trust->dns_name));
--                                       return NT_STATUS_INVALID_NETWORK_RESPONSE;
-+                                       DEBUG(0, ("Trusted Domain %s has no SID!\n", trust->dns_name));
-+                               } else {
-+                                       sid_copy(sid, dom_list_ex.domains[i].sid);
-                                }
--                               sid_copy(sid, dom_list_ex.domains[i].sid);
-                        } else {
-                                trust->netbios_name = talloc_move(array,
-                                                                  &dom_list.domains[i].name.string);
-                                trust->dns_name = NULL;
-
-                                if (dom_list.domains[i].sid == NULL) {
--                                       DEBUG(0, ("Trusted Domain %s has no SID, aborting!\n", trust->netbios_name));
--                                       return NT_STATUS_INVALID_NETWORK_RESPONSE;
-+                                       DEBUG(0, ("Trusted Domain %s has no SID!\n", trust->netbios_name));
-+                               } else {
-+                                       sid_copy(sid, dom_list.domains[i].sid);
-                                }
--
--                               sid_copy(sid, dom_list.domains[i].sid);
-                        }
--
--                       trust->sid = sid;
-+                       if(sid != NULL)
-+                               trust->sid = sid;
-+                       else
-+                               trust->sid = NULL;
-                }
-        } while (NT_STATUS_EQUAL(result, STATUS_MORE_ENTRIES));
-
-
---------------33F5EB659B717F3958280D1E--
+-- 
+/ Alexander Bokovoy
 
