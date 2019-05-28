@@ -2,55 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D1A82CA4E
-	for <lists+samba-technical@lfdr.de>; Tue, 28 May 2019 17:25:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3381D2CE59
+	for <lists+samba-technical@lfdr.de>; Tue, 28 May 2019 20:17:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=7HGE9aVXw7DsWU8FtBbb5hFjs6zqm/TMQavTkg84AM0=; b=A5Dl/+eZYWgoU1yub4VBOT7+k1
-	Kq4cbVb2ZSGxu6+LsC2mM0kOFAUQZFbSSEo0lARdlOsRiMHRgIKm6xDE3uYQSWE4qcX+xJK+Kq+hx
-	JzYAHFf1ZNiY9JTcXf8eDszBVTJHvZxO818wHo4+VZUg9ZU/BogphoP1z8bHLg6VjvOCZCjpsSZKl
-	l0JEf01AcF225JDwTBSufasZ4S9bwtyWCjYxQSfrVvbTuiZguK0tVVrjvD/93KPxXbFyP6o2gxHaE
-	VS32LWOHKzcRRKXkq/OF6v4TH6y/0WK9aRvgWNqIDM/swgGhc4WfEc9mzZSjRZUXTChX9Qp+RflV8
-	tM3VlY+w==;
-Received: from localhost ([::1]:36680 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=feP45vmPABjqHenJQ422o4t3Eamg7fAyJx85oa/hVww=; b=cKZAZVVTE06BNJmapZycBuuAzJ
+	8ooOJeoa8Jatj2fJeyDlLBo8ZXwey28lMZzOEU8DxGVZUjqmQEUkFER7uUEjtuv2PWLxEsTKxjmLX
+	2I0QWg4tUwkauL+sTTGCl3iPa5HV6BXveXfu1md3D9LSnkgKsFvpnrUXju78DSqV/EXGHr+MTKvAC
+	o8B8nkAZJk4jpnUf2Hw24JE1RXND7MGQWD0dvyAMqP03nd/0wFrTmFQgX0Zs6hkmGTc/YZ+LZGx8e
+	OmJWLSgmxe/SUPeKdCnvXoy34X36uaFT/l9GKl4EKwd9D4gfszF9VoPkJu1bLQeaQ25T0q+xZcwnH
+	oISyu1lw==;
+Received: from localhost ([::1]:40124 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hVdxt-002Mly-QV; Tue, 28 May 2019 15:24:37 +0000
-Received: from [2a01:4f8:192:486::147:1] (port=55250 helo=hr2.samba.org) 
+	id 1hVgeX-002NMc-E3; Tue, 28 May 2019 18:16:49 +0000
+Received: from [2a01:4f8:192:486::147:1] (port=31378 helo=hr2.samba.org) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hVdxp-002Mlr-E4
- for samba-technical@lists.samba.org; Tue, 28 May 2019 15:24:35 +0000
+ (Exim) id 1hVgeT-002NMV-Dh
+ for samba-technical@lists.samba.org; Tue, 28 May 2019 18:16:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:Cc:To;
- bh=7HGE9aVXw7DsWU8FtBbb5hFjs6zqm/TMQavTkg84AM0=; b=q0J7wTYCYDIuOtbrvMxATJZzs8
- CtHzyWVhP9Qg2Bwc8F+96ptN1YKTxI21f1mLxKZQXt/6eeYnT9IwV4adLDC2FQS6a2o30SzV63LkE
- j7AyXZ1gQRBLqOlwpdz+71POZrEJ7p7Zf5QaFladVtb800PkyiJcdxe9+JB2fJCxm4m8=;
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=feP45vmPABjqHenJQ422o4t3Eamg7fAyJx85oa/hVww=; b=kx/QyzVjNU+M1H7vNfrEFEqJBM
+ vCpWQQl26SHgQ+wAW72ZAyS9Az+pieb4gYPQLbElPqRbtCLfEXLx1TPBcpz9RwDbtPv6dllNrYFp3
+ oLedCUAncXVqgD+pYwHbW/GwDljKspCC+t2Zpe3xwwtqcoi7ADT84yzxRfhQuIbyg6x0=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1hVdxg-0000kS-My; Tue, 28 May 2019 15:24:24 +0000
-To: d.dario76@gmail.com, Rowland penny <rpenny@samba.org>,
- Alexander Bokovoy <ab@samba.org>
-References: <642f86fb-36b6-e647-ec52-e6e93bab2950@linagora.com>
- <b2b6f46b-c819-c917-37f7-ead663bf4cf4@samba.org>
- <1c97651b-c97b-6f38-249b-aff5a091b24e@linagora.com>
- <4f70f827-6b7d-ff57-beaa-6519a8d80633@samba.org>
- <c636364e-f0d9-5c50-4d8e-dddfdda43a67@catalyst.net.nz>
- <9e8c741c-e144-0cdf-2136-d72b8764f2a3@samba.org>
- <228e33ff-1224-fb1e-2f30-60d8934d5675@catalyst.net.nz>
- <1e16699e-5067-325a-ba19-eb05013ffd5d@samba.org>
- <20190527082719.GA4871@onega.vda.li>
- <aed6ac60-f128-6890-5ac3-8178e67cab06@samba.org>
- <133b8c68229553e9c273e1bcc5adeda0e3d28706.camel@gmail.com>
-Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
-Subject: Re: [PATCH] Re: samba-tool fsmo transfer - uncaught exception
-Message-ID: <4ae82f08-97b1-c474-3470-4a5429fdeb85@samba.org>
-Date: Tue, 28 May 2019 17:24:20 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hVgeN-00027z-38; Tue, 28 May 2019 18:16:39 +0000
+Date: Tue, 28 May 2019 11:16:36 -0700
+To: Alexander Bokovoy <ab@samba.org>
+Subject: Re: Implement lsaRQueryForestTrustInformation in source3
+Message-ID: <20190528181636.GB2170@jra4>
+References: <20190528090355.GB4871@onega.vda.li>
 MIME-Version: 1.0
-In-Reply-To: <133b8c68229553e9c273e1bcc5adeda0e3d28706.camel@gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="IP1DbJfOWQTv1RpgokE6hzipSUtfw9fo9"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190528090355.GB4871@onega.vda.li>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,82 +50,61 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
- =?UTF-8?Q?Julien_Rop=c3=a9?= <jrope@linagora.com>,
- samba-technical@lists.samba.org
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---IP1DbJfOWQTv1RpgokE6hzipSUtfw9fo9
-Content-Type: multipart/mixed; boundary="M58XAWC3iSzkrSD9U5YSQ4bs1HVTsW8Nz";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: d.dario76@gmail.com, Rowland penny <rpenny@samba.org>,
- Alexander Bokovoy <ab@samba.org>
-Cc: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
- =?UTF-8?Q?Julien_Rop=c3=a9?= <jrope@linagora.com>,
- samba-technical@lists.samba.org
-Message-ID: <4ae82f08-97b1-c474-3470-4a5429fdeb85@samba.org>
-Subject: Re: [PATCH] Re: samba-tool fsmo transfer - uncaught exception
-References: <642f86fb-36b6-e647-ec52-e6e93bab2950@linagora.com>
- <b2b6f46b-c819-c917-37f7-ead663bf4cf4@samba.org>
- <1c97651b-c97b-6f38-249b-aff5a091b24e@linagora.com>
- <4f70f827-6b7d-ff57-beaa-6519a8d80633@samba.org>
- <c636364e-f0d9-5c50-4d8e-dddfdda43a67@catalyst.net.nz>
- <9e8c741c-e144-0cdf-2136-d72b8764f2a3@samba.org>
- <228e33ff-1224-fb1e-2f30-60d8934d5675@catalyst.net.nz>
- <1e16699e-5067-325a-ba19-eb05013ffd5d@samba.org>
- <20190527082719.GA4871@onega.vda.li>
- <aed6ac60-f128-6890-5ac3-8178e67cab06@samba.org>
- <133b8c68229553e9c273e1bcc5adeda0e3d28706.camel@gmail.com>
-In-Reply-To: <133b8c68229553e9c273e1bcc5adeda0e3d28706.camel@gmail.com>
+On Tue, May 28, 2019 at 12:03:55PM +0300, Alexander Bokovoy via samba-technical wrote:
+> Hi,
+> 
+> while working on fixing FreeIPA ipasam module to allow establishing
+> forest trust with a shared secret from Windows side, I stumbled upon the
+> difference we have in lsaRQueryForestTrustInformation handling between
+> Samba AD DC and smbd.
+> 
+> Windows asks for lsaRQueryForestTrustInformation to retrieve details
+> about a trust. We have implementation for lsaRSetForestTrustInformation
+> in source3/rpc_server/lsa/srv_lsa_nt.c. However,
+> lsaRQueryForestTrustInformation is a stub:
+> 
+> NTSTATUS _lsa_lsaRQueryForestTrustInformation(struct pipes_struct *p,
+>                                               struct lsa_lsaRQueryForestTrustInformation *r)
+> {
+>         p->fault_state = DCERPC_FAULT_OP_RNG_ERROR;
+>         return NT_STATUS_NOT_IMPLEMENTED;
+> }
+> 
+> lsaRSetForestTrustInformation() was implemented as a part of the commit
+> d638f4a3b824 by Sumit Bose. It depends on a PASSDB module that
+> implements enum_trusted_domains() helper. We have a single in-tree PASSDB
+> module that implement it: pdb_dsdb (Samba AD DC). Also, ipasam
+> implements it. Another in-tree PASSDB module, pdb_ldap, implements
+> enum_trusteddoms() which can be abstracted out to implement
+> enum_trusted_domains() -- in ipasam we actually implement
+> enum_trusteddoms() on top of enum_trusted_domains, so the storage is the
+> same.
+> 
+> As a result, we can reuse the code from pdb_ldap/ipasam to implement
+> remaining part for lsaRQueryForestTrustInformation without any trouble.
+> This would mostly benefit FreeIPA because in order to be able to
+> establish trust to such smbd instance, one needs more than just smbd.
+> For Samba AD DC actual LSA RPC server end point is implemented in
+> source4, thus the code in source3/rpc_server/lsa/ did not matter for
+> that.
+> 
+> However, this would complete a missing functionality and if I'll add
+> the same code to pdb_ldap and pdb_tdbsam, we can actually test LSA RPC
+> lsaRQueryForestTrustInformation in the test suite.
+> 
+> Is anyone against this plan?
 
---M58XAWC3iSzkrSD9U5YSQ4bs1HVTsW8Nz
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Sounds OK to me, but the devil, as ever, is in the details :-).
 
-Hi,
+I'll reserve judgement until I see the code :-) !
 
-I'm created a merge request which also contains the fix for this, see:
+Cheers,
 
-https://gitlab.com/samba-team/samba/merge_requests/505
-
-The strange thing is that the tests (backported to v4-10-test)
-work with python 2.7.15rc1 and python 3.6.7 with out the
-'import samba.drs_utils' line, while an installation of
-SAMBA+ 4.10.4 packages on debian 9.9 with python 2.7.13, require
-that line.
-
-metze
-
-
---M58XAWC3iSzkrSD9U5YSQ4bs1HVTsW8Nz--
-
---IP1DbJfOWQTv1RpgokE6hzipSUtfw9fo9
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAlztUqQACgkQDbX1YShp
-vVbwnA/7Bp4Rb8Pa3CfqnxtooI2yyWKwyBFuNCcP5JXfuQaT0JsvxbI1BRq9aIKo
-vho1GVgF6ytZ2rBAVmtVaewdX0eTEbCJymNRP2JTro1Dc0sZiqApA2Flb8MPity8
-Mdh6kKjLTe5OIcucsGEB3jHJ8aJ9dLtGNdiaQ3W0o4ENYCazabFxlraSlnxANV8C
-Yn/N81NE3pEYakyw/v5DKoqwa8XoD/ISz2t5vI65vzibb9fK3+0B5n00gHISFDaF
-n+qBMrLh3KX9z2BC3wABB5A6UzlYJAS++Fih0AavAd51bElH+eA+WOMIgroOAwq7
-5HXwt7gmURKc0C3u6X2MmDQTppaUXSQRap3VV/uMUCdktMvX59NaUYdR6L31IloY
-pjU88OeKJ+YzvxrXnuWZr/TVIXKgEWCle8L+daCIKHv3XMutRlBf+b+WCpbGDEQV
-YsY2rhqQutKC3/PTV1m51g+aahPHRHMPzawvCuvVwyT2P8UpeVDODcD6W51yb42Q
-saSGWcQQKRDNVg0agUn7DP7m+y/aBMxLJG0gcB5uciP4tDe3thyB4VI49/hMe6ug
-Kmb+jcicCRxc8hqRgFabSxy70KTO8aj/AjZTKObw+feSMBnw0xM3VGFj5rCplOvW
-meEcje07b8moEvx1x8edcMB9FoXKylg/7hQ3D2nGSpkb82S4igs=
-=r7KQ
------END PGP SIGNATURE-----
-
---IP1DbJfOWQTv1RpgokE6hzipSUtfw9fo9--
+	Jeremy.
 
