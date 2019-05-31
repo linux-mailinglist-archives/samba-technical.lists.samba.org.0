@@ -2,49 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9784C31170
-	for <lists+samba-technical@lfdr.de>; Fri, 31 May 2019 17:37:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F95431436
+	for <lists+samba-technical@lfdr.de>; Fri, 31 May 2019 19:53:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=JAeJko+ol5qVyuR5AaI57hG3Zk4HI9cAIFe5u6Cer8s=; b=ZvAv1/NjOcjyCixKjPSiwTg2GI
-	mH2J9c2VKBPQLVgPtLd946nIsteGQ0T6gEw+5pViMT9JpzFlvaY0iR0ISdkaj4ycbcLuqmPkMpC0B
-	jbA4kbsBMQhfUOz+nS9Hcdl2h4YxGPzjctcfdh+S3zqHxI3tRc74rATDv0GrGhkdSzKrC3f3eTIir
-	mBa+WEtvf7yMt7jGWHVsw2SKBgZxEZ/RSl2L8/gNX/Ty0GqNZ3T6K1YTXnxscZ2DtTewt8FOWBKxN
-	zdQhsL/OP+WPfnQKTJ9uS2RrbhwgsV8zNcrzTNdkHrV2UBOosWWxC3Egmk6wE2TcrBQvY26TCcDKy
-	94vtlrMQ==;
-Received: from localhost ([::1]:26622 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=fbEziQAlDa+MPcuMDQ4aWE9wRj2Etz/eXcyDuUKM790=; b=ZZynDdEsMiabxMaLz4UeJZ/eA/
+	TLzRHuIxVNo5AnjdB/yT0Elss0y9RQxjxIvq+bHygPdzSUzDNSxubPEVcX7tO9y6VRNUBrDnSRFkO
+	9ps64dHN2WqsJ7BXyTjeff7bmJZ5exV9s93wFel+ZSQLu/y5WMNL/7kc1vAvG/z5bVy9LWouYbBXW
+	LNIyEIzsulaAyxwCKB0IpiRjTdgH1ygg22eMXmX3fU4/V/TrjIKOafJhCP2xPMrDRdk5/UHq66pBc
+	E7z6lN41vG8PBs4bBoNOIb57wFOfSAmfXoH3g0ZUzj2m7UAFl2kQ6vb5St8eE79YgIYGgIfG+NNRb
+	j3dohGAg==;
+Received: from localhost ([::1]:44998 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hWjaV-002kxA-De; Fri, 31 May 2019 15:36:59 +0000
-Received: from [2a01:4f8:192:486::147:1] (port=31532 helo=hr2.samba.org) 
+	id 1hWliX-002nYz-1G; Fri, 31 May 2019 17:53:25 +0000
+Received: from latitanza.investici.org ([82.94.249.234]:45047
+ helo=mx1.investici.org) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hWjaM-002kwy-C9
- for samba-technical@lists.samba.org; Fri, 31 May 2019 15:36:57 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=JAeJko+ol5qVyuR5AaI57hG3Zk4HI9cAIFe5u6Cer8s=; b=XZ45rjEvRAmRrLOgq30bOk2jok
- kGk3oCMsrKMGZ6o7TzkUnAzH3+Bl4xBbzA7VXPqgVcphU+3aiGXRMbFjwU3kBsG9/f2lH9XV+ritG
- rDviPJztdQrDMaic1ZuTdOLswNLdHvsWgv3CBOKGOTCjAPpR1ENN62OW5m32NmbJKjVA=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hWjaF-0007QQ-T8; Fri, 31 May 2019 15:36:44 +0000
-Date: Fri, 31 May 2019 17:36:40 +0200
-To: Amit Kumar <amitkuma@redhat.com>
-Subject: Re: [PATCH]: winbind handling NULL sids (bug #13914)
-Message-ID: <20190531153640.baezcpth3t4l7qmy@inti>
-References: <b7d91e0e-e654-3452-37a0-dfbda4936296@redhat.com>
- <b59fbffd-c363-47f1-29eb-621676d5eb52@samba.org>
- <0cc22df8-b48c-73c8-74ad-e1e602b8096a@redhat.com>
- <20190527140812.qeyamc5kzomgipuj@inti>
- <6aa5bc8a-24f1-8bf5-5f58-99b3df1e84fd@redhat.com>
- <20190528095640.fcn2gm5gb62qoqel@inti>
- <bd98b9d8-ec9e-4cf6-6351-e35d724c82cc@samba.org>
- <cfa5b581-096d-7b08-24e5-010009fda94e@redhat.com>
- <2e4a105b-9ca1-0c1e-d890-a1c1c61c799a@redhat.com>
+ (Exim) id 1hWliR-002nYr-HZ
+ for samba-technical@lists.samba.org; Fri, 31 May 2019 17:53:22 +0000
+Received: from mx1.investici.org (localhost [127.0.0.1])
+ by mx1.investici.org (Postfix) with ESMTP id 7526A120AC2;
+ Fri, 31 May 2019 17:34:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cryptolab.net;
+ s=stigmate; t=1559324058;
+ bh=fbEziQAlDa+MPcuMDQ4aWE9wRj2Etz/eXcyDuUKM790=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=PwhAZW9D6yYqloskUiv1TummkrIZq6iS574b95t0XMauO205SlrpczYToX6BHEk6c
+ oHmB6WfpZhz1eXT2CUmYN51dh+H5TFqs4UccyolZDSN0ioEdqIdmx/hvBQG4H6aSES
+ x6NAP5cJUQvKptxfNRGoyOFIismyFFoi2VAKD0Qw=
+Received: from [82.94.249.234] (mx1.autistici.org [82.94.249.234])
+ (Authenticated sender: anoopcs@autistici.org) by localhost (Postfix) with
+ ESMTPSA id A328812084D; Fri, 31 May 2019 17:34:15 +0000 (UTC)
+Message-ID: <d59909ca37f6b2abeb5fc653f518b41da30b0680.camel@cryptolab.net>
+Subject: Re: [PATCH] Fix compile error with --enable-selftest
+To: Ralph Boehme <slow@samba.org>
+Date: Fri, 31 May 2019 23:04:09 +0530
+In-Reply-To: <20190529084444.gcd6k2kgskv4jnhz@inti>
+References: <42f879d1e0abfd4dd2e6c299b9184a7dfc5afacd.camel@cryptolab.net>
+ <20190529075805.zc4qabjyb7plsajg@inti> <20190529082426.GD4871@onega.vda.li>
+ <20190529084444.gcd6k2kgskv4jnhz@inti>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.32.2 (3.32.2-1.fc30) 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
-In-Reply-To: <2e4a105b-9ca1-0c1e-d890-a1c1c61c799a@redhat.com>
-User-Agent: NeoMutt/20180716
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -58,25 +58,21 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Stefan Metzmacher <metze@samba.org>, samba-technical@lists.samba.org
+From: Anoop C S via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Anoop C S <anoopcs@cryptolab.net>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, May 31, 2019 at 06:53:42PM +0530, Amit Kumar wrote:
->Hey slow/metze,
->
->https://gitlab.com/samba-team/samba/merge_requests/515
->
->Pipeline again failed.. cannot understand why!! can you try understand why?
+On Wed, 2019-05-29 at 10:44 +0200, Ralph Boehme via samba-technical
+wrote:
+> On Wed, May 29, 2019 at 11:24:26AM +0300, Alexander Bokovoy wrote:
+> > See my separate email -- there is a typo in the commit message
+> > (undecalred). With that fixed, RB+, please push.
+> 
+> fixed and pushed. Thanks!
 
-we have a bunch of flapping test, you can try restarting the failed job.
+Sorry to ping again. I don't see the patch available in master yet. Is
+there anything pending to get it pushed?
 
--slow
-
--- 
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
