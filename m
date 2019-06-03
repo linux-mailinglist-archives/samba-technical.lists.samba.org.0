@@ -2,66 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2460732DFC
-	for <lists+samba-technical@lfdr.de>; Mon,  3 Jun 2019 12:51:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF0A132FDC
+	for <lists+samba-technical@lfdr.de>; Mon,  3 Jun 2019 14:41:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=8cWaLzEaHEjQDzTe96BWqk1CblPG2+uyf0UYyvni+Co=; b=gzPBdJqPY2V2C15FlKTbJwAunx
-	MQYKHPQp++e/OnLPSaqhl2t9T4AaUbbFtkLmaiyf3fdUbtuxsUOD2gYxW4lRxG3dRlN22yI1cH+NT
-	GMsmy6Yb20gduoH52vc7iITAavW1ZYpFUaKfcCuYs1xi2ednO+8uvKXmhxNrNPf845UIK8abVbsvD
-	n9de09PkhWxNqEBtSSEeVI4jPiLv49+MO8+4jJ5O0EcW6HWjcjLZlSk95wOLF48no4gsbL6r8jbVU
-	G2yFpW4IOuRPTyhkUviuRPt9mZwUO/AO7GLEDQfWoo05XPRpkfhAYBr7O+FylvvjigmEkLWunybtJ
-	e6kXUkig==;
-Received: from localhost ([::1]:36634 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=7s8VtmwvF8IzHctRyD302/Z0jhJK/pHUEGomiGrt3r8=; b=3S1i6nbW4Z1NnQ7eCNe44Nw1xG
+	E9AvtWFVpdwPAHeCGW/EKdByCOzYTCOzmMy0Gy0Y8Qwk8YHfNabma2fO1dI3E3ZY+CVXOIcdHfQSk
+	9oBybd81QOuBXDBesIszqtl7PdvLH8mcAX3IqO8dW6bAczinNadiP2+YTa8zjMBK7pHmsICwDgvtX
+	ed5iCTLt2sdM1CtMYVjc+e9cRo8qa9nnSEa6+R6OGGr9KeQdSJdmEE91Xg1b0qSo+T+VWkUXX8O6C
+	lTWTI177pOVFF9JwIe7vMj9p6vU9nwAcOYAhJAf/fcfZszBHpOahpE4ZAI5+ubHxecYnWwH97pZTG
+	7dTOm5Cw==;
+Received: from localhost ([::1]:56370 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hXkXq-004mnU-G0; Mon, 03 Jun 2019 10:50:26 +0000
-Received: from mail-pg1-f174.google.com ([209.85.215.174]:33871) 
+	id 1hXmGG-004pjN-Ad; Mon, 03 Jun 2019 12:40:24 +0000
+Received: from mail-qt1-f193.google.com ([209.85.160.193]:35987) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hXkXl-004mmc-Cg
- for samba-technical@lists.samba.org; Mon, 03 Jun 2019 10:50:24 +0000
-Received: by mail-pg1-f174.google.com with SMTP id h2so4826248pgg.1
- for <samba-technical@lists.samba.org>; Mon, 03 Jun 2019 03:50:20 -0700 (PDT)
+ (Exim) id 1hXmGC-004pjG-FS
+ for samba-technical@lists.samba.org; Mon, 03 Jun 2019 12:40:22 +0000
+Received: by mail-qt1-f193.google.com with SMTP id u12so9121939qth.3
+ for <samba-technical@lists.samba.org>; Mon, 03 Jun 2019 05:40:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language;
- bh=8cWaLzEaHEjQDzTe96BWqk1CblPG2+uyf0UYyvni+Co=;
- b=G/EfABSrW2gLMVSBXTDbUTBi7E7dSw4gCMUHlq/2DovIT+eaUAWWBWd1cHJQOxZqR1
- k7R3qo7m6UTamXzMFjInk6/t1qTGMd1Ckntf5AHQoUyU4xhZbnRPcWMv+kxXSlss0Q83
- zXv5J7W6kbkXJeyxubxsHikr33P2t6ucSlvxBWIGcEkqAPkyeiIvorwQGoDpgIPrzmtN
- qagcCZU1NZioh+I4ogoDlLKK5L7zBn6QpGw34XPO3B5qy4Fd8taCreRACk+NO3Wf+i7O
- GE2LXsQaUolDwHByzMi5SFGEsDfLZz9C+KaKJjiN96gyHtBgjQoASKmUraUVogc/APbS
- XX6Q==
-X-Gm-Message-State: APjAAAUpIZlMRT4mjAPpIHDa/zUS2FjoYhCUaErkXsSTdhO6sRc4rhVK
- 2Cxrf00kZTe+jJOwSqYKknP/dXUDyws=
-X-Google-Smtp-Source: APXvYqwzlIEz+sYUqF/N/oFMoKLj7Ih1i1EDm1Oz0XJottquazX/aGoURDWZLTW6nJUlG43PZBjkGw==
-X-Received: by 2002:a62:1b85:: with SMTP id
- b127mr30217162pfb.165.1559559018954; 
- Mon, 03 Jun 2019 03:50:18 -0700 (PDT)
-Received: from amitkuma.pnq.csb ([125.16.200.50])
- by smtp.gmail.com with ESMTPSA id m101sm29880601pjb.2.2019.06.03.03.50.16
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 03 Jun 2019 03:50:17 -0700 (PDT)
-Subject: Re: [PATCH]: winbind handling NULL sids (bug #13914)
-To: Ralph Boehme <slow@samba.org>
-References: <b7d91e0e-e654-3452-37a0-dfbda4936296@redhat.com>
- <b59fbffd-c363-47f1-29eb-621676d5eb52@samba.org>
- <0cc22df8-b48c-73c8-74ad-e1e602b8096a@redhat.com>
- <20190527140812.qeyamc5kzomgipuj@inti>
- <6aa5bc8a-24f1-8bf5-5f58-99b3df1e84fd@redhat.com>
- <20190528095640.fcn2gm5gb62qoqel@inti>
- <bd98b9d8-ec9e-4cf6-6351-e35d724c82cc@samba.org>
- <cfa5b581-096d-7b08-24e5-010009fda94e@redhat.com>
- <2e4a105b-9ca1-0c1e-d890-a1c1c61c799a@redhat.com>
- <20190531153640.baezcpth3t4l7qmy@inti>
-Message-ID: <d5c9dc06-7535-77c3-148b-27d242638ed7@redhat.com>
-Date: Mon, 3 Jun 2019 16:20:14 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=7s8VtmwvF8IzHctRyD302/Z0jhJK/pHUEGomiGrt3r8=;
+ b=qccG3BhWuRZk1ZbX2wH58Qg6BRsQHyltT+25OnqvvBfbDMLVPs+x7R9wq/k0gUaf0e
+ B48r4O2x2rwz9VbINAZAHdJJpeyzmMSye2pKdt6HZe01H0tfB1uw14zXQyKgSrKG1lNU
+ 478EWlqo0nP2Kt2sO6QcQBNexlFy7ALwWpMRxKBxJoCQHLG7/c2S7GMG216xb6ht5bEd
+ TYfMDc0jInZtpo3GAhHhq7+EReb+zh18U4M/3U/+7WvxsI1ILKhgKNh5JXv4L5MvF0d6
+ ho5Pi+zsQpWJRUpmGXfrU4HzgnnbQvHgsBoJeBQl6IzLxqiZ7uwX5SXSf7g4MVEp1Lba
+ LtEw==
+X-Gm-Message-State: APjAAAXllV1RTMLRwhF0Ohi6r46oY2u1R2IlcIuGcUtm6tK2WZyfJ45j
+ Xa8BzELCOOYCCJ7S4oywoA7sJlefysYA3l0r
+X-Google-Smtp-Source: APXvYqwxNikQyzF/rORQU7pV2Zy6xspHTOjEjNDGgQvw3fkJCpBq50rYKCsYv4OPxFt8EwMzrtVViw==
+X-Received: by 2002:a0c:88c3:: with SMTP id 3mr3088553qvo.21.1559565618503;
+ Mon, 03 Jun 2019 05:40:18 -0700 (PDT)
+Received: from workstation.celeiro.br. ([191.177.181.81])
+ by smtp.gmail.com with ESMTPSA id t197sm2972177qke.2.2019.06.03.05.40.17
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Mon, 03 Jun 2019 05:40:18 -0700 (PDT)
+To: samba-technical@lists.samba.org
+Subject: [PATCH v2] ctdb-scripts: Fix tcp_tw_recycle existence check
+Date: Mon,  3 Jun 2019 09:40:14 -0300
+Message-Id: <20190603124014.21226-1-rafaeldtinoco@ubuntu.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <2ff36d47-49fb-30b3-f953-53b6364a5949@rsmas.miami.edu>
+References: <2ff36d47-49fb-30b3-f953-53b6364a5949@rsmas.miami.edu>
 MIME-Version: 1.0
-In-Reply-To: <20190531153640.baezcpth3t4l7qmy@inti>
-Content-Type: multipart/mixed; boundary="------------9B5DFFBED96A5C0CCEA25C36"
-Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,100 +63,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Amit Kumar via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Amit Kumar <amitkuma@redhat.com>
-Cc: Stefan Metzmacher <metze@samba.org>, samba-technical@lists.samba.org
+From: Rafael David Tinoco via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
+Cc: rafaeldtinoco@ubuntu.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a multi-part message in MIME format.
---------------9B5DFFBED96A5C0CCEA25C36
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+net.ipv4.tcp_tw_recycle has been removed from Linux 4.12 but, still,
+makes sense to check its existence. Unfortunately, current check does
+not test for the procfs file existence. This commit fixes the issue.
 
-
-
-On 05/31/2019 09:06 PM, Ralph Boehme wrote:
-> On Fri, May 31, 2019 at 06:53:42PM +0530, Amit Kumar wrote:
->> Hey slow/metze,
->>
->> https://gitlab.com/samba-team/samba/merge_requests/515
->>
->> Pipeline again failed.. cannot understand why!! can you try
->> understand why?
->
-> we have a bunch of flapping test, you can try restarting the failed job.
->
-> -slow
->
-
-
---------------9B5DFFBED96A5C0CCEA25C36
-Content-Type: text/x-patch;
- name="0001-s3-winbind-Not-abort-when-received-NULL-SID.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="0001-s3-winbind-Not-abort-when-received-NULL-SID.patch"
-
-From d14bda62b06794760e9ece57420a6b53b24501b3 Mon Sep 17 00:00:00 2001
-From: Amit Kumar <amitkuma@redhat.com>
-Date: Fri, 31 May 2019 18:57:52 +0530
-Subject: [PATCH] s3: winbind: Not abort when received NULL SID
-
-Source code in winbind_rpc.c states that if the trusted domain
-has no SID, winbindd just aborts the session. This happens with
-MIT Kerberos realm added as trust to AD and winbindd just returns
-without processing further as there is no SID returned for the
-Linux system having kerberos support.
-
-This fix makes winbindd to skip the domain having NULL SID instead
-of aborting the request completely.
-
-Fixes: https://bugzilla.samba.org/show_bug.cgi?id=13914
-
-Signed-off-by: Amit Kumar <amitkuma@redhat.com>
+Signed-off-by: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
 ---
- source3/winbindd/winbindd_rpc.c | 14 +++++---------
- 1 file changed, 5 insertions(+), 9 deletions(-)
+ ctdb/config/nfs-linux-kernel-callout | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/source3/winbindd/winbindd_rpc.c b/source3/winbindd/winbindd_rpc.c
-index ffbaabcfe49..ee997d064ce 100644
---- a/source3/winbindd/winbindd_rpc.c
-+++ b/source3/winbindd/winbindd_rpc.c
-@@ -952,26 +952,22 @@ NTSTATUS rpc_trusted_domains(TALLOC_CTX *mem_ctx,
-                                return NT_STATUS_NO_MEMORY;
-                        }
-
-+                        if (dom_list_ex.domains[i].sid == NULL) {
-+                               DEBUG(0, ("Trusted Domain %s has no SID, skipping!\n", trust->dns_name));
-+                                continue;
-+                        }
+diff --git a/ctdb/config/nfs-linux-kernel-callout b/ctdb/config/nfs-linux-kernel-callout
+index def69a04649..5625eddf6e2 100755
+--- a/ctdb/config/nfs-linux-kernel-callout
++++ b/ctdb/config/nfs-linux-kernel-callout
+@@ -280,10 +280,12 @@ nfs_startup ()
+ {
+     basic_stop "nfs" || true
+     basic_start "nfs"
 +
-                        if (has_ex) {
-                                trust->netbios_name = talloc_move(array,
-                                                                  &dom_list_ex.domains[i].netbios_name.string);
-                                trust->dns_name = talloc_move(array,
-                                                              &dom_list_ex.domains[i].domain_name.string);
--                               if (dom_list_ex.domains[i].sid == NULL) {
--                                       DEBUG(0, ("Trusted Domain %s has no SID, aborting!\n", trust->dns_name));
--                                       return NT_STATUS_INVALID_NETWORK_RESPONSE;
--                               }
-                                sid_copy(sid, dom_list_ex.domains[i].sid);
-                        } else {
-                                trust->netbios_name = talloc_move(array,
-                                                                  &dom_list.domains[i].name.string);
-                                trust->dns_name = NULL;
-
--                               if (dom_list.domains[i].sid == NULL) {
--                                       DEBUG(0, ("Trusted Domain %s has no SID, aborting!\n", trust->netbios_name));
--                                       return NT_STATUS_INVALID_NETWORK_RESPONSE;
--                               }
--
-                                sid_copy(sid, dom_list.domains[i].sid);
-                        }
-
++    [ "${PROCFS_PATH}" ] || return 0
++
+     _f="${PROCFS_PATH}/sys/net/ipv4/tcp_tw_recycle"
+-    if [ "$_f" ] ; then
+-	echo 1 >"$_f"
+-    fi
++
++    [ -f "$_f" ] && echo 1 > "$_f"
+ }
+ 
+ ##################################################
 -- 
-2.17.1
+2.20.1
 
---------------9B5DFFBED96A5C0CCEA25C36--
 
