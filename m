@@ -2,54 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF0A132FDC
-	for <lists+samba-technical@lfdr.de>; Mon,  3 Jun 2019 14:41:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55E7D33259
+	for <lists+samba-technical@lfdr.de>; Mon,  3 Jun 2019 16:41:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=7s8VtmwvF8IzHctRyD302/Z0jhJK/pHUEGomiGrt3r8=; b=3S1i6nbW4Z1NnQ7eCNe44Nw1xG
-	E9AvtWFVpdwPAHeCGW/EKdByCOzYTCOzmMy0Gy0Y8Qwk8YHfNabma2fO1dI3E3ZY+CVXOIcdHfQSk
-	9oBybd81QOuBXDBesIszqtl7PdvLH8mcAX3IqO8dW6bAczinNadiP2+YTa8zjMBK7pHmsICwDgvtX
-	ed5iCTLt2sdM1CtMYVjc+e9cRo8qa9nnSEa6+R6OGGr9KeQdSJdmEE91Xg1b0qSo+T+VWkUXX8O6C
-	lTWTI177pOVFF9JwIe7vMj9p6vU9nwAcOYAhJAf/fcfZszBHpOahpE4ZAI5+ubHxecYnWwH97pZTG
-	7dTOm5Cw==;
-Received: from localhost ([::1]:56370 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=cd7gK2PCi3jMwChSoVGTMOuWKnFuM5AZeHp+9J8SGFk=; b=Xm1weKJrrWTJeyEB8GwcY+dv7A
+	HH/OEBelMIrRYQwH/IZPoef9ZexU+t+gxiWWd091mp7YEqsr9iMGSh2TaTqigN9AOxMOSpDzCUjUa
+	SrrVHMcKZyZw2jT4OGHTlJgdSew3j06q1BVFCSXp87KTfoWGyQCECS3vElETi6Nms8ILAW1PdRNbG
+	Ej6nVJ9YV9RxgSep7oPeA4zOXKeZWaAf5W9a8Ce6bRhhKn7U2rhPHvdOaDCb4eXE4jLihdaOWaQDy
+	OX+BboKWC8rE389e1QC85QkaOgl6dHNaDPzkDe9/HhvHgtwYLFeexXyJGXsjwyAVfyuNQ+pZRNQVP
+	lOCPZLaw==;
+Received: from localhost ([::1]:21882 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hXmGG-004pjN-Ad; Mon, 03 Jun 2019 12:40:24 +0000
-Received: from mail-qt1-f193.google.com ([209.85.160.193]:35987) 
+	id 1hXo9O-004riu-Ii; Mon, 03 Jun 2019 14:41:26 +0000
+Received: from bilbo.ozlabs.org ([203.11.71.1]:44265 helo=ozlabs.org) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hXmGC-004pjG-FS
- for samba-technical@lists.samba.org; Mon, 03 Jun 2019 12:40:22 +0000
-Received: by mail-qt1-f193.google.com with SMTP id u12so9121939qth.3
- for <samba-technical@lists.samba.org>; Mon, 03 Jun 2019 05:40:19 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=7s8VtmwvF8IzHctRyD302/Z0jhJK/pHUEGomiGrt3r8=;
- b=qccG3BhWuRZk1ZbX2wH58Qg6BRsQHyltT+25OnqvvBfbDMLVPs+x7R9wq/k0gUaf0e
- B48r4O2x2rwz9VbINAZAHdJJpeyzmMSye2pKdt6HZe01H0tfB1uw14zXQyKgSrKG1lNU
- 478EWlqo0nP2Kt2sO6QcQBNexlFy7ALwWpMRxKBxJoCQHLG7/c2S7GMG216xb6ht5bEd
- TYfMDc0jInZtpo3GAhHhq7+EReb+zh18U4M/3U/+7WvxsI1ILKhgKNh5JXv4L5MvF0d6
- ho5Pi+zsQpWJRUpmGXfrU4HzgnnbQvHgsBoJeBQl6IzLxqiZ7uwX5SXSf7g4MVEp1Lba
- LtEw==
-X-Gm-Message-State: APjAAAXllV1RTMLRwhF0Ohi6r46oY2u1R2IlcIuGcUtm6tK2WZyfJ45j
- Xa8BzELCOOYCCJ7S4oywoA7sJlefysYA3l0r
-X-Google-Smtp-Source: APXvYqwxNikQyzF/rORQU7pV2Zy6xspHTOjEjNDGgQvw3fkJCpBq50rYKCsYv4OPxFt8EwMzrtVViw==
-X-Received: by 2002:a0c:88c3:: with SMTP id 3mr3088553qvo.21.1559565618503;
- Mon, 03 Jun 2019 05:40:18 -0700 (PDT)
-Received: from workstation.celeiro.br. ([191.177.181.81])
- by smtp.gmail.com with ESMTPSA id t197sm2972177qke.2.2019.06.03.05.40.17
- (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Mon, 03 Jun 2019 05:40:18 -0700 (PDT)
-To: samba-technical@lists.samba.org
-Subject: [PATCH v2] ctdb-scripts: Fix tcp_tw_recycle existence check
-Date: Mon,  3 Jun 2019 09:40:14 -0300
-Message-Id: <20190603124014.21226-1-rafaeldtinoco@ubuntu.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <2ff36d47-49fb-30b3-f953-53b6364a5949@rsmas.miami.edu>
-References: <2ff36d47-49fb-30b3-f953-53b6364a5949@rsmas.miami.edu>
+ (Exim) id 1hXo9J-004rin-Tl
+ for samba-technical@lists.samba.org; Mon, 03 Jun 2019 14:41:24 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 45Hd5x5qsnz9s1c;
+ Tue,  4 Jun 2019 00:41:09 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
+ t=1559572871; bh=tLNfz3lTcjYoLQLTEefC0bw2ZpiAYLLWBb12THvp2Pw=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=P+/W7jAvXw20O0+kUnfAVzOh+XJDVyDfEYRFPayX7em2aQXrfjT8XMg1waX0k9yL2
+ AeeB20uMD3zx9VPkHfwoXpegWlzmtGbAnlxJA7bM4UWpAxd2EQT0/O4Q9ZotulZs3N
+ 02MYTl3rMcfQBqmjmV/wkREiILPXx6DDwOIThWtQOZ+ncKAnNCxFNKpojTzVRi8NoT
+ tdcx4zjp2nfX15wMsQzcReNNcXC0egD15Tdz/1bKAW71epGJ9csSBv85imEB6ZTic6
+ A0vVbLvvyj4pdwkH3Dyny4JLmhYGm8D/bcP/zd0Gj0dP9lIVeX7kD6Mzru230Fn7Uk
+ fSPeGvtrc0rMA==
+Date: Tue, 4 Jun 2019 00:40:59 +1000
+To: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
+Subject: Re: [PATCH] ctdb-scripts: Fix tcp_tw_recycle existence check
+Message-ID: <20190604004059.6b52af7c@martins.ozlabs.org>
+In-Reply-To: <20190603024415.9581-1-rafaeldtinoco@ubuntu.com>
+References: <20190603024415.9581-1-rafaeldtinoco@ubuntu.com>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,42 +57,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rafael David Tinoco via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
-Cc: rafaeldtinoco@ubuntu.com
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-net.ipv4.tcp_tw_recycle has been removed from Linux 4.12 but, still,
-makes sense to check its existence. Unfortunately, current check does
-not test for the procfs file existence. This commit fixes the issue.
+On Sun,  2 Jun 2019 23:44:15 -0300, Rafael David Tinoco via
+samba-technical <samba-technical@lists.samba.org> wrote:
 
-Signed-off-by: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
----
- ctdb/config/nfs-linux-kernel-callout | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+> net.ipv4.tcp_tw_recycle has been removed from Linux 4.12 but, still,
+> makes sense to check its existence. Unfortunately, current check does
+> not test for the procfs file existence. This commit fixes the issue.
+> 
+> Signed-off-by: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
+> ---
+>  ctdb/config/nfs-linux-kernel-callout | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/ctdb/config/nfs-linux-kernel-callout b/ctdb/config/nfs-linux-kernel-callout
+> index def69a04649..71d8ecf8074 100755
+> --- a/ctdb/config/nfs-linux-kernel-callout
+> +++ b/ctdb/config/nfs-linux-kernel-callout
+> @@ -281,8 +281,8 @@ nfs_startup ()
+>      basic_stop "nfs" || true
+>      basic_start "nfs"
+>      _f="${PROCFS_PATH}/sys/net/ipv4/tcp_tw_recycle"
+> -    if [ "$_f" ] ; then
+> -	echo 1 >"$_f"
+> +    if [ -f "$_f" ] ; then
+> +	    echo 1 >"$_f"
+>      fi
+>  }
 
-diff --git a/ctdb/config/nfs-linux-kernel-callout b/ctdb/config/nfs-linux-kernel-callout
-index def69a04649..5625eddf6e2 100755
---- a/ctdb/config/nfs-linux-kernel-callout
-+++ b/ctdb/config/nfs-linux-kernel-callout
-@@ -280,10 +280,12 @@ nfs_startup ()
- {
-     basic_stop "nfs" || true
-     basic_start "nfs"
-+
-+    [ "${PROCFS_PATH}" ] || return 0
-+
-     _f="${PROCFS_PATH}/sys/net/ipv4/tcp_tw_recycle"
--    if [ "$_f" ] ; then
--	echo 1 >"$_f"
--    fi
-+
-+    [ -f "$_f" ] && echo 1 > "$_f"
- }
- 
- ##################################################
--- 
-2.20.1
+I actually prefer this version.  The script already guarantees that
+PROCFS_PATH is set, so let's not complicate this fix with an
+unnecessary check.
 
+Now that I'm old, I also prefer the explicit if-statement in this
+version, instead of the && pipeline in the later version.  The more
+verbose if-statement is easier to read.  :-)
+
+Reviewed-by: Martin Schwenke <martin@meltin.net>
+
+Can the 2nd reviewer please add:
+
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=13984
+
+to the commit message before pushing?  We will backport this fix to
+stable releases...
+
+Thanks!
+
+peace & happiness,
+martin
 
