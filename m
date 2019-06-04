@@ -2,50 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA446333CB
-	for <lists+samba-technical@lfdr.de>; Mon,  3 Jun 2019 17:43:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BBE3D33CD2
+	for <lists+samba-technical@lfdr.de>; Tue,  4 Jun 2019 03:45:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=hll3mxyxrGFaMUeLVO6Xq4dQuG1TboqPGzg9vvLZ0Ew=; b=rwyUiSVi4TTKsYlEV49osQqkse
-	mkXD8Qd4NJjM+R2uTOfnKg8Fnp+XribQudQjhEinKt5P9gENqjTV+2rUf82zPZH9N40HwcIaLVm23
-	cA5t8jsxXznmG6aktVnzjAqHIMWx2keGLk9/y86rf+RVqKqAefUpfWJRSG+Pp9Ol51B0YUVBoMjuw
-	qHlMrPkc6YsglWELSxY27JpULaZ/3hsczYevv7Zm3EEX/jShYRIKTP8T1gCma/kbmrrD+3f5ZC0vK
-	zkasFHwL+SNpZOi5V29G9PqQpwVKCgAgYHe+EJ5t9WqsJAD8YtvBT23oO1AktsVQw9QT1HU5PjNon
-	cCJHNTrg==;
-Received: from localhost ([::1]:38932 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=tJ/c7Uc5QAtD9Fs6zCBIRXhkyutiDmTmgfHgCGGMhI4=; b=NWHNHL24sN5tv6KE2iCXA1hrCA
+	aOLmP60oytsXqczx/pez8WojBBd3TZGk3PBu/OnMVUkamuVE39AQh4EnPlofYZxs7mZA9lQmBT4tx
+	jfCqdiSiN72hfH+NvwnNhYTR1VvmyYGMsCetO4Y086KnZi+K28OppVcki72lk+TqmLuyqUE1c7Cs0
+	bCmQxc8q0NlCWEqC6VO3LAUPo5t6UJqliXItqz/aHBMaR/Gzc6XNSKsDJMQ7cnS+vymHhaLFn+i5U
+	68xa3reIYPw1BSRPUJ65VONTGc6pSV5zn8zRL4NbrHB0z+3K4J5ITAh4GATfc1coT6wPd5mjtxHHl
+	gt2+JVUg==;
+Received: from localhost ([::1]:61790 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hXp6h-004u6n-Gs; Mon, 03 Jun 2019 15:42:43 +0000
-Received: from bilbo.ozlabs.org ([203.11.71.1]:46553 helo=ozlabs.org) 
+	id 1hXyUq-004yNL-7i; Tue, 04 Jun 2019 01:44:16 +0000
+Received: from mail-qt1-f193.google.com ([209.85.160.193]:35173) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hXp6T-004u15-6l
- for samba-technical@lists.samba.org; Mon, 03 Jun 2019 15:42:35 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 45HfSW6wgCz9s00;
- Tue,  4 Jun 2019 01:42:19 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1559576542; bh=u+f/SYyRE9okT4rpVoC/hwTpygrtEGT72Lgj2/QcVQ4=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=UJ5rm4uU+SJWY4wmHKDUQXrwNS/bAXZrQn7zl9I/2fuJeLUPEfV5jPz4lmRI+idGq
- CMWLflvCDvGn7mBwDiyco/q+HUmO7nsXqWXs8oxmpvSUqhbt1yLvNqrnFMWKcLf6z4
- GduFVtoM9VLViTnK1j8s9JccmOlhO2+HmgMW864dg2nJCisBKAMLCl3IDGQWx3WgzS
- 5JIXGx+QgxWzH7Z+JEFHHfbCe4PxcPPgUe+VDu3E8Sc+09CjgRWyr00t0mbxYfuCoW
- QAXVRpOWUOO6q2WvJbfCAWdsy5uwjrHukbunN/Ez1c6omZbhIp5BsylV9h8uOgUYNi
- CfCjX8VGi+7tQ==
-Date: Tue, 4 Jun 2019 01:42:10 +1000
-To: Amitay Isaacs <amitay@gmail.com>
-Subject: Re: [PATCH] ctdb-scripts: Fix tcp_tw_recycle existence check
-Message-ID: <20190604014210.030a5e11@martins.ozlabs.org>
-In-Reply-To: <CAJ+X7mTNwN+E4=g0B8Djjh1B=Rkiy7kjNJYMM7y-LYQ3zuy1CA@mail.gmail.com>
-References: <20190603024415.9581-1-rafaeldtinoco@ubuntu.com>
- <20190604004059.6b52af7c@martins.ozlabs.org>
- <CAJ+X7mTNwN+E4=g0B8Djjh1B=Rkiy7kjNJYMM7y-LYQ3zuy1CA@mail.gmail.com>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+ (Exim) id 1hXyUg-004yNE-Ra
+ for samba-technical@lists.samba.org; Tue, 04 Jun 2019 01:44:09 +0000
+Received: by mail-qt1-f193.google.com with SMTP id d23so11950042qto.2
+ for <samba-technical@lists.samba.org>; Mon, 03 Jun 2019 18:44:06 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=tJ/c7Uc5QAtD9Fs6zCBIRXhkyutiDmTmgfHgCGGMhI4=;
+ b=tDsPeyTJ6c61GkE5YQvS/CVF1RUnqiiZDtglFCKIs3nVeNDbDuOUnx4dXzF0t6n0vI
+ G3fdFva0vi2WFiiIMMS4K1+g9iyYBgsU6TGLwxKXMUKKtfZv9mMEBWvFTdd5oUprdMYq
+ MSX80xSDtb1PtiqW9MUCipIvj3/bd4LgSfyeMmzCB6+m526/3Ev3OAuopOY3WXLeiGNL
+ UiZhN32dDvGEHHXdc3ZkX1iWvZgNsYCM+899jMGfNVA5q8EzXXE/t6r4uAfOPSU+tEt1
+ H57mKGJoyyBIDSdYvqtFBrKgADSNhySh8DNla3JxoFr/Iw7KteE7FWBj/MLpoUkuC2Fo
+ +6ug==
+X-Gm-Message-State: APjAAAWXorcl5KjRhdTLpn4PST0J0ogqEEyu/umh917jGTb6gqBZL5KQ
+ aNGn9QO8KlFW2554tWmlIi9u/ob+flUyNBda
+X-Google-Smtp-Source: APXvYqzFvGF/SxzMGcOz6/pnCrofVBSUDdkwNoo0FHYUj3b5AODQCnF8nj4WR564A7RlyCjOPGYKjg==
+X-Received: by 2002:a0c:f6cc:: with SMTP id d12mr25271173qvo.73.1559612644608; 
+ Mon, 03 Jun 2019 18:44:04 -0700 (PDT)
+Received: from workstation.celeiro.br. ([191.177.181.81])
+ by smtp.gmail.com with ESMTPSA id m40sm13626264qtm.2.2019.06.03.18.44.03
+ (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+ Mon, 03 Jun 2019 18:44:04 -0700 (PDT)
+To: samba-technical@lists.samba.org
+Subject: [PATCH] ctdb-scripts: Fix ss syntax in update_tickles()
+Date: Mon,  3 Jun 2019 22:44:00 -0300
+Message-Id: <20190604014400.16289-1-rafaeldtinoco@ubuntu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,69 +61,119 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>,
- Samba Technical <samba-technical@lists.samba.org>
+From: Rafael David Tinoco via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
+Cc: rafaeldtinoco@ubuntu.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 4 Jun 2019 00:47:03 +1000, Amitay Isaacs <amitay@gmail.com>
-wrote:
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=13985
 
-> On Tue, Jun 4, 2019 at 12:42 AM Martin Schwenke via samba-technical
-> <samba-technical@lists.samba.org> wrote:
-> >
-> > On Sun,  2 Jun 2019 23:44:15 -0300, Rafael David Tinoco via
-> > samba-technical <samba-technical@lists.samba.org> wrote:
-> >  
-> > > net.ipv4.tcp_tw_recycle has been removed from Linux 4.12 but, still,
-> > > makes sense to check its existence. Unfortunately, current check does
-> > > not test for the procfs file existence. This commit fixes the issue.
-> > >
-> > > Signed-off-by: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
-> > > ---
-> > >  ctdb/config/nfs-linux-kernel-callout | 4 ++--
-> > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > >
-> > > diff --git a/ctdb/config/nfs-linux-kernel-callout b/ctdb/config/nfs-linux-kernel-callout
-> > > index def69a04649..71d8ecf8074 100755
-> > > --- a/ctdb/config/nfs-linux-kernel-callout
-> > > +++ b/ctdb/config/nfs-linux-kernel-callout
-> > > @@ -281,8 +281,8 @@ nfs_startup ()
-> > >      basic_stop "nfs" || true
-> > >      basic_start "nfs"
-> > >      _f="${PROCFS_PATH}/sys/net/ipv4/tcp_tw_recycle"
-> > > -    if [ "$_f" ] ; then
-> > > -     echo 1 >"$_f"
-> > > +    if [ -f "$_f" ] ; then
-> > > +         echo 1 >"$_f"
-> > >      fi
-> > >  }  
-> >
-> > I actually prefer this version.  The script already guarantees that
-> > PROCFS_PATH is set, so let's not complicate this fix with an
-> > unnecessary check.
-> >
-> > Now that I'm old, I also prefer the explicit if-statement in this
-> > version, instead of the && pipeline in the later version.  The more
-> > verbose if-statement is easier to read.  :-)
-> >
-> > Reviewed-by: Martin Schwenke <martin@meltin.net>
-> >
-> > Can the 2nd reviewer please add:
-> >
-> > BUG: https://bugzilla.samba.org/show_bug.cgi?id=13984
-> >
-> > to the commit message before pushing?  We will backport this fix to
-> > stable releases...  
-> 
-> Reviewed-by: Amitay Isaacs <amitay@gmail.com>
-> 
-> Martin, you can push the right patch with the required bug tag.
+During CTDB execution I got the following error:
 
-Wunderbar!  Pushed to autobuild...
+ctdbd[1000]: Starting traverse on DB ctdb.tdb (id 806)
+ctdbd[1000]: Ending traverse on DB ctdb.tdb (id 806), records 0
+ctdb-eventd[1002]: 60.nfq: ss: bison bellows (while parsing filter): "syntax error!" Sorry.
+ctdb-eventd[1002]: 60.nfs: Usage: ss [ OPTIONS ]
+ctdb-eventd[1002]: 60.nfs:        ss [ OPTIONS ] [ FILTER ]
+ctdb-eventd[1002]: 60.nfs:    -V, --version       output version information
 
-peace & happiness,
-martin
+Debug in /etc/ctdb/functions showed:
+
+60.nfs: + _port=2049
+60.nfs: + tickledir=/var/lib/ctdb/scripts/tickles
+60.nfs: + mkdir -p /var/lib/ctdb/scripts/tickles
+60.nfs: + ctdb_get_pnn
+60.nfs: + _pnn_file=/var/lib/ctdb/scripts/my-pnn
+60.nfs: + [ ! -f /var/lib/ctdb/scripts/my-pnn ]
+60.nfs: + cat /var/lib/ctdb/scripts/my-pnn
+60.nfs: + _pnn=0
+60.nfs: + /usr/bin/ctdb -X ip
+60.nfs: + awk -F| -v pnn=0 $3 == pnn {print $2}it
+60.nfs: + _ips=172.16.17.3
+60.nfs: + _ip_filter=
+60.nfs: + _ip_filter=src [172.16.17.3]
+60.nfs: + _port_filter=sport == :2049
+60.nfs: + _my_connections=/var/lib/ctdb/scripts/tickles/2049.connections.12623
+60.nfs: + ss -tn state established ( src [172.16.17.3] ) ( sport == :2049 )
+
+ss syntax is wrong in update_tickles().
+
+Instead of:
+
+ss -tn state established ( src [172.16.17.3] ) ( sport == :2049 )
+
+Obtained in debug mode, we should have something like:
+
+ss -tn state established '( src [172.16.17.3] ) && sport == :2049'
+
+or
+
+ss -tn state established '( src [172.16.17.2] || src [172.16.17.3] ) \
+    && sport == :2049'
+
+depending on the number of _ips obtained from "ctdb -X ip command".
+
+This script fixes the issue.
+
+Signed-off-by: Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
+---
+ ctdb/config/functions | 27 ++++++++++++++++-----------
+ 1 file changed, 16 insertions(+), 11 deletions(-)
+
+diff --git a/ctdb/config/functions b/ctdb/config/functions
+index 1dc16532890..8c4dae6097d 100755
+--- a/ctdb/config/functions
++++ b/ctdb/config/functions
+@@ -956,6 +956,10 @@ update_tickles ()
+ {
+ 	_port="$1"
+ 
++	if [ "$_port" = "" ]; then
++		return 0;
++	fi
++
+ 	tickledir="${CTDB_SCRIPT_VARDIR}/tickles"
+ 	mkdir -p "$tickledir"
+ 
+@@ -964,24 +968,25 @@ update_tickles ()
+ 	_ips=$($CTDB -X ip | awk -F'|' -v pnn="$_pnn" '$3 == pnn {print $2}')
+ 
+ 	# IPs and port as ss filters
+-	_ip_filter=""
+-	for _ip in $_ips ; do
+-	    _ip_filter="${_ip_filter}${_ip_filter:+ || }src [${_ip}]"
+-	done
++
++	_ip_filter=$(for _ip in $_ips; do echo " src [$_ip] |" ; done | xargs)
++	_ip_filter=$(echo $_ip_filter | sed 's: |$::g')
++
++	if [ "$_ip_filter" = "" ]; then
++		return 0;
++	fi
++
+ 	_port_filter="sport == :${_port}"
+ 
+ 	# Record connections to our public IPs in a temporary file.
+ 	# This temporary file is in CTDB's private state directory and
+ 	# $$ is used to avoid a very rare race involving CTDB's script
+ 	# debugging.  No security issue, nothing to see here...
++
+ 	_my_connections="${tickledir}/${_port}.connections.$$"
+-	# Parentheses are needed around the filters for precedence but
+-	# the parentheses can't be empty!
+-	ss -tn state established \
+-	   "${_ip_filter:+( ${_ip_filter} )}" \
+-	   "${_port_filter:+( ${_port_filter} )}" |
+-	awk 'NR > 1 {print $4, $3}' |
+-	sort >"$_my_connections"
++
++	ss -tn state established "( $_ip_filter ) && $_port_filter" | \
++		awk 'NR > 1 {print $4, $3}' | sort >"$_my_connections"
+ 
+ 	# Record our current tickles in a temporary file
+ 	_my_tickles="${tickledir}/${_port}.tickles.$$"
+-- 
+2.20.1
+
 
