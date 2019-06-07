@@ -2,57 +2,77 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87BC8396C2
-	for <lists+samba-technical@lfdr.de>; Fri,  7 Jun 2019 22:24:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 833AD396E1
+	for <lists+samba-technical@lfdr.de>; Fri,  7 Jun 2019 22:37:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=+Ph/P+aMyTVBBlMtGSxpuwyoARzDz0vtltO+wZhBOEY=; b=qp35sAEQyAs8D/szRKQGQxNJ8F
-	m7G7HJSOFVXUr+EWldcZlxgvmqWPgljUbPPUnVgQ+uawjXwD+2lBCKYGpmM/TSwbJbsp7mSOer0LD
-	GWmHWh9BkQXq1KDwaVOvvWRxrRvBizm82VfCwLTCVT7Z7cCvgR8srLG6d9C+i6/2pEly4QAsBDC+6
-	dZygjHaSonF+TfZOjKRZxBsYhGqdWAIfSh1X0cy+0uvCl0FsNiPoCHPP3blEk3WWmerKLMG3tL1t5
-	HipEGB+EZ+nOLsBOFK0huXbYGDG55vfKtVY1GDQoncboLHN86rA4D1zmeRYytOCSPajvyUKS+//K+
-	YxfORBQQ==;
-Received: from localhost ([::1]:59290 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=Uqj+y7MlGf+jr1v0zIWWiVduQFkkD0gJTcqGoONFlGQ=; b=cph29NwDgN8tlfbPVzXubmkefE
+	F3blryDwDtbdhlVyeRvTUII/MskD/knbFIfnIuqi53t79RpJdhRTZklf9gUbC5aca6biOujwytLph
+	q8WEGACXdw+oLA/jPD0rba1npiGGgJki4W1afg819Rk7G3NXHGqziLXHuscMGwui1FdblMIXhfSQv
+	VIy3uysiYjFP6zJoC6YIim0EQM3gdOahwEdOLT5BaSIFAs8xBnAdtFKPqnBOGD2XI1SW5gdGtdwE3
+	G8vmCDL3beg/Tq3X7avDEG94b99oOUpEQHIeYb2QQdrZq1lYHdw3fBQdgyTsukMzx6WmGN0fRweik
+	X3B4GhBA==;
+Received: from localhost ([::1]:60076 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hZLOw-000RTL-BZ; Fri, 07 Jun 2019 20:23:50 +0000
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632]:41152) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hZLOr-000RTE-OP
- for samba-technical@lists.samba.org; Fri, 07 Jun 2019 20:23:48 +0000
-Received: by mail-pl1-x632.google.com with SMTP id s24so1233920plr.8
- for <samba-technical@lists.samba.org>; Fri, 07 Jun 2019 13:23:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=+Ph/P+aMyTVBBlMtGSxpuwyoARzDz0vtltO+wZhBOEY=;
- b=HubCRacH1axPdEHp/w8vC34pB9Ej36JlZeXyR3MgBdcSphRX3aw55SE9srv6E74FLb
- NWELkW25enTINjJNKOMoYY+52gof4vEAg6kEW3p0pHCnPEfClpYUJBNVVrp9X+p4t7N4
- +4IpJWLtGcvv2Ixy5VTem5k+5TvYjUKGERhU4AVTrplLY1E14cuugBWKJLx+Ip4lHwvR
- ywzS2FotC0X4ArJWL4v/6B2e3MiNpKOwNk8ZN1navy7kE8g3GtHgXRMsRHnckv6s/Ap1
- xA1682k5X7CrabDSQ4a39/xRkPo0WqapGbt3qbm3qQsnBD/3+VnLyblJoVzAuatoYUEd
- a1EQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=+Ph/P+aMyTVBBlMtGSxpuwyoARzDz0vtltO+wZhBOEY=;
- b=bfB6e2pOcK6KJ/LmqZ9QC0AUR3NnMThx8xsRAIUwTvwrKvzTTmksoo1SJ6OfPU0/qq
- vgHTeasGj1KOYGMWNLRiYfPyuzLPv1T2ElZLgzKJFNSSQeSJa4X5OHZ+v/omQ7A7SCd8
- EfnE38hcq3WJNsnAhBlVWFgeGmiQVGDH0/Seizt2wmkQwSomv7RXH4uwGEs7CDyyem+o
- LKtdUbZcZ+ox/rNNkDnSN2kgUKM2/JNljJ6B9pIXB4cqbgzic596VFUuUwLofdVUnTTX
- 2blTK0uriSnMpRPmQ47QurnYzjiWPgxGOBdxZm8e1HXzmK99LnYmjW5xGl2ZqFDcMbqO
- RLsw==
-X-Gm-Message-State: APjAAAWMNd85KTGLKPanpyK8Jty0v5rzp44Qaxy3JQB7WmqRRb0I/UBL
- F+O8EPhS1+4NtfDXRaNoXznqPNlUvTHCsZzSa8clb7wF
-X-Google-Smtp-Source: APXvYqzmGIpn512iQXzwziJHhdyM3s5VJ9sDGJ8jPV331CRB2F+HD2oUPzcAiGFdvw2PHy2Mf/P+vMjgrLCP13Cnf7E=
-X-Received: by 2002:a17:902:728b:: with SMTP id
- d11mr28303949pll.78.1559939021753; 
- Fri, 07 Jun 2019 13:23:41 -0700 (PDT)
+	id 1hZLbY-000Rf6-8J; Fri, 07 Jun 2019 20:36:52 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:34810) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hZLbS-000Rez-CV
+ for samba-technical@lists.samba.org; Fri, 07 Jun 2019 20:36:50 +0000
+Received: from [172.21.50.31] (unknown [80.155.4.82])
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id D2B7E812BA; 
+ Sat,  8 Jun 2019 08:36:35 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1559939797;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Uqj+y7MlGf+jr1v0zIWWiVduQFkkD0gJTcqGoONFlGQ=;
+ b=fRZUzNuUyXP6AhgRAADHXUm+55QoUxUDeXEkrTMzNgvHaA5OtcRDqsRQJaCq5w9+h+HWF/
+ R+ZFh27ivOIj2srbXmdi7b4zLmGSYG33fIAyaE6Fx1EAzFwDvgeu5bLJy0uvTe/FgMeVQ9
+ 92jgQcLolO93+dZXut762Fot9a7Ccs0plzHbhG4Q9QS8kXk1/+0qoYE4yaIsWCbh7z1FTu
+ cjNVjAlD/2EEWtpGzGujw9uQ8zB0qoVMkQHSBgypVsFHq+pg44PSoKGJbiraZfqeX6pUKj
+ VwsmA5zeRr5PLuJkapEIVFt8+ihW9Qk/A73hL3Vxa6hEZySLGsoZDNc/VdBh9g==
+Subject: Re: recent flapping tests
+To: Martin Schwenke <martin@meltin.net>, samba-technical@lists.samba.org
+References: <7af13c9d-858d-650d-242a-d023f19dbaae@catalyst.net.nz>
+ <20190608012357.68de8832@martins.ozlabs.org>
+Message-ID: <c58cec86-7177-18ac-ead1-7e5de351f330@catalyst.net.nz>
+Date: Sat, 8 Jun 2019 08:36:29 +1200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-Date: Fri, 7 Jun 2019 15:23:30 -0500
-Message-ID: <CAH2r5mvA3t2Nm4F=LuBwHkN+E19pHuiLaSv0JV9SMNYvZrxAiQ@mail.gmail.com>
-Subject: [SMB3.1.1] Faster crypto (GCM) for Linux kernel SMB3.1.1 mounts
-To: CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="00000000000043f8e9058ac19bf6"
+In-Reply-To: <20190608012357.68de8832@martins.ozlabs.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1559939797;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Uqj+y7MlGf+jr1v0zIWWiVduQFkkD0gJTcqGoONFlGQ=;
+ b=vCFee1nA+HGfF8oZiv2gtXkD1toGxlHFM4GN8mZXk7002zsNK4vkPqn6YbnOcFF2Ngy1Yi
+ EddoXdI22tqi9zPicvlFMh/sVWf51kKJ/DvCBRxg4rvLh9OvoSpdqeHZXZi3s1eXmgLQvY
+ N/wjIHTld5IdQevBXQe7sjuRgtpqK2IYkseY2o5PeuTKnQuX745SppWi0VvAlafp22uojB
+ Qrl1UPWOaFRVO8yC5sSJ83igzqJJDNhQm+nTjixiz80k2Ea3YSTLbRR6xuimhjwLgt+msd
+ fHwwpj385pGqIDh2QS6yYG/Kzil8G8x2XTPaKAtAI4w2ck8qY1fAR3ksW+c2SQ==
+ARC-Seal: i=1; s=default; d=catalyst.net.nz; t=1559939797; a=rsa-sha256;
+ cv=none;
+ b=qj60kHnCGKXH9pZH231wlu1gRW++S/MRQ7TZgUQEs/6ZfXNdsqr4nTO1mpR7s0tdsVtyFx
+ FPzYS9Wf3/3QFVVNrDF3t5aRJvtOL34PslCOTnSVLy1/QXVHFFsFgdr4nT2Zk10hOXlvC9
+ gyrP+jkbiZhesMn31iPOBmzbdcaz5PPVf0lBtaEOMF9f2EHyVS9FgWlxdyHZwU86Cg1MeV
+ II5UlFjrPXVwic4ibrw0aM/F+5dJ83zcBmx42hblGhBvxwv3v9dcA1JKEeWNMNCViu1/ZR
+ ygBfrjFujEFA3uql4wVItwETmqWc30p+kFj8brtFkzlIhlvF60KKrTQ3W4Hmew==
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=douglasb@catalyst.net.nz
+ smtp.mailfrom=douglas.bagnall@catalyst.net.nz
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=douglasb@catalyst.net.nz
+ smtp.mailfrom=douglas.bagnall@catalyst.net.nz
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,159 +86,64 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---00000000000043f8e9058ac19bf6
-Content-Type: text/plain; charset="UTF-8"
+hi Martin,
 
-I am seeing more than double the performance of copy to Samba on
-encrypted mount with this two patch set, and 80%+ faster on copy from
-Samba server (when running Ralph's GCM capable experimental branch of
-Samba)
+> Should be fixed by fixes pushed on 7 May.
 
-Patches to update the kernel client (cifs.ko) attached:
+I can confirm all your "shoulds". Also I can confirm the wisdom of
+hedging with this "may":
 
--- 
-Thanks,
+>>    4 *FAILED* tests/simple/69_recovery_resurrect_deleted.sh
+> 
+> May be fixed by fixes pushed on 7 May.  :-)
 
-Steve
+It happened twice since May 8.
 
---00000000000043f8e9058ac19bf6
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-SMB3-Add-SMB3.1.1-GCM-to-negotiated-crypto-algorigth.patch"
-Content-Disposition: attachment; 
-	filename="0001-SMB3-Add-SMB3.1.1-GCM-to-negotiated-crypto-algorigth.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_jwmjdagf0>
-X-Attachment-Id: f_jwmjdagf0
+The complete results for the last thirty days look like this:
 
-RnJvbSBlZGRhZGY5NzM2MTM1MzU5MjM2YjAwNDAzOTBhN2FlMWVhMWQyYjVlIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IEZyaSwgNyBKdW4gMjAxOSAwODo1OTo0MCAtMDUwMApTdWJqZWN0OiBbUEFUQ0ggMS8y
-XSBTTUIzOiBBZGQgU01CMy4xLjEgR0NNIHRvIG5lZ290aWF0ZWQgY3J5cHRvIGFsZ29yaWd0aG1z
-CgpHQ00gaXMgZmFzdGVyLiBSZXF1ZXN0IGl0IGR1cmluZyBuZWdvdGlhdGUgcHJvdG9jb2wuCkZv
-bGxvd29uIHBhdGNoIHdpbGwgYWRkIGNhbGxvdXRzIHRvIEdDTSBjcnlwdG8KClNpZ25lZC1vZmYt
-Ynk6IFN0ZXZlIEZyZW5jaCA8c3RmcmVuY2hAbWljcm9zb2Z0LmNvbT4KLS0tCiBmcy9jaWZzL3Nt
-YjJvcHMuYyB8IDQgKystLQogZnMvY2lmcy9zbWIycGR1LmMgfCA4ICsrKystLS0tCiBmcy9jaWZz
-L3NtYjJwZHUuaCB8IDQgKystLQogMyBmaWxlcyBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKyksIDgg
-ZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZnMvY2lmcy9zbWIyb3BzLmMgYi9mcy9jaWZzL3Nt
-YjJvcHMuYwppbmRleCBlOTIxZTY1MTE3MjguLjdmYTk1OTI5YzhmYyAxMDA2NDQKLS0tIGEvZnMv
-Y2lmcy9zbWIyb3BzLmMKKysrIGIvZnMvY2lmcy9zbWIyb3BzLmMKQEAgLTMzMzMsNyArMzMzMyw3
-IEBAIGZpbGxfdHJhbnNmb3JtX2hkcihzdHJ1Y3Qgc21iMl90cmFuc2Zvcm1faGRyICp0cl9oZHIs
-IHVuc2lnbmVkIGludCBvcmlnX2xlbiwKIAl0cl9oZHItPlByb3RvY29sSWQgPSBTTUIyX1RSQU5T
-Rk9STV9QUk9UT19OVU07CiAJdHJfaGRyLT5PcmlnaW5hbE1lc3NhZ2VTaXplID0gY3B1X3RvX2xl
-MzIob3JpZ19sZW4pOwogCXRyX2hkci0+RmxhZ3MgPSBjcHVfdG9fbGUxNigweDAxKTsKLQlnZXRf
-cmFuZG9tX2J5dGVzKCZ0cl9oZHItPk5vbmNlLCBTTUIzX0FFUzEyOENNTV9OT05DRSk7CisJZ2V0
-X3JhbmRvbV9ieXRlcygmdHJfaGRyLT5Ob25jZSwgU01CM19BRVMxMjhDQ01fTk9OQ0UpOwogCW1l
-bWNweSgmdHJfaGRyLT5TZXNzaW9uSWQsICZzaGRyLT5TZXNzaW9uSWQsIDgpOwogfQogCkBAIC0z
-NDkyLDcgKzM0OTIsNyBAQCBjcnlwdF9tZXNzYWdlKHN0cnVjdCBUQ1BfU2VydmVyX0luZm8gKnNl
-cnZlciwgaW50IG51bV9ycXN0LAogCQlnb3RvIGZyZWVfc2c7CiAJfQogCWl2WzBdID0gMzsKLQlt
-ZW1jcHkoaXYgKyAxLCAoY2hhciAqKXRyX2hkci0+Tm9uY2UsIFNNQjNfQUVTMTI4Q01NX05PTkNF
-KTsKKwltZW1jcHkoaXYgKyAxLCAoY2hhciAqKXRyX2hkci0+Tm9uY2UsIFNNQjNfQUVTMTI4Q0NN
-X05PTkNFKTsKIAogCWFlYWRfcmVxdWVzdF9zZXRfY3J5cHQocmVxLCBzZywgc2csIGNyeXB0X2xl
-biwgaXYpOwogCWFlYWRfcmVxdWVzdF9zZXRfYWQocmVxLCBhc3NvY19kYXRhX2xlbik7CmRpZmYg
-LS1naXQgYS9mcy9jaWZzL3NtYjJwZHUuYyBiL2ZzL2NpZnMvc21iMnBkdS5jCmluZGV4IGFiOGRj
-NzNkMjI4Mi4uOWFmZWYwZWFhMWM0IDEwMDY0NAotLS0gYS9mcy9jaWZzL3NtYjJwZHUuYworKysg
-Yi9mcy9jaWZzL3NtYjJwZHUuYwpAQCAtNDg5LDEwICs0ODksMTAgQEAgc3RhdGljIHZvaWQKIGJ1
-aWxkX2VuY3J5cHRfY3R4dChzdHJ1Y3Qgc21iMl9lbmNyeXB0aW9uX25lZ19jb250ZXh0ICpwbmVn
-X2N0eHQpCiB7CiAJcG5lZ19jdHh0LT5Db250ZXh0VHlwZSA9IFNNQjJfRU5DUllQVElPTl9DQVBB
-QklMSVRJRVM7Ci0JcG5lZ19jdHh0LT5EYXRhTGVuZ3RoID0gY3B1X3RvX2xlMTYoNCk7IC8qIENp
-cGhlciBDb3VudCArIGxlMTYgY2lwaGVyICovCi0JcG5lZ19jdHh0LT5DaXBoZXJDb3VudCA9IGNw
-dV90b19sZTE2KDEpOwotLyogcG5lZ19jdHh0LT5DaXBoZXJzWzBdID0gU01CMl9FTkNSWVBUSU9O
-X0FFUzEyOF9HQ007Ki8gLyogbm90IHN1cHBvcnRlZCB5ZXQgKi8KLQlwbmVnX2N0eHQtPkNpcGhl
-cnNbMF0gPSBTTUIyX0VOQ1JZUFRJT05fQUVTMTI4X0NDTTsKKwlwbmVnX2N0eHQtPkRhdGFMZW5n
-dGggPSBjcHVfdG9fbGUxNig2KTsgLyogQ2lwaGVyIENvdW50ICsgbGUxNiBjaXBoZXIgKi8KKwlw
-bmVnX2N0eHQtPkNpcGhlckNvdW50ID0gY3B1X3RvX2xlMTYoMik7CisJcG5lZ19jdHh0LT5DaXBo
-ZXJzWzBdID0gU01CMl9FTkNSWVBUSU9OX0FFUzEyOF9HQ007CisJcG5lZ19jdHh0LT5DaXBoZXJz
-WzFdID0gU01CMl9FTkNSWVBUSU9OX0FFUzEyOF9DQ007CiB9CiAKIHN0YXRpYyB2b2lkCmRpZmYg
-LS1naXQgYS9mcy9jaWZzL3NtYjJwZHUuaCBiL2ZzL2NpZnMvc21iMnBkdS5oCmluZGV4IGM3ZDU4
-MTNiZWJkOC4uZDNhNjRjZjgxMmQ5IDEwMDY0NAotLS0gYS9mcy9jaWZzL3NtYjJwZHUuaAorKysg
-Yi9mcy9jaWZzL3NtYjJwZHUuaApAQCAtMTIzLDcgKzEyMyw3IEBAIHN0cnVjdCBzbWIyX3N5bmNf
-cGR1IHsKIAlfX2xlMTYgU3RydWN0dXJlU2l6ZTI7IC8qIHNpemUgb2Ygd2N0IGFyZWEgKHZhcmll
-cywgcmVxdWVzdCBzcGVjaWZpYykgKi8KIH0gX19wYWNrZWQ7CiAKLSNkZWZpbmUgU01CM19BRVMx
-MjhDTU1fTk9OQ0UgMTEKKyNkZWZpbmUgU01CM19BRVMxMjhDQ01fTk9OQ0UgMTEKICNkZWZpbmUg
-U01CM19BRVMxMjhHQ01fTk9OQ0UgMTIKIAogc3RydWN0IHNtYjJfdHJhbnNmb3JtX2hkciB7CkBA
-IC0yOTMsNyArMjkzLDcgQEAgc3RydWN0IHNtYjJfZW5jcnlwdGlvbl9uZWdfY29udGV4dCB7CiAJ
-X19sZTE2CURhdGFMZW5ndGg7CiAJX19sZTMyCVJlc2VydmVkOwogCV9fbGUxNglDaXBoZXJDb3Vu
-dDsgLyogQUVTLTEyOC1HQ00gYW5kIEFFUy0xMjgtQ0NNICovCi0JX19sZTE2CUNpcGhlcnNbMV07
-IC8qIENpcGhlcnNbMF0gc2luY2Ugb25seSBvbmUgdXNlZCBub3cgKi8KKwlfX2xlMTYJQ2lwaGVy
-c1syXTsKIH0gX19wYWNrZWQ7CiAKIC8qIFNlZSBNUy1TTUIyIDIuMi4zLjEuMyAqLwotLSAKMi4y
-MC4xCgo=
---00000000000043f8e9058ac19bf6
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0002-SMB3-Add-SMB3.1.1-GCM-crypto-to-the-encrypt-and-decr.patch"
-Content-Disposition: attachment; 
-	filename="0002-SMB3-Add-SMB3.1.1-GCM-crypto-to-the-encrypt-and-decr.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_jwmjdagu1>
-X-Attachment-Id: f_jwmjdagu1
+$ ./parse-email/parse-autobuild-email --file-regex sn-devel-184 --since
+2019-05-08
+found 36 lines matching '(?:^(?:UNEXPECTED|\\*FAILED\\*))|(?:No space left
+on device)' in 37 files matching 'sn-devel-184'
+   8 UNEXPECTED(failure):
+samba.tests.auth_log_winbind.samba.tests.auth_log_winbind.AuthLogTestsWinbind.test_wbinfo(ad_member:local)
+   6 UNEXPECTED(failure):
+samba.tests.auth_log_winbind.samba.tests.auth_log_winbind.AuthLogTestsWinbind.test_wbinfo_ntlmv1(ad_member:local)
+   4 UNEXPECTED(failure):
+samba.wbinfo_simple.check-secret.domain=SAMBA-TEST.wbinfo(nt4_member:local)
+   3 UNEXPECTED(failure): samba3.raw.notify.mask(nt4_dc)
+   2 UNEXPECTED(failure):
+samba4.drs.getnc_schema.python(schema_pair_dc).getnc_schema.SchemaReplicationTests.test_schema_linked_attributes(schema_pair_dc)
+   2 *FAILED* tests/simple/69_recovery_resurrect_deleted.sh
+   2 UNEXPECTED(failure):
+samba4.ldap.password_lockout.python(ad_dc_slowtests).__main__.PasswordTestsWithSleep.test_pso_login_lockout_krb5(ad_dc_slowtests)
+   2 UNEXPECTED(error):
+samba4.drs.samba_tool_drs.python(vampire_dc).samba_tool_drs.SambaToolDrsTests.test_samba_tool_kcc(vampire_dc:local)
+   2 UNEXPECTED(failure):
+samba4.ldap.notification.python(ad_dc_ntvfs).__main__.LDAPNotificationTest.test_simple_search(ad_dc_ntvfs)
+   1 UNEXPECTED(failure):
+samba4.ldap.password_lockout.python(ad_dc_slowtests).__main__.PasswordTestsWithSleep.test_login_lockout_krb5(ad_dc_slowtests)
+   1 UNEXPECTED(failure):
+samba4.winbind.struct.lookup_name_sid(nt4_member:local)
+   1 UNEXPECTED(failure): samba3.raw.notify.dir(nt4_dc)
+   1 UNEXPECTED(failure): samba3.smb2.notify.mask(nt4_dc)
+   1 UNEXPECTED(failure):
+samba4.ldap.rodc_rwdc.python(rodc).__main__.RodcRwdcCachedTests.test_login_lockout_krb5(rodc:local)
 
-RnJvbSAxZGM4NTFhNDUyZWJiYzE5MWI3NTBmZWU4ZmI0MWRhNDVkOWIyMGZiIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IEZyaSwgNyBKdW4gMjAxOSAxNToxNjoxMCAtMDUwMApTdWJqZWN0OiBbUEFUQ0ggMi8y
-XSBbU01CM10gQWRkIFNNQjMuMS4xIEdDTSBjcnlwdG8gdG8gdGhlIGVuY3J5cHQgYW5kIGRlY3J5
-cHQKIGZ1bmN0aW9ucwoKU01CMy4xLjEgR0NNIHBlcmZvcm1zIG11Y2ggYmV0dGVyIHRoYW4gdGhl
-IG9sZGVyIENDTSBkZWZhdWx0Ogptb3JlIHRoYW4gdHdpY2UgYXMgZmFzdCBpbiB0aGUgd3JpdGUg
-cGF0Y2ggKGNvcHkgdG8gdGhlIFNhbWJhCnNlcnZlciBvbiBsb2NhbGhvc3QgZm9yIGV4YW1wbGUp
-IGFuZCA4MCUgZmFzdGVyIG9uIHRoZSByZWFkCnBhdGNoIChjb3B5IGZyb20gdGhlIHNlcnZlciku
-CgpTaWduZWQtb2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+Ci0t
-LQogZnMvY2lmcy9zbWIyb3BzLmMgICAgICAgfCAxOCArKysrKysrKysrKysrLS0tLS0KIGZzL2Np
-ZnMvc21iMnRyYW5zcG9ydC5jIHwgMTAgKysrKysrKystLQogMiBmaWxlcyBjaGFuZ2VkLCAyMSBp
-bnNlcnRpb25zKCspLCA3IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2ZzL2NpZnMvc21iMm9w
-cy5jIGIvZnMvY2lmcy9zbWIyb3BzLmMKaW5kZXggN2ZhOTU5MjljOGZjLi5hOGUyOGI5NTVjNjkg
-MTAwNjQ0Ci0tLSBhL2ZzL2NpZnMvc21iMm9wcy5jCisrKyBiL2ZzL2NpZnMvc21iMm9wcy5jCkBA
-IC0zMzI0LDcgKzMzMjQsNyBAQCBzbWIyX2Rpcl9uZWVkc19jbG9zZShzdHJ1Y3QgY2lmc0ZpbGVJ
-bmZvICpjZmlsZSkKIAogc3RhdGljIHZvaWQKIGZpbGxfdHJhbnNmb3JtX2hkcihzdHJ1Y3Qgc21i
-Ml90cmFuc2Zvcm1faGRyICp0cl9oZHIsIHVuc2lnbmVkIGludCBvcmlnX2xlbiwKLQkJICAgc3Ry
-dWN0IHNtYl9ycXN0ICpvbGRfcnEpCisJCSAgIHN0cnVjdCBzbWJfcnFzdCAqb2xkX3JxLCBzdHJ1
-Y3QgVENQX1NlcnZlcl9JbmZvICpzZXJ2ZXIpCiB7CiAJc3RydWN0IHNtYjJfc3luY19oZHIgKnNo
-ZHIgPQogCQkJKHN0cnVjdCBzbWIyX3N5bmNfaGRyICopb2xkX3JxLT5ycV9pb3ZbMF0uaW92X2Jh
-c2U7CkBAIC0zMzMzLDcgKzMzMzMsMTAgQEAgZmlsbF90cmFuc2Zvcm1faGRyKHN0cnVjdCBzbWIy
-X3RyYW5zZm9ybV9oZHIgKnRyX2hkciwgdW5zaWduZWQgaW50IG9yaWdfbGVuLAogCXRyX2hkci0+
-UHJvdG9jb2xJZCA9IFNNQjJfVFJBTlNGT1JNX1BST1RPX05VTTsKIAl0cl9oZHItPk9yaWdpbmFs
-TWVzc2FnZVNpemUgPSBjcHVfdG9fbGUzMihvcmlnX2xlbik7CiAJdHJfaGRyLT5GbGFncyA9IGNw
-dV90b19sZTE2KDB4MDEpOwotCWdldF9yYW5kb21fYnl0ZXMoJnRyX2hkci0+Tm9uY2UsIFNNQjNf
-QUVTMTI4Q0NNX05PTkNFKTsKKwlpZiAoc2VydmVyLT5jaXBoZXJfdHlwZSA9PSBTTUIyX0VOQ1JZ
-UFRJT05fQUVTMTI4X0dDTSkKKwkJZ2V0X3JhbmRvbV9ieXRlcygmdHJfaGRyLT5Ob25jZSwgU01C
-M19BRVMxMjhHQ01fTk9OQ0UpOworCWVsc2UKKwkJZ2V0X3JhbmRvbV9ieXRlcygmdHJfaGRyLT5O
-b25jZSwgU01CM19BRVMxMjhDQ01fTk9OQ0UpOwogCW1lbWNweSgmdHJfaGRyLT5TZXNzaW9uSWQs
-ICZzaGRyLT5TZXNzaW9uSWQsIDgpOwogfQogCkBAIC0zNDkxLDggKzM0OTQsMTMgQEAgY3J5cHRf
-bWVzc2FnZShzdHJ1Y3QgVENQX1NlcnZlcl9JbmZvICpzZXJ2ZXIsIGludCBudW1fcnFzdCwKIAkJ
-cmMgPSAtRU5PTUVNOwogCQlnb3RvIGZyZWVfc2c7CiAJfQotCWl2WzBdID0gMzsKLQltZW1jcHko
-aXYgKyAxLCAoY2hhciAqKXRyX2hkci0+Tm9uY2UsIFNNQjNfQUVTMTI4Q0NNX05PTkNFKTsKKwor
-CWlmIChzZXJ2ZXItPmNpcGhlcl90eXBlID09IFNNQjJfRU5DUllQVElPTl9BRVMxMjhfR0NNKQor
-CQltZW1jcHkoaXYsIChjaGFyICopdHJfaGRyLT5Ob25jZSwgU01CM19BRVMxMjhHQ01fTk9OQ0Up
-OworCWVsc2UgeworCQlpdlswXSA9IDM7CisJCW1lbWNweShpdiArIDEsIChjaGFyICopdHJfaGRy
-LT5Ob25jZSwgU01CM19BRVMxMjhDQ01fTk9OQ0UpOworCX0KIAogCWFlYWRfcmVxdWVzdF9zZXRf
-Y3J5cHQocmVxLCBzZywgc2csIGNyeXB0X2xlbiwgaXYpOwogCWFlYWRfcmVxdWVzdF9zZXRfYWQo
-cmVxLCBhc3NvY19kYXRhX2xlbik7CkBAIC0zNTkyLDcgKzM2MDAsNyBAQCBzbWIzX2luaXRfdHJh
-bnNmb3JtX3JxKHN0cnVjdCBUQ1BfU2VydmVyX0luZm8gKnNlcnZlciwgaW50IG51bV9ycXN0LAog
-CX0KIAogCS8qIGZpbGwgdGhlIDFzdCBpb3Ygd2l0aCBhIHRyYW5zZm9ybSBoZWFkZXIgKi8KLQlm
-aWxsX3RyYW5zZm9ybV9oZHIodHJfaGRyLCBvcmlnX2xlbiwgb2xkX3JxKTsKKwlmaWxsX3RyYW5z
-Zm9ybV9oZHIodHJfaGRyLCBvcmlnX2xlbiwgb2xkX3JxLCBzZXJ2ZXIpOwogCiAJcmMgPSBjcnlw
-dF9tZXNzYWdlKHNlcnZlciwgbnVtX3Jxc3QsIG5ld19ycSwgMSk7CiAJY2lmc19kYmcoRllJLCAi
-RW5jcnlwdCBtZXNzYWdlIHJldHVybmVkICVkXG4iLCByYyk7CmRpZmYgLS1naXQgYS9mcy9jaWZz
-L3NtYjJ0cmFuc3BvcnQuYyBiL2ZzL2NpZnMvc21iMnRyYW5zcG9ydC5jCmluZGV4IGQxMTgxNTcy
-NzU4Yi4uMWNjYmNmOWMyYzNiIDEwMDY0NAotLS0gYS9mcy9jaWZzL3NtYjJ0cmFuc3BvcnQuYwor
-KysgYi9mcy9jaWZzL3NtYjJ0cmFuc3BvcnQuYwpAQCAtNzM0LDcgKzczNCwxMCBAQCBzbWIzX2Ny
-eXB0b19hZWFkX2FsbG9jYXRlKHN0cnVjdCBUQ1BfU2VydmVyX0luZm8gKnNlcnZlcikKIAlzdHJ1
-Y3QgY3J5cHRvX2FlYWQgKnRmbTsKIAogCWlmICghc2VydmVyLT5zZWNtZWNoLmNjbWFlc2VuY3J5
-cHQpIHsKLQkJdGZtID0gY3J5cHRvX2FsbG9jX2FlYWQoImNjbShhZXMpIiwgMCwgMCk7CisJCWlm
-IChzZXJ2ZXItPmNpcGhlcl90eXBlID09IFNNQjJfRU5DUllQVElPTl9BRVMxMjhfR0NNKQorCQkJ
-dGZtID0gY3J5cHRvX2FsbG9jX2FlYWQoImdjbShhZXMpIiwgMCwgMCk7CisJCWVsc2UKKwkJCXRm
-bSA9IGNyeXB0b19hbGxvY19hZWFkKCJjY20oYWVzKSIsIDAsIDApOwogCQlpZiAoSVNfRVJSKHRm
-bSkpIHsKIAkJCWNpZnNfZGJnKFZGUywgIiVzOiBGYWlsZWQgdG8gYWxsb2MgZW5jcnlwdCBhZWFk
-XG4iLAogCQkJCSBfX2Z1bmNfXyk7CkBAIC03NDQsNyArNzQ3LDEwIEBAIHNtYjNfY3J5cHRvX2Fl
-YWRfYWxsb2NhdGUoc3RydWN0IFRDUF9TZXJ2ZXJfSW5mbyAqc2VydmVyKQogCX0KIAogCWlmICgh
-c2VydmVyLT5zZWNtZWNoLmNjbWFlc2RlY3J5cHQpIHsKLQkJdGZtID0gY3J5cHRvX2FsbG9jX2Fl
-YWQoImNjbShhZXMpIiwgMCwgMCk7CisJCWlmIChzZXJ2ZXItPmNpcGhlcl90eXBlID09IFNNQjJf
-RU5DUllQVElPTl9BRVMxMjhfR0NNKQorCQkJdGZtID0gY3J5cHRvX2FsbG9jX2FlYWQoImdjbShh
-ZXMpIiwgMCwgMCk7CisJCWVsc2UKKwkJCXRmbSA9IGNyeXB0b19hbGxvY19hZWFkKCJjY20oYWVz
-KSIsIDAsIDApOwogCQlpZiAoSVNfRVJSKHRmbSkpIHsKIAkJCWNyeXB0b19mcmVlX2FlYWQoc2Vy
-dmVyLT5zZWNtZWNoLmNjbWFlc2VuY3J5cHQpOwogCQkJc2VydmVyLT5zZWNtZWNoLmNjbWFlc2Vu
-Y3J5cHQgPSBOVUxMOwotLSAKMi4yMC4xCgo=
---00000000000043f8e9058ac19bf6--
+That makes 36 failures in 120 tests, which is 30%. As ctdb went quiet,
+everything else got worse.
+
+Andrew says the top two were fixed a couple of days ago, so you might
+think we can expect a failure rate of (36 - 14) / 120 = 18%, but that
+isn't quite valid because some of those runs that flapped on the
+authlog might have been destined to go on to flap on something else.
+It depends on the order in which tests run.
+
+cheers
+Douglas
 
