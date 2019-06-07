@@ -2,77 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 833AD396E1
-	for <lists+samba-technical@lfdr.de>; Fri,  7 Jun 2019 22:37:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E309397AA
+	for <lists+samba-technical@lfdr.de>; Fri,  7 Jun 2019 23:24:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=Uqj+y7MlGf+jr1v0zIWWiVduQFkkD0gJTcqGoONFlGQ=; b=cph29NwDgN8tlfbPVzXubmkefE
-	F3blryDwDtbdhlVyeRvTUII/MskD/knbFIfnIuqi53t79RpJdhRTZklf9gUbC5aca6biOujwytLph
-	q8WEGACXdw+oLA/jPD0rba1npiGGgJki4W1afg819Rk7G3NXHGqziLXHuscMGwui1FdblMIXhfSQv
-	VIy3uysiYjFP6zJoC6YIim0EQM3gdOahwEdOLT5BaSIFAs8xBnAdtFKPqnBOGD2XI1SW5gdGtdwE3
-	G8vmCDL3beg/Tq3X7avDEG94b99oOUpEQHIeYb2QQdrZq1lYHdw3fBQdgyTsukMzx6WmGN0fRweik
-	X3B4GhBA==;
-Received: from localhost ([::1]:60076 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=VDnA7G6oEfycCISMp+y58zaY4Y2dGvtqHh5KDSqa5A4=; b=URMNsTQymrascrt0Z+m/HfCxhT
+	aDTd+nj4noQ8xK/4yrGSHYHlmiYlXG9GIwbOIRAyH12WzsA00EyoPlCXCMY4mSZ2XZ5pA4pdhvORT
+	M8dmxnZkTORUzYxQ0Zqrel11uXjPwBgNmSqCNasPXr9uIsFlw+nz2VxWQn8RsW1C9gpds22wmyxh9
+	shzR0Tsk6mUBdIlvsWDQp4Wf19EVMmDRalJhMweOfVsrYf8h+j0r8FEH4RRsVHuj/nXtiilzktoJd
+	ozXZTQr2yl+z3iSs6EuPxIhHodp0sSvzJusOuAWH2AEp/DWKINZ2UTXICAE9JHnT9nOLPCaNms/cn
+	K8PKHIxg==;
+Received: from localhost ([::1]:60978 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hZLbY-000Rf6-8J; Fri, 07 Jun 2019 20:36:52 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:34810) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hZLbS-000Rez-CV
- for samba-technical@lists.samba.org; Fri, 07 Jun 2019 20:36:50 +0000
-Received: from [172.21.50.31] (unknown [80.155.4.82])
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id D2B7E812BA; 
- Sat,  8 Jun 2019 08:36:35 +1200 (NZST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1559939797;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Uqj+y7MlGf+jr1v0zIWWiVduQFkkD0gJTcqGoONFlGQ=;
- b=fRZUzNuUyXP6AhgRAADHXUm+55QoUxUDeXEkrTMzNgvHaA5OtcRDqsRQJaCq5w9+h+HWF/
- R+ZFh27ivOIj2srbXmdi7b4zLmGSYG33fIAyaE6Fx1EAzFwDvgeu5bLJy0uvTe/FgMeVQ9
- 92jgQcLolO93+dZXut762Fot9a7Ccs0plzHbhG4Q9QS8kXk1/+0qoYE4yaIsWCbh7z1FTu
- cjNVjAlD/2EEWtpGzGujw9uQ8zB0qoVMkQHSBgypVsFHq+pg44PSoKGJbiraZfqeX6pUKj
- VwsmA5zeRr5PLuJkapEIVFt8+ihW9Qk/A73hL3Vxa6hEZySLGsoZDNc/VdBh9g==
-Subject: Re: recent flapping tests
-To: Martin Schwenke <martin@meltin.net>, samba-technical@lists.samba.org
-References: <7af13c9d-858d-650d-242a-d023f19dbaae@catalyst.net.nz>
- <20190608012357.68de8832@martins.ozlabs.org>
-Message-ID: <c58cec86-7177-18ac-ead1-7e5de351f330@catalyst.net.nz>
-Date: Sat, 8 Jun 2019 08:36:29 +1200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+	id 1hZMLS-000RxW-Tw; Fri, 07 Jun 2019 21:24:18 +0000
+Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:44458) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hZMLO-000RxP-Id
+ for samba-technical@lists.samba.org; Fri, 07 Jun 2019 21:24:16 +0000
+Received: by mail-io1-xd35.google.com with SMTP id s7so2503338iob.11
+ for <samba-technical@lists.samba.org>; Fri, 07 Jun 2019 14:24:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=VDnA7G6oEfycCISMp+y58zaY4Y2dGvtqHh5KDSqa5A4=;
+ b=EVK8M02ZV1vR7lHfj/Z7ku3d1GD30vGAZeAbk42Hiv7j8RJMlzdV5rj3EFi+OR6uwy
+ /o4To+6eTjBqJl9MvcFtkPfzcvUSlM/uCSGeHs4Cstb9PRSK8QNnHbkOjx34smOMfzAW
+ EQfRvgnWvf4sMbAz/f7mF5+crhQjiUE3MvD1aP1hy27EQidLbvh+TTSIR2OpqZ0yZpiF
+ KAoKykp8TPzMFzo1cFpkJBde0Bpoutpv/6kRx+5NfGEjQ2FGyIxMSvCGvQuePN2ppXEA
+ V5gOXiMCJYlrOio8YyENyvW6A1RnT8unOp4p5XCGUHpV+fq5ZbqzBO9ud3/+xGECgOMO
+ Zxeg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=VDnA7G6oEfycCISMp+y58zaY4Y2dGvtqHh5KDSqa5A4=;
+ b=EBrH2RZyxUZfBpkFlLVmD/yGSRY4kjX4f0ZU300RjV87y1aDbUcSg08dcnZbEZOeK/
+ 7F3fQ1gX2lpVcFUKRhmjz+AUyaVx62rMy+5iCm6i+vkZpzeIMp/RRFaZ6T6T1UKEV1a3
+ KzUBT0Ie/lX7ExAwzdPczO/7ay/GYaCGGnz/vayLxAZtlNdHp+KKIkIeX48H1qPV5sDL
+ RGHzABL7b4dm8dGouW+k5IPNQHZuiVMqf/QLQUOx+DAnNrVq3fV+g1XCeZ24LM2UPHvG
+ Bfm74ZQgv/AyVKP/J9SlQeUjJSueBNwHGt85Y+8SApUhMyZylpGC4VCiQbglrWbMBI9E
+ Ef/A==
+X-Gm-Message-State: APjAAAXiDnh8eJwifWW+oGgmkLNsI3LnqYPl/arEbmQIM9W2RDldYDqL
+ gHf3P9MdBmiiamd4HH+E/jN+MLKMyPm9fkNKezw=
+X-Google-Smtp-Source: APXvYqyh3SBLLyE4XRupeW0yPO1XrHgOpW2cKgu2XEQB9/f5/d1ZIFgt2VXu3N1AiFfwEaCNuy2KrKkTRny2WKyWmbY=
+X-Received: by 2002:a6b:4f14:: with SMTP id d20mr19168204iob.219.1559942652611; 
+ Fri, 07 Jun 2019 14:24:12 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190608012357.68de8832@martins.ozlabs.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1559939797;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Uqj+y7MlGf+jr1v0zIWWiVduQFkkD0gJTcqGoONFlGQ=;
- b=vCFee1nA+HGfF8oZiv2gtXkD1toGxlHFM4GN8mZXk7002zsNK4vkPqn6YbnOcFF2Ngy1Yi
- EddoXdI22tqi9zPicvlFMh/sVWf51kKJ/DvCBRxg4rvLh9OvoSpdqeHZXZi3s1eXmgLQvY
- N/wjIHTld5IdQevBXQe7sjuRgtpqK2IYkseY2o5PeuTKnQuX745SppWi0VvAlafp22uojB
- Qrl1UPWOaFRVO8yC5sSJ83igzqJJDNhQm+nTjixiz80k2Ea3YSTLbRR6xuimhjwLgt+msd
- fHwwpj385pGqIDh2QS6yYG/Kzil8G8x2XTPaKAtAI4w2ck8qY1fAR3ksW+c2SQ==
-ARC-Seal: i=1; s=default; d=catalyst.net.nz; t=1559939797; a=rsa-sha256;
- cv=none;
- b=qj60kHnCGKXH9pZH231wlu1gRW++S/MRQ7TZgUQEs/6ZfXNdsqr4nTO1mpR7s0tdsVtyFx
- FPzYS9Wf3/3QFVVNrDF3t5aRJvtOL34PslCOTnSVLy1/QXVHFFsFgdr4nT2Zk10hOXlvC9
- gyrP+jkbiZhesMn31iPOBmzbdcaz5PPVf0lBtaEOMF9f2EHyVS9FgWlxdyHZwU86Cg1MeV
- II5UlFjrPXVwic4ibrw0aM/F+5dJ83zcBmx42hblGhBvxwv3v9dcA1JKEeWNMNCViu1/ZR
- ygBfrjFujEFA3uql4wVItwETmqWc30p+kFj8brtFkzlIhlvF60KKrTQ3W4Hmew==
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=douglasb@catalyst.net.nz
- smtp.mailfrom=douglas.bagnall@catalyst.net.nz
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=douglasb@catalyst.net.nz
- smtp.mailfrom=douglas.bagnall@catalyst.net.nz
+References: <CAH2r5mvA3t2Nm4F=LuBwHkN+E19pHuiLaSv0JV9SMNYvZrxAiQ@mail.gmail.com>
+In-Reply-To: <CAH2r5mvA3t2Nm4F=LuBwHkN+E19pHuiLaSv0JV9SMNYvZrxAiQ@mail.gmail.com>
+Date: Sat, 8 Jun 2019 07:24:01 +1000
+Message-ID: <CAN05THT93RGGqECaQjpBJzo7cQWyxfsSNh-3nX+WqagjeZN8wQ@mail.gmail.com>
+Subject: Re: [SMB3.1.1] Faster crypto (GCM) for Linux kernel SMB3.1.1 mounts
+To: Steve French <smfrench@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,64 +67,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
+Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-hi Martin,
+First patch, fix the comment :
++ pneg_ctxt->DataLength = cpu_to_le16(6); /* Cipher Count + le16 cipher */
+to
++ pneg_ctxt->DataLength = cpu_to_le16(6); /* Cipher Count + 2 * le16 cipher */
 
-> Should be fixed by fixes pushed on 7 May.
+You can add a Reviewed-by me.
+Very nice!
 
-I can confirm all your "shoulds". Also I can confirm the wisdom of
-hedging with this "may":
-
->>    4 *FAILED* tests/simple/69_recovery_resurrect_deleted.sh
-> 
-> May be fixed by fixes pushed on 7 May.  :-)
-
-It happened twice since May 8.
-
-The complete results for the last thirty days look like this:
-
-$ ./parse-email/parse-autobuild-email --file-regex sn-devel-184 --since
-2019-05-08
-found 36 lines matching '(?:^(?:UNEXPECTED|\\*FAILED\\*))|(?:No space left
-on device)' in 37 files matching 'sn-devel-184'
-   8 UNEXPECTED(failure):
-samba.tests.auth_log_winbind.samba.tests.auth_log_winbind.AuthLogTestsWinbind.test_wbinfo(ad_member:local)
-   6 UNEXPECTED(failure):
-samba.tests.auth_log_winbind.samba.tests.auth_log_winbind.AuthLogTestsWinbind.test_wbinfo_ntlmv1(ad_member:local)
-   4 UNEXPECTED(failure):
-samba.wbinfo_simple.check-secret.domain=SAMBA-TEST.wbinfo(nt4_member:local)
-   3 UNEXPECTED(failure): samba3.raw.notify.mask(nt4_dc)
-   2 UNEXPECTED(failure):
-samba4.drs.getnc_schema.python(schema_pair_dc).getnc_schema.SchemaReplicationTests.test_schema_linked_attributes(schema_pair_dc)
-   2 *FAILED* tests/simple/69_recovery_resurrect_deleted.sh
-   2 UNEXPECTED(failure):
-samba4.ldap.password_lockout.python(ad_dc_slowtests).__main__.PasswordTestsWithSleep.test_pso_login_lockout_krb5(ad_dc_slowtests)
-   2 UNEXPECTED(error):
-samba4.drs.samba_tool_drs.python(vampire_dc).samba_tool_drs.SambaToolDrsTests.test_samba_tool_kcc(vampire_dc:local)
-   2 UNEXPECTED(failure):
-samba4.ldap.notification.python(ad_dc_ntvfs).__main__.LDAPNotificationTest.test_simple_search(ad_dc_ntvfs)
-   1 UNEXPECTED(failure):
-samba4.ldap.password_lockout.python(ad_dc_slowtests).__main__.PasswordTestsWithSleep.test_login_lockout_krb5(ad_dc_slowtests)
-   1 UNEXPECTED(failure):
-samba4.winbind.struct.lookup_name_sid(nt4_member:local)
-   1 UNEXPECTED(failure): samba3.raw.notify.dir(nt4_dc)
-   1 UNEXPECTED(failure): samba3.smb2.notify.mask(nt4_dc)
-   1 UNEXPECTED(failure):
-samba4.ldap.rodc_rwdc.python(rodc).__main__.RodcRwdcCachedTests.test_login_lockout_krb5(rodc:local)
-
-That makes 36 failures in 120 tests, which is 30%. As ctdb went quiet,
-everything else got worse.
-
-Andrew says the top two were fixed a couple of days ago, so you might
-think we can expect a failure rate of (36 - 14) / 120 = 18%, but that
-isn't quite valid because some of those runs that flapped on the
-authlog might have been destined to go on to flap on something else.
-It depends on the order in which tests run.
-
-cheers
-Douglas
+On Sat, Jun 8, 2019 at 6:24 AM Steve French via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> I am seeing more than double the performance of copy to Samba on
+> encrypted mount with this two patch set, and 80%+ faster on copy from
+> Samba server (when running Ralph's GCM capable experimental branch of
+> Samba)
+>
+> Patches to update the kernel client (cifs.ko) attached:
+>
+> --
+> Thanks,
+>
+> Steve
 
