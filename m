@@ -2,59 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5550F3A1E4
+	by mail.lfdr.de (Postfix) with ESMTPS id 98B5E3A1E5
 	for <lists+samba-technical@lfdr.de>; Sat,  8 Jun 2019 22:19:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=z+mJlA42Dth++7CIkmE9uZDf5ym1tFnPSv8yNiVBmuo=; b=q/yVB6kov5vhxHsyGZQxf3ow6x
-	j9seenlrvh6uCYpuBDplyXap41F2lW6FmXTEOsWWMsIGP63rlWz44NF7mrwUg75iaJ91VjKdnk6pf
-	u0mblZ9lUfteFADaif6e8FEltK11L80SA/WTr358eGvwJ4RkW/OnYknWpt+Sb6cizXmrq9e1nlXv6
-	fs2/04kjuRplx78XKE42y7EKBGGsOdEPsyWJu1cxUIlsOUvqNs0cnT3v5D6Mzoj+iwf8LbalQKaen
-	rE3jJoFte1A0J/D2NPPZyjRcb/hf6uELN6iGq8Spa3B47Z/Tj1sgyciPz9Hbd7IHZXzdBgUHm9Vdb
-	HarBq8ew==;
-Received: from localhost ([::1]:63086 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=WaBJF00J0CVbe5UsScF6RYFuDtKsUufciPd/0n5GfrM=; b=aB2/A2JG7OTAmde8UG7+7kG9kw
+	3vuYMrP8KhQCzJ1LqRdm4lSxBM5d6LMQ3fhG2kInjoFHT2G/IFD9jw+B5TJle9mpVpUkDOkgmZTKt
+	E+ZIyXGGS577w4mtYrouYc8q7bvPJb3bm6PmRpRT1IhEQaue1W6YrnBdbdfJK74BSLM25si95h8RJ
+	qip+JAkMcaGzLYlG6qtc2Qe9ZAmN+coWIdWnkr6Gxqcx/Qc0l+EEiPoKjCJ6ZHEmiHl1FL5jKVZkI
+	YGTcV6eTEfVGRVlTdyykckqk8B3ycYj0+wVMzzyPu/zbezhN1qwqegoHEnyZ6Z5arKkVo6pVL+BWW
+	2AjGuELg==;
+Received: from localhost ([::1]:63188 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hZhn5-000Y4g-4b; Sat, 08 Jun 2019 20:18:15 +0000
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b]:43932) 
+	id 1hZhnB-000Y6Z-Pd; Sat, 08 Jun 2019 20:18:21 +0000
+Received: from ozlabs.org ([2401:3900:2:1::2]:56471) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hZWsD-000VPl-Md
- for samba-technical@lists.samba.org; Sat, 08 Jun 2019 08:38:52 +0000
-Received: by mail-pf1-x42b.google.com with SMTP id i189so2469983pfg.10
- for <samba-technical@lists.samba.org>; Sat, 08 Jun 2019 01:38:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=z+mJlA42Dth++7CIkmE9uZDf5ym1tFnPSv8yNiVBmuo=;
- b=bLlrBu86Yew8btIs8ORMa3bf3BLAEwpWPsnFrIpcm8+m2hijLFdVI5v6Y0pzVMReVY
- FEPi4HjQL2wLs4/+/SicNW/azbc6HCTJKMRkFXkWVaq+UJvZ+sBj88skntJ2zNHBJ5G6
- Bx3aJYKwWjrvv8Wu4Rfs+jQlRdqeTdzaZphcQv8PhqWEt3+UTNUwSt4PuHDs6doZ4DWl
- 9Ay6UFgLtk3FNeU0fShlIQPldMwlKAyfTRkA/w71rSOBtq9JXpmFq8MdQeHLYUWgJ/It
- xqC16MK4hbgEatFby6en5h7JLBnuusXtvgwnK2Qm+Yliahvhivv1iYCXps0hDNFWV7b2
- sWMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=z+mJlA42Dth++7CIkmE9uZDf5ym1tFnPSv8yNiVBmuo=;
- b=NxC9uh9+6P6VnltB5PYSe9kLmk7o3jTQMZCzjcKksp6V+2mgeHYoe31uazoc8kq2k1
- QrnSJcI8DtmyMYYWks9d4exbPyK5mgDJ8/oQYHHcHkalLXE+gkkqrQ1i3+48fs+MK7yL
- TGqfAeZv3EPaMgS+SNoyPu/jqvO/GZ2jmJ5F+AcIzz3hMgcaaNrY3Ss8yiz092MLXXkL
- FvLNWYg7XwbOE0yaK8XuwLnlh7kx8EW9I0ljHKicphWK0ha3zXeQ+laHTeV0+LF1hHEE
- 4AmpxKtoKxxuw8HbTrnwgERcDQZ9xvcGmIHvmaKyL5gQCvnHt9irxIJd5kua7Joj7JXY
- gnmA==
-X-Gm-Message-State: APjAAAWaeAHfc/nV5UYTSEB7I83/kOD/9/YMgC91HWbBMKhBm78/1Ww6
- TUPf2kcJyryxnkQu2cHKSWWZGJeWT6cr3K4biYQ=
-X-Google-Smtp-Source: APXvYqw5iF+3OI+efxaBYjbWvG8YqtW3YetT+zsO1K3IrmSl47Lkab4mzpc7cD5IczFJ/z+FF8kJN9NJej1/QQWeLUs=
-X-Received: by 2002:a63:d4c:: with SMTP id 12mr6843387pgn.30.1559983124137;
- Sat, 08 Jun 2019 01:38:44 -0700 (PDT)
+ (Exim) id 1hZYGS-000Vin-C2
+ for samba-technical@lists.samba.org; Sat, 08 Jun 2019 10:08:07 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 45LZp75zpYz9s4Y;
+ Sat,  8 Jun 2019 20:07:43 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
+ t=1559988466; bh=QXIAL3eySsMnPKvbBFBgtGf64qso3ojOK9fDY41zg7I=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=UFaC9JVDKdffOPAwP3qcNn21Wj9OZS0iWVS+deku2HYox+2Q1ojvP55OQNWS/f34W
+ 2wxLifR8mGffqESHqcmCtth71TelhvWLjy2rPF6flCFnOHqSql3mTufhncCAho94bl
+ kwZ9e1mA/KZJXmN57eX6MdrJbLlUMjiy187l7aeirfPOV9kqt0PiuEhCgrdEAE8JZo
+ v8s/F8hTfFyAlZm8zG5aEVFWytIsZvUggRcFvR0KwZzl45dohqmDP8NkLchdWydP7/
+ MSioz7vOe4eWV04NEMK7fKnrcdAVJzfzHTSGpW9TzCPhQWHkeIXqBxYT6rkELo/xVi
+ Sy5bOz6s2X+Zw==
+Date: Sat, 8 Jun 2019 20:07:29 +1000
+To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+Subject: Re: recent flapping tests
+Message-ID: <20190608200729.759ac6a1@martins.ozlabs.org>
+In-Reply-To: <c58cec86-7177-18ac-ead1-7e5de351f330@catalyst.net.nz>
+References: <7af13c9d-858d-650d-242a-d023f19dbaae@catalyst.net.nz>
+ <20190608012357.68de8832@martins.ozlabs.org>
+ <c58cec86-7177-18ac-ead1-7e5de351f330@catalyst.net.nz>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <CAH2r5mvA3t2Nm4F=LuBwHkN+E19pHuiLaSv0JV9SMNYvZrxAiQ@mail.gmail.com>
- <CAN05THT93RGGqECaQjpBJzo7cQWyxfsSNh-3nX+WqagjeZN8wQ@mail.gmail.com>
-In-Reply-To: <CAN05THT93RGGqECaQjpBJzo7cQWyxfsSNh-3nX+WqagjeZN8wQ@mail.gmail.com>
-Date: Sat, 8 Jun 2019 03:38:33 -0500
-Message-ID: <CAH2r5muoekqamNPRGZO52PZb+fDuKp1-MYxhGgBjKNv--AqkkA@mail.gmail.com>
-Subject: Re: [SMB3.1.1] Faster crypto (GCM) for Linux kernel SMB3.1.1 mounts
-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,44 +59,38 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-updated and repushed to cifs-2.6.git for-next
+On Sat, 8 Jun 2019 08:36:29 +1200, Douglas Bagnall
+<douglas.bagnall@catalyst.net.nz> wrote:
 
-On Fri, Jun 7, 2019 at 4:24 PM ronnie sahlberg <ronniesahlberg@gmail.com> wrote:
->
-> First patch, fix the comment :
-> + pneg_ctxt->DataLength = cpu_to_le16(6); /* Cipher Count + le16 cipher */
-> to
-> + pneg_ctxt->DataLength = cpu_to_le16(6); /* Cipher Count + 2 * le16 cipher */
->
-> You can add a Reviewed-by me.
-> Very nice!
->
-> On Sat, Jun 8, 2019 at 6:24 AM Steve French via samba-technical
-> <samba-technical@lists.samba.org> wrote:
-> >
-> > I am seeing more than double the performance of copy to Samba on
-> > encrypted mount with this two patch set, and 80%+ faster on copy from
-> > Samba server (when running Ralph's GCM capable experimental branch of
-> > Samba)
-> >
-> > Patches to update the kernel client (cifs.ko) attached:
-> >
-> > --
-> > Thanks,
-> >
-> > Steve
+> > Should be fixed by fixes pushed on 7 May.  
+> 
+> I can confirm all your "shoulds". Also I can confirm the wisdom of
+> hedging with this "may":
+> 
+> >>    4 *FAILED* tests/simple/69_recovery_resurrect_deleted.sh  
+> > 
+> > May be fixed by fixes pushed on 7 May.  :-)  
+> 
+> It happened twice since May 8.
 
+Oh, well...  :-(
 
+We tightened up some things that might have been causing some tests to
+fail, but it doesn't look to have helped this one.
 
--- 
-Thanks,
+Some time soon I'll look at a patch so that the daemon logs are dumped
+to stderr when these "simple" tests fail.  It'll be a lot of output but
+at least it might give us a way to debug them when they happen in an
+environment that we don't control.
 
-Steve
+I might also try running that one in a loop...
+
+peace & happiness,
+martin
 
