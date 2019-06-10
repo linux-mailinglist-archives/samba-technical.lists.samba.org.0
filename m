@@ -2,61 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5B823B7E7
-	for <lists+samba-technical@lfdr.de>; Mon, 10 Jun 2019 17:00:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DD043BCBC
+	for <lists+samba-technical@lfdr.de>; Mon, 10 Jun 2019 21:20:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=1FfrdJ/vmGZsrQFGMhDI8rALYY2ixaZdIuY623gQql4=; b=r0k8r2CkSokxzrhTmgIh44IPbn
-	LKueUmjjv+yCWktAJQU/UNK0znX8VQXhcf/3hsZzpkja2ItYg2QeB5810Kxs6pyXFV+7g+DMmkHSt
-	eV0aMqAWqOkkqaS1eufrIwk2lSMMQ3KQrKf6XTnDcKa8Y973C/orgYlDrBqqb1fITX5MZmrEXQXmh
-	VZKDYqkuRUfy2ZPRlac/OeUNMK+k59nY8ZDaWb/WBkfW87ZjEw7kTiLXgJa9xF3q57NSEIbggfejK
-	wNJkaotUxsRmlgOG3BJ2HuzFomx+OdB5P8VMc4Skh5nkeYSTyHysQMsn4kRfPySRp45MPlpJs3Phm
-	G8xG0/xA==;
-Received: from localhost ([::1]:26040 helo=hr1.samba.org) 
+	bh=3c8rhFJE14sMpTTc89Hz57tyhVCoAB2/e1RKeHiyLVI=; b=lh6wTsv85+2mpPuAw/gvbZVbfi
+	m/SXhEXD0VOsqTyb7f4sQhRj+Rxz4yIZAHAGht0vSGAOWDEjvfEV0g9mFgo0KdcS+sJFD1WJyryHV
+	K2lSZP2EFUGxVT2Gm4ErA/9Jff55cTLu+tdPbR5evjnc9vWb+tN4mi5ZT4vcAQhNUVJmsosLf+CWD
+	u4py/9kpCKiY9P/y/Kge3WQguowQgDta8wcpXITL2kr5hcmm/1Ts1NKsVeCCbogY45HYpQFBWhZcr
+	a/Un/8j4d4sWA+3HPjtIcvwm5LcvdwqyUXYd2HqbrGlGnY+KCmcy6hGX2xrKZfm09LM2PyoMNwQPT
+	a80//VmA==;
+Received: from localhost ([::1]:32060 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1haLmV-000kpI-OH; Mon, 10 Jun 2019 15:00:19 +0000
-Received: from mail-pf1-x443.google.com ([2607:f8b0:4864:20::443]:33793) 
+	id 1haPpB-000pbv-CJ; Mon, 10 Jun 2019 19:19:21 +0000
+Received: from mail-lj1-x236.google.com ([2a00:1450:4864:20::236]:46321) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1haLmO-000kpB-MB
- for samba-technical@lists.samba.org; Mon, 10 Jun 2019 15:00:17 +0000
-Received: by mail-pf1-x443.google.com with SMTP id c85so5484000pfc.1
- for <samba-technical@lists.samba.org>; Mon, 10 Jun 2019 08:00:12 -0700 (PDT)
+ (Exim) id 1haPp7-000pbn-3P
+ for samba-technical@lists.samba.org; Mon, 10 Jun 2019 19:19:19 +0000
+Received: by mail-lj1-x236.google.com with SMTP id v24so4718517ljg.13
+ for <samba-technical@lists.samba.org>; Mon, 10 Jun 2019 12:19:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9gPMTsHH8G6B8r86p/gdzoNKKPhTO77bLFE45UBhY2c=;
- b=Oe2IiYLvQcywsfKW1zwbQAYIFPtl+mNQXcnjutCNEtpulSye+8mupkHyiwNWT/H0P7
- bxzRPkiWUEyc0Hb2XYrRp5+/lf6+KB/JT7OLkYu7WbsRRgXyrUe0hUpy6TRIt6piBCn6
- NQEt/eu9arm6KsQw2APDqxK3uopceIFHiFL8EFMloNST2CwG7mNHT85yWF9Z/ST94oTe
- lT2vCg4vVsK6WkNklNhIGFZMLcJaNX1hlZ8AS0OqX6XcutN6z02BqSvB5/khQTg4lUwV
- yoL4fP9B1SvUKKu6NhY7Qjbrn71QYBRT6p/IiX9o1VtOKVjub8mXfucnZyex5PNjtwwH
- A0cg==
+ :cc:content-transfer-encoding;
+ bh=3c8rhFJE14sMpTTc89Hz57tyhVCoAB2/e1RKeHiyLVI=;
+ b=GbeyrCeD+ICYA9A1mM+GsGYjoYY2ApUxmWtx4k5c8rXjgjRrzNDqI/lKQXvGbOvInk
+ 1Bs5QQZC2oYXrVikNbLPGrjHBYMBnoTP8E+KTBIffL+G4o5b6jEiHqwD3UwmSVWuzbmx
+ Du7I5jMhKvcGPgeLxIddG6AF2g1ACr9Lk7yah/5yHzgVhO9D/XLiGkK2PLgYQeR0vPXu
+ JLC1ZJ31kNxn+o8+vDZKASKLFkjdLIYfT2p7rFfACXicHbJuS+ewrI5a8M6fzl5rr2wA
+ Ij8fW4BrrUnNIwJU3jWc20HiJkHOL45xLFDhSsjbMqtP1exKchpcrjbfWBO8fhWx66QA
+ IuzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=9gPMTsHH8G6B8r86p/gdzoNKKPhTO77bLFE45UBhY2c=;
- b=U7CVieKF+Yjts36RbPekjGtLwHiEHCWdxQwfshtqDY7R996NLmdyWU3FkSULhwoIXR
- rbBj7YBkcouuoRoMtqSV1vhF7tExbpiCMzIuZnInLhsO3JeVoOSp3gIvUfyj87rVHysk
- CZBd7pNkCSIjV91z5abiDZtzUYrYsFGyzJZqluZT0ZjbdCpp7Bh7iT2j1psqYjm+cHAq
- QaKq3Yaa111RcH6N+uST78TPwmSlK9tQ4IY2G8ADMHF6WO3f6UCZ5mSbM8507g8cRgxx
- RAqzkn5UTMRlKd8IpJAFO2nAE+nM07OqNasBLU4AyEOPac+NsxqlKCmSBbhyHY34i1hq
- zeHw==
-X-Gm-Message-State: APjAAAWNv9lzU9ipud571DkVguW6kQSWv5+dDumzxxMjsDcXRAUgVFx+
- 5tFvxTe/gBk+ln+JLEFe7x0MGJGbW1RcSmLnZdo=
-X-Google-Smtp-Source: APXvYqwIKvgXSRqJeBSTLm4KX99yGJyCWJwmcKzsqEWQS6VxQdxa7dj4ih7cQdNR3jxJw7vphPbzhUbE8VT+5mh3Jf0=
-X-Received: by 2002:a62:f20b:: with SMTP id m11mr22473934pfh.125.1560178810491; 
- Mon, 10 Jun 2019 08:00:10 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=3c8rhFJE14sMpTTc89Hz57tyhVCoAB2/e1RKeHiyLVI=;
+ b=mPQn8Re7S9Ip/vP2jMP2MqfddUNu4Zd0wPVyez6qzhjYVGYe8/3VkMHqiI0OdGdPCj
+ /6nxEu+maGds1U2BrvbjfHDPt8t6fiV0etUFrdqBwM7cDllWO0TZCXqIAKVxVXpa1IOA
+ phYv6yOltaJP2cSpULpa7QU6L2I5DRZyyE5gptUIwPUleTKeKEEO4kB7CXOZPUZiz9Zl
+ 8Sb31xW21PFDDKvmGeKY+JJlq6CDkWCN+mUrF1aO54LlSQrE+OJIHwko4OzKnNMasxaz
+ 0PW+WuRAAlrdUpg0PTDtx1zkQD3bJ9mtP30IG69Wl8irjD0ly3LrDUC+gMJLF95vmLCb
+ l3bA==
+X-Gm-Message-State: APjAAAXBPy95ZNcuILlJ7gt5CQ2n6EzzA55/qDP8ZiUsSwjZeTRngbUT
+ Fz+DsgusyqaxhiWLOmDsAKQQJI+Q9a1fZoQmsA==
+X-Google-Smtp-Source: APXvYqwrLQ7AV7CFM9xhrtFsTzHPL7DUncCaEc2S0ccmGZviuhfUK+VAeEptKTKO1dAwjUSxc4aufapVYMJkZqawP2c=
+X-Received: by 2002:a2e:a318:: with SMTP id l24mr25289379lje.36.1560194356061; 
+ Mon, 10 Jun 2019 12:19:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAH2r5mvA3t2Nm4F=LuBwHkN+E19pHuiLaSv0JV9SMNYvZrxAiQ@mail.gmail.com>
- <48763148.viiOTLWQpP@krikkit>
-In-Reply-To: <48763148.viiOTLWQpP@krikkit>
-Date: Mon, 10 Jun 2019 09:59:59 -0500
-Message-ID: <CAH2r5mvP2O2mzLB7hLntG9a_P9Z1wYneQ_jMKXT4-c0m8h+A5g@mail.gmail.com>
+In-Reply-To: <CAH2r5mvA3t2Nm4F=LuBwHkN+E19pHuiLaSv0JV9SMNYvZrxAiQ@mail.gmail.com>
+Date: Mon, 10 Jun 2019 12:19:04 -0700
+Message-ID: <CAKywueTTp_jQqhND0gpLhffNeXudPUjkWHGEze33+=6oVWhLpw@mail.gmail.com>
 Subject: Re: [SMB3.1.1] Faster crypto (GCM) for Linux kernel SMB3.1.1 mounts
-To: Andreas Schneider <asn@samba.org>
+To: Steve French <smfrench@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,27 +69,81 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Shilovsky <pavel.shilovsky@gmail.com>
 Cc: CIFS <linux-cifs@vger.kernel.org>,
  samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Jun 10, 2019, 09:56 Andreas Schneider <asn@samba.org> wrote:
-
-> On Friday, 7 June 2019 22:23:30 CEST Steve French via samba-technical
-> wrote:
-> > I am seeing more than double the performance of copy to Samba on
-> > encrypted mount with this two patch set, and 80%+ faster on copy from
-> > Samba server (when running Ralph's GCM capable experimental branch of
-> > Samba)
+=D0=BF=D1=82, 7 =D0=B8=D1=8E=D0=BD. 2019 =D0=B3. =D0=B2 13:23, Steve French=
+ via samba-technical
+<samba-technical@lists.samba.org>:
 >
-> I'm sorry but I have to disappoint you, my name is Andreas and not Ralph
-> ;-)
+> I am seeing more than double the performance of copy to Samba on
+> encrypted mount with this two patch set, and 80%+ faster on copy from
+> Samba server (when running Ralph's GCM capable experimental branch of
+> Samba)
 >
-
-
-Can I blame autocomplete or lack of sleep on flight for typo =F0=9F=98=83
-
+> Patches to update the kernel client (cifs.ko) attached:
 >
+> --
+> Thanks,
+>
+> Steve
+
+
+--- a/fs/cifs/smb2ops.c
++++ b/fs/cifs/smb2ops.c
+@@ -3324,7 +3324,7 @@ smb2_dir_needs_close(struct cifsFileInfo *cfile)
+
+ static void
+ fill_transform_hdr(struct smb2_transform_hdr *tr_hdr, unsigned int orig_le=
+n,
+-                  struct smb_rqst *old_rq)
++                  struct smb_rqst *old_rq, struct TCP_Server_Info *server)
+ {
+        struct smb2_sync_hdr *shdr =3D
+                        (struct smb2_sync_hdr *)old_rq->rq_iov[0].iov_base;
+@@ -3333,7 +3333,10 @@ fill_transform_hdr(struct smb2_transform_hdr
+*tr_hdr, unsigned int orig_len,
+        tr_hdr->ProtocolId =3D SMB2_TRANSFORM_PROTO_NUM;
+        tr_hdr->OriginalMessageSize =3D cpu_to_le32(orig_len);
+        tr_hdr->Flags =3D cpu_to_le16(0x01);
+-       get_random_bytes(&tr_hdr->Nonce, SMB3_AES128CCM_NONCE);
++       if (server->cipher_type =3D=3D SMB2_ENCRYPTION_AES128_GCM)
+
+We only use server->cipher_type here and below. Let's pass just this
+integer instead of whole server pointer to fill_transform_hdr then
+
++               get_random_bytes(&tr_hdr->Nonce, SMB3_AES128GCM_NONCE);
++       else
++               get_random_bytes(&tr_hdr->Nonce, SMB3_AES128CCM_NONCE);
+        memcpy(&tr_hdr->SessionId, &shdr->SessionId, 8);
+ }
+
+@@ -3491,8 +3494,13 @@ crypt_message(struct TCP_Server_Info *server,
+int num_rqst,
+                rc =3D -ENOMEM;
+                goto free_sg;
+        }
+-       iv[0] =3D 3;
+-       memcpy(iv + 1, (char *)tr_hdr->Nonce, SMB3_AES128CCM_NONCE);
++
++       if (server->cipher_type =3D=3D SMB2_ENCRYPTION_AES128_GCM)
++               memcpy(iv, (char *)tr_hdr->Nonce, SMB3_AES128GCM_NONCE);
++       else {
++               iv[0] =3D 3;
++               memcpy(iv + 1, (char *)tr_hdr->Nonce, SMB3_AES128CCM_NONCE)=
+;
++       }
+
+        aead_request_set_crypt(req, sg, sg, crypt_len, iv);
+        aead_request_set_ad(req, assoc_data_len);
+
+Other than the note above looks good.
+
+--
+Best regards,
+Pavel Shilovskiy
+
