@@ -2,62 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D41BA3C0A8
-	for <lists+samba-technical@lfdr.de>; Tue, 11 Jun 2019 02:42:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6AA43D335
+	for <lists+samba-technical@lfdr.de>; Tue, 11 Jun 2019 19:02:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=LTh7h4fwgu/IdLNqhRirFuzkrJkPBdU70QJ+oK60Rks=; b=F2e7vn8/eY/UPWnqcG6UydDDLj
-	0KCu8g7CkgXHJblocQJ1XhTjuo66BU9Iq7HJEK1WcVdBavPkvUl6AVD4BUBGMpOrKl/W/9N66B1JE
-	TjupNVejS2wV1HlwsGybBFAjNPKr7UtBzVVNGxNNED/73c0jlYx2aM+7FUK7VryfGPVgrl138/P8R
-	5Zml6RX69v+9oBeRpIAvNpVl0d5e9Xisxku4FUvqylQg8hXFjnfAdzDRFQ+z5tF164fLMxqF4VDMt
-	DZpxXhYlr5Jksyg4n/tKO1rAAxC1wJIBUTjb11eQ5CXBJsExw4B+HhPOsI9cIpc6r1v7AEsR+LX+l
-	Y6624uXg==;
-Received: from localhost ([::1]:36558 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=o7BOnQSQYwLYEZNnzy3GWG2d0G2Av+935HkONp7vNHg=; b=6Ay+QN3GSZbgcH04oVemCiLjc4
+	ndBPg0MwPL/7w4lJ9eQWYt0xR49jqDH+f7gWmA+42l63YGhY0MRqN4tuj+FLy+5Iv5OIEfSjaLUrS
+	VM2tP8jiwhFIFIPRa8Ru5XsR3F+do5WusbqJAMN/3vzFtMg3tQALGV11zUQdwYNWjrBHBb7GaLjKj
+	nfW+3MwcwB+aAjGG0mz+qAbY0lyoM5d+ORWmT0tePALEDZMqoxkL7CkeOI0pzLwgB90lCGxGhuwYS
+	M5TG5AKE82pxrJyc90gzAyVxibVF+BcpUjL7Gw8fBL8ioZSW1u6Psgxf8GTOQdrD9cA2YUM7RGsPg
+	0wSHxb0Q==;
+Received: from localhost ([::1]:50160 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1haUqo-000qgP-RZ; Tue, 11 Jun 2019 00:41:22 +0000
-Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:43672) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1haUql-000qgI-0m
- for samba-technical@lists.samba.org; Tue, 11 Jun 2019 00:41:21 +0000
-Received: by mail-lf1-x129.google.com with SMTP id j29so7930184lfk.10
- for <samba-technical@lists.samba.org>; Mon, 10 Jun 2019 17:41:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=LTh7h4fwgu/IdLNqhRirFuzkrJkPBdU70QJ+oK60Rks=;
- b=dqql54mLFx32R5XqDQvMgr1zgOL1adNKtsldm+Xn8K8GouJsDRX4S73PXI/+STxyDX
- hBgjfzpoxjwIMcXlOo9cBhUm8jKkW9C9F9sQFHmQsZHiH+PQXtT0g0u5qFGBy9O3BS90
- 3YxLTQSULLMQW8dOFzd6eyIDOsD8Uv/cCX9qGjPPticpg0FIvqxINFV5aOdrKezs/Y27
- Jp/BqevykAP6yt9BGqJh2WCk3H8JN42JiykLvykGnumfQAw9a83o+rg6h6H318pde0kp
- 5llUGdc3eU6inqwuXrk6OoMNWHcBqbvCWKW+J7xxcHijORey5RxFFB1HP+TUccIFlPcV
- yHdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=LTh7h4fwgu/IdLNqhRirFuzkrJkPBdU70QJ+oK60Rks=;
- b=jjRTis3+pJo35fikU+zJNB9y3nD5Yxv1a0IusDxdWkza5YGsxUi1SibLjQjQekV21a
- lszdOye2wB+o3Kyzd00ExKUnUkZNn/+Xoyk6AdU6yhP7/UxozfCShxAfM0l1Y128pW2+
- kPpryOM5wopmpe2i2lQO8/AQDRqr5quGXSqmVEfZdts22lb5tbEQXdlZtwO3SMMg/liR
- PbBWaEwkqjQJbzcTKaPxkCGSr8cH1ndJZecXav3xW8g2MJI0ZQ+1jLjaktZsnBfkIem0
- EfuNVQuIP2vJ1pz1aBGpGi/NR2vlNTE482i6D73R5y2E8ptypmeiKTTDgO5JVnIj7BFA
- SpVQ==
-X-Gm-Message-State: APjAAAWvbw/pV4V1AeEaT22BQcdNmAzdQ62eIK9A+4uf3lTQpic9g3Xi
- 6ILiD3VnWvySo8ghzZtfHWoYBYqfZOW+bniucU6swyM=
-X-Google-Smtp-Source: APXvYqx4Wsa/kcO/OivCXZfzgGN/lguwrntS2svHyv0Cu7GknbQV9ZTBr2qZpd2QQAlDN4YqQ8WhLgeFFtvar2lueHQ=
-X-Received: by 2002:a19:700b:: with SMTP id h11mr35137919lfc.25.1560213678086; 
- Mon, 10 Jun 2019 17:41:18 -0700 (PDT)
+	id 1hak9v-0010HR-GZ; Tue, 11 Jun 2019 17:02:07 +0000
+Received: from smtp2.provo.novell.com ([137.65.250.81]:54255) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1hak9p-0010HK-3P
+ for samba-technical@lists.samba.org; Tue, 11 Jun 2019 17:02:04 +0000
+Received: from [10.0.0.228] (prva10-snat226-2.provo.novell.com [137.65.226.36])
+ by smtp2.provo.novell.com with ESMTP (TLS encrypted);
+ Tue, 11 Jun 2019 10:41:33 -0600
+To: Andrew Bartlett <abartlet@samba.org>,
+ Rowland Penny <repenny241155@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>
+Subject: Re: Need the capture answer for samba wiki
+References: <a3682a5f-d9e7-604b-3cd6-c8a460a4ad0c@suse.com>
+ <1837bdc89794cc5b331c9d33e9d67280f26e4bf5.camel@samba.org>
+ <54595bb8-e90b-8ffb-220e-63a074a83e6c@suse.com>
+Message-ID: <68b2117f-0eab-05e5-7f1a-093a2b82f90c@suse.com>
+Date: Tue, 11 Jun 2019 10:41:31 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-References: <CAH2r5mvA3t2Nm4F=LuBwHkN+E19pHuiLaSv0JV9SMNYvZrxAiQ@mail.gmail.com>
- <CAKywueTTp_jQqhND0gpLhffNeXudPUjkWHGEze33+=6oVWhLpw@mail.gmail.com>
- <CAH2r5mvo5YbDd5Pqu6XcMBAW+4rPX0ZZU9RBj=NWLEFTp4L+-w@mail.gmail.com>
-In-Reply-To: <CAH2r5mvo5YbDd5Pqu6XcMBAW+4rPX0ZZU9RBj=NWLEFTp4L+-w@mail.gmail.com>
-Date: Mon, 10 Jun 2019 17:41:06 -0700
-Message-ID: <CAKywueRauK_Lf_NMKJgKr46tLMOgJyk6iWcsMuPx74EJ3cGz=g@mail.gmail.com>
-Subject: Re: [SMB3.1.1] Faster crypto (GCM) for Linux kernel SMB3.1.1 mounts
-To: Steve French <smfrench@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <54595bb8-e90b-8ffb-220e-63a074a83e6c@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,22 +51,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Pavel Shilovsky <pavel.shilovsky@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: David Mulder via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Mulder <dmulder@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-=D0=BF=D0=BD, 10 =D0=B8=D1=8E=D0=BD. 2019 =D0=B3. =D0=B2 15:34, Steve Frenc=
-h <smfrench@gmail.com>:
->
-> Updated the patch with Pavel's suggestion and added reviewed by and
-> repushed to cifs-2.6.git for-next.
->
+Anybody? I also can't add images without page add rights.
 
-Looks good. Thanks!
+On 6/6/19 1:11 PM, David Mulder wrote:
+> I don't have rights to create a page. Can I get permission?
+>
+> On 6/6/19 9:37 AM, Andrew Bartlett wrote:
+>> On Thu, 2019-06-06 at 08:52 +0200, David Mulder via samba-team wrote:
+>>> I need the capture answer to create an account on the samba wiki.
+>>> I intend to add info about using my yast adsi and aduc modules (from
+>>> my sambaxp talk).
+>>> -- 
+>> WeHateSpammers are the words you seek.
+>>
+>>
+> -- 
+> *David Mulder*
+> Labs Software Engineer, Samba
+> SUSE
+> 1800 Novell Place Provo, UT 84606
+> (P)+1 801.861.6571
+> dmulder@suse.com
+>  <http://www.suse.com/>
+-- 
 
-Best regards,
-Pavel Shilovskiy
+*David Mulder*
+Labs Software Engineer, Samba
+SUSE
+1800 Novell Place Provo, UT 84606
+(P)+1 801.861.6571
+dmulder@suse.com
+ <http://www.suse.com/>
 
