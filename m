@@ -2,58 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D69E42BF3
-	for <lists+samba-technical@lfdr.de>; Wed, 12 Jun 2019 18:19:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D31542E80
+	for <lists+samba-technical@lfdr.de>; Wed, 12 Jun 2019 20:23:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=ZjdJe4gBZrPxnTp7SijcV/Guu3HhLfsYEucbCciiFYs=; b=tJH8yeEDVNvkCwHSf6NI/BQApc
-	Kk7ioRHJCXMtUmjGWVaw0pHHJSGI0k/Erbn4n7U/nXFzssojtR6p/zikfKa3QAFxmqp1XFyyF0Ou3
-	9aK2vl4kaf8frf3RnqJDsmJx0b8U86HjL0hAKmCLg5dxS9PifBxiqYVTRWeN1EoooSSVNQ4api7qg
-	pfvWYvCVNsxA+1dztQAfRipOmeRX9bBWB9TKoBH1YOZyeDcx+4hYt+9XhB3WCer+E1fJJgGisorC4
-	e/RHXjV1HkDr8GR5Vpk3ZyVCvT4meSF4TCMapyHJ2bBGJjilEmlSgJyrSwtWsrS/8tTZG0fv/BACq
-	21WZ9Ufw==;
-Received: from localhost ([::1]:63484 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=EsNSz+aJW3zLlDN9irD3Djr1oPOiMxVrQc2z+fuVvkc=; b=z9rqc53nu3oue1F6R7+5dQLEjW
+	HUBpO/bY6mRHmC3/6kQ0xkFREjUwXJyfyQpHwJZEGJ2y26reNzU1zdG/pbXVwKKILupbX4o0qyWgC
+	jxJOw1uG1nVqlZ4qAm5xwR6K5AgVhQky2lGvvRBW/59NSGUDWYFa12tWeSh71/f1A6yGRCU6GouKY
+	PNKH6UpZhhopP/RyT0C4S4zynw+3lYHjcV2rYHJ7fKQNbBYI8ZnPun/3lszPxP1xxvIBoFu8ZgTmm
+	+GVZALys6GI7Nq98mR3EsiYFY5OiMGbh0ozpsx+3qra7HulpP9lsraeoOKMRKo+3cUmm8UslR7i6A
+	SjZ8pl7w==;
+Received: from localhost ([::1]:41378 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hb5xv-001GZj-Hj; Wed, 12 Jun 2019 16:19:11 +0000
-Received: from mail-pf1-f195.google.com ([209.85.210.195]:44368) 
+	id 1hb7tK-001K4m-8L; Wed, 12 Jun 2019 18:22:34 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13826) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hb5xo-001GZc-QU
- for samba-technical@lists.samba.org; Wed, 12 Jun 2019 16:19:07 +0000
-Received: by mail-pf1-f195.google.com with SMTP id t16so9937559pfe.11
- for <samba-technical@lists.samba.org>; Wed, 12 Jun 2019 09:19:04 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=ZjdJe4gBZrPxnTp7SijcV/Guu3HhLfsYEucbCciiFYs=;
- b=PKE41qlI3ep/yv0RCXRtS+h5PkhJWdgVSJi4z6ExXbS3d50Ro/kdMtUR7xQNo0fLsy
- 7DRwPyTSYA2j8svhD7FuU7O9NxN7VDcwusNjYskX9TkYhnxhG+Vw3+yLxTRepX++Ab3K
- ZhMP09FG4TGkDLFCqsLFAUdATZ/ojwUJr9qcfIr9pHHnO/zI9uLlCymd9HYou+rnS3mL
- zd7joiumePF4IM+D+LzcYRO+zYBlxRKQqnzz8hzVqdyOJoDJBsAfEorFVb69VX4azFhy
- cdC7y7Ub2es2y1pyGYCAy0Nn3exMeRiFTg+nUpVCUQjRvF3gQASteL3IwF9EM7gYNjR8
- AD2A==
-X-Gm-Message-State: APjAAAVRAFBp2IU2MLZbBBC96iBhRL2KOeNLMkLS4BVWTCKHSY85q7nT
- WHutPvM0QMhlKX6LEDn0ZTtpxP3W4BXmjAyoMxS9iQ==
-X-Google-Smtp-Source: APXvYqxqCEYTyAbNLSA9uPcB2GIGfeuC6PJvJPspUFGl+wc7JGq5B/OVJpHghBmO9pcsDiTgsOf6YC0J48w/i6Ke8Is=
-X-Received: by 2002:a17:90a:1a0d:: with SMTP id
- 13mr27504881pjk.99.1560356342724; 
- Wed, 12 Jun 2019 09:19:02 -0700 (PDT)
+ (Exim) id 1hb7tG-001K4f-AD
+ for samba-technical@lists.samba.org; Wed, 12 Jun 2019 18:22:32 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=EsNSz+aJW3zLlDN9irD3Djr1oPOiMxVrQc2z+fuVvkc=; b=qDzaQPAWrIJ66jaSVL2NoCzYl/
+ bME9x9uCaYBT4A/9IUQ6mKJ73q0nFsv2HlyxuthHug2eJAHCPMXV6CrZ58d94JfjXuzreCEoRcC9e
+ OtGBOBmlnLN/58heaVaAhqFHgXcRu6duzNIW69fq/fNsDDFbgs/4MDkJwhgA5fMHWwhc=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hb7tA-00014y-Ow; Wed, 12 Jun 2019 18:22:25 +0000
+Date: Wed, 12 Jun 2019 11:22:22 -0700
+To: Stefan Behrens <samba-technical@giantdisaster.de>
+Subject: Re: [PATCH] lib/util: Fixup tcopy_passwd() to also copy the
+ pw_comment, field
+Message-ID: <20190612182222.GA91664@jra4>
+References: <cac16911-80da-a27d-deb1-3ce3929cb6a2@giantdisaster.de>
 MIME-Version: 1.0
-References: <CALe0_75rQHY5em=YEvT-K64uOnWzAeg8p=ZZtH1WhEFzk4nNmg@mail.gmail.com>
- <CAH2r5muMo6LCEW1fTP4bGtf7aXggzs_YthRdB=qYnPg5EUEsJQ@mail.gmail.com>
- <20190123003029.GA235078@jra3> <20190124110829.GC20089@sernet.de>
- <20190124170341.GA104839@jra3> <20190124170945.wsasncusduwg3zbp@kazak>
- <CALe0_75-64OXgeWb6kQu6R1bA2OM9shJ=YQvbPnm6EJ_zHjbiQ@mail.gmail.com>
- <20190124201433.bibu3k2fo7h2bdep@kazak>
- <CALe0_74ZEDEafvyWqWqCD74TBO5Pyq=G=jb0AMcCmAwmP0OZYQ@mail.gmail.com>
- <20190124224927.GB252624@jra3>
-In-Reply-To: <20190124224927.GB252624@jra3>
-Date: Wed, 12 Jun 2019 12:18:26 -0400
-Message-ID: <CALe0_76rHGUedvRHvEyYvROPp8fPtvM9unkw7-gsLG2CPYxasw@mail.gmail.com>
-Subject: Re: Fwd: SMB2 not respecting mtime values
-To: Jeremy Allison <jra@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cac16911-80da-a27d-deb1-3ce3929cb6a2@giantdisaster.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,201 +51,101 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jacob Shivers via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jacob Shivers <jshivers@redhat.com>
-Cc: Steve French <smfrench@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>, linux-cifs@vger.kernel.org
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I finally got around to making some time for this and I this is indeed
-a server side issue.
-The SMB client is using the appropriate file handles when setting
-atime and mtime and the server initially reports the desired mtime.
-The server only slightly later reports a mtime matching that of ctime.
+On Fri, May 31, 2019 at 03:33:48PM +0200, Stefan Behrens via samba-technical wrote:
+> All fields of the passwd structure are copied except for pw_comment, and
+> I needed pw_comment to be copied and here is the commit for the change.
+> 
+> Bug 13975
+> 
+> Review appreciated.
 
-$ tshark -tad -n -r cp_p-testing-3.16.66.pcap -Y 'smb2.pid =3D=3D 0xf2d'
--T fields -e frame.number -e smb2.fid -e smb2.last_access.time -e
-smb2.last_write.time -e _ws.col.Info -E header=3Dy | tr '\t' '#' |
-column -t -s '#'
-frame.number  smb2.fid
-smb2.last_access.time                smb2.last_write.time
-   _ws.col.Info
-170
-                                                       Create Request
-File: test_file-data
-171
-                                                       Create
-Response, Error: STATUS_OBJECT_NAME_NOT_FOUND
-173           00000000-0000-0000-0000-000000000000
-                                                       Create Request
-File: test_file-data
-174           5981ad82-0000-0000-1d86-2dcf00000000  May 27, 2019
-20:16:03.862513400 EDT  May 27, 2019 20:16:03.862513400 EDT  Create
-Response File: test_file-data
-175           5981ad82-0000-0000-1d86-2dcf00000000
-                                                       GetInfo Request
-FILE_INFO/SMB2_FILE_INTERNAL_INFO File: test_file-data
-176
-                                                       GetInfo
-Response
-177           5981ad82-0000-0000-1d86-2dcf00000000
-                                                       Write Request
-Len:12 Off:0 File: test_file-data
-178
-                                                       Write Response
-179
-                                                       Create Request
-File: test_file-data
-180           b8fa5b2d-0000-0000-d86e-38bf00000000  May 27, 2019
-20:16:03.862513400 EDT  May 27, 2019 20:16:03.862513400 EDT  Create
-Response File: test_file-data
-181           b8fa5b2d-0000-0000-d86e-38bf00000000  Oct 31, 2018
-00:00:00.000000000 EDT  Oct 31, 2018 00:00:00.000000000 EDT  SetInfo
-Request FILE_INFO/SMB2_FILE_BASIC_INFO File: test_file-data
-182
-                                                       SetInfo
-Response
-183           b8fa5b2d-0000-0000-d86e-38bf00000000
-                                                       Close Request
-File: test_file-data
-184                                                 Dec 31, 1969
-19:00:00.000000000 EST  Dec 31, 1969 19:00:00.000000000 EST  Close
-Response
-185
-                                                       Create Request
-File: test_file-data
-186           f7323833-0000-0000-5d04-6e1d00000000  Oct 31, 2018
-00:00:00.000000000 EDT  Oct 31, 2018 00:00:00.000000000 EDT  Create
-Response File: test_file-data
-187           f7323833-0000-0000-5d04-6e1d00000000  Dec 31, 1969
-19:00:00.000000000 EST  Dec 31, 1969 19:00:00.000000000 EST  SetInfo
-Request FILE_INFO/SMB2_FILE_BASIC_INFO File: test_file-data
-188
-                                                       SetInfo
-Response
-189           f7323833-0000-0000-5d04-6e1d00000000
-                                                       Close Request
-File: test_file-data
-190                                                 Dec 31, 1969
-19:00:00.000000000 EST  Dec 31, 1969 19:00:00.000000000 EST  Close
-Response
-191           5981ad82-0000-0000-1d86-2dcf00000000
-                                                       Close Request
-File: test_file-data
-192                                                 Dec 31, 1969
-19:00:00.000000000 EST  Dec 31, 1969 19:00:00.000000000 EST  Close
-Response
+Set this to 5 on initialization:
 
+ +     unsigned int num_subobjs;
 
-$ tshark -tad -n -r cp_p-testing-3.16.66.pcap -Y 'smb2.cmd =3D=3D find' -O
-smb2 | sed '/test_file-data/,/test_file-data/ !d'
-            FileIdBothDirectoryInfo: test_file-data
-                Next Offset: 0
-                File Index: 0x00000000
-                Create: May 27, 2019 20:16:03.862513400 EDT
-                Last Access: Oct 31, 2018 00:00:00.000000000 EDT
-                Last Write: May 27, 2019 20:16:03.872393500 EDT
-                Last Change: May 27, 2019 20:16:03.872393500 EDT
-                End Of File: 12
-                Allocation Size: 1048576
-                File Attributes: 0x00000020
-                    .... .... .... .... .... .... .... ...0 =3D Read
-Only: NOT read only
-                    .... .... .... .... .... .... .... ..0. =3D Hidden: NOT=
- hidden
-                    .... .... .... .... .... .... .... .0.. =3D System:
-NOT a system file/dir
-                    .... .... .... .... .... .... .... 0... =3D Volume
-ID: NOT a volume ID
-                    .... .... .... .... .... .... ...0 .... =3D
-Directory: NOT a directory
-                    .... .... .... .... .... .... ..1. .... =3D Archive:
-Modified since last ARCHIVE
-                    .... .... .... .... .... .... .0.. .... =3D Device:
-NOT a device
-                    .... .... .... .... .... .... 0... .... =3D Normal:
-Has some attribute set
-                    .... .... .... .... .... ...0 .... .... =3D
-Temporary: NOT a temporary file
-                    .... .... .... .... .... ..0. .... .... =3D Sparse:
-NOT a sparse file
-                    .... .... .... .... .... .0.. .... .... =3D Reparse
-Point: Does NOT have an associated reparse point
-                    .... .... .... .... .... 0... .... .... =3D
-Compressed: Uncompressed
-                    .... .... .... .... ...0 .... .... .... =3D Offline: On=
-line
-                    .... .... .... .... ..0. .... .... .... =3D Content
-Indexed: NOT content indexed
-                    .... .... .... .... .0.. .... .... .... =3D
-Encrypted: This is NOT an encrypted file
-                Filename Length: 28
-                EA Size: 60
-                Reserved: 00000000
-                File Id: 0x0000000000052b02
-                Filename: test_file-data
+i.e.
 
-I've added additional notes, strace, and pcap data to both kenel and
-samba bugzillas that seem applicable to this:
+ +     unsigned int num_subobjs = 5;
 
-  ** Bug 198967 - Modification times not preserved correctly **
-  https://bugzilla.kernel.org/show_bug.cgi?id=3D198967
+This then removes the "else" from:
 
-  ** Bug 13594 - smbd write time handling differs compared to recent
-Windows releases **
-  https://bugzilla.samba.org/show_bug.cgi?id=3D13594
+ +     if (from->pw_comment != NULL) {
+ +             len += strlen(from->pw_comment)+1;
+ +             num_subobjs = 6;
+ +     } else {
+ +             num_subobjs = 5;
+ +     }
 
-The earlier comments about filehandle do not apply as the atime used
-the same filehandle and the filehandle used is what should be used for
-compound operations.
+Cleaner code IMHO  :-).
 
-For context, Samba is matching behavior in Windows 2k16.
+Can you fix that and repost and then I'll +1 from me.
 
+Cheers,
 
-On Thu, Jan 24, 2019 at 5:49 PM Jeremy Allison <jra@samba.org> wrote:
->
-> On Thu, Jan 24, 2019 at 05:47:24PM -0500, Jacob Shivers wrote:
-> > On Thu, Jan 24, 2019 at 3:14 PM Ralph B=C3=B6hme <slow@samba.org> wrote=
-:
-> > >
-> > > On Thu, Jan 24, 2019 at 12:24:53PM -0500, Jacob Shivers wrote:
-> > > >On Thu, Jan 24, 2019 at 12:11 PM Ralph B=C3=B6hme via samba-technica=
-l
-> > > ><samba-technical@lists.samba.org> wrote:
-> > > >>
-> > > >> On Thu, Jan 24, 2019 at 09:03:41AM -0800, Jeremy Allison via samba=
--technical wrote:
-> > > >> >Maybe. Changing meta-data semantics on write is fraught with dang=
-er,
-> > > >> >and we don't even do that for SMB1 unix extensions. So let's not
-> > > >> >add contraints we don't understand yet please.
-> > > >> >
-> > > >> >My money is on a client bug, as always :-).
-> > > >>
-> > > >> fwiw, just in case you were not aware of this one:
-> > > >>
-> > > >> https://bugzilla.samba.org/show_bug.cgi?id=3D13594
-> > > >>
-> > > >> We also seem to have a bug that a set-eof on a handle with
-> > > >> set-eof-size=3Dexisting-size doesn't flush a pending write time up=
-date. At least
-> > > >> newer Windows server seem to do that.
-> > > >
-> > > >This seems like what the issue is.
-> > > >The SMB server is uptime mtime after the server actually flushes to
-> > > >stable storage.
-> > >
-> > > not quite, but still a client bug. :) The client uses a second handle=
- to set the
-> > > mtime, it should use the first handle. Or open the second handle afte=
-r closing
-> > > the first one where it did the write.
-> >
-> > Ahh.
-> >
-> > Thank you very much for your help and for narrowing down the problem
-> > to a client side bug :)
->
-> Bingo ! I claim my 5 euro :-) :-).
+	Jeremy.
+
+> From c8c6829e0b167c85fc804b2559a643232a36f9fa Mon Sep 17 00:00:00 2001
+> From: Stefan Behrens <sbehrens@giantdisaster.de>
+> Date: Wed, 27 Mar 2019 11:26:09 +0100
+> Subject: [PATCH] lib/util: Fixup tcopy_passwd() to also copy the pw_comment
+>  field
+> 
+> This change isn't needed by the Samba code itself but by a passdb
+> module of mine. This module makes use of the comment field and
+> requires that the copy of a passwd structure includes the pw_comment
+> field. And I see no reason why all fields of the passwd structure
+> are copied except for pw_comment.
+> 
+> Signed-off-by: Stefan Behrens <sbehrens@giantdisaster.de>
+> ---
+>  lib/util/util_pw.c | 12 +++++++++++-
+>  1 file changed, 11 insertions(+), 1 deletion(-)
+> 
+> diff --git a/lib/util/util_pw.c b/lib/util/util_pw.c
+> index 8035de4392c3..62e6e1e36a64 100644
+> --- a/lib/util/util_pw.c
+> +++ b/lib/util/util_pw.c
+> @@ -34,14 +34,21 @@ struct passwd *tcopy_passwd(TALLOC_CTX *mem_ctx,
+>  {
+>  	struct passwd *ret;
+>  	size_t len = 0;
+> +	unsigned int num_subobjs;
+>  
+>  	len += strlen(from->pw_name)+1;
+>  	len += strlen(from->pw_passwd)+1;
+>  	len += strlen(from->pw_gecos)+1;
+>  	len += strlen(from->pw_dir)+1;
+>  	len += strlen(from->pw_shell)+1;
+> +	if (from->pw_comment != NULL) {
+> +		len += strlen(from->pw_comment)+1;
+> +		num_subobjs = 6;
+> +	} else {
+> +		num_subobjs = 5;
+> +	}
+>  
+> -	ret = talloc_pooled_object(mem_ctx, struct passwd, 5, len);
+> +	ret = talloc_pooled_object(mem_ctx, struct passwd, num_subobjs, len);
+>  
+>  	if (ret == NULL) {
+>  		return NULL;
+> @@ -54,6 +61,9 @@ struct passwd *tcopy_passwd(TALLOC_CTX *mem_ctx,
+>  	ret->pw_gecos = talloc_strdup(ret, from->pw_gecos);
+>  	ret->pw_dir = talloc_strdup(ret, from->pw_dir);
+>  	ret->pw_shell = talloc_strdup(ret, from->pw_shell);
+> +	if (from->pw_comment != NULL) {
+> +		ret->pw_comment = talloc_strdup(ret, from->pw_comment);
+> +	}
+>  
+>  	return ret;
+>  }
+> -- 
+> 2.19.2
+> 
+
 
