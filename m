@@ -2,38 +2,39 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 926F74311D
-	for <lists+samba-technical@lfdr.de>; Wed, 12 Jun 2019 22:50:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E507843120
+	for <lists+samba-technical@lfdr.de>; Wed, 12 Jun 2019 22:53:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=4yfJhVYRablgimYqfgDiCISnQDnHkGlKTCpooJOF8iI=; b=hyB6aoF/AMeMJKVt3hvQshFUiO
-	ZF76CDcn3fQO0yz3gDmPIbLyYa8KdFrgUvxyg3IoUe1k9KuOiCKRzvK4+zhGvNPiyOjPsUPBiVqTe
-	RQFcBLn/gKHbGcsTo7XqsTK+2MuYJL/PT57CNX6TrAI3Hj/yYbQU84OVdx4eueBAbAL0ld84ay9Uh
-	AfX9LlM2THpP1kOucEr3OWmhmMss+f+pTZuda7SbQDP20cou2t+uo1io4K6CxV5xVWV5hME4aCW8I
-	1eODQ5Pqme4nVC6HeSBgLbZohou7+NEi7lwcSZ8LQmZ2lOkn6O7swbt50T4CCUv3auvZ1dIyDoRvC
-	wXu5oCTA==;
-Received: from localhost ([::1]:62966 helo=hr1.samba.org) 
+	bh=c/3ckYCQIjG+sTo+M+T393SCudeAcV3cVuitvCZMI44=; b=byPoGDEpuPad4yerT2MVWSAAXC
+	Apjsctl/JrdRV3/wlvzSVYziB0CJ3ygz9vUtGlEo77Vsub++vy1TpNMqv9oduqe3ECRqwzLhk6MsU
+	ZWIjCH5VnsD0SVvuuybYCHtRI7TVDOOhDLuapLz3f1bxvwOl1xT7Nk+E2V6sd8v/IE6TRTrGs77BD
+	3ldAAtkdHKb36ZSpZxh8gpsXlBFM8EnGh/KWxYykzhoIwa0Hn2Qn//Bjh+8QnT51E1rpXdSiUUnqL
+	a5X75+nzl5H6t7Z1sQD9DP1ZTeDqGlFNGNVONaxEIWNWwS0VU7l6Ptc9brHCH39n/NfmvadJtuNKw
+	qk98L4Fg==;
+Received: from localhost ([::1]:63764 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hbACK-001N4v-8x; Wed, 12 Jun 2019 20:50:20 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35984) 
+	id 1hbAEp-001NBt-D1; Wed, 12 Jun 2019 20:52:55 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37238) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hbACC-001N4o-Rc
- for samba-technical@lists.samba.org; Wed, 12 Jun 2019 20:50:18 +0000
+ (Exim) id 1hbAEk-001NBh-Mb
+ for samba-technical@lists.samba.org; Wed, 12 Jun 2019 20:52:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42627210; h=Date:To:From:Message-ID:CC;
- bh=4yfJhVYRablgimYqfgDiCISnQDnHkGlKTCpooJOF8iI=; b=VCm5jv1LSKv0wiBdznpljN3Cqd
- rqxz7p8JNlkOggnfZyeHU+uvJ8DBHuL31HPMMRsno0xDMfQtnUoY0vR19+j6n2MJsE34p/YAimBau
- XAWuh/UBtZlngMBigw2m1ReG1wzLUoIoV2fbGnQBW2NMgnCNaHr0nGGgzgrxfCs+nh/0=;
+ bh=c/3ckYCQIjG+sTo+M+T393SCudeAcV3cVuitvCZMI44=; b=iVJYIDzdD/Qhj7eUVzXFiiTj9M
+ 38FSVIYCOIF57vP9kG64KCo6+Y7JbsveQ1h6v5tK3lXqdQQnOa54cimc8BkMxAm7mK3zLsdKup3vb
+ u1mZz3sG3sufGaD4ctksQtyfjWel177cyqgTehEaCZjrKgWm3AsG/NXvN1qzd/RGh0jg=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1hbACA-0002Rl-Is; Wed, 12 Jun 2019 20:50:11 +0000
-Message-ID: <bba2b7b229846f564753bf28cec3d490b268fba1.camel@samba.org>
-Subject: Re: Some bugzilla work and thoughts
-To: Amit Kumar <amitkuma@redhat.com>, samba-technical@lists.samba.org
-Date: Wed, 12 Jun 2019 22:49:56 +0200
-In-Reply-To: <b37e1c69-bb71-68a0-24e7-555d09cd6659@redhat.com>
-References: <c976289f207aa7ab941cb368e38e806201eff36c.camel@samba.org>
- <b37e1c69-bb71-68a0-24e7-555d09cd6659@redhat.com>
+ (Exim) id 1hbAEk-0002VC-BU; Wed, 12 Jun 2019 20:52:50 +0000
+Message-ID: <52115dfa88ecbb8f13436cdf8d6641d0cda4728d.camel@samba.org>
+Subject: Re: ChangeLog
+To: Steve Cook <steve.cook@mandsconsulting.com>, 
+ samba-technical@lists.samba.org
+Date: Wed, 12 Jun 2019 22:52:48 +0200
+In-Reply-To: <CAPKK0PPxz7RSLqE4NOmXah6_qvpbwM37XwxYOX035QQ9mi3XGg@mail.gmail.com>
+References: <CAPKK0PPaLLXnh5Gu-EHeUGcKkATp4rva4LzcnhCU3SsACMyb4w@mail.gmail.com>
+ <CAPKK0PPxz7RSLqE4NOmXah6_qvpbwM37XwxYOX035QQ9mi3XGg@mail.gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
 Mime-Version: 1.0
@@ -56,34 +57,44 @@ Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2019-06-12 at 18:35 +0530, Amit Kumar via samba-technical
-wrote:
-> Dear Andrew,
-> 
-> So do you have plan to reduce/work/close(RFE maybe Not even in
-> pipeline)
-> on bugzillas to lower their numbers.
-> What i find is It's even tough to search and start working, Since
-> quite
-> are in NEW state while patches are attached to them!!
+I think you are tooling for 'samba-tool user syncpasswords'.
 
-Yes, that was the idea.  I was hoping to close around 10% of the bugs,
-and perhaps encourage others to close another 10%.  This was
-optimistic, I only got to triage of 2.5%, closing around 2%. 
-
-I agree, it is very hard to know where to start, plus patches really
-(even if not known at the time they were uploaded) need to be merge
-requests to avoid being time sinks for the reviewer. 
-
-I'm no longer convinced that Bugzilla is the right tool for Samba, but
-I don't know what would be.  
-
-This isn't are reflection on the administration staff, just on the
-quality/properties of the tool.  
-
-Thanks,
+Samba can store passwords in GPG encrypted blobs (for plaintext) or
+crypt() format (for e.g. OpenLDAP, shadow files, Google etc).
 
 Andrew Bartlett
+
+On Wed, 2019-06-12 at 07:34 -0400, Steve Cook via samba-technical
+wrote:
+> Can anyone point me in the right direction?
+> 
+> On Tue, Jun 11, 2019, 2:10 PM Steve Cook <
+> steve.cook@mandsconsulting.com>
+> wrote:
+> 
+> > Hi All,
+> > 
+> > Is there a implementation of a changelog within Samba4?  I need to
+> > be able
+> > to encrypt and store password changes for a user.  I then will have
+> > an
+> > external tool that will connect to the cn=changelog using the
+> > decryption
+> > password so that I can get the clear text password to change the
+> > password
+> > for the same user in another directory.
+> > 
+> > Thank You,
+> > 
+> > --
+> > 
+> > Steve Cook
+> > 
+> > 
+> > [
+> > 
+> 
+> 
 -- 
 Andrew Bartlett                       https://samba.org/~abartlet/
 Authentication Developer, Samba Team  https://samba.org
