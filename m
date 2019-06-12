@@ -2,39 +2,38 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E507843120
-	for <lists+samba-technical@lfdr.de>; Wed, 12 Jun 2019 22:53:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E15943130
+	for <lists+samba-technical@lfdr.de>; Wed, 12 Jun 2019 22:56:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=c/3ckYCQIjG+sTo+M+T393SCudeAcV3cVuitvCZMI44=; b=byPoGDEpuPad4yerT2MVWSAAXC
-	Apjsctl/JrdRV3/wlvzSVYziB0CJ3ygz9vUtGlEo77Vsub++vy1TpNMqv9oduqe3ECRqwzLhk6MsU
-	ZWIjCH5VnsD0SVvuuybYCHtRI7TVDOOhDLuapLz3f1bxvwOl1xT7Nk+E2V6sd8v/IE6TRTrGs77BD
-	3ldAAtkdHKb36ZSpZxh8gpsXlBFM8EnGh/KWxYykzhoIwa0Hn2Qn//Bjh+8QnT51E1rpXdSiUUnqL
-	a5X75+nzl5H6t7Z1sQD9DP1ZTeDqGlFNGNVONaxEIWNWwS0VU7l6Ptc9brHCH39n/NfmvadJtuNKw
-	qk98L4Fg==;
-Received: from localhost ([::1]:63764 helo=hr1.samba.org) 
+	bh=VuQibCyucE79mfPwPk6IgC0XCXMVElMRnxpz30bqy0E=; b=xBsf9ffU5mv1CFYxfwSNddCJfC
+	QM16fFhKg4UYkNGy6rIyCL/F5imN5pOcRBv5Rx3aVv4/sbJxZfWWF2B/3dNgzmvFsmO9ARm1AOrLA
+	J4mKkH9lWcXD6gY5W05xx+yFGJvGWVoozrHh1t7sKJ8ax7Vr4ic6JM4u7nxT1hPkfaILcD4tJUnmC
+	1bQT/5wELrUCuh+fCK6TevpaYfogxWGJHsUJ+xdQUtiginJuPFmmKvTBDKVeUB8y6sGEyBAHtIXvz
+	cLcmIBzo5Q87cRUGriPTWZx6UekgYoVV+4nJlULwEl14HlDaJpWYMVctViC+FrHtzbdTJXJzEhxKd
+	0ckE7kLw==;
+Received: from localhost ([::1]:64562 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hbAEp-001NBt-D1; Wed, 12 Jun 2019 20:52:55 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37238) 
+	id 1hbAHq-001NIv-L9; Wed, 12 Jun 2019 20:56:02 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39106) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hbAEk-001NBh-Mb
- for samba-technical@lists.samba.org; Wed, 12 Jun 2019 20:52:53 +0000
+ (Exim) id 1hbAHm-001NIo-RP
+ for samba-technical@lists.samba.org; Wed, 12 Jun 2019 20:56:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42627210; h=Date:To:From:Message-ID:CC;
- bh=c/3ckYCQIjG+sTo+M+T393SCudeAcV3cVuitvCZMI44=; b=iVJYIDzdD/Qhj7eUVzXFiiTj9M
- 38FSVIYCOIF57vP9kG64KCo6+Y7JbsveQ1h6v5tK3lXqdQQnOa54cimc8BkMxAm7mK3zLsdKup3vb
- u1mZz3sG3sufGaD4ctksQtyfjWel177cyqgTehEaCZjrKgWm3AsG/NXvN1qzd/RGh0jg=;
+ bh=VuQibCyucE79mfPwPk6IgC0XCXMVElMRnxpz30bqy0E=; b=U3qyeJOTjC1cccNZoPagUQcPSI
+ jE7zInY7TpwXJjAU3+Zb+IG+XB8GCfQwWEZ248YQ9JnhiYZ8hif4rDlc4oVXZy1/vIVhQsKBRBFvd
+ USBHkfzhlrZmcHjfiP7J056q5JVRTXwtUdEGYP2wFePa98Onti76wdz7bx6mLtXtWqK0=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1hbAEk-0002VC-BU; Wed, 12 Jun 2019 20:52:50 +0000
-Message-ID: <52115dfa88ecbb8f13436cdf8d6641d0cda4728d.camel@samba.org>
-Subject: Re: ChangeLog
-To: Steve Cook <steve.cook@mandsconsulting.com>, 
+ (Exim) id 1hbAHl-0002YK-Kj; Wed, 12 Jun 2019 20:55:58 +0000
+Message-ID: <788c2cbe86cdee5d70a2a5e1db34cb21bd86734f.camel@samba.org>
+Subject: Re: [PATCH] wafsamba: Use native waf timer
+To: Lukas Slebodnik <lslebodn@fedoraproject.org>, 
  samba-technical@lists.samba.org
-Date: Wed, 12 Jun 2019 22:52:48 +0200
-In-Reply-To: <CAPKK0PPxz7RSLqE4NOmXah6_qvpbwM37XwxYOX035QQ9mi3XGg@mail.gmail.com>
-References: <CAPKK0PPaLLXnh5Gu-EHeUGcKkATp4rva4LzcnhCU3SsACMyb4w@mail.gmail.com>
- <CAPKK0PPxz7RSLqE4NOmXah6_qvpbwM37XwxYOX035QQ9mi3XGg@mail.gmail.com>
+Date: Wed, 12 Jun 2019 22:55:54 +0200
+In-Reply-To: <20190612113125.GB8215@10.4.128.1>
+References: <20190612113125.GB8215@10.4.128.1>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
 Mime-Version: 1.0
@@ -57,44 +56,23 @@ Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I think you are tooling for 'samba-tool user syncpasswords'.
+On Wed, 2019-06-12 at 13:31 +0200, Lukas Slebodnik via samba-technical
+wrote:
+> ehlo,
+> 
+> it is another blocker to build samba with python 3.8
 
-Samba can store passwords in GPG encrypted blobs (for plaintext) or
-crypt() format (for e.g. OpenLDAP, shadow files, Google etc).
+Can you (sorry) please file a bug (or re-use the existing one), add a
+BUG: tag, push to GitLab and create a merge request please?
+
+https://wiki.samba.org/index.php/Samba_CI_on_gitlab#Creating_a_merge_request
+
+This way we can see that it passes a build before we start review.
+
+Thanks!
 
 Andrew Bartlett
 
-On Wed, 2019-06-12 at 07:34 -0400, Steve Cook via samba-technical
-wrote:
-> Can anyone point me in the right direction?
-> 
-> On Tue, Jun 11, 2019, 2:10 PM Steve Cook <
-> steve.cook@mandsconsulting.com>
-> wrote:
-> 
-> > Hi All,
-> > 
-> > Is there a implementation of a changelog within Samba4?  I need to
-> > be able
-> > to encrypt and store password changes for a user.  I then will have
-> > an
-> > external tool that will connect to the cn=changelog using the
-> > decryption
-> > password so that I can get the clear text password to change the
-> > password
-> > for the same user in another directory.
-> > 
-> > Thank You,
-> > 
-> > --
-> > 
-> > Steve Cook
-> > 
-> > 
-> > [
-> > 
-> 
-> 
 -- 
 Andrew Bartlett                       https://samba.org/~abartlet/
 Authentication Developer, Samba Team  https://samba.org
