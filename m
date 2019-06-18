@@ -2,43 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9C894A647
-	for <lists+samba-technical@lfdr.de>; Tue, 18 Jun 2019 18:09:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C8774A8AC
+	for <lists+samba-technical@lfdr.de>; Tue, 18 Jun 2019 19:41:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=QYRRYDBqeeBNPqE820ZPD7YMXyv0nEdzHotuJ4/ck3o=; b=3WCIRPAay4L4jl9/5W99lkd4lS
-	tc2UnzQIr0fwrjNo94d0Q2MHg8EAdKRGi+S5yWI+bP/Y9jM8qiTdm9c0xkG2JTtS+LKORrN+iPzYn
-	hppgq50WDdlNHTo0za3Ot1RYuRdKzzIPzUCMkXVkg3AQH9Rxr1vvYA3YIPiqNGD/letwXdKzgemnf
-	lG6ikbFOM+XZv92mKWt3G5EsCK45P/8qlPop3mf5KYmmKgO6TOsxN7mRP135ma/2WE+B+LiSjkToW
-	H0zdwdwYUEdHGsmQ5W6/seMAT5cXPQwz2dws6KiMZQLlMDNXW3CAMAVTfrAno41gqK+hEuIhhjlLK
-	r8jkPLKg==;
-Received: from localhost ([::1]:38178 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=X+mlhhAWyK9C11Zm/YyEGHdugeqb5lUY9L5yu5ET6B4=; b=zyvkSSmRKvV2yX9oES9EapFM/c
+	/vr/HxR1VuBLJxV2ptZEDfs/RT8Pkuml3jJ8RSpRHyZA5iUDn8lG9kxpIio5r/73O+bj3Y//ZjyFk
+	KX8h6U8x1HLTdLvkLYt/FGyfg46NxsZgy/UD16AXkCmgaPY8USIPWgMAoAECcTvf1Q5rLnTlNt5X8
+	mY1xXmNQQyXeN4R4872NNZB2kZ2dBnCbSFaEMwNfFgA6N/dcLuj7mfMzJeARFTL8xUeKHC+vFiL6q
+	J+Wgo9DiBxy30Wk/j/fhVKmAiAesPCu5gUXaWfP1QS60TyJUAhkcmayIJA0YRjRuAyya/xKssVpvn
+	Jsr8cUYQ==;
+Received: from localhost ([::1]:49204 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hdGfa-000507-MP; Tue, 18 Jun 2019 16:09:14 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60250) 
+	id 1hdI6S-0006YI-Dm; Tue, 18 Jun 2019 17:41:04 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56298) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hdGfW-000500-Ar
- for samba-technical@lists.samba.org; Tue, 18 Jun 2019 16:09:12 +0000
+ (Exim) id 1hdI6M-0006YB-SD
+ for samba-technical@lists.samba.org; Tue, 18 Jun 2019 17:41:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:To:From:Date:CC;
- bh=QYRRYDBqeeBNPqE820ZPD7YMXyv0nEdzHotuJ4/ck3o=; b=vQzpIWoN7vnji/XGG34uuY98bg
- GPJOAvHOrIGHlut7XI8E7ULKCwqo5ITTcFwbupFFFptw/w4Bx2KZ8YePkzTWRTE6MeHXBeX4jCjsu
- Ja5EOdOvDR0EpQOHp05vm96ZOQVbzj06DcgWRWnlmbr0tyIXA0mUNjYcFEs0SJrm3/gg=;
+ s=42627210; h=Date:To:From:Message-ID:CC;
+ bh=X+mlhhAWyK9C11Zm/YyEGHdugeqb5lUY9L5yu5ET6B4=; b=UWjtzrcgFOlY+se4UrJTHLtEt1
+ AW6R3NyF9QeINo/iNTahZn6eC+rMPWQvp928xp3q0pyag6/OcwEcgVTJXFmzfoN/X+hRmQbizZOfs
+ MscvfsR7QrBVM5n1z9qIlD+BLFGRNRuLsBbKQzbady4BwEkRRngyVsFJA1D1JRgjtwj0=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hdGfV-0003YD-M1
- for samba-technical@lists.samba.org; Tue, 18 Jun 2019 16:09:10 +0000
-Date: Tue, 18 Jun 2019 09:09:07 -0700
-To: samba-technical@lists.samba.org
+ (Exim) id 1hdI6L-0004i7-VQ; Tue, 18 Jun 2019 17:40:58 +0000
+Message-ID: <fd40b82df37deb9f81cd0934f6db7290bc345fbd.camel@samba.org>
 Subject: Re: RFC: deprecate allocation roundup size
-Message-ID: <20190618160907.GA233746@jra4>
-References: <20190618144358.GA6800@sernet.de>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+To: =?ISO-8859-1?Q?Bj=F6rn?= JACKE <bj@SerNet.DE>, 
+ samba-technical@lists.samba.org
+Date: Wed, 19 Jun 2019 05:40:53 +1200
 In-Reply-To: <20190618144358.GA6800@sernet.de>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+References: <20190618144358.GA6800@sernet.de>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.30.5 (3.30.5-1.fc29) 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,12 +51,13 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Jun 18, 2019 at 04:43:58PM +0200, Björn JACKE via samba-technical wrote:
+On Tue, 2019-06-18 at 16:43 +0200, BjÃ¶rn JACKE via samba-technical
+wrote:
 > Hi,
 > 
 > I was debugging a problem with strict allocate = yes and our current default of
@@ -82,11 +82,21 @@ On Tue, Jun 18, 2019 at 04:43:58PM +0200, Björn JACKE via samba-technical wrote:
 > releases completely to behave more windows standard conforming and to just cut
 > off this source of irritation.
 
-+1 from me and I was the person who added it, a *long* time ago :-).
+Certainly now is the time to be doing deprecation.  This option has had
+other consequences, with some clients reporting massive 'in use' sizes
+for short files, to the confusion of our users.
 
-I agree, I don't think we need this anymore.
+Deprecation is harmless, so we should do at least that, and changing
+the default back is user-visible but at least recoverable (while the
+option still exists).  Perhaps we should be fixing the bug above also,
+that seems quite wrong, but it is a matter of resources (pardon the
+pun).
 
-Cheers,
+Andrew Bartlett
+-- 
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
 
-	Jeremy.
+
 
