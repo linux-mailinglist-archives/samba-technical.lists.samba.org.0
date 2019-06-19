@@ -2,48 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 431814B502
-	for <lists+samba-technical@lfdr.de>; Wed, 19 Jun 2019 11:36:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BCB54B716
+	for <lists+samba-technical@lfdr.de>; Wed, 19 Jun 2019 13:32:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=8LGP5PkRH1vh2Umy9QB2wCCZVASmHwYOC95K6MJEV1A=; b=vt+VWxFu0RrBe0ZeKXZKf2HXmC
-	mT67xOKcOONnf/idl/xUuMFkIiSJRpV2qjHzNYaLu5ywyBmZmburV9kHjihe+84c6BDmymvJLPecv
-	kXWhEDEMs2vDCofn28j88R/GmJRCYTFkGVOKCuD3uTRlIwM80/Iea6Nb+RLBOZDpma0wLbbNEG+ql
-	ha6mVmzx+pxca8GIiGEPYuRdxk7XwwTb/+XJEHOgoNJKFDMUyZNEgNwc4+U5ozwEMeh1VzyvQoYOv
-	j9cywNYmDyDs2EroyFcsqyGZrDkTTnvoP+TaYmFbPQLWZElPTuScs9eJ9KfZz9qBUgub59Fpx3WsT
-	N61fZzNw==;
-Received: from localhost ([::1]:48754 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=i3MQuJI26p2TmvfiEiIeFAsYYvM6GGnDdye0a47cg8g=; b=wNrx4Yz4aqQC6xte3hXmIw6En4
+	X3YVgxZKHi5Th9Jw44Y8JGi47oGJXXoPcACDI6zMtIpsZdnWHSSth/iDtd2K6mkEUiWcnV7bIGc8h
+	YG3MvVkRFA/cAcAagQs75CRsE+MEhWUZp0nA84TeyO4jIURZJr1SjWiMKTumZ09n12YlmnJgDzt7Z
+	PWJRW4ZqaTrwMENai9p3t8Yj8GpEvM7HfVEIPMS7HLFiWTOPIBDocP0TMXryJl4BzqsK2UnoozDcr
+	OBsAZ4gNPDYcBZceP/jX09SiNELInc4eWqYuMGWiImXhseNtnlIDj1d+ydjWJGNSSjEsYPIQBQdrP
+	RwPO90IA==;
+Received: from localhost ([::1]:49696 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hdX0L-000KlK-Ij; Wed, 19 Jun 2019 09:35:45 +0000
-Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:55789) 
+	id 1hdYoK-000L48-3a; Wed, 19 Jun 2019 11:31:28 +0000
+Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:45177) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hdX0G-000KlD-J5
- for samba-technical@lists.samba.org; Wed, 19 Jun 2019 09:35:42 +0000
+ (Exim) id 1hdYoF-000L40-KU
+ for samba-technical@lists.samba.org; Wed, 19 Jun 2019 11:31:26 +0000
 Received: from intern.SerNet.DE by mail.SerNet.DE with esmtps (Exim 4.92 #3)
- id 1hdX0F-0004y5-Uw; Wed, 19 Jun 2019 11:35:39 +0200
+ for samba-technical@lists.samba.org
+ id 1hdYoE-0005pi-5C; Wed, 19 Jun 2019 13:31:22 +0200
 Received: by intern.sernet.de
- id 1hdX0F-0003lB-Q4; Wed, 19 Jun 2019 11:35:39 +0200
+ id 1hdYoE-0005AQ-1E; Wed, 19 Jun 2019 13:31:22 +0200
 Received: from bjacke by pell.sernet.de with local (Exim 4.90_1)
- (envelope-from <bjacke@sernet.de>)
- id 1hdX0F-00014F-JW; Wed, 19 Jun 2019 11:35:39 +0200
-Date: Wed, 19 Jun 2019 11:35:39 +0200
-To: Andrew Bartlett <abartlet@samba.org>
-Subject: Re: WANTED: bugzilla help (automated and semi-automated) closing bugs
-Message-ID: <20190619093539.GB1757@sernet.de>
-Mail-Followup-To: Andrew Bartlett <abartlet@samba.org>,
- Anoop C S <anoopcs@cryptolab.net>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-References: <c976289f207aa7ab941cb368e38e806201eff36c.camel@samba.org>
- <f916dfd9c395ea1589daddefaa31f8ef4615cd8e.camel@cryptolab.net>
- <9c4fa2da0d467c72a822f0151a08b006daf332bd.camel@samba.org>
- <20190612135627.GA24651@sernet.de>
- <e5622276b22de37212b27b908ee9dc065519fa72.camel@samba.org>
- <79b47f9c34a9154ce94c0129c37b77410d33f15c.camel@samba.org>
+ (envelope-from <bjacke@sernet.de>) id 1hdYoD-0002QE-Te
+ for samba-technical@lists.samba.org; Wed, 19 Jun 2019 13:31:21 +0200
+Date: Wed, 19 Jun 2019 13:31:21 +0200
+To: samba-technical@lists.samba.org
+Subject: Re: RFC: deprecate allocation roundup size
+Message-ID: <20190619113121.GA9207@sernet.de>
+Mail-Followup-To: samba-technical@lists.samba.org
+References: <20190618144358.GA6800@sernet.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="hHWLQfXTYDoKhP50"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <79b47f9c34a9154ce94c0129c37b77410d33f15c.camel@samba.org>
+In-Reply-To: <20190618144358.GA6800@sernet.de>
 X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
  Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
 X-BeenThere: samba-technical@lists.samba.org
@@ -62,36 +56,169 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
 From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
  <samba-technical@lists.samba.org>
 Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bj@SerNet.DE>
-Cc: Anoop C S <anoopcs@cryptolab.net>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 2019-06-19 at 17:18 +1200 Andrew Bartlett sent off:
-> Currently these bugs have a BUG: tag in master yet are open[1]:
-> 
-> https://bugzilla.samba.org/buglist.cgi?bug_id=8630%2C9976%2C10066%2C10286%2C10440%2C10803%2C10812%2C10882%2C11012%2C11198%2C11592%2C11600%2C11628%2C11665%2C11823%2C11836%2C11894%2C12155%2C12292%2C12293%2C12297%2C12385%2C12399%2C12402%2C12416%2C12423%2C12451%2C12468%2C12739%2C12761%2C12841%2C12845%2C12851%2C12876%2C12881%2C12921%2C12926%2C13004%2C13039%2C13059%2C13093%2C13151%2C13159%2C13178%2C13213%2C13214%2C13223%2C13225%2C13229%2C13247%2C13307%2C13309%2C13311%2C13343%2C13350%2C13353%2C13365%2C13378%2C13379%2C13381%2C13415%2C13442%2C13448%2C13452%2C13458%2C13461%2C13462%2C13466%2C13469%2C13471%2C13475%2C13525%2C13564%2C13565%2C13573%2C13591%2C13604%2C13612%2C13627%2C13630%2C13655%2C13658%2C13680%2C13698%2C13699%2C13723%2C13761%2C13771%2C13772%2C13806%2C13822%2C13825%2C13843%2C13852%2C13864%2C13880%2C13915%2C13932%2C13939%2C13948%2C13949%2C13952%2C13959%2C13967%2C13973&bug_id_type=anyexact&list_id=22103&query_format=advanced
-> 
-> What do folks think of closing those as fixed?  Would someone be
-> willing to write a script to find the git hash from the BUG number and
-> close the bug with that and the version it was found in?  
-> 
-> Or should we just close them all in bulk (perhaps a more refined list)?
 
-I see the danger, that there can be bugs, which are referenced because they are
-partly fixed or the referenced fix went upstream already but wasn't the final
-solution or the bug got reopened because the fix was not okay. There are many
-reasons why this could go wrong. But the list is great in any way, just that I
-think it needs manual work if we want to be on the safe site with this.
+--hHWLQfXTYDoKhP50
+Content-Type: multipart/mixed; boundary="MGYHOYXEY6WxJCY8"
+Content-Disposition: inline
 
-What we would need is that all of us take care of our own bugs, own bugs
-includes bugs that we reported ourself. If I file a bug report that I fixed, I
-need to take care that the bug report gets closed also or correctly assigned to
-Karolin for merging. I should also not file bug reports that have no descriptive
-body text but only a more or less cryptic summary line. What I want to say is
-that we all need to change the way we use bugzilla and we should all give it
-more love and attention.
 
-peace & happyness™
-Björn
+--MGYHOYXEY6WxJCY8
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On 2019-06-18 at 16:43 +0200 Bj=F6rn JACKE via samba-technical sent off:
+> As this performance trick is not needed for modern SMB clients any more, =
+it
+> might also be be better idea to just reset the value of "allocation round=
+up
+> size" to 4k again, deprecate the option and remove it with one of the next
+> releases completely to behave more windows standard conforming and to jus=
+t cut
+> off this source of irritation.
+
+thanks for your feedback on this.
+
+Attached is a small patch set, which changes the default to 0 now, documents
+that and finally deprecates the parameter.
+
+Review and push welcome :-)
+
+Thanks
+Bj=F6rn
+
+--MGYHOYXEY6WxJCY8
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="allocation-roundup-size-away.patch"
+Content-Transfer-Encoding: quoted-printable
+
+=46rom 553781e020bc02fbd770f45c6b2fe232b112d1d8 Mon Sep 17 00:00:00 2001
+=46rom: =3D?UTF-8?q?Bj=3DC3=3DB6rn=3D20Jacke?=3D <bj@sernet.de>
+Date: Wed, 19 Jun 2019 13:04:55 +0200
+Subject: [PATCH 1/3] param: change default of "allocation roundup size" to 0
+
+Signed-off-by: Bjoern Jacke <bjacke@samba.org>
+---
+ lib/param/loadparm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/param/loadparm.c b/lib/param/loadparm.c
+index e03c1556d7e0..b2982dec6107 100644
+--- a/lib/param/loadparm.c
++++ b/lib/param/loadparm.c
+@@ -2889,7 +2889,7 @@ struct loadparm_context *loadparm_init(TALLOC_CTX *me=
+m_ctx)
+=20
+ 	lpcfg_do_global_parameter(lp_ctx, "show add printer wizard", "yes");
+=20
+-	lpcfg_do_global_parameter(lp_ctx, "allocation roundup size", "1048576");
++	lpcfg_do_global_parameter(lp_ctx, "allocation roundup size", "0");
+=20
+ 	lpcfg_do_global_parameter(lp_ctx, "ldap page size", "1000");
+=20
+--=20
+2.17.1
+
+
+=46rom 9aa693f65d09be2f6e870da539ca18a8ba48f9c1 Mon Sep 17 00:00:00 2001
+=46rom: =3D?UTF-8?q?Bj=3DC3=3DB6rn=3D20Jacke?=3D <bj@sernet.de>
+Date: Wed, 19 Jun 2019 13:15:54 +0200
+Subject: [PATCH 2/3] docs-xml: improve documentation and new default of
+ "allocation roundup size"
+
+Signed-off-by: Bjoern Jacke <bjacke@samba.org>
+---
+ .../smbdotconf/tuning/allocationroundupsize.xml    | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
+
+diff --git a/docs-xml/smbdotconf/tuning/allocationroundupsize.xml b/docs-xm=
+l/smbdotconf/tuning/allocationroundupsize.xml
+index eaea467bc390..aabbba32655a 100644
+--- a/docs-xml/smbdotconf/tuning/allocationroundupsize.xml
++++ b/docs-xml/smbdotconf/tuning/allocationroundupsize.xml
+@@ -4,17 +4,21 @@
+                  xmlns:samba=3D"http://www.samba.org/samba/DTD/samba-doc">
+ <description>
+     <para>This parameter allows an administrator to tune the=20
+-    allocation size reported to Windows clients.  The default=20
+-    size of 1Mb generally results in improved Windows client
+-    performance.   However, rounding the allocation size may cause
++    allocation size reported to Windows clients. This is only
++    useful for old SMB1 clients because modern SMB dialects
++    eliminated that bottleneck and have better performance by
++    default.  Using this parameter may cause
+     difficulties for some applications, e.g. MS Visual Studio.
+     If the MS Visual Studio compiler starts to crash with an
+     internal error, set this parameter to zero for this share.
++    Settings this parameter to a large value can also cause
++    small files to allocate more space on the disk than
++    needed.
+     </para>
+=20
+     <para>The integer parameter specifies the roundup size in bytes.</para>
+ </description>
+=20
+-<value type=3D"default">1048576</value>
+-<value type=3D"example">0<comment>(to disable roundups)</comment></value>
++<value type=3D"default">0</value>
++<value type=3D"example">1048576<comment>(to set it to the former default o=
+f 1 MiB)</comment></value>
+ </samba:parameter>
+--=20
+2.17.1
+
+
+=46rom 533090c97320223706b253147e1d621f08af25a0 Mon Sep 17 00:00:00 2001
+=46rom: =3D?UTF-8?q?Bj=3DC3=3DB6rn=3D20Jacke?=3D <bj@sernet.de>
+Date: Wed, 19 Jun 2019 13:20:34 +0200
+Subject: [PATCH 3/3] docs-xml: deprecate allocation roundup size parameter
+
+---
+ docs-xml/smbdotconf/tuning/allocationroundupsize.xml | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/docs-xml/smbdotconf/tuning/allocationroundupsize.xml b/docs-xm=
+l/smbdotconf/tuning/allocationroundupsize.xml
+index aabbba32655a..08aa621fcc53 100644
+--- a/docs-xml/smbdotconf/tuning/allocationroundupsize.xml
++++ b/docs-xml/smbdotconf/tuning/allocationroundupsize.xml
+@@ -1,6 +1,7 @@
+ <samba:parameter name=3D"allocation roundup size"
+                  context=3D"S"
+                  type=3D"bytes"
++                 deprecated=3D"1"
+                  xmlns:samba=3D"http://www.samba.org/samba/DTD/samba-doc">
+ <description>
+     <para>This parameter allows an administrator to tune the=20
+@@ -15,6 +16,9 @@
+     small files to allocate more space on the disk than
+     needed.
+     </para>
++    <para>This parameter is deprecated and will be removed in
++    one of the next Samba releases.
++    </para>
+=20
+     <para>The integer parameter specifies the roundup size in bytes.</para>
+ </description>
+--=20
+2.17.1
+
+
+--MGYHOYXEY6WxJCY8--
+
+--hHWLQfXTYDoKhP50
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRTh3WYB8ykhrzLAI8xQwafzsNCPwUCXQodBwAKCRAxQwafzsNC
+Pw9pAP9EkS43Us6l4066DYH7xU3nh/s46mIrSVGXvCXXxNZ/mQEA4Rsrlx7GewQQ
+XZk84oV+5/JesVF46LxxRsChb77EKgU=
+=fPef
+-----END PGP SIGNATURE-----
+
+--hHWLQfXTYDoKhP50--
 
