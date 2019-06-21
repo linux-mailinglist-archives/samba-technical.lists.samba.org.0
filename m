@@ -2,64 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15ADC4E717
-	for <lists+samba-technical@lfdr.de>; Fri, 21 Jun 2019 13:27:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E3B04ED56
+	for <lists+samba-technical@lfdr.de>; Fri, 21 Jun 2019 18:44:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=CUaoV5Ytga0hLe39K/NXpFlRcpFDr5iD1ylxlTAdfRk=; b=sEFwuMS7NMUVvFHQx6tOhiib9A
-	1CHcpWkosipvTNXGlR5Tcs6a34CMZVtucNvPMcNrAv/8MFkPnCuc5S8dUSS2uE3rTrPr4CKn8qdw9
-	gToNCdoaaHDKEncVh8o/XDIyLhzCHrJ4pHuUQ0kN1W4tKjLfoiQSaMMFLPXXEQHIugbG4q3+i9JVx
-	XX7Wh9oFlYoCvVKCnyfg7+UpqbhKam72xHCePm2xZQfS45+KtbhDh5kyksdkDxzj2MNIuq/JwfedN
-	2aW6Z3Ij9Xb8j0hbDslJrNUsMFVZyJNNPQnsJI1m08msuIQoSSf+776y06PtHdT5iPMZOgu8EbSm1
-	S521mPPA==;
-Received: from localhost ([::1]:41680 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=uDfVC9CXj6To81Md55wNMZz9owH5xvPtd8lzgvHvzRw=; b=SMGzDfmC4xcM3cn8dcfND8APzo
+	9lCUclfQyEfUe7KIX/jPiQn9P1g8IAqleEcOhLTaH8wyofkRAfOn80GCyDnX01QTw0M7Kg2xe9Fje
+	XnGOKfb0cL/hLgnbZEvwlkYhMinux3sUWpG1aFmGp6E+bv6nlZgadxvGU8/KPPfdJOo5j/I2NlGWG
+	XgslDa3MMAtd35pA4+B04DaSPr7UyexPuvXEzRCf1ECQr5ZCmE8ursjN1+9XZW5/ysrFDVYl4EALM
+	azJCRxLY8/Uqv8CkXbtSiMMQOWSjCUjMVyZ+EEhA4FOkxwECCflJ9pIKP+Fox2ICSRQEnLywJWtgx
+	9AV+9uhQ==;
+Received: from localhost ([::1]:35638 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1heHhK-000xnP-Kw; Fri, 21 Jun 2019 11:27:14 +0000
-Received: from mail-pl1-f178.google.com ([209.85.214.178]:44289) 
+	id 1heMe0-0013jP-A8; Fri, 21 Jun 2019 16:44:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25256) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1heHhG-000xnI-Bd
- for samba-technical@lists.samba.org; Fri, 21 Jun 2019 11:27:12 +0000
-Received: by mail-pl1-f178.google.com with SMTP id t7so2847186plr.11
- for <samba-technical@lists.samba.org>; Fri, 21 Jun 2019 04:27:09 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:from:to:references:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=CUaoV5Ytga0hLe39K/NXpFlRcpFDr5iD1ylxlTAdfRk=;
- b=ryD3GVl0vdAIQcjhRcmSXWM8mOQjbxhOCnEEJIOzk0fYSSYNNBJ3SasLubgPboDhOp
- Srq7Z/pQsi5yACguRzKG49NBdZJENpIo7rnoyy3ACf4lUoiYVAInmoIRiuJ5Tp0QgttC
- dmDhMQZOR2oiqoB35y5vjsYcwSPpGQRnE758wxuCqIf3863Cq0xOmg5mNlQDZLydcIvZ
- A67oxJkRU+EmuP9ONaJYHrJTJeD4Rz1DsEMiTo3qzHu3t9G5lwPb9rUFYTzIRBeZN7IA
- fBps+oJrr0fNwDDzLSBiyPGwT3gXtliZBWrmaTfMi3G4UW/Q6y7NFeOsNtGpsMA2EFh+
- x6JQ==
-X-Gm-Message-State: APjAAAWgY8HTLesjC3zne5vgdPXEgCy8OkOassvIstoKpXiihwoRQwlf
- E5lWzkP29P78yQxCr873lu2Ohy0mnos=
-X-Google-Smtp-Source: APXvYqzRl5D6ZqnNuk+rXfylnE75AkhzlKz0Y8aXJybgVHyVvreoWH3wAYgmcknEq1VHeKbcBvbfnA==
-X-Received: by 2002:a17:902:e208:: with SMTP id
- ce8mr13116973plb.205.1561116427729; 
- Fri, 21 Jun 2019 04:27:07 -0700 (PDT)
-Received: from amitkuma.pnq.csb ([125.16.200.50])
- by smtp.gmail.com with ESMTPSA id bo20sm2626750pjb.23.2019.06.21.04.27.05
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 21 Jun 2019 04:27:06 -0700 (PDT)
-Subject: Re: Every-time Pipeline failing [Pulling docker image
- gitlab/gitlab-runner-helper:x86_64-58d8360f .. ERROR: Job failed: execution
- took longer than 1h0m0s seconds]
-To: Andrew Bartlett <abartlet@samba.org>, samba-technical@lists.samba.org
-References: <1b05eb02-d234-1d70-ecba-3fc8b3da57dc@redhat.com>
- <5d99326e-ebee-ae3d-a882-b1ae68fb1b8e@redhat.com>
- <046412e248fe9e2ed537e0b92b56e202364a97e1.camel@samba.org>
- <bab720e0-d204-b0c8-4da6-5917bd659bf3@redhat.com>
-Message-ID: <ec365071-a5d9-34f4-fdcd-812c39af2a62@redhat.com>
-Date: Fri, 21 Jun 2019 16:57:04 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+ (Exim) id 1heMdw-0013jI-1I
+ for samba-technical@lists.samba.org; Fri, 21 Jun 2019 16:44:05 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=uDfVC9CXj6To81Md55wNMZz9owH5xvPtd8lzgvHvzRw=; b=DIcKZcc+ls6HUxFN6aG0k0DEu1
+ QFl3E/bhqMFhBR0Q6tyLYz7t9kWU8hT9P+Mp162iCaN3JvvuSJW7gaIACa2R/MMb3NSnb7ViY5jnR
+ 3sN7+aqR43NGyMZPtRWCs9CDL+Kyc3/kcradCI1VXVaMFf7oF42T5zKDCyJAhWq8kIgA=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1heMdv-0006fU-0u; Fri, 21 Jun 2019 16:44:03 +0000
+Date: Fri, 21 Jun 2019 09:43:58 -0700
+To: Andrew Bartlett <abartlet@samba.org>
+Subject: Re: Document GitLab as the only way to contribute to Samba?
+Message-ID: <20190621164357.GA10488@samba.org>
+References: <1561079117.28284.21.camel@samba.org>
+ <20190621111436.342f713e@martins.ozlabs.org>
+ <1561082290.28284.28.camel@samba.org>
 MIME-Version: 1.0
-In-Reply-To: <bab720e0-d204-b0c8-4da6-5917bd659bf3@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1561082290.28284.28.camel@samba.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,46 +52,32 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Amit Kumar via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Amit Kumar <amitkuma@redhat.com>
+From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christof Schmitt <cs@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hey Andrew,
+On Fri, Jun 21, 2019 at 01:58:10PM +1200, Andrew Bartlett via samba-technical wrote:
+> Christof,
+> 
+> You are the other person I still using samba-technical much at all to
+> submit patches.  Is there anything I can do to help you make the move
+> to GitLab, or is there anything stopping you?
+> 
+> Thanks,
+> 
+> Andrew Bartlett
+> 
+> [1] Attached is the histogram of patches on samba-technical from April
+> -> June, for the curious.  
 
-Can you please review this?
-https://gitlab.com/samba-team/samba/merge_requests/524
+Hi Andrew,
 
-Thanks
-Amit
+i might have been slow in adapting to gitlab, but my last patches went
+only through gitlab. The quicker feedback on the autobuild results and
+the verification across different Linux distributions is very helpful.
+Right now i don't see a reason not to use gitlab.
 
-On 06/20/2019 04:41 PM, Amit Kumar wrote:
-> Hey Andrew!!
->
-> Great Success this time. I am Happy :)
->
-> https://gitlab.com/samba-team/samba/merge_requests/524
->
-> Thanks
->
->
-> On 06/20/2019 12:46 PM, Andrew Bartlett wrote:
->> On Thu, 2019-06-20 at 12:38 +0530, Amit Kumar via samba-technical
->> wrote:
->>> Dear Devels,
->>>
->>> My pipeline(https://gitlab.com/amitkuma/samba/-/jobs/235933064) keeps on
->>> failing on "samba-ad-dc-2" test case.
->>>
->>> Pulling docker image gitlab/gitlab-runner-helper:x86_64-58d8360f ...
->>> ERROR: Job failed: execution took longer than 1h0m0s seconds
->> In your project settings, set the maximum pipeline time to 6 hours. 
->>
->> Or join the shared development repo which will run the full testsuite
->> (overkill for docs, but good for next time). 
->>
->> https://wiki.samba.org/index.php/Samba_CI_on_gitlab#1_hour_Timeout
->>
->> Andrew Bartlett
-
+Christof
 
