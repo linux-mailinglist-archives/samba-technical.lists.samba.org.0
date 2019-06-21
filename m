@@ -2,40 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDCC04DE50
-	for <lists+samba-technical@lfdr.de>; Fri, 21 Jun 2019 03:06:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BFB804DE58
+	for <lists+samba-technical@lfdr.de>; Fri, 21 Jun 2019 03:14:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=1fpwU8D/bOM7aho15h3UOTW0KC06u1f6/QbgI9gjYN8=; b=iXAD1MV3Ku06QoE+GpUKS79wyn
-	dCZt34bwAcdlnluJzwo+OET1DZrC0r6NqtlcpOkeNHUVeQT+wT01pXHVxmRI9sp6jzydqDl0yNRe8
-	V+YGZGKelKi41BSV9DUpZlv1aO3WrxeUyRKNt4euQcYbjdpOKvzC0G1TxAUV9pOBXOKW32y9PDnMW
-	6oKGwx5LXHJ84j+VJeCx/LBx5xixOBj+aBrlnx2E1FuyzrWWr100iZ75AXVRmtxoZsgWjG0OJ9pIG
-	Fr/MUTM9Zd0tFWtnPSS7OqVRnbCAmyijbrVx/QMZq4xiQlK1emM039396qiyNWWZxVcZ/BhEY0b3A
-	CVC3yX/w==;
-Received: from localhost ([::1]:46928 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=gQBisMtFz6dVHCgim5v1hFT3qR9PRGz+k1gk++VnIAg=; b=F4KHtT9ks20ghi2HF3lF8RlySf
+	v1I7rKIasJUNSaJK6GfWH8s7YWQMWBnqASInljgH+CdDMpjmA4UlgS3oDplB8UXGSeuH2pcL8QSkl
+	tSOphd/+WO5YbtQtJyEQwbAvpbtZ94zkwu+NiVKYR7en7I476hrXWRlxvBk1lZSyJfM1/Yfo0sLdC
+	hiB/CsjZ3tzxzakgzSYYUvnZS1HVY/RIbI5nx97J+AVgpFmXGZZRvdQE2T6CRQnr8NHo0+fM1z4VT
+	I4Ku5PwL4eEdokcHCMZ0DjcfOsEPlaGl02i7iz76jsMfTMmCKqrv+p3L3T6pAZJUwVqeQjgV67Lio
+	bgxQ4IvA==;
+Received: from localhost ([::1]:47684 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1he7za-000qJq-VL; Fri, 21 Jun 2019 01:05:27 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34850) 
+	id 1he88f-000qQ6-Ev; Fri, 21 Jun 2019 01:14:49 +0000
+Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:36581 helo=ozlabs.org) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1he7zW-000qJj-AU
- for samba-technical@lists.samba.org; Fri, 21 Jun 2019 01:05:24 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:To:From:Message-ID:CC;
- bh=1fpwU8D/bOM7aho15h3UOTW0KC06u1f6/QbgI9gjYN8=; b=aIM1ekArIbVBeL1EqIDDzB8J0P
- gOCJpzF0/uaPdfNNIwTKJ4WzprsdhTMMiQcwPkYMobQfnrOCW85mbFppl+80aMyUlllvUiRr+NjIx
- 8k0uWn9f4InY5WoX6O4+4Av6OjYaMA6QKaZBQxOPfUfTFoi4KVSI3lMYBajaXxoG5Kvc=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1he7zV-0003VQ-A9
- for samba-technical@lists.samba.org; Fri, 21 Jun 2019 01:05:21 +0000
-Message-ID: <1561079117.28284.21.camel@samba.org>
-Subject: Document GitLab as the only way to contribute to Samba?
-To: samba-technical@lists.samba.org
-Date: Fri, 21 Jun 2019 13:05:17 +1200
-Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAACRklEQVRYw81YS67DIAwkVe8FPRm5menJeAu3lmUCbyBGKqsmRXjwb8Y5aq3hl9Yj/Nh6Tu0upZRS+EdKiV+e5+mJqMKLiHLORBRjzDmbc/hlvb1QD2k3sG84+dhhvF6vlzymlNY8dyBJzUdLjAwyvaeU8n6/2WHpu/xDRkREJI8cOBMgfuRQxhj58JzzbBwhQDFGA07M6/efE0MQxDHGFvpdQHy6MUxqtU4yezRcH0B4GfbM44BWGqOurF6Omz140a0ASimJvdbwZT32XrpRh5yuwY1d0vPrdNkv91+T8uBRG8l1uiX+JtsHxPNIWE27ugwTctTdHCIiYXvuy4P7IDl0CxAzl2xgZTJwgw+g3kGaHwYh5g2sljyrjIVEq4pYBg2Kq3yXZ5WxjfO7zF9jRdXrnLcEmlbTRnNpcT0gvpTScUC2HlOE2ipAvPuJanMT+Xc0PC4dFzu1DEO4HgczaS5kOnZ4vM7zxNU+mtRyRVPDgqyX3cdx8AQCCrQnfkV9VzMA9Ryg3ek8Sgsg3QX+nbz03Og5l10ytp6HusQUwpjd1rnsksbHlhjuVGdBAbWzIiJu5MvEFkA6OkiwBO4uQL3ADeQ9b57t74+FBo1s47IqpVxqBDcuQ66r94QQJOH2ctnAf9oZtdbZYejpi2bQEveO0sb2JXu09OJJrnpil4SV5G2N6Y+1QjL+gHSKDApHJoJWF3hW2fInh6lutGW216OPRBZtRZscwyQvI+KuTj3rp4VP1VsAcTobxgDngukqm3LPgmL8A4m377Y5OvTKAAAAAElFTkSuQmCC
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.22.6-1+deb9u2 
-Mime-Version: 1.0
+ (Exim) id 1he88a-000qPz-R9
+ for samba-technical@lists.samba.org; Fri, 21 Jun 2019 01:14:48 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 45VLM12VTXz9s6w;
+ Fri, 21 Jun 2019 11:14:37 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
+ t=1561079677; bh=4bwT6jxqj7KGm08Mr1ydgQFK3sCcigriSpCbBqKZ3f4=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=muLu3NGqOOqCenoondbpBdkLX57Rbn2ZCR9rjEeOBoLOMCKyIBE8ZZtaJtWz4dqbL
+ kiUiSuANdGq8T7eclBteJuPcGaOZeGctsqJQJlAdsbFQqe+8dv1O5YjT5V6uKu3xlv
+ lstCV6oro4uCq7ITEhx9Z4pg0hDVw40/Rkra2NTEFchjxQR2cCQodr3HdH5pzqi6cG
+ 9XlRzj3CIGMtENqshVNJZ+uGhlshqr8VqGBsLTMAENQwOUG5/pHD/cfGBSyQP5f4AE
+ akmpv7jwxmkN1/dOSoncEJVWPUcjQicdt2EPNs6V1fWs/HhEl9kevg6mFvF0+64t7a
+ zwWEBqZpCAFrQ==
+Date: Fri, 21 Jun 2019 11:14:36 +1000
+To: Andrew Bartlett <abartlet@samba.org>
+Subject: Re: Document GitLab as the only way to contribute to Samba?
+Message-ID: <20190621111436.342f713e@martins.ozlabs.org>
+In-Reply-To: <1561079117.28284.21.camel@samba.org>
+References: <1561079117.28284.21.camel@samba.org>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -50,57 +57,55 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-G'Day all,
+On Fri, 21 Jun 2019 13:05:17 +1200, Andrew Bartlett via samba-technical
+<samba-technical@lists.samba.org> wrote:
 
-I gave a talk at SambaXP about our first year with GitLab, and one
-point I made is that it is *not OK* to have public contribution
-documentation that does not match our actual practice.
+> I gave a talk at SambaXP about our first year with GitLab, and one
+> point I made is that it is *not OK* to have public contribution
+> documentation that does not match our actual practice.
+> 
+> I was talking about GitHub, which we advertised but did not embrace
+> (and which by the end caused new contributors to be told off,
+> essentially).
+> 
+> I've recently found myself doing the same thing!  But now I'm berating
+> contributors who follow our public documentation and so innocently send
+> patches to samba-technical, or attach them to bugzilla. 
+> 
+> So, I would like to propose this.  That given the practice of the Samba
+> Team and almost all contributors is to contribute via a merge request
+> against https://gitlab.com/samba-team/samba that we document this, and
+> only this, as how to contribute to new patches to Samba.
+> 
+> This is only one tiny step in a process to have clear, practical
+> contribution instructions, but I would like to ensure we agree on this
+> much.
+> 
+> Essentially it would mean a better version of this being prominently
+> placed:
+> 
+> https://wiki.samba.org/index.php/Samba_CI_on_gitlab#Creating_a_merge_request
+> 
+> and updates to:
+> https://wiki.samba.org/index.php/Using_Git_for_Samba_Development
+> 
+> Non patch, meta and broader architectural discussions still belong on
+> samba-technical of course. 
+> 
+> Any thoughts?
 
-I was talking about GitHub, which we advertised but did not embrace
-(and which by the end caused new contributors to be told off,
-essentially).
+I don't think it is the practice of the whole Samba Team.  I haven't
+managed to get into the GitLab workflow, though I have used it.
 
-I've recently found myself doing the same thing!  But now I'm berating
-contributors who follow our public documentation and so innocently send
-patches to samba-technical, or attach them to bugzilla. 
+Perhaps I'm the only one, but I don't think we should be mandating this
+(yet?)...
 
-So, I would like to propose this.  That given the practice of the Samba
-Team and almost all contributors is to contribute via a merge request
-against https://gitlab.com/samba-team/samba that we document this, and
-only this, as how to contribute to new patches to Samba.
-
-This is only one tiny step in a process to have clear, practical
-contribution instructions, but I would like to ensure we agree on this
-much.
-
-Essentially it would mean a better version of this being prominently
-placed:
-
-https://wiki.samba.org/index.php/Samba_CI_on_gitlab#Creating_a_merge_request
-
-and updates to:
-https://wiki.samba.org/index.php/Using_Git_for_Samba_Development
-
-Non patch, meta and broader architectural discussions still belong on
-samba-technical of course. 
-
-Any thoughts?
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT   
-https://catalyst.net.nz/services/samba
-
-
-
-
+peace & happiness,
+martin
 
