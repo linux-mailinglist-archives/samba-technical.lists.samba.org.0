@@ -2,43 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 953D94EEC6
-	for <lists+samba-technical@lfdr.de>; Fri, 21 Jun 2019 20:28:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0159A4F3B4
+	for <lists+samba-technical@lfdr.de>; Sat, 22 Jun 2019 06:32:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=UKhRIgAYEfZr/FRHhY92Ph4iHfFIa2qW4DP2bJCJvp0=; b=4F7j0rdN6r9dklmPUxATvhK5pB
-	sSm0c/v44q3SbCGIM0TtGzX9lroRDqADgA9ysY5bsGrmiWBWwl0WAHQyMOJ/s5jgXKX4A9rtiZtjf
-	DbbF8JDoe8nCmpXsdhTQCBXaG3l0IZfYXwdC/zKy0uA0eZSjW/cLlZEYe/mfDdKL94UNH6xH4OfRY
-	itTqE7JzTCIcIlDL71WLvu/GYSLsz+Rk0yPQRf0K5wkDv2jCrwKsZxFfRMV0BqOiA2PdzA6TyjlJ1
-	n8Y/6JPpB8HMQovQyp6z8ugP+u0aolZ+yJYeqonQ3TZUrXDwQc9i+EjRItw/kZFcNnxEgcx1uZylp
-	48RL+pAg==;
-Received: from localhost ([::1]:41648 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=iS1ZGpBwKPp81BYsKgWBhUKLodh9XaHkZo4ejGFDvjY=; b=2bY9elPD/dtqKMFegYGbjoAofl
+	qC7r2LQVkah1oW9Pvs6vDPcDLWkWsNZBQwXldLgV0sWmHey65xRNPTeO7arqGZ44+sAyMAdfjcFdf
+	Epar5nEzcrucstZd0PLf+Z9F2YAN/K9awKBNUj1qwqWCMin8fX1XUbWJvwmNI8DGHjipt3/2GwADB
+	GocqPbGOSHyW1k4loh+obzmJMlPa6lv8E8oEVNw0F20a5AY7jxRqpN6SW+0oTsKI+FXCINE4iIYxe
+	EU56vd+mUoWfbAb3sGCl5BQU7vcQjD6wIzSZaCj2DKbGSemj3NIelb9xwTUcAQLX+DJbd/66CLdBE
+	9iol+UOw==;
+Received: from localhost ([::1]:45204 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1heOGh-0014f7-OX; Fri, 21 Jun 2019 18:28:11 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20888) 
+	id 1heXg6-0015sg-Nv; Sat, 22 Jun 2019 04:31:02 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35820) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1heOGd-0014f0-VQ
- for samba-technical@lists.samba.org; Fri, 21 Jun 2019 18:28:10 +0000
+ (Exim) id 1heXg3-0015sZ-5I
+ for samba-technical@lists.samba.org; Sat, 22 Jun 2019 04:31:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Cc:To:From:Message-ID;
- bh=UKhRIgAYEfZr/FRHhY92Ph4iHfFIa2qW4DP2bJCJvp0=; b=fQrZAkCf/M8l/ELDR2Nw67G92V
- yxnZXV01gtgugZfAREluPIViYCx1NspflXr3mdtdtvT5tqHdsfaL+puNysag+wkkn/IB6J5CGub7U
- fFyoe2cxEUxfH5uR1GVZdyU5/q0scWL7TF/n0mPAae2iXVn8Lr7M6p6/zH5HnwZgg6+k=;
+ s=42627210; h=Date:Message-ID:From:To:CC;
+ bh=iS1ZGpBwKPp81BYsKgWBhUKLodh9XaHkZo4ejGFDvjY=; b=JUKn3XXjj+vlQBpP9nmxFjTcxe
+ 0xA4egCbVBx1dLkWH+6vwAmDwrj/oMZIRay999+3RgBLhGEFb9rB+XYihlRJv2z2PrcTNQKgx7Lah
+ HaEWshlIaNGy/0O6IZaYPoIICXi4l0Ekj9RuDmCfSht86lpSdGKUO72Iu0isPc/M7HFs=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1heOGb-0007n3-OS; Fri, 21 Jun 2019 18:28:06 +0000
-Message-ID: <8d6f3d4789e15dec9863c1eb9797497892dafd3e.camel@samba.org>
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1heXg2-0004bn-2C; Sat, 22 Jun 2019 04:30:58 +0000
 Subject: Re: Document GitLab as the only way to contribute to Samba?
-To: Christof Schmitt <cs@samba.org>
-Date: Sat, 22 Jun 2019 06:28:01 +1200
-In-Reply-To: <20190621164357.GA10488@samba.org>
+To: Andrew Bartlett <abartlet@samba.org>, samba-technical@lists.samba.org
 References: <1561079117.28284.21.camel@samba.org>
- <20190621111436.342f713e@martins.ozlabs.org>
- <1561082290.28284.28.camel@samba.org> <20190621164357.GA10488@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Openpgp: preference=signencrypt
+Message-ID: <1335d0cf-bb13-6fcc-a4ea-75e6d4345cf5@samba.org>
+Date: Sat, 22 Jun 2019 07:30:51 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
+MIME-Version: 1.0
+In-Reply-To: <1561079117.28284.21.camel@samba.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,38 +53,74 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Uri Simchoni <uri@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2019-06-21 at 09:43 -0700, Christof Schmitt wrote:
-
-> Hi Andrew,
+On 6/21/19 4:05 AM, Andrew Bartlett via samba-technical wrote:
+> G'Day all,
 > 
-> i might have been slow in adapting to gitlab, but my last patches
-> went
-> only through gitlab. The quicker feedback on the autobuild results
-> and
-> the verification across different Linux distributions is very
-> helpful.
-> Right now i don't see a reason not to use gitlab.
+> I gave a talk at SambaXP about our first year with GitLab, and one
+> point I made is that it is *not OK* to have public contribution
+> documentation that does not match our actual practice.
 > 
-> Christof
+> I was talking about GitHub, which we advertised but did not embrace
+> (and which by the end caused new contributors to be told off,
+> essentially).
+> 
+> I've recently found myself doing the same thing!  But now I'm berating
+> contributors who follow our public documentation and so innocently send
+> patches to samba-technical, or attach them to bugzilla. 
+> 
+> So, I would like to propose this.  That given the practice of the Samba
+> Team and almost all contributors is to contribute via a merge request
+> against https://gitlab.com/samba-team/samba that we document this, and
+> only this, as how to contribute to new patches to Samba.
+> 
+> This is only one tiny step in a process to have clear, practical
+> contribution instructions, but I would like to ensure we agree on this
+> much.
+> 
+> Essentially it would mean a better version of this being prominently
+> placed:
+> 
+> https://wiki.samba.org/index.php/Samba_CI_on_gitlab#Creating_a_merge_request
+> 
+> and updates to:
+> https://wiki.samba.org/index.php/Using_Git_for_Samba_Development
+> 
+> Non patch, meta and broader architectural discussions still belong on
+> samba-technical of course. 
+> 
+> Any thoughts?
+> 
+> Andrew Bartlett
+> 
 
-G'Day Chrisof,
+Speaking for myself, this thread brought to my attention that Samba
+development is no longer happening on samba-technical mailing list. I'm
+all for gitlab, but had the notion that you post an MR *and* write to
+samba-technical, which was certainly true 6 months ago. By moving to
+Gitlab without proper notification you've lost me as a reviewer (and I
+do make occasional reviews in places where I was involved). I'll take
+the proper measures to get back on-board :)
 
-That is great to hear.  Thank you so much for the positive feedback!
+So a clear statement *is* in order.
 
-Andrew Bartlett
+A bit off-topic, and maybe the following concern has been raised and
+answered. My gitlab experience is a bit dated so maybe things have
+changed, but it seems to me that the mailing-list style of review keeps
+a better track of the decision process that led to the way the code is
+(and I for one used the samba-technical mail archive more than once for
+that purpose):
+a. With online tools, a revised MR may trump the comments made by the
+previous version.
+b. How to find the MR from a commit hash to see those comments.
+c. All this information (MR comments) is kept outside our control and
+may not be available should we decide to move away from Gitlab as a
+hosting platform.
 
--- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
-
-
-
+Thanks,
+Uri.
 
