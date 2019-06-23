@@ -2,47 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E0FF4F7F4
-	for <lists+samba-technical@lfdr.de>; Sat, 22 Jun 2019 21:34:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B33C4FDFF
+	for <lists+samba-technical@lfdr.de>; Sun, 23 Jun 2019 22:29:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=KC+19wjrDyV/hPKtN2f5znaLyMTbl5JeFD7f/GoBGLg=; b=NK9+zl/GKOLbbmcP6Iv3TpVeyl
-	wmtrC6VO4za9n67DE0VsrZnxnCw1EY4zUk83zEAXsk3+X2rDmOZ86gHHBxWolGl6wECC6gcMFQq6k
-	m6j7QLRLCT8xs+tgrB8avFYFvtrGYA4oEa25JeRILGhh+EAeac8aHnxyq2M4XfPpyulVEugs8fmGg
-	PzilnTicCPi5mOQuou3KnbHd27Gq6UvIB7VEc7CZ6MDAResc1ttGcF4YhWrghzcuO6Qwkco+c0svT
-	BUrvsw2+qkP4toSPjNvaXWCQ/lrq4aNwHGl2LvwvsruZCyWX/Y0FBT3M1M2tG0IKYL+1ZvX1pFyq2
-	M0yKA2Qw==;
-Received: from localhost ([::1]:49950 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=JNsVk+PoVxv/xvXeURpk8PxzJAf5IHyq/NLRYqAr0tU=; b=f2q2RnA/buV9Sgut4HhydhwII/
+	jzCxyHAYEOzjUqtSBbybxfQY8B2iOzc8Wp6Q/UH6nx1pRwxN6gPzsbFJ48e8k65PSkOSFK5OWG26X
+	UvHJUrcLJ4oXZpmzHA0QFBMlFhFgOnEwwASHze5V/FFQBqVSyECrqzCEDjL7UHf2iRVVkeCy98a12
+	xVv/p/RxgGvPz4yveFred1iCURzAzccep+eqLgcRI+7OIRMYnqpZHw+9kXDMDBnLw8vr1y9fGtKNH
+	7gl/XiG+H6dR4t9+d00IEDWKFt4+Rzb6fiBZf4WmKIv303Jpdjyvy2W0JgvX2IHPd/3OeAnutP5X8
+	oYcb+sgg==;
+Received: from localhost ([::1]:54284 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hellV-0017sg-83; Sat, 22 Jun 2019 19:33:33 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26946) 
+	id 1hf963-001JVp-5G; Sun, 23 Jun 2019 20:28:19 +0000
+Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c]:47079) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hellN-0017sZ-Tu
- for samba-technical@lists.samba.org; Sat, 22 Jun 2019 19:33:31 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:To:CC;
- bh=KC+19wjrDyV/hPKtN2f5znaLyMTbl5JeFD7f/GoBGLg=; b=gdX0unOfIIYiWtXcVYDW/9rQA/
- oaq4zEZrCR/EWqbekNTNGJafBBCBlnRBvs4d8KU+4SA7LJz5UlGvh7H1pJgADQsg8EK9eg3wsMtys
- qKD55FSYIwGriPWo10hegHXXS1WU75sA1CVJdTJwYtTU9c4ehR8g3VVOZcYEQnt9ntUQ=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hellI-0002lp-EC; Sat, 22 Jun 2019 19:33:21 +0000
-Subject: Re: WANTED: gitlab automation help (was: Re: Document GitLab as the
- only way to contribute to Samba?)
-To: Andrew Bartlett <abartlet@samba.org>, samba-technical@lists.samba.org
-References: <1561079117.28284.21.camel@samba.org>
- <1335d0cf-bb13-6fcc-a4ea-75e6d4345cf5@samba.org>
- <71ad9ba3182d72cc7ec7f398d5f61368b5434169.camel@samba.org>
-Openpgp: preference=signencrypt
-Message-ID: <0f6ef568-693e-6e16-e839-85e78b7b297b@samba.org>
-Date: Sat, 22 Jun 2019 22:33:04 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ (Exim) id 1hf95z-001JVi-3I
+ for samba-technical@lists.samba.org; Sun, 23 Jun 2019 20:28:17 +0000
+Received: by mail-lj1-x22c.google.com with SMTP id v24so10516267ljg.13
+ for <samba-technical@lists.samba.org>; Sun, 23 Jun 2019 13:28:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=pBaEeT3o4yIlY+tlMK+IAA24fbRDLcCAwHL2f6CuIos=;
+ b=N29KyTK+Q4uxh9tC5n29QwsjlPEwAk/Xo8upZiQ0MAXUdGxHzoS4UjgvYMggLo8pY9
+ MKNVpRwzDLUB+Na/oA0JyXeYI79RT9CaQlIz37E/hQltbm+Aw8HGkFJiDumNVIARS6jr
+ qFqvhCSn1f++lruS/dUJsHn5SGTT8hrj5P88gdr2b7H8y+ZGjzwQ2ahkXnBYXWd1RzO9
+ NXp4SXsxG9nt4Y9AIkgaSCliYOKSLhAQlcjWU5SpLoAvpESm1XRIGi/crBejIx9JKhEk
+ g/PKrWVU/8vuc+IDAuL19hsRI4opGhDtlG0dW9NTtT16IADxmVaybiQjD21s88c/3sm8
+ mPDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=pBaEeT3o4yIlY+tlMK+IAA24fbRDLcCAwHL2f6CuIos=;
+ b=eTdnDT2Q06ZYmdT9+vErtDkAGbyDcyQsH8FIiAyDGE3b8C8H3f+Z1S4/mSdSENgJ+z
+ rTEyZeZG9Ysf0rRXDPRM0dzfxXWXtNDZjBUUmXKsN3vAiE36fTYFODKk2OVsnoZDfMZr
+ cH10TYTwDvDLsuv9dcTikoqjyzXlPcAfcKvqbkMJchO2D3K2uuPB1mK4w3DEwer9IzOS
+ 8ETXL7TZS9PKiZSAIXGo8lP3QCBqlN364+hAtw+HXHlRKSQRbwcbZCsX3344htC+4ZW2
+ /JvjWk9GOO70tKjKWI+hrpJOMjiC+va5dm8GTechi2alFpg6/Z7JT7cJoDlw6Ry4nBOi
+ gRNQ==
+X-Gm-Message-State: APjAAAWoYT2UkcuUOyo5I6XvZOSjnAL94lAoW4RBBNE/Q5FOHwV+glCh
+ B5Nfek0V653Gg3g29pXqQoI2osWr1oN7fU/xegl8qru7yhs=
+X-Google-Smtp-Source: APXvYqz3z59KlSrN9+fYSCsGmh/Y1rNmHdRh2wyoZ90eH77PFUZZZrDjx43na52u+mYUQ/UjEM1cjIwzilfdfDDj0To=
+X-Received: by 2002:a2e:654d:: with SMTP id z74mr64110003ljb.111.1561321692697; 
+ Sun, 23 Jun 2019 13:28:12 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <71ad9ba3182d72cc7ec7f398d5f61368b5434169.camel@samba.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Date: Sun, 23 Jun 2019 21:27:28 +0100
+Message-ID: <CAELK94fKWJbPPWD9+jFzvW9tr1yN-JFry0FreqTbAshMU_Dhxw@mail.gmail.com>
+Subject: GSOC 2019 : Improve smbcmp - Week 1 & 2
+To: P Mairo via samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,59 +65,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Uri Simchoni <uri@samba.org>
+From: P Mairo via samba-technical <samba-technical@lists.samba.org>
+Reply-To: P Mairo <akoudanilo@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 6/22/19 8:04 AM, Andrew Bartlett via samba-technical wrote:
+Hello, a summary of my activities since the beginning :
+Week 2 :
+- Set up IDE : I'll using spacemacs with python layer and a few others
+useful layers
+- Read documentation about curses with python and practice with some sample
+codes
+- set up local repository with remote origin and upstream and a branch
+corresponding to the feature I'll be working on the next week : highlight
+diffs.
+Week 1 :
+- set up test environnement : compile samba from source (with mentor
+guidance) and test capture with smbcmp.
 
-> On Sat, 2019-06-22 at 07:30 +0300, Uri Simchoni wrote:
-<snip>
-
->> a. With online tools, a revised MR may trump the comments made by the
->> previous version.
-> 
-> The history of pushes is included in the history of comments on the MR,
-> if that is what concerns you. 
-> 
-
-Yes, that's really good. Much better than Bitbucket/Github.
-
->> b. How to find the MR from a commit hash to see those comments.
-> 
-> Currently this is just as poor as finding the mails on samba-technical, 
-> but there is hope.  We either need someone to write a script to watch
-> the merge requests for the closing comments mentioning a git hash and
-> to tag that commit with a git tag named after the merge request (eg
-> gitlab-mr-456) and containing in the text:
->  - the URL of the merge request
->  - the test of the merge request description
-> 
-
-That would seem (to me) as a non-idiomatic use of the git tag system for
-something not *that* important. Perhaps a simpler approach to both b.
-and c. would be to channel the samba-team-bot emails to a special
-mailing list that gets archived and can be browsed via lists.samba.org.
-
-<snip>
-
-> We also need help to automate the backups from GitLab.
-
-I ran a short test of that - create my own small repo, review and merge
-an MR, export the thing, setup a local gitlab instance, import. It
-doesn't fully restore the state of the repo. MR comments are now on
-behalf of the user who did the import (root), with the original
-commenter mentioned in an additional line. I didn't get all versions of
-the MR, "likes" are gone.
-
-As noted above, maybe it would be more practical to make a mailing list
-out of the MR discussion and archive that.
-
-I'd be happy to help with automation but I'm currently not buying into
-those particular automation tasks (I can do the backup if I understand
-what we try to achieve by that and can demonstrate that we achieve it).
-
-Thanks,
-Uri.
-
+-- 
+https://github.com/RMPR
