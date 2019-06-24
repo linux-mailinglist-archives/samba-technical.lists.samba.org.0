@@ -2,42 +2,69 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D052951B1E
-	for <lists+samba-technical@lfdr.de>; Mon, 24 Jun 2019 21:03:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A9AA51CE0
+	for <lists+samba-technical@lfdr.de>; Mon, 24 Jun 2019 23:13:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=sXmv0rmoVJ0UFhnTzdQARYWS7+Af9W+ln3++XJeZKAs=; b=IdUeOPblB8vZF/CLe4CLh24Hfq
-	XaIQzKnY6DYH9ICtsBaPWgeDFAfkzj4zcFrTvBRl205byRUS80yVWwr+8i6qRL65+5m1yU/0LoTW4
-	cGG+rx2OzgZ56HawvJXjmg1o5ANzEh1AREuyb7fdVdsNjkvGRvKH6lc+dZos7yVI+0GQ81mqJTTRI
-	9vvx4eo7ypUYef6/IRIDZ7NDnvamQiH5yJ3T7eE+PC1wHY+DJx961fmcuQmEHXwKymkkQctHiwIsU
-	bBgmOeWtezB01L3upPMmfoHGqrc8KwUcavEY0FXD7/qBiCmrnNHyLNU3XFqvzrr5F1GDzrdFeou5n
-	Je6iztng==;
-Received: from localhost ([::1]:34762 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=4QYjvBtAm4Rrim9T565/WyudQA7YDmZM1PZlexLvVa4=; b=LWDIPndBfFezhge4IFte4Tgi1w
+	YqHm2ufCdjW0xCPLzFSM6U1bYxN8MiTKnHShmXqGHkxP3YLcm522p0PRPmVxHC2QleRSPXNFYlcYn
+	af0ov93//x5SYQ7yR2mN9NHsTEde1SPzjSXAZgnDuxmMbfkD3oRFwjwETKE2h3KDZSWvqDfrC7xLq
+	DxH59iStzkFaFyu83mR25JkAEUWc6rnOY1fmywK6XiP8NsTdupOvAQkUDkt8sYQEV3Lg0bjQoXSSg
+	7n86omfwwSHm5OrbFl540zV7THi1RhkXMkysCebkwjzGc0EsWuOTSpTNMQqARkVW1ZEemwAcuhroU
+	tfCrYZ0Q==;
+Received: from localhost ([::1]:35836 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hfUEn-001WWo-CY; Mon, 24 Jun 2019 19:02:45 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13004) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hfUEk-001WWh-3D
- for samba-technical@lists.samba.org; Mon, 24 Jun 2019 19:02:44 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=sXmv0rmoVJ0UFhnTzdQARYWS7+Af9W+ln3++XJeZKAs=; b=iNYrUYfgQAIWFuayPUnKySmHiw
- YneD7/bY4dVAGsbyNkk8Fn85qG8PTJgo3YYcDdKxkzlTYA8ZzG7p0cM54IsKvNIbG/LdFaKe7oukk
- YEFJx7mrMdFmW/Tar4sdcTklsurJo16/wVZzChdC986WjCgbhukwGYyRRa6J5DJMObpw=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1hfUEi-0001Rc-KK; Mon, 24 Jun 2019 19:02:41 +0000
-Date: Mon, 24 Jun 2019 12:02:37 -0700
-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Subject: Re: xfstest 531 and unlink of open file
-Message-ID: <20190624190237.GD3690@jeremy-ThinkPad-X1>
-References: <CAH2r5mv+oqGxZRkV_ROqdauNW0CYJ7X9uJCk+uYmercJ4De41w@mail.gmail.com>
- <CAN05THTqP+_uSEPq2FqBEnV8FeuutaHASznH6iBDS=C0hCD=kQ@mail.gmail.com>
+	id 1hfWGG-001WwC-Qn; Mon, 24 Jun 2019 21:12:24 +0000
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:58874) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1hfWGB-001Ww5-Fi
+ for samba-technical@lists.samba.org; Mon, 24 Jun 2019 21:12:22 +0000
+Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x5OJutpb086749
+ for <samba-technical@lists.samba.org>; Mon, 24 Jun 2019 16:01:54 -0400
+Received: from smtp.notes.na.collabserv.com (smtp.notes.na.collabserv.com
+ [192.155.248.91])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 2tb1vjrbj8-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <samba-technical@lists.samba.org>; Mon, 24 Jun 2019 16:01:54 -0400
+Received: from localhost
+ by smtp.notes.na.collabserv.com with smtp.notes.na.collabserv.com ESMTP
+ for <samba-technical@lists.samba.org> from <Christopher.O.Cowan@ibm.com>;
+ Mon, 24 Jun 2019 20:01:53 -0000
+Received: from us1a3-smtp02.a3.dal06.isc4sb.com (10.106.154.159)
+ by smtp.notes.na.collabserv.com (10.106.227.143) with
+ smtp.notes.na.collabserv.com ESMTP; Mon, 24 Jun 2019 20:01:51 -0000
+Received: from us1a3-mail267.a3.dal06.isc4sb.com ([10.146.127.216])
+ by us1a3-smtp02.a3.dal06.isc4sb.com
+ with ESMTP id 2019062420015114-1116995 ;
+ Mon, 24 Jun 2019 20:01:51 +0000 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAN05THTqP+_uSEPq2FqBEnV8FeuutaHASznH6iBDS=C0hCD=kQ@mail.gmail.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
+Subject: SMB2/SMB3 workloads for testing.  (smbtorture?)
+To: samba-technical@lists.samba.org
+Date: Mon, 24 Jun 2019 15:01:50 -0500
+X-KeepSent: 98773EBD:D1411451-86258423:0069EA03;
+ type=4; name=$KeepSent
+X-Mailer: IBM Notes Release 10.0.1 November 29, 2018
+X-LLNOutbound: False
+X-Disclaimed: 5707
+X-TNEFEvaluated: 1
+x-cbid: 19062420-9951-0000-0000-00000D071F05
+X-IBM-SpamModules-Scores: BY=0; FL=0; FP=0; FZ=0; HX=0; KW=0; PH=0;
+ SC=0.423878; ST=0; TS=0; UL=0; ISC=; MB=0.127075
+X-IBM-SpamModules-Versions: BY=3.00011322; HX=3.00000242; KW=3.00000007;
+ PH=3.00000004; SC=3.00000286; SDB=6.01222742; UDB=6.00643412; IPR=6.01003902; 
+ BA=6.00006341; NDR=6.00000001; ZLA=6.00000005; ZF=6.00000009; ZB=6.00000000;
+ ZP=6.00000000; ZH=6.00000000; ZU=6.00000002; MB=3.00027449; XFM=3.00000015;
+ UTC=2019-06-24 20:01:52
+X-IBM-AV-DETECTION: SAVI=unsuspicious REMOTE=unsuspicious XFE=unused
+X-IBM-AV-VERSION: SAVI=2019-06-24 18:55:23 - 6.00010087
+x-cbparentid: 19062420-9952-0000-0000-00003D3923F6
+Message-Id: <OF98773EBD.D1411451-ON86258423.0069EA03-86258423.006E0810@notes.na.collabserv.com>
+X-Proofpoint-Spam-Reason: safe
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,40 +78,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>,
- Steve French <smfrench@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>,
- CIFS <linux-cifs@vger.kernel.org>
+From: Christopher O Cowan via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christopher O Cowan <Christopher.O.Cowan@ibm.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Jun 24, 2019 at 01:44:53PM +1000, ronnie sahlberg via samba-technical wrote:
-> On Mon, Jun 24, 2019 at 1:23 PM Steve French <smfrench@gmail.com> wrote:
-> >
-> > Xioli created a fairly simple unlink test failure reproducer loosely
-> > related to xfstest 531 (see
-> > https://bugzilla.kernel.org/show_bug.cgi?id=203271) which unlinks an
-> > open file then tries to create a file with the same name before
-> > closing the first file (which fails over SMB3/SMB3.11 mounts with
-> > STATUS_DELETE_PENDING).
-> >
-> > Presumably we could work around this by a "silly-rename" trick.
-> > During delete we set delete on close for the file, then close it but
-> > presumably we could check first if the file is open by another local
-> > process and if so try to rename it?
-> >
-> > Ideas?
-> 
-> The test is to check "can you unlink and recreate a file while someone
-> (else) is holding it open?"
-> 
-> I don't think you can rename() a file while other folks have it open :-(
-> This is likely a place where NTFS is too different from Posix that we
-> can't get full 100% posix semantics.
 
-Yeah, this is one of the places you need SMB3+ POSIX extensions
-(and even there we fail it if a Windows open exists on the same
-handle).
+
+In recent years, we've set the MIN Protocol to SMB2, in production, but I
+had not been running that way in my lab.
+
+Since, I have been using smbtorture and bench.nbench to simulate
+workloads, things broke when I made the change to Min Protocol.
+I'm getting "Failed to open connection -
+NT=5FSTATUS=5FINVALID=5FNETWORK=5FRESPONSE".  I'm thinking either I don't k=
+now the
+magic combination of switches, or I'm going to have to change the code a
+bit.    Fully expecting right now, that a different loadfile is needed, as
+well.  (Unless I'm mistaken)
+
+I found two conference presentations in with the SambaXP stuff, but not
+sure that I fully grok things, yet.   My understanding is that nbench is
+just replaying packets previously captured using one of the VFS modules.
+
+I would appreciate any advice for generating a representative SMB2/SMB3
+workload, hopefully smbtorture.
+
+Regards,
+Chris
+
+PS: I'm also looking at dbench, as well, but I having a little trouble
+compiling it on a RHEL7 desktop.   Wading through that, right now, as well.
+
 
