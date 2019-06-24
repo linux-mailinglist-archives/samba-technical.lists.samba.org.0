@@ -2,44 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9ADAB50402
-	for <lists+samba-technical@lfdr.de>; Mon, 24 Jun 2019 09:55:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 46ECF50409
+	for <lists+samba-technical@lfdr.de>; Mon, 24 Jun 2019 09:58:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=j7nqw8wubq/YDkG7klYEUKxakPId7KzYf6yMlivR9Bc=; b=Ov9o9+0PxOCrbAY3TtLuRb546P
-	9l4AjNQZCaks117fYkOmf6WuOc1yAcjaJrQ8ittTCAIb81wLXEcLhTQadKV6PWUD3j6Zj8wnCRxBv
-	HOXGaUDlNOc/0cexmJBFuIWfxc3YYssgXnDqejf5yXdOPJA3SQlqSYUV+Gjz0TgejbciYTand9+sl
-	fWpfV/L352BQ7ynvc7JhM2rZc4yeCrrA7/WZ/KwoLR+pYaxHNHw1r6j7IuV5gx2qqYp5mJPGVS1l+
-	Pr1QzHKz5q4EEYZalEk957041aE2KSGVWFQ5kXOeeCEykGS7QkC/Q5bYzUHDuaNMN2UglFmwArf5k
-	EMqGBrdQ==;
-Received: from localhost ([::1]:32786 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=udaYCsUV5k/QxyDJG0Cdv+5AxoVH8FAsThKRQoMxLsQ=; b=TR87EIwzjgqOL4WKd9+axvm4WQ
+	QRWQ7L+2c8xS5TQqLQZWlwnBc21yaO+5LzKtxyuiyXpxEgu2Rb3hVVq6eUpM3egdpXH6SfHsLuieN
+	IfxDpTEXrnt/7eet/x6WAs6EMHhrYxikys548Ljy7eAZLHDiWg5VmXeq8/ZREfE0hn9JxHW6zm2jp
+	ckSNMS5eV8ZpieIUgIgMoR+mbBqsWuq/LrnmAwS7MFxyZFg8vTEjy8WbwMESyR22Ymp0IIjbjp02O
+	daRRI9WajJPGids7J5VkF3dIfklYQ/fpJXI87/GhRcyz32hHfrY1canAOq1IrjWQ9zcCD7Z9DW4AC
+	yU3sSKCg==;
+Received: from localhost ([::1]:33580 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hfJoZ-001Odr-2O; Mon, 24 Jun 2019 07:54:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51062) 
+	id 1hfJrz-001Omu-5x; Mon, 24 Jun 2019 07:58:31 +0000
+Received: from mail-pg1-f182.google.com ([209.85.215.182]:36576) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hfJoT-001Odk-Qm
- for samba-technical@lists.samba.org; Mon, 24 Jun 2019 07:54:56 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:To:CC;
- bh=j7nqw8wubq/YDkG7klYEUKxakPId7KzYf6yMlivR9Bc=; b=Jmnua37vMCcF7CNLKXVoMKl/md
- um2YbjUytYLij9lg3W9vGUtig8I5c1euzdLK1cblcbqnFqgb/0UGVMxux0taA/Pj9HqoF+z5C/aNu
- mm80Cqr5w7B2a96/h7Jzh3D6RfIXOxMmrsSkKjb2FYniLm3JOC6sieT6UWx9Mg3gz638=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hfJoS-0002fW-Iy; Mon, 24 Jun 2019 07:54:52 +0000
-Subject: Re: Can we RESOLVED/FIXED
- https://bugzilla.samba.org/show_bug.cgi?id=13142 <EOM>
-To: Amit Kumar <amitkuma@redhat.com>, samba-technical@lists.samba.org
-References: <7b698bfa-3f52-14b9-32ee-f914f49fbf5e@redhat.com>
-Message-ID: <bbfc2ea5-871f-3ddd-2d77-6acec6aa7946@samba.org>
-Date: Mon, 24 Jun 2019 09:54:51 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ (Exim) id 1hfJrv-001Omn-0e
+ for samba-technical@lists.samba.org; Mon, 24 Jun 2019 07:58:29 +0000
+Received: by mail-pg1-f182.google.com with SMTP id f21so6682851pgi.3
+ for <samba-technical@lists.samba.org>; Mon, 24 Jun 2019 00:58:26 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+ :mime-version:content-transfer-encoding:content-language;
+ bh=udaYCsUV5k/QxyDJG0Cdv+5AxoVH8FAsThKRQoMxLsQ=;
+ b=Hy4jN3UJyHSWDV69snucJl+EiydG/JTWEcvx/p6hL+mE3XZISbzmxrn9scqxrMrjlZ
+ QMowMLAQjWvFTy4czBi6ErB/64Q2Dl95WpPvfYLOW/9Dx2HpUle/cLhqVrL2kTE4WXQ+
+ ztTcS2QfU04x9rSQqPFStboOE982AuAQthG9gH0x+0U6p/smCe0ivubUUp8L1ONCqUjp
+ Omx5Uxjvkj7dRynv0pGWBdBZJRPEUkXYzIKmyvmFhSU8GCRG6bi8hBPgY0lQR4+Kk+/3
+ hkE8jYvrAJ51sgIocq9BCqVuuMBPUH4iNL+eVG8YJp2Zd2DZwo7U1hIPImVvXAIMBp9S
+ lZfw==
+X-Gm-Message-State: APjAAAURJPt56UZlmLMyNUA4OTJhJEhz3QftIk1DHWXQquSbxEx4tOL1
+ VsFjT9aw5ouALmUgjbbYArRqMp2jj+c=
+X-Google-Smtp-Source: APXvYqw8M4SkR0T7kSlLOjqWg31vJdkP8/vIi1PpxXqfSgigjly2wJDRrlQRzQt5TpgaS3tHAGqRfg==
+X-Received: by 2002:a63:570c:: with SMTP id l12mr4324156pgb.25.1561363104332; 
+ Mon, 24 Jun 2019 00:58:24 -0700 (PDT)
+Received: from amitkuma.pnq.csb ([125.16.200.50])
+ by smtp.gmail.com with ESMTPSA id u134sm1919243pfc.19.2019.06.24.00.58.22
+ for <samba-technical@lists.samba.org>
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 24 Jun 2019 00:58:23 -0700 (PDT)
+To: samba-technical@lists.samba.org
+Subject: Can we RESOLVED/FIXED
+ https://bugzilla.samba.org/show_bug.cgi?id=11777?
+Message-ID: <121489a2-9794-9084-e0a6-cc23bce7f0c7@redhat.com>
+Date: Mon, 24 Jun 2019 13:28:21 +0530
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <7b698bfa-3f52-14b9-32ee-f914f49fbf5e@redhat.com>
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,17 +66,17 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Amit Kumar via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Amit Kumar <amitkuma@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-done. Thanks!
+Hey,
 
--slow
+Sorry to bother all, But I was just looking for 'net command' issues and
+found some have already merged patches.
 
--- 
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+Thanks
+Amit
+
 
