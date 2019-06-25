@@ -2,50 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A56D252213
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Jun 2019 06:26:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA88E5238F
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Jun 2019 08:31:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=uRf0dWrdC5H1LWg6V+CKqSbe58i7VdyTOB5icBfYg1M=; b=CXzxmlE6hf6kEWB96hIAMfrqGt
-	oc2LrRTFy5ukkelmM8F2TVf9pBINfZ1A57iUsbzMY9gc64kTPFeOq2A65Tx9v8xrhr76BYatOURu5
-	K0UgUREJn8YxcKbbKmwudaNd32+nVoi0NN9J48ppKJIaz2qzjUWjhKfo9aGQFlnMHdEjBWYaSI1db
-	OUKTJLT5GPVrihxVmXb5E3rvL//gwT/gQM4z8MtKxU0WswaDZy3nBFvef8hOtfZOGLGXBJyDyT9Wi
-	xU1eRoj5W4plgA3woR+ovOW4A8lwnjDz97fckPa/dWh8wd5PeYsjKOQ4OIDcFa7yoHysKyISo+uUt
-	Fl6ux1/g==;
-Received: from localhost ([::1]:40226 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=Yp1pZjIgM8j6nAWCJwr1RviA9TCpOdWc0/KD/+kueE8=; b=GoowmS65MMIT8ecritbFiRnXXI
+	2xihc1mG8MyVu8oTKj+fb0xjf2+BQ4jZRQ5qVLoTeMmbz9KZ+rh5hWoQp6tlJ4M2RuyHL6tN2G+hb
+	Ifx/3fZ1p/ggVhx38sG1Acs26OhLfH+O3rNKJiLH2RhxcB0WaFluPluyG2As4BcspbPNJOx/1DkEn
+	gkemps7gNXw6Jpr6/N5ANUj+1AEDIXFG+sNN+48OD2K5zTG9LBpaRAsNGUqX+TuDeh/KxJ0wHOAC2
+	GJtp1ayo4fQgLL3leLA0cCRCBZUUH+oXuA0BhK38YNKlz4Pnu4iYUi9FvD2f6TtDVPZxdxyLwdkLj
+	d3pFGTjQ==;
+Received: from localhost ([::1]:41138 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hfd0s-001YMJ-3N; Tue, 25 Jun 2019 04:24:58 +0000
-Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:54785 helo=ozlabs.org) 
+	id 1hfeyE-001YxF-Sp; Tue, 25 Jun 2019 06:30:23 +0000
+Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:41123) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hfd0m-001YMC-56
- for samba-technical@lists.samba.org; Tue, 25 Jun 2019 04:24:55 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 45XtNV5tgJz9s3C;
- Tue, 25 Jun 2019 14:24:42 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1561436682; bh=O6JyYTLtYGVMi/dJOm5Vw78HYWdWd0BaBeiDkbDlvQA=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=Kf1I0lvPiPdjYCpuTZIMryPLuxs5SLCWxAEKdhZlvD18NoqgZTu4O/oKyIycbLrwo
- zkdDacPPBVT46d6oCS6l+pzd+TV+dlymJQpCzOAdHkpPeVM6LwW52evQZXlssuGs0L
- NLxPBNnUHhKxABTS1cIIZXtPnCKpNwvf261KkPP52GIeeF0D8ckTZNzyW5WL6AM/BI
- pvWPHDQuzD48JpIJZF6XMErUV3B/rdqMiLJvIuSnCxPK3nX7HzVkMlMpclCNzG1sVI
- s5GhhQ+vBpxbPhUWw7x1sV+LIU71kQELgt9bbjFalvQ7N+gDfWThFsF7nAIkV50vao
- 89pQhqfNKngDQ==
-Date: Tue, 25 Jun 2019 14:24:41 +1000
-To: Andrew Bartlett <abartlet@samba.org>
-Subject: Re: Document GitLab as the only way to contribute to Samba?
-Message-ID: <20190625142441.7dd96a4f@martins.ozlabs.org>
-In-Reply-To: <1561082290.28284.28.camel@samba.org>
-References: <1561079117.28284.21.camel@samba.org>
- <20190621111436.342f713e@martins.ozlabs.org>
- <1561082290.28284.28.camel@samba.org>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+ (Exim) id 1hfexr-001Yvv-Mg
+ for samba-technical@lists.samba.org; Tue, 25 Jun 2019 06:30:03 +0000
+Received: by mail-pf1-x441.google.com with SMTP id m30so8908194pff.8
+ for <samba-technical@lists.samba.org>; Mon, 24 Jun 2019 23:29:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Yp1pZjIgM8j6nAWCJwr1RviA9TCpOdWc0/KD/+kueE8=;
+ b=nkFsChlNZt6IeXoodY2TGON55dXdvG9cyS5sonM/QFDihbw7N5eQ5pnSitRqcsn5XZ
+ zaNCV4RsHRiOCAHGMrj3lzKN4NPV2/3Q/MJBBlioBzksDgO9oSMQAdfgrOAgzxrdhrz8
+ igy3BH/2aytuFOizukyI1An0Xk1yxzXvef8Ilt7eiecBkcOFozeqAxwHKQI7FisPAHqr
+ x+SiDz5eixHJjZcVFVwIpP20LgJn6BqHsMZHS2sZrcTsowVQztyCTHCN7rSP3qppfNyY
+ Nrw8yFahwBmuE2ajQ1OOHMTyBBIyzzbjTr29CDsjjUKIxMfIL2K+9hP9ZEWM+1nXubGP
+ G+Sw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Yp1pZjIgM8j6nAWCJwr1RviA9TCpOdWc0/KD/+kueE8=;
+ b=ikshWfDjGpEKg4N8iXo5u3mpiol2UR9LO3F0u0jfzKLNTDibHJc+sAGWwzQKwcez6n
+ mGrtVzFlF82yjqvTIouh92sWC7gY3BT+1GONthxOGIXPezPdGg3oPuLmxk7zZRsrNLAC
+ whP1yKTyF9p+iGHRH5hUVV8ogDSRrxLY3C52ZQONNL07y61KiPLrhh/hr2cjVSyAFF6j
+ 4RVg2n0WBj3veta1A4a6eALhvn5Gqu50usgySww3ThODFqAX7QoNclSfLAx60bKW8oaN
+ KbO10pS2x82RjEHIet+JSAGzTYNy8hXwK7cMENbKG2knzkS0SMXkAY33gQWN0RXM1A19
+ 2pag==
+X-Gm-Message-State: APjAAAXvpZVBNkhQwwK0u6fvmsyKkdy/rpGmKKEnZ7zrT1V6A5tnZu06
+ iL2QApknB2UDLUmkyyKHstdnne6uknyEzOTnrqE=
+X-Google-Smtp-Source: APXvYqzVcTKNjQWoRWqpshVelGz2/WVEbatr5RX3V5UecbE4d8qgv3csXOm9FYwbfR9FWhIFR3pRVjmDt9hAX76HG0E=
+X-Received: by 2002:a63:8b4c:: with SMTP id j73mr26925363pge.11.1561444196820; 
+ Mon, 24 Jun 2019 23:29:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+References: <20190624163943.6721-1-colin.king@canonical.com>
+In-Reply-To: <20190624163943.6721-1-colin.king@canonical.com>
+Date: Tue, 25 Jun 2019 01:29:45 -0500
+Message-ID: <CAH2r5mvSOS3khpwQ5bZ4OrTcuMXmxB_oaUuVLqaivD1w5g9n9Q@mail.gmail.com>
+Subject: Re: [PATCH] cifs: fix typo in debug message with struct field ia_valid
+To: Colin King <colin.king@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,90 +67,48 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: samba-technical@lists.samba.org, cs@samba.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
+ kernel-janitors <kernel-janitors@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Andrew,
+merged into cifs-2.6.git for-next
 
-On Fri, 21 Jun 2019 13:58:10 +1200, Andrew Bartlett
-<abartlet@samba.org> wrote:
+On Mon, Jun 24, 2019 at 3:25 PM Colin King <colin.king@canonical.com> wrote:
+>
+> From: Colin Ian King <colin.king@canonical.com>
+>
+> Field ia_valid is being debugged with the field name iavalid, fix this.
+>
+> Signed-off-by: Colin Ian King <colin.king@canonical.com>
+> ---
+>  fs/cifs/inode.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/fs/cifs/inode.c b/fs/cifs/inode.c
+> index d7cc62252634..06a4892e9973 100644
+> --- a/fs/cifs/inode.c
+> +++ b/fs/cifs/inode.c
+> @@ -2415,7 +2415,7 @@ cifs_setattr_nounix(struct dentry *direntry, struct iattr *attrs)
+>
+>         xid = get_xid();
+>
+> -       cifs_dbg(FYI, "setattr on file %pd attrs->iavalid 0x%x\n",
+> +       cifs_dbg(FYI, "setattr on file %pd attrs->ia_valid 0x%x\n",
+>                  direntry, attrs->ia_valid);
+>
+>         if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_NO_PERM)
+> --
+> 2.20.1
+>
 
-> On Fri, 2019-06-21 at 11:14 +1000, Martin Schwenke via samba-technical
-> wrote:
-> > On Fri, 21 Jun 2019 13:05:17 +1200, Andrew Bartlett via samba-technical
-> > <samba-technical@lists.samba.org> wrote:
-> >  =20
-> > > I gave a talk at SambaXP about our first year with GitLab, and one
-> > > point I made is that it is *not OK* to have public contribution
-> > > documentation that does not match our actual practice. =20
->=20
-> > > So, I would like to propose this.  That given the practice of the Sam=
-ba
-> > > Team and almost all contributors is to contribute via a merge request
-> > > against https://gitlab.com/samba-team/samba that we document this, and
-> > > only this, as how to contribute to new patches to Samba.
-> > >  =20
->=20
-> > I don't think it is the practice of the whole Samba Team.  I haven't
-> > managed to get into the GitLab workflow, though I have used it.
-> >=20
-> > Perhaps I'm the only one, but I don't think we should be mandating this
-> > (yet?)... =20
 
-> Thanks for the feedback.  I should have checked rather than working on
-> a 'gut feel' and I see you are still using samba-technical a fair
-> bit[1]. =C2=A0
+-- 
+Thanks,
 
-Yeah, probably...  ;-)
-
-> I would say that aside from your patches, the vast majority of the
-> patch flow has moved to GitLab.
-
-We don't know how existing contributors who haven't been busy with
-Samba lately prefer to contribute.
-
-> To help us present a clear process, do you think you could embrace
-> GitLab, if not for the benefits to you, but for the sake of our new
-> contributors?
-
-> The alternatives are (to my mind):
->  - Contributors get ignored on samba-technical (both because the
-> patches are not known-good and because they are not on a clear to-do
-> list)
-
-I've just submitted some fairly simple commits via GitLab.  However,
-one of them sets off alarm bells for me because "there must be a reason
-why it was done this way".  CI passes... but I'm not labelling that
-commit "known-good" until someone else takes a careful look.  ;-)
-
->  - Contributors other than yourself keep getting told off for doing it
-> 'wrong'.
-
-I'm not sure why we are doing this.  For a simple patch that is
-obviously good, I don't think we need to chase people to do extra work
-via GitLab.  That may actually discourage them.
-
-> What do you think?
-
-I'm happy to use the new process as much as possible.
-
-However, I'd like to be sure that the new process is getting us some new
-contributors before we become too prescriptive.
-
-For example, https://www.openhub.net/p/samba says that we're down 17
-contributors from the previous 12 months.  I think it'd be a very long
-bow to draw to say that this is because we've moved a lot of activity
-to GitLab.  I'm in no way suggesting there is a correlation.
-
-That said, we should look at some data before we force all contributors
-to use GitLab.  If we just force the change then we just get a
-self-fulfilling prophecy where the contributors that hang around are OK
-with that process...  but we don't know how many decided that it was
-simply too hard...
-
-peace & happiness,
-martin
+Steve
 
