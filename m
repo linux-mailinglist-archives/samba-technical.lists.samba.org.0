@@ -2,41 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A8BF5565B
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Jun 2019 19:54:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06DB455B13
+	for <lists+samba-technical@lfdr.de>; Wed, 26 Jun 2019 00:28:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=0dnAKPzuDwmsyaHcQ/xcFQ8K+qBHwBrP/AkEbVROiaY=; b=3gC5A57uugMKpyiP81kKZieZaD
-	ket+qnMnldR8Az4H4b4s5VcoAHZ/5+tW30qCA3ZWX081cyDLwmSDO9vWBAau2/MJpySJtbdIMP7Yd
-	m0JScERYnlBJ/5oKOEsn7cZRSCXvhC0CC5tsVeiRAh/ZfDu7JLQ/u58bSD3hu0WC/yHx4SGBtabm0
-	KuRtKKSoLNuufEpNxH0oCi+WHwJXDxRyvYI5/g5HzJ4LOUhNPOyknW+kyGPC/7YTYWU0Id8GaM+im
-	deSgUbUTIoLQZQpN1K7AWCDh5klz1yW3V6lz0vOzO06wDVeUE1qVm4Lu8kKaRPLwGsDjNPkOGczgc
-	YuOaLmUw==;
-Received: from localhost ([::1]:43766 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=qsHjGWqi0AWBLOY3EOyFnATpELqSWWg/HO9Ab8ChvDw=; b=qLpuKMB1yOAFf1cky3zrtVMl5i
+	DdKMDmz8N//tdz2xRCM6iYgNl+wFqaDxFBDe0xADFkxngaR+QgvdGSiJO86E1J5py2vX+LPzP22sM
+	BanPJBLn+9zFbAutndDt18YWaUJxFWiAjRxiqc23U2gC94rbGrOsIVE4GkDR0T8uhA3SRIKYvBiNo
+	OMjizy9mUDdQN6hbidCaJEStGTjJSA5LO0NYDjMxfbJFZ+I1KM5DXHkVZGXCSBWQixdXZVP4PDCMx
+	w28jOQM8Sq/Zt06TPmbxlvJPhnUjkRfC9YekwfBN9NsODcC98w8pCmiH19kqpGNd4SU1lGs2NfrmB
+	w3uat8MA==;
+Received: from localhost ([::1]:62758 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hfpdb-001gpo-Or; Tue, 25 Jun 2019 17:53:47 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20038) 
+	id 1hftum-001jkT-6N; Tue, 25 Jun 2019 22:27:48 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49826) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hfpdY-001gph-CG
- for samba-technical@lists.samba.org; Tue, 25 Jun 2019 17:53:46 +0000
+ (Exim) id 1hftug-001jkM-NC
+ for samba-technical@lists.samba.org; Tue, 25 Jun 2019 22:27:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=0dnAKPzuDwmsyaHcQ/xcFQ8K+qBHwBrP/AkEbVROiaY=; b=bHMBCCabXKZ/rYOdhsVR1arNqF
- JVWzGeGhz2LeGdFll+Nq5FsTq2BmFdXi9WkpXjCzwd0lgQ+LH0MMciwiA9A4wi1alyr2e8WHj++T5
- DBs2Q3aEXPyc+HifQdPpFd+tsGsazfuWSkLCzcLEkay+BXvO0x9k9cJXPVXymosKafbg=;
+ s=42627210; h=Date:Cc:To:From:Message-ID;
+ bh=qsHjGWqi0AWBLOY3EOyFnATpELqSWWg/HO9Ab8ChvDw=; b=TgQwbvrTDx21eDDDLMZQVqECmg
+ /Jn5RCdRjowOPvvH1D881IspPMIcszlSKXN8C3lUQs0qyXSgO1RSRmo77uh8vCUFcsj1lMEoWXv/4
+ 0ZGplTBz4c3tRcIla6eEZJgFtj9jn8Ygg1p44ZNDGxGcy04vAEh+N1VCp4T5YLJqBPxw=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hfpdV-0005ui-TZ; Tue, 25 Jun 2019 17:53:42 +0000
-Date: Tue, 25 Jun 2019 10:53:37 -0700
-To: Christopher O Cowan <Christopher.O.Cowan@ibm.com>
-Subject: Re: SMB2/SMB3 workloads for testing.  (smbtorture?)
-Message-ID: <20190625175337.GA13365@samba.org>
-References: <OF98773EBD.D1411451-ON86258423.0069EA03-86258423.006E0810@notes.na.collabserv.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <OF98773EBD.D1411451-ON86258423.0069EA03-86258423.006E0810@notes.na.collabserv.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hftuf-0007yJ-5q; Tue, 25 Jun 2019 22:27:41 +0000
+Message-ID: <1561501657.28284.65.camel@samba.org>
+Subject: Re: Document GitLab as the only way to contribute to Samba?
+To: Uri Simchoni <uri@samba.org>
+Date: Wed, 26 Jun 2019 10:27:37 +1200
+In-Reply-To: <1335d0cf-bb13-6fcc-a4ea-75e6d4345cf5@samba.org>
+References: <1561079117.28284.21.camel@samba.org>
+ <1335d0cf-bb13-6fcc-a4ea-75e6d4345cf5@samba.org>
+Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAACRklEQVRYw81YS67DIAwkVe8FPRm5menJeAu3lmUCbyBGKqsmRXjwb8Y5aq3hl9Yj/Nh6Tu0upZRS+EdKiV+e5+mJqMKLiHLORBRjzDmbc/hlvb1QD2k3sG84+dhhvF6vlzymlNY8dyBJzUdLjAwyvaeU8n6/2WHpu/xDRkREJI8cOBMgfuRQxhj58JzzbBwhQDFGA07M6/efE0MQxDHGFvpdQHy6MUxqtU4yezRcH0B4GfbM44BWGqOurF6Omz140a0ASimJvdbwZT32XrpRh5yuwY1d0vPrdNkv91+T8uBRG8l1uiX+JtsHxPNIWE27ugwTctTdHCIiYXvuy4P7IDl0CxAzl2xgZTJwgw+g3kGaHwYh5g2sljyrjIVEq4pYBg2Kq3yXZ5WxjfO7zF9jRdXrnLcEmlbTRnNpcT0gvpTScUC2HlOE2ipAvPuJanMT+Xc0PC4dFzu1DEO4HgczaS5kOnZ4vM7zxNU+mtRyRVPDgqyX3cdx8AQCCrQnfkV9VzMA9Ryg3ek8Sgsg3QX+nbz03Og5l10ytp6HusQUwpjd1rnsksbHlhjuVGdBAbWzIiJu5MvEFkA6OkiwBO4uQL3ADeQ9b57t74+FBo1s47IqpVxqBDcuQ66r94QQJOH2ctnAf9oZtdbZYejpi2bQEveO0sb2JXu09OJJrnpil4SV5G2N6Y+1QjL+gHSKDApHJoJWF3hW2fInh6lutGW216OPRBZtRZscwyQvI+KuTj3rp4VP1VsAcTobxgDngukqm3LPgmL8A4m377Y5OvTKAAAAAElFTkSuQmCC
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.22.6-1+deb9u2 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,48 +52,65 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Christof Schmitt <cs@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Jun 24, 2019 at 03:01:50PM -0500, Christopher O Cowan via samba-technical wrote:
-
-> In recent years, we've set the MIN Protocol to SMB2, in production, but I
-> had not been running that way in my lab.
+On Sat, 2019-06-22 at 07:30 +0300, Uri Simchoni wrote:
 > 
-> Since, I have been using smbtorture and bench.nbench to simulate
-> workloads, things broke when I made the change to Min Protocol.
-> I'm getting "Failed to open connection -
-> NT_STATUS_INVALID_NETWORK_RESPONSE".  I'm thinking either I don't know the
-> magic combination of switches, or I'm going to have to change the code a
-> bit.    Fully expecting right now, that a different loadfile is needed, as
-> well.  (Unless I'm mistaken)
+> Speaking for myself, this thread brought to my attention that Samba
+> development is no longer happening on samba-technical mailing list. I'm
+> all for gitlab, but had the notion that you post an MR *and* write to
+> samba-technical, which was certainly true 6 months ago. By moving to
+> Gitlab without proper notification you've lost me as a reviewer (and I
+> do make occasional reviews in places where I was involved). I'll take
+> the proper measures to get back on-board :)
 
-bench.nbench uses SMB1, not any of the newer protocol versions.
+> So a clear statement *is* in order.
 
-> I found two conference presentations in with the SambaXP stuff, but not
-> sure that I fully grok things, yet.   My understanding is that nbench is
-> just replaying packets previously captured using one of the VFS modules.
+Thanks.  I'm sorry you missed this, the extent to which the team had
+made the successful migration surprised me as well!  
 
-nbench basically reads a text file (loadfile) which describes the SMB
-requests to issue on each connection. Then you specify how many
-connections you want.
+Indeed it took one of my colleagues (Tim) reminding me at the office
+that Samba has silently moved to GitLab before I realised how complete
+it was!  (Noting Martin as the exception, per the other arm of this
+thread). 
 
-> I would appreciate any advice for generating a representative SMB2/SMB3
-> workload, hopefully smbtorture.
+I'm not sure that had I tried to announce or compel this any earlier I
+don't think it would have been nearly as successful: the gravity of the
+team's activity is far more powerful than any announcement or policy.
 
-I don't think there is a similar test for SMB2/SMB3 in smbtorture.
+However this left you in a tricky spot and I'm sorry for that.
 
-> Regards,
-> Chris
-> 
-> PS: I'm also looking at dbench, as well, but I having a little trouble
-> compiling it on a RHEL7 desktop.   Wading through that, right now, as well.
+To others: If you are an active samba developer and I've missed you
+please ensure you have a GitLab account!  (I did the personal setup
+phase a year ago for those at SambaXP.)
 
-I managed to compile dbench with recent Samba versions. There are some
-small changes required.
+Stepping back, before your time we moved to 'autobuild', which started
+out voluntary and was even more quickly adopted, but buy the same
+means:  Almost everyone was using it, and then we made it policy. 
+(Actually after someone pushed directly a 'trivial fix' that 'didn't
+need testing' and broke the tree).
 
-Christof
+I'm not sure if you were around for the start of the code review, but
+that was the opposite a proposal was put and pushed hard to a vote,
+causing great trouble right before Samba 4.0.  I've worked hard to
+avoid that kind of thing. 
+
+I hope this background helps and I'm sorry you felt left out,
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett
+https://samba.org/~abartlet/
+Authentication Developer, Samba Team         https://samba.org
+Samba Development and Support, Catalyst IT   
+https://catalyst.net.nz/services/samba
+
+
+
+
 
