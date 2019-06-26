@@ -2,42 +2,40 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1777956E40
-	for <lists+samba-technical@lfdr.de>; Wed, 26 Jun 2019 18:01:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A785E56E72
+	for <lists+samba-technical@lfdr.de>; Wed, 26 Jun 2019 18:13:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=TQWUaP53LrT1dTOpsWgysEOH3c8mwGX3BP/pvmGcQsk=; b=kpcFpJu7y/HoQ3//82oU4NM32E
-	5fEhye9bHqbxDcXlWqEjV1c77cEQhniDHyaWQGtIJLzl6vfBODjE8Er5gv/awzBUYmuXfyrnCmdBX
-	QpkpHV1tvxkPkUwgNCr7I/Yz/8LuimC94GEJR7cx8ZvqWg1iv+E9qWOXhEzyEDr636wWyvcV28TO4
-	nxcDDEMwTFRrBeNKw1EP3KI+vLq9ENgByIQ/1qA/Rfk5ykIrW+1tRrlJtPqRoiUISAnYOotWnl43N
-	cd71q5xu4qW78jYWrPT8YXgsaQX5oj7lFw9nZ0rS/UZ0YVqNqMpDGmK7G1GBehsHQqPwAMUW7gyPS
-	G7QI2Qzw==;
-Received: from localhost ([::1]:42478 helo=hr1.samba.org) 
+	bh=7ylFS9sKdZgKVLzaONgYJ+CATCFOqB2cQWR2lXz6DKg=; b=C/usekihVwS6lQMeiHEzTIRnuU
+	ksoHNlZeDxHTaFP/Q3uKz4E4Vr7b39XUe4zn9pHJBuJKz7PfAq15/VRcj7gxjhFZu32ulBNF2Mss4
+	CPz0i/gsuVWa8ZNAAabGup40rgkBEUd3D/+JajFr5QE1fuECBqzQseZ1Gehqyinskd1m0ViRqAuU+
+	7dgfThGicjWGqZqrbhufrPjwACVYF+v4N5OrniFVX/WLSh9caXPDCvtagSk6BG0EoE9YPicYOrmZl
+	P0cF9ygScqyro4tK09AEiQcFM28ZI7U6cSVHfAkX1j5B1IHPVEr+2cUcVlIZ6kZ7HPNGeQLa2s6TV
+	BPeSzQ7Q==;
+Received: from localhost ([::1]:43268 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hgAMC-001wTT-M6; Wed, 26 Jun 2019 16:01:12 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28916) 
+	id 1hgAXK-001waz-C9; Wed, 26 Jun 2019 16:12:42 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37038) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hgAM9-001wTM-4Q
- for samba-technical@lists.samba.org; Wed, 26 Jun 2019 16:01:11 +0000
+ (Exim) id 1hgAXF-001was-Od
+ for samba-technical@lists.samba.org; Wed, 26 Jun 2019 16:12:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=TQWUaP53LrT1dTOpsWgysEOH3c8mwGX3BP/pvmGcQsk=; b=edTeUn/vEL9gycm6laT9tK5gDO
- v5VhE5DW0h0xSqrEEqSGrJQdsqiFm3s2JS5lcxWJszn2a5lXtly31rHMcCLkMt3T7X9YUAZykjbn/
- rKNa2ujl/MWSVVmdYlVff/EokXD1fnsViEP2AVf9fRUovz7PUCNO0MLdSPbeXST+iNz0=;
+ bh=7ylFS9sKdZgKVLzaONgYJ+CATCFOqB2cQWR2lXz6DKg=; b=CvCDn0wHOsvm95U0NT/DUWTcyv
+ 1XnlMYhhDvO8zCRELm9+0hmzSKL5zkV17Mo2y7gyVXu35Hcvbdvi9kpbAe0B3pqlKnpvsIIHc0rBo
+ GCW5tVi9ViiMPkWDSre5ySxKK7tf7BEu+lLf2NMeW423WNtQnl6xCMcHNTms9IpqYwi8=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hgAM8-0002Jm-Dq; Wed, 26 Jun 2019 16:01:08 +0000
-Date: Wed, 26 Jun 2019 18:01:05 +0200
-To: Richard Sharpe <realrichardsharpe@gmail.com>
-Subject: Re: Is there some way to have Samba limit the portion of the Version
- it compares in a CTDB environment
-Message-ID: <20190626160105.bmomcypvhhgvdgdq@inti>
-References: <CACyXjPyKXCXuW2J2C=ocqYTCmhBZEpv+a_Uxd8B5V3WpvOVQYQ@mail.gmail.com>
+ (Exim) id 1hgAXE-0002Q5-LL; Wed, 26 Jun 2019 16:12:36 +0000
+Date: Wed, 26 Jun 2019 18:12:33 +0200
+To: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Subject: Re: [HEADS-UP] Using stored immutable file birth time for SMB File-ID
+Message-ID: <20190626181233.4fc61c42@samba.org>
+In-Reply-To: <20190626135745.lk7757wmy26pgy26@inti>
+References: <20190626135745.lk7757wmy26pgy26@inti>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
-In-Reply-To: <CACyXjPyKXCXuW2J2C=ocqYTCmhBZEpv+a_Uxd8B5V3WpvOVQYQ@mail.gmail.com>
-User-Agent: NeoMutt/20180716
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,22 +49,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
+Cc: Stefan Metzmacher <metze@samba.org>, Jeremy Allison <jra@samba.org>,
+ Volker Lendecke <Volker.Lendecke@SerNet.DE>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jun 26, 2019 at 08:52:13AM -0700, Richard Sharpe via samba-technical wrote:
->Is there some way to limit the comparison to the real portion of the
->version string, ie, '4.7.1'?
+On Wed, 26 Jun 2019 15:57:46 +0200, Ralph Boehme via samba-technical wrote:
 
-there is a way to ignore the whole string: allow unsafe cluster upgrade = yes
+> Questions? Remarks? Thoughts?
 
--slow
+Thanks for the write-up, Ralph. I have a few of questions:
+- how will this change be affected by filesystems with low resolution
+  birth times?
+- given that this issue is Apple client specific, is there a need for
+  this new logic to be implemented outside of vfs_fruit?
+- what should we do for snapshots, which may have identical btime (and
+  inode) values shared with the snapshot source?
 
--- 
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+Cheers, David
 
