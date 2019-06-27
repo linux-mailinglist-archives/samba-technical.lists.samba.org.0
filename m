@@ -2,43 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD32B57E3E
-	for <lists+samba-technical@lfdr.de>; Thu, 27 Jun 2019 10:32:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2222D57E66
+	for <lists+samba-technical@lfdr.de>; Thu, 27 Jun 2019 10:40:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=PkOMbxbfyg1u3h+wc3/QnfxE21rWHZE/vrieH6zUePg=; b=CL/7WtnmQKKkdiGLOe5nCINzw0
-	hxwmkoHCD1b9UtG1vQFgVsNxs2jLNrgMRbYM3MOEeK4Q95gTE+J86Jgc6rGl74rkKswRMHHNhBUTC
-	yvs6l0uwUWxOwghGAyIJEA0luEG46VP6exH60f3/zwXR+tRbLAqLr3p4s57BJ2W3cHt8svVAQpPdZ
-	sOZHERpS3aQklVDnMK44w6Q1nCLmtFQofMxbwyKUJW4xdBo+DAYMUID11iV6xue2S8c0Cv0FT0o9e
-	O6IZIKQzRmyew2f8fWlRNd/cIua5sUbnqerncI3RcSnjxYBX0uorIWQcYYnqLVP6Kddfz0YpQi0RG
-	EYjHDZug==;
-Received: from localhost ([::1]:50614 helo=hr1.samba.org) 
+	bh=jlA4ApoO5/iz7N4fd3J83/BuyH3ngypCfAnRxLyMrS0=; b=wv6bVYb0wy4E8o3qd2VVd5T3N5
+	F0hjQHIMagiUhIJBz6kLe1FFgnJNB7Mu9jzvZpnqiuAyAZeqONKisoLD+zYGqI7oOhUJPRXGxB5mT
+	W24lHKrnz0eEU6Z7mXYWgJtE7GqvNI7tOwqi/6pN305IvsGM7g9Yv7UOFbMvxK33TneHzZKbzx1iD
+	d/+mPoodojbFyYD1+qXwrqXwudX16nMsIx9H8ae3dNhRZuWtHKBmv91ZAThP2py8hEtCyJEJooO9T
+	5O7hes5bkh+ocJL+wIsmX3WOUBlHCH/mqoF3X1XhEE35VRk6DEjpVl/ymjExCbIn1hU52cTN4go+h
+	N1XXg71Q==;
+Received: from localhost ([::1]:51402 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hgPpX-00269h-QK; Thu, 27 Jun 2019 08:32:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37904) 
+	id 1hgPwu-0026Gg-4S; Thu, 27 Jun 2019 08:40:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42862) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hgPpU-00269a-2f
- for samba-technical@lists.samba.org; Thu, 27 Jun 2019 08:32:30 +0000
+ (Exim) id 1hgPwo-0026GZ-Qh
+ for samba-technical@lists.samba.org; Thu, 27 Jun 2019 08:40:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42627210; h=Date:Message-ID:From:Cc:To;
- bh=PkOMbxbfyg1u3h+wc3/QnfxE21rWHZE/vrieH6zUePg=; b=mJAt5oUtCQpaG7HK53Ia52ZdPA
- 4epb28xgHtW2SGPjAMDqyK/Yg3hx1zk8oMqWpZ21FjXGKxYFWfJrMQgFWTeLt1SMmiupIvb66ormk
- hgWsIqB2lac/IVsAdZ1Q0xCY2aHZiyiINvWYru1vFGcF45dvWihxHaB7B/UHrryf7C2A=;
+ bh=jlA4ApoO5/iz7N4fd3J83/BuyH3ngypCfAnRxLyMrS0=; b=swbQLsmV8WI1JLsDIEM6X3bo66
+ FwXrrQRf8DgllmyO9eExTQ0SruNajlOrWymy8WC3XWLn7QLtwKhmvXifHruU8pu/lx41b4UTuzM31
+ /W68kR2k84Hlpfe4lhhbMjPEoen+XG86hKLA6usi7OGuMMtj9QPzkSjZR5Xt2KO/ao00=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hgPpS-0002DI-Oj; Thu, 27 Jun 2019 08:32:26 +0000
+ (Exim) id 1hgPwk-0002IB-VD; Thu, 27 Jun 2019 08:39:59 +0000
 Subject: Re: [HEADS-UP] Using stored immutable file birth time for SMB File-ID
-To: Jeremy Allison <jra@samba.org>
+To: Christof Schmitt <cs@samba.org>
 References: <20190626135745.lk7757wmy26pgy26@inti>
  <20190626181233.4fc61c42@samba.org>
  <c37b59f5-8a89-eeb2-8f92-7db2c7524efd@samba.org>
- <20190626204626.GA15143@jeremy-ThinkPad-X1>
-Message-ID: <585ba57c-c358-bd45-7fe7-2d362b1b90c2@samba.org>
-Date: Thu, 27 Jun 2019 10:32:26 +0200
+ <f01ce57c-6336-02c3-f80b-c8fa7e1187e0@samba.org>
+ <20190626185113.GA2768@samba.org>
+Message-ID: <07782413-8252-f44b-992e-944ba7ddad46@samba.org>
+Date: Thu, 27 Jun 2019 10:39:58 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.7.0
 MIME-Version: 1.0
-In-Reply-To: <20190626204626.GA15143@jeremy-ThinkPad-X1>
+In-Reply-To: <20190626185113.GA2768@samba.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -57,27 +58,52 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Stefan Metzmacher <metze@samba.org>,
- Volker Lendecke <Volker.Lendecke@SerNet.DE>,
- Ralph Boehme via samba-technical <samba-technical@lists.samba.org>,
+Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>,
  David Disseldorp <ddiss@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 6/26/19 10:46 PM, Jeremy Allison wrote:
-> On Wed, Jun 26, 2019 at 07:59:08PM +0200, Ralph Boehme wrote:
+On 6/26/19 8:51 PM, Christof Schmitt wrote:
+> On Wed, Jun 26, 2019 at 08:08:37PM +0200, Ralph Boehme via samba-technical wrote:
+>> On 6/26/19 7:59 PM, Ralph Boehme via samba-technical wrote:
+>>> On 6/26/19 6:12 PM, David Disseldorp wrote:
+>>>> - given that this issue is Apple client specific, is there a need for
+>>>>   this new logic to be implemented outside of vfs_fruit?
+>>>
+>>> yes, I think our current semantics based on inodes is dumb and we need a
+>>> general fix.
 >>
->> Thinking about it, I will go and ask MS what their client uses the
->> server provided File-IDs for, if at all.
+>> an additional note: from an implementation perspective it would be ideal
+>> to store the additional state in an existing xattr, instead of an
+>> additional one.
+>>
+>> We need to fetch the state for directory enumerations and getxattr can
+>> be slow, especially with fuse based filesytems which many of our
+>> consumers love these days. So piggypacking this onto the existing DOS
+>> xattr seemed like a clever idea.
 > 
-> This was just touched in by the MS SMB client team presentation,
-> the File-ID's are used to uniquely identify files in their
-> buffer cache I think. They have to be identical between the
-> different query methods at least (that was the question that
-> was asked).
+> Have you considered file systems that store the birthtime in metadata
+> (no xattr)?
 
-oh, really?! This means we screw their cache with our current inode
-based File-IDs as well.
+yes.
+
+> It sounds like for that case we would need to add a new
+> xattr for the new metadata.
+
+See my initial mail:
+
+> Existing VFS modules that want to take advantage of the new File-ID
+> semantics, must either implement an immutable btime natively, and
+> until that happens they have to call the VFS NEXT functions to get and
+> set the immutable btime from vfs_default. vfs_ceph already does this,
+> but vfs_gpfs needs to be updated.
+
+Currently gpfs doesn't call VFS NEXT for the DOS attributes function.
+Unfortunately adding that has a performance impact, but you have to die
+one death.
+
+Maybe GPFS has some kind of immutable creation date that could be
+exposed to userspace?
 
 -slow
 
