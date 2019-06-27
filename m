@@ -2,45 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AD7B586B9
-	for <lists+samba-technical@lfdr.de>; Thu, 27 Jun 2019 18:10:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EEC7E58740
+	for <lists+samba-technical@lfdr.de>; Thu, 27 Jun 2019 18:39:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=8MKnwoyV8PLamNHOOPElEAgiS5vvpZf3AK5jJ8YKU1U=; b=TJaSMhI4BJXYH8HeEuKcDJNMgU
-	ZwE7uUlmJdPWwzbr0N0VTVO0qGIwHoE2nqaZjAmDQhL9B4SH0uaUsqrTHQN9hZdeYeX54EamJ8Trj
-	B4jPG/KtSCPZrZgpINoyIScqZnoxeoouvAlFCzWxEqK81vt/FsQirSVLCLkjzy4XAF1wV265AryzL
-	EnQ4dpk06ilNIJEzEcymxmT7uWra/7vdJrVpYolq+QXWv5N6wIIQtypQha7jDrkmObm7mV5OsozVk
-	TNO95/pnyL3QmcMIu54AsxPrORsqK61/46MSEdvhpXVhQPszJqSjHe3Rz9NZY8utCKFLaAGBrx9Xc
-	ZHspf9yQ==;
-Received: from localhost ([::1]:48898 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=Arol/IiUtUgx7/Jh0XEPvqZrfpR9euEhKDB1SzEHBWE=; b=6T7PT/Sipno5/+ok+5hRDmOJJZ
+	SbRQrWSsnm086LHD15ucid/3sA5b2Ei1TtQN+i0C40I3XqcJteJHu2DwyCNLWnjrq0m7a/S2Y9PC/
+	+SgTUC+A81FGXT2wE1FIEX/zQmN1KOD64sHrdYxH/uJwKANLzWoGth2FeCPFzYvnNO47jiBx6uF2s
+	2EYv/RoHLpybIZtvBbDC5Nn8YOf8peNLDUIrMRuFJJ1R23O3qLDk3RSZv7og9KUOrYKmZeLUzWIST
+	uQnYgY/JjWuH3b7lNp89AWrSIJpl3+WOp6SU7P5X5eQKUweve3djhP5RQb5YzZwJmJP5UbaEuh64E
+	qUqF/m2A==;
+Received: from localhost ([::1]:49752 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hgWyD-002DRg-54; Thu, 27 Jun 2019 16:09:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:27948) 
+	id 1hgXQS-002Db9-DM; Thu, 27 Jun 2019 16:39:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42934) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hgWy9-002DRZ-6G
- for samba-technical@lists.samba.org; Thu, 27 Jun 2019 16:09:55 +0000
+ (Exim) id 1hgXQO-002Db2-85
+ for samba-technical@lists.samba.org; Thu, 27 Jun 2019 16:39:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:Cc:To:From;
- bh=8MKnwoyV8PLamNHOOPElEAgiS5vvpZf3AK5jJ8YKU1U=; b=Sx1X6Hsv20czVwVH2BqEltvQXL
- z13bK0MSIRhFxviC6Vl6jzOW/7I0ztq5PHpVvVe/lVNmd3v9A1jHJ5NZs+JvFzOXEri9lKrMs/Aq2
- xqjFMzVX3F69IfgriEMdMJelWBbvHke8ROOmJKqQZOCAaUBb7dgt5fPBcgLDfH9SGHMI=;
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=Arol/IiUtUgx7/Jh0XEPvqZrfpR9euEhKDB1SzEHBWE=; b=lULzAZwHA30bJ2oCnF7oC1/irC
+ BimTso7KNBEwaCv4SRgHAKDwC0gIC3Kyzw9MZlxAT91rwe5gIeVEZjGfFpKotT6PfA0vG7/0+7LIv
+ xqTBNFnfeI8bqNc64VrCqjtjwwkNc0+/45UES3kyWjRRBpYXhHosbUqqHmv4MU6DOp6U=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hgWy8-0007N5-1A; Thu, 27 Jun 2019 16:09:52 +0000
-Subject: Re: [RFC] Rename st_ex_btime in struct stat_ex to st_ex_crtime
-To: Jeremy Allison <jra@samba.org>,
- Volker Lendecke <Volker.Lendecke@SerNet.DE>,
- Stefan Metzmacher <metze@samba.org>, David Disseldorp <ddiss@samba.org>
-References: <c055bdf9-0262-4228-f8c3-7bc3de750715@samba.org>
-Message-ID: <36995cc6-de0f-d0bf-d183-d5893a26f139@samba.org>
-Date: Thu, 27 Jun 2019 18:09:50 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hgXQN-0007js-78; Thu, 27 Jun 2019 16:39:03 +0000
+Date: Thu, 27 Jun 2019 09:38:59 -0700
+To: Amit Kumar <amitkuma@redhat.com>
+Subject: Re: Can we RESOLVED/FIXED
+ https://bugzilla.samba.org/show_bug.cgi?id=13564
+Message-ID: <20190627163859.GD14078@jeremy-ThinkPad-X1>
+References: <e002d5f9-0911-3825-1859-07ffc598050f@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <c055bdf9-0262-4228-f8c3-7bc3de750715@samba.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <e002d5f9-0911-3825-1859-07ffc598050f@redhat.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,21 +51,16 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
 Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 6/27/19 4:47 PM, Ralph Boehme wrote:
-> while working on the File-ID s
+On Thu, Jun 27, 2019 at 01:17:19PM +0530, Amit Kumar via samba-technical wrote:
+> Hello,
+> 
+> Fix is already present in samba-4.11.0
 
-sorry for the noise, please ignore.
-
--slow
-
--- 
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+Done, thanks !
 
