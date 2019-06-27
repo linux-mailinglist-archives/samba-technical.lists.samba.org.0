@@ -2,47 +2,36 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2222D57E66
-	for <lists+samba-technical@lfdr.de>; Thu, 27 Jun 2019 10:40:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 894F058119
+	for <lists+samba-technical@lfdr.de>; Thu, 27 Jun 2019 13:04:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=jlA4ApoO5/iz7N4fd3J83/BuyH3ngypCfAnRxLyMrS0=; b=wv6bVYb0wy4E8o3qd2VVd5T3N5
-	F0hjQHIMagiUhIJBz6kLe1FFgnJNB7Mu9jzvZpnqiuAyAZeqONKisoLD+zYGqI7oOhUJPRXGxB5mT
-	W24lHKrnz0eEU6Z7mXYWgJtE7GqvNI7tOwqi/6pN305IvsGM7g9Yv7UOFbMvxK33TneHzZKbzx1iD
-	d/+mPoodojbFyYD1+qXwrqXwudX16nMsIx9H8ae3dNhRZuWtHKBmv91ZAThP2py8hEtCyJEJooO9T
-	5O7hes5bkh+ocJL+wIsmX3WOUBlHCH/mqoF3X1XhEE35VRk6DEjpVl/ymjExCbIn1hU52cTN4go+h
-	N1XXg71Q==;
-Received: from localhost ([::1]:51402 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=xDhCBmf2pjvuyw+HWrYhfPcDcWnQjuVHNXzZ40+osd8=; b=YFD1BmWFjxRK0z2aOuz/iI/Rdu
+	ChUscN+0mLS16NtPYt+lr/2tzTp/Hv3H9uk1GBt7ZuOrL8eS8A45HOqAI9GTmaCL0+WTLO3Wf7bVg
+	g3z5AgXW6t9dSd1j6+snNV0cWK59fsPKDCGPdnQ8YWEbTJ/R+LqtIimptFu8qFlMp/JltLkBQhZbj
+	mpQ47q8NHNStsZlgJ2kNhBGzErd1abe3irKYEbH5e3/xKpXt+li4nLJYRxVSJTZu9kbCpSk+3BdEf
+	E3RKr1WzBLwc4ipZvm0HUPL0Tj6tls1qbjCM/614IMDPuYr6BHF9oGHuyZ81B2cEBpwUaxB9yE6dz
+	kvJLFyng==;
+Received: from localhost ([::1]:64856 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hgPwu-0026Gg-4S; Thu, 27 Jun 2019 08:40:08 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42862) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hgPwo-0026GZ-Qh
- for samba-technical@lists.samba.org; Thu, 27 Jun 2019 08:40:05 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:Cc:To;
- bh=jlA4ApoO5/iz7N4fd3J83/BuyH3ngypCfAnRxLyMrS0=; b=swbQLsmV8WI1JLsDIEM6X3bo66
- FwXrrQRf8DgllmyO9eExTQ0SruNajlOrWymy8WC3XWLn7QLtwKhmvXifHruU8pu/lx41b4UTuzM31
- /W68kR2k84Hlpfe4lhhbMjPEoen+XG86hKLA6usi7OGuMMtj9QPzkSjZR5Xt2KO/ao00=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hgPwk-0002IB-VD; Thu, 27 Jun 2019 08:39:59 +0000
-Subject: Re: [HEADS-UP] Using stored immutable file birth time for SMB File-ID
-To: Christof Schmitt <cs@samba.org>
-References: <20190626135745.lk7757wmy26pgy26@inti>
- <20190626181233.4fc61c42@samba.org>
- <c37b59f5-8a89-eeb2-8f92-7db2c7524efd@samba.org>
- <f01ce57c-6336-02c3-f80b-c8fa7e1187e0@samba.org>
- <20190626185113.GA2768@samba.org>
-Message-ID: <07782413-8252-f44b-992e-944ba7ddad46@samba.org>
-Date: Thu, 27 Jun 2019 10:39:58 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+	id 1hgSBv-0028Nq-RC; Thu, 27 Jun 2019 11:03:47 +0000
+Received: from [109.74.130.141] (port=53950 helo=astralinux.ru) 
+ by hr1.samba.org with esmtp (Exim) id 1hgSBr-0028Nj-7z
+ for samba-technical@lists.samba.org; Thu, 27 Jun 2019 11:03:45 +0000
+Received: from [10.77.109.26] (account skorchak@astralinux.ru)
+ by astralinux.ru (CommuniGate Pro XIMSS 6.2.7)
+ with HTTPU id 1128675 for samba-technical@lists.samba.org;
+ Thu, 27 Jun 2019 14:03:14 +0300
+X-Mailer: CommuniGate Pronto! HTML5 6.2.4247
+Subject: bug 9612 fix
 MIME-Version: 1.0
-In-Reply-To: <20190626185113.GA2768@samba.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+To: "samba-technical@lists.samba.org"
+ <samba-technical@lists.samba.org>
+Date: Thu, 27 Jun 2019 14:03:14 +0300
+Message-ID: <ximss-1128743@fe1.astralinux.ru>
+Content-Type: multipart/mixed;boundary="_===1128675====fe1.astralinux.ru===_"
+X-Warn: EHLO/HELO not verified: Remote host 109.74.130.141
+ (mail.astralinux.ru) incorrectly presented itself as astralinux.ru
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,59 +45,84 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>,
- David Disseldorp <ddiss@samba.org>
+From: =?utf-8?b?0KHQtdGA0LPQtdC5INCa0L7RgNGH0LDQuiB2aWEgc2FtYmEtdGVjaG5pY2Fs?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?B?0KHQtdGA0LPQtdC5INCa0L7RgNGH0LDQug==?=
+ <skorchak@astralinux.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 6/26/19 8:51 PM, Christof Schmitt wrote:
-> On Wed, Jun 26, 2019 at 08:08:37PM +0200, Ralph Boehme via samba-technical wrote:
->> On 6/26/19 7:59 PM, Ralph Boehme via samba-technical wrote:
->>> On 6/26/19 6:12 PM, David Disseldorp wrote:
->>>> - given that this issue is Apple client specific, is there a need for
->>>>   this new logic to be implemented outside of vfs_fruit?
->>>
->>> yes, I think our current semantics based on inodes is dumb and we need a
->>> general fix.
->>
->> an additional note: from an implementation perspective it would be ideal
->> to store the additional state in an existing xattr, instead of an
->> additional one.
->>
->> We need to fetch the state for directory enumerations and getxattr can
->> be slow, especially with fuse based filesytems which many of our
->> consumers love these days. So piggypacking this onto the existing DOS
->> xattr seemed like a clever idea.
-> 
-> Have you considered file systems that store the birthtime in metadata
-> (no xattr)?
 
-yes.
+--_===1128675====fe1.astralinux.ru===_
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: 8bit
 
-> It sounds like for that case we would need to add a new
-> xattr for the new metadata.
+Hello!
+My name Sergey Korchak, and i work in AstraLinux company. see 
+http://astralinux.ru
 
-See my initial mail:
+I have fixed bug 9612
+https://bugzilla.samba.org/show_bug.cgi?id=9612
 
-> Existing VFS modules that want to take advantage of the new File-ID
-> semantics, must either implement an immutable btime natively, and
-> until that happens they have to call the VFS NEXT functions to get and
-> set the immutable btime from vfs_default. vfs_ceph already does this,
-> but vfs_gpfs needs to be updated.
+According to GNU GPL we wish to publish our patch.
 
-Currently gpfs doesn't call VFS NEXT for the DOS attributes function.
-Unfortunately adding that has a performance impact, but you have to die
-one death.
 
-Maybe GPFS has some kind of immutable creation date that could be
-exposed to userspace?
+--_===1128675====fe1.astralinux.ru===_
+Content-Disposition: attachment; filename="bug-9612.patches.txt"
+Content-Type: application/plain; name="bug-9612.patches.txt"
+Content-Transfer-Encoding: base64
 
--slow
+RnJvbSBkYTUzMTY5ZDM1YjA3MzRjZmIxYjI0ODE5YTA3MDMzNjRlYjEyYzgyIE1vbiBTZXAg
+MTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBTZXJnZXkgS29yY2hhayA8c2tvcmNoYWtAYXN0cmFs
+aW51eC5ydT4KRGF0ZTogVGh1LCAyNyBKdW4gMjAxOSAxMzo0NToxNSArMDMwMApTdWJqZWN0
+OiBbUEFUQ0hdIFRoaXMgcGF0Y2ggZml4ZXMgYnVnIDk2MTIgLSBTYW1iYSBEQyBhbGxvd2Vk
+IHVzZXIgdG8gbG9nb24KIHVzaW5nIHJldm9rZWQgY2VydGlmaWNhdGUgb24gc21hcnQgY2Fy
+ZAoKLS0tCiBzb3VyY2U0L2hlaW1kYWwva2RjL3BraW5pdC5jICAgICAgIHwgMTEgKysrKysr
+KysrKysKIHNvdXJjZTQvaGVpbWRhbC9saWIvaHg1MDkvcmV2b2tlLmMgfCAxNCArKysrKysr
+KysrKysrKwogMiBmaWxlcyBjaGFuZ2VkLCAyNSBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0
+IGEvc291cmNlNC9oZWltZGFsL2tkYy9wa2luaXQuYyBiL3NvdXJjZTQvaGVpbWRhbC9rZGMv
+cGtpbml0LmMKaW5kZXggYWQ3ZjNlZmMxMGEuLjY2NjI3YWJkNzViIDEwMDY0NAotLS0gYS9z
+b3VyY2U0L2hlaW1kYWwva2RjL3BraW5pdC5jCisrKyBiL3NvdXJjZTQvaGVpbWRhbC9rZGMv
+cGtpbml0LmMKQEAgLTQ5NSw2ICs0OTUsMTAgQEAgX2tkY19wa19yZF9wYWRhdGEoa3JiNV9j
+b250ZXh0IGNvbnRleHQsCiAJCSAgaGRiX2VudHJ5X2V4ICpjbGllbnQsCiAJCSAgcGtfY2xp
+ZW50X3BhcmFtcyAqKnJldF9wYXJhbXMpCiB7CisvLyBCZWdpbiBvZiBBc3RyYUxpbnV4IHBh
+dGNoIGJ5IFNlcmdleSBLb3JjaGFrCisgICAgaHg1MDlfcmV2b2tlX2N0eCBzZW5kZXJfcmV2
+X2N0eDsgCisgICAgY2hhciAqKmpqID0gTlVMTDsKKy8vIEVuZCBvZiBBc3RyYUxpbnV4IHBh
+dGNoIGJ5IFNlcmdleSBLb3JjaGFrCiAgICAgcGtfY2xpZW50X3BhcmFtcyAqY3A7CiAgICAg
+a3JiNV9lcnJvcl9jb2RlIHJldDsKICAgICBoZWltX29pZCBlQ29udGVudFR5cGUgPSB7IDAs
+IE5VTEwgfSwgY29udGVudEluZm9PaWQgPSB7IDAsIE5VTEwgfTsKQEAgLTU2NSw2ICs1Njks
+MTMgQEAgX2tkY19wa19yZF9wYWRhdGEoa3JiNV9jb250ZXh0IGNvbnRleHQsCiAgICAgaHg1
+MDlfdmVyaWZ5X2F0dGFjaF9hbmNob3JzKGNwLT52ZXJpZnlfY3R4LCB0cnVzdF9hbmNob3Jz
+KTsKICAgICBoeDUwOV9jZXJ0c19mcmVlKCZ0cnVzdF9hbmNob3JzKTsKIAorLy8gQmVnaW4g
+b2YgQXN0cmFMaW51eCBwYXRjaCBieSBTZXJnZXkgS29yY2hhaworICAgIGh4NTA5X3Jldm9r
+ZV9pbml0KGNvbnRleHQtPmh4NTA5Y3R4LCAmc2VuZGVyX3Jldl9jdHgpOworICAgIGpqID0g
+Y29uZmlnLT5wa2luaXRfa2RjX3Jldm9rZTsKKyAgICByZXQgPSBoeDUwOV9yZXZva2VfYWRk
+X2NybChjb250ZXh0LT5oeDUwOWN0eCxzZW5kZXJfcmV2X2N0eCwqamogKTsKKyAgICBoeDUw
+OV92ZXJpZnlfYXR0YWNoX3Jldm9rZShjcC0+dmVyaWZ5X2N0eCwgc2VuZGVyX3Jldl9jdHgp
+OworLy8gRW5kIG9mIEFzdHJhTGludXggcGF0Y2ggYnkgU2VyZ2V5IEtvcmNoYWsKKwogICAg
+IGlmIChjb25maWctPnBraW5pdF9hbGxvd19wcm94eV9jZXJ0cykKIAloeDUwOV92ZXJpZnlf
+c2V0X3Byb3h5X2NlcnRpZmljYXRlKGNwLT52ZXJpZnlfY3R4LCAxKTsKIApkaWZmIC0tZ2l0
+IGEvc291cmNlNC9oZWltZGFsL2xpYi9oeDUwOS9yZXZva2UuYyBiL3NvdXJjZTQvaGVpbWRh
+bC9saWIvaHg1MDkvcmV2b2tlLmMKaW5kZXggMjkzMjI4MDc0ODcuLjBhNzc3MDIwNTkyIDEw
+MDY0NAotLS0gYS9zb3VyY2U0L2hlaW1kYWwvbGliL2h4NTA5L3Jldm9rZS5jCisrKyBiL3Nv
+dXJjZTQvaGVpbWRhbC9saWIvaHg1MDkvcmV2b2tlLmMKQEAgLTgxNywxMSArODE3LDIzIEBA
+IGh4NTA5X3Jldm9rZV92ZXJpZnkoaHg1MDlfY29udGV4dCBjb250ZXh0LAogCSAgICByZXR1
+cm4gMDsKIAogCS8qIGNoZWNrIGlmIGNlcnQgaXMgaW4gY3JsICovCisKKworCiAJZm9yIChq
+ID0gMDsgaiA8IGNybC0+Y3JsLnRic0NlcnRMaXN0LnJldm9rZWRDZXJ0aWZpY2F0ZXMtPmxl
+bjsgaisrKSB7CiAJICAgIHRpbWVfdCB0OwogCiAJICAgIHJldCA9IGRlcl9oZWltX2ludGVn
+ZXJfY21wKCZjcmwtPmNybC50YnNDZXJ0TGlzdC5yZXZva2VkQ2VydGlmaWNhdGVzLT52YWxb
+al0udXNlckNlcnRpZmljYXRlLAogCQkJCSAgICAgICAmYy0+dGJzQ2VydGlmaWNhdGUuc2Vy
+aWFsTnVtYmVyKTsKKworLy8gQmVnaW4gb2YgQXN0cmFMaW51eCBwYXRjaCBieSBTZXJnZXkg
+S29yY2hhaworCSAgICBpZiAoIXJldCkgeworCQkgICAgaHg1MDlfc2V0X2Vycm9yX3N0cmlu
+Zyhjb250ZXh0LCAwLAorCQkJCQkgICAgSFg1MDlfQ0VSVF9SRVZPS0VELAorCQkJCQkgICAg
+IkNlcnRpZmljYXRlIHJldm9rZWQgYnkgaXNzdWVyIGluIENSTCIpOworCSAgICAJICAgIHJl
+dHVybiBIWDUwOV9DRVJUX1JFVk9LRUQ7CisJICAgIH0KKy8qCiAJICAgIGlmIChyZXQgIT0g
+MCkKIAkJY29udGludWU7CiAKQEAgLTgzOCw2ICs4NTAsOCBAQCBoeDUwOV9yZXZva2VfdmVy
+aWZ5KGh4NTA5X2NvbnRleHQgY29udGV4dCwKIAkJCQkgICBIWDUwOV9DRVJUX1JFVk9LRUQs
+CiAJCQkJICAgIkNlcnRpZmljYXRlIHJldm9rZWQgYnkgaXNzdWVyIGluIENSTCIpOwogCSAg
+ICByZXR1cm4gSFg1MDlfQ0VSVF9SRVZPS0VEOworKi8KKy8vIEVuZCBvZiBBc3RyYUxpbnV4
+IHBhdGNoIGJ5IFNlcmdleSBLb3JjaGFrCiAJfQogCiAJcmV0dXJuIDA7Ci0tIAoyLjExLjAK
+Cg==
 
--- 
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+--_===1128675====fe1.astralinux.ru===_--
 
