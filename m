@@ -2,58 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9188595F0
-	for <lists+samba-technical@lfdr.de>; Fri, 28 Jun 2019 10:21:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D617F59663
+	for <lists+samba-technical@lfdr.de>; Fri, 28 Jun 2019 10:48:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=xXnTMAwBOkH16B+ApR213dd8eBfGespxwTSR3TlkX/Y=; b=ilyvVt/g/qe19W35k/3qX1TVwL
-	v3RY7ZWcHbc4JU6wrLshaRLe0mgAPNJjvK5RtfH8+7Ej8jJMyhRt4B+3Cp53Jrm3hJ3qYGfn7gpZe
-	r7vkwyTz76+2MOUyl7GpoPGu/hR5yTkm24/YBeq7s5wSGoUb2GW9y/MopD9Zwb1rv3hE2+cZhPkbq
-	RJF/JF/JGdCQZcvTttFvJ9Q1TMcV9nz0M21ZE8hlpYYbbJoROyQrHKBUSXO+ZqpBqEVhTo8yR+sq1
-	0cI3KkmnEpJMvdGvciOhY0wisk6dCyzXB+mdKsofhxffXZjRFw97OJdi8tpRGBdYIVlwz9Ew+qgI8
-	GhUKLl5w==;
-Received: from localhost ([::1]:19000 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=IEVyzPUiFOrLmBnovNxLpFIIdV0gHrcx9mtyKkfoSiU=; b=KYhgXJfmiVv7ZrJWpl+IBR1FiH
+	3Ed6MlyzZ2Rk3Gfo18uedMBLhR+nkT/xdTT4Ulb4lu/hVeEAaB1kQ7gLxYCHHBn9AzMobfV8RThMt
+	QoXhkBVsYbtmMXyo1RUbmlO5yYDlj7UYPoSIj0YeE/wN7L6oL4itSkdtvBYnJWTv05W2YlGu08ry4
+	ORdodTpBB8oAN+NZu038nQFHfygBh13899xXoaTmq3URLiE6YG3gGKihUnBAiuV/yYR1oWnlrTX1/
+	/hO2lVXw7bsfiDwy/ZaD0j8lf2jITVPSDkrEHPUpqjmUO8ya/dQcQVoQv32pX/3/TeFQ8S5QHnBCr
+	pvc4pwGA==;
+Received: from localhost ([::1]:24768 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hgm7b-002Hj4-GZ; Fri, 28 Jun 2019 08:20:40 +0000
-Received: from mail-wr1-f47.google.com ([209.85.221.47]:43140) 
+	id 1hgmYf-002IVu-Te; Fri, 28 Jun 2019 08:48:38 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20658) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hgm7W-002Hix-Az
- for samba-technical@lists.samba.org; Fri, 28 Jun 2019 08:20:36 +0000
-Received: by mail-wr1-f47.google.com with SMTP id p13so5272283wru.10
- for <samba-technical@lists.samba.org>; Fri, 28 Jun 2019 01:20:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:to:from:subject:message-id:date:user-agent
- :mime-version:content-language;
- bh=Sc43PiXqJiOFmf8r/xaZxlplaMSlh/9pIEXtES0C8pI=;
- b=UT6zoRJFBoFFC/Zuy+NDb2wCcOl0tS/Z4V5SXT1NWa2KNtkj7Ekk3VnMqAJHVNCigT
- YFYKYdE36FAsT/ipTsBworVYaoppcQfUcofsk3PjJWqL43jPXmGqZGnywch+HCvAWKVN
- hZ4JHUDXsEl9G06+D90YqebEQXwMO2BNZ3ObOa+jky7iPodhlnEzQw2Kf4pKMDsiNz0u
- JnLPH2hT1QyT1GAc544tV+ZRtRnYWN2ldzL5sBDMtLqPenyH9krsPpYwfHMmZckGK2o2
- o3klQGzW/XaRu1OP8bg0z9697NPepPJ6yyjRNQdvN8WUvOeomXlntCg52/slO5geVpYN
- +wCg==
-X-Gm-Message-State: APjAAAXTCNO61/RdPeUwrQKImfYQMw1Qf+AesI+Z6fs1s5qW2AST6oJ7
- AQNJijNJo+XAxy2Vo6D28ExNASwy+8Q=
-X-Google-Smtp-Source: APXvYqwmJlWq4Ou4f/07eTIzNH7TqcrCpt8macqkdsK1z2QgRFTcpx1BZN1Mv0zPgQWnRghiel+4cA==
-X-Received: by 2002:a5d:400f:: with SMTP id n15mr7073210wrp.312.1561710033510; 
- Fri, 28 Jun 2019 01:20:33 -0700 (PDT)
-Received: from amitkuma.pnq.csb ([103.83.215.66])
- by smtp.gmail.com with ESMTPSA id g2sm1308006wmh.0.2019.06.28.01.20.31
- for <samba-technical@lists.samba.org>
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 28 Jun 2019 01:20:33 -0700 (PDT)
-To: samba-technical@lists.samba.org
-Subject: Pipeline failing on samba-ad-dc-backup
+ (Exim) id 1hgmYc-002IVn-41
+ for samba-technical@lists.samba.org; Fri, 28 Jun 2019 08:48:36 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=IEVyzPUiFOrLmBnovNxLpFIIdV0gHrcx9mtyKkfoSiU=; b=jHNcVihO/auVk7izMUeXWyxpoB
+ 9+kv/TqH+KalUc+9mwWAw+SS5fgxJ6RgzfLpFDoAGHIrn4AMoKthuab7DVkuOxJOTnEFk3MY55N6L
+ qa9U4gIhfTOU2BF8A/pR75UaHjSjqVjWeGj7GneuNbQnO7ArZlGXIyF8ZBeG1Lm5GR5Y=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hgmYb-000711-Os; Fri, 28 Jun 2019 08:48:33 +0000
+Date: Fri, 28 Jun 2019 10:48:32 +0200
+To: Amit Kumar <amitkuma@redhat.com>
+Subject: Re: Pipeline failing on samba-ad-dc-backup
  [https://gitlab.com/amitkuma/samba/-/jobs/241734878]
-Message-ID: <ce517e87-73cb-e018-5d66-9eb8b21a350c@redhat.com>
-Date: Fri, 28 Jun 2019 13:50:27 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+Message-ID: <20190628084832.GE32415@samba.org>
+References: <ce517e87-73cb-e018-5d66-9eb8b21a350c@redhat.com>
 MIME-Version: 1.0
-Content-Language: en-US
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="10jrOL3x2xqLmOsH"
+Content-Disposition: inline
+In-Reply-To: <ce517e87-73cb-e018-5d66-9eb8b21a350c@redhat.com>
+User-Agent: Mutt/1.11.4 (2019-03-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,60 +52,103 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Amit Kumar via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Amit Kumar <amitkuma@redhat.com>
+From: Michael Adam via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Michael Adam <obnox@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello,
 
-Not able to find why pipeline is failing
+--10jrOL3x2xqLmOsH
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-test failed in 42 minutes, while runner timeout is 3h.
+On 2019-06-28 at 13:50 +0530, Amit Kumar via samba-technical wrote:
+> Hello,
+>=20
+> Not able to find why pipeline is failing
+>=20
+> test failed in 42 minutes, while runner timeout is 3h.
+>=20
+> =3D=3D> /builds/amitkuma/samba/samba-ad-dc-backup.stderr <=3D=3D
+> make: *** [test] Error 1
+> samba-ad-dc-backup: [test] failed 'make test FAIL_IMMEDIATELY=3D1
+> TESTS=3D'--include-env=3Dbackupfromdc --include-env=3Drestoredc
+> --include-env=3Drenamedc --include-env=3Dofflinebackupdc --include-env=3D=
+labdc
+> --include-env=3Dad_dc_backup'' with status 2
+> waiting for tail to flush
+> Running: 'uname -a' in '.'
+> Running: 'lsb_release -a' in '.'
+> No LSB modules are available.
+> Running: 'free' in '.'
+> Running: 'mount' in '.'
+> Running: 'cat /proc/cpuinfo' in '.'
+> Running: 'cc --version' in '.'
+> Running: 'df -m .' in '.'
+> Running: 'df -m /tmp/samba-testbase/b22' in '.'
 
-==> /builds/amitkuma/samba/samba-ad-dc-backup.stderr <==
-make: *** [test] Error 1
-samba-ad-dc-backup: [test] failed 'make test FAIL_IMMEDIATELY=1
-TESTS='--include-env=backupfromdc --include-env=restoredc
---include-env=renamedc --include-env=offlinebackupdc --include-env=labdc
---include-env=ad_dc_backup'' with status 2
-waiting for tail to flush
-Running: 'uname -a' in '.'
-Running: 'lsb_release -a' in '.'
-No LSB modules are available.
-Running: 'free' in '.'
-Running: 'mount' in '.'
-Running: 'cat /proc/cpuinfo' in '.'
-Running: 'cc --version' in '.'
-Running: 'df -m .' in '.'
-Running: 'df -m /tmp/samba-testbase/b22' in '.'
+This is part of the teardown code. That is not the actual test.
 
+I think you can see a hit for an error a little further up in the
+logs:
 
-####################################################################
+>> Timed out (120 sec) waiting for dns_update_cache PID 22240 at /tmp/samba=
+-testbase/b22/samba-ad-dc-backup/selftest/target/Samba4.pm line 279.
+>> Samba 22240 failed to start up at /tmp/samba-testbase/b22/samba-ad-dc-ba=
+ckup/selftest/target/Samba4.pm line 161.
+>> failed to start up environment 'labdc' at /tmp/samba-testbase/b22/samba-=
+ad-dc-backup/selftest/target/Samba.pm line 88.
+>> samba can't start up known environment 'labdc' at /tmp/samba-testbase/b2=
+2/samba-ad-dc-backup/selftest/selftest.pl line 883.
 
-AUTOBUILD FAILURE
+Not sure if that's a flakey behavior..
 
-Your autobuild[master] on runner-fa6cab46-project-10891704-concurrent-0
-failed after 38.6 minutes
-when trying to test samba-ad-dc-backup with the following error:
+Cheers - Michael
 
-   samba-ad-dc-backup: [test] failed 'make test FAIL_IMMEDIATELY=1
-TESTS='--include-env=backupfromdc --include-env=restoredc
---include-env=renamedc --include-env=offlinebackupdc --include-env=labdc
---include-env=ad_dc_backup'' with status 2
+>
+>=20
+>=20
+> ####################################################################
+>=20
+> AUTOBUILD FAILURE
+>=20
+> Your autobuild[master] on runner-fa6cab46-project-10891704-concurrent-0
+> failed after 38.6 minutes
+> when trying to test samba-ad-dc-backup with the following error:
+>=20
+> =A0=A0 samba-ad-dc-backup: [test] failed 'make test FAIL_IMMEDIATELY=3D1
+> TESTS=3D'--include-env=3Dbackupfromdc --include-env=3Drestoredc
+> --include-env=3Drenamedc --include-env=3Dofflinebackupdc --include-env=3D=
+labdc
+> --include-env=3Dad_dc_backup'' with status 2
+>=20
+> the autobuild has been abandoned. Please fix the error and resubmit.
+>=20
+> ####################################################################
+>=20
+>=20
+> Though this is a very simple addition of print statement only:
+>=20
+> if gplink.strip() =3D=3D '':
+> + print("gpLink is empty")
+> return ret
+>=20
+> Thanks
+> Amit
+>=20
+>=20
 
-the autobuild has been abandoned. Please fix the error and resubmit.
+--10jrOL3x2xqLmOsH
+Content-Type: application/pgp-signature; name="signature.asc"
 
-####################################################################
+-----BEGIN PGP SIGNATURE-----
 
+iF0EARECAB0WIQQ4hxRJ4GXWNWIKYh7JT0k4GE+QNAUCXRXUXQAKCRDJT0k4GE+Q
+NE98AJwLnMrFRkPpsKP/X/flWQZyagNf1gCfdiRHSDNNG5xh6gRwGFfxejcfkvo=
+=ri74
+-----END PGP SIGNATURE-----
 
-Though this is a very simple addition of print statement only:
-
-if gplink.strip() == '':
-+ print("gpLink is empty")
-return ret
-
-Thanks
-Amit
-
+--10jrOL3x2xqLmOsH--
 
