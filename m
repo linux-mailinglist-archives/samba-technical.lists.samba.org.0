@@ -2,47 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2F2E59A0C
-	for <lists+samba-technical@lfdr.de>; Fri, 28 Jun 2019 14:08:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F1F659BC6
+	for <lists+samba-technical@lfdr.de>; Fri, 28 Jun 2019 14:40:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=OkP/TXzN9PSrkm3O9MLQxemxD5WpnbG3bOeFScEl2/0=; b=Gdu7NRpYU8FNmzZimWq8DdHrHA
-	tZ1OJH1UBKPvin8vNlm/edpNpuZ+XfVqM8Bpoii6PbOf2jgSt7/znXlCqelJAYiut61gkOiqDMRbi
-	CXMWt3e1JIBufN3DoZOGC6JjjlPgmViIHcFFZXflyiBbXVw2Gj2q1wHac/bc0DY/bYkKOT+bq+bRq
-	ETGC4XA/eSZv/X4KRUhTgIAHPcfIO89SIeWx1+ln3m1tAMOGveaCbZpio5hPRkXBZn0MiFfHqNkW2
-	d3+XwWInseMVk8VwUstgvS8hErWuXf4lmfngNYyI/cSDxh3V9g8bBfSpnV5SAR92dc7Y4EilbB6NC
-	hhuxxRoA==;
-Received: from localhost ([::1]:50078 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=OxJcE7584iPhGG94T3T0zc1okkY2fe465VnqrfdAijQ=; b=vEaySJXHbQM2X/FHWnhUITLTxl
+	AHeG8nqZCFWmvSAe1GyyAIBk278m9RFywciJs9tvNEbcPPP/bJEDQbW+yOJ1vkIURq9+/F5oWAsLI
+	RRw6rAI+BcpllqA69Gu4+t0uFnsTTWJ0BmAs7xDA0HjTWSVhZsjM96NQK2MZDet0H5CnWWVS3F8+K
+	l+JBoVkOFMmZsJxDRsCJac88XWUhz9KsNpkQmM3E0S2Ud1lw1g7qg3FncXoNs53VnzqEWu6GUqk7Y
+	HypNuMEVtMS5+BtfYOU61YaFVW5ebf1jB5MXMAUL7Eatg4sPftEhnn1W5Va/Si/XFx2zKRgw2M2/h
+	Ly1lSVCQ==;
+Received: from localhost ([::1]:58392 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hgpgA-002M8a-Pk; Fri, 28 Jun 2019 12:08:34 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20852) 
+	id 1hgqAw-002NHY-SF; Fri, 28 Jun 2019 12:40:22 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38700) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hgpg6-002M8T-SO
- for samba-technical@lists.samba.org; Fri, 28 Jun 2019 12:08:32 +0000
+ (Exim) id 1hgqAs-002NHR-QD
+ for samba-technical@lists.samba.org; Fri, 28 Jun 2019 12:40:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:Cc:To;
- bh=OkP/TXzN9PSrkm3O9MLQxemxD5WpnbG3bOeFScEl2/0=; b=R5ydOThTcZU/m6M40hHIGWef1u
- qzf2qKkmEeTujY+uKW9vodsvavbLn2iBYK0GqgJgWiUwTx6pyNUW3gjPWvGcVOtmqVLc8nlRqUI6f
- 79lLpqli615h/fRMjFEoGRXMmrpmtsoy2lorxFHS2Drchv/DckzjVhZeG3+AqTyhNPW4=;
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=OxJcE7584iPhGG94T3T0zc1okkY2fe465VnqrfdAijQ=; b=bcC265Wu0bG672nv6YFilDyu8e
+ kdqfJzM4ezva73FxMM8nNlr9yiu2OyDM8QSV6a80/WxihxynrNlPJ6c91dwrRvXUCdzDZFMqzOi/u
+ tIwFhw+Yv1rrG9G12TSSLTgWN0bOXg3I4dgGISMxZhVkdc+B3CZ5/y3relvmv85qCssc=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hgpg5-0000fS-Qg; Fri, 28 Jun 2019 12:08:30 +0000
+ (Exim) id 1hgqAl-00012K-VC; Fri, 28 Jun 2019 12:40:12 +0000
+Date: Fri, 28 Jun 2019 14:40:10 +0200
+To: Uri Simchoni <uri@samba.org>
 Subject: Re: Document GitLab as the only way to contribute to Samba?
-To: Michael Adam <obnox@samba.org>, Andrew Bartlett <abartlet@samba.org>
+Message-ID: <20190628124010.GC5892@samba.org>
 References: <1561079117.28284.21.camel@samba.org>
  <20190628104624.GF32415@samba.org>
  <62bc808700dca7a08f3a61c6d7e676119c301843.camel@samba.org>
  <20190628114651.GB5892@samba.org>
-Openpgp: preference=signencrypt
-Message-ID: <d2f00126-4507-23de-df51-d41ee28b639a@samba.org>
-Date: Fri, 28 Jun 2019 15:08:26 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ <d2f00126-4507-23de-df51-d41ee28b639a@samba.org>
 MIME-Version: 1.0
-In-Reply-To: <20190628114651.GB5892@samba.org>
-Content-Type: text/plain; charset=windows-1252
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="vEao7xgI/oilGqZ+"
+Content-Disposition: inline
+In-Reply-To: <d2f00126-4507-23de-df51-d41ee28b639a@samba.org>
+User-Agent: Mutt/1.11.4 (2019-03-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,26 +55,59 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Uri Simchoni <uri@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Michael Adam via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Michael Adam <obnox@samba.org>
+Cc: samba-technical@lists.samba.org, Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 6/28/19 2:46 PM, Michael Adam via samba-technical wrote:
-> 
-> Ugh. That's really strange. Is this a gitlab design choice?
-> Because if it is, it's finally a thing (and quite a major one),
-> where gitlab is way worse than github. ;-)
-> 
 
-To be fair, I don't know if GitHub even has CI. What I've seen in  FLOSS
-projects is that they have their Jenkins/Travis instance or something of
-that sort (and who knows how many runners), and each PR would trigger a
-run there, and success/failure would annotate the PR. GitHub just
-provides the webhook.
+--vEao7xgI/oilGqZ+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I do agree with the bottom line though...
+On 2019-06-28 at 15:08 +0300, Uri Simchoni via samba-technical wrote:
+> On 6/28/19 2:46 PM, Michael Adam via samba-technical wrote:
+> >=20
+> > Ugh. That's really strange. Is this a gitlab design choice?
+> > Because if it is, it's finally a thing (and quite a major one),
+> > where gitlab is way worse than github. ;-)
+> >=20
+>=20
+> To be fair, I don't know if GitHub even has CI. What I've seen in  FLOSS
+> projects is that they have their Jenkins/Travis instance or something of
+> that sort (and who knows how many runners), and each PR would trigger a
+> run there, and success/failure would annotate the PR. GitHub just
+> provides the webhook.
 
-Uri.
+That is true. CI is always external.
+But you typically configure the repo to require those CIs passing
+for a PR to become merge-able.
+
+> I do agree with the bottom line though...
+
+And don't get me wrong: I'm not advocating for github here.
+I was just comparing with something I know better.
+And if we could somehow tie the beefier CI with the core repo
+and run it on every MR, that would be great.
+But I probably need to read up on gitlab and it's ci etc.
+
+Cheers - Michael
+
+>=20
+> Uri.
+>=20
+
+--vEao7xgI/oilGqZ+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQQ4hxRJ4GXWNWIKYh7JT0k4GE+QNAUCXRYKqAAKCRDJT0k4GE+Q
+NBjBAJ9j8Ea719q4PiYuxPHm6f0iS2GDWwCgojEf2GO7FKRjKlulNPrHZvj74Gk=
+=Johg
+-----END PGP SIGNATURE-----
+
+--vEao7xgI/oilGqZ+--
 
