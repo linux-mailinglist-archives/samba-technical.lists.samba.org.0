@@ -2,46 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F1F659BC6
-	for <lists+samba-technical@lfdr.de>; Fri, 28 Jun 2019 14:40:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23EF559DBC
+	for <lists+samba-technical@lfdr.de>; Fri, 28 Jun 2019 16:30:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=OxJcE7584iPhGG94T3T0zc1okkY2fe465VnqrfdAijQ=; b=vEaySJXHbQM2X/FHWnhUITLTxl
-	AHeG8nqZCFWmvSAe1GyyAIBk278m9RFywciJs9tvNEbcPPP/bJEDQbW+yOJ1vkIURq9+/F5oWAsLI
-	RRw6rAI+BcpllqA69Gu4+t0uFnsTTWJ0BmAs7xDA0HjTWSVhZsjM96NQK2MZDet0H5CnWWVS3F8+K
-	l+JBoVkOFMmZsJxDRsCJac88XWUhz9KsNpkQmM3E0S2Ud1lw1g7qg3FncXoNs53VnzqEWu6GUqk7Y
-	HypNuMEVtMS5+BtfYOU61YaFVW5ebf1jB5MXMAUL7Eatg4sPftEhnn1W5Va/Si/XFx2zKRgw2M2/h
-	Ly1lSVCQ==;
-Received: from localhost ([::1]:58392 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=Ov7nkt03W1Mv4YFTio2j9G0gk6EWjghsZmFl0SuDBiM=; b=lUK7qmThqDtdWaQzIXk/FHjM1R
+	Dxc2vmZZMNv5hM/qiZoJJZ62c4eF3qvpBNiTFVYYAhgt0Nk9xrYmntgQLj2bSkTQrTPbGaA1dlHaH
+	YnHU/rAkwYHWmT0cNcY5oKSinBxRs5ZuiwlIzgSdB82wQ+C1K4d/215FLPW0mL/fvsvWmxTJ+L/gV
+	wvRSF4pOS1iGnP0nmqBLjDsVqF8uZufZ2C+vcOMRndRAf8H3gjCS2ZmtY7a+RKNWj95qIaIsGkWTj
+	Tv9CNOLeIhiSFvAu5LSqqp+MAzga0dg/BV5tfmc8xlEtRPMJK1rUCkfgW2vkZDrphlqrokKyvg0Tc
+	+xEU4L8w==;
+Received: from localhost ([::1]:61854 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hgqAw-002NHY-SF; Fri, 28 Jun 2019 12:40:22 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38700) 
+	id 1hgrsl-002NxO-45; Fri, 28 Jun 2019 14:29:43 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45570) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hgqAs-002NHR-QD
- for samba-technical@lists.samba.org; Fri, 28 Jun 2019 12:40:20 +0000
+ (Exim) id 1hgrsg-002NxH-4G
+ for samba-technical@lists.samba.org; Fri, 28 Jun 2019 14:29:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=OxJcE7584iPhGG94T3T0zc1okkY2fe465VnqrfdAijQ=; b=bcC265Wu0bG672nv6YFilDyu8e
- kdqfJzM4ezva73FxMM8nNlr9yiu2OyDM8QSV6a80/WxihxynrNlPJ6c91dwrRvXUCdzDZFMqzOi/u
- tIwFhw+Yv1rrG9G12TSSLTgWN0bOXg3I4dgGISMxZhVkdc+B3CZ5/y3relvmv85qCssc=;
+ s=42627210; h=Message-ID:Date:Cc:To:From;
+ bh=Ov7nkt03W1Mv4YFTio2j9G0gk6EWjghsZmFl0SuDBiM=; b=D1Vcd+HrPm47abegtRV5JqdyTb
+ +Bz1CgvGwLlU6xRpox5OGonUAmZZkHX7jozjK/3+dARgy0wWuv7/SofAdZHeC6cs4qrsByFFCK4de
+ 8QcDtIdV4a2BgaiwXfAAwP/lErBhQtAL+8huAsrXUe5WPwVv9Ig1w21+biTEXRRxTvoo=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hgqAl-00012K-VC; Fri, 28 Jun 2019 12:40:12 +0000
-Date: Fri, 28 Jun 2019 14:40:10 +0200
-To: Uri Simchoni <uri@samba.org>
-Subject: Re: Document GitLab as the only way to contribute to Samba?
-Message-ID: <20190628124010.GC5892@samba.org>
-References: <1561079117.28284.21.camel@samba.org>
- <20190628104624.GF32415@samba.org>
- <62bc808700dca7a08f3a61c6d7e676119c301843.camel@samba.org>
- <20190628114651.GB5892@samba.org>
- <d2f00126-4507-23de-df51-d41ee28b639a@samba.org>
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1hgrse-0002LP-Oq; Fri, 28 Jun 2019 14:29:36 +0000
+To: "'Martin Schwenke'" <martin@meltin.net>
+References: <20190628142946.7537edfd@martins.ozlabs.org>
+ <vmime.5d15b434.4582.3bcb7b652c1223e3@ms249-lin-003.rotterdam.bazuin.nl>
+ <20190628163954.553b8115@martins.ozlabs.org>
+In-Reply-To: <20190628163954.553b8115@martins.ozlabs.org>
+Subject: RE: Compiling Samba with system Heimdal?
+Date: Fri, 28 Jun 2019 16:29:36 +0200
+Message-ID: <A2CE4032F6664799A60902AB16BDC146@rotterdam.bazuin.nl>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="vEao7xgI/oilGqZ+"
-Content-Disposition: inline
-In-Reply-To: <d2f00126-4507-23de-df51-d41ee28b639a@samba.org>
-User-Agent: Mutt/1.11.4 (2019-03-13)
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Office Outlook 11
+Thread-Index: AdUtfF3J1DeQsdg1TceqyMQmxTSccwAP3OJg
+X-MimeOLE: Produced By Microsoft MimeOLE
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,59 +55,108 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Adam via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Adam <obnox@samba.org>
-Cc: samba-technical@lists.samba.org, Andrew Bartlett <abartlet@samba.org>
+From: "L. van Belle via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: belle@samba.org
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Hai Martin, 
 
---vEao7xgI/oilGqZ+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Ok, its done. 
 
-On 2019-06-28 at 15:08 +0300, Uri Simchoni via samba-technical wrote:
-> On 6/28/19 2:46 PM, Michael Adam via samba-technical wrote:
-> >=20
-> > Ugh. That's really strange. Is this a gitlab design choice?
-> > Because if it is, it's finally a thing (and quite a major one),
-> > where gitlab is way worse than github. ;-)
-> >=20
->=20
-> To be fair, I don't know if GitHub even has CI. What I've seen in  FLOSS
-> projects is that they have their Jenkins/Travis instance or something of
-> that sort (and who knows how many runners), and each PR would trigger a
-> run there, and success/failure would annotate the PR. GitHub just
-> provides the webhook.
+Now, why its not building from source, that i dont know, im really never
+build from source. 
+And i did not have the time to have a good look at it why it failes. 
 
-That is true. CI is always external.
-But you typically configure the repo to require those CIs passing
-for a PR to become merge-able.
+But if you want to test/check it against a 4.10.5 packages samba on buster
+;-)
 
-> I do agree with the bottom line though...
+Here you go, these are not for production (yet), i only quick tested them. 
+As in, the install fine and the basic work, i havent check more. 
 
-And don't get me wrong: I'm not advocating for github here.
-I was just comparing with something I know better.
-And if we could somehow tie the beefier CI with the core repo
-and run it on every MR, that would be great.
-But I probably need to read up on gitlab and it's ci etc.
+Note, only build on/for amd64.
 
-Cheers - Michael
+wget -O - http://apt.van-belle.nl/louis-van-belle.gpg-key.asc | apt-key add
+-
+echo "deb http://apt.van-belle.nl/debian buster-experimental main contrib
+non-free" | sudo tee -a /etc/apt/sources.list.d/van-belle.list
 
->=20
-> Uri.
->=20
+What might help you are the build and changes logs. 
+Found here : http://downloads.van-belle.nl/samba4/Buildlogs/buster/ 
 
---vEao7xgI/oilGqZ+
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+lsb_release -a
+No LSB modules are available.
+Distributor ID: Debian
+Description:    Debian GNU/Linux 10 (buster)
+Release:        10
+Codename:       buster
 
-iF0EARECAB0WIQQ4hxRJ4GXWNWIKYh7JT0k4GE+QNAUCXRYKqAAKCRDJT0k4GE+Q
-NBjBAJ9j8Ea719q4PiYuxPHm6f0iS2GDWwCgojEf2GO7FKRjKlulNPrHZvj74Gk=
-=Johg
------END PGP SIGNATURE-----
+root@debian10test:~# smbd -V
+Version 4.10.5-Debian
+root@debian10test:~#
 
---vEao7xgI/oilGqZ+--
+
+Good weekend guys, 
+
+Greetz, 
+
+Louis
+
+
+
+> -----Oorspronkelijk bericht-----
+> Van: samba-technical 
+> [mailto:samba-technical-bounces@lists.samba.org] Namens 
+> Martin Schwenke via samba-technical
+> Verzonden: vrijdag 28 juni 2019 8:40
+> Aan: L.P.H. van Belle
+> CC: samba-technical@lists.samba.org
+> Onderwerp: Re: Compiling Samba with system Heimdal?
+> 
+> Hi Louis,
+> 
+> On Fri, 28 Jun 2019 08:31:16 +0200, "L.P.H. van Belle via
+> samba-technical" <samba-technical@lists.samba.org> wrote:
+> 
+> > > ../../source4/heimdal/lib/vers/print_version.c:39:  
+> > > > ../../source4/heimdal/lib/roken/roken.h.in:282:10: fatal   
+> > > error: roken-common.h: No such file or directory  
+> > > >  #include <roken-common.h>
+> > > >           ^~~~~~~~~~~~~~~~
+> > > > compilation terminated.
+> > > > 
+> > > > I don't see -I/usr/include/heimdal in there anywhere.  :-(
+> > > > 
+> > > > Can someone please tell me what I'm doing wrong?
+> 
+> > You tried, installing heimdal-multidev ? 
+> > 
+> https://packages.debian.org/search?suite=buster&arch=any&mode=
+> path&searchon=contents&keywords=roken-common.h 
+> 
+> Yep:
+> 
+> dpkg -l heimdal-multidev 
+> Desired=Unknown/Install/Remove/Purge/Hold
+> | 
+> Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-a
+> Wait/Trig-pend
+> |/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
+> ||/ Name             Version      Architecture Description
+> +++-================-============-============-===============
+> ====================================
+> ii  heimdal-multidev 7.5.0+dfsg-3 amd64        Heimdal 
+> Kerberos - Multi-implementation Development
+> 
+> :-(
+> 
+> But thanks for trying!  :-D
+> 
+> peace & happiness,
+> martin
+> 
+> 
+
 
