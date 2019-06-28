@@ -2,56 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B2A35A18D
-	for <lists+samba-technical@lfdr.de>; Fri, 28 Jun 2019 18:57:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4423B5A5E6
+	for <lists+samba-technical@lfdr.de>; Fri, 28 Jun 2019 22:30:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=xUJwlTr8PWwY2a4O3GtCdQ6KJQPyHRI1fGb7piV3HOc=; b=IaNA5Z0wnoDvJW320LmlEbZ9ez
-	eVb+oU9RE7hnfImAWfUl5m5o6od0i+Kc6KewLeAvk2mE/wZr4xtupSx+IyXVuY/7aFgk/8FhRkGos
-	Bda10uEQGl7hyQCr21Db2R03YKa2h8Bcq7EL+MkTvC4dDOpJ3Bx5NRI7P94h10pE8mloL12EG6rLt
-	Nn2DwUW3xxUMBequPLHnWFdMJu3PB1EFtGtq/IhtyZho22rftSbsiJuU9Yc8ZZC+aGu2IIkHZTzIt
-	e1gngEhD6iHA0v2TmNSWScZoB7zhVJBTbgfvItBGLNijqaLvC48A3Aa0bqvipqjtU+So2Rm6+IlQO
-	6k5Lg+Cw==;
-Received: from localhost ([::1]:65460 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=vfWUEsctlBsqQOIERbgHsw3U54U6QgLGlqbspatugVU=; b=gPwH/nwPNxzuV91C32UUcR/Xte
+	M+hESosnbJBX1+9Tkkh9irIOaaqDBYqnv7O4FhpAwt72xVjgJK0/th9wgH35z/BpYkzDtPhWrgTpW
+	2+NHlmRyz/6YqqZHi2W+ShTg0DvuoSoePxNJHrMSHM2OYXT5YWIn5mlXJdnh4hzK5kDRWbqvBCpHz
+	tlPiP9+QagjzKwW0Oomd0kHeconZqBN2hp8kF6JpAxJDOJsObPb4myUC0+pDJ+FvpCmradUVEvz+c
+	gcGYYStE6io3zkPDYc8P1CGr18lBvdIwfF9jGLg9QQLup+y/NqPAVJ3MQ/MyqdjJ6yrgT3dzpRKrv
+	56mwpzlA==;
+Received: from localhost ([::1]:18992 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hguAX-002Oa0-6W; Fri, 28 Jun 2019 16:56:13 +0000
-Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d]:37575) 
+	id 1hgxVC-002P0b-RM; Fri, 28 Jun 2019 20:29:46 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57214) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hguAR-002OZt-K7
- for samba-technical@lists.samba.org; Fri, 28 Jun 2019 16:56:11 +0000
-Received: by mail-lj1-x22d.google.com with SMTP id 131so6664414ljf.4
- for <samba-technical@lists.samba.org>; Fri, 28 Jun 2019 09:56:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=r6cbHmTOMT1JZYprlLo3TDgKYTryDNd+Utpfzir9doU=;
- b=nAuBEHufbSLbiMeypb060po8aQZuKNhf9GbmwjYKJfSbxE8WMu3pdc+PIROBHU73gy
- xooK4f1eL6p5pOaG4NKnDxFUzlK75Jpxt5om+u1fOIDjUd6/BkWFMPRXq7+lqN51VP2Y
- LxD40MTxb/COpRtL9W4q7LQnc9eJzl1QRPSkemuzx3sm+XAnUk43w5Ud63R7an7EXK0b
- /LnDBm5j33DAUhoII+eQzL6YSPuwLcO2LGS026wGe3cXRMFi5TTmJMrFPukdzRRdLkgp
- gAsgMmqsWn7WFcZGC6nbQaNvrhzXHOYieaWgDniphwHsOvKwV24rHM4u1O+3WFOGbRXu
- 8zjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=r6cbHmTOMT1JZYprlLo3TDgKYTryDNd+Utpfzir9doU=;
- b=ban1g5M38XSvmw5k+1ATk7jHeYr89AdVmBMTfxRSJBC25BuQVX7ABz7SinFluqwuJI
- wyfVfByuEzC2qIxX6DvHb4YW6c0ZIpudSK1FdXEtXakI3cNZIpDXGiMOZrOdU0BHEEh9
- L7YjDahPngPCt6ripsQ4UUpH/rHqmcImCExejWm8wiXGvg4FZHMRp1DqveerGugYS2Rc
- v28a2u5HhL5Y7dGDJvfeMnrLVl2sqiIiGM6poVeOGfXFs2J2RYD92oEEHDPPkfrZ2LEq
- tzCgu2Zwd6Dvp4OAfPp5IIsKIz70xLuuSTPsGRKnKQWRfKqtguPd1vwWg8S8y0p0/Qfa
- jGOg==
-X-Gm-Message-State: APjAAAXBcnmmSGl/gjQbznSBtHYsiTRlgt4ZLa+vEoRZiqsk8cGsCT/b
- hqEUMhomR7nTO874F/6QVoPWD+2rcqA8VPQ/2leQ/r6G4Bw=
-X-Google-Smtp-Source: APXvYqzON7ma5OW3sTrEum7q7LFR9aqMASEzXpAcsKJJspYUZnwb8yygOpCqkR12MZOXYxhQUEWd9PLp3iznaomIbrw=
-X-Received: by 2002:a2e:9b84:: with SMTP id z4mr6923883lji.75.1561740966573;
- Fri, 28 Jun 2019 09:56:06 -0700 (PDT)
-MIME-Version: 1.0
-Date: Fri, 28 Jun 2019 17:55:38 +0100
-Message-ID: <CAELK94eFMBfrvxoPQWC20TaUL3cGXm49cTsixkBS04hn6ckkAg@mail.gmail.com>
-Subject: Clarification about Pdml output
-To: P Mairo via samba-technical <samba-technical@lists.samba.org>
+ (Exim) id 1hgxV5-002P0U-JT
+ for samba-technical@lists.samba.org; Fri, 28 Jun 2019 20:29:44 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Cc:To:From:Message-ID;
+ bh=vfWUEsctlBsqQOIERbgHsw3U54U6QgLGlqbspatugVU=; b=Vd3faSWTjLvQIlRdxF5oGGW+lY
+ pf9s97wvgHLioCivMWapNeUBZf1oCkygukJHIr+Gmg8uhr60jaiImcvNqOAwk8nkncelY9qE9kLYV
+ iQ6A7PLuQ7GM3osHZILxtZJ+wLdUoXuit5qigNxZF5I1WuOsKlyR8kN9U0nWI+A1jCVI=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hgxUs-0005w7-QH; Fri, 28 Jun 2019 20:29:27 +0000
+Message-ID: <2bf77950a3762982c3f8b2666f906656a1a64e42.camel@samba.org>
+Subject: An even better GitLab CI (was: Re: Document GitLab as the only way
+ to contribute to Samba?)
+To: Michael Adam <obnox@samba.org>, Uri Simchoni <uri@samba.org>
+Date: Sat, 29 Jun 2019 08:29:22 +1200
+In-Reply-To: <20190628124010.GC5892@samba.org>
+References: <1561079117.28284.21.camel@samba.org>
+ <20190628104624.GF32415@samba.org>
+ <62bc808700dca7a08f3a61c6d7e676119c301843.camel@samba.org>
+ <20190628114651.GB5892@samba.org>
+ <d2f00126-4507-23de-df51-d41ee28b639a@samba.org>
+ <20190628124010.GC5892@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+User-Agent: Evolution 3.30.5 (3.30.5-1.fc29) 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,19 +56,80 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: P Mairo via samba-technical <samba-technical@lists.samba.org>
-Reply-To: P Mairo <akoudanilo@gmail.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello,
-I am working on using the tshark XML output to do better and deeper diffs
-(basically adding ways to let users add ignore rules). and I wonder if I
-may delete some fields by default mainly :
-pos - the starting offset within the packet data where this
-protocol starts
-size - the number of octets in the packet data that this protocol
-covers.
+On Fri, 2019-06-28 at 14:40 +0200, Michael Adam wrote:
+> On 2019-06-28 at 15:08 +0300, Uri Simchoni via samba-technical wrote:
+> > On 6/28/19 2:46 PM, Michael Adam via samba-technical wrote:
+> > > Ugh. That's really strange. Is this a gitlab design choice?
+> > > Because if it is, it's finally a thing (and quite a major one),
+> > > where gitlab is way worse than github. ;-)
+> > > 
+> > 
+> > To be fair, I don't know if GitHub even has CI. What I've seen in  FLOSS
+> > projects is that they have their Jenkins/Travis instance or something of
+> > that sort (and who knows how many runners), and each PR would trigger a
+> > run there, and success/failure would annotate the PR. GitHub just
+> > provides the webhook.
+> 
+> That is true. CI is always external.
+> But you typically configure the repo to require those CIs passing
+> for a PR to become merge-able.
+> 
+> > I do agree with the bottom line though...
+> 
+> And don't get me wrong: I'm not advocating for github here.
+> I was just comparing with something I know better.
+> And if we could somehow tie the beefier CI with the core repo
+> and run it on every MR, that would be great.
+> But I probably need to read up on gitlab and it's ci etc.
 
+When we used Travis CI on GitHub we did the same thing, except we never
+had the full set of tests, it was always a cut down set.
+
+It started as just a compile and very few tests, but enough to catch
+the typical python whitespace errors and mixups between docs and
+loadparm.  Just before we killed it we got it similar to the 'shared'
+set on GitLab (I had to tweak it hard to get the run under an hour
+total). 
+
+I'm also kind of glad the CI is attached to the repo in one sense only:
+The private runners are (after credits) at the Samba Team's cost. 
+Abuse of free CI runners is a real thing, and so I'm more comfortable
+with the risk when we can manually vet/ban users.
+
+The fix is to:
+ - Reduce the time spent in each job by:
+  - use the pipeline feature in GitLab more to split the compile into a
+different job
+  - passing the compiled output (or primed ccache cache) to the 'test'
+runners.  
+
+ - Remove the dependency on an ext4 file system in our SMB tests or
+find a way to get to ext4 on the shared runners (and not unionfs)
+
+ - Reduce further the resource use of our tests
+  - shut down smbd/samba processes when we are done with them in
+selftest.pl
+  - optimise the memory use of smbd/samba even more
+
+All very much practical tasks, we just need help.  I'm always available
+to consult, but I can't take on this much myself.  It would suit a
+(new?) enthusiastic developer who is keen to make a mark and is willing
+to streach the boundaries and try the 'impossible' to prove it isn't
+really.
+
+Thanks,
+
+Andrew Bartlett
 -- 
-https://github.com/RMPR
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+
+
+
