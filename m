@@ -2,45 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13F615B5A3
-	for <lists+samba-technical@lfdr.de>; Mon,  1 Jul 2019 09:16:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 541DB5B65D
+	for <lists+samba-technical@lfdr.de>; Mon,  1 Jul 2019 10:08:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=RF2vms9tbRddEGdtfsM+WZn2jm7ODfT01Ll/7z95z1Y=; b=k7iFO6blk2tQLw0Si2aHOwtUwY
-	QNjFaNNf8C/F3P9H9pcVDtrT1jAUPSBikXg0Wp67f30D/W2nLFWxBU4tf0wGvPB3bDaSTAgQT86uK
-	GnFrzOa6zn7Y6aQLEIafo+pybAKyWlnzfm3iS0nnzXETNLU3UvM3EJcpD/NcWxsITlj+tniDZAUSC
-	bnnZzC+t9K296oDT3xUQ3FFqUVtSX1vuS/GEXPrP/MLH2DysaEYx82Znkh7vYIC9GJo54ZUY75diL
-	CxwoyPVbex53M5w9A8J0ksovt46Sq90mn2QDHo7om3r6ajF+V+NfPQ1OH2BcD5BatikQO7uPvPnXw
-	9D3un1Tg==;
-Received: from localhost ([::1]:65022 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=Tb1sOu3WkiWnllLnLI/6uIAETe6ma1bQrYQTWhODUU4=; b=kw9wRWMAoeoagCfZgWmSTKAsig
+	2qK/M7iqcOahlSi9VktPVjFCl0ULoTkarWJ2OgqyxJ9B8flGcE0DW1w/Q+IsJszEF3xPX5Z/Zh0fn
+	nhuc8zVTC8OEYh3Ghj/Kwsu0ydRAhVtpdpMHZBuzjLQQMJXjdQluNKrZ/nXSPdE2BLPCbxuuwXypc
+	pF682ZxJCnhK+z+1at1Qp7kydU+MkwWumkK/XsdNwA/2WPZiyUI1KnZ3MSMegROT9g/N3OhYwWHhg
+	kq55kAdw1/Qx23U+5lNzw3moCfLt6XRT33/s5P/iM3pfJ0XMIWRb4jZo57QoZUHobhmFNJIdO2ltc
+	oyMj27ZA==;
+Received: from localhost ([::1]:18402 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hhqWk-004HgH-Ge; Mon, 01 Jul 2019 07:15:02 +0000
-Received: from ozlabs.org ([2401:3900:2:1::2]:49799) 
+	id 1hhrMU-004HrN-5z; Mon, 01 Jul 2019 08:08:30 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10176) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hhqWW-004Hg8-4j
- for samba-technical@lists.samba.org; Mon, 01 Jul 2019 07:14:54 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 45cdsp51mxz9s4V;
- Mon,  1 Jul 2019 17:14:38 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1561965278; bh=2bLUQH+bsKaRZIDuK/sRN3trhX2h1dEP+RMSi2QuGok=;
- h=Date:From:To:Subject:From;
- b=TLePlKoEJXnwdB5IOeTkjWIbRv3/m/zAgKoOxzTEePjBrSCxjSqYAbs6M/mFozG+4
- PZqe1encD21s2EN1beKPvqsARU2SHlOXja9D0v7qz/Yih27z1FBCLA3nNzqDOQn8Sf
- pAfA2QRKf6KoVGrVwn/DIAkj8VNf0viEBsGZoT+DTNTyCa+Qr5LMC6bu5T0av1JlLS
- 3Et0lHnEhto7RaQt0oS2/SynTePB4a9ey7jwmFtUNcvP3GAjLJ8Yqw/nrSw9o7vkYx
- Kf0TJYk8TLNeoEHZQTtGIlZ12IeneHCYLrRBqrZwN98ZP4F6ZFwrpwK7CW5//n9yKq
- oF/SV8EiiFDOA==
-Date: Mon, 1 Jul 2019 17:14:37 +1000
-To: Samba Technical <samba-technical@lists.samba.org>
-Subject: [PATCH] CTDB csbuild fixups
-Message-ID: <20190701171437.337d5c2f@martins.ozlabs.org>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+ (Exim) id 1hhrMO-004HrG-NI
+ for samba-technical@lists.samba.org; Mon, 01 Jul 2019 08:08:28 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Message-ID:From:To:CC;
+ bh=Tb1sOu3WkiWnllLnLI/6uIAETe6ma1bQrYQTWhODUU4=; b=UVxGuP/2yTFEqtSCfWvdFW5g/l
+ r1EJUUGKJIvHilsW+2rngcob2Kj5cS46X2HdJ7Hul1OU4Xt3zShBFTbAdj3RcpexR9p3xSx50RPBn
+ oLO3QeLfBCp9b80R5Vx+H/u4P0o1NuBPz6c7Sasp+V+ORHPSA4kb42YSkwxh6BH5ypbw=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hhrML-0005bK-1w
+ for samba-technical@lists.samba.org; Mon, 01 Jul 2019 08:08:21 +0000
+Subject: Re: [HEADS-UP] Using stored immutable file birth time for SMB File-ID
+To: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+References: <20190626135745.lk7757wmy26pgy26@inti>
+ <20190627162137.1077fdc4@samba.org>
+ <28fe2464-3992-84eb-fe14-cc16b41b665b@samba.org>
+Message-ID: <5ed36eb9-2fc8-9573-4a11-002bf78a37cf@samba.org>
+Date: Mon, 1 Jul 2019 10:08:20 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="MP_/h1/VjHv18ARt124wAMGyo0p"
+In-Reply-To: <28fe2464-3992-84eb-fe14-cc16b41b665b@samba.org>
+Content-Type: multipart/mixed; boundary="------------02D36DE835737C4CAC771312"
+Content-Language: en-US
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,2950 +54,2200 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---MP_/h1/VjHv18ARt124wAMGyo0p
-Content-Type: text/plain; charset=US-ASCII
+This is a multi-part message in MIME format.
+--------------02D36DE835737C4CAC771312
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-Lots of csbuild-related CTDB fixups.
+On 6/27/19 4:38 PM, Ralph Boehme via samba-technical wrote:
+> Hi David,
+> 
+> On 6/27/19 4:21 PM, David Disseldorp wrote:
+>> Hi Ralph,
+>>
+>> Another follow-up here, after looking at your patchset...
+>>
+>> On Wed, 26 Jun 2019 15:57:46 +0200, Ralph Boehme via samba-technical wrote:
+>>
+>>> As a file's creation time (or btime for birth-time) may be set by clients, this 
+>>> would result in changed File-IDs every time a client sets the btime. So we need 
+>>> to store an additional copy of a file's original btime. We store the btime as 
+>>> part of the DOS attributes xattr, we need an additional field in there, making 
+>>> for a new level 4 of the xattr info struct.
+>>
+>> IIUC, Btrfs, XFS, ext4 and f2fs already expose an *immutable* btime via
+>> statx. See the discussion in https://patchwork.kernel.org/cover/10812257
+> 
+> thanks for bringing this up. These are interesting times... in the end
+> the kernel may pick up our user.DOSATTRIB... :)
+> 
+>> I'd also imagine that there are FSes out there that can offer their own
+>> immutable never-recycled File-ID.
+> 
+> Yes, HFS+, APFS, NTFS. :) Others?
+> 
+>> Ideally your patchset could cater to both cases by allowing for
+>> make_file_index_from_btime() / update_stat_ex_file_index() calls in the
+>> VFS stat handler
+> 
+> yes, that will work.
+> 
+>> and avoiding the extra dosmode games if the
+>> st_ex_file_index is already set.
+> 
+> oh, good point, I have to fix that. :)
+> 
+>> As a minor nit, I think it'd make sense to combine the new stat_ex bools
+>> into a single flags entry which includes calculated[_original]_birthtime
+>> etc.
+> 
+> Yeah, maybe, I'll take a look.
 
-This is also GitLab merge request:
+proposed patchset for merge available via gitlab CI at
 
-  https://gitlab.com/samba-team/samba/merge_requests/578
+<https://gitlab.com/samba-team/samba/merge_requests/589>
 
-with CI pipeline:
+...and as attachment.
 
-  https://gitlab.com/samba-team/devel/samba/pipelines/68715416
+-slow
 
-Please review and maybe push...
-
-peace & happiness,
-martin
-
---MP_/h1/VjHv18ARt124wAMGyo0p
-Content-Type: text/x-patch
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename=ctdb-csbuild.patch
-
-From 12f4de4622c31bc6d694d95b8d7e9cbe8ecbe531 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sat, 8 Jun 2019 06:08:48 +1000
-Subject: [PATCH 01/32] ctdb-daemon: Make old list_of_nodes() function static
-
-The next commit will change the type of this function, which is only
-used in this file.  So, make it static to isolate the change.
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/include/ctdb_client.h |  3 ---
- ctdb/server/ctdb_client.c  | 10 +++++-----
- 2 files changed, 5 insertions(+), 8 deletions(-)
-
-diff --git a/ctdb/include/ctdb_client.h b/ctdb/include/ctdb_client.h
-index a48e506d271..ef4950ab533 100644
---- a/ctdb/include/ctdb_client.h
-+++ b/ctdb/include/ctdb_client.h
-@@ -278,9 +278,6 @@ uint32_t *list_of_vnnmap_nodes(struct ctdb_context *ctdb,
- 			       struct ctdb_vnn_map *vnn_map,
- 			       TALLOC_CTX *mem_ctx, bool include_self);
- 
--uint32_t *list_of_nodes(struct ctdb_context *ctdb,
--			struct ctdb_node_map_old *node_map,
--			TALLOC_CTX *mem_ctx, uint32_t mask, int exclude_pnn);
- uint32_t *list_of_active_nodes(struct ctdb_context *ctdb,
- 			       struct ctdb_node_map_old *node_map,
- 			       TALLOC_CTX *mem_ctx, bool include_self);
-diff --git a/ctdb/server/ctdb_client.c b/ctdb/server/ctdb_client.c
-index f66ecbea7c1..c5ffa121c3d 100644
---- a/ctdb/server/ctdb_client.c
-+++ b/ctdb/server/ctdb_client.c
-@@ -1772,11 +1772,11 @@ uint32_t *list_of_vnnmap_nodes(struct ctdb_context *ctdb,
- /* Get list of nodes not including those with flags specified by mask.
-  * If exclude_pnn is not -1 then exclude that pnn from the list.
-  */
--uint32_t *list_of_nodes(struct ctdb_context *ctdb,
--			struct ctdb_node_map_old *node_map,
--			TALLOC_CTX *mem_ctx,
--			uint32_t mask,
--			int exclude_pnn)
-+static uint32_t *list_of_nodes(struct ctdb_context *ctdb,
-+			       struct ctdb_node_map_old *node_map,
-+			       TALLOC_CTX *mem_ctx,
-+			       uint32_t mask,
-+			       int exclude_pnn)
- {
- 	int i, j, num_nodes;
- 	uint32_t *nodes;
 -- 
-2.20.1
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
+--------------02D36DE835737C4CAC771312
+Content-Type: text/x-patch;
+ name="master-fileid.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="master-fileid.patch"
 
-From 35ce8849866752e8d7a033462ab40bd448ce32f3 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sat, 8 Jun 2019 06:22:49 +1000
-Subject: [PATCH 02/32] ctdb-daemon: Make type of list_of_nodes() consistent
- with callers
+From 24a41cac15cb81d91b1e51b060789eb6052a8c27 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Thu, 27 Jun 2019 12:50:37 +0200
+Subject: [PATCH 01/22] vfs_catia: pass stat info to synthetic_smb_fname()
 
-Instead of taking exclude_pnn as a parameter, calculate it from an
-include_self_parameter, which is passed through from the 2 calling
-functions.
+This doesn't cause visible damage in vanilla Samba, but would affect downstream
+consumers that add additional fields to struct smb_filename.
 
-While doing this, fix a signed/unsigned comparison issue by declaring
-the new exclude_pnn local variable as an unsigned type.
+For the same reason there's no test.
 
-Signed-off-by: Martin Schwenke <martin@meltin.net>
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=14015
+RN: Ensure vfs_catia passes stat info to stacked VFS modules
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
 ---
- ctdb/server/ctdb_client.c | 23 +++++++++++++++--------
- 1 file changed, 15 insertions(+), 8 deletions(-)
+ source3/modules/vfs_catia.c | 42 ++++++++++++++++++-------------------
+ 1 file changed, 21 insertions(+), 21 deletions(-)
 
-diff --git a/ctdb/server/ctdb_client.c b/ctdb/server/ctdb_client.c
-index c5ffa121c3d..42aa0f5fc39 100644
---- a/ctdb/server/ctdb_client.c
-+++ b/ctdb/server/ctdb_client.c
-@@ -1769,18 +1769,19 @@ uint32_t *list_of_vnnmap_nodes(struct ctdb_context *ctdb,
- 	return nodes;
- }
+diff --git a/source3/modules/vfs_catia.c b/source3/modules/vfs_catia.c
+index 5915e40ff28..762491ede31 100644
+--- a/source3/modules/vfs_catia.c
++++ b/source3/modules/vfs_catia.c
+@@ -193,7 +193,7 @@ static DIR *catia_opendir(vfs_handle_struct *handle,
+ 	mapped_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 				name_mapped,
+ 				NULL,
+-				NULL,
++				&smb_fname->st,
+ 				smb_fname->flags);
+ 	if (mapped_smb_fname == NULL) {
+ 		TALLOC_FREE(mapped_smb_fname);
+@@ -722,7 +722,7 @@ static int catia_chown(vfs_handle_struct *handle,
+ 	catia_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (catia_smb_fname == NULL) {
+ 		TALLOC_FREE(name);
+@@ -760,7 +760,7 @@ static int catia_lchown(vfs_handle_struct *handle,
+ 	catia_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (catia_smb_fname == NULL) {
+ 		TALLOC_FREE(name);
+@@ -797,7 +797,7 @@ static int catia_chmod(vfs_handle_struct *handle,
+ 	catia_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (catia_smb_fname == NULL) {
+ 		TALLOC_FREE(name);
+@@ -832,7 +832,7 @@ static int catia_rmdir(vfs_handle_struct *handle,
+ 	catia_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (catia_smb_fname == NULL) {
+ 		TALLOC_FREE(name);
+@@ -867,7 +867,7 @@ static int catia_mkdir(vfs_handle_struct *handle,
+ 	catia_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (catia_smb_fname == NULL) {
+ 		TALLOC_FREE(name);
+@@ -902,7 +902,7 @@ static int catia_chdir(vfs_handle_struct *handle,
+ 	catia_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (catia_smb_fname == NULL) {
+ 		TALLOC_FREE(name);
+@@ -968,7 +968,7 @@ catia_realpath(vfs_handle_struct *handle,
+ 	catia_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					mapped_name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (catia_smb_fname == NULL) {
+ 		TALLOC_FREE(mapped_name);
+@@ -1001,7 +1001,7 @@ static int catia_chflags(struct vfs_handle_struct *handle,
+ 	catia_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (catia_smb_fname == NULL) {
+ 		TALLOC_FREE(name);
+@@ -1046,7 +1046,7 @@ catia_streaminfo(struct vfs_handle_struct *handle,
+ 	catia_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					mapped_name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (catia_smb_fname == NULL) {
+ 		TALLOC_FREE(mapped_name);
+@@ -1126,7 +1126,7 @@ catia_get_nt_acl(struct vfs_handle_struct *handle,
+ 	mapped_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					mapped_name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (mapped_smb_fname == NULL) {
+ 		TALLOC_FREE(mapped_name);
+@@ -1165,7 +1165,7 @@ catia_sys_acl_get_file(vfs_handle_struct *handle,
+ 	mapped_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					mapped_name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (mapped_smb_fname == NULL) {
+ 		TALLOC_FREE(mapped_name);
+@@ -1210,7 +1210,7 @@ catia_sys_acl_set_file(vfs_handle_struct *handle,
+ 	mapped_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					mapped_name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (mapped_smb_fname == NULL) {
+ 		TALLOC_FREE(mapped_name);
+@@ -1253,7 +1253,7 @@ catia_sys_acl_delete_def_file(vfs_handle_struct *handle,
+ 	mapped_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					mapped_name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (mapped_smb_fname == NULL) {
+ 		TALLOC_FREE(mapped_name);
+@@ -1306,7 +1306,7 @@ catia_getxattr(vfs_handle_struct *handle,
+ 	mapped_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					mapped_name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (mapped_smb_fname == NULL) {
+ 		TALLOC_FREE(mapped_name);
+@@ -1353,7 +1353,7 @@ catia_listxattr(vfs_handle_struct *handle,
+ 	mapped_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					mapped_name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (mapped_smb_fname == NULL) {
+ 		TALLOC_FREE(mapped_name);
+@@ -1406,7 +1406,7 @@ catia_removexattr(vfs_handle_struct *handle,
+ 	mapped_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					mapped_name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (mapped_smb_fname == NULL) {
+ 		TALLOC_FREE(mapped_name);
+@@ -1465,7 +1465,7 @@ catia_setxattr(vfs_handle_struct *handle,
+ 	mapped_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					mapped_name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (mapped_smb_fname == NULL) {
+ 		TALLOC_FREE(mapped_name);
+@@ -2274,7 +2274,7 @@ static NTSTATUS catia_get_compression(vfs_handle_struct *handle,
+ 		mapped_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 						mapped_name,
+ 						NULL,
+-						NULL,
++						&smb_fname->st,
+ 						smb_fname->flags);
+ 		if (mapped_smb_fname == NULL) {
+ 			TALLOC_FREE(mapped_name);
+@@ -2367,7 +2367,7 @@ static NTSTATUS catia_get_dos_attributes(struct vfs_handle_struct *handle,
+ 	mapped_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					mapped_name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (mapped_smb_fname == NULL) {
+ 		TALLOC_FREE(mapped_name);
+@@ -2401,7 +2401,7 @@ static NTSTATUS catia_set_dos_attributes(struct vfs_handle_struct *handle,
+ 	mapped_smb_fname = synthetic_smb_fname(talloc_tos(),
+ 					mapped_name,
+ 					NULL,
+-					NULL,
++					&smb_fname->st,
+ 					smb_fname->flags);
+ 	if (mapped_smb_fname == NULL) {
+ 		TALLOC_FREE(mapped_name);
+-- 
+2.21.0
+
+
+From f508906484a58fd842cc13f4ba89cd6213bac797 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Sun, 30 Jun 2019 14:43:28 +0200
+Subject: [PATCH 02/22] idl: add xattr_DosInfo4 to xattr_DosInfo in xattr.idl
+
+Adding itime, removing unused ea_size, size, alloc_size and change_time.
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ librpc/idl/xattr.idl | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/librpc/idl/xattr.idl b/librpc/idl/xattr.idl
+index 38d32fd85b1..a2c4f25d0fd 100644
+--- a/librpc/idl/xattr.idl
++++ b/librpc/idl/xattr.idl
+@@ -73,7 +73,8 @@ interface xattr
+ 		XATTR_DOSINFO_SIZE              = 0x00000004,
+ 		XATTR_DOSINFO_ALLOC_SIZE        = 0x00000008,
+ 		XATTR_DOSINFO_CREATE_TIME       = 0x00000010,
+-		XATTR_DOSINFO_CHANGE_TIME       = 0x00000020
++		XATTR_DOSINFO_CHANGE_TIME       = 0x00000020,
++		XATTR_DOSINFO_ITIME             = 0x00000040
+ 	} xattr_DosInfoValidFlags;
  
--/* Get list of nodes not including those with flags specified by mask.
-- * If exclude_pnn is not -1 then exclude that pnn from the list.
-- */
-+/* Get list of nodes not including those with flags specified by mask */
- static uint32_t *list_of_nodes(struct ctdb_context *ctdb,
- 			       struct ctdb_node_map_old *node_map,
- 			       TALLOC_CTX *mem_ctx,
- 			       uint32_t mask,
--			       int exclude_pnn)
-+			       bool include_self)
- {
- 	int i, j, num_nodes;
-+	uint32_t exclude_pnn;
- 	uint32_t *nodes;
+ 	typedef struct {
+@@ -86,11 +87,19 @@ interface xattr
+ 		NTTIME change_time;
+ 	} xattr_DosInfo3;
  
-+	exclude_pnn = include_self ? CTDB_UNKNOWN_PNN : ctdb->pnn;
++	typedef struct {
++		xattr_DosInfoValidFlags valid_flags;
++		uint32 attrib;
++		NTTIME itime;
++		NTTIME create_time;
++	} xattr_DosInfo4;
 +
- 	for (i=num_nodes=0;i<node_map->num;i++) {
- 		if (node_map->nodes[i].flags & mask) {
- 			continue;
-@@ -1812,8 +1813,11 @@ uint32_t *list_of_active_nodes(struct ctdb_context *ctdb,
- 				TALLOC_CTX *mem_ctx,
- 				bool include_self)
- {
--	return list_of_nodes(ctdb, node_map, mem_ctx, NODE_FLAGS_INACTIVE,
--			     include_self ? -1 : ctdb->pnn);
-+	return list_of_nodes(ctdb,
-+			     node_map,
-+			     mem_ctx,
-+			     NODE_FLAGS_INACTIVE,
-+			     include_self);
- }
+ 	typedef [public,switch_type(uint16)] union {
+ 		[case(0xFFFF)] xattr_DosInfoFFFFCompat compatinfoFFFF;
+                 [case(1)] xattr_DosInfo1 info1;
+                 [case(2)] xattr_DosInfo2Old oldinfo2;
+ 		[case(3)] xattr_DosInfo3 info3;
++		[case(4)] xattr_DosInfo4 info4;
+         } xattr_DosInfo;
  
- uint32_t *list_of_connected_nodes(struct ctdb_context *ctdb,
-@@ -1821,8 +1825,11 @@ uint32_t *list_of_connected_nodes(struct ctdb_context *ctdb,
- 				TALLOC_CTX *mem_ctx,
- 				bool include_self)
- {
--	return list_of_nodes(ctdb, node_map, mem_ctx, NODE_FLAGS_DISCONNECTED,
--			     include_self ? -1 : ctdb->pnn);
-+	return list_of_nodes(ctdb,
-+			     node_map,
-+			     mem_ctx,
-+			     NODE_FLAGS_DISCONNECTED,
-+			     include_self);
- }
- 
- /*
+ 	typedef [public] struct {
 -- 
-2.20.1
+2.21.0
 
 
-From f4252f4b6cc1fee885a2d9987c39bab72ccf8826 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sat, 8 Jun 2019 06:38:56 +1000
-Subject: [PATCH 03/32] ctdb-daemon: Fix signed/unsigned comparisons by
- declaring as unsigned
+From 252fbb8ec10103e5befd3658c5bc57911cd309a9 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Thu, 27 Jun 2019 16:52:25 +0200
+Subject: [PATCH 03/22] s3: remove unused st_ex_mask from struct stat_ex
 
-Signed-off-by: Martin Schwenke <martin@meltin.net>
+Signed-off-by: Ralph Boehme <slow@samba.org>
 ---
- ctdb/include/ctdb_private.h        |  2 +-
- ctdb/server/ctdb_client.c          |  4 ++--
- ctdb/server/ctdb_daemon.c          |  2 +-
- ctdb/server/ctdb_freeze.c          | 10 +++++-----
- ctdb/server/ctdb_keepalive.c       |  2 +-
- ctdb/server/ctdb_lock_helper.c     |  3 ++-
- ctdb/server/ctdb_ltdb_server.c     |  2 +-
- ctdb/server/ctdb_persistent.c      |  2 +-
- ctdb/server/ctdb_server.c          | 10 +++++-----
- ctdb/server/ctdb_takeover.c        | 19 ++++++++++++-------
- ctdb/server/ctdb_takeover_helper.c |  6 +++---
- ctdb/server/ctdb_traverse.c        |  2 +-
- ctdb/server/ctdb_update_record.c   |  9 ++++++---
- ctdb/server/ctdb_vacuum.c          |  4 ++--
- ctdb/server/eventscript.c          |  2 +-
- 15 files changed, 44 insertions(+), 35 deletions(-)
+ source3/include/includes.h        |  1 -
+ source3/include/vfs.h             |  1 +
+ source3/librpc/idl/open_files.idl |  1 -
+ source3/smbd/durable.c            | 14 --------------
+ 4 files changed, 1 insertion(+), 16 deletions(-)
 
-diff --git a/ctdb/include/ctdb_private.h b/ctdb/include/ctdb_private.h
-index ea00bb12128..9eec244c4f2 100644
---- a/ctdb/include/ctdb_private.h
-+++ b/ctdb/include/ctdb_private.h
-@@ -713,7 +713,7 @@ int ctdb_load_persistent_health(struct ctdb_context *ctdb,
- int ctdb_update_persistent_health(struct ctdb_context *ctdb,
- 				  struct ctdb_db_context *ctdb_db,
- 				  const char *reason,/* NULL means healthy */
--				  int num_healthy_nodes);
-+				  unsigned int num_healthy_nodes);
- int ctdb_recheck_persistent_health(struct ctdb_context *ctdb);
+diff --git a/source3/include/includes.h b/source3/include/includes.h
+index c26b75f5791..8f398d0d24b 100644
+--- a/source3/include/includes.h
++++ b/source3/include/includes.h
+@@ -213,7 +213,6 @@ struct stat_ex {
+ 	blkcnt_t	st_ex_blocks;
  
- int32_t ctdb_control_db_set_healthy(struct ctdb_context *ctdb,
-diff --git a/ctdb/server/ctdb_client.c b/ctdb/server/ctdb_client.c
-index 42aa0f5fc39..419333025cb 100644
---- a/ctdb/server/ctdb_client.c
-+++ b/ctdb/server/ctdb_client.c
-@@ -1746,7 +1746,7 @@ uint32_t *list_of_vnnmap_nodes(struct ctdb_context *ctdb,
- 				TALLOC_CTX *mem_ctx,
- 				bool include_self)
- {
--	int i, j, num_nodes;
-+	unsigned int i, j, num_nodes;
- 	uint32_t *nodes;
- 
- 	for (i=num_nodes=0;i<vnn_map->size;i++) {
-@@ -1776,7 +1776,7 @@ static uint32_t *list_of_nodes(struct ctdb_context *ctdb,
- 			       uint32_t mask,
- 			       bool include_self)
- {
--	int i, j, num_nodes;
-+	unsigned int i, j, num_nodes;
- 	uint32_t exclude_pnn;
- 	uint32_t *nodes;
- 
-diff --git a/ctdb/server/ctdb_daemon.c b/ctdb/server/ctdb_daemon.c
-index acb40bdb8df..6a4e42d8010 100644
---- a/ctdb/server/ctdb_daemon.c
-+++ b/ctdb/server/ctdb_daemon.c
-@@ -1345,7 +1345,7 @@ static void ctdb_create_pidfile(TALLOC_CTX *mem_ctx)
- 
- static void ctdb_initialise_vnn_map(struct ctdb_context *ctdb)
- {
--	int i, j, count;
-+	unsigned int i, j, count;
- 
- 	/* initialize the vnn mapping table, skipping any deleted nodes */
- 	ctdb->vnn_map = talloc(ctdb, struct ctdb_vnn_map);
-diff --git a/ctdb/server/ctdb_freeze.c b/ctdb/server/ctdb_freeze.c
-index 10841efa1b9..b4b99a0e5c9 100644
---- a/ctdb/server/ctdb_freeze.c
-+++ b/ctdb/server/ctdb_freeze.c
-@@ -86,7 +86,7 @@ static int db_transaction_start_handler(struct ctdb_db_context *ctdb_db,
- static int db_transaction_commit_handler(struct ctdb_db_context *ctdb_db,
- 					 void *private_data)
- {
--	int healthy_nodes = *(int *)private_data;
-+	unsigned int healthy_nodes = *(unsigned int *)private_data;
- 	int ret;
- 
- 	tdb_add_flags(ctdb_db->ltdb->tdb, TDB_NOLOCK);
-@@ -414,7 +414,7 @@ static int db_invalidate(struct ctdb_db_context *ctdb_db, void *private_data)
-  */
- static int db_count(struct ctdb_db_context *ctdb_db, void *private_data)
- {
--	int *count = (int *)private_data;
-+	unsigned int *count = (unsigned int *)private_data;
- 
- 	*count += 1;
- 
-@@ -464,7 +464,7 @@ static void ctdb_start_freeze(struct ctdb_context *ctdb)
- 	ctdb_db_iterator(ctdb, db_invalidate, NULL);
- 
- 	if (ctdb->freeze_mode == CTDB_FREEZE_FROZEN) {
--		int count = 0;
-+		unsigned int count = 0;
- 
- 		/*
- 		 * Check if all the databases are frozen
-@@ -711,7 +711,7 @@ static int db_cancel_transaction(struct ctdb_db_context *ctdb_db,
- 
- struct db_commit_transaction_state {
- 	uint32_t transaction_id;
--	int healthy_nodes;
-+	unsigned int healthy_nodes;
+ 	uint32_t	st_ex_flags;
+-	uint32_t	st_ex_mask;
  };
  
- static int db_commit_transaction(struct ctdb_db_context *ctdb_db,
-@@ -809,7 +809,7 @@ int32_t ctdb_control_db_transaction_commit(struct ctdb_context *ctdb,
- 		(struct ctdb_transdb *)indata.dptr;
- 	struct ctdb_db_context *ctdb_db;
- 	struct db_commit_transaction_state state;
--	int healthy_nodes, i;
-+	unsigned int healthy_nodes, i;
+ typedef struct stat_ex SMB_STRUCT_STAT;
+diff --git a/source3/include/vfs.h b/source3/include/vfs.h
+index 67cbe758674..39ea04bf266 100644
+--- a/source3/include/vfs.h
++++ b/source3/include/vfs.h
+@@ -261,6 +261,7 @@
+ /* Version 40 - Add SMB_VFS_GET_DOS_ATTRIBUTES_SEND/RECV */
+ /* Bump to version 41, Samba 4.11 will ship with that */
+ /* Version 41 - Remove SMB_VFS_BRL_CANCEL_WINDOWS */
++/* Version 41 - Remove unused st_ex_mask from struct stat_ex */
  
- 	ctdb_db = find_ctdb_db(ctdb, w->db_id);
- 	if (ctdb_db == NULL) {
-diff --git a/ctdb/server/ctdb_keepalive.c b/ctdb/server/ctdb_keepalive.c
-index b4c9d3731c4..9155adef301 100644
---- a/ctdb/server/ctdb_keepalive.c
-+++ b/ctdb/server/ctdb_keepalive.c
-@@ -107,7 +107,7 @@ static void ctdb_check_for_dead_nodes(struct tevent_context *ev,
- 				      struct timeval t, void *private_data)
- {
- 	struct ctdb_context *ctdb = talloc_get_type(private_data, struct ctdb_context);
--	int i;
-+	unsigned int i;
+ #define SMB_VFS_INTERFACE_VERSION 41
  
- 	/* send a keepalive to all other nodes, unless */
- 	for (i=0;i<ctdb->num_nodes;i++) {
-diff --git a/ctdb/server/ctdb_lock_helper.c b/ctdb/server/ctdb_lock_helper.c
-index f918b73dbd3..6b6fbbe27a5 100644
---- a/ctdb/server/ctdb_lock_helper.c
-+++ b/ctdb/server/ctdb_lock_helper.c
-@@ -86,7 +86,8 @@ static void usage(const char *progname)
- static uint8_t *hex_decode_talloc(TALLOC_CTX *mem_ctx,
- 				  const char *hex_in, size_t *len)
- {
--	int i, num;
-+	unsigned int i;
-+	int num;
- 	uint8_t *buffer;
+diff --git a/source3/librpc/idl/open_files.idl b/source3/librpc/idl/open_files.idl
+index d724d738214..5668a0b97e2 100644
+--- a/source3/librpc/idl/open_files.idl
++++ b/source3/librpc/idl/open_files.idl
+@@ -80,7 +80,6 @@ interface open_files
+ 		hyper		st_ex_blksize;
+ 		hyper		st_ex_blocks;
+ 		uint32		st_ex_flags;
+-		uint32		st_ex_mask;
+ 	} vfs_default_durable_stat;
  
- 	*len = strlen(hex_in) / 2;
-diff --git a/ctdb/server/ctdb_ltdb_server.c b/ctdb/server/ctdb_ltdb_server.c
-index 8cc6c4ba4cc..022baf62d92 100644
---- a/ctdb/server/ctdb_ltdb_server.c
-+++ b/ctdb/server/ctdb_ltdb_server.c
-@@ -425,7 +425,7 @@ int ctdb_load_persistent_health(struct ctdb_context *ctdb,
- int ctdb_update_persistent_health(struct ctdb_context *ctdb,
- 				  struct ctdb_db_context *ctdb_db,
- 				  const char *given_reason,/* NULL means healthy */
--				  int num_healthy_nodes)
-+				  unsigned int num_healthy_nodes)
- {
- 	struct tdb_context *tdb = ctdb->db_persistent_health->tdb;
- 	int ret;
-diff --git a/ctdb/server/ctdb_persistent.c b/ctdb/server/ctdb_persistent.c
-index fc286552747..26717441d17 100644
---- a/ctdb/server/ctdb_persistent.c
-+++ b/ctdb/server/ctdb_persistent.c
-@@ -178,7 +178,7 @@ int32_t ctdb_control_trans3_commit(struct ctdb_context *ctdb,
- {
- 	struct ctdb_client *client;
- 	struct ctdb_persistent_state *state;
--	int i;
-+	unsigned int i;
- 	struct ctdb_marshall_buffer *m = (struct ctdb_marshall_buffer *)recdata.dptr;
- 	struct ctdb_db_context *ctdb_db;
+ 	typedef [public] struct {
+diff --git a/source3/smbd/durable.c b/source3/smbd/durable.c
+index 0c4a2fec684..311f7e598a4 100644
+--- a/source3/smbd/durable.c
++++ b/source3/smbd/durable.c
+@@ -122,7 +122,6 @@ NTSTATUS vfs_default_durable_cookie(struct files_struct *fsp,
+ 	cookie.stat_info.st_ex_blksize = fsp->fsp_name->st.st_ex_blksize;
+ 	cookie.stat_info.st_ex_blocks = fsp->fsp_name->st.st_ex_blocks;
+ 	cookie.stat_info.st_ex_flags = fsp->fsp_name->st.st_ex_flags;
+-	cookie.stat_info.st_ex_mask = fsp->fsp_name->st.st_ex_mask;
  
-diff --git a/ctdb/server/ctdb_server.c b/ctdb/server/ctdb_server.c
-index c991b85d99b..eb11eb1f95c 100644
---- a/ctdb/server/ctdb_server.c
-+++ b/ctdb/server/ctdb_server.c
-@@ -72,7 +72,7 @@ static int convert_node_map_to_list(struct ctdb_context *ctdb,
- 				    struct ctdb_node ***nodes,
- 				    uint32_t *num_nodes)
- {
--	int i;
-+	unsigned int i;
+ 	ndr_err = ndr_push_struct_blob(cookie_blob, mem_ctx, &cookie,
+ 			(ndr_push_flags_fn_t)ndr_push_vfs_default_durable_cookie);
+@@ -272,7 +271,6 @@ NTSTATUS vfs_default_durable_disconnect(struct files_struct *fsp,
+ 	cookie.stat_info.st_ex_blksize = fsp->fsp_name->st.st_ex_blksize;
+ 	cookie.stat_info.st_ex_blocks = fsp->fsp_name->st.st_ex_blocks;
+ 	cookie.stat_info.st_ex_flags = fsp->fsp_name->st.st_ex_flags;
+-	cookie.stat_info.st_ex_mask = fsp->fsp_name->st.st_ex_mask;
  
- 	*nodes = talloc_zero_array(mem_ctx,
- 					struct ctdb_node *, node_map->num);
-@@ -157,7 +157,7 @@ int ctdb_set_address(struct ctdb_context *ctdb, const char *address)
- */
- uint32_t ctdb_get_num_active_nodes(struct ctdb_context *ctdb)
- {
--	int i;
-+	unsigned int i;
- 	uint32_t count=0;
- 	for (i=0; i < ctdb->num_nodes; i++) {
- 		if (!(ctdb->nodes[i]->flags & NODE_FLAGS_INACTIVE)) {
-@@ -383,7 +383,7 @@ static void ctdb_defer_packet(struct ctdb_context *ctdb, struct ctdb_req_header
- static void ctdb_broadcast_packet_all(struct ctdb_context *ctdb, 
- 				      struct ctdb_req_header *hdr)
- {
--	int i;
-+	unsigned int i;
- 	for (i=0; i < ctdb->num_nodes; i++) {
- 		if (ctdb->nodes[i]->flags & NODE_FLAGS_DELETED) {
- 			continue;
-@@ -399,7 +399,7 @@ static void ctdb_broadcast_packet_all(struct ctdb_context *ctdb,
- static void ctdb_broadcast_packet_active(struct ctdb_context *ctdb,
- 					 struct ctdb_req_header *hdr)
- {
--	int i;
-+	unsigned int i;
- 	for (i = 0; i < ctdb->num_nodes; i++) {
- 		if (ctdb->nodes[i]->flags & NODE_FLAGS_INACTIVE) {
- 			continue;
-@@ -416,7 +416,7 @@ static void ctdb_broadcast_packet_active(struct ctdb_context *ctdb,
- static void ctdb_broadcast_packet_connected(struct ctdb_context *ctdb, 
- 					    struct ctdb_req_header *hdr)
- {
--	int i;
-+	unsigned int i;
- 	for (i=0; i < ctdb->num_nodes; i++) {
- 		if (ctdb->nodes[i]->flags & NODE_FLAGS_DELETED) {
- 			continue;
-diff --git a/ctdb/server/ctdb_takeover.c b/ctdb/server/ctdb_takeover.c
-index d8dc1c34af5..844e3c32866 100644
---- a/ctdb/server/ctdb_takeover.c
-+++ b/ctdb/server/ctdb_takeover.c
-@@ -75,9 +75,11 @@ struct ctdb_vnn {
- 	ctdb_sock_addr public_address;
- 	uint8_t public_netmask_bits;
+ 	ndr_err = ndr_push_struct_blob(&new_cookie_blob, mem_ctx, &cookie,
+ 			(ndr_push_flags_fn_t)ndr_push_vfs_default_durable_cookie);
+@@ -497,18 +495,6 @@ static bool vfs_default_durable_reconnect_check_stat(
+ 		return false;
+ 	}
  
--	/* the node number that is serving this public address, if any.
--	   If no node serves this ip it is set to -1 */
--	int32_t pnn;
-+	/*
-+	 * The node number that is serving this public address - set
-+	 * to CTDB_UNKNOWN_PNN if node is serving it
-+	 */
-+	uint32_t pnn;
+-	if (cookie_st->st_ex_mask != fsp_st->st_ex_mask) {
+-		DEBUG(1, ("vfs_default_durable_reconnect (%s): "
+-			  "stat_ex.%s differs: "
+-			  "cookie:%llu != stat:%llu, "
+-			  "denying durable reconnect\n",
+-			  name,
+-			  "st_ex_mask",
+-			  (unsigned long long)cookie_st->st_ex_mask,
+-			  (unsigned long long)fsp_st->st_ex_mask));
+-		return false;
+-	}
+-
+ 	return true;
+ }
  
- 	/* List of clients to tickle for this public address */
- 	struct ctdb_tcp_array *tcp_array;
-@@ -370,7 +372,7 @@ static void ctdb_control_send_arp(struct tevent_context *ev,
- {
- 	struct ctdb_takeover_arp *arp = talloc_get_type(private_data, 
- 							struct ctdb_takeover_arp);
--	int i, ret;
-+	int ret;
- 	struct ctdb_tcp_array *tcparray;
- 	const char *iface = ctdb_vnn_iface_string(arp->vnn);
+-- 
+2.21.0
+
+
+From 6d15fd16f464ba13c8926ee066fca7fee82a006b Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Thu, 27 Jun 2019 17:06:46 +0200
+Subject: [PATCH 04/22] s3: convert struct stat_ex st_ex_calculated_birthtime
+ bool to flags
+
+Subsequent commits will add more flags, this paves the way.
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ source3/include/includes.h        |  7 +++++--
+ source3/include/vfs.h             |  1 +
+ source3/lib/system.c              | 11 ++++++-----
+ source3/librpc/idl/open_files.idl |  2 +-
+ source3/modules/vfs_ceph.c        |  2 +-
+ source3/modules/vfs_gpfs.c        |  4 ++--
+ source3/smbd/durable.c            | 12 +++++-------
+ 7 files changed, 21 insertions(+), 18 deletions(-)
+
+diff --git a/source3/include/includes.h b/source3/include/includes.h
+index 8f398d0d24b..ec486be6efa 100644
+--- a/source3/include/includes.h
++++ b/source3/include/includes.h
+@@ -190,6 +190,9 @@ typedef uint64_t br_off;
+ #define SOFF_T_R(p, ofs, v) (SIVAL(p,(ofs)+4,(v)&0xFFFFFFFF), SIVAL(p,ofs,(v)>>32))
+ #define IVAL_TO_SMB_OFF_T(buf,off) ((off_t)(( ((uint64_t)(IVAL((buf),(off)))) & ((uint64_t)0xFFFFFFFF) )))
  
-@@ -382,6 +384,8 @@ static void ctdb_control_send_arp(struct tevent_context *ev,
- 
- 	tcparray = arp->tcparray;
- 	if (tcparray) {
-+		unsigned int i;
++/* Is birthtime real, or was it calculated ? */
++#define ST_EX_IFLAG_CALCULATED_BTIME		(1 << 0)
 +
- 		for (i=0;i<tcparray->num;i++) {
- 			struct ctdb_connection *tcon;
- 
-@@ -1366,7 +1370,7 @@ int32_t ctdb_control_tcp_client(struct ctdb_context *ctdb, uint32_t client_id,
- static struct ctdb_connection *ctdb_tcp_find(struct ctdb_tcp_array *array,
- 					   struct ctdb_connection *tcp)
- {
--	int i;
-+	unsigned int i;
- 
- 	if (array == NULL) {
- 		return NULL;
-@@ -1949,7 +1953,7 @@ int32_t ctdb_control_get_tcp_tickle_list(struct ctdb_context *ctdb, TDB_DATA ind
- 	ctdb_sock_addr *addr = (ctdb_sock_addr *)indata.dptr;
- 	struct ctdb_tickle_list_old *list;
- 	struct ctdb_tcp_array *tcparray;
--	int num, i;
-+	unsigned int num, i;
- 	struct ctdb_vnn *vnn;
- 	unsigned port;
- 
-@@ -2393,7 +2397,8 @@ static int ctdb_reloadips_child(struct ctdb_context *ctdb)
- 	TDB_DATA data;
- 	struct ctdb_client_control_state *state;
- 	bool first_add;
--	int i, ret;
-+	unsigned int i;
-+	int ret;
- 
- 	CTDB_NO_MEMORY(ctdb, mem_ctx);
- 
-diff --git a/ctdb/server/ctdb_takeover_helper.c b/ctdb/server/ctdb_takeover_helper.c
-index 9aa77d14f1d..8740838cfdd 100644
---- a/ctdb/server/ctdb_takeover_helper.c
-+++ b/ctdb/server/ctdb_takeover_helper.c
-@@ -692,7 +692,7 @@ struct takeover_state {
- 	struct tevent_context *ev;
- 	struct ctdb_client_context *client;
- 	struct timeval timeout;
--	int num_nodes;
-+	unsigned int num_nodes;
- 	uint32_t *pnns_connected;
- 	int num_connected;
- 	uint32_t *pnns_active;
-@@ -1076,8 +1076,8 @@ void takeover_failed(struct tevent_req *req, int ret)
- 		req, struct takeover_state);
- 	struct tevent_req *subreq;
- 	uint32_t max_pnn = CTDB_UNKNOWN_PNN;
--	int max_credits = 0;
--	int pnn;
-+	unsigned int max_credits = 0;
-+	uint32_t pnn;
- 
- 	/* Check that bans are enabled */
- 	if (state->tun_list->enable_bans == 0) {
-diff --git a/ctdb/server/ctdb_traverse.c b/ctdb/server/ctdb_traverse.c
-index 5ea19709599..4865dcc94f0 100644
---- a/ctdb/server/ctdb_traverse.c
-+++ b/ctdb/server/ctdb_traverse.c
-@@ -390,7 +390,7 @@ static struct ctdb_traverse_all_handle *ctdb_daemon_traverse_all(struct ctdb_db_
- 		/* volatile database, traverse all active nodes */
- 		destination = CTDB_BROADCAST_ACTIVE;
- 	} else {
--		int i;
-+		unsigned int i;
- 		/* persistent database, traverse one node, preferably
- 		 * the local one
- 		 */
-diff --git a/ctdb/server/ctdb_update_record.c b/ctdb/server/ctdb_update_record.c
-index 04b6901ce55..405499c81e2 100644
---- a/ctdb/server/ctdb_update_record.c
-+++ b/ctdb/server/ctdb_update_record.c
-@@ -53,7 +53,8 @@ struct ctdb_persistent_write_state {
+ /*
+  * Type for stat structure.
   */
- static int ctdb_persistent_store(struct ctdb_persistent_write_state *state)
- {
--	int ret, i;
-+	unsigned int i;
-+	int ret;
- 	struct ctdb_rec_data_old *rec = NULL;
- 	struct ctdb_marshall_buffer *m = state->m;
+@@ -207,12 +210,12 @@ struct stat_ex {
+ 	struct timespec st_ex_mtime;
+ 	struct timespec st_ex_ctime;
+ 	struct timespec st_ex_btime; /* birthtime */
+-	/* Is birthtime real, or was it calculated ? */
+-	bool		st_ex_calculated_birthtime;
++
+ 	blksize_t	st_ex_blksize;
+ 	blkcnt_t	st_ex_blocks;
  
-@@ -73,8 +74,10 @@ static int ctdb_persistent_store(struct ctdb_persistent_write_state *state)
- 		rec = ctdb_marshall_loop_next(m, rec, NULL, &header, &key, &data);
+ 	uint32_t	st_ex_flags;
++	uint32_t	st_ex_iflags;
+ };
  
- 		if (rec == NULL) {
--			DEBUG(DEBUG_ERR,("Failed to get next record %d for db_id 0x%08x in ctdb_persistent_store\n",
--					 i, state->ctdb_db->db_id));
-+			D_ERR("Failed to get next record %u for db_id 0x%08x "
-+			      "in ctdb_persistent_store\n",
-+			      i,
-+			      state->ctdb_db->db_id);
- 			talloc_free(tmp_ctx);
- 			goto failed;
- 		}
-diff --git a/ctdb/server/ctdb_vacuum.c b/ctdb/server/ctdb_vacuum.c
-index 9d086917f3c..0c3770267bc 100644
---- a/ctdb/server/ctdb_vacuum.c
-+++ b/ctdb/server/ctdb_vacuum.c
-@@ -655,7 +655,7 @@ static void ctdb_vacuum_traverse_db(struct ctdb_db_context *ctdb_db,
- static void ctdb_process_vacuum_fetch_lists(struct ctdb_db_context *ctdb_db,
- 					    struct vacuum_data *vdata)
- {
--	int i;
-+	unsigned int i;
- 	struct ctdb_context *ctdb = ctdb_db->ctdb;
+ typedef struct stat_ex SMB_STRUCT_STAT;
+diff --git a/source3/include/vfs.h b/source3/include/vfs.h
+index 39ea04bf266..ecac793b93d 100644
+--- a/source3/include/vfs.h
++++ b/source3/include/vfs.h
+@@ -262,6 +262,7 @@
+ /* Bump to version 41, Samba 4.11 will ship with that */
+ /* Version 41 - Remove SMB_VFS_BRL_CANCEL_WINDOWS */
+ /* Version 41 - Remove unused st_ex_mask from struct stat_ex */
++/* Version 41 - convert struct stat_ex.st_ex_calculated_birthtime to flags */
  
- 	for (i = 0; i < ctdb->num_nodes; i++) {
-@@ -924,7 +924,7 @@ static struct vacuum_data *ctdb_vacuum_init_vacuum_data(
- 					struct ctdb_db_context *ctdb_db,
- 					TALLOC_CTX *mem_ctx)
- {
--	int i;
-+	unsigned int i;
- 	struct ctdb_context *ctdb = ctdb_db->ctdb;
- 	struct vacuum_data *vdata;
+ #define SMB_VFS_INTERFACE_VERSION 41
  
-diff --git a/ctdb/server/eventscript.c b/ctdb/server/eventscript.c
-index 801e8a85e66..e7a74468cc2 100644
---- a/ctdb/server/eventscript.c
-+++ b/ctdb/server/eventscript.c
-@@ -741,7 +741,7 @@ static bool event_allowed_during_recovery(enum ctdb_event event)
- 		CTDB_EVENT_RELEASE_IP,
- 		CTDB_EVENT_IPREALLOCATED,
- 	};
--	int i;
-+	size_t i;
- 
- 	for (i = 0; i < ARRAY_SIZE(allowed_events); i++) {
- 		if (event == allowed_events[i]) {
--- 
-2.20.1
-
-
-From 432efd2db2576f321a798b794d8a1f598db131d9 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sat, 8 Jun 2019 06:40:12 +1000
-Subject: [PATCH 04/32] ctdb-daemon: Fix signed/unsigned comparisons by casting
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/server/ctdb_client.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/ctdb/server/ctdb_client.c b/ctdb/server/ctdb_client.c
-index 419333025cb..dc7836abb2e 100644
---- a/ctdb/server/ctdb_client.c
-+++ b/ctdb/server/ctdb_client.c
-@@ -97,7 +97,9 @@ int ctdb_call_local(struct ctdb_db_context *ctdb_db, struct ctdb_call *call,
- 	c->header = header;
- 
- 	for (fn=ctdb_db->calls;fn;fn=fn->next) {
--		if (fn->id == call->call_id) break;
-+		if (fn->id == (uint32_t)call->call_id) {
-+			break;
-+		}
+diff --git a/source3/lib/system.c b/source3/lib/system.c
+index 9dd04ca5e3d..4bfe3785118 100644
+--- a/source3/lib/system.c
++++ b/source3/lib/system.c
+@@ -291,7 +291,7 @@ static void make_create_timespec(const struct stat *pst, struct stat_ex *dst,
+ 		dst->st_ex_btime.tv_nsec = 0;
  	}
- 	if (fn == NULL) {
- 		ctdb_set_error(ctdb, "Unknown call id %u\n", call->call_id);
--- 
-2.20.1
-
-
-From 36111948e96a89c05605c64622be555c3137ff63 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sat, 8 Jun 2019 06:40:40 +1000
-Subject: [PATCH 05/32] ctdb-daemon: Fix signed/unsigned comparisons by using
- constant
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/server/ctdb_takeover.c        | 6 +++---
- ctdb/server/ctdb_takeover_helper.c | 2 +-
- 2 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/ctdb/server/ctdb_takeover.c b/ctdb/server/ctdb_takeover.c
-index 844e3c32866..3ac569a953a 100644
---- a/ctdb/server/ctdb_takeover.c
-+++ b/ctdb/server/ctdb_takeover.c
-@@ -298,7 +298,7 @@ static void ctdb_vnn_unassign_iface(struct ctdb_context *ctdb,
- 	}
- 	vnn->iface = NULL;
- 	if (vnn->pnn == ctdb->pnn) {
--		vnn->pnn = -1;
-+		vnn->pnn = CTDB_UNKNOWN_PNN;
+ 
+-	dst->st_ex_calculated_birthtime = false;
++	dst->st_ex_iflags &= ~ST_EX_IFLAG_CALCULATED_BTIME;
+ 
+ #if defined(HAVE_STRUCT_STAT_ST_BIRTHTIMESPEC_TV_NSEC)
+ 	dst->st_ex_btime = pst->st_birthtimespec;
+@@ -303,7 +303,7 @@ static void make_create_timespec(const struct stat *pst, struct stat_ex *dst,
+ 	dst->st_ex_btime.tv_nsec = 0;
+ #else
+ 	dst->st_ex_btime = calc_create_time_stat(pst);
+-	dst->st_ex_calculated_birthtime = true;
++	dst->st_ex_iflags |= ST_EX_IFLAG_CALCULATED_BTIME;
+ #endif
+ 
+ 	/* Deal with systems that don't initialize birthtime correctly.
+@@ -311,7 +311,7 @@ static void make_create_timespec(const struct stat *pst, struct stat_ex *dst,
+ 	 */
+ 	if (null_timespec(dst->st_ex_btime)) {
+ 		dst->st_ex_btime = calc_create_time_stat(pst);
+-		dst->st_ex_calculated_birthtime = true;
++		dst->st_ex_iflags |= ST_EX_IFLAG_CALCULATED_BTIME;
  	}
  }
  
-@@ -772,7 +772,7 @@ int32_t ctdb_control_takeover_ip(struct ctdb_context *ctdb,
- 		return -1;
+@@ -327,7 +327,7 @@ void update_stat_ex_mtime(struct stat_ex *dst,
+ 	dst->st_ex_mtime = write_ts;
+ 
+ 	/* We may have to recalculate btime. */
+-	if (dst->st_ex_calculated_birthtime) {
++	if (dst->st_ex_iflags & ST_EX_IFLAG_CALCULATED_BTIME) {
+ 		dst->st_ex_btime = calc_create_time_stat_ex(dst);
+ 	}
+ }
+@@ -336,7 +336,7 @@ void update_stat_ex_create_time(struct stat_ex *dst,
+                                 struct timespec create_time)
+ {
+ 	dst->st_ex_btime = create_time;
+-	dst->st_ex_calculated_birthtime = false;
++	dst->st_ex_iflags &= ~ST_EX_IFLAG_CALCULATED_BTIME;
+ }
+ 
+ void init_stat_ex_from_stat (struct stat_ex *dst,
+@@ -354,6 +354,7 @@ void init_stat_ex_from_stat (struct stat_ex *dst,
+ 	dst->st_ex_atime = get_atimespec(src);
+ 	dst->st_ex_mtime = get_mtimespec(src);
+ 	dst->st_ex_ctime = get_ctimespec(src);
++	dst->st_ex_iflags = 0;
+ 	make_create_timespec(src, dst, fake_dir_create_times);
+ #ifdef HAVE_STAT_ST_BLKSIZE
+ 	dst->st_ex_blksize = src->st_blksize;
+diff --git a/source3/librpc/idl/open_files.idl b/source3/librpc/idl/open_files.idl
+index 5668a0b97e2..04305e24164 100644
+--- a/source3/librpc/idl/open_files.idl
++++ b/source3/librpc/idl/open_files.idl
+@@ -76,10 +76,10 @@ interface open_files
+ 		timespec	st_ex_mtime;
+ 		timespec	st_ex_ctime;
+ 		timespec	st_ex_btime;
+-		boolean8	st_ex_calculated_birthtime;
+ 		hyper		st_ex_blksize;
+ 		hyper		st_ex_blocks;
+ 		uint32		st_ex_flags;
++		uint32		st_ex_iflags;
+ 	} vfs_default_durable_stat;
+ 
+ 	typedef [public] struct {
+diff --git a/source3/modules/vfs_ceph.c b/source3/modules/vfs_ceph.c
+index e1f3d757bf1..e3e9bb65b07 100644
+--- a/source3/modules/vfs_ceph.c
++++ b/source3/modules/vfs_ceph.c
+@@ -704,7 +704,7 @@ static void init_stat_ex_from_ceph_statx(struct stat_ex *dst, const struct ceph_
+ 	dst->st_ex_btime = stx->stx_btime;
+ 	dst->st_ex_ctime = stx->stx_ctime;
+ 	dst->st_ex_mtime = stx->stx_mtime;
+-	dst->st_ex_calculated_birthtime = false;
++	dst->st_ex_iflags = 0;
+ 	dst->st_ex_blksize = stx->stx_blksize;
+ 	dst->st_ex_blocks = stx->stx_blocks;
+ }
+diff --git a/source3/modules/vfs_gpfs.c b/source3/modules/vfs_gpfs.c
+index a1fe91d0df4..4b963edab11 100644
+--- a/source3/modules/vfs_gpfs.c
++++ b/source3/modules/vfs_gpfs.c
+@@ -1630,7 +1630,7 @@ static NTSTATUS vfs_gpfs_get_dos_attributes(struct vfs_handle_struct *handle,
  	}
  
--	if (vnn->pnn != ctdb->pnn && have_ip && vnn->pnn != -1) {
-+	if (vnn->pnn != ctdb->pnn && have_ip && vnn->pnn != CTDB_UNKNOWN_PNN) {
- 		DEBUG(DEBUG_CRIT,(__location__ " takeoverip of IP %s is known to the kernel, "
- 				  "and we have it on iface[%s], but it was assigned to node %d"
- 				  "and we are node %d, banning ourself\n",
-@@ -782,7 +782,7 @@ int32_t ctdb_control_takeover_ip(struct ctdb_context *ctdb,
- 		return -1;
+ 	*dosmode |= vfs_gpfs_winattrs_to_dosmode(attrs.winAttrs);
+-	smb_fname->st.st_ex_calculated_birthtime = false;
++	smb_fname->st.st_ex_iflags &= ~ST_EX_IFLAG_CALCULATED_BTIME;
+ 	smb_fname->st.st_ex_btime.tv_sec = attrs.creationTime.tv_sec;
+ 	smb_fname->st.st_ex_btime.tv_nsec = attrs.creationTime.tv_nsec;
+ 
+@@ -1689,7 +1689,7 @@ static NTSTATUS vfs_gpfs_fget_dos_attributes(struct vfs_handle_struct *handle,
  	}
  
--	if (vnn->pnn == -1 && have_ip) {
-+	if (vnn->pnn == CTDB_UNKNOWN_PNN && have_ip) {
- 		/* This will cause connections to be reset and
- 		 * reestablished.  However, this is a very unusual
- 		 * situation and doing this will completely repair the
-diff --git a/ctdb/server/ctdb_takeover_helper.c b/ctdb/server/ctdb_takeover_helper.c
-index 8740838cfdd..254b48f0759 100644
---- a/ctdb/server/ctdb_takeover_helper.c
-+++ b/ctdb/server/ctdb_takeover_helper.c
-@@ -466,7 +466,7 @@ static struct tevent_req *take_ip_send(TALLOC_CTX *mem_ctx,
- 		struct take_ip_one_state *substate;
- 		struct ctdb_public_ip ip;
+ 	*dosmode |= vfs_gpfs_winattrs_to_dosmode(attrs.winAttrs);
+-	fsp->fsp_name->st.st_ex_calculated_birthtime = false;
++	fsp->fsp_name->st.st_ex_iflags &= ~ST_EX_IFLAG_CALCULATED_BTIME;
+ 	fsp->fsp_name->st.st_ex_btime.tv_sec = attrs.creationTime.tv_sec;
+ 	fsp->fsp_name->st.st_ex_btime.tv_nsec = attrs.creationTime.tv_nsec;
  
--		if (tmp_ip->pnn == -1) {
-+		if (tmp_ip->pnn == CTDB_UNKNOWN_PNN) {
- 			/* IP will be unassigned */
- 			continue;
- 		}
--- 
-2.20.1
-
-
-From 698f518a3c26a05799484007c91a564bbab38ff2 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sat, 8 Jun 2019 06:41:15 +1000
-Subject: [PATCH 06/32] ctdb-daemon: Drop unused values assigned to variable
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/server/ctdb_takeover_helper.c | 2 --
- 1 file changed, 2 deletions(-)
-
-diff --git a/ctdb/server/ctdb_takeover_helper.c b/ctdb/server/ctdb_takeover_helper.c
-index 254b48f0759..ab8fb9bbe24 100644
---- a/ctdb/server/ctdb_takeover_helper.c
-+++ b/ctdb/server/ctdb_takeover_helper.c
-@@ -160,7 +160,6 @@ static void get_public_ips_done(struct tevent_req *subreq)
- 						&reply);
- 	TALLOC_FREE(subreq);
- 	if (! status) {
--		found_errors = false;
- 		for (i = 0; i < state->count; i++) {
- 			if (err_list[i] != 0) {
- 				uint32_t pnn = state->pnns[i];
-@@ -169,7 +168,6 @@ static void get_public_ips_done(struct tevent_req *subreq)
- 				      "node %u, ret=%d\n", pnn, err_list[i]);
+diff --git a/source3/smbd/durable.c b/source3/smbd/durable.c
+index 311f7e598a4..4aa5a2d619e 100644
+--- a/source3/smbd/durable.c
++++ b/source3/smbd/durable.c
+@@ -118,7 +118,7 @@ NTSTATUS vfs_default_durable_cookie(struct files_struct *fsp,
+ 	cookie.stat_info.st_ex_mtime = fsp->fsp_name->st.st_ex_mtime;
+ 	cookie.stat_info.st_ex_ctime = fsp->fsp_name->st.st_ex_ctime;
+ 	cookie.stat_info.st_ex_btime = fsp->fsp_name->st.st_ex_btime;
+-	cookie.stat_info.st_ex_calculated_birthtime = fsp->fsp_name->st.st_ex_calculated_birthtime;
++	cookie.stat_info.st_ex_iflags = fsp->fsp_name->st.st_ex_iflags;
+ 	cookie.stat_info.st_ex_blksize = fsp->fsp_name->st.st_ex_blksize;
+ 	cookie.stat_info.st_ex_blocks = fsp->fsp_name->st.st_ex_blocks;
+ 	cookie.stat_info.st_ex_flags = fsp->fsp_name->st.st_ex_flags;
+@@ -267,7 +267,7 @@ NTSTATUS vfs_default_durable_disconnect(struct files_struct *fsp,
+ 	cookie.stat_info.st_ex_mtime = fsp->fsp_name->st.st_ex_mtime;
+ 	cookie.stat_info.st_ex_ctime = fsp->fsp_name->st.st_ex_ctime;
+ 	cookie.stat_info.st_ex_btime = fsp->fsp_name->st.st_ex_btime;
+-	cookie.stat_info.st_ex_calculated_birthtime = fsp->fsp_name->st.st_ex_calculated_birthtime;
++	cookie.stat_info.st_ex_iflags = fsp->fsp_name->st.st_ex_iflags;
+ 	cookie.stat_info.st_ex_blksize = fsp->fsp_name->st.st_ex_blksize;
+ 	cookie.stat_info.st_ex_blocks = fsp->fsp_name->st.st_ex_blocks;
+ 	cookie.stat_info.st_ex_flags = fsp->fsp_name->st.st_ex_flags;
+@@ -445,17 +445,15 @@ static bool vfs_default_durable_reconnect_check_stat(
+ 		return false;
+ 	}
  
- 				state->ban_credits[pnn]++;
--				found_errors = true;
- 			}
- 		}
+-	if (cookie_st->st_ex_calculated_birthtime !=
+-	    fsp_st->st_ex_calculated_birthtime)
+-	{
++	if (cookie_st->st_ex_iflags != fsp_st->st_ex_iflags) {
+ 		DEBUG(1, ("vfs_default_durable_reconnect (%s): "
+ 			  "stat_ex.%s differs: "
+ 			  "cookie:%llu != stat:%llu, "
+ 			  "denying durable reconnect\n",
+ 			  name,
+ 			  "st_ex_calculated_birthtime",
+-			  (unsigned long long)cookie_st->st_ex_calculated_birthtime,
+-			  (unsigned long long)fsp_st->st_ex_calculated_birthtime));
++			  (unsigned long long)cookie_st->st_ex_iflags,
++			  (unsigned long long)fsp_st->st_ex_iflags));
+ 		return false;
+ 	}
  
 -- 
-2.20.1
+2.21.0
 
 
-From 35af0a265f1b55b4a7b18bd220899a2cb3591466 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sat, 8 Jun 2019 06:56:00 +1000
-Subject: [PATCH 07/32] ctdb-cluster-mutex: Ensure that the configured command
- is not empty
+From 74267fb0f78425a81c448f5f26f0f1bb948efbe0 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Thu, 27 Jun 2019 18:14:43 +0200
+Subject: [PATCH 05/22] s3: add st_ex_itime to struct stat_ex
 
-... and does not just contain whitespace.
+st_ex_itime is an immutable original birth time aka instantiation time. Set when
+a file is created, never changes thereafter. May not be set by the client.
 
-Otherwise NULL can be passed as the first argument to execv().
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
+Signed-off-by: Ralph Boehme <slow@samba.org>
 ---
- ctdb/server/ctdb_cluster_mutex.c | 4 ++++
+ source3/include/includes.h | 6 ++++++
+ source3/include/vfs.h      | 1 +
+ source3/lib/system.c       | 3 +++
+ source3/modules/vfs_ceph.c | 3 ++-
+ 4 files changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/source3/include/includes.h b/source3/include/includes.h
+index ec486be6efa..5a9150fe2fe 100644
+--- a/source3/include/includes.h
++++ b/source3/include/includes.h
+@@ -192,6 +192,7 @@ typedef uint64_t br_off;
+ 
+ /* Is birthtime real, or was it calculated ? */
+ #define ST_EX_IFLAG_CALCULATED_BTIME		(1 << 0)
++#define ST_EX_IFLAG_CALCULATED_ITIME		(1 << 1)
+ 
+ /*
+  * Type for stat structure.
+@@ -210,6 +211,11 @@ struct stat_ex {
+ 	struct timespec st_ex_mtime;
+ 	struct timespec st_ex_ctime;
+ 	struct timespec st_ex_btime; /* birthtime */
++	/*
++	 * Immutable original birth time aka instantiation time. Set when a file
++	 * is created, never changes thereafter. May not be set by the client.
++	 */
++	struct timespec st_ex_itime; /* instantiation time */
+ 
+ 	blksize_t	st_ex_blksize;
+ 	blkcnt_t	st_ex_blocks;
+diff --git a/source3/include/vfs.h b/source3/include/vfs.h
+index ecac793b93d..17cbf32ec19 100644
+--- a/source3/include/vfs.h
++++ b/source3/include/vfs.h
+@@ -263,6 +263,7 @@
+ /* Version 41 - Remove SMB_VFS_BRL_CANCEL_WINDOWS */
+ /* Version 41 - Remove unused st_ex_mask from struct stat_ex */
+ /* Version 41 - convert struct stat_ex.st_ex_calculated_birthtime to flags */
++/* Version 41 - add st_ex_itime to struct stat_ex */
+ 
+ #define SMB_VFS_INTERFACE_VERSION 41
+ 
+diff --git a/source3/lib/system.c b/source3/lib/system.c
+index 4bfe3785118..104d1abc1f2 100644
+--- a/source3/lib/system.c
++++ b/source3/lib/system.c
+@@ -313,6 +313,9 @@ static void make_create_timespec(const struct stat *pst, struct stat_ex *dst,
+ 		dst->st_ex_btime = calc_create_time_stat(pst);
+ 		dst->st_ex_iflags |= ST_EX_IFLAG_CALCULATED_BTIME;
+ 	}
++
++	dst->st_ex_itime = dst->st_ex_btime;
++	dst->st_ex_iflags |= ST_EX_IFLAG_CALCULATED_ITIME;
+ }
+ 
+ /****************************************************************************
+diff --git a/source3/modules/vfs_ceph.c b/source3/modules/vfs_ceph.c
+index e3e9bb65b07..2f49ca24a18 100644
+--- a/source3/modules/vfs_ceph.c
++++ b/source3/modules/vfs_ceph.c
+@@ -704,7 +704,8 @@ static void init_stat_ex_from_ceph_statx(struct stat_ex *dst, const struct ceph_
+ 	dst->st_ex_btime = stx->stx_btime;
+ 	dst->st_ex_ctime = stx->stx_ctime;
+ 	dst->st_ex_mtime = stx->stx_mtime;
+-	dst->st_ex_iflags = 0;
++	dst->st_ex_itime = dst->st_ex_btime;
++	dst->st_ex_iflags = ST_EX_IFLAG_CALCULATED_ITIME;
+ 	dst->st_ex_blksize = stx->stx_blksize;
+ 	dst->st_ex_blocks = stx->stx_blocks;
+ }
+-- 
+2.21.0
+
+
+From 230c49652c5c58783fcdaa87501e2ec30701be4a Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Thu, 27 Jun 2019 18:17:20 +0200
+Subject: [PATCH 06/22] s3: add st_ex_file_id to struct stat_ex
+
+st_ex_file_id is an immutable, never reused numeric identifier for objects in a
+filesystem.
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ source3/include/includes.h | 2 ++
+ source3/include/vfs.h      | 1 +
+ source3/lib/system.c       | 2 ++
+ source3/modules/vfs_ceph.c | 2 ++
+ 4 files changed, 7 insertions(+)
+
+diff --git a/source3/include/includes.h b/source3/include/includes.h
+index 5a9150fe2fe..abe12ac0930 100644
+--- a/source3/include/includes.h
++++ b/source3/include/includes.h
+@@ -193,6 +193,7 @@ typedef uint64_t br_off;
+ /* Is birthtime real, or was it calculated ? */
+ #define ST_EX_IFLAG_CALCULATED_BTIME		(1 << 0)
+ #define ST_EX_IFLAG_CALCULATED_ITIME		(1 << 1)
++#define ST_EX_IFLAG_CALCULATED_FILE_ID		(1 << 2)
+ 
+ /*
+  * Type for stat structure.
+@@ -201,6 +202,7 @@ typedef uint64_t br_off;
+ struct stat_ex {
+ 	dev_t		st_ex_dev;
+ 	ino_t		st_ex_ino;
++	uint64_t	st_ex_file_id;
+ 	mode_t		st_ex_mode;
+ 	nlink_t		st_ex_nlink;
+ 	uid_t		st_ex_uid;
+diff --git a/source3/include/vfs.h b/source3/include/vfs.h
+index 17cbf32ec19..33c54c884cd 100644
+--- a/source3/include/vfs.h
++++ b/source3/include/vfs.h
+@@ -264,6 +264,7 @@
+ /* Version 41 - Remove unused st_ex_mask from struct stat_ex */
+ /* Version 41 - convert struct stat_ex.st_ex_calculated_birthtime to flags */
+ /* Version 41 - add st_ex_itime to struct stat_ex */
++/* Version 41 - add st_ex_file_id to struct stat_ex */
+ 
+ #define SMB_VFS_INTERFACE_VERSION 41
+ 
+diff --git a/source3/lib/system.c b/source3/lib/system.c
+index 104d1abc1f2..486a775c8c3 100644
+--- a/source3/lib/system.c
++++ b/source3/lib/system.c
+@@ -376,6 +376,8 @@ void init_stat_ex_from_stat (struct stat_ex *dst,
+ #else
+ 	dst->st_ex_flags = 0;
+ #endif
++	dst->st_ex_file_id = dst->st_ex_ino;
++	dst->st_ex_iflags |= ST_EX_IFLAG_CALCULATED_FILE_ID;
+ }
+ 
+ /*******************************************************************
+diff --git a/source3/modules/vfs_ceph.c b/source3/modules/vfs_ceph.c
+index 2f49ca24a18..1b293ddb1b0 100644
+--- a/source3/modules/vfs_ceph.c
++++ b/source3/modules/vfs_ceph.c
+@@ -708,6 +708,8 @@ static void init_stat_ex_from_ceph_statx(struct stat_ex *dst, const struct ceph_
+ 	dst->st_ex_iflags = ST_EX_IFLAG_CALCULATED_ITIME;
+ 	dst->st_ex_blksize = stx->stx_blksize;
+ 	dst->st_ex_blocks = stx->stx_blocks;
++	dst->st_ex_file_id = dst->st_ex_ino;
++	dst->st_ex_iflags |= ST_EX_IFLAG_CALCULATED_FILE_ID;
+ }
+ 
+ static int cephwrap_stat(struct vfs_handle_struct *handle,
+-- 
+2.21.0
+
+
+From c94f9d8b492ca504ba07ee9dac85974eb754a588 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Tue, 25 Jun 2019 13:13:08 +0200
+Subject: [PATCH 07/22] s3/lib: add update_stat_ex_itime()
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ source3/include/proto.h | 1 +
+ source3/lib/system.c    | 7 +++++++
+ 2 files changed, 8 insertions(+)
+
+diff --git a/source3/include/proto.h b/source3/include/proto.h
+index 484afc959b9..84d19e4277d 100644
+--- a/source3/include/proto.h
++++ b/source3/include/proto.h
+@@ -220,6 +220,7 @@ ssize_t sys_recvfrom(int s, void *buf, size_t len, int flags, struct sockaddr *f
+ int sys_fcntl_ptr(int fd, int cmd, void *arg);
+ int sys_fcntl_long(int fd, int cmd, long arg);
+ void update_stat_ex_mtime(struct stat_ex *dst, struct timespec write_ts);
++void update_stat_ex_itime(struct stat_ex *dst, struct timespec itime);
+ void update_stat_ex_create_time(struct stat_ex *dst, struct timespec create_time);
+ int sys_stat(const char *fname, SMB_STRUCT_STAT *sbuf,
+ 	     bool fake_dir_create_times);
+diff --git a/source3/lib/system.c b/source3/lib/system.c
+index 486a775c8c3..d42ec3048cc 100644
+--- a/source3/lib/system.c
++++ b/source3/lib/system.c
+@@ -342,6 +342,13 @@ void update_stat_ex_create_time(struct stat_ex *dst,
+ 	dst->st_ex_iflags &= ~ST_EX_IFLAG_CALCULATED_BTIME;
+ }
+ 
++void update_stat_ex_itime(struct stat_ex *dst,
++			  struct timespec itime)
++{
++	dst->st_ex_itime = itime;
++	dst->st_ex_iflags &= ~ST_EX_IFLAG_CALCULATED_ITIME;
++}
++
+ void init_stat_ex_from_stat (struct stat_ex *dst,
+ 			    const struct stat *src,
+ 			    bool fake_dir_create_times)
+-- 
+2.21.0
+
+
+From d1247028295add7b9a59f009adf951e7b588928b Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Tue, 25 Jun 2019 14:24:17 +0200
+Subject: [PATCH 08/22] s3/lib: add update_stat_ex_file_id()
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ source3/include/proto.h | 1 +
+ source3/lib/system.c    | 6 ++++++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/source3/include/proto.h b/source3/include/proto.h
+index 84d19e4277d..8b387f7c563 100644
+--- a/source3/include/proto.h
++++ b/source3/include/proto.h
+@@ -222,6 +222,7 @@ int sys_fcntl_long(int fd, int cmd, long arg);
+ void update_stat_ex_mtime(struct stat_ex *dst, struct timespec write_ts);
+ void update_stat_ex_itime(struct stat_ex *dst, struct timespec itime);
+ void update_stat_ex_create_time(struct stat_ex *dst, struct timespec create_time);
++void update_stat_ex_file_id(struct stat_ex *dst, uint64_t file_id);
+ int sys_stat(const char *fname, SMB_STRUCT_STAT *sbuf,
+ 	     bool fake_dir_create_times);
+ int sys_fstat(int fd, SMB_STRUCT_STAT *sbuf,
+diff --git a/source3/lib/system.c b/source3/lib/system.c
+index d42ec3048cc..a67388e436a 100644
+--- a/source3/lib/system.c
++++ b/source3/lib/system.c
+@@ -349,6 +349,12 @@ void update_stat_ex_itime(struct stat_ex *dst,
+ 	dst->st_ex_iflags &= ~ST_EX_IFLAG_CALCULATED_ITIME;
+ }
+ 
++void update_stat_ex_file_id(struct stat_ex *dst, uint64_t file_id)
++{
++	dst->st_ex_file_id = file_id;
++	dst->st_ex_iflags &= ~ST_EX_IFLAG_CALCULATED_FILE_ID;
++}
++
+ void init_stat_ex_from_stat (struct stat_ex *dst,
+ 			    const struct stat *src,
+ 			    bool fake_dir_create_times)
+-- 
+2.21.0
+
+
+From 4ed752d09cac88127cafdc79eb94dceb01784696 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Tue, 25 Jun 2019 14:13:28 +0200
+Subject: [PATCH 09/22] s3/lib: add make_file_index_from_itime()
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ source3/lib/file_id.c | 34 ++++++++++++++++++++++++++++++++++
+ source3/lib/file_id.h |  5 +++++
+ 2 files changed, 39 insertions(+)
+
+diff --git a/source3/lib/file_id.c b/source3/lib/file_id.c
+index f8295ce738a..7d4fb006afe 100644
+--- a/source3/lib/file_id.c
++++ b/source3/lib/file_id.c
+@@ -90,3 +90,37 @@ void pull_file_id_24(const char *buf, struct file_id *id)
+ 	id->extid  = IVAL(buf,  16);
+ 	id->extid |= ((uint64_t)IVAL(buf,20))<<32;
+ }
++
++uint64_t make_file_id_from_itime(SMB_STRUCT_STAT *st)
++{
++	struct timespec itime = st->st_ex_itime;
++	ino_t ino = st->st_ex_ino;
++	uint64_t file_id_low;
++	uint64_t file_id;
++
++	if (st->st_ex_iflags & ST_EX_IFLAG_CALCULATED_ITIME) {
++		return ino;
++	}
++
++	file_id_low = itime.tv_nsec;
++	if (file_id_low == 0) {
++		/*
++		 * This could be by coincidence, but more likely the filesystem
++		 * is only giving us seconds granularity. We need more fine
++		 * grained granularity for the File-ID, so combine with the
++		 * inode number.
++		 */
++		file_id_low = ino & ((1 << 30) - 1);
++	}
++
++	/*
++	 * Set the high bit so ideally File-IDs based on inode numbers and
++	 * File-IDs based on Birth Time use disjoint ranges, given inodes never
++	 * have the high bit set.
++	 */
++	file_id = ((uint64_t)1) << 63;
++	file_id |= (uint64_t)itime.tv_sec << 30;
++	file_id |= file_id_low;
++
++	return file_id;
++}
+diff --git a/source3/lib/file_id.h b/source3/lib/file_id.h
+index 6fa98400b85..509e924c1fe 100644
+--- a/source3/lib/file_id.h
++++ b/source3/lib/file_id.h
+@@ -35,3 +35,8 @@ const char *file_id_string(TALLOC_CTX *mem_ctx, const struct file_id *id);
+ void push_file_id_16(char *buf, const struct file_id *id);
+ void push_file_id_24(char *buf, const struct file_id *id);
+ void pull_file_id_24(const char *buf, struct file_id *id);
++
++/*
++ * Make a SMB File-ID from itime
++ */
++uint64_t make_file_id_from_itime(SMB_STRUCT_STAT *st);
+-- 
+2.21.0
+
+
+From 2a4e4f670bd10810cf9604dd6b4dc6362f144256 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Wed, 26 Jun 2019 13:40:05 +0200
+Subject: [PATCH 10/22] s3:smbd: mark itime non-calculated if we created a file
+ or dir
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ source3/smbd/open.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/source3/smbd/open.c b/source3/smbd/open.c
+index 411c917e55f..b86559ec417 100644
+--- a/source3/smbd/open.c
++++ b/source3/smbd/open.c
+@@ -3811,6 +3811,10 @@ static NTSTATUS open_file_ntcreate(connection_struct *conn,
+ 		fsp->initial_delete_on_close = True;
+ 	}
+ 
++	if (info == FILE_WAS_CREATED) {
++		smb_fname->st.st_ex_iflags &= ~ST_EX_IFLAG_CALCULATED_ITIME;
++	}
++
+ 	if (info != FILE_WAS_OPENED) {
+ 		/* Overwritten files should be initially set as archive */
+ 		if ((info == FILE_WAS_OVERWRITTEN && lp_map_archive(SNUM(conn))) ||
+@@ -3958,6 +3962,8 @@ static NTSTATUS mkdir_internal(connection_struct *conn,
+ 		return NT_STATUS_NOT_A_DIRECTORY;
+ 	}
+ 
++	smb_dname->st.st_ex_iflags &= ~ST_EX_IFLAG_CALCULATED_ITIME;
++
+ 	if (lp_store_dos_attributes(SNUM(conn))) {
+ 		if (!posix_open) {
+ 			file_set_dosmode(conn, smb_dname,
+-- 
+2.21.0
+
+
+From 4181f5c6a7dcafc19eb84b393926f232ae7740e5 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Tue, 25 Jun 2019 14:25:21 +0200
+Subject: [PATCH 11/22] s3:smbd: parse xattr_DosInfo4 in
+ parse_dos_attribute_blob()
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ source3/smbd/dosmode.c | 44 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
+
+diff --git a/source3/smbd/dosmode.c b/source3/smbd/dosmode.c
+index a4625718a56..8e8d791cfe9 100644
+--- a/source3/smbd/dosmode.c
++++ b/source3/smbd/dosmode.c
+@@ -325,6 +325,50 @@ NTSTATUS parse_dos_attribute_blob(struct smb_filename *smb_fname,
+ 						      create_time)));
+ 		}
+ 		break;
++	case 4:
++	{
++		struct xattr_DosInfo4 *info = &dosattrib.info.info4;
++
++		dosattr = info->attrib;
++
++		if ((info->valid_flags & XATTR_DOSINFO_CREATE_TIME) &&
++		    !null_nttime(info->create_time))
++		{
++			struct timespec creat_time;
++
++			creat_time = nt_time_to_unix_timespec(info->create_time);
++			update_stat_ex_create_time(&smb_fname->st, creat_time);
++
++			DBG_DEBUG("file [%s] creation time [%s]\n",
++				smb_fname_str_dbg(smb_fname),
++				nt_time_string(talloc_tos(), info->create_time));
++		}
++
++		if (info->valid_flags & XATTR_DOSINFO_ITIME) {
++			struct timespec itime;
++			uint64_t file_id;
++
++			itime = nt_time_to_unix_timespec(info->itime);
++			if (smb_fname->st.st_ex_iflags &
++			    ST_EX_IFLAG_CALCULATED_ITIME)
++			{
++				update_stat_ex_itime(&smb_fname->st, itime);
++			}
++
++			file_id = make_file_id_from_itime(&smb_fname->st);
++			if (smb_fname->st.st_ex_iflags &
++			    ST_EX_IFLAG_CALCULATED_FILE_ID)
++			{
++				update_stat_ex_file_id(&smb_fname->st, file_id);
++			}
++
++			DBG_DEBUG("file [%s] itime [%s] fileid [%"PRIx64"]\n",
++				smb_fname_str_dbg(smb_fname),
++				nt_time_string(talloc_tos(), info->itime),
++				file_id);
++		}
++		break;
++	}
+ 	default:
+ 		DBG_WARNING("Badly formed DOSATTRIB on file %s - %s\n",
+ 			    smb_fname_str_dbg(smb_fname), blob.data);
+-- 
+2.21.0
+
+
+From d7cebcf92222efca14c41ea25727ce0710ba0238 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Tue, 25 Jun 2019 14:26:10 +0200
+Subject: [PATCH 12/22] s3:smbd: use xattr_DosInfo4 in set_ea_dos_attribute()
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ source3/smbd/dosmode.c | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/source3/smbd/dosmode.c b/source3/smbd/dosmode.c
+index 8e8d791cfe9..d722c022fe9 100644
+--- a/source3/smbd/dosmode.c
++++ b/source3/smbd/dosmode.c
+@@ -488,13 +488,19 @@ NTSTATUS set_ea_dos_attribute(connection_struct *conn,
+ 	ZERO_STRUCT(dosattrib);
+ 	ZERO_STRUCT(blob);
+ 
+-	dosattrib.version = 3;
+-	dosattrib.info.info3.valid_flags = XATTR_DOSINFO_ATTRIB|
++	dosattrib.version = 4;
++	dosattrib.info.info4.valid_flags = XATTR_DOSINFO_ATTRIB |
+ 					XATTR_DOSINFO_CREATE_TIME;
+-	dosattrib.info.info3.attrib = dosmode;
+-	dosattrib.info.info3.create_time = unix_timespec_to_nt_time(
++	dosattrib.info.info4.attrib = dosmode;
++	dosattrib.info.info4.create_time = unix_timespec_to_nt_time(
+ 				smb_fname->st.st_ex_btime);
+ 
++	if (!(smb_fname->st.st_ex_iflags & ST_EX_IFLAG_CALCULATED_ITIME)) {
++		dosattrib.info.info4.valid_flags |= XATTR_DOSINFO_ITIME;
++		dosattrib.info.info4.itime = unix_timespec_to_nt_time(
++			smb_fname->st.st_ex_itime);
++	}
++
+ 	DEBUG(10,("set_ea_dos_attributes: set attribute 0x%x, btime = %s on file %s\n",
+ 		(unsigned int)dosmode,
+ 		time_to_asc(convert_timespec_to_time_t(smb_fname->st.st_ex_btime)),
+-- 
+2.21.0
+
+
+From 96897733cacc4d70dd92a5f7254f29779454e19d Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Tue, 25 Jun 2019 12:07:59 +0200
+Subject: [PATCH 13/22] s3:smbd: return inode number, not FileIndex for UNIX
+ query info level
+
+get_FileIndex() returns a stable and unique numerical identifier when "store dos
+attributes" is enabled. It is NOT the same as a file's inode number which used
+as the key for locking.tdb.
+
+For POSIX clients we should return the inode numbers in the POSIX query info
+level and the FileIndex in the corresponding SMB protocol fields (eg SMB2 QFID
+create context).
+
+This fix lets test "smbtorture_s3.plain.CLEANUP3" test work with get_FileIndex()
+returning something different then the file's inode number.
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ source3/smbd/trans2.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/source3/smbd/trans2.c b/source3/smbd/trans2.c
+index 77297c158b7..02a6d4b2407 100644
+--- a/source3/smbd/trans2.c
++++ b/source3/smbd/trans2.c
+@@ -4601,7 +4601,6 @@ static char *store_file_unix_basic(connection_struct *conn,
+ 				files_struct *fsp,
+ 				const SMB_STRUCT_STAT *psbuf)
+ {
+-	uint64_t file_index = get_FileIndex(conn, psbuf);
+ 	dev_t devno;
+ 
+ 	DEBUG(10,("store_file_unix_basic: SMB_QUERY_FILE_UNIX_BASIC\n"));
+@@ -4643,7 +4642,7 @@ static char *store_file_unix_basic(connection_struct *conn,
+ 	SIVAL(pdata,4,0);
+ 	pdata += 8;
+ 
+-	SINO_T_VAL(pdata,0,(SMB_INO_T)file_index);   /* inode number */
++	SINO_T_VAL(pdata, 0, psbuf->st_ex_ino);   /* inode number */
+ 	pdata += 8;
+ 
+ 	SIVAL(pdata,0, unix_perms_to_wire(psbuf->st_ex_mode));     /* Standard UNIX file permissions */
+-- 
+2.21.0
+
+
+From 701cbd4dbb30825a12f2df063a964ca387d0098b Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Fri, 28 Jun 2019 10:12:44 +0200
+Subject: [PATCH 14/22] s3:smbd: rename get_FileIndex() to get_fs_file_id()
+
+Also rename all variable used to store the result of the renamed
+get_fs_file_id() in the callers.
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ source3/smbd/proto.h       |  2 +-
+ source3/smbd/smb2_create.c |  6 +++---
+ source3/smbd/trans2.c      | 26 +++++++++++++-------------
+ 3 files changed, 17 insertions(+), 17 deletions(-)
+
+diff --git a/source3/smbd/proto.h b/source3/smbd/proto.h
+index a0424388bec..23c59000da1 100644
+--- a/source3/smbd/proto.h
++++ b/source3/smbd/proto.h
+@@ -1161,7 +1161,7 @@ int sys_statvfs(const char *path, vfs_statvfs_struct *statbuf);
+ NTSTATUS check_access_fsp(const struct files_struct *fsp,
+ 			  uint32_t access_mask);
+ uint64_t smb_roundup(connection_struct *conn, uint64_t val);
+-uint64_t get_FileIndex(connection_struct *conn, const SMB_STRUCT_STAT *psbuf);
++uint64_t get_fs_file_id(connection_struct *conn, const SMB_STRUCT_STAT *psbuf);
+ void aapl_force_zero_file_id(struct smbd_server_connection *sconn);
+ bool samba_private_attr_name(const char *unix_ea_name);
+ NTSTATUS get_ea_value(TALLOC_CTX *mem_ctx, connection_struct *conn,
+diff --git a/source3/smbd/smb2_create.c b/source3/smbd/smb2_create.c
+index 96a50741af9..55dfb148c8e 100644
+--- a/source3/smbd/smb2_create.c
++++ b/source3/smbd/smb2_create.c
+@@ -1389,8 +1389,8 @@ static void smbd_smb2_create_after_exec(struct tevent_req *req)
+ 
+ 	if (state->qfid != NULL) {
+ 		uint8_t p[32];
+-		uint64_t file_index = get_FileIndex(state->result->conn,
+-						    &state->result->fsp_name->st);
++		uint64_t file_id = get_fs_file_id(state->result->conn,
++						  &state->result->fsp_name->st);
+ 		DATA_BLOB blob = data_blob_const(p, sizeof(p));
+ 
+ 		ZERO_STRUCT(p);
+@@ -1399,7 +1399,7 @@ static void smbd_smb2_create_after_exec(struct tevent_req *req)
+ 		   the MS plugfest. The first 8 bytes are the "volume index"
+ 		   == inode, the second 8 bytes are the "volume id",
+ 		   == dev. This will be updated in the SMB2 doc. */
+-		SBVAL(p, 0, file_index);
++		SBVAL(p, 0, file_id);
+ 		SIVAL(p, 8, state->result->fsp_name->st.st_ex_dev);/* FileIndexHigh */
+ 
+ 		status = smb2_create_blob_add(state->out_context_blobs,
+diff --git a/source3/smbd/trans2.c b/source3/smbd/trans2.c
+index 02a6d4b2407..a268e97218f 100644
+--- a/source3/smbd/trans2.c
++++ b/source3/smbd/trans2.c
+@@ -219,18 +219,18 @@ uint64_t smb_roundup(connection_struct *conn, uint64_t val)
+  mangle as we used to do.
+ ********************************************************************/
+ 
+-uint64_t get_FileIndex(connection_struct *conn, const SMB_STRUCT_STAT *psbuf)
++uint64_t get_fs_file_id(connection_struct *conn, const SMB_STRUCT_STAT *psbuf)
+ {
+-	uint64_t file_index;
++	uint64_t file_id;
+ 	if (conn->sconn->aapl_zero_file_id) {
+ 		return 0;
+ 	}
+ 	if (conn->base_share_dev == psbuf->st_ex_dev) {
+ 		return (uint64_t)psbuf->st_ex_ino;
+ 	}
+-	file_index = ((psbuf->st_ex_ino) & UINT32_MAX); /* FileIndexLow */
+-	file_index |= ((uint64_t)((psbuf->st_ex_dev) & UINT32_MAX)) << 32; /* FileIndexHigh */
+-	return file_index;
++	file_id = ((psbuf->st_ex_ino) & UINT32_MAX); /* FileIDLow */
++	file_id |= ((uint64_t)((psbuf->st_ex_dev) & UINT32_MAX)) << 32; /* FileIDHigh */
++	return file_id;
+ }
+ 
+ 
+@@ -1836,7 +1836,7 @@ static NTSTATUS smbd_marshall_dir_entry(TALLOC_CTX *ctx,
+ 	uint32_t reskey=0;
+ 	uint64_t file_size = 0;
+ 	uint64_t allocation_size = 0;
+-	uint64_t file_index = 0;
++	uint64_t file_id = 0;
+ 	size_t len = 0;
+ 	struct timespec mdate_ts = {0};
+ 	struct timespec adate_ts = {0};
+@@ -1863,7 +1863,7 @@ static NTSTATUS smbd_marshall_dir_entry(TALLOC_CTX *ctx,
+ 		}
+ 	}
+ 
+-	file_index = get_FileIndex(conn, &smb_fname->st);
++	file_id = get_fs_file_id(conn, &smb_fname->st);
+ 
+ 	mdate_ts = smb_fname->st.st_ex_mtime;
+ 	adate_ts = smb_fname->st.st_ex_atime;
+@@ -2281,7 +2281,7 @@ static NTSTATUS smbd_marshall_dir_entry(TALLOC_CTX *ctx,
+ 		}
+ 		p += 4;
+ 		SIVAL(p,0,0); p += 4; /* Unknown - reserved ? */
+-		SBVAL(p,0,file_index); p += 8;
++		SBVAL(p,0,file_id); p += 8;
+ 		status = srvstr_push(base_data, flags2, p,
+ 				  fname, PTR_DIFF(end_data, p),
+ 				  STR_TERMINATE_ASCII, &len);
+@@ -2402,7 +2402,7 @@ static NTSTATUS smbd_marshall_dir_entry(TALLOC_CTX *ctx,
+ 		}
+ 		p += 2;
+ 
+-		SBVAL(p,0,file_index); p += 8;
++		SBVAL(p,0,file_id); p += 8;
+ 		status = srvstr_push(base_data, flags2, p,
+ 				  fname, PTR_DIFF(end_data, p),
+ 				  STR_TERMINATE_ASCII, &len);
+@@ -5110,7 +5110,7 @@ NTSTATUS smbd_do_qfilepathinfo(connection_struct *conn,
+ 	uint64_t file_size = 0;
+ 	uint64_t pos = 0;
+ 	uint64_t allocation_size = 0;
+-	uint64_t file_index = 0;
++	uint64_t file_id = 0;
+ 	uint32_t access_mask = 0;
+ 	size_t len = 0;
+ 
+@@ -5231,7 +5231,7 @@ NTSTATUS smbd_do_qfilepathinfo(connection_struct *conn,
+ 
+ 	   I think this causes us to fail the IFSKIT
+ 	   BasicFileInformationTest. -tpot */
+-	file_index = get_FileIndex(conn, psbuf);
++	file_id = get_fs_file_id(conn, psbuf);
+ 
+ 	*fixed_portion = 0;
+ 
+@@ -5575,7 +5575,7 @@ NTSTATUS smbd_do_qfilepathinfo(connection_struct *conn,
+ 			SCVAL(pdata,	0x3C, delete_pending);
+ 			SCVAL(pdata,	0x3D, (mode&FILE_ATTRIBUTE_DIRECTORY)?1:0);
+ 			SSVAL(pdata,	0x3E, 0); /* padding */
+-			SBVAL(pdata,	0x40, file_index);
++			SBVAL(pdata,	0x40, file_id);
+ 			SIVAL(pdata,	0x48, ea_size);
+ 			SIVAL(pdata,	0x4C, access_mask);
+ 			SBVAL(pdata,	0x50, pos);
+@@ -5600,7 +5600,7 @@ NTSTATUS smbd_do_qfilepathinfo(connection_struct *conn,
+ 		case SMB_FILE_INTERNAL_INFORMATION:
+ 
+ 			DEBUG(10,("smbd_do_qfilepathinfo: SMB_FILE_INTERNAL_INFORMATION\n"));
+-			SBVAL(pdata, 0, file_index);
++			SBVAL(pdata, 0, file_id);
+ 			data_size = 8;
+ 			*fixed_portion = 8;
+ 			break;
+-- 
+2.21.0
+
+
+From 9ab5fdae3341dc1bdfd34dad0bb4f2a0cf7799d6 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Sat, 29 Jun 2019 14:08:04 +0200
+Subject: [PATCH 15/22] s3:vfs: add SMB_VFS_FS_FILE_ID()
+
+Not yet used, that comes next.
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ examples/VFS/skel_opaque.c            |  8 ++++++++
+ examples/VFS/skel_transparent.c       |  7 +++++++
+ source3/include/vfs.h                 |  7 +++++++
+ source3/include/vfs_macros.h          |  5 +++++
+ source3/modules/vfs_full_audit.c      | 17 +++++++++++++++++
+ source3/modules/vfs_not_implemented.c |  8 ++++++++
+ source3/modules/vfs_time_audit.c      | 20 ++++++++++++++++++++
+ source3/smbd/vfs.c                    |  7 +++++++
+ 8 files changed, 79 insertions(+)
+
+diff --git a/examples/VFS/skel_opaque.c b/examples/VFS/skel_opaque.c
+index 6628bffe3eb..4e4475a11e8 100644
+--- a/examples/VFS/skel_opaque.c
++++ b/examples/VFS/skel_opaque.c
+@@ -513,6 +513,13 @@ static struct file_id skel_file_id_create(vfs_handle_struct *handle,
+ 	return id;
+ }
+ 
++static uint64_t skel_fs_file_id(vfs_handle_struct *handle,
++				const SMB_STRUCT_STAT *sbuf)
++{
++	errno = ENOSYS;
++	return 0;
++}
++
+ struct skel_offload_read_state {
+ 	bool dummy;
+ };
+@@ -1084,6 +1091,7 @@ static struct vfs_fn_pointers skel_opaque_fns = {
+ 	.realpath_fn = skel_realpath,
+ 	.chflags_fn = skel_chflags,
+ 	.file_id_create_fn = skel_file_id_create,
++	.fs_file_id_fn = skel_fs_file_id,
+ 	.offload_read_send_fn = skel_offload_read_send,
+ 	.offload_read_recv_fn = skel_offload_read_recv,
+ 	.offload_write_send_fn = skel_offload_write_send,
+diff --git a/examples/VFS/skel_transparent.c b/examples/VFS/skel_transparent.c
+index 9b5f336042e..ac2665ef07b 100644
+--- a/examples/VFS/skel_transparent.c
++++ b/examples/VFS/skel_transparent.c
+@@ -600,6 +600,12 @@ static struct file_id skel_file_id_create(vfs_handle_struct *handle,
+ 	return SMB_VFS_NEXT_FILE_ID_CREATE(handle, sbuf);
+ }
+ 
++static uint64_t skel_fs_file_id(vfs_handle_struct *handle,
++				const SMB_STRUCT_STAT *sbuf)
++{
++	return SMB_VFS_NEXT_FS_FILE_ID(handle, sbuf);
++}
++
+ struct skel_offload_read_state {
+ 	struct vfs_handle_struct *handle;
+ 	DATA_BLOB token;
+@@ -1348,6 +1354,7 @@ static struct vfs_fn_pointers skel_transparent_fns = {
+ 	.realpath_fn = skel_realpath,
+ 	.chflags_fn = skel_chflags,
+ 	.file_id_create_fn = skel_file_id_create,
++	.fs_file_id_fn = skel_fs_file_id,
+ 	.offload_read_send_fn = skel_offload_read_send,
+ 	.offload_read_recv_fn = skel_offload_read_recv,
+ 	.offload_write_send_fn = skel_offload_write_send,
+diff --git a/source3/include/vfs.h b/source3/include/vfs.h
+index 33c54c884cd..56f4b9dd1f8 100644
+--- a/source3/include/vfs.h
++++ b/source3/include/vfs.h
+@@ -265,6 +265,7 @@
+ /* Version 41 - convert struct stat_ex.st_ex_calculated_birthtime to flags */
+ /* Version 41 - add st_ex_itime to struct stat_ex */
+ /* Version 41 - add st_ex_file_id to struct stat_ex */
++/* Version 41 - add SMB_VFS_FS_FILE_ID */
+ 
+ #define SMB_VFS_INTERFACE_VERSION 41
+ 
+@@ -800,6 +801,8 @@ struct vfs_fn_pointers {
+ 				unsigned int flags);
+ 	struct file_id (*file_id_create_fn)(struct vfs_handle_struct *handle,
+ 					    const SMB_STRUCT_STAT *sbuf);
++	uint64_t (*fs_file_id_fn)(struct vfs_handle_struct *handle,
++				  const SMB_STRUCT_STAT *sbuf);
+ 	struct tevent_req *(*offload_read_send_fn)(TALLOC_CTX *mem_ctx,
+ 						   struct tevent_context *ev,
+ 						   struct vfs_handle_struct *handle,
+@@ -1327,6 +1330,8 @@ int smb_vfs_call_chflags(struct vfs_handle_struct *handle,
+ 			unsigned int flags);
+ struct file_id smb_vfs_call_file_id_create(struct vfs_handle_struct *handle,
+ 					   const SMB_STRUCT_STAT *sbuf);
++uint64_t smb_vfs_call_fs_file_id(struct vfs_handle_struct *handle,
++				 const SMB_STRUCT_STAT *sbuf);
+ NTSTATUS smb_vfs_call_streaminfo(struct vfs_handle_struct *handle,
+ 				 struct files_struct *fsp,
+ 				 const struct smb_filename *smb_fname,
+@@ -1751,6 +1756,8 @@ int vfs_not_implemented_chflags(vfs_handle_struct *handle,
+ 				uint flags);
+ struct file_id vfs_not_implemented_file_id_create(vfs_handle_struct *handle,
+ 						  const SMB_STRUCT_STAT *sbuf);
++uint64_t vfs_not_implemented_fs_file_id(vfs_handle_struct *handle,
++					const SMB_STRUCT_STAT *sbuf);
+ struct tevent_req *vfs_not_implemented_offload_read_send(
+ 			TALLOC_CTX *mem_ctx,
+ 			struct tevent_context *ev,
+diff --git a/source3/include/vfs_macros.h b/source3/include/vfs_macros.h
+index e867810f30f..c4fa0fe022e 100644
+--- a/source3/include/vfs_macros.h
++++ b/source3/include/vfs_macros.h
+@@ -331,6 +331,11 @@
+ #define SMB_VFS_NEXT_FILE_ID_CREATE(handle, sbuf) \
+ 	smb_vfs_call_file_id_create((handle)->next, (sbuf))
+ 
++#define SMB_VFS_FS_FILE_ID(conn, sbuf) \
++	smb_vfs_call_fs_file_id((conn)->vfs_handles, (sbuf))
++#define SMB_VFS_NEXT_FS_FILE_ID(handle, sbuf) \
++	smb_vfs_call_fs_file_id((handle)->next, (sbuf))
++
+ #define SMB_VFS_STREAMINFO(conn, fsp, smb_fname, mem_ctx, num_streams, streams) \
+ 	smb_vfs_call_streaminfo((conn)->vfs_handles, (fsp), (smb_fname), (mem_ctx), (num_streams), (streams))
+ #define SMB_VFS_NEXT_STREAMINFO(handle, fsp, smb_fname, mem_ctx, num_streams, streams) \
+diff --git a/source3/modules/vfs_full_audit.c b/source3/modules/vfs_full_audit.c
+index 8c4dc44dc5d..b20bca0a528 100644
+--- a/source3/modules/vfs_full_audit.c
++++ b/source3/modules/vfs_full_audit.c
+@@ -158,6 +158,7 @@ typedef enum _vfs_op_type {
+ 	SMB_VFS_OP_REALPATH,
+ 	SMB_VFS_OP_CHFLAGS,
+ 	SMB_VFS_OP_FILE_ID_CREATE,
++	SMB_VFS_OP_FS_FILE_ID,
+ 	SMB_VFS_OP_STREAMINFO,
+ 	SMB_VFS_OP_GET_REAL_FILENAME,
+ 	SMB_VFS_OP_CONNECTPATH,
+@@ -300,6 +301,7 @@ static struct {
+ 	{ SMB_VFS_OP_REALPATH,	"realpath" },
+ 	{ SMB_VFS_OP_CHFLAGS,	"chflags" },
+ 	{ SMB_VFS_OP_FILE_ID_CREATE,	"file_id_create" },
++	{ SMB_VFS_OP_FS_FILE_ID,	"fs_file_id" },
+ 	{ SMB_VFS_OP_STREAMINFO,	"streaminfo" },
+ 	{ SMB_VFS_OP_GET_REAL_FILENAME, "get_real_filename" },
+ 	{ SMB_VFS_OP_CONNECTPATH,	"connectpath" },
+@@ -1820,6 +1822,20 @@ static struct file_id smb_full_audit_file_id_create(struct vfs_handle_struct *ha
+ 	return result;
+ }
+ 
++static uint64_t smb_full_audit_fs_file_id(struct vfs_handle_struct *handle,
++					  const SMB_STRUCT_STAT *sbuf)
++{
++	uint64_t result;
++
++	result = SMB_VFS_NEXT_FS_FILE_ID(handle, sbuf);
++
++	do_log(SMB_VFS_OP_FS_FILE_ID,
++	       result != 0,
++	       handle, "%" PRIu64, result);
++
++	return result;
++}
++
+ static NTSTATUS smb_full_audit_streaminfo(vfs_handle_struct *handle,
+ 					  struct files_struct *fsp,
+ 					  const struct smb_filename *smb_fname,
+@@ -2864,6 +2880,7 @@ static struct vfs_fn_pointers vfs_full_audit_fns = {
+ 	.realpath_fn = smb_full_audit_realpath,
+ 	.chflags_fn = smb_full_audit_chflags,
+ 	.file_id_create_fn = smb_full_audit_file_id_create,
++	.fs_file_id_fn = smb_full_audit_fs_file_id,
+ 	.offload_read_send_fn = smb_full_audit_offload_read_send,
+ 	.offload_read_recv_fn = smb_full_audit_offload_read_recv,
+ 	.offload_write_send_fn = smb_full_audit_offload_write_send,
+diff --git a/source3/modules/vfs_not_implemented.c b/source3/modules/vfs_not_implemented.c
+index d3aca899067..aa7068ed073 100644
+--- a/source3/modules/vfs_not_implemented.c
++++ b/source3/modules/vfs_not_implemented.c
+@@ -511,6 +511,13 @@ struct file_id vfs_not_implemented_file_id_create(vfs_handle_struct *handle,
+ 	return id;
+ }
+ 
++uint64_t vfs_not_implemented_fs_file_id(vfs_handle_struct *handle,
++					const SMB_STRUCT_STAT *sbuf)
++{
++	errno = ENOSYS;
++	return 0;
++}
++
+ struct vfs_not_implemented_offload_read_state {
+ 	bool dummy;
+ };
+@@ -1088,6 +1095,7 @@ static struct vfs_fn_pointers vfs_not_implemented_fns = {
+ 	.realpath_fn = vfs_not_implemented_realpath,
+ 	.chflags_fn = vfs_not_implemented_chflags,
+ 	.file_id_create_fn = vfs_not_implemented_file_id_create,
++	.fs_file_id_fn = vfs_not_implemented_fs_file_id,
+ 	.offload_read_send_fn = vfs_not_implemented_offload_read_send,
+ 	.offload_read_recv_fn = vfs_not_implemented_offload_read_recv,
+ 	.offload_write_send_fn = vfs_not_implemented_offload_write_send,
+diff --git a/source3/modules/vfs_time_audit.c b/source3/modules/vfs_time_audit.c
+index 96847a4fde9..8e1c794c037 100644
+--- a/source3/modules/vfs_time_audit.c
++++ b/source3/modules/vfs_time_audit.c
+@@ -1520,6 +1520,25 @@ static struct file_id smb_time_audit_file_id_create(struct vfs_handle_struct *ha
+ 	return result;
+ }
+ 
++static uint64_t smb_time_audit_fs_file_id(struct vfs_handle_struct *handle,
++					  const SMB_STRUCT_STAT *sbuf)
++{
++	uint64_t result;
++	struct timespec ts1,ts2;
++	double timediff;
++
++	clock_gettime_mono(&ts1);
++	result = SMB_VFS_NEXT_FS_FILE_ID(handle, sbuf);
++	clock_gettime_mono(&ts2);
++	timediff = nsec_time_diff(&ts2,&ts1)*1.0e-9;
++
++	if (timediff > audit_timeout) {
++		smb_time_audit_log("fs_file_id", timediff);
++	}
++
++	return result;
++}
++
+ static NTSTATUS smb_time_audit_streaminfo(vfs_handle_struct *handle,
+ 					  struct files_struct *fsp,
+ 					  const struct smb_filename *smb_fname,
+@@ -2824,6 +2843,7 @@ static struct vfs_fn_pointers vfs_time_audit_fns = {
+ 	.realpath_fn = smb_time_audit_realpath,
+ 	.chflags_fn = smb_time_audit_chflags,
+ 	.file_id_create_fn = smb_time_audit_file_id_create,
++	.fs_file_id_fn = smb_time_audit_fs_file_id,
+ 	.offload_read_send_fn = smb_time_audit_offload_read_send,
+ 	.offload_read_recv_fn = smb_time_audit_offload_read_recv,
+ 	.offload_write_send_fn = smb_time_audit_offload_write_send,
+diff --git a/source3/smbd/vfs.c b/source3/smbd/vfs.c
+index d3bb9c5d63f..51a4aeb0f22 100644
+--- a/source3/smbd/vfs.c
++++ b/source3/smbd/vfs.c
+@@ -2237,6 +2237,13 @@ struct file_id smb_vfs_call_file_id_create(struct vfs_handle_struct *handle,
+ 	return handle->fns->file_id_create_fn(handle, sbuf);
+ }
+ 
++uint64_t smb_vfs_call_fs_file_id(struct vfs_handle_struct *handle,
++				 const SMB_STRUCT_STAT *sbuf)
++{
++	VFS_FIND(fs_file_id);
++	return handle->fns->fs_file_id_fn(handle, sbuf);
++}
++
+ NTSTATUS smb_vfs_call_streaminfo(struct vfs_handle_struct *handle,
+ 				 struct files_struct *fsp,
+ 				 const struct smb_filename *smb_fname,
+-- 
+2.21.0
+
+
+From 33e2acfff860945018b7e6e2403a9ed3b5c4f77e Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Sat, 29 Jun 2019 14:18:13 +0200
+Subject: [PATCH 16/22] s3:vfs: move get_fs_file_id to vfs_default
+
+This makes get_fs_file_id() the default implementation of
+SMB_VFS_FS_FILE_ID(). No change in behaviour.
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ source3/modules/vfs_default.c | 23 +++++++++++++++++++++++
+ source3/smbd/proto.h          |  1 -
+ source3/smbd/smb2_create.c    |  5 +++--
+ source3/smbd/trans2.c         | 25 ++-----------------------
+ 4 files changed, 28 insertions(+), 26 deletions(-)
+
+diff --git a/source3/modules/vfs_default.c b/source3/modules/vfs_default.c
+index f2f2ed7f7d1..dcb53c64eef 100644
+--- a/source3/modules/vfs_default.c
++++ b/source3/modules/vfs_default.c
+@@ -2728,6 +2728,28 @@ static struct file_id vfswrap_file_id_create(struct vfs_handle_struct *handle,
+ 	return key;
+ }
+ 
++static uint64_t vfswrap_fs_file_id(struct vfs_handle_struct *handle,
++				   const SMB_STRUCT_STAT *psbuf)
++{
++	uint64_t file_id;
++
++	if (handle->conn->sconn->aapl_zero_file_id) {
++		return 0;
++	}
++
++	if (handle->conn->base_share_dev == psbuf->st_ex_dev) {
++		return (uint64_t)psbuf->st_ex_ino;
++	}
++
++	/* FileIDLow */
++	file_id = ((psbuf->st_ex_ino) & UINT32_MAX);
++
++	/* FileIDHigh */
++	file_id |= ((uint64_t)((psbuf->st_ex_dev) & UINT32_MAX)) << 32;
++
++	return file_id;
++}
++
+ static NTSTATUS vfswrap_streaminfo(vfs_handle_struct *handle,
+ 				   struct files_struct *fsp,
+ 				   const struct smb_filename *smb_fname,
+@@ -3447,6 +3469,7 @@ static struct vfs_fn_pointers vfs_default_fns = {
+ 	.realpath_fn = vfswrap_realpath,
+ 	.chflags_fn = vfswrap_chflags,
+ 	.file_id_create_fn = vfswrap_file_id_create,
++	.fs_file_id_fn = vfswrap_fs_file_id,
+ 	.streaminfo_fn = vfswrap_streaminfo,
+ 	.get_real_filename_fn = vfswrap_get_real_filename,
+ 	.connectpath_fn = vfswrap_connectpath,
+diff --git a/source3/smbd/proto.h b/source3/smbd/proto.h
+index 23c59000da1..1dd1a8dbef4 100644
+--- a/source3/smbd/proto.h
++++ b/source3/smbd/proto.h
+@@ -1161,7 +1161,6 @@ int sys_statvfs(const char *path, vfs_statvfs_struct *statbuf);
+ NTSTATUS check_access_fsp(const struct files_struct *fsp,
+ 			  uint32_t access_mask);
+ uint64_t smb_roundup(connection_struct *conn, uint64_t val);
+-uint64_t get_fs_file_id(connection_struct *conn, const SMB_STRUCT_STAT *psbuf);
+ void aapl_force_zero_file_id(struct smbd_server_connection *sconn);
+ bool samba_private_attr_name(const char *unix_ea_name);
+ NTSTATUS get_ea_value(TALLOC_CTX *mem_ctx, connection_struct *conn,
+diff --git a/source3/smbd/smb2_create.c b/source3/smbd/smb2_create.c
+index 55dfb148c8e..61ed72169fb 100644
+--- a/source3/smbd/smb2_create.c
++++ b/source3/smbd/smb2_create.c
+@@ -1389,8 +1389,9 @@ static void smbd_smb2_create_after_exec(struct tevent_req *req)
+ 
+ 	if (state->qfid != NULL) {
+ 		uint8_t p[32];
+-		uint64_t file_id = get_fs_file_id(state->result->conn,
+-						  &state->result->fsp_name->st);
++		uint64_t file_id = SMB_VFS_FS_FILE_ID(
++			state->result->conn,
++			&state->result->fsp_name->st);
+ 		DATA_BLOB blob = data_blob_const(p, sizeof(p));
+ 
+ 		ZERO_STRUCT(p);
+diff --git a/source3/smbd/trans2.c b/source3/smbd/trans2.c
+index a268e97218f..9a2ae9b2f47 100644
+--- a/source3/smbd/trans2.c
++++ b/source3/smbd/trans2.c
+@@ -213,27 +213,6 @@ uint64_t smb_roundup(connection_struct *conn, uint64_t val)
+ 	return val;
+ }
+ 
+-/********************************************************************
+- Create a 64 bit FileIndex. If the file is on the same device as
+- the root of the share, just return the 64-bit inode. If it isn't,
+- mangle as we used to do.
+-********************************************************************/
+-
+-uint64_t get_fs_file_id(connection_struct *conn, const SMB_STRUCT_STAT *psbuf)
+-{
+-	uint64_t file_id;
+-	if (conn->sconn->aapl_zero_file_id) {
+-		return 0;
+-	}
+-	if (conn->base_share_dev == psbuf->st_ex_dev) {
+-		return (uint64_t)psbuf->st_ex_ino;
+-	}
+-	file_id = ((psbuf->st_ex_ino) & UINT32_MAX); /* FileIDLow */
+-	file_id |= ((uint64_t)((psbuf->st_ex_dev) & UINT32_MAX)) << 32; /* FileIDHigh */
+-	return file_id;
+-}
+-
+-
+ /********************************************************************
+  Globally (for this connection / multi-channel) disable file-ID
+  calculation. This is required to be global because it serves
+@@ -1863,7 +1842,7 @@ static NTSTATUS smbd_marshall_dir_entry(TALLOC_CTX *ctx,
+ 		}
+ 	}
+ 
+-	file_id = get_fs_file_id(conn, &smb_fname->st);
++	file_id = SMB_VFS_FS_FILE_ID(conn, &smb_fname->st);
+ 
+ 	mdate_ts = smb_fname->st.st_ex_mtime;
+ 	adate_ts = smb_fname->st.st_ex_atime;
+@@ -5231,7 +5210,7 @@ NTSTATUS smbd_do_qfilepathinfo(connection_struct *conn,
+ 
+ 	   I think this causes us to fail the IFSKIT
+ 	   BasicFileInformationTest. -tpot */
+-	file_id = get_fs_file_id(conn, psbuf);
++	file_id = SMB_VFS_FS_FILE_ID(conn, psbuf);
+ 
+ 	*fixed_portion = 0;
+ 
+-- 
+2.21.0
+
+
+From 2fbed49880b4228cbdbafec04fceab548cba3f50 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Thu, 27 Jun 2019 14:46:37 +0200
+Subject: [PATCH 17/22] s3:smbd: use stored file_id in SMB_VFS_FS_FILE_ID()
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ source3/modules/vfs_default.c | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/ctdb/server/ctdb_cluster_mutex.c b/ctdb/server/ctdb_cluster_mutex.c
-index 2e3cb8112ad..719b5c14f7a 100644
---- a/ctdb/server/ctdb_cluster_mutex.c
-+++ b/ctdb/server/ctdb_cluster_mutex.c
-@@ -176,6 +176,10 @@ static bool cluster_mutex_helper_args_cmd(TALLOC_CTX *mem_ctx,
- 		return false;
+diff --git a/source3/modules/vfs_default.c b/source3/modules/vfs_default.c
+index dcb53c64eef..bcad1c8a736 100644
+--- a/source3/modules/vfs_default.c
++++ b/source3/modules/vfs_default.c
+@@ -2737,6 +2737,10 @@ static uint64_t vfswrap_fs_file_id(struct vfs_handle_struct *handle,
+ 		return 0;
  	}
- 	n = strv_count(strv);
-+	if (n == 0) {
-+		D_ERR("Mutex helper command is empty \"%s\"\n", argstring);
-+		return false;
+ 
++	if (!(psbuf->st_ex_iflags & ST_EX_IFLAG_CALCULATED_ITIME)) {
++		return psbuf->st_ex_file_id;
 +	}
- 
- 	/* Extra slot for NULL */
- 	args = talloc_array(mem_ctx, char *, n + 1);
--- 
-2.20.1
-
-
-From f4cbb6f0b5504783e280e613ed615f228a69e250 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Wed, 26 Jun 2019 15:55:41 +1000
-Subject: [PATCH 08/32] ctdb-tests: Fix signed/unsigned comparison by declaring
- as unsigned
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/tests/src/ctdb_io_test.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/ctdb/tests/src/ctdb_io_test.c b/ctdb/tests/src/ctdb_io_test.c
-index e3cb0a98ffe..56fc44f3b37 100644
---- a/ctdb/tests/src/ctdb_io_test.c
-+++ b/ctdb/tests/src/ctdb_io_test.c
-@@ -113,7 +113,8 @@ static void test2_callback(uint8_t *data, size_t length, void *private_data)
- static void test2(void)
- {
- 	struct ctdb_context *ctdb;
--	int fd, ret, i;
-+	int fd, ret;
-+	size_t i;
- 	uint32_t pkt_size;
- 	char req[1024] = { 0 };
- 
--- 
-2.20.1
-
-
-From d95abccf7e5a67533d57a6d2931e02036f45875b Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Fri, 21 Jun 2019 21:47:06 +1000
-Subject: [PATCH 09/32] ctdb-tests: Declare variable for return value of
- write(2) as ssize_t
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/tests/src/ctdb_io_test.c | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
-
-diff --git a/ctdb/tests/src/ctdb_io_test.c b/ctdb/tests/src/ctdb_io_test.c
-index 56fc44f3b37..f624d145d12 100644
---- a/ctdb/tests/src/ctdb_io_test.c
-+++ b/ctdb/tests/src/ctdb_io_test.c
-@@ -78,7 +78,8 @@ static void test1_callback(uint8_t *data, size_t length, void *private_data)
- static void test1(void)
- {
- 	struct ctdb_context *ctdb;
--	int fd, ret;
-+	int fd;
-+	ssize_t ret;
- 	uint32_t pkt_size;
- 
- 	test_setup(test1_callback, &fd, &ctdb, NULL);
-@@ -113,7 +114,8 @@ static void test2_callback(uint8_t *data, size_t length, void *private_data)
- static void test2(void)
- {
- 	struct ctdb_context *ctdb;
--	int fd, ret;
-+	int fd;
-+	ssize_t ret;
- 	size_t i;
- 	uint32_t pkt_size;
- 	char req[1024] = { 0 };
-@@ -188,7 +190,7 @@ static void test3(void)
- 	char *request;
- 	size_t req_len;
- 	int fd;
--	int ret;
-+	ssize_t ret;
- 
- 	test_setup(test_cb, &fd, &ctdb, &queue);
- 	request = talloc_zero_size(queue, queue->buffer_size);
-@@ -253,7 +255,7 @@ static void test4(void)
- 	char *request;
- 	size_t req_len;
- 	int fd;
--	int ret;
-+	ssize_t ret;
- 
- 	test_setup(test_cb, &fd, &ctdb, &queue);
- 
--- 
-2.20.1
-
-
-From bd1ebda7292ac2cbcee92b91e59329f57172c98d Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Fri, 21 Jun 2019 21:16:18 +1000
-Subject: [PATCH 10/32] ctdb-tests: Add a local variable for repeated
- calculation
-
-This improves readability.  Also, the asserts involving this
-expression get more complicated in the next commit, so this will keep
-those asserts within a single line.
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/tests/src/ctdb_io_test.c | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
-
-diff --git a/ctdb/tests/src/ctdb_io_test.c b/ctdb/tests/src/ctdb_io_test.c
-index f624d145d12..99c63f4de5d 100644
---- a/ctdb/tests/src/ctdb_io_test.c
-+++ b/ctdb/tests/src/ctdb_io_test.c
-@@ -253,7 +253,7 @@ static void test4(void)
- 	struct ctdb_queue *queue;
- 	uint32_t pkt_size;
- 	char *request;
--	size_t req_len;
-+	size_t req_len, half_buf_size;
- 	int fd;
- 	ssize_t ret;
- 
-@@ -268,8 +268,10 @@ static void test4(void)
- 	ret = write(fd, &pkt_size, sizeof(pkt_size));
- 	assert(ret == sizeof(pkt_size));
- 
--	ret = write(fd, request, req_len - (queue->buffer_size >> 1));
--	assert(ret == req_len - (queue->buffer_size >> 1));
-+	half_buf_size = queue->buffer_size >> 1;
 +
-+	ret = write(fd, request, req_len - half_buf_size);
-+	assert(ret == req_len - half_buf_size);
- 
- 	/*
- 	 * process...
-@@ -286,8 +288,8 @@ static void test4(void)
- 	assert(queue->buffer.size == pkt_size);
- 
- 	/* writing remaining data */
--	ret = write(fd, request, queue->buffer_size >> 1);
--	assert(ret == (queue->buffer_size >> 1));
-+	ret = write(fd, request, half_buf_size);
-+	assert(ret == half_buf_size);
- 
- 	/* process... */
- 	tevent_loop_once(ctdb->ev);
-@@ -301,13 +303,13 @@ static void test4(void)
- 	assert(queue->buffer.size == 0);
- 
- 	/* writing new packet to verify standard buffer size */
--	pkt_size = sizeof(uint32_t) + (queue->buffer_size >> 1);
-+	pkt_size = sizeof(uint32_t) + half_buf_size;
- 
- 	ret = write(fd, &pkt_size, sizeof(pkt_size));
- 	assert(ret == sizeof(pkt_size));
- 
--	ret = write(fd, request, (queue->buffer_size >> 1));
--	assert(ret == (queue->buffer_size >> 1));
-+	ret = write(fd, request, half_buf_size);
-+	assert(ret == half_buf_size);
- 
- 	/* process... */
- 	tevent_loop_once(ctdb->ev);
--- 
-2.20.1
-
-
-From b2daa17f5226d29bc7fd764a88f483d2459961cf Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Wed, 26 Jun 2019 15:59:10 +1000
-Subject: [PATCH 11/32] ctdb-tests: Fix signed/unsigned comparisons by casting
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/tests/src/ctdb_io_test.c | 38 +++++++++++++++++------------------
- 1 file changed, 19 insertions(+), 19 deletions(-)
-
-diff --git a/ctdb/tests/src/ctdb_io_test.c b/ctdb/tests/src/ctdb_io_test.c
-index 99c63f4de5d..d8f22162514 100644
---- a/ctdb/tests/src/ctdb_io_test.c
-+++ b/ctdb/tests/src/ctdb_io_test.c
-@@ -86,10 +86,10 @@ static void test1(void)
- 
- 	pkt_size = sizeof(uint32_t) + test1_req_len;
- 	ret = write(fd, &pkt_size, sizeof(pkt_size));
--	assert(ret == sizeof(pkt_size));
-+	assert(ret != -1 && (size_t)ret == sizeof(pkt_size));
- 
- 	ret = write(fd, test1_req, test1_req_len);
--	assert(ret == test1_req_len);
-+	assert(ret != -1 && (size_t)ret == test1_req_len);
- 
- 	tevent_loop_once(ctdb->ev);
- 
-@@ -132,23 +132,23 @@ static void test2(void)
- 
- 	pkt_size = sizeof(uint32_t) + test2_req_len[0];
- 	ret = write(fd, &pkt_size, sizeof(pkt_size));
--	assert(ret == sizeof(pkt_size));
-+	assert(ret != -1 && (size_t)ret == sizeof(pkt_size));
- 
- 	ret = write(fd, req, test2_req_len[0]);
--	assert(ret == test2_req_len[0]);
-+	assert(ret != -1 && (size_t)ret == test2_req_len[0]);
- 
- 	/*
- 	 * request 1
- 	 */
- 	pkt_size = sizeof(uint32_t) + test2_req_len[1];
- 	ret = write(fd, &pkt_size, sizeof(pkt_size));
--	assert(ret == sizeof(pkt_size));
-+	assert(ret != -1 && (size_t)ret == sizeof(pkt_size));
- 
- 	/*
- 	 * Omit the last byte to avoid buffer processing.
- 	 */
- 	ret = write(fd, req, test2_req_len[1] - 1);
--	assert(ret == test2_req_len[1] - 1);
-+	assert(ret != -1 && (size_t)ret == test2_req_len[1] - 1);
- 
- 	tevent_loop_once(ctdb->ev);
- 
-@@ -156,17 +156,17 @@ static void test2(void)
- 	 * Write the missing byte now.
- 	 */
- 	ret = write(fd, &req[test2_req_len[1] - 1], 1);
--	assert(ret == 1);
-+	assert(ret != -1 && (size_t)ret == 1);
- 
- 	/*
- 	 * request 2
- 	 */
- 	pkt_size = sizeof(uint32_t) + test2_req_len[2];
- 	ret = write(fd, &pkt_size, sizeof(pkt_size));
--	assert(ret == sizeof(pkt_size));
-+	assert(ret != -1 && (size_t)ret == sizeof(pkt_size));
- 
- 	ret = write(fd, req, test2_req_len[2]);
--	assert(ret == test2_req_len[2]);
-+	assert(ret != -1 && (size_t)ret == test2_req_len[2]);
- 
- 	tevent_loop_once(ctdb->ev);
- 	tevent_loop_once(ctdb->ev);
-@@ -206,19 +206,19 @@ static void test3(void)
- 	pkt_size = sizeof(uint32_t) + req_len;
- 
- 	ret = write(fd, &pkt_size, sizeof(pkt_size));
--	assert(ret == sizeof(pkt_size));
-+	assert(ret != -1 && (size_t)ret == sizeof(pkt_size));
- 
- 	ret = write(fd, request, req_len);
--	assert(ret == req_len);
-+	assert(ret != -1 && (size_t)ret == req_len);
- 
- 	/* writing second, incomplete packet */
- 	pkt_size = sizeof(uint32_t) + req_len;
- 
- 	ret = write(fd, &pkt_size, sizeof(pkt_size));
--	assert(ret == sizeof(pkt_size));
-+	assert(ret != -1 && (size_t)ret == sizeof(pkt_size));
- 
- 	ret = write(fd, request, req_len >> 1);
--	assert(ret == req_len >> 1);
-+	assert(ret != -1 && (size_t)ret == req_len >> 1);
- 
- 	/* process...only 1st packet can be processed */
- 	tevent_loop_once(ctdb->ev);
-@@ -228,7 +228,7 @@ static void test3(void)
- 
- 	/* writing another few bytes of the still incomplete packet */
- 	ret = write(fd, request, (req_len >> 1) - 1);
--	assert(ret == (req_len >> 1) - 1);
-+	assert(ret != -1 && (size_t)ret == (req_len >> 1) - 1);
- 
- 	/*
- 	 * the packet is still incomplete and connot be processed
-@@ -266,12 +266,12 @@ static void test4(void)
- 	pkt_size = sizeof(uint32_t) + req_len;
- 
- 	ret = write(fd, &pkt_size, sizeof(pkt_size));
--	assert(ret == sizeof(pkt_size));
-+	assert(ret != -1 && (size_t)ret == sizeof(pkt_size));
- 
- 	half_buf_size = queue->buffer_size >> 1;
- 
- 	ret = write(fd, request, req_len - half_buf_size);
--	assert(ret == req_len - half_buf_size);
-+	assert(ret != -1 && (size_t)ret == req_len - half_buf_size);
- 
- 	/*
- 	 * process...
-@@ -289,7 +289,7 @@ static void test4(void)
- 
- 	/* writing remaining data */
- 	ret = write(fd, request, half_buf_size);
--	assert(ret == half_buf_size);
-+	assert(ret != -1 && (size_t)ret == half_buf_size);
- 
- 	/* process... */
- 	tevent_loop_once(ctdb->ev);
-@@ -306,10 +306,10 @@ static void test4(void)
- 	pkt_size = sizeof(uint32_t) + half_buf_size;
- 
- 	ret = write(fd, &pkt_size, sizeof(pkt_size));
--	assert(ret == sizeof(pkt_size));
-+	assert(ret != -1 && (size_t)ret == sizeof(pkt_size));
- 
- 	ret = write(fd, request, half_buf_size);
--	assert(ret == half_buf_size);
-+	assert(ret != -1 && (size_t)ret == half_buf_size);
- 
- 	/* process... */
- 	tevent_loop_once(ctdb->ev);
--- 
-2.20.1
-
-
-From 8e5210261aba8122fd9f801544da73a09cc4d980 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Fri, 21 Jun 2019 14:37:11 +1000
-Subject: [PATCH 12/32] ctdb-tests: Fix signed/unsigned comparisons by
- declaring as unsigned
-
-Change declarations of variable and parameters, usually loop variables
-and limits, from int to unsigned int, size_t or uint32_t.
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/tests/src/cluster_wait.c               |  6 ++--
- ctdb/tests/src/cluster_wait.h               |  2 +-
- ctdb/tests/src/comm_client_test.c           |  7 ++--
- ctdb/tests/src/comm_test.c                  |  6 ++--
- ctdb/tests/src/ctdb_packet_parse.c          |  2 +-
- ctdb/tests/src/errcode.c                    |  6 ++--
- ctdb/tests/src/event_script_test.c          |  3 +-
- ctdb/tests/src/fake_ctdbd.c                 | 19 +++++------
- ctdb/tests/src/fetch_ring.c                 |  6 ++--
- ctdb/tests/src/protocol_basic_test.c        |  3 +-
- ctdb/tests/src/protocol_common.c            | 36 ++++++++++-----------
- ctdb/tests/src/protocol_common_basic.c      |  4 +--
- ctdb/tests/src/protocol_ctdb_compat_test.c  |  2 +-
- ctdb/tests/src/protocol_ctdb_test.c         |  2 +-
- ctdb/tests/src/protocol_types_compat_test.c | 28 ++++++++--------
- ctdb/tests/src/run_event_test.c             |  6 ++--
- ctdb/tests/src/sigcode.c                    |  6 ++--
- 17 files changed, 76 insertions(+), 68 deletions(-)
-
-diff --git a/ctdb/tests/src/cluster_wait.c b/ctdb/tests/src/cluster_wait.c
-index 8b0bb429e81..d411591765b 100644
---- a/ctdb/tests/src/cluster_wait.c
-+++ b/ctdb/tests/src/cluster_wait.c
-@@ -34,7 +34,7 @@
- struct cluster_wait_state {
- 	struct tevent_context *ev;
- 	struct ctdb_client_context *client;
--	int num_nodes;
-+	uint32_t num_nodes;
- 	bool *ready;
- 	bool join_done;
- };
-@@ -54,7 +54,7 @@ static void cluster_wait_sync_unregistered(struct tevent_req *subreq);
- struct tevent_req *cluster_wait_send(TALLOC_CTX *mem_ctx,
- 				     struct tevent_context *ev,
- 				     struct ctdb_client_context *client,
--				     int num_nodes)
-+				     uint32_t num_nodes)
- {
- 	struct tevent_req *req, *subreq;
- 	struct cluster_wait_state *state;
-@@ -213,7 +213,7 @@ static void cluster_wait_join_handler(uint64_t srvid, TDB_DATA data,
- 		req, struct cluster_wait_state);
- 	struct tevent_req *subreq;
- 	uint32_t pnn;
--	int i;
-+	uint32_t i;
- 
- 	if (srvid != MSG_ID_JOIN) {
- 		return;
-diff --git a/ctdb/tests/src/cluster_wait.h b/ctdb/tests/src/cluster_wait.h
-index 20aa6e969ac..e0c64ccbfc6 100644
---- a/ctdb/tests/src/cluster_wait.h
-+++ b/ctdb/tests/src/cluster_wait.h
-@@ -23,7 +23,7 @@
- struct tevent_req *cluster_wait_send(TALLOC_CTX *mem_ctx,
- 				     struct tevent_context *ev,
- 				     struct ctdb_client_context *client,
--				     int num_nodes);
-+				     uint32_t num_nodes);
- 
- bool cluster_wait_recv(struct tevent_req *req, int *perr);
- 
-diff --git a/ctdb/tests/src/comm_client_test.c b/ctdb/tests/src/comm_client_test.c
-index 8db219e6ee4..41ed5f7ad46 100644
---- a/ctdb/tests/src/comm_client_test.c
-+++ b/ctdb/tests/src/comm_client_test.c
-@@ -32,7 +32,7 @@ struct writer_state {
- 	struct comm_context *comm;
- 	uint8_t *buf;
- 	size_t *pkt_size;
--	int count, id;
-+	size_t count, id;
- };
- 
- static void writer_done(struct tevent_req *subreq);
-@@ -42,12 +42,13 @@ static void dead_handler(void *private_data);
- static struct tevent_req *writer_send(TALLOC_CTX *mem_ctx,
- 				      struct tevent_context *ev,
- 				      int fd, size_t *pkt_size,
--				      int count)
-+				      size_t count)
- {
- 	struct tevent_req *req, *subreq;
- 	struct writer_state *state;
- 	size_t max_size = 0, buflen;
--	int i, ret;
-+	size_t i;
-+	int ret;
- 
- 	for (i=0; i<count; i++) {
- 		if (pkt_size[i] > max_size) {
-diff --git a/ctdb/tests/src/comm_test.c b/ctdb/tests/src/comm_test.c
-index 5e1d6945da1..4595928e919 100644
---- a/ctdb/tests/src/comm_test.c
-+++ b/ctdb/tests/src/comm_test.c
-@@ -265,12 +265,12 @@ static void test3_writer_next(struct tevent_req *subreq);
- static struct tevent_req *test3_writer_send(TALLOC_CTX *mem_ctx,
- 					    struct tevent_context *ev,
- 					    struct comm_context *comm,
--					    size_t *pkt_size, int count)
-+					    size_t *pkt_size, size_t count)
- {
- 	struct tevent_req *req, *subreq;
- 	struct test3_writer_state *state;
- 	size_t max_size = 0, buflen;
--	int i;
-+	size_t i;
- 
- 	for (i=0; i<count; i++) {
- 		if (pkt_size[i] > max_size) {
-@@ -352,7 +352,7 @@ static void test3_writer_recv(struct tevent_req *req, int *perr)
- 	*perr = 0;
- }
- 
--static void test3_writer(int fd, size_t *pkt_size, int count)
-+static void test3_writer(int fd, size_t *pkt_size, size_t count)
- {
- 	TALLOC_CTX *mem_ctx;
- 	struct tevent_context *ev;
-diff --git a/ctdb/tests/src/ctdb_packet_parse.c b/ctdb/tests/src/ctdb_packet_parse.c
-index 707d697d931..0b99b34b3ca 100644
---- a/ctdb/tests/src/ctdb_packet_parse.c
-+++ b/ctdb/tests/src/ctdb_packet_parse.c
-@@ -30,7 +30,7 @@
- static TDB_DATA strace_parser(char *buf, TALLOC_CTX *mem_ctx)
- {
- 	TDB_DATA data;
--	int i = 0, j = 0;
-+	size_t i = 0, j = 0;
- 
- 	data.dptr = talloc_size(mem_ctx, strlen(buf));
- 	if (data.dptr == NULL) {
-diff --git a/ctdb/tests/src/errcode.c b/ctdb/tests/src/errcode.c
-index 90853624add..7343e818be2 100644
---- a/ctdb/tests/src/errcode.c
-+++ b/ctdb/tests/src/errcode.c
-@@ -127,7 +127,7 @@ struct {
- 
- static void dump(void)
- {
--	int i;
-+	size_t i;
- 
- 	for (i=0; i<ARRAY_SIZE(err_codes); i++) {
- 		printf("%s %d\n", err_codes[i].label, err_codes[i].code);
-@@ -137,7 +137,7 @@ static void dump(void)
- static void match_label(const char *str)
- {
- 	int code = -1;
--	int i;
-+	size_t i;
- 
- 	for (i=0; i<ARRAY_SIZE(err_codes); i++) {
- 		if (strcasecmp(err_codes[i].label, str) == 0) {
-@@ -152,7 +152,7 @@ static void match_label(const char *str)
- static void match_code(int code)
- {
- 	const char *label = "UNKNOWN";
--	int i;
-+	size_t i;
- 
- 	for (i=0; i<ARRAY_SIZE(err_codes); i++) {
- 		if (err_codes[i].code == code) {
-diff --git a/ctdb/tests/src/event_script_test.c b/ctdb/tests/src/event_script_test.c
-index 73c974dbd39..a78e4005828 100644
---- a/ctdb/tests/src/event_script_test.c
-+++ b/ctdb/tests/src/event_script_test.c
-@@ -46,7 +46,8 @@ static void usage(const char *prog)
- static void do_list(TALLOC_CTX *mem_ctx, int argc, const char **argv)
- {
- 	struct event_script_list *script_list = NULL;
--	int ret, i;
-+	unsigned int i;
-+	int ret;
- 
- 	if (argc != 3) {
- 		usage(argv[0]);
-diff --git a/ctdb/tests/src/fake_ctdbd.c b/ctdb/tests/src/fake_ctdbd.c
-index 899d05f30d5..6736d5dcdd0 100644
---- a/ctdb/tests/src/fake_ctdbd.c
-+++ b/ctdb/tests/src/fake_ctdbd.c
-@@ -1300,7 +1300,7 @@ fail:
- static bool ctdbd_verify(struct ctdbd_context *ctdb)
- {
- 	struct node *node;
--	int i;
-+	unsigned int i;
- 
- 	if (ctdb->node_map->num_nodes == 0) {
- 		return true;
-@@ -1370,7 +1370,7 @@ static int recover_check(struct tevent_req *req)
- 	struct ctdbd_context *ctdb = state->ctdb;
- 	struct tevent_req *subreq;
- 	bool recovery_disabled;
--	int i;
-+	unsigned int i;
- 
- 	recovery_disabled = false;
- 	for (i=0; i<ctdb->node_map->num_nodes; i++) {
-@@ -1833,7 +1833,7 @@ static void control_get_dbmap(TALLOC_CTX *mem_ctx,
- 	struct ctdb_reply_control reply;
- 	struct ctdb_dbid_map *dbmap;
- 	struct database *db;
--	int i;
-+	unsigned int i;
- 
- 	reply.rdata.opcode = request->opcode;
- 
-@@ -2377,7 +2377,7 @@ static void control_reload_nodes_file(TALLOC_CTX *mem_ctx,
- 	struct ctdb_reply_control reply;
- 	struct ctdb_node_map *nodemap;
- 	struct node_map *node_map = ctdb->node_map;
--	int i;
-+	unsigned int i;
- 
- 	reply.rdata.opcode = request->opcode;
- 
-@@ -2493,7 +2493,7 @@ static void control_release_ip(TALLOC_CTX *mem_ctx,
- 	struct ctdb_reply_control reply;
- 	struct ctdb_public_ip_list *ips = NULL;
- 	struct ctdb_public_ip *t = NULL;
--	int i;
-+	unsigned int i;
- 
- 	reply.rdata.opcode = request->opcode;
- 
-@@ -2559,7 +2559,7 @@ static void control_takeover_ip(TALLOC_CTX *mem_ctx,
- 	struct ctdb_reply_control reply;
- 	struct ctdb_public_ip_list *ips = NULL;
- 	struct ctdb_public_ip *t = NULL;
--	int i;
-+	unsigned int i;
- 
- 	reply.rdata.opcode = request->opcode;
- 
-@@ -2663,7 +2663,7 @@ static void control_get_nodemap(TALLOC_CTX *mem_ctx,
- 	struct ctdb_reply_control reply;
- 	struct ctdb_node_map *nodemap;
- 	struct node *node;
--	int i;
-+	unsigned int i;
- 
- 	reply.rdata.opcode = request->opcode;
- 
-@@ -2954,7 +2954,7 @@ static struct ctdb_iface_list *get_ctdb_iface_list(TALLOC_CTX *mem_ctx,
- {
- 	struct ctdb_iface_list *iface_list;
- 	struct interface *iface;
--	int i;
-+	unsigned int i;
- 
- 	iface_list = talloc_zero(mem_ctx, struct ctdb_iface_list);
- 	if (iface_list == NULL) {
-@@ -3745,7 +3745,8 @@ static void client_read_handler(uint8_t *buf, size_t buflen,
- 	struct ctdbd_context *ctdb = state->ctdb;
- 	struct ctdb_req_header header;
- 	size_t np;
--	int ret, i;
-+	unsigned int i;
-+	int ret;
- 
- 	ret = ctdb_req_header_pull(buf, buflen, &header, &np);
- 	if (ret != 0) {
-diff --git a/ctdb/tests/src/fetch_ring.c b/ctdb/tests/src/fetch_ring.c
-index f746e789511..a8d103ed3f2 100644
---- a/ctdb/tests/src/fetch_ring.c
-+++ b/ctdb/tests/src/fetch_ring.c
-@@ -33,7 +33,7 @@
- 
- #define MSG_ID_FETCH	0
- 
--static uint32_t next_node(struct ctdb_client_context *client, int num_nodes)
-+static uint32_t next_node(struct ctdb_client_context *client, uint32_t num_nodes)
- {
- 	return (ctdb_client_pnn(client) + 1) % num_nodes;
- }
-@@ -42,7 +42,7 @@ struct fetch_ring_state {
- 	struct tevent_context *ev;
- 	struct ctdb_client_context *client;
- 	struct ctdb_db_context *ctdb_db;
--	int num_nodes;
-+	uint32_t num_nodes;
- 	int timelimit;
- 	int interactive;
- 	TDB_DATA key;
-@@ -63,7 +63,7 @@ static struct tevent_req *fetch_ring_send(TALLOC_CTX *mem_ctx,
- 					  struct tevent_context *ev,
- 					  struct ctdb_client_context *client,
- 					  struct ctdb_db_context *ctdb_db,
--					  int num_nodes, int timelimit,
-+					  uint32_t num_nodes, int timelimit,
- 					  int interactive)
- {
- 	struct tevent_req *req, *subreq;
-diff --git a/ctdb/tests/src/protocol_basic_test.c b/ctdb/tests/src/protocol_basic_test.c
-index 4bacb47ada3..215c0829854 100644
---- a/ctdb/tests/src/protocol_basic_test.c
-+++ b/ctdb/tests/src/protocol_basic_test.c
-@@ -36,7 +36,8 @@ static void test_ctdb_chararray(void)
- 	size_t len = rand_int(1000) + 1;
- 	char p1[len], p2[len];
- 	size_t buflen, np = 0;
--	int i, ret;
-+	size_t i;
-+	int ret;
- 
- 	for (i=0; i<len-1; i++) {
- 		p1[i] = 'A' + rand_int(26);
-diff --git a/ctdb/tests/src/protocol_common.c b/ctdb/tests/src/protocol_common.c
-index 781947d13d1..73e9a8c5d0d 100644
---- a/ctdb/tests/src/protocol_common.c
-+++ b/ctdb/tests/src/protocol_common.c
-@@ -218,7 +218,7 @@ void verify_ctdb_statistics(struct ctdb_statistics *p1,
- 
- void fill_ctdb_vnn_map(TALLOC_CTX *mem_ctx, struct ctdb_vnn_map *p)
- {
--	int i;
-+	unsigned int i;
- 
- 	p->generation = rand32();
- 	p->size = rand_int(20);
-@@ -236,7 +236,7 @@ void fill_ctdb_vnn_map(TALLOC_CTX *mem_ctx, struct ctdb_vnn_map *p)
- 
- void verify_ctdb_vnn_map(struct ctdb_vnn_map *p1, struct ctdb_vnn_map *p2)
- {
--	int i;
-+	unsigned int i;
- 
- 	assert(p1->generation == p2->generation);
- 	assert(p1->size == p2->size);
-@@ -259,7 +259,7 @@ void verify_ctdb_dbid(struct ctdb_dbid *p1, struct ctdb_dbid *p2)
- 
- void fill_ctdb_dbid_map(TALLOC_CTX *mem_ctx, struct ctdb_dbid_map *p)
- {
--	int i;
-+	unsigned int i;
- 
- 	p->num = rand_int(40);
- 	if (p->num > 0) {
-@@ -275,7 +275,7 @@ void fill_ctdb_dbid_map(TALLOC_CTX *mem_ctx, struct ctdb_dbid_map *p)
- 
- void verify_ctdb_dbid_map(struct ctdb_dbid_map *p1, struct ctdb_dbid_map *p2)
- {
--	int i;
-+	unsigned int i;
- 
- 	assert(p1->num == p2->num);
- 	for (i=0; i<p1->num; i++) {
-@@ -714,7 +714,7 @@ void verify_ctdb_tunable_list(struct ctdb_tunable_list *p1,
- 
- void fill_ctdb_tickle_list(TALLOC_CTX *mem_ctx, struct ctdb_tickle_list *p)
- {
--	int i;
-+	unsigned int i;
- 
- 	fill_ctdb_sock_addr(mem_ctx, &p->addr);
- 	p->num = rand_int(1000);
-@@ -732,7 +732,7 @@ void fill_ctdb_tickle_list(TALLOC_CTX *mem_ctx, struct ctdb_tickle_list *p)
- void verify_ctdb_tickle_list(struct ctdb_tickle_list *p1,
- 			     struct ctdb_tickle_list *p2)
- {
--	int i;
-+	unsigned int i;
- 
- 	verify_ctdb_sock_addr(&p1->addr, &p2->addr);
- 	assert(p1->num == p2->num);
-@@ -806,7 +806,7 @@ void verify_ctdb_public_ip(struct ctdb_public_ip *p1,
- void fill_ctdb_public_ip_list(TALLOC_CTX *mem_ctx,
- 			      struct ctdb_public_ip_list *p)
- {
--	int i;
-+	unsigned int i;
- 
- 	p->num = rand_int(32);
- 	if (p->num > 0) {
-@@ -823,7 +823,7 @@ void fill_ctdb_public_ip_list(TALLOC_CTX *mem_ctx,
- void verify_ctdb_public_ip_list(struct ctdb_public_ip_list *p1,
- 				struct ctdb_public_ip_list *p2)
- {
--	int i;
-+	unsigned int i;
- 
- 	assert(p1->num == p2->num);
- 	for (i=0; i<p1->num; i++) {
-@@ -849,7 +849,7 @@ void verify_ctdb_node_and_flags(struct ctdb_node_and_flags *p1,
- 
- void fill_ctdb_node_map(TALLOC_CTX *mem_ctx, struct ctdb_node_map *p)
- {
--	int i;
-+	unsigned int i;
- 
- 	p->num = rand_int(32);
- 	if (p->num > 0) {
-@@ -866,7 +866,7 @@ void fill_ctdb_node_map(TALLOC_CTX *mem_ctx, struct ctdb_node_map *p)
- 
- void verify_ctdb_node_map(struct ctdb_node_map *p1, struct ctdb_node_map *p2)
- {
--	int i;
-+	unsigned int i;
- 
- 	assert(p1->num == p2->num);
- 	for (i=0; i<p1->num; i++) {
-@@ -894,7 +894,7 @@ void verify_ctdb_script(struct ctdb_script *p1, struct ctdb_script *p2)
- 
- void fill_ctdb_script_list(TALLOC_CTX *mem_ctx, struct ctdb_script_list *p)
- {
--	int i;
-+	unsigned int i;
- 
- 	p->num_scripts = rand_int(32);
- 	if (p->num_scripts > 0) {
-@@ -912,7 +912,7 @@ void fill_ctdb_script_list(TALLOC_CTX *mem_ctx, struct ctdb_script_list *p)
- void verify_ctdb_script_list(struct ctdb_script_list *p1,
- 			     struct ctdb_script_list *p2)
- {
--	int i;
-+	unsigned int i;
- 
- 	assert(p1->num_scripts == p2->num_scripts);
- 	for (i=0; i<p1->num_scripts; i++) {
-@@ -962,7 +962,7 @@ void verify_ctdb_iface(struct ctdb_iface *p1, struct ctdb_iface *p2)
- 
- void fill_ctdb_iface_list(TALLOC_CTX *mem_ctx, struct ctdb_iface_list *p)
- {
--	int i;
-+	unsigned int i;
- 
- 	p->num = rand_int(32);
- 	if (p->num > 0) {
-@@ -979,7 +979,7 @@ void fill_ctdb_iface_list(TALLOC_CTX *mem_ctx, struct ctdb_iface_list *p)
- void verify_ctdb_iface_list(struct ctdb_iface_list *p1,
- 			    struct ctdb_iface_list *p2)
- {
--	int i;
-+	unsigned int i;
- 
- 	assert(p1->num == p2->num);
- 	for (i=0; i<p1->num; i++) {
-@@ -1052,7 +1052,7 @@ void verify_ctdb_key_data(struct ctdb_key_data *p1, struct ctdb_key_data *p2)
- void fill_ctdb_db_statistics(TALLOC_CTX *mem_ctx,
- 			     struct ctdb_db_statistics *p)
- {
--	int i;
-+	unsigned int i;
- 
- 	p->locks.num_calls = rand32();
- 	p->locks.num_current = rand32();
-@@ -1081,7 +1081,7 @@ void fill_ctdb_db_statistics(TALLOC_CTX *mem_ctx,
- void verify_ctdb_db_statistics(struct ctdb_db_statistics *p1,
- 			       struct ctdb_db_statistics *p2)
- {
--	int i;
-+	unsigned int i;
- 
- 	assert(p1->locks.num_calls == p2->locks.num_calls);
- 	assert(p1->locks.num_current == p2->locks.num_current);
-@@ -1199,7 +1199,7 @@ void verify_ctdb_g_lock(struct ctdb_g_lock *p1, struct ctdb_g_lock *p2)
- 
- void fill_ctdb_g_lock_list(TALLOC_CTX *mem_ctx, struct ctdb_g_lock_list *p)
- {
--	int i;
-+	unsigned int i;
- 
- 	p->num = rand_int(20) + 1;
- 	p->lock = talloc_zero_array(mem_ctx, struct ctdb_g_lock, p->num);
-@@ -1212,7 +1212,7 @@ void fill_ctdb_g_lock_list(TALLOC_CTX *mem_ctx, struct ctdb_g_lock_list *p)
- void verify_ctdb_g_lock_list(struct ctdb_g_lock_list *p1,
- 			     struct ctdb_g_lock_list *p2)
- {
--	int i;
-+	unsigned int i;
- 
- 	assert(p1->num == p2->num);
- 	for (i=0; i<p1->num; i++) {
-diff --git a/ctdb/tests/src/protocol_common_basic.c b/ctdb/tests/src/protocol_common_basic.c
-index cbc59606629..b8b82fd298c 100644
---- a/ctdb/tests/src/protocol_common_basic.c
-+++ b/ctdb/tests/src/protocol_common_basic.c
-@@ -70,7 +70,7 @@ double rand_double(void)
- 
- void fill_buffer(void *p, size_t len)
- {
--	int i;
-+	size_t i;
- 	uint8_t *ptr = p;
- 
- 	for (i=0; i<len; i++) {
-@@ -87,7 +87,7 @@ void verify_buffer(void *p1, void *p2, size_t len)
- 
- void fill_string(char *p, size_t len)
- {
--	int i;
-+	size_t i;
- 
- 	for (i=0; i<len-1; i++) {
- 		p[i] = 'A' + rand_int(26);
-diff --git a/ctdb/tests/src/protocol_ctdb_compat_test.c b/ctdb/tests/src/protocol_ctdb_compat_test.c
-index f0235ddc9fa..77e10ef6d8f 100644
---- a/ctdb/tests/src/protocol_ctdb_compat_test.c
-+++ b/ctdb/tests/src/protocol_ctdb_compat_test.c
-@@ -1236,7 +1236,7 @@ int main(int argc, char *argv[])
- 		CTDB_SRVID_DISABLE_RECOVERIES,
- 		CTDB_SRVID_DISABLE_IP_CHECK,
- 	};
--	int i;
-+	unsigned int i;
- 
- 	if (argc == 2) {
- 		int seed = atoi(argv[1]);
-diff --git a/ctdb/tests/src/protocol_ctdb_test.c b/ctdb/tests/src/protocol_ctdb_test.c
-index cb268679c41..9eb25d96186 100644
---- a/ctdb/tests/src/protocol_ctdb_test.c
-+++ b/ctdb/tests/src/protocol_ctdb_test.c
-@@ -328,7 +328,7 @@ int main(int argc, char *argv[])
- 		CTDB_SRVID_DISABLE_RECOVERIES,
- 		CTDB_SRVID_DISABLE_IP_CHECK,
- 	};
--	int i;
-+	size_t i;
- 
- 	if (argc == 2) {
- 		int seed = atoi(argv[1]);
-diff --git a/ctdb/tests/src/protocol_types_compat_test.c b/ctdb/tests/src/protocol_types_compat_test.c
-index 59d6958a568..0f1e548d099 100644
---- a/ctdb/tests/src/protocol_types_compat_test.c
-+++ b/ctdb/tests/src/protocol_types_compat_test.c
-@@ -967,7 +967,7 @@ static void ctdb_tickle_list_push_old(struct ctdb_tickle_list *in,
- 	struct ctdb_tickle_list_wire *wire =
- 		(struct ctdb_tickle_list_wire *)buf;
- 	size_t offset;
--	int i;
-+	unsigned int i;
- 
- 	memcpy(&wire->addr, &in->addr, sizeof(ctdb_sock_addr));
- 	wire->num = in->num;
-@@ -987,7 +987,8 @@ static int ctdb_tickle_list_pull_old(uint8_t *buf, size_t buflen,
- 	struct ctdb_tickle_list_wire *wire =
- 		(struct ctdb_tickle_list_wire *)buf;
- 	size_t offset;
--	int i, ret;
-+	unsigned int i;
-+	int ret;
- 
- 	if (buflen < offsetof(struct ctdb_tickle_list_wire, conn)) {
- 		return EMSGSIZE;
-@@ -1220,7 +1221,7 @@ struct ctdb_public_ip_list_wire {
- 
- static size_t ctdb_public_ip_list_len_old(struct ctdb_public_ip_list *in)
- {
--	int i;
-+	unsigned int i;
- 	size_t len;
- 
- 	len = sizeof(uint32_t);
-@@ -1236,7 +1237,7 @@ static void ctdb_public_ip_list_push_old(struct ctdb_public_ip_list *in,
- 	struct ctdb_public_ip_list_wire *wire =
- 		(struct ctdb_public_ip_list_wire *)buf;
- 	size_t offset;
--	int i;
-+	unsigned int i;
- 
- 	wire->num = in->num;
- 
-@@ -1255,7 +1256,7 @@ static int ctdb_public_ip_list_pull_old(uint8_t *buf, size_t buflen,
- 	struct ctdb_public_ip_list_wire *wire =
- 		(struct ctdb_public_ip_list_wire *)buf;
- 	size_t offset;
--	int i;
-+	unsigned int i;
- 	bool ret;
- 
- 	if (buflen < sizeof(uint32_t)) {
-@@ -1368,7 +1369,7 @@ static void ctdb_node_map_push_old(struct ctdb_node_map *in, uint8_t *buf)
- {
- 	struct ctdb_node_map_wire *wire = (struct ctdb_node_map_wire *)buf;
- 	size_t offset;
--	int i;
-+	unsigned int i;
- 
- 	wire->num = in->num;
- 
-@@ -1386,7 +1387,7 @@ static int ctdb_node_map_pull_old(uint8_t *buf, size_t buflen,
- 	struct ctdb_node_map *val;
- 	struct ctdb_node_map_wire *wire = (struct ctdb_node_map_wire *)buf;
- 	size_t offset;
--	int i;
-+	unsigned int i;
- 	bool ret;
- 
- 	if (buflen < sizeof(uint32_t)) {
-@@ -1484,7 +1485,7 @@ struct ctdb_script_list_wire {
- 
- static size_t ctdb_script_list_len_old(struct ctdb_script_list *in)
- {
--	int i;
-+	unsigned int i;
- 	size_t len;
- 
- 	if (in == NULL) {
-@@ -1504,7 +1505,7 @@ static void ctdb_script_list_push_old(struct ctdb_script_list *in,
- 	struct ctdb_script_list_wire *wire =
- 		(struct ctdb_script_list_wire *)buf;
- 	size_t offset;
--	int i;
-+	unsigned int i;
- 
- 	if (in == NULL) {
- 		return;
-@@ -1527,7 +1528,7 @@ static int ctdb_script_list_pull_old(uint8_t *buf, size_t buflen,
- 	struct ctdb_script_list_wire *wire =
- 		(struct ctdb_script_list_wire *)buf;
- 	size_t offset;
--	int i;
-+	unsigned int i;
- 	bool ret;
- 
- 	/* If event scripts have never been run, the result will be NULL */
-@@ -2024,7 +2025,7 @@ static int ctdb_db_statistics_pull_old(uint8_t *buf, size_t buflen,
- 	struct ctdb_db_statistics_wire *wire =
- 		(struct ctdb_db_statistics_wire *)buf;
- 	size_t offset;
--	int i;
-+	unsigned int i;
- 
- 	if (buflen < sizeof(struct ctdb_db_statistics)) {
- 		return EMSGSIZE;
-@@ -2220,7 +2221,7 @@ static void ctdb_g_lock_list_push_old(struct ctdb_g_lock_list *in,
- 				      uint8_t *buf)
- {
- 	size_t offset = 0;
--	int i;
-+	unsigned int i;
- 
- 	for (i=0; i<in->num; i++) {
- 		ctdb_g_lock_push_old(&in->lock[i], &buf[offset]);
-@@ -2235,7 +2236,8 @@ static int ctdb_g_lock_list_pull_old(uint8_t *buf, size_t buflen,
- 	struct ctdb_g_lock_list *val;
- 	unsigned count;
- 	size_t offset;
--	int ret, i;
-+	unsigned int i;
-+	int ret;
- 
- 	val = talloc_zero(mem_ctx, struct ctdb_g_lock_list);
- 	if (val == NULL) {
-diff --git a/ctdb/tests/src/run_event_test.c b/ctdb/tests/src/run_event_test.c
-index 8b5dcd7beef..cfe5f161d1d 100644
---- a/ctdb/tests/src/run_event_test.c
-+++ b/ctdb/tests/src/run_event_test.c
-@@ -60,7 +60,8 @@ static void do_run(TALLOC_CTX *mem_ctx, struct tevent_context *ev,
- 	struct timeval timeout;
- 	struct run_event_script_list *script_list = NULL;
- 	char *arg_str;
--	int ret, t, i;
-+	unsigned int i;
-+	int ret, t;
- 	bool status;
- 
- 	if (argc < 5) {
-@@ -115,7 +116,8 @@ static void do_list(TALLOC_CTX *mem_ctx, struct tevent_context *ev,
- 		    int argc, const char **argv)
- {
- 	struct run_event_script_list *script_list = NULL;
--	int ret, i;
-+	unsigned int i;
-+	int ret;
- 
- 	ret = run_event_list(run_ctx, mem_ctx, &script_list);
- 	if (ret != 0) {
-diff --git a/ctdb/tests/src/sigcode.c b/ctdb/tests/src/sigcode.c
-index 1318d246891..9e5ed819f8e 100644
---- a/ctdb/tests/src/sigcode.c
-+++ b/ctdb/tests/src/sigcode.c
-@@ -58,7 +58,7 @@ struct {
- 
- static void dump(void)
- {
--	int i;
-+	size_t i;
- 
- 	for (i=0; i<ARRAY_SIZE(sig_codes); i++) {
- 		printf("%s %d\n", sig_codes[i].label, sig_codes[i].code);
-@@ -68,7 +68,7 @@ static void dump(void)
- static void match_label(const char *str)
- {
- 	int code = -1;
--	int i;
-+	size_t i;
- 
- 	for (i=0; i<ARRAY_SIZE(sig_codes); i++) {
- 		if (strcasecmp(sig_codes[i].label, str) == 0) {
-@@ -83,7 +83,7 @@ static void match_label(const char *str)
- static void match_code(int code)
- {
- 	const char *label = "UNKNOWN";
--	int i;
-+	size_t i;
- 
- 	for (i=0; i<ARRAY_SIZE(sig_codes); i++) {
- 		if (sig_codes[i].code == code) {
--- 
-2.20.1
-
-
-From 2ad90e56bd7d7b8164e770fe7b642c1d734e0859 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Fri, 21 Jun 2019 14:39:20 +1000
-Subject: [PATCH 13/32] ctdb-tests: Fix signed/unsigned comparisons by casting
-
-These are all cases comparing a number of bytes written (int or
-ssize_t) with a size_t, so casting to size_t is appropriate.
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/tests/src/conf_test.c          | 2 +-
- ctdb/tests/src/line_test.c          | 2 +-
- ctdb/tests/src/pkt_write_test.c     | 2 +-
- ctdb/tests/src/sock_io_test.c       | 2 +-
- ctdb/tests/src/system_socket_test.c | 4 ++--
- 5 files changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/ctdb/tests/src/conf_test.c b/ctdb/tests/src/conf_test.c
-index b727cf34406..9b3bd8f0cc1 100644
---- a/ctdb/tests/src/conf_test.c
-+++ b/ctdb/tests/src/conf_test.c
-@@ -418,7 +418,7 @@ static void test11(const char *filename)
- 	bool status;
- 
- 	ret = snprintf(reload, sizeof(reload), "%s.reload", filename);
--	assert(ret < sizeof(reload));
-+	assert((size_t)ret < sizeof(reload));
- 
- 	ret = conf_init(mem_ctx, &conf);
- 	assert(ret == 0);
-diff --git a/ctdb/tests/src/line_test.c b/ctdb/tests/src/line_test.c
-index 0c5a8211392..806d8836e5f 100644
---- a/ctdb/tests/src/line_test.c
-+++ b/ctdb/tests/src/line_test.c
-@@ -72,7 +72,7 @@ int main(int argc, const char **argv)
- 
- 		while (1) {
- 			n = read(fd, buffer, sizeof(buffer));
--			assert(n >= 0 && n <= sizeof(buffer));
-+			assert(n >= 0 && (size_t)n <= sizeof(buffer));
- 
- 			if (n == 0) {
- 				break;
-diff --git a/ctdb/tests/src/pkt_write_test.c b/ctdb/tests/src/pkt_write_test.c
-index 3872670880d..dae92a5043a 100644
---- a/ctdb/tests/src/pkt_write_test.c
-+++ b/ctdb/tests/src/pkt_write_test.c
-@@ -84,7 +84,7 @@ static void writer_next(struct tevent_req *subreq)
- 		return;
- 	}
- 
--	if (nwritten != state->buflen) {
-+	if ((size_t)nwritten != state->buflen) {
- 		tevent_req_error(req, EIO);
- 		return;
- 	}
-diff --git a/ctdb/tests/src/sock_io_test.c b/ctdb/tests/src/sock_io_test.c
-index d0048c18220..d0e424f5620 100644
---- a/ctdb/tests/src/sock_io_test.c
-+++ b/ctdb/tests/src/sock_io_test.c
-@@ -170,7 +170,7 @@ static void test2_reader(int fd)
- 			return;
- 		}
- 
--		assert(n == pkt_len);
-+		assert((size_t)n == pkt_len);
- 		pkt_len += 10;
- 	}
- }
-diff --git a/ctdb/tests/src/system_socket_test.c b/ctdb/tests/src/system_socket_test.c
-index b3959576b5e..da962f00a2c 100644
---- a/ctdb/tests/src/system_socket_test.c
-+++ b/ctdb/tests/src/system_socket_test.c
-@@ -82,7 +82,7 @@ static void test_arp(const char *addr_str, const char *hwaddr_str, bool reply)
- 	assert(ret == 0);
- 
- 	num_written = write(STDOUT_FILENO, buf, len);
--	assert(num_written == len);
-+	assert(num_written != -1 && (size_t)num_written == len);
- }
- 
- #else /* HAVE_PACKETSOCKET  */
-@@ -162,7 +162,7 @@ static void test_tcp(const char *src_str,
- 	num_written = write(STDOUT_FILENO,
- 			    buf + sizeof(struct ether_header),
- 			    len);
--	assert(num_written == len);
-+	assert(num_written != -1 && (size_t)num_written == len);
- 
- 	switch (ntohs(eth->ether_type)) {
- 	case ETHERTYPE_IP:
--- 
-2.20.1
-
-
-From d5436f3d5f6fe45f8e3d3e0e4aedf3f4247549ed Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Fri, 21 Jun 2019 14:41:38 +1000
-Subject: [PATCH 14/32] ctdb-tests: Don't compare an unsigned value with -1
-
-The dummy reader should never be called, so contains an assert on the
-buffer length that should always trigger.  Just abort() instead.
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/tests/src/sock_io_test.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/ctdb/tests/src/sock_io_test.c b/ctdb/tests/src/sock_io_test.c
-index d0e424f5620..ba4b6377d6d 100644
---- a/ctdb/tests/src/sock_io_test.c
-+++ b/ctdb/tests/src/sock_io_test.c
-@@ -178,7 +178,7 @@ static void test2_reader(int fd)
- static void test2_dummy_reader(uint8_t *buf, size_t buflen,
- 			       void *private_data)
- {
--	assert(buflen == -1);
-+	abort();
- }
- 
- static void test2_writer(struct sock_queue *queue)
--- 
-2.20.1
-
-
-From 109b08c52fad1f69a8fd44474effb52ef656a3c7 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Fri, 21 Jun 2019 16:08:58 +1000
-Subject: [PATCH 15/32] ctdb-tests: Avoid warning about NULL dereference
-
-Static analysis finds that earlier in the call path, ctdb_string_len()
-checks for NULL, so complains that a NULL value can be passed to
-strlen() here.  Avoid this by adding an assert().
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/tests/src/protocol_types_compat_test.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/ctdb/tests/src/protocol_types_compat_test.c b/ctdb/tests/src/protocol_types_compat_test.c
-index 0f1e548d099..59aef825b72 100644
---- a/ctdb/tests/src/protocol_types_compat_test.c
-+++ b/ctdb/tests/src/protocol_types_compat_test.c
-@@ -838,6 +838,7 @@ static size_t ctdb_var_list_len_old(struct ctdb_var_list *in)
- 	size_t len = sizeof(uint32_t);
- 
- 	for (i=0; i<in->count; i++) {
-+		assert(in->var[i] != NULL);
- 		len += strlen(in->var[i]) + 1;
- 	}
- 	return len;
--- 
-2.20.1
-
-
-From 90f3db71f8b10c8706a8ed071f1899336d7a7a18 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sat, 22 Jun 2019 05:29:53 +1000
-Subject: [PATCH 16/32] ctdb-tcp: Fix signed/unsigned comparisons by declaring
- as unsigned
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/tcp/tcp_connect.c | 3 ++-
- ctdb/tcp/tcp_init.c    | 4 ++--
- 2 files changed, 4 insertions(+), 3 deletions(-)
-
-diff --git a/ctdb/tcp/tcp_connect.c b/ctdb/tcp/tcp_connect.c
-index 385547e0e78..a8fca530470 100644
---- a/ctdb/tcp/tcp_connect.c
-+++ b/ctdb/tcp/tcp_connect.c
-@@ -300,7 +300,8 @@ static int ctdb_tcp_listen_automatic(struct ctdb_context *ctdb)
- 	struct ctdb_tcp *ctcp = talloc_get_type(ctdb->private_data,
- 						struct ctdb_tcp);
-         ctdb_sock_addr sock;
--	int lock_fd, i;
-+	int lock_fd;
-+	unsigned int i;
- 	const char *lock_path = CTDB_RUNDIR "/.socket_lock";
- 	struct flock lock;
- 	int one = 1;
-diff --git a/ctdb/tcp/tcp_init.c b/ctdb/tcp/tcp_init.c
-index b6083666e18..87d628aba93 100644
---- a/ctdb/tcp/tcp_init.c
-+++ b/ctdb/tcp/tcp_init.c
-@@ -70,7 +70,7 @@ static int ctdb_tcp_add_node(struct ctdb_node *node)
- */
- static int ctdb_tcp_initialise(struct ctdb_context *ctdb)
- {
--	int i;
-+	unsigned int i;
- 
- 	/* listen on our own address */
- 	if (ctdb_tcp_listen(ctdb) != 0) {
-@@ -147,7 +147,7 @@ static void ctdb_tcp_shutdown(struct ctdb_context *ctdb)
- */
- static int ctdb_tcp_start(struct ctdb_context *ctdb)
- {
--	int i;
-+	unsigned int i;
- 
- 	for (i=0; i < ctdb->num_nodes; i++) {
- 		if (ctdb->nodes[i]->flags & NODE_FLAGS_DELETED) {
--- 
-2.20.1
-
-
-From ba31ab322f2c1dc6f66fdd6a5710422e79458660 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sat, 22 Jun 2019 05:53:15 +1000
-Subject: [PATCH 17/32] ctdb-daemon: Replace function ctdb_ip_to_nodeid() with
- ctdb_ip_to_pnn()
-
-Node ID is a poorly defined concept, indicating the slot in the node
-map where the IP address was found.  This signed value also ends up
-compared to num_nodes, which is unsigned, producing unwanted warnings.
-
-Just return the PNN because this what both callers really want.
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/include/ctdb_private.h |  3 ++-
- ctdb/server/ctdb_daemon.c   | 11 ++++-------
- ctdb/server/ctdb_server.c   | 14 ++++++--------
- ctdb/tcp/tcp_connect.c      | 10 ++++++----
- 4 files changed, 18 insertions(+), 20 deletions(-)
-
-diff --git a/ctdb/include/ctdb_private.h b/ctdb/include/ctdb_private.h
-index 9eec244c4f2..7ea7691a36b 100644
---- a/ctdb/include/ctdb_private.h
-+++ b/ctdb/include/ctdb_private.h
-@@ -841,7 +841,8 @@ void ctdb_stop_recoverd(struct ctdb_context *ctdb);
- 
- int ctdb_set_transport(struct ctdb_context *ctdb, const char *transport);
- 
--int ctdb_ip_to_nodeid(struct ctdb_context *ctdb, const ctdb_sock_addr *nodeip);
-+uint32_t ctdb_ip_to_pnn(struct ctdb_context *ctdb,
-+			const ctdb_sock_addr *nodeip);
- 
- void ctdb_load_nodes_file(struct ctdb_context *ctdb);
- 
-diff --git a/ctdb/server/ctdb_daemon.c b/ctdb/server/ctdb_daemon.c
-index 6a4e42d8010..e9fbc29cb98 100644
---- a/ctdb/server/ctdb_daemon.c
-+++ b/ctdb/server/ctdb_daemon.c
-@@ -1374,21 +1374,18 @@ static void ctdb_initialise_vnn_map(struct ctdb_context *ctdb)
- 
- static void ctdb_set_my_pnn(struct ctdb_context *ctdb)
- {
--	int nodeid;
--
- 	if (ctdb->address == NULL) {
- 		ctdb_fatal(ctdb,
- 			   "Can not determine PNN - node address is not set\n");
- 	}
- 
--	nodeid = ctdb_ip_to_nodeid(ctdb, ctdb->address);
--	if (nodeid == -1) {
-+	ctdb->pnn = ctdb_ip_to_pnn(ctdb, ctdb->address);
-+	if (ctdb->pnn == CTDB_UNKNOWN_PNN) {
- 		ctdb_fatal(ctdb,
--			   "Can not determine PNN - node address not found in node list\n");
-+			   "Can not determine PNN - unknown node address\n");
- 	}
- 
--	ctdb->pnn = ctdb->nodes[nodeid]->pnn;
--	DEBUG(DEBUG_NOTICE, ("PNN is %u\n", ctdb->pnn));
-+	D_NOTICE("PNN is %u\n", ctdb->pnn);
- }
- 
- /*
-diff --git a/ctdb/server/ctdb_server.c b/ctdb/server/ctdb_server.c
-index eb11eb1f95c..dcd761a2961 100644
---- a/ctdb/server/ctdb_server.c
-+++ b/ctdb/server/ctdb_server.c
-@@ -45,24 +45,22 @@ int ctdb_set_transport(struct ctdb_context *ctdb, const char *transport)
- 	return 0;
- }
- 
--/*
--  Check whether an ip is a valid node ip
--  Returns the node id for this ip address or -1
--*/
--int ctdb_ip_to_nodeid(struct ctdb_context *ctdb, const ctdb_sock_addr *nodeip)
-+/* Return the PNN for nodeip, CTDB_UNKNOWN_PNN if nodeip is invalid */
-+uint32_t ctdb_ip_to_pnn(struct ctdb_context *ctdb,
-+			const ctdb_sock_addr *nodeip)
- {
--	int nodeid;
-+	unsigned int nodeid;
- 
- 	for (nodeid=0;nodeid<ctdb->num_nodes;nodeid++) {
- 		if (ctdb->nodes[nodeid]->flags & NODE_FLAGS_DELETED) {
- 			continue;
- 		}
- 		if (ctdb_same_ip(&ctdb->nodes[nodeid]->address, nodeip)) {
--			return nodeid;
-+			return ctdb->nodes[nodeid]->pnn;
- 		}
- 	}
- 
--	return -1;
-+	return CTDB_UNKNOWN_PNN;
- }
- 
- /* Load a nodes list file into a nodes array */
-diff --git a/ctdb/tcp/tcp_connect.c b/ctdb/tcp/tcp_connect.c
-index a8fca530470..d757abdf26c 100644
---- a/ctdb/tcp/tcp_connect.c
-+++ b/ctdb/tcp/tcp_connect.c
-@@ -244,7 +244,8 @@ static void ctdb_listen_event(struct tevent_context *ev, struct tevent_fd *fde,
- 	struct ctdb_tcp *ctcp = talloc_get_type(ctdb->private_data, struct ctdb_tcp);
- 	ctdb_sock_addr addr;
- 	socklen_t len;
--	int fd, nodeid;
-+	int fd;
-+	uint32_t pnn;
- 	struct ctdb_incoming *in;
- 	int one = 1;
- 	int ret;
-@@ -255,10 +256,11 @@ static void ctdb_listen_event(struct tevent_context *ev, struct tevent_fd *fde,
- 	if (fd == -1) return;
- 	smb_set_close_on_exec(fd);
- 
--	nodeid = ctdb_ip_to_nodeid(ctdb, &addr);
-+	pnn = ctdb_ip_to_pnn(ctdb, &addr);
- 
--	if (nodeid == -1) {
--		DEBUG(DEBUG_ERR, ("Refused connection from unknown node %s\n", ctdb_addr_to_str(&addr)));
-+	if (pnn == CTDB_UNKNOWN_PNN) {
-+		D_ERR("Refused connection from unknown node %s\n",
-+		      ctdb_addr_to_str(&addr));
- 		close(fd);
- 		return;
+ 	if (handle->conn->base_share_dev == psbuf->st_ex_dev) {
+ 		return (uint64_t)psbuf->st_ex_ino;
  	}
 -- 
-2.20.1
+2.21.0
 
 
-From 09fe69ef8f4f26212677c34e3092740c25fe5aa0 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sat, 22 Jun 2019 06:23:12 +1000
-Subject: [PATCH 18/32] ctdb-daemon: Don't index by PNN when initialising node
- flags
+From cd8364232221f482cedde2415773fcb307731cca Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Thu, 27 Jun 2019 14:47:57 +0200
+Subject: [PATCH 18/22] s3:smbd: set file_id in fetch_dos_mode_done()
 
-Indexing by PNN is wrong.
-
-This also removes a signed/unsigned comparison because the PNN is not
-compared to -1 anymore.
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
+Signed-off-by: Ralph Boehme <slow@samba.org>
 ---
- ctdb/server/ctdb_daemon.c | 21 ++++++++++++---------
- 1 file changed, 12 insertions(+), 9 deletions(-)
+ source3/smbd/smb2_query_directory.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-diff --git a/ctdb/server/ctdb_daemon.c b/ctdb/server/ctdb_daemon.c
-index e9fbc29cb98..c0553a18c14 100644
---- a/ctdb/server/ctdb_daemon.c
-+++ b/ctdb/server/ctdb_daemon.c
-@@ -1229,23 +1229,26 @@ failed:
+diff --git a/source3/smbd/smb2_query_directory.c b/source3/smbd/smb2_query_directory.c
+index 13fb820ce6c..d433f2bee42 100644
+--- a/source3/smbd/smb2_query_directory.c
++++ b/source3/smbd/smb2_query_directory.c
+@@ -1021,8 +1021,11 @@ static void fetch_dos_mode_done(struct tevent_req *subreq)
+ 	uint32_t dfs_dosmode;
+ 	uint32_t dosmode;
+ 	struct timespec btime_ts = {0};
++	bool need_file_id = false;
++	uint64_t file_id;
+ 	off_t dosmode_off;
+ 	off_t btime_off;
++	off_t file_id_off;
+ 	NTSTATUS status;
  
- static void initialise_node_flags (struct ctdb_context *ctdb)
- {
--	if (ctdb->pnn == -1) {
--		ctdb_fatal(ctdb, "PNN is set to -1 (unknown value)");
-+	unsigned int i;
+ 	status = dos_mode_at_recv(subreq, &dosmode);
+@@ -1074,6 +1077,30 @@ static void fetch_dos_mode_done(struct tevent_req *subreq)
+ 			       (char *)state->entry_marshall_buf + btime_off,
+ 			       btime_ts);
+ 
++	switch (state->info_level) {
++	case SMB_FIND_ID_BOTH_DIRECTORY_INFO:
++		file_id_off = 96;
++		need_file_id = true;
++		break;
++	case SMB_FIND_ID_FULL_DIRECTORY_INFO:
++		file_id_off = 72;
++		need_file_id = true;
++		break;
++	default:
++		break;
++	}
 +
-+	/* Always found: PNN correctly set just before this is called */
-+	for (i = 0; i < ctdb->num_nodes; i++) {
-+		if (ctdb->pnn == ctdb->nodes[i]->pnn) {
-+			break;
-+		}
- 	}
- 
--	ctdb->nodes[ctdb->pnn]->flags &= ~NODE_FLAGS_DISCONNECTED;
-+	ctdb->nodes[i]->flags &= ~NODE_FLAGS_DISCONNECTED;
- 
- 	/* do we start out in DISABLED mode? */
- 	if (ctdb->start_as_disabled != 0) {
--		DEBUG(DEBUG_ERR,
--		      ("This node is configured to start in DISABLED state\n"));
--		ctdb->nodes[ctdb->pnn]->flags |= NODE_FLAGS_DISABLED;
-+		D_ERR("This node is configured to start in DISABLED state\n");
-+		ctdb->nodes[i]->flags |= NODE_FLAGS_DISABLED;
- 	}
- 	/* do we start out in STOPPED mode? */
- 	if (ctdb->start_as_stopped != 0) {
--		DEBUG(DEBUG_ERR,
--		      ("This node is configured to start in STOPPED state\n"));
--		ctdb->nodes[ctdb->pnn]->flags |= NODE_FLAGS_STOPPED;
-+		D_ERR("This node is configured to start in STOPPED state\n");
-+		ctdb->nodes[i]->flags |= NODE_FLAGS_STOPPED;
- 	}
- }
- 
--- 
-2.20.1
-
-
-From ed16ba61c0a741e06e47e5ebac5b2c720168ef79 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sat, 8 Jun 2019 00:04:31 +1000
-Subject: [PATCH 19/32] ctdb-protocol: Do not ignore return value of
- ctdb_g_lock_pull()
-
-clang reports:
-
-  ctdb/protocol/protocol_types.c:5191:3: warning: Value stored to 'ret' is never read
-
-Found by csbuild.
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/protocol/protocol_types.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/ctdb/protocol/protocol_types.c b/ctdb/protocol/protocol_types.c
-index 416d4843b74..8090dbddadf 100644
---- a/ctdb/protocol/protocol_types.c
-+++ b/ctdb/protocol/protocol_types.c
-@@ -5208,5 +5208,5 @@ done:
- 
- fail:
- 	talloc_free(val);
--	return ENOMEM;
-+	return ret;
++	if (need_file_id) {
++		/*
++		 * File-ID might have been updated from calculated (based on
++		 * inode) to storage based, fetch via DOS attributes in
++		 * vfs_default.
++		 */
++		file_id = SMB_VFS_FS_FILE_ID(state->dir_fsp->conn,
++					     &state->smb_fname->st);
++		SBVAL(state->entry_marshall_buf, file_id_off, file_id);
++	}
++
+ 	tevent_req_done(req);
+ 	return;
  }
 -- 
-2.20.1
+2.21.0
 
 
-From bb5dc94ed15cad6926233f0e13bd8204128f8d0a Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Wed, 26 Jun 2019 16:14:28 +1000
-Subject: [PATCH 20/32] ctdb-protocol: Fix signed/unsigned comparison by
- declaring as unsigned
+From 5e3d01a825596829b2b823b43070d7987194e359 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Sat, 29 Jun 2019 14:35:49 +0200
+Subject: [PATCH 19/22] vfs_fruit: move zero file-id to vfs_fruit
 
-Signed-off-by: Martin Schwenke <martin@meltin.net>
+Now that this stuff goes through the VFS, let's do it right. :)
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
 ---
- ctdb/protocol/protocol_types.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ source3/modules/vfs_default.c |  4 ----
+ source3/modules/vfs_fruit.c   | 20 +++++++++++++++++---
+ source3/smbd/globals.h        |  1 -
+ source3/smbd/proto.h          |  1 -
+ source3/smbd/trans2.c         | 10 ----------
+ 5 files changed, 17 insertions(+), 19 deletions(-)
 
-diff --git a/ctdb/protocol/protocol_types.c b/ctdb/protocol/protocol_types.c
-index 8090dbddadf..5fb8f201e5d 100644
---- a/ctdb/protocol/protocol_types.c
-+++ b/ctdb/protocol/protocol_types.c
-@@ -1640,7 +1640,8 @@ int ctdb_rec_buffer_traverse(struct ctdb_rec_buffer *recbuf,
- 	TDB_DATA key, data;
- 	uint32_t reqid;
- 	size_t offset, reclen;
--	int ret = 0, i;
-+	unsigned int i;
-+	int ret = 0;
+diff --git a/source3/modules/vfs_default.c b/source3/modules/vfs_default.c
+index bcad1c8a736..68d9200ce88 100644
+--- a/source3/modules/vfs_default.c
++++ b/source3/modules/vfs_default.c
+@@ -2733,10 +2733,6 @@ static uint64_t vfswrap_fs_file_id(struct vfs_handle_struct *handle,
+ {
+ 	uint64_t file_id;
  
- 	offset = 0;
- 	for (i=0; i<recbuf->count; i++) {
--- 
-2.20.1
-
-
-From 20f800a34c3d013e882ca1d6578da7af69a1c890 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sun, 23 Jun 2019 20:59:34 +1000
-Subject: [PATCH 21/32] ctdb-protocol: Variable for return value of strlcpy()
- should be size_t
-
-This avoids an unnecessary signed/unsigned comparison issue.
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/protocol/protocol_util.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/ctdb/protocol/protocol_util.c b/ctdb/protocol/protocol_util.c
-index 2a0d42a9f45..026f342bd7d 100644
---- a/ctdb/protocol/protocol_util.c
-+++ b/ctdb/protocol/protocol_util.c
-@@ -311,7 +311,7 @@ int ctdb_sock_addr_mask_from_string(const char *str,
- 	char *p;
- 	char s[64]; /* Much longer than INET6_ADDRSTRLEN */
- 	unsigned int m;
--	ssize_t len;
-+	size_t len;
- 	int ret = 0;
- 
- 	if (addr == NULL || mask == NULL) {
--- 
-2.20.1
-
-
-From 52893533f57c9f474cd95d19bac2347a63572b47 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Sun, 23 Jun 2019 21:00:38 +1000
-Subject: [PATCH 22/32] ctdb-protocol: Avoid signed/unsigned comparison by
- casting
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/protocol/protocol_types.c | 16 ++++++++--------
- ctdb/protocol/protocol_util.c  |  4 ++--
- 2 files changed, 10 insertions(+), 10 deletions(-)
-
-diff --git a/ctdb/protocol/protocol_types.c b/ctdb/protocol/protocol_types.c
-index 5fb8f201e5d..d9388b74b1e 100644
---- a/ctdb/protocol/protocol_types.c
-+++ b/ctdb/protocol/protocol_types.c
-@@ -1680,19 +1680,19 @@ int ctdb_rec_buffer_write(struct ctdb_rec_buffer *recbuf, int fd)
- 	ssize_t n;
- 
- 	n = write(fd, &recbuf->db_id, sizeof(uint32_t));
--	if (n == -1 || n != sizeof(uint32_t)) {
-+	if (n == -1 || (size_t)n != sizeof(uint32_t)) {
- 		return (errno != 0 ? errno : EIO);
- 	}
- 	n = write(fd, &recbuf->count, sizeof(uint32_t));
--	if (n == -1 || n != sizeof(uint32_t)) {
-+	if (n == -1 || (size_t)n != sizeof(uint32_t)) {
- 		return (errno != 0 ? errno : EIO);
- 	}
- 	n = write(fd, &recbuf->buflen, sizeof(size_t));
--	if (n == -1 || n != sizeof(size_t)) {
-+	if (n == -1 || (size_t)n != sizeof(size_t)) {
- 		return (errno != 0 ? errno : EIO);
- 	}
- 	n = write(fd, recbuf->buf, recbuf->buflen);
--	if (n == -1 || n != recbuf->buflen) {
-+	if (n == -1 || (size_t)n != recbuf->buflen) {
- 		return (errno != 0 ? errno : EIO);
- 	}
- 
-@@ -1711,15 +1711,15 @@ int ctdb_rec_buffer_read(int fd, TALLOC_CTX *mem_ctx,
- 	}
- 
- 	n = read(fd, &recbuf->db_id, sizeof(uint32_t));
--	if (n == -1 || n != sizeof(uint32_t)) {
-+	if (n == -1 || (size_t)n != sizeof(uint32_t)) {
- 		return (errno != 0 ? errno : EIO);
- 	}
- 	n = read(fd, &recbuf->count, sizeof(uint32_t));
--	if (n == -1 || n != sizeof(uint32_t)) {
-+	if (n == -1 || (size_t)n != sizeof(uint32_t)) {
- 		return (errno != 0 ? errno : EIO);
- 	}
- 	n = read(fd, &recbuf->buflen, sizeof(size_t));
--	if (n == -1 || n != sizeof(size_t)) {
-+	if (n == -1 || (size_t)n != sizeof(size_t)) {
- 		return (errno != 0 ? errno : EIO);
- 	}
- 
-@@ -1729,7 +1729,7 @@ int ctdb_rec_buffer_read(int fd, TALLOC_CTX *mem_ctx,
- 	}
- 
- 	n = read(fd, recbuf->buf, recbuf->buflen);
--	if (n == -1 || n != recbuf->buflen) {
-+	if (n == -1 || (size_t)n != recbuf->buflen) {
- 		return (errno != 0 ? errno : EIO);
- 	}
- 
-diff --git a/ctdb/protocol/protocol_util.c b/ctdb/protocol/protocol_util.c
-index 026f342bd7d..c67aa2e056f 100644
---- a/ctdb/protocol/protocol_util.c
-+++ b/ctdb/protocol/protocol_util.c
-@@ -147,7 +147,7 @@ int ctdb_sock_addr_to_buf(char *buf, socklen_t buflen,
- 
- 		ret = snprintf(buf+len, buflen-len,
- 			       ":%u", ctdb_sock_addr_port(addr));
--		if (ret >= buflen-len) {
-+		if (ret < 0 || (size_t)ret >= buflen-len) {
- 			return ENOSPC;
- 		}
- 	}
-@@ -485,7 +485,7 @@ int ctdb_connection_to_buf(char *buf, size_t buflen,
- 	} else {
- 		ret = snprintf(buf, buflen, "%s %s", client, server);
- 	}
--	if (ret >= buflen) {
-+	if (ret < 0 || (size_t)ret >= buflen) {
- 		return ENOSPC;
- 	}
- 
--- 
-2.20.1
-
-
-From b4aa27471c58a4eec7fed0b7268532a97e6361ac Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Mon, 24 Jun 2019 14:02:53 +1000
-Subject: [PATCH 23/32] ctdb-daemon: Drop unused function
- ctdb_vfork_with_logging()
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/include/ctdb_private.h | 10 ----
- ctdb/server/ctdb_logging.c  | 96 -------------------------------------
- 2 files changed, 106 deletions(-)
-
-diff --git a/ctdb/include/ctdb_private.h b/ctdb/include/ctdb_private.h
-index 7ea7691a36b..2bcc7c94156 100644
---- a/ctdb/include/ctdb_private.h
-+++ b/ctdb/include/ctdb_private.h
-@@ -675,16 +675,6 @@ struct lock_request *ctdb_lock_db(TALLOC_CTX *mem_ctx,
- bool ctdb_logging_init(TALLOC_CTX *mem_ctx, const char *logging,
- 		       const char *debug_level);
- 
--struct ctdb_log_state *ctdb_vfork_with_logging(TALLOC_CTX *mem_ctx,
--					       struct ctdb_context *ctdb,
--					       const char *log_prefix,
--					       const char *helper,
--					       int helper_argc,
--					       const char **helper_argv,
--					       void (*logfn)(const char *,
--							     uint16_t, void *),
--					       void *logfn_private, pid_t *pid);
--
- int ctdb_set_child_logging(struct ctdb_context *ctdb);
- 
- /* from ctdb_logging_file.c */
-diff --git a/ctdb/server/ctdb_logging.c b/ctdb/server/ctdb_logging.c
-index e7ca9b2758d..8af787c189f 100644
---- a/ctdb/server/ctdb_logging.c
-+++ b/ctdb/server/ctdb_logging.c
-@@ -132,102 +132,6 @@ static void ctdb_child_log_handler(struct tevent_context *ev,
- 	}
- }
- 
--static int log_context_destructor(struct ctdb_log_state *log)
--{
--	/* Flush buffer in case it wasn't \n-terminated. */
--	if (log->buf_used > 0) {
--		write_to_log(log, log->buf, log->buf_used);
+-	if (handle->conn->sconn->aapl_zero_file_id) {
+-		return 0;
 -	}
--	return 0;
+-
+ 	if (!(psbuf->st_ex_iflags & ST_EX_IFLAG_CALCULATED_ITIME)) {
+ 		return psbuf->st_ex_file_id;
+ 	}
+diff --git a/source3/modules/vfs_fruit.c b/source3/modules/vfs_fruit.c
+index 9916bd12f5a..02b6d0dc0f6 100644
+--- a/source3/modules/vfs_fruit.c
++++ b/source3/modules/vfs_fruit.c
+@@ -2980,9 +2980,6 @@ static NTSTATUS check_aapl(vfs_handle_struct *handle,
+ 				      blob);
+ 	if (NT_STATUS_IS_OK(status)) {
+ 		global_fruit_config.nego_aapl = true;
+-		if (config->aapl_zero_file_id) {
+-			aapl_force_zero_file_id(handle->conn->sconn);
+-		}
+ 	}
+ 
+ 	return status;
+@@ -7135,6 +7132,22 @@ static uint64_t fruit_disk_free(vfs_handle_struct *handle,
+ 	return dfree / 2;
+ }
+ 
++static uint64_t fruit_fs_file_id(struct vfs_handle_struct *handle,
++				 const SMB_STRUCT_STAT *psbuf)
++{
++	struct fruit_config_data *config = NULL;
++
++	SMB_VFS_HANDLE_GET_DATA(handle, config,
++				struct fruit_config_data,
++				return 0);
++
++	if (config->aapl_zero_file_id) {
++		return 0;
++	}
++
++	return SMB_VFS_NEXT_FS_FILE_ID(handle, psbuf);
++}
++
+ static struct vfs_fn_pointers vfs_fruit_fns = {
+ 	.connect_fn = fruit_connect,
+ 	.disk_free_fn = fruit_disk_free,
+@@ -7166,6 +7179,7 @@ static struct vfs_fn_pointers vfs_fruit_fns = {
+ 	.offload_read_recv_fn = fruit_offload_read_recv,
+ 	.offload_write_send_fn = fruit_offload_write_send,
+ 	.offload_write_recv_fn = fruit_offload_write_recv,
++	.fs_file_id_fn = fruit_fs_file_id,
+ 
+ 	/* NT ACL operations */
+ 	.fget_nt_acl_fn = fruit_fget_nt_acl,
+diff --git a/source3/smbd/globals.h b/source3/smbd/globals.h
+index f0c1624babe..03d50882d16 100644
+--- a/source3/smbd/globals.h
++++ b/source3/smbd/globals.h
+@@ -858,7 +858,6 @@ struct smbd_server_connection {
+ 	struct messaging_context *msg_ctx;
+ 	struct notify_context *notify_ctx;
+ 	bool using_smb2;
+-	bool aapl_zero_file_id; /* Apple-specific */
+ 	int trans_num;
+ 
+ 	size_t num_users;
+diff --git a/source3/smbd/proto.h b/source3/smbd/proto.h
+index 1dd1a8dbef4..112acfa4ad4 100644
+--- a/source3/smbd/proto.h
++++ b/source3/smbd/proto.h
+@@ -1161,7 +1161,6 @@ int sys_statvfs(const char *path, vfs_statvfs_struct *statbuf);
+ NTSTATUS check_access_fsp(const struct files_struct *fsp,
+ 			  uint32_t access_mask);
+ uint64_t smb_roundup(connection_struct *conn, uint64_t val);
+-void aapl_force_zero_file_id(struct smbd_server_connection *sconn);
+ bool samba_private_attr_name(const char *unix_ea_name);
+ NTSTATUS get_ea_value(TALLOC_CTX *mem_ctx, connection_struct *conn,
+ 			files_struct *fsp,
+diff --git a/source3/smbd/trans2.c b/source3/smbd/trans2.c
+index 9a2ae9b2f47..4f183ecd601 100644
+--- a/source3/smbd/trans2.c
++++ b/source3/smbd/trans2.c
+@@ -213,16 +213,6 @@ uint64_t smb_roundup(connection_struct *conn, uint64_t val)
+ 	return val;
+ }
+ 
+-/********************************************************************
+- Globally (for this connection / multi-channel) disable file-ID
+- calculation. This is required to be global because it serves
+- Macs in AAPL mode, which is globally set.
+-********************************************************************/
+-void aapl_force_zero_file_id(struct smbd_server_connection *sconn)
+-{
+-	sconn->aapl_zero_file_id = true;
 -}
 -
--/*
-- * vfork + exec, redirecting child output to logging and specified callback.
-- */
--struct ctdb_log_state *ctdb_vfork_with_logging(TALLOC_CTX *mem_ctx,
--					       struct ctdb_context *ctdb,
--					       const char *log_prefix,
--					       const char *helper,
--					       int helper_argc,
--					       const char **helper_argv,
--					       void (*logfn)(const char *, uint16_t, void *),
--					       void *logfn_private, pid_t *pid)
--{
--	int p[2];
--	struct ctdb_log_state *log;
--	struct tevent_fd *fde;
--	char **argv;
--	int i;
--	struct timeval before;
--	double delta_t;
--
--	log = talloc_zero(mem_ctx, struct ctdb_log_state);
--	CTDB_NO_MEMORY_NULL(ctdb, log);
--
--	log->prefix = log_prefix;
--	log->logfn = logfn;
--	log->logfn_private = logfn_private;
--
--	if (pipe(p) != 0) {
--		DEBUG(DEBUG_ERR, (__location__ " Failed to setup pipe for child logging:"
--				" %s\n", strerror(errno)));
--		goto free_log;
--	}
--
--	argv = talloc_array(mem_ctx, char *, helper_argc + 2);
--	if (argv == NULL) {
--		DEBUG(DEBUG_ERR, (__location__ "Failed to allocate memory for helper\n"));
--		goto free_log;
--	}
--	argv[0] = discard_const(helper);
--	argv[1] = talloc_asprintf(argv, "%d", p[1]);
--	if (argv[1] == NULL) {
--		DEBUG(DEBUG_ERR, (__location__ "Failed to allocate memory for helper\n"));
--		talloc_free(argv);
--		goto free_log;
--	}
--
--	for (i=0; i<helper_argc; i++) {
--		argv[i+2] = discard_const(helper_argv[i]);
--	}
--
--	before = timeval_current();
--
--	*pid = vfork();
--	if (*pid == 0) {
--		execv(helper, argv);
--		_exit(1);
--	}
--	close(p[1]);
--
--	if (*pid < 0) {
--		DEBUG(DEBUG_ERR, (__location__ "vfork failed for helper process\n"));
--		close(p[0]);
--		goto free_log;
--	}
--
--	delta_t = timeval_elapsed(&before);
--	if (delta_t > 3.0) {
--		DEBUG(DEBUG_WARNING, ("vfork() took %lf seconds\n", delta_t));
--	}
--
--	ctdb_track_child(ctdb, *pid);
--
--	log->pfd = p[0];
--	set_close_on_exec(log->pfd);
--	talloc_set_destructor(log, log_context_destructor);
--	fde = tevent_add_fd(ctdb->ev, log, log->pfd, TEVENT_FD_READ,
--			    ctdb_child_log_handler, log);
--	tevent_fd_set_auto_close(fde);
--
--	return log;
--
--free_log:
--	talloc_free(log);
--	return NULL;
--}
--
--
- /*
-   setup for logging of child process stdout
- */
+ /****************************************************************************
+  Utility functions for dealing with extended attributes.
+ ****************************************************************************/
 -- 
-2.20.1
+2.21.0
 
 
-From 6346184d4e75413aee6df8a809191ef82122277d Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Mon, 24 Jun 2019 16:35:01 +1000
-Subject: [PATCH 24/32] ctdb-common: Fix signed/unsigned comparisons by casting
+From 16f8faf8fe070cf49547cb38db4c22574f0a3e89 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Sun, 30 Jun 2019 14:24:59 +0200
+Subject: [PATCH 20/22] vfs_fruit: make "fruit:zero_file_id" a per share option
 
-One case needs an extra variable declared.
+Now that File-ID calculation goes through the VFS, we can nicely make a
+per-share option out of it.
 
-Signed-off-by: Martin Schwenke <martin@meltin.net>
+Signed-off-by: Ralph Boehme <slow@samba.org>
 ---
- ctdb/common/ctdb_util.c    | 5 ++++-
- ctdb/common/event_script.c | 4 ++--
- ctdb/common/sock_io.c      | 2 +-
- 3 files changed, 7 insertions(+), 4 deletions(-)
+ docs-xml/manpages/vfs_fruit.8.xml | 33 +++++++++++++++----------------
+ selftest/target/Samba3.pm         |  7 +++++++
+ source3/modules/vfs_fruit.c       |  7 +++++--
+ source3/selftest/tests.py         |  2 +-
+ 4 files changed, 29 insertions(+), 20 deletions(-)
 
-diff --git a/ctdb/common/ctdb_util.c b/ctdb/common/ctdb_util.c
-index 0f367c2100e..3f8fff925f0 100644
---- a/ctdb/common/ctdb_util.c
-+++ b/ctdb/common/ctdb_util.c
-@@ -111,7 +111,10 @@ bool ctdb_set_helper(const char *type, char *helper, size_t size,
- 			      ("Unable to set %s - dir is NULL\n", type));
- 		return false;
- 	} else {
--		if (snprintf(helper, size, "%s/%s", dir, file) >= size) {
-+		int ret;
+diff --git a/docs-xml/manpages/vfs_fruit.8.xml b/docs-xml/manpages/vfs_fruit.8.xml
+index c5bd593a139..364b1536f66 100644
+--- a/docs-xml/manpages/vfs_fruit.8.xml
++++ b/docs-xml/manpages/vfs_fruit.8.xml
+@@ -143,23 +143,6 @@
+ 	    </listitem>
+ 	  </varlistentry>
+ 
+-	  <varlistentry>
+-	    <term>fruit:zero_file_id = yes | no</term>
+-	    <listitem>
+-	      <para>A <emphasis>global</emphasis> option whether to return
+-	      zero to queries of on-disk file identifier, if the client
+-	      has negotiated AAPL.</para>
+-	      <para>Mac applications and / or the Mac SMB
+-	      client code expect the on-disk file identifier to have the
+-	      semantics of HFS+ Catalog Node Identifier (CNID). Samba
+-	      doesn't provide those semantics, and that occasionally cause
+-	      usability issues or even data loss. Returning a file identifier
+-	      of zero causes the Mac client to stop using and trusting the
+-	      file id returned from the server.</para>
+-	      <para>The default is <emphasis>yes</emphasis>.</para>
+-	    </listitem>
+-	  </varlistentry>
+-
+ 	  <varlistentry>
+ 	    <term>fruit:model = MacSamba</term>
+ 	    <listitem>
+@@ -407,6 +390,22 @@
+ 	    </listitem>
+ 	  </varlistentry>
+ 
++	  <varlistentry>
++	    <term>fruit:zero_file_id = yes | no</term>
++	    <listitem>
++	      <para>Whether to return zero to queries of on-disk file
++	      identifier if the client has negotiated AAPL.</para>
++	      <para>Mac applications and / or the Mac SMB client code expect the
++	      on-disk file identifier to have the semantics of HFS+ Catalog Node
++	      Identifier (CNID). Samba provides File-IDs based on a file's
++	      initial creation date if the option <smbconfoption name="store dos
++	      attributes"/> is enabled.  Returning a file identifier of
++	      zero causes the Mac client to stop using and trusting the file id
++	      returned from the server.</para>
++	      <para>The default is <emphasis>yes</emphasis>.</para>
++	    </listitem>
++	  </varlistentry>
 +
-+		ret = snprintf(helper, size, "%s/%s", dir, file);
-+		if (ret < 0 || (size_t)ret >= size) {
- 			DEBUG(DEBUG_ERR,
- 			      ("Unable to set %s - path too long\n", type));
- 			return false;
-diff --git a/ctdb/common/event_script.c b/ctdb/common/event_script.c
-index 8bdfdd0b5ca..edd607f7a14 100644
---- a/ctdb/common/event_script.c
-+++ b/ctdb/common/event_script.c
-@@ -159,7 +159,7 @@ int event_script_chmod(const char *script_dir,
- 		script_file = script_name;
- 	} else {
- 		ret = snprintf(buf, sizeof(buf), "%s.script", script_name);
--		if (ret >= sizeof(buf)) {
-+		if (ret < 0 || (size_t)ret >= sizeof(buf)) {
- 			return ENAMETOOLONG;
- 		}
- 		script_file = buf;
-@@ -196,7 +196,7 @@ int event_script_chmod(const char *script_dir,
- 		       "%s/%s",
- 		       script_dir,
- 		       script_file);
--	if (ret >= sizeof(filename)) {
-+	if (ret < 0 || (size_t)ret >= sizeof(filename)) {
- 		return ENAMETOOLONG;
- 	}
+ 	</variablelist>
+ </refsect1>
  
-diff --git a/ctdb/common/sock_io.c b/ctdb/common/sock_io.c
-index b5c9332526b..81e82c59ca0 100644
---- a/ctdb/common/sock_io.c
-+++ b/ctdb/common/sock_io.c
-@@ -198,7 +198,7 @@ static void sock_queue_handler(struct tevent_context *ev,
- 		goto fail;
- 	}
+diff --git a/selftest/target/Samba3.pm b/selftest/target/Samba3.pm
+index 34a9864cd48..6ce61a8b4ed 100755
+--- a/selftest/target/Samba3.pm
++++ b/selftest/target/Samba3.pm
+@@ -1995,6 +1995,13 @@ sub provision($$$$$$$$$)
+ 	fruit:delete_empty_adfiles = true
+ 	fruit:veto_appledouble = no
  
--	if (num_ready > queue->buflen - queue->end) {
-+	if ((size_t)num_ready > queue->buflen - queue->end) {
- 		queue->buf = talloc_realloc_size(queue, queue->buf,
- 						 queue->end + num_ready);
- 		if (queue->buf == NULL) {
--- 
-2.20.1
-
-
-From b17315a33ee011ac9bc195368a3465f1102cc37c Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Mon, 24 Jun 2019 16:36:47 +1000
-Subject: [PATCH 25/32] ctdb-common: Fix error handling
-
-According to the documentation, sendto() should either send the packet
-as given or return with an error.  However, given that it can return
-the number of bytes sent, treat the theoretical error of a short
-packet send separately, since errno would not be set in this case.
-
-Similarly, treat a short packet recv() separately from an error where
-errno is set.
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/common/system_socket.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
-
-diff --git a/ctdb/common/system_socket.c b/ctdb/common/system_socket.c
-index c6800431112..86cbdaab6ad 100644
---- a/ctdb/common/system_socket.c
-+++ b/ctdb/common/system_socket.c
-@@ -681,10 +681,14 @@ int ctdb_sys_send_tcp(const ctdb_sock_addr *dest,
- 			     sizeof(dest->ip));
- 		saved_errno = errno;
- 		close(s);
--		if (ret != len) {
-+		if (ret == -1) {
- 			D_ERR("Failed sendto (%s)\n", strerror(saved_errno));
- 			return -1;
- 		}
-+		if ((size_t)ret != len) {
-+			DBG_ERR("Failed sendto - didn't send full packet\n");
-+			return -1;
-+		}
- 		break;
- 
- 	case AF_INET6:
-@@ -722,11 +726,14 @@ int ctdb_sys_send_tcp(const ctdb_sock_addr *dest,
- 			     sizeof(tmpdest));
- 		saved_errno = errno;
- 		close(s);
--
--		if (ret != len) {
-+		if (ret == -1) {
- 			D_ERR("Failed sendto (%s)\n", strerror(saved_errno));
- 			return -1;
- 		}
-+		if ((size_t)ret != len) {
-+			DBG_ERR("Failed sendto - didn't send full packet\n");
-+			return -1;
-+		}
- 		break;
- 
- 	default:
-@@ -914,7 +921,10 @@ int ctdb_sys_read_tcp_packet(int s, void *private_data,
- 	int ret;
- 
- 	nread = recv(s, pkt, sizeof(pkt), MSG_TRUNC);
--	if (nread < sizeof(*eth)) {
-+	if (nread == -1) {
-+		return errno;
-+	}
-+	if ((size_t)nread < sizeof(*eth)) {
- 		return EMSGSIZE;
- 	}
- 
--- 
-2.20.1
-
-
-From 884707e7f47f47f6161f3ed6cb9c468131c15e7d Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Mon, 24 Jun 2019 16:42:21 +1000
-Subject: [PATCH 26/32] ctdb-common: Fix signed/unsigned comparisons by
- declaring as unsigned
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/common/ctdb_ltdb.c | 8 ++++----
- ctdb/common/run_event.c | 2 +-
- 2 files changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/ctdb/common/ctdb_ltdb.c b/ctdb/common/ctdb_ltdb.c
-index 1fc9ce28c1b..73458754def 100644
---- a/ctdb/common/ctdb_ltdb.c
-+++ b/ctdb/common/ctdb_ltdb.c
-@@ -308,8 +308,8 @@ int ctdb_ltdb_delete(struct ctdb_db_context *ctdb_db, TDB_DATA key)
- 
- int ctdb_trackingdb_add_pnn(struct ctdb_context *ctdb, TDB_DATA *data, uint32_t pnn)
- {
--	int byte_pos = pnn / 8;
--	int bit_mask   = 1 << (pnn % 8);
-+	unsigned int byte_pos = pnn / 8;
-+	unsigned char bit_mask = 1 << (pnn % 8);
- 
- 	if (byte_pos + 1 > data->dsize) {
- 		char *buf;
-@@ -334,10 +334,10 @@ int ctdb_trackingdb_add_pnn(struct ctdb_context *ctdb, TDB_DATA *data, uint32_t
- 
- void ctdb_trackingdb_traverse(struct ctdb_context *ctdb, TDB_DATA data, ctdb_trackingdb_cb cb, void *private_data)
- {
--	int i;
-+	unsigned int i;
- 
- 	for(i = 0; i < data.dsize; i++) {
--		int j;
-+		unsigned int j;
- 
- 		for (j=0; j<8; j++) {
- 			int mask = 1<<j;
-diff --git a/ctdb/common/run_event.c b/ctdb/common/run_event.c
-index ca4e572a806..d283664e2cf 100644
---- a/ctdb/common/run_event.c
-+++ b/ctdb/common/run_event.c
-@@ -519,7 +519,7 @@ struct run_event_state {
- 	struct run_event_script_list *script_list;
- 	const char **argv;
- 	struct tevent_req *script_subreq;
--	int index;
-+	unsigned int index;
- 	bool cancelled;
- };
- 
--- 
-2.20.1
-
-
-From ab661be40594b5dc82f7dac3c71863fe9a6246f1 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Mon, 24 Jun 2019 16:42:58 +1000
-Subject: [PATCH 27/32] ctdb-event: Assign missing return value
-
-Otherwise ret == 0 is returned from successful call to
-ctdb_int32_pull().
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/event/event_protocol.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/ctdb/event/event_protocol.c b/ctdb/event/event_protocol.c
-index 21adb430c20..baa9e1ecb82 100644
---- a/ctdb/event/event_protocol.c
-+++ b/ctdb/event/event_protocol.c
-@@ -317,6 +317,7 @@ static int ctdb_event_script_list_pull(uint8_t *buf,
- 	value->script = talloc_array(value, struct ctdb_event_script,
- 				     num_scripts);
- 	if (value->script == NULL) {
-+		ret = ENOMEM;
- 		goto fail;
- 	}
- 
--- 
-2.20.1
-
-
-From 9892e00c6935d82d90f14b4d9387e160f063b319 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Mon, 24 Jun 2019 16:44:37 +1000
-Subject: [PATCH 28/32] ctdb-database: Fix signed/unsigned comparison by
- casting
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/database/database_conf.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/ctdb/database/database_conf.c b/ctdb/database/database_conf.c
-index 6bdb372bf03..4c7cb2d9ffe 100644
---- a/ctdb/database/database_conf.c
-+++ b/ctdb/database/database_conf.c
-@@ -96,7 +96,7 @@ static bool database_conf_validate_lock_debug_script(const char *key,
- 		       "%s/%s",
- 		       path_etcdir(),
- 		       basename(script));
--	if (ret >= sizeof(script_path)) {
-+	if (ret < 0 || (size_t)ret >= sizeof(script_path)) {
- 		D_ERR("lock debug script path too long\n");
- 		return false;
- 	}
--- 
-2.20.1
-
-
-From 68d70b426dc0ce52b120e5afe40ed12c7c439cdd Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Mon, 24 Jun 2019 16:45:06 +1000
-Subject: [PATCH 29/32] ctdb-event: Fix signed/unsigned comparisons by casting
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/event/event_conf.c | 2 +-
- ctdb/event/event_tool.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/ctdb/event/event_conf.c b/ctdb/event/event_conf.c
-index 33bfc7c5335..61ecf8e33eb 100644
---- a/ctdb/event/event_conf.c
-+++ b/ctdb/event/event_conf.c
-@@ -50,7 +50,7 @@ static bool event_conf_validate_debug_script(const char *key,
- 		       "%s/%s",
- 		       path_etcdir(),
- 		       basename(script));
--	if (ret >= sizeof(script_path)) {
-+	if (ret < 0 || (size_t)ret >= sizeof(script_path)) {
- 		D_ERR("debug script path too long\n");
- 		return false;
- 	}
-diff --git a/ctdb/event/event_tool.c b/ctdb/event/event_tool.c
-index 6cc5dc9a822..9c95e6d9553 100644
---- a/ctdb/event/event_tool.c
-+++ b/ctdb/event/event_tool.c
-@@ -408,7 +408,7 @@ static int event_command_script_list(TALLOC_CTX *mem_ctx,
- 			}
- 
- 			len = readlink(e->path, buf, sizeof(buf));
--			if (len == -1 || len >= sizeof(buf)) {
-+			if (len == -1 || (size_t)len >= sizeof(buf)) {
- 				/*
- 				 * Not a link?  Disappeared?  Invalid
- 				 * link target?  Something else?
--- 
-2.20.1
-
-
-From 964a18bbf9fbc79add1998889303e8b1e6a698ff Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Mon, 24 Jun 2019 17:01:07 +1000
-Subject: [PATCH 30/32] ctdb-common: Mark ctdb_fatal() and ctdb_die() as
- _NORETURN_
-
-This avoids static analysers continuing analysis after calls to these
-functions and producing incorrect warnings.
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/common/common.h | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/ctdb/common/common.h b/ctdb/common/common.h
-index 6b2c98ef383..79f6b9ed03a 100644
---- a/ctdb/common/common.h
-+++ b/ctdb/common/common.h
-@@ -20,6 +20,8 @@
- #ifndef __CTDB_COMMON_H__
- #define __CTDB_COMMON_H__
- 
-+#include "lib/util/attr.h"
++[vfs_fruit_zero_fileid]
++	path = $shrdir
++	vfs objects = fruit streams_xattr acl_xattr xattr_tdb
++	fruit:resource = file
++	fruit:metadata = stream
++	fruit:zero_file_id=yes
 +
- /* From common/ctdb_io.c */
+ [badname-tmp]
+ 	path = $badnames_shrdir
+ 	guest ok = yes
+diff --git a/source3/modules/vfs_fruit.c b/source3/modules/vfs_fruit.c
+index 02b6d0dc0f6..ea97cb93b30 100644
+--- a/source3/modules/vfs_fruit.c
++++ b/source3/modules/vfs_fruit.c
+@@ -2225,7 +2225,8 @@ static int init_fruit_config(vfs_handle_struct *handle)
+ 		SNUM(handle->conn), FRUIT_PARAM_TYPE_NAME, "posix_rename", true);
  
- typedef void (*ctdb_queue_cb_fn_t)(uint8_t *data, size_t length,
-@@ -91,9 +93,9 @@ const char *ctdb_errstr(struct ctdb_context *ctdb);
- void ctdb_set_error(struct ctdb_context *ctdb, const char *fmt, ...)
- 		    PRINTF_ATTRIBUTE(2,3);
+ 	config->aapl_zero_file_id =
+-	    lp_parm_bool(-1, FRUIT_PARAM_TYPE_NAME, "zero_file_id", true);
++	    lp_parm_bool(SNUM(handle->conn), FRUIT_PARAM_TYPE_NAME,
++			 "zero_file_id", true);
  
--void ctdb_fatal(struct ctdb_context *ctdb, const char *msg);
-+void ctdb_fatal(struct ctdb_context *ctdb, const char *msg) _NORETURN_;
+ 	config->readdir_attr_rsize = lp_parm_bool(
+ 		SNUM(handle->conn), "readdir_attr", "aapl_rsize", true);
+@@ -7141,7 +7142,9 @@ static uint64_t fruit_fs_file_id(struct vfs_handle_struct *handle,
+ 				struct fruit_config_data,
+ 				return 0);
  
--void ctdb_die(struct ctdb_context *ctdb, const char *msg);
-+void ctdb_die(struct ctdb_context *ctdb, const char *msg) _NORETURN_;
- 
- bool ctdb_set_helper(const char *type, char *helper, size_t size,
- 		     const char *envvar,
--- 
-2.20.1
-
-
-From d8b591721710075c91e4a6a0589220e14a40c52d Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Tue, 25 Jun 2019 06:35:04 +1000
-Subject: [PATCH 31/32] ctdb-daemon: Don't check if lock_ctx->ctdb_db is NULL
-
-This can never be NULL.  It could probably be NULL in the past when
-"all database" locks existed.
-
-There are paths where is is checked for NULL and then later
-dereferenced, causing static analysers to produce spurious warnings.
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/server/ctdb_lock.c | 49 ++++++++++++++---------------------------
- 1 file changed, 16 insertions(+), 33 deletions(-)
-
-diff --git a/ctdb/server/ctdb_lock.c b/ctdb/server/ctdb_lock.c
-index d42d47af85f..5f032ae568b 100644
---- a/ctdb/server/ctdb_lock.c
-+++ b/ctdb/server/ctdb_lock.c
-@@ -198,13 +198,9 @@ static int ctdb_lock_context_destructor(struct lock_context *lock_ctx)
- 		} else {
- 			DLIST_REMOVE(lock_ctx->ctdb->lock_current, lock_ctx);
- 		}
--		if (lock_ctx->ctdb_db) {
--			lock_ctx->ctdb_db->lock_num_current--;
--		}
-+		lock_ctx->ctdb_db->lock_num_current--;
- 		CTDB_DECREMENT_STAT(lock_ctx->ctdb, locks.num_current);
--		if (lock_ctx->ctdb_db) {
--			CTDB_DECREMENT_DB_STAT(lock_ctx->ctdb_db, locks.num_current);
--		}
-+		CTDB_DECREMENT_DB_STAT(lock_ctx->ctdb_db, locks.num_current);
- 	} else {
- 		if (lock_ctx->type == LOCK_RECORD) {
- 			DLIST_REMOVE(lock_ctx->ctdb_db->lock_pending, lock_ctx);
-@@ -212,9 +208,7 @@ static int ctdb_lock_context_destructor(struct lock_context *lock_ctx)
- 			DLIST_REMOVE(lock_ctx->ctdb->lock_pending, lock_ctx);
- 		}
- 		CTDB_DECREMENT_STAT(lock_ctx->ctdb, locks.num_pending);
--		if (lock_ctx->ctdb_db) {
--			CTDB_DECREMENT_DB_STAT(lock_ctx->ctdb_db, locks.num_pending);
--		}
-+		CTDB_DECREMENT_DB_STAT(lock_ctx->ctdb_db, locks.num_pending);
+-	if (config->aapl_zero_file_id) {
++	if (global_fruit_config.nego_aapl &&
++	    config->aapl_zero_file_id)
++	{
+ 		return 0;
  	}
  
- 	ctdb_lock_schedule(lock_ctx->ctdb);
-@@ -357,25 +351,19 @@ static void ctdb_lock_handler(struct tevent_context *ev,
+diff --git a/source3/selftest/tests.py b/source3/selftest/tests.py
+index a3cd890e903..5ef227732be 100755
+--- a/source3/selftest/tests.py
++++ b/source3/selftest/tests.py
+@@ -616,7 +616,7 @@ tests = base + raw + smb2 + rpc + unix + local + rap + nbt + libsmbclient + idma
+     elif t == "vfs.fruit_timemachine":
+         plansmbtorture4testsuite(t, "nt4_dc", '//$SERVER_IP/vfs_fruit_timemachine -U$USERNAME%$PASSWORD --option=torture:localdir=$SELFTEST_PREFIX/nt4_dc/share')
+     elif t == "vfs.fruit_file_id":
+-        plansmbtorture4testsuite(t, "nt4_dc", '//$SERVER_IP/vfs_fruit -U$USERNAME%$PASSWORD')
++        plansmbtorture4testsuite(t, "nt4_dc", '//$SERVER_IP/vfs_fruit_zero_fileid -U$USERNAME%$PASSWORD')
+     elif t == "vfs.fruit_conversion":
+         plansmbtorture4testsuite(t, "nt4_dc", '//$SERVER_IP/tmp -U$USERNAME%$PASSWORD --option=torture:share2=vfs_fruit_wipe_intentionally_left_blank_rfork --option=torture:delete_empty_adfiles=false', 'wipe_intentionally_left_blank_rfork')
+         plansmbtorture4testsuite(t, "nt4_dc", '//$SERVER_IP/tmp -U$USERNAME%$PASSWORD --option=torture:share2=vfs_fruit_delete_empty_adfiles --option=torture:delete_empty_adfiles=true', 'delete_empty_adfiles')
+-- 
+2.21.0
+
+
+From e82699fd43f99880cbaa4879437ba6b4c05966f7 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Sun, 30 Jun 2019 13:33:39 +0200
+Subject: [PATCH 21/22] vfs_fruit: change default for "fruit:zero_file_id" to
+ false
+
+Now that we have reliable File-IDs, change the default for the option
+"zero_file_id" to false.
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ WHATSNEW.txt                | 1 +
+ source3/modules/vfs_fruit.c | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/WHATSNEW.txt b/WHATSNEW.txt
+index 3a5d978d6ee..7ba0dbeca13 100644
+--- a/WHATSNEW.txt
++++ b/WHATSNEW.txt
+@@ -110,6 +110,7 @@ smb.conf changes
+   --------------                     -----------                -------
  
- 	/* Update statistics */
- 	CTDB_INCREMENT_STAT(lock_ctx->ctdb, locks.num_calls);
--	if (lock_ctx->ctdb_db) {
--		CTDB_INCREMENT_DB_STAT(lock_ctx->ctdb_db, locks.num_calls);
--	}
-+	CTDB_INCREMENT_DB_STAT(lock_ctx->ctdb_db, locks.num_calls);
+   web port                           Removed
++  fruit:zero_file_id                 Changed default            False
  
- 	if (locked) {
--		if (lock_ctx->ctdb_db) {
--			CTDB_INCREMENT_STAT(lock_ctx->ctdb, locks.buckets[id]);
--			CTDB_UPDATE_LATENCY(lock_ctx->ctdb, lock_ctx->ctdb_db,
--					    lock_type_str[lock_ctx->type], locks.latency,
--					    lock_ctx->start_time);
--
--			CTDB_UPDATE_DB_LATENCY(lock_ctx->ctdb_db, lock_type_str[lock_ctx->type], locks.latency, t);
--			CTDB_INCREMENT_DB_STAT(lock_ctx->ctdb_db, locks.buckets[id]);
--		}
-+		CTDB_INCREMENT_STAT(lock_ctx->ctdb, locks.buckets[id]);
-+		CTDB_UPDATE_LATENCY(lock_ctx->ctdb, lock_ctx->ctdb_db,
-+				    lock_type_str[lock_ctx->type], locks.latency,
-+				    lock_ctx->start_time);
+ 
+ KNOWN ISSUES
+diff --git a/source3/modules/vfs_fruit.c b/source3/modules/vfs_fruit.c
+index ea97cb93b30..42beed2143f 100644
+--- a/source3/modules/vfs_fruit.c
++++ b/source3/modules/vfs_fruit.c
+@@ -2226,7 +2226,7 @@ static int init_fruit_config(vfs_handle_struct *handle)
+ 
+ 	config->aapl_zero_file_id =
+ 	    lp_parm_bool(SNUM(handle->conn), FRUIT_PARAM_TYPE_NAME,
+-			 "zero_file_id", true);
++			 "zero_file_id", false);
+ 
+ 	config->readdir_attr_rsize = lp_parm_bool(
+ 		SNUM(handle->conn), "readdir_attr", "aapl_rsize", true);
+-- 
+2.21.0
+
+
+From 13bba02ba0d456ed4e78d821b6120a46a06c19b6 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Thu, 27 Jun 2019 09:38:57 +0200
+Subject: [PATCH 22/22] selftest: add a test that itime is not set when setting
+ DOS attrs
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ selftest/target/Samba4.pm          |  5 ++++
+ source3/script/tests/test_itime.sh | 39 ++++++++++++++++++++++++++++++
+ source3/selftest/tests.py          |  2 ++
+ 3 files changed, 46 insertions(+)
+ create mode 100755 source3/script/tests/test_itime.sh
+
+diff --git a/selftest/target/Samba4.pm b/selftest/target/Samba4.pm
+index 59ea6f38e18..32de94cf21f 100755
+--- a/selftest/target/Samba4.pm
++++ b/selftest/target/Samba4.pm
+@@ -1215,6 +1215,11 @@ sub provision($$$$$$$$$$)
+ 	fruit:locking = netatalk
+ 	fruit:encoding = native
+ 
++[xattr]
++	path = $ctx->{share}
++        # This can be used for testing real fs xattr stuff
++	vfs objects = streams_xattr acl_xattr
 +
-+		CTDB_UPDATE_DB_LATENCY(lock_ctx->ctdb_db, lock_type_str[lock_ctx->type], locks.latency, t);
-+		CTDB_INCREMENT_DB_STAT(lock_ctx->ctdb_db, locks.buckets[id]);
- 	} else {
- 		CTDB_INCREMENT_STAT(lock_ctx->ctdb, locks.num_failed);
--		if (lock_ctx->ctdb_db) {
--			CTDB_INCREMENT_DB_STAT(lock_ctx->ctdb_db, locks.num_failed);
--		}
-+		CTDB_INCREMENT_DB_STAT(lock_ctx->ctdb_db, locks.num_failed);
- 	}
+ $extra_smbconf_shares
+ ";
  
- 	process_callbacks(lock_ctx, locked);
-@@ -674,10 +662,7 @@ static struct lock_context *ctdb_find_lock_context(struct ctdb_context *ctdb)
- 				   "request\n"));
- 		DLIST_REMOVE(ctdb->lock_pending, lock_ctx);
- 		CTDB_DECREMENT_STAT(ctdb, locks.num_pending);
--		if (lock_ctx->ctdb_db) {
--			CTDB_DECREMENT_DB_STAT(lock_ctx->ctdb_db,
--					       locks.num_pending);
--		}
-+		CTDB_DECREMENT_DB_STAT(lock_ctx->ctdb_db, locks.num_pending);
- 		talloc_free(lock_ctx);
- 	}
- 
-@@ -825,11 +810,9 @@ static void ctdb_lock_schedule(struct ctdb_context *ctdb)
- 	}
- 	CTDB_DECREMENT_STAT(lock_ctx->ctdb, locks.num_pending);
- 	CTDB_INCREMENT_STAT(lock_ctx->ctdb, locks.num_current);
--	if (lock_ctx->ctdb_db) {
--		lock_ctx->ctdb_db->lock_num_current++;
--		CTDB_DECREMENT_DB_STAT(lock_ctx->ctdb_db, locks.num_pending);
--		CTDB_INCREMENT_DB_STAT(lock_ctx->ctdb_db, locks.num_current);
--	}
-+	lock_ctx->ctdb_db->lock_num_current++;
-+	CTDB_DECREMENT_DB_STAT(lock_ctx->ctdb_db, locks.num_pending);
-+	CTDB_INCREMENT_DB_STAT(lock_ctx->ctdb_db, locks.num_current);
- }
- 
- 
+diff --git a/source3/script/tests/test_itime.sh b/source3/script/tests/test_itime.sh
+new file mode 100755
+index 00000000000..c457da9906b
+--- /dev/null
++++ b/source3/script/tests/test_itime.sh
+@@ -0,0 +1,39 @@
++#!/bin/sh
++
++# this tests immutable birthtime
++
++if [ $# != 6 ]; then
++cat <<EOF
++Usage: $0 SERVER USERNAME PASSWORD LOCAL_PATH SMBCLIENT SHARE
++EOF
++exit 1
++fi
++
++SERVER="$1"
++USERNAME="$2"
++PASSWORD="$3"
++LOCAL_PATH="$4"
++SMBCLIENT="$5"
++SHARE="$6"
++SAMBATOOL="$BINDIR/samba-tool"
++
++incdir=`dirname $0`/../../../testprogs/blackbox
++. $incdir/subunit.sh
++
++# Show that setting DOS attributes on a locally created file, therefore lacking
++# a DOS xattr and an itime, doesn't set an itime
++no_itime_on_local_file() {
++    fname="tmp.$$"
++    local_fname="$LOCAL_PATH/$fname"
++    touch $local_fname || return 1
++
++    $SMBCLIENT //$SERVER/$SHARE -U $USERNAME%$PASSWORD -c "setmode $fname +h" || return 1
++
++    dosinfo=$($SAMBATOOL ntacl getdosinfo $local_fname) || return 1
++    echo $dosinfo | grep -q "xattr_DosInfo4" || return 1
++    echo $dosinfo | grep -q "1: XATTR_DOSINFO_ATTRIB" || return 1
++    echo $dosinfo | grep -q "1: XATTR_DOSINFO_CREATE_TIME" || return 1
++    echo $dosinfo | grep -q "0: XATTR_DOSINFO_ITIME" || return 1
++}
++
++testit "no_itime_on_local_file" no_itime_on_local_file
+diff --git a/source3/selftest/tests.py b/source3/selftest/tests.py
+index 5ef227732be..1394dc456b2 100755
+--- a/source3/selftest/tests.py
++++ b/source3/selftest/tests.py
+@@ -832,3 +832,5 @@ plansmbtorture4testsuite('rpc.fsrvp', 'nt4_dc:local', 'ncacn_np:$SERVER_IP[/pipe
+     plantestsuite("samba3.blackbox.guest (%s)" % env , env,
+                   [os.path.join(samba3srcdir, "script/tests/test_guest_auth.sh"),
+                    '$SERVER', smbclient3, smbcontrol, net, configuration])
++
++plantestsuite("samba3.blackbox.itime", "ad_dc", [os.path.join(samba3srcdir, "script/tests/test_itime.sh"), '$SERVER', '$USERNAME', '$PASSWORD', '$LOCAL_PATH', smbclient3, 'xattr'])
 -- 
-2.20.1
+2.21.0
 
 
-From eab2ce8b6bb5997866ad87a1692caa1746c68ee7 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Tue, 25 Jun 2019 10:03:44 +1000
-Subject: [PATCH 32/32] ctdb-build: Tweak hacking of rpcgen output
-
-csbuild doesn't like the hack where variable buf is initialised to
-itself to avoid an unused variable warning.  buf is unused so remove
-it instead.
-
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/wscript | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/ctdb/wscript b/ctdb/wscript
-index 614e042bd70..51a09fdc63d 100644
---- a/ctdb/wscript
-+++ b/ctdb/wscript
-@@ -634,7 +634,7 @@ def build(bld):
-                         target='utils/smnotify/smnotify.h',
-                         rule='rpcgen -h ${SRC} > ${TGT}')
- 
--    xdr_buf_hack = 'sed -e "s@^\([ \t]*register int32_t \*buf\);@\\1 = buf;@"'
-+    xdr_buf_hack = 'grep -Fv "register int32_t *buf;"'
- 
-     bld.SAMBA_GENERATOR('ctdb-smnotify-x',
-                         source='utils/smnotify/smnotify.x',
--- 
-2.20.1
-
-
---MP_/h1/VjHv18ARt124wAMGyo0p--
+--------------02D36DE835737C4CAC771312--
 
