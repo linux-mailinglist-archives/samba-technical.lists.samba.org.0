@@ -2,59 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E85FF5C4C8
-	for <lists+samba-technical@lfdr.de>; Mon,  1 Jul 2019 23:06:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33ED95C683
+	for <lists+samba-technical@lfdr.de>; Tue,  2 Jul 2019 03:12:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=9TxhAvO9zqAfxuKK8PfvfOCDHKXA4YLihM6253x59/Q=; b=j9N2gMVqnm834yjC1ay+R5KNe3
-	f9oMLuUIEexlaGeUvVrxvodm5ShpjCtTKsTFVFoG7RKcmypkzqg6aY/12wPTQLthAV1iuSifEgt1s
-	AvQ8ntwB7S6fGB597vIztdQOILCc0KjDEabu/tgvLOm1E9062pSaJ0/Qll/EOMr0lT8iMoVgwBKj5
-	3bVbQio4QpdHl20W5U5NHrmujBO6x0QTwN7UYMmp72uihDNfuNTwTgJMA+qmPisjEok2fXrlSOD6H
-	QsqGpTwgHyWNtlpQMlTV2YTxsH3fcfkLBJ7mkfmP1yR4GRcXcXz+L8GDvfY+q9kduuX9Gyxna1sYf
-	1u8foZ+A==;
-Received: from localhost ([::1]:37926 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=j23+oGsjf2NjeodMk0bmIK71jhPBgAxoUeN0IXzXYXs=; b=sU6WbjQgCnNwuBOyaKHWc1i+eI
+	n1rR1/QgfCATk2aNNlWLxG5Gh7/D+aOqGkrIlWnecuxoEw/MD0gWBSRq2Hy6eSlq8p6mdCrFOIk13
+	oyYz0tFg8y5LPDuMseATDdi//lyYE4C8J1GANaJko/fVUTaryjpdJm0tksi1KpN+S+CpZBHnZYPCt
+	Mnv8UkfwtGLopBHtGRuUuEnvb85ykxqkXE1RYymsjnZyKdTT93JD0wCYly5VZ89Qv9ay9EgRZLcpr
+	JFc2SK454yQ2dVENTR8HMauWkL6PPh/F1Dq359n/VqweSRPNBHdZI4r7Lti2T5Zwev1flLy1yfpq+
+	2k6j9wgA==;
+Received: from localhost ([::1]:41546 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hi3U5-004LJN-2s; Mon, 01 Jul 2019 21:05:09 +0000
-Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643]:42159) 
+	id 1hi7KL-004M8D-V3; Tue, 02 Jul 2019 01:11:22 +0000
+Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:38679 helo=ozlabs.org) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hi3U0-004LJG-5B
- for samba-technical@lists.samba.org; Mon, 01 Jul 2019 21:05:06 +0000
-Received: by mail-pl1-x643.google.com with SMTP id ay6so7903994plb.9
- for <samba-technical@lists.samba.org>; Mon, 01 Jul 2019 14:05:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9TxhAvO9zqAfxuKK8PfvfOCDHKXA4YLihM6253x59/Q=;
- b=JSJxaBstqFZKbF2uwtUC+RgbaVu19OlukIYYjnsLbDW8o7UXh++H+tFzsjZCkoGQeL
- 4f8+/EX0gs8ZbQ0hYtLP0WushVycqWKx0cv7tHlcWSMj0N6az2xYwcpeogULMW4FKL/I
- 1AZhuoDkhtXPqaagbe1grxRA3h/eAbGworSZveeSRu/9mT3iqRhk8DE8mRBxSephFWAy
- kg6HIlJpjZvT6yJfrdOK1yhheAQIMR7yewY46Sg1tC9GWKNPFpqHSYDYxgrvYumfEUvH
- fXfHVtAQmHuhVlfp3IlrHeHwCN9iRKwdR+Dc1n8Vkxl/SCdMJtt4SUzwCd8IeQVntUrn
- vtUA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=9TxhAvO9zqAfxuKK8PfvfOCDHKXA4YLihM6253x59/Q=;
- b=WS6Yr+yVXLy2bcIVxX1NY1B9eHPS5KhTPP1b0Vqr27rQUtu899Z80S+P7wVAAftWAY
- o9PovpiDKbBYCjtaV1D0DmzLRwWTzGMEWEgMIY72e0S3Cjnd20M4c727JHRBfcoq3Rqs
- xxxiH5rztU8uqgWiJREaj8b/r2lJnT//g6lrHxUUtmt47WMkP9AiyOwc2KzoxAN+7f4p
- TAcnicpTxkp0Ekt+vYV2clYNekLIvxMLF3o7mGxL5bX5Fl1L3mUp+OQzdKcVLVQVATPk
- ciBgESvNRo2bWcF9Uc3MXvZOJAhKRYScUGCEK1NV9QVHa6AvL5j2iyWh/c85dr829Cp4
- FnPA==
-X-Gm-Message-State: APjAAAVI4dYK2KPWpjJgrg0DoZm9+B/Lqp63BHFg9XcPiaO+u4Erni/e
- 7BFAx2YS+osUT9ZmXJXWqAgMAehCe9M31fUV5fI=
-X-Google-Smtp-Source: APXvYqzhWaBYh+OXaLyUrrHU2hgCXHUa/EEucvYceNVZUyL8/hvy3wIdjun0LOA71RTxAo4nsKWQM2IIleJCfnADpio=
-X-Received: by 2002:a17:902:2a68:: with SMTP id
- i95mr31602176plb.167.1562015100563; 
- Mon, 01 Jul 2019 14:05:00 -0700 (PDT)
+ (Exim) id 1hi7KG-004M86-Pl
+ for samba-technical@lists.samba.org; Tue, 02 Jul 2019 01:11:19 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 45d5lv2G5Jz9s00;
+ Tue,  2 Jul 2019 11:11:06 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
+ t=1562029867; bh=jDsL54iYWl42Ivm5J8oDaz+hxwv3dExpUhMQ+6qGDJ4=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=ruwvmtPZIfyJcQuZbotAkQGsxKNqfJNKIDyUW/Hpq9Q3NzjyMysqJdMpTt+kNsRe4
+ /ahF94Xvt+eICEQm4G0/MJsKNCEHVm67l/gqv0gi5tTaWgumpPIhpFoSJxinRh/BDj
+ a8MmPBkOKKSHZq+CbMZcznzqHWV+wgyyDicwHVSaHjMeOCNBlGdY5TQ417WtGy2T4G
+ /MA7SzZCSuBA3tNSBnajrmskL9HJM5j9AOqshAF2agFGjCrMAqZWGMLMVtaf++LqIF
+ GzOfXbK1salpzoVEIEhJuQPtSITy1HH47vb/N+QwJEDo38FstwtGtYK3MV+qvBtviD
+ klZiGgLsh8nlQ==
+Date: Tue, 2 Jul 2019 11:11:02 +1000
+To: Christof Schmitt <cs@samba.org>
+Subject: Re: Compiling Samba with system Heimdal?
+Message-ID: <20190702111103.5be8bc8f@martins.ozlabs.org>
+In-Reply-To: <20190628211045.GA16917@samba.org>
+References: <20190628142946.7537edfd@martins.ozlabs.org>
+ <20190628211045.GA16917@samba.org>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <20190701030325.18188-1-sergey.senozhatsky@gmail.com>
-In-Reply-To: <20190701030325.18188-1-sergey.senozhatsky@gmail.com>
-Date: Mon, 1 Jul 2019 16:04:49 -0500
-Message-ID: <CAH2r5mutRM0d9oLG0rpRAzTC9DMWL61i0ewbri8v7Lgu1Ud5yQ@mail.gmail.com>
-Subject: Re: [PATCH] cifs: fix build by selecting CONFIG_KEYS
-To: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
-Content-Type: multipart/mixed; boundary="000000000000341b41058ca4fb33"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,112 +58,161 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>,
- Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000341b41058ca4fb33
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi Christof,
 
-I had already merged the attached (similar) fix into cifs-2.6.git for-next
+On Fri, 28 Jun 2019 14:10:46 -0700, Christof Schmitt <cs@samba.org>
+wrote:
+
+> On Fri, Jun 28, 2019 at 02:29:46PM +1000, Martin Schwenke via samba-technical wrote:
+> > I'm trying to build Samba with system Heimdal on Debian testing...
+> > 
+> > $ CFLAGS="-O3" ./configure --picky-developer --abi-check-disable \
+> >     --without-ad-dc  --without-json \
+> >     --with-system-heimdalkrb5
+> > ...
+> > 'configure' finished successfully (1m1.668s)
+> > 
+> > $ make
+> > [184/187] Compiling source4/heimdal_build/version.c
+> > [185/187] Compiling source4/heimdal/lib/vers/print_version.c
+> > In file included from ../../source4/heimdal_build/roken.h:156,
+> >                  from ../../source4/heimdal/lib/vers/print_version.c:39:
+> > ../../source4/heimdal/lib/roken/roken.h.in:282:10: fatal error: roken-common.h: No such file or directory
+> >  #include <roken-common.h>
+> >           ^~~~~~~~~~~~~~~~
+> > compilation terminated.
+> > 
+> > Waf: Leaving directory `/home/martins/samba/samba/bin/default'
+> > Build failed  
+> >  -> task in 'HEIMDAL_VERS_HOSTCC' failed with exit status 1 (run with -v to display more information)  
+> > make: *** [Makefile:7: all] Error 1  
+> 
+> Hi Martin,
+> 
+> i see the same also on Ubuntu 18.04. Samba 4.10 has the same problem,
+> Samba 4.9 compiles. 4.10 started using Python3 for the build. Then i
+> came across this comment from metze, that there might be a problem with
+> parsing the output of krb5-config with Python3:
+> 
+> commit 8061983d4882f3ba3f12da71443b035d7b672eec
+> Author: Stefan Metzmacher <metze@samba.org>
+> Date:   Thu Jan 24 02:31:10 2019 +0100
+> 
+>     wscript: separate embedded_heimdal from system_heimdal
+>     
+>     This allows to default (embedded_heimdal) to build even with a
+>     broken krb5-config file from Heimdal.
+>     
+>     In the system_heimdal case we parse the content of krb5-config
+>     instead of just executing it. This fails on FreeBSD 12 as
+>     krb5-config contains iso-8859-1 characters, which can't be parsed
+>     as unicode python buffers when using python3.
+>     
+>     Fixing the system_heimdal case is a task for another day,
+>     I guess it will only work once we imported a current heimdal version
+>     and actually tested the system_heimdal case.
+>     
+>     Signed-off-by: Stefan Metzmacher <metze@samba.org>
+>     Reviewed-by: Andreas Schneider <asn@samba.org>
+> 
+> I am not sure if that is the exact problem, but it would seem worthwhile
+> to look closer in that area.
+
+Thanks for this idea.
+
+Unfortunately, the problem doesn't seem to be iso-8859-1 characters
+that can't be parsed using python3.
+
+I hacked wscript_configure_system_heimdal to grep the desired lines
+of krb5-config.heimdal and then read only those lines in Python.  This
+avoids any non-ASCII characters.  However, the same
+bin/c4che/default_cache.py file is produced with or without the hack.
+
+On my Debian testing system I see:
+
+  $ file /usr/bin/krb5-config.heimdal 
+  /usr/bin/krb5-config.heimdal: POSIX shell script, UTF-8 Unicode text executable
+
+compared with:
+
+  $ file /usr/bin/krb5-config.mit 
+  /usr/bin/krb5-config.mit: POSIX shell script, ASCII text executable
+
+So, I don't think the iso-8859-1 character problem exists on my system.
+
+I don't think my problem is that I have both kerberos flavours
+installed.  wscript_configure_system_heimdal explicitly looks for
+krb5-config.heimdal.  When I saw this problem 6 months ago I didn't
+have MIT kerberos installed.
+
+Potentially relevant lines from default_cache.py are:
+
+CFLAGS_roken = []
+CPPPATH_ASN1 = ['/usr/include/heimdal']
+CPPPATH_COM_ERR = ['/usr/include/heimdal']
+CPPPATH_GSSAPI = ['/usr/include/heimdal']
+CPPPATH_HCRYPTO = ['/usr/include/heimdal']
+CPPPATH_HDB = ['/usr/include/heimdal']
+CPPPATH_HEIMBASE = ['/usr/include/heimdal']
+CPPPATH_HEIMNTLM = ['/usr/include/heimdal']
+CPPPATH_HX509 = ['/usr/include/heimdal']
+CPPPATH_KDC = ['/usr/include/heimdal']
+CPPPATH_KRB5 = ['/usr/include/heimdal']
+CPPPATH_ROKEN = ['/usr/include/heimdal']
+CPPPATH_ROKEN_HOSTCC = ['/usr/include/heimdal']
+CPPPATH_WIND = ['/usr/include/heimdal']
+FOUND_SYSTEMLIB_roken = True
+HAVE_LIBROKEN = 1
+HAVE_ROKEN_H = 1
+HEIMDAL_KRB5_CONFIG = ['/usr/bin/krb5-config.heimdal']
+HEIMDAL_KRB5_TYPES_PATH = '/usr/include/heimdal/krb5-types.h'
+LDFLAGS_roken = ['-lpthread', '-Wl,-no-undefined']
+LIBPATH_ASN1 = ['/usr/lib/x86_64-linux-gnu/heimdal', '/usr/lib/x86_64-linux-gnu/mit-krb5']
+LIBPATH_COM_ERR = ['/usr/lib/x86_64-linux-gnu/heimdal', '/usr/lib/x86_64-linux-gnu/mit-krb5']
+LIBPATH_GSSAPI = ['/usr/lib/x86_64-linux-gnu/heimdal', '/usr/lib/x86_64-linux-gnu/mit-krb5']
+LIBPATH_HCRYPTO = ['/usr/lib/x86_64-linux-gnu/heimdal', '/usr/lib/x86_64-linux-gnu/mit-krb5']
+LIBPATH_HDB = ['/usr/lib/x86_64-linux-gnu/heimdal', '/usr/lib/x86_64-linux-gnu/mit-krb5']
+LIBPATH_HEIMBASE = ['/usr/lib/x86_64-linux-gnu/heimdal', '/usr/lib/x86_64-linux-gnu/mit-krb5']
+LIBPATH_HEIMNTLM = ['/usr/lib/x86_64-linux-gnu/heimdal', '/usr/lib/x86_64-linux-gnu/mit-krb5']
+LIBPATH_HX509 = ['/usr/lib/x86_64-linux-gnu/heimdal', '/usr/lib/x86_64-linux-gnu/mit-krb5']
+LIBPATH_KDC = ['/usr/lib/x86_64-linux-gnu/heimdal', '/usr/lib/x86_64-linux-gnu/mit-krb5']
+LIBPATH_KRB5 = ['/usr/lib/x86_64-linux-gnu/heimdal', '/usr/lib/x86_64-linux-gnu/mit-krb5']
+LIBPATH_ROKEN = ['/usr/lib/x86_64-linux-gnu/heimdal', '/usr/lib/x86_64-linux-gnu/mit-krb5']
+LIBPATH_ROKEN_HOSTCC = ['/usr/lib/x86_64-linux-gnu/heimdal', '/usr/lib/x86_64-linux-gnu/mit-krb5']
+LIBPATH_WIND = ['/usr/lib/x86_64-linux-gnu/heimdal', '/usr/lib/x86_64-linux-gnu/mit-krb5']
+LIB_ROKEN = 'roken'
+LIB_ROKEN_HOSTCC = 'roken'
+LIB_roken = ['roken']
+SAMBA4_USES_HEIMDAL = 1
+SYSTEM_LIBS = ('heimdal', 'asn1', 'com_err', 'roken', 'hx509', 'wind', 'gssapi', 'hcrypto', 'krb5', 'heimbase', 'asn1_compile', 'compile_et', 'kdc', 'hdb', 'heimntlm')
+TARGET_TYPE = {'inotify': 'EMPTY', 'tirpc': 'EMPTY', 'nsl': 'SYSLIB', 'socket': 'EMPTY', 'bsd': 'SYSLIB', 'setproctitle': 'EMPTY', 'attr': 'EMPTY', 'dl': 'SYSLIB', 'rt': 'SYSLIB', 'resolv': 'SYSLIB', 'intl': 'EMPTY', 'pthread': 'SYSLIB', 'crypt': 'SYSLIB', 'popt': 'SYSLIB', 'z': 'SYSLIB', 'pam': 'SYSLIB', 'com_err': 'SYSLIB', 'roken': 'SYSLIB', 'ROKEN_HOSTCC': 'SYSLIB', 'wind': 'SYSLIB', 'hx509': 'SYSLIB', 'asn1': 'SYSLIB', 'heimbase': 'SYSLIB', 'hcrypto': 'SYSLIB', 'krb5': 'SYSLIB', 'gssapi': 'SYSLIB', 'heimntlm': 'SYSLIB', 'hdb': 'SYSLIB', 'kdc': 'SYSLIB', 'gnutls': 'SYSLIB', 'gpgme': 'EMPTY', 'execinfo': 'EMPTY', 'systemd-daemon': 'EMPTY', 'systemd-journal': 'EMPTY', 'systemd': 'SYSLIB', 'lttng-ust': 'EMPTY', 'iconv': 'EMPTY', 'ncurses': 'SYSLIB', 'readline': 'EMPTY', 'jansson': 'EMPTY', 'inet': 'EMPTY', 'archive': 'SYSLIB', 'dm': 'EMPTY', 'jfsdm': 'EMPTY', 'dmapi': 'EMPTY', 'xdsm': 'EMPTY', 'cap': 'EMPTY', 'sunacl': 'EMPTY', 'acl': 'SYSLIB', 'cups': 'EMPTY', 'lber': 'SYSLIB', 'ld
+ ap': 'SYSLIB', 'avahi-client': 'EMPTY', 'avahi-common': 'EMPTY', 'sendfile': 'EMPTY', 'gen': 'EMPTY', 'security': 'EMPTY', 'sec': 'EMPTY', 'gfapi': 'EMPTY', 'menu': 'SYSLIB', 'panel': 'SYSLIB', 'form': 'SYSLIB', 'crypto': 'SYSLIB', 'glib-2.0': 'SYSLIB', 'nscd': 'EMPTY', 'util': 'SYSLIB', 'pcap': 'EMPTY', 'libtasn1': 'SYSLIB'}
+USING_SYSTEM_ROKEN = 1
 
 
-On Sun, Jun 30, 2019 at 10:24 PM Sergey Senozhatsky
-<sergey.senozhatsky.work@gmail.com> wrote:
->
-> CONFIG_CIFS_ACL had a dependency "depends on KEYS" which was
-> dropped with the removal of CONFIG_CIFS_ACL. This breaks the
-> build on systems which don't have CONFIG_KEYS in .config:
->
-> cifsacl.c:37:15: error: variable =E2=80=98cifs_idmap_key_acl=E2=80=99 has
->                  initializer but incomplete type
->    37 | static struct key_acl cifs_idmap_key_acl =3D {
->       |               ^~~~~~~
-> cifsacl.c:38:3: error: =E2=80=98struct key_acl=E2=80=99 has no member
->                 named =E2=80=98usage=E2=80=99
->    38 |  .usage =3D REFCOUNT_INIT(1),
->       |   ^~~~~
-> [..]
->
-> Signed-off-by: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
-> ---
->  fs/cifs/Kconfig   | 1 +
->  fs/cifs/cifsacl.c | 1 +
->  2 files changed, 2 insertions(+)
->
-> diff --git a/fs/cifs/Kconfig b/fs/cifs/Kconfig
-> index 3eee73449bdd..5912751e6f09 100644
-> --- a/fs/cifs/Kconfig
-> +++ b/fs/cifs/Kconfig
-> @@ -17,6 +17,7 @@ config CIFS
->         select CRYPTO_ECB
->         select CRYPTO_AES
->         select CRYPTO_DES
-> +       select KEYS
->         help
->           This is the client VFS module for the SMB3 family of NAS protoc=
-ols,
->           (including support for the most recent, most secure dialect SMB=
-3.1.1)
-> diff --git a/fs/cifs/cifsacl.c b/fs/cifs/cifsacl.c
-> index 78eed72f3af0..8ca479caf902 100644
-> --- a/fs/cifs/cifsacl.c
-> +++ b/fs/cifs/cifsacl.c
-> @@ -24,6 +24,7 @@
->  #include <linux/fs.h>
->  #include <linux/slab.h>
->  #include <linux/string.h>
-> +#include <linux/key.h>
->  #include <linux/keyctl.h>
->  #include <linux/key-type.h>
->  #include <keys/user-type.h>
-> --
-> 2.22.0
->
+Despite all of those lovely variables containing
+"/usr/include/heimdal", I don't see that in the compilation command.
 
+In fact, as-per Andrew's comment a year ago, I'm guessing that we
+shouldn't even be trying to build anything in source4/heimdal/.
+However, it isn't as simple as commenting out
 
---=20
-Thanks,
+  bld.RECURSE('source4/heimdal_build')
 
-Steve
+in wscript_build_system_heimdal as is done in
+wscript_build_system_mitkrb5.  That results in:
 
---000000000000341b41058ca4fb33
-Content-Type: text/x-patch; charset="US-ASCII"; name="0001-CIFS-Fix-module-dependency.patch"
-Content-Disposition: attachment; 
-	filename="0001-CIFS-Fix-module-dependency.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_jxkvgaqw0>
-X-Attachment-Id: f_jxkvgaqw0
+  Unknown dependency 'gssapi_krb5' in 'KRB5_PAC'
 
-RnJvbSAyNzVlMzUxNTJlNzEzY2IxODYzMzhiZDI1NzEzOWVkMjhkNDk4NzI2IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFN1biwgMzAgSnVuIDIwMTkgMTg6MDA6NDEgLTA1MDAKU3ViamVjdDogW1BBVENIXSBD
-SUZTOiBGaXggbW9kdWxlIGRlcGVuZGVuY3kKCktFWVMgaXMgcmVxdWlyZWQgbm90IHRoYXQgQ09O
-RklHX0NJRlNfQUNMIGlzIGFsd2F5cyBvbgphbmQgdGhlIGlmZGVmIGZvciBpdCByZW1vdmVkLgoK
-U2lnbmVkLW9mZi1ieTogU3RldmUgRnJlbmNoIDxzdGZyZW5jaEBtaWNyb3NvZnQuY29tPgotLS0K
-IGZzL2NpZnMvS2NvbmZpZyB8IDUgKysrLS0KIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMo
-KyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZnMvY2lmcy9LY29uZmlnIGIvZnMvY2lm
-cy9LY29uZmlnCmluZGV4IGNiMzA5NmZhYmJiZS4uZTM5YzE1MjY3YmI0IDEwMDY0NAotLS0gYS9m
-cy9jaWZzL0tjb25maWcKKysrIGIvZnMvY2lmcy9LY29uZmlnCkBAIC0xNyw2ICsxNyw3IEBAIGNv
-bmZpZyBDSUZTCiAJc2VsZWN0IENSWVBUT19FQ0IKIAlzZWxlY3QgQ1JZUFRPX0FFUwogCXNlbGVj
-dCBDUllQVE9fREVTCisJc2VsZWN0IEtFWVMKIAloZWxwCiAJICBUaGlzIGlzIHRoZSBjbGllbnQg
-VkZTIG1vZHVsZSBmb3IgdGhlIFNNQjMgZmFtaWx5IG9mIE5BUyBwcm90b2NvbHMsCiAJICAoaW5j
-bHVkaW5nIHN1cHBvcnQgZm9yIHRoZSBtb3N0IHJlY2VudCwgbW9zdCBzZWN1cmUgZGlhbGVjdCBT
-TUIzLjEuMSkKQEAgLTExMCw3ICsxMTEsNyBAQCBjb25maWcgQ0lGU19XRUFLX1BXX0hBU0gKIAog
-Y29uZmlnIENJRlNfVVBDQUxMCiAJYm9vbCAiS2VyYmVyb3MvU1BORUdPIGFkdmFuY2VkIHNlc3Np
-b24gc2V0dXAiCi0JZGVwZW5kcyBvbiBDSUZTICYmIEtFWVMKKwlkZXBlbmRzIG9uIENJRlMKIAlz
-ZWxlY3QgRE5TX1JFU09MVkVSCiAJaGVscAogCSAgRW5hYmxlcyBhbiB1cGNhbGwgbWVjaGFuaXNt
-IGZvciBDSUZTIHdoaWNoIGFjY2Vzc2VzIHVzZXJzcGFjZSBoZWxwZXIKQEAgLTE3Nyw3ICsxNzgs
-NyBAQCBjb25maWcgQ0lGU19ERUJVR19EVU1QX0tFWVMKIAogY29uZmlnIENJRlNfREZTX1VQQ0FM
-TAogCWJvb2wgIkRGUyBmZWF0dXJlIHN1cHBvcnQiCi0JZGVwZW5kcyBvbiBDSUZTICYmIEtFWVMK
-KwlkZXBlbmRzIG9uIENJRlMKIAlzZWxlY3QgRE5TX1JFU09MVkVSCiAJaGVscAogCSAgRGlzdHJp
-YnV0ZWQgRmlsZSBTeXN0ZW0gKERGUykgc3VwcG9ydCBpcyB1c2VkIHRvIGFjY2VzcyBzaGFyZXMK
-LS0gCjIuMjAuMQoK
---000000000000341b41058ca4fb33--
+... and then I'm too far into dependencies that I don't understand well
+enough to unravel.  :-(
+
+peace & happiness,
+martin
 
