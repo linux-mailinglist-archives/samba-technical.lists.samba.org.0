@@ -2,45 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 352A65E025
-	for <lists+samba-technical@lfdr.de>; Wed,  3 Jul 2019 10:47:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A3E215E041
+	for <lists+samba-technical@lfdr.de>; Wed,  3 Jul 2019 10:53:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=D28q/AgFHndB/ayNvJ9P1BV4rh27/Sz7kTeO3NHWfUs=; b=dsQFnrTCCyZNAnZJFzOtf0zKfX
-	vBXnkgzmecjp2eVYhEsdO3eX8dulapVzVWDn0ZepbQYjTZCcw/vh6Eenzp+D2w11y4shfsTJvFL3S
-	0uWL+6gRtBCOMXk+ZqrGuSt/f20/a4bq/5cAmpSQTh/XQhHxEvs8hLaRbaXhPQXMW4vpszV+W+lc+
-	w2S9VHGCO3FO+Yadn6qSKw2L9SWe+oP7GSivBV3bqzxLdOn5suqIwipBB6l+yTLbgwYJXvB62vV/v
-	IFK+QOSDPh4pcuRBrTwcm9GI5nY7BkGY7foMm9VQwM5Wl9oljG2MSWEdWJY7ETZdr+pyJAzyB18Af
-	lKk8IWww==;
-Received: from localhost ([::1]:43032 helo=hr1.samba.org) 
+	bh=QiIBWFHYUta+5a1EVqNMauYcKLTNkZ1kBbcLB/KufNI=; b=328WtWy4MwB7yjyS1UjQZObH4T
+	RQm8vchnz6MYV7USclKW0uqPNJdHQfFNL8c8RLfU61hDuk+LUN9IDnUHVZPTcpyFdm0JNMFdramyG
+	6J8sGwPMyfbIfLUODIqnK6NcwZCfH4B0sBQ78PQUhVDYPTZTgJWbDHdJUdx4YdzpQTaUCRjy3SJO/
+	V2HzqMzjat5N52r+tBEc7s53i12/cH8HSJQIoXMMtAUfWTdS1bw159P/zGFK4GNqrgU9gLKGTWy0x
+	pVPZWAo/YCh895AGuQ+QCKPxXOS4lsoPEMspm/QwpqOp7ZRWLuLwVW+DXCsXLYOzICV0K5SEg0GRY
+	DlfjCW8w==;
+Received: from localhost ([::1]:43810 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hiav8-004pgh-U9; Wed, 03 Jul 2019 08:47:18 +0000
-Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:33037 helo=ozlabs.org) 
+	id 1hib0t-004pna-6q; Wed, 03 Jul 2019 08:53:15 +0000
+Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:55771 helo=ozlabs.org) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hiav3-004pga-9j
- for samba-technical@lists.samba.org; Wed, 03 Jul 2019 08:47:16 +0000
+ (Exim) id 1hib0o-004pnT-JD
+ for samba-technical@lists.samba.org; Wed, 03 Jul 2019 08:53:13 +0000
 Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 45dvqW0Cqyz9s3Z;
- Wed,  3 Jul 2019 18:47:02 +1000 (AEST)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 45dvyS0Vk2z9s3Z;
+ Wed,  3 Jul 2019 18:53:04 +1000 (AEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1562143623; bh=NsK5XcIqoagVyyN27PIPUaUhhpNWpuDz5rLKHjWqA4E=;
- h=Date:From:To:Subject:From;
- b=ovrG2NAniyngffKVG3zFcWHglKnE9omZkjpemnNlm7F4NfYrgIKy1PJvkKEsJDzQq
- y092TOyjVnMRrk+hpKDbCKo/7d0bf/zaUumuQbRHx/YxZ4uWmPmSHyA/Ontm5GVWpC
- 8cb2yDnaXCiVKP0K2g0pPhelzi3aIUTXYsmR3UavcHc8C1Gb2LD2G67fVjBjVNGYC2
- ndaHikUnOjIf/zVS5pxtiMkKEJcbbuBcunM3rUmSllk8mPhUcwLRrCgcVz1/z+a3+5
- ON+7nmrwTQjbjHRdtdz6F9XteMC2Lo+1khJhAgOfXkzn8mS3YTIZIc9T+7O1A1FG9e
- +4NitpPnbt/1w==
-Date: Wed, 3 Jul 2019 18:47:01 +1000
+ t=1562143984; bh=tRPk1/DjcgmPEmN9QMyBNhOA4N9IaMGPfgAI2DPLOr4=;
+ h=Date:From:To:Subject:In-Reply-To:References:From;
+ b=jgXvXuX6vi1fBExku1t1unJZxohKREdWrXvLMa/9veQoJJJ6ktYTs4bCbAO46BHe1
+ ATmae1tKGClosNoPXuYDBYm+Aim7r9yBE5RAKz++393BciGNICzcN3rF+wzluEhKAw
+ lMKPv/nEuirRuwzP89HJbK4gUxdFJo94fnlyvoO0V62MqK+Bz/jbEE6hsI6Yrqsoq5
+ FMyw8hp1UROg0z7I4nLfkdbNIYZki+gNDwALZGBIUgaCibYWZ6oReeMBBYTz8SXm/V
+ yX3vfPZIEA4Szq7o8IZK225mfWLlh6zdBF/5Zt0y+RJ0qTmDAGb3Ryi7S9GvC0cdnX
+ g0n8hawGD+JdA==
+Date: Wed, 3 Jul 2019 18:53:02 +1000
 To: Samba Technical <samba-technical@lists.samba.org>
-Subject: [PATCH] CTDB onnode simplifications
-Message-ID: <20190703184701.4f93d776@martins.ozlabs.org>
+Subject: Re: [PATCH] CTDB onnode simplifications
+Message-ID: <20190703185302.00e2b627@martins.ozlabs.org>
+In-Reply-To: <20190703184701.4f93d776@martins.ozlabs.org>
+References: <20190703184701.4f93d776@martins.ozlabs.org>
 X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="MP_/.umymTM9re4Vq_nb0CFS80."
+Content-Type: multipart/mixed; boundary="MP_/iskdQpZSXneg_fC2ad6kl3q"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,28 +61,34 @@ Reply-To: Martin Schwenke <martin@meltin.net>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---MP_/.umymTM9re4Vq_nb0CFS80.
+--MP_/iskdQpZSXneg_fC2ad6kl3q
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
-Simplify and drop output filtering in onnode.  This avoids onnode
-hanging in many circumstances when a backgrounded process has stdout
-open.
+On Wed, 3 Jul 2019 18:47:01 +1000, Martin Schwenke <martin@meltin.net>
+wrote:
 
-https://gitlab.com/samba-team/samba/merge_requests/606
+> Simplify and drop output filtering in onnode.  This avoids onnode
+> hanging in many circumstances when a backgrounded process has stdout
+> open.
+> 
+> https://gitlab.com/samba-team/samba/merge_requests/606
+> 
+> Please review and maybe push...
 
-Please review and maybe push...
+New patch attached that also removed the documentation for the onnode
+-o option.
 
 peace & happiness,
 martin
 
---MP_/.umymTM9re4Vq_nb0CFS80.
+--MP_/iskdQpZSXneg_fC2ad6kl3q
 Content-Type: text/x-patch
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename=ctdb-onnode.patch
 
-From 0f8bb3f3de7630218d1f210e7031dcb15e08ce53 Mon Sep 17 00:00:00 2001
+From e8498dbf7e98d1183205192c8f0b78c2a60a5290 Mon Sep 17 00:00:00 2001
 From: Martin Schwenke <martin@meltin.net>
 Date: Fri, 28 Jun 2019 15:43:27 +1000
 Subject: [PATCH 1/3] ctdb-tools: Drop onnode -o option
@@ -89,9 +97,30 @@ I don't think anyone uses this and it causes complications.
 
 Signed-off-by: Martin Schwenke <martin@meltin.net>
 ---
- ctdb/tools/onnode | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+ ctdb/doc/onnode.1.xml | 9 ---------
+ ctdb/tools/onnode     | 7 +------
+ 2 files changed, 1 insertion(+), 15 deletions(-)
 
+diff --git a/ctdb/doc/onnode.1.xml b/ctdb/doc/onnode.1.xml
+index c9d56a97dd5..f7da04aedbe 100644
+--- a/ctdb/doc/onnode.1.xml
++++ b/ctdb/doc/onnode.1.xml
+@@ -90,15 +90,6 @@
+         </listitem>
+       </varlistentry>
+ 
+-      <varlistentry><term>-o <parameter>PREFIX</parameter></term>
+-        <listitem>
+-          <para>
+-	    Causes standard output from each node to be saved into a
+-	    file with name PREFIX.<replaceable>IP</replaceable>.
+-	  </para>
+-        </listitem>
+-      </varlistentry>
+-
+       <varlistentry><term>-p</term>
+         <listitem>
+           <para>
 diff --git a/ctdb/tools/onnode b/ctdb/tools/onnode
 index 13b0d19b3ee..76cd2217a0d 100755
 --- a/ctdb/tools/onnode
@@ -135,7 +164,7 @@ index 13b0d19b3ee..76cd2217a0d 100755
 2.20.1
 
 
-From c12bb04c796e534b9db56f2df84f3428921f4ead Mon Sep 17 00:00:00 2001
+From 4bc47436d77aaf1e2e346d8b07899a9e035a8156 Mon Sep 17 00:00:00 2001
 From: Martin Schwenke <martin@meltin.net>
 Date: Fri, 28 Jun 2019 15:44:59 +1000
 Subject: [PATCH 2/3] ctdb-tools: Drop no-op stdout-filter from non-parallel
@@ -172,7 +201,7 @@ index 76cd2217a0d..863b8b393c5 100755
 2.20.1
 
 
-From 8da9ace8cd3b1632ab505639f415efda987f2eea Mon Sep 17 00:00:00 2001
+From 520b7d9a7bae3643179116e4a8bb9895a03a3fdf Mon Sep 17 00:00:00 2001
 From: Martin Schwenke <martin@meltin.net>
 Date: Fri, 28 Jun 2019 15:46:57 +1000
 Subject: [PATCH 3/3] ctdb-tools: Drop separate parallel+verbose stdout/stderr
@@ -252,5 +281,5 @@ index 863b8b393c5..e143ba2d4d4 100755
 2.20.1
 
 
---MP_/.umymTM9re4Vq_nb0CFS80.--
+--MP_/iskdQpZSXneg_fC2ad6kl3q--
 
