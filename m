@@ -2,57 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F7045FFE1
-	for <lists+samba-technical@lfdr.de>; Fri,  5 Jul 2019 05:54:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C98AE5FFE6
+	for <lists+samba-technical@lfdr.de>; Fri,  5 Jul 2019 06:05:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Gt90+YBqJrHQQCDeKj2//ut6COY7OOnD1hwhgBvRrSA=; b=LL4WWlaG6kYwCxXDMqSlzN91E6
-	h8rSwKix3nEpGZ1M2N2rxwk3cWbwAo0bDs/uLZIsD0NNvwYbUr8/B70C1OLnDvZvZzHK6Ajc9EnAp
-	z1f7L3tBegUWPoKsFdcZZCIylUfk+5JJUXYDHuzPDqOPIs3NXSoZxuDqiblKRHtVfcKx1Pdy2x1wD
-	UoGwYsUPDV5Wv1fG2WUWU3yDkaL8Pf8+PkFdKI02/Q/MqHrUgy70mNzn5q1W+61RRpoyipKfIRfVk
-	LfRlgZZ5AS+Tp/V7iQkOxCiL6v6dSC+0RB9bPOVP9cvCIdBwC1TxVoWrLtzpZIFQ+L7VKDNrJB/dR
-	gFyy8tjg==;
-Received: from localhost ([::1]:18982 helo=hr1.samba.org) 
+	bh=Atg3ZUUGSmFzXRHXhXeCLvjvz10NhGUiGe+LIgo6YS0=; b=xgkV5HZkj/7J4mNXn2y/Ht1QFr
+	/5cUyc2WFKwscQCV2mCS0E7OjqnBz1yFmHuTyPy42GXLfq0biXlHaXhPGMcV5PY+q6oPyuEk9v7jE
+	RwgeMPv1Vchw965h1JZIDPTD3qJLVzs87umMbp2h6RX4aZgQ8aO8FA43lu6DAxyMLMHxDJYu0qCwV
+	Jdk+IhiwMqSoZ27oG085a0xhdmO6Ej5rnoHIayvdu//HqGbeg8LvRAuFBFdiBYwCM2QBN9QziAZ2u
+	r8yau6fQs/ZSpY99b+0F5R09DzKePA0mfvzjKUprBvSLfQgZQQ43o9U2xH7WWXfVT7J8e8c/4y3Wp
+	X87Tpekw==;
+Received: from localhost ([::1]:19882 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hjFHI-005GrL-MF; Fri, 05 Jul 2019 03:52:52 +0000
-Received: from mail-ot1-x343.google.com ([2607:f8b0:4864:20::343]:38032) 
+	id 1hjFT4-005Gzk-Vs; Fri, 05 Jul 2019 04:05:03 +0000
+Received: from mail-ot1-x343.google.com ([2607:f8b0:4864:20::343]:43884) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hjFHE-005GrE-9J
- for samba-technical@lists.samba.org; Fri, 05 Jul 2019 03:52:50 +0000
-Received: by mail-ot1-x343.google.com with SMTP id d17so7753659oth.5
- for <samba-technical@lists.samba.org>; Thu, 04 Jul 2019 20:52:46 -0700 (PDT)
+ (Exim) id 1hjFT0-005GzQ-5V
+ for samba-technical@lists.samba.org; Fri, 05 Jul 2019 04:05:00 +0000
+Received: by mail-ot1-x343.google.com with SMTP id q10so7740089otk.10
+ for <samba-technical@lists.samba.org>; Thu, 04 Jul 2019 21:04:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Gt90+YBqJrHQQCDeKj2//ut6COY7OOnD1hwhgBvRrSA=;
- b=IRL3nSr8cX381BxxzbB2fVa0IeQp3gAnpuw40K9eXFTeKvwX63XjxW7mUVBNOCglM3
- o81FZnc9uy1xrx3o+XDq3bJgCV70/r4KagW/xSBmvbZPR0KeEf5d10aWINYJRpy7stHS
- 7EwcbxjXf/6pM0lE4gprB1xepvCizFencr8jN8jJLu860fHS/vdUbz7MWbqC9g1V3ZYW
- TbkrEQxdbtJ5gHXeFWhRXCCyWxDx6ctVUrKoYhQ5jFRnHS1e5InaHZuJTnJ0tIU1NcjJ
- jhlr0gHLEpsC0V0iLiiK/rsSpnF5Ggu5I6g7em9/jQJ0nu+un56JbtV6xh2V3823EIKq
- ucIA==
+ :cc; bh=Atg3ZUUGSmFzXRHXhXeCLvjvz10NhGUiGe+LIgo6YS0=;
+ b=pkRRsW3Ms1xxB7VYRriW9p1dNvEn0Ytu3gXWs2MCw9juLFVEAA96modwC+V2PyUlkw
+ hUm6e0zA6WTgme2Zt3Q7bARSySqXLbli0WEt7kVtpNba/0SlaR8CCphl1dMRt3llLUB5
+ /cMQv/9awbS2evOs2ebnxpq3myrc6CfyfzeIModE2S/ZQp0C6zAm+QG+JZvpY/HJmkBK
+ G12fNFjpeRJdv6awQaOfeV8iLw8LJGUYnGATbE5gx28dyDTXhBy2YzUaSiGDW/V1QOpP
+ ZLaZ4b6o9VEzgicwYbKfpG25e2ETTCGe32KdyEF0Io/ktxbuT6DDV0uQTGLCIFrGP0QY
+ kX5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Gt90+YBqJrHQQCDeKj2//ut6COY7OOnD1hwhgBvRrSA=;
- b=U1/bWoP38EqnunPH3ywe01l42JzEkkDyneShP6UH2pQ3NJv1zxisN4Ow7Y7Zi/TjTd
- aDH0iPLb8thb5iMAOpHrY4mQ6kGBrBO8Qg18+ikTtgH/7TynU0NgQHb6E9TJWEp72fmr
- tG6mJd0ahMkYRZaJUj+d654nebUmvVQVr9okRxD9Qv4l6iS9BvllaqglUZTpKeG1rFXq
- K+fqNXqN+wHqbDD3jOksnjUhMAOM81bLeBNaizY8K7c9QpQCrNz5gsP3YylOwB7iMUSJ
- vLGYfxAlj+R1giPht/vFwv5Wy8LHvRd4cyYTXFAgDc+1HqYvxG/7xB7EYoxFQ5NVb75i
- XiCA==
-X-Gm-Message-State: APjAAAX3HgZZJDZzVOlAUTlOIkvPsUP7om3SK/IiadVtOJqDh2vembmf
- hEq6wD4upR9PrMtDc8eRc2o8Luwjw5seVknX4luExQ==
-X-Google-Smtp-Source: APXvYqxAv+lhWJoFtIKzptaRrefwS/FcnNQsXl1MqGEeTNvwh9FNdmx3JaWFweLTYm/+zBCHuYcehEsNxGBTRLYsRxc=
-X-Received: by 2002:a9d:578c:: with SMTP id q12mr1039763oth.240.1562298764368; 
- Thu, 04 Jul 2019 20:52:44 -0700 (PDT)
+ bh=Atg3ZUUGSmFzXRHXhXeCLvjvz10NhGUiGe+LIgo6YS0=;
+ b=cSGIVuDtUotJQMRO80en2uHlgM7PEwxoyM3bxm1+6Veu2GifpJ0dAnPNm6QIJsTbFn
+ RIZGSOIHREGoK9SYkkFdfuULqMJeBjVrWYzvz39psD6cb+BnGtzZNUAj8Ne2AKw0ceJT
+ SKQZcWfVsxPIYyyhEDKL45hhFAziXrcFT9wVaL5Y8FC/8oH7tdkYQql2roRE2nh5PQMT
+ iUZodZS5zo3Chhq9/Lt4960GrvKFylb9sLf9cbFYfuQO24fKaQNzneLzZ89tNO9jWeAM
+ F7UC/IwnUb3YLBiG0X5fSqy95nnD0lRwRgdjywKoSg+a/b1CcgNpq5UcfGXJbyhZNpem
+ /kJw==
+X-Gm-Message-State: APjAAAWyYxfnP9SPPTyRvzs13nv6dzwO4GEMDSQmP2OeBfeVEfyQpRY9
+ 2zdL9z2tAH5qfWOQha00ZLmb9Hy+hPT/GTJy1A4nHw==
+X-Google-Smtp-Source: APXvYqyeQ75JD/1MYUf3x3e84TMNNyI+LBXRdQKhaNpXm7KOdxgNQ5WJKrFGdIJQGFbtr1dLRbSJO8E22KuYsosOFLA=
+X-Received: by 2002:a9d:73cd:: with SMTP id m13mr1052186otk.43.1562299495038; 
+ Thu, 04 Jul 2019 21:04:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190703184701.4f93d776@martins.ozlabs.org>
- <20190703185302.00e2b627@martins.ozlabs.org>
-In-Reply-To: <20190703185302.00e2b627@martins.ozlabs.org>
-Date: Fri, 5 Jul 2019 13:52:33 +1000
-Message-ID: <CAJ+X7mT9yad=PyOqrbOMaddgJa1GVDq1xBr19hjYqQEvbAkPZQ@mail.gmail.com>
-Subject: Re: [PATCH] CTDB onnode simplifications
+References: <20190701171437.337d5c2f@martins.ozlabs.org>
+In-Reply-To: <20190701171437.337d5c2f@martins.ozlabs.org>
+Date: Fri, 5 Jul 2019 14:04:43 +1000
+Message-ID: <CAJ+X7mQKjxeCTpSLH0K+v0DKyQuRZD800hVL=cUZyMXOpt-OwQ@mail.gmail.com>
+Subject: Re: [PATCH] CTDB csbuild fixups
 To: Martin Schwenke <martin@meltin.net>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
@@ -74,22 +73,20 @@ Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jul 3, 2019 at 6:53 PM Martin Schwenke via samba-technical
+On Mon, Jul 1, 2019 at 5:16 PM Martin Schwenke via samba-technical
 <samba-technical@lists.samba.org> wrote:
 >
-> On Wed, 3 Jul 2019 18:47:01 +1000, Martin Schwenke <martin@meltin.net>
-> wrote:
+> Lots of csbuild-related CTDB fixups.
 >
-> > Simplify and drop output filtering in onnode.  This avoids onnode
-> > hanging in many circumstances when a backgrounded process has stdout
-> > open.
-> >
-> > https://gitlab.com/samba-team/samba/merge_requests/606
-> >
-> > Please review and maybe push...
+> This is also GitLab merge request:
 >
-> New patch attached that also removed the documentation for the onnode
-> -o option.
+>   https://gitlab.com/samba-team/samba/merge_requests/578
+>
+> with CI pipeline:
+>
+>   https://gitlab.com/samba-team/devel/samba/pipelines/68715416
+>
+> Please review and maybe push...
 >
 > peace & happiness,
 > martin
