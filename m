@@ -2,77 +2,40 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73B7C62CAF
-	for <lists+samba-technical@lfdr.de>; Tue,  9 Jul 2019 01:34:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6FF763423
+	for <lists+samba-technical@lfdr.de>; Tue,  9 Jul 2019 12:21:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=nqRuM0StNnmtFJpBrdeUoCiCUgLbNQ0zXk53ILsrFfk=; b=qI4nz5EhvkdJsDQIuzCm+OzM/B
-	vbZLP+i6Ggkfe1u9qBP5mk7X5J+Z+c2iBjsTrfmc8/DjauPslI5MHNH79Hnu+KXnPHzKL2ZRKd9MC
-	VUc/XQygu1BvxkHE+9ERj2EzCNvI7ihZMxI9XoSos3gAek5ZEAuKDOLvgPKx+hsQo6GD2y2AEWNBk
-	H+8ZN/tWgOugGFft3VbGqe1mD3BbaUjP0piZX3LIAClUHu7rlAxs86WfmyalUosm6SaQ+lNmya40A
-	1P4ZGrzmpo323kL3hCYVD9jk1Fkx9DcU5A4RfFyB/Zidd8r+4gE68efc3Jl9XcFtpa18zvk4Bsc5V
-	F7Cb9U9g==;
-Received: from localhost ([::1]:37208 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=e4yc1HiWzSdsXUefrC3gfmc+ALg4aIiVnwDCeKSpyYI=; b=2cLso9MkQkzPrAsrBBJxECnKHH
+	ytwn5SLAXaFcU36q1M/FTyk9BVbxrrawpawo947QvASQIvVzdfE7KaFBL7+U8i9sRgQC1VTrw6CbY
+	DqFKZ0IL2MxKmOhyMedQdnAMvS1GyjW7extMfwgN0eZrb2cLQLVFeB4nSgzr5QtkoSRL7HbAvTyb0
+	415HdTRnsTCj7/p9arO04wFbzHML/+B2gKPdybNvsCdJVxW8+YYJ/aOYIzaoNfIfv+Qy4OTmeIbjr
+	sZ0EXrQJRVqEVciLPgRJBbWgyaLzs3PiW2JhXhHAifA2hHLHRcKO86MycZ6hrnovgpSSlVPbBC3co
+	Yx33s2ZQ==;
+Received: from localhost ([::1]:18086 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hkd94-005vsn-Ve; Mon, 08 Jul 2019 23:34:07 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:50896) 
+	id 1hknF8-0061Da-FH; Tue, 09 Jul 2019 10:21:02 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42652) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hkd8x-005vsg-6p
- for samba-technical@lists.samba.org; Mon, 08 Jul 2019 23:34:04 +0000
-Received: from [IPv6:2404:130:0:1000:ed06:1c1d:e56c:b595] (unknown
- [IPv6:2404:130:0:1000:ed06:1c1d:e56c:b595])
- (Authenticated sender: timbeale@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id C9A91810D0; 
- Tue,  9 Jul 2019 11:33:27 +1200 (NZST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1562628807;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references:openpgp:openpgp;
- bh=4dkM4Rev+gdJgk8X9ZTbuPFBkOeh4alN0cvXywcYhBs=;
- b=qs48bJypQAFbza4GTphf4vNjnyVH9HxqxENE6gxCMRgK7JWdrOhOGFuPxf/VdlNiqnCXDH
- 4SnXTNGHop75FFkeQMcqFvx7niqw61xPSaHYt8zaClJ/GoGHqsDK2AtqLTHkdQ9qOSa5Xy
- ROHJWM0woz7GCCioJitUd8fHsxqpUFOMNcd9JYzCiERxk53BgTm3tv5RQwlgX39bnMFDJi
- rfldtlTe3Iyat9xmuiFkTOXOmCbH3NSKFVo8WJBnxNGctd0bFIXnoMZn7nxQNW0Ab75oIi
- V7xq8tQapht1kQJ1oGHlGJmCRVggh4c/s7wb4EfCd8ZHi+7t/YBPHzusUCLQEw==
-Subject: Re: Pipeline failing {Timed out (120 sec) waiting for
- dns_update_cache PID 22244 at
- /tmp/samba-testbase/b22/samba-ad-dc-backup/selftest/target/Samba4.pm line
- 279}
-To: Amit Kumar <amitkuma@redhat.com>, samba-technical@lists.samba.org
-References: <9e8b94a3-b30b-f5b1-9f36-54af672b2b61@redhat.com>
-Openpgp: preference=signencrypt
-Message-ID: <7ea375cc-7e24-71cf-e270-1277b0bca3c3@catalyst.net.nz>
-Date: Tue, 9 Jul 2019 11:33:27 +1200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.2
+ (Exim) id 1hknEs-0061Cu-Ff; Tue, 09 Jul 2019 10:20:49 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:To:From:Date:CC;
+ bh=e4yc1HiWzSdsXUefrC3gfmc+ALg4aIiVnwDCeKSpyYI=; b=RM5kry+jVec+lhrRz8Myrmj0kF
+ pcsior8ZXvbJYSw7fULt8/Rz0M2ouo/vJinuSgYFrNMerVRezjN2MPrCLApKvaCyOphyYsJlX43I9
+ AVGTlAFjqNZEG/5FjLGuyh/l/MBazIkTLzlaYaD7qMxamgoaXcn87O0bzj4ho5rQwXaU=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hknEr-0001vy-PC; Tue, 09 Jul 2019 10:20:45 +0000
+Date: Tue, 9 Jul 2019 12:20:44 +0200
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.11.0rc1 Available for Download
+Message-ID: <20190709102041.GA17245@carrie2>
 MIME-Version: 1.0
-In-Reply-To: <9e8b94a3-b30b-f5b1-9f36-54af672b2b61@redhat.com>
-Content-Language: en-US
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1562628808;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references:openpgp:openpgp;
- bh=4dkM4Rev+gdJgk8X9ZTbuPFBkOeh4alN0cvXywcYhBs=;
- b=kZxl6cvJQRxl+1pqXG3Sy6kbqOep7UXynQjp+q7OHSH7IP8/ITVBi8CRXCBw2ohkxFHTV7
- zOwG3ioJXdY/ir/fqfAlrJZT/wxjsmwj4edJAqj80skKGLcEKVLqm5GHdspjeWKEOilxt2
- JyT7Luk2jA4fTqLim0/HUzrAap4vny7JIR8S5Qg5+vo2FcpDg+3R10eWcmxs3bMK27jujZ
- LV7DLtocJOYIG+p756mTyWZmILisjRDed1T7t9igmvF9vYfZmNP1hjNnKU5WqHwkT1bp/C
- SA1xOdoxoAXKZ8ZdqF23QK+KRUkozH1n+UWfNkt/KeOkdti1d4DkTEyPb1E8Xg==
-ARC-Seal: i=1; s=default; d=catalyst.net.nz; t=1562628808; a=rsa-sha256;
- cv=none;
- b=faZ3o+Ew7BtnQQpKjlF/KMcC3dowOJrCKX4KTdhCcTfkBofcgsq2dhVtY9U7MUkobWgubs
- SPfYflkX4eQ8gjI3/LMicfRWyVdnyy92rHfnVExUy3AABiS3Tdvpg522pWfEtOz89eF6CS
- yh66imo3He63KM6evI91NDtftceVSfPTumTnJLxYRm3WFZtXHAZTFgR0RSLlddDQ/bhbme
- 8i1CI0gO95gNn+wUQOzG5ANTLybQIAljIfurW3XhbcpiAf++59F9/A3FIUjcsCF4is/84d
- gJTtGbJafmIFqBiAod9MF+Jbasftt9uP2rG8Mi/MM+3xEaZpc7MLRA2gQKxkKw==
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=timbeale@catalyst.net.nz
- smtp.mailfrom=timbeale@catalyst.net.nz
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="EVF5PPMfhYS0aIcm"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,298 +49,400 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tim Beale via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Tim Beale <timbeale@catalyst.net.nz>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Try rebasing. This should be fixed by
-https://gitlab.com/samba-team/samba/commit/98e34c299ddd8b24f3daeeafe45ab136ad015a47
 
-The downside to this change is the autobuild job now uses a private CI
-runner, so it will no longer run at all (pass nor fail) on your private
-fork of the samba repo.
+--EVF5PPMfhYS0aIcm
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-To run the full set of CI tests, including the jobs that require a
-private CI runner, you can either:
-- Push your branch to https://gitlab.com/samba-team/devel/samba - see
-https://wiki.samba.org/index.php/Samba_CI_on_gitlab#Other_Samba_developers
-- Register your own gitlab runner
-https://wiki.samba.org/index.php/CI_using_Your_own_gitlab_runner
+Release Announcements
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-On 8/07/19 11:44 PM, Amit Kumar via samba-technical wrote:
-> Hello,
->
-> https://gitlab.com/amitkuma/samba/pipelines/68302609
->
-> xattr_tdb_fsetxattr() failed to get vfs_handle->data!
-> xattr_tdb_fremovexattr() failed to get vfs_handle->data!
-> xattr_tdb_fgetxattr() failed to get vfs_handle->data!
-> xattr_tdb_fgetxattr() failed to get vfs_handle->data!
-> xattr_tdb_fgetxattr() failed to get vfs_handle->data!
-> xattr_tdb_fgetxattr() failed to get vfs_handle->data!
-> xattr_tdb_fgetxattr() failed to get vfs_handle->data!
-> xattr_tdb_getxattr() failed to get vfs_handle->data!
-> xattr_tdb_fgetxattr() failed to get vfs_handle->data!
-> xattr_tdb_fgetxattr() failed to get vfs_handle->data!
-> xattr_tdb_fsetxattr() failed to get vfs_handle->data!
-> samba version 4.11.0pre1-DEVELOPERBUILD started.
-> Copyright Andrew Tridgell and the Samba Team 1992-2019
-> binary_smbd_main: samba PID 22244 was called with maxruntime 18000 -
-> current ts 1562585024
-> binary_smbd_main: samba: using 'prefork' process model
-> Attempting to autogenerate TLS self-signed keys for https for hostname
-> 'LABDC.labdom.samba.example.com'
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/smbd: Failed to create
-> /tmp/samba-testbase/b22/prefix/samba-ad-dc-backup/var/cores for user 0
-> with mode 0700
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/smbd: Unable to setup
-> corepath for smbd: No such file or directory
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/smbd: smbd version
-> 4.11.0pre1-DEVELOPERBUILD started.
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/smbd: Copyright Andrew
-> Tridgell and the Samba Team 1992-2019
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/winbindd: Failed to
-> create /tmp/samba-testbase/b22/prefix/samba-ad-dc-backup/var/cores for
-> user 0 with mode 0700
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/winbindd: Unable to setup
-> corepath for winbindd: No such file or directory
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/winbindd: Failed to
-> create /tmp/samba-testbase/b22/prefix/samba-ad-dc-backup/var/cores for
-> user 0 with mode 0700
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/winbindd: Unable to setup
-> corepath for winbindd: No such file or directory
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/winbindd: winbindd
-> version 4.11.0pre1-DEVELOPERBUILD started.
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/winbindd: Copyright
-> Andrew Tridgell and the Samba Team 1992-2019
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/smbd: INFO: Profiling
-> turned OFF from pid 22256
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/winbindd:
-> initialize_winbindd_cache: clearing cache and re-creating with version
-> number 2
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/winbindd: daemon_ready:
-> daemon 'winbindd' finished starting up and ready to serve connections
-> TLS self-signed keys generated OK
-> Doing a full scan on
-> DC=ForestDnsZones,DC=labdom,DC=samba,DC=example,DC=com and looking for
-> deleted objects
-> Doing a full scan on
-> DC=DomainDnsZones,DC=labdom,DC=samba,DC=example,DC=com and looking for
-> deleted objects
-> Doing a full scan on DC=labdom,DC=samba,DC=example,DC=com and looking
-> for deleted objects
-> Doing a full scan on
-> CN=Configuration,DC=labdom,DC=samba,DC=example,DC=com and looking for
-> deleted objects
-> dnsupdate_nameupdate_done: Failed DNS update with exit code 110
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/smbd: Test dummy executed!
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/smbd: daemon_ready:
-> daemon 'smbd' finished starting up and ready to serve connections
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/bin/smbd: Failed to fetch record!
-> dnsupdate_nameupdate_done: Failed DNS update with exit code 110
-> ../../source4/dsdb/dns/dns_update.c:354: Failed SPN update - with error
-> code 110
-> samba_parent_shutdown: samba_shutdown of samba 22244: from 22341
-> samba child process 22244 exited with value 0
-> Timed out (120 sec) waiting for dns_update_cache PID 22244 at
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/selftest/target/Samba4.pm
-> line 279.
-> Samba 22244 failed to start up at
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/selftest/target/Samba4.pm
-> line 161.
-> failed to start up environment 'labdc' at
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/selftest/target/Samba.pm line 88.
-> samba can't start up known environment 'labdc' at
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/selftest/selftest.pl line 883.
->
-> ==> /builds/amitkuma/samba/samba-ad-dc-backup.stdout <==
-> [11(84)/49 at 19m50s] samba4.blackbox.ldapcmp_restore(labdc)
-> ERROR: Testsuite[samba4.blackbox.ldapcmp_restore(labdc)]
-> REASON: unable to set up environment labdc - exiting
->
->
->
-> FAILED (0 failures, 0 errors and 0 unexpected successes in 1 testsuites)
->
-> A summary with detailed information can be found in:
->   ./bin/ab/summary
->
-> ==> /builds/amitkuma/samba/samba-ad-dc-backup.stderr <==
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/selftest/selftest.pl:
-> PID[19750]: Got SIGPIPE teardown environments.
-> teardown_env(backupfromdc)
-> samba_parent_shutdown: samba_shutdown of samba 19929: from 22342
-> samba child process 19929 exited with value 0
-> SAMBA LOG of: BACKUPFROMDC pid 19929
-> Doing a full scan on
-> DC=ForestDnsZones,DC=backupdom,DC=samba,DC=example,DC=com and looking
-> for deleted objects
-> Doing a full scan on
-> DC=DomainDnsZones,DC=backupdom,DC=samba,DC=example,DC=com and looking
-> for deleted objects
-> Doing a full scan on
-> CN=Configuration,DC=backupdom,DC=samba,DC=example,DC=com and looking for
-> deleted objects
-> Doing a full scan on DC=backupdom,DC=samba,DC=example,DC=com and looking
-> for deleted objects
-> python3: WARNING: The "server schannel" option is deprecated
-> python3: WARNING: The "server schannel" option is deprecated
-> python3: WARNING: The "server schannel" option is deprecated
-> python3: WARNING: The "server schannel" option is deprecated
-> samba_parent_shutdown: samba_shutdown of samba 19929: from 22342
-> teardown_env(restoredc)
-> samba_parent_shutdown: samba_shutdown of samba 20574: from 22343
-> samba child process 20574 exited with value 0
-> SAMBA LOG of: RESTOREDC pid 20574
-> samba_parent_shutdown: samba_shutdown of samba 20574: from 22343
-> teardown_env(ad_dc_backup)
-> samba_parent_shutdown: samba_shutdown of samba 21024: from 22344
-> samba child process 21024 exited with value 0
-> SAMBA LOG of: ADDC pid 21024
-> python3: WARNING: The "server schannel" option is deprecated
-> python3: WARNING: The "server schannel" option is deprecated
-> python3: WARNING: The "server schannel" option is deprecated
-> python3: WARNING: The "server schannel" option is deprecated
-> samba_parent_shutdown: samba_shutdown of samba 21024: from 22344
-> teardown_env(renamedc)
-> samba_parent_shutdown: samba_shutdown of samba 20317: from 22345
-> samba child process 20317 exited with value 0
-> SAMBA LOG of: RENAMEDC pid 20317
-> samba_parent_shutdown: samba_shutdown of samba 20317: from 22345
-> teardown_env(offlinebackupdc)
-> samba_parent_shutdown: samba_shutdown of samba 20063: from 22346
-> samba child process 20063 exited with value 0
-> SAMBA LOG of: OFFLINEBACKUPDC pid 20063
-> dnsupdate_nameupdate_done: Failed DNS update with exit code 110
-> ../../source4/dsdb/dns/dns_update.c:354: Failed SPN update - with error
-> code 110
-> samba_parent_shutdown: samba_shutdown of samba 20063: from 22346
-> perl(19750)-+-pstree(22347)
->             `-python3(19762)-+-sh(19764)---tee(19765)
->                              `-{python3}(19770)
-> /tmp/samba-testbase/b22/samba-ad-dc-backup/selftest/selftest.pl:
-> PID[19750]: Exiting...
-> dns_hub: after poll()
-> dns_hub: after serve_forever()
-> dns_hub: before exit()
->
-> ==> /builds/amitkuma/samba/samba-ad-dc-backup.stdout <==
-> TOP 10 slowest tests
-> samba4.blackbox.ldapcmp_restore(labdc) -> 1562584978
-> samba.tests.domain_backup(ad_dc_backup:local) -> 535
-> samba.tests.domain_backup(restoredc:local) -> 393
-> samba.tests.samba_tool.gpo(offlinebackupdc:local) -> 30
-> samba.tests.samba_tool.gpo(restoredc:local) -> 28
-> samba.tests.samba_tool.gpo(renamedc:local) -> 26
-> samba4.blackbox.ldapcmp_restore(offlinebackupdc) -> 7
-> samba4.blackbox.ldapcmp_restore(renamedc) -> 4
-> samba4.blackbox.ldapcmp_restore(restoredc) -> 4
-> samba.tests.ntacls_backup(restoredc:local) -> 3
-> ERROR: test failed with exit code 1
-> Makefile:16: recipe for target 'test' failed
->
-> ==> /builds/amitkuma/samba/samba-ad-dc-backup.stderr <==
-> make: *** [test] Error 1
-> samba-ad-dc-backup: [test] failed 'make test FAIL_IMMEDIATELY=1
-> TESTS='--include-env=backupfromdc --include-env=restoredc
-> --include-env=renamedc --include-env=offlinebackupdc --include-env=labdc
-> --include-env=ad_dc_backup'' with status 2
-> waiting for tail to flush
-> Running: 'uname -a' in '.'
-> Running: 'lsb_release -a' in '.'
-> No LSB modules are available.
-> Running: 'free' in '.'
-> Running: 'mount' in '.'
-> Running: 'cat /proc/cpuinfo' in '.'
-> Running: 'cc --version' in '.'
-> Running: 'df -m .' in '.'
-> Running: 'df -m /tmp/samba-testbase/b22' in '.'
->
->
-> ####################################################################
->
-> AUTOBUILD FAILURE
->
-> Your autobuild[master] on runner-72989761-project-10891704-concurrent-0
-> failed after 40.2 minutes
-> when trying to test samba-ad-dc-backup with the following error:
->
->    samba-ad-dc-backup: [test] failed 'make test FAIL_IMMEDIATELY=1
-> TESTS='--include-env=backupfromdc --include-env=restoredc
-> --include-env=renamedc --include-env=offlinebackupdc --include-env=labdc
-> --include-env=ad_dc_backup'' with status 2
->
-> the autobuild has been abandoned. Please fix the error and resubmit.
->
-> ####################################################################
->
->
-> samba-ad-dc-backup: [test] failed 'make test FAIL_IMMEDIATELY=1
-> TESTS='--include-env=backupfromdc --include-env=restoredc
-> --include-env=renamedc --include-env=offlinebackupdc --include-env=labdc
-> --include-env=ad_dc_backup'' with status 2
-> Logs in logs.tar.gz
-> Running after script...
-> $ mount
-> overlay on / type overlay
-> (rw,relatime,lowerdir=/var/lib/docker/overlay2/l/U35P5WVEUM72UPBJDR3WCE3GY5:/var/lib/docker/overlay2/l/2FRVSJZNAJOAPKUM2FAZ524X37:/var/lib/docker/overlay2/l/5NXTSYZT4AVJR4JKASTCH6N3WA:/var/lib/docker/overlay2/l/ZA7TPER5DWRRQZ3HZGVYDDA3WY:/var/lib/docker/overlay2/l/FFNIQI5VO7TLYRV64CK77BJKSF:/var/lib/docker/overlay2/l/P72OZWKNPCKL5IH3762WP2XOIB:/var/lib/docker/overlay2/l/DPOLKGENUA5UOFBSTUXN6STXOK:/var/lib/docker/overlay2/l/BNNKFTW7362WZ23RQ32BEFIWYL:/var/lib/docker/overlay2/l/ANBYYSSAMHDZIV662RZLK2XNF5,upperdir=/var/lib/docker/overlay2/25018cae65d533db33b10bf9d4668ebca686cac375318674316718f9a4dedf95/diff,workdir=/var/lib/docker/overlay2/25018cae65d533db33b10bf9d4668ebca686cac375318674316718f9a4dedf95/work)
-> proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
-> tmpfs on /dev type tmpfs (rw,nosuid,seclabel,size=65536k,mode=755)
-> devpts on /dev/pts type devpts
-> (rw,nosuid,noexec,relatime,seclabel,gid=5,mode=620,ptmxmode=666)
-> sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime,seclabel)
-> tmpfs on /sys/fs/cgroup type tmpfs
-> (rw,nosuid,nodev,noexec,relatime,seclabel,mode=755)
-> cgroup on /sys/fs/cgroup/systemd type cgroup
-> (rw,nosuid,nodev,noexec,relatime,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd)
-> cgroup on /sys/fs/cgroup/cpu,cpuacct type cgroup
-> (rw,nosuid,nodev,noexec,relatime,cpu,cpuacct)
-> cgroup on /sys/fs/cgroup/cpuset type cgroup
-> (rw,nosuid,nodev,noexec,relatime,cpuset)
-> cgroup on /sys/fs/cgroup/memory type cgroup
-> (rw,nosuid,nodev,noexec,relatime,memory)
-> cgroup on /sys/fs/cgroup/devices type cgroup
-> (rw,nosuid,nodev,noexec,relatime,devices)
-> cgroup on /sys/fs/cgroup/hugetlb type cgroup
-> (rw,nosuid,nodev,noexec,relatime,hugetlb)
-> cgroup on /sys/fs/cgroup/perf_event type cgroup
-> (rw,nosuid,nodev,noexec,relatime,perf_event)
-> cgroup on /sys/fs/cgroup/net_cls,net_prio type cgroup
-> (rw,nosuid,nodev,noexec,relatime,net_cls,net_prio)
-> cgroup on /sys/fs/cgroup/pids type cgroup
-> (rw,nosuid,nodev,noexec,relatime,pids)
-> cgroup on /sys/fs/cgroup/freezer type cgroup
-> (rw,nosuid,nodev,noexec,relatime,freezer)
-> cgroup on /sys/fs/cgroup/blkio type cgroup
-> (rw,nosuid,nodev,noexec,relatime,blkio)
-> mqueue on /dev/mqueue type mqueue (rw,nosuid,nodev,noexec,relatime,seclabel)
-> /dev/sda9 on /builds type ext4 (rw,relatime,seclabel)
-> /dev/sda9 on /etc/resolv.conf type ext4 (rw,relatime,seclabel)
-> /dev/sda9 on /etc/hostname type ext4 (rw,relatime,seclabel)
-> /dev/sda9 on /etc/hosts type ext4 (rw,relatime,seclabel)
-> shm on /dev/shm type tmpfs
-> (rw,nosuid,nodev,noexec,relatime,seclabel,size=65536k)
-> /dev/sda9 on /sys/devices/virtual/dmi/id type ext4 (ro,relatime,seclabel)
-> $ df -h
-> Filesystem      Size  Used Avail Use% Mounted on
-> overlay          22G  8.1G   13G  39% /
-> tmpfs            64M     0   64M   0% /dev
-> tmpfs           1.9G     0  1.9G   0% /sys/fs/cgroup
-> /dev/sda9        22G  8.1G   13G  39% /builds
-> shm              64M     0   64M   0% /dev/shm
-> $ cat /proc/swaps
-> Filename                Type        Size    Used    Priority
-> /var/vm/swapfile1                       file        2097148    310784    -2
-> $ free -h
->               total        used        free      shared  buff/cache  
-> available
-> Mem:           3.6G        303M        3.0G        122M       
-> 282M        3.0G
-> Swap:          2.0G        303M        1.7G
-> ERROR: Job failed: exit code 1
->
-> Thanks
-> Amit
->
->
+This is the first release candidate of Samba 4.11.  This is *not*
+intended for production environments and is designed for testing
+purposes only.  Please report any defects via the Samba bug reporting
+system at https://bugzilla.samba.org/.
+
+Samba 4.11 will be the next version of the Samba suite.
+
+
+UPGRADING
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+SMB1 is disabled by default
+---------------------------
+
+The defaults of 'client min protocol' and 'server min protocol'
+have been changed to SMB2_02.
+
+This means clients without support for SMB2 or SMB3 are no longer
+able to connect to smbd (by default).
+
+It also means client tools like smbclient and other,
+as well as applications making use of libsmbclient are no longer
+able to connect to servers without SMB2 or SMB3 support (by default).
+
+It's still possible to allow SMB1 dialects, e.g. NT1, LANMAN2
+and LANMAN1 for client and server, as well as CORE and COREPLUS on
+the client.
+
+Note that most commandline tools e.g. smbclient, smbcacls and others
+also support the --option argument to overwrite smb.conf options,
+e.g. --option=3D'client min protocol=3DNT1' might be useful.
+
+As Microsoft no longer installs SMB1 support in recent releases
+or uninstalls it after 30 days without usage, the Samba Team
+tries to get remove the SMB1 usage as much as possible.
+
+SMB1 is officially deprecated and might be removed step by step
+in the following years. If you have a strong requirement for SMB1
+(except for supporting old Linux Kernels), please file a bug
+at https://bugzilla.samba.org and let us know about the details.
+
+NEW FEATURES/CHANGES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+Default samba process model
+---------------------------
+
+The default for the --model argument passed to the samba executable has cha=
+nged
+=66rom 'standard' to 'prefork'. This means a difference in the number of sa=
+mba
+child processes that are created to handle client connections. The previous
+default would create a separate process for every LDAP or NETLOGON client
+connection. For a network with a lot of persistent client connections, this
+could result in significant memory overhead.  Now, with the new default of
+'prefork', the LDAP, NETLOGON, and KDC services will create a fixed number =
+of
+worker processes at startup and share the client connections amongst these
+workers. The number of worker processes can be configured by the 'prefork
+children' setting in the smb.conf (the default is 4).
+
+Authentication Logging.
+-----------------------
+
+Winbind now logs PAM_AUTH and NTLM_AUTH events, a new attribute "logonId" h=
+as
+been added to the Authentication JSON log messages.  This contains a random
+logon id that is generated for each PAM_AUTH and NTLM_AUTH request and is p=
+assed
+to SamLogon, linking the windbind and SamLogon requests.
+
+The serviceDescription of the messages is set to "winbind", the authDescrip=
+tion
+is set to one of:
+   "PASSDB, <command>, <pid>"
+   "PAM_AUTH, <command>, <pid>"
+   "NTLM_AUTH, <command>, <pid>"
+where:
+   <command> is the name of the command makinmg the winbind request i.e. wb=
+info
+   <pid>     is the process id of the requesting process.
+
+The version of the JSON Authentication messages has been changed to 1.2 fro=
+m 1.1
+
+LDAP referrals
+--------------
+
+The scheme of returned LDAP referrals now reflects the scheme of the origin=
+al
+request, i.e. referrals received via ldap are prefixed with "ldap://"
+and those over ldaps are prefixed with "ldaps://"
+
+Previously all referrals were prefixed with "ldap://"
+
+Bind9 logging
+-------------
+
+It is now possible to log the duration of DNS operations performed by Bind9
+This should aid future diagnosis of performance issues, and could be used to
+monitor DNS performance. The logging is enabled by setting log level to
+"dns:10" in smb.conf
+
+The logs are currently Human readable text only, i.e. no JSON formatted out=
+put.
+
+Log lines are of the form:
+
+    <function>: DNS timing: result: [<result>] duration: (<duration>)
+    zone: [<zone>] name: [<name>] data: [<data>]
+
+    durations are in microseconds.
+
+Default schema updated to 2012_R2
+---------------------------------
+
+Default AD schema changed from 2008_R2 to 2012_R2.  2012_R2 functional level
+is not yet available.  Older schemas can be used by provisioning with the
+'--base-schema' argument.  Existing installations can be updated with the
+samba-tool command "domain schemaupgrade".
+
+Samba's replication code has also been improved to handle replication
+with the 2012 schema (the core of this replication fix has also been
+backported to 4.9.11 and will be in a 4.10.x release).
+
+GnuTLS 3.2 required
+-------------------
+
+Samba is making efforts to remove in-tree cryptographic functionality,
+and to instead rely on externally maintained libraries.  To this end,
+Samba has chosen GnuTLS as our standard cryptographic provider.
+
+Samba now requires GnuTLS 3.2 to be installed (including development
+headers at build time) for all configurations, not just the Samba AD
+DC.
+
+NOTE WELL: The use of GnuTLS means that Samba will honour the
+system-wide 'FIPS mode' (a reference to the US FIPS-140 cryptographic
+standard) and so will not operate in many still common situations if
+this system-wide parameter is in effect, as many of our protocols rely
+on outdated cryptography.
+
+A future Samba version will mitigate this to some extent where good
+cryptography effectively wraps bad cryptography, but for now that above
+applies.
+
+samba-tool improvements
+-----------------------
+
+A new "samba-tool contact" command has been added to allow the
+command-line manipulation of contacts, as used for address book
+lookups in LDAP.
+
+The "samba-tool [user|group|computer|group|contact] edit" command has been
+improved to operate more pleasantly on international character sets.
+
+100,000 USER and LARGER Samba AD DOMAINS
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+Extensive efforts have been made to optimise Samba for use in
+organisations (for example) targeting 100,000 users, plus 120,000
+computer objects, as well as large number of group memberships.
+
+Many of the specific efforts are detailed below, but the net results
+is to remove barriers to significantly larger Samba deployments
+compared to previous releases.
+
+Reindex performance improvements
+--------------------------------
+
+The performance of samba-tool dbcheck --reindex has been improved,
+especially for large domains.
+
+join performance improvements
+-----------------------------
+
+The performance of samba-tool domain join has been improved,
+especially for large domains.
+
+LDAP Server memory improvements
+-------------------------------
+
+The LDAP server has improved memory efficiency, ensuring that large
+LDAP responses (for example a search for all objects) is not copied
+multiple times into memory.
+
+Setting lmdb map size
+---------------------
+
+It is now possible to set the lmdb map size (The maximum permitted
+size for the database).  "samba-tool" now accepts the
+"--backend-store-size" i.e. --backend-store-size=3D4Gb.  If not
+specified it defaults to 8Gb.
+
+This option is avaiable for the following sub commands:
+ * domain provision
+ * domain join
+ * domain dcpromo
+ * drs clone-dc-database
+
+LDB "batch_mode"
+----------------
+
+To improve performance during batch operations i.e. joins, ldb now
+accepts a "batch_mode" option.  However to prevent any index or
+database inconsistencies if an operation fails, the entire transaction
+will be aborted at commit.
+
+New LDB pack format
+-------------------
+
+On first use (startup of 'samba' or the first transaction write)
+Samba's sam.ldb will be updated to a new more efficient pack format.
+This will take a few moments.
+
+New LDB <=3D and >=3D index mode to improve replication performance
+---------------------------------------------------------------
+
+As well as a new pack format, Samba's sam.ldb uses a new index format
+allowing Samba to efficiently select objects changed since the last
+replication cycle.  This in turn improves performance during
+replication of large domains.
+
+https://wiki.samba.org/index.php/LDB_Greater_than_and_Less_than_indexing
+
+Improvements to ldb search performance
+--------------------------------------
+
+Search performance on large LDB databases has been improved by
+reducing memory allocations made on each object.
+
+Improvements to subtree rename performance
+------------------------------------------
+
+Improvements have been made to Samba's handling of subtree renames,
+for example of containers and organisational units, however large
+renames are still not recommended.
+
+CTDB changes
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+* nfs-linux-kernel-callout now defaults to using systemd service names
+
+  The Red Hat service names continue to be the default.
+
+  Other distributions should patch this file when packaging it.
+
+* The onnode -o option has been removed
+
+* ctdbd logs when it is using more than 90% of a CPU thread
+
+  ctdbd is single threaded, so can become saturated if it uses the
+  full capacity of a CPU thread.  To help detect this situation, ctdbd
+  now logs messages when CPU utilisation exceeds 90%.  Each change in
+  CPU utilisation over 90% is logged.  A message is also logged when
+  CPU utilisation drops below the 90% threshold.
+
+* Script configuration variable CTDB_MONITOR_SWAP_USAGE has been removed
+
+  05.system.script now monitors total memory (i.e. physical memory +
+  swap) utilisation using the existing CTDB_MONITOR_MEMORY_USAGE
+  script configuration variable.
+
+
+REMOVED FEATURES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+Web server
+----------
+
+As a leftover from work related to the Samba Web Administration Tool (SWAT),
+Samba still supported a Python WSGI web server (which could still be turned=
+ on
+=66rom the 'server services' smb.conf parameter). This service was unused a=
+nd has
+now been removed from Samba.
+
+
+samba-tool join subdomain
+-------------------------
+
+The subdomain role has been removed from the join command.  This option did
+not work and has no tests.
+
+
+Python2 support
+---------------
+
+Samba 4.11 will not have any runtime support for Python 2.
+
+If you are building Samba using the '--disable-python' option
+(i.e. you're excluding all the run-time Python support), then this
+will continue to work on a system that supports either python2 or
+python3.
+
+To build Samba with python2 you *must* set the 'PYTHON' environment
+variable for both the 'configure' and 'make' steps, i.e.
+   'PYTHON=3Dpython2 ./configure'
+   'PYTHON=3Dpython2 make'
+This will override the python3 default.
+
+Except for this specific build-time use of python2, Samba now requires
+Python 3.4 as a minimum.
+
+smb.conf changes
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+  Parameter Name                     Description                Default
+  --------------                     -----------                -------
+
+  allocation roundup size            Default changed/           0
+                                     Deprecated
+  client min protocol                Changed default            SMB2_02
+  server min protocol                Changed default            SMB2_02
+  mangled names                      Changed default            illegal
+  web port                           Removed
+  fruit:zero_file_id                 Changed default            False
+
+
+KNOWN ISSUES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.11#Release_bl=
+ocking_bugs
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/rc/
+
+The release notes are available online at:
+
+        https://download.samba.org/pub/samba/rc/samba-4.11.0rc1.WHATSNEW.txt
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--EVF5PPMfhYS0aIcm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCXSRqdgAKCRAoaL1+KxeT
+UeDRAJ0R6cfVgNPdUzWnxaPzjz3jHdaIwACfdQBNGwFi9JjEz8g8ic+54qiETpQ=
+=Kzg2
+-----END PGP SIGNATURE-----
+
+--EVF5PPMfhYS0aIcm--
+
