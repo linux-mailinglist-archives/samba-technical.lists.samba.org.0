@@ -2,61 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE3896849C
-	for <lists+samba-technical@lfdr.de>; Mon, 15 Jul 2019 09:51:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02969686B0
+	for <lists+samba-technical@lfdr.de>; Mon, 15 Jul 2019 11:55:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=2PPKKiy4TOkySs84erSTaGPrR7iQ7CdeTu3bd/bWAIQ=; b=tbRvCgQ8n/h+FfLkRB7YkBDfEA
-	okPckliYZO0NoIWToloVTHGCjY45H5hBIEV7SMdJWPfIyzVFjMLQtO3GgfY7P1b9D9BSCttsUcwPO
-	KoTGewGjAhg01JWdTHVf/d8VMzhXhqMtW2r/hsQYJ5kicVC4nPKh44OCKfkAa9cv3CsvWX+UM07PU
-	xjoYG10jIExUvqgwM5ymiTiVHbWA0jR4taPoZysUUb/q6Y0fjYUm6wKmpqKNbxlGPdzq2oLYdRvxi
-	nUg/XZxBHxk7A5KRPRX5egE6ZkGV6G74Zi5dPyXJM08HTiRwn6k27wVX9ZvYYe1wK3/Nr4Rf2DZWh
-	x5if8zag==;
-Received: from localhost ([::1]:21222 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=benBHZ3+c3kP9IgTntseYmtj/MDSYwzWU/8xdjR1ISU=; b=lHMUGamDtnf2q47DgKwOh88oim
+	Bwbdr5TtYgLd5lanEXDsNdFCsoOWWciYmzWwi9kIx/B/nfHW22xRw5QDR65YAG9gPMzdPdxlOw6Ls
+	IZciwP06SbsfQrFTWnwBEkw19aUnQW9o20Q8O/nQltiqffB6pl2g9BvyAqbEyXUhrYYk559a6f6ss
+	j5XqieYVv87/ksi/ffvT9wDdK6/GL/QvLVhPaEiYzun3A6LpNb7LOln0Ce/jhIi8tNdcqd1wlKV3n
+	HwIYpmpc/monUY0eAzWA57P6uiLddBJWE/hGgig2WD6WfQz6EGNWZvsP/5jnFeFZXPYppGmsXM1zs
+	Mcm+mkyA==;
+Received: from localhost ([::1]:28452 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hmvl7-006piC-0S; Mon, 15 Jul 2019 07:50:53 +0000
-Received: from mail-yw1-xc43.google.com ([2607:f8b0:4864:20::c43]:45594) 
+	id 1hmxhY-006qsK-KD; Mon, 15 Jul 2019 09:55:20 +0000
+Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229]:42706) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hmvkz-006pi5-MC
- for samba-technical@lists.samba.org; Mon, 15 Jul 2019 07:50:48 +0000
-Received: by mail-yw1-xc43.google.com with SMTP id m16so7055691ywh.12
- for <samba-technical@lists.samba.org>; Mon, 15 Jul 2019 00:50:44 -0700 (PDT)
+ (Exim) id 1hmxhK-006qsD-VI
+ for samba-technical@lists.samba.org; Mon, 15 Jul 2019 09:55:10 +0000
+Received: by mail-lj1-x229.google.com with SMTP id t28so15500307lje.9
+ for <samba-technical@lists.samba.org>; Mon, 15 Jul 2019 02:55:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=2PPKKiy4TOkySs84erSTaGPrR7iQ7CdeTu3bd/bWAIQ=;
- b=jtFWvSggLjAdlRoLceRlD3L8mhrjoJM+b0hNi6SVyoUIjpIXh+1F1+YFQT/gTco5dG
- YOxQod8ltqERqXGxaHtsPX6i9FbySs8UfKp7XsGbfrYXJWBGYgnA1baouQncNkf4apuu
- QiZzFEcrjgqh2/rbw4fMJ2mE1x8tbTBoWLxa5m7hWHCUP97jGjeL0Yoc5PEplVb4Ocsi
- 0IMYSmkyG/2z7OFEi/xdE4IA+v56nG3HEecfIDojLpKKF9Loav6H1bw4KCprkvAq2fNl
- JbbqfG9sP3mybUuHsb8iDiJBjasVnMssEQALlAHSOBpclwfIaZwZ9SOx6HWFrJnrgCHP
- 3z4g==
+ h=mime-version:from:date:message-id:subject:to;
+ bh=qerQ+/zE3IYPVgaycDXl6dKtCwi5FadlCGP1dty17Tk=;
+ b=beNNMB6MFIfWzbCV1hY++09/gGgVAT0nCSlJ4F5eBMez7xxEVd/cmS78/Wusv97R9E
+ kouMxtk7q8Q63lYFlWt9+ds9tDkiIBbZ7AhX62Rb9lK9Dvz2B1poAaaU3jBxxxEk2PW0
+ dEp1SJpq+e3hJO9YQM0QUTiFF7ZeIxV3NmKYNSEIF3OCq5F6GWtN0dPZ0rqbIl8eigq9
+ 2MVpQ6LGTihnN95YZeFbbBC/HENSz2a0Bd+FBWPSR1IgsSwfYruyPVVQDPnLlhBa1WS8
+ xwT2EgsjTqwuxxoKGwc9sjShrP4iKWwu2P9WeHxWpQJrDdOZTE54HAptBdVpEBUMzXhp
+ Kz+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=2PPKKiy4TOkySs84erSTaGPrR7iQ7CdeTu3bd/bWAIQ=;
- b=Zb+WlhEtfO91/4lzvFFWdL7OMHFoaphrLpEWhH46iHs5nBu610kUz/NQHuaZuEjnSu
- TlyhYIVT+Pzw04Ec9bk1TBj0zunzEMAxwFESiXZL9NHaPb3eR+iWDwsmRCslRbhDt2XR
- dzCCnP5uLTcvn32VCkyKRUhEGsY7lkJDBC1bK8FW7Eilxyuj2xrC26WbLaq/ed6bDqPr
- Nubkv9f/vr2c9GJOGAAUQECRAcDxOK9YlUrAAB6MwLzB05FiWP6JnlksSuJaIgivZg4a
- 0q3F7QwGsUXdprrCyTnHauvhVhsObLQRn/mMP43Vw0gftleE/hlU90v5mYluTkhnf27a
- JWmQ==
-X-Gm-Message-State: APjAAAU6o5dcF9YFpbFhGgbhl4cZUeNkjHI79/qJBVm8H615WRq2NDt9
- fGE4aZrwYHyaH5kwtn0kl7PTrj0+QXnWqP0Vs5nHMZAo
-X-Google-Smtp-Source: APXvYqxlHNixHRSxJaTHsrNyfNsQ/iEjX941UVv5ReMsihu6kuOIKxsk1kVQyd+N4jh7C6Kvt7BZ7YjXMrjrZ/jqRf8=
-X-Received: by 2002:a81:3c12:: with SMTP id j18mr15450493ywa.294.1563177042978; 
- Mon, 15 Jul 2019 00:50:42 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=qerQ+/zE3IYPVgaycDXl6dKtCwi5FadlCGP1dty17Tk=;
+ b=DWMseX/AxipIHuHLaN1CmqaO49cwARRaMsWV8LOzr0st9IJzP3QF/EY8Z2Fv5+57Vv
+ m15TCzSeb++ehayR166RxuX7nyTJZn4BMwDChAYHj5WmY9YQN3zFFyza8b2Ow6QAp1Kj
+ 9AkM3h6UIHxsjriPbx477/wzkJcwwsxt9X9/f1Uk5ywpYljNQltl81iK0e6CFkQQE/q0
+ VOjKNz26s5SL3mxV2AUQdUAHuHwSHR4VxaM0676KOH2aHphWmBhQQt9w86Ihmbt4W7fI
+ GDQdNSiioB2VrhHoyKLT8koMrFZWhbY/QxDEMMmE6nxFthjRTwvTL/zc3v0OSLwOsM7O
+ LVMg==
+X-Gm-Message-State: APjAAAVFVkweze+jOnCdHGQNuIm5T6zVz8qDpUIksIr5D0A50ICIYShm
+ q3LGcNiZN9nTE1id2uzwukgPrtrl3zwuBQjC6rctVWAh
+X-Google-Smtp-Source: APXvYqwoNUlsoBpPrg6LonReqFVDcBRcgsQvO4SjbmJonuUbgf6YDL7cOXIcIk7ub0xNpZ//YyR1upfSzMynK4di9lc=
+X-Received: by 2002:a2e:b047:: with SMTP id d7mr13853935ljl.8.1563184505035;
+ Mon, 15 Jul 2019 02:55:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAH2r5ms8f_wTwBVofvdRF=tNH2NJHvJC6sWYCJyG6E5PVGTwZQ@mail.gmail.com>
- <CAH2r5muC=cEH1u2L+UvSJ8vsrrQ2LV68yojgVYUAP7MDx3Y1Mw@mail.gmail.com>
- <CAH2r5mu0yMPX+JFrWvnciYdWVRxGYgPsSX2UKOj2O70-bxzrsw@mail.gmail.com>
-In-Reply-To: <CAH2r5mu0yMPX+JFrWvnciYdWVRxGYgPsSX2UKOj2O70-bxzrsw@mail.gmail.com>
-Date: Mon, 15 Jul 2019 10:50:31 +0300
-Message-ID: <CAOQ4uxiQC9_OnrdzV+XniFeTDorAe-YHxWEC5c9pT_mxa62JxQ@mail.gmail.com>
-Subject: Re: [SMB3][PATCH] fix copy_file_range when copying beyond end of
- source file
-To: Steve French <smfrench@gmail.com>
+Date: Mon, 15 Jul 2019 10:53:53 +0100
+Message-ID: <CAELK94eSQu3oE_q2FtApsEBTEdpTOhjPTb0642hMpLvmx4kJbg@mail.gmail.com>
+Subject: GSOC 2019 : Improve smbcmp - Week 5
+To: P Mairo via samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,45 +65,18 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Amir Goldstein via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Amir Goldstein <amir73il@gmail.com>
-Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>,
- CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- "Darrick J. Wong" <darrick.wong@oracle.com>
+From: P Mairo via samba-technical <samba-technical@lists.samba.org>
+Reply-To: P Mairo <akoudanilo@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Jul 11, 2019 at 6:19 PM Steve French <smfrench@gmail.com> wrote:
->
-> I noticed that the copy_file_range patches were merged (which is good)
-> - see below.
->
-> Anything else to merge for the changes to cifs.ko that we discussed
-> earlier.
+Hello, here is a summary of my activities for the last week :
+- Implemented PDMLParser class
+- Browsed samba protocols specifications
+- Read a paper about xmldiff algorithm (
+http://ilpubs.stanford.edu:8090/115/1/1995-46.pdf)
+- Started PDML diffs (using xml diff)
+- Worked on specifications about filters
 
-There was the cifs patch that I sent you:
-
-cifs: copy_file_range needs to strip setuid bits and update timestamps
-
-That was not included in Darrick's branch.
-
-> I wasn't sure about the "SMB3: fix copy file when beyond
-> size of source" patch - it may be redundant.  I will need to check
-
-It is redundant, but if you plan to forward a patch to stable, it
-will be easier for you to forward just the CIFS patch, so up to you.
-I am not sure if and when I will get to testing and forwarding
-copy_file_range patches to stable. Not sure it makes sense.
-
-> with current mainline.  Anything else needed for the enabling of
-> copy_file_range cross mount etc.
-
-The mtime update patch is not *needed* for enabling of
-copy_file_range cross mount. It is a correctness patch.
-So copy_file_range cross mount should work in mainline
-with cifs as long as other cifs related bugs have been fixed.
-
-Thanks,
-Amir.
-
+-- 
+https://github.com/RMPR
