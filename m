@@ -2,58 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 160C86CA2D
-	for <lists+samba-technical@lfdr.de>; Thu, 18 Jul 2019 09:44:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 711B06CA38
+	for <lists+samba-technical@lfdr.de>; Thu, 18 Jul 2019 09:47:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=VbD6G2Vui/H+PCrLj8p7MaQjbXtP2nP/ReK20uQTZEw=; b=hFYHEow8xUW61hpN9X5oAU5cYv
-	wICz1+3Bj6lMk6oLtz7Sc6DZnttp9ib7FpMOb1UC/7AaBYAfpj7w1zRgo189lhJAbqf8LCbCVp2E6
-	bWYbeNQ+owM6t211i85yHANbw6aILzAsI4ran08pkvIXuSFUmLsazQGGg+do+ehuQNmBTEw0xh2Nv
-	hAo2mdkX157X/o7WpAowaNmeFMpArxzbq6upn/aXDzfqFL7PIMs3uUx6+Uw7A3Zlkhk6T+MjAt0gy
-	p26DSSBq0aVo2eIxRobtIp7sy3xOssPNbR4LztubknFIBibcOhNLhfBqXQvVR13b3CLwYAIsvewrx
-	0clMS35Q==;
-Received: from localhost ([::1]:58550 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=Q3YlYHtqc9O7InLAo47Z1XFcRibA/JN30ieqM/7TI/o=; b=odYyWE/J431Xcb8zeXUqq0iS+y
+	0+U93gIH1Iz9ZBqN0KRGASJIg6+xQys1fvjVK+i/XKgT1fXYnMjof/Ou/jPeI5uXEQwt2187taM61
+	+x8yfCeD+GhedxEGsM62aokxARElypeFB6myP4eeFyhueKF4MxTEGoSnVJ+qHizflK4776IT1QmEc
+	jbcnOTCg5gyAxTiylWbVRiXLihjGaDn+ZxEXz7/YptdAblmEQHAJL10ArTK2BIu33bDofL5qB9Xo1
+	iTw04+0YIeSt6nkcb+8WT2rYRX8fLyjKVbDD4TbA9N0NXT+WaF1whU0rLMSUIoPrI1stl+PsaOtUr
+	4vYQ1Iyw==;
+Received: from localhost ([::1]:59318 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ho14i-000l3I-8h; Thu, 18 Jul 2019 07:43:36 +0000
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a]:36077) 
+	id 1ho18n-000lAL-Hc; Thu, 18 Jul 2019 07:47:49 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50200) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ho14d-000l3B-4N
- for samba-technical@lists.samba.org; Thu, 18 Jul 2019 07:43:33 +0000
-Received: by mail-pg1-x52a.google.com with SMTP id l21so12486520pgm.3
- for <samba-technical@lists.samba.org>; Thu, 18 Jul 2019 00:43:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=VbD6G2Vui/H+PCrLj8p7MaQjbXtP2nP/ReK20uQTZEw=;
- b=rsT5fhEjTO014TRqHaRQnsNRlLfwk0iJyB8MC+Wr2DXe1SJDVHgjyZ1HSZAL9cG6jA
- LAiXTK3RYtuGTnLVQtEcnQ2H+N6nfg8nzO+3FtI6nEVgsGsKmsuf0Kzvt+SZBF/BQyhH
- Qq3hlwtle3Gs1Q6FQVtZv+WZOzJaLJpOIYxqwcOhn6hfd1yM6p/w25ieQDtopHY/vM2L
- GQsnnJq8mHIHlVCKv6BdOS2GJhfCds7E0cGrLD8OP1uiA1PX6l6JzYHN1KRBwdbeQvF1
- CFlgUGRUHssnJo4OCgoQPI6q4spZN3iOzXEZ8twUDf0A34kL45dUIgSNJW8Tf89B3h+W
- eOfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=VbD6G2Vui/H+PCrLj8p7MaQjbXtP2nP/ReK20uQTZEw=;
- b=f2b1rr814OEvnoSY3OikKlYIDcIypGSYOMCvQGVI+7J75zRGZ//hJ4NsqPna87OdQg
- pdVaTTPewFfjGiEqHQKgBp5bXz6AAIC0SW1QjTnElBzPN/1AvwGANJumYGhHoXisLFmM
- sYjsU9kpZ6TW6y1QYD0DYDxPBGhMA8GsKbl3CVdp7WB2xKLU2mMKtZuM7PA/hpppKPy9
- TZF0WR9M6PpRPUyKpgSb33yz8ELSUn2xqtRmX4xGYshR1mSLlQxbzszO/YUDNkNPAox3
- mp8GOnZA95dSdxmiqJY39GBYGe8jzwIMassly9zQ14QrLtFRFjualuTAbB4UQsLwrrUD
- 9T9g==
-X-Gm-Message-State: APjAAAXrPcu6/GE8kEUHQeV1++VhAyqIUdhpRIaeAucOUM1d3DxpbFFE
- RLPiohxG2jreYtx+XIj8tgsYkwdYyPEhG+hzcLs=
-X-Google-Smtp-Source: APXvYqxLikVOCP1bYMo6WrBEdTUIYtc6frxF+O81wNDbMFfmfKhzoyqn+MT/vBLYDnY+PnXewtntr4RT5ZwqBuSTElE=
-X-Received: by 2002:a17:90a:360c:: with SMTP id
- s12mr50146315pjb.30.1563435808772; 
- Thu, 18 Jul 2019 00:43:28 -0700 (PDT)
+ (Exim) id 1ho18j-000lAE-7P
+ for samba-technical@lists.samba.org; Thu, 18 Jul 2019 07:47:47 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=Q3YlYHtqc9O7InLAo47Z1XFcRibA/JN30ieqM/7TI/o=; b=EkazQERqxhpKGb0p5XOlwY249m
+ T2zT1BmcEFZVc6MrAlIOCxqvomDWfSFquRcwhucM5vu9ePio3s/D8xvaoRmQSLjBOHj6icV7yoNMO
+ kfiSIk53XNuJl737W1nwLcwKsXkpZZzZE9c7zy1+qK+dm4PRWVF9Bp2WZM5MIwq8/v+k=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ho18i-00012P-K0; Thu, 18 Jul 2019 07:47:44 +0000
+Date: Thu, 18 Jul 2019 10:47:41 +0300
+To: Amit Kumar <amitkuma@redhat.com>
+Subject: Re: [PATCH] samba-tool: Fix traceback in samba-tool ntacl subcommands
+Message-ID: <20190718074741.GA11484@onega.vda.li>
+References: <d0fa6fcc-08ea-26cb-621e-fac39428fc63@redhat.com>
 MIME-Version: 1.0
-Date: Thu, 18 Jul 2019 02:43:17 -0500
-Message-ID: <CAH2r5mtn5SyUao9Y3f-_ubqgSV8t3RSj2fzAR9bE5ZQQ5dFcRQ@mail.gmail.com>
-Subject: [SMB3][PATCH] Speed up open by skipping query
- FILE_INTERNAL_INFORMATION
-To: CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="00000000000002fa87058defc4e9"
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <d0fa6fcc-08ea-26cb-621e-fac39428fc63@redhat.com>
+User-Agent: Mutt/1.12.0 (2019-05-25)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,141 +51,152 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Alexander Bokovoy <ab@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---00000000000002fa87058defc4e9
-Content-Type: text/plain; charset="UTF-8"
+On to, 18 heinä 2019, Amit Kumar via samba-technical wrote:
+> # samba-tool ntacl sysvolcheck
+> ERROR(runtime): uncaught exception - samdb_domain_sid failed
+>   File "/usr/lib64/python2.7/site-packages/samba/netcmd/__init__.py",
+> line 177, in _run
+>     return self.run(*args, **kwargs)
+>   File "/usr/lib64/python2.7/site-packages/samba/netcmd/ntacl.py", line
+> 265, in run
+>     domain_sid = security.dom_sid(samdb.domain_sid)
+>   File "/usr/lib64/python2.7/site-packages/samba/samdb.py", line 583, in
+> get_domain_sid
+>     return dsdb._samdb_get_domain_sid(self)
+> 
+> # samba-tool ntacl sysvolreset
+> ERROR(runtime): uncaught exception - samdb_domain_sid failed
+>   File "/usr/lib64/python2.7/site-packages/samba/netcmd/__init__.py",
+> line 177, in _run
+>     return self.run(*args, **kwargs)
+>   File "/usr/lib64/python2.7/site-packages/samba/netcmd/ntacl.py", line
+> 210, in run
+>     domain_sid = security.dom_sid(samdb.domain_sid)
+>   File "/usr/lib64/python2.7/site-packages/samba/samdb.py", line 583, in
+> get_domain_sid
+>     return dsdb._samdb_get_domain_sid(self)
+> 
+> Signed-off-by: Amit Kumar <amitkuma@redhat.com>
+> ---
+>  python/samba/netcmd/ntacl.py | 12 ++++++++++--
+>  1 file changed, 10 insertions(+), 2 deletions(-)
+> 
+> diff --git a/python/samba/netcmd/ntacl.py b/python/samba/netcmd/ntacl.py
+> index 4cc7737ae77..dfcc8bd4d8f 100644
+> --- a/python/samba/netcmd/ntacl.py
+> +++ b/python/samba/netcmd/ntacl.py
+> @@ -393,7 +393,11 @@ class cmd_ntacl_sysvolreset(Command):
+>          elif use_s3fs:
+>              use_ntvfs = False
+>  
+> -        domain_sid = security.dom_sid(samdb.domain_sid)
+> +        try:
+> +            domain_sid = security.dom_sid(samdb.domain_sid)
+> +        except Exception as e:
+> +            print("domain_sid not returned,",e)
+> +            return
+I think it is better to raise CommandError() exception here instead.
+Pretty much like below with 'Unable to open samdb':
 
-Now that we have the qfid context returned on open we can cut 1/3 of
-the traffic on open by not sending the query FILE_INTERNAL_INFORMATION
+>  
+>          s3conf = s3param.get_context()
+>          s3conf.load(lp.configfile)
+> @@ -448,7 +452,11 @@ class cmd_ntacl_sysvolcheck(Command):
+>          except Exception as e:
+>              raise CommandError("Unable to open samdb:", e)
+^^ Here.
 
+Also, please use 'Cannot retrieve domain SID' as a friendly message
+instead of 'domain_sid not returned'.
+
+Same applies to the second patch.
+
+>  
+> -        domain_sid = security.dom_sid(samdb.domain_sid)
+> +        try:
+> +            domain_sid = security.dom_sid(samdb.domain_sid)
+> +        except Exception as e:
+> +            print("domain_sid not returned,",e)
+> +            return
+>  
+>          provision.checksysvolacl(samdb, netlogon, sysvol,
+>                                   domain_sid,
+> -- 
+> 2.17.1
+> 
+> 
+> Opened MR: https://gitlab.com/samba-team/samba/merge_requests/650
+> 
+
+> From 646c9d78413d59399636d1ca14cad65341b912c6 Mon Sep 17 00:00:00 2001
+> From: Amit Kumar <amitkuma@redhat.com>
+> Date: Fri, 19 Jul 2019 00:43:58 +0530
+> Subject: [PATCH] samba-tool: Fix traceback in samba-tool ntacl subcommands
+> 
+> # samba-tool ntacl sysvolcheck
+> ERROR(runtime): uncaught exception - samdb_domain_sid failed
+>   File "/usr/lib64/python2.7/site-packages/samba/netcmd/__init__.py", line 177, in _run
+>     return self.run(*args, **kwargs)
+>   File "/usr/lib64/python2.7/site-packages/samba/netcmd/ntacl.py", line 265, in run
+>     domain_sid = security.dom_sid(samdb.domain_sid)
+>   File "/usr/lib64/python2.7/site-packages/samba/samdb.py", line 583, in get_domain_sid
+>     return dsdb._samdb_get_domain_sid(self)
+> 
+> # samba-tool ntacl sysvolreset
+> ERROR(runtime): uncaught exception - samdb_domain_sid failed
+>   File "/usr/lib64/python2.7/site-packages/samba/netcmd/__init__.py", line 177, in _run
+>     return self.run(*args, **kwargs)
+>   File "/usr/lib64/python2.7/site-packages/samba/netcmd/ntacl.py", line 210, in run
+>     domain_sid = security.dom_sid(samdb.domain_sid)
+>   File "/usr/lib64/python2.7/site-packages/samba/samdb.py", line 583, in get_domain_sid
+>     return dsdb._samdb_get_domain_sid(self)
+> 
+> Signed-off-by: Amit Kumar <amitkuma@redhat.com>
+> ---
+>  python/samba/netcmd/ntacl.py | 12 ++++++++++--
+>  1 file changed, 10 insertions(+), 2 deletions(-)
+> 
+> diff --git a/python/samba/netcmd/ntacl.py b/python/samba/netcmd/ntacl.py
+> index 4cc7737ae77..dfcc8bd4d8f 100644
+> --- a/python/samba/netcmd/ntacl.py
+> +++ b/python/samba/netcmd/ntacl.py
+> @@ -393,7 +393,11 @@ class cmd_ntacl_sysvolreset(Command):
+>          elif use_s3fs:
+>              use_ntvfs = False
+>  
+> -        domain_sid = security.dom_sid(samdb.domain_sid)
+> +        try:
+> +            domain_sid = security.dom_sid(samdb.domain_sid)
+> +        except Exception as e:
+> +            print("domain_sid not returned,",e)
+> +            return
+>  
+>          s3conf = s3param.get_context()
+>          s3conf.load(lp.configfile)
+> @@ -448,7 +452,11 @@ class cmd_ntacl_sysvolcheck(Command):
+>          except Exception as e:
+>              raise CommandError("Unable to open samdb:", e)
+>  
+> -        domain_sid = security.dom_sid(samdb.domain_sid)
+> +        try:
+> +            domain_sid = security.dom_sid(samdb.domain_sid)
+> +        except Exception as e:
+> +            print("domain_sid not returned,",e)
+> +            return
+>  
+>          provision.checksysvolacl(samdb, netlogon, sysvol,
+>                                   domain_sid,
+> -- 
+> 2.17.1
+> 
 
 
 -- 
-Thanks,
-
-Steve
-
---00000000000002fa87058defc4e9
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-smb3-optimize-open-to-not-send-query-file-internal-i.patch"
-Content-Disposition: attachment; 
-	filename="0001-smb3-optimize-open-to-not-send-query-file-internal-i.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_jy8dazi80>
-X-Attachment-Id: f_jy8dazi80
-
-RnJvbSBlM2Y4YjFjNWRiZjE5YTBlNmVmMzhkMDliNDIzZjY4YjAwMDc4YTljIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFRodSwgMTggSnVsIDIwMTkgMDI6Mzk6MDUgLTA1MDAKU3ViamVjdDogW1BBVENIXSBz
-bWIzOiBvcHRpbWl6ZSBvcGVuIHRvIG5vdCBzZW5kIHF1ZXJ5IGZpbGUgaW50ZXJuYWwgaW5mbwoK
-V2UgY2FuIGN1dCBvbmUgdGhpcmQgb2YgdGhlIHRyYWZmaWMgb24gb3BlbiBieSBub3QgcXVlcnlp
-bmcgdGhlCmlub2RlIG51bWJlciBleHBsaWNpdGx5IHZpYSBTTUIzIHF1ZXJ5X2luZm8gc2luY2Ug
-aXQgaXMgbm93CnJldHVybmVkIG9uIG9wZW4gaW4gdGhlIHFmaWQgY29udGV4dC4KClNwZWVkcyB1
-cCBvcGVuIHNpZ25pZmljYW50bHkuCgpTaWduZWQtb2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJl
-bmNoQG1pY3Jvc29mdC5jb20+Ci0tLQogZnMvY2lmcy9zbWIyZmlsZS5jICB8IDE4ICsrKysrKysr
-KysrKy0tLS0tLQogZnMvY2lmcy9zbWIyb3BzLmMgICB8ICA1ICsrKy0tCiBmcy9jaWZzL3NtYjJw
-ZHUuYyAgIHwgNDIgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tCiBm
-cy9jaWZzL3NtYjJwZHUuaCAgIHwgIDIgKysKIGZzL2NpZnMvc21iMnByb3RvLmggfCAgNSArKyst
-LQogNSBmaWxlcyBjaGFuZ2VkLCA1MSBpbnNlcnRpb25zKCspLCAyMSBkZWxldGlvbnMoLSkKCmRp
-ZmYgLS1naXQgYS9mcy9jaWZzL3NtYjJmaWxlLmMgYi9mcy9jaWZzL3NtYjJmaWxlLmMKaW5kZXgg
-NTRiZmZiMmExNzg2Li5lNmExZmM3MjAxOGYgMTAwNjQ0Ci0tLSBhL2ZzL2NpZnMvc21iMmZpbGUu
-YworKysgYi9mcy9jaWZzL3NtYjJmaWxlLmMKQEAgLTg4LDE0ICs4OCwyMCBAQCBzbWIyX29wZW5f
-ZmlsZShjb25zdCB1bnNpZ25lZCBpbnQgeGlkLCBzdHJ1Y3QgY2lmc19vcGVuX3Bhcm1zICpvcGFy
-bXMsCiAJfQogCiAJaWYgKGJ1ZikgewotCQkvKiBvcGVuIHJlc3BvbnNlIGRvZXMgbm90IGhhdmUg
-SW5kZXhOdW1iZXIgZmllbGQgLSBnZXQgaXQgKi8KLQkJcmMgPSBTTUIyX2dldF9zcnZfbnVtKHhp
-ZCwgb3Bhcm1zLT50Y29uLCBmaWQtPnBlcnNpc3RlbnRfZmlkLAorCQkvKiBpZiBvcGVuIHJlc3Bv
-bnNlIGRvZXMgbm90IGhhdmUgSW5kZXhOdW1iZXIgZmllbGQgLSBnZXQgaXQgKi8KKwkJaWYgKHNt
-YjJfZGF0YS0+SW5kZXhOdW1iZXIgPT0gMCkgeworCQkJcmMgPSBTTUIyX2dldF9zcnZfbnVtKHhp
-ZCwgb3Bhcm1zLT50Y29uLAorCQkJCSAgICAgIGZpZC0+cGVyc2lzdGVudF9maWQsCiAJCQkJICAg
-ICAgZmlkLT52b2xhdGlsZV9maWQsCiAJCQkJICAgICAgJnNtYjJfZGF0YS0+SW5kZXhOdW1iZXIp
-OwotCQlpZiAocmMpIHsKLQkJCS8qIGxldCBnZXRfaW5vZGVfaW5mbyBkaXNhYmxlIHNlcnZlciBp
-bm9kZSBudW1iZXJzICovCi0JCQlzbWIyX2RhdGEtPkluZGV4TnVtYmVyID0gMDsKLQkJCXJjID0g
-MDsKKwkJCWlmIChyYykgeworCQkJCS8qCisJCQkJICogbGV0IGdldF9pbm9kZV9pbmZvIGRpc2Fi
-bGUgc2VydmVyIGlub2RlCisJCQkJICogbnVtYmVycworCQkJCSAqLworCQkJCXNtYjJfZGF0YS0+
-SW5kZXhOdW1iZXIgPSAwOworCQkJCXJjID0gMDsKKwkJCX0KIAkJfQogCQltb3ZlX3NtYjJfaW5m
-b190b19jaWZzKGJ1Ziwgc21iMl9kYXRhKTsKIAl9CmRpZmYgLS1naXQgYS9mcy9jaWZzL3NtYjJv
-cHMuYyBiL2ZzL2NpZnMvc21iMm9wcy5jCmluZGV4IDBjZGM0ZTQ3Y2E4Ny4uZTczNDg2ZTliOTRk
-IDEwMDY0NAotLS0gYS9mcy9jaWZzL3NtYjJvcHMuYworKysgYi9mcy9jaWZzL3NtYjJvcHMuYwpA
-QCAtNzExLDExICs3MTEsMTIgQEAgaW50IG9wZW5fc2hyb290KHVuc2lnbmVkIGludCB4aWQsIHN0
-cnVjdCBjaWZzX3Rjb24gKnRjb24sIHN0cnVjdCBjaWZzX2ZpZCAqcGZpZCkKIAl0Y29uLT5jcmZp
-ZC5pc192YWxpZCA9IHRydWU7CiAJa3JlZl9pbml0KCZ0Y29uLT5jcmZpZC5yZWZjb3VudCk7CiAK
-KwkvKiBCQiBUQkQgY2hlY2sgdG8gc2VlIGlmIG9wbG9jayBsZXZlbCBjaGVjayBjYW4gYmUgcmVt
-b3ZlZCBiZWxvdyAqLwogCWlmIChvX3JzcC0+T3Bsb2NrTGV2ZWwgPT0gU01CMl9PUExPQ0tfTEVW
-RUxfTEVBU0UpIHsKIAkJa3JlZl9nZXQoJnRjb24tPmNyZmlkLnJlZmNvdW50KTsKLQkJb3Bsb2Nr
-ID0gc21iMl9wYXJzZV9sZWFzZV9zdGF0ZShzZXJ2ZXIsIG9fcnNwLAorCQlvcGxvY2sgPSBzbWIy
-X3BhcnNlX2NvbnRleHRzKHNlcnZlciwgb19yc3AsCiAJCQkJCQkmb3Bhcm1zLmZpZC0+ZXBvY2gs
-Ci0JCQkJCQlvcGFybXMuZmlkLT5sZWFzZV9rZXkpOworCQkJCQkJb3Bhcm1zLmZpZC0+bGVhc2Vf
-a2V5LCBOVUxMKTsKIAl9IGVsc2UKIAkJZ290byBvc2hyX2V4aXQ7CiAKZGlmZiAtLWdpdCBhL2Zz
-L2NpZnMvc21iMnBkdS5jIGIvZnMvY2lmcy9zbWIycGR1LmMKaW5kZXggYjM1MmY0NTNhNmQyLi5h
-NTU3MDhiNzU0NjggMTAwNjQ0Ci0tLSBhL2ZzL2NpZnMvc21iMnBkdS5jCisrKyBiL2ZzL2NpZnMv
-c21iMnBkdS5jCkBAIC0xODczLDI2ICsxODczLDQ2IEBAIGNyZWF0ZV9yZWNvbm5lY3RfZHVyYWJs
-ZV9idWYoc3RydWN0IGNpZnNfZmlkICpmaWQpCiAJcmV0dXJuIGJ1ZjsKIH0KIAorc3RhdGljIHZv
-aWQKK3BhcnNlX3F1ZXJ5X2lkX2N0eHQoc3RydWN0IGNyZWF0ZV9jb250ZXh0ICpjYywgc3RydWN0
-IHNtYjJfZmlsZV9hbGxfaW5mbyAqYnVmKQoreworCXN0cnVjdCBvbl9kaXNrX2lkICpwZGlza19p
-ZCA9IChzdHJ1Y3Qgb25fZGlza19pZCAqKWNjOworCisJY2lmc19kYmcoRllJLCAicGFyc2UgcXVl
-cnkgaWQgY29udGV4dCAweCVsbHggMHglbGx4XG4iLAorCQlwZGlza19pZC0+RGlza0ZpbGVJZCwg
-cGRpc2tfaWQtPlZvbHVtZUlkKTsKKwlidWYtPkluZGV4TnVtYmVyID0gcGRpc2tfaWQtPkRpc2tG
-aWxlSWQ7Cit9CisKIF9fdTgKLXNtYjJfcGFyc2VfbGVhc2Vfc3RhdGUoc3RydWN0IFRDUF9TZXJ2
-ZXJfSW5mbyAqc2VydmVyLAorc21iMl9wYXJzZV9jb250ZXh0cyhzdHJ1Y3QgVENQX1NlcnZlcl9J
-bmZvICpzZXJ2ZXIsCiAJCSAgICAgICBzdHJ1Y3Qgc21iMl9jcmVhdGVfcnNwICpyc3AsCi0JCSAg
-ICAgICB1bnNpZ25lZCBpbnQgKmVwb2NoLCBjaGFyICpsZWFzZV9rZXkpCisJCSAgICAgICB1bnNp
-Z25lZCBpbnQgKmVwb2NoLCBjaGFyICpsZWFzZV9rZXksCisJCSAgICAgICBzdHJ1Y3Qgc21iMl9m
-aWxlX2FsbF9pbmZvICpidWYpCiB7CiAJY2hhciAqZGF0YV9vZmZzZXQ7CiAJc3RydWN0IGNyZWF0
-ZV9jb250ZXh0ICpjYzsKIAl1bnNpZ25lZCBpbnQgbmV4dDsKIAl1bnNpZ25lZCBpbnQgcmVtYWlu
-aW5nOwogCWNoYXIgKm5hbWU7CisJX191OCBvcGxvY2sgPSAwOwogCiAJZGF0YV9vZmZzZXQgPSAo
-Y2hhciAqKXJzcCArIGxlMzJfdG9fY3B1KHJzcC0+Q3JlYXRlQ29udGV4dHNPZmZzZXQpOwogCXJl
-bWFpbmluZyA9IGxlMzJfdG9fY3B1KHJzcC0+Q3JlYXRlQ29udGV4dHNMZW5ndGgpOwogCWNjID0g
-KHN0cnVjdCBjcmVhdGVfY29udGV4dCAqKWRhdGFfb2Zmc2V0OworCisJLyogSW5pdGlhbGl6ZSBp
-bm9kZSBudW1iZXIgdG8gMCBpbiBjYXNlIG5vIHZhbGlkIGRhdGEgaW4gcWZpZCBjb250ZXh0ICov
-CisJaWYgKGJ1ZikKKwkJYnVmLT5JbmRleE51bWJlciA9IDA7CisKIAl3aGlsZSAocmVtYWluaW5n
-ID49IHNpemVvZihzdHJ1Y3QgY3JlYXRlX2NvbnRleHQpKSB7CiAJCW5hbWUgPSBsZTE2X3RvX2Nw
-dShjYy0+TmFtZU9mZnNldCkgKyAoY2hhciAqKWNjOwogCQlpZiAobGUxNl90b19jcHUoY2MtPk5h
-bWVMZW5ndGgpID09IDQgJiYKLQkJICAgIHN0cm5jbXAobmFtZSwgIlJxTHMiLCA0KSA9PSAwKQot
-CQkJcmV0dXJuIHNlcnZlci0+b3BzLT5wYXJzZV9sZWFzZV9idWYoY2MsIGVwb2NoLAotCQkJCQkJ
-CSAgICBsZWFzZV9rZXkpOworCQkgICAgc3RybmNtcChuYW1lLCBTTUIyX0NSRUFURV9SRVFVRVNU
-X0xFQVNFLCA0KSA9PSAwKQorCQkJb3Bsb2NrID0gc2VydmVyLT5vcHMtPnBhcnNlX2xlYXNlX2J1
-ZihjYywgZXBvY2gsCisJCQkJCQkJICAgbGVhc2Vfa2V5KTsKKwkJZWxzZSBpZiAoYnVmICYmIChs
-ZTE2X3RvX2NwdShjYy0+TmFtZUxlbmd0aCkgPT0gNCkgJiYKKwkJICAgIHN0cm5jbXAobmFtZSwg
-U01CMl9DUkVBVEVfUVVFUllfT05fRElTS19JRCwgNCkgPT0gMCkKKwkJCXBhcnNlX3F1ZXJ5X2lk
-X2N0eHQoY2MsIGJ1Zik7CiAKIAkJbmV4dCA9IGxlMzJfdG9fY3B1KGNjLT5OZXh0KTsKIAkJaWYg
-KCFuZXh0KQpAQCAtMTkwMSw3ICsxOTIxLDcgQEAgc21iMl9wYXJzZV9sZWFzZV9zdGF0ZShzdHJ1
-Y3QgVENQX1NlcnZlcl9JbmZvICpzZXJ2ZXIsCiAJCWNjID0gKHN0cnVjdCBjcmVhdGVfY29udGV4
-dCAqKSgoY2hhciAqKWNjICsgbmV4dCk7CiAJfQogCi0JcmV0dXJuIDA7CisJcmV0dXJuIG9wbG9j
-azsKIH0KIAogc3RhdGljIGludApAQCAtMjU4OCwxMSArMjYwOCwxMSBAQCBTTUIyX29wZW4oY29u
-c3QgdW5zaWduZWQgaW50IHhpZCwgc3RydWN0IGNpZnNfb3Blbl9wYXJtcyAqb3Bhcm1zLCBfX2xl
-MTYgKnBhdGgsCiAJCWJ1Zi0+RGVsZXRlUGVuZGluZyA9IDA7CiAJfQogCi0JaWYgKHJzcC0+T3Bs
-b2NrTGV2ZWwgPT0gU01CMl9PUExPQ0tfTEVWRUxfTEVBU0UpCi0JCSpvcGxvY2sgPSBzbWIyX3Bh
-cnNlX2xlYXNlX3N0YXRlKHNlcnZlciwgcnNwLAotCQkJCQkJICZvcGFybXMtPmZpZC0+ZXBvY2gs
-Ci0JCQkJCQkgb3Bhcm1zLT5maWQtPmxlYXNlX2tleSk7Ci0JZWxzZQorCisJKm9wbG9jayA9IHNt
-YjJfcGFyc2VfY29udGV4dHMoc2VydmVyLCByc3AsICZvcGFybXMtPmZpZC0+ZXBvY2gsCisJCQkJ
-ICAgICAgb3Bhcm1zLT5maWQtPmxlYXNlX2tleSwKKwkJCQkgICAgICBidWYpOworCWlmICgqb3Bs
-b2NrID09IDApIC8qIG5vIGxlYXNlIG9wZW4gY29udGV4dCBmb3VuZCAqLwogCQkqb3Bsb2NrID0g
-cnNwLT5PcGxvY2tMZXZlbDsKIGNyZWF0X2V4aXQ6CiAJU01CMl9vcGVuX2ZyZWUoJnJxc3QpOwpk
-aWZmIC0tZ2l0IGEvZnMvY2lmcy9zbWIycGR1LmggYi9mcy9jaWZzL3NtYjJwZHUuaAppbmRleCA3
-ZTJlNzgyZjhlZGQuLjdjOTE2YWRjMmZiYyAxMDA2NDQKLS0tIGEvZnMvY2lmcy9zbWIycGR1LmgK
-KysrIGIvZnMvY2lmcy9zbWIycGR1LmgKQEAgLTgxOSw2ICs4MTksOCBAQCBzdHJ1Y3QgZHVyYWJs
-ZV9yZWNvbm5lY3RfY29udGV4dF92MiB7CiAKIC8qIFNlZSBNUy1TTUIyIDIuMi4xNC4yLjkgKi8K
-IHN0cnVjdCBvbl9kaXNrX2lkIHsKKwlzdHJ1Y3QgY3JlYXRlX2NvbnRleHQgY2NvbnRleHQ7CisJ
-X191OCAgIE5hbWVbOF07CiAJX19sZTY0IERpc2tGaWxlSWQ7CiAJX19sZTY0IFZvbHVtZUlkOwog
-CV9fdTMyICBSZXNlcnZlZFs0XTsKZGlmZiAtLWdpdCBhL2ZzL2NpZnMvc21iMnByb3RvLmggYi9m
-cy9jaWZzL3NtYjJwcm90by5oCmluZGV4IGU0Y2E5OGNmM2FmMy4uYjZiMWExYmVkNDY2IDEwMDY0
-NAotLS0gYS9mcy9jaWZzL3NtYjJwcm90by5oCisrKyBiL2ZzL2NpZnMvc21iMnByb3RvLmgKQEAg
-LTIzMiw5ICsyMzIsMTAgQEAgZXh0ZXJuIGludCBzbWIzX3ZhbGlkYXRlX25lZ290aWF0ZShjb25z
-dCB1bnNpZ25lZCBpbnQsIHN0cnVjdCBjaWZzX3Rjb24gKik7CiAKIGV4dGVybiBlbnVtIHNlY3Vy
-aXR5RW51bSBzbWIyX3NlbGVjdF9zZWN0eXBlKHN0cnVjdCBUQ1BfU2VydmVyX0luZm8gKiwKIAkJ
-CQkJZW51bSBzZWN1cml0eUVudW0pOwotZXh0ZXJuIF9fdTggc21iMl9wYXJzZV9sZWFzZV9zdGF0
-ZShzdHJ1Y3QgVENQX1NlcnZlcl9JbmZvICpzZXJ2ZXIsCitleHRlcm4gX191OCBzbWIyX3BhcnNl
-X2NvbnRleHRzKHN0cnVjdCBUQ1BfU2VydmVyX0luZm8gKnNlcnZlciwKIAkJCQkgICBzdHJ1Y3Qg
-c21iMl9jcmVhdGVfcnNwICpyc3AsCi0JCQkJICAgdW5zaWduZWQgaW50ICplcG9jaCwgY2hhciAq
-bGVhc2Vfa2V5KTsKKwkJCQkgICB1bnNpZ25lZCBpbnQgKmVwb2NoLCBjaGFyICpsZWFzZV9rZXks
-CisJCQkJICAgc3RydWN0IHNtYjJfZmlsZV9hbGxfaW5mbyAqYnVmKTsKIGV4dGVybiBpbnQgc21i
-M19lbmNyeXB0aW9uX3JlcXVpcmVkKGNvbnN0IHN0cnVjdCBjaWZzX3Rjb24gKnRjb24pOwogZXh0
-ZXJuIGludCBzbWIyX3ZhbGlkYXRlX2lvdih1bnNpZ25lZCBpbnQgb2Zmc2V0LCB1bnNpZ25lZCBp
-bnQgYnVmZmVyX2xlbmd0aCwKIAkJCSAgICAgc3RydWN0IGt2ZWMgKmlvdiwgdW5zaWduZWQgaW50
-IG1pbl9idWZfc2l6ZSk7Ci0tIAoyLjIwLjEKCg==
---00000000000002fa87058defc4e9--
+/ Alexander Bokovoy
 
