@@ -2,57 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57DC96E46C
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Jul 2019 12:38:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 265376E863
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Jul 2019 18:04:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=orG46PIRL7oIq8o0g0sFXhS93zCFRqlpUBA4oRqECqo=; b=zopmZMQZ4zUpcypQqDVjLbVXF9
-	ZOOU4qM20OWXLseHdASUUsOQSxFu8yEp9jm2pSmqd3XxKhY49gNi3MrLrpiAgwYSInhbYnchWcpj7
-	gpdfJoWVxjxnDBiO1pjqAAtrAxg1h571k1/dJO1Dy7wLXiVhueJYzIRT9mu6coili7I1kUA8nQqVD
-	hhOLElDl8DrCX701fo+TV/QCrQXq5Zq60IGMUNvYNI1UvNQfVGhLe1uN/IcAnFedlaZNCNU0eaWRP
-	7ZK5Y1v83Cp7zhCpMNmySxhdyxp8e2oJz1Fnf/bqdOmmT0Izik6DCVPoqWsoDrTkKzCDEonP1etcN
-	CTsIDU/A==;
-Received: from localhost ([::1]:50138 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=hQ7pqURBh344Vk73S4eSwekv2N2BgwsPz4jxQW7++j8=; b=KmsMhIJAT7/pwIIeBpNt6c2g9S
+	UezI2lKA3VjroDIvxQX8RsBnMSbkCRyMzGBzeEjadupmT36V3peAU/AmwjwM0p45G8uRwgklixnwt
+	0B9ULa4yRk46u/qT57My2MhkZTj4hXh6+e2/YJE2nubgq7nxpLJvtDbjSAMK5XaVDATkZYI2OpZg7
+	7K5/aTIm7RHD+VLGjdQnegK1BsMkEvcWVZ4FWkRxenxTnz8zqLY7kRM3x4kALl6bZiw0w1H7ptIB6
+	I2zI+MXNn9D60E9Eyy02Lui7C3ydUzSS3cbX5r3qGi9lCzsFgoAlpiwOaKfdtQ3KU3rGJ6JNXS6x6
+	qpODmr6g==;
+Received: from localhost ([::1]:24964 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hoQH1-0017J3-OO; Fri, 19 Jul 2019 10:37:59 +0000
-Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:42799) 
+	id 1hoVLr-001BGg-5j; Fri, 19 Jul 2019 16:03:19 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25462) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hoQGw-0017Iu-M3; Fri, 19 Jul 2019 10:37:56 +0000
-Received: by mail-io1-xd32.google.com with SMTP id e20so27038607iob.9;
- Fri, 19 Jul 2019 03:37:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=orG46PIRL7oIq8o0g0sFXhS93zCFRqlpUBA4oRqECqo=;
- b=e3WuA7lIfNK4WUdekupLDiTRHxSZ5iWL4sSGMXl5kU6IsLu3s5BRxAHIdqop23HBxR
- mmNEJHTbi4xfrpuvEIUcu615CM8l1rpKqZKLQl8ON/8bta5ybEFzhBRBrw838hBM8CXn
- t3KwkpMMZc6sfoEyQDp/Q4gsYtUXFIbp94UJ1vN7vFp2s6QvoyIPAwDSeCZyo2uNsfCL
- qNXCWEoZIm44aYciRXjHe9V/vTY2bfSZjQCRSJL+wHQOOMouk3Kpope9BSPgndgJZUt1
- c8OMRh2CMj6EJWgZ4dqP5u+Isu7lWC3gPVN3Kih1TbNUzuSxpPZ57J/c3+PferWybh7h
- jvzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=orG46PIRL7oIq8o0g0sFXhS93zCFRqlpUBA4oRqECqo=;
- b=gKnJxxknkaaYgYJxPrbCzjXahVWCyvVNOXnt9WoWGw0xq76fl+3lUKangYpqwceiAa
- 9d4NU7ymn0o/pUqgSFZK9rt80Jz2qcOLeI1sX6eFrZrKFsf7najBFS/SC4DqkflYUbTs
- JDMqn8l9wqyRJh6o4ioqtZe01EuDLKs6qxCyZk5IOkawrcYSPWl6Hl8iOVfFiKlya8kl
- y1XGIRXDjmQQYX9wh3QaOSVDgj00FIa+sr35K9oC4xGwaACCz93FD1BF42F25YLGO7fH
- /wQfVQKA/wJDMRtLqzTMRWq9NAyk/gadng/h282Uv4pAXjnI2pVAtrQuGTJEsRE3i/vj
- +M4w==
-X-Gm-Message-State: APjAAAVhy/nhsV0TIgz6SZxABi59GF9DDP7j8QVJILSbCE8yT+OlpKpW
- eADiF7hMI03KrFyOW/XGp/2of302oejKIJV5Qyk=
-X-Google-Smtp-Source: APXvYqzVCgqL9X9JCZJNPdCcdHIlVXHYx+DHeMVqp4Pfn7oDaMi2jKVORaDG/hNOREKrPaJzgXenkV4OVZDJU4JTto8=
-X-Received: by 2002:a02:3f1d:: with SMTP id d29mr57418200jaa.116.1563532672413; 
- Fri, 19 Jul 2019 03:37:52 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190710225121.GA142072@jra4>
-In-Reply-To: <20190710225121.GA142072@jra4>
-Date: Fri, 19 Jul 2019 20:37:40 +1000
-Message-ID: <CAN05THQ65himSVSYpzypUwDeJoaV6FPAhQpV4NEeCT3fRaBxFg@mail.gmail.com>
+ (Exim) id 1hoVLl-001BGF-V8; Fri, 19 Jul 2019 16:03:16 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=hQ7pqURBh344Vk73S4eSwekv2N2BgwsPz4jxQW7++j8=; b=gjG3U9qmnmDlRMjOpWkdY6PHVd
+ 1uK58QZc6Tu5ObBOn+TeZ1B6Sr4bjJGTBuf5jIjeTcBOFBsZZsjy8mNWZgYZy+HcAT/V0i9zjdepG
+ 7lcKCx8kOsfRC1VrrLVjqhb+m7MTBQz597JlT/1kQX4vFZjUdvrdYL2zKTBTifPbSMhg=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hoVLi-0003yU-0n; Fri, 19 Jul 2019 16:03:10 +0000
+Date: Fri, 19 Jul 2019 09:02:54 -0700
+To: ronnie sahlberg <ronniesahlberg@gmail.com>
 Subject: Re: Turning off SMB1 make slashdot and theregister !
-To: Jeremy Allison <jra@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Message-ID: <20190719160254.GA28960@jeremy-acer>
+References: <20190710225121.GA142072@jra4>
+ <CAN05THQ65himSVSYpzypUwDeJoaV6FPAhQpV4NEeCT3fRaBxFg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAN05THQ65himSVSYpzypUwDeJoaV6FPAhQpV4NEeCT3fRaBxFg@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,25 +50,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
 Cc: samba@lists.samba.org,
  "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Good stuff.
+On Fri, Jul 19, 2019 at 08:37:40PM +1000, ronnie sahlberg wrote:
+> Good stuff.
+> 
+> Next step will be to delete the entire smb1 codebase for the next major version.
 
-Next step will be to delete the entire smb1 codebase for the next major version.
+That's going to take a little while, there are still many major
+vendors (small routers mostly) who depend on this. Still it'll
+be easier to remove the server code than the client.
 
-On Thu, Jul 11, 2019 at 8:52 AM Jeremy Allison via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> In some small way to apologise for linking to twitter
-> yesterday :-).
->
-> https://tech.slashdot.org/story/19/07/10/2119238/samba-411-removes-smb1-file-sharing-protocol-version-by-default
->
-> https://www.theregister.co.uk/2019/07/09/samba_sans_one_smb1/
->
+My idea is when the last line of SMB1 and previous protocol
+code is removed from the server we rename the tree Samba5 :-).
+
+Makes for a good marketing pitch anyway :-).
+
+But first we have to finish the VFS modernization / rewrite
+to move to the XXXXat() syscalls (now standardized in the
+OpenGroup thank goodness :-) and merge in the SMB3+posix
+extensions code.
+
+This is a boatload of work. Engineers welcome to help :-).
+
+Jeremy.
 
