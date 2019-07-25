@@ -2,41 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 094C775779
-	for <lists+samba-technical@lfdr.de>; Thu, 25 Jul 2019 21:00:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50F57757B6
+	for <lists+samba-technical@lfdr.de>; Thu, 25 Jul 2019 21:18:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=FqtqjGeNI1f3To+0Q9LNjfF5Gbo0fEE7JHcMeuN+OWI=; b=VoRidUxKZHuDTwOpNSK3YzqZXV
-	DUVnx3axqX4SSJS0nVG6cBLQtS+mHKw1+vxaBdrgdXS5uJ8TnxiiFO8aRDYBUZeg4FajLkffeQmmO
-	Njiybaw2jJ3a9SUUtUWUZOSo3Fi2S1SMKHo1B04iEcSFchXGXsb4HPGO6oKnAl337vJXm9Be10W5K
-	CZYh/RWnA0kd8OkpG71PmRKyWppTIYcQFAJ+EcdiICtFgJwaDbzF4CqGV/FO/dhMTdGg4YeakGh1l
-	w5jaCfRBDgNxvtH9u3zZvSFtBJ4J/oP+Gnk7sZCToKgAes8LAHEooXINYgy33PB3WGLyKLQub8yB7
-	r5faXz1w==;
-Received: from localhost ([::1]:18020 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=8Ao+niWXcYZm0AO2mtcFZudYn2AfP3l7Ts0uBFCDu+E=; b=XAdg0GbBpZirEU1lwkRPvI6yyU
+	V8xlouTUm4vt1kNWLW/H7FK3YJKJNp7ADxXEvZh1P3yF1coRIxaVBcH1arNdOGTo95ltmSsnc8ewJ
+	uLqVDEAdDuMauEwKtuPyJpcoDU1me6qLUq4JDaek2vzQNyfM5IlhC8QnmWKlSuVALedfpOU6QyJrg
+	GVZ0ZCnqYgXuMc6Dd1cE4//0W54pHs3EyfjgGxuuwR3JBV0cei84jJnqth7gQed6KK7RiL+vQKu/o
+	MBtGkF8hbdMLoJ0Oqi2S5YVn7rXbCy4Xb/G0BHd1d3hITuZTMENzyA7Y3W94xAwO0CkrZDTKK3HBu
+	RciNkYEg==;
+Received: from localhost ([::1]:21262 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hqixu-000JyO-Tt; Thu, 25 Jul 2019 18:59:46 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39398) 
+	id 1hqjFy-000KQc-Gl; Thu, 25 Jul 2019 19:18:26 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47180) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hqixo-000Jxz-FE; Thu, 25 Jul 2019 18:59:42 +0000
+ (Exim) id 1hqjFu-000KQV-A8
+ for samba-technical@lists.samba.org; Thu, 25 Jul 2019 19:18:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Cc:To:From:Message-ID;
- bh=FqtqjGeNI1f3To+0Q9LNjfF5Gbo0fEE7JHcMeuN+OWI=; b=M0tkOmUTtzW0fXF5WTqBsJauaB
- 3aeFF1PYRQArEFEUUqGxRIBVIKBo5Ulcibtpcw/0mXoVKB9KNHkDjvQJnDMPN/BW2a0NnsPLRDaDP
- METnRTp1J6UANEDuGiO6XYt/1K+5N/55MQsX4Z+VXQK9JN+5nM1AbfK3mKrk/+c33WGQ=;
+ s=42627210; h=Date:Message-ID:From:To:CC;
+ bh=8Ao+niWXcYZm0AO2mtcFZudYn2AfP3l7Ts0uBFCDu+E=; b=omDgBRploZ5j3kE0GY3Ft9XRVD
+ aE7EPfeKyvXuZ6lxiSIZau1wtNlZdUvORECXpds2bO2v+otlMFVQ+aL9jnnohidecg/n2b6C7KA6o
+ OfD6Vc4e+WQYHpSKEDVlnmgEmT+xs9cA7rs6WWmOss2oReMUAfpIwUOhR9HYYYQiatqY=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hqixn-0002T6-2z; Thu, 25 Jul 2019 18:59:39 +0000
-Message-ID: <dc0d693a2caf311097cf9a0ef8df3add01117ba7.camel@samba.org>
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hqjFs-0002do-Uf
+ for samba-technical@lists.samba.org; Thu, 25 Jul 2019 19:18:21 +0000
 Subject: Re: Turning off SMB1 make slashdot and theregister !
-To: ronnie sahlberg <ronniesahlberg@gmail.com>, Jeremy Allison <jra@samba.org>
-Date: Fri, 26 Jul 2019 06:59:33 +1200
-In-Reply-To: <CAN05THQ65himSVSYpzypUwDeJoaV6FPAhQpV4NEeCT3fRaBxFg@mail.gmail.com>
+To: samba-technical@lists.samba.org
 References: <20190710225121.GA142072@jra4>
  <CAN05THQ65himSVSYpzypUwDeJoaV6FPAhQpV4NEeCT3fRaBxFg@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.32.3 (3.32.3-1.fc30) 
+ <dc0d693a2caf311097cf9a0ef8df3add01117ba7.camel@samba.org>
+Message-ID: <4efb83c3-6df7-af2c-798d-b4ec681562ab@samba.org>
+Date: Thu, 25 Jul 2019 20:18:20 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.2
 MIME-Version: 1.0
+In-Reply-To: <dc0d693a2caf311097cf9a0ef8df3add01117ba7.camel@samba.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,48 +55,43 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba@lists.samba.org,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-We can't do that until we provide a reasonable way for SMB1 clients to
-connect, probably via a SMB1 -> SMB2 proxy based on the NTVFS file
-server (where we had such a prototype until very recently). 
+On 25/07/2019 19:59, Andrew Bartlett via samba-technical wrote:
+> We can't do that until we provide a reasonable way for SMB1 clients to
+> connect, probably via a SMB1 -> SMB2 proxy based on the NTVFS file
+> server (where we had such a prototype until very recently).
+>
+> It won't be perfect SMB1, but needs to be enough for basic operation.
+>
+> I'm quite convinced Samba and SMB1 are critical infrastructure in many
+> places and while we may dislike SMB1 for good reasons the alternative
+> is to force such installations to rely on what will in 2 years be an
+> unsupported and therefore soon an insecure version.
+>
+> I'm not comfortable with that as an outcome, so we need to provide them
+> a way forward.
+>
+> Andrew Bartlett
+>
+Andrew, why do we need to keep anything like SMBv1 around in the long term ?
 
-It won't be perfect SMB1, but needs to be enough for basic operation.
+If you do an internet search, you will find blogs from Microsoft 
+employees nearly begging people not to use SMBv1 and the fact that new 
+Windows 10 installs have SMBv1 turned off by default, leads me to think 
+that it wont be long before it is totally removed from windows.
 
-I'm quite convinced Samba and SMB1 are critical infrastructure in many
-places and while we may dislike SMB1 for good reasons the alternative
-is to force such installations to rely on what will in 2 years be an
-unsupported and therefore soon an insecure version.  
+If SMBv1 is removed from windows, then the major user base will 
+disappear, so are you saying Samba should keep SMBv1 around just for 
+Unix users ?
 
-I'm not comfortable with that as an outcome, so we need to provide them
-a way forward. 
+If you are considering the Network Browsing problem, then there are 
+other ways to do this.
 
-Andrew Bartlett
-
-On Fri, 2019-07-19 at 20:37 +1000, ronnie sahlberg via samba-technical
-wrote:
-> Good stuff.
-> 
-> Next step will be to delete the entire smb1 codebase for the next major version.
-> 
-> On Thu, Jul 11, 2019 at 8:52 AM Jeremy Allison via samba-technical
-> <samba-technical@lists.samba.org> wrote:
-> > In some small way to apologise for linking to twitter
-> > yesterday :-).
-> > 
-> > https://tech.slashdot.org/story/19/07/10/2119238/samba-411-removes-smb1-file-sharing-protocol-version-by-default
-> > 
-> > https://www.theregister.co.uk/2019/07/09/samba_sans_one_smb1/
-> > 
--- 
-Andrew Bartlett                       http://samba.org/~abartlet/
-Authentication Developer, Samba Team  http://samba.org
-Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+Rowland
 
 
 
