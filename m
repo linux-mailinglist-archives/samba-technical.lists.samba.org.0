@@ -2,63 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BCF97586E
-	for <lists+samba-technical@lfdr.de>; Thu, 25 Jul 2019 21:55:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3E10758EB
+	for <lists+samba-technical@lfdr.de>; Thu, 25 Jul 2019 22:36:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=z5KkkiL6ERJvT0HD4fPP02fUkT3S/jvcEMI8g1dTC/0=; b=M8vdXEXnqErgTytUIGougHk1V5
-	H23SQYFjvKJa89aq1aMceIPCXZkK2kz1M7A7MSemxuu+FwtHQ+huioPk7DCHzk+oxOr8JPEBz31st
-	n+uDYN2LS7veVxBi39Eh5QdjdmJ1Df6sJyaZZGHG3Asz3yXiJPoKjBQHB/yINU0/xEl8YwN7TJNoG
-	RFIMQQy4fxpLNvMfcT08HsV50L3I+Z3LvBKxIl98Xit9vjCVxtYf1NGHa9AJe/qZ1knpogkmBKqN3
-	9c10qR27tLZOGH82wspdbUicLw0/Qz/oYObNTtQv92aJXDJmBhGD/SwH+D1aowCc4Fctq7aj8joNZ
-	Qhg9fjBA==;
-Received: from localhost ([::1]:23616 helo=hr1.samba.org) 
+	bh=bZH1EfO+wp4ZZepYUwOn6w2UpQm5V1jccHCzgFCqyAE=; b=gavRzXCBxScM11GhOCFRk9DV+F
+	yCse9I15oCXuiQdV34HdIK/GkDtzIJTUOKGmUUaLZGq+c4d4WPHPdahw1FKHM1WwooQUJOpiLwTo3
+	FhLPx5YVJ6pdGHSEh6dgb9exAPmXVnAUzqYOKwadWdfDWKVUVdHToXnZO7tuU2VO7F0vLm/uVxQXV
+	fpoEVNnQtBlfqdWrWgdFYUvzcuI5UarOswksKkwRxZSwCClR0pYEUCg2f1vW4jryKZTHLxEZejVE8
+	4fJZor85c4hsSQn3UE0KR9z+Z+mlt4m95M9n2DNrZuLDemxCUCNnBjGxifQ9H4fCNmTwUTzSabt0B
+	V/+aXJfA==;
+Received: from localhost ([::1]:29408 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hqjq9-000Kmt-2F; Thu, 25 Jul 2019 19:55:49 +0000
-Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:35719) 
+	id 1hqkSn-000Lc1-Db; Thu, 25 Jul 2019 20:35:45 +0000
+Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:45702) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hqjq4-000Kmm-0q
- for samba-technical@lists.samba.org; Thu, 25 Jul 2019 19:55:46 +0000
-Received: by mail-io1-xd2f.google.com with SMTP id m24so99887850ioo.2
- for <samba-technical@lists.samba.org>; Thu, 25 Jul 2019 12:55:43 -0700 (PDT)
+ (Exim) id 1hqkSi-000Lbs-HS
+ for samba-technical@lists.samba.org; Thu, 25 Jul 2019 20:35:42 +0000
+Received: by mail-lj1-x242.google.com with SMTP id m23so49194785lje.12
+ for <samba-technical@lists.samba.org>; Thu, 25 Jul 2019 13:35:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Dusr0vAaW5K61r5dK7VZdF/WKWBEiZ9OhsjakRiVQPo=;
- b=JLBf4yXhfwUNDmmJsz3qOSlfquY77UqPcMb/FSIAEcPDrB3zjOA9bVLaNV9iQHlqxD
- Jc/1L7yyXS+BICFra3HCb/nHaLkawdpafMk9qE+KtB8xcWDpYo+TUDVRyWs4CmNQQSEH
- j4U3V5LpkquGbsKGKwun2uYkwiyOAyWp+v7jwSktBIgbmp93MgH6LbuZYPuWXeKLtWbd
- Vj9krOg846BAqkK7bRm4O9TWqQGW9a72Nb7BUOfNHh6Uet5Q2Sd6rTycRHy8qH5pM2l9
- tW0eEneXpsN282+0sZSWYyfH16190NVAfsq3lpFKajNGU3eDF+9SGHokXAXCOhPvh3pY
- RAWw==
+ :cc:content-transfer-encoding;
+ bh=bZH1EfO+wp4ZZepYUwOn6w2UpQm5V1jccHCzgFCqyAE=;
+ b=I/SbeOa8k5S8/M7sVSOen0A+TyTVCHMCzF/FbUKc5gXpS83cIUlnNWsABNgzRrohMV
+ CNa1akp/y9X8N2IjtLMu+vRWp6d4g8sjcmYED3KjUV1gdaOsd9nB84co5NNH1Ios69bD
+ ZrUosYNmc78JfRsXfA1C6FATWO9H7DP/hvuU6PruMXcOTF7eKaEBiLFdDvq8yOrPY+zC
+ gojt5sSW9bmJFqwrvhTFFGM3ydrgIDkTs+LkVZdZNwoc7EI/DNt9k7EHw6jgjnIhJahl
+ XMgxtMxx327dvT9YtwwPIUItWPOxjEa+L0Km/dvILnsPEmfGawo/Ygapg9Ur+8wMLKhJ
+ o0og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Dusr0vAaW5K61r5dK7VZdF/WKWBEiZ9OhsjakRiVQPo=;
- b=hUb+MhXxNBpQpaN8gskAwO8hS/NMakzHpxEGGwDck4rxQuukKdkmp1IRG2x8EK4ojC
- TVmOWhkAhj9ZALvUEX+ogOg3dLkwD+bHTXypyAl2ImpcR86T2EVtmDP7zSbyLysDFO/t
- Pla05fYlALp2vHpzHZprZiJKiJ/HeCVsR7oQP2PBMJQ8FLAvziO18VXTwnyNwnziIlbt
- Gf96wxyCmvBjR3IsbCLFWTBaUeYyQjs2HBlIoMJMLjSQuYmuYfgjEyD1h/bzaKutYl7x
- QmmzZhwfoz6uxiQO32gq45U6A4PLMf+whZF3zi9u5FmuCvfy+4QEWrLo9K1ZxbrF6nhh
- 45ww==
-X-Gm-Message-State: APjAAAX1Sush5GuicMJW0F8N+dfpvcYcx0DHtxruy5sL6Mj/YEZXuYs7
- Le1yuGtvn8cT3JjY3R3ozvCGqvwvnaQwSTlvyKRhLA==
-X-Google-Smtp-Source: APXvYqyKsl3jfHnooRNByV5eSbXFz/KUSypSuEGHEiHMVewF/Y6APwrxQhecVhjDDmKRL4rc2yTXThv2CWhavRDrFGg=
-X-Received: by 2002:a5e:9314:: with SMTP id k20mr65938129iom.235.1564084542075; 
- Thu, 25 Jul 2019 12:55:42 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=bZH1EfO+wp4ZZepYUwOn6w2UpQm5V1jccHCzgFCqyAE=;
+ b=IRsNRQXrQGB6N8KLN4pDzGA9Q84HLi1VZcxJkSkMdftkcQoGQAUxyLPedEFFiAlHkl
+ Pky1RE21M6DZ9o1XT+9q4jCAZzVvr7/i3A3tIMMSMLuhKkxPPN/1Rty7+o4ZKufSYZU/
+ vBybM9XjUB4K19tIhvfQM6YPIr8HnsbBwZdgIchfJwzT9O4e46HrCibOVvtg24Lm3ogE
+ yxrjhirTaOxuYZ9Fryx82qwa6IzvyRwWqvoT4NUxyYb5T7nq7/oFYDg2Eq8leyvYrW7r
+ 8rPdXTOaHFeJDWO9nWazc/7Y0BTYWVXBHwJOoet8m6Kxdcq+dRhW22P6nmD20W2MD6ou
+ M3jg==
+X-Gm-Message-State: APjAAAXzAzuE7sOrJmQuhPWnzqhQwf6OcaXF7y/v92GmZnNHVqDrq1mG
+ y7+gdKQ93SYiSpNBLsHYS/Qwim/ULzu8emOLV9Uv
+X-Google-Smtp-Source: APXvYqyCpZoR6mH4jGliesmebXDKnBSJSvMH10sJOh78OipnpgT6Ur5RY8DiqAJhXEZzpNUZHov+Sw9DK9ImJ4hOv0w=
+X-Received: by 2002:a2e:8945:: with SMTP id b5mr46051581ljk.93.1564086939506; 
+ Thu, 25 Jul 2019 13:35:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190710225121.GA142072@jra4>
- <CAN05THQ65himSVSYpzypUwDeJoaV6FPAhQpV4NEeCT3fRaBxFg@mail.gmail.com>
- <dc0d693a2caf311097cf9a0ef8df3add01117ba7.camel@samba.org>
- <4efb83c3-6df7-af2c-798d-b4ec681562ab@samba.org>
- <8219d257b2fe68717939d2f41566ae669fab8466.camel@samba.org>
-In-Reply-To: <8219d257b2fe68717939d2f41566ae669fab8466.camel@samba.org>
-Date: Thu, 25 Jul 2019 15:55:30 -0400
-Message-ID: <CAP5+4qdrwPjgb6TLa2nXJ8HBibR2t0T=of17_pXrwUjAyM2+ow@mail.gmail.com>
-Subject: Re: Turning off SMB1 make slashdot and theregister !
-To: Andrew Bartlett <abartlet@samba.org>
+References: <380e1b86-1911-b8a5-6b02-276b6d4be4fe@wallix.com>
+In-Reply-To: <380e1b86-1911-b8a5-6b02-276b6d4be4fe@wallix.com>
+Date: Thu, 25 Jul 2019 13:35:27 -0700
+Message-ID: <CAKywueSO=choOsw6THnEnmN4UwhACHU1o1pJX8ypx0wjVTmiKQ@mail.gmail.com>
+Subject: Re: PROBLEM: Kernel oops when mounting a encryptData CIFS share with
+ CONFIG_DEBUG_VIRTUAL
+To: Sebastien Tisserant <stisserant@wallix.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,81 +70,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Sonic via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Sonic <sonicsmith@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Shilovsky <pavel.shilovsky@gmail.com>
+Cc: Steve French <sfrench@samba.org>,
+ "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ Cristian Popi <cpopi@wallix.com>, Cyrille Mucchietto <cmucchietto@wallix.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I'm pretty sure my Oppo 105 Blu-Ray player, which I stream video to via
-Samba, can only use SMBv1. There may be other such devices with this
-limitation as well.
+=D1=87=D1=82, 25 =D0=B8=D1=8E=D0=BB. 2019 =D0=B3. =D0=B2 09:57, Sebastien T=
+isserant via samba-technical
+<samba-technical@lists.samba.org>:
+...
+>
+> mount works without CONFIG_DEBUG_VIRTUAL
+>
+> If we don't set CONFIG_VMAP_STACK mount works with CONFIG_DEBUG_VIRTUAL
+>
+>
+> We have the following (very quick and dirty) patch :
+>
+> Index: linux-4.19.60/fs/cifs/smb2ops.c
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> --- linux-4.19.60.orig/fs/cifs/smb2ops.c
+> +++ linux-4.19.60/fs/cifs/smb2ops.c
+> @@ -2545,7 +2545,15 @@ fill_transform_hdr(struct smb2_transform
+>  static inline void smb2_sg_set_buf(struct scatterlist *sg, const void *b=
+uf,
+>                     unsigned int buflen)
+>  {
+> -    sg_set_page(sg, virt_to_page(buf), buflen, offset_in_page(buf));
+> +      void *addr;
+> +      /*
+> +       * VMAP_STACK (at least) puts stack into the vmalloc address space
+> +      */
+> +      if (is_vmalloc_addr(buf))
+> +              addr =3D vmalloc_to_page(buf);
+> +      else
+> +              addr =3D virt_to_page(buf);
+> +      sg_set_page(sg, addr, buflen, offset_in_page(buf));
+>  }
+>
+>  /* Assumes the first rqst has a transform header as the first iov.
+>
+>
+
+Thanks for reporting this. The patch looks good to me. Did you test
+your scenario all together with it (not only mounting)?
 
 
-On Thu, Jul 25, 2019 at 3:28 PM Andrew Bartlett via samba-technical <
-samba-technical@lists.samba.org> wrote:
+Best regards,
+Pavel Shilovskiy
 
-> On Thu, 2019-07-25 at 20:18 +0100, Rowland penny via samba-technical
-> wrote:
-> > On 25/07/2019 19:59, Andrew Bartlett via samba-technical wrote:
-> > > We can't do that until we provide a reasonable way for SMB1 clients
-> > > to
-> > > connect, probably via a SMB1 -> SMB2 proxy based on the NTVFS file
-> > > server (where we had such a prototype until very recently).
-> > >
-> > > It won't be perfect SMB1, but needs to be enough for basic
-> > > operation.
-> > >
-> > > I'm quite convinced Samba and SMB1 are critical infrastructure in
-> > > many
-> > > places and while we may dislike SMB1 for good reasons the
-> > > alternative
-> > > is to force such installations to rely on what will in 2 years be
-> > > an
-> > > unsupported and therefore soon an insecure version.
-> > >
-> > > I'm not comfortable with that as an outcome, so we need to provide
-> > > them
-> > > a way forward.
-> > >
-> > > Andrew Bartlett
-> > >
-> >
-> > Andrew, why do we need to keep anything like SMBv1 around in the long
-> > term ?
-> >
-> > If you do an internet search, you will find blogs from Microsoft
-> > employees nearly begging people not to use SMBv1 and the fact that
-> > new
-> > Windows 10 installs have SMBv1 turned off by default, leads me to
-> > think
-> > that it wont be long before it is totally removed from windows.
-> >
-> > If SMBv1 is removed from windows, then the major user base will
-> > disappear, so are you saying Samba should keep SMBv1 around just for
-> > Unix users ?
->
-> I'm more thinking about the DOS users, the OS/2 users and the Windows
-> 3.11 users.
->
-> > If you are considering the Network Browsing problem, then there are
-> > other ways to do this.
->
-> It isn't browsing.  Samba is the glue that holds a lot of things
-> together.
->
-> I'm sure we will find out a little of this in a year or so, when 4.11
-> starts to be seriously used in production.
->
-> Andrew Bartlett
->
-> --
-> Andrew Bartlett                       https://samba.org/~abartlet/
-> Authentication Developer, Samba Team  https://samba.org
-> Samba Developer, Catalyst IT
-> https://catalyst.net.nz/services/samba
->
->
->
->
->
