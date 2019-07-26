@@ -2,43 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4174077231
-	for <lists+samba-technical@lfdr.de>; Fri, 26 Jul 2019 21:32:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8E2977244
+	for <lists+samba-technical@lfdr.de>; Fri, 26 Jul 2019 21:39:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=YRuWsVRiUua73Q6LCQl1n8qhRaB4tKUsMaLt8bflMds=; b=Z8R4G+4mlPyOmX+0+UF6oHxnpe
-	EzMtAfsdh/oAw5BGSGQnLgh7KfXfG16lquQyn+vPR0QE5IIZhJ11W7NJa4KOsl66rQKL38JB9K0PM
-	50jvb//dYYaG7zbSf1DIXMfeAB9O/GQsu5ycWbnN1lZ4LMM0WlZGyLP5RX4zpqFjn1ZCD6ch+QiW/
-	+WBUVGUG+jw8a3FogGdY9CC/qi0q8qTYiOeV0jLD0vu0dNvTp04V/SsQnTm93pOdVqpFKcW7OKt6n
-	ADngpfRlzvCiJrLpZ6f+xTCEzp11vU0BgCXubtptJcof57Pg0z0Lw8p38xFKKqJJ12Qi8MpwZ51Mr
-	IrTrBebw==;
-Received: from localhost ([::1]:46554 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=5W8ATVYv1BMjpDAkfXtFqdctzVcQz7j0l3wDLYsfu60=; b=1LZMXXBMRj6R370ZYyFV/DU+Zp
+	kwJGP8+xtT27NsWwX4KbpuPxJQMpY5TrKe+NSToR1OVmXCqA/wPRAHGRUh5Oxui4YBphOtottxJ98
+	raacQtE7tykHdHt74Z/yb5vIW2nxJdMa5inCPeTJuD6QtC9fbAfRXJv1vqCp2Ua09AiqpeGMSiwtU
+	jYhWy8Drw5RJGmvWOZGHnvQ0Aa83p9q5jrOjdTUETaBzfd3WEV9f55yzIYOXVLwJIx4KVQCB3fGNC
+	+kLyKvmGYrrr9Zul+equ7Jo3FoDCO+JDUi5wFgk0pR+OaXYs8NxGt97NrQBdj/nDIh2inCBJQIdqi
+	F7G5Z4Pg==;
+Received: from localhost ([::1]:48152 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hr5wC-000Wqt-T7; Fri, 26 Jul 2019 19:31:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48920) 
+	id 1hr63z-000X41-50; Fri, 26 Jul 2019 19:39:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53128) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hr5w6-000WqY-A7; Fri, 26 Jul 2019 19:31:29 +0000
+ (Exim) id 1hr63v-000X3u-66
+ for samba-technical@lists.samba.org; Fri, 26 Jul 2019 19:39:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:Cc:To;
- bh=YRuWsVRiUua73Q6LCQl1n8qhRaB4tKUsMaLt8bflMds=; b=cd1X39yFbDP4bWngqQ1DFg1ohT
- MHv7gN4geXZIXGViWspiiJULkVAp2yhQflV9VoC3IyQfOHdNUxSTZacx7mreLoaGrdGW6nkzBxqFN
- wOFLMgFiQ+RNEo4mLSPAAI1LIB7+podVPFuFrtqUlGf9kElJyg4BnIAKhuLY3lVQvfNU=;
+ s=42627210; h=Date:Message-ID:From:To:CC;
+ bh=5W8ATVYv1BMjpDAkfXtFqdctzVcQz7j0l3wDLYsfu60=; b=vfYvbzthRnH3RFFFgmhSEx9ewq
+ oe7798dbyW1Yvt+wgs30RcY2ROXNOYG3mwgVDh1FC/sAfQE9oC3Giy/gLG4beOrZmlQFFoC0D58e+
+ X5mYqVc9yBDI1OhBFcRS0bvKvXajfcCqj21TtPGrlyCdRGUSSudHaBBraXcpzCEdugKs=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1hr5w4-00074L-JM; Fri, 26 Jul 2019 19:31:24 +0000
-To: noel.power@suse.com
-References: <20190724225102.6A7EC1401D9@sn.samba.org>
+ (Exim) id 1hr63u-00079O-GH; Fri, 26 Jul 2019 19:39:30 +0000
+To: Gary Lockyer <gary@catalyst.net.nz>,
+ Samba Technical <samba-technical@lists.samba.org>
+References: <7860b3f6-995c-9d5b-e337-7ca579ea1b05@catalyst.net.nz>
 Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
-Subject: Re: [SCM] Samba Shared Repository - branch master updated
-Message-ID: <430d65f0-cfd4-798d-a2de-8ddb8e7f8b78@samba.org>
-Date: Fri, 26 Jul 2019 21:31:15 +0200
+Subject: Re: DNS performance.
+Message-ID: <a7ffc446-80c1-97b5-879f-302bc89bcc5d@samba.org>
+Date: Fri, 26 Jul 2019 21:39:25 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <20190724225102.6A7EC1401D9@sn.samba.org>
+In-Reply-To: <7860b3f6-995c-9d5b-e337-7ca579ea1b05@catalyst.net.nz>
 Content-Type: multipart/signed; micalg=pgp-sha512;
  protocol="application/pgp-signature";
- boundary="l2O8J7iHS4ASCP2pRZmjctsmCE2dmDe3H"
+ boundary="ouE3zPAmWRJlHQYMtOJrqQDNm6wmfEtur"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,118 +56,96 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: samba-technical@lists.samba.org, samba-cvs@lists.samba.org,
- Gary Lockyer <gary@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---l2O8J7iHS4ASCP2pRZmjctsmCE2dmDe3H
-Content-Type: multipart/mixed; boundary="R9JKRPFscAgqhL9hos1iaKz2983C1TUJ4";
+--ouE3zPAmWRJlHQYMtOJrqQDNm6wmfEtur
+Content-Type: multipart/mixed; boundary="R0uTkPBpncRE8u3tQUJMWOptI7FKG8V0H";
  protected-headers="v1"
 From: Stefan Metzmacher <metze@samba.org>
-To: noel.power@suse.com
-Cc: samba-technical@lists.samba.org, samba-cvs@lists.samba.org,
- Gary Lockyer <gary@samba.org>
-Message-ID: <430d65f0-cfd4-798d-a2de-8ddb8e7f8b78@samba.org>
-Subject: Re: [SCM] Samba Shared Repository - branch master updated
-References: <20190724225102.6A7EC1401D9@sn.samba.org>
-In-Reply-To: <20190724225102.6A7EC1401D9@sn.samba.org>
+To: Gary Lockyer <gary@catalyst.net.nz>,
+ Samba Technical <samba-technical@lists.samba.org>
+Message-ID: <a7ffc446-80c1-97b5-879f-302bc89bcc5d@samba.org>
+Subject: Re: DNS performance.
+References: <7860b3f6-995c-9d5b-e337-7ca579ea1b05@catalyst.net.nz>
+In-Reply-To: <7860b3f6-995c-9d5b-e337-7ca579ea1b05@catalyst.net.nz>
 
---R9JKRPFscAgqhL9hos1iaKz2983C1TUJ4
+--R0uTkPBpncRE8u3tQUJMWOptI7FKG8V0H
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-Hi Noel,
+Hi Gary,
 
-thanks for fixing clang warnings, but
-I fear the following changes are wrong.
+> One of the performance bottlenecks that we're seeing on the AD is DNS
+> performance in both the internal and BIND9 serverts.  I've taken a quic=
+k
+> look at enabling pre-fork on the internal DNS server this mostly works.=
 
-Can we have SMB_ASSERT(hdr !=3D NULL); after the if statements with a
-comment explaining why it's there.
+>=20
+> Queries work, but updates don't
+>=20
+> The updates use DNS TSIG to do the authentication, which requires
+> holding authentication state between requests.
+>=20
+> I did look at using shared memory to hold this state but could not work=
 
-> diff --git a/source3/lib/ctdbd_conn.c b/source3/lib/ctdbd_conn.c
-> index d5fac572d3c..8a8fbec4552 100644
-> --- a/source3/lib/ctdbd_conn.c
-> +++ b/source3/lib/ctdbd_conn.c
-> @@ -398,15 +398,16 @@ static int ctdb_read_packet(int fd, int timeout, =
-TALLOC_CTX *mem_ctx,
->  static int ctdb_read_req(struct ctdbd_connection *conn, uint32_t reqid=
-,
->  			 TALLOC_CTX *mem_ctx, struct ctdb_req_header **result)
->  {
-> -	struct ctdb_req_header *hdr;
-> +	struct ctdb_req_header *hdr =3D NULL;
->  	int ret;
-> =20
->   next_pkt:
-> =20
->  	ret =3D ctdb_read_packet(conn->fd, conn->timeout, mem_ctx, &hdr);
-> -	if (ret !=3D 0) {
-> +	if (hdr =3D=3D NULL || ret !=3D 0) {
->  		DBG_ERR("ctdb_read_packet failed: %s\n", strerror(ret));
->  		cluster_fatal("failed to read data from ctdbd\n");
-> +		return -1;
->  	}
+> out how to copy the auth_session_info and gensec_security strucures int=
+o
+> the shared memory.
 
-This is not strictly a bug, but it's makes the code really unclear.
+We could use a tdb similar to the netlogon challenges,
+see schannel_save_challenge().
+There are gss_export_sec_context/gss_import_sec_context
+and we may have gensec hooks for it, which would be also useful
+in other cases.
 
->  	DEBUG(11, ("Received ctdb packet\n"));
-> @@ -1038,7 +1039,7 @@ int ctdbd_traverse(struct ctdbd_connection *conn,=
- uint32_t db_id,
->  	int ret;
->  	TDB_DATA key, data;
->  	struct ctdb_traverse_start t;
-> -	int32_t cstatus;
-> +	int32_t cstatus =3D 0;
-> =20
->  	if (ctdbd_conn_has_async_reqs(conn)) {
->  		/*
-> @@ -1945,7 +1946,7 @@ static void ctdbd_parse_done(struct tevent_req *s=
-ubreq)
-> =20
->  	ret =3D ctdb_pkt_recv_recv(subreq, state, &hdr);
->  	TALLOC_FREE(subreq);
-> -	if (tevent_req_error(req, ret)) {
-> +	if ((hdr =3D=3D NULL) || tevent_req_error(req, ret)) {
->  		DBG_ERR("ctdb_pkt_recv_recv returned %s\n", strerror(ret));
->  		return;
->  	}
+> A possible approach would be to:
+>   * Launch a crypto worker process that handles the tsig processing and=
 
-This is actually really a bug, in case  ctdb_pkt_recv_recv fails
-we'll never run tevent_req_error() and the callers callback function,
-so it will just hang as hdr is always NULL if ret is not 0.
+>     maintains the associated state.
+>   * The DNS worker processes forward the TSIG packets to the crypto
+>     worker via messaging, and wait for the response.
+>   * None TSIG queries are handled directly by the DNS worker process.
+>=20
+> One possible issue is that we would be limited to a single crypto
+> worker. However the assumption is that query loads are much greater tha=
+n
+> the update loads. And given that we currently only store 128 sessions
+> this seems to be likely.
+>=20
+> This should all work, the only bit I'm unsure about would be waiting fo=
+r
+> a response over messaging, but believe that this should be doable.
 
-Can you revert this and add SMB_ASSERT().
-
-Thanks!
+That would also work, but I think I'd prefer a tdb.
 metze
 
 
---R9JKRPFscAgqhL9hos1iaKz2983C1TUJ4--
+--R0uTkPBpncRE8u3tQUJMWOptI7FKG8V0H--
 
---l2O8J7iHS4ASCP2pRZmjctsmCE2dmDe3H
+--ouE3zPAmWRJlHQYMtOJrqQDNm6wmfEtur
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl07VQgACgkQDbX1YShp
-vVYNERAAiR3W75DMDkqfHb6lgTl2aY/Ls/wfCy234vILlBoY/SusSJLqY4+ERKWz
-lZDon1SYHWbAmUiDlca9FEfTSHJj6WiFLsRyXCGYEj1avS//blyU5R76FnujVgz/
-jM1X4ucGgzKxwM6lc6/VdNzaS7yqU4HXsHm1MWBI8wFN125h4SPREYd55h6tLq9G
-FbWrwCWO9Zg0gNwk7M+PGR0B4jJeNkwuo5NbbIVaWt77Lr17qE2LN9uyhoXa/7PJ
-fl22nz/mR/cKdLULg58BgBsvLy/9a0GzcyQyLY7eWQtakLnIrqNI0F+DG+zgav3/
-zG9Pz7em0W84DHqIkT+kBQtQKUJ1bVdtxcQgfgjcWicl+skyeaXLBGb1k/RCJvzN
-mWl6e5tIOnXSg6jiv3uKl34HFhVHJ9LRYYshdhjI7xB5Ydj9j8eN2+onQhgAJSrs
-DHioMHheqkFbfjPPbS44Ga375ImLiQ4CvwBCq5HnWr5DDYh7VGihV7pjisk3rlx4
-2q9g0oGDLaV1tD3ahSevwXLaUt/tnJcCifRpJPQk6UY4zjBmTQeT2GwyWa6EmtPQ
-PDgsqdFP1fWEvE+kFkfMfwK8YDgYjaZS2GnqNFaLncACKCzC9/nQMlpIRm1TunNI
-Ab7LH5TyTebxfmAr7J8AF8y5yh0UpRhfJH3nG1WJraMbuWYa2do=
-=Vr/p
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl07Vu0ACgkQDbX1YShp
+vVaGYhAAxWjlTjIAWxJ/LHVRhmeiEM9N+qG5n/ULyhYlek3AT67mGlI69dQZvTXJ
++cWZbwKXUdZW3giGP1IdsvNVQQ2kOomCXBnRDB1ULKCD03G5Ac301RsNZAYFYuye
+g+loDG5gbpRy5vOuHaIbd6d2E6Ks6IIcwPQul087sk+ws3ZO2AKYWWE1AgyCI0yZ
+bNO1Fqf7vdOQ1ECzFxxL7500a4+wZhFWwb9p03sFn25B8mTT0ekXzq7riI+ZKSKR
+lmKN2pxUMdFY30iRD8hOJXI9vikDfgXmCxVd0ompR8RH3l+UDofmGA+61EbLhfKo
+XM96pvzzeWYnq5N8KLdZz9aPl1Cj/sgtZAJX57AAiriskI9/STD/KkudOIcjzYwh
+lyA28dcoRSA+0FFsV7IWEmPR3kitbIfccCY0iyKOBEgMW2VUwp8MTQ+xxS5JsVM9
+AdCCN0RtpP03OkEwhTtGO/Ixrt6KS9lPhZjfX1rjeR+VKHA0lSGLSvnRetyB/E7A
+0JA1GiC8sO9XsO8keZS0IAVBJAQClWHuEF1yLKFlOQlLx2wz/Gz4279GK/pEoJ+f
+xLaQnW/XGg6p5+ZQjRJH6OCVU2Hj6u1Qrem5SADKDsvtZGFCFeuXPnli/JjfuQrv
+wyo7m8UNJzgsbd7gyZnVBHpUPZ3Lgx/04RBgtcNs04Vbg14h8gg=
+=0TOw
 -----END PGP SIGNATURE-----
 
---l2O8J7iHS4ASCP2pRZmjctsmCE2dmDe3H--
+--ouE3zPAmWRJlHQYMtOJrqQDNm6wmfEtur--
 
