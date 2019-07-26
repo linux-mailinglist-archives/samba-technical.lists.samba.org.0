@@ -2,76 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 482AC75C58
-	for <lists+samba-technical@lfdr.de>; Fri, 26 Jul 2019 02:58:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE19E75CFB
+	for <lists+samba-technical@lfdr.de>; Fri, 26 Jul 2019 04:27:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Date:Subject;
-	bh=aLk4+3q9aDUxT+5/J0P27rMvagT1DUHV1u3sTi/v1Rk=; b=vfLnp188aX0hn0/ZkEjtm3FKL9
-	KVFWIdVdOBXdb5qSDk5Mf3f+KYtF4OKtZybMjpaeGP8n9IMiOiAuBezfh9iP20P7SNGNaYPyRjN7N
-	iiufCtyTWMnUmXs4fIy94VARhOxUfhCfO4yKqMV/4PlM2tt/lPME6cpRu1sGtgoP5oIi1AQuh+LD2
-	uDkrw5rF17XRwGErd4qdegMtP4agRxmz4npuScGxl6MNVuRw9r5ew/Oyaeyv4IRDx9ACQKZpCTN+1
-	MZGlL+peJmcI0TprBZwZnZ9ujFCqr52PfFIaGOhcjlFi7vWCNDs2CJP9tA2QFU/DiHPWoEBUc69V/
-	IgOyaGTQ==;
-Received: from localhost ([::1]:42478 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=TqrsO4vx/LLTGfp/OFwk6ZFbnOQS/xw06beB9bsAK2A=; b=dVj9HAZFbd2k8ftowqdgMTiChb
+	/n5MHcdthOTOrZCb+asatHAgTZ577lePyBg5rHJnoLJ3rAdNS5tGT+7uBurcSuPuxQVMjtIKJINcu
+	A8zbWjET9h0vIQZOoFXWa5vTBNkAtSkCdtZ4qk3RtG9WobemL4o9kk683focRvc0k06ZPUVe5I7hy
+	ivC4TOnEz73lScszftwFsO85q/89fbphztDaZqDDa1rIw7GWhOJNMrqVEFeyVaarQpbXlvmPkOJLV
+	sjUsrD50RBBvzAcswQwQ1L87l6nvnHjcVSxHZTaFhH6U2tcXBaPlaPfzPL00lAcrmKsLk8s7V6+iD
+	lW+aiJdg==;
+Received: from localhost ([::1]:46700 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hqoYd-000O0C-UT; Fri, 26 Jul 2019 00:58:04 +0000
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:45429) 
+	id 1hqpwg-000Oge-Ig; Fri, 26 Jul 2019 02:26:58 +0000
+Received: from mail-ot1-x330.google.com ([2607:f8b0:4864:20::330]:34247) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hqoYZ-000O05-F4
- for samba-technical@lists.samba.org; Fri, 26 Jul 2019 00:58:01 +0000
-Received: by mail-pf1-x435.google.com with SMTP id r1so23595932pfq.12
- for <samba-technical@lists.samba.org>; Thu, 25 Jul 2019 17:57:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ixsystems-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:subject:from:in-reply-to:date:cc
- :content-transfer-encoding:message-id:references:to;
- bh=aLk4+3q9aDUxT+5/J0P27rMvagT1DUHV1u3sTi/v1Rk=;
- b=hKMbnVZEVmkzKh2lNEI5unwFFVLvEv36C3u8hKCVLkX5zuuHyE3e2jC32PN5WkJz9O
- AU6wht4VOaYljd21gJibJEZHRDoY6sawQz6IpTQ+9gqDsm32rCXvPjHnVqhyjDPx+KB1
- oMW9xc42ImCy2Iq76dII/O+9QVM4FLjpJKMl+Soti3CyWQEfI/68KtHM0Npp8JvnLp4n
- lrIyekWpu9YqpCldl87rJKtvNb1Fb6ck7okZixWUUPpz59dqG1wZysZtdQ22mwuqvA6p
- gvRs9b07Rq23zitRby7thd5XL9E+NOqPwa6Jnf5hnkg5P4S7x0/z2GLkDjVhpfB/poiE
- Yk1w==
+ (Exim) id 1hqpwb-000Oef-AJ
+ for samba-technical@lists.samba.org; Fri, 26 Jul 2019 02:26:55 +0000
+Received: by mail-ot1-x330.google.com with SMTP id n5so53888436otk.1
+ for <samba-technical@lists.samba.org>; Thu, 25 Jul 2019 19:26:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=TqrsO4vx/LLTGfp/OFwk6ZFbnOQS/xw06beB9bsAK2A=;
+ b=pxjOfpZvrOhrLdJccP4lA5SVauBveMNRaBUj0DtaQurslyAeM3YZZ/P31Gy4qfaiWW
+ Zth3jC++BZT1729Vo+RONPzH0b4r80mgMUzTKQhB5tbSKkgErPr5Lg5I3QviWpV333pB
+ Qgo3koQMDkfDXDHSWASq2Jv904ZFoxTKq8Wxztcv5D9cyL5Kdv5vdLjfU62fFOavWVwM
+ htW3ui+tkcN36BP6yeQl6kMzPSGfE29I9NC8ceRJ9ViFeZdf74uDdESqM31xgy/BzsH3
+ cXplaBz2tYGOBJC3x30LQbLHxzB87MCv9TRtxj6wFSW5MIWMsWt5l+NAz+IMMjNph2UC
+ dTAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
- :content-transfer-encoding:message-id:references:to;
- bh=aLk4+3q9aDUxT+5/J0P27rMvagT1DUHV1u3sTi/v1Rk=;
- b=EaUbLqh/nO/FxBEx48+FxwgtZWAVaAC1CsQBh1u1WIj2ihfStJ4ZMgv0P6tFNdd/38
- 65gKvzCJ5t4kOmwaNUUpz6jHCggfMoegdr2WmaieaKlzBIi3TQrgFA1xmTICRKX91ET3
- fO9UhYDmYTHDDtpekJtx6o8gUzjXau39op0dGaBU9R4UDBG3oly91WTjuZ7ZILlDbNX7
- lPkBxIBPanmYbffaZINdONTZ/TGPakjFPGo2Wle7OArekHnyoyqaVeR0PaBIF00VyZqz
- 2MGVxJL1befOrmf7u64qcBB7siKS71T6gSDBguLpLUJoQIMY+ETud1fSMER4ebgfvxXh
- szqQ==
-X-Gm-Message-State: APjAAAVHtE/7UQK9WNow0RQ87tI2ZtnMWCqCzA9UCVrKtvqqNB4FfTij
- 7OmvWEzIzYXdXV88iqADUXflqeIGMlnER1pdH1DxFHR3H1axtHUkugF4aaIfDTCO+vw60QH2Obf
- N/GZdBdPhBxmPVYSBO39Xz8+5YJXfbSeD3TcUF5ZCKG9iofKBI6hV0hxeRH1VCItuor/dMHhlWd
- o7xhsw
-X-Google-Smtp-Source: APXvYqydrVN2stoLBj/gIDfx+1eB5lt9G9uUM2VxK936dTtIU6pfFAOJbc9ypcyNyNHugFknca61uA==
-X-Received: by 2002:a65:654d:: with SMTP id a13mr72592647pgw.196.1564102676702; 
- Thu, 25 Jul 2019 17:57:56 -0700 (PDT)
-Received: from ?IPv6:2600:6c5d:5900:1e6:150c:535c:e4bb:e352?
- (2600-6c5d-5900-01e6-150c-535c-e4bb-e352.dhcp6.chtrptr.net.
- [2600:6c5d:5900:1e6:150c:535c:e4bb:e352])
- by smtp.gmail.com with ESMTPSA id c10sm9033267pfo.36.2019.07.25.17.57.55
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 25 Jul 2019 17:57:55 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (1.0)
-Subject: Re: Turning off SMB1 make slashdot and theregister !
-X-Mailer: iPhone Mail (16F203)
-In-Reply-To: <CAN05THQyQVOCUSwLrtoQoR93_ac2+uGfzots-3W03uwnJGvgXg@mail.gmail.com>
-Date: Thu, 25 Jul 2019 20:57:54 -0400
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <DEE3294E-5EE9-428D-8F60-8EAB709CABB3@ixsystems.com>
-References: <20190710225121.GA142072@jra4>
- <CAN05THQ65himSVSYpzypUwDeJoaV6FPAhQpV4NEeCT3fRaBxFg@mail.gmail.com>
- <dc0d693a2caf311097cf9a0ef8df3add01117ba7.camel@samba.org>
- <4efb83c3-6df7-af2c-798d-b4ec681562ab@samba.org>
- <8219d257b2fe68717939d2f41566ae669fab8466.camel@samba.org>
- <CAN05THQyQVOCUSwLrtoQoR93_ac2+uGfzots-3W03uwnJGvgXg@mail.gmail.com>
-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=TqrsO4vx/LLTGfp/OFwk6ZFbnOQS/xw06beB9bsAK2A=;
+ b=tlnO49g9YqOqBbwFtDG/z0TEMkqNA5ifffFsEshwilEQnJterHxcDRB+bDNAXVxozY
+ KoFMU9VjnSicakFoWFbk3YUB3sWR2zx5KT/nLagyHfaBVpfV/swo4ft9wNVcpwx77QkA
+ ySE1mDYxYetGpsGqKdGmu37NvYZD5XfFvfCsj7x1/VpsIu2Lyde746/vgaFxXOGen0Bp
+ sRvQ7dZ7dls270VdmByQOwqJoS+vQERPGTl01Ti07zuFX3OfYI9zLa9xOQk8c4+fMCcM
+ P5FuFKRAE3quofbP/h+pPUzWly+qbKmtPp4AcZMSj4j3nxwK3rYlWD/jfsAJ4bM43DN3
+ oMqw==
+X-Gm-Message-State: APjAAAUNpvI5yt+JbPV6oXcUas8dxVX+lyDDCfPfV9oG9Ob70eOb65Ig
+ HZtJb73JIYLJBLrGYXh50vZnFQx1vdJx1DN7TxTAAhVK
+X-Google-Smtp-Source: APXvYqyxvoO15AhxDhFyrOkNvN4jvnih3UYnZdAyEsBr1huMW5+MkdBDs9QniF1eB76Aaep3gN16lM6f3Rkd3/nnbfA=
+X-Received: by 2002:a05:6830:1653:: with SMTP id
+ h19mr12656266otr.232.1564108010325; 
+ Thu, 25 Jul 2019 19:26:50 -0700 (PDT)
+MIME-Version: 1.0
+Date: Fri, 26 Jul 2019 12:26:38 +1000
+Message-ID: <CAJ+X7mQzPtsL-YiS1J=MN3fh2z6D=nWGncnrn7Jn-MfNkJgTFw@mail.gmail.com>
+Subject: [PATCH] Minor fix to conf handling of empty values
+To: Samba Technical <samba-technical@lists.samba.org>
+Content-Type: multipart/mixed; boundary="00000000000058d6d7058e8c4650"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,15 +65,96 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Walker <awalker@ixsystems.com>
-Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
+From: Amitay Isaacs via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Amitay Isaacs <amitay@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I think we turned off SMB1 by default in FreeNAS about a year ago. There are=
- quite a few devices exclusively using it out there, but the number appears t=
-o be decreasing. The general user response was criticism of the vendor that=E2=
-=80=99s SMB1 only rather than of FreeNAS / samba.=
+--00000000000058d6d7058e8c4650
+Content-Type: text/plain; charset="UTF-8"
+
+Hi,
+
+In tini, allow_empty_value=false causes the parser to ignore the lines
+without '=' sign, but lines with nothing after '=' sign are allowed and
+cause empty string ("") to be passed as a value.
+
+This is counter-intuitive, so conf requires special handling for empty
+values (which are treated as invalid).
+
+Please review and push.
+
+Amitay.
+
+--00000000000058d6d7058e8c4650
+Content-Type: text/x-patch; charset="US-ASCII"; name="ctdb.patch"
+Content-Disposition: attachment; filename="ctdb.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_jyjhi4rd0>
+X-Attachment-Id: f_jyjhi4rd0
+
+RnJvbSAzOTk3Y2I3ZmJjMDJhODY2MTZhYzJjZjJmOWUxYTEzZGUyN2Y4ZWJkIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBBbWl0YXkgSXNhYWNzIDxhbWl0YXlAZ21haWwuY29tPgpEYXRl
+OiBUaHUsIDI1IEp1bCAyMDE5IDE1OjE1OjIzICsxMDAwClN1YmplY3Q6IFtQQVRDSCAxLzNdIGN0
+ZGItdGVzdHM6IFVzZSByZXF1aXJlZF9lcnJvciBpbnN0ZWFkIG9mIHJlcXVpcmVkX3Jlc3VsdAoK
+U2lnbmVkLW9mZi1ieTogQW1pdGF5IElzYWFjcyA8YW1pdGF5QGdtYWlsLmNvbT4KLS0tCiBjdGRi
+L3Rlc3RzL2N1bml0L2NvbmZfdGVzdF8wMDEuc2ggfCA2ICsrKy0tLQogMSBmaWxlIGNoYW5nZWQs
+IDMgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9jdGRiL3Rlc3Rz
+L2N1bml0L2NvbmZfdGVzdF8wMDEuc2ggYi9jdGRiL3Rlc3RzL2N1bml0L2NvbmZfdGVzdF8wMDEu
+c2gKaW5kZXggZDJmZmE5ODg3NDUuLjQ4N2I1MDhiNTdhIDEwMDc1NQotLS0gYS9jdGRiL3Rlc3Rz
+L2N1bml0L2NvbmZfdGVzdF8wMDEuc2gKKysrIGIvY3RkYi90ZXN0cy9jdW5pdC9jb25mX3Rlc3Rf
+MDAxLnNoCkBAIC01MSw3ICs1MSw3IEBAIGNhdCA+ICIkY29uZmZpbGUiIDw8RU9GCiBbc2VjdGlv
+bjFdCiBFT0YKIAotcmVxdWlyZWRfcmVzdWx0IDIyIDw8RU9GCityZXF1aXJlZF9lcnJvciBFSU5W
+QUwgPDxFT0YKIGNvbmY6IHZhbGlkYXRpb24gZm9yIHNlY3Rpb24gW3NlY3Rpb24xXSBmYWlsZWQK
+IFtzZWN0aW9uMV0KIAkjIGtleTEgPSBkZWZhdWx0CkBAIC02Myw3ICs2Myw3IEBAIGNhdCA+ICIk
+Y29uZmZpbGUiIDw8RU9GCiAgICAga2V5MSA9IHVua25vd24KIEVPRgogCi1yZXF1aXJlZF9yZXN1
+bHQgMjIgPDxFT0YKK3JlcXVpcmVkX2Vycm9yIEVJTlZBTCA8PEVPRgogY29uZjogdmFsaWRhdGlv
+biBmb3Igc2VjdGlvbiBbc2VjdGlvbjFdIGZhaWxlZAogW3NlY3Rpb24xXQogCSMga2V5MSA9IGRl
+ZmF1bHQKQEAgLTEwNCw3ICsxMDQsNyBAQCBjYXQgPiAiJGNvbmZmaWxlIiA8PEVPRgogICAgIGZv
+byA9IGJhcgogRU9GCiAKLXJlcXVpcmVkX3Jlc3VsdCAyMiA8PEVPRgorcmVxdWlyZWRfZXJyb3Ig
+RUlOVkFMIDw8RU9GCiBjb25mOiB1bmtub3duIHNlY3Rpb24gW3NlY3Rpb24yXQogY29uZjogdW5r
+bm93biBzZWN0aW9uIGZvciBvcHRpb24gImZvbyIKIFtzZWN0aW9uMV0KLS0gCjIuMjEuMAoKCkZy
+b20gY2NlMGNjYjU1MjM0YjBlZWIxMmY3NmJjOGJkYjMzMjlkNDcwOTkxOCBNb24gU2VwIDE3IDAw
+OjAwOjAwIDIwMDEKRnJvbTogQW1pdGF5IElzYWFjcyA8YW1pdGF5QGdtYWlsLmNvbT4KRGF0ZTog
+VGh1LCAyNSBKdWwgMjAxOSAxNToxNDozMiArMTAwMApTdWJqZWN0OiBbUEFUQ0ggMi8zXSBjdGRi
+LWNvbW1vbjogRml4IGVtcHR5IHZhbHVlIGhhbmRsaW5nIGluIGNvbmYKCkluIHRpbmksIGFsbG93
+X2VtcHR5X3ZhbHVlPWZhbHNlIGNhdXNlcyB0aGUgcGFyc2VyIHRvIGlnbm9yZSB0aGUgbGluZXMK
+d2l0aG91dCAnPScgc2lnbiwgYnV0IGxpbmVzIHdpdGggbm90aGluZyBhZnRlciAnPScgc2lnbiBh
+cmUgYWxsb3dlZCBhbmQKY2F1c2UgZW1wdHkgc3RyaW5nICgiIikgdG8gYmUgcGFzc2VkIGFzIGEg
+dmFsdWUuCgpUaGlzIGlzIGNvdW50ZXItaW50dWl0aXZlLCBzbyBjb25mIHJlcXVpcmVzIHNwZWNp
+YWwgaGFuZGxpbmcgZm9yIGVtcHR5CnZhbHVlcyAod2hpY2ggYXJlIHRyZWF0ZWQgYXMgaW52YWxp
+ZCkuCgpTaWduZWQtb2ZmLWJ5OiBBbWl0YXkgSXNhYWNzIDxhbWl0YXlAZ21haWwuY29tPgotLS0K
+IGN0ZGIvY29tbW9uL2NvbmYuYyB8IDggKysrKysrKysKIDEgZmlsZSBjaGFuZ2VkLCA4IGluc2Vy
+dGlvbnMoKykKCmRpZmYgLS1naXQgYS9jdGRiL2NvbW1vbi9jb25mLmMgYi9jdGRiL2NvbW1vbi9j
+b25mLmMKaW5kZXggM2Q2NjhkZTMxMjIuLmU4NDlmZjQzMjJmIDEwMDY0NAotLS0gYS9jdGRiL2Nv
+bW1vbi9jb25mLmMKKysrIGIvY3RkYi9jb21tb24vY29uZi5jCkBAIC0xMTMwLDYgKzExMzAsMTQg
+QEAgc3RhdGljIGJvb2wgY29uZl9sb2FkX29wdGlvbihjb25zdCBjaGFyICpuYW1lLAogCQl9CiAJ
+fQogCisJaWYgKHN0cmxlbih2YWx1ZV9zdHIpID09IDApIHsKKwkJRF9FUlIoImNvbmY6IGVtcHR5
+IHZhbHVlIFslc10gLT4gXCIlc1wiXG4iLAorCQkgICAgICBzdGF0ZS0+cy0+bmFtZSwKKwkJICAg
+ICAgbmFtZSk7CisJCXN0YXRlLT5lcnIgPSBFSU5WQUw7CisJCXJldHVybiB0cnVlOworCX0KKwog
+CXRtcF9jdHggPSB0YWxsb2NfbmV3KHN0YXRlLT5jb25mKTsKIAlpZiAodG1wX2N0eCA9PSBOVUxM
+KSB7CiAJCXN0YXRlLT5lcnIgPSBFTk9NRU07Ci0tIAoyLjIxLjAKCgpGcm9tIGFhMWY2YzE1ZTA4
+ZmFjNTNjMzNjNzJjN2Q5MjkwYjczMDVhN2E4ODAgTW9uIFNlcCAxNyAwMDowMDowMCAyMDAxCkZy
+b206IEFtaXRheSBJc2FhY3MgPGFtaXRheUBnbWFpbC5jb20+CkRhdGU6IFRodSwgMjUgSnVsIDIw
+MTkgMTU6MTU6NDMgKzEwMDAKU3ViamVjdDogW1BBVENIIDMvM10gY3RkYi10ZXN0czogQWRkIHRl
+c3RzIGZvciBlbXB0eSB2YWx1ZXMgaW4gY29uZmlnIGZpbGUKClNpZ25lZC1vZmYtYnk6IEFtaXRh
+eSBJc2FhY3MgPGFtaXRheUBnbWFpbC5jb20+Ci0tLQogY3RkYi90ZXN0cy9jdW5pdC9jb25mX3Rl
+c3RfMDAxLnNoIHwgMjggKysrKysrKysrKysrKysrKysrKysrKysrKysrKwogMSBmaWxlIGNoYW5n
+ZWQsIDI4IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9jdGRiL3Rlc3RzL2N1bml0L2NvbmZf
+dGVzdF8wMDEuc2ggYi9jdGRiL3Rlc3RzL2N1bml0L2NvbmZfdGVzdF8wMDEuc2gKaW5kZXggNDg3
+YjUwOGI1N2EuLmJhZDFjMWQyYzc4IDEwMDc1NQotLS0gYS9jdGRiL3Rlc3RzL2N1bml0L2NvbmZf
+dGVzdF8wMDEuc2gKKysrIGIvY3RkYi90ZXN0cy9jdW5pdC9jb25mX3Rlc3RfMDAxLnNoCkBAIC03
+MCw2ICs3MCwzNCBAQCBjb25mOiB2YWxpZGF0aW9uIGZvciBzZWN0aW9uIFtzZWN0aW9uMV0gZmFp
+bGVkCiBFT0YKIHVuaXRfdGVzdCBjb25mX3Rlc3QgOCAiJGNvbmZmaWxlIgogCitjYXQgPiAiJGNv
+bmZmaWxlIiA8PEVPRgorW3NlY3Rpb24xXQorICAgIGtleTEgPQorRU9GCisKK3JlcXVpcmVkX2Vy
+cm9yIEVJTlZBTCA8PEVPRgorY29uZjogZW1wdHkgdmFsdWUgW3NlY3Rpb24xXSAtPiAia2V5MSIK
+K1tzZWN0aW9uMV0KKwkjIGtleTEgPSB2YWx1ZTEKKwkjIGtleTIgPSAxMAorCWtleTMgPSBmYWxz
+ZSAjIHRlbXBvcmFyeQorRU9GCit1bml0X3Rlc3QgY29uZl90ZXN0IDkgIiRjb25mZmlsZSIKKwor
+Y2F0ID4gIiRjb25mZmlsZSIgPDxFT0YKK1tzZWN0aW9uMV0KKyAgICBrZXkzID0KK0VPRgorCity
+ZXF1aXJlZF9lcnJvciBFSU5WQUwgPDxFT0YKK2NvbmY6IGVtcHR5IHZhbHVlIFtzZWN0aW9uMV0g
+LT4gImtleTMiCitbc2VjdGlvbjFdCisJIyBrZXkxID0gdmFsdWUxCisJIyBrZXkyID0gMTAKKwlr
+ZXkzID0gZmFsc2UgIyB0ZW1wb3JhcnkKK0VPRgordW5pdF90ZXN0IGNvbmZfdGVzdCA5ICIkY29u
+ZmZpbGUiCisKIGNhdCA+ICIkY29uZmZpbGUiIDw8RU9GCiAKIFtzZWN0aW9uMV0KLS0gCjIuMjEu
+MAoK
+--00000000000058d6d7058e8c4650--
 
