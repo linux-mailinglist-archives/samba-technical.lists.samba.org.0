@@ -2,70 +2,76 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51FC275C25
-	for <lists+samba-technical@lfdr.de>; Fri, 26 Jul 2019 02:47:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 482AC75C58
+	for <lists+samba-technical@lfdr.de>; Fri, 26 Jul 2019 02:58:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=xZFxjdRrAW2GItL/lBbUYpvqXmWi9Rz9kNTWmANoAck=; b=wIdo+QGhLBTYv9BfSRbuktuJWY
-	MWJd7Bn1c/cpoIYaEwHY+iQ38mjAMwVahHotcJBITWjvdH1BUPp+Jmq/PCcvvTEcAbuWt8Ht93Fui
-	rRjSKoKkFyzXBWFxyJaXsgs0NTABigt6xjPv4Y0ZeW67CoHOQNXFppv1SntnaoOjTjMB+ZxmWxIpJ
-	cx53yQGhQgWEjslcUzRhp2wdZprZT4jMyf855Csn20etWGBhKx0q4Q0tb29ipatrhO3s9uFRWTzft
-	sq0OqRf+BehoxbYE8jjWrSzXuBzEOcp8LP25dcUNE7RJhv0BNzYPANTTtUKh4OQH/gd0XoGxIWssB
-	oGHkbK3w==;
-Received: from localhost ([::1]:41668 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Date:Subject;
+	bh=aLk4+3q9aDUxT+5/J0P27rMvagT1DUHV1u3sTi/v1Rk=; b=vfLnp188aX0hn0/ZkEjtm3FKL9
+	KVFWIdVdOBXdb5qSDk5Mf3f+KYtF4OKtZybMjpaeGP8n9IMiOiAuBezfh9iP20P7SNGNaYPyRjN7N
+	iiufCtyTWMnUmXs4fIy94VARhOxUfhCfO4yKqMV/4PlM2tt/lPME6cpRu1sGtgoP5oIi1AQuh+LD2
+	uDkrw5rF17XRwGErd4qdegMtP4agRxmz4npuScGxl6MNVuRw9r5ew/Oyaeyv4IRDx9ACQKZpCTN+1
+	MZGlL+peJmcI0TprBZwZnZ9ujFCqr52PfFIaGOhcjlFi7vWCNDs2CJP9tA2QFU/DiHPWoEBUc69V/
+	IgOyaGTQ==;
+Received: from localhost ([::1]:42478 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hqoN1-000NjH-5I; Fri, 26 Jul 2019 00:46:03 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:37894) 
+	id 1hqoYd-000O0C-UT; Fri, 26 Jul 2019 00:58:04 +0000
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:45429) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hqoMp-000NjA-Nb
- for samba-technical@lists.samba.org; Fri, 26 Jul 2019 00:46:00 +0000
-Received: from [IPv6:2404:130:0:1000:7c79:69d9:b196:afb3] (unknown
- [IPv6:2404:130:0:1000:7c79:69d9:b196:afb3])
- (Authenticated sender: gary@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id E4D13801CD
- for <samba-technical@lists.samba.org>; Fri, 26 Jul 2019 12:26:36 +1200 (NZST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1564100796;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- openpgp:openpgp:autocrypt:autocrypt;
- bh=xZFxjdRrAW2GItL/lBbUYpvqXmWi9Rz9kNTWmANoAck=;
- b=wUayluCYQAMK8BicubfLwTAIRKwJosCdno11lH3xBKcFWx3JM+XEgjiJ0xMULFNH6qnWYI
- Brzj5c2dBqsk5WrIGm/yz1BSdPY+bLaFRqawT+o+90D9zvqOUb4j0+rw5hWVSNqwdyq2Tm
- kJ3BxtEmfb8Wr0rVPTzPmB6HsZeq3evJNZqZw9n+DFB6Nh6FTbrcTPf1G4l6YBRWcs9Ya/
- jh0S4LWQvDlQ+QHIPpmHHdE0CIMiK3LVczHCMXtCBSe6OR1Q5g2jffZ1P5iFoyuhpEKofH
- 3qFGG1a/Oc4G5tRGTJwTQ6+lXOVTKb7URLp/9//6Mx2LlgC0NYF5sGx/g2N6Kg==
-Subject: DNS performance.
-To: Samba Technical <samba-technical@lists.samba.org>
-Openpgp: preference=signencrypt
-Message-ID: <7860b3f6-995c-9d5b-e337-7ca579ea1b05@catalyst.net.nz>
-Date: Fri, 26 Jul 2019 12:26:32 +1200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="XBAPUnFnBU7E4faeXt6lCqvfO5jRFWe1B"
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1564100797;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- openpgp:openpgp:autocrypt:autocrypt;
- bh=xZFxjdRrAW2GItL/lBbUYpvqXmWi9Rz9kNTWmANoAck=;
- b=p9RPG5exmLobLWSJlGZrO89ng5kJv2/pqoRjWDXjKsnD0iT+Mzqw1ACAoddm+T46+XZLyy
- 8MBGUBZM0eTswYX7++vlhnuSxAkFImsNr8Nwu4aQzdZuVGR8g+9za6ZpvXvDqrdw1iylz9
- R70f1AGRV2nB64X+O40Mbc4ZYBtb4q5/v3qTNkxJtZD5IZp0tli6SVfXaGhTvEaUF/bq8u
- fre+sCsiRt6j1AGzx/j7oBA4HjXrG+6sCaz9vGXSv0P4nmVMQUo4BZ1Pu0nlRDcH/9dSw9
- AYs2jpOKFzhmNc7T5f8YIMH6j3N3NN2bCfvP2Tz543k4H7sQZmAcGHIbUxGuKA==
-ARC-Seal: i=1; s=default; d=catalyst.net.nz; t=1564100797; a=rsa-sha256;
- cv=none;
- b=MpGBHuPG/zMrM7EGkLlSd1ovd2IYcU3y8SSjmOOISDCLt8tdA9vl7PVYomQJQk+hVfInX3
- 56uwSKMV0Sm11GYfI1XjAFLyem52CKgXjidOGGJvupkENnMAG6k+jQgeAtZ6tZBih60Jz6
- SbRaHtyY42P0BiNDTU97rMbDDEkzSn4Vl4FehpJNO/oEGoR1CcaRsmEC+CKhwW0+8KOmhL
- JEAhnT2tjgrgT7mGGfgezFnU0bF21HJuquXr3OLnAu+334wfllxqO+6GCKFTau/pOmN9ZP
- OBALZ04hf7bv+T2Cbc78ocYU1wLbZllrkaPcqher/IPnGHXz86NOfRns/5kGUA==
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=gary@catalyst.net.nz smtp.mailfrom=gary@catalyst.net.nz
+ (Exim) id 1hqoYZ-000O05-F4
+ for samba-technical@lists.samba.org; Fri, 26 Jul 2019 00:58:01 +0000
+Received: by mail-pf1-x435.google.com with SMTP id r1so23595932pfq.12
+ for <samba-technical@lists.samba.org>; Thu, 25 Jul 2019 17:57:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ixsystems-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:subject:from:in-reply-to:date:cc
+ :content-transfer-encoding:message-id:references:to;
+ bh=aLk4+3q9aDUxT+5/J0P27rMvagT1DUHV1u3sTi/v1Rk=;
+ b=hKMbnVZEVmkzKh2lNEI5unwFFVLvEv36C3u8hKCVLkX5zuuHyE3e2jC32PN5WkJz9O
+ AU6wht4VOaYljd21gJibJEZHRDoY6sawQz6IpTQ+9gqDsm32rCXvPjHnVqhyjDPx+KB1
+ oMW9xc42ImCy2Iq76dII/O+9QVM4FLjpJKMl+Soti3CyWQEfI/68KtHM0Npp8JvnLp4n
+ lrIyekWpu9YqpCldl87rJKtvNb1Fb6ck7okZixWUUPpz59dqG1wZysZtdQ22mwuqvA6p
+ gvRs9b07Rq23zitRby7thd5XL9E+NOqPwa6Jnf5hnkg5P4S7x0/z2GLkDjVhpfB/poiE
+ Yk1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
+ :content-transfer-encoding:message-id:references:to;
+ bh=aLk4+3q9aDUxT+5/J0P27rMvagT1DUHV1u3sTi/v1Rk=;
+ b=EaUbLqh/nO/FxBEx48+FxwgtZWAVaAC1CsQBh1u1WIj2ihfStJ4ZMgv0P6tFNdd/38
+ 65gKvzCJ5t4kOmwaNUUpz6jHCggfMoegdr2WmaieaKlzBIi3TQrgFA1xmTICRKX91ET3
+ fO9UhYDmYTHDDtpekJtx6o8gUzjXau39op0dGaBU9R4UDBG3oly91WTjuZ7ZILlDbNX7
+ lPkBxIBPanmYbffaZINdONTZ/TGPakjFPGo2Wle7OArekHnyoyqaVeR0PaBIF00VyZqz
+ 2MGVxJL1befOrmf7u64qcBB7siKS71T6gSDBguLpLUJoQIMY+ETud1fSMER4ebgfvxXh
+ szqQ==
+X-Gm-Message-State: APjAAAVHtE/7UQK9WNow0RQ87tI2ZtnMWCqCzA9UCVrKtvqqNB4FfTij
+ 7OmvWEzIzYXdXV88iqADUXflqeIGMlnER1pdH1DxFHR3H1axtHUkugF4aaIfDTCO+vw60QH2Obf
+ N/GZdBdPhBxmPVYSBO39Xz8+5YJXfbSeD3TcUF5ZCKG9iofKBI6hV0hxeRH1VCItuor/dMHhlWd
+ o7xhsw
+X-Google-Smtp-Source: APXvYqydrVN2stoLBj/gIDfx+1eB5lt9G9uUM2VxK936dTtIU6pfFAOJbc9ypcyNyNHugFknca61uA==
+X-Received: by 2002:a65:654d:: with SMTP id a13mr72592647pgw.196.1564102676702; 
+ Thu, 25 Jul 2019 17:57:56 -0700 (PDT)
+Received: from ?IPv6:2600:6c5d:5900:1e6:150c:535c:e4bb:e352?
+ (2600-6c5d-5900-01e6-150c-535c-e4bb-e352.dhcp6.chtrptr.net.
+ [2600:6c5d:5900:1e6:150c:535c:e4bb:e352])
+ by smtp.gmail.com with ESMTPSA id c10sm9033267pfo.36.2019.07.25.17.57.55
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 25 Jul 2019 17:57:55 -0700 (PDT)
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (1.0)
+Subject: Re: Turning off SMB1 make slashdot and theregister !
+X-Mailer: iPhone Mail (16F203)
+In-Reply-To: <CAN05THQyQVOCUSwLrtoQoR93_ac2+uGfzots-3W03uwnJGvgXg@mail.gmail.com>
+Date: Thu, 25 Jul 2019 20:57:54 -0400
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <DEE3294E-5EE9-428D-8F60-8EAB709CABB3@ixsystems.com>
+References: <20190710225121.GA142072@jra4>
+ <CAN05THQ65himSVSYpzypUwDeJoaV6FPAhQpV4NEeCT3fRaBxFg@mail.gmail.com>
+ <dc0d693a2caf311097cf9a0ef8df3add01117ba7.camel@samba.org>
+ <4efb83c3-6df7-af2c-798d-b4ec681562ab@samba.org>
+ <8219d257b2fe68717939d2f41566ae669fab8466.camel@samba.org>
+ <CAN05THQyQVOCUSwLrtoQoR93_ac2+uGfzots-3W03uwnJGvgXg@mail.gmail.com>
+To: ronnie sahlberg <ronniesahlberg@gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,79 +85,15 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Gary Lockyer via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Gary Lockyer <gary@catalyst.net.nz>
+From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Walker <awalker@ixsystems.com>
+Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---XBAPUnFnBU7E4faeXt6lCqvfO5jRFWe1B
-Content-Type: multipart/mixed; boundary="88kzGBwO2rSW1Udtrp6GxJm7cwF7o6QfF";
- protected-headers="v1"
-From: Gary Lockyer <gary@catalyst.net.nz>
-To: Samba Technical <samba-technical@lists.samba.org>
-Message-ID: <7860b3f6-995c-9d5b-e337-7ca579ea1b05@catalyst.net.nz>
-Subject: DNS performance.
-
---88kzGBwO2rSW1Udtrp6GxJm7cwF7o6QfF
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-NZ
-Content-Transfer-Encoding: quoted-printable
-
-One of the performance bottlenecks that we're seeing on the AD is DNS
-performance in both the internal and BIND9 serverts.  I've taken a quick
-look at enabling pre-fork on the internal DNS server this mostly works.
-
-Queries work, but updates don't
-
-The updates use DNS TSIG to do the authentication, which requires
-holding authentication state between requests.
-
-I did look at using shared memory to hold this state but could not work
-out how to copy the auth_session_info and gensec_security strucures into
-the shared memory.
-
-
-A possible approach would be to:
-  * Launch a crypto worker process that handles the tsig processing and
-    maintains the associated state.
-  * The DNS worker processes forward the TSIG packets to the crypto
-    worker via messaging, and wait for the response.
-  * None TSIG queries are handled directly by the DNS worker process.
-
-One possible issue is that we would be limited to a single crypto
-worker. However the assumption is that query loads are much greater than
-the update loads. And given that we currently only store 128 sessions
-this seems to be likely.
-
-This should all work, the only bit I'm unsure about would be waiting for
-a response over messaging, but believe that this should be doable.
-
-
-Ng=C4=81 mihi
-Gary
-
-
-
-
---88kzGBwO2rSW1Udtrp6GxJm7cwF7o6QfF--
-
---XBAPUnFnBU7E4faeXt6lCqvfO5jRFWe1B
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEDO84T/PRptSsMEixei/9ZKIyR1MFAl06SLgACgkQei/9ZKIy
-R1MsUggAoXq+HCYDFAPHg5z2be6DyrV1NEgNGwqtHF2O9rzask4jT4BB+PIZ8Ia6
-wPvM0zvebDgDOGYYAm8dTKyBRtMWaWoDdkxmwxKVCm42Xv9vR8domi1z54NpPjLw
-NC4iI3Ks3NHCkd4h29G595bOib7l6om94bVSyfir4DnaKHyEe9NZU0WzspbgW2UO
-aShmKaPky2sUD4ey7joilK0xyjRX/UcoAP2kfuGF8z3k5pivUvJArZBqjFilBga1
-gVwk4qRGjpkcsCsq87mqKjrREFuDT6HY13pQzqUKWohL062whezFq58ufGqerCDj
-huLCgbLFLwBfZ6PPsNuVJZlqmSb3kw==
-=nbON
------END PGP SIGNATURE-----
-
---XBAPUnFnBU7E4faeXt6lCqvfO5jRFWe1B--
+I think we turned off SMB1 by default in FreeNAS about a year ago. There are=
+ quite a few devices exclusively using it out there, but the number appears t=
+o be decreasing. The general user response was criticism of the vendor that=E2=
+=80=99s SMB1 only rather than of FreeNAS / samba.=
 
