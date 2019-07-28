@@ -2,89 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDB0577E76
-	for <lists+samba-technical@lfdr.de>; Sun, 28 Jul 2019 09:35:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8351077E8E
+	for <lists+samba-technical@lfdr.de>; Sun, 28 Jul 2019 10:20:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=X0YZ+zfDxLdPpy/xjZVv7pUQjc5JTzuOIOzlFWNHfKw=; b=oAwYL0HP/5KTp5LO7Kbabqa95j
-	O9wdmZvYYVk36/cHYNZvHpfkx6R824I7UFNTniRRCU01xX1a0TiSOTkhZKphVxqdGUqeFa/iHVbVb
-	T8wf1z39nMCujj43kgTBHWe6uppRPwzyqq9OBBeF4VUTm/DkfOMWWK3VInGHEfKpimEzc+9iEWf9K
-	rpwVkf7x1wgQCQUJ0owPDMglFD9np77z2dvSh/OiNpJrOhJC5X1Z322uDQ7Tt3fvPJwQE/jksYN10
-	2K9GqevhcMYb0xL0jjM/nOPcDyTG/TxYEce3+eTTuVpg6XJqB/fx+yDmRxglgo8MUTXZTkgQiujfX
-	8L5cYWUg==;
-Received: from localhost ([::1]:59154 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=m1VyCfAGFgGp+Ci9miR8pa4uUOkyvwVj6HNUlHTrGe4=; b=kZF50XVojtkl2tz0Os5THwu6s4
+	5RC4ozZ2Rt+jUNbGmjDwTLfbMjk7E7BZ0J36q9eUdIhNGAm7+C9hbeSPSMUVnENDQAamXm1MVg2k1
+	+TDJotzABYlvI/7udhZ5zRdFUp/UXZHxoChoemnz7a1xrfSFihZHxNeSwEn56brZo25jrRQIZuNa4
+	Mms/a5IMNrh4nFgOfedryaem0rh7VacXQf4vyeNb+Br7enq6pm0wiXuBwYAovit8fpVwtSZSfqdjb
+	aKLD5p2AlVG6NjbpGS23L7QYz3TlfG/JvK/AGGlO2aBp3vI2fjuNhy3C7p/XEign0XmNklexzfAAx
+	TWvY+GhQ==;
+Received: from localhost ([::1]:60044 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hrdhG-000c46-6u; Sun, 28 Jul 2019 07:34:22 +0000
-Received: from m9a0002g.houston.softwaregrp.com ([15.124.64.67]:36647) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hrdgw-000c3y-58
- for samba-technical@lists.samba.org; Sun, 28 Jul 2019 07:34:12 +0000
-Received: FROM m9a0002g.houston.softwaregrp.com (15.121.0.190) BY
- m9a0002g.houston.softwaregrp.com WITH ESMTP
- FOR samba-technical@lists.samba.org; Sun, 28 Jul 2019 07:34:01 +0000
-Received: from M9W0067.microfocus.com (2002:f79:be::f79:be) by
- M9W0067.microfocus.com (2002:f79:be::f79:be) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10; Sun, 28 Jul 2019 07:00:47 +0000
-Received: from NAM04-SN1-obe.outbound.protection.outlook.com (15.124.72.11) by
- M9W0067.microfocus.com (15.121.0.190) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10 via Frontend Transport; Sun, 28 Jul 2019 07:00:47 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PRU8TT1ypn5x6rxzGyvbQdRuz69IpN4pzLH7C+jGZynCQK4/vku3z90mktfM9DMNrC0JgdfcOerGxBC5MiM79nZmMMjZXGJSsuaa8afjnVsqE6d5TqtwGIceOKwHSzQOQ5zrx/OJIODgWMs3mdISAWGk3urqFthtA93YHuXcu5vKYePb6Sn+hGWfd+dMB5NlVmkCEEC23HWJy1fHtifcHxkjeSITc9uUUjpl6JgetAt6/9OtxpUN0BaiL3xh29+Bi4oo/hy+v00vu0dgRnxPcJnaN4hJ8/zd3hXCb4UV+ESUXyEHjkhQekP/pPbbccq73HuRUCGyIjH00YoMlYsicw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=X0YZ+zfDxLdPpy/xjZVv7pUQjc5JTzuOIOzlFWNHfKw=;
- b=ciQcufzRhA1GRnLjWzkwOHlGv22qghQX4r82S2aVkdj+rSwcvGh/cLA8wubAby/eyTbeIEUcVHeWTmHJk/1kkH8LHtzWMH1r6xgy8lw7X8lAxpTnjmgckPdUNwrseaX4Wx+bjMHIJd2ESSlTKsJmcQENGLXi3UgkgiO8MbrtKj5gbiLA/KlBEc9vhFd1UgmhbwOcKkO3elBH13cRKWsPQj1r03yyM13t9hL813Z/yk4bn64m/ntX+lNGmoFXeUmyCRsPl2gWngK3uWu335AHn8oFh89spljuiIS32wXjfaseorU+BzVRhYhpCo9PLhJJLoxrkU1m5nrrlusNHpZ42w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1;spf=pass
- smtp.mailfrom=suse.com;dmarc=pass action=none header.from=suse.com;dkim=pass
- header.d=suse.com;arc=none
-Received: from CY4PR1801MB1861.namprd18.prod.outlook.com (10.171.255.12) by
- CY4PR1801MB1896.namprd18.prod.outlook.com (10.171.255.23) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2115.13; Sun, 28 Jul 2019 07:00:44 +0000
-Received: from CY4PR1801MB1861.namprd18.prod.outlook.com
- ([fe80::801a:2bc2:5211:88b5]) by CY4PR1801MB1861.namprd18.prod.outlook.com
- ([fe80::801a:2bc2:5211:88b5%6]) with mapi id 15.20.2115.005; Sun, 28 Jul 2019
- 07:00:44 +0000
-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Subject: Fwd: [lca-announce] linux.conf.au 2020 - Call for Sessions and
- Miniconfs final week!
-Thread-Topic: [lca-announce] linux.conf.au 2020 - Call for Sessions and
- Miniconfs final week!
-Thread-Index: AQHVRRIiNyjq9bUNcEGp/joyB9e0Ag==
-Date: Sun, 28 Jul 2019 07:00:43 +0000
-Message-ID: <c018f760-1619-5659-c561-fed599f44c9a@suse.com>
-References: <mailman.235.1563886694.3523.lca-announce@lists.linux.org.au>
-In-Reply-To: <mailman.235.1563886694.3523.lca-announce@lists.linux.org.au>
-Accept-Language: en-AU, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=TSerong@suse.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-forwarded-message-id: <mailman.235.1563886694.3523.lca-announce@lists.linux.org.au>
-x-originating-ip: [14.2.161.78]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: cd9c696b-8d0f-4103-4c5b-08d713294eed
-x-ms-traffictypediagnostic: CY4PR1801MB1896:
-x-ms-exchange-purlcount: 6
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: JOF4pB/CbG8cDaAhc8SrZahugGXAHwx2g346p1jXcQ2BNoc2d7iCoYAbHVW5siDR8+3ZCAFlVSu6GezpnF8kDm0pN+brwYBzPJOi+9HzkKKsAnOvbAbB+pS7fjtneYNCiBqxqH+tz4crY6B+bQiKixwWiadaB9IuMOQHaQpUEINzcFwijWOost9eVwosPZHk1AtSA0LmuCeta8Si36LrjBs7+LRibpTUbqs//t1NLlbmFh5QnYziB5v+Yg/UsPXhFNDvhCo1HKuK+CXR4Duqhrnte0AZ3ru0lc3VjoIyJb+8SP/GjZy4ebewHv5AykG0nYuZrIlT/2ijiazJhjqDxDikZxB8M8Wo4Sx2BG9+WtFp8qMlmVpCBgNvl6FdlFrT3dyv18z0rl7ufM05LpgLoosaxgxwSRDXUpXh9z7SXOc=
-Content-Type: text/plain; charset="Windows-1252"
-Content-ID: <3EAE430E3B51734EA0AD9F55F06137E6@namprd18.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+	id 1hrePb-000cFK-Fb; Sun, 28 Jul 2019 08:20:11 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20934) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hrePW-000cFD-7E
+ for samba-technical@lists.samba.org; Sun, 28 Jul 2019 08:20:08 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Message-ID:From:To:CC;
+ bh=m1VyCfAGFgGp+Ci9miR8pa4uUOkyvwVj6HNUlHTrGe4=; b=rcvy2+a55oi6hS+x5U8nf7yFLW
+ PnFXZQGFt3JAP7XaavJnIEtFVIUMvMQrPSVh0pmlCTfED0nhEGIaMOpEe6ty7uDZz6C0GOpoLC/na
+ GTbRvFwysWPhxvamZCD0yvx1CDpVaG//q/LmiCgj6ca+t3lUe1ZZr53C+qmmCcMKHBYI=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hrePU-0005sh-SK
+ for samba-technical@lists.samba.org; Sun, 28 Jul 2019 08:20:05 +0000
+Subject: Re: Turning off SMB1 make slashdot and theregister !
+To: samba-technical@lists.samba.org
+References: <20190710225121.GA142072@jra4>
+ <CAN05THQ65himSVSYpzypUwDeJoaV6FPAhQpV4NEeCT3fRaBxFg@mail.gmail.com>
+ <dc0d693a2caf311097cf9a0ef8df3add01117ba7.camel@samba.org>
+ <4efb83c3-6df7-af2c-798d-b4ec681562ab@samba.org>
+ <8219d257b2fe68717939d2f41566ae669fab8466.camel@samba.org>
+ <cecb5641-2d82-b548-da2c-7f39979dff44@smedley.id.au>
+Message-ID: <56834227-1234-b981-ab43-28da12c08039@samba.org>
+Date: Sun, 28 Jul 2019 09:20:02 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.2
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: cd9c696b-8d0f-4103-4c5b-08d713294eed
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: TSerong@suse.com
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR1801MB1896
-X-OriginatorOrg: suse.com
+In-Reply-To: <cecb5641-2d82-b548-da2c-7f39979dff44@smedley.id.au>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,85 +58,45 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tim Serong via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Tim Serong <TSerong@suse.com>
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Folks,
+On 28/07/2019 00:21, Paul Smedley via samba-technical wrote:
+> Hey Andrew,
+>
+> On 26/7/19 4:57 am, Andrew Bartlett via samba-technical wrote:
+>> I'm more thinking about the DOS users, the OS/2 users and the Windows
+>> 3.11 users.
+>
+> OS/2 users now have a Samba client based on the latest 4.x code - it's 
+> included in ArcaOS (https://www.arcanoae.com/)
+>
+> Cheers,
+>
+> Paul
+>
+Well, that takes care of the only one of the three that could actually 
+network correctly ;-)
 
-Just a reminder, there's approximately a day left to submit talks for
-this most excellent conference.  As usual the conference theme is
-intended to inspire, not to restrict; talks on any topic in the world of
-free and open source software, hardware, etc. are most welcome.
+DOS is a single user system and knew nothing of networking (well the PC 
+XT system I had, didn't)
 
-Regards,
+Windows 3.11 was plonked on top of DOS and was pretty much the same, it 
+wasn't until Windows 3.11 for workgroups came out that you needed a 
+network card.
 
-Tim
+Lets be honest, these operating systems are now historic and should be 
+treated as such. Having to write new code whilst ensuring that you are 
+not breaking the old systems must be difficult and will, undoubtedly, 
+produce suboptimal code.
 
--------- Forwarded Message --------
-Subject: [lca-announce] linux.conf.au 2020 - Call for Sessions and
-Miniconfs final week!
-Date: Tue, 23 Jul 2019 22:40:55 +1000
-From:  linux.conf.au Announcements  <lca-announce@lists.linux.org.au>
-Reply-To: lca-announce@lists.linux.org.au
-To: lca-announce@lists.linux.org.au
+There is nothing stopping people running old operating systems from also 
+using old versions of Samba, they presumably accept the risks involved 
+in running old OSs, so will be willing to accept the risks involved in 
+using old versions of Samba.
 
-Hello everyone,
-
-We are now in the final week for submissions to the linux.conf.au 2020
-Call for Sessions and Miniconfs. If you have not yet submitted your
-proposal, now is the time to start working on it to get it in by the
-cutoff, Sunday 28 July Anywhere on Earth (AoE)
-(https://en.wikipedia.org/wiki/Anywhere_on_Earth).
-
-As you know, our theme for linux.conf.au 2020 is "Who's Watching",
-focusing on security, privacy and ethics. As big data and IoT-connected
-devices become more pervasive, it's no surprise that we're more
-concerned about privacy and security than ever before.
-
-Call for Sessions
-
-Would you like to talk in the main conference of linux.conf.au 2020?
-The main conference runs from Wednesday to Friday, with multiple streams
-catering for a wide range of interest areas.
-We welcome you to submit a session
-(https://linux.conf.au/programme/sessions/) proposal for either a talk
-or tutorial now.
-
-Call for Miniconfs
-
-Miniconfs are dedicated day-long streams focusing on single topics,
-creating a more immersive experience for delegates than a session.
-Miniconfs are run on the first two days of the conference before the
-main conference commences on Wednesday.
-If you would like to organise a miniconf
-(https://linux.conf.au/programme/miniconfs/) at linux.conf.au, we want
-to hear from you.
-
-
-If you have something to share about security, privacy or anything open
-source make sure you submit a proposal for a talk or miniconf.
-You can find out how to submit your session or miniconf proposals at
-https://linux.conf.au/programme/proposals/.
-
-If you have any questions, please contact us via email at
-contact@lca2020.linux.org.au.
-
-The session selection committee is looking forward to reviewing your
-proposals!
-
-Kind regards,
-LCA 2020 team
-
-
----
-Read this online at
-https://lca2020.linux.org.au/news/call-for-sessions-miniconfs-now-open/
-_______________________________________________
-lca-announce mailing list
-lca-announce@lists.linux.org.au
-http://lists.linux.org.au/mailman/listinfo/lca-announce
-
+Rowland
 
 
