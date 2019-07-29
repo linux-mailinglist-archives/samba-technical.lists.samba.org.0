@@ -2,38 +2,38 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74C4978CB1
-	for <lists+samba-technical@lfdr.de>; Mon, 29 Jul 2019 15:23:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6A10791C3
+	for <lists+samba-technical@lfdr.de>; Mon, 29 Jul 2019 19:06:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=CQYgrDKl0hkmmcAKnkq/B+eOdxv8U8/jqocqCMmimPM=; b=kCXxRtJSLOVGXANJyCNuG06aPM
-	g75z3JpkiAGVkWYjdghKPkyDbfhQPtqh06xLw2RaSImtv+ccWBEyzWYhNIYtc3IpYebz3Kk5U9act
-	+Xtlj5d5BPBbDzttR6+QfUHOckeCzJERd1OiBT73dqsbOsB4XyYTZD8AowMz0jl4byOSX4uJn5ZvW
-	k2ixWvVwmISvbKm4H4//tdIRT6dc22HVT5SJD0uqtcCYRUOh2sUZ6x6+RIS4MRhyGr2KMmKa7arUm
-	/LeUkXOdsrovHdg94OHcgsyMM33njb/iKsZgvBj1gr0O8tPNq1RZBmsq1sWuERUNkXIrcTBgj0j72
-	m3hiN3pA==;
-Received: from localhost ([::1]:51880 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=WpRNEcoy3muX29wZqDONXDv6xmFMfICE8D727l9eNeY=; b=ii42Tk5EWmlH8lmOo/NW6Kfj0o
+	X+6A9auufetRsIahKV9ho1FZVxxLZaO6dmTW/L2+2SrjWw+oKwTVp4dhHiy5uO97zQ9uQ9kmwVxv4
+	DhbapsHDyMocxjIt2cg/2aNdwZOhdjouMKk0yI0NhRTWpHNAqErC51qgxq52dCkCdt0ZW3Pc6DAXA
+	IjUpOVIT8BxdCMvG50Hc3az0Ci113WNlQ+3iWSaMh6rtSCI1dgKcrbpMfrTO3QQ91wnxQNPwp/4+2
+	roaWAsNG8OKQoPpDzAp7L08DApIln/+q5Gf27LQToxMOlJD62TLFbS/U/67//s7YqUKV8XcYFQPpv
+	RRSsLU6Q==;
+Received: from localhost ([::1]:37182 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hs5bb-000kB8-Uv; Mon, 29 Jul 2019 13:22:24 +0000
-Received: from mx2.suse.de ([195.135.220.15]:43750 helo=mx1.suse.de) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hs5bW-000kB1-Ju
- for samba-technical@lists.samba.org; Mon, 29 Jul 2019 13:22:21 +0000
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 89B2BAE84;
- Mon, 29 Jul 2019 13:22:10 +0000 (UTC)
-Date: Mon, 29 Jul 2019 15:21:50 +0200
-To: Jeff Layton <jlayton@samba.org>
-Subject: Re: libcephfs and supplimentary groups
-Message-ID: <20190729152150.2b9daa4b@suse.de>
-In-Reply-To: <e3088b317f691edffdf4aff719199db608f89506.camel@samba.org>
-References: <20190725170749.4c4466e7@suse.de>
- <e3088b317f691edffdf4aff719199db608f89506.camel@samba.org>
+	id 1hs95p-000ofp-Hl; Mon, 29 Jul 2019 17:05:49 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21106) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hs95l-000ofh-9B
+ for samba-technical@lists.samba.org; Mon, 29 Jul 2019 17:05:47 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Date:Cc:To:From;
+ bh=WpRNEcoy3muX29wZqDONXDv6xmFMfICE8D727l9eNeY=; b=m33dT8rYEXLRcOYhlZXRXiSBrn
+ MFoP2hQT+Qb/zSekLV1BraUaqNtW9d0TJIzmyhict7PMdQn5rcvugIs3ggbaI1HUFG1ghO5yztWoI
+ 7uuiKqQB1jmJrS5Zcz8HRp29Sih2EXinUA4o4VSwQdc6o6D0yC9ytbnOj3pYZpwTcKJA=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hs95k-0001uJ-Lo; Mon, 29 Jul 2019 17:05:44 +0000
+To: gary@catalyst.net.nz
+Subject: ldb bug?
+Date: Mon, 29 Jul 2019 19:05:43 +0200
+Message-ID: <42283926.1TdCr3XVcX@magrathea.fritz.box>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Warn: EHLO/HELO not verified: Remote host 195.135.220.15 (mx2.suse.de)
- incorrectly presented itself as mx1.suse.de
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,52 +47,56 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Disseldorp <ddiss@suse.de>
-Cc: Samba Technical <samba-technical@lists.samba.org>,
- "dev@ceph.io" <dev@ceph.io>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 25 Jul 2019 14:34:13 -0400, Jeff Layton wrote:
+Hi Gary,
 
-> On Thu, 2019-07-25 at 17:07 +0200, David Disseldorp wrote:
-> > Hi,
-> > 
-> > Without calling ceph_mount_perms_set(), libcephfs consumers such as
-> > Samba can rely upon UserPerm::uid() and UserPerm::gid() to fallback to
-> > geteuid() and setegid() respectively for things such as ACL enforcement.
+we got a bug report an issue with the ldb_lmdb_size_test. I'm able to 
+reproduce the issue:
 
-^ that should be "geteuid() and getegid() ..."
+$ ./bin/ldb_lmdb_size_test
+[==========] Running 1 test(s).
+[ RUN      ] test_db_size_gt_4GB
+A transaction is still active in ldb context [0x56317c9e5760] on mdb://
+apitest.ldb
+[  ERROR   ] --- 0x35 != 0
+[   LINE   ] --- ../../lib/ldb/tests/ldb_lmdb_size_test.c:186: error: Failure!
+[  FAILED  ] test_db_size_gt_4GB
+[==========] 1 test(s) run.
+[  PASSED  ] 0 test(s).
+[  FAILED  ] 1 test(s), listed below:
+[  FAILED  ] test_db_size_gt_4GB
 
-> > However, there is no such fallback for supplementary groups, so ACL
-> > checks for a user which is only permitted path access via a
-> > supplementary group will result in a permission denied error.
-> > 
-> > Samba ticket: https://bugzilla.samba.org/show_bug.cgi?id=14053
-> > 
-> > I've written a patch to address this (it currently omits the get_gids()
-> > codepath):
-> > https://github.com/ddiss/ceph/commit/035a1785ec73d803fead42c7240df01b755a815b
-> > 
-> > Does this approach make sense, or should Samba go down the
-> > ceph_mount_perms_set() route to avoid this bug? The latter
-> > would likely be problematic, as user/group details for a mount will
-> > remain static.
-> >   
-> 
-> I think that a better approach would be to have samba just call
-> ceph_mount_perms_set to set the credentials soon after forking. Is there
-> some reason that doesn't work here?
+ 1 FAILED TEST(S)
 
-Samba becomes root for some privileged operations where Windows would
-permit access. E.g. "acl group control", vfs_acl_xattr, etc.
 
-We should be able to change Samba's vfs_ceph to use the ceph_ll_X
-API to handle the user<->root perms switches and add corresponding
-geteuid()/getegid() checks in each VFS call, but IMO this is still
-something that should be fixed in libcephfs, to compliment the existing
-geteuid/getegid() fallback behaviour.
+The apitest.ldb file is only 12KB ...
 
-Cheers, David
+
+Linux magrathea 5.2.1-1-default #1 SMP Mon Jul 15 05:32:47 UTC 2019 (bf5c01b) 
+x86_64 x86_64 x86_64 GNU/Linux
+
+Filesystem is XFS
+
+lmdb-devel-0.9.23-1.4.x86_64
+
+
+Can you reproduce this?
+
+
+Cheers,
+
+
+	Andreas
+
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
+
 
