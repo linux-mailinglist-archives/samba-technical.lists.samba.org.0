@@ -2,84 +2,38 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B301789CD
-	for <lists+samba-technical@lfdr.de>; Mon, 29 Jul 2019 12:49:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74C4978CB1
+	for <lists+samba-technical@lfdr.de>; Mon, 29 Jul 2019 15:23:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=wVpalZiUJDxtx8nOnAFM62+52kKuYlPw0GwRUdA7Nd8=; b=pV2xbdrCRnD1yGkucHyuHGrHMs
-	VCTSL/a0i2lvvcZo+DF5L/5ovDuNWqTYvTY89jY3A+WUUcPU6V1RVmDZ3oHMlBsQzmwF++zY7k8lM
-	h6LoVmB196Rlf4u4V4T69KSD8bGeKdR15yG0TbQReMbMCCN6JVoUxx4Aa8sUYkn1zaB5I90f5HdAZ
-	P81Qtl0GcbXxPiy0WiHXg9qt9NFJc0pHMCIkv4Qa0SyLWhEXZaM2MRxa92JzJwVPoZZxd/EuJ+9/D
-	DY1ZJFHaWhOp8bz2QTQdwzF71S7yr43s0lLgb+jADT2N34W3EhqiMpowCimvjtVkXLmmJKqhSpB00
-	OXkS2EsQ==;
-Received: from localhost ([::1]:39580 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=CQYgrDKl0hkmmcAKnkq/B+eOdxv8U8/jqocqCMmimPM=; b=kCXxRtJSLOVGXANJyCNuG06aPM
+	g75z3JpkiAGVkWYjdghKPkyDbfhQPtqh06xLw2RaSImtv+ccWBEyzWYhNIYtc3IpYebz3Kk5U9act
+	+Xtlj5d5BPBbDzttR6+QfUHOckeCzJERd1OiBT73dqsbOsB4XyYTZD8AowMz0jl4byOSX4uJn5ZvW
+	k2ixWvVwmISvbKm4H4//tdIRT6dc22HVT5SJD0uqtcCYRUOh2sUZ6x6+RIS4MRhyGr2KMmKa7arUm
+	/LeUkXOdsrovHdg94OHcgsyMM33njb/iKsZgvBj1gr0O8tPNq1RZBmsq1sWuERUNkXIrcTBgj0j72
+	m3hiN3pA==;
+Received: from localhost ([::1]:51880 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hs3DD-000iH8-J5; Mon, 29 Jul 2019 10:49:03 +0000
-Received: from m9a0003g.houston.softwaregrp.com ([15.124.64.68]:42208) 
+	id 1hs5bb-000kB8-Uv; Mon, 29 Jul 2019 13:22:24 +0000
+Received: from mx2.suse.de ([195.135.220.15]:43750 helo=mx1.suse.de) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hs3D0-000iH0-JK
- for samba-technical@lists.samba.org; Mon, 29 Jul 2019 10:49:00 +0000
-Received: FROM m9a0003g.houston.softwaregrp.com (15.121.0.190) BY
- m9a0003g.houston.softwaregrp.com WITH ESMTP
- FOR samba-technical@lists.samba.org; Mon, 29 Jul 2019 10:48:48 +0000
-Received: from M9W0068.microfocus.com (2002:f79:bf::f79:bf) by
- M9W0067.microfocus.com (2002:f79:be::f79:be) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10; Mon, 29 Jul 2019 09:48:44 +0000
-Received: from NAM04-CO1-obe.outbound.protection.outlook.com (15.124.72.10) by
- M9W0068.microfocus.com (15.121.0.191) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10 via Frontend Transport; Mon, 29 Jul 2019 09:48:44 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=A9u5K7gr/w2vOKL40Lt1d0Vya+4uqNYgq31OiEuUNcZjOEbajtpJ9cVQUaXA8wZZrr6M94QpOCG90EBAvhTXMb9kpJsBYe4pAzqbMRYy8sMAnSaIAmXr2Nm7NNHct6Lhy/N6ko+d0eH6TBj9rdtPgfZsSCIuXF3DHC1aXuMFmB5gJDfxXYwjatBcHQMm4ZOaBYuwZjNenlE7hZdk3pIGXpa444zOkrhTMtjLO9mD76diJ36eIftdEpeknkSEXq0DjAAavwJ3g4s1VHyzyU3TJkpXmVtTjlXE9z3ffYfvGnm/H/pmOTkB4zVziXmce3Vhj3o0KFKfXhvCvPL5J88hDQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pfk+hLUINjvfCSkCRiXavalX+CeT3j4Sj5RROs29xgQ=;
- b=EYDErQ8pPIDyfPjevfItsOi4U17Dj7GavAADXdR6zxPFMm7ehyq99ShNH0L870qpDoFuoAqfDHIVWGySnirV2eCP9Ne3JGUS5WbIvOprz3fDwcKY4sTUTrPPU6EXdvNul+fN8rGOKwqDvL3pVmRy4/PFngYDjiHfthf+ZJE8Wji+lnXstASQSjvqvvOvSv5kBwbPWAPKhsCf2j7iHbhQsUImM6BlLs9XA4002pD/9HCN+ifsFNY3oY+R6UWgkO8dlyaaTEQV3EdAR34nWvkHvVUfqZcJVUjeOtjAUfk+jFKrZd80Slr0ECNBPryoBkO41fhZidRqk37vzG0vNuz7qA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1;spf=pass
- smtp.mailfrom=suse.com;dmarc=pass action=none header.from=suse.com;dkim=pass
- header.d=suse.com;arc=none
-Received: from BY5PR18MB3267.namprd18.prod.outlook.com (10.255.138.24) by
- BY5PR18MB3233.namprd18.prod.outlook.com (10.255.137.206) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2115.10; Mon, 29 Jul 2019 09:48:42 +0000
-Received: from BY5PR18MB3267.namprd18.prod.outlook.com
- ([fe80::8877:5f44:3f1b:fdd7]) by BY5PR18MB3267.namprd18.prod.outlook.com
- ([fe80::8877:5f44:3f1b:fdd7%7]) with mapi id 15.20.2115.005; Mon, 29 Jul 2019
- 09:48:42 +0000
-To: samba-technical <samba-technical@lists.samba.org>
-Subject: RFC --picky-developer (for developer builds)
-Thread-Topic: RFC --picky-developer (for developer builds)
-Thread-Index: AQHVRfLO8KMdRYThTUuLY0ugiHTshg==
-Date: Mon, 29 Jul 2019 09:48:42 +0000
-Message-ID: <82e23c37-0bdc-e35a-373c-71b0591becd9@suse.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=NoPower@suse.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [109.76.120.191]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: df056285-4a0b-47d2-18f3-08d71409f0b4
-x-ms-traffictypediagnostic: BY5PR18MB3233:
-x-ms-exchange-purlcount: 3
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: p0AHDNvfuxHmHxVVXN8FuNH4SywKi1sV+lN4jrEB8BCc/VMN4UHd2wRfJfG1/0CRdcj2meDShz0EhHwlpuOe1RfJ7frohFnOvx/5QX9M4fZ3DajL/MVoDmuI+PaCHd4vhsJ9gTy55iIwvZsy69fDzQdjYjEjCkDwdgBMWDzFaa7HeG7LvrKxumf9DwSdR4kDjFAY7E/xJm8Q4i+JjjdVMrQLsqxgmyJrTPXWpj6pmEKnY4+F+iEvPtzqvaTSS70bk8Eli5aAdnoOTEIm07oweK1PjqP42rznD/g3J3Aj4z4oa/b3e6kTt5g/BSH8aj7tcquF+eFK3Jmd1BYOSRkY7nKk9QMppqcq3fyJ6tGiGcG9uWVi9J2FLWSwv6bjN6hsu3PYod6iovWie+0USoL9JBoIcM/g6QmzfDIBBwTvBN4=
-Content-Type: multipart/mixed;
- boundary="_004_82e23c370bdce35a373c71b0591becd9susecom_"
+ (Exim) id 1hs5bW-000kB1-Ju
+ for samba-technical@lists.samba.org; Mon, 29 Jul 2019 13:22:21 +0000
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id 89B2BAE84;
+ Mon, 29 Jul 2019 13:22:10 +0000 (UTC)
+Date: Mon, 29 Jul 2019 15:21:50 +0200
+To: Jeff Layton <jlayton@samba.org>
+Subject: Re: libcephfs and supplimentary groups
+Message-ID: <20190729152150.2b9daa4b@suse.de>
+In-Reply-To: <e3088b317f691edffdf4aff719199db608f89506.camel@samba.org>
+References: <20190725170749.4c4466e7@suse.de>
+ <e3088b317f691edffdf4aff719199db608f89506.camel@samba.org>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: df056285-4a0b-47d2-18f3-08d71409f0b4
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: NoPower@suse.com
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR18MB3233
-X-OriginatorOrg: suse.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Warn: EHLO/HELO not verified: Remote host 195.135.220.15 (mx2.suse.de)
+ incorrectly presented itself as mx1.suse.de
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,171 +47,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Noel Power via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Noel Power <NoPower@suse.com>
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@suse.de>
+Cc: Samba Technical <samba-technical@lists.samba.org>,
+ "dev@ceph.io" <dev@ceph.io>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---_004_82e23c370bdce35a373c71b0591becd9susecom_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+On Thu, 25 Jul 2019 14:34:13 -0400, Jeff Layton wrote:
 
-SGkgQWxsLA0KDQpJIGhhZCBhIG1lcmdlIHJlcXVlc3QgaHR0cHM6Ly9naXRsYWIuY29tL3NhbWJh
-LXRlYW0vc2FtYmEvbWVyZ2VfcmVxdWVzdHMvNTkxIChub3cgY2xvc2VkKSB0byBlbmFibGUgLS1w
-aWNreS1kZXZlbG9wZXIgZm9yIGRldmVsb3BlciBidWlsZHMsIHRoaXMgd2FzIGEgcHJldHR5IGxv
-dyBpbXBhY3QgY2hhbmdlIHRvIG1ha2UgZGV2ZWxvcGVyIGJ1aWxkcyBidWlsZCB3aXRoICctLS1w
-aWNreS1kZXZlbG9wZXInIGJ5IGRlZmF1bHQuDQoNCm5vdGU6IGl0IG1vZGlmaWVkIHRoZSBjb25m
-aWd1cmUuZGV2ZWxvcGVyIHdyYXBwZXIgc2NyaXB0IHJhdGhlciB0aGFuIHRoZSAtLWRldmVsb3Bl
-ciBvcHRpb24gaXRzZWxmDQoNCk1ldHplIGhvd2V2ZXIgcG9pbnRlZCBvdXQgdGhhdCBoZSBoYWQg
-YW4gb2xkIGJyYW5jaCBoYW5naW5nIGFyb3VuZCB0cnlpbmcgdG8gYWNoaWV2ZSB0aGUgc2FtZSBy
-ZXN1bHQgKGJ1dCBJIHRoaW5rIGF0IHRoZSB0aW1lIHRvbyBtYW55IHdhcm5pbmcgYXMgZXJyb3Jz
-IHN0aWxsIGV4aXN0ZWQgaW4gdGhlIGNvZGViYXNlKQ0KDQpNZXR6ZSdzIGJyYW5jaDoNCg0KICBh
-KSByZW1vdmVzIHRoZSAnLS1waWNreS1kZXZlbG9wZXInIG9wdGlvbiBidXQgaW5zdGVhZCBtYWtl
-IHRoZSAtLWRldmVsb3BlciBvcHRpb24gdXNlIHRoZSBzYW1lIGZsYWdzIChpbiBvdGhlcndvcmRz
-IG1ha2UgLS1kZXZlbG9wZXIgZG8gdGhlIHNhbWUgYSAtLXBpY2t5LWRldmVsb3BlcikNCg0KICBi
-KSByZXBsYWNlcyB0aGUgJy0tcGlja3ktZGV2ZWxvcGVyJyBvcHRpb24gd2l0aCAnLS1kaXNhYmxl
-LXdhcm5pbmdzLWFzLWVycm9ycyc8aHR0cHM6Ly9naXRsYWIuY29tL3NhbWJhLXRlYW0vc2FtYmEv
-bWVyZ2VfcmVxdWVzdHMvNjY3L2RpZmZzP2NvbW1pdF9pZD0zMTk1ZTRhNTdlYTc0ZmFlMmI4MTUz
-NmIzMjdjMTMxNDhiMTUyOWZhPiB0byBhbGxvdyB0byBhdm9pZCAtV2Vycm9yDQoNCkkgdGhpbmsg
-TWV0emVzJyBhcHByb2FjaCBpcyBiZXR0ZXIgYW5kIHNvIHJlYmFzZWQgaGlzIGJyYW5jaCwgIChz
-ZWUgaHR0cHM6Ly9naXRsYWIuY29tL3NhbWJhLXRlYW0vZGV2ZWwvc2FtYmEvcGlwZWxpbmVzLzcy
-OTc1MDAzKQ0KDQpTdXJlbHkgaXQncyBiZXR0ZXIgKGZvciBkZXZlbG9wZXIgYnVpbGRzKSB0byBi
-ZSBhcyAncGlja3knIGFzIHBvc3NpYmxlIGFuZCBlbnN1cmUgd2Uga2VlcCBwYXNzaW5nIHdpdGgg
-dGhhdCkNCg0Kd2hhdCBkbyBvdGhlcnMgdGhpbms/IEknbSBhbGwgZm9yIG1lcmdpbmcgdGhpcyBi
-dXQgc3VjaCBhIGNoYW5nZSBwcm9iYWJseSBuZWVkcyBzb21lIHdpZGVyIGRpc2N1c3Npb24vYWdy
-ZWVtZW50DQoNCnRoYW5rcywNCg0KTm9lbA0K
+> On Thu, 2019-07-25 at 17:07 +0200, David Disseldorp wrote:
+> > Hi,
+> > 
+> > Without calling ceph_mount_perms_set(), libcephfs consumers such as
+> > Samba can rely upon UserPerm::uid() and UserPerm::gid() to fallback to
+> > geteuid() and setegid() respectively for things such as ACL enforcement.
 
---_004_82e23c370bdce35a373c71b0591becd9susecom_
-Content-Type: text/x-patch; name="make-devbuild-picky.patch"
-Content-Description: make-devbuild-picky.patch
-Content-Disposition: attachment; filename="make-devbuild-picky.patch";
-	size=6910; creation-date="Mon, 29 Jul 2019 09:48:42 GMT";
-	modification-date="Mon, 29 Jul 2019 09:48:42 GMT"
-Content-ID: <B9A899464CFD014C84F87C1EF356BC52@namprd18.prod.outlook.com>
-Content-Transfer-Encoding: base64
+^ that should be "geteuid() and getegid() ..."
 
-RnJvbSBmZmFmYjZkZDM1NjhhZGUxMTE2NmE5MWJiOTM4NWQ5YWI0NWM5ZjVjIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQ0KRnJvbTogU3RlZmFuIE1ldHptYWNoZXIgPG1ldHplQHNhbWJhLm9yZz4N
-CkRhdGU6IFR1ZSwgMTEgTm92IDIwMTQgMTQ6NTU6NTUgKzAxMDANClN1YmplY3Q6IFtQQVRDSCAx
-LzJdIHNjcmlwdC9hdXRvYnVpbGQucHk6IHJlbW92ZSBleHBsaWNpdCAtLXBpY2t5LWRldmVsb3Bl
-ciINCg0KLS0tDQogc2NyaXB0L2F1dG9idWlsZC5weSB8IDEyICsrKysrKy0tLS0tLQ0KIDEgZmls
-ZSBjaGFuZ2VkLCA2IGluc2VydGlvbnMoKyksIDYgZGVsZXRpb25zKC0pDQoNCmRpZmYgLS1naXQg
-YS9zY3JpcHQvYXV0b2J1aWxkLnB5IGIvc2NyaXB0L2F1dG9idWlsZC5weQ0KaW5kZXggZWY3NWY1
-MDdhZGQuLjA1NjA2MjJlZTkxIDEwMDc1NQ0KLS0tIGEvc2NyaXB0L2F1dG9idWlsZC5weQ0KKysr
-IGIvc2NyaXB0L2F1dG9idWlsZC5weQ0KQEAgLTE1NiwxMyArMTU2LDEzIEBAIGRlZmF1bHR0YXNr
-cyA9IGxpc3QoYnVpbGRkaXJzLmtleXMoKSkNCiBpZiBvcy5lbnZpcm9uLmdldCgiQVVUT0JVSUxE
-X1NLSVBfU0FNQkFfTzMiLCAiMCIpID09ICIxIjoNCiAgICAgZGVmYXVsdHRhc2tzLnJlbW92ZSgi
-c2FtYmEtbzMiKQ0KIA0KLWN0ZGJfY29uZmlndXJlX3BhcmFtcyA9ICIgLS1lbmFibGUtZGV2ZWxv
-cGVyIC0tcGlja3ktZGV2ZWxvcGVyICR7UFJFRklYfSINCi1zYW1iYV9jb25maWd1cmVfcGFyYW1z
-ID0gIiAke0VOQUJMRV9DT1ZFUkFHRX0gLS1waWNreS1kZXZlbG9wZXIgJHtQUkVGSVh9IC0td2l0
-aC1wcm9maWxpbmctZGF0YSINCitjdGRiX2NvbmZpZ3VyZV9wYXJhbXMgPSAiIC0tZW5hYmxlLWRl
-dmVsb3BlciAke1BSRUZJWH0iDQorc2FtYmFfY29uZmlndXJlX3BhcmFtcyA9ICIgJHtFTkFCTEVf
-Q09WRVJBR0V9ICR7UFJFRklYfSAtLXdpdGgtcHJvZmlsaW5nLWRhdGEiDQogDQogc2FtYmFfbGli
-c19lbnZ2YXJzID0gIlBZVEhPTlBBVEg9JHtQWVRIT05fUFJFRklYfTokUFlUSE9OUEFUSCINCiBz
-YW1iYV9saWJzX2VudnZhcnMgKz0gIiBQS0dfQ09ORklHX1BBVEg9JFBLR19DT05GSUdfUEFUSDok
-e1BSRUZJWF9ESVJ9L2xpYi9wa2djb25maWciDQogc2FtYmFfbGlic19lbnZ2YXJzICs9ICIgQURE
-SVRJT05BTF9DRkxBR1M9Jy1XbWlzc2luZy1wcm90b3R5cGVzJyINCi1zYW1iYV9saWJzX2NvbmZp
-Z3VyZV9iYXNlID0gc2FtYmFfbGlic19lbnZ2YXJzICsgIiAuL2NvbmZpZ3VyZSAtLWFiaS1jaGVj
-ayAke0VOQUJMRV9DT1ZFUkFHRX0gLS1lbmFibGUtZGVidWcgLS1waWNreS1kZXZlbG9wZXIgLUMg
-JHtQUkVGSVh9Ig0KK3NhbWJhX2xpYnNfY29uZmlndXJlX2Jhc2UgPSBzYW1iYV9saWJzX2VudnZh
-cnMgKyAiIC4vY29uZmlndXJlIC0tYWJpLWNoZWNrICR7RU5BQkxFX0NPVkVSQUdFfSAtLWVuYWJs
-ZS1kZWJ1ZyAtQyAke1BSRUZJWH0iDQogc2FtYmFfbGlic19jb25maWd1cmVfbGlicyA9IHNhbWJh
-X2xpYnNfY29uZmlndXJlX2Jhc2UgKyAiIC0tYnVuZGxlZC1saWJyYXJpZXM9Y21vY2thLHBvcHQs
-Tk9ORSINCiBzYW1iYV9saWJzX2NvbmZpZ3VyZV9idW5kbGVkX2xpYnMgPSAiIC0tYnVuZGxlZC1s
-aWJyYXJpZXM9IXRhbGxvYywhcHl0YWxsb2MtdXRpbCwhdGRiLCFweXRkYiwhbGRiLCFweWxkYiwh
-cHlsZGItdXRpbCwhdGV2ZW50LCFweXRldmVudCwhcG9wdCINCiBzYW1iYV9saWJzX2NvbmZpZ3Vy
-ZV9zYW1iYSA9IHNhbWJhX2xpYnNfY29uZmlndXJlX2Jhc2UgKyBzYW1iYV9saWJzX2NvbmZpZ3Vy
-ZV9idW5kbGVkX2xpYnMNCkBAIC00NTksNyArNDU5LDcgQEAgdGFza3MgPSB7DQogICAgICAgICAo
-InRkYi1pbnN0YWxsIiwgImNkIGxpYi90ZGIgJiYgbWFrZSBpbnN0YWxsIiksDQogDQogICAgICAg
-ICAjIGJ1aWxkIHNhbWJhIHdpdGggY2x1c3RlciBzdXBwb3J0IChhbHNvIGJ1aWxkaW5nIGN0ZGIp
-Og0KLSAgICAgICAgKCJzYW1iYS1jb25maWd1cmUiLCAiUFlUSE9OUEFUSD0ke1BZVEhPTl9QUkVG
-SVh9OiRQWVRIT05QQVRIIFBLR19DT05GSUdfUEFUSD0ke1BSRUZJWF9ESVJ9L2xpYi9wa2djb25m
-aWc6JHtQS0dfQ09ORklHX1BBVEh9IC4vY29uZmlndXJlLmRldmVsb3BlciAtLXBpY2t5LWRldmVs
-b3BlciAke1BSRUZJWH0gLS13aXRoLXNlbGZ0ZXN0LXByZWZpeD0uL2Jpbi9hYiAtLXdpdGgtY2x1
-c3Rlci1zdXBwb3J0IC0tYnVuZGxlZC1saWJyYXJpZXM9IXRkYiIpLA0KKyAgICAgICAgKCJzYW1i
-YS1jb25maWd1cmUiLCAiUFlUSE9OUEFUSD0ke1BZVEhPTl9QUkVGSVh9OiRQWVRIT05QQVRIIFBL
-R19DT05GSUdfUEFUSD0ke1BSRUZJWF9ESVJ9L2xpYi9wa2djb25maWc6JHtQS0dfQ09ORklHX1BB
-VEh9IC4vY29uZmlndXJlLmRldmVsb3BlciAke1BSRUZJWH0gLS13aXRoLXNlbGZ0ZXN0LXByZWZp
-eD0uL2Jpbi9hYiAtLXdpdGgtY2x1c3Rlci1zdXBwb3J0IC0tYnVuZGxlZC1saWJyYXJpZXM9IXRk
-YiIpLA0KICAgICAgICAgKCJzYW1iYS1tYWtlIiwgIm1ha2UiKSwNCiAgICAgICAgICgic2FtYmEt
-Y2hlY2siLCAiLi9iaW4vc21iZCAtYiB8IGdyZXAgQ0xVU1RFUl9TVVBQT1JUIiksDQogICAgICAg
-ICAoInNhbWJhLWluc3RhbGwiLCAibWFrZSBpbnN0YWxsIiksDQpAQCAtNTQ5LDcgKzU0OSw3IEBA
-IHRhc2tzID0gew0KICAgICAjIHNoaXBwaW5nIGEgbWluaW1hbCBzbWJkLg0KICAgICAic2FtYmEt
-bm9weXRob24iOiBbDQogICAgICAgICAoInJhbmRvbS1zbGVlcCIsIHJhbmRvbV9zbGVlcCgzMDAs
-IDkwMCkpLA0KLSAgICAgICAgKCJjb25maWd1cmUiLCAiLi9jb25maWd1cmUuZGV2ZWxvcGVyICR7
-RU5BQkxFX0NPVkVSQUdFfSAtLXBpY2t5LWRldmVsb3BlciAke1BSRUZJWH0gLS13aXRoLXByb2Zp
-bGluZy1kYXRhIC0tZGlzYWJsZS1weXRob24gLS13aXRob3V0LWFkLWRjIiksDQorICAgICAgICAo
-ImNvbmZpZ3VyZSIsICIuL2NvbmZpZ3VyZS5kZXZlbG9wZXIgJHtFTkFCTEVfQ09WRVJBR0V9ICR7
-UFJFRklYfSAtLXdpdGgtcHJvZmlsaW5nLWRhdGEgLS1kaXNhYmxlLXB5dGhvbiAtLXdpdGhvdXQt
-YWQtZGMiKSwNCiAgICAgICAgICgibWFrZSIsICJtYWtlIC1qIiksDQogICAgICAgICAoImluc3Rh
-bGwiLCAibWFrZSBpbnN0YWxsIiksDQogICAgICAgICAoImZpbmQtcHl0aG9uIiwgInNjcmlwdC9m
-aW5kX3B5dGhvbi5zaCAke1BSRUZJWH0iKSwNCkBAIC01ODUsNyArNTg1LDcgQEAgdGFza3MgPSB7
-DQogICAgICMgY2hlY2sgd2UgY2FuIGRvIHRoZSBzYW1lIHRoaW5nIHVzaW5nIHB5dGhvbjINCiAg
-ICAgInNhbWJhLW5vcHl0aG9uLXB5MiI6IFsNCiAgICAgICAgICgicmFuZG9tLXNsZWVwIiwgcmFu
-ZG9tX3NsZWVwKDMwMCwgOTAwKSksDQotICAgICAgICAoImNvbmZpZ3VyZSIsICJQWVRIT049cHl0
-aG9uMiAuL2NvbmZpZ3VyZS5kZXZlbG9wZXIgJHtFTkFCTEVfQ09WRVJBR0V9IC0tcGlja3ktZGV2
-ZWxvcGVyICR7UFJFRklYfSAtLXdpdGgtcHJvZmlsaW5nLWRhdGEgLS1kaXNhYmxlLXB5dGhvbiAt
-LXdpdGhvdXQtYWQtZGMiKSwNCisgICAgICAgICgiY29uZmlndXJlIiwgIlBZVEhPTj1weXRob24y
-IC4vY29uZmlndXJlLmRldmVsb3BlciAke0VOQUJMRV9DT1ZFUkFHRX0gJHtQUkVGSVh9IC0td2l0
-aC1wcm9maWxpbmctZGF0YSAtLWRpc2FibGUtcHl0aG9uIC0td2l0aG91dC1hZC1kYyIpLA0KICAg
-ICAgICAgKCJtYWtlIiwgIlBZVEhPTj1weXRob24yIG1ha2UgLWoiKSwNCiAgICAgICAgICgiaW5z
-dGFsbCIsICJQWVRIT049cHl0aG9uMiBtYWtlIGluc3RhbGwiKSwNCiAgICAgICAgICgiZmluZC1w
-eXRob24iLCAic2NyaXB0L2ZpbmRfcHl0aG9uLnNoICR7UFJFRklYfSIpLA0KLS0gDQoyLjE2LjQN
-Cg0KDQpGcm9tIDMxOTVlNGE1N2VhNzRmYWUyYjgxNTM2YjMyN2MxMzE0OGIxNTI5ZmEgTW9uIFNl
-cCAxNyAwMDowMDowMCAyMDAxDQpGcm9tOiBTdGVmYW4gTWV0em1hY2hlciA8bWV0emVAc2FtYmEu
-b3JnPg0KRGF0ZTogV2VkLCAxMiBNYXIgMjAxNCAxMTo0ODowNiArMDEwMA0KU3ViamVjdDogW1BB
-VENIIDIvMl0gd2Fmc2FtYmE6IGNoYW5nZSAtLXBpY2t5LWRldmVsb3BlciBpbnRvDQogLS1kaXNh
-YmxlLXdhcm5pbmdzLWFzLWVycm9ycw0KDQpCeSBkZWZhdWx0IHdlJ3JlIHVzaW5nIC1XZXJyb3Ig
-bm93IGlmIC0tZW5hYmxlLWRldmVsb3BlciBpcw0Kc3BlY2lmaWVkLg0KDQpTaWduZWQtb2ZmLWJ5
-OiBTdGVmYW4gTWV0em1hY2hlciA8bWV0emVAc2FtYmEub3JnPg0KLS0tDQogYnVpbGR0b29scy93
-YWZzYW1iYS9zYW1iYV9hdXRvY29uZi5weSB8ICA2ICsrKy0tLQ0KIGJ1aWxkdG9vbHMvd2Fmc2Ft
-YmEvd3NjcmlwdCAgICAgICAgICAgfCAxMCArKystLS0tLS0tDQogMiBmaWxlcyBjaGFuZ2VkLCA2
-IGluc2VydGlvbnMoKyksIDEwIGRlbGV0aW9ucygtKQ0KDQpkaWZmIC0tZ2l0IGEvYnVpbGR0b29s
-cy93YWZzYW1iYS9zYW1iYV9hdXRvY29uZi5weSBiL2J1aWxkdG9vbHMvd2Fmc2FtYmEvc2FtYmFf
-YXV0b2NvbmYucHkNCmluZGV4IDhlNWRmYjg3MTAyLi4zNTJiNWNhMzFkMyAxMDA2NDQNCi0tLSBh
-L2J1aWxkdG9vbHMvd2Fmc2FtYmEvc2FtYmFfYXV0b2NvbmYucHkNCisrKyBiL2J1aWxkdG9vbHMv
-d2Fmc2FtYmEvc2FtYmFfYXV0b2NvbmYucHkNCkBAIC03ODMsOSArNzgzLDkgQEAgaW50IG1haW4o
-dm9pZCkgew0KICAgICAgICAgICAgICAgICBjb25mLmVudlsnRVhUUkFfQ0ZMQUdTJ10gPSBbXQ0K
-ICAgICAgICAgICAgIGNvbmYuZW52WydFWFRSQV9DRkxBR1MnXS5leHRlbmQoVE9fTElTVCgiLVdl
-cnJvcj1mb3JtYXQiKSkNCiANCi0gICAgaWYgT3B0aW9ucy5vcHRpb25zLnBpY2t5X2RldmVsb3Bl
-cjoNCi0gICAgICAgIGNvbmYuQUREX05BTUVEX0NGTEFHUygnUElDS1lfQ0ZMQUdTJywgJy1XZXJy
-b3IgLVduby1lcnJvcj1kZXByZWNhdGVkLWRlY2xhcmF0aW9ucycsIHRlc3RmbGFncz1UcnVlKQ0K
-LSAgICAgICAgY29uZi5BRERfTkFNRURfQ0ZMQUdTKCdQSUNLWV9DRkxBR1MnLCAnLVduby1lcnJv
-cj10YXV0b2xvZ2ljYWwtY29tcGFyZScsIHRlc3RmbGFncz1UcnVlKQ0KKyAgICAgICAgaWYgbm90
-IE9wdGlvbnMub3B0aW9ucy5kaXNhYmxlX3dhcm5pbmdzX2FzX2Vycm9yczoNCisgICAgICAgICAg
-ICBjb25mLkFERF9OQU1FRF9DRkxBR1MoJ1BJQ0tZX0NGTEFHUycsICctV2Vycm9yIC1Xbm8tZXJy
-b3I9ZGVwcmVjYXRlZC1kZWNsYXJhdGlvbnMnLCB0ZXN0ZmxhZ3M9VHJ1ZSkNCisgICAgICAgICAg
-ICBjb25mLkFERF9OQU1FRF9DRkxBR1MoJ1BJQ0tZX0NGTEFHUycsICctV25vLWVycm9yPXRhdXRv
-bG9naWNhbC1jb21wYXJlJywgdGVzdGZsYWdzPVRydWUpDQogDQogICAgIGlmIE9wdGlvbnMub3B0
-aW9ucy5mYXRhbF9lcnJvcnM6DQogICAgICAgICBjb25mLkFERF9DRkxBR1MoJy1XZmF0YWwtZXJy
-b3JzJywgdGVzdGZsYWdzPVRydWUpDQpkaWZmIC0tZ2l0IGEvYnVpbGR0b29scy93YWZzYW1iYS93
-c2NyaXB0IGIvYnVpbGR0b29scy93YWZzYW1iYS93c2NyaXB0DQppbmRleCA4MDE0NzE2ZTY0ZS4u
-ZTUwMTdhNGEwMmYgMTAwNjQ0DQotLS0gYS9idWlsZHRvb2xzL3dhZnNhbWJhL3dzY3JpcHQNCisr
-KyBiL2J1aWxkdG9vbHMvd2Fmc2FtYmEvd3NjcmlwdA0KQEAgLTEwMiwxNyArMTAyLDEzIEBAIGRl
-ZiBvcHRpb25zKG9wdCk6DQogICAgIGdyLmFkZF9vcHRpb24oJy0tZW5hYmxlLWRldmVsb3Blcics
-DQogICAgICAgICAgICAgICAgICAgIGhlbHA9KCJUdXJuIG9uIGRldmVsb3BlciB3YXJuaW5ncyBh
-bmQgZGVidWdnaW5nIiksDQogICAgICAgICAgICAgICAgICAgIGFjdGlvbj0ic3RvcmVfdHJ1ZSIs
-IGRlc3Q9J2RldmVsb3BlcicsIGRlZmF1bHQ9RmFsc2UpDQorICAgIGdyLmFkZF9vcHRpb24oJy0t
-ZGlzYWJsZS13YXJuaW5ncy1hcy1lcnJvcnMnLA0KKyAgICAgICAgICAgICAgICAgICBoZWxwPSgi
-RG8gbm90IHRyZWF0IGFsbCB3YXJuaW5ncyBhcyBlcnJvcnMgKGRpc2FibGUgLVdlcnJvcikiKSwN
-CisgICAgICAgICAgICAgICAgICAgYWN0aW9uPSJzdG9yZV90cnVlIiwgZGVzdD0nZGlzYWJsZV93
-YXJuaW5nc19hc19lcnJvcnMnLCBkZWZhdWx0PUZhbHNlKQ0KICAgICBvcHQuYWRkX29wdGlvbign
-LS1lbmFibGUtY292ZXJhZ2UnLA0KICAgICAgICAgICAgICAgICAgICBoZWxwPSgiZW5hYmxlIG9w
-dGlvbnMgbmVjZXNzYXJ5IGZvciBjb2RlIGNvdmVyYWdlICINCiAgICAgICAgICAgICAgICAgICAg
-ICAgICAgInJlcG9ydGluZyBvbiBzZWxmdGVzdCAoZGVmYXVsdD1ubykiKSwNCiAgICAgICAgICAg
-ICAgICAgICAgYWN0aW9uPSJzdG9yZV90cnVlIiwgZGVzdD0nZW5hYmxlX2NvdmVyYWdlJywgZGVm
-YXVsdD1GYWxzZSkNCi0gICAgZGVmIHBpY2t5X2RldmVsb3Blcl9jYWxsYmFjayhvcHRpb24sIG9w
-dF9zdHIsIHZhbHVlLCBwYXJzZXIpOg0KLSAgICAgICAgcGFyc2VyLnZhbHVlcy5kZXZlbG9wZXIg
-PSBUcnVlDQotICAgICAgICBwYXJzZXIudmFsdWVzLnBpY2t5X2RldmVsb3BlciA9IFRydWUNCi0g
-ICAgZ3IuYWRkX29wdGlvbignLS1waWNreS1kZXZlbG9wZXInLA0KLSAgICAgICAgICAgICAgICAg
-ICBoZWxwPSgiVHJlYXQgYWxsIHdhcm5pbmdzIGFzIGVycm9ycyAoZW5hYmxlIC1XZXJyb3IpIiks
-DQotICAgICAgICAgICAgICAgICAgIGFjdGlvbj0iY2FsbGJhY2siLCBjYWxsYmFjaz1waWNreV9k
-ZXZlbG9wZXJfY2FsbGJhY2ssDQotICAgICAgICAgICAgICAgICAgIGRlc3Q9J3BpY2t5X2RldmVs
-b3BlcicsIGRlZmF1bHQ9RmFsc2UpDQogICAgIGdyLmFkZF9vcHRpb24oJy0tZmF0YWwtZXJyb3Jz
-JywNCiAgICAgICAgICAgICAgICAgICAgaGVscD0oIlN0b3AgY29tcGlsYXRpb24gb24gZmlyc3Qg
-ZXJyb3IgKGVuYWJsZSAtV2ZhdGFsLWVycm9ycykiKSwNCiAgICAgICAgICAgICAgICAgICAgYWN0
-aW9uPSJzdG9yZV90cnVlIiwgZGVzdD0nZmF0YWxfZXJyb3JzJywgZGVmYXVsdD1GYWxzZSkNCi0t
-IA0KMi4xNi40DQoNCg==
+> > However, there is no such fallback for supplementary groups, so ACL
+> > checks for a user which is only permitted path access via a
+> > supplementary group will result in a permission denied error.
+> > 
+> > Samba ticket: https://bugzilla.samba.org/show_bug.cgi?id=14053
+> > 
+> > I've written a patch to address this (it currently omits the get_gids()
+> > codepath):
+> > https://github.com/ddiss/ceph/commit/035a1785ec73d803fead42c7240df01b755a815b
+> > 
+> > Does this approach make sense, or should Samba go down the
+> > ceph_mount_perms_set() route to avoid this bug? The latter
+> > would likely be problematic, as user/group details for a mount will
+> > remain static.
+> >   
+> 
+> I think that a better approach would be to have samba just call
+> ceph_mount_perms_set to set the credentials soon after forking. Is there
+> some reason that doesn't work here?
 
---_004_82e23c370bdce35a373c71b0591becd9susecom_--
+Samba becomes root for some privileged operations where Windows would
+permit access. E.g. "acl group control", vfs_acl_xattr, etc.
+
+We should be able to change Samba's vfs_ceph to use the ceph_ll_X
+API to handle the user<->root perms switches and add corresponding
+geteuid()/getegid() checks in each VFS call, but IMO this is still
+something that should be fixed in libcephfs, to compliment the existing
+geteuid/getegid() fallback behaviour.
+
+Cheers, David
 
