@@ -2,43 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4826579FC6
-	for <lists+samba-technical@lfdr.de>; Tue, 30 Jul 2019 06:13:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD47E7A28D
+	for <lists+samba-technical@lfdr.de>; Tue, 30 Jul 2019 09:51:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=zbD7nJtbaX9t8sFRlNjNhKhp33Bj5XvXuDROO/z3Jn4=; b=NIwzsjXE6lshFS7ohhEwbz6Sgy
-	Qq7D0JYZOj0LucnOYL9SKmbjCSXs4kAgDGj2EomFxJ6hE8NL4/NobgNKOaowkvi/cqAG+YEsjb9gd
-	172PJPFLmk8hHivuXIDlMfBMa8xEFLTZU8veYl92kXnOoNy7uT0EwJ7yiJu9W9QXKpHjSp5F1HWXC
-	pgxwv5dSYt6kXQCEgbxrnkXcMY5FMvZ7uAd1rc68bc5SyznuNSdxbMckBAP3zQSlHh6rk3jtknBYf
-	nzy+84F40iYqUn8k5Fl5d0NeF9x76iggx2yzYudYv7ANPfRdlhMV5FutN6visaOUty4xTsR45KzDX
-	hjIkN6jw==;
-Received: from localhost ([::1]:62946 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=v6udm8VmYY240V5XR5Cpn5pFvLjjPrxJLYuL4COSWmk=; b=2mGoKJ6f+rXcraLkzbvIHLmWDV
+	BiUZzBgUM4O8mlHE0Wd0VJ0yqQtS33iRKK0RtHptyxP9EXNjfqNoRsJAm6ziPXMRQ6+E45JHx6Bgo
+	9JP2W9wwJhLhO7eL8hCdFQC/v9fbIsIz8WzdnV3L1gS2iAnXGa24AqQu278dk+JFcQYPTVEIYfLTX
+	KMajSeaY9tm9wYH78Z8GFYZH6mDb5u8rcz+4cdsLBDZbo5dWeOzXPYES4X8Vs8DXYuSbaXcZZzyea
+	xHc1w1q5viRSw9UAfY6Vfky5sY5Rpm3UrAKKUsoyHJdXbrvu1Q3dsbtpKB/Ac62TQE1gg1fQ6+Iai
+	TIHixxCw==;
+Received: from localhost ([::1]:19040 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hsJUc-000shB-1U; Tue, 30 Jul 2019 04:12:06 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48250) 
+	id 1hsMuq-000tg8-MZ; Tue, 30 Jul 2019 07:51:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29630) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hsJUW-000sh3-Rj
- for samba-technical@lists.samba.org; Tue, 30 Jul 2019 04:12:03 +0000
+ (Exim) id 1hsMum-000tg1-2I
+ for samba-technical@lists.samba.org; Tue, 30 Jul 2019 07:51:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:To:From:Message-ID:CC;
- bh=zbD7nJtbaX9t8sFRlNjNhKhp33Bj5XvXuDROO/z3Jn4=; b=G4bamcRZXIeE9bIkikak27+Nup
- GNj+bDHBnDRHlaiFECc9UNBswyoytg4CnGWI0bRbIKUQrx+vy2ayE1zCKtBTJihxI8ZdjUeAdDjgA
- /kMm/O5tgPTgD0jnRqyzdixsELYedhebvtXEhofVGpp+jjqBSlV8/DkCJoZY4O/1okWw=;
+ s=42627210; h=Date:Message-ID:From:Cc:To;
+ bh=v6udm8VmYY240V5XR5Cpn5pFvLjjPrxJLYuL4COSWmk=; b=q3Yuz6DGmgCVIlyTukf7HP0FB1
+ 2aCJS/Qquy0NzedRfu7ihYSiLy6waW5Cypb1wGl8GVUARhkYr2kLuzCQHhPQEiY6lO20YgmVAk3NR
+ 8rvjE5gU12E2HMEkepUDTj3/+n1euR+AstAgfHlhXK44uVVzDLrhZcqBe87Y9u2BfMvc=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1hsJUU-0005zK-OQ; Tue, 30 Jul 2019 04:11:59 +0000
-Message-ID: <1564459915.4261.33.camel@samba.org>
-Subject: Re: RFC --picky-developer (for developer builds)
-To: Noel Power <NoPower@suse.com>, samba-technical
- <samba-technical@lists.samba.org>
-Date: Tue, 30 Jul 2019 16:11:55 +1200
-In-Reply-To: <82e23c37-0bdc-e35a-373c-71b0591becd9@suse.com>
+ (Exim) id 1hsMuk-0008Uo-I2; Tue, 30 Jul 2019 07:51:18 +0000
+To: Martin Schwenke <martin@meltin.net>, Noel Power <NoPower@suse.com>
 References: <82e23c37-0bdc-e35a-373c-71b0591becd9@suse.com>
-Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAACRklEQVRYw81YS67DIAwkVe8FPRm5menJeAu3lmUCbyBGKqsmRXjwb8Y5aq3hl9Yj/Nh6Tu0upZRS+EdKiV+e5+mJqMKLiHLORBRjzDmbc/hlvb1QD2k3sG84+dhhvF6vlzymlNY8dyBJzUdLjAwyvaeU8n6/2WHpu/xDRkREJI8cOBMgfuRQxhj58JzzbBwhQDFGA07M6/efE0MQxDHGFvpdQHy6MUxqtU4yezRcH0B4GfbM44BWGqOurF6Omz140a0ASimJvdbwZT32XrpRh5yuwY1d0vPrdNkv91+T8uBRG8l1uiX+JtsHxPNIWE27ugwTctTdHCIiYXvuy4P7IDl0CxAzl2xgZTJwgw+g3kGaHwYh5g2sljyrjIVEq4pYBg2Kq3yXZ5WxjfO7zF9jRdXrnLcEmlbTRnNpcT0gvpTScUC2HlOE2ipAvPuJanMT+Xc0PC4dFzu1DEO4HgczaS5kOnZ4vM7zxNU+mtRyRVPDgqyX3cdx8AQCCrQnfkV9VzMA9Ryg3ek8Sgsg3QX+nbz03Og5l10ytp6HusQUwpjd1rnsksbHlhjuVGdBAbWzIiJu5MvEFkA6OkiwBO4uQL3ADeQ9b57t74+FBo1s47IqpVxqBDcuQ66r94QQJOH2ctnAf9oZtdbZYejpi2bQEveO0sb2JXu09OJJrnpil4SV5G2N6Y+1QjL+gHSKDApHJoJWF3hW2fInh6lutGW216OPRBZtRZscwyQvI+KuTj3rp4VP1VsAcTobxgDngukqm3LPgmL8A4m377Y5OvTKAAAAAElFTkSuQmCC
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.22.6-1+deb9u2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ <20190730100948.3e72f009@martins.ozlabs.org>
+Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
+Subject: Re: RFC --picky-developer (for developer builds)
+Message-ID: <1dfda6d3-27ec-3d05-4f82-9d4b8814ccaa@samba.org>
+Date: Tue, 30 Jul 2019 09:51:14 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <20190730100948.3e72f009@martins.ozlabs.org>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="4FEAb3fKK7eGXFFkYRnvmTEX73tqS60M0"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,61 +54,80 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2019-07-29 at 09:48 +0000, Noel Power via samba-technical
-wrote:
-> Hi All,
-> 
-> I had a merge request https://gitlab.com/samba-team/samba/merge_requests/591 (now closed) to enable --picky-developer for developer builds, this was a pretty low impact change to make developer builds build with '---picky-developer' by default.
-> 
-> note: it modified the configure.developer wrapper script rather than the --developer option itself
-> 
-> Metze however pointed out that he had an old branch hanging around trying to achieve the same result (but I think at the time too many warning as errors still existed in the codebase)
-> 
-> Metze's branch:
-> 
->   a) removes the '--picky-developer' option but instead make the --developer option use the same flags (in otherwords make --developer do the same a --picky-developer)
-> 
->   b) replaces the '--picky-developer' option with '--disable-warnings-as-errors'<https://gitlab.com/samba-team/samba/merge_requests/667/diffs?commit_id=3195e4a57ea74fae2b81536b327c13148b1529fa> to allow to avoid -Werror
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--4FEAb3fKK7eGXFFkYRnvmTEX73tqS60M0
+Content-Type: multipart/mixed; boundary="6v7rVV8rAVsbcIdT15KEQMNNyA7SOqYtN";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Martin Schwenke <martin@meltin.net>, Noel Power <NoPower@suse.com>
+Cc: samba-technical@lists.samba.org
+Message-ID: <1dfda6d3-27ec-3d05-4f82-9d4b8814ccaa@samba.org>
+Subject: Re: RFC --picky-developer (for developer builds)
+References: <82e23c37-0bdc-e35a-373c-71b0591becd9@suse.com>
+ <20190730100948.3e72f009@martins.ozlabs.org>
+In-Reply-To: <20190730100948.3e72f009@martins.ozlabs.org>
 
-I really like this, as it removes the social/professional implication
-and instead talks about what the option does.  
+--6v7rVV8rAVsbcIdT15KEQMNNyA7SOqYtN
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-This is important as often new/old compilers introduce raise errors
-unconnected to the developers area of work, but which impedes progress
-(occasionally there is even no acceptable solution, except to allow
-warnings in a subsystem). 
+Hi Martin,
 
-Just as some are forced to build with --abi-check-disable for
-environmental reasons (no, not that environment, the other type of
-environment... ;-). 
+> I like the idea.  Those fancy options sometimes find bugs before the
+> code gets merged.  ;-)
+>=20
+> It would be good if we could even go stronger.  I always try to build
+> with CFLAGS=3D"-O3" and --picky-developer. However, with those options =
+you
+> can't build against bundled Heimdal Kerberos, because it is a roaring
+> dumpster fire... and I don't think anyone has looked at fixing
+> building against system Heimdal either...  :-(
 
-> I think Metzes' approach is better and so rebased his branch,  (see https://gitlab.com/samba-team/devel/samba/pipelines/72975003)
-> 
-> Surely it's better (for developer builds) to be as 'picky' as possible and ensure we keep passing with that)
-> 
-> what do others think? I'm all for merging this but such a change probably needs some wider discussion/agreement
+Are you sure that's still the case?
+It was the problem at the time I wrote the patches
+~ 5 years ago.
 
-So this is:
-https://gitlab.com/samba-team/samba/merge_requests/667
+But autobuild and gitlab-ci use that for quite some time now.
 
-That looks OK to me.
+See https://gitlab.com/samba-team/samba/merge_requests/667
+the pipeline works fine and we're running the O3 build on a lot of
+distributions and never need to use --disable-warnings-as-errors.
 
-Thanks!
-
-Andrew Bartlett
--- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT   
-https://catalyst.net.nz/services/samba
+metze
 
 
 
 
+--6v7rVV8rAVsbcIdT15KEQMNNyA7SOqYtN--
+
+--4FEAb3fKK7eGXFFkYRnvmTEX73tqS60M0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl0/9vIACgkQDbX1YShp
+vVbqeA/+LKkYLXpg34w7d6o0vajTlRb1Y44TS63xuVaZduM4MYXQwm7xXAsnG3uM
+tpy2iUVGLit0wNbOXyiY79wn9bQXn8DCQjeJ7x7zoUfuujHUN+vHYwjef6yZxZSf
+k768XEcGDH1FNMp2mRwg0a9XBPWoaNk1hhW8WOugIwW3aZgfytRP28pgMBkuR09r
+GIU7F3Z+atEBMKN0h6VfmkuT3uO/v0oNWU/nndoumkB3N5Kbf2WdFgAMdCUU4eHu
+2xZ6OPAG1OyU1U2cowCBHKMWZ4/RocibMdYtBq/6unG6EMOUVQopBrvN0YjAB4EO
+txZwuE72j8bZEnNQ4MNsUq6iyyGiL2FMkhLlVeNpfEVJGwr2ptKoM+va5YGftYPv
++BEBkmB49STF2yxkYZmHGuYyxvp0H4MjQpcbuqynE9pNEbLzVUO5ergq8r3LmbET
+3phUz/emSI4K48U19u2oBhR/clAPeG4rztb7CkLJQBK6iU4HvknOT1gl5NJ/oDzg
+6vEsWMvm6BxQ3P1eVpLPA6ZsxA9f52raJrLe2Weher8dL6w5+GnRPTQqCwLim9Hx
+91ym8aOqgYlYkg7Pn6JykE/e+/YREoW9N/ZeTVrDrU5uKc5vSMpkKyWPvR0b6Eo/
+VTshLUlJaUd1En6KFnr/oHee/PQReRxFuoEHPU7pwHBdoDxDNoU=
+=TJN9
+-----END PGP SIGNATURE-----
+
+--4FEAb3fKK7eGXFFkYRnvmTEX73tqS60M0--
 
