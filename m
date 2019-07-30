@@ -2,48 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 610A27AFB0
-	for <lists+samba-technical@lfdr.de>; Tue, 30 Jul 2019 19:22:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 491DC7B050
+	for <lists+samba-technical@lfdr.de>; Tue, 30 Jul 2019 19:41:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=kJfqg0XBYg4gLIXnTH9MIFdVoJZWyU2WmdtCF2wuyh4=; b=tXAz5U+X57gAWHIStL2zlyC+50
-	d1yL3LXKct1K22bwIBP2Atgm8g/pkzQsrSc98tl8d2uymQsqaPuK+4isyzhpGD+nKWD6pThKVvyZ2
-	YedaJ4GY2yw9s3arVmHLUDvsIJqQTdcjRQzdSOKSzu6PtX4kPK1ifiar/cAQkvSG58Yo8CsIUeyCI
-	fVca7M5qgcIfYhcE/7uiM4X+sephejTTaYH2ZvYrMWUjB5TdMhZjTIm7BJyL/GwDiLOZ69YdR4Xgw
-	e+NvxTxpZ0LCSM8Z04ynqmxELCoGJlhXE8aySv+1QgY8LdA85rMsd3invs7THL4Ii5WKXWBqiE1bN
-	iE8iFE6g==;
-Received: from localhost ([::1]:40418 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=b2kXTb6h7GJvp4Tr1jkxf2hhKbqGicvw7pM0HUDdJgQ=; b=gy24fZgSW8ZvueV4QNDjMTp3vx
+	4lwGBThExlKq1XpA/srYwL5/aUSPDEflHgs4O2PNSkbYVt19yiMjMMwNO0YtVnuv2FWpsTXUThKE/
+	SFrJWRxADGuCEZgZ6R6N7qn6jdtJtvZnnwlff5evisyrCEea2QFZCZr/qnlLsjmnCRM008lSepQ7N
+	fFj0f37gM41XLAkFbMlAm3rkqa9MprUOM+UJIbt+hRdtzbfNJJ2oVsdn+lhEfCvCqdhk2xttpOD5K
+	ZiVWc64dSYMVB/MMWIcOZx6CNe/n4QgNi8WHOdPPZEVs26iN1CPgy10IS/RLFb+06wuGiRBiMdL8c
+	wPERUmgg==;
+Received: from localhost ([::1]:41298 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hsVox-0013W3-1H; Tue, 30 Jul 2019 17:21:55 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54744) 
+	id 1hsW7J-0013ii-Rw; Tue, 30 Jul 2019 17:40:53 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64680) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hsVot-0013Vw-0N
- for samba-technical@lists.samba.org; Tue, 30 Jul 2019 17:21:52 +0000
+ (Exim) id 1hsW7F-0013iZ-Rm
+ for samba-technical@lists.samba.org; Tue, 30 Jul 2019 17:40:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=kJfqg0XBYg4gLIXnTH9MIFdVoJZWyU2WmdtCF2wuyh4=; b=B13+6jZiwwM98oF8/t0cROSGhO
- s5S60xGQ0zDns+BOTkHV0gp26e9tcmV+gWYIUfE8jCERZ7IH/opvTk/0jx9olbp8Mdt75zAZU4Afg
- eIAcg8OL45uMzETN9tDERh83gjgR0TYQPFLlRSU63TlPSNys2ISNN2weKT94EXyA/5Ek=;
+ s=42627210; h=Date:Message-ID:From:To:CC;
+ bh=b2kXTb6h7GJvp4Tr1jkxf2hhKbqGicvw7pM0HUDdJgQ=; b=ms6cw3pgKca6E3ga/I6Q7DnFLA
+ C5WzzPVnzX1B0ZqrHXmzbYoVHAwB1s5PCC8gQt0E4Zv4n0d4WV7UQanyWyte8IAli+jtWtE2yXX9l
+ Xmp7PqEEUy0tSWf76csFKPKLwhXG9Iy+YASS1wQKjhLbylcL0V5GJpfs4dHwtVwWPbOQ=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hsVos-0005H9-1B; Tue, 30 Jul 2019 17:21:50 +0000
-Date: Tue, 30 Jul 2019 10:21:47 -0700
-To: miguel medalha <medalist@sapo.pt>
-Subject: Re: Turning off SMB1 make slashdot and theregister !
-Message-ID: <20190730172147.GF128128@jra4>
-References: <20190710225121.GA142072@jra4>
- <CAN05THQ65himSVSYpzypUwDeJoaV6FPAhQpV4NEeCT3fRaBxFg@mail.gmail.com>
- <dc0d693a2caf311097cf9a0ef8df3add01117ba7.camel@samba.org>
- <4efb83c3-6df7-af2c-798d-b4ec681562ab@samba.org>
- <8219d257b2fe68717939d2f41566ae669fab8466.camel@samba.org>
- <CAN05THQZVBic5xhXNVixp90UfeWz1rt=mF6F0ZXN6aHFCkZmKA@mail.gmail.com>
- <20190730163237.GC128128@jra4>
- <ad9a941e-539a-b864-542f-01a804bbc88b@sapo.pt>
+ (Exim) id 1hsW7F-0005Vs-8G; Tue, 30 Jul 2019 17:40:49 +0000
+Subject: Re: Interesting issue with Macs accessing SMB shares ...
+To: Richard Sharpe <realrichardsharpe@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>
+References: <CACyXjPxikKqDFpTF=z7u-xVwxpXSLEoo1wssnYRccYuUt3brfg@mail.gmail.com>
+Message-ID: <4f1ad8d7-3df3-c5d1-5b5f-f299b2235ed2@samba.org>
+Date: Tue, 30 Jul 2019 19:40:47 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ad9a941e-539a-b864-542f-01a804bbc88b@sapo.pt>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <CACyXjPxikKqDFpTF=z7u-xVwxpXSLEoo1wssnYRccYuUt3brfg@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,45 +53,38 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Jul 30, 2019 at 05:51:51PM +0100, miguel medalha via samba-technical wrote:
-> > I'm working on modernizing the fileserver VFS right
-> > now, and the requirements to keep SMB1 working are
-> > causing massive amounts of extra work.
-> > 
-> > If we can ditch SMB1, many many simplifications
-> > become possible in the fileserver code that require
-> > enormous effort today. Take a look at the directory
-> > scanning cleanup fixes I'm going to try and land
-> > this week - 99% of that is fixing up old SMB1
-> > code that is simply unneeded if we were SMB2+
-> > only.
-> > 
-> > The AD-DC codebase moves forward as rapidly as
-> > possible to match current Windows needs.
-> > 
-> > The fileserver needs to be able to do the
-> > same.
+Hi Richard,
+
+On 7/30/19 7:14 PM, Richard Sharpe via samba-technical wrote:
+> UserA accesses/mounts an smb share on \\some-server\some-share and 
+> when listing the files in a terminal with 'ls -a' they show up as 
+> owned by UserA.
 > 
+> If UserB also accesses/mounts the same smb share on 
+> \\some-server\some-share and does an 'ls -a' they show up as owned
+> by UserB.
 > 
-> Maybe I am saying something stupid, but why not encapsulate the current
-> state of SMB1 and make it a VFS module presentable to the SMB2 layer?
+> 1. Is this normal?
+Not 100% sure. With AFP the macOS client has a notion of being in
+"domain mode" or not. In the latter mode all files are being shown as
+owner by the mounting user. Only in "domain mode" the client will
+actually show the real server side ownership.
 
-The SMB1 processing takes place above the VFS
-layer. It would be more work to do that refactoring
-than it would to keep the existing SMB1 mapping
-working.
+To be honest, I have no idea if similar rules apply to SMB. :)
 
-The only way to simplify the fileserver is to
-remove the SMB1 code and leave us as SMB2-only.
+Is your client part of the same domain as the server? Or is the server
+running in standalone mode?
 
-Use old-Samba mounted on cifsfs (via a vm maybe)
-exporting SMB1 to an SMB2 server seems the only
-sane solution for old devices to me.
+Cheerio!
+-slow
+
+-- 
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
