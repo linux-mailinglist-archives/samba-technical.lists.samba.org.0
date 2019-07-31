@@ -2,42 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24C937C77D
-	for <lists+samba-technical@lfdr.de>; Wed, 31 Jul 2019 17:50:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 083447C91E
+	for <lists+samba-technical@lfdr.de>; Wed, 31 Jul 2019 18:48:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=Y5MSDVkmYqU3DQBJZs0zH0GoVwya7poSDlu9Gd1YVJc=; b=ODhTW4w0dB3CDNRW72pPsJSVHG
-	bJGdbdyMpo3HjSp2Uo3eQWrhaaEyfKWGQFJ3KBLf6dXYK7ak+Y6UJm4jlVddNJ92fMiZv4XodPs+G
-	yFu+tqF6LSMSFgU2ohfusz//afPFL5vbBk2cUFc3KsmRO79zVWwowl6KPGEwDOaD9ZVG7pGnMmMlD
-	ybtv7WPOs1qn/P5K9Zm1bBPBRtaNvaqkN/RM3IV60OfE7wvLSOwScvRfwsTt+V00z9wa6tL+PgidZ
-	ftvQxXe5NocRyQoHp+D81c/R74vB5LMIiNfFPxCgTA8ncbpaCkUB7CD2JS+kUniSvReer3CNdXU3T
-	Br1FTjbQ==;
-Received: from localhost ([::1]:43440 helo=hr1.samba.org) 
+	bh=QinEdhda0QF80hZU/Agg8fmLabZy/oSbGrNclrokDBw=; b=HphoR1sml8tf6sj8PnjrYG9Krf
+	OO/mUPpvAfMaWgLoyt3glTHrH1TDO2xCteKA+Yrm4LJsYzmy6l/oXJcLqQk8a4BrtxxWj1IrTg6r6
+	UAdgFAfOIJNMt3u9RlO7HlH2axoBO0bsUXrbhf69ve5dC7TOYYH/U0L3PGyhAxhwjvl8Y5Xh0X+at
+	DPa0ilEJwxFkg1b0GIC8YNfZR6EpTmwsyMSxiPilso27Q9hBG96otMSK4M6DnOiFQcE5VyNLlpjGR
+	q+2ZCEB98dHDQZpQcyrYsEYSKJHVse/HnjmwYb9SsKhn0nwYiKq1HIWi1lmMq6u6bjYOetDG7ny7+
+	hjxESOkw==;
+Received: from localhost ([::1]:21460 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hsqs1-001VhT-HZ; Wed, 31 Jul 2019 15:50:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21434) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hsqrw-001VhM-9s
- for samba-technical@lists.samba.org; Wed, 31 Jul 2019 15:50:26 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=Y5MSDVkmYqU3DQBJZs0zH0GoVwya7poSDlu9Gd1YVJc=; b=mG5nN6jO/OeAcOTw3wizUa45X1
- 1oWvTepoIskBCyxP7E+yyMqoPcdQoPk1TE8ZpMXSQcKHB1iy4Jw6LegBGut90IJLlcMedeyIdl2/T
- urmWTp/bKbb9o6nosv/hVfKHREtccpejUuyPJKDB6uZQbkl5ti1Yg5rN/HhQwA0GBZFI=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hsqru-0001Xr-W9; Wed, 31 Jul 2019 15:50:23 +0000
-Date: Wed, 31 Jul 2019 08:50:20 -0700
-To: Noel Power <NoPower@suse.com>
-Subject: Re: RFC --picky-developer (for developer builds)
-Message-ID: <20190731155020.GA234347@jra4>
-References: <82e23c37-0bdc-e35a-373c-71b0591becd9@suse.com>
- <ab16fa62-dbef-9281-da4d-6ae2e6c9d1db@suse.com>
+	id 1hsrlZ-001ZAk-3L; Wed, 31 Jul 2019 16:47:53 +0000
+Received: from userp2130.oracle.com ([156.151.31.86]:60836) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1hsrlV-001ZAc-Ev
+ for samba-technical@lists.samba.org; Wed, 31 Jul 2019 16:47:51 +0000
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+ by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x6VCSffp017250;
+ Wed, 31 Jul 2019 12:29:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ content-transfer-encoding : in-reply-to; s=corp-2018-07-02;
+ bh=QinEdhda0QF80hZU/Agg8fmLabZy/oSbGrNclrokDBw=;
+ b=UNwu0c4wPTcK+P1xidV4FT1LKRMkQxaz1cUkvPP0Ee+M+UU7Gz6OFj/z0zrdjsIBiIq4
+ RR8DcnO5BwNTbkOvMba9ntx0ugykK37yx2s+Jx6DIgjqa48IZxcBXUaErA1PKGdhWr8G
+ S8WWUkZgU4BlTabEqJIoeeOVWQGWLj0dAYvOkqC0FbbM0/OAXdFd2cjaI2oHoDA481B2
+ +wEqkrBjyxFUHotQBrap0c7q5fg3j/fm9XhJXH2VLylTe5PSkrLLX5CH1ijL6LQ1clmv
+ z5rKCBCAVw8gaAgmgUgsyHemIMKZ2yOeJ8PUZZ2MFFIg2K8J4ASWSTjwi0sYZWoA5hKV vg== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+ by userp2130.oracle.com with ESMTP id 2u0e1tw392-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 31 Jul 2019 12:29:04 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+ by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x6VCRT7A074339;
+ Wed, 31 Jul 2019 12:29:03 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by userp3020.oracle.com with ESMTP id 2u2exbjc4u-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 31 Jul 2019 12:29:03 +0000
+Received: from abhmp0019.oracle.com (abhmp0019.oracle.com [141.146.116.25])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x6VCSwSp004011;
+ Wed, 31 Jul 2019 12:28:58 GMT
+Received: from kadam (/41.57.98.10) by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Wed, 31 Jul 2019 12:28:57 +0000
+Date: Wed, 31 Jul 2019 15:28:41 +0300
+To: =?iso-8859-1?Q?Aur=E9lien?= Aptel <aaptel@suse.com>
+Subject: Re: [PATCH] cifs: remove redundant assignment to variable rc
+Message-ID: <20190731122841.GA1974@kadam>
+References: <20190731090526.27245-1-colin.king@canonical.com>
+ <87r266seg4.fsf@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <ab16fa62-dbef-9281-da4d-6ae2e6c9d1db@suse.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <87r266seg4.fsf@suse.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,41 +73,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Dan Carpenter via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Dan Carpenter <dan.carpenter@oracle.com>
+Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Steve French <sfrench@samba.org>, Colin King <colin.king@canonical.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jul 31, 2019 at 08:35:14AM +0000, Noel Power via samba-technical wrote:
+On Wed, Jul 31, 2019 at 12:09:31PM +0200, Aurélien Aptel wrote:
+> Colin King <colin.king@canonical.com> writes:
+> > Variable rc is being initialized with a value that is never read
+> > and rc is being re-assigned a little later on. The assignment is
+> > redundant and hence can be removed.
 > 
-> On 29/07/2019 10:48, Noel Power via samba-technical wrote:
-> > Hi All,
-> >
-> > I had a merge request https://gitlab.com/samba-team/samba/merge_requests/591 (now closed) to enable --picky-developer for developer builds, this was a pretty low impact change to make developer builds build with '---picky-developer' by default.
-> >
-> > note: it modified the configure.developer wrapper script rather than the --developer option itself
-> >
-> > Metze however pointed out that he had an old branch hanging around trying to achieve the same result (but I think at the time too many warning as errors still existed in the codebase)
-> >
-> > Metze's branch:
-> >
-> >   a) removes the '--picky-developer' option but instead make the --developer option use the same flags (in otherwords make --developer do the same a --picky-developer)
-> >
-> >   b) replaces the '--picky-developer' option with '--disable-warnings-as-errors'<https://gitlab.com/samba-team/samba/merge_requests/667/diffs?commit_id=3195e4a57ea74fae2b81536b327c13148b1529fa> to allow to avoid -Werror
-> >
-> > I think Metzes' approach is better and so rebased his branch,  (see https://gitlab.com/samba-team/devel/samba/pipelines/72975003)
-> >
-> > Surely it's better (for developer builds) to be as 'picky' as possible and ensure we keep passing with that)
-> >
-> > what do others think? I'm all for merging this but such a change probably needs some wider discussion/agreement
-> 
-> If I'm reading the comments from others correctly then I don't see any
-> objections to pushing this to autobuild right ?
-> 
-> Please let me know if not :-) Anyway, I'll not do anything for a couple
-> of days to let anyone else chime in if they want
+> I think I would actually rather have rc set to an error by default than
+> uninitialized. Just my personal opinion.
 
-Making autobuild work with picky developer would
-be great ! Thanks, please push.
+You're just turning off GCC's static analysis (and introducing false
+positives) when you do that.  We have seen bugs caused by this and never
+seen any bugs prevented by this style.
+
+regards,
+dan carpenter
 
