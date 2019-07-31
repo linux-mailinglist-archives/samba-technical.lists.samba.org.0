@@ -2,69 +2,38 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68D2E7BDFF
-	for <lists+samba-technical@lfdr.de>; Wed, 31 Jul 2019 12:07:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F09CD7BE09
+	for <lists+samba-technical@lfdr.de>; Wed, 31 Jul 2019 12:09:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=1R7KneQt2NayayBr0W3gdW83EoL1yWfWYJWickRARtw=; b=sxMOA/x1n32YLkQJunrPOXohu0
-	W9zktQTnd8sqxLRAKNz6bdnWqKv8IhPe/M4sj7PGisF/JNS+o+sXoxkew3ypI3qV2S0stKPEYDJXU
-	nEy74xlYq/U0FrCEwBVWuiTz3Y9YpwChpj/SlOu5hIkbwrRQHh76bJ01KKdI6Z85oaGErXwfP5mvp
-	dlOJmjIRLasyNgdMlTi65ixUz5+Cm2p2lx1er50F14rtaDKcUYcAuXVPjszBDVGfev4epDt9f9rZ3
-	7m5HIq1l1Gf5EferIlZx4PZm2sARgrcZI2jSlAm3bkEs2q3LVUAK19Yb/btnc/OKeVpPfvseiYkTA
-	nE4qcCHw==;
-Received: from localhost ([::1]:59810 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=PPVC5vzSwJbLn2XDtsfqGhiXr1OBRLYHw5LkP3qFjzc=; b=kyYsQxesc3DrwhhM+2Kahlq23t
+	8uo+zeLaDFpuPHw3XZ1QZYsNVa63+to1Kx2cYoxbc7M12MR3tHsDkk7jiTF8wRapKk1+C3iyRjts8
+	/5xSdr/igxTltMVbNuyhd+j/1r18EJnzYzAI/LYxGgZCREWELh/UQ71SKI02rgnewVkXCvi/5fFaY
+	O0jkDQSfpZ7oeUFAhgkZvRZIXSQLU5chkh2ekI9EzXi9dNN0FsiuLCe9/R2sbP5ZRE7ZBSaWkfuVb
+	ApP0VFZMjsXGVr4lfDPVrrtnYyzbo8lIJsvQzL1BwOqjbk/Z38OpYkRU2VteBZYPma/jS2p1J8VIG
+	r556W7VQ==;
+Received: from localhost ([::1]:62998 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hslWB-001EQ5-8f; Wed, 31 Jul 2019 10:07:35 +0000
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:62484) 
+	id 1hslYH-001EsA-Az; Wed, 31 Jul 2019 10:09:45 +0000
+Received: from mx2.suse.de ([195.135.220.15]:52782 helo=mx1.suse.de) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hslW6-001EPy-Hk
- for samba-technical@lists.samba.org; Wed, 31 Jul 2019 10:07:33 +0000
-Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x6VA706R038030
- for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 06:07:25 -0400
-Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
- by mx0a-001b2d01.pphosted.com with ESMTP id 2u37j2m5ah-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 06:07:25 -0400
-Received: from localhost
- by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <samba-technical@lists.samba.org> from <swen@linux.ibm.com>;
- Wed, 31 Jul 2019 11:07:23 +0100
-Received: from b06cxnps4076.portsmouth.uk.ibm.com (9.149.109.198)
- by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
- Authorized Use Only! Violators will be prosecuted; 
- (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Wed, 31 Jul 2019 11:07:19 +0100
-Received: from d06av25.portsmouth.uk.ibm.com (d06av25.portsmouth.uk.ibm.com
- [9.149.105.61])
- by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- x6VA7IZP20119786
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
- for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 10:07:18 GMT
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 9E61E11C04C
- for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 10:07:18 +0000 (GMT)
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 830A411C058
- for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 10:07:18 +0000 (GMT)
-Received: from sig-9-145-21-34.uk.ibm.com (unknown [9.145.21.34])
- by d06av25.portsmouth.uk.ibm.com (Postfix) with ESMTP
- for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 10:07:18 +0000 (GMT)
-Subject: [PATCH] registry: Free memory at the end of each loop run to
- prevent mem leak
-To: samba-technical <samba-technical@lists.samba.org>
-Date: Wed, 31 Jul 2019 12:07:18 +0200
-Content-Type: multipart/signed; micalg="pgp-sha512";
- protocol="application/pgp-signature"; boundary="=-uxiBZNmhPiFHh96HS+VI"
-User-Agent: Evolution 3.30.5 (3.30.5-1.fc29) 
+ (Exim) id 1hslYD-001Es3-1Y
+ for samba-technical@lists.samba.org; Wed, 31 Jul 2019 10:09:43 +0000
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id 9759CB08C;
+ Wed, 31 Jul 2019 10:09:33 +0000 (UTC)
+To: Colin King <colin.king@canonical.com>, samba-technical@lists.samba.org,
+ Steve French <sfrench@samba.org>, linux-cifs@vger.kernel.org
+Subject: Re: [PATCH] cifs: remove redundant assignment to variable rc
+In-Reply-To: <20190731090526.27245-1-colin.king@canonical.com>
+References: <20190731090526.27245-1-colin.king@canonical.com>
+Date: Wed, 31 Jul 2019 12:09:31 +0200
+Message-ID: <87r266seg4.fsf@suse.com>
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19073110-0008-0000-0000-000003028C09
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19073110-0009-0000-0000-0000227030ED
-Message-Id: <a3fffe5bb10a74e4cdbf3815e99c9ebbe9cee1b0.camel@linux.ibm.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Warn: EHLO/HELO not verified: Remote host 195.135.220.15 (mx2.suse.de)
+ incorrectly presented itself as mx1.suse.de
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,84 +47,26 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: swen via samba-technical <samba-technical@lists.samba.org>
-Reply-To: swen@linux.ibm.com
+From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
+Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Colin King <colin.king@canonical.com> writes:
+> Variable rc is being initialized with a value that is never read
+> and rc is being re-assigned a little later on. The assignment is
+> redundant and hence can be removed.
 
---=-uxiBZNmhPiFHh96HS+VI
-Content-Type: multipart/mixed; boundary="=-hbtVe8IbcX6D1i/RzMau"
+I think I would actually rather have rc set to an error by default than
+uninitialized. Just my personal opinion.
 
-
---=-hbtVe8IbcX6D1i/RzMau
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Small patch preventing a memleak.
-
-Passed all gitlab-ci tests and a merge request is created.
-
-https://gitlab.com/samba-team/samba/merge_requests/678
-
-Please review and push if happy.
-
-Thanks for your support in advance.
-
-Cheers Swen
-
-
---=-hbtVe8IbcX6D1i/RzMau
-Content-Disposition: attachment; filename="patch.txt"
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; name="patch.txt"; charset="UTF-8"
-
-RnJvbSBkYWZmZmI1NThhZmRmNWMyZTJkZWZiZTVjZWUxZGE1NWE4YjU2N2ExIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTd2VuIFNjaGlsbGlnIDxzd2VuQGxpbnV4LmlibS5jb20+CkRh
-dGU6IE1vbiwgMjkgSnVsIDIwMTkgMTU6Mjc6NTggKzAyMDAKU3ViamVjdDogW1BBVENIXSByZWdp
-c3RyeTogRnJlZSBtZW1vcnkgYXQgdGhlIGVuZCBvZiBlYWNoIGxvb3AgcnVuIHRvIHByZXZlbnQK
-IG1lbSBsZWFrCgpGb3VuZCBkdXJpbmcgdG9ydHVyZSB0ZXN0IHJ1bnMgd2l0aCBlbmFibGUgYWRk
-cmVzcy1zYW5pdGl6ZXIuCgpTaWduZWQtb2ZmLWJ5OiBTd2VuIFNjaGlsbGlnIDxzd2VuQGxpbnV4
-LmlibS5jb20+Ci0tLQogc291cmNlNC9saWIvcmVnaXN0cnkvcGF0Y2hmaWxlX3ByZWcuYyB8IDEw
-ICsrKysrLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDUgZGVsZXRpb25z
-KC0pCgpkaWZmIC0tZ2l0IGEvc291cmNlNC9saWIvcmVnaXN0cnkvcGF0Y2hmaWxlX3ByZWcuYyBi
-L3NvdXJjZTQvbGliL3JlZ2lzdHJ5L3BhdGNoZmlsZV9wcmVnLmMKaW5kZXggYmE4YWMzYTVjMzgu
-LmZkNjI2NjNkMzJiIDEwMDY0NAotLS0gYS9zb3VyY2U0L2xpYi9yZWdpc3RyeS9wYXRjaGZpbGVf
-cHJlZy5jCisrKyBiL3NvdXJjZTQvbGliL3JlZ2lzdHJ5L3BhdGNoZmlsZV9wcmVnLmMKQEAgLTM3
-MiwxMyArMzcyLDEzIEBAIF9QVUJMSUNfIFdFUlJPUiByZWdfcHJlZ19kaWZmX2xvYWQoaW50IGZk
-LAogCQkJY2FsbGJhY2tzLT5hZGRfa2V5KGNhbGxiYWNrX2RhdGEsIGtleSk7CiAJCQljYWxsYmFj
-a3MtPnNldF92YWx1ZShjYWxsYmFja19kYXRhLCBrZXksIHZhbHVlX25hbWUsCiAJCQkJCSAgICAg
-dmFsdWVfdHlwZSwgZGF0YSk7Ci0gCQl9CisJCX0KKwkJVEFMTE9DX0ZSRUUoa2V5KTsKKwkJVEFM
-TE9DX0ZSRUUodmFsdWVfbmFtZSk7CisJCWRhdGFfYmxvYl9mcmVlKCZkYXRhKTsKIAl9CiBjbGVh
-bnVwOgogCWNsb3NlKGZkKTsKLQl0YWxsb2NfZnJlZShkYXRhLmRhdGEpOwotCXRhbGxvY19mcmVl
-KGtleSk7Ci0JdGFsbG9jX2ZyZWUodmFsdWVfbmFtZSk7Ci0JdGFsbG9jX2ZyZWUoYnVmKTsKKwlU
-QUxMT0NfRlJFRShtZW1fY3R4KTsKIAlyZXR1cm4gcmV0OwogfQotLSAKMi4yMC4xCgo=
-
-
---=-hbtVe8IbcX6D1i/RzMau--
-
---=-uxiBZNmhPiFHh96HS+VI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEErGbWt5PHCTgy2J0tug2knLYPYasFAl1BaFYACgkQug2knLYP
-Yat3iQ/+MRzn4iQj7mJX+kMrcLkwx40/oBJS4muyZc0v8RUPZghHw/WZ3mlyhyNI
-p4M11HIX8v0BVw9d9haPxWXBIV64gr9lgp84VsjFRZIs8fPWWtrK8JYl6yugRYRL
-VMd3SnOw1n8XZapN1tmZ0y42FwODB9JbeaiZJYFxzB/vZNwRg7F3H72928dFqE7C
-lS11Hyj6OHKIWX7FvOz3i6r46c5vZwkqTAY6ReCpXgFxr2q6tyhuG6Sif6i6VaWS
-KLN6KnKLZhY+jBQ3dvWLFVy0qWp/fGBI6GA5J8oiv+nkcxRWBuu2R4sqUaqNbPCg
-dAs+UZVYsYSlnl9xQzmc4UZr1vbFXHvaCvYKfIp6y8J4jZ7PSQMjYwiKZRgU7enY
-Mpcexzd9U2vOzBgS5hHfj6RWy80mf/7LzehHIA678ml/2c0gDWC/6Mu/+yD2yAQE
-s4w446qFhEshO0ZenSr9WsTWIR/oUob0nQzcERWdDM57sRDqUszwfV+afaodRtfW
-Ke27dT/cmdv91TGebnWX9Uu0+i1DVRn1DH16yedf+uSJqpvFTxPoEIbkmQB/v9gh
-tQNgYh0Gp0jgVTHiaSdo27kP+fm086sKliHvRJ96Iv6caEpRdEeJ07/L24XN2j43
-bkTPQH+83PwVp9T+lrs82pNyYTs2O304WrX3B7Bc3pVEi8FIFbo=
-=ug6L
------END PGP SIGNATURE-----
-
---=-uxiBZNmhPiFHh96HS+VI--
-
+Cheers,
+--=20
+Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+SUSE Linux GmbH, Maxfeldstra=C3=9Fe 5, 90409 N=C3=BCrnberg, Germany
+GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 21284 (AG N=C3=BCr=
+nberg)
 
