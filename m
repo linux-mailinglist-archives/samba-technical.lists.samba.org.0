@@ -2,40 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A07AB7CC51
-	for <lists+samba-technical@lfdr.de>; Wed, 31 Jul 2019 20:52:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 480037CC52
+	for <lists+samba-technical@lfdr.de>; Wed, 31 Jul 2019 20:52:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=m94+MFIZdCjy97exsNAIRqYyJoF/qO8YtXk6Q4Ocq2s=; b=IHkDRNrsyUwLyCfRFgg4W5MW5y
-	+JADqRLtWNXfLyEO7FXMuHvRtI8wE8x+TC2eEotAq2zigvrZdZVuAk6IqKx/mxMoX5vMSalnZWxKQ
-	jlicS5g6XBdSoLlxxSsTIhu6k+XnSbgFeznBEEv/TrHD1nOPOldrVJroHUNyFYHgvc4P516DFllwm
-	9gclf02I+2yLnL8JXSATbSYvSvbEY7B5WDbHc4pX6nT7lTva2mWOPWzZWkJIwu+bn4c2994sxtsOm
-	5Xq1xB9/YoU8p1aq4Q0A3J9whMXH3n3XFhfPdlyIO7yMmJwOL8jTl9EEa6YXIG1Ao9uTUnuQ5apaq
-	eBTDsYKg==;
-Received: from localhost ([::1]:36372 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=F3Ards7NoFM1mMrZ+gKI/CVtn325ieJWGN9DA73KOPE=; b=guR+MH9EWP0XYyhUyRk9NHwBD4
+	1rmQUSohcLsHIKllwVYfAbGVzSMa/LC/SKZK6TR7bFPIM3hRFDI54xY4M9RYHF8e4WxE8HOH3XfnD
+	O1ea56Y2AZkvvyOaPPghBLAOR6g7jGDlfP9D2W9qRdM/o26rVImr0diBQ3oFIXc/ufkaHjasRl8k7
+	tlw/jH0pjfQKtbJAnTOA9eUp0oJuW+vjMn3wSGMWbfnH73xSNqxnYNJvZjeUKiXmyzas1PUn5YK/1
+	JA1b8uGjfK2/0DFYy9/JIZJfa8Rw/2hT5LtjowOoKSROxRcx6qiYaZg0wtlReNNzy/tKOk2XVimhE
+	LL+9gB0Q==;
+Received: from localhost ([::1]:37138 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hsthj-001bJ4-Q7; Wed, 31 Jul 2019 18:52:03 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20640) 
+	id 1hstia-001bPj-RI; Wed, 31 Jul 2019 18:52:56 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21122) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hsthf-001bIx-Rb
- for samba-technical@lists.samba.org; Wed, 31 Jul 2019 18:52:01 +0000
+ (Exim) id 1hstiW-001bPc-G2
+ for samba-technical@lists.samba.org; Wed, 31 Jul 2019 18:52:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Date:To:From:CC;
- bh=m94+MFIZdCjy97exsNAIRqYyJoF/qO8YtXk6Q4Ocq2s=; b=Wq4klHgABmAAbSC+xgLZ+CFpr0
- 9GsMScsn5mmtuZ3GF8ZtZgJbBxdfbajHKpYAIVAa64W4l8ILXipU0ykAW7BSgZcVBPYi5fTJOekzt
- v2iYvua2vzQLHSZff/f4eXv5477Jvhkqryun8pXj+66+eseg/0G4ox4fQl3Q5buv/z4Y=;
+ s=42627210; h=Date:To:From:Message-ID:CC;
+ bh=F3Ards7NoFM1mMrZ+gKI/CVtn325ieJWGN9DA73KOPE=; b=ZHWPjBoCz21wRADOlVwrK5ypNX
+ 3EQEwoxtSsFvkCRoNvXzNyIrv5N4I0fasLkwl7mHJ39aQs7Giv6bLCYKo+/dGcyOc1hOgScp0ba+2
+ zWuDodwn1OL9HmwL1v4OrvSz0OqhVdKmw28dPBPUcyFiIKto7DZjoJXP7S+h+gvLyMXg=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hsthf-0003qy-3E; Wed, 31 Jul 2019 18:51:59 +0000
-To: samba-technical@lists.samba.org, Andrew Bartlett <abartlet@samba.org>
-Subject: Re: Require GnuTLS 3.4.7 for Samba 4.12 in March 2020?
-Date: Wed, 31 Jul 2019 20:51:58 +0200
-Message-ID: <2437169.Go6ugyqXA4@magrathea.fritz.box>
-In-Reply-To: <1564547155.4261.48.camel@samba.org>
-References: <1564547155.4261.48.camel@samba.org>
+ (Exim) id 1hstiV-0003sr-Ni; Wed, 31 Jul 2019 18:52:52 +0000
+Message-ID: <50e79d318a2d0ec571b20153a7a69b3083e5dd5f.camel@samba.org>
+Subject: Re: Samba.org GUI page
+To: David Mulder <dmulder@suse.com>, samba-technical
+ <samba-technical@lists.samba.org>
+Date: Thu, 01 Aug 2019 06:52:48 +1200
+In-Reply-To: <2691e0ab-7c21-c9c2-be47-58e8a869b6c8@suse.com>
+References: <2691e0ab-7c21-c9c2-be47-58e8a869b6c8@suse.com>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.32.4 (3.32.4-1.fc30) 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -49,22 +51,26 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wednesday, July 31, 2019 6:25:55 AM CEST Andrew Bartlett via samba-
-technical wrote:
-> [1] Sadly we couldn't totally remove the Samba AES code, as SMB 2.24
-> requires AES-CMAC-128, but the impact would be far more constrained.
+On Wed, 2019-07-31 at 17:26 +0000, David Mulder via samba-technical
+wrote:
+> Could somebody add my admin-tools package to https://www.samba.org/samba/GUI ? I'm not sure who manages the site.
+> 
+> Download URL is https://download.opensuse.org/repositories/home:/dmulder:/YaST:/AppImage/AppImage/admin-tools-latest-x86_64.AppImage
 
-And also AES-CFB8 ...
+It is just pure HTML in the samba-web repo.  Direct push to master
+changes the website after a few mins.
+
+Andrew Bartlett
 
 -- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
 
 
 
