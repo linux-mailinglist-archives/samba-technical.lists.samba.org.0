@@ -2,68 +2,69 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3DF77BDD2
-	for <lists+samba-technical@lfdr.de>; Wed, 31 Jul 2019 11:59:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 68D2E7BDFF
+	for <lists+samba-technical@lfdr.de>; Wed, 31 Jul 2019 12:07:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=51ae1xT5XS6P78JXkdaQOHz95zxhyE82ztIV78ZIM6k=; b=k+3CLvoH7HhcDav4qeotZlwbYn
-	QK70Sz+51O+A9nCdDVpDCnn6tGqWzhpHu6zgZZ7xmgZ+gLU7/JDmNDZHI6H6wC5Co4tZxrc/oatai
-	FDvOd5DrvZWou5lP3uUc/nHR4E/zv1BNPKnV0aWw+NbsJjGC83+3jSq3/lefTBWQrGbK/GQimUZWy
-	k6j7RBb2DlQjEZy1slIk+lZm9qAQrUQumh/MBbO9x8sAm4ms03facZdzkBsdbuV2jSla6WbgIi+aK
-	bpDjmaBO0Bhnh2SfqU9IZCnfH06AchLEMog0kOE2kWY79P8rwfG4XomcqlxM1ZbxkRkcQXeSa42R6
-	bZJi4zRw==;
-Received: from localhost ([::1]:53544 helo=hr1.samba.org) 
+	bh=1R7KneQt2NayayBr0W3gdW83EoL1yWfWYJWickRARtw=; b=sxMOA/x1n32YLkQJunrPOXohu0
+	W9zktQTnd8sqxLRAKNz6bdnWqKv8IhPe/M4sj7PGisF/JNS+o+sXoxkew3ypI3qV2S0stKPEYDJXU
+	nEy74xlYq/U0FrCEwBVWuiTz3Y9YpwChpj/SlOu5hIkbwrRQHh76bJ01KKdI6Z85oaGErXwfP5mvp
+	dlOJmjIRLasyNgdMlTi65ixUz5+Cm2p2lx1er50F14rtaDKcUYcAuXVPjszBDVGfev4epDt9f9rZ3
+	7m5HIq1l1Gf5EferIlZx4PZm2sARgrcZI2jSlAm3bkEs2q3LVUAK19Yb/btnc/OKeVpPfvseiYkTA
+	nE4qcCHw==;
+Received: from localhost ([::1]:59810 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hslNq-001Daf-0P; Wed, 31 Jul 2019 09:58:58 +0000
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:22786) 
+	id 1hslWB-001EQ5-8f; Wed, 31 Jul 2019 10:07:35 +0000
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:62484) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hslNl-001DYv-FU
- for samba-technical@lists.samba.org; Wed, 31 Jul 2019 09:58:56 +0000
-Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
+ (Exim) id 1hslW6-001EPy-Hk
+ for samba-technical@lists.samba.org; Wed, 31 Jul 2019 10:07:33 +0000
+Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x6V9wFWG141412
- for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 05:58:47 -0400
-Received: from e06smtp07.uk.ibm.com (e06smtp07.uk.ibm.com [195.75.94.103])
- by mx0a-001b2d01.pphosted.com with ESMTP id 2u37r6b7c0-1
+ x6VA706R038030
+ for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 06:07:25 -0400
+Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 2u37j2m5ah-1
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 05:58:47 -0400
+ for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 06:07:25 -0400
 Received: from localhost
- by e06smtp07.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+ by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
  Violators will be prosecuted
  for <samba-technical@lists.samba.org> from <swen@linux.ibm.com>;
- Wed, 31 Jul 2019 10:58:45 +0100
-Received: from b06cxnps3075.portsmouth.uk.ibm.com (9.149.109.195)
- by e06smtp07.uk.ibm.com (192.168.101.137) with IBM ESMTP SMTP Gateway:
+ Wed, 31 Jul 2019 11:07:23 +0100
+Received: from b06cxnps4076.portsmouth.uk.ibm.com (9.149.109.198)
+ by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway:
  Authorized Use Only! Violators will be prosecuted; 
  (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Wed, 31 Jul 2019 10:58:42 +0100
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com
- (b06wcsmtp001.portsmouth.uk.ibm.com [9.149.105.160])
- by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- x6V9wfhA59965472
+ Wed, 31 Jul 2019 11:07:19 +0100
+Received: from d06av25.portsmouth.uk.ibm.com (d06av25.portsmouth.uk.ibm.com
+ [9.149.105.61])
+ by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ x6VA7IZP20119786
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
- for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 09:58:42 GMT
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id DB8B0A405F
- for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 09:58:41 +0000 (GMT)
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id C07DAA405C
- for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 09:58:41 +0000 (GMT)
+ for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 10:07:18 GMT
+Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 9E61E11C04C
+ for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 10:07:18 +0000 (GMT)
+Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 830A411C058
+ for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 10:07:18 +0000 (GMT)
 Received: from sig-9-145-21-34.uk.ibm.com (unknown [9.145.21.34])
- by b06wcsmtp001.portsmouth.uk.ibm.com (Postfix) with ESMTP
- for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 09:58:41 +0000 (GMT)
-Subject: [PATCH] Update samba internal test to pass with ASAN sanitizer enabled
+ by d06av25.portsmouth.uk.ibm.com (Postfix) with ESMTP
+ for <samba-technical@lists.samba.org>; Wed, 31 Jul 2019 10:07:18 +0000 (GMT)
+Subject: [PATCH] registry: Free memory at the end of each loop run to
+ prevent mem leak
 To: samba-technical <samba-technical@lists.samba.org>
-Date: Wed, 31 Jul 2019 11:58:36 +0200
+Date: Wed, 31 Jul 2019 12:07:18 +0200
 Content-Type: multipart/signed; micalg="pgp-sha512";
- protocol="application/pgp-signature"; boundary="=-tK79F5sBdsr8CAS85Ngv"
+ protocol="application/pgp-signature"; boundary="=-uxiBZNmhPiFHh96HS+VI"
 User-Agent: Evolution 3.30.5 (3.30.5-1.fc29) 
 MIME-Version: 1.0
 X-TM-AS-GCONF: 00
-x-cbid: 19073109-0028-0000-0000-00000389967A
+x-cbid: 19073110-0008-0000-0000-000003028C09
 X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19073109-0029-0000-0000-00002449E6B9
-Message-Id: <63aac41699e3c14c946a270e28eb7ea8180294e1.camel@linux.ibm.com>
+x-cbparentid: 19073110-0009-0000-0000-0000227030ED
+Message-Id: <a3fffe5bb10a74e4cdbf3815e99c9ebbe9cee1b0.camel@linux.ibm.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,24 +84,19 @@ Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 
---=-tK79F5sBdsr8CAS85Ngv
+--=-uxiBZNmhPiFHh96HS+VI
+Content-Type: multipart/mixed; boundary="=-hbtVe8IbcX6D1i/RzMau"
+
+
+--=-hbtVe8IbcX6D1i/RzMau
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-SAMBA is "prepared" to be build with the ASAN address sanitizer
-enabled.
-The best way to verify that SAMBA complies is to run SAMBAs own=20
-test-suite.
+Small patch preventing a memleak.
 
-However, if compiled with the ASAN sanitizer enabled the SAMBA internal
-tests need some modifications to not trigger a finding themselves.=20
+Passed all gitlab-ci tests and a merge request is created.
 
-This small patch-set is performing the required changes for the
-"local.*" tests.
-
-The updates passed the gitlab-ci tests and a merge request is created
-at
-https://gitlab.com/samba-team/samba/merge_requests/677
+https://gitlab.com/samba-team/samba/merge_requests/678
 
 Please review and push if happy.
 
@@ -108,28 +104,58 @@ Thanks for your support in advance.
 
 Cheers Swen
 
---=-tK79F5sBdsr8CAS85Ngv
+
+--=-hbtVe8IbcX6D1i/RzMau
+Content-Disposition: attachment; filename="patch.txt"
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; name="patch.txt"; charset="UTF-8"
+
+RnJvbSBkYWZmZmI1NThhZmRmNWMyZTJkZWZiZTVjZWUxZGE1NWE4YjU2N2ExIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTd2VuIFNjaGlsbGlnIDxzd2VuQGxpbnV4LmlibS5jb20+CkRh
+dGU6IE1vbiwgMjkgSnVsIDIwMTkgMTU6Mjc6NTggKzAyMDAKU3ViamVjdDogW1BBVENIXSByZWdp
+c3RyeTogRnJlZSBtZW1vcnkgYXQgdGhlIGVuZCBvZiBlYWNoIGxvb3AgcnVuIHRvIHByZXZlbnQK
+IG1lbSBsZWFrCgpGb3VuZCBkdXJpbmcgdG9ydHVyZSB0ZXN0IHJ1bnMgd2l0aCBlbmFibGUgYWRk
+cmVzcy1zYW5pdGl6ZXIuCgpTaWduZWQtb2ZmLWJ5OiBTd2VuIFNjaGlsbGlnIDxzd2VuQGxpbnV4
+LmlibS5jb20+Ci0tLQogc291cmNlNC9saWIvcmVnaXN0cnkvcGF0Y2hmaWxlX3ByZWcuYyB8IDEw
+ICsrKysrLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDUgZGVsZXRpb25z
+KC0pCgpkaWZmIC0tZ2l0IGEvc291cmNlNC9saWIvcmVnaXN0cnkvcGF0Y2hmaWxlX3ByZWcuYyBi
+L3NvdXJjZTQvbGliL3JlZ2lzdHJ5L3BhdGNoZmlsZV9wcmVnLmMKaW5kZXggYmE4YWMzYTVjMzgu
+LmZkNjI2NjNkMzJiIDEwMDY0NAotLS0gYS9zb3VyY2U0L2xpYi9yZWdpc3RyeS9wYXRjaGZpbGVf
+cHJlZy5jCisrKyBiL3NvdXJjZTQvbGliL3JlZ2lzdHJ5L3BhdGNoZmlsZV9wcmVnLmMKQEAgLTM3
+MiwxMyArMzcyLDEzIEBAIF9QVUJMSUNfIFdFUlJPUiByZWdfcHJlZ19kaWZmX2xvYWQoaW50IGZk
+LAogCQkJY2FsbGJhY2tzLT5hZGRfa2V5KGNhbGxiYWNrX2RhdGEsIGtleSk7CiAJCQljYWxsYmFj
+a3MtPnNldF92YWx1ZShjYWxsYmFja19kYXRhLCBrZXksIHZhbHVlX25hbWUsCiAJCQkJCSAgICAg
+dmFsdWVfdHlwZSwgZGF0YSk7Ci0gCQl9CisJCX0KKwkJVEFMTE9DX0ZSRUUoa2V5KTsKKwkJVEFM
+TE9DX0ZSRUUodmFsdWVfbmFtZSk7CisJCWRhdGFfYmxvYl9mcmVlKCZkYXRhKTsKIAl9CiBjbGVh
+bnVwOgogCWNsb3NlKGZkKTsKLQl0YWxsb2NfZnJlZShkYXRhLmRhdGEpOwotCXRhbGxvY19mcmVl
+KGtleSk7Ci0JdGFsbG9jX2ZyZWUodmFsdWVfbmFtZSk7Ci0JdGFsbG9jX2ZyZWUoYnVmKTsKKwlU
+QUxMT0NfRlJFRShtZW1fY3R4KTsKIAlyZXR1cm4gcmV0OwogfQotLSAKMi4yMC4xCgo=
+
+
+--=-hbtVe8IbcX6D1i/RzMau--
+
+--=-uxiBZNmhPiFHh96HS+VI
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCgAdFiEErGbWt5PHCTgy2J0tug2knLYPYasFAl1BZkwACgkQug2knLYP
-YasEHA//aR8lG1oiocK7FH+Ed5jr4+5NkAF8irR7KeN9m44DlP0tHAz2FUGEzy6x
-bw1t2Hjpkvgv2bkPyel05DlF60vGHlrbp/XrHQG+5yrRToxBWiIhcRN/xiG9PRhX
-agw6Kqw9fOq5oXOir5jAAhqfs1wL8MEILbql/cvHFQ+/GadfGXxJTRKzdm5TS6P8
-fM4SHkWIBejQ44HqJ/P5pNhKHwEr8irefHiygu67DDVyofpV3D3cKUmx2X+72R8J
-94EdBONd5qQ6xKwoZEJxONNdYpfOWDL8EwBLK4dB7mhFGWf9JnsAOZFwU4Dn8U6K
-vJBuxx7F+vxpizIR3njOo6chzoQXb7ftmYY2FD/L7bOAPGisusHdfaNeEYg2iZOD
-/zR3U2xjwQpKdwlb7uk8qVPIyb0rERA8D2u3QySnCe/kKyNFq7T30RX8hsBTXhUs
-hGum7LbS4YPDp1aSxcMFR/iV9CKeKvVowUv2QcyVCYNicWXNcPew15QphPIiD341
-BO4Buo92gwr2U5rjrlI7noySS4E8Sbu56ccIl4QdGJO2AZyIZUd5FMS37C7r+GZb
-mTK+r8EPZRVo6kWSBSpKxUgkoixinyA1WNFKiNmLTPtuixoZTcevDTkaB4zd/lnh
-CZDQ3uQT1r+hZZWYUAB2ebK4oa9Wh5EQaxMHIDh71ZNYBJCa7WA=
-=pgMz
+iQIzBAABCgAdFiEErGbWt5PHCTgy2J0tug2knLYPYasFAl1BaFYACgkQug2knLYP
+Yat3iQ/+MRzn4iQj7mJX+kMrcLkwx40/oBJS4muyZc0v8RUPZghHw/WZ3mlyhyNI
+p4M11HIX8v0BVw9d9haPxWXBIV64gr9lgp84VsjFRZIs8fPWWtrK8JYl6yugRYRL
+VMd3SnOw1n8XZapN1tmZ0y42FwODB9JbeaiZJYFxzB/vZNwRg7F3H72928dFqE7C
+lS11Hyj6OHKIWX7FvOz3i6r46c5vZwkqTAY6ReCpXgFxr2q6tyhuG6Sif6i6VaWS
+KLN6KnKLZhY+jBQ3dvWLFVy0qWp/fGBI6GA5J8oiv+nkcxRWBuu2R4sqUaqNbPCg
+dAs+UZVYsYSlnl9xQzmc4UZr1vbFXHvaCvYKfIp6y8J4jZ7PSQMjYwiKZRgU7enY
+Mpcexzd9U2vOzBgS5hHfj6RWy80mf/7LzehHIA678ml/2c0gDWC/6Mu/+yD2yAQE
+s4w446qFhEshO0ZenSr9WsTWIR/oUob0nQzcERWdDM57sRDqUszwfV+afaodRtfW
+Ke27dT/cmdv91TGebnWX9Uu0+i1DVRn1DH16yedf+uSJqpvFTxPoEIbkmQB/v9gh
+tQNgYh0Gp0jgVTHiaSdo27kP+fm086sKliHvRJ96Iv6caEpRdEeJ07/L24XN2j43
+bkTPQH+83PwVp9T+lrs82pNyYTs2O304WrX3B7Bc3pVEi8FIFbo=
+=ug6L
 -----END PGP SIGNATURE-----
 
---=-tK79F5sBdsr8CAS85Ngv--
+--=-uxiBZNmhPiFHh96HS+VI--
 
 
