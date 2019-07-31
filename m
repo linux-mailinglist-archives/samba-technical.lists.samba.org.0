@@ -2,38 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A087A7C6B8
-	for <lists+samba-technical@lfdr.de>; Wed, 31 Jul 2019 17:35:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 24C937C77D
+	for <lists+samba-technical@lfdr.de>; Wed, 31 Jul 2019 17:50:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=55QYgc7yBQ7ThsWmveFo9XYW/UTChnwrNvtCgk6FRTA=; b=l6yKJn5elzf8Qe/XmHZWr4T+Om
-	KBPdNbHk/Jg5kve1k0tq1n8+la4n/Cmjz2FE2J7XDqSX3jX+4COSOM9yMsUJ/NLvv2Y0Vahj3lNtx
-	qaGosGLZiZJRisjeCZ13dY8F6JaDYlLom4yrSmZ1jhvmhYBBISxYJzIQUb/8mvyUmc+IQslYUeIpQ
-	prOqebT4BwFduaPmgW5eElkvTkEFRnN1ghhcN/iQeka7GAOAliIEIu7lhS3nWqn22+MG8DBNQV7De
-	qXhbi7F1RoUy5FlxWlsplXOA0gTprLgcUNxoN/45M4JjyIdOzJtJbfggy91atkx5cuEbCNcvqPIds
-	3STlAZpA==;
-Received: from localhost ([::1]:39190 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=Y5MSDVkmYqU3DQBJZs0zH0GoVwya7poSDlu9Gd1YVJc=; b=ODhTW4w0dB3CDNRW72pPsJSVHG
+	bJGdbdyMpo3HjSp2Uo3eQWrhaaEyfKWGQFJ3KBLf6dXYK7ak+Y6UJm4jlVddNJ92fMiZv4XodPs+G
+	yFu+tqF6LSMSFgU2ohfusz//afPFL5vbBk2cUFc3KsmRO79zVWwowl6KPGEwDOaD9ZVG7pGnMmMlD
+	ybtv7WPOs1qn/P5K9Zm1bBPBRtaNvaqkN/RM3IV60OfE7wvLSOwScvRfwsTt+V00z9wa6tL+PgidZ
+	ftvQxXe5NocRyQoHp+D81c/R74vB5LMIiNfFPxCgTA8ncbpaCkUB7CD2JS+kUniSvReer3CNdXU3T
+	Br1FTjbQ==;
+Received: from localhost ([::1]:43440 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hsqcv-001V95-P5; Wed, 31 Jul 2019 15:34:53 +0000
-Received: from mx2.suse.de ([195.135.220.15]:40468 helo=mx1.suse.de) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hsqcq-001V7f-JH
- for samba-technical@lists.samba.org; Wed, 31 Jul 2019 15:34:51 +0000
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id CC5D1AC68;
- Wed, 31 Jul 2019 15:34:40 +0000 (UTC)
-To: Dan Carpenter <dan.carpenter@oracle.com>
-Subject: Re: [PATCH] cifs: remove redundant assignment to variable rc
-In-Reply-To: <20190731122841.GA1974@kadam>
-References: <20190731090526.27245-1-colin.king@canonical.com>
- <87r266seg4.fsf@suse.com> <20190731122841.GA1974@kadam>
-Date: Wed, 31 Jul 2019 17:34:39 +0200
-Message-ID: <87lfwerze8.fsf@suse.com>
+	id 1hsqs1-001VhT-HZ; Wed, 31 Jul 2019 15:50:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21434) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hsqrw-001VhM-9s
+ for samba-technical@lists.samba.org; Wed, 31 Jul 2019 15:50:26 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=Y5MSDVkmYqU3DQBJZs0zH0GoVwya7poSDlu9Gd1YVJc=; b=mG5nN6jO/OeAcOTw3wizUa45X1
+ 1oWvTepoIskBCyxP7E+yyMqoPcdQoPk1TE8ZpMXSQcKHB1iy4Jw6LegBGut90IJLlcMedeyIdl2/T
+ urmWTp/bKbb9o6nosv/hVfKHREtccpejUuyPJKDB6uZQbkl5ti1Yg5rN/HhQwA0GBZFI=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hsqru-0001Xr-W9; Wed, 31 Jul 2019 15:50:23 +0000
+Date: Wed, 31 Jul 2019 08:50:20 -0700
+To: Noel Power <NoPower@suse.com>
+Subject: Re: RFC --picky-developer (for developer builds)
+Message-ID: <20190731155020.GA234347@jra4>
+References: <82e23c37-0bdc-e35a-373c-71b0591becd9@suse.com>
+ <ab16fa62-dbef-9281-da4d-6ae2e6c9d1db@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Warn: EHLO/HELO not verified: Remote host 195.135.220.15 (mx2.suse.de)
- incorrectly presented itself as mx1.suse.de
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ab16fa62-dbef-9281-da4d-6ae2e6c9d1db@suse.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,32 +51,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
-Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
- Steve French <sfrench@samba.org>, Colin King <colin.king@canonical.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-"Dan Carpenter" <dan.carpenter@oracle.com> writes:
-> You're just turning off GCC's static analysis (and introducing false
-> positives) when you do that.  We have seen bugs caused by this and never
-> seen any bugs prevented by this style.
+On Wed, Jul 31, 2019 at 08:35:14AM +0000, Noel Power via samba-technical wrote:
+> 
+> On 29/07/2019 10:48, Noel Power via samba-technical wrote:
+> > Hi All,
+> >
+> > I had a merge request https://gitlab.com/samba-team/samba/merge_requests/591 (now closed) to enable --picky-developer for developer builds, this was a pretty low impact change to make developer builds build with '---picky-developer' by default.
+> >
+> > note: it modified the configure.developer wrapper script rather than the --developer option itself
+> >
+> > Metze however pointed out that he had an old branch hanging around trying to achieve the same result (but I think at the time too many warning as errors still existed in the codebase)
+> >
+> > Metze's branch:
+> >
+> >   a) removes the '--picky-developer' option but instead make the --developer option use the same flags (in otherwords make --developer do the same a --picky-developer)
+> >
+> >   b) replaces the '--picky-developer' option with '--disable-warnings-as-errors'<https://gitlab.com/samba-team/samba/merge_requests/667/diffs?commit_id=3195e4a57ea74fae2b81536b327c13148b1529fa> to allow to avoid -Werror
+> >
+> > I think Metzes' approach is better and so rebased his branch,  (see https://gitlab.com/samba-team/devel/samba/pipelines/72975003)
+> >
+> > Surely it's better (for developer builds) to be as 'picky' as possible and ensure we keep passing with that)
+> >
+> > what do others think? I'm all for merging this but such a change probably needs some wider discussion/agreement
+> 
+> If I'm reading the comments from others correctly then I don't see any
+> objections to pushing this to autobuild right ?
+> 
+> Please let me know if not :-) Anyway, I'll not do anything for a couple
+> of days to let anyone else chime in if they want
 
-You've never seen bugs prevented by initializing uninitialized
-variables? Code can change overtime and I don't think coverity is
-checked as often as it could be, meaning the var could end up being used
-while uninitialized in the future.
-
-Anyway I won't die on this hill, merge this if you prefer.
-
-Cheers,
---=20
-Aur=C3=A9lien Aptel / SUSE Labs Samba Team
-GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
-SUSE Linux GmbH, Maxfeldstra=C3=9Fe 5, 90409 N=C3=BCrnberg, Germany
-GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 21284 (AG N=C3=BCr=
-nberg)
+Making autobuild work with picky developer would
+be great ! Thanks, please push.
 
