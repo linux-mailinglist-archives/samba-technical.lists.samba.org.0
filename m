@@ -2,47 +2,87 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 398BB7B982
-	for <lists+samba-technical@lfdr.de>; Wed, 31 Jul 2019 08:10:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3EF0C7BCEA
+	for <lists+samba-technical@lfdr.de>; Wed, 31 Jul 2019 11:23:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=HuyQm5wsMf6SUTZzGl1+o89lPh+2iTZDjCZQ0VnsfEc=; b=VivVbNT/SUOlFL5NHhkBBXAPOO
-	GKqy8baZVcdefunhfOMAW+BXSR2EvXZMFlIPxiI9rbb9RXtHrXME9gF5vgrKNt6KHqURWkBgF6VAV
-	0f4pyxq9p4QJHa7I1Ldk+Y3kcoK1/J1zgL/LtWhAmQFK9Y4SWTyrExV/ibmUh2sQ/hU1aGTD+8r7P
-	O5dFQ/8ghAbho+OJnXiWxjjXUIdvP6wVLxP1cUwUFbCu5D4yrTfJE2JVlsLU/E67LWSnbwLv/0tqz
-	wkaXm3ZKVpgwJGHQjx2O3Fq+rg8ul2VO8aVfSocLzIEPRvoQeFd10Qkmbag3eizKHxVC6s6EB1iq1
-	o1rU6H9A==;
-Received: from localhost ([::1]:65018 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=hv4aNK0DjQ9nZRi9SaY0bma0jLcE1afzw5ZtjGNeze4=; b=EerykHj4+eV1Yjl+U8Vf7CAEcS
+	hgKnSkQ7dR29BxIXHQLVC3dxsWxkdLtPR8L2n3oTdPbV7jiVo8aloFDXss3ZSYjbKaqriQRVeoGMt
+	h/Aoxf93xjOYl0i7Yb1j2F0WLeKOBrQHM97obPa2kdC62K+e+fEHymbNwSYCrnuZLezhbS1+QfeC7
+	O2zhTNxadedywxEbDbywJYfm3QlhhvLkJ9lyVLt+mHltDYVCvRlTiH+Mp9ofpfn2TlxbhRlXJphSN
+	t8f1ug+r188nXOeC5T06Uo70oSGk+6Osr/Gtzfy064EcH8zri/iOYBnwr5aoDUWith1ZAOdd7EWKI
+	eyCHorMg==;
+Received: from localhost ([::1]:31252 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hshof-0018Is-UJ; Wed, 31 Jul 2019 06:10:26 +0000
-Received: from szxga05-in.huawei.com ([45.249.212.191]:2297 helo=huawei.com) 
- by hr1.samba.org with esmtps
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim) id 1hshoZ-0018Il-Ph
- for samba-technical@lists.samba.org; Wed, 31 Jul 2019 06:10:22 +0000
-Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.58])
- by Forcepoint Email with ESMTP id 3F9AAA095F01FBBB10AA;
- Wed, 31 Jul 2019 13:54:01 +0800 (CST)
-Received: from [127.0.0.1] (10.184.225.177) by DGGEMS409-HUB.china.huawei.com
- (10.3.19.209) with Microsoft SMTP Server id 14.3.439.0;
- Wed, 31 Jul 2019 13:53:51 +0800
-Subject: Re: [PATCH] mount.cifs.c: fix memory leaks in main func
-To: <pshilov@microsoft.com>, <lsahlber@redhat.com>, <ab@samba.org>,
- <aaptel@suse.com>, <kdsouza@redhat.com>, <palcantara@suse.de>,
- <lsahlber@redhat.com>, <smfrench@gmail.com>, <liujiawen10@huawei.com>
-References: <1c5a44a0-f08c-67f8-227f-957cd161781b@huawei.com>
- <2560210f-739a-1045-4f4d-339d79961175@huawei.com>
-Message-ID: <498a2fcb-b703-3386-d252-29494f6a0443@huawei.com>
-Date: Wed, 31 Jul 2019 13:53:30 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.5.0
+	id 1hskpL-001AbM-LJ; Wed, 31 Jul 2019 09:23:19 +0000
+Received: from m4a0041g.houston.softwaregrp.com ([15.124.2.87]:46801) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1hskpF-001AbF-I4
+ for samba-technical@lists.samba.org; Wed, 31 Jul 2019 09:23:17 +0000
+Received: FROM m4a0041g.houston.softwaregrp.com (15.120.17.147) BY
+ m4a0041g.houston.softwaregrp.com WITH ESMTP
+ FOR samba-technical@lists.samba.org; Wed, 31 Jul 2019 09:23:10 +0000
+Received: from M4W0335.microfocus.com (2002:f78:1193::f78:1193) by
+ M4W0335.microfocus.com (2002:f78:1193::f78:1193) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10; Wed, 31 Jul 2019 08:35:15 +0000
+Received: from NAM03-DM3-obe.outbound.protection.outlook.com (15.124.8.11) by
+ M4W0335.microfocus.com (15.120.17.147) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10 via Frontend Transport; Wed, 31 Jul 2019 08:35:15 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=TJ31vW2SQLWwRKJ6Ie87dUIq1k06QaPD//d/0sopbkwYEK1USgMLHD9g+KXOkEv2+3mBvBmUUbkxjYel+K6XsshR6vaRPEoWFkh9Ks8gVreF2qgGYmStlNYewlq4fr5zV2P4u5yQMoSY8sfzamFAYvREXIAdVuXo/WtzqRCDqmzPgoE8evOBRdxpB1x7H8lRE3sfUilwjdR8mj6cN88xT+PaO1NIJrSqpiEgV4JTu72mKWuxTE71MXg9sN+6DfHShfeDmBEjnMLqTliQ0tO8Qsb3EtA2LqANM8P9zlAeTvjicZ+RW+MtRF2h45YZC3lGu9Uv6UmXNnVOBl4GOseuCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hv4aNK0DjQ9nZRi9SaY0bma0jLcE1afzw5ZtjGNeze4=;
+ b=WET+hIWfs7Y0zxtOcsLl1HGm+J6IyWyfgSZbr/Ooo2aN981FKHOZJB/wfSLXoudlsNZxHxUNtXhX7aPX/6hoQhfT+J0Q/ZPgwHAUDfWWsz4EPLaFY/jixYROBl7L2OQ925pMhz+hRkLnCuUmJMQZhraFpn+3voIxZmcqq4bQZ0DSHrycrw8f2UZLdF/9+nCzfPa0yfkxMWm0r/KxrZZPRqhhJmhZi1ik9qDS2GFIGyg1I+X3DrDWGYH0nJS+QmM5ie4/cYIvFmroXXaNdjXKcg1IGBL912MXAsDSG5IVpA7HTbty58j0lrtuZSe/XX+VZe5c1F0zLSM8450JzRYyIw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1;spf=pass
+ smtp.mailfrom=suse.com;dmarc=pass action=none header.from=suse.com;dkim=pass
+ header.d=suse.com;arc=none
+Received: from BY5PR18MB3267.namprd18.prod.outlook.com (10.255.138.24) by
+ BY5PR18MB3410.namprd18.prod.outlook.com (10.255.137.212) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2136.15; Wed, 31 Jul 2019 08:35:14 +0000
+Received: from BY5PR18MB3267.namprd18.prod.outlook.com
+ ([fe80::8877:5f44:3f1b:fdd7]) by BY5PR18MB3267.namprd18.prod.outlook.com
+ ([fe80::8877:5f44:3f1b:fdd7%7]) with mapi id 15.20.2115.005; Wed, 31 Jul 2019
+ 08:35:14 +0000
+To: Noel Power <NoPower@suse.com>, samba-technical
+ <samba-technical@lists.samba.org>
+Subject: Re: RFC --picky-developer (for developer builds)
+Thread-Topic: RFC --picky-developer (for developer builds)
+Thread-Index: AQHVRfLO8KMdRYThTUuLY0ugiHTshqbkacqA
+Date: Wed, 31 Jul 2019 08:35:14 +0000
+Message-ID: <ab16fa62-dbef-9281-da4d-6ae2e6c9d1db@suse.com>
+References: <82e23c37-0bdc-e35a-373c-71b0591becd9@suse.com>
+In-Reply-To: <82e23c37-0bdc-e35a-373c-71b0591becd9@suse.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=NoPower@suse.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [109.77.40.137]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 6579f198-bda1-4912-77a8-08d71592020d
+x-ms-traffictypediagnostic: BY5PR18MB3410:
+x-ms-exchange-purlcount: 3
+x-ms-oob-tlc-oobclassifiers: OLM:5516;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: y7eLuPXsQx/VdHRbUWWORo449BFB6QX72CROMw453GdcGqJ/414mrTgMtngFiqilWwd0HHFQ2NnIjEtBeojZbjNumsV9juKyW56z9KwNQ8OI1KXkOqNCMY8AnvyGRSvoHSJzyLUb9M6Gp4ngXLMVkKu5CTZd4fHYGN/6tmLJFavdGf4bHpdOgpl0RDu7N3Cd08XLCuPg2aw18OHLrgfYdwwzeF/0Cz03Z4pi4j2afL4w4kCs6ownhM73N4LPQOeWyTCyn2vRzS3oQrvAMJuvTi8QTrCEyZV4lOKohsE3uPfhiB3dBsHEskK34K8dKGKZr2yohTVGWojL1D1lhEepG/U3mr4yw9cbT4mefzSTq4c/VePyD6zzx/Acn5QdVknewouj+cUU/EKP1hWFuKji3B+X/fBk0byywOfxq/EQdPU=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <79363254E9CEE8488F89620E213FD81E@namprd18.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-In-Reply-To: <2560210f-739a-1045-4f4d-339d79961175@huawei.com>
-Content-Type: text/plain; charset="gb18030"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.184.225.177]
-X-CFilter-Loop: Reflected
-X-Warn: EHLO/HELO not verified: Remote host 45.249.212.191
- (szxga05-in.huawei.com) incorrectly presented itself as huawei.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6579f198-bda1-4912-77a8-08d71592020d
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: NoPower@suse.com
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR18MB3410
+X-OriginatorOrg: suse.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,77 +96,39 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Zhiqiang Liu via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Zhiqiang Liu <liuzhiqiang26@huawei.com>
-Cc: zhangsaisai <zhangsaisai@huawei.com>, Mingfangsen <mingfangsen@huawei.com>,
- dujin1@huawei.com, samba-technical@lists.samba.org
+From: Noel Power via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Noel Power <NoPower@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Friendly ping ...
-
-On 2019/7/25 14:55, Zhiqiang Liu wrote:
-> From: Jiawen Liu <liujiawen10@huawei.com>
-> 
-> In mount.cifs module, orgoptions and mountpoint in the main func
-> point to the memory allocated by func realpath and strndup respectively.
-> However, they are not freed before the main func returns so that the
-> memory leaks occurred.
-> 
-> The memory leak problem is reported by LeakSanitizer tool.
-> LeakSanitizer url: "https://github.com/google/sanitizers"
-> 
-> Here I free the pointers orgoptions and mountpoint before main
-> func returns.
-> 
-> Fixes£º7549ad5e7126 ("memory leaks: caused by func realpath and strndup")
-> Signed-off-by: Jiawen Liu <liujiawen10@huawei.com>
-> Reported-by: Jin Du <dujin1@huawei.com>
-> Reviewed-by: Saisai Zhang <zhangsaisai@huawei.com>
-> ---
->  mount.cifs.c | 8 +++++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
-> 
-> diff --git a/mount.cifs.c b/mount.cifs.c
-> index ae7a899..029f01a 100644
-> --- a/mount.cifs.c
-> +++ b/mount.cifs.c
-> @@ -1830,6 +1830,7 @@ assemble_mountinfo(struct parsed_mount_info *parsed_info,
->  	}
-> 
->  assemble_exit:
-> +	free(orgoptions);
->  	return rc;
->  }
-> 
-> @@ -1994,8 +1995,11 @@ int main(int argc, char **argv)
-> 
->  	/* chdir into mountpoint as soon as possible */
->  	rc = acquire_mountpoint(&mountpoint);
-> -	if (rc)
-> +	if (rc) {
-> +		free(mountpoint);
-> +		free(orgoptions);
->  		return rc;
-> +	}
-> 
->  	/*
->  	 * mount.cifs does privilege separation. Most of the code to handle
-> @@ -2014,6 +2018,7 @@ int main(int argc, char **argv)
->  		/* child */
->  		rc = assemble_mountinfo(parsed_info, thisprogram, mountpoint,
->  					orig_dev, orgoptions);
-> +		free(mountpoint);
->  		return rc;
->  	} else {
->  		/* parent */
-> @@ -2149,5 +2154,6 @@ mount_exit:
->  	}
->  	free(options);
->  	free(orgoptions);
-> +	free(mountpoint);
->  	return rc;
->  }
-> 
-
+DQpPbiAyOS8wNy8yMDE5IDEwOjQ4LCBOb2VsIFBvd2VyIHZpYSBzYW1iYS10ZWNobmljYWwgd3Jv
+dGU6DQo+IEhpIEFsbCwNCj4NCj4gSSBoYWQgYSBtZXJnZSByZXF1ZXN0IGh0dHBzOi8vZ2l0bGFi
+LmNvbS9zYW1iYS10ZWFtL3NhbWJhL21lcmdlX3JlcXVlc3RzLzU5MSAobm93IGNsb3NlZCkgdG8g
+ZW5hYmxlIC0tcGlja3ktZGV2ZWxvcGVyIGZvciBkZXZlbG9wZXIgYnVpbGRzLCB0aGlzIHdhcyBh
+IHByZXR0eSBsb3cgaW1wYWN0IGNoYW5nZSB0byBtYWtlIGRldmVsb3BlciBidWlsZHMgYnVpbGQg
+d2l0aCAnLS0tcGlja3ktZGV2ZWxvcGVyJyBieSBkZWZhdWx0Lg0KPg0KPiBub3RlOiBpdCBtb2Rp
+ZmllZCB0aGUgY29uZmlndXJlLmRldmVsb3BlciB3cmFwcGVyIHNjcmlwdCByYXRoZXIgdGhhbiB0
+aGUgLS1kZXZlbG9wZXIgb3B0aW9uIGl0c2VsZg0KPg0KPiBNZXR6ZSBob3dldmVyIHBvaW50ZWQg
+b3V0IHRoYXQgaGUgaGFkIGFuIG9sZCBicmFuY2ggaGFuZ2luZyBhcm91bmQgdHJ5aW5nIHRvIGFj
+aGlldmUgdGhlIHNhbWUgcmVzdWx0IChidXQgSSB0aGluayBhdCB0aGUgdGltZSB0b28gbWFueSB3
+YXJuaW5nIGFzIGVycm9ycyBzdGlsbCBleGlzdGVkIGluIHRoZSBjb2RlYmFzZSkNCj4NCj4gTWV0
+emUncyBicmFuY2g6DQo+DQo+ICAgYSkgcmVtb3ZlcyB0aGUgJy0tcGlja3ktZGV2ZWxvcGVyJyBv
+cHRpb24gYnV0IGluc3RlYWQgbWFrZSB0aGUgLS1kZXZlbG9wZXIgb3B0aW9uIHVzZSB0aGUgc2Ft
+ZSBmbGFncyAoaW4gb3RoZXJ3b3JkcyBtYWtlIC0tZGV2ZWxvcGVyIGRvIHRoZSBzYW1lIGEgLS1w
+aWNreS1kZXZlbG9wZXIpDQo+DQo+ICAgYikgcmVwbGFjZXMgdGhlICctLXBpY2t5LWRldmVsb3Bl
+cicgb3B0aW9uIHdpdGggJy0tZGlzYWJsZS13YXJuaW5ncy1hcy1lcnJvcnMnPGh0dHBzOi8vZ2l0
+bGFiLmNvbS9zYW1iYS10ZWFtL3NhbWJhL21lcmdlX3JlcXVlc3RzLzY2Ny9kaWZmcz9jb21taXRf
+aWQ9MzE5NWU0YTU3ZWE3NGZhZTJiODE1MzZiMzI3YzEzMTQ4YjE1MjlmYT4gdG8gYWxsb3cgdG8g
+YXZvaWQgLVdlcnJvcg0KPg0KPiBJIHRoaW5rIE1ldHplcycgYXBwcm9hY2ggaXMgYmV0dGVyIGFu
+ZCBzbyByZWJhc2VkIGhpcyBicmFuY2gsICAoc2VlIGh0dHBzOi8vZ2l0bGFiLmNvbS9zYW1iYS10
+ZWFtL2RldmVsL3NhbWJhL3BpcGVsaW5lcy83Mjk3NTAwMykNCj4NCj4gU3VyZWx5IGl0J3MgYmV0
+dGVyIChmb3IgZGV2ZWxvcGVyIGJ1aWxkcykgdG8gYmUgYXMgJ3BpY2t5JyBhcyBwb3NzaWJsZSBh
+bmQgZW5zdXJlIHdlIGtlZXAgcGFzc2luZyB3aXRoIHRoYXQpDQo+DQo+IHdoYXQgZG8gb3RoZXJz
+IHRoaW5rPyBJJ20gYWxsIGZvciBtZXJnaW5nIHRoaXMgYnV0IHN1Y2ggYSBjaGFuZ2UgcHJvYmFi
+bHkgbmVlZHMgc29tZSB3aWRlciBkaXNjdXNzaW9uL2FncmVlbWVudA0KDQpJZiBJJ20gcmVhZGlu
+ZyB0aGUgY29tbWVudHMgZnJvbSBvdGhlcnMgY29ycmVjdGx5IHRoZW4gSSBkb24ndCBzZWUgYW55
+DQpvYmplY3Rpb25zIHRvIHB1c2hpbmcgdGhpcyB0byBhdXRvYnVpbGQgcmlnaHQgPw0KDQpQbGVh
+c2UgbGV0IG1lIGtub3cgaWYgbm90IDotKSBBbnl3YXksIEknbGwgbm90IGRvIGFueXRoaW5nIGZv
+ciBhIGNvdXBsZQ0Kb2YgZGF5cyB0byBsZXQgYW55b25lIGVsc2UgY2hpbWUgaW4gaWYgdGhleSB3
+YW50DQoNCnRoYW5rcywNCg0KTm9lbA0KDQo=
 
