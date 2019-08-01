@@ -2,59 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EB367D970
-	for <lists+samba-technical@lfdr.de>; Thu,  1 Aug 2019 12:34:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EB4C7E0B1
+	for <lists+samba-technical@lfdr.de>; Thu,  1 Aug 2019 19:01:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=CigtntcGEx92IUDe+NP96Iw5O7r0J54o1TDvBznL9Ms=; b=CFAwxlh3M5UlSRmibny4FIWiZ0
-	wfJrRQd6DUHca1z6re1Bk5RGsi3/8PvYk8u6I/R0hmYVLoYWN0JfIEQo3Ik8+dAjDcLT/u/TqJQkD
-	na8xn8EjMC/+6+6hJyznAdjmfRzd0oOS3xuCIZR31ls4ZXmVWuOCXrogpEgaB1EbfMl0FPwW7+so0
-	1ku9PieU+M4943W1rmUMkrWPPpNC/wYD0BTDIf5eAFkpKrFbCZHJUKZxTHNHIuIWZ4IjD3h8Q+4jw
-	LtJqwK6OQ/ewV0dI7FYZ5oVG+mVuRES/WrUIGZdhVKExnCQwKmFOQVugnWXaetzAv21/wQyesv79F
-	d0SsIMWQ==;
-Received: from localhost ([::1]:58740 helo=hr1.samba.org) 
+	bh=WGPyF/jz2yKuYFU7gzQ1L/LMsgV9YTZ2vw6QCV6Vnss=; b=FC6qM0OfsFDkQCem6h4eoeJ+GI
+	CRzryq/Y/1OIUBfVKDqI+2izot2Q9Sxp4bN/CPLhzYfwVFmJCOIAvsqAZ8z3kiTSS0Hf+9zrzVJ7K
+	dj/qEWJQ1uJ61XxV00lM9XA0wG93ep9P4YlDcI9r0mrO/CpyLw0hAdaigfTEqmBdDFuCEvNA1MNAm
+	VGq2TgPO4pDpyP6Z9Hssur9L4Xhb8JfRqAHSx0amZpFTIrP4WV2aEO6nDm3kFl+HGZpaw7ojcIf79
+	2fbSXPHvQIs5uxWmvgdxDjWYGuvowYaDEp/CrPykVr+gNq2cX7aJRQp3BXUS0JgT1L5r6/oY2qpDX
+	sSm2ZuVg==;
+Received: from localhost ([::1]:33976 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ht8Pt-003N2x-2w; Thu, 01 Aug 2019 10:34:37 +0000
-Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c]:40373) 
+	id 1htERl-003Qbf-Pe; Thu, 01 Aug 2019 17:00:57 +0000
+Received: from mail-pf1-x444.google.com ([2607:f8b0:4864:20::444]:42689) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ht8Po-003N2p-J8
- for samba-technical@lists.samba.org; Thu, 01 Aug 2019 10:34:35 +0000
-Received: by mail-ua1-x92c.google.com with SMTP id s4so28189357uad.7
- for <samba-technical@lists.samba.org>; Thu, 01 Aug 2019 03:34:32 -0700 (PDT)
+ (Exim) id 1htERg-003QbY-Ik
+ for samba-technical@lists.samba.org; Thu, 01 Aug 2019 17:00:55 +0000
+Received: by mail-pf1-x444.google.com with SMTP id q10so34402515pff.9
+ for <samba-technical@lists.samba.org>; Thu, 01 Aug 2019 10:00:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=CigtntcGEx92IUDe+NP96Iw5O7r0J54o1TDvBznL9Ms=;
- b=ngs3WYRorV6gz558/4w0oGV1qDUdzg5IA9j5pQ/bcYsmIerLoNYItDcOvPQzmIITRk
- GD01TgAdHsTzVl+Vsvc+LK83ytR2qVaXj3jlCBMLXtEu7kg6IjYZ/53zRrH0Cp+3JpsT
- xomcuH5SMVV73Tdw5qmaeAqJWHvgjpJptJCL+B9c2+a1UIrD/QIVDv8s9m0NMTqoB07v
- i5if3DUCXVtmUuOEUH7+pDASgbgqJEP/gOm6wP8YIY4yrRN4hyJ0ZLuv0N3etkOeQAdE
- /PSCNZ/Npx3+nfcIG2XVMYNEgJKhtjkzmFPcLWMoOC7IfnqsWNFgnQ4Pri/y66zUtUL7
- zxLw==
+ :cc:content-transfer-encoding;
+ bh=WGPyF/jz2yKuYFU7gzQ1L/LMsgV9YTZ2vw6QCV6Vnss=;
+ b=sGWP0fErmKQgCjE58NXoxmrj6L7FQzRJa9+jCi2n/GxkHB/xpz3L93gva3RvfziNta
+ BPAXRRhRYolWQODuGp6caxy9kqfFS2cRDZlBzVt0w66rKNTU88AUyNASwK103/FeLuGy
+ IvyXPKwbB1SG2ZNkOfIbWBX7EP7B3DOeOZM4NxF6fnJXYBG1ccKIi+YlF86t18TJ3qrG
+ h6huSgunJmOEpK32CV3ruEsJxK+WC9+l9d0HO6Skl5UtdhTHXTya9OWN3RNsJ4yWZK34
+ rP+oWK9LVjAGws1nttGsu+bBMdkccSBGABlbwzpOZaEfTMXQw52/eKVtWfbnz72QJMhv
+ JS7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=CigtntcGEx92IUDe+NP96Iw5O7r0J54o1TDvBznL9Ms=;
- b=j4EdFDFexPjC76C6Eyyh5a1tnYx5firnPee2jpt86bfYXzTvlg48xUcHvUKynIdxxn
- i7LbE/zU7qxAneBhHtXNsXQcK8+At2y7/8q4Bdis9cbTbNyUpFWzFlNweADIVCvyi8Rh
- Po/meQHMM66iPIReTwjvzaNrPhcIJDIUEDdPWdO152wC//IeNj0j76iXQ3aevuZDLxjs
- FA8wHgiFbjtt++CpxsmYk0hsBlAmz0fQfsyqgXGDEnbtxwIZJq4uHM/1kyRL/xUReRHt
- 84HvDd6S0qMhk6+0fQpnCkX8txTRz2heP0mZuNzUkau6SHg6UeJkDY5tDE0vs43TYA/q
- qx8Q==
-X-Gm-Message-State: APjAAAWvBvAokTaDDf0bRU27QY2GK7L034PtjUCJuUKLA2P9rhJt3K0P
- V6o38Pf2pPzZyIv0hxk2WmB/e9xfx9lgatzN91g=
-X-Google-Smtp-Source: APXvYqwPQrDMR3D5t1PjwbprfDbM+rTUrwUUX+Bh+0Vxrst6x6bydCKDDCISf+ZUDqPGzvEdwvKc1keWBDCTFX50rqg=
-X-Received: by 2002:ab0:5ea6:: with SMTP id y38mr81183040uag.40.1564655670562; 
- Thu, 01 Aug 2019 03:34:30 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=WGPyF/jz2yKuYFU7gzQ1L/LMsgV9YTZ2vw6QCV6Vnss=;
+ b=FRDVEzdwCG4Y4YvfmIZPGq0LMoS/rAovT/p8nqjnUJShXBL4hmdEIyMzhHpQkoQWiC
+ DsOMy8yq8f4Spjpo1/k7v8HCxDWGASfop1xLVuxiGaLRJ43acOCWNDBtVbTp6QFMyv2a
+ Mri4VELqWynZr26wdrNwLXeVOZghliEjpDafeX2VpRJOn2bU81mXBkAfTvqafadTgC5K
+ EodkI7qiDT24CTI8CjY7x+g/PzufB2MAfTiYo/p3Liv3Upmhq90FbxikVRxTThQa69o7
+ ho8WHU0nHwwNoTBCG4r5ZkzCRWOlUJnLoVisHs5LWG3ZvLHOP1/MWl8ONxT0RAQNRSal
+ WHUQ==
+X-Gm-Message-State: APjAAAUGQSroOIXgsGwprJjIoSQoxggrIUWxQIEwivTND5Z1Ufb/jF9o
+ aKs/z/fjh8S9jc2sy5eOdXLdLx84RVXMSrcYMYc=
+X-Google-Smtp-Source: APXvYqxlnoZ7H66e1GLk8MqU9jRtl8FsWM4cquNdSP23TFAWWxy+fPwsayD6YLTVS7VXcsI01KJ2dq1MjFDDLk6SktI=
+X-Received: by 2002:a17:90a:360c:: with SMTP id
+ s12mr9971211pjb.30.1564678849452; 
+ Thu, 01 Aug 2019 10:00:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <1564547155.4261.48.camel@samba.org>
- <11267207.3DhDtICzHl@magrathea.fritz.box>
-In-Reply-To: <11267207.3DhDtICzHl@magrathea.fritz.box>
-Date: Thu, 1 Aug 2019 06:34:17 -0400
-Message-ID: <CAOCN9rwk8fUOs1yCStJhnn_ZnF_U2pXv5_WQnz=tHi44qPAa=g@mail.gmail.com>
-Subject: Re: Require GnuTLS 3.4.7 for Samba 4.12 in March 2020?
-To: Andreas Schneider <asn@samba.org>
+References: <20190731090526.27245-1-colin.king@canonical.com>
+ <87r266seg4.fsf@suse.com> <20190731122841.GA1974@kadam>
+ <87lfwerze8.fsf@suse.com>
+ <2f562159-8118-f4a5-9e00-c82cf0841fd5@canonical.com>
+In-Reply-To: <2f562159-8118-f4a5-9e00-c82cf0841fd5@canonical.com>
+Date: Thu, 1 Aug 2019 12:00:37 -0500
+Message-ID: <CAH2r5msukKuhEcbpBfXOrwFEA=fyXQKSL+hDwdOFYX7DNLe8TQ@mail.gmail.com>
+Subject: Re: [PATCH] cifs: remove redundant assignment to variable rc
+To: Colin Ian King <colin.king@canonical.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,84 +73,50 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ kernel-janitors <kernel-janitors@vger.kernel.org>,
+ =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>,
+ LKML <linux-kernel@vger.kernel.org>, Steve French <sfrench@samba.org>,
+ Dan Carpenter <dan.carpenter@oracle.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jul 31, 2019 at 1:57 AM Andreas Schneider via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> On Wednesday, July 31, 2019 6:25:55 AM CEST Andrew Bartlett via samba-
-> technical wrote:
-> > I'm reviewing "Use GnuTLS AES ciphers if supported by the installed
-> > GnuTLS version" for Andreas.
-> >
-> > https://gitlab.com/samba-team/samba/merge_requests/669
-> >
-> > The one thing I really don't like is the #ifdef on HAVE_GNUTLS_AEAD.  I
-> > would prefer we just chose to rely on GnuTLS. [1]
-> >
-> > Duplicated code is bad, duplicated crypto code is particularly bad and
-> > I would really like to remove our existing duplicates rather than add
-> > more.
-> >
-> > Not only are we short on maintainece resources, we would also need to
-> > restructure our testuite to force a non-GnuTLS build to ensure we
-> > actually test this at all.
-> >
-> > In doing so I know many folks really like running current Samba (both
-> > as an AD DC and fileserver) on older enterprise distributions.
-> >
-> > In this case, RHEL 8, Ubuntu 16.04 and current debian stable
-> > all have GnuTLS versions later than 3.4.7.
->
-> Also SLE15 offers newer GnuTLS via an update.
->
-> Also note that the older the distro the more likely it is that there is no
-> python3 available. RHEL7 will have to stick to 4.10 as it is the last version
-> supporting python2.
+merged into cifs-2.6.git for-next
 
-Python 3.6 is available from EPEL for RHEL 7. It's also available as
-an sclo" package, the Software Colleciotns Library offered by RHEL. My
-published tools, and several other sets of tools, use the EPEL bnaries
-quite successfully for Samba 4.10. EPEL is unfortunately not
-officially supported by Red Hat, so it doesn't have the industry grade
-"I can call Red Hat in the middle of the night and yell at them when
-an update broke my server" support that may be necessary for a high
-availability business critical service.
+On Wed, Jul 31, 2019 at 10:54 AM Colin Ian King
+<colin.king@canonical.com> wrote:
+>
+> On 31/07/2019 16:34, Aur=C3=A9lien Aptel wrote:
+> > "Dan Carpenter" <dan.carpenter@oracle.com> writes:
+> >> You're just turning off GCC's static analysis (and introducing false
+> >> positives) when you do that.  We have seen bugs caused by this and nev=
+er
+> >> seen any bugs prevented by this style.
+> >
+> > You've never seen bugs prevented by initializing uninitialized
+> > variables? Code can change overtime and I don't think coverity is
+> > checked as often as it could be, meaning the var could end up being use=
+d
+> > while uninitialized in the future.
+>
+> gcc/clang should pick up uninitialized vars at compile time. also I run
+> coverity daily on linux-next.
+>
+> Colin
+>
+> >
+> > Anyway I won't die on this hill, merge this if you prefer.
+> >
+> > Cheers,
+> >
+>
 
-I will give Samba credit that the community has usually been more
-responsive to critical problems or debugging than even a good
-professional support team..
 
-> That you can build a newer Samba version with python3 support is only possible
-> because of EPEL7 repositories. I'm not sure something like that is offered.
+--=20
+Thanks,
 
-I'm not publishing binaries, but am publishing source code to build
-RPMs and SRPMs at https://github.com/nkadel/samba4repo with various
-git bubmodules. Several other folks publish binaries, like Sergio's
-work at https://github.com/sergiomb2/SambaAD .
-
-I'm just waiting on a bundled tdb 4.1 or tdb 4.1rc1  to test Samba
-4.11rc1 with my structure. Since ldb, tdb, tevent, and talloc all
-require major version updates, and the updates are incompatible with
-4.10 as best I can tell, I'm not ready to mix those with the  main
-code line.
-
-> Cheers,
->
->
->         Andreas
->
->
-> --
-> Andreas Schneider                      asn@samba.org
-> Samba Team                             www.samba.org
-> GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
->
->
->
+Steve
 
