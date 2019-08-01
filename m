@@ -2,42 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 480037CC52
-	for <lists+samba-technical@lfdr.de>; Wed, 31 Jul 2019 20:52:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 285477D5EA
+	for <lists+samba-technical@lfdr.de>; Thu,  1 Aug 2019 08:59:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=F3Ards7NoFM1mMrZ+gKI/CVtn325ieJWGN9DA73KOPE=; b=guR+MH9EWP0XYyhUyRk9NHwBD4
-	1rmQUSohcLsHIKllwVYfAbGVzSMa/LC/SKZK6TR7bFPIM3hRFDI54xY4M9RYHF8e4WxE8HOH3XfnD
-	O1ea56Y2AZkvvyOaPPghBLAOR6g7jGDlfP9D2W9qRdM/o26rVImr0diBQ3oFIXc/ufkaHjasRl8k7
-	tlw/jH0pjfQKtbJAnTOA9eUp0oJuW+vjMn3wSGMWbfnH73xSNqxnYNJvZjeUKiXmyzas1PUn5YK/1
-	JA1b8uGjfK2/0DFYy9/JIZJfa8Rw/2hT5LtjowOoKSROxRcx6qiYaZg0wtlReNNzy/tKOk2XVimhE
-	LL+9gB0Q==;
-Received: from localhost ([::1]:37138 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=A/jqvkc+InZRH0/Fs0SQ3zvOAAAGYABwl3/aGQhd0x8=; b=mnCAYN+P4hhohY6iXVHAWGp6Rc
+	tWnkH0pklIrU5OArWrg2FVkRLHtLoPmfcvYAXXzzEV9kSx4gmQfV404TQvetvdNxjFl5JTEURjQsW
+	VM8Trh76hpBd7vqcTK3RN/dlPgoDZq1t9qzfEZeI+XUHSyyafe6PkjpAH56AjMnVHM784c3v0osfs
+	6rCHrX43nl9yIhR/ekBCn6nSbqBtF0AAX3oR3JgOfujxIutCmI6hizxTXT6CzNNdJ9ohlVhs3kyGs
+	WppPC/hPYFTOiBA6CTl60PmU4TxkQoMHv9ADg2x4z7BQpLFXBoi3VmJ9zn4IODXnBF52+wHSfW6Nv
+	sf4pU/UQ==;
+Received: from localhost ([::1]:44438 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hstia-001bPj-RI; Wed, 31 Jul 2019 18:52:56 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21122) 
+	id 1ht53A-003KlS-8Z; Thu, 01 Aug 2019 06:58:56 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59620) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hstiW-001bPc-G2
- for samba-technical@lists.samba.org; Wed, 31 Jul 2019 18:52:54 +0000
+ (Exim) id 1ht533-003KlL-CN
+ for samba-technical@lists.samba.org; Thu, 01 Aug 2019 06:58:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:To:From:Message-ID:CC;
- bh=F3Ards7NoFM1mMrZ+gKI/CVtn325ieJWGN9DA73KOPE=; b=ZHWPjBoCz21wRADOlVwrK5ypNX
- 3EQEwoxtSsFvkCRoNvXzNyIrv5N4I0fasLkwl7mHJ39aQs7Giv6bLCYKo+/dGcyOc1hOgScp0ba+2
- zWuDodwn1OL9HmwL1v4OrvSz0OqhVdKmw28dPBPUcyFiIKto7DZjoJXP7S+h+gvLyMXg=;
+ s=42627210; h=Message-ID:Date:Cc:To:From;
+ bh=A/jqvkc+InZRH0/Fs0SQ3zvOAAAGYABwl3/aGQhd0x8=; b=wLXrVDfjqWLPEuXSs38CpyN+oj
+ RO18Aerz9wZmIVd2T8utMNhB+LTS7e2D1RY4j3VvWamo3NUqL5fZh+/53yuis3661kpFZI1yW6Bpm
+ B8zma8/euff2Ke13NlO+jZrRwzR9Opg8hN41ga+gYs2M0Sj3R/HeP2kGc28Tcr1nulB0=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hstiV-0003sr-Ni; Wed, 31 Jul 2019 18:52:52 +0000
-Message-ID: <50e79d318a2d0ec571b20153a7a69b3083e5dd5f.camel@samba.org>
-Subject: Re: Samba.org GUI page
-To: David Mulder <dmulder@suse.com>, samba-technical
- <samba-technical@lists.samba.org>
-Date: Thu, 01 Aug 2019 06:52:48 +1200
-In-Reply-To: <2691e0ab-7c21-c9c2-be47-58e8a869b6c8@suse.com>
-References: <2691e0ab-7c21-c9c2-be47-58e8a869b6c8@suse.com>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.32.4 (3.32.4-1.fc30) 
+ (Exim) id 1ht530-0001Lj-En; Thu, 01 Aug 2019 06:58:46 +0000
+To: samba-technical@lists.samba.org, Nico Kadel-Garcia <nkadel@gmail.com>
+Subject: Re: Require GnuTLS 3.4.7 for Samba 4.12 in March 2020?
+Date: Thu, 01 Aug 2019 08:58:44 +0200
+Message-ID: <3136808.qJGijLCe70@magrathea.fritz.box>
+In-Reply-To: <CAOCN9rz0wCkZZvzsjsXKcm4+Jv0nQWicmuk6PeYwUNGinMyq3Q@mail.gmail.com>
+References: <1564547155.4261.48.camel@samba.org>
+ <CAOCN9ryBOTTTB8UR2fNX7ZMDM0hJHKT7-Ys8v-VDv4BCgp+uug@mail.gmail.com>
+ <CAOCN9rz0wCkZZvzsjsXKcm4+Jv0nQWicmuk6PeYwUNGinMyq3Q@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,26 +51,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2019-07-31 at 17:26 +0000, David Mulder via samba-technical
-wrote:
-> Could somebody add my admin-tools package to https://www.samba.org/samba/GUI ? I'm not sure who manages the site.
+On Wednesday, July 31, 2019 7:37:10 AM CEST Nico Kadel-Garcia via samba-
+technical wrote:
+> I only repackage that, I didn't write it, Credit where it's due, and
 > 
-> Download URL is https://download.opensuse.org/repositories/home:/dmulder:/YaST:/AppImage/AppImage/admin-tools-latest-x86_64.AppImage
+> quoting from the README.md there:
+> >>This is based on sergiomb2's work at
+> >>
+> >>  https://github.com/sergiomb2/SambaAD
+> 
+> So Sergio gets credit. But I'm already using it for RHEL 7/CenbtOS 7.
+> I've done some very limited testing with RHEL 8, but am waiting for
+> CentOS 8 to finally be released to really test  that.
+> 
+> > > [1] Sadly we couldn't totally remove the Samba AES code, as SMB 2.24
+> > > requires AES-CMAC-128, but the impact would be far more constrained.
+> 
+> Fair enough. I'd say accept the requirement of a compatibility library
+> for older operating systems, and I'm glad Sergio did most of the work.
 
-It is just pure HTML in the samba-web repo.  Direct push to master
-changes the website after a few mins.
+Is there a copr repo with the compat-gnutls34 available somewhere?
 
-Andrew Bartlett
+
+	Andreas
 
 -- 
-Andrew Bartlett                       http://samba.org/~abartlet/
-Authentication Developer, Samba Team  http://samba.org
-Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
 
 
