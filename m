@@ -2,95 +2,88 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF8557EC2D
-	for <lists+samba-technical@lfdr.de>; Fri,  2 Aug 2019 07:41:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DAD2A7F510
+	for <lists+samba-technical@lfdr.de>; Fri,  2 Aug 2019 12:33:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=HqSuuo3RPXLMvlxbxTjIOnZQ9IGhUxoWtjNRAOLRLM8=; b=K0eWHlNkJOlkgc3ExjfN1wp0vd
-	NcvVt7QW7tQxqbfb2nfCKf6dcQnAZlcFm6oJJEx74XAj+2nWtoqGnRwKEDxuPsOb5M1Hm9yPKtRmD
-	9Aa7st3cd5bmv6080RJRf0g+IvKtqn+Y2zb423b+vtJMqMqkGiPApAql9B98LdGBih1/9ka2bdLZR
-	SDxc8B38HzTQKDtZV4wDLUQfBBJoAhn3GFK5T64EwUn3wTaqzxHQzsE3DkwmoxI+67guBD+mPUVUI
-	2Gmh4VlrLkoc6sEDOH8s5kXVv98OGI37qCGGcc+F6aYtzNw+5bTp6j6wRon4ybzX0lD2RCKrpLX5m
-	tcpwlgoQ==;
-Received: from localhost ([::1]:49494 helo=hr1.samba.org) 
+	bh=a1sBj8eVWfmYtq61mrC0Etl/alJwheg8nfae/xJr2X0=; b=SxYB561r77Zss7Rl2Hfgy0MR/m
+	orw7mLKZ3Ii6xqhwVoQs6IIwdFVu2c1hs1c24bL5edHd/4dhmzjw2EO9HsbwLDxG6+wlwbXr4nQFF
+	5uP6cNQRmWcwLIohDhent6QKZqGjoUHzpa3KBZgTHlgdm2H7a/hK3jNXR4fOdwdhtp/7Cqz8CcQ5h
+	EFB1dN8vKNUv/S5QNlYoFf651SStb/bFdkSQAVo90l5araciDETSUc7J/9nmhtlFBt5Q1EDEEeuCJ
+	KFZovZYjZu9ui8mi02awfPuD5k/sSKsPgewXYhYvwVL1ui0Tu72U556Zg3tems7ey+csCwDMUDp+z
+	XX0tDU0w==;
+Received: from localhost ([::1]:60424 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1htQIO-003TsM-06; Fri, 02 Aug 2019 05:40:04 +0000
-Received: from mail1.bemta24.messagelabs.com ([67.219.250.212]:46176) 
+	id 1htUrU-003Vld-TG; Fri, 02 Aug 2019 10:32:37 +0000
+Received: from mail-eopbgr80059.outbound.protection.outlook.com
+ ([40.107.8.59]:25336 helo=EUR04-VI1-obe.outbound.protection.outlook.com) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1htQII-003TsF-8i
- for samba-technical@lists.samba.org; Fri, 02 Aug 2019 05:40:01 +0000
-Received: from [67.219.250.101] (using TLSv1.2 with cipher
- DHE-RSA-AES256-GCM-SHA384 (256 bits))
- by server-2.bemta.az-a.us-west-2.aws.symcld.net id A9/B4-10939-8ACC34D5;
- Fri, 02 Aug 2019 05:39:52 +0000
-X-Env-Sender: Abhishek.Anand@veritas.com
-X-Msg-Ref: server-25.tower-325.messagelabs.com!1564724390!83839!1
-X-Originating-IP: [18.237.140.177]
-X-SYMC-ESS-Client-Auth: mailfrom-relay-check=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.43.9; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 17467 invoked from network); 2 Aug 2019 05:39:51 -0000
-Received: from p01b.mail.dlp.protect.symantec.com (HELO
- mail.ds.dlp.protect.symantec.com) (18.237.140.177)
- by server-25.tower-325.messagelabs.com with ECDHE-RSA-AES256-SHA384 encrypted
- SMTP; 2 Aug 2019 05:39:51 -0000
+ (Exim) id 1htUrO-003VlW-Ov
+ for samba-technical@lists.samba.org; Fri, 02 Aug 2019 10:32:34 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iYODs5Fr10wh/GrVwzn1LuHoTQ+fmkdI8KPDHNSKXw5vHT1TvMHM19VAmIGOKdooR/WBC3sw9fGfZmZ1znqBt/DbBOtld8JZh/eL75nASxi784Vhm+Kx9ouIJ6yezKj4IdxiuAU8w0gwWPgeQmIDYcL5wIBD/lzZUehDaPFWrNQeTt8GbxqtCKHZVeZ+XNFVT+fhUhrLB0Gm3w+hkLj1LOyYpO4Fl+mmsRtmNqnNOFuSxk+ET6HLkA4AUWu694PdcdilJbtyoIlEWRESraIM54EmM+6Eun7uHglIC4FHQYaNzTmOYDwdbqXUQLWEqli0/2pVbbHObVwTQLqqyLcWwg==
+ b=U1IA8rlJOIC8gj7xeq67YV2pReCy7NalLIUXhiWE1q9+KBheiN2M+j5mROku3TaT/QpOopp10Ypz+FNstZnDZvhxc765h0/NjgUeUhstayPdjnGV2dwZnw/PR4oZHx+//TCcOg/HMLrVluCM1/RybdbYHaGQFxnGvee/mBQ2FoU2I2hDcySxcwtFEiLEjajm3LdykNUR6Da8Vbwj9L9GVSRSOq1iVH/iN1wBTuJmIc1jZmLCFF3JZZCTQFNNH6wWGjvjwR+Tb4eIGT+L87SgstiGRUxascz1pGwOxnCdm255N8DaCkCpzO4PRUq/4J6zaekYRdA/fi3P4bXPqcN03A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+Xql1gxRrd9YNKiTRzIG8WvtxVyo8IrIuXrpI5csF8U=;
- b=E9CJhbBXsaGW4gwV8DQPkTmY1TOE1Alu15ZJm5IhaQa0F5L5AGdXCO4QqzzkrS9/pptXKuMl6Df61xZVwLH4fws4Y8iYzdqlaxLYDTZ6ZMi2zk5e34zd/g1ljBsT5h53rIMQP65QDLovf5HXVr7Tr9IR1+O8yjDht/JdZGcqj6WduMIrmTNpM0BZWdKld2ho6PKLOv1wFfA3R3Tj/uRLbqAJltUeDomnFMyOLFiFMieDyXYYr+l8coslzP2FaTVQz9OyMFrCB8ydU3G/KH/cnXYO7TBPl+uAzTF58aEdWV6JHN2IxMfzJpda6xQfJ0vdWVmCvkvxkPS7MtESDpra/g==
+ bh=a1sBj8eVWfmYtq61mrC0Etl/alJwheg8nfae/xJr2X0=;
+ b=HYakVBbrjvYfFZ+FyNdf06GwUN6fC1A5TKcF9+Xh5RadqKzXrRooVcawlU5h42srZwAxMJoZMuYNVgg+kPL4W0+4TxgeXtIECgGrM2I2JQKlPU7Q+A51nr3zhUprBr57hDGA6Ky1hUr4rTodzqQ+Y4PpRcz+oYOo/Kj4j5hicB5eliC2muOeDFSlgazYbflG7Etsu7dQC8QMwy8sW0uVAhWM4Y6SrIc5jfT/KIOJuwkntS2YjzPFL4s4JkHOQpKHcjgUCMJWtA8jBx2vBVqgWLcRUG6rOQ8g/YW4buheL5oSbY8gT4q3F95Gq2C2IQYoyY7AzIxjAUuUINHu5jbQVQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1;spf=pass
- smtp.mailfrom=veritas.com;dmarc=pass action=none
- header.from=veritas.com;dkim=pass header.d=veritas.com;arc=none
+ smtp.mailfrom=wallix.com;dmarc=pass action=none
+ header.from=wallix.com;dkim=pass header.d=wallix.com;arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=veritastech.onmicrosoft.com; s=selector2-veritastech-onmicrosoft-com;
+ d=wallix.onmicrosoft.com; s=selector2-wallix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+Xql1gxRrd9YNKiTRzIG8WvtxVyo8IrIuXrpI5csF8U=;
- b=vu01ZkIh+mwrcbPxPngH2ThVfD0pSZqsuyq66JJjPUPEGXK1UhFO6fwP+mtmjyQaJKvAcybuNUTC/RvRGTeTggOS8CPMw1OENGXJVhtVbb1auLxNR11/1mdP3m6TO+7GcEp6CUZazjD2MxDUV9NbuUXEq4FaeMh38gcPZ83XfgI=
-Received: from CH2PR20MB2949.namprd20.prod.outlook.com (52.132.228.22) by
- CH2PR20MB2919.namprd20.prod.outlook.com (52.132.231.140) with Microsoft SMTP
+ bh=a1sBj8eVWfmYtq61mrC0Etl/alJwheg8nfae/xJr2X0=;
+ b=WBKoaJH+fTXxUq96LZ1VpHnywOqvMVJVHHatmm22J9UnEXFJZc1+sQOxb/fPS5mkO2Do2r2TVJEjYPhzTzpnvNtBXH82dK5b0h2ca/56vuQQ7KOaU4hC2TvWcqZnQlh6J8Fm96DMhHE2O4Vai8KP0STLBPyBu31RTjWJxpd7QCU=
+Received: from VI1PR03MB6190.eurprd03.prod.outlook.com (10.141.128.75) by
+ VI1PR03MB6158.eurprd03.prod.outlook.com (10.141.128.21) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2136.12; Fri, 2 Aug 2019 05:39:48 +0000
-Received: from CH2PR20MB2949.namprd20.prod.outlook.com
- ([fe80::c4b2:6f62:2341:fe83]) by CH2PR20MB2949.namprd20.prod.outlook.com
- ([fe80::c4b2:6f62:2341:fe83%7]) with mapi id 15.20.2136.010; Fri, 2 Aug 2019
- 05:39:48 +0000
-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- Jeremy Allison <jra@samba.org>
-Subject: Subfoders in VxFS not inheriting correct ACLs from parent directory
-Thread-Topic: Subfoders in VxFS not inheriting correct ACLs from parent
- directory
-Thread-Index: AdVI9I+RGACnPjivTG+rQ5nrOLWnjw==
-Date: Fri, 2 Aug 2019 05:39:48 +0000
-Message-ID: <CH2PR20MB2949F99CEFF9F84FDFBA25B886D90@CH2PR20MB2949.namprd20.prod.outlook.com>
-Accept-Language: en-US
+ 15.20.2136.16; Fri, 2 Aug 2019 06:58:38 +0000
+Received: from VI1PR03MB6190.eurprd03.prod.outlook.com
+ ([fe80::4d7c:17b1:9d63:4403]) by VI1PR03MB6190.eurprd03.prod.outlook.com
+ ([fe80::4d7c:17b1:9d63:4403%2]) with mapi id 15.20.2136.010; Fri, 2 Aug 2019
+ 06:58:38 +0000
+To: Steve French <smfrench@gmail.com>, Pavel Shilovsky
+ <pavel.shilovsky@gmail.com>
+Subject: Re: PROBLEM: Kernel oops when mounting a encryptData CIFS share with
+ CONFIG_DEBUG_VIRTUAL
+Thread-Topic: PROBLEM: Kernel oops when mounting a encryptData CIFS share with
+ CONFIG_DEBUG_VIRTUAL
+Thread-Index: AQHVQwVbrMDmWO2VoUeqR7dMvDyd06bbyvGAgArH3YCAAOaQAA==
+Date: Fri, 2 Aug 2019 06:58:38 +0000
+Message-ID: <35ee3dd4-19dd-4a27-6160-4080bdeaea48@wallix.com>
+References: <380e1b86-1911-b8a5-6b02-276b6d4be4fe@wallix.com>
+ <CAKywueSO=choOsw6THnEnmN4UwhACHU1o1pJX8ypx0wjVTmiKQ@mail.gmail.com>
+ <CAH2r5ms1qgpPrB+oOHWF7TVoZ36g3iska1PQ3dBGMrscq2K51g@mail.gmail.com>
+In-Reply-To: <CAH2r5ms1qgpPrB+oOHWF7TVoZ36g3iska1PQ3dBGMrscq2K51g@mail.gmail.com>
+Accept-Language: en-150, fr-FR, en-US
 Content-Language: en-US
-X-MS-Has-Attach: yes
+X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [165.225.106.80]
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=cmucchietto@wallix.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [89.87.189.250]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 7ec06956-0cd2-481d-afc4-08d7170bd565
-x-ms-traffictypediagnostic: CH2PR20MB2919:
-x-ms-exchange-purlcount: 2
-x-ms-oob-tlc-oobclassifiers: OLM:8882;
+x-ms-office365-filtering-correlation-id: 037bf5ac-b34e-4e7c-ee5c-08d71716d858
+x-ms-traffictypediagnostic: VI1PR03MB6158:
+x-ms-oob-tlc-oobclassifiers: OLM:8273;
 x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: eSxyJa8zLw7cCHvq6WEFKSSvFCk0uCY3uvrv2gbV0E3LKCMIo44kaYzkcQZpyzXXAeJeDfg9xR/kXwp5h2jXLAH7ToP4xjQ+15oKzjNrVLW8ThA/M+KGGA+5219Us/i8Vmth/FZVRqba2QWssfVJbaSSM2txbHto/vwygHiTJLNICo0cdGyJsaQeqMtaxtk/UFjICpk9S1N/AyTf6GUY0ESHWItkHUEg78eh0wFtniiRaV8wtQ9Ao85b0317y030PEPd++RllVP2D3EIjW6U5qShopg6NkxH/2evpblqF0NExCclz5d0YZGnR9eQTS/Qx0dCTJqeewTHy6+UFbmUO2/nNI6seUw1LK/ECnmOYqs/nY/3ru49OeYZsKngyAHqcOxY/P/0r9tduCduLsMvAPMJ1YC2JcrIwAL8wOwY+X8=
-Content-Type: multipart/mixed;
- boundary="_004_CH2PR20MB2949F99CEFF9F84FDFBA25B886D90CH2PR20MB2949namp_"
+x-microsoft-antispam-message-info: NxCXPojoloFVVufq1OtsY45LaTsABbQ0JN4caHlONFuW92LR1EbLIQUCgXzh1exTxpqWrC1Ri6ZGFJxUZan3lpd1jqUk+JfAvbBDmmkZsXv/0Cth/pPYKG8js38aOg9jd6QFD6EctbB6pBCAbJOZKTvAIgo0qVC/0jsYMuFFTZc1a41+/47vhWXQVLbCbYeMSXgj+3ZiOp7SN1ao3IIZj5iILGQTV9aiCZxLfsUZaUUi99lzf+ANcp5flSaR2EOY303Nl9sJLBN2lkxK/71rUphzIg/t2fZH/HCVYTOIxvIu7IeOtKMiUve3iPgeR8E5VQFitPQP/hZakdGGyWGcHz9JPjlFMxow6dYIAuxAwiLmU5Xv0hAL8W0LM3fk2/fljYGpqGe65EgIrRPUcD138YOaXPu1eav5/J69z5lTuAo=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <CEDA740230A54C4DA0AB0EEACF33A3DB@eurprd03.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-OriginatorOrg: veritas.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7ec06956-0cd2-481d-afc4-08d7170bd565
+X-OriginatorOrg: wallix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 037bf5ac-b34e-4e7c-ee5c-08d71716d858
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fc8e13c0-422c-4c55-b3ea-ca318e6cac32
+X-MS-Exchange-CrossTenant-id: f6bb2bd8-b6f1-4c26-8e2b-61c79722df19
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Abhishek.Anand@veritas.com
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR20MB2919
-X-CFilter-Loop: Reflected
-X-DetectorID-Processed: 8cd23f87-5a55-4de7-9b51-dd0f7d1caaf5
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+X-MS-Exchange-CrossTenant-userprincipalname: cmucchietto@wallix.com
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR03MB6158
+X-Warn: EHLO/HELO not verified: Remote host 40.107.8.59
+ (mail-eopbgr80059.outbound.protection.outlook.com) incorrectly presented
+ itself as EUR04-VI1-obe.outbound.protection.outlook.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -104,85 +97,46 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Abhishek Anand via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Abhishek Anand <Abhishek.Anand@veritas.com>
-Cc: Deepti Shenai1 <Deepti.Shenai1@veritas.com>
+From: Cyrille Mucchietto via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Cyrille Mucchietto <cmucchietto@wallix.com>
+Cc: Steve French <sfrench@samba.org>,
+ "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>,
+ Sebastien Tisserant <stisserant@wallix.com>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ Cristian Popi <cpopi@wallix.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---_004_CH2PR20MB2949F99CEFF9F84FDFBA25B886D90CH2PR20MB2949namp_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-Hi List,
-
-As part of our NAS product, we are using Samba on top of Veritas File Syste=
-m (VxFS).
-
-This Fix solves the issue of no retention of windows ACLs set onto a file/d=
-irectory created on a samba share.
-
-Previously, VxFS did not support the security namespace for extended attrib=
-utes. Thus, we stored the security.NTACL as user.NTACL. VxFS now supports s=
-toring the extended attributes in security.NTACL namespace. Hence, the old =
-styled extended attributes user.NTACL should be removed whenever a new set =
-of request comes.
-
-Please find attached patch which fixes for the above issue.
-This patch applies to Samba master. Please let me know reviews/comments.
-
-Thanks and Regards,
-Abhishek Anand
-
-
---_004_CH2PR20MB2949F99CEFF9F84FDFBA25B886D90CH2PR20MB2949namp_
-Content-Type: application/octet-stream;
-	name="0001-This-Fix-solves-the-issue-of-no-retention-of-windows.patch"
-Content-Description:  0001-This-Fix-solves-the-issue-of-no-retention-of-windows.patch
-Content-Disposition: attachment;
-	filename="0001-This-Fix-solves-the-issue-of-no-retention-of-windows.patch";
-	size=2151; creation-date="Fri, 02 Aug 2019 05:39:39 GMT";
-	modification-date="Fri, 02 Aug 2019 04:47:19 GMT"
-Content-Transfer-Encoding: base64
-
-RnJvbSBiN2MxNWY1NzI0MWUyYTU1YTllZjQyMWUwZjgyYzY1MDhlZGU5ZTE5IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBBYmhpc2hlayBBbmFuZCA8YWJoaXNoZWsuYW5hbmRAdmVyaXRh
-cy5jb20+CkRhdGU6IFdlZCwgMjQgSnVsIDIwMTkgMTI6Mjk6MTkgKzA1MzAKU3ViamVjdDogW1BB
-VENIXSBUaGlzIEZpeCBzb2x2ZXMgdGhlIGlzc3VlIG9mIG5vIHJldGVudGlvbiBvZiB3aW5kb3dz
-IEFDTHMgc2V0CiBvbnRvIGEgZmlsZS9kaXJlY3RvcnkgY3JlYXRlZCBvbiBhIHNhbWJhIHNoYXJl
-LgoKUHJldmlvdXNseSwgVnhGUyBkaWQgbm90IHN1cHBvcnQgdGhlIHNlY3VyaXR5IG5hbWVzcGFj
-ZSBmb3IgZXh0ZW5kZWQgYXR0cmlidXRlcy4gVGh1cywgd2Ugc3RvcmVkIHRoZSBzZWN1cml0eS5O
-VEFDTCBhcyB1c2VyLk5UQUNMLiBWeEZTIG5vdyBzdXBwb3J0cyBzdG9yaW5nIHRoZSBleHRlbmRl
-ZCBhdHRyaWJ1dGVzIGluIHNlY3VyaXR5Lk5UQUNMIG5hbWVzcGFjZS4gSGVuY2UsIHRoZSBvbGQg
-c3R5bGVkIGV4dGVuZGVkIGF0dHJpYnV0ZXMgdXNlci5OVEFDTCBzaG91bGQgYmUgcmVtb3ZlZCB3
-aGVuZXZlciBhIG5ldyBzZXQgb2YgcmVxdWVzdCBjb21lcy4KClNpZ25lZC1vZmYtYnk6IEFiaGlz
-aGVrIEFuYW5kIDxhYmhpc2hlay5hbmFuZEB2ZXJpdGFzLmNvbT4KLS0tCiBzb3VyY2UzL21vZHVs
-ZXMvdmZzX3Z4ZnMuYyB8IDE1ICsrKysrKysrKysrKysrLQogMSBmaWxlIGNoYW5nZWQsIDE0IGlu
-c2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9zb3VyY2UzL21vZHVsZXMv
-dmZzX3Z4ZnMuYyBiL3NvdXJjZTMvbW9kdWxlcy92ZnNfdnhmcy5jCmluZGV4IDViYWEzODUuLjA1
-MDJlMmUgMTAwNjQ0Ci0tLSBhL3NvdXJjZTMvbW9kdWxlcy92ZnNfdnhmcy5jCisrKyBiL3NvdXJj
-ZTMvbW9kdWxlcy92ZnNfdnhmcy5jCkBAIC02Miw2ICs2Miw3IEBAIGFsb25nIHdpdGggdGhpcyBw
-cm9ncmFtLiAgSWYgbm90LCBzZWUgPGh0dHA6Ly93d3cuZ251Lm9yZy9saWNlbnNlcy8+LgogCiAj
-aWZuZGVmIFhBVFRSX1VTRVJfTlRBQ0wKICNkZWZpbmUgWEFUVFJfVVNFUl9OVEFDTCAic3lzdGVt
-Lk5UQUNMIgorI2RlZmluZSBYQVRUUl9VU0VSX05UQUNMX1YwICJ1c2VyLk5UQUNMIgogI2VuZGlm
-CiAKIC8qIHR5cGUgdmFsdWVzICovCkBAIC01OTUsMTMgKzU5NiwyNSBAQCBzdGF0aWMgaW50IHZ4
-ZnNfZnNldF94YXR0cihzdHJ1Y3QgdmZzX2hhbmRsZV9zdHJ1Y3QgKmhhbmRsZSwKIAkJCSAgIHN0
-cnVjdCBmaWxlc19zdHJ1Y3QgKmZzcCwgY29uc3QgY2hhciAqbmFtZSwKIAkJCSAgIGNvbnN0IHZv
-aWQgKnZhbHVlLCBzaXplX3Qgc2l6ZSwgIGludCBmbGFncyl7CiAJaW50IHJldCA9IDA7CisJaW50
-IHRtcF9yZXQgPSAwOwogCiAJREVCVUcoMTAsICgiSW4gdnhmc19mc2V0X3hhdHRyXG4iKSk7CiAK
-IAlyZXQgPSB2eGZzX3NldHhhdHRyX2ZkKGZzcC0+ZmgtPmZkLCBuYW1lLCB2YWx1ZSwgc2l6ZSwg
-ZmxhZ3MpOwogCWlmICgocmV0ID09IDApIHx8CiAJICAgICgocmV0ID09IC0xKSAmJiAoZXJybm8g
-IT0gRU5PVFNVUCkgJiYgKGVycm5vICE9IEVOT1NZUykpKSB7Ci0JCVNNQl9WRlNfTkVYVF9GUkVN
-T1ZFWEFUVFIoaGFuZGxlLCBmc3AsIG5hbWUpOworCisJCS8qCisJCSAqIHZlcnNpb24gMTogdXNl
-ci5OVEFDTCB4YXR0ciB3aXRob3V0IGluaGVyaXRhbmNlIHN1cHBvcnRlZAorCQkgKiB2ZXJzaW9u
-IDI6IHVzZXIuTlRBQ0wgeGF0dHIgd2l0aCBpbmhlcml0YW5jZSBzdXBwb3J0ZWQKKwkJICogdmVy
-c2lvbiAzOiBuZXcgc3R5bGVkIHhhdHRyIHNlY3VyaXR5Lk5UQUNMIHdpdGggaW5oZXJpdGFuY2Ug
-c3VwcG9ydGVkCisJCSAqIEhlbmNlLCB0aGUgb2xkIHN0eWxlZCB4YXR0ciB1c2VyLk5UQUNMIHNo
-b3VsZCBiZSByZW1vdmVkCisJCSAqLworCQl0bXBfcmV0ID0gc3RyY2FzZWNtcChuYW1lLCBYQVRU
-Ul9OVEFDTF9OQU1FKTsKKwkJaWYgKHRtcF9yZXQgPT0gMCkgeworCQkJU01CX1ZGU19ORVhUX0ZS
-RU1PVkVYQVRUUihoYW5kbGUsIGZzcCwgWEFUVFJfVVNFUl9OVEFDTF9WMCk7CisJCQlERUJVRygx
-MCwgKCJPbGQgc3R5bGUgeGF0dHIgJXMgcmVtb3ZlZC4uLlxuIiwgWEFUVFJfVVNFUl9OVEFDTF9W
-MCkpOworCQl9CiAJCXJldHVybiByZXQ7CiAJfQogCi0tIAoyLjUuMQoK
-
---_004_CH2PR20MB2949F99CEFF9F84FDFBA25B886D90CH2PR20MB2949namp_--
+T24gOC8xLzE5IDc6MTMgUE0sIFN0ZXZlIEZyZW5jaCB3cm90ZToNCj4gU2ViYXN0aWVuLA0KPiBJ
+IGNsZWFuZWQgdXAgdGhlIHBhdGNoIGFuZCBtZXJnZWQgaW50byBjaWZzLTIuNi5naXQgLSBjYW4g
+eW91DQo+IGRvdWJsZWNoZWNrIGl0IGlzIGNvcnJlY3Q/DQoNClNlYmFzdGllbiBpcyBub3QgYXZh
+bGFpYmxlLCBidXQgd2UgY29uZmlybSB0aGF0IHRoaXMgcGF0Y2ggaXMgY29ycmVjdA0KDQpSZWdh
+cmRzLA0KDQpDeXJpbGxlIE11Y2NoaWV0dG8NCg0KDQo+IE9uIFRodSwgSnVsIDI1LCAyMDE5IGF0
+IDM6MzUgUE0gUGF2ZWwgU2hpbG92c2t5DQo+IDxwYXZlbC5zaGlsb3Zza3lAZ21haWwuY29tPiB3
+cm90ZToNCj4+INGH0YIsIDI1INC40Y7Quy4gMjAxOSDQsy4g0LIgMDk6NTcsIFNlYmFzdGllbiBU
+aXNzZXJhbnQgdmlhIHNhbWJhLXRlY2huaWNhbA0KPj4gPHNhbWJhLXRlY2huaWNhbEBsaXN0cy5z
+YW1iYS5vcmc+Og0KPj4gLi4uDQo+Pj4gbW91bnQgd29ya3Mgd2l0aG91dCBDT05GSUdfREVCVUdf
+VklSVFVBTA0KPj4+DQo+Pj4gSWYgd2UgZG9uJ3Qgc2V0IENPTkZJR19WTUFQX1NUQUNLIG1vdW50
+IHdvcmtzIHdpdGggQ09ORklHX0RFQlVHX1ZJUlRVQUwNCj4+Pg0KPj4+DQo+Pj4gV2UgaGF2ZSB0
+aGUgZm9sbG93aW5nICh2ZXJ5IHF1aWNrIGFuZCBkaXJ0eSkgcGF0Y2ggOg0KPj4+DQo+Pj4gSW5k
+ZXg6IGxpbnV4LTQuMTkuNjAvZnMvY2lmcy9zbWIyb3BzLmMNCj4+PiA9PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09DQo+Pj4g
+LS0tIGxpbnV4LTQuMTkuNjAub3JpZy9mcy9jaWZzL3NtYjJvcHMuYw0KPj4+ICsrKyBsaW51eC00
+LjE5LjYwL2ZzL2NpZnMvc21iMm9wcy5jDQo+Pj4gQEAgLTI1NDUsNyArMjU0NSwxNSBAQCBmaWxs
+X3RyYW5zZm9ybV9oZHIoc3RydWN0IHNtYjJfdHJhbnNmb3JtDQo+Pj4gIHN0YXRpYyBpbmxpbmUg
+dm9pZCBzbWIyX3NnX3NldF9idWYoc3RydWN0IHNjYXR0ZXJsaXN0ICpzZywgY29uc3Qgdm9pZCAq
+YnVmLA0KPj4+ICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgaW50IGJ1ZmxlbikNCj4+PiAg
+ew0KPj4+IC0gICAgc2dfc2V0X3BhZ2Uoc2csIHZpcnRfdG9fcGFnZShidWYpLCBidWZsZW4sIG9m
+ZnNldF9pbl9wYWdlKGJ1ZikpOw0KPj4+ICsgICAgICB2b2lkICphZGRyOw0KPj4+ICsgICAgICAv
+Kg0KPj4+ICsgICAgICAgKiBWTUFQX1NUQUNLIChhdCBsZWFzdCkgcHV0cyBzdGFjayBpbnRvIHRo
+ZSB2bWFsbG9jIGFkZHJlc3Mgc3BhY2UNCj4+PiArICAgICAgKi8NCj4+PiArICAgICAgaWYgKGlz
+X3ZtYWxsb2NfYWRkcihidWYpKQ0KPj4+ICsgICAgICAgICAgICAgIGFkZHIgPSB2bWFsbG9jX3Rv
+X3BhZ2UoYnVmKTsNCj4+PiArICAgICAgZWxzZQ0KPj4+ICsgICAgICAgICAgICAgIGFkZHIgPSB2
+aXJ0X3RvX3BhZ2UoYnVmKTsNCj4+PiArICAgICAgc2dfc2V0X3BhZ2Uoc2csIGFkZHIsIGJ1Zmxl
+biwgb2Zmc2V0X2luX3BhZ2UoYnVmKSk7DQo+Pj4gIH0NCj4+Pg0KPj4+ICAvKiBBc3N1bWVzIHRo
+ZSBmaXJzdCBycXN0IGhhcyBhIHRyYW5zZm9ybSBoZWFkZXIgYXMgdGhlIGZpcnN0IGlvdi4NCj4+
+Pg0KPj4+DQo+PiBUaGFua3MgZm9yIHJlcG9ydGluZyB0aGlzLiBUaGUgcGF0Y2ggbG9va3MgZ29v
+ZCB0byBtZS4gRGlkIHlvdSB0ZXN0DQo+PiB5b3VyIHNjZW5hcmlvIGFsbCB0b2dldGhlciB3aXRo
+IGl0IChub3Qgb25seSBtb3VudGluZyk/DQo+Pg0KPj4NCj4+IEJlc3QgcmVnYXJkcywNCj4+IFBh
+dmVsIFNoaWxvdnNraXkNCj4+DQo+Pg0K
 
