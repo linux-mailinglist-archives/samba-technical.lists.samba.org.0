@@ -2,42 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D061D82006
-	for <lists+samba-technical@lfdr.de>; Mon,  5 Aug 2019 17:23:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87BA98229F
+	for <lists+samba-technical@lfdr.de>; Mon,  5 Aug 2019 18:41:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=XHpw2oQkx6o9ZJzeTvhQN2TgySYlg6YcUjeaHya9xnQ=; b=bvRtB+3sqWfcYpl7/5JwB0MBYq
-	HDugpR5Xtr5j85RUd6Gkz+KWKzbTj6ON/AiiR+X/g4HTNOyimcG2XuMckjzWIN9/5CzV6UeeRZqmx
-	ewbbHAM9LYSDNtIvlrLeeiLZfJFWMhp/NXTmpTZHUUJciaZpiVbPA4YLM7iKbHfVsJlR+Pav9ToVU
-	Ha4/hNSUcz+12JW8+YAnGgfQIsiNggiZwvGarI4f85yoVRzFPIlU8Z7n6cZUc5khtj92p92aCcA/w
-	AKvJ9LG+4C4t6sro3pBj8Q8rIrHADfcg9TwwG8xp69Vdv2/me67TgxhcoJkEV2z1plv25mUy/MHSS
-	HIsIfadw==;
-Received: from localhost ([::1]:56288 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=LeR6FwcDKYvZ7G+VoOgyO1Y3ifHWdlYs2dv1bpQIzuo=; b=EEqgdn0pL+JfnPAz0IgWpeb2Qd
+	QKSO66cbHeXO312BDUDzhuhvNn18EZVtGhHKZEFCh87T3GgRSatp/nGAUpPmbnw9mss/USazBbblY
+	zfDzTNbmFr6DlvxR2cNB+pC2ZXIsVbSIt7/pcwYDW0QXPX5Wq5VG+P+yFDJYzRkxfOtsUotLtl+3E
+	SgiHWcgP6XVzZFz1/RilFYCxoDvTBbCdUDQrF4qvy11Y3M3paZumbChDOyOCkdc3w6f4lOAAkWq6j
+	ULB6eGiD08oiO+CRF8Y5jOvjrmqHmapOy2R3r6LNN4FV4GYRZr1TaRHmRYQ5yYeTMU7LYVIsOjuTi
+	X2QaeyBw==;
+Received: from localhost ([::1]:62190 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1huepC-004Iw5-Bd; Mon, 05 Aug 2019 15:23:02 +0000
-Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:52139) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1huep8-004Ivy-7O
- for samba-technical@lists.samba.org; Mon, 05 Aug 2019 15:23:00 +0000
-Received: from intern.SerNet.DE by mail.SerNet.DE with esmtps (Exim 4.92 #3)
- for samba-technical@lists.samba.org
- id 1huep7-0008L1-OV; Mon, 05 Aug 2019 17:22:57 +0200
-Received: by intern.sernet.de
- id 1huep7-0006dK-Iy; Mon, 05 Aug 2019 17:22:57 +0200
-Received: from bjacke by pell.sernet.de with local (Exim 4.90_1)
- (envelope-from <bjacke@sernet.de>) id 1huep7-00074X-EQ
- for samba-technical@lists.samba.org; Mon, 05 Aug 2019 17:22:57 +0200
-Date: Mon, 5 Aug 2019 17:22:57 +0200
-To: samba-technical@lists.samba.org
-Subject: [PATCH] doc: improve vfs objects parameter description
-Message-ID: <20190805152257.GA27074@sernet.de>
-Mail-Followup-To: samba-technical@lists.samba.org
+	id 1hug2b-004JqK-Ey; Mon, 05 Aug 2019 16:40:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40782) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hug2W-004JqC-RM
+ for samba-technical@lists.samba.org; Mon, 05 Aug 2019 16:40:55 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=LeR6FwcDKYvZ7G+VoOgyO1Y3ifHWdlYs2dv1bpQIzuo=; b=WfjK5jjOpJIhcAm/J47MJVGR3J
+ kzCfFlarnx0G0HtnyNI0HYcGn+Oc46wqatCu7arHW2FxPWEQVVrlRzzYtKhQRzKTZN3IlTRwvyKCM
+ TqkTQBnTwq/lXQTsaPizTDDzY5lHWFW2xpoqccQ6+TCchodCJVd41YDKZF/Tgtai35Eg=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hug2W-0003o9-3l; Mon, 05 Aug 2019 16:40:52 +0000
+Date: Mon, 5 Aug 2019 09:40:34 -0700
+To: Anoop C S <anoopcs@cryptolab.net>
+Subject: Re: NT_STATUS_INVALID_HANDLE during file open with  vfs_glusterfs
+Message-ID: <20190805164034.GE224585@jra4>
+References: <e3886f8fcb0ed4aae2965099bcdb0b4ff35a581a.camel@cryptolab.net>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="fdj2RfSjLxBAspz7"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
- Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <e3886f8fcb0ed4aae2965099bcdb0b4ff35a581a.camel@cryptolab.net>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,60 +51,46 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bj@SerNet.DE>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: "Volker.Lendecke" <Volker.Lendecke@SerNet.DE>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+On Mon, Aug 05, 2019 at 07:52:37PM +0530, Anoop C S via samba-technical wro=
+te:
+> Hi all,
+>=20
+> The following commit changed the way in which O_NONBLOCK is
+> added/removed from file status flags during open.
+>=20
+> https://git.samba.org/?p=3Dsamba.git;a=3Dcommit;h=3Def582ffcf3a220b73f678=
+d9bce0fd37800f76c54
+> smbd: Always open files with O_NONBLOCK
+>=20
+> Since O_NONBLOCK is now internally getting added unconditionally,
+> storage backed by GlusterFS volumes using vfs_glusterfs produces
+> *Invalid file handle* error while opening files(I tested from Windows).
+> set_blocking() from open_file() is now being invoked due to the
+> presence of O_NONBLOCK flag and fails at fcntl() call operating on fsp-
+> >fh->fd which is obviously bad and returns EBADF.
+>=20
+> Thus when open file descriptors are handled as fsp_extensions we may
+> have to rely on VFS itself to get the job done.
 
---fdj2RfSjLxBAspz7
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+Hi Anoop, can you fix this by removing the O_NONBLOCK
+=66rom the open call inside vfs_glusterfs ?
 
-Hi,
+Adding the O_NONBLOCK is correct for the local filesystem
+side of things, so if glusterfs needs something different
+it'll need to cope.
 
-review and push appreciated for this ...
+Adding a test environment for gluster into Samba would
+also be a really good way to ensure we don't cause
+problems like this in the future - but currently
+our base test environment is the local filesystem,
+which I think is the correct decision.
 
-Cheers
-Björn
-
---fdj2RfSjLxBAspz7
-Content-Type: text/x-diff; charset=us-ascii
-Content-Disposition: attachment; filename="0001-doc-improve-vfs-objects-parameter-description.patch"
-Content-Transfer-Encoding: quoted-printable
-
-=46rom 1489e24c085b54838bc3afea8fea5052e4547ff7 Mon Sep 17 00:00:00 2001
-=46rom: =3D?UTF-8?q?Bj=3DC3=3DB6rn=3D20Jacke?=3D <bjacke@samba.org>
-Date: Mon, 5 Aug 2019 17:16:32 +0200
-Subject: [PATCH] doc: improve vfs objects parameter description
-
-Signed-off-by: Bjoern Jacke <bjacke@samba.org>
----
- docs-xml/smbdotconf/vfs/vfsobjects.xml | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/docs-xml/smbdotconf/vfs/vfsobjects.xml b/docs-xml/smbdotconf/v=
-fs/vfsobjects.xml
-index 05903baf1c6d..f8f33b55f565 100644
---- a/docs-xml/smbdotconf/vfs/vfsobjects.xml
-+++ b/docs-xml/smbdotconf/vfs/vfsobjects.xml
-@@ -7,8 +7,9 @@
- 	<para>This parameter specifies the backend names which=20
- 	are used for Samba VFS I/O operations.  By default, normal=20
- 	disk I/O operations are used but these can be overloaded=20
--	with one or more VFS objects. </para>
--</description>
-+	with one or more VFS objects. Be aware that the definition of this
-+	parameter will overwrite a possible previous definition of the
-+	vfs objects parameter.</para> </description>
-=20
- <value type=3D"default"/>
- <value type=3D"example">extd_audit recycle</value>
---=20
-2.17.1
-
-
---fdj2RfSjLxBAspz7--
+Jeremy.
 
