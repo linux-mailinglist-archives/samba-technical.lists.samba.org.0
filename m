@@ -2,43 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B320B8301C
-	for <lists+samba-technical@lfdr.de>; Tue,  6 Aug 2019 12:55:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 61696830C7
+	for <lists+samba-technical@lfdr.de>; Tue,  6 Aug 2019 13:37:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=usveu5+2ThTd3Pa3a/rNTk/AgClRVHCodZD8WTcrVbg=; b=OnufmYKxp30JAM6+LJOKuABHYQ
-	eJDG3Z1+30BUFctYmAFZKp89P4UmgJC6+XiN+DpuPmYfTK16efEJ89BNzECavF9q/+lZN+zEozWcM
-	iIrXe5hD04ZI/qEdXfjV5nlafwbiKeH3d73BTB/pN9B0KG6H0fM7ojuuIDVmt5AGrqmrzIjikTWqt
-	maKav4/XbHNom6yXsVielhaMxbClEoKv68FGg3qHbTQdw6U26uKvQtkoVCbCJzDqo4sG8Fzat2vEe
-	Vw2VgPP7KztqH7OV6yL9b8uKqJrb0zl52wGeUV4OagJa/QRNVZHpGyUK8p17Xp/zBdYBxJ3jT2soq
-	KOfeO4xg==;
-Received: from localhost ([::1]:34206 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=csJNRy9yKfWZBqOopYymOnDMm2i12WXohWRqIZS6GrA=; b=n+HjPJnLMd/h8GR1vxZEqIam/j
+	uBkbRzFR3ZryIpgppU5Y+xxg2GifnBPHcDMBU8gkDbjpZoOAaHnXSwKA1+oeOhFV0jrVadHV+iO1v
+	rpibi+IDQgXgXKlq7D2hCAWFMBR8C44GShcU2CfydInQ+KeL1AFlLvJH3oCcsZpyzcvRY0pxty4OW
+	ILuRgfNu1W0IfLTI9cve+nVhVzy+3QW1N9ekdPbDAQ+k6nSOWX61zWbWDaD+DUiUEdoybzK8n1/sC
+	aS6sv1doJ6ZPC7oGiwZStjkKQfoJULYOQAZUvJGwfoNsBs1Zr3IlfIHj+2/lpkk58CJYou+rNf40O
+	2Da/ibVg==;
+Received: from localhost ([::1]:40374 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hux7q-004aeB-8s; Tue, 06 Aug 2019 10:55:30 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33266) 
+	id 1huxlW-004bXH-Vy; Tue, 06 Aug 2019 11:36:31 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62628) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hux7l-004adv-PD
- for samba-technical@lists.samba.org; Tue, 06 Aug 2019 10:55:28 +0000
+ (Exim) id 1huxlS-004bX7-VR
+ for samba-technical@lists.samba.org; Tue, 06 Aug 2019 11:36:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:To:CC;
- bh=usveu5+2ThTd3Pa3a/rNTk/AgClRVHCodZD8WTcrVbg=; b=lw3I2DNXGWR2CcLwQCn/ip0L4n
- VhQZLeVCyaU+JqID31q3e2/uNcYFHgwT52rONnoYldzOZjAt5qiEoXoqXxWxBPbRvWwE3DpV+M+9L
- K6Hm9WuRvPmAajXNwBC3cvCXncvBKD8PK9FzHDXo+2cs3D+k0FGI19YFwVEg9piKQGk8=;
+ s=42627210; h=Date:Message-ID:From:Cc:To;
+ bh=csJNRy9yKfWZBqOopYymOnDMm2i12WXohWRqIZS6GrA=; b=i5z0VAOPSjEWB0OWshi59zfCo/
+ WWI/MODfLdEdwDFYjhxlrRKpcuOnTeYmWoUAZws28tcAVCLeK8OuOTUqyNsGTHKm3pUxIGLwaGgpB
+ DcbXDx16dIrgr53vYYE+Z1YwzqEfDzOsMkZFedHXhEIxwwe3+232Q2xsm9RY/L+xRme8=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1hux7l-00053J-E7
- for samba-technical@lists.samba.org; Tue, 06 Aug 2019 10:55:25 +0000
-To: samba-technical <samba-technical@lists.samba.org>
-Subject: [Release Planning 4.11] Delaying 4.11.0rc2
-Openpgp: preference=signencrypt
-Organization: Samba Team
-Message-ID: <81b761b3-676b-b3f1-1fc8-589f744b2c2b@samba.org>
-Date: Tue, 6 Aug 2019 12:55:25 +0200
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1huxlS-0005Q0-6L; Tue, 06 Aug 2019 11:36:26 +0000
+Subject: Re: [MR] http client library improvements
+To: Samuel Cabrero <scabrero@samba.org>
+References: <d1245e3f-5232-f76c-b629-a8e5827b81fb@samba.org>
+ <20190806112310.3gga7yzv3kjc54a3@aneto>
+Message-ID: <44314444-d67f-717a-fd43-86dc274599ca@samba.org>
+Date: Tue, 6 Aug 2019 13:36:25 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.2
+ Thunderbird/60.8.0
 MIME-Version: 1.0
+In-Reply-To: <20190806112310.3gga7yzv3kjc54a3@aneto>
 Content-Type: text/plain; charset=utf-8
-Content-Language: de-DE
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -53,20 +53,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Karolin Seeger <kseeger@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+On 8/6/19 1:23 PM, Samuel Cabrero wrote:
+> Hi Ralph,
+> 
+> thanks for notice, of course I will take a look.
 
-Samba 4.11.0rc2 will be delayed, because library releases are needed first.
+thanks! :)
 
-Cheers,
-Karolin
+> Meanwhile I will assign
+> the merge request to myselḟ so you can find me easily in gitlab.
+
+Hm. Couldn't find you via the member search...
+
+Thanks!
+-slow
 
 -- 
-Karolin Seeger			https://samba.org/~kseeger/
-Release Manager Samba Team	https://samba.org
-Team Lead Samba SerNet		https://sernet.de
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
