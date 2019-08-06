@@ -2,42 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC3158279F
-	for <lists+samba-technical@lfdr.de>; Tue,  6 Aug 2019 00:28:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A6E982ACD
+	for <lists+samba-technical@lfdr.de>; Tue,  6 Aug 2019 07:18:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=TOJ5/c6MMeYn++PQoW1NxD0BW1KzccOfS27Gj6dJqIo=; b=f73S6zRKcLQxBcwHi/QapK3tVr
-	OTkH+IaHKGrJSZgxqDZJYPeFXg8yJIp8/uWgWbnG4lKgw2FVOaO8rxixTiSFV3ZCeE0MoTnKhcK29
-	/FlKwLGLO0R3iB9ZxyuWdiQnJdIKai/mPvf6ZLfSTJ/vZOW57wdhbXdcnA0H5TcP7MK5AO1tmWpH4
-	j6XHy3qgy0kFZCJL1sMuQ2dRjZnxypA29KMZvr9BeqiYJ6gfUaZJq0vhldG6lXdRviWEwaZOyGBqc
-	96J5mHeAQYbkwFxtTfDaqHaH9RCXwRhRL+DKz65DShg2LRiOD++7BJSxMR9lt+4M0BsjJkdKn8pkb
-	UYdlfKIw==;
-Received: from localhost ([::1]:26482 helo=hr1.samba.org) 
+	bh=SBr5j9H5hufr3cg9zCewUJkbganx7n7FFJM994NvLIc=; b=zGJHQdll83p+BVHzpAonYZCn+b
+	rRIBSrPeG6okvivSAe7oMW/3dwUANizzfwJANY2iHIjAPsNBVgbpB3iBb2u4cS+fZRud3WOjgnMzq
+	4vEBAvMckwOsWsSWuJMw8wNMANnMT+NYAvJf5SrJ9vRG61CyU18IvyU2e0sQ7NhPLIWAsgRB6N8mI
+	19r1WcHWCVH4Q5F5YI0IeRRkYqzd9juvqHkk1TAvE5RCRFeaPjD0/lG4TU7TEK9vAVg+tZPBFoC2+
+	cstPyq85eXBd+kEH1RPgVebPJ39lCaTaWRP9hG3hhJK3AuzuiwE/fbmOpNBnPogW1G6Fq4Jtmr6PZ
+	CSgG8qfw==;
+Received: from localhost ([::1]:35848 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hulSJ-004LuR-G9; Mon, 05 Aug 2019 22:27:51 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33192) 
+	id 1hurqU-004Nnd-4T; Tue, 06 Aug 2019 05:17:14 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42056) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hulSE-004LuK-VW
- for samba-technical@lists.samba.org; Mon, 05 Aug 2019 22:27:49 +0000
+ (Exim) id 1hurqQ-004NnW-9L
+ for samba-technical@lists.samba.org; Tue, 06 Aug 2019 05:17:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Cc:To:From:Message-ID;
- bh=TOJ5/c6MMeYn++PQoW1NxD0BW1KzccOfS27Gj6dJqIo=; b=iPadAqirWgD1kJ5EfqHOSOOWlP
- HM8ga3Fvh1wT7fcasj54tBVBGZZaWTUYnCfpyOyn8UA9+nxA6v/ePRupM11bKbGsCnoXGzD4Et1/q
- lfD8fTewJP7WyE//WgrSP62UW8YMWfxSVJjZLCUZaP7PHVVEV/MAFT4JgY69gAsu0mpY=;
+ s=42627210; h=Date:Message-ID:From:Cc:To;
+ bh=SBr5j9H5hufr3cg9zCewUJkbganx7n7FFJM994NvLIc=; b=RmricxJrrv2/JBwRlNIZQGRSzU
+ K7UjhtYYSsYwe7Gg1cm/pGwSGGKJ/3N1kMlybg1Ng3qldy7kZTZgXq9bf3zEpWif7po1Jh15MS5sG
+ nYOdsEle4hibm5QUHMSSN/7cSKnRU8yF2H54u+OUvLZveFNYBU++u3n4RFOn05MYtzuw=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1hulSD-0006b7-2v; Mon, 05 Aug 2019 22:27:45 +0000
-Message-ID: <1565044061.15865.25.camel@samba.org>
-Subject: Re: ldb bug?
-To: Andreas Schneider <asn@samba.org>, gary@catalyst.net.nz
-Date: Tue, 06 Aug 2019 10:27:41 +1200
-In-Reply-To: <42283926.1TdCr3XVcX@magrathea.fritz.box>
-References: <42283926.1TdCr3XVcX@magrathea.fritz.box>
-Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAACRklEQVRYw81YS67DIAwkVe8FPRm5menJeAu3lmUCbyBGKqsmRXjwb8Y5aq3hl9Yj/Nh6Tu0upZRS+EdKiV+e5+mJqMKLiHLORBRjzDmbc/hlvb1QD2k3sG84+dhhvF6vlzymlNY8dyBJzUdLjAwyvaeU8n6/2WHpu/xDRkREJI8cOBMgfuRQxhj58JzzbBwhQDFGA07M6/efE0MQxDHGFvpdQHy6MUxqtU4yezRcH0B4GfbM44BWGqOurF6Omz140a0ASimJvdbwZT32XrpRh5yuwY1d0vPrdNkv91+T8uBRG8l1uiX+JtsHxPNIWE27ugwTctTdHCIiYXvuy4P7IDl0CxAzl2xgZTJwgw+g3kGaHwYh5g2sljyrjIVEq4pYBg2Kq3yXZ5WxjfO7zF9jRdXrnLcEmlbTRnNpcT0gvpTScUC2HlOE2ipAvPuJanMT+Xc0PC4dFzu1DEO4HgczaS5kOnZ4vM7zxNU+mtRyRVPDgqyX3cdx8AQCCrQnfkV9VzMA9Ryg3ek8Sgsg3QX+nbz03Og5l10ytp6HusQUwpjd1rnsksbHlhjuVGdBAbWzIiJu5MvEFkA6OkiwBO4uQL3ADeQ9b57t74+FBo1s47IqpVxqBDcuQ66r94QQJOH2ctnAf9oZtdbZYejpi2bQEveO0sb2JXu09OJJrnpil4SV5G2N6Y+1QjL+gHSKDApHJoJWF3hW2fInh6lutGW216OPRBZtRZscwyQvI+KuTj3rp4VP1VsAcTobxgDngukqm3LPgmL8A4m377Y5OvTKAAAAAElFTkSuQmCC
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.22.6-1+deb9u2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+ (Exim) id 1hurqO-00012W-6p; Tue, 06 Aug 2019 05:17:08 +0000
+Subject: Re: [MS-SMB2] 2.2.3.1.4 SMB2_NETNAME_NEGOTIATE_CONTEXT_ID
+To: Steve French <smfrench@gmail.com>
+References: <e51f32ff-ce54-d015-4ba0-572ec35f3e45@samba.org>
+ <a8102b82-046b-c62a-29c9-a61ae563bf34@samba.org>
+ <CAH2r5mvJzTmg+mPDeDcS7RJzdtYV4Coq76fKkVBu3oysU6ihkA@mail.gmail.com>
+Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
+Message-ID: <442364df-1c26-4161-6a02-98417e8d6aa6@samba.org>
+Date: Tue, 6 Aug 2019 07:17:01 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <CAH2r5mvJzTmg+mPDeDcS7RJzdtYV4Coq76fKkVBu3oysU6ihkA@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="qr6eRBM9rEXYFWFvyAZgXk3LaRHx8llHC"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,56 +55,103 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>,
+ Samba Technical <samba-technical@lists.samba.org>,
+ Steve French <stfrench@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2019-07-29 at 19:05 +0200, Andreas Schneider via samba-
-technical wrote:
-> Hi Gary,
-> 
-> we got a bug report an issue with the ldb_lmdb_size_test. I'm able to 
-> reproduce the issue:
-> 
-> $ ./bin/ldb_lmdb_size_test
-> [==========] Running 1 test(s).
-> [ RUN      ] test_db_size_gt_4GB
-> A transaction is still active in ldb context [0x56317c9e5760] on mdb://
-> apitest.ldb
-> [  ERROR   ] --- 0x35 != 0
-> [   LINE   ] --- ../../lib/ldb/tests/ldb_lmdb_size_test.c:186: error: Failure!
-> [  FAILED  ] test_db_size_gt_4GB
-> [==========] 1 test(s) run.
-> [  PASSED  ] 0 test(s).
-> [  FAILED  ] 1 test(s), listed below:
-> [  FAILED  ] test_db_size_gt_4GB
-> 
->  1 FAILED TEST(S)
-> 
-> 
-> The apitest.ldb file is only 12KB ...
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--qr6eRBM9rEXYFWFvyAZgXk3LaRHx8llHC
+Content-Type: multipart/mixed; boundary="y0o7B7JcVgzZfeIl9jJubDAAyLCpp38fA";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Steve French <smfrench@gmail.com>
+Cc: Steve French <stfrench@microsoft.com>,
+ "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>,
+ Samba Technical <samba-technical@lists.samba.org>
+Message-ID: <442364df-1c26-4161-6a02-98417e8d6aa6@samba.org>
+Subject: Re: [MS-SMB2] 2.2.3.1.4 SMB2_NETNAME_NEGOTIATE_CONTEXT_ID
+References: <e51f32ff-ce54-d015-4ba0-572ec35f3e45@samba.org>
+ <a8102b82-046b-c62a-29c9-a61ae563bf34@samba.org>
+ <CAH2r5mvJzTmg+mPDeDcS7RJzdtYV4Coq76fKkVBu3oysU6ihkA@mail.gmail.com>
+In-Reply-To: <CAH2r5mvJzTmg+mPDeDcS7RJzdtYV4Coq76fKkVBu3oysU6ihkA@mail.gmail.com>
 
-This test is not normally run, as if successful it would fill the CI
-machines.
+--y0o7B7JcVgzZfeIl9jJubDAAyLCpp38fA
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-The test regressed when the default LMDB DB map size was return to the
-LMDB default, with the 8GB default being specified in Samba only.
+Am 06.08.19 um 00:11 schrieb Steve French:
+> How about this fix?
 
-The test needs to be modified to pass a larger map size to the
-ldb_connect() call as an option.
+Looks good, if you have tested it :-)
 
-Andrew Bartlett
+metze
 
--- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT   
-https://catalyst.net.nz/services/samba
+> On Fri, Jul 26, 2019 at 3:29 AM Stefan Metzmacher via samba-technical
+> <samba-technical@lists.samba.org> wrote:
+>>
+>> Hi Steve,
+>>
+>> I just contacted dochelp for this and noticed (from reading the code)
+>> that the kernel sends null-termination for the
+>> SMB2_NETNAME_NEGOTIATE_CONTEXT_ID value.
+>>
+>> I think you should fix that and backport it to stable releases,
+>> it would be good if all clients would implement it like windows.
+>>
+>> I implemented it for Samba here:
+>> https://gitlab.com/samba-team/samba/merge_requests/666
+>>
+>> metze
+>>
+>> Am 26.07.19 um 10:22 schrieb Stefan Metzmacher via cifs-protocol:
+>>> Hi DocHelp,
+>>>
+>>> I just noticed a documentation bug in
+>>> [MS-SMB2] 2.2.3.1.4 SMB2_NETNAME_NEGOTIATE_CONTEXT_ID:
+>>>
+>>>    NetName (variable): A null-terminated Unicode string containing th=
+e
+>>>    server name and specified by the client application.
+>>>
+>>> Windows Server 1903 sends the name without null-termination, see the
+>>> attached capture.
+>>>
+>>> metze
+>>
+>>
+>=20
+>=20
 
 
 
+--y0o7B7JcVgzZfeIl9jJubDAAyLCpp38fA--
 
+--qr6eRBM9rEXYFWFvyAZgXk3LaRHx8llHC
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl1JDU0ACgkQDbX1YShp
+vVZWTg//auz8bJEWfJpHTJhuV/UU9ChwOxn/UYDYUWtlzKmzVJb9T35f7NWmOgfA
+iLEs21SKNjIZfSj1FNBkRFmu+wOjdxXz+6ObEQ0mueP7eT0SXhdidNwLOXJ0fszO
+9PgMmN1I1XjQvvnM/p5Pm3SGXsUK6k4uIZN7lA2dhCag9WYek5XglKRZLAZ39PrF
+UOJAtu7Js/ejvOgwlJ2KIO0rNYh066LauEui0Pgs4buGs+rYUc6LmxcXF7kmSvsz
+Hv20SiVJjD/l5kc8ljNlB122otV3vQU2Q8ucluxMUGXzR11dsNjBG6oXqPprX46i
+2I0dxASmD2g3Kgvy6u1tc0mkLPxsfLt/E+Vg/u1usVOtDxEIXVm4MR31nkN8F1Lh
+WvRe9iuIMGLttkiMrVhrdDES0VnqfWgYTAzjwXPALrww5glb+ayyLPFGP8klVXvO
+hcbBTJD9XsT06pU+80NX1cRJKfmuY5M01PGM2XkGIax4K4QzU2FhVzegK3Ccu0BN
+0/qYVXkLlNOyRpiS60wx1rDyUUnAbNOgXxhkPY72vJsS9FvnF6pswTi2FsKCbJDq
+7zphEY3OVCGWTvbu5BQuYpwNPBVxQiD49FwtUkA9BJ8EUICsmpN4L8pRGCEJ+XJR
+hn8h84E+IcK0LyynJRkWIhIAl54AUB2vGMfQj2sdqFqBDmcW3Bg=
+=b1LL
+-----END PGP SIGNATURE-----
+
+--qr6eRBM9rEXYFWFvyAZgXk3LaRHx8llHC--
 
