@@ -2,41 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2F6C862A6
-	for <lists+samba-technical@lfdr.de>; Thu,  8 Aug 2019 15:10:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BEA886D38
+	for <lists+samba-technical@lfdr.de>; Fri,  9 Aug 2019 00:27:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=TxBt0nhyj3Qugp/fj4+sEG5ctf4o22cuCBt1hFx3huQ=; b=16Eyhmemtb5v8nJZkptnhV6ssF
-	CMJcHw+VOpsiMoKGjHo8Jk91uQBvHjJLROWI1zZ0RHpNvTZsCJ2JZ+NTkxqmHBHuSk9MpTvNklE9d
-	bI5XEmCXhKH0NplusPocet0DhY4smA1/rR1MIm6dnfa8q+s3pdHNQTB8P8hJN7zLsOY7zO/eAMh2g
-	avIFSd8vSDJmlpU1iSOl3yzhcZ2TKiT+UP3UU8JmHp5bngW53o6dbOzih0qsFpqLJJqmkQDzYUX7T
-	gVNeyWnWW7vfJL1QNedorarfeRACIkRKvkqFNuYdPy6cRXFLAY4T7wDTuPgwpbeb+I5HMQhs3F7j2
-	PiAT30ug==;
-Received: from localhost ([::1]:30854 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=MDlzs0yeZ0pl2QFRfM5QA21m4GNItARb6fFWraWIzhA=; b=2be5id8RF1Txd7Kl8RVuBWbiE/
+	N3GHuDHwAHRoQahINrIMm8irFxUFohv4v1esvi5hfiLT7M89gcmfAZhMtFLsi/9rSGznJIxQX9oj0
+	ExDpKESsiUVWB9POds/ifu/fX0/lFj9X3n7xVuAna7RQ682FXn8X0V+6wSD/my6lj6h58eFRfn1ZX
+	SVZYCFF5AMEbTlpUd6b0lvfatFHrPJh8NQWF78s+kPozM7oJuhodpTPpDcPfvdc1FaPDdHsnXqL89
+	S0mhu10596Nvi/gM9lnbI78YQZQ+3q8M9HmS0AQfGPQ42Qyi3JgcpMh27L7QgMOju7jgpUgxmErYO
+	VUCZLCQQ==;
+Received: from localhost ([::1]:35460 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hviB4-005AN1-Ux; Thu, 08 Aug 2019 13:09:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56802) 
+	id 1hvqrW-005I2M-J9; Thu, 08 Aug 2019 22:26:22 +0000
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c]:40203) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hviB0-005AMu-Qr
- for samba-technical@lists.samba.org; Thu, 08 Aug 2019 13:09:57 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Date:Cc:To:From;
- bh=TxBt0nhyj3Qugp/fj4+sEG5ctf4o22cuCBt1hFx3huQ=; b=SqlBOaM5D70wK4km40LgK1KAQX
- R+MPASVCa475VIS2t7IeHz/h8AYbEEIS/EBKj6CjJv2CnldGk0NKnkOzBSxBYP64tqM6parUw9v5Z
- iSbHtomLPOO/g7ZWvYN4Luo/a/URobGZ7QaEmzBcejbpsTHbTd3+MB45jhbTN4FsdYsM=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hviAz-0000c2-UV; Thu, 08 Aug 2019 13:09:54 +0000
-To: samba-technical@lists.samba.org, Andrew Bartlett <abartlet@samba.org>
-Subject: Re: Require GnuTLS 3.4.7 for Samba 4.12 in March 2020?
-Date: Thu, 08 Aug 2019 15:09:53 +0200
-Message-ID: <2881045.bibbPyKMdu@magrathea.fritz.box>
-In-Reply-To: <1565240829.4444.5.camel@samba.org>
-References: <1564547155.4261.48.camel@samba.org>
- <3136808.qJGijLCe70@magrathea.fritz.box> <1565240829.4444.5.camel@samba.org>
+ (Exim) id 1hvqrS-005I2F-F2
+ for samba-technical@lists.samba.org; Thu, 08 Aug 2019 22:26:19 +0000
+Received: by mail-wr1-x42c.google.com with SMTP id r1so96363018wrl.7
+ for <samba-technical@lists.samba.org>; Thu, 08 Aug 2019 15:26:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to
+ :content-transfer-encoding;
+ bh=MDlzs0yeZ0pl2QFRfM5QA21m4GNItARb6fFWraWIzhA=;
+ b=TLedIlp2XRUQCOWnQOFM25/9l0+gaADQB9i6dyr646Y1TJx9d/asPFl/H4JVlaUvja
+ l2pWvdw2Tatq70IV0wGvuuuzHqhmhbuenZ0eOWGK1XvvQ0ET4gQ+ws5r6qQE+tYo0lsu
+ JaqRtLv9P5KlG/o7/OimQOoL2KaGj4JlluTQDZYwnUr5oAgxO/2BNcD7S5J5RpTg7z9+
+ H3o1GeVn0rtZuyCzIB363kh4ybrDc8BN6dGJqkw+iYFC2wVbsB97c5GZEeExZGa5Wfzp
+ fWtB7YZwsesJK1KOpXpvwGtwoZMjrxeyIZzino+/ve2rbVfF2di8oCINBuY8FyU5O3wj
+ Uvyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+ :content-transfer-encoding;
+ bh=MDlzs0yeZ0pl2QFRfM5QA21m4GNItARb6fFWraWIzhA=;
+ b=lY7ZGEESk/jFebndI82zr9SYV4/D8NPKegRImYRKEQaDkpQoNwumoPswTAJycveJh4
+ S6hw+X55s+vzE2e0HhSF6+qz8Qv4Q3h4vzErTs++zpCcTanAXaE8zgtKsBrJ50jqwZ5+
+ n3CqJKLTOsGjmOfS9B4ka3JtTMsERb/bxLSnKm3PvSJ/4Wi6C2XiSz5iBBYfD0p8p2CI
+ j4BijL/QX8vcRsiF63VLRCvuD/9maMKFtcuRPHe1ymPS9RQJWr3aIrjMWLns69j5tiov
+ lv5X20UqFSi+2PJcfeNh2sSU+TZyuLLyTNeSUU7W1M2NPAyjtvqswxsHJ1s0UfScfn/k
+ vkvQ==
+X-Gm-Message-State: APjAAAVwmrT2G7R8ShQqp17ScZoPROUdRjuDP2Yylyv8eqsNGXuberzS
+ WH1f7nyvY4Ee44q5U7kyG58A9blVcDzejpZH8Puk8Q==
+X-Google-Smtp-Source: APXvYqzNjqPsvkmUtFpNNmoX1+9XhkwQ19jLk86A7nHB+ZPNHRqsdNak7pUYoMc9212HEUWGhez+I3VeEpAKem5qjUw=
+X-Received: by 2002:adf:ee4f:: with SMTP id w15mr17957731wro.337.1565303177086; 
+ Thu, 08 Aug 2019 15:26:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Date: Thu, 8 Aug 2019 15:23:57 -0700
+Message-ID: <CACyXjPyxsrrTkD7dBtLuQiwrTh=o+8k9vJPKYfrMtrAe592hwA@mail.gmail.com>
+Subject: net ads join seems to restrict itself to the first 5 DCs of those it
+ finds
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,57 +68,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thursday, August 8, 2019 7:07:09 AM CEST Andrew Bartlett via samba-
-technical wrote:
-> On Thu, 2019-08-01 at 08:58 +0200, Andreas Schneider wrote:
-> > On Wednesday, July 31, 2019 7:37:10 AM CEST Nico Kadel-Garcia via samba-
-> > 
-> > technical wrote:
-> > > I only repackage that, I didn't write it, Credit where it's due, and
-> > > 
-> > > quoting from the README.md there:
-> > > > > This is based on sergiomb2's work at
-> > > > > 
-> > > > >  https://github.com/sergiomb2/SambaAD
-> > > 
-> > > So Sergio gets credit. But I'm already using it for RHEL 7/CenbtOS 7.
-> > > I've done some very limited testing with RHEL 8, but am waiting for
-> > > CentOS 8 to finally be released to really test  that.
-> > > 
-> > > > > [1] Sadly we couldn't totally remove the Samba AES code, as SMB 2.24
-> > > > > requires AES-CMAC-128, but the impact would be far more constrained.
-> > > 
-> > > Fair enough. I'd say accept the requirement of a compatibility library
-> > > for older operating systems, and I'm glad Sergio did most of the work.
-> > 
-> > Is there a copr repo with the compat-gnutls34 available somewhere?
-> 
-> Do you mean this:
-> 
-> https://copr.fedorainfracloud.org/coprs/sergiomb/SambaAD/package/compat
-> -gnutls34/
-> 
-> Andreas,
-> 
-> Can you take charge of getting this into to the CentOS7 image used for
-> CI so we can proceed with this?
+Hi folks,
 
-I've started to work on it ...
+We are finding that net ads join is unable to join because it only
+issues cldap requests for the first five DCs it finds when looking up
+_ldap._tcp.realm ...
 
-https://gitlab.com/samba-team/devel/samba/commits/asn/master-centos7
+Is this correct?
 
+The problem seems to be that sites and services is not correctly
+configured to return the closest DC first in the list and the one they
+should be contacting is around 16 out of 29 returned.
 
-	Andreas
-
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
+--=20
+Regards,
+Richard Sharpe
+(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
+=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
+=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
 
