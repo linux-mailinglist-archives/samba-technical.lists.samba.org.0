@@ -2,49 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6FAC8CA7F
-	for <lists+samba-technical@lfdr.de>; Wed, 14 Aug 2019 06:44:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 000FA8CA97
+	for <lists+samba-technical@lfdr.de>; Wed, 14 Aug 2019 07:18:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=DcdXk9DL5y9jXMMPRW+uG0sRX+yMSNrxY8ySeInbIT4=; b=LV6UqeMPk5yBqmWmOpTqj6mjis
-	AA1Adzy4Ba6ccmHBTHMrCXpJWMUW5GVIJA+M7JddS7VJh52bXPkH6pDHWzEYwNHIZRjLag9PaWW0y
-	E5T/kmB6oVa63XbLAldT4NtmR1Yjbn/nuA1mB7pwPtkbpK9alZ3oNJD6C0seaUdSg50emzBIr9ga/
-	xlGLS4+IznZdyeFx2neX4CWByn8EWZEIG3xQzL0rMycEl8idUQTFsH+52fF7wDgdifDbj4KIvMLlh
-	bid/sZ2GUStpC/zgmeNrIA6J+k5UGLfWGXErcIPDLLVGVM9L/aTZLO6A5Okjh4Fwm9HwDOJqAXfBe
-	K4QBoGHw==;
-Received: from localhost ([::1]:42346 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=28L5FCr5e5bSQi8FcJnPgeuFB5eSibGD7z9lLxa3Gnk=; b=3xxqcuGtbWC1TDLtVs2bvFnX9k
+	5wKBqnN1poMx6eEfM7N6+bHgij+mkvCVXua0b8N5sT5v9+oVdfBq9jYJq+FFkcJWnx/L7locFJeMc
+	s6mQgiFb2IE4EBKfF5uYyB+YBPzleuQWXEYA1Q24UCTdOuIDx3XZ3B3GGpTBctA2y9KNepouQ6OPU
+	f32lcsOjHC8/MoIpwpnIgJaU2dLAXQOVFQrEZu4dXh6AVLqhValJHbmAoaG47sdPB3wBK8zvLjx0E
+	rTe1OZadiK2outvk2dD9N03I60tJyVWIinyTuZ+O0rnCSZrepKtF3mTgEtsKjrT8HuHp1L2qiFAmu
+	mragvkZQ==;
+Received: from localhost ([::1]:43118 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hxl93-006Eat-CR; Wed, 14 Aug 2019 04:44:21 +0000
-Received: from ozlabs.org ([2401:3900:2:1::2]:44125) 
+	id 1hxley-006Ejn-KH; Wed, 14 Aug 2019 05:17:20 +0000
+Received: from mail-ot1-x342.google.com ([2607:f8b0:4864:20::342]:37958) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1hxl8v-006Eam-VT
- for samba-technical@lists.samba.org; Wed, 14 Aug 2019 04:44:18 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 467cRp1dmCz9sDQ;
- Wed, 14 Aug 2019 14:44:06 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1565757846; bh=F1HSHGQ7ExtGVuQ2Nz1RTNp+N5McVq37lTfhgGwTpLg=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=jZGcMhqON4OtczUzFtNuF6/qNPyhEkirmpyD/n/n4nn0zD26x75R5+MEprcweanMD
- xcSSVOGDjsm74W264ZmXm3bbsLQBfeVJoLcUb7dmgu6IgyXsMi47PWnNEijJmSx5qW
- 4CRvy7Rv8pdq8mwn9Wq5l3+c/5XX3KxE7U4K2UpMAzkI9YBR0csXT5pnXuQk4vY+d2
- POVkPBL3lL7c4JiRl0ofot7Mu7AXcGzw/isyL4SlMUM+Ci2C3Z6cWk3WTTzMnJsyBV
- RFCBtGbtnqZzjpjqmPOUaD2xD27RzCbfLnOne09T8HQE4jYLXTytvVu6oETNHAqL28
- hln1DgiWB9Eeg==
-Date: Wed, 14 Aug 2019 14:44:04 +1000
-To: Amitay Isaacs <amitay@gmail.com>
-Subject: Re: [PATCH] CTDB TCP transport connectivity fixes (bug 14084)
-Message-ID: <20190814144404.484e9e45@martins.ozlabs.org>
-In-Reply-To: <CAJ+X7mQRwy7Uwe4nAMKxxUgDno0HsJPxxj0_Lf48eOngo6EBaQ@mail.gmail.com>
+ (Exim) id 1hxlet-006Ejg-Ix
+ for samba-technical@lists.samba.org; Wed, 14 Aug 2019 05:17:18 +0000
+Received: by mail-ot1-x342.google.com with SMTP id r20so29689869ota.5
+ for <samba-technical@lists.samba.org>; Tue, 13 Aug 2019 22:17:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=28L5FCr5e5bSQi8FcJnPgeuFB5eSibGD7z9lLxa3Gnk=;
+ b=V08Ba0UzSUo4Tper11MTchOv7U1E5L736UqB1CwgBmKElbmhe4xjiuBmWzAIICKAyz
+ YwpUqDr+hOuDI+F3dNKMtnJjTi4DgRfcnlqJHusk3V0dipwtLJ3iLsQf5FTBHMOlEj+x
+ R5BVc4HML8B2Of4cU6SyDDL/AW7n8tig8qoNDG5pUrSj3GtMVDxedTs2rbgvAjLXvstI
+ elBJQytXk37n+wK2/vR2gHaQYMOvYwIXi45cLEg6ESxjUWcoo0jK4qOrl1y6K8Y+R+rV
+ Bty1YPG7hf6P0V8V/bgz+B4LvMqyOFHpaUy7nnma1RTmZTF1mjSvFLJ36DnUT2iPWV/v
+ HG2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=28L5FCr5e5bSQi8FcJnPgeuFB5eSibGD7z9lLxa3Gnk=;
+ b=aUfylv9mMjRsYYZSR+O8m1rd8o+E4OxqqFXUvGzxZutuDgYWfO3E9tTLW/kyXFTNSt
+ 1UaJ1cJ0rdODcwhmerNZnFI9pzm8SWeylh4mDLjMLc6Db4qPW4tq97Payohh8n4F9BWj
+ bdsDBgd8c2p/t8xn7nd1yTqSD7FLjAd7O2k7SDBlo7tcjRavVmsBvAl2sBwvmEL2KUGn
+ qf8eJBRykqn4d/5eQ6fhQb8tp0ScfzLdw6/4AhXzFNYS4IhsWGwXRvVVf/QTg/H/Slsi
+ OHNpfnCcYDRPuV//+9HMA9erTPPKXiQ5hxNMprIcOdgcMCeqfds0FOhxFnFhe/bJCkVa
+ 2vdA==
+X-Gm-Message-State: APjAAAVj/vCIOsYCaYzHeNSDMmOFZAX4vAzwrGc7foZqJdqBfWveVN3W
+ aIOpxF5E83B8XohvmOM0I2eG9iHHTomVw93rpLJkng==
+X-Google-Smtp-Source: APXvYqzN4726bOqLWFUDSzWDKOC42ty0ttlPi7dbPg0GpzhDwG2Qu61yGwgs6pH2wNOPzQ1kZEHJnquEJM1dGLMF9Z4=
+X-Received: by 2002:a9d:5a82:: with SMTP id w2mr34800230oth.240.1565759832578; 
+ Tue, 13 Aug 2019 22:17:12 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190814135302.7cae603f@martins.ozlabs.org>
  <CAJ+X7mQRwy7Uwe4nAMKxxUgDno0HsJPxxj0_Lf48eOngo6EBaQ@mail.gmail.com>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+ <20190814144404.484e9e45@martins.ozlabs.org>
+In-Reply-To: <20190814144404.484e9e45@martins.ozlabs.org>
+Date: Wed, 14 Aug 2019 15:17:01 +1000
+Message-ID: <CAJ+X7mT5K7aKu8f=_gzv9U3fxtnRHygraJhYGOGzcify_FcY_g@mail.gmail.com>
+Subject: Re: [PATCH] CTDB TCP transport connectivity fixes (bug 14084)
+To: Martin Schwenke <martin@meltin.net>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,47 +69,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
+From: Amitay Isaacs via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Amitay Isaacs <amitay@gmail.com>
 Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 14 Aug 2019 14:22:27 +1000, Amitay Isaacs <amitay@gmail.com>
-wrote:
-
-> On Wed, Aug 14, 2019 at 1:54 PM Martin Schwenke via samba-technical
-> <samba-technical@lists.samba.org> wrote:
+On Wed, Aug 14, 2019 at 2:44 PM Martin Schwenke <martin@meltin.net> wrote:
+>
+> On Wed, 14 Aug 2019 14:22:27 +1000, Amitay Isaacs <amitay@gmail.com>
+> wrote:
+>
+> > On Wed, Aug 14, 2019 at 1:54 PM Martin Schwenke via samba-technical
+> > <samba-technical@lists.samba.org> wrote:
+> > >
+> > > Fix for:
+> > >
+> > >   https://bugzilla.samba.org/show_bug.cgi?id=14084
+> > >
+> > > The solution is to only mark nodes as connected when both incoming and
+> > > outgoing connections are up.
+> > >
+> > > Included in this pipeline:
+> > >
+> > >   https://gitlab.com/samba-team/devel/samba/pipelines/76265339
+> > >
+> > > Please review and maybe push...
 > >
-> > Fix for:
-> >
-> >   https://bugzilla.samba.org/show_bug.cgi?id=14084
-> >
-> > The solution is to only mark nodes as connected when both incoming and
-> > outgoing connections are up.
-> >
-> > Included in this pipeline:
-> >
-> >   https://gitlab.com/samba-team/devel/samba/pipelines/76265339
-> >
-> > Please review and maybe push...  
-> 
-> In the last patch, there is no need to add "node" element to "tnode".
-> "tnode" already includes "ctdb" for upcalls.
+> > In the last patch, there is no need to add "node" element to "tnode".
+> > "tnode" already includes "ctdb" for upcalls.
+>
+> It is needed to be able to easily pass the node as the argument to the
+> upcall.
+>
+> However, you're right that:
+>
+>   tnode->node->ctdb->upcalls->node_dead(tnode->node);
+>
+> could just be:
+>
+>   tnode->ctdb->upcalls->node_dead(tnode->node);
+>
+> Do you want to tweak it or should I?
 
-It is needed to be able to easily pass the node as the argument to the
-upcall.
+Ah.  In that case we need to change the private_data for
+ctdb_tcp_read_cb() to "node" from "tnode".  Then we have access to
+"node" required for upcall.
 
-However, you're right that:
-
-  tnode->node->ctdb->upcalls->node_dead(tnode->node);
-
-could just be:
-
-  tnode->ctdb->upcalls->node_dead(tnode->node);
-
-Do you want to tweak it or should I?
-
-peace & happiness,
-martin
+Amitay.
 
