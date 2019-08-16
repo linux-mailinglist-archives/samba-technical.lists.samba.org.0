@@ -2,70 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBAEE8EC30
-	for <lists+samba-technical@lfdr.de>; Thu, 15 Aug 2019 15:01:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71E508FA81
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Aug 2019 07:54:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=tVpkG1ePJDd1Shgte5phB6HRe2+XLTb18q8DOp7krtU=; b=WlLtyGhjy2zSawhT5NEYFno/qt
-	a1Q/f6Iw/ucYDwhrPfnXYImoFCxmbAVSIv932ohAh0Tc2k6qeQCeqe4pXQI0jGIzxaJNDOAgJpn+c
-	/MPvlTmxbi9lpwwFO+TPyLPJJA08cKITEMVqgg1PaPgi1ZU1/srnVV4XUE+W/58VVrVDa7kRUVHST
-	nMmBEloKqgmUMRoVsTwp/UHqzapnjH0Bgg6B/YmvaL4tRK7CndI/A7upjfom85imOcDPSnxFlXsa9
-	WDac2Zag7101obAjPuw51rcLkr2xwV04c5L9zbmPfo7KZ3y+S23ZwaJA2BiKVLiu9/wtK7khbs5Cp
-	PhgqxEyw==;
-Received: from localhost ([::1]:34386 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=ZRS7oLCRSCtNwcK30VtZ9hyLitaAB/ruA1y7Qt80tuU=; b=VWie6/MO3iDyi/P8/Ah1yMXA30
+	46KpFpkQxH0rUFUjYu7+lV0Q6pfinNZCXsSBua6SLezWa0Yr1piDAWk/FRFEQl3QWGCprJv7+rgwB
+	qpy1CS9zZdWVQWd7kc1UgkcMMHK5FODxOIqGkFW7a0YF/hxgWBLMwXlCVGd/cZl4hFG2nyjv6TkBh
+	06VhTyx0Xb8MX8S86tO+UPZlhawtDcj9WLCm6zjqw8IlUVNleL3/iYx8EEzzuKzIec/Q/OeavMWXG
+	fg+cqsCSbxsUpzmQ/rKwNSRRtXB5rtB7LXh+x1PEL8ttK6CkqD9VYjGWX/+34gVN9FvZljzIYry5f
+	L6E4khxQ==;
+Received: from localhost ([::1]:33138 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hyFMg-006MeC-2N; Thu, 15 Aug 2019 13:00:26 +0000
-Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:13332
- helo=mx0a-001b2d01.pphosted.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hyFMX-006Me5-VZ
- for samba-technical@lists.samba.org; Thu, 15 Aug 2019 13:00:22 +0000
-Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x7FCtjrE154447
- for <samba-technical@lists.samba.org>; Thu, 15 Aug 2019 09:00:04 -0400
-Received: from e06smtp01.uk.ibm.com (e06smtp01.uk.ibm.com [195.75.94.97])
- by mx0b-001b2d01.pphosted.com with ESMTP id 2ud5hs4vsd-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <samba-technical@lists.samba.org>; Thu, 15 Aug 2019 09:00:04 -0400
-Received: from localhost
- by e06smtp01.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <samba-technical@lists.samba.org> from <swen@linux.ibm.com>;
- Thu, 15 Aug 2019 14:00:02 +0100
-Received: from b06avi18626390.portsmouth.uk.ibm.com (9.149.26.192)
- by e06smtp01.uk.ibm.com (192.168.101.131) with IBM ESMTP SMTP Gateway:
- Authorized Use Only! Violators will be prosecuted; 
- (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Thu, 15 Aug 2019 14:00:01 +0100
-Received: from d06av21.portsmouth.uk.ibm.com (d06av21.portsmouth.uk.ibm.com
- [9.149.105.232])
- by b06avi18626390.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
- id x7FCxe1o36700670
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
- for <samba-technical@lists.samba.org>; Thu, 15 Aug 2019 12:59:40 GMT
-Received: from d06av21.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 448E552050
- for <samba-technical@lists.samba.org>; Thu, 15 Aug 2019 13:00:00 +0000 (GMT)
-Received: from dhcp-9-244-58-93.kelsterbach.de.ibm.com (unknown [9.244.58.93])
- by d06av21.portsmouth.uk.ibm.com (Postfix) with ESMTP id 279535204E
- for <samba-technical@lists.samba.org>;
- Thu, 15 Aug 2019 13:00:00 +0000 (GMT)
-Subject: talloc: set of  patches for talloc testsuite to make ASAN happy
-To: samba-technical <samba-technical@lists.samba.org>
-Date: Thu, 15 Aug 2019 14:59:55 +0200
-Content-Type: multipart/signed; micalg="pgp-sha512";
- protocol="application/pgp-signature"; boundary="=-bNp0aOBhn9cwE1ePbobk"
-User-Agent: Evolution 3.30.5 (3.30.5-1.fc29) 
+	id 1hyVAe-006V7z-33; Fri, 16 Aug 2019 05:53:04 +0000
+Received: from mail-ot1-x341.google.com ([2607:f8b0:4864:20::341]:33277) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hyVAY-006V7q-FL
+ for samba-technical@lists.samba.org; Fri, 16 Aug 2019 05:53:01 +0000
+Received: by mail-ot1-x341.google.com with SMTP id q20so7846981otl.0
+ for <samba-technical@lists.samba.org>; Thu, 15 Aug 2019 22:52:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ZRS7oLCRSCtNwcK30VtZ9hyLitaAB/ruA1y7Qt80tuU=;
+ b=p9ZKQejerqy2B388QokNJ6lm/qnJescL2xVNagWgw4wOCad5SzyA17olIThJOfg7U8
+ lY/TbMpNbfcmpSrEPahE3gc1ZWR/HJo2qj+dEebTZhsE5OxAwgqlmihP1HA2HkTVHUF3
+ OREFW6LfpKzPTRznYA17tx45gCSymrxVH4yDPuWhz0/of2GYotkV6RZqkZXoMWegZNrW
+ 3dWfnIjerUmst0LIxQVI5ci3l/n7dwkFrP9r27zDKfiVqOvmwpkVvFES0c3jcy9auD/E
+ 9XztLwNRdXp59SWAmZBXk1W7UZP7IonLLkkPLP32T1E7h9pWSalcNf25kH8JJ3u5Ot55
+ 8I/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ZRS7oLCRSCtNwcK30VtZ9hyLitaAB/ruA1y7Qt80tuU=;
+ b=DSD8EJBbXCQpjW5axJcNh0mfFTRJvkhztKYakoT+HgvOZ3WIK9QEFPJR5YvraQOQ64
+ edxPI2Nq7IFWRI9pClILHaHkzGyUHMoWAC/yUYwJVSV4zT/tZcamA3sUZkMD8mpdMsMT
+ DQvYCv5Lf/TZ2/pYiptvbAULF1Psqzr77ZO0pGH8T5insgsIOU2wDoHzCWmM+XJ/xvx0
+ BZoSoKxD4LG/3jnDh4E7Az5LirownKPaRcKGxColCOUrM0KnTYpqIvwF51jlOx/exPnn
+ yWr+2F+fEApvqUWDmnkKiPM/huA5dB5v2CKwrVtULxkCfSL4aZetBMUzpKjejRymSbXJ
+ 8iGQ==
+X-Gm-Message-State: APjAAAV1XeLLvklbfenxycOUcQHPrrXQBTjY7cEn0F4rVheYZQKb/Woh
+ 3PIltYgv5cJ4z04ue7T3THyQh3z3ScUu4k0R8/4=
+X-Google-Smtp-Source: APXvYqwjZzM1RIjcbbujZ3CHuNiMPDER1Q7F7iBAif7NfVRquCke0AuXgWbS/ZBIcZuzUejQ3RNM8tMF7yztKQL6nQg=
+X-Received: by 2002:a05:6830:1015:: with SMTP id
+ a21mr949514otp.232.1565934776075; 
+ Thu, 15 Aug 2019 22:52:56 -0700 (PDT)
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 19081513-4275-0000-0000-000003596F30
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19081513-4276-0000-0000-0000386B84C5
-Message-Id: <b60311c310054c87a84f2fef845a46eeb506e57b.camel@linux.ibm.com>
-X-Warn: EHLO/HELO not verified: Remote host 148.163.158.5
- (mx0b-001b2d01.pphosted.com) incorrectly presented itself as
- mx0a-001b2d01.pphosted.com
+References: <20190814135302.7cae603f@martins.ozlabs.org>
+ <CAJ+X7mQRwy7Uwe4nAMKxxUgDno0HsJPxxj0_Lf48eOngo6EBaQ@mail.gmail.com>
+ <20190814144404.484e9e45@martins.ozlabs.org>
+ <CAJ+X7mT5K7aKu8f=_gzv9U3fxtnRHygraJhYGOGzcify_FcY_g@mail.gmail.com>
+ <20190815215333.1ef3bc2b@martins.ozlabs.org>
+In-Reply-To: <20190815215333.1ef3bc2b@martins.ozlabs.org>
+Date: Fri, 16 Aug 2019 15:52:44 +1000
+Message-ID: <CAJ+X7mS9=OwKRRMTKk1vvsJievu=XhyvEaSz5QjJ39WAUz=ecw@mail.gmail.com>
+Subject: Re: [PATCH] CTDB TCP transport connectivity fixes (bug 14084)
+To: Martin Schwenke <martin@meltin.net>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,183 +72,73 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: swen via samba-technical <samba-technical@lists.samba.org>
-Reply-To: swen@linux.ibm.com
+From: Amitay Isaacs via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Amitay Isaacs <amitay@gmail.com>
+Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+On Thu, Aug 15, 2019 at 9:53 PM Martin Schwenke <martin@meltin.net> wrote:
+>
+> On Wed, 14 Aug 2019 15:17:01 +1000, Amitay Isaacs <amitay@gmail.com>
+> wrote:
+>
+> > On Wed, Aug 14, 2019 at 2:44 PM Martin Schwenke <martin@meltin.net> wrote:
+> > >
+> > > On Wed, 14 Aug 2019 14:22:27 +1000, Amitay Isaacs <amitay@gmail.com>
+> > > wrote:
+> > >
+> > > > On Wed, Aug 14, 2019 at 1:54 PM Martin Schwenke via samba-technical
+> > > > <samba-technical@lists.samba.org> wrote:
+> > > > >
+> > > > > Fix for:
+> > > > >
+> > > > >   https://bugzilla.samba.org/show_bug.cgi?id=14084
+> > > > >
+> > > > > The solution is to only mark nodes as connected when both incoming and
+> > > > > outgoing connections are up.
+> > > > >
+> > > > > Included in this pipeline:
+> > > > >
+> > > > >   https://gitlab.com/samba-team/devel/samba/pipelines/76265339
+> > > > >
+> > > > > Please review and maybe push...
+> > > >
+> > > > In the last patch, there is no need to add "node" element to "tnode".
+> > > > "tnode" already includes "ctdb" for upcalls.
+> > >
+> > > It is needed to be able to easily pass the node as the argument to the
+> > > upcall.
+> > >
+> > > However, you're right that:
+> > >
+> > >   tnode->node->ctdb->upcalls->node_dead(tnode->node);
+> > >
+> > > could just be:
+> > >
+> > >   tnode->ctdb->upcalls->node_dead(tnode->node);
+> > >
+> > > Do you want to tweak it or should I?
+> >
+> > Ah.  In that case we need to change the private_data for
+> > ctdb_tcp_read_cb() to "node" from "tnode".  Then we have access to
+> > "node" required for upcall.
+>
+> The attached, improved patch set does the above and also fixes the
+> problem where tnode->out_queue wasn't a useful indicator that the
+> outbound connection was up.  As discussed offline, tnode->out_queue is
+> now only created when the connection becomes writable.
+>
+> Included in this pipeline:
+>
+>   https://gitlab.com/samba-team/devel/samba/pipelines/76501176
+>
+> Please review and maybe push...
+>
+> peace & happiness,
+> martin
 
---=-bNp0aOBhn9cwE1ePbobk
-Content-Type: multipart/mixed; boundary="=-qFYyudpKI/0fJPAeQKpm"
+Pushed after adding missing BUG tags to couple of patches.
 
-
---=-qFYyudpKI/0fJPAeQKpm
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Small patch-set modifying a few talloc tests
-fixing some findings of ASAN.
-
-Merge request created at=20
-https://gitlab.com/samba-team/samba/merge_requests/720
-
-Please review and push if happy.
-
-Thanks for your support in advance.
-
-Cheers Swen
-
---=-qFYyudpKI/0fJPAeQKpm
-Content-Disposition: attachment; filename="patch.txt"
-Content-Type: text/plain; name="patch.txt"; charset="UTF-8"
-Content-Transfer-Encoding: base64
-
-RnJvbSBjMDc2NzJjNzE4MTI1OWY3ZGVjOWIxYTI3OTVjNjQ0ZDNlOTgxNWE2IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTd2VuIFNjaGlsbGlnIDxzd2VuQGxpbnV4LmlibS5jb20+CkRh
-dGU6IFRodSwgMTUgQXVnIDIwMTkgMTQ6MjI6NDYgKzAyMDAKU3ViamVjdDogW1BBVENIIDEvNV0g
-dGFsbG9jOiBBU0FOIGZpeCBmb3IgdGVzdF9yZWFsbG9jX29uX2Rlc3RydWN0b3JfcGFyZW50CgpE
-aXJlY3QgbGVhayBvZiA5NiBieXRlKHMpIGluIDEgb2JqZWN0KHMpIGFsbG9jYXRlZCBmcm9tOgog
-ICAgIzAgMHg3ZmQ1MmMwMGRjMDggaW4gX19pbnRlcmNlcHRvcl9tYWxsb2MgKC9saWI2NC9saWJh
-c2FuLnNvLjUrMHhlZmMwOCkKICAgICMxIDB4N2ZkNTJiZWZlYzQ1IGluIF9fdGFsbG9jX3dpdGhf
-cHJlZml4IC4uLy4uL3RhbGxvYy5jOjc4MgogICAgIzIgMHg3ZmQ1MmJlZmVjNDUgaW4gX190YWxs
-b2MgLi4vLi4vdGFsbG9jLmM6ODI0CiAgICAjMyAweDdmZDUyYmVmZWM0NSBpbiBfdGFsbG9jX25h
-bWVkX2NvbnN0IC4uLy4uL3RhbGxvYy5jOjk4MQogICAgIzQgMHg3ZmQ1MmJlZmVjNDUgaW4gdGFs
-bG9jX25hbWVkX2NvbnN0IC4uLy4uL3RhbGxvYy5jOjE3NDgKICAgICM1IDB4NDA5OWJkIGluIHRl
-c3RfcmVhbGxvY19vbl9kZXN0cnVjdG9yX3BhcmVudCAuLi8uLi90ZXN0c3VpdGUuYzoxMDAwCiAg
-ICAjNiAweDQwOTliZCBpbiB0b3J0dXJlX2xvY2FsX3RhbGxvYyAuLi8uLi90ZXN0c3VpdGUuYzoy
-MTI5CiAgICAjNyAweDQwMjYwMyBpbiBtYWluIC4uLy4uL3Rlc3RzdWl0ZV9tYWluLmM6MzIKICAg
-ICM4IDB4N2ZkNTJiY2I4NDEyIGluIF9fbGliY19zdGFydF9tYWluICgvbGliNjQvbGliYy5zby42
-KzB4MjQ0MTIpCgpTaWduZWQtb2ZmLWJ5OiBTd2VuIFNjaGlsbGlnIDxzd2VuQGxpbnV4LmlibS5j
-b20+Ci0tLQogbGliL3RhbGxvYy90ZXN0c3VpdGUuYyB8IDIgKysKIDEgZmlsZSBjaGFuZ2VkLCAy
-IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9saWIvdGFsbG9jL3Rlc3RzdWl0ZS5jIGIvbGli
-L3RhbGxvYy90ZXN0c3VpdGUuYwppbmRleCBhNzZhNjQ3MTZjOC4uOWUzNDA4MjdlODggMTAwNjQ0
-Ci0tLSBhL2xpYi90YWxsb2MvdGVzdHN1aXRlLmMKKysrIGIvbGliL3RhbGxvYy90ZXN0c3VpdGUu
-YwpAQCAtMTAzNSw2ICsxMDM1LDggQEAgc3RhdGljIGJvb2wgdGVzdF9yZWFsbG9jX29uX2Rlc3Ry
-dWN0b3JfcGFyZW50KHZvaWQpCiAKIAogCXByaW50Zigic3VjY2VzczogZnJlZV9mb3JfZXhpdFxu
-Iik7CisJdGFsbG9jX2ZyZWUodG9wKTsgLyogbWFrZSBBU0FOIGhhcHB5ICovCisKIAlyZXR1cm4g
-dHJ1ZTsKIH0KIAotLSAKMi4yMC4xCgoKRnJvbSBkN2FkM2YwZGU5YTQwZWNiZjI3YzdkYmY5MDhj
-YTdmNGJjMzNmNzViIE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBTd2VuIFNjaGlsbGln
-IDxzd2VuQGxpbnV4LmlibS5jb20+CkRhdGU6IFRodSwgMTUgQXVnIDIwMTkgMTQ6MzM6MzIgKzAy
-MDAKU3ViamVjdDogW1BBVENIIDIvNV0gdGFsbG9jOiBBU0FOIGZpeCBmb3IgdGVzdF90YWxsb2Nf
-ZnJlZV9pbl9kZXN0cnVjdG9yCgpJbmRpcmVjdCBsZWFrIG9mIDEwNCBieXRlKHMpIGluIDEgb2Jq
-ZWN0KHMpIGFsbG9jYXRlZCBmcm9tOgogICAgIzAgMHg3ZjA2MzkzZGZjMDggaW4gX19pbnRlcmNl
-cHRvcl9tYWxsb2MgKC9saWI2NC9saWJhc2FuLnNvLjUrMHhlZmMwOCkKICAgICMxIDB4N2YwNjM5
-MmQwYzQ1IGluIF9fdGFsbG9jX3dpdGhfcHJlZml4IC4uLy4uL3RhbGxvYy5jOjc4MgogICAgIzIg
-MHg3ZjA2MzkyZDBjNDUgaW4gX190YWxsb2MgLi4vLi4vdGFsbG9jLmM6ODI0CiAgICAjMyAweDdm
-MDYzOTJkMGM0NSBpbiBfdGFsbG9jX25hbWVkX2NvbnN0IC4uLy4uL3RhbGxvYy5jOjk4MQogICAg
-IzQgMHg3ZjA2MzkyZDBjNDUgaW4gdGFsbG9jX25hbWVkX2NvbnN0IC4uLy4uL3RhbGxvYy5jOjE3
-NDgKICAgICM1IDB4NDA5ZWRkIGluIHRlc3RfdGFsbG9jX2ZyZWVfaW5fZGVzdHJ1Y3RvciAuLi8u
-Li90ZXN0c3VpdGUuYzoxMjU2CiAgICAjNiAweDQwOWVkZCBpbiB0b3J0dXJlX2xvY2FsX3RhbGxv
-YyAuLi8uLi90ZXN0c3VpdGUuYzoyMTM4CiAgICAjNyAweDQwMjYwMyBpbiBtYWluIC4uLy4uL3Rl
-c3RzdWl0ZV9tYWluLmM6MzIKICAgICM4IDB4N2YwNjM5MDhhNDEyIGluIF9fbGliY19zdGFydF9t
-YWluICgvbGliNjQvbGliYy5zby42KzB4MjQ0MTIpCgpTaWduZWQtb2ZmLWJ5OiBTd2VuIFNjaGls
-bGlnIDxzd2VuQGxpbnV4LmlibS5jb20+Ci0tLQogbGliL3RhbGxvYy90ZXN0c3VpdGUuYyB8IDIg
-KysKIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9saWIvdGFs
-bG9jL3Rlc3RzdWl0ZS5jIGIvbGliL3RhbGxvYy90ZXN0c3VpdGUuYwppbmRleCA5ZTM0MDgyN2U4
-OC4uYzExOTg4NGZkNTUgMTAwNjQ0Ci0tLSBhL2xpYi90YWxsb2MvdGVzdHN1aXRlLmMKKysrIGIv
-bGliL3RhbGxvYy90ZXN0c3VpdGUuYwpAQCAtMTI2Niw2ICsxMjY2LDggQEAgc3RhdGljIGJvb2wg
-dGVzdF90YWxsb2NfZnJlZV9pbl9kZXN0cnVjdG9yKHZvaWQpCiAKIAl0YWxsb2NfZnJlZShsZXZl
-bDApOwogCisJdGFsbG9jX2ZyZWUobGV2ZWwzKTsgLyogbWFrZSBBU0FOIGhhcHB5ICovCisKIAlw
-cmludGYoInN1Y2Nlc3M6IGZyZWVfaW5fZGVzdHJ1Y3RvclxuIik7CiAJcmV0dXJuIHRydWU7CiB9
-Ci0tIAoyLjIwLjEKCgpGcm9tIGUxYjA1ZWI5NzRiNGQ3ZGM5ZDhlMmUzZTlhODIyZDVmZTAzZmNm
-ZDIgTW9uIFNlcCAxNyAwMDowMDowMCAyMDAxCkZyb206IFN3ZW4gU2NoaWxsaWcgPHN3ZW5AbGlu
-dXguaWJtLmNvbT4KRGF0ZTogVGh1LCAxNSBBdWcgMjAxOSAxNDozNjo1OSArMDIwMApTdWJqZWN0
-OiBbUEFUQ0ggMy81XSB0YWxsb2M6IEFTQU4gZml4IGZvciB0ZXN0X3Bvb2xfbmVzdAoKRGlyZWN0
-IGxlYWsgb2YgOTYgYnl0ZShzKSBpbiAxIG9iamVjdChzKSBhbGxvY2F0ZWQgZnJvbToKICAgICMw
-IDB4N2YwNjM5M2RmYzA4IGluIF9faW50ZXJjZXB0b3JfbWFsbG9jICgvbGliNjQvbGliYXNhbi5z
-by41KzB4ZWZjMDgpCiAgICAjMSAweDdmMDYzOTJkMGM0NSBpbiBfX3RhbGxvY193aXRoX3ByZWZp
-eCAuLi8uLi90YWxsb2MuYzo3ODIKICAgICMyIDB4N2YwNjM5MmQwYzQ1IGluIF9fdGFsbG9jIC4u
-Ly4uL3RhbGxvYy5jOjgyNAogICAgIzMgMHg3ZjA2MzkyZDBjNDUgaW4gX3RhbGxvY19uYW1lZF9j
-b25zdCAuLi8uLi90YWxsb2MuYzo5ODEKICAgICM0IDB4N2YwNjM5MmQwYzQ1IGluIHRhbGxvY19u
-YW1lZF9jb25zdCAuLi8uLi90YWxsb2MuYzoxNzQ4CiAgICAjNSAweDQwOTAxZSBpbiB0ZXN0X3Bv
-b2xfbmVzdCAuLi8uLi90ZXN0c3VpdGUuYzoxNDUxCiAgICAjNiAweDQwOTAxZSBpbiB0b3J0dXJl
-X2xvY2FsX3RhbGxvYyAuLi8uLi90ZXN0c3VpdGUuYzoyMDk2CiAgICAjNyAweDQwMjYwMyBpbiBt
-YWluIC4uLy4uL3Rlc3RzdWl0ZV9tYWluLmM6MzIKICAgICM4IDB4N2YwNjM5MDhhNDEyIGluIF9f
-bGliY19zdGFydF9tYWluICgvbGliNjQvbGliYy5zby42KzB4MjQ0MTIpCgpTaWduZWQtb2ZmLWJ5
-OiBTd2VuIFNjaGlsbGlnIDxzd2VuQGxpbnV4LmlibS5jb20+Ci0tLQogbGliL3RhbGxvYy90ZXN0
-c3VpdGUuYyB8IDIgKysKIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKykKCmRpZmYgLS1n
-aXQgYS9saWIvdGFsbG9jL3Rlc3RzdWl0ZS5jIGIvbGliL3RhbGxvYy90ZXN0c3VpdGUuYwppbmRl
-eCBjMTE5ODg0ZmQ1NS4uZDkzNmQxOGMyYWUgMTAwNjQ0Ci0tLSBhL2xpYi90YWxsb2MvdGVzdHN1
-aXRlLmMKKysrIGIvbGliL3RhbGxvYy90ZXN0c3VpdGUuYwpAQCAtMTQ2OCw2ICsxNDY4LDggQEAg
-c3RhdGljIGJvb2wgdGVzdF9wb29sX25lc3Qodm9pZCkKIAogCXRhbGxvY19mcmVlKHAxKTsKIAor
-CXRhbGxvY19mcmVlKGUpOyAvKiBtYWtlIEFTQU4gaGFwcHkgKi8KKwogCXJldHVybiB0cnVlOwog
-fQogCi0tIAoyLjIwLjEKCgpGcm9tIDc2NDRlZjgxMjhlNWYyYWNkOGYyN2UxMTYyNDhiODZmYjZj
-YzAwYWUgTW9uIFNlcCAxNyAwMDowMDowMCAyMDAxCkZyb206IFN3ZW4gU2NoaWxsaWcgPHN3ZW5A
-bGludXguaWJtLmNvbT4KRGF0ZTogVGh1LCAxNSBBdWcgMjAxOSAxNDozOTo1OCArMDIwMApTdWJq
-ZWN0OiBbUEFUQ0ggNC81XSB0YWxsb2M6IEFTQU4gZml4IGZvciB0ZXN0X3J1c3R5CgpEaXJlY3Qg
-bGVhayBvZiAxMDAgYnl0ZShzKSBpbiAxIG9iamVjdChzKSBhbGxvY2F0ZWQgZnJvbToKICAgICAj
-MCAweDdmMDYzOTNkZmMwOCBpbiBfX2ludGVyY2VwdG9yX21hbGxvYyAoL2xpYjY0L2xpYmFzYW4u
-c28uNSsweGVmYzA4KQogICAgICMxIDB4N2YwNjM5MmQxYWYzIGluIF9fdGFsbG9jX3dpdGhfcHJl
-Zml4IC4uLy4uL3RhbGxvYy5jOjc4MgogICAgICMyIDB4N2YwNjM5MmQxYWYzIGluIF9fdGFsbG9j
-IC4uLy4uL3RhbGxvYy5jOjgyNAogICAgICMzIDB4N2YwNjM5MmQxYWYzIGluIF9fdGFsbG9jX3N0
-cmxlbmR1cCAuLi8uLi90YWxsb2MuYzoyNDU1CiAgICAgIzQgMHg3ZjA2MzkyZDFhZjMgaW4gdGFs
-bG9jX3N0cmR1cCAuLi8uLi90YWxsb2MuYzoyNDcxCiAgICAgIzUgMHg0MGI0ZjAgaW4gdGVzdF9y
-dXN0eSAuLi8uLi90ZXN0c3VpdGUuYzoxNTQzCiAgICAgIzYgMHg0MGI0ZjAgaW4gdG9ydHVyZV9s
-b2NhbF90YWxsb2MgLi4vLi4vdGVzdHN1aXRlLmM6MjE0NgogICAgICM3IDB4NDAyNjAzIGluIG1h
-aW4gLi4vLi4vdGVzdHN1aXRlX21haW4uYzozMgogICAgICM4IDB4N2YwNjM5MDhhNDEyIGluIF9f
-bGliY19zdGFydF9tYWluICgvbGliNjQvbGliYy5zby42KzB4MjQ0MTIpCgpTaWduZWQtb2ZmLWJ5
-OiBTd2VuIFNjaGlsbGlnIDxzd2VuQGxpbnV4LmlibS5jb20+Ci0tLQogbGliL3RhbGxvYy90ZXN0
-c3VpdGUuYyB8IDQgKysrLQogMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMSBkZWxl
-dGlvbigtKQoKZGlmZiAtLWdpdCBhL2xpYi90YWxsb2MvdGVzdHN1aXRlLmMgYi9saWIvdGFsbG9j
-L3Rlc3RzdWl0ZS5jCmluZGV4IGQ5MzZkMThjMmFlLi5mZmVkZTY4ZjUyYSAxMDA2NDQKLS0tIGEv
-bGliL3RhbGxvYy90ZXN0c3VpdGUuYworKysgYi9saWIvdGFsbG9jL3Rlc3RzdWl0ZS5jCkBAIC0x
-NTQwLDcgKzE1NDAsNyBAQCBzdGF0aWMgYm9vbCB0ZXN0X2ZyZWVfcmVmX251bGxfY29udGV4dCh2
-b2lkKQogc3RhdGljIGJvb2wgdGVzdF9ydXN0eSh2b2lkKQogewogCXZvaWQgKnJvb3Q7Ci0JY29u
-c3QgY2hhciAqcDE7CisJY2hhciAqcDE7CiAKIAl0YWxsb2NfZW5hYmxlX251bGxfdHJhY2tpbmco
-KTsKIAlyb290ID0gdGFsbG9jX25ldyhOVUxMKTsKQEAgLTE1NDksNiArMTU0OSw4IEBAIHN0YXRp
-YyBib29sIHRlc3RfcnVzdHkodm9pZCkKIAl0YWxsb2NfcmVwb3J0X2Z1bGwocm9vdCwgc3Rkb3V0
-KTsKIAl0YWxsb2NfZnJlZShyb290KTsKIAlDSEVDS19CTE9DS1MoIm51bGxfY29udGV4dCIsIE5V
-TEwsIDIpOworCXRhbGxvY19mcmVlKHAxKTsgLyogbWFrZSBBU0FOIGhhcHB5ICovCisKIAlyZXR1
-cm4gdHJ1ZTsKIH0KIAotLSAKMi4yMC4xCgoKRnJvbSBmYWUzZTZjNTE2NWI1OTk2YzBiMjI1NDE4
-Yzc0ZDM1ZDZmZGNiM2I1IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBTd2VuIFNjaGls
-bGlnIDxzd2VuQGxpbnV4LmlibS5jb20+CkRhdGU6IFRodSwgMTUgQXVnIDIwMTkgMTQ6NDM6MjIg
-KzAyMDAKU3ViamVjdDogW1BBVENIIDUvNV0gdGFsbG9jOiBBU0FOIGZpeCBmb3IgdGVzdF9tYWdp
-Y19wcm90ZWN0aW9uCgpEaXJlY3QgbGVhayBvZiAxMTUyIGJ5dGUocykgaW4gMSBvYmplY3Qocykg
-YWxsb2NhdGVkIGZyb206CiAgICAgIzAgMHg3ZjA2MzkzZGZjMDggaW4gX19pbnRlcmNlcHRvcl9t
-YWxsb2MgKC9saWI2NC9saWJhc2FuLnNvLjUrMHhlZmMwOCkKICAgICAjMSAweDdmMDYzOTJjZmQ1
-OSBpbiBfX3RhbGxvY193aXRoX3ByZWZpeCAuLi8uLi90YWxsb2MuYzo3ODIKICAgICAjMiAweDdm
-MDYzOTJjZmQ1OSBpbiBfdGFsbG9jX3Bvb2wgLi4vLi4vdGFsbG9jLmM6ODM3CiAgICAgIzMgMHg3
-ZjA2MzkyY2ZkNTkgaW4gdGFsbG9jX3Bvb2wgLi4vLi4vdGFsbG9jLmM6ODU5CiAgICAgIzQgMHg0
-MGI4M2MgaW4gdGVzdF9tYWdpY19wcm90ZWN0aW9uIC4uLy4uL3Rlc3RzdWl0ZS5jOjE5NjAKICAg
-ICAjNSAweDQwYjgzYyBpbiB0b3J0dXJlX2xvY2FsX3RhbGxvYyAuLi8uLi90ZXN0c3VpdGUuYzoy
-MTY0CiAgICAgIzYgMHg0MDI2MDMgaW4gbWFpbiAuLi8uLi90ZXN0c3VpdGVfbWFpbi5jOjMyCiAg
-ICAgIzcgMHg3ZjA2MzkwOGE0MTIgaW4gX19saWJjX3N0YXJ0X21haW4gKC9saWI2NC9saWJjLnNv
-LjYrMHgyNDQxMikKClNpZ25lZC1vZmYtYnk6IFN3ZW4gU2NoaWxsaWcgPHN3ZW5AbGludXguaWJt
-LmNvbT4KLS0tCiBsaWIvdGFsbG9jL3Rlc3RzdWl0ZS5jIHwgMiArKwogMSBmaWxlIGNoYW5nZWQs
-IDIgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL2xpYi90YWxsb2MvdGVzdHN1aXRlLmMgYi9s
-aWIvdGFsbG9jL3Rlc3RzdWl0ZS5jCmluZGV4IGZmZWRlNjhmNTJhLi5hYTVjNzcxZWEzMSAxMDA2
-NDQKLS0tIGEvbGliL3RhbGxvYy90ZXN0c3VpdGUuYworKysgYi9saWIvdGFsbG9jL3Rlc3RzdWl0
-ZS5jCkBAIC0xOTk5LDYgKzE5OTksOCBAQCBzdGF0aWMgYm9vbCB0ZXN0X21hZ2ljX3Byb3RlY3Rp
-b24odm9pZCkKIAogCXdoaWxlICh3YWl0KCZleGl0X3N0YXR1cykgIT0gcGlkKTsKIAorCXRhbGxv
-Y19mcmVlKHBvb2wpOyAvKiBtYWtlIEFTQU4gaGFwcHkgKi8KKwogCWlmICghV0lGRVhJVEVEKGV4
-aXRfc3RhdHVzKSkgewogCQlwcmludGYoIkNoaWxkIGV4aXRlZCB0aHJvdWdoIHVuZXhwZWN0ZWQg
-YWJub3JtYWwgbWVhbnNcbiIpOwogCQlyZXR1cm4gZmFsc2U7Ci0tIAoyLjIwLjEKCg==
-
-
---=-qFYyudpKI/0fJPAeQKpm--
-
---=-bNp0aOBhn9cwE1ePbobk
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEErGbWt5PHCTgy2J0tug2knLYPYasFAl1VV0sACgkQug2knLYP
-YasTBg//efKJfZd5UQ7+GWAMQSizZaWLYGQ0IwnTzZqkhzkoYnlL5wv5ePSfrFRK
-GbjrduM/kervZWAbnHSsXfm7Hom1TxSulmoitvlHsTuSwVlIQtdtjD2MF0gLPRoW
-lXIdOuVyatp7AaWcfewKY0KJYSbmKeo2W60APVYUv7CkyAH8pGbKLt9ITe3CHLki
-NzQH0d10p4HbuGb3NelH8cA5WS8jh+tpijY2gyefo3w70V+P2fDBzhuDWrOVcMxo
-TmYiOLuCsbtsTePsneRQUODxMm0jYY06M+WZzizRt4EFTSkcoeWwoaxfwCyQ5rlF
-BQzBYzOcdROsUchSkvPGtB7+1cosu8kTJzStl5yu4NqVFMa7GNzF0y045lTRP+/S
-1U79jhhU9JnelzFzM6EZrVi3QWRffYPoqfHs40Et5KbM0eWEBH2x1/T6w5gVXuY9
-7KmUUkIbx/QfjOvzhYKs9ij968pxbqEBB0x3BYGu+TCXge9Y1IaynmYv/K9jNktn
-5HzlJfLMznEUlrdTL1rNisZ+iVk5+zGRqbkP7yH16x2QR0ANTr8ED2j3OO4Lpdn7
-8lzVV+4YZe87/n9OwTLutRurPCPOGphn4ByXXl0tZgObNdOudkybwxv2KI18seAg
-cThtt+DNS4go7Bynr34A61hILUeqSdvIJ9h8drysg4dqyXYXZtM=
-=0JcB
------END PGP SIGNATURE-----
-
---=-bNp0aOBhn9cwE1ePbobk--
-
+Amitay.
 
