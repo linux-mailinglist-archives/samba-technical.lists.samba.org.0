@@ -2,44 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89DF78FD8F
-	for <lists+samba-technical@lfdr.de>; Fri, 16 Aug 2019 10:18:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 41D3990BBE
+	for <lists+samba-technical@lfdr.de>; Sat, 17 Aug 2019 02:26:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=X/BkUWy4IvPObAr3TZ97hiqLlbnJs23S4pR9xNSIEjw=; b=NsRgHRr91gk3217LR7FfHGrbYv
-	V3vQ39IqzB8nDdVRHVwg/ZswWA5RPM4ozp/oIzXAEtvgChdwuKo9ee4fDK7ql6+wpL9DX3VOgJiD7
-	B/6vHhowFU0qGvEchTmWgBwaKbfu80U/d10UVJ58nSAgWp3G2MBMfJFP/qijk/FFgkl+B3fdciB8Z
-	p/lelWVBozzFp2Lw6HUMIg53PpSr05Xam4TuscqwYCG5Wtv/oe3GctUOb/EGmmd1BJMd3MQIGTOhP
-	TTxRgiyYD7ZZIKv7gnMNuwoTVBOO/tDjgPHR5Sc0oJl3FdsTyUVXDCVJGxIWnFgl/4HXuz0kBTOCQ
-	t/PcAnQA==;
-Received: from localhost ([::1]:36914 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=Hc5H79tEPssrpyGHoPcfRCt08FGFaYaCOIxZ9MIeIhE=; b=qNagZeAE7K2ppnv268CjrKvc2Z
+	u71+TBx15GWalysyqYIZUUPCqESPtzfehCHkbWqy9IX7aGte0H3NuakTliHH/E/jE4J1hsQyAxSVL
+	GeYy6ELYr0L3viPlAEAmd25YfAmSwVCklVpoYvpqkE/F+vDA2HMAv5Q6nwuptLnPClS8IHktWX1bX
+	cAbzJOxk5IzYB6qVOEeLKtv9xPMxxu4rIBqQ/DkVcYWVDQS6mM+mz8VKZcr+oi5el1NR4w2rc662V
+	tOa9prHdyH9yrbzaAv2Dkoxjzha1zmo8Nm0tFT9FmDj30ygqkA8vVM6AtamljQTySi21N5VfYFYrL
+	Zpx6vk1g==;
+Received: from localhost ([::1]:58274 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1hyXQ1-006W4q-41; Fri, 16 Aug 2019 08:17:05 +0000
-Received: from mx2.suse.de ([195.135.220.15]:47500 helo=mx1.suse.de) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1hyHi1-006Nt8-8y
- for samba-technical@lists.samba.org; Thu, 15 Aug 2019 15:30:42 +0000
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 84639B02E;
- Thu, 15 Aug 2019 15:30:28 +0000 (UTC)
-Received: by quack2.suse.cz (Postfix, from userid 1000)
- id F3E6E1E4200; Thu, 15 Aug 2019 17:30:24 +0200 (CEST)
-Date: Thu, 15 Aug 2019 17:30:24 +0200
-To: Mark Salyzyn <salyzyn@android.com>
-Subject: Re: [PATCH v2] Add flags option to get xattr method paired to
- __vfs_getxattr
-Message-ID: <20190815153024.GP14313@quack2.suse.cz>
-References: <20190813145527.26289-1-salyzyn@android.com>
- <20190814110022.GB26273@quack2.suse.cz>
- <71d66fd1-cc94-fd0c-dfa7-115ba8a6b95a@android.com>
+	id 1hymWn-006hDK-KV; Sat, 17 Aug 2019 00:25:05 +0000
+Received: from ozlabs.org ([2401:3900:2:1::2]:36721) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1hymWi-006hD9-5I
+ for samba-technical@lists.samba.org; Sat, 17 Aug 2019 00:25:02 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 469LYF3JQGz9sDQ;
+ Sat, 17 Aug 2019 10:24:49 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
+ t=1566001489; bh=xtWI+aMS7wgpcyGDErUvln4oZg211aY/gB5JJqY6A7U=;
+ h=Date:From:To:Subject:From;
+ b=GfjlTi3gLtsvYIdn6JSxskVrnq58cbxaVlkuPeJPDqDSuo8ELCkSSoKcNLcqLnzt4
+ Vzo7XhrEigxlAqoyiPylFCgcULUw92YZCBqyS9C0b14ESJGyCGvaQ66/Jx3cbbNyy2
+ 8Oijm0x1j7QLYr+JFgzEgZVYKB6NqFrTOdm/G93jjW8ljXFaLSDztixb2kQUeUuBdU
+ sAlY7AVUa3ppcVxHpcvLatHT2wfTnqLSP6VsRpe5W3SB/MZMux+QN7bXLMp0Bmyu/e
+ lWxhNRvsDX4iM/OvuoelEmrsDW1goIKYF/ak+4KSTKelS9b7NUSwWdSRlvwXo6g8f4
+ 9C34w8QRa6IjQ==
+Date: Sat, 17 Aug 2019 10:24:47 +1000
+To: Samba Technical <samba-technical@lists.samba.org>
+Subject: [PATCH] ctdb-daemon: Make STOP_NODE control wait until complete
+ (bug 14087)
+Message-ID: <20190817102447.55faa4c7@martins.ozlabs.org>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <71d66fd1-cc94-fd0c-dfa7-115ba8a6b95a@android.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Warn: EHLO/HELO not verified: Remote host 195.135.220.15 (mx2.suse.de)
- incorrectly presented itself as mx1.suse.de
-X-Mailman-Approved-At: Fri, 16 Aug 2019 08:17:02 +0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,150 +56,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jan Kara via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jan Kara <jack@suse.cz>
-Cc: Latchesar Ionkov <lucho@ionkov.net>, Dave Kleikamp <shaggy@kernel.org>,
- jfs-discussion@lists.sourceforge.net,
- Phillip Lougher <phillip@squashfs.org.uk>, Jan Kara <jack@suse.cz>,
- linux-integrity@vger.kernel.org, Martin Brandenburg <martin@omnibond.com>,
- samba-technical@lists.samba.org, Dominique Martinet <asmadeus@codewreck.org>,
- Chao Yu <yuchao0@huawei.com>, Mimi Zohar <zohar@linux.ibm.com>,
- Adrian Hunter <adrian.hunter@intel.com>, linux-mm@kvack.org,
- Chris Mason <clm@fb.com>, netdev@vger.kernel.org,
- Andreas Dilger <adilger.kernel@dilger.ca>, linux-xfs@vger.kernel.org,
- Eric Paris <eparis@parisplace.org>, linux-f2fs-devel@lists.sourceforge.net,
- linux-afs@lists.infradead.org, Stephen Smalley <sds@tycho.nsa.gov>,
- Mike Marshall <hubcap@omnibond.com>, devel@driverdev.osuosl.org,
- linux-cifs@vger.kernel.org, Paul Moore <paul@paul-moore.com>,
- Sage Weil <sage@redhat.com>, "Darrick J. Wong" <darrick.wong@oracle.com>,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- linux-unionfs@vger.kernel.org, Hugh Dickins <hughd@google.com>,
- James Morris <jmorris@namei.org>, cluster-devel@redhat.com,
- Joseph Qi <joseph.qi@linux.alibaba.com>,
- Vyacheslav Dubeyko <slava@dubeyko.com>,
- Casey Schaufler <casey@schaufler-ca.com>, v9fs-developer@lists.sourceforge.net,
- Ilya Dryomov <idryomov@gmail.com>, linux-ext4@vger.kernel.org,
- kernel-team@android.com, devel@lists.orangefs.org,
- Serge Hallyn <serge@hallyn.com>, Gao Xiang <gaoxiang25@huawei.com>,
- Eric Van Hensbergen <ericvh@gmail.com>, ecryptfs@vger.kernel.org,
- linux-erofs@lists.ozlabs.org, Josef Bacik <josef@toxicpanda.com>,
- reiserfs-devel@vger.kernel.org, Bob Peterson <rpeterso@redhat.com>,
- Joel Becker <jlbec@evilplan.org>, Anna Schumaker <anna.schumaker@netapp.com>,
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, selinux@vger.kernel.org,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Andreas Gruenbacher <agruenba@redhat.com>, David Howells <dhowells@redhat.com>,
- linux-nfs@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- linux-fsdevel@vger.kernel.org, Artem Bityutskiy <dedekind1@gmail.com>,
- Mathieu Malaterre <malat@debian.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Miklos Szeredi <miklos@szeredi.hu>, Jeff Layton <jlayton@kernel.org>,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- Tyler Hicks <tyhicks@canonical.com>, Steve French <sfrench@samba.org>,
- Ernesto =?iso-8859-1?Q?A=2E_Fern=E1ndez?= <ernesto.mnd.fernandez@gmail.com>,
- linux-btrfs@vger.kernel.org, linux-security-module@vger.kernel.org,
- Jan Kara <jack@suse.com>, Tejun Heo <tj@kernel.org>,
- linux-mtd@lists.infradead.org, Andrew Morton <akpm@linux-foundation.org>,
- David Woodhouse <dwmw2@infradead.org>, "David S. Miller" <davem@davemloft.net>,
- ocfs2-devel@oss.oracle.com, Alexander Viro <viro@zeniv.linux.org.uk>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed 14-08-19 07:54:16, Mark Salyzyn wrote:
-> On 8/14/19 4:00 AM, Jan Kara wrote:
-> > On Tue 13-08-19 07:55:06, Mark Salyzyn wrote:
-> > ...
-> > > diff --git a/fs/xattr.c b/fs/xattr.c
-> > > index 90dd78f0eb27..71f887518d6f 100644
-> > > --- a/fs/xattr.c
-> > > +++ b/fs/xattr.c
-> > ...
-> > >   ssize_t
-> > >   __vfs_getxattr(struct dentry *dentry, struct inode *inode, const char *name,
-> > > -	       void *value, size_t size)
-> > > +	       void *value, size_t size, int flags)
-> > >   {
-> > >   	const struct xattr_handler *handler;
-> > > -
-> > > -	handler = xattr_resolve_name(inode, &name);
-> > > -	if (IS_ERR(handler))
-> > > -		return PTR_ERR(handler);
-> > > -	if (!handler->get)
-> > > -		return -EOPNOTSUPP;
-> > > -	return handler->get(handler, dentry, inode, name, value, size);
-> > > -}
-> > > -EXPORT_SYMBOL(__vfs_getxattr);
-> > > -
-> > > -ssize_t
-> > > -vfs_getxattr(struct dentry *dentry, const char *name, void *value, size_t size)
-> > > -{
-> > > -	struct inode *inode = dentry->d_inode;
-> > >   	int error;
-> > > +	if (flags & XATTR_NOSECURITY)
-> > > +		goto nolsm;
-> > Hum, is it OK for XATTR_NOSECURITY to skip even the xattr_permission()
-> > check? I understand that for reads of security xattrs it actually does not
-> > matter in practice but conceptually that seems wrong to me as
-> > XATTR_NOSECURITY is supposed to skip just security-module checks to avoid
-> > recursion AFAIU.
-> 
-> Good catch I think.
-> 
-> I was attempting to make this change purely inert, no change in
-> functionality, only a change in API. Adding a call to xattr_permission would
-> incur a change in overall functionality, as it would introduce into the
-> current and original __vfs_getxattr a call to xattr_permission that was not
-> there before.
-> 
-> (I will have to defer the real answer and requirements to the security
-> folks)
-> 
-> AFAIK you are correct, and to make the call would reduce the attack surface,
-> trading a very small amount of CPU utilization, for a much larger amount of
-> trust.
-> 
-> Given the long history of this patch set (for overlayfs) and the large
-> amount of stakeholders, I would _prefer_ to submit a followup independent
-> functionality/security change to _vfs_get_xattr _after_ this makes it in.
+STOP_NODE is supported by a periodic check in the recovery daemon's
+main_loop(), which notices the flag change, and schedules a recovery
+and freezes databases.  If STOP_NODE returns immediately then the
+associated recovery can complete and the node can be continued before
+databases are actually frozen.  This means that the databases on the
+stopped node will node never be marked invalid and the recovery
+following CONTINUE_NODE can resurrect deleted records.
 
-You're right. The problem was there before. So ack to changing this later.
+CONTINUE_NODE must wait for an in-progress STOP_NODE to complete
+before commencing.
 
-> > > diff --git a/include/uapi/linux/xattr.h b/include/uapi/linux/xattr.h
-> > > index c1395b5bd432..1216d777d210 100644
-> > > --- a/include/uapi/linux/xattr.h
-> > > +++ b/include/uapi/linux/xattr.h
-> > > @@ -17,8 +17,9 @@
-> > >   #if __UAPI_DEF_XATTR
-> > >   #define __USE_KERNEL_XATTR_DEFS
-> > > -#define XATTR_CREATE	0x1	/* set value, fail if attr already exists */
-> > > -#define XATTR_REPLACE	0x2	/* set value, fail if attr does not exist */
-> > > +#define XATTR_CREATE	 0x1	/* set value, fail if attr already exists */
-> > > +#define XATTR_REPLACE	 0x2	/* set value, fail if attr does not exist */
-> > > +#define XATTR_NOSECURITY 0x4	/* get value, do not involve security check */
-> > >   #endif
-> > It seems confusing to export XATTR_NOSECURITY definition to userspace when
-> > that is kernel-internal flag. I'd just define it in include/linux/xattr.h
-> > somewhere from the top of flags space (like 0x40000000).
-> > 
-> > Otherwise the patch looks OK to me (cannot really comment on the security
-> > module aspect of this whole thing though).
-> 
-> Good point. However, we do need to keep these flags together to reduce
-> maintenance risk, I personally abhor two locations for flags bits even if
-> one comes from the opposite bit-side; collisions are undetectable at build
-> time. Although I have not gone through the entire thought experiment, I am
-> expecting that fuse could possibly benefit from this flag (if exposed) since
-> it also has a security recursion. That said, fuse is probably the example of
-> a gaping wide attack surface if user space had access to it ... your
-> xattr_permissions call addition requested above would be realistically, not
-> just pedantically, required!
+Multiple STOP_NODE controls are also serialised.  This isn't strictly
+necessary but will stop more deeply nested event loops.
 
-Yeah, flags bits in two places are bad as well. So maybe at least
-#ifdef __KERNEL__ bit around the definitiona and a comment that it is
-kernel internal flag?
+Went through this pipelines with a slightly different commit message:
 
-								Honza
--- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+  https://gitlab.com/samba-team/devel/samba/pipelines/76501176
+
+Now running in this one:
+
+  https://gitlab.com/samba-team/devel/samba/pipelines/76849217
+
+Please review and maybe push...
+
+peace & happiness,
+martin
 
