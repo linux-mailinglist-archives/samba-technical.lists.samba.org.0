@@ -2,58 +2,40 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A86CA98067
-	for <lists+samba-technical@lfdr.de>; Wed, 21 Aug 2019 18:41:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8833698DBD
+	for <lists+samba-technical@lfdr.de>; Thu, 22 Aug 2019 10:32:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=apmBza1D/jgq8ysrAYJLKFCh2KTiNJiS02F85HTZxwM=; b=GW9W2DOul1SxyxiYsUIdA8CNNu
-	fCuQQXMa/G9PHjw2/Dzwhz16LwhvrnM6wgJLrgH5qGlmhMVwq9QjpIOtELy3yM0rcbOhB+sdpdeJN
-	K867lKvW8F5KY4YDG7YXq9/4gC2gbuBHfNOmSw6VbazsCIPUGht1zLmwE70EbhBVBDn4hbeaIl3F5
-	hyxpoo71wngAgLPf/eJfLLqaOebqOV/ojHWac8Ato+9qTQOKUVgrGvWQVm7cLd7b7SOuJv7k8MZcP
-	OclyQZiRPMlcYp5S9YiLAS4tN40Mu0TPUGKuIt4zlmtaKPylD+ErwXygeAPy6CMtxox9NKQFLFBam
-	0K49ifCg==;
-Received: from localhost ([::1]:42922 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=IUqrepXrssR4H2oLkvE7+WffzRhILFSIE/CI33mkCsI=; b=1FpsG5vnGUo3h08WV/L4aS89PG
+	ExpJDujlfjqoq0yU3eGnGUKRx77q5sDYooS9ridVZpSNQiAnKJwoxPCt09yYogebqRJpD9O2+nxZP
+	2N4lsdDVEiCUPAYBCNx0WJi+Mlr13alscgX9ya4Y5rN5CcxbVYF0+eyrYhkFarRE+YFaRxA14DPhk
+	3+zta4an/z8RTsqY0jla4LrpmwyEs8bqRla8NL31B/npttFZhZm2eLoijsg8uRIv7KJPIIaaY+iTK
+	xTizV+ztorYQpLN7AVPp24a0lrbTNIUgDrrC1/DLPWiNhMS2FfikZSMLRcFSSJbskVoDSGglTJe/U
+	u9RJnyZQ==;
+Received: from localhost ([::1]:25820 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i0TfF-007RQf-8r; Wed, 21 Aug 2019 16:40:49 +0000
-Received: from mail-pg1-x544.google.com ([2607:f8b0:4864:20::544]:40844) 
+	id 1i0iVL-007WhZ-FN; Thu, 22 Aug 2019 08:31:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10216) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i0Tf8-007RQ8-6R
- for samba-technical@lists.samba.org; Wed, 21 Aug 2019 16:40:45 +0000
-Received: by mail-pg1-x544.google.com with SMTP id w10so1614201pgj.7
- for <samba-technical@lists.samba.org>; Wed, 21 Aug 2019 09:40:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=apmBza1D/jgq8ysrAYJLKFCh2KTiNJiS02F85HTZxwM=;
- b=MGM+I4cVFJCHEZ3U9SQoxWMpfs5tfCg2ijgNS8TzK9IKDpoS7c63wFR1+BPJ8zxw2Y
- uwbj8cMdLVUwQAtAqj6UmdXXhLVnRLGPWgMtn0l8SaVmn7RKECeqknEMSoqOerbh2mKz
- yKGnZZaQOCWRnOLFYrW85l0xhctwqSgiAquO5s5z7mJHO+fPvd9BPDjGdpGg95qmuRT9
- TBB9056F17W+8OcJds43/dy1hEVfU8X4qd8nzULm+abvqfDbKZWQBMJwEeeF/+gePg2d
- SfiwedOR4z2D+dcyYSawFQ6wVBIox2DVeqMte4TRnK0ov+WsZg6rp2mx47MtmbIt9TAG
- 8AYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=apmBza1D/jgq8ysrAYJLKFCh2KTiNJiS02F85HTZxwM=;
- b=tiJMl37CbghubcISvYIRUJunFAKU//b+9MTkO/GUL+aM+6us7ydnOrX9Mk8dxFyxFc
- 0rHxrD28axF/ZlPLUsmFPJsjMSE349lBhqtI+L/IHzZMizk7w43R+X1TOW7QId5O4HBI
- L3EKPPgCTKoyj2MW+spLYxOF6y/WfqVF8Q0P0biIC2c/kQ+vTvuMWch6cCHxL1NGGCCL
- Eq3k1WVGvfo5c0FO6aHeaRSpwtfdZw1uOWHLMqgERA33ceFmVJX3lNpCV1qS5zC+VvzO
- pHKIKhL2pIK2xOcq4JvnhAbhd+61NxTnxRrVKaCmcrbBTXChhUhghavPxG1y7RgsEn76
- ROeQ==
-X-Gm-Message-State: APjAAAXbxfhtfrNXpcq+s6cSP7P+2PXi8nyK8Erh6EJjVlKibwWSgKOZ
- gTGoE8S6bFKKV+rWqi+d4KyupOqgqJl4u7fshIsFdF2Y
-X-Google-Smtp-Source: APXvYqySFNV7Fiio1XWiDQwaqpb6e509tE0QUHo6kTe+WUBLdA3o1pY/qTnJRfbmVkPpvjdkUcQtRwI1933ObaswpKQ=
-X-Received: by 2002:a63:7245:: with SMTP id c5mr30322787pgn.11.1566405639720; 
- Wed, 21 Aug 2019 09:40:39 -0700 (PDT)
+ (Exim) id 1i0iV8-007Wgt-Go; Thu, 22 Aug 2019 08:31:28 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:To:From:Date:CC;
+ bh=IUqrepXrssR4H2oLkvE7+WffzRhILFSIE/CI33mkCsI=; b=D4wyr6S3SPB1BYJnRP1Pyo7JJF
+ 7IzeX5NeR9jAqRLNqMmh1a5uAGq+KaT8OBDZhIYjBR8GrbppExt6XmnX6Dg0psEbVvXzfB2pJEmDv
+ vKub3ClxH7sylTMyCv4pP0m9bFH5AZnfrn6U5dxfmCoNaO+IZ3xsxEsXm1YZzkkJ5hOA=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i0iUy-0004o3-25; Thu, 22 Aug 2019 08:31:12 +0000
+Date: Thu, 22 Aug 2019 10:31:10 +0200
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.10.7 Available for Download
+Message-ID: <20190822083109.GA9759@carrie2>
 MIME-Version: 1.0
-References: <1566309647-67393-1-git-send-email-zhengbin13@huawei.com>
-In-Reply-To: <1566309647-67393-1-git-send-email-zhengbin13@huawei.com>
-Date: Wed, 21 Aug 2019 11:40:28 -0500
-Message-ID: <CAH2r5mvx7y7B-LsgFY-MSJ1B2OM-87zaVYrQDO3VToey-VjcUw@mail.gmail.com>
-Subject: Re: [PATCH] cifs: remove unused variable
-To: zhengbin <zhengbin13@huawei.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="HlL+5n6rz5pIUxbD"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,74 +49,141 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>, yi.zhang@huawei.com
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
 
-On Tue, Aug 20, 2019 at 8:54 AM zhengbin <zhengbin13@huawei.com> wrote:
->
-> In smb3_punch_hole, variable cifsi set but not used, remove it.
-> In cifs_lock, variable netfid set but not used, remove it.
->
-> Reported-by: Hulk Robot <hulkci@huawei.com>
-> Signed-off-by: zhengbin <zhengbin13@huawei.com>
-> ---
->  fs/cifs/file.c    | 2 --
->  fs/cifs/smb2ops.c | 2 --
->  2 files changed, 4 deletions(-)
->
-> diff --git a/fs/cifs/file.c b/fs/cifs/file.c
-> index 9709069..ab07ae8 100644
-> --- a/fs/cifs/file.c
-> +++ b/fs/cifs/file.c
-> @@ -1695,7 +1695,6 @@ int cifs_lock(struct file *file, int cmd, struct file_lock *flock)
->         struct cifs_tcon *tcon;
->         struct cifsInodeInfo *cinode;
->         struct cifsFileInfo *cfile;
-> -       __u16 netfid;
->         __u32 type;
->
->         rc = -EACCES;
-> @@ -1711,7 +1710,6 @@ int cifs_lock(struct file *file, int cmd, struct file_lock *flock)
->         cifs_read_flock(flock, &type, &lock, &unlock, &wait_flag,
->                         tcon->ses->server);
->         cifs_sb = CIFS_FILE_SB(file);
-> -       netfid = cfile->fid.netfid;
->         cinode = CIFS_I(file_inode(file));
->
->         if (cap_unix(tcon->ses) &&
-> diff --git a/fs/cifs/smb2ops.c b/fs/cifs/smb2ops.c
-> index 64a5864..f5bbd1d 100644
-> --- a/fs/cifs/smb2ops.c
-> +++ b/fs/cifs/smb2ops.c
-> @@ -2939,7 +2939,6 @@ static long smb3_punch_hole(struct file *file, struct cifs_tcon *tcon,
->                             loff_t offset, loff_t len)
->  {
->         struct inode *inode;
-> -       struct cifsInodeInfo *cifsi;
->         struct cifsFileInfo *cfile = file->private_data;
->         struct file_zero_data_information fsctl_buf;
->         long rc;
-> @@ -2949,7 +2948,6 @@ static long smb3_punch_hole(struct file *file, struct cifs_tcon *tcon,
->         xid = get_xid();
->
->         inode = d_inode(cfile->dentry);
-> -       cifsi = CIFS_I(inode);
->
->         /* Need to make file sparse, if not already, before freeing range. */
->         /* Consider adding equivalent for compressed since it could also work */
-> --
-> 2.7.4
->
+--HlL+5n6rz5pIUxbD
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
+			"If I had to live my life again,
+			 I'd make the same mistakes,
+			 only sooner."
+
+			 Tallulah Bankhead
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
 
 
--- 
-Thanks,
+Release Announcements
+---------------------
 
-Steve
+This is the latest stable release of the Samba 4.10 release series.
+
+
+Changes since 4.10.6:
+---------------------
+
+o  Michael Adam <obnox@samba.org>
+   * BUG 14010: Unable to create or rename file/directory inside shares
+     configured with vfs_glusterfs_fuse module.
+
+o  Andrew Bartlett <abartlet@samba.org>
+   * BUG 13844: build: Allow build when '--disable-gnutls' is set.
+
+o  Bj=C3=B6rn Baumbach <bb@sernet.de>
+   * BUG 13973: samba-tool: Add 'import samba.drs_utils' to fsmo.py.
+
+o  Tim Beale <timbeale@catalyst.net.nz>
+   * BUG 14008: Fix 'Error 32 determining PSOs in system' message on old DB
+     with FL upgrade.
+   * BUG 14021: s4/libnet: Fix joining a Windows pre-2008R2 DC.
+   * BUG 14046: join: Use a specific attribute order for the DsAddEntry
+     nTDSDSA object.
+
+o  Ralph Boehme <slow@samba.org>
+   * BUG 14015: vfs_catia: Pass stat info to synthetic_smb_fname().
+
+o  Alexander Bokovoy <ab@samba.org>
+   * BUG 14091: lookup_name: Allow own domain lookup when flags =3D=3D 0.
+
+o  Gary Lockyer <gary@catalyst.net.nz>
+   * BUG 13932: s4 librpc rpc pyrpc: Ensure tevent_context deleted last.
+
+o  Stefan Metzmacher <metze@samba.org>
+   * BUG 13915: DEBUGC and DEBUGADDC doesn't print into a class specific log
+     file.
+   * BUG 13949: Request to keep deprecated option "server schannel",=20
+     VMWare Quickprep requires "auto".
+   * BUG 13967: dbcheck: Fallback to the default tombstoneLifetime of 180 d=
+ays.
+   * BUG 13969: dnsProperty fails to decode values from older Windows versi=
+ons.
+   * BUG 13973: samba-tool: Use only one LDAP modify for dns partition fsmo
+     role transfer.
+
+o  Andreas Schneider <asn@samba.org>
+   * BUG 13960: third_party: Update waf to version 2.0.17.
+
+o  Garming Sam <garming@catalyst.net.nz>
+   * BUG 14051: netcmd: Allow 'drs replicate --local' to create partitions.
+
+o  Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
+   * BUG 14017: ctdb-config: Depend on /etc/ctdb/nodes file.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the "Samba 4.1 and newer" product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+        https://www.samba.org/samba/history/samba-4.10.7.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--HlL+5n6rz5pIUxbD
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCXV5SygAKCRAoaL1+KxeT
+UR3gAJ9b0vsPTSecMYMg0cH+oeU+Ca10+QCgnmaxOeEQKpbjWlQ4hGCi1Gft/CE=
+=PEG8
+-----END PGP SIGNATURE-----
+
+--HlL+5n6rz5pIUxbD--
 
