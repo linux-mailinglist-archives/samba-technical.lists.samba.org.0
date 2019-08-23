@@ -2,51 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E68EB9A4FF
-	for <lists+samba-technical@lfdr.de>; Fri, 23 Aug 2019 03:38:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 906819A7DF
+	for <lists+samba-technical@lfdr.de>; Fri, 23 Aug 2019 08:55:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=7JXir8bS20ZQ52t63c4eu40HPjcc7NW6dQ3cfjKGubI=; b=I8Up9hPUgDX5DOYlOzM2/erDXj
-	mQzx0jWZBKyscbySWKfTJ2aG/TGAntxMez0j9K4E1Lrh43xrSAKRisKaE1Xcp+Nl66nnOcCHQ3lvA
-	bxML1q38riNMoDecrKGw4yQtVAIF9fFYNiyPG6Dvl2mSMuVj5JoM2erQKhAal2qeyvKQsU8N2pul4
-	aw6QT+Tcc/i9QBbih9cGoCtrOBMwbI9R590Kr11kb2b/Al8eZhfBlaLxmJOI/Ze425eVZjn3qDOeG
-	PAsiyFxprElmUwTQKlFtHsqv5KzgpVXiJd93neBXAQdC6zfclpy+i6iJGlU7nP35DewSYTuYOAsoX
-	l4+46C1Q==;
-Received: from localhost ([::1]:37220 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=PwKwnTAJmltBTo8PHcxX2SxKtM8ttjbSH+Qtehfku9Q=; b=uNeTwkBirZJKRfNoqpi8Z8iXxY
+	Uh0F8xYWANn4hJ5B1ew4O5d1QI5+iNDiapZYwQ6ht9Rr+ggbPEZndmnq0bIZnFcIG2q3tGOZz4kpH
+	+oKspWx1G7K0HjHgvsKH0ruLJwogrSwDRpOPnb5OCG3kJ4EoTzc5jLthjGusHMTZc5YL7tD1b+irt
+	XH8NoASoVCNcM1dLdBOLHkv2696rUeofZcxMA46FDXWQ3vuGNyzLJevL1joTlDXR4X6VZZOJf+mHq
+	BSkh94hlsnwNM9jKC0Ow1isbAWK/+y/omrnn3jiUxK6/urwUkhTBbfWh8nYgnvORfX8me9vwHGYVO
+	9iF2JeTA==;
+Received: from localhost ([::1]:45378 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i0yWj-007gGL-QZ; Fri, 23 Aug 2019 01:38:05 +0000
-Received: from bilbo.ozlabs.org ([203.11.71.1]:49117 helo=ozlabs.org) 
+	id 1i13TU-007iAc-U5; Fri, 23 Aug 2019 06:55:05 +0000
+Received: from mail-io1-xd2a.google.com ([2607:f8b0:4864:20::d2a]:37786) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i0yWa-007gGE-R0
- for samba-technical@lists.samba.org; Fri, 23 Aug 2019 01:37:59 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 46F3tf6Hm3z9sNk;
- Fri, 23 Aug 2019 11:37:46 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1566524267; bh=vUmYoD+Cpk0CC6x6DOX3kGS6AgBlyTZ1AJ5tkUwZvKw=;
- h=Date:From:To:Subject:In-Reply-To:References:From;
- b=O2PDfswk+0vBYpQp4ezRtrj4FCLBiy8wHcrhJMytrsAkOtg7GIaR+I3p0irSwlsCw
- rH5M94X0D23iJGATLh5hXnu+8CopZxdYgdtANA/cUJ3hQ1tTVm9QArfuPRPhvh9AuW
- lDpzG7EVKO3Od5LSnHhcYABG9S7uRWxHJUq720n8RvPnO9VmDP+epWgqQD95DMfDHk
- 57Aja5oyRD2cnZ6pIFCgDd46ITKM3atT2WkDfxMunMC1LGcsMndBLXdi4JEnc8i4if
- HcoOlCfkJ73Xub5Hx7EKEL/yvDhWtPDz5XjtTaYunie0nx9+TIkOpdAyaxI/L+T91h
- w3z4JMIoBqfrA==
-Date: Fri, 23 Aug 2019 11:37:45 +1000
-To: samba-technical@lists.samba.org
-Subject: Re: recent flapping tests
-Message-ID: <20190823113745.79501e26@martins.ozlabs.org>
-In-Reply-To: <20190608200729.759ac6a1@martins.ozlabs.org>
-References: <7af13c9d-858d-650d-242a-d023f19dbaae@catalyst.net.nz>
- <20190608012357.68de8832@martins.ozlabs.org>
- <c58cec86-7177-18ac-ead1-7e5de351f330@catalyst.net.nz>
- <20190608200729.759ac6a1@martins.ozlabs.org>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+ (Exim) id 1i13TC-007i8m-7V
+ for samba-technical@lists.samba.org; Fri, 23 Aug 2019 06:54:48 +0000
+Received: by mail-io1-xd2a.google.com with SMTP id q22so17774911iog.4
+ for <samba-technical@lists.samba.org>; Thu, 22 Aug 2019 23:54:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=eOCWsprZllBKK7f3gLLRSJiPrpyMZGcDh903YXQfWrE=;
+ b=AJH7QCu0ytgosORoK0Xaac6AsehJLulu6SQYtdE2xjPmSsGirKGKscNTM1vNcZcVI0
+ oKwR+0t4x5xCsSMBfWKNLmKBQyQgNOPFLkEG+z2MX/R87XGH9gcsIVlg1g1Q8p3FOBIm
+ RjrLf6YIz97vWmX/+0Ul+rqRoBHQiXX8VB/9Z+rbH7YtN6PIjqNELmdyvdBqe2WoEa5M
+ XZcIvPyOdFy/W6JRozTXJLpstys7a2IrPL91aNDzNxszN//WsJUD1dwIXLO+jnBAoqs6
+ xLbSYzuGM1AisnAWyVSZqA8Y854/Ha5WLUBYbX6tONMLvgo83be7lfVAPHskOQX+zUTr
+ eAzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=eOCWsprZllBKK7f3gLLRSJiPrpyMZGcDh903YXQfWrE=;
+ b=tVUc5jOYTJ9752W71f8Ci4Vxi5yXUF1GLGrWUvgI1zfLD0u0XL+dvjNppNR0P2rmfu
+ py6wLjyL/6lmQArorSf88DnXBGfxD4XnEE6FAhkW5lTZacStPkP4nxTbOhoXSlt6LUuM
+ fPDMvsG1VqQ4KTOuffk41Y3W78UEF7d7a5RYbM58XnqUNJWW9M1pRTxPfWmYRdNSa8Ri
+ V38sloG7/PhcpcJMdKI9FQiEw5h6trVGFP6GhsXUpP7cumaUbWnSEQXLzw/Ko0DgBT/h
+ 8OPaytAgqdYpcN93caCEid6Xtx13PuBnCv7gCo2dSpLIcaXtjBFcjeqwqkEAnYBvrBZi
+ PRvw==
+X-Gm-Message-State: APjAAAVPzFE7qEO8shP4M3lwmX69OkWqRgypRS+YCdRIEQzJi8DiTTue
+ 2GW4SPirOQIW/LY8+TzEI8MYycSCHeC1AgV2shQ1G6rb
+X-Google-Smtp-Source: APXvYqy7Er1oCMVrVIHcowIvwgDtDN34rQ3R0DKX1AFwo9iBztJUN1674VinQB1LYeBUOI1ntJZVy2VdBKljoCx7ZHw=
+X-Received: by 2002:a5d:9e05:: with SMTP id h5mr4724260ioh.302.1566543284244; 
+ Thu, 22 Aug 2019 23:54:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Date: Fri, 23 Aug 2019 12:24:34 +0530
+Message-ID: <CALmqtCXzTfqrOX_rSoR5nbEqGvcO1Xeuk7a+56+uoC0nh_-Kmg@mail.gmail.com>
+Subject: Query about slow read performance
+To: samba-technical@lists.samba.org
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,43 +65,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
+From: Abhidnya Joshi via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Abhidnya Joshi <abhidnyachirmule@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sat, 8 Jun 2019 20:07:29 +1000, Martin Schwenke via samba-technical
-<samba-technical@lists.samba.org> wrote:
+Hi All,
 
-> On Sat, 8 Jun 2019 08:36:29 +1200, Douglas Bagnall
-> <douglas.bagnall@catalyst.net.nz> wrote:
-> 
-> > > Should be fixed by fixes pushed on 7 May.    
-> > 
-> > I can confirm all your "shoulds". Also I can confirm the wisdom of
-> > hedging with this "may":
-> >   
-> > >>    4 *FAILED* tests/simple/69_recovery_resurrect_deleted.sh    
-> > > 
-> > > May be fixed by fixes pushed on 7 May.  :-)    
-> > 
-> > It happened twice since May 8.  
-> 
-> Oh, well...  :-(
-> 
-> We tightened up some things that might have been causing some tests to
-> fail, but it doesn't look to have helped this one.
-> 
-> Some time soon I'll look at a patch so that the daemon logs are dumped
-> to stderr when these "simple" tests fail.  It'll be a lot of output but
-> at least it might give us a way to debug them when they happen in an
-> environment that we don't control.
-> 
-> I might also try running that one in a loop...
+Recently while doing single file read testing on SMB2 from our product to
+Win2008 (as client), we saw some performance degradation.
 
-ctdb/tests/simple/69_recovery_resurrect_deleted.sh should now pass
-reliably...
+Although we are finding out causes in our SMB server, we can somehow see
+this degradation when the Win2008 got security patch applied.
 
-peace & happiness,
-martin
+*2019-03 Servicing Stack Update for Windows Server 2008 R2 for x64-based
+Systems (KB4490628)*
 
+The performance drop is not observed for write but only for reads and the
+cap seen is around 260-280 Mbps. (Earlier it was around 520 Mbps). The
+security patch does not have anything directly related to I/O or SMB but
+this is what we are observing.
+
+My question here is, has anyone observed any of such problem recently with
+Win2k8 used as client?
+
+Thanks
+Abhidnya
