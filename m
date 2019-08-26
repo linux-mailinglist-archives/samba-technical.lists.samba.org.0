@@ -2,56 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9432E9D030
-	for <lists+samba-technical@lfdr.de>; Mon, 26 Aug 2019 15:14:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7C869D5CE
+	for <lists+samba-technical@lfdr.de>; Mon, 26 Aug 2019 20:28:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=7ze0jl1Mf3/M/vQ6J2EHr4A9PJdBZaMzZH7WTlhGT0I=; b=CXwhKraAhoiCIIl6tiQ6S4Fl+h
-	GlDvZMDUyN2Zuj6desNunz+Drkvs9mzKRv0R75L5oVUQC5JvCvFOMt12ZGjPT+iEdiDXDEU7grR4l
-	QVMm+h166v1wkbn63v4mWyrX6YuIueUV/J5vPpUZu76snyT6PBc3BzZArKsMO6JsmptBKAceaKHUE
-	BhEOmRVckHIt1NWNOohAR3SM1nqJdOawMIGz7k0yLjpAaEX7ftlhHtm+rd2xTedILEGqAjS5IneRR
-	beOrPaGTUnDefqR0rgtVdp5GhUVVT8pcNtLU+Um3teti7FJ+LqLQ988VKOk2WodcwJHqnnqEKDxmk
-	Hm9LIHiQ==;
-Received: from localhost ([::1]:18226 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=SnefcUqUaAiIr5QsWc4YhhG+2/NAzDH62nXxOI30sfY=; b=uBdAs5lffReYC7x2ipWti4oCp5
+	M5k6F0WH8JdHQkDCKToBFmO5TI6ijvljjGNU7HA+QGyDJj3w+xjJCK7iSiTjtzMHGKPGyHxDLjsUC
+	7skXe/IFj5I10++lbmpGdu77rvET9w1b4fSczPVIZ6VAtlwhkqp27K1rpzEjkXhZsl6ZrPnVARNqE
+	MjHxbe/8oGcvtHaEbcZ3e+i/GQXtaA7gyTHXfcnuePjxY+jf8Y1kxyeFHbf2qtK7ne0iE5bDwkmqg
+	El1XQ5UBiy0+SY6i2xq68Jgf69C8GD75WHPda9wXWvBuJUOsWePpkdX7dCazLRdtmkeJevEifjBzg
+	1p3oWOrw==;
+Received: from localhost ([::1]:27998 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i2EoV-008TsA-Fr; Mon, 26 Aug 2019 13:13:39 +0000
-Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233]:39047) 
+	id 1i2Jhx-008Vp4-Fd; Mon, 26 Aug 2019 18:27:13 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44818) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i2EoP-008Ts3-Hx
- for samba-technical@lists.samba.org; Mon, 26 Aug 2019 13:13:35 +0000
-Received: by mail-lj1-x233.google.com with SMTP id x4so15019092ljj.6
- for <samba-technical@lists.samba.org>; Mon, 26 Aug 2019 06:13:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=ILZPnzU6ijsue231JlEw68lqehu7mYO7zFtKia0wTCU=;
- b=cgJb4aNzfrC8zKftBPEYUc39ptQMpN0ZjH3csuDDeIe2/KBQvvaFNYLyGJUmSPT0aK
- ZRHkrJBNrTosGW18Rb/qLVVuzvnn390uTehaiSgis5n81dRUitvGWXwdBli0EHx/zulR
- 5Cd/VjyeVfUll4/Y1cPCmqs4hxKf60gk63TZnSuTkukfrY/O+XbeN12bZdxxmHLsKxeT
- /t3IXJFokP4RLFEzwrLoQBGWRwTxWA7XN/1zIf2NQ0WRNXuoMu+335irsARViXEVj5YI
- ihJNI7+UTQgaEzDzckMLRiOkWB3jFWiGvj7e/eWH2Vzg6AWjWd0dVgwvbW4TS/hWo/VT
- McAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=ILZPnzU6ijsue231JlEw68lqehu7mYO7zFtKia0wTCU=;
- b=VekUVIKuc2nbCctyGVFMNDI8XlR/S5rwFPPJ3g9pDBNbqmKDABYGl3Wp6eTjGsAHBS
- L6MNzYewc7/4d/IlUzBkg0l2rp0WvqH9lQpZRgBh7Q1oJEGQb3RqiV92DQhXmFhweKj4
- K3JAbh7zPVExIU0mFqGW3/EMbG+bkkJ33ojUWnsydC0wYXgtDaC/Ki/noAKRR2Dm+C4W
- skSNUY4xcF46ArMiZB3mA3M613iKAiYOsSHf5LjD/RFNFzOUJ/XyFPKEoCpNT/Lip3kr
- /IXZP+fpJcblmjpnBnY+So29H1qjQ1ypZ/5/0HtCiwwpGE6QzjXk4DDjh11KnRIGQz5t
- sJYQ==
-X-Gm-Message-State: APjAAAVv0VCWw/IwZ9b473DHOnfkIPV0l2d8vBOdUUl1OCaty4GD7zSz
- cI5TmaB9SMWFQhFi9as4pUwPPISR7KGydJFpys7hEOtB
-X-Google-Smtp-Source: APXvYqy0txKNBHV96AWSvb35FGJNGL78ZTATUPLt7KLE1Nl6QK8UFtvdricrdfzyyEb16NjODji7uY4xF9uUpH2JoIk=
-X-Received: by 2002:a2e:9ad4:: with SMTP id p20mr11117043ljj.49.1566825212460; 
- Mon, 26 Aug 2019 06:13:32 -0700 (PDT)
-MIME-Version: 1.0
-Date: Mon, 26 Aug 2019 14:13:21 +0100
-Message-ID: <CAELK94cBsS_+AfvaNRCkSdsdjLv5os2D_Wuy5ni41t+jrrYDhA@mail.gmail.com>
-Subject: GSOC 2019 - Final report
-To: P Mairo via samba-technical <samba-technical@lists.samba.org>
+ (Exim) id 1i2Jht-008Vow-1O
+ for samba-technical@lists.samba.org; Mon, 26 Aug 2019 18:27:11 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:To:From:Message-ID:CC;
+ bh=SnefcUqUaAiIr5QsWc4YhhG+2/NAzDH62nXxOI30sfY=; b=Emk7LbQkTBvz7rgW2bgo4bNKkO
+ BS3ZTm/2B59BhE+R7az4aKTSsFNIhVooaG3JfW0gBLxnmpzItmws9ENpnrvHiJmz137cfF1ghftl2
+ EOh95aV79YID3zdRb8867JkL2W/+orhhnResKpXFd7ltK86pAftgd2T+CSz/k0lB8chg=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i2Jhq-0000za-Oc; Mon, 26 Aug 2019 18:27:07 +0000
+Message-ID: <eaf9a97bd517e0b12b871fd5175759e86aa24c53.camel@samba.org>
+Subject: Re: ldb test test_guid_indexed_v1_db fails on ppc64le
+To: Lukas Slebodnik <lslebodn@fedoraproject.org>, 
+ samba-technical@lists.samba.org, Aaron Haslett
+ <aaronhaslett@catalyst.net.nz>
+Date: Tue, 27 Aug 2019 06:27:01 +1200
+In-Reply-To: <20190826112911.GA2711905@10.4.128.1>
+References: <20190826112911.GA2711905@10.4.128.1>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,14 +52,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: P Mairo via samba-technical <samba-technical@lists.samba.org>
-Reply-To: P Mairo <akoudanilo@gmail.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello, here's the link to my final report
+On Mon, 2019-08-26 at 13:29 +0200, Lukas Slebodnik via samba-technical
+wrote:
+> ehlo,
+> 
+> The repack unit test failed just only on ppc64le with ldb-2.0.5
+> Other architectures are ok
+> https://koji.fedoraproject.org/koji/taskinfo?taskID=37286196
+> 
+https://kojipkgs.fedoraproject.org//work/tasks/6219/37286219/build.log
+> 
+> BTW it would be good to suppress error messages
+> "MDB_INVALID: File is not an LMDB file".
+> I could see them also on x86_64
+> 
 
-https://rmpr.github.io/gsoc_2019
+Sadly LMDB is not portable across endian or word length boundaries. 
 
+The only way to fix this is to store a LE version of the LDB file and
+detect which to use.  We don't hit the word length issue because we
+lock this to 64 bit only so far.
+
+Do you think you could have a go at that?
+
+Andrew Bartlett
 -- 
-https://github.com/RMPR/smbcmp <https://github.com/RMPR>
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
+
+
+
