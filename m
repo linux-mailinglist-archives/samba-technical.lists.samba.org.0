@@ -2,41 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 778BA9F0C1
-	for <lists+samba-technical@lfdr.de>; Tue, 27 Aug 2019 18:51:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AC6D9F4F2
+	for <lists+samba-technical@lfdr.de>; Tue, 27 Aug 2019 23:19:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=r5iDTktveqn+SnKH4Bsiz4c5TaVGhXsj4B/rhRHTwPw=; b=1NZi9snqNRn4hMZC1k55yc079b
-	CI+SnbNmgck0sMZVixnp4o4W+byWt3dPVk29AZZgr3zrLxiHnsX8AfqLdaPIKbECj24gx7DM6pu3l
-	XOWkjjIe4YlgYyjyFbO7B7kwzyH9uyhRgaiNIboIFoKcfoWqDohJ1/FBpeEZd1s1LQQBKtCdVt5Zi
-	Ty4N5MDvfW6H8EE6VpNXi980bq9CmtbQA7MMz6VHAjRO05+SIqk2naVDHm/uVXO3jpG2Ips1B9k1N
-	S0OBTSVsnbh1FS7lG6xchMntkW8+12MlKKYoM8DChQTyTJBkYtHJ4I8j0nkA3UxCZYpvySwFZwtsU
-	y7r5lW1g==;
-Received: from localhost ([::1]:27260 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=cFMOEcKCACKDNPPKNkvL7Uc/DPa1qNdDOzfOJqmouRc=; b=Y2PMPzjAEepNQC71qqWwVuARwA
+	r/qHwzJuVRrr0WotVY1RmRs9r54ZgCIH2eEIdP2VQxQh36sk7ROVtTZry1DckD5+r1qacHthFnfjg
+	6fRUfkxXhwsquQrTvWSST2a4S+fC63CHz7u14rdhiOUrxzbi2ILKyzWBNNe+mUsnknCoCxaPD3CB9
+	jmbjgBcr3N5DMnfW8LqJ2w9hR7H6OCYLVoTc8DrnifXoICnlpzSJ2BZzJ1UQOn8/8M2vEdLblwdBH
+	qPdu1XSddCovr2MqnlyxIIhCmk8HzWYokCBQvpBm2aO9Me/+l5VDfLX8jxamZeXA6QvU+84KRbLOG
+	s85GTQ6Q==;
+Received: from localhost ([::1]:35706 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i2egb-008mXG-Mr; Tue, 27 Aug 2019 16:51:13 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60356) 
+	id 1i2ire-008oRe-F9; Tue, 27 Aug 2019 21:18:54 +0000
+Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b]:45483) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i2egX-008mX9-My
- for samba-technical@lists.samba.org; Tue, 27 Aug 2019 16:51:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=r5iDTktveqn+SnKH4Bsiz4c5TaVGhXsj4B/rhRHTwPw=; b=mEPOmmX6aE/PRARY+ChVAbYwbC
- RN75/zoqRadmrcbtgkrfxxHGICOH3an4vNnsqFsppDjZ+97Z+f1UUv5o3B6EgKZlUnusAdcDbw4GI
- p8NEvdT2fJItyIQbAlWbDyBMfm8L2QFRx1uvHkajgWqCIWdHOkdivdvZFwsW5+knBaJQ=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
- (Exim) id 1i2egV-0004By-GP; Tue, 27 Aug 2019 16:51:07 +0000
-Date: Tue, 27 Aug 2019 09:51:04 -0700
-To: Andrew Walker <awalker@ixsystems.com>
-Subject: Re: Add option to sort dacl into canonical order in nfs4_acls
-Message-ID: <20190827165103.GA14309@samba.org>
-References: <CAB5c7xqToOayxaAp9TYexiz-vKFbx-tUnbNqfgNGbE7EYMQ+eg@mail.gmail.com>
+ (Exim) id 1i2ira-008oRW-CI
+ for samba-technical@lists.samba.org; Tue, 27 Aug 2019 21:18:52 +0000
+Received: by mail-lj1-x22b.google.com with SMTP id l1so570701lji.12
+ for <samba-technical@lists.samba.org>; Tue, 27 Aug 2019 14:18:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=aouPgtpoPpIA+2/Nr2nkbP2mN8YjuNQCmpt5/CTcPE4=;
+ b=EhVsnuB60zIZGGiieo8Fm/TZmD/BlpTE9mv+LaHtTfJX6G5dUpxrhPRdHGUsFitQqg
+ ym15bzq1vo1FULL6Tu9jMLjQSztfG0pEiyLCbTa/gwMvJv453zbCH7IWZqH5NXo2OhRP
+ wc5gBHveUZzwiOxlVuxvDU8nOrX2b3+gsl3zQoKHecqriWVeqx/raWcVmFHCegGMlVeD
+ rA8vahF+N/elMc5R+5QE1GQgwtz618mMT9PESU/jFcKRMnYtUU0/eK82EW84qcNhqSpY
+ ZyguRqvrLdkRplL7vcIfzJ8KyHGa/of66s7vHmtScopUJpxG0+IgKDD7tErV1rPfxpYW
+ 2JTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=aouPgtpoPpIA+2/Nr2nkbP2mN8YjuNQCmpt5/CTcPE4=;
+ b=VnJnyMTh84zZBlNN0gBgqmZoZpsyVv1gVeFPGM+XO2uoG18l4PBaKWfHuwbVY6hwTh
+ Bw7tOF+HqqbLguNXS4VHPE5WsYGXNzEJS2bPgmAhdAerM5XKMgAQwXLAhvWa3CsGXWBj
+ rTaxOWu2Khzl24UwNeDKqYiPfqj1AnOtmVwMCURDjHpUwzyDQ5pH37KDtEVjvmuyYkJj
+ tTLeWW38HqaQVK8XiJptaVI/vqI/uVfs7vP8zZMPXCqrDKqYYIXzJefjQ6NpekRGxYYe
+ zXB3MEDOTXjuaQGCbKu2iwR3FXITqV7VDKBNOO1oLqhXYden++MyMe+nduJvt8nm7gm2
+ 37aA==
+X-Gm-Message-State: APjAAAURqh1KwDg5liMDfbvezbxYoHxKwuYOg9pr1ZpL14eRh1HjBKnS
+ 8NvUR/M4AQqpqqzNKOCaQcK+2dPpKY2z+2fGR6Q=
+X-Google-Smtp-Source: APXvYqxKyhUcfFMZdZ2bkWNsj3sBLYIydYXfJFgv/23/BmmsunVfjxRhngrlLyVOwr/Fce6Tv4b69wSKykw2iAj8LzQ=
+X-Received: by 2002:a2e:6111:: with SMTP id v17mr206567ljb.30.1566940727803;
+ Tue, 27 Aug 2019 14:18:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAB5c7xqToOayxaAp9TYexiz-vKFbx-tUnbNqfgNGbE7EYMQ+eg@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+References: <CAELK94cBsS_+AfvaNRCkSdsdjLv5os2D_Wuy5ni41t+jrrYDhA@mail.gmail.com>
+ <MWHPR2101MB07313A73451E5E60C3AB5D96A0A00@MWHPR2101MB0731.namprd21.prod.outlook.com>
+In-Reply-To: <MWHPR2101MB07313A73451E5E60C3AB5D96A0A00@MWHPR2101MB0731.namprd21.prod.outlook.com>
+Date: Tue, 27 Aug 2019 22:18:36 +0100
+Message-ID: <CAELK94eoFPEXXE4ogKQtEjzg6UrH=dVB5pOVkPSj7zkhz1HmOQ@mail.gmail.com>
+Subject: Re: GSOC 2019 - Final report
+To: Tom Talpey <ttalpey@microsoft.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,111 +70,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Christof Schmitt <cs@samba.org>
+From: P Mairo via samba-technical <samba-technical@lists.samba.org>
+Reply-To: P Mairo <akoudanilo@gmail.com>
 Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Aug 27, 2019 at 10:49:19AM -0400, Andrew Walker via samba-technical wrote:
-> There are many ways that applications can write NFS4 ACL entries in a
-> non-canonical order per MS-DTYP 2.4.5. It would be nice to have the option
-> to automatically sort these into canonical order so that Windows doesn't
-> complain when viewing these.  I'm honestly a bit torn regarding the best
-> path forward with this. It's easy to say "you're doing it wrong - fix your
-> ACLs", but I imagine that some admins would want a "stop nagging me" option.
-> 
-> Example of some operations resulting out-of-order ACEs:
-> # file: /mnt/dozer/share/inherited
-> # owner: root
-> # group: smbuser
->       user:smbuser:rwxpDdaARWcCos:-------:allow
->             owner@:rwxpDdaARWcCos:fd----I:allow
->             group@:rwxpDdaARWcCos:fd----I:allow
->          everyone@:--------------:fd----I:allow
-> root@freenas[/mnt/dozer]# setfacl -m u:root:full_set:fd:allow
-> /mnt/dozer/share/inherited
-> root@freenas[/mnt/dozer]# getfacl /mnt/dozer/share/inherited
-> 
-> # file: /mnt/dozer/share/inherited
-> # owner: root
-> # group: smbuser
->          user:root:rwxpDdaARWcCos:fd-----:allow
->       user:smbuser:rwxpDdaARWcCos:-------:allow
->             owner@:rwxpDdaARWcCos:fd----I:allow
->             group@:rwxpDdaARWcCos:fd----I:allow
->          everyone@:--------------:fd----I:allow
-> root@freenas[/mnt/dozer]# chmod 777 /mnt/dozer/share/inherited
-> root@freenas[/mnt/dozer]# getfacl /mnt/dozer/share/inherited
-> # file: /mnt/dozer/share/inherited
-> # owner: root
-> # group: smbuser
->          user:root:rwxpDdaARWcCos:fd-----:allow
->       user:smbuser:rwxpDdaARWcCos:-------:allow
->             owner@:rwxpDdaARWcCos:fdi---I:allow
->             group@:rwxpDdaARWcCos:fdi---I:allow
->          everyone@:--------------:fdi---I:allow
->             owner@:rwxp--aARWcCos:-------:allow
->             group@:rwxp--a-R-c--s:-------:allow
->          everyone@:rwxp--a-R-c--s:-------:allow
+Thank you so much!
 
+Le mar. 27 ao=C3=BBt 2019 =C3=A0 15:33, Tom Talpey <ttalpey@microsoft.com> =
+a =C3=A9crit :
 
-I am not quite familiar with the output here, but i assume this is about
-having inherited ACL entries after explicit ACL entries. If all entries
-are "allow", then reordering them should not be a problem. On the other
-hand, if there are "allow" and "deny" entries, then the order is
-important and reordering would change the meaning of the ACL.
+> Congratulations, Mairo! It's very nice work and we hope to see more in th=
+e
+> future.
+>
+> Tom.
+>
+> > -----Original Message-----
+> > From: samba-technical <samba-technical-bounces@lists.samba.org> On
+> Behalf
+> > Of P Mairo via samba-technical
+> > Sent: Monday, August 26, 2019 9:13 AM
+> > To: P Mairo via samba-technical <samba-technical@lists.samba.org>
+> > Subject: GSOC 2019 - Final report
+> >
+> > Hello, here's the link to my final report
+> >
+> > https://rmpr.github.io/gsoc_2019/
+>
+>
 
-What is the problem to solve here? That an administrator changes the ACL
-through setfacl while not adhering to the order expected by the Windows
-clients?  Ideally, there could be a way in setfacl or even in the file
-system to only allow the Windows ACL order. As this is likely not
-feasible, maybe the "sort_dacl" option could be restricted to only
-reorder if there are only "allow" entries, but skip the reordering if
-there are "deny" entries. With that, the meaning of the ACL would not
-change. In any case, the behavior should also be documented in the man
-pages.
-
-Christof
-
-> diff --git a/source3/modules/nfs4_acls.c b/source3/modules/nfs4_acls.c
-> index 4d50223..6011a72 100644
-> --- a/source3/modules/nfs4_acls.c
-> +++ b/source3/modules/nfs4_acls.c
-> @@ -107,6 +107,10 @@ int smbacl4_get_vfs_params(struct connection_struct *conn,
->  
->  	params->map_full_control = lp_acl_map_full_control(SNUM(conn));
->  
-> +	params->sort_dacl = lp_parm_bool(SNUM(conn),
-> +					 SMBACL4_PARAM_TYPE_NAME,
-> +					 "sort_dacl", False);
-> +
->  	DEBUG(10, ("mode:%s, do_chown:%s, acedup: %s map full control:%s\n",
->  		enum_smbacl4_modes[params->mode].name,
->  		params->do_chown ? "true" : "false",
-> @@ -532,6 +536,11 @@ static NTSTATUS smb_get_nt_acl_nfs4_common(const SMB_STRUCT_STAT *sbuf,
->  		return NT_STATUS_NO_MEMORY;
->  	}
->  
-> +	if ((*ppdesc)->dacl && params->sort_dacl) {
-> +		dacl_sort_into_canonical_order((*ppdesc)->dacl->aces,
-> +					       (unsigned int)(*ppdesc)->dacl->num_aces);
-> +	}
-> +
->  	DEBUG(10, ("smb_get_nt_acl_nfs4_common successfully exited with "
->  		   "sd_size %d\n",
->  		   (int)ndr_size_security_descriptor(*ppdesc, 0)));
-> diff --git a/source3/modules/nfs4_acls.h b/source3/modules/nfs4_acls.h
-> index c9fcf6d..ad981a3 100644
-> --- a/source3/modules/nfs4_acls.h
-> +++ b/source3/modules/nfs4_acls.h
-> @@ -113,6 +113,7 @@ struct smbacl4_vfs_params {
->  	bool do_chown;
->  	enum smbacl4_acedup_enum acedup;
->  	bool map_full_control;
-> +	bool sort_dacl;
->  };
->  
->  int smbacl4_get_vfs_params(struct connection_struct *conn,
-
-
+--=20
+https://github.com/RMPR
