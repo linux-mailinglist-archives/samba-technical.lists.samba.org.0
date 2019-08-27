@@ -2,61 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AC6D9F4F2
-	for <lists+samba-technical@lfdr.de>; Tue, 27 Aug 2019 23:19:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D396F9F709
+	for <lists+samba-technical@lfdr.de>; Wed, 28 Aug 2019 01:48:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=cFMOEcKCACKDNPPKNkvL7Uc/DPa1qNdDOzfOJqmouRc=; b=Y2PMPzjAEepNQC71qqWwVuARwA
-	r/qHwzJuVRrr0WotVY1RmRs9r54ZgCIH2eEIdP2VQxQh36sk7ROVtTZry1DckD5+r1qacHthFnfjg
-	6fRUfkxXhwsquQrTvWSST2a4S+fC63CHz7u14rdhiOUrxzbi2ILKyzWBNNe+mUsnknCoCxaPD3CB9
-	jmbjgBcr3N5DMnfW8LqJ2w9hR7H6OCYLVoTc8DrnifXoICnlpzSJ2BZzJ1UQOn8/8M2vEdLblwdBH
-	qPdu1XSddCovr2MqnlyxIIhCmk8HzWYokCBQvpBm2aO9Me/+l5VDfLX8jxamZeXA6QvU+84KRbLOG
-	s85GTQ6Q==;
-Received: from localhost ([::1]:35706 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=3LuUGGtEokBNpfQAeegwxURTy+FRvCVO30TCRCEuxbg=; b=sNApVnF4X21hrGiCMq2FJmCM0W
+	oqEY7Ktdab4z8sVa2yTOkHo6wk7WQpkB1c0eHM8no6p6QFDKgWA0Z29Za4ngI2+c0fH0/jKuGgLg2
+	H1zu0TdGAeS2w7aOETdQdpZAakmRI7PEarHoKAs4jiPkal5/fm5/uRSK78OOsL/u8xjmzZ7gMutWM
+	pO9Z75YTARcGBTQNYzIpcXiKmbC3aZ5HpcCzfQziUjB1svSmpY1oQa29TCn275F+KKVQ1g3PV3+yC
+	jwjCYCUF2uw2wqIaKMRYZkj/P9hU8I2cuK3EULsM3HH2Wu0gRZTRinslTcEJ85FycQinvH4JW6UJD
+	39Emx8cQ==;
+Received: from localhost ([::1]:44998 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i2ire-008oRe-F9; Tue, 27 Aug 2019 21:18:54 +0000
-Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b]:45483) 
+	id 1i2lBr-008q8g-9D; Tue, 27 Aug 2019 23:47:55 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11364) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i2ira-008oRW-CI
- for samba-technical@lists.samba.org; Tue, 27 Aug 2019 21:18:52 +0000
-Received: by mail-lj1-x22b.google.com with SMTP id l1so570701lji.12
- for <samba-technical@lists.samba.org>; Tue, 27 Aug 2019 14:18:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=aouPgtpoPpIA+2/Nr2nkbP2mN8YjuNQCmpt5/CTcPE4=;
- b=EhVsnuB60zIZGGiieo8Fm/TZmD/BlpTE9mv+LaHtTfJX6G5dUpxrhPRdHGUsFitQqg
- ym15bzq1vo1FULL6Tu9jMLjQSztfG0pEiyLCbTa/gwMvJv453zbCH7IWZqH5NXo2OhRP
- wc5gBHveUZzwiOxlVuxvDU8nOrX2b3+gsl3zQoKHecqriWVeqx/raWcVmFHCegGMlVeD
- rA8vahF+N/elMc5R+5QE1GQgwtz618mMT9PESU/jFcKRMnYtUU0/eK82EW84qcNhqSpY
- ZyguRqvrLdkRplL7vcIfzJ8KyHGa/of66s7vHmtScopUJpxG0+IgKDD7tErV1rPfxpYW
- 2JTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=aouPgtpoPpIA+2/Nr2nkbP2mN8YjuNQCmpt5/CTcPE4=;
- b=VnJnyMTh84zZBlNN0gBgqmZoZpsyVv1gVeFPGM+XO2uoG18l4PBaKWfHuwbVY6hwTh
- Bw7tOF+HqqbLguNXS4VHPE5WsYGXNzEJS2bPgmAhdAerM5XKMgAQwXLAhvWa3CsGXWBj
- rTaxOWu2Khzl24UwNeDKqYiPfqj1AnOtmVwMCURDjHpUwzyDQ5pH37KDtEVjvmuyYkJj
- tTLeWW38HqaQVK8XiJptaVI/vqI/uVfs7vP8zZMPXCqrDKqYYIXzJefjQ6NpekRGxYYe
- zXB3MEDOTXjuaQGCbKu2iwR3FXITqV7VDKBNOO1oLqhXYden++MyMe+nduJvt8nm7gm2
- 37aA==
-X-Gm-Message-State: APjAAAURqh1KwDg5liMDfbvezbxYoHxKwuYOg9pr1ZpL14eRh1HjBKnS
- 8NvUR/M4AQqpqqzNKOCaQcK+2dPpKY2z+2fGR6Q=
-X-Google-Smtp-Source: APXvYqxKyhUcfFMZdZ2bkWNsj3sBLYIydYXfJFgv/23/BmmsunVfjxRhngrlLyVOwr/Fce6Tv4b69wSKykw2iAj8LzQ=
-X-Received: by 2002:a2e:6111:: with SMTP id v17mr206567ljb.30.1566940727803;
- Tue, 27 Aug 2019 14:18:47 -0700 (PDT)
+ (Exim) id 1i2lBm-008q8Y-T3
+ for samba-technical@lists.samba.org; Tue, 27 Aug 2019 23:47:53 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=3LuUGGtEokBNpfQAeegwxURTy+FRvCVO30TCRCEuxbg=; b=IPDuJkQ8kx38pASa1xMOUYHXtz
+ hCTGZw856B7lbrJJeoEV9U2RtbKuRn2hQASsNUFKsXZf9/sFek9sZyoIWwlO44XLjYeeVZFfhB2cM
+ yAq1cJi5iGVJlrlAZ5jH6JFvYJW1963d6Te+52El0Vz7akhBtMHMHD50t7RXMuVOXa74=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i2lBj-0007U0-DC; Tue, 27 Aug 2019 23:47:47 +0000
+Date: Tue, 27 Aug 2019 16:47:44 -0700
+To: Richard Sharpe <realrichardsharpe@gmail.com>
+Subject: Re: smbclient having problems connecting to a NetApp C-Mode system
+ with kerberos
+Message-ID: <20190827234744.GA219881@jra4>
+References: <CACyXjPxjPoewRRghAem6ZKX7VSihjno5OoO_BNV3GnOBiSJDyg@mail.gmail.com>
 MIME-Version: 1.0
-References: <CAELK94cBsS_+AfvaNRCkSdsdjLv5os2D_Wuy5ni41t+jrrYDhA@mail.gmail.com>
- <MWHPR2101MB07313A73451E5E60C3AB5D96A0A00@MWHPR2101MB0731.namprd21.prod.outlook.com>
-In-Reply-To: <MWHPR2101MB07313A73451E5E60C3AB5D96A0A00@MWHPR2101MB0731.namprd21.prod.outlook.com>
-Date: Tue, 27 Aug 2019 22:18:36 +0100
-Message-ID: <CAELK94eoFPEXXE4ogKQtEjzg6UrH=dVB5pOVkPSj7zkhz1HmOQ@mail.gmail.com>
-Subject: Re: GSOC 2019 - Final report
-To: Tom Talpey <ttalpey@microsoft.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CACyXjPxjPoewRRghAem6ZKX7VSihjno5OoO_BNV3GnOBiSJDyg@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,36 +51,28 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: P Mairo via samba-technical <samba-technical@lists.samba.org>
-Reply-To: P Mairo <akoudanilo@gmail.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
 Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Thank you so much!
+On Thu, Aug 22, 2019 at 08:51:59AM -0700, Richard Sharpe via samba-technical wrote:
+> Hi folks,
+> 
+> If I try to use Kerberos with a NetApp C-Mode system (simulator) after
+> doing a kinit, I get the following error:
+> 
+> "gse_get_client_auth_token: gss_init_sec_context failed with
+> [Unspecified GSS failure.  Minor code may provide more information:
+> Message stream modified](2529638953)"
+> 
+> The only thing I can find that might be related is a suggestion to
+> switch off AES.
+> 
+> Has anyone seen this problem?
 
-Le mar. 27 ao=C3=BBt 2019 =C3=A0 15:33, Tom Talpey <ttalpey@microsoft.com> =
-a =C3=A9crit :
+Seen it reported via Googling (on other apps). What does
+wireshark say when you look at the stream ? Debug level
+10 ?
 
-> Congratulations, Mairo! It's very nice work and we hope to see more in th=
-e
-> future.
->
-> Tom.
->
-> > -----Original Message-----
-> > From: samba-technical <samba-technical-bounces@lists.samba.org> On
-> Behalf
-> > Of P Mairo via samba-technical
-> > Sent: Monday, August 26, 2019 9:13 AM
-> > To: P Mairo via samba-technical <samba-technical@lists.samba.org>
-> > Subject: GSOC 2019 - Final report
-> >
-> > Hello, here's the link to my final report
-> >
-> > https://rmpr.github.io/gsoc_2019/
->
->
-
---=20
-https://github.com/RMPR
