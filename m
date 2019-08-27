@@ -2,46 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B76539D736
-	for <lists+samba-technical@lfdr.de>; Mon, 26 Aug 2019 22:08:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB93D9DB98
+	for <lists+samba-technical@lfdr.de>; Tue, 27 Aug 2019 04:18:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=TS6DaTC9EiDb4h/m7Xxl5lj2znGPqPWnMO1cyEL68UU=; b=F2ggyPY2GVXCGd5/l7H9j/N6b8
-	IigmQiSyrfzRLJmyJO36JMnHBA7u35XN6rfZkr+KAa2k5fMW7cCj5V683VfcHJHf22H+fUB6w7ULA
-	bF3nnBZeHobTulB0K+JhrgVmUAzYX8oempyl4ffqowwBTO/XTd32O/0lD8v2oG8YwLyghIWMqJ4lk
-	wFvc8EXE25LCffG5o2J3DwVL0p7jARD7ZaBfLAbJ44p4e7eGcvkN9xQ56F8R5qzHotAO32kLRfvG7
-	KoydHBTd4o8j6XhZvepfCdtnWkTnw97MHmOMVtbM3SfvFm4YgKH6TKlX+MwmhQh6LrAvcSs/m/GOM
-	Kiq3h7lg==;
-Received: from localhost ([::1]:41330 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=ZMYagr/WE3Y3IEP0n4+4SEYN+FXlCIELHPdQhlAEA9Q=; b=15VUF32EL3LMHLhYuj8YqDUfys
+	XGmr/qVUT7JekAn546K5u6akqV54OMEUihSe1ewTXz5OOp7MSCavLFx//3ZtMqDzQcWRvcWRFFl4F
+	8A8EKCaIAfKJYPrBPD39gS5ttUZOt7gjo4bybkJCPX9worQEBkGtWrRHXVvy4bZk4fWhhIbi/3fb0
+	TyCnYRnYFeM6qxLlmFEUanBuKXEXirG8p4rdUNMDDJJPDATDr7qRqEOyDj7r6mO/qBwhFxSK5Gq0C
+	vK/cKMT0X651naCHaWlRcopAGEtK3bed5YSSevL6MyfpSKvwx003xgAUVCj7OLK9gEPJMAfHl9bS/
+	+J8SaZNQ==;
+Received: from localhost ([::1]:18420 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i2LHU-008XpB-O4; Mon, 26 Aug 2019 20:08:00 +0000
-Received: from mx1.redhat.com ([209.132.183.28]:59826) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1i2LHP-008Xp4-Pu
- for samba-technical@lists.samba.org; Mon, 26 Aug 2019 20:07:58 +0000
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id F001748FD;
- Mon, 26 Aug 2019 20:07:51 +0000 (UTC)
-Received: from 10.4.128.1 (ovpn-204-46.brq.redhat.com [10.40.204.46])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id E25AB196AE;
- Mon, 26 Aug 2019 20:07:50 +0000 (UTC)
-Date: Mon, 26 Aug 2019 22:07:48 +0200
-To: Andrew Bartlett <abartlet@samba.org>
-Subject: Re: ldb test test_guid_indexed_v1_db fails on ppc64le
-Message-ID: <20190826200748.GB2733638@10.4.128.1>
-References: <20190826112911.GA2711905@10.4.128.1>
- <eaf9a97bd517e0b12b871fd5175759e86aa24c53.camel@samba.org>
+	id 1i2R3D-008byG-Ee; Tue, 27 Aug 2019 02:17:39 +0000
+Received: from ozlabs.org ([2401:3900:2:1::2]:59427) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i2R38-008by8-Sv
+ for samba-technical@lists.samba.org; Tue, 27 Aug 2019 02:17:37 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 46HXZS1njcz9s7T;
+ Tue, 27 Aug 2019 12:17:20 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
+ t=1566872240; bh=6lS79QxirNZBhRrQOpsEV0shEjoMuuVKJ7YMuCm/Wq4=;
+ h=Date:From:To:Subject:From;
+ b=PGDs7LVwLNRD6D955q6iEcuuAp6y4Qbk9AuBGcjXDIAjB9vPoFdf0cjJOdp9ETmVa
+ 8NMM7acQtqayEbbO1DnD7FcNQqI0qmxUkdfaMBl9JJie7b0y/xoB5RqvYchjRJaiV8
+ gf/7f8wY3/uki1FbF/H+It0rtMpdUovZjqxm6caKZESHpVpW3C4IHeVEDpcPM57w3Z
+ UuxlPq4fpzhfKB4BGv949WbtnxUjCs/kZt3nqfnNi27mA/W9VcBwyaqELB5S6I1Rjf
+ FbSmg5Sf21zOJUNMJof3be8h9QLNvAXvx7A65AisfnqF1Ao+HfuvDej1ZAWw2Hxvc0
+ jinigbjU3FN4Q==
+Date: Tue, 27 Aug 2019 12:17:19 +1000
+To: Samba Technical <samba-technical@lists.samba.org>
+Subject: [PATCH] ctdb-recoverd: Fix typo in previous fix
+Message-ID: <20190827121719.2be9307f@martins.ozlabs.org>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <eaf9a97bd517e0b12b871fd5175759e86aa24c53.camel@samba.org>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
- (mx1.redhat.com [10.5.110.71]); Mon, 26 Aug 2019 20:07:52 +0000 (UTC)
+Content-Type: multipart/mixed; boundary="MP_/a_1m0sIHc+E_/84AvRr=pWp"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,56 +54,59 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Lukas Slebodnik via samba-technical <samba-technical@lists.samba.org>
-Reply-To: lslebodn@fedoraproject.org
-Cc: Aaron Haslett <aaronhaslett@catalyst.net.nz>,
- samba-technical@lists.samba.org
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On (27/08/19 06:27), Andrew Bartlett wrote:
->On Mon, 2019-08-26 at 13:29 +0200, Lukas Slebodnik via samba-technical
->wrote:
->> ehlo,
->> 
->> The repack unit test failed just only on ppc64le with ldb-2.0.5
->> Other architectures are ok
->> https://koji.fedoraproject.org/koji/taskinfo?taskID=37286196
->> 
->https://kojipkgs.fedoraproject.org//work/tasks/6219/37286219/build.log
->> 
->> BTW it would be good to suppress error messages
->> "MDB_INVALID: File is not an LMDB file".
->> I could see them also on x86_64
->> 
->
->Sadly LMDB is not portable across endian or word length boundaries. 
->
->The only way to fix this is to store a LE version of the LDB file and
->detect which to use.  We don't hit the word length issue because we
->lock this to 64 bit only so far.
->
+--MP_/a_1m0sIHc+E_/84AvRr=pWp
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-IIUC:
-* x86_64  is little endian and 64 bit
-* ppc64le is little endian and 64 bit
+The typo will probably do no harm but logically it is very wrong.  :-(
 
-So I do not see any difference and therefore I am confused here.
-And there was not any failure on s390x which is big endian.
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=14085
 
->Do you think you could have a go at that?
->
+Please review and maybe push...
 
-Is your comment related to the error message "MDB_INVALID: File is not an LMDB
-file"  or to the failure in the test?
+peace & happiness,
+martin
 
-I am sorry but I am lost.
-Moreover, the error " (1, 'Failure during prepare_write): Corrupt database -> Operations error')"
-and my knowledge of ldb/tdb/lmdb is not sufficient for debugging
-I already gave up after an hour. I am sorry I do not have days for that,
+--MP_/a_1m0sIHc+E_/84AvRr=pWp
+Content-Type: text/x-patch
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename=0001-ctdb-recoverd-Fix-typo-in-previous-fix.patch
 
-But I have an access to the ppc64le machine and I can help
-with providing debug output with some trace messages if it helps.
+From fb425383d263c31bf84f38d623ed03459b463001 Mon Sep 17 00:00:00 2001
+From: Martin Schwenke <martin@meltin.net>
+Date: Tue, 27 Aug 2019 12:13:51 +1000
+Subject: [PATCH] ctdb-recoverd: Fix typo in previous fix
 
-LS
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=14085
+
+Signed-off-by: Martin Schwenke <martin@meltin.net>
+---
+ ctdb/server/ctdb_recoverd.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ctdb/server/ctdb_recoverd.c b/ctdb/server/ctdb_recoverd.c
+index c1c2a88b12c..5f7fd71ae41 100644
+--- a/ctdb/server/ctdb_recoverd.c
++++ b/ctdb/server/ctdb_recoverd.c
+@@ -2998,7 +2998,7 @@ static void main_loop(struct ctdb_context *ctdb, struct ctdb_recoverd *rec,
+ 			continue;
+ 		}
+ 		if (! ctdb_node_has_capabilities(rec->caps,
+-						 ctdb->nodes[j]->pnn,
++						 nodemap->nodes[j].pnn,
+ 						 CTDB_CAP_LMASTER)) {
+ 			continue;
+ 		}
+-- 
+2.23.0.rc1
+
+
+--MP_/a_1m0sIHc+E_/84AvRr=pWp--
 
