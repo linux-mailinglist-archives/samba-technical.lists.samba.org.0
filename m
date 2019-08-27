@@ -2,51 +2,40 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE4509E38D
-	for <lists+samba-technical@lfdr.de>; Tue, 27 Aug 2019 11:02:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A2969E43D
+	for <lists+samba-technical@lfdr.de>; Tue, 27 Aug 2019 11:31:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=7hAvHPXFsqeTBvgi9n+tpitfZzoeJTqkiK/kUjLixv0=; b=hOGNhVGEIDAYE2Yx5UF/AMXE5k
-	J72QWEx8cpuK4ucKCELL2ZMh0W+qW7CVeixbn9iTrUmXDPn6Aqnf1Gm2CvVsNISnBj5SdXsvrF42C
-	WIUnAgwuEIBXs26xwVS2ZLtHAK2GbzeqZEnFck5ehKGWu5VH/LMxHDZY2GVkReUZMiXn6+Vm8vE+M
-	MG6RBOk+5tOavX90N29X1SJNUGFGkdWH/K6dQ7/eImhFqULYFNczhdIzrsQpuW2aZFeIObokMNf98
-	I1hgeyXuNVVjLdcbU16yTAuN2m9BFZk+PBRWGCrXXYLIz9dizewBKTCmFlKwa10N4wK7BmsQKPgch
-	/ZAOPWYw==;
-Received: from localhost ([::1]:28750 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=sE1s0GaYiq3wRQGMtNHa09NoJMjfaZwvp61bQ6lTZxM=; b=29WB0QE5X/1/VqUb9KUd+nKMmc
+	w6wqpdvcwccIB6nN04uvJMYQfOKkRrK4NJ9Xzh+rAioGIMxbUOZXlcN562332yFJwtMnunywxpyX/
+	9rLggq4y6vGAv6Zw1DeNSDYTfzTrTrt6pu3u83sbtX5+VIdLGHWAkYpL723VdecOs3DhDgg2YpWsi
+	RnMOS53TdIXNPBBaUITivo7nD86XnPvNCKukgxo5LVVmWeykmtB7s3DxllV3pj1h7D5tST+9oqb+W
+	hfoUhlJ4M/Vq9nTPNj4hAi0QMG9LBS2dM2JEHo/FjzHv2rZrbc1D2iEDpAvmSNLd6sc9aLLK70fMo
+	D5Owu3pA==;
+Received: from localhost ([::1]:31738 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i2XMa-008eor-8e; Tue, 27 Aug 2019 09:02:04 +0000
-Received: from latitanza.investici.org ([82.94.249.234]:32353) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i2XMV-008eok-KC
- for samba-technical@lists.samba.org; Tue, 27 Aug 2019 09:02:02 +0000
-Received: from mx3.investici.org (localhost [127.0.0.1])
- by latitanza.investici.org (Postfix) with ESMTP id D56DB12049D;
- Tue, 27 Aug 2019 09:01:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cryptolab.net;
- s=stigmate; t=1566896508;
- bh=7hAvHPXFsqeTBvgi9n+tpitfZzoeJTqkiK/kUjLixv0=;
- h=From:To:Cc:In-Reply-To:References:Subject:Resent-From:Resent-To:
- Resent-Cc:Date:From;
- b=e2GjH0XtiBP8nqLCcXv1YRJAggRB4jZLjQQ96QDyXRipbMrhhNtOZ8xtpGL2c73do
- +IDxgkd+14671578TUFI9Z8wgEfpe/JgKKpIKWHUpFg1G5lFoK7a4a/yXuoO5jvGd2
- Ce99Ru1TMsa/jfC+Zmm5eeFX6LOpI4zZBCYLWA7c=
-Received: from [82.94.249.234] (mx3.investici.org [82.94.249.234])
- (Authenticated sender: anoopcs@autistici.org) by localhost (Postfix) with
- ESMTPSA id 17D3E120145; Tue, 27 Aug 2019 09:01:46 +0000 (UTC)
-Message-ID: <5b898b9f283f59da6ede16ca748e18ad4c02f518.camel@cryptolab.net>
-To: samba-technical <samba-technical@lists.samba.org>
-In-Reply-To: <b271e08ddfa327529a3579d5d2fbefe269a8de64.camel@cryptolab.net>
-References: <e3886f8fcb0ed4aae2965099bcdb0b4ff35a581a.camel@cryptolab.net>
- <b271e08ddfa327529a3579d5d2fbefe269a8de64.camel@cryptolab.net>
-Content-Type: text/plain; charset="UTF-8"
+	id 1i2XoP-008fLN-0B; Tue, 27 Aug 2019 09:30:49 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35798) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i2XoG-008fJx-1B; Tue, 27 Aug 2019 09:30:42 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:To:From:Date:CC;
+ bh=sE1s0GaYiq3wRQGMtNHa09NoJMjfaZwvp61bQ6lTZxM=; b=AXHemb+gc/w1jQ8qrO5c3B9Z7L
+ DdQYNIDc5YkyJcNGcjDEgTozi4cX8SM6ONUvo2L9BiAKLxO+e1qmy5n2mr/lcCsg9/glKOaUPh/HK
+ W3rWUVkm8mTgvQURJQ8qjOb5cAzbdz4LrDpdmQjaYTaAZb9fdEAZQjpIyfSuM5syu9ZQ=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i2XoF-0008L4-N7; Tue, 27 Aug 2019 09:30:39 +0000
+Date: Tue, 27 Aug 2019 11:30:38 +0200
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.9.12 Available for Download
+Message-ID: <20190827093036.GA10303@carrie2>
 MIME-Version: 1.0
-Subject: Re: NT_STATUS_INVALID_HANDLE during file open with  vfs_glusterfs
-Resent-From: Anoop C S <anoopcs@cryptolab.net>
-Resent-To: samba-technical <samba-technical@lists.samba.org>
-Resent-Cc: Jeremy Allison <jra@samba.org>
-Date: Tue, 27 Aug 2019 14:31:41 +0530
-User-Agent: Evolution 3.32.4 (3.32.4-1.fc30) 
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="fdj2RfSjLxBAspz7"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,50 +49,141 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Anoop C S via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Anoop C S <anoopcs@cryptolab.net>
-Cc: "Volker.Lendecke" <Volker.Lendecke@SerNet.DE>,
- Jeremy Allison <jra@samba.org>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2019-08-21 at 08:43 +0530, Anoop C S via samba-technical wrote:
-> On Mon, 2019-08-05 at 19:52 +0530, Anoop C S via samba-technical
-> wrote:
-> > Hi all,
-> >=20
-> > The following commit changed the way in which O_NONBLOCK is
-> > added/removed from file status flags during open.
-> >=20
-> > https://git.samba.org/?p=3Dsamba.git;a=3Dcommit;h=3Def582ffcf3a220b73f6=
-78d9bce0fd37800f76c54
-> > smbd: Always open files with O_NONBLOCK
-> >=20
-> > Since O_NONBLOCK is now internally getting added unconditionally,
-> > storage backed by GlusterFS volumes using vfs_glusterfs produces
-> > *Invalid file handle* error while opening files(I tested from
-> > Windows).
-> > set_blocking() from open_file() is now being invoked due to the
-> > presence of O_NONBLOCK flag and fails at fcntl() call operating on
-> > fsp-
-> > > fh->fd which is obviously bad and returns EBADF.
-> >=20
-> > Thus when open file descriptors are handled as fsp_extensions we
-> > may
-> > have to rely on VFS itself to get the job done.
->=20
-> Based on follow-up offline discussions proposing the attached patch
-> for
-> review. Since this is not supposed to be land in release branches I
-> hope we are good with not adding the BUG in commit message.
->=20
-> Pipeline:
-> https://gitlab.com/samba-team/devel/samba/pipelines/77444128
 
-Pipeline after recent VFS changes:
-https://gitlab.com/samba-team/devel/samba/pipelines/78439007
+--fdj2RfSjLxBAspz7
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Thanks,
-> Anoop C S.=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
+			"Predicting rain doesn't count.
+			 Building arks does."
 
+			 Warren Buffett
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
+
+
+Release Announcements
+---------------------
+
+This is the latest stable release of the Samba 4.9 release series.
+
+
+Changes since 4.9.11:
+---------------------
+
+o  Michael Adam <obnox@samba.org>
+   * BUG 13972: vfs:glusterfs_fuse: Different Device Id for GlusterFS FUSE =
+mount
+     is causing data loss in CTDB cluster.
+   * BUG 14010: vfs:glusterfs_fuse: Unable to create or rename file/directo=
+ry
+     inside shares configured with vfs_glusterfs_fuse module.
+
+o  Bj=C3=B6rn Baumbach <bb@sernet.de>
+   * BUG 13973: samba-tool: Add 'import samba.drs_utils' to fsmo.py.
+
+o  Tim Beale <timbeale@catalyst.net.nz>
+   * BUG 14008: dsdb: Handle DB corner-case where PSO container doesn't exi=
+st.
+   * BUG 14021: s4/libnet: Fix joining a Windows pre-2008R2 DC.
+
+o  Ralph Boehme <slow@samba.org>
+   * BUG 14015: vfs_catia: Pass stat info to synthetic_smb_fname().
+   * BUG 14033: Samba 4.9 doesn't build with libtevent 0.9.39.
+
+o  Alexander Bokovoy <ab@samba.org>
+   * BUG 14091: lookup_name: Allow own domain lookup when flags =3D=3D 0.
+
+o  Isaac Boukris <iboukris@gmail.com>
+   * BUG 11362: Add PrimaryGroupId to group array in DC response.
+
+o  Anoop C S <anoopcs@redhat.com>
+   * BUG 14035: vfs_glusterfs: Enable profiling for file system operations.
+
+o  Stefan Metzmacher <metze@samba.org>
+   * BUG 13915: DEBUGC and DEBUGADDC doesn't print into a class specific log
+     file.=20
+   * BUG 13949: Request to keep deprecated option "server schannel", VMWare
+     Quickprep requires "auto".
+   * BUG 13967: dbcheck: Fallback to the default tombstoneLifetime of 180 d=
+ays.
+   * BUG 13969: dnsProperty fails to decode values from older Windows versi=
+ons.
+   * BUG 13973: samba-tool: fsmo transfer is not reliable for the dns relat=
+ed
+     partitions role transfer.
+
+o  Christof Schmitt <cs@samba.org>
+   * BUG 14032: vfs_gpfs: Fix NFSv4 ACL for owner with IDMAP_TYPE_BOTH.
+
+o  Rafael David Tinoco <rafaeldtinoco@ubuntu.com>
+   * BUG 14017: ctdb-config: Depend on /etc/ctdb/nodes file.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the "Samba 4.1 and newer" product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+        https://www.samba.org/samba/history/samba-4.9.12.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--fdj2RfSjLxBAspz7
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCXWT4OQAKCRAoaL1+KxeT
+UUfmAJ9HxhENagQQuyMUKQUIptRybDY4fQCeIdOCfGmm9TmBJmicqHovkv6blc4=
+=kuDE
+-----END PGP SIGNATURE-----
+
+--fdj2RfSjLxBAspz7--
 
