@@ -2,55 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4099BA0822
-	for <lists+samba-technical@lfdr.de>; Wed, 28 Aug 2019 19:08:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DB74A097D
+	for <lists+samba-technical@lfdr.de>; Wed, 28 Aug 2019 20:32:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=EBY6mPGPk7XKIzv/E/9IDEPFvp1m4f/pGntC1L9NkPc=; b=tm49rSciPfcZgXwP1Ny+NBtItN
-	5kBoztNxaxTcVUWYpZIM89ZbgLMkftT7ZSaZy2+UfbpYa1xJZPNAgJ/34IvVN7GIF+BbYxn/Oy5ZJ
-	J/80IQVzaqtUL7E9xnof2zv7b2uZ4+Q+N7wGG/rOSPeTBC1t6tLH4N7lSwaEZELbVVZGGLNrjm4/F
-	0gQltL6+jJxF3KHBuN5MrUjXQOsHieuiy6IZD+wkvfuZRkjkCeVDPE+P+HgBzINvvCA3+CsVh4rPZ
-	hWeZUj+3UZidlR+KDMZPNHfFEsjgyP9FLIkrxdC/DTP1q5KYTpv/LR9Zr9jCZLfHeyEzPAGW1CLJU
-	94Dv/QUQ==;
-Received: from localhost ([::1]:28920 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=sYwZXgUwvDn0lM7SIkA8H7cgSgRqccr1r9cgfz5izEk=; b=ptVst4Qu0JvjawfuN1JPPSHZcC
+	7qFvZFELI1dYQfJRPSIlnsEVjAt/P2jBbRWEHCq+tudwITR84kqOtLPSQLlIgKu+XunpwoU+eteqO
+	F/3TKUcP3Jij1abISgegyJtbEE9kQORpB3O5RNAEE4fh5QX0jS0mWiF5UUcyrv3pENS4GjZspbqet
+	T2HOMS92abe6tGQgKRN5JamHPdXboDikw4G76R6E9is/m6QVR6ydd+f2KXeyazvcQfgbdVQuotmmZ
+	vOxyWc5/DRUeSxbiVlnXIoNRFpUMuEoukhBbblzilrdZ1pauNHHw0jcikowmbWyqRRPnkSwNiAq2F
+	M0oCXYSA==;
+Received: from localhost ([::1]:35450 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i31Qu-0002Qg-SX; Wed, 28 Aug 2019 17:08:32 +0000
-Received: from mx1.redhat.com ([209.132.183.28]:36176) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1i31Qq-0002Pe-Ci
- for samba-technical@lists.samba.org; Wed, 28 Aug 2019 17:08:30 +0000
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 628C081F25
- for <samba-technical@lists.samba.org>; Wed, 28 Aug 2019 17:08:24 +0000 (UTC)
-Received: by mail-ed1-f70.google.com with SMTP id w15so379464edv.17
- for <samba-technical@lists.samba.org>; Wed, 28 Aug 2019 10:08:24 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=EBY6mPGPk7XKIzv/E/9IDEPFvp1m4f/pGntC1L9NkPc=;
- b=ifbpeqo3RAYZtxOZHQx51ygk+3rsKauTyEXPHK5UuVe6Yv+PnYXB5qUXuethr5Ae4H
- uHMSya07mbyEtE1N7CL26hvrI0zE257gBagWyV8s4xK07ghr5JOQkvJbyxWhTUDvsSeE
- w+akeceyq37ZNKkH36z1+28yWx3cwWaMvqPj1H2sTNS+2yfz/Rj5Z/WgPZvp0TBkm8tj
- 3hNswoTSx7JlDUCquKZtqLYS95fadVQdF8ykj475wEuhY4eO3AAruhgDRRRqv+NlDSG7
- jRqOqX+wOkVLPMQxtOYgQaMtNp+g3RVzpYPZaCvnSu5tF7r9ve9pbpdzwPjZ1oylpQLY
- FWnQ==
-X-Gm-Message-State: APjAAAUtpFQ9KH+Cf8asPvYjl6Uty6C2PXCqjspdh5j5bjbKDIHugRFF
- LJyK758MR8Me+HllH0FVztE1sR8HIUVaxKepA4Ff8yG4xzLIm8ehDwV7d0R9hl1mebDL9vpQbnn
- IQnEH8FTYYMOrMZzDgXhmGsQ2/sgz7KlMHIyAaoQ84yUc
-X-Received: by 2002:a50:da02:: with SMTP id z2mr5165892edj.254.1567012102924; 
- Wed, 28 Aug 2019 10:08:22 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqwc4iKqf5/z3eizfa61hwnYn9Hl0Z8YcgqAD/iTQsRHYjNhV2dpUYjxwqjspG0u0ez4EGNU1zs3ab7mVAZ2Y14=
-X-Received: by 2002:a50:da02:: with SMTP id z2mr5165875edj.254.1567012102772; 
- Wed, 28 Aug 2019 10:08:22 -0700 (PDT)
-MIME-Version: 1.0
-Date: Wed, 28 Aug 2019 19:08:11 +0200
-Message-ID: <CAEiGmB+e_BcL=shJ6y+ePa2Ja4d8xw1NpZSXc3sym6EGV=DD-g@mail.gmail.com>
-Subject: Join a domain independently of local hostname
-To: samba-technical@lists.samba.org, Andreas Schneider <anschnei@redhat.com>
+	id 1i32k0-0003Pz-5R; Wed, 28 Aug 2019 18:32:20 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39592) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i32jv-0003Ps-S2
+ for samba-technical@lists.samba.org; Wed, 28 Aug 2019 18:32:18 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:To:From:Message-ID:CC;
+ bh=sYwZXgUwvDn0lM7SIkA8H7cgSgRqccr1r9cgfz5izEk=; b=ssHTR1WlsMMdjidbQslQowvWpJ
+ b2EbOVC1FJRolqmlKLjOUx73wIbQKc1Z+y4t8924fVybesuFswo+yz1sHtwoufBz2l7wl7k+uxMAU
+ WEh/hUAcTz6BvnDVJ6UsUvPu1OTQVJqKF1VtbmPohV9FzDH1zHO5T27s2uOz7x3Adjio=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i32ju-0001gg-O6; Wed, 28 Aug 2019 18:32:15 +0000
+Message-ID: <ee7ef5951ba67e788cff73811a29cda46afb7356.camel@samba.org>
+Subject: Re: [PATCH] re-add pidl install
+To: =?ISO-8859-1?Q?G=FCnther?= Deschner <gd@samba.org>, Samba Technical
+ <samba-technical@lists.samba.org>
+Date: Thu, 29 Aug 2019 06:32:11 +1200
+In-Reply-To: <a4cd67f4-ae87-1ac4-7053-1946a19bf7b0@samba.org>
+References: <a4cd67f4-ae87-1ac4-7053-1946a19bf7b0@samba.org>
 Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.32.4 (3.32.4-1.fc30) 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,29 +51,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@redhat.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello,
+On Wed, 2019-08-28 at 19:08 +0200, Günther Deschner via samba-technical 
+wrote:
+> Hi,
+> 
+> attached a patch to re-add the pidl waf install. At least openchange,
+> although a dormant project atm, requires pidl to be available in the system.
+> 
+> https://gitlab.com/samba-team/devel/samba/pipelines/78660819
+> 
+> Please review & push.
 
-In the join process, if we get an fqdn from getaddrinfo for local
-machine then we prefer to use that for dnsHostName and fqdn SPN over
-nbname+realm, see:
-https://github.com/samba-team/samba/blob/1f923e067dbe358c17cbccfe179baa811aa3b8b3/source3/libnet/libnet_join.c#L523
+If needed, why can't it use the perl MakeMaker makefile based build
+that we have tested in autobuild?
 
-I'm working on a ticket where the customer wants to be able to join a
-domain based only on netbios name from smb.conf, independently of
-local machine hostname (reportedly, this used to work). The problem
-they are facing, is that the fqdn returned from getaddrinfo, sometimes
-has already got a registered SPN and the join fails with "Failed to
-set machine spn: Constraint violation".
+Also, please use GitLab merge requests for patches to Samba, for
+consistency.
 
-I wonder how can we accommodated this use case, maybe we can fallback
-to nbname+realm if we get this error, or perhaps by adding a new
-parameter to net-join specifying the machine fqdn, or a new smb.conf
-option ?
+Thanks,
 
-Thanks!
+Andrew Bartlett
+-- 
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+
+
 
