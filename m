@@ -2,45 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 008C4A27A0
-	for <lists+samba-technical@lfdr.de>; Thu, 29 Aug 2019 22:04:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73F76A4D39
+	for <lists+samba-technical@lfdr.de>; Mon,  2 Sep 2019 04:04:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=gHEtZGvCTPiHeu5xLYf+ZE7GPl2WUMDclLbBgOpUqD8=; b=bHdKfTKrY4rlNYD2UsBehFL9BQ
-	SZRnst47XXOPxi9jVs5SBu83HkAWhnu5fOSNxrGF6KTOl9Nlv0cIR33aNHOy1VpFN9p+M7cr0xDFJ
-	nPCOr+I0xEsF6GNyiXOlTz7NYeencypkOGsXNNaSnaH1sBRuIr47U1kpy9oyz8gBoRN2tY3+bLzRv
-	K7A8IZ/N6BJoG7lOtWo1FbStwy71JwuRnN0NYZem+rNtu2bC2S7srj72G2FE46DA1FEGwLPQ2Bv9x
-	iQcUukIP3CYVFJ5I2H22jxpQ4vn5keJf+OfdJs9EQRwTZH9Z3kRxJHS/W9YtQH3peLV7XhX/MTQDB
-	xfl6vsdw==;
-Received: from localhost ([::1]:26676 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=QOAk1p6slNs9Qcr4d6xmlFmn7f+h7iaz13dkXEfzSEY=; b=1jOYvJEpc1rlXXAsYU9Z5MXL4B
+	8te1J3g1mwpjF2oRHReTx5giB6EWvqn9ESVtJgoRWJ5hIuXOHrwjKqEXLd0bmWAbRpxt5cBKokZrs
+	n9FVxXU53gB3LDktlWtKGNKUzBb+yTaznC20CZI5XlWYwkLh4S5mS1fLelAWFhrCxGeXKvERUPbjC
+	KoN6Gz6zxYAmur14sjdSMYwa0Z9+qqwSzTcvEBdSg3Fl/TlzJ23DIb3LvXZbvsIaeuy7zngFC7/4B
+	V35gGDJcRC2rVL6ARBg7klE1yiw+M2fLxBOdzdZ1ddQXKgTPZrTdRdqztH+xvn8/rFmGUJnOeE2xz
+	REubQVuA==;
+Received: from localhost ([::1]:20956 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i3QeK-000OBl-Ki; Thu, 29 Aug 2019 20:04:04 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:46322) 
+	id 1i4bhP-002rec-6v; Mon, 02 Sep 2019 02:04:07 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64370) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i3QeF-000OBe-Kf
- for samba-technical@lists.samba.org; Thu, 29 Aug 2019 20:04:02 +0000
+ (Exim) id 1i4bhK-002reV-2K
+ for samba-technical@lists.samba.org; Mon, 02 Sep 2019 02:04:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:To:CC;
- bh=gHEtZGvCTPiHeu5xLYf+ZE7GPl2WUMDclLbBgOpUqD8=; b=k8h6HFaCMcUfg1tFN1ngfw5iTc
- 7BB/7/JCnrGd1ymXTEBhuh18Unokrpl0zk8XrnItVdiLO6mztbeXOBH2gpLw7u8BkQG/eKn18MyzC
- hRYINAgq4Gyxu3RxbaipXqoO4LKYaHTXhLsjt4tS6JJYxX7Fs6W87jsRfFCBz9Nh0z0w=;
+ s=42627210; h=Date:To:From:Message-ID:CC;
+ bh=QOAk1p6slNs9Qcr4d6xmlFmn7f+h7iaz13dkXEfzSEY=; b=kqqXihpA6YIckKNUeKdYlOzm4E
+ uTBW84i06HQluEbXTr7oIkfRFihzpYGAr+MdHm5Qh4fJhcIToVf+Ts8T6RXnnIY5joBm9rZT7mTvE
+ N8m4ohvGyEy+JQUF1mf47vlnu7BJrb587j1TSibo2Jui5VjaraShA1a+FOBjZY2CGPec=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1i3QeF-0006pb-4G; Thu, 29 Aug 2019 20:03:59 +0000
-To: Isaac Boukris <iboukris@redhat.com>, samba-technical@lists.samba.org,
- Andreas Schneider <anschnei@redhat.com>
-References: <CAEiGmB+e_BcL=shJ6y+ePa2Ja4d8xw1NpZSXc3sym6EGV=DD-g@mail.gmail.com>
-Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
-Subject: Re: Join a domain independently of local hostname
-Message-ID: <15a0e30a-e2cf-e52d-f4c1-8725d2f4f641@samba.org>
-Date: Thu, 29 Aug 2019 22:03:55 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
-MIME-Version: 1.0
-In-Reply-To: <CAEiGmB+e_BcL=shJ6y+ePa2Ja4d8xw1NpZSXc3sym6EGV=DD-g@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="N5ovmj3cVoGSimFDJ4ZyaYGQVjDoYS06M"
+ (Exim) id 1i4bhI-0007Tg-US
+ for samba-technical@lists.samba.org; Mon, 02 Sep 2019 02:04:01 +0000
+Message-ID: <1567389837.19432.26.camel@samba.org>
+Subject: The road to removing Samba's internal copy of AES (and perhaps DES?)
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Mon, 02 Sep 2019 14:03:57 +1200
+Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAACRklEQVRYw81YS67DIAwkVe8FPRm5menJeAu3lmUCbyBGKqsmRXjwb8Y5aq3hl9Yj/Nh6Tu0upZRS+EdKiV+e5+mJqMKLiHLORBRjzDmbc/hlvb1QD2k3sG84+dhhvF6vlzymlNY8dyBJzUdLjAwyvaeU8n6/2WHpu/xDRkREJI8cOBMgfuRQxhj58JzzbBwhQDFGA07M6/efE0MQxDHGFvpdQHy6MUxqtU4yezRcH0B4GfbM44BWGqOurF6Omz140a0ASimJvdbwZT32XrpRh5yuwY1d0vPrdNkv91+T8uBRG8l1uiX+JtsHxPNIWE27ugwTctTdHCIiYXvuy4P7IDl0CxAzl2xgZTJwgw+g3kGaHwYh5g2sljyrjIVEq4pYBg2Kq3yXZ5WxjfO7zF9jRdXrnLcEmlbTRnNpcT0gvpTScUC2HlOE2ipAvPuJanMT+Xc0PC4dFzu1DEO4HgczaS5kOnZ4vM7zxNU+mtRyRVPDgqyX3cdx8AQCCrQnfkV9VzMA9Ryg3ek8Sgsg3QX+nbz03Og5l10ytp6HusQUwpjd1rnsksbHlhjuVGdBAbWzIiJu5MvEFkA6OkiwBO4uQL3ADeQ9b57t74+FBo1s47IqpVxqBDcuQ66r94QQJOH2ctnAf9oZtdbZYejpi2bQEveO0sb2JXu09OJJrnpil4SV5G2N6Y+1QjL+gHSKDApHJoJWF3hW2fInh6lutGW216OPRBZtRZscwyQvI+KuTj3rp4VP1VsAcTobxgDngukqm3LPgmL8A4m377Y5OvTKAAAAAElFTkSuQmCC
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.22.6-1+deb9u2 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,86 +50,60 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---N5ovmj3cVoGSimFDJ4ZyaYGQVjDoYS06M
-Content-Type: multipart/mixed; boundary="GX79yYr8W9CdA5yMKTSRVx4zkfT4SrhEu";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Isaac Boukris <iboukris@redhat.com>, samba-technical@lists.samba.org,
- Andreas Schneider <anschnei@redhat.com>
-Message-ID: <15a0e30a-e2cf-e52d-f4c1-8725d2f4f641@samba.org>
-Subject: Re: Join a domain independently of local hostname
-References: <CAEiGmB+e_BcL=shJ6y+ePa2Ja4d8xw1NpZSXc3sym6EGV=DD-g@mail.gmail.com>
-In-Reply-To: <CAEiGmB+e_BcL=shJ6y+ePa2Ja4d8xw1NpZSXc3sym6EGV=DD-g@mail.gmail.com>
+G'Day,
 
---GX79yYr8W9CdA5yMKTSRVx4zkfT4SrhEu
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+I wanted to write to update the list on where we at at with removing
+cryptographic code from Samba.
 
-Hi Isaac,
+We now absolutely rely on GnuTLS 3.4.7 or later, which has allowed use
+to delete a great deal of such duplicate code.
 
-> In the join process, if we get an fqdn from getaddrinfo for local
-> machine then we prefer to use that for dnsHostName and fqdn SPN over
-> nbname+realm, see:
-> https://github.com/samba-team/samba/blob/1f923e067dbe358c17cbccfe179baa=
-811aa3b8b3/source3/libnet/libnet_join.c#L523
->=20
-> I'm working on a ticket where the customer wants to be able to join a
-> domain based only on netbios name from smb.conf, independently of
-> local machine hostname (reportedly, this used to work). The problem
-> they are facing, is that the fqdn returned from getaddrinfo, sometimes
-> has already got a registered SPN and the join fails with "Failed to
-> set machine spn: Constraint violation".
->=20
-> I wonder how can we accommodated this use case, maybe we can fallback
-> to nbname+realm if we get this error, or perhaps by adding a new
-> parameter to net-join specifying the machine fqdn, or a new smb.conf
-> option ?
+We do still have AES code, for the AES CFB8 and CMAC functions.
 
-I think we should not use the machine fqdn.
+These could probably be open-coded against raw AES routines from
+GnuTLS, but for now I would rather not go down that route. 
 
-Just "netbios name" and "netbios aliases" together with the
-configured "realm" via the "lp_dnsdomain() function.
-I think we could have a new option "dns hostname aliases",
-which can take a list of additional names.
+The operating systems that do not supply that[1], in our CI system are:
+ - CentOS7
+ - Ubuntu 16.04
+ - Ubuntu 18.04
+ - Debian 9
 
-This make the whole join process much more reliable
-and avoids relying on /etc/hostname values to
-be correct.
+By April 2020 we should have a new Ubuntu LTS, Debian 10 is already out
+and CentOS8 will be available.  (And we already backport GnuTLS for
+CentOS7 regardless). 
 
-metze
+So I would propose we remove the fallback internal code after Ubuntu
+20.04 is released, or discuss it earlier if we can get a newer backport
+package for the above.  
+
+On a related note, I plan to experiment with implementing our DES code
+via GnuTLS using the CBC-DES cipher and an all-zero IV.  That may let
+us remove that code as well, becoming essentially crypto-free and
+therefore honouring FIPS mode correctly in all cases.  Do let me know
+if you happen to experiment in this area so I don't double-up!
+
+Thanks,
+
+Andrew Bartlett
+
+[1] configure shows:
+No gnutls support for AES CFB8
+No gnutls support for AES CMAC
+
+-- 
+Andrew Bartlett
+https://samba.org/~abartlet/
+Authentication Developer, Samba Team         https://samba.org
+Samba Development and Support, Catalyst IT   
+https://catalyst.net.nz/services/samba
 
 
 
---GX79yYr8W9CdA5yMKTSRVx4zkfT4SrhEu--
 
---N5ovmj3cVoGSimFDJ4ZyaYGQVjDoYS06M
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl1oL6sACgkQDbX1YShp
-vVZCvQ/+JwAjCFb9uydRyUWGfxShGrbDnLRe+szyMHxGsb4Av2savKH3stRkD0MT
-t5TxCfj375xv/AmtMsmNDFrt6sZqY3ZydyDukHZWrPPQsxibVRmsZTKXr16CcGbG
-64LqXmPy8LX5WSP4F3P/fWTK23ktrtPrVKWmQRTn4lr9QxzLX14RWYl1fHaWZ8y7
-Zu/B1KUvx9aDDTRDwylBEOS0wYM1yYSmhZGN3SDHKmomm54sxGFkTQL3s+41BPTf
-3YFm7bdtc39GEC4xHPnxTav0p+R+2qsVOZNAn5KLdbc4ytthL5f63PzB+XAnCGDc
-SN4CNLymFBrxTvimSgDP+ahJDIozgs0vStrf7Pv/vKhJ9kgD1zoS55zTUc4dZShk
-opfTOSXLYjDdMTzGnlDWbBCfZFNnQVWB7UP1xtCIB9xo32W0frtbbznPIue4G9+5
-8eyWWbKUqZrpW385eYaj0S8uAMFDJ7HONk7klPROdByW3BPWt2Bkq+8sX2+f6CkK
-X4dpZuST7eRkF2bJlDOLIvQZ7tpEtinOLOxnNsF4kSkMMm95Vt9tgJ8yhiVxbf44
-xZmZtp7jb+HblkPJBbsJuZH0mtaunFfyBxTeQzCBEJ+xRrPeQ+OGTkVlCk+VdDYs
-I05KDbtZy043M/1kGAS0Y7gi2h9b9KQZYnMLpx/HbypN6OubeAQ=
-=4B6W
------END PGP SIGNATURE-----
-
---N5ovmj3cVoGSimFDJ4ZyaYGQVjDoYS06M--
 
