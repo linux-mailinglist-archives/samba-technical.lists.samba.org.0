@@ -2,41 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73F76A4D39
-	for <lists+samba-technical@lfdr.de>; Mon,  2 Sep 2019 04:04:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21571A52F8
+	for <lists+samba-technical@lfdr.de>; Mon,  2 Sep 2019 11:39:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=QOAk1p6slNs9Qcr4d6xmlFmn7f+h7iaz13dkXEfzSEY=; b=1jOYvJEpc1rlXXAsYU9Z5MXL4B
-	8te1J3g1mwpjF2oRHReTx5giB6EWvqn9ESVtJgoRWJ5hIuXOHrwjKqEXLd0bmWAbRpxt5cBKokZrs
-	n9FVxXU53gB3LDktlWtKGNKUzBb+yTaznC20CZI5XlWYwkLh4S5mS1fLelAWFhrCxGeXKvERUPbjC
-	KoN6Gz6zxYAmur14sjdSMYwa0Z9+qqwSzTcvEBdSg3Fl/TlzJ23DIb3LvXZbvsIaeuy7zngFC7/4B
-	V35gGDJcRC2rVL6ARBg7klE1yiw+M2fLxBOdzdZ1ddQXKgTPZrTdRdqztH+xvn8/rFmGUJnOeE2xz
-	REubQVuA==;
-Received: from localhost ([::1]:20956 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=qHroUKt1DiITQb+pLowv24yndzVxnNWMiTD1yPUEcvU=; b=EEauexeqexHbxUIE5uJhdqBeVg
+	0+6CZczvdCXNnzS61ONur96HFw9kIcJBzCsNDdRVPmi0EcHGIIGVwxHV/Prs7CxKjHEVPm5yxApPQ
+	Zr4QseqBeNJpv6cErig03CALtroAEfz6UV4ViqQBEAk6nQwFVcgX+TSvWllOSBCr6PDPS9xW+FxO/
+	Xx61oIqUI77ZY/mbrZ3ZH2hvvRkuCNG/hMdB4usapkz/NnEdUlVIiYXcPOI+WX9ir8aIAbSH1P/wV
+	m4KsRBgwi4oo57fO45iuplSjjcaPLmkCCS5tNWl2TvIWUZKEdLZk2ETMTpM9DDhVuOOwoNIfsKN57
+	pFUtDu7g==;
+Received: from localhost ([::1]:32282 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i4bhP-002rec-6v; Mon, 02 Sep 2019 02:04:07 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64370) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i4bhK-002reV-2K
- for samba-technical@lists.samba.org; Mon, 02 Sep 2019 02:04:04 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:To:From:Message-ID:CC;
- bh=QOAk1p6slNs9Qcr4d6xmlFmn7f+h7iaz13dkXEfzSEY=; b=kqqXihpA6YIckKNUeKdYlOzm4E
- uTBW84i06HQluEbXTr7oIkfRFihzpYGAr+MdHm5Qh4fJhcIToVf+Ts8T6RXnnIY5joBm9rZT7mTvE
- N8m4ohvGyEy+JQUF1mf47vlnu7BJrb587j1TSibo2Jui5VjaraShA1a+FOBjZY2CGPec=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1i4bhI-0007Tg-US
- for samba-technical@lists.samba.org; Mon, 02 Sep 2019 02:04:01 +0000
-Message-ID: <1567389837.19432.26.camel@samba.org>
-Subject: The road to removing Samba's internal copy of AES (and perhaps DES?)
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Mon, 02 Sep 2019 14:03:57 +1200
-Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAACRklEQVRYw81YS67DIAwkVe8FPRm5menJeAu3lmUCbyBGKqsmRXjwb8Y5aq3hl9Yj/Nh6Tu0upZRS+EdKiV+e5+mJqMKLiHLORBRjzDmbc/hlvb1QD2k3sG84+dhhvF6vlzymlNY8dyBJzUdLjAwyvaeU8n6/2WHpu/xDRkREJI8cOBMgfuRQxhj58JzzbBwhQDFGA07M6/efE0MQxDHGFvpdQHy6MUxqtU4yezRcH0B4GfbM44BWGqOurF6Omz140a0ASimJvdbwZT32XrpRh5yuwY1d0vPrdNkv91+T8uBRG8l1uiX+JtsHxPNIWE27ugwTctTdHCIiYXvuy4P7IDl0CxAzl2xgZTJwgw+g3kGaHwYh5g2sljyrjIVEq4pYBg2Kq3yXZ5WxjfO7zF9jRdXrnLcEmlbTRnNpcT0gvpTScUC2HlOE2ipAvPuJanMT+Xc0PC4dFzu1DEO4HgczaS5kOnZ4vM7zxNU+mtRyRVPDgqyX3cdx8AQCCrQnfkV9VzMA9Ryg3ek8Sgsg3QX+nbz03Og5l10ytp6HusQUwpjd1rnsksbHlhjuVGdBAbWzIiJu5MvEFkA6OkiwBO4uQL3ADeQ9b57t74+FBo1s47IqpVxqBDcuQ66r94QQJOH2ctnAf9oZtdbZYejpi2bQEveO0sb2JXu09OJJrnpil4SV5G2N6Y+1QjL+gHSKDApHJoJWF3hW2fInh6lutGW216OPRBZtRZscwyQvI+KuTj3rp4VP1VsAcTobxgDngukqm3LPgmL8A4m377Y5OvTKAAAAAElFTkSuQmCC
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.22.6-1+deb9u2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+	id 1i4inG-002u8N-7f; Mon, 02 Sep 2019 09:38:38 +0000
+Received: from mx1.redhat.com ([209.132.183.28]:35480) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1i4inB-002u8G-9u
+ for samba-technical@lists.samba.org; Mon, 02 Sep 2019 09:38:36 +0000
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com
+ [209.85.215.197])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 51F2386679
+ for <samba-technical@lists.samba.org>; Mon,  2 Sep 2019 09:38:28 +0000 (UTC)
+Received: by mail-pg1-f197.google.com with SMTP id z35so8589183pgk.10
+ for <samba-technical@lists.samba.org>; Mon, 02 Sep 2019 02:38:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:message-id:from:to:subject:date:user-agent
+ :mime-version:content-language;
+ bh=qHroUKt1DiITQb+pLowv24yndzVxnNWMiTD1yPUEcvU=;
+ b=gH6D0v+CpQEoVi8fa0AVYTB/2KukqOuJUteA+2pnXhH+iL655GhF473UlpZDE0Fh0T
+ ++IM31I6ZGt8kYeA0b4om0vX9uC8BEdyb65xxszQxFMe3p0fzdhuJrazHIsetXzCauRs
+ CS5C4WchqyPDkX4yX+3cbhud69zG4MGzqRpTglVdummqwaYPZG0ywrexGZSeH0XLm7VX
+ JETVzyjvSkj7UFPTyU5MeXdsxCaZF3yma9IoWvCUw62xfyccCT2icaPp1BneKBLbPiBQ
+ dPYHvGPZcEph5Y/1QXbKQ2PzpTmTt+0Q9jSP4c9qxhQ8nJTlNDSIX9M63a4j2OGqjoPW
+ ZoYg==
+X-Gm-Message-State: APjAAAVAap/TYcvonxDIFQD44HBQ7ddV0qHGklMiBInjyB4HxDC6ZL5B
+ VeX2RZxcNfWoy/HF1lonL4t9rEPDN7MA9LPRGBAS8/f92unptUnr7WbOJrAitdF+LAv6oUS6zmm
+ ZecKnyP5g+oi3IemYBI5NeAN2Kp/R
+X-Received: by 2002:a17:902:1107:: with SMTP id
+ d7mr28453087pla.184.1567417107541; 
+ Mon, 02 Sep 2019 02:38:27 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqxbMAmfV85A4c5Pgi1k+WSztjBD+WV0vmK2FnHo/Cw8YdgNMG1y9kZTSR34V7FOovV9To/ovw==
+X-Received: by 2002:a17:902:1107:: with SMTP id
+ d7mr28453072pla.184.1567417107379; 
+ Mon, 02 Sep 2019 02:38:27 -0700 (PDT)
+Received: from amitkuma.pnq.csb ([125.16.200.50])
+ by smtp.gmail.com with ESMTPSA id p10sm13431530pjr.14.2019.09.02.02.38.25
+ for <samba-technical@lists.samba.org>
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 02 Sep 2019 02:38:26 -0700 (PDT)
+Message-ID: <5d6ce312.1c69fb81.67c3e.2767@mx.google.com>
+X-Google-Original-From: Amit Kumar <anonymous>
+To: samba-technical@lists.samba.org
+Subject: [Patch] Uncaught exception on running 'samba-tool domain
+ schemaupgrade'
+Date: Mon, 2 Sep 2019 15:08:23 +0530
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="------------CCB3D56726D706750FDCCC7B"
+Content-Language: en-US
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,60 +77,65 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Amit Kumar via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Amit Kumar <amitkuma@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-G'Day,
+This is a multi-part message in MIME format.
+--------------CCB3D56726D706750FDCCC7B
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-I wanted to write to update the list on where we at at with removing
-cryptographic code from Samba.
+PR: https://gitlab.com/samba-team/samba/merge_requests/757
 
-We now absolutely rely on GnuTLS 3.4.7 or later, which has allowed use
-to delete a great deal of such duplicate code.
 
-We do still have AES code, for the AES CFB8 and CMAC functions.
+--------------CCB3D56726D706750FDCCC7B
+Content-Type: text/x-patch;
+ name="0001-Uncaught-exception-on-running-samba-tool-domain-sche.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename*0="0001-Uncaught-exception-on-running-samba-tool-domain-sche.pa";
+ filename*1="tch"
 
-These could probably be open-coded against raw AES routines from
-GnuTLS, but for now I would rather not go down that route. 
+From 06bbe380ae680a7e1b99138a1135a2621b0d0a3d Mon Sep 17 00:00:00 2001
+From: Amit Kumar <amitkuma@redhat.com>
+Date: Mon, 2 Sep 2019 04:26:08 -0500
+Subject: [PATCH] Uncaught exception on running 'samba-tool domain
+ schemaupgrade' # samba-tool domain schemaupgrade ERROR(<class
+ 'ModuleNotFoundError'>): uncaught exception - No module named 'markdown'  
+ File "/usr/lib64/python3.7/site-packages/samba/netcmd/__init__.py", line 185,
+ in _run     return self.run(*args, **kwargs)   File
+ "/usr/lib64/python3.7/site-packages/samba/netcmd/domain.py", line 4157, in
+ run     from samba.ms_schema_markdown import read_ms_markdown   File
+ "/usr/lib64/python3.7/site-packages/samba/ms_schema_markdown.py", line 26, in
+ <module>     import markdown
 
-The operating systems that do not supply that[1], in our CI system are:
- - CentOS7
- - Ubuntu 16.04
- - Ubuntu 18.04
- - Debian 9
+Signed-off-by: Amit Kumar amitkuma@redhat.com
+---
+ python/samba/netcmd/domain.py | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-By April 2020 we should have a new Ubuntu LTS, Debian 10 is already out
-and CentOS8 will be available.  (And we already backport GnuTLS for
-CentOS7 regardless). 
-
-So I would propose we remove the fallback internal code after Ubuntu
-20.04 is released, or discuss it earlier if we can get a newer backport
-package for the above.  
-
-On a related note, I plan to experiment with implementing our DES code
-via GnuTLS using the CBC-DES cipher and an all-zero IV.  That may let
-us remove that code as well, becoming essentially crypto-free and
-therefore honouring FIPS mode correctly in all cases.  Do let me know
-if you happen to experiment in this area so I don't double-up!
-
-Thanks,
-
-Andrew Bartlett
-
-[1] configure shows:
-No gnutls support for AES CFB8
-No gnutls support for AES CMAC
-
+diff --git a/python/samba/netcmd/domain.py b/python/samba/netcmd/domain.py
+index 9d44d6d5ea4..b5a478154d0 100644
+--- a/python/samba/netcmd/domain.py
++++ b/python/samba/netcmd/domain.py
+@@ -4110,7 +4110,11 @@ class cmd_domain_schema_upgrade(Command):
+         return count
+ 
+     def run(self, **kwargs):
+-        from samba.ms_schema_markdown import read_ms_markdown
++        try:
++            from samba.ms_schema_markdown import read_ms_markdown
++        except Exception as e:
++            print("Exception in importing markdown: %s" %e)
++            raise CommandError('Failed to import module markdown')
+         from samba.schema import Schema
+ 
+         updates_allowed_overridden = False
 -- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT   
-https://catalyst.net.nz/services/samba
+2.21.0
 
 
-
-
+--------------CCB3D56726D706750FDCCC7B--
 
