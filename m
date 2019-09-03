@@ -2,43 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C6D5A720E
-	for <lists+samba-technical@lfdr.de>; Tue,  3 Sep 2019 19:58:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7FB0A775D
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 00:55:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=LimGAZ5qlys5bbKLfla8wXHlvmm+jOBBo5EgiejDv4M=; b=YRIOmA3wWR0IA2PRdcOKSOZfbV
-	ddnAx/mvKBxuzIQpa21lGPR2hhs7w2kPtLYAmb/HPFj0BdF0MyjjCzuKXppeETmep1pd9+I4uUJsr
-	qXVq8z4lXBBZJxT+/H/SJQ2ogGEp08z3+49kEdR0CiAjS6g4NvUUt4shYXgYMLELGcL7AJ+vFwQ40
-	w0ZBGNkMf/tlv1zx0Vx5RtSV+JXmNf5lagY0r++fHMchEpd5XqZVvJZKy+re8vhZ8xPGS2boYD4zS
-	g9XRrRwnGyTDeYJblhle1yLc/kSNimk5JPZX+vdBQCNPHEt8F/idWT5pyCf3HGbgC1t6JH1vwXiNV
-	Gm/9sCZQ==;
-Received: from localhost ([::1]:61872 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=XX6PnSS0XGg/J1ZrD4AQewrN8q/0nOz94IYH1WHzKjk=; b=ACR0m7/NMutII+xDUs1AZ8l2oe
+	Vk25zgM3k6wIJscyE3Vfv/7CJ2Ff5ac+nn85gp4lHIeX5JHVbK+yDS3DGfokVCr3n69dVGUsB6Zy8
+	yPUaTteYwWnFpi4e5dkzcbnUxifomJW/GeX21XDKTgjMtIBHXyghq4bgKh0bh1o2H2BzZnmd4VT20
+	Eh9ndHbdf+2K9tiYUf4cLtbg9StAGo6X96YCSLetl9dElB/rNMrWa7+WJ1dZ+94bzCwBTnq8dyOO4
+	1acQ2RotPaDQsB3kS1ZRPBSsQKdcMOAcQX32MnJCAs9lLNunyqHanfVgfXrjAye7WtZv1cMk4RW6c
+	FzOSecJQ==;
+Received: from localhost ([::1]:28344 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i5D4g-003FLs-4k; Tue, 03 Sep 2019 17:58:38 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51388) 
+	id 1i5Hh4-003Htz-L9; Tue, 03 Sep 2019 22:54:34 +0000
+Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:47012) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5D4b-003FLk-Vq
- for samba-technical@lists.samba.org; Tue, 03 Sep 2019 17:58:36 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Cc:To:From:Date;
- bh=LimGAZ5qlys5bbKLfla8wXHlvmm+jOBBo5EgiejDv4M=; b=p1l3hQUdZbVQAsPRDwMXS7qF6a
- Z1vWERNxOGsBAR/2FLh5ozVYGdBvjeO1+Q+MlEtORxE2I7WnGZxUQUaqJX2m9xZftKeKl5V7LsQUf
- AUQkayLw/SQ6Urs3ZMAaHQuxbScGWOGd7UCPY6QTFNPOw1D+RLxqFSo5wFXQJxE3HAYQ=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5D4b-0004jE-60; Tue, 03 Sep 2019 17:58:33 +0000
-Date: Tue, 3 Sep 2019 10:58:31 -0700
-To: Abhidnya Joshi <abhidnyachirmule@gmail.com>
-Subject: Re: Query about slow read performance
-Message-ID: <20190903175831.GC9092@jra4>
-References: <CALmqtCXzTfqrOX_rSoR5nbEqGvcO1Xeuk7a+56+uoC0nh_-Kmg@mail.gmail.com>
- <20190827235014.GB219881@jra4>
- <CALmqtCU-NfivpVAdSz74TP5MX=8o514i0CyvUNixG6Yax06j-Q@mail.gmail.com>
+ (Exim) id 1i5Hh0-003Hts-Dy
+ for samba-technical@lists.samba.org; Tue, 03 Sep 2019 22:54:32 +0000
+Received: by mail-io1-xd42.google.com with SMTP id x4so39712137iog.13
+ for <samba-technical@lists.samba.org>; Tue, 03 Sep 2019 15:54:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=XX6PnSS0XGg/J1ZrD4AQewrN8q/0nOz94IYH1WHzKjk=;
+ b=HDnpZZzGzCPGC3Wpm2akx2tC2hmTaty2GGI0YqIg89UeaTKrtF3HjiXpy7s+u7aua4
+ fTTlC+Gvy2/fN9YnN6Ox4WFTRa47SE4KfmH7UfoLlS5jhLfzd3Pg7p/WtmHQjlcjSH2I
+ GjhMjjXrhLGrMuu81xo2ji5Mubghht0jWqwnn0Bq0tRMI9CLNzHjFryx+MjgV4rjZG3Q
+ caZe1VXaQHm4bamKHxcV/1umzHeYaqevtN9kEjvLBTI3NF+0ENIuZRyCYVYomXXRAYlE
+ mmuw6IBgdfA5uQTR4gX5rUkM9fQ+54QuNvQw2AYMP/MJ2ckh8CQVftWkD5HHCyzIb0LI
+ mwog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=XX6PnSS0XGg/J1ZrD4AQewrN8q/0nOz94IYH1WHzKjk=;
+ b=LWVJIb4V4qqLR7BTrLWLLsw6EexjguiVj0jjx2V/2kzsi0YeR78vMbIBMKg9B5rQNs
+ a4CXLj/sFbG8Aia7+Sk4vAFpdnCJrHYcTeJDjamdNR2khZr3z40uIuh7dsPx89WHbI9N
+ VnBCZugmPpmAaqzwpI/r1aMIll2VvbxXxtoRZOt1mZcjaeSO5SVs1qGNtAn3RvDoQdpr
+ okMSFfYsJdJvzOdW0AjFqSSHCRjCv4Xl05CM81ltx5trhWJ/l7cDiSQz34CIwkk7UxEF
+ fH4CTmUyfPY9YX3Ckrp6BqxuCZAxHZB29jJxPetN6M9dlv+N9b37ZpWlnQJYENPPj3yu
+ XQVg==
+X-Gm-Message-State: APjAAAUk1XKZ9KrVf7ZG9RiHsVKrowFDoUizk8idc4qcHbqBFTsYOzsw
+ Svw+Z9Q6eXIZyzTYfRhBD+tiCBelVKI0CNyV9jM=
+X-Google-Smtp-Source: APXvYqy7MJrikA6cZoW3mUqxKonOcNME2sfKdgUyF+KZXJfVpeBdjnL7cdGX0I3KFyK0uIxGxc69qqZfNntbTiAAEJY=
+X-Received: by 2002:a6b:6303:: with SMTP id p3mr1006199iog.169.1567551268258; 
+ Tue, 03 Sep 2019 15:54:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CALmqtCU-NfivpVAdSz74TP5MX=8o514i0CyvUNixG6Yax06j-Q@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Date: Tue, 3 Sep 2019 17:54:17 -0500
+Message-ID: <CAH2r5mtzztgoW91TvG_wTYju10dNJ+=r8Ncx3f3bebstMZiCpA@mail.gmail.com>
+Subject: [PATCH] smb3: log warning if CSC policy conflicts with linux kernel
+ client cache mount option
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
+Content-Type: multipart/mixed; boundary="0000000000008327cd0591adf8db"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,57 +66,85 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Sep 03, 2019 at 11:01:33PM +0530, Abhidnya Joshi wrote:
-> Hi Jeremy,
-> 
-> Thanks for your reply. Yes we do see less number of credits being asked by
-> problematic client compared to the other Win2k8 client.
-> Is there any way to increase the number of credits client can ask for
-> irrespective of tcp level delays/sizes in Win2k8?
+--0000000000008327cd0591adf8db
+Content-Type: text/plain; charset="UTF-8"
 
-The client is responsible for the number of
-credits it requests, server is responsible for
-the number of credits granted.
+If the server config (e.g. Samba smb.conf "csc policy = disable)
+for the share indicates that the share should not be cached, log
+a warning message in the Linux kernel client if forced client side
+caching ("cache=ro" or "cache=singleclient") was requested on mount.
 
-I wasn't easily to find a Windows registry
-tunable for number of client credits requested,
-but I didn't spend long searching.
+Signed-off-by: Steve French <stfrench@microsoft.com>
+---
+ fs/cifs/connect.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
+diff --git a/fs/cifs/connect.c b/fs/cifs/connect.c
+index d9a995588c74..85f8d943a05a 100644
+--- a/fs/cifs/connect.c
++++ b/fs/cifs/connect.c
+@@ -3478,6 +3478,14 @@ cifs_get_tcon(struct cifs_ses *ses, struct
+smb_vol *volume_info)
+         tcon->use_resilient = true;
+     }
 
-> On Wed, Aug 28, 2019 at 5:20 AM Jeremy Allison <jra@samba.org> wrote:
-> 
-> > On Fri, Aug 23, 2019 at 12:24:34PM +0530, Abhidnya Joshi via
-> > samba-technical wrote:
-> > > Hi All,
-> > >
-> > > Recently while doing single file read testing on SMB2 from our product to
-> > > Win2008 (as client), we saw some performance degradation.
-> > >
-> > > Although we are finding out causes in our SMB server, we can somehow see
-> > > this degradation when the Win2008 got security patch applied.
-> > >
-> > > *2019-03 Servicing Stack Update for Windows Server 2008 R2 for x64-based
-> > > Systems (KB4490628)*
-> > >
-> > > The performance drop is not observed for write but only for reads and the
-> > > cap seen is around 260-280 Mbps. (Earlier it was around 520 Mbps). The
-> > > security patch does not have anything directly related to I/O or SMB but
-> > > this is what we are observing.
-> > >
-> > > My question here is, has anyone observed any of such problem recently
-> > with
-> > > Win2k8 used as client?
-> >
-> > Nope, this is the first I've heard of it. Can you do a comparative
-> > wireshark trace between an unpatched client and a patched client
-> > to look at the differences in how they're driving the server.
-> >
-> > Any credit changes ?
-> >
++    /* If the user really knows what they are doing they can override */
++    if (tcon->share_flags & SMB2_SHAREFLAG_NO_CACHING) {
++        if (volume_info->cache_ro)
++            cifs_dbg(VFS, "cache=ro requested on mount but NO_CACHING
+flag set on share\n");
++        else if (volume_info->cache_rw)
++            cifs_dbg(VFS, "cache=singleclient requested on mount but
+NO_CACHING flag set on share\n");
++    }
++
+     /*
+      * We can have only one retry value for a connection to a share so for
+      * resources mounted more than once to the same server share the last
+
+-- 
+Thanks,
+
+Steve
+
+--0000000000008327cd0591adf8db
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-smb3-log-warning-if-CSC-policy-conflicts-with-cache-.patch"
+Content-Disposition: attachment; 
+	filename="0001-smb3-log-warning-if-CSC-policy-conflicts-with-cache-.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_k04fjknu0>
+X-Attachment-Id: f_k04fjknu0
+
+RnJvbSBkYWU5MzFjMDJhZWQxNDQyN2VhNDAyMmM3ZTgwMzhhYjMxMDNiNGQ5IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+CkRhdGU6IFR1ZSwgMyBTZXAgMjAxOSAxNzo0OTo0NiAtMDUwMApTdWJqZWN0OiBbUEFUQ0hdIHNt
+YjM6IGxvZyB3YXJuaW5nIGlmIENTQyBwb2xpY3kgY29uZmxpY3RzIHdpdGggY2FjaGUgbW91bnQK
+IG9wdGlvbgoKSWYgdGhlIHNlcnZlciBjb25maWcgKGUuZy4gU2FtYmEgc21iLmNvbmYgImNzYyBw
+b2xpY3kgPSBkaXNhYmxlKQpmb3IgdGhlIHNoYXJlIGluZGljYXRlcyB0aGF0IHRoZSBzaGFyZSBz
+aG91bGQgbm90IGJlIGNhY2hlZCwgbG9nCmEgd2FybmluZyBtZXNzYWdlIGlmIGZvcmNlZCBjbGll
+bnQgc2lkZSBjYWNoaW5nICgiY2FjaGU9cm8iIG9yCiJjYWNoZT1zaW5nbGVjbGllbnQiKSBpcyBy
+ZXF1ZXN0ZWQgb24gbW91bnQuCgpTaWduZWQtb2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNo
+QG1pY3Jvc29mdC5jb20+Ci0tLQogZnMvY2lmcy9jb25uZWN0LmMgfCA4ICsrKysrKysrCiAxIGZp
+bGUgY2hhbmdlZCwgOCBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvZnMvY2lmcy9jb25uZWN0
+LmMgYi9mcy9jaWZzL2Nvbm5lY3QuYwppbmRleCBkOWE5OTU1ODhjNzQuLjg1ZjhkOTQzYTA1YSAx
+MDA2NDQKLS0tIGEvZnMvY2lmcy9jb25uZWN0LmMKKysrIGIvZnMvY2lmcy9jb25uZWN0LmMKQEAg
+LTM0NzgsNiArMzQ3OCwxNCBAQCBjaWZzX2dldF90Y29uKHN0cnVjdCBjaWZzX3NlcyAqc2VzLCBz
+dHJ1Y3Qgc21iX3ZvbCAqdm9sdW1lX2luZm8pCiAJCXRjb24tPnVzZV9yZXNpbGllbnQgPSB0cnVl
+OwogCX0KIAorCS8qIElmIHRoZSB1c2VyIHJlYWxseSBrbm93cyB3aGF0IHRoZXkgYXJlIGRvaW5n
+IHRoZXkgY2FuIG92ZXJyaWRlICovCisJaWYgKHRjb24tPnNoYXJlX2ZsYWdzICYgU01CMl9TSEFS
+RUZMQUdfTk9fQ0FDSElORykgeworCQlpZiAodm9sdW1lX2luZm8tPmNhY2hlX3JvKQorCQkJY2lm
+c19kYmcoVkZTLCAiY2FjaGU9cm8gcmVxdWVzdGVkIG9uIG1vdW50IGJ1dCBOT19DQUNISU5HIGZs
+YWcgc2V0IG9uIHNoYXJlXG4iKTsKKwkJZWxzZSBpZiAodm9sdW1lX2luZm8tPmNhY2hlX3J3KQor
+CQkJY2lmc19kYmcoVkZTLCAiY2FjaGU9c2luZ2xlY2xpZW50IHJlcXVlc3RlZCBvbiBtb3VudCBi
+dXQgTk9fQ0FDSElORyBmbGFnIHNldCBvbiBzaGFyZVxuIik7CisJfQorCiAJLyoKIAkgKiBXZSBj
+YW4gaGF2ZSBvbmx5IG9uZSByZXRyeSB2YWx1ZSBmb3IgYSBjb25uZWN0aW9uIHRvIGEgc2hhcmUg
+c28gZm9yCiAJICogcmVzb3VyY2VzIG1vdW50ZWQgbW9yZSB0aGFuIG9uY2UgdG8gdGhlIHNhbWUg
+c2VydmVyIHNoYXJlIHRoZSBsYXN0Ci0tIAoyLjIwLjEKCg==
+--0000000000008327cd0591adf8db--
 
