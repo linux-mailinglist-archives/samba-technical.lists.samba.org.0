@@ -2,47 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DE48A709B
-	for <lists+samba-technical@lfdr.de>; Tue,  3 Sep 2019 18:41:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B5CF8A71B5
+	for <lists+samba-technical@lfdr.de>; Tue,  3 Sep 2019 19:32:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=244Bo6zT8PUtnPOQarCxT+eBNrqqZTFK+0hEZXIzlLA=; b=gSHkbl//efNBxZpt10RLXLmBt1
-	z/rpG1/dfdw5Ik1cOlY1e7KSqlJchTTTP6bN2OodpD6FwuY+XOvFEtPH1zALF+aDUQrJwkg81WXEW
-	CDiZwdsNMviLzZYy4EZIVypDR8bY8o9tmg+DL4LkXnVZ3Q8HDJx20GqOx0MOJqycVooHOD3Q2lr4A
-	x3HDD9zjs/nRumn0h2vR6NRoN8rj39XQXgiNBfJnakDRaHGMDXhGfFnDEpvtGCOz7kUdYlRG6eeLR
-	4ZBP85JpGTl8sqxn7+0stg8MUZU+ge/Sdwybb26fw6HijKhoFDIwjmKtN2cGoP8oZkL7tiSb3ONrB
-	TtHTnbYA==;
-Received: from localhost ([::1]:57552 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=YWVq5mzct/8EUBAfN02AMIfCb7IfcgPFOxCd6hiMT4k=; b=idRc4oJbpcig3AFP+zXmotyyrK
+	R21b0Nh1qQChhuPiV3QkancC69DZr+8DKj454EqHA6/PDP+b0Z/XhJfvbBQlJ8ZnfPiSpRiFDBkKP
+	XptkbiDDwdJ1Pf4QxPYIgEh36/8s8YVII7tdKmoyRCqeVJBHKYs4lpZup6UNDKkf1maQ13aPLFkKU
+	kfpHF7R1d/sUtsRBg9Wqp6IWnD4k5NakFcSaaqKXXG6MQ/UEMIacHVxcfHEA+BDOkdl26wgWG+91D
+	JLEVpoLmGlJf5t2yn/NmSd2BD2KrEmqy8F+M3orECD14TJVw8fIQ6Zh3ax8dioDyM9SJGbDCDLWtf
+	cB30VVKg==;
+Received: from localhost ([::1]:58356 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i5BrR-003EbY-Cj; Tue, 03 Sep 2019 16:40:53 +0000
-Received: from mx1.redhat.com ([209.132.183.28]:43768) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1i5BrH-003EbR-Mk
- for samba-technical@lists.samba.org; Tue, 03 Sep 2019 16:40:51 +0000
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 0D6F618C8912;
- Tue,  3 Sep 2019 16:40:38 +0000 (UTC)
-Received: from 10.4.128.1 (unknown [10.34.244.21])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 16DFE5D6B7;
- Tue,  3 Sep 2019 16:40:36 +0000 (UTC)
-Date: Tue, 3 Sep 2019 18:40:34 +0200
-To: "L. van Belle" <belle@samba.org>
-Subject: Re: [Announce] Samba 4.11.0rc3 Available for Download
-Message-ID: <20190903164034.GA2128202@10.4.128.1>
-References: <20190903111941.GA15245@carrie2>
- <20190903141225.GA2122626@10.4.128.1>
- <E99FB72BA8824B0FAB212FAE35B48FCC@rotterdam.bazuin.nl>
+	id 1i5Cej-003Eoi-Pf; Tue, 03 Sep 2019 17:31:49 +0000
+Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d]:43294) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i5Cef-003Eob-3i
+ for samba-technical@lists.samba.org; Tue, 03 Sep 2019 17:31:47 +0000
+Received: by mail-io1-xd2d.google.com with SMTP id u185so33954135iod.10
+ for <samba-technical@lists.samba.org>; Tue, 03 Sep 2019 10:31:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=vPbIouzbi4pXBChXnojcl6IiUx26+/WRcA7NAPJ+Y8I=;
+ b=BLsUxHHc+LBtZH0+ScKCmRnIkXZqrHxLx2Btu5hYA2URtkVyAZ8VHVO49i+awBpyrB
+ +rAft30VsTDrpR0nAe5lpobZDrzohl+CJUxEw6byLrDxLH16OJhp6bxsGDynGX/NP7w+
+ vvYtiNwBAgvLUsPOzoK9pyiH1aXBqGtBAxyZoXRBm+s5MEUTfMNor+hhruyI3P+69jlQ
+ IbaZXPWoc5mHXo7RTG5nLjp8xWwfam/1Sl0xvDCsGd9ro+ZIUOxxfR0i6dvO2rGbIivP
+ 8Wyhw5bG4hpksylWQr/6+H9godAO5ykvqwsOhKJyqtVwiNZDNP8duDWNAkqd/qkQ8jkG
+ ohDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=vPbIouzbi4pXBChXnojcl6IiUx26+/WRcA7NAPJ+Y8I=;
+ b=hUm4+Q64wJ1989k6K3igZl6MbCiXgve4/RYMY7W7FH74sEEG1OVRiyHsHSe81GRbIs
+ fYlDeDTku1zQgwZUKqTd9dEO1QnLRC0k3TD0Wn2xeusg5CedrRMwMwKUG7xgp8dkVEyI
+ CcltrzdqSHqNDZENrR6Uq7QxbFtrd9l2tuR4u6mIXzt9sMdlTpfrzR96YgDwVq12I+bm
+ bMO+Pt0D0NtQpAPnuVs9SvxqXzTQv3+2Llsvg6RNnAFzNKSPWY61WqYDVL6LdZMcIRXq
+ q48d0jyadIq5oMj3jZz+3KeG35ZxTDOergcI9HuLCNnttRe5EiEuA5UYhIfDzbWr68oi
+ NhZQ==
+X-Gm-Message-State: APjAAAXXXf3CEinstlEHQ53R9BNOwEboxZCUhatsWyt8Y55+f3MEFhVK
+ y+892Qb56hWqfwpLJafOA2HGz8JRecnZ2K76C+O6nQ==
+X-Google-Smtp-Source: APXvYqzP6MpEmu3e5XeXh1Qw2MJH7OYi3eI+GY8bcK9OMOm8WZPWhEQponcy2yyvE7nhVUBSmmZZodIpOSO4EwnXc3U=
+X-Received: by 2002:a02:81ca:: with SMTP id r10mr4530193jag.62.1567531902740; 
+ Tue, 03 Sep 2019 10:31:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <E99FB72BA8824B0FAB212FAE35B48FCC@rotterdam.bazuin.nl>
-User-Agent: Mutt/1.12.1 (2019-06-15)
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.6.2
- (mx1.redhat.com [10.5.110.70]); Tue, 03 Sep 2019 16:40:38 +0000 (UTC)
+References: <CALmqtCXzTfqrOX_rSoR5nbEqGvcO1Xeuk7a+56+uoC0nh_-Kmg@mail.gmail.com>
+ <20190827235014.GB219881@jra4>
+In-Reply-To: <20190827235014.GB219881@jra4>
+Date: Tue, 3 Sep 2019 23:01:33 +0530
+Message-ID: <CALmqtCU-NfivpVAdSz74TP5MX=8o514i0CyvUNixG6Yax06j-Q@mail.gmail.com>
+Subject: Re: Query about slow read performance
+To: Jeremy Allison <jra@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,34 +69,49 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Lukas Slebodnik via samba-technical <samba-technical@lists.samba.org>
-Reply-To: samba-technical@lists.samba.org
-Cc: Lukas Slebodnik <lslebodn@fedoraproject.org>,
- samba-technical@lists.samba.org
+From: Abhidnya Joshi via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Abhidnya Joshi <abhidnyachirmule@gmail.com>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On (03/09/19 16:26), L. van Belle wrote:
->Hai, 
+Hi Jeremy,
+
+Thanks for your reply. Yes we do see less number of credits being asked by
+problematic client compared to the other Win2k8 client.
+Is there any way to increase the number of credits client can ask for
+irrespective of tcp level delays/sizes in Win2k8?
+
+Thanks
+Abhidnya
+
+On Wed, Aug 28, 2019 at 5:20 AM Jeremy Allison <jra@samba.org> wrote:
+
+> On Fri, Aug 23, 2019 at 12:24:34PM +0530, Abhidnya Joshi via
+> samba-technical wrote:
+> > Hi All,
+> >
+> > Recently while doing single file read testing on SMB2 from our product to
+> > Win2008 (as client), we saw some performance degradation.
+> >
+> > Although we are finding out causes in our SMB server, we can somehow see
+> > this degradation when the Win2008 got security patch applied.
+> >
+> > *2019-03 Servicing Stack Update for Windows Server 2008 R2 for x64-based
+> > Systems (KB4490628)*
+> >
+> > The performance drop is not observed for write but only for reads and the
+> > cap seen is around 260-280 Mbps. (Earlier it was around 520 Mbps). The
+> > security patch does not have anything directly related to I/O or SMB but
+> > this is what we are observing.
+> >
+> > My question here is, has anyone observed any of such problem recently
+> with
+> > Win2k8 used as client?
 >
->Have you looked on the ftp? 
->The others are also there, see: 
+> Nope, this is the first I've heard of it. Can you do a comparative
+> wireshark trace between an unpatched client and a patched client
+> to look at the differences in how they're driving the server.
 >
-
-I already did
-
->https://ftp.samba.org/pub/talloc/?C=M;O=D 
-
-My web browser say to me that the latest version
-for talloc is talloc-2.2.0.tar.gz
-And it ass uploaded there on 2019-03-21 10:13
-Which is 6 months old.
-
-And talloc-2.2.0 is not a friend with python3.8
-Morever I also checked git repo and the branch
-And I could not see any new tag for talloc there?
-
-Did I miss something?
-
-LS
-
+> Any credit changes ?
+>
