@@ -2,59 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FD74A5CCD
-	for <lists+samba-technical@lfdr.de>; Mon,  2 Sep 2019 21:43:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0605CA5F58
+	for <lists+samba-technical@lfdr.de>; Tue,  3 Sep 2019 04:37:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=QnCqjttPsD9VOItZgQKR8PHxubyIWfecxGB1z85kRaA=; b=cghI+Pjc/GuU6O/+sWNXcsl5sN
-	ujqXEMDaTkChgpssrIklPQeC65rNigvZZisM7yaAMg0MIYKsTgfLDIzcRw/jp92xVagRr2PcRkO3E
-	YiYouXNaOVMpxkvAifo7RyzStkRvygPPbKmVt89T+M+h80iI2pclu6G/AZQPNVk4ampCMZ1TBe5CT
-	Oa6QC58vzdseSRTsu2V8vcuVcl7/vUhEgBPp76Jx/WTbS4Wgbpgfk/lmCRpy7ooH8Lsmyz2KADnIw
-	jJtB0Z2ghV+MP5wvvqb5/i6OwOxfwoqdE8j2QHoWG8VqG+N3W5xOqol9yjl9qK1y7WcVxc3XunzqV
-	u4cgAAuQ==;
-Received: from localhost ([::1]:46496 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=5ximUBuBnU4YIkaztQhHvt1XBYoUBQJRn4OL5mYzXq4=; b=jy4+x4Muw67O4vy2T6cW7/AOf1
+	wdIm46NemyE9SX2rK9EwvlKNDjDo20YgzppfbcK9aGrf3uNWQ+7+cyd6kvnq21sez8LmSedBJJBG1
+	C+jQNmt4hu7xHzRL43wZoAX8yk6AqpbJ1IwnEYIefM1biXCdx8Opq8aCcbsXSCDRUQyWkXWDCZh6M
+	3T7NO68DFnu5UmAccoXjLIxFLRsUn8l4X9UmcMOFOwPedBRoVAMJE38CsJzktYs9oeasOeWmAROmn
+	8P/+nQw/Q4ZGE2FgACHhvaeKYhG0MS2c8KQfLWA6bdbPyG9170Gil7DsuhdrwRp7AW2GCr7lrnau0
+	ru9ZTo1Q==;
+Received: from localhost ([::1]:50486 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i4sE1-0033Tb-L9; Mon, 02 Sep 2019 19:42:53 +0000
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:45159) 
+	id 1i4yfi-0035G7-8f; Tue, 03 Sep 2019 02:35:54 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25172) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i4sDw-0033TU-K1
- for samba-technical@lists.samba.org; Mon, 02 Sep 2019 19:42:51 +0000
-Received: by mail-io1-xd44.google.com with SMTP id f12so13495902iog.12
- for <samba-technical@lists.samba.org>; Mon, 02 Sep 2019 12:42:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=QnCqjttPsD9VOItZgQKR8PHxubyIWfecxGB1z85kRaA=;
- b=drk3pFKrwK38hMeRXxVG2/nOt7S70Pfl9vl3UrDB/SaQoNBjlHvB0wWXFsN+vGsWPL
- 8lXwNSZhUfDAWlfNVUnhJv+pfSH9ZgqRoBfr1Kcc+BBYYDcuN2p65XDjF538ynOkczuK
- wRFtpxcgV1311tVqcH3hbqFBDIXln5wgwCjlbZFTNBNubr8ISIcFOJlOZwSs+d+mHpQ+
- cXrlhW+3yaMM4aqB4guKpTKEUawxMOsiDKUvFDGsiEL9+HGqB3c3muIkkPF3LxiQSZL/
- xmBNYgivufdorFGF+XdUVNhY/sMGsiaWwl0tHBewkKDTfPWu6mkl0VOPS5CgQE7ynN6B
- G2AQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=QnCqjttPsD9VOItZgQKR8PHxubyIWfecxGB1z85kRaA=;
- b=RGCW9A0I+gH1dHjiFGRImP2EzJIWLSt2D/6EZx5fPeK+Y3Mr7S/Kn64nBCRYhLX36N
- OdKUn3MHwQw1z8IkJlVnXaEXI6jrA3EhxWmg1Wd38AuLfwg6X9iaAxKy5cY1as9mhlSK
- YnnVTnZAqkaJ20Afnls4OwLQFA8kO736E+x5STBkrccTFuvPZuO5M84pfqZKoKYrdrfI
- DNux+PmLzScL8mbi9Jb8bgVp1JuxObC3IeWBcV8BKlKtaJ3rXlO+YR2snPb16MDSeNOE
- vEQgeqzpg77yX9Ch+Q6o/NZwRTC4CiWdIxrI6Qd2BTk1y8SMv/8Jm9bZ5O7zeiQDMq/X
- pN/Q==
-X-Gm-Message-State: APjAAAXQcg7sWV3ykk+BlKH8JKa58h8D0dsmuhEDN8UrAyB+ZlH7xeER
- xqZ5/6LlGffAp8nKnyrk+w79PeHgukqgVlCJ+R4=
-X-Google-Smtp-Source: APXvYqz0ig3Ou3gySoBUVnZyPjYLAcAupHpExck2qSURcqM7IatpW8/XwvrGxI/vgiYJ8fO0ibOunmPv31vCfW2Exhs=
-X-Received: by 2002:a5d:9c4c:: with SMTP id 12mr15389478iof.5.1567453365705;
- Mon, 02 Sep 2019 12:42:45 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190902151059.22088-1-colin.king@canonical.com>
-In-Reply-To: <20190902151059.22088-1-colin.king@canonical.com>
-Date: Mon, 2 Sep 2019 14:42:34 -0500
-Message-ID: <CAH2r5mv_Fv_k8h=-i8-bBrgBU3ghCVM3W=KyLrL=LrrCiT=vOQ@mail.gmail.com>
-Subject: Re: [PATCH][V2][cifs-next] cifs: fix dereference on ses before it is
- null checked
-To: Colin King <colin.king@canonical.com>
+ (Exim) id 1i4yfc-0035G0-18
+ for samba-technical@lists.samba.org; Tue, 03 Sep 2019 02:35:50 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Cc:To:From:Message-ID;
+ bh=5ximUBuBnU4YIkaztQhHvt1XBYoUBQJRn4OL5mYzXq4=; b=qlglSYhrrRfzKT6Eht5DZyGUXy
+ j61bnRDSq8HznL2srIE+NynAYe2YokAw8oW0KYGXiOCSkzt9uouAbROTpoU0L4zfu/BhGpwGuOonh
+ bin1PpfLqAFZmeRMl9meDwbTeS2AUAbW/jP7XrP0Q/OY5AUQtt4rClSsNkIzusPnMJwc=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i4yfZ-0002yz-EA; Tue, 03 Sep 2019 02:35:46 +0000
+Message-ID: <1567478141.19432.44.camel@samba.org>
+Subject: Samba python deps management (was: Re: [Patch]Correcting the error
+ message of 'samba-tool domain schemaupgrade')
+To: Amit Kumar <amitkuma@redhat.com>, samba-technical@lists.samba.org
+Date: Tue, 03 Sep 2019 14:35:41 +1200
+In-Reply-To: <5d6d0209.1c69fb81.336d5.26fd@mx.google.com>
+References: <5d6d0209.1c69fb81.336d5.26fd@mx.google.com>
+Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAACRklEQVRYw81YS67DIAwkVe8FPRm5menJeAu3lmUCbyBGKqsmRXjwb8Y5aq3hl9Yj/Nh6Tu0upZRS+EdKiV+e5+mJqMKLiHLORBRjzDmbc/hlvb1QD2k3sG84+dhhvF6vlzymlNY8dyBJzUdLjAwyvaeU8n6/2WHpu/xDRkREJI8cOBMgfuRQxhj58JzzbBwhQDFGA07M6/efE0MQxDHGFvpdQHy6MUxqtU4yezRcH0B4GfbM44BWGqOurF6Omz140a0ASimJvdbwZT32XrpRh5yuwY1d0vPrdNkv91+T8uBRG8l1uiX+JtsHxPNIWE27ugwTctTdHCIiYXvuy4P7IDl0CxAzl2xgZTJwgw+g3kGaHwYh5g2sljyrjIVEq4pYBg2Kq3yXZ5WxjfO7zF9jRdXrnLcEmlbTRnNpcT0gvpTScUC2HlOE2ipAvPuJanMT+Xc0PC4dFzu1DEO4HgczaS5kOnZ4vM7zxNU+mtRyRVPDgqyX3cdx8AQCCrQnfkV9VzMA9Ryg3ek8Sgsg3QX+nbz03Og5l10ytp6HusQUwpjd1rnsksbHlhjuVGdBAbWzIiJu5MvEFkA6OkiwBO4uQL3ADeQ9b57t74+FBo1s47IqpVxqBDcuQ66r94QQJOH2ctnAf9oZtdbZYejpi2bQEveO0sb2JXu09OJJrnpil4SV5G2N6Y+1QjL+gHSKDApHJoJWF3hW2fInh6lutGW216OPRBZtRZscwyQvI+KuTj3rp4VP1VsAcTobxgDngukqm3LPgmL8A4m377Y5OvTKAAAAAElFTkSuQmCC
 Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.22.6-1+deb9u2 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,99 +52,60 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- kernel-janitors <kernel-janitors@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: ab@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Tentatively merged into cifs-2.6.git pending additional testing
+G'Day Amit,
 
-Kicked off buildbot with rc7+patches in cifs for-next
+I'm going to write here because you have opened mulitple MR, sent a
+mail to samba-techncial and filed bugs and this converstation is
+already a bit too spread out.
 
-See http://smb3-test-rhel-75.southcentralus.cloudapp.azure.com/#/builders/2/builds/247
+Samba's python code has dependencies.  These are documented in
+our bootstrap system (finally), but of course many users don't use that
+(because it really is built for the CI runners).
 
-On Mon, Sep 2, 2019 at 10:33 AM Colin King <colin.king@canonical.com> wrote:
->
-> From: Colin Ian King <colin.king@canonical.com>
->
-> The assignment of pointer server dereferences pointer ses, however,
-> this dereference occurs before ses is null checked and hence we
-> have a potential null pointer dereference.  Fix this by only
-> dereferencing ses after it has been null checked.
->
-> Addresses-Coverity: ("Dereference before null check")
-> Fixes: 2808c6639104 ("cifs: add new debugging macro cifs_server_dbg")
-> Signed-off-by: Colin Ian King <colin.king@canonical.com>
-> ---
->  fs/cifs/smb2pdu.c   | 11 ++++++++---
->  fs/cifs/transport.c |  3 ++-
->  2 files changed, 10 insertions(+), 4 deletions(-)
->
-> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
-> index dbc6ef50dd45..0e92983de0b7 100644
-> --- a/fs/cifs/smb2pdu.c
-> +++ b/fs/cifs/smb2pdu.c
-> @@ -2759,8 +2759,10 @@ SMB2_ioctl(const unsigned int xid, struct cifs_tcon *tcon, u64 persistent_fid,
->         else
->                 return -EIO;
->
-> +       if (!ses)
-> +               return -EIO;
->         server = ses->server;
-> -       if (!ses || !(server))
-> +       if (!server)
->                 return -EIO;
->
->         if (smb3_encryption_required(tcon))
-> @@ -3058,13 +3060,16 @@ query_info(const unsigned int xid, struct cifs_tcon *tcon,
->         int rc = 0;
->         int resp_buftype = CIFS_NO_BUFFER;
->         struct cifs_ses *ses = tcon->ses;
-> -       struct TCP_Server_Info *server = ses->server;
-> +       struct TCP_Server_Info *server;
->         int flags = 0;
->         bool allocated = false;
->
->         cifs_dbg(FYI, "Query Info\n");
->
-> -       if (!ses || !(server))
-> +       if (!ses)
-> +               return -EIO;
-> +       server = ses->server;
-> +       if (!server)
->                 return -EIO;
->
->         if (smb3_encryption_required(tcon))
-> diff --git a/fs/cifs/transport.c b/fs/cifs/transport.c
-> index 0d60bd2f4dca..a90bd4d75b4d 100644
-> --- a/fs/cifs/transport.c
-> +++ b/fs/cifs/transport.c
-> @@ -1242,12 +1242,13 @@ SendReceive(const unsigned int xid, struct cifs_ses *ses,
->         struct kvec iov = { .iov_base = in_buf, .iov_len = len };
->         struct smb_rqst rqst = { .rq_iov = &iov, .rq_nvec = 1 };
->         struct cifs_credits credits = { .value = 1, .instance = 0 };
-> -       struct TCP_Server_Info *server = ses->server;
-> +       struct TCP_Server_Info *server;
->
->         if (ses == NULL) {
->                 cifs_dbg(VFS, "Null smb session\n");
->                 return -EIO;
->         }
-> +       server = ses->server;
->         if (server == NULL) {
->                 cifs_dbg(VFS, "Null tcp session\n");
->                 return -EIO;
-> --
-> 2.20.1
->
+So, we have a problem at runtime when things like 'patch' or Python
+Markdown are not installed.
 
+My view is that, as pointed out so well by AB, we must not print
+distro-specific package instructions at runtime.  That just ends in
+madness.
+
+https://gitlab.com/samba-team/samba/merge_requests/758#note_211145140
+
+We do, in configure, suggest the typical RPM and DEB package name for
+things we need, but given the proliferation of tools (apt-get, yum,
+dnf, zypper) we certainly don't want to go for full commands.
+
+What we need is a check at configure time that the python and system
+tools we need are present.  Perhaps some way to use the standard python
+requirements.txt would be nice, but could also cause more problems.
+
+I realise that due to the nature of python (and calling executables)
+that these can diverge between build and install time (of the binaries)
+so I'm all ears on how to solve that also (beyond saying that it a
+distributor problem).
+
+However, I don't want this put into scatter-gut exception handling all
+over the codebase.  It needs to be in one spot, and consistent. 
+
+As we move away from using third_party for this we need to do this
+once, and right.
+
+Andrew Bartlett
 
 -- 
-Thanks,
+Andrew Bartlett
+https://samba.org/~abartlet/
+Authentication Developer, Samba Team         https://samba.org
+Samba Development and Support, Catalyst IT   
+https://catalyst.net.nz/services/samba
 
-Steve
+
+
+
 
