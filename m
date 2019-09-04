@@ -2,49 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 234BBA834D
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 15:00:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C363A8562
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 16:13:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=MFKovwl3xLz5G/E09D46K0EQP0CR2gpkddeq7GrYzSA=; b=d5QlnFHFoYd9AI/84Dxb1A/SYY
-	k9aR6Z01tlewUmdtoGXXn/o8o4sb/GWHlBwVTF4Rqjp0fNReoVi7uXdLZGKYXeJIEjq7TGtG9Cg+d
-	aw9lyG7UMhNSnxsCcQkdhTtli/dS0AHY7JGCeru/fDYnPO/plCSV2UFxzBeAORpbcYQKxUk2Wrk9v
-	QKmueqc4I6NRUCmCKAz/2q2t/q+hu0SE2a/Sw1fzkQv4UMX6V4F9w4Hl6HIsoqXkvhTWu0cna1J3P
-	QhhKAkCWIfbO5Zs1yhteyUQEfTjrRyWmWJgcpYSylsMbpsVhZB4LuAMMGNAoMLoWP3PrKyVMehsIy
-	BeygLFsQ==;
-Received: from localhost ([::1]:19444 helo=hr1.samba.org) 
+	bh=yDACrYP9dJYTh82JU6AqDwO0FvT1xnJqjU0KMaj3F1Y=; b=cJ3Rg6bIkbfN2a+suc8gBs9jBs
+	RYrhyRfrUm5/qCnwO0ab4/jTk+LYv1AiALdh/VaZ9YS0eGMi6HUIPKl9F3XKNggt0KURUWrnlRdar
+	ri8oSRIzfEAGRmahDfEe7kgJCLO3QqdWf1B72onSLVX0nKf/VQT4y7a03zcXjmF6WGi4x2AaSNIdv
+	L8i+R+vZKegq1bnUz+Arzsrkm/vbOFSpN01Rbsj2WIAv/QY7dyl7D3TsIgq9yiN7qvjudGXFHBibG
+	gh+fi8if3njoUjl3DKsg9fdBuWNA9gED3Xb2OKxjRqW/mqSJy12KvwbA3YyHaT/VVYZg1Ug8/iKuy
+	LDo3kB+A==;
+Received: from localhost ([::1]:32696 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i5UtB-003PGY-FW; Wed, 04 Sep 2019 12:59:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45850) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5Ut7-003PGR-TJ
- for samba-technical@lists.samba.org; Wed, 04 Sep 2019 12:59:56 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:Cc:To;
- bh=MFKovwl3xLz5G/E09D46K0EQP0CR2gpkddeq7GrYzSA=; b=s7zqXwXSzlXuQ9F7GJbEsoyNdr
- Gu8TEV/Qp50gRSOPhJ7PiVLIjd1OZnBfTERbimxpQdvtFa3RoNtuyqoYEWTTxMSbzT+sEusPXiPrX
- H9E60XZ+btBgX0Lc27mK0H/UXIImKgmk/lISsk/cOKqFu9zgBQpd0BUlJJ+pwT5qXDyg=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5Ut6-0006Z3-Px; Wed, 04 Sep 2019 12:59:52 +0000
-Subject: Re: [PATCH] Fix joining specific ou (regression from #13861)
-To: Stefan Metzmacher <metze@samba.org>, Alexander Bokovoy <ab@samba.org>
-References: <555a364d-eeda-cf1e-3fd5-eafb3422f347@samba.org>
- <20190904114035.GD25360@onega.vda.li>
- <adc25872-d764-23ac-69fa-9fc2f958e346@samba.org>
- <20190904120318.GE25360@onega.vda.li>
- <f8d0132c-7d8c-b90f-af58-6533246141b0@samba.org>
- <b54f470e-d35f-ca3a-b86d-0373c3d7f364@samba.org>
-Openpgp: preference=signencrypt
-Message-ID: <4b1a3c2c-7689-fb4b-699c-31bb8183544c@samba.org>
-Date: Wed, 4 Sep 2019 14:59:44 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
-MIME-Version: 1.0
-In-Reply-To: <b54f470e-d35f-ca3a-b86d-0373c3d7f364@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature";
- boundary="Li5JFRTRIQCPXV4Db4luslfQEyFfKUOJ3"
+	id 1i5W1j-003R8U-UO; Wed, 04 Sep 2019 14:12:52 +0000
+Received: from mailhopper2.bazuin.nl ([195.134.173.123]:57020) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i5W1g-003R8L-9u; Wed, 04 Sep 2019 14:12:50 +0000
+X-Bazuin-en-Partners-MailScanner-Watermark: 1568211162.87975@Ta/gPTj30aQL9Ttgxxoztw
+X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
+X-Bazuin-en-Partners-MailScanner: Found to be clean
+X-Bazuin-en-Partners-MailScanner-ID: DB6C01207E7.A8294
+X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
+ Partners for more information
+Received: from ms249-lin-003.rotterdam.bazuin.nl
+ (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
+ by mailhopper2.bazuin.nl (Postfix) with ESMTP id DB6C01207E7;
+ Wed,  4 Sep 2019 16:12:41 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
+ s=mail20180308; t=1567606361;
+ bh=UDVMBo4qvBkMWfalSPmCk+5zVsg3DApueKY5eSAMT7k=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=gje/1aOQAwmkslgOCmwXgS2MK72WzUh2DIbXALCgTyJ02+NvNz5yg9uGPUBuVlzhx
+ c5SJ3rAaVi+TQELbuRnGCh7Z8rvP/0O6iDJxRUPt01Ws/S5T8TJyvfOvIuI6WdyCJC
+ HFxlbUQsewyh1Ml+uo09Dczl+tBeBQpj6seg/m4SOUdfZHMtaeIANUEfGZH4EZ87ja
+ t/z6I6I2l5OeYv5kDamsNej5VAl5miNlOi/N2RXIYjafRx5f/5nO5FmRcQMqLuGUzC
+ 80aKa+M+cvKDGjIikHPhlwDDAf3txrjmBkWWC0re0WurHgb2UKTRpVRiO41BVmiCB3
+ O2wiOaHIBbQsA==
+Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
+ by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 1FBD03AF8C;
+ Wed,  4 Sep 2019 16:12:38 +0200 (CEST)
+Subject: RE: [Samba] Samba4 computers not on W10 Network
+To: =?windows-1252?Q?samba=40lists.samba.org?= <samba@lists.samba.org>
+Date: Wed, 4 Sep 2019 16:12:38 +0200
+Mime-Version: 1.0
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <db8842ea-9227-dee8-d589-f1192d0f2565@samba.org>
+References: <CAHcZi78RL0i5gi8p=sYYkD3vD0d69M7AjgTBmtk36UK4KSY2Cg@mail.gmail.com>
+X-Priority: 3 (Normal)
+X-Mailer: Zarafa 6.30.19-25148
+Thread-Index: AdVjKs4rUopYb++lQoyJRAWGn6MlPw==
+Message-Id: <vmime.5d6fc656.4937.59bde85a42e16cb6@ms249-lin-003.rotterdam.bazuin.nl>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,107 +66,59 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?G=C3=BCnther_Deschner_via_samba-technical?=
+From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
+Cc: "=?windows-1252?Q?samba-technical=40lists.samba.org?="
  <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?G=c3=bcnther_Deschner?= <gd@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---Li5JFRTRIQCPXV4Db4luslfQEyFfKUOJ3
-Content-Type: multipart/mixed; boundary="srsZQw20FKGU9L4KlsyhRVu3DVLJu2qoy";
- protected-headers="v1"
-From: =?UTF-8?Q?G=c3=bcnther_Deschner?= <gd@samba.org>
-To: Stefan Metzmacher <metze@samba.org>, Alexander Bokovoy <ab@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>
-Message-ID: <4b1a3c2c-7689-fb4b-699c-31bb8183544c@samba.org>
-Subject: Re: [PATCH] Fix joining specific ou (regression from #13861)
-References: <555a364d-eeda-cf1e-3fd5-eafb3422f347@samba.org>
- <20190904114035.GD25360@onega.vda.li>
- <adc25872-d764-23ac-69fa-9fc2f958e346@samba.org>
- <20190904120318.GE25360@onega.vda.li>
- <f8d0132c-7d8c-b90f-af58-6533246141b0@samba.org>
- <b54f470e-d35f-ca3a-b86d-0373c3d7f364@samba.org>
-In-Reply-To: <b54f470e-d35f-ca3a-b86d-0373c3d7f364@samba.org>
+Hai,=20
 
---srsZQw20FKGU9L4KlsyhRVu3DVLJu2qoy
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+There is some work done here, see:=20
+https://bugzilla.samba.org/show_bug.cgi=3Fid=3D11473=20
 
-On 04/09/2019 14:56, Stefan Metzmacher via samba-technical wrote:
-> Am 04.09.19 um 14:54 schrieb Stefan Metzmacher via samba-technical:
->> Am 04.09.19 um 14:03 schrieb Alexander Bokovoy via samba-technical:
->>> On ke, 04 syys 2019, G=C3=BCnther Deschner via samba-technical wrote:=
+Maybe an extra ping on it.=20
+Would be nice to have it in 4.11. since its directly related to/with SMB1.
 
->>>> Hi Alexander,
->>>>
->>>> On 04/09/2019 13:40, Alexander Bokovoy wrote:
->>>>
->>>>>> @@ -2122,7 +2122,7 @@ ADS_STATUS ads_create_machine_acct(ADS_STRUC=
-T *ads,
->>>>>> =20
->>>>>>  	ret =3D ads_find_machine_acct(ads, &res, machine_escaped);
->>>>>>  	ads_msgfree(ads, res);
->>>>>> -	if (ADS_ERR_OK(ret)) {
->>>>>> +	if (ADS_ERR_OK(ret) && ads_count_replies(ads, res) =3D=3D 1) {
->>>>>>  		DBG_DEBUG("Host account for %s already exists.\n",
->>>>>>  				machine_escaped);
->>>>> I wonder if the check has to be ads_count_replies(ads, res) > 0 ?
->>>>> Technically, there could be a unique name but there might be names =
-in
->>>>> multiple OUs.
->>>>
->>>> The LDAP query looks for the specific samaccountname of that machine=
 
->>>> which will be unique in the entire domain namespace.
->>>
->>> Ok, discussed it more on IRC and since GC search will not be done her=
-e,
->>> '=3D=3D 1' is OK.
->>>
->>> RB+, please push.
->>
->> Please add
->>
->> BUG: https://bugzilla.samba.org/show_bug.cgi?id=3D14007
->>
->> As that's the already existing bug for the regression.
->> And I think is has a similar patch attached.
+Greetz,=20
+
+Louis
+
+
+
+> -----Oorspronkelijk bericht-----
+> Van: samba [mailto:samba-bounces@lists.samba.org] Namens=20
+> Rowland penny via samba
+> Verzonden: woensdag 4 september 2019 15:48
+> Aan: samba@lists.samba.org
+> Onderwerp: Re: [Samba] Samba4 computers not on W10 Network
 >=20
-> Actually please take the patch from the bug
-> as it also moves ads_msgfree(ads, res);
+> On 04/09/2019 14:36, Robert Wooden via samba wrote:
+> > My Samba4 computers (DC's & member server) are not shown=20
+> within W10 File
+> > Explorer Network. Only the other workstations appear.
+> >
+> > I believe this is due to smb1 being depreciated.
+> >
+> > All the folder redirection still works, gpo, etc. Domain=20
+> users can log in.
+> >
+> > What do I need to adjust so these machines appear in smb2=3F
+> >
+> > (I know this has been talked about before sorry.)
+> >
+> Try this: https://github.com/christgau/wsdd
 >=20
-> Thanks!
-> metze
+> Rowland
+>=20
+>=20
+>=20
+> --=20
+> To unsubscribe from this list go to the following URL and read the
+> instructions:  https://lists.samba.org/mailman/options/samba
+>=20
+>=20
 
-Will do and close the new bug, I was looking and looking a regression
-bug but did not find it earlier.
-
-Thanks for checking!
-
-Guenther
-
---=20
-G=C3=BCnther Deschner                    GPG-ID: 8EE11688
-Red Hat                         gdeschner@redhat.com
-Samba Team                              gd@samba.org
-
-
---srsZQw20FKGU9L4KlsyhRVu3DVLJu2qoy--
-
---Li5JFRTRIQCPXV4Db4luslfQEyFfKUOJ3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQQi7xTdNz0EbkNwwhJI6TdojuEWiAUCXW+1QAAKCRBI6TdojuEW
-iBXFAJ4nXxYpD9OSyNBEO8tdXnJqbmX3LQCbBc5ezAXG5yUhUYKFpRbDHMSwS0s=
-=17Mz
------END PGP SIGNATURE-----
-
---Li5JFRTRIQCPXV4Db4luslfQEyFfKUOJ3--
 
