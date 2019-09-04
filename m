@@ -2,46 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2534EA7F1E
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 11:18:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C5BCA7F72
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 11:32:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=Q+kZZdqM1SqKyLL3loaha6b0v5yAWGIUYM8o6dxlLyM=; b=ukiX8YsxjZ9JcdbHRa5jvjSgtg
-	2p6d5WKpjaWBjhXu0FkeRdcSVEHhPFHJ/tyqP65OPaTd4XNJ2uoJX9tUarLHW0X4oe3E/GQP95vUF
-	GJ7KnZPYmHNIMyvpKWrwFp8eqcO6YcxGJK5OvDbS7GbLFcxMVqZ8Et9VraVTUbZyggmfoouOFK0Zb
-	zQKiSsEpfymzcDXbX4g4vWIeWFEgSnh/iWj+y5xiDaBjd5Ku0zUrQYyL0vw6FkFU81qwHPFSwf0Qs
-	J/MhxHlY++HCXhdVAMPnSOzKCWcaLxgheF+9JQ+gGoutPrqn/3RV+SANtyvM4U97oxpW7Flczd0N9
-	TFBE+K+w==;
-Received: from localhost ([::1]:46346 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=55WwKcB7jP4QU2+zG/uAInlOJpAUJFil3XnzEpEera0=; b=SeEqw5Iqn3pglrZL3Jrxk4QzNU
+	WFaNzrbiiwnMYMkOp8+M+RD0gzsb6kaFv2X2y/afdn5Ez+qXKS8xuq5YYckWm/2zKfwa7rtxoj2Au
+	Wrjmr7J47zUetkYk/kZr5MZ4eYXRMp/8rAMU8FS0G/UdJud+zayaV5zAq9T3QX7OTZbLcmkQOD3eN
+	Cqsz7sASisGeRH6iH+CIbN7LKwN4IR46qtiXTO1B161hcBydiiFfXNrvlrsPEPr4WdLF/6uToCWlR
+	dNamGULcgLimNvzYdhSqqSY/1TZ6uMlnvdFm/zsXeq7g8GDRlfTcTQHqZfmdL0AsFsWMVTxaMm7mg
+	tabkBynA==;
+Received: from localhost ([::1]:47212 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i5RQS-003Lwa-VQ; Wed, 04 Sep 2019 09:18:05 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63872) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5RQO-003LwT-Se
- for samba-technical@lists.samba.org; Wed, 04 Sep 2019 09:18:02 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:Cc:To;
- bh=Q+kZZdqM1SqKyLL3loaha6b0v5yAWGIUYM8o6dxlLyM=; b=sgWfOJi4Ta8plA0hy73nOOymiz
- IWFmGM/MMQ1MPOZUON7GnmRH9ggrtXSW7sYjoPOlSQ+VmXooHjV10vM8uUHpTKVhETwPgWY/iLkx4
- IxgiH9lTCCmQl1izl0RT0sZPX6bmG8eJB3JQR0Cc+JF5zBDyQZP22TFBXA6TeKV+8N4Q=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5RQN-0003jL-8o; Wed, 04 Sep 2019 09:17:59 +0000
-Subject: Re: [Announce] Samba 4.11.0rc3 Available for Download
-To: "L.P.H. van Belle" <belle@bazuin.nl>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-References: <E99FB72BA8824B0FAB212FAE35B48FCC@rotterdam.bazuin.nl>
- <vmime.5d6f80b4.1e1b.6bb54cec4bcd19f4@ms249-lin-003.rotterdam.bazuin.nl>
-Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
-Message-ID: <f22b0ebb-ffd1-0cca-60f7-81622ace6ad6@samba.org>
-Date: Wed, 4 Sep 2019 11:17:51 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+	id 1i5ReB-003M7N-Di; Wed, 04 Sep 2019 09:32:15 +0000
+Received: from mx1.redhat.com ([209.132.183.28]:35782) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1i5RdY-003M7G-RU
+ for samba-technical@lists.samba.org; Wed, 04 Sep 2019 09:32:14 +0000
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id 8AC0F2A09A4
+ for <samba-technical@lists.samba.org>; Wed,  4 Sep 2019 09:31:32 +0000 (UTC)
+Received: by mail-ed1-f72.google.com with SMTP id s24so10853406edx.6
+ for <samba-technical@lists.samba.org>; Wed, 04 Sep 2019 02:31:32 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=55WwKcB7jP4QU2+zG/uAInlOJpAUJFil3XnzEpEera0=;
+ b=l2wEjsG9Dzw7mBjCujPCOlXWMP2i5HYbKfyuOue5yV5ATnEUrPJNsd5lmypdGrO2Qz
+ 2D817scQ1K/HtXE9fSW0pghiN2lpOTaptAilM5VL9hOG4fKiMekeBMUIeck4utij/2xZ
+ MZaB5OEjbtoMDZYIyzRTLy9TfJb7z8kEM2hb1K3ovUAETsWCa4RggMfl5AmAeZu1nGQv
+ YGlCssTuhYiXLKZGf9ebLRW/gTnoYNsFQiPQeAR3DWfHwm/SjacnWKUOh558umExl7hr
+ i2yyabxjKINU8dwZ8B2UHf273dEPz7Uh/CnNfZYzY1/AppnO6llCSMDtsw8XcaDEjf6Q
+ rhvQ==
+X-Gm-Message-State: APjAAAXEgwCf5eyzpagkwgj6aKEKhHlR/tOBCzZ6HCwKZsGbG6Kmjd82
+ cNTBUBnRucBQkAoUxAWI3H6ChX/WLMjS/qYTh/gzrDngidQhS7h6+K2vkSXOWWjuresRIDD13wA
+ baJzXyVuF0zSkVjiwCsbmHPSKs0SgIpP5crbo3KUgL8Xg
+X-Received: by 2002:a17:906:30c7:: with SMTP id
+ b7mr32094848ejb.132.1567589491282; 
+ Wed, 04 Sep 2019 02:31:31 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqwWGwjvPc20h9JcEW6BusZOe1XpyZ3f3j2yXPm3V4F5rEpvAPdSfvBMPm5pC7Ba+DJzSGaXfggoQpz+M6ZcUj0=
+X-Received: by 2002:a17:906:30c7:: with SMTP id
+ b7mr32094837ejb.132.1567589491116; 
+ Wed, 04 Sep 2019 02:31:31 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <vmime.5d6f80b4.1e1b.6bb54cec4bcd19f4@ms249-lin-003.rotterdam.bazuin.nl>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="9784VzliESTg6mbJj4bYQ1edq04AxFrG2"
+References: <CAEiGmBL_1J4CBtKRcqx8JpSMTpMKFA6L6kBYpYYGsdXRXsfPaQ@mail.gmail.com>
+ <9b8897329db688e6b8904f636131922fc777c318.camel@samba.org>
+In-Reply-To: <9b8897329db688e6b8904f636131922fc777c318.camel@samba.org>
+Date: Wed, 4 Sep 2019 11:31:19 +0200
+Message-ID: <CAEiGmBK-sRqnTT1myYMgj67q-Em_hPkUMC54azk4SiM1Yb75PQ@mail.gmail.com>
+Subject: Re: Test script test_net_ads.sh can't fail
+To: Andrew Bartlett <abartlet@samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,65 +70,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Lukas Slebodnik <lslebodn@fedoraproject.org>
+From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Isaac Boukris <iboukris@redhat.com>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---9784VzliESTg6mbJj4bYQ1edq04AxFrG2
-Content-Type: multipart/mixed; boundary="peSOBMYiwqGaTomir6dMEKhfnWdTnrkcd";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: "L.P.H. van Belle" <belle@bazuin.nl>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Cc: Lukas Slebodnik <lslebodn@fedoraproject.org>
-Message-ID: <f22b0ebb-ffd1-0cca-60f7-81622ace6ad6@samba.org>
-Subject: Re: [Announce] Samba 4.11.0rc3 Available for Download
-References: <E99FB72BA8824B0FAB212FAE35B48FCC@rotterdam.bazuin.nl>
- <vmime.5d6f80b4.1e1b.6bb54cec4bcd19f4@ms249-lin-003.rotterdam.bazuin.nl>
-In-Reply-To: <vmime.5d6f80b4.1e1b.6bb54cec4bcd19f4@ms249-lin-003.rotterdam.bazuin.nl>
+On Wed, Sep 4, 2019 at 9:46 AM Andrew Bartlett <abartlet@samba.org> wrote:
+>
+> On Wed, 2019-09-04 at 09:20 +0200, Isaac Boukris via samba-technical
+> wrote:
+> > Hi,
+> >
+> > I've submitted wip MR #765 and while working on a test, I realized it
+> > doesn't fail when it should, right after the first call to testit(),
+> > see:
+> > https://gitlab.com/samba-team/samba/merge_requests/765/diffs?commit_id=28f588b18c2f13c217d958914d8cbcc0c4a7368b
+> >
+> > Any clues on this?
+>
+> Failures in Samba tests are from the failure: lines not the exit
+> status.
 
---peSOBMYiwqGaTomir6dMEKhfnWdTnrkcd
-Content-Type: text/plain; charset=windows-1252
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Ah, I thought it was the exit status, the real bug was actually solved
+when I switched to testit_grep.. all ok now.
 
-Am 04.09.19 um 11:15 schrieb L.P.H. van Belle via samba-technical:
-> Hai,
->=20
-> Check again.=20
-> I see 2.3.0 is uploaded.=20
-
-I'll do tevent-0.10.1 in the next hours.
-
-metze
-
-
---peSOBMYiwqGaTomir6dMEKhfnWdTnrkcd--
-
---9784VzliESTg6mbJj4bYQ1edq04AxFrG2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl1vgUMACgkQDbX1YShp
-vVax4w//VfPdIUOtc6aE3LlzBOMpNVbwNmgH+cuJx2d6NkqaWqifTpu/++Fn9jaM
-UH6Pl+TyPQ/JZgHR3MKbuWJR1KnmWJwzbM+Z68EFxphgCyuQ8F7RgrTG2TcCBp7S
-KQ6fu2PJPPnYVAI9woNd289EiAHDSx5JFZzo/mcp7gVAdkics0ht0VfeZlpPT2R8
-+FmDohFYw/TJagzyRSV3Ou4HKJ9gK8S9vKL8zn+y3pELIKf1qEm+KUP7rsjkyUKw
-OV06yZNDkUkRwFVLohuh+D+KHWu8eGfKpJRnCMQqd1+c9ZAyC7FaEv+y1RAiMvEC
-nkHNCwlkHInJ8zqmZL/2SpxBAzufk1f0BnFhRmI/LeZCwtp6jDthBe/mFSUibsuM
-jCfO3tIKL+ig02CJCDGsc4Z5rF0yqlLHkaYVhqZvXAiIL9aACcyUSGzO3rqGvGO6
-fIq5BxlKGKJbN90nLbFa/zwxmMt6yxCVYmY5zUwXDxgHETPCogPx1KLQa9pmvtyV
-dXlOtAdIkYnTJs0LqLEZmVHjwpTn6p3TLU4tUgBQ2++xPibyQ0mokMGT3M3x5s3K
-NaQNPDZuHRzvdcGpV+4DVx1hxwu7H8vVeel8kAXamGKjtAzNlCVBX3esLAImbTkb
-ioSGw7drzbzDVK14E3bpxV5OAc3I070B8lkKqW6E1M0n37QBJjQ=
-=sMYF
------END PGP SIGNATURE-----
-
---9784VzliESTg6mbJj4bYQ1edq04AxFrG2--
+Thank you
 
