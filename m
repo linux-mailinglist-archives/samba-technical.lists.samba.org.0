@@ -2,61 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C5BCA7F72
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 11:32:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8865A8021
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 12:12:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=55WwKcB7jP4QU2+zG/uAInlOJpAUJFil3XnzEpEera0=; b=SeEqw5Iqn3pglrZL3Jrxk4QzNU
-	WFaNzrbiiwnMYMkOp8+M+RD0gzsb6kaFv2X2y/afdn5Ez+qXKS8xuq5YYckWm/2zKfwa7rtxoj2Au
-	Wrjmr7J47zUetkYk/kZr5MZ4eYXRMp/8rAMU8FS0G/UdJud+zayaV5zAq9T3QX7OTZbLcmkQOD3eN
-	Cqsz7sASisGeRH6iH+CIbN7LKwN4IR46qtiXTO1B161hcBydiiFfXNrvlrsPEPr4WdLF/6uToCWlR
-	dNamGULcgLimNvzYdhSqqSY/1TZ6uMlnvdFm/zsXeq7g8GDRlfTcTQHqZfmdL0AsFsWMVTxaMm7mg
-	tabkBynA==;
-Received: from localhost ([::1]:47212 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=ohgR29bAB16NCchTzb8RKqrIyXIJ04zdrf7YXoxNER4=; b=BmPJkXz+FwJlMEhPDIoWKh4FsM
+	67URnlI4e1M2/LzMv3hA05MqGodRB1JW6csEiWTOR0mfFoEcvcFe/xnh5FF1tzCG5OTZq6+lIMEXg
+	/68mmk7OOpkcCRDsm42kOkaPwt1b5sO15nRpv6VUneL47u7gtv1UjzYbrJf9c46+1EhdTpRxFcnT9
+	DJKoLs7v8gtyPFaTwT75/VsIc44X+KgecOc9iGRd/pH16ThuRBGv5BozKgMpd/PnglWto+Hn1PCRz
+	Zo5VNh8tDQFWuvFk08DXCpxSvG+iRNmyymCHcAfc3VVmbK0dQwVf/z2qPuWGMFrO8aN6akQhWeAoh
+	aZlvQpWA==;
+Received: from localhost ([::1]:50522 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i5ReB-003M7N-Di; Wed, 04 Sep 2019 09:32:15 +0000
-Received: from mx1.redhat.com ([209.132.183.28]:35782) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1i5RdY-003M7G-RU
- for samba-technical@lists.samba.org; Wed, 04 Sep 2019 09:32:14 +0000
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 8AC0F2A09A4
- for <samba-technical@lists.samba.org>; Wed,  4 Sep 2019 09:31:32 +0000 (UTC)
-Received: by mail-ed1-f72.google.com with SMTP id s24so10853406edx.6
- for <samba-technical@lists.samba.org>; Wed, 04 Sep 2019 02:31:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=55WwKcB7jP4QU2+zG/uAInlOJpAUJFil3XnzEpEera0=;
- b=l2wEjsG9Dzw7mBjCujPCOlXWMP2i5HYbKfyuOue5yV5ATnEUrPJNsd5lmypdGrO2Qz
- 2D817scQ1K/HtXE9fSW0pghiN2lpOTaptAilM5VL9hOG4fKiMekeBMUIeck4utij/2xZ
- MZaB5OEjbtoMDZYIyzRTLy9TfJb7z8kEM2hb1K3ovUAETsWCa4RggMfl5AmAeZu1nGQv
- YGlCssTuhYiXLKZGf9ebLRW/gTnoYNsFQiPQeAR3DWfHwm/SjacnWKUOh558umExl7hr
- i2yyabxjKINU8dwZ8B2UHf273dEPz7Uh/CnNfZYzY1/AppnO6llCSMDtsw8XcaDEjf6Q
- rhvQ==
-X-Gm-Message-State: APjAAAXEgwCf5eyzpagkwgj6aKEKhHlR/tOBCzZ6HCwKZsGbG6Kmjd82
- cNTBUBnRucBQkAoUxAWI3H6ChX/WLMjS/qYTh/gzrDngidQhS7h6+K2vkSXOWWjuresRIDD13wA
- baJzXyVuF0zSkVjiwCsbmHPSKs0SgIpP5crbo3KUgL8Xg
-X-Received: by 2002:a17:906:30c7:: with SMTP id
- b7mr32094848ejb.132.1567589491282; 
- Wed, 04 Sep 2019 02:31:31 -0700 (PDT)
-X-Google-Smtp-Source: APXvYqwWGwjvPc20h9JcEW6BusZOe1XpyZ3f3j2yXPm3V4F5rEpvAPdSfvBMPm5pC7Ba+DJzSGaXfggoQpz+M6ZcUj0=
-X-Received: by 2002:a17:906:30c7:: with SMTP id
- b7mr32094837ejb.132.1567589491116; 
- Wed, 04 Sep 2019 02:31:31 -0700 (PDT)
+	id 1i5SGk-003Mcj-7P; Wed, 04 Sep 2019 10:12:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31938) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i5SGf-003Mcb-Em
+ for samba-technical@lists.samba.org; Wed, 04 Sep 2019 10:12:03 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Message-ID:From:To:CC;
+ bh=ohgR29bAB16NCchTzb8RKqrIyXIJ04zdrf7YXoxNER4=; b=Jmau/w2Wykzn+F3KK661nT2ra9
+ ilD9HksmLRettqm4+DWOmVpDko8wTQjZBq475DvxLWtBnyg92OcWM+0UwFMtRy0H0TTcYIvkjPyVS
+ UEuwb4rXRqxmsS3hQnThf9cAMjKxuQm6Qsqwa9pwCamp5sUGdQQl+fGGVs62Oc3ToXsw=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i5SGd-0004Tb-RM
+ for samba-technical@lists.samba.org; Wed, 04 Sep 2019 10:11:59 +0000
+To: Samba Technical <samba-technical@lists.samba.org>
+Subject: [PATCH] Fix joining specific ou (regression from #13861)
+Openpgp: preference=signencrypt
+Message-ID: <555a364d-eeda-cf1e-3fd5-eafb3422f347@samba.org>
+Date: Wed, 4 Sep 2019 12:11:51 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-References: <CAEiGmBL_1J4CBtKRcqx8JpSMTpMKFA6L6kBYpYYGsdXRXsfPaQ@mail.gmail.com>
- <9b8897329db688e6b8904f636131922fc777c318.camel@samba.org>
-In-Reply-To: <9b8897329db688e6b8904f636131922fc777c318.camel@samba.org>
-Date: Wed, 4 Sep 2019 11:31:19 +0200
-Message-ID: <CAEiGmBK-sRqnTT1myYMgj67q-Em_hPkUMC54azk4SiM1Yb75PQ@mail.gmail.com>
-Subject: Re: Test script test_net_ads.sh can't fail
-To: Andrew Bartlett <abartlet@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature";
+ boundary="sKRei5yAvADbJzgcSmuAM32VNGrptRAVf"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,30 +52,92 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@redhat.com>
-Cc: samba-technical@lists.samba.org
+From: =?utf-8?q?G=C3=BCnther_Deschner_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?UTF-8?Q?G=c3=bcnther_Deschner?= <gd@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Sep 4, 2019 at 9:46 AM Andrew Bartlett <abartlet@samba.org> wrote:
->
-> On Wed, 2019-09-04 at 09:20 +0200, Isaac Boukris via samba-technical
-> wrote:
-> > Hi,
-> >
-> > I've submitted wip MR #765 and while working on a test, I realized it
-> > doesn't fail when it should, right after the first call to testit(),
-> > see:
-> > https://gitlab.com/samba-team/samba/merge_requests/765/diffs?commit_id=28f588b18c2f13c217d958914d8cbcc0c4a7368b
-> >
-> > Any clues on this?
->
-> Failures in Samba tests are from the failure: lines not the exit
-> status.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--sKRei5yAvADbJzgcSmuAM32VNGrptRAVf
+Content-Type: multipart/mixed; boundary="Ie9f2Ae3gV6U1u9qTRMwrAjKvX4s1Z59U";
+ protected-headers="v1"
+From: =?UTF-8?Q?G=c3=bcnther_Deschner?= <gd@samba.org>
+To: Samba Technical <samba-technical@lists.samba.org>
+Message-ID: <555a364d-eeda-cf1e-3fd5-eafb3422f347@samba.org>
+Subject: [PATCH] Fix joining specific ou (regression from #13861)
 
-Ah, I thought it was the exit status, the real bug was actually solved
-when I switched to testit_grep.. all ok now.
+--Ie9f2Ae3gV6U1u9qTRMwrAjKvX4s1Z59U
+Content-Type: multipart/mixed;
+ boundary="------------207E046CA13601B7249B9DE9"
+Content-Language: en-US
 
-Thank you
+This is a multi-part message in MIME format.
+--------------207E046CA13601B7249B9DE9
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+while fixing bug #13861 we brought in a regression via
+2044ca0e20bd3180720a82506b3af041d14b5c68 (we check only for LDAP result
+code but the result itself). Andreas has a similar patch in his larger
+join related patchset but we should first push this isolated join fix.
+
+Please review and push.
+
+Thanks,
+Guenther
+
+--=20
+G=C3=BCnther Deschner                    GPG-ID: 8EE11688
+Red Hat                         gdeschner@redhat.com
+Samba Team                              gd@samba.org
+
+--------------207E046CA13601B7249B9DE9
+Content-Type: text/plain; charset=UTF-8;
+ name="patch"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="patch"
+
+RnJvbSAwZjYzNTdmNWZjZTJhMjVkZmY5NTdmZmZmYjIzNjI1Mjk1MTI0NGZhIE1vbiBTZXAg
+MTcgMDA6MDA6MDAgMjAwMQpGcm9tOiA9P1VURi04P3E/Rz1DMz1CQ250aGVyPTIwRGVzY2hu
+ZXI/PSA8Z2RAc2FtYmEub3JnPgpEYXRlOiBGcmksIDMwIEF1ZyAyMDE5IDE3OjE5OjUxICsw
+MjAwClN1YmplY3Q6IFtQQVRDSF0gczMvbGliYWRzOiBmaXggam9pbmluZyB0byBBRCBhbmQg
+c3BlY2lmaWMgb3JnYW5pemF0aW9uYWwKIHVuaXRzCgpCVUc6IGh0dHBzOi8vYnVnemlsbGEu
+c2FtYmEub3JnL3Nob3dfYnVnLmNnaT9pZD0xNDExNAoKVGhlIGNoYW5nZSBtYWRlIGluIDIw
+NDRjYTBlMjBiZDMxODA3MjBhODI1MDZiM2FmMDQxZDE0YjVjNjggKGZvciAjMTM4NjEpCmRp
+ZCBvbmx5IGNoZWNrIHdoZXRoZXIgdGhlIExEQVAgcXVlcnkgd2FzIHN1Y2Nlc3NmdWwsIGl0
+IGRpZCBub3QKY2hlY2sgZm9yIHRoZSBMREFQIHJlc3VsdHMuCgpHdWVudGhlcgoKU2lnbmVk
+LW9mZi1ieTogR3VlbnRoZXIgRGVzY2huZXIgPGdkQHNhbWJhLm9yZz4KLS0tCiBzb3VyY2Uz
+L2xpYmFkcy9sZGFwLmMgfCAyICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyks
+IDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9zb3VyY2UzL2xpYmFkcy9sZGFwLmMgYi9z
+b3VyY2UzL2xpYmFkcy9sZGFwLmMKaW5kZXggNGYzZDQzYjAyYjEuLmQ3NzQxZTA5MjBiIDEw
+MDY0NAotLS0gYS9zb3VyY2UzL2xpYmFkcy9sZGFwLmMKKysrIGIvc291cmNlMy9saWJhZHMv
+bGRhcC5jCkBAIC0yMTIyLDcgKzIxMjIsNyBAQCBBRFNfU1RBVFVTIGFkc19jcmVhdGVfbWFj
+aGluZV9hY2N0KEFEU19TVFJVQ1QgKmFkcywKIAogCXJldCA9IGFkc19maW5kX21hY2hpbmVf
+YWNjdChhZHMsICZyZXMsIG1hY2hpbmVfZXNjYXBlZCk7CiAJYWRzX21zZ2ZyZWUoYWRzLCBy
+ZXMpOwotCWlmIChBRFNfRVJSX09LKHJldCkpIHsKKwlpZiAoQURTX0VSUl9PSyhyZXQpICYm
+IGFkc19jb3VudF9yZXBsaWVzKGFkcywgcmVzKSA9PSAxKSB7CiAJCURCR19ERUJVRygiSG9z
+dCBhY2NvdW50IGZvciAlcyBhbHJlYWR5IGV4aXN0cy5cbiIsCiAJCQkJbWFjaGluZV9lc2Nh
+cGVkKTsKIAkJcmV0ID0gQURTX0VSUk9SX0xEQVAoTERBUF9BTFJFQURZX0VYSVNUUyk7Ci0t
+IAoyLjIxLjAKCg==
+--------------207E046CA13601B7249B9DE9--
+
+--Ie9f2Ae3gV6U1u9qTRMwrAjKvX4s1Z59U--
+
+--sKRei5yAvADbJzgcSmuAM32VNGrptRAVf
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQQi7xTdNz0EbkNwwhJI6TdojuEWiAUCXW+N7wAKCRBI6TdojuEW
+iOTxAJ9Vx+BmSYoYaSdiuzsGVWuPpowsbACfa6J19q9D7nf/6k3z8lg3ABDDVhk=
+=sMPF
+-----END PGP SIGNATURE-----
+
+--sKRei5yAvADbJzgcSmuAM32VNGrptRAVf--
 
