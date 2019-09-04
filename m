@@ -2,45 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00A9CA8143
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 13:45:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37EA0A8169
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 13:50:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=wPIpA77Ti0B6gCzPZdRf60f1+EOX3BCS/TNZUoZ55Pc=; b=jJ0gLQXQiQuHnP0NnXXLA7VfK6
-	i9Z8CmYGWw7F/WAIjXX/rhqHhTvzUwU/32cwqPN9HDq+CNNZ+Hy8RTNde1mEdxRvQ3/ihRSAXQbQy
-	qJwr6YxKcsb576lIr6JUSHjRsqvIM51gTrVcGKheFYe6BNQipd9/+TFfd9nBJWdlHNDrOtb1LQchN
-	glYu3S+rU50+2ghUZAUQwnemO+6MNbxABKT1CXKy1VSXoMJd7srS7BLf8A6ygeJqkXEZ2Dr7i0Py5
-	khTzDPgNnL8qh7fzXX6ju13zkpSt8JTAifeMme/kcZ8GLqBH6x2EUO1FTn48LrQ0jgq2i/p0ewKL2
-	jNO5MDwA==;
-Received: from localhost ([::1]:55678 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=jRmqStGDkGYovgKrKTUEOS+hjhPDkrom7sA4A1sYh0A=; b=x/L9EXG+VYoCCqOtusSk6gBI+g
+	/1yo3DdoGbf/M+aXkFkgU1XEjUP3T4UP/PC8F/p1d/9vDmZKtyhgK5aAoeYESgG00svs/Vr0OCyLy
+	VHmxcsXpWDXjLE05ttL+1H7VbmL7ALyDDp6njEtxahyudBws0j1hIzl9I66GvIpdvUXR5fcIerMDQ
+	BhoMCgkay1skKhYs2DOAxYo5z712lpM0Fu+fcyW2eMDVqLNgGatv38E+KASrrbYf8iq5tj2J7QR1b
+	FL2BvtGmnGptjHq5sas/gG12OUdfsYB/xZ71L7OvegFFpn+v633r3X2dWiIjE6mckc0RU3l3rxH+B
+	cGIsKphQ==;
+Received: from localhost ([::1]:56568 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i5Tia-003NTN-5U; Wed, 04 Sep 2019 11:44:56 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12554) 
+	id 1i5Tnv-003NbK-Gu; Wed, 04 Sep 2019 11:50:27 +0000
+Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34]:42753) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5TiW-003NTG-Rm
- for samba-technical@lists.samba.org; Wed, 04 Sep 2019 11:44:54 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:Cc:To;
- bh=wPIpA77Ti0B6gCzPZdRf60f1+EOX3BCS/TNZUoZ55Pc=; b=BzfDhdJ29eMCK3SKf0ezi+Czd7
- 9oAKqp6JepMLB/s8ZZt72N4CmBtMC3b7rMEiKtfFFWv8mth3dNRq8GVEok8JZsqXaqn6SvWYNoVTm
- TIMNbzR/jGkWn/WUC90sLiVbUBwp0Aa3vXnRUNbcs7HVVa83OkfbXltrXj8Hqr9UmjLE=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5TiV-0005YK-DB; Wed, 04 Sep 2019 11:44:51 +0000
-Subject: Re: [PATCH] Fix joining specific ou (regression from #13861)
-To: Alexander Bokovoy <ab@samba.org>
-References: <555a364d-eeda-cf1e-3fd5-eafb3422f347@samba.org>
- <20190904114035.GD25360@onega.vda.li>
-Openpgp: preference=signencrypt
-Message-ID: <adc25872-d764-23ac-69fa-9fc2f958e346@samba.org>
-Date: Wed, 4 Sep 2019 13:44:43 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ (Exim) id 1i5Tnq-003NbD-Iy
+ for samba-technical@lists.samba.org; Wed, 04 Sep 2019 11:50:25 +0000
+Received: by mail-vk1-xa34.google.com with SMTP id t136so4291523vkt.9
+ for <samba-technical@lists.samba.org>; Wed, 04 Sep 2019 04:50:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=jRmqStGDkGYovgKrKTUEOS+hjhPDkrom7sA4A1sYh0A=;
+ b=ufqGs/WCs5lpfmVkRti80FFsimzGyL7FZRhyBUK8CkzyaQQu07975KRe3msxQuPPlC
+ bFMTwk1S75Q6skJcvlrhNBS1xzr0IhGNayzD3F0BCH7cisskhDZ4sBGOAP0HCVVsYCpV
+ jhLw7wj+LSQVCYw/ybdwnixzEfuKOh3v1HDHBl2zuRH8BfxMedwbXbuBJ5Xxg9t5CGzk
+ 9zCYsXUvJQ9XzJZh6SvBk3TpzVpgrO0Ik0QPlIj7ePIpRz/JMt0kE2q0CzSZmiVZvpxc
+ 3qqf88eauEumbOUJ9GK3K4wP2X+A7sUGWNbctEaXwSOAdawhtZvDxN+js5qBW7StaU9s
+ 5K0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=jRmqStGDkGYovgKrKTUEOS+hjhPDkrom7sA4A1sYh0A=;
+ b=NqSLbY7fmvGbychcsbl8Mtk/egmqr9XuOzCx4vI9gYZlR8TGIyjD7jtqEtbd5nHL/N
+ 4bkCcRwVpkHHrHpJ2Zr5e61/bDsB4kwm5Hu4IjwwTPa0NUgq61c7hPRgiDSebKtadWcK
+ I//HxmwJZ0BA823Yb+lXj85PauUpIOCXV25xdKhh0XBZmNvVRZhCpChffh75one26anJ
+ +del2B18k5sV05wHM2EEaatICgglaI8m7V/3XHnnSMALZIM3PjfGQ5eyDvonpUFaWqyo
+ rWLHwY/WD/x+r5zbQcDxEgEh2ERVc6CaMh1bQ/efWHHx75XXQGuLuOznZkrOK2Kmn1QC
+ HGkg==
+X-Gm-Message-State: APjAAAWLQJ/CoS9AxtqG4YD21sIwO+wpz8fArrjYgYTWrnmNXGVVSViz
+ NzuZRlwQuG2kro6q89lT9gmRsKZUzAkeUQ9Pl3A=
+X-Google-Smtp-Source: APXvYqwsLIaA7QzWNk0GtMCWwjfa+eG9zHUZgpeOCF3BGbPzHg62ly3Ikned0hq4w28SP+MYHJcnl8ypdQcFO7ehJIk=
+X-Received: by 2002:a1f:1e14:: with SMTP id e20mr927053vke.91.1567597820736;
+ Wed, 04 Sep 2019 04:50:20 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190904114035.GD25360@onega.vda.li>
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature";
- boundary="lpz7ZmFAR9M4WA8uSm0AitGA1abOpetgh"
+References: <ad9719c06273cac4686726b293ce9e78fecd8ca4.camel@samba.org>
+In-Reply-To: <ad9719c06273cac4686726b293ce9e78fecd8ca4.camel@samba.org>
+Date: Wed, 4 Sep 2019 07:50:09 -0400
+Message-ID: <CAOCN9rw95H1SAZr+CSGQyuOVBgJAUysGuHazxwWQUN4=kDFfnA@mail.gmail.com>
+Subject: Re: PROPOSAL: deprecate plaintext password support (in SMB1) for 4.11?
+To: Andrew Bartlett <abartlet@samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,75 +67,79 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?G=C3=BCnther_Deschner_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?G=c3=bcnther_Deschner?= <gd@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>
+From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---lpz7ZmFAR9M4WA8uSm0AitGA1abOpetgh
-Content-Type: multipart/mixed; boundary="xY7pyUPyaQayGzjnyDEGapD8VCcQhUVOn";
- protected-headers="v1"
-From: =?UTF-8?Q?G=c3=bcnther_Deschner?= <gd@samba.org>
-To: Alexander Bokovoy <ab@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>
-Message-ID: <adc25872-d764-23ac-69fa-9fc2f958e346@samba.org>
-Subject: Re: [PATCH] Fix joining specific ou (regression from #13861)
-References: <555a364d-eeda-cf1e-3fd5-eafb3422f347@samba.org>
- <20190904114035.GD25360@onega.vda.li>
-In-Reply-To: <20190904114035.GD25360@onega.vda.li>
+On Wed, Sep 4, 2019 at 4:24 AM Andrew Bartlett via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> It is quite late for Samba 4.11 but I wondered what folks would think
+> of marking 'encrypt passwords' as deprecated so we can consider to
+> remove this code in Samba 4.12 (eg master) later this year?
+>
+> This would dovetail with the SMB1 deprecation effort and I hope also
+> help find users who can't live without this (because SMB2 doesn't have
+> this at all).
 
---xY7pyUPyaQayGzjnyDEGapD8VCcQhUVOn
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+It's a good idea as a behavior. But you're right that it is *really*
+late in the release process. By "depreceate", do you mean deprecate in
+the documentation? Or to change any software behavior?
 
-Hi Alexander,
+> I'm unclear if this even works, given bugs like:
+> https://bugzilla.samba.org/show_bug.cgi?id=9705
+>
+> If this is supported I'll polish up the attached patch and then write a
+> WHATSNEW for 4.11.
+>
+> It doesn't commit us to doing anything in master / 4.12 (and we might
+> want to wait till closer to the end of the year for feedback), but I
+> took a stab at seeing what it might allow us to remove and this was the
+> diffstat (and there is probably more if we tried):
+>
+>  /docs-xml/smbdotconf/security/encryptpasswords.xml  |   43 -
+>  b/docs-xml/smbdotconf/security/encryptpasswords.xml |    4
+>  b/lib/replace/wscript                               |    1
+>  b/source3/auth/auth.c                               |    9
+>  b/source3/auth/pampass.c                            |  132 ---
+>  b/source3/auth/proto.h                              |   14
+>  b/source3/auth/wscript_build                        |    8
+>  b/source3/param/loadparm.c                          |    1
+>  b/source3/smbd/globals.h                            |    1
+>  b/source3/smbd/negprot.c                            |   62 -
+>  b/source3/smbd/reply.c                              |    6
+>  b/source3/smbd/sesssetup.c                          |  104 --
+>  b/source3/utils/testparm.c                          |   26
+>  b/source3/wscript                                   |    1
+>  b/source3/wscript_build                             |    1
+>  b/source4/auth/ntlm/wscript_build                   |    8
+>  b/source4/smb_server/smb/negprot.c                  |   63 -
+>  b/source4/smb_server/smb_server.h                   |    3
+>  lib/replace/crypt.c                                 |  770 --------------------
+>  source3/auth/auth_unix.c                            |  104 --
+>  source3/auth/pass_check.c                           |  294 -------
+>  source4/auth/ntlm/auth_unix.c                       |  769 -------------------
+>  22 files changed, 70 insertions(+), 2354 deletions(-)
+>
+> What do folks think?
+>
+> Andrew Bartlett
 
-On 04/09/2019 13:40, Alexander Bokovoy wrote:
+Obviously, Iyou are far more active in the source code than us mere
+mortals. But as an occasional software developer, more than 2000 lines
+of deletion in 22 C files, that hasn't been through *any* of the
+releases QA? That's begging for trouble with an unexpected dependency,
+and it's not a critical feature. I'd push actual deletion back to
+4.12, and be cautious about even inserting a deprecation warning at
+this late date.
 
->> @@ -2122,7 +2122,7 @@ ADS_STATUS ads_create_machine_acct(ADS_STRUCT *a=
-ds,
->> =20
->>  	ret =3D ads_find_machine_acct(ads, &res, machine_escaped);
->>  	ads_msgfree(ads, res);
->> -	if (ADS_ERR_OK(ret)) {
->> +	if (ADS_ERR_OK(ret) && ads_count_replies(ads, res) =3D=3D 1) {
->>  		DBG_DEBUG("Host account for %s already exists.\n",
->>  				machine_escaped);
-> I wonder if the check has to be ads_count_replies(ads, res) > 0 ?
-> Technically, there could be a unique name but there might be names in
-> multiple OUs.
-
-The LDAP query looks for the specific samaccountname of that machine
-which will be unique in the entire domain namespace.
-
-> Other than that, RB+, please push.
-
-Thanks!
-Guenther
-
---=20
-G=C3=BCnther Deschner                    GPG-ID: 8EE11688
-Red Hat                         gdeschner@redhat.com
-Samba Team                              gd@samba.org
-
-
---xY7pyUPyaQayGzjnyDEGapD8VCcQhUVOn--
-
---lpz7ZmFAR9M4WA8uSm0AitGA1abOpetgh
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQQi7xTdNz0EbkNwwhJI6TdojuEWiAUCXW+jqwAKCRBI6TdojuEW
-iFz4AKCQw17A7G65m+HUpbJESW6H1tA0cACgnH920InWvivfva8S4BdbO09c7q8=
-=jrwE
------END PGP SIGNATURE-----
-
---lpz7ZmFAR9M4WA8uSm0AitGA1abOpetgh--
+> --
+> Andrew Bartlett                       http://samba.org/~abartlet/
+> Authentication Developer, Samba Team  http://samba.org
+> Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+>
+>
+>
 
