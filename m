@@ -2,57 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C363A8562
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 16:13:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD8BBA863B
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 17:55:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=yDACrYP9dJYTh82JU6AqDwO0FvT1xnJqjU0KMaj3F1Y=; b=cJ3Rg6bIkbfN2a+suc8gBs9jBs
-	RYrhyRfrUm5/qCnwO0ab4/jTk+LYv1AiALdh/VaZ9YS0eGMi6HUIPKl9F3XKNggt0KURUWrnlRdar
-	ri8oSRIzfEAGRmahDfEe7kgJCLO3QqdWf1B72onSLVX0nKf/VQT4y7a03zcXjmF6WGi4x2AaSNIdv
-	L8i+R+vZKegq1bnUz+Arzsrkm/vbOFSpN01Rbsj2WIAv/QY7dyl7D3TsIgq9yiN7qvjudGXFHBibG
-	gh+fi8if3njoUjl3DKsg9fdBuWNA9gED3Xb2OKxjRqW/mqSJy12KvwbA3YyHaT/VVYZg1Ug8/iKuy
-	LDo3kB+A==;
-Received: from localhost ([::1]:32696 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=XeJyi7bLpyZFNd33BPltjsMcJwuRjUiCIOfHrjEqMv8=; b=3bI1jcNLNP/0/nxU0wnAt3w20O
+	jElBqkSrPaQItn9JEgVjxlrJL5foyp/1TRg/Niace0uSI2X68ivnOXjzJGiZfOaxEnswzMMFz5mLt
+	/qujpU2Hr0U64GBGDlgi4ffQqA89d4HFwCzq7jPcNdYAA4n1Ajf6NJbNJjlioSvUL6r5SqGHhufJ1
+	kufzewjjtgBpcI7GdYUTOmDKS6jm+1h5GtksWQEhPvVrAIgoykAnGICFMv84eETpGNKOjQC65SwZ3
+	c7geX0sDocPfh5QcYCB3cMU0olr6fWFGalClDZUKT5AZR28AHPFrJCuSukG5l8UyqB4Tte8H+cwgc
+	MLL+nZ/Q==;
+Received: from localhost ([::1]:38964 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i5W1j-003R8U-UO; Wed, 04 Sep 2019 14:12:52 +0000
-Received: from mailhopper2.bazuin.nl ([195.134.173.123]:57020) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5W1g-003R8L-9u; Wed, 04 Sep 2019 14:12:50 +0000
-X-Bazuin-en-Partners-MailScanner-Watermark: 1568211162.87975@Ta/gPTj30aQL9Ttgxxoztw
-X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
-X-Bazuin-en-Partners-MailScanner: Found to be clean
-X-Bazuin-en-Partners-MailScanner-ID: DB6C01207E7.A8294
-X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
- Partners for more information
-Received: from ms249-lin-003.rotterdam.bazuin.nl
- (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
- by mailhopper2.bazuin.nl (Postfix) with ESMTP id DB6C01207E7;
- Wed,  4 Sep 2019 16:12:41 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
- s=mail20180308; t=1567606361;
- bh=UDVMBo4qvBkMWfalSPmCk+5zVsg3DApueKY5eSAMT7k=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=gje/1aOQAwmkslgOCmwXgS2MK72WzUh2DIbXALCgTyJ02+NvNz5yg9uGPUBuVlzhx
- c5SJ3rAaVi+TQELbuRnGCh7Z8rvP/0O6iDJxRUPt01Ws/S5T8TJyvfOvIuI6WdyCJC
- HFxlbUQsewyh1Ml+uo09Dczl+tBeBQpj6seg/m4SOUdfZHMtaeIANUEfGZH4EZ87ja
- t/z6I6I2l5OeYv5kDamsNej5VAl5miNlOi/N2RXIYjafRx5f/5nO5FmRcQMqLuGUzC
- 80aKa+M+cvKDGjIikHPhlwDDAf3txrjmBkWWC0re0WurHgb2UKTRpVRiO41BVmiCB3
- O2wiOaHIBbQsA==
-Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
- by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 1FBD03AF8C;
- Wed,  4 Sep 2019 16:12:38 +0200 (CEST)
-Subject: RE: [Samba] Samba4 computers not on W10 Network
-To: =?windows-1252?Q?samba=40lists.samba.org?= <samba@lists.samba.org>
-Date: Wed, 4 Sep 2019 16:12:38 +0200
-Mime-Version: 1.0
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <db8842ea-9227-dee8-d589-f1192d0f2565@samba.org>
-References: <CAHcZi78RL0i5gi8p=sYYkD3vD0d69M7AjgTBmtk36UK4KSY2Cg@mail.gmail.com>
-X-Priority: 3 (Normal)
-X-Mailer: Zarafa 6.30.19-25148
-Thread-Index: AdVjKs4rUopYb++lQoyJRAWGn6MlPw==
-Message-Id: <vmime.5d6fc656.4937.59bde85a42e16cb6@ms249-lin-003.rotterdam.bazuin.nl>
+	id 1i5Xcb-003SDR-Sy; Wed, 04 Sep 2019 15:55:01 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12128) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i5XcX-003SDK-RL
+ for samba-technical@lists.samba.org; Wed, 04 Sep 2019 15:55:00 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=XeJyi7bLpyZFNd33BPltjsMcJwuRjUiCIOfHrjEqMv8=; b=QdofmGVPAWN/rzdAFbTpoNfiC7
+ Tcqam3dXymmPSl6UMMLhvA/nEYmkpBO4rEmD8BzlAhjyHMRsipdXqRqJ01lIYVM720PCodWcjUoTC
+ f7I/zqJUXVTdwcDa/ZCmS7a1WT14aG6edDMx2rPeu0fXRTcymFXnoJtb/DmTb5otJir4=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i5XcV-0008Fr-BI; Wed, 04 Sep 2019 15:54:55 +0000
+Date: Wed, 4 Sep 2019 08:54:50 -0700
+To: Stefan Metzmacher <metze@samba.org>
+Subject: Re: PROPOSAL: deprecate plaintext password support (in SMB1) for 4.11?
+Message-ID: <20190904155450.GA162682@jra4>
+References: <ad9719c06273cac4686726b293ce9e78fecd8ca4.camel@samba.org>
+ <e5796781-277a-5e10-cd55-0322f42783d7@samba.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <e5796781-277a-5e10-cd55-0322f42783d7@samba.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,59 +51,48 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
-Cc: "=?windows-1252?Q?samba-technical=40lists.samba.org?="
- <samba-technical@lists.samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hai,=20
+On Wed, Sep 04, 2019 at 12:58:25PM +0200, Stefan Metzmacher via samba-technical wrote:
+> Hi Andrew,
+> 
+> > It is quite late for Samba 4.11 but I wondered what folks would think
+> > of marking 'encrypt passwords' as deprecated so we can consider to
+> > remove this code in Samba 4.12 (eg master) later this year?
+> > 
+> > This would dovetail with the SMB1 deprecation effort and I hope also
+> > help find users who can't live without this (because SMB2 doesn't have
+> > this at all).  
+> > 
+> > I'm unclear if this even works, given bugs like:
+> > https://bugzilla.samba.org/show_bug.cgi?id=9705
+> > 
+> > If this is supported I'll polish up the attached patch and then write a
+> > WHATSNEW for 4.11.
+> 
+> I don't see an attached patch, but I like the idea of deprecating
+> plaintext passwords,
 
-There is some work done here, see:=20
-https://bugzilla.samba.org/show_bug.cgi=3Fid=3D11473=20
++1 on removing the plaintext password code.
 
-Maybe an extra ping on it.=20
-Would be nice to have it in 4.11. since its directly related to/with SMB1.
+> maybe we should also deprecate lanman auth
+> and ntlmv1, we may not go on and remove them before SMB1, but
+> people should avoid them.
+> 
+> > It doesn't commit us to doing anything in master / 4.12 (and we might
+> > want to wait till closer to the end of the year for feedback), but I
+> > took a stab at seeing what it might allow us to remove and this was the
+> > diffstat (and there is probably more if we tried):
+> 
+> For now just mark them as deprecated and defer the removal decision.
 
++1 on deprecate lanman auth and ntlmv1, but we can't
+remove I think until SMB1 is removed.
 
-Greetz,=20
-
-Louis
-
-
-
-> -----Oorspronkelijk bericht-----
-> Van: samba [mailto:samba-bounces@lists.samba.org] Namens=20
-> Rowland penny via samba
-> Verzonden: woensdag 4 september 2019 15:48
-> Aan: samba@lists.samba.org
-> Onderwerp: Re: [Samba] Samba4 computers not on W10 Network
->=20
-> On 04/09/2019 14:36, Robert Wooden via samba wrote:
-> > My Samba4 computers (DC's & member server) are not shown=20
-> within W10 File
-> > Explorer Network. Only the other workstations appear.
-> >
-> > I believe this is due to smb1 being depreciated.
-> >
-> > All the folder redirection still works, gpo, etc. Domain=20
-> users can log in.
-> >
-> > What do I need to adjust so these machines appear in smb2=3F
-> >
-> > (I know this has been talked about before sorry.)
-> >
-> Try this: https://github.com/christgau/wsdd
->=20
-> Rowland
->=20
->=20
->=20
-> --=20
-> To unsubscribe from this list go to the following URL and read the
-> instructions:  https://lists.samba.org/mailman/options/samba
->=20
->=20
-
+Just my 2cents.
 
