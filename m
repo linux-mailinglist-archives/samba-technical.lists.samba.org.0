@@ -2,58 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9FD3FA7763
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 01:00:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 12513A7CAB
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 09:21:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=tpxNAEZbBezwq3krS/EPGkxMHdh8CnRju4ktRcIZ7Zk=; b=neRweRvOmE+WRkEPupD7ozdst8
-	JmBsc5T5OmgTgJaPp7SuDQvE88Mkg0dQ948NB1q0uyLn1Q2xz61aNIbmb4MqPwV7OmpeWN9RoqZby
-	76jXMHXzwnQconMqC4IZmeBy8Zz9/SPgqG8XryUR+qsvh/FHHroAsNduTNvG9HOJHcGwh4QyFSjf9
-	jDalrR2jz6C6ktE7Wys/90Gz3trdsD6hNhACpCf/nSihb5gBbLimQuMl70WAyLL3rpU1g7z0e3DKx
-	r1fNyh6gRlrBHy6jYdQzN8095vZG2JUtVXMqkLSR8qKmF7VhX72idMM09yXBvFD8D+Udwq63HRbCR
-	zkXPF6mw==;
-Received: from localhost ([::1]:29124 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=czc7nEzhPBWVAILaYzFkSqGEx1pif7ede7wY1jWBV9Q=; b=nZUJz7YbcbVqFEyYY76zmDt4YQ
+	QuEGSoTvicwMKtmft8P5/Mgar8NAaCHd42eDzi0TSZTw9GOYBPq3S+zdSW3H7v7yYprO4K9gt88Vj
+	ADPoPw2egaaXLikMtZDPgl+Xx9K20n8FFaotp7fT8AFs1w9XJByrTd/IR4lf2XPOXVwWzHhfxkpip
+	NAztmCqnHmKmtQJXc1/rxXpTkoWP+a80egkHwmmIv8oVPpedVoSPPwKBF5IL5N5rxzpxCaw+c8TdE
+	y0D1N4CUUnHB4tuuLQ6FzhzRC6CgrsmN4t0EmaVnXtPVXPidBlIqxLRUjtR5sZxSRIjo45Ly7X8HI
+	WLKUlsYw==;
+Received: from localhost ([::1]:35518 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i5HnB-003I0e-Sr; Tue, 03 Sep 2019 23:00:53 +0000
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:46104) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5Hn7-003I0X-7Q
- for samba-technical@lists.samba.org; Tue, 03 Sep 2019 23:00:51 +0000
-Received: by mail-io1-xd43.google.com with SMTP id x4so39740903iog.13
- for <samba-technical@lists.samba.org>; Tue, 03 Sep 2019 16:00:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=tpxNAEZbBezwq3krS/EPGkxMHdh8CnRju4ktRcIZ7Zk=;
- b=uBVTXNDGAu2CZ3gfw1R8LXJIkTM7cRM1AKrXvM6VeJhI3/oxjkXgiFGfG+dU/6EXx4
- J5qofNI8wMt78KduWlVBJn7MVxUKmT4XjZ8LfUeHm/DCbRuRtJ9ZcKQ+pv7f5UgXgg5O
- CtwFNhyeyiK5L8eTToQ4g5R2i+XZ/bw3n36qRWHI93hMNkC/M9vHriIsEztNrpFFsDGL
- FoDWTQtPQDGqsIge2R7sm5PjuuevR9DEg5hoebpOpH7kqxFwYTbcFtPCq+NkL3JDL3/C
- G/Fxx3mHYbYFYkp4NgOvmhmY+QUvm6Ccu+B+pjyzvZi7iynzy30Kwabl2lhpxG02/23u
- 49ZQ==
+	id 1i5PbK-003KG4-0Y; Wed, 04 Sep 2019 07:21:10 +0000
+Received: from mx1.redhat.com ([209.132.183.28]:58196) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1i5PbE-003KF6-MP
+ for samba-technical@lists.samba.org; Wed, 04 Sep 2019 07:21:07 +0000
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mx1.redhat.com (Postfix) with ESMTPS id BF4988553A
+ for <samba-technical@lists.samba.org>; Wed,  4 Sep 2019 07:21:00 +0000 (UTC)
+Received: by mail-ed1-f71.google.com with SMTP id s24so10646672edx.6
+ for <samba-technical@lists.samba.org>; Wed, 04 Sep 2019 00:21:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=tpxNAEZbBezwq3krS/EPGkxMHdh8CnRju4ktRcIZ7Zk=;
- b=N3wAR+R3MWpy+9BhIytBttVdJKm95IkOasr2CaJUlgy3S7H5QZIrZU4jaWAuqFkTUl
- cRK1BlZOiUrmQGvwXHU344FRZNX81StdZFLHAzCK3i4A+20qZHDcX8AZM476yUH7bssJ
- WLrNHnSN4igk48D9fAqp+LGQntmp1uY36AsMlbuew5gusCoiURHw6jA23igR+pudDbCt
- yHBJ/cA2BGdDazVUioSGLd9y2NKVvMLQThyuS+CHjeW6gGQuTkvhYbYylsevr6m5ey+r
- 9bOd8dr7Yb0ueV4EGsqXPEMO648EkSjbArr1mCqtJ9DTNXM9cWBjhy0k5occoplh3/ka
- Id0Q==
-X-Gm-Message-State: APjAAAWDaJq2jrS0CXfm4NqUyepvRlgCvigCwF3659allzAlaJZvtsoT
- d+tLEskQMeQu9OlD/ntXbHeWV6gXJzx9HZJyEwU=
-X-Google-Smtp-Source: APXvYqxsOkNd+mfBG98uFsA7r0+q+sM6MuQE6T9/FQt4kuwwmZcu5yVUsRyxEhkBbMuljLlPUe2OD8dgoD6iYadwyDc=
-X-Received: by 2002:a5e:d70b:: with SMTP id v11mr3421263iom.252.1567551645380; 
- Tue, 03 Sep 2019 16:00:45 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=czc7nEzhPBWVAILaYzFkSqGEx1pif7ede7wY1jWBV9Q=;
+ b=eMxKD8zZkrgTQlVWE780hSwuvBDZtUmJl/5/P9SexHmghremejF3gXNgrkx4QoB5iM
+ ii1MBPRRyYHDWnsses53zh/NkXmd5x2IP2ME7aXl9ymGO3sdd2PCWS03tHoxvqpN93PX
+ 9IWufbPPqeh0W1PNO2ijl/JWcBWHJXqBF3apyWhDRY1ETqwAVx3qVkEa1xUyvq/ywQHr
+ KyGVnwM+tXyX+Zdd/PmbQOlSGGmDvfvohRqg1apltdinJh4SQ95GTsezzk/iA4oG3pUc
+ lCloUOFSBf2WEbekHKmDXu3pASEWsurevVtGtAiAFVj+mNUSRWvhAg5IFLIxhFD2mLfp
+ h2cg==
+X-Gm-Message-State: APjAAAXETsMZZMTC83JHUIhwAgSUoEJY+q7laGUDW25zA4H/uigmBG2y
+ kE9OLdN2YVsG69p6jh+hYszslX/tufHXluGTojXJbmdg0RVg4NcdJ+wX81MXln6TIjAkOmVsoLH
+ q75Oj+VX1TPbpEezbYv8q3QaCY7FpjqD1R5FA5lokqzj3
+X-Received: by 2002:a05:6402:1594:: with SMTP id
+ c20mr40040518edv.130.1567581659340; 
+ Wed, 04 Sep 2019 00:20:59 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqz4o4PtKWz/5t7c1HW3W3gOUFs+CDTM6T1HVkw0QLBFJGZGPcHzuocK/NZfG1rC/IBAI4o7RQIjW7MiONbLJLM=
+X-Received: by 2002:a05:6402:1594:: with SMTP id
+ c20mr40040510edv.130.1567581659246; 
+ Wed, 04 Sep 2019 00:20:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAH2r5mtzztgoW91TvG_wTYju10dNJ+=r8Ncx3f3bebstMZiCpA@mail.gmail.com>
-In-Reply-To: <CAH2r5mtzztgoW91TvG_wTYju10dNJ+=r8Ncx3f3bebstMZiCpA@mail.gmail.com>
-Date: Wed, 4 Sep 2019 09:00:33 +1000
-Message-ID: <CAN05THSp4vOHiZ7jqdVfLSbN2HD8nzEkq5aU_NSGVFFM2_4wTg@mail.gmail.com>
-Subject: Re: [PATCH] smb3: log warning if CSC policy conflicts with linux
- kernel client cache mount option
-To: Steve French <smfrench@gmail.com>
+Date: Wed, 4 Sep 2019 09:20:48 +0200
+Message-ID: <CAEiGmBL_1J4CBtKRcqx8JpSMTpMKFA6L6kBYpYYGsdXRXsfPaQ@mail.gmail.com>
+Subject: Test script test_net_ads.sh can't fail
+To: samba-technical@lists.samba.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -68,53 +66,20 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Isaac Boukris <iboukris@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Reviewed-by: Ronnie Sahlberg <lsahlber@redhat.com>
+Hi,
 
+I've submitted wip MR #765 and while working on a test, I realized it
+doesn't fail when it should, right after the first call to testit(),
+see:
+https://gitlab.com/samba-team/samba/merge_requests/765/diffs?commit_id=28f588b18c2f13c217d958914d8cbcc0c4a7368b
 
-On Wed, Sep 4, 2019 at 8:54 AM Steve French <smfrench@gmail.com> wrote:
->
-> If the server config (e.g. Samba smb.conf "csc policy = disable)
-> for the share indicates that the share should not be cached, log
-> a warning message in the Linux kernel client if forced client side
-> caching ("cache=ro" or "cache=singleclient") was requested on mount.
->
-> Signed-off-by: Steve French <stfrench@microsoft.com>
-> ---
->  fs/cifs/connect.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
->
-> diff --git a/fs/cifs/connect.c b/fs/cifs/connect.c
-> index d9a995588c74..85f8d943a05a 100644
-> --- a/fs/cifs/connect.c
-> +++ b/fs/cifs/connect.c
-> @@ -3478,6 +3478,14 @@ cifs_get_tcon(struct cifs_ses *ses, struct
-> smb_vol *volume_info)
->          tcon->use_resilient = true;
->      }
->
-> +    /* If the user really knows what they are doing they can override */
-> +    if (tcon->share_flags & SMB2_SHAREFLAG_NO_CACHING) {
-> +        if (volume_info->cache_ro)
-> +            cifs_dbg(VFS, "cache=ro requested on mount but NO_CACHING
-> flag set on share\n");
-> +        else if (volume_info->cache_rw)
-> +            cifs_dbg(VFS, "cache=singleclient requested on mount but
-> NO_CACHING flag set on share\n");
-> +    }
-> +
->      /*
->       * We can have only one retry value for a connection to a share so for
->       * resources mounted more than once to the same server share the last
->
-> --
-> Thanks,
->
-> Steve
+Any clues on this?
+
+Thanks,
+Isaac
 
