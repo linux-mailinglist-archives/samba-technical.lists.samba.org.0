@@ -2,43 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8865A8021
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 12:12:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 295EBA80B8
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 12:59:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=ohgR29bAB16NCchTzb8RKqrIyXIJ04zdrf7YXoxNER4=; b=BmPJkXz+FwJlMEhPDIoWKh4FsM
-	67URnlI4e1M2/LzMv3hA05MqGodRB1JW6csEiWTOR0mfFoEcvcFe/xnh5FF1tzCG5OTZq6+lIMEXg
-	/68mmk7OOpkcCRDsm42kOkaPwt1b5sO15nRpv6VUneL47u7gtv1UjzYbrJf9c46+1EhdTpRxFcnT9
-	DJKoLs7v8gtyPFaTwT75/VsIc44X+KgecOc9iGRd/pH16ThuRBGv5BozKgMpd/PnglWto+Hn1PCRz
-	Zo5VNh8tDQFWuvFk08DXCpxSvG+iRNmyymCHcAfc3VVmbK0dQwVf/z2qPuWGMFrO8aN6akQhWeAoh
-	aZlvQpWA==;
-Received: from localhost ([::1]:50522 helo=hr1.samba.org) 
+	bh=C3ye/X3SK7uD6Eqm/7cQi6AR6rs900/+LjG87LplGwI=; b=P98iBoUqKWbq7nBC7rhvII+wnR
+	LS2QlmW3NVx6XzvUchoNkJm1TZyr/4Y3j8+37l/DVXjx9ootGRDI7Mtlz4tWM6nJVXvRc/GDLyCaE
+	ACoPTXPPVjlQf3bnIvUWeDNO2yD9MGv4a9Og3yBBqeJTkDwIztNUVO+WOgq2vc8xwigfEm6peBgSE
+	5BNiEcTgsLgMBmkeguSw8Re9Z0IbKzzPV1phAMMxW/qXUEgzNvVEiNLrpKSRn3j6CTuZM5cO1XPGQ
+	Hz6POWPFbS7qCQefAhgJ3QVW0OtVumabDSUmwQIW6KIopsK3aCRxqda8oMspim0IbU4OzNPNFgVNF
+	BMktDWLA==;
+Received: from localhost ([::1]:51442 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i5SGk-003Mcj-7P; Wed, 04 Sep 2019 10:12:06 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31938) 
+	id 1i5Szj-003Mqv-7X; Wed, 04 Sep 2019 10:58:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48456) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5SGf-003Mcb-Em
- for samba-technical@lists.samba.org; Wed, 04 Sep 2019 10:12:03 +0000
+ (Exim) id 1i5Sze-003Mqo-Dm
+ for samba-technical@lists.samba.org; Wed, 04 Sep 2019 10:58:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42627210; h=Date:Message-ID:From:To:CC;
- bh=ohgR29bAB16NCchTzb8RKqrIyXIJ04zdrf7YXoxNER4=; b=Jmau/w2Wykzn+F3KK661nT2ra9
- ilD9HksmLRettqm4+DWOmVpDko8wTQjZBq475DvxLWtBnyg92OcWM+0UwFMtRy0H0TTcYIvkjPyVS
- UEuwb4rXRqxmsS3hQnThf9cAMjKxuQm6Qsqwa9pwCamp5sUGdQQl+fGGVs62Oc3ToXsw=;
+ bh=C3ye/X3SK7uD6Eqm/7cQi6AR6rs900/+LjG87LplGwI=; b=VD3oschRWueTOy1136Y18onC7T
+ O3+GRStuK1yjA5LBH3gIK/Wl6uc3QFOkY+8HzjMErz/8GszE7T9fTmI6Ui2dseUkjAPJOBfWaIfUp
+ qKRjE3yP6jIzANS4WfR+qdDGtsfHRlCOzhuwHxlpJ9XRavF/QlCbEYsuUjRmSj0pFUTc=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5SGd-0004Tb-RM
- for samba-technical@lists.samba.org; Wed, 04 Sep 2019 10:11:59 +0000
-To: Samba Technical <samba-technical@lists.samba.org>
-Subject: [PATCH] Fix joining specific ou (regression from #13861)
-Openpgp: preference=signencrypt
-Message-ID: <555a364d-eeda-cf1e-3fd5-eafb3422f347@samba.org>
-Date: Wed, 4 Sep 2019 12:11:51 +0200
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i5Szd-000580-I5; Wed, 04 Sep 2019 10:58:29 +0000
+To: Andrew Bartlett <abartlet@samba.org>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+References: <ad9719c06273cac4686726b293ce9e78fecd8ca4.camel@samba.org>
+Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
+Subject: Re: PROPOSAL: deprecate plaintext password support (in SMB1) for 4.11?
+Message-ID: <e5796781-277a-5e10-cd55-0322f42783d7@samba.org>
+Date: Wed, 4 Sep 2019 12:58:25 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
+In-Reply-To: <ad9719c06273cac4686726b293ce9e78fecd8ca4.camel@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha512;
  protocol="application/pgp-signature";
- boundary="sKRei5yAvADbJzgcSmuAM32VNGrptRAVf"
+ boundary="9PUMVuy7PPaOLvQu2qcbKyKclR4fGB79Y"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,92 +54,85 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?G=C3=BCnther_Deschner_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?G=c3=bcnther_Deschner?= <gd@samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---sKRei5yAvADbJzgcSmuAM32VNGrptRAVf
-Content-Type: multipart/mixed; boundary="Ie9f2Ae3gV6U1u9qTRMwrAjKvX4s1Z59U";
+--9PUMVuy7PPaOLvQu2qcbKyKclR4fGB79Y
+Content-Type: multipart/mixed; boundary="v3g9u0jSPG8ZuG250xLSXR15cP6PxqiKN";
  protected-headers="v1"
-From: =?UTF-8?Q?G=c3=bcnther_Deschner?= <gd@samba.org>
-To: Samba Technical <samba-technical@lists.samba.org>
-Message-ID: <555a364d-eeda-cf1e-3fd5-eafb3422f347@samba.org>
-Subject: [PATCH] Fix joining specific ou (regression from #13861)
+From: Stefan Metzmacher <metze@samba.org>
+To: Andrew Bartlett <abartlet@samba.org>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Message-ID: <e5796781-277a-5e10-cd55-0322f42783d7@samba.org>
+Subject: Re: PROPOSAL: deprecate plaintext password support (in SMB1) for
+ 4.11?
+References: <ad9719c06273cac4686726b293ce9e78fecd8ca4.camel@samba.org>
+In-Reply-To: <ad9719c06273cac4686726b293ce9e78fecd8ca4.camel@samba.org>
 
---Ie9f2Ae3gV6U1u9qTRMwrAjKvX4s1Z59U
-Content-Type: multipart/mixed;
- boundary="------------207E046CA13601B7249B9DE9"
-Content-Language: en-US
-
-This is a multi-part message in MIME format.
---------------207E046CA13601B7249B9DE9
+--v3g9u0jSPG8ZuG250xLSXR15cP6PxqiKN
 Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Hi Andrew,
 
-while fixing bug #13861 we brought in a regression via
-2044ca0e20bd3180720a82506b3af041d14b5c68 (we check only for LDAP result
-code but the result itself). Andreas has a similar patch in his larger
-join related patchset but we should first push this isolated join fix.
+> It is quite late for Samba 4.11 but I wondered what folks would think
+> of marking 'encrypt passwords' as deprecated so we can consider to
+> remove this code in Samba 4.12 (eg master) later this year?
+>=20
+> This would dovetail with the SMB1 deprecation effort and I hope also
+> help find users who can't live without this (because SMB2 doesn't have
+> this at all). =20
+>=20
+> I'm unclear if this even works, given bugs like:
+> https://bugzilla.samba.org/show_bug.cgi?id=3D9705
+>=20
+> If this is supported I'll polish up the attached patch and then write a=
 
-Please review and push.
+> WHATSNEW for 4.11.
 
-Thanks,
-Guenther
+I don't see an attached patch, but I like the idea of deprecating
+plaintext passwords, maybe we should also deprecate lanman auth
+and ntlmv1, we may not go on and remove them before SMB1, but
+people should avoid them.
 
---=20
-G=C3=BCnther Deschner                    GPG-ID: 8EE11688
-Red Hat                         gdeschner@redhat.com
-Samba Team                              gd@samba.org
+> It doesn't commit us to doing anything in master / 4.12 (and we might
+> want to wait till closer to the end of the year for feedback), but I
+> took a stab at seeing what it might allow us to remove and this was the=
 
---------------207E046CA13601B7249B9DE9
-Content-Type: text/plain; charset=UTF-8;
- name="patch"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment;
- filename="patch"
+> diffstat (and there is probably more if we tried):
 
-RnJvbSAwZjYzNTdmNWZjZTJhMjVkZmY5NTdmZmZmYjIzNjI1Mjk1MTI0NGZhIE1vbiBTZXAg
-MTcgMDA6MDA6MDAgMjAwMQpGcm9tOiA9P1VURi04P3E/Rz1DMz1CQ250aGVyPTIwRGVzY2hu
-ZXI/PSA8Z2RAc2FtYmEub3JnPgpEYXRlOiBGcmksIDMwIEF1ZyAyMDE5IDE3OjE5OjUxICsw
-MjAwClN1YmplY3Q6IFtQQVRDSF0gczMvbGliYWRzOiBmaXggam9pbmluZyB0byBBRCBhbmQg
-c3BlY2lmaWMgb3JnYW5pemF0aW9uYWwKIHVuaXRzCgpCVUc6IGh0dHBzOi8vYnVnemlsbGEu
-c2FtYmEub3JnL3Nob3dfYnVnLmNnaT9pZD0xNDExNAoKVGhlIGNoYW5nZSBtYWRlIGluIDIw
-NDRjYTBlMjBiZDMxODA3MjBhODI1MDZiM2FmMDQxZDE0YjVjNjggKGZvciAjMTM4NjEpCmRp
-ZCBvbmx5IGNoZWNrIHdoZXRoZXIgdGhlIExEQVAgcXVlcnkgd2FzIHN1Y2Nlc3NmdWwsIGl0
-IGRpZCBub3QKY2hlY2sgZm9yIHRoZSBMREFQIHJlc3VsdHMuCgpHdWVudGhlcgoKU2lnbmVk
-LW9mZi1ieTogR3VlbnRoZXIgRGVzY2huZXIgPGdkQHNhbWJhLm9yZz4KLS0tCiBzb3VyY2Uz
-L2xpYmFkcy9sZGFwLmMgfCAyICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyks
-IDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9zb3VyY2UzL2xpYmFkcy9sZGFwLmMgYi9z
-b3VyY2UzL2xpYmFkcy9sZGFwLmMKaW5kZXggNGYzZDQzYjAyYjEuLmQ3NzQxZTA5MjBiIDEw
-MDY0NAotLS0gYS9zb3VyY2UzL2xpYmFkcy9sZGFwLmMKKysrIGIvc291cmNlMy9saWJhZHMv
-bGRhcC5jCkBAIC0yMTIyLDcgKzIxMjIsNyBAQCBBRFNfU1RBVFVTIGFkc19jcmVhdGVfbWFj
-aGluZV9hY2N0KEFEU19TVFJVQ1QgKmFkcywKIAogCXJldCA9IGFkc19maW5kX21hY2hpbmVf
-YWNjdChhZHMsICZyZXMsIG1hY2hpbmVfZXNjYXBlZCk7CiAJYWRzX21zZ2ZyZWUoYWRzLCBy
-ZXMpOwotCWlmIChBRFNfRVJSX09LKHJldCkpIHsKKwlpZiAoQURTX0VSUl9PSyhyZXQpICYm
-IGFkc19jb3VudF9yZXBsaWVzKGFkcywgcmVzKSA9PSAxKSB7CiAJCURCR19ERUJVRygiSG9z
-dCBhY2NvdW50IGZvciAlcyBhbHJlYWR5IGV4aXN0cy5cbiIsCiAJCQkJbWFjaGluZV9lc2Nh
-cGVkKTsKIAkJcmV0ID0gQURTX0VSUk9SX0xEQVAoTERBUF9BTFJFQURZX0VYSVNUUyk7Ci0t
-IAoyLjIxLjAKCg==
---------------207E046CA13601B7249B9DE9--
+For now just mark them as deprecated and defer the removal decision.
 
---Ie9f2Ae3gV6U1u9qTRMwrAjKvX4s1Z59U--
+metze
 
---sKRei5yAvADbJzgcSmuAM32VNGrptRAVf
+
+--v3g9u0jSPG8ZuG250xLSXR15cP6PxqiKN--
+
+--9PUMVuy7PPaOLvQu2qcbKyKclR4fGB79Y
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQQi7xTdNz0EbkNwwhJI6TdojuEWiAUCXW+N7wAKCRBI6TdojuEW
-iOTxAJ9Vx+BmSYoYaSdiuzsGVWuPpowsbACfa6J19q9D7nf/6k3z8lg3ABDDVhk=
-=sMPF
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl1vmNEACgkQDbX1YShp
+vVY4kQ//bCkp+4kXRI5HEnbIpGeT8ezN/fU8w6mmiZ1MiPOfVS9ygyMiJCCf2Qng
+VHw7Pfpc1AtVwKvsznPW+OsSSVn0fhIonREX4dYcO0n4gJ0/fxmWr78doyGAn+ds
+S8HDyrFula0/oVYUmQXYBBVlvTFoWdAKDkqh6Myxtckhx25FBUijHPk9sp9tNGO7
+XqDuhymgDQu53Ik6u6hVKcbAYV9ZPJ9kU5tNxxZ7oQ6L//rx4Etyd5VV6B+PIxsG
+zH3mypqzwiZJfsD435tA1LLtX1ltOvhlANKvQ8emCFdvU6CUMHapsjtqYNAhUTJa
+mCYI5gYmg6k+rGnZg7aKTy2frzY6x911mkTsz1UDl2Xt4PfsBED6Y53pUBbyOPDU
+hLv4HoI8RySTFNeY77F8Q1ZBiH+8zHWanIwJPvf13U/5iqg5N/1LcLbKeJ1jpj2b
+O8m/qFNnXV8ZqYpdmknTB4U/xlzAlUrPNK9iNdhXaPB1elU0cAtCJ5tuzR1PGUgP
+8RzQSuQ1ajL/mHqiq6la3O1cKYWTQq0G7XyQbxAgPVVS7RQND6o82ZNdOyIx8gbK
+HcnJtGZy3jGYWY0zqrQdiJaNDUTZ1XthEo1VjXUKysZ9JBC+NNjJ29TF3pK4DaoK
+kHhXS3CnceEEeJySHT9eIOkeqMPsbqEHiF1sNkQdR/gs8xZpuXE=
+=+vax
 -----END PGP SIGNATURE-----
 
---sKRei5yAvADbJzgcSmuAM32VNGrptRAVf--
+--9PUMVuy7PPaOLvQu2qcbKyKclR4fGB79Y--
 
