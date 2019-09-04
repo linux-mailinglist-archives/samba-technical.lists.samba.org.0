@@ -2,59 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C576A7F10
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 11:16:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2534EA7F1E
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Sep 2019 11:18:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=pHiJtb8N5E322RwRK2Rb1AXvfhW9h0zgLO2ZDCOZ8XA=; b=Cdbo2hK/g56aAUJwCqkBs1ZlP9
-	S7MJ+lm6XM4yl7oDM9qPOdd6rt4gTYtv9lAOcAosgqxbt5HkjbuHXMyTwTVT/iOn/CoraNlJNmtfi
-	SDInWlS1ta2n/sD7jHR7TM6LAVJ2PMGsSuzDoz687y04jTByRtJnbmv5qAkJuENKiYeHWNT/+yZ73
-	im8zrHqSHGp24gxdo0HQkjidF3lqtA+L655ZkDgqBgWAgMZkHw0BG391rnblgV/qATT7FgMgvYJvB
-	j0mked877pNcpXdkAB7r0Co5+/aZuTjlECNGsHCLey73d4BtL1tEEtPLkHQUt8j01J4gXfxnHyj4r
-	oZP2gAew==;
-Received: from localhost ([::1]:45552 helo=hr1.samba.org) 
+	bh=Q+kZZdqM1SqKyLL3loaha6b0v5yAWGIUYM8o6dxlLyM=; b=ukiX8YsxjZ9JcdbHRa5jvjSgtg
+	2p6d5WKpjaWBjhXu0FkeRdcSVEHhPFHJ/tyqP65OPaTd4XNJ2uoJX9tUarLHW0X4oe3E/GQP95vUF
+	GJ7KnZPYmHNIMyvpKWrwFp8eqcO6YcxGJK5OvDbS7GbLFcxMVqZ8Et9VraVTUbZyggmfoouOFK0Zb
+	zQKiSsEpfymzcDXbX4g4vWIeWFEgSnh/iWj+y5xiDaBjd5Ku0zUrQYyL0vw6FkFU81qwHPFSwf0Qs
+	J/MhxHlY++HCXhdVAMPnSOzKCWcaLxgheF+9JQ+gGoutPrqn/3RV+SANtyvM4U97oxpW7Flczd0N9
+	TFBE+K+w==;
+Received: from localhost ([::1]:46346 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i5ROA-003Lpx-Va; Wed, 04 Sep 2019 09:15:43 +0000
-Received: from mailhopper2.bazuin.nl ([195.134.173.123]:44200) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5RO7-003Lpq-8h
- for samba-technical@lists.samba.org; Wed, 04 Sep 2019 09:15:41 +0000
-X-Bazuin-en-Partners-MailScanner-Watermark: 1568193337.50298@oAmTn12NsZR9BK8WiezZag
-X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
-X-Bazuin-en-Partners-MailScanner: Found to be clean
-X-Bazuin-en-Partners-MailScanner-ID: 1EF07120506.A611F
-X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
- Partners for more information
-Received: from ms249-lin-003.rotterdam.bazuin.nl
- (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
- by mailhopper2.bazuin.nl (Postfix) with ESMTP id 1EF07120506;
- Wed,  4 Sep 2019 11:15:36 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
- s=mail20180308; t=1567588536;
- bh=pHiJtb8N5E322RwRK2Rb1AXvfhW9h0zgLO2ZDCOZ8XA=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=KgZZPb4kbYuOFRoDCXko+qfBRDw+nxRyhMn3lByvcSb1Q9kjiWakzOMuKVxpjnyCF
- ZqyF1EClPAm6LobH1aSNwHWrnuzTmkeSi+fFiONs5Z4iHmfZA1xvt3u+/Z7usQ6Yku
- W6cBfsq3Q1K9QFUxsuYGNyG7GfKYQW+Fwcri1wc9EjL3bckvIbNWjNkV0m4ghSCDw2
- ohnddW/wzoD6q3uN3i5WV5rUUYAMs8UUyI0AGmGGhdpIzLDBV1VOHsQS3todFijLXv
- EXrCwLe+amOQUYNQhw6dLYXLX96Wfc28793b8x3Ix2t8gvLmpahYDOmL7fp8hsgpFc
- M/+XSEpJlCXFg==
-Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
- by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 8B99D3AF8C;
- Wed,  4 Sep 2019 11:15:32 +0200 (CEST)
-Subject: RE: [Announce] Samba 4.11.0rc3 Available for Download
-To: =?windows-1252?Q?samba-technical=40lists.samba.org?=
- <samba-technical@lists.samba.org>
-Date: Wed, 4 Sep 2019 11:15:32 +0200
-Mime-Version: 1.0
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <20190903164034.GA2128202@10.4.128.1>
+	id 1i5RQS-003Lwa-VQ; Wed, 04 Sep 2019 09:18:05 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63872) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i5RQO-003LwT-Se
+ for samba-technical@lists.samba.org; Wed, 04 Sep 2019 09:18:02 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Message-ID:From:Cc:To;
+ bh=Q+kZZdqM1SqKyLL3loaha6b0v5yAWGIUYM8o6dxlLyM=; b=sgWfOJi4Ta8plA0hy73nOOymiz
+ IWFmGM/MMQ1MPOZUON7GnmRH9ggrtXSW7sYjoPOlSQ+VmXooHjV10vM8uUHpTKVhETwPgWY/iLkx4
+ IxgiH9lTCCmQl1izl0RT0sZPX6bmG8eJB3JQR0Cc+JF5zBDyQZP22TFBXA6TeKV+8N4Q=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i5RQN-0003jL-8o; Wed, 04 Sep 2019 09:17:59 +0000
+Subject: Re: [Announce] Samba 4.11.0rc3 Available for Download
+To: "L.P.H. van Belle" <belle@bazuin.nl>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 References: <E99FB72BA8824B0FAB212FAE35B48FCC@rotterdam.bazuin.nl>
-X-Priority: 3 (Normal)
-X-Mailer: Zarafa 6.30.19-25148
-Thread-Index: AdVjAU0uzxY8MfUSTC2vyKvoYOCX3A==
-Message-Id: <vmime.5d6f80b4.1e1b.6bb54cec4bcd19f4@ms249-lin-003.rotterdam.bazuin.nl>
+ <vmime.5d6f80b4.1e1b.6bb54cec4bcd19f4@ms249-lin-003.rotterdam.bazuin.nl>
+Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
+Message-ID: <f22b0ebb-ffd1-0cca-60f7-81622ace6ad6@samba.org>
+Date: Wed, 4 Sep 2019 11:17:51 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <vmime.5d6f80b4.1e1b.6bb54cec4bcd19f4@ms249-lin-003.rotterdam.bazuin.nl>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="9784VzliESTg6mbJj4bYQ1edq04AxFrG2"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,56 +55,65 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
-Cc: =?windows-1252?Q?Lukas_Slebodnik?= <lslebodn@fedoraproject.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: Lukas Slebodnik <lslebodn@fedoraproject.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hai,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--9784VzliESTg6mbJj4bYQ1edq04AxFrG2
+Content-Type: multipart/mixed; boundary="peSOBMYiwqGaTomir6dMEKhfnWdTnrkcd";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: "L.P.H. van Belle" <belle@bazuin.nl>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Cc: Lukas Slebodnik <lslebodn@fedoraproject.org>
+Message-ID: <f22b0ebb-ffd1-0cca-60f7-81622ace6ad6@samba.org>
+Subject: Re: [Announce] Samba 4.11.0rc3 Available for Download
+References: <E99FB72BA8824B0FAB212FAE35B48FCC@rotterdam.bazuin.nl>
+ <vmime.5d6f80b4.1e1b.6bb54cec4bcd19f4@ms249-lin-003.rotterdam.bazuin.nl>
+In-Reply-To: <vmime.5d6f80b4.1e1b.6bb54cec4bcd19f4@ms249-lin-003.rotterdam.bazuin.nl>
 
-Check again.=20
-I see 2.3.0 is uploaded.=20
+--peSOBMYiwqGaTomir6dMEKhfnWdTnrkcd
+Content-Type: text/plain; charset=windows-1252
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-Greetz,=20
+Am 04.09.19 um 11:15 schrieb L.P.H. van Belle via samba-technical:
+> Hai,
+>=20
+> Check again.=20
+> I see 2.3.0 is uploaded.=20
 
-Louis
+I'll do tevent-0.10.1 in the next hours.
+
+metze
 
 
+--peSOBMYiwqGaTomir6dMEKhfnWdTnrkcd--
 
-> -----Oorspronkelijk bericht-----
-> Van: samba-technical=20
-> [mailto:samba-technical-bounces@lists.samba.org] Namens Lukas=20
-> Slebodnik via samba-technical
-> Verzonden: dinsdag 3 september 2019 18:41
-> Aan: L. van Belle
-> CC: Lukas Slebodnik; samba-technical@lists.samba.org
-> Onderwerp: Re: [Announce] Samba 4.11.0rc3 Available for Download
->=20
-> On (03/09/19 16:26), L. van Belle wrote:
-> >Hai,=20
-> >
-> >Have you looked on the ftp=3F=20
-> >The others are also there, see:=20
-> >
->=20
-> I already did
->=20
-> >https://ftp.samba.org/pub/talloc/=3FC=3DM;O=3DD=20
->=20
-> My web browser say to me that the latest version
-> for talloc is talloc-2.2.0.tar.gz
-> And it ass uploaded there on 2019-03-21 10:13
-> Which is 6 months old.
->=20
-> And talloc-2.2.0 is not a friend with python3.8
-> Morever I also checked git repo and the branch
-> And I could not see any new tag for talloc there=3F
->=20
-> Did I miss something=3F
->=20
-> LS
->=20
->=20
+--9784VzliESTg6mbJj4bYQ1edq04AxFrG2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl1vgUMACgkQDbX1YShp
+vVax4w//VfPdIUOtc6aE3LlzBOMpNVbwNmgH+cuJx2d6NkqaWqifTpu/++Fn9jaM
+UH6Pl+TyPQ/JZgHR3MKbuWJR1KnmWJwzbM+Z68EFxphgCyuQ8F7RgrTG2TcCBp7S
+KQ6fu2PJPPnYVAI9woNd289EiAHDSx5JFZzo/mcp7gVAdkics0ht0VfeZlpPT2R8
++FmDohFYw/TJagzyRSV3Ou4HKJ9gK8S9vKL8zn+y3pELIKf1qEm+KUP7rsjkyUKw
+OV06yZNDkUkRwFVLohuh+D+KHWu8eGfKpJRnCMQqd1+c9ZAyC7FaEv+y1RAiMvEC
+nkHNCwlkHInJ8zqmZL/2SpxBAzufk1f0BnFhRmI/LeZCwtp6jDthBe/mFSUibsuM
+jCfO3tIKL+ig02CJCDGsc4Z5rF0yqlLHkaYVhqZvXAiIL9aACcyUSGzO3rqGvGO6
+fIq5BxlKGKJbN90nLbFa/zwxmMt6yxCVYmY5zUwXDxgHETPCogPx1KLQa9pmvtyV
+dXlOtAdIkYnTJs0LqLEZmVHjwpTn6p3TLU4tUgBQ2++xPibyQ0mokMGT3M3x5s3K
+NaQNPDZuHRzvdcGpV+4DVx1hxwu7H8vVeel8kAXamGKjtAzNlCVBX3esLAImbTkb
+ioSGw7drzbzDVK14E3bpxV5OAc3I070B8lkKqW6E1M0n37QBJjQ=
+=sMYF
+-----END PGP SIGNATURE-----
+
+--9784VzliESTg6mbJj4bYQ1edq04AxFrG2--
 
