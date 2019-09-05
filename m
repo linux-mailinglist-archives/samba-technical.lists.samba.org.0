@@ -2,64 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5A8EAABC1
-	for <lists+samba-technical@lfdr.de>; Thu,  5 Sep 2019 21:08:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DDBBAABF8
+	for <lists+samba-technical@lfdr.de>; Thu,  5 Sep 2019 21:30:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=MQ7QSppux8Y1s8kfSsUNxZsA9QRimRonn/ZdxFo92cA=; b=VNOcRbS7WSHhNp4jkNer4RSygb
-	jy2qzJfMAi8Pcbs+H3BjCYDDdjUWIhROD0eSIrnxh4XFXYS4OcW7vepfQfqth2SowqObpUqr3f380
-	S9m8wAAfO7LYXHVicYYKvCuo+ZpEeeUVKmnE3xLt+Ti8YQNMToTfHne5hseZLnWymVNwdrS50z6Xw
-	VQP9JF3PkVunpPomeknnXUx8EJlHun8BXXXN/sdFuxmwb3UkzFiJTTlcJ1Jv8jIRzgTaHzcdSfDOt
-	Je7pLPl/FBBvRCqzeLxOiGJm4QN2mrkftubZU06A6qO94G3g/zHpTDwEI9Zz31ZFsiZR2/LJbx4hY
-	64jNQIXA==;
-Received: from localhost ([::1]:23962 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=L2qfm352btEmhzYWfQD6hD/AP43h8d7NtItjFGIm5q8=; b=5TuUUCfNf+j8MpO5kxnKXoVKXY
+	FHlrvil0vHs3o1rlObJ8DtLHySCkMPuwoW/+SSaLPmrhRGNoEMatrqXGbstNYX3QrITOQqqfUZ6Np
+	w2VhGyvdKt7q003rEnF5eD/7yJOaPfa7C1mEyVUF9g/Op3HTyXQbBSc/VaKOlIVNUJHWJGTBFn3aj
+	HAkzbq1ctQM8b1FsElpxzDIm1NHM2J8ZCh8zlbIbRvfqYdVEiDFg9JCony/lOXLth70VasXzWEGzf
+	BEG5Wp5omR25GUVH3mQUAZA8eMtmY+823CP4uINNHaNj6UUWN8NTdeyPWMw5chhY3jxQI8pRd/vB3
+	esr3GD2A==;
+Received: from localhost ([::1]:27256 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i5x6n-003oI6-4L; Thu, 05 Sep 2019 19:07:53 +0000
-Received: from mx.paulo.ac ([51.15.251.127]:33864) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5x6i-003oHz-Tp
- for samba-technical@lists.samba.org; Thu, 05 Sep 2019 19:07:51 +0000
-Received: from mx.paulo.ac (mx.paulo.ac [51.15.251.127])
- by mx.paulo.ac (Postfix) with ESMTPSA id 181CD81016;
- Thu,  5 Sep 2019 18:49:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=paulo.ac; s=dkim;
- t=1567709383;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=MQ7QSppux8Y1s8kfSsUNxZsA9QRimRonn/ZdxFo92cA=;
- b=vccxvvoUDr8FPEYKNNYFwfUHq8ZkGCN0TRwgc+RhT8NM1FJTvLV28ujnehxmwys6UvFCdO
- 4LpdsdmssykAiiMzfRe+OwhF8fDOuvZ+FOM+v+Oz1p6HS+SdqMhVjbUBg2c4fom9+HJLem
- 68oltt90EeKJEeo9URxczTyE8T63hRlB4wFnr91NNosPtMEiNwMeRZx+Hs+4Vxe8qlW4kA
- 2BFzXb7AfLQyjLN4IFJbVWiAG6SmFkDmvEuleGr3Y//G38MwBmT3dj09bM9BPae3o4cGE5
- mNOI+s94Ih9mZYiMmmAZP+JF4me+3lHSUAgO7QTuXwO2nGqEt+ITvkltZ2JKmg==
-To: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- piastryyy@gmail.com
-Subject: [PATCH] mount.cifs: Fix double-free issue when mounting with setuid
- root
-Date: Thu,  5 Sep 2019 15:49:35 -0300
-Message-Id: <20190905184935.30694-1-paulo@paulo.ac>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=paulo.ac;
- s=dkim; t=1567709383;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=MQ7QSppux8Y1s8kfSsUNxZsA9QRimRonn/ZdxFo92cA=;
- b=euLPc8ag9RahIWeWYeelTfcGYoctWu35HllLNKX3oUyhez5RkslSZ97FmINOnR7oeS5ty6
- VUXFK0E8bL7ciLpdZPLer0fiFE17VByOc/2Uw9DdRjaKuWFUcOdgIJKW17WgQMnHBJJEPE
- MmRKNmwgf3PSLHRM7/aQsPRRiWsVYAlvgOT294umRWKXnTF+YOHDjjOzO1uMEwMESpAIQm
- QP+ShyqejFxC+RUdZ/ywo4mRH7LR0YX9Fd4v5O8XsSTfSxxmx4PhpYLQxZSP4M8m0Ub8oz
- Vm1GBikO4IJz4860ClhCX9acjzoL3iBBcy8vdz6A7YVvyYdzW3mfzD9MLeMKPA==
-ARC-Seal: i=1; s=dkim; d=paulo.ac; t=1567709383; a=rsa-sha256; cv=none;
- b=wTxMtOpNbs7crE8yweiTee4D6xh1wC/dcI9RYhBRnon/BWdcjVFOdcUT0iavAx4bTIYNbX
- UKFh5UvRqVIfJAFfoXDEesmkjxxK1VmOejeCCI0lLp+xpKu5uV/VlQBou+kT6crJRl9h1y
- dGmd/nOGPLOdSvzhcIhR3fxE5mmMtnvgYywPLCL1RmEkxyJlNJsmdLo9vZStdylzF6GJQz
- 8yaq3jo2uZYKpw6ZVmoROUPVZKVqJqJ1x3KTI/2kGG98HPch5oKgtC9Ur8NBJCB6Dvk1gL
- g1MvuthhxyuEejo1SumndR2JB05GhWyCodj9g5JpYbkISWgBZ5hSZUKPQpCWzQ==
-ARC-Authentication-Results: i=1; mx.paulo.ac;
- auth=pass smtp.auth=paulo smtp.mailfrom=paulo@paulo.ac
+	id 1i5xSK-003opM-Ny; Thu, 05 Sep 2019 19:30:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50416) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i5xSF-003opF-Dv
+ for samba-technical@lists.samba.org; Thu, 05 Sep 2019 19:30:05 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Cc:To:From:Message-ID;
+ bh=L2qfm352btEmhzYWfQD6hD/AP43h8d7NtItjFGIm5q8=; b=fNaryyMGKzMun6opCSito1PwYE
+ RYvXh2R933Wp9IQGx7OiU0zfDnWsUrxSQbMUUm5pJwwenxU/Qp4wjB04s1SWYJxKLICxsqdXm7b13
+ hG+KCPe07SqqPyVQkjDVTX7KhMepEWAZnJ+AkZTyoZofdXG2EvZe5lNMPx1qI4RQfgaE=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i5xSE-00064c-6D; Thu, 05 Sep 2019 19:30:02 +0000
+Message-ID: <646138d109724d66429657115422b9d1b2e803bc.camel@samba.org>
+Subject: PROPOSAL: deprecate all authentication worse than NTLMv2 in NTLMSSP
+To: Stefan Metzmacher <metze@samba.org>, Jeremy Allison <jra@samba.org>
+Date: Fri, 06 Sep 2019 07:29:58 +1200
+In-Reply-To: <1567660854.20732.0.camel@samba.org>
+References: <ad9719c06273cac4686726b293ce9e78fecd8ca4.camel@samba.org>
+ <e5796781-277a-5e10-cd55-0322f42783d7@samba.org>
+ <20190904155450.GA162682@jra4>
+ <43fda24acfc63961446586339798f9d7801601bf.camel@samba.org>
+ <827f8bfd-22c9-7305-228c-9230d6fa3960@samba.org>
+ <1567660854.20732.0.camel@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,74 +55,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "Paulo Alcantara \(SUSE\) via samba-technical"
- <samba-technical@lists.samba.org>
-Reply-To: "Paulo Alcantara \(SUSE\)" <paulo@paulo.ac>
-Cc: "Paulo Alcantara \(SUSE\)" <paulo@paulo.ac>, aaptel@suse.com
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-It can be easily reproduced with the following:
+On Thu, 2019-09-05 at 17:20 +1200, Andrew Bartlett via samba-technical
+wrote:
+> On Thu, 2019-09-05 at 06:21 +0200, Stefan Metzmacher wrote:
+> > 
+> > Can you do the same for the client side parameters?
+> 
+> See https://gitlab.com/samba-team/samba/merge_requests/770
+> 
+> There may be more, but this is most of the weak authentication
+> parameters. 
 
-  # chmod +s `which mount.cifs`
-  # echo "//localhost/share /mnt cifs \
-    users,username=foo,password=XXXX" >> /etc/fstab
-  # su - foo
-  $ mount /mnt
-  free(): double free detected in tcache 2
-  Child process terminated abnormally.
+Any comments on this MR?
 
-The problem was that check_fstab() already freed orgoptions pointer
-and then we freed it again in main() function.
+Thanks,
 
-Fixes: bf7f48f4c7dc ("mount.cifs.c: fix memory leaks in main func")
-Signed-off-by: Paulo Alcantara (SUSE) <paulo@paulo.ac>
----
- mount.cifs.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/mount.cifs.c b/mount.cifs.c
-index 7748d54aa814..2116fc803311 100644
---- a/mount.cifs.c
-+++ b/mount.cifs.c
-@@ -247,7 +247,6 @@ check_fstab(const char *progname, const char *mountpoint, const char *devname,
- 	 * set of options. We don't want to trust what the user
- 	 * gave us, so just take whatever is in /etc/fstab.
- 	 */
--	free(*options);
- 	*options = strdup(mnt->mnt_opts);
- 	return 0;
- }
-@@ -1762,6 +1761,7 @@ assemble_mountinfo(struct parsed_mount_info *parsed_info,
- 		   const char *orig_dev, char *orgoptions)
- {
- 	int rc;
-+	char *newopts = NULL;
- 
- 	rc = drop_capabilities(0);
- 	if (rc)
-@@ -1773,10 +1773,11 @@ assemble_mountinfo(struct parsed_mount_info *parsed_info,
- 
- 	if (getuid()) {
- 		rc = check_fstab(thisprogram, mountpoint, orig_dev,
--				 &orgoptions);
-+				 &newopts);
- 		if (rc)
- 			goto assemble_exit;
- 
-+		orgoptions = newopts;
- 		/* enable any default user mount flags */
- 		parsed_info->flags |= CIFS_SETUID_FLAGS;
- 	}
-@@ -1880,6 +1881,7 @@ assemble_mountinfo(struct parsed_mount_info *parsed_info,
- 	}
- 
- assemble_exit:
-+	free(newopts);
- 	return rc;
- }
- 
+Andrew Bartlett
 -- 
-2.23.0
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
+
 
 
