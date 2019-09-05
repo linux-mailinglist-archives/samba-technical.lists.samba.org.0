@@ -2,35 +2,35 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A2E2A9981
-	for <lists+samba-technical@lfdr.de>; Thu,  5 Sep 2019 06:27:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D2B0A9A09
+	for <lists+samba-technical@lfdr.de>; Thu,  5 Sep 2019 07:22:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=t1FP80AGJX/nvTAoakvq/iU4PD5hfxoJ4E0uAjLJ/JE=; b=MCpPrjEVNInR4+UP8MFUj7J09h
-	bE3tKEbzld3kcjqpXIEwyQnERjgK3JS4tTB8Sf18gAlYbI/ZCNG517zPVUvNh6ifIc+vkAgV/y/pU
-	4bs0neET+0x3GsxPxQHcSwvMwpSl08RojoyUYKHERBkzkecciYxtu9iYMdGs5N7mAdkRAOdDcJFli
-	JS+Nt0DsASVGQWtMoDTwXKolZFOeXIeeuSnxLs0KrMrnZ7tOSkeHmjp5j1sJVaqWdn870WCZHTstC
-	mDBvVy+LLv7pJuyyUDmx3r0U+BX9mB/Axl3DM8EThNJtYGERYaQ0h21P/Qi81CANVW8LQbN7+l0DK
-	ZFvt+8bQ==;
-Received: from localhost ([::1]:57912 helo=hr1.samba.org) 
+	bh=cD2vc1FKMFQaI35RMl2PBEFolxNETL0pFAIjiLUVwlg=; b=pxMTTn4gsurspACNaZ5tzk7Ecf
+	S/+lo3lZu6b8ENctiXPwWq+n9BNNXeatnAWq0rU2la3h7/3EoWbI7+BV7suvg5RVM2ohTELcuBXYG
+	6hc1mG49v3O1+ncbwKrv3yYwDIX5uBnbVc7A6p3TtZRFjTcsMBJOoQ6PfvS8psoc5Rey2Ro53C18e
+	EDQnUouwlKuLpfSnG0MOiTOmrLiC1xRWgvc0C6XLlIdY3fMkll9dBGoGjPOPqUQvff5llo0uOkoRN
+	bQAcVyTuPZICs5hF54MnXT0gL1rWKGRzQp/l5N0+KYHCQ3XGLJ8of9zC8zyWesn+y0qNVR65aUk0L
+	bZqvz8ng==;
+Received: from localhost ([::1]:58740 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i5jMX-003Wja-10; Thu, 05 Sep 2019 04:27:13 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56002) 
+	id 1i5kD4-003Wx6-44; Thu, 05 Sep 2019 05:21:30 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17052) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5jMK-003WjT-Jl
- for samba-technical@lists.samba.org; Thu, 05 Sep 2019 04:27:11 +0000
+ (Exim) id 1i5kCz-003Wwz-4R
+ for samba-technical@lists.samba.org; Thu, 05 Sep 2019 05:21:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42627210; h=Date:Cc:To:From:Message-ID;
- bh=t1FP80AGJX/nvTAoakvq/iU4PD5hfxoJ4E0uAjLJ/JE=; b=uiYa7509ElM3EBwUoLP438xxxX
- EQOWtcAcvniP1xSB32oB5tP/8YZOcEoSDB44jRnKtGjIMU1pEXPn9X4LXfLZ3ZzaUjcJ1SSXjlWl0
- Oq1yhN4pO0sXckbMwCcvcOI+JNuYkEwjN9jzw1VqgAeozhunnsGw7u5fj5oDSbTWoLcA=;
+ bh=cD2vc1FKMFQaI35RMl2PBEFolxNETL0pFAIjiLUVwlg=; b=IflLB5nYZ8wNv4sWPSIuioc1dZ
+ 2k9otxMvBENtWmbD2hCTlQyUhhnbKIvI/UXcgR0e4Q4g3yIn5a565kMofqFHXdMvhM0/DN7lMTbRj
+ fDvWtQYZFkNXSdKzFQR68VtL0ozokiKO4vicAAjow4C2rqI8eTCRkfEMbG5l7dgvKExc=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5jMG-0005ys-Pu; Thu, 05 Sep 2019 04:26:57 +0000
-Message-ID: <1567657601.19432.57.camel@samba.org>
+ (Exim) id 1i5kCv-0006Zi-Qg; Thu, 05 Sep 2019 05:21:22 +0000
+Message-ID: <1567660854.20732.0.camel@samba.org>
 Subject: Re: PROPOSAL: deprecate plaintext password support (in SMB1) for 4.11?
 To: Stefan Metzmacher <metze@samba.org>, Jeremy Allison <jra@samba.org>
-Date: Thu, 05 Sep 2019 16:26:41 +1200
+Date: Thu, 05 Sep 2019 17:20:54 +1200
 In-Reply-To: <827f8bfd-22c9-7305-228c-9230d6fa3960@samba.org>
 References: <ad9719c06273cac4686726b293ce9e78fecd8ca4.camel@samba.org>
  <e5796781-277a-5e10-cd55-0322f42783d7@samba.org>
@@ -39,7 +39,7 @@ References: <ad9719c06273cac4686726b293ce9e78fecd8ca4.camel@samba.org>
  <827f8bfd-22c9-7305-228c-9230d6fa3960@samba.org>
 Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAACRklEQVRYw81YS67DIAwkVe8FPRm5menJeAu3lmUCbyBGKqsmRXjwb8Y5aq3hl9Yj/Nh6Tu0upZRS+EdKiV+e5+mJqMKLiHLORBRjzDmbc/hlvb1QD2k3sG84+dhhvF6vlzymlNY8dyBJzUdLjAwyvaeU8n6/2WHpu/xDRkREJI8cOBMgfuRQxhj58JzzbBwhQDFGA07M6/efE0MQxDHGFvpdQHy6MUxqtU4yezRcH0B4GfbM44BWGqOurF6Omz140a0ASimJvdbwZT32XrpRh5yuwY1d0vPrdNkv91+T8uBRG8l1uiX+JtsHxPNIWE27ugwTctTdHCIiYXvuy4P7IDl0CxAzl2xgZTJwgw+g3kGaHwYh5g2sljyrjIVEq4pYBg2Kq3yXZ5WxjfO7zF9jRdXrnLcEmlbTRnNpcT0gvpTScUC2HlOE2ipAvPuJanMT+Xc0PC4dFzu1DEO4HgczaS5kOnZ4vM7zxNU+mtRyRVPDgqyX3cdx8AQCCrQnfkV9VzMA9Ryg3ek8Sgsg3QX+nbz03Og5l10ytp6HusQUwpjd1rnsksbHlhjuVGdBAbWzIiJu5MvEFkA6OkiwBO4uQL3ADeQ9b57t74+FBo1s47IqpVxqBDcuQ66r94QQJOH2ctnAf9oZtdbZYejpi2bQEveO0sb2JXu09OJJrnpil4SV5G2N6Y+1QjL+gHSKDApHJoJWF3hW2fInh6lutGW216OPRBZtRZscwyQvI+KuTj3rp4VP1VsAcTobxgDngukqm3LPgmL8A4m377Y5OvTKAAAAAElFTkSuQmCC
 Content-Type: multipart/signed; micalg="pgp-sha512";
- protocol="application/pgp-signature"; boundary="=-wfLhWOiFRIjDgJnbLwOo"
+ protocol="application/pgp-signature"; boundary="=-rmnnWlpHILpe6wxteFE/"
 X-Mailer: Evolution 3.22.6-1+deb9u2 
 Mime-Version: 1.0
 X-BeenThere: samba-technical@lists.samba.org
@@ -62,7 +62,7 @@ Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 
---=-wfLhWOiFRIjDgJnbLwOo
+--=-rmnnWlpHILpe6wxteFE/
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -86,7 +86,10 @@ On Thu, 2019-09-05 at 06:21 +0200, Stefan Metzmacher wrote:
 >=20
 > Can you do the same for the client side parameters?
 
-Sure, I'll knock that up now.  Even less excuse for them!
+See https://gitlab.com/samba-team/samba/merge_requests/770
+
+There may be more, but this is most of the weak authentication
+parameters.=20
 
 Andrew Bartlett
 --=20
@@ -99,29 +102,29 @@ https://catalyst.net.nz/services/samba
 
 
 
---=-wfLhWOiFRIjDgJnbLwOo
+--=-rmnnWlpHILpe6wxteFE/
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQJHBAABCgAxFiEEgWCb+FN1ul5RDM6h/gAdRMgCGGUFAl1wjoETHGFiYXJ0bGV0
-QHNhbWJhLm9yZwAKCRD+AB1EyAIYZTQ0EAC6CBhA2wu0pRUQ8YOlyWUuI0E1w5eJ
-rL/VwphwM8S2MOMoAPENZZRX9CehbsMzB7UraSJzwu1U3JFuxXzqunpfXy2v0PgE
-NcyB/nHQFkwFi5VaJKYvyQ+CEUTn7s5nr0mlucgup7Iswbmu6hWS32hrogVsYjpo
-Y/0VG6YzisbgsT6xEH6POdiyZGoNEk1exM80Oy+cQQDHdGU/LybJRCA+L6kWls9G
-jwK5V20KJGlO8DQ2z+nx0Ucm9y7n8E9IzQZNnRiIRScIa4fUodW7OWRm5chRbVE7
-wijHVQwQM80CXWWEOk+FJHn5JUdvg0I4XiBlqTVEM8+tXkDXOMo+Tygnfh9CdHVp
-Zp5BTzZCkVLevSKImzRLJECa1cod1KyeHHA3fHc2K1wcY9m46fejW58iSrTsfKpL
-5ZPcwCFEqrqP+uStC9eJq2i9LSngJkpyTVIfch+KrLSQAzTKeLWNEpZnOMc+vCFR
-+V/ygj4DvgR3+bJM3fVws3d21Au5fpzj9RQ20P42m7JKXg5nrcCSlXUtWipTZHe0
-VNpU7c0vfgifUpASMCNKGmur8xOUTRsyYcBE87WVNGR1Nhc9FE6jazXB1GKT4bKI
-Mf2JyWHdN37ZxgLAc0qiC48kSIDt4HUKnq5SBxd8QDZ5JWEH58BLaK3tgsBNPkGp
-jjiOCn66pmJ3xg==
-=L9kC
+iQJHBAABCgAxFiEEgWCb+FN1ul5RDM6h/gAdRMgCGGUFAl1wmzYTHGFiYXJ0bGV0
+QHNhbWJhLm9yZwAKCRD+AB1EyAIYZZo5D/9NFYnEWNFxT0jmVkqWZoPP1CY28UCM
+jrVXAXjTxPtx/9+e5njv0V2UYXhQQ2fuRnUhl7bDoWNx36yVC+9qdtOb9u0e6bmq
+rvL7XtXMpGAqXMGoukGYuaP45Zts9N4dbrBBpBXYLezVIjz10X5pOvjxQIoYplKX
+v28AuToa89C++zf3+1etZJQl0N4tpKR7LRJLLicF6yEGnlonSvRhDFAahx3HEg/7
+B+QCQ/tSx4tYlFz5Rx+bSvGw+XLlmsanR6RWgjHk99Q9LDksmGq35tb4F1Z6uCC2
+r60FwX950Hwek8tc2up8Os+/Hc1nNjjcQEsTgNax9AHSj7YkcZnY/DOSwTsbJjLp
+8OPINh4SPHxDGzV5NlKJY5TS1zlb+VoZRaqh3hAfRBMzrWihZeVTr7b75Jq0Oxpc
+/spvB3zQbOiExocbUtCk50lSC3avVCAT2M976Byinvpic61LXHFqIShHnutGTMgd
+1nVIh/xFsLB6sfCbblMpGJ24q6CrUhjNcA8jTAupdyPiqZBh2TGQLFs8pYlDLC1v
+McopAPyBwE9I9c69GOhIWh7b3mNnN/osPqlfkwF3kZNY9tdfhJY6mtRjTOmYGCtl
+NkLIFI1SKiK+X7Oj+srTX+ED7VL1J16oYGCXjigBJEHh6h+9QlEDJBCv/lKqipGu
+nBWWS9gRAkLquQ==
+=DIZI
 -----END PGP SIGNATURE-----
 
---=-wfLhWOiFRIjDgJnbLwOo--
+--=-rmnnWlpHILpe6wxteFE/--
 
 
