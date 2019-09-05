@@ -2,60 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71B1EA96B4
-	for <lists+samba-technical@lfdr.de>; Thu,  5 Sep 2019 00:48:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C13D6A9950
+	for <lists+samba-technical@lfdr.de>; Thu,  5 Sep 2019 06:22:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=12a97yUcQcDYbkCwMjh0JlQHwlc8e+RXkz3Eidczepo=; b=4Hh2H43IfXNZFg3z0xkgCsMJJC
-	FH085MG8hbQ1TS59sFBR15OnCiIqkXzyHnyBtCZfCN5o2WLJ6zCpWmspnJOAZ1lW3ItaXg+KclvIz
-	Xi0foUp0iol9DG82nkDE+t08RQePOnY7PGILYzpI3GzwQ9jh48WWGpX3kQ/RaivPDEh02uh/0hkj6
-	Ydt5kAZz88lZCpitivYDEMGwYmfZt9QIFU5yvcBhaVcLUSSqJeTI1cD5fCWMMbwOiqNHK0jikmxOv
-	+hh3vnAtRzhjx7qt4QVund/rMaseWo7B7ngX0D4fv/y6e6C97oQPBs2jVcqMpaykCPCmLn8m7a4dU
-	mP3Ch4Ng==;
-Received: from localhost ([::1]:51078 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=UEg49WKe1BT2ydR+OtQA5WgQFbX6FmRwRArlftjm7Bo=; b=KovnYkJHW+qJHq/IUrfgxY65il
+	LQY/4pS01Vz+VCPgnlkXCiup0kD6wMfa0ZlIi3JmZoWzeTVAe2XwnTZ8g213Qgy4MQoFJ45QUXEa0
+	fWriO1BOgK8wWN1c3/7ojWaWt0n2rNWnDXQIRABBhjLy9gM8uYipzT0zbUpyTRzT1OENmuGwUxlIM
+	ew0ZMBN7vOX/55SQtBtXb5fmwS3U13+4mGvKtbPwdkDTZJQORj8a0ScZWWSRlHg9UdGHrRto7mh0H
+	yDmu0w3qJ3XolhpBk+iEQZ97m8uQMaYDh3E0v/omqS633fHDucSAekJ3UBj5kb4LBIKRpBqWAL+9R
+	A3fUY8qw==;
+Received: from localhost ([::1]:57118 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i5e3W-003Uly-Vg; Wed, 04 Sep 2019 22:47:15 +0000
-Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e]:44615) 
+	id 1i5jGy-003Wc8-Q8; Thu, 05 Sep 2019 04:21:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54466) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i5e3N-003Ulr-2r
- for samba-technical@lists.samba.org; Wed, 04 Sep 2019 22:47:12 +0000
-Received: by mail-vs1-xe2e.google.com with SMTP id w195so172945vsw.11
- for <samba-technical@lists.samba.org>; Wed, 04 Sep 2019 15:47:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=12a97yUcQcDYbkCwMjh0JlQHwlc8e+RXkz3Eidczepo=;
- b=kkffzPA+TI/rzzqsjAy4bbOS6uGpL/qOLQSGZdQtPQ+EMfnPSsds1etHoikqVlUc/D
- ko7d6rQZmkJ37qJoPmy1KVn9NoS5wdG2uA43MgRaqQ7F01s6rsIyEb6cpqqBnqr/BqXS
- eYr8hNrEXaSXFRZBYRhJ7i1LXGsxoGkBob2z2pmLM6cmJ08ovFxu9QFsOvkRdk8USiCB
- 9m71xMLShvPdQwNhGnV8V9dmyXog9M6oczl4B2DfKSGjK8BwrAcuSmIHMs812GMiSGQv
- zDHIbl8YUax2tKolUX7PEcKeMHNPgPXiHtR94hPDs3O+7A0aozphnIqKmYLSziJaxp2S
- fwAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=12a97yUcQcDYbkCwMjh0JlQHwlc8e+RXkz3Eidczepo=;
- b=AChH3ds1NWa1un1nBRfSfhnj3z+ezGjHbJ0Vv9mxk9aeeHNoLzk0ZO4vsUwp8vr3b5
- GHOMOKzebAQJifxSSZTOAl5+fCCJoPtVm/TYwWTXrUfdguZ1AL8QPULlht8jp7kvZDjO
- copmjZ9CVk2PtG0Au3T2xXZXwJNGSRpB7MtNXmauExNoUsKr62feiC9SY3o6Hs7x2CMx
- 6ZEJQym8vt9tensgENR0H9TOOzZko4Gf5tEtQW1NmONdGPAOwAl7WtwysWvVG+sop2Hk
- wbBBT95nT75lva14+sekQelWnWtx5LVWFdepMjc7YEMX6iMShAiNr1bYW1eK92LZ+LgR
- ddsA==
-X-Gm-Message-State: APjAAAW80EtLpLRJl44VNeLnBFAWToNcE7/p8RTEtQUcz8+JSw4komU+
- RWAnU75CXQocO6sKSeZzbiflnBXOUfF73AwtgQfhAw==
-X-Google-Smtp-Source: APXvYqwta6cPdzV5f1Rp4G3fCTCUJLd2DDuLbMDe8oEVxOlIqDQdySNWl8spfffKY9hmay7MKMYl5Xbvn2k2gUaIGWs=
-X-Received: by 2002:a67:e447:: with SMTP id n7mr175124vsm.66.1567637219309;
- Wed, 04 Sep 2019 15:46:59 -0700 (PDT)
-MIME-Version: 1.0
-References: <ad9719c06273cac4686726b293ce9e78fecd8ca4.camel@samba.org>
- <CAOCN9rw95H1SAZr+CSGQyuOVBgJAUysGuHazxwWQUN4=kDFfnA@mail.gmail.com>
- <19181593-9e9d-2819-62c9-e87b5ab8d6b1@samba.org>
-In-Reply-To: <19181593-9e9d-2819-62c9-e87b5ab8d6b1@samba.org>
-Date: Wed, 4 Sep 2019 18:46:46 -0400
-Message-ID: <CAOCN9rypK7x3Rj0dHQWRY=zVpi4EDSxjVfBRJekz65ksURvKog@mail.gmail.com>
+ (Exim) id 1i5jGu-003Wc1-B0
+ for samba-technical@lists.samba.org; Thu, 05 Sep 2019 04:21:26 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Message-ID:From:Cc:To;
+ bh=UEg49WKe1BT2ydR+OtQA5WgQFbX6FmRwRArlftjm7Bo=; b=i+v0+ojHGDFBo+L4YMTkzjsY2K
+ HvXZ1NdTuHT+dI8Is/Qk4d894WroSz1v7LuzX8EIUr9CaLYpllfcgwwdmgZGkn+8+C2DP8ymZJo+2
+ JylbIsYLBjQ/iSYDsxIF00+oegDsj3l/SYj+GLBG3edkkeWLAZdipGf5KiO4uCnsfvQc=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i5jGt-0005u0-Ei; Thu, 05 Sep 2019 04:21:23 +0000
 Subject: Re: PROPOSAL: deprecate plaintext password support (in SMB1) for 4.11?
-To: Rowland penny <rpenny@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+To: Andrew Bartlett <abartlet@samba.org>, Jeremy Allison <jra@samba.org>
+References: <ad9719c06273cac4686726b293ce9e78fecd8ca4.camel@samba.org>
+ <e5796781-277a-5e10-cd55-0322f42783d7@samba.org>
+ <20190904155450.GA162682@jra4>
+ <43fda24acfc63961446586339798f9d7801601bf.camel@samba.org>
+Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
+Message-ID: <827f8bfd-22c9-7305-228c-9230d6fa3960@samba.org>
+Date: Thu, 5 Sep 2019 06:21:10 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <43fda24acfc63961446586339798f9d7801601bf.camel@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="WVXofMtpvgDbzRsoAMtQMTB9EA6fSueuM"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,25 +56,80 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Sep 4, 2019 at 8:07 AM Rowland penny <rpenny@samba.org> wrote:
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--WVXofMtpvgDbzRsoAMtQMTB9EA6fSueuM
+Content-Type: multipart/mixed; boundary="TDK8sj7SNpatU51NvJVDoqEIBubjkYGAc";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Andrew Bartlett <abartlet@samba.org>, Jeremy Allison <jra@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Message-ID: <827f8bfd-22c9-7305-228c-9230d6fa3960@samba.org>
+Subject: Re: PROPOSAL: deprecate plaintext password support (in SMB1) for
+ 4.11?
+References: <ad9719c06273cac4686726b293ce9e78fecd8ca4.camel@samba.org>
+ <e5796781-277a-5e10-cd55-0322f42783d7@samba.org>
+ <20190904155450.GA162682@jra4>
+ <43fda24acfc63961446586339798f9d7801601bf.camel@samba.org>
+In-Reply-To: <43fda24acfc63961446586339798f9d7801601bf.camel@samba.org>
 
-> Given that the default in smb.conf for  'encrypt passwords' is 'yes' and
-> has been so since (at least) Samba 3.6.x, deprecating it will not change
-> anything and removing it, not much more.
->
-> In case you haven't guessed by now, I am all for the removal, who thinks
-> it is a good idea to send unencrypted passwords over the lan ?
->
-> Rowland
+--TDK8sj7SNpatU51NvJVDoqEIBubjkYGAc
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-People who wanted to be able to sniff them, or comply with requests to
-sniff them. They still do, and send passwords in plain text, and send
-clients passwords rather than send them a way to set a password.
+Hi Andrew,
+
+>> +1 on deprecate lanman auth and ntlmv1, but we can't
+>> remove I think until SMB1 is removed.
+>=20
+> OK, sorry for my late-night patch non-attachment.  I think my mail
+> client even prompted me!  Oops.
+>=20
+> I'll write up something similar for lanman auth.  NTLMv1 will be with
+> us a long time due to MSCHAPv2 sadly, but I'll see about some stern
+> words.
+>=20
+> Thanks for the support.  I agree actually decisions come a long time
+> later, after we asses the feedback.  We might not even hear from real
+> users before 4.12 branches off given how long it takes folks to
+> actually start using new Samba versions.=20
+
+Can you do the same for the client side parameters?
+
+Thanks!
+metze
+
+
+
+--TDK8sj7SNpatU51NvJVDoqEIBubjkYGAc--
+
+--WVXofMtpvgDbzRsoAMtQMTB9EA6fSueuM
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl1wjTsACgkQDbX1YShp
+vVaY3Q//R70ImLGsT630cEyaWiW4pAehmfacJYkqCh9PrQ81VTQljYNh+VgXBh/V
+D8J+hkuaKmzBUke3vI9NpXR4eXRs1e/b0nFiLyQZr2Ua3SxMHnvEBM5MPdasfQEA
+n55M6ZLo0uxgH42qsMgNLkEf7DEq3RoV9ovcwe3v/ggumZoZVTLTqBBlk04PEiTv
+Z4y9kAviSbug0bqdW+lcdPTpG2OxXOQ6SnbnNVfs0mR5dGEwxq+Ob0lVj2O/qR0L
+f5nJbN02sNP0p85yoA1wLWB58gE0ocOXzwb0g0YbJ670f85nenIcRpm9v9RSwQWN
+JntZuy7oWxsnREJeNra4ZrDWv0DFQ8so26QPDz3nDgBdpfiCM5QwVPKSeC9f7ZKR
+e+jUZmqCAN9FJNM8B8gsvPWTAqU6pXQaEZ5z9J0/4kfCGprtg3Z07yFgHLggWTaV
+FQOPha3D4BUQAercQssqeFePzKDvDv0qR16bGHh4NcRrfEvUTc/vU2D1m70hnFvr
+sf4Mj9meCGq/SBTP6Cforv4/TrpEbAGnSR/zii2gbC5jALfm8pkGwaXZOcHuixTI
+BlJma8ebyH6luVND5FdZweo4sZzyJPdy6KPkXgNtEfUODen98x7ig8ERjGg2aRWZ
+4i/DMZ7ooDEOSpd3LEjN0WPchii8vnaXEtSBOiYyj6OOdzAIUfs=
+=xnGh
+-----END PGP SIGNATURE-----
+
+--WVXofMtpvgDbzRsoAMtQMTB9EA6fSueuM--
 
