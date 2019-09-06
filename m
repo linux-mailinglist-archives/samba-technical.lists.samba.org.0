@@ -2,61 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E065AC21B
-	for <lists+samba-technical@lfdr.de>; Fri,  6 Sep 2019 23:41:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23C4FAC2C3
+	for <lists+samba-technical@lfdr.de>; Sat,  7 Sep 2019 00:58:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=VTJ6ywtXF0Kb16M8r2gdX3dF3j+El9LhnIg0gn6rXqg=; b=g7nBINJnwvZ2y89PInLK10q+1u
-	MlfJqwjLuWqQfVHjy19TD/qEZMOXBAVM/FD1sBH4vVbcO9t9tP6UmlKYfPvb9UlPC7us5An6tZT4n
-	nyGCYKk32vLxV9/0Sa24T9UHTroZJUW1dvktrEdeIJuNhRWOSly99zDBYJF19a2F9jyoIJa0PXJkU
-	P24fjZjRadpK6X8RFeMQWw78uafKVimIVKe5BoIJSxvetMosVUZlO52TCFYkJoHqEUfUOAZiwmat2
-	bGcsRYqMv8EmLt13fv6dklPL5fSGaOP8Vk2qlGQT5PTY+IUBOy9k3WS4LTwUkVMHRgyIyarJMgSjL
-	JyHbWOeA==;
-Received: from localhost ([::1]:37766 helo=hr1.samba.org) 
+	bh=ollU1zyU3K+04nLtVkrxW8XcA/8tUXtuP5hB5eMqNuU=; b=i4/DxlGy3Eb/jI3VkxbP2sjnTA
+	j2bwpBbEK1A2zJZN1ox3n44VJqvmL1H2lWS+CO6HYSvju9DzxtkvRgUBdQSRWwjvlQ4f6ZaN7eg2v
+	6xuedEt8Ue5Tva0g3eFPO+tXiqT9/ifce1mh+jL5myMee9knDPKw+XdxZ6fFGYq7OdZhTttzaf1cz
+	wTz2JOb1PFgSvCwkRRIOkmoD0yx4lgLjM+ak8ywNpxgxXlmlO4m2NEb/GyOllH4tDsSAfG7L3dKU0
+	CdVRtRo4UTyrkN2IzHYl3etfMrybxEfECtBJn2XpDubEZSErUTLTX7TWgc0dMddje5pcxarsoJcit
+	UUL6epcw==;
+Received: from localhost ([::1]:38558 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i6Lxb-0047BT-B9; Fri, 06 Sep 2019 21:40:03 +0000
-Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f]:35492) 
+	id 1i6NAb-0047Vw-Me; Fri, 06 Sep 2019 22:57:33 +0000
+Received: from mail-ot1-x335.google.com ([2607:f8b0:4864:20::335]:37289) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i6LxW-0047BM-Kd
- for samba-technical@lists.samba.org; Fri, 06 Sep 2019 21:40:00 +0000
-Received: by mail-lj1-x22f.google.com with SMTP id q22so2735227ljj.2
- for <samba-technical@lists.samba.org>; Fri, 06 Sep 2019 14:39:58 -0700 (PDT)
+ (Exim) id 1i6NAW-0047Vp-IQ
+ for samba-technical@lists.samba.org; Fri, 06 Sep 2019 22:57:30 +0000
+Received: by mail-ot1-x335.google.com with SMTP id s28so7281321otd.4
+ for <samba-technical@lists.samba.org>; Fri, 06 Sep 2019 15:57:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=KiOnIaX2jGtuqWGD7hphQmkN0w/LR0zk9cdqHCj9QBw=;
- b=trOiSgifT/FXG6zrveE6FzUYMNnXbGL0bqIA1ohEXhKbs7NSfFO+nah6byp95metbq
- 0rXEQMTZw7q2GXbwl7uHVGJ1hcO0GqNZ4MtMmd8U5N2iexcT/TWD3neJZ7YutzPy3a5D
- 5W8aXa1LjkEXUQUBmAqqKzYlbzbYfI5CMk2sEFawtQRm2GcOVn7jBIoCycI/UEhn1ANz
- JBoh0Llzr1I3vZBU2kjFy83M2aak3rMEepOGphMmJiyL960B5CLgl9EkAEDaIJffD1fi
- uw+ZyGQNYr7Km/JlM/V/nllbAOw6LrRHBUZ+2DHof3PWu21Q0NYSo1Tga3Gi8atzsULp
- Fl4Q==
+ h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+ :cc; bh=ollU1zyU3K+04nLtVkrxW8XcA/8tUXtuP5hB5eMqNuU=;
+ b=EIdqkRqWcglB9wMSizj7kDNZScFoY7Z8+ssalEkQ2a4LukzTMnmPXHlI1wT3CUYv4y
+ d95QNV+jxO22esItgMShMsHX0e/pCpwvZdFUiwcwYcifjy3e0uIhr9m9+NCQgRmMSHXb
+ v5Lj64G7XcahLilJKVpyFAeDQDJtjwdoE7W4Z26B43MErH/KtwG38fcTlQnSh7bd53sQ
+ 6GYwGiC36UkLHkitew9jcGBPrxqmBtj7WOVSwpjmbDlQCKxxWqjOxdY5KMmF0A+zQ79l
+ X6N5VwFjB/YQC+Z3BY08XMslGoftrI1MUFFP5RWFf0sT61HcHHGJ9eX82hycmSpMlUzb
+ wZiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ h=x-gm-message-state:mime-version:in-reply-to:references:from:date
  :message-id:subject:to:cc;
- bh=KiOnIaX2jGtuqWGD7hphQmkN0w/LR0zk9cdqHCj9QBw=;
- b=EsorusNzbfjkHdu3cXVyaBvx1mHKuSkm2wQTzv+XwB1DVljH/tjgXhllt+Txk0VTMJ
- NwN/JL15e/XJbjTyWBeoq4dRKadmKeh9I/KMw1ztIa/sdagZEkVR6TFctb48PVeWIUVn
- Vx8qDO75VrQpR/kpNjuRvTw3ZVkKDkQNSvCIj9+XR1qeY1B21b4GIramvLcM1qQAKwCC
- pn3pGg6zQ7soTeaGyaGPL6B/dOgApT0wNSM7KmIte6V3psl33Z5SFiyKgPtxJRjkKMNv
- DBwwlbUhY3N26bYIIvFhcYBU9TTK13chuNnGW1nAPN/lk79Eorwqqt+gWrO7iQAeexjQ
- wIFw==
-X-Gm-Message-State: APjAAAVm1EY3YXrJmhZUt2eIXioDnw5Og35NH+1KJS/JQ05ywEjYJIP5
- lXJhkqdOfN4gNFKNs4U6aARUZFcBtRhVVyIA9QwvLRqj
-X-Google-Smtp-Source: APXvYqz4GxYujI01/FL8T0WoPwM6ymMg37psz0DzaVFLG+Is1mRJ4+19kqr+INK+UvDdJMhcPxLJ9Ajeh1WkImeX0H4=
-X-Received: by 2002:a2e:99c1:: with SMTP id l1mr1194200ljj.8.1567805997619;
- Fri, 06 Sep 2019 14:39:57 -0700 (PDT)
+ bh=ollU1zyU3K+04nLtVkrxW8XcA/8tUXtuP5hB5eMqNuU=;
+ b=CZ9+oZwaDpQSxQoNdM7ijTPK8x/5g9STY9fYZ0HP11ipN2n8iZQINUBPB0aLREg+eW
+ Pmxu7dP0vI5Pz4xYJ2NA8Nwp0cf+X/JmtRdtBceQUqDKekGCCqON6G06r88kz3S5DBNQ
+ MCJK+rYtbM8RhmG3tsnpzJ7wWJpwC0s2jEFP1eNlqSMU1YVtWVt+TcGg0trWkUEyYKoc
+ kG4mUfLMaQJVP57f4TT1n5oCjg8538yPMO6Lpwok40hHio6ptdh/3Kvayu5JHhxH51Kz
+ BW2Ki9uV121MX01xbUxIae6WcSB6JwyPRgFSRu3M+hOy+efr7uvuP5/yMnjsdejFVJ6e
+ KSvg==
+X-Gm-Message-State: APjAAAVhZ2wIgz+NIbuqm+urZpHP8QzOb8uIf0+C9whcxjN/7tUq9Ecx
+ TWXkcO9Rg4tdwMx2efl3/1bgWEPNtYbO87CkyeU=
+X-Google-Smtp-Source: APXvYqw3tE/hS3V6CSW0lRJ2lLgsBeYPC3pxO3Ic3kuEp7/gcbt9UMKfsJ8G6SvrNFJnDCjvLxxdPY4LqyotgfOEY6Y=
+X-Received: by 2002:a9d:3288:: with SMTP id u8mr2732754otb.120.1567810644941; 
+ Fri, 06 Sep 2019 15:57:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAELK94eRurKj24RLm7Csd88ueJ5K+D8NhnZQ-j7Wt+dJhJLSVA@mail.gmail.com>
- <87lfv17nwo.fsf@suse.com>
-In-Reply-To: <87lfv17nwo.fsf@suse.com>
-Date: Fri, 6 Sep 2019 22:39:46 +0100
-Message-ID: <CAELK94fiPPVEKuk3SP1dDeXkAm7xQRkjEU1FpHQ_duJONWPNMw@mail.gmail.com>
-Subject: Re: Insights for the future of smbcmp
-To: =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>
+Received: by 2002:ac9:1d4b:0:0:0:0:0 with HTTP;
+ Fri, 6 Sep 2019 15:57:24 -0700 (PDT)
+In-Reply-To: <20190906161845.GA192819@jra4>
+References: <CGME20190906020151epcas1p487a64747d0a00c84bc683fe0d07207bd@epcas1p4.samsung.com>
+ <006701d56457$0c77fc60$2567f520$@samsung.com> <20190906161845.GA192819@jra4>
+Date: Sat, 7 Sep 2019 07:57:24 +0900
+Message-ID: <CAKYAXd-uR9RCQeVKsfREAvegP7J06nHDZ4nfeo1M+5KnkZ4VjQ@mail.gmail.com>
+Subject: Re: samba performance difference between old and the latest ?
+To: Jeremy Allison <jra@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,65 +70,80 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: P Mairo via samba-technical <samba-technical@lists.samba.org>
-Reply-To: P Mairo <akoudanilo@gmail.com>
-Cc: P Mairo via samba-technical <samba-technical@lists.samba.org>
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@gmail.com>
+Cc: Namjae Jeon <namjae.jeon@samsung.com>, sergey.senozhatsky@gmail.com,
+ samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Le ven. 6 sept. 2019 =C3=A0 10:51, Aur=C3=A9lien Aptel <aaptel@suse.com> a =
-=C3=A9crit :
-
-> Hi,
+2019-09-07 1:18 GMT+09:00, Jeremy Allison via samba-technical
+<samba-technical@lists.samba.org>:
+> On Fri, Sep 06, 2019 at 11:01:51AM +0900, Namjae Jeon via samba-technical
+> wrote:
+>> Hello,
+>>
+>> I found something strange during measuring performance with samba these
+>> days.
+>> I checked the performance of samba 4.7.6 and 4.10.6.
+>> There seems to be about 20% performance difference between the two
+>> versions.
+>>
+>> Test environment
+>>  1. use iozone and dd utils
+>>  2. share is tmpfs
+>>  3. smb client is kernel cifs client
+>>  4. oplock disable, oplock = no
+>>  4. command : ./iozone -s1g -r4 -e -i 0 -t 1 -b 24m.xls -+u
+>>
+>> with samba 4.7.6
+>> 	Children see throughput for  1 initial writers 	=   11248.48 kB/sec
+>> 	Parent sees throughput for  1 initial writers 	=   11248.28 kB/sec
+>> 	Min throughput per process 			=   11248.48 kB/sec
+>> 	Max throughput per process 			=   11248.48 kB/sec
+>> 	Avg throughput per process 			=   11248.48 kB/sec
+>> 	Min xfer 					= 1048576.00 kB
+>> 	CPU Utilization: Wall time   93.219    CPU time   29.517    CPU
+>> utilization
+>>
+>> with samba 4.10.6
+>> Children see throughput for  1 initial writers 	=    9018.82 kB/sec
+>> 	Parent sees throughput for  1 initial writers 	=    9018.70 kB/sec
+>> 	Min throughput per process 			=    9018.82 kB/sec
+>> 	Max throughput per process 			=    9018.82 kB/sec
+>> 	Avg throughput per process 			=    9018.82 kB/sec
+>> 	Min xfer 					= 1048576.00 kB
+>> 	CPU Utilization: Wall time  116.265    CPU time   33.182    CPU
+>> utilization
+>>
+>>
+>> ================================================================================
+>> ========
+>> dd test result is same with iozone result.
+>>
+>> samba 4.7.6 : 11.6MB/s
+>> samba 4.10.6 : 9.5MB/s
+>>
+>> with samba 4.7.6 :
+>> root@test1234-Samsung-DeskTop-System:/mnt/read# dd if=/dev/zero of=1.txt
+>> bs=4096
+>> count=1024
+>> 1024+0 records in
+>> 1024+0 records out
+>> 4194304 bytes (4.2 MB, 4.0 MiB) copied, 0.360991 s, 11.6 MB/s
+>>
+>> with samba 4.10.6 :
+>> root@test1234-Samsung-DeskTop-System:/mnt/read# dd if=/dev/zero of=1.txt
+>> bs=4096
+>> count=1024
+>> 1024+0 records in
+>> 1024+0 records out
+>> 4194304 bytes (4.2 MB, 4.0 MiB) copied, 0.442567 s, 9.5 MB/s
+>>
+>> Am I missing something? or real issue ?
 >
-> "P Mairo via samba-technical" <samba-technical@lists.samba.org> writes:
-> > Hello, I just added a new experimental feature to smbcmp GUI: the abili=
-ty
-> > to browse the summaries with a search bar, it's not merged yet but you
-> can
-> > try it on my branch[1].
-> > I would also like to know which features interest you in order to
-> implement
-> > it.
+> Is this on identical kernel versions ?
+Yes, I compared two versions in the same test environment.
 >
-> Good idea, but I think it is a bit confusing to use at the
-> moment.
->
-> - Hitting return doesn't do anything, I had to click on
->
-  the magnifier to search which was not obvious.
 >
 
-I was hoping a bug of GTK3 because the widget used is officially supported
-for windows, mac and gtk2, not a big deal though, I'll fix this, thanks for
-the feedback.
-
-- Once you hit the last result it doesn't loop back to the start.
->
-
-Can you provide me the file(s) you used ? And the steps to reproduce the
-bug because it just re-tested it and it works just fine
-
-- If you select something and then search it won't search starting from
->   the selection.
->
-
-I think this is questionable, but you are one of the users so I'll do it
-accordingly
-
-- Highlighting the matched part of the summary in the results would be nice=
-.
->
-
-Copythat
-
-
-> Cheers,
-> --
-> Aur=C3=A9lien Aptel / SUSE Labs Samba Team
-> GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
-> SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg,=
- DE
-> GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=
-=BCnchen)
->
