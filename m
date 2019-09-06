@@ -2,38 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A41CAB525
-	for <lists+samba-technical@lfdr.de>; Fri,  6 Sep 2019 11:52:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE98DABD8E
+	for <lists+samba-technical@lfdr.de>; Fri,  6 Sep 2019 18:19:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=94vTuaE+FRqHha4Xz9lxMsCWZ5zBPsTzNw2TVMP1IsY=; b=5Lrb9sxExY53FJdOXgZbiftcd+
-	cmnX/Py5Ws7jtKkucNhSMAaNB7MLQMH3p5O8iwSJEjWBOsTLJ78dBIopWiP+DbNANQplxHPfEbolF
-	0g/zEMgjrnu0wByv3YoOZzHLjbpNVuX6+XURINTFXQNuu+kk5szLviz03ntVVEoAkMNDKX6+b7Vdk
-	BiUQzxJGAL7d4y1cO6TjnIqbGLpn+aTS+oQFcdk3wXSqIk7osjbcFmJRG8wg8S8rimqpIX+3ENUVv
-	gyjG8yU8P1dZm/30XwaqwZVKVfD8Nju4UIDHX39+DAarbN1SnPPxaCyhYanU8XeoI3qy0qCtGVYiu
-	6du2Aq3w==;
-Received: from localhost ([::1]:18692 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=X418f7UbBtQdcYi1+1fN+oQGLcIk9I7YVt3g0A20p6k=; b=IA4Xhcm7WTutos56JqpfPUL2qP
+	5hJgUkxf+TYM98LRiKdxGHUJlidh6gihbUvXkddcKtL17kZMAU5osWcJk3NNv8JIPgY6aP+zxTQxc
+	ETXUckZ9PQ80ZZ+b1AdG4fzMZXxSaSdwSLIbYPzPgoGFVYw7o8FIHyHtSS2o0aShaE0swlqUqEowN
+	GmwwVEyInuJxE+B/6TTzLhyQdApEXeFjJDpxGPKLeJACD1fV5oxcDIuV9z4t3vUnrPusgGFL0pM9x
+	nOK7tXok0NPiKveK2PBwLLjwJZRxN9B9t9vBySYJVq2Kf4MbJ2411E464+UHBT/A/dr5QiQmNr580
+	HSn0ztcg==;
+Received: from localhost ([::1]:62058 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i6AuT-003wND-3y; Fri, 06 Sep 2019 09:52:05 +0000
-Received: from mx2.suse.de ([195.135.220.15]:50606 helo=mx1.suse.de) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1i6AuP-003wN5-9c
- for samba-technical@lists.samba.org; Fri, 06 Sep 2019 09:52:03 +0000
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 0B796AFCF;
- Fri,  6 Sep 2019 09:51:53 +0000 (UTC)
-To: P Mairo <akoudanilo@gmail.com>,
- P Mairo via samba-technical <samba-technical@lists.samba.org>
-Subject: Re: Insights for the future of smbcmp
-In-Reply-To: <CAELK94eRurKj24RLm7Csd88ueJ5K+D8NhnZQ-j7Wt+dJhJLSVA@mail.gmail.com>
-References: <CAELK94eRurKj24RLm7Csd88ueJ5K+D8NhnZQ-j7Wt+dJhJLSVA@mail.gmail.com>
-Date: Fri, 06 Sep 2019 11:51:51 +0200
-Message-ID: <87lfv17nwo.fsf@suse.com>
+	id 1i6Gwp-0043L3-1i; Fri, 06 Sep 2019 16:18:55 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:65318) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i6Gwk-0043Kw-Sg
+ for samba-technical@lists.samba.org; Fri, 06 Sep 2019 16:18:52 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=X418f7UbBtQdcYi1+1fN+oQGLcIk9I7YVt3g0A20p6k=; b=gTiAXrMcd2OYLgbMdgTfUFgCsM
+ v2JP2p3MwsHv4qpVQBkemCIX7hdZ3kbeDGuP7jPl6F9EvLK798A3hik7HXkqeiyH1vj6Ln/pl+kuq
+ XBtx9KFwaBaEq7JGCs98bEYcWBLQDP4HyaC9rWGMlSJCrATN6PonMDS8GZfNcroKDifY=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i6Gwi-00021s-9X; Fri, 06 Sep 2019 16:18:48 +0000
+Date: Fri, 6 Sep 2019 09:18:45 -0700
+To: Namjae Jeon <namjae.jeon@samsung.com>
+Subject: Re: samba performance difference between old and the latest ?
+Message-ID: <20190906161845.GA192819@jra4>
+References: <CGME20190906020151epcas1p487a64747d0a00c84bc683fe0d07207bd@epcas1p4.samsung.com>
+ <006701d56457$0c77fc60$2567f520$@samsung.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Warn: EHLO/HELO not verified: Remote host 195.135.220.15 (mx2.suse.de)
- incorrectly presented itself as mx1.suse.de
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <006701d56457$0c77fc60$2567f520$@samsung.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,37 +51,69 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: sergey.senozhatsky@gmail.com, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+On Fri, Sep 06, 2019 at 11:01:51AM +0900, Namjae Jeon via samba-technical wrote:
+> Hello,
+> 
+> I found something strange during measuring performance with samba these days.
+> I checked the performance of samba 4.7.6 and 4.10.6. 
+> There seems to be about 20% performance difference between the two versions.
+> 
+> Test environment
+>  1. use iozone and dd utils
+>  2. share is tmpfs
+>  3. smb client is kernel cifs client
+>  4. oplock disable, oplock = no
+>  4. command : ./iozone -s1g -r4 -e -i 0 -t 1 -b 24m.xls -+u
+> 
+> with samba 4.7.6
+> 	Children see throughput for  1 initial writers 	=   11248.48 kB/sec
+> 	Parent sees throughput for  1 initial writers 	=   11248.28 kB/sec
+> 	Min throughput per process 			=   11248.48 kB/sec 
+> 	Max throughput per process 			=   11248.48 kB/sec
+> 	Avg throughput per process 			=   11248.48 kB/sec
+> 	Min xfer 					= 1048576.00 kB
+> 	CPU Utilization: Wall time   93.219    CPU time   29.517    CPU
+> utilization  
+> 
+> with samba 4.10.6 
+> Children see throughput for  1 initial writers 	=    9018.82 kB/sec
+> 	Parent sees throughput for  1 initial writers 	=    9018.70 kB/sec
+> 	Min throughput per process 			=    9018.82 kB/sec 
+> 	Max throughput per process 			=    9018.82 kB/sec
+> 	Avg throughput per process 			=    9018.82 kB/sec
+> 	Min xfer 					= 1048576.00 kB
+> 	CPU Utilization: Wall time  116.265    CPU time   33.182    CPU
+> utilization  
+> 
+> 
+> ================================================================================
+> ========
+> dd test result is same with iozone result. 
+> 
+> samba 4.7.6 : 11.6MB/s
+> samba 4.10.6 : 9.5MB/s
+> 
+> with samba 4.7.6 :
+> root@test1234-Samsung-DeskTop-System:/mnt/read# dd if=/dev/zero of=1.txt bs=4096
+> count=1024
+> 1024+0 records in
+> 1024+0 records out
+> 4194304 bytes (4.2 MB, 4.0 MiB) copied, 0.360991 s, 11.6 MB/s
+> 
+> with samba 4.10.6 :
+> root@test1234-Samsung-DeskTop-System:/mnt/read# dd if=/dev/zero of=1.txt bs=4096
+> count=1024
+> 1024+0 records in
+> 1024+0 records out
+> 4194304 bytes (4.2 MB, 4.0 MiB) copied, 0.442567 s, 9.5 MB/s
+> 
+> Am I missing something? or real issue ?
 
-"P Mairo via samba-technical" <samba-technical@lists.samba.org> writes:
-> Hello, I just added a new experimental feature to smbcmp GUI: the ability
-> to browse the summaries with a search bar, it's not merged yet but you can
-> try it on my branch[1].
-> I would also like to know which features interest you in order to impleme=
-nt
-> it.
-
-Good idea, but I think it is a bit confusing to use at the
-moment.
-
-- Hitting return doesn't do anything, I had to click on
-  the magnifier to search which was not obvious.
-- Once you hit the last result it doesn't loop back to the start.
-- If you select something and then search it won't search starting from
-  the selection.
-- Highlighting the matched part of the summary in the results would be nice.
-
-Cheers,
---=20
-Aur=C3=A9lien Aptel / SUSE Labs Samba Team
-GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
-SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, DE
-GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
-nchen)
+Is this on identical kernel versions ?
 
