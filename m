@@ -2,65 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E910BAB1C7
-	for <lists+samba-technical@lfdr.de>; Fri,  6 Sep 2019 06:46:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58041AB1CD
+	for <lists+samba-technical@lfdr.de>; Fri,  6 Sep 2019 06:50:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=LHh3Zc7w5NHOu/ivVI+JuXjQ/UktiosRlzeYy/y3U2o=; b=5k0LzgX6VKnZLUPJdzkXTjWxtm
-	mFtQnBZyc4No1Z5wDfhk2ts2KfV1pzHK4IE5MkGoIbwK4fXnSI/t9yy8cb4Q2p8HWonJOFaJHBAQ3
-	ScMXY2SPJ+oc8tPuSx6rwK7zhgnzadLbv25KhA3SaGqSm3wjN6/fPhPGQ29QVU/zL52xJlZ5HTvsU
-	gcqd68nrqfI+Go8rGw0ZWxZ8tqPE3IA0Ut1OlAtsIsTKNdPK6HZhG/XumRLSHbaROHww3+sekgkCV
-	O+si0X2/vvlOPaN28nQUlVTP4A5h7yFAwkw+A4gyQt3SalESFa29x96Yxh/sO3siOyzaOWBYMPDYs
-	W4BQCUKA==;
-Received: from localhost ([::1]:33204 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=wyO0NUyLW9CpKTPIS2L53Ux3At7nW6dXhv3i6c9o88g=; b=Q/tAOZPODDYG6E3EK87AAFtFFp
+	XCu52zxPtB2h3QPSYTCR3Acns1Tuu/hXNAATqt/t/3lZJjTt6FFE09HKZRA/6V30BlYQyGLNHj+S4
+	3sirdTuwlxcCFceXt+2dxlcQgafK7oNap/Jm6672a4DMda5AQTW7AOQwVzfFAkYbpGcudrQeQYi2Y
+	c0Wbc6C3zY4C0nYhSU6tQfec+dj6YrkgWtWVMGQkZB8xTPaOiL+Lq5/EB5hWlxxPjZeMxTUqOTH4E
+	0oCmFbR5kaBwyMeaJY0ZvVYBet9mzQgvZFvpPLDAHc+ASQ0ai65Zx+PX2PUGiZfVUyehRaooFgR//
+	5bRNne0g==;
+Received: from localhost ([::1]:34816 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i667d-003rCt-Mf; Fri, 06 Sep 2019 04:45:21 +0000
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441]:33252) 
+	id 1i66CH-003rPu-UO; Fri, 06 Sep 2019 04:50:09 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26380) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i667U-003rCW-3x
- for samba-technical@lists.samba.org; Fri, 06 Sep 2019 04:45:16 +0000
-Received: by mail-pf1-x441.google.com with SMTP id q10so3510078pfl.0
- for <samba-technical@lists.samba.org>; Thu, 05 Sep 2019 21:45:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=LHh3Zc7w5NHOu/ivVI+JuXjQ/UktiosRlzeYy/y3U2o=;
- b=uQrbHWNasUNvV5McSjuwsyvlYRCSc1BvB8pWiK8Jr89pjFlxWrZ0ZlKLURXAdad2oL
- nSr60231OzLhD/IK/G1XtKQ5iaYpwnO9Jc1YV7OCjamTe1M3QW7h7hLWYeFYTtGOGKjI
- GSWwOCeFUcUXGCt5IA4abQBSMWAMBzG9fd5poYNklW3hemD1O5k/QC2Je2PWeqy1m+z5
- DxFZFZHgCkSKs0QtUe4/GqhFqzhTQzCBXZ4my0+YijGZsahpvC/P65PN77BCbGxQ3vQZ
- iRibjTJrS1WOsZGBFpejAk7dFI4ISsi2jIlWBkcgMNuch40GJgOdLQcnfTROB+dVPDfm
- MKAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=LHh3Zc7w5NHOu/ivVI+JuXjQ/UktiosRlzeYy/y3U2o=;
- b=pvN1FpkGhyf3juVCGz7C2Iv25WOGjLO7zYZlo2gPnUXpREPh7nCZRGJ8dMchttIJ2U
- jZZzF/iTDE29pvKPOVpHj/8JXLJ5nyPD9a2jsmXyQR6SrQJKPAoLyV9pUZ/G+WXIo5kP
- VCDxPuF9+U/wPdTj8bl5ibhw+mhJuz7ePJhMhP1TyEScYURe0KMpm7+/4cZnNEPlMaP5
- tRhhT3To3pqT6PpLWTn5WpBZYyvLvw6I1mK3YHTEEGQ+54d98lc6HjNNYkZrG4TVazgf
- i+puIOFb0OM0upM9UcMqk4JvVGpI+DMXBahacy31bjtUxoFVupy0txdnhnDAkA9XxdaM
- RFKA==
-X-Gm-Message-State: APjAAAXc3Y44XyT4qACCIA+hDMsT1xbo4pOWqzYKBkC58OhCIsht7++y
- zF7KggRR4WDN3H7oQ5SyIsrcgArybPM=
-X-Google-Smtp-Source: APXvYqw0H/J2q2BgoB01FRWQTecJF6kXJst3CRrO+IVru/IlVzadmHGfjpJRh8xfuR4pH1ZjUNYlrQ==
-X-Received: by 2002:a17:90a:e292:: with SMTP id
- d18mr7875461pjz.100.1567745107291; 
- Thu, 05 Sep 2019 21:45:07 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
- [73.71.176.3])
- by smtp.gmail.com with ESMTPSA id v12sm4109060pff.40.2019.09.05.21.45.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Sep 2019 21:45:06 -0700 (PDT)
-To: samba-technical@lists.samba.org
-Subject: [PATCH 2/2] util_sec.c: Move __thread variable to global scope
-Date: Thu,  5 Sep 2019 21:44:47 -0700
-Message-Id: <20190906044447.41266-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
+ (Exim) id 1i66CB-003rPm-Vg
+ for samba-technical@lists.samba.org; Fri, 06 Sep 2019 04:50:07 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:To:From:Message-ID:CC;
+ bh=wyO0NUyLW9CpKTPIS2L53Ux3At7nW6dXhv3i6c9o88g=; b=Gn0u928SvkfjlQ2aVGVwMFCAU+
+ rSkHFy8YhTMLC/Pke99F/zky6ah4vEBK6Cl0kOADiD6H9RqNHsii1LcBINfABYM4eEoptI3lTuVci
+ qaMAEJL7wiShDnlfITtM+Z4VYw7qy3QIeQsCun8lKlOGTFje3wUjrngCu5NklnE2KyOo=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i66C8-00043x-Lq; Fri, 06 Sep 2019 04:50:01 +0000
+Message-ID: <1567745396.20732.11.camel@samba.org>
+Subject: Re: [PATCH 1/2] lib/replace/wscript: Avoid generating nested main
+ function
+To: Khem Raj <raj.khem@gmail.com>, samba-technical@lists.samba.org
+Date: Fri, 06 Sep 2019 16:49:56 +1200
 In-Reply-To: <20190906044447.41266-1-raj.khem@gmail.com>
 References: <20190906044447.41266-1-raj.khem@gmail.com>
-MIME-Version: 1.0
+Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAACRklEQVRYw81YS67DIAwkVe8FPRm5menJeAu3lmUCbyBGKqsmRXjwb8Y5aq3hl9Yj/Nh6Tu0upZRS+EdKiV+e5+mJqMKLiHLORBRjzDmbc/hlvb1QD2k3sG84+dhhvF6vlzymlNY8dyBJzUdLjAwyvaeU8n6/2WHpu/xDRkREJI8cOBMgfuRQxhj58JzzbBwhQDFGA07M6/efE0MQxDHGFvpdQHy6MUxqtU4yezRcH0B4GfbM44BWGqOurF6Omz140a0ASimJvdbwZT32XrpRh5yuwY1d0vPrdNkv91+T8uBRG8l1uiX+JtsHxPNIWE27ugwTctTdHCIiYXvuy4P7IDl0CxAzl2xgZTJwgw+g3kGaHwYh5g2sljyrjIVEq4pYBg2Kq3yXZ5WxjfO7zF9jRdXrnLcEmlbTRnNpcT0gvpTScUC2HlOE2ipAvPuJanMT+Xc0PC4dFzu1DEO4HgczaS5kOnZ4vM7zxNU+mtRyRVPDgqyX3cdx8AQCCrQnfkV9VzMA9Ryg3ek8Sgsg3QX+nbz03Og5l10ytp6HusQUwpjd1rnsksbHlhjuVGdBAbWzIiJu5MvEFkA6OkiwBO4uQL3ADeQ9b57t74+FBo1s47IqpVxqBDcuQ66r94QQJOH2ctnAf9oZtdbZYejpi2bQEveO0sb2JXu09OJJrnpil4SV5G2N6Y+1QjL+gHSKDApHJoJWF3hW2fInh6lutGW216OPRBZtRZscwyQvI+KuTj3rp4VP1VsAcTobxgDngukqm3LPgmL8A4m377Y5OvTKAAAAAElFTkSuQmCC
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.22.6-1+deb9u2 
+Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -75,63 +52,45 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Khem Raj via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Khem Raj <raj.khem@gmail.com>
-Cc: Khem Raj <raj.khem@gmail.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Make clang happy otherwise it complains about variable scope
+On Thu, 2019-09-05 at 21:44 -0700, Khem Raj via samba-technical wrote:
+> clang is not happy when it sees another main nested inside the main
+> function and fails the test for prctl syscall, therefore avoid adding
+> implicit main() here
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-fixes
+G'Day Khem,
 
-source3/./lib/util_sec.c:470:4: error: '__thread' variables must have global storage
-        } __thread cache;
-          ^
+Thank you for your submission.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- source3/lib/util_sec.c | 19 +++++++++++--------
- 1 file changed, 11 insertions(+), 8 deletions(-)
+However it is most helpful if you could submit changes to samba as a
+gitlab merge request, we keep better track of outstanding patches here
+than on the list, and can see CI results for them. 
+https://wiki.samba.org/index.php/Samba_CI_on_gitlab
 
-diff --git a/source3/lib/util_sec.c b/source3/lib/util_sec.c
-index 9408269..7390318 100644
---- a/source3/lib/util_sec.c
-+++ b/source3/lib/util_sec.c
-@@ -444,6 +444,17 @@ void become_user_permanently(uid_t uid, gid_t gid)
- 	assert_gid(gid, gid);
- }
- 
-+#ifdef HAVE___THREAD
-+	struct cache_t {
-+		bool active;
-+		uid_t uid;
-+		gid_t gid;
-+		size_t setlen;
-+		uintptr_t gidset;
-+	};
-+
-+static __thread struct cache_t cache;
-+#endif
- /**********************************************************
-  Function to set thread specific credentials. Leave
-  saved-set uid/gid alone.Must be thread-safe code.
-@@ -461,14 +472,6 @@ int set_thread_credentials(uid_t uid,
- 	 * available.
- 	 */
- #ifdef HAVE___THREAD
--	static struct {
--		bool active;
--		uid_t uid;
--		gid_t gid;
--		size_t setlen;
--		uintptr_t gidset;
--	} __thread cache;
--
- 	if (cache.active &&
- 	    cache.uid == uid &&
- 	    cache.gid == gid &&
+Also ensure you have followed 
+https://www.samba.org/samba/devel/copyright-policy.html
+if required.
+
+Specifically do not use git-send-email as samba-technical rewrites the
+author and so the patches get owned by samba-technical, not you.
+
+Thanks!
+
+Andrew Bartlett
 -- 
-2.23.0
+Andrew Bartlett
+https://samba.org/~abartlet/
+Authentication Developer, Samba Team         https://samba.org
+Samba Development and Support, Catalyst IT   
+https://catalyst.net.nz/services/samba
+
+
+
 
 
