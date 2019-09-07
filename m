@@ -2,76 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 004ECAC3B6
-	for <lists+samba-technical@lfdr.de>; Sat,  7 Sep 2019 02:42:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA354AC3C3
+	for <lists+samba-technical@lfdr.de>; Sat,  7 Sep 2019 02:58:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=uTTihvmpg0Cx7RX5j4M1Z5qbLeFhFqwraHGxiDLmcyI=; b=nfos0VDIQObQ7qdx02eieHcfFQ
-	U9Xy7Hb8uLRSOGso8sfTQQv+n4bNweT8ExyVH3XbcMStuhpc7tlTIrwB7Psh+9XS+3/QRRUuodINC
-	KE2lyjWJemVqLwsqiyUfiteZevDInFk02Mi0W5IzPv4ebTxk3gxQN7GYpxnQE3ogvkJ3hma8OPuhv
-	kd8pJLVzUjsisNojWQA0Q+kGZggJGwjjXR0mmtuPEOea/lXuWvvxtL1s4sRb7A1k2gfZSi+jvHU4c
-	ioVtG0h7R4nIubCLHJsY42riInpdFG+v+cjl/rEQeNnUT+P2wu6EVIM5BObslLs/zXF4VNvcUrX9/
-	c1SvgMhA==;
-Received: from localhost ([::1]:41046 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=1rZDT7aN86EweQ934rVvpishZdvw8GFzMbnTnAYduqQ=; b=BB8td4zyygUDV5embRDTzAsHaA
+	mFwMUQmIOcFmpLaZVIdeJ6PNL2mC6I8UShqtPK3U0l86vWcc5gCdVplX9hOZ556TmIfrRqElGbmPO
+	Qzlf0wyOUoj4nvTXumtiFds41ey8HrJ+OP+SkUJpxFjwhTltYmbr+ZGa70gyZhs0aeiH5q68iLuLF
+	/NUiU7QMssEiG/LhNnZ7hZgXTPGI31kNOTeWfgYGNvw/Ge4NxY2A7imzUi5relbnMddoJ+fNVvJSm
+	pjeE3iSxctk/CoaO5WwuqrLZWgVOXthGeTQxOTUrl78XU1WvG/eXJvGxAfKMB3EGgrILe3yRCL/m9
+	nhvCT5Zg==;
+Received: from localhost ([::1]:41838 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i6OoF-00489s-C4; Sat, 07 Sep 2019 00:42:35 +0000
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d]:41632) 
+	id 1i6P3I-0048KS-95; Sat, 07 Sep 2019 00:58:08 +0000
+Received: from mail-ot1-x32b.google.com ([2607:f8b0:4864:20::32b]:41162) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i6OoA-00489l-4t
- for samba-technical@lists.samba.org; Sat, 07 Sep 2019 00:42:33 +0000
-Received: by mail-pl1-x62d.google.com with SMTP id m9so3966809pls.8
- for <samba-technical@lists.samba.org>; Fri, 06 Sep 2019 17:42:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ixsystems.com; s=google;
- h=from:content-transfer-encoding:mime-version:date:subject:message-id
- :references:in-reply-to:to;
- bh=uTTihvmpg0Cx7RX5j4M1Z5qbLeFhFqwraHGxiDLmcyI=;
- b=djbz4Qp0swOHIqyItMCnhVAjcgmKLKMoYS9TC2h71EWasHlrQBiVnGiWo4lZjBgXOz
- +5ksLUpPR+fFv0sSU4pPROanZ+rJZdFicjv3ri0xACS2d0Wnor8X6jAoxIQGa+WKzfUo
- VwjaBy2aIp3JmT5kTe63grhjfJ+jV740B5UEDmbutWzOCqhgnWFw12HNOfqU+sWo4n+h
- 9yNR3AsSMutI1/k03YZacGv7V/+06qdi5o3Y6yoFS7sNhPgLrqBRkXXa+gcThiJaGcPx
- xDXikp6iKj4E+Lg2rhHES0mWyBSkgvl+7jPiXb6NYJuwnNULIQq9V0JzfLWqBmNX0XsQ
- Zy7A==
+ (Exim) id 1i6P38-0048KL-CA
+ for samba-technical@lists.samba.org; Sat, 07 Sep 2019 00:58:06 +0000
+Received: by mail-ot1-x32b.google.com with SMTP id o101so7462737ota.8
+ for <samba-technical@lists.samba.org>; Fri, 06 Sep 2019 17:57:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+ :cc; bh=1rZDT7aN86EweQ934rVvpishZdvw8GFzMbnTnAYduqQ=;
+ b=TT4/QnMNqCZTk1jxWH2TcWbr4IXoqbR7evth4niQErpQk0yMuAvoEBzjryhoOvWhPP
+ 7LyxNBLD0+noRaG0ZRyqSl4J/BwPlok+wKvCjs8j4kmp91XIzGENn/EgLsqRaWwGjaum
+ gflUFQBzGadd/Jq+f/zr/8QpUN7X/XHgLpnH1Ycna+WYh8f5hEGt32WqVQjave9M9Z9R
+ LkXJIFcnWbNrjcanpCYo4c86x84NTkYAq06/pw+xqqC8WExjffFHSDfKaXNeAzd61wTG
+ O+LyjpRuNbwHkJW230MVcheQJCEZBaXxgraXIvtNFIAocKfUPC4UvSSVxmAuoFI6QFmj
+ nS9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:content-transfer-encoding:mime-version:date
- :subject:message-id:references:in-reply-to:to;
- bh=uTTihvmpg0Cx7RX5j4M1Z5qbLeFhFqwraHGxiDLmcyI=;
- b=uBDYOD5mODDYou6Kf/IJmsFl2vsTTOLk3QyCuDWp/tPmsS8Z0JbaV1E9SOVIoAKvyk
- H/FN2gX6vFoS5Gn5x9gCX+209xRS6I0Onoppq3/C13KdTiR6Xg+M4D9nrRRyVjlqKrOl
- ehLD683aYnXUATo9QYF1e5TeZLDOiojZdTBsqiZzN857SonnANEmmhmKrlvxLqWDtHPX
- Mt5tFgFkYGnwRuTDxhp61Ccegt3LuMSLOMCD/q67rcfsQw/Odj/MCr9C4s49KwfLnG93
- RhODPy/xC1Hi6XBMuGzdBQb/Ne7+8neVe1Dw5zloMw/7TRlcKKqxds57Ku7R8rLnCOJu
- Cgmw==
-X-Gm-Message-State: APjAAAVDClTTq+e6TPssdA1qUuXpVdjX4gXuZtVm12zdrFsdkuDHwwN3
- TcMfVfIuWst0vQ9JFN+L7bTxsul4ejnyLRqbgoIeepBrH2sKJWXJmhULzSOpzOEq5GX4sKtDih8
- RgeyfIhpNtOK76jdogDTUcJ3c2euvjXRSBPR3WTtQjNT5pgOZoET7UmLQvNJiDHB1hh2H+BtXTH
- 5ZAW9H
-X-Google-Smtp-Source: APXvYqx7a+JstNVdyNSe7EenXfVBAaktMvURMsNlPC8MJSLky1XT3N5NA/CQnogiXHHrmfN/fHCBuw==
-X-Received: by 2002:a17:902:6a84:: with SMTP id
- n4mr12213787plk.109.1567816947917; 
- Fri, 06 Sep 2019 17:42:27 -0700 (PDT)
-Received: from ?IPv6:2600:6c5d:5900:1e6:acd0:5a1:cee5:3ec2?
- ([2600:6c5d:5900:1e6:acd0:5a1:cee5:3ec2])
- by smtp.gmail.com with ESMTPSA id v27sm16185332pgn.76.2019.09.06.17.42.26
- for <samba-technical@lists.samba.org>
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 06 Sep 2019 17:42:27 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Mime-Version: 1.0 (1.0)
-Date: Fri, 6 Sep 2019 20:42:25 -0400
-Subject: Re: samba performance difference between old and the latest ?
-Message-Id: <A79AF92E-3404-487A-8697-9FA6F3B1D69A@ixsystems.com>
+ h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+ :message-id:subject:to:cc;
+ bh=1rZDT7aN86EweQ934rVvpishZdvw8GFzMbnTnAYduqQ=;
+ b=h+epCkGrSwWufUGoorZhpuEobV17Sxwp8+FRC2BkDAprRZE+jg92bnVWPhdfBqYnyh
+ pvue5OyNjNgM/0N/I5HcmVnUiBZ0DPjCvt0dgFL0N4Swysi9WJK1VsS1wuB12vI1uCsy
+ uI7+l2FaOdpfHaDkG/5ANlrrk0NEerHCFOOWa2M7WIGT+uF+siTuaSjwr5lwriJy1kLX
+ lwij7JdFxhMEoEdWXhm+wZu0vwD/vFN4R81E8sq+C7lKGlGp4K29h0/K/S6eobP+kf77
+ AmDPKrjC57fFb2Ep+BnrwZOAwXTO7qn+znTCe0mdtUm5mW2ibWSPSOA19AyGj+M1Mn6A
+ 0rtg==
+X-Gm-Message-State: APjAAAVvbR496wc2Vw26fu6BAKgPlbqhAoSTcAcHC5oMhiOzuQmbahV6
+ p054csBGeCd6IZ+W/YaMXsVd8rskO9FdBlUomp0=
+X-Google-Smtp-Source: APXvYqx0mvghDuPEIIzqUM2vkYj5vc0fJT08t5MyCsIrBzilBJZsXgaux1DRDaV/o5irbRYPHn4iums6mRXns2og9Nk=
+X-Received: by 2002:a9d:a0d:: with SMTP id 13mr6874824otg.282.1567817872957;
+ Fri, 06 Sep 2019 17:57:52 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:ac9:1d4b:0:0:0:0:0 with HTTP;
+ Fri, 6 Sep 2019 17:57:52 -0700 (PDT)
+In-Reply-To: <67731bdad1bd3dda0d25a9ba1a8aebe8f7d17d92.camel@samba.org>
 References: <CGME20190906020151epcas1p487a64747d0a00c84bc683fe0d07207bd@epcas1p4.samsung.com>
  <006701d56457$0c77fc60$2567f520$@samsung.com> <20190906161845.GA192819@jra4>
  <CAKYAXd-uR9RCQeVKsfREAvegP7J06nHDZ4nfeo1M+5KnkZ4VjQ@mail.gmail.com>
  <20190906230552.GA37629@jra4>
  <67731bdad1bd3dda0d25a9ba1a8aebe8f7d17d92.camel@samba.org>
-In-Reply-To: <67731bdad1bd3dda0d25a9ba1a8aebe8f7d17d92.camel@samba.org>
-To: samba-technical@lists.samba.org
-X-Mailer: iPhone Mail (16G102)
+Date: Sat, 7 Sep 2019 09:57:52 +0900
+Message-ID: <CAKYAXd_VO+9=aNm2Fii-_AVuFR9uDSHz+3nN2uKPCJ9BcO1Q7g@mail.gmail.com>
+Subject: Re: samba performance difference between old and the latest ?
+To: Andrew Bartlett <abartlet@samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,11 +73,76 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Walker <awalker@ixsystems.com>
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@gmail.com>
+Cc: Namjae Jeon <namjae.jeon@samsung.com>, sergey.senozhatsky@gmail.com,
+ samba-technical@lists.samba.org, Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-We=E2=80=99re same aio settings used on both cases? Defaults changed in 4.9 I=
-IRC.=
+2019-09-07 9:37 GMT+09:00, Andrew Bartlett <abartlet@samba.org>:
+> On Fri, 2019-09-06 at 16:05 -0700, Jeremy Allison via samba-technical
+> wrote:
+>> On Sat, Sep 07, 2019 at 07:57:24AM +0900, Namjae Jeon wrote:
+>> > 2019-09-07 1:18 GMT+09:00, Jeremy Allison via samba-technical
+>> > <samba-technical@lists.samba.org>:
+>> > > On Fri, Sep 06, 2019 at 11:01:51AM +0900, Namjae Jeon via samba-
+>> > > technical
+>> > > wrote:
+>> > > > Hello,
+>> > > >
+>> > > > I found something strange during measuring performance with
+>> > > > samba these
+>> > > > days.
+>
+>> > > > dd test result is same with iozone result.
+>> > > >
+>> > > > samba 4.7.6 : 11.6MB/s
+>> > > > samba 4.10.6 : 9.5MB/s
+>> > > >
+>> > > > with samba 4.7.6 :
+>> > > > root@test1234-Samsung-DeskTop-System:/mnt/read# dd if=/dev/zero
+>> > > > of=1.txt
+>> > > > bs=4096
+>> > > > count=1024
+>> > > > 1024+0 records in
+>> > > > 1024+0 records out
+>> > > > 4194304 bytes (4.2 MB, 4.0 MiB) copied, 0.360991 s, 11.6 MB/s
+>> > > >
+>> > > > with samba 4.10.6 :
+>> > > > root@test1234-Samsung-DeskTop-System:/mnt/read# dd if=/dev/zero
+>> > > > of=1.txt
+>> > > > bs=4096
+>> > > > count=1024
+>> > > > 1024+0 records in
+>> > > > 1024+0 records out
+>> > > > 4194304 bytes (4.2 MB, 4.0 MiB) copied, 0.442567 s, 9.5 MB/s
+>> > > >
+>> > > > Am I missing something? or real issue ?
+>> > >
+>> > > Is this on identical kernel versions ?
+>> >
+>> > Yes, I compared two versions in the same test environment.
+>>
+>> Just checking :-). In that case doing a cachegrind run
+>> on each of the two different versions might show where
+>> the issue is.
+>
+> Perhaps it negotiated different protocol versions or encryption
+> settings?
+Both are mounted with smb3.11, and no encryption setting.
+I checked smb packets using tcpdump...
+
+>
+> Andrew Bartlett
+>
+> --
+> Andrew Bartlett                       https://samba.org/~abartlet/
+> Authentication Developer, Samba Team  https://samba.org
+> Samba Developer, Catalyst IT
+> https://catalyst.net.nz/services/samba
+>
+>
+>
+>
 
