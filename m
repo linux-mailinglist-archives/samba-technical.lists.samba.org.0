@@ -2,34 +2,34 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0884DAD5CD
-	for <lists+samba-technical@lfdr.de>; Mon,  9 Sep 2019 11:34:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 66A6FAD959
+	for <lists+samba-technical@lfdr.de>; Mon,  9 Sep 2019 14:48:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=+j7j/pBSygLSol6SnREo8YMl8szqg3RJFcmUso6vIQY=; b=H7S5wf9yXUbw7b68AelGzjxmCB
-	zdnCtQXN46piQ7vkrySYbwxwjnjW3ilzJFxPsuDKAgcW9PMOPDZbQYwgoFeICeVrFeIFzjxhZY1mD
-	7Po6wHr9SsP2jewrIL14lHAq1NA/SwtqBI7Vm0cXtbKzafUIMVnJ7i/muVoV14ufQNIdeKfaZDyG7
-	NC7JG6fqDwNdeyqOjt4dmY3CgP+/QDRhqT0PAxgJzZXZPP2eG+NAqZALcckXjXWmrJhn8KmZDEc9N
-	03tDkSSScrDxhI0lt43JgtYK0/KCKX+YBXQ/pYmUa6VB9gwfw1t2i+4Tqt2D+p5ByMyVrgDwVX1sZ
-	qQuJtOpw==;
-Received: from localhost ([::1]:23672 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Aqz2UCkkJvpu/BdEbJb6cBMFpaHCJcN7GmoGliA1KHI=; b=Nnp7MtM/YPaLBPFAg9xnq6Jop/
+	ZauaenvR9r8Tt7ufmrRQO/KPWWa1rUp+4Mu7R8wA5ekvWp6JaKAadd0JB0oy6FgcYjLvsp8MZbhKC
+	YI+t784M0tR5yeHn/SKf3f7/fbGb+xk1lqvv9BVGObRioE54x70sKDuVrKrzkSmHJ9pBYLHfDkEcY
+	xJU2/iAUyfDS0pmZSvE52RhvCfCqOTSjH71Zl3nxeQmHYD6DxAyS/XiS3IJOLqT9MAlJH4nKiXOPQ
+	fOIIzjq5hq02EFGCSr//aJOwSSpeM09Ijb4rDUn0N9k0erNQYkje5obD/1bo7PlpRY5VRReU97tY+
+	gMUVn1DA==;
+Received: from localhost ([::1]:35276 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i7G3q-004P0n-5O; Mon, 09 Sep 2019 09:34:14 +0000
-Received: from mx2.suse.de ([195.135.220.15]:58494 helo=mx1.suse.de) 
+	id 1i7J4d-004Qso-So; Mon, 09 Sep 2019 12:47:16 +0000
+Received: from mx2.suse.de ([195.135.220.15]:33854 helo=mx1.suse.de) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1i7G3i-004P0g-GQ
- for samba-technical@lists.samba.org; Mon, 09 Sep 2019 09:34:09 +0000
+ (Exim) id 1i7J4N-004Qsh-9i
+ for samba-technical@lists.samba.org; Mon, 09 Sep 2019 12:47:10 +0000
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 894B4AC1C;
- Mon,  9 Sep 2019 09:33:58 +0000 (UTC)
-To: P Mairo <akoudanilo@gmail.com>
-Subject: Re: Insights for the future of smbcmp
-In-Reply-To: <CAELK94fiPPVEKuk3SP1dDeXkAm7xQRkjEU1FpHQ_duJONWPNMw@mail.gmail.com>
-References: <CAELK94eRurKj24RLm7Csd88ueJ5K+D8NhnZQ-j7Wt+dJhJLSVA@mail.gmail.com>
- <87lfv17nwo.fsf@suse.com>
- <CAELK94fiPPVEKuk3SP1dDeXkAm7xQRkjEU1FpHQ_duJONWPNMw@mail.gmail.com>
-Date: Mon, 09 Sep 2019 11:33:57 +0200
-Message-ID: <87pnk9izju.fsf@suse.com>
+ by mx1.suse.de (Postfix) with ESMTP id 645ADAEB3;
+ Mon,  9 Sep 2019 12:46:51 +0000 (UTC)
+To: "Paulo Alcantara \(SUSE\)" <paulo@paulo.ac>, piastryyy@gmail.com,
+ samba-technical@lists.samba.org, linux-cifs@vger.kernel.org
+Subject: Re: [PATCH] mount.cifs: Fix double-free issue when mounting with
+ setuid root
+In-Reply-To: <20190905184935.30694-1-paulo@paulo.ac>
+References: <20190905184935.30694-1-paulo@paulo.ac>
+Date: Mon, 09 Sep 2019 14:46:50 +0200
+Message-ID: <87k1ahiqmd.fsf@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -51,26 +51,79 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
 From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
  <samba-technical@lists.samba.org>
 Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
-Cc: P Mairo via samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-"P Mairo via samba-technical" <samba-technical@lists.samba.org> writes:
-> Can you provide me the file(s) you used ? And the steps to reproduce the
-> bug because it just re-tested it and it works just fine
+" Paulo Alcantara (SUSE) " <paulo@paulo.ac> writes:
+> It can be easily reproduced with the following:
+>
+>   # chmod +s `which mount.cifs`
+>   # echo "//localhost/share /mnt cifs \
+>     users,username=3Dfoo,password=3DXXXX" >> /etc/fstab
+>   # su - foo
+>   $ mount /mnt
+>   free(): double free detected in tcache 2
+>   Child process terminated abnormally.
+>
+> The problem was that check_fstab() already freed orgoptions pointer
+> and then we freed it again in main() function.
+>
+> Fixes: bf7f48f4c7dc ("mount.cifs.c: fix memory leaks in main func")
+> Signed-off-by: Paulo Alcantara (SUSE) <paulo@paulo.ac>
 
-It happens with all the captures I have. I coudn't find a capture where
-it loops correctly. I'm seaching for "res". It doesn't matter if you
-open the file via the CLI or the menu, happens in both.
+Reviewed-by: Aurelien Aptel <aaptel@suse.com>
 
-> - If you select something and then search it won't search starting from
->>   the selection.
-> I think this is questionable, but you are one of the users so I'll do it
-> accordingly
+I've compiled next branch with ASAN and can confirm the double-free and
+the fix works
 
-This is how most (all?) searches work. Text editors, web browsers, etc
-all search from current cursor position. It is a pretty conventionnal
-way to implement it I would say.
+Compiling with ASAN
+-------------------
+
+$ CFLAGS=3D-fsanitize=3Daddress \
+  LDFLAGS=3D-fsanitize=3Daddress \
+  ac_cv_func_malloc_0_nonnull=3Dyes \
+  ./configure
+$ make clean && make -j4=20=20
+
+Next branch
+-----------
+
+$ mount /mnt; echo $?
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D29883=3D=3DERROR: AddressSanitizer: attempting double-free on 0x60700=
+0000020 in thread T0:
+    #0 0x7f69d480a1b8 in __interceptor_free (/usr/lib64/libasan.so.4+0xdc1b=
+8)
+    #1 0x559381795f33 in main (/sbin/mount.cifs+0xef33)
+    #2 0x7f69d4394f89 in __libc_start_main (/lib64/libc.so.6+0x20f89)
+    #3 0x55938178e079 in _start (/sbin/mount.cifs+0x7079)
+
+0x607000000020 is located 0 bytes inside of 68-byte region [0x607000000020,=
+0x607000000064)
+freed by thread T0 here:
+    #0 0x7f69d480a1b8 in __interceptor_free (/usr/lib64/libasan.so.4+0xdc1b=
+8)
+    #1 0x55938178e372 in check_fstab (/sbin/mount.cifs+0x7372)
+    #2 0x559381794661 in assemble_mountinfo (/sbin/mount.cifs+0xd661)
+    #3 0x559381795eef in main (/sbin/mount.cifs+0xeeef)
+    #4 0x7f69d4394f89 in __libc_start_main (/lib64/libc.so.6+0x20f89)
+
+previously allocated by thread T0 here:
+    #0 0x7f69d480a510 in malloc (/usr/lib64/libasan.so.4+0xdc510)
+    #1 0x7f69d43fc2a9 in __GI___strndup (/lib64/libc.so.6+0x882a9)
+
+SUMMARY: AddressSanitizer: double-free (/usr/lib64/libasan.so.4+0xdc1b8) in=
+ __interceptor_free
+=3D=3D29883=3D=3DABORTING
+1
+
+With fix
+--------
+
+$ mount /mnt; echo $?
+0
 
 Cheers,
 --=20
