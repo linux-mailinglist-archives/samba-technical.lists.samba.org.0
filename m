@@ -2,62 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71AC2AC4D4
-	for <lists+samba-technical@lfdr.de>; Sat,  7 Sep 2019 07:58:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80002AD57A
+	for <lists+samba-technical@lfdr.de>; Mon,  9 Sep 2019 11:14:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=p+d2x8RDv2Hc3OQkHVfgjAoy7hacEXnfYL+slISXPrg=; b=jjEjz93Sm+X8sBALNsl8iDhSaf
-	c3qViUnX4PtqLVG6o6n7BQ0LwTSPK6+TivYjYY6jDGeeYpT7rAhPN1Ga40Df9aDIRLWouKXZQYqSq
-	AgbT/i47jIZITNpinYtDbbgOqfRpmc/U5r93lim1YaRDou4cn7zhMr3PJk8/rUCqSzQmlHVNjSu2m
-	LljPh2HeuNmnrkkEHFFoZx8yNdFWdqRGgbYDSttXWH+KTuf8W3l8a5dy0uHMKaHjAFPEoQLaTyvyB
-	1qLOEc7pdCaUfbybPLhY4XKacWFrRVgAUrETD6cD3JInnP2DVqw3RpHJO0g2Rrls+GrmoxkNrzXFr
-	d5tsrb+w==;
-Received: from localhost ([::1]:45092 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=p/+VTO+MNUYhaXpzt1S3E5puXWvJTlaqVUO1p69RJME=; b=kv3lJ7z/rs8jqQsJW/7y+IH5hf
+	mZFRImIKG7fpi5vlQnfaGDA+YkJuH6WIJZYUtxjquVQ9e2ktkZw1/7i3GK0mKtOgZ/DyYtouQj4iw
+	+ivfyQ6nCx9FAfCK4SigE+JOv4WOvr9+HQ41d4xmyf+2nnMGfq0NyviA1tG20xWitgzeNxtuVcI1V
+	/rGbHrYYtCJYF1+CaNnSnbaYOa7xjYL/JtySds9z86+c44mwc9aOGpPlvndljcmtCYMqss/0nnNd6
+	fK2LegITE/W75EPJpyiIlu91KX7Gg8PeY0grfbf4F+JUc80FPMY879XcJNAPZHVJC6Z0JOaalCez9
+	fG6KFppg==;
+Received: from localhost ([::1]:20268 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i6Tk1-0049g4-6U; Sat, 07 Sep 2019 05:58:33 +0000
-Received: from mail-oi1-x22e.google.com ([2607:f8b0:4864:20::22e]:39224) 
+	id 1i7Fkf-004OXG-Pk; Mon, 09 Sep 2019 09:14:26 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55664) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i6Tjw-0049fx-O2
- for samba-technical@lists.samba.org; Sat, 07 Sep 2019 05:58:31 +0000
-Received: by mail-oi1-x22e.google.com with SMTP id w144so6829336oia.6
- for <samba-technical@lists.samba.org>; Fri, 06 Sep 2019 22:58:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:in-reply-to:references:from:date:message-id:subject:to
- :cc; bh=p+d2x8RDv2Hc3OQkHVfgjAoy7hacEXnfYL+slISXPrg=;
- b=gg0gSFeaAJwmtQDXHWWySjEHRka/OGeMZ2dHMni5TERWYqidJNOQmgOizAV1Lr9fft
- 8yUOwI6Wz7e8giwdbolNQ6KwZRrR7TCfvKMV4lRZ0uoyFZva/Izbo3ymezzsB5fbSJuv
- 7oyTveYZwQqW4AX2hYvi6quTKZOMxdoFnM8D1vKkv+VtbyrjHlv9n5agd70mFV6X2wXN
- BzeEWnJC7ZUYpKEaL7QgbCB9jQEPFI9QgnTL6t969C2LHKUj94/WM2vkk3f0+uAjCjva
- U+rBjXer4OF1BLUL2FKfvcuwaxb3x620cfCXZi0luwa3TF8DDPDx6YoA6hX75jqW3o2+
- yelA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:in-reply-to:references:from:date
- :message-id:subject:to:cc;
- bh=p+d2x8RDv2Hc3OQkHVfgjAoy7hacEXnfYL+slISXPrg=;
- b=liy9/vq2iaaTG0jd/DkkR7OosCW6H6qXUci2lFBgvQhR7wUMCETteorTdDondVeYxr
- Fcw5QYo8bVV0XpRC414+CsKDMb1y/FzjJMRoeYlnyAYb6rhvQqTYLp/MjY6FB6aiKoQt
- CQL9COE5e/7uM94R0HLYlnyVLD4Ai/yng22NZU7wA0suSnAAK/b50yb+PpUgAXHdg/Ja
- d6jec8vcg9uNzFIzzc1DptqdVbdMqVEWUlgyX9cloSFItQ8TKD1FXE0fLZBLOxpZKvwi
- /9axZvNDTo54fomUeEs/vh7rJpucXN3YwUH3ig+5IXs7dIk4MjOPt9L+hltwSeFKEmG+
- 4n1g==
-X-Gm-Message-State: APjAAAXktu5J3LyAS5cJeBUAS3fboBVa8SWNu8JBihuXsdfEBzLdFalX
- NTwyp0pif+MFKRgQFKbiALNe+9iNWHRvQF2j610=
-X-Google-Smtp-Source: APXvYqwQY899Gh0GSVx5pUex3/l6YeMeRTD6fLCViEJLOm4Qzpwgu806D+noZfHeWYb6JV641idXO4uRDZsLuwRHmVw=
-X-Received: by 2002:aca:dfd5:: with SMTP id w204mr8428680oig.62.1567835906424; 
- Fri, 06 Sep 2019 22:58:26 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:ac9:1d4b:0:0:0:0:0 with HTTP;
- Fri, 6 Sep 2019 22:58:25 -0700 (PDT)
-In-Reply-To: <371f328678d7f01b7051d657499ec0f8b341b2f9.camel@samba.org>
-References: <CGME20190906020151epcas1p487a64747d0a00c84bc683fe0d07207bd@epcas1p4.samsung.com>
- <006701d56457$0c77fc60$2567f520$@samsung.com>
- <371f328678d7f01b7051d657499ec0f8b341b2f9.camel@samba.org>
-Date: Sat, 7 Sep 2019 14:58:25 +0900
-Message-ID: <CAKYAXd80cwJ2XUOBoP25M94mB_P200Y7BnajsSZwWkMuuXO8Yg@mail.gmail.com>
-Subject: Re: samba performance difference between old and the latest ?
-To: Andrew Bartlett <abartlet@samba.org>
+ (Exim) id 1i7FkQ-004OTM-J9; Mon, 09 Sep 2019 09:14:14 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Cc:To:From:Message-ID;
+ bh=p/+VTO+MNUYhaXpzt1S3E5puXWvJTlaqVUO1p69RJME=; b=HhGg6wXpy+8Ky3mVCCoyAkliib
+ qkoNaIJ7aUrEr6Y3At8q5Z/2ThW0VqohMDSEtmQtGJhimKRCPXKno7Pzni4NaKOU2dgrhzRnh7utD
+ b/e2IGDAbh4kgf6q/V25Ou45W3UTCZSNkcnj++4v1ovpjO1NYBwoAvVLRu/F5AAfLh0E=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1i7FkP-0001pw-3K; Mon, 09 Sep 2019 09:14:10 +0000
+Message-ID: <eb83e780be6aa729a409203cf98e6918d32d5049.camel@samba.org>
+Subject: Samba 4.4 AD DC and GET_ANC restriction from Samba 4.5 DC joining
+ (was: Re: [Samba] Error join samba 4.10.7 to samba 4.4.5)
+To: Trenta sis <trenta.sis@gmail.com>, samba <samba@lists.samba.org>
+Date: Mon, 09 Sep 2019 21:14:02 +1200
+In-Reply-To: <CANTbh_9hUpgDkLeBwx8ebKx43cnvA55q8UU409sSLDxbw9mOvA@mail.gmail.com>
+References: <CANTbh_9hUpgDkLeBwx8ebKx43cnvA55q8UU409sSLDxbw9mOvA@mail.gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.32.4 (3.32.4-1.fc30) 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,54 +50,118 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@gmail.com>
-Cc: Namjae Jeon <namjae.jeon@samsung.com>, sergey.senozhatsky@gmail.com,
- samba-technical@lists.samba.org
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-2019-09-07 12:20 GMT+09:00, Andrew Bartlett via samba-technical
-<samba-technical@lists.samba.org>:
-> On Fri, 2019-09-06 at 11:01 +0900, Namjae Jeon via samba-technical
-> wrote:
->> Hello,
->>
->> I found something strange during measuring performance with samba
->> these days.
->> I checked the performance of samba 4.7.6 and 4.10.6.
->
->
->> samba 4.7.6 : 11.6MB/s
->> samba 4.10.6 : 9.5MB/s
->>
->
-> Jumping back to the top of this thread to focus on what you could help
-> us with.  If you built Samba for both of these tests, then perhaps you
-> could do a git bisect between those two versions to work out where this
-> degraded?
-Yes, I agree to narrow it down.
->
-> Of course, this assumes it was a single commit, but who knows, it just
-> might be.
->
-> Either way, if you were able to additionally test 4.7.latest,
-> 4.8.latest, 4.9.latest, 4.11.0rc3 and master (so as to add to the
-> dataset) it would be a massive help.
-Hm, okay, I will make time.
->
-> Thanks!
->
-> Andrew Bartlett
->
-> --
-> Andrew Bartlett                       https://samba.org/~abartlet/
-> Authentication Developer, Samba Team  https://samba.org
-> Samba Developer, Catalyst IT
-> https://catalyst.net.nz/services/samba
->
->
->
->
->
+On Mon, 2019-09-09 at 10:33 +0200, Trenta sis via samba wrote:
+> Hi,
+> 
+> After reading wiki documentation about join I have tested to join a
+> second dc, but with problems.
+> 
+> I need to add a second controller to our AD, and then upgrade existing
+> server (4.4.5)  and I have tried to join a new DC 4.10.7 to 4.4.5
+> server but I receive join errors, attached output  wit and without
+> debug:
+> I have executed samba-tool dbcheck --cross-ncs all seems OK
+> 
+> I have made a test upgrading actual 4.4.5 to 4.10.7 and then join
+> 4.10.7 to update DC to 4.10.7 and then works, bu first I need to add a
+> second controller to ensure no downtime.
+> 
+> some questions:
+> 1) Why I receive this error?
+> Replicating critical objects from the base DN of the domain
+> Partition[DC=DOMAIN-TEST,DC=com] objects[98/98] linked_values[762/0]
+> Missing parent while attempting to apply records: No parent with GUID
+> cdee5b31-365
+> 
+> d-4c8f-9368-4115b6307a19 found for object remotely known as CN=Domain
+> Users,OU=Gru
+> 
+> ps,DC=DOMAIN-TEST,DC=com
+> Failed to commit objects: WERR_DS_DRA_MISSING_PARENT
+> 
+> --> not sure if can be related with this issue:
+> https://bugzilla.samba.org/show_bug.cgi?id=13274
+
+Not that issue, but a very well known one.
+
+The trouble is, Samba 4.4 was happy to get a tree like this:
+
+
+ X
+| |
+Y Z
+
+in an order like this:
+
+Step 1
+
+Y
+
+Step 2
+
+Y Z
+
+Step 3
+ X
+| |
+Y Z
+
+As long as everything worked out in the end, it was fine.  But this had
+issues, so we patched it to instead demand the objects in tree order
+(GET_ANC), but of course the server needs to know what that means. 
+
+Samba 4.5 was, from memory, the first release we did that, but the
+server, even with 4.4, didn't really know what that flag meant.  
+
+It wasn't until much later, Samba 4.6 or so, when we finally got the
+flag right, which of course gives problems upgrading from Samba 4.4.
+(We would sort the current 'page' of replication entries, but not the
+whole partition).
+
+We have continued to improve this code since, but that is the core. 
+The next issue is a flag called GET_TGT but that hurts much less often,
+as we have a client-side workaround detecting that the server didn't
+understand us. 
+
+The workaround for you is to carefully touch each object such that the
+children are modified after the parents.  Or upgrade in-place that DC
+and replicate from there.  Both suck, I know. 
+
+> 2) About join in wiki appears
+> "
+> If the other DCs are Samba DCs and were provisioned with
+> --use-rfc2307, you Should add --option='idmap_ldb:use rfc2307 = yes'
+> to the join command
+> "
+> 
+> But checking my command userv to migrate from samba nt doamin to our
+> actual ADDC domain this command was not used, but checking smb.conf
+> appears this:
+>  idmap_ldb:use rfc2307 = yes
+> 
+> But I'm not sure if I have to use --option='idmap_ldb:use rfc2307 =
+> yes' on join command
+
+Probably.  But that isn't the big deal at this point. 
+
+I hope this helps a little.  We need to extend our wiki to explain this
+more I'm sure.
+
+I've CC'ed samba-technical for those there who might want to learn the
+history a bit more.
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+
+
 
