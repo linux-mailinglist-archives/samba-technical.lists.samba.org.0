@@ -2,43 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F531B1AC4
-	for <lists+samba-technical@lfdr.de>; Fri, 13 Sep 2019 11:29:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8AD37B217A
+	for <lists+samba-technical@lfdr.de>; Fri, 13 Sep 2019 15:58:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=mEwceAYB17RW+xX/8YQvBA7emuxELpDZ35cKRyGrCts=; b=n2d+zDjWcyLj4cOpBKdT5dTlKy
-	LP3A+Bmf6/CiFJfj9wUm0bgF42YW2NpV+fRVgUlUl3RxFtW8UVmRHLs5MhdUYMcqQ3xKIkyzy30t+
-	X0/KjSsuE872i8evOWAdcngoZ1cYDUYmlPVGrpmufGBK/RZrVnhz4jrucoKziPnbvT5abBrOuSKr6
-	bByyMuSFYwHlWGoT4RT3Yqmy+X2ROZfBQBDkUktox8mu1+/kCtJkxk0SgZHjw48hCsFoIrGsa2SOJ
-	87cmfDq0GIbavClnNe7SAsqKFLoR8AOHyogVUhwnWeNxnzjKeWPrExyDnHNjGTM1Cz/RC2kxYU10V
-	E9l/sQ8Q==;
-Received: from localhost ([::1]:46810 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=fBz+hKZQK0dDgBowutuUmdN79legw3CALxr/lmBl0H4=; b=yOzMLgRl/KbtR7ke5UoMjOZom7
+	jT+O5hMOxLa0RPkDls3XCJEW2V8PReI929nSzhxXXVyDuCvG9sg5RcgAWmbjNbhIGNx3DK9DpIJf6
+	sKIeSNt5siKcswAJtT88KeojghUO/7NJZkNFOt7eafMSB3ixEg1yjYR3CAeb66UehqHSonBQPfSkr
+	kkRGXOQRi8GVbEizzJ+DsRPmFMViF1uzh8gqjvXwAI3Mcr31gxvqEnf9E7BeNyw1XuLtMt6/3+Th0
+	WI6tVh1MO+lB34HHNM4SrRMreo8Nsx6jLX4xQID4EVktqFYM2d46JvrjPhsRTmSxbj5kPBpdxG1RB
+	N44xDQWw==;
+Received: from localhost ([::1]:33996 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1i8hsz-005CWE-NZ; Fri, 13 Sep 2019 09:29:01 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42148) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i8hsv-005CW7-1y
- for samba-technical@lists.samba.org; Fri, 13 Sep 2019 09:28:59 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:To:CC;
- bh=mEwceAYB17RW+xX/8YQvBA7emuxELpDZ35cKRyGrCts=; b=dYENawQAdq3jTLPgIqGVcsP+DX
- 0gwwgw78DeLT+kGm63tdDDMEvIQp69gxm8dsnmGW54Ub9hUsYU3BmNhN90oprfMxNFZ7nxIpiFQJu
- 3zS44yAuylSe5LDlx2dqC/KOS0bnpNqk5YU2J4I6YJmqMyQh9QNEbCOqafNTd7QtxZe8=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1i8hsu-0007g4-7U
- for samba-technical@lists.samba.org; Fri, 13 Sep 2019 09:28:56 +0000
-To: Samba Technical <samba-technical@lists.samba.org>
-Subject: [PATCH] add new lsa trust attributes
-Openpgp: preference=signencrypt
-Message-ID: <eca08ad5-2980-57ef-eb77-ba5cdb3bd95a@samba.org>
-Date: Fri, 13 Sep 2019 11:28:47 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+	id 1i8m4t-005IPw-F2; Fri, 13 Sep 2019 13:57:35 +0000
+Received: from userp2120.oracle.com ([156.151.31.85]:43504) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1i8m4o-005IPn-SH
+ for samba-technical@lists.samba.org; Fri, 13 Sep 2019 13:57:33 +0000
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+ by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x8DDrwck156345;
+ Fri, 13 Sep 2019 13:57:24 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : mime-version : content-type; s=corp-2019-08-05;
+ bh=fBz+hKZQK0dDgBowutuUmdN79legw3CALxr/lmBl0H4=;
+ b=WfrOstkztklES2gWGJajHOowLggWlFPo+Pw4m2uF4gVoee80A614AINLcyctJfuGL8n0
+ fkn+GxrVzC8K1vtBt+Dapw1lDZHoly3uXRabVbBSbXztZXYTPYO+oc72j4O+Ul1HGoLu
+ ArM14EqrzdSyFs7/hD0wKJkr43KNW+ob9N9Ocm3cB4SqJx6661HPi7geiUobihoVW5Ws
+ 82J8vvIOdh3UXiD0zfhGN3Pl3hEpsEKHQzw1FvpYCEI1PXuOEhqbPYk0/V6nPRAPWxps
+ QdpAIVpHu71bluEcgib0wxmoZvlp5O6Q+eEQky18HWV2616/hWGUJeVDi0j3Qr8yrPo0 Bg== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+ by userp2120.oracle.com with ESMTP id 2uytd34vq7-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 13 Sep 2019 13:57:24 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+ by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x8DDsh1q189242;
+ Fri, 13 Sep 2019 13:55:24 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by userp3020.oracle.com with ESMTP id 2uytdmqqsw-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 13 Sep 2019 13:55:24 +0000
+Received: from abhmp0006.oracle.com (abhmp0006.oracle.com [141.146.116.12])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x8DDtMB5016511;
+ Fri, 13 Sep 2019 13:55:23 GMT
+Received: from kadam (/41.57.98.10) by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Fri, 13 Sep 2019 06:55:22 -0700
+Date: Fri, 13 Sep 2019 16:55:11 +0300
+To: kbuild@01.org, Steve French <stfrench@microsoft.com>,
+ Aurelien Aptel <aaptel@suse.com>
+Subject: [cifs:for-next 31/31] fs/cifs/smb2ops.c:786 open_shroot() error:
+ double unlock 'mutex:&tcon->crfid.fid_mutex'
+Message-ID: <20190913135510.GS20699@kadam>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature";
- boundary="oCZA9IePJDChkCTs6srKCceBsDExV2z7N"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,133 +70,106 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?G=C3=BCnther_Deschner_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?G=c3=bcnther_Deschner?= <gd@samba.org>
+From: Dan Carpenter via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Dan Carpenter <dan.carpenter@oracle.com>
+Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ kbuild-all@01.org, Pavel Shilovsky <pshilov@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---oCZA9IePJDChkCTs6srKCceBsDExV2z7N
-Content-Type: multipart/mixed; boundary="C9DFXyQHecvcMFpZgJWKI3gWmTuO48xVp";
- protected-headers="v1"
-From: =?UTF-8?Q?G=c3=bcnther_Deschner?= <gd@samba.org>
-To: Samba Technical <samba-technical@lists.samba.org>
-Message-ID: <eca08ad5-2980-57ef-eb77-ba5cdb3bd95a@samba.org>
-Subject: [PATCH] add new lsa trust attributes
+tree:   git://git.samba.org/sfrench/cifs-2.6.git for-next
+head:   5fc321fb644fc787710353be11129edadd313f3a
+commit: 5fc321fb644fc787710353be11129edadd313f3a [31/31] smb3: fix unmount hang in open_shroot
 
---C9DFXyQHecvcMFpZgJWKI3gWmTuO48xVp
-Content-Type: multipart/mixed;
- boundary="------------60B3924E5496E0F114968F76"
-Content-Language: en-US
+If you fix the issue, kindly add following tag
+Reported-by: kbuild test robot <lkp@intel.com>
+Reported-by: Dan Carpenter <dan.carpenter@oracle.com>
 
-This is a multi-part message in MIME format.
---------------60B3924E5496E0F114968F76
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+New smatch warnings:
+fs/cifs/smb2ops.c:786 open_shroot() error: double unlock 'mutex:&tcon->crfid.fid_mutex'
 
-Hi,
+git remote add cifs git://git.samba.org/sfrench/cifs-2.6.git
+git remote update cifs
+git checkout 5fc321fb644fc787710353be11129edadd313f3a
+vim +786 fs/cifs/smb2ops.c
 
-attached a patch to add the new lsa trust attributes. There is currently
-a winbind forest trust issue related to the use of the new flags,
-winbind patch to follow.
+fs/cifs/smb2ops.c
+   726                  /*
+   727                   * caller expects this func to set pfid to a valid
+   728                   * cached root, so we copy the existing one and get a
+   729                   * reference.
+   730                   */
+   731                  memcpy(pfid, tcon->crfid.fid, sizeof(*pfid));
+   732                  kref_get(&tcon->crfid.refcount);
+   733  
+   734                  mutex_unlock(&tcon->crfid.fid_mutex);
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Unlock (recently added)
 
-Please review and push.
+   735  
+   736                  if (rc == 0) {
+   737                          /* close extra handle outside of crit sec */
+   738                          SMB2_close(xid, tcon, fid.persistent_fid, fid.volatile_fid);
+   739                  }
+   740                  goto oshr_free;
+   741          }
+   742  
+   743          /* Cached root is still invalid, continue normaly */
+   744  
+   745          if (rc) {
+   746                  if (rc == -EREMCHG) {
+   747                          tcon->need_reconnect = true;
+   748                          printk_once(KERN_WARNING "server share %s deleted\n",
+   749                                      tcon->treeName);
+   750                  }
+   751                  goto oshr_exit;
+   752          }
+   753  
+   754          o_rsp = (struct smb2_create_rsp *)rsp_iov[0].iov_base;
+   755          oparms.fid->persistent_fid = o_rsp->PersistentFileId;
+   756          oparms.fid->volatile_fid = o_rsp->VolatileFileId;
+   757  #ifdef CONFIG_CIFS_DEBUG2
+   758          oparms.fid->mid = le64_to_cpu(o_rsp->sync_hdr.MessageId);
+   759  #endif /* CIFS_DEBUG2 */
+   760  
+   761          memcpy(tcon->crfid.fid, pfid, sizeof(struct cifs_fid));
+   762          tcon->crfid.tcon = tcon;
+   763          tcon->crfid.is_valid = true;
+   764          kref_init(&tcon->crfid.refcount);
+   765  
+   766          /* BB TBD check to see if oplock level check can be removed below */
+   767          if (o_rsp->OplockLevel == SMB2_OPLOCK_LEVEL_LEASE) {
+   768                  kref_get(&tcon->crfid.refcount);
+   769                  smb2_parse_contexts(server, o_rsp,
+   770                                  &oparms.fid->epoch,
+   771                                  oparms.fid->lease_key, &oplock, NULL);
+   772          } else
+   773                  goto oshr_exit;
+   774  
+   775          qi_rsp = (struct smb2_query_info_rsp *)rsp_iov[1].iov_base;
+   776          if (le32_to_cpu(qi_rsp->OutputBufferLength) < sizeof(struct smb2_file_all_info))
+   777                  goto oshr_exit;
+   778          if (!smb2_validate_and_copy_iov(
+   779                                  le16_to_cpu(qi_rsp->OutputBufferOffset),
+   780                                  sizeof(struct smb2_file_all_info),
+   781                                  &rsp_iov[1], sizeof(struct smb2_file_all_info),
+   782                                  (char *)&tcon->crfid.file_all_info))
+   783                  tcon->crfid.file_all_info_is_valid = 1;
+   784  
+   785  oshr_exit:
+   786          mutex_unlock(&tcon->crfid.fid_mutex);
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Double unlock.
 
-Tuanks,
-Guenther
---=20
-G=C3=BCnther Deschner                    GPG-ID: 8EE11688
-Red Hat                         gdeschner@redhat.com
-Samba Team                              gd@samba.org
+   787  oshr_free:
+   788          SMB2_open_free(&rqst[0]);
+   789          SMB2_query_info_free(&rqst[1]);
+   790          free_rsp_buf(resp_buftype[0], rsp_iov[0].iov_base);
+   791          free_rsp_buf(resp_buftype[1], rsp_iov[1].iov_base);
+   792          return rc;
+   793  }
 
---------------60B3924E5496E0F114968F76
-Content-Type: text/plain; charset=UTF-8;
- name="patch"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment;
- filename="patch"
-
-RnJvbSA3ZTEyOWQxOTE1Yjk2NDI5M2E1MTBhMTY0ZDU5NDI3YzQwMjA4YWIyIE1vbiBTZXAg
-MTcgMDA6MDA6MDAgMjAwMQpGcm9tOiA9P1VURi04P3E/Rz1DMz1CQ250aGVyPTIwRGVzY2hu
-ZXI/PSA8Z2RAc2FtYmEub3JnPgpEYXRlOiBUaHUsIDEyIFNlcCAyMDE5IDE2OjM2OjIwICsw
-MjAwClN1YmplY3Q6IFtQQVRDSCAxLzJdIGxzYTogZG9jdW1lbnQgbmV3IExTQSB0cnVzdCBh
-dHRyaWJ1dGVzCgpHdWVudGhlcgoKU2lnbmVkLW9mZi1ieTogR3VlbnRoZXIgRGVzY2huZXIg
-PGdkQHNhbWJhLm9yZz4KLS0tCiBsaWJycGMvaWRsL2xzYS5pZGwgfCAxOSArKysrKysrKysr
-Ky0tLS0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgMTEgaW5zZXJ0aW9ucygrKSwgOCBkZWxldGlv
-bnMoLSkKCmRpZmYgLS1naXQgYS9saWJycGMvaWRsL2xzYS5pZGwgYi9saWJycGMvaWRsL2xz
-YS5pZGwKaW5kZXggZWE4YTQyNmZhMDEuLjM5ZWQzYmU4MjYyIDEwMDY0NAotLS0gYS9saWJy
-cGMvaWRsL2xzYS5pZGwKKysrIGIvbGlicnBjL2lkbC9sc2EuaWRsCkBAIC03MDIsMTQgKzcw
-MiwxNyBAQCBpbXBvcnQgIm1pc2MuaWRsIiwgInNlY3VyaXR5LmlkbCI7CiAJfSBsc2FfVHJ1
-c3RUeXBlOwogCiAJdHlwZWRlZiBbcHVibGljLGJpdG1hcDMyYml0XSBiaXRtYXAgewotCQlM
-U0FfVFJVU1RfQVRUUklCVVRFX05PTl9UUkFOU0lUSVZFICAgICAgPSAweDAwMDAwMDAxLAot
-CQlMU0FfVFJVU1RfQVRUUklCVVRFX1VQTEVWRUxfT05MWSAgICAgICAgPSAweDAwMDAwMDAy
-LAotCQlMU0FfVFJVU1RfQVRUUklCVVRFX1FVQVJBTlRJTkVEX0RPTUFJTiAgPSAweDAwMDAw
-MDA0LAotCQlMU0FfVFJVU1RfQVRUUklCVVRFX0ZPUkVTVF9UUkFOU0lUSVZFICAgPSAweDAw
-MDAwMDA4LAotCQlMU0FfVFJVU1RfQVRUUklCVVRFX0NST1NTX09SR0FOSVpBVElPTiAgPSAw
-eDAwMDAwMDEwLAotCQlMU0FfVFJVU1RfQVRUUklCVVRFX1dJVEhJTl9GT1JFU1QgICAgICAg
-PSAweDAwMDAwMDIwLAotCQlMU0FfVFJVU1RfQVRUUklCVVRFX1RSRUFUX0FTX0VYVEVSTkFM
-ICAgPSAweDAwMDAwMDQwLAotCQlMU0FfVFJVU1RfQVRUUklCVVRFX1VTRVNfUkM0X0VOQ1JZ
-UFRJT04gPSAweDAwMDAwMDgwCisJCUxTQV9UUlVTVF9BVFRSSUJVVEVfTk9OX1RSQU5TSVRJ
-VkUJCQkJPSAweDAwMDAwMDAxLAorCQlMU0FfVFJVU1RfQVRUUklCVVRFX1VQTEVWRUxfT05M
-WQkJCQk9IDB4MDAwMDAwMDIsCisJCUxTQV9UUlVTVF9BVFRSSUJVVEVfUVVBUkFOVElORURf
-RE9NQUlOCQkJCT0gMHgwMDAwMDAwNCwKKwkJTFNBX1RSVVNUX0FUVFJJQlVURV9GT1JFU1Rf
-VFJBTlNJVElWRQkJCQk9IDB4MDAwMDAwMDgsCisJCUxTQV9UUlVTVF9BVFRSSUJVVEVfQ1JP
-U1NfT1JHQU5JWkFUSU9OCQkJCT0gMHgwMDAwMDAxMCwKKwkJTFNBX1RSVVNUX0FUVFJJQlVU
-RV9XSVRISU5fRk9SRVNUCQkJCT0gMHgwMDAwMDAyMCwKKwkJTFNBX1RSVVNUX0FUVFJJQlVU
-RV9UUkVBVF9BU19FWFRFUk5BTAkJCQk9IDB4MDAwMDAwNDAsCisJCUxTQV9UUlVTVF9BVFRS
-SUJVVEVfVVNFU19SQzRfRU5DUllQVElPTgkJCQk9IDB4MDAwMDAwODAsCisJCUxTQV9UUlVT
-VF9BVFRSSUJVVEVfQ1JPU1NfT1JHQU5JWkFUSU9OX05PX1RHVF9ERUxFR0FUSU9OCT0gMHgw
-MDAwMDIwMCwKKwkJTFNBX1RSVVNUX0FUVFJJQlVURV9QSU1fVFJVU1QJCQkJCT0gMHgwMDAw
-MDQwMCwKKwkJTFNBX1RSVVNUX0FUVFJJQlVURV9DUk9TU19PUkdBTklaQVRJT05fRU5BQkxF
-X1RHVF9ERUxFR0FUSU9OCT0gMHgwMDAwMDgwMAogCX0gbHNhX1RydXN0QXR0cmlidXRlczsK
-IAogCXR5cGVkZWYgc3RydWN0IHsKLS0gCjIuMjEuMAoKCkZyb20gZTc4ZTIwOTFiMmIzMGIy
-MmJhMWU1YWIyMjZkZGM3ZjZmYTI2NDE3MyBNb24gU2VwIDE3IDAwOjAwOjAwIDIwMDEKRnJv
-bTogPT9VVEYtOD9xP0c9QzM9QkNudGhlcj0yMERlc2NobmVyPz0gPGdkQHNhbWJhLm9yZz4K
-RGF0ZTogVGh1LCAxMiBTZXAgMjAxOSAyMzoyNzoxMyArMDIwMApTdWJqZWN0OiBbUEFUQ0gg
-Mi8yXSBtaXNjOiBmaXggQUQgdHJ1c3QgYXR0cmlidXRlcyBpbiBhZHNzZWFyY2gKCkd1ZW50
-aGVyCgpTaWduZWQtb2ZmLWJ5OiBHdWVudGhlciBEZXNjaG5lciA8Z2RAc2FtYmEub3JnPgot
-LS0KIGV4YW1wbGVzL21pc2MvYWRzc2VhcmNoLnBsIHwgMTcgKysrKysrKysrKysrLS0tLS0K
-IDEgZmlsZSBjaGFuZ2VkLCAxMiBpbnNlcnRpb25zKCspLCA1IGRlbGV0aW9ucygtKQoKZGlm
-ZiAtLWdpdCBhL2V4YW1wbGVzL21pc2MvYWRzc2VhcmNoLnBsIGIvZXhhbXBsZXMvbWlzYy9h
-ZHNzZWFyY2gucGwKaW5kZXggN2MzNTcwYWJkNmUuLmZjMjQ4MTFiNjI2IDEwMDc1NQotLS0g
-YS9leGFtcGxlcy9taXNjL2Fkc3NlYXJjaC5wbAorKysgYi9leGFtcGxlcy9taXNjL2Fkc3Nl
-YXJjaC5wbApAQCAtMjg1LDEwICsyODUsMTcgQEAgbXkgJWFkc19zZGVmZmVjdGl2ZSA9ICgK
-ICk7CiAKIG15ICVhZHNfdHJ1c3RhdHRycyA9ICgKLQkiVFJVU1RfQVRUUklCVVRFX05PTl9U
-UkFOU0lUSVZFIgk9PiAxLAotCSJUUlVTVF9BVFRSSUJVVEVfVFJFRV9QQVJFTlQiCQk9PiAy
-LAotCSJUUlVTVF9BVFRSSUJVVEVfVFJFRV9ST09UIgkJPT4gMywKLQkiVFJVU1RfQVRUUklC
-VVRFX1VQTEVWRUxfT05MWSIJCT0+IDQsCisJIlRSVVNUX0FUVFJJQlVURV9OT05fVFJBTlNJ
-VElWRSIJCQkJPT4gMHgwMDAwMDAwMSwKKwkiVFJVU1RfQVRUUklCVVRFX1VQTEVWRUxfT05M
-WSIJCQkJCT0+IDB4MDAwMDAwMDIsCisJIlRSVVNUX0FUVFJJQlVURV9RVUFSQU5USU5FRF9E
-T01BSU4iCQkJCT0+IDB4MDAwMDAwMDQsCisJIlRSVVNUX0FUVFJJQlVURV9GT1JFU1RfVFJB
-TlNJVElWRSIJCQkJPT4gMHgwMDAwMDAwOCwKKwkiVFJVU1RfQVRUUklCVVRFX0NST1NTX09S
-R0FOSVpBVElPTiIJCQkJPT4gMHgwMDAwMDAxMCwKKwkiVFJVU1RfQVRUUklCVVRFX1dJVEhJ
-Tl9GT1JFU1QiCQkJCQk9PiAweDAwMDAwMDIwLAorCSJUUlVTVF9BVFRSSUJVVEVfVFJFQVRf
-QVNfRVhURVJOQUwiCQkJCT0+IDB4MDAwMDAwNDAsCisJIlRSVVNUX0FUVFJJQlVURV9VU0VT
-X1JDNF9FTkNSWVBUSU9OIgkJCQk9PiAweDAwMDAwMDgwLAorCSJUUlVTVF9BVFRSSUJVVEVf
-Q1JPU1NfT1JHQU5JWkFUSU9OX05PX1RHVF9ERUxFR0FUSU9OIgkJPT4gMHgwMDAwMDIwMCwK
-KwkiVFJVU1RfQVRUUklCVVRFX1BJTV9UUlVTVCIJCQkJCT0+IDB4MDAwMDA0MDAsCisJIlRS
-VVNUX0FUVFJJQlVURV9DUk9TU19PUkdBTklaQVRJT05fRU5BQkxFX1RHVF9ERUxFR0FUSU9O
-Igk9PiAweDAwMDAwODAwLAogKTsKIAogbXkgJWFkc190cnVzdGRpcmVjdGlvbiA9ICgKQEAg
-LTEyODMsNyArMTI5MCw3IEBAIHN1YiBkdW1wX3NkZWZmZWN0aXZlIHsKIH0KIAogc3ViIGR1
-bXBfdHJ1c3RhdHRyIHsKLQlyZXR1cm4gZHVtcF9iaXRtYXNrX2VxdWFsKEBfLCVhZHNfdHJ1
-c3RhdHRycyk7CisJcmV0dXJuIGR1bXBfYml0bWFza19hbmQoQF8sJWFkc190cnVzdGF0dHJz
-KTsKIH0KIAogc3ViIGR1bXBfdHJ1c3R0eXBlIHsKLS0gCjIuMjEuMAoK
---------------60B3924E5496E0F114968F76--
-
---C9DFXyQHecvcMFpZgJWKI3gWmTuO48xVp--
-
---oCZA9IePJDChkCTs6srKCceBsDExV2z7N
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQQi7xTdNz0EbkNwwhJI6TdojuEWiAUCXXthTwAKCRBI6TdojuEW
-iMyLAJ9c669dD9cQvBnA3qdRe/ADetMngwCfUfN0zlymPUISVkUgKgjtT8RxiY4=
-=H3oU
------END PGP SIGNATURE-----
-
---oCZA9IePJDChkCTs6srKCceBsDExV2z7N--
+---
+0-DAY kernel test infrastructure                Open Source Technology Center
+https://lists.01.org/pipermail/kbuild-all                   Intel Corporation
 
