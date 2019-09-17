@@ -2,44 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4203B5634
-	for <lists+samba-technical@lfdr.de>; Tue, 17 Sep 2019 21:34:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9DE7B5849
+	for <lists+samba-technical@lfdr.de>; Wed, 18 Sep 2019 00:56:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=DGhDTbHMyBzZ7EU3p5lWrF8DjFlG34DGc6ob5KiTi9g=; b=PCYB8P7eAIkSvKXEdmOzhL4KX/
-	4aMh+LyG/GaGktzEiyI7x+X29/+E8Yt9RG1fDQ2Mu4r8WasH6Oi4/PhP0q4nkJ70dsk4ehQ32IOMA
-	e2mLSBgtxukoZMSSRAjCvQKC2gQD5h0I/hfoV8Q+ZN24jWy8mOvFZ02tTchccrZgX+4q79BVNOOay
-	nP5m+1pZlhddY4l08PJ/qvySybPpGlqGzsZjyL63J/LA17MV1MLXLFOB5CRd6AuZqz2d5N8m54SME
-	Uqi3R+KH0LuuqIDNEz5JXO4Kr4jTn0TozPqws4hXyXEZQmo/GWxBQwaFIGv7h3yyhdoaOAy70abse
-	KGcZA+bQ==;
-Received: from localhost ([::1]:22802 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=XOtTja6+Wj2nySXvBiJnl1fni5sDDLki3X3m8dFJXBA=; b=PszB1KugZ15P08Yxv55dd5+Gd4
+	f5Zk6gTmT/UU5U5bKHDcAQMU+X5vYIMylrsbRIeUG+wwAKvath0vhGIbNf6hKiy3RyV7DgO6vOm6G
+	/26QuJnGOwksYuCzsSWtOeYg/YYBFGMy+pEI4vYJysrf5+VrZmBudjytVZkbiQ8PwhKgdxiqByXWU
+	snczHLzRPyzYK4hEJ70WeD9lDX94MQl3avhViX8VDjVEwMXBWksiSKB/iqCDFxtLowykSQQrJBDcj
+	Fj8R3id8u8pKFH7L4u8H8fK8WOWSIJxoTU9d6H3YE/qtEILo13vLUUdsHg1GpvhNUBLLp6cmarFJV
+	a6+Ailug==;
+Received: from localhost ([::1]:27410 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iAJE2-006JNr-TJ; Tue, 17 Sep 2019 19:33:22 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31972) 
+	id 1iAMNa-006LIW-4c; Tue, 17 Sep 2019 22:55:26 +0000
+Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35]:33671) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iAJDx-006JNk-3z
- for samba-technical@lists.samba.org; Tue, 17 Sep 2019 19:33:19 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Cc:To:From:Message-ID;
- bh=DGhDTbHMyBzZ7EU3p5lWrF8DjFlG34DGc6ob5KiTi9g=; b=KH1I0GHsxq6bnoBanraL1ZAP/W
- S+tiZDkUhloO14CYx0Gmw4kIszJZs07mfID6mVR9246PaXQc6P7SZh/QpKHz/N85ky+9bhDJByvWb
- UBL988TUiUnaELysj12eqofoI6Hz+xC+4wyaJqFl1FuIMRVZVKhZIOXvS+eL0d7Yx2+0=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iAJDv-0001Gn-6H; Tue, 17 Sep 2019 19:33:15 +0000
-Message-ID: <b34d077e33bcb6e72a25e6cd0b32ed28e570c7e0.camel@samba.org>
-Subject: Re: samba performance difference between old and the latest ?
-To: Namjae Jeon <linkinjeon@gmail.com>
-Date: Wed, 18 Sep 2019 07:33:10 +1200
-In-Reply-To: <CAKYAXd80cwJ2XUOBoP25M94mB_P200Y7BnajsSZwWkMuuXO8Yg@mail.gmail.com>
-References: <CGME20190906020151epcas1p487a64747d0a00c84bc683fe0d07207bd@epcas1p4.samsung.com>
- <006701d56457$0c77fc60$2567f520$@samsung.com>
- <371f328678d7f01b7051d657499ec0f8b341b2f9.camel@samba.org>
- <CAKYAXd80cwJ2XUOBoP25M94mB_P200Y7BnajsSZwWkMuuXO8Yg@mail.gmail.com>
+ (Exim) id 1iAMNM-006LHN-Fd
+ for samba-technical@lists.samba.org; Tue, 17 Sep 2019 22:55:15 +0000
+Received: by mail-vs1-xe35.google.com with SMTP id p13so3238800vso.0
+ for <samba-technical@lists.samba.org>; Tue, 17 Sep 2019 15:55:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=XOtTja6+Wj2nySXvBiJnl1fni5sDDLki3X3m8dFJXBA=;
+ b=XiuuP5SoQLkwdZ7QU0eN3aLAlxf7DwqAEa4+GFIwkDpvqfnOBPzh34M+72LTq2n4rF
+ z9P3SKGLSXpPBdyWxFFemNo6hC+PlOkNj0xrmj+WAg9PBzwf0Rlb436ZKr+xy6bc1y4P
+ krkg+0VDYdhOMGEW+8WWD7fhtbdJkkadjOENgPErsp2CIshkd8/RmT6skFvFCYmGJFfA
+ cx430uOXuI8ZDchnYtamtamKqnR9tBM7UbIV7omX987HLtCUy921grBoJIw3fw5qFqAc
+ 2eHU6iZ4OQuMmjBrV7szbEF9dUJJedDyoDLENMWAUVQDCssRF+IMz/dpcJDQE81yT5SP
+ Vpng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=XOtTja6+Wj2nySXvBiJnl1fni5sDDLki3X3m8dFJXBA=;
+ b=sJDPwDaECjj2hznPogeZeV9QPCu8wIpy+KqKt7rwGfgAIhfW0p69VD2OyUWhIsfdUW
+ SaoM73sJwZQJX33nWkhOkfeMOcAcGni003QdM3wring9KYvBpcjRbYABnqE/tOpg0HFf
+ zCEz6oSIoGj6MK27s9YVM0wINS+OSW/MkI+70t5Z2rY2bfWWWnhVlDBhcpX8QbcpwfhN
+ InOnW1De7BvP3zP3hncOjCdMEJ0JPcN59MHZKd66qiCVAcUZR3tHXHVOjCqkDIdaeD8L
+ H9fex282hUxJ5/X3uiFg8ZIQZDRjoFjqBmGO08S3mKp1sDPD5gaKQhMU/N1qaDH2AgSx
+ uWag==
+X-Gm-Message-State: APjAAAV2hH4VHZ4hqV+3wotdisgQmAAMkbnXL4GhMnA+uVtBHh5cZEcD
+ bRuYL8+MJdN2tUxfanuQmpxV6vNoIncTKvDRQ/I=
+X-Google-Smtp-Source: APXvYqxiSo+0wN+CZsy3d1s8DMuBXvwAHFElOUELZHce0EU06Xg85hg8tUzZSwD6rWXQu1mCfdKLXnDSnNYmdaYu17g=
+X-Received: by 2002:a67:e447:: with SMTP id n7mr583595vsm.66.1568760909325;
+ Tue, 17 Sep 2019 15:55:09 -0700 (PDT)
+MIME-Version: 1.0
+References: <43d2884c-c637-a028-2f17-9857483a11b4@samba.org>
+In-Reply-To: <43d2884c-c637-a028-2f17-9857483a11b4@samba.org>
+Date: Tue, 17 Sep 2019 18:54:57 -0400
+Message-ID: <CAOCN9rx_8eJR-ZgXrH6_zJFNDAOfoio+2Y89-QT_ZyCE0jcz5A@mail.gmail.com>
+Subject: Re: [Release Planning 4.11] Samba 4.11.1
+To: Karolin Seeger <kseeger@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,66 +67,26 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Namjae Jeon <namjae.jeon@samsung.com>, sergey.senozhatsky@gmail.com,
- samba-technical@lists.samba.org
+From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sat, 2019-09-07 at 14:58 +0900, Namjae Jeon via samba-technical
-wrote:
-> 2019-09-07 12:20 GMT+09:00, Andrew Bartlett via samba-technical
-> <samba-technical@lists.samba.org>:
-> > On Fri, 2019-09-06 at 11:01 +0900, Namjae Jeon via samba-technical
-> > wrote:
-> > > Hello,
-> > > 
-> > > I found something strange during measuring performance with samba
-> > > these days.
-> > > I checked the performance of samba 4.7.6 and 4.10.6.
-> > 
-> > 
-> > > samba 4.7.6 : 11.6MB/s
-> > > samba 4.10.6 : 9.5MB/s
-> > > 
-> > 
-> > Jumping back to the top of this thread to focus on what you could
-> > help
-> > us with.  If you built Samba for both of these tests, then perhaps
-> > you
-> > could do a git bisect between those two versions to work out where
-> > this
-> > degraded?
-> 
-> Yes, I agree to narrow it down.
-> > 
-> > Of course, this assumes it was a single commit, but who knows, it
-> > just
-> > might be.
-> > 
-> > Either way, if you were able to additionally test 4.7.latest,
-> > 4.8.latest, 4.9.latest, 4.11.0rc3 and master (so as to add to the
-> > dataset) it would be a massive help.
-> 
-> Hm, okay, I will make time.
+On Tue, Sep 17, 2019 at 5:16 AM Karolin Seeger via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> Hi,
+>
+> Samba 4.11.1 is scheduled for Tuesday, October 29 2019.
+>
+> https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.11
+> has been updated accordingly.
+>
+> Cheers,
+> Karolin
 
-G'Day Namjae,
-
-I just wondered if you had any more numbers to share with us?
-
-I know I asked for a lot of work, but we would really appreciate any
-insights you have on this.
-
-Thanks!
-
-Andrew Bartlett
--- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
-
-
-
+Will the experimental support for mit-krb5 be considered stable enough
+for production use? The Fedora "rawhide" copies of Samba activate
+that, rather than compiling Heimdal.
 
