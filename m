@@ -2,43 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A93BB6FB5
-	for <lists+samba-technical@lfdr.de>; Thu, 19 Sep 2019 01:33:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35625B715F
+	for <lists+samba-technical@lfdr.de>; Thu, 19 Sep 2019 04:02:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=H7OGlh2D5cP9mGpXcw9aQtqwDu6u6uGlIzzWYsFifpc=; b=MMU13/hPC8DwRAhbWPA4oROXn5
-	o8WNhtQzWznNptMMsCerZpkn9609LjoebbnPGZRV/b0ks2qBmuski5AoQSqgX84v1bbTh9FUCLdsg
-	8r1P7cuj3/lOtndh6Vtq3SffmlXggsihmvSCbH/CrPOB64PAQSGH3ACyKZ4cTrS3Tz534ffZK7UlW
-	ZY9u4qFURKnCAZPAufWrso1nL5jftzKBLi8av/29+D6GnQPYKSlr4dQ54Ae8EvX47JCaqS4DZr61B
-	1y5lwZu0vqRnwzIf5kPhv/Ba+nK6uHrwq6jHLcyYq2vnrqpib5pYZn1x/1DAmWyCMERHwSxgeF7eP
-	g8okuxrQ==;
-Received: from localhost ([::1]:46732 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=KdkvmwmOSOwVn5z+zC8eYaCbIrPvzzvQGVbUx7EVelM=; b=SMmhm4nQjPTftpG3ldb2SUa8gO
+	GM6sVuQ1pUB+NDH87y6C73rwZSUeAwMU9IsELoF9z1E7EjSAsomaOs2CyCrYxz/F7cqvKUrJCyTic
+	sZGKbhEcqBsS2CvFbitpgkEhXfQWuoQ95flV9TN0WhuQqEuuR9ZMJt4O9xlhJ/so4X5oHoUPbM4aU
+	Fu479+V/GiCMyzH/wEbuEiGipO/fr6NDRpvxQwAwjO3BBJh6ep9Ov7gjohaVNPG/v3Gliwnuy2Ebt
+	oSQ5sIugzU7qJVSRh9EHZrOjYUkL9cZ9a1m4LQSnZ/y8nbriFMhoZhBeWtSNsui+Nor74/HS9X0If
+	J/yJAYqA==;
+Received: from localhost ([::1]:51484 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iAjRJ-006jBB-4C; Wed, 18 Sep 2019 23:32:49 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12912) 
+	id 1iAllV-006kdb-L0; Thu, 19 Sep 2019 02:01:49 +0000
+Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b]:39664) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iAjRD-006jB4-QO
- for samba-technical@lists.samba.org; Wed, 18 Sep 2019 23:32:46 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Cc:To:From:Message-ID;
- bh=H7OGlh2D5cP9mGpXcw9aQtqwDu6u6uGlIzzWYsFifpc=; b=LiCENOpbL1M790JN2BB6s+4CaQ
- MvC38ipZSg2pF1eYOZ/xZUmAPbE7dAvtnJHtG7VCLou/FtavfRKvNUV4RmhnhG/B/GKAbYTk70DQr
- tgoZkGy2riQZuyOPlmpkiUlhNgmBF0mHscaYQOOqpUevFpxFg1cx7HaPY/ulIeHJojpo=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iAjR9-00048R-O7; Wed, 18 Sep 2019 23:32:40 +0000
-Message-ID: <1568849556.4377.70.camel@samba.org>
-Subject: Re: Building Samba master on CentOS 7 (gnutls)
-To: Martin Schwenke <martin@meltin.net>
-Date: Thu, 19 Sep 2019 11:32:36 +1200
-In-Reply-To: <20190903144445.58591c90@martins.ozlabs.org>
+ (Exim) id 1iAllP-006kdU-Iv
+ for samba-technical@lists.samba.org; Thu, 19 Sep 2019 02:01:46 +0000
+Received: by mail-vs1-xe2b.google.com with SMTP id f15so1205260vsq.6
+ for <samba-technical@lists.samba.org>; Wed, 18 Sep 2019 19:01:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=KdkvmwmOSOwVn5z+zC8eYaCbIrPvzzvQGVbUx7EVelM=;
+ b=r2z6PVW8YpYiYc8ovEZclTVy/AVap1If5l9t0xEXggKF4V0R7WymEud4hFMrZjDJz4
+ wrrQhY5uNY38x8EGBYTOq/VVR36XN+5l7EVfsdKx6N7lI0TOCW1eb4UxfjVAnw1g8rFJ
+ ePXqCe4AEOR3/zkBvgqTxg7S/t72Ajx0+4Z0fnUAsiWKuaf5tfMXoNlu5HlBTvCYET6/
+ f/9G+pv3xoOR+4RIjt1zuz30b6dEtY3XVIXHcCadZfRHktuOBi/dNhCmFrSJgdR+Mqb4
+ b4qyZ3bm7tDvmBX+WdlqfAS1TiUeCSfvsuhbzwZf7cB5YTvv4+RUd5mEkEF4zz2WBvDJ
+ QpCw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=KdkvmwmOSOwVn5z+zC8eYaCbIrPvzzvQGVbUx7EVelM=;
+ b=gDG5LhM+VKjlu9DT9iM268ZhrG6QMdUx4NiIwFu4p0LNA6Kkvs/0iv4UmcUxb0wD+2
+ pfMt8OBKY1Qf3/be7G2vW/SyrfFUTkPdYYki2bcYhkKCIZQ1auS+7se7WjNqupgfdLej
+ E5yC1hR4t4V1OH2gznajYR0PY/uHn1RtmPXnpHVzm6gKAAlUy+5u9JBZ6bgb0imGCBNY
+ Ccjbep8lcceK5We0zweuQwZV66LZl72TYIlJ6OIzoVv1RED7oAY8sgSXJI6TeqkaEaur
+ UgKh0RV35a7T9ZQ1hACeqJaFhI2PD+mYoHtKVaJcEqKn/F81eGSo/y0/jnmxm9smBN5A
+ hhxw==
+X-Gm-Message-State: APjAAAVnfKiTVLYcijrUoCkngf1HROEE6qnOREs8xmVqVpNgpIUNEU7t
+ x/vloiMqHUq2mveRHhYh5Ws8mSEq/sDLqUQ4zEk=
+X-Google-Smtp-Source: APXvYqw0wMByhFAjYSrMtikC6TCztmVCWdYecxIrAqo9OAY4GWZJla/uhI9RgkpBgsLsafIbKcGNZVOuSqMVZVUX68U=
+X-Received: by 2002:a67:2981:: with SMTP id p123mr4099808vsp.121.1568858500170; 
+ Wed, 18 Sep 2019 19:01:40 -0700 (PDT)
+MIME-Version: 1.0
 References: <1567482029.19432.46.camel@samba.org>
  <20190903144445.58591c90@martins.ozlabs.org>
-Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAAA3NCSVQICAjb4U/gAAACRklEQVRYw81YS67DIAwkVe8FPRm5menJeAu3lmUCbyBGKqsmRXjwb8Y5aq3hl9Yj/Nh6Tu0upZRS+EdKiV+e5+mJqMKLiHLORBRjzDmbc/hlvb1QD2k3sG84+dhhvF6vlzymlNY8dyBJzUdLjAwyvaeU8n6/2WHpu/xDRkREJI8cOBMgfuRQxhj58JzzbBwhQDFGA07M6/efE0MQxDHGFvpdQHy6MUxqtU4yezRcH0B4GfbM44BWGqOurF6Omz140a0ASimJvdbwZT32XrpRh5yuwY1d0vPrdNkv91+T8uBRG8l1uiX+JtsHxPNIWE27ugwTctTdHCIiYXvuy4P7IDl0CxAzl2xgZTJwgw+g3kGaHwYh5g2sljyrjIVEq4pYBg2Kq3yXZ5WxjfO7zF9jRdXrnLcEmlbTRnNpcT0gvpTScUC2HlOE2ipAvPuJanMT+Xc0PC4dFzu1DEO4HgczaS5kOnZ4vM7zxNU+mtRyRVPDgqyX3cdx8AQCCrQnfkV9VzMA9Ryg3ek8Sgsg3QX+nbz03Og5l10ytp6HusQUwpjd1rnsksbHlhjuVGdBAbWzIiJu5MvEFkA6OkiwBO4uQL3ADeQ9b57t74+FBo1s47IqpVxqBDcuQ66r94QQJOH2ctnAf9oZtdbZYejpi2bQEveO0sb2JXu09OJJrnpil4SV5G2N6Y+1QjL+gHSKDApHJoJWF3hW2fInh6lutGW216OPRBZtRZscwyQvI+KuTj3rp4VP1VsAcTobxgDngukqm3LPgmL8A4m377Y5OvTKAAAAAElFTkSuQmCC
+ <1568849556.4377.70.camel@samba.org>
+In-Reply-To: <1568849556.4377.70.camel@samba.org>
+Date: Wed, 18 Sep 2019 22:01:28 -0400
+Message-ID: <CAOCN9rzCshckhzed96biz2QaopixuwsE13JQYCNcWSYd0BbkTA@mail.gmail.com>
+Subject: Re: Building Samba master on CentOS 7 (gnutls)
+To: Andrew Bartlett <abartlet@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.22.6-1+deb9u2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,94 +69,49 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
 Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2019-09-03 at 14:44 +1000, Martin Schwenke wrote:
-> Hi Andrew,
-> 
-> On Tue, 03 Sep 2019 15:40:29 +1200, Andrew Bartlett
-> <abartlet@samba.org> wrote:
-> 
-> > You correctly mentioned that discussing how to get past the new GnuTLS
-> > requirements on a unrelated and now closed Merge Request[1] is not
-> > really helpful.
-> > We do still have a mailing list, and this more 'meta' kind of issue is
-> > what it is for.
-> > The background is that we, in order to avoid having significant
-> > duplicated cryptographic code in the SMB2 server, we chose to
-> > exclusively require GnuTLS 3.5.7 or later.  We will increase this
-> > version in the future as and when the distribution landscape permits it
-> > as it is no longer favoured to have cryptographic code 'in-house'.
-> 
-> Sure...
-> 
-> > The instructions for preparing a build environment on CentOS7 are here:
-> > bootstrap/generated-dists/centos7/bootstrap.sh
-> > https://git.samba.org/?p=samba.git;a=blob_plain;f=bootstrap/generated-dists/centos7/bootstrap.sh;hb=master
-> > The key line is 'yum copr enable -y sergiomb/SambaAD' which enables a
-> > user repository with compat-gnutls34-* in it.  This is far from ideal,
-> > it would be much better if this was in EPEL, but someone would need to
-> > step up and do that.
-> > However this is only half of the story, as to avoid overwriting the
-> > system gnutls, the package is installed in a subdirectory.
-> 
-> The nutty thing is that I ended up removing the original gnutls
-> package anyway because dependent packages (including the devel
-> package) conflicted:
-> 
->   Transaction check error:
->     file /usr/lib64/libgnutlsxx.so.28.1.0 from install of compat-gnutls34-c++-3.4.17-4.el7.x86_64 conflicts with file from package gnutls-c++-3.3.29-9.el7_6.x86_64
->     file /usr/lib64/libgnutls-dane.so.0 from install of compat-gnutls34-dane-3.4.17-4.el7.x86_64 conflicts with file from package gnutls-dane-3.3.29-9.el7_6.x86_64
->     file /usr/lib64/libgnutls-dane.so from install of compat-gnutls34-devel-3.4.17-4.el7.x86_64 conflicts with file from package gnutls-devel-3.3.29-9.el7_6.x86_64
->     file /usr/lib64/libgnutls.so from install of compat-gnutls34-devel-3.4.17-4.el7.x86_64 conflicts with file from package gnutls-devel-3.3.29-9.el7_6.x86_64
-> 
-> Given that gnutls.pc is in the devel package, and there's a direct
-> conflict between gnutls-devel and compat-gnutls34-devel, the
-> subdirectory for the gnutls.pc file is completely pointless.  If only
-> one devel package can be installed then it might as well be
-> self-contained...  :-(
+On Wed, Sep 18, 2019 at 7:33 PM Andrew Bartlett via samba-technical
+<samba-technical@lists.samba.org> wrote:
 
-Drat.  That isn't ideal.
+> We can't easily add comments like that to the bootstap.sh, but a README
+> might work.  Only trouble is that you will need to modify
+> bootstrap/template.py to also exclude that new file from the sha1sum
+> calcuations.
+>
+> Getting a better gnutls34 or later package into EPEL without the
+> conflicts would also be really helpful.
 
-> > The build needs to first set as an environment variable
-> > 
-> > PKG_CONFIG_PATH="/usr/lib64/compat-gnutls34/pkgconfig:/usr/lib64/compat-nettle32/pkgconfig"
-> > 
-> > (this is in .gitlab-ci.yml).
-> 
-> OK, thanks!  That's the missing step!  Unless someone decides that the
-> subdirectory is pointless and fixes the packaging, then we should
-> document this with a comment in
-> bootstrap/generated-dists/centos7/bootstrap.sh or a README in that
-> directory.
-> 
-> I'm happy to take advice and make it so...
+The published compat-gnutls34 and compat-nettle32 from have "devel"
+packages that conflict with the default gnutls and nettle packages.
+There are probably more graceful ways around them, but they'd need
+some hooks in the samba building tools to *find* and use the
+alternative locations.
 
-We can't easily add comments like that to the bootstap.sh, but a README
-might work.  Only trouble is that you will need to modify
-bootstrap/template.py to also exclude that new file from the sha1sum
-calcuations.
+Is there any chance that the alternative, mit-krb5 based Kerberos
+setups are good enough to use for samba-4.11? Fedora has been enabling
+them in rawhide, but I don't know if all the older components in RHEL
+7 or now RHEL 8 are recent and play nicely, and I for one have not had
+the spare stable build environment to test it out lately.
 
-Getting a better gnutls34 or later package into EPEL without the
-conflicts would also be really helpful.
-
-Sorry this didn't go as well as I had hoped and hopefully smoother
-sailing with CentOS8 is on the way soon.
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT   
-https://catalyst.net.nz/services/samba
-
-
-
-
+> Sorry this didn't go as well as I had hoped and hopefully smoother
+> sailing with CentOS8 is on the way soon.
+>
+> Andrew Bartlett
+>
+> --
+> Andrew Bartlett
+> https://samba.org/~abartlet/
+> Authentication Developer, Samba Team         https://samba.org
+> Samba Development and Support, Catalyst IT
+> https://catalyst.net.nz/services/samba
+>
+>
+>
+>
+>
 
