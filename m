@@ -2,64 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E1A3B74A9
-	for <lists+samba-technical@lfdr.de>; Thu, 19 Sep 2019 10:02:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C36C5B7978
+	for <lists+samba-technical@lfdr.de>; Thu, 19 Sep 2019 14:32:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=aHmIAp+HjeKh0nDlboZaEwdPjSjLDQ2RVUXnXzcnWSM=; b=IFTThVYHrBIu8jMkztmmdO2in2
-	zbdRAIfmBdhdjPPG8jzrnQzGd2YxCU1bODtfFbeayzN6Q7mdHOq1ExIorjILS6vYDCkIRLNznmIYD
-	c/QVApnUbfHTGbZ1kqmQW2CF5mye3OJAdZyQvirI8X6yrNeoMYummpuCyioFohPaYQDub/hLbxgK+
-	ob0J5nYIVjB2pwb+8TKkwPpG7gThxB3ughNKlGO5aOU/E3F72TCrMd4crydzGBQU9YZLozgAm6ppz
-	2YRXNE/Yquydo/u6ZbnrEcntVYfdtFLz/Wa3Vc7K+Qo7vuJtSe46LqbFgl1jCbulkaQgRfrrUbQEa
-	giGRVWPg==;
-Received: from localhost ([::1]:20260 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=xYHaguuqkZAjGKqBi/wff33jzCeg21O+5/4qDe2Bzsg=; b=Tke7fGaf6Une1q7ysiKtghgveX
+	B5sG4EebuwhxYW4WM4DiJFa1Jzo3XpD8AOKKfw9cwLK2q5NhoXYA3MY6msd0HRenGu8m6R2WEDSLe
+	fwNKv5JnbtyTGAxDvE6f4wBJBnmYfG6n/K01XsDHQ22TPsbCgSELhjiManUNuriNpakb+rzIvm2dU
+	CGZWZgZbnLZbzymq0aDDDekopaSHE843iP27QmToAILR/fQJExIoBrB/ubiLTSXU1igccmX3kjyf+
+	6G9ueNww3KlduPK4CjOMDvI8NCA0bnThHSnc54iIcyRRjLei0kqLBXCZ1TKjpskulVASf6p+yToNZ
+	02Lv4XzA==;
+Received: from localhost ([::1]:49856 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iArOQ-006oo1-49; Thu, 19 Sep 2019 08:02:22 +0000
-Received: from smtp-fw-6002.amazon.com ([52.95.49.90]:25269) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iAhI5-006hYJ-7P
- for samba-technical@lists.samba.org; Wed, 18 Sep 2019 21:15:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
- t=1568841309; x=1600377309;
- h=from:to:subject:date:message-id:in-reply-to:references:
- mime-version; bh=aHmIAp+HjeKh0nDlboZaEwdPjSjLDQ2RVUXnXzcnWSM=;
- b=gSQPA5s0uPT+5o075PRyBOisQhnA5SaHlWJ+Abak8WcG0yhHa5DxX4lR
- 7TBq5lPMCwg8xOvqYvHwcp+s9gIPg464LT17zJ96MV8HwxmQVEKzVpWsF
- YYCYIMt0QRt98w7UMZpPiJqhL9PRWqw7HFgnrAqt3+MG67wGN6F8cCq7z A=;
-X-Amazon-filename: signature.asc
-Received: from iad6-co-svc-p1-lb1-vlan3.amazon.com (HELO
- email-inbound-relay-1a-7d76a15f.us-east-1.amazon.com) ([10.124.125.6])
- by smtp-border-fw-out-6002.iad6.amazon.com with ESMTP;
- 18 Sep 2019 20:59:02 +0000
-Received: from EX13MTAUWA001.ant.amazon.com
- (iad55-ws-svc-p15-lb9-vlan2.iad.amazon.com [10.40.159.162])
- by email-inbound-relay-1a-7d76a15f.us-east-1.amazon.com (Postfix) with ESMTPS
- id 78F86A2381; Wed, 18 Sep 2019 20:59:01 +0000 (UTC)
-Received: from EX13D27UWA002.ant.amazon.com (10.43.160.30) by
- EX13MTAUWA001.ant.amazon.com (10.43.160.58) with Microsoft SMTP Server (TLS)
- id 15.0.1367.3; Wed, 18 Sep 2019 20:59:00 +0000
-Received: from u33b4e6d89a065e.ant.amazon.com (10.43.162.189) by
- EX13D27UWA002.ant.amazon.com (10.43.160.30) with Microsoft SMTP Server (TLS)
- id 15.0.1367.3; Wed, 18 Sep 2019 20:59:00 +0000
-To: <samba-technical@lists.samba.org>, Richard Sharpe
- <realrichardsharpe@gmail.com>
-Subject: Re: Sites and services and queries for SRV records ...
-Date: Wed, 18 Sep 2019 13:58:52 -0700
-Message-ID: <1687967.4MLVLAP09i@u33b4e6d89a065e.ant.amazon.com>
-Organization: WorkSpaces Linux Desktop
-In-Reply-To: <CACyXjPwy0yR5KZeh2JpS2ZwPHNmqo36WkuN9JPH9FmzKdUPNkA@mail.gmail.com>
-References: <CACyXjPxh=feYNk3o=DWxQN5xc4s8T5NNffoi_boTck1N39Rx8w@mail.gmail.com>
- <44826820.fKAd0jnEr8@u33b4e6d89a065e.ant.amazon.com>
- <CACyXjPwy0yR5KZeh2JpS2ZwPHNmqo36WkuN9JPH9FmzKdUPNkA@mail.gmail.com>
+	id 1iAvaj-006uBb-9T; Thu, 19 Sep 2019 12:31:21 +0000
+Received: from mx.cjr.nz ([51.158.111.142]:45692) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iAvae-006uBU-Ry
+ for samba-technical@lists.samba.org; Thu, 19 Sep 2019 12:31:19 +0000
+Received: from authenticated-user (mx.cjr.nz [51.158.111.142])
+ (Authenticated sender: pc)
+ by mx.cjr.nz (Postfix) with ESMTPSA id E62CF810D5;
+ Thu, 19 Sep 2019 12:12:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz; s=dkim;
+ t=1568895156;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=xYHaguuqkZAjGKqBi/wff33jzCeg21O+5/4qDe2Bzsg=;
+ b=ILi49dpi9tB8Ua1osuj+YxzBeu2EP20naHgIK+Yo+YJeNzJ1zEQDB7q5Hof7a4vTKxPGuF
+ GzZnfoESt4P99CMXOkhAZ1vokSwQFNQyEJgwycprJrLC/WsrWL+q3oTNCFDKSu14dQefmO
+ 6W0YYOw65P9QU7sp2urwYWEDwQC0OeuTXIHud3UFO5Bd2ZdwXLiDe0G+XbZPumLao7krCb
+ oMErQ23dkjNu8Wi4oL2pBq3oPtiO1BhitHY4MSyv5fRtvsFaFYAGuUjf/ngs4QbVXlg+ox
+ 6aB3I+Nez6D/0/sJFq3TmsDC+Kh4cvKbYDcxLapJPjNGf/7xzyMl/nE79qry4A==
+To: linux-cifs@vger.kernel.org,
+	samba-technical@lists.samba.org
+Subject: [PATCH] mount.cifs: Fix invalid free
+Date: Thu, 19 Sep 2019 09:12:26 -0300
+Message-Id: <20190919121226.8756-1-pc@cjr.nz>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPart3278094.J6kXmkrJxQ";
- micalg=pgp-sha512; protocol="application/pgp-signature"
-X-Originating-IP: [10.43.162.189]
-Precedence: Bulk
-X-Mailman-Approved-At: Thu, 19 Sep 2019 08:02:19 +0000
+Content-Transfer-Encoding: 8bit
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz;
+ s=dkim; t=1568895156; h=from:from:sender:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:references; bh=xYHaguuqkZAjGKqBi/wff33jzCeg21O+5/4qDe2Bzsg=;
+ b=rLB2+4mKS1HTM+j5bsgs2n+8w8NOpFxJY7FgUIgJdARelR94krlFuANYEkUMysAiuATZAU
+ q38LpY93MKBFcHgQqXamBXT435fkSI81SnClUippQxp/sy0AZs31E5Uwc1/CJnsyTKOhLI
+ +pj/8DG+iwbaqJn2DMig5jTuWyZYu0cAHMTU5zJlwDSkEX/CyWN+9qGy7OosUYzCmxc5By
+ cXgBBZBskqaJ+DdEtL7P2YhvJrJPAwxPVI6EeYWh6dHxbqNVu9XFvACuSorFEUKrHSNXA6
+ RB1/2NdDw3l77xVMeSJUgnP+EW8j7CmzJyblvsOfAKuVEisaED319eSN5zMm/g==
+ARC-Seal: i=1; s=dkim; d=cjr.nz; t=1568895156; a=rsa-sha256; cv=none;
+ b=ruYd0dg3VWEmHBPwv6x+9AyZBvURT23m8AOeKOsdXHRHbCyozqyLY2jOsmo0poVWKZGPZC
+ Ft0lQXRJY0dDLzL3YEAzoSiNHC9UYICG0rhhHiZbECDVwt76ZgT7i6g7seeblGh2puvhSz
+ RrQi86wpDueCBvMZK9dp6LcL82fe5lowKB9V8f3z+adcKiQwQRMY2VKsO2+9MH8jXVrGqK
+ zpHTFYxCkH4tI3mFUZ1g2zggwWJLm9T80QfQ3BbVXKqcBbv0hvZAR9x43OpBV373YDBfQA
+ kSHN2UxIAajtlCS49HsfLBIwupFXQPqtG2SzSAkxn/Do3CWUbB63zdKtX5zUGw==
+ARC-Authentication-Results: i=1; mx.cjr.nz;
+ auth=pass smtp.auth=pc smtp.mailfrom=pc@cjr.nz
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
+Precedence: list
 List-Id: "Discussions on Samba internals. For general questions please
  subscribe to the list samba@lists.samba.org"
  <samba-technical.lists.samba.org>
@@ -70,89 +72,83 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexey A Nikitin via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexey A Nikitin <nikitin@amazon.com>
+From: "Paulo Alcantara \(SUSE\) via samba-technical"
+ <samba-technical@lists.samba.org>
+Reply-To: "Paulo Alcantara \(SUSE\)" <pc@cjr.nz>
+Cc: "Paulo Alcantara \(SUSE\)" <pc@cjr.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---nextPart3278094.J6kXmkrJxQ
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
+When attemping to chdir into non-existing directories, mount.cifs
+crashes.
 
-On Wednesday, 18 September 2019 13:45:57 PDT Richard Sharpe via samba-techn=
-ical wrote:
-> On Wed, Sep 18, 2019 at 1:34 PM Alexey A Nikitin <nikitin@amazon.com> wro=
-te:
-> >
-> > On Wednesday, 18 September 2019 12:22:44 PDT Richard Sharpe via samba-t=
-echnical wrote:
-> > > Hi folks,
-> > >
-> > > I thought, perhaps naively, that if an organization is using sites and
-> > > services, and you do a query for SRV records from Site A for
-> > > _ldap._tcp.<realm> that the Windows DNS servers would return the SRV
-> > > records ordered with those for Site A first.
-> > >
-> > > Is there more that you have to do to ensure that? What I am seeing
-> > > looks like standard random round-robin order.
-> > >
-> > >
-> >
-> > The behavior of SRV RRs is specified in https://tools.ietf.org/html/rfc=
-2782
-> > To summarize the related to your question info:
-> >
-> > The order for the servers in SRV RRs is not guaranteed, instead the cli=
-ents should attempt to query those servers in the order that depends on the=
- weight and priority of the corresponding SRV RRs. In case of MS AD DS, for=
- example, order of the SRV RRs may depend on the order in which DCs came on=
-line and registered themselves with DNS. The weight and priority ideally sh=
-ould depend on the domain topology, and IIRC there is a way to have each DN=
-S server in the domain return the same server with different weight/priorit=
-y, or even limit the domain-global SRV RR set to just the site-specific SRV=
- RRs. But in a simple multi-site setup with all links between the sites equ=
-ivalent and all DNS servers providing the same SRV RR sets whether client w=
-ill first pick a DC in it's local site is up to the dumb luck. What client =
-then should do is described in the DC Location mechanism specification (see=
-  [MS-ADTS], [MS-NRPC], ash [MS-DISO] - some of these are deprecated, but e=
-mpirically still hold true), though to simplify it sends the NetLogon ping =
-to the first server it picks, and then reads the response to figure out whi=
-ch site the client is in and whether that server is from the client's site =
-or some other site; if the first server is not the closest to the client th=
-en client should make another SRV RR query, this time using the closest to =
-the client site it obtained with the first NetLogon ping response.
->=20
-> Thanks for that. Clearly, I didn't understand sites-and-services.
->=20
-> In my case the problem was a domain joining problem where we don't
-> know what site we are in at that point anyway.
->=20
->=20
+This patch fixes the following ASAN report:
 
-Normally Winbind (or other client software) should figure out the site auto=
-matically, given the directory is not misconfigured. What is the exact prob=
-lem you're running into?
---nextPart3278094.J6kXmkrJxQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
+$ ./mount.cifs //localhost/foo /mnt/invalid-dir -o ...
+/mnt/bar -o username=foo,password=foo,vers=1.0
+Couldn't chdir to /mnt/bar: No such file or directory
+=================================================================
+==11846==ERROR: AddressSanitizer: attempting free on address which was
+not malloc()-ed: 0x7ffd86332e97 in thread T0
+    #0 0x7f0860ca01e7 in
+    __interceptor_free (/usr/lib64/libasan.so.5+0x10a1e7)
+    #1 0x557edece9ccb in
+    acquire_mountpoint (/home/paulo/src/cifs-utils/mount.cifs+0xeccb)
+    #2 0x557edecea63d in
+    main (/home/paulo/src/cifs-utils/mount.cifs+0xf63d)
+    #3 0x7f08609f0bca in __libc_start_main (/lib64/libc.so.6+0x26bca)
+    #4 0x557edece27d9 in
+    _start (/home/paulo/src/cifs-utils/mount.cifs+0x77d9)
 
------BEGIN PGP SIGNATURE-----
+Address 0x7ffd86332e97 is located in stack of thread T0 at offset 8951
+in frame
+    #0 0x557edece9ce0 in
+    main (/home/paulo/src/cifs-utils/mount.cifs+0xece0)
 
-iQIzBAABCgAdFiEEpRZyqYrXfmxeMjWyd71YSxgxbEgFAl2CmowACgkQd71YSxgx
-bEjwOw//UKRvIcvg9hx7bdkIedlR/ESbmFtWENrTFuhkqfPNDsWxpTA2UPjes6SX
-2SXok8Hvex3GBs69a9xYyN8l/wlmkykVVmThzLGiSBw/5/OCZImd42Lu0tiN5a7L
-P3E+nUcME4VNSpKpL7fmDiiqkTZLauCYsQP/isy6JK+yjnwyVmpFRQwoI9Z0Wk1O
-s7UZvS5e5HcAYZSNM+gj4+ZPPdbBrsDZ5lapxTQgeks5UyI8+mphImzkHRMYgB7O
-0PmfsAjr8a2iHUPKsAlIpGH/VF3xkf0FJS8oGszfxBchG3NNkaKu0AKTVouxN8xc
-FFJQo81AQN/uGGM73mgITJkkluMbEAF7g9MtlTRZ4HOsSdbIV72WbsIKhsZeYdXm
-3FxLB+ZIWqodZbIgLhshedpdh5+lcZmeim2AJM5jG7Apt/ch6BLZRMwe75qP9u6y
-oSy/yGhVjs2M028NQfG5EnxkaFLAwUvKDh3v1ZAFECf4fJlyDZx+GvnH8smRQTxk
-I8ymwdejLxqobWv+m10Z0xqoy0dagFvmWXkAIJl4w/9tIL9ROlCJWP8xw9iVdQP6
-U8hglJUBBLz57g3YRt/R6yuuZWLxlaTAKDj8778J69S2q4KdBCKcb8VOcGqzKi0G
-UyV9jQYV5O7gQMhepPiCgNpy26bXwyfkzgXeXKAxVj7nmaX9SNQ=
-=ewxD
------END PGP SIGNATURE-----
+  This frame has 2 object(s):
+    [48, 52) 'rc' (line 1959)
+    [64, 72) 'mountpoint' (line 1955) <== Memory access at offset 8951
+    overflows this variable
+HINT: this may be a false positive if your program uses some custom
+stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: bad-free (/usr/lib64/libasan.so.5+0x10a1e7)
+in __interceptor_free
+==11846==ABORTING
 
---nextPart3278094.J6kXmkrJxQ--
+Fixes: bf7f48f4c7dc ("mount.cifs.c: fix memory leaks in main func")
+Signed-off-by: Paulo Alcantara (SUSE) <pc@cjr.nz>
+---
+ mount.cifs.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/mount.cifs.c b/mount.cifs.c
+index 7748d54aa814..0c38adcd99b1 100644
+--- a/mount.cifs.c
++++ b/mount.cifs.c
+@@ -1893,7 +1893,7 @@ acquire_mountpoint(char **mountpointp)
+ 	int rc, dacrc;
+ 	uid_t realuid, oldfsuid;
+ 	gid_t oldfsgid;
+-	char *mountpoint;
++	char *mountpoint = NULL;
+ 
+ 	/*
+ 	 * Acquire the necessary privileges to chdir to the mountpoint. If
+@@ -1942,9 +1942,9 @@ restore_privs:
+ 		gid_t __attribute__((unused)) gignore = setfsgid(oldfsgid);
+ 	}
+ 
+-	if (rc) {
+-		free(*mountpointp);
+-	}
++	if (rc)
++		free(mountpoint);
++
+ 	return rc;
+ }
+ 
+-- 
+2.23.0
+
 
