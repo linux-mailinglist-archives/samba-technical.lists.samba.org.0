@@ -2,68 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97A6DB7E0E
-	for <lists+samba-technical@lfdr.de>; Thu, 19 Sep 2019 17:22:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6170B8B69
+	for <lists+samba-technical@lfdr.de>; Fri, 20 Sep 2019 09:09:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=35pe9kkxdC7EjCrreNNnD39E8uLZQzbEg7Hs3HWa184=; b=4q+MuT4GsFhBhLTJsinys8a6bA
-	N18c3z0Q2Q2gJahamPLRAFzV0SdPCjnXDvcB3tCJ3TkwZyJB+ZC9geKisxtkdKx01OPjegtR8LbG9
-	CxiQndi9m56Bq9ZvP1ip3KLh8lXbRhgzI/pWVtk8QAfsXtmk2m+IZ5nblh173Oa4zoqcf1E6zRUqi
-	ayjuhA9dQy6+poc94hZY+t7Gjtdku55DNVP8B/WfBJ+SuHtHezv4dSFM6K9pnpyTKTdNQ636foIxN
-	GOpuRueMfvVue5oG4t2y9x9UxPHruceznwml/vNtEIYEjpqwC6d+K7irG2qEpVKW0LwksMOn2hP7A
-	dYXILXtQ==;
-Received: from localhost ([::1]:37846 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=okJYcSdtFVyAVwO/GO4YqAqofHrbE1eBVlcWVEJegAw=; b=i9+rzunTIyIfkBGYHo+uWJ1YKX
+	cU9j4E/SzujjelQ0HzBjCFO8uzsGhDdhhxck4Ltqq8KEPPIYbWaMy52H5kTXh9GIUCbuBztV/7DKn
+	41pBfZQ+6ovILjAHD1C57qfTJgbBSkBP17a55wS5b8Ro3PbEEVJ2PbltaNM9euUYhAs6AniPMnyfJ
+	O01/mxUZQNrOrV5iNgilZf55ZyL9wT3dF+kgqPIrv3eElwJss5sZEjXCuB0/nxwzfGNeyKaoBGlLn
+	uyxjtF7OIkPxDczxcVIjy/9aBPbVkB0ty14McE+EXrRrP7/fTBus4LmkyvT0ETihn3JE+ZveXHrdi
+	GMoihtiQ==;
+Received: from localhost ([::1]:21032 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iAyFh-006zyt-V8; Thu, 19 Sep 2019 15:21:50 +0000
-Received: from mx.cjr.nz ([51.158.111.142]:43262) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iAyFQ-006zwu-2v
- for samba-technical@lists.samba.org; Thu, 19 Sep 2019 15:21:46 +0000
-Received: from authenticated-user (mx.cjr.nz [51.158.111.142])
- (Authenticated sender: pc)
- by mx.cjr.nz (Postfix) with ESMTPSA id 616EC810F3;
- Thu, 19 Sep 2019 15:21:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz; s=dkim;
- t=1568906486;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=35pe9kkxdC7EjCrreNNnD39E8uLZQzbEg7Hs3HWa184=;
- b=cOJRl1mYDRbcAWsieqLPyrwnn1ZcKgG6d5fS52/HuBgJd0VRUQXW6bYEEOAlCQuHfBKirN
- DMK7n5lIQDe3t5EW5Zi+kDzqYKGwU67S5vOUhldnMRs7x3YmSDcsx2godYA3nR/DKxiQ1B
- m6OmbRih+3OzjdgGR+RlK2PPv59NdGUmiQhYNgwRBHcsUGdLwrBkqr2DalzXGwl9egdGvC
- M3ZwfiPlUO1KcCFptYQ/0wDLKVLchnDu2AJLO6AvTQ4hFIowHGs4Sm6D3NG0Fz5Bcpr1e9
- Bxb/t6aC+kEvL2Z0Pb6l7TxzJktjrOE7JxwKQ0nwVED1o3rCigDxjHKYQZBIig==
-To: linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
- linux-cifs@vger.kernel.org, samba-technical@lists.samba.org
-Subject: [PATCH v2 3/3] ipconfig: Handle CONFIG_CIFS_ROOT option
-Date: Thu, 19 Sep 2019 12:21:16 -0300
-Message-Id: <20190919152116.27076-3-pc@cjr.nz>
-In-Reply-To: <20190919152116.27076-1-pc@cjr.nz>
-References: <20190716220452.3382-1-paulo@paulo.ac>
- <20190919152116.27076-1-pc@cjr.nz>
+	id 1iBD19-0079sh-6G; Fri, 20 Sep 2019 07:07:47 +0000
+Received: from mail-io1-xd2e.google.com ([2607:f8b0:4864:20::d2e]:41482) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iBD0y-0079sa-M3
+ for samba-technical@lists.samba.org; Fri, 20 Sep 2019 07:07:39 +0000
+Received: by mail-io1-xd2e.google.com with SMTP id r26so13803503ioh.8
+ for <samba-technical@lists.samba.org>; Fri, 20 Sep 2019 00:07:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=okJYcSdtFVyAVwO/GO4YqAqofHrbE1eBVlcWVEJegAw=;
+ b=eMZqqOKv4wfevbxpa+sdw3ZObLugRtncz6gfUX81PAIpc7WyON0lSLVCtNmy8o69/P
+ IYXLj/B8Cwv5GBRX6bE+1mdk6dPaOk3JE++PZKe9X5G0bbNTpMevBI6SGjiZ0f6gcWzZ
+ UxWtnS4NsngQBScXyxb9Uh1FE3VkQj5tWNmo+77kLu4nYi9qzmZImnjzt3Z3dcHkiCkO
+ aPt2sHZ5sHMJOztMzfmHsMVdREttI+XQ9z4mKTYiOfkB3AAwAUpu+Rv4NEJCET0kj6kN
+ F+VBB6nPUb2wo82sFx+IiVoQhLSbO5K0ockxDARTciDkM3c4w06PuhvukgzdMiB+2GCc
+ WTWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=okJYcSdtFVyAVwO/GO4YqAqofHrbE1eBVlcWVEJegAw=;
+ b=AtSgAO9/lAIxyoyKhVLDLWUHKFRvOqCgP5HahnL4prXV1UOU8okX9rFit52yZpg9SB
+ JAzKRedDtTF4rEXhcepC/yqIgTYmhH5ifEG+y0nsFDM7M11bHvCUvvC0tQUFTeS2m+Qg
+ 998t8LJFuTK9e0Q2jQPUphf/JBz9LG89uA5xweKt+w6Ch7hO7WiS8X6vpF0FF54zIpgv
+ egOiW6goKmnyv0sBvl/UdWV3YJSVuoYqalb5QBUZJe8q4J4DckvZvHEg7VCWg/q/vbx8
+ S5Ps1EGpyzWpVJFdPUMS4bOEO8qRPR3qIYrWCfa0Wp+umu/zJ4mgKbNr12RRlzu6I4qk
+ wHBg==
+X-Gm-Message-State: APjAAAXU1A3sfexCjYxmx6wW5lDBKrY4LyF03Gu1O9ZiHdiVjgogBGHb
+ GbVi+DIlpLPGt6yggFkFhJf+ypp72k8N/ID0fMI=
+X-Google-Smtp-Source: APXvYqwaWnUYhLz/O5M7qwUTJfuDLy/m+SCebXVVZJ5xZfcP7thnewkk9koxIOMwg0y+yEGYUW+gCWu8h+pJUBiCcjY=
+X-Received: by 2002:a5d:8e0d:: with SMTP id e13mr5099659iod.3.1568963254367;
+ Fri, 20 Sep 2019 00:07:34 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz;
- s=dkim; t=1568906486; h=from:from:sender:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=35pe9kkxdC7EjCrreNNnD39E8uLZQzbEg7Hs3HWa184=;
- b=ZUFwe3MHtU4uhVteniaWRxAZy5z6wahxyYYQpAdDmcw2cIQFVFjg7uS1UrsA7VJt7EJ+Xd
- d0sjpVt6ITnPuIvOMLX8CBU28eoD/Qdlw+z8TDvoKgAGt4sSQ60U4pCHzko1r2R1J/8q8x
- SjbSBjwUoYF+sbw88BZzCnxtk9XTkIqA0C/15rrx97/r/At10yWslDJpfa7kFtB1R9iKaE
- eLSTO9DHyykbYzr5W/tdufn1wQL/R1zRflqvnlIKlsXYYrAO34ck7va33bzTuNdIdoAYHg
- /Mmp0qwvtm6SRGHBx5cG8g2r+61OxNaIDhkp2Kt4ZyC5A+hm6uBJscAxneQs7g==
-ARC-Seal: i=1; s=dkim; d=cjr.nz; t=1568906486; a=rsa-sha256; cv=none;
- b=TFv/T5Cvp+8RF2T+Ji1+0Y89OEIJVpfDIoKkCPzAny1cjLt0TLtFfSg6yP0xZXe7jNp+P2
- rLOHUXGGJv17o60IPze9azS/vlQLgHyOXwPGCWhqqIs4PpXQo1rW2oUarnmheQPMngdHlv
- qoMybQyKdEI5eSTvdOkwl+eiNOnIRACfClreP3c7beKBzk7X+U4ShjiHJQctVCf5Jb52Pp
- uZxWXJ2ZYQbtXeITTiHoH9J6AwOcLjYCAkS7xb96mtI2WovGeSRfEFs+IfCvMgQRwb/BWk
- WASoVRQ4UyxaZ8YUR6cCsbd4uZkLAN6yfiWiS6JAYJj8k4ZeRp4ovFOHTrhoIA==
-ARC-Authentication-Results: i=1; mx.cjr.nz;
- auth=pass smtp.auth=pc smtp.mailfrom=pc@cjr.nz
+Date: Fri, 20 Sep 2019 02:07:22 -0500
+Message-ID: <CAH2r5mvcRuSihH58GgrzXTAHuXnQ9a0N-d8AkLLOigQrqincKg@mail.gmail.com>
+Subject: [SMB3][PATCH] dump encryption keys to allow wireshark debugging of
+ encrypted
+To: =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>, 
+ CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
+Content-Type: multipart/mixed; boundary="00000000000071b6230592f6b96e"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,59 +67,111 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "Paulo Alcantara \(SUSE\) via samba-technical"
- <samba-technical@lists.samba.org>
-Reply-To: "Paulo Alcantara \(SUSE\)" <pc@cjr.nz>
-Cc: Hideaki YOSHIFUJI <yoshfuji@linux-ipv6.org>,
- Alexey Kuznetsov <kuznet@ms2.inr.ac.ru>,
- "Paulo Alcantara \(SUSE\)" <pc@cjr.nz>,
- "David S. Miller" <davem@davemloft.net>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-The experimental root file system support in cifs.ko relies on
-ipconfig to set up the network stack and then accessing the SMB share
-that contains the rootfs files.
+--00000000000071b6230592f6b96e
+Content-Type: text/plain; charset="UTF-8"
 
-Cc: "David S. Miller" <davem@davemloft.net>
-Cc: Alexey Kuznetsov <kuznet@ms2.inr.ac.ru>
-Cc: Hideaki YOSHIFUJI <yoshfuji@linux-ipv6.org>
-Signed-off-by: Paulo Alcantara (SUSE) <pc@cjr.nz>
----
- net/ipv4/ipconfig.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+kernel patch updated to check if encryption is enabled
 
-diff --git a/net/ipv4/ipconfig.c b/net/ipv4/ipconfig.c
-index 9bcca08efec9..32e20b758b68 100644
---- a/net/ipv4/ipconfig.c
-+++ b/net/ipv4/ipconfig.c
-@@ -1483,10 +1483,10 @@ static int __init ip_auto_config(void)
- 	 * missing values.
- 	 */
- 	if (ic_myaddr == NONE ||
--#ifdef CONFIG_ROOT_NFS
-+#if defined(CONFIG_ROOT_NFS) || defined(CONFIG_CIFS_ROOT)
- 	    (root_server_addr == NONE &&
- 	     ic_servaddr == NONE &&
--	     ROOT_DEV == Root_NFS) ||
-+	     (ROOT_DEV == Root_NFS || ROOT_DEV == Root_CIFS)) ||
- #endif
- 	    ic_first_dev->next) {
- #ifdef IPCONFIG_DYNAMIC
-@@ -1513,6 +1513,12 @@ static int __init ip_auto_config(void)
- 				goto try_try_again;
- 			}
- #endif
-+#ifdef CONFIG_CIFS_ROOT
-+			if (ROOT_DEV == Root_CIFS) {
-+				pr_err("IP-Config: Retrying forever (CIFS root)...\n");
-+				goto try_try_again;
-+			}
-+#endif
- 
- 			if (--retries) {
- 				pr_err("IP-Config: Reopening network devices...\n");
+In order to debug certain problems it is important to be able
+to decrypt network traces (e.g. wireshark) but to do this we
+need to be able to dump out the encryption/decryption keys.
+Dumping them to an ioctl is safer than dumping then to dmesg,
+(and better than showing all keys in a pseudofile).
+
+Restrict this to root (CAP_SYS_ADMIN), and only for a mount
+that this admin has access to.
+
+Sample smbinfo output:
+SMB3.0 encryption
+Session Id:   0x82d2ec52
+Session Key:  a5 6d 81 d0 e c1 ca e1 d8 13 aa 20 e8 f2 cc 71
+Server Encryption Key:  1a c3 be ba 3d fc dc 3c e bc 93 9e 50 9e 19 c1
+Server Decryption Key:  e0 d4 d9 43 1b a2 1b e3 d8 76 77 49 56 f7 20 88
+
+
 -- 
-2.23.0
+Thanks,
 
+Steve
+
+--00000000000071b6230592f6b96e
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-smb3-allow-decryption-keys-to-be-dumped-by-admin-for.patch"
+Content-Disposition: attachment; 
+	filename="0001-smb3-allow-decryption-keys-to-be-dumped-by-admin-for.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_k0rs6l1l0>
+X-Attachment-Id: f_k0rs6l1l0
+
+RnJvbSAzY2VlMmVlYzljMjg0OWJmMTE0OGI1ZDUxYjVlNzE0N2U5N2IwYjU1IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+CkRhdGU6IFRodSwgMTkgU2VwIDIwMTkgMDQ6MDA6NTUgLTA1MDAKU3ViamVjdDogW1BBVENIXSBz
+bWIzOiBhbGxvdyBkZWNyeXB0aW9uIGtleXMgdG8gYmUgZHVtcGVkIGJ5IGFkbWluIGZvcgogZGVi
+dWdnaW5nCgpJbiBvcmRlciB0byBkZWJ1ZyBjZXJ0YWluIHByb2JsZW1zIGl0IGlzIGltcG9ydGFu
+dCB0byBiZSBhYmxlCnRvIGRlY3J5cHQgbmV0d29yayB0cmFjZXMgKGUuZy4gd2lyZXNoYXJrKSBi
+dXQgdG8gZG8gdGhpcyB3ZQpuZWVkIHRvIGJlIGFibGUgdG8gZHVtcCBvdXQgdGhlIGVuY3J5cHRp
+b24vZGVjcnlwdGlvbiBrZXlzLgpEdW1waW5nIHRoZW0gdG8gYW4gaW9jdGwgaXMgc2FmZXIgdGhh
+biBkdW1waW5nIHRoZW4gdG8gZG1lc2csCihhbmQgYmV0dGVyIHRoYW4gc2hvd2luZyBhbGwga2V5
+cyBpbiBhIHBzZXVkb2ZpbGUpLgoKUmVzdHJpY3QgdGhpcyB0byByb290IChDQVBfU1lTX0FETUlO
+KSwgYW5kIG9ubHkgZm9yIGEgbW91bnQKdGhhdCB0aGlzIGFkbWluIGhhcyBhY2Nlc3MgdG8uCgpT
+YW1wbGUgc21iaW5mbyBvdXRwdXQ6ClNNQjMuMCBlbmNyeXB0aW9uClNlc3Npb24gSWQ6ICAgMHg4
+MmQyZWM1MgpTZXNzaW9uIEtleTogIGE1IDZkIDgxIGQwIGUgYzEgY2EgZTEgZDggMTMgYWEgMjAg
+ZTggZjIgY2MgNzEKU2VydmVyIEVuY3J5cHRpb24gS2V5OiAgMWEgYzMgYmUgYmEgM2QgZmMgZGMg
+M2MgZSBiYyA5MyA5ZSA1MCA5ZSAxOSBjMQpTZXJ2ZXIgRGVjcnlwdGlvbiBLZXk6ICBlMCBkNCBk
+OSA0MyAxYiBhMiAxYiBlMyBkOCA3NiA3NyA0OSA1NiBmNyAyMCA4OAoKUmV2aWV3ZWQtYnk6IEF1
+cmVsaWVuIEFwdGVsIDxhYXB0ZWxAc3VzZS5jb20+ClNpZ25lZC1vZmYtYnk6IFN0ZXZlIEZyZW5j
+aCA8c3RmcmVuY2hAbWljcm9zb2Z0LmNvbT4KLS0tCiBmcy9jaWZzL2NpZnNfaW9jdGwuaCB8ICA5
+ICsrKysrKysrKwogZnMvY2lmcy9pb2N0bC5jICAgICAgfCAyOSArKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKwogMiBmaWxlcyBjaGFuZ2VkLCAzOCBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0
+IGEvZnMvY2lmcy9jaWZzX2lvY3RsLmggYi9mcy9jaWZzL2NpZnNfaW9jdGwuaAppbmRleCA2YzNi
+ZDA3ODY4ZDcuLjBmMGRjMWMxZmU0MSAxMDA2NDQKLS0tIGEvZnMvY2lmcy9jaWZzX2lvY3RsLmgK
+KysrIGIvZnMvY2lmcy9jaWZzX2lvY3RsLmgKQEAgLTU3LDkgKzU3LDE4IEBAIHN0cnVjdCBzbWJf
+cXVlcnlfaW5mbyB7CiAJLyogY2hhciBidWZmZXJbXTsgKi8KIH0gX19wYWNrZWQ7CiAKK3N0cnVj
+dCBzbWIzX2tleV9kZWJ1Z19pbmZvIHsKKwlfX3U2NAlTdWlkOworCV9fdTE2CWNpcGhlcl90eXBl
+OworCV9fdTgJYXV0aF9rZXlbMTZdOyAvKiBTTUIyX05UTE1WMl9TRVNTS0VZX1NJWkUgKi8KKwlf
+X3U4CXNtYjNlbmNyeXB0aW9ua2V5W1NNQjNfU0lHTl9LRVlfU0laRV07CisJX191OAlzbWIzZGVj
+cnlwdGlvbmtleVtTTUIzX1NJR05fS0VZX1NJWkVdOworfSBfX3BhY2tlZDsKKwogI2RlZmluZSBD
+SUZTX0lPQ1RMX01BR0lDCTB4Q0YKICNkZWZpbmUgQ0lGU19JT0NfQ09QWUNIVU5LX0ZJTEUJX0lP
+VyhDSUZTX0lPQ1RMX01BR0lDLCAzLCBpbnQpCiAjZGVmaW5lIENJRlNfSU9DX1NFVF9JTlRFR1JJ
+VFkgIF9JTyhDSUZTX0lPQ1RMX01BR0lDLCA0KQogI2RlZmluZSBDSUZTX0lPQ19HRVRfTU5UX0lO
+Rk8gX0lPUihDSUZTX0lPQ1RMX01BR0lDLCA1LCBzdHJ1Y3Qgc21iX21udF9mc19pbmZvKQogI2Rl
+ZmluZSBDSUZTX0VOVU1FUkFURV9TTkFQU0hPVFMgX0lPUihDSUZTX0lPQ1RMX01BR0lDLCA2LCBz
+dHJ1Y3Qgc21iX3NuYXBzaG90X2FycmF5KQogI2RlZmluZSBDSUZTX1FVRVJZX0lORk8gX0lPV1Io
+Q0lGU19JT0NUTF9NQUdJQywgNywgc3RydWN0IHNtYl9xdWVyeV9pbmZvKQorI2RlZmluZSBDSUZT
+X0RVTVBfS0VZIF9JT1dSKENJRlNfSU9DVExfTUFHSUMsIDgsIHN0cnVjdCBzbWIzX2tleV9kZWJ1
+Z19pbmZvKQpkaWZmIC0tZ2l0IGEvZnMvY2lmcy9pb2N0bC5jIGIvZnMvY2lmcy9pb2N0bC5jCmlu
+ZGV4IDc2ZGRkOThiNjI5OC4uNDhjMjM5MjkzNTBjIDEwMDY0NAotLS0gYS9mcy9jaWZzL2lvY3Rs
+LmMKKysrIGIvZnMvY2lmcy9pb2N0bC5jCkBAIC0xNjQsNiArMTY0LDcgQEAgc3RhdGljIGxvbmcg
+c21iX21udF9nZXRfZnNpbmZvKHVuc2lnbmVkIGludCB4aWQsIHN0cnVjdCBjaWZzX3Rjb24gKnRj
+b24sCiBsb25nIGNpZnNfaW9jdGwoc3RydWN0IGZpbGUgKmZpbGVwLCB1bnNpZ25lZCBpbnQgY29t
+bWFuZCwgdW5zaWduZWQgbG9uZyBhcmcpCiB7CiAJc3RydWN0IGlub2RlICppbm9kZSA9IGZpbGVf
+aW5vZGUoZmlsZXApOworCXN0cnVjdCBzbWIzX2tleV9kZWJ1Z19pbmZvIHBrZXlfaW5mOwogCWlu
+dCByYyA9IC1FTk9UVFk7IC8qIHN0cmFuZ2UgZXJyb3IgLSBidXQgdGhlIHByZWNlZGVudCAqLwog
+CXVuc2lnbmVkIGludCB4aWQ7CiAJc3RydWN0IGNpZnNGaWxlSW5mbyAqcFNNQkZpbGUgPSBmaWxl
+cC0+cHJpdmF0ZV9kYXRhOwpAQCAtMjcwLDYgKzI3MSwzNCBAQCBsb25nIGNpZnNfaW9jdGwoc3Ry
+dWN0IGZpbGUgKmZpbGVwLCB1bnNpZ25lZCBpbnQgY29tbWFuZCwgdW5zaWduZWQgbG9uZyBhcmcp
+CiAJCQllbHNlCiAJCQkJcmMgPSAtRU9QTk9UU1VQUDsKIAkJCWJyZWFrOworCQljYXNlIENJRlNf
+RFVNUF9LRVk6CisJCQljaWZzX2RiZyhWRlMsICJpb2N0bCBkdW1wa2V5XG4iKTsgLyogQkIgUkVN
+T1ZFTUUgKi8KKwkJCWlmIChwU01CRmlsZSA9PSBOVUxMKQorCQkJCWJyZWFrOworCQkJaWYgKCFj
+YXBhYmxlKENBUF9TWVNfQURNSU4pKSB7CisJCQkJcmMgPSAtRUFDQ0VTOworCQkJCWJyZWFrOwor
+CQkJfQorCQkJdGNvbiA9IHRsaW5rX3Rjb24ocFNNQkZpbGUtPnRsaW5rKTsKKwkJCWlmICghc21i
+M19lbmNyeXB0aW9uX3JlcXVpcmVkKHRjb24pKSB7CisJCQkJcmMgPSAtRU9QTk9UU1VQUDsKKwkJ
+CQlicmVhazsKKwkJCX0KKwkJCXBrZXlfaW5mLmNpcGhlcl90eXBlID0KKwkJCQlsZTE2X3RvX2Nw
+dSh0Y29uLT5zZXMtPnNlcnZlci0+Y2lwaGVyX3R5cGUpOworCQkJcGtleV9pbmYuU3VpZCA9IHRj
+b24tPnNlcy0+U3VpZDsKKwkJCW1lbWNweShwa2V5X2luZi5hdXRoX2tleSwgdGNvbi0+c2VzLT5h
+dXRoX2tleS5yZXNwb25zZSwKKwkJCQkJMTYgLyogU01CMl9OVExNVjJfU0VTU0tFWV9TSVpFICov
+KTsKKwkJCW1lbWNweShwa2V5X2luZi5zbWIzZGVjcnlwdGlvbmtleSwKKwkJCSAgICAgIHRjb24t
+PnNlcy0+c21iM2RlY3J5cHRpb25rZXksIFNNQjNfU0lHTl9LRVlfU0laRSk7CisJCQltZW1jcHko
+cGtleV9pbmYuc21iM2VuY3J5cHRpb25rZXksCisJCQkgICAgICB0Y29uLT5zZXMtPnNtYjNlbmNy
+eXB0aW9ua2V5LCBTTUIzX1NJR05fS0VZX1NJWkUpOworCQkJaWYgKGNvcHlfdG9fdXNlcigodm9p
+ZCBfX3VzZXIgKilhcmcsICZwa2V5X2luZiwKKwkJCQkJc2l6ZW9mKHN0cnVjdCBzbWIzX2tleV9k
+ZWJ1Z19pbmZvKSkpCisJCQkJcmMgPSAtRUZBVUxUOworCQkJZWxzZQorCQkJCXJjID0gMDsKKwkJ
+CWJyZWFrOwogCQlkZWZhdWx0OgogCQkJY2lmc19kYmcoRllJLCAidW5zdXBwb3J0ZWQgaW9jdGxc
+biIpOwogCQkJYnJlYWs7Ci0tIAoyLjIwLjEKCg==
+--00000000000071b6230592f6b96e--
 
