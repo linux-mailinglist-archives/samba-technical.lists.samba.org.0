@@ -2,68 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52D52B8E40
-	for <lists+samba-technical@lfdr.de>; Fri, 20 Sep 2019 12:06:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FD19B9666
+	for <lists+samba-technical@lfdr.de>; Fri, 20 Sep 2019 19:15:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Ins2TSKeYgQuuE+zqzLA/MBqsHxtlvLHMg+kDG21zGY=; b=1UFj1N8JePkBPTtuC4nNmDHvRE
-	7wmitjYz0gerzd4C3+mEQQPeR/4xY/OdxORFXPzXJ/MYGKHYdLLf8ZA/9sf+ZINFqg4ihf0m9jsZg
-	aXsBR/cOIlhb+YOf43w4AcW0DogcVrG9IB860QJaQquCF4hGxkifdT0TgX7ghVwP4AGXv49d3fMru
-	7zGfNn4O7XUr8YX/FwXXeBhTCMBjvwfaAP4UVgJxqWkGD0ExnDn1pHmzRwUXzYICweuxMn4ZTxuyE
-	vM29+t/QmOU6sKjSGhEJasNgqaW+CfHk8X4y0KoMJu5spOSwmumgCGZHSnBAqFaaoxOJ2sIn24X77
-	ul3w8ozQ==;
-Received: from localhost ([::1]:26380 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=ESelHwgO3+2i5rz/QsN8eVcv4qgUjVwoX52Nxx4zS84=; b=XoTJgPjv3JLOJ4wOttWZEo/ezq
+	SL+b8JLt7qb8tv9PlfVq2LbjrfTFsyCKgRofO00cn7fWbY3o9yerSoyrGEDp92rkpzBIXktzRW1WE
+	Kr8tJonAMB1c40oU4251xLqgj0zgel5Z+Ovzgsc4dgCeZf2Ej7O8tFZG3WKUsx3a+0b00TTGNcGnT
+	Ns1qqG1Ms+aiyhsZjSRI8AzMoCodczVpRsuELm3bqYKa0Ynjg04+4W0pmsaMhF4v4SBORQ6Fo957q
+	jLxKspaQ95HBhPBpnXeAENQIovfXr6fNiJyuGdekJbYVx2LqHQqmWIJxj+S0bhpYOq7f8/kSzVa6N
+	LV3CeP8w==;
+Received: from localhost ([::1]:46348 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iBFnN-007BUd-9A; Fri, 20 Sep 2019 10:05:45 +0000
-Received: from mx.cjr.nz ([51.158.111.142]:34814) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iBFnH-007BUT-SM
- for samba-technical@lists.samba.org; Fri, 20 Sep 2019 10:05:43 +0000
-Received: from authenticated-user (mx.cjr.nz [51.158.111.142])
- (Authenticated sender: pc)
- by mx.cjr.nz (Postfix) with ESMTPSA id 46FA580C01;
- Fri, 20 Sep 2019 10:05:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz; s=dkim;
- t=1568973936;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Ins2TSKeYgQuuE+zqzLA/MBqsHxtlvLHMg+kDG21zGY=;
- b=HQiIlFXvSGJ9bvFAHnEJa5A93NGyhuDVMhBAG1FLanJ9+yKTI0LazbNZFW6ApR3HAAfX9t
- e3RP4Y8t75bopox2k/lc4kpQyWFS0GvlQbC2vd6c2gq3zzZhLYqgkDQOFGNZCUCXFX70OK
- gQLQJBI9QH2/gKG8kZOIbKogYT5cie15o3hxgq8RrhTfY1fHH0zIUqCPR9XE01BDZSEq3l
- hmu5MLN5JiIz2zAD0IcDWU4fbdIkLBV9yF7QOctU+q9L8ihJnYaSxH8IcpR5a8ZCDDg7vD
- gAbl636P8ZgOIP1i4EPVW7vlR3VTi6iI0eG6qHlTKRgRA642YbvvWMs2s/Obiw==
-To: linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
- linux-cifs@vger.kernel.org, samba-technical@lists.samba.org, "David S.
- Miller" <davem@davemloft.net>, Steve French <smfrench@gmail.com>
-Subject: Re: [PATCH v2 1/3] cifs: Add support for root file systems
-In-Reply-To: <20190919152116.27076-1-pc@cjr.nz>
-References: <20190716220452.3382-1-paulo@paulo.ac>
- <20190919152116.27076-1-pc@cjr.nz>
-Date: Fri, 20 Sep 2019 07:04:06 -0300
-Message-ID: <8736gr2six.fsf@cjr.nz>
+	id 1iBMUF-007GiJ-Eb; Fri, 20 Sep 2019 17:14:27 +0000
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:40658) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iBMUA-007GiC-GQ
+ for samba-technical@lists.samba.org; Fri, 20 Sep 2019 17:14:25 +0000
+Received: by mail-lf1-x143.google.com with SMTP id d17so5566806lfa.7
+ for <samba-technical@lists.samba.org>; Fri, 20 Sep 2019 10:14:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=ESelHwgO3+2i5rz/QsN8eVcv4qgUjVwoX52Nxx4zS84=;
+ b=hjKqmRJCPl40qD7zxg2LKEsqEBNkD20wHn7YdPpTvX5yP4s5YwEBKSL6akQAEyLQmJ
+ KTF5b4K00ibaDFdf+tzJ7KUcgtf/FweY+oNfoIKvoIx3yoF5sQjP4REJIKrFY9AMSO+Y
+ tcCDebC04dzdb603NNXd/iPiiVQsHvJdE0+/aG4TCoAQW8aTQSRpRCsbA4YDj2g89a4r
+ Ai0AWM4AKK8126fb8H39kf5pelIEvaZipvFqWwTj3CQpvLoRcEitNyQMn0xfsBN+a8gk
+ XoABSLooJAqql6eEXuEuVpziMX8KRSWqkIQuYfAjawlubyo+PVhUSUSL5T1+Xn6hvL4d
+ i5bg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=ESelHwgO3+2i5rz/QsN8eVcv4qgUjVwoX52Nxx4zS84=;
+ b=Jm26UxirSw05bwgwtBfGB0BhoPmV6LxYvkEr001lGGm58dfEAKp+WyBDydxAuH1gpd
+ J6vQz0B/oA6GG5W9XLLSipjsr2o6CxYu5+jIiEFe26MEbSGGCSDlHRCBLyqkS5Ups9NU
+ arpJNFeORREMS64rfGGHms4KYhZtdRGwEXjKgVLwzAF+hjBwyUqr9Cheg8cG+BmYfNI2
+ QwWV3HlyKrf0QjemVbWrEsl6mUPFQZljfQV1n/txsfAQYs0wzpq9e6yHYvuXHdm1lkmX
+ iUmRv8KL/ESxpbbny4bw45BCsG/r3hDmXVlmjcXrdX4W62+pFRGZmi29GGbqcCrt6vrY
+ nmpA==
+X-Gm-Message-State: APjAAAXU5KbBTZCsdcDhEurqNi11bmuYFz6C2wMpf2kShLMS7ccBAgY9
+ ejEwJh6LZSP4eDdvZCgzHjruQIzzPhu+27qt2Q==
+X-Google-Smtp-Source: APXvYqxSS//pQQ+Tt4bM3mO16/k+oliOsClZKficPGR4VWE8Mb1aaCigHd1+4k9l+jzr2O3qSeQ1gmG1Mr5Pm1qEhYI=
+X-Received: by 2002:ac2:4308:: with SMTP id l8mr9201715lfh.25.1568999660621;
+ Fri, 20 Sep 2019 10:14:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz;
- s=dkim; t=1568973936; h=from:from:sender:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Ins2TSKeYgQuuE+zqzLA/MBqsHxtlvLHMg+kDG21zGY=;
- b=d5hvI/vrK5+fjiRA3B6UvBReH0gSktp65GgjBG11y05GGTgctQp+sey17Utou6dJmkFG/d
- LPA52E458xYgbVpnALCwU/kBuj5ZVFHt0KtWqgfjUc0ajgDMqZtczVztP+bB1p+bsKxuOZ
- fSl9MIqzs8Z4ADD6FCY9KaRevFT6lCEm99fsok46dHzjfhr35R5ZRx42C19Lzw+Z5v/vRz
- H8lk+e0F64VcgnDFGwBqse1xnwK1d88DIuLzLQgLeWKD0fvdfEm4Fq9DDPIlsD5Ala3UoE
- 6EPfEuznXiCSV2hJNR/Eu831wqsMM5Xl5zLjmy79w7ld5bwwdyvbT2G+6NIdtw==
-ARC-Seal: i=1; s=dkim; d=cjr.nz; t=1568973936; a=rsa-sha256; cv=none;
- b=eM0lxNtzOEjwskAm5TldDSBc1eqyNpVHMoqait7Y3FeAXIJ3wjcgaDCIFQCgPQEOnXkeAK
- ZjynmpkDE6c8bGTX6UxxBDacrr7t0zLVPx7atc6e7mGojetcAl+FdKN7QPzc6tpasdFHBC
- FU8S2DJOiQrnxmYFic/GOqMc8Itgnx5JpBM2snkGsiFCss3bVzJap8ZhT5EtFojIr1dv6j
- Jv5V6LWBAznuELZuAfQMbsn28WYXmEloXX9KAADuMfBMi0fdhqmaKQz8yMo5DBwy9Fhm/I
- zEMPPN3wioqU2PtB9Hpr/AmRXGSOb21Z6WLxpU6cflr4gn9Cyhfo8X/hh3y9Jg==
-ARC-Authentication-Results: i=1; mx.cjr.nz;
- auth=pass smtp.auth=pc smtp.mailfrom=pc@cjr.nz
+References: <CAH2r5mvcRuSihH58GgrzXTAHuXnQ9a0N-d8AkLLOigQrqincKg@mail.gmail.com>
+ <CAH2r5mvAw3ShBpy39OodU8EgXqR0rFBmAk0TXJbug1N22R8o4w@mail.gmail.com>
+In-Reply-To: <CAH2r5mvAw3ShBpy39OodU8EgXqR0rFBmAk0TXJbug1N22R8o4w@mail.gmail.com>
+Date: Fri, 20 Sep 2019 10:14:09 -0700
+Message-ID: <CAKywueQW84FxiG1QEmWSJdJiUAiVbYr+0hYVPc4ypW8OAtTZYQ@mail.gmail.com>
+Subject: Re: [SMB3][PATCH] dump encryption keys to allow wireshark debugging
+ of encrypted
+To: Steve French <smfrench@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,45 +71,75 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Paulo Alcantara <pc@cjr.nz>
-Cc: Aurelien Aptel <aaptel@suse.com>
+From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Shilovsky <pavel.shilovsky@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-"Paulo Alcantara (SUSE)" <pc@cjr.nz> writes:
+Thanks, this is very useful functionality! A couple comments below.
 
-> Introduce a new CONFIG_CIFS_ROOT option to handle root file systems
-> over a SMB share.
+kernel patch:
+
++ cifs_dbg(VFS, "ioctl dumpkey\n"); /* BB REMOVEME */
+
+please remove this or change to FYI.
+
+user space patch:
+
++ if (keys_info.cipher_type =3D=3D 1)
++ printf("CCM encryption");
++ else if (keys_info.cipher_type =3D=3D 2)
++ printf("GCM encryption");
++ else if (keys_info.cipher_type =3D=3D 0)
++ printf("SMB3.0 encryption");
+^^^
+SMB3.0 encryption is CCM, so, let's not confuse users and print "CCM
+encryption" for both cipher_type values of 0 and 1.
+
+
+Best regards,
+Pavel Shilovskiy
+
+=D0=BF=D1=82, 20 =D1=81=D0=B5=D0=BD=D1=82. 2019 =D0=B3. =D0=B2 00:20, Steve=
+ French via samba-technical
+<samba-technical@lists.samba.org>:
 >
-> In order to mount the root file system during the init process, make
-> cifs.ko perform non-blocking socket operations while mounting and
-> accessing it.
+> And updated patch for cifs-utils ("smbinfo keys <filename>")
 >
-> Signed-off-by: Paulo Alcantara (SUSE) <pc@cjr.nz>
-> Signed-off-by: Aurelien Aptel <aaptel@suse.com>
-> ---
->  Documentation/filesystems/cifs/cifsroot.txt | 97 +++++++++++++++++++++
->  fs/cifs/Kconfig                             |  8 ++
->  fs/cifs/Makefile                            |  2 +
->  fs/cifs/cifsglob.h                          |  2 +
->  fs/cifs/cifsroot.c                          | 94 ++++++++++++++++++++
->  fs/cifs/connect.c                           | 17 +++-
->  include/linux/root_dev.h                    |  1 +
->  7 files changed, 218 insertions(+), 3 deletions(-)
->  create mode 100644 Documentation/filesystems/cifs/cifsroot.txt
->  create mode 100644 fs/cifs/cifsroot.c
-
-Hi David,
-
-This patch has already been merged into Linus tree. The other two (2/3
-and 3/3) still need to be reviewed.
-
-I'm not sure how this works when series touch multiple subsystems --
-that is, these changes should go through your tree or Steve's?
-
-Please let me you know if you need anything else.
-
-Thanks!
-Paulo
+>
+> On Fri, Sep 20, 2019 at 2:07 AM Steve French <smfrench@gmail.com> wrote:
+> >
+> > kernel patch updated to check if encryption is enabled
+> >
+> > In order to debug certain problems it is important to be able
+> > to decrypt network traces (e.g. wireshark) but to do this we
+> > need to be able to dump out the encryption/decryption keys.
+> > Dumping them to an ioctl is safer than dumping then to dmesg,
+> > (and better than showing all keys in a pseudofile).
+> >
+> > Restrict this to root (CAP_SYS_ADMIN), and only for a mount
+> > that this admin has access to.
+> >
+> > Sample smbinfo output:
+> > SMB3.0 encryption
+> > Session Id:   0x82d2ec52
+> > Session Key:  a5 6d 81 d0 e c1 ca e1 d8 13 aa 20 e8 f2 cc 71
+> > Server Encryption Key:  1a c3 be ba 3d fc dc 3c e bc 93 9e 50 9e 19 c1
+> > Server Decryption Key:  e0 d4 d9 43 1b a2 1b e3 d8 76 77 49 56 f7 20 88
+> >
+> >
+> > --
+> > Thanks,
+> >
+> > Steve
+>
+>
+>
+> --
+> Thanks,
+>
+> Steve
 
