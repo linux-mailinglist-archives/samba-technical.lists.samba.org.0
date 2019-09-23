@@ -2,43 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6232BB14C
-	for <lists+samba-technical@lfdr.de>; Mon, 23 Sep 2019 11:22:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC2FFBB7F6
+	for <lists+samba-technical@lfdr.de>; Mon, 23 Sep 2019 17:32:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=wMesswrqOlDV+Zc6OJS5KsF6T92r6iymcq+YTFzL54Q=; b=m3wRt/aDrXjaeUD1BfFIVoczP1
-	AQGERyJ3Tv3OWWr9kWWltdo//WXb1raJfJQrwDsPqazMg4sf0UvxGigblZ1x4Zzg+U3XVRDzCY28t
-	c4SKaQp17JpYa0YLkssMfWWuDME8V8aMKaESMomXMLlGYZCW1LI3SQ8MLw+gO+vn5wGkb9JtVpCNP
-	ReFhKp2doshLEfWuvJQ2AjadIf+WJVZHfD4LrSygfzZ0cRm7hjShTdL3vS+3283b3Gt+OeP7y58xU
-	tJuz92UtQX8YoYM/MLflVn8jZnTeitwlPOKmHFd/nx4nNqt5T7vFslc3zCpBb9pT2e6JM+B81AkBb
-	5AV6MctQ==;
-Received: from localhost ([::1]:48450 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=BJr2ApeLqooRCsLRyQovTbN8aXzj+h+zgw1QdVVXDNs=; b=o0CJ+ZhX4Zp1KiwmudEXvrV1oF
+	JqZ4m7alo52AkUtSjyd93JQeeEsMW5d5bn0Buf7O6UjQNfHvUBOUO3nEDZ7Su53aXzm/tpl4M1ZtT
+	7cxtzChSt0LoTNkvQVdkdfZIegUfMFhJoirm1h/6qc/6h4Wwgi9BcmqRIgBxKu1NdRDNIUEPEfsY6
+	nNHoU3gymJGfhaQB9hc7/cQj3wkAJ4MlXZIHBbROqKYV4i5h8jgihf1geAVXy/UtEAojcfDj5J+vu
+	lHWA5iOaakzLhUKCOLW+FQBCVirJLKSaXI+Omnk/eKpvLWEXe6AL3o9jET9E9ExHJATG8wmlocU+0
+	zpLG0PRA==;
+Received: from localhost ([::1]:57728 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iCKXO-007shD-5S; Mon, 23 Sep 2019 09:21:42 +0000
-Received: from devianza.investici.org ([198.167.222.108]:33893) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iCKXI-007sh6-Ul
- for samba-technical@lists.samba.org; Mon, 23 Sep 2019 09:21:39 +0000
-Received: from mx2.investici.org (localhost [127.0.0.1])
- by devianza.investici.org (Postfix) with ESMTP id 96FCEE0620;
- Mon, 23 Sep 2019 09:21:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cryptolab.net;
- s=stigmate; t=1569230491;
- bh=wMesswrqOlDV+Zc6OJS5KsF6T92r6iymcq+YTFzL54Q=;
- h=Subject:From:To:Cc:Date:From;
- b=iDS/NDSpn6eFC5O27Q1KsCLzUvUSwmOFhD2rPjtDToIeBeLpZxE9Fv1rSt8efFqxC
- Zfnre+hg/0t5M4HwotIxtRv9ia3jErTd6P2m5gfRt7vg5NUVtP5dD3T+eEs61DaxAH
- twKMqVrzS9EV8qDcox8A6Ncn5VdNrolnMUwPoOYg=
-Received: from [198.167.222.108] (mx2.investici.org [198.167.222.108])
- (Authenticated sender: anoopcs@autistici.org) by localhost (Postfix) with
- ESMTPSA id ECB8AE061F; Mon, 23 Sep 2019 09:21:29 +0000 (UTC)
-Message-ID: <7024afc6236a656134f867288cdb37579425e3ee.camel@cryptolab.net>
-Subject: Implementing SMB_VFS_FCNTL in Samba
-To: samba-technical <samba-technical@lists.samba.org>
-Date: Mon, 23 Sep 2019 14:51:24 +0530
-Content-Type: multipart/mixed; boundary="=-52TP3MfM41tegfE4zTfX"
-User-Agent: Evolution 3.32.4 (3.32.4-1.fc30) 
+	id 1iCQJ3-00821n-2U; Mon, 23 Sep 2019 15:31:17 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64058) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iCQIx-00821Y-5I
+ for samba-technical@lists.samba.org; Mon, 23 Sep 2019 15:31:13 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=BJr2ApeLqooRCsLRyQovTbN8aXzj+h+zgw1QdVVXDNs=; b=cu9kuy/Vz0jC8t/ewQTQ6Ex+ww
+ JfJns3dzeqMtgKto6DyAISxyeOdRGWnXfoOfAVlAcJlar39MLcbxk4VIj1QQdWQVEDzmI3pBq50OX
+ cmkCbW/Wi0iOVoqegCTGfwycQmTFJVjIlfZSRsD9PH7AE3ZO5q1Ge38yzPkz4RgZ6UXE=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iCQIv-0002Xi-ER; Mon, 23 Sep 2019 15:31:09 +0000
+Date: Mon, 23 Sep 2019 08:31:07 -0700
+To: Anoop C S <anoopcs@cryptolab.net>
+Subject: Re: Implementing SMB_VFS_FCNTL in Samba
+Message-ID: <20190923153107.GA4325@jeremy-ThinkPad-X1>
+References: <7024afc6236a656134f867288cdb37579425e3ee.camel@cryptolab.net>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <7024afc6236a656134f867288cdb37579425e3ee.camel@cryptolab.net>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,203 +50,248 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Anoop C S via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Anoop C S <anoopcs@cryptolab.net>
-Cc: Jeremy Allison <jra@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+On Mon, Sep 23, 2019 at 02:51:24PM +0530, Anoop C S wrote:
+> Hi all,
+> 
+> I am attaching a patch as an attempt to implement SMB_VFS_FCNTL(for a
+> background see https://bugzilla.samba.org/show_bug.cgi?id=14060). But I
+> have the following question.
+> 
+> int fcntl(int fd, int cmd, ... /* arg */ );
+> 
+> As per man page, fcntl(2) system call can accept a third optional
+> argument. If present it can be of type int, struct flock *, struct
+> f_owner_ex * or uint64_t *. Our current SMB_VFS_LOCK and
+> SMB_VFS_GETLOCK takes care of "Advisory record locking" and "Open file
+> description locks" commands which requires third argument of type
+> struct flock *. Other important fact here to notice is that in most
+> cases the required third argument type is int. The patch I have
+> prepared right now assumes third argument type to be int. 
+> 
+> So should we rename the call to something else(keeping third argument
+> as int) or change the implementation to consider optional third
+> argument as variable?
 
---=-52TP3MfM41tegfE4zTfX
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+I think we need a varargs argument here like the real fcntl definition.
 
-Hi all,
-
-I am attaching a patch as an attempt to implement SMB_VFS_FCNTL(for a
-background see https://bugzilla.samba.org/show_bug.cgi?id=14060). But I
-have the following question.
-
-int fcntl(int fd, int cmd, ... /* arg */ );
-
-As per man page, fcntl(2) system call can accept a third optional
-argument. If present it can be of type int, struct flock *, struct
-f_owner_ex * or uint64_t *. Our current SMB_VFS_LOCK and
-SMB_VFS_GETLOCK takes care of "Advisory record locking" and "Open file
-description locks" commands which requires third argument of type
-struct flock *. Other important fact here to notice is that in most
-cases the required third argument type is int. The patch I have
-prepared right now assumes third argument type to be int. 
-
-So should we rename the call to something else(keeping third argument
-as int) or change the implementation to consider optional third
-argument as variable?
-
-Thanks,
-Anoop C S.
-
---=-52TP3MfM41tegfE4zTfX
-Content-Disposition: attachment; filename="0001-s3-VFS-Add-SMB_VFS_FCNTL.patch"
-Content-Type: text/x-patch; name="0001-s3-VFS-Add-SMB_VFS_FCNTL.patch"; charset="UTF-8"
-Content-Transfer-Encoding: base64
-
-RnJvbSAwYTEzYzNmNDI3YmNkN2E4Y2U4OGNjZjM3YTUzZjEzYjU2ZTJhNjc4IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBBbm9vcCBDIFMgPGFub29wY3NAcmVkaGF0LmNvbT4KRGF0ZTog
-U2F0LCAyMSBTZXAgMjAxOSAxOToxMToxOSArMDUzMApTdWJqZWN0OiBbUEFUQ0hdIHMzOiBWRlM6
-IEFkZCBTTUJfVkZTX0ZDTlRMKCkKClNpZ25lZC1vZmYtYnk6IEFub29wIEMgUyA8YW5vb3Bjc0By
-ZWRoYXQuY29tPgotLS0KIGV4YW1wbGVzL1ZGUy9za2VsX29wYXF1ZS5jICAgICAgICAgICAgfCAg
-OCArKysrKysrKwogZXhhbXBsZXMvVkZTL3NrZWxfdHJhbnNwYXJlbnQuYyAgICAgICB8ICA3ICsr
-KysrKysKIHNvdXJjZTMvaW5jbHVkZS9zbWJwcm9maWxlLmggICAgICAgICAgfCAgMSArCiBzb3Vy
-Y2UzL2luY2x1ZGUvdmZzLmggICAgICAgICAgICAgICAgIHwgIDcgKysrKysrKwogc291cmNlMy9p
-bmNsdWRlL3Zmc19tYWNyb3MuaCAgICAgICAgICB8ICA1ICsrKysrCiBzb3VyY2UzL21vZHVsZXMv
-dmZzX2RlZmF1bHQuYyAgICAgICAgIHwgMTMgKysrKysrKysrKysrKwogc291cmNlMy9tb2R1bGVz
-L3Zmc19ub3RfaW1wbGVtZW50ZWQuYyB8ICA4ICsrKysrKysrCiBzb3VyY2UzL3NtYmQvdmZzLmMg
-ICAgICAgICAgICAgICAgICAgIHwgIDcgKysrKysrKwogOCBmaWxlcyBjaGFuZ2VkLCA1NiBpbnNl
-cnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvZXhhbXBsZXMvVkZTL3NrZWxfb3BhcXVlLmMgYi9leGFt
-cGxlcy9WRlMvc2tlbF9vcGFxdWUuYwppbmRleCBjMDNhNDJmZWUwNC4uZmViOTBjMzE1MzMgMTAw
-NjQ0Ci0tLSBhL2V4YW1wbGVzL1ZGUy9za2VsX29wYXF1ZS5jCisrKyBiL2V4YW1wbGVzL1ZGUy9z
-a2VsX29wYXF1ZS5jCkBAIC00NDIsNiArNDQyLDEzIEBAIHN0YXRpYyBpbnQgc2tlbF9rZXJuZWxf
-ZmxvY2soc3RydWN0IHZmc19oYW5kbGVfc3RydWN0ICpoYW5kbGUsCiAJcmV0dXJuIC0xOwogfQog
-CitzdGF0aWMgaW50IHNrZWxfZmNudGwoc3RydWN0IHZmc19oYW5kbGVfc3RydWN0ICpoYW5kbGUs
-CisJCSAgICAgIHN0cnVjdCBmaWxlc19zdHJ1Y3QgKmZzcCwgaW50IGNtZCwgaW50IGNtZF9hcmcp
-Cit7CisJZXJybm8gPSBFTk9TWVM7CisJcmV0dXJuIC0xOworfQorCiBzdGF0aWMgaW50IHNrZWxf
-bGludXhfc2V0bGVhc2Uoc3RydWN0IHZmc19oYW5kbGVfc3RydWN0ICpoYW5kbGUsCiAJCQkgICAg
-ICAgc3RydWN0IGZpbGVzX3N0cnVjdCAqZnNwLCBpbnQgbGVhc2V0eXBlKQogewpAQCAtMTA4OSw2
-ICsxMDk2LDcgQEAgc3RhdGljIHN0cnVjdCB2ZnNfZm5fcG9pbnRlcnMgc2tlbF9vcGFxdWVfZm5z
-ID0gewogCS5mYWxsb2NhdGVfZm4gPSBza2VsX2ZhbGxvY2F0ZSwKIAkubG9ja19mbiA9IHNrZWxf
-bG9jaywKIAkua2VybmVsX2Zsb2NrX2ZuID0gc2tlbF9rZXJuZWxfZmxvY2ssCisJLmZjbnRsX2Zu
-ID0gc2tlbF9mY250bCwKIAkubGludXhfc2V0bGVhc2VfZm4gPSBza2VsX2xpbnV4X3NldGxlYXNl
-LAogCS5nZXRsb2NrX2ZuID0gc2tlbF9nZXRsb2NrLAogCS5zeW1saW5rYXRfZm4gPSBza2VsX3N5
-bWxpbmthdCwKZGlmZiAtLWdpdCBhL2V4YW1wbGVzL1ZGUy9za2VsX3RyYW5zcGFyZW50LmMgYi9l
-eGFtcGxlcy9WRlMvc2tlbF90cmFuc3BhcmVudC5jCmluZGV4IDY1NmM5MzMzMzhhLi42ZDg4ZjA4
-YWU1OSAxMDA2NDQKLS0tIGEvZXhhbXBsZXMvVkZTL3NrZWxfdHJhbnNwYXJlbnQuYworKysgYi9l
-eGFtcGxlcy9WRlMvc2tlbF90cmFuc3BhcmVudC5jCkBAIC01NDcsNiArNTQ3LDEyIEBAIHN0YXRp
-YyBpbnQgc2tlbF9rZXJuZWxfZmxvY2soc3RydWN0IHZmc19oYW5kbGVfc3RydWN0ICpoYW5kbGUs
-CiAJcmV0dXJuIFNNQl9WRlNfTkVYVF9LRVJORUxfRkxPQ0soaGFuZGxlLCBmc3AsIHNoYXJlX21v
-ZGUsIGFjY2Vzc19tYXNrKTsKIH0KIAorc3RhdGljIGludCBza2VsX2ZjbnRsKHN0cnVjdCB2ZnNf
-aGFuZGxlX3N0cnVjdCAqaGFuZGxlLAorCQkgICAgICBzdHJ1Y3QgZmlsZXNfc3RydWN0ICpmc3As
-IGludCBjbWQsIGludCBjbWRfYXJnKQoreworCXJldHVybiBTTUJfVkZTX05FWFRfRkNOVEwoaGFu
-ZGxlLCBmc3AsIGNtZCwgY21kX2FyZyk7Cit9CisKIHN0YXRpYyBpbnQgc2tlbF9saW51eF9zZXRs
-ZWFzZShzdHJ1Y3QgdmZzX2hhbmRsZV9zdHJ1Y3QgKmhhbmRsZSwKIAkJCSAgICAgICBzdHJ1Y3Qg
-ZmlsZXNfc3RydWN0ICpmc3AsIGludCBsZWFzZXR5cGUpCiB7CkBAIC0xMzc0LDYgKzEzODAsNyBA
-QCBzdGF0aWMgc3RydWN0IHZmc19mbl9wb2ludGVycyBza2VsX3RyYW5zcGFyZW50X2ZucyA9IHsK
-IAkuZmFsbG9jYXRlX2ZuID0gc2tlbF9mYWxsb2NhdGUsCiAJLmxvY2tfZm4gPSBza2VsX2xvY2ss
-CiAJLmtlcm5lbF9mbG9ja19mbiA9IHNrZWxfa2VybmVsX2Zsb2NrLAorCS5mY250bF9mbiA9IHNr
-ZWxfZmNudGwsCiAJLmxpbnV4X3NldGxlYXNlX2ZuID0gc2tlbF9saW51eF9zZXRsZWFzZSwKIAku
-Z2V0bG9ja19mbiA9IHNrZWxfZ2V0bG9jaywKIAkuc3ltbGlua2F0X2ZuID0gc2tlbF9zeW1saW5r
-YXQsCmRpZmYgLS1naXQgYS9zb3VyY2UzL2luY2x1ZGUvc21icHJvZmlsZS5oIGIvc291cmNlMy9p
-bmNsdWRlL3NtYnByb2ZpbGUuaAppbmRleCA0ODlhNjEzZTNkZi4uMjRkYTk5ZGNkMjAgMTAwNjQ0
-Ci0tLSBhL3NvdXJjZTMvaW5jbHVkZS9zbWJwcm9maWxlLmgKKysrIGIvc291cmNlMy9pbmNsdWRl
-L3NtYnByb2ZpbGUuaApAQCAtODIsNiArODIsNyBAQCBzdHJ1Y3QgdGV2ZW50X2NvbnRleHQ7CiAJ
-U01CUFJPRklMRV9TVEFUU19CQVNJQyhzeXNjYWxsX2tlcm5lbF9mbG9jaykgXAogCVNNQlBST0ZJ
-TEVfU1RBVFNfQkFTSUMoc3lzY2FsbF9saW51eF9zZXRsZWFzZSkgXAogCVNNQlBST0ZJTEVfU1RB
-VFNfQkFTSUMoc3lzY2FsbF9mY250bF9nZXRsb2NrKSBcCisJU01CUFJPRklMRV9TVEFUU19CQVNJ
-QyhzeXNjYWxsX2ZjbnRsKSBcCiAJU01CUFJPRklMRV9TVEFUU19CQVNJQyhzeXNjYWxsX3JlYWRs
-aW5rYXQpIFwKIAlTTUJQUk9GSUxFX1NUQVRTX0JBU0lDKHN5c2NhbGxfc3ltbGlua2F0KSBcCiAJ
-U01CUFJPRklMRV9TVEFUU19CQVNJQyhzeXNjYWxsX2xpbmthdCkgXApkaWZmIC0tZ2l0IGEvc291
-cmNlMy9pbmNsdWRlL3Zmcy5oIGIvc291cmNlMy9pbmNsdWRlL3Zmcy5oCmluZGV4IDQ3MTQ3ODIx
-ZmZkLi42ZTQ0NmQzYjMyYyAxMDA2NDQKLS0tIGEvc291cmNlMy9pbmNsdWRlL3Zmcy5oCisrKyBi
-L3NvdXJjZTMvaW5jbHVkZS92ZnMuaApAQCAtMjgxLDYgKzI4MSw3IEBACiAvKiBWZXJzaW9uIDQy
-IC0gTW92ZSBjaGFuZ2VfdG9fdXNlcigpIC0+IGNoYW5nZV90b191c2VyX2FuZF9zZXJ2aWNlKCkg
-Ki8KIC8qIFZlcnNpb24gNDIgLSBNb3ZlIGNoYW5nZV90b191c2VyX2J5X2ZzcCgpIC0+IGNoYW5n
-ZV90b191c2VyX2FuZF9zZXJ2aWNlX2J5X2ZzcCgpICovCiAvKiBWZXJzaW9uIDQyIC0gTW92ZSBb
-dW5dYmVjb21lX3VzZXIqKCkgLT4gW3VuXWJlY29tZV91c2VyX3dpdGhvdXRfc2VydmljZSooKSAq
-LworLyogVmVyc2lvbiA0MiAtIEFkZCBTTUJfVkZTX0ZDTlRMICovCiAKICNkZWZpbmUgU01CX1ZG
-U19JTlRFUkZBQ0VfVkVSU0lPTiA0MgogCkBAIC04MDcsNiArODA4LDggQEAgc3RydWN0IHZmc19m
-bl9wb2ludGVycyB7CiAJYm9vbCAoKmxvY2tfZm4pKHN0cnVjdCB2ZnNfaGFuZGxlX3N0cnVjdCAq
-aGFuZGxlLCBzdHJ1Y3QgZmlsZXNfc3RydWN0ICpmc3AsIGludCBvcCwgb2ZmX3Qgb2Zmc2V0LCBv
-ZmZfdCBjb3VudCwgaW50IHR5cGUpOwogCWludCAoKmtlcm5lbF9mbG9ja19mbikoc3RydWN0IHZm
-c19oYW5kbGVfc3RydWN0ICpoYW5kbGUsIHN0cnVjdCBmaWxlc19zdHJ1Y3QgKmZzcCwKIAkJCSAg
-ICAgICB1aW50MzJfdCBzaGFyZV9tb2RlLCB1aW50MzJfdCBhY2Nlc3NfbWFzayk7CisJaW50ICgq
-ZmNudGxfZm4pKHN0cnVjdCB2ZnNfaGFuZGxlX3N0cnVjdCAqaGFuZGxlLAorCQkJc3RydWN0IGZp
-bGVzX3N0cnVjdCAqZnNwLCBpbnQgY21kLCBpbnQgY21kX2FyZyk7CiAJaW50ICgqbGludXhfc2V0
-bGVhc2VfZm4pKHN0cnVjdCB2ZnNfaGFuZGxlX3N0cnVjdCAqaGFuZGxlLCBzdHJ1Y3QgZmlsZXNf
-c3RydWN0ICpmc3AsIGludCBsZWFzZXR5cGUpOwogCWJvb2wgKCpnZXRsb2NrX2ZuKShzdHJ1Y3Qg
-dmZzX2hhbmRsZV9zdHJ1Y3QgKmhhbmRsZSwgc3RydWN0IGZpbGVzX3N0cnVjdCAqZnNwLCBvZmZf
-dCAqcG9mZnNldCwgb2ZmX3QgKnBjb3VudCwgaW50ICpwdHlwZSwgcGlkX3QgKnBwaWQpOwogCWlu
-dCAoKnN5bWxpbmthdF9mbikoc3RydWN0IHZmc19oYW5kbGVfc3RydWN0ICpoYW5kbGUsCkBAIC0x
-MzQwLDYgKzEzNDMsOCBAQCBib29sIHNtYl92ZnNfY2FsbF9sb2NrKHN0cnVjdCB2ZnNfaGFuZGxl
-X3N0cnVjdCAqaGFuZGxlLAogaW50IHNtYl92ZnNfY2FsbF9rZXJuZWxfZmxvY2soc3RydWN0IHZm
-c19oYW5kbGVfc3RydWN0ICpoYW5kbGUsCiAJCQkgICAgICBzdHJ1Y3QgZmlsZXNfc3RydWN0ICpm
-c3AsIHVpbnQzMl90IHNoYXJlX21vZGUsCiAJCQkgICAgICB1aW50MzJfdCBhY2Nlc3NfbWFzayk7
-CitpbnQgc21iX3Zmc19jYWxsX2ZjbnRsKHN0cnVjdCB2ZnNfaGFuZGxlX3N0cnVjdCAqaGFuZGxl
-LAorCQkgICAgICAgc3RydWN0IGZpbGVzX3N0cnVjdCAqZnNwLCBpbnQgY21kLCBpbnQgY21kX2Fy
-Zyk7CiBpbnQgc21iX3Zmc19jYWxsX2xpbnV4X3NldGxlYXNlKHN0cnVjdCB2ZnNfaGFuZGxlX3N0
-cnVjdCAqaGFuZGxlLAogCQkJCXN0cnVjdCBmaWxlc19zdHJ1Y3QgKmZzcCwgaW50IGxlYXNldHlw
-ZSk7CiBib29sIHNtYl92ZnNfY2FsbF9nZXRsb2NrKHN0cnVjdCB2ZnNfaGFuZGxlX3N0cnVjdCAq
-aGFuZGxlLApAQCAtMTc3Myw2ICsxNzc4LDggQEAgYm9vbCB2ZnNfbm90X2ltcGxlbWVudGVkX2xv
-Y2sodmZzX2hhbmRsZV9zdHJ1Y3QgKmhhbmRsZSwgZmlsZXNfc3RydWN0ICpmc3AsIGludAogaW50
-IHZmc19ub3RfaW1wbGVtZW50ZWRfa2VybmVsX2Zsb2NrKHN0cnVjdCB2ZnNfaGFuZGxlX3N0cnVj
-dCAqaGFuZGxlLAogCQkJCSAgICAgc3RydWN0IGZpbGVzX3N0cnVjdCAqZnNwLAogCQkJCSAgICAg
-dWludDMyX3Qgc2hhcmVfbW9kZSwgdWludDMyX3QgYWNjZXNzX21hc2spOworaW50IHZmc19ub3Rf
-aW1wbGVtZW50ZWRfZmNudGwoc3RydWN0IHZmc19oYW5kbGVfc3RydWN0ICpoYW5kbGUsCisJCQkg
-ICAgICBzdHJ1Y3QgZmlsZXNfc3RydWN0ICpmc3AsIGludCBjbWQsIGludCBjbWRfYXJnKTsKIGlu
-dCB2ZnNfbm90X2ltcGxlbWVudGVkX2xpbnV4X3NldGxlYXNlKHN0cnVjdCB2ZnNfaGFuZGxlX3N0
-cnVjdCAqaGFuZGxlLAogCQkJCSAgICAgICBzdHJ1Y3QgZmlsZXNfc3RydWN0ICpmc3AsIGludCBs
-ZWFzZXR5cGUpOwogYm9vbCB2ZnNfbm90X2ltcGxlbWVudGVkX2dldGxvY2sodmZzX2hhbmRsZV9z
-dHJ1Y3QgKmhhbmRsZSwgZmlsZXNfc3RydWN0ICpmc3AsCmRpZmYgLS1naXQgYS9zb3VyY2UzL2lu
-Y2x1ZGUvdmZzX21hY3Jvcy5oIGIvc291cmNlMy9pbmNsdWRlL3Zmc19tYWNyb3MuaAppbmRleCA2
-ZDk1ZDg0MGUyNS4uZmM2ZDViZTU4OWMgMTAwNjQ0Ci0tLSBhL3NvdXJjZTMvaW5jbHVkZS92ZnNf
-bWFjcm9zLmgKKysrIGIvc291cmNlMy9pbmNsdWRlL3Zmc19tYWNyb3MuaApAQCAtMjg2LDYgKzI4
-NiwxMSBAQAogI2RlZmluZSBTTUJfVkZTX05FWFRfS0VSTkVMX0ZMT0NLKGhhbmRsZSwgZnNwLCBz
-aGFyZV9tb2RlLCBhY2Nlc3NfbWFzaykJXAogCXNtYl92ZnNfY2FsbF9rZXJuZWxfZmxvY2soKGhh
-bmRsZSktPm5leHQsIChmc3ApLCAoc2hhcmVfbW9kZSksIChhY2Nlc3NfbWFzaykpCiAKKyNkZWZp
-bmUgU01CX1ZGU19GQ05UTChmc3AsIGNtZCwgY21kX2FyZykgXAorCXNtYl92ZnNfY2FsbF9mY250
-bCgoZnNwKS0+Y29ubi0+dmZzX2hhbmRsZXMsIChmc3ApLCAoY21kKSwgKGNtZF9hcmcpKQorI2Rl
-ZmluZSBTTUJfVkZTX05FWFRfRkNOVEwoaGFuZGxlLCBmc3AsIGNtZCwgY21kX2FyZykgXAorCXNt
-Yl92ZnNfY2FsbF9mY250bCgoaGFuZGxlKS0+bmV4dCwgKGZzcCksIChjbWQpLCAoY21kX2FyZykp
-CisKICNkZWZpbmUgU01CX1ZGU19MSU5VWF9TRVRMRUFTRShmc3AsIGxlYXNldHlwZSkgXAogCXNt
-Yl92ZnNfY2FsbF9saW51eF9zZXRsZWFzZSgoZnNwKS0+Y29ubi0+dmZzX2hhbmRsZXMsIChmc3Ap
-LCAobGVhc2V0eXBlKSkKICNkZWZpbmUgU01CX1ZGU19ORVhUX0xJTlVYX1NFVExFQVNFKGhhbmRs
-ZSwgZnNwLCBsZWFzZXR5cGUpIFwKZGlmZiAtLWdpdCBhL3NvdXJjZTMvbW9kdWxlcy92ZnNfZGVm
-YXVsdC5jIGIvc291cmNlMy9tb2R1bGVzL3Zmc19kZWZhdWx0LmMKaW5kZXggZjQ4YTU5MGU1ZTcu
-LjRjZDI2NzQ3YzQ3IDEwMDY0NAotLS0gYS9zb3VyY2UzL21vZHVsZXMvdmZzX2RlZmF1bHQuYwor
-KysgYi9zb3VyY2UzL21vZHVsZXMvdmZzX2RlZmF1bHQuYwpAQCAtMjYwOSw2ICsyNjA5LDE4IEBA
-IHN0YXRpYyBpbnQgdmZzd3JhcF9rZXJuZWxfZmxvY2sodmZzX2hhbmRsZV9zdHJ1Y3QgKmhhbmRs
-ZSwgZmlsZXNfc3RydWN0ICpmc3AsCiAJcmV0dXJuIDA7CiB9CiAKK3N0YXRpYyBpbnQgdmZzd3Jh
-cF9mY250bCh2ZnNfaGFuZGxlX3N0cnVjdCAqaGFuZGxlLCBmaWxlc19zdHJ1Y3QgKmZzcCwgaW50
-IGNtZCwKKwkJCSBpbnQgY21kX2FyZykKK3sKKwlpbnQgcmVzdWx0OworCisJU1RBUlRfUFJPRklM
-RShzeXNjYWxsX2ZjbnRsKTsKKwlyZXN1bHQgPSBmY250bChmc3AtPmZoLT5mZCwgY21kLCBjbWRf
-YXJnKTsKKwlFTkRfUFJPRklMRShzeXNjYWxsX2ZjbnRsKTsKKworCXJldHVybiByZXN1bHQ7Cit9
-CisKIHN0YXRpYyBib29sIHZmc3dyYXBfZ2V0bG9jayh2ZnNfaGFuZGxlX3N0cnVjdCAqaGFuZGxl
-LCBmaWxlc19zdHJ1Y3QgKmZzcCwgb2ZmX3QgKnBvZmZzZXQsIG9mZl90ICpwY291bnQsIGludCAq
-cHR5cGUsIHBpZF90ICpwcGlkKQogewogCWJvb2wgcmVzdWx0OwpAQCAtMzUwMCw2ICszNTEyLDcg
-QEAgc3RhdGljIHN0cnVjdCB2ZnNfZm5fcG9pbnRlcnMgdmZzX2RlZmF1bHRfZm5zID0gewogCS5m
-YWxsb2NhdGVfZm4gPSB2ZnN3cmFwX2ZhbGxvY2F0ZSwKIAkubG9ja19mbiA9IHZmc3dyYXBfbG9j
-aywKIAkua2VybmVsX2Zsb2NrX2ZuID0gdmZzd3JhcF9rZXJuZWxfZmxvY2ssCisJLmZjbnRsX2Zu
-ID0gdmZzd3JhcF9mY250bCwKIAkubGludXhfc2V0bGVhc2VfZm4gPSB2ZnN3cmFwX2xpbnV4X3Nl
-dGxlYXNlLAogCS5nZXRsb2NrX2ZuID0gdmZzd3JhcF9nZXRsb2NrLAogCS5zeW1saW5rYXRfZm4g
-PSB2ZnN3cmFwX3N5bWxpbmthdCwKZGlmZiAtLWdpdCBhL3NvdXJjZTMvbW9kdWxlcy92ZnNfbm90
-X2ltcGxlbWVudGVkLmMgYi9zb3VyY2UzL21vZHVsZXMvdmZzX25vdF9pbXBsZW1lbnRlZC5jCmlu
-ZGV4IGUwZjM2YjlhNjMyLi40ZjcxMGNiNGNhNyAxMDA2NDQKLS0tIGEvc291cmNlMy9tb2R1bGVz
-L3Zmc19ub3RfaW1wbGVtZW50ZWQuYworKysgYi9zb3VyY2UzL21vZHVsZXMvdmZzX25vdF9pbXBs
-ZW1lbnRlZC5jCkBAIC00NDAsNiArNDQwLDEzIEBAIGludCB2ZnNfbm90X2ltcGxlbWVudGVkX2tl
-cm5lbF9mbG9jayhzdHJ1Y3QgdmZzX2hhbmRsZV9zdHJ1Y3QgKmhhbmRsZSwKIAlyZXR1cm4gLTE7
-CiB9CiAKK2ludCB2ZnNfbm90X2ltcGxlbWVudGVkX2ZjbnRsKHN0cnVjdCB2ZnNfaGFuZGxlX3N0
-cnVjdCAqaGFuZGxlLAorCQkJICAgICAgc3RydWN0IGZpbGVzX3N0cnVjdCAqZnNwLCBpbnQgY21k
-LCBpbnQgY21kX2FyZykKK3sKKwllcnJubyA9IEVOT1NZUzsKKwlyZXR1cm4gLTE7Cit9CisKIGlu
-dCB2ZnNfbm90X2ltcGxlbWVudGVkX2xpbnV4X3NldGxlYXNlKHN0cnVjdCB2ZnNfaGFuZGxlX3N0
-cnVjdCAqaGFuZGxlLAogCQkJCSAgICAgICBzdHJ1Y3QgZmlsZXNfc3RydWN0ICpmc3AsIGludCBs
-ZWFzZXR5cGUpCiB7CkBAIC0xMDkzLDYgKzExMDAsNyBAQCBzdGF0aWMgc3RydWN0IHZmc19mbl9w
-b2ludGVycyB2ZnNfbm90X2ltcGxlbWVudGVkX2ZucyA9IHsKIAkuZmFsbG9jYXRlX2ZuID0gdmZz
-X25vdF9pbXBsZW1lbnRlZF9mYWxsb2NhdGUsCiAJLmxvY2tfZm4gPSB2ZnNfbm90X2ltcGxlbWVu
-dGVkX2xvY2ssCiAJLmtlcm5lbF9mbG9ja19mbiA9IHZmc19ub3RfaW1wbGVtZW50ZWRfa2VybmVs
-X2Zsb2NrLAorCS5mY250bF9mbiA9IHZmc19ub3RfaW1wbGVtZW50ZWRfZmNudGwsCiAJLmxpbnV4
-X3NldGxlYXNlX2ZuID0gdmZzX25vdF9pbXBsZW1lbnRlZF9saW51eF9zZXRsZWFzZSwKIAkuZ2V0
-bG9ja19mbiA9IHZmc19ub3RfaW1wbGVtZW50ZWRfZ2V0bG9jaywKIAkuc3ltbGlua2F0X2ZuID0g
-dmZzX25vdF9pbXBsZW1lbnRlZF9zeW1saW5rYXQsCmRpZmYgLS1naXQgYS9zb3VyY2UzL3NtYmQv
-dmZzLmMgYi9zb3VyY2UzL3NtYmQvdmZzLmMKaW5kZXggMjBmM2QzNDk2NWYuLjdlODQ4OTAwYWJh
-IDEwMDY0NAotLS0gYS9zb3VyY2UzL3NtYmQvdmZzLmMKKysrIGIvc291cmNlMy9zbWJkL3Zmcy5j
-CkBAIC0yMTkwLDYgKzIxOTAsMTMgQEAgaW50IHNtYl92ZnNfY2FsbF9rZXJuZWxfZmxvY2soc3Ry
-dWN0IHZmc19oYW5kbGVfc3RydWN0ICpoYW5kbGUsCiAJCQkJCSBhY2Nlc3NfbWFzayk7CiB9CiAK
-K2ludCBzbWJfdmZzX2NhbGxfZmNudGwoc3RydWN0IHZmc19oYW5kbGVfc3RydWN0ICpoYW5kbGUs
-CisJCSAgICAgICBzdHJ1Y3QgZmlsZXNfc3RydWN0ICpmc3AsIGludCBjbWQsIGludCBjbWRfYXJn
-KQoreworCVZGU19GSU5EKGZjbnRsKTsKKwlyZXR1cm4gaGFuZGxlLT5mbnMtPmZjbnRsX2ZuKGhh
-bmRsZSwgZnNwLCBjbWQsIGNtZF9hcmcpOworfQorCiBpbnQgc21iX3Zmc19jYWxsX2xpbnV4X3Nl
-dGxlYXNlKHN0cnVjdCB2ZnNfaGFuZGxlX3N0cnVjdCAqaGFuZGxlLAogCQkJCXN0cnVjdCBmaWxl
-c19zdHJ1Y3QgKmZzcCwgaW50IGxlYXNldHlwZSkKIHsKLS0gCjIuMjEuMAoK
-
-
---=-52TP3MfM41tegfE4zTfX--
+> From 0a13c3f427bcd7a8ce88ccf37a53f13b56e2a678 Mon Sep 17 00:00:00 2001
+> From: Anoop C S <anoopcs@redhat.com>
+> Date: Sat, 21 Sep 2019 19:11:19 +0530
+> Subject: [PATCH] s3: VFS: Add SMB_VFS_FCNTL()
+> 
+> Signed-off-by: Anoop C S <anoopcs@redhat.com>
+> ---
+>  examples/VFS/skel_opaque.c            |  8 ++++++++
+>  examples/VFS/skel_transparent.c       |  7 +++++++
+>  source3/include/smbprofile.h          |  1 +
+>  source3/include/vfs.h                 |  7 +++++++
+>  source3/include/vfs_macros.h          |  5 +++++
+>  source3/modules/vfs_default.c         | 13 +++++++++++++
+>  source3/modules/vfs_not_implemented.c |  8 ++++++++
+>  source3/smbd/vfs.c                    |  7 +++++++
+>  8 files changed, 56 insertions(+)
+> 
+> diff --git a/examples/VFS/skel_opaque.c b/examples/VFS/skel_opaque.c
+> index c03a42fee04..feb90c31533 100644
+> --- a/examples/VFS/skel_opaque.c
+> +++ b/examples/VFS/skel_opaque.c
+> @@ -442,6 +442,13 @@ static int skel_kernel_flock(struct vfs_handle_struct *handle,
+>  	return -1;
+>  }
+>  
+> +static int skel_fcntl(struct vfs_handle_struct *handle,
+> +		      struct files_struct *fsp, int cmd, int cmd_arg)
+> +{
+> +	errno = ENOSYS;
+> +	return -1;
+> +}
+> +
+>  static int skel_linux_setlease(struct vfs_handle_struct *handle,
+>  			       struct files_struct *fsp, int leasetype)
+>  {
+> @@ -1089,6 +1096,7 @@ static struct vfs_fn_pointers skel_opaque_fns = {
+>  	.fallocate_fn = skel_fallocate,
+>  	.lock_fn = skel_lock,
+>  	.kernel_flock_fn = skel_kernel_flock,
+> +	.fcntl_fn = skel_fcntl,
+>  	.linux_setlease_fn = skel_linux_setlease,
+>  	.getlock_fn = skel_getlock,
+>  	.symlinkat_fn = skel_symlinkat,
+> diff --git a/examples/VFS/skel_transparent.c b/examples/VFS/skel_transparent.c
+> index 656c933338a..6d88f08ae59 100644
+> --- a/examples/VFS/skel_transparent.c
+> +++ b/examples/VFS/skel_transparent.c
+> @@ -547,6 +547,12 @@ static int skel_kernel_flock(struct vfs_handle_struct *handle,
+>  	return SMB_VFS_NEXT_KERNEL_FLOCK(handle, fsp, share_mode, access_mask);
+>  }
+>  
+> +static int skel_fcntl(struct vfs_handle_struct *handle,
+> +		      struct files_struct *fsp, int cmd, int cmd_arg)
+> +{
+> +	return SMB_VFS_NEXT_FCNTL(handle, fsp, cmd, cmd_arg);
+> +}
+> +
+>  static int skel_linux_setlease(struct vfs_handle_struct *handle,
+>  			       struct files_struct *fsp, int leasetype)
+>  {
+> @@ -1374,6 +1380,7 @@ static struct vfs_fn_pointers skel_transparent_fns = {
+>  	.fallocate_fn = skel_fallocate,
+>  	.lock_fn = skel_lock,
+>  	.kernel_flock_fn = skel_kernel_flock,
+> +	.fcntl_fn = skel_fcntl,
+>  	.linux_setlease_fn = skel_linux_setlease,
+>  	.getlock_fn = skel_getlock,
+>  	.symlinkat_fn = skel_symlinkat,
+> diff --git a/source3/include/smbprofile.h b/source3/include/smbprofile.h
+> index 489a613e3df..24da99dcd20 100644
+> --- a/source3/include/smbprofile.h
+> +++ b/source3/include/smbprofile.h
+> @@ -82,6 +82,7 @@ struct tevent_context;
+>  	SMBPROFILE_STATS_BASIC(syscall_kernel_flock) \
+>  	SMBPROFILE_STATS_BASIC(syscall_linux_setlease) \
+>  	SMBPROFILE_STATS_BASIC(syscall_fcntl_getlock) \
+> +	SMBPROFILE_STATS_BASIC(syscall_fcntl) \
+>  	SMBPROFILE_STATS_BASIC(syscall_readlinkat) \
+>  	SMBPROFILE_STATS_BASIC(syscall_symlinkat) \
+>  	SMBPROFILE_STATS_BASIC(syscall_linkat) \
+> diff --git a/source3/include/vfs.h b/source3/include/vfs.h
+> index 47147821ffd..6e446d3b32c 100644
+> --- a/source3/include/vfs.h
+> +++ b/source3/include/vfs.h
+> @@ -281,6 +281,7 @@
+>  /* Version 42 - Move change_to_user() -> change_to_user_and_service() */
+>  /* Version 42 - Move change_to_user_by_fsp() -> change_to_user_and_service_by_fsp() */
+>  /* Version 42 - Move [un]become_user*() -> [un]become_user_without_service*() */
+> +/* Version 42 - Add SMB_VFS_FCNTL */
+>  
+>  #define SMB_VFS_INTERFACE_VERSION 42
+>  
+> @@ -807,6 +808,8 @@ struct vfs_fn_pointers {
+>  	bool (*lock_fn)(struct vfs_handle_struct *handle, struct files_struct *fsp, int op, off_t offset, off_t count, int type);
+>  	int (*kernel_flock_fn)(struct vfs_handle_struct *handle, struct files_struct *fsp,
+>  			       uint32_t share_mode, uint32_t access_mask);
+> +	int (*fcntl_fn)(struct vfs_handle_struct *handle,
+> +			struct files_struct *fsp, int cmd, int cmd_arg);
+>  	int (*linux_setlease_fn)(struct vfs_handle_struct *handle, struct files_struct *fsp, int leasetype);
+>  	bool (*getlock_fn)(struct vfs_handle_struct *handle, struct files_struct *fsp, off_t *poffset, off_t *pcount, int *ptype, pid_t *ppid);
+>  	int (*symlinkat_fn)(struct vfs_handle_struct *handle,
+> @@ -1340,6 +1343,8 @@ bool smb_vfs_call_lock(struct vfs_handle_struct *handle,
+>  int smb_vfs_call_kernel_flock(struct vfs_handle_struct *handle,
+>  			      struct files_struct *fsp, uint32_t share_mode,
+>  			      uint32_t access_mask);
+> +int smb_vfs_call_fcntl(struct vfs_handle_struct *handle,
+> +		       struct files_struct *fsp, int cmd, int cmd_arg);
+>  int smb_vfs_call_linux_setlease(struct vfs_handle_struct *handle,
+>  				struct files_struct *fsp, int leasetype);
+>  bool smb_vfs_call_getlock(struct vfs_handle_struct *handle,
+> @@ -1773,6 +1778,8 @@ bool vfs_not_implemented_lock(vfs_handle_struct *handle, files_struct *fsp, int
+>  int vfs_not_implemented_kernel_flock(struct vfs_handle_struct *handle,
+>  				     struct files_struct *fsp,
+>  				     uint32_t share_mode, uint32_t access_mask);
+> +int vfs_not_implemented_fcntl(struct vfs_handle_struct *handle,
+> +			      struct files_struct *fsp, int cmd, int cmd_arg);
+>  int vfs_not_implemented_linux_setlease(struct vfs_handle_struct *handle,
+>  				       struct files_struct *fsp, int leasetype);
+>  bool vfs_not_implemented_getlock(vfs_handle_struct *handle, files_struct *fsp,
+> diff --git a/source3/include/vfs_macros.h b/source3/include/vfs_macros.h
+> index 6d95d840e25..fc6d5be589c 100644
+> --- a/source3/include/vfs_macros.h
+> +++ b/source3/include/vfs_macros.h
+> @@ -286,6 +286,11 @@
+>  #define SMB_VFS_NEXT_KERNEL_FLOCK(handle, fsp, share_mode, access_mask)	\
+>  	smb_vfs_call_kernel_flock((handle)->next, (fsp), (share_mode), (access_mask))
+>  
+> +#define SMB_VFS_FCNTL(fsp, cmd, cmd_arg) \
+> +	smb_vfs_call_fcntl((fsp)->conn->vfs_handles, (fsp), (cmd), (cmd_arg))
+> +#define SMB_VFS_NEXT_FCNTL(handle, fsp, cmd, cmd_arg) \
+> +	smb_vfs_call_fcntl((handle)->next, (fsp), (cmd), (cmd_arg))
+> +
+>  #define SMB_VFS_LINUX_SETLEASE(fsp, leasetype) \
+>  	smb_vfs_call_linux_setlease((fsp)->conn->vfs_handles, (fsp), (leasetype))
+>  #define SMB_VFS_NEXT_LINUX_SETLEASE(handle, fsp, leasetype) \
+> diff --git a/source3/modules/vfs_default.c b/source3/modules/vfs_default.c
+> index f48a590e5e7..4cd26747c47 100644
+> --- a/source3/modules/vfs_default.c
+> +++ b/source3/modules/vfs_default.c
+> @@ -2609,6 +2609,18 @@ static int vfswrap_kernel_flock(vfs_handle_struct *handle, files_struct *fsp,
+>  	return 0;
+>  }
+>  
+> +static int vfswrap_fcntl(vfs_handle_struct *handle, files_struct *fsp, int cmd,
+> +			 int cmd_arg)
+> +{
+> +	int result;
+> +
+> +	START_PROFILE(syscall_fcntl);
+> +	result = fcntl(fsp->fh->fd, cmd, cmd_arg);
+> +	END_PROFILE(syscall_fcntl);
+> +
+> +	return result;
+> +}
+> +
+>  static bool vfswrap_getlock(vfs_handle_struct *handle, files_struct *fsp, off_t *poffset, off_t *pcount, int *ptype, pid_t *ppid)
+>  {
+>  	bool result;
+> @@ -3500,6 +3512,7 @@ static struct vfs_fn_pointers vfs_default_fns = {
+>  	.fallocate_fn = vfswrap_fallocate,
+>  	.lock_fn = vfswrap_lock,
+>  	.kernel_flock_fn = vfswrap_kernel_flock,
+> +	.fcntl_fn = vfswrap_fcntl,
+>  	.linux_setlease_fn = vfswrap_linux_setlease,
+>  	.getlock_fn = vfswrap_getlock,
+>  	.symlinkat_fn = vfswrap_symlinkat,
+> diff --git a/source3/modules/vfs_not_implemented.c b/source3/modules/vfs_not_implemented.c
+> index e0f36b9a632..4f710cb4ca7 100644
+> --- a/source3/modules/vfs_not_implemented.c
+> +++ b/source3/modules/vfs_not_implemented.c
+> @@ -440,6 +440,13 @@ int vfs_not_implemented_kernel_flock(struct vfs_handle_struct *handle,
+>  	return -1;
+>  }
+>  
+> +int vfs_not_implemented_fcntl(struct vfs_handle_struct *handle,
+> +			      struct files_struct *fsp, int cmd, int cmd_arg)
+> +{
+> +	errno = ENOSYS;
+> +	return -1;
+> +}
+> +
+>  int vfs_not_implemented_linux_setlease(struct vfs_handle_struct *handle,
+>  				       struct files_struct *fsp, int leasetype)
+>  {
+> @@ -1093,6 +1100,7 @@ static struct vfs_fn_pointers vfs_not_implemented_fns = {
+>  	.fallocate_fn = vfs_not_implemented_fallocate,
+>  	.lock_fn = vfs_not_implemented_lock,
+>  	.kernel_flock_fn = vfs_not_implemented_kernel_flock,
+> +	.fcntl_fn = vfs_not_implemented_fcntl,
+>  	.linux_setlease_fn = vfs_not_implemented_linux_setlease,
+>  	.getlock_fn = vfs_not_implemented_getlock,
+>  	.symlinkat_fn = vfs_not_implemented_symlinkat,
+> diff --git a/source3/smbd/vfs.c b/source3/smbd/vfs.c
+> index 20f3d34965f..7e848900aba 100644
+> --- a/source3/smbd/vfs.c
+> +++ b/source3/smbd/vfs.c
+> @@ -2190,6 +2190,13 @@ int smb_vfs_call_kernel_flock(struct vfs_handle_struct *handle,
+>  					 access_mask);
+>  }
+>  
+> +int smb_vfs_call_fcntl(struct vfs_handle_struct *handle,
+> +		       struct files_struct *fsp, int cmd, int cmd_arg)
+> +{
+> +	VFS_FIND(fcntl);
+> +	return handle->fns->fcntl_fn(handle, fsp, cmd, cmd_arg);
+> +}
+> +
+>  int smb_vfs_call_linux_setlease(struct vfs_handle_struct *handle,
+>  				struct files_struct *fsp, int leasetype)
+>  {
+> -- 
+> 2.21.0
+> 
 
 
