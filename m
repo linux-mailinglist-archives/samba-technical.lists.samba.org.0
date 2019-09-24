@@ -2,51 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 383E3BC485
-	for <lists+samba-technical@lfdr.de>; Tue, 24 Sep 2019 11:10:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF8EDBCB01
+	for <lists+samba-technical@lfdr.de>; Tue, 24 Sep 2019 17:19:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=5tIdVXvhI3drj4ZVr67Ae+VAplq/aEQVC/pRwtwA384=; b=34xdwXIDna4TTJP5zfwlDfzBMD
-	L1MXFSF9Wuf95cEYgBVcYKj2/Rfa59z+OyCdy93gnXVDmTzz4XjS7D3ig/BbJqOm0w3kGAY7Q/jOf
-	rNJmP+cJ6Z7+GrYyjC+aa9XmBmPOwHrPVtEZGEQ9ufBe6ECegh0qjq6SmrFpmxBsZ9vsikeadReVM
-	2dXaGln+c6coSnrc6LMh/R9skuWfbYQUR1sQDje9jUiZWLBtOmpk/dTHBTpZGC3syTRzBO83lYQko
-	43qvZuJnv30R2k2LDL4ahNB3+WMu7KM9wWBTk//qBviZmeKHCAaabN1RflGNB3SbEL63n5UaC62PJ
-	tMrVjgnw==;
-Received: from localhost ([::1]:40318 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=XwtCxduiaizIi6QX2xQuk08roAb1261lgMxAYujwlvk=; b=gdxSZNh9YZC7iCzEX8AgZrfcBg
+	Q0D/ggpE4BS6wj4F2CEiBCH5eU4zr+n7Lr0SA9tda7mdQqlNs7VoDDPNkLVwwSuIDMxNpP7iYZrWg
+	gUSOqn1XKDnQKx0jqxXBmn2TtiVQY344imaGS4Vw0iGa8H2srBVUhP1UCBY1Rhmd1mY3CAJ9iibXU
+	CVOndpVsP1SI3GdIZe5C4MZ85s4U0XbdFFB4aTnO/ZQBvf4yTcTnQQ0cYZM3+cQ2B+wQHHwviBUKe
+	kBarHyptiBEXDltI7vECD0MC74CgwHoei8IlFjWjqrOKVbOInLsUR4gV+6+kjN9gbflshB1DiQ0lb
+	NgxN4V6g==;
+Received: from localhost ([::1]:61766 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iCgov-008AxE-6n; Tue, 24 Sep 2019 09:09:17 +0000
-Received: from smtp1.lauterbach.com ([62.154.241.196]:39903) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iCgoq-008Ax7-6S
- for samba-technical@lists.samba.org; Tue, 24 Sep 2019 09:09:14 +0000
-Received: (qmail 10391 invoked by uid 484); 24 Sep 2019 09:09:09 -0000
-X-Qmail-Scanner-Diagnostics: from 10.2.11.10 by smtp1.lauterbach.com
- (envelope-from <Franz.Sirl-kernel@lauterbach.com>,
- uid 484) with qmail-scanner-2.11 
- (mhr: 1.0. clamdscan: 0.99/21437. spamassassin: 3.4.0.  
- Clear:RC:1(10.2.11.10):. 
- Processed in 0.325855 secs); 24 Sep 2019 09:09:09 -0000
-Received: from unknown (HELO [10.2.11.10])
- (Authenticated_SSL:fsirl@[10.2.11.10])
- (envelope-sender <Franz.Sirl-kernel@lauterbach.com>)
- by smtp1.lauterbach.com (qmail-ldap-1.03) with ECDHE-RSA-AES256-GCM-SHA384
- encrypted SMTP
- for <samba-technical@lists.samba.org>; 24 Sep 2019 09:09:08 -0000
-Subject: Re: [Announce] Samba 4.11.0rc4 Available for Download
-To: =?UTF-8?Q?Bj=c3=b6rn_Baumbach?= <bb@sernet.de>,
- samba-technical@lists.samba.org
-References: <20190911065708.GA7868@carrie2>
- <8eb21452-8d69-d9b6-1467-d663bc71cf6a@lauterbach.com>
- <74e57095-a057-e25c-97c1-c0b1642f4e4b@sernet.de>
-Message-ID: <114eb6bf-ba54-d048-17e1-aeb3f52e3216@lauterbach.com>
-Date: Tue, 24 Sep 2019 11:09:08 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.0
+	id 1iCmam-008FkM-Lu; Tue, 24 Sep 2019 15:19:04 +0000
+Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135]:43514) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iCmai-008FkF-Hf
+ for samba-technical@lists.samba.org; Tue, 24 Sep 2019 15:19:02 +0000
+Received: by mail-lf1-x135.google.com with SMTP id u3so1706787lfl.10
+ for <samba-technical@lists.samba.org>; Tue, 24 Sep 2019 08:18:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=XwtCxduiaizIi6QX2xQuk08roAb1261lgMxAYujwlvk=;
+ b=CJcKb3e1eLxmmiyWUgs3KY2VSLm/xP7+ZORZTXMeJtVezPXb72HGW6v83LE9Td4Ova
+ j1I3dhCQQFOKpKRzQhtVImFLO3xIgSnIh4wncvLm1Gt4JKqCM5JLmaVPBmLqLgoaZR5F
+ O2TnEdvsFtjB6ostsQ5RgGW3alTIOPqSXErZGO4av+R2v2r9B1lL1eroEvu3GMxVTuz4
+ nzYZDWmaHUfBFIm3hMUULp558gL/DeucEZYzcRqEmfwSadaIgBGO84pdhDSE5noPQTh/
+ 2l67MQRt2nO3pprBpf0/pIUeiqlf2HgV4wAo23DskLf8BtKwIpQRAV/CbEVHE2LkuvxG
+ PKDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=XwtCxduiaizIi6QX2xQuk08roAb1261lgMxAYujwlvk=;
+ b=Ta0YfOQvGOG0srqdDTbFMI0GX1NyfenMv1Kh/g3fykUavgJp4u3qTGTOF+qia/MpkT
+ Cqsn/C+69cfTvkKM20naAEj77WsPD7Q86ABCPCrJIFMes9YD8s6UQcwJ7TuPfaOL26Q9
+ Y6knB09mrNQmFjJQms9Rq87L+tzdWM0Q17q907aelpRhuhwgJwjeFp5QI+wsk8j5Z8I5
+ 4f+JJlqYPkGWzzhZtBDgOTPY7a5MusiZuec6OiDaWG8vAnE98hgtHQYi2UzKk0vy4pyp
+ vCnTvP7h1QDsxiqnXRYNUGun65Px9cqe1byJdLk0xphU5pfjxkoPL6fbNjyAwdu3S7um
+ Azdw==
+X-Gm-Message-State: APjAAAW6nLfkMByaektWHTBB19Bxo1MVqLvPT7IYDq+Ulf+MRn8Impqs
+ ET+Q98O0XH9KB88gAKacir+0ONqN3h9ZfsT76Q==
+X-Google-Smtp-Source: APXvYqz3xR04ZEaUDGlftEt8ejCiYNfgkT/PNEOcVLaEDDTrk6n2myIo5qvB44+GJgz33di6Vr/r62VRkAP7Z2Bbvqo=
+X-Received: by 2002:ac2:4308:: with SMTP id l8mr2226416lfh.25.1569338339168;
+ Tue, 24 Sep 2019 08:18:59 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <74e57095-a057-e25c-97c1-c0b1642f4e4b@sernet.de>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+References: <CAH2r5mvfb3nkdz8r8sAUXGJkx678XZkt4dn=4xiuq0UD2vxFrw@mail.gmail.com>
+In-Reply-To: <CAH2r5mvfb3nkdz8r8sAUXGJkx678XZkt4dn=4xiuq0UD2vxFrw@mail.gmail.com>
+Date: Tue, 24 Sep 2019 08:18:47 -0700
+Message-ID: <CAKywueQXsnMzS30q2QidWAjvMinCXXWQg0ysUH=62RWLnPW1UQ@mail.gmail.com>
+Subject: Re: [PATCH] smbinfo dump encryption keys for using wireshark
+To: Steve French <smfrench@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,71 +69,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Franz Sirl via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Franz Sirl <Franz.Sirl-kernel@lauterbach.com>
+From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Shilovsky <pavel.shilovsky@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Am 2019-09-12 um 17:25 schrieb Björn Baumbach:
-> Hi Franz!
-> 
-> On 9/11/19 3:15 PM, Franz Sirl via samba-technical wrote:
->> just noting that 4.11 will already be the third major release without a
->> fix for the https://bugzilla.samba.org/show_bug.cgi?id=13745 regression.
->>
->> Can someone at least comment on the bug so I can work on a patch and
->> make PDF printing shares (via smbprngenpdf) functional again? Just
->> moving the new %j/%J to %k/%K would be enough to fix the bug.
-> 
-> Thank you for the reminder.
-> 
-> Not only %j and %J are affected. There is also %p, which is used twice.
++ if (keys_info.cipher_type =3D=3D 1)
++ printf("CCM encryption");
++ else if (keys_info.cipher_type =3D=3D 2)
++ printf("GCM encryption");
++ else if (keys_info.cipher_type =3D=3D 0)
++ printf("SMB3.0 CCM encryption");
 
-Hi Björn,
+Do we need to mention SMB3.0 here? It is the same CCM as cipher_type
+1, why don't just extend the 1st IF to
 
-%p is handled in talloc_sub_advanced() which already is called "later" 
-in code flow. Additionally the %p functionality in talloc_sub_advanced() 
-is less likely useful in a printing share.
-The problematic thing about %j/%J is that they are handled in 
-talloc_sub_basic() via lp_string() without a way to intervene. Moreover 
-the functionality could also be useful in a printing share.
+if (keys_info.cipher_type =3D=3D 0 || keys_info.cipher_type =3D=3D 1)
 
-> I've requested some comments from the samba team regarding the issue.
-> Metze added some notes to the bug report. There is still no decision,
-> but there are currently two ideas:
-> 
-> - make sure that the printing related commands are processed by
->    standard substitution *after* the printing related substitution.
++ else
++ printf("unknown encryption type");
 
-I've added a tentative patch doing this according to Stefan#s suggestion 
-in bugzilla.
+Best regards,
+Pavel Shilovskiy
 
-> - add new substitutions and throw a warning if %j %J or %p is used
-
-With the mentioned patch the talloc_sub_basic() %j/%J functionality 
-could be left in place and %k/%K could be added, duplicating the %j/%J 
-behaviour. The %k/%K could then become the only documented variation and 
-testparm would warn about %j/%J usage in a file share.
-
-> <comment>
-> Stefan Metzmacher 2019-09-12 12:56:51 UTC
-> 
-> Another possible way would be to mark the printing related commands as
-> constant="1" in their documentation that should avoid the lp_string() is
-> called for them.
-> 
-> Then we can do the printing related %j substitution first and then
-> call lp_string() as a 2nd step.
-> 
-> Yet another or additional way would be to replace it with something that
-> doesn't require a single charater, similar to %$(envvar).
-> Maybe %{jobid} %{jobname} %{clientip_pathsafe} %{serverip_pathsafe}
-> %{printername}...
-> </comment>
-> 
-> Maybe we need both here.
-
-Yes, I agree, %{long_name} sounds like a nice addition.
-
-Franz
+=D0=BF=D0=BD, 23 =D1=81=D0=B5=D0=BD=D1=82. 2019 =D0=B3. =D0=B2 21:51, Steve=
+ French via samba-technical
+<samba-technical@lists.samba.org>:
+>
+> Updated with feedback from Aurelien and Pavel
+>
+>
+>
+> --
+> Thanks,
+>
+> Steve
 
