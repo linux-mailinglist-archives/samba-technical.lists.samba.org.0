@@ -2,56 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABB06BC129
-	for <lists+samba-technical@lfdr.de>; Tue, 24 Sep 2019 06:52:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D2133BC1D0
+	for <lists+samba-technical@lfdr.de>; Tue, 24 Sep 2019 08:35:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=K9NiVfbpskhHYlk5SvYE6t0BJTl3U6RG02ZbnZDdNqI=; b=h4abYt1dkIhR4WjID+4FErj5pY
-	GHsuOAu/mmqcsZywpkYcNUk2TP72VIcWUbzsixfPcSF3aV+ym8wu+3NZLNw4JHrL7pIVaojxPftzo
-	qAfCX8VpgSagf0QFQMokCwdXvNU/Q0rJbczoue3/YplL/TA6hnCtdNe2pxPDvzHp+tksxE2TRrhf9
-	u2MA3QeO93VA9B4QXOUnM3CVoq+gXonB5Y4wMka6YyL0LwjAFEvsZCdFAf6YtwoI3ux9RZ3uuOz/p
-	sBEuD+Z7ypSePbQw0QgHzMvZ0rBHJv4R973gLy4h3YCClE8RYXBHggDe+H9mJ+ApygKmMwe2Ws+8c
-	08BBVOKQ==;
-Received: from localhost ([::1]:27386 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=XiCuHNI1g5qn+KPlGov8evKHS4grikdmAbIUZGvTHVk=; b=w2Fmd9N/qvZKnk82n2I5+lTqRD
+	UszwhY1vFTh7Md7p06SN03X9pORX9zRrFHtLPnlKfCW9oDym7r2kk79AA3P/6ZHDVR7o4kJSbU1h5
+	Esb+h38mPT8C1/MrdsQCSRqzaDhehFRpH4CGuclEoVaAGuYdwZGx9h6XEETw+p5cku0Lz/760Yona
+	uhpVdWilQ4gw5SQMLfNmxUxLomskhdFoAzgmASO+mjHMVv+qNFk0AlY8rJXnOYVNctXFp96efvsUy
+	/j4fDp97niFvOPgXFl63Ltvi8KiPNgBlbtx6RLmb6WFKANTaOa+iPkpi2imz47Qq7M5gWg3KkPhAF
+	8NqBeaqw==;
+Received: from localhost ([::1]:28532 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iCcn3-0087sI-G8; Tue, 24 Sep 2019 04:51:05 +0000
-Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:35389) 
+	id 1iCePB-0088cA-DK; Tue, 24 Sep 2019 06:34:33 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:46426) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iCcmy-0087rz-Ip
- for samba-technical@lists.samba.org; Tue, 24 Sep 2019 04:51:02 +0000
-Received: by mail-io1-xd30.google.com with SMTP id q10so1252449iop.2
- for <samba-technical@lists.samba.org>; Mon, 23 Sep 2019 21:51:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=K9NiVfbpskhHYlk5SvYE6t0BJTl3U6RG02ZbnZDdNqI=;
- b=p6H2AJt2hhtPqCOcUXnRTOSu6p/COkm3DsCen+FgVZ+7XjNIoTipJwA23xPXI6uv+M
- bQEWmVogncfnS5fQVw6rdXqT5GucU0IKXGB/WSPiXBY5RhJH8T/IUPrQSFQf1fU6ZSRx
- yKJAljGzgWDGAPRku6hTGHw0mIXc9v5ljhdnW4Ovqguxz1HeVOAH1sgRmy13NA1i2zcq
- dJNAXBILPO/9rh9R/V3saTKaL8PREChqaq2e1PeLwpwvLNPl1ypGISzzOHlWpwvWgvJR
- sVVgEycW1O6aLX5ynrZk8IRSa+4qVOpEsZhwjiFl2bpNk0qrIBoPKgHAiw3dgKVqCrXd
- Lfqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=K9NiVfbpskhHYlk5SvYE6t0BJTl3U6RG02ZbnZDdNqI=;
- b=APGSeEwIF8hOfTIyMvYpJqZRZvigjJ3jUEAREY9HhtuVokrpzVVxGYkn4wAv3Wom4A
- 4Ryg0jT2JtU6TXsO9Z/JoUlEY8PDHfYIkUUQ43rNUY9XlItp+O8SlfkWmxtDcnYf6oYe
- xqlrWIuZ5nXtJVc60uxWpIVdLya84qmNBgp5Ca86M2TrtBNX0YZANJhe2cgO836qRbTQ
- rMh+9P9XDQWgp39f8aTicTjrDuqvArnDgigEPwKatCBBI4RllE6TWb5R/Ka2/ip3+qBN
- o78xBzzkeapT106QWPwDpDECDl6pwXbJUkuD0C68tYGp/z5ghHcUnDc0LKHCX+KCgosV
- aR1g==
-X-Gm-Message-State: APjAAAWFYXUSaD4skm23nEFo1U535N9XGpgzSRsqu3mcDS1eX0ni03A1
- 7ry/MeHGbD9X5uxyAkmDaHxIvtNOOPKSV0oONlKRm2Ec
-X-Google-Smtp-Source: APXvYqwEKI0jfubpz/4z9udAQj78PIDjakYd9A0NPHf2SKMscMZ+zHBbwsHSJKjBp7GZ7bHIYtSdbQguerf0/zkHlJY=
-X-Received: by 2002:a02:608:: with SMTP id 8mr1623916jav.88.1569300658192;
- Mon, 23 Sep 2019 21:50:58 -0700 (PDT)
+ (Exim) id 1iCeOy-0088c1-0T
+ for samba-technical@lists.samba.org; Tue, 24 Sep 2019 06:34:23 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Message-ID:From:To:CC;
+ bh=XiCuHNI1g5qn+KPlGov8evKHS4grikdmAbIUZGvTHVk=; b=iGMJPTq+jWgNwNCxVWlkisobdI
+ lGTNyZDyiVnXYUuE+Dyxnr9WOApTY8MZQjRS4h73zfRFeWGAw0xS0ILYrdzKvrhagTOO0ToWZHyCM
+ uP58DYrM2/UICk86qNfBw8qw1tMxhVq5dWXnbKj6EEYiZuTEI44msPMmYApnE5h8UxAE=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iCeOw-00042k-5M
+ for samba-technical@lists.samba.org; Tue, 24 Sep 2019 06:34:18 +0000
+Subject: Re: getpwnam/uid for group with ID_TYPE_BOTH
+To: samba-technical@lists.samba.org
+References: <20190923193911.GA9762@samba.org>
+ <62c2ca93-2600-27d9-1697-0d465efed1a9@samba.org>
+ <8e2dd85c-37d3-6c65-49f6-28aa5d59018f@samba.org>
+Message-ID: <21a27887-ef4f-2c51-f511-e682f1548a22@samba.org>
+Date: Tue, 24 Sep 2019 07:34:17 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-Date: Mon, 23 Sep 2019 23:50:46 -0500
-Message-ID: <CAH2r5mvfb3nkdz8r8sAUXGJkx678XZkt4dn=4xiuq0UD2vxFrw@mail.gmail.com>
-Subject: [PATCH] smbinfo dump encryption keys for using wireshark
-To: CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="00000000000047a2540593454896"
+In-Reply-To: <8e2dd85c-37d3-6c65-49f6-28aa5d59018f@samba.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,89 +55,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---00000000000047a2540593454896
-Content-Type: text/plain; charset="UTF-8"
+On 23/09/2019 22:45, Stefan Metzmacher wrote:
+> Hi Rowland,
+>
+>> On 23/09/2019 20:39, Christof Schmitt via samba-technical wrote:
+>>> The behavior of winbindd changed in regards to whether a group with
+>>> ID_TYPE_BOTH returns a fake user structure. This surfaced during a test
+>>> of creating files from a SMB client and then checking the ownership
+>>> directly on the file system.
+>>>
+>>> make testenv SELFTEST_TESTENV=ad_member_idmap_rid
+>>> is an environment that provides ID_TYPE_BOTH for testing.
+>> Surely if that is a testenv, then it should be removed or modified, a
+>> Unix domain member using idmap_rid will not work in that way, using
+>> 'getent passwd' against a group returns nothing.
+> No, it did with 4.5 and that's how it's supposed to be.
+> That's exactly what ID_TYPE_BOTH is all about.
+>
+> metze
+>
+Well, it doesn't do that on an actual Unix domain member using the 
+winbind rid backend, but then, from my understanding, idmap.ldb is only 
+read on a DC, or am I missing something ?
 
-Updated with feedback from Aurelien and Pavel
+Rowland
 
-
-
--- 
-Thanks,
-
-Steve
-
---00000000000047a2540593454896
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-smbinfo-print-the-security-information-needed-to-dec.patch"
-Content-Disposition: attachment; 
-	filename="0001-smbinfo-print-the-security-information-needed-to-dec.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_k0xd33510>
-X-Attachment-Id: f_k0xd33510
-
-RnJvbSA2YmY0MGZkMTQ2MDQ4OWE2NmEzMWI2ZmI0M2JjNDY2MWM4ZGM1OTdlIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFRodSwgMTkgU2VwIDIwMTkgMDQ6MjE6MTYgLTA1MDAKU3ViamVjdDogW1BBVENIXSBz
-bWJpbmZvOiBwcmludCB0aGUgc2VjdXJpdHkgaW5mb3JtYXRpb24gbmVlZGVkIHRvIGRlY3J5cHQK
-IHdpcmVzaGFyayB0cmFjZQoKQ0NNIGVuY3J5cHRpb24KU2Vzc2lvbiBJZDogICBlMiAzZSBlYSBh
-ZSAwMCAwMCAwMCAwMApTZXNzaW9uIEtleTogIDY1IDdlIDBlIGQ1IDNjIDA2IDVhIDA2IDUwIGEz
-IGVmIDk2IGMxIDY0IDNkIDFmClNlcnZlciBFbmNyeXB0aW9uIEtleTogIDVlIDQyIGE3IGI1IDU3
-IDc1IGQ2IDU2IDRhIDVkIDMzIDk3IGU2IDQ1IDA3IDc2ClNlcnZlciBEZWNyeXB0aW9uIEtleTog
-IDFmIDY0IGRiIGEzIDBmIDI0IGUzIDRkIGI2IDMxIDAwIGFiIDlhIGFmIDIyIDQ3CgpTaWduZWQt
-b2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+Ci0tLQogc21iaW5m
-by5jIHwgNTMgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKy0KIDEgZmlsZSBjaGFuZ2VkLCA1MiBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpk
-aWZmIC0tZ2l0IGEvc21iaW5mby5jIGIvc21iaW5mby5jCmluZGV4IGY5ZGU3ZmQuLmM5NDcyZTkg
-MTAwNjQ0Ci0tLSBhL3NtYmluZm8uYworKysgYi9zbWJpbmZvLmMKQEAgLTU0LDcgKzU0LDE3IEBA
-IHN0cnVjdCBzbWJfcXVlcnlfaW5mbyB7CiAJLyogY2hhciBidWZmZXJbXTsgKi8KIH0gX19wYWNr
-ZWQ7CiAKKyNkZWZpbmUgU01CM19TSUdOX0tFWV9TSVpFIDE2CitzdHJ1Y3Qgc21iM19rZXlfZGVi
-dWdfaW5mbyB7CisJdWludDY0X3QgU3VpZDsKKwl1aW50MTZfdCBjaXBoZXJfdHlwZTsKKwl1aW50
-OF90IGF1dGhfa2V5WzE2XTsgLyogU01CMl9OVExNVjJfU0VTU0tFWV9TSVpFICovCisJdWludDhf
-dAlzbWIzZW5jcnlwdGlvbmtleVtTTUIzX1NJR05fS0VZX1NJWkVdOworCXVpbnQ4X3QJc21iM2Rl
-Y3J5cHRpb25rZXlbU01CM19TSUdOX0tFWV9TSVpFXTsKK30gX19hdHRyaWJ1dGVfXygocGFja2Vk
-KSk7CisKICNkZWZpbmUgQ0lGU19RVUVSWV9JTkZPIF9JT1dSKENJRlNfSU9DVExfTUFHSUMsIDcs
-IHN0cnVjdCBzbWJfcXVlcnlfaW5mbykKKyNkZWZpbmUgQ0lGU19EVU1QX0tFWSBfSU9XUihDSUZT
-X0lPQ1RMX01BR0lDLCA4LCBzdHJ1Y3Qgc21iM19rZXlfZGVidWdfaW5mbykKICNkZWZpbmUgSU5Q
-VVRfQlVGRkVSX0xFTkdUSCAxNjM4NAogCiBpbnQgdmVyYm9zZTsKQEAgLTkyLDcgKzEwMiw5IEBA
-IHVzYWdlKGNoYXIgKm5hbWUpCiAJCSIgIHF1b3RhOlxuIgogCQkiICAgICAgUHJpbnRzIHRoZSBx
-dW90YSBmb3IgYSBjaWZzIGZpbGUuXG4iCiAJCSIgIHNlY2Rlc2M6XG4iCi0JCSIgICAgICBQcmlu
-dHMgdGhlIHNlY3VyaXR5IGRlc2NyaXB0b3IgZm9yIGEgY2lmcyBmaWxlLlxuIiwKKwkJIiAgICAg
-IFByaW50cyB0aGUgc2VjdXJpdHkgZGVzY3JpcHRvciBmb3IgYSBjaWZzIGZpbGUuXG4iCisJCSIg
-IGtleXM6XG4iCisJCSIgICAgICBQcmludHMgdGhlIGRlY3J5cHRpb24gaW5mb3JtYXRpb24gbmVl
-ZGVkIHRvIHZpZXcgZW5jcnlwdGVkIG5ldHdvcmsgdHJhY2VzLlxuIiwKIAkJbmFtZSk7CiAJZXhp
-dCgxKTsKIH0KQEAgLTEwMTUsNiArMTAyNyw0MyBAQCBzdGF0aWMgdm9pZCBwcmludF9zbmFwc2hv
-dHMoc3RydWN0IHNtYl9zbmFwc2hvdF9hcnJheSAqcHNuYXApCiAJcHJpbnRmKCJcbiIpOwogfQog
-CitzdGF0aWMgdm9pZAorZHVtcF9rZXlzKGludCBmKQoreworCXN0cnVjdCBzbWIzX2tleV9kZWJ1
-Z19pbmZvIGtleXNfaW5mbzsKKwl1aW50OF90ICpwc2Vzc19pZDsKKworCWlmIChpb2N0bChmLCBD
-SUZTX0RVTVBfS0VZLCAma2V5c19pbmZvKSA8IDApIHsKKwkJZnByaW50ZihzdGRlcnIsICJRdWVy
-eWluZyBrZXlzIGluZm9ybWF0aW9uIGZhaWxlZCB3aXRoICVzXG4iLCBzdHJlcnJvcihlcnJubykp
-OworCQlleGl0KDEpOworCX0KKworCWlmIChrZXlzX2luZm8uY2lwaGVyX3R5cGUgPT0gMSkKKwkJ
-cHJpbnRmKCJDQ00gZW5jcnlwdGlvbiIpOworCWVsc2UgaWYgKGtleXNfaW5mby5jaXBoZXJfdHlw
-ZSA9PSAyKQorCQlwcmludGYoIkdDTSBlbmNyeXB0aW9uIik7CisJZWxzZSBpZiAoa2V5c19pbmZv
-LmNpcGhlcl90eXBlID09IDApCisJCXByaW50ZigiU01CMy4wIENDTSBlbmNyeXB0aW9uIik7CisJ
-ZWxzZQorCQlwcmludGYoInVua25vd24gZW5jcnlwdGlvbiB0eXBlIik7CisKKwlwcmludGYoIlxu
-U2Vzc2lvbiBJZDogICIpOworCXBzZXNzX2lkID0gKHVpbnQ4X3QgKikma2V5c19pbmZvLlN1aWQ7
-CisJZm9yIChpbnQgaSA9IDA7IGkgPCA4OyBpKyspCisJCXByaW50ZigiICUwMngiLCBwc2Vzc19p
-ZFtpXSk7CisKKwlwcmludGYoIlxuU2Vzc2lvbiBLZXk6ICIpOworCWZvciAoaW50IGkgPSAwOyBp
-IDwgMTY7IGkrKykKKwkJcHJpbnRmKCIgJTAyeCIsIGtleXNfaW5mby5hdXRoX2tleVtpXSk7CisJ
-cHJpbnRmKCJcblNlcnZlciBFbmNyeXB0aW9uIEtleTogIik7CisJZm9yIChpbnQgaSA9IDA7IGkg
-PCBTTUIzX1NJR05fS0VZX1NJWkU7IGkrKykKKwkJcHJpbnRmKCIgJTAyeCIsIGtleXNfaW5mby5z
-bWIzZW5jcnlwdGlvbmtleVtpXSk7CisJcHJpbnRmKCJcblNlcnZlciBEZWNyeXB0aW9uIEtleTog
-Iik7CisJZm9yIChpbnQgaSA9IDA7IGkgPCBTTUIzX1NJR05fS0VZX1NJWkU7IGkrKykKKwkJcHJp
-bnRmKCIgJTAyeCIsIGtleXNfaW5mby5zbWIzZGVjcnlwdGlvbmtleVtpXSk7CisJcHJpbnRmKCJc
-biIpOworfQorCiAjZGVmaW5lIENJRlNfRU5VTUVSQVRFX1NOQVBTSE9UUyBfSU9SKENJRlNfSU9D
-VExfTUFHSUMsIDYsIHN0cnVjdCBzbWJfc25hcHNob3RfYXJyYXkpCiAKICNkZWZpbmUgTUlOX1NO
-QVBTSE9UX0FSUkFZX1NJWkUgMTYgLyogU2VlIE1TLVNNQjIgc2VjdGlvbiAzLjMuNS4xNS4xICov
-CkBAIC0xMTI0LDYgKzExNzMsOCBAQCBpbnQgbWFpbihpbnQgYXJnYywgY2hhciAqYXJndltdKQog
-CQlxdW90YShmKTsKIAllbHNlIGlmICghc3RyY21wKGFyZ3Zbb3B0aW5kXSwgInNlY2Rlc2MiKSkK
-IAkJc2VjZGVzYyhmKTsKKwllbHNlIGlmICghc3RyY21wKGFyZ3Zbb3B0aW5kXSwgImtleXMiKSkK
-KwkJZHVtcF9rZXlzKGYpOwogCWVsc2UgewogCQlmcHJpbnRmKHN0ZGVyciwgIlVua25vd24gY29t
-bWFuZCAlc1xuIiwgYXJndltvcHRpbmRdKTsKIAkJZXhpdCgxKTsKLS0gCjIuMjAuMQoK
---00000000000047a2540593454896--
 
