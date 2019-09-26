@@ -2,150 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C648BFB73
-	for <lists+samba-technical@lfdr.de>; Fri, 27 Sep 2019 00:50:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C4F8BFBBC
+	for <lists+samba-technical@lfdr.de>; Fri, 27 Sep 2019 01:17:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=jUMTRXTY9ozhzE1783xAggwd8Nq1/A5WU5Ox+R3bQxA=; b=nh9DSIAqvtBd1hvU18W/01UncS
-	GZXyg4b+60c7zJHpIsXBPMzv2TPPuRkH6VauhE2oxkOxHsRbZUiMXJ7ePNRp12gbQUYp/7Tz0CAnV
-	TnA+qiOag1I8ZLuUrBdxxxtTqgjeo6pQ2TRm/PCi749V5J2tWtAKqe3no+sLfgWzu/XZCXyFxc4ky
-	MVYgxB8ydT6SGz4L7rRt/NYGCH+IacOkj42iinA3jE+6UUgsVLDCEydM/DqktYS6sPHTOxgbjmn5I
-	GGtyR7x5URCnPzvtz1nFNPz7MGDq+ru508pN4aWeEGrTPDY85s4nypbEyGLYJ4ESKHFiCVlFUg17C
-	5mKYe8nA==;
-Received: from localhost ([::1]:21604 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=vEmco+MKmFRd7ES89fGq6iZeHL2AEvUQAw4p7bRBnU0=; b=2SlNdCUzZCeN/omAoM4w8gXDis
+	Nm5I46QN1ACI/vMfle6SqL2TwS3E4biDDHRqaMUtcbsMsAUkFfoa2f4xf1Cbpw5WCNZ3np2GWOvJm
+	XYQEArWLDFm5zq78/zDjGeqLfezpGO2BpxCvv4OgKOm6upNVRZFUJEO5oJQOFpMUv+6bB1mABA+q8
+	Y64AW3wgmoSi8ry6hrhhEJwP28d4Hvi2Xtr2qmQO1Raxry6AEpLdn+pv/WBcWZJhTAvguqpWKFGzh
+	uswDNbVUYyZ/GxtfOolz/Cw9NDqdOR8iPvuIYEcVvWYc/NMnNect2jwiZ0llBwz+8oa19MKzmzZkQ
+	oCUNQjFg==;
+Received: from localhost ([::1]:22722 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iDcZa-008zKP-QA; Thu, 26 Sep 2019 22:49:18 +0000
-Received: from mail-eopbgr760073.outbound.protection.outlook.com
- ([40.107.76.73]:11838 helo=NAM02-CY1-obe.outbound.protection.outlook.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iDcZV-008zKD-Lc
- for samba-technical@lists.samba.org; Thu, 26 Sep 2019 22:49:16 +0000
-Received: from BY5PR19MB3491.namprd19.prod.outlook.com (2603:10b6:a03:1be::29)
- by CH2PR19MB3496.namprd19.prod.outlook.com (2603:10b6:610:3e::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2284.21; Thu, 26 Sep
- 2019 22:14:53 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ieeeglobalspec.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jUMTRXTY9ozhzE1783xAggwd8Nq1/A5WU5Ox+R3bQxA=;
- b=fF5A5vjLbqwQy/5SfAB0hulav4FHhg+n+6jhV5VbbRH1xu1HjdQzZYuDR7qg496shmh+F3YPTXHcFDo8JSGWZ7eco0g6nXCuT53ru4+7gRhqQzzSbTfLX1mKrIuzEE0gtDMeLiUQ7C4csE+ENWJG51MTOphrtCKKoGCCVcAZgGA=
-Received: from DM5PR19CA0017.namprd19.prod.outlook.com (2603:10b6:3:151::27)
- by BY5PR19MB3491.namprd19.prod.outlook.com (2603:10b6:a03:1be::29) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2284.25; Thu, 26 Sep
- 2019 19:04:44 +0000
-Received: from SN1NAM04FT064.eop-NAM04.prod.protection.outlook.com
- (2a01:111:f400:7e4c::202) by DM5PR19CA0017.outlook.office365.com
- (2603:10b6:3:151::27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.2305.15 via Frontend
- Transport; Thu, 26 Sep 2019 19:04:44 +0000
-Authentication-Results: spf=pass (sender IP is 209.235.67.34)
- smtp.mailfrom=ieeeglobalspec.com; lists.samba.org; dkim=pass (signature was
- verified) header.d=ieeeglobalspec.com; lists.samba.org; dmarc=pass action=none
- header.from=ieeeglobalspec.com;
-Received: from mxgateway.ieeeglobalspec.com (209.235.67.34) by
- SN1NAM04FT064.mail.protection.outlook.com (10.152.89.198) with Microsoft SMTP
- Server id 15.20.2305.15 via Frontend Transport; Thu, 26 Sep 2019 19:04:44
- +0000
-Received: from mxgateway.ieeeglobalspec.com (localhost [127.0.0.1])
- by mxgateway.ieeeglobalspec.com (Postfix) with ESMTP id 41A924EAB6
- for <samba-technical@lists.samba.org>; Thu, 26 Sep 2019 15:04:43 -0400 (EDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=ieeeglobalspec.com;
- s=green; t=1569524683;
- bh=jUMTRXTY9ozhzE1783xAggwd8Nq1/A5WU5Ox+R3bQxA=;
- h=From:To:Subject:Date:References:In-Reply-To;
- b=IBjoMIxAsjtEV6AINSt+OJyvpt2d/wDQ6bqdRfzL2FuL8WEcRoByFmfqCTEE2pr4T
- WNnu52GAa7HAtUownQAoOZ33ipUyetbrvB9xaREzaWftdJ/KC7Apgyj383tUd1KuXw
- i0M/LcZ1FcOooMXJZ8e+UbxY06OgAvj1obF7idxE=
-Received: from localhost (localhost [127.0.0.1])
- by mxgateway.ieeeglobalspec.com (Postfix) with ESMTP id 3E1754EA72
- for <samba-technical@lists.samba.org>; Thu, 26 Sep 2019 15:04:43 -0400 (EDT)
-Received: from mxgateway.ieeeglobalspec.com (localhost [127.0.0.1])
- by mxgateway.ieeeglobalspec.com (Postfix) with ESMTP id 6876E4E9B9
- for <samba-technical@lists.samba.org>; Thu, 26 Sep 2019 15:04:39 -0400 (EDT)
-Authentication-Results-Original: mxgateway.ieeeglobalspec.com; arc=pass
- (as.1.microsoft.com=pass,
- ams.1.microsoft.com=pass)
- smtp.remote-ip=104.47.41.50;        dkim=pass (1024-bit rsa key
- sha256) header.d=ieeeglobalspec.com          header.i=@ieeeglobalspec.com
- header.b=fF5A5vjL header.a=rsa-sha256 header.s=selector2 x-bits=1024
-Received: from NAM03-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam03lp2050.outbound.protection.outlook.com [104.47.41.50])
- by mxgateway.ieeeglobalspec.com (Postfix) with ESMTPS id 233B54E9DE
- for <samba-technical@lists.samba.org>; Thu, 26 Sep 2019 15:04:34 -0400 (EDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CtDo+l2WnXdftXtd+jsxB4/qdDTyeSfYgAozm28Y9ETKVgQ027vTJtx+GOQdz5jW6C9sZA754B/ftmhv1MZcgmkzqWX2FBgcoZRHe8bTQeEONU3436DmpMQS78UpsNEgLAWaiwvp7pxBUjejt6far7USYkHtBjbMFHvrs+L2WdzEdHkmCoTIS/Lm9iCtH+V1xtI4xc/zRm7GS7LXGhNJ1D/gVGWh5ld50COXCugAXG8cVFVF5aOYa7DaKgbwmxMeJY4TE+Y2yntPB5I+LNQ//TkyOfdOxYuSzSPyqJreZtomgBhPc/3V9vtuinmVasDiCmCYLAbBtMAg5vhV2K3UTA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jUMTRXTY9ozhzE1783xAggwd8Nq1/A5WU5Ox+R3bQxA=;
- b=ipD2K9IMzilYlPl7ambrAscrNnYoZPGqhcqum1f5yMGzpin179m5bCblnt8+OW3VI1CUSuMeXF1lrKBQYgwLhq4J/h8MXWJsF6bsXKUq04qv1GxmjTA1MlsS8lD+Xm+RzDhJWhbHDwWBT39n136amq/LXUPSzYMiDrjW7nsHNKyKUWzlYDgqQ73Lh/Ehiag23SYh5nGI9ekwgLZCI5oQ3Ys/zIre6eRE93aQAVNJ3pMx5hFPnQlX/Kugtv6ByPaTg3LYL02asuhjKyAj77AJevl/taoFIhuLp/ap/UwG08ufIn7zeArtJVwab+e02O4kqsePWqyTho2HyqGh68HxwQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=ieeeglobalspec.com; dmarc=pass action=none
- header.from=ieeeglobalspec.com; dkim=pass header.d=ieeeglobalspec.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ieeeglobalspec.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jUMTRXTY9ozhzE1783xAggwd8Nq1/A5WU5Ox+R3bQxA=;
- b=fF5A5vjLbqwQy/5SfAB0hulav4FHhg+n+6jhV5VbbRH1xu1HjdQzZYuDR7qg496shmh+F3YPTXHcFDo8JSGWZ7eco0g6nXCuT53ru4+7gRhqQzzSbTfLX1mKrIuzEE0gtDMeLiUQ7C4csE+ENWJG51MTOphrtCKKoGCCVcAZgGA=
-Received: from MN2PR19MB3102.namprd19.prod.outlook.com (20.179.150.11) by
- MN2PR19MB3501.namprd19.prod.outlook.com (10.255.90.84) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2305.17; Thu, 26 Sep 2019 19:04:32 +0000
-Received: from MN2PR19MB3102.namprd19.prod.outlook.com
- ([fe80::407e:884d:d5d7:1730]) by MN2PR19MB3102.namprd19.prod.outlook.com
- ([fe80::407e:884d:d5d7:1730%3]) with mapi id 15.20.2305.016; Thu, 26 Sep 2019
- 19:04:32 +0000
-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+	id 1iDd0E-008zcA-O0; Thu, 26 Sep 2019 23:16:50 +0000
+Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:48693 helo=ozlabs.org) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iDd09-008zc2-Ca
+ for samba-technical@lists.samba.org; Thu, 26 Sep 2019 23:16:48 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 46fW5b3tHrz9sP3;
+ Fri, 27 Sep 2019 09:16:35 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
+ t=1569539795; bh=S5bmkLewFPv6o02AHYACuaoqthx/CQa128IhpIbqzRM=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=EqZWZEpu8EIpJtTL+jRtu+UQOGsfJCxDQzKwMSo4YRbQ+ZwveMLZ2M2NZpWYp7tD3
+ 0YACsWdVaWjdAMQkaUVJZi9rF9jSVJ7T5Gmrkj+a3EN4AOeQQdDSqXDSv2xpVzw4ho
+ OGSauOgUell0NMP3kUvnFQVgtVydfH/Q12k/i3VJHntHFUFh1MMlq9Cxn1MNLjnP7I
+ zegqu7imaxMp3wiOu+QW9UgPNteZNvIgkHWfBrNXrPcKmRRvr+Dtdh/6qtpUFGslQm
+ ocbyZdl0B9W52c1jMx+dTetnb7A1eehD76Gphgdbo/fe1TGYsSVMrYmhJt7u5zP4vf
+ JP8n0YYuX4OyQ==
+Date: Fri, 27 Sep 2019 09:16:34 +1000
+To: Max DiOrio <Max.DiOrio@ieeeglobalspec.com>
 Subject: Re: CTDB Assigned IP not on an interface
-Thread-Topic: CTDB Assigned IP not on an interface
-Thread-Index: AQHVdIvAB/OSwJ2XTUmUhJfCAoJqvac+DjMA
-Date: Thu, 26 Sep 2019 19:04:31 +0000
-Message-ID: <F637268B-A385-4A24-92A4-7CAB5754CCC1@ieeeglobalspec.com>
+Message-ID: <20190927091634.5adcce10@martins.ozlabs.org>
+In-Reply-To: <F637268B-A385-4A24-92A4-7CAB5754CCC1@ieeeglobalspec.com>
 References: <848DA573-7DDC-4B8B-BECE-A0C5B15E704F@ieeeglobalspec.com>
-In-Reply-To: <848DA573-7DDC-4B8B-BECE-A0C5B15E704F@ieeeglobalspec.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Microsoft-MacOutlook/10.1e.0.190918
-Authentication-Results-Original: spf=none (sender IP is )
- smtp.mailfrom=Max.DiOrio@ieeeglobalspec.com; 
-x-originating-ip: [72.0.156.165]
-x-ms-publictraffictype: Email
-X-MS-Office365-Filtering-Correlation-Id: be91ccae-d5d4-4d80-70a0-08d742b4646b
-X-MS-TrafficTypeDiagnostic: MN2PR19MB3501:|BY5PR19MB3491:|BY5PR19MB3491:|CH2PR19MB3496:
-x-ms-oob-tlc-oobclassifiers: OLM:7691;OLM:7691;
-X-Forefront-Antispam-Report-Untrusted: SFV:NSPM;
- SFS:(10009020)(979002)(39850400004)(346002)(136003)(396003)(366004)(376002)(199004)(189003)(2906002)(305945005)(478600001)(2616005)(25786009)(30864003)(2351001)(5660300002)(476003)(66066001)(33656002)(486006)(14454004)(6506007)(2501003)(71190400001)(36756003)(186003)(102836004)(81156014)(81166006)(26005)(76176011)(446003)(99286004)(8936002)(256004)(14444005)(11346002)(8676002)(71200400001)(5640700003)(6436002)(229853002)(6246003)(7736002)(76116006)(6486002)(58126008)(316002)(3846002)(66946007)(64756008)(66476007)(6116002)(86362001)(66556008)(66446008)(6916009)(6512007)(969003)(989001)(999001)(1009001)(1019001);
- DIR:OUT; SFP:1101; SCL:1; SRVR:MN2PR19MB3501;
- H:MN2PR19MB3102.namprd19.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: 21Uu+m+Rm33Ivql4FoHLB2PaC+ssP7zN5eeKPnJQYJFqlDP8jD85dzpGhfnvHg8yMK7Ig8T7ILLm8JbkxXAv8Qf3UdIjHb6zL8xLwuLjnP4y2sfrYTVeW6e9BH7XKzbCMNYV0K1g+eKdnR7xUCTf8pSFSLwecvcLGdUiPfI0Ny8d8/1FzC4uXVbIJo5k3ZM1bicGTNR7MtxQjGUBEp2O4mgAftNx58w08vDvLc5K9VK3oIEBVgOKLeor9YTjBBEOn1tuoBp6J+ATsxzWrkpoFut7Bc6pIS5qCN0IEn1+aF/poCtNW/lrRweLaG84nHXze3431cdzFOuHymzkECDOB/Ug39Eogg+YEHy5fXqTi60W36vBsW7Wze8aV8CuapfBSxVHhlXGI755TFyPxYFaK3UssO/Al21gXW3zT9iQYMc=
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <87AEE41A30D1C744A9E2FF87088416E6@namprd19.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ <F637268B-A385-4A24-92A4-7CAB5754CCC1@ieeeglobalspec.com>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR19MB3501
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: SN1NAM04FT064.eop-NAM04.prod.protection.outlook.com
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 7ee25df3-cb1b-438c-aa0f-08d742b45d31
-X-Microsoft-Antispam-Message-Info: 88LZLkECaqW+xl/obD5GSO2iMws+TgGB9g6vEuBMx56sybZKGrGMp97slU6iBWtiTmCpHU0PZxh6FpmI/NUMTOE8TbvxDQaWHHeHa8EnEhi+0pXhhB3/tuNUaprDx8nmU4st95zQEMsiCdciQLSXuFGXfGJD2ceHVSF+su1z/hWban9P1EMGIdYy2KdU7PyJAzTk5divmeOi5k6QKFAbgxkalM8UPPoU7EqiaoIedhFFCQr1XB+8gMJTsv/8zvgYgRbEBnn1rR8WMT/bXANdLtN++MNey1Xjd542OLOhwNgcOhoOakyKvC16RwY/bvv5sG2KY3tM33V0m8K+wdz2SmOEPXzyY6NxI/e0KhittksUg5E5YRzZbcEYIM2r94r6H0wrAE54DLX/TgHsxBGGH8wYkUyl91C8ZuFX2M2oFoE=
-X-MS-Exchange-CrossTenant-Network-Message-Id: be91ccae-d5d4-4d80-70a0-08d742b4646b
-X-MS-Exchange-CrossTenant-Id: cf3f664a-66a9-41c6-bdd5-b7c67d0a9e9c
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=cf3f664a-66a9-41c6-bdd5-b7c67d0a9e9c; Ip=[209.235.67.34];
- Helo=[mxgateway.ieeeglobalspec.com]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR19MB3491
-X-OriginatorOrg: ieeeglobalspec.com
-X-Warn: EHLO/HELO not verified: Remote host 40.107.76.73
- (mail-eopbgr760073.outbound.protection.outlook.com) incorrectly presented
- itself as NAM02-CY1-obe.outbound.protection.outlook.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -159,227 +58,102 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Max DiOrio via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Max DiOrio <Max.DiOrio@ieeeglobalspec.com>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-QWRkaXRpb25hbCBpbmZvIC0gd2hlbiBydW5uaW5nIGFuIHN0cmFjZSBvbiB0aGUgcHJvY2VzczoN
-Cg0KZXBvbGxfd2FpdCgxMSwgW3tFUE9MTElOLCB7dTMyPTIxNzkyMTQ0MDAsIHU2ND05NDU0Mjk5
-OTMzMzk1Mn19XSwgMSwgMTE0KSA9IDENCmlvY3RsKDI0LCBGSU9OUkVBRCwgWzk2XSkgICAgICAg
-ICAgICAgICA9IDANCnJlYWQoMjQsICJgXDBcMFwwQkRUQ1wxXDBcMFwwXDM1MmtcMzV3XDdcMFww
-XDBcMFwwXDBcMFwyXDBcMFwwV1wyNFwxXDAiLi4uLCA5NikgPSA5Ng0Kc3RhdCgiL2V0Yy9sb2Nh
-bHRpbWUiLCB7c3RfbW9kZT1TX0lGUkVHfDA2NDQsIHN0X3NpemU9MzUxOSwgLi4ufSkgPSAwDQp3
-cml0ZSg1LCAiMjAxOS8wOS8yNiAxNDo1OTozNi4wNTU0NjggY3RkYmQiLi4uLCAxMzApID0gMTMw
-DQpzb2NrZXQoQUZfSU5FVCwgU09DS19TVFJFQU0sIElQUFJPVE9fVENQKSA9IDI1DQpiaW5kKDI1
-LCB7c2FfZmFtaWx5PUFGX0lORVQsIHNpbl9wb3J0PWh0b25zKDApLCBzaW5fYWRkcj1pbmV0X2Fk
-ZHIoIjEwLjg1LjEzNi4xMDgiKX0sIDE2KSA9IC0xIEVBRERSTk9UQVZBSUwgKENhbm5vdCBhc3Np
-Z24gcmVxdWVzdGVkIGFkZHJlc3MpDQpjbG9zZSgyNSkgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgPSAwDQpzdGF0KCIvZXRjL2xvY2FsdGltZSIsIHtzdF9tb2RlPVNfSUZSRUd8MDY0NCwg
-c3Rfc2l6ZT0zNTE5LCAuLi59KSA9IDANCndyaXRlKDUsICIyMDE5LzA5LzI2IDE0OjU5OjM2LjA1
-NTczMSBjdGRiZCIuLi4sIDExOCkgPSAxMTgNCnN0YXQoIi9ldGMvbG9jYWx0aW1lIiwge3N0X21v
-ZGU9U19JRlJFR3wwNjQ0LCBzdF9zaXplPTM1MTksIC4uLn0pID0gMA0Kd3JpdGUoNSwgIjIwMTkv
-MDkvMjYgMTQ6NTk6MzYuMDU1ODQ4IGN0ZGJkIi4uLiwgMTUzKSA9IDE1Mw0Kd3JpdGUoMjEsICIw
-XDBcMFwwQkRUQ1wxXDBcMFwwXDM1MmtcMzV3XDEwXDBcMFwwXDJcMFwwXDBcMFwwXDBcMFdcMjRc
-MVwwIi4uLiwgNDgpID0gNDgNCg0KDQoNCg0KDQrvu79PbiA5LzI2LzE5LCAxOjAwIFBNLCAic2Ft
-YmEtdGVjaG5pY2FsIG9uIGJlaGFsZiBvZiBNYXggRGlPcmlvIHZpYSBzYW1iYS10ZWNobmljYWwi
-IDxzYW1iYS10ZWNobmljYWwtYm91bmNlc0BsaXN0cy5zYW1iYS5vcmcgb24gYmVoYWxmIG9mIHNh
-bWJhLXRlY2huaWNhbEBsaXN0cy5zYW1iYS5vcmc+IHdyb3RlOg0KDQogICAgTk9URTogVGhpcyBl
-bWFpbCBvcmlnaW5hdGVkIGZyb20gb3V0c2lkZSBvZiB0aGUgb3JnYW5pemF0aW9uLg0KICAgIA0K
-ICAgIA0KICAgIEhpIQ0KICAgIA0KICAgIENUREIgaGFzIGJlZW4gd29ya2luZyBncmVhdCBmb3Ig
-dXMgdGhlIGxhc3QgZmV3IHdlZWtzLiAgVG9kYXksIEkgZGlkIGEgeXVtIHVwZGF0ZSDigJMgYW5k
-IG5vdyB0aGluZ3MgYXJlbuKAmXQgd29ya2luZy4gIFRoZSBwdWJsaWMgSVAgYXNzaWduZWQgaXMg
-bm90IGFjdHVhbGx5IGJlaW5nIGFkZGVkIHRvIHRoZSBpbnRlcmZhY2UsIGJ1dCBDVERCIGNsYWlt
-cyB0aGUgbm9kZXMgYXJlIGhlYWx0aHkuDQogICAgDQogICAgQWxsIDMgbm9kZXMgYXJlIHNob3dp
-bmcgdGhlIHNhbWUgZXZlbnRzLCBqdXN0IHdpdGggdGhlaXIgcmVzcGVjdGl2ZSBwdWJsaWMgSVDi
-gJlzLiAgVGhpcyByZXBlYXRzIG92ZXIgYW5kIG92ZXIgd2hlbiBzZXQgdG8gZGVidWcgbGV2ZWwu
-DQogICAgDQogICAgMjAxOS8wOS8yNiAxMjo1NjowNi4yMjUzNjIgY3RkYi1yZWNvdmVyZFsxMTYx
-NV06IFRyaWdnZXIgdGFrZW92ZXJydW4NCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA2LjIyNTQxOSBj
-dGRiZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVyL2N0ZGJfZGFlbW9uLmM6OTExIGNsaWVudCByZXF1
-ZXN0IDAgb2YgdHlwZSA1IGxlbmd0aCA2NCBmcm9tIG5vZGUgMCB0byAxDQogICAgMjAxOS8wOS8y
-NiAxMjo1NjowNi40MDk4MTkgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3NlcnZlci9jdGRiX3NlcnZl
-ci5jOjE4OCBjdGRiIHJlcXVlc3QgMTgyNzk2IG9mIHR5cGUgNyBsZW5ndGggNjQgZnJvbSBub2Rl
-IDEgdG8gMA0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDYuNDEwNTI2IGN0ZGJkWzExNjA2XTogLi4v
-Y3RkYi9zZXJ2ZXIvY3RkYl9zZXJ2ZXIuYzoxODggY3RkYiByZXF1ZXN0IDE4MjgwMyBvZiB0eXBl
-IDcgbGVuZ3RoIDY0IGZyb20gbm9kZSAxIHRvIDANCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA2LjQx
-MDkwNCBjdGRiZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVyL2N0ZGJfc2VydmVyLmM6MTg4IGN0ZGIg
-cmVxdWVzdCAxODI4MDUgb2YgdHlwZSA3IGxlbmd0aCA2NCBmcm9tIG5vZGUgMSB0byAwDQogICAg
-MjAxOS8wOS8yNiAxMjo1NjowNi40MTEwODcgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3NlcnZlci9j
-dGRiX3NlcnZlci5jOjE4OCBjdGRiIHJlcXVlc3QgMTgyODA4IG9mIHR5cGUgNyBsZW5ndGggNjQg
-ZnJvbSBub2RlIDEgdG8gMA0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDYuNDExMjU3IGN0ZGJkWzEx
-NjA2XTogLi4vY3RkYi9zZXJ2ZXIvY3RkYl9zZXJ2ZXIuYzoxODggY3RkYiByZXF1ZXN0IDE4Mjgx
-MSBvZiB0eXBlIDcgbGVuZ3RoIDY0IGZyb20gbm9kZSAxIHRvIDANCiAgICAyMDE5LzA5LzI2IDEy
-OjU2OjA2LjQxMTQyMCBjdGRiZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVyL2N0ZGJfc2VydmVyLmM6
-MTg4IGN0ZGIgcmVxdWVzdCAxODI4MTQgb2YgdHlwZSA3IGxlbmd0aCA2NCBmcm9tIG5vZGUgMSB0
-byAwDQogICAgMjAxOS8wOS8yNiAxMjo1NjowNi40MTE3NTUgY3RkYmRbMTE2MDZdOiAuLi9jdGRi
-L3NlcnZlci9jdGRiX3NlcnZlci5jOjE4OCBjdGRiIHJlcXVlc3QgMCBvZiB0eXBlIDUgbGVuZ3Ro
-IDcyIGZyb20gbm9kZSAxIHRvIDANCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA2LjQxMTgwNSBjdGRi
-LXJlY292ZXJkWzExNjE1XTogRGlzYWJsaW5nIHRha2VvdmVyIHJ1bnMgZm9yIDYwIHNlY29uZHMN
-CiAgICAyMDE5LzA5LzI2IDEyOjU2OjA2LjQxMzg5NSBjdGRiZFsxMTYwNl06IC4uL2N0ZGIvc2Vy
-dmVyL2N0ZGJfc2VydmVyLmM6MTg4IGN0ZGIgcmVxdWVzdCAyMDUxMCBvZiB0eXBlIDcgbGVuZ3Ro
-IDY0IGZyb20gbm9kZSAyIHRvIDANCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA2LjQxNjI3MCBjdGRi
-ZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVyL2N0ZGJfc2VydmVyLmM6MTg4IGN0ZGIgcmVxdWVzdCAx
-ODI4MjAgb2YgdHlwZSA3IGxlbmd0aCA2NCBmcm9tIG5vZGUgMSB0byAwDQogICAgMjAxOS8wOS8y
-NiAxMjo1NjowNi40MTY0ODQgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3NlcnZlci9jdGRiX3NlcnZl
-ci5jOjE4OCBjdGRiIHJlcXVlc3QgMTgyODIzIG9mIHR5cGUgNyBsZW5ndGggNjQgZnJvbSBub2Rl
-IDEgdG8gMA0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDYuNDE2ODczIGN0ZGJkWzExNjA2XTogLi4v
-Y3RkYi9zZXJ2ZXIvY3RkYl9zZXJ2ZXIuYzoxODggY3RkYiByZXF1ZXN0IDE4MjgyOCBvZiB0eXBl
-IDcgbGVuZ3RoIDk2IGZyb20gbm9kZSAxIHRvIDANCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA2LjQx
-NjkxMiBjdGRiZFsxMTYwNl06IFJlZHVuZGFudCByZWxlYXNlIG9mIElQIDEwLjg1LjEzNi4xMDkv
-MjQgb24gaW50ZXJmYWNlIF9fbm9uZV9fIChpcCBub3QgaGVsZCkNCiAgICAyMDE5LzA5LzI2IDEy
-OjU2OjA2LjQxNjkyNSBjdGRiZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVyL2N0ZGJfdGFrZW92ZXIu
-YzoyOTEgcHVibGljIGFkZHJlc3MgJzEwLjg1LjEzNi4xMDknIG5vdyB1bmFzc2lnbmVkIChvbGQg
-aWZhY2UgJ19fbm9uZV9fJyByZWZzWzBdKQ0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDYuNDE2OTQ5
-IGN0ZGJkWzExNjA2XTogLi4vY3RkYi9zZXJ2ZXIvY3RkYl9zZXJ2ZXIuYzoxODggY3RkYiByZXF1
-ZXN0IDE4MjgzMCBvZiB0eXBlIDcgbGVuZ3RoIDk2IGZyb20gbm9kZSAxIHRvIDANCiAgICAyMDE5
-LzA5LzI2IDEyOjU2OjA2LjQxNjk3MCBjdGRiZFsxMTYwNl06IFJlZHVuZGFudCByZWxlYXNlIG9m
-IElQIDEwLjg1LjEzNi4xMDgvMjQgb24gaW50ZXJmYWNlIF9fbm9uZV9fIChpcCBub3QgaGVsZCkN
-CiAgICAyMDE5LzA5LzI2IDEyOjU2OjA2LjQxNjk4MSBjdGRiZFsxMTYwNl06IC4uL2N0ZGIvc2Vy
-dmVyL2N0ZGJfdGFrZW92ZXIuYzoyOTEgcHVibGljIGFkZHJlc3MgJzEwLjg1LjEzNi4xMDgnIG5v
-dyB1bmFzc2lnbmVkIChvbGQgaWZhY2UgJ19fbm9uZV9fJyByZWZzWzBdKQ0KICAgIDIwMTkvMDkv
-MjYgMTI6NTY6MDYuNDE3MjMyIGN0ZGJkWzExNjA2XTogLi4vY3RkYi9zZXJ2ZXIvY3RkYl9zZXJ2
-ZXIuYzoxODggY3RkYiByZXF1ZXN0IDE4MjgzMiBvZiB0eXBlIDcgbGVuZ3RoIDk2IGZyb20gbm9k
-ZSAxIHRvIDANCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA2LjQxNzI2MCBjdGRiZFsxMTYwNl06IC4u
-L2N0ZGIvc2VydmVyL2N0ZGJfdGFrZW92ZXIuYzoyNjAgcHVibGljIGFkZHJlc3MgJzEwLjg1LjEz
-Ni4xMTAnIHN0aWxsIGFzc2lnbmVkIHRvIGlmYWNlICdlbnMxOTInDQogICAgMjAxOS8wOS8yNiAx
-Mjo1NjowNi40MTcyNzIgY3RkYmRbMTE2MDZdOiBUYWtlb3ZlciBvZiBJUCAxMC44NS4xMzYuMTEw
-LzI0IG9uIGludGVyZmFjZSBlbnMxOTINCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA2LjQxNzI5MCBj
-dGRiZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVyL2V2ZW50c2NyaXB0LmM6NjU5IFJ1bm5pbmcgZXZl
-bnQgdGFrZWlwIHdpdGggYXJndW1lbnRzIGVuczE5MiAxMC44NS4xMzYuMTEwIDI0DQogICAgMjAx
-OS8wOS8yNiAxMjo1NjowNi40MTg0OTQgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3NlcnZlci9jdGRi
-X3Rha2VvdmVyLmM6NDk0IHNlbmRpbmcgVEFLRV9JUCBmb3IgJzEwLjg1LjEzNi4xMTAnDQogICAg
-MjAxOS8wOS8yNiAxMjo1NjowNi40MTg1NDMgY3RkYmRbMTE2MDZdOiBjdGRiX3N5c19zZW5kX2Fy
-cDogQ3JlYXRlZCBTT0NLRVQgRkQ6MTggZm9yIHNlbmRpbmcgYXJwDQogICAgMjAxOS8wOS8yNiAx
-Mjo1NjowNi40Mjc0NDIgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3NlcnZlci9jdGRiX3NlcnZlci5j
-OjE4OCBjdGRiIHJlcXVlc3QgMTgyODM1IG9mIHR5cGUgNyBsZW5ndGggNjQgZnJvbSBub2RlIDEg
-dG8gMA0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDYuNDI3NDg3IGN0ZGJkWzExNjA2XTogLi4vY3Rk
-Yi9zZXJ2ZXIvY3RkYl90YWtlb3Zlci5jOjIyODIgUnVubmluZyAiaXByZWFsbG9jYXRlZCIgZXZl
-bnQNCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA2LjQyNzUwNSBjdGRiZFsxMTYwNl06IC4uL2N0ZGIv
-c2VydmVyL2V2ZW50c2NyaXB0LmM6NjU5IFJ1bm5pbmcgZXZlbnQgaXByZWFsbG9jYXRlZCB3aXRo
-IGFyZ3VtZW50cw0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDYuNDMxNzI4IGN0ZGJkWzExNjA2XTog
-Li4vY3RkYi9zZXJ2ZXIvY3RkYl9zZXJ2ZXIuYzoxODggY3RkYiByZXF1ZXN0IDAgb2YgdHlwZSA1
-IGxlbmd0aCA3MiBmcm9tIG5vZGUgMSB0byAwDQogICAgMjAxOS8wOS8yNiAxMjo1NjowNi40MzE3
-ODYgY3RkYi1yZWNvdmVyZFsxMTYxNV06IFJlZW5hYmxpbmcgdGFrZW92ZXIgcnVucw0KICAgIDIw
-MTkvMDkvMjYgMTI6NTY6MDYuNTMxODE2IGN0ZGJkWzExNjA2XTogY3RkYl9zeXNfc2VuZF9hcnA6
-IENyZWF0ZWQgU09DS0VUIEZEOjE4IGZvciBzZW5kaW5nIGFycA0KICAgIDIwMTkvMDkvMjYgMTI6
-NTY6MDYuNjM0NjU2IGN0ZGJkWzExNjA2XTogY3RkYl9zeXNfc2VuZF9hcnA6IENyZWF0ZWQgU09D
-S0VUIEZEOjE4IGZvciBzZW5kaW5nIGFycA0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDcuMjIzNzQz
-IGN0ZGJkWzExNjA2XTogLi4vY3RkYi9zZXJ2ZXIvY3RkYl9kYWVtb24uYzo5MTEgY2xpZW50IHJl
-cXVlc3QgMTMzMCBvZiB0eXBlIDcgbGVuZ3RoIDY0IGZyb20gbm9kZSAwIHRvIDQwMjY1MzE4NDEN
-CiAgICAyMDE5LzA5LzI2IDEyOjU2OjA3LjIyMzgyNSBjdGRiZFsxMTYwNl06IC4uL2N0ZGIvc2Vy
-dmVyL2N0ZGJfc2VydmVyLmM6MTg4IGN0ZGIgcmVxdWVzdCAxMzQzIG9mIHR5cGUgNyBsZW5ndGgg
-NjQgZnJvbSBub2RlIDAgdG8gMA0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDcuMjIzODUxIGN0ZGJk
-WzExNjA2XTogLi4vY3RkYi9zZXJ2ZXIvY3RkYl9zZXJ2ZXIuYzoxODggY3RkYiByZXF1ZXN0IDEz
-NDMgb2YgdHlwZSA4IGxlbmd0aCA0OCBmcm9tIG5vZGUgMCB0byAwDQogICAgMjAxOS8wOS8yNiAx
-Mjo1NjowNy4yMjM5MTcgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3NlcnZlci9jdGRiX2RhZW1vbi5j
-OjkxMSBjbGllbnQgcmVxdWVzdCAxMzMxIG9mIHR5cGUgNyBsZW5ndGggNjQgZnJvbSBub2RlIDAg
-dG8gNDAyNjUzMTg0MQ0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDcuMjIzOTQ0IGN0ZGJkWzExNjA2
-XTogLi4vY3RkYi9zZXJ2ZXIvY3RkYl9zZXJ2ZXIuYzoxODggY3RkYiByZXF1ZXN0IDEzNDQgb2Yg
-dHlwZSA3IGxlbmd0aCA2NCBmcm9tIG5vZGUgMCB0byAwDQogICAgMjAxOS8wOS8yNiAxMjo1Njow
-Ny4yMjQwODQgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3NlcnZlci9jdGRiX3NlcnZlci5jOjE4OCBj
-dGRiIHJlcXVlc3QgMTM0NCBvZiB0eXBlIDggbGVuZ3RoIDQ4IGZyb20gbm9kZSAwIHRvIDANCiAg
-ICAyMDE5LzA5LzI2IDEyOjU2OjA3LjIyNDEyNyBjdGRiZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVy
-L2N0ZGJfZGFlbW9uLmM6OTExIGNsaWVudCByZXF1ZXN0IDEzMzIgb2YgdHlwZSA3IGxlbmd0aCA2
-NCBmcm9tIG5vZGUgMCB0byA0MDI2NTMxODQxDQogICAgMjAxOS8wOS8yNiAxMjo1NjowNy4yMjQx
-NDUgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3NlcnZlci9jdGRiX3NlcnZlci5jOjE4OCBjdGRiIHJl
-cXVlc3QgMTM0NSBvZiB0eXBlIDcgbGVuZ3RoIDY0IGZyb20gbm9kZSAwIHRvIDANCiAgICAyMDE5
-LzA5LzI2IDEyOjU2OjA3LjIyNDE1OSBjdGRiZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVyL2N0ZGJf
-c2VydmVyLmM6MTg4IGN0ZGIgcmVxdWVzdCAxMzQ1IG9mIHR5cGUgOCBsZW5ndGggMjkyIGZyb20g
-bm9kZSAwIHRvIDANCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA3LjIyNDE5OSBjdGRiZFsxMTYwNl06
-IC4uL2N0ZGIvc2VydmVyL2N0ZGJfZGFlbW9uLmM6OTExIGNsaWVudCByZXF1ZXN0IDEzMzMgb2Yg
-dHlwZSA3IGxlbmd0aCA2NCBmcm9tIG5vZGUgMCB0byA0MDI2NTMxODQxDQogICAgMjAxOS8wOS8y
-NiAxMjo1NjowNy4yMjQyMTcgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3NlcnZlci9jdGRiX3NlcnZl
-ci5jOjE4OCBjdGRiIHJlcXVlc3QgMTM0NiBvZiB0eXBlIDcgbGVuZ3RoIDY0IGZyb20gbm9kZSAw
-IHRvIDANCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA3LjIyNDIyOSBjdGRiZFsxMTYwNl06IC4uL2N0
-ZGIvc2VydmVyL2N0ZGJfc2VydmVyLmM6MTg4IGN0ZGIgcmVxdWVzdCAxMzQ2IG9mIHR5cGUgOCBs
-ZW5ndGggNDggZnJvbSBub2RlIDAgdG8gMA0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDcuMjI0MjY1
-IGN0ZGJkWzExNjA2XTogLi4vY3RkYi9zZXJ2ZXIvY3RkYl9kYWVtb24uYzo5MTEgY2xpZW50IHJl
-cXVlc3QgMTMzNCBvZiB0eXBlIDcgbGVuZ3RoIDY0IGZyb20gbm9kZSAwIHRvIDANCiAgICAyMDE5
-LzA5LzI2IDEyOjU2OjA3LjIyNDI4MSBjdGRiZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVyL2N0ZGJf
-c2VydmVyLmM6MTg4IGN0ZGIgcmVxdWVzdCAxMzQ3IG9mIHR5cGUgNyBsZW5ndGggNjQgZnJvbSBu
-b2RlIDAgdG8gMA0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDcuMjI0Mjk2IGN0ZGJkWzExNjA2XTog
-Li4vY3RkYi9zZXJ2ZXIvY3RkYl9zZXJ2ZXIuYzoxODggY3RkYiByZXF1ZXN0IDEzNDcgb2YgdHlw
-ZSA4IGxlbmd0aCAxNTYgZnJvbSBub2RlIDAgdG8gMA0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDcu
-MjI0MzM2IGN0ZGJkWzExNjA2XTogLi4vY3RkYi9zZXJ2ZXIvY3RkYl9kYWVtb24uYzo5MTEgY2xp
-ZW50IHJlcXVlc3QgMTMzNSBvZiB0eXBlIDcgbGVuZ3RoIDY0IGZyb20gbm9kZSAwIHRvIDQwMjY1
-MzE4NDENCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA3LjIyNDM1MiBjdGRiZFsxMTYwNl06IC4uL2N0
-ZGIvc2VydmVyL2N0ZGJfc2VydmVyLmM6MTg4IGN0ZGIgcmVxdWVzdCAxMzQ4IG9mIHR5cGUgNyBs
-ZW5ndGggNjQgZnJvbSBub2RlIDAgdG8gMA0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDcuMjI0MzY0
-IGN0ZGJkWzExNjA2XTogLi4vY3RkYi9zZXJ2ZXIvY3RkYl9zZXJ2ZXIuYzoxODggY3RkYiByZXF1
-ZXN0IDEzNDggb2YgdHlwZSA4IGxlbmd0aCA0OCBmcm9tIG5vZGUgMCB0byAwDQogICAgMjAxOS8w
-OS8yNiAxMjo1NjowNy4yMjQ0MDQgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3NlcnZlci9jdGRiX2Rh
-ZW1vbi5jOjkxMSBjbGllbnQgcmVxdWVzdCAxMzM2IG9mIHR5cGUgNyBsZW5ndGggNjQgZnJvbSBu
-b2RlIDAgdG8gMA0KICAgIDIwMTkvMDkvMjYgMTI6NTY6MDcuMjI0NDIyIGN0ZGJkWzExNjA2XTog
-Li4vY3RkYi9zZXJ2ZXIvY3RkYl9zZXJ2ZXIuYzoxODggY3RkYiByZXF1ZXN0IDEzNDkgb2YgdHlw
-ZSA3IGxlbmd0aCA2NCBmcm9tIG5vZGUgMCB0byAwDQogICAgMjAxOS8wOS8yNiAxMjo1NjowNy4y
-MjQ0MzQgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3NlcnZlci9jdGRiX3NlcnZlci5jOjE4OCBjdGRi
-IHJlcXVlc3QgMTM0OSBvZiB0eXBlIDggbGVuZ3RoIDQ4IGZyb20gbm9kZSAwIHRvIDANCiAgICAy
-MDE5LzA5LzI2IDEyOjU2OjA3LjIyNDQ2NiBjdGRiZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVyL2N0
-ZGJfZGFlbW9uLmM6OTExIGNsaWVudCByZXF1ZXN0IDEzMzcgb2YgdHlwZSA3IGxlbmd0aCA2NCBm
-cm9tIG5vZGUgMCB0byAxDQogICAgMjAxOS8wOS8yNiAxMjo1NjowNy4yMjQ1MjEgY3RkYmRbMTE2
-MDZdOiAuLi9jdGRiL3NlcnZlci9jdGRiX2RhZW1vbi5jOjkxMSBjbGllbnQgcmVxdWVzdCAxMzM4
-IG9mIHR5cGUgNyBsZW5ndGggNjQgZnJvbSBub2RlIDAgdG8gMg0KICAgIDIwMTkvMDkvMjYgMTI6
-NTY6MDcuMjI0OTAyIGN0ZGJkWzExNjA2XTogLi4vY3RkYi9zZXJ2ZXIvY3RkYl9zZXJ2ZXIuYzox
-ODggY3RkYiByZXF1ZXN0IDEzNTAgb2YgdHlwZSA4IGxlbmd0aCA0OCBmcm9tIG5vZGUgMSB0byAw
-DQogICAgMjAxOS8wOS8yNiAxMjo1NjowNy4yMjQ5MzkgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3Nl
-cnZlci9jdGRiX3NlcnZlci5jOjE4OCBjdGRiIHJlcXVlc3QgMTM1MSBvZiB0eXBlIDggbGVuZ3Ro
-IDQ4IGZyb20gbm9kZSAyIHRvIDANCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA3LjIyNDk4MCBjdGRi
-ZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVyL2N0ZGJfZGFlbW9uLmM6OTExIGNsaWVudCByZXF1ZXN0
-IDEzMzkgb2YgdHlwZSA3IGxlbmd0aCA2NCBmcm9tIG5vZGUgMCB0byAxDQogICAgMjAxOS8wOS8y
-NiAxMjo1NjowNy4yMjUxNzUgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3NlcnZlci9jdGRiX3NlcnZl
-ci5jOjE4OCBjdGRiIHJlcXVlc3QgMTM1MiBvZiB0eXBlIDggbGVuZ3RoIDE2MCBmcm9tIG5vZGUg
-MSB0byAwDQogICAgMjAxOS8wOS8yNiAxMjo1NjowNy4yMjUyMjAgY3RkYmRbMTE2MDZdOiAuLi9j
-dGRiL3NlcnZlci9jdGRiX2RhZW1vbi5jOjkxMSBjbGllbnQgcmVxdWVzdCAxMzQwIG9mIHR5cGUg
-NyBsZW5ndGggNjQgZnJvbSBub2RlIDAgdG8gNDAyNjUzMTg0MQ0KICAgIDIwMTkvMDkvMjYgMTI6
-NTY6MDcuMjI1MjM4IGN0ZGJkWzExNjA2XTogLi4vY3RkYi9zZXJ2ZXIvY3RkYl9zZXJ2ZXIuYzox
-ODggY3RkYiByZXF1ZXN0IDEzNTMgb2YgdHlwZSA3IGxlbmd0aCA2NCBmcm9tIG5vZGUgMCB0byAw
-DQogICAgMjAxOS8wOS8yNiAxMjo1NjowNy4yMjUyNTIgY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3Nl
-cnZlci9jdGRiX3NlcnZlci5jOjE4OCBjdGRiIHJlcXVlc3QgMTM1MyBvZiB0eXBlIDggbGVuZ3Ro
-IDcyIGZyb20gbm9kZSAwIHRvIDANCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA3LjIyNTI5MSBjdGRi
-ZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVyL2N0ZGJfZGFlbW9uLmM6OTExIGNsaWVudCByZXF1ZXN0
-IDEzNDEgb2YgdHlwZSA3IGxlbmd0aCA2NCBmcm9tIG5vZGUgMCB0byA0MDI2NTMxODQxDQogICAg
-MjAxOS8wOS8yNiAxMjo1NjowNy4yMjUzMDggY3RkYmRbMTE2MDZdOiAuLi9jdGRiL3NlcnZlci9j
-dGRiX3NlcnZlci5jOjE4OCBjdGRiIHJlcXVlc3QgMTM1NCBvZiB0eXBlIDcgbGVuZ3RoIDY0IGZy
-b20gbm9kZSAwIHRvIDANCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA3LjIyNTMyMiBjdGRiZFsxMTYw
-Nl06IC4uL2N0ZGIvc2VydmVyL2N0ZGJfc2VydmVyLmM6MTg4IGN0ZGIgcmVxdWVzdCAxMzU0IG9m
-IHR5cGUgOCBsZW5ndGggMTQ0IGZyb20gbm9kZSAwIHRvIDANCiAgICAyMDE5LzA5LzI2IDEyOjU2
-OjA3LjIyNTM2MCBjdGRiZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVyL2N0ZGJfZGFlbW9uLmM6OTEx
-IGNsaWVudCByZXF1ZXN0IDEzNDIgb2YgdHlwZSA3IGxlbmd0aCA2NCBmcm9tIG5vZGUgMCB0byA0
-MDI2NTMxODQxDQogICAgMjAxOS8wOS8yNiAxMjo1NjowNy4yMjUzNzcgY3RkYmRbMTE2MDZdOiAu
-Li9jdGRiL3NlcnZlci9jdGRiX3NlcnZlci5jOjE4OCBjdGRiIHJlcXVlc3QgMTM1NSBvZiB0eXBl
-IDcgbGVuZ3RoIDY0IGZyb20gbm9kZSAwIHRvIDANCiAgICAyMDE5LzA5LzI2IDEyOjU2OjA3LjIy
-NTM4OSBjdGRiZFsxMTYwNl06IC4uL2N0ZGIvc2VydmVyL2N0ZGJfc2VydmVyLmM6MTg4IGN0ZGIg
-cmVxdWVzdCAxMzU1IG9mIHR5cGUgOCBsZW5ndGggMTQ0IGZyb20gbm9kZSAwIHRvIDANCiAgICAy
-MDE5LzA5LzI2IDEyOjU2OjA3LjIyNTQ0MiBjdGRiLXJlY292ZXJkWzExNjE1XTogQXNzaWduZWQg
-SVAgMTAuODUuMTM2LjExMCBub3Qgb24gYW4gaW50ZXJmYWNlDQogICAgMjAxOS8wOS8yNiAxMjo1
-NjowNy4yMjU0NzYgY3RkYi1yZWNvdmVyZFsxMTYxNV06IFRyaWdnZXIgdGFrZW92ZXJydW4NCiAg
-ICANCiAgICANCiAgICAxOiBsbzogPExPT1BCQUNLLFVQLExPV0VSX1VQPiBtdHUgNjU1MzYgcWRp
-c2Mgbm9xdWV1ZSBzdGF0ZSBVTktOT1dOIGdyb3VwIGRlZmF1bHQgcWxlbiAxMDAwDQogICAgICAg
-IGxpbmsvbG9vcGJhY2sgMDA6MDA6MDA6MDA6MDA6MDAgYnJkIDAwOjAwOjAwOjAwOjAwOjAwDQog
-ICAgICAgIGluZXQgMTI3LjAuMC4xLzggc2NvcGUgaG9zdCBsbw0KICAgICAgICAgICB2YWxpZF9s
-ZnQgZm9yZXZlciBwcmVmZXJyZWRfbGZ0IGZvcmV2ZXINCiAgICAgICAgaW5ldDYgOjoxLzEyOCBz
-Y29wZSBob3N0DQogICAgICAgICAgIHZhbGlkX2xmdCBmb3JldmVyIHByZWZlcnJlZF9sZnQgZm9y
-ZXZlcg0KICAgIDI6IGVuczE5MjogPEJST0FEQ0FTVCxNVUxUSUNBU1QsVVAsTE9XRVJfVVA+IG10
-dSAxNTAwIHFkaXNjIG1xIHN0YXRlIFVQIGdyb3VwIGRlZmF1bHQgcWxlbiAxMDAwDQogICAgICAg
-IGxpbmsvZXRoZXIgMDA6NTA6NTY6ODU6MzM6ODggYnJkIGZmOmZmOmZmOmZmOmZmOmZmDQogICAg
-ICAgIGluZXQgMTAuODUuMTM2LjEwMS8yNCBicmQgMTAuODUuMTM2LjI1NSBzY29wZSBnbG9iYWwg
-ZW5zMTkyDQogICAgICAgICAgIHZhbGlkX2xmdCBmb3JldmVyIHByZWZlcnJlZF9sZnQgZm9yZXZl
-cg0KICAgICAgICBpbmV0NiBmZTgwOjoyNTA6NTZmZjpmZTg1OjMzODgvNjQgc2NvcGUgbGluaw0K
-ICAgICAgICAgICB2YWxpZF9sZnQgZm9yZXZlciBwcmVmZXJyZWRfbGZ0IGZvcmV2ZXINCiAgICAz
-OiBlbnMyMjQ6IDxCUk9BRENBU1QsTVVMVElDQVNULFVQLExPV0VSX1VQPiBtdHUgMTUwMCBxZGlz
-YyBtcSBzdGF0ZSBVUCBncm91cCBkZWZhdWx0IHFsZW4gMTAwMA0KICAgICAgICBsaW5rL2V0aGVy
-IDAwOjUwOjU2Ojg1OmMxOjE0IGJyZCBmZjpmZjpmZjpmZjpmZjpmZg0KICAgICAgICBpbmV0IDE5
-Mi4xNjguMTM2LjEwMS8yNCBicmQgMTkyLjE2OC4xMzYuMjU1IHNjb3BlIGdsb2JhbCBlbnMyMjQN
-CiAgICAgICAgICAgdmFsaWRfbGZ0IGZvcmV2ZXIgcHJlZmVycmVkX2xmdCBmb3JldmVyDQogICAg
-ICAgIGluZXQ2IGZlODA6OjI1MDo1NmZmOmZlODU6YzExNC82NCBzY29wZSBsaW5rDQogICAgICAg
-ICAgIHZhbGlkX2xmdCBmb3JldmVyIHByZWZlcnJlZF9sZnQgZm9yZXZlcg0KICAgIA0KICAgIA0K
-ICAgIEN1cnJlbnRseSBydW5uaW5nIGN0ZGIueDg2XzY0ICAgIDQuOS4xLTYuZWw3LiBvbiBDZW50
-b3MgNy43LjE5MDgNCiAgICANCiAgICBOb3RoaW5nIGVsc2UgaXMgYmVpbmcgbG9nZ2VkIHRvIG1l
-c3NhZ2VzIG9yIGFueSBvdGhlciBsb2cgSeKAmXZlIGxvb2tlZCBhdC4gIFNlbGludXggaXMgZGlz
-YWJsZWQuICAgSG93IGRvIEkgZml4IHRoaXM/ICBUaGFua3MhDQogICAgDQogICAgDQogICAgTWF4
-IERpT3Jpbw0KICAgIElUIEFyY2hpdGVjdA0KICAgIFtzaWduYXR1cmVfNjIwODYzNDY2XQ0KICAg
-IDIwMSBGdWxsZXIgUm9hZCwgU3VpdGUgMjAyDQogICAgQWxiYW55LCBOWSAxMjIwMy0zNjIxDQog
-ICAgUGhvbmU6IDUxOC0yMzgtNjUxNiB8IE1vYmlsZTogNTE4LTk0NC01Mjg5DQogICAgbWF4LmRp
-b3Jpb0BpZWVlZ2xvYmFsc3BlYy5jb208bWFpbHRvOm1heC5kaW9yaW9AaWVlZWdsb2JhbHNwZWMu
-Y29tPg0KICAgIA0KDQo=
+Hi Max,
+
+On Thu, 26 Sep 2019 19:04:31 +0000, Max DiOrio via samba-technical
+<samba-technical@lists.samba.org> wrote:
+
+> Additional info - when running an strace on the process:
+>=20
+> epoll_wait(11, [{EPOLLIN, {u32=3D2179214400, u64=3D94542999333952}}], 1, =
+114) =3D 1
+> ioctl(24, FIONREAD, [96])               =3D 0
+> read(24, "`\0\0\0BDTC\1\0\0\0\352k\35w\7\0\0\0\0\0\0\0\2\0\0\0W\24\1\0"..=
+., 96) =3D 96
+> stat("/etc/localtime", {st_mode=3DS_IFREG|0644, st_size=3D3519, ...}) =3D=
+ 0
+> write(5, "2019/09/26 14:59:36.055468 ctdbd"..., 130) =3D 130
+> socket(AF_INET, SOCK_STREAM, IPPROTO_TCP) =3D 25
+> bind(25, {sa_family=3DAF_INET, sin_port=3Dhtons(0), sin_addr=3Dinet_addr(=
+"10.85.136.108")}, 16) =3D -1 EADDRNOTAVAIL (Cannot assign requested addres=
+s)
+> close(25)                               =3D 0
+> stat("/etc/localtime", {st_mode=3DS_IFREG|0644, st_size=3D3519, ...}) =3D=
+ 0
+> write(5, "2019/09/26 14:59:36.055731 ctdbd"..., 118) =3D 118
+> stat("/etc/localtime", {st_mode=3DS_IFREG|0644, st_size=3D3519, ...}) =3D=
+ 0
+> write(5, "2019/09/26 14:59:36.055848 ctdbd"..., 153) =3D 153
+> write(21, "0\0\0\0BDTC\1\0\0\0\352k\35w\10\0\0\0\2\0\0\0\0\0\0\0W\24\1\0"=
+..., 48) =3D 48
+
+Not sure what process you're running strace on here.  A higher
+value for -s might have give enough context in the log messages
+being written in that snippet.
+
+However, I think I can guess the answer... see below...
+
+> =EF=BB=BFOn 9/26/19, 1:00 PM, "samba-technical on behalf of Max DiOrio vi=
+a samba-technical" <samba-technical-bounces@lists.samba.org on behalf of sa=
+mba-technical@lists.samba.org> wrote:
+
+>     CTDB has been working great for us the last few weeks.  Today, I
+> did a yum update =E2=80=93 and now things aren=E2=80=99t working.  The pu=
+blic IP
+> assigned is not actually being added to the interface, but CTDB
+> claims the nodes are healthy.
+
+> [...]
+
+>     Currently running ctdb.x86_64    4.9.1-6.el7. on Centos 7.7.1908
+
+I'm guessing that this was an upgrade to 4.9 from a previous version.
+In 4.9 CTDB's configuration changed a lot and so did the event script
+handling.
+
+Try running:
+
+# ctdb event script list legacy
+
+See if 10.interface is listed and has a '*' next to it to indicate
+whether it is enabled.  If it is listed but it is not enabled then:
+
+# ctdb event script enable legacy 10.interface
+
+will enable it.
+
+You may want to check that all the event scripts you use are enabled as
+expected.
+
+There is an example configuration migration script
+(config_migrate.sh) with CTDB in version 4.9.  It is pretty good but we
+left it as an example because we didn't want to drown in bugs that
+might be present in the script.  I don't know if CentOS 7 ships it.  If
+not, you can get it at:
+
+  https://git.samba.org/?p=3Dsamba.git;a=3Dblob_plain;f=3Dctdb/doc/examples=
+/config_migrate.sh;hb=3Drefs/heads/v4-9-stable
+
+If I haven't guessed right then please post your config (ctdb.conf,
+nodes file, public addresses file) and the output of:
+
+# ctdb event script list legacy
+
+If none of this works, since you seem to be awake now, you could jump
+on the #ctdb IRC channel on Freenode and look for me there.  I'll be in
+and out for the next couple of hours.
+
+Thanks...
+
+peace & happiness,
+martin
+
+p.s. As a user level question, this would have been more appropriate on
+     the "samba" list, rather than samba-technical.   :-)
 
