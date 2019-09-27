@@ -2,58 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73600C00A3
-	for <lists+samba-technical@lfdr.de>; Fri, 27 Sep 2019 10:06:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97683C0362
+	for <lists+samba-technical@lfdr.de>; Fri, 27 Sep 2019 12:25:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=aII4M2SwZO+GRDmd3nm0B9UpYMTlksmgmY752Xryfwg=; b=qQi00StxKw+dXH4UhDfcDppOyS
-	V71zwkvbyCp1XoukyQ+eqYAM8V0w3K6qvUBL6eiqlLBTZjN0i394OlgyDmLCRyECrbrzArBapNvv3
-	MGc1XzmpvJgi79hnJvhDt9uR2tRSNDYBIcCizCf9j5bLZRd8oOKxu3xalYjqvcIP7hBa1Zm83WCMi
-	VtqGnQz4lVEXPYFjFfOT31LzveDTVDfsFJPs6DZVxSa3u+S2MgaBabjHbpKkhHiExULdCcG/U2Mgk
-	lLFB7djoAjD9ZG9kna2k4S43cvo9EhYBQs7AJcQUima1s+uzd4tfj0ZZK+9ZT1ZVcw63zRj1d4Ts4
-	3aALiZpA==;
-Received: from localhost ([::1]:38622 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=Lu3ULsU56xcIy0d+bFPbEjBsL1zggI7DxER2ncW9PRw=; b=Ml9160OlspGJ7RYMcpG/Q2ltWO
+	IHXmsR/mWVp7fUceVAzJdHxTwWQvBb3zwvZd+4GegEOQ8L3HJ1ADMOqeq6poEBy+0/YNOySP8Knv6
+	o6oJRBUW/JVkHfhBbhicuNDOMPzdpqY8qAA+fXH+dQ+VH91R16jSJMj8MgXTYwtC1Uwu8zsZefPqv
+	NazTbmz3cFiYqnmWPudIRxYwRXw44yeYch3CT/s/6Al6aKtLdj+7wxEfSMiM3zW+3n4TjaPPVilTX
+	RIHEa2cHU1hXXAZ8LpwKSshWGE+YSl82I0vOJA7/nXiV5c4MgDw16TOTwylI0QufBBCk0acU411P6
+	oULziYGQ==;
+Received: from localhost ([::1]:42670 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iDlFo-0095Cr-Pr; Fri, 27 Sep 2019 08:05:28 +0000
-Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:38937) 
+	id 1iDnQg-0096M4-CA; Fri, 27 Sep 2019 10:24:50 +0000
+Received: from grace.univie.ac.at ([2001:62a:4:25::25:115]:54192) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iDlFj-0095Ck-Hz
- for samba-technical@lists.samba.org; Fri, 27 Sep 2019 08:05:25 +0000
-Received: by mail-io1-xd2f.google.com with SMTP id a1so14033308ioc.6
- for <samba-technical@lists.samba.org>; Fri, 27 Sep 2019 01:05:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=aII4M2SwZO+GRDmd3nm0B9UpYMTlksmgmY752Xryfwg=;
- b=rgBxjCxjhPdcbOfu4hiaChXBj51sjdBd/pOIfRwcGb+gHt0bYoxcDGmZBzFmhe4/ui
- 2YKrQX3qA93oZbxUdftjoSrdCYpGdvZTLDz8clv7fXMwSNIa1XygnIOaX5KTQMA4dYbw
- oT7z7CECOUmtiGIbWpJpqQasaug3PjG0RVD0LDrbcLrrbR0fDPp2ijbckxj16XvZxCYl
- oJbh6VgOaK3DLAhFbJu2heVPX6FhSRCBOfTKyIC3wUnTMyN6zL4Di0Z87y2WGC/ZLran
- TSnOWrVXNhN2kfJLugBVMGjaTe0mjnzUGaKgTD832t70AbOrd6FP40h2j44cBtGGt2JN
- T7dQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=aII4M2SwZO+GRDmd3nm0B9UpYMTlksmgmY752Xryfwg=;
- b=pnadaTVcc0ioZEqcnWJonntP1xrbhVLYv/dY3U4IaJwF+aztcAxeAvsdfymhuklATr
- jEgSggcG2WfaqAsQUY/6kOWsYYJl22VbsSp7+L4YYUOEqbJ31P+aOp54pVw4jml21kUz
- TeNFkIwb/1QON7tilMqGrSG6xunhU5RpYugqVnJ0e/sQzTv6c0ouVeWlXPvUnuP/EuOO
- aNdwdjL6usR8IUQDDYi/DxjGwhD03JlIoS6hGhoDIDHAtkSRr23xy+QZnRhgCxeUx5TA
- wFDFA8WzM7WdqQQq6hmYitTt4aqjzCdegZ4Wm3B+bA0JNNSZDLTcm+Lg+74J+FuJnhFs
- gJEg==
-X-Gm-Message-State: APjAAAW6QbjHPBViXdFLVx1viRoQ1NSt/y5BuEoSs+D3nosRALYvK969
- 8m7O5Q1eV2j6LMv3lyOvlxUK3Bxj1E3k4YTyzCg=
-X-Google-Smtp-Source: APXvYqyy5KszHwxSTkUamxhjSmdfrXjsdptssDmQF/MWhvmTa3qKwsUQDohWBRPumTR2JE1fiwGXLHlJ55ffxIrjQ+E=
-X-Received: by 2002:a02:3e91:: with SMTP id s139mr7333168jas.22.1569571521958; 
- Fri, 27 Sep 2019 01:05:21 -0700 (PDT)
+ (Exim) id 1iDnQc-0096Lx-5k
+ for samba-technical@lists.samba.org; Fri, 27 Sep 2019 10:24:48 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=univie.ac.at; s=rev2; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Lu3ULsU56xcIy0d+bFPbEjBsL1zggI7DxER2ncW9PRw=; b=sGeAm/CjkC8I98bjFd4LyBG2h7
+ cd1UxvgC9IzVcC+Jegze6ey4gbscoi32jgfWTE+uJW9uPhJ+cXNTgSF8tEK9bYCNTCanduL3a36+8
+ jBZ5Z8ppSJLPaIIbQtqGxPJPGwRYfsjYT/UcVWQeXtP/W8orcPs832eNhOXnVLcvzFOI=;
+Received: from joan.univie.ac.at ([131.130.3.110] helo=joan.univie.ac.at)
+ by grace.univie.ac.at with esmtps (TLSv1.3:TLS_AES_256_GCM_SHA384:256)
+ (Exim 4.92.1) (envelope-from <Heinrich.Mislik@univie.ac.at>)
+ id 1iDnEr-0007F4-IG
+ for samba-technical@lists.samba.org; Fri, 27 Sep 2019 12:12:37 +0200
+Received: from wsmi.cc.univie.ac.at ([2001:62a:4:202::200]
+ helo=wsmi.cc.univie.ac.at)
+ by joan.univie.ac.at with esmtpsa (TLSv1.3:TLS_AES_256_GCM_SHA384:256)
+ (Exim 4.92.1) (envelope-from <Heinrich.Mislik@univie.ac.at>)
+ id 1iDnEr-0006f8-ED
+ for samba-technical@lists.samba.org; Fri, 27 Sep 2019 12:12:37 +0200
+Subject: Re: CTDB Assigned IP not on an interface
+To: samba-technical@lists.samba.org
+References: <848DA573-7DDC-4B8B-BECE-A0C5B15E704F@ieeeglobalspec.com>
+Openpgp: preference=signencrypt
+Message-ID: <557c4a52-b8a4-c320-155e-4333890fffd8@univie.ac.at>
+Date: Fri, 27 Sep 2019 12:12:37 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.4.0
 MIME-Version: 1.0
-References: <CAH2r5mueOCtAsWjOc3n2OgnygSMmj22uycsvfNKPAiqhx68xsg@mail.gmail.com>
-In-Reply-To: <CAH2r5mueOCtAsWjOc3n2OgnygSMmj22uycsvfNKPAiqhx68xsg@mail.gmail.com>
-Date: Fri, 27 Sep 2019 01:05:10 -0700
-Message-ID: <CAN05THT-hc84ZOK-c7ZAxRitCKWDVtRCJpvBzYfv9=CqpSNdmA@mail.gmail.com>
-Subject: Re: Getting the SID of the user out of the PAC ...
-To: Steve French <smfrench@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <848DA573-7DDC-4B8B-BECE-A0C5B15E704F@ieeeglobalspec.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Univie-Virus-Scan: scanned by ClamAV on joan.univie.ac.at
+X-Univie-DANE: verified lists-mx.samba.org
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,31 +67,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>
+From: Heinrich Mislik via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Heinrich Mislik <Heinrich.Mislik@univie.ac.at>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Please don't.
+Hi,
 
-You can't get the sid from NTLMSSP
+I think, the package ctdb-4.9.1-6.el7.x86_64 is somehow broken. After a fresh install I had to do several things, to get it working:
 
-On Thu, Sep 26, 2019 at 11:39 PM Steve French <smfrench@gmail.com> wrote:
->
-> Is there a way to get the SID of the user out of the MS-PAC through
-> Samba utils (or winbind)?
->
-> This would help cifs if when we upcall as we do today to get the
-> kerberos ticket, we were also given the user's SID not just the ticket
-> to use to send to the server during session setup.
->
->
->
-> --
-> Thanks,
->
-> Steve
+Create missing directories:
+
+/etc/ctdb/events/legacy
+/var/lib/ctdb/state
+/var/lib/ctdb/persistent
+/var/lib/ctdb/volatile
+
+Create missiong symlinks in /etc/ctdb/events/legacy/
+
+ls -l /etc/ctdb/events/legacy/
+total 0
+lrwxrwxrwx 1 root root 44 Sep 20 17:06 00.ctdb.script -> /usr/share/ctdb/events/legacy/00.ctdb.script
+lrwxrwxrwx 1 root root 47 Sep 20 17:06 01.reclock.script -> /usr/share/ctdb/events/legacy/01.reclock.script
+lrwxrwxrwx 1 root root 46 Sep 20 17:06 05.system.script -> /usr/share/ctdb/events/legacy/05.system.script
+lrwxrwxrwx 1 root root 49 Sep 20 17:06 10.interface.script -> /usr/share/ctdb/events/legacy/10.interface.script
+lrwxrwxrwx 1 root root 47 Sep 19 17:40 49.winbind.script -> /usr/share/ctdb/events/legacy/49.winbind.script
+lrwxrwxrwx 1 root root 45 Sep 19 18:27 50.samba.script -> /usr/share/ctdb/events/legacy/50.samba.script
+
+The SPEC file in samba source handles the symlinks in a post install script, thats where I got that list.
+
+Hth
+
+Cheers
+
+Heinrich
+
+-- 
+Heinrich Mislik
+Zentraler Informatikdienst der Universitaet Wien
+A-1010 Wien, Universitaetsstrasse 7
+Tel.: (+43 1) 4277-14056, Fax: (+43 1) 4277-9140
 
