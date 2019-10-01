@@ -2,49 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08840C1B20
-	for <lists+samba-technical@lfdr.de>; Mon, 30 Sep 2019 07:49:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4708AC3E3E
+	for <lists+samba-technical@lfdr.de>; Tue,  1 Oct 2019 19:11:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=/5ZplNo9cQLHzCFo4NJ22CC14ahD5BuEQImk54ogFDg=; b=ebwU8EyPZvIdNr3CyRPctP6fNa
-	qo+GJRZiuxqmD/Fp8dgBiFyKPL+izrozsPfD12/AB3SJonGlgK2KqOzh7bZmBfUp6OVioiPXD2tdf
-	3FemcTYfdvi9V29Y5+lV8Kl9TbQhb+T5xuJOjoej9v+sYKQyqdDbReiIXqkNZqgkaIaTx/fyYswur
-	Nsl0gDheMybapC1sYvlL+Kf9z2OaQsgdXRd6216PdMX5OSHA+jspBqmDf7iwGNkS7/4dDFrow9P+C
-	XwXNPEhV783JuRpSO/PhVY/9lSnfiNHYZ10OQMat8ZDWN7Pi1AxBn7ZFV2HmYw2U34azcQUumE92B
-	3Wxve3hw==;
-Received: from localhost ([::1]:18418 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=A8qzreD3Aoux2woi5Fj9Leo7MHUln5di2PJf76EqfBk=; b=eR7iXS9aE8+Wo6Du9mf05zdSGi
+	UZRCwhh7Vqj6rHNwbSteuOPPJNkFuGA5aRIz32Eyh7aKPPoNmGLIJx4ng4tpbWrGtgJU5puVulxJA
+	f4TPYXpiKnybwXeA4Cdta9rEvH004PKFDTpKvVwu4NuXv7L0Nt8EUHZN5PT/dRnsRjFefPIn7t24o
+	T3QZM869rai7FeCUdzKSJIZ/vy7FnGQ8Jrk0K7JfdbMpusyTGSUqSxyo15Pc1VWUCrJ3E56w5OL3D
+	YM2DUkHuT3DKIi1vLANTANeuBRG/UdaxIvvZyCYxplA3E9zvmWoMjzBmLPl9ccD9kw0G7wByBf42q
+	p7JGrWHA==;
+Received: from localhost ([::1]:22346 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iEoY8-009mLm-Kp; Mon, 30 Sep 2019 05:48:44 +0000
-Received: from bilbo.ozlabs.org ([203.11.71.1]:50137 helo=ozlabs.org) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iEoY2-009mLf-UQ
- for samba-technical@lists.samba.org; Mon, 30 Sep 2019 05:48:41 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 46hWfN4Mnmz9s7T;
- Mon, 30 Sep 2019 15:48:28 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1569822510; bh=xx78/74J2nb6niirTe05U8A1RMZd72DCgTGA6LHR8Vw=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=A/ZguNTbESjtv1SM4IE2BT+v2f7FoXx1JhxDMmFzrwgLwAsAUYynnMioBJWfQ/APh
- 4o9TnWONR9T3duaA86ZPH+xsxEZ9IhYRmwbKz/mo9IexWYq3KjKWiA3Dcnkwq6aLYE
- fo1QDpKT4DybrG3mi/rBGzrwRH++HwSRXPV4h6SOSwZP5+iPXxXI7X6gRY2aWrpRlJ
- on0njfjmHuFRPy0ErZre0IUIW8kWA0BuFSpo1evqH9LExXy5egAlJBxnIQZJm9ZwIb
- Ru1v1zubyrqf4+w3/Aj1axjfmxjilbmiyuKHrIf78YFzCTfxW0yAjv+l1AOsaCvtKT
- GTizla0a2rVUQ==
-Date: Mon, 30 Sep 2019 15:48:27 +1000
-To: Heinrich Mislik <Heinrich.Mislik@univie.ac.at>
-Subject: Re: CTDB Assigned IP not on an interface
-Message-ID: <20190930154827.52b782c4@martins.ozlabs.org>
-In-Reply-To: <557c4a52-b8a4-c320-155e-4333890fffd8@univie.ac.at>
-References: <848DA573-7DDC-4B8B-BECE-A0C5B15E704F@ieeeglobalspec.com>
- <557c4a52-b8a4-c320-155e-4333890fffd8@univie.ac.at>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+	id 1iFLg3-0006CM-QJ; Tue, 01 Oct 2019 17:11:07 +0000
+Received: from mx.cjr.nz ([51.158.111.142]:36198) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iFLfy-0006AE-26
+ for samba-technical@lists.samba.org; Tue, 01 Oct 2019 17:11:06 +0000
+Received: from authenticated-user (mx.cjr.nz [51.158.111.142])
+ (Authenticated sender: pc)
+ by mx.cjr.nz (Postfix) with ESMTPSA id CD95F80A7A;
+ Tue,  1 Oct 2019 17:10:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz; s=dkim;
+ t=1569949858;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=A8qzreD3Aoux2woi5Fj9Leo7MHUln5di2PJf76EqfBk=;
+ b=dFbX3/Sttcc+w4N56hh9JsQQan/u+sklnnafSgX3HnMYorBA4/Tp4wJ4wYSIVCFrpQ+EWQ
+ gABpNigKj86CLsd6ndZE0+fy9vsYgyBZK3Q13dBFzfvmuFB5VhaU1ZqeZJIce/5wWIM9qS
+ qlq5vL+D7KBq5RTaKgMQvH60pq45hP8NTU97MqTbcuXhWWpktEfZEyjANTXrDJuBM20GLY
+ QtaxMOigBL8naSmx17XTh96QHyyUBsWAj3kfTItGcr/10o+5GG3EAFssuwKsjwHXKqUSvD
+ /x4fFmxkhtiJBbdEzQzh8fPj0AqkMz7P9FiS5fDUq9hSr4GU+B2dp4uVlSkEDw==
+To: netdev@vger.kernel.org, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, davem@davemloft.net, smfrench@gmail.com
+Subject: [PATCH net-next 0/2] Experimental SMB rootfs support
+Date: Tue,  1 Oct 2019 14:10:26 -0300
+Message-Id: <20191001171028.23356-1-pc@cjr.nz>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz;
+ s=dkim; t=1569949858; h=from:from:sender:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:references; bh=A8qzreD3Aoux2woi5Fj9Leo7MHUln5di2PJf76EqfBk=;
+ b=0jWn1vZPGuBwKQF7WiKqAsuPRIRJ3N6ed2Qygf2UT7EaH83ROI4bgdtmvNtdwFm5QIWd69
+ 6oIxrcsUUN9NTmYc7xXdVJD/42pwxWlXMKHtb+bZPCRMJ/Rh5lew+zNhQNijaW+OrVYlgC
+ pYvdAfPGzkkLvKlvaZwuSR0It/e+cvTXxLIHPCpP02G8unGv7bFnk+LnAxYrl9nvRQpH6d
+ k/9JFf7i9XiC/cnvwfHLcd+jj5F8PPm8gIPosMSb9zyJ/Pzl+hRfTkJi9WD7z8qUSpS1bH
+ pyBAE0yCqVl9Rf4EEiQSVeBeEqM4NVWzAjQ5E1u1+KKmrSZUymN8oUG1a/qJEA==
+ARC-Seal: i=1; s=dkim; d=cjr.nz; t=1569949858; a=rsa-sha256; cv=none;
+ b=RvTtBqrBobfZxGGV9MX69/AOI8AfPqYC6jwIGMZOCdUSCiMFSIx5tqXan459VeTtwcCU0E
+ ZhzfDPo7gg/CkHSuAQ/IYeNhrEtqqO4GHtwGRcRumnT/qdvF746rxTRiaHhR10RwCSKvZW
+ T1E69VRt90LtHJ8PU5toi49jS54iQc9r5sfdDkXHChsLCkg4HcNcaaunbKha1NwwnbwuN+
+ faPMN+xmPch+3YJGBkIThUH+qXD0ndoa57Qpkn/F/Hg+T8xEk96ofIaZSmgaQLqhW51A8Z
+ UBahCDJ0M+xbdCT+Vwvh8BnzSUVVWvTYhASC7tsOa0Cw0Y15p+3KWXDFxIwIUQ==
+ARC-Authentication-Results: i=1; mx.cjr.nz;
+ auth=pass smtp.auth=pc smtp.mailfrom=pc@cjr.nz
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,55 +72,57 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: samba-technical@lists.samba.org
+From: "Paulo Alcantara \(SUSE\) via samba-technical"
+ <samba-technical@lists.samba.org>
+Reply-To: "Paulo Alcantara \(SUSE\)" <pc@cjr.nz>
+Cc: "Paulo Alcantara \(SUSE\)" <pc@cjr.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Heinrich,
+Hi,
 
-On Fri, 27 Sep 2019 12:12:37 +0200, Heinrich Mislik via samba-technical
-<samba-technical@lists.samba.org> wrote:
+This patch series enables Linux to mount root file systems over the
+network by utilizing SMB protocol.
 
-> I think, the package ctdb-4.9.1-6.el7.x86_64 is somehow broken. After
-> a fresh install I had to do several things, to get it working:
+Upstream commit 8eecd1c2e5bc ("cifs: Add support for root file
+systems") introduced a new CONFIG_CIFS_ROOT option, a virtual device
+(Root_CIFS) and a kernel cmdline parameter "cifsroot=" which tells the
+kernel to actually mount the root filesystem over a SMB share.
 
-> Create missing directories:
->=20
-> /etc/ctdb/events/legacy
-> /var/lib/ctdb/state
-> /var/lib/ctdb/persistent
-> /var/lib/ctdb/volatile
+The feature relies on ipconfig to set up the network prior to mounting
+the rootfs, so when it is set along with "cifsroot=" parameter:
 
-Please report this as a bug to the distribution (CentOS?).
+    (1) cifs_root_setup() parses all necessary data out of "cifsroot="
+    parameter for the init process know how to mount the SMB rootfs
+    (e.g. SMB server address, mount options).
 
-> Create missiong symlinks in /etc/ctdb/events/legacy/
+    (2) If DHCP failed for some reason in ipconfig, we keep retrying
+    forever as we have nowhere to go for NFS or SMB root
+    filesystems (see PATCH 2/2). Otherwise go to (3).
 
-> ls -l /etc/ctdb/events/legacy/
-> total 0
-> lrwxrwxrwx 1 root root 44 Sep 20 17:06 00.ctdb.script -> /usr/share/ctdb/=
-events/legacy/00.ctdb.script
-> lrwxrwxrwx 1 root root 47 Sep 20 17:06 01.reclock.script -> /usr/share/ct=
-db/events/legacy/01.reclock.script
-> lrwxrwxrwx 1 root root 46 Sep 20 17:06 05.system.script -> /usr/share/ctd=
-b/events/legacy/05.system.script
-> lrwxrwxrwx 1 root root 49 Sep 20 17:06 10.interface.script -> /usr/share/=
-ctdb/events/legacy/10.interface.script
-> lrwxrwxrwx 1 root root 47 Sep 19 17:40 49.winbind.script -> /usr/share/ct=
-db/events/legacy/49.winbind.script
-> lrwxrwxrwx 1 root root 45 Sep 19 18:27 50.samba.script -> /usr/share/ctdb=
-/events/legacy/50.samba.script
+    (3) mount_cifs_root() is then called by mount_root() (ROOT_DEV ==
+    Root_CIFS), retrieves early parsed data from (1), then attempt to
+    mount SMB rootfs by CIFSROOT_RETRY_MAX times at most (see PATCH
+    1/2).
 
-> The SPEC file in samba source handles the symlinks in a post install
-> script, thats where I got that list.
+    (4) If all attempts failed, fall back to floppy drive, otherwise
+    continue the boot process with rootfs mounted over a SMB share.
 
-Yeah, the distribution package should try to enable at least the basic
-scripts.=C2=A0 However, this can be quite difficult to get right.  You'll
-notice that the sample CTDB packaging that you refer to only creates
-the 1st 4 of these if the 1st one does not exist.  It doesn't enable
-49.winbind and 50.samba.
+My idea was to keep the same behavior of nfsroot - as it seems to work
+for most users so far.
 
-peace & happiness,
-martin
+For more information on how this feature works, see
+Documentation/filesystems/cifs/cifsroot.txt.
+
+Paulo Alcantara (SUSE) (2):
+  init: Support mounting root file systems over SMB
+  ipconfig: Handle CONFIG_CIFS_ROOT option
+
+ init/do_mounts.c    | 49 +++++++++++++++++++++++++++++++++++++++++++++
+ net/ipv4/ipconfig.c | 10 +++++++--
+ 2 files changed, 57 insertions(+), 2 deletions(-)
+
+-- 
+2.23.0
+
 
