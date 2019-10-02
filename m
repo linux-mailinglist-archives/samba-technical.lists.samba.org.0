@@ -2,58 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC47AC8CD5
-	for <lists+samba-technical@lfdr.de>; Wed,  2 Oct 2019 17:25:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35A92C8D7C
+	for <lists+samba-technical@lfdr.de>; Wed,  2 Oct 2019 17:58:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=tfkytMcH4ovEsd736+JX0cx08mOhHJE895L8XWxWWsc=; b=nZwWo3vIzkYUzR3F6RG48YIpOA
-	6RWW3sIzW1iPbxRQf7nD+BTCzUK6lmNFTApjFm0uFEdnYQji2aHhHvR3s4bs5jYqMohhU8+UztUM5
-	Yyip+I67kNjYNSNdpo7oEnLGFEGGjS5C5j2I/OV+U2oBs5HpN61yrQuWdgXxEU9uZp30od0qfq3E4
-	DgGmJ6KeUj2vTOsWYTkZYd7SevY+qBRB0eA7WB0Cu2+qXiXif4PzLuY3mjYDVTNGj+soLTXDTcvrB
-	ttwrNb4ooGaoUKPr6+Ne120kL6yoA5sr0Y/YWTTgDXP8ijll3LSuaKg3sjw7fyFwyJ0bi6NmDvGru
-	Bn9f6hUA==;
-Received: from localhost ([::1]:25958 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=eTqNtVHiqQXDAt6EdSMQrpwuN5DWK1KrWf9SAAyS1LM=; b=MlRreYRZUod1TdLA7RfO1UQkr/
+	+G5vijDoif85I35mGeGAqs/bFFmo8+qsnsD36JH8v3B0f80lkRo++j7Y4Hzmsz9b9WX2Z7B7KJ3Fg
+	aYwiCDptFMIv+SbsBynLZjwbZuXRX6cLfDGaEVVRHrSNBTMI6ZZu00AC8TJpohO5svEldvhbUiBZv
+	cvI0l9FlrpgwR/BK5sJtQdVXRfXbsscJtm0VLHp/qH2Dp/XemgV++eBFLWpd6Qnfmq106ObQCBkd1
+	r1pZ+rfBap/RZ29sjTWX9Blprdcv9K/DQp/rf/EMAETgEFq50Oi2nvr8aLgpVJwQuig1whLC3GHhK
+	mJushN3g==;
+Received: from localhost ([::1]:27122 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iFgUk-000Tgx-KX; Wed, 02 Oct 2019 15:24:50 +0000
-Received: from mail-lj1-x22e.google.com ([2a00:1450:4864:20::22e]:37916) 
+	id 1iFh0r-000UBM-Tk; Wed, 02 Oct 2019 15:58:01 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58852) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iFgUg-000Tga-Ln
- for samba-technical@lists.samba.org; Wed, 02 Oct 2019 15:24:48 +0000
-Received: by mail-lj1-x22e.google.com with SMTP id b20so17569257ljj.5
- for <samba-technical@lists.samba.org>; Wed, 02 Oct 2019 08:24:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
- bh=tfkytMcH4ovEsd736+JX0cx08mOhHJE895L8XWxWWsc=;
- b=r5vUbMq4pwcxdPK0jPRDdn2j71oBvPruOiXosAcoZH8P1fm1IMrz2VcvrN96QSrZMp
- JHJwFLVTZx3jTv1YjAOQ4+gbK/5Wq8yoRQNXRiBLYNchKV9bf6B8ACPQD/MkDp56UhMu
- jNl+jIGuNrm9Y0DYUd5Jj1YqSfwSPF2AN08BfL1Z5NhOA024JHPYIIGohQ5Yd+4/uxWc
- 9Lkjc9DVf3x/40wT1R28cin2xTR5NR2mg8D527PlRJK35yD2vZ+KnWmJ3NS3yr5UQ4Iu
- N/kElIICdWC11McOJhpycuWI8Z+fpO8L/ASVblJeTOxGRn1uHcPsn8bnq/P3LuZy40in
- XE4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to;
- bh=tfkytMcH4ovEsd736+JX0cx08mOhHJE895L8XWxWWsc=;
- b=eYrZIKy1qAim+03Xng1Jwu3L7Ul1gejGr8sj83eAs1Ml7p8TMSTSrxj82rY+EdpHxr
- aHjox0EUQduPRYNS0zG1GCZRcb0SjdlarwuzTvT+f+2F40XJXtQWhpWsdnoB0y5lF7BJ
- HK/U/QRrITRQm60aAZ/FPZYl3Z325yXElL9H5JQ5Z0POsMtleIglK6rJkqPTWrRuHri1
- 3ZaTfnTal2YoiwPnUbT482m1I2m55VUm8Iufnj1kce9SjeSU3ViEe1JesDvnCcP7HDxF
- q4zLEhb1QbaKUcujKMe7IqDKejitmOC+73OKfPpaBiC4ZAmcKiUXnYtGDp7+ecqhWjkd
- zbeQ==
-X-Gm-Message-State: APjAAAU2muS25w+KHw/F7pMlNBOlAi8FWYL8MKnGnZt3jaURXl1cukKo
- rBRMRIDrlna2bqtkpxcKM/uxCFbOJ9QFBrhppAsYUu/O
-X-Google-Smtp-Source: APXvYqxw0Nm24KEkTigB7az4Fw30cV+1kx2LDK+Yog9Fx0CxyUssWPw6jT28jCdLzodzrs3VVcNZHZW4BxEN3vESy6E=
-X-Received: by 2002:a2e:2bda:: with SMTP id r87mr2806737ljr.3.1570029885531;
- Wed, 02 Oct 2019 08:24:45 -0700 (PDT)
+ (Exim) id 1iFh0o-000UBF-Iu
+ for samba-technical@lists.samba.org; Wed, 02 Oct 2019 15:58:00 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Message-ID:From:Cc:To;
+ bh=eTqNtVHiqQXDAt6EdSMQrpwuN5DWK1KrWf9SAAyS1LM=; b=Xvy0lQIk/ZJlVMC2cP85BG3ToE
+ bB4yYbLN8LdPY+uvWMYGFA/DN/LutATh1vMnmSzcVXqN5YzM6pomRwqP/5EPfFonHejNuEEURQm+8
+ bA3NABjNIcQl8A4P2xQKpniDuTL1wmm3as3jIZtqIGtm4q7V9CiTXM7BTq91uKaylsYc=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iFh0n-00075i-LQ; Wed, 02 Oct 2019 15:57:57 +0000
+To: Samuel Cabrero <scabrero@suse.de>, samba-technical@lists.samba.org
+References: <20191002154202.upjxr3pqii47wt3a@aneto>
+Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
+Subject: Re: About adding a new 'winbind:allow domains' parameter
+Message-ID: <b2536fb0-4ae2-ee41-e5b8-bed143aae9d2@samba.org>
+Date: Wed, 2 Oct 2019 17:57:52 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-References: <CAD0Ztp3ZioeuGwzsjL3ehpCMxXgbrXsTQxMXXKYP53m0q6wDqw@mail.gmail.com>
-In-Reply-To: <CAD0Ztp3ZioeuGwzsjL3ehpCMxXgbrXsTQxMXXKYP53m0q6wDqw@mail.gmail.com>
-Date: Wed, 2 Oct 2019 11:24:31 -0400
-Message-ID: <CAD0Ztp1wjUnYqQZV9=gxZxgDSCxHDOVsk7eKi48r3fZ0KFnBUQ@mail.gmail.com>
-Subject: Re: Patch: Let smbtorture run when EAs are not supported
-To: _samba-tech <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="0000000000009d515b0593ef119b"
+In-Reply-To: <20191002154202.upjxr3pqii47wt3a@aneto>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="907YbbnEyKMRvuJhxXme8JryFQQIkFC4b"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,55 +53,74 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Gordon Ross via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Gordon Ross <gordon.w.ross@gmail.com>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: asn@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---0000000000009d515b0593ef119b
-Content-Type: text/plain; charset="UTF-8"
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--907YbbnEyKMRvuJhxXme8JryFQQIkFC4b
+Content-Type: multipart/mixed; boundary="LOU06rYusJGWDVFGYQVgCg71v6LXNUWNx";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Samuel Cabrero <scabrero@suse.de>, samba-technical@lists.samba.org
+Cc: asn@samba.org
+Message-ID: <b2536fb0-4ae2-ee41-e5b8-bed143aae9d2@samba.org>
+Subject: Re: About adding a new 'winbind:allow domains' parameter
+References: <20191002154202.upjxr3pqii47wt3a@aneto>
+In-Reply-To: <20191002154202.upjxr3pqii47wt3a@aneto>
 
-I forgot (and Volker reminded me) that I needed to use NT_STATUS_EQUAL
-in that status check.  I did that in a later commit but forgot about
-that when I extracted this change from other work.  Attached is a new
-patch.  This one passes gitlab.
-Volker reviewed and did some testing.  (Thanks!)
+--LOU06rYusJGWDVFGYQVgCg71v6LXNUWNx
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Hi Samuel,
+
+> I would like to ask your opinion about adding a new 'winbind:allow doma=
+ins'
+> parameter to ignore all trusted domains except the ones specified,
+> taking precedence over the existing 'winbind:ignore domains'.
+>=20
+> The use case is to avoid having to edit the smb.conf file everytime a
+> new domain or trust relationship is added to Active Directory.
+>=20
+> Do you foresee any undesired side-effects or problems by adding it?
+
+What is the reason have just a manual specified subset of the trusted
+domains?
+
+I'd actually like to get rid of all this hacks and just trust our dc.
+
+metze
 
 
-On Tue, Sep 24, 2019 at 12:11 PM Gordon Ross <gordon.w.ross@gmail.com> wrote:
->
-> Some servers (and some file system types) choose not to implement OS/2
-> style EAs.  As one example, the server I work on supports named
-> streams but does not support EAs.  I gather some file system types
-> (even on Windows) also don't support EAs.  Many smbtorture tests that
-> have little to do with EAs refuse to run only because
-> smb2_create_complex fails if EAs are not supported.
-> Attached is a patch to make that failure non-fatal.
 
---0000000000009d515b0593ef119b
-Content-Type: application/octet-stream; name="samba-noea.patch"
-Content-Disposition: attachment; filename="samba-noea.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_k19f86hu0>
-X-Attachment-Id: f_k19f86hu0
 
-RnJvbSA0NGY4MjZjNmRhYjUzYzM3NGYzMWYyNmIzYzc2MjY5NWVhNTc5Yjc1IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQ0KRnJvbTogR29yZG9uIFJvc3MgPGd3ckBuZXhlbnRhLmNvbT4NCkRhdGU6
-IE1vbiwgOSBNYXkgMjAxNiAxMzo0NTowNyAtMDQwMA0KU3ViamVjdDogW1BBVENIXSB0b3J0dXJl
-OiBBbGxvdyBydW5uaW5nIG9uIEZTIHRoYXQgZG9lcyBub3Qgc3VwcG9ydCBFQXMNCg0KU2lnbmVk
-LW9mZi1ieTogR29yZG9uIFJvc3MgPGdvcmRvbi53LnJvc3NAZ21haWwuY29tPg0KUmV2aWV3ZWQt
-Ynk6IFZvbGtlciBMZW5kZWNrZSA8dmxAc2FtYmEub3JnPg0KLS0tDQogc291cmNlNC90b3J0dXJl
-L3NtYjIvdXRpbC5jIHwgNyArKysrKysrDQogMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygr
-KQ0KDQpkaWZmIC0tZ2l0IGEvc291cmNlNC90b3J0dXJlL3NtYjIvdXRpbC5jIGIvc291cmNlNC90
-b3J0dXJlL3NtYjIvdXRpbC5jDQppbmRleCAwNDIxMjY1MGMzMC4uYmRhZTc4ODZlZGUgMTAwNjQ0
-DQotLS0gYS9zb3VyY2U0L3RvcnR1cmUvc21iMi91dGlsLmMNCisrKyBiL3NvdXJjZTQvdG9ydHVy
-ZS9zbWIyL3V0aWwuYw0KQEAgLTEwMiw2ICsxMDIsMTMgQEAgc3RhdGljIE5UU1RBVFVTIHNtYjJf
-Y3JlYXRlX2NvbXBsZXgoc3RydWN0IHRvcnR1cmVfY29udGV4dCAqdGN0eCwNCiAJfQ0KIA0KIAlz
-dGF0dXMgPSBzbWIyX2NyZWF0ZSh0cmVlLCB0bXBfY3R4LCAmaW8pOw0KKwlpZiAoTlRfU1RBVFVT
-X0VRVUFMKHN0YXR1cywgTlRfU1RBVFVTX0VBU19OT1RfU1VQUE9SVEVEKSkgew0KKwkJdG9ydHVy
-ZV9jb21tZW50KA0KKwkJCXRjdHgsICJFQXMgbm90IHN1cHBvcnRlZCwgY3JlYXRpbmc6ICVzXG4i
-LCBmbmFtZSk7DQorCQlpby5pbi5lYXMubnVtX2VhcyA9IDA7DQorCQlzdGF0dXMgPSBzbWIyX2Ny
-ZWF0ZSh0cmVlLCB0bXBfY3R4LCAmaW8pOw0KKwl9DQorDQogCXRhbGxvY19mcmVlKHRtcF9jdHgp
-Ow0KIAlOVF9TVEFUVVNfTk9UX09LX1JFVFVSTihzdGF0dXMpOw0KIA0KLS0gDQoyLjExLjANCg0K
---0000000000009d515b0593ef119b--
+--LOU06rYusJGWDVFGYQVgCg71v6LXNUWNx--
+
+--907YbbnEyKMRvuJhxXme8JryFQQIkFC4b
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl2UyQAACgkQDbX1YShp
+vVajFxAAqUCxKDUZJzKalti38+fAWROOmeFMTrXrR+dQyu6XCpQpIaQ9QHH3Oc2W
+VURSl3DaZAmLhma3FUv1HzJZ9yilRkWjh2ZK3/0ayWdmht4QbKiTdyemBXIVqAEX
+oHcuAduRYs/sWTv2sLHS+RcY8MXdEc2Q8xYMKKdligqgevfbS+YWvlO/joTpW+WN
+eVtlSvyeLD4asRzDPMyJJN8LLu9OouzyQVMonDdD5JdjUoGYpeiUxZSgovOwAfhQ
+wAduJvw8bgVm5GLu9Dyb1QlfzvwEoI6yToBX32E3wPYmUMnX55hiHWqFzySWwC+8
+5J+uktT9XREC7rlpBoAZOG37/hAb5ZZETYpfENjYs0w766r2taK47s41M5M9PXNw
+vKAC9sOU6zqCTuM5Ck3EtemBD/RsciOf3PuGusOnnqItI4nLQGbqJ3yJxUW+dTAX
+mPRDx+eDthzGOOTfdxg/unMVPxMcqIQ/uEBF2+34kjwInQAN+hx7Zzue0upWG1FH
+LE53XBDeY2qBeXGgkzQ1DRCoTn4pkEuR6YdwgcLQp32hRIaab0Adz+sG2NaLIHQo
+CDsuBv2o3ZDClqR0pE97iwdXOY8BN3xE3CCGcgU3Xqzv2KqesInoj4u06pRQMBbj
+rQ4Yk+tsxFVc54SFIejiq8HvKkA20CGObBm/CBDCqmdxQvu5MCc=
+=+bEJ
+-----END PGP SIGNATURE-----
+
+--907YbbnEyKMRvuJhxXme8JryFQQIkFC4b--
 
