@@ -2,41 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8A96C4958
-	for <lists+samba-technical@lfdr.de>; Wed,  2 Oct 2019 10:20:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC47AC8CD5
+	for <lists+samba-technical@lfdr.de>; Wed,  2 Oct 2019 17:25:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=/bEE1xyAAD2A7joXLyJJnH0NAE3Qsdde4+R2JnpEpaE=; b=LpK6mlMMxqahJSbqNePCC2AJ09
-	5RW3i2pn1jn66+RbvCK5lAlA04zT+sS1Ku+nie8vz/dsnZd+OwFYiOH1NAN4WorEjAG9pOF1fUhLH
-	42S/ryh/EmQH/Y4+OYfFGktojqTtyZV4ffiNcolF9SQSBErmQ/2ivBmD1PYl5F8swQO+s37fDV/mU
-	cBt0Vdq5IHVoCbUUf0Rr7142UIgL+MvBFsYND/4LWjcC4tuVgDgGIYvjKNhfdaB15bKI0K3H45415
-	JfAqugHdO3ecVXjuci7fYAwgqeOhGe4dEd/2fKBla5tsCnmjOHTOOqdFLx20BTKfBjJQ0rObXWrHo
-	PeAeaZPg==;
-Received: from localhost ([::1]:18102 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=tfkytMcH4ovEsd736+JX0cx08mOhHJE895L8XWxWWsc=; b=nZwWo3vIzkYUzR3F6RG48YIpOA
+	6RWW3sIzW1iPbxRQf7nD+BTCzUK6lmNFTApjFm0uFEdnYQji2aHhHvR3s4bs5jYqMohhU8+UztUM5
+	Yyip+I67kNjYNSNdpo7oEnLGFEGGjS5C5j2I/OV+U2oBs5HpN61yrQuWdgXxEU9uZp30od0qfq3E4
+	DgGmJ6KeUj2vTOsWYTkZYd7SevY+qBRB0eA7WB0Cu2+qXiXif4PzLuY3mjYDVTNGj+soLTXDTcvrB
+	ttwrNb4ooGaoUKPr6+Ne120kL6yoA5sr0Y/YWTTgDXP8ijll3LSuaKg3sjw7fyFwyJ0bi6NmDvGru
+	Bn9f6hUA==;
+Received: from localhost ([::1]:25958 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iFZs8-000Iti-0a; Wed, 02 Oct 2019 08:20:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21508) 
+	id 1iFgUk-000Tgx-KX; Wed, 02 Oct 2019 15:24:50 +0000
+Received: from mail-lj1-x22e.google.com ([2a00:1450:4864:20::22e]:37916) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iFZs3-000Itb-Sg
- for samba-technical@lists.samba.org; Wed, 02 Oct 2019 08:20:30 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Message-ID:Date:To:From:CC;
- bh=/bEE1xyAAD2A7joXLyJJnH0NAE3Qsdde4+R2JnpEpaE=; b=gxuVCiqwFWSbvV+yI4B0QnkEyS
- oe6vlw3hi18v5fth8a2BWJMN5yKyVmHFINZA5PLyKAeJTXJ5DwUYPRIWnn9ye6Aa3/R3jc4hjD6ui
- 341AnZkRH7Ijh5l+ktloqrz7UoL6SS0QGE10q/lQmMBukfbPMylmbL+EHr4Yy726TWoo=;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iFZs1-0002M0-D5; Wed, 02 Oct 2019 08:20:25 +0000
-To: samba-technical@lists.samba.org, Andrew Bartlett <abartlet@samba.org>
-Subject: Re: The road to removing Samba's internal copy of AES (and perhaps
- DES?)
-Date: Wed, 02 Oct 2019 10:20:24 +0200
-Message-ID: <3302192.AWg68A9t8x@magrathea>
-In-Reply-To: <1567389837.19432.26.camel@samba.org>
-References: <1567389837.19432.26.camel@samba.org>
+ (Exim) id 1iFgUg-000Tga-Ln
+ for samba-technical@lists.samba.org; Wed, 02 Oct 2019 15:24:48 +0000
+Received: by mail-lj1-x22e.google.com with SMTP id b20so17569257ljj.5
+ for <samba-technical@lists.samba.org>; Wed, 02 Oct 2019 08:24:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+ bh=tfkytMcH4ovEsd736+JX0cx08mOhHJE895L8XWxWWsc=;
+ b=r5vUbMq4pwcxdPK0jPRDdn2j71oBvPruOiXosAcoZH8P1fm1IMrz2VcvrN96QSrZMp
+ JHJwFLVTZx3jTv1YjAOQ4+gbK/5Wq8yoRQNXRiBLYNchKV9bf6B8ACPQD/MkDp56UhMu
+ jNl+jIGuNrm9Y0DYUd5Jj1YqSfwSPF2AN08BfL1Z5NhOA024JHPYIIGohQ5Yd+4/uxWc
+ 9Lkjc9DVf3x/40wT1R28cin2xTR5NR2mg8D527PlRJK35yD2vZ+KnWmJ3NS3yr5UQ4Iu
+ N/kElIICdWC11McOJhpycuWI8Z+fpO8L/ASVblJeTOxGRn1uHcPsn8bnq/P3LuZy40in
+ XE4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to;
+ bh=tfkytMcH4ovEsd736+JX0cx08mOhHJE895L8XWxWWsc=;
+ b=eYrZIKy1qAim+03Xng1Jwu3L7Ul1gejGr8sj83eAs1Ml7p8TMSTSrxj82rY+EdpHxr
+ aHjox0EUQduPRYNS0zG1GCZRcb0SjdlarwuzTvT+f+2F40XJXtQWhpWsdnoB0y5lF7BJ
+ HK/U/QRrITRQm60aAZ/FPZYl3Z325yXElL9H5JQ5Z0POsMtleIglK6rJkqPTWrRuHri1
+ 3ZaTfnTal2YoiwPnUbT482m1I2m55VUm8Iufnj1kce9SjeSU3ViEe1JesDvnCcP7HDxF
+ q4zLEhb1QbaKUcujKMe7IqDKejitmOC+73OKfPpaBiC4ZAmcKiUXnYtGDp7+ecqhWjkd
+ zbeQ==
+X-Gm-Message-State: APjAAAU2muS25w+KHw/F7pMlNBOlAi8FWYL8MKnGnZt3jaURXl1cukKo
+ rBRMRIDrlna2bqtkpxcKM/uxCFbOJ9QFBrhppAsYUu/O
+X-Google-Smtp-Source: APXvYqxw0Nm24KEkTigB7az4Fw30cV+1kx2LDK+Yog9Fx0CxyUssWPw6jT28jCdLzodzrs3VVcNZHZW4BxEN3vESy6E=
+X-Received: by 2002:a2e:2bda:: with SMTP id r87mr2806737ljr.3.1570029885531;
+ Wed, 02 Oct 2019 08:24:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+References: <CAD0Ztp3ZioeuGwzsjL3ehpCMxXgbrXsTQxMXXKYP53m0q6wDqw@mail.gmail.com>
+In-Reply-To: <CAD0Ztp3ZioeuGwzsjL3ehpCMxXgbrXsTQxMXXKYP53m0q6wDqw@mail.gmail.com>
+Date: Wed, 2 Oct 2019 11:24:31 -0400
+Message-ID: <CAD0Ztp1wjUnYqQZV9=gxZxgDSCxHDOVsk7eKi48r3fZ0KFnBUQ@mail.gmail.com>
+Subject: Re: Patch: Let smbtorture run when EAs are not supported
+To: _samba-tech <samba-technical@lists.samba.org>
+Content-Type: multipart/mixed; boundary="0000000000009d515b0593ef119b"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,57 +67,55 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Gordon Ross via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Gordon Ross <gordon.w.ross@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Monday, 2 September 2019 04:03:57 CEST Andrew Bartlett via samba-technical 
-wrote:
-> G'Day,
-> 
-> I wanted to write to update the list on where we at at with removing
-> cryptographic code from Samba.
-> 
-> We now absolutely rely on GnuTLS 3.4.7 or later, which has allowed use
-> to delete a great deal of such duplicate code.
-> 
-> We do still have AES code, for the AES CFB8 and CMAC functions.
-> 
-> These could probably be open-coded against raw AES routines from
-> GnuTLS, but for now I would rather not go down that route.
-> 
-> The operating systems that do not supply that[1], in our CI system are:
->  - CentOS7
->  - Ubuntu 16.04
->  - Ubuntu 18.04
->  - Debian 9
-> 
-> By April 2020 we should have a new Ubuntu LTS, Debian 10 is already out
-> and CentOS8 will be available.  (And we already backport GnuTLS for
-> CentOS7 regardless).
-> 
-> So I would propose we remove the fallback internal code after Ubuntu
-> 20.04 is released, or discuss it earlier if we can get a newer backport
-> package for the above.
-> 
-> On a related note, I plan to experiment with implementing our DES code
-> via GnuTLS using the CBC-DES cipher and an all-zero IV.  That may let
-> us remove that code as well, becoming essentially crypto-free and
-> therefore honouring FIPS mode correctly in all cases.  Do let me know
-> if you happen to experiment in this area so I don't double-up!
+--0000000000009d515b0593ef119b
+Content-Type: text/plain; charset="UTF-8"
 
-That's an interesting idea!
-
-I'm currently working on further performance improvements for SMB3 encryption. 
+I forgot (and Volker reminded me) that I needed to use NT_STATUS_EQUAL
+in that status check.  I did that in a later commit but forgot about
+that when I extracted this change from other work.  Attached is a new
+patch.  This one passes gitlab.
+Volker reviewed and did some testing.  (Thanks!)
 
 
-	Andreas
+On Tue, Sep 24, 2019 at 12:11 PM Gordon Ross <gordon.w.ross@gmail.com> wrote:
+>
+> Some servers (and some file system types) choose not to implement OS/2
+> style EAs.  As one example, the server I work on supports named
+> streams but does not support EAs.  I gather some file system types
+> (even on Windows) also don't support EAs.  Many smbtorture tests that
+> have little to do with EAs refuse to run only because
+> smb2_create_complex fails if EAs are not supported.
+> Attached is a patch to make that failure non-fatal.
 
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+--0000000000009d515b0593ef119b
+Content-Type: application/octet-stream; name="samba-noea.patch"
+Content-Disposition: attachment; filename="samba-noea.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_k19f86hu0>
+X-Attachment-Id: f_k19f86hu0
 
-
+RnJvbSA0NGY4MjZjNmRhYjUzYzM3NGYzMWYyNmIzYzc2MjY5NWVhNTc5Yjc1IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQ0KRnJvbTogR29yZG9uIFJvc3MgPGd3ckBuZXhlbnRhLmNvbT4NCkRhdGU6
+IE1vbiwgOSBNYXkgMjAxNiAxMzo0NTowNyAtMDQwMA0KU3ViamVjdDogW1BBVENIXSB0b3J0dXJl
+OiBBbGxvdyBydW5uaW5nIG9uIEZTIHRoYXQgZG9lcyBub3Qgc3VwcG9ydCBFQXMNCg0KU2lnbmVk
+LW9mZi1ieTogR29yZG9uIFJvc3MgPGdvcmRvbi53LnJvc3NAZ21haWwuY29tPg0KUmV2aWV3ZWQt
+Ynk6IFZvbGtlciBMZW5kZWNrZSA8dmxAc2FtYmEub3JnPg0KLS0tDQogc291cmNlNC90b3J0dXJl
+L3NtYjIvdXRpbC5jIHwgNyArKysrKysrDQogMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygr
+KQ0KDQpkaWZmIC0tZ2l0IGEvc291cmNlNC90b3J0dXJlL3NtYjIvdXRpbC5jIGIvc291cmNlNC90
+b3J0dXJlL3NtYjIvdXRpbC5jDQppbmRleCAwNDIxMjY1MGMzMC4uYmRhZTc4ODZlZGUgMTAwNjQ0
+DQotLS0gYS9zb3VyY2U0L3RvcnR1cmUvc21iMi91dGlsLmMNCisrKyBiL3NvdXJjZTQvdG9ydHVy
+ZS9zbWIyL3V0aWwuYw0KQEAgLTEwMiw2ICsxMDIsMTMgQEAgc3RhdGljIE5UU1RBVFVTIHNtYjJf
+Y3JlYXRlX2NvbXBsZXgoc3RydWN0IHRvcnR1cmVfY29udGV4dCAqdGN0eCwNCiAJfQ0KIA0KIAlz
+dGF0dXMgPSBzbWIyX2NyZWF0ZSh0cmVlLCB0bXBfY3R4LCAmaW8pOw0KKwlpZiAoTlRfU1RBVFVT
+X0VRVUFMKHN0YXR1cywgTlRfU1RBVFVTX0VBU19OT1RfU1VQUE9SVEVEKSkgew0KKwkJdG9ydHVy
+ZV9jb21tZW50KA0KKwkJCXRjdHgsICJFQXMgbm90IHN1cHBvcnRlZCwgY3JlYXRpbmc6ICVzXG4i
+LCBmbmFtZSk7DQorCQlpby5pbi5lYXMubnVtX2VhcyA9IDA7DQorCQlzdGF0dXMgPSBzbWIyX2Ny
+ZWF0ZSh0cmVlLCB0bXBfY3R4LCAmaW8pOw0KKwl9DQorDQogCXRhbGxvY19mcmVlKHRtcF9jdHgp
+Ow0KIAlOVF9TVEFUVVNfTk9UX09LX1JFVFVSTihzdGF0dXMpOw0KIA0KLS0gDQoyLjExLjANCg0K
+--0000000000009d515b0593ef119b--
 
