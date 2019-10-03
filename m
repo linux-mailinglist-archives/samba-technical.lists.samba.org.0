@@ -2,58 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BC6ACAEAE
-	for <lists+samba-technical@lfdr.de>; Thu,  3 Oct 2019 20:57:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AFB7ACB275
+	for <lists+samba-technical@lfdr.de>; Fri,  4 Oct 2019 01:46:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=aa6r931Rjp1NE7cgnIGCkHLvHKb0A2CYSfJ4m7AK8VA=; b=Qfn+WytnBy++WaJqOXDaXyDQHH
-	8l0U25BJWy+rmpV3kR5a5qS8/13r5qPIMtzpys/dfzmM8c19FiE9k6lIw6KbWgrQRK9vsU68DR1eu
-	cbKfxV84WKmafYtiYiiuGCtiKKFiYIf+j5EIrgIHYxJoUTJklscYcKIGTCFE0IJRV25JFliI9uwOw
-	3NE7JwwAFtr78WWWfO0SgUCDG2JL6q+wuDgAERCOIlexyh9V1WcCzeZdl8MHvizLYuoIizrClcNp/
-	bvWtTWhUk1YucKAogwWYgaX4rMipBeB1xwokeVIWJGgOfmDvYuE1GvSnfRIXQ5CsYGMJcMH9VKe8A
-	Cwm4LUQg==;
-Received: from localhost ([::1]:47344 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=KiTQrxibX71atsKXTHUjTix3V2M8APmsIyYghcXoOEc=; b=yzI5Hf47QANhR4JbljXtOU1HeV
+	KKtYXjZCUxkxDmsLKHqMW/KCD7YgML4FdQ4q2G2m+kSwpJeM/2SwHCw53KsA6+ZxSOMwC1PEpHjlh
+	OD/kkc25SKajlS3bpxpCM07OqBQyicSxLloYQ96MsqmTbhowThT+RsqP3E5kmNZweDYfK25ziW+qM
+	62ezkx9MzMyqDeIa7KNYdlFXBAEyrPZMExYymTKx2iAzFBe2pdpoXPA1kjf2EyIZ3dRrSqHoiT8BK
+	ZuqyucWOIBlYBmqi/hW9jfnLpBZA+K6H4TxqOy4RtZvqMu0oUaqv/PHzHXS87f10r7D0AZvgqEeVo
+	jeZI3gIA==;
+Received: from localhost ([::1]:30454 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iG6IP-000q3U-Q1; Thu, 03 Oct 2019 18:57:49 +0000
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:45483) 
+	id 1iGAmH-000wil-SF; Thu, 03 Oct 2019 23:44:57 +0000
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e]:38732) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iG6IK-000q3M-N4
- for samba-technical@lists.samba.org; Thu, 03 Oct 2019 18:57:47 +0000
-Received: by mail-io1-xd44.google.com with SMTP id c25so7962389iot.12
- for <samba-technical@lists.samba.org>; Thu, 03 Oct 2019 11:57:42 -0700 (PDT)
+ (Exim) id 1iGAmD-000wiZ-To
+ for samba-technical@lists.samba.org; Thu, 03 Oct 2019 23:44:56 +0000
+Received: by mail-wr1-x42e.google.com with SMTP id w12so4761721wro.5
+ for <samba-technical@lists.samba.org>; Thu, 03 Oct 2019 16:44:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=aa6r931Rjp1NE7cgnIGCkHLvHKb0A2CYSfJ4m7AK8VA=;
- b=O7PPsQ4zo2sfTl6NOOpE5XsVzE5RNltNIJ3BWIjoP92YjkqCBcz4qI/eBObiEFXHxG
- KRCWmXU5E6KeddHOB8UC3E5e2kPXWnfMhDspqFWqDTx4jTXTKFnfflDpMxlSj8QQ1ljS
- fmuw1vNpa3Srq0SIWXs3Yi8+CZ2o1gSYFOzL3TWpH9CYIiygn++HYMB4hX9sctCfrbeo
- ATuEaJcaYLvYIjB/e6/PErOcfUZWKWlgQTRbvjxOQIFhwAhCJj5WwHA7nqs0A2i372Ra
- 1nwpkJ3rEVH8ssU/VgHToN77qu95pjftoLb/trkIUAcWvXG3cECeieEVc2QRbCNL+uR/
- qKgQ==
+ h=mime-version:from:date:message-id:subject:to
+ :content-transfer-encoding;
+ bh=KiTQrxibX71atsKXTHUjTix3V2M8APmsIyYghcXoOEc=;
+ b=W4yCEE2IXzLmYdjGkFUlSstU70BojshJtHJRb1KPYJJ3ku+eEvbNRO4xsWKlazLgEq
+ fyclAroQesodUuxroMvUsH4Gu4lhFVMoQHcmhSspWJA0v1D+E9aW/dQnc9G9X5OVPT5C
+ RF6ZsFHrib7rEYQBJaZDNa/Vg/UbHU+ktqxoQNuD0n9kRAZ39oglwe3c/TxLaBcB/T5g
+ iD1NngxeVEqL2Ekm/27jWpPoOHSaEhC7/c7/NJDR/VszcwL7GkHi6zHzLZn3Rv51XJHy
+ 7faysQDkF0/DROi0fcqWeULvSp8EuO2rZWqUkethoNKvKAoLJX8yvgqQMbTuvbv+8JMN
+ g9RA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=aa6r931Rjp1NE7cgnIGCkHLvHKb0A2CYSfJ4m7AK8VA=;
- b=nTHL2PPDKUfTC6b+wkO9eB6fyHYK0QDXJ/4YlmrPSOsOFN9i3eyCrPFixtUdADZlYQ
- ECnGZPhIeNqts68+zOhZsTsfNT7DGZPq+AQhg4AOI0Uq5Aqzjl9chZTDEdHw3hWXlf3I
- TKCxTsE/o6QGWKjrjGSkDFk/ltcfL7+nS8xy5lvEAynrMExowQfwxqJFXTSoSeHWTBCw
- FurFKyt62+d6SKntwYAVa/OLy+Ppo6AevvMwCylcgSlOBQ6t+/Gc90PymnZyzO6GMpw5
- bUwaiX3CU7lZliCwOd05GXnjbJAPeNUvEYnK7FpAP++FFNwcDP5Udruqa/7vkks7U7HM
- S0zw==
-X-Gm-Message-State: APjAAAXhq4OqCbdezEOpk5JlqyfLgn4ETHGcUPvmfUszPeavekJISEMJ
- G9t6evK7G2vtt1ICXJNZmwWkmC09FwZf4ZztxnxFmGLq
-X-Google-Smtp-Source: APXvYqw5LZFI0OlAdzJ3Zi5QgTBf3yzfeslOKU0JWKwjHyMto7VKmPhcOSlsE1S3BTxGJi0w5yQ/WHCyiK/fEHdewQE=
-X-Received: by 2002:a92:1657:: with SMTP id r84mr10980876ill.5.1570129060851; 
- Thu, 03 Oct 2019 11:57:40 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+ :content-transfer-encoding;
+ bh=KiTQrxibX71atsKXTHUjTix3V2M8APmsIyYghcXoOEc=;
+ b=a5sul1Rwyuo3W7nSgkOR3Ei7n0rvZAGyqQJuvp5J4UI1iWrxAEOtR43bS3OZfAjOEL
+ UjkKZAdOeFItpeJazOkzxGr7gZOC+wTy+TDbNQNsgXmgwatHToM0bWzcL813O1Z2nCG5
+ SurEocg0OkdrptErx1DQnR8i9qUV6CKrCgyATV81dkGYWLWNMIl1mFGU9iDcrLRY1AZs
+ Y0C5+7ccRCLdHApUczLxzJJ3yxkPAXxGSD5CL6ng8e+Ed3RBjoyvsuKK65gTPI682Dof
+ 5gCEPzpI8P2qk01T8CMWGWOHzCZqSa4UInmay9Nl5mJqtD+oAXKGSOLaOHD5VXyYcWOt
+ P/jQ==
+X-Gm-Message-State: APjAAAX4+1dQyS9lJIjgt7bqY4rWINF/+b3Y5p6y++4y+FQ2gH10dXGD
+ URXOYCcH41/t83x6aeNkSAbzOJ7mdSj3KwnEyj8Blsth4iY=
+X-Google-Smtp-Source: APXvYqwZ2gZ9pA0ecvQkjh0uDM5UHyND2qCvfa25lkuQfHuH60yr2kqs4Z/3hBl9+pJw106pqs9TZJipIXrAEf4F354=
+X-Received: by 2002:adf:dd41:: with SMTP id u1mr9408902wrm.49.1570146291293;
+ Thu, 03 Oct 2019 16:44:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191001073413.GA51148@LGEARND20B15>
-In-Reply-To: <20191001073413.GA51148@LGEARND20B15>
-Date: Thu, 3 Oct 2019 13:57:29 -0500
-Message-ID: <CAH2r5mtx3OWKv4ZDM=Nob9nRi7ahRW-DK2nY9LP28urQ6NBvFw@mail.gmail.com>
-Subject: Re: [PATCH] fs: cifs: mute -Wunused-const-variable message
-To: Austin Kim <austindh.kim@gmail.com>
+Date: Thu, 3 Oct 2019 16:43:34 -0700
+Message-ID: <CACyXjPy5LL=yj6i_T_W0J=DOXHxHB_D=0-ir60opyEV7ftaQ=g@mail.gmail.com>
+Subject: Has anyone seen a Windows Server return zero results to a CLDAP query
+ for NetLogon servers?
+To: samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,54 +68,64 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>
+From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+Hi folks,
 
-On Tue, Oct 1, 2019 at 2:34 AM Austin Kim <austindh.kim@gmail.com> wrote:
->
-> After 'Initial git repository build' commit,
-> 'mapping_table_ERRHRD' variable has not been used.
->
-> So 'mapping_table_ERRHRD' const variable could be removed
-> to mute below warning message:
->
->    fs/cifs/netmisc.c:120:40: warning: unused variable 'mapping_table_ERRHRD' [-Wunused-const-variable]
->    static const struct smb_to_posix_error mapping_table_ERRHRD[] = {
->                                            ^
-> Signed-off-by: Austin Kim <austindh.kim@gmail.com>
-> ---
->  fs/cifs/netmisc.c | 4 ----
->  1 file changed, 4 deletions(-)
->
-> diff --git a/fs/cifs/netmisc.c b/fs/cifs/netmisc.c
-> index 49c17ee1..9b41436 100644
-> --- a/fs/cifs/netmisc.c
-> +++ b/fs/cifs/netmisc.c
-> @@ -117,10 +117,6 @@ static const struct smb_to_posix_error mapping_table_ERRSRV[] = {
->         {0, 0}
->  };
->
-> -static const struct smb_to_posix_error mapping_table_ERRHRD[] = {
-> -       {0, 0}
-> -};
-> -
->  /*
->   * Convert a string containing text IPv4 or IPv6 address to binary form.
->   *
-> --
-> 2.6.2
->
+I have run into a situation where it seems the Windows DC is
+responding to CLDAP request, but returning zero responses.
 
+Samba send:
 
--- 
-Thanks,
+searchRequest
+    baseObject:
+    scope: baseObject (0)
+    derefAliases: neverDerefAliases (0)
+    sizeLimit: 0
+    timeLimit: 0
+    typesOnly: False
+    Filter: (&(&(NtVer=3D0x00000006)(DnsDomain=3DSOME.DOM))(AAC=3D00:00:00:=
+00))
+        filter: and (0)
+            and: (&(&(NtVer=3D0x00000006)(DnsDomain=3DSOME.DOM))(AAC=3D00:0=
+0:00:00))
+                and: 3 items
+                    Filter: (NtVer=3D0x00000006)
+                        and item: equalityMatch (3)
+                            equalityMatch
+                    Filter: (DnsDomain=3DGPJ.LOC)
+                        and item: equalityMatch (3)
+                            equalityMatch
+                    Filter: (AAC=3D00:00:00:00)
+                        and item: equalityMatch (3)
+                            equalityMatch
+    attributes: 1 item
+        AttributeDescription: NetLogon
 
-Steve
+and the server responds:
+
+LDAPMessage searchResDone(3822) success [0 results]
+    messageID: 3822
+    protocolOp: searchResDone (5)
+        searchResDone
+            resultCode: success (0)
+            matchedDN:
+            errorMessage:
+    [Response To: 5897]
+    [Time: 0.001296000 seconds]
+
+After that Samba seems to declare that DC as a negative connection
+entry and cannot find any DCs.
+
+Has anyone seen this? Does anyone know how to configure Windows to do that?
+
+--=20
+Regards,
+Richard Sharpe
+(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
+=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
+=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
 
