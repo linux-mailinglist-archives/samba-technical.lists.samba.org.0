@@ -2,65 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BF90CC74E
-	for <lists+samba-technical@lfdr.de>; Sat,  5 Oct 2019 04:06:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 793DFCCAB0
+	for <lists+samba-technical@lfdr.de>; Sat,  5 Oct 2019 17:03:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=dKFFeqNEIfC6bfYX2MCvoQDPGT0qQ00+CPFZGAhucyY=; b=5plnk/zLSrm1tCfqfEEijMfS/a
-	Tagz1xnt3Y64548n1OEctZ1MBdAaWhgrAvrT7uLQkrqZTuRzddgHfoLtN5gXpIYenE2D0AHdObj/G
-	QrRu7TY6N/BVOTyAp/KxT972zG/tFFTnDCOYNBmY9nnY8/9mGSIKXfF3LlzwFCwOl107yZToaHOB8
-	6rc6odgdtpgv1OGXBlpfxSGbXnjQmxQhq/+TQbgUOR10khaxacELInib+TA2bneIjbY9jIhGwV4/5
-	tvM8ziulJaPgrvbmpl9r6yrxBynzpnC5/wG6p/Rz+6nVDODeYJxLk7u2kLxjk7bu/2+mjWcIo1AQA
-	+Wg4EKBw==;
-Received: from localhost ([::1]:52888 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=/wy69H7aXTsT8NrD4Jql44tATGvsxk/ogOk+nKv5r4Q=; b=TLJiVUZGrOLuLwjsZy134bmGl1
+	9xJOncGR+Oa0QmdVf6QeRTrPSLLecTqyG98reYJmyUcGhBiIHhDG04Kmo7zNrNgRpK+wzZ/yuQBvI
+	LyG7yMrFvA4tC1R7JIyn3qB0rxsIt2RnhyBy7DYuxedSMpsgqDMOeQEn1eVjGrqHxv7mym1C39KE+
+	0NcustYqmSwIcKPyANLjXWbSm4fk5k9EYGQhSFQ6MrsuI9aHt067NBT0cFKGI9qED9wpNPu3Tkinr
+	JiGoT4KF8y4BpZChOKh/qu1FJDwKzb24oHhrBkJs9C1iAJAyBh1/m45t9Sy0wjMC+tL4HGkdil1wp
+	yEVSSHrA==;
+Received: from localhost ([::1]:36400 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iGZRH-001IHE-A3; Sat, 05 Oct 2019 02:04:55 +0000
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:42549) 
+	id 1iGlZt-001Rem-G6; Sat, 05 Oct 2019 15:02:37 +0000
+Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344]:36010) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iGZR9-001IH3-Fe
- for samba-technical@lists.samba.org; Sat, 05 Oct 2019 02:04:49 +0000
-Received: by mail-io1-xd41.google.com with SMTP id n197so17473792iod.9
- for <samba-technical@lists.samba.org>; Fri, 04 Oct 2019 19:04:46 -0700 (PDT)
+ (Exim) id 1iGlZp-001Rec-AF
+ for samba-technical@lists.samba.org; Sat, 05 Oct 2019 15:02:35 +0000
+Received: by mail-wm1-x344.google.com with SMTP id m18so8447857wmc.1
+ for <samba-technical@lists.samba.org>; Sat, 05 Oct 2019 08:02:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=dKFFeqNEIfC6bfYX2MCvoQDPGT0qQ00+CPFZGAhucyY=;
- b=XBe5Lfr1WO/ehyz2z39XQtwaT6/KSwCbVEkv+2+0BqSdThjVgBjDT1cuh1+asCPLPx
- 7QTCbGMiz4NzONlXxyuS+vu/g3czW4Fyux9aI/D8wbAdKY+FTdHb/l+Dimq5bdZeEzYD
- 4PjV2HAXhU3I46PSY0ygDCaTG+Ru7LcYyB6UX2Am/0LP7qsksngNjNGyBQyIMySnfFN1
- 726mZeM8PEajpVSZxXtpNoNmFFOwjt1cIweKDUr1Ruq9U/VrEnc87f0/bqTjY1C9PjRL
- CvHxOHCgL0RXpJQPyzDv17vfNua7aQ2gBTO64mLIXl0NIDm8B29bBrZMGg41IB64Hpze
- Hm2Q==
+ h=mime-version:from:date:message-id:subject:to;
+ bh=PTykQANQWkY++naC9Qy6DKoZvYoNPeUIYN2DXErCpaU=;
+ b=rRR2Erm91AJxk7ahJfIS6iIHBZ0oQrSyGbGukBGYxf1k8ztZWlNY5+HhLIWf+qNixt
+ Kw8MqLAaaXRmmcHbAo8RZjvPqp7uOGrKA2DLZwlb3VVtMpS4RUODCyID73Rjf5uWvPTw
+ lCNUOsz9H2b082mscseeyBbBSt+jNBLgYOg34AQWfBlrD1jAi8bBADA+nsOLjtU6Wvtn
+ AB9vJ4zUFZO1Pdnv+RjI8/1sMuiinGk19CN5kuew+Ar6Crk3ysZ6onRhiFo5GbCHS/Da
+ KaYN/0W2T2W1C8WIFQtietckoQv3dS/IaaO2qfLaQsCaD7XfvAJ3KCa+RDhNcb4R1nYQ
+ 4lNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=dKFFeqNEIfC6bfYX2MCvoQDPGT0qQ00+CPFZGAhucyY=;
- b=udIgug3Na6ZO+SvVyO3DumbSeVC5CLoCDUy7Whoo/ePKaytt34tJCkMq8Vz/fxxoG5
- L32rOYDrx2/++qAVeH3/I7zEOpaDaoEwblBR3gRlmHASOm7x2JL+PvIb9HUMlDHJvZqb
- BjXXGUfNdpARTpzgiwk/F+PeHY9541mcbf1UVbQCnxr3Bsq0jVGgnSl11bq8bFrHwCYd
- 1SQfGWSkyIqAZkR3s6fDhHFSGEDXlZF5bgj8Defry26rsEpaYdRTdSa3xhuDkLW11uJ7
- DMEgsL1M111XoP6iOVD7o+RlGVfbAVKV4DEdYeFK5Rco0hh0Zuew8x3YF9mkPgsj8foy
- J9JA==
-X-Gm-Message-State: APjAAAVy8VeIaE4Dam08KTXIg5lDoymif4oY0EKWnvX5Kc/EoXNR0RYq
- HtSptFCPBQ1u81opOS99l2SIysFSXyxJ6FU94XI=
-X-Google-Smtp-Source: APXvYqwBIAoHkqwaCUKDOqze9cchvM+P00vkTrkL1lxkk2uirCl29/HUsptcngeC6wh302S1+9ApJXpS9WjXydrEuD0=
-X-Received: by 2002:a5d:8f02:: with SMTP id f2mr8826897iof.272.1570241084953; 
- Fri, 04 Oct 2019 19:04:44 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=PTykQANQWkY++naC9Qy6DKoZvYoNPeUIYN2DXErCpaU=;
+ b=B4UN3PEKxvAxfO8EALiJDPttAlE4YzJ29AVZnAscEYrToP51gYo/x/leGlARKW1PPm
+ L/eOP0EuEeJDAwMsfGVJBcEz+BDp96zWXonPPMq9IJpM8CLiEEz7fydX363c5TtQZk4c
+ tza92PCRtLUU1DaEPV1Ij5frOvu4NRR8qtK6NxczBKVerGuClmyoj5P3K9r3xJgYSlNk
+ MYnTWNmE2PF+giMpTPTuLf0oPrrqY6lghXdPZ4NNw8GDzalksEZZcvcRZM+45QyfJ45+
+ Br/GDwyP+lZWq9F+gpwSLxBPTZbINW2Re2/eKo56MC8lV3hMxxiWOh0IkTpq++0wBJYj
+ bpTg==
+X-Gm-Message-State: APjAAAV8ZbImAyks+4wilrzejpLfX6uLvM7ma8arx/TTUgsXfjDXdd9q
+ gikk9PNMyLQ5/atCsXkfbE0u8BCsXmaWh3tTpwJxPNXe
+X-Google-Smtp-Source: APXvYqw0eOrAcg/rttaP6Rm+cUZav81qVu8IcYgRgUdouiOGCsBg+qGhTIeEJ0XWx4BApFjNBkNjgGuFjiTeVWpUX6w=
+X-Received: by 2002:a7b:caaa:: with SMTP id r10mr288841wml.100.1570287752269; 
+ Sat, 05 Oct 2019 08:02:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191004140503.9817-1-christian.brauner@ubuntu.com>
- <20191004142748.GG26530@ZenIV.linux.org.uk>
- <20191004143301.kfzcut6a6z5owfee@wittgenstein>
- <20191004151058.GH26530@ZenIV.linux.org.uk>
- <20191004152526.adgg3a7u7jylfk4a@wittgenstein>
- <20191004160219.GI26530@ZenIV.linux.org.uk>
- <20191004165428.GA28597@ZenIV.linux.org.uk>
-In-Reply-To: <20191004165428.GA28597@ZenIV.linux.org.uk>
-Date: Fri, 4 Oct 2019 21:04:33 -0500
-Message-ID: <CAH2r5msU43=Nc=Az05y9mXwKSpe5YC1gL1KHYiu7eowP+sYZog@mail.gmail.com>
-Subject: Re: [cifs] semantics of IPC$ shares (was Re: [PATCH] devpts: Fix NULL
- pointer dereference in dcache_readdir())
-To: Al Viro <viro@zeniv.linux.org.uk>
+Date: Sat, 5 Oct 2019 23:02:21 +0800
+Message-ID: <CADvhK2uJgKcNsxJwT4eGHV=4pH_qJZm0u_GkFMAwQ87vBsSpMw@mail.gmail.com>
+Subject: How to turn on SMB3 POSIX extensions in Samba server?
+To: samba-technical@lists.samba.org
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,102 +66,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Kate Stewart <kstewart@linuxfoundation.org>,
- CIFS <linux-cifs@vger.kernel.org>,
- Linus Torvalds <torvalds@linux-foundation.org>, Varad Gautam <vrd@amazon.de>,
- Amir Goldstein <amir73il@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Stable <stable@vger.kernel.org>,
- Jan Glauber <jglauber@marvell.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Christian Brauner <christian.brauner@ubuntu.com>,
- Will Deacon <will@kernel.org>, Thomas Gleixner <tglx@linutronix.de>
+From: Chris Han via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Chris Han <chrishan308@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Your questions are interesting and rarely asked.
+Hi, I want to use the SMB3 POSIX extensions in the latest Samba (with
+SMB3.1.1, vers=3D3.1.1). By following the user manual, I have added the
+"posix" mount option when mounting, but it shows the following error
+messages.
 
-On Fri, Oct 4, 2019 at 11:57 AM Al Viro <viro@zeniv.linux.org.uk> wrote:
->
-> On Fri, Oct 04, 2019 at 05:02:20PM +0100, Al Viro wrote:
->
-> >       * (possibly) cifs hitting the same on eviction by memory pressure alone
-> > (no locked inodes anywhere in sight).  Possibly == if cifs IPC$ share happens to
-> > show up non-empty (e.g. due to server playing silly buggers).
-> >       * (possibly) cifs hitting *another* lovely issue - lookup in one subdirectory
-> > of IPC$ root finding an alias for another subdirectory of said root, triggering
-> > d_move() of dentry of the latter.  IF the name happens to be long enough to be
-> > externally allocated and if dcache_readdir() on root is currently copying it to
-> > userland, Bad Things(tm) will happen.  That one almost certainly depends upon the
-> > server playing silly buggers and might or might not be possible.  I'm not familiar
-> > enough with CIFS to tell.
->
-> BTW, I would really appreciate somebody familiar with CIFS giving a braindump on
-> that.  Questions:
->
-> 1) What's normally (== without malicious/broken server) seen when you mount
-> an IPC$ share?
+Error messages:
+[xxxxx] CIFS VFS: Server does not support mounting with posix SMB3.11
+extensions.
+[xxxxx] CIFS VFS: cifs_mount failed w/return code =3D -95
 
-IPC$ is for "inter process communication" so is basically an
-abstraction for named pipes (used
-for remote procedure call queries using the old DCE/RPC standard).
+Mount option:
+https://www.mankier.com/8/mount.cifs#posix%7Cunix%7Clinux
+https://wiki.samba.org/index.php/SMB3-Linux
 
-To Windows it is possible to mount IPC$, to Samba you can connect to
-the share but
-due to a Samba server bug you can't do a query info on "." (the 'root'
-of the IPC$ share).
+Mount commands:
+mount =E2=80=93t cifs -o username=3D<user>,vers=3D3.1.1,posix //<address>/s=
+hare
+/mnt/share
+mount =E2=80=93t cifs -o username=3D<user>,vers=3D3.1.1,posix,mfsymlinks
+//<address>/share /mnt/share
 
+Software and kernel version:
+1. Ubuntu 19.04, Kernel 5.0, Samba 4.10
+2. Ubuntu 18.04.3, Kernel 5.0, Samba 4.7
 
-> 2) Does it ever have subdirectories (i.e. can we fail a lookup in its root if it
-> looks like returning a subdirectory)?
+Example of using the "vers=3D3.1.1,posix" mount option: (Page 46)
+https://www.snia.org/sites/default/files/SDC/2018/presentations/SMB/Steve_F=
+rench_SMB311.pdf
 
-In Samba you can't query subdirectories on IPC$ because even open of "."
-fails, but to Windows the query directory would get "STATUS_INVALID_INFO_CLASS"
+How to turn on SMB3 POSIX extensions in Samba server?
 
-An interesting question, and one that I will bring up with the spec
-writers is whether
-there are info level which would be allowed for query directory (probably not).
-
-Another interesting question this brings up is ... "should we allow
-enumerating the 'services' under IPC$
-via readdir"?   You could imagine a case where mounting IPC$ would
-allow you to see the 'services'
-exported by the server over remote procedure call ("server service"
-and "workstation server" and "netlogon service"
-and the global name space (DFS) service and  perhaps "witness protocol
-services" and "branch cache service" etc.)
-
-And then thinking about Dave Howell's changes to the mount API -
-should this be a mechanism that is allowed to be
-used to either browse the valid shares or better access the root of
-the (DFS) global name space.
-
-But the short answer is "no you can't query the directory contents
-under IPC$" (at least not without changing the
-abstraction that we export on the client) but I am open to ideas if
-this would fit with Dave Howell's changes to the
-mount API or other ideas.
-> 3) If it can be non-empty, is there way to ask the server about its contents?
-> Short of "look every possible name up", that is...
->
-> As it is, the thing is abusing either cifs_lookup() (if it really shouldn't
-> have any files in it) or dcache_readdir().  Sure, dcache_readdir() can (and
-> should) pin a dentry while copying the name to userland, but WTF kind of
-> semantics it is?  "ls will return the things you'd guessed to look up, until
-> there's enough memory pressure to have them forgotten, which can happen at
-> any point with no activity on server"?
-
-Server's realistically must expose a share "IPC$" so in theory it can be mounted
-(despite Samba server's current bug there) and there were some experiments
-that Shirish did a few years ago opening well known services under mounts
-to IPC$ (to allow doing remote procedure calls over SMB3 mounts which has
-some value) but AFAIK you would never do a readdir over IPC$ and no
-current users would ever mount IPC$
-
--- 
-Thanks,
-
-Steve
-
+Thanks.
