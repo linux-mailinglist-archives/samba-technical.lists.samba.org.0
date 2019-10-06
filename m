@@ -2,50 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76608CD969
-	for <lists+samba-technical@lfdr.de>; Mon,  7 Oct 2019 00:16:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E52DCD96B
+	for <lists+samba-technical@lfdr.de>; Mon,  7 Oct 2019 00:18:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=VrRuTJdl+pPqb59QFe1A9rc0TPmJF+powwworVLBDTw=; b=sRwktZTGifo9/ceusMqWF9Wvnc
-	XB2JU+SLXMBS/M2ihfytN7dDY0E8KDlIPU/N49RUXeeN8HGCDKZTtxDTFdAOSeSUf3qjrv1MT8JuS
-	chZouDiElHU8cR6kyqCnh9Qxqrx6TXsrJW2T1TxzW2jLOPEegP88G1SbMWNbGCoBoPWZr5T1znxt0
-	IiYnQPQj5SvYmRggUBMgRkkdHSlqXtqxGh1QM0M6+AViS0sZfNCwbUPxnv6DYeDMlOIB9QDzl1a54
-	TApCnrf5LBsYTs9Hxodt6SU2lCaSbES6PobB5hharVcxHhNw3R1KiOyr3KBooukpqzssGvhGRlLWh
-	UcEoNxqQ==;
-Received: from localhost ([::1]:64156 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=aT8c/e0JiCG07rvAYU3NfpHQmzkD7/onkE0jcKyGlYg=; b=h5pw5W0gPfYJxB6d1CbCYmilPw
+	yQLqaz5dNmsS3Chx3HSxxbYRShlZ6X+yx9cKOcMJGjJ4FofMOA2QcHe2KOc/huFfTXcKVMLJuWhgZ
+	GJo3k8wazmyqrXtLsCnJrMRk5ID3jqq70S2Ts1mAbIILoAa9llo+03Ao8Q0K/0jgrcrbxN69ut8a5
+	mlXmVOylawN+T/8mLNfhBHmnCZDugeWdy4FOrUaxdhyqaskxb4mTICLeYlBQakyVfncExZ35MM+c/
+	b9dDLrwHCY1oKoISlsqDnUvaenk43lu6RLJG9qYmFtWWEbm05qJYYXrE5ggbezKDAuh4fhxpAWV6R
+	ku9ZwgZA==;
+Received: from localhost ([::1]:64944 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iHEo8-001fIF-Vt; Sun, 06 Oct 2019 22:15:17 +0000
-Received: from [185.16.48.59] (port=55148 helo=smtp.tranquil.it) 
- by hr1.samba.org with esmtp (Exim) id 1iHEo2-001fI7-6c
- for samba-technical@lists.samba.org; Sun, 06 Oct 2019 22:15:12 +0000
+	id 1iHErb-001fOy-GW; Sun, 06 Oct 2019 22:18:51 +0000
+Received: from [185.16.48.59] (port=55162 helo=smtp.tranquil.it) 
+ by hr1.samba.org with esmtp (Exim) id 1iHErX-001fOr-3K
+ for samba-technical@lists.samba.org; Sun, 06 Oct 2019 22:18:49 +0000
 Received: from mail.tranquil.it (mail.tranquil.it [185.16.48.58])
- by smtp.tranquil.it (Postfix) with ESMTPS id 3F82540263
- for <samba-technical@lists.samba.org>; Sun,  6 Oct 2019 23:59:45 +0200 (CEST)
+ by smtp.tranquil.it (Postfix) with ESMTPS id 88D0540279
+ for <samba-technical@lists.samba.org>; Mon,  7 Oct 2019 00:18:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tranquil.it; s=mail;
- t=1570399185; bh=VrRuTJdl+pPqb59QFe1A9rc0TPmJF+powwworVLBDTw=;
- h=To:From:Subject:Date;
- b=rnOWg8a65neJ1LzewlnXTmQU93nfW4SQIX9oyrzzHIevnCUvn3XGp5L+YI0b2ycAr
- ixztmN12kJp8q3FFpMhq+8RmarEVWqqGdED2cdyEd2R3KOZTwk7UoKFp3qn8M+rhOD
- wNA0MDuFcLECfQ2B2qiCEoBnkxq+bjx4++hTzzWs=
+ t=1570400324; bh=aT8c/e0JiCG07rvAYU3NfpHQmzkD7/onkE0jcKyGlYg=;
+ h=From:Subject:To:Date;
+ b=gsjwwzC1n68vAG2o8ejcqDslrNh+D9y4rYaSQOOeazt0h2p46EWye0yMtI9I7p2XQ
+ dIJfOHUDnSoiLENdNz24L3kjF9BZlMRVfXV59yEYkGlrP1bxwuJhcGjY3F0UtVCSjT
+ uifQCbQuIGC7Wqf+V7NQ5elU4ZAFl6OH9uCj/ow4=
 Received: from localhost (localhost [127.0.0.1])
- by mail.tranquil.it (Postfix) with ESMTP id 37B98141
- for <samba-technical@lists.samba.org>; Sun,  6 Oct 2019 23:59:49 +0200 (CEST)
+ by mail.tranquil.it (Postfix) with ESMTP id 735EE141
+ for <samba-technical@lists.samba.org>; Mon,  7 Oct 2019 00:18:48 +0200 (CEST)
 Received: from mail.tranquil.it ([127.0.0.1])
  by localhost (mail.tranquil.it [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id AhpCWBhvQMdJ; Sun,  6 Oct 2019 23:59:48 +0200 (CEST)
+ with ESMTP id eCKRs7DO7JDl; Mon,  7 Oct 2019 00:18:48 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by mail.tranquil.it (Postfix) with ESMTP id C2F2315B;
- Sun,  6 Oct 2019 23:59:48 +0200 (CEST)
+ by mail.tranquil.it (Postfix) with ESMTP id 3310615B;
+ Mon,  7 Oct 2019 00:18:48 +0200 (CEST)
 Received: from mail.tranquil.it ([127.0.0.1])
  by localhost (mail.tranquil.it [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id 6CQk_4R7kPC9; Sun,  6 Oct 2019 23:59:48 +0200 (CEST)
+ with ESMTP id Tbyk0qcjFeWY; Mon,  7 Oct 2019 00:18:48 +0200 (CEST)
 Received: from srvlts1.ad.tranquil.it (bureau-sdsl.tranquil.it [185.16.50.4])
- by mail.tranquil.it (Postfix) with ESMTPSA id 9779A141;
- Sun,  6 Oct 2019 23:59:48 +0200 (CEST)
-To: samba-technical@lists.samba.org
-Subject: samba 4.11 rpmbuild on CentOS7
-Message-ID: <dcc2c49e-08cd-e077-6506-53020b3ffc58@tranquil.it>
-Date: Sun, 6 Oct 2019 23:59:43 +0200
+ by mail.tranquil.it (Postfix) with ESMTPSA id 184C5141;
+ Mon,  7 Oct 2019 00:18:48 +0200 (CEST)
+Subject: acl propagation during replication (bugzilla #12497)
+To: samba-technical <samba-technical@lists.samba.org>
+Message-ID: <29cb4796-40f6-57f2-8dd6-c8a4d9940fc9@tranquil.it>
+Date: Mon, 7 Oct 2019 00:18:43 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
  Thunderbird/45.8.0
 MIME-Version: 1.0
@@ -71,44 +71,18 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 Hi everyone,
 
-I have given a look tonight at building rpm of Samba 4.11 for=20
-CentOS7[1]. The need for gnutls >=3D 3.4.7 makes it quite challenging!
+I would like to know what is the best way y'all are using to mitigate=20
+the acl propagation bug[1] after replication.
 
-Taking on the work of Sergiomb[2] and Nico Kadel Garcias[3], I compiled=20
-nettle and gnutls and then went on building the other stuff (which was=20
-more business as usual).
-
-I have a few question about packaging:
-
-* is it ok to use the latest gnutls 3.6.10? It seems the 3.4 serie is=20
-not maintained since late 2016. What would be the recommended version?
-
-* I had some library file conflict between stock CentOS7 and custom=20
-packages when compiling gnutls-dane, gnutls-guile and gnutls-c++. As=20
-there are no dependencies on them, I didn't build support for them ad I=20
-guess it was safe to side-step them as far as Samba is concerned.
-
-* EPEL lmdb version is 0.9.22 while upstream is 0.9.24. As I have had=20
-some issues with lmdb backend in the last year, I was wondering if=20
-testing was done against the latest 0.9.24 or 0.9.22 should be enough?
-
-* when doing some samba-tool command, the logger is configured to be=20
-very talkative, like "INFO 2019-10-06 23:46:09,446 pid:23294=20
-/usr/lib64/python3.6/site-packages/samba/netcmd/domain.py #453:=20
-Administrator password will be set randomly!", and looking at the=20
-get_logger() inherited methods or other eventual configuration, I have=20
-not found where the talkative pattern is set... (perhaps it is too late=20
-and I should go to sleep!).
+Are you using dsacls on windows to force inheritance propagation on=20
+every DC? Or just do the delegation on the site DC where the delegated=20
+admin is working?
 
 Cheers,
 
 Denis
 
-[1] https://samba.tranquil.it/centos7/samba-4.11.0/
-https://samba.tranquil.it/centos7/samba-4.11.0-srcrpm/
-[2] https://github.com/sergiomb2/SambaAD
-[3] https://github.com/nkadel/compat-gnutls34-3.x-srpm
-
+[1] https://bugzilla.samba.org/show_bug.cgi?id=3D12497
 
 --=20
 Denis Cardon
