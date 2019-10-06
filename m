@@ -2,45 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 725A9CCCE5
-	for <lists+samba-technical@lfdr.de>; Sat,  5 Oct 2019 23:50:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8861DCCE64
+	for <lists+samba-technical@lfdr.de>; Sun,  6 Oct 2019 06:42:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=h3prknZ+klYwef4I7JISuZcMw8dJfjybNrICBbMrE3o=; b=cNSEZ0n5nwcOV1TRuJV1f835c3
-	diGMhwrwBnih0S8iIpo7u0wCVmkN4XygOSyTKJNP7ofQOgkVDRLWzvk1Q3+DOpnoyVYWj8NlUW5gM
-	Ys+L4CkV7/zGohD5es6nLDOePpdjfG1IowmfwmbAaRBhV56Fofva++r3xQTmtNw9d1ZbOcRApmKhu
-	5tBraJreoIIBx0r0pu0Yt1goLnHgfAeYFM0Vny0It8/kbD1Z/CxJeYZCnkeOJinC0SZGlx1K4ZWSP
-	4JzaOouoGrLK+mTS8LrbksRf8N+mjL9hxZ9LHzIys7lYRZcyKaeQfozQdBRbEvGYCyhxz4P9rOOxx
-	euGSHn/A==;
-Received: from localhost ([::1]:40696 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=hP0SPGxoScI1PqRZk5FwpIWUfiuxN3A0LgsUMGV76Rk=; b=mIBWnBOgW7hQhrDP/ur698rL4M
+	FEVqKrI7eazRoDdEjbpoAjcbHTUF5CGCo51inQO/8xih+u1D3SiJCOU5ZUV67ODh7eLTU9R7s8hUz
+	kaxKAHYLfxHxMrjCnEfsK9Bm5aR3j9tKvbT3P0lCh3jZjn2MHbt4mTZwbmW5HzT6nTELTGY6osHit
+	1dvYuH9HY6BdRa0FvMOrvC8vzKZZR6hVocgU6Tx4/+ekz9OEuCkBentOAFRmJ8UJQOe2yqDLSH6os
+	ra+yTT2d3w56ZGoP2/wXlNw/8X2htepns6T0c+RYLTFLTMncrnjIuTw0u3q/sxQllDYLVenUucLr4
+	HZdxGvPQ==;
+Received: from localhost ([::1]:44732 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iGrwG-001Uo2-MI; Sat, 05 Oct 2019 21:50:08 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37722) 
+	id 1iGyMT-001Y6W-Rh; Sun, 06 Oct 2019 04:41:37 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25384) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iGrwB-001Unv-ND
- for samba-technical@lists.samba.org; Sat, 05 Oct 2019 21:50:05 +0000
+ (Exim) id 1iGyMP-001Y6P-Lp
+ for samba-technical@lists.samba.org; Sun, 06 Oct 2019 04:41:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42627210; h=Date:Message-ID:From:To:CC;
- bh=h3prknZ+klYwef4I7JISuZcMw8dJfjybNrICBbMrE3o=; b=qrSwPpk5zs4MViGtxABpfbDrQo
- Xw5KANkEFZ7xJxvlO3/BEhbgh/n3bdxqtOylsOlTiZ2h8+Nmu6yOGG9/K+metiEPv9Fa7PI7LaiPo
- xdta9f15dRMDIKm4O7itNNoL9reXNvIJ/6iRDoUFNXh3ok38Akb09L08TdcTNe0Qas4w=;
+ s=42627210; h=Message-ID:Cc:To:From:Date;
+ bh=hP0SPGxoScI1PqRZk5FwpIWUfiuxN3A0LgsUMGV76Rk=; b=taU1ZTQ7QYqZMc9ekO3bMyrBT3
+ 6+uVTVBZZm9VjvdPGvzPOY1VkW4CeYTGEhZ31p9rjwlEH9ZSaKkUMSb1WIL2MC6t38IkGp0E1yjMM
+ YWMaF/cxq4AfXOebl9ckZQrEXzzBNhWxSe9vZHa+LrA84QikezE3fcdCZd27JOtYRz/8=;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iGrwB-0001SF-6r
- for samba-technical@lists.samba.org; Sat, 05 Oct 2019 21:50:03 +0000
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iGyML-00038C-5N; Sun, 06 Oct 2019 04:41:29 +0000
+Date: Sat, 5 Oct 2019 21:41:24 -0700
+To: Rowland penny <rpenny@samba.org>
 Subject: Re: How to turn on SMB3 POSIX extensions in Samba server?
-To: samba-technical@lists.samba.org
+Message-ID: <20191006044124.GA12220@jeremy-acer>
 References: <CADvhK2uJgKcNsxJwT4eGHV=4pH_qJZm0u_GkFMAwQ87vBsSpMw@mail.gmail.com>
  <20191005212851.GA8068@jeremy-acer>
-Message-ID: <942a44f9-a3bf-f5ec-0444-04a65c3e6138@samba.org>
-Date: Sat, 5 Oct 2019 22:49:59 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ <942a44f9-a3bf-f5ec-0444-04a65c3e6138@samba.org>
 MIME-Version: 1.0
-In-Reply-To: <20191005212851.GA8068@jeremy-acer>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <942a44f9-a3bf-f5ec-0444-04a65c3e6138@samba.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,61 +52,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 05/10/2019 22:28, Jeremy Allison via samba-technical wrote:
-> On Sat, Oct 05, 2019 at 11:02:21PM +0800, Chris Han via samba-technical wrote:
->> Hi, I want to use the SMB3 POSIX extensions in the latest Samba (with
->> SMB3.1.1, vers=3.1.1). By following the user manual, I have added the
->> "posix" mount option when mounting, but it shows the following error
->> messages.
->>
->> Error messages:
->> [xxxxx] CIFS VFS: Server does not support mounting with posix SMB3.11
->> extensions.
->> [xxxxx] CIFS VFS: cifs_mount failed w/return code = -95
->>
->> Mount option:
->> https://www.mankier.com/8/mount.cifs#posix%7Cunix%7Clinux
->> https://wiki.samba.org/index.php/SMB3-Linux
->>
->> Mount commands:
->> mount –t cifs -o username=<user>,vers=3.1.1,posix //<address>/share
->> /mnt/share
->> mount –t cifs -o username=<user>,vers=3.1.1,posix,mfsymlinks
->> //<address>/share /mnt/share
->>
->> Software and kernel version:
->> 1. Ubuntu 19.04, Kernel 5.0, Samba 4.10
->> 2. Ubuntu 18.04.3, Kernel 5.0, Samba 4.7
->>
->> Example of using the "vers=3.1.1,posix" mount option: (Page 46)
->> https://www.snia.org/sites/default/files/SDC/2018/presentations/SMB/Steve_French_SMB311.pdf
->>
->> How to turn on SMB3 POSIX extensions in Samba server?
-> There is no officially released version of Samba that
-> implements the SMB3 POSIX extensions yet. The code still
-> lives in an experimental branch that hasn't yet been
-> merged with mainline.
->
-> The plan is to finish the VFS refactoring, which will
-> bring the internals of Samba closer to the modern OpenGroup
-> handle-based VFS interface, then merge the extensions code
-> into mainline after that. The released code will be in
-> the next supported Samba version after the VFS refactoring
-> is done. Realistically, this will be sometime in 2020 unless
-> someone else wants to help me with the code :-).
->
-> Jeremy.
->
-Hi Jeremy, I advised the OP over on the samba mailing that unix 
-extensions for SMBv3 do not exist yet, but he seems to think that 
-something similar should work with mount.cifs and the kernel.
+On Sat, Oct 05, 2019 at 10:49:59PM +0100, Rowland penny via samba-technical wrote:
+> > 
+> > Jeremy.
+> > 
+> Hi Jeremy, I advised the OP over on the samba mailing that unix extensions
+> for SMBv3 do not exist yet, but he seems to think that something similar
+> should work with mount.cifs and the kernel.
 
-Rowland
-
-
+Yeah, that's Steve pushing experimental stuff into
+released kernels for you :-(. The client side of the
+SMBv3 UNIX extensions is being developed in the
+SMB3 Linux kernel client code, the server side isn't
+in any released Samba (or even upstream master) yet.
 
