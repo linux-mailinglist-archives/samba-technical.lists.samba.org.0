@@ -2,67 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14D50CCF37
-	for <lists+samba-technical@lfdr.de>; Sun,  6 Oct 2019 09:46:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 76608CD969
+	for <lists+samba-technical@lfdr.de>; Mon,  7 Oct 2019 00:16:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Date:Subject:cc;
-	bh=laoGjAbNF5lm6ANK7dq5cnEZtqZ/trAe6zrRNlOszRA=; b=Jc/bhdp8FPtkAD3HtrCh3r6096
-	R5hcLYmMnV8/OaewHOjBeEQE43Iq19otxuB5C087vFM0AKF3gIArvTey+rqWHUNYKD1bLRYyoAGU5
-	Mj43BXgAmSerM3aRJq6cxfQHGapa7tVfDUotKqM1bkhOMIVKYh0yCLFQBrI6Ai6TyhsV3xPTPcpWT
-	ncNo3F5vP73dlps16yUYd+VDrMjT5kxdq7iME8h4vBx9ihf66HOUI6vJsEGGV7qX1XJe9dKWAApGp
-	DMRPTzdxK6bzJh6mZCCIiK4wX7vpHYbNIuEuLVgKTdTxfIglseLB8dYugdxxwQuHO1yr7RNPwITTj
-	6+jj2h+g==;
-Received: from localhost ([::1]:49096 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=VrRuTJdl+pPqb59QFe1A9rc0TPmJF+powwworVLBDTw=; b=sRwktZTGifo9/ceusMqWF9Wvnc
+	XB2JU+SLXMBS/M2ihfytN7dDY0E8KDlIPU/N49RUXeeN8HGCDKZTtxDTFdAOSeSUf3qjrv1MT8JuS
+	chZouDiElHU8cR6kyqCnh9Qxqrx6TXsrJW2T1TxzW2jLOPEegP88G1SbMWNbGCoBoPWZr5T1znxt0
+	IiYnQPQj5SvYmRggUBMgRkkdHSlqXtqxGh1QM0M6+AViS0sZfNCwbUPxnv6DYeDMlOIB9QDzl1a54
+	TApCnrf5LBsYTs9Hxodt6SU2lCaSbES6PobB5hharVcxHhNw3R1KiOyr3KBooukpqzssGvhGRlLWh
+	UcEoNxqQ==;
+Received: from localhost ([::1]:64156 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iH1Eb-001Zhi-9m; Sun, 06 Oct 2019 07:45:41 +0000
-Received: from mout.gmx.net ([212.227.15.19]:47921) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iH1EV-001Zha-6k
- for samba-technical@lists.samba.org; Sun, 06 Oct 2019 07:45:37 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1570347932;
- bh=laoGjAbNF5lm6ANK7dq5cnEZtqZ/trAe6zrRNlOszRA=;
- h=X-UI-Sender-Class:From:Subject:Date:To;
- b=gcwBxcR3biV6YDz2zv66YWKi9164VMvQFCorLD9nuNiKWsqTLkDHGHEOxKYc+jiJS
- 4z+dC8Ju3jxjSK3enpPgywfGEk+5EdnJvNmo8mis+ltnQW5lsFT7/GSkmbZF79cJjx
- FXKe8O7JF73klb2W82SPiH0kVIUlEdiJJisfhd+Y=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from macbookpro.local ([91.66.148.27]) by mail.gmx.com (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MJE2D-1iWkZ50Afr-00KdSG for
- <samba-technical@lists.samba.org>; Sun, 06 Oct 2019 09:45:32 +0200
-Content-Type: text/plain;
-	charset=utf-8
+	id 1iHEo8-001fIF-Vt; Sun, 06 Oct 2019 22:15:17 +0000
+Received: from [185.16.48.59] (port=55148 helo=smtp.tranquil.it) 
+ by hr1.samba.org with esmtp (Exim) id 1iHEo2-001fI7-6c
+ for samba-technical@lists.samba.org; Sun, 06 Oct 2019 22:15:12 +0000
+Received: from mail.tranquil.it (mail.tranquil.it [185.16.48.58])
+ by smtp.tranquil.it (Postfix) with ESMTPS id 3F82540263
+ for <samba-technical@lists.samba.org>; Sun,  6 Oct 2019 23:59:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tranquil.it; s=mail;
+ t=1570399185; bh=VrRuTJdl+pPqb59QFe1A9rc0TPmJF+powwworVLBDTw=;
+ h=To:From:Subject:Date;
+ b=rnOWg8a65neJ1LzewlnXTmQU93nfW4SQIX9oyrzzHIevnCUvn3XGp5L+YI0b2ycAr
+ ixztmN12kJp8q3FFpMhq+8RmarEVWqqGdED2cdyEd2R3KOZTwk7UoKFp3qn8M+rhOD
+ wNA0MDuFcLECfQ2B2qiCEoBnkxq+bjx4++hTzzWs=
+Received: from localhost (localhost [127.0.0.1])
+ by mail.tranquil.it (Postfix) with ESMTP id 37B98141
+ for <samba-technical@lists.samba.org>; Sun,  6 Oct 2019 23:59:49 +0200 (CEST)
+Received: from mail.tranquil.it ([127.0.0.1])
+ by localhost (mail.tranquil.it [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id AhpCWBhvQMdJ; Sun,  6 Oct 2019 23:59:48 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.tranquil.it (Postfix) with ESMTP id C2F2315B;
+ Sun,  6 Oct 2019 23:59:48 +0200 (CEST)
+Received: from mail.tranquil.it ([127.0.0.1])
+ by localhost (mail.tranquil.it [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id 6CQk_4R7kPC9; Sun,  6 Oct 2019 23:59:48 +0200 (CEST)
+Received: from srvlts1.ad.tranquil.it (bureau-sdsl.tranquil.it [185.16.50.4])
+ by mail.tranquil.it (Postfix) with ESMTPSA id 9779A141;
+ Sun,  6 Oct 2019 23:59:48 +0200 (CEST)
+To: samba-technical@lists.samba.org
+Subject: samba 4.11 rpmbuild on CentOS7
+Message-ID: <dcc2c49e-08cd-e077-6506-53020b3ffc58@tranquil.it>
+Date: Sun, 6 Oct 2019 23:59:43 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+ Thunderbird/45.8.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.11\))
-Subject: pam headers not found by waf on illumos/openindiana 
-Message-Id: <C90A30A7-3FE6-449D-92D6-BB37D9E986DC@gmx.net>
-Date: Sun, 6 Oct 2019 09:45:31 +0200
-To: samba-technical <samba-technical@lists.samba.org>
-X-Mailer: Apple Mail (2.3445.104.11)
-X-Provags-ID: V03:K1:EbKXTuzVSUFKKnUfLvpVJ6Om0vVCHuW9ZSHHmZXBzhgboJpnEqV
- E6D1I91g/4cs/UNANSvJRiMxynxkaMDDdMSAUWYEUtvkQirb5O0ImlEH16R33emLTYXAu75
- SqdOWrQtY86YBbJr6GzxRCQB6Kc1EY0QC43rwK8vBn4AhInAqxBn6LhQiNw5S5xzF3Jtudm
- 0409PcbqdnrftzRmw0pPA==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:HGdhFmE4AZc=:Hmi4eJxAHNMw0XNYmnpEgv
- cbwnZn4CwvnLgz3cKeMoX/UgiyADQ2YHPMIpsabi4sUYjfgVtWPI9F+oTbiZtXjAz95A5iSj+
- +EXKKeQMBZQtNg8FthA77LUxppZohjyaBRHkBoynjF4A6NuHFUUazcYLLbC6tRMAiNXGvn+F5
- hoAlMCWuFpVHMORaLSC5IC50i0T4+Wy7UdeOb90Ep2GOIiwfbkRqGIaDeh6s+3IkHkOdnHkPd
- kjPnR1NtddlR4cLzXpi9y4If7jai3rJ4z/kAHOPlL/vEEBOi8DoZ4RiFcr7Z/9fMrqI1YWMfw
- dLsFLO3QvgSJv4Fw3qDjLkTEZ5ZGJkqgP2XKPmyYAJDML7V9nmsTD+oWPzTkVclmsUSAfWO48
- W4KLS3eiNtWWL0qcyQMAOb02jioSZty2e/YA8i7tvUxMHu45QXWB2tvKuIBUoNspQ3YY/+LC6
- 3c7jMvGheKEX7M33xop7LVLK1jZJkI2cwr+0+FgJ4jxDZwd0RO3wKLQWAHSP20oZof+CBiFcM
- iAV84yetAc33eJWRPKlaV1i7JWxPo2S+vqhja3eB99NAlKBmanNT9WW1fCFzA9q7LE316gjTO
- znPRYj8TsINu4jqVvSyLcKRqcuN168OPjjA+Ugl3DzKMkE/CpTE/lceMx023Jo3vryMVvAj3H
- 2GmDelkeBBlWDR/0r6xiV0wXlQC7m3Yzu6jt5LD2F7vE1hdGyzCYZ29xZbQ5W6glYlSiSRWsN
- JL9Ntupzguc4dP3Af+cS8D9GIIfMxOo0XUFOr+d44QupPoii3PsnppNisFu9fiHCKf6/v35z0
- GkKJtFvzspqTRZGFTYbJj5nK6NqufAVlgVmlhrTsAPGx3Yd0GfGg3KpDt/rbyhklf7xyrTjKI
- os4p31Jsf2k3W6vFrj4/Mus9jkA1/+kqPoPKieGkyaagxNproQg9EXCYajycopTQC79FAX5fo
- UvucJe+P0DFhRsZ6jXTjejm7nmWbGfnFwsqLYFQu4h8d/X2YoI4d1vNmG2u2er2+jZBst8ncZ
- O377e0F7WvlVgF3ctU51UfOCQrTfft+fOJ/YjrXh0lZcwfOURndIg4hxaW87rdFoW8+ng+uyv
- 5/6g+ZsymtiJn+9fVL+WPTH0u+A7BHgY7LCriCeCFFL3+Ge9ocKdjnZTQa7LnhHBUy4mB9glA
- QQmHOVimO1I4M1ITYbEWKGjQu1IcdO6xf4gIl3iGTmxscOQj54dqw1kwn6D5PcOFbovxt+iRV
- j7iAb42DcBuXj4biZ9oRyUfONaUz+SK27V1KtrGYmodmQJm6n0t3joQLHhKo=
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,26 +64,61 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rouven WEILER via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rouven WEILER <Rouven_Weiler@gmx.net>
+From: Denis Cardon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Denis Cardon <dcardon@tranquil.it>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I am trying to compile samba 4.11 on openindiana/illumos.
+Hi everyone,
 
-I compiled it with =E2=80=9E=E2=80=94enable-selftes=E2=80=9C which =
-throws the error, that I should use =E2=80=94with-pam=3Dno.
-The reason is that the =E2=80=9Esecurity/pam_modules.h=E2=80=9C header =
-is not found, BUT it is available as =
-"/usr/include/security/pam_modules.h=E2=80=9C.
+I have given a look tonight at building rpm of Samba 4.11 for=20
+CentOS7[1]. The need for gnutls >=3D 3.4.7 makes it quite challenging!
 
-Compiling =E2=80=9E=E2=80=94with-pam=3Dno=E2=80=9C works of course.
+Taking on the work of Sergiomb[2] and Nico Kadel Garcias[3], I compiled=20
+nettle and gnutls and then went on building the other stuff (which was=20
+more business as usual).
 
-Compiling without =E2=80=9E--enable-selftest=E2=80=9C also works, BUT =
-automatically pam is left out since the "security/pam_modules.h=E2=80=9C =
-is also not found although there (see above).
+I have a few question about packaging:
 
-How can I tell waf to find the headers correctly?
+* is it ok to use the latest gnutls 3.6.10? It seems the 3.4 serie is=20
+not maintained since late 2016. What would be the recommended version?
 
-Thanks in advance.=
+* I had some library file conflict between stock CentOS7 and custom=20
+packages when compiling gnutls-dane, gnutls-guile and gnutls-c++. As=20
+there are no dependencies on them, I didn't build support for them ad I=20
+guess it was safe to side-step them as far as Samba is concerned.
+
+* EPEL lmdb version is 0.9.22 while upstream is 0.9.24. As I have had=20
+some issues with lmdb backend in the last year, I was wondering if=20
+testing was done against the latest 0.9.24 or 0.9.22 should be enough?
+
+* when doing some samba-tool command, the logger is configured to be=20
+very talkative, like "INFO 2019-10-06 23:46:09,446 pid:23294=20
+/usr/lib64/python3.6/site-packages/samba/netcmd/domain.py #453:=20
+Administrator password will be set randomly!", and looking at the=20
+get_logger() inherited methods or other eventual configuration, I have=20
+not found where the talkative pattern is set... (perhaps it is too late=20
+and I should go to sleep!).
+
+Cheers,
+
+Denis
+
+[1] https://samba.tranquil.it/centos7/samba-4.11.0/
+https://samba.tranquil.it/centos7/samba-4.11.0-srcrpm/
+[2] https://github.com/sergiomb2/SambaAD
+[3] https://github.com/nkadel/compat-gnutls34-3.x-srpm
+
+
+--=20
+Denis Cardon
+Tranquil IT
+12 avenue Jules Verne (Bat. A)
+44230 Saint S=C3=A9bastien sur Loire (FRANCE)
+tel : +33 (0) 240 975 755
+http://www.tranquil.it
+
+Tranquil IT recrute! https://www.tranquil.it/nous-rejoindre/
+Samba install wiki for Frenchies : https://dev.tranquil.it
+WAPT, software deployment made easy : https://wapt.fr
 
