@@ -2,58 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BAEFCDE40
-	for <lists+samba-technical@lfdr.de>; Mon,  7 Oct 2019 11:32:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E9682CDFC0
+	for <lists+samba-technical@lfdr.de>; Mon,  7 Oct 2019 12:57:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=lgBEhm9zEEOSt1zOTLRwkdmbc2zQ7DbyGlUafr/BmtA=; b=g1v1cchFnLz7w6iXfgCcs+4/BJ
-	rZvHZhfYiBaLp41v7fgPkz3rLU6DFqm4SD9504j3cHsfOSfFlvkavMLfbi/WwNkLleRvOoICa27Mq
-	kBSxKzsdO28P1hqwRUZX81VMFSTYfcJkTMAN5Y0A3k5aG9A+izHZhzXuUby47oNUWpQtseB7Mg6Zg
-	IPQaK6ZRiISeleaXg5XCDjcHnhoAWMrMSyEoIPpd2sdkw3Wq/Zk7MWMc13hQmUX8xq+YkGLiSYOOq
-	lWwgzZ/xHNNS/CdPy7SWF8WvaZyL4CDriIvJsMUInweDOsJ2VPl2ctLHYKLsnS5dVMkpZzpffpk5/
-	CEXPz0hg==;
-Received: from localhost ([::1]:44800 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=pgu2s+5SjIORnDV1GstZZ02u9fqAnYOFKYZPpcWdefA=; b=CxALihMxvq2LrNnw0F8JefWFd0
+	qbytSvRs29fXhY9PpFZ+POtlT+9qcY0Ix98bxA6EZq3WTL10CBzwhLccxialViCDf/CzdxsJv3AID
+	XURzPOKSHOLvh5UvQupjWNjsD564nLPg7+6a6PEGdiJim5yces17R11Y/nYhBBpoj98XYmzOUrjuh
+	bMF1IC5HEEOtFaZm4JJE8CdBsHYhfA3S7FWgSpbsEBRAWERlHhG655VLn8b1JvpbsUNiCM7uKDzIB
+	i+lZ7EQv9fmW2ajXRP9SVJRFJzOsSzOeKTqkx9RPottOekvYtbdsTDpZcq2u6tdOhiCqI5BTAn2NO
+	moyhhBDQ==;
+Received: from localhost ([::1]:46254 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iHPNQ-001nEY-R7; Mon, 07 Oct 2019 09:32:24 +0000
-Received: from [185.16.48.59] (port=57194 helo=smtp.tranquil.it) 
- by hr1.samba.org with esmtp (Exim) id 1iHPNM-001nEC-TE
- for samba-technical@lists.samba.org; Mon, 07 Oct 2019 09:32:23 +0000
-Received: from mail.tranquil.it (mail.tranquil.it [185.16.48.58])
- by smtp.tranquil.it (Postfix) with ESMTPS id 05D6040476;
- Mon,  7 Oct 2019 11:32:17 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tranquil.it; s=mail;
- t=1570440737; bh=lgBEhm9zEEOSt1zOTLRwkdmbc2zQ7DbyGlUafr/BmtA=;
- h=Subject:To:References:From:Date:In-Reply-To;
- b=FE1zKqDHr2RqBPC7hZMlUXNf1st7W+BpcKDPbhdF4D1uRG0KUqs5+VHWf+zzZoUsf
- cNqbz838jDX+IL03CItAvI/4po4seHTcDN9z94brcyLBlerc/g97CfvjL4coZkfcxL
- ZEbCTX76KNdAyr33lYUCILadmVTcS6tSIEm75eT8=
-Received: from localhost (localhost [127.0.0.1])
- by mail.tranquil.it (Postfix) with ESMTP id 5CA08128;
- Mon,  7 Oct 2019 11:32:21 +0200 (CEST)
-Received: from mail.tranquil.it ([127.0.0.1])
- by localhost (mail.tranquil.it [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id OYU2Lfgue0GT; Mon,  7 Oct 2019 11:32:20 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by mail.tranquil.it (Postfix) with ESMTP id B656C15C;
- Mon,  7 Oct 2019 11:32:20 +0200 (CEST)
-Received: from mail.tranquil.it ([127.0.0.1])
- by localhost (mail.tranquil.it [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id qoBLccv_Zuie; Mon,  7 Oct 2019 11:32:20 +0200 (CEST)
-Received: from srvlts1.ad.tranquil.it (bureau-sdsl.tranquil.it [185.16.50.4])
- by mail.tranquil.it (Postfix) with ESMTPSA id 9630C128;
- Mon,  7 Oct 2019 11:32:20 +0200 (CEST)
+	id 1iHQhH-001o2d-Sj; Mon, 07 Oct 2019 10:56:59 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18930) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iHQh6-001o2W-KC
+ for samba-technical@lists.samba.org; Mon, 07 Oct 2019 10:56:57 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Message-ID:Date:Cc:To:From;
+ bh=pgu2s+5SjIORnDV1GstZZ02u9fqAnYOFKYZPpcWdefA=; b=vyY9Vki8j8bj2K7ikI4FJ+xLyM
+ sVyNjSQhbIY0vIJNCYDUsi6x6AKd0OVdP22M7kJG95uK/XvfWCmEaLETqoI/SuKZ9P8zxTa4pw3Je
+ 35VfUJyqVTuuRPK7mukx0nEwp4z7bzpzk7pWR2MVDf6MAZDioo665iAGI+DVL7nf4w04=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iHQh6-0004Hn-3N; Mon, 07 Oct 2019 10:56:48 +0000
+To: samba-technical@lists.samba.org, Denis Cardon <dcardon@tranquil.it>
 Subject: Re: samba 4.11 rpmbuild on CentOS7
-To: Dario Lesca <d.lesca@solinos.it>, samba-technical@lists.samba.org
+Date: Mon, 07 Oct 2019 12:56:45 +0200
+Message-ID: <5800371.XWyRSs5115@magrathea>
+In-Reply-To: <0091979d-7696-5502-d34d-acd2725bfd36@tranquil.it>
 References: <dcc2c49e-08cd-e077-6506-53020b3ffc58@tranquil.it>
  <d6e33d3f085cd509f2915cc0e50f50572416e169.camel@solinos.it>
-Message-ID: <0091979d-7696-5502-d34d-acd2725bfd36@tranquil.it>
-Date: Mon, 7 Oct 2019 11:32:15 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
- Thunderbird/45.8.0
+ <0091979d-7696-5502-d34d-acd2725bfd36@tranquil.it>
 MIME-Version: 1.0
-In-Reply-To: <d6e33d3f085cd509f2915cc0e50f50572416e169.camel@solinos.it>
-Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,56 +51,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Denis Cardon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Denis Cardon <dcardon@tranquil.it>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Dario Lesca <d.lesca@solinos.it>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Dario,
+On Monday, 7 October 2019 11:32:15 CEST Denis Cardon via samba-technical=20
+wrote:
+> It is built against Heimdal kerberos. The samba.spec is taken from
+> Fedora (thanks G=FCnter and Andreas for doing all the hard work!) and
+> modified to switch from MIT to Heimdal. Actually the hard part for
+> building 4.11 on CentOS7 is the requirement gnutls>=3D3.4.7.
 
-Le 10/07/2019 =C3=A0 11:03 AM, Dario Lesca via samba-technical a =C3=A9cr=
-it :
-> Il giorno dom, 06/10/2019 alle 23.59 +0200, Denis Cardon via samba-
-> technical ha scritto:
->> I have given a look tonight at building rpm of Samba 4.11 for
->> CentOS7[1].
->
-> Have you build it with MIT or Heimdal Kerberos?
->
-> If you have build with MIT there is (yet) this problem
-> https://bugzilla.redhat.com/show_bug.cgi?id=3D1748860
+Hi Denis!
 
-It is built against Heimdal kerberos. The samba.spec is taken from=20
-Fedora (thanks G=C3=BCnter and Andreas for doing all the hard work!) and=20
-modified to switch from MIT to Heimdal. Actually the hard part for=20
-building 4.11 on CentOS7 is the requirement gnutls>=3D3.4.7.
 
-By the way, if you want to rebuild the srcrpm, for gnutls you'll have to=20
-add --without guile --without dane --without cxx (otherwise there are=20
-some conflicting filename with stock distro). And for rebuilding=20
-samba.spec, you'll have to copy over=20
-/usr/lib64/compat-gnutls34/pkgconfig/gnutls.pc and=20
-/usr/lib64/compat-nettle32/pkgconfig/nettle.pc over to=20
-/usr/lib64/pkgconfig/ as I was unable to get PKG_CONFIG_PATH being taken=20
-by the build scripts...
+Samba 3.4.7 is only required for MIT Kerberos. If you build with Heimdal=20
+GnuTLS >=3D 3.2 is just fine. Just change the required version in the spec =
+file.
 
-Cheers,
 
-Denis
+With Samba 4.12, GnuTLS >=3D 3.4.7 will be required!
 
-PS : Note : those rpm are not yet field tested and not deemed production=20
-ready, I just built a simple test domain to validate basic functionnality=
-.
+https://blog.cryptomilk.org/2019/10/02/samba-and-gnutls/
 
---=20
-Denis Cardon
-Tranquil IT
-12 avenue Jules Verne (Bat. A)
-44230 Saint S=C3=A9bastien sur Loire (FRANCE)
-tel : +33 (0) 240 975 755
-http://www.tranquil.it
 
-Tranquil IT recrute! https://www.tranquil.it/nous-rejoindre/
-Samba install wiki for Frenchies : https://dev.tranquil.it
-WAPT, software deployment made easy : https://wapt.fr
+Best regards,
+
+
+	Andreas
+
+=2D-=20
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
+
 
