@@ -2,58 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F50BCF5B3
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Oct 2019 11:11:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C3BFCF679
+	for <lists+samba-technical@lfdr.de>; Tue,  8 Oct 2019 11:55:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=QuzDM32yW0od9y+ac8Gw0SzmHRPlpttRnLi10/oxADc=; b=SlM7BpfpVK/6AWpEXF/twc6Vkw
-	HxOaeo+91lEboceGbg5dbif7X0zNHFV9s8ZsQXhoV3lXC4VBG8WUUrjHp/TV15hm5G3FpVOBGmFSK
-	Z6lbi7X+YFiRMttJp/X18dqqCcVBjed2ClHAUEAHcxHZMKJgfaV35/qLJZbWz24aMaIZr8rUWAm7I
-	8v9+i0cDjE/wbtvlFmzVR8u7jy+CdRitSq7ItmEt1nXze3COC21Bq9o+AWpYS502WoQeT4WPI5Zm7
-	izWa+KoxAPuEv+/INzyfOW+WU/q9ftULvBO4TRk00LpGoTi50itlmIYtiOqA/NqFNSNJGmq1EzRc+
-	4SgatEFg==;
-Received: from localhost ([::1]:40544 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=37QZa7G8FuhZe1z2ZF7RpnHJefj+oQ0iwWWwCf0R5O4=; b=z2xdnwqyAOPY1T2aom+EHfQwS8
+	raYL1cp4C5FHSBm1EgjBSeqBkWQ3IGmAUOn8Zw4DXNiT3D7jh8EeONnk6DLqRpUPMpQAvFw97gWOE
+	Go3BEEdhhuuxaEqYlXmY96VZe2qjqLQk6kWHDLnWbmSxcxqiWC2NxbT6sNAooBNZttQG4NrCDqZrf
+	Rr10g/V7FPnE5EUvRdl9SkY4Deqt5ykFi4z5I2ePKZi0NH506gzfgk/dNQZE5hH/CW7CXIbeImMus
+	EF2zfGp/WYtwSb0sZCyY3d8o1CHB2pEmNoKphIryNtJSSBvz8NS2qrf8NIoLSOjdho8pXwYxVCUAv
+	qPGT6ZLg==;
+Received: from localhost ([::1]:41712 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iHlW1-0022yA-PN; Tue, 08 Oct 2019 09:10:45 +0000
-Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:39408) 
+	id 1iHmDE-0023QB-TX; Tue, 08 Oct 2019 09:55:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:27680) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iHlVx-0022y3-8z
- for samba-technical@lists.samba.org; Tue, 08 Oct 2019 09:10:43 +0000
-Received: by mail-io1-xd2f.google.com with SMTP id a1so34929393ioc.6
- for <samba-technical@lists.samba.org>; Tue, 08 Oct 2019 02:10:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=QuzDM32yW0od9y+ac8Gw0SzmHRPlpttRnLi10/oxADc=;
- b=hEJAcAZBLAp8415KnzzcxI/bpLJiojNQq8vluLx9HNyzk1A2OGy8F21Gur5I0177Sh
- VzuIPzfeAxx96ETwNCUhhwLHTPtmLu57HjCZR+CLTWDtevXi2gYDU3mwzeQm+hlN8q1p
- HE1XXJUIfiIX+IBWWzNpM1u9vJTVTqC+vWyVJxYxT6pAoJv+0rCwfSwqWQc9P3aJA0j8
- eKyrNmklKZA8Q4t1ccYHNx5J1C1vKZRxXEWFgEVLsJJSh+L2c2erewbbQ9N8ZYqK2kH4
- YE8anJD4Msdn9J9BBs64yqEFOsV3kWwj3ecFlnWKs8rVZq+gfR1y39EoNlufTV9WqQrC
- Kibw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=QuzDM32yW0od9y+ac8Gw0SzmHRPlpttRnLi10/oxADc=;
- b=mqMh5/r1XO6Yji+A5Bb67qtd5iTQ5+Ycg/QdtTiOkk1PlmWjVgUq2+EqlMm2V3PHmr
- Y1u6oOU7k6HA1RIcHiek8ls3J8gTNNYirXDisuuGT8tvI961gPs1DMzL3X6O2kIoRE7H
- Bir4mlAiKyf6TZ6zBnivvhei8bgZckSndD1/epW+9YNJIupq7hEtYnis2lh/Tc4yYciT
- c5jXDAsdr57zMHNH4/jypkVB3EW4jp68JN/iUPgKbVK/m5hCMxgs91irBM3Q65vJydN/
- nM+ViBPbCKFBsRcouNq4OGb9Ta9zyk0CB31kP4aV2bwWL+bZjfXZnoT5kpZJvWo509km
- 69+A==
-X-Gm-Message-State: APjAAAUb2yiY4B5T7sqrdplAy/2dhZHiomFh9YcWzP3ylT2rx8aMjS8K
- uRPQwERFa7fT76lUSSzRi2MdpuaWBV8mU5sN8NU=
-X-Google-Smtp-Source: APXvYqzYqd0i1AIEodFlePaLKmYLKYMqZcJXh+BLgNyzhK15zoggWQENxlxxaSo6sOXnmBkTm0mG4gArr7X/6EizgA8=
-X-Received: by 2002:a92:2903:: with SMTP id l3mr2137056ilg.109.1570525839394; 
- Tue, 08 Oct 2019 02:10:39 -0700 (PDT)
-MIME-Version: 1.0
-References: <5849953.E8HlOTvGIY@magrathea>
-In-Reply-To: <5849953.E8HlOTvGIY@magrathea>
-Date: Tue, 8 Oct 2019 19:10:29 +1000
-Message-ID: <CAN05THRPeQg_aCZeaUmh-3xaC8UKHQiqaVFA01vZuqUSLN=p9A@mail.gmail.com>
+ (Exim) id 1iHmDA-0023Q4-JF
+ for samba-technical@lists.samba.org; Tue, 08 Oct 2019 09:55:22 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Message-ID:From:To:CC;
+ bh=37QZa7G8FuhZe1z2ZF7RpnHJefj+oQ0iwWWwCf0R5O4=; b=byI0EW+7sNQ8C2WlPlLaypGr/8
+ 8NI/eFtUa/pnzyFs4YFPcZYGqhLGkxJQW6C6eIohSQQS/q+BZX9oHAr1oJOF8tggcYzBHSrvJmv28
+ 4jfUfEWPkn778yc3cVjzpRz6qzTACt70Qf5THeNGx+z0FTw26F0JkEqPeIDbRRqzTTGA=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iHmD7-00052Q-O1
+ for samba-technical@lists.samba.org; Tue, 08 Oct 2019 09:55:20 +0000
 Subject: Re: Samba and legacy Windows support
-To: Andreas Schneider <asn@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+To: samba-technical@lists.samba.org
+References: <5849953.E8HlOTvGIY@magrathea>
+Message-ID: <90c21d9b-7a61-e2c4-bd7c-fc0d81290373@samba.org>
+Date: Tue, 8 Oct 2019 10:55:17 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <5849953.E8HlOTvGIY@magrathea>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,15 +53,12 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Oct 8, 2019 at 7:00 PM Andreas Schneider via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
+On 08/10/2019 09:59, Andreas Schneider via samba-technical wrote:
 > Samba with version 4.11 currently still support a lot of systems which are
 > already out of support. We still get bugs to either fix support for Windows
 > NT4 or OS/2. Also we know that Windows Server 2003 with Active Directory is
@@ -88,6 +71,7 @@ On Tue, Oct 8, 2019 at 7:00 PM Andreas Schneider via samba-technical
 >
 > With Samba 4.12 we plan to disable SMB1 by default and then remove support for
 > it in Samba 4.13 or 4.14. This means end of 2020 or beginning of 2021.
+We already have disabled SMB1 by default in 4.11.0
 >
 > If we remove support for SMB1, we could also remove support for NTLMv1 and
 > Kerberos support for DES, 3DES and maybe RC4. Already on Fedora 31 use of
@@ -105,28 +89,17 @@ On Tue, Oct 8, 2019 at 7:00 PM Andreas Schneider via samba-technical
 > smbdes.c`)?
 > * Can we remove DES and 3DES Kerberos support for Samba 4.12?
 > * When can we remove RC4 support with Kerberos?
+>
+>
+>
+> 	Andreas
 
-My opinion:
-First two questions: Yes.
-Third question: at the same time.
+I personally would just pick a major version (probably 4.14) and 
+announce that SMB1 will be totally removed at that version along with 
+anything that relies on it, but we need to tell people now that we are 
+going to do this.
 
-There is always going to be older versions of samba available to those
-few that need obsolete features.
-Eventhough no one ships a default distro with telnet installed or
-activated any more, the twelve people in the world that need
-telnetd can download/install/use it just fine.
+Rowland
 
->
->
->
->         Andreas
->
->
-> --
-> Andreas Schneider                      asn@samba.org
-> Samba Team                             www.samba.org
-> GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
->
->
->
+
 
