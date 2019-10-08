@@ -2,60 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3774CF7E4
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Oct 2019 13:12:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BA08CF998
+	for <lists+samba-technical@lfdr.de>; Tue,  8 Oct 2019 14:15:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=3Apm1RF1TYJvfHYPSptzB7y2vT9LZub8/UWZXlt8RvY=; b=4UkGLJcqlaTWjGLf6BXs236GvT
-	vgiCta0ikVOs+xBkfQPDpAS7LAXqXOxY69wA9C6dmuNhJbMT8DQEjBs7W+4g1MLurI7aTBF/odIVw
-	LwqcsAjALlpy7Dn6l1PK3FEKq3gEQhpO0dtjRTaJ47mcAHf4mEe6vMnTeRljiVkD0caGN2tisj1Hy
-	li4j6tCSsj3mr/OQet6ZVzR0rIx3wRooe+rH1lxI0VzkqvFfn1BJT8NMIGIiinuSTjOfgeuViTAMf
-	Greu7Ctt8NAzjjARfrb9kAe7tTA6tN/OAVARhIK5elsJMt3ZGpJP6yMABUSdUxwXx9hzt8bzZDiQh
-	4NSKQPdw==;
-Received: from localhost ([::1]:45762 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=eAtzRFyhqXVC9UmY8M6Ft2saIiuaYGD18ldOQW8qaDw=; b=rlHyswa7OxyqX8UwSWK7xg66C2
+	sF5OAKMDDuQC5R6shCxpIiGTjwsoNiPx25u0OrLh10siajXyB47wpK5wwsgdVZiMzgnovhIMj6ahV
+	9rRkxYTKOp0H1GTB1Lze/YZJdtlRtZTo7joB6tWKQvBWRWe1H0HLy5pD7jMjpGgEfR0jS6SUzaXsF
+	+9VQhmss1Uzl8gzYVjnQMIGxdrrIVfycOWT6NyPvJdu+Za6zrIVl17K81zVtGt5hPX6LImaXYvgka
+	iYC3DBuyjbI/k/cQoih6pJqqG4+kvniI2fyTgy1EIGKRYgQmS6eCBiQI8W0VsexntxVMrgvwXLvYc
+	97BIgZGw==;
+Received: from localhost ([::1]:58360 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iHnQ9-0024TZ-6a; Tue, 08 Oct 2019 11:12:49 +0000
-Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132]:43230) 
+	id 1iHoOn-0026Py-El; Tue, 08 Oct 2019 12:15:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33798) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iHnQ5-0024TS-03
- for samba-technical@lists.samba.org; Tue, 08 Oct 2019 11:12:47 +0000
-Received: by mail-lf1-x132.google.com with SMTP id u3so11595716lfl.10
- for <samba-technical@lists.samba.org>; Tue, 08 Oct 2019 04:12:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=3Apm1RF1TYJvfHYPSptzB7y2vT9LZub8/UWZXlt8RvY=;
- b=J3FoMyuse+EDpuPr//fbeFs1rptwmW7n0Ca383iR4oeB/O6zfsTv7R5b7Xb/zitREK
- R3OKYhvmyJuSS4MYUXMJ2YPIULPrVhgIBtn8Dx9KMzNznlq6L9BZoPhtCOTPLSHgD5TL
- qFrHc2VebzWCreeopCIlV5zkvZWxqPq6W04p0VKqJOWw1kyXTHJIFpFX9YFSeIBlVRp7
- I4u4Av3m+EUEW0lG8wIqQJ1Ams8yTBC4qiZQFdEqjkiy6phz+Mn7ymyoLrPude2GU0eo
- qzmwtnRgwk/nylZVW7VuWbXSG4Jem3GDZpM/tN6LJoFcc1xftVxNwHz6+vvoRM8Vyvys
- HgHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=3Apm1RF1TYJvfHYPSptzB7y2vT9LZub8/UWZXlt8RvY=;
- b=e1TnUDxhLVNyQ2rDlFR+1SKMer1hTiORvbiiWK1CpsBHJZVPyRp4LrUtK9ruSbv/IR
- RCcn7565yE/wx8uY0NSY2gPG60e2oD7y2dvU1YWDGzK3eKYxOcpMJPj9tf6Bcm2cf4Ne
- 2c6a3TDyCOEiESHAA1StD+tReJBK60lr0X63Disqw3bfPlxQsgusCv8S8KqkJAmtH6g/
- z/8Z8CySJspMAyX4yf0KDb33YuDrcMfvl72SMsYficnJ5QPQhL77LjhQOeFqIzlEp5BR
- i8u5b1aT9smMvEBrDdjVzdc7xXyqY0BOMYzMrNQChOCgadcZOLLr+tAJ/YTuVVDA2FFq
- 3AeQ==
-X-Gm-Message-State: APjAAAWioUd8erZoLluPHinfmNBUwFLfArjCBiDmY++CkpUK3dDe+et3
- lY1RtscvGr0BV7n3V0MQO+5HcNV6BclIVuBsfZzvFw==
-X-Google-Smtp-Source: APXvYqxaRbsbDRtVPv3oTE/H6lSUiIvX+I/QMHCIae0xtMJ/JxjE3fDB6j3iAcjirR1fNusSWVRTlesrmS0JrIFrtFk=
-X-Received: by 2002:a05:6512:488:: with SMTP id
- v8mr20170073lfq.37.1570533163876; 
- Tue, 08 Oct 2019 04:12:43 -0700 (PDT)
+ (Exim) id 1iHoOj-0026Pr-7Y
+ for samba-technical@lists.samba.org; Tue, 08 Oct 2019 12:15:27 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42627210; h=Date:Message-ID:Cc:From:To;
+ bh=eAtzRFyhqXVC9UmY8M6Ft2saIiuaYGD18ldOQW8qaDw=; b=W42qO8BHtqT3p8RVM8p3TfucXX
+ rBqsnv7BIh07pTX6MlAHsx6NYmqwl8Iw/VCqxdvnzsHPnU4rDDs9JmNETKEWZQ85Y1PM2qZc5espz
+ iAmqwBVlYpKhay/SjVvtEA9dwBbY8wsaB3IhyuRJOAz2Vg1gszDMPYYwgNbzjgxKpGz4=;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iHoOi-0006Hy-OF; Tue, 08 Oct 2019 12:15:24 +0000
+Subject: Re: Converting SMB1 tests to SMB2
+To: David Mulder <dmulder@suse.com>
+References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
+Message-ID: <be6770e5-5bf0-4665-4a88-3e4182e4c82e@samba.org>
+Date: Tue, 8 Oct 2019 14:15:24 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.0
 MIME-Version: 1.0
-References: <5849953.E8HlOTvGIY@magrathea>
- <d7532a8d-aa6b-4f30-efde-891b7b5b8333@samba.org>
-In-Reply-To: <d7532a8d-aa6b-4f30-efde-891b7b5b8333@samba.org>
-Date: Tue, 8 Oct 2019 13:12:31 +0200
-Message-ID: <CAC-fF8TbP+jLsCxEO_knBWSR-2=Y6y+NpKEBA6+7Wz-pQec9pw@mail.gmail.com>
-Subject: Re: Samba and legacy Windows support
-To: Stefan Metzmacher <metze@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,29 +52,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@gmail.com>
-Cc: Andreas Schneider <asn@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Oct 8, 2019 at 1:06 PM Stefan Metzmacher via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> Am 08.10.19 um 10:59 schrieb Andreas Schneider via samba-technical:
-> >
-> > * Can we remove NTLMv1 and LM keys for Samba 4.12 (remove `libcli/auth/
-> > smbdes.c`)?
+Hi David, Noel,
 
-As noted, that would also remove mschapv2 I think.
+thanks a *lot* for taking care of this!
 
-> > * Can we remove DES and 3DES Kerberos support for Samba 4.12?
->
-> Yes. The question is how to store the keys.
-> Is there a way to disable DES on Windows, so that we could
-> check what they store in the Primary:Kerberos-Newer-Keys
-> and Primary:Kerberos blobs in that case.
+On 9/27/19 4:54 PM, David Mulder via samba-technical wrote:
+> Noel and I are looking at converting any old SMB tests that target the SMB1 protocols to SMB2+. Is anyone else already working on this? Does anyone have some pointers?
 
-Thanks Metze, I'll look into this.
+what exactly are you looking for?
+
+I guess at least the following needs to be covered:
+
+- everything in s3/torture/ that calls torture_open_connection()
+
+- everything in s4/torture/ that calls torture_suite_add_[1|2]smb_test()
+
+Am I missing anything?
+
+-slow
+
+-- 
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
