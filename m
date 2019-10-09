@@ -2,43 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4ED3D1BA1
-	for <lists+samba-technical@lfdr.de>; Thu, 10 Oct 2019 00:25:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE317D1C58
+	for <lists+samba-technical@lfdr.de>; Thu, 10 Oct 2019 01:01:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=w7u4T3a9rzUo0ttToWIJT8LsjYX02S0cicHOTGNJ4h8=; b=EPVvMRznKsBDeZq7ddOeyxOsFF
-	kWcmOfmfpcipypj4EcCq7PEUaCRCFzjHZtCnWxPCACz1gSgDAbBk2r9LEseLmGxe+/WotKPncx7nN
-	D2dP6NcbL7oFpP4HjGczPzr7Hxo5cKjWIhH6pDLvVGFWTKp4WP/Nk7n5VqITdGbGpPMfqe65QOkst
-	V65VndDVIiaEG/SvWFLX0rwKo2NYBdFlziD6zSSHSDtmljZg6FIBB5nRzqsyBtPsETJJ5Ez4RIBmt
-	kAuaZS3PP24LjUv78yaNwsufWBYF+sGIL2T4+GBRof85N4YRXmz7hcVMCW0DBgSMuX6Oz/vmRkzNN
-	K5fcUc+Q==;
-Received: from localhost ([::1]:42518 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=K8H/DSkP2ZakixGLDSiImYSbOb0fFztZXHX1fPXI7qo=; b=dIU9hQygj7z0uBb8B+Q0LVLa5w
+	PJn10/nZluoCjtjZmjaE4sRK4fydXBeGZq5K1/292qvhZuTQlQxBD0MSs+8GDhTlyzfB6gb+Y3YHR
+	mX75HH4WjchrNazrsiYlS7p5nswj1WW5dd1YeCKz5BrtRmuSNJefbRbH/Q8Oe7D20KbLXDGn2E4Z7
+	Fm7s3aCWwRRaHzvZVLYD7uc/YaTGZl2GV85uNeb5W/wjtGyW43CO3IY1gvxmvC/XQcRT8BIh5eYkD
+	B9A0IIr3jvEZM4vZDfocy8fRfklU9p+08JzPBDYPTthc3Kf9FEz+qt7eCSRDLnAXjpud8Xx4WyO70
+	uTe8jnHw==;
+Received: from localhost ([::1]:48398 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iIKNa-002USj-Q5; Wed, 09 Oct 2019 22:24:22 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26490) 
+	id 1iIKwu-002VNM-CM; Wed, 09 Oct 2019 23:00:52 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35954) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iIKNW-002USc-5M
- for samba-technical@lists.samba.org; Wed, 09 Oct 2019 22:24:20 +0000
+ (Exim) id 1iIKwq-002VNF-Uj
+ for samba-technical@lists.samba.org; Wed, 09 Oct 2019 23:00:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=w7u4T3a9rzUo0ttToWIJT8LsjYX02S0cicHOTGNJ4h8=; b=S/umlUiHll3iBcmwZ7KdJhkp7x
- wqs68FBoX5WO3FnNMfQNj5EV8Uvdk6F4F7BQ/MGuCMqz6/81KSsrCn/HSUwynelS0GMy6tY7TnrOy
- ETIv0U4/tnPtqGB2hqD9TyljJ7XkBJJgQZdIP5G3NW8+7tUxzs4CFVQ3TNCRTTIxSfqi9Lq+4w2OV
- nrELVXIbulwic8+KyqLyQca5atEKBtulfG8Z5n91NiIkpuevgk695v0JMsAc+FRLNktmWuVfi3UvD
- y+luJl+r3mbav3gkpi4KlXHlaAOWgXXuAn2nMkh6fDRig3K61M3Zwu1hd9Dj5ezkoc0sJZrUt+LL9
- NFjsz2ohc09pfvbzxgWIgLIrRk1Z2SOE2TEr5isPfzdLzJSemYiZypSpLEFgWztulXGY9nZBz/WUh
- pFCI9I/g8Qi7+aWU8TT7yDeOruuMsSNL46apNBhX5k31zJx84BnllWJthqArAmNYvTU2lUzLvVHAQ
- ADqd9JPgGccS/Y1d+4kPzQnY;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=K8H/DSkP2ZakixGLDSiImYSbOb0fFztZXHX1fPXI7qo=; b=zbipYgzI9Az2nTEs9sNzWrBLVj
+ AfapTaAHHXfTohJDo1wold0m2976W0N0WMamYT6iRhC6hFHiOCogRGqk2cDKLcANptY7eTi6Hk5Wj
+ mSQfnhozq+4GH+Tp4WcwKPjDv+RPI6MtwUN3hwPXAICtvuae8BChZ+DqO32NqvwquxI5vtb1BWZwR
+ WN9yecAgDpod2bRjGSXjLoqDX6UCVdQSi464j+CiRAWJy154BZnfNk2RUyR/Yyx5dBkiFwsKSMAbR
+ iW7LJKUNFBjxlLAY7a1rm77Zl7pJ2Y2/jofE7yRkhQule44LHDCUDhFcgybIY+cRwHjBfsmrPPokt
+ Is1AuxxBN2QWVfN1AgSaazO3SouqhEmnaW+3Kc+Ki2epYUWMMje8oCsBiXKxfelYiIeMMKTEqqPSS
+ 9oedCHspm3gjAfwS8vXgcUYiubavJCrwBjb9VvWUOR+K35xXxJozmN8n3yi5bdtnv+XARpLx/pVGX
+ 3r9M2iWRRmFMcratxHSGFr7t;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iIKNT-0003rk-TV; Wed, 09 Oct 2019 22:24:16 +0000
-Message-ID: <0fb33f9ced490a7ef59d11efd6f9c6348e403d92.camel@samba.org>
-Subject: DES with GnuTLS (was: Re: Samba and legacy Windows support)
-To: Andreas Schneider <asn@samba.org>, Jeremy Allison <jra@samba.org>
-Date: Thu, 10 Oct 2019 11:24:11 +1300
-In-Reply-To: <1657858.v60hS3BQgh@magrathea>
-References: <5849953.E8HlOTvGIY@magrathea> <20191008182451.GA1583@jra4>
- <1657858.v60hS3BQgh@magrathea>
+ (Exim) id 1iIKwp-00045K-Qg; Wed, 09 Oct 2019 23:00:48 +0000
+Message-ID: <cbce6ced00356f1563078c793a4afb7f69960aae.camel@samba.org>
+Subject: RC4 support with kerberos (was: Re: Samba and legacy Windows support)
+To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+Date: Thu, 10 Oct 2019 12:00:44 +1300
+In-Reply-To: <5849953.E8HlOTvGIY@magrathea>
+References: <5849953.E8HlOTvGIY@magrathea>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
 Mime-Version: 1.0
@@ -58,24 +57,22 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2019-10-08 at 20:34 +0200, Andreas Schneider via samba-
+On Tue, 2019-10-08 at 10:59 +0200, Andreas Schneider via samba-
 technical wrote:
-> 
-> Isaac and I will work on migrating the DES code to GnuTLS so that
-> SMB1 still 
-> works.
+> * When can we remove RC4 support with Kerberos?
 
-Cool!  I looked at the cryptography but never got a chance to prove if
-GnuTLS allowed it.  DES-CBC with an all-zero IV seems to be just DES at
-a maths level, so if that works we should be able to just use GnuTLS!
+I do note that unicodePwd being an unsalted hash is used by a lot of
+folks doing domain migrations, and (when it works) the Azure sync
+service.  
 
-Sadly MSCHAPv2 is so well embedded that I don't think we will be rid of
-DES or NTLM any time soon, but I certainly hope we can stop carrying
-the crypto code for it. 
+Also the password history is in this hash.
+
+I would like, if I ever get time, to build a Samba mode without it (and
+with a crypt() hash as an alternative inbound sync), but it will be
+with us for a while.
 
 Andrew Bartlett
 
