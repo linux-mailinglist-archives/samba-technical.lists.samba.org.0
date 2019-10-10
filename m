@@ -2,46 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8085BD1ECB
-	for <lists+samba-technical@lfdr.de>; Thu, 10 Oct 2019 05:11:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B450BD2691
+	for <lists+samba-technical@lfdr.de>; Thu, 10 Oct 2019 11:42:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=4xNfp0vULGEVDhriWyv07F1/COodoW8CtehK5kiu+S0=; b=ieHFfUAREJvEGTdmWPOqLvhihS
-	oyKJzyInINE86O2cYnn1eBzHC7BccsWbe4PNsVSVT4d44KlQQzCiZZaGYBJZVVtUgaMLhQ3PjZvVJ
-	K0NKYp2RiZDP2D0HC3N4ZR8GNjvPuWBzFFPQcjc8uAy509Hu/ACEqQ2YUn7pDJ3xwRNSId7FUCekI
-	/22KfUYLVyoIZU5p/voBOa5rT4ynTTaWe2kTkWHqEl1nF6OQlPE6AIPGrHzjUnz0Z9dAOpxF1okT6
-	Ctd05LgYgNw6rZKnsxLci0AuCL5RvDB4WpQJkuo+lGNPkHuf/4kf71RBlvKe53A8f6KD6WSPU+Ccv
-	3luLMJEQ==;
-Received: from localhost ([::1]:53774 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Zg/Rqss/iBP8jQf08hPmTCqF5TM0sQGepK9OZi0+DfE=; b=fxoPmvRpxVw3qtsy/AOlvyGTgv
+	5dlZsIzH5hX95Nu9e4o7T9696bGy7/RoblHBsbqFSgP5TEalpzpbAGFK36FJFETtY5bm30zpNHexs
+	Rgux7VHO84mZhZ5xrU/BcF9q3FiOtdT+SF5EIuKavYdIjPuk8OR2zXl07fCNlWtUVHSpq+wo4Pr68
+	XCWu+y0BSivwKQeB5jRmtLCkDdHCzlvfxPOMEEhByooo0M0xyfPXgLpz+jrdTqwqufSSYssSLH/Oo
+	CqWh7J+e6gjI0XuOu0VjdnXiO12aC6/CH9g1muoZ9e3WaWdvOejoXMfYhrWXNQ0YPfjwEdNzt/d9n
+	sJjQOR1Q==;
+Received: from localhost ([::1]:62952 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iIOqR-002XX6-4o; Thu, 10 Oct 2019 03:10:27 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47638) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iIOqL-002XWz-V0
- for samba-technical@lists.samba.org; Thu, 10 Oct 2019 03:10:24 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=4xNfp0vULGEVDhriWyv07F1/COodoW8CtehK5kiu+S0=; b=FdYe1sP6GDngbQDak/joB1rISK
- J3nijaQoZbSXepc/xTSZZnce+TXLG9rVLW7p3PErfiL4azCI5W49DnwAzNqgCxpK+mog3z6h9f1h9
- iyuT7qpkKS8Fu6Td9FRUz3GvfdORSXyCZ6PedBNwrz4t+S6g/oIrucGfiRzlSHwAqz3Zi1HL2UZmM
- l7bUBsWzR7nkPoLDh625t1lOkxcXU+m8waWXq3EGt4iIgZiGbCY5o2fv9ntD3VIaCZj76TXB4htei
- yW+QkVW7umPEFL/OhP3N2+gyvCxmHQUNUZO0mo8xig3VFi+MFBUNCH89004n+OyWq94cNxm0Izeym
- Ma4y8XyknaTvcHHzexQXSdlsCbqV3hVnhYKFsN/tMYDHZ2sdtC+jl2L3LK9yd5mZv0+ZqKD+K9zJW
- mRf93f+6F2Z21AfCEmgKxNFXxreHVusUUorjJAE7SCSgbwQ+ZvzPg0GXUSks1k1q/uArLgTqmY5dQ
- aT23D3DLfzM62t4kUr2/6hoV;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iIOqJ-0005U1-EN; Thu, 10 Oct 2019 03:10:20 +0000
-Message-ID: <93305fb71149337426a697deb92f1a7fb732957c.camel@samba.org>
-Subject: docker image creation on private (rackspace) runners
-To: samba-technical@lists.samba.org, asn@samba.org
-Date: Thu, 10 Oct 2019 16:10:14 +1300
-In-Reply-To: <20191008082803.90E00140315@sn.samba.org>
-References: <20191008082803.90E00140315@sn.samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+	id 1iIUwp-002bUW-Va; Thu, 10 Oct 2019 09:41:28 +0000
+Received: from [185.16.48.59] (port=35076 helo=smtp.tranquil.it) 
+ by hr1.samba.org with esmtp (Exim) id 1iIUwk-002bUP-Ra
+ for samba-technical@lists.samba.org; Thu, 10 Oct 2019 09:41:25 +0000
+Received: from mail.tranquil.it (mail.tranquil.it [185.16.48.58])
+ by smtp.tranquil.it (Postfix) with ESMTPS id 37C7B40608
+ for <samba-technical@lists.samba.org>; Thu, 10 Oct 2019 11:41:20 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tranquil.it; s=mail;
+ t=1570700480; bh=Zg/Rqss/iBP8jQf08hPmTCqF5TM0sQGepK9OZi0+DfE=;
+ h=To:From:Subject:Date;
+ b=lmTmgjKPn5AoVV52VyrddlywCtrRXFhAD0wFJkGeNX6YdC+5SaTyfe0sgOLgZAhgF
+ KpearOCXSI5/4Sqz6N3RTeqo+wQDSDO1MdpOfp0SKR+6I17UKby4yKiduTFTHJvJ2Q
+ gA3+tVDzfIpPfT6wL/m0GsSKUQFWuSvmKpzymfGU=
+Received: from localhost (localhost [127.0.0.1])
+ by mail.tranquil.it (Postfix) with ESMTP id E05E45E
+ for <samba-technical@lists.samba.org>; Thu, 10 Oct 2019 11:41:26 +0200 (CEST)
+Received: from mail.tranquil.it ([127.0.0.1])
+ by localhost (mail.tranquil.it [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id Bz2LbXgy9q23; Thu, 10 Oct 2019 11:41:26 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.tranquil.it (Postfix) with ESMTP id 4F6DB6D;
+ Thu, 10 Oct 2019 11:41:26 +0200 (CEST)
+Received: from mail.tranquil.it ([127.0.0.1])
+ by localhost (mail.tranquil.it [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id lRlA1Zo27oGm; Thu, 10 Oct 2019 11:41:26 +0200 (CEST)
+Received: from srvlts1.ad.tranquil.it (bureau-sdsl.tranquil.it [185.16.50.4])
+ by mail.tranquil.it (Postfix) with ESMTPSA id 35CC75E;
+ Thu, 10 Oct 2019 11:41:26 +0200 (CEST)
+To: samba-technical@lists.samba.org
+Subject: samba-ad bind-dlz AXFR allow bug
+Message-ID: <bf8c6483-ad14-9a72-0c66-aae6193a22c9@tranquil.it>
+Date: Thu, 10 Oct 2019 11:41:19 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+ Thunderbird/45.8.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,88 +64,68 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Denis Cardon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Denis Cardon <dcardon@tranquil.it>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2019-10-08 at 10:28 +0200, Andreas Schneider wrote:
-> The branch, master has been updated
->        via  c9d302f20b0 gitlab-ci: Add CentOS 8 to CI
->        via  9cd0d153701 bootstrap: We can only build docker images on
-> gitlab shared runners
->        via  42edab7bd76 bootstrap: Remove pyhton2 packages
->       from  7bceafe8401 s3/passdb: clang: Fix 'Value stored during
-> initialization is never read'
-> 
-> https://git.samba.org/?p=samba.git;a=shortlog;h=master
-> 
-> 
-> - Log -------------------------------------------------------------
-> ----
-> commit c9d302f20b066267a8fd2d7ce4dc171161c9c40c
-> Author: Andreas Schneider <asn@samba.org>
-> Date:   Mon Oct 7 11:28:24 2019 +0200
-> 
->     gitlab-ci: Add CentOS 8 to CI
->     
->     Signed-off-by: Andreas Schneider <asn@samba.org>
->     Reviewed-by: Alexander Bokovoy <ab@samba.org>
->     
->     Autobuild-User(master): Andreas Schneider <asn@cryptomilk.org>
->     Autobuild-Date(master): Tue Oct  8 08:27:50 UTC 2019 on sn-devel-
-> 184
-> 
-> commit 9cd0d15370142b3694a51fa9b6cfffdb8e08e886
-> Author: Andreas Schneider <asn@samba.org>
-> Date:   Mon Oct 7 13:28:07 2019 +0200
-> 
->     bootstrap: We can only build docker images on gitlab shared
-> runners
->     
->     Our rackspace runners don't provide a running docker.
->     
->     Signed-off-by: Andreas Schneider <asn@samba.org>
->     Reviewed-by: Alexander Bokovoy <ab@samba.org>
+Hi everyone,
 
-I don't think this patch is right, you probably just got lucky and got
-a shared runner when re-submitting this.
+I have been looking yesterday into the AXFR bug in Samba Bind-DLZ=20
+module[1] (current Samba DLZ module accepts DNS zone transfer requests=20
+from anybody).
 
-Instead we need the patch Garming did in:
+There has been a fix proposed by Julien Rop=C3=A9 [2]. The patch does wor=
+k as=20
+expected (I have not looked into at why the pipeline did not go through).
 
-https://gitlab.com/samba-team/samba/merge_requests/803
+However while fixing this bug Julien stumbled on a isc-bind bug [3],=20
+which resulted in a new patch [4] which was considered as a potential=20
+security issue by the Bind9 team (CVE-2019-6465).
 
-> diff --git a/bootstrap/.gitlab-ci.yml b/bootstrap/.gitlab-ci.yml
-> index 8254986d2dc..e474b4b500f 100644
-> --- a/bootstrap/.gitlab-ci.yml
-> +++ b/bootstrap/.gitlab-ci.yml
-> @@ -6,6 +6,7 @@ services:
->    stage: images
->    tags:
->      - docker
-> +    - shared
->    variables:
->      SAMBA_CI_IS_BROKEN_IMAGE: "no"
->    before_script:
+This fix is part of Bind9 version 9.11.5 or later. However CentOS7 ships=20
+version 9.11.4 with a patchset released this summer [5] which address a=20
+series of bugs and security issues, but it is missing CVE-2019-6465n=20
+even though the patch was already released at that time. According to=20
+Redhat errata dated from February it was planned to be included in=20
+future bind9 release [6].
 
-Or we need to remove 'shared' from the rackspace runners.  
+Redhat does not ship Samba-AD, so there is no issues here with Samba=20
+Bind-DLZ module as far as Redhat is concerned, however this issue also=20
+affects other DLZ modules.
 
-Currently we declare those as shared to take some of the load, but we
-could stop doing that.
+Do you all think this patch [4] may be going in upstream Redhat7/CentOS7=20
+rpm in the near future? If I ask customers with active subscriptions to=20
+report this issue, would it be quicker to be fixed?
 
-If we wanted to still, sometimes, share the load we could instead have
-the rackspace runners only declare 'docker' to gitlab.com.
+Adding the patch to the bind9 srcrpm is not very complicated, however I=20
+am not eager to ship patched rpm of bind9 along Samba packages for such=20
+a small patch... Another option would be to just remove the AXFR=20
+altogether in the samba bind-dlz module from our CentOS rpms for the=20
+time being...
 
-Yeah, the interactions here are a bit too subtle.
+Cheers,
 
-Andrew Bartlett
+Denis
 
--- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
+[1] https://bugzilla.samba.org/show_bug.cgi?id=3D9634
+[2] https://gitlab.com/samba-team/samba/merge_requests/169#note_194230102
+[3] https://gitlab.isc.org/isc-projects/bind9/issues/790
+[4]=20
+https://gitlab.isc.org/isc-projects/bind9/commit/a9307de85e147f4756c75d15=
+aa221d2262df7d67
+[5] https://access.redhat.com/errata/RHSA-2019:2057
+[6] https://access.redhat.com/security/cve/cve-2019-6465
 
+--=20
+Denis Cardon
+Tranquil IT
+12 avenue Jules Verne (Bat. A)
+44230 Saint S=C3=A9bastien sur Loire (FRANCE)
+tel : +33 (0) 240 975 755
+http://www.tranquil.it
 
-
+Tranquil IT recrute! https://www.tranquil.it/nous-rejoindre/
+Samba install wiki for Frenchies : https://dev.tranquil.it
+WAPT, software deployment made easy : https://wapt.fr
 
