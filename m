@@ -2,49 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7205DAAB8
-	for <lists+samba-technical@lfdr.de>; Thu, 17 Oct 2019 13:00:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F1ACDAAC2
+	for <lists+samba-technical@lfdr.de>; Thu, 17 Oct 2019 13:03:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=KQ6F32DB2yxwLkwpBPlzz+Xp0Pa5DBTR4TZjcUa944s=; b=VXE/K/9FYbbCU6+2V+oNlJ7qQj
-	khRTUpQf1yvZCK9vWi8HhP/HyeBp9UVWIHiLtrBMcj0tdJ2rfPtm5q8dnepKVzh1HaKoCcFGYE/Yy
-	QOVbPQ2CyDnm5mZszv1+AbPcjRUNqTA3BSaDEhCye4yBrX0XOoSWb+Zba9GdrgXHnXsOL5r3Nx0N9
-	mK1dcjdVyewGLXM/ASfs+qkespb2ABMCArMzmz4UGo/EOjA7QHhBcFOjk+DVRoBQt5ORqr83wtS8n
-	BoYKYcd1UMQbzzJVAaANnJK1EW1R8u7bS1CqAW38qHtGsb4uO5z/MnmkuuOcawMmqayP6u8fYIIZV
-	IuAN3jMA==;
-Received: from localhost ([::1]:35538 helo=hr1.samba.org) 
+	bh=M4L0fLe9Rx86b/5JRlDaRQU22f7VBFsK4qs7KzVdzUU=; b=r9Kbp+AD3tXfGaNLRJ91GfbUrm
+	QmAVL+AqzxmmGiLawy6ekW2nSDUv0kiWPY2ZlK9z4wV1pnFGbv3fQap54CKQOdXTr5Kr6Uae1lq3t
+	uH44Re6y7bcYL6Sc3jAZvgj1luehYVvqMkz9UUEvAyQHTG1dahuRU51l2a+bHsTJD+B3ppRc8IZ/B
+	57/15j+p1wq8+l+n40qPWIY4RCmpvQXgTyvS0tSmV82VYTTBjCJ0CcHaNkWCSQupzrq4LpE1UxEc8
+	Vs8jdZr69Y0/gxz7Tpflr7FOq35VD/QX8g2vDEdV/TGqkwpXDTuvs4i8l06JyWo5WvLDGBNpWltYc
+	axs3+e/A==;
+Received: from localhost ([::1]:36884 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iL3Vk-00017o-CI; Thu, 17 Oct 2019 11:00:04 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29254) 
+	id 1iL3ZF-0001Ij-Mo; Thu, 17 Oct 2019 11:03:41 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31154) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iL3Vf-00016k-IG
- for samba-technical@lists.samba.org; Thu, 17 Oct 2019 11:00:01 +0000
+ (Exim) id 1iL3ZB-0001Ib-9t
+ for samba-technical@lists.samba.org; Thu, 17 Oct 2019 11:03:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=KQ6F32DB2yxwLkwpBPlzz+Xp0Pa5DBTR4TZjcUa944s=; b=m6gztoVbe1DBr+MIUHfoE55w9c
- 5QMuGBe1NfVySraJsfGQBKqvnIbYzKl6b/N6Hof0P9WQ5d6J2mE12WWu3plkLKcfWWeoJjhk6Rexn
- 0/5/nufslXob09aBvm5p4/aakeBtV7VYR5oCvMeU/RBsk3NUzbqJL7fDhP6VXr3Pe/6bbkaqIoaVM
- O+7p7RLYegC8WYqcimo9W93CeQPlIasokm7WC8oryTkEpvu36p37uKzrDqFD0s627+9uGVy7Uh2kI
- fpyRn7KuPixy8knuzkzcDQzjuRRP95gQknnGNuct/Vj0yQ1rzti3E4cBN3l5oeqhK/FZH2FOnG0rn
- 629pE61IwHcoN1tjPshPyA0kb7bY4h/07YXkdynOvyd2uF2UWmEj4+2raHowHsj6vFBbSxK1knVwx
- VpJ6IHZyP3ym/mSUV7bjZIWyAfVNQRGiX4j9DwTfX7nKy1MgdWZvBYNw+HfUSlX9t+HHhZxDhdchX
- As9BMacCFtomX5mgqb6z2/U3;
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=M4L0fLe9Rx86b/5JRlDaRQU22f7VBFsK4qs7KzVdzUU=; b=F2FurxG+JdOBs37qCim0Iwqwf5
+ dLZ18cyF9PAbAKJETsf86rcPdIfEME5OCB0JXjNhGLY7MUmgG8IcEzJSQG5zUqZ98pjr1mnj54Pif
+ gTO9N3d1Q86JgTRhqxwEyfoRaxqHXIt+pTDayGYsR3QmWep/4rFJGFmE5L+i3PbCB95ZwGR2s+5lj
+ XlxpYn8dN8qRrsBwv8yZknJmWvoaOxscXeHjUhXyFNVcIp/YjAcY35qkIxYlZXxtTwKbpKvqKvLqG
+ LJEnvlt19LfAQrblOxPyyA0Ym8Crvj/FTm/IboRZEvVbRiU4sle3OwvbgMVeGMeTQ65H0AxRWLR6E
+ JlY3za1ahXqgrg4hAKrtjFB7fuiXK4jAZxjUjYtuOHjgaJ3YDi8zq+EJWZRHeThlfq+GxFUyjJP4x
+ XbqbGxBGlyUrmuBywLcOCyfchIdRmuy+F0fG0HhyZIe8A3aPs9OOnPQXA/BW6k5cThmCfYekaKg4P
+ +WxLp+4ufbW3LsGnyiUIKg/u;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iL3Vf-0000VJ-9p
- for samba-technical@lists.samba.org; Thu, 17 Oct 2019 10:59:59 +0000
-To: samba-technical <samba-technical@lists.samba.org>
-Subject: [Release Planning 4.10] Samba 4.10.10
-Openpgp: preference=signencrypt
-Organization: Samba Team
-Message-ID: <18328a97-7ebb-ae0f-7377-af9d24eb7005@samba.org>
-Date: Thu, 17 Oct 2019 12:59:59 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iL3ZB-0000bB-0H
+ for samba-technical@lists.samba.org; Thu, 17 Oct 2019 11:03:37 +0000
+To: samba-technical@lists.samba.org
+Subject: Code Review
+Date: Thu, 17 Oct 2019 12:44:04 +0200
+Message-ID: <1928715.89pbXDvyhR@magrathea>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: de-DE
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,23 +53,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Karolin Seeger <kseeger@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Hello,
 
-Samba 4.10.10 is scheduled for Thursday, December 12.
+we have 4 pages of Merge Requests on gitlab! There are a lot of MRs which are 
+valid but nobody is reviewing them. Every month I try to look at MRs at page 4 
+and ping people about fixing MRs and or asking for review.
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.10
-has been updated accordingly.
+Yesterday and today I closed several MRs.
 
-Cheers,
-Karolin
+a) When code bit rotting in MRs is frustrating especially for new
+   contributors!
+b) If you want code review, you should see it as your duty to also do code
+   reviews!
+
+Thank you Andrew for doing most of the reviews!
+
+	
+	Andreas
+
 
 -- 
-Karolin Seeger			https://samba.org/~kseeger/
-Release Manager Samba Team	https://samba.org
-Team Lead Samba SerNet		https://sernet.de
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
+
 
