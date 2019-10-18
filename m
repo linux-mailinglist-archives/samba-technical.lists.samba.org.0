@@ -2,52 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25AEFDCC5B
-	for <lists+samba-technical@lfdr.de>; Fri, 18 Oct 2019 19:11:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 00119DD552
+	for <lists+samba-technical@lfdr.de>; Sat, 19 Oct 2019 01:27:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=xzWPf7ZrGXT+iH4KwQREHzB3FjB3q6YgqRV3IhUXpRA=; b=kMhWEMPKRHFKCQ2lXPuh1Ge3/n
-	2ESpIyuXwRZuh/NnA66zrgmp0BWioRjZdXj2YCkuy1bFcv9ReVAAX2s2hOE6t/xC6duqqiUW23sj7
-	BVHW7e+WoeHqEedhP6f4pqDu98gDGG4JtSyDoRCo/9pz/zA7qAmnNPGX21Mo2qQ9ThX2aZlcmx/Hb
-	USxmacVIbqZPqx0X2CQjQogAi8fNetSF3p/qPnBrwGPIs4L3+tguBIy/f6CYKkuCUuGYYDO/TSyG8
-	1ccV4RLaxHLofkNQ6N6qznVsmpz+PCCFFRAGFiPNwAK2+nK0SKLuNi76jGK1nbYnQWrDdG6jx02Js
-	KTqcs6ug==;
-Received: from localhost ([::1]:28414 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=WG1FAPm3UfFpB28tDOlCyxssLqpiLRDDQWn9I165yYw=; b=k0quECDpU8unjWFFRPnayLoERt
+	AZCxEKJhE8iJ+7an4pRZcR32VCJbDmlH2fAfdcmTC/wOMurzrK0pw8FW5wxsJiqM0+5EbW+l+JNFA
+	gldqdKnSXlLKnbf7Ka8sCwfYZ9ii9n6On9BjoOJKD6DelyhF6AjJ6j34nyPzRY14z4BKn4mfRItxx
+	MfWy2PWDrFKhXtyxaGk/2egf1u9uhYGr7vVS0yAgVv5aZMWg/ezAvsToZ54XTNxisSafwifCUuh4L
+	tbHmDgbuqa9pc3Nv063o3rp1fht/dEAVCVuTPwyK6oNxamEHrpnWkcPYYsRa3MXXaGCefoYPGs5sU
+	xM/u1JDA==;
+Received: from localhost ([::1]:23578 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iLVmG-000Mfv-Ol; Fri, 18 Oct 2019 17:11:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:32790) 
+	id 1iLbe3-000UKM-JN; Fri, 18 Oct 2019 23:26:55 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62520) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iLVmC-000Mfn-KU
- for samba-technical@lists.samba.org; Fri, 18 Oct 2019 17:10:59 +0000
+ (Exim) id 1iLbdz-000UKF-4i
+ for samba-technical@lists.samba.org; Fri, 18 Oct 2019 23:26:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=xzWPf7ZrGXT+iH4KwQREHzB3FjB3q6YgqRV3IhUXpRA=; b=deh8wN7MT8SUE+4YOOeNL9V2lc
- e5+GvB1APoeDg8h8rim3kAlJfLxEmkkPsZM7zUy4/WiT/Ugq9OYQnHPUfCT/SxNaIUxcwomEmb28G
- jvRNA+1XkhfoRrqIOYVavk57xPiTldNW1FaMLb3WkjdVIVhxf+0Mlb2IGL+51UoVLgVKaoFnCoD81
- B+pXdq6tJkbELS2yN+AfuM+ruZqTnO1n+dimSnZzy7ukPihRGrHncQdC3C50kcz8J+sfpaitutqK3
- 74u39l2AgUsvnXW4Zr722oaSeTnOe+P+LGTyMlfrJ77NB8zyF9EpOZPHSqccy7FBQckhLLK4qO1cu
- 1jar4IVwHsveuuXOBXjBwhOzQa5e5k59qO8CXWuCqHf/vOxYdJORq669RuZe6npFxiXu74q1jr/X9
- cm54wZCAXwjIwKt7UOdDmix6feYKFSf2Y/YmNhQ97os9wOReRuc0Z5ZkdNgreygZDsOHNpNFgUdYb
- U78iMQW49bZ0Nk6ZwY2e9hUK;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=WG1FAPm3UfFpB28tDOlCyxssLqpiLRDDQWn9I165yYw=; b=M9m+qTVTlB8nTBP93+nTmLGunR
+ /FZUWTX6UqvvbYWa1ni9kt9pVQoiew+Wqz4egVMPPZhFeWCY70p906DxLb7ZoWPX17PvwW1qtI+FD
+ K3EjvuvoKJsoYVm9NOgW+JPb0JkMrEeM37Qyomdv8csB1WGgUqP5FIO9NKdjO3Ubu4YwNV5Vnyclk
+ 6Zu0AD8velv9h4XFWICT1qZNXUWxS4HQ+OtvHFoRJ3668B1QMlYwA+AyUShOd/6FAHFjPihPO2VTL
+ 2Xjst8UV3LKxcOXwL/AowIcC/KzZkoalNVwwfKqoRK02wabn9hJvCCcam029hQji9RikesB/hp393
+ WNUrovQHWvzVIj2LQ4mQZ/ESI2kd2e1dFQLQLl5MEU5Za6E2aSwd7p5eoR0vuk/O2qiPUd7J3XKzx
+ vXp3IDIT6G0ttsOK0LNcpCrYkQ7WuVzioCxRuxNKN4Yzggj72QkCZaNpCryYgyJHZzs1TmLZ0z34e
+ qiCDaYKNsUxehra85CJsPyK0;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iLVmA-0007i7-Th; Fri, 18 Oct 2019 17:10:55 +0000
-Subject: Re: Converting SMB1 tests to SMB2
-To: npower <npower@samba.org>, noel.power@suse.com
-References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
- <be6770e5-5bf0-4665-4a88-3e4182e4c82e@samba.org>
- <0981db46-93bf-f153-c98f-15d5cf404353@suse.com>
- <ed7eb92f-46a7-758e-f3b5-185d71b8b98a@samba.org>
- <002434db-63ef-edad-d091-76e3efe783d1@samba.org>
-Message-ID: <15dfbaf6-c774-debe-b61e-c3ef4e7f9727@samba.org>
-Date: Fri, 18 Oct 2019 19:10:54 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.0
+ (Exim) id 1iLbdy-0002CB-19; Fri, 18 Oct 2019 23:26:50 +0000
+Date: Fri, 18 Oct 2019 16:26:47 -0700
+To: Stefan Metzmacher <metze@samba.org>
+Subject: Re: RFC impersonation and substitution
+Message-ID: <20191018232647.GA49942@jra4>
+References: <a7aabda6-2463-7777-9132-a3a94edfa3a1@samba.org>
 MIME-Version: 1.0
-In-Reply-To: <002434db-63ef-edad-d091-76e3efe783d1@samba.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <a7aabda6-2463-7777-9132-a3a94edfa3a1@samba.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,111 +55,78 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: David Mulder <david.mulder@suse.com>,
- samba-technical <samba-technical@lists.samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 10/18/19 6:12 PM, npower wrote:
-> Hi Ralph,
+On Wed, Oct 16, 2019 at 05:47:19PM +0200, Stefan Metzmacher via samba-technical wrote:
+> Hi,
 > 
-> On 18/10/2019 13:00, Ralph Boehme wrote:
->> Hi Noel,
->>
->> On 10/17/19 10:14 PM, Noel Power wrote:
->>> So as a first step I tried (via brute force) e.g. changing the min
->>> protocol definitions in the generated conf files for the test
->>> environments, running the tests and seeing what was failing. I then
->>> disabled (and/or) deleted tests to get to a point where all running
->>> tests pass with 'min protocol = SMB2_02'. The intention here was to
->>> enumerate the tests involve
->> I guess I would put all failing tests into selftest/knownfail.d/smb1
-> I initially thought about doing this but ran into problems (see below)
->>
->> I'd try to generate the list with
->>
->> <https://git.samba.org/?p=slow/samba.git;a=commitdiff;h=0fa5ae9d30546e46a5db9ecf7936768f69a1e957>
->>
->> then running autobuild-private-security.sh on sn-devel.
->>
->> Then with grep UNEXPECTED *.stdout you get a first (but incomplete) list:
->>
->> <https://git.samba.org/?p=slow/samba.git;a=commitdiff;h=4e2788f7d494b6e402784d217f37c08b985f3d7a>
->>
->> I noticed a crash in smbtorture is triggered by a test, so there's
->> likely some iterations needed to manually filter out tests that induce
->> crashes.
+> some of you already saw my SDC presentation:
+> https://www.samba.org/~metze/presentations/2019/SDC/
 > 
-> not only crashes but also hangs. There seems to be a whole pile of tests
-> that hang (with the min protocol changes I did) this and the crashes
-> kindof put me off trying to use a knownfail (because the for that to
-> work you need the tests to run and complete)  So for the problematic
-> tests you are left then with the choice of removing them from set of
-> running tests (I really don't like that) or fix the hangs and crashes
-> which are more than likely happening in SMB1 tests we will throw away :/
+> Now I want to start the discussion regarding our impersonation model
+> here.
+> 
+> We try to get more things (including path based calls) in the smb_vfs
+> layer async.
+> 
+> I started with tevent_wrapper based impersonation, but that got reverted
+> as it got too complex, more details can be found here:
+> https://lists.samba.org/archive/samba-technical/2018-December/131731.html
+> 
+> Currently our impersonation happens per incoming SMB request.
+> We change 3 things:
+> A) the unix token (uid, gid, groups)
+> B) the global state in order to do smb.conf substitutions like %U
+> C) we change to the share root directory
+> 
+> The future idea would be that we no longer do impersonation at the
+> SMB layer. Instead we would explicitly pass down enough information
+> through the SMB_VFS layer, that vfs modules can do impersonation
+> just around the raw syscall (or in other required places).
+> The module write should know where it is required!
+> Userspace filesystems may do impersonation differently.
+> Of course we'll provide helper functions to make it
+> easy for the module writers.
+> 
+> In order to catch problem C) (relying on the correct current
+> working directory) Jeremy and others are working
+> hard to convert our SMB_VFS layer to *at() based syscalls.
+> See https://git.samba.org/?p=samba.git;a=history;f=source3/include/vfs.h
+> 
+> For problems A) and B) I have the idea to pass down
+> a 'const struct samba_impersonation' as explicit argument
+> to each SMB_VFS call. Note I called i 'smb_vfs_impersonation'
+> in my presentation, but I realized that we need the same
+> for the DCEPRC servers and changed the name.
+> 
+> Regarding problem B) I'm introducing a
+> 'struct loadparm_substitution' that needs tobe passed explicitly
+> to each lp_*(), lpcfg_*() function that needs substitutions.
+> 
+> struct samba_impersonation will wrap
+> struct auth_session_info as well as struct loadparm_substitution.
+> We could add more later if needed.
+> 
+> I started with the struct loadparm_substitution infrastructure
+> and created some draft patches for struct samba_impersonation.
+> Before I continue I'd like to get some feedback.
+> 
+> Please have a look and tell me if you are happy with
+> that approach or if we need to find a better solution.
 
-well, I guess we need an initial list of all those tests in
-selftest/skip-smb1 and  something like this
+Just want to comment to say I think this is the right
+way to move forward to modernize our VFS and move to
+a completely async model.
 
-env.OPTIONS += " --mitkrb5 --exclude=${srcdir}/selftest/skip-smb1"
+Haven't had time to review these specific patches
+yet (sorry, been busy with other things) but I'll
+try and do so as soon as I get some time.
 
-in selftest/wscript.
+Cheers,
 
-And then figure we have to figure out why they crash or hang. Once we
-know that, we can fix or remove the test.
-
-> However if we just want to generate a list well I'd say I probably can
-> do better than I did maybe using autobuild-private-security.sh in
-> combination with/without the changes I already have.
-
-I think we need a complete list *before* doing any changes.
-
->>> So, if anyone can immediately identify say any tests we can just delete
->>> or port from the attached list of test diffs, that would be useful :-)
->>> Could save us some time digging.
->> I guess one of the first things I'd look as is all the torture tests
->> that run against both nt4_dc and ad_dc. I guess for most it's ok to just
->> run them against either one.
->
-> not sure I get what you mean here, what is the significance of tests
-> that run against these environments (I realise this is probably
-> obvious... but not to me :-))))
-
-I guess that's just historical practice. Look at s3/selftest/tests.py,
-the final else for the block that sets up the smbtorture test is
-
-else:
-    plansmbtorture4testsuite(t, "nt4_dc", '//$SERVER_IP/tmp \
-       -U$USERNAME%$PASSWORD')
-    plansmbtorture4testsuite(t, "ad_dc", '//$SERVER/tmp \
-        -U$USERNAME%$PASSWORD')
-
-For most tests this is not needed and it bloats your list of failing tests.
-
-
->>
->> Everything else probably has to be assessed one by one.
->>
->> Note that tests ported from smb1 to smb2 must also pass against Windows.
->>
->> Fwiw, once you get to the base.delaywrite tests be warned, that Windows
->> behaviour is different between Windows 2003 (which is what Samba
->> implements) and Windows 2008 or newer. It's also different between SMB1
->> and 2, see
->>
->> https://bugzilla.samba.org/show_bug.cgi?id=13594
->
-> I'm afraid to look, sounds awful
-
-Just remember to come back to me when you start working on this.
-Hopefully by then I know what's going on.
-
--slow
-
--- 
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+	Jeremy.
 
