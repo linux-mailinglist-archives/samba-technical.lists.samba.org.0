@@ -2,50 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB6FCDC448
-	for <lists+samba-technical@lfdr.de>; Fri, 18 Oct 2019 14:01:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F284DC7F2
+	for <lists+samba-technical@lfdr.de>; Fri, 18 Oct 2019 16:58:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=VbzpBZYkrtsijBPV69OlnxVPO566iaC6ehBcCLP9Ur0=; b=bEipYliQVVEwqDEFwEHx/5MlHT
-	y1qKvBydjAMc0T1hBO1c9zM9u6pdx3CeCWkhBF/+LUnu709ASlLoN5k1M0yuPfomVCsnckp0KGpNU
-	0qh8HEaxQOvjh0HrMErq3hoJbmgu3/ULzPzenNa915F/aBFfMwKrTlxqDJ12bhgycNXsx/2Esdnbg
-	5IHLWRFZ8gpCXxcyiwM3jXyByi20PXWLqpwl2M9pmHOGgFVP7Z0cTpmh2A3FB00tyxBZSw0P28yUa
-	kw54SB9n9FAJKhbpOJ4mqhK5aUJfzKd9gvl+Vs6rfYH7feHcK4ueYWEqCu7FzAbcxBsjTeRMzkhKx
-	uEQeVmYw==;
-Received: from localhost ([::1]:46432 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=I+degAFrzdGnAx4zBITta6LVqOBhneek4EiytLpOerQ=; b=qTBnRxNShFHHZ/TQbHJbOE9Ol3
+	lyj0BzGRlJXFzEKGaZwW7wgG2aa+/TPf+PR2OsjDRDy354NxiW507oKdsx6r7AdN7d+G4l9cYxAxd
+	15aC2OgP/iFA6jYUkskl3XJzwzmQA99rlNuc+ZuiCukJPN3K6MtI+XDopUXqgG2iQZDOoxvg4KdtV
+	mpbAUUHVJhdqQ0AFPzhKOOv1CGtTe+vhfgpBdtsSi1p6pyRKYM8c796aGGmh8mC5Jvr9F97WZg+V4
+	I/zFDrxoE7CXHrQ5ZWRWP4mT38SX07gujiQ9SA8vqRU82Zx5CTWwbh/HcguRUabXLkTUiBcV6PiNU
+	m22ufoTw==;
+Received: from localhost ([::1]:18562 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iLQwE-000H7S-SS; Fri, 18 Oct 2019 12:00:58 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62940) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iLQwA-000H6w-SX
- for samba-technical@lists.samba.org; Fri, 18 Oct 2019 12:00:57 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:Cc:To:From;
- bh=VbzpBZYkrtsijBPV69OlnxVPO566iaC6ehBcCLP9Ur0=; b=FHUXrDJKR4Hhz6DkVMBzqda+d6
- M+UNmCNt4Ova8qzIsCtDY6M9i3a7H9r/WBBxPN+89dderdYKU18/+IbzD9hTPvCk2ICrg8ToxNxg2
- frdRCjhjYRdJvKsLKwoifK1y1F6FOV+//snVBm8VWhViUa1iaTRiT9Dr+TcF232hGUtuKpGLxko3C
- 4odMTje0LcwVAT0mygtRuIAZXSmY17QQ3YvPfSY4prfjmuyR8w5yEps20WvHfVnkleyUxDM84ogeZ
- Vw6eyMh0hFbINpSJV6a3QpFIj5L/GNPZ01cwf57ybJchUd33rBamyuvI4dA9js8ruIRDh9Iiy1rIk
- PuC82cWYGfKlYt0YTqttpWTpdQXZ085VY20g67XmeEch+HvTqCSFDKQ8FEaHnj7e7dGGYWfyBJp9m
- PJXMgW1h25n3qan5NydeogQtvmRx+wDFk785XTxIy7uXCVF2xx0I+tJBZ3VCTObtjx7Kc1RHcJdB2
- gQRgWHqoqvjwx1UuImixbomt;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iLQw9-0004g3-R6; Fri, 18 Oct 2019 12:00:53 +0000
-Subject: Re: Converting SMB1 tests to SMB2
-To: noel.power@suse.com
-References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
- <be6770e5-5bf0-4665-4a88-3e4182e4c82e@samba.org>
- <0981db46-93bf-f153-c98f-15d5cf404353@suse.com>
-Message-ID: <ed7eb92f-46a7-758e-f3b5-185d71b8b98a@samba.org>
-Date: Fri, 18 Oct 2019 14:00:53 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.0
-MIME-Version: 1.0
-In-Reply-To: <0981db46-93bf-f153-c98f-15d5cf404353@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+	id 1iLTh8-000KkC-9V; Fri, 18 Oct 2019 14:57:34 +0000
+Received: from mailhopper2.bazuin.nl ([195.134.173.123]:38088) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iLTh4-000Kk5-5u
+ for samba-technical@lists.samba.org; Fri, 18 Oct 2019 14:57:32 +0000
+X-Bazuin-en-Partners-MailScanner-Watermark: 1572015448.59913@NzVaERZLT5m6G/90ToUYGg
+X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
+X-Bazuin-en-Partners-MailScanner: Found to be clean
+X-Bazuin-en-Partners-MailScanner-ID: BBB5D11F0E4.AA270
+X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
+ Partners for more information
+Received: from ms249-lin-003.rotterdam.bazuin.nl
+ (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
+ by mailhopper2.bazuin.nl (Postfix) with ESMTP id BBB5D11F0E4
+ for <samba-technical@lists.samba.org>; Fri, 18 Oct 2019 16:57:26 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
+ s=mail20180308; t=1571410646;
+ bh=wnhrqD5V4Tazz+aTdJ9GP90pAttyIhsUqBv+abmq8Hc=;
+ h=Subject:From:To:Date:From;
+ b=mm5l9d9Eaqm0+aa8PtI7zR6Py7mJSucKz6dnVclVfO8ZFJk1XPGMmSjOYCIz88w4T
+ /439IZQ6tHlxXFjOF0OfGYjdI3CJcDjCEl8SsG4QWVLV0AMTl5AAub8hwTbFJ9xOsn
+ kRMGvaWmcM3ANCgY+CKVGtUidNTKsOwVJvAoXH5+Hudp0M6+hCTkXPQpqHRs+k03RQ
+ xvWEAKl3hNArQxlaES31slrZZdohJDlPO/ME9zFGEHAZpHl938tq4jRhUUsQ3GI68T
+ R0kF4d3CJFin7kM60CRQrctbkt6KBbtT8N3nWSXd1fmRJx1wtBk6Rkz8KN7NeqsaYn
+ RbRXkUlJA7kgg==
+Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
+ by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 30ED33AF8C
+ for <samba-technical@lists.samba.org>; Fri, 18 Oct 2019 16:57:19 +0200 (CEST)
+Subject: Building on armhf
+To: =?windows-1252?Q?samba-technical=40lists.samba.org?=
+ <samba-technical@lists.samba.org>
+Date: Fri, 18 Oct 2019 16:57:19 +0200
+Mime-Version: 1.0
+X-Priority: 3 (Normal)
+X-Mailer: Zarafa 6.30.19-25148
+Thread-Index: AdWFxFZIw4BkokK1SC++G8wOYNvDpw==
+Message-Id: <vmime.5da9d2cf.67ea.2e47a9a962d3963f@ms249-lin-003.rotterdam.bazuin.nl>
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,125 +67,15 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: David Mulder <david.mulder@suse.com>,
- samba-technical <samba-technical@lists.samba.org>
+From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Noel,
-
-On 10/17/19 10:14 PM, Noel Power wrote:
-> So as a first step I tried (via brute force) e.g. changing the min
-> protocol definitions in the generated conf files for the test
-> environments, running the tests and seeing what was failing. I then
-> disabled (and/or) deleted tests to get to a point where all running
-> tests pass with 'min protocol = SMB2_02'. The intention here was to
-> enumerate the tests involve
-
-I guess I would put all failing tests into selftest/knownfail.d/smb1
-
-I'd try to generate the list with
-
-<https://git.samba.org/?p=slow/samba.git;a=commitdiff;h=0fa5ae9d30546e46a5db9ecf7936768f69a1e957>
-
-then running autobuild-private-security.sh on sn-devel.
-
-Then with grep UNEXPECTED *.stdout you get a first (but incomplete) list:
-
-<https://git.samba.org/?p=slow/samba.git;a=commitdiff;h=4e2788f7d494b6e402784d217f37c08b985f3d7a>
-
-I noticed a crash in smbtorture is triggered by a test, so there's
-likely some iterations needed to manually filter out tests that induce
-crashes.
-
-> 
-> I tried to list the tests for each environment (with/without) the
-> changes, I am attaching the diff of tests here (sorted by test env) be
-> aware there maybe some minor errors in there, the diffs were ugly and
-> needed to be tweaked by hand and I most likely made some minor
-> mistakes.  The build (with brute force changes) to do this can be found 
-> https://gitlab.com/samba-team/devel/samba/commits/squash-smb2-only
-> 
-> My plan is to first move all of these tests identified above to suitable
-> smb1 environments (e.g. nt4_dc_smb1) etc. So we
-> 
-> a) can clearly see the tests that need to be deleted/ported/fixed
-
-I guess I would take the knownfail list as basis to for fixing stuff.
-Whenever commits change/fix things you also update the knownfail list,
-so make test always passes with each commit.
-
-I don't think the additional work of letting the tests use a different
-testenv really helps. We'll just have to go through the knownfail list
-and look at each failing test to see what's needed to fix it.
-
-> 
-> b) we can immediately delineate the smb1 vs >= smb2 tests  and be sure
-> we don't lose anything along the way
-> 
-> I've started as a proof of concept
-> https://gitlab.com/samba-team/devel/samba/commits/separate-smb1-tests to
-> migrate tests
-> 
-> Does this make sense? I expect it will be a bit time consuming to
-> separate the tests (when some may be just deleted) so I wonder do others
-> think it is worth it (personally I do) But I'd like some other opinions
-> before continuing down that road :-)
-> 
-> In the end I suppose the tests that fail will fall into 1 of the
-> categories below
-> 
-> a) a test that tess > SMB1 only functionality or messages (probably these
-> can be just deleted)
-
-yes.
-
-> b) a test that tests SMB1 functionality but doesn't and should test the
-> same functionality  >=SMB2 (needs porting)
-
-yes.
-
-> c) A test that maybe isn't essentially SMB1 or greater but that perhaps
-> fails with the new defaults for some reason. For example;
-> 
->    + a blackbox test scripts might have some parts working with e.g. NT1
-> mixed with other bits that are using >= SMB2 (needs rewriting)
-> 
->    + a python test may have mixed SMB1 & >=SMB2 tests in the same test
-> module (needs rewriting)
-> 
->    + some test you would expect should pass with the new min protocol
-> but doesn't (therefore needs investigation)
-
-Do we have such beasts? Heavens!
-
-> So, if anyone can immediately identify say any tests we can just delete
-> or port from the attached list of test diffs, that would be useful :-)
-> Could save us some time digging.
-
-I guess one of the first things I'd look as is all the torture tests
-that run against both nt4_dc and ad_dc. I guess for most it's ok to just
-run them against either one.
-
-Everything else probably has to be assessed one by one.
-
-Note that tests ported from smb1 to smb2 must also pass against Windows.
-
-Fwiw, once you get to the base.delaywrite tests be warned, that Windows
-behaviour is different between Windows 2003 (which is what Samba
-implements) and Windows 2008 or newer. It's also different between SMB1
-and 2, see
-
-https://bugzilla.samba.org/show_bug.cgi?id=13594
-
--slow
-
--- 
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
-
-
-
+Hai,=20=0D=0A=A0=0D=0AJust a question here, is there a way to speed up bu=
+ilding for armhf.=20=0D=0Aim already using ccache and tmpfs but the cpu e=
+mulation of armhf makes it so slow..=20=0D=0A=A0=0D=0Aim using qemu to si=
+mulate the armhf env.=A0=20=0D=0A=0D=0AWith the current build speed=A0tak=
+ing me hours ..=A0 :-(=20=0D=0A=A0=0D=0AAnyone suggestion to speed this u=
+p or is it just impossible due to the cpu emulation.=20=0D=0A=A0=0D=0A=A0=
+=0D=0AGreetz,=20=0D=0A=A0=0D=0ALouis=0D=0A=A0=0D=0A
