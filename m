@@ -2,58 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E3C0DD9A1
-	for <lists+samba-technical@lfdr.de>; Sat, 19 Oct 2019 18:23:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C538CDDA84
+	for <lists+samba-technical@lfdr.de>; Sat, 19 Oct 2019 20:49:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=gzQi94vXkEMJqZAWqHDtRP+TTdqJfOZCqNbADY6XTGs=; b=MUNNv+Cmpf5hmLffipcp0TrlZT
-	nuT5i017lJkTvMJzDAps7fB4Uy7zPHcV2mm0L8SS7LYm9y9nGiBElt3t0ycA4HlhyvFG/eT13fZUr
-	G0yL14Zimh/Q/5vfgPaB9XOP9ryBdbQq6GlPSiqcRSAhFXTadkvHhVjqDmu3Yml3YVCLdo6LmohnK
-	ke4VMDwdZhPPdzyaXxxxBU5SN10/N46jUs2bo05TWyzQaaT+jSE5sVNqu4BYZdQ+C+WA2u0dtA4cj
-	/vL8/xEczc0tYYVvWzhjQyKCGQpQLiAe60T9QEaLZHFI+GF9CetZWvUEfOoX6b+SO8qr6UXYtCWet
-	Y+aDeJcg==;
-Received: from localhost ([::1]:37774 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=sh9pKInr8nDUTrfs9xovg58m7uDvljre4diXVMI8dMo=; b=RXByP9g2GSnvBYEqjvhK3dKifG
+	ykYE4N0SuZFrZa28vjK0feQXla3kBNfb6JZEOuk6MuRdQ2p4Y/bX7N9BrXYUqA0VgBgsGtSqd/MMq
+	TNmr15+NFeoePdM//seesGjyjkjlCOn34UwpxS3o+8rXmIRPlKF3BcLC30X2vxmNz5DecZfZhl7e0
+	EknPEc6U3beLPYdmmxyWQ372sMuAoDFYPX4SsdSLHi717PdqW+e8X41ete5IS5PG92wY6DdHzdEHT
+	ekPnxwLgD9FIceq+axmLyx/3eJO2StUFKHGihX2O0Rd+BDNAkadcSHmPetfKK27Tt+hxTA/RePdQ8
+	7Uad7Msw==;
+Received: from localhost ([::1]:39946 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iLrVE-000dP1-AP; Sat, 19 Oct 2019 16:22:52 +0000
-Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36]:38378) 
+	id 1iLtmW-000eqs-OY; Sat, 19 Oct 2019 18:48:52 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15058) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iLrV8-000dOu-RH
- for samba-technical@lists.samba.org; Sat, 19 Oct 2019 16:22:49 +0000
-Received: by mail-vs1-xe36.google.com with SMTP id b123so6142221vsb.5
- for <samba-technical@lists.samba.org>; Sat, 19 Oct 2019 09:22:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=gzQi94vXkEMJqZAWqHDtRP+TTdqJfOZCqNbADY6XTGs=;
- b=nMeZkiygo/4tv6qxFrYQDaoBhURZh0joylH8WJlHKyPLQ2r8pcjC0Jsq0mcqKiFe1h
- zqFPh595h+o5cuHx4jcFre/FiEFH+mmtpDJ6eT2xl6BhAJm9FlB14DOhWx7DptchOyPZ
- Bc4NQh5s9/gXHwWNkIFh4rVHq335jG4dW7pwoedPiIM+onYi4t2YmzahgnKfXcAtgn81
- t/ixZ/Cp1Cj4CzMHApnzAB80/04pcCNOXs2t9jBDylmd6CtwnMJF6CjAC/28CZvQ6CN8
- PIeTmTc0bxBE/65oUbnoizhPZ+rAtUb93Ag5GetLWUJQ7i3wgCt0VzowxqAq/RgR6/MG
- 0oNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=gzQi94vXkEMJqZAWqHDtRP+TTdqJfOZCqNbADY6XTGs=;
- b=s1k0VdlrbHb0kY6YykEyn5jC052mP8FK7pFou01LEBqvVq6SyZBU7wwUYOy04W1cFH
- PoffQmr51YBR7Do8nbltt7bsgZvvcMNJhwYUpFwYGTkqZBp3mkTxBpuL6XGDaken72eU
- +GIHyUQUGzlFxEVNB9gGBszAtMIVDdcvR0avqkGnQFgeo+U733RHBz9F8rJQRJST2S+M
- sUpCU/FQzpnY7FjtUjrmSRgMXqKq5B5NpUYwEmKaX77cHvrjS15bD9CjCwlEKEQquABF
- bRBblmAHMIS/XUqyIhOoVDSmRCrOg/ZDhJe3tBQy6je4lLd0Y5rwVt8KfUYcYCSnkZ/H
- 973w==
-X-Gm-Message-State: APjAAAXByPaxHsTf87wIvkSwPhJNm/Hik8C0hm4EPquivY6cODOUahG0
- rqbp1Lz6hMry3SHlJc/q17bmS+aSBD2mVEdPURafcAuQ
-X-Google-Smtp-Source: APXvYqzwc6meGgNZr7u105/wyRugBfBnq1C3A2WsKsGOv7OdcmedGKv3RhAP0dUr1n1rH/J5Cr5ddvRWDwCJa8Df+IQ=
-X-Received: by 2002:a67:c307:: with SMTP id r7mr8592905vsj.97.1571502160209;
- Sat, 19 Oct 2019 09:22:40 -0700 (PDT)
-MIME-Version: 1.0
+ (Exim) id 1iLtmS-000eqh-O6
+ for samba-technical@lists.samba.org; Sat, 19 Oct 2019 18:48:51 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=sh9pKInr8nDUTrfs9xovg58m7uDvljre4diXVMI8dMo=; b=ivgSgmogha3cYpOo4nDlHtFSve
+ 9TN5ojDe0B8fIqpdBzDNonTYVu6fHNvQL88EiBqSmmk2guTYPSEAu3zPFkQkd6x750G8pV0xCo2Ie
+ rI3fBq3or4HTHdvYjbAuQkYAGJjA2HDxcWBzyih7GZPAGJN1q6hFu3SRRr9IZ+X3Kew6N7x27yEMP
+ odxJZOMWc0ha9And8uwzphYy9zUpBuZ6PXwNYiduHeFmgIaodNzHYBTArUIwxTfQJQFYTrzrJ0idL
+ RTl3y9ve3TiiYcQtrkR88qyxt+V07iPR8lNtAEahrfOsU4KKIIbh3JzeNGEZQOA5BAIigwOZ9cMb1
+ o+ZwNdClOo1JfuPbE7rASh102FS75tP7C+QtgIraENoiLWVffO/T9I4tKsbp4J3pXV4zTtcYaCmg5
+ 9Xwy4ROLf+yxSl5nuXkFmRZtagtAvg0QyYYiN4KfkLoWD5t3DzDm8y8lXZZ5xBTOj0dK6cvdh2+I2
+ SWMNoyMq1tsBo3CGf4lBST6T;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iLtmO-00015i-Da; Sat, 19 Oct 2019 18:48:45 +0000
+Message-ID: <2d3b27fdc2a30b313e3ef63eb64cbaaec82838a7.camel@samba.org>
+Subject: Installing PIDL for Samba 4.11 RPMs
+To: Nico Kadel-Garcia <nkadel@gmail.com>, Karolin Seeger <kseeger@samba.org>
+Date: Sun, 20 Oct 2019 07:48:38 +1300
+In-Reply-To: <CAOCN9rw1g-N8iAV2z4S=-6Sx7GRQ_vACPcy-pOvwrLys_OykVg@mail.gmail.com>
 References: <3ee51a4a-c102-df01-8e52-cf8ea702194f@samba.org>
-In-Reply-To: <3ee51a4a-c102-df01-8e52-cf8ea702194f@samba.org>
-Date: Sat, 19 Oct 2019 12:22:28 -0400
-Message-ID: <CAOCN9rw1g-N8iAV2z4S=-6Sx7GRQ_vACPcy-pOvwrLys_OykVg@mail.gmail.com>
-Subject: Re: [Release Planning 4.11] Samba 4.11.2
-To: Karolin Seeger <kseeger@samba.org>
+ <CAOCN9rw1g-N8iAV2z4S=-6Sx7GRQ_vACPcy-pOvwrLys_OykVg@mail.gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.32.4 (3.32.4-1.fc30) 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,31 +56,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Oct 18, 2019 at 6:05 AM Karolin Seeger via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> Hi,
->
-> Samba 4.11.2 is scheduled for Thursday, December 5.
->
-> https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.11
-> has been updated accordingly.
->
-> Cheers,
-> Karolin
+On Sat, 2019-10-19 at 12:22 -0400, Nico Kadel-Garcia via samba-
+technical wrote:
+> 
+> What happened to the PIDL code with samba-4.11.1? I see that it's no
+> longer in the source tarball, and had to edit it out of the RPM .spec
+> file I'm using.
 
-Cool! I just managed to get 4.11.1 into my published CentOS 7, 8, and
-Fedora setup at https://github.com/nkadel/samba4repo. This setup uses
-Heimdal Kerberos, which eased the gnutls requirements and made CentOS
-7 easier.
+You can either use the build in pidl via pidl/Makefile.PL or just skip
+it.  OpenChange is the only known consumer, and while folks sill build
+it for the evolution-mapi connector it is sadly dead upstream.
 
-What happened to the PIDL code with samba-4.11.1? I see that it's no
-longer in the source tarball, and had to edit it out of the RPM .spec
-file I'm using.
+Andrew Bartlett
+
+-- 
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+
+
 
