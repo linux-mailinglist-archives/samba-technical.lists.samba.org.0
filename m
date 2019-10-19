@@ -2,46 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00119DD552
-	for <lists+samba-technical@lfdr.de>; Sat, 19 Oct 2019 01:27:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 85CBDDD965
+	for <lists+samba-technical@lfdr.de>; Sat, 19 Oct 2019 17:34:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=WG1FAPm3UfFpB28tDOlCyxssLqpiLRDDQWn9I165yYw=; b=k0quECDpU8unjWFFRPnayLoERt
-	AZCxEKJhE8iJ+7an4pRZcR32VCJbDmlH2fAfdcmTC/wOMurzrK0pw8FW5wxsJiqM0+5EbW+l+JNFA
-	gldqdKnSXlLKnbf7Ka8sCwfYZ9ii9n6On9BjoOJKD6DelyhF6AjJ6j34nyPzRY14z4BKn4mfRItxx
-	MfWy2PWDrFKhXtyxaGk/2egf1u9uhYGr7vVS0yAgVv5aZMWg/ezAvsToZ54XTNxisSafwifCUuh4L
-	tbHmDgbuqa9pc3Nv063o3rp1fht/dEAVCVuTPwyK6oNxamEHrpnWkcPYYsRa3MXXaGCefoYPGs5sU
-	xM/u1JDA==;
-Received: from localhost ([::1]:23578 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=NIb3d/6toqZlUMcL7Zc8QdhiLzW9kKqfuVQu7v/JRyg=; b=LryxKon4gtl18iluiDBysQ3e7M
+	sCnvIeD+7NTFI57XB0ocQ29F+Sn/DmWMR06zT/5lFeYonJPJZr9wzdJtewx/4i1YTuhBt8vmdM8eQ
+	veRlRJmUoHuVP9KUnQ4Bid6cQWBqAMcHNYKJXfV7mmES2j4ZE5osCOCWplQddG1EljHVQTKpyTx1T
+	M3xO2VkYarbMPw8Skaql2w6cO3az9pyLm2AlcXmhtJR+DfGEuXzW8ml/s5mc/WM1Aha9v+65QfH/R
+	g79Sroj3uPlzy6K7oMMuYb9PnxriC+G6NSDDhRkqPeGpjgvxQq90ZrLkK97uKgnXk6nCsUw/dBr8i
+	hi+2gRew==;
+Received: from localhost ([::1]:36532 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iLbe3-000UKM-JN; Fri, 18 Oct 2019 23:26:55 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62520) 
+	id 1iLqj8-000cqZ-7J; Sat, 19 Oct 2019 15:33:10 +0000
+Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:34952) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iLbdz-000UKF-4i
- for samba-technical@lists.samba.org; Fri, 18 Oct 2019 23:26:54 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=WG1FAPm3UfFpB28tDOlCyxssLqpiLRDDQWn9I165yYw=; b=M9m+qTVTlB8nTBP93+nTmLGunR
- /FZUWTX6UqvvbYWa1ni9kt9pVQoiew+Wqz4egVMPPZhFeWCY70p906DxLb7ZoWPX17PvwW1qtI+FD
- K3EjvuvoKJsoYVm9NOgW+JPb0JkMrEeM37Qyomdv8csB1WGgUqP5FIO9NKdjO3Ubu4YwNV5Vnyclk
- 6Zu0AD8velv9h4XFWICT1qZNXUWxS4HQ+OtvHFoRJ3668B1QMlYwA+AyUShOd/6FAHFjPihPO2VTL
- 2Xjst8UV3LKxcOXwL/AowIcC/KzZkoalNVwwfKqoRK02wabn9hJvCCcam029hQji9RikesB/hp393
- WNUrovQHWvzVIj2LQ4mQZ/ESI2kd2e1dFQLQLl5MEU5Za6E2aSwd7p5eoR0vuk/O2qiPUd7J3XKzx
- vXp3IDIT6G0ttsOK0LNcpCrYkQ7WuVzioCxRuxNKN4Yzggj72QkCZaNpCryYgyJHZzs1TmLZ0z34e
- qiCDaYKNsUxehra85CJsPyK0;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iLbdy-0002CB-19; Fri, 18 Oct 2019 23:26:50 +0000
-Date: Fri, 18 Oct 2019 16:26:47 -0700
-To: Stefan Metzmacher <metze@samba.org>
-Subject: Re: RFC impersonation and substitution
-Message-ID: <20191018232647.GA49942@jra4>
-References: <a7aabda6-2463-7777-9132-a3a94edfa3a1@samba.org>
+ (Exim) id 1iLqj3-000cqS-TX
+ for samba-technical@lists.samba.org; Sat, 19 Oct 2019 15:33:08 +0000
+Received: by mail-io1-xd44.google.com with SMTP id t18so6860915iog.2
+ for <samba-technical@lists.samba.org>; Sat, 19 Oct 2019 08:33:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=NIb3d/6toqZlUMcL7Zc8QdhiLzW9kKqfuVQu7v/JRyg=;
+ b=L3Vj1kOjh/KZ+NM2bYzvMPYecYR0A9+wlEwnyTyQjAO1K0vGrt5253pKMcYXllwx2T
+ YLAmBckEL++tOo2MqutwWpos6jo9jc7JYXy2krBnaV5gcqdsk22et2V+vs/zISZUbxxW
+ PPzetePYJBdaEKkDwcjswxRllw0jirERNrZoEf4w++galojWuKOb/yd7kHcduDZMJZgw
+ Nd92jBZ83FQVGSIZIRUn4we1RIm2gEXt29bv2w5+DVfWbJPK4mCqx37KpI/lkjQ4pY5f
+ W+1B3DcJpADEasmOaU8YKLNjC18+Ynu9qlH8GH3Qw4/2hVBjwa+nQ57WFvDSP6/zsOoR
+ JNtQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=NIb3d/6toqZlUMcL7Zc8QdhiLzW9kKqfuVQu7v/JRyg=;
+ b=nEI6dcsAxC/xf5ohr9BISs7eFyMqeBjX9KKOwFdP7bFebhoQ2FxczHwCBu2zRhOS+D
+ PW69+xdcJ9QnHWvUZg551UD3OOAAuhuprP0BVBdfpR8gauEAGMonFNO95JgB2uhuABCk
+ 4GnJ/VgoeNbhKJKaaUfLIv7LqcJfRfn9xsqfAfkRJmvxlo1HWot13XqAikX/W2umihzV
+ gvsjVSVU4PQeZW/LaRNJQZmqLCQLyYAP0z8HT9lUMXjXu1GoU9ZzClQSTF7/rmTAvhjA
+ aMSFBvyyPcd6IVn+nWJjqd90HLQFS8Q8xuP6O+0iX7lY//6VmDEU8LrGxVpeyPKqFexT
+ JfrQ==
+X-Gm-Message-State: APjAAAWjw3a1amLqU4ijar3q3GaCrbHVfpqcEt8ilBkB12Gr+Yc2vzqK
+ g8Fd12YWiv18XD/I0HVvHvgexetq08mPZmulOyE=
+X-Google-Smtp-Source: APXvYqzctIUFoGaIl0rpBUDrpqH8GDKfSMmdOFSYgwBO7PeaqyV1oVJFIstJbr0hTlAN7tiDDzPhiyHFiSxfpgjP0/g=
+X-Received: by 2002:a5e:9405:: with SMTP id q5mr13110599ioj.5.1571499182901;
+ Sat, 19 Oct 2019 08:33:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <a7aabda6-2463-7777-9132-a3a94edfa3a1@samba.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+References: <20191017035351.125013-1-yuehaibing@huawei.com>
+In-Reply-To: <20191017035351.125013-1-yuehaibing@huawei.com>
+Date: Sat, 19 Oct 2019 10:32:52 -0500
+Message-ID: <CAH2r5mucpgb=cOzbq52kLojoTega3fCVh9yRtpodPe1zw9GG6Q@mail.gmail.com>
+Subject: Re: [PATCH -next] CIFS: remove set but not used variables 'cinode'
+ and 'netfid'
+To: YueHaibing <yuehaibing@huawei.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,78 +68,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ kernel-janitors <kernel-janitors@vger.kernel.org>,
+ LKML <linux-kernel@vger.kernel.org>, Steve French <sfrench@samba.org>,
+ Hulk Robot <hulkci@huawei.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Oct 16, 2019 at 05:47:19PM +0200, Stefan Metzmacher via samba-technical wrote:
-> Hi,
-> 
-> some of you already saw my SDC presentation:
-> https://www.samba.org/~metze/presentations/2019/SDC/
-> 
-> Now I want to start the discussion regarding our impersonation model
-> here.
-> 
-> We try to get more things (including path based calls) in the smb_vfs
-> layer async.
-> 
-> I started with tevent_wrapper based impersonation, but that got reverted
-> as it got too complex, more details can be found here:
-> https://lists.samba.org/archive/samba-technical/2018-December/131731.html
-> 
-> Currently our impersonation happens per incoming SMB request.
-> We change 3 things:
-> A) the unix token (uid, gid, groups)
-> B) the global state in order to do smb.conf substitutions like %U
-> C) we change to the share root directory
-> 
-> The future idea would be that we no longer do impersonation at the
-> SMB layer. Instead we would explicitly pass down enough information
-> through the SMB_VFS layer, that vfs modules can do impersonation
-> just around the raw syscall (or in other required places).
-> The module write should know where it is required!
-> Userspace filesystems may do impersonation differently.
-> Of course we'll provide helper functions to make it
-> easy for the module writers.
-> 
-> In order to catch problem C) (relying on the correct current
-> working directory) Jeremy and others are working
-> hard to convert our SMB_VFS layer to *at() based syscalls.
-> See https://git.samba.org/?p=samba.git;a=history;f=source3/include/vfs.h
-> 
-> For problems A) and B) I have the idea to pass down
-> a 'const struct samba_impersonation' as explicit argument
-> to each SMB_VFS call. Note I called i 'smb_vfs_impersonation'
-> in my presentation, but I realized that we need the same
-> for the DCEPRC servers and changed the name.
-> 
-> Regarding problem B) I'm introducing a
-> 'struct loadparm_substitution' that needs tobe passed explicitly
-> to each lp_*(), lpcfg_*() function that needs substitutions.
-> 
-> struct samba_impersonation will wrap
-> struct auth_session_info as well as struct loadparm_substitution.
-> We could add more later if needed.
-> 
-> I started with the struct loadparm_substitution infrastructure
-> and created some draft patches for struct samba_impersonation.
-> Before I continue I'd like to get some feedback.
-> 
-> Please have a look and tell me if you are happy with
-> that approach or if we need to find a better solution.
+tentatively pushed to cifs-2.6.git for-next pending more testing of
+the flock patch it modified.
 
-Just want to comment to say I think this is the right
-way to move forward to modernize our VFS and move to
-a completely async model.
+On Fri, Oct 18, 2019 at 1:07 AM YueHaibing <yuehaibing@huawei.com> wrote:
+>
+> Fixes gcc '-Wunused-but-set-variable' warning:
+>
+> fs/cifs/file.c: In function 'cifs_flock':
+> fs/cifs/file.c:1704:8: warning:
+>  variable 'netfid' set but not used [-Wunused-but-set-variable]
+>
+> fs/cifs/file.c:1702:24: warning:
+>  variable 'cinode' set but not used [-Wunused-but-set-variable]
+>
+> Reported-by: Hulk Robot <hulkci@huawei.com>
+> Signed-off-by: YueHaibing <yuehaibing@huawei.com>
+> ---
+>  fs/cifs/file.c | 4 ----
+>  1 file changed, 4 deletions(-)
+>
+> diff --git a/fs/cifs/file.c b/fs/cifs/file.c
+> index 936e03892e2a..02a81dc6861a 100644
+> --- a/fs/cifs/file.c
+> +++ b/fs/cifs/file.c
+> @@ -1699,9 +1699,7 @@ int cifs_flock(struct file *file, int cmd, struct file_lock *fl)
+>         bool posix_lck = false;
+>         struct cifs_sb_info *cifs_sb;
+>         struct cifs_tcon *tcon;
+> -       struct cifsInodeInfo *cinode;
+>         struct cifsFileInfo *cfile;
+> -       __u16 netfid;
+>         __u32 type;
+>
+>         rc = -EACCES;
+> @@ -1716,8 +1714,6 @@ int cifs_flock(struct file *file, int cmd, struct file_lock *fl)
+>         cifs_read_flock(fl, &type, &lock, &unlock, &wait_flag,
+>                         tcon->ses->server);
+>         cifs_sb = CIFS_FILE_SB(file);
+> -       netfid = cfile->fid.netfid;
+> -       cinode = CIFS_I(file_inode(file));
+>
+>         if (cap_unix(tcon->ses) &&
+>             (CIFS_UNIX_FCNTL_CAP & le64_to_cpu(tcon->fsUnixInfo.Capability)) &&
+>
+>
+>
 
-Haven't had time to review these specific patches
-yet (sorry, been busy with other things) but I'll
-try and do so as soon as I get some time.
 
-Cheers,
+-- 
+Thanks,
 
-	Jeremy.
+Steve
 
