@@ -2,47 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3960CDDD1F
-	for <lists+samba-technical@lfdr.de>; Sun, 20 Oct 2019 08:57:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5ED67DDD2E
+	for <lists+samba-technical@lfdr.de>; Sun, 20 Oct 2019 09:29:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=EWL+aO/XcG8K7kiHNjByz2orFbWwvBixTpObXEKO4vA=; b=kx2VN/7X3Z9wD/PUqh4B1Eky4v
-	oMESCPrHmsuh7G1nIfVJIwDyHi/7sJySLe5qd6qVpNBenKf2olSbBxofXDXRVN0IjpVJxXiN1Ox83
-	/Z8pPHtPkejdGzmoUwhpkLWLZoTm99Pf1EpK4ygg2tjKHCS5hVSztOeYLEnhzPOYcpM035GV/XQIj
-	nHVYJobJhc9FUG3cq5vWQZrhaRN7UfTO2FCPzR/akVwOLlWKoNPTDa+gcmj/fApMUhAhTFLQRQ1VZ
-	B9Ye8Bv93m29T5TaBj/agRo9gAVj5OBhld8ai5MCOnLIKc1Xr6AAEtXtNHFGiY2jPZfBc0QRuWlt+
-	UvJeB8Rg==;
-Received: from localhost ([::1]:55588 helo=hr1.samba.org) 
+	bh=N4e4S76gs/a1b1eLKyp0iNVSnbKvNICvRtehvtFJ9LY=; b=jEqeTkw5z6vKtd1V6kYuD+20M4
+	zZFiTlqx7/U47c87WRJi7J4VMoA2iZzFB6xWarbrtyWy0Uyoz2fj5o/iVy4VDI/qDTr5CwSS6FhK7
+	vSfZhieP9bOxbD7t4kV4qJUKY4CzDWPKT0ZNfWY4Qumb5Nzr/iWxzZO/vA582RrcZqqq+Z5TE44q9
+	ogDEbm40JZOSE17jju1lGWtQgXqudTFWMjOrB40VwfKvwhgycUCRWIDgbFaAVosLg3hog0qka0p1K
+	WGXcslAlM1e9VQux9Hv9mYcxZf0PlZWIPP4rYbJRMv9yITmzRgmiLjmAfyBvjhqyBgMNIAvYYvTS8
+	rKc7SvQw==;
+Received: from localhost ([::1]:56528 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iM59F-000mP9-7S; Sun, 20 Oct 2019 06:57:05 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63344) 
+	id 1iM5eW-000mm6-Qk; Sun, 20 Oct 2019 07:29:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14810) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iM598-000mP2-Gb
- for samba-technical@lists.samba.org; Sun, 20 Oct 2019 06:57:01 +0000
+ (Exim) id 1iM5eQ-000mlx-CF
+ for samba-technical@lists.samba.org; Sun, 20 Oct 2019 07:29:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=EWL+aO/XcG8K7kiHNjByz2orFbWwvBixTpObXEKO4vA=; b=UanliY5wMcGLB3bN+QdHzLeHnZ
- LrJh4W1Ygs1Qdpp8iXNl7PDep0XHcHczxBcPw+F3FO72OVwf9Q5fG0PIRvLYNG+SYau9qzkO5BjGW
- i0F8jG2Ao9hqDxMgI273vIa5/rpc3AdAcnG1kzLcLxFn8lphabmAvzBt+2VhI5ynO4hK5lPZPet0P
- UHQK/j2TIXXeIy4c8iguTPYSECRDSa/G8vks3CybjHgvEl5D8Dgm9Nd9GB+dP8jUrv98y6XL/Ygf5
- 6YUvcJtB8aLEhGL7t+RKEWKfSWQ9L6XTn17sgiTf2gixuMV+7m3n9WDbScP4m35Q8NyuOFlqcKFXQ
- pAhbtwAqSNl1ORs8R8ekV7XeRhvgz4Sgo4O4hzvkQVGdK1sN/HPipCSZpbkeCfkfwGHLpIfndxf1w
- T1ygOgtg7MyqakoJewI5YULVLfWuJ3FcrBIaXHImZsTo0ijdqCuygRemiDMJ59lpECEwhR78K19Lo
- ZGyYqhnZr587Kmb90AeLb3gF;
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=N4e4S76gs/a1b1eLKyp0iNVSnbKvNICvRtehvtFJ9LY=; b=w6y3q83gWYkcMy8tkUbTMhzEbg
+ GpkHZcYs/dhElijDDIP1mL6vxVHG6mpua5QQDzXVeQ/5gRzr6qWLrPV9JJ9tguiy5q/FFM3meQX+t
+ 6lNtYBNIednMCXBswok2DrZ1JSv9IbtIZ9XVacnfl7WYWD21KGyYhncWT8aq4EHlO/L7dApDr/rbM
+ BOsNmPuOeGk8H3jgPyf2r0c8y2ndIjPfxqiUryIIXI5XEsMGIGLJmlfXa1itM271xC9RVE+J34sf6
+ Y6r8Df2YxKT5XJIINGcSXFC6cKseg30JWZesKA0NBlOMd5L9iyFAJkLKlh+BSiv68z3/3hjjZPu26
+ gN8t0iuRr0YijKjlIol7vcKkJQEkxPsWAMUXpqtmL3Jh2JL0l2GrI+af1WuqQS87FkbLyXPd8zPgo
+ /4mIin5JDPEg6r0RbQJFK8vsbe568SyBMxz8RnCXSlJ1Qn34bZscpw2T8rFdPFCkMEz6faohlNlAO
+ 0D25SKl6+yEA8WQAmbhIkKY9;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iM596-0007KF-Mn; Sun, 20 Oct 2019 06:56:57 +0000
-Message-ID: <ab5a51e6f8b7b45e552c70db9a5ab517e328c4ae.camel@samba.org>
-Subject: Re: [PATCH] build - use system asn1_compile to cross-compile
- Samba's bundled Heimdal
-To: Uri Simchoni <uri@samba.org>, samba-technical
- <samba-technical@lists.samba.org>
-Date: Sun, 20 Oct 2019 19:56:51 +1300
-In-Reply-To: <80f0d797-a4df-2694-f707-4dfb41b0bbdf@samba.org>
+ (Exim) id 1iM5eM-0007VV-9B; Sun, 20 Oct 2019 07:29:14 +0000
+Subject: Re: [PATCH] build - use system asn1_compile to cross-compile Samba's
+ bundled Heimdal
+To: Andrew Bartlett <abartlet@samba.org>,
+ samba-technical <samba-technical@lists.samba.org>
 References: <80f0d797-a4df-2694-f707-4dfb41b0bbdf@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.32.4 (3.32.4-1.fc30) 
+ <ab5a51e6f8b7b45e552c70db9a5ab517e328c4ae.camel@samba.org>
+Message-ID: <8eafc867-d09f-c899-c4ff-d0c0520a9f0a@samba.org>
+Date: Sun, 20 Oct 2019 10:29:12 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.1
 MIME-Version: 1.0
+In-Reply-To: <ab5a51e6f8b7b45e552c70db9a5ab517e328c4ae.camel@samba.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -57,112 +60,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Uri Simchoni <uri@samba.org>
 Cc: neil@nmacleod.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sun, 2019-10-20 at 09:37 +0300, Uri Simchoni wrote:
-> Hi,
+On 20/10/2019 9:56, Andrew Bartlett via samba-technical wrote:
 > 
-> (Taking discussion from https://bugzilla.samba.org/show_bug.cgi?id=14164 
-> to the list)
+> Samba's waf is meant to be able to prepare host binaries using
+> use_hostcc=yes on the targets, but that may well have bit-rotted.
 > 
-> Attached is yet another cross-compilation fix which I submitted to 
-> bugzilla for test by reporter before MR. The fix works for the reporter, 
->   but has been Nacked by Andrew, and I'd like to discuss this further here.
+
+That must have bit-rotted a long time ago because we set use_hostcc 
+correctly yet the embedded vendor workarounds have been there for years.
+
+> it should just work or not be available at
+> all.
 > 
-> Background:
-> - Heimdal build requires two tools, asn1_compile and compile_et, which 
-> are binary programs.
-> - In the native build of Samba with embedded Heimdal, we build them 
-> first and use them to build the rest of Heimdal.
-> - This fails on cross-build for obvious reasons.
-> - One workaround (which I've been using when I was in the embedded Samba 
-> business) is to build Samba natively, stash the binaries of asn1_compile 
-> and compile_et somewhere, and set environment vars COMPILE_ET and 
-> ASN1_COMPILE to point to these binaries.
-> - A different workaround which is in common use (buildroot, OpenWRT, 
-> LibreELEC to name just a few) is to *somehow* host-build compile_et and 
-> asn1_compile and install them in the build's path, then run configure 
-> with the flag --bundled-libraries='!asn1_compile,!compile_et'. This 
-> would invoke a configuration test which finds the binaries in the path 
-> and sets COMPILE_ET / ASN1_COMPILE accordingly. Let's call that "the 
-> automatic method".
-> - The "somehow" seems to mostly be building of stand-alone Heimdal 
-> package. So Samba gets cross-built with asn1_compile that came from 
-> stand-alone Heimdal, and compile_et which comes from either Heimdal or, 
-> possibly, another package that produces this binary and has been 
-> host-built such as e2fsprogs. Both might be overriden by what happens to 
-> be installed on the build-host, if the distro doesn't take care to put 
-> its built tools in the path before the system tools.
-> - commit 8061983d4882f3ba3f12da71443b035d7b672eec broke the automatic 
-> method, because it invokes the test to find binaries only if using 
-> system Heimdal.
+
+Understood. Embedded vendors /distros are of course welcome to use this 
+patch and as a Team I think it would be practical or even necessary to 
+support issues with embedded Samba even if they use patches, and even if 
+they use embedded heimdal, because from installed-base POV they probably 
+represent the lion's share of Samba instances out there.
+
+> I understand you are running out of time, my suggestion is to lock in
+> what we can agree on for now until someone can either make a fool-proof
+> fully automatic recipe, one way or the other.
 > 
-> The attached patch fixes "the automatic method". Andrew Nacked it 
-> because using some binary that we don't know where it came from is prone 
-> to incompatibility issues. In fact, it appears that embedded vendors 
-> routinely use a patch that removes inclusion of <unistd.h> from one of 
-> Samba's libreplace files, just because of the automatic method, and this 
-> patch works on 4.11 but breaks master. A better fix would be to get 
-> Samba's build system to build asn1_compile and compile_et using the host 
-> compiler.
+> Sorry,
 > 
-> After this long background, my response to the Nack:
+> Andrew Bartlett
 > 
-> 1. Does waf support this mixed-build method? Are there examples / 
-> pointers? (I can try myself but any pointers would be welcome)
-> 2. Shouldn't we "get things to the way they were" before supplying "the 
-> perfect fix"? I fear of me running out of time and continuing this at a 
-> much slower pace.
-> 3. If we nack the fix, would it be correct to say that the current 
-> situation, where "the automatic method" is invoked in system-heimdal 
-> build makes no sense, as there's no need for asn1_compile / et_compile 
-> with system Heimdal?
 
-I think using that for cross-compiled file servers the system MIT
-Kerberos should be the first preference, not our embedded Heimdal.
+OK, will do.
 
-The second preference for cross-compiled operation should be a system
-Heimdal.
-
-Only if those are not possible, then we should cross-compile Samba's
-internal Heimdal.  We should take the patch to fix waf to have cross-
-compilation work in principle. 
-
-Samba's waf is meant to be able to prepare host binaries using
-use_hostcc=yes on the targets, but that may well have bit-rotted. 
-
-The problem I have with the manual/automatic finding of the host
-asn1compile and compile_et binaries is that clearly these are being
-mixed up, and developers with little time but the best of intentions
-are even hacking around that.  Samba is too complex to have things only
-work with time and care, it should just work or not be available at
-all.
-
-I say clearly mixed up because:
- - The Heimdal 7.7.0 compile_et and Samba master are almost identical
- - identical compilers would produce identical output, regardless of
-architecture. 
- - They would certainly not require different header files.
- - The complained-about output comes from MIT's old compile_et.
-
-Substituting 'just a bit' of our Heimdal build is just asking for
-trouble, in an already difficult area.
-
-I understand you are running out of time, my suggestion is to lock in
-what we can agree on for now until someone can either make a fool-proof 
-fully automatic recipe, one way or the other.
-
-Sorry,
-
-Andrew Bartlett
--- 
-Andrew Bartlett                       http://samba.org/~abartlet/
-Authentication Developer, Samba Team  http://samba.org
-Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
-
-
+Thanks,
+Uri.
 
