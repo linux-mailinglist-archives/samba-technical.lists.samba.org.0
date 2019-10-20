@@ -2,51 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5ED67DDD2E
-	for <lists+samba-technical@lfdr.de>; Sun, 20 Oct 2019 09:29:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 009B9DE063
+	for <lists+samba-technical@lfdr.de>; Sun, 20 Oct 2019 22:23:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=N4e4S76gs/a1b1eLKyp0iNVSnbKvNICvRtehvtFJ9LY=; b=jEqeTkw5z6vKtd1V6kYuD+20M4
-	zZFiTlqx7/U47c87WRJi7J4VMoA2iZzFB6xWarbrtyWy0Uyoz2fj5o/iVy4VDI/qDTr5CwSS6FhK7
-	vSfZhieP9bOxbD7t4kV4qJUKY4CzDWPKT0ZNfWY4Qumb5Nzr/iWxzZO/vA582RrcZqqq+Z5TE44q9
-	ogDEbm40JZOSE17jju1lGWtQgXqudTFWMjOrB40VwfKvwhgycUCRWIDgbFaAVosLg3hog0qka0p1K
-	WGXcslAlM1e9VQux9Hv9mYcxZf0PlZWIPP4rYbJRMv9yITmzRgmiLjmAfyBvjhqyBgMNIAvYYvTS8
-	rKc7SvQw==;
-Received: from localhost ([::1]:56528 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=o81R4pdhd7FqvxgBXhjzNJ/WU4g5VtK1ieU1qFafjEA=; b=XxDcfBJF8La4inSD81Lop+hqQy
+	NKWW60ZPBINpCiExPmQINuov8gYM3jRSJydhR6Rt2TRuqZ1/23fwcuvS3pMNNqGpSqmXQ9bz5dJ+Y
+	BeMga7Fw3vDwrJl8Fi7mtcY1nwh1YAKHQLbNZR9C6frER3v/PVMUv/6wVKI2Fn3buWJ5LD/Ace6XT
+	3RvSlStG4/zb5LceULTcqy6iEZYU16ypgl8Hu/WXqogTlnaFCL7AMSxUiOb2uaYD59fNs5FWyZHQc
+	h6YL/4dwzqqPjB3ThokowT+odZycwyDSxXLtQ7L/83+HJRfQr6qi/ec2Rri3gGit6M5qX6G+zwN9z
+	oOZIMC8A==;
+Received: from localhost ([::1]:33750 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iM5eW-000mm6-Qk; Sun, 20 Oct 2019 07:29:24 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14810) 
+	id 1iMHiI-000uuQ-IS; Sun, 20 Oct 2019 20:22:06 +0000
+Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936]:34554) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iM5eQ-000mlx-CF
- for samba-technical@lists.samba.org; Sun, 20 Oct 2019 07:29:22 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=N4e4S76gs/a1b1eLKyp0iNVSnbKvNICvRtehvtFJ9LY=; b=w6y3q83gWYkcMy8tkUbTMhzEbg
- GpkHZcYs/dhElijDDIP1mL6vxVHG6mpua5QQDzXVeQ/5gRzr6qWLrPV9JJ9tguiy5q/FFM3meQX+t
- 6lNtYBNIednMCXBswok2DrZ1JSv9IbtIZ9XVacnfl7WYWD21KGyYhncWT8aq4EHlO/L7dApDr/rbM
- BOsNmPuOeGk8H3jgPyf2r0c8y2ndIjPfxqiUryIIXI5XEsMGIGLJmlfXa1itM271xC9RVE+J34sf6
- Y6r8Df2YxKT5XJIINGcSXFC6cKseg30JWZesKA0NBlOMd5L9iyFAJkLKlh+BSiv68z3/3hjjZPu26
- gN8t0iuRr0YijKjlIol7vcKkJQEkxPsWAMUXpqtmL3Jh2JL0l2GrI+af1WuqQS87FkbLyXPd8zPgo
- /4mIin5JDPEg6r0RbQJFK8vsbe568SyBMxz8RnCXSlJ1Qn34bZscpw2T8rFdPFCkMEz6faohlNlAO
- 0D25SKl6+yEA8WQAmbhIkKY9;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iM5eM-0007VV-9B; Sun, 20 Oct 2019 07:29:14 +0000
-Subject: Re: [PATCH] build - use system asn1_compile to cross-compile Samba's
- bundled Heimdal
-To: Andrew Bartlett <abartlet@samba.org>,
- samba-technical <samba-technical@lists.samba.org>
-References: <80f0d797-a4df-2694-f707-4dfb41b0bbdf@samba.org>
- <ab5a51e6f8b7b45e552c70db9a5ab517e328c4ae.camel@samba.org>
-Message-ID: <8eafc867-d09f-c899-c4ff-d0c0520a9f0a@samba.org>
-Date: Sun, 20 Oct 2019 10:29:12 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.1
+ (Exim) id 1iMHiD-000uuI-UB
+ for samba-technical@lists.samba.org; Sun, 20 Oct 2019 20:22:04 +0000
+Received: by mail-ua1-x936.google.com with SMTP id q11so3222119uao.1
+ for <samba-technical@lists.samba.org>; Sun, 20 Oct 2019 13:22:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=o81R4pdhd7FqvxgBXhjzNJ/WU4g5VtK1ieU1qFafjEA=;
+ b=H7eAjsro4JdW8qTqBedtfCGjCsTOSo0Ahq96MzUrxeFTLhQabzbGIXZocLH5WAn1z1
+ dsYzP4MsHqYmPgCwb4xf9sYw4b4aZ6a6TGJ/v2tR05Ra6jzz2cCTQ8oVRhCVgysOruq2
+ TrqW0TLx3NNLTrDztwE/39+beMK+y6gmrsrjLjpDSOTYEVD16DgmhDsRw5SpbSf1O+2U
+ 5vQedM+k6pX2ICjqDztj+hVMHyTLDJKz93G1Wt2zWsAbiHSnmjINA68sn9diGLJjr2RD
+ 58ZzSyzgrV97ZtmWRJwwnUnTyIXLUXUYfp4dibBpCMoe0Yw0MdaW/gdAI5m/sKgDPEmQ
+ yUTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=o81R4pdhd7FqvxgBXhjzNJ/WU4g5VtK1ieU1qFafjEA=;
+ b=jMowNu9pJphjuqh45Td5nqmeuXBvlTl77ftD2QLX8fHgKuDw6ViIuYtHo6fH5dT12Y
+ MRCWyScVdTO2VkPqzy2OcegTwdIGvgcn+ZH7bHVcHVZ3GCaWXGnnLxSWdKWFyiw0DJLc
+ ZNgDglSHZHsL8d0jCUmcXaXCMxZPC/T2+DJSQz03JIQqyShurF4MJgjx6lpi0X+qEy1n
+ fhPwPhw55ebXV5gp+ud+FM9Vz8ShSGN27VwwlmEW5DSK+97+BEzlQOc9a9hzu/Ze0T8T
+ MX4TwJbRv+ShnVVKa+9ZqrUuEZgNJw0WPpoYNBuR//pMh1G61vzjb9P/gZybxt7GIXYa
+ /GFQ==
+X-Gm-Message-State: APjAAAUzHkqDGOZjemacUC8vpmgE6wxxEZ/yT20qZuVcRp3mqUALzp53
+ Z2VyvNTxGFhUe7VNFeYnQLU1E412yd5dpDzV8Ak=
+X-Google-Smtp-Source: APXvYqziodcmc+1+scAIixGBYBrbCBgBDIuvt6Bl3k90+n6VxWEmPlVqjPlnz3/xrO+yOlClFv8Cut3s4Oo2bOhokaA=
+X-Received: by 2002:ab0:6409:: with SMTP id x9mr11130562uao.29.1571602918878; 
+ Sun, 20 Oct 2019 13:21:58 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <ab5a51e6f8b7b45e552c70db9a5ab517e328c4ae.camel@samba.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <3ee51a4a-c102-df01-8e52-cf8ea702194f@samba.org>
+ <CAOCN9rw1g-N8iAV2z4S=-6Sx7GRQ_vACPcy-pOvwrLys_OykVg@mail.gmail.com>
+ <2d3b27fdc2a30b313e3ef63eb64cbaaec82838a7.camel@samba.org>
+In-Reply-To: <2d3b27fdc2a30b313e3ef63eb64cbaaec82838a7.camel@samba.org>
+Date: Sun, 20 Oct 2019 16:21:45 -0400
+Message-ID: <CAOCN9rxhKTWmsinpe4jh5+CB_DSENr1KvJXrBHREGTizoUtiBA@mail.gmail.com>
+Subject: Re: Installing PIDL for Samba 4.11 RPMs
+To: Andrew Bartlett <abartlet@samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,42 +69,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Uri Simchoni <uri@samba.org>
-Cc: neil@nmacleod.com
+From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 20/10/2019 9:56, Andrew Bartlett via samba-technical wrote:
-> 
-> Samba's waf is meant to be able to prepare host binaries using
-> use_hostcc=yes on the targets, but that may well have bit-rotted.
-> 
-
-That must have bit-rotted a long time ago because we set use_hostcc 
-correctly yet the embedded vendor workarounds have been there for years.
-
-> it should just work or not be available at
-> all.
-> 
-
-Understood. Embedded vendors /distros are of course welcome to use this 
-patch and as a Team I think it would be practical or even necessary to 
-support issues with embedded Samba even if they use patches, and even if 
-they use embedded heimdal, because from installed-base POV they probably 
-represent the lion's share of Samba instances out there.
-
-> I understand you are running out of time, my suggestion is to lock in
-> what we can agree on for now until someone can either make a fool-proof
-> fully automatic recipe, one way or the other.
-> 
-> Sorry,
-> 
+On Sat, Oct 19, 2019 at 2:48 PM Andrew Bartlett <abartlet@samba.org> wrote:
+>
+> On Sat, 2019-10-19 at 12:22 -0400, Nico Kadel-Garcia via samba-
+> technical wrote:
+> >
+> > What happened to the PIDL code with samba-4.11.1? I see that it's no
+> > longer in the source tarball, and had to edit it out of the RPM .spec
+> > file I'm using.
+>
+> You can either use the build in pidl via pidl/Makefile.PL or just skip
+> it.  OpenChange is the only known consumer, and while folks sill build
+> it for the evolution-mapi connector it is sadly dead upstream.
+>
 > Andrew Bartlett
-> 
 
-OK, will do.
-
-Thanks,
-Uri.
+Thanks. I misattributed its failure to a complete deletion of the
+software, it's the incompatibility of the current fedora patches,
+which were apparently designed to add PIDL to wscript settings. But
+with PIDL being deprecated this way, there seems no reason to support
+that patch.
 
