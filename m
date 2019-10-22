@@ -2,50 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95392DFEF1
-	for <lists+samba-technical@lfdr.de>; Tue, 22 Oct 2019 10:05:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06744E0098
+	for <lists+samba-technical@lfdr.de>; Tue, 22 Oct 2019 11:23:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=iuITTNEmxnt306+rYoAL9Of8NYHk2v3lPOoB++XfBgM=; b=zTIvhxHpKK38crnYHrTWypdXG7
-	KlYoeaUGXY6jIfmtNp/PoAMldYtT/mHnG+gk4uwaPqle3bxGv7PZgSBZ4GUD2iQcNclao2UN8SFU+
-	GmJS/bFTBVOFcIGlnPdOA12nQI1JJL0rc1k1FXVrN+HGYfDxia2z4JWx7SWchay57t6oFVEzQg9qY
-	VHpnLq3vbVwckZLJnpDVIzFOI9iQ2i/ERecpxkKQNQI3itdPdTjPbnpyI4EbuCABiPWTU1VXEE5fH
-	ZIkiQIBpbOkHepoxnv8K7TMk25aWEAkEjvbZCG1D07xzVlo3yb4A26o3iKfZJ0Q6H8Qj8QAErTr9U
-	EZASWqog==;
-Received: from localhost ([::1]:35262 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=JvMX/lXDUOWIR5q+Cr2vce4yKF1oZYR3RjrTrD0pUrU=; b=vFueaSXiOTGRybOBYiPGwEn4nS
+	zXIe2ZggOvgQ7vObUP5x+J0l5hQRg8qs2PyjD9/yJY1c618djcM2QOufx/sWi1WPCbZBMyXCg8i1W
+	ylOk3UTdELY6hNfF9jEnaK7gwZa3Jzn4w1n6NTQ9K1JDEjwd17hKkcbSpTYg8fdMPfsPuLOnqNxmG
+	3wtVPx3GcMRtosA+6vEz1Mh1I/VP6Nh82xeAs5f/xwINOjkl6g6a9kaneyBu8GqOoc/sjEcKWPPJj
+	UagN19jKCkPuqHp9X29o5Iv9J37tMvhzeh7Rbuq2j/9XXvMCBgIqWux394t+jIFet6ilCVsfN99+X
+	Vr9nvtpQ==;
+Received: from localhost ([::1]:36870 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iMp9r-001K1k-TL; Tue, 22 Oct 2019 08:04:47 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45998) 
+	id 1iMqN9-001KVv-U4; Tue, 22 Oct 2019 09:22:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:27480) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iMp9n-001K1d-6Y
- for samba-technical@lists.samba.org; Tue, 22 Oct 2019 08:04:45 +0000
+ (Exim) id 1iMqN2-001KVF-LM; Tue, 22 Oct 2019 09:22:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=iuITTNEmxnt306+rYoAL9Of8NYHk2v3lPOoB++XfBgM=; b=P+ShHRWKTWWVFuWMmNf4s1YHQ2
- vWWG/Od9f4lvHvVBXac8AQmNfUHM8LtnGaEDBybqA0AECtOsWMfIZQS7elSMuJS3cdySErWnMHi9U
- AEQIp97fGMT5HELiLHeTL5qt5I2Z/ay8/nbB4nEEPjJX3lzOTs77ZFxsK7uRvb2fFYQ4/xl6+2f3m
- 1hm5fVW4b3li+OJijAbjAZbazVwL3wNxJjIwkRra31HdukZCAl8NfhRngXslgiGwkCMFVJ/txUJxx
- jakr9EcLXsNJoJOh2F6YhcrElc0owoi2g2vsH0PjKf1qIZHrK0RyQGF2wya47AbOfBHD/wIDVa4bt
- 4zGci3w3WeDdTnzrB6XsCMFpfUlhdSzsRDPi4Q7xcLBxkJhezf9a5P9U2EgIB0cgKEhzFQvvIK1kn
- J+dbcafKZ1Zs6L5xJCNhIglX/3YD8idZMWR/uYnk83tMu5FS2LcOelDHVrUO2Kzn2Bk7Z/jfJ1nfe
- xp2CL8EpkTSWPDhK7SLocTKm;
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=JvMX/lXDUOWIR5q+Cr2vce4yKF1oZYR3RjrTrD0pUrU=; b=yWY98MUtFVIL3U7E28MHL3yEn+
+ 70DAN9REK60eAeS3irA7s8KngU8TX4KZGL8rUgxjXLNTAfnLJ8CXahh4RPtS21hPUMsUhRUxMaZ0C
+ WYEOyk0aDgRYdpiVOPu6gJuV+UPQ6Au2p2Ah2QEDTUvVDBYKdh1zlxBTS2gj9IYE6baYwkkIzStQG
+ qynM9r5t3kedWu0yFFTXxPRiMA3kaUyoL2zRqDJFegZ3cRoqcyVSfRp7A9ZwTtL5x2siGTW4w0SgS
+ 7KI504s0HD1iACWRllbMzW0f2ZK8ziMui5wCQV2IcndncrMt37QDzcWTGGlI4tkA6Um8ZzuhxKpk9
+ gg6TEhPmLQtWF5wEAm5Sg97y2uFL8Cv5EdBsyinaOQgNbZtPuR6MF7e/BggN8OO7QEk+jJLGJguDs
+ 7pofarIcnHoRRuh9H0vbQUNnkCRAQVQcOjETt7yJwMt08fhQfUbfFwNHb0ee+CUhiY47jkOf/CWvt
+ i7HJbtkSyBgN09xmBqER87T0;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iMp9l-0001aV-ON; Tue, 22 Oct 2019 08:04:42 +0000
-Message-ID: <62d5ad8c301b265e872120c563b8e991674a00c6.camel@samba.org>
-Subject: Re: Converting SMB1 tests to SMB2
-To: Ralph Boehme <slow@samba.org>, Andreas Schneider <asn@samba.org>
-Date: Tue, 22 Oct 2019 21:04:37 +1300
-In-Reply-To: <477d3bdf-2afe-35f8-bd06-15bd00568c83@samba.org>
-References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
- <0981db46-93bf-f153-c98f-15d5cf404353@suse.com>
- <ed7eb92f-46a7-758e-f3b5-185d71b8b98a@samba.org>
- <8323638.P3YhLeQRCy@magrathea>
- <477d3bdf-2afe-35f8-bd06-15bd00568c83@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.32.4 (3.32.4-1.fc30) 
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iMqN1-0002QR-Nj; Tue, 22 Oct 2019 09:22:28 +0000
+Date: Tue, 22 Oct 2019 11:22:26 +0200
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.9.14 Available for Download
+Message-ID: <20191022092224.GA25362@carrie2>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="XsQoSWH+UP9D9v3l"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,44 +54,148 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: David Mulder <david.mulder@suse.com>, samba-technical@lists.samba.org
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2019-10-22 at 09:57 +0200, Ralph Boehme via samba-technical
-wrote:
-> On 10/22/19 8:57 AM, Andreas Schneider wrote:
-> > On Friday, 18 October 2019 14:00:53 CEST Ralph Boehme via samba-technical 
-> > wrote:
-> > > Hi Noel,
-> > 
-> > Hey Ralph and Noel,
-> > 
-> > > I don't think the additional work of letting the tests use a different
-> > > testenv really helps. We'll just have to go through the knownfail list
-> > > and look at each failing test to see what's needed to fix it.
-> > 
-> > Well SMB2 tests should not be run in the nt4_dc environment. That will go away 
-> > at some point. It should either use fileserver or ad_dc (if krb5 is needed).
-> 
-> yup. I guess the tests I was talking about (smbtorture base, raw, ...)
-> can mostly just use fileserver env.
 
-I (at least I presume it was me) added much of the duplication during
-the great merge.  Many of these tests are also run from both
-source3/selftest/tests.py and similarly under source4.
+--XsQoSWH+UP9D9v3l
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Care is needed when removing duplication (to ensure there isn't some
-aspect of what is tested that differs) but it is very worthwhile work.
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
+			"Be thankful we're not getting
+			 all the government we're paying
+			 for."
 
-Andrew Bartlett
-
--- 
-Andrew Bartlett                       http://samba.org/~abartlet/
-Authentication Developer, Samba Team  http://samba.org
-Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+			 Will Rogers
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D
 
 
+Release Announcements
+---------------------
+
+This is the last bugfix release of the Samba 4.9 release series. There will=
+ be
+security releases only beyond this point.
+
+
+Changes since 4.9.13:
+---------------------
+
+o  Jeremy Allison <jra@samba.org>
+   * BUG 14094: smbc_readdirplus() is incompatible with smbc_telldir() and
+     smbc_lseekdir().
+
+o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+   * BUG 13978: s4/scripting: MORE py3 compatible print functions.
+
+o  Andrew Bartlett <abartlet@samba.org>
+   * ldb: release ldb 1.4.8
+   * BUG 13959: ldb_tdb fails to check error return when parsing pack forma=
+ts.
+   * BUG 13978: undoguididx: Add "or later" to warning about using tools fr=
+om
+     Samba 4.8.
+
+o  Ralph Boehme <slow@samba.org>
+   * BUG 14038: ctdb: Fix compilation on systems with glibc robust mutexes.
+
+o  Isaac Boukris <iboukris@gmail.com>
+   * BUG 14106: Fix spnego fallback from kerberos to ntlmssp in smbd server.
+
+o  Poornima G <pgurusid@redhat.com>
+   * BUG 14098: vfs_glusterfs: Use pthreadpool for scheduling aio operation=
+s.
+
+o  Aaron Haslett <aaronhaslett@catalyst.net.nz>
+   * BUG 13977: ldb: baseinfo pack format check on init.
+   * BUG 13978: sambaundoguidindex is untested and py2-only.
+
+o  Amitay Isaacs <amitay@gmail.com>
+   * BUG 14147: ctdb-vacuum: Process all records not deleted on a remote no=
+de.
+
+o  Bj=C3=B6rn Jacke <bj@sernet.de>
+   * BUG 14139: Fault.c: Improve fault_report message text pointing to our =
+wiki.
+
+o  Stefan Metzmacher <metze@samba.org>
+   * BUG 14055: libcli/smb: send SMB2_NETNAME_NEGOTIATE_CONTEXT_ID.
+
+o  Martin Schwenke <martin@meltin.net>
+   * BUG 14084: ctdb-tcp: Mark node as disconnected if incoming connection =
+goes
+     away.
+   * BUG 14087: 'ctdb stop' command completes before databases are frozen.
+   * BUG 14129: Exit code of ctdb nodestatus should not be influenced by de=
+leted
+     nodes.
+
+o  Evgeny Sinelnikov <sin@altlinux.org>
+   * BUG 14007: s3:ldap: Fix join with don't exists machine account.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the "Samba 4.1 and newer" product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+        https://www.samba.org/samba/history/samba-4.9.14.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--XsQoSWH+UP9D9v3l
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCXa7KTQAKCRAoaL1+KxeT
+UUQrAJ9LE+Fo+OrJHQRAjTLmutfwchGPQQCfVVSSz4qsDWNlNJyWKT++2G6VZPk=
+=UCVi
+-----END PGP SIGNATURE-----
+
+--XsQoSWH+UP9D9v3l--
 
