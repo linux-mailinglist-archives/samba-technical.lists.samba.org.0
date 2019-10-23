@@ -2,36 +2,36 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30BCEE1886
-	for <lists+samba-technical@lfdr.de>; Wed, 23 Oct 2019 13:08:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35450E197D
+	for <lists+samba-technical@lfdr.de>; Wed, 23 Oct 2019 13:57:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=YCjCXIltgUkUQol8sil1yk6N61kCDuWWXR8U81CZAOg=; b=kwMR+z2QZZAo/UQIGqBNg/fEn/
-	h8Oj2YK7y0/zEiS65Is7V8agmYan5+0OWlJGH/i19y1jT2AOCoppXTGPjCJUlVoxCTskead6fmlOK
-	LHPDVV7KVwKa1ckXOR3MpGjokKzAARwSfb4U5mkq6GGRa9wgr8vHo2q5ZYq8j4puggzG+59H7aMlw
-	vHIpxUWVBw/n2GpYctOysxx+IEuBnSVearyOUxy2TWzueBqvMgFRYdHwdrpp8O/8cdXZ1/dbNK5uP
-	MYmAVK0nVG5z2/LKXP9T5/uiXzkHt/cyqHuKiF+09v9DkUlpkfp4mZn2c0/nfis/h7Uxk27RnSPOW
-	2kXOrUWA==;
-Received: from localhost ([::1]:62152 helo=hr1.samba.org) 
+	bh=0AIp4re2jGmquBFpzhIS3SEka1g83eCcwZiyiI8LzG4=; b=bFvS09zx0rpjna6ah7oEZ5pDw/
+	aF/IxzbhwZTH41aFiMQ1EB8oFEc+yWdfG41y0zx4kD1S8ZvaG6eHnGGnUx/4o8deeNLJzIqS17NzN
+	rU70gwnKEEKRrlZIdXad2Blf7zN3bLCQ7wgcC+7axBQW1w22hgPtHYih12MJp9SkY3lIyFATTwE9e
+	Uw+vwh3l2A/cxDsMUOauD9dAvQawz2WvRMtuqZnGPGk0ZKKEHa85KdmE4V1YwsPawWcjsfW1cAJTE
+	9IKTX9fh6foNE1Lo6IRaiOMI7F9fJ3U0SHXovNSI/YAeH/Htb5G86EknQci83mH57+L5r1DX6dfqn
+	xT9mr4Cw==;
+Received: from localhost ([::1]:63052 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iNEV0-001fTY-ST; Wed, 23 Oct 2019 11:08:18 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18670) 
+	id 1iNFGH-001fgs-DS; Wed, 23 Oct 2019 11:57:09 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44152) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iNEUx-001fTR-2n
- for samba-technical@lists.samba.org; Wed, 23 Oct 2019 11:08:17 +0000
+ (Exim) id 1iNFGC-001fgl-MV
+ for samba-technical@lists.samba.org; Wed, 23 Oct 2019 11:57:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:Message-ID:From:Cc:To;
- bh=YCjCXIltgUkUQol8sil1yk6N61kCDuWWXR8U81CZAOg=; b=C71vYdbmSAYSNOz4nMJPXKkRMj
- qfS/hd3VpNkLHqoB07/ZV27nm0Ad9BaKFA6Cqqcq9Ulb2FvOlXPjrMeWM/x6rtCe7jQdYxM8QfgE4
- Lw8vsktv46xWFpyZVioiEldKp1EJ8YAOEia/4Z8+65r96TmNHhvsBwONJCr8L5ivkKe10erNh0TUM
- G+fnm6hFor95Wb16xAwokJD2C7Ou2d+1R3dr9N7p6MWVQL1pCegoMWpTcncMe5xBZWEkdBIipcvFw
- 8Nb3H6kdlRzxbseL8jIUjO0i7UDL9Yzj4zJfpn9rxXFrbQXqr8swUZ8f68i7y8atJkV9LCS5OLTWw
- BxMt5uh9z19wdAPiSleAkS3J15aJw26Dkf0/YLGu35kSiFBby+9fgvRXAK3d6xXq7Bg1odw4lsswi
- Fszq5MhIjozuOayDYnqJ1p+7c6rhmO6MGJd+uI8MSi1waMT3HZCxfK/LX4qKQBclW7UOv6VWmMBvq
- sT3s3IY92sIPrVzz6VGaDVqO;
+ bh=0AIp4re2jGmquBFpzhIS3SEka1g83eCcwZiyiI8LzG4=; b=PSaWWwvBSNei/aE5YqGfgumddw
+ WaTDNjtxxKws2opMLUw1j0N9fE4CE5xEqAZHbIHTLfPt8QEBBbvTADk04fOmNHYUC3D1PN7aNvtEj
+ vPzNN76xXqWdOhgUEEcMi+/q/Cqn3IhA/WZMYebBea6W/GZRhUnTV5oKpYLxM9jntUKuGbpr3riRc
+ 3nKu0l0BvnXk4WD3xxuYC283NS227P1/06frhL7QXTmsmz4D3sRxKBgjCbR2aQQni0o7nQgsE78Oo
+ eUuvRl1kGx5vvMNs2jNXIOZbdpYLoGH+IFVDjHJK6/N5JhMdOkYV7Gc39RZ7hK2Sx3q6alfVtC9h0
+ PqpTGArTd6NCfDp5fNOMBv6iakvHgoSaBgssc9dHt8HOMIvBwG5Im+XK8Tj9snvil5w8+AUbaHIub
+ 3hHW+wqFqNqxX/KUJcsF3iy2if7DOIHmUC757iTkdepcvltcOUMViwz+iX3h8KRyTNawCr5z8lKOH
+ eyvZnzpVxL4WPdrt0lbE9EsH;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iNEUv-0000Yp-UH; Wed, 23 Oct 2019 11:08:14 +0000
+ (Exim) id 1iNFGA-0000w1-MM; Wed, 23 Oct 2019 11:57:02 +0000
 Subject: Re: Converting SMB1 tests to SMB2
 To: npower <npower@samba.org>
 References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
@@ -43,12 +43,13 @@ References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
  <d9625941-c85a-a686-2162-30c80a2e84b3@samba.org>
  <fa464ebe-cfe7-1d6e-7435-c896e2cc188e@samba.org>
  <f479113c-7a74-8259-823e-4ae1c4a713c6@samba.org>
-Message-ID: <47fef5d6-7fb6-b054-a8c5-7a28b63e97c8@samba.org>
-Date: Wed, 23 Oct 2019 13:08:12 +0200
+ <47fef5d6-7fb6-b054-a8c5-7a28b63e97c8@samba.org>
+Message-ID: <9cc9d402-57fb-3568-29e6-12284d6ccd98@samba.org>
+Date: Wed, 23 Oct 2019 13:57:01 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.1.0
 MIME-Version: 1.0
-In-Reply-To: <f479113c-7a74-8259-823e-4ae1c4a713c6@samba.org>
+In-Reply-To: <47fef5d6-7fb6-b054-a8c5-7a28b63e97c8@samba.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -71,34 +72,31 @@ Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 10/23/19 12:38 PM, npower wrote:
-> On 23/10/2019 11:05, Ralph Boehme wrote:
->> For each item we:
->>
->> - check is the *same* test already exists as a SMB2 tests
->>
->> - if no: rewrite test as smb2 test
->>
->> - remove smb1 test, remove entry from skip list
->>
->> Am I missing something?t
+On 10/23/19 1:08 PM, Ralph Boehme via samba-technical wrote:
+> On 10/23/19 12:38 PM, npower wrote:
+
+>> * I thought that it would not be acceptable to just effectively remove all of these tests without a clean transition path, e.g. they run till they are removed
 > 
-> * There are tests there that are mixed smb2 & smb1, certainly some blackbox tests fall into this category, there maybe others, so skipping them currently skips the smb2 parts
+> All this has to happen in a private branch of course, you can't push the
+> initial changes upstream of course.
 
-yes, sure, I was skipping the finer details here.
+what would works as well, and I guess this might be what you had in mind, is
 
-> * There are tests that hang and crash, I am not certain they are running any smb2 stuff, without going through each and every test in the skip file to verify, it is impossible to tell if using the skip tests removes valid smb2 tests from the suite
+* force smb2 in the testenvs
 
-I'm afraid, we have to do exactly that.
+* move all failing tests to seperate temporary testenvs that still allow
+smb1
 
-> * I thought that it would not be acceptable to just effectively remove all of these tests without a clean transition path, e.g. they run till they are removed
+This changeset could the already go upstream, allowing working on the
+indivual tests in a more piecemeal fashion, because the resulting work
+can be pushed upstream for every test.
 
-All this has to happen in a private branch of course, you can't push the
-initial changes upstream of course.
+Once all tests are taken care of, the temporary test envs can be removed.
 
-> I'd prefer to just skip the tests and work through them, I am a little worried about doing that though, that's all
+This would avoid accumulating all the changes in a private branch and
+the rebase hassle that comes with it.
 
-Hm, isn't that exactly what I'm suggesting? Phone call? :)
+Is this what you had in mind?
 
 -slow
 
