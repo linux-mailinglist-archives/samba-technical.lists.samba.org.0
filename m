@@ -2,64 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56960E623D
-	for <lists+samba-technical@lfdr.de>; Sun, 27 Oct 2019 12:24:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DCE6E6531
+	for <lists+samba-technical@lfdr.de>; Sun, 27 Oct 2019 21:00:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=GHErEpPUYRdwVi/W6VDtLFC9cShh+la64rB5VrNQ4kw=; b=fnNiN98g++TK9tm8iH58V5tX8C
-	zHdkTI+vWAA8fsaoTLGCI88gSYos/DjCCqvDwxYVam7SMJgvshGH7+G+YERzuIqO7EcraRC6FTNfq
-	gyGu3Q81oIsI+9YOPLaW3fHyWkE+rWpNZyMPfmXvbc42ZR+Td22WrbcgdT2MJTFc+ervBwu83I4Td
-	hw3kWxSgTDWXf5/q8ac4XJG5I5SquHJRYqpHe8e8UXImRmx0aZkthSJHTVUbWqnNiTOhGa9o7K4Rm
-	fvAFE2TOjDHNwTG6IzDM4D6F2TspKW7GwpmsHkH1vbQYzEONCWXddWOfaMbQ60zSbTcxMWgCjJO1x
-	UV7iMQEw==;
-Received: from localhost ([::1]:20100 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=1JDSmw4J3XoscIws3mjSmVtK+pmmPNy7/Yi1UQKGYyc=; b=EMXqgzfHFYJYKxW8qgY8y3vMZz
+	P0QZHUh6nSYeySOKrog0SKTRs+yQzaPAyxKtoTwu1XZVVZt5x6m+w5tmaPwjv5/jHi9F307mXJCBw
+	69KyKPo+6tFml1AlS8gWvmV0WjlGZP2zszHwzg+v2WLpd3U1/SDNhg196V5vvX8yWR9bGCPI10ZGz
+	oymLvZe8T57QpFePK/cE6+i1U73mAuXtWsAeAJLRPSsnQgHlIbnOK2SavX2hZekHewUwnZkeU3fZ3
+	cwq6UZbApJpn4iNAX66yvDAztYMPP/6emBsfua3aQbkaq6NiCif6MQeFqYhTYKr4Y7OKdBISAu5Eg
+	guMg8Kcg==;
+Received: from localhost ([::1]:29368 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iOgeE-002n50-Od; Sun, 27 Oct 2019 11:23:50 +0000
-Received: from mail.rosalinux.ru ([195.19.76.54]:55200) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iOgeA-002n4t-Kn
- for samba-technical@lists.samba.org; Sun, 27 Oct 2019 11:23:48 +0000
-Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id 344A2D39F00A7
- for <samba-technical@lists.samba.org>; Sun, 27 Oct 2019 14:23:42 +0300 (MSK)
-Received: from mail.rosalinux.ru ([127.0.0.1])
- by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id SAoOlX_x1Fgp for <samba-technical@lists.samba.org>;
- Sun, 27 Oct 2019 14:23:42 +0300 (MSK)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id DDEB8D39F00AD
- for <samba-technical@lists.samba.org>; Sun, 27 Oct 2019 14:23:41 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rosalinux.ru DDEB8D39F00AD
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosalinux.ru;
- s=A1AAD92A-9767-11E6-A27F-AC75C9F78EF4; t=1572175421;
- bh=GHErEpPUYRdwVi/W6VDtLFC9cShh+la64rB5VrNQ4kw=;
- h=To:From:Message-ID:Date:MIME-Version;
- b=HnTyMSgxbq8qhfPeNzZrxXhhzT8XsfHQ92cpEvzPalzdmI9vL58PiiHYC28R1g0/3
- Li+NKESEXA+PAtJ5cqvcIzgQtw83vJ52d1kq1wmvzIA/lBQkOQjxtrla1K8GavsYNP
- WgbjvDyb7lIBKnZZqRcGaiUe1nuRTIBjaQA1F2ZfW6xlOSbZDOvAJNVZXqZMJiBUHq
- fLwgp38hNY02h5cmN8ULMnqo97Un7JAV4PuVBImFtR9lJy/gPkDAml5k8W4UElkads
- 4Z2dAB04m83A/+tDDqSJC7iqgII/4J3TvA11NKcIV3r7oNCWcRujolkyIN7yHkoJlz
- VR02Rbfe4t6yw==
-Received: from mail.rosalinux.ru ([127.0.0.1])
- by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id IRRunzu7GOou for <samba-technical@lists.samba.org>;
- Sun, 27 Oct 2019 14:23:41 +0300 (MSK)
-Received: from [192.168.1.173] (broadband-90-154-70-115.ip.moscow.rt.ru
- [90.154.70.115])
- by mail.rosalinux.ru (Postfix) with ESMTPSA id BFF4CD39F00A5
- for <samba-technical@lists.samba.org>; Sun, 27 Oct 2019 14:23:41 +0300 (MSK)
-Subject: Re: Building on armhf
-To: samba-technical@lists.samba.org
-References: <vmime.5da9d2cf.67ea.2e47a9a962d3963f@ms249-lin-003.rotterdam.bazuin.nl>
-Message-ID: <7a937e93-44a0-b772-c358-869b395de803@rosalinux.ru>
-Date: Sun, 27 Oct 2019 14:23:41 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+	id 1iOohL-002r6C-0k; Sun, 27 Oct 2019 19:59:35 +0000
+Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:43870) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iOohG-002r65-2M
+ for samba-technical@lists.samba.org; Sun, 27 Oct 2019 19:59:32 +0000
+Received: by mail-io1-xd44.google.com with SMTP id c11so8128740iom.10
+ for <samba-technical@lists.samba.org>; Sun, 27 Oct 2019 12:59:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=1JDSmw4J3XoscIws3mjSmVtK+pmmPNy7/Yi1UQKGYyc=;
+ b=IfnIIUZpwalkn0FyuXzidd6QbzoB/pizIfsG7Kq/pLUDKe0/r/6k5nl+T0L9VY9LHc
+ UeGyRrDWobnZWk772raunkKmfuhcIGE0AxgzD2dJP6FhRnJ6GuSMv1pGLWkfMZYMy/H7
+ gmrvOpgA6virUieOFyZq+NtEsOHCSy5RIthtjfuhEqqcQlUNlp9uRgEqZLrPsIhnF0aQ
+ WJMee5yNIYIexo27dVyCe79v5SIirCLDi2mjXncXVZHBNrqfrRQMzDiU7PJstoHNi4E7
+ tOpDpcnmFi1b1YL1x447NeM2Eg6QcyQkSmKwLZOWmD/c9Ef4G0j+UosEKCForP5i5Tfl
+ +fug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=1JDSmw4J3XoscIws3mjSmVtK+pmmPNy7/Yi1UQKGYyc=;
+ b=FXf3jf96IbmCFSmHaxPDhoJf/i7Trsb1ERUEDhEq6pF8hANlq2rStmtY/CZ0NU1eor
+ 3K4TQCI1r8MLb44aiOtsVOLaPzMZUpM9dUXiqrmwA2zwi6otPCaflvxURLBztTFzpUl4
+ N41NUAYw1gokNGdEOx1+cEv5LfksKKZxqa7PPgQQidtvbzhMvy4P0qMmAM9j+Vr/qf9S
+ kd45wFlfIZg5BWGtFOCTsvs8bhIO/LCvx+Bl4k50+ZwYFEhHlW9BvvIyx8yJK6ayu2hA
+ L43EDpvzyAs22x7gW4TrI6EWNmk2/BYREeQQoN2lhERe65MY6VQKqb5FhLQHR133040w
+ AIJA==
+X-Gm-Message-State: APjAAAUYz4AdfMWWZtF0eQExyknK5PSGpvDdGKrE6fW3iiMW9PYrrICg
+ bWwIy65z1Km4SX0RqhJhJWEsihKdinX2gTYE65w=
+X-Google-Smtp-Source: APXvYqzQBpwMNIT2dG22laDowix/1mJWw64mvlIHL9mvLhX8iaqPbYdgarAGvzKHfXWihZYw3Fy20QQ5B1mKqGkyQ3M=
+X-Received: by 2002:a02:1c41:: with SMTP id c62mr12041847jac.132.1572206367691; 
+ Sun, 27 Oct 2019 12:59:27 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <vmime.5da9d2cf.67ea.2e47a9a962d3963f@ms249-lin-003.rotterdam.bazuin.nl>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Language: ru-RU
-Content-Transfer-Encoding: quoted-printable
+References: <1571259116-102015-1-git-send-email-longli@linuxonhyperv.com>
+ <1571259116-102015-7-git-send-email-longli@linuxonhyperv.com>
+In-Reply-To: <1571259116-102015-7-git-send-email-longli@linuxonhyperv.com>
+Date: Sun, 27 Oct 2019 14:59:16 -0500
+Message-ID: <CAH2r5mto-Jbp1_yoLsFuiCWiFd-HA8TFVFB91CjDaBABq9PiuQ@mail.gmail.com>
+Subject: Re: [PATCH 6/7] cifs: smbd: Only queue work for error recovery on
+ memory registration
+To: Long Li <longli@microsoft.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,25 +69,98 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Mikhail Novosyolov via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>, Stable <stable@vger.kernel.org>,
+ Steve French <sfrench@samba.org>, longli@linuxonhyperv.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-18.10.2019 17:57, L.P.H. van Belle via samba-technical =D0=BF=D0=B8=D1=88=
-=D0=B5=D1=82:
-> Hai,
->  =20
-> Just a question here, is there a way to speed up building for armhf.
-> im already using ccache and tmpfs but the cpu emulation of armhf makes =
-it so slow..
->  =20
-> im using qemu to simulate the armhf env.
+I cleaned up minor cosmetic nit spotted by checkpatch
+
+$ scripts/checkpatch.pl
+0001-cifs-smbd-Only-queue-work-for-error-recovery-on-memo.patch
+WARNING: Possible unwrapped commit description (prefer a maximum 75
+chars per line)
+#7:
+It's not necessary to queue invalidated memory registration to work queue, as
+
+WARNING: Block comments use a trailing */ on a separate line
+#58: FILE: fs/cifs/smbdirect.c:2614:
++ * current I/O */
+
+total: 0 errors, 2 warnings, 38 lines checked
+
+On Wed, Oct 16, 2019 at 4:11 PM longli--- via samba-technical
+<samba-technical@lists.samba.org> wrote:
 >
-> With the current build speed=C2=A0taking me hours ..=C2=A0 :-(
->  =20
-> Anyone suggestion to speed this up or is it just impossible due to the =
-cpu emulation.
-Cross-compilation on a x86 host for amv7 target should be possible. Then=20
-compilers are run natively without CPU emulation.
+> From: Long Li <longli@microsoft.com>
+>
+> It's not necessary to queue invalidated memory registration to work queue, as
+> all we need to do is to unmap the SG and make it usable again. This can save
+> CPU cycles in normal data paths as memory registration errors are rare and
+> normally only happens during reconnection.
+>
+> Signed-off-by: Long Li <longli@microsoft.com>
+> Cc: stable@vger.kernel.org
+> ---
+>  fs/cifs/smbdirect.c | 26 +++++++++++++++-----------
+>  1 file changed, 15 insertions(+), 11 deletions(-)
+>
+> diff --git a/fs/cifs/smbdirect.c b/fs/cifs/smbdirect.c
+> index cf001f10d555..c00629a41d81 100644
+> --- a/fs/cifs/smbdirect.c
+> +++ b/fs/cifs/smbdirect.c
+> @@ -2269,12 +2269,7 @@ static void smbd_mr_recovery_work(struct work_struct *work)
+>         int rc;
+>
+>         list_for_each_entry(smbdirect_mr, &info->mr_list, list) {
+> -               if (smbdirect_mr->state == MR_INVALIDATED)
+> -                       ib_dma_unmap_sg(
+> -                               info->id->device, smbdirect_mr->sgl,
+> -                               smbdirect_mr->sgl_count,
+> -                               smbdirect_mr->dir);
+> -               else if (smbdirect_mr->state == MR_ERROR) {
+> +               if (smbdirect_mr->state == MR_ERROR) {
+>
+>                         /* recover this MR entry */
+>                         rc = ib_dereg_mr(smbdirect_mr->mr);
+> @@ -2602,11 +2597,20 @@ int smbd_deregister_mr(struct smbd_mr *smbdirect_mr)
+>                  */
+>                 smbdirect_mr->state = MR_INVALIDATED;
+>
+> -       /*
+> -        * Schedule the work to do MR recovery for future I/Os
+> -        * MR recovery is slow and we don't want it to block the current I/O
+> -        */
+> -       queue_work(info->workqueue, &info->mr_recovery_work);
+> +       if (smbdirect_mr->state == MR_INVALIDATED) {
+> +               ib_dma_unmap_sg(
+> +                       info->id->device, smbdirect_mr->sgl,
+> +                       smbdirect_mr->sgl_count,
+> +                       smbdirect_mr->dir);
+> +               smbdirect_mr->state = MR_READY;
+> +               if (atomic_inc_return(&info->mr_ready_count) == 1)
+> +                       wake_up_interruptible(&info->wait_mr);
+> +       } else
+> +               /*
+> +                * Schedule the work to do MR recovery for future I/Os
+> +                * MR recovery is slow and we don't want it to block the
+> +                * current I/O */
+> +               queue_work(info->workqueue, &info->mr_recovery_work);
+>
+>  done:
+>         if (atomic_dec_and_test(&info->mr_used_count))
+> --
+> 2.17.1
+>
+>
+
+
+-- 
+Thanks,
+
+Steve
 
