@@ -2,43 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8AB9E6CC2
-	for <lists+samba-technical@lfdr.de>; Mon, 28 Oct 2019 08:13:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 267BBE6CC7
+	for <lists+samba-technical@lfdr.de>; Mon, 28 Oct 2019 08:14:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=z2PS2NJUokqEhPN46sR0tzD5X4RXZghbXvwgDlWbjHY=; b=37bU7f0vCp9IW4iF13W3hDZYUn
-	vzzTa1B1BWo+40YTHzMvXVAE5iuIytzUiry2ThGCS3kOmWT3C1Wrj7t6+Wj8SzeGI/GULvzYTv+a5
-	eDictIcdCPKqOMIHNN5zowmvKEYnhMZA1B1iZJUHqOj3WcT/R8EeYjLh1fsLoGwgboGMDo7SMzMF/
-	1aRCQR93qhr58Tl0UYCkqm4BhctXFjc4xk9nl0ILeEqD49k+wtuYr81OnObWn8vituaB5fnT3HkAb
-	DXSUHnhKRBboSLlutg8ydCRXPrwpXm6N1QiyFMP/Lwf97NZ/dAxlJTqMTKIiehWl4fttkSP8rYRUx
-	rbDcEb2A==;
-Received: from localhost ([::1]:39048 helo=hr1.samba.org) 
+	bh=3ii4IGsS7JPUCo9+LrxwzkNCTrxll+VqrkvYiFR0GTc=; b=DXC1q6lODrM0dWrtaMs1Qz2bDE
+	HrGmpyFE37wlQaLWcUbZDtTijTryCBOYjlpIGFOd02qqKvSLPWLRsE1iXgWeVU7HGSpbro4k9RR4X
+	2qavZM9GRjFZyQ6IU72SvJd88GCVkn8B4+3bnTlCMxcJ9ACN+mcTstE6fa+eZTOShXIbkefRvfT29
+	E62DMysRRU7stUzbh3i08Lv2kJDTNZikzHefhyWA/CfNT1Pju4Fa7+dJqGWEjnxjwX3iBxuO2g1if
+	kovr2CSSuwKPCFDvsSgr8+UD82EX56adfkA8wKJ23hXbQH8VTT+5/0oapM9u6IVytf5XOjX/2uIyk
+	rl946bLQ==;
+Received: from localhost ([::1]:39838 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iOzDI-002viA-Ci; Mon, 28 Oct 2019 07:13:16 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20544) 
+	id 1iOzEZ-002vqQ-IV; Mon, 28 Oct 2019 07:14:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20864) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iOzD6-002vi3-7n
- for samba-technical@lists.samba.org; Mon, 28 Oct 2019 07:13:06 +0000
+ (Exim) id 1iOzEU-002vq3-1G
+ for samba-technical@lists.samba.org; Mon, 28 Oct 2019 07:14:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:To:From:CC;
- bh=z2PS2NJUokqEhPN46sR0tzD5X4RXZghbXvwgDlWbjHY=; b=ln67IOxMJoSChSFyqOmkI0t6cW
- MYdz/F+yq3afZ40bIwSKaTIAY39qPsnlvNvLyVPIADMTX+Ved/weJRT8gRAyOiQpqpXfFtXe/zbMu
- mRXuP8lBTiSuXLwbqQf2Qq8Y2l5zLamswIMVedaMqwstNDbHlPCsrWRENybq2XYKOzz1ZzaQf1mm6
- LTO7X9QWt6o8rTwVJFNJZOOuEbTU7ipo3ewHb5Ult5RTx1YlGIuHM3ZVJzsGtYC2Q5RJdi8QwqDdx
- xP3rOMHHqrkSjmt5y4PRRUJJYofX8pN7ML+Hky4v/X2SencX+/HvBE/jvcrpl6C5tVIfL98MhTdf7
- OmshFNGbSa00pXxm7ZMLKcsg4LxNuq87KumwcKKSJewERjdCtX5IxbvEZcYFCp/lLjcz2ZLRvxMKt
- E64fYgVsy6pqw3sa01fHPFmUt95Cy5k9i2/9CBt0hW0rDTyFcN29iwGc1ihgd6ho5F3MV1tEa/hb2
- xOWO5HIivxdnPpHR8Rj6TVD7;
+ bh=3ii4IGsS7JPUCo9+LrxwzkNCTrxll+VqrkvYiFR0GTc=; b=FTJcchFz65qragwgfRgd87fc5G
+ bISFdiWWH5Gq8RHneJOedP/woXZZXDY99RZKR3Mm4iM4KDU/arcassvZ93B1OHAdXxbGcUEHBLXEW
+ uSi0TNnx51zKBiX3UyRfNR8KZbuPR5Q0JgZCD41M6gzX24tlFOZeD2SLAHgEWzTzBrNM67vyHKdJ7
+ cozhgnQb+y3iMsmjPhBVJsOR0TfQ5LCRPfWfle4rBUHx/Sh0EVZ/dRQpw9YB564+4TidtJ6H5rDfD
+ KKsncuGmh0KXTwDkT23IJTL/67x5S/STK87dzsImPpedUqxbGz3JLR5uNQs6Ux4rwjy+dZIWN66QC
+ 4E7k1PsFAPzuOy6eO4XpVtRclNFKXytxf1vIWi8ZA1NYIo9ZljqfByL/cEll/kkuKu5TUUb+iP8da
+ rEcBvUisKURroeiLf3Nw3rlgCWktlLYrKbT+XRwFwtsfm6qM9Wh8D8ESzgRYQlCaqy68c24dbMKr2
+ WwZBfMihAvRKhF5tLRcd5ADc;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iOzD4-0002kR-Hd; Mon, 28 Oct 2019 07:13:02 +0000
-To: samba-technical@lists.samba.org,
- Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
-Subject: Re: Automating usage of smbspool_krb5_wrapper
-Date: Mon, 28 Oct 2019 08:12:59 +0100
-Message-ID: <2538732.qaAAVzzFgV@magrathea>
-In-Reply-To: <af8412ee-5493-0406-e95b-8d3175ec069a@rosalinux.ru>
-References: <af8412ee-5493-0406-e95b-8d3175ec069a@rosalinux.ru>
+ (Exim) id 1iOzET-0002mK-LS; Mon, 28 Oct 2019 07:14:29 +0000
+To: samba-technical@lists.samba.org, Carson Reinke <carson@reinke.co>
+Subject: Re: [PATCH] Add RR TXT to resolv_wrapper
+Date: Mon, 28 Oct 2019 08:14:29 +0100
+Message-ID: <2303630.oTt7KeoaRQ@magrathea>
+In-Reply-To: <CADmTV85u56g1qCtjGLuoDjGyMPveG+BksekRxSQ-yo9ypLe9dw@mail.gmail.com>
+References: <CADmTV87B2HCcj537=k9SC=LL9cu3BFypXmdVyM+po_0mA6OvFA@mail.gmail.com>
+ <7261541.Vyxcxg3dJj@magrathea.fritz.box>
+ <CADmTV85u56g1qCtjGLuoDjGyMPveG+BksekRxSQ-yo9ypLe9dw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
@@ -60,28 +61,20 @@ Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Monday, 28 October 2019 07:32:13 CET Mikhail Novosyolov via samba-technical 
-wrote:
-> Currently there are 2 alternatives for /var/lib/cups/backend/smb:
-> - /usr/bin/smbspool for printing to an SMB printer
-> - /usr/lib(64)/samba/smbspool_krb5_wrapper
-> for printing to an SMB printer with Kerberos authentication (e.g. inside
-> Active Directory domain). It makes use of Kerberos ccache of a user who
-> made the printing task instead of ccache of ldp daemon user.
-> 
-> In Fedora, as I could understand from samba.spec
-> (https://src.fedoraproject.org/rpms/samba/blob/master/f/samba.spec),
-> package samba-krb5-printing has to be installed when it is needed to
-> switch from smbspool to smbspool_krb5_wrapper.
+On Sunday, 2 June 2019 00:32:18 CET Carson Reinke via samba-technical wrote:
+> *Andreas*, looks like I had this wrong.  The TXT record handling was
+> missing an important part after some testing.  Here is the original and
+> adjust patch.  Let me know if you want a squashed version.
 
-Samba only provides smbspool and smbspool_krb5_wrapper. Installing it as a 
-CUPS backend is done by downstream, e.g. Fedora.
+Carson,
 
-You should discuss it there. However there is probably a historic reason for 
-smbspool_krb5_wrapper being in a separate package. Maybe the package could be 
-installed by default or as a recommondation.
+thanks for your contribution. I've finally set up CI for resolv_wrapper. Could 
+you please check the upstream sources?
 
-So open a bug downstream :-)
+I will do a release soon.
+
+
+Thanks!
 
 
 	Andreas
