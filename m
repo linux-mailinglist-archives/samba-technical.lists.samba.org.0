@@ -2,48 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FED3E6E7A
-	for <lists+samba-technical@lfdr.de>; Mon, 28 Oct 2019 09:49:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45887E7953
+	for <lists+samba-technical@lfdr.de>; Mon, 28 Oct 2019 20:39:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=7UnMfZjHOnyF435ZjC8+jajODjR2LFpxXEB5hjYdXhM=; b=sfs+BxeJl0HmfDjmw03C3d+IHX
-	21qAZ15+Sw+ohC7NWOSXy8JLJwGQGE+9RxmLcp8AnbABmHAbkRWjp3msmGbGtY1sCrfSDXJP8G4iF
-	074e4OIOSNFcbe5DCiHx2KuQVZZeRAclisrUVM6uFDf8gHpWeuoX5c12DLa9k8yMaRxkA6wIBxTc8
-	gjqIwXEaoXD/zacIBf92i0NUjbapK4o7osB1rGpcqYo5MQUEW/cJyRSoxKRj+l+jdKts3BYmNBJXK
-	GAKqbeObGX0gvfwt3emV4xIAZzcbsIqNCimyMGIDVW3CcukXOdr5NMvCRb9anUZHvaZsxSTe7pqQE
-	jln2+kPw==;
-Received: from localhost ([::1]:42646 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=c8SIBKdE2Eex7oQmSd16QYrFgBbXakYDZOPIt8JJpXM=; b=Q5XIYXDZ5nLRuAbzeAs18nh0A9
+	Pqy0+juNncfiEI0YY0DLG/qg7Cg1nAFsf2ARODIt2pMAyMFd0Ido8o8ChGX8jnat+elB50xmBFh8D
+	BWIshVEtB0h3GbY/ilRGpYdg/fvhxmt4TL+XHMlEhv1NCRsgVsUteqJ9wUMsc5Sczk7wh/EwBwcel
+	xlcLpH5Eqhg6u15b65KT4W0580c79lijCYLYe5IEJkz3qmymhLjGqPk0tYOS9uum9pAUJOqqaJTUl
+	rtZb+QTKla6kDxIQQ63oxvo3oNdeGLj5h27IZ7YrVe4P5dzedaV47+iVvrGHmegxs0uxTPeLo0Mjm
+	B4XM3+mQ==;
+Received: from localhost ([::1]:53854 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iP0h4-002wW5-47; Mon, 28 Oct 2019 08:48:06 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48688) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iP0h0-002wVy-28
- for samba-technical@lists.samba.org; Mon, 28 Oct 2019 08:48:04 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:To:From:CC;
- bh=7UnMfZjHOnyF435ZjC8+jajODjR2LFpxXEB5hjYdXhM=; b=TPEmrmAmOqDkmuow5sXSDJcn4A
- 7tM1bqkqV7T6jzwQzF9ULGM8xzfKATLQSmsEogkfSGbqnbJC6lxitKpTS5FJUPwVUPd6IXXVtcWkb
- SUJTKbEwL7Cm9pkAKqQsqMDi4UnzsWmG1aWWVehzj7wPGuVEVQwIzCTg4nP5DXAkStf7aQPZolNiV
- s5ANSNrm5ZqPvfJj+j40VPROB74vd2yo5dOcTog4LXlSZL1Q+If9Qt9f6/fWtq4pIieLkFewYMIFd
- u+YrFSyii6BTGn2Ngd+6eYztOelGcLXqYYAiGSvI/kJiro0msYjDhTplIA0KdHlmBWu75TeFV2tVs
- DlY20g5aCbqsKLY5J6/1XNTPFxr0So2DElycYoa3+LxA6OY1ABVyxVCQciamvQAr3wwHa+F+Y2AQJ
- 2DlaDzIavSeJPsThBycD0NLYFflOMQKZQ0k1dqHtmIuqvgC4kK7Td8ddx2wFHkdEjZuxi8JRY2pQR
- qPNn73Wc/jhXcgVvmuk8dJkF;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iP0gy-0003RJ-TP; Mon, 28 Oct 2019 08:48:01 +0000
-To: samba-technical@lists.samba.org,
- Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+	id 1iPAqH-0030gB-QH; Mon, 28 Oct 2019 19:38:17 +0000
+Received: from mail.rosalinux.ru ([195.19.76.54]:34938) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1iPAqC-0030ft-RS
+ for samba-technical@lists.samba.org; Mon, 28 Oct 2019 19:38:15 +0000
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rosalinux.ru (Postfix) with ESMTP id C28AFD46DFF2F;
+ Mon, 28 Oct 2019 22:38:09 +0300 (MSK)
+Received: from mail.rosalinux.ru ([127.0.0.1])
+ by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id GnvV4mN6bp4X; Mon, 28 Oct 2019 22:38:08 +0300 (MSK)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rosalinux.ru (Postfix) with ESMTP id C5856D46DFF31;
+ Mon, 28 Oct 2019 22:38:08 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rosalinux.ru C5856D46DFF31
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosalinux.ru;
+ s=A1AAD92A-9767-11E6-A27F-AC75C9F78EF4; t=1572291488;
+ bh=c8SIBKdE2Eex7oQmSd16QYrFgBbXakYDZOPIt8JJpXM=;
+ h=To:From:Message-ID:Date:MIME-Version;
+ b=RjMdSS6UrxvetmRed5i+lzRz3OGEtIm3+gu8e7xNzsdyOEVV7pDZpwcwnTzMpeR28
+ Ug7pqB0EQelDRhb6+aogZ7awJuzaD0xY3LwZGeY0RMQyla29/0NHgcvvuY7hNYMIUP
+ AHAvGDMDaTb/00txkvBI4bGsPnfwR5BoNdvBvvvL1Ayzu9woj+NVeVgl9ydtRjGJHc
+ Muky35rke5P+PVB25qrXiM2VD0Y8y9EwogF0p3Ed615a4UkYVuLtO3vAcZ08SRr9lc
+ zkmLPlOH2ti6ZmwfiFPQUZzoy9eBbNRiUTI9CFts2xSztCqOMXExx63lMSm2yEx8RZ
+ 47uvBIdz8YeiA==
+Received: from mail.rosalinux.ru ([127.0.0.1])
+ by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id QX4lvfNGGikh; Mon, 28 Oct 2019 22:38:08 +0300 (MSK)
+Received: from [192.168.1.173] (broadband-90-154-70-115.ip.moscow.rt.ru
+ [90.154.70.115])
+ by mail.rosalinux.ru (Postfix) with ESMTPSA id 996F4D46DFF2F;
+ Mon, 28 Oct 2019 22:38:08 +0300 (MSK)
 Subject: Re: Automating usage of smbspool_krb5_wrapper
-Date: Mon, 28 Oct 2019 09:47:59 +0100
-Message-ID: <1853953.WXbCIQQCWo@magrathea>
-In-Reply-To: <7837d34e-dd46-2f3e-c14c-c9bd6510b940@rosalinux.ru>
+To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
 References: <af8412ee-5493-0406-e95b-8d3175ec069a@rosalinux.ru>
  <dda32395-9ac0-9dad-5528-7f284f5101df@rosalinux.ru>
  <7837d34e-dd46-2f3e-c14c-c9bd6510b940@rosalinux.ru>
+ <1853953.WXbCIQQCWo@magrathea>
+Message-ID: <f21e078f-669f-6590-c0a1-f450f72200be@rosalinux.ru>
+Date: Mon, 28 Oct 2019 22:38:08 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
+In-Reply-To: <1853953.WXbCIQQCWo@magrathea>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: ru-RU
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,63 +74,105 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Mikhail Novosyolov via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Monday, 28 October 2019 08:58:26 CET Mikhail Novosyolov via samba-techni=
-cal=20
-wrote:
-> 28.10.2019 10:44, Mikhail Novosyolov =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
-> > <...>
-> > There are 2 possible solutions:
-> >=20
-> > 1) either patch source3/client/smbspool_krb5_wrapper.c to "goto
-> > smbspool;" if env does not contain "negotiate" instead of chekcing to
-> > be either null or 0 - how correct will this be?
->=20
-> I mean this:
->=20
-> diff --git a/source3/client/smbspool_krb5_wrapper.c
-> b/source3/client/smbspool_krb5_wrapper.c
-> index bff1df417e8..000a613291e 100644
-> --- a/source3/client/smbspool_krb5_wrapper.c
-> +++ b/source3/client/smbspool_krb5_wrapper.c
-> @@ -149,7 +149,7 @@ int main(int argc, char *argv[])
->          env =3D getenv("AUTH_INFO_REQUIRED");
->=20
->           /* If not set, then just call smbspool. */
-> -       if (env =3D=3D NULL || env[0] =3D=3D 0) {
-> +       if (env =3D=3D NULL || env =3D=3D "none" || env[0] =3D=3D 0) {
->                  CUPS_SMB_DEBUG("AUTH_INFO_REQUIRED is not set - "
->                                 "execute smbspool");
->                  goto smbspool;
+28.10.2019 11:47, Andreas Schneider =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
+> On Monday, 28 October 2019 08:58:26 CET Mikhail Novosyolov via samba-te=
+chnical
+> wrote:
+>> 28.10.2019 10:44, Mikhail Novosyolov =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
+>>> <...>
+>>> There are 2 possible solutions:
+>>>
+>>> 1) either patch source3/client/smbspool_krb5_wrapper.c to "goto
+>>> smbspool;" if env does not contain "negotiate" instead of chekcing to
+>>> be either null or 0 - how correct will this be?
+>> I mean this:
+>>
+>> diff --git a/source3/client/smbspool_krb5_wrapper.c
+>> b/source3/client/smbspool_krb5_wrapper.c
+>> index bff1df417e8..000a613291e 100644
+>> --- a/source3/client/smbspool_krb5_wrapper.c
+>> +++ b/source3/client/smbspool_krb5_wrapper.c
+>> @@ -149,7 +149,7 @@ int main(int argc, char *argv[])
+>>           env =3D getenv("AUTH_INFO_REQUIRED");
+>>
+>>            /* If not set, then just call smbspool. */
+>> -       if (env =3D=3D NULL || env[0] =3D=3D 0) {
+>> +       if (env =3D=3D NULL || env =3D=3D "none" || env[0] =3D=3D 0) {
+>>                   CUPS_SMB_DEBUG("AUTH_INFO_REQUIRED is not set - "
+>>                                  "execute smbspool");
+>>                   goto smbspool;
+> This is obviously wrong :-)
+>
+> Did you see the code below? The question is if we should map
+>
+> AUTH_INFO_REQUIRED=3Dnone
+>
+> to anonymous. I've created a patchset you can find here:
+>
+> https://git.samba.org/?p=3Dasn/samba.git;a=3Dshortlog;h=3Drefs/heads/ma=
+ster-smbspool
+>
+>
+> However you need to try all combinations, username/password, kerberos a=
+nd none
+> for anonymous.
 
-This is obviously wrong :-)
+Thank you! I did not test these patches yet, first tried to understand=20
+how it works.
 
-Did you see the code below? The question is if we should map
+Could you please explain a bit how it works?
 
-AUTH_INFO_REQUIRED=3Dnone
+About smbspool.
 
-to anonymous. I've created a patchset you can find here:
+I see that AUTH_INFO_REQUIRED =3D=3D NULL (not set) and=20
+AUTH_INFO_REQUIRED=3D"none" are treated differently.
 
-https://git.samba.org/?p=3Dasn/samba.git;a=3Dshortlog;h=3Drefs/heads/master=
-=2Dsmbspool
+Code of smbspool seems to try to guess authentication method if=20
+AUTH_INFO_REQUIRED =3D=3D NULL. If username for authentication was provid=
+e,=20
+it will do the same as in case of=C2=A0 AUTH_INFO_REQUIRED =3D=3D "userna=
+me,=20
+password"
+[ but will not print "DEBUG: Try to connect using username/password=20
+...\n", maybe also print it? ].
+
+If AUTH_INFO_REQUIRED =3D=3D NULL && ( username =3D=3D NULL || usernames'=
+s=20
+kerberos ccache is not valid ), then NT_STATUS_ACCESS_DENIED will be=20
+returned. Why are you sure that it is not an anonymous connection if=20
+AUTH_INFO_REQUIRED was not set? Does a situation with not set=20
+AUTH_INFO_REQUIRED ever happen in CUPS? If it does, when does it happen?=20
+I could not find any documentation and source code is not very clear.
 
 
-However you need to try all combinations, username/password, kerberos and n=
-one=20
-for anonymous.
+As for smbspool_krb5_wrapper.
 
+cmp =3D strcmp(env, "negotiate");
+if (cmp !=3D 0) {
+ =C2=A0=C2=A0=C2=A0 =C2=A0CUPS_SMB_ERROR("Authentication unsupported");
+ =C2=A0=C2=A0=C2=A0 =C2=A0fprintf(stderr, "ATTR: auth-info-required=3Dneg=
+otiate\n");
+ =C2=A0=C2=A0=C2=A0 =C2=A0return CUPS_BACKEND_AUTH_REQUIRED;
+}
 
-	Andreas
+If I understood corretly, this code will be executed after all other=20
+_known_ possible values of variable AUTH_INFO_REQUIRED were tried.=20
+CUPS_BACKEND_AUTH_REQUIRED will be returned if AUTH_INFO_REQUIRED is set=20
+to a not known value. And this value seems to be possible not know, e.g.=20
+job.c (https://github.com/apple/cups/blob/master/scheduler/job.c#L1017)=20
+in cups can work with situations when it hasup up to 4 comma-separated=20
+components, I don't know examples, but now smpspool_krb5_wrapper will=20
+return CUPS_BACKEND_AUTH_REQUIRED.
 
+If we intend to make smbspool_krb5_wrapper universal, I think "goto=20
+smbspool;" should be done in cases of not clear AUTH_INFO_REQUIRED, not=20
+exit with error.
 
-=2D-=20
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
+Sorry if I misunderstood something. Thank you for quick patches!
 
 
