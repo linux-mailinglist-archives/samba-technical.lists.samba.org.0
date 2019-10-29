@@ -2,47 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19745E8286
-	for <lists+samba-technical@lfdr.de>; Tue, 29 Oct 2019 08:30:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86507E84AB
+	for <lists+samba-technical@lfdr.de>; Tue, 29 Oct 2019 10:46:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=/ac4vuD804oOtKgm30dOwQxJgXqApEw6ymN5eOSPhx8=; b=PC+xFmB/y3DzL95UiTaWFgF4rz
-	ZkklQLgel7Gx2GiYI6EHskTuU8yox/3g/X0IA6PKTLTjda+OVJscsqrSLL43GSAL7wBJbbGAzQZJb
-	RlAlqc2+Hw3B5/4C1z1RlGKt0urFxE3zxsY9DjUni/6LwY6TTMnYPIqKIAiTQOXmsnyRNseHc39FV
-	gzfyrn72emDjildQ0ty9DVrhmabNkATKvnRb16B9bz4Lg7t+mogaCh1MesqZPSwmhz1FxvUEt+q4C
-	S2bTzAwNpoyn1rMzhbdLtNpgU62tq8V2WUfgj/sNxoHRFDICJRLZqXWU33g9uRRMylhgsPPStORD0
-	QjM5GYdQ==;
-Received: from localhost ([::1]:28030 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=t5X2QULHcclP1ZE3iEn196JZxL2P5kbiOS3a+vePxf0=; b=ghFFe8PdDkCifDc9PlNrNBnQcn
+	dQVYdxNAG40J6flVK5TLEQrlVPIqAPdJWqEAf3gE1oAdKTNTbfE6O5gxpkBn1HsO9PRK59ItPiQde
+	79FjHuQ9i6r4WWuh0abNDSxQjZkpbdEnyUGBvUykipE9t+EAYT92oLLyhDAzjyy0KFqhTumN6CjU9
+	1UOuGohSy8+p3YPlBgdS173k5SvJlkhUSmFRPi3lQzz7UjpXkfOS7/7NUljfbxVtQ5dwdM7P0qoFz
+	mkDze8Z+ZArSPV3iYlhDjv+AZ21EXe8/prC/sZdSKgi4a02uNy6/K27RN7Rm0woolVK7EFIE/SLkB
+	J9CpBPeQ==;
+Received: from localhost ([::1]:40702 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iPLxF-00365k-A7; Tue, 29 Oct 2019 07:30:13 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20414) 
+	id 1iPO4Y-0038H0-7H; Tue, 29 Oct 2019 09:45:54 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11844) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iPLwy-00365c-Kv
- for samba-technical@lists.samba.org; Tue, 29 Oct 2019 07:29:59 +0000
+ (Exim) id 1iPO4Q-0038GK-IT; Tue, 29 Oct 2019 09:45:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=/ac4vuD804oOtKgm30dOwQxJgXqApEw6ymN5eOSPhx8=; b=JWseoKahNlwdK0NlTpAYoB7DFL
- tywDr50nAlFLbFHFBOD9bzkaeMvnF1nAwmGys3FeBLSGfc40DNZ8VQpDvPP7PfHwFIcWcE+Lxzo+F
- mYDkvtQwvXnzrAWcSkBY6OHl79/LU1/1W4/QOI8VaGxoKJ2FrMTPXsjsF3asBZUIxohr7SAxSmLF6
- LjGVAzs1UsRcGoJNuSKLpF4luyNpboRozJZi/JTI2qk0VxU1Bouz+6k5/bpUbGxzlKYwNH7gIzzyb
- i8Yf6ktGXfX/r1n2H3HpZ4MoaBOOtexJDkh+fVBsscAgtU9uVE50nz4WNxOmXRuVAwDZPsUfQWHat
- BaxDDdk1JKohiVNeE860mnnjxGL1W5VfdywKPqYIU+c7zsh8k73fZFKLW/fZ5SsxRTd2ANOv+oLf+
- /PZ0DgFxZQfbiOUH7sJZNX/Zz9wrA+0fbie3hYjrCftGBd5YqfzQcFOb6iblvZ5EVH4E7Kp+1Xrwd
- tqmODHu8aFm7FLWBbL/kJqie;
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=t5X2QULHcclP1ZE3iEn196JZxL2P5kbiOS3a+vePxf0=; b=ukTMydz9tLUtvtIxHjH9UxB99r
+ sJMV+dcKbtjWyZk2zPqJ6Bn1P/LRj74bGIXQwjx8I5ED1tmhuyjLzJExILp2uCAzQTZpXXdPBmNBk
+ ds/ryy1HrAeyeufLxobkgpWRKym8tQ9FMKKe4gnz20/0hzYMqh4h0zyvjgFoh3bNaoe1ycwKvnb+5
+ TeqmVR4v8ePPMV1bFdGmjWyCcWCsoaYiiqDqVdIlXtoKymtJC2k1+PmPeQu3qs46gIFOKW+kcLThH
+ pcUa3YGkvqfvKRJe44b1peJgi8PwtAjGHD4raVtlNHBlJPgLzcDHWtEXSBZwIH/g2qn6llALZfEMI
+ 0aEuzt4c0+YGb6/EwwzLuXOcCEFyHceE67PzrOZ2KPVuNAfxLZVoL35H3QqlsOA1I/2A1UW8ZAZlB
+ oJSpHQgkMvj44SJ/20Q4ZgjZM1WqNH/eQkDTP6m9JcZXvvxnXEOe20b+ypamT0gLWFmhc2kMqhSvD
+ N/OqopM5Y9/yWfQwO0yQVEuA;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iPLwx-0003ed-4q; Tue, 29 Oct 2019 07:29:55 +0000
-To: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
-Subject: Re: Automating usage of smbspool_krb5_wrapper
-Date: Tue, 29 Oct 2019 08:29:53 +0100
-Message-ID: <18291618.dcJLbluVCs@magrathea>
-In-Reply-To: <f21e078f-669f-6590-c0a1-f450f72200be@rosalinux.ru>
-References: <af8412ee-5493-0406-e95b-8d3175ec069a@rosalinux.ru>
- <1853953.WXbCIQQCWo@magrathea>
- <f21e078f-669f-6590-c0a1-f450f72200be@rosalinux.ru>
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iPO4P-0004a1-Nx; Tue, 29 Oct 2019 09:45:45 +0000
+Date: Tue, 29 Oct 2019 10:45:44 +0100
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.11.2, 4.10.10 and 4.9.15 Security Releases
+ Available
+Message-ID: <20191029094542.GA9986@carrie2>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="huq684BweRXVnRxX"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,91 +55,128 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Monday, 28 October 2019 20:38:08 CET Mikhail Novosyolov wrote:
-> 28.10.2019 11:47, Andreas Schneider =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
-> > On Monday, 28 October 2019 08:58:26 CET Mikhail Novosyolov via
-> > samba-technical>=20
-> > wrote:
-> >> 28.10.2019 10:44, Mikhail Novosyolov =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
-> >>> <...>
-> >>> There are 2 possible solutions:
-> >>>=20
-> >>> 1) either patch source3/client/smbspool_krb5_wrapper.c to "goto
-> >>> smbspool;" if env does not contain "negotiate" instead of chekcing to
-> >>> be either null or 0 - how correct will this be?
-> >>=20
-> >> I mean this:
-> >>=20
-> >> diff --git a/source3/client/smbspool_krb5_wrapper.c
-> >> b/source3/client/smbspool_krb5_wrapper.c
-> >> index bff1df417e8..000a613291e 100644
-> >> --- a/source3/client/smbspool_krb5_wrapper.c
-> >> +++ b/source3/client/smbspool_krb5_wrapper.c
-> >> @@ -149,7 +149,7 @@ int main(int argc, char *argv[])
-> >>=20
-> >>           env =3D getenv("AUTH_INFO_REQUIRED");
-> >>          =20
-> >>            /* If not set, then just call smbspool. */
-> >>=20
-> >> -       if (env =3D=3D NULL || env[0] =3D=3D 0) {
-> >> +       if (env =3D=3D NULL || env =3D=3D "none" || env[0] =3D=3D 0) {
-> >>=20
-> >>                   CUPS_SMB_DEBUG("AUTH_INFO_REQUIRED is not set - "
-> >>                  =20
-> >>                                  "execute smbspool");
-> >>                  =20
-> >>                   goto smbspool;
-> >=20
-> > This is obviously wrong :-)
-> >=20
-> > Did you see the code below? The question is if we should map
-> >=20
-> > AUTH_INFO_REQUIRED=3Dnone
-> >=20
-> > to anonymous. I've created a patchset you can find here:
-> >=20
-> > https://git.samba.org/?p=3Dasn/samba.git;a=3Dshortlog;h=3Drefs/heads/ma=
-ster-smbs
-> > pool
-> >=20
-> >=20
-> > However you need to try all combinations, username/password, kerberos a=
-nd
-> > none for anonymous.
->=20
-> Thank you! I did not test these patches yet, first tried to understand
-> how it works.
->=20
-> Could you please explain a bit how it works?
 
-That's a good question as documentation from CUPS side is missing. So we ne=
-ed=20
-to find out what CUPS does and then try to write tests for it if possible.=
-=20
-This allows us to make sure we work correctly. The repo above shows you whe=
-re=20
-the test is in the samba source code. I've tried to add more tests in the p=
-ast=20
-to avoid regressions and verify we work correctly. This needs to be extende=
-d=20
-as much as possible.
+--huq684BweRXVnRxX
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Release Announcements
+---------------------
+
+These are security releases in order to address the following defects:
+
+o CVE-2019-10218: Client code can return filenames containing path separato=
+rs.         =20
+o CVE-2019-14833: Samba AD DC check password script does not receive the fu=
+ll
+		  password.
+o CVE-2019-14847: User with "get changes" permission can crash AD DC LDAP s=
+erver
+		  via dirsync.
+
+=3D=3D=3D=3D=3D=3D=3D
+Details
+=3D=3D=3D=3D=3D=3D=3D
+
+o  CVE-2019-10218:
+   Malicious servers can cause Samba client code to return filenames contai=
+ning
+   path separators to calling code.
+
+o  CVE-2019-14833:
+   When the password contains multi-byte (non-ASCII) characters, the check
+   password script does not receive the full password string.
+
+o  CVE-2019-14847:
+   Users with the "get changes" extended access right can crash the AD DC L=
+DAP
+   server by requesting an attribute using the range=3D syntax.
+
+For more details and workarounds, please refer to the security advisories.
 
 
-The two patches were just a quick shot.
+Changes:
+--------
+
+o  Jeremy Allison <jra@samba.org>
+   * BUG 14071: CVE-2019-10218 - s3: libsmb: Protect SMB1 and SMB2 client c=
+ode
+     from evil server returned names.
+
+o  Andrew Bartlett <abartlet@samba.org>
+   * BUG 12438: CVE-2019-14833: Use utf8 characters in the unacceptable
+     password.
+   * BUG 14040: CVE-2019-14847 dsdb: Correct behaviour of ranged_results wh=
+en
+     combined with dirsync.
+
+o  Bj=C3=B6rn Baumbach <bb@sernet.de>
+   * BUG 12438: CVE-2019-14833 dsdb: Send full password to check password
+     script.
 
 
-	Andreas
+#######################################
+Reporting bugs & Development Discussion
+#######################################
 
-=2D-=20
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the "Samba 4.1 and newer" product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
 
 
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+        https://www.samba.org/samba/history/samba-4.11.2.html
+        https://www.samba.org/samba/history/samba-4.10.10.html
+        https://www.samba.org/samba/history/samba-4.9.15.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--huq684BweRXVnRxX
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCXbgKRAAKCRAoaL1+KxeT
+UdXwAKCK2Imbm9RV5isSw+2LhnNSbzSTcgCgij3VLQrVHGEzsLnR5N9MNz37upI=
+=9NGk
+-----END PGP SIGNATURE-----
+
+--huq684BweRXVnRxX--
 
