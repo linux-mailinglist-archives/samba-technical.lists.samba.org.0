@@ -2,59 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56AE1E920A
-	for <lists+samba-technical@lfdr.de>; Tue, 29 Oct 2019 22:30:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E686CE93B9
+	for <lists+samba-technical@lfdr.de>; Wed, 30 Oct 2019 00:33:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=onRtbi3f4yy2K0UrY6vCgN6n1D2jD32VR3Wmhxjt+rY=; b=e7fJVF5L1Izvwb3NCst7gpV1K9
-	Eo9Mzt+cTL22iiJqnbKv9MKZIx/mUyXtuF5DajeTYXhM6tXImLtdCWKrOTBjxZoQrjv8gih2i/k8t
-	nZOGAeSvPDXieF4sjuWVsKtiVjlNYJylddy86CqbPmPs7aKzJxFWo/l+aK4oK0sxA/7dd5ZHtOCXT
-	1IPKhNGyBp1wWWaXoQxs3RrhJr7RnS7CeEgMglLFCoP2ah+PNIb2zeDEmsaRHk0wLTWeT1nubG3i9
-	8wljKV4BSMclgFFu4GSHiDAMAZigozC54pxoaF2Bf+RO7wEHdYfjpsNo48usUsaWvHHxdnN6knilT
-	LRryLYgw==;
-Received: from localhost ([::1]:22018 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=Uzo7IugC/7RMwsSOp68I2uQRbufQTgfg0AIBCMLyhWM=; b=rde4Nj6+IEd55o+NTjQMgiG65g
+	lRMpWmBaDJb5SeH5qq+P3td0REtU5n/fS9oAbbOuHVpWmwVbQk9s3M2hTFDcmWR2ldvp5gXPfKMbB
+	q2YtoFyTsB1wdLQTNt3MAWTmiwHNy341E2GzCbcDs9mtXFPa04onFUOypjKV4dk7z34aop+P44/4M
+	ezBWLyqx1OUhgxuR94GoNykZNmrHbg+BIJw24oGJQG2R4nvqJmYYwRSKQ1BZIBVbuX57cuqecECZJ
+	7E0lLNyziBtpsMTLszxWBuX133mgqeRkNnUjfuFRK6scd2eGB7sRgIJde45WoNnj86GjWdU83IC1b
+	yLN4GPRw==;
+Received: from localhost ([::1]:35330 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iPZ3k-003Rxw-E2; Tue, 29 Oct 2019 21:29:48 +0000
-Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131]:36523) 
+	id 1iPayN-003UWC-Un; Tue, 29 Oct 2019 23:32:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26624) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iPZ3f-003Rwm-PI
- for samba-technical@lists.samba.org; Tue, 29 Oct 2019 21:29:46 +0000
-Received: by mail-lf1-x131.google.com with SMTP id u16so11671219lfq.3
- for <samba-technical@lists.samba.org>; Tue, 29 Oct 2019 14:29:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=onRtbi3f4yy2K0UrY6vCgN6n1D2jD32VR3Wmhxjt+rY=;
- b=TK7fIRmQ27W61vK/jiwqAYOOGsF7o08hLMpCVho59pXtnlEfyBEKXVrDoCXkSEPggH
- K2kiXJL25tlIPXpw6rljYtqcukGX5UAqm+mSJ+KXpKdCAtBTmSyZ8HpYwr8APT42sjT+
- h1RxToeP10hQHHHTG5wm5ZNBsZG0M6vEMLePrJ1sUK5Of50eci4N6XoPXO80qTsb82nr
- nDzwhwfqbdFY2TuAFPzR2TjbJfJOiS/FlIF1kHqVW2G3BIllhczYVYd6vuK1b1AxsDP3
- 0wgqk8YPl3YfTtSnj5dKSlK0is9BxJtQMm+jSkfrWd4I9+XyspjIoS9Zp1RLbBWbfWqI
- epVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=onRtbi3f4yy2K0UrY6vCgN6n1D2jD32VR3Wmhxjt+rY=;
- b=MB/67vqAhmkdMp4M98huLu5dwAsDuRtYa/Bimec0uaUcnwSkkPqIogw/bYR4a8CkKO
- LEeSZXm9MGuDSA+1kSHCX36riNQ+Cabg0TJsuTAmeQBHrZjFmMx9Io7J+luECqd6zVXA
- cAEcxCVil8ZqPYkJ2kzuHxJ5wF1bWkZfrMJYfWhcY9UL+AqBOxjpF/gNZhC3OO1uh4LF
- iDL3EjAbdECEQcELOrtyDotsVHxXr4InfjU5J9rYqlN5MsI8gK5ztOGex3npVtFUjb4l
- UCtqWNNOmaxl5G8zvEEKQzsV15k8j9tPEagHG63BHZkKQuc5PcWZpZtsmPchwA7XTj0S
- oSSw==
-X-Gm-Message-State: APjAAAWx2+RueC8wuqfQpq+eWaWUfUpUhAoeGPN8XsmrrmcpSY5/UUU+
- 8kXNbDUO1YX5hnNe6r3uHePUUnMRpUC3oebxeRA=
-X-Google-Smtp-Source: APXvYqwlv2dBrZu7HkymCDOAzGdsiDCdvEpUyh1bsoytdoUE9XkES7GE0yS+ur6TtmQhhSlIEZlRjS41W/YTpedac0k=
-X-Received: by 2002:a19:cc07:: with SMTP id c7mr3826277lfg.107.1572384582812; 
- Tue, 29 Oct 2019 14:29:42 -0700 (PDT)
+ (Exim) id 1iPayJ-003UW5-Fl
+ for samba-technical@lists.samba.org; Tue, 29 Oct 2019 23:32:21 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=Uzo7IugC/7RMwsSOp68I2uQRbufQTgfg0AIBCMLyhWM=; b=sLhYkoV67kcsFIEwM6V2v1ECjo
+ wvNYkDJvJ/O43Er4KzdCV36OqYTXgayRJYIhTCA1zcY2mSitMNxmfHqEtoWtDlXxGrk1WtBQN/lql
+ ehqTPh7ymEzxlCp/U7aik11YDJFko8Z91yh66cKS/LRf9J5TC22jJoUeByfO+U2xBgs1oTR3qidNw
+ w65wWHZJGiB94WG1Bq0fWOSgFtY7DYZddWqBpRBwGYJkjs130KcwMshDvDPPTwaQR4yqEAP4PCJJd
+ sxl94I+3PDKhlj6W2gKRCwWRxkFsGp2Mzuvssf2vbPd3fzBRHS0g1TsWPaVxUE4Vb20CHpRsTjUCP
+ P5grUa1aRK/k8sEX5whXcpafv1e25jFLNGtbQRfbFYEM6QDtOtTFDwa5K6S1Gy4k4fdkGTNUS2tBH
+ OEmJJfz2q8rfDljwckohOVykE1DYetoFnwq/tTcuGCeIkQ03f1d85JApqulsVPjvyrDbd4LX/83Oq
+ 4wdF01B1X4PKqHgINJcm2Gco;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1iPayI-0003az-LL; Tue, 29 Oct 2019 23:32:19 +0000
+Date: Tue, 29 Oct 2019 16:32:16 -0700
+To: Uri Simchoni <uri@samba.org>
+Subject: Re: Q: how to build with system Heimdal
+Message-ID: <20191029233215.GA22880@samba.org>
+References: <07c7a4cf-b874-d9ae-ce9f-909345b27265@samba.org>
+ <20191029171833.GA13244@samba.org>
+ <5d738a0a-13c5-7ac0-4cc4-3aa6e6c81627@samba.org>
 MIME-Version: 1.0
-References: <CAC-fF8Tp4FsXokCrDkXFrdD2PhFs4wVpqyjEWDjpj4smam8VXA@mail.gmail.com>
- <f1c0f4c5-cde1-6fb6-b481-adea7a8be5eb@samba.org>
-In-Reply-To: <f1c0f4c5-cde1-6fb6-b481-adea7a8be5eb@samba.org>
-Date: Tue, 29 Oct 2019 22:29:31 +0100
-Message-ID: <CAC-fF8QxakMBmqWMwDkmw9_oE8mNM_MgP8qBOzmX_v-wzXTJRw@mail.gmail.com>
-Subject: Re: kdc: allow referrals for krbtgt in transitively trusted realm
-To: Stefan Metzmacher <metze@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <5d738a0a-13c5-7ac0-4cc4-3aa6e6c81627@samba.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,27 +57,92 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@gmail.com>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christof Schmitt <cs@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi
+On Tue, Oct 29, 2019 at 08:06:42PM +0200, Uri Simchoni wrote:
+> On 29/10/2019 19:18, Christof Schmitt wrote:
+> >On Fri, Oct 25, 2019 at 12:33:33AM +0300, Uri Simchoni via samba-technical wrote:
+> >>Hi,
+> >>
+> >>How should I build Samba with system heimdal? Should this do the trick:
+> >>./configure --with-system-heimdalkrb5 --without-ad-dc
+> >>make
+> >>
+> >>(assuming I have Heimdal installed, of course)
+> >>
+> >>I tried this one on master, configure succeeds and the build fails
+> >>like so (kind of surprising that it tries building system heimdal):
+> >>
+> >>waf: Entering directory `/home/vagrant/samba/bin/default'
+> >>         Selected system Heimdal build
+> >>[190/192] Compiling source4/heimdal/lib/vers/print_version.c
+> >>21:26:51 runner ['/usr/bin/gcc', '-D_SAMBA_BUILD_=4',
+> >>'-DHAVE_CONFIG_H=1', '-MMD', '-D_GNU_SOURCE=1',
+> >>'-D_XOPEN_SOURCE_EXTENDED=1', '-DHAVE_CONFIG_H=1', '-fPIC',
+> >>'-D__STDC_WANT_LIB_EXT1__=1', '-D_REENTRANT',
+> >>'-fstack-protector-strong',
+> >>'-DSTATIC_HEIMDAL_VERS_HOSTCC_MODULES=NULL',
+> >>'-DSTATIC_HEIMDAL_VERS_HOSTCC_MODULES_PROTO=extern void
+> >>__HEIMDAL_VERS_HOSTCC_dummy_module_proto(void)',
+> >>'-Isource4/heimdal_build', '-I../../source4/heimdal_build',
+> >>'-Iinclude/public', '-I../../include/public', '-Isource4',
+> >>'-I../../source4', '-Ilib', '-I../../lib', '-Isource4/lib',
+> >>'-I../../source4/lib', '-Isource4/include',
+> >>'-I../../source4/include', '-Iinclude', '-I../../include',
+> >>'-Ilib/replace', '-I../../lib/replace', '-I.', '-I../..',
+> >>'../../source4/heimdal/lib/vers/print_version.c', '-c', '-o/home/vagrant/samba/bin/default/source4/heimdal/lib/vers/print_version.c.1.o']
+> >>In file included from ../../source4/heimdal_build/roken.h:156:0,
+> >>                  from ../../source4/heimdal/lib/vers/print_version.c:39:
+> >>../../source4/heimdal/lib/roken/roken.h.in:282:10: fatal error:
+> >>roken-common.h: No such file or directory
+> >>  #include <roken-common.h>
+> >>           ^~~~~~~~~~~~~~~~
+> >>compilation terminated.
+> >
+> >This should work, but it broke back with Samba 4.10. The build works
+> >with Samba 4.9. I am trying to bisect and debug this problem now.
+> >
+> >Christof
+> >
+> 
+> Oh, thanks! I didn't want to start actually debugging this before
+> being sure I'm not missing some basic thing. Do note however that
+> all of waf has been replaced for 4.10, so maybe it's more a matter
+> of getting this back in shape than bisecting.
+> 
+> I wanted to push forward another cross-compilation patch that
+> involves removal of an explicit path of Heimdal headers, so I wanted
+> to see if that breaks system-heimdal build and then realized it's
+> broken before the patch.
 
-On Tue, Oct 29, 2019 at 3:50 PM Stefan Metzmacher <metze@samba.org> wrote:
->
-> > The attached poc patch solves the bug, but I think not efficient (and
-> > may leak?). I think what I need is, to find out efficiently in
-> > samba_kdc_lookup_realm(krbtgt) whether the realm is directly trusted
-> > in which case return 0, or only transitively trusted and then return
-> > WRONG_REALM with referral to intermediate realm.
->
-> I recently hit the same problem
-> and created a different fix.
->
-> Can you have a look?
-> It would be good to get this finally fixed.
+So far it looks like the problem is that the heimdal include files are
+in /usr/include/heimdal (at least in the Ubuntu 18.04 that i am using
+for debugging).
 
-Lovely, was fun to remember this, looks good to me!
+Deleting source4/heimdal_build/krb5-types.h and adding this line allows
+the system heimdal build to succeed:
+
+--- a/wscript_configure_system_heimdal
++++ b/wscript_configure_system_heimdal
+@@ -18,6 +18,7 @@ if krb5_config:
+             elif l.startswith("includedir="):
+                 include_path = l.strip()[len("includedir="):]
+                 heimdal_includedirs.append(include_path)
++                conf.ADD_EXTRA_INCLUDES(include_path)
+                 conf.define('HEIMDAL_KRB5_TYPES_PATH',
+                             include_path + "/krb5-types.h")
+     finally:
+
+I am not sure if that is the cleanest solution, maybe someone with more
+knowledge about waf and the build could provide input.
+
+I have not done further testing. Building with the internal heimdal
+library and MIT would be the next steps. Ideally we would also establish
+a system heimdal build in gitlab.
+
+Christof
 
