@@ -2,46 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C04DFEA220
-	for <lists+samba-technical@lfdr.de>; Wed, 30 Oct 2019 17:55:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B11D7EA46E
+	for <lists+samba-technical@lfdr.de>; Wed, 30 Oct 2019 20:51:34 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=lNInmEhxU9AXJlnTc4dJhw9zeRR4kEfEC/fqgsKsevM=; b=nNZQOrrRe3xzyE5SuSoQq2ZgdZ
-	0hH6wR0VydDH7UedgLm4MrABOtxgpstCJj23JVgssFVuyh3p9ucsn7vjOCO6qpOVV/sd3+enYMeBZ
-	niyrIzXiv192yFzcigAvSJ5yjg45jG02KCEK0ApV/TAd9TxfxFk+J7bB+ln9ejXi8hdgH0AjENXYq
-	m+jWgVTZWr/y51GqDurqC7A/t0joyntS0ey/iMbubfIV/x1lxOPZhepiDue+QeC5lTuiw2PJN0CC7
-	N76zzCl/0mFZLMBzEX4/2WgPdQCUTnHFpmJ8vFAF1YEWIGG2DrIuFxVwxsj40k24ledkPvX5SkAUj
-	o6CNAvmA==;
-Received: from localhost ([::1]:40510 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=zMcXXnKm+ObFHdiJYvOxGL3b2NlCh0XD3biRmKUgej4=; b=kDCDatCszT7PCIagXEPxZWc2C1
+	zd0t2CPMCdEbYV18vDt4cc1myTYUrgpBE5aF8i1q190k9SyWzy2JaET/uUHJd2dLFdsxLlSqA4ZV0
+	yYdLgKZEdwENTLnakMbcyMoBXRphq8WYLoS/F/KRBLVkciogSm10jnTTcfakQhC04i5XLi9RZbyU+
+	V/Xo1u3bhC81bkL633F8zT/nkObZlaVHAupC0qlhsCZeJcS3QEUvmIaQMW6wGDYXKYhoYqrlaP6t5
+	eJsEuKNu8IG5tEBm3eMgIkIHDkXJ5DFEpFXuwHvaFMtUetQn1lx1DSqgMVBKZhZ2ejow65iCz7dj7
+	TECYo9rw==;
+Received: from localhost ([::1]:35708 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iPrFx-003hUu-48; Wed, 30 Oct 2019 16:55:37 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21430) 
+	id 1iPtzR-003o1v-Cw; Wed, 30 Oct 2019 19:50:45 +0000
+Received: from mail-il1-x130.google.com ([2607:f8b0:4864:20::130]:40414) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iPrFr-003hTM-Kj
- for samba-technical@lists.samba.org; Wed, 30 Oct 2019 16:55:33 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=lNInmEhxU9AXJlnTc4dJhw9zeRR4kEfEC/fqgsKsevM=; b=pg0vU0edbyWR09ZZBRyslU+LwT
- R17+nuWCjxGHSkn0aKhRyXGG/UnLc36AZ5mvr9jrNDGXuGBZ3Xh+O8GDxxxA2txoaPi7x1Rv/qyos
- VGbv0qppk1ewpniqKxtv0Ym01wK2hOSDPuFi35XtLgRWZ4zfQ65XpIk0pFmIBvGO/olG8Dudzd6aB
- JDHGIlcW8Wk46AVRUcLlMa6YsuIMwFECm3FdDjqF2g3WAmOF6yjD0n89mbxLGoSYMX4r80H6ae6Vl
- AwBujoAI102DCw5TTxdMZApLN/zDkSCZ1joU9ABn2JsdY2R+wBd8sVeth121gonVm/JKo3FUPPqai
- ohRQuRtQosaNvoGK0RIQxNj53tz6Vada7VWFxCmKzA329UzctaTfCAFUlwP/svBSyd9Fj4aEciy98
- VrI+6zVkK8vvMHmx41MTeqweHHoVqv5lqSFs79ikx+Zh4ghsM+0NejwtJkJXYow5a60OUEPsEqN9U
- DOk0nzYVWV3+Uck70d8em4de;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iPrFo-0003Ic-Rr; Wed, 30 Oct 2019 16:55:29 +0000
-Date: Wed, 30 Oct 2019 18:55:26 +0200
-To: Steve French <smfrench@gmail.com>
-Subject: Re: Samba build error on Fedora 31 can't find 'nsl'
-Message-ID: <20191030165526.GB32459@onega.vda.li>
-References: <CAH2r5msEjOuWumbKQce6ucn6pM2K1CW7iyEwuzj_611E5R7C5w@mail.gmail.com>
+ (Exim) id 1iPtzM-003o1m-6U; Wed, 30 Oct 2019 19:50:42 +0000
+Received: by mail-il1-x130.google.com with SMTP id d83so3247387ilk.7;
+ Wed, 30 Oct 2019 12:50:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=zMcXXnKm+ObFHdiJYvOxGL3b2NlCh0XD3biRmKUgej4=;
+ b=dKvJFkTZ75LRZqPbH4alfouv/IsibSmm/lEkoFydB9eoQsawYqYctqZ8eO9vVj5Bbt
+ O79WdZiQdtI5JZam3XlvQGm69CnbcB7XVkqOVBiBXxNIV5E+aZUXSUv7puaKuttr4FXm
+ bFn4Bss15iPoCHzjRMaHh8r6DPZGB2JgPUgkbXsAq0CmAqfRcwMgGbzdnmoCcEZa/rAT
+ NyMnt++Pn7B+XWgxFg4mo/5JiYM9CTPAZvPD9p1ExlNmGddLGNY0To3bhw50EWgmh79R
+ Wlx5x/EbQpTu5E8I4j4d18Ht2jzyd41/CNi1ruLrP8QjAicmVtQtpWTxkA+9Cz9zP1X+
+ wxRA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=zMcXXnKm+ObFHdiJYvOxGL3b2NlCh0XD3biRmKUgej4=;
+ b=gI0gVooqv8k0AiiyvCgD4ePdFSq834PjP6tNi91msJKS14MzrFnK0ZncURT1qKKjoz
+ HuAmE16e0jjX6cL9IHM6BqrP/OpWiqN4punbUFmXdoaLfFnXjTw0OQE/y5eigm52oo6y
+ AXB9tcp5Vv+5sq5lXdAYW8Z5IMoKerA60oy/SENKA4+Z8zAIErzE5ANM9eLJ1eGEe1zf
+ soclG4zTztx4yS0oFj9XoM6W8ba2Wd6w3OXAeoOUb9u5dwvtNhOBm1L8cFHSJU3iPviR
+ ShjixmA6MN+hkzXPQ61wfrpc16fHrOQb+963wttZ2+vClVaUfq5qbP3eARr8NCQhIKEY
+ 9RsQ==
+X-Gm-Message-State: APjAAAX2xcxxIa8lhOJLyo3vstaY4mW6Sqdg4dZgX2bNKqPUDJgo7BmY
+ 1Ssqb9iWdlkHxS08V+UsVV3M4OEb/3N6eN+zaFrXG23z
+X-Google-Smtp-Source: APXvYqyw53QYZR0waEzsWJW754QKkED96IWUsmF2QIckXxmBJE3LQyHqH19FeKpmY83Ukw32s3LKiqt8bi4e63Qh4EY=
+X-Received: by 2002:a92:1793:: with SMTP id 19mr1972466ilx.3.1572465036980;
+ Wed, 30 Oct 2019 12:50:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAH2r5msEjOuWumbKQce6ucn6pM2K1CW7iyEwuzj_611E5R7C5w@mail.gmail.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
+References: <CAG+HqKTMYkd1ynUUVZrWJy-Lu3vQwe+6kHVrghhnd9s-YAoSCg@mail.gmail.com>
+In-Reply-To: <CAG+HqKTMYkd1ynUUVZrWJy-Lu3vQwe+6kHVrghhnd9s-YAoSCg@mail.gmail.com>
+Date: Wed, 30 Oct 2019 14:50:26 -0500
+Message-ID: <CAH2r5muSXNb5Fas1Qab1a4A-gKX-05c6eyvh0SZXUrO1wkAPvw@mail.gmail.com>
+Subject: Re: After configured server signing, file transfer speed is very slow
+To: VigneshDhanraj G <vigneshdhanraj.g@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,40 +66,74 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexander Bokovoy <ab@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Samba Listing <samba@lists.samba.org>, Andreas Schneider <asn@samba.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On ke, 30 loka 2019, Steve French via samba-technical wrote:
-> Doing a clean build of Samba on Fedora 31 (master from jra's branch of
-> a few months ago) I get this error (worked on Ubuntu) not finding
-> 'nsl' but the package is installed
-> 
-> ./configure --without-ad-dc --with-system-mitkrb5 ; make
-> 
-> [144/144] Creating bin/default/lib/krb5_wrap/krb5samba.vscript
-> [145/147] Compiling lib/replace/cwrap.c
-> [146/147] Compiling lib/replace/replace.c
-> [147/147] Linking bin/default/lib/replace/libreplace-samba4.so
-> /usr/bin/ld: cannot find -lnsl
-> collect2: error: ld returned 1 exit status
-> 
-> 
-> # yum whatprovides '*nsl'
-> Last metadata expiration check: 0:46:54 ago on Wed 30 Oct 2019 10:30:46 AM CDT.
-> libnsl-2.30-5.fc31.i686 : Legacy support library for NIS
-> Repo        : fedora
-> Matched from:
-> Provide    : libnsl = 2.30-5.fc31
-> 
-> Package libnsl-2.30-5.fc31.x86_64 is already installed.
+In my testing signing is slower than encryption (but only when using
+SMB3.1.1 GCM e.g. to Windows or Andreas's Samba GCM branch). With
+Andreas's GCM SMB3.1.1 in Samba, I find there to be no need for
+signing as encryption is faster.
 
-Please use libnsl2-devel.
+On Tue, Oct 29, 2019 at 1:56 AM VigneshDhanraj G via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> Hi Team,
+>
+> After configured server signing as mandatory in smb.conf, file transfer
+> speed has slow down.
+> Almost 90% speed has reducing. Kindly do the needful.
+>
+> Please find the below configuration:
+> [Global]
+> available= yes
+> restrict anonymous= 0
+> server string= Test
+> Workgroup= GNANA
+> netbios name= Test
+> realm= GNANA.COM <http://VIGNESH.COM>
+> password server= 192.168.1.14, *
+> idmap backend= tdb
+> idmap uid= 5000-9999999
+> idmap gid= 5000-9999999
+> idmap config GNANA : backend= rid
+> idmap config GNANA : range= 10000000-19999999
+> security= ADS
+> name resolve order= wins host bcast lmhosts
+> client use spnego= yes
+> dns proxy= no
+> winbind use default domain= no
+> winbind nested groups= yes
+> inherit acls= yes
+> winbind enum users= yes
+> winbind enum groups= yes
+> winbind separator= \\
+> winbind cache time= 300
+> winbind offline logon= true
+> template shell= /bin/sh
+> kerberos method= secrets and keytab
+> map to guest= Bad User
+> host msdfs= yes
+> strict allocate= no
+> encrypt passwords= yes
+> passdb backend= smbpasswd
+> printcap name= lpstat
+> printable= no
+> load printers= yes
+> ntlm auth= Yes
+> server signing= mandatory
+>
+> Thanks,
+> Vignesh.
 
-See https://bugzilla.samba.org/show_bug.cgi?id=13238
+
 
 -- 
-/ Alexander Bokovoy
+Thanks,
+
+Steve
 
