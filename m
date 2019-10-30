@@ -2,48 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22693EA4F5
-	for <lists+samba-technical@lfdr.de>; Wed, 30 Oct 2019 21:47:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2515DEA670
+	for <lists+samba-technical@lfdr.de>; Wed, 30 Oct 2019 23:40:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=CxoMIq22AXFOD8qI+1XjannvF68Kg+xhNaMbH4X5JjE=; b=Sxh1uVnSVkHFYYtPizePJ0KQAQ
-	HJ1Pay37wyJAAYOCVDZeDXK2fMeBQRiz44HrFqD6h1Zo/YSSEs2u8z4r323LAnoDSu/JLgihKn14l
-	pPgJi4MXuP0Lb6sUQMJ0Lc9vmnejA4Jt5fK3GwJjM42hSmaEjcBTV4FeEgi52nxzSdfyKsK7HzpL6
-	kersfaIZ+AjdiNnrdeAB4C5Iuwuoeq8r+AcsaQucjnN/JStnGsUIXRNntVGiGD4YSTsZrr2TGzCZE
-	PBsPFgB55C78eyYWpd3xIr296jF0+kAQzC+v0jGMyxFMuUR1iDBq4SBDWzO5gFYZfSRkp+pW/ZLDe
-	9mgn5Brg==;
-Received: from localhost ([::1]:43276 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=LH6TR3MW+ZckrAzeVBsOlfDjP39KeSHEN7YelfY1IYo=; b=hX2bwwsQCcses9EWR3RnnEAGwW
+	9IDoDjJZFwnqL/W5oLJFz2mrc5Z7UKgKGZH0WRFqL6dGwftlXHxfoJJqxoQf7g0DIt03OHlaQgt23
+	9n0v2d+uEktHB09O1W3D5A17scmMVC97fq/Vo1Rqe3RoJpIHgGBeWZgURLUIOxDLB+YKnGxZ9rPo/
+	RNw/BfBdTjEmrjbNuSEn9oo8r14q13oG4Qdm9LddZbi+ZrPf9SWkl8699FFQvgf6C+1HXhNqiAFnw
+	RBhHryjtjlwlbONuAEXRlRCxWH5p66KzslVfplyACRLfa0qIHV08bJbiC0YQTD8ZkGBsANze24d66
+	hZAPoWlg==;
+Received: from localhost ([::1]:44930 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iPusP-003pIQ-PJ; Wed, 30 Oct 2019 20:47:33 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37462) 
+	id 1iPwco-003qAr-Br; Wed, 30 Oct 2019 22:39:34 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13190) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iPusL-003pIJ-Jt
- for samba-technical@lists.samba.org; Wed, 30 Oct 2019 20:47:31 +0000
+ (Exim) id 1iPwcj-003qAk-MP
+ for samba-technical@lists.samba.org; Wed, 30 Oct 2019 22:39:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=CxoMIq22AXFOD8qI+1XjannvF68Kg+xhNaMbH4X5JjE=; b=NRSa2CJc09pLz/jlADrBRnzSWL
- D+Rmh9rOduaX7dV8DkiYF8SIBQgHo9TuJhL9VLftDJhvBDriI7Ewg4NgO6y6ZJedrQoyeWR+/Y/kw
- 4rewh5VXZU1zeuL7iKs3/OX1m2U6rA+XktbWaxEdcfBj3PzOz//Yj+Q1z8t2n/+LRMagXNmPnP3mz
- LcF81nfZaNsKY7FcggsMe5wDkI7RKCGkwEdGdK9+d9wrQF4A8cYlfWSfEC0PPiDFdCzDTL/2Ps8gq
- fzgj/LrEmCLEGCP82aE/lBfghKvrN+6xgxbET1zsDxgGxYCvgfulrXuchSRDflzBWvVYJsWesmepB
- /CorhglHvlmV4ShmIVEqt5txaVGfFcpx77bOmBTybTrLVPtn9+C9rVUHvVMEfAAWj4b3FtkJOVvUU
- g3FGR/x7wdYQRvVFnr5jx2TX7VKV3Vz8+W5pCjyGkhnpFWW0E/W+fTX2AAUzqUmtyF9N81MG/72Jz
- GRTwMJS/v5ka4Erzq3sq3VTo;
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=LH6TR3MW+ZckrAzeVBsOlfDjP39KeSHEN7YelfY1IYo=; b=hy92NGy2FyJ8YRr/gVyN28rx2O
+ 0awYF8VkqE2glZ76gMRbKk6ajXvRVIpgk8LYXXf/b0prh+VW5e6xajbObrxckVKIjmlJuz/xx++LN
+ ZRctUBfWWGsDcQyNkBUYDSOJFml0FKySD9ZhGl4MZG7oah7/hafzEqVHJ/ZGB3f6bZ2eUp9UMzVaa
+ u2H2IU9fkeqB/+KRxt2hAn7eGaGUG7meas9cIjdP9qGhzIztV1Tlh1agOP/XjjwDUHzL/0MkGL5Ss
+ oZsWRZtE92I8A6yojLQWjcr5P6gHYAuMeO71r9otPDYCbqM8xGS9TmBINME+OW8wWuwNTZuc0RNTn
+ c0UpkKMQzqyN1y5nr1a/C6EHo88Tz13yQJVcnZoBr7RhVzApAoIqHC18cLZgtTEbLp40FcTocFZN0
+ Kku5eeS2xwsNbINPs1OEOSyGJAWDVBbzORUpmqT85qpCI6IOtqQ2LjU0EdCUjGmErTCFWGjhsSaFo
+ Nb9pIog8pf2+5cgM4nvINwrV;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iPusL-0005VR-3k; Wed, 30 Oct 2019 20:47:29 +0000
-Subject: Re: Samba build error on Fedora 31 can't find 'nsl'
-To: Steve French <smfrench@gmail.com>
-References: <CAH2r5msEjOuWumbKQce6ucn6pM2K1CW7iyEwuzj_611E5R7C5w@mail.gmail.com>
-Message-ID: <de5b3be6-e8af-a87d-d307-d212a80027d2@samba.org>
-Date: Wed, 30 Oct 2019 21:47:27 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.0
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1iPwcj-0006z7-0a
+ for samba-technical@lists.samba.org; Wed, 30 Oct 2019 22:39:29 +0000
+Date: Wed, 30 Oct 2019 15:39:25 -0700
+To: samba-technical@lists.samba.org
+Subject: Problem regenerating gitlab docker images
+Message-ID: <20191030223925.GA8185@samba.org>
 MIME-Version: 1.0
-In-Reply-To: <CAH2r5msEjOuWumbKQce6ucn6pM2K1CW7iyEwuzj_611E5R7C5w@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.5.21 (2010-09-15)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,24 +54,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christof Schmitt <cs@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 10/30/19 5:19 PM, Steve French via samba-technical wrote:
-> Doing a clean build of Samba on Fedora 31 (master from jra's branch of
-> a few months ago) 
+Hi,
 
-try rebase on current master. Iirc there were a few patches recently in
-that area by Andreas (and Alexander iirc).
+while fixing the build problem with the system heimdal libraries, i am
+also trying to establish a gitlab test for this build. This requires
+adding the heimdal-multidev package to the Ubuntu images. Regenerating
+the images now fails for CentOS7 and CentOS8, which should not changed.
+I already fixed one problem for CentOS7 to avoid the conflict between
+nettle and compat-nettle.
 
+Now CentOS 7 fails with:
+https://gitlab.com/samba-team/devel/samba/-/jobs/337893367
++ docker build -t samba-ci-centos7 --build-arg
+'SHA1SUM=9dae5d8732853f0025bcf9528e94935f0e7ebada' bootstrap/generated-dists/centos7
+Cannot connect to the Docker daemon at tcp://docker:2375. Is the docker daemon running?
+ERROR: Job failed: exit code 1
 
--slow
+And CentOS 8 with:
+https://gitlab.com/samba-team/devel/samba/-/jobs/337893366
+Error: 
+ Problem: cannot install both glibc-common-2.28-42.el8_0.1.x86_64 and glibc-common-2.28-42.el8.1.x86_64
+  - package glibc-langpack-en-2.28-42.el8_0.1.x86_64 requires glibc-common = 2.28-42.el8_0.1, but none of the providers can be installed
+  - cannot install the best candidate for the job
+  - conflicting requests
 
--- 
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+Does anybody have an idea how to address these?
+
+Christof
 
