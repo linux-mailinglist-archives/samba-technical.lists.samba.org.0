@@ -2,47 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20F60EB8D5
-	for <lists+samba-technical@lfdr.de>; Thu, 31 Oct 2019 22:19:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8D97EB9C2
+	for <lists+samba-technical@lfdr.de>; Thu, 31 Oct 2019 23:39:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=fKSsJBCy9/iqDhyWIRN9uFZlgcJ56RbD8cxsEIs3Xdw=; b=P5w3I+fzD8K3J9nsWeqlkgCVwf
-	VovZhLykN+Xsw+j0fKHWq/tv11BE/Ewtll8bUaOyX5DfXg48+nyYkFxfZJFPST/x88vW7c1ZPET3q
-	9rmaES55Tfk3UHwKRYyHZjmjpnJIXBQMhdzDD/8RzRZm2gd+BWIAyyjRnCBcYSKmwsq8kN73g9vCt
-	tdzUSQP5vIzRIQKLAAsOR8VSJ6vinhhjcxMbw5RlxxLELzPXmLmWF6eIqAouzVSruGUDTNclv4rLD
-	lb9rcDJj8HJOLDILbWsDCbxsBWaHv9h+4zidE/K90rgcxWyR9nB/oDHMpdcc04z7hBJ3UtHXnqJA7
-	cLtRGHhw==;
-Received: from localhost ([::1]:50720 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=DMsu+pzAlqXLFqCFHczAJnKB7kERRvXtZgg7glElDEE=; b=Dxcmuez2y/p67uEL4JVHJWfHqh
+	FLscOMgfcIFy2vbJ1XYqZo45uJn62qphRDhDEN6r+dPqh/GY7CEbb6flreiX/lZAFue2LPXAD52/k
+	eDT9PVMxKqN93B9XVPlRoUjb6KJ8cAjLCL8xXMaHWAc+qAjvlWjPZwh5cyPCIuhcKdBrZvnHjOR8Z
+	/ATfT+CxY7fEAOiHLPftddF4HZl1JO05etHHm3IjE4f2MvvGl0NjNDM9Qb4aDZOf12JEA9N9n1Iwk
+	3c+4kjzozbg1swiEGCFRm4iR7aBQapxYt1MysYzL3tiIvj1tVYORCLCjtZ2eBVfWsUmSMfghz+wIc
+	7Tynq+Ww==;
+Received: from localhost ([::1]:54856 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iQHpf-0043zR-1l; Thu, 31 Oct 2019 21:18:15 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:52888) 
+	id 1iQJ5o-0044zH-Lf; Thu, 31 Oct 2019 22:39:00 +0000
+Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c]:36198) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iQHpa-0043zK-7S
- for samba-technical@lists.samba.org; Thu, 31 Oct 2019 21:18:12 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=fKSsJBCy9/iqDhyWIRN9uFZlgcJ56RbD8cxsEIs3Xdw=; b=Fz7QR2xjf3UxzSjpKrDPJpdgT/
- 0WDwaA1rcWCInZ25tnGVDFBQOYrmLsEUYpBXAkB9trPKRyrIJnvQjd6hi7tyO0kxPR0tdWCbM/0M4
- 1Y3OgnYtYK9/45IxVtj2T4KMGM8B5hJSQU4pB+smCwTUoVG9RpziaEPEhHi9/9rH35/0CiBD1l5WL
- L2e+HJZofApwsLZyvPWJm1NE5W7TSIYqvHVvj+TkIUomPRpB95bgGR2sdySfckVtvA1SEYrNQ2eaY
- fqImttf+WbdtpZ4n3j0aF0CrzV8zfyMaGgLgzOJaoAZKGKeB66s5VVhaYDT/C+oBIHHbn9Qmx12BS
- I+P2BIhbEpeGSsRJhnmFX+7dyS2RjLOYKMmnOWWFjQSGgsPQzJxjwWQD0SFADfBV4OH3EMqJi0Y5D
- +mraRNnCAtOHZC3f7TCk4BNY1OhKB8jbNVzO4qguVam/od13gjfHZaL8Nwynei//Ond/UyPn0MT8e
- /FjqOL/AZSvHq11KIeZ9F0zd;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iQHpY-0002u2-5D; Thu, 31 Oct 2019 21:18:08 +0000
-Date: Thu, 31 Oct 2019 14:18:04 -0700
-To: Andrew Bartlett <abartlet@samba.org>
-Subject: Re: Problem regenerating gitlab docker images
-Message-ID: <20191031211803.GA538@samba.org>
-References: <20191030223925.GA8185@samba.org>
- <138c4d166b885f6ba112f6e74037a1f1c30ea436.camel@samba.org>
+ (Exim) id 1iQJ5l-0044z8-3Q
+ for samba-technical@lists.samba.org; Thu, 31 Oct 2019 22:38:59 +0000
+Received: by mail-lf1-x12c.google.com with SMTP id a6so2503801lfo.3
+ for <samba-technical@lists.samba.org>; Thu, 31 Oct 2019 15:38:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=DMsu+pzAlqXLFqCFHczAJnKB7kERRvXtZgg7glElDEE=;
+ b=NEZIVVJcOEyp+FmstITkLUPvzz9/amNUR4Eb+sTJTAU/6h9jcva0x8v7wuRfSzwIjh
+ 29vRZFNvd0kagZ92Uca7GefZgSX536LI4zoGenuOWd/hcg39WfrKhc0JHhXrjr567IHm
+ YEaPttYRkiBUrhjmF9WmZ5egmPrFiJHSR1a+NbqaKAZ0L8bIRhTdLz/WPfgIyQ7C0l16
+ heKNRoTCVJl/173+aJbBzTFMiBMDd8wvyVp/t45BKJsOADZWKMJWMEsP8c0vUd4xp/RM
+ nRaVFIAVN5T1R7ZX0889H3ArewCkluBM1BkK+Wa0y7Wz09GXDQp9Lo0O9DlrdJaEVzL5
+ NKeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=DMsu+pzAlqXLFqCFHczAJnKB7kERRvXtZgg7glElDEE=;
+ b=irEAqkt2pidGzqn7YDA6FzlSBGZ3wB7AjycFjD1mpCBAwg6g/NJJSPDPtPuvjkD3ax
+ 458M8tOvJcixCllXNo5cXt23aYMJeqEkUxR1Cye/he+hSZlrxZzzrYU9p+4e+CDpqVJt
+ nZHqylh8xvBvK0PlrJUe9A+XJs0PIel3XlV3N2VX4gFTaW0leuQv32UcPqkjxvtVqbEO
+ 5Si7ljwUTC2SZ54m6Bpi28u/WbVg2TGqLCWppjWq475m3BFHZUfe10eM1jWR3QIvoEzO
+ LgiPUgGFjZoCexeErmi5ldq9DV9X6pjfvFWnF5dW3K9l+kKlWU+w7VQxdzc81urRCQV3
+ UleA==
+X-Gm-Message-State: APjAAAW3ccOC3PlE7NRryEM7+6MyLQE/UvZxC7CWLQO8JBgJldJm05cB
+ sOH2Yd7dth+XufXiuDcg6DGPXck12XS2lLfVHw==
+X-Google-Smtp-Source: APXvYqzKd9r93QAg17E/2JmGkVuAU91vw06mrBRJQpRUyQNpII1YFdInRFvW6WXcUMJ9fmuyojM+54xE988qdA6WcEs=
+X-Received: by 2002:ac2:5bc2:: with SMTP id u2mr5097690lfn.173.1572561536258; 
+ Thu, 31 Oct 2019 15:38:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <138c4d166b885f6ba112f6e74037a1f1c30ea436.camel@samba.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+References: <CAH2r5muCW3ow-9UkdtBK9sxRrgK92MjVQZfe6W+DS0XKYVRF9Q@mail.gmail.com>
+In-Reply-To: <CAH2r5muCW3ow-9UkdtBK9sxRrgK92MjVQZfe6W+DS0XKYVRF9Q@mail.gmail.com>
+Date: Thu, 31 Oct 2019 15:38:45 -0700
+Message-ID: <CAKywueRROHSqc+tiggojNabwqOtfcvvTfMPbT6bmS4r9WDEZXw@mail.gmail.com>
+Subject: Re: SMB3 Buildbot regression tests added
+To: Steve French <smfrench@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,63 +69,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Christof Schmitt <cs@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Shilovsky <piastryyy@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Oct 31, 2019 at 12:18:26PM +1300, Andrew Bartlett wrote:
-> On Wed, 2019-10-30 at 15:39 -0700, Christof Schmitt via samba-technical 
-> wrote:
-> > Hi,
-> > 
-> > while fixing the build problem with the system heimdal libraries, i
-> > am
-> > also trying to establish a gitlab test for this build. This requires
-> > adding the heimdal-multidev package to the Ubuntu images.
-> > Regenerating
-> > the images now fails for CentOS7 and CentOS8, which should not
-> > changed.
-> > I already fixed one problem for CentOS7 to avoid the conflict between
-> > nettle and compat-nettle.
-> > 
-> > Now CentOS 7 fails with:
-> > https://gitlab.com/samba-team/devel/samba/-/jobs/337893367
-> > + docker build -t samba-ci-centos7 --build-arg
-> > 'SHA1SUM=9dae5d8732853f0025bcf9528e94935f0e7ebada'
-> > bootstrap/generated-dists/centos7
-> > Cannot connect to the Docker daemon at tcp://docker:2375. Is the
-> > docker daemon running?
-> > ERROR: Job failed: exit code 1
-> 
-> Garming did this on my suggestion:
-> 
-> https://gitlab.com/samba-team/samba/merge_requests/803/diffs?commit_id=a6b38e4ed0f409b88ba9df765951afaab9195047
-> 
-> The issue is that, in order to progress work while the Gitlab.com
-> runners are busy, we also declare 'shared' on our own runners. 
-> 
-> However we haven't worked out how to do the docker-in-docker thing
-> there, and probably don't want to (due the security risk).
-> 
-> The alternative is to stop our runners declaring 'shared' and make our
-> jobs that can run on either just require 'docker'. 
-> 
-> This is probaby the better approach.  It may mean CI for older branches
-> take longer when gitlab.com is busy, but master is where all the action
-> is.  For our private CI (for security embargoed stuff) we will still
-> declare 'shared'.
-> 
-> In the meantime, just try again later, our own runners have a slower
-> tick cycle to try and loose the race if they can.
+cifs-testing group has 109 but not 091. Let's try to keep  the Azure
+bucket as a quick subset of tests that we have in cifs-testing one.
 
-Thank you. Is there some documentation about the different runners to
-understand this better?
+Best regards,
+Pavel Shilovskiy
 
-Retrying helped with the problems connecting to docker. Now i am down to
-the CentOS8 issue. It looks like CentOS8 went from glibc
-2.28-42.el8.1 to 2.28-42.el8_0.1 and yum does not handle that.
-
-Christof
+=D1=87=D1=82, 31 =D0=BE=D0=BA=D1=82. 2019 =D0=B3. =D0=B2 13:19, Steve Frenc=
+h via samba-technical
+<samba-technical@lists.samba.org>:
+>
+> Added xfstests 091 and 109 to the (SMB3 Linux kernel client) Azure target=
+ bucket
+>
+> --
+> Thanks,
+>
+> Steve
+>
 
