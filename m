@@ -2,60 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8D97EB9C2
-	for <lists+samba-technical@lfdr.de>; Thu, 31 Oct 2019 23:39:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E690EBE36
+	for <lists+samba-technical@lfdr.de>; Fri,  1 Nov 2019 07:58:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=DMsu+pzAlqXLFqCFHczAJnKB7kERRvXtZgg7glElDEE=; b=Dxcmuez2y/p67uEL4JVHJWfHqh
-	FLscOMgfcIFy2vbJ1XYqZo45uJn62qphRDhDEN6r+dPqh/GY7CEbb6flreiX/lZAFue2LPXAD52/k
-	eDT9PVMxKqN93B9XVPlRoUjb6KJ8cAjLCL8xXMaHWAc+qAjvlWjPZwh5cyPCIuhcKdBrZvnHjOR8Z
-	/ATfT+CxY7fEAOiHLPftddF4HZl1JO05etHHm3IjE4f2MvvGl0NjNDM9Qb4aDZOf12JEA9N9n1Iwk
-	3c+4kjzozbg1swiEGCFRm4iR7aBQapxYt1MysYzL3tiIvj1tVYORCLCjtZ2eBVfWsUmSMfghz+wIc
-	7Tynq+Ww==;
-Received: from localhost ([::1]:54856 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=8rjjY6eA2eKbf94AlF6pXw/GQJ01rHUOPGA664iApl4=; b=Gzyl8l/CXQ+R3JiXrCJWLmo73W
+	P8NxS6PQrX843ut0RsR+DuaZB+8EX2fsrigD7LtDweWqhw89sKH+sb54udasTom2K/y3HmEjD9YuR
+	alhBkjR3E90yqSFIiTLHJCFIQJjF651GuosexFMHkO/b9p6H4KP5qn6mcTbHxIAjKslImUIKIrF2C
+	eSnanukYl0efvglzDa6Qy42mbodUd2CKz/ily6gJfofAjDRwwag+H00qL4lIDW8KxQQRqlbk9OLqI
+	qjbiKm5mFfgpXeAnKT0u1rELdFkwDoriwWKYp/hellzY20LVUk9P2BebFT9IGrp6pq0RRsruaR099
+	2pFCYYZA==;
+Received: from localhost ([::1]:60552 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iQJ5o-0044zH-Lf; Thu, 31 Oct 2019 22:39:00 +0000
-Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c]:36198) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iQJ5l-0044z8-3Q
- for samba-technical@lists.samba.org; Thu, 31 Oct 2019 22:38:59 +0000
-Received: by mail-lf1-x12c.google.com with SMTP id a6so2503801lfo.3
- for <samba-technical@lists.samba.org>; Thu, 31 Oct 2019 15:38:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=DMsu+pzAlqXLFqCFHczAJnKB7kERRvXtZgg7glElDEE=;
- b=NEZIVVJcOEyp+FmstITkLUPvzz9/amNUR4Eb+sTJTAU/6h9jcva0x8v7wuRfSzwIjh
- 29vRZFNvd0kagZ92Uca7GefZgSX536LI4zoGenuOWd/hcg39WfrKhc0JHhXrjr567IHm
- YEaPttYRkiBUrhjmF9WmZ5egmPrFiJHSR1a+NbqaKAZ0L8bIRhTdLz/WPfgIyQ7C0l16
- heKNRoTCVJl/173+aJbBzTFMiBMDd8wvyVp/t45BKJsOADZWKMJWMEsP8c0vUd4xp/RM
- nRaVFIAVN5T1R7ZX0889H3ArewCkluBM1BkK+Wa0y7Wz09GXDQp9Lo0O9DlrdJaEVzL5
- NKeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=DMsu+pzAlqXLFqCFHczAJnKB7kERRvXtZgg7glElDEE=;
- b=irEAqkt2pidGzqn7YDA6FzlSBGZ3wB7AjycFjD1mpCBAwg6g/NJJSPDPtPuvjkD3ax
- 458M8tOvJcixCllXNo5cXt23aYMJeqEkUxR1Cye/he+hSZlrxZzzrYU9p+4e+CDpqVJt
- nZHqylh8xvBvK0PlrJUe9A+XJs0PIel3XlV3N2VX4gFTaW0leuQv32UcPqkjxvtVqbEO
- 5Si7ljwUTC2SZ54m6Bpi28u/WbVg2TGqLCWppjWq475m3BFHZUfe10eM1jWR3QIvoEzO
- LgiPUgGFjZoCexeErmi5ldq9DV9X6pjfvFWnF5dW3K9l+kKlWU+w7VQxdzc81urRCQV3
- UleA==
-X-Gm-Message-State: APjAAAW3ccOC3PlE7NRryEM7+6MyLQE/UvZxC7CWLQO8JBgJldJm05cB
- sOH2Yd7dth+XufXiuDcg6DGPXck12XS2lLfVHw==
-X-Google-Smtp-Source: APXvYqzKd9r93QAg17E/2JmGkVuAU91vw06mrBRJQpRUyQNpII1YFdInRFvW6WXcUMJ9fmuyojM+54xE988qdA6WcEs=
-X-Received: by 2002:ac2:5bc2:: with SMTP id u2mr5097690lfn.173.1572561536258; 
- Thu, 31 Oct 2019 15:38:56 -0700 (PDT)
+	id 1iQQrp-005pjW-Al; Fri, 01 Nov 2019 06:57:05 +0000
+Received: from mailout1.hostsharing.net ([2a01:37:1000::53df:5fcc:0]:38467) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iQQrg-005pjP-Kh
+ for samba-technical@lists.samba.org; Fri, 01 Nov 2019 06:56:59 +0000
+Received: from h01.hostsharing.net (h01.hostsharing.net
+ [IPv6:2a01:37:1000::53df:5f1d:0])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (Client CN "*.hostsharing.net",
+ Issuer "COMODO RSA Domain Validation Secure Server CA" (not verified))
+ by mailout1.hostsharing.net (Postfix) with ESMTPS id C25DA101903A5
+ for <samba-technical@lists.samba.org>; Fri,  1 Nov 2019 07:38:52 +0100 (CET)
+Received: from webmail.hostsharing.net (h50.hostsharing.net [83.223.95.104])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by h01.hostsharing.net (Postfix) with ESMTPSA id 90AC16019029
+ for <samba-technical@lists.samba.org>; Fri,  1 Nov 2019 07:38:52 +0100 (CET)
 MIME-Version: 1.0
-References: <CAH2r5muCW3ow-9UkdtBK9sxRrgK92MjVQZfe6W+DS0XKYVRF9Q@mail.gmail.com>
-In-Reply-To: <CAH2r5muCW3ow-9UkdtBK9sxRrgK92MjVQZfe6W+DS0XKYVRF9Q@mail.gmail.com>
-Date: Thu, 31 Oct 2019 15:38:45 -0700
-Message-ID: <CAKywueRROHSqc+tiggojNabwqOtfcvvTfMPbT6bmS4r9WDEZXw@mail.gmail.com>
-Subject: Re: SMB3 Buildbot regression tests added
-To: Steve French <smfrench@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Date: Fri, 01 Nov 2019 07:38:52 +0100
+To: samba-technical@lists.samba.org
+Subject: suddenly change: idmap uid + gid
+Message-ID: <fcf6d6e4b21081a4a05b50c419a4facc@c-toph.de>
+X-Sender: liste@c-toph.de
+User-Agent: Roundcube Webmail/1.3.3
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,29 +54,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Pavel Shilovsky <piastryyy@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Hilberg via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Hilberg <liste@c-toph.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-cifs-testing group has 109 but not 091. Let's try to keep  the Azure
-bucket as a quick subset of tests that we have in cifs-testing one.
+Hi
 
-Best regards,
-Pavel Shilovskiy
+The server suddenly changed the uid + gid. this happened to times, 
+yesterday and the week after.
+The samba is a AD member where we have many users (>20 000) and we use 
+autorid in that way
+[global]
+	security = ads
+	workgroup = CUSTOMER
+	realm = CUSTOMER.COM
+         winbind use default domain = yes
+         winbind enum users = yes
+         winbind enum group = yes
+    	idmap config * : backend = autorid
+	idmap config * : range = 1000000-8999999999
 
-=D1=87=D1=82, 31 =D0=BE=D0=BA=D1=82. 2019 =D0=B3. =D0=B2 13:19, Steve Frenc=
-h via samba-technical
-<samba-technical@lists.samba.org>:
->
-> Added xfstests 091 and 109 to the (SMB3 Linux kernel client) Azure target=
- bucket
->
-> --
-> Thanks,
->
-> Steve
->
+At the moment I have two questions:
+Why this happened and is there a way to stop the disaster?
+Is there a quick way to repair the disaster? I infects the profile 
+directory used with acl.
+
+thank you
 
