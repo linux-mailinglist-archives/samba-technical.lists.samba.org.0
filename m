@@ -2,101 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E3E7EC8A3
-	for <lists+samba-technical@lfdr.de>; Fri,  1 Nov 2019 19:48:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C421AED130
+	for <lists+samba-technical@lfdr.de>; Sun,  3 Nov 2019 01:04:50 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=uQN2EpN1i+4UOuAmNwuOqGHZK/1xamfFgGwvpQwn6eg=; b=LNVW2KLQ+4Jds8sF/IOkjW0/w8
-	dgisUpTx23zZM9zb3aCY7P6ZM2Cbuc5I3/IEVkydQ6RQncFCaOcWEiv856hLZgqO80AGlDNIU3rpA
-	gVD5LFyssgszT+tkEME/GfQ2678QSwY5IsXs/M2+bTGSqfsiX/+AQgrnzu2c5cis1+NITe7uR1Msw
-	rpdWQzqm+wTm9Ps5UjKllFIZDLeWegvx3CwfLLyNNdp6i3N/jEtAO0hc3z5f4NEVjhvS/LfIywjSa
-	uuP354jjhbN+wG36M5o4JcBP3jToDwLxERNC0aH7w8aqb4TDm4eYormOj9bGO38DS6hMUpdb909/t
-	Qa0mPJGg==;
-Received: from localhost ([::1]:40768 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=hxQ/7TbZpqRG276CQelGV2q8exzmtzEgZPyTSgGgwj8=; b=lPWSGLyE/WI+C35yRcsjW5YwZf
+	MjJ53LyQL+qMAKhhjMpTWGacWuJStj/V/1MUWgeSyl/4tXElJ5zPzcL+99nGei+7Utwj5QdsqX2N7
+	j4l36PkbFj0nML03UMQnSZzYocGMEQQIDuO3ZtM/gAW4eqVn/LSFqwJE645qEZMypfksNdolwH2YN
+	hx+Ld2qjekOAbicqVjiJe2DB/nvqG+Gky12h7UTRoAzhfLlVH1I7ZuCfC13j3XM61P85KUfFfoiQv
+	mhJ581ZCq8alKuLEK211gkOk2jFHK21sZUENxcwP/ATz3Sfu1rEGqZ152Pceu5v8a5QI7c3cCQRpn
+	ol8AtV/A==;
+Received: from localhost ([::1]:28802 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iQbxw-005wKm-Ru; Fri, 01 Nov 2019 18:48:08 +0000
-Received: from m4a0040g.houston.softwaregrp.com ([15.124.2.86]:35279) 
+	id 1iR3N4-0068fW-Rt; Sun, 03 Nov 2019 00:03:54 +0000
+Received: from mail.rosalinux.ru ([195.19.76.54]:50506) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iQbxr-005wKf-Vk
- for samba-technical@lists.samba.org; Fri, 01 Nov 2019 18:48:06 +0000
-Received: FROM m4a0040g.houston.softwaregrp.com (15.120.17.146) BY
- m4a0040g.houston.softwaregrp.com WITH ESMTP; 
- Fri,  1 Nov 2019 18:46:18 +0000
-Received: from M9W0067.microfocus.com (2002:f79:be::f79:be) by
- M4W0334.microfocus.com (2002:f78:1192::f78:1192) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10; Fri, 1 Nov 2019 18:31:30 +0000
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com (15.124.72.12) by
- M9W0067.microfocus.com (15.121.0.190) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10 via Frontend Transport; Fri, 1 Nov 2019 18:31:30 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Q68avGf5/Xl96dbhpb3mTmb/HvQhwfaKLV/+edzDm9bj69doMTbxDUw6y2k97bAD5qsSAIBqmn7whNZoxTop/iNPOWhmwdXjbyiXabQ4TKMFPCbNPvrf6XDoyeYUSxEX/t66P7D51kXo97Z3dL6kor0Jptp0jt8c7pioBBCeTtH/mB0VH2fD6HEGhpCvR+UlSfxLKXJSwFsywNfk56vh8OjcOq7SCpK/SFiP5TLBztd2Rb/uJ0IIcepJGCd0ek1XXH/MLp5E8KPbSuhw8zSgRYG9K7dODCXBWWH+rkKmKqKw37z8GoLOODXudRJw2fk+Gq1XIxt8rXed3DXSoOPBEw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uQN2EpN1i+4UOuAmNwuOqGHZK/1xamfFgGwvpQwn6eg=;
- b=N1YhklBoOdlf3xst+aWnEhQ1vKEgh5WSmSGmryEUkgwtCRS3ckWt8DUf9w3TgDvVzb+vcTx/DG9f8wPCwLxtAqh9UtGGQ/yQ4Zjgr5wtryDatpHp6vteHUOf+1lnKgw0jisvNKg+aitbQfDEALwt28DfX6pwiMQ+/zONU9B+pWtRjukuR0UqV/VYnKBH5sKBYycM/HpyNVUePy9bXXfgWZBpwTiLsyniiKNNgyz0Rx/tv9xkLdvJY/Gpe0i37E25TTP/44W0mpGEN+Ql+hqalDyrpH6dc1DVzrA3oungw2EtPEVvdctbSyuGunTBzpNPnXx0U1ChaTHdTkRjplNmPQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Received: from BN8PR18MB2499.namprd18.prod.outlook.com (20.179.65.86) by
- BN8PR18MB2420.namprd18.prod.outlook.com (20.179.66.142) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2408.18; Fri, 1 Nov 2019 18:31:28 +0000
-Received: from BN8PR18MB2499.namprd18.prod.outlook.com
- ([fe80::3974:f92c:6b6b:c9c2]) by BN8PR18MB2499.namprd18.prod.outlook.com
- ([fe80::3974:f92c:6b6b:c9c2%3]) with mapi id 15.20.2387.025; Fri, 1 Nov 2019
- 18:31:28 +0000
-To: Ralph Boehme <slow@samba.org>, Noel Power <NoPower@suse.com>, npower
- <npower@samba.org>
-Subject: Re: Converting SMB1 tests to SMB2
-Thread-Topic: Converting SMB1 tests to SMB2
-Thread-Index: AQHVdUNqiOZWCa16a0elHejFomZ1kadQugh0gA6wbN+AAQJmgIAARkCAgAAQXgCAB2I8AIAAAnuAgAAJSYCAAAhSAIAADaSAgAAIYx6ADoq/AA==
-Date: Fri, 1 Nov 2019 18:31:27 +0000
-Message-ID: <dc95f81c-90ba-a368-9b3e-ccdcf067edaa@suse.com>
-References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
- <be6770e5-5bf0-4665-4a88-3e4182e4c82e@samba.org>
- <0981db46-93bf-f153-c98f-15d5cf404353@suse.com>
- <ed7eb92f-46a7-758e-f3b5-185d71b8b98a@samba.org>
- <002434db-63ef-edad-d091-76e3efe783d1@samba.org>
- <15dfbaf6-c774-debe-b61e-c3ef4e7f9727@samba.org>
- <d9625941-c85a-a686-2162-30c80a2e84b3@samba.org>
- <fa464ebe-cfe7-1d6e-7435-c896e2cc188e@samba.org>
- <f479113c-7a74-8259-823e-4ae1c4a713c6@samba.org>
- <47fef5d6-7fb6-b054-a8c5-7a28b63e97c8@samba.org>
- <9cc9d402-57fb-3568-29e6-12284d6ccd98@samba.org>
- <f5970612-2998-cef1-dcca-40188c7a176f@suse.de>
- <361f5a38-66fb-e18c-7858-c5db6e93424e@samba.org>
-In-Reply-To: <361f5a38-66fb-e18c-7858-c5db6e93424e@samba.org>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=NoPower@suse.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [109.76.44.167]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 37eb0c3b-3525-49e1-d4cc-08d75ef9b51f
-x-ms-traffictypediagnostic: BN8PR18MB2420:
-x-ms-exchange-purlcount: 3
-x-ld-processed: 856b813c-16e5-49a5-85ec-6f081e13b527,ExtFwd
-x-ms-exchange-transport-forked: True
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: gqIfncQSZC6EljWobNPERGP2Eu296zxBkP5W/G5o5Wtce+d846cFQ1SIns+m+ida2ItYbq2Ue9Efl1rd5KviFG2GLPzdtEfZYKtTDl/rvIh3Ic9gH7poXqwkJ4Q6tBLZ2o5yWwZ0H2I1p7GibETmxEVNi/84IklDD1bDnE51ujz+RcILnjndEj75H0jMVYqAEx92F2/GQuaFi2fzjGghhDrdXMPwrsk5HlEnpTchfj43IvDATLEZyzK/EqrqhAUoOtx9NYNKzlTRE1NHOVknBUylBP+ch1GpdWtdPT257ULkZkCHDhh9UrEeejj2l3NtDF/2D+P3IVBjjnnF8h/3F3LcdKo/U0kh1eMA2On1B6LNPM0/7jRFRyawJ/fqDDvPWLAY9EQGsfwc4/+rn1UKl3mfGZPSVmhSqDjao23Uy6kYA4mkrdcDt36ObuJqlVZ3eJju6SdHy7UEF04LIQUubjbNeSqup+DwUAsCIevoBtc=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <24ACF87E2F124742855C70E5C82AACE6@namprd18.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ (Exim) id 1iR3Mz-0068fP-1R
+ for samba-technical@lists.samba.org; Sun, 03 Nov 2019 00:03:52 +0000
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rosalinux.ru (Postfix) with ESMTP id CEAF7D1EBC6FF;
+ Sun,  3 Nov 2019 03:03:45 +0300 (MSK)
+Received: from mail.rosalinux.ru ([127.0.0.1])
+ by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id PN16rOrSWrrJ; Sun,  3 Nov 2019 03:03:44 +0300 (MSK)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rosalinux.ru (Postfix) with ESMTP id D0DB3D1EBC707;
+ Sun,  3 Nov 2019 03:03:44 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rosalinux.ru D0DB3D1EBC707
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosalinux.ru;
+ s=A1AAD92A-9767-11E6-A27F-AC75C9F78EF4; t=1572739424;
+ bh=hxQ/7TbZpqRG276CQelGV2q8exzmtzEgZPyTSgGgwj8=;
+ h=To:From:Message-ID:Date:MIME-Version;
+ b=iRiaEzcupjLbJzy6uQ6zoe9Ud13IBAyN6vzhbzrBlDIEhGirzDMST2LjN14OLmfD/
+ 5LKDBArv3WU/IHhgmLhKy/Zfn79ue3aYjp8NQhgU+gIP9XL/Re8M82Ul8c3occbn84
+ FtfZOmahYvX39iD256mmEsuc9mUTPoAd1GHB04pPNo8xPY9HoczTQlozXYG2p0cIbi
+ jTdqMyM4sgBrXHgij2czJub8Y5kPTM3X6EYWyuXiFRVbdccR6xiJgiOa5RG/S3Fjx8
+ 3LUdzP2RsuV5diJA9F95M1KkeBrIf514QLXXXzW+MUBoPTPnrCUyXzM6/gjz2VB8eI
+ QHt1lwMdDt4AQ==
+Received: from mail.rosalinux.ru ([127.0.0.1])
+ by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id uX1rLVs3hUMh; Sun,  3 Nov 2019 03:03:44 +0300 (MSK)
+Received: from [192.168.1.173] (broadband-90-154-71-208.ip.moscow.rt.ru
+ [90.154.71.208])
+ by mail.rosalinux.ru (Postfix) with ESMTPSA id 98F01D1EBC6FF;
+ Sun,  3 Nov 2019 03:03:44 +0300 (MSK)
+Subject: Re: Automating usage of smbspool_krb5_wrapper
+To: Andreas Schneider <asn@samba.org>
+References: <af8412ee-5493-0406-e95b-8d3175ec069a@rosalinux.ru>
+ <1853953.WXbCIQQCWo@magrathea>
+ <f21e078f-669f-6590-c0a1-f450f72200be@rosalinux.ru>
+ <18291618.dcJLbluVCs@magrathea>
+Message-ID: <7e571555-5d87-a566-dbf1-4a1c33c67ea8@rosalinux.ru>
+Date: Sun, 3 Nov 2019 03:03:43 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: 37eb0c3b-3525-49e1-d4cc-08d75ef9b51f
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: VrdosI40+dyl8mIDYEx1VXWWeUpi0WeVLIVdNMG73omK5GjMB+ZkmiUX1vbgWqehAK94Z8FHsSLcaSEKh7E95w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR18MB2420
-X-OriginatorOrg: suse.com
+In-Reply-To: <18291618.dcJLbluVCs@magrathea>
+Content-Type: multipart/mixed; boundary="------------E7B1B9A379B03B360CED1717"
+Content-Language: ru-RU
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -110,122 +73,291 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Noel Power via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Noel Power <NoPower@suse.com>
-Cc: David Mulder <david.mulder@suse.com>,
- samba-technical <samba-technical@lists.samba.org>
+From: Mikhail Novosyolov via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-SGkgQWxsDQoNCkp1c3QgdGhvdWdodCBJIHN1bW1hcml6ZSB3aGF0IHdlIChteXNlbGYgJiBSYWxw
-aCkgZGlzY3Vzc2VkLCBmb3IgbXkgb3duDQpiZW5lZml0IGFuZCB0aGUgYmVuZWZpdCBvZiBvdGhl
-cnMuDQoNCldlIGFncmVlZCB0aGF0DQoNCsKgwqAgKiBnZXR0aW5nIHNvbWV0aGluZyB1cHN0cmVh
-bSB0aGF0IHdvdWxkIGFsbG93IHVzIHRvIGl0ZXJhdGl2ZWx5IHBvcnTCoA0KdGVzdHMgaXMgdGhl
-IGJlc3Qgc3RhcnQsIGxvbmcgbGl2aW5nIGJyYW5jaGVzLCByZWJhc2UgaG9ycm9yIGFuZCBhIGZp
-bmFsDQpkdW1wIG9mIHdvcmsgYXQgc29tZSB1bmtub3duIGZ1dHVyZSB0aW1lIGlzIG5vdCBpZGVh
-bC4NCg0KwqAgKiB3ZSBuZWVkIHRvIGtlZXAgdGhlIHNtYjEgdGVzdHMgcnVubmluZyB1bnRpbCBz
-dWNoIHRpbWUgYXMgdGhlIHNtYjENCmNvZGUgaXMgcmVtb3ZlZA0KDQrCoCAqIHdlIG5lZWQgc29t
-ZSBib3RoIGEgd2F5IHRvIGVhc2lseSBpZGVudGlmeSB3aGF0IG5lZWRzIHRvIGJlIHBvcnRlZA0K
-KG9yIGludmVzdGlnYXRlZCBbMV0pIGFuZCB0aGVuIG1hcmsgdGhlbSBhcyBkb25lIHNvIGFueW9u
-ZSB3aG8gd2FudCB0bw0KaGVscCBvciBjb250cmlidXRlIGtub3dzIHdoYXQgaGFzIGFscmVhZHkg
-YmVlbiBwb3J0ZWQgYW5kIGFkZHJlc3NlZCBvciBub3QNCg0KVG8gYWNoaWV2ZSB0aGUgYWJvdmUg
-dGhlIHBsYW4gaXMgdG8NCg0KYSkgc3dpdGNoIGVudmlyb25tZW50cyB0byBieSBkZWZhdWx0IGJl
-IFNNQjIgb25seSAoZS5nLiBzZXQgdGhlIG1pbg0KcHJvdG9jb2wgdG8gU01CMl8wMikNCg0KYikg
-aWRlbnRpZnkgdGhlIHRlc3RzIHRoYXQgY3VycmVudGx5IGZhaWwgdmlhIGEgbmV3IHNraXAgZmls
-ZSBbMl0gYW5kDQp1c2UgdGhhdCBza2lwIGZpbGUgYXMgcGFydCBvZiB0aGUgbm9ybWFsIHRlc3Qg
-cnVuIHRodXMgc2hvd2luZyB3aXRoIGENCnN1Y2Nlc3NmdWwgQ0kgcnVuIHRoYXQgYWxsIHJlbWFp
-bmluZyB0ZXN0cyBydW4gd2l0aCB0aGUgbm93ICdkZWZhdWx0Jw0KU01CMiB0ZXN0IGVudmlyb25t
-ZW50cywgYWxsIGZhaWxpbmcgdGVzdHMgZG9uJ3QgcnVuDQoNCmMpIG1ha2UgdGhlIGZhaWxpbmcg
-dGVzdHMgcnVuIG9uY2UgbW9yZSBieSBtb3ZpbmcgdGhlIHRlc3RzIChpZGVudGlmaWVkDQppbiB0
-aGUgc2tpcCBmaWxlKSB0byBuZXcgdGVzdCBlbnZpcm9ubWVudHMgdGhhdCBoYXZlIHRoZSAnb2xk
-JyBtaW4NCnByb3RvY29sIG9wdGlvbnMgc2V0IGFkZCB0aGVzZSB0ZXN0IGVudmlyb25tZW50cyB0
-byB0aGUgZXhpc3RpbmcNCmF1dG9idWlsZCBqb2JzLiBFLmcuIHRoZSAnc2FtYmEtYWQtZGMtNScg
-YXV0b2J1aWxkIGpvYiB1c2VzIHRoZSB0ZXN0DQplbnZpcm9ubWVudCAnYWRfZGNfZGVmYXVsdCcs
-IHNvIGluIHRoaXMgY2FzZSB3ZSB3b3VsZCBjcmVhdGUgYSBuZXcgdGVzdA0KZW52aXJvbm1lbnQg
-J2FkX2RjX2RlZmF1bHRfc21iMScgYW5kIHdlIHdvdWxkIGFkanVzdCB0aGUgJ3NhbWJhLWFkLWRj
-LTUnDQphdXRvYnVpbGQgam9iIHRvIHVzZSAnYWRfZGNfZGVmYXVsdCcgYW5kIGFkZGl0aW9uYWxs
-eQ0KJ2FkX2RjX2RlZmF1bHRfc21iMScgdGVzdCBlbnZpcm9ubWVudHMuIFNhbWUgdGhlbiBmb3Ig
-ZWFjaCBhdXRvYnVpbGQgam9iDQoNCmQpwqAgZG9uJ3QgdXNlIHRoZSBuZXcgc2tpcCBmaWxlIGlu
-IHRoZSB0ZXN0IHJ1biBhbnltb3JlLCBpdCdzIGp1c3QgZm9yDQpkb2N1bWVudGF0aW9uDQoNCldp
-dGggc3VjaCBjaGFuZ2VzIGluIHBsYWNlIHVwc3RyZWFtIHdlIGNhbiB0aGVuIGdvIHRocm91Z2gg
-dGhlIGxpc3Qgb2YNCnRlc3RzIGFuZCBwcm9jZXNzIHRoZW0uIEJ5IHByb2Nlc3Npbmcgd2UgbWVh
-biB0aGF0IHRoZSB0ZXN0IGlzIGVpdGhlcg0KDQppKSBsZWZ0IGFsb25lLCB0aGlzIHRlc3QgaXMg
-dGVzdGluZyBmdW5jdGlvbmFsaXR5IHRoYXQgaXMgU01CMSBvbmx5DQooZXhhbXBsZSB0ZXN0aW5n
-IHNwZWNpZmljIFNNQjEgbWVzc2FnZXMpIHNvIHdlIGp1c3QgbWFyayB0aGlzIGFzIGRvbmUuDQpX
-ZSBjb3VsZCBtYXJrIHRoaXMgd2l0aCBhIGNvbW1lbnQgcGVyaGFwcyBpbiB0aGUgbmV3IHNraXAg
-ZmlsZS4gV2UgYWxzbw0KaW50ZW50IHRvIGNyZWF0ZSBhIHRyZWxsbyBwYWdlIHRvIHRyYWNrIHRo
-aXMgdG9vDQoNCmlpKSB0aGUgdGVzdCBpcyBwb3J0ZWQsIHRoZSBuZXcgc21iMiB0ZXN0IG5lZWRz
-IHRvIGJlIGFkZGVkIHRvIHRoZSBub24NCidfc21iMScgZW52aXJvbm1lbnQsIHRoZSBleGlzdGlu
-ZyB0ZXN0IG5lZWRzIHRvIHJlbWFpbiBpbiBwbGFjZSBmb3Igbm93Lg0KRS5nLiBzYXkgZm9yIGV4
-YW1wbGUgd2UgaGF2ZSBhIHRlc3QgJ3NhbWJhMy5mb28nLmJhcicgdGhhdCBydW5zIGFnYWluc3TC
-oA0KJ2FkX2RjX3NtYjEnIHRoZW4gYWZ0ZXIgcG9ydGluZyB3ZSBuZWVkIHRvIGNyZWF0ZSBhIG5l
-dyB0ZXN0IGVudHJ5IGluDQonc291cmNlMy9zZWxmdGVzdC90ZXN0cy5weSfCoCBmb3LCoCAnc2Ft
-YmEzLmZvbycuYmFyJyB0byBydW4gYWdhaW5zdCAnYWRfZGMnDQoNCkkgaGF2ZSBiZWVuIHRyeWlu
-ZyB0byBnZXQgYSBicmFuY2ggdG9nZXRoZXIgdG8gYWNoaWV2ZSB0aGUgYWJvdmUgdGhhdA0Kd291
-bGQgcHJvdmlkZSB0aGUgZnJhbWV3b3JrIHRvIGFsbG93IHVzIHRvIHN0YXJ0IHBvcnRpbmcgdGVz
-dHMsIHRoZQ0KY3VycmVudCBXSVAgYnJhbmNoIGlzDQpodHRwczovL2dpdGxhYi5jb20vc2FtYmEt
-dGVhbS9kZXZlbC9zYW1iYS9jb21taXRzL25wb3dlcl9leGNsdWRlX3NtYjFmYWlsdXJlc19zcXVh
-c2gNCg0KVGhlcmUgaGF2ZSBiZWVuIHNvbWUgaXNzdWVzLCBmaXJzdGx5IGl0IGhhcyBiZWVuIHZl
-cnkgdGltZSBjb25zdW1pbmcgYW5kDQp0ZWRpb3VzIHRvIGdldCB0byB0aGUgc3RhZ2Ugd2hlcmUg
-dGhlIGluaXRpYWwgc2tpcCBmaWxlIHdhcyBjcmVhdGVkIGFuZA0KdGhlbiBhZ2FpbiB0byB0aGUg
-cG9pbnQgd2hlcmUgYWxsIHRoZSBpbnZvbHZlZCB0ZXN0cyBhcmUgbW92ZWQgdG8gdGhlDQpuZXcg
-J3h5el9zbWIxJyB0ZXN0IGVudmlyb25tZW50cy4gQW5kIGFmdGVyIGFsbCB0aGF0IHNvbWUgbW9y
-ZSBpc3N1ZXMgOi8NCg0KDQpwcm9ibGVtIDEpDQoNClRoZSBtaXh0dXJlIG9mIHh5eiAmIHh5el9z
-bWIxIHRlc3QgZW52aXJvbm1lbnRzIHNlZW1zIHRvIGNhdXNlIHN0cmFuZ2UNCmlzc3VlcyAoc2Vl
-DQpodHRwczovL2dpdGxhYi5jb20vc2FtYmEtdGVhbS9kZXZlbC9zYW1iYS9waXBlbGluZXMvOTI5
-NDUxMjgpLCBtYW55DQp0ZXN0cyBmYWlsIG9yIGhhbmcuIFJ1bm5pbmcgdGhlIHRlc3RzIGFnYWlu
-c3QgdGhlc2UgZW52aXJvbm1lbnRzDQppbmRpdmlkdWFsbHkgd29ya3Mgbm8gcHJvYmxlbXMuIE1v
-c3RseSBJIGd1ZXNzIHRoaXMgaXMgYW4gaXNzdWUgd2l0aCB0aGUNCmZhY3QgdGhhdCB0aGUgTkVU
-QklPUyBuYW1lIG9mIHRoZXNlICdkdXBsaWNhdGVkJyBlbnZpcm9ubWVudHMgYXJlIHRoZQ0Kc2Ft
-ZSBhbmQgdGhpcyBjYW4gY2F1c2UgY2xpZW50cyB0byBjb25uZWN0IHRvIHRoZSB3cm9uZyBzZXJ2
-ZXIgKGZyb20gdGhlDQp3cm9uZyBlbnZpcm9ubWVudCkNCg0KcHJvYmxlbSAyKQ0KDQpZZXMsIG5v
-dCBiZWluZyBhIHRlc3QgZW52aXJvbm1lbnQgZ3VydSBhbmQgYmVpbmcgbWF5YmUgYSBsaXR0bGUg
-bGF6eSBhbmQNCkkgd2FudGVkIHRvIGF2b2lkIHRyeWluZyBjaGFuZ2UgdGhlIHRlc3QgZW52aXJv
-bm1lbnQgZm9vIHRvIGNoYW5nZSBvcg0KcGFzcyBkb3duIE5FVEJJT1NOQU1FwqAgKHNlZW1lZCBh
-IGxpdHRsZSByaXNreSB0b28sIG1heWJlIHRoZXJlIGlzIG90aGVyDQp0aGluZ3MgbGlrZSB0aGlz
-KS7CoCBTbyBJIGRlY2lkZWQgdG8gY3JlYXRlIDIgbmV3IGF1dG9idWlsZCBqb2JzIHRvIHJ1bg0K
-dGhlIHNtYjEgdGVzdHMuIFVuZm9ydHVuYXRlbHkgdGhlc2UgZmFpbCBpbiBDSSAoc2VlDQpodHRw
-czovL2dpdGxhYi5jb20vc2FtYmEtdGVhbS9kZXZlbC9zYW1iYS9waXBlbGluZXMvOTMwMjkzMjUp
-IFdoYXQgaXMNCnJlYWxseSB3ZWlyZCBoZXJlIGlzDQoNCsKgwqDCoCBhKSBydW5uaW5nIHRoZXNl
-IGF1dG9idWlsZCBqb2JzIGxvY2FsbHkgb24gbXkgb3duIG1hY2hpbmUgY2F1c2VzIG5vDQpwcm9i
-bGVtcywgYm90aCBqb2JzIHBhc3MNCg0KwqDCoMKgIGIpIHJ1bm5pbmcgdGhlc2Ugam9icyBpbiB0
-aGUgKnNhbWUqIGRvY2tlciBjb250YWluZXIgYXMgQ0kgdXNlcw0KKHVzaW5nIHRoZSBzYW1lIGF1
-dG9idWlsZCBjb21tYW5kKSBhZ2FpbiB3b3JrcyBubyBwcm9ibGVtcw0KDQrCoMKgwqAgYykgcnVu
-bmluZyB0aGUgcHJvYmxlbWF0aWMgam9icyBvbiBzbi1kZXZlbC0xODQgdXNpbmcNCmF1dG9idWls
-ZC1wcml2YXRlLXNlY3VyaXR5LnNoIGFnYWluIHdvcmtzIDotKA0KDQpJIGFtIHRyeWluZyAoc29m
-YXIgdW5zdWNjZXNzZnVsbHkpIHRvIGZpZ3VyZSBvdXQgd2h5IHRoZXNlIGFyZSBmYWlsaW5nDQoN
-Ck5vZWwNCg0KWzFdIGl0IGxvb2tzIGxpa2Ugc29tZSB0ZXN0cyB0aGF0IGFyZSBleHBlY3RlZCB0
-byBwYXNzIGFnYWluc3QNCmVudmlyb25tZW50cyB0aGF0IGFyZSBTTUIyIG9ubHkgZG9uJ3QuLiBJ
-dCBtYXliZSB0aGVzZSB0ZXN0cyBhcmVuJ3QNCnJlYWxseSBTTUIyIG9yIHBlcmhhcHMgdXNlIGlu
-dGVybmFsbHkgc29tZSBTTUIxIG1lc3NhZ2VzIG9yIHNvbWV0aGluZw0KZWxzZSBpcyBhZm9vdA0K
-DQpbMl0gVXNpbmcga25vd25mYWlsdXJlcyB3YXMgYWxzbyBhbiBvcHRpb24gYnV0IHVuZm9ydHVu
-YXRlbHkgc29tZSBvZiB0aGUNCnRlc3RzIHRoYXQgZmFpbCBpbiB0aGUgU01CMiBvbmx5IGVudmly
-b25tZW50cyBmYWlsIGJ5IGNyYXNoaW5nIG9yDQpoYW5naW5nIHNvIHRoZSBlYXNpZXN0IHNvbHV0
-aW9uIHdhcyBqdXN0IHRvIHNraXAgdGhlc2UgdGVzdHMNCg0KT24gMjMvMTAvMjAxOSAxMzoyNiwg
-UmFscGggQm9laG1lIHdyb3RlOg0KPiBPbiAxMC8yMy8xOSAyOjAyIFBNLCBOb2VsIFBvd2VyIHdy
-b3RlOg0KPj4gT24gMjMvMTAvMjAxOSAxMjo1NywgUmFscGggQm9laG1lIHZpYSBzYW1iYS10ZWNo
-bmljYWwgd3JvdGU6DQo+Pj4gT24gMTAvMjMvMTkgMTowOCBQTSwgUmFscGggQm9laG1lIHZpYSBz
-YW1iYS10ZWNobmljYWwgd3JvdGU6DQo+Pj4+IE9uIDEwLzIzLzE5IDEyOjM4IFBNLCBucG93ZXIg
-d3JvdGU6DQo+Pj4+PiAqIEkgdGhvdWdodCB0aGF0IGl0IHdvdWxkIG5vdCBiZSBhY2NlcHRhYmxl
-IHRvIGp1c3QgZWZmZWN0aXZlbHkgcmVtb3ZlIGFsbCBvZiB0aGVzZSB0ZXN0cyB3aXRob3V0IGEg
-Y2xlYW4gdHJhbnNpdGlvbiBwYXRoLCBlLmcuIHRoZXkgcnVuIHRpbGwgdGhleSBhcmUgcmVtb3Zl
-ZA0KPj4+PiBBbGwgdGhpcyBoYXMgdG8gaGFwcGVuIGluIGEgcHJpdmF0ZSBicmFuY2ggb2YgY291
-cnNlLCB5b3UgY2FuJ3QgcHVzaCB0aGUNCj4+Pj4gaW5pdGlhbCBjaGFuZ2VzIHVwc3RyZWFtIG9m
-IGNvdXJzZS4NCj4+PiB3aGF0IHdvdWxkIHdvcmtzIGFzIHdlbGwsIGFuZCBJIGd1ZXNzIHRoaXMg
-bWlnaHQgYmUgd2hhdCB5b3UgaGFkIGluIG1pbmQsIGlzDQo+Pj4NCj4+PiAqIGZvcmNlIHNtYjIg
-aW4gdGhlIHRlc3RlbnZzDQo+Pj4NCj4+PiAqIG1vdmUgYWxsIGZhaWxpbmcgdGVzdHMgdG8gc2Vw
-ZXJhdGUgdGVtcG9yYXJ5IHRlc3RlbnZzIHRoYXQgc3RpbGwgYWxsb3cNCj4+PiBzbWIxDQo+Pj4N
-Cj4+PiBUaGlzIGNoYW5nZXNldCBjb3VsZCB0aGUgYWxyZWFkeSBnbyB1cHN0cmVhbSwgYWxsb3dp
-bmcgd29ya2luZyBvbiB0aGUNCj4+PiBpbmRpdnVhbCB0ZXN0cyBpbiBhIG1vcmUgcGllY2VtZWFs
-IGZhc2hpb24sIGJlY2F1c2UgdGhlIHJlc3VsdGluZyB3b3JrDQo+Pj4gY2FuIGJlIHB1c2hlZCB1
-cHN0cmVhbSBmb3IgZXZlcnkgdGVzdC4NCj4+Pg0KPj4+IE9uY2UgYWxsIHRlc3RzIGFyZSB0YWtl
-biBjYXJlIG9mLCB0aGUgdGVtcG9yYXJ5IHRlc3QgZW52cyBjYW4gYmUgcmVtb3ZlZC4NCj4+Pg0K
-Pj4+IFRoaXMgd291bGQgYXZvaWQgYWNjdW11bGF0aW5nIGFsbCB0aGUgY2hhbmdlcyBpbiBhIHBy
-aXZhdGUgYnJhbmNoIGFuZA0KPj4+IHRoZSByZWJhc2UgaGFzc2xlIHRoYXQgY29tZXMgd2l0aCBp
-dC4NCj4+Pg0KPj4+IElzIHRoaXMgd2hhdCB5b3UgaGFkIGluIG1pbmQ/DQo+PiBleGFjdGx5LCBi
-ZWNhdXNlIG9mIHRoZSBjb25mdXNpb24gSSBwcm9iYWJseSBkaWRuJ3QgYXJ0aWN1bGF0ZSB3aGF0
-IEkNCj4+IHdhcyB0aGlua2luZyBjbGVhcmx5IGVub3VnaCwgc29ycnkgYWJvdXQgdGhhdCA6LSkp
-DQo+IG9rLCBnbGFkIHdlIGZpZ3VyZWQgdGhhdCBvdXQuIDopKSkNCj4NCj4gTXkgcGhvbmUgbnVt
-YmVyIGlzIGluIHRoZSB0ZWFtIHJlcG8sIGZlZWwgZnJlZSB0byBjYWxsIG1lIGFueXRpbWUgb3IN
-Cj4gcGluZyBtZSBvbiBpcmMuDQo+DQo+IC1zbG93DQo+DQo=
+This is a multi-part message in MIME format.
+--------------E7B1B9A379B03B360CED1717
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+
+29.10.2019 10:29, Andreas Schneider =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
+> On Monday, 28 October 2019 20:38:08 CET Mikhail Novosyolov wrote:
+>> 28.10.2019 11:47, Andreas Schneider =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
+>>> On Monday, 28 October 2019 08:58:26 CET Mikhail Novosyolov via
+>>> samba-technical>
+>>> wrote:
+>>>> 28.10.2019 10:44, Mikhail Novosyolov =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
+>>>>> <...>
+>>>>> There are 2 possible solutions:
+>>>>>
+>>>>> 1) either patch source3/client/smbspool_krb5_wrapper.c to "goto
+>>>>> smbspool;" if env does not contain "negotiate" instead of chekcing =
+to
+>>>>> be either null or 0 - how correct will this be?
+>>>> I mean this:
+>>>>
+>>>> diff --git a/source3/client/smbspool_krb5_wrapper.c
+>>>> b/source3/client/smbspool_krb5_wrapper.c
+>>>> index bff1df417e8..000a613291e 100644
+>>>> --- a/source3/client/smbspool_krb5_wrapper.c
+>>>> +++ b/source3/client/smbspool_krb5_wrapper.c
+>>>> @@ -149,7 +149,7 @@ int main(int argc, char *argv[])
+>>>>
+>>>>            env =3D getenv("AUTH_INFO_REQUIRED");
+>>>>           =20
+>>>>             /* If not set, then just call smbspool. */
+>>>>
+>>>> -       if (env =3D=3D NULL || env[0] =3D=3D 0) {
+>>>> +       if (env =3D=3D NULL || env =3D=3D "none" || env[0] =3D=3D 0)=
+ {
+>>>>
+>>>>                    CUPS_SMB_DEBUG("AUTH_INFO_REQUIRED is not set - "
+>>>>                   =20
+>>>>                                   "execute smbspool");
+>>>>                   =20
+>>>>                    goto smbspool;
+>>> This is obviously wrong :-)
+>>>
+>>> Did you see the code below? The question is if we should map
+>>>
+>>> AUTH_INFO_REQUIRED=3Dnone
+>>>
+>>> to anonymous. I've created a patchset you can find here:
+>>>
+>>> https://git.samba.org/?p=3Dasn/samba.git;a=3Dshortlog;h=3Drefs/heads/=
+master-smbs
+>>> pool
+>>>
+>>>
+>>> However you need to try all combinations, username/password, kerberos=
+ and
+>>> none for anonymous.
+>> Thank you! I did not test these patches yet, first tried to understand
+>> how it works.
+>>
+>> Could you please explain a bit how it works?
+> That's a good question as documentation from CUPS side is missing. So w=
+e need
+> to find out what CUPS does and then try to write tests for it if possib=
+le.
+> This allows us to make sure we work correctly. The repo above shows you=
+ where
+> the test is in the samba source code. I've tried to add more tests in t=
+he past
+> to avoid regressions and verify we work correctly. This needs to be ext=
+ended
+> as much as possible.
+>
+>
+> The two patches were just a quick shot.
+
+CUPS developer has clearified documentation:
+
+  * https://github.com/apple/cups/issues/5674
+  * https://github.com/apple/cups/commit/025b8ce8f637009f0df7a5bb5fa0a460=
+dbb32b10
+
+"'negotiate': Kerberos is required - this keyword can only appear by=20
+itself and causes cupsd to collect the UID of the printing user."
+
+I've switched smbspool_krb5_wrapper from failing if value of=20
+AUTH_INFO_REQUIRED is something not known to just ignoring that and=20
+passing the task to smbspool. smbspool will fail itself. Added a test=20
+for that. Patches on top of asn/samba.git/master-smbspool are attached.
+
+I've not tested those changes yet, just checked buildability. Testing=20
+will require making a complex set up, I will try.
+
+
+--------------E7B1B9A379B03B360CED1717
+Content-Type: text/x-patch;
+ name="0003-s3-smbspool_krb5_wrapper-ignore-unknown-values-of-AU.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename*0="0003-s3-smbspool_krb5_wrapper-ignore-unknown-values-of-AU.pa";
+ filename*1="tch"
+
+From b2581f0ecc1253fa4d805b962ac8c7191f92e278 Mon Sep 17 00:00:00 2001
+From: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+Date: Sun, 3 Nov 2019 01:28:13 +0300
+Subject: [PATCH 3/4] s3:smbspool_krb5_wrapper: ignore unknown values of
+ AUTH_INFO_REQUIRED
+
+To make smbspool_krb5_wrapper usable as a default destination for symlink
+/usr/lib/cups/backend/smb in Linux ditros, it has to be well-prepared
+for any possible values of AUTH_INFO_REQUIRED set by cupsd and correctly
+pass printing tasks to smbspool if it sees that Kerberos authentication
+is not needed.
+
+Discussed here: https://lists.samba.org/archive/samba-technical/2019-October/134470.html
+
+Signed-off-by: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+---
+ source3/client/smbspool_krb5_wrapper.c | 34 ++++++++++++++++++++------
+ source3/script/tests/test_smbspool.sh  | 28 +++++++++++++++++++++
+ 2 files changed, 55 insertions(+), 7 deletions(-)
+
+diff --git a/source3/client/smbspool_krb5_wrapper.c b/source3/client/smbspool_krb5_wrapper.c
+index bd6319ca9c3..a2851d7fbc1 100644
+--- a/source3/client/smbspool_krb5_wrapper.c
++++ b/source3/client/smbspool_krb5_wrapper.c
+@@ -145,36 +145,56 @@ int main(int argc, char *argv[])
+ 		snprintf(device_uri, sizeof(device_uri), "%s", env);
+ 	}
+ 
+-	/* Check if AuthInfoRequired is set to negotiate */
++	/* We must handle the following values of AUTH_INFO_REQUIRED:
++	 *  none: Anonymous/guest printing
++	 *  username,password: A username (of the form "username" or "DOMAIN\username")
++	 *                     and password are required
++	 *  negotiate: Kerberos authentication
++	 *  NULL (not set): will never happen when called from cupsd
++	 * https://www.cups.org/doc/spec-ipp.html#auth-info-required
++	 * https://github.com/apple/cups/issues/5674
++	 */
+ 	env = getenv("AUTH_INFO_REQUIRED");
+ 
+         /* If not set, then just call smbspool. */
+ 	if (env == NULL || env == "none" || env[0] == 0) {
+ 		CUPS_SMB_DEBUG("AUTH_INFO_REQUIRED is not set - "
+-			       "execute smbspool");
++			       "executing smbspool");
++		/* Pass this printing task to smbspool without Kerberos auth */
+ 		goto smbspool;
+ 	} else {
+ 		CUPS_SMB_DEBUG("AUTH_INFO_REQUIRED=%s", env);
+ 
++		/* First test the value of AUTH_INFO_REQUIRED
++		 * against known possible values
++		 */
+ 		cmp = strcmp(env, "none");
+ 		if (cmp == 0) {
+ 			CUPS_SMB_DEBUG("Authenticate using none (anonymous) - "
+-				       "execute smbspool");
++				       "executing smbspool");
+ 			goto smbspool;
+ 		}
+ 
+ 		cmp = strcmp(env, "username,password");
+ 		if (cmp == 0) {
+ 			CUPS_SMB_DEBUG("Authenticate using username/password - "
+-				       "execute smbspool");
++				       "executing smbspool");
+ 			goto smbspool;
+ 		}
+ 
++		/* Now, if 'goto smbspool' still has not happened,
++		 * there are only two variants left:
++		 * 1) AUTH_INFO_REQUIRED is "negotiate" and then
++		 *    we have to continue working
++		 * 2) or it is something not known to us, then Kerberos
++		 *    authentication is not required, so just also pass
++		 *    this task to smbspool
++		 */
+ 		cmp = strcmp(env, "negotiate");
+ 		if (cmp != 0) {
+-			CUPS_SMB_ERROR("Authentication unsupported");
+-			fprintf(stderr, "ATTR: auth-info-required=negotiate\n");
+-			return CUPS_BACKEND_AUTH_REQUIRED;
++			CUPS_SMB_DEBUG("Value of AUTH_INFO_REQUIRED is not known "
++				       "to smbspool_krb5_wrapper, executing smbspool");
++			goto smbspool;
+ 		}
+ 
+ 		snprintf(auth_info_required,
+diff --git a/source3/script/tests/test_smbspool.sh b/source3/script/tests/test_smbspool.sh
+index 01d72101615..c32ace6682e 100755
+--- a/source3/script/tests/test_smbspool.sh
++++ b/source3/script/tests/test_smbspool.sh
+@@ -66,6 +66,30 @@ test_smbspool_authinforequired_none()
+ 	return 0
+ }
+ 
++test_smbspool_authinforequired_unknown()
++{
++	cmd='$samba_smbspool_krb5 smb://$SERVER_IP/print4 200 $USERNAME "Testprint" 1 "options" $SRCDIR/testdata/printing/example.ps 2>&1'
++
++	# smbspool_krb5_wrapper must ignore AUTH_INFO_REQUIRED unknown to him and pass the task to smbspool
++	# smbspool must fail with NT_STATUS_ACCESS_DENIED (22)
++	# "jjf4wgmsbc0" is just a random string
++	AUTH_INFO_REQUIRED="jjf4wgmsbc0"
++	export AUTH_INFO_REQUIRED
++	eval echo "$cmd"
++	out=$(eval $cmd)
++	ret=$?
++	unset AUTH_INFO_REQUIRED
++
++	case "$ret" in
++		22 ) return 0 ;;
++		* )
++			echo "$out"
++			echo "failed to test $smbspool_krb5 against unknown value of AUTH_INFO_REQUIRED"
++			return 1
++		;;
++	esac
++}
++
+ #
+ # The test enviornment uses 'vlp' (virtual lp) as the printing backend.
+ #
+@@ -187,6 +211,10 @@ testit "smbspool_krb5_wrapper AuthInfoRequired=none" \
+ 	test_smbspool_authinforequired_none || \
+ 	failed=$(expr $failed + 1)
+ 
++testit "smbspool_krb5_wrapper AuthInfoRequired=(sth unknown)" \
++	test_smbspool_authinforequired_unknown || \
++	failed=$(expr $failed + 1)
++
+ testit "smbspool print example.ps" \
+ 	$samba_smbspool smb://$USERNAME:$PASSWORD@$SERVER_IP/print1 200 $USERNAME "Testprint" 1 "options" $SRCDIR/testdata/printing/example.ps || \
+ 	failed=$(expr $failed + 1)
+-- 
+2.20.1
+
+
+--------------E7B1B9A379B03B360CED1717
+Content-Type: text/x-patch;
+ name="0004-smbspool-print-a-hint-about-smbspool_krb5_wrapper.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename*0="0004-smbspool-print-a-hint-about-smbspool_krb5_wrapper.patch"
+
+From 90dec7767aa6aecd303164eaea22656b9fa4e959 Mon Sep 17 00:00:00 2001
+From: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+Date: Sun, 3 Nov 2019 01:47:51 +0300
+Subject: [PATCH 4/4] smbspool: print a hint about smbspool_krb5_wrapper
+
+When I first met with the situation that Kerberos kredentials cache of root
+user was looked for instead of the one of the printing task creator,
+it took a lot of time to understand that smbspool_krb5_wrapper will resolve this.
+
+Signed-off-by: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+---
+ source3/client/smbspool.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/source3/client/smbspool.c b/source3/client/smbspool.c
+index 34def0c91a9..5e2d230ab8b 100644
+--- a/source3/client/smbspool.c
++++ b/source3/client/smbspool.c
+@@ -699,8 +699,8 @@ smb_connect(struct cli_state **output_cli,
+ 	if (strcmp(auth_info_required, "negotiate") == 0) {
+ 		if (!kerberos_ccache_is_valid()) {
+ 			fprintf(stderr,
+-				"ERROR: No valid Kerberos credential cache "
+-				"found!\n");
++				"ERROR: No valid Kerberos credential cache found! "
++				"Using smbspool_krb5_wrapper may help.\n");
+ 			return NT_STATUS_LOGON_FAILURE;
+ 		}
+ 		user = jobusername;
+-- 
+2.20.1
+
+
+--------------E7B1B9A379B03B360CED1717--
 
