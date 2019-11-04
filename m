@@ -2,47 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE895EDB42
-	for <lists+samba-technical@lfdr.de>; Mon,  4 Nov 2019 10:07:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63922EDB59
+	for <lists+samba-technical@lfdr.de>; Mon,  4 Nov 2019 10:13:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=IsGpomh1T8kyUIWX4gFsiHREjQ+f4WAEnIpLYihTwjw=; b=I4tPRxMZTFzKOMaRr1FNNL176t
-	48gmC6LY0KN61xhqlJ9Um8Hh2gX2WuJjMoSojGcUQYGQxaNqN/K6C9fFSMtxIodyK34yFsaizCgmP
-	WUfLcJkuU07VSVldaJvXo9Fe5+7OzDi9mPg6qidqiuh0SP7dAeLArqsrhHCTdbR93NExio+yxK653
-	r3p72ppQyzzibwDcxlKiYN3dsRqCvBHaIRb4uVHBv9pKjbIrZDS6frI5NbLPY6xz6aiSBvRKlH8Xv
-	64pfrV2qhXJBGwCo67xOjfnwXNkYdRy6GdIBKVDMK7mxmRAPVYNMj8TGmGGFCQTgcPqnlJQgjslgq
-	/44KZvhw==;
-Received: from localhost ([::1]:63160 helo=hr1.samba.org) 
+	bh=zBn8EhlwdCNXvtauvMJCgc6Eb7G6myJTh5JkwqJXBwI=; b=FiMmHRUAg86JMm9378r4g120w1
+	JhPk4axPMDuHczXRnkacxJNgJZA0UPsjQBZyqo3L4/2fCAAF3qfAqI3aZahPCDJKmjmsWxJvYT8/I
+	UeATvEppQg+DTVh+wM6SCMRfhIDpK1d6QXj9VRvLzLUrOCDoMWPS2RD9bFXTEgKRcurxJFtiwCxWm
+	vlVhdt5MQWeklixigT3rpbajDwqKv5cm6ULW98+ndQUE2WHNLzbMLWvL2hBYUBcce1ChI7Stjdv+R
+	srq/YVrsE4GLH4sVcFUxVwFLbDkkVyOByWb4LPu9QO5UjjuoH5SWyuww1Vk/ptlbDgBnauoFsEpAo
+	WCK+SW6Q==;
+Received: from localhost ([::1]:63962 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iRYJv-006SGu-Or; Mon, 04 Nov 2019 09:06:43 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39310) 
+	id 1iRYQ6-006SNa-9I; Mon, 04 Nov 2019 09:13:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41344) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iRYJr-006SGn-BK
- for samba-technical@lists.samba.org; Mon, 04 Nov 2019 09:06:41 +0000
+ (Exim) id 1iRYQ1-006SNT-IF
+ for samba-technical@lists.samba.org; Mon, 04 Nov 2019 09:13:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=IsGpomh1T8kyUIWX4gFsiHREjQ+f4WAEnIpLYihTwjw=; b=cYICQh7C45lRE9yU2yx4jILrjK
- s5QQDXTSnvcgGSiwSZbkDDwulUu9g1OlmnEgLxJrUEOQNaonE3mdK2MHKLmKi9Mx+RnmZ0bP5vL8W
- t1eOVY6TcoHSKt/l9HGHHbOrZjf+s09Z7VVi3OkYAdY9Palcn/vjWWUDIx0Kdg3cgBPg6GldZY8l2
- 85egfzsozSkY5GWELDLeSEY8sdFVeAz9Tt9q7aDBlQ+AXZds+RlZPtCsQ1+CmB/VNpwC7peaOv432
- 0EUZYuuGYmUVtLRhoLBy+rU/bhtbL2CLbIs8mIW+0d29AShXc8wWAVZBpqhB0JEndCDO9wyjXWASr
- M5geweMbr8CNh50BO2hE1IVD/UPUeIK3oM7g+BegnvGrpQkDQ/WdEsTvfRJ4hF5nQrR+eQPDlTIWs
- lG4LvpSte/eCl270OJ09FA8Vk/51og2KgLNGj6O9cGVQSHijiSkZS0h3S2XXnz4TXYzVyk/Y/66dZ
- TXtXNYKeKIyCGKFZAXmNjrME;
+ bh=zBn8EhlwdCNXvtauvMJCgc6Eb7G6myJTh5JkwqJXBwI=; b=dfn4fVen1WRqvvgzGuoS68msUU
+ Yk9MjxodHgsUbmvsVSY3EQ8sytUGNmaUX+U/6y7LmQ9nFP9zVYT1Y5S9FIwNdS+T6CBiFnqlmnio6
+ zI9aJGptBDN+MOx+qdo5SticCREH+aP2nRiN1iYT+Byab01sc3uNhVfO+dcJpPR8cLU6LAC8Hd2Uq
+ QPprWJYbYjJEwe2PQez5WGLL1kBdgfSS91e21BQEAisMrHWZDq0HjgPVSVrkRgxFrvRrhAdf6LGfg
+ Wwr4fdDrPWIw60MfaaJAbXCwdlAZuegpwWM+0T7rVJgK9mGKhUtfXoQvNHUiOhPbGDHrFQ73t7Lov
+ BR0BvdvkgkBbo8EhWl1K392xnhJtF3MXizAl94vFl0K23lfQhzhIYMGjr1fjYji2dkRRkxrTOVHxs
+ Sja9ashyYuLtb0peesJogqM/XeH75ELHxXfLWDcC4vV7YXSi3AreUCkXhlib28V/K+Wk4sAnXlR0o
+ ixdMad9GU/M/KcuCk27wzOnZ;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iRYJq-0006Wp-OS; Mon, 04 Nov 2019 09:06:38 +0000
-Date: Mon, 4 Nov 2019 11:06:36 +0200
+ (Exim) id 1iRYQ1-0006br-2I; Mon, 04 Nov 2019 09:13:01 +0000
+Date: Mon, 4 Nov 2019 10:12:59 +0100
 To: Ralph Boehme <slow@samba.org>
 Subject: Re: [PATCH] s3:libads: Fix mem leak in ads_create_machine_acct
-Message-ID: <20191104090636.GD32459@onega.vda.li>
+Message-ID: <20191104091259.g4jdmb3cdhjlqhgx@aneto>
 References: <CAEUGjKjmFJFmz+Wts1UMZaHXKEEpeuY7UmB52H_aiQU=HS11sA@mail.gmail.com>
  <937a7927-14e4-be29-a1df-37d19f5999c4@samba.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 In-Reply-To: <937a7927-14e4-be29-a1df-37d19f5999c4@samba.org>
-User-Agent: Mutt/1.12.1 (2019-06-15)
+User-Agent: NeoMutt/20180716
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,23 +56,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexander Bokovoy <ab@samba.org>
+From: Samuel Cabrero via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Samuel Cabrero <scabrero@samba.org>
 Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On ma, 04 marras 2019, Ralph Boehme via samba-technical wrote:
-> On 11/1/19 8:59 AM, Jones Syue via samba-technical wrote:
-> > Hello list,
-> > 
-> > This patch fix memory leak in ads_create_machine_acct,
-> > samba-4.10.9 included Bug 13884 and introduce this,
-> > please help review and push, thank you.
+
+
+On Mon, Nov 04, 2019 at 09:47:53AM +0100, Ralph Boehme via samba-technical wrote:
 > 
 > lgtm. Can I get a second team review please?
-LGTM too. Please push.
+> 
+
++1, LGTM too.
 
 -- 
-/ Alexander Bokovoy
+Samuel Cabrero                       scabrero@samba.org
+Samba Team                                www.samba.org
+GPG:  D7D6 E259 F91C F0B3 2E61 1239 3655 6EC9 7051 0856
 
