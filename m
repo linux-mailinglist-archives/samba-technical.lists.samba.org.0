@@ -2,58 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25387ED924
-	for <lists+samba-technical@lfdr.de>; Mon,  4 Nov 2019 07:51:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CEF1EDA67
+	for <lists+samba-technical@lfdr.de>; Mon,  4 Nov 2019 09:15:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=Bd3TTrg9zZW4cAfn85CxBo+7eINTNAhXiK/cSyJLOes=; b=2PwUJHe+kyMQkbaP3rJtCFeV7S
-	DEFjg8nF8n9BEWcjyIIVq7I9iZiv3n2edA78VjnQ2Rk+rbAeHrUHi3R16MCGdxYe+73aRZUt5regs
-	u3HnHk7UgvLa7muZyNki8gGBGsiNKJy4aBU/qmnqPY951fNXFIDKlpmPPyYpFTMdQLVHrfettXJEz
-	tXaFJESghs0xnCSbevRHrpXfgdh8ewREnczEOKPo/6SE53jD2LJQ+stH09rIVPB2SFn2TTYyNSlhO
-	6IHH1S4U/M/bXyFu6QcSQaC8saEXqDbSYoX5Zsxlxdk90c8q9fH7wyoOn5m2SHlvd3Ens0S/0XnrD
-	xyfNz6gw==;
-Received: from localhost ([::1]:55880 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=7ZMORGCZ+vngASJTAQfTjEdE4lG3oHsGNhUY6Oo8gSs=; b=dqlydyQmEyJtXXcI5UrlZC2T3d
+	IOhSiQ3BdsT4ERL2hWGDfb370afsTrN8I6ZtV/rCHC2FsLYTFx3E4NSkLSAAdWbhrib8YWk444KAU
+	VKbTa53zednZqTAC49bo0Fri+WqRDDhFAiWgAh/it3IKrjM2WZX06RuwTQWIVuXG9S3C/favbbuKF
+	YsLm75w8ckGj1BeGOLDPDucGnEJecRDBo84DVDTowbwUB6J8bL2XkVSobJtcf4P5EoU8kDPEe5KxD
+	VQ3ekQNYzX7gH3hiIyDIrAcneXhKNMNmmcebWEdMGGXjMFI+WrNnrm+tocmcRZh5H3oH/JJLNhk0h
+	SeHUNZzA==;
+Received: from localhost ([::1]:60222 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iRWBX-006Qu6-6u; Mon, 04 Nov 2019 06:49:55 +0000
-Received: from mail-qt1-x844.google.com ([2607:f8b0:4864:20::844]:42599) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iRWBL-006Qtz-30
- for samba-technical@lists.samba.org; Mon, 04 Nov 2019 06:49:46 +0000
-Received: by mail-qt1-x844.google.com with SMTP id t20so6750342qtn.9
- for <samba-technical@lists.samba.org>; Sun, 03 Nov 2019 22:49:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qnap.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
- bh=z7LzGM5EKFffPJkLbt62hNBnBOzOTQgi8AJJ3SmL390=;
- b=YVilUKT7x/e+BZ5JBjHAcbGs1uAHDeyNRJpL5+ZjGU5p+N0Ctk9cvqOW32AsIxOaD7
- NTiTJxgVhQ5ETqATs8Ekp3cFel9Nf+berUT7ZoxijiKVsRT5SmZ43gQCb2i/jbQVA29B
- vs1/1wjf8x1l6kXR47H3wa99bHiB0aYpEolJE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to;
- bh=z7LzGM5EKFffPJkLbt62hNBnBOzOTQgi8AJJ3SmL390=;
- b=eKWQ8pcCSOom5KadUQaGpsT1SzXSkSiz0lDukO5QdFPGVkI2KILHRjjW4y0YweBh3b
- Zq+P/DORFXvpVCjocaVW/Y0fxEzqWuyvefQYaX/Dx9mKrFESyCfASUyhlbTQNlJrSL2W
- YcRPuU2D7j/jkbY3kq998S/cudHaPlkxjlnLiIB9UcDR5mQYRGnATO+OLts8Qoutd+14
- +V3D4gdQVzmFzrHsSk6Jv3ksMNtISAMKKJP5Bxp5kViDwJqxYQQo4UH0IhaiFif1wVbE
- aX/BBqlffLnLYDvmYKTXF8wGhKZdFSvBN0tRe6bIxEAqA8ZRam6uZ46LUkFmE2rnuXbH
- +X8w==
-X-Gm-Message-State: APjAAAVAzCWU+oOYBUFZIYCmBs2JnDx9J7pgRr/J730aZ1qRuObk9Xtg
- HbBKCDnsXzRFik3HYJ0RDSYz3Nmhk9sAqK1rExp/ucTU
-X-Google-Smtp-Source: APXvYqxkgCtLgj3fRrKB4Iuuh847RiqBZuJaPjlAYzhlHOiWT1nPmAUn+cn/6Beix/Dh1ots5BBUS7Sx0TBXgPv1/wU=
-X-Received: by 2002:ad4:558c:: with SMTP id e12mr14305103qvx.191.1572850180667; 
- Sun, 03 Nov 2019 22:49:40 -0800 (PST)
+	id 1iRXWD-006Riy-VL; Mon, 04 Nov 2019 08:15:22 +0000
+Received: from mga06.intel.com ([134.134.136.31]:37421) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1iRXW5-006Ria-Nk
+ for samba-technical@lists.samba.org; Mon, 04 Nov 2019 08:15:18 +0000
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+ by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 03 Nov 2019 23:59:18 -0800
+X-ExtLoop1: 1
+Received: from lkp-server01.sh.intel.com (HELO lkp-server01) ([10.239.97.150])
+ by orsmga002.jf.intel.com with ESMTP; 03 Nov 2019 23:59:16 -0800
+Received: from kbuild by lkp-server01 with local (Exim 4.89)
+ (envelope-from <lkp@intel.com>)
+ id 1iRXGe-000I1c-Fc; Mon, 04 Nov 2019 15:59:16 +0800
+Date: Mon, 4 Nov 2019 15:59:09 +0800
+To: Aurelien Aptel <aaptel@suse.com>
+Subject: [cifs:for-next 18/20] fs/cifs/smb2transport.c:52:1: sparse: sparse:
+ symbol 'smb3_crypto_shash_allocate' was not declared. Should it be static?
+Message-ID: <201911041524.o7kWSYSC%lkp@intel.com>
 MIME-Version: 1.0
-References: <CAEUGjKjmFJFmz+Wts1UMZaHXKEEpeuY7UmB52H_aiQU=HS11sA@mail.gmail.com>
-In-Reply-To: <CAEUGjKjmFJFmz+Wts1UMZaHXKEEpeuY7UmB52H_aiQU=HS11sA@mail.gmail.com>
-Date: Mon, 4 Nov 2019 14:49:23 +0800
-Message-ID: <CAEUGjKhGfu1F+7bzsFNo5oq4YRg22hzK3xjuf3sv7Y-iYCzd6w@mail.gmail.com>
-Subject: Re: [PATCH] s3:libads: Fix mem leak in ads_create_machine_acct
-To: Samba Technical <samba-technical@lists.samba.org>,
- Jones Syue <jonessyue@qnap.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Patchwork-Hint: ignore
+User-Agent: NeoMutt/20170113 (1.7.2)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,35 +54,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jones Syue via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jones Syue <jonessyue@qnap.com>
+From: kbuild test robot via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kbuild test robot <lkp@intel.com>
+Cc: linux-cifs@vger.kernel.org, kbuild-all@lists.01.org,
+ samba-technical@lists.samba.org, Steve French <stfrench@microsoft.com>,
+ linux-kernel@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello list,
+tree:   git://git.samba.org/sfrench/cifs-2.6.git for-next
+head:   3c652dd9928737b82a74b3ce8483c7497885eb04
+commit: 4d1cc0309f7ec007b5b29f1350e3b1c105e86439 [18/20] cifs: try opening channels after mounting
+reproduce:
+        # apt-get install sparse
+        # sparse version: v0.6.1-6-g57f8611-dirty
+        git checkout 4d1cc0309f7ec007b5b29f1350e3b1c105e86439
+        make ARCH=x86_64 allmodconfig
+        make C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__'
 
-CI pipeline running here:
-https://gitlab.com/samba-team/devel/samba/pipelines/93381285
-please help review and push, thank you.
-
---
-Regards,
-Jones Syue | =E8=96=9B=E6=87=B7=E5=AE=97
-QNAP Systems, Inc.
+If you fix the issue, kindly add following tag
+Reported-by: kbuild test robot <lkp@intel.com>
 
 
-On Fri, Nov 1, 2019 at 3:59 PM Jones Syue <jonessyue@qnap.com> wrote:
+sparse warnings: (new ones prefixed by >>)
 
-> Hello list,
->
-> This patch fix memory leak in ads_create_machine_acct,
-> samba-4.10.9 included Bug 13884 and introduce this,
-> please help review and push, thank you.
->
-> https://bugzilla.samba.org/show_bug.cgi?id=3D13884
->
-> --
-> Regards,
-> Jones Syue | =E8=96=9B=E6=87=B7=E5=AE=97
-> QNAP Systems, Inc.
->
+>> fs/cifs/smb2transport.c:52:1: sparse: sparse: symbol 'smb3_crypto_shash_allocate' was not declared. Should it be static?
+
+Please review and possibly fold the followup patch.
+
+---
+0-DAY kernel test infrastructure                Open Source Technology Center
+https://lists.01.org/pipermail/kbuild-all                   Intel Corporation
+
