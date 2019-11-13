@@ -2,48 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D22A2F9798
-	for <lists+samba-technical@lfdr.de>; Tue, 12 Nov 2019 18:50:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 59CCAFAA1B
+	for <lists+samba-technical@lfdr.de>; Wed, 13 Nov 2019 07:21:38 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=ACUdikuY9uOe1VwqNezuXT3YBCZ8QoMd++Fan7YAFKA=; b=dQxAHx9+rZaH4uaL1+HUL2QpEv
-	cxX6sEeD2v8Lw/FQ+adsoduPllv0QMgzSLgnuw+FgRwD5Jv+obK4TCraKf0uXTTDk66OIZuSn2evd
-	gBvuy3xW4AbOr365DDUM7mPDoZTlsG+QB7awfd6RIVAHut8FbYXcRpEPajKVrHpUonnqNGtuL0Rys
-	KMSl9xIWSEh2LXxciysX+40AgPoYNH25irNOe3XW7MmNSUhp48dmuLv+pVrAjShgl3JXDB6hKjcKO
-	FxD1keaDABjKENIjQtPtWKPDllwCnJPEdy+vOeajRJTRmH7eJlgmZNEJrz1J8bOIublaG+xGR3xI1
-	edUZTYhA==;
-Received: from localhost ([::1]:24270 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=/Sx8jOFip6LY0WM2JtGUJH6gRD99w/mj049GL+1FtHo=; b=JxiXwiLznjLzws/UllraG+f8FM
+	t45fMGk4LoU3asdMPKYNnqVYB/vrNTo7CiRIGQzUbDv1Y8aMBdrTPOfbkbwirJnuemr9QGaPe24wP
+	9PiY/zEVWpa+fbYruOdSMM9CVDlQtY7KXo53NhsksuSAMv4a6YTRUBUmymRueVnxZ63GjKymNZUkB
+	oxBTw5b1wyRLTWPz/KVNyLKzQccKEMLT+Sy8/gcmlsZfLMGFwYFXh7lilDYGY/WtmMXGl0JbIBWeK
+	tZ/dnMfKPXbIJWaXgl++uPf6ln37PsyZ0HJBbUIGdMsOJhANm9QxMA6xAPFzSSe4rM+0yzdOixmHR
+	7A3T6JLg==;
+Received: from localhost ([::1]:65350 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iUaJI-009KmJ-If; Tue, 12 Nov 2019 17:50:36 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56402) 
+	id 1iUm0w-009ePw-JI; Wed, 13 Nov 2019 06:20:26 +0000
+Received: from mail-oi1-x229.google.com ([2607:f8b0:4864:20::229]:38851) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iUaJB-009Klh-Ud
- for samba-technical@lists.samba.org; Tue, 12 Nov 2019 17:50:33 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=ACUdikuY9uOe1VwqNezuXT3YBCZ8QoMd++Fan7YAFKA=; b=pMKdil6rLo70tzx5xSBaQLCHAh
- xiaYEQD9akeMi4hEptzv6WymSoo/PpqRnX1BH2LSN6zOLaK1VLNgP2MGMN6+qur37meYfQOVEALSr
- 0mJP4qcdvlGOtbVQp73nBy14pdiQoC/8lcc7aodtRmihU9cOl37sdeehbVylPZcYP7L9f9C5ZC8jL
- I3lG4QLVRdT0llzjx+Qp63y/2XgmsBMaILnn1IIUYyD3nfEGIRxzFR+iYMg1eNjLg6c1ahVefIAmv
- ZlV7csMMgvzDP+nCO+DvEbWIaA6uvtq6oBQJ01mzIIrI6qBgAIigPIHQoyTJ2si6Phdq2FKjFLFPC
- MwUS7kFl3zkx9sh7pgqp+k8IRQ3QGJwsCvI4srgTue4A1505wjUmcV2no0ZOUYaxoedqy7KtO26DZ
- /UhrfUn7UspEHZBXZSzlBlbz2TcFInx6lfJa7niDfxwOh+V4+/AmEHzFKNSnN1QJiStiMTs12mUOY
- oGSXBI8pgKPNR/DMHyDwaiLj;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iUaJA-0008HH-Rn; Tue, 12 Nov 2019 17:50:29 +0000
-Date: Tue, 12 Nov 2019 10:50:24 -0700
-To: Andreas Schneider <asn@samba.org>
-Subject: Re: bootstrap: Fix centos7 image creation
-Message-ID: <20191112175023.GA3048@samba.org>
-References: <20191106133603.2F5431404C0@sn.samba.org>
- <343cb710c4bb9936e0d6c75f82c81ab0f3d35bf9.camel@samba.org>
- <20191106234619.GA21747@samba.org> <24991601.T20UtDr9EF@magrathea>
+ (Exim) id 1iUm0r-009ePZ-Lc
+ for samba-technical@lists.samba.org; Wed, 13 Nov 2019 06:20:23 +0000
+Received: by mail-oi1-x229.google.com with SMTP id a14so779354oid.5
+ for <samba-technical@lists.samba.org>; Tue, 12 Nov 2019 22:20:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=/Sx8jOFip6LY0WM2JtGUJH6gRD99w/mj049GL+1FtHo=;
+ b=NZRF+rMoIOuBiOJuUb1ajLpkpfGJwn8eoEAbh8TtwbYqRFC4RFrVGA2rWPSaTpt4ul
+ m+XGhq2CpOSzc/kJ/8d8mTUoLKcuroPckUe+VkpV/g9vLycWLu5qnHXAkjY18HTtDbot
+ 0/7qMAWx1Oi2aP2MGkoM+6pXMkWafdd5+hVYTJkPgrXSW6C14GXqTBg11vg8985FiX+2
+ v2smXSejq7i64z27Oj8QJdxd5q9BE+CUJXjM+oUyQ3MAO/eya3oWgGxKFIBdQhGP3Gro
+ zIXdrRwYGdXHbBiXZpK70527LVr6vzRqhYwitEgOr0O3T2JzglH+TgmE5zOSzOBQnru7
+ EX3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=/Sx8jOFip6LY0WM2JtGUJH6gRD99w/mj049GL+1FtHo=;
+ b=J7f0yX+TY1+QwvcR4PcSyq9enf//z5ti+jJes4IxH95sDz4bU1O3bFksgpLIJB1vm6
+ 5oLVzyQUp+Wmw3+RhL4iuz3dm7P5ukS+GvmAK6NbgBviL9VoFDDYoN9JGqAhROXlR9SU
+ qvAyB6WDD+9vwLeoRf5oyBxyq7398wlx5mURQwTLgQF5qsZ4CvVT5j8y3btC82KU2yZD
+ /Z44uFBxCb6095VGkRxwqrMze77dMXvOO1tC2nUzyUlEsXoQf9h7lPhwk+lTuT9Pl/1w
+ 1TqSpe+Ng/i/dxtyptlaH6RQz3IQHYBUoWZEnIAtQRqbailvNtJSuh3c1ABZxExhv0t/
+ Kzng==
+X-Gm-Message-State: APjAAAV+WaETFyXATwpAz58lP6EA2NL3UI9ZUJp9mvGQfiAEbEMRyCSG
+ q1JGTG9oXqz04zcOoSEpbYSeCUJPRphmmcJ/8ifVbg==
+X-Google-Smtp-Source: APXvYqxrlX4jcjdSEMhOhDN1U83d1sZPTA2PiKccUEgncM1AyCr85uEuNRpfZSsJThBw/vQ/9bPl7Q2FyhBUo8cYKkQ=
+X-Received: by 2002:aca:4742:: with SMTP id u63mr1572673oia.177.1573626019264; 
+ Tue, 12 Nov 2019 22:20:19 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <24991601.T20UtDr9EF@magrathea>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+Date: Wed, 13 Nov 2019 17:20:07 +1100
+Message-ID: <CAJ+X7mTKrDNj7hgcKNpf=8ibwtJ7VjhrOLbyjgJ+Orj9R6aR0A@mail.gmail.com>
+Subject: [PATCH] ctdb-ib: Fix build errors for infiniband transport
+To: Samba Technical <samba-technical@lists.samba.org>
+Content-Type: multipart/mixed; boundary="000000000000e35d340597345b88"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,67 +64,56 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Christof Schmitt <cs@samba.org>
-Cc: samba-technical@lists.samba.org, Andrew Bartlett <abartlet@samba.org>
+From: Amitay Isaacs via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Amitay Isaacs <amitay@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Nov 07, 2019 at 09:55:43AM +0100, Andreas Schneider wrote:
-> On Thursday, 7 November 2019 00:46:19 CET Christof Schmitt wrote:
-> > On Thu, Nov 07, 2019 at 06:34:38AM +1300, Andrew Bartlett wrote:
-> > > On Wed, 2019-11-06 at 14:36 +0100, Andreas Schneider wrote:
-> > > > The branch, master has been updated
-> > > > 
-> > > >        via  35bb734d638 bootstrap: Fix centos7 image creation
-> > > >        via  6a3b19fb170 bootstrap: Add Fedora 31
-> > > >        via  1ba0a32e707 bootstrap: Remove Fedora 28 which is already EOL
-> > > >       
-> > > >       from  bf99f820778 ctdb-tests: Make process exists test more
-> > > >       resilient
-> > > > 
-> > > > https://git.samba.org/?p=samba.git;a=shortlog;h=master
-> > > > 
-> > > > 
-> > > > - Log -----------------------------------------------------------------
-> > > > commit 35bb734d638e273f2fd1a19220db5f200d3e7489
-> > > > Author: Andreas Schneider <asn@samba.org>
-> > > > Date:   Wed Nov 6 08:43:05 2019 +0100
-> > > > 
-> > > >     bootstrap: Fix centos7 image creation
-> > > >     
-> > > >     Signed-off-by: Andreas Schneider <asn@samba.org>
-> > > >     Reviewed-by: Alexander Bokovoy <ab@samba.org>
-> > > >     
-> > > >     Autobuild-User(master): Andreas Schneider <asn@cryptomilk.org>
-> > > >     Autobuild-Date(master): Wed Nov  6 13:35:17 UTC 2019 on sn-devel-184
-> > > 
-> > > G'Day Andreas,
-> > > 
-> > > I actually think we should remove nettle entirely, it is incorrectly
-> > > listed as a dependency.  It came about due to some work we did for the
-> > > encrypted passwords support (which metze then changed to use our
-> > > internal AES, now removed in favour of pure GnuTLS).
-> > > 
-> > > I picked this this when Christof proposed the same patch here:
-> > > https://gitlab.com/samba-team/samba/merge_requests/875#note_239077036
-> > > 
-> > > He was able to successfully drop the nettle dep.
-> > > 
-> > > Sadly he had trouble with the ktest environment I also asked him to add
-> > > so it hasn't merged yet.
-> > 
-> > Yes, i can confirm that nettle-dev can be removed, as it will be pulled
-> > in as a gnutls dependency. I just got distracted by customer work and
-> > still need to debug the ktest issue.
-> 
-> I'm fine with removing it, I've just wanted to fix CentOS7 quickly.
+--000000000000e35d340597345b88
+Content-Type: text/plain; charset="UTF-8"
 
-FYI,
+Hi,
 
-i updated the nettle patch in
-https://gitlab.com/samba-team/samba/merge_requests/875#note_242391478 to
-remove nettle-dev.
+Even though infiniband support is broken in CTDB, I would like to keep
+it building at least.
 
-Christof
+Please review and push.
+
+Amitay.
+
+--000000000000e35d340597345b88
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-ctdb-ib-Fix-build-errors-for-infiniband-transport.patch"
+Content-Disposition: attachment; 
+	filename="0001-ctdb-ib-Fix-build-errors-for-infiniband-transport.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_k2wwa8kd0>
+X-Attachment-Id: f_k2wwa8kd0
+
+RnJvbSBmODY5MWMxZjBiZDFmODJkZGI4NWMyYjg2NzVmNzY5MDM3ZTMwNGM3IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBBbWl0YXkgSXNhYWNzIDxhbWl0YXlAZ21haWwuY29tPgpEYXRl
+OiBUdWUsIDEyIE5vdiAyMDE5IDE0OjE0OjUzICsxMTAwClN1YmplY3Q6IFtQQVRDSF0gY3RkYi1p
+YjogRml4IGJ1aWxkIGVycm9ycyBmb3IgaW5maW5pYmFuZCB0cmFuc3BvcnQKClNpZ25lZC1vZmYt
+Ynk6IEFtaXRheSBJc2FhY3MgPGFtaXRheUBnbWFpbC5jb20+Ci0tLQogY3RkYi9pYi9pYndyYXBw
+ZXIuYyAgICAgIHwgMSAtCiBjdGRiL2liL2lid3JhcHBlcl90ZXN0LmMgfCA0ICsrLS0KIDIgZmls
+ZXMgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBh
+L2N0ZGIvaWIvaWJ3cmFwcGVyLmMgYi9jdGRiL2liL2lid3JhcHBlci5jCmluZGV4IDVjYTNiOTQ2
+ZjAwLi5jZjRlZmE1NzllMiAxMDA2NDQKLS0tIGEvY3RkYi9pYi9pYndyYXBwZXIuYworKysgYi9j
+dGRiL2liL2lid3JhcHBlci5jCkBAIC0zMiw3ICszMiw2IEBACiAKICNpbmNsdWRlICJjb21tb24v
+bG9nZ2luZy5oIgogCi0jaW5jbHVkZSA8aW5maW5pYmFuZC9rZXJuLWFiaS5oPgogI2luY2x1ZGUg
+PHJkbWEvcmRtYV9jbWFfYWJpLmg+CiAjaW5jbHVkZSA8cmRtYS9yZG1hX2NtYS5oPgogCmRpZmYg
+LS1naXQgYS9jdGRiL2liL2lid3JhcHBlcl90ZXN0LmMgYi9jdGRiL2liL2lid3JhcHBlcl90ZXN0
+LmMKaW5kZXggNWViMzIwOWI2OGMuLjc3YTUzMjNmYmYxIDEwMDY0NAotLS0gYS9jdGRiL2liL2li
+d3JhcHBlcl90ZXN0LmMKKysrIGIvY3RkYi9pYi9pYndyYXBwZXJfdGVzdC5jCkBAIC01NTEsNyAr
+NTUxLDcgQEAgaW50IG1haW4oaW50IGFyZ2MsIGNoYXIgKmFyZ3ZbXSkKIAltZW1zZXQodGN4LCAw
+LCBzaXplb2Yoc3RydWN0IGlid3Rlc3RfY3R4KSk7CiAJdGN4LT5uc2VjID0gMDsKIAl0Y3gtPm5t
+c2cgPSAxMDAwOwotCURFQlVHTEVWRUwgPSAwOworCWRlYnVnbGV2ZWxfc2V0KDApOwogCiAJLyog
+aGVyZSBpcyB0aGUgb25seSBjYXNlIHdlIGNhbid0IGF2b2lkIHVzaW5nIGdsb2JhbC4uLiAqLwog
+CXRlc3RjdHggPSB0Y3g7CkBAIC01OTAsNyArNTkwLDcgQEAgaW50IG1haW4oaW50IGFyZ2MsIGNo
+YXIgKmFyZ3ZbXSkKIAkJCXRjeC0+bWF4c2l6ZSA9ICh1bnNpZ25lZCBpbnQpYXRvaShvcHRhcmcp
+OwogCQkJYnJlYWs7CiAJCWNhc2UgJ2QnOgotCQkJREVCVUdMRVZFTCA9IGF0b2kob3B0YXJnKTsK
+KwkJCWRlYnVnbGV2ZWxfc2V0KGF0b2kob3B0YXJnKSk7CiAJCQlicmVhazsKIAkJZGVmYXVsdDoK
+IAkJCWZwcmludGYoc3RkZXJyLCAiRVJST1I6IHVua25vd24gb3B0aW9uIC0lY1xuIiwgKGNoYXIp
+b3ApOwotLSAKMi4yMS4wCgo=
+--000000000000e35d340597345b88--
 
