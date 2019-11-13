@@ -2,91 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DF78FB5D6
-	for <lists+samba-technical@lfdr.de>; Wed, 13 Nov 2019 18:01:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A82F6FB946
+	for <lists+samba-technical@lfdr.de>; Wed, 13 Nov 2019 20:59:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=bSVDIsPaAfHEzMDWm83h9RkQiYWVw0SpwRaxG3nV5e4=; b=zkq6A4GwppPPzMGY8knxn/S/AJ
-	p5HOQpRs9OK0KSTmBQXPI8QLytjcw+BGlDmOBJamUnQHsrdaWDFTufnnWgEVFNRj20m3hS+RFx0V0
-	zkEOfRoNRt4gPsS+1rHBUnCUygXoUa7IwHQm83R1HkPZSmQsCl4ZDGnQgPDyWQtF4gtlxHEcBGjHs
-	uCR6i1fdhQye6TdBz9YLmSs+HwRONDatUvq4U9TOr3bYUlklIf5gILZCCNtJ6eT6kvOjHVe3KIqIx
-	datqXhXvWTvLdpA8Z2vxPcV9P/9HlF2hpLZNtzvYbxxrhBxJsbgrIMDTlKP4lGzlYOU+3vC/1wP+U
-	Lk8JgmQA==;
-Received: from localhost ([::1]:21820 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=AnnVr8sFIj3W9PEwbcAvKwCegO/9Ua9DWlwMlf5sAPE=; b=erM+6YvEh6YxzetczQJFsJ0mGF
+	Mj7pWg24b1C/UO2urpRXd6WfV+9zR3b9eP+w12pa03W2T+NJjf3W1ABTT7i/K9yRKHdTA5lDVyHyA
+	hKTiBUWXr9bRCWk0J8yw4xvMD4w2VieaLME1v+6URvRmfJdqMr8DD8qJlkGSYtsEX3hsdz6bdd+Ye
+	9772m56jb3ca0yoxe4ebgGnb9vaiU5/M4ad3pPVu5jieIyj/MAfAleC3uOz6fpuDc5Fm7rSRQiJSK
+	WGRCpVbYHdo/1TWF1kB5QmfDog7gqnd80o1AMJRqpicyY0aX/fJLTOr5fxlNiIKdWwnZJi9E2g5V8
+	3yZDyjSg==;
+Received: from localhost ([::1]:24796 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iUw0k-000DZF-LZ; Wed, 13 Nov 2019 17:00:54 +0000
-Received: from m4a0039g.houston.softwaregrp.com ([15.124.2.85]:51128) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iUw0a-000DZ8-Sm
- for samba-technical@lists.samba.org; Wed, 13 Nov 2019 17:00:50 +0000
-Received: FROM m4a0039g.houston.softwaregrp.com (15.120.17.146) BY
- m4a0039g.houston.softwaregrp.com WITH ESMTP
- FOR samba-technical@lists.samba.org; Wed, 13 Nov 2019 16:59:29 +0000
-Received: from M4W0334.microfocus.com (2002:f78:1192::f78:1192) by
- M4W0334.microfocus.com (2002:f78:1192::f78:1192) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10; Wed, 13 Nov 2019 16:50:26 +0000
-Received: from NAM03-DM3-obe.outbound.protection.outlook.com (15.124.8.12) by
- M4W0334.microfocus.com (15.120.17.146) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10 via Frontend Transport; Wed, 13 Nov 2019 16:50:26 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YEa+gsvBXMg42+xlm8MPGunGj28Olx3GxEsyC+6OeGe4PBFhsnos3Xk4koXkYOeDGqKGbgRKgWVOGt3JTrDUfZQ2wCADpiEzZA67rKfxlm0fI3atSMnbe2TPO/3Wr7qXXep3je8wT5E5ObEm8VDukn8asRxCDEA6D+U+JggJm2YhOh8SxFJ+DCHGA610s0LouwT9nBRpeekZv6cJWd5TF70Ruw6AOEE/WTvmcR6/ubz+rfCSTUGiCKuxzYQg6Mq6JeEoJza1OulIRMAZO2e/LjQm9NShexQU6I4UtaTocYQOFZH3Dju9FHdgO1mY3KcMakBnaf1Edp9ypQq79fOwpQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bSVDIsPaAfHEzMDWm83h9RkQiYWVw0SpwRaxG3nV5e4=;
- b=PqJhvUnxKIIqQfeeFj/GImP1WMp/5vHJvKUyitJSRYBdTKCcQWRLFzpGEq9RHDKRP6MqoZ9NIFPpyALFbsMvAe0zgGju/9CGud1xqEBrj3cfj6RnNlS0WotFROgzJNfbg3TQwqYIGsAgPJXgbp+lzA7enGXLygdtjj5foJjG9Y889sLtn7U/qrC3RlG7r+SO0yDtKZ9zjYUEaCc3bN29KWX5TE1U31sDYMbsRVU3SBbiN1bgl4ydUVETPXfP9/96Su7EITyY8KgFEx3Cm8RvbGM/5kd1UxXivKLRvSC9BriG2uYHEMwrqWvui3331XAf2LgOJW59vSTw99w21Zibag==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Received: from DM6PR18MB2507.namprd18.prod.outlook.com (20.179.105.79) by
- DM6PR18MB3049.namprd18.prod.outlook.com (20.179.48.142) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2430.25; Wed, 13 Nov 2019 16:50:23 +0000
-Received: from DM6PR18MB2507.namprd18.prod.outlook.com
- ([fe80::31ca:a807:241:adf6]) by DM6PR18MB2507.namprd18.prod.outlook.com
- ([fe80::31ca:a807:241:adf6%5]) with mapi id 15.20.2408.024; Wed, 13 Nov 2019
- 16:50:23 +0000
-To: Rowland penny <rpenny@samba.org>, "samba-technical@lists.samba.org"
- <samba-technical@lists.samba.org>
-Subject: Re: RFC: Add some functionality to net ads changetrustpw
-Thread-Topic: RFC: Add some functionality to net ads changetrustpw
-Thread-Index: AQHVmi5eYhhxmiZA5Uef7zHFUzBZG6eJMyeAgAAFIQCAAAqlAIAADZIA
-Date: Wed, 13 Nov 2019 16:50:23 +0000
-Message-ID: <162a149c-6615-1f14-9fc2-cc3e76041bb2@suse.com>
-References: <aa05a22c-1fae-b4e0-c194-88f8609c0307@suse.com>
- <700e8c5e-9fb7-c0e6-75ff-7c82d112864e@samba.org>
- <6974328a-3d55-9f1e-0e37-ef5e45035a54@suse.com>
- <8afaa4f8-da9f-5459-cd0a-4dff22b9ff0e@samba.org>
-In-Reply-To: <8afaa4f8-da9f-5459-cd0a-4dff22b9ff0e@samba.org>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=NoPower@suse.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [109.76.44.167]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 4f597085-d1df-40e4-261c-08d768599397
-x-ms-traffictypediagnostic: DM6PR18MB3049:
-x-ms-exchange-purlcount: 1
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: hHzxFVfe+zoH16eR0enf+cpbdqqqXSzLr3it0dqsFAbP1Es7AIVEaJHFCk49XiODObLYn9IRAqBlt/xTRZdUHIA+MZlJZk1Eaw6pMjQsebG4bmFFrJ5DZ/SQC+ipD8bE96pG6OAiod2Re9hvo1ut8eN0oKIwzMRHwv1x9BUgOflWnqBYK6OO/XnLErEunoDCH1w+h29GcwSNTttklRd/mIsrgR5DyYsC92XAdRUNcKMPl3oy6cu7RCqFsO/ov6zjGcBDfFBcqj/yuxwOFntIRxlB0Wf3dwuc+hl8WKhzSMdd9Fl35CtX+zk7yKgbqgQu2OqoXJSKR3TxGm+hk6hA9DJgqoAvpVL5b+vuySFTebGCt5DjfTvgHGS2YMrVYn8oEMdKX+UCIrzLvnC5h/v2TVqz+I6dxuHjtrGbdOub8CKdcKtdwPJqyrCAF6HsaHtkNFe1TqPWI+IUcayX02RRCNIn/rCq6JK4FEx7uuS2/fs=
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <4B8466C60ABA35478EF0B09279561C01@namprd18.prod.outlook.com>
-Content-Transfer-Encoding: base64
+	id 1iUymL-000FzZ-Ii; Wed, 13 Nov 2019 19:58:13 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz
+ ([2404:130:4080::4]:48112) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iUymF-000FzO-M1
+ for samba-technical@lists.samba.org; Wed, 13 Nov 2019 19:58:11 +0000
+Received: from [IPv6:2404:130:0:1000:b511:6110:326e:9667] (unknown
+ [IPv6:2404:130:0:1000:b511:6110:326e:9667])
+ (Authenticated sender: gary@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 74D4A810DF
+ for <samba-technical@lists.samba.org>; Thu, 14 Nov 2019 08:40:18 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1573674018;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references:openpgp:openpgp:autocrypt:autocrypt;
+ bh=AnnVr8sFIj3W9PEwbcAvKwCegO/9Ua9DWlwMlf5sAPE=;
+ b=EAioKKMTykkga4fiXQO//R5WXWvR2r5CbC2vjduJMsJ+Uu5Md28/dhxihQnNqhZIarIiwp
+ 4lHojvn1ZfwmeA7fUy/snKP3mZg6jEICDZYScnaWQ60ymdwmYUBXupmt7ObStn7oQOO0Dg
+ 5jqrh3/UvcR5ewBIa3gKkSp4eHEp9qVGMXh5h2ViRpAfiUk9YkF++2/La98AuP2BCbvbYU
+ c95tt/bTRQnabD7i0YC6EQ1n3DCV1Gkn0ds60BtoBeNrjrfXMi9iopAaGHfAkv3a5Pf8AF
+ hx4Tqo0/7avMNA/weR3wOSJkFV775e2zGo6RYOiEy27Hz7UMra9v1mlUSYqZiw==
+Subject: Re: feedback on ldap improvement in samba 4.11
+To: samba-technical@lists.samba.org
+References: <4ac9eeeb-211b-ca35-d234-6648c612ce3d@tranquil.it>
+Openpgp: preference=signencrypt
+Message-ID: <36c80274-fefe-e1ff-c6ee-223f85195c22@catalyst.net.nz>
+Date: Thu, 14 Nov 2019 08:40:12 +1300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4f597085-d1df-40e4-261c-08d768599397
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: CAJqvd+VRIIeXa8BjHDH6a7arncRLFYVcA5SZ21TQRJ/Bdfue+1kcwGKwI21h5thKXaKGwQENU3ur7ZQjRIW2g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR18MB3049
-X-OriginatorOrg: suse.com
+In-Reply-To: <4ac9eeeb-211b-ca35-d234-6648c612ce3d@tranquil.it>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="TupK1kFtN8Mbl7IaE2ryyskVT6vkUG6Qc"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,36 +62,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Noel Power via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Noel Power <NoPower@suse.com>
+From: Gary Lockyer via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Gary Lockyer <gary@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-DQpPbiAxMy8xMS8yMDE5IDE2OjAxLCBSb3dsYW5kIHBlbm55IHZpYSBzYW1iYS10ZWNobmljYWwg
-d3JvdGU6DQo+IE9uIDEzLzExLzIwMTkgMTU6MjMsIE5vZWwgUG93ZXIgd3JvdGU6DQo+PiBPbiAx
-My8xMS8yMDE5IDE1OjA1LCBSb3dsYW5kIHBlbm55IHZpYSBzYW1iYS10ZWNobmljYWwgd3JvdGU6
-DQo+Pj4gT24gMTMvMTEvMjAxOSAxNDoyNiwgTm9lbCBQb3dlciB2aWEgc2FtYmEtdGVjaG5pY2Fs
-IHdyb3RlOg0KPj4+PiBIaSwNCj4+Pj4NCj4+Pj4gSSBoYXZlIGEgcGF0Y2ggaGVyZSByZXN1bHRp
-bmcgZnJvbSBhIGN1c3RvbWVyIHJlcXVlc3Qgd2hlcmUgdGhleQ0KPj4+PiB3aXNoIHRvDQo+Pj4+
-IGJlIGFibGUgdG8gcGVyaW9kaWNhbGx5IHJ1biBhIGNvbW1hbmQgdG8gdHJ1c3QgcHcgYWZ0ZXIg
-YSBudW1iZXIgb2YNCj4+Pj4gZGF5cw0KPj4+PiBoYXMgZXhwaXJlZCAoc28gc29tZXRoaW5nIHRo
-ZXkgY2FuIHJ1biBpbiBjcm9uIGpvYikgVGhlIHdvdWxkIGJlDQo+Pj4+IHNvbWV0aGluZyBzaW1p
-bGFyIHRvIHdoYXQgd2luYmluZCBkb2VzIHdpdGggJ21hY2hpbmUgcGFzc3dvcmQgdGltZW91dCcN
-Cj4+Pj4gcGFyYW0uIFNvIHRoaXMgaXMgc29tZXRoaW5nIHRvIGJlIHVzZWQgd2hlbiB3aW5iaW5k
-IGlzbid0IHVzZWQuDQo+Pj4gTm93IEkgYW0gcHJvYmFibHkgbWlzc2luZyBzb21ldGhpbmcgaGVy
-ZSwgYnV0IGRvZXNuJ3Qga2VyYmVyb3MgdXNlIHRoZQ0KPj4+IG1hY2hpbmUgcGFzc3dvcmQgKHdo
-aWNoIG1lYW5zIGFkcykgYW5kIHRoaXMgbWVhbnMgd2luYmluZCBtdXN0IGJlDQo+Pj4gcnVubmlu
-ZyAoYXQgbGVhc3QgZnJvbSA0LjguMCkNCj4+IEkgZG9uJ3QgcmVjYWxsIHdoaWNoIHNhbWJhIHZl
-cnNpb24gdGhpcyB3YXMgcmVwb3J0ZWQgYWdhaW5zdCwgYnV0IHRoZW4NCj4+IGFnYWluIEkgYW0g
-bm90IGVudGlyZWx5IHN1cmUgYWJvdXQgaWYgaXQgaXNuJ3QgcG9zc2libGUgdG8gcnVuIHdpdGhv
-dXQNCj4+IHdpbmJpbmQgaW4gbW9yZSByZWNlbnQgdmVyc2lvbnMuDQo+Pg0KPj4gQWxzbyBJIGJl
-bGlldmUgaXQncyBwb3NzaWJsZSB0byBydW4gd2l0aCBzc3NkIGFuZCBubyB3aW5iaW5kDQo+DQo+
-IFNvcnJ5LCBidXQgeW91IG11c3QgaGF2ZSBtaXNzZWQgdGhlICd1c2luZyBzc3NkIHdpdGggU2Ft
-YmEgaXMgbm8NCj4gbG9uZ2VyIHN1cHBvcnRlZCcgZGlzY3Vzc2lvbi4gSWYgeW91IHVzZSAnc2Vj
-dXJpdHkgPSBBRFMnIG9yICdzZWN1cml0eQ0KPiA9IGRvbWFpbicgd2l0aCBTYW1iYSA+PSA0Ljgu
-MCwgeW91IG11c3QgcnVuIHdpbmJpbmQsIHNlZSBoZXJlOg0KPg0KPiBodHRwczovL3dpa2kuc2Ft
-YmEub3JnL2luZGV4LnBocC9TYW1iYV80LjhfRmVhdHVyZXNfYWRkZWQvY2hhbmdlZA0KPg0KeWVw
-IEkgbWlzc2VkIHRoYXQsDQoNCmFsc28gc3RpbGwgIidtYWNoaW5lIHBhc3N3b3JkIHRpbWVvdXQn
-IHdvcmtzIG9ubHkgd2l0aCBhIHN1YnNldCBvZiB0aGUNCidrZXJiZXJvcyBtZXRob2QnIHZhbHVl
-cyINCg0Kc28gSSB0aGluayBpdCBpcyBzdGlsbCBtYXliZSB1c2VmdWwNCg0KTm9lbA0KDQo=
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--TupK1kFtN8Mbl7IaE2ryyskVT6vkUG6Qc
+Content-Type: multipart/mixed; boundary="3quwGqzhgAOxK7crRQFHPjoYMNdz5PVDm";
+ protected-headers="v1"
+From: Gary Lockyer <gary@catalyst.net.nz>
+To: samba-technical@lists.samba.org
+Message-ID: <36c80274-fefe-e1ff-c6ee-223f85195c22@catalyst.net.nz>
+Subject: Re: feedback on ldap improvement in samba 4.11
+References: <4ac9eeeb-211b-ca35-d234-6648c612ce3d@tranquil.it>
+In-Reply-To: <4ac9eeeb-211b-ca35-d234-6648c612ce3d@tranquil.it>
+
+--3quwGqzhgAOxK7crRQFHPjoYMNdz5PVDm
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-NZ
+Content-Transfer-Encoding: quoted-printable
+
+That's by design, as I get confused by processes that restart after a
+SIGKILL.
+
+On 13/11/19 23:24, Denis Cardon via samba-technical wrote:
+> About the prefork model, the master ldap process is properly restarting=
+
+> the child process after a SIGTERM but it is not restarting after a
+> SIGKILL. Is it normal?
+
+Ng=C4=81 mihi
+Gary
+
+
+--3quwGqzhgAOxK7crRQFHPjoYMNdz5PVDm--
+
+--TupK1kFtN8Mbl7IaE2ryyskVT6vkUG6Qc
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEDO84T/PRptSsMEixei/9ZKIyR1MFAl3MXCEACgkQei/9ZKIy
+R1M5xwf+McahHFlALnTj/3FBfGtLMW1hyJ6Wizw8CYfGeQ08DPtS2EOsgdxdN77t
+3zx5kOeja5SIyaRS6TbMeYxVRDwU+rh8W4unOQUWWjh/aOcbAPxmP2SXb3uQBxNI
+Nu6fpEp7iVDRnhFL3k7rOUkpf4cOK9YAzP/0/vmSyjxIubhT4yzuCF2dsvzK0MsL
+xScuvgJjmjX/3EcRZ4tBDH12tr7NMcfgVwmtFiNmEZZLxAeTvPMNc7R6hH7hH/cS
+G9YCqqVdLBaYUfrO3D+6Z/3k/qfjiOj+fJKhzViO5vlzzpMWFaxgUvJ/4w/lD9mo
+fuYZV/lfje5sbZQRQ0FatX67ldJcNA==
+=exAh
+-----END PGP SIGNATURE-----
+
+--TupK1kFtN8Mbl7IaE2ryyskVT6vkUG6Qc--
 
