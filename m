@@ -2,48 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62830FAD02
-	for <lists+samba-technical@lfdr.de>; Wed, 13 Nov 2019 10:32:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AF18FAE67
+	for <lists+samba-technical@lfdr.de>; Wed, 13 Nov 2019 11:25:32 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=hLKJ3b1kdqYT/8w85hjHmRIjPFrz9LdwuZUtQSIwcAE=; b=KIeET2cU+Eqnqh8NcvUorywCQW
-	Zv7QJLEDTLWTHLQPENGEMSo6Z1WN+UsL0z49d+9kEyvIskhKKEOAJq73LJ+SzwyIiqKpoW30RCvRS
-	u0eNyvPPpx3QFfPvpaFZfMsz6M2AVPoATNWtZu2Rw2jvbhgjf+Eixl1IEoQ8eIUUCUCOWeCDmfddc
-	rs6BYNv3wjoCUuAc8sLBki/TLNgOLeWcwjAm6K0oWefgaGgqt+72OiF+sTlkCBT2YLSQxLh7sdPSz
-	LAf/LpXSnaChyYhJxOsp08W5ylqvvTfIiHju1kyAPJ2iRNFa0VwaNJsorAqZKHNHnVMjxw5PM0TJx
-	f6AiYCvw==;
-Received: from localhost ([::1]:52390 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=SmgMZ3itDpKZJedayJ1J4NvoXYd2hSV2RhMS68QnlPY=; b=v7CDNkJ8PvFySLjVhrBwsXaF/P
+	bBuT/1QBtlNwcfE2oFZddPIMkDqB5LQOKcySSxqIOIR+Lqxz/PNagtE1F20synqodNjDF654r10Hs
+	ywVMEwY1pP/XlpIQppNJ347E9NSgKo3FSkIeMQJO9zbYjmmU8F/ddgZHIjwTqKfmUCnGNyt9qIclb
+	ArCMd8f7N1fIZyW4BEeFsv70ogQNgFrhHBb/dDiR5xFM2r25fncMEdariPThaZ2030DFEgwkXwUfo
+	7tUbcrqgRKSljfRGP38AS9mRuQDq32bL+NLAoHAYUhte4xyNWkBmlt110FTGjVHQOox+ulo6h1qyS
+	Rnt+1U8Q==;
+Received: from localhost ([::1]:53864 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iUp0P-0003Lz-7o; Wed, 13 Nov 2019 09:32:05 +0000
-Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:49549 helo=ozlabs.org) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iUp0K-0003Ls-Lj
- for samba-technical@lists.samba.org; Wed, 13 Nov 2019 09:32:03 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 47CfWn6P1jz9s7T;
- Wed, 13 Nov 2019 20:31:49 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1573637510; bh=+wuRH+OQrF8SbpbjgA9Z1aMQPnst1OWWKJP2ul15JXs=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=tH8GZaLZpXEHJLcIbMMN6mD2IMShnf08LNEBqHykloDMfi4ip0nQAEuW7INc0KhNN
- r5uPloHTn0uOCPdsREyTMQvXaGvnCo4YyQqgfw92KvpRozCQ6/wia7ve0RFPsw+cha
- uv5/Of3Ug16Uf+jiookDjKBPOfUjQGREjFJoFf/L64zLNn6jq4MOL80CnaCumZpnZm
- OCijs4Sb3SNvmVt5XZ+HMLsdJgdgENJHuIJTrH6YcYfZMN6metGge6rahbrFRUt8VQ
- ZFoc6LLb1hXivPeCSvFfL1LDs/myrRs77Qh2KxtuajmhXMAQuQP8VlCM7uu+PoQCHs
- Hb+kGJ5UIuSnQ==
-Date: Wed, 13 Nov 2019 20:31:48 +1100
-To: Amitay Isaacs <amitay@gmail.com>
-Subject: Re: [PATCH] ctdb-ib: Fix build errors for infiniband transport
-Message-ID: <20191113203148.2ac36c92@martins.ozlabs.org>
-In-Reply-To: <CAJ+X7mTKrDNj7hgcKNpf=8ibwtJ7VjhrOLbyjgJ+Orj9R6aR0A@mail.gmail.com>
-References: <CAJ+X7mTKrDNj7hgcKNpf=8ibwtJ7VjhrOLbyjgJ+Orj9R6aR0A@mail.gmail.com>
-X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+	id 1iUppc-0004fm-2u; Wed, 13 Nov 2019 10:25:00 +0000
+Received: from [185.16.48.59] (port=40796 helo=smtp.tranquil.it) 
+ by hr1.samba.org with esmtp (Exim) id 1iUppX-0004fe-9s
+ for samba-technical@lists.samba.org; Wed, 13 Nov 2019 10:24:57 +0000
+Received: from mail.tranquil.it (mail.tranquil.it [185.16.48.58])
+ by smtp.tranquil.it (Postfix) with ESMTPS id 93013401F0
+ for <samba-technical@lists.samba.org>; Wed, 13 Nov 2019 11:24:52 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tranquil.it; s=mail;
+ t=1573640692; bh=SmgMZ3itDpKZJedayJ1J4NvoXYd2hSV2RhMS68QnlPY=;
+ h=From:Subject:To:Date;
+ b=BE2ysrWLnsJkXeQxpLzNFOm1p+Ld9Hd8QEmSiMqf476kdwBxwATQbjr8pKewCw4i+
+ VazhqeJfs8kj9l65lC4HTcM7iBeWWtiBQXfzhAQJAmmeAOlKWdZWk7hy5CPpbuXvDd
+ vWz/uCIo9sZoqWA9NYy8adKKqjCxNf+3+qqDH7Z4=
+Received: from localhost (localhost [127.0.0.1])
+ by mail.tranquil.it (Postfix) with ESMTP id 8C3FC96
+ for <samba-technical@lists.samba.org>; Wed, 13 Nov 2019 11:25:09 +0100 (CET)
+Received: from mail.tranquil.it ([127.0.0.1])
+ by localhost (mail.tranquil.it [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id jlFTp0hrlu8M; Wed, 13 Nov 2019 11:25:09 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.tranquil.it (Postfix) with ESMTP id F22FE97;
+ Wed, 13 Nov 2019 11:25:08 +0100 (CET)
+Received: from mail.tranquil.it ([127.0.0.1])
+ by localhost (mail.tranquil.it [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id 3K4Cd-H0S-UK; Wed, 13 Nov 2019 11:25:08 +0100 (CET)
+Received: from srvlts1.ad.tranquil.it (bureau-sdsl.tranquil.it [185.16.50.4])
+ by mail.tranquil.it (Postfix) with ESMTPSA id D90FF96;
+ Wed, 13 Nov 2019 11:25:08 +0100 (CET)
+Subject: feedback on ldap improvement in samba 4.11
+To: Samba Technical <samba-technical@lists.samba.org>
+Message-ID: <4ac9eeeb-211b-ca35-d234-6648c612ce3d@tranquil.it>
+Date: Wed, 13 Nov 2019 11:24:51 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+ Thunderbird/45.8.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,24 +64,47 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: samba-technical@lists.samba.org
+From: Denis Cardon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Denis Cardon <dcardon@tranquil.it>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 13 Nov 2019 17:20:07 +1100, Amitay Isaacs via samba-technical
-<samba-technical@lists.samba.org> wrote:
+Hi everyone,
 
-> Even though infiniband support is broken in CTDB, I would like to keep
-> it building at least.
-> 
-> Please review and push.
+I just wanted to say how impressed I was with the improvement in memory=20
+handling in ldap server in samba 4.11 that were announced in the changelo=
+g.
 
-Reviewed-by: Martin Schwenke <martin@meltin.net>
+I was doing some debug on OOMKiller issues on a Samba-AD 4.9 with a=20
+large database in production. There are some buggy softwares that make=20
+queries for all users (the most peculiar one I have seen is a print=20
+driver...) and Samba 4.9 properly handles the query but allocate around=20
+2GiB RAM for the query while the client downloads the result. With a=20
+handfull of such queries piling up it can quickly run the server out of=20
+memory.
 
-Pushed...
+On the other hand with Samba-4.11 memory is allocated in a much more=20
+frugal way and it can handle hundred of such buggy queries without=20
+crashing (it may be slow but it does not crash). So kudos the Catalyst=20
+dev team for that great piece of work!
 
-peace & happiness,
-martin
+About the prefork model, the master ldap process is properly restarting=20
+the child process after a SIGTERM but it is not restarting after a=20
+SIGKILL. Is it normal?
+
+Cheers,
+
+Denis
+
+--=20
+Denis Cardon
+Tranquil IT
+12 avenue Jules Verne (Bat. A)
+44230 Saint S=C3=A9bastien sur Loire (FRANCE)
+tel : +33 (0) 240 975 755
+http://www.tranquil.it
+
+Tranquil IT recrute! https://www.tranquil.it/nous-rejoindre/
+Samba install wiki for Frenchies : https://dev.tranquil.it
+WAPT, software deployment made easy : https://wapt.fr
 
