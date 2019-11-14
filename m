@@ -2,103 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14008FC61A
-	for <lists+samba-technical@lfdr.de>; Thu, 14 Nov 2019 13:15:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9F3DFC723
+	for <lists+samba-technical@lfdr.de>; Thu, 14 Nov 2019 14:15:56 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=JSQby2XiOrRnqyXbbJ8JGgs5JwDE68zn0kWtQIJNOlw=; b=PUzVmhwsr1x4CswfLA1u7ggTFR
-	qB/42naBGPtgI3k4XhwUhEKiTW2rX8P2bX1MO3PwshoZUBkjLKpjS2Mjm1JD53OeX+faPtbYGEYGM
-	/KYkNzKJpqZteK6HfXoR/JqZgBHoUFaVvqKUlbnoUQAICkN6calUq78CPuMioIEIllaRaWEw6nSUJ
-	wNXQjJ4O9rXv0MMsMWGOtXQM4jTj51Hr3PbQSwrIUTWCqwvYKbiBLqfVaLFZFotts00ji771Vb9LP
-	4nowLyR4hpUb7iIHXxULZYpHPvQ4UuB4PDrL/8r0bA74D9vkfWGtB67E1tlwPnqD/5oeed26v5DAt
-	syGzWQCA==;
-Received: from localhost ([::1]:36194 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=qftnhyeLr2Wsw8y1oh+hTf/gesPw1r1Gc3jGuYvBMVA=; b=RHA932evxL40rxzZAWC0frM5FZ
+	KjkbyN2+lnJIOaVYNsCNQn3WPexEz4Px/QwePCKPFNv07fC8Byql4QQylphJDeHu0R9cZJgQoep4Q
+	ojKVSSBYIQqEhNjcKlcnnb5348ykxB0I+56hQi7/0W+yfoiXV6SFfrY5sdizunT/3y0VDgYwpaXMr
+	oNwEPac77h/I2ob0Zze1oHBuGzbu1RPQtxcRFMXg8Lns72kTSkewUGL2yEEFPZi+4QyQX59o/5pWZ
+	OrKzcKohhgPkEIzuJlq7PEioFEkb4s9CjlUGy/GCc1NWR+u601ceI3Tc3PoumW2w5Uu57pQ6oydr8
+	NAKaehzg==;
+Received: from localhost ([::1]:39910 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iVE1P-000WAL-UC; Thu, 14 Nov 2019 12:14:47 +0000
-Received: from m4a0039g.houston.softwaregrp.com ([15.124.2.85]:44352) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iVE1L-000WAE-Uu
- for samba-technical@lists.samba.org; Thu, 14 Nov 2019 12:14:46 +0000
-Received: FROM m4a0039g.houston.softwaregrp.com (15.120.17.146) BY
- m4a0039g.houston.softwaregrp.com WITH ESMTP; 
- Thu, 14 Nov 2019 12:13:20 +0000
-Received: from M9W0067.microfocus.com (2002:f79:be::f79:be) by
- M4W0334.microfocus.com (2002:f78:1192::f78:1192) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10; Thu, 14 Nov 2019 12:12:12 +0000
-Received: from NAM03-DM3-obe.outbound.protection.outlook.com (15.124.72.12) by
- M9W0067.microfocus.com (15.121.0.190) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10 via Frontend Transport; Thu, 14 Nov 2019 12:12:11 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=npaJjt7NcD9OwFLQupWoiXNNSci/PmOYqTMJ0JNhwnVQKsHYH/Kyp3ws8HT/8mhHg5+DeMXk3+9TBaH6PYit5fRMIBoEBJxHBtgP60Eu1Vr5Qj2RIbyBIvJ3yJq7p8g8MNQHXelqq85xPtzCnFjsA/Y9SQLZCr2Fej2IRVN5JMHsHuhqRXfDY8qaEguBYC1MLH7VGDZb3RgEShr+J7Mv6WTdBP66aOlLNEqHJxsj7an8Iaagkf8V5voIgI7ahl1GF3Jsa6bhs+FUuTD3gHIhMWm3kS2htMTVTPwVKuDg8KMiuSFL87oY6D+dkIHXSQI+qvLfIB+GLvB7y7T1FfJYkA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JSQby2XiOrRnqyXbbJ8JGgs5JwDE68zn0kWtQIJNOlw=;
- b=X8aDV44K/28nodwGC2TighDM0Rgyvz8vMnv05zGbp1g48ukP7k9nTxzgI+AehU4FS13JwhleNBhXaRObjnWdp7sg5eOI8xTPlG1zh/otrXvyzOaAsBDvFTi3t3RE2khcxNXk5YCODfXrcxNamrMRZugJKoHsgpZdzKf2jpf6AOZQnJ3HtplEtOjVnZqyoAK7+VKSJraARFH0+3ttFzcWGuK0CqmgbzjhmuSkRWPaW5t4HzD+IfBkhh/kZ4LjoqIRI5XsAMaERIDjCuoXMmadvWglRqDmrIFxv1wkC+151Pjp0zwRwxdyEttZnOowNdv4u1/ZCBpDrnuJnUF8PwTriA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Received: from DM6PR18MB2507.namprd18.prod.outlook.com (20.179.105.79) by
- DM6PR18MB2650.namprd18.prod.outlook.com (20.179.106.221) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2451.27; Thu, 14 Nov 2019 12:12:10 +0000
-Received: from DM6PR18MB2507.namprd18.prod.outlook.com
- ([fe80::31ca:a807:241:adf6]) by DM6PR18MB2507.namprd18.prod.outlook.com
- ([fe80::31ca:a807:241:adf6%5]) with mapi id 15.20.2408.024; Thu, 14 Nov 2019
- 12:12:10 +0000
-To: Noel Power <NoPower@suse.com>, Andrew Bartlett <abartlet@samba.org>,
- "Ralph Boehme" <slow@samba.org>, npower <npower@samba.org>
-Subject: Re: Converting SMB1 tests to SMB2
-Thread-Topic: Converting SMB1 tests to SMB2
-Thread-Index: AQHVdUNqiOZWCa16a0elHejFomZ1kadQugh0gA6wbN+AAQJmgIAARkCAgAAQXgCAB2I8AIAAAnuAgAAJSYCAAAhSAIAADaSAgAAIYx6ADoq/AIAHznWAgALm3ICACU8HAA==
-Date: Thu, 14 Nov 2019 12:12:10 +0000
-Message-ID: <a146e395-f9ca-12d0-2cab-ca52e8209706@suse.com>
-References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
- <be6770e5-5bf0-4665-4a88-3e4182e4c82e@samba.org>
- <0981db46-93bf-f153-c98f-15d5cf404353@suse.com>
- <ed7eb92f-46a7-758e-f3b5-185d71b8b98a@samba.org>
- <002434db-63ef-edad-d091-76e3efe783d1@samba.org>
- <15dfbaf6-c774-debe-b61e-c3ef4e7f9727@samba.org>
- <d9625941-c85a-a686-2162-30c80a2e84b3@samba.org>
- <fa464ebe-cfe7-1d6e-7435-c896e2cc188e@samba.org>
- <f479113c-7a74-8259-823e-4ae1c4a713c6@samba.org>
- <47fef5d6-7fb6-b054-a8c5-7a28b63e97c8@samba.org>
- <9cc9d402-57fb-3568-29e6-12284d6ccd98@samba.org>
- <f5970612-2998-cef1-dcca-40188c7a176f@suse.de>
- <361f5a38-66fb-e18c-7858-c5db6e93424e@samba.org>
- <dc95f81c-90ba-a368-9b3e-ccdcf067edaa@suse.com>
- <c25ed441eedb2a864429c0154859f2afe95f38cb.camel@samba.org>
- <f3fcbb1f-a25c-f7cb-4023-fdef68e208a8@suse.com>
-In-Reply-To: <f3fcbb1f-a25c-f7cb-4023-fdef68e208a8@suse.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=NoPower@suse.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [109.76.44.167]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: cd23a9bc-5778-4cb8-a1f9-08d768fbe03a
-x-ms-traffictypediagnostic: DM6PR18MB2650:
-x-ld-processed: 856b813c-16e5-49a5-85ec-6f081e13b527,ExtFwd
-x-ms-exchange-transport-forked: True
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: lpsCnbipoaghnZQslwQgrvzPGPIvOTqMsUj53nB3Ioh8PU+XRiIPA61BiEjtUoYJB6GE9ebPrz4IPvRF6XIE59iyiR0fBGMVv4WocUzyLVlxYwZ3PM1hdqnf9LmVGECIWI11VmdvVc7ynL0Moi3DPCON4hct7HcfqE78CPYVZcSTPjk/xkp1ZQSTFTeCQQYRk6cwZcpV63wNEo8vey2IzMDCZaoBRumMkNyf14yAWquFeXmhaTftj+ABWwvN6/NwS3HgtlkBBanYOcirEBaPpsDUvQ4MMtFe/aOvH1n9UiXyWtlzI4VpwSdpn8gea3tPniiQvZo0onsewywl/zVULyupOJUuIfBDXVSqgiqdgju/N+EtPBLZywRh2vDEuj2IfEPkkStwGSI7aVTVP3TiwkZnzVas7GxwfPfrnZOfQ3w26e5FIUz4nzkt9orxujt1
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <C2668EA7E269EA48A628B3A80FF3746F@namprd18.prod.outlook.com>
-Content-Transfer-Encoding: base64
+	id 1iVEy1-000XHV-6T; Thu, 14 Nov 2019 13:15:21 +0000
+Received: from [185.16.48.59] (port=47258 helo=smtp.tranquil.it) 
+ by hr1.samba.org with esmtp (Exim) id 1iVExt-000XH4-9A
+ for samba-technical@lists.samba.org; Thu, 14 Nov 2019 13:15:16 +0000
+Received: from mail.tranquil.it (mail.tranquil.it [185.16.48.58])
+ by smtp.tranquil.it (Postfix) with ESMTPS id 9EE0A40643;
+ Thu, 14 Nov 2019 14:15:10 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=tranquil.it; s=mail;
+ t=1573737310; bh=qftnhyeLr2Wsw8y1oh+hTf/gesPw1r1Gc3jGuYvBMVA=;
+ h=Subject:To:References:From:Date:In-Reply-To;
+ b=S2XoOKbm7KE0vDKHf8oyydoObxc8C5nsLKSnyQKTxW8ArAXb0m6JTX9J3zLH0dpY/
+ LcKb2XCFItbDjV/OwtrFqyM8FMOIEhwPBD15xvAcku6CvxYW/nC5NdTSbKK+LK84ni
+ Yyoc4BTpZhxZRdh//4E0Uk37mZXAtCsvotzoE1PM=
+Received: from localhost (localhost [127.0.0.1])
+ by mail.tranquil.it (Postfix) with ESMTP id 7313170;
+ Thu, 14 Nov 2019 14:15:28 +0100 (CET)
+Received: from mail.tranquil.it ([127.0.0.1])
+ by localhost (mail.tranquil.it [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id XjUuOXUKaQCv; Thu, 14 Nov 2019 14:15:27 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.tranquil.it (Postfix) with ESMTP id B0C747F;
+ Thu, 14 Nov 2019 14:15:27 +0100 (CET)
+Received: from mail.tranquil.it ([127.0.0.1])
+ by localhost (mail.tranquil.it [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id dCf-vUwp5N_w; Thu, 14 Nov 2019 14:15:27 +0100 (CET)
+Received: from srvlts1.ad.tranquil.it (bureau-sdsl.tranquil.it [185.16.50.4])
+ by mail.tranquil.it (Postfix) with ESMTPSA id 93D4A70;
+ Thu, 14 Nov 2019 14:15:27 +0100 (CET)
+Subject: Re: feedback on ldap improvement in samba 4.11
+To: Gary Lockyer <gary@catalyst.net.nz>, samba-technical@lists.samba.org
+References: <4ac9eeeb-211b-ca35-d234-6648c612ce3d@tranquil.it>
+ <36c80274-fefe-e1ff-c6ee-223f85195c22@catalyst.net.nz>
+Message-ID: <8cf68d63-9006-49d1-cfe2-0bc42cd89a58@tranquil.it>
+Date: Thu, 14 Nov 2019 14:15:09 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+ Thunderbird/45.8.0
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: cd23a9bc-5778-4cb8-a1f9-08d768fbe03a
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Sxi/cFhT0N5NlFVqH3jPKTAoCcYUFFb0x+a+2vwVviR0CoquNNdFEBsorTQmLo83X4JZaJzwbJpr2aCwU3mx+A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR18MB2650
-X-OriginatorOrg: suse.com
+In-Reply-To: <36c80274-fefe-e1ff-c6ee-223f85195c22@catalyst.net.nz>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -112,108 +67,47 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Noel Power via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Noel Power <NoPower@suse.com>
-Cc: David Mulder <david.mulder@suse.com>,
- samba-technical <samba-technical@lists.samba.org>
+From: Denis Cardon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Denis Cardon <dcardon@tranquil.it>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-SnVzdCBGWUkNCg0KSSBvcGVuZWQgaHR0cHM6Ly9naXRsYWIuY29tL3NhbWJhLXRlYW0vc2FtYmEv
-bWVyZ2VfcmVxdWVzdHMvOTAyDQoNClRoaXMgYnJhbmNoIGlzIGEgcmV0dXJuIHRvIHRoZSBwbGFu
-IG9mIGp1c3QgdXNpbmcgc29tZSBpbmRlcGVuZGVudCBDSQ0Kam9icyB0byBydW4gdGhlIFNNQjEg
-dGVzdHMgKGFuZCB0ZXN0cyBmYWlsaW5nIGluIGVudmlyb25tZW50cyB3aGVyZSBTTUIxDQpjYW4n
-dCBiZSBuZWdvdGlhdGVkKS4gVGhlc2UgbmV3IGpvYnMgdXNlIHNpbXBsZSAnc2hhbGxvdycgY29w
-aWVzIG9mIHRoZQ0KZXhpc3RpbmcgZW52aXJvbm1lbnRzLg0KDQpJIHJldHVybmVkIHRvIHRoaXMg
-YXBwcm9hY2ggZHVlIHRvIHRoZSBldmVyIGluY3JlYXNpbmcgYW1vdW50IG9mIGNoYW5nZXMNCihh
-bmQgSSBhZG1pdCBmYWlsdXJlKSB0cnlpbmcgdG8gY3JlYXRlIHByb3BlciBpbmRlcGVuZGVudCB0
-ZXN0DQplbnZpcm9ubWVudHMgKGFzIGRlc2NyaWJlZCBiZWxvdykNCg0KTWF5YmUgd2UgY2FuIHRy
-eSB3aXRoIHRoZSBhcHByb2FjaCBvdXRsaW5lZCBpbiB0aGUgbWVyZ2UgcmVxdWVzdCBhbmQNCmNv
-bnRpbnVlIHRoZSBkaXNjdXNzaW9uIHRoZXJlLiBUaGUgc29vbmVyIHdlIGhhdmUgc29tZXRoaW5n
-IGluIHBsYWNlDQp1cHN0cmVhbSB0aGUgc29vbmVyIHdlIGNhbiBzdGFydCBjaGlwcGluZyBhd2F5
-IGF0IHRoZSB0ZXN0cyA6LSkNCg0KTm9lbA0KDQpPbiAwOC8xMS8yMDE5IDE0OjAzLCBOb2VsIFBv
-d2VyIHZpYSBzYW1iYS10ZWNobmljYWwgd3JvdGU6DQo+IEhpIEFsbCwNCj4NCj4gT24gMDYvMTEv
-MjAxOSAxNzo0NCwgQW5kcmV3IEJhcnRsZXR0IHZpYSBzYW1iYS10ZWNobmljYWwgd3JvdGU6DQo+
-PiBPbiBGcmksIDIwMTktMTEtMDEgYXQgMTg6MzEgKzAwMDAsIE5vZWwgUG93ZXIgdmlhIHNhbWJh
-LXRlY2huaWNhbA0KPj4gd3JvdGU6DQo+Pj4gSGkgQWxsDQo+Pj4NCj4+PiBKdXN0IHRob3VnaHQg
-SSBzdW1tYXJpemUgd2hhdCB3ZSAobXlzZWxmICYgUmFscGgpIGRpc2N1c3NlZCwgZm9yIG15IG93
-bg0KPj4+IGJlbmVmaXQgYW5kIHRoZSBiZW5lZml0IG9mIG90aGVycy4NCj4+IFRoYW5rcyBmb3Ig
-d3JpdGluZyB0aGlzIG91dC4gIEkgc2VlIGluIHRoZSByZXN0IG9mIHRoZSB0aHJlYWQgdGhhdCB5
-b3UNCj4+IGhhdmUgbWFkZSBzb21lIHByb2dyZXNzLA0KPiB3ZWxsIHllcyBhbmQgbm8gOi0pDQo+
-DQo+IHNvLCBJIGRpZCB0cnkgYW5kIGZpeCB0aGUgaXAgdW5pcXVlbmVzcyB0aGluZyBidXQuLi4N
-Cj4NCj4gdW5pcXVlIGlwcyBtYWRlIHNvbWUgZGlmZmVyZW5jZSBob3dldmVyIHRoZXJlIHdlcmUg
-bW9yZSB0aGluZ3MsIG1vcmUNCj4gY2hhbmdlcyBuZWVkZWQNCj4NCj4gYSkgbmVlZCB0byBwYXNz
-IGRvd24gYSB1bmlxdWUgc2VydmVyIG5hbWUgaW4gb3JkZXIgdGhhdCB0aGUgdW5pcXVlIGlwDQo+
-IGNhbiBiZSBjcmVhdGVkICh0aGVyZSBpcyBhIG5hbWUgLT4gaW50ZXJmYWNlX251bSBoYXNoKQ0K
-PiBiKSBidXQuLi4gd2UgaGF2ZSBhbG90IG9mIGZha2UgX3NtYjEgZW52cyBhbmQgdGhlIG51bWJl
-ciBvZiBpbnRlcmZhY2VzDQo+IHdlIGhhdmXCoCBicmVha3MgdGhlIGN1cnJlbnQgTUFYX1dSQVBQ
-RURfSU5URVJGQUNFUyBsaW1pdCwgbmVlZCB0byBtb2RpZnkNCj4gdGhpcyBpbiB0aGlyZF9wYXJ0
-eS9zb2NrZXRfd3JhcHBlci9zb2NrZXRfd3JhcHBlci5jDQo+IGMpIG1pc3NpbmcgY2VydHMgZm9y
-IHZhcmlvdXMgdGVzdHMgd2hpY2ggbmVlZGVkIHNvbWUgbmV3IGRpcmVjdG9yaWVzDQo+IChhbmQg
-Y29udGVudCkgc2V0dGluZyB1cCBpbiB2YXJpb3VzIGRpcnMgdW5kZXINCj4gc2VsZnRlc3QvbWFu
-YWdlLWNhL0NBLXNhbWJhLmV4YW1wbGUuY29tL0RDcy8NCj4gZSkgdGhlcmUgaXMgYW5vdGhlciBw
-cm9ibGVtLCB0aGVyZSBpcyBzdGlsbCBpbnRlcmZlcmVuY2UgYmV0d2VlbiB0aGUNCj4gZW52aXJv
-bm1lbnRzIGJlY2F1c2UgYW4gYWRkaXRpb25hbCByZWFsbV90b19pcF9tYXBwaW5ncyB3aGVyZSB0
-aGUgcmVhbG0NCj4gYXNzb2NpYXRlZCB3aXRoIHRoZSBzZXJ2ZXJuYW1lIChhbmQgd2hlcmUgdGhl
-IHNlcnZlcm5hbWUgaW4gdHVybiBpcyB1c2VkDQo+IHRvIGdldCB0aGUgaXAgYWRkcmVzcykNCj4g
-ZikgSSB0aGVuIHRyaWVkIHRvIHVzZSBkaWZmZXJlbnQgcmVhbG1zIHdpdGggdGhlIHNtYjEgZW52
-aXJvbm1lbnRzIHdobw0KPiBzaG91bGQgaGF2ZSBlbnRyaWVzIGluIHRoZSB0YWJsZSBidXQgdGhp
-cyBhbHNvIHdhcyBub3QgZW5vdWdoLCBzdGlsbA0KPiB0ZXN0cyBmYWlsIChJIHByZXN1bWUgYmVj
-YXVzZSBsb3RzIG9mIHRlc3QgZGF0YSwgZGF0YWJhc2UgZW50cmllcyBldGMuDQo+IGRlcGVuZCBv
-biB0aGUgZXhpc3RpbmcgJ3JlYWxtcycgdXNlZCAodGhpcyBpcyBzcGVjdWxhdGlvbikNCj4NCj4g
-U2/CoCBDSSBzdGlsbCBkb2Vzbid0IHBhc3MsIGF0IHRoaXMgcG9pbnQgSSBqdXN0IGdvdCB0b28g
-ZGlzaGVhcnRlbmVkLA0KPiBiZWVuIGdvaW5nIGFyb3VuZCBpbiBjaXJjbGVzLCBkb24ndCBrbm93
-IGVub3VnaCBhYm91dCB0aGUgdGVzdCBzZXR1cCAob3INCj4gc2FtYmEgYWQpIHRvIGZpZ3VyZSBv
-dXQgKGF0IGxlYXN0IGVhc2lseSkuIEkgZ2V0IHRoZSBpbXByZXNzaW9uIHRoaXMgaXMNCj4gYSBw
-aWVjZSBvZiBzdHJpbmcgSSBjb3VsZCBwdWxsIGZvciBhIGxvbmcgdGltZSA6LSkgYW5kIHRoZSBv
-bmx5IHRoaW5nDQo+IHRoYXQgd2lsbCBiZSB1bnJhdmVsbGVkIGlzIG15IHNhbml0eQ0KPg0KPiBU
-aGUgY3VycmVudCBlcnJvcnMgd2l0aCB0aGlzIGFwcHJvYWNoIGNhbiBiZSBzZWVuIGhlcmUNCj4g
-aHR0cHM6Ly9naXRsYWIuY29tL3NhbWJhLXRlYW0vZGV2ZWwvc2FtYmEvcGlwZWxpbmVzLzk0MDY0
-ODU4DQo+DQo+PiAgYnV0IHdhbnRlZCB0byBzYXkgdGhhdCBpZiB5b3UgZ2V0IHJlYWxseSBzdHVj
-aw0KPj4gYWdhaW4gdGhlbiBJIGNhbiBjZXJ0YWlubHkgYmUgb2YgYXNzaXN0YW5jZS4gDQo+IHRo
-YW5rcywgYXBwcmVjaWF0ZWQhISwgSSB3b25kZXIgd291bGQgeW91IHRoaW5rIG9yIGFncmVlIHRo
-YXQgcmF0aGVyDQo+IHRoYW4gZ28gZG93biB0aGUgcmF0aG9sZSBhYm92ZSB0aGF0IHJldmVydGlu
-ZyB0byBteSBiYWNrdXAgcGxhbiB3aGljaA0KPiBqdXN0IGFkZGVkIDIgbmV3IHNtYjEgam9icyBp
-cyBhIGZhciBlYXNpZXIgcm91dGUsIHdlIGRvbid0IG5lZWQgdGhlDQo+IHJ1bmF3YXkgY2hhbmdl
-cyB0byB0aGUgJ19zbWIxJyBlbnZpcm9ubWVudHMgYXMgYWJvdmUuIGlwIHVuaXF1ZW5lc3MgZm9y
-DQo+IGV4YW1wbGUgc2hvdWxkIG5vdCBiZSBhbiBpc3N1ZSBhcyB3ZSBydW4gdGhvc2UgdGVzdHMg
-aW4gaXNvbGF0aW9uIGluDQo+IHRoZWlyIG93biBDSSBqb2IvY29udGFpbmVyLCB0aGVzZSBqb2Jz
-L2Vudmlyb25tZW50cyB3aWxsIGdvIGF3YXkgd2hlbg0KPiBTTUIxIGRpc2FwcGVhcnMgYW55d2F5
-LiBIb3BlZnVsbHkgdXNpbmcgc3VjaCAnc2hhbGxvdycgY29weSB2ZXJzaW9ucyBvZg0KPiB0aGUg
-ZW52aXJvbm1lbnRzIGlzbid0IGFuIGlzc3VlIG9yIGEgc3R1bWJsaW5nIGJsb2NrID8gWzFdDQo+
-DQo+IEJ1dC4uLiB0aGVyZSBzdGlsbCByZW1haW5zIHRoZSBwcm9ibGVtIHRoYXQgaW4gdGhlIGxh
-c3QgYXR0ZW1wdCBhIG51bWJlcg0KPiBvZiB0ZXN0cyB3ZXJlIGZhaWxpbmcgbXlzdGVyaW91c2x5
-IGluIHRoZSBuZXcgc2VwYXJhdGUgc21iMSBDSSBqb2JzLiBJDQo+IHNjcmF0Y2hlZCBteSBoZWFk
-IG9uIHRoaXMsIGFnYWluIEkgdHJpZWQgdG8gcmVwcm9kdWNlIHRoZSBwcm9ibGVtcw0KPiBsb2Nh
-bGx5LCBpbiBkb2NrZXIgYW5kIG9uIHNuLWRldmVsIHdpdGhvdXQgc3VjY2VzcyAoZXZlcnl0aGlu
-ZyBwYXNzZXMNCj4gb3V0c2lkZSBvZiBDSSkuIFNvLCBJIHJldHVybmVkIHRvIHJ1bm5pbmcganVz
-dCBhIHNpbmdsZSBmYWlsaW5nIHRlc3Qgb24NCj4gQ0kgKG5vdyB3aXRoIGxvdHMgb2YgREVCVUcp
-IGFuZCBmb3VuZCBmb3IgZXhhbXBsZSB0aGF0IHdpdGggdGhlDQo+IHNhbWJhMy51bml4LmluZm8y
-IHRlc3QgdGhhdCBpbW1lZGlhdGVseSBhZnRlciBjcmVhdGluZyBhIGZpbGUgd2l0aCAoMA0KPiBi
-eXRlcyBhbGxvY2F0ZWQpIHRoYXQgU1RBVCByZXR1cm5zIHN0X2V4X2Jsb2NrcyB3aXRoIGEgcG9z
-aXRpdmUgdmFsdWUuDQo+IENsZWFybHkgdGhpcyBpcyBzb21ldGhpbmcgaGFwcGVuaW5nIGF0IHRo
-ZSBob3N0IG9zIG9yIGZpbGVzeXN0ZW0gbGV2ZWwuDQo+IENvbXBhcmluZyB3aXRoIHBhc3Npbmcg
-dGVzdHMgaW4gbWFzdGVyIHRoZSBvbmx5IGRpZmZlcmVuY2UgaXMgdGhlDQo+IHBhc3NpbmcgdGVz
-dHMgcnVuIG9uIHJhY2tzcGFjZSBydW5uZXJzIGFuZCB3aXRoIHRoZSBmYWlsaW5nIGNhc2UsIHRo
-ZQ0KPiB0ZXN0cyBydW4gb24gc2hhcmVkIHJ1bm5lcnMuIENoYW5naW5nIHRoZSBuZXcgc21iMSBq
-b2JzIHRvIHJ1biBvbg0KPiByYWNrc3BhY2Ugc29sdmVzIHRoZSBwcm9ibGVtDQo+DQo+IHNlZSBo
-dHRwczovL2dpdGxhYi5jb20vc2FtYmEtdGVhbS9kZXZlbC9zYW1iYS9waXBlbGluZXMvOTQ2MDQ3
-OTINCj4NCj4gc28uLi4NCj4NCj4gMXN0IGNhbiBhbnlvbmUgZW5saWdodGVuIG1lIGFzIHRvIHdo
-YXQgaXMgZGlmZmVyZW50IHdpdGggdGhlIHJhY2tzcGFjZQ0KPiBydW5uZXJzPw0KPiAybmQgY2Fu
-IHdlIGFncmVlIHRoYXQgYWRkaW5nIHRoZSAyIG5ldyBqb2JzIGlzIHRoZSBzaW1wbGVzdCBhbmQg
-ZWFzaWVzdA0KPiB3YXkgZm9yd2FyZCwgb25jZSB1cHN0cmVhbSB0aGlzIHdpbGwgYWxsb3cgdXMg
-dG8gaXRlcmF0aXZlbHkgdGFja2xlIHRoZQ0KPiBTTUIxIGZhaWxpbmcgdGVzdHMNCj4NCj4gdGhh
-bmtzLA0KPg0KPiBOb2VsDQo+DQo+DQo+IFsxXSBPbmUgcG90ZW50aWFsIHByb2JsZW0gaXMgdGhh
-dCB0aGUgZGVmYXVsdCAnbWFrZSB0ZXN0JyBmcm9tIHNvdXJjZQ0KPiB3aWxsIGZhaWwgYmVjYXVz
-ZSBvZiB0aGUgbWl4IG9yIHh5eiAmIHh5el9zbWIxIGVudmlyb25tZW50cy4gSG93ZXZlcg0KPiDC
-oCArIHBlcnNvbmFsbHkgSSBkb3VidCB0aGF0ICdtYWtlIHRlc3QnIHJlbGlhYmx5IHdpbGwgc3Vj
-Y2VlZCBhbnl3YXkNCj4gdGhlc2UgZGF5cywgd2UgY2VydGFpbmx5IGRvbid0IHRlc3QgYSBmdWxs
-IG1ha2UgdGVzdCBhbnl3aGVyZSBhbnltb3JlLA0KPiBpbW8gdGhlIG9ubHkgcmVsaWFibGUgd2F5
-IHRvIHJ1biB0ZXN0cyBpcyB2aWEgZ2l0bGFiIENJIChvciBhdXRvYnVpbGQpDQo+IMKgICsgd2l0
-aCB0aGUgcHl0aG9uMyBwb3J0IHRoZXJlIHdlcmUgam9icyB0aGF0IHdlcmUgY29tcGxldGVseQ0K
-PiB1bnJlbGlhYmxlIHVudGlsIHRoZXkgd2VyZSBzZXBhcmF0ZWQgaW50byBweXRob24vcHl0aG9u
-LTMgam9icy4gVGhlcmUNCj4gd2VyZSBjZXJ0YWlubHkgYSBudW1iZXIgb2YgdGVzdHMgdGhhdCBj
-b3VsZG4ndCBiZSBydW4gbXVsdGlwbGUgdGltZSBpbg0KPiB0aGUgc2FtZSBlbnYgKGR1ZSB0byBk
-ZXN0cnVjdGl2ZSBuYXR1cmUgb2YgdGhlIHRlc3RzKSBzbyBJIHRoaW5rIHdlIGhhdmUNCj4gYWxy
-ZWFkeSBkb25lIHRoaXMgYmVmb3JlDQo+DQo+DQo=
+Hi Gary,
+
+Le 11/13/2019 =C3=A0 08:40 PM, Gary Lockyer via samba-technical a =C3=A9c=
+rit :
+> That's by design, as I get confused by processes that restart after a
+> SIGKILL.
+
+I'm speaking about the ldap worker processes, not about the master ldap=20
+process. Perhaps I'm confused, but if oomkiller kicks in and SIGKILL a=20
+worker, I would have thought that it would be nice for a new worker to=20
+be re-spawned.
+
+Cheers,
+
+Denis
+
+>
+> On 13/11/19 23:24, Denis Cardon via samba-technical wrote:
+>> About the prefork model, the master ldap process is properly restartin=
+g
+>> the child process after a SIGTERM but it is not restarting after a
+>> SIGKILL. Is it normal?
+>
+> Ng=C4=81 mihi
+> Gary
+>
+
+--=20
+Denis Cardon
+Tranquil IT
+12 avenue Jules Verne (Bat. A)
+44230 Saint S=C3=A9bastien sur Loire (FRANCE)
+tel : +33 (0) 240 975 755
+http://www.tranquil.it
+
+Tranquil IT recrute! https://www.tranquil.it/nous-rejoindre/
+Samba install wiki for Frenchies : https://dev.tranquil.it
+WAPT, software deployment made easy : https://wapt.fr
 
