@@ -2,47 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4790AFD28B
-	for <lists+samba-technical@lfdr.de>; Fri, 15 Nov 2019 02:44:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7C8A1006AA
+	for <lists+samba-technical@lfdr.de>; Mon, 18 Nov 2019 14:39:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=/XrEBtPZIGwr7fpK+M9saEBQhxll5EHcA8WVUeVzGSI=; b=VXyYaJLhINyYL2nOnnMefXuT0Q
-	G/QSH3B0ml7Gq2RguyhNAMCWsduM3WnV1puOtLEQ/aqJALeFSatCZW5jac/fUhi6f++AGLm5UMZ+R
-	mX0Me+LbtBm7xVGztTu0MjGlQM5W4ECtA0hNo6EKOpGmx6nJEHIsF5+LC5ib2iBsrMVpcBBXGMJSN
-	lgKv6WvBjiadzPof6WI2u4RK+kyQ1MdJy60LSQqN45cUzlQBpJZrs6hh+hmk+iwtiJZXUvs8gBO27
-	msBeX7wBRLVmnoTw84FMjdF41EZ/qmCCPLSQJw1ZGpl+o46rA+sZ9UzMT3iTBVe9PBzuapbEp7x4T
-	JTaZKT1A==;
-Received: from localhost ([::1]:58976 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=ZDIyRxmJm52XcLMig581iJB4Cob6f5ZZojDW7RH05GQ=; b=DZFcmidMax24nQPNh8zTgD0unZ
+	z7CFxickKxvbjBsFBODO9Gj+L3dsaeVYj1ioJ4+/NECJNnfP7JCaPPEJJ0O9XYG8yOPBYfcpqkSu6
+	kPY1BpbLAEjGYYLhx/yxYe9sgChRISwQ8XbeWbQ86CwbglmnARDx5QzwX1jueMLnjExT5uX2Qh9a4
+	do+7iVFHFkgjCDUBZ8gpJvA5rlYRyFlIRrDQ+49vHE7SpWr3cspeS20JSoXuqg9RYHcwKTVR5lnJA
+	Yx02i/59vOcjcqNmjmVrB/QVUUV3fW1SiFaJyKqq/ljkekjmhDOWkSI23QfdObUEGaEoXh4RLjx/Z
+	SLupGOcw==;
+Received: from localhost ([::1]:47818 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iVQet-000le0-CH; Fri, 15 Nov 2019 01:44:23 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24878) 
+	id 1iWhEM-001YVG-Kx; Mon, 18 Nov 2019 13:38:14 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62358) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iVQeg-000lda-Vy
- for samba-technical@lists.samba.org; Fri, 15 Nov 2019 01:44:14 +0000
+ (Exim) id 1iWhEH-001YV9-VN
+ for samba-technical@lists.samba.org; Mon, 18 Nov 2019 13:38:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=/XrEBtPZIGwr7fpK+M9saEBQhxll5EHcA8WVUeVzGSI=; b=LKtex+y1hSGyIrOSFof1Sf/MXp
- uWbUaaFLuVDMLBRS2bKUjQvuUBRJtn4pJRiBOXcvxyDM8PdXYpnitqKM2xCGtMFtRdhW9vEPuE0jV
- rd1lzfjEmuhFAQLP06yfvQnE7j9MSB5KX+z7euZGGxDyGrnIsWIMPv6UJm0miUnvZPmWVyHkdxjto
- r6zpArdb+orj258fS9uHGNgUCUjnizH+kauoQKwedH1qO14umBPyeDyh2XncpyDmPdrdsQ0CRYvBX
- f+koayzMLO4NL/QumKCsS7ZyDTZvmgD4gX5nGcJvl0E0W0zT7mdwOKDmU6yMjcFzbMi0JNYCiOD3L
- gw0/yuX7k6MIUWX19AL/weUkJgU4VvkO0l5t47JaO7g5ehXDFBsp1/bufzmtdlom00hfCmuIU9i9i
- aS4UT7pLcWONaPEtkcjYbXJKQ735/3tFj835B87Xm+9DBwJVVXUMtAkfYKqcvBFtT9qbl2rWcE/Ms
- HP3ly6rhgaQg6O73HbZg08HJ;
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=ZDIyRxmJm52XcLMig581iJB4Cob6f5ZZojDW7RH05GQ=; b=ojb2gQfWQdJyZfyILxuD8rbFIT
+ Ov168KhkRA0E9uX4EvQzYN4l2Drtj5eAxLZRcVgg0GNmHaEWSeHbUgP0NX6jYe32JDyGYgoNywA11
+ tXsB7gmndQdbq/B5zfPf3UvjNyrC7j53RSz2kaiTNY+UmMqX2oD6ZZrFsrbV08gNl2XavgZ6b49dO
+ t1Szqsu04gLzFlZc1s7hGjoPofIFSaouOytiY4uk6x08g4X08KFg50l9BiE7izYtMLBR73n2hw9bP
+ 16EaQS+ccctHgyxlP50eEK/UMlywVSMkK6cV6NPxje/i5DvPsz5YCxSwI9ZhnZFVTUmgZBuT/N5iY
+ ONf0UKeh3LIPq1RK/6sg0l886m8TLFHyuuXvtRJ+IE0TDYsHrhr8oPYI+peTbl7H8KLrSzoyxVeh0
+ qjxj3ydnvVIZRsvBZE451/bpCqdWWOrKTsVSlDwbac/39fVy0/w8dEwJLwxq5AcYGbeNY0l+Uq4As
+ ridtkx92wHRUG1ExoWfUqiC1;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iVQef-00046p-7y
- for samba-technical@lists.samba.org; Fri, 15 Nov 2019 01:44:09 +0000
-Message-ID: <be7bbeaf95255d088662f2ecd7b9fef3530cd056.camel@samba.org>
-Subject: Re: Samba smaller: 10.4mb smbd
-To: samba-technical@lists.samba.org
-Date: Fri, 15 Nov 2019 14:44:06 +1300
-In-Reply-To: <fef7a4b511a770b14bbcb2f169b3f424133d03cc.camel@samba.org>
-References: <1485773517.15997.35.camel@samba.org>
- <fef7a4b511a770b14bbcb2f169b3f424133d03cc.camel@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iWhEG-0001oU-RC; Mon, 18 Nov 2019 13:38:08 +0000
+To: samba-technical <samba-technical@lists.samba.org>,
+ Andrew Bartlett <abartlet@samba.org>, Stefan Metzmacher <metze@samba.org>
+Subject: library versioning
+Message-ID: <4008ac5d-ec0c-c184-f5c9-731987718f8a@samba.org>
+Date: Mon, 18 Nov 2019 15:38:06 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -57,58 +56,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Uri Simchoni <uri@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2019-11-15 at 14:34 +1300, Andrew Bartlett via samba-technical
-wrote:
-> For some reason I had another go at this, and have things down to
-> 11.1MB.
-> 
-> This is NOT FOR PRODUCTION USE, because I have to cut out some
-> important things, but the idea is to prove that by reducing the
-> linkage
-> to the ndr-table subsystem, we can avoid bringing in unused code to
-> eg
-> parse drsuapi.
-> 
-> Anyone wanting to take this further will need to work out how to get
-> the appropriate interface tables for the specific pipes we need to
-> use
-> internally.  It would also be very worthwhile working to understand
-> why
-> we depend on what is left, and seeing if we can trim that some more. 
-> 
-> I used:
+(taking the thread of https://bugzilla.samba.org/show_bug.cgi?id=13846 
+to the list)
 
-By not building all the modules, I was able to reduce it to 10.4mb.
+Hi,
 
-CFLAGS="-DSAMBA_SMALLER -O2 -flto -fwhole-program " LDFLAGS="-O2 -flto
--fwhole-program " ./configure --bundled-
-libraries=talloc,tdb,pytdb,ldb,pyldb,tevent,pytevent --with-static-
-modules='!FORCED' --with-shared-modules='!FORCED' --nonshared-
-binary=smbtorture,smbd/smbd --with-system-mitkrb5 --without-ad-dc --
-without-ads --disable-python && ./buildtools/bin/waf --
-targets=smbd/smbd
+Can someone reiterate our versioning scheme for libraries? I'm a bit 
+confused because there seem to be some contradictions.
 
-If any vendors wish to work with me to make this production, so that
-they can upgrade to a modern Samba version in constrained environments,
-please do be in touch, as I would be very glad to work with you!
+- v4-11 branch has talloc v2.2.0 and master has v2.3.0 (additions to ABI 
+- 2.3.0 was released without a Samba version that uses it)
+- Due to a bugfix, master goes to talloc 2.3.1 and Metze suggests that 
+v4-11 should also go to 2.3.1 (and I remember that indeed this is the 
+way it used to work)
 
-Thanks!
+Now trying to apply same logic to ldb:
+- v4-11 branch has ldb v2.0.7 and master has unreleased v2.1.0 
+(additions to ABI)
+- In the same way, I suppose that we need to release ldb 2.1.0 and 
+upgrade v4-11's ldb to 2.1.0. But in ldb, we have 2.0.6 and 2.0.7 which 
+are bugfix versions off v4-11 branch - why did we publish bugfix 
+versions off v4-11 instead of releasing 2.1.x and moving v4-11 to use that?
 
-Andrew Bartlett
--- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT   
-https://catalyst.net.nz/services/samba
-
-
-
-
-
+Thanks,
+Uri.
 
