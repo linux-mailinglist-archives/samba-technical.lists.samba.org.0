@@ -2,48 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D864E1020C2
-	for <lists+samba-technical@lfdr.de>; Tue, 19 Nov 2019 10:36:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79B15102C57
+	for <lists+samba-technical@lfdr.de>; Tue, 19 Nov 2019 20:06:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=5yK1lB1UdqKZnNnu8dVrXTPuYpYdyUDLz88xoWr9NpM=; b=VGE9tHZm0ptTBM2PNAEOXIjXm4
-	yt4EUTt+nTzY9gg8yOPZbj2Sp0a3o7nWYeN5lHFUw1c0gWpjFhZx2ILGfh/4L/zbgG/Bjz2XVNX4X
-	6Zk30liy1i5x+/i/uQocXLeGynxENdJqXIzEcBH+31EL69ofE+CLk6fSanPph/kKLCRfcx0nHdVbv
-	z3gkgp7QMKcULRU0k2Cu77wPat/TGJRlAv88IGkg7vivrahjbRTpr27p5/GQRWx8s/PIEnLL+jHHS
-	4f4Fng/NKMrW1J3n1WuIdlZWzoS0id+HDO9svnAWpUWzU1Ta1TLOJb7dDtrHosKhU+dkYQTxNqWvJ
-	5ravsPMw==;
-Received: from localhost ([::1]:63396 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=ETekLPuwAvffvff07uZO5L2TwFvC0NzsYrFNVIj82OM=; b=vfR0/Q/mkQ7Wk2ZUsPHHAJIfDV
+	+7xaihTWmSB1zHusyOZQKlucz/sNwg92D/Y+THcnTBzcAZw9Pxd93iYZGHl5sF/MXwGSt2aIPblh6
+	CRcyHxdVTqCWBQaT3De0lTm0eCMXanrSCPK3jhaIVYAKABkldBw4Tis2YIqYVBSETjshKU8yHd9l7
+	rkn8mA8oNlr5PwdDhCi/koX+7hgPQL1CXuRmNxgfloGyA+CLa80pQgpASkiTEObpzd8/1TFN/m+US
+	WUz1ohObsDHa20dnBq/94IKbyaVs6t6Af8phA4GyDvn8ZG8oLCqO0cLlRdxsrotVaJtlxPgmLap+p
+	Nao6DK/A==;
+Received: from localhost ([::1]:19212 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iWzue-001cki-RI; Tue, 19 Nov 2019 09:35:08 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61930) 
+	id 1iX8og-001eI6-Dx; Tue, 19 Nov 2019 19:05:34 +0000
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433]:39463) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iWzuQ-001ckX-Ot
- for samba-technical@lists.samba.org; Tue, 19 Nov 2019 09:35:05 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=5yK1lB1UdqKZnNnu8dVrXTPuYpYdyUDLz88xoWr9NpM=; b=dwXzwm6PQem0njOIFB+yyqWpA8
- by1+OmLthVyVJT55rsvq3M5FdhmNbunTfKdBhMt7g0zSAVfKiOZuYWO2oPtp4j2wae0ID1HnqCQG0
- 88+8gYRb4m+ja1ybaF4TX+PCCAk/uNDWeuv4IjSvW1hDfEUacQss0npzBoAZlCu8uPrykMn/Bt6tV
- u0mAKMDviCwiCTdRv0zBvC3OepC1xKk81XnPmuM141ZC1R+pg1i4EYDXs2jHF7PFFkE174hnwusJM
- GdhsIL/vT7MzhxLTltLefoKBw7KNUP6RZGhaEQAPEKyiq8kEj2gdixYmA0Z7Y/ekI/dVDiHSbhRR+
- t37DdbAnm8/BR59aIe+KLwGM8Ecn9YaARuZXawiKmjFel7522lm6V29IgN8E7IU6RXj9Vxk4ZI9I8
- V767KGLQxLxVp9OS6XZ23LGxSgZ03ru+zrjAgb4A+BZXQFUuoY7sB208kMeCYMbTzad8hYpUkqhBt
- Ufti/MPXaNKdJrvpS9oq/WSJ;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iWzuE-0003Ig-UA; Tue, 19 Nov 2019 09:34:43 +0000
-Message-ID: <07de3a12a09f74c14e5f4328fb751ce251d31294.camel@samba.org>
-Subject: ldb versioning (was: Re: library versioning)
-To: Stefan Metzmacher <metze@samba.org>, Uri Simchoni <uri@samba.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Date: Tue, 19 Nov 2019 22:34:36 +1300
-In-Reply-To: <50203bef-dce2-39a5-0b1d-7e47a10a6a8a@samba.org>
-References: <4008ac5d-ec0c-c184-f5c9-731987718f8a@samba.org>
- <50203bef-dce2-39a5-0b1d-7e47a10a6a8a@samba.org>
+ (Exim) id 1iX8ob-001eHz-La
+ for samba-technical@lists.samba.org; Tue, 19 Nov 2019 19:05:31 +0000
+Received: by mail-wr1-x433.google.com with SMTP id l7so25207488wrp.6
+ for <samba-technical@lists.samba.org>; Tue, 19 Nov 2019 11:05:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to
+ :content-transfer-encoding;
+ bh=ETekLPuwAvffvff07uZO5L2TwFvC0NzsYrFNVIj82OM=;
+ b=kc4X6S/pK/1WLboehNp2v9EMtNY1JSOwAVu3WkOXRhDH90BUQ1TwLK8F9S8pPXPHSB
+ vQ436DVZQoZVIE5vn8XTxCY3bB9V/gH6elATy09MjIWp9itpF7v6R2TxJOTOFYr9lyC7
+ mcz+vmZRkEnDHHiMgzEV3f3iCTC5kB5tJNQb+J5zQwJD2lO46gcoT25/sOuvjM+AjKY0
+ P/FXoHDNK/oQZMycqBoqmnOitio4/izL6FXrbcy+H2HVhwrsN+0NlUFwI+Luuv7KKVeX
+ ZVpzA/MLrAKWN/DeusZaOCi3VDnhlSXeB1kDBYOE4HiOtMxRdY5ZhOI1/jkOEMuOzZD9
+ i1ZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+ :content-transfer-encoding;
+ bh=ETekLPuwAvffvff07uZO5L2TwFvC0NzsYrFNVIj82OM=;
+ b=mKwSuwXDDb7xz5djWv6txtMyc8aJfwkyeVET0ZKSa6jTcxlbqoOo3/qDmbQ/s5Ieh/
+ Lhd6BR4Yu5T7FBUpjKbfm5E48z2/cA+TDcN/7j4cFNuKAzOxCA1Uu0j/gpyjYhYiGvTs
+ 5OtUPRqCHPnaPTogmwiEgeHTm00AyghtOqg3M4atNgexcBTXXLlur019lnmYpKMzKcQg
+ gbZ3cC5R7epvgZkqMsgzIxJmmOn+Mh0W7h2KoBc0sZGAyj+Dl29T3ZaCkjGVjQ89SAg0
+ LH/IWC60QjpQu37sT/2NOfvLiEbmmE7zcWKOXqUXOSubAkHvxlPb5hEVxfflT8zEBPnR
+ Vrcg==
+X-Gm-Message-State: APjAAAVVWrWndrlBOCWvLEHtohB7WWdqHSZlyLdgp3ou46O8KngPj+kr
+ Iok2kn3Zcd2/pjbF9a2hGroYAdSqJOxYnwuF3w8jSw==
+X-Google-Smtp-Source: APXvYqwYyqhPMDOQA3s30eZIU/JdhBP7bL8QmuRSfP/5C2HBI2JaLy8l47ecmM6YYbA8aC/X3i+5K/MhxN/BElquNfU=
+X-Received: by 2002:a5d:6706:: with SMTP id o6mr18610135wru.54.1574190328646; 
+ Tue, 19 Nov 2019 11:05:28 -0800 (PST)
+MIME-Version: 1.0
+Date: Tue, 19 Nov 2019 11:03:39 -0800
+Message-ID: <CACyXjPwfkzN-GUqnffKeOgH9vYRP9qLP8Jwh0cuE_a=gP03bEg@mail.gmail.com>
+Subject: Wireshark 3.1.1 and SMB2/TWrp Timestamps
+To: samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,41 +67,26 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2019-11-18 at 16:01 +0100, Stefan Metzmacher wrote:
-> Hi Uri,
+Hi folks,
 
-> > Now trying to apply same logic to ldb:> - v4-11 branch has ldb
-> > v2.0.7 and master has unreleased v2.1.0
-> > (additions to ABI)
-> > - In the same way, I suppose that we need to release ldb 2.1.0 and
-> > upgrade v4-11's ldb to 2.1.0. But in ldb, we have 2.0.6 and 2.0.7
-> > which
-> > are bugfix versions off v4-11 branch - why did we publish bugfix
-> > versions off v4-11 instead of releasing 2.1.x and moving v4-11 to
-> > use that?
-> 
-> ldb is the exception as there's a strong interaction between samba's
-> ldb
-> modules and the library, that's why we can no longer use the same
-> scheme
-> and need one ldb release stream per samba minor version.
+Wireshark 3.1.1 has my changes for Windows Previous Versions/TWrp
+Timestamps in it.
 
-Can I ask again if we can progress 
-https://gitlab.com/samba-team/samba/merge_requests/374
-"ldb: Remove independent version logic"?
+Unfortunately, there is a bug and it displays bogus times way in the future=
+.
 
-Andrew Bartlett
--- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
+I have committed a fix which is already in the Wireshark master branch
+and will be in 3.2.0rc1 when it becomes available next week.
 
-
-
+--=20
+Regards,
+Richard Sharpe
+(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
+=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
+=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
 
