@@ -2,58 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79B15102C57
-	for <lists+samba-technical@lfdr.de>; Tue, 19 Nov 2019 20:06:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E20A1102D0A
+	for <lists+samba-technical@lfdr.de>; Tue, 19 Nov 2019 20:53:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=ETekLPuwAvffvff07uZO5L2TwFvC0NzsYrFNVIj82OM=; b=vfR0/Q/mkQ7Wk2ZUsPHHAJIfDV
-	+7xaihTWmSB1zHusyOZQKlucz/sNwg92D/Y+THcnTBzcAZw9Pxd93iYZGHl5sF/MXwGSt2aIPblh6
-	CRcyHxdVTqCWBQaT3De0lTm0eCMXanrSCPK3jhaIVYAKABkldBw4Tis2YIqYVBSETjshKU8yHd9l7
-	rkn8mA8oNlr5PwdDhCi/koX+7hgPQL1CXuRmNxgfloGyA+CLa80pQgpASkiTEObpzd8/1TFN/m+US
-	WUz1ohObsDHa20dnBq/94IKbyaVs6t6Af8phA4GyDvn8ZG8oLCqO0cLlRdxsrotVaJtlxPgmLap+p
-	Nao6DK/A==;
-Received: from localhost ([::1]:19212 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=uwa1rOpcKuOGKEJYaHKlKop8ekP9FEefee742LoVSY4=; b=cWDtzWMMoQqNDgRH1BHoWMSkvv
+	SD4TWhC0Pn7SgF1xk0RMByCgbNkebinVsZW10WzrJonB8jRROituMZ0wDf1HX3OCBFqHr5+5rPh7K
+	rl8+5aLwOt/0bbijiIQYbhK8AEh42AfcHjUTBYduA2jOBgdwSXlRhgAmSBwwo3+74bHHwYSv7+SBA
+	p7jxesIIdIZezv+7DgmfJpQHe/hI556iTknGt7f3ed9FWmrBRBAkqN3qY2inL2Y18p6UKg0sazf+1
+	qnIVoCKtRBHTX69TeTeT5875OdqReRwXn21WKz3vwac29aUwC5OamiwJvR0IfF7+7S8HD+FCcUb0X
+	lFS3NttA==;
+Received: from localhost ([::1]:21568 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iX8og-001eI6-Dx; Tue, 19 Nov 2019 19:05:34 +0000
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433]:39463) 
+	id 1iX9Yn-001efs-Tc; Tue, 19 Nov 2019 19:53:13 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13940) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iX8ob-001eHz-La
- for samba-technical@lists.samba.org; Tue, 19 Nov 2019 19:05:31 +0000
-Received: by mail-wr1-x433.google.com with SMTP id l7so25207488wrp.6
- for <samba-technical@lists.samba.org>; Tue, 19 Nov 2019 11:05:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to
- :content-transfer-encoding;
- bh=ETekLPuwAvffvff07uZO5L2TwFvC0NzsYrFNVIj82OM=;
- b=kc4X6S/pK/1WLboehNp2v9EMtNY1JSOwAVu3WkOXRhDH90BUQ1TwLK8F9S8pPXPHSB
- vQ436DVZQoZVIE5vn8XTxCY3bB9V/gH6elATy09MjIWp9itpF7v6R2TxJOTOFYr9lyC7
- mcz+vmZRkEnDHHiMgzEV3f3iCTC5kB5tJNQb+J5zQwJD2lO46gcoT25/sOuvjM+AjKY0
- P/FXoHDNK/oQZMycqBoqmnOitio4/izL6FXrbcy+H2HVhwrsN+0NlUFwI+Luuv7KKVeX
- ZVpzA/MLrAKWN/DeusZaOCi3VDnhlSXeB1kDBYOE4HiOtMxRdY5ZhOI1/jkOEMuOzZD9
- i1ZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to
- :content-transfer-encoding;
- bh=ETekLPuwAvffvff07uZO5L2TwFvC0NzsYrFNVIj82OM=;
- b=mKwSuwXDDb7xz5djWv6txtMyc8aJfwkyeVET0ZKSa6jTcxlbqoOo3/qDmbQ/s5Ieh/
- Lhd6BR4Yu5T7FBUpjKbfm5E48z2/cA+TDcN/7j4cFNuKAzOxCA1Uu0j/gpyjYhYiGvTs
- 5OtUPRqCHPnaPTogmwiEgeHTm00AyghtOqg3M4atNgexcBTXXLlur019lnmYpKMzKcQg
- gbZ3cC5R7epvgZkqMsgzIxJmmOn+Mh0W7h2KoBc0sZGAyj+Dl29T3ZaCkjGVjQ89SAg0
- LH/IWC60QjpQu37sT/2NOfvLiEbmmE7zcWKOXqUXOSubAkHvxlPb5hEVxfflT8zEBPnR
- Vrcg==
-X-Gm-Message-State: APjAAAVVWrWndrlBOCWvLEHtohB7WWdqHSZlyLdgp3ou46O8KngPj+kr
- Iok2kn3Zcd2/pjbF9a2hGroYAdSqJOxYnwuF3w8jSw==
-X-Google-Smtp-Source: APXvYqwYyqhPMDOQA3s30eZIU/JdhBP7bL8QmuRSfP/5C2HBI2JaLy8l47ecmM6YYbA8aC/X3i+5K/MhxN/BElquNfU=
-X-Received: by 2002:a5d:6706:: with SMTP id o6mr18610135wru.54.1574190328646; 
- Tue, 19 Nov 2019 11:05:28 -0800 (PST)
-MIME-Version: 1.0
-Date: Tue, 19 Nov 2019 11:03:39 -0800
-Message-ID: <CACyXjPwfkzN-GUqnffKeOgH9vYRP9qLP8Jwh0cuE_a=gP03bEg@mail.gmail.com>
-Subject: Wireshark 3.1.1 and SMB2/TWrp Timestamps
-To: samba-technical <samba-technical@lists.samba.org>
+ (Exim) id 1iX9Yk-001efl-7m
+ for samba-technical@lists.samba.org; Tue, 19 Nov 2019 19:53:12 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=uwa1rOpcKuOGKEJYaHKlKop8ekP9FEefee742LoVSY4=; b=oyWn4LD0LOUXAzpCIBhIqZ13dj
+ XpN+NTTU6FB/v4XAMImlQJOpi9m7ykLSgr3Be98//DNuuJKGWY2Gn0Jvs3zI8D9qkQN0Ges4G25j/
+ kBtTss4zm43vfQIjUeOtRVRhrWlucqfq7yflaNjvdbaNz+xKc3sfvy2hTKtF5NQUh2cr4Aul+nY0v
+ 3yS1KUQhYuS0L1x7PyAKlPP8ZSPQ0bemfYWcmymYxyTFmEYCuGaVODh6F27uEyshHUKL1AWjCCml+
+ 1VZwWy8o4AUT0I1dCoDsErkWJz6VNS9k1OHtnKHqH+cBhR1ib/NOl/icjfNj816CTAiU3hiBb9Okt
+ 3j+FfOTdxV8fDz0ZgALe0tzhh/BqPRV1pPgJ1v9r6ES6DofT8pKVp4mHdc980A5jH6Ub35NotZZEZ
+ kirisAbKAZGlUTM+ZzoDjrWHt5UpIeFFylxFTWLxC9GbuV50/v7phcdtBiHdwn31u7n8YsbMV3Gsp
+ kwS1CAbq+tX5F3sGodB1M3w/;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iX9Yj-0008Qv-AI; Tue, 19 Nov 2019 19:53:09 +0000
+Message-ID: <9dc8dc485f6bdf08823c5a86043c459c51ffd173.camel@samba.org>
+Subject: Re: feedback on ldap improvement in samba 4.11
+To: Denis Cardon <dcardon@tranquil.it>, Samba Technical
+ <samba-technical@lists.samba.org>
+Date: Wed, 20 Nov 2019 08:53:04 +1300
+In-Reply-To: <4ac9eeeb-211b-ca35-d234-6648c612ce3d@tranquil.it>
+References: <4ac9eeeb-211b-ca35-d234-6648c612ce3d@tranquil.it>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,26 +56,67 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi folks,
+On Wed, 2019-11-13 at 11:24 +0100, Denis Cardon via samba-technical
+wrote:
+> Hi everyone,
+> 
+> I just wanted to say how impressed I was with the improvement in
+> memory 
+> handling in ldap server in samba 4.11 that were announced in the
+> changelog.
+> 
+> I was doing some debug on OOMKiller issues on a Samba-AD 4.9 with a 
+> large database in production. There are some buggy softwares that
+> make 
+> queries for all users (the most peculiar one I have seen is a print 
+> driver...) and Samba 4.9 properly handles the query but allocate
+> around 
+> 2GiB RAM for the query while the client downloads the result. With a 
+> handfull of such queries piling up it can quickly run the server out
+> of 
+> memory.
+> 
+> On the other hand with Samba-4.11 memory is allocated in a much more 
+> frugal way and it can handle hundred of such buggy queries without 
+> crashing (it may be slow but it does not crash). So kudos the
+> Catalyst 
+> dev team for that great piece of work!
 
-Wireshark 3.1.1 has my changes for Windows Previous Versions/TWrp
-Timestamps in it.
+Thank you so much!  This work started long, long ago when Simo (at the
+time controversially) made ldb async, so it was really nice to be able
+to finish the job and see the end result finally show in something so
+valuable. 
 
-Unfortunately, there is a bug and it displays bogus times way in the future=
-.
+When we did it, we were not sure that it would help outside our
+synthetic benchmarks, so to hear the difference it makes in the real
+world is wonderful!
 
-I have committed a fix which is already in the Wireshark master branch
-and will be in 3.2.0rc1 when it becomes available next week.
+> About the prefork model, the master ldap process is properly
+> restarting 
+> the child process after a SIGTERM but it is not restarting after a 
+> SIGKILL. Is it normal?
 
---=20
-Regards,
-Richard Sharpe
-(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
-=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
-=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
+I get Gary's view about a manual kill -9 respawing perhaps being
+unwanted, but I agree, a re-spawn system that doesn't cope with the OOM
+killer is less than ideal, I would have expected such a process to be
+restarted (perhaps after a bit longer wait). 
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett
+https://samba.org/~abartlet/
+Authentication Developer, Samba Team         https://samba.org
+Samba Development and Support, Catalyst IT   
+https://catalyst.net.nz/services/samba
+
+
+
+
+
 
