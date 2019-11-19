@@ -2,47 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E20A1102D0A
-	for <lists+samba-technical@lfdr.de>; Tue, 19 Nov 2019 20:53:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 576EA102D48
+	for <lists+samba-technical@lfdr.de>; Tue, 19 Nov 2019 21:11:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=uwa1rOpcKuOGKEJYaHKlKop8ekP9FEefee742LoVSY4=; b=cWDtzWMMoQqNDgRH1BHoWMSkvv
-	SD4TWhC0Pn7SgF1xk0RMByCgbNkebinVsZW10WzrJonB8jRROituMZ0wDf1HX3OCBFqHr5+5rPh7K
-	rl8+5aLwOt/0bbijiIQYbhK8AEh42AfcHjUTBYduA2jOBgdwSXlRhgAmSBwwo3+74bHHwYSv7+SBA
-	p7jxesIIdIZezv+7DgmfJpQHe/hI556iTknGt7f3ed9FWmrBRBAkqN3qY2inL2Y18p6UKg0sazf+1
-	qnIVoCKtRBHTX69TeTeT5875OdqReRwXn21WKz3vwac29aUwC5OamiwJvR0IfF7+7S8HD+FCcUb0X
-	lFS3NttA==;
-Received: from localhost ([::1]:21568 helo=hr1.samba.org) 
+	bh=3BtJ1zMcxUx0iMXSHeLZyfUZRzjGXtWWynrn03LdZKk=; b=HWcxQdXWy1EL8WyKKt5EVigSPC
+	HGvptftQktXbWRIP+Iy/ypJn5bGyCbFZBa5uBWOxzYFsdBWQkoAcpT0FTqIklDDi9KCxZOgm/Pqej
+	9KBtNFx4sPmY1WapfcRjBY1dLx82W3eWfiulwWGzhySdnissTt3gdBFSxKWWRmNDR/ulBeGdfcpyl
+	ASytX5W+vuCI7tS0F3hVOkXZ3afqBOrPJFGnepjI35RkoGDjaT8U0p3TE7G1VveNi8f1Y0LK9rZ4n
+	YA3I8hj9SKHLAUnTSyv98poxMcUv7viWj1JND2Bcd27ozrebZZo+bzZpGmOyVd1kX4jvckXgEouV8
+	KBl4RTLg==;
+Received: from localhost ([::1]:23338 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iX9Yn-001efs-Tc; Tue, 19 Nov 2019 19:53:13 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13940) 
+	id 1iX9pk-001euz-8W; Tue, 19 Nov 2019 20:10:44 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz
+ ([2404:130:4080::4]:39584) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iX9Yk-001efl-7m
- for samba-technical@lists.samba.org; Tue, 19 Nov 2019 19:53:12 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=uwa1rOpcKuOGKEJYaHKlKop8ekP9FEefee742LoVSY4=; b=oyWn4LD0LOUXAzpCIBhIqZ13dj
- XpN+NTTU6FB/v4XAMImlQJOpi9m7ykLSgr3Be98//DNuuJKGWY2Gn0Jvs3zI8D9qkQN0Ges4G25j/
- kBtTss4zm43vfQIjUeOtRVRhrWlucqfq7yflaNjvdbaNz+xKc3sfvy2hTKtF5NQUh2cr4Aul+nY0v
- 3yS1KUQhYuS0L1x7PyAKlPP8ZSPQ0bemfYWcmymYxyTFmEYCuGaVODh6F27uEyshHUKL1AWjCCml+
- 1VZwWy8o4AUT0I1dCoDsErkWJz6VNS9k1OHtnKHqH+cBhR1ib/NOl/icjfNj816CTAiU3hiBb9Okt
- 3j+FfOTdxV8fDz0ZgALe0tzhh/BqPRV1pPgJ1v9r6ES6DofT8pKVp4mHdc980A5jH6Ub35NotZZEZ
- kirisAbKAZGlUTM+ZzoDjrWHt5UpIeFFylxFTWLxC9GbuV50/v7phcdtBiHdwn31u7n8YsbMV3Gsp
- kwS1CAbq+tX5F3sGodB1M3w/;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iX9Yj-0008Qv-AI; Tue, 19 Nov 2019 19:53:09 +0000
-Message-ID: <9dc8dc485f6bdf08823c5a86043c459c51ffd173.camel@samba.org>
+ (Exim) id 1iX9pf-001eum-VQ
+ for samba-technical@lists.samba.org; Tue, 19 Nov 2019 20:10:42 +0000
+Received: from [IPv6:2404:130:0:1000:295f:724:d9bc:f644] (unknown
+ [IPv6:2404:130:0:1000:295f:724:d9bc:f644])
+ (Authenticated sender: gary@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id D159F80F20
+ for <samba-technical@lists.samba.org>; Wed, 20 Nov 2019 09:10:13 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1574194213;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references:openpgp:openpgp:autocrypt:autocrypt;
+ bh=3BtJ1zMcxUx0iMXSHeLZyfUZRzjGXtWWynrn03LdZKk=;
+ b=gKaa48SXc8+U8g8GJUIzu+bSUol/ibholmEKqMmAUhp8N/hxneOFdOrYrklNYxCfrSRjEF
+ qpcB0Jh8lnhAxma0LuK5bQm4ioClux+7ysE0kjyynENJnhgWholtatb4Lfn4E3y2+fRQNw
+ IWdsbcd0suV5Dc7w/FSSN/F/OVYSRUZDEIL/c38dwVyfWnDkPeaWybVyTH+WTEwJcFI81T
+ WpED8wAqfjWJj3+zezap8mETK2xSMz0lDTK3CjpJrSmf/so2XxHW0AVYuWIYMLNdNBdPL5
+ P2cWzkpsjPBsJt4h7HoxwH3b6dfd2ASwg/D8OTZzcJsygHcgAJGyRylonixqSA==
 Subject: Re: feedback on ldap improvement in samba 4.11
-To: Denis Cardon <dcardon@tranquil.it>, Samba Technical
- <samba-technical@lists.samba.org>
-Date: Wed, 20 Nov 2019 08:53:04 +1300
-In-Reply-To: <4ac9eeeb-211b-ca35-d234-6648c612ce3d@tranquil.it>
+To: samba-technical@lists.samba.org
 References: <4ac9eeeb-211b-ca35-d234-6648c612ce3d@tranquil.it>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+ <9dc8dc485f6bdf08823c5a86043c459c51ffd173.camel@samba.org>
+Openpgp: preference=signencrypt
+Message-ID: <230ee6a4-d875-d749-cb60-80eb8ecd25d0@catalyst.net.nz>
+Date: Wed, 20 Nov 2019 09:10:07 +1300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
+MIME-Version: 1.0
+In-Reply-To: <9dc8dc485f6bdf08823c5a86043c459c51ffd173.camel@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="sHueZC9JrH1nGLEBZqyFWShqAtjsP8GkC"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,67 +63,104 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Gary Lockyer via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Gary Lockyer <gary@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2019-11-13 at 11:24 +0100, Denis Cardon via samba-technical
-wrote:
-> Hi everyone,
-> 
-> I just wanted to say how impressed I was with the improvement in
-> memory 
-> handling in ldap server in samba 4.11 that were announced in the
-> changelog.
-> 
-> I was doing some debug on OOMKiller issues on a Samba-AD 4.9 with a 
-> large database in production. There are some buggy softwares that
-> make 
-> queries for all users (the most peculiar one I have seen is a print 
-> driver...) and Samba 4.9 properly handles the query but allocate
-> around 
-> 2GiB RAM for the query while the client downloads the result. With a 
-> handfull of such queries piling up it can quickly run the server out
-> of 
-> memory.
-> 
-> On the other hand with Samba-4.11 memory is allocated in a much more 
-> frugal way and it can handle hundred of such buggy queries without 
-> crashing (it may be slow but it does not crash). So kudos the
-> Catalyst 
-> dev team for that great piece of work!
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--sHueZC9JrH1nGLEBZqyFWShqAtjsP8GkC
+Content-Type: multipart/mixed; boundary="mqD2NQFqUpxAEXUug9R8anPDrRku0TKnY";
+ protected-headers="v1"
+From: Gary Lockyer <gary@catalyst.net.nz>
+To: samba-technical@lists.samba.org
+Message-ID: <230ee6a4-d875-d749-cb60-80eb8ecd25d0@catalyst.net.nz>
+Subject: Re: feedback on ldap improvement in samba 4.11
+References: <4ac9eeeb-211b-ca35-d234-6648c612ce3d@tranquil.it>
+ <9dc8dc485f6bdf08823c5a86043c459c51ffd173.camel@samba.org>
+In-Reply-To: <9dc8dc485f6bdf08823c5a86043c459c51ffd173.camel@samba.org>
 
-Thank you so much!  This work started long, long ago when Simo (at the
-time controversially) made ldb async, so it was really nice to be able
-to finish the job and see the end result finally show in something so
-valuable. 
+--mqD2NQFqUpxAEXUug9R8anPDrRku0TKnY
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-NZ
+Content-Transfer-Encoding: quoted-printable
 
-When we did it, we were not sure that it would help outside our
-synthetic benchmarks, so to hear the difference it makes in the real
-world is wonderful!
+Yeah still a little reluctant about having processes ignoring SIGKILL,
+but given that we use the control pipes to shut down it should probably
+be ok.  It's just going to require a bit of thought to make sure things
+can be shut down.
 
-> About the prefork model, the master ldap process is properly
-> restarting 
-> the child process after a SIGTERM but it is not restarting after a 
-> SIGKILL. Is it normal?
+Ng=C4=81 mihi
+Gary
+On 20/11/19 08:53, Andrew Bartlett via samba-technical wrote:
+> On Wed, 2019-11-13 at 11:24 +0100, Denis Cardon via samba-technical
+> wrote:
+>> Hi everyone,
+>>
+>> I just wanted to say how impressed I was with the improvement in
+>> memory=20
+>> handling in ldap server in samba 4.11 that were announced in the
+>> changelog.
+>>
+>> I was doing some debug on OOMKiller issues on a Samba-AD 4.9 with a=20
+>> large database in production. There are some buggy softwares that
+>> make=20
+>> queries for all users (the most peculiar one I have seen is a print=20
+>> driver...) and Samba 4.9 properly handles the query but allocate
+>> around=20
+>> 2GiB RAM for the query while the client downloads the result. With a=20
+>> handfull of such queries piling up it can quickly run the server out
+>> of=20
+>> memory.
+>>
+>> On the other hand with Samba-4.11 memory is allocated in a much more=20
+>> frugal way and it can handle hundred of such buggy queries without=20
+>> crashing (it may be slow but it does not crash). So kudos the
+>> Catalyst=20
+>> dev team for that great piece of work!
+>=20
+> Thank you so much!  This work started long, long ago when Simo (at the
+> time controversially) made ldb async, so it was really nice to be able
+> to finish the job and see the end result finally show in something so
+> valuable.=20
+>=20
+> When we did it, we were not sure that it would help outside our
+> synthetic benchmarks, so to hear the difference it makes in the real
+> world is wonderful!
+>=20
+>> About the prefork model, the master ldap process is properly
+>> restarting=20
+>> the child process after a SIGTERM but it is not restarting after a=20
+>> SIGKILL. Is it normal?
+>=20
+> I get Gary's view about a manual kill -9 respawing perhaps being
+> unwanted, but I agree, a re-spawn system that doesn't cope with the OOM=
 
-I get Gary's view about a manual kill -9 respawing perhaps being
-unwanted, but I agree, a re-spawn system that doesn't cope with the OOM
-killer is less than ideal, I would have expected such a process to be
-restarted (perhaps after a bit longer wait). 
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT   
-https://catalyst.net.nz/services/samba
+> killer is less than ideal, I would have expected such a process to be
+> restarted (perhaps after a bit longer wait).=20
+>=20
+> Andrew Bartlett
+>=20
 
 
+--mqD2NQFqUpxAEXUug9R8anPDrRku0TKnY--
 
+--sHueZC9JrH1nGLEBZqyFWShqAtjsP8GkC
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
+iQEzBAEBCgAdFiEEDO84T/PRptSsMEixei/9ZKIyR1MFAl3UTCQACgkQei/9ZKIy
+R1OXMwf8C3w5TCCSOpX0eD3gCwV02OuCBcsXbnNgz7wkpHNeWIKYc+9frNf6ONPI
+xv8dFFCn8tP1SRxO1jIY+Ww3WuLCCU4q1V6qFAv3zd322LrMM7Wuet7YdxyFswuL
+qOJZbR1d+HUYRaeznEKRdqDfdUZTqc/XmG8qDUuexo5/Hg7cZ8ijymlf6kmLsa9d
+vBzDlMw/zcM3ljO6SZo4QRx4mKlxqmTBWcLJUY6VnZxaUMwzAzB/wFzk4JGvAn1o
++qyNMYXbfLKToYflLvBdCXt+CcmG7S1k3Dm8BV+B6o8OG1oX1VZTdVliyv3jhQ0p
+s7Ma0czpVB6reh+7MAx0ILCP8YlMpA==
+=xBwg
+-----END PGP SIGNATURE-----
+
+--sHueZC9JrH1nGLEBZqyFWShqAtjsP8GkC--
 
