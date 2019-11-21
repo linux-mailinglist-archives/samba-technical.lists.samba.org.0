@@ -2,55 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBBD11058D5
-	for <lists+samba-technical@lfdr.de>; Thu, 21 Nov 2019 18:53:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BFFC105911
+	for <lists+samba-technical@lfdr.de>; Thu, 21 Nov 2019 19:10:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=PGPmuVKWm0lCjfwiQ5Oedqi0prxcPjmtTU4qtRJdBCA=; b=LECn10si9P0scybEDGtUzBvJVF
-	usi7mLdu9eoh5hDe6RLJa11ohsDMKxpKpDJw1aQ/VxbsAhDNKtds9HQQtXEunTzZNbpXEUjAC2rXi
-	cnZPKK6oP4TvmBpjie6V8t++oeXIhiW5R+Fhd/nUCidAFQ/FPZK9wLMlWW5U3Ys14+cxNWDZzquk/
-	MBC3ifzwRsAJF8/kE0L93AFdAt1KdI1ViIWbUksf31cb+4/7Z278M0Pc5knJxzAmD6S0tWCDcCKW9
-	5j+xiPyuxLbHD0R3ptRrd/R64ry8+K6Tx73RslhKTMQ6eOrLepUE7hIZJBhmJY/72CL3gwxYDnb6J
-	eo8K2OyA==;
-Received: from localhost ([::1]:25696 helo=hr1.samba.org) 
+	bh=+ujZnqrlu4W/ASdb56U4L07F2DRkcWPX2Q1sfhPqUdE=; b=BXD9FdulKCnOYFDttnQM1v3yRV
+	yc8zk4oELBfxkP2T0+rsjrCD5FHqwqExvdlBUzkVJxnauObokajo+u1GIQaVg5saP5y3P4DKcNxqK
+	1qUQcBtspOulqiPdjDDjfxBL/PizQUhU22jbbJYTtibfEROlBekitoUWGxR1c7WIu6jVsAxwzUZzy
+	fwcGQNENfxn8ROPbfzJmGHhT8tC+M48CTwUfwVII4bl5bYiZZe+D+QlAzzntn1r0r0fo1mdoJ0Xc/
+	f9+rmIqL19NMW4YLMWc+bt+q4TnkZ8E4NMbw2t5TVRLoLBq2juMh3nMBHhCoSSaJPY53RmxJJ6ZPa
+	qBQbNlYw==;
+Received: from localhost ([::1]:26598 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iXqdU-001vpx-Fz; Thu, 21 Nov 2019 17:52:56 +0000
-Received: from mail-lj1-x235.google.com ([2a00:1450:4864:20::235]:42534) 
+	id 1iXqtt-001w0B-M4; Thu, 21 Nov 2019 18:09:53 +0000
+Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929]:38848) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iXqdQ-001vpq-47
- for samba-technical@lists.samba.org; Thu, 21 Nov 2019 17:52:54 +0000
-Received: by mail-lj1-x235.google.com with SMTP id n5so4212160ljc.9
- for <samba-technical@lists.samba.org>; Thu, 21 Nov 2019 09:52:51 -0800 (PST)
+ (Exim) id 1iXqto-001w04-Jj
+ for samba-technical@lists.samba.org; Thu, 21 Nov 2019 18:09:50 +0000
+Received: by mail-ua1-x929.google.com with SMTP id u99so1295657uau.5
+ for <samba-technical@lists.samba.org>; Thu, 21 Nov 2019 10:09:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:from:date:message-id:subject:to;
- bh=PGPmuVKWm0lCjfwiQ5Oedqi0prxcPjmtTU4qtRJdBCA=;
- b=XjSGf+3/PnxnGeRWAc9loX6cqpEF54K589i6K1sxu2hcG84hYutEw/Kz5MAYgCYj1i
- nWTDYHIHrBtrR3CT47fCmCrPXaFmL502FA3sNYLSS8O4yDem02RlAZvNP3LKFek40Ulx
- mN9USlIRHCccqCxTXple8WYG976CXpg9E5rNkf6xHiwWA1ArtknSwsHYh/uPDRRUm9Tb
- wbD9CtxX94g190rN8EcdTy0CosW1IfOjiGE85PN1HH9NUdkM6mImESLedfHgRN3DYT3m
- McQBEvpXWPU5rPspxU4D/g9yNADPxRSehzP61tHzGaWzO3r9QaHqRiHdQrSk27eTLwV6
- BKLg==
+ bh=A6TT/cOA6ecTIEqv5TPBEzoScBqp1g1UQrzHlRd1zug=;
+ b=EKlSaDvBLLBV3MitShzvSt+3lx136az/fljqucIjxid9hWo1ncKFVQIPWV7H6bJ7fV
+ jC4NJNeFOTQUld7gVV6Nc7fk9SLQIpGQfJRIjDwRFtK4cTaP9AoOFeBMWOt9eFV7SvS3
+ vXPogZL04eFS01YbtGP/G1ZgUHRvY816Asd9TGbjIPCD1o9DhaHBRHHWxRR3cWkl5l6G
+ pJaneOBqKGjI7F+E0fci37XErbuFuUupb8mYPOHt24OiyHKr/YrSQnCdSjhG19HZ1mhs
+ 4DXtSIEloM8/r0Hk/q4tea6/Nn9hPSzQgs0ocvsnzTuBgBUnkTZM93LeR+kAm+/eVS/o
+ aGpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=PGPmuVKWm0lCjfwiQ5Oedqi0prxcPjmtTU4qtRJdBCA=;
- b=ftPU6vDuER5gQnn/RGrpQ/FHUnM1QSRxnSGp0T+Op9rZgS99ANQKzN2mOihI5R9Gbs
- 8tl9W6uwT7ITfCtp0B+VAXkockEaYlNIF+czr229oO5KOrGnW6scxMNLSqfes+nkAM9l
- FU0Gv1PWWh6SPnnZZd1cIUJDb0PcEs+jlwumH2oXhe8LZg2z47OgUUhhuyrvD8JMhPAX
- KC/OJioqhSabOU5S0oGFUf4lv6WDa3oaiJyhqBUkdFDCYG777NcVTkUi3sPPC8YhZ9BI
- AKz3zhwacUvLT+56M6u+bI0vhXthDOWC80wgK5jrdxDHhgsZgUUmoW+kWdHjGUKii6EI
- xiXQ==
-X-Gm-Message-State: APjAAAUwECXaM0iY+XwVpeDkLoNQpidiY9FI6b1P8DobmfBreEycfz32
- 4XyAYg2eaZ6NUnERa9QJjnZDvO7EVZGY+5iaAnV1ySss
-X-Google-Smtp-Source: APXvYqyhecbeiUbsXtaCjleg1osjD42PAK0jHeBJHyX5vrgDWd7irW/0/RANJb3BGAyXUPkkWDyGGD1H03Yn8N0oJWE=
-X-Received: by 2002:a2e:9b89:: with SMTP id z9mr9040153lji.185.1574358770703; 
- Thu, 21 Nov 2019 09:52:50 -0800 (PST)
+ bh=A6TT/cOA6ecTIEqv5TPBEzoScBqp1g1UQrzHlRd1zug=;
+ b=BqZ3OP1E/bY5kuVTfw28rOpl8tchRtZ4GLLnJL2b+aS/PSGVmAmpum0s7p2wmooTFE
+ LFKM/4KgkHVtXQpu+GbpSqB+mGcNN/W20Nazy/3lIk0C3m/mwnjOJ8zH5Am5lHwiwbgq
+ mOAMsRyo8IVIttWgpcvZyCI7ekK9jGtorxsAAZnZthQejG8E/zjKj2QqEfsGBstQgQSf
+ U6naUNoBAUJ5+XaOsgIsJs8cHREgI37u0aWUFpiNy3A8MdJ7MDf464kLJhS+UfrshsTe
+ jTo7+TBrGpEs9C0EDx/pOT77VMvI0GorqsJQW+bFdB9fIk0cGjxo+Xu04CnOsw49gerR
+ bp9g==
+X-Gm-Message-State: APjAAAVMSPFP4GnfV8QULvovpQKcSClxWqxiYihMkeFgKzYKLhCklct0
+ 4G2WnD3ho7bd1d6uk3OQduHXDaw2NB6pkeJnTRJaHN855Xg=
+X-Google-Smtp-Source: APXvYqw8XSOitdPul3yjnS0OvBVL1oMcxcY9h5yHVzVTvxBmZj8csKMVZlU7ZdojWzbrEPXmnYWflGqz1TEBvinAYRw=
+X-Received: by 2002:ab0:2601:: with SMTP id c1mr6255359uao.11.1574359786687;
+ Thu, 21 Nov 2019 10:09:46 -0800 (PST)
 MIME-Version: 1.0
-Date: Thu, 21 Nov 2019 18:52:39 +0100
-Message-ID: <CAC-fF8T2bviHcpRgmjmVoiAvtpLEmFkr-5P9Q9dr=AoKCiEyMw@mail.gmail.com>
-Subject: MR !854 | sess_crypt_blob() fails to decrypt its own cipher text
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Thu, 21 Nov 2019 18:09:34 +0000
+Message-ID: <CAGYhc9=AZmkOjHAGx7rWd=iM6h5BaVohym+oWMWqfNEfNtju3Q@mail.gmail.com>
+Subject: building source3 subsystems and libs
+To: samba-technical@lists.samba.org
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,21 +65,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@gmail.com>
+From: moore chestnut via samba-technical <samba-technical@lists.samba.org>
+Reply-To: moore chestnut <moore.43132@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+  hello,
 
-While adding tests for sess_crypt_blob() I noticed it fails when the
-input is not aligned to block size of 8, and it looks like we always
-use it this way (see also comment above sess_encrypt_string()), see
-pipeline:
-https://gitlab.com/samba-team/devel/samba/commits/iboukris-dtest
+is there any way to individually build subsystems and libraries?
 
-I think we should simplify it and require the input to be multiple of
-8 like in the above branch, thoughts ?
+for example:
 
-Thanks
+the msrpc3 library in  source3/wscript_build
+bld.SAMBA3_LIBRARY('msrpc3',
 
+or
+bld.SAMBA3_SUBSYSTEM('samba3util',
+
+when I try waf or waf msrpc3 in the source3 dir, it does not work.
+
+currently trying on a 4.11.0 source tree.
+
+I have read through the https://wiki.samba.org/index.php/Waf
+and tried the samples with no success.
+
+Does this work for source3 libs/subsystems?
+
+Thank you for any guidance.
