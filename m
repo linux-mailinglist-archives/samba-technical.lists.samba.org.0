@@ -2,60 +2,78 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38AA7105CE2
-	for <lists+samba-technical@lfdr.de>; Thu, 21 Nov 2019 23:53:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80236105D19
+	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 00:17:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=cyNwZE9rOytRQhqliEJXrh4PieLFQbeiMkMI5M8Mw7I=; b=Y76ZgoewNML5HF4iVBxB9lHJjY
-	owu112mC65vC/VyzbINNVnlRxwZIWFodtYW+ldyLKwwEgpelkCeyx6QPg0s/ZsxP+wdS2a49sPO9U
-	PX54EYPEHogqtHExI0Wrk6KEu7Fe+AJPeWBXw6yHFW0CC8wwik8YioovCl6+HTteYwtwsTZaH38JA
-	Gchyd18bRGE0uyvJ0hLRq6xs/ALTV8xSxkS1LEOm9rv//0jtg5/my8+XDmCMJ4/wsJ5VDj3DdB/8o
-	mJzHEXbudAzxhqE7k4gTivAy5jPcxMYgSklnN5wFx9LW3m6Sgl3h31PQ6ox+T/UZYB03jZq23GoBW
-	FcgxK3fA==;
-Received: from localhost ([::1]:44092 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=+JqTZymDJV9U31VHWODYV0xco0uldz6QzYufe1OmiMc=; b=b0ySX8m13jGoM/C1SteUiT2j28
+	GRpJWsqMVueFV7Bl1w7k8kzjq1TZZ3Kg8Vsldiyb/ZvIgwuO9Ts3D7aOAgBnShn2nLoag1irU0JQM
+	wk3piK/W2+TwE8jdOrvyyWbv1JobQXdz8IoPvvsLFJKXm7RviVSYdfLP3CXaPUyKP1Jhfcd1JV8jS
+	IX/ZS1AO0EltrKLtFhViRCwZ40IzM86c4tQyZnzuQe9BaA9djRDI17jm44FcSmy1biGLMxd7cJURZ
+	vkMXnBMab6FNS+0wqLERwgmt8Kh/mmVRNNKMX0qEz+/mglx+zUuMdCnhL2xqldEE8zf9aOhNlUS2s
+	sHwkCMzg==;
+Received: from localhost ([::1]:45896 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iXvKB-001ymk-Nb; Thu, 21 Nov 2019 22:53:19 +0000
-Received: from mail-vs1-xe44.google.com ([2607:f8b0:4864:20::e44]:44170) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iXvK0-001ymc-A5
- for samba-technical@lists.samba.org; Thu, 21 Nov 2019 22:53:17 +0000
-Received: by mail-vs1-xe44.google.com with SMTP id j85so3458891vsd.11
- for <samba-technical@lists.samba.org>; Thu, 21 Nov 2019 14:53:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Qe0lNm/i+1Zuryx/xbBtsAuUXC4irRfHZsspcQhief4=;
- b=AG5Gh6ppqpy8PE036CeMIzEWE7ra0SqjvJ6L3giuSwGwoswJFxkDEEKQKHukBQ9CeR
- pkbkJpKYrOFvyXf9vTLAmHyyPIdwuOxrR26k71YZr/VleQ10ybfVewrylGhIHnmuA7yo
- IwasJ62XLpN77PVHSnvVqR/Kr9fLWjSLRqT8MpcZOer4ysSjWgTYak44nUe7gugYzlPW
- MbzFe+KzOQNLDmDmIrRo2EDIECsT9mDgdiKYKu3zanpJEJJwmWv0OW4gEE3IBWB4txcN
- 2jnxnfchy/nazPyJ4aDP1AxrWy/F8fuyRdDQAPkWLKfIS6MU0b3wW3K7fEMtJ+sOu2E4
- nNDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Qe0lNm/i+1Zuryx/xbBtsAuUXC4irRfHZsspcQhief4=;
- b=CUAGiVHRIvIkRnfnDM7zfuFDS+A/XW2R+PKvIrDK5VY1Y86/LnuBNQT+Ik8ITQE2GL
- DTcFNLfotfJdC3cRM9xlhzm+9DpYLaMMIjdlmz1rYD5jPV8dpLa0RcCCIrzfqM4liyk7
- uB6x2alnFlXr3E7g5ZrU1hnfLCC/Zafdku0DmIDlkbsXsz/1Tegw6idPDgXaFCejxKpb
- dmhSKvirDEAZWuGId2StWuym7X067F682vz6DvPH0MCxgqZLbB5nmd1yEesaLaat8i0U
- Yulv3V4ng6LxoK97hJJjuQw4clDeSbNsO+OIvYCuZQFDt37z5YYtLYwH//Z/OWnDHUix
- YrlQ==
-X-Gm-Message-State: APjAAAVyzbInLVsQ3vxUCPvWLG7zUDpblvIbRH1I/m4YEddof2Bxwtt7
- X0fzQFUufTVgGef9cEMlX+YYfwOxqwEVNLwrTzZ12XFr
-X-Google-Smtp-Source: APXvYqyu88JPeLx9Y7iVPPtVeHCsHbjLpE3PrvjjyTC6khfrmgzleh7FhTaeQU0Rx6/sfHqb68O5qUqLKsALRXYdhRw=
-X-Received: by 2002:a67:d802:: with SMTP id e2mr8849935vsj.221.1574376785727; 
- Thu, 21 Nov 2019 14:53:05 -0800 (PST)
+	id 1iXvh2-001z4L-D9; Thu, 21 Nov 2019 23:16:56 +0000
+Received: from anteater.elm.relay.mailchannels.net ([23.83.212.3]:30327) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1iXvgx-001z4C-0W
+ for samba-technical@lists.samba.org; Thu, 21 Nov 2019 23:16:54 +0000
+X-Sender-Id: dreamhost|x-authsender|nico@cryptonector.com
+Received: from relay.mailchannels.net (localhost [127.0.0.1])
+ by relay.mailchannels.net (Postfix) with ESMTP id C01A9E0FEB;
+ Thu, 21 Nov 2019 22:39:22 +0000 (UTC)
+Received: from pdx1-sub0-mail-a70.g.dreamhost.com
+ (100-96-92-164.trex.outbound.svc.cluster.local [100.96.92.164])
+ (Authenticated sender: dreamhost)
+ by relay.mailchannels.net (Postfix) with ESMTPA id 01645E0E52;
+ Thu, 21 Nov 2019 22:39:21 +0000 (UTC)
+X-Sender-Id: dreamhost|x-authsender|nico@cryptonector.com
+Received: from pdx1-sub0-mail-a70.g.dreamhost.com ([TEMPUNAVAIL].
+ [64.90.62.162]) (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384)
+ by 0.0.0.0:2500 (trex/5.18.5); Thu, 21 Nov 2019 22:39:22 +0000
+X-MC-Relay: Neutral
+X-MailChannels-SenderId: dreamhost|x-authsender|nico@cryptonector.com
+X-MailChannels-Auth-Id: dreamhost
+X-Broad-Decisive: 407ad6495d511f67_1574375962583_2397112492
+X-MC-Loop-Signature: 1574375962583:3236055638
+X-MC-Ingress-Time: 1574375962582
+Received: from pdx1-sub0-mail-a70.g.dreamhost.com (localhost [127.0.0.1])
+ by pdx1-sub0-mail-a70.g.dreamhost.com (Postfix) with ESMTP id AA0B5AACEF;
+ Thu, 21 Nov 2019 14:39:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=cryptonector.com; h=date
+ :from:to:cc:subject:message-id:references:mime-version
+ :content-type:in-reply-to; s=cryptonector.com; bh=mF5AQPTIFF1rtI
+ p2Cd5T2IYWnek=; b=I4+GC6S1LGzubA+WC99eI2SIzQ7gf8IyBxZy3zrhEFWylf
+ m985RLtA6+OAUfeNOEJ3n8St/5emjkeMUoZQ1ENaP3/j2Ze89f9Lbr9UIj2ppq9V
+ cuw/AkjEqHpunWSxgqaq0d9JOCUNGq49Ic0qfjWiDec6/85EbjJlznyKt+9a4=
+Received: from localhost (sdzac10-108-1-nat.nje.twosigma.com [8.2.105.17])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: nico@cryptonector.com)
+ by pdx1-sub0-mail-a70.g.dreamhost.com (Postfix) with ESMTPSA id 35CFDAACEC;
+ Thu, 21 Nov 2019 14:39:12 -0800 (PST)
+Date: Thu, 21 Nov 2019 16:39:09 -0600
+X-DH-BACKEND: pdx1-sub0-mail-a70
+To: Stefan Metzmacher <metze=40samba.org@dmarc.ietf.org>
+Subject: Re: [kitten] Checking the transited list of a kerberos ticket in a
+ transitive cross-realm trust situation...
+Message-ID: <20191121223908.GC26241@localhost>
+References: <33c431f5-c36b-c321-de3f-65977d8aa898@samba.org>
+ <007c29e8-02b9-4f48-f67e-881cb0985d64@mit.edu>
+ <69d80d24-d461-1652-3cfb-e55d90d31fbf@samba.org>
+ <ec067a72-313e-1878-33a0-a3259d2979d5@mit.edu>
+ <1503578184.3428.19.camel@redhat.com>
+ <db882372-aa1d-e58e-4c94-a268539bd2ee@samba.org>
+ <1503596189.3428.26.camel@redhat.com>
+ <F363B51E-FDF7-4C91-9ABD-B623B5CE97BC@dukhovni.org>
+ <8f68cfb0-2d6b-d86f-4ff0-a9282aa0bf55@samba.org>
+ <cb0d7433-9e23-5bce-4e06-1213bf88cade@samba.org>
 MIME-Version: 1.0
-References: <CAGYhc9=AZmkOjHAGx7rWd=iM6h5BaVohym+oWMWqfNEfNtju3Q@mail.gmail.com>
- <20d3f005503d82862b0ba8856010ae7a8831d577.camel@samba.org>
-In-Reply-To: <20d3f005503d82862b0ba8856010ae7a8831d577.camel@samba.org>
-Date: Thu, 21 Nov 2019 22:52:48 +0000
-Message-ID: <CAGYhc9nN1cf3KD52mJG0ROmNYXDGXuA7c-KML33W+Qec0jOkrw@mail.gmail.com>
-Subject: Re: building source3 subsystems and libs
-To: Andrew Bartlett <abartlet@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cb0d7433-9e23-5bce-4e06-1213bf88cade@samba.org>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,70 +87,63 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: moore chestnut via samba-technical <samba-technical@lists.samba.org>
-Reply-To: moore chestnut <moore.43132@gmail.com>
-Cc: samba-technical@lists.samba.org
+From: Nico Williams via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Nico Williams <nico@cryptonector.com>
+Cc: kitten@ietf.org, Viktor Dukhovni <viktor1dane@dukhovni.org>,
+ "heimdal-discuss@sics.se" <heimdal-discuss@sics.se>,
+ Samba Technical <samba-technical@lists.samba.org>,
+ "krbdev@mit.edu Dev List" <krbdev@mit.edu>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello Andrew,
+On Tue, Sep 24, 2019 at 02:05:05AM +0200, Stefan Metzmacher wrote:
+> resuming this old thread...
+> https://lists.samba.org/archive/samba-technical/2017-August/122422.html
+> 
+> >> Does the Kerberos library know whether whether the application is going
+> >> to look at PACs and SIDs or just use the client principal name?  I am
+> >> guessing it does not.  Thus in Samba, one might need a dedicated
+> >> krb5.conf configuration file that disables the transit check.  Other
+> >> applications should still apply transit check even if a PAC happens
+> >> to be present, as AFAIK it may well remain unused.
+> > 
+> > My idea was that Samba would use
+> > gss_set_cred_option(GSS_KRB5_CRED_NO_TRANSIT_CHECK_X) to indicate
+> > the the transited list should not be checked.
+> 
+> I implemented GSS_KRB5_CRED_NO_TRANSIT_CHECK_X for
+> MIT, Heimdal (both upstream and Samba) and make use of
+> it in Samba.
 
-thank you for reply.
+Hi,
 
-so would it be bad a idea to try hack a build together based on the source
-files of msrpc3 and the deps?
+The right design for this is to use name attributes, not credential
+options.  Credential options should be banished altogether.
 
-essentially I would like to hack a client together to do dcerpc bind, epm
-mapper request, followed by bind and schannel setup (
-NetrServerReqChallenge and NetRServerReqAuthenticate3) followed by bind and
-NetrLogonSamLogonWithFlags.
+To see why consider an acceptor application that wishes to examine the
+transit path (or whatever other attribute) an authenticated initiator
+principal took to reach the acceptor.  What credential should the
+acceptor inspect?  There is none to inspect, not for the initiator (not
+even if they delegated a credential, since that one might not have
+transited any realms).  The only way to inspect the transit path taken
+by the initiator is to inspect its name, as that's all we have for it.
+This is one reason we added name attributes.
 
-Any suggestions on best approach?
+Correspondingly and symmetrically, the right way to request some
+behavior on the side where the credential is available, is to associate
+that request with the desired_name for which the credential is acquired.
 
+Credential options are not standardized, but name attributes are.
+Please use those.
 
+Consider this my code review for the Heimdal PR.
 
+I understand that this is probably a big change, and that this request
+may seem hostile (email being such a dry medium).  I'm willing to help
+you make this change, both for Heimdal and MIT -- I'll help with the
+code, and I'd be happy to have a conference call or exchange further
+emails.
 
+Nico
+-- 
 
-
-
-On Thu, 21 Nov 2019 at 18:18, Andrew Bartlett <abartlet@samba.org> wrote:
-
-> On Thu, 2019-11-21 at 18:09 +0000, moore chestnut via samba-technical
-> wrote:
-> >   hello,
-> >
-> > is there any way to individually build subsystems and libraries?
-> >
-> > for example:
-> >
-> > the msrpc3 library in  source3/wscript_build
-> > bld.SAMBA3_LIBRARY('msrpc3',
-> >
-> > or
-> > bld.SAMBA3_SUBSYSTEM('samba3util',
-> >
-> > when I try waf or waf msrpc3 in the source3 dir, it does not work.
-> >
-> > currently trying on a 4.11.0 source tree.
-> >
-> > I have read through the https://wiki.samba.org/index.php/Waf
-> > and tried the samples with no success.
-> >
-> > Does this work for source3 libs/subsystems?
->
-> No, you can't really build bits of Samba in general.  Some binary
-> targets can be specified with the --targets option, and a few of these
-> work correctly, nothing beyond that has been tested.  So where it works
-> it works, but nobody is really working to have this be a general
-> feature.
->
-> Andrew Bartlett
->
-> --
-> Andrew Bartlett                       http://samba.org/~abartlet/
-> Authentication Developer, Samba Team  http://samba.org
-> Samba Developer, Catalyst IT
-> http://catalyst.net.nz/services/samba
->
->
->
