@@ -2,49 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58B07105CB2
-	for <lists+samba-technical@lfdr.de>; Thu, 21 Nov 2019 23:34:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38AA7105CE2
+	for <lists+samba-technical@lfdr.de>; Thu, 21 Nov 2019 23:53:32 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=51uOJfDVymSUVtGd5icXlofiVjarYIOVQCRr0w0321o=; b=aErXPSmDCazr2deFasLDIupS4y
-	fGP1/DDF833gPiCZq93XmbmHXSjkkg79XU/t2JBuXTi1wSvujiGaZ0KusXN9H4OWdlpXyIpGKU2EU
-	buF0DzjJEzIzpggwWWc88sY2vL5yTzr/Voy5kaQBsHZ6vy4/zKTCGKG2uJf5Y6TM+oPIT8Vrvmn0L
-	7EJ6lq5cS+GmQcS2DA8M4tOs9vc5Budb2WvvKGzGJg1WcDjl+N5XANMPUFUM8NQVtektYYR1MD/r8
-	Yz6c1sHR+x2AWZEGWQ1MO8DzyTyfTLQuTTYvs4NjAd2Bxex8kchpzw/jjCA5SzGsOdpNTrPuLO8Sd
-	kYe93lkQ==;
-Received: from localhost ([::1]:43270 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=cyNwZE9rOytRQhqliEJXrh4PieLFQbeiMkMI5M8Mw7I=; b=Y76ZgoewNML5HF4iVBxB9lHJjY
+	owu112mC65vC/VyzbINNVnlRxwZIWFodtYW+ldyLKwwEgpelkCeyx6QPg0s/ZsxP+wdS2a49sPO9U
+	PX54EYPEHogqtHExI0Wrk6KEu7Fe+AJPeWBXw6yHFW0CC8wwik8YioovCl6+HTteYwtwsTZaH38JA
+	Gchyd18bRGE0uyvJ0hLRq6xs/ALTV8xSxkS1LEOm9rv//0jtg5/my8+XDmCMJ4/wsJ5VDj3DdB/8o
+	mJzHEXbudAzxhqE7k4gTivAy5jPcxMYgSklnN5wFx9LW3m6Sgl3h31PQ6ox+T/UZYB03jZq23GoBW
+	FcgxK3fA==;
+Received: from localhost ([::1]:44092 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iXv12-001ydf-70; Thu, 21 Nov 2019 22:33:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63236) 
+	id 1iXvKB-001ymk-Nb; Thu, 21 Nov 2019 22:53:19 +0000
+Received: from mail-vs1-xe44.google.com ([2607:f8b0:4864:20::e44]:44170) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iXv0s-001ydY-BE
- for samba-technical@lists.samba.org; Thu, 21 Nov 2019 22:33:30 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=51uOJfDVymSUVtGd5icXlofiVjarYIOVQCRr0w0321o=; b=arloIHLuEeE3TTolK38qp51u8P
- yJTFmLSC/t8VmPxfX0iHnNiXerzx4OIvwdP3/gwqyZhinTd8TQZj0eouUlA6gjiAD3SRoNrBGjf+H
- C7FIzXGLx49jFMcGtLiF7oYj9azSCkGutqej2cHx1WG6Xc7XL7B52IAblG7lQWjrxVHr5w3fCLVW8
- r1g+EhbWHOOqBuzu50D5ipSPjwiLaxRQqimPnX6lqblJdWdDJMKlVeYZDsOkuMhMCnvJm1q/L9beZ
- 5OT+tQgvadRVQ0omn+Kv+4qJZEDrHIISBxMM28HQLBzS6COyb+z2y/oUoqYr2pNn0I6mnJbLFz7Bw
- 8DjNkjtC3W9Ghvi1BMdRVxVycHGq7mGrhfpYE8FTzmTk9mBlTbKJ38MmtHk9mQxDfDA6T2GAdtMH2
- DWFdJMN7j+6iKiFjUF2Vvv5zbY0YPZzu8Q9PbkiPRw16040lFVcJtYPBX15uZykdzr5pkEmMpP0p8
- UbdJF4iSaRvnjzkta2Wt7GA3;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iXv0r-00073j-D2
- for samba-technical@lists.samba.org; Thu, 21 Nov 2019 22:33:22 +0000
-Message-ID: <c097de66cbc8cd44c9536cadcd95b7ddbada9df6.camel@samba.org>
-Subject: Re: Samba smaller: 8.2mb smbd
-To: samba-technical@lists.samba.org
-Date: Fri, 22 Nov 2019 11:33:17 +1300
-In-Reply-To: <be7bbeaf95255d088662f2ecd7b9fef3530cd056.camel@samba.org>
-References: <1485773517.15997.35.camel@samba.org>
- <fef7a4b511a770b14bbcb2f169b3f424133d03cc.camel@samba.org>
- <be7bbeaf95255d088662f2ecd7b9fef3530cd056.camel@samba.org>
+ (Exim) id 1iXvK0-001ymc-A5
+ for samba-technical@lists.samba.org; Thu, 21 Nov 2019 22:53:17 +0000
+Received: by mail-vs1-xe44.google.com with SMTP id j85so3458891vsd.11
+ for <samba-technical@lists.samba.org>; Thu, 21 Nov 2019 14:53:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Qe0lNm/i+1Zuryx/xbBtsAuUXC4irRfHZsspcQhief4=;
+ b=AG5Gh6ppqpy8PE036CeMIzEWE7ra0SqjvJ6L3giuSwGwoswJFxkDEEKQKHukBQ9CeR
+ pkbkJpKYrOFvyXf9vTLAmHyyPIdwuOxrR26k71YZr/VleQ10ybfVewrylGhIHnmuA7yo
+ IwasJ62XLpN77PVHSnvVqR/Kr9fLWjSLRqT8MpcZOer4ysSjWgTYak44nUe7gugYzlPW
+ MbzFe+KzOQNLDmDmIrRo2EDIECsT9mDgdiKYKu3zanpJEJJwmWv0OW4gEE3IBWB4txcN
+ 2jnxnfchy/nazPyJ4aDP1AxrWy/F8fuyRdDQAPkWLKfIS6MU0b3wW3K7fEMtJ+sOu2E4
+ nNDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Qe0lNm/i+1Zuryx/xbBtsAuUXC4irRfHZsspcQhief4=;
+ b=CUAGiVHRIvIkRnfnDM7zfuFDS+A/XW2R+PKvIrDK5VY1Y86/LnuBNQT+Ik8ITQE2GL
+ DTcFNLfotfJdC3cRM9xlhzm+9DpYLaMMIjdlmz1rYD5jPV8dpLa0RcCCIrzfqM4liyk7
+ uB6x2alnFlXr3E7g5ZrU1hnfLCC/Zafdku0DmIDlkbsXsz/1Tegw6idPDgXaFCejxKpb
+ dmhSKvirDEAZWuGId2StWuym7X067F682vz6DvPH0MCxgqZLbB5nmd1yEesaLaat8i0U
+ Yulv3V4ng6LxoK97hJJjuQw4clDeSbNsO+OIvYCuZQFDt37z5YYtLYwH//Z/OWnDHUix
+ YrlQ==
+X-Gm-Message-State: APjAAAVyzbInLVsQ3vxUCPvWLG7zUDpblvIbRH1I/m4YEddof2Bxwtt7
+ X0fzQFUufTVgGef9cEMlX+YYfwOxqwEVNLwrTzZ12XFr
+X-Google-Smtp-Source: APXvYqyu88JPeLx9Y7iVPPtVeHCsHbjLpE3PrvjjyTC6khfrmgzleh7FhTaeQU0Rx6/sfHqb68O5qUqLKsALRXYdhRw=
+X-Received: by 2002:a67:d802:: with SMTP id e2mr8849935vsj.221.1574376785727; 
+ Thu, 21 Nov 2019 14:53:05 -0800 (PST)
+MIME-Version: 1.0
+References: <CAGYhc9=AZmkOjHAGx7rWd=iM6h5BaVohym+oWMWqfNEfNtju3Q@mail.gmail.com>
+ <20d3f005503d82862b0ba8856010ae7a8831d577.camel@samba.org>
+In-Reply-To: <20d3f005503d82862b0ba8856010ae7a8831d577.camel@samba.org>
+Date: Thu, 21 Nov 2019 22:52:48 +0000
+Message-ID: <CAGYhc9nN1cf3KD52mJG0ROmNYXDGXuA7c-KML33W+Qec0jOkrw@mail.gmail.com>
+Subject: Re: building source3 subsystems and libs
+To: Andrew Bartlett <abartlet@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,68 +69,70 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: moore chestnut via samba-technical <samba-technical@lists.samba.org>
+Reply-To: moore chestnut <moore.43132@gmail.com>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2019-11-15 at 14:44 +1300, Andrew Bartlett wrote:
-> On Fri, 2019-11-15 at 14:34 +1300, Andrew Bartlett via samba-
-> technical
+Hello Andrew,
+
+thank you for reply.
+
+so would it be bad a idea to try hack a build together based on the source
+files of msrpc3 and the deps?
+
+essentially I would like to hack a client together to do dcerpc bind, epm
+mapper request, followed by bind and schannel setup (
+NetrServerReqChallenge and NetRServerReqAuthenticate3) followed by bind and
+NetrLogonSamLogonWithFlags.
+
+Any suggestions on best approach?
+
+
+
+
+
+
+
+On Thu, 21 Nov 2019 at 18:18, Andrew Bartlett <abartlet@samba.org> wrote:
+
+> On Thu, 2019-11-21 at 18:09 +0000, moore chestnut via samba-technical
 > wrote:
-> > For some reason I had another go at this, and have things down to
-> > 11.1MB.
-> > 
-> > This is NOT FOR PRODUCTION USE, because I have to cut out some
-> > important things, but the idea is to prove that by reducing the
-> > linkage
-> > to the ndr-table subsystem, we can avoid bringing in unused code to
-> > eg
-> > parse drsuapi.
-> > 
-> > Anyone wanting to take this further will need to work out how to
-> > get
-> > the appropriate interface tables for the specific pipes we need to
-> > use
-> > internally.  It would also be very worthwhile working to understand
-> > why
-> > we depend on what is left, and seeing if we can trim that some
-> > more. 
-> > 
-> > I used:
-> 
-> By not building all the modules, I was able to reduce it to 10.4mb.
-> 
-> CFLAGS="-DSAMBA_SMALLER -O2 -flto -fwhole-program " LDFLAGS="-O2
-> -flto
-> -fwhole-program " ./configure --bundled-
-> libraries=talloc,tdb,pytdb,ldb,pyldb,tevent,pytevent --with-static-
-> modules='!FORCED' --with-shared-modules='!FORCED' --nonshared-
-> binary=smbtorture,smbd/smbd --with-system-mitkrb5 --without-ad-dc --
-> without-ads --disable-python && ./buildtools/bin/waf --
-> targets=smbd/smbd
-> 
-> If any vendors wish to work with me to make this production, so that
-> they can upgrade to a modern Samba version in constrained
-> environments,
-> please do be in touch, as I would be very glad to work with you!
-
-I continue to be fascinated by the idea of making a small smbd really
-work (and so ease embedded vendors of Samba 3.x), so I got it down to
-8.2mb with:
-
-CFLAGS='-DMAX_DEBUG_LEVEL=1 -D__location__=__FILE__ -DSAMBA_SMALLER -O2 -flto -fwhole-program' LDFLAGS="-O2 -flto -fwhole-program " ./configure --bundled-libraries=talloc,tdb,pytdb,ldb,pyldb,tevent,pytevent --with-static-modules='!FORCED' --with-shared-modules='!FORCED' --nonshared-binary=smbtorture,smbd/smbd --with-system-mitkrb5 --without-ad-dc --without-ads --disable-python --without-ldap && ./buildtools/bin/waf --targets=smbd/smbd
-
-Andrew Bartlett
--- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT   
-https://catalyst.net.nz/services/samba
-
-
-
-
-
-
+> >   hello,
+> >
+> > is there any way to individually build subsystems and libraries?
+> >
+> > for example:
+> >
+> > the msrpc3 library in  source3/wscript_build
+> > bld.SAMBA3_LIBRARY('msrpc3',
+> >
+> > or
+> > bld.SAMBA3_SUBSYSTEM('samba3util',
+> >
+> > when I try waf or waf msrpc3 in the source3 dir, it does not work.
+> >
+> > currently trying on a 4.11.0 source tree.
+> >
+> > I have read through the https://wiki.samba.org/index.php/Waf
+> > and tried the samples with no success.
+> >
+> > Does this work for source3 libs/subsystems?
+>
+> No, you can't really build bits of Samba in general.  Some binary
+> targets can be specified with the --targets option, and a few of these
+> work correctly, nothing beyond that has been tested.  So where it works
+> it works, but nobody is really working to have this be a general
+> feature.
+>
+> Andrew Bartlett
+>
+> --
+> Andrew Bartlett                       http://samba.org/~abartlet/
+> Authentication Developer, Samba Team  http://samba.org
+> Samba Developer, Catalyst IT
+> http://catalyst.net.nz/services/samba
+>
+>
+>
