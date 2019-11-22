@@ -2,60 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9331B1069EB
-	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 11:25:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C839F106A17
+	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 11:31:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=xjgneR0zptXFDLK7pr5lYE+0tRRo0EPj05DrzE4aRZQ=; b=oxUgv8CzXjwQFt3HflBCB7tMGV
-	eGfyIqZXWpJMQM64LCJ96Sc7ErLIglKuMLrur5vtLIi6esnMo62tFpt/bYw6h9JiL+AsfAmuB3Uhq
-	2ee/OBvGjMXOOB39d6xpU3bhVa3D0N1jn20SSwZwKVo4QNVS5YT1nxMSGVvodeJWe0A36WB9vjb5e
-	sZELeWs/uHXYSSIzJBs8XdlECVSZfNkvCpD57k2qs8tFPiCHVsoCSdgUlXQ2q9BAtw3wVoj3b3Ir2
-	YybZ02NG/U9cQRSWu1ZesyzR1uSBsKA6AZdLQPfSZaYi12xapD57uXPGWJDnFA+Dh6cgzBOVjwouq
-	mcOp2G+g==;
-Received: from localhost ([::1]:53500 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=SUZx1hAjOcCTbU0OfbxCdvFxT7LE4Ir8VLyijEqPHjU=; b=RcE1m81FGGUF2gk/eSMRg67ecv
+	41F9zIX3ng5k5Axjigyd/BzojjCqKUbqLu6uLpGJsKbjX2AQBUilEuJCo9ETwVDpluo9WRPoShJ7t
+	Bptbt0H3/tEZ4td8vjigbyRGHU7G9gYoCVkDMELH8QcKOOFfuzE7GamkQp2QwgYuBc7+RM0LLmcZc
+	Lvyz4RUThzK3iiSJfsHivQ4ADse7mpWPhAkQpMad3ooTXIFJRjQe9UKKHI95IV9FP6VBMAkXdTnlY
+	4/e/qyDKdWBLcLNP32KX/puqLKfDLq9lO2MuxInBptAW/6ZhGywXBv/ujET6G+4inC4jqOMJCxsDd
+	6uGyKs8w==;
+Received: from localhost ([::1]:54280 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iY67V-0021K3-4r; Fri, 22 Nov 2019 10:24:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16304) 
+	id 1iY6E7-0021Qq-Dd; Fri, 22 Nov 2019 10:31:47 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19364) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iY67R-0021Jw-9D
- for samba-technical@lists.samba.org; Fri, 22 Nov 2019 10:24:55 +0000
+ (Exim) id 1iY6E3-0021Qj-DX
+ for samba-technical@lists.samba.org; Fri, 22 Nov 2019 10:31:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=xjgneR0zptXFDLK7pr5lYE+0tRRo0EPj05DrzE4aRZQ=; b=Jjty9lrwZL438G/oKlXwAanLUl
- MP2Su+moM641Y8mUOdk5MEPrZ/3SRf6M/PzieKmN++43BnMQ7gWBN5AebH/RPKfePP5+exQbnd1Qf
- 8ZOqwd/BRT/RxBHg1fYMkiR69sxTlTcEOE+Od0Ty7EErbS0+fQ/bEppOowddxg7dsLdh4LgA5071m
- FLgxg2XcgEvIGDCUcFRbSRC6YfZdVFMqbDhSfq0k2+R/dnT226z72nHEG03L6DuZm46FhoTbTR5aN
- RrKUSNffJmiJXrFEvEonsCF0imjQiUqS2CXjOSlN3/1htQBLPqyoztFCBQoF3VAjDLcrRDVJ7vIdB
- j293AGWkcLps0TH2+K2p0nM8ZE6UluxKrraapNGxgLTNzFwo6Z6T2NXs1herR5042ywFDuEtVqGPp
- RCXorq6WybqZHM2BclIOvBNO6Fm2HIHZWN4wHwLifMpqoM/2SCHMx5UQJkcax7gTpiS3MsVVgiURu
- cKak9S8DVl+wani4dh4AetSA;
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=SUZx1hAjOcCTbU0OfbxCdvFxT7LE4Ir8VLyijEqPHjU=; b=jo2T58aGWidLgO6/dgOOBiyLA4
+ PLoml15YTJVwE37qMCebjM8PqMYIglgXE9y8jGfpxDDEUjE7LIKHdgvTcWNgVOzr2TBpkSypZ0G4p
+ 23vTOc8BjF3T652+ahcdTuHMjeehZ4YOMmkn3DGpvD2rrqOG4jqNVEpLQPfTnwUa8bFgw6LhEA0Xa
+ zou5RZkt58b5sB/5l3+bx8Uf3kUaEzRuYpGNYZvRbl+aLgjO48UB7IqF/AidQOZGZpgjXVUgnD+dS
+ UeoAqlEZmBcsL5/h6KjWcRECgoMTzRij4CyFcb20FQF7VgKVobDtnu32QjxrX7sqVQFfQgOmHLg9K
+ fMYvue+UqDw1zS7ks0UHNtHhdR0+eDjnql0NJaeAOOcZDTfD2KMmpJ3JOaJy0RV5GJLvgYEoK0xRv
+ bPI9VENxzP+sMBiPRuxKEuA9tpCDh4Q/aFIdswNmMVQUh2pm08++udGyaU9FDmOKxfVQ7zN4XqhEy
+ jFpPljrrJ3BC8KjoEPP2t3s+;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iY67N-0002xg-Qt; Fri, 22 Nov 2019 10:24:49 +0000
-To: Nico Williams <nico@cryptonector.com>
-References: <33c431f5-c36b-c321-de3f-65977d8aa898@samba.org>
- <007c29e8-02b9-4f48-f67e-881cb0985d64@mit.edu>
- <69d80d24-d461-1652-3cfb-e55d90d31fbf@samba.org>
- <ec067a72-313e-1878-33a0-a3259d2979d5@mit.edu>
- <1503578184.3428.19.camel@redhat.com>
- <db882372-aa1d-e58e-4c94-a268539bd2ee@samba.org>
- <1503596189.3428.26.camel@redhat.com>
- <F363B51E-FDF7-4C91-9ABD-B623B5CE97BC@dukhovni.org>
- <8f68cfb0-2d6b-d86f-4ff0-a9282aa0bf55@samba.org>
- <cb0d7433-9e23-5bce-4e06-1213bf88cade@samba.org>
- <20191121223908.GC26241@localhost>
-Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
-Subject: Re: [kitten] Checking the transited list of a kerberos ticket in a
- transitive cross-realm trust situation...
-Message-ID: <22f96c93-0217-0b2b-d7e1-684f9269fba4@samba.org>
-Date: Fri, 22 Nov 2019 11:24:44 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1iY6E3-00032C-0K
+ for samba-technical@lists.samba.org; Fri, 22 Nov 2019 10:31:43 +0000
+To: <samba-technical@lists.samba.org>
+References: <af8412ee-5493-0406-e95b-8d3175ec069a@rosalinux.ru>
+ <18291618.dcJLbluVCs@magrathea>
+ <7e571555-5d87-a566-dbf1-4a1c33c67ea8@rosalinux.ru>
+ <5586929.0Fyjv50KOk@magrathea>
+ <0a9d2586-38ab-7c6c-7bcc-8ffc94303495@rosalinux.ru>
+ <c5ef0b5b-a1d2-e3f0-2941-13512029caf3@samba.org>
+In-Reply-To: <c5ef0b5b-a1d2-e3f0-2941-13512029caf3@samba.org>
+Subject: RE: Automating usage of smbspool_krb5_wrapper
+Date: Fri, 22 Nov 2019 11:31:42 +0100
+Message-ID: <9AADDDE9251C45DC8E48BED0B6261996@rotterdam.bazuin.nl>
 MIME-Version: 1.0
-In-Reply-To: <20191121223908.GC26241@localhost>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="uB1NnpKCNTTJnpqZJe9TAfToAyI3ReWK4"
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Office Outlook 11
+X-MimeOLE: Produced By Microsoft MimeOLE
+Thread-Index: AdWhFdi9F5DtneDxQUeau7nAa/JrMAAAFw6g
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,151 +64,223 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: "heimdal-discuss@sics.se" <heimdal-discuss@sics.se>,
- Viktor Dukhovni <viktor1dane@dukhovni.org>,
- Samba Technical <samba-technical@lists.samba.org>,
- Greg Hudson <ghudson@MIT.EDU>, "krbdev@mit.edu Dev List" <krbdev@mit.edu>,
- kitten@ietf.org
+From: "L. van Belle via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: belle@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---uB1NnpKCNTTJnpqZJe9TAfToAyI3ReWK4
-Content-Type: multipart/mixed; boundary="1nQgGYMk7ondMoMQPMm10l3Re2p7B4t8j";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Nico Williams <nico@cryptonector.com>
-Cc: kitten@ietf.org, Viktor Dukhovni <viktor1dane@dukhovni.org>,
- Samba Technical <samba-technical@lists.samba.org>,
- "krbdev@mit.edu Dev List" <krbdev@mit.edu>,
- "heimdal-discuss@sics.se" <heimdal-discuss@sics.se>,
- Greg Hudson <ghudson@MIT.EDU>
-Message-ID: <22f96c93-0217-0b2b-d7e1-684f9269fba4@samba.org>
-Subject: Re: [kitten] Checking the transited list of a kerberos ticket in a
- transitive cross-realm trust situation...
-References: <33c431f5-c36b-c321-de3f-65977d8aa898@samba.org>
- <007c29e8-02b9-4f48-f67e-881cb0985d64@mit.edu>
- <69d80d24-d461-1652-3cfb-e55d90d31fbf@samba.org>
- <ec067a72-313e-1878-33a0-a3259d2979d5@mit.edu>
- <1503578184.3428.19.camel@redhat.com>
- <db882372-aa1d-e58e-4c94-a268539bd2ee@samba.org>
- <1503596189.3428.26.camel@redhat.com>
- <F363B51E-FDF7-4C91-9ABD-B623B5CE97BC@dukhovni.org>
- <8f68cfb0-2d6b-d86f-4ff0-a9282aa0bf55@samba.org>
- <cb0d7433-9e23-5bce-4e06-1213bf88cade@samba.org>
- <20191121223908.GC26241@localhost>
-In-Reply-To: <20191121223908.GC26241@localhost>
 
---1nQgGYMk7ondMoMQPMm10l3Re2p7B4t8j
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
 
-Hi Nico,
-
->>> My idea was that Samba would use
->>> gss_set_cred_option(GSS_KRB5_CRED_NO_TRANSIT_CHECK_X) to indicate
->>> the the transited list should not be checked.
->>
->> I implemented GSS_KRB5_CRED_NO_TRANSIT_CHECK_X for
->> MIT, Heimdal (both upstream and Samba) and make use of
->> it in Samba.
+> -----Oorspronkelijk bericht-----
+> Van: samba-technical=20
+> [mailto:samba-technical-bounces@lists.samba.org] Namens=20
+> Rowland penny via samba-technical
+> Verzonden: vrijdag 22 november 2019 10:19
+> Aan: samba-technical@lists.samba.org
+> Onderwerp: Re: Automating usage of smbspool_krb5_wrapper
 >=20
-> Hi,
+> On 22/11/2019 02:22, Mikhail Novosyolov via samba-technical wrote:
+> > 14.11.2019 12:51, Andreas Schneider ?????:
+> >> On Sunday, 3 November 2019 01:03:43 CET Mikhail Novosyolov wrote:
+> >>> 29.10.2019 10:29, Andreas Schneider ?????:
+> >>>> On Monday, 28 October 2019 20:38:08 CET Mikhail Novosyolov wrote:
+> >>>>> 28.10.2019 11:47, Andreas Schneider ?????:
+> >>>>>> On Monday, 28 October 2019 08:58:26 CET Mikhail Novosyolov via
+> >>>>>> samba-technical>
+> >>>>>>
+> >>>>>> wrote:
+> >>>>>>> 28.10.2019 10:44, Mikhail Novosyolov ?????:
+> >>>>>>>> <...>
+> >>>>>>>> There are 2 possible solutions:
+> >>>>>>>>
+> >>>>>>>> 1) either patch=20
+> source3/client/smbspool_krb5_wrapper.c to "goto
+> >>>>>>>> smbspool;" if env does not contain "negotiate" instead of=20
+> >>>>>>>> chekcing to
+> >>>>>>>> be either null or 0 - how correct will this be?
+> >>>>>>> I mean this:
+> >>>>>>>
+> >>>>>>> diff --git a/source3/client/smbspool_krb5_wrapper.c
+> >>>>>>> b/source3/client/smbspool_krb5_wrapper.c
+> >>>>>>> index bff1df417e8..000a613291e 100644
+> >>>>>>> --- a/source3/client/smbspool_krb5_wrapper.c
+> >>>>>>> +++ b/source3/client/smbspool_krb5_wrapper.c
+> >>>>>>> @@ -149,7 +149,7 @@ int main(int argc, char *argv[])
+> >>>>>>>
+> >>>>>>> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 env =3D =
+getenv("AUTH_INFO_REQUIRED");
+> >>>>>>> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 /* If not set, then just=20
+> call smbspool. */
+> >>>>>>>
+> >>>>>>> -=A0=A0=A0=A0=A0=A0 if (env =3D=3D NULL || env[0] =3D=3D 0) {
+> >>>>>>> +=A0=A0=A0=A0=A0=A0 if (env =3D=3D NULL || env =3D=3D "none" =
+|| env[0] =3D=3D 0) {
+> >>>>>>>
+> >>>>>>> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =
+CUPS_SMB_DEBUG("AUTH_INFO_REQUIRED is not=20
+> >>>>>>> set - "
+> >>>>>>> "execute smbspool");
+> >>>>>>> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 goto smbspool;
+> >>>>>> This is obviously wrong :-)
+> >>>>>>
+> >>>>>> Did you see the code below? The question is if we should map
+> >>>>>>
+> >>>>>> AUTH_INFO_REQUIRED=3Dnone
+> >>>>>>
+> >>>>>> to anonymous. I've created a patchset you can find here:
+> >>>>>>
+> >>>>>>=20
+> https://git.samba.org/?p=3Dasn/samba.git;a=3Dshortlog;h=3Drefs/heads
+/master-sm=20
+> >>>>>>
+> >>>>>> bs
+> >>>>>> pool
+> >>>>>>
+> >>>>>>
+> >>>>>> However you need to try all combinations, username/password,=20
+> >>>>>> kerberos
+> >>>>>> and
+> >>>>>> none for anonymous.
+> >>>>> Thank you! I did not test these patches yet, first tried to=20
+> >>>>> understand
+> >>>>> how it works.
+> >>>>>
+> >>>>> Could you please explain a bit how it works?
+> >>>> That's a good question as documentation from CUPS side=20
+> is missing.=20
+> >>>> So we
+> >>>> need to find out what CUPS does and then try to write=20
+> tests for it if
+> >>>> possible. This allows us to make sure we work correctly.=20
+> The repo=20
+> >>>> above
+> >>>> shows you where the test is in the samba source code.=20
+> I've tried to=20
+> >>>> add
+> >>>> more tests in the past to avoid regressions and verify we work=20
+> >>>> correctly.
+> >>>> This needs to be extended as much as possible.
+> >>>>
+> >>>>
+> >>>> The two patches were just a quick shot.
+> >>> CUPS developer has clearified documentation:
+> >>>
+> >>> =A0=A0 * https://github.com/apple/cups/issues/5674
+> >>> =A0=A0 *
+> >>>=20
+> https://github.com/apple/cups/commit/025b8ce8f637009f0df7a5bb5
+> fa0a460dbb32b=20
+> >>>
+> >>> 10
+> >>>
+> >>> "'negotiate': Kerberos is required - this keyword can=20
+> only appear by
+> >>> itself and causes cupsd to collect the UID of the printing user."
+> >>>
+> >>> I've switched smbspool_krb5_wrapper from failing if value of
+> >>> AUTH_INFO_REQUIRED is something not known to just=20
+> ignoring that and
+> >>> passing the task to smbspool. smbspool will fail itself.=20
+> Added a test
+> >>> for that. Patches on top of asn/samba.git/master-smbspool=20
+> are attached.
+> >>>
+> >>> I've not tested those changes yet, just checked=20
+> buildability. Testing
+> >>> will require making a complex set up, I will try.
+> >>
+> >> They look fine, let me know if it works!
+> >>
+> >>
+> >> Thanks.
+> >
+> > How to make Samba AD domain controller make all local printers=20
+> > available only to domain members? I've made a local PDF=20
+> printer which=20
+> > writes to PDF files in CUPS and want to use it for testing=20
+> and be sure=20
+> > that Kerberos authorization is used to access the printer.
+> >
+> > [printers]
+> > =A0=A0=A0 path =3D /var/spool/samba/
+> > =A0=A0=A0 printable =3D yes
+> > =A0=A0=A0 #guest ok=3Dyes
+> > =A0=A0=A0 security =3D domain
+> >
+> > Is it correct? I am not sure about "security =3D domain".
+> >
+> >
+> Sorry, but it isn't,=A0 the 'security' parameter is only valid=20
+> in [global]=20
+> and if you read 'man smb.conf' it tells you this:
 >=20
-> The right design for this is to use name attributes, not credential
-> options.  Credential options should be banished altogether.
+> PARAMETERS
 >=20
-> To see why consider an acceptor application that wishes to examine the
-> transit path (or whatever other attribute) an authenticated initiator
-> principal took to reach the acceptor.  What credential should the
-> acceptor inspect?  There is none to inspect, not for the initiator (not=
-
-> even if they delegated a credential, since that one might not have
-> transited any realms).  The only way to inspect the transit path taken
-> by the initiator is to inspect its name, as that's all we have for it.
-> This is one reason we added name attributes.
+> Parameters define the specific attributes of sections.
 >=20
-> Correspondingly and symmetrically, the right way to request some
-> behavior on the side where the credential is available, is to associate=
-
-> that request with the desired_name for which the credential is acquired=
-=2E
-
-So you mean we need to pass an explicit desired_name to
-gss_acquire_cred_from() and use gss_set_name_attribute() calls
-(for no_transit_check and iterate_acceptor_keytab) on that desired_name
-before?
-
-Then I think we need iterate_acceptor_keytab also for MIT.
-As far as I can see GSS_C_NO_NAME is the current trigger for
-iterating the keytab. The functionality we need is, try every key
-with a matching keytype, but ignore name and kvno.
-
-> Credential options are not standardized, but name attributes are.
-> Please use those.
+> Some parameters are specific to the [global] section (e.g., security).
 >=20
-> Consider this my code review for the Heimdal PR.
->=20
-> I understand that this is probably a big change, and that this request
-> may seem hostile (email being such a dry medium).  I'm willing to help
-> you make this change, both for Heimdal and MIT -- I'll help with the
-> code,
+> Not being a printing expert, ( Louis will know this ) but is=20
+> it possible  to deny access by Windows ACLs ?
 
-Thanks! I'm a bit lost on how to actually implement this, as
-Heimdal doesn't seem to have a gsskrb5_gss_set_name_attribute() function
-and krb5_gss_set_name_attribute() in MIT uses
-krb5_authdata_set_attribute(), which just calls
-krb5_authdata_context_module plugins. I'm not sure if authdata is what
-we need here.
-
-Are my changes to the lib/krb5 layer ok and we just need to change the
-way the gsskrb5 layer triggers them? Or do we also need modifications the=
-re?
-
-If you can tell me what attribute names we should use and how
-the full call to gss_set_name_attribute() should look like,
-I can start to change all the tests. But I need help to
-implement the glue between gss_set_name_attribute() and
-gsskrb5_acceptor_start() and kg_accept_krb5() respectively.
-
-> and I'd be happy to have a conference call or exchange further
-> emails.
-
-I guess email is better for now, as we have everything archived.
-
-Greg, do you agree, with changing to gss_set_name_attribute() instead of
-gss_set_cred_option().
-
-Thanks!
-metze
+Yes, and Deny preffers over Allow, always..=20
 
 
---1nQgGYMk7ondMoMQPMm10l3Re2p7B4t8j--
+In this not related to:=20
+https://github.com/samba-team/samba/blob/8c833470fc52332c62220ec9cc38c8a4=
+fd7
+721f1/source3/client/smbspool.c#L120=20
 
---uB1NnpKCNTTJnpqZJe9TAfToAyI3ReWK4
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+Where andreas fix things in 4.8.0
+(https://bugzilla.redhat.com/show_bug.cgi?id=3D1574177)=20
+The other i noticed : =
+https://bugzilla.redhat.com/show_bug.cgi?id=3D1772450=20
 
------BEGIN PGP SIGNATURE-----
+And I did notice something in the cups protocol parts.
+(seen on arch linux: https://bugs.archlinux.org/task/58247 )=20
+There is currently a bug in cups, that gives problems with logins.=20
+I can confirm this also is on Debian 10.=20
 
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl3Xt2wACgkQDbX1YShp
-vVaVwxAAvsm5rrmLLK0kBQELyJOc6yKMLvJldOAvEDxvYeshr6VM/R3fBHww+n63
-D7/cTsyrd0cm1gDgAZS9XR7rBB99k46rzl97oIGWYk735xhBmDMBSevTILS7TuYv
-BFerPkqIutK3HYB9AJqT6/z3YP0i5RsAz1XrgrSOS8XJobdw99KyO0rdjmZHmZdk
-kmbVeh82kx0nWEsub196gYdHRwePbuLSZw8eo+ZKFUD7XOInjoRiPGD5plBTq1Fk
-S5pHvBjVzUW1mVXqFe0hHkGbFqaxu9oSQEIXE7F3NnQZCoh0bjuU8pCm8qcX8mfF
-drIL1jr+mYlQo99PkO7rCE7U4Le3Z1QspmXDxf7mX0SFHe9uPCf9Eux0EeUCPSK0
-75Tn6RvDwteJmwlBLTWFwvTd63H9s7tPCAgnURXPDy0c9S1kG/jDFHHsg/YJsI+z
-FjlXueyt/YWASOKTVu6LH5/bMZwiVuuYJUsZ9lWdZ3yOq84t1VSRintUc/CuGyM4
-ZMNb5DEL+3aVNIluShAtBOOBkbTWTORVGi2sQ2YshATk6vMzfO41y5HsSZ2Ra42d
-HdNSh213PRqt6J9lFMjXQC5JrqQr1N0fvfijKzU9fqFLyZCb99Z13LW2KGmRuMar
-yPmNA+3c26kKxrnMtNAe2nDY8PSRuFrqvfSJxTSkfDQk+TA+IAI=
-=tz6A
------END PGP SIGNATURE-----
+This fix works, so before a lot of code is changed, i might be handy if =
+cups
+fixes this first.=20
 
---uB1NnpKCNTTJnpqZJe9TAfToAyI3ReWK4--
+Edit "/etc/cups/cupsd.conf"
+
+Change:
+<Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class
+CUPS-Delete-Class CUPS-Set-Default CUPS-Get-Devices>
+AuthType Default
+Require user @SYSTEM
+Order deny,allow
+</Limit>
+
+To:
+<Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class
+CUPS-Delete-Class CUPS-Set-Default CUPS-Get-Devices>
+AuthType None
+# AuthType Default
+# Require user @SYSTEM
+Order deny,allow
+</Limit>
+
+I hope above help you guys.
+Lot is going on in cups/kerberos/smb areas, it hard for me to track them
+all..=20
+
+
+Greetz,=20
+
+Louis
+
+
+
+
+
+
+
+=20
+
 
