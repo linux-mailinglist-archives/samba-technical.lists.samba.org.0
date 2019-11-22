@@ -2,65 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 157F8105E98
-	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 03:23:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 582951068B0
+	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 10:14:34 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=STitR2O0kio6P7RXEgF+gG2cYXJE5pDW4oP+Utz1V9U=; b=CctUdrXfOxVnUgVT+5X4Y1pBqW
-	4mq+yJhZD0cTXcLxTXHHiU4EukWhwyjG9Co13tyjSAaiQS5O/CFrQkaEOIyE4udn7jw4mUWkWeer5
-	o+1NvVw3jPqj025+Wo8Biaj+NiXc4ME3FRdcsV7b6eXwTlSmRp9jZlDsHU4vgr50XEyKc+npJAuzL
-	06Omvu9RWqUirQY1T1gbqCCSKMq9g8JF6729BMjZ/GqSLzuLtg7OCrW2XhZrG8t4YUq+fFSeE79TO
-	VFdnxIqaNHhkGXYOzgIMr6oqzw0Um4BxA3UWBPcyzSro2wLKzyNRS6K7D8yxKyM+hen9L6k6EUCtD
-	cnEIQ2kw==;
-Received: from localhost ([::1]:47562 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=fy431Q4ukCG/lXAUQXy06rCSdOHnr7PxTldzFvpntdc=; b=laBJKU2qw8mC9Dhjijl7JzkLLm
+	IM4/UXJiVGMnwuHgbasWGNJco3Z592NiAyGb9bwnbYMQtV+HBtRukqPHJHfwmYoo7/GhnaPJ5oN7J
+	majGKoLlXwoqTGSKwLklOvUU2KZ8MI6MqmuFcZRiTXRZzaKOzx9ifv4fVHmqsfHMJppIb89z+On06
+	wt+kFbctAk6poRstun68V+ESJc+PLRpbjepoa8W5ivUA+EmeqsjY4cjVTFb9kUv2/NlIf8fUhq0G1
+	rFMgKK1YgtKOEY3C37/SpgFtLP815kJUzGhA8XCcanWVGBEOtVhdF1AxazZWBlcfhCxAIAmZV8pkQ
+	9LNUw0XQ==;
+Received: from localhost ([::1]:48638 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iXyal-001zc2-Qo; Fri, 22 Nov 2019 02:22:39 +0000
-Received: from mail.rosalinux.ru ([195.19.76.54]:37462) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iXyah-001zbv-8E
- for samba-technical@lists.samba.org; Fri, 22 Nov 2019 02:22:37 +0000
-Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id 52EDACC1144DF;
- Fri, 22 Nov 2019 05:22:31 +0300 (MSK)
-Received: from mail.rosalinux.ru ([127.0.0.1])
- by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id P23otujOPTgo; Fri, 22 Nov 2019 05:22:30 +0300 (MSK)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id 7D1D1C44B08E9;
- Fri, 22 Nov 2019 05:22:30 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rosalinux.ru 7D1D1C44B08E9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosalinux.ru;
- s=A1AAD92A-9767-11E6-A27F-AC75C9F78EF4; t=1574389350;
- bh=STitR2O0kio6P7RXEgF+gG2cYXJE5pDW4oP+Utz1V9U=;
- h=To:From:Message-ID:Date:MIME-Version;
- b=oQFEaJdXlYFXjdEPGNrUy6HO950oDGTQCSwsfPkwlSXhBq2+PFealUyBh2DMmdIYE
- WHAIegaSu9LmBta89cfkVp+gu16vIRNq9YSkPa/fUJOSxLyKAEg5ev+TWseCkk25b0
- hIKKEvvKMWV9efVKRcfdmLlmMI66bMl6QwC5DBcF6B33eXt63UWG4ulg2Nyumjzfuu
- LP/AcZ9x2ipqC8qlSbC+A1J36uckn2mkgZfEUBroTtVmJ3hsA25hkqNh4o8dVO8dzr
- vP+nQlb352dLzet5cu/jbk7pFCRlNU1efp+qY8pNO/KCrVMi8szEwCvnFQbqWLlDg3
- uX4IP5eedMKSw==
-Received: from mail.rosalinux.ru ([127.0.0.1])
- by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id lkT7O-vy1wJk; Fri, 22 Nov 2019 05:22:30 +0300 (MSK)
-Received: from [192.168.1.173] (broadband-90-154-71-190.ip.moscow.rt.ru
- [90.154.71.190])
- by mail.rosalinux.ru (Postfix) with ESMTPSA id 5389BCC1144DE;
- Fri, 22 Nov 2019 05:22:30 +0300 (MSK)
-Subject: Re: Automating usage of smbspool_krb5_wrapper
-To: Andreas Schneider <asn@samba.org>
-References: <af8412ee-5493-0406-e95b-8d3175ec069a@rosalinux.ru>
- <18291618.dcJLbluVCs@magrathea>
- <7e571555-5d87-a566-dbf1-4a1c33c67ea8@rosalinux.ru>
- <5586929.0Fyjv50KOk@magrathea>
-Message-ID: <0a9d2586-38ab-7c6c-7bcc-8ffc94303495@rosalinux.ru>
-Date: Fri, 22 Nov 2019 05:22:29 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.1
+	id 1iY50H-0020aJ-JU; Fri, 22 Nov 2019 09:13:25 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43276) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iY50A-0020aC-QL
+ for samba-technical@lists.samba.org; Fri, 22 Nov 2019 09:13:22 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=fy431Q4ukCG/lXAUQXy06rCSdOHnr7PxTldzFvpntdc=; b=N9+m07VbP2vaIKb3+HdVOXNvV/
+ 5TuWAx3yYj2VocsUVB7JHNVYFNqwK77UL5otiJBeJFzpaOjhHTgMQfgEKXmlo7RXNcdmkZPAKN/Ob
+ xAmKrj/WztlKCsjYwDxO0LoDoY2QFpfWCHPMeGjif9ymTkK3dPQeGwUsvpZR88HItWwfO86Uy4WC9
+ UqjkuBDPdkd0QhJ94mx+gI6ZyirLcwIBYzzDY6TmujytSd1Di7RGl3BI3/aTQ4p3zXoPFxUiCm6zf
+ jb65oxp4YhiyaXSMSVBe/7oWBOMkdOsD0nL4Pp2YKid1IWMuux/4CE1Fvb9IlN3ibHdPxZnqIXj3H
+ EAnF0ol6yT67s5yP59GFqNTF+3JOOpOfEEke/MKYkg6HKCp296H2K9gzXyfHyXO+yfvOKCKSMzyTj
+ eNgfF5H5QBQvr/LJ7gYGC5gI3pPfmkGNMYplXMK6aWg0Z7DUDTeKazLWgf23jL9ZcL+tZUETOSISj
+ mBdS8VBK76MH5KA27vN/VZ0o;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iY508-0002XD-Ad; Fri, 22 Nov 2019 09:13:17 +0000
+Message-ID: <118908fe1f076becc0c7e3c3debf680b444f9bbb.camel@samba.org>
+Subject: Re: libpytalloc-util 2.2.0 broke the ABI
+To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+Date: Fri, 22 Nov 2019 22:13:12 +1300
+In-Reply-To: <1647506.J1yn77AgSA@magrathea>
+References: <1647506.J1yn77AgSA@magrathea>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.34.1 (3.34.1-1.fc31) 
 MIME-Version: 1.0
-In-Reply-To: <5586929.0Fyjv50KOk@magrathea>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: ru-RU
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,125 +55,62 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Mikhail Novosyolov via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
-Cc: samba-technical@lists.samba.org
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-14.11.2019 12:51, Andreas Schneider =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
-> On Sunday, 3 November 2019 01:03:43 CET Mikhail Novosyolov wrote:
->> 29.10.2019 10:29, Andreas Schneider =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
->>> On Monday, 28 October 2019 20:38:08 CET Mikhail Novosyolov wrote:
->>>> 28.10.2019 11:47, Andreas Schneider =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
->>>>> On Monday, 28 October 2019 08:58:26 CET Mikhail Novosyolov via
->>>>> samba-technical>
->>>>>
->>>>> wrote:
->>>>>> 28.10.2019 10:44, Mikhail Novosyolov =D0=BF=D0=B8=D1=88=D0=B5=D1=82=
-:
->>>>>>> <...>
->>>>>>> There are 2 possible solutions:
->>>>>>>
->>>>>>> 1) either patch source3/client/smbspool_krb5_wrapper.c to "goto
->>>>>>> smbspool;" if env does not contain "negotiate" instead of chekcin=
-g to
->>>>>>> be either null or 0 - how correct will this be?
->>>>>> I mean this:
->>>>>>
->>>>>> diff --git a/source3/client/smbspool_krb5_wrapper.c
->>>>>> b/source3/client/smbspool_krb5_wrapper.c
->>>>>> index bff1df417e8..000a613291e 100644
->>>>>> --- a/source3/client/smbspool_krb5_wrapper.c
->>>>>> +++ b/source3/client/smbspool_krb5_wrapper.c
->>>>>> @@ -149,7 +149,7 @@ int main(int argc, char *argv[])
->>>>>>
->>>>>>             env =3D getenv("AUTH_INFO_REQUIRED");
->>>>>>            =20
->>>>>>              /* If not set, then just call smbspool. */
->>>>>>
->>>>>> -       if (env =3D=3D NULL || env[0] =3D=3D 0) {
->>>>>> +       if (env =3D=3D NULL || env =3D=3D "none" || env[0] =3D=3D =
-0) {
->>>>>>
->>>>>>                     CUPS_SMB_DEBUG("AUTH_INFO_REQUIRED is not set =
-- "
->>>>>>                    =20
->>>>>>                                    "execute smbspool");
->>>>>>                    =20
->>>>>>                     goto smbspool;
->>>>> This is obviously wrong :-)
->>>>>
->>>>> Did you see the code below? The question is if we should map
->>>>>
->>>>> AUTH_INFO_REQUIRED=3Dnone
->>>>>
->>>>> to anonymous. I've created a patchset you can find here:
->>>>>
->>>>> https://git.samba.org/?p=3Dasn/samba.git;a=3Dshortlog;h=3Drefs/head=
-s/master-sm
->>>>> bs
->>>>> pool
->>>>>
->>>>>
->>>>> However you need to try all combinations, username/password, kerber=
-os
->>>>> and
->>>>> none for anonymous.
->>>> Thank you! I did not test these patches yet, first tried to understa=
-nd
->>>> how it works.
->>>>
->>>> Could you please explain a bit how it works?
->>> That's a good question as documentation from CUPS side is missing. So=
- we
->>> need to find out what CUPS does and then try to write tests for it if
->>> possible. This allows us to make sure we work correctly. The repo abo=
-ve
->>> shows you where the test is in the samba source code. I've tried to a=
-dd
->>> more tests in the past to avoid regressions and verify we work correc=
-tly.
->>> This needs to be extended as much as possible.
->>>
->>>
->>> The two patches were just a quick shot.
->> CUPS developer has clearified documentation:
->>
->>    * https://github.com/apple/cups/issues/5674
->>    *
->> https://github.com/apple/cups/commit/025b8ce8f637009f0df7a5bb5fa0a460d=
-bb32b
->> 10
->>
->> "'negotiate': Kerberos is required - this keyword can only appear by
->> itself and causes cupsd to collect the UID of the printing user."
->>
->> I've switched smbspool_krb5_wrapper from failing if value of
->> AUTH_INFO_REQUIRED is something not known to just ignoring that and
->> passing the task to smbspool. smbspool will fail itself. Added a test
->> for that. Patches on top of asn/samba.git/master-smbspool are attached=
-.
->>
->> I've not tested those changes yet, just checked buildability. Testing
->> will require making a complex set up, I will try.
->
-> They look fine, let me know if it works!
->
->
-> Thanks.
+On Thu, 2019-11-21 at 14:41 +0100, Andreas Schneider via samba-
+technical wrote:
+> 
+> This has been introduced by commit 24127acae0f05f0011c4008e75f1a1de31584199
+> 
+>     ABI: Remove unused .py3*.sigs files
+>     
+>     These are no longer used by the build system so avoid
+>     confusion by removing them from the tree.
+> 
+> I'm investigating how we are fixing this in RHEL now. Maybe we have to add the 
+> symbols back in our package.
 
-How to make Samba AD domain controller make all local printers available=20
-only to domain members? I've made a local PDF printer which writes to=20
-PDF files in CUPS and want to use it for testing and be sure that=20
-Kerberos authorization is used to access the printer.
+Ouch.  What I will say is this:  The py3.sigs stuff was a disaster,
+Debian tried to make it better (but seemed to make it worse, as far as
+I could tell, even minor upgrades failed the debian ABI checker), so I
+dropped both the additional patch and then disabled py3 libs from
+Samba.  
 
-[printers]
- =C2=A0=C2=A0=C2=A0 path =3D /var/spool/samba/
- =C2=A0=C2=A0=C2=A0 printable =3D yes
- =C2=A0=C2=A0=C2=A0 #guest ok=3Dyes
- =C2=A0=C2=A0=C2=A0 security =3D domain
+Debian has of course had py3 re-enabled now, but my disable of the py3
+build caused Debian not to be able to ship Python3 bindings for ages.
 
-Is it correct? I am not sure about "security =3D domain".
+The Fedora packages had dramas with how much of the python ABI to
+embed.
+
+And then this.  I'm kind of glad we accidentally dropped the whole .py3
+ABI file, even if we have to clean up this mess.  It has single-
+handedly caused much confusion, work and frustration in packaging
+Samba. 
+
+> For Samba I guess we should bump the SO version of libpytalloc-util to 3 asap.
+
+And here re-starts our library versioning discussion.  Could we at
+lease merge my 'remove ldb independent version logic', so we can bump
+the pyldb-util ABI without a whole ldb version bump?
+
+> In addition I think we need a CI job which runs the abi-compliance-checker for 
+> all public libraries.
+> 
+> Fedora provides packages for abi-dumper and abi-compliance-checker. So we 
+> could keep an ABI dump from the current released version in the source tree 
+> and compare against that one if we break anything.
+
+Yeah, I guess that's a useful idea.  Perhaps extend one of the CI jobs?
+(Please don't create a whole new one if possible). 
+
+Andrew Bartlett
+-- 
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+
 
 
