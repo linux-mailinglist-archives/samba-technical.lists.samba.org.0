@@ -2,62 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC78D1072CC
-	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 14:09:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D442D1073DA
+	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 15:08:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=/udDQgD82MkirZ/kWXcDWVzOzMiPr5L2d2klEQMhgzI=; b=rs6HBlsF35tEFSyEDFhZjzfapD
-	obFueTPYsK4SwTyvGc3nLpeSaJWKX92nDgAiKg1cjzgx9UwDcxK22pPxcX/rsgkGjiX4grjpuKjQ+
-	o1+LC/iDZb0/6gz3zv3ZP/OGeV7KOfVSFKsWAn412ZmNFRCNCPTvr/u3KyfyCn630ck3koCszcF6c
-	a92G2KJP95crW3YOLP2EKoGJMDQh1J1gm0wzvpECwabiWXY7t3zuaEjK3C/wQpx7tJvVzXcC/zZr1
-	ydDljqN181OVbaZhLVR7e1Q6joilPqzfbrnuBakc6A7Yz9oWDe35HTMXc0PQYaJH3Imr8SJ4+83Ef
-	3onlsmww==;
-Received: from localhost ([::1]:61614 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=/AZRFBrts0MAaUahI6OwW/olHj2RPZrpSINQpqH7fqY=; b=0i4A4d5KyGmn30AST+a1VUPY7u
+	6I4sMBLusrt7uhYBumICHMEIMnBmbQlJxOpZyBNOCbLL198lb9i4hkUS0hdnKeOIq0ihMdi9c7Wcr
+	cpgFBvIMXWjN+3/PM9ZJY0W94P8+zihBNR3KYv4s1JIVql6jXaoHQ1vYl3EVJmIJb+frISuu7J4XF
+	dnlg2ushZo/cUoWFTG5SeCkq44Lu5Tlegeydj2MYtirPIgshhVLt3W9vQ0VP8gCgxV2mjPc478IcH
+	RrMix1eVnn6Slz3haCvBuH0+zgKbr4K2IZG9Q0iG0FW3ijQ/3Kmg31WAOqdmqMc4XL/mSzcvQHPTh
+	L/BQ9Y/A==;
+Received: from localhost ([::1]:24796 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iY8fV-0022mK-T1; Fri, 22 Nov 2019 13:08:14 +0000
-Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d]:34617) 
+	id 1iY9bC-0024Iq-Sn; Fri, 22 Nov 2019 14:07:50 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57196) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iY8fQ-0022mD-3y
- for samba-technical@lists.samba.org; Fri, 22 Nov 2019 13:08:10 +0000
-Received: by mail-vk1-xa2d.google.com with SMTP id t184so1630665vka.1
- for <samba-technical@lists.samba.org>; Fri, 22 Nov 2019 05:08:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=5cf/mmGLkZKmgWpVEfOy47bPjMP6QJaQd9ESz5Zv+1Y=;
- b=GoBo+ojU6WEmuCGZiyKg9C1xG1aaEQM3mh7brmugxIav/bffKol1s/8S/V/HmVqTzI
- EZZsQcNU5IfStiSloEpc6ZegeyU6smiVuKWkEahkV0AC7dy11sJ0tYC6QuRBG43tzsKz
- wMoSJ3DJoa3wtYH4/DhHIoRZzBIp2OzegzvmTLz/uKXS7pYanwOvcwN7xF+SypUndunl
- da56iQSnoN31pWEEfbUj017waSUOiRMpl4XjUXfxi6f+UHwXSmE6zKHaOv1SUSfh/ATY
- QsU8w+zl6B7pj7ioXTrIxg2sanjM2EIxEf4tF6q7h5m5fnJZiBoEO+ayEWPBEdovId6s
- YYsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=5cf/mmGLkZKmgWpVEfOy47bPjMP6QJaQd9ESz5Zv+1Y=;
- b=Vr4pGOXF7nFL2KfQ43y/BygyiQxHteBd8+vO2dQYPaJNiGhCLUeQFh/mfw2eQGiQsL
- ptSUmDZvhH2rKh8+r6KSsPXba093Kdp92e5s1DWuLH5dAVOMFO9R4i4gBLNsqLsiI0Bt
- PQrRTmjXz96D65pC6EC48nf/o99qsWDFGjjRZnhbOu0suRNdk3O/WPtxqilp9/EdB7lR
- CMKLGUjz7SWWl9q5P52o/54Xy3QpKqjwHVIIm7z0aMcZt9lx4b4kyqgQxuP18jscsN++
- /wCSy/oWlUagp/vM+cvd/y5eHcDmENrU9weKNsNkBF8QGDX6I3MsMI3BhW+e6o3/dfh9
- DY6g==
-X-Gm-Message-State: APjAAAXAVt+SCtDg01D8B0kpVdT/Ue9gK3icluUPMCCp1fRfMHqvBmuj
- 5/tydszrITqR+elJ4Y5wBdAkJxN4uYa2As/IMK9Sa5tUevw=
-X-Google-Smtp-Source: APXvYqwBJNCsprMm7YPhCoM9ufTjWAfmcNZ8GJjz2TzjO3bdCNnzoLV2dHHXCkXipbql5h6CxyKsgJVTTApkQruMmnA=
-X-Received: by 2002:a1f:94c7:: with SMTP id w190mr9438611vkd.62.1574428086023; 
- Fri, 22 Nov 2019 05:08:06 -0800 (PST)
-MIME-Version: 1.0
-References: <CAGYhc9=AZmkOjHAGx7rWd=iM6h5BaVohym+oWMWqfNEfNtju3Q@mail.gmail.com>
- <20d3f005503d82862b0ba8856010ae7a8831d577.camel@samba.org>
- <CAGYhc9nN1cf3KD52mJG0ROmNYXDGXuA7c-KML33W+Qec0jOkrw@mail.gmail.com>
- <c982637749a9629cf45b2481242d809532cfe8c1.camel@samba.org>
-In-Reply-To: <c982637749a9629cf45b2481242d809532cfe8c1.camel@samba.org>
-Date: Fri, 22 Nov 2019 13:07:54 +0000
-Message-ID: <CAGYhc9k-nVC48C3uxYKA=g031LqTpPEtJYedDi_Z9Ug5NHA-tA@mail.gmail.com>
-Subject: Re: building source3 subsystems and libs
+ (Exim) id 1iY9b9-0024Ij-J9
+ for samba-technical@lists.samba.org; Fri, 22 Nov 2019 14:07:49 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=/AZRFBrts0MAaUahI6OwW/olHj2RPZrpSINQpqH7fqY=; b=AcqbhaKLqYqewk2HfOo+Pab/Yi
+ 2C/6HnMBnr6vDewlYrUTi6qcXs41Tox7cuqKeeU2FuF81X7ji1Er7cC5h7sjFSx6wuf644VMyUwb0
+ C/CK4nNnTZZ/275Prn1DaY/wxrjxC6upPxTQ1AMI/AEtZNeGaKmdODtJtmjEI+95oNMuIQKUuNQ1Y
+ qf2/EOsgrC9S6W8kIbWhE93REMVYpcR3mBsDzafHVmp9mUTbAIIopeFf5fSIl8SHhMeTKLAPGMdUu
+ vXMPpRyyfRHrXubl9ixHsqWcv1FjWR3ogwWRNK4GujvX4Nx/kOu3yARt3P2Nv2jOaR1cGGVQ6yP+C
+ 7Ua7yLGovZmDB2kXQw6K+3Im8CjZzmBH9FKL9d7HjrxzVL3/UACn15GWlThyjrXERZ0AHPFfkO3Y5
+ 7anW7tn0kKKdwEimTeG3jKwIkDObptMwcJn1yRD2Cfoqh6UH8fV41T10jRlu+mIQuFq4s6D8G65mR
+ G6wnghHfTNa72AbKvutTqBYE;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iY9b8-0004qj-S3; Fri, 22 Nov 2019 14:07:46 +0000
 To: Andrew Bartlett <abartlet@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Subject: Re: libpytalloc-util 2.2.0 broke the ABI
+Date: Fri, 22 Nov 2019 15:07:44 +0100
+Message-ID: <20458013.Ilke4jX49h@magrathea>
+In-Reply-To: <118908fe1f076becc0c7e3c3debf680b444f9bbb.camel@samba.org>
+References: <1647506.J1yn77AgSA@magrathea>
+ <118908fe1f076becc0c7e3c3debf680b444f9bbb.camel@samba.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,128 +55,80 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: moore chestnut via samba-technical <samba-technical@lists.samba.org>
-Reply-To: moore chestnut <moore.43132@gmail.com>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-hello Andrew:
+On Friday, 22 November 2019 10:13:12 CET Andrew Bartlett wrote:
+> On Thu, 2019-11-21 at 14:41 +0100, Andreas Schneider via samba-
+> 
+> technical wrote:
+> > This has been introduced by commit
+> > 24127acae0f05f0011c4008e75f1a1de31584199
+> > 
+> >     ABI: Remove unused .py3*.sigs files
+> >     
+> >     These are no longer used by the build system so avoid
+> >     confusion by removing them from the tree.
+> > 
+> > I'm investigating how we are fixing this in RHEL now. Maybe we have to add
+> > the symbols back in our package.
+> 
+> Ouch.  What I will say is this:  The py3.sigs stuff was a disaster,
+> Debian tried to make it better (but seemed to make it worse, as far as
+> I could tell, even minor upgrades failed the debian ABI checker), so I
+> dropped both the additional patch and then disabled py3 libs from
+> Samba.
+> 
+> Debian has of course had py3 re-enabled now, but my disable of the py3
+> build caused Debian not to be able to ship Python3 bindings for ages.
+> 
+> The Fedora packages had dramas with how much of the python ABI to
+> embed.
+> 
+> And then this.  I'm kind of glad we accidentally dropped the whole .py3
+> ABI file, even if we have to clean up this mess.  It has single-
+> handedly caused much confusion, work and frustration in packaging
+> Samba.
 
-regarding why:
-- initially because I'm finding my way around this code base and I dont
-know all the options... :-)
-- I want a simplified, lean client that I have can use for testing and
-understanding.
-- a starting point i was looking at was the rpc_open_tcp and then try build
-on that with the functionality in netlogon_creds_cli.c for a ntlm pass
-thru, but even that has lots of dependencies.
+We have to restore the ABI with the .PY3 in the name to deal with it in RHEL 
+8.2. For RHEL 8.3 we need to fix it correctly upstream. Currently we try to 
+have a workaround in our package.
 
-otherwise, as an end goal, this might be something that I want to use in an
-extremely constrained embedded environment.
-so having full samba build/deployment is not going to be an option.
-the list of dependencies and nested dependencies is long so I want to
-determine if a streamlined client is possible.
+> > For Samba I guess we should bump the SO version of libpytalloc-util to 3
+> > asap.
+> And here re-starts our library versioning discussion.  Could we at
+> lease merge my 'remove ldb independent version logic', so we can bump
+> the pyldb-util ABI without a whole ldb version bump?
 
-rpcclient bin itself is fully loaded with dependencies and even a test with
-NETLOGON command uses lsarpc, over dcerpc over smb over tcp.
-Of course there is high chance I'm misunderstanding and based on what I
-think I need around dcerpc bind, epm mapper, schannel netrlogonsamlogon for
-ntlm pass thru.
+Yes, I will discuss it with Alexander again. We need to use a different SO 
+version for each library.
+ 
+> > In addition I think we need a CI job which runs the abi-compliance-checker
+> > for all public libraries.
+> > 
+> > Fedora provides packages for abi-dumper and abi-compliance-checker. So we
+> > could keep an ABI dump from the current released version in the source
+> > tree
+> > and compare against that one if we break anything.
+> 
+> Yeah, I guess that's a useful idea.  Perhaps extend one of the CI jobs?
+> (Please don't create a whole new one if possible).
 
-your thoughts appreciated.
+For a start, 'others' would be the right place, where libt* and libldb is 
+built.
 
-thank you.
+Maybe we can add it to autobuild.py.
 
 
-On Thu, 21 Nov 2019 at 23:07, Andrew Bartlett <abartlet@samba.org> wrote:
+	Andreas
 
-> Is there a reason why you first want to untangle our build system?
->
-> I would suggest first just creating a new binary, which links against
-> whatever it needs to (and we have great helper libraries for the things
-> you need for the below).
->
-> rpcclient has a samlogon command that does what you need, I would just
-> cut that down.
->
-> But why not just use winbind via ntlm_auth or libwbclient?  That has
-> everything setup and ready to go, manages the connection and
-> everything.
->
-> Perhaps it would help to explain your use case first.
->
-> Thanks!
->
-> Andrew Bartlett
->
-> On Thu, 2019-11-21 at 22:52 +0000, moore chestnut wrote:
-> > Hello Andrew,
-> >
-> > thank you for reply.
-> >
-> > so would it be bad a idea to try hack a build together based on the
-> > source files of msrpc3 and the deps?
-> >
-> > essentially I would like to hack a client together to do dcerpc bind,
-> > epm mapper request, followed by bind and schannel setup (
-> > NetrServerReqChallenge and NetRServerReqAuthenticate3) followed by
-> > bind and NetrLogonSamLogonWithFlags.
-> >
-> > Any suggestions on best approach?
-> >
-> >
-> >
-> >
-> >
-> >
-> >
-> > On Thu, 21 Nov 2019 at 18:18, Andrew Bartlett <abartlet@samba.org>
-> > wrote:
-> > > On Thu, 2019-11-21 at 18:09 +0000, moore chestnut via samba-
-> > > technical
-> > > wrote:
-> > > >   hello,
-> > > >
-> > > > is there any way to individually build subsystems and libraries?
-> > > >
-> > > > for example:
-> > > >
-> > > > the msrpc3 library in  source3/wscript_build
-> > > > bld.SAMBA3_LIBRARY('msrpc3',
-> > > >
-> > > > or
-> > > > bld.SAMBA3_SUBSYSTEM('samba3util',
-> > > >
-> > > > when I try waf or waf msrpc3 in the source3 dir, it does not
-> > > work.
-> > > >
-> > > > currently trying on a 4.11.0 source tree.
-> > > >
-> > > > I have read through the https://wiki.samba.org/index.php/Waf
-> > > > and tried the samples with no success.
-> > > >
-> > > > Does this work for source3 libs/subsystems?
-> > >
-> > > No, you can't really build bits of Samba in general.  Some binary
-> > > targets can be specified with the --targets option, and a few of
-> > > these
-> > > work correctly, nothing beyond that has been tested.  So where it
-> > > works
-> > > it works, but nobody is really working to have this be a general
-> > > feature.
-> > >
-> > > Andrew Bartlett
-> > >
-> --
-> Andrew Bartlett
-> https://samba.org/~abartlet/
-> Authentication Developer, Samba Team         https://samba.org
-> Samba Development and Support, Catalyst IT
-> https://catalyst.net.nz/services/samba
->
->
->
->
->
->
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
+
+
