@@ -2,59 +2,39 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 286571074DB
-	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 16:29:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63F4E107507
+	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 16:39:06 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=blVUaDBfZNi+jPcLDZBNlohP4YEJtGbm7pBCFPvBQa0=; b=cjWD3f8/o7xRIVHAqQKOjViduX
-	0F7dHsrzC+SYEk/TZV1ghZfNIRO0+P+wdxgfGxDBX91xvjdRU9lm+85/Chp1cqwSlAFgUoXyaf9PC
-	OynjMdUnqJPYWpYvuofU6RV2DMsiK7VoGqmhwfxNVMGySdnxXCJ+6O2iXY2uOvqgPxQ8iDgLN+r/p
-	ARLV64kPjUsIBedUAk3G7jHlPb22FdLs4HQxZV1vO7truTxAF5UGTs3ZGwh3wYWGg9iect5hrE1eY
-	ybshe93CD23yTDaGUo/DiDWhEC4lIMGWArRMtpQA69jMJuU75jsntbMXy5sbfOA8wQD4vTf87TKZb
-	xmQr88sQ==;
-Received: from localhost ([::1]:33436 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=PGUl0rkDuDy8HZssVvTilHAeKyMDGMYSXdM+6YJN00Q=; b=T3GK4IiaaOiY/PvadY4ddwMpHE
+	SG3vLBk2jfBtcToFZF/Dy2eBWNWrDQAtKvHAmPni6oZ9VxrIHReD5ijT9QPS+eIE63rA79PfhphBz
+	H9ZYUQ0wl87nKeZVHUAhGk/bI5s7jaq0otcurxfOcrxGpI+Ox+g4sqk8BH+87xaG0AgaAj8dB5/Zp
+	P9pxnnxxhF3MLiaX/4FDjwXCdHOPGSTFpOR6Ebb3LPQh9M9PBO44KvNbFU6SWOM55Lz1WM6XOSCWa
+	WTd5KDR7a0sah119KDNeY8lSYtosIppJ0C8vLw9auDhqlHyiS7fbgEx+RCtSianDBnXkvjyZaq1tC
+	OV5dpcfQ==;
+Received: from localhost ([::1]:37646 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iYAsG-0025bE-By; Fri, 22 Nov 2019 15:29:32 +0000
-Received: from m4a0040g.houston.softwaregrp.com ([15.124.2.86]:44942) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iYAs8-0025US-Kg
- for samba-technical@lists.samba.org; Fri, 22 Nov 2019 15:29:27 +0000
-Received: FROM m4a0040g.houston.softwaregrp.com (15.120.17.147) BY
- m4a0040g.houston.softwaregrp.com WITH ESMTP; 
- Fri, 22 Nov 2019 15:28:24 +0000
-Received: from M4W0335.microfocus.com (2002:f78:1193::f78:1193) by
- M4W0335.microfocus.com (2002:f78:1193::f78:1193) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10; Fri, 22 Nov 2019 15:27:29 +0000
-Received: from NAM05-CO1-obe.outbound.protection.outlook.com (15.124.8.12) by
- M4W0335.microfocus.com (15.120.17.147) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10 via Frontend Transport; Fri, 22 Nov 2019 15:27:28 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=H8BrVDEYY3qZejW/S9e9sFs9lhttvglHmAdPd15wBEiybvVdfqWWC5zUYZRjLhCL76LxqhhgLgtiiqS6FGIx7c0jcTUgQz13HEvkNHpfjESCILTARHzXVDMSPk8I3huRBXjwkx3BOy7BlJ34yRHIrBk4tmKamPWOfEI5+T1L3Hemc/sE5pXzVme5KukunvvwMA1bZHYk2rOQSa2OQCQAcYxMTO+LjMSMHw0AxQOiFlC/ZjuLXYel+uZmXAQddyF4VDP3vc0PosOoGAbVR4C88gjhqpr8DU84lGfRX4cjffgJSOK4ozRTEOpSquMWd9LABS317D9f5kvWi/p4sdVK/A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=blVUaDBfZNi+jPcLDZBNlohP4YEJtGbm7pBCFPvBQa0=;
- b=TXK/lUFQgMmNe6USEdUC0fvH6v+k0VJtBGchfK8buiJlN+0nLmU8aDjWTnMuoTboaD/ykOAlXVGWy0qZGDASQ4y3DDywHnQhghgKx5SWhb1he4rqz/48odtpYuQ0BHPSi02ZSR3KO00LlIOMIJZ0JSADhC/iULVjFPr1ZdkyLOt6i0ig8uWFPPh+ifVdoMj88kjfeY7oIyz1+GHCqzAxYe0KAgLtBghdW1NxedxIc0625UbqCRq04I38mEr2agf7IHr5CTCj0nOPB8gmge8W8LeL3aUMnYVr8Vuqb2W2f0VVPa+FLau6xA4jiZgObptPneqBu/lUydXIEi+r7zdWCg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Received: from DM6PR18MB2507.namprd18.prod.outlook.com (20.179.71.218) by
- DM6PR18MB2570.namprd18.prod.outlook.com (20.179.104.96) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2474.16; Fri, 22 Nov 2019 15:27:27 +0000
-Received: from DM6PR18MB2507.namprd18.prod.outlook.com
- ([fe80::c8fa:28ed:2197:e967]) by DM6PR18MB2507.namprd18.prod.outlook.com
- ([fe80::c8fa:28ed:2197:e967%4]) with mapi id 15.20.2474.018; Fri, 22 Nov 2019
- 15:27:27 +0000
-To: Noel Power <NoPower@suse.com>, Andrew Bartlett <abartlet@samba.org>,
- "Ralph Boehme" <slow@samba.org>, npower <npower@samba.org>
+	id 1iYB1L-0026AH-Ds; Fri, 22 Nov 2019 15:38:55 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43186) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iYB1G-0026AA-Ak
+ for samba-technical@lists.samba.org; Fri, 22 Nov 2019 15:38:52 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=PGUl0rkDuDy8HZssVvTilHAeKyMDGMYSXdM+6YJN00Q=; b=uR9cCMp4pUX6N+UU9J2x+hlstq
+ A8S0NWa8VhDK0UlJfH8TSmDIJGaKg2aI9lLEX3NbNLbqsZSY9i/XPqa2YFnzU2AShiTHeXiA4U6iN
+ IJ876Nvb2++J2Hq629rV5TxzibkAapC9MZiBCI+oEocOv+ntZgFjYfuMdJE72CaEY9rGUTmT2nOVC
+ 9ALHmts+Z19iLwWjQ4UWDM4AfoCyK1upXZVtqSDrhz4AhKyEXayMcgHJEfXM7w84y2nALlWAXjTeF
+ goq69Ag553j5Cjrw9kh1NeBYS7GYOF0XfWeXil6O0/XEC0I48HycZrQu5cueR0e5z35LGuU2hgXEi
+ AFaexvAS/ysQ7OULJXsO+D1M647BFmZB5W1sZNs/werpxdapA005Lzsz3HqCHxNmRwXKs3XumaA1b
+ nGkRVuG33t1MDCMeB3ww4XKcv5j7gx32rT6dB0Ol2kKcTG7W4yHvZAblo6KYwA0lF22Si8GcZkqlr
+ 6sRe9IJ+Ri2BFTswMlNPdXS9;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iYB1E-0005kk-Q4; Fri, 22 Nov 2019 15:38:49 +0000
 Subject: Re: Converting SMB1 tests to SMB2
-Thread-Topic: Converting SMB1 tests to SMB2
-Thread-Index: AQHVdUNqiOZWCa16a0elHejFomZ1kadQugh0gA6wbN+AAQJmgIAARkCAgAAQXgCAB2I8AIAAAnuAgAAJSYCAAAhSAIAADaSAgAAIYx6ADoq/AIAHznWAgALm3ICACU8HAIAMyTUA
-Date: Fri, 22 Nov 2019 15:27:27 +0000
-Message-ID: <f7229830-b844-a509-ed31-9707e0101666@suse.com>
+To: Noel Power <NoPower@suse.com>, Andrew Bartlett <abartlet@samba.org>,
+ npower <npower@samba.org>
 References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
  <be6770e5-5bf0-4665-4a88-3e4182e4c82e@samba.org>
  <0981db46-93bf-f153-c98f-15d5cf404353@suse.com>
@@ -72,35 +52,16 @@ References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
  <c25ed441eedb2a864429c0154859f2afe95f38cb.camel@samba.org>
  <f3fcbb1f-a25c-f7cb-4023-fdef68e208a8@suse.com>
  <a146e395-f9ca-12d0-2cab-ca52e8209706@suse.com>
-In-Reply-To: <a146e395-f9ca-12d0-2cab-ca52e8209706@suse.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=NoPower@suse.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [109.76.125.221]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 32501ae3-c7db-4c21-a745-08d76f607b1c
-x-ms-traffictypediagnostic: DM6PR18MB2570:
-x-ms-exchange-purlcount: 4
-x-ld-processed: 856b813c-16e5-49a5-85ec-6f081e13b527,ExtFwd
-x-ms-exchange-transport-forked: True
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: CXW2lTtvju0Lu6h03+Xi2whUbO+nYAzQCSy42xQkIRHMWvwqDX6q8FDPBaY3dcclOPSY32l8J48r+ewoXwjEZkUNFjnrgIwN1Ou/0N3M2/QYSsMI/g1Zk0ul+iyrly4ey2ctGBeaVabhTf0IsmuGvo0TXjkFYb8dBgSEOajmyTCRGsl5RAAQhpdeJf2hgm7+wBjvNwQYC5RbGx20ZLwTkLwpeU0Zqnr86c3lwRd23vVEoyFUQUJWPKBVdSc7/ZH6VW4At8g7iBuOvvviNtc0H3tiBRrhwMVagzKS4Y2dUAa3d+ssTtz7yiRBRggQgxnjEAARj3iVhGcMJCEf6ZY0MSgrTTbXc0Dskk+pECFgWpsXm4ci08NAztZ/jU7xHAQdRU7MWPC8jC/42X81Pf74t7pSp8lKWYr1z+cH0syq6W5/CBx01rOZSi2HjCCRK/ZJ1FyvdanEYqXUuglq9YxWki3x2uiBOyI7lV865JEoF04=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <3D60776D623DAE4A97564D6E372F7A0D@namprd18.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ <f7229830-b844-a509-ed31-9707e0101666@suse.com>
+Message-ID: <fc8ebc97-7cca-3274-2f1a-712052b8d5c8@samba.org>
+Date: Fri, 22 Nov 2019 16:38:46 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: 32501ae3-c7db-4c21-a745-08d76f607b1c
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: yK/bScqCsfu0N4pg2C5Gyw9RN9+lU08NS7ut050jXW5u3zVc3k2WGjsRR4enitKw71YLxOsMZMGBnMWAP/EteA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR18MB2570
-X-OriginatorOrg: suse.com
+In-Reply-To: <f7229830-b844-a509-ed31-9707e0101666@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -114,160 +75,211 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Noel Power via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Noel Power <NoPower@suse.com>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Cc: David Mulder <david.mulder@suse.com>,
  samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-SGkgUmFscGggJiBhbGwNCg0KSSByZWFsbHkgbmVlZCBoZWxwIHdpdGgNCmh0dHBzOi8vZ2l0bGFi
-LmNvbS9zYW1iYS10ZWFtL3NhbWJhL21lcmdlX3JlcXVlc3RzLzkwMg0KDQpDdXJyZW50bHkgaXQg
-aXMgbWFya2VkIFdJUCBhcyBJIGhvcGVkIHRoZXJlIGNvdWxkIGJlIHNvbWUNCmRpc2N1c3Npb24v
-YWdyZWVtZW50IGFzIHRvIHRoZSBhcHByb2FjaCBvdXRsaW5lZCB0aGVyZS4gSW4gc3VtbWFyeSB0
-aGlzDQptZXJnZSByZXF1ZXN0IGltbyBzYXRpc2ZpZXMgdGhlIGdlbmVyYWwgZGlzY3Vzc2lvbnMg
-d2UgaGFkIGFib3V0IHRoZQ0KYXBwcm9hY2ggdG8gcHJvdmlkaW5nIGEgd2F5IHRvIGl0ZXJhdGl2
-ZWx5IHB1c2ggcG9ydGVkIHNtYjEgdGVzdHMgaW50bw0KdGhlIGNvZGViYXNlLiBBcyBtZW50aW9u
-ZWQgSSBkaWRuJ3QgaGF2ZSBtdWNoIGx1Y2sgdHJ5aW5nIHRvIG1ha2UgdGhlDQonX3NtYjEnIHRl
-c3QgZW52aXJvbm1lbnRzIGZ1bGx5IGluZGVwZW5kZW50LCBpbiB0aGUgZW5kIGl0IHNlZW1lZCB0
-aGlzDQp3b3VsZCBwcm9iYWJseSByZXF1aXJlIG1vcmUgd29yayB0aGFuIGl0IHdhcyB3b3J0aCAo
-YWZ0ZXJhbGwgaW4gdGhlIGVuZA0Kd2Ugd2lsbCBnZXQgcmlkIG9mIHRoZSBzbWIxIHRlc3RzIGFu
-ZCBhc3NvY2lhdGVkIGVudnMpLg0KDQpXaXRoIHRoaXMgaW4gbWluZCBJIG9ubHkgY3JlYXRlICdz
-aGFsbG93IGNvcGllcycgb2YgdGhlIHRlc3QgZW52cyB0aGF0DQpoYXZlIHRlc3RzIHRoYXQgZmFp
-bCBhZ2FpbnN0IHRoZSBuZXcgZGVmYXVsdCBlbnZpcm9ubWVudHMgd2hpY2ggZG9uJ3QNCnN1cHBv
-cnQgbmVnb3RpYXRpb24gb2YgU01CMS4gSSBhZGRlZCAyIG5ldyBDSSBqb2JzIHRvIHJ1biB0aGUg
-dGVzdHMgdGhhdA0Kb25seSBydW4gaW4gZW52aXJvbm1lbnRzIHRoYXQgY2FuIG5lZ290aWF0ZSBT
-TUIxLiBUaGlzIHBhc3NlcyBDSSBjdXJyZW50bHkNCg0KSSdkIHJlYWxseSBsaWtlIHRvIGdldCB0
-aGlzICh3aXRoIHdoYXRldmVyIGNoYW5nZXMgYXJlIG5lZWRlZCkgdXBzdHJlYW0NCnNvIHdlIGNh
-biBzdGFydCBvbiB0aGUgcG9ydGluZyBwcm9wZXIuIERhdmlkIGlzIGN1cnJlbnRseSBzdGFydGlu
-ZyB0bw0KdHJ5IGFuZCBwb3J0IHNvbWUgb2YgdGhlIGJhc2UgdGVzdHMgYW5kIEkgc3RhcnRlZCBn
-b2luZyB0aHJvdWdoIHRoZQ0Kc2tpcF9zbWIxX2ZhaWwgbGlzdCB3ZSBoYXZlIHRvIHNwbGl0IHRl
-c3RzIHRoYXQgbWl4IFNNQjEgJiA+PSBTTUIyLCBmaXgNCnRlc3RzIHRoYXQgc2hvdWxkIHJ1biBh
-Z2FpbnN0IFNNQjIgYnV0IGRvbnQndCBldGMuDQoNCkkgYWxzbyB3YW50ZWQgdG8gZ28gdGhyb3Vn
-aCB0aGUgbW90aW9ucyBvZiBwb3J0aW5nIGEgdGVzdCwgbWFya2luZyBpdCBhcw0KcG9ydGVkL2Rv
-bmUgZXRjLiBSYWxwaCwgeW91IGhhZCB0aGUgaWRlYSBvZiB1c2luZyBhbGlhcyBlbnZpcm9ubWVu
-dHMNCidfZG9uZScgdGhhdCBJIGxpa2VkIHNvIEkgY3JlYXRlZCBhIG5ldyBicmFuY2gNCg0KaHR0
-cHM6Ly9naXRsYWIuY29tL3NhbWJhLXRlYW0vZGV2ZWwvc2FtYmEvY29tbWl0cy9ucG93ZXJfc21i
-MV93aXRoX3BvcnRpbmcNCg0KVGhpcyBicmFuY2ggYWxzbyBpbmNsdWRlcyB0aGUgY2hhbmdlcyBm
-cm9tDQpodHRwczovL2dpdGxhYi5jb20vc2FtYmEtdGVhbS9zYW1iYS9tZXJnZV9yZXF1ZXN0cy85
-MDIsIG9uIHRvcCBvZiB0aG9zZQ0KY2hhbmdlcyBpdA0KDQoqIGNyZWF0ZXMgYWxpYXMgJ19zbWIx
-X2RvbmUnIGVudnMgdGhhdCBhIHRlc3QgY2FuIGJlIG1vdmVkIHRvIHdoZW4NCidwcm9jZXNzZWQn
-DQoqIGZpeGVzIG9yIHNwbGl0cyB0ZXN0cyB0aGF0IGN1cnJlbnRseSBvbmx5IHJ1biBpbiBhIHRl
-c3QgZW52IHRoYXQgY2FuDQpuZWdvdGlhdGUgU01CMQ0KwqAgZS5nLiB3aGVyZSBhIHRlc3QgdGhh
-dCBtaXhlcyB0ZXN0aW5nIFNNQjEgJiA+PVNNQjIgcHJvdG9jb2xzIHRoZW4gdGhlDQp0ZXN0IGlz
-IG1vZGlmaWVkIHNvIGl0IGNhbiB0YWtlIGEgcGFyYW0gdG8gcnVuIGVpdGhlciBwcm90b2NvbCwg
-dGhlbg0KZXhpc3RpbmcgdGVzdCBpczsNCsKgwqDCoMKgwqAgYSkgbW9kaWZpZWQgdG8gcHJvdmlk
-ZSBwYXJhbSB0byBydW4gU01CMSAmIHRlc3QgbW92ZWQgZnJvbSAnX3NtYjEnDQplbnYgdG8gJ19z
-bWIxX2RvbmUnIGVudg0KwqDCoMKgwqDCoCBiKSBjb3BpZWQgJiBtb2RpZmllZCB0byBwcm92aWRl
-IGEgcGFyYW0gdG8gcnVuID49IFNNQjIgYW5kIHRlc3QNCm5vdyBhZGRpdGlvbmFsbHkgcnVucyBh
-Z2FpbnN0IGFwcHJvcHJpYXRlIG5vbiAnX3NtYjEnIGVudg0KDQrCoCBUaGVyZSBhcmUgcXVpdGUg
-YSBmZXcgdGVzdHMgaW4gdGhlIHNraXAgZmlsZSB0aGF0IHJlYWxseSBhcmUgU01CMSBvbmx5DQp0
-ZXN0cyzCoMKgIGluIHRoaXMgY2FzZQ0KwqDCoMKgwqDCoCBhKSBtb3ZlIHRoZSB0ZXN0IGZyb20g
-J19zbWIxJyBlbnYgdG8gJ19zbWIxX2RvbmUnIGVudg0KDQrCoCBJbiBib3RoIGNhc2VzIHRoZSBz
-a2lwX3NtYjFfZmFpbCBmaWxlIGlzIHVwZGF0ZWQgd2l0aCBjb21tZW50cyBzYXlpbmcNCnRoZSB0
-ZXN0DQrCoCBoYXMgYmVlbiBwcm9jZXNzZWQNCg0KQ3VycmVudGx5IH43MCB0ZXN0cyBoYXZlIGJl
-ZW4gJ3Byb2Nlc3NlZCcgdHJpdmlhbGx5IGluIHRoYXQgYnJhbmNoLiBJDQpmZWFyIHRoYXQgdGhl
-IHdvcmsgdGhlcmUgbWlnaHQgYmUgd2FzdGVkIChpZiB0aGUgd3JvbmcgYXBwcm9hY2ggaXMgYmVp
-bmcNCmZvbGxvd2VkKSBzbyByZWFsbHkgaXQgd291bGQgYmUgZ3JlYXQgdG8gZ2V0IHRoaXMgbmFp
-bGVkIGRvd24gYmVmb3JlDQptb3JlIGNvbXBsZXggY2hhbmdlcyBoYXBwZW4NCg0KTm9lbA0KDQpP
-biAxNC8xMS8yMDE5IDEyOjEyLCBOb2VsIFBvd2VyIHdyb3RlOg0KPiBKdXN0IEZZSQ0KPg0KPiBJ
-IG9wZW5lZCBodHRwczovL2dpdGxhYi5jb20vc2FtYmEtdGVhbS9zYW1iYS9tZXJnZV9yZXF1ZXN0
-cy85MDINCj4NCj4gVGhpcyBicmFuY2ggaXMgYSByZXR1cm4gdG8gdGhlIHBsYW4gb2YganVzdCB1
-c2luZyBzb21lIGluZGVwZW5kZW50IENJDQo+IGpvYnMgdG8gcnVuIHRoZSBTTUIxIHRlc3RzIChh
-bmQgdGVzdHMgZmFpbGluZyBpbiBlbnZpcm9ubWVudHMgd2hlcmUgU01CMQ0KPiBjYW4ndCBiZSBu
-ZWdvdGlhdGVkKS4gVGhlc2UgbmV3IGpvYnMgdXNlIHNpbXBsZSAnc2hhbGxvdycgY29waWVzIG9m
-IHRoZQ0KPiBleGlzdGluZyBlbnZpcm9ubWVudHMuDQo+DQo+IEkgcmV0dXJuZWQgdG8gdGhpcyBh
-cHByb2FjaCBkdWUgdG8gdGhlIGV2ZXIgaW5jcmVhc2luZyBhbW91bnQgb2YgY2hhbmdlcw0KPiAo
-YW5kIEkgYWRtaXQgZmFpbHVyZSkgdHJ5aW5nIHRvIGNyZWF0ZSBwcm9wZXIgaW5kZXBlbmRlbnQg
-dGVzdA0KPiBlbnZpcm9ubWVudHMgKGFzIGRlc2NyaWJlZCBiZWxvdykNCj4NCj4gTWF5YmUgd2Ug
-Y2FuIHRyeSB3aXRoIHRoZSBhcHByb2FjaCBvdXRsaW5lZCBpbiB0aGUgbWVyZ2UgcmVxdWVzdCBh
-bmQNCj4gY29udGludWUgdGhlIGRpc2N1c3Npb24gdGhlcmUuIFRoZSBzb29uZXIgd2UgaGF2ZSBz
-b21ldGhpbmcgaW4gcGxhY2UNCj4gdXBzdHJlYW0gdGhlIHNvb25lciB3ZSBjYW4gc3RhcnQgY2hp
-cHBpbmcgYXdheSBhdCB0aGUgdGVzdHMgOi0pDQo+DQo+IE5vZWwNCj4NCj4gT24gMDgvMTEvMjAx
-OSAxNDowMywgTm9lbCBQb3dlciB2aWEgc2FtYmEtdGVjaG5pY2FsIHdyb3RlOg0KPj4gSGkgQWxs
-LA0KPj4NCj4+IE9uIDA2LzExLzIwMTkgMTc6NDQsIEFuZHJldyBCYXJ0bGV0dCB2aWEgc2FtYmEt
-dGVjaG5pY2FsIHdyb3RlOg0KPj4+IE9uIEZyaSwgMjAxOS0xMS0wMSBhdCAxODozMSArMDAwMCwg
-Tm9lbCBQb3dlciB2aWEgc2FtYmEtdGVjaG5pY2FsDQo+Pj4gd3JvdGU6DQo+Pj4+IEhpIEFsbA0K
-Pj4+Pg0KPj4+PiBKdXN0IHRob3VnaHQgSSBzdW1tYXJpemUgd2hhdCB3ZSAobXlzZWxmICYgUmFs
-cGgpIGRpc2N1c3NlZCwgZm9yIG15IG93bg0KPj4+PiBiZW5lZml0IGFuZCB0aGUgYmVuZWZpdCBv
-ZiBvdGhlcnMuDQo+Pj4gVGhhbmtzIGZvciB3cml0aW5nIHRoaXMgb3V0LiAgSSBzZWUgaW4gdGhl
-IHJlc3Qgb2YgdGhlIHRocmVhZCB0aGF0IHlvdQ0KPj4+IGhhdmUgbWFkZSBzb21lIHByb2dyZXNz
-LA0KPj4gd2VsbCB5ZXMgYW5kIG5vIDotKQ0KPj4NCj4+IHNvLCBJIGRpZCB0cnkgYW5kIGZpeCB0
-aGUgaXAgdW5pcXVlbmVzcyB0aGluZyBidXQuLi4NCj4+DQo+PiB1bmlxdWUgaXBzIG1hZGUgc29t
-ZSBkaWZmZXJlbmNlIGhvd2V2ZXIgdGhlcmUgd2VyZSBtb3JlIHRoaW5ncywgbW9yZQ0KPj4gY2hh
-bmdlcyBuZWVkZWQNCj4+DQo+PiBhKSBuZWVkIHRvIHBhc3MgZG93biBhIHVuaXF1ZSBzZXJ2ZXIg
-bmFtZSBpbiBvcmRlciB0aGF0IHRoZSB1bmlxdWUgaXANCj4+IGNhbiBiZSBjcmVhdGVkICh0aGVy
-ZSBpcyBhIG5hbWUgLT4gaW50ZXJmYWNlX251bSBoYXNoKQ0KPj4gYikgYnV0Li4uIHdlIGhhdmUg
-YWxvdCBvZiBmYWtlIF9zbWIxIGVudnMgYW5kIHRoZSBudW1iZXIgb2YgaW50ZXJmYWNlcw0KPj4g
-d2UgaGF2ZcKgIGJyZWFrcyB0aGUgY3VycmVudCBNQVhfV1JBUFBFRF9JTlRFUkZBQ0VTIGxpbWl0
-LCBuZWVkIHRvIG1vZGlmeQ0KPj4gdGhpcyBpbiB0aGlyZF9wYXJ0eS9zb2NrZXRfd3JhcHBlci9z
-b2NrZXRfd3JhcHBlci5jDQo+PiBjKSBtaXNzaW5nIGNlcnRzIGZvciB2YXJpb3VzIHRlc3RzIHdo
-aWNoIG5lZWRlZCBzb21lIG5ldyBkaXJlY3Rvcmllcw0KPj4gKGFuZCBjb250ZW50KSBzZXR0aW5n
-IHVwIGluIHZhcmlvdXMgZGlycyB1bmRlcg0KPj4gc2VsZnRlc3QvbWFuYWdlLWNhL0NBLXNhbWJh
-LmV4YW1wbGUuY29tL0RDcy8NCj4+IGUpIHRoZXJlIGlzIGFub3RoZXIgcHJvYmxlbSwgdGhlcmUg
-aXMgc3RpbGwgaW50ZXJmZXJlbmNlIGJldHdlZW4gdGhlDQo+PiBlbnZpcm9ubWVudHMgYmVjYXVz
-ZSBhbiBhZGRpdGlvbmFsIHJlYWxtX3RvX2lwX21hcHBpbmdzIHdoZXJlIHRoZSByZWFsbQ0KPj4g
-YXNzb2NpYXRlZCB3aXRoIHRoZSBzZXJ2ZXJuYW1lIChhbmQgd2hlcmUgdGhlIHNlcnZlcm5hbWUg
-aW4gdHVybiBpcyB1c2VkDQo+PiB0byBnZXQgdGhlIGlwIGFkZHJlc3MpDQo+PiBmKSBJIHRoZW4g
-dHJpZWQgdG8gdXNlIGRpZmZlcmVudCByZWFsbXMgd2l0aCB0aGUgc21iMSBlbnZpcm9ubWVudHMg
-d2hvDQo+PiBzaG91bGQgaGF2ZSBlbnRyaWVzIGluIHRoZSB0YWJsZSBidXQgdGhpcyBhbHNvIHdh
-cyBub3QgZW5vdWdoLCBzdGlsbA0KPj4gdGVzdHMgZmFpbCAoSSBwcmVzdW1lIGJlY2F1c2UgbG90
-cyBvZiB0ZXN0IGRhdGEsIGRhdGFiYXNlIGVudHJpZXMgZXRjLg0KPj4gZGVwZW5kIG9uIHRoZSBl
-eGlzdGluZyAncmVhbG1zJyB1c2VkICh0aGlzIGlzIHNwZWN1bGF0aW9uKQ0KPj4NCj4+IFNvwqAg
-Q0kgc3RpbGwgZG9lc24ndCBwYXNzLCBhdCB0aGlzIHBvaW50IEkganVzdCBnb3QgdG9vIGRpc2hl
-YXJ0ZW5lZCwNCj4+IGJlZW4gZ29pbmcgYXJvdW5kIGluIGNpcmNsZXMsIGRvbid0IGtub3cgZW5v
-dWdoIGFib3V0IHRoZSB0ZXN0IHNldHVwIChvcg0KPj4gc2FtYmEgYWQpIHRvIGZpZ3VyZSBvdXQg
-KGF0IGxlYXN0IGVhc2lseSkuIEkgZ2V0IHRoZSBpbXByZXNzaW9uIHRoaXMgaXMNCj4+IGEgcGll
-Y2Ugb2Ygc3RyaW5nIEkgY291bGQgcHVsbCBmb3IgYSBsb25nIHRpbWUgOi0pIGFuZCB0aGUgb25s
-eSB0aGluZw0KPj4gdGhhdCB3aWxsIGJlIHVucmF2ZWxsZWQgaXMgbXkgc2FuaXR5DQo+Pg0KPj4g
-VGhlIGN1cnJlbnQgZXJyb3JzIHdpdGggdGhpcyBhcHByb2FjaCBjYW4gYmUgc2VlbiBoZXJlDQo+
-PiBodHRwczovL2dpdGxhYi5jb20vc2FtYmEtdGVhbS9kZXZlbC9zYW1iYS9waXBlbGluZXMvOTQw
-NjQ4NTgNCj4+DQo+Pj4gIGJ1dCB3YW50ZWQgdG8gc2F5IHRoYXQgaWYgeW91IGdldCByZWFsbHkg
-c3R1Y2sNCj4+PiBhZ2FpbiB0aGVuIEkgY2FuIGNlcnRhaW5seSBiZSBvZiBhc3Npc3RhbmNlLiAN
-Cj4+IHRoYW5rcywgYXBwcmVjaWF0ZWQhISwgSSB3b25kZXIgd291bGQgeW91IHRoaW5rIG9yIGFn
-cmVlIHRoYXQgcmF0aGVyDQo+PiB0aGFuIGdvIGRvd24gdGhlIHJhdGhvbGUgYWJvdmUgdGhhdCBy
-ZXZlcnRpbmcgdG8gbXkgYmFja3VwIHBsYW4gd2hpY2gNCj4+IGp1c3QgYWRkZWQgMiBuZXcgc21i
-MSBqb2JzIGlzIGEgZmFyIGVhc2llciByb3V0ZSwgd2UgZG9uJ3QgbmVlZCB0aGUNCj4+IHJ1bmF3
-YXkgY2hhbmdlcyB0byB0aGUgJ19zbWIxJyBlbnZpcm9ubWVudHMgYXMgYWJvdmUuIGlwIHVuaXF1
-ZW5lc3MgZm9yDQo+PiBleGFtcGxlIHNob3VsZCBub3QgYmUgYW4gaXNzdWUgYXMgd2UgcnVuIHRo
-b3NlIHRlc3RzIGluIGlzb2xhdGlvbiBpbg0KPj4gdGhlaXIgb3duIENJIGpvYi9jb250YWluZXIs
-IHRoZXNlIGpvYnMvZW52aXJvbm1lbnRzIHdpbGwgZ28gYXdheSB3aGVuDQo+PiBTTUIxIGRpc2Fw
-cGVhcnMgYW55d2F5LiBIb3BlZnVsbHkgdXNpbmcgc3VjaCAnc2hhbGxvdycgY29weSB2ZXJzaW9u
-cyBvZg0KPj4gdGhlIGVudmlyb25tZW50cyBpc24ndCBhbiBpc3N1ZSBvciBhIHN0dW1ibGluZyBi
-bG9jayA/IFsxXQ0KPj4NCj4+IEJ1dC4uLiB0aGVyZSBzdGlsbCByZW1haW5zIHRoZSBwcm9ibGVt
-IHRoYXQgaW4gdGhlIGxhc3QgYXR0ZW1wdCBhIG51bWJlcg0KPj4gb2YgdGVzdHMgd2VyZSBmYWls
-aW5nIG15c3RlcmlvdXNseSBpbiB0aGUgbmV3IHNlcGFyYXRlIHNtYjEgQ0kgam9icy4gSQ0KPj4g
-c2NyYXRjaGVkIG15IGhlYWQgb24gdGhpcywgYWdhaW4gSSB0cmllZCB0byByZXByb2R1Y2UgdGhl
-IHByb2JsZW1zDQo+PiBsb2NhbGx5LCBpbiBkb2NrZXIgYW5kIG9uIHNuLWRldmVsIHdpdGhvdXQg
-c3VjY2VzcyAoZXZlcnl0aGluZyBwYXNzZXMNCj4+IG91dHNpZGUgb2YgQ0kpLiBTbywgSSByZXR1
-cm5lZCB0byBydW5uaW5nIGp1c3QgYSBzaW5nbGUgZmFpbGluZyB0ZXN0IG9uDQo+PiBDSSAobm93
-IHdpdGggbG90cyBvZiBERUJVRykgYW5kIGZvdW5kIGZvciBleGFtcGxlIHRoYXQgd2l0aCB0aGUN
-Cj4+IHNhbWJhMy51bml4LmluZm8yIHRlc3QgdGhhdCBpbW1lZGlhdGVseSBhZnRlciBjcmVhdGlu
-ZyBhIGZpbGUgd2l0aCAoMA0KPj4gYnl0ZXMgYWxsb2NhdGVkKSB0aGF0IFNUQVQgcmV0dXJucyBz
-dF9leF9ibG9ja3Mgd2l0aCBhIHBvc2l0aXZlIHZhbHVlLg0KPj4gQ2xlYXJseSB0aGlzIGlzIHNv
-bWV0aGluZyBoYXBwZW5pbmcgYXQgdGhlIGhvc3Qgb3Mgb3IgZmlsZXN5c3RlbSBsZXZlbC4NCj4+
-IENvbXBhcmluZyB3aXRoIHBhc3NpbmcgdGVzdHMgaW4gbWFzdGVyIHRoZSBvbmx5IGRpZmZlcmVu
-Y2UgaXMgdGhlDQo+PiBwYXNzaW5nIHRlc3RzIHJ1biBvbiByYWNrc3BhY2UgcnVubmVycyBhbmQg
-d2l0aCB0aGUgZmFpbGluZyBjYXNlLCB0aGUNCj4+IHRlc3RzIHJ1biBvbiBzaGFyZWQgcnVubmVy
-cy4gQ2hhbmdpbmcgdGhlIG5ldyBzbWIxIGpvYnMgdG8gcnVuIG9uDQo+PiByYWNrc3BhY2Ugc29s
-dmVzIHRoZSBwcm9ibGVtDQo+Pg0KPj4gc2VlIGh0dHBzOi8vZ2l0bGFiLmNvbS9zYW1iYS10ZWFt
-L2RldmVsL3NhbWJhL3BpcGVsaW5lcy85NDYwNDc5Mg0KPj4NCj4+IHNvLi4uDQo+Pg0KPj4gMXN0
-IGNhbiBhbnlvbmUgZW5saWdodGVuIG1lIGFzIHRvIHdoYXQgaXMgZGlmZmVyZW50IHdpdGggdGhl
-IHJhY2tzcGFjZQ0KPj4gcnVubmVycz8NCj4+IDJuZCBjYW4gd2UgYWdyZWUgdGhhdCBhZGRpbmcg
-dGhlIDIgbmV3IGpvYnMgaXMgdGhlIHNpbXBsZXN0IGFuZCBlYXNpZXN0DQo+PiB3YXkgZm9yd2Fy
-ZCwgb25jZSB1cHN0cmVhbSB0aGlzIHdpbGwgYWxsb3cgdXMgdG8gaXRlcmF0aXZlbHkgdGFja2xl
-IHRoZQ0KPj4gU01CMSBmYWlsaW5nIHRlc3RzDQo+Pg0KPj4gdGhhbmtzLA0KPj4NCj4+IE5vZWwN
-Cj4+DQo+Pg0KPj4gWzFdIE9uZSBwb3RlbnRpYWwgcHJvYmxlbSBpcyB0aGF0IHRoZSBkZWZhdWx0
-ICdtYWtlIHRlc3QnIGZyb20gc291cmNlDQo+PiB3aWxsIGZhaWwgYmVjYXVzZSBvZiB0aGUgbWl4
-IG9yIHh5eiAmIHh5el9zbWIxIGVudmlyb25tZW50cy4gSG93ZXZlcg0KPj4gwqAgKyBwZXJzb25h
-bGx5IEkgZG91YnQgdGhhdCAnbWFrZSB0ZXN0JyByZWxpYWJseSB3aWxsIHN1Y2NlZWQgYW55d2F5
-DQo+PiB0aGVzZSBkYXlzLCB3ZSBjZXJ0YWlubHkgZG9uJ3QgdGVzdCBhIGZ1bGwgbWFrZSB0ZXN0
-IGFueXdoZXJlIGFueW1vcmUsDQo+PiBpbW8gdGhlIG9ubHkgcmVsaWFibGUgd2F5IHRvIHJ1biB0
-ZXN0cyBpcyB2aWEgZ2l0bGFiIENJIChvciBhdXRvYnVpbGQpDQo+PiDCoCArIHdpdGggdGhlIHB5
-dGhvbjMgcG9ydCB0aGVyZSB3ZXJlIGpvYnMgdGhhdCB3ZXJlIGNvbXBsZXRlbHkNCj4+IHVucmVs
-aWFibGUgdW50aWwgdGhleSB3ZXJlIHNlcGFyYXRlZCBpbnRvIHB5dGhvbi9weXRob24tMyBqb2Jz
-LiBUaGVyZQ0KPj4gd2VyZSBjZXJ0YWlubHkgYSBudW1iZXIgb2YgdGVzdHMgdGhhdCBjb3VsZG4n
-dCBiZSBydW4gbXVsdGlwbGUgdGltZSBpbg0KPj4gdGhlIHNhbWUgZW52IChkdWUgdG8gZGVzdHJ1
-Y3RpdmUgbmF0dXJlIG9mIHRoZSB0ZXN0cykgc28gSSB0aGluayB3ZSBoYXZlDQo+PiBhbHJlYWR5
-IGRvbmUgdGhpcyBiZWZvcmUNCj4+DQo+Pg0K
+Hey Noel,
+
+thanks for all your hard work so far!
+
+I'll try to wrap my head around this next Monday, so we can chat Monday
+or Tuesday.
+
+If others are faster, feel free of course. :)
+
+Thanks!
+-slow
+
+On 11/22/19 4:27 PM, Noel Power wrote:
+> Hi Ralph & all
+> 
+> I really need help with
+> https://gitlab.com/samba-team/samba/merge_requests/902
+> 
+> Currently it is marked WIP as I hoped there could be some
+> discussion/agreement as to the approach outlined there. In summary this
+> merge request imo satisfies the general discussions we had about the
+> approach to providing a way to iteratively push ported smb1 tests into
+> the codebase. As mentioned I didn't have much luck trying to make the
+> '_smb1' test environments fully independent, in the end it seemed this
+> would probably require more work than it was worth (afterall in the end
+> we will get rid of the smb1 tests and associated envs).
+> 
+> With this in mind I only create 'shallow copies' of the test envs that
+> have tests that fail against the new default environments which don't
+> support negotiation of SMB1. I added 2 new CI jobs to run the tests that
+> only run in environments that can negotiate SMB1. This passes CI currently
+> 
+> I'd really like to get this (with whatever changes are needed) upstream
+> so we can start on the porting proper. David is currently starting to
+> try and port some of the base tests and I started going through the
+> skip_smb1_fail list we have to split tests that mix SMB1 & >= SMB2, fix
+> tests that should run against SMB2 but dont't etc.
+> 
+> I also wanted to go through the motions of porting a test, marking it as
+> ported/done etc. Ralph, you had the idea of using alias environments
+> '_done' that I liked so I created a new branch
+> 
+> https://gitlab.com/samba-team/devel/samba/commits/npower_smb1_with_porting
+> 
+> This branch also includes the changes from
+> https://gitlab.com/samba-team/samba/merge_requests/902, on top of those
+> changes it
+> 
+> * creates alias '_smb1_done' envs that a test can be moved to when
+> 'processed'
+> * fixes or splits tests that currently only run in a test env that can
+> negotiate SMB1
+>   e.g. where a test that mixes testing SMB1 & >=SMB2 protocols then the
+> test is modified so it can take a param to run either protocol, then
+> existing test is;
+>       a) modified to provide param to run SMB1 & test moved from '_smb1'
+> env to '_smb1_done' env
+>       b) copied & modified to provide a param to run >= SMB2 and test
+> now additionally runs against appropriate non '_smb1' env
+> 
+>   There are quite a few tests in the skip file that really are SMB1 only
+> tests,   in this case
+>       a) move the test from '_smb1' env to '_smb1_done' env
+> 
+>   In both cases the skip_smb1_fail file is updated with comments saying
+> the test
+>   has been processed
+> 
+> Currently ~70 tests have been 'processed' trivially in that branch. I
+> fear that the work there might be wasted (if the wrong approach is being
+> followed) so really it would be great to get this nailed down before
+> more complex changes happen
+> 
+> Noel
+> 
+> On 14/11/2019 12:12, Noel Power wrote:
+>> Just FYI
+>>
+>> I opened https://gitlab.com/samba-team/samba/merge_requests/902
+>>
+>> This branch is a return to the plan of just using some independent CI
+>> jobs to run the SMB1 tests (and tests failing in environments where SMB1
+>> can't be negotiated). These new jobs use simple 'shallow' copies of the
+>> existing environments.
+>>
+>> I returned to this approach due to the ever increasing amount of changes
+>> (and I admit failure) trying to create proper independent test
+>> environments (as described below)
+>>
+>> Maybe we can try with the approach outlined in the merge request and
+>> continue the discussion there. The sooner we have something in place
+>> upstream the sooner we can start chipping away at the tests :-)
+>>
+>> Noel
+>>
+>> On 08/11/2019 14:03, Noel Power via samba-technical wrote:
+>>> Hi All,
+>>>
+>>> On 06/11/2019 17:44, Andrew Bartlett via samba-technical wrote:
+>>>> On Fri, 2019-11-01 at 18:31 +0000, Noel Power via samba-technical
+>>>> wrote:
+>>>>> Hi All
+>>>>>
+>>>>> Just thought I summarize what we (myself & Ralph) discussed, for my own
+>>>>> benefit and the benefit of others.
+>>>> Thanks for writing this out.  I see in the rest of the thread that you
+>>>> have made some progress,
+>>> well yes and no :-)
+>>>
+>>> so, I did try and fix the ip uniqueness thing but...
+>>>
+>>> unique ips made some difference however there were more things, more
+>>> changes needed
+>>>
+>>> a) need to pass down a unique server name in order that the unique ip
+>>> can be created (there is a name -> interface_num hash)
+>>> b) but... we have alot of fake _smb1 envs and the number of interfaces
+>>> we have  breaks the current MAX_WRAPPED_INTERFACES limit, need to modify
+>>> this in third_party/socket_wrapper/socket_wrapper.c
+>>> c) missing certs for various tests which needed some new directories
+>>> (and content) setting up in various dirs under
+>>> selftest/manage-ca/CA-samba.example.com/DCs/
+>>> e) there is another problem, there is still interference between the
+>>> environments because an additional realm_to_ip_mappings where the realm
+>>> associated with the servername (and where the servername in turn is used
+>>> to get the ip address)
+>>> f) I then tried to use different realms with the smb1 environments who
+>>> should have entries in the table but this also was not enough, still
+>>> tests fail (I presume because lots of test data, database entries etc.
+>>> depend on the existing 'realms' used (this is speculation)
+>>>
+>>> So  CI still doesn't pass, at this point I just got too disheartened,
+>>> been going around in circles, don't know enough about the test setup (or
+>>> samba ad) to figure out (at least easily). I get the impression this is
+>>> a piece of string I could pull for a long time :-) and the only thing
+>>> that will be unravelled is my sanity
+>>>
+>>> The current errors with this approach can be seen here
+>>> https://gitlab.com/samba-team/devel/samba/pipelines/94064858
+>>>
+>>>>  but wanted to say that if you get really stuck
+>>>> again then I can certainly be of assistance. 
+>>> thanks, appreciated!!, I wonder would you think or agree that rather
+>>> than go down the rathole above that reverting to my backup plan which
+>>> just added 2 new smb1 jobs is a far easier route, we don't need the
+>>> runaway changes to the '_smb1' environments as above. ip uniqueness for
+>>> example should not be an issue as we run those tests in isolation in
+>>> their own CI job/container, these jobs/environments will go away when
+>>> SMB1 disappears anyway. Hopefully using such 'shallow' copy versions of
+>>> the environments isn't an issue or a stumbling block ? [1]
+>>>
+>>> But... there still remains the problem that in the last attempt a number
+>>> of tests were failing mysteriously in the new separate smb1 CI jobs. I
+>>> scratched my head on this, again I tried to reproduce the problems
+>>> locally, in docker and on sn-devel without success (everything passes
+>>> outside of CI). So, I returned to running just a single failing test on
+>>> CI (now with lots of DEBUG) and found for example that with the
+>>> samba3.unix.info2 test that immediately after creating a file with (0
+>>> bytes allocated) that STAT returns st_ex_blocks with a positive value.
+>>> Clearly this is something happening at the host os or filesystem level.
+>>> Comparing with passing tests in master the only difference is the
+>>> passing tests run on rackspace runners and with the failing case, the
+>>> tests run on shared runners. Changing the new smb1 jobs to run on
+>>> rackspace solves the problem
+>>>
+>>> see https://gitlab.com/samba-team/devel/samba/pipelines/94604792
+>>>
+>>> so...
+>>>
+>>> 1st can anyone enlighten me as to what is different with the rackspace
+>>> runners?
+>>> 2nd can we agree that adding the 2 new jobs is the simplest and easiest
+>>> way forward, once upstream this will allow us to iteratively tackle the
+>>> SMB1 failing tests
+>>>
+>>> thanks,
+>>>
+>>> Noel
+>>>
+>>>
+>>> [1] One potential problem is that the default 'make test' from source
+>>> will fail because of the mix or xyz & xyz_smb1 environments. However
+>>>   + personally I doubt that 'make test' reliably will succeed anyway
+>>> these days, we certainly don't test a full make test anywhere anymore,
+>>> imo the only reliable way to run tests is via gitlab CI (or autobuild)
+>>>   + with the python3 port there were jobs that were completely
+>>> unreliable until they were separated into python/python-3 jobs. There
+>>> were certainly a number of tests that couldn't be run multiple time in
+>>> the same env (due to destructive nature of the tests) so I think we have
+>>> already done this before
+>>>
+>>>
+
+
+-slow
+
+-- 
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
