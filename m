@@ -2,44 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 117C1105D09
-	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 00:07:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C1C9105E21
+	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 02:25:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=nP5rv5Kv6eqcgVK0vMpCEZWLIB7Mi/9qmDP+Nl73cJc=; b=UIM/iHEvXw83dTTySDekh39HxJ
-	hSd4NGpAPudcT9ZzYkLXqABPcOJ3lWWATwHdJR0PkpbSBk/IPYj3dvMArvhIOb0PDuvCZtDVztZtM
-	ok0cGtIUkaTQJar2W9dXJMFF17m3tdHoVxsnYaveSr4BKcK2jNWykgyiU9FEYDqLJ/271s/h4shCo
-	ptODpI3ageXcl5UMeYrTWRNM8tE/HN9m6mBQPAtCJJTf2DMGgV5pBFGdYIQkN7NAMMVtA+RguJPdo
-	c1WvbaOTpaielxZVQd2qDcwGjH/8PChSLV6pvg8QBDBBtJffpKR6x17rs/3Bdf+4H6ToVq0Gdmley
-	y1FNJTHA==;
-Received: from localhost ([::1]:45116 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=UU/sSdx7q6DcFfoR8pY7FOJ8qwhcZ9gLVXvbkTUksf8=; b=0+qQCyjOrXdNUu3Z5Gff4GhYUk
+	Bb9UCLXiJBkB932W5x8THyICeNlnDgws9kvJh2ihc7eebGtNLZ8C9aEdj0hyETOPlCuw50CyKlxhn
+	jSBJXVJgJ2cRweZECEaLOMaP4HNF9+ylce3AhEmDPHGucTjsS1j7sfw7d3u6f6qXdGsr9/x2OJoI+
+	ymlRR1qbDnC33AOWWb0xSMYAFiWRM8MwOxbwV+INvcAVybISAxp31WA4slSZP2LO+potSBW0j8FS9
+	8HYEqgNu2raef9sRGbj1QH9WSjnyb2m5a5uuCymlrLkZhjhybdMH3NL7goctRxysgB+szwMwHMFRh
+	XpohFddg==;
+Received: from localhost ([::1]:46694 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iXvXW-001yvy-UR; Thu, 21 Nov 2019 23:07:07 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17898) 
+	id 1iXxga-001zOb-OH; Fri, 22 Nov 2019 01:24:36 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60414) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iXvXS-001yvr-PM
- for samba-technical@lists.samba.org; Thu, 21 Nov 2019 23:07:04 +0000
+ (Exim) id 1iXxgV-001zOU-Q4
+ for samba-technical@lists.samba.org; Fri, 22 Nov 2019 01:24:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=nP5rv5Kv6eqcgVK0vMpCEZWLIB7Mi/9qmDP+Nl73cJc=; b=knYqt4Y86HuPkp5LxE3HuS4Rb5
- /stkxAHscn9whEtGsyQl22c0N6osELh3vusvI3lq7RqAQw2UxHtUTUWV2jFdQK1mul59YnwnCGoQ4
- Iu0bI+hMaPp/aFx0i87dk2RNYzQDMX0cGFuxcDuEYnN0d1KhV8UaAz1MA/p4gVH3JJTyMKxWKI0uC
- MDuOaQiZcoBPkNjoYlS/NYfyRprLdBsMsMJMIITIJMTRvX+liRDFaFotYKv/9venHvx4GRmN7K2DO
- jQ9jy0T+68a/GBgSjveDaMkX2rKZ/HwEbmCIL5DRs5cqSFOiwdO0s39lyHEsad7OzPJA9DFygv1kr
- V6HQDdy8jqTjgSQm0MXE9o4QSZXy+SLMgXK9g3QbXvgYZrCU0yxJ6uPmEaRUaSNFnrt2izaPoeNp1
- bTDmSwrXZn690+HeW4Wq5zi/bVkO8348wbvjIXZse5VQ/uHqSAJLIXx8csf8NXJ/AewfSeAo0PASD
- t2nQFU6qvyEWTfsi9jJ28xMC;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=UU/sSdx7q6DcFfoR8pY7FOJ8qwhcZ9gLVXvbkTUksf8=; b=RFF0agk/9a6iujWaIWmOwHqbgM
+ pHn8slUmIYsrrUU1NihWNAJAW2oXwdnEzNn7ZvFNngydmnNL62Bamn19iZOTtxHi1z+NsApBDkHr2
+ t6PWo5/htxnH2JsjFBjqmf9RcuL0V/6KsIJ+9kvPgzuj6QtFWjT27hq/lwH8QokrAvjFQJTOZl/4j
+ WHOl1f5wy8TWU+g+bylCovlcUShMPgYiIWaKKsNlXroJUALqTVtXBXvB399XO9UGyhlsUOLe/BDrZ
+ QMK9bf+VxO65XZcRhNTIQYyMOnJhzLY0XM7b+0xH9YHXZ4l0dh8skjIBvwoCgZEE6o5gGorRZjtW+
+ 3ygwCJ7CtM64brtltpHlyIiTzN8uCreGMZyqMIILZL+Vfn8xNT/Ft0XxDi9CG3rJTlA+zCFPxGqCS
+ FrbbqIeBFtyjMLB8I7va4MnzOVdfE4/wd1C02xqEEsJcnXA0ZgYoMUfCLify1SmPmDemR8Ms809iF
+ mtniStb7DdOt0CgsyL7Z6/Tl;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iXvXP-0007Hc-Nu; Thu, 21 Nov 2019 23:07:00 +0000
-Message-ID: <c982637749a9629cf45b2481242d809532cfe8c1.camel@samba.org>
-Subject: Re: building source3 subsystems and libs
-To: moore chestnut <moore.43132@gmail.com>
-Date: Fri, 22 Nov 2019 12:06:56 +1300
-In-Reply-To: <CAGYhc9nN1cf3KD52mJG0ROmNYXDGXuA7c-KML33W+Qec0jOkrw@mail.gmail.com>
-References: <CAGYhc9=AZmkOjHAGx7rWd=iM6h5BaVohym+oWMWqfNEfNtju3Q@mail.gmail.com>
- <20d3f005503d82862b0ba8856010ae7a8831d577.camel@samba.org>
- <CAGYhc9nN1cf3KD52mJG0ROmNYXDGXuA7c-KML33W+Qec0jOkrw@mail.gmail.com>
+ (Exim) id 1iXxgU-00083x-Ql
+ for samba-technical@lists.samba.org; Fri, 22 Nov 2019 01:24:31 +0000
+Message-ID: <712d8619cb2ce1dac1879ec7e7a9260bb88431ef.camel@samba.org>
+Subject: Today's fun fact:  Oldest build of Samba on modern Ubuntu 18.04:
+ autoconf removal!
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Fri, 22 Nov 2019 14:24:27 +1300
 Content-Type: text/plain; charset="UTF-8"
 X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
 Mime-Version: 1.0
@@ -59,87 +57,31 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Is there a reason why you first want to untangle our build system?
+Today's fun fact is that the oldest Samba version I could build (to
+test an AD DC thing) with --enable-selftest on Ubuntu 18.04 was
+d47c1245788505cfaca9a25c855a2503c83e4315 (I didn't finish the bisect,
+but this is close enough). 
 
-I would suggest first just creating a new binary, which links against
-whatever it needs to (and we have great helper libraries for the things
-you need for the below).
+In an interesting coincidence, this is essentially the point where the
+old autoconf build system was removed
+(cd4b413cb0574c459c1c24cf07f8d6b44f5fc077).  That probably means that
+if using autoconf you can go back earlier without breaking out the VMs
+or docker containers. 
 
-rpcclient has a samlogon command that does what you need, I would just
-cut that down.
+The command line (quite likely not minimal) I used was:
 
-But why not just use winbind via ntlm_auth or libwbclient?  That has
-everything setup and ready to go, manages the connection and
-everything. 
+ADDITIONAL_CFLAGS="-Wno-error -Wno-error=format-truncation -Wno-
+error=implicit-function-declaration" ./configure --enable-selftest '
+--with-shared-modules=!vfs_ceph' --disable-gnutls
 
-Perhaps it would help to explain your use case first.
+I removed libcephfs-dev to make it build (ceph has changed API since
+then). 
 
-Thanks!
+Andrew Bartlett
 
-Andrew Bartlett 
-
-On Thu, 2019-11-21 at 22:52 +0000, moore chestnut wrote:
-> Hello Andrew,
-> 
-> thank you for reply.
-> 
-> so would it be bad a idea to try hack a build together based on the
-> source files of msrpc3 and the deps?
-> 
-> essentially I would like to hack a client together to do dcerpc bind,
-> epm mapper request, followed by bind and schannel setup (
-> NetrServerReqChallenge and NetRServerReqAuthenticate3) followed by
-> bind and NetrLogonSamLogonWithFlags. 
-> 
-> Any suggestions on best approach?
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> On Thu, 21 Nov 2019 at 18:18, Andrew Bartlett <abartlet@samba.org>
-> wrote:
-> > On Thu, 2019-11-21 at 18:09 +0000, moore chestnut via samba-
-> > technical
-> > wrote:
-> > >   hello,
-> > > 
-> > > is there any way to individually build subsystems and libraries?
-> > > 
-> > > for example:
-> > > 
-> > > the msrpc3 library in  source3/wscript_build
-> > > bld.SAMBA3_LIBRARY('msrpc3',
-> > > 
-> > > or
-> > > bld.SAMBA3_SUBSYSTEM('samba3util',
-> > > 
-> > > when I try waf or waf msrpc3 in the source3 dir, it does not
-> > work.
-> > > 
-> > > currently trying on a 4.11.0 source tree.
-> > > 
-> > > I have read through the https://wiki.samba.org/index.php/Waf
-> > > and tried the samples with no success.
-> > > 
-> > > Does this work for source3 libs/subsystems?
-> > 
-> > No, you can't really build bits of Samba in general.  Some binary
-> > targets can be specified with the --targets option, and a few of
-> > these
-> > work correctly, nothing beyond that has been tested.  So where it
-> > works
-> > it works, but nobody is really working to have this be a general
-> > feature.
-> > 
-> > Andrew Bartlett
-> > 
 -- 
 Andrew Bartlett
 https://samba.org/~abartlet/
