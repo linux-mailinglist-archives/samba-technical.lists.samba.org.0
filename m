@@ -2,66 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63F4E107507
-	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 16:39:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DDAF10757E
+	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 17:12:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=PGUl0rkDuDy8HZssVvTilHAeKyMDGMYSXdM+6YJN00Q=; b=T3GK4IiaaOiY/PvadY4ddwMpHE
-	SG3vLBk2jfBtcToFZF/Dy2eBWNWrDQAtKvHAmPni6oZ9VxrIHReD5ijT9QPS+eIE63rA79PfhphBz
-	H9ZYUQ0wl87nKeZVHUAhGk/bI5s7jaq0otcurxfOcrxGpI+Ox+g4sqk8BH+87xaG0AgaAj8dB5/Zp
-	P9pxnnxxhF3MLiaX/4FDjwXCdHOPGSTFpOR6Ebb3LPQh9M9PBO44KvNbFU6SWOM55Lz1WM6XOSCWa
-	WTd5KDR7a0sah119KDNeY8lSYtosIppJ0C8vLw9auDhqlHyiS7fbgEx+RCtSianDBnXkvjyZaq1tC
-	OV5dpcfQ==;
-Received: from localhost ([::1]:37646 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=+XmDb+SdYiP6F5fK30eqBF9S1Stw4yE3H01vLKNFjL8=; b=SY4Gm3yXSUbr2cqitGA3hfkVBc
+	9+CpQkxAsJ7ohxOKAsUBgy4kQvmcCKZ/Ca22dVm+JGyVmSBsK9EXnRhBEKaEnFWuZLc3ZUtEvDBn+
+	5DYyjXihM+DkmrK9Xt9dSSs6f+eRllMGHOmX8ACjmC5hgm/8AH5WH3u5P6t9xuWQ7x613c7QVvNYa
+	QxtWKtVdWmNON1C33gTkOL4IBRS4K9O+OxXg0VSkZj9jGcTfyJd0/do6O+PKu28DUi2xKi/pWapdE
+	EpnnzPVuu0ltNgTe5QJxLB44TgSvk+m02KYsmARs7Xaf6CPh6QZyvKzHQwKo5jJ4hSwvOOkZjyZwZ
+	TlAT9/OA==;
+Received: from localhost ([::1]:41616 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iYB1L-0026AH-Ds; Fri, 22 Nov 2019 15:38:55 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43186) 
+	id 1iYBXS-0026mg-Al; Fri, 22 Nov 2019 16:12:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56674) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iYB1G-0026AA-Ak
- for samba-technical@lists.samba.org; Fri, 22 Nov 2019 15:38:52 +0000
+ (Exim) id 1iYBXK-0026mH-9v; Fri, 22 Nov 2019 16:12:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=PGUl0rkDuDy8HZssVvTilHAeKyMDGMYSXdM+6YJN00Q=; b=uR9cCMp4pUX6N+UU9J2x+hlstq
- A8S0NWa8VhDK0UlJfH8TSmDIJGaKg2aI9lLEX3NbNLbqsZSY9i/XPqa2YFnzU2AShiTHeXiA4U6iN
- IJ876Nvb2++J2Hq629rV5TxzibkAapC9MZiBCI+oEocOv+ntZgFjYfuMdJE72CaEY9rGUTmT2nOVC
- 9ALHmts+Z19iLwWjQ4UWDM4AfoCyK1upXZVtqSDrhz4AhKyEXayMcgHJEfXM7w84y2nALlWAXjTeF
- goq69Ag553j5Cjrw9kh1NeBYS7GYOF0XfWeXil6O0/XEC0I48HycZrQu5cueR0e5z35LGuU2hgXEi
- AFaexvAS/ysQ7OULJXsO+D1M647BFmZB5W1sZNs/werpxdapA005Lzsz3HqCHxNmRwXKs3XumaA1b
- nGkRVuG33t1MDCMeB3ww4XKcv5j7gx32rT6dB0Ol2kKcTG7W4yHvZAblo6KYwA0lF22Si8GcZkqlr
- 6sRe9IJ+Ri2BFTswMlNPdXS9;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=+XmDb+SdYiP6F5fK30eqBF9S1Stw4yE3H01vLKNFjL8=; b=MFVRvi0uh7+C0+O0w5GW9uSRyO
+ +As8VAdoke4Gr59ELIPTAMSym2tajHvvPwZV6NDG/ukn3485wBmMC/NQ1dQDpgKKgy/CbuQKehCgo
+ Ghwx0ZYcvWlTl5nwOlpMUybkNE2EvVzgpjS4c+iR0s3Iwdw7uxxubHS7e4LRU+VvtigRRL4e5g2AA
+ 4/uBAnCZM8E+v/cLc6Wwtpkz3tDn26NAJtfUQyixFPc+pIcebzhFW1TvCP/AigyRSeodFSf65kbM5
+ A3iOX1T4T2vNbFSeo7vARt5cdD9P7R8cmbTqhD24lwpxi1v/BmpdiYvQuTwtkYbzoGBkqeM+HGbXB
+ WUY17HeA+gTrd7S/RQ6woQoloDx/YvQ1WKow6xqr4kHkvhIK4RPQmbGdqNiTRApulXJacv0Zmpva6
+ YUMTfQ4uNxb82OuLl2JiYQJ2Tlx5chIGvDiHAd4yvSlR0a01JRrC9qT0rT7FAC/p3zs0e9Vf+Tmgb
+ 3jHIZdSwi8RayrqPpl/GHJ1B;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iYB1E-0005kk-Q4; Fri, 22 Nov 2019 15:38:49 +0000
-Subject: Re: Converting SMB1 tests to SMB2
-To: Noel Power <NoPower@suse.com>, Andrew Bartlett <abartlet@samba.org>,
- npower <npower@samba.org>
-References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
- <be6770e5-5bf0-4665-4a88-3e4182e4c82e@samba.org>
- <0981db46-93bf-f153-c98f-15d5cf404353@suse.com>
- <ed7eb92f-46a7-758e-f3b5-185d71b8b98a@samba.org>
- <002434db-63ef-edad-d091-76e3efe783d1@samba.org>
- <15dfbaf6-c774-debe-b61e-c3ef4e7f9727@samba.org>
- <d9625941-c85a-a686-2162-30c80a2e84b3@samba.org>
- <fa464ebe-cfe7-1d6e-7435-c896e2cc188e@samba.org>
- <f479113c-7a74-8259-823e-4ae1c4a713c6@samba.org>
- <47fef5d6-7fb6-b054-a8c5-7a28b63e97c8@samba.org>
- <9cc9d402-57fb-3568-29e6-12284d6ccd98@samba.org>
- <f5970612-2998-cef1-dcca-40188c7a176f@suse.de>
- <361f5a38-66fb-e18c-7858-c5db6e93424e@samba.org>
- <dc95f81c-90ba-a368-9b3e-ccdcf067edaa@suse.com>
- <c25ed441eedb2a864429c0154859f2afe95f38cb.camel@samba.org>
- <f3fcbb1f-a25c-f7cb-4023-fdef68e208a8@suse.com>
- <a146e395-f9ca-12d0-2cab-ca52e8209706@suse.com>
- <f7229830-b844-a509-ed31-9707e0101666@suse.com>
-Message-ID: <fc8ebc97-7cca-3274-2f1a-712052b8d5c8@samba.org>
-Date: Fri, 22 Nov 2019 16:38:46 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1iYBXJ-00064x-UH; Fri, 22 Nov 2019 16:11:58 +0000
+To: <samba-technical@lists.samba.org>
+References: <ce8839fe-733e-7a9f-8e49-f0f57342f85b@openevents.fr>
+ <f20d25c7-27e6-cb6f-e516-3b298680f764@openevents.fr>
+In-Reply-To: <f20d25c7-27e6-cb6f-e516-3b298680f764@openevents.fr>
+Subject: RE: [Samba] Samba4 - Printer Drivers install fails
+Date: Fri, 22 Nov 2019 17:11:57 +0100
+Message-ID: <A61204F588614AE58D018A1745988FD8@rotterdam.bazuin.nl>
 MIME-Version: 1.0
-In-Reply-To: <f7229830-b844-a509-ed31-9707e0101666@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Office Outlook 11
+X-MimeOLE: Produced By Microsoft MimeOLE
+Thread-Index: AdWhT5BrqNj/37YcQ0CPNBSe8ocJGQ==
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,211 +58,326 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: David Mulder <david.mulder@suse.com>,
- samba-technical <samba-technical@lists.samba.org>
+From: "L. van Belle via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: belle@samba.org
+Cc: samba@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hey Noel,
+Hai guys,=20
 
-thanks for all your hard work so far!
+Update:=20
+I've just tested an upload of this driver with the printer manager in
+windows. ( W7-x64 in this case )=20
 
-I'll try to wrap my head around this next Monday, so we can chat Monday
-or Tuesday.
+impxeroxc405=A0=A0=A0 =A0=A0=A0 imprimante Xerox Versalink c405=20
+To be exact : VersaLink_C400_5.658.3.0_PCL6_x64=20
+https://www.support.xerox.com/support/versalink-c405/file-download/enus.h=
+tml
+?operatingSystem=3Dwin10x64&fileLanguage=3Den&contentId=3D144414&from=3Dd=
+ownloads&vi
+ewArchived=3Dfalse
+Which are Model 3 drivers as far i can tell. On my now 4.11.2 print =
+server,
+it also gave an error.=20
+Error code in windows : 0x0000023f  Then error, 0x00000578=20
 
-If others are faster, feel free of course. :)
+Im Monday in the proces that i must upgrade some of my printer drivers =
+due
+to a found bug in a kyocera driver.
+Which makes a pdf print disapeer .. And not being printed.=20
+I'll write notes of the steps i'll do, and i hope we can find fix for =
+it.=20
 
-Thanks!
--slow
+@Samba Devs.=20
+i suspect this is something with signed/not signed SMB1/2/3 things.=20
 
-On 11/22/19 4:27 PM, Noel Power wrote:
-> Hi Ralph & all
-> 
-> I really need help with
-> https://gitlab.com/samba-team/samba/merge_requests/902
-> 
-> Currently it is marked WIP as I hoped there could be some
-> discussion/agreement as to the approach outlined there. In summary this
-> merge request imo satisfies the general discussions we had about the
-> approach to providing a way to iteratively push ported smb1 tests into
-> the codebase. As mentioned I didn't have much luck trying to make the
-> '_smb1' test environments fully independent, in the end it seemed this
-> would probably require more work than it was worth (afterall in the end
-> we will get rid of the smb1 tests and associated envs).
-> 
-> With this in mind I only create 'shallow copies' of the test envs that
-> have tests that fail against the new default environments which don't
-> support negotiation of SMB1. I added 2 new CI jobs to run the tests that
-> only run in environments that can negotiate SMB1. This passes CI currently
-> 
-> I'd really like to get this (with whatever changes are needed) upstream
-> so we can start on the porting proper. David is currently starting to
-> try and port some of the base tests and I started going through the
-> skip_smb1_fail list we have to split tests that mix SMB1 & >= SMB2, fix
-> tests that should run against SMB2 but dont't etc.
-> 
-> I also wanted to go through the motions of porting a test, marking it as
-> ported/done etc. Ralph, you had the idea of using alias environments
-> '_done' that I liked so I created a new branch
-> 
-> https://gitlab.com/samba-team/devel/samba/commits/npower_smb1_with_porting
-> 
-> This branch also includes the changes from
-> https://gitlab.com/samba-team/samba/merge_requests/902, on top of those
-> changes it
-> 
-> * creates alias '_smb1_done' envs that a test can be moved to when
-> 'processed'
-> * fixes or splits tests that currently only run in a test env that can
-> negotiate SMB1
->   e.g. where a test that mixes testing SMB1 & >=SMB2 protocols then the
-> test is modified so it can take a param to run either protocol, then
-> existing test is;
->       a) modified to provide param to run SMB1 & test moved from '_smb1'
-> env to '_smb1_done' env
->       b) copied & modified to provide a param to run >= SMB2 and test
-> now additionally runs against appropriate non '_smb1' env
-> 
->   There are quite a few tests in the skip file that really are SMB1 only
-> tests,   in this case
->       a) move the test from '_smb1' env to '_smb1_done' env
-> 
->   In both cases the skip_smb1_fail file is updated with comments saying
-> the test
->   has been processed
-> 
-> Currently ~70 tests have been 'processed' trivially in that branch. I
-> fear that the work there might be wasted (if the wrong approach is being
-> followed) so really it would be great to get this nailed down before
-> more complex changes happen
-> 
-> Noel
-> 
-> On 14/11/2019 12:12, Noel Power wrote:
->> Just FYI
->>
->> I opened https://gitlab.com/samba-team/samba/merge_requests/902
->>
->> This branch is a return to the plan of just using some independent CI
->> jobs to run the SMB1 tests (and tests failing in environments where SMB1
->> can't be negotiated). These new jobs use simple 'shallow' copies of the
->> existing environments.
->>
->> I returned to this approach due to the ever increasing amount of changes
->> (and I admit failure) trying to create proper independent test
->> environments (as described below)
->>
->> Maybe we can try with the approach outlined in the merge request and
->> continue the discussion there. The sooner we have something in place
->> upstream the sooner we can start chipping away at the tests :-)
->>
->> Noel
->>
->> On 08/11/2019 14:03, Noel Power via samba-technical wrote:
->>> Hi All,
->>>
->>> On 06/11/2019 17:44, Andrew Bartlett via samba-technical wrote:
->>>> On Fri, 2019-11-01 at 18:31 +0000, Noel Power via samba-technical
->>>> wrote:
->>>>> Hi All
->>>>>
->>>>> Just thought I summarize what we (myself & Ralph) discussed, for my own
->>>>> benefit and the benefit of others.
->>>> Thanks for writing this out.  I see in the rest of the thread that you
->>>> have made some progress,
->>> well yes and no :-)
->>>
->>> so, I did try and fix the ip uniqueness thing but...
->>>
->>> unique ips made some difference however there were more things, more
->>> changes needed
->>>
->>> a) need to pass down a unique server name in order that the unique ip
->>> can be created (there is a name -> interface_num hash)
->>> b) but... we have alot of fake _smb1 envs and the number of interfaces
->>> we have  breaks the current MAX_WRAPPED_INTERFACES limit, need to modify
->>> this in third_party/socket_wrapper/socket_wrapper.c
->>> c) missing certs for various tests which needed some new directories
->>> (and content) setting up in various dirs under
->>> selftest/manage-ca/CA-samba.example.com/DCs/
->>> e) there is another problem, there is still interference between the
->>> environments because an additional realm_to_ip_mappings where the realm
->>> associated with the servername (and where the servername in turn is used
->>> to get the ip address)
->>> f) I then tried to use different realms with the smb1 environments who
->>> should have entries in the table but this also was not enough, still
->>> tests fail (I presume because lots of test data, database entries etc.
->>> depend on the existing 'realms' used (this is speculation)
->>>
->>> So  CI still doesn't pass, at this point I just got too disheartened,
->>> been going around in circles, don't know enough about the test setup (or
->>> samba ad) to figure out (at least easily). I get the impression this is
->>> a piece of string I could pull for a long time :-) and the only thing
->>> that will be unravelled is my sanity
->>>
->>> The current errors with this approach can be seen here
->>> https://gitlab.com/samba-team/devel/samba/pipelines/94064858
->>>
->>>>  but wanted to say that if you get really stuck
->>>> again then I can certainly be of assistance. 
->>> thanks, appreciated!!, I wonder would you think or agree that rather
->>> than go down the rathole above that reverting to my backup plan which
->>> just added 2 new smb1 jobs is a far easier route, we don't need the
->>> runaway changes to the '_smb1' environments as above. ip uniqueness for
->>> example should not be an issue as we run those tests in isolation in
->>> their own CI job/container, these jobs/environments will go away when
->>> SMB1 disappears anyway. Hopefully using such 'shallow' copy versions of
->>> the environments isn't an issue or a stumbling block ? [1]
->>>
->>> But... there still remains the problem that in the last attempt a number
->>> of tests were failing mysteriously in the new separate smb1 CI jobs. I
->>> scratched my head on this, again I tried to reproduce the problems
->>> locally, in docker and on sn-devel without success (everything passes
->>> outside of CI). So, I returned to running just a single failing test on
->>> CI (now with lots of DEBUG) and found for example that with the
->>> samba3.unix.info2 test that immediately after creating a file with (0
->>> bytes allocated) that STAT returns st_ex_blocks with a positive value.
->>> Clearly this is something happening at the host os or filesystem level.
->>> Comparing with passing tests in master the only difference is the
->>> passing tests run on rackspace runners and with the failing case, the
->>> tests run on shared runners. Changing the new smb1 jobs to run on
->>> rackspace solves the problem
->>>
->>> see https://gitlab.com/samba-team/devel/samba/pipelines/94604792
->>>
->>> so...
->>>
->>> 1st can anyone enlighten me as to what is different with the rackspace
->>> runners?
->>> 2nd can we agree that adding the 2 new jobs is the simplest and easiest
->>> way forward, once upstream this will allow us to iteratively tackle the
->>> SMB1 failing tests
->>>
->>> thanks,
->>>
->>> Noel
->>>
->>>
->>> [1] One potential problem is that the default 'make test' from source
->>> will fail because of the mix or xyz & xyz_smb1 environments. However
->>>   + personally I doubt that 'make test' reliably will succeed anyway
->>> these days, we certainly don't test a full make test anywhere anymore,
->>> imo the only reliable way to run tests is via gitlab CI (or autobuild)
->>>   + with the python3 port there were jobs that were completely
->>> unreliable until they were separated into python/python-3 jobs. There
->>> were certainly a number of tests that couldn't be run multiple time in
->>> the same env (due to destructive nature of the tests) so I think we have
->>> already done this before
->>>
->>>
+It might be related/looks like:
+https://bugzilla.samba.org/show_bug.cgi?id=3D13093=20
+
+In addition to Julien logs below, i found these messages in daemon.log=20
+
+Nov 21 17:08:03 print1 smbd[707]: [2019/11/21 17:08:03.080421,  0]=20
+=09
+../../source3/printing/nt_printing.c:1462(move_driver_file_to_download_ar=
+ea)
+Nov 21 17:08:03 print1 smbd[707]:   move_driver_file_to_download_area:
+Unable to rename=20
+     =
+[x64/{004398AB-A497-4700-90FD-59AD7F57D78E}/install_nbomx_xl_noredist]=20
+  to [x64/3/Install_NBOMX_XL_NoRedist]: NT_STATUS_OBJECT_NAME_NOT_FOUND
+
+Nov 21 17:08:03 print1 smbd[707]: [2019/11/21 17:08:03.080582,  0]
+../../source3/rpc_server/spoolss/srv_spoolss_nt.c:8621(_spoolss_AddPrinte=
+rDr
+iverEx)
+Nov 21 17:08:03 print1 smbd[707]:   _spoolss_AddPrinterDriverEx:
+move_driver_to_download_area failed - WERR_APP_INIT_FAILURE
+
+And this links back to :  =
+https://bugzilla.samba.org/show_bug.cgi?id=3D13395 =20
+
+Currently, we are unable to upload new drivers with the windows tools.=20
+I have not tried the commandline options yet, thats for Monday.=20
+
+So if one has ideas, of patches to test, let me know i'll test them.=20
+
+I also notice that MS had a "Point and Print Compatible driver" changes,
+maybe this interfere..=20
+
+The print server settings im using for completeness..
+
+Normal Samba Member, backend AD.=20
+SePrivileges checked and set.=20
+verified with :
+https://wiki.samba.org/index.php/Setting_up_Automatic_Printer_Driver_Down=
+loa
+ds_for_Windows_Clients=20
+
+##### PRINT SERVER PART #######
+    #enable asu support =3D yes
+
+    ## Enabling spoolssd
+    rpc_server:spoolss =3D external
+    rpc_daemon:spoolssd =3D fork
+    spoolss:architecture =3D Windows x64
+    spoolssd:prefork_min_children =3D 5           # Minimum number of =
+child
+processes
+    spoolssd:prefork_max_children =3D 25          # Maximum number of =
+child
+processes
+    spoolssd:prefork_spawn_rate =3D 5             # Start (fork) x new =
+childs
+if one connection comes in (up to prefork_max_children)
+    spoolssd:prefork_max_allowed_clients =3D 100  # Number of clients, a =
+child
+process should be responsible for
+    spoolssd:prefork_child_min_life =3D 60        # Minimum lifetime of =
+a
+child process (60 seconds
+                                                # is the minimum, even a
+lower value has been configured)
+    load printers =3D yes
+
+# Windows clients look for this share name as a source of downloadable
+# printer drivers
+[print$]
+   comment =3D Printer Drivers
+   path =3D /home/samba/printing/drivers
+   acl_xattr:ignore system acl =3D yes
+   browseable =3D yes
+   writable =3D yes
+   guest ok =3D no
+# Uncomment to allow remote administration of Windows print drivers.
+# You may need to replace 'lpadmin' with the name of the group your
+# admin users are members of.
+# Please note that you also need to set appropriate Unix permissions
+# to the drivers directory for these users to have write rights in it
+   write list =3D root, administrator, @"Domain Admins", @lpadmin, =
+@"Print
+Operators"
+
+[printers]
+   comment =3D All Printers
+   path =3D /home/samba/printing/spool
+   acl_xattr:ignore system acl =3D yes
+   browseable =3D yes
+   printable =3D yes
+   printing =3D CUPS
 
 
--slow
 
--- 
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+WEEKEND... !  :-)=20
+
+Have a great weekend guys..=20
+
+Greetz,=20
+
+Louis
+
+
+
+
+
+
+> -----Oorspronkelijk bericht-----
+> Van: samba [mailto:samba-bounces@lists.samba.org] Namens=20
+> Julien TEHERY via samba
+> Verzonden: vrijdag 22 november 2019 15:15
+> Aan: samba@lists.samba.org
+> Onderwerp: Re: [Samba] Samba4 - Printer Drivers install fails
+>=20
+>=20
+> > FYI,
+> >
+> > I finally succeeded too upload one of the 3 drivers that=20
+> had problems.
+> >
+> > I didi it with another user (not=A0 with administrator) which=20
+> is member=20
+> > of domain admins.
+> >
+> > I deleted it and tried so many times again to upload it anf=20
+> it failed=20
+> > with the same error.
+> >
+> > So we're in a process where sometimes it's working=20
+> sometimes not and=20
+> > you won't know why.
+> >
+> >
+> > I'm still investigating, upgraded loglevel and saw this :
+> >
+> >
+> > 2019/11/22 14:31:04.146325,=A0 1]=20
+> >=20
+> ../source3/printing/printer_list.c:234(printer_list_get_last_refresh)
+> > =A0 Failed to fetch record!
+> > [2019/11/22 14:31:25.108720,=A0 2]=20
+> > ../source3/printing/spoolssd.c:459(spoolss_handle_client)
+> > =A0 Spoolss preforked child 11201 got client connection!
+> > [2019/11/22 14:31:25.112839,=A0 3]=20
+> > ../source3/rpc_server/srv_pipe.c:748(api_pipe_bind_req)
+> > =A0 api_pipe_bind_req: spoolss -> spoolss rpc service
+> > [2019/11/22 14:31:25.112897,=A0 3]=20
+> > ../source3/rpc_server/srv_pipe.c:356(check_bind_req)
+> > =A0 check_bind_req for spoolss context_id=3D0
+> > [2019/11/22 14:31:25.112936,=A0 3]=20
+> > ../source3/rpc_server/srv_pipe.c:399(check_bind_req)
+> > =A0 check_bind_req: spoolss -> spoolss rpc service
+> > [2019/11/22 14:31:25.114898,=A0 3]=20
+> > ../source3/rpc_server/srv_pipe.c:1528(api_rpcTNP)
+> > =A0 api_rpcTNP: rpc command: SPOOLSS_ADDPRINTERDRIVEREX
+> > [2019/11/22 14:31:25.115252,=A0 3]=20
+> > ../source3/smbd/vfs.c:113(vfs_init_default)
+> > =A0 Initialising default vfs hooks
+> > [2019/11/22 14:31:25.115302,=A0 3]=20
+> > ../source3/smbd/vfs.c:139(vfs_init_custom)
+> > =A0 Initialising custom vfs hooks from [/[Default VFS]/]
+> > [2019/11/22 14:31:25.115329,=A0 3]=20
+> > ../source3/smbd/vfs.c:139(vfs_init_custom)
+> > =A0 Initialising custom vfs hooks from [acl_xattr]
+> > [2019/11/22 14:31:25.121499,=A0 3]=20
+> > ../lib/util/modules.c:167(load_module_absolute_path)
+> > =A0 load_module_absolute_path: Module=20
+> > '/usr/lib/x86_64-linux-gnu/samba/vfs/acl_xattr.so' loaded
+> > [2019/11/22 14:31:25.121567,=A0 2]=20
+> > ../source3/modules/vfs_acl_xattr.c:236(connect_acl_xattr)
+> > =A0 connect_acl_xattr: setting 'inherit acls =3D true' 'dos filemode =
+=3D=20
+> > true' and 'force unknown acl user =3D true' for service print$
+> > [2019/11/22 14:31:25.121861,=A0 3]=20
+> > ../source3/lib/util.c:313(unix_clean_name)
+> > =A0 unix_clean_name [x64/3]
+> > [2019/11/22 14:31:25.121920,=A0 2]=20
+> > ../source3/smbd/open.c:3987(open_directory)
+> > =A0 open_directory: unable to create x64/3. Error was=20
+> > NT_STATUS_OBJECT_NAME_COLLISION
+> > [2019/11/22 14:31:25.121995,=A0 3]=20
+> > ../source3/lib/util.c:313(unix_clean_name)
+> > =A0 unix_clean_name [x64/3/DriverInstall_Pre_Vista_1]
+> > [2019/11/22 14:31:25.122250,=A0 3]=20
+> > ../source3/lib/util.c:313(unix_clean_name)
+> > =A0 unix_clean_name=20
+> >=20
+> [x64/{B764A331-6585-4FE6-8C6E-965E027AC30C}/DriverInstall_Pre_Vista_1]
+> > [2019/11/22 14:31:25.122414,=A0 0]=20
+> >=20
+> ../source3/printing/nt_printing.c:1145(move_driver_file_to_dow
+> nload_area)
+> > =A0 move_driver_file_to_download_area: Unable to rename=20
+> >=20
+> [x64/{B764A331-6585-4FE6-8C6E-965E027AC30C}/driverinstall_pre_
+> vista_1]=20
+> > to [x64/3/DriverInstall_Pre_Vista_1]:=20
+> NT_STATUS_OBJECT_NAME_NOT_FOUND
+> > [2019/11/22 14:31:25.124344,=A0 0]=20
+> >=20
+> ../source3/rpc_server/spoolss/srv_spoolss_nt.c:8612(_spoolss_A
+> ddPrinterDriverEx)
+> > =A0 _spoolss_AddPrinterDriverEx: move_driver_to_download_area=20
+> failed -=20
+> > WERR_ACCESS_DENIED
+> > [2019/11/22 14:31:25.126246,=A0 2]=20
+> > ../source3/rpc_server/rpc_server.c:534(named_pipe_packet_process)
+> > =A0 Fatal error(NT_STATUS_CONNECTION_DISCONNECTED). Terminating=20
+> > client(172.17.172.10) connection!
+> >
+> >
+> >
+> > It seems that it tries to recreate /var/lib/samba/printers/x64/3=20
+> > although it allready exists
+>=20
+> Doing this in CLI via rpclient does exactly the same thing:
+>=20
+>=20
+>=20
+> rpcclient $>=A0 adddriver "Windows x64"=20
+> xrxC8030:cupsdrvr.dll:xrxC8030.ppd:cupsui.dll:cups.hlp:NULL:RAW:NULL"
+> result was WERR_ACCESS_DENIED
+>=20
+>=20
+> =3D=3D> log.spoolssd.9 <=3D=3D
+> [2019/11/22 15:00:55.917157,=A0 3]=20
+> ../source3/rpc_server/srv_pipe.c:1528(api_rpcTNP)
+>  =A0 api_rpcTNP: rpc command: SPOOLSS_ADDPRINTERDRIVER
+> [2019/11/22 15:00:55.917634,=A0 3]=20
+> ../source3/smbd/vfs.c:113(vfs_init_default)
+>  =A0 Initialising default vfs hooks
+> [2019/11/22 15:00:55.917776,=A0 3]=20
+> ../source3/smbd/vfs.c:139(vfs_init_custom)
+>  =A0 Initialising custom vfs hooks from [/[Default VFS]/]
+> [2019/11/22 15:00:55.917960,=A0 3]=20
+> ../source3/smbd/vfs.c:139(vfs_init_custom)
+>  =A0 Initialising custom vfs hooks from [acl_xattr]
+> [2019/11/22 15:00:55.918310,=A0 2]=20
+> ../source3/modules/vfs_acl_xattr.c:236(connect_acl_xattr)
+>  =A0 connect_acl_xattr: setting 'inherit acls =3D true' 'dos filemode =
+=3D=20
+> true' and 'force unknown acl user =3D true' for service print$
+> [2019/11/22 15:00:55.918743,=A0 3]=20
+> ../source3/lib/util.c:313(unix_clean_name)
+>  =A0 unix_clean_name [x64/3]
+> [2019/11/22 15:00:55.918971,=A0 2]=20
+> ../source3/smbd/open.c:3987(open_directory)
+>  =A0 open_directory: unable to create x64/3. Error was=20
+> NT_STATUS_OBJECT_NAME_COLLISION
+> [2019/11/22 15:00:55.919133,=A0 3]=20
+> ../source3/lib/util.c:313(unix_clean_name)
+>  =A0 unix_clean_name [x64/3/cupsdrvr.dll]
+> [2019/11/22 15:00:55.919462,=A0 3]=20
+> ../source3/lib/util.c:313(unix_clean_name)
+>  =A0 unix_clean_name [x64/cupsdrvr.dll]
+> [2019/11/22 15:00:55.919717,=A0 0]=20
+> ../source3/printing/nt_printing.c:1145(move_driver_file_to_dow
+> nload_area)
+>  =A0 move_driver_file_to_download_area: Unable to rename=20
+> [x64/cupsdrvr.dll] to [x64/3/cupsdrvr.dll]:=20
+> NT_STATUS_OBJECT_NAME_NOT_FOUND
+> [2019/11/22 15:00:55.920019,=A0 0]=20
+> ../source3/rpc_server/spoolss/srv_spoolss_nt.c:8612(_spoolss_A
+> ddPrinterDriverEx)
+>  =A0 _spoolss_AddPrinterDriverEx: move_driver_to_download_area failed =
+-=20
+> WERR_ACCESS_DENIED
+>=20
+>=20
+> It seems you allready=A0 had exactly this problem:=20
+> https://lists.samba.org/archive/samba/2019-April/222366.html
+>=20
+> I thought it would be possible to do it direclyt from CLI/rpcclient
+>=20
+> Do you know if there is any other way to make those drivers=20
+> work even if=20
+> we can't upload them through MMC ?
+>=20
+>=20
+>=20
+> --=20
+> To unsubscribe from this list go to the following URL and read the
+> instructions:  https://lists.samba.org/mailman/options/samba
+>=20
+>=20
+
 
