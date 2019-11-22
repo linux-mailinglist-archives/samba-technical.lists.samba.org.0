@@ -2,48 +2,105 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6598D107417
-	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 15:33:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 286571074DB
+	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 16:29:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=nuOxQxbtgfIEJq5gXUDAOWZCD29as+MDdreL5wIrkK0=; b=EpJuJP8Yfxu1QN2LLzrLlIo24Y
-	23nPENDcn7eGUS3KfWLBOIsBY3hkUsZNu0KV008w+1hdrUeRZCsuZ3bajlj4cwq4NOAJhI4JmmMFF
-	/eF8EdQkyujQah8vMg9VuhEUGnDybLl5FXBgFIUFh+7sbvWY06PcszesYTT203OLndUQ4CcjWQ930
-	R9VvxZhlMCI96zw5xDr2W43rxL0m7IAwTMu33RcufHWTe68icktwxhtcIbzeW9uJCp/6VypDlAROQ
-	86r44ZV8poMfltBHH//9YrW22YMsa/xIu3pOtTc87uEcl/kC46l0df6NJQ64+xtoW6NEFop2KQ9M4
-	YeTQEJrQ==;
-Received: from localhost ([::1]:30454 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=blVUaDBfZNi+jPcLDZBNlohP4YEJtGbm7pBCFPvBQa0=; b=cjWD3f8/o7xRIVHAqQKOjViduX
+	0F7dHsrzC+SYEk/TZV1ghZfNIRO0+P+wdxgfGxDBX91xvjdRU9lm+85/Chp1cqwSlAFgUoXyaf9PC
+	OynjMdUnqJPYWpYvuofU6RV2DMsiK7VoGqmhwfxNVMGySdnxXCJ+6O2iXY2uOvqgPxQ8iDgLN+r/p
+	ARLV64kPjUsIBedUAk3G7jHlPb22FdLs4HQxZV1vO7truTxAF5UGTs3ZGwh3wYWGg9iect5hrE1eY
+	ybshe93CD23yTDaGUo/DiDWhEC4lIMGWArRMtpQA69jMJuU75jsntbMXy5sbfOA8wQD4vTf87TKZb
+	xmQr88sQ==;
+Received: from localhost ([::1]:33436 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iY9zu-00256j-7J; Fri, 22 Nov 2019 14:33:22 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14500) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iY9zp-00256c-8B
- for samba-technical@lists.samba.org; Fri, 22 Nov 2019 14:33:19 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:To:From:CC;
- bh=nuOxQxbtgfIEJq5gXUDAOWZCD29as+MDdreL5wIrkK0=; b=WFmKcT3TkruYI6bR61ysAkkrth
- ZRdRgJ7ajs/OziREmpF9zJcfnCDTno+JGNYYezOg1/EyvIGP9PLvUunqrHvMvd27IvkeuE6lc7RfA
- h3ak8KuZWi7VtcPaJjZ+i+r4ZNixlvYqsSChq7R9nXXsnLU0g75Bd1rLWYcmvsISo8Zywhl6J665U
- HnFu/uSc6iOEvz9h9v1X5IHnUXbfRVXGRTBx7YWEG1VQDtEPa0Y63bKKKM1D3a33LFQuq+GGVca24
- ShB6Jif/GyZQIgX91ml2xdsj2F4WHywnX/8FHemG/a4MTU73zhCpYpOfHNdI9ormb3T2Qtlx8ho5/
- nItUx/G+PZU1xVCtCAxc1mQt3NNPshR6f0zCKyFdFfwSEZApfzUcPGHqBGnmOqiudIhaH37mKS9cn
- 1uLWZi2j5YPAek6f9hQTTiRuoEU3bOmrrSupTPYHsTjcdPeVqO2REmQsmSl7jmcggorsucnPQU+0r
- qJqigMnSzjeUVFloXcCscCqa;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iY9zo-0005I1-Dy; Fri, 22 Nov 2019 14:33:16 +0000
-To: samba-technical@lists.samba.org,
- Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
-Subject: Re: Automating usage of smbspool_krb5_wrapper
-Date: Fri, 22 Nov 2019 15:33:16 +0100
-Message-ID: <1574444045.gU553saExv@magrathea>
-In-Reply-To: <0a9d2586-38ab-7c6c-7bcc-8ffc94303495@rosalinux.ru>
-References: <af8412ee-5493-0406-e95b-8d3175ec069a@rosalinux.ru>
- <5586929.0Fyjv50KOk@magrathea>
- <0a9d2586-38ab-7c6c-7bcc-8ffc94303495@rosalinux.ru>
+	id 1iYAsG-0025bE-By; Fri, 22 Nov 2019 15:29:32 +0000
+Received: from m4a0040g.houston.softwaregrp.com ([15.124.2.86]:44942) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1iYAs8-0025US-Kg
+ for samba-technical@lists.samba.org; Fri, 22 Nov 2019 15:29:27 +0000
+Received: FROM m4a0040g.houston.softwaregrp.com (15.120.17.147) BY
+ m4a0040g.houston.softwaregrp.com WITH ESMTP; 
+ Fri, 22 Nov 2019 15:28:24 +0000
+Received: from M4W0335.microfocus.com (2002:f78:1193::f78:1193) by
+ M4W0335.microfocus.com (2002:f78:1193::f78:1193) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10; Fri, 22 Nov 2019 15:27:29 +0000
+Received: from NAM05-CO1-obe.outbound.protection.outlook.com (15.124.8.12) by
+ M4W0335.microfocus.com (15.120.17.147) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10 via Frontend Transport; Fri, 22 Nov 2019 15:27:28 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=H8BrVDEYY3qZejW/S9e9sFs9lhttvglHmAdPd15wBEiybvVdfqWWC5zUYZRjLhCL76LxqhhgLgtiiqS6FGIx7c0jcTUgQz13HEvkNHpfjESCILTARHzXVDMSPk8I3huRBXjwkx3BOy7BlJ34yRHIrBk4tmKamPWOfEI5+T1L3Hemc/sE5pXzVme5KukunvvwMA1bZHYk2rOQSa2OQCQAcYxMTO+LjMSMHw0AxQOiFlC/ZjuLXYel+uZmXAQddyF4VDP3vc0PosOoGAbVR4C88gjhqpr8DU84lGfRX4cjffgJSOK4ozRTEOpSquMWd9LABS317D9f5kvWi/p4sdVK/A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=blVUaDBfZNi+jPcLDZBNlohP4YEJtGbm7pBCFPvBQa0=;
+ b=TXK/lUFQgMmNe6USEdUC0fvH6v+k0VJtBGchfK8buiJlN+0nLmU8aDjWTnMuoTboaD/ykOAlXVGWy0qZGDASQ4y3DDywHnQhghgKx5SWhb1he4rqz/48odtpYuQ0BHPSi02ZSR3KO00LlIOMIJZ0JSADhC/iULVjFPr1ZdkyLOt6i0ig8uWFPPh+ifVdoMj88kjfeY7oIyz1+GHCqzAxYe0KAgLtBghdW1NxedxIc0625UbqCRq04I38mEr2agf7IHr5CTCj0nOPB8gmge8W8LeL3aUMnYVr8Vuqb2W2f0VVPa+FLau6xA4jiZgObptPneqBu/lUydXIEi+r7zdWCg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Received: from DM6PR18MB2507.namprd18.prod.outlook.com (20.179.71.218) by
+ DM6PR18MB2570.namprd18.prod.outlook.com (20.179.104.96) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2474.16; Fri, 22 Nov 2019 15:27:27 +0000
+Received: from DM6PR18MB2507.namprd18.prod.outlook.com
+ ([fe80::c8fa:28ed:2197:e967]) by DM6PR18MB2507.namprd18.prod.outlook.com
+ ([fe80::c8fa:28ed:2197:e967%4]) with mapi id 15.20.2474.018; Fri, 22 Nov 2019
+ 15:27:27 +0000
+To: Noel Power <NoPower@suse.com>, Andrew Bartlett <abartlet@samba.org>,
+ "Ralph Boehme" <slow@samba.org>, npower <npower@samba.org>
+Subject: Re: Converting SMB1 tests to SMB2
+Thread-Topic: Converting SMB1 tests to SMB2
+Thread-Index: AQHVdUNqiOZWCa16a0elHejFomZ1kadQugh0gA6wbN+AAQJmgIAARkCAgAAQXgCAB2I8AIAAAnuAgAAJSYCAAAhSAIAADaSAgAAIYx6ADoq/AIAHznWAgALm3ICACU8HAIAMyTUA
+Date: Fri, 22 Nov 2019 15:27:27 +0000
+Message-ID: <f7229830-b844-a509-ed31-9707e0101666@suse.com>
+References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
+ <be6770e5-5bf0-4665-4a88-3e4182e4c82e@samba.org>
+ <0981db46-93bf-f153-c98f-15d5cf404353@suse.com>
+ <ed7eb92f-46a7-758e-f3b5-185d71b8b98a@samba.org>
+ <002434db-63ef-edad-d091-76e3efe783d1@samba.org>
+ <15dfbaf6-c774-debe-b61e-c3ef4e7f9727@samba.org>
+ <d9625941-c85a-a686-2162-30c80a2e84b3@samba.org>
+ <fa464ebe-cfe7-1d6e-7435-c896e2cc188e@samba.org>
+ <f479113c-7a74-8259-823e-4ae1c4a713c6@samba.org>
+ <47fef5d6-7fb6-b054-a8c5-7a28b63e97c8@samba.org>
+ <9cc9d402-57fb-3568-29e6-12284d6ccd98@samba.org>
+ <f5970612-2998-cef1-dcca-40188c7a176f@suse.de>
+ <361f5a38-66fb-e18c-7858-c5db6e93424e@samba.org>
+ <dc95f81c-90ba-a368-9b3e-ccdcf067edaa@suse.com>
+ <c25ed441eedb2a864429c0154859f2afe95f38cb.camel@samba.org>
+ <f3fcbb1f-a25c-f7cb-4023-fdef68e208a8@suse.com>
+ <a146e395-f9ca-12d0-2cab-ca52e8209706@suse.com>
+In-Reply-To: <a146e395-f9ca-12d0-2cab-ca52e8209706@suse.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=NoPower@suse.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [109.76.125.221]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 32501ae3-c7db-4c21-a745-08d76f607b1c
+x-ms-traffictypediagnostic: DM6PR18MB2570:
+x-ms-exchange-purlcount: 4
+x-ld-processed: 856b813c-16e5-49a5-85ec-6f081e13b527,ExtFwd
+x-ms-exchange-transport-forked: True
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: CXW2lTtvju0Lu6h03+Xi2whUbO+nYAzQCSy42xQkIRHMWvwqDX6q8FDPBaY3dcclOPSY32l8J48r+ewoXwjEZkUNFjnrgIwN1Ou/0N3M2/QYSsMI/g1Zk0ul+iyrly4ey2ctGBeaVabhTf0IsmuGvo0TXjkFYb8dBgSEOajmyTCRGsl5RAAQhpdeJf2hgm7+wBjvNwQYC5RbGx20ZLwTkLwpeU0Zqnr86c3lwRd23vVEoyFUQUJWPKBVdSc7/ZH6VW4At8g7iBuOvvviNtc0H3tiBRrhwMVagzKS4Y2dUAa3d+ssTtz7yiRBRggQgxnjEAARj3iVhGcMJCEf6ZY0MSgrTTbXc0Dskk+pECFgWpsXm4ci08NAztZ/jU7xHAQdRU7MWPC8jC/42X81Pf74t7pSp8lKWYr1z+cH0syq6W5/CBx01rOZSi2HjCCRK/ZJ1FyvdanEYqXUuglq9YxWki3x2uiBOyI7lV865JEoF04=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <3D60776D623DAE4A97564D6E372F7A0D@namprd18.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-CrossTenant-Network-Message-Id: 32501ae3-c7db-4c21-a745-08d76f607b1c
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: yK/bScqCsfu0N4pg2C5Gyw9RN9+lU08NS7ut050jXW5u3zVc3k2WGjsRR4enitKw71YLxOsMZMGBnMWAP/EteA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR18MB2570
+X-OriginatorOrg: suse.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,148 +114,160 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Noel Power via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Noel Power <NoPower@suse.com>
+Cc: David Mulder <david.mulder@suse.com>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Friday, 22 November 2019 03:22:29 CET Mikhail Novosyolov via samba-
-technical wrote:
-> 14.11.2019 12:51, Andreas Schneider =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
-> > On Sunday, 3 November 2019 01:03:43 CET Mikhail Novosyolov wrote:
-> >> 29.10.2019 10:29, Andreas Schneider =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
-> >>> On Monday, 28 October 2019 20:38:08 CET Mikhail Novosyolov wrote:
-> >>>> 28.10.2019 11:47, Andreas Schneider =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
-> >>>>> On Monday, 28 October 2019 08:58:26 CET Mikhail Novosyolov via
-> >>>>> samba-technical>
-> >>>>>=20
-> >>>>> wrote:
-> >>>>>> 28.10.2019 10:44, Mikhail Novosyolov =D0=BF=D0=B8=D1=88=D0=B5=D1=
-=82:
-> >>>>>>> <...>
-> >>>>>>> There are 2 possible solutions:
-> >>>>>>>=20
-> >>>>>>> 1) either patch source3/client/smbspool_krb5_wrapper.c to "goto
-> >>>>>>> smbspool;" if env does not contain "negotiate" instead of chekcing
-> >>>>>>> to
-> >>>>>>> be either null or 0 - how correct will this be?
-> >>>>>>=20
-> >>>>>> I mean this:
-> >>>>>>=20
-> >>>>>> diff --git a/source3/client/smbspool_krb5_wrapper.c
-> >>>>>> b/source3/client/smbspool_krb5_wrapper.c
-> >>>>>> index bff1df417e8..000a613291e 100644
-> >>>>>> --- a/source3/client/smbspool_krb5_wrapper.c
-> >>>>>> +++ b/source3/client/smbspool_krb5_wrapper.c
-> >>>>>> @@ -149,7 +149,7 @@ int main(int argc, char *argv[])
-> >>>>>>=20
-> >>>>>>             env =3D getenv("AUTH_INFO_REQUIRED");
-> >>>>>>            =20
-> >>>>>>              /* If not set, then just call smbspool. */
-> >>>>>>=20
-> >>>>>> -       if (env =3D=3D NULL || env[0] =3D=3D 0) {
-> >>>>>> +       if (env =3D=3D NULL || env =3D=3D "none" || env[0] =3D=3D =
-0) {
-> >>>>>>=20
-> >>>>>>                     CUPS_SMB_DEBUG("AUTH_INFO_REQUIRED is not set =
-=2D "
-> >>>>>>                    =20
-> >>>>>>                                    "execute smbspool");
-> >>>>>>                    =20
-> >>>>>>                     goto smbspool;
-> >>>>>=20
-> >>>>> This is obviously wrong :-)
-> >>>>>=20
-> >>>>> Did you see the code below? The question is if we should map
-> >>>>>=20
-> >>>>> AUTH_INFO_REQUIRED=3Dnone
-> >>>>>=20
-> >>>>> to anonymous. I've created a patchset you can find here:
-> >>>>>=20
-> >>>>> https://git.samba.org/?p=3Dasn/samba.git;a=3Dshortlog;h=3Drefs/head=
-s/master-> >>>>> sm
-> >>>>> bs
-> >>>>> pool
-> >>>>>=20
-> >>>>>=20
-> >>>>> However you need to try all combinations, username/password, kerber=
-os
-> >>>>> and
-> >>>>> none for anonymous.
-> >>>>=20
-> >>>> Thank you! I did not test these patches yet, first tried to understa=
-nd
-> >>>> how it works.
-> >>>>=20
-> >>>> Could you please explain a bit how it works?
-> >>>=20
-> >>> That's a good question as documentation from CUPS side is missing. So=
- we
-> >>> need to find out what CUPS does and then try to write tests for it if
-> >>> possible. This allows us to make sure we work correctly. The repo abo=
-ve
-> >>> shows you where the test is in the samba source code. I've tried to a=
-dd
-> >>> more tests in the past to avoid regressions and verify we work
-> >>> correctly.
-> >>> This needs to be extended as much as possible.
-> >>>=20
-> >>>=20
-> >>> The two patches were just a quick shot.
-> >>=20
-> >> CUPS developer has clearified documentation:
-> >>    * https://github.com/apple/cups/issues/5674
-> >>    *
-> >>=20
-> >> https://github.com/apple/cups/commit/025b8ce8f637009f0df7a5bb5fa0a460d=
-bb3
-> >> 2b
-> >> 10
-> >>=20
-> >> "'negotiate': Kerberos is required - this keyword can only appear by
-> >> itself and causes cupsd to collect the UID of the printing user."
-> >>=20
-> >> I've switched smbspool_krb5_wrapper from failing if value of
-> >> AUTH_INFO_REQUIRED is something not known to just ignoring that and
-> >> passing the task to smbspool. smbspool will fail itself. Added a test
-> >> for that. Patches on top of asn/samba.git/master-smbspool are attached.
-> >>=20
-> >> I've not tested those changes yet, just checked buildability. Testing
-> >> will require making a complex set up, I will try.
-> >=20
-> > They look fine, let me know if it works!
-> >=20
-> >=20
-> > Thanks.
->=20
-> How to make Samba AD domain controller make all local printers available
-> only to domain members? I've made a local PDF printer which writes to
-> PDF files in CUPS and want to use it for testing and be sure that
-> Kerberos authorization is used to access the printer.
->=20
-> [printers]
->      path =3D /var/spool/samba/
->      printable =3D yes
->      #guest ok=3Dyes
->      security =3D domain
->=20
-> Is it correct? I am not sure about "security =3D domain".
-
-'secruity =3D domain' means it is a NT4-style member :-) That also wont wor=
-k on=20
-shares.
-
-If you don't specify anything, it requires authentication. You can use 'val=
-id=20
-users' to restrict the share to certain users or groups.
-
-
-	Andreas
-
-=2D-=20
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
+SGkgUmFscGggJiBhbGwNCg0KSSByZWFsbHkgbmVlZCBoZWxwIHdpdGgNCmh0dHBzOi8vZ2l0bGFi
+LmNvbS9zYW1iYS10ZWFtL3NhbWJhL21lcmdlX3JlcXVlc3RzLzkwMg0KDQpDdXJyZW50bHkgaXQg
+aXMgbWFya2VkIFdJUCBhcyBJIGhvcGVkIHRoZXJlIGNvdWxkIGJlIHNvbWUNCmRpc2N1c3Npb24v
+YWdyZWVtZW50IGFzIHRvIHRoZSBhcHByb2FjaCBvdXRsaW5lZCB0aGVyZS4gSW4gc3VtbWFyeSB0
+aGlzDQptZXJnZSByZXF1ZXN0IGltbyBzYXRpc2ZpZXMgdGhlIGdlbmVyYWwgZGlzY3Vzc2lvbnMg
+d2UgaGFkIGFib3V0IHRoZQ0KYXBwcm9hY2ggdG8gcHJvdmlkaW5nIGEgd2F5IHRvIGl0ZXJhdGl2
+ZWx5IHB1c2ggcG9ydGVkIHNtYjEgdGVzdHMgaW50bw0KdGhlIGNvZGViYXNlLiBBcyBtZW50aW9u
+ZWQgSSBkaWRuJ3QgaGF2ZSBtdWNoIGx1Y2sgdHJ5aW5nIHRvIG1ha2UgdGhlDQonX3NtYjEnIHRl
+c3QgZW52aXJvbm1lbnRzIGZ1bGx5IGluZGVwZW5kZW50LCBpbiB0aGUgZW5kIGl0IHNlZW1lZCB0
+aGlzDQp3b3VsZCBwcm9iYWJseSByZXF1aXJlIG1vcmUgd29yayB0aGFuIGl0IHdhcyB3b3J0aCAo
+YWZ0ZXJhbGwgaW4gdGhlIGVuZA0Kd2Ugd2lsbCBnZXQgcmlkIG9mIHRoZSBzbWIxIHRlc3RzIGFu
+ZCBhc3NvY2lhdGVkIGVudnMpLg0KDQpXaXRoIHRoaXMgaW4gbWluZCBJIG9ubHkgY3JlYXRlICdz
+aGFsbG93IGNvcGllcycgb2YgdGhlIHRlc3QgZW52cyB0aGF0DQpoYXZlIHRlc3RzIHRoYXQgZmFp
+bCBhZ2FpbnN0IHRoZSBuZXcgZGVmYXVsdCBlbnZpcm9ubWVudHMgd2hpY2ggZG9uJ3QNCnN1cHBv
+cnQgbmVnb3RpYXRpb24gb2YgU01CMS4gSSBhZGRlZCAyIG5ldyBDSSBqb2JzIHRvIHJ1biB0aGUg
+dGVzdHMgdGhhdA0Kb25seSBydW4gaW4gZW52aXJvbm1lbnRzIHRoYXQgY2FuIG5lZ290aWF0ZSBT
+TUIxLiBUaGlzIHBhc3NlcyBDSSBjdXJyZW50bHkNCg0KSSdkIHJlYWxseSBsaWtlIHRvIGdldCB0
+aGlzICh3aXRoIHdoYXRldmVyIGNoYW5nZXMgYXJlIG5lZWRlZCkgdXBzdHJlYW0NCnNvIHdlIGNh
+biBzdGFydCBvbiB0aGUgcG9ydGluZyBwcm9wZXIuIERhdmlkIGlzIGN1cnJlbnRseSBzdGFydGlu
+ZyB0bw0KdHJ5IGFuZCBwb3J0IHNvbWUgb2YgdGhlIGJhc2UgdGVzdHMgYW5kIEkgc3RhcnRlZCBn
+b2luZyB0aHJvdWdoIHRoZQ0Kc2tpcF9zbWIxX2ZhaWwgbGlzdCB3ZSBoYXZlIHRvIHNwbGl0IHRl
+c3RzIHRoYXQgbWl4IFNNQjEgJiA+PSBTTUIyLCBmaXgNCnRlc3RzIHRoYXQgc2hvdWxkIHJ1biBh
+Z2FpbnN0IFNNQjIgYnV0IGRvbnQndCBldGMuDQoNCkkgYWxzbyB3YW50ZWQgdG8gZ28gdGhyb3Vn
+aCB0aGUgbW90aW9ucyBvZiBwb3J0aW5nIGEgdGVzdCwgbWFya2luZyBpdCBhcw0KcG9ydGVkL2Rv
+bmUgZXRjLiBSYWxwaCwgeW91IGhhZCB0aGUgaWRlYSBvZiB1c2luZyBhbGlhcyBlbnZpcm9ubWVu
+dHMNCidfZG9uZScgdGhhdCBJIGxpa2VkIHNvIEkgY3JlYXRlZCBhIG5ldyBicmFuY2gNCg0KaHR0
+cHM6Ly9naXRsYWIuY29tL3NhbWJhLXRlYW0vZGV2ZWwvc2FtYmEvY29tbWl0cy9ucG93ZXJfc21i
+MV93aXRoX3BvcnRpbmcNCg0KVGhpcyBicmFuY2ggYWxzbyBpbmNsdWRlcyB0aGUgY2hhbmdlcyBm
+cm9tDQpodHRwczovL2dpdGxhYi5jb20vc2FtYmEtdGVhbS9zYW1iYS9tZXJnZV9yZXF1ZXN0cy85
+MDIsIG9uIHRvcCBvZiB0aG9zZQ0KY2hhbmdlcyBpdA0KDQoqIGNyZWF0ZXMgYWxpYXMgJ19zbWIx
+X2RvbmUnIGVudnMgdGhhdCBhIHRlc3QgY2FuIGJlIG1vdmVkIHRvIHdoZW4NCidwcm9jZXNzZWQn
+DQoqIGZpeGVzIG9yIHNwbGl0cyB0ZXN0cyB0aGF0IGN1cnJlbnRseSBvbmx5IHJ1biBpbiBhIHRl
+c3QgZW52IHRoYXQgY2FuDQpuZWdvdGlhdGUgU01CMQ0KwqAgZS5nLiB3aGVyZSBhIHRlc3QgdGhh
+dCBtaXhlcyB0ZXN0aW5nIFNNQjEgJiA+PVNNQjIgcHJvdG9jb2xzIHRoZW4gdGhlDQp0ZXN0IGlz
+IG1vZGlmaWVkIHNvIGl0IGNhbiB0YWtlIGEgcGFyYW0gdG8gcnVuIGVpdGhlciBwcm90b2NvbCwg
+dGhlbg0KZXhpc3RpbmcgdGVzdCBpczsNCsKgwqDCoMKgwqAgYSkgbW9kaWZpZWQgdG8gcHJvdmlk
+ZSBwYXJhbSB0byBydW4gU01CMSAmIHRlc3QgbW92ZWQgZnJvbSAnX3NtYjEnDQplbnYgdG8gJ19z
+bWIxX2RvbmUnIGVudg0KwqDCoMKgwqDCoCBiKSBjb3BpZWQgJiBtb2RpZmllZCB0byBwcm92aWRl
+IGEgcGFyYW0gdG8gcnVuID49IFNNQjIgYW5kIHRlc3QNCm5vdyBhZGRpdGlvbmFsbHkgcnVucyBh
+Z2FpbnN0IGFwcHJvcHJpYXRlIG5vbiAnX3NtYjEnIGVudg0KDQrCoCBUaGVyZSBhcmUgcXVpdGUg
+YSBmZXcgdGVzdHMgaW4gdGhlIHNraXAgZmlsZSB0aGF0IHJlYWxseSBhcmUgU01CMSBvbmx5DQp0
+ZXN0cyzCoMKgIGluIHRoaXMgY2FzZQ0KwqDCoMKgwqDCoCBhKSBtb3ZlIHRoZSB0ZXN0IGZyb20g
+J19zbWIxJyBlbnYgdG8gJ19zbWIxX2RvbmUnIGVudg0KDQrCoCBJbiBib3RoIGNhc2VzIHRoZSBz
+a2lwX3NtYjFfZmFpbCBmaWxlIGlzIHVwZGF0ZWQgd2l0aCBjb21tZW50cyBzYXlpbmcNCnRoZSB0
+ZXN0DQrCoCBoYXMgYmVlbiBwcm9jZXNzZWQNCg0KQ3VycmVudGx5IH43MCB0ZXN0cyBoYXZlIGJl
+ZW4gJ3Byb2Nlc3NlZCcgdHJpdmlhbGx5IGluIHRoYXQgYnJhbmNoLiBJDQpmZWFyIHRoYXQgdGhl
+IHdvcmsgdGhlcmUgbWlnaHQgYmUgd2FzdGVkIChpZiB0aGUgd3JvbmcgYXBwcm9hY2ggaXMgYmVp
+bmcNCmZvbGxvd2VkKSBzbyByZWFsbHkgaXQgd291bGQgYmUgZ3JlYXQgdG8gZ2V0IHRoaXMgbmFp
+bGVkIGRvd24gYmVmb3JlDQptb3JlIGNvbXBsZXggY2hhbmdlcyBoYXBwZW4NCg0KTm9lbA0KDQpP
+biAxNC8xMS8yMDE5IDEyOjEyLCBOb2VsIFBvd2VyIHdyb3RlOg0KPiBKdXN0IEZZSQ0KPg0KPiBJ
+IG9wZW5lZCBodHRwczovL2dpdGxhYi5jb20vc2FtYmEtdGVhbS9zYW1iYS9tZXJnZV9yZXF1ZXN0
+cy85MDINCj4NCj4gVGhpcyBicmFuY2ggaXMgYSByZXR1cm4gdG8gdGhlIHBsYW4gb2YganVzdCB1
+c2luZyBzb21lIGluZGVwZW5kZW50IENJDQo+IGpvYnMgdG8gcnVuIHRoZSBTTUIxIHRlc3RzIChh
+bmQgdGVzdHMgZmFpbGluZyBpbiBlbnZpcm9ubWVudHMgd2hlcmUgU01CMQ0KPiBjYW4ndCBiZSBu
+ZWdvdGlhdGVkKS4gVGhlc2UgbmV3IGpvYnMgdXNlIHNpbXBsZSAnc2hhbGxvdycgY29waWVzIG9m
+IHRoZQ0KPiBleGlzdGluZyBlbnZpcm9ubWVudHMuDQo+DQo+IEkgcmV0dXJuZWQgdG8gdGhpcyBh
+cHByb2FjaCBkdWUgdG8gdGhlIGV2ZXIgaW5jcmVhc2luZyBhbW91bnQgb2YgY2hhbmdlcw0KPiAo
+YW5kIEkgYWRtaXQgZmFpbHVyZSkgdHJ5aW5nIHRvIGNyZWF0ZSBwcm9wZXIgaW5kZXBlbmRlbnQg
+dGVzdA0KPiBlbnZpcm9ubWVudHMgKGFzIGRlc2NyaWJlZCBiZWxvdykNCj4NCj4gTWF5YmUgd2Ug
+Y2FuIHRyeSB3aXRoIHRoZSBhcHByb2FjaCBvdXRsaW5lZCBpbiB0aGUgbWVyZ2UgcmVxdWVzdCBh
+bmQNCj4gY29udGludWUgdGhlIGRpc2N1c3Npb24gdGhlcmUuIFRoZSBzb29uZXIgd2UgaGF2ZSBz
+b21ldGhpbmcgaW4gcGxhY2UNCj4gdXBzdHJlYW0gdGhlIHNvb25lciB3ZSBjYW4gc3RhcnQgY2hp
+cHBpbmcgYXdheSBhdCB0aGUgdGVzdHMgOi0pDQo+DQo+IE5vZWwNCj4NCj4gT24gMDgvMTEvMjAx
+OSAxNDowMywgTm9lbCBQb3dlciB2aWEgc2FtYmEtdGVjaG5pY2FsIHdyb3RlOg0KPj4gSGkgQWxs
+LA0KPj4NCj4+IE9uIDA2LzExLzIwMTkgMTc6NDQsIEFuZHJldyBCYXJ0bGV0dCB2aWEgc2FtYmEt
+dGVjaG5pY2FsIHdyb3RlOg0KPj4+IE9uIEZyaSwgMjAxOS0xMS0wMSBhdCAxODozMSArMDAwMCwg
+Tm9lbCBQb3dlciB2aWEgc2FtYmEtdGVjaG5pY2FsDQo+Pj4gd3JvdGU6DQo+Pj4+IEhpIEFsbA0K
+Pj4+Pg0KPj4+PiBKdXN0IHRob3VnaHQgSSBzdW1tYXJpemUgd2hhdCB3ZSAobXlzZWxmICYgUmFs
+cGgpIGRpc2N1c3NlZCwgZm9yIG15IG93bg0KPj4+PiBiZW5lZml0IGFuZCB0aGUgYmVuZWZpdCBv
+ZiBvdGhlcnMuDQo+Pj4gVGhhbmtzIGZvciB3cml0aW5nIHRoaXMgb3V0LiAgSSBzZWUgaW4gdGhl
+IHJlc3Qgb2YgdGhlIHRocmVhZCB0aGF0IHlvdQ0KPj4+IGhhdmUgbWFkZSBzb21lIHByb2dyZXNz
+LA0KPj4gd2VsbCB5ZXMgYW5kIG5vIDotKQ0KPj4NCj4+IHNvLCBJIGRpZCB0cnkgYW5kIGZpeCB0
+aGUgaXAgdW5pcXVlbmVzcyB0aGluZyBidXQuLi4NCj4+DQo+PiB1bmlxdWUgaXBzIG1hZGUgc29t
+ZSBkaWZmZXJlbmNlIGhvd2V2ZXIgdGhlcmUgd2VyZSBtb3JlIHRoaW5ncywgbW9yZQ0KPj4gY2hh
+bmdlcyBuZWVkZWQNCj4+DQo+PiBhKSBuZWVkIHRvIHBhc3MgZG93biBhIHVuaXF1ZSBzZXJ2ZXIg
+bmFtZSBpbiBvcmRlciB0aGF0IHRoZSB1bmlxdWUgaXANCj4+IGNhbiBiZSBjcmVhdGVkICh0aGVy
+ZSBpcyBhIG5hbWUgLT4gaW50ZXJmYWNlX251bSBoYXNoKQ0KPj4gYikgYnV0Li4uIHdlIGhhdmUg
+YWxvdCBvZiBmYWtlIF9zbWIxIGVudnMgYW5kIHRoZSBudW1iZXIgb2YgaW50ZXJmYWNlcw0KPj4g
+d2UgaGF2ZcKgIGJyZWFrcyB0aGUgY3VycmVudCBNQVhfV1JBUFBFRF9JTlRFUkZBQ0VTIGxpbWl0
+LCBuZWVkIHRvIG1vZGlmeQ0KPj4gdGhpcyBpbiB0aGlyZF9wYXJ0eS9zb2NrZXRfd3JhcHBlci9z
+b2NrZXRfd3JhcHBlci5jDQo+PiBjKSBtaXNzaW5nIGNlcnRzIGZvciB2YXJpb3VzIHRlc3RzIHdo
+aWNoIG5lZWRlZCBzb21lIG5ldyBkaXJlY3Rvcmllcw0KPj4gKGFuZCBjb250ZW50KSBzZXR0aW5n
+IHVwIGluIHZhcmlvdXMgZGlycyB1bmRlcg0KPj4gc2VsZnRlc3QvbWFuYWdlLWNhL0NBLXNhbWJh
+LmV4YW1wbGUuY29tL0RDcy8NCj4+IGUpIHRoZXJlIGlzIGFub3RoZXIgcHJvYmxlbSwgdGhlcmUg
+aXMgc3RpbGwgaW50ZXJmZXJlbmNlIGJldHdlZW4gdGhlDQo+PiBlbnZpcm9ubWVudHMgYmVjYXVz
+ZSBhbiBhZGRpdGlvbmFsIHJlYWxtX3RvX2lwX21hcHBpbmdzIHdoZXJlIHRoZSByZWFsbQ0KPj4g
+YXNzb2NpYXRlZCB3aXRoIHRoZSBzZXJ2ZXJuYW1lIChhbmQgd2hlcmUgdGhlIHNlcnZlcm5hbWUg
+aW4gdHVybiBpcyB1c2VkDQo+PiB0byBnZXQgdGhlIGlwIGFkZHJlc3MpDQo+PiBmKSBJIHRoZW4g
+dHJpZWQgdG8gdXNlIGRpZmZlcmVudCByZWFsbXMgd2l0aCB0aGUgc21iMSBlbnZpcm9ubWVudHMg
+d2hvDQo+PiBzaG91bGQgaGF2ZSBlbnRyaWVzIGluIHRoZSB0YWJsZSBidXQgdGhpcyBhbHNvIHdh
+cyBub3QgZW5vdWdoLCBzdGlsbA0KPj4gdGVzdHMgZmFpbCAoSSBwcmVzdW1lIGJlY2F1c2UgbG90
+cyBvZiB0ZXN0IGRhdGEsIGRhdGFiYXNlIGVudHJpZXMgZXRjLg0KPj4gZGVwZW5kIG9uIHRoZSBl
+eGlzdGluZyAncmVhbG1zJyB1c2VkICh0aGlzIGlzIHNwZWN1bGF0aW9uKQ0KPj4NCj4+IFNvwqAg
+Q0kgc3RpbGwgZG9lc24ndCBwYXNzLCBhdCB0aGlzIHBvaW50IEkganVzdCBnb3QgdG9vIGRpc2hl
+YXJ0ZW5lZCwNCj4+IGJlZW4gZ29pbmcgYXJvdW5kIGluIGNpcmNsZXMsIGRvbid0IGtub3cgZW5v
+dWdoIGFib3V0IHRoZSB0ZXN0IHNldHVwIChvcg0KPj4gc2FtYmEgYWQpIHRvIGZpZ3VyZSBvdXQg
+KGF0IGxlYXN0IGVhc2lseSkuIEkgZ2V0IHRoZSBpbXByZXNzaW9uIHRoaXMgaXMNCj4+IGEgcGll
+Y2Ugb2Ygc3RyaW5nIEkgY291bGQgcHVsbCBmb3IgYSBsb25nIHRpbWUgOi0pIGFuZCB0aGUgb25s
+eSB0aGluZw0KPj4gdGhhdCB3aWxsIGJlIHVucmF2ZWxsZWQgaXMgbXkgc2FuaXR5DQo+Pg0KPj4g
+VGhlIGN1cnJlbnQgZXJyb3JzIHdpdGggdGhpcyBhcHByb2FjaCBjYW4gYmUgc2VlbiBoZXJlDQo+
+PiBodHRwczovL2dpdGxhYi5jb20vc2FtYmEtdGVhbS9kZXZlbC9zYW1iYS9waXBlbGluZXMvOTQw
+NjQ4NTgNCj4+DQo+Pj4gIGJ1dCB3YW50ZWQgdG8gc2F5IHRoYXQgaWYgeW91IGdldCByZWFsbHkg
+c3R1Y2sNCj4+PiBhZ2FpbiB0aGVuIEkgY2FuIGNlcnRhaW5seSBiZSBvZiBhc3Npc3RhbmNlLiAN
+Cj4+IHRoYW5rcywgYXBwcmVjaWF0ZWQhISwgSSB3b25kZXIgd291bGQgeW91IHRoaW5rIG9yIGFn
+cmVlIHRoYXQgcmF0aGVyDQo+PiB0aGFuIGdvIGRvd24gdGhlIHJhdGhvbGUgYWJvdmUgdGhhdCBy
+ZXZlcnRpbmcgdG8gbXkgYmFja3VwIHBsYW4gd2hpY2gNCj4+IGp1c3QgYWRkZWQgMiBuZXcgc21i
+MSBqb2JzIGlzIGEgZmFyIGVhc2llciByb3V0ZSwgd2UgZG9uJ3QgbmVlZCB0aGUNCj4+IHJ1bmF3
+YXkgY2hhbmdlcyB0byB0aGUgJ19zbWIxJyBlbnZpcm9ubWVudHMgYXMgYWJvdmUuIGlwIHVuaXF1
+ZW5lc3MgZm9yDQo+PiBleGFtcGxlIHNob3VsZCBub3QgYmUgYW4gaXNzdWUgYXMgd2UgcnVuIHRo
+b3NlIHRlc3RzIGluIGlzb2xhdGlvbiBpbg0KPj4gdGhlaXIgb3duIENJIGpvYi9jb250YWluZXIs
+IHRoZXNlIGpvYnMvZW52aXJvbm1lbnRzIHdpbGwgZ28gYXdheSB3aGVuDQo+PiBTTUIxIGRpc2Fw
+cGVhcnMgYW55d2F5LiBIb3BlZnVsbHkgdXNpbmcgc3VjaCAnc2hhbGxvdycgY29weSB2ZXJzaW9u
+cyBvZg0KPj4gdGhlIGVudmlyb25tZW50cyBpc24ndCBhbiBpc3N1ZSBvciBhIHN0dW1ibGluZyBi
+bG9jayA/IFsxXQ0KPj4NCj4+IEJ1dC4uLiB0aGVyZSBzdGlsbCByZW1haW5zIHRoZSBwcm9ibGVt
+IHRoYXQgaW4gdGhlIGxhc3QgYXR0ZW1wdCBhIG51bWJlcg0KPj4gb2YgdGVzdHMgd2VyZSBmYWls
+aW5nIG15c3RlcmlvdXNseSBpbiB0aGUgbmV3IHNlcGFyYXRlIHNtYjEgQ0kgam9icy4gSQ0KPj4g
+c2NyYXRjaGVkIG15IGhlYWQgb24gdGhpcywgYWdhaW4gSSB0cmllZCB0byByZXByb2R1Y2UgdGhl
+IHByb2JsZW1zDQo+PiBsb2NhbGx5LCBpbiBkb2NrZXIgYW5kIG9uIHNuLWRldmVsIHdpdGhvdXQg
+c3VjY2VzcyAoZXZlcnl0aGluZyBwYXNzZXMNCj4+IG91dHNpZGUgb2YgQ0kpLiBTbywgSSByZXR1
+cm5lZCB0byBydW5uaW5nIGp1c3QgYSBzaW5nbGUgZmFpbGluZyB0ZXN0IG9uDQo+PiBDSSAobm93
+IHdpdGggbG90cyBvZiBERUJVRykgYW5kIGZvdW5kIGZvciBleGFtcGxlIHRoYXQgd2l0aCB0aGUN
+Cj4+IHNhbWJhMy51bml4LmluZm8yIHRlc3QgdGhhdCBpbW1lZGlhdGVseSBhZnRlciBjcmVhdGlu
+ZyBhIGZpbGUgd2l0aCAoMA0KPj4gYnl0ZXMgYWxsb2NhdGVkKSB0aGF0IFNUQVQgcmV0dXJucyBz
+dF9leF9ibG9ja3Mgd2l0aCBhIHBvc2l0aXZlIHZhbHVlLg0KPj4gQ2xlYXJseSB0aGlzIGlzIHNv
+bWV0aGluZyBoYXBwZW5pbmcgYXQgdGhlIGhvc3Qgb3Mgb3IgZmlsZXN5c3RlbSBsZXZlbC4NCj4+
+IENvbXBhcmluZyB3aXRoIHBhc3NpbmcgdGVzdHMgaW4gbWFzdGVyIHRoZSBvbmx5IGRpZmZlcmVu
+Y2UgaXMgdGhlDQo+PiBwYXNzaW5nIHRlc3RzIHJ1biBvbiByYWNrc3BhY2UgcnVubmVycyBhbmQg
+d2l0aCB0aGUgZmFpbGluZyBjYXNlLCB0aGUNCj4+IHRlc3RzIHJ1biBvbiBzaGFyZWQgcnVubmVy
+cy4gQ2hhbmdpbmcgdGhlIG5ldyBzbWIxIGpvYnMgdG8gcnVuIG9uDQo+PiByYWNrc3BhY2Ugc29s
+dmVzIHRoZSBwcm9ibGVtDQo+Pg0KPj4gc2VlIGh0dHBzOi8vZ2l0bGFiLmNvbS9zYW1iYS10ZWFt
+L2RldmVsL3NhbWJhL3BpcGVsaW5lcy85NDYwNDc5Mg0KPj4NCj4+IHNvLi4uDQo+Pg0KPj4gMXN0
+IGNhbiBhbnlvbmUgZW5saWdodGVuIG1lIGFzIHRvIHdoYXQgaXMgZGlmZmVyZW50IHdpdGggdGhl
+IHJhY2tzcGFjZQ0KPj4gcnVubmVycz8NCj4+IDJuZCBjYW4gd2UgYWdyZWUgdGhhdCBhZGRpbmcg
+dGhlIDIgbmV3IGpvYnMgaXMgdGhlIHNpbXBsZXN0IGFuZCBlYXNpZXN0DQo+PiB3YXkgZm9yd2Fy
+ZCwgb25jZSB1cHN0cmVhbSB0aGlzIHdpbGwgYWxsb3cgdXMgdG8gaXRlcmF0aXZlbHkgdGFja2xl
+IHRoZQ0KPj4gU01CMSBmYWlsaW5nIHRlc3RzDQo+Pg0KPj4gdGhhbmtzLA0KPj4NCj4+IE5vZWwN
+Cj4+DQo+Pg0KPj4gWzFdIE9uZSBwb3RlbnRpYWwgcHJvYmxlbSBpcyB0aGF0IHRoZSBkZWZhdWx0
+ICdtYWtlIHRlc3QnIGZyb20gc291cmNlDQo+PiB3aWxsIGZhaWwgYmVjYXVzZSBvZiB0aGUgbWl4
+IG9yIHh5eiAmIHh5el9zbWIxIGVudmlyb25tZW50cy4gSG93ZXZlcg0KPj4gwqAgKyBwZXJzb25h
+bGx5IEkgZG91YnQgdGhhdCAnbWFrZSB0ZXN0JyByZWxpYWJseSB3aWxsIHN1Y2NlZWQgYW55d2F5
+DQo+PiB0aGVzZSBkYXlzLCB3ZSBjZXJ0YWlubHkgZG9uJ3QgdGVzdCBhIGZ1bGwgbWFrZSB0ZXN0
+IGFueXdoZXJlIGFueW1vcmUsDQo+PiBpbW8gdGhlIG9ubHkgcmVsaWFibGUgd2F5IHRvIHJ1biB0
+ZXN0cyBpcyB2aWEgZ2l0bGFiIENJIChvciBhdXRvYnVpbGQpDQo+PiDCoCArIHdpdGggdGhlIHB5
+dGhvbjMgcG9ydCB0aGVyZSB3ZXJlIGpvYnMgdGhhdCB3ZXJlIGNvbXBsZXRlbHkNCj4+IHVucmVs
+aWFibGUgdW50aWwgdGhleSB3ZXJlIHNlcGFyYXRlZCBpbnRvIHB5dGhvbi9weXRob24tMyBqb2Jz
+LiBUaGVyZQ0KPj4gd2VyZSBjZXJ0YWlubHkgYSBudW1iZXIgb2YgdGVzdHMgdGhhdCBjb3VsZG4n
+dCBiZSBydW4gbXVsdGlwbGUgdGltZSBpbg0KPj4gdGhlIHNhbWUgZW52IChkdWUgdG8gZGVzdHJ1
+Y3RpdmUgbmF0dXJlIG9mIHRoZSB0ZXN0cykgc28gSSB0aGluayB3ZSBoYXZlDQo+PiBhbHJlYWR5
+IGRvbmUgdGhpcyBiZWZvcmUNCj4+DQo+Pg0K
 
