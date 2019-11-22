@@ -2,47 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 771CA1077CF
-	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 20:08:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A959D107811
+	for <lists+samba-technical@lfdr.de>; Fri, 22 Nov 2019 20:36:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=Twmmd7CtgRqbOVF4ft0+xM8F+utlqfXFP0Kpmo+DHg8=; b=S/3U1TTOsTU1YvhV1OrJfNk9DC
-	HVOadSgo2hJgoFtjRKle+YhSbQlhX53UUi+QIZ1KLiCzwiCCk/1fPpajecRz/YwvcPvADIVULsCjV
-	yr3Zh8iJ7pHtKnIs1lL4PNiYoAIKbAeiOWWZ/124q5y5N4uMRYLy753lfRL1jcg6OnoEamYRSRo2z
-	hA4KmLYwy+b2uC8HL9WJyBeOSoWHlrnvdTujck3UkyhAZF/NgmQ9a947G0hfyQEsfRUqGGlJF4+Eq
-	T3YHqcc20aRo52xMPzLQCd4Y11bJIWV4QnWimNu//b3gbS1uCccki+axo2Wv4uJHyHP7VPNwiAT95
-	FRoFRH7A==;
-Received: from localhost ([::1]:55484 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=EEtTRMlWBqlpCzLFtyEAHulSQXxm0ci2ZqsKkxPsS84=; b=VeDP3CB95+LssMJbsE4h6mI6Rq
+	AyhuD03il23pG4AsEpN6V4BE6CVAEXPbIcvA14BvbbAvrm6NheInWgxZqHlxMz4M/XpBO68o8hapa
+	wlTNsPVa7jvNzP2qNjv+/L6dpKSUM9ZjVqMHfgzsAaMau/0rBxnC7eY6PSqSGEsl7/Nn46piiGvKl
+	v25hTvYkjgzusnxv686p586x0+iFk+FYoTlA4IkRE+8HgEyxMkpCa79iZ02Z/2Cmpvp3SmBOpsPrV
+	eEAuj8IKhMYrBksG0M40PWmHAgUbPpcTuFf/UJ5syi/XGb+43sjEvxtp/7HWh7QvGqnh/lvqKppcA
+	noPNN1nA==;
+Received: from localhost ([::1]:56258 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iYEII-0028uM-KX; Fri, 22 Nov 2019 19:08:38 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18756) 
+	id 1iYEix-002944-Cf; Fri, 22 Nov 2019 19:36:11 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29146) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iYEIE-0028uF-3s
- for samba-technical@lists.samba.org; Fri, 22 Nov 2019 19:08:36 +0000
+ (Exim) id 1iYEis-00293t-VH; Fri, 22 Nov 2019 19:36:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=Twmmd7CtgRqbOVF4ft0+xM8F+utlqfXFP0Kpmo+DHg8=; b=a+biJwL7wl38ONkjenvdYorG62
- ia8vBRl1/Dg0AkXx6xHrZBaPNtpewG7GbrOPsNt2hX4F3xEgLN1n95kXEGO6LDMpTUwDoc6sAqBEo
- ZCcrwwfhxBS2Ank/ndKgZ/rIwxJA8Wb2qKrFaP3ZhWMo/WeQhECeV8vGChlm3PTnqX5hoLS03sAah
- ctuALXgvpDYi7POLVxm3adYNhZ6yBW6g0jYfy2FYLp95Az6a7M5WlCygPcKViC4OvRSF6uK7UkltC
- g2ILQElXSvPtZYLn4g8NEaaohrt3SMOD2rGH3UDVtLz0oaVH9TOA4LfPj8p7W11fkh2FIRQKrRsBN
- WTpBPizYbQw1nl/FnFPzShbNLTln0N94qDwFPeXNw3wzVjyTgEPas7YFSi1cuQ024rKqlxUh9cYfb
- y+NayrebieYcu7JYL/09ApIlNjJ2xG76ZMYB7MNNx4ztuGSis2btY40S1oCab0nGlBjx/IF0PtnLK
- WnETRWHh1/k2Lildymy4Ve8h;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=EEtTRMlWBqlpCzLFtyEAHulSQXxm0ci2ZqsKkxPsS84=; b=LDMpSossHzPSqcnQxU8yLzqdWG
+ EFLkP6x8A17roFfSUqSYCSZc89ZvmvaYmhs18bfam3pR4U6Nr4i+pIfkgAMvIdA3e350DCCh9ZV/i
+ Ly+lTNEhZmvP7rgVQt+Ax6Yu4DdMVsbJLXTZgYdz9NBeRpaVtSKtqVy5h1xt/2Y5a5S3XNhxNVv2Q
+ fxH67V3U4tig34huWc7UVfHQE+6TwRqnv+7ve25eZPl3//euZGTY6w+A/+QxsmNkixNO01Av0WF6G
+ dLit0EtXX6BVYtsMVdcSDd0FjB9b6wPj5wawx3L8qbGza0bepTfyIzKuaUP79AIffmuPquWjldXHU
+ uylkA/eymIWH6khv/s3sUrprXpvFZ+GaSspXnPBRkO6daekfrehF9cZS5aMiLurUCiDvTDE0XWBqS
+ kkAH74h9/QGMJlt9rw8UWRyCgS9NWAZR+Axr2CZXfKqZkhYM4big6eq02t1ivcLBmp+BslBoWsBSA
+ 42WuJ5dp8CrJ6Xi51KmedP3N;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iYEIC-0007bj-3o; Fri, 22 Nov 2019 19:08:32 +0000
-Message-ID: <67329ddb56bab6d6091afa089ccbcb95bcdd66ea.camel@samba.org>
-Subject: Re: [Release Planning 4.9] Another 4.9 bug fix release
-To: Karolin Seeger <kseeger@samba.org>, samba-technical
- <samba-technical@lists.samba.org>
-Date: Sat, 23 Nov 2019 08:08:26 +1300
-In-Reply-To: <b809fe9d-b399-c13a-bdc5-0680d140ca6e@samba.org>
-References: <b809fe9d-b399-c13a-bdc5-0680d140ca6e@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iYEis-0007la-9E; Fri, 22 Nov 2019 19:36:06 +0000
+Date: Fri, 22 Nov 2019 11:35:48 -0800
+To: samba-technical@lists.samba.org
+Subject: Vault 2020 Conference call for papers.
+Message-ID: <20191122193548.GA12731@jeremy-acer>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,40 +53,32 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2019-11-20 at 12:16 +0100, Karolin Seeger via samba-technical
-wrote:
-> Hi,
-> 
-> due to
-> 
-> Bug 14175 - Incoming queue can be orphaned causing communication
-> breakdown
-> 
-> there will be an additional 4.9 bug fix release asap.
-> 
-> Are there any other important issues that should be addressed?
+Hi all Samba-folks,
 
-I'm swamped, but this looks important and Denis suggests it would be an
-easy fix (just more hard links):
+The Linux Storage conference Vault '20 is open
+for papers. They've explicitly requested Samba / SMB
+papers.
 
-LMDB domaindns/forestdns partition corruption with bind9_dlz
+Website is here:
 
-https://bugzilla.samba.org/show_bug.cgi?id=14199
+https://www.usenix.org/conference/vault20/call-for-participation
 
-I certainly won't be offended if someone else fixes and backports it. 
+and the conference is February 24–25, 2020, in Santa Clara, CA,
+USA, at the Hyatt Regency Santa Clara.
 
-Andrew Bartlett
--- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
+Local to me at any rate :-).
 
+Any Samba people wanting to attend / submit talks
+are encouraged to do so. Call for papers has been
+extended to December 3rd.
 
+Cheers,
 
+	Jeremy.
 
