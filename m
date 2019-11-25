@@ -2,58 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07A5B108B54
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Nov 2019 11:04:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC910108B80
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Nov 2019 11:18:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=mpYompxwXnHoAOPDiZu/y3OxNjdgpnrOfBgAd4M9ol8=; b=WOeSj3tMuFEgpiDf9XFb3mEslU
-	H4oxJ+UZnL9DUk479EEa3V3uHMKLsiW6827n/a6PXOpcSjOa9i29+hxpY6wlK1rLXG68hkFcH77nE
-	zIFb1xst4n1noRfIkOFcNfywcxhJs6VNGIGUNCLehiz4wsjTDzKXHd1m5xjOfWKIAchTeYrGFjp3q
-	QZCk/ikOXqLtEIUohX8P3v0WS6gV4vJa0rvs6kHEf+0pD9iZB8zaZm8X5+iTamS+1Ccxw6MWYqjNn
-	6aBnkSIFnCPc//e0HeWntyxD5j81qG+9VXo36bEmdDuIknjTx6HtLpRvbpnzZ5BF6WxhJV/JRBzTY
-	4l4G5e6g==;
-Received: from localhost ([::1]:47242 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=yqEvMxYKnCuih+cfeF6R4OAhJlerVDjEEW0hXN4hNro=; b=58B7u3zmwUaraSx65dX2xPAx8d
+	RO6vME3aP3ZPHotczSlEEDvXieI9QJhdCzPJ1NCNRb/ETZpAPW8c7ayAp+/tX+uR6+dw+ofVLiX0u
+	6SUhjSmv+lHx0D2Vh+JMPWyNfEDkVR4H8A6aW856y5NBdDyCVkWGoVPUk7cQxGHWbyyuj4LQc5ILZ
+	Lx0RQM0wDnU3MiVn8h1KR7yF5fqPxiyfi7FztBHenbMrWrDNNxjG2Y+9IVVP0ax2/T0z38YCC37Et
+	7NMsWL/L/nSSkTysgCbC6ysOKC4hVMVHvFGCw7dDURVEC8shlcqy6KnMJyPuPB6icunMqqxNPMaXE
+	x4vS5+CQ==;
+Received: from localhost ([::1]:50558 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iZBDn-002JQU-6g; Mon, 25 Nov 2019 10:03:55 +0000
-Received: from mailhopper2.bazuin.nl ([195.134.173.123]:59404) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iZBDh-002JQL-Hl; Mon, 25 Nov 2019 10:03:51 +0000
-X-Bazuin-en-Partners-MailScanner-Watermark: 1575281021.70833@HE0kyE/IIv05zCR63IKTIg
-X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
-X-Bazuin-en-Partners-MailScanner: Found to be clean
-X-Bazuin-en-Partners-MailScanner-ID: 8B37412139A.A4F3A
-X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
- Partners for more information
-Received: from ms249-lin-003.rotterdam.bazuin.nl
- (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
- by mailhopper2.bazuin.nl (Postfix) with ESMTP id 8B37412139A;
- Mon, 25 Nov 2019 11:03:40 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
- s=mail20180308; t=1574676220;
- bh=fQa4PK7aVfsPKBRiRo2gWrpqyUV/PpmFU/jGmQtpwNE=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=KER9FXOnCl8n1H+xwR20VGtat3bIv6uJ9re3/gyOaTQb9hQxkGMDImj8s5LfilFcg
- LuT5/8K07TxjeC+/7UjB77mi0yO4MA7lAnqIPvI0nZJ4B4FLx4gAmS5VIhvhLFk1b6
- wDLdNlIybyHVSZxqXn2rRi+VpI9yYge+p5cJtPbFROY6Kan8Cc3hYQRBe7DYZjHkPi
- QOKXpsw06YILHZCGT1QR2vok0b2TDUJ1NBX/2xuGSpuHdAiuiCf0uS84tzYx/LCE7Q
- /gWa5TqjgvCNH2NwdKvRZeNbD4qblTLCNx9zpUrZFnaSVh2V8l3YjVt4+WPGNSFsGZ
- f4oMTviwp6sBw==
-Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
- by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id DF1853AF8C;
- Mon, 25 Nov 2019 11:03:37 +0100 (CET)
-Subject: RE: [Samba] Samba4 - Printer Drivers install fails
-To: =?windows-1252?Q?samba-technical=40lists.samba.org?=
- <samba-technical@lists.samba.org>
-Date: Mon, 25 Nov 2019 11:03:37 +0100
-Mime-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <vmime.5ddb9009.4e21.3dc2fa3f4bbb3e19@ms249-lin-003.rotterdam.bazuin.nl>
-References: <50e04d6f-b0ec-e4c9-445e-4224ac9af22c@openevents.fr>
-X-Priority: 3 (Normal)
-X-Mailer: Zarafa 6.30.19-25148
-Thread-Index: AdWjae7KlTeVFU20SYa6y3jtoJrCRgAC5y3w
-Message-Id: <vmime.5ddba6f9.28bf.50f5facf45252c09@ms249-lin-003.rotterdam.bazuin.nl>
+	id 1iZBRp-002JsN-NK; Mon, 25 Nov 2019 10:18:25 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54460) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iZBRm-002JsF-76
+ for samba-technical@lists.samba.org; Mon, 25 Nov 2019 10:18:24 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=yqEvMxYKnCuih+cfeF6R4OAhJlerVDjEEW0hXN4hNro=; b=YEbHqfkfF3PPxjQIX9mdUapoOZ
+ lqWczUgwGEAJ6Vg2EYBqeNlW7TBWu/3RmKh/cURAvjg3Hfov8xZ/04ywYIyBrXs3T7UU1KYUhOJfN
+ 0w+tuMAR1JWcqFxELnNNgNHdumxsAk/lI9H97rYeC8CSUCvAc0YsVejpQnwurxB14Cx/Ej6pxGOTo
+ 1bHqAp/jZi5erWS/P+Cj4k5z22p3mtXVmbMNVAXqDM3ONAZYDxgxZ3fbTMDQvyu1M7/RixG3MPzv7
+ ZzP60QWN/tpoIrf0Kfy3gs/pOGK5sH7gn177B/Eg0QnR2p/B5UVK49Ehthpvja4Q0k0WQwbBJ2kHX
+ jPuRbZZyXNEbEfoiPEN97D2Wt7LVh5TJxELP+ERGcmBz6sglqdIaeFHw5z2GZnAlkCNi5f00AWguS
+ Ck4DDCJuw/vYdxefYYKMsAskRSDyKic9Ukl2dKF7f47TTP+qhFVkvwPuTdF1uN54hhpD5M7FEidCX
+ ECoOS7gchpqnc3oVwyfphWkO;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iZBRk-0002Bt-GA; Mon, 25 Nov 2019 10:18:20 +0000
+To: Andrew Bartlett <abartlet@samba.org>, Karolin Seeger <kseeger@samba.org>, 
+ samba-technical <samba-technical@lists.samba.org>
+References: <b809fe9d-b399-c13a-bdc5-0680d140ca6e@samba.org>
+ <67329ddb56bab6d6091afa089ccbcb95bcdd66ea.camel@samba.org>
+Openpgp: id=A3D192CE44EF412517BCED646A739B025C6B98D4
+Subject: Re: [Release Planning 4.9] Another 4.9 bug fix release
+Message-ID: <402d1722-4c92-b7ba-5590-2913a69bec2b@samba.org>
+Date: Mon, 25 Nov 2019 11:18:15 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
+MIME-Version: 1.0
+In-Reply-To: <67329ddb56bab6d6091afa089ccbcb95bcdd66ea.camel@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="qj7og2SzOsgG5v7lrDfrSHHa7468g8n6H"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,103 +60,85 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
-Cc: "=?windows-1252?Q?samba=40lists.samba.org?=" <samba@lists.samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hai,=20
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--qj7og2SzOsgG5v7lrDfrSHHa7468g8n6H
+Content-Type: multipart/mixed; boundary="MBKLWN7tCR9QJciOqrFpgeHjLvVNeo1d8";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Andrew Bartlett <abartlet@samba.org>, Karolin Seeger <kseeger@samba.org>,
+ samba-technical <samba-technical@lists.samba.org>
+Message-ID: <402d1722-4c92-b7ba-5590-2913a69bec2b@samba.org>
+Subject: Re: [Release Planning 4.9] Another 4.9 bug fix release
+References: <b809fe9d-b399-c13a-bdc5-0680d140ca6e@samba.org>
+ <67329ddb56bab6d6091afa089ccbcb95bcdd66ea.camel@samba.org>
+In-Reply-To: <67329ddb56bab6d6091afa089ccbcb95bcdd66ea.camel@samba.org>
 
-Im looking into this printer driver problem, and yes, its a bug..=20
-Now this part of the logs.
+--MBKLWN7tCR9QJciOqrFpgeHjLvVNeo1d8
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-move_driver_file_to_download_area: Unable to rename [x64/{7B0F67E9-8A50-45EF-A926-F9EF3D271299}/install_nbomx_xl_noredist] to [x64/3/Install_NBOMX_XL_NoRedist]: NT_STATUS_OBJECT_NAME_NOT_FOUND
-Nov 25 10:35:16 print1 smbd[732]: [2019/11/25 10:35:16.901490,  0] ../../source3/rpc_server/spoolss/srv_spoolss_nt.c:8621(_spoolss_AddPrinterDriverEx)
-Nov 25 10:35:16 print1 smbd[732]:   _spoolss_AddPrinterDriverEx: move_driver_to_download_area failed - WERR_APP_INIT_FAILURE
-
-
-Unable to rename [x64/{7B0F67E9-8A50-45EF-A926-F9EF3D271299}/install_nbomx_xl_noredist
-
-This line,  the GUID folder exist, but "install_nbomx_xl_noredist" is not be be found.=20
-
-Im wondering, why a "Section" : [Install_NBOMX_XL_NoRedist]  from the .inf file seen as file/folder.=20
-That is why the rename errors out.=20
-..
-
-; Install Sections
-;
-
-[Install_NBOMX_XL_NoRedist]
-
-PrintProcessor=3D"XeroxV5Print,x5print.dll"
-
-Which is the only thing i found with : install_nbomx_xl_noredist in it.=20
-
-I'll see if there is an bugreport, if not i'll make one.=20
-
-
-Greetz,=20
-
-Louis
-
-
-
-
-=20
-
-> -----Oorspronkelijk bericht-----
-> Van: samba [mailto:samba-bounces@lists.samba.org] Namens=20
-> L.P.H. van Belle via samba
-> Verzonden: maandag 25 november 2019 9:26
-> Aan: samba@lists.samba.org
-> Onderwerp: Re: [Samba] Samba4 - Printer Drivers install fails
+Am 22.11.19 um 20:08 schrieb Andrew Bartlett via samba-technical:
+> On Wed, 2019-11-20 at 12:16 +0100, Karolin Seeger via samba-technical
+> wrote:
+>> Hi,
+>>
+>> due to
+>>
+>> Bug 14175 - Incoming queue can be orphaned causing communication
+>> breakdown
+>>
+>> there will be an additional 4.9 bug fix release asap.
+>>
+>> Are there any other important issues that should be addressed?
 >=20
-> No worries, i tested the 4.11.2, so not needed for you to test also.=20
->=20
-> Greetz,=20
->=20
-> Louis
->=20
->=20
-> > -----Oorspronkelijk bericht-----
-> > Van: samba [mailto:samba-bounces@lists.samba.org] Namens=20
-> > Julien TEHERY via samba
-> > Verzonden: maandag 25 november 2019 9:23
-> > Aan: samba@lists.samba.org
-> > Onderwerp: Re: [Samba] Samba4 - Printer Drivers install fails
-> >=20
-> > Le 25/11/2019 =E0 09:15, L.P.H. van Belle via samba a =E9crit=A0:
-> > > I tested Friday also with a W7 pc.
-> > > Not working, im try to see what i can do today on this problem.
-> > >
-> > > Greetz,
-> > >
-> > > Louis
-> >=20
-> > Hi Louis,
-> >=20
-> > Thanks for your help. I'm still investigating on it, but=20
-> > sadly i cannot=20
-> > upgrade to 4.11 as those servers cannot reach external=20
-> > repositories for=20
-> > security reasons (those servers belong to a client which=20
-> only accepts=20
-> > ubuntu oficial repositories..)
-> >=20
-> >=20
-> >=20
-> > --=20
-> > To unsubscribe from this list go to the following URL and read the
-> > instructions:  https://lists.samba.org/mailman/options/samba
-> >=20
-> >=20
->=20
->=20
-> --=20
-> To unsubscribe from this list go to the following URL and read the
-> instructions:  https://lists.samba.org/mailman/options/samba
->=20
->=20
+> I'm swamped, but this looks important and Denis suggests it would be an=
 
+> easy fix (just more hard links):
+>=20
+> LMDB domaindns/forestdns partition corruption with bind9_dlz
+>=20
+> https://bugzilla.samba.org/show_bug.cgi?id=3D14199
+>=20
+> I certainly won't be offended if someone else fixes and backports it.=20
+
+As this is not a regression, I wouldn't delay the last 4.9 release for
+this problem. 4.9 is already OEL and we only do one additional release
+because there was a regression in the last release.
+If someone comes up with a fix it will be fixed in all
+supported releases, as always.
+
+metze
+
+
+--MBKLWN7tCR9QJciOqrFpgeHjLvVNeo1d8--
+
+--qj7og2SzOsgG5v7lrDfrSHHa7468g8n6H
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl3bqmcACgkQDbX1YShp
+vVYqOg//b3of154V9CEkrK2g9QRwURc/HMSLHGs3qNDD1aM1H3ZXrcvbCou+LoUJ
+ZppXIMqooYAtp+u+itpfASHtEj11YiscxVXy63aEUxD3zoq73YIRXw08OndEllap
+yfeY2QE8n3NQ5AYiJxTM22BNSIAZ5Jodqosv54MBbdwX7qFMybcP3yAVtde1XQ4T
+F6NfzUoBqUY8QDmHmwbebhqQLXQc7/UZLWKOa/rlXGHKD8nxA4Nqurj7wJSVgmap
+CeHyfvo+GHEeSKw4Z6y+v71Z4EVqKj+95lp6MbvWwmLCweyMnoiX5ZDh8twhmljg
+r49QYfOgwXTTgkraikShDTpoCQQ0X4ojhxWg0oJp9upVjAk24OpYfQfuGCBS8oP7
+hgE6evh9il2seUvEAlZ2fzZTj7JzEGPOSGqAmVWFTAnUiLnwHpaD0fowRIVKde7/
+5K4wp6WpSa5EzSkLqLQ+HNqymxiKpSV6M1QFOvwjsIwfE8GDYju7TMnl5HabciRv
+iMWp/UQ85yT2OITOGdOOcWyYiPJDybg8TfeCooW8ncUcX38CL50uB3uluzJRFTfc
+eeID6KcV8KpfjPZLor9eskFgO3wAW5Y1fairuwTUGQEFidHVr7TJio7C6GMDUCLT
+98DiFcl0CPDx3UkJv1OlxOtRegWWKBG4V7H7fnHDSXcsXje5YgM=
+=AnHk
+-----END PGP SIGNATURE-----
+
+--qj7og2SzOsgG5v7lrDfrSHHa7468g8n6H--
 
