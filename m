@@ -2,66 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4DA310A358
-	for <lists+samba-technical@lfdr.de>; Tue, 26 Nov 2019 18:29:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8440110A4AA
+	for <lists+samba-technical@lfdr.de>; Tue, 26 Nov 2019 20:42:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=ehMa8NKWQCVrEYZ6nCxzCwSOLh+U86GbkxXPvOIXXpE=; b=rRN7uncxDuQTxDUFJvvqBso8mF
-	zc9tmHM0JYobIokOX8UBwVDQMl+qZBihA+ocVDunwVXF4Jt4E7+v5WWq9Gz9EEqY2bB+5fnVB686J
-	iPV+oUau/8QGt/ErgbgyP4ky9SlLVQGXYpcMdkV40QwWs2KeCVUsUzm3vpq9GO+Jhr6cRG5AVipje
-	LVSxHnOGT8p0MGPkI04YdBnWU19MCUvftqK6rO6hXhsLosDLzTmqqhmLJVQC4/PR5oYwR3eek5TNv
-	TWtwJUT7FrwvnYmCprkmJq63lB44/kig5FBc0aaBYE2iDsA1Tkqsu4+uMEuBZcyjCuab5QfJC5Yv3
-	xWyYA/Hg==;
-Received: from localhost ([::1]:19380 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=zK27Ft4Sn264NFCBMMD9dhMRnCLmPQkhp02kBsERTA8=; b=EFR6sV5mqQAy9Hzr3oh6d0QES1
+	Dh/RlSggHHOhRknLCx3yUJzBmwo/RmsgsQjElZams1sjnIyMjNAhmNoetgWE936eg0Eb1RfvdaIon
+	afftAR5XISr8lGXAwkxdOWBQipYD7e9sURLB5ZKukvSbSRIZhaJ/RpVjfK2tzT4fUxbY4y1SnkP0H
+	hkz8RX/QfnMpiLcv7EzIlGoZJIA43wBlUmvTcaoQvbrF7I61yFwHPsNnvaQ9zYMHroIaeCQc1d7Iu
+	gpoc7Bzum+A4n4Zrglvb9ad9z7x1JYm55t+6TXvOO5OuQJiE0Ukamnbr0BmHvX2QpSISE5nhf25Ir
+	NlgHTNkw==;
+Received: from localhost ([::1]:32440 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iZeeA-002UUD-Im; Tue, 26 Nov 2019 17:29:06 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29000) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iZee5-002UU6-TF
- for samba-technical@lists.samba.org; Tue, 26 Nov 2019 17:29:04 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=ehMa8NKWQCVrEYZ6nCxzCwSOLh+U86GbkxXPvOIXXpE=; b=u2tVOmTJmDPwjzjs2FYcbeGmpU
- L7PUc1tFY//P9E8RjohGimh1O0La23rNB0sEXa2WZdjcqff1YEu4HjjoRjtC7kThINDm/sxFPYQzH
- cf2eeeO+Koo/XLFl7ihkFAvoHzrimJ8HibosLglBFj4Q7O6MckakTIKNwpmrTuW4BQXySmFkjfn2c
- akzdh9s+a0iTPo8HXY/Mw/AfVLi/1zY9+5FjWXxNgvmatZBc75jlf8/rQGTTDW7axrg6E4m9MsY32
- GLumyVPlG+asaJrNKnuij4gUmADgztWUq+ATHp+b7PWMFu5o0t2B5PMh8NgbmK4TX3KmE/D4MDZlO
- 1LqFDbnb/LAyljbRF/HHOhSg/fEQIkx+TE93ypNsibDpWVBHaPaFwwEOG5Fk1zzbEKjPOs6WqGRMu
- a7ROdaCKIpYZa7nXD7VuCPKSh1odJ1cq+S9HHGpSxIZucBukrxD1wKXyeWu+/0nXlTqC4Dx6mSiuy
- CPdk6e+WDgKQw0Prq/W0DmYN;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iZee4-00004w-3Z; Tue, 26 Nov 2019 17:29:00 +0000
-Message-ID: <5150a81373a8328e303cc97aaf67f1670181c699.camel@samba.org>
-Subject: Re: Converting SMB1 tests to SMB2
-To: Noel Power <NoPower@suse.com>, Ralph Boehme <slow@samba.org>, npower
- <npower@samba.org>
-Date: Wed, 27 Nov 2019 06:28:54 +1300
-In-Reply-To: <7a86b0cd-9eea-d077-69ac-9077d0cc12c8@suse.com>
-References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
- <be6770e5-5bf0-4665-4a88-3e4182e4c82e@samba.org>
- <0981db46-93bf-f153-c98f-15d5cf404353@suse.com>
- <ed7eb92f-46a7-758e-f3b5-185d71b8b98a@samba.org>
- <002434db-63ef-edad-d091-76e3efe783d1@samba.org>
- <15dfbaf6-c774-debe-b61e-c3ef4e7f9727@samba.org>
- <d9625941-c85a-a686-2162-30c80a2e84b3@samba.org>
- <fa464ebe-cfe7-1d6e-7435-c896e2cc188e@samba.org>
- <f479113c-7a74-8259-823e-4ae1c4a713c6@samba.org>
- <47fef5d6-7fb6-b054-a8c5-7a28b63e97c8@samba.org>
- <9cc9d402-57fb-3568-29e6-12284d6ccd98@samba.org>
- <f5970612-2998-cef1-dcca-40188c7a176f@suse.de>
- <361f5a38-66fb-e18c-7858-c5db6e93424e@samba.org>
- <dc95f81c-90ba-a368-9b3e-ccdcf067edaa@suse.com>
- <c25ed441eedb2a864429c0154859f2afe95f38cb.camel@samba.org>
- <f3fcbb1f-a25c-f7cb-4023-fdef68e208a8@suse.com>
- <a146e395-f9ca-12d0-2cab-ca52e8209706@suse.com>
- <f7229830-b844-a509-ed31-9707e0101666@suse.com>
- <e09044be-713a-f074-ed2f-e41168646d81@samba.org>
- <7a86b0cd-9eea-d077-69ac-9077d0cc12c8@suse.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+	id 1iZgiv-002WN7-9I; Tue, 26 Nov 2019 19:42:09 +0000
+Received: from mail.rosalinux.ru ([195.19.76.54]:50746) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1iZgim-002WMt-S9
+ for samba-technical@lists.samba.org; Tue, 26 Nov 2019 19:42:04 +0000
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rosalinux.ru (Postfix) with ESMTP id E2BEAD4ECA66E;
+ Tue, 26 Nov 2019 22:41:57 +0300 (MSK)
+Received: from mail.rosalinux.ru ([127.0.0.1])
+ by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id mYHtHFoEnfEO; Tue, 26 Nov 2019 22:41:56 +0300 (MSK)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rosalinux.ru (Postfix) with ESMTP id A7F7ED4ECA66F;
+ Tue, 26 Nov 2019 22:41:56 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rosalinux.ru A7F7ED4ECA66F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosalinux.ru;
+ s=A1AAD92A-9767-11E6-A27F-AC75C9F78EF4; t=1574797316;
+ bh=zK27Ft4Sn264NFCBMMD9dhMRnCLmPQkhp02kBsERTA8=;
+ h=To:From:Message-ID:Date:MIME-Version;
+ b=f+aFNlZ+GT9q2KJP47sFwE16IvXI00e6uCoJxq2WhVWXhMxigKQ/c5iqDfLIKvSMx
+ ie25nfw4Bjxjb2kTjgxH+gclgDrqJa2L0Sh5F0+yHedlIzYZmQ0YUIqD/LQ/mxjXLA
+ c7HT/5+cqbyDCKrtuwQOyU6J/NjuFk2gNFUK+8ejFdfMUwyomCh2+O3WNmXyOXW5+A
+ r0YLCmEfGI89NspGjbosYRzeiKQ/IxJg8ODkR5e1jQp3NKL+Z1D7kFJOE3ebDlH5Zv
+ F2M2BFDPSPTaZufOh5hl3DVzEeK8nbAZvxEa42tFQHHpwvUMM1z+yTZ8Xvx+izeoIp
+ QcVu5wzSt8Yfg==
+Received: from mail.rosalinux.ru ([127.0.0.1])
+ by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id avxFpozQJgg4; Tue, 26 Nov 2019 22:41:56 +0300 (MSK)
+Received: from [192.168.1.173] (broadband-90-154-70-14.ip.moscow.rt.ru
+ [90.154.70.14])
+ by mail.rosalinux.ru (Postfix) with ESMTPSA id 467FFD4ECA66E;
+ Tue, 26 Nov 2019 22:41:56 +0300 (MSK)
+Subject: Re: Automating usage of smbspool_krb5_wrapper
+To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+References: <af8412ee-5493-0406-e95b-8d3175ec069a@rosalinux.ru>
+ <1574444045.gU553saExv@magrathea>
+ <c767314c-4517-20f1-538f-7a34a35c1086@rosalinux.ru>
+ <1925046.vXGPc2B9mm@magrathea>
+Message-ID: <bff9668a-604b-ffb1-d8e4-1ceaf51ded81@rosalinux.ru>
+Date: Tue, 26 Nov 2019 22:41:55 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.1
+MIME-Version: 1.0
+In-Reply-To: <1925046.vXGPc2B9mm@magrathea>
+Content-Type: multipart/mixed; boundary="------------04CFCF085F0B9899CCB9577F"
+Content-Language: ru-RU
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,45 +73,406 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Stefan Metzmacher <metze@samba.org>, David Mulder <david.mulder@suse.com>,
- samba-technical <samba-technical@lists.samba.org>
+From: Mikhail Novosyolov via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2019-11-26 at 16:09 +0000, Noel Power via samba-technical
-wrote:
-> yes that is true, however I am not sure even if these days make test
-> normally will work (or if anyone actually even use it instead of
-> autobuild)
+This is a multi-part message in MIME format.
+--------------04CFCF085F0B9899CCB9577F
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Douglas recently ran one in aid of some of the much-alluded to fuzzing
-work we have been doing, and it still works. 
+26.11.2019 19:20, Andreas Schneider =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
+> On Tuesday, 26 November 2019 00:49:08 CET Mikhail Novosyolov via samba-
+>> I have tested those 4 patches (2 yours, Andreas, and 2 mine that I sen=
+t
+>> here previously). Behaviour of /usr/lib/cups/backend/smb symlinked to
+>> patched smbspool_krb5_wrapper seems to be correct: it passes printing
+>> tasks from printers without "AuthInfoRequired negotiate" directly to
+>> smbspool and correctly finds /tmp/krb5cc_$UID for printers with
+>> "AuthInfoRequired negotiate", where UID is a local ID of a domain user=
+.
+>> I clearly see this in /var/log/cups/error_log when it is "LogLevel
+>> debug2" in /etc/cups/cupsd.conf.
+>>
+>> So, these patches are ready to be merged, I think.
+>
+> I'm not able to apply your patches. Could you please send patches creat=
+ed with
+> 'git format-patch' or point me to a git repo where I could pick them?
+>
+>
+> Thanks!
+>
+Attached the patches
 
-A couple of failures but nothing catastrophic.  We need to keep 'make
-test' working.
+--------------04CFCF085F0B9899CCB9577F
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0004-smbspool-print-a-hint-about-smbspool_krb5_wrapper.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename*0="0004-smbspool-print-a-hint-about-smbspool_krb5_wrapper.patch"
 
-I need to look over this more carefully, I've been swamped in my own
-world, but I will say this.  We can't just keep creating infinite new
-environments.  Instead, we should focus on sorting tests from their
-current place of running into the 'right' place.
+From 90dec7767aa6aecd303164eaea22656b9fa4e959 Mon Sep 17 00:00:00 2001
+From: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+Date: Sun, 3 Nov 2019 01:47:51 +0300
+Subject: [PATCH 4/4] smbspool: print a hint about smbspool_krb5_wrapper
 
-Tests that are carefully examined to just need a simple fileserver, and
-which are not impacted by the use of full ACLs should run in
-fileserver, not nt4_dc AND ad_dc for example.  
+When I first met with the situation that Kerberos kredentials cache of root
+user was looked for instead of the one of the printing task creator,
+it took a lot of time to understand that smbspool_krb5_wrapper will resolve this.
 
-Getting to that basis will then make it much easier to have an SMB1 and
-SMB2 simple fileserver. 
+Signed-off-by: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+---
+ source3/client/smbspool.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Andrew Bartlett
-
+diff --git a/source3/client/smbspool.c b/source3/client/smbspool.c
+index 34def0c91a9..5e2d230ab8b 100644
+--- a/source3/client/smbspool.c
++++ b/source3/client/smbspool.c
+@@ -699,8 +699,8 @@ smb_connect(struct cli_state **output_cli,
+ 	if (strcmp(auth_info_required, "negotiate") == 0) {
+ 		if (!kerberos_ccache_is_valid()) {
+ 			fprintf(stderr,
+-				"ERROR: No valid Kerberos credential cache "
+-				"found!\n");
++				"ERROR: No valid Kerberos credential cache found! "
++				"Using smbspool_krb5_wrapper may help.\n");
+ 			return NT_STATUS_LOGON_FAILURE;
+ 		}
+ 		user = jobusername;
 -- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
+2.20.1
 
 
+--------------04CFCF085F0B9899CCB9577F
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0003-s3-smbspool_krb5_wrapper-ignore-unknown-values-of-AU.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename*0="0003-s3-smbspool_krb5_wrapper-ignore-unknown-values-of-AU.pa";
+ filename*1="tch"
 
+From b2581f0ecc1253fa4d805b962ac8c7191f92e278 Mon Sep 17 00:00:00 2001
+From: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+Date: Sun, 3 Nov 2019 01:28:13 +0300
+Subject: [PATCH 3/4] s3:smbspool_krb5_wrapper: ignore unknown values of
+ AUTH_INFO_REQUIRED
+
+To make smbspool_krb5_wrapper usable as a default destination for symlink
+/usr/lib/cups/backend/smb in Linux ditros, it has to be well-prepared
+for any possible values of AUTH_INFO_REQUIRED set by cupsd and correctly
+pass printing tasks to smbspool if it sees that Kerberos authentication
+is not needed.
+
+Discussed here: https://lists.samba.org/archive/samba-technical/2019-October/134470.html
+
+Signed-off-by: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+---
+ source3/client/smbspool_krb5_wrapper.c | 34 ++++++++++++++++++++------
+ source3/script/tests/test_smbspool.sh  | 28 +++++++++++++++++++++
+ 2 files changed, 55 insertions(+), 7 deletions(-)
+
+diff --git a/source3/client/smbspool_krb5_wrapper.c b/source3/client/smbspool_krb5_wrapper.c
+index bd6319ca9c3..a2851d7fbc1 100644
+--- a/source3/client/smbspool_krb5_wrapper.c
++++ b/source3/client/smbspool_krb5_wrapper.c
+@@ -145,36 +145,56 @@ int main(int argc, char *argv[])
+ 		snprintf(device_uri, sizeof(device_uri), "%s", env);
+ 	}
+ 
+-	/* Check if AuthInfoRequired is set to negotiate */
++	/* We must handle the following values of AUTH_INFO_REQUIRED:
++	 *  none: Anonymous/guest printing
++	 *  username,password: A username (of the form "username" or "DOMAIN\username")
++	 *                     and password are required
++	 *  negotiate: Kerberos authentication
++	 *  NULL (not set): will never happen when called from cupsd
++	 * https://www.cups.org/doc/spec-ipp.html#auth-info-required
++	 * https://github.com/apple/cups/issues/5674
++	 */
+ 	env = getenv("AUTH_INFO_REQUIRED");
+ 
+         /* If not set, then just call smbspool. */
+ 	if (env == NULL || env == "none" || env[0] == 0) {
+ 		CUPS_SMB_DEBUG("AUTH_INFO_REQUIRED is not set - "
+-			       "execute smbspool");
++			       "executing smbspool");
++		/* Pass this printing task to smbspool without Kerberos auth */
+ 		goto smbspool;
+ 	} else {
+ 		CUPS_SMB_DEBUG("AUTH_INFO_REQUIRED=%s", env);
+ 
++		/* First test the value of AUTH_INFO_REQUIRED
++		 * against known possible values
++		 */
+ 		cmp = strcmp(env, "none");
+ 		if (cmp == 0) {
+ 			CUPS_SMB_DEBUG("Authenticate using none (anonymous) - "
+-				       "execute smbspool");
++				       "executing smbspool");
+ 			goto smbspool;
+ 		}
+ 
+ 		cmp = strcmp(env, "username,password");
+ 		if (cmp == 0) {
+ 			CUPS_SMB_DEBUG("Authenticate using username/password - "
+-				       "execute smbspool");
++				       "executing smbspool");
+ 			goto smbspool;
+ 		}
+ 
++		/* Now, if 'goto smbspool' still has not happened,
++		 * there are only two variants left:
++		 * 1) AUTH_INFO_REQUIRED is "negotiate" and then
++		 *    we have to continue working
++		 * 2) or it is something not known to us, then Kerberos
++		 *    authentication is not required, so just also pass
++		 *    this task to smbspool
++		 */
+ 		cmp = strcmp(env, "negotiate");
+ 		if (cmp != 0) {
+-			CUPS_SMB_ERROR("Authentication unsupported");
+-			fprintf(stderr, "ATTR: auth-info-required=negotiate\n");
+-			return CUPS_BACKEND_AUTH_REQUIRED;
++			CUPS_SMB_DEBUG("Value of AUTH_INFO_REQUIRED is not known "
++				       "to smbspool_krb5_wrapper, executing smbspool");
++			goto smbspool;
+ 		}
+ 
+ 		snprintf(auth_info_required,
+diff --git a/source3/script/tests/test_smbspool.sh b/source3/script/tests/test_smbspool.sh
+index 01d72101615..c32ace6682e 100755
+--- a/source3/script/tests/test_smbspool.sh
++++ b/source3/script/tests/test_smbspool.sh
+@@ -66,6 +66,30 @@ test_smbspool_authinforequired_none()
+ 	return 0
+ }
+ 
++test_smbspool_authinforequired_unknown()
++{
++	cmd='$samba_smbspool_krb5 smb://$SERVER_IP/print4 200 $USERNAME "Testprint" 1 "options" $SRCDIR/testdata/printing/example.ps 2>&1'
++
++	# smbspool_krb5_wrapper must ignore AUTH_INFO_REQUIRED unknown to him and pass the task to smbspool
++	# smbspool must fail with NT_STATUS_ACCESS_DENIED (22)
++	# "jjf4wgmsbc0" is just a random string
++	AUTH_INFO_REQUIRED="jjf4wgmsbc0"
++	export AUTH_INFO_REQUIRED
++	eval echo "$cmd"
++	out=$(eval $cmd)
++	ret=$?
++	unset AUTH_INFO_REQUIRED
++
++	case "$ret" in
++		22 ) return 0 ;;
++		* )
++			echo "$out"
++			echo "failed to test $smbspool_krb5 against unknown value of AUTH_INFO_REQUIRED"
++			return 1
++		;;
++	esac
++}
++
+ #
+ # The test enviornment uses 'vlp' (virtual lp) as the printing backend.
+ #
+@@ -187,6 +211,10 @@ testit "smbspool_krb5_wrapper AuthInfoRequired=none" \
+ 	test_smbspool_authinforequired_none || \
+ 	failed=$(expr $failed + 1)
+ 
++testit "smbspool_krb5_wrapper AuthInfoRequired=(sth unknown)" \
++	test_smbspool_authinforequired_unknown || \
++	failed=$(expr $failed + 1)
++
+ testit "smbspool print example.ps" \
+ 	$samba_smbspool smb://$USERNAME:$PASSWORD@$SERVER_IP/print1 200 $USERNAME "Testprint" 1 "options" $SRCDIR/testdata/printing/example.ps || \
+ 	failed=$(expr $failed + 1)
+-- 
+2.20.1
+
+
+--------------04CFCF085F0B9899CCB9577F
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0002-s3-smbspool_krb5_wrapper-Map-AUTH_INFO_REQUIRED-none.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename*0="0002-s3-smbspool_krb5_wrapper-Map-AUTH_INFO_REQUIRED-none.pa";
+ filename*1="tch"
+
+From 28bbb580dead3f4a523335f89f020ce522458571 Mon Sep 17 00:00:00 2001
+From: Andreas Schneider <asn@samba.org>
+Date: Mon, 28 Oct 2019 09:38:08 +0100
+Subject: [PATCH 2/4] s3:smbspool_krb5_wrapper: Map AUTH_INFO_REQUIRED=none to
+ anonymous
+
+Signed-off-by: Andreas Schneider <asn@samba.org>
+---
+ selftest/target/Samba4.pm              |  3 +++
+ source3/client/smbspool_krb5_wrapper.c | 18 ++++++++++++------
+ source3/script/tests/test_smbspool.sh  | 10 +++-------
+ 3 files changed, 18 insertions(+), 13 deletions(-)
+
+diff --git a/selftest/target/Samba4.pm b/selftest/target/Samba4.pm
+index 1310e2ff09f..23dafba1574 100755
+--- a/selftest/target/Samba4.pm
++++ b/selftest/target/Samba4.pm
+@@ -1845,6 +1845,9 @@ sub provision_ad_dc($$$$$$)
+ 	copy = print1
+ [print3]
+ 	copy = print1
++[print4]
++	copy = print1
++	guest ok = yes
+ [lp]
+ 	copy = print1
+ ";
+diff --git a/source3/client/smbspool_krb5_wrapper.c b/source3/client/smbspool_krb5_wrapper.c
+index bff1df417e8..bd6319ca9c3 100644
+--- a/source3/client/smbspool_krb5_wrapper.c
++++ b/source3/client/smbspool_krb5_wrapper.c
+@@ -149,17 +149,19 @@ int main(int argc, char *argv[])
+ 	env = getenv("AUTH_INFO_REQUIRED");
+ 
+         /* If not set, then just call smbspool. */
+-	if (env == NULL || env[0] == 0) {
++	if (env == NULL || env == "none" || env[0] == 0) {
+ 		CUPS_SMB_DEBUG("AUTH_INFO_REQUIRED is not set - "
+ 			       "execute smbspool");
+ 		goto smbspool;
+ 	} else {
+ 		CUPS_SMB_DEBUG("AUTH_INFO_REQUIRED=%s", env);
+ 
+-		snprintf(auth_info_required,
+-			 sizeof(auth_info_required),
+-			 "%s",
+-			 env);
++		cmp = strcmp(env, "none");
++		if (cmp == 0) {
++			CUPS_SMB_DEBUG("Authenticate using none (anonymous) - "
++				       "execute smbspool");
++			goto smbspool;
++		}
+ 
+ 		cmp = strcmp(env, "username,password");
+ 		if (cmp == 0) {
+@@ -168,13 +170,17 @@ int main(int argc, char *argv[])
+ 			goto smbspool;
+ 		}
+ 
+-		/* if AUTH_INFO_REQUIRED=none */
+ 		cmp = strcmp(env, "negotiate");
+ 		if (cmp != 0) {
+ 			CUPS_SMB_ERROR("Authentication unsupported");
+ 			fprintf(stderr, "ATTR: auth-info-required=negotiate\n");
+ 			return CUPS_BACKEND_AUTH_REQUIRED;
+ 		}
++
++		snprintf(auth_info_required,
++			 sizeof(auth_info_required),
++			 "%s",
++			 env);
+ 	}
+ 
+ 	uid = getuid();
+diff --git a/source3/script/tests/test_smbspool.sh b/source3/script/tests/test_smbspool.sh
+index 7ba03f01fc7..01d72101615 100755
+--- a/source3/script/tests/test_smbspool.sh
++++ b/source3/script/tests/test_smbspool.sh
+@@ -48,7 +48,7 @@ test_smbspool_noargs()
+ 
+ test_smbspool_authinforequired_none()
+ {
+-	cmd='$samba_smbspool_krb5 smb://$SERVER_IP/print1 200 $USERNAME "Testprint" 1 "options" $SRCDIR/testdata/printing/example.ps 2>&1'
++	cmd='$samba_smbspool_krb5 smb://$SERVER_IP/print4 200 $USERNAME "Testprint" 1 "options" $SRCDIR/testdata/printing/example.ps 2>&1'
+ 
+ 	AUTH_INFO_REQUIRED="none"
+ 	export AUTH_INFO_REQUIRED
+@@ -60,14 +60,10 @@ test_smbspool_authinforequired_none()
+ 	if [ $ret != 0 ]; then
+ 		echo "$out"
+ 		echo "failed to execute $smbspool_krb5"
+-	fi
+-
+-	echo "$out" | grep 'ATTR: auth-info-required=negotiate'
+-	ret=$?
+-	if [ $ret != 0 ] ; then
+-		echo "$out"
+ 		return 1
+ 	fi
++
++	return 0
+ }
+ 
+ #
+-- 
+2.20.1
+
+
+--------------04CFCF085F0B9899CCB9577F
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0001-smbspool-Map-AUTH_INFO_REQUIRED-none-to-anonymous-co.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename*0="0001-smbspool-Map-AUTH_INFO_REQUIRED-none-to-anonymous-co.pa";
+ filename*1="tch"
+
+From 3ad5ed9bc31d46360b6bf025773bf8ade4717bf8 Mon Sep 17 00:00:00 2001
+From: Andreas Schneider <asn@samba.org>
+Date: Mon, 28 Oct 2019 09:35:34 +0100
+Subject: [PATCH 1/4] smbspool: Map AUTH_INFO_REQUIRED=none to anonymous
+ connection
+
+Signed-off-by: Andreas Schneider <asn@samba.org>
+---
+ source3/client/smbspool.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/source3/client/smbspool.c b/source3/client/smbspool.c
+index 36f7f67ca94..34def0c91a9 100644
+--- a/source3/client/smbspool.c
++++ b/source3/client/smbspool.c
+@@ -287,7 +287,7 @@ main(int argc,			/* I - Number of command-line arguments */
+ 
+ 	auth_info_required = getenv("AUTH_INFO_REQUIRED");
+ 	if (auth_info_required == NULL) {
+-		auth_info_required = "none";
++		auth_info_required = "samba";
+ 	}
+ 
+ 	/*
+@@ -718,7 +718,9 @@ smb_connect(struct cli_state **output_cli,
+ 
+ 		fprintf(stderr,
+ 			"DEBUG: Try to connect using username/password ...\n");
+-	} else {
++	} else if (strcmp(auth_info_required, "none") == 0) {
++		goto anonymous;
++	} else if (strcmp(auth_info_required, "samba") == 0) {
+ 		if (username != NULL) {
+ 			flags |= CLI_FULL_CONNECTION_FALLBACK_AFTER_KERBEROS;
+ 		} else if (kerberos_ccache_is_valid()) {
+@@ -731,6 +733,8 @@ smb_connect(struct cli_state **output_cli,
+ 				"DEBUG: This backend requires credentials!\n");
+ 			return NT_STATUS_ACCESS_DENIED;
+ 		}
++	} else {
++		return NT_STATUS_ACCESS_DENIED;
+ 	}
+ 
+ 	nt_status = smb_complete_connection(&cli,
+@@ -780,6 +784,7 @@ smb_connect(struct cli_state **output_cli,
+          * last try. Use anonymous authentication
+          */
+ 
++anonymous:
+ 	nt_status = smb_complete_connection(&cli,
+ 					    myname,
+ 					    server,
+-- 
+2.20.1
+
+
+--------------04CFCF085F0B9899CCB9577F--
 
