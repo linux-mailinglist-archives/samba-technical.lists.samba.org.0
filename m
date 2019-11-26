@@ -2,59 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A74010A1E3
-	for <lists+samba-technical@lfdr.de>; Tue, 26 Nov 2019 17:20:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6015A10A1E4
+	for <lists+samba-technical@lfdr.de>; Tue, 26 Nov 2019 17:20:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=Kk0TqNbqtZg8/R/Y6w6CVtr/eflFSCEDQIseJL/cIOI=; b=h/SAKaeRhRuIhjdhCLn2jgy8XC
-	10wjlSQurleCoU0Fzds9W+oK+47iZK1mKr1JrBu0TvR5KNlO7R0Am8Hdw6xxDJiiO+TbsuL51lfLs
-	/SWeyCA4q5TW8+LK8tjyRH4UEmLjf/vfz22NEuiN5iSvhUxZI9Qv+pJ6xZRcMSSdLXLzu6NibCGK9
-	iSXiwNMPBxwdb1Dvhab5T/0+weILdkrspzg5SGOLPexH5PG0SfpTK6RJPHuernOQgg+YJmNNLYtIk
-	tiPmxaR0MGUrjdNHQvk6/VAXTbBs8C5zQRn8BPLjVixIYXzbXtF8XJ99R5dK5WRgKK58qZ4Q7QQx5
-	vcxMMHMg==;
-Received: from localhost ([::1]:54088 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=9etl9hz+skFZgA99rsfrtHdKE2RU7lkhXPQVwdgNgY8=; b=lK3QabMR3B8+w94b+do06OOJk5
+	jCrb+owf99BjmZW6oZWmRnFYQINDDaQ/SQU50H3RNEumafWgnrQLy4oXOve2aJp4yMiSQtpsYYZPP
+	MDWUIA/AX6yyWseXBlsas0qW/SLyxo5JLs2nwYEwwEdqBOgImVHJAi9a06q4SXqZFNBbVJlZXit6K
+	Zy1jG3GFEUDgrlvZKQQfP4RcUyleH2HQ40b8YAmR3AiH3AIEkVuYVNYTaBMdc7dXabS9xfKik9o81
+	5gutG4Qamcbto0OMY1AHRwNABnfT/rpnw6dLIeFTTHMQeMPGIMDbIWC50fFXm7gaTL9qgCXRTd2sT
+	JGdWQZdw==;
+Received: from localhost ([::1]:54838 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iZdZO-002SiY-Vw; Tue, 26 Nov 2019 16:20:07 +0000
-Received: from mailhopper2.bazuin.nl ([195.134.173.123]:34912) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iZdZK-002SiQ-TT
- for samba-technical@lists.samba.org; Tue, 26 Nov 2019 16:20:05 +0000
-X-Bazuin-en-Partners-MailScanner-Watermark: 1575390000.38415@Ttw2UCHTRuWN8KmfnoY/8w
-X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
-X-Bazuin-en-Partners-MailScanner: Found to be clean
-X-Bazuin-en-Partners-MailScanner-ID: 215AD11F2FD.A771A
-X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
- Partners for more information
-Received: from ms249-lin-003.rotterdam.bazuin.nl
- (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
- by mailhopper2.bazuin.nl (Postfix) with ESMTP id 215AD11F2FD;
- Tue, 26 Nov 2019 17:20:00 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
- s=mail20180308; t=1574785200;
- bh=akjSOidLd0UceoDrQhNpfweCVep6uKCTa5HSMcs38JU=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=WY63mqLp6nX4pznP3C0359lZNF0PgfVOxyPP4UUUq2DFbuIdYFmPhQi+t3+WOtNM8
- +iev8mhF4v5Q7ZsbH8PJ0WRRSwVrBwdhUsYoz51OHnFQDmJbQPfRpcvzEz9gjrllqr
- qDEt/Zwi20L/sgeTGEboP3oZTD1t5EMSzoW8FKPfvIaokpixNRROc/7Q+fuE7lCdgl
- PoFiwMqrizhxN1aGDNPA5DzDcs9eO1nFn7AB2D6MQbxT1jwpOePCY5vAG8JhjmueEn
- lI0VbpFtDPDci4XYkpcLK7NDynHrYwEB75O72RmA9MQLfYCZbxXiQEWU0tGTcFYrcf
- FZrNy5bmjDXXA==
-Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
- by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 330DC3AF8C;
- Tue, 26 Nov 2019 17:19:57 +0100 (CET)
-Subject: RE: [Samba] moved DM config to new server : gids different etc
-To: =?windows-1252?Q?samba-technical=40lists.samba.org?=
- <samba-technical@lists.samba.org>
-Date: Tue, 26 Nov 2019 17:19:57 +0100
-Mime-Version: 1.0
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <dd441242-3a01-dcbf-f112-1efeeeab1d2f@xunil.at>
-References: <dd441242-3a01-dcbf-f112-1efeeeab1d2f@xunil.at>
-X-Priority: 3 (Normal)
-X-Mailer: Zarafa 6.30.19-25148
-Thread-Index: AdWkdVdtnrnBYBPnTUGQzqCB+eV+2g==
-Message-Id: <vmime.5ddd50ad.6cee.6bf466bb7a847efd@ms249-lin-003.rotterdam.bazuin.nl>
+	id 1iZda4-002Sog-I7; Tue, 26 Nov 2019 16:20:49 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61552) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iZda0-002SoA-9T
+ for samba-technical@lists.samba.org; Tue, 26 Nov 2019 16:20:46 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=9etl9hz+skFZgA99rsfrtHdKE2RU7lkhXPQVwdgNgY8=; b=ByleW4b6V92cBqq/QzkeUkTvQc
+ QwM/QgWhuEu/4/zuOi/jYUieonIElgFC/aRf9tf/ewvqLSqQaK4T7XzZf7PQwcOdFMH8oPyPiZ/Uv
+ ySgDgMcZxaTW/RkyRUJL9kHxYaNKpYompnD+b/qa5J39x57pO3d4szwxYbIDxCD1p6ucoD0s+48EX
+ i38MmY01u0hvLD+jimV16s3hRpo/0ET/Z1kThXj6hNMGpaBBDDfkdXDV7I9zSmSWy6xS6rkzmiM7O
+ pB2njNOsN0eDB9sNRoCv/9atB6TNURjqaoSZCaRe2/9kumjWHtGfSnsFqlUXNv+cyxErSve7C20N/
+ o95FdEmJMsaIcq8DJR+XgoUoDtG7O5Gw8Mkn1drec/WcvnYWRdPIgsXhRTX7nmOPy+OkpKfvp2Zkd
+ Vrsd69j1gbAL7kuUQZbo2Go3ErBRq0Ry6uh2TQHx8Et9IMWktkVF2Kmc79SrHflFBpb4PxS6NS1dU
+ ZxaHcx+4fJETPJqd3LpYLlqT;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iZdZz-0007ss-Rr; Tue, 26 Nov 2019 16:20:43 +0000
+To: samba-technical@lists.samba.org,
+ Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+Subject: Re: Automating usage of smbspool_krb5_wrapper
+Date: Tue, 26 Nov 2019 17:20:43 +0100
+Message-ID: <1925046.vXGPc2B9mm@magrathea>
+In-Reply-To: <c767314c-4517-20f1-538f-7a34a35c1086@rosalinux.ru>
+References: <af8412ee-5493-0406-e95b-8d3175ec069a@rosalinux.ru>
+ <1574444045.gU553saExv@magrathea>
+ <c767314c-4517-20f1-538f-7a34a35c1086@rosalinux.ru>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,161 +57,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
-Cc: "=?windows-1252?Q?Stefan_G._Weichinger?=" <lists@xunil.at>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hai Stefan,=20
-
-Remove the netbios alias and then put that as CNAME in the DNS
-Verify if the server its PTR is set also.=20
-
-And yeah, your totaly correct that your ACL is messed up..
-Because your using backend RID.=20
-
-The "advantage" of backend AD.
-Consistent IDs on all Samba clients and servers using the ad back end.=20
-
-Which is also the DISAVANTAGE of RID.
-IN-Consistent IDs on all Samba clients and servers with RID.
+On Tuesday, 26 November 2019 00:49:08 CET Mikhail Novosyolov via samba- 
+> I have tested those 4 patches (2 yours, Andreas, and 2 mine that I sent
+> here previously). Behaviour of /usr/lib/cups/backend/smb symlinked to
+> patched smbspool_krb5_wrapper seems to be correct: it passes printing
+> tasks from printers without "AuthInfoRequired negotiate" directly to
+> smbspool and correctly finds /tmp/krb5cc_$UID for printers with
+> "AuthInfoRequired negotiate", where UID is a local ID of a domain user.
+> I clearly see this in /var/log/cups/error_log when it is "LogLevel
+> debug2" in /etc/cups/cupsd.conf.
+> 
+> So, these patches are ready to be merged, I think.
 
 
-Maybe im bit wrong here, with recent updates, .. Then Rowland will correct me.. ;-)=20
-But this is exactly why i ONLY use AD backends.=20
-
-I suggest, setup a folder, correct the rights, and use get-set facl to apply them again on the filesystem/folders/files.=20
-
-So far,
-
-Greetz,=20
-
-Louis
+I'm not able to apply your patches. Could you please send patches created with 
+'git format-patch' or point me to a git repo where I could pick them?
 
 
+Thanks!
 
-> -----Oorspronkelijk bericht-----
-> Van: samba [mailto:samba-bounces@lists.samba.org] Namens=20
-> Stefan G. Weichinger via samba
-> Verzonden: dinsdag 26 november 2019 17:01
-> Aan: samba
-> Onderwerp: [Samba] moved DM config to new server : gids different etc
->=20
->=20
-> Last week the mobo in a DM server died, so we had to set up a fallback
-> machine and reinstall Debian 10.2 including Samba
->=20
-> I had smb.conf but not /var/lib/samba in backups.
->=20
-> Restored krb5.conf and smb.conf, rejoined.
->=20
-> Things work mostly ...
->=20
-> but for example I get gid 10006 for "domain users" instead of=20
-> 10513 before.
->=20
-> and getent group doesn't show the AD groups, btw
->=20
-> -
->=20
-> I have:
->=20
-> # /etc/nsswitch.conf
->=20
-> passwd:         compat winbind
-> group:          compat winbind
-> shadow:         compat
-> gshadow:        files
->=20
-> hosts:          files dns
-> networks:       files
->=20
-> protocols:      db files
-> services:       db files
-> ethers:         db files
-> rpc:            db files
->=20
-> netgroup:       nis
->=20
-> ---
->=20
-> # cat /etc/samba/smb.conf
-> # Samba config file
-> # from sgw 2018/jun/15
-> # with help from Rowland
->=20
-> [global]
-> unix charset =3D iso8859-15
->=20
-> security =3D ads
-> realm =3D XYZ.INTRA
-> workgroup =3D XYZ
->=20
-> dedicated keytab file =3D /etc/krb5.keytab
-> kerberos method =3D secrets and keytab
->=20
-> netbios aliases =3D u1XYZ
-> server string =3D U1XYZ
->=20
-> winbind cache time =3D 10
-> winbind use default domain =3D yes
-> winbind refresh tickets =3D Yes
->=20
-> template homedir =3D /mnt/MSA2040/smb/Homes/%D/%U
->=20
-> restrict anonymous =3D 2
-> domain master =3D no
-> local master =3D no
-> preferred master =3D no
-> invalid users =3D root bin daemon adm sync shutdown halt mail news \
-> =09=09uucp
-> obey pam restrictions =3D yes
->=20
-> interfaces =3D 192.168.100.4/24 127.0.0.1
-> bind interfaces only =3D Yes
->=20
-> idmap config * : range =3D 3000-7999
-> idmap config * : backend =3D tdb
-> idmap config XYZ : range =3D 10000-20000
-> idmap config XYZ : backend =3D rid
->=20
-> # For ACL support on domain member
-> vfs objects =3D acl_xattr full_audit
-> map acl inherit =3D Yes
-> store dos attributes =3D Yes
-> inherit acls =3D yes
->=20
-> unix extensions =3D no
-> follow symlinks=3D yes
-> wide links=3D yes
->=20
-> load printers =3D no
-> printcap name =3D /dev/null
->=20
-> acl allow execute always =3D True
->=20
-> # Audit settings
-> full_audit:prefix =3D %u|%I|%m|%S
-> full_audit:failure =3D connect
-> full_audit:success =3D mkdir rmdir read pread write pwrite rename unlink
-> full_audit:facility =3D local5
-> full_audit:priority =3D notice
->=20
-> ---
->=20
-> wbinfo -u and -g work afaik
->=20
-> But permissions and ACLs are screwed up.
->=20
-> I might be missing some package to install ... or what ever ...
->=20
-> pls advise, Stefan
->=20
-> --=20
-> To unsubscribe from this list go to the following URL and read the
-> instructions:  https://lists.samba.org/mailman/options/samba
->=20
->=20
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
 
 
