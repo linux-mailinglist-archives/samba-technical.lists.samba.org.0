@@ -2,58 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A051410B48E
-	for <lists+samba-technical@lfdr.de>; Wed, 27 Nov 2019 18:36:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88AAD10B716
+	for <lists+samba-technical@lfdr.de>; Wed, 27 Nov 2019 20:58:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=m/7eafJgfpqueNmh9ZRZEk1gJa1dWUpLF0+zUtuTQtk=; b=gkVfxV52MCbCsXemAa8Y4MhcDV
-	BXPUj4/2RgFr76wLljM9YHomAcP+zWHEuydWW49/5a6tfJ+Glfng9Ou/qx3WbTqFpiPM+vxgao92u
-	RMISx5nElfEuAoxoIQq5VkuyoIepZunUewqLLOOhMSvb28rUoKwCiqPqx/XQmFV82eK0j+On5BNFh
-	QL6bfuu0vd7hqB4h85GRMivYo09eaXePkt63PgOqTDJfaC/VMmQCHJ+hy42cbRYpnV7v559h1gMM/
-	YQjBo0uReP37BxnNH3IVVsdN/NWQeMTMSZLVBWX9tqn1UHKQWe9dsumVJqy9A1L7k7H8/MyryhLXA
-	SHlaK9oA==;
-Received: from localhost ([::1]:25710 helo=hr1.samba.org) 
+	bh=y96KkGHjl3s/Wybk1hiqKSbPGQPS3P/QOc9/gleGC1A=; b=jvILU443EpgRvfGyqoYsZLXLaj
+	+PQwcaTz9TLUWThx8MejPQwexfHFVuMM5xMf9AnlR/4Sjj23/yX4b5um34aXImMDsJE46hylsjXvp
+	2DXgk/xnnp3IFiLtLBdPZuGnABystMe2fcSc1Q9phool9j0Q3vZqnUfDyWPcwanR53EV2N40s31KH
+	HfJe9Abn2mYNiIlDxG4N6tKLgs+3pNO4fuAs//Ovk9NEBMyDsJe5eOuNBV1KnSx5ksY3p9DnDmE6g
+	KHN+9Eu+Ew3jL4jEP6Vw+MK5DIUDvrqpqeYU460Za1RFsx2rRY/yBz5G5wr182fOYmXB1NFNX+gEg
+	CrhvFUug==;
+Received: from localhost ([::1]:27248 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ia1Dz-002r1o-Ft; Wed, 27 Nov 2019 17:35:35 +0000
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:43805) 
+	id 1ia3Rd-002rfk-4q; Wed, 27 Nov 2019 19:57:49 +0000
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:39179) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ia1Dm-002r1h-Db
- for samba-technical@lists.samba.org; Wed, 27 Nov 2019 17:35:25 +0000
-Received: by mail-il1-x142.google.com with SMTP id r9so21691629ilq.10
- for <samba-technical@lists.samba.org>; Wed, 27 Nov 2019 09:35:21 -0800 (PST)
+ (Exim) id 1ia3RW-002rfd-B8
+ for samba-technical@lists.samba.org; Wed, 27 Nov 2019 19:57:44 +0000
+Received: by mail-lf1-x12b.google.com with SMTP id f18so18130869lfj.6
+ for <samba-technical@lists.samba.org>; Wed, 27 Nov 2019 11:57:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=m/7eafJgfpqueNmh9ZRZEk1gJa1dWUpLF0+zUtuTQtk=;
- b=kzH4NtVh4OYNO5XWK5q2X34roBeaEFv1hYVrJESPnFMoeX4x6zh9tBek7hAClUkA4g
- k0u/lh3gbjt9kDolNMObn5NxGmBbkvjXhXKltFq5DyktQmHKmXKOzcMrleO4B9c8gL6u
- J7mnuhFXSY7YfFoP6RPu+Bp5dJDR0woy9Z0IHdGYtYOwbPNrf/xDomR1JGfefAL0Liuz
- Q3G9OtMFeRBKoRex2cSnSpSGpnRJaooF0TyxQo6GhD17UXeaQGoP+0UqqDl0rVRkVKQz
- WlgoblxJza9sp4/4zTB3Z0fk6DVyt3n2DpJ/WsGkYjh9tgCL1TEagmjQp/WSOa6FD2FM
- djXQ==
+ :cc; bh=B+iCzn6zy0zWOUkzUZMEBgZSIs3qDjkBXtbAb8GHHOE=;
+ b=cYYyGXZfy1iRG92GMZOjYnzuJGaT3htvIn/zoGEaOAfhggN9FbI0sEGQUsV/0LD7UJ
+ ewqe2EcD3Q7Qio1Os5TJt3QJl88xiGLxaK4hgeJ2+qsOb/zz9MbnirSB8SZ1+Ylk6g3G
+ xA4mb5oQmvj7tXiVMIe5A5QHbElFH9T67zr9+RRrTdrOgmhBoBZtm6nZ4yhGLXimi0mi
+ lHgG2u/Dhu26Y53cfsnngTxYBgwW0sUmyzMp1R3ENezAYsTp3MqBAUe+TGoZqVdAXFIx
+ tTHJksYMhbeAdOs1rrXOkc8zD0t5JsuE8IKxDrjnfwyvpVhOeDFqLH/8XFpWyAfgcoTh
+ /xHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=m/7eafJgfpqueNmh9ZRZEk1gJa1dWUpLF0+zUtuTQtk=;
- b=kDhU/YeVG3MXYY1pn63eBAjFEYNOCouzrSO44LGxzK0qtL9flvBL7CXWlXaffDEohD
- WPgbHX11LYoQ6aXthAvYsFON0Ib8HQzjLfz7hjsaxXInLkE9lepko99xyUz/ifBjQLt4
- GGbn9rjcL2B1HsQ2UFciDgv4NO2n4tdZ2xnNCJDV0VDQukv35Kh64DVgYKPc6Xnr8km4
- dBpRqBN0ZaGHuZbiSnNu3PBg9uXAJfKbAdvly7oQcrv3ReBkegzSp+WQmCnTa5pdTPcj
- /Up1HOyr3erMOZ0orGxHLB6CRnpqSw8Dt98OKRkn0ULFFxUUDDWV5GbPNf/0eFhCwVPi
- SV4Q==
-X-Gm-Message-State: APjAAAU7ZpsGinH4bxUlhTmFDiWYa4+j9fb2zfAZ2ApBq1CpVHxYDO4D
- IEpGSw4KtgMX/HfZ7CuCpcTep62pNVH/oKVgQQM=
-X-Google-Smtp-Source: APXvYqzfpLfQOzc7XEa3BV41a6BtYeGTMMZpACmEKhIdx9LxMLKPyflnCM1JcbwVuzhbPGp9MFPcwKQVTKF6qnH46ag=
-X-Received: by 2002:a92:d642:: with SMTP id x2mr8753929ilp.169.1574876120477; 
- Wed, 27 Nov 2019 09:35:20 -0800 (PST)
+ bh=B+iCzn6zy0zWOUkzUZMEBgZSIs3qDjkBXtbAb8GHHOE=;
+ b=G+kdtYAOcHVcak3nDLe/Oarfv89fyTD0WCJLiZtsgVifD6who4HFrPivWaJY/XqAyE
+ nfCGi+dA0M9ZgqgS1bPGXLdDDmr+ZZaJGgyw+l57jzM67INYefcWthXIBwyOuLBAKMOK
+ LTgdeMZvqhi/TIFGk/SemojT5M+hUwdVCWiBNr9LJrfU6JnzMoAMscNe8davheVbHDvl
+ BiKszmSTtw2BEu2SPYpmSWW4E0QOQxq607Suh2FB+DgMyQCNjqwbnOJhdFUJxsEPpHgg
+ pdyI1zKvs7UYuyn2yhQwDITGoCBuNeYMZ3eEdGZTyTe/4u4VVJj+xSFmGOEbFO0Jegny
+ 4QCw==
+X-Gm-Message-State: APjAAAXq12ANCJJqOQvoccTTOt6KEciqSbGLA7H+PUd2S3lXY44afE8f
+ m+0FH2DeoDW5Jb4K8rrlXgPUhhK1IxNRjZEo5aclvRlB7OM=
+X-Google-Smtp-Source: APXvYqxmNyDq/FtxOAgLPbMVJgICYiCwwtZsoFiYwPdoFVwWBWOkXIkVJbfjVZBOsZhXerJxgrqeBzIz45cycUrj31k=
+X-Received: by 2002:a19:c7c5:: with SMTP id x188mr4084312lff.22.1574884658980; 
+ Wed, 27 Nov 2019 11:57:38 -0800 (PST)
 MIME-Version: 1.0
-References: <20191126071650.c76un267i4v6vuoz@kili.mountain>
-In-Reply-To: <20191126071650.c76un267i4v6vuoz@kili.mountain>
-Date: Wed, 27 Nov 2019 11:35:09 -0600
-Message-ID: <CAH2r5mvtC4Dt3XDigxp5cqwEtjYCnSK3_aATiW0Dt0s9kBtTuA@mail.gmail.com>
-Subject: Re: [PATCH] CIFS: fix a white space issue in cifs_get_inode_info()
-To: Dan Carpenter <dan.carpenter@oracle.com>
+References: <CAPw4iV5nHkd8E=9PfbYepaStPRoqWJX+iZRVicgrRf2vcHK3uQ@mail.gmail.com>
+ <CAPw4iV6qTv5ssFZEFUN0zuVuZ38ofXq_x+QSTUHT8QFrBtmRhw@mail.gmail.com>
+ <fcf29df7-34c6-d30b-f2ee-d46a8c9a3d41@samba.org>
+In-Reply-To: <fcf29df7-34c6-d30b-f2ee-d46a8c9a3d41@samba.org>
+Date: Wed, 27 Nov 2019 14:57:27 -0500
+Message-ID: <CAPw4iV6ZsSh2O3=g18HTO+1kPPNor4on-ijHmUBLyX4cNOPsUw@mail.gmail.com>
+Subject: Re: Why is smbd looking for Kerberos principal cifs/host@DOMB when it
+ is a member of DOMA?
+To: Stefan Metzmacher <metze@samba.org>
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,50 +71,47 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- kernel-janitors <kernel-janitors@vger.kernel.org>,
- Aurelien Aptel <aaptel@suse.com>
+From: "Nathaniel W. Turner via samba-technical"
+ <samba-technical@lists.samba.org>
+Reply-To: "Nathaniel W. Turner" <nathanielwyliet@gmail.com>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+Hi metze,
 
-On Tue, Nov 26, 2019 at 6:14 AM Dan Carpenter via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> We accidentally messed up the indenting on this if statement.
->
-> Fixes: 16c696a6c300 ("CIFS: refactor cifs_get_inode_info()")
-> Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
-> ---
->  fs/cifs/inode.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/fs/cifs/inode.c b/fs/cifs/inode.c
-> index 1fec2e7d796a..8a76195e8a69 100644
-> --- a/fs/cifs/inode.c
-> +++ b/fs/cifs/inode.c
-> @@ -967,7 +967,8 @@ cifs_get_inode_info(struct inode **inode,
->                 }
->         } else if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_CIFS_ACL) {
->                 rc = cifs_acl_to_fattr(cifs_sb, &fattr, *inode, false,
-> -                                      full_path, fid);         if (rc) {
-> +                                      full_path, fid);
-> +               if (rc) {
->                         cifs_dbg(FYI, "%s: Getting ACL failed with error: %d\n",
->                                  __func__, rc);
->                         goto out;
-> --
-> 2.11.0
->
+On Wed, Nov 27, 2019 at 4:33 AM Stefan Metzmacher <metze@samba.org> wrote:
+
+> Did you take a wireshark capture to see the kerberos related packets?
+> Does the client really provides a ticket for
+> cifs/kvm7246-vm022.maas.local@TC83.LOCAL?
+> Maybe the cifs/kvm7246-vm022.maas.local principal exists in both domains?
 >
 
+Ah, yes, this was the case. After confirming that the client is sending a
+ticket for that principal name (via wireshark), I found and removed the
+(stale) computer account from the tc84 domain (it was left over from a
+prior test). Now I can authenticate as expected.
 
--- 
-Thanks,
+Should samba fall back to ntmlssp in this situation (stale computer account
+in the client domain)?
 
-Steve
+As far as I know the principal name is ignored when accepting kerberos
+> authentication, but maybe you hit
+> https://bugzilla.samba.org/show_bug.cgi?id=14125
+> or the ticket is just not for the server you try to connect.
+>
 
+I only partially grok the issue there. How can we determine if that's the
+case? I suspect I can recreate the problem scenario easily by joining my
+samba machine to tc84, then leaving the domain without removing the
+computer account, and then re-joining tc83.
+
+
+
+> Which kerberos library is used in you setup?
+>
+
+For this test, I'm building samba master from git, with default
+configuration, so I think that means I'm using samba's built-in copy of
+Heimdal. Is that right?
