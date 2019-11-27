@@ -2,45 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 348ED10AE3D
-	for <lists+samba-technical@lfdr.de>; Wed, 27 Nov 2019 11:55:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A051410B48E
+	for <lists+samba-technical@lfdr.de>; Wed, 27 Nov 2019 18:36:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=RVEbJOlQYFXLVHPjOjqf+TCvjlzJU2hC/eXJTJryGMQ=; b=Kzrl/61gX217xHlmM8oEVLqmJS
-	0YJexRRjUItqcvPE6JyPNU3oWexlUKfNNp1eW6eW4wD4PhhUW9jNRFIQVxaE+508gNLDaaH9HKU6K
-	24zr2kxQdlTwI2ezHeHEMdA821I6zfl0r1ECMIf0YqMYzdynzEDmYFFrexhPDjVmV6zHJSg+k/7wV
-	OkQS95YKBK1qslY57Bo+nmuWFIFwTCkM/r3Uf8B7rzel/ygSNaYOl3dZA/ZRY+XZZScUnm/EUSrBq
-	cFJ7c+Yba4BukcM82KVPGVBtJM5DAawmQIaez08mXU5EfYZ0wmESvKM1jG0aStt9P1WPWVCC3ikYS
-	4YhQ0JzQ==;
-Received: from localhost ([::1]:36884 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=m/7eafJgfpqueNmh9ZRZEk1gJa1dWUpLF0+zUtuTQtk=; b=gkVfxV52MCbCsXemAa8Y4MhcDV
+	BXPUj4/2RgFr76wLljM9YHomAcP+zWHEuydWW49/5a6tfJ+Glfng9Ou/qx3WbTqFpiPM+vxgao92u
+	RMISx5nElfEuAoxoIQq5VkuyoIepZunUewqLLOOhMSvb28rUoKwCiqPqx/XQmFV82eK0j+On5BNFh
+	QL6bfuu0vd7hqB4h85GRMivYo09eaXePkt63PgOqTDJfaC/VMmQCHJ+hy42cbRYpnV7v559h1gMM/
+	YQjBo0uReP37BxnNH3IVVsdN/NWQeMTMSZLVBWX9tqn1UHKQWe9dsumVJqy9A1L7k7H8/MyryhLXA
+	SHlaK9oA==;
+Received: from localhost ([::1]:25710 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iZuxq-002epr-9k; Wed, 27 Nov 2019 10:54:30 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19162) 
+	id 1ia1Dz-002r1o-Ft; Wed, 27 Nov 2019 17:35:35 +0000
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:43805) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iZuxh-002epA-33; Wed, 27 Nov 2019 10:54:23 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=RVEbJOlQYFXLVHPjOjqf+TCvjlzJU2hC/eXJTJryGMQ=; b=NoEDTLSjH2qUxOvyEFZTnSHIrJ
- rXHHEnY21LFS6GSSWrQ5mpvTNlk+4/6xzzSFHkrohuTQ/a9RjmIGqsS47C7O+F3Uxh4BM9H2viCR7
- 4rsU/kLJfCDI+rTTGpxKUcerwP3HBi6oMv6CsNhG8N7gw6xu5rykmuMirrE1nywC9+H1E5ULwCouU
- dfR/MCQL2HbgwA75ClP53ysd+7gHzoRX2Pv07kF7PQ8JU6n33DHS9Vwr7OuVu5ectjRlwaPg0lnCr
- OQICdxE1wkjodqbc5aHJ341J+GsWFdV3nBSsxbs5+cqs8YTQD1pceP0S8z6O1b5IS9pYoWiaEECIR
- P6o+ZNQMfGrLYyCQuE1b9Pd/kdPYw3JS3ImrdYZ96RAwXaZatvyaU1KpNZqWOrQI3ee4iLRzP1drr
- VoYD2dVN4aNewTaxG5NPriSKiDA2NrBrEljk+jxs0FKlB6tIBT9D+Zdzu1NsCuMcMnoe99ID6iknx
- qWQvAwc9Q7BXkJf/vvJrT3XT;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iZuxg-0000Mo-Qu; Wed, 27 Nov 2019 10:54:20 +0000
-Date: Wed, 27 Nov 2019 11:54:19 +0100
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.9.16 Available for Download
-Message-ID: <20191127105418.GA21783@carrie2>
+ (Exim) id 1ia1Dm-002r1h-Db
+ for samba-technical@lists.samba.org; Wed, 27 Nov 2019 17:35:25 +0000
+Received: by mail-il1-x142.google.com with SMTP id r9so21691629ilq.10
+ for <samba-technical@lists.samba.org>; Wed, 27 Nov 2019 09:35:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=m/7eafJgfpqueNmh9ZRZEk1gJa1dWUpLF0+zUtuTQtk=;
+ b=kzH4NtVh4OYNO5XWK5q2X34roBeaEFv1hYVrJESPnFMoeX4x6zh9tBek7hAClUkA4g
+ k0u/lh3gbjt9kDolNMObn5NxGmBbkvjXhXKltFq5DyktQmHKmXKOzcMrleO4B9c8gL6u
+ J7mnuhFXSY7YfFoP6RPu+Bp5dJDR0woy9Z0IHdGYtYOwbPNrf/xDomR1JGfefAL0Liuz
+ Q3G9OtMFeRBKoRex2cSnSpSGpnRJaooF0TyxQo6GhD17UXeaQGoP+0UqqDl0rVRkVKQz
+ WlgoblxJza9sp4/4zTB3Z0fk6DVyt3n2DpJ/WsGkYjh9tgCL1TEagmjQp/WSOa6FD2FM
+ djXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=m/7eafJgfpqueNmh9ZRZEk1gJa1dWUpLF0+zUtuTQtk=;
+ b=kDhU/YeVG3MXYY1pn63eBAjFEYNOCouzrSO44LGxzK0qtL9flvBL7CXWlXaffDEohD
+ WPgbHX11LYoQ6aXthAvYsFON0Ib8HQzjLfz7hjsaxXInLkE9lepko99xyUz/ifBjQLt4
+ GGbn9rjcL2B1HsQ2UFciDgv4NO2n4tdZ2xnNCJDV0VDQukv35Kh64DVgYKPc6Xnr8km4
+ dBpRqBN0ZaGHuZbiSnNu3PBg9uXAJfKbAdvly7oQcrv3ReBkegzSp+WQmCnTa5pdTPcj
+ /Up1HOyr3erMOZ0orGxHLB6CRnpqSw8Dt98OKRkn0ULFFxUUDDWV5GbPNf/0eFhCwVPi
+ SV4Q==
+X-Gm-Message-State: APjAAAU7ZpsGinH4bxUlhTmFDiWYa4+j9fb2zfAZ2ApBq1CpVHxYDO4D
+ IEpGSw4KtgMX/HfZ7CuCpcTep62pNVH/oKVgQQM=
+X-Google-Smtp-Source: APXvYqzfpLfQOzc7XEa3BV41a6BtYeGTMMZpACmEKhIdx9LxMLKPyflnCM1JcbwVuzhbPGp9MFPcwKQVTKF6qnH46ag=
+X-Received: by 2002:a92:d642:: with SMTP id x2mr8753929ilp.169.1574876120477; 
+ Wed, 27 Nov 2019 09:35:20 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="XsQoSWH+UP9D9v3l"
-Content-Disposition: inline
-User-Agent: Mutt/1.9.4 (2018-02-28)
+References: <20191126071650.c76un267i4v6vuoz@kili.mountain>
+In-Reply-To: <20191126071650.c76un267i4v6vuoz@kili.mountain>
+Date: Wed, 27 Nov 2019 11:35:09 -0600
+Message-ID: <CAH2r5mvtC4Dt3XDigxp5cqwEtjYCnSK3_aATiW0Dt0s9kBtTuA@mail.gmail.com>
+Subject: Re: [PATCH] CIFS: fix a white space issue in cifs_get_inode_info()
+To: Dan Carpenter <dan.carpenter@oracle.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,102 +67,50 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: kseeger@samba.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ kernel-janitors <kernel-janitors@vger.kernel.org>,
+ Aurelien Aptel <aaptel@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+merged into cifs-2.6.git for-next
 
---XsQoSWH+UP9D9v3l
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D
-			 "Success is simply a matter of
-			  luck. Ask any failure."
-
-			  Earl Wilson
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D
-
-
-Release Announcements
----------------------
-
-This is an additional bug fix release to address bug #14175 (CTDB: Incoming
-queue can be orphaned causing communication breakdown). Please see
-https://bugzilla.samba.org/show_bug.cgi?id=3D14175 for details.
-
-
-Changes since 4.9.15:
----------------------
-
-o  Volker Lendecke <vl@samba.org>
-   * BUG 14175: ctdb: Avoid communication breakdown on node reconnect.
-
-o  Martin Schwenke <martin@meltin.net>
-   * BUG 14175: ctdb: Incoming queue can be orphaned causing communication
-     breakdown.
+On Tue, Nov 26, 2019 at 6:14 AM Dan Carpenter via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> We accidentally messed up the indenting on this if statement.
+>
+> Fixes: 16c696a6c300 ("CIFS: refactor cifs_get_inode_info()")
+> Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+> ---
+>  fs/cifs/inode.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/fs/cifs/inode.c b/fs/cifs/inode.c
+> index 1fec2e7d796a..8a76195e8a69 100644
+> --- a/fs/cifs/inode.c
+> +++ b/fs/cifs/inode.c
+> @@ -967,7 +967,8 @@ cifs_get_inode_info(struct inode **inode,
+>                 }
+>         } else if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_CIFS_ACL) {
+>                 rc = cifs_acl_to_fattr(cifs_sb, &fattr, *inode, false,
+> -                                      full_path, fid);         if (rc) {
+> +                                      full_path, fid);
+> +               if (rc) {
+>                         cifs_dbg(FYI, "%s: Getting ACL failed with error: %d\n",
+>                                  __func__, rc);
+>                         goto out;
+> --
+> 2.11.0
+>
+>
 
 
-#######################################
-Reporting bugs & Development Discussion
-#######################################
+-- 
+Thanks,
 
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the "Samba 4.1 and newer" product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=3D=3D Our Code, Our Bugs, Our Responsibility.
-=3D=3D The Samba Team
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Download Details
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
-=66rom:
-
-        https://download.samba.org/pub/samba/stable/
-
-The release notes are available online at:
-
-        https://www.samba.org/samba/history/samba-4.9.16.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                        --Enjoy
-                        The Samba Team
-
---XsQoSWH+UP9D9v3l
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCXd5V1wAKCRAoaL1+KxeT
-URWEAKCmY+vxwYpswm8f0QDDRd50OiuUpgCghq+q3ylxFgPdszfSjGEsXPnzMak=
-=CQIo
------END PGP SIGNATURE-----
-
---XsQoSWH+UP9D9v3l--
+Steve
 
