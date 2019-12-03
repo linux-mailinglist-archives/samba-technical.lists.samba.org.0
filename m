@@ -2,58 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A075110F304
-	for <lists+samba-technical@lfdr.de>; Mon,  2 Dec 2019 23:58:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AF5F110F58C
+	for <lists+samba-technical@lfdr.de>; Tue,  3 Dec 2019 04:25:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=7OqmQQJODK9vo7ge/B5mit6aPLYvUZlqzcHChoc1YCQ=; b=GW5OKtBxn7cw/+wKU6ki0NOfOz
-	dmUNoNRrBIO4hf6Xh/Vk8lKyqz+75OyHL86E3XuwnVMwh6s6OK/1cwGDuUa8dG4vPX/VzrJpncAQH
-	cazObKablFlRkx0hunJL8dCmv3w6gc86ce3on4cOUBEBzSAUkrlpggVs/KhO9Cmz7+PurTF33NXOe
-	cK4JI5QCf6NsXTy244xE9tUnRD+3lWvoXOdMpRWIJYV0NfpS7T2Nz3SA9LgN63aB0t5ocOWhCy5dj
-	UZ103EcQdSrZNaqfUIAJxxNHbrjwI/2xhtBf9+QvJCHkiYCzTp7HbPATQ/WsWtvJIZRLDYXWCqV3i
-	PDFWROzw==;
-Received: from localhost ([::1]:61070 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=uq8cBDvKR8MjOK6limgheyw6zDITJW8o7GoQ4UdNY78=; b=2ORiwDGATb6Krzae7J/PqDXajx
+	9iAafClLfbcS//KOKedkMrfTuFVDbR/6MB28vYV3TogV9GBI6hIIPhFmJp5qZ7Hi5c+hsTJhMiquB
+	BIf3MCX42MsdvpIsF5RFWrr6mI7KOY+e1BcezkEbHWm8QTKVmYDlXGdK86KfvKKXQoB9QdvBSpq5o
+	VX+4Y+ISoVtdczsjmhMywTc/nT7nY/C7q8+gGGZxQ4De06YJzgELLUTaoUlqKj7i/exiftUKdLGn7
+	ILZQZs/6tc40N080hvFvZXt8iJmLMPbZsd1e5ug2dl+hsVE0RYZXWuycmYOeElHXu9Ybx05AIs+pX
+	MTifH4Fg==;
+Received: from localhost ([::1]:65260 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ibudI-005hwD-TL; Mon, 02 Dec 2019 22:57:33 +0000
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:43757) 
+	id 1ibynE-005jf2-86; Tue, 03 Dec 2019 03:24:04 +0000
+Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:59921 helo=ozlabs.org) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ibudE-005hw6-Of
- for samba-technical@lists.samba.org; Mon, 02 Dec 2019 22:57:30 +0000
-Received: by mail-io1-xd43.google.com with SMTP id s2so1351218iog.10
- for <samba-technical@lists.samba.org>; Mon, 02 Dec 2019 14:57:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=7OqmQQJODK9vo7ge/B5mit6aPLYvUZlqzcHChoc1YCQ=;
- b=F22W3AgfuOPDFHPUrzCdhSGKZJ5xlcnM9mGSYTNvFr6FpKl9wy/vJ0TDsYGmK/Lmi0
- k+7DaOUXEByM/pAYnnZjwVG+jAJXMkaoQZW/FIKAXTyKHrWNdo9PCeWqsHdtLS9jzZMl
- FFcznrw13nyZ1FTCsnAQMpH9kEdemBNM5JSJkOoiQZRD1NRhZVke2mdAzRMYJG8ERrQn
- vN/gyPBpQaUzOCbziR/WY250xSzZn5sBeIBRpSnc7bFX74UJzO4DZQPqdXbEe4YAcWiC
- /vhIyZzZct+N8pgTpmOg1DLcva9ycL6G0BfkqnSMUwqYs+zSA+udV+WorBeQwdxSYcJZ
- uNgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=7OqmQQJODK9vo7ge/B5mit6aPLYvUZlqzcHChoc1YCQ=;
- b=gFszESjaz5auXSYWNBx1xPXOgnWHYcOoA4G72CAlBDjgdgaC82Kf/JhunxikNrrscn
- 0FCEsMLtIiUwsojvp8u9Lbtd2n6Z1cttnzLpCR0ku/EjTvjeE09jH14M+7R8hzWi79IW
- bY3C/D2+QeYzuNYvbqb+Qra3/vMyYhlZ90MM3YkB2KMpUUtoh7uWJbGuIhwLzxcOgrsy
- Ng/WdKGeu33VmXY7Nj9oUaZDOxxNrfq76O1+4lGyGrrEwTrrZsSi/STIM31+3T8tOmdr
- z8rW80zP6X/aok7Ms2icq3eOKb2JbQEalQ+kZyApzF4u59uLWpeJN3Y35FmgtIiXs8iO
- LdEg==
-X-Gm-Message-State: APjAAAUpAXO2xcNzT4Mh7M9nm/XlREVaWvj7QHDP+qT6IS4iv3WJSWHv
- fXOzivmQR1uuxvoIe5YRY46POpUzi/s9snFHfng=
-X-Google-Smtp-Source: APXvYqzqgWdV8UxJScltcaQcOuDlIwZa5df7npulO3GcZdYl61HsqySvcNsIK04eAK1TVZwGNGoelGvqxFtQSH+5kGk=
-X-Received: by 2002:a6b:8d11:: with SMTP id p17mr1252191iod.3.1575327446607;
- Mon, 02 Dec 2019 14:57:26 -0800 (PST)
+ (Exim) id 1ibyn5-005jel-Tz
+ for samba-technical@lists.samba.org; Tue, 03 Dec 2019 03:24:01 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 47RnPR1PRDz9sPc;
+ Tue,  3 Dec 2019 14:23:22 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
+ t=1575343403; bh=8oBJsxtSYD8UTdwMH3bULeOzAH+HMaqVoB7wG6C4Q5E=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=bDjJfN7A6N/5iI2mpSJzh6ASuJtfJVGKxH6Figees9bouF1rB2DP/TtYH+MeDfLXY
+ erG5ZoN1QBezUp87OjJOvloFAJQXBnCYAVWxzA9o1GuEveLk4Kh+l3ykyOxy+GKqbX
+ c8rQGi1/4hGr8/m7eIWwm1dEQCZH32QG8VG4m+LPg/snKPxLnd+Yiq3CLiZKsSL7kV
+ 9JoLCsDHzPaJ34pzP3ozMLtwrrd4O9qjSx2HzEw5wzGBr+bAwR5msil122cLOtLLam
+ mgvmL1axQqVI+m8tuMI/4QnQq8k1zfaFqCAKMLKFRBG9Lz737c42iI8cNLG5xh9V3m
+ z+Z8Pdks7CrOw==
+Date: Tue, 3 Dec 2019 14:23:21 +1100
+To: =?UTF-8?B?6IC/57qq6LaF?= <gengjichao@jd.com>
+Subject: Re: ctdb 4.11.2 version failed to recover
+Message-ID: <20191203142321.29eb01a3@martins.ozlabs.org>
+In-Reply-To: <07289a1fd0a740db8e1f0abad2b7a49c@jd.com>
+References: <07289a1fd0a740db8e1f0abad2b7a49c@jd.com>
+X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <20191202185942.81854-1-colin.king@canonical.com>
-In-Reply-To: <20191202185942.81854-1-colin.king@canonical.com>
-Date: Mon, 2 Dec 2019 16:57:15 -0600
-Message-ID: <CAH2r5ms+DVGP+Wgx+cTe65sBCFskrXBNxNe1gMDr+sEQ1DbqAA@mail.gmail.com>
-Subject: Re: [PATCH] cifs: remove redundant assignment to pointer pneg_ctxt
-To: Colin King <colin.king@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,51 +57,81 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- kernel-janitors <kernel-janitors@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+Hi,
 
-On Mon, Dec 2, 2019 at 1:00 PM Colin King <colin.king@canonical.com> wrote:
->
-> From: Colin Ian King <colin.king@canonical.com>
->
-> The pointer pneg_ctxt is being initialized with a value that is never
-> read and it is being updated later with a new value.  The assignment
-> is redundant and can be removed.
->
-> Addresses-Coverity: ("Unused value")
-> Signed-off-by: Colin Ian King <colin.king@canonical.com>
-> ---
->  fs/cifs/smb2pdu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
-> index ed77f94dbf1d..be0de8a63e57 100644
-> --- a/fs/cifs/smb2pdu.c
-> +++ b/fs/cifs/smb2pdu.c
-> @@ -554,7 +554,7 @@ static void
->  assemble_neg_contexts(struct smb2_negotiate_req *req,
->                       struct TCP_Server_Info *server, unsigned int *total_len)
->  {
-> -       char *pneg_ctxt = (char *)req;
-> +       char *pneg_ctxt;
->         unsigned int ctxt_len;
->
->         if (*total_len > 200) {
-> --
-> 2.24.0
->
+On Fri, 29 Nov 2019 07:20:59 +0000, =E8=80=BF=E7=BA=AA=E8=B6=85 via samba-t=
+echnical
+<samba-technical@lists.samba.org> wrote:
 
+>        I use the ctdb of 4.11.2 version, include the newest patch(https:/=
+/bugzilla.samba.org/show_bug.cgi?id=3D14175). But,when I test the NIC excep=
+tion, I encounter a problem, the ctdb cluster can not
+> Recover Normal.
+>        The test steps are as follows:
+>=20
+> 1=E3=80=81 ctdb cluster have two ndoes, nodeA and nodeB=EF=BC=8Cthe clust=
+er status is OK=E3=80=82
+>=20
+> 2=E3=80=81 Ifdown the nodeA and nodeB=E2=80=99s NIC, which config private=
+ IP.
+>=20
+> 3=E3=80=81 After 25 seconds, nodeA and nodeB detech each other dead=EF=BC=
+=8Cthen call the functions: ctdb_tcp_restart->ctdb_tcp_node_connect,
+> but bind failed, print the log:
+>=20
+> node 10.240.226.211:4379 is dead: 0 connected
+>=20
+> Tearing down connection to dead node :1
+>=20
+> Failed to bind socket (Cannot assign requested address)
 
--- 
-Thanks,
+It really depends what you are trying to test and how you are doing
+it...
 
-Steve
+I am wondering if you are using:
+
+* ifdown <device> (which unassigned the IP address)
+
+* ip link set <device> down (or ifconfig <device> down)
+
+The first of these definitely does not test anything like a
+hardware/link failure.  Normally, if a link goes down the IP address
+will stay on the interface.  This case is much more likely than the
+case where an admin accidentally takes down the wrong interface.
+
+> solution:
+>        when bind failed, no one will reestablish connections, even the NI=
+C is up. I think when bind failed, we should use the time to retry. The pat=
+ch is follow, I test it work well=E3=80=82
+> --- a/ctdb/tcp/tcp_connect.c
+> +++ b/ctdb/tcp/tcp_connect.c
+> @@ -236,6 +236,11 @@ void ctdb_tcp_node_connect(struct tevent_context *ev=
+, struct tevent_timer *te,
+>                 DBG_ERR("Failed to bind socket (%s)\n", strerror(errno));
+>                 close(tnode->out_fd);
+>                 tnode->out_fd =3D -1;
+> +               tnode->connect_te =3D tevent_add_timer(ctdb->ev,
+> +                                                       tnode,
+> +                                                       timeval_current_o=
+fs(5, 0),
+> +                                                       ctdb_tcp_node_con=
+nect,
+> +                                                       node);
+>                 return;
+>         }
+
+So, while you have identified a situation from which ctdbd does not
+recover and provided a possible fix, I would like to understand what
+you are trying to test before we agree on the best fix. ;-)
+
+Thanks...
+
+peace & happiness,
+martin
 
