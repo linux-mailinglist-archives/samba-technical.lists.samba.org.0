@@ -2,41 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C173110108
-	for <lists+samba-technical@lfdr.de>; Tue,  3 Dec 2019 16:18:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D601C1127F4
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Dec 2019 10:43:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=Lsl7ZTcH6p13nfOQS2EGVGfcyZ4WUnXUi6msOuLCFhE=; b=oDruyD1RHHtarCpZD6oP6gnpgD
-	docEOhWy5VwwUQd6lWGqRVuYmJnQ9Iyx6PM5n4RaggqtVkmI1X6PJlKgGU++gXWuD40TvOI9nHRiq
-	YRFISI4aKVxrUMIXv0r6d/usdwzfDm3Dh9/CCVUuW16C30nw/I4zQB2IYLIRZrPjN4xKuDCGogqEZ
-	DyXh/f/WgwQajcYJhtY1fRJYoeVw1soW7QdZ15gyUf/IDPPhthjMUen/qA6VKfBl2HOXEz+e7MIY1
-	iwUhKVMsKu11NVMddbEByiWjmN+nYtCYj0fIyi2bz3lSnuDdlglUF5YxQ4csBCK3MNj+jEyFDgF9n
-	5pAXK8Qg==;
-Received: from localhost ([::1]:54272 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=OylMN4gzR9SJP+j134/E6Ac8AM6X09rv/DvjRw/O1h0=; b=B1qo2uqlwguxaAdwNvHmEqDjFZ
+	nj7fb2URkfe7ch3xO5Kk6GX+2ic4Y21ieqEiTQMmaIzTYFEcGfWjnwfdAKQWLIGiimzhDU9zfFB/J
+	+uvm2W+cA/ACVmt7j6TwVhExQL6Mbg7HhHqoCwTNXDevHFVO8G8Ekl+FOJrx9gZQfZrCncDf0aVNk
+	EdbzaVOeOR4ZelQw9/qF6T/aa2VmmUuLT4SjGSVD7RX+k9YPyzo3IncJxCNWON5lvCNfipSizYn6+
+	e5tc2fxjnGbbCstsBK4msfvDsfACHY2DDJGLYuQ+nr76UXszKqHTROv3hHKpVMi6wzKENQU5Qf+wR
+	6WeMpyWg==;
+Received: from localhost ([::1]:32338 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ic9wN-005rzA-60; Tue, 03 Dec 2019 15:18:15 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18622) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ic9wI-005rz3-CB
- for samba-technical@lists.samba.org; Tue, 03 Dec 2019 15:18:12 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=Lsl7ZTcH6p13nfOQS2EGVGfcyZ4WUnXUi6msOuLCFhE=; b=P8d6nGiITF0ZXvszv8DgmcIeXP
- 1n6Qj8pmHUpVygcOsHpJVQpJlL/y2l5SQamMnefxPDf1x4xlQDnMGY/4uLm2KITt+9UZFu/AOE5JL
- FSooTkPxVdOu4ruqlhf+X35AlHCt047GNz7ISxx8lg3ItXvKqFMnuGebcKZny624uI0lz1ONBG/+5
- H7lIBdnqQr/JDlij3AAyToJYb56yL6xB8mk78+7dQXQyxDCHziKyOAp4rkxsoR6Yh5rdqYuqniUyu
- EmqhJMIW9dlD4R7hf/xjuuMdTgBNw3kKDNl7J/21j/wZiG3PesrcfCJlc658vip/NRhjk1h12DpzM
- Z+dRZCGjbRgXyM0+03zBTEiuml3qCkD/j4vwns5OVkI+b95iRzeWD0vvUQVVUlSi8DaAdUdADiH2X
- CfknRP7SeY6dWYZkrHcjaIYWSoHnWSwS2hcfDQ3tMAkFdYMBYRKSWmJ7cku5bCcAO320OguYdIE5o
- yvhKDCXMJTLA//dLcd2jdfgA;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ic9wH-0005L1-Ag; Tue, 03 Dec 2019 15:18:09 +0000
+	id 1icRAG-005zYx-2y; Wed, 04 Dec 2019 09:41:44 +0000
+Received: from m9a0003g.houston.softwaregrp.com ([15.124.64.68]:51344) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1icRA5-005zYp-8Y
+ for samba-technical@lists.samba.org; Wed, 04 Dec 2019 09:41:41 +0000
+Received: FROM m9a0003g.houston.softwaregrp.com (15.121.0.191) BY
+ m9a0003g.houston.softwaregrp.com WITH ESMTP; 
+ Wed,  4 Dec 2019 09:40:41 +0000
+Received: from M4W0334.microfocus.com (2002:f78:1192::f78:1192) by
+ M9W0068.microfocus.com (2002:f79:bf::f79:bf) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10; Wed, 4 Dec 2019 09:38:55 +0000
+Received: from NAM01-SN1-obe.outbound.protection.outlook.com (15.124.8.10) by
+ M4W0334.microfocus.com (15.120.17.146) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10 via Frontend Transport; Wed, 4 Dec 2019 09:38:55 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Sq5BoLGDmNvf2QL8YRKaYmXKrs29ut8j+AUNWPoFQwrhW1coYI7afRhBg5Cxf2z0tghSC5aFsOOY9n1eEwSiacunt37oeW6TYuaPwigwQAzJ3No1CiI17q6PArQMCrDyCVVDm5KWDx+BY9gjWnF7Ob1G+c8hM+/0/Ra2BN9k7jj3giQDU1/rOFS5ETVufkns5boDuqDwVz7oxcdeipB2DGzYfF5VUdTVLh8IxnOVCricDxcxNmjZhJQbctvAV9Y+ayxCeYe9IoIaracjrye891tG/QOk199K5zBs7EMkHMDGZvbPwR3cxKZ5lsnsYHgNIT/i1TVAyUzHQHsRrtojkA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OylMN4gzR9SJP+j134/E6Ac8AM6X09rv/DvjRw/O1h0=;
+ b=ar3WpnlAqyOtfXrsxP9S6aC2LLDs5vFdxTV6K2QdTdy4WWrPbv3Nb/vbsQ1Zo3ObWRFdfbtEQrFH1++9KaSP6VL7+qY6tc9hhRjfO9D8Dje+sqpWBuP4bBo+8sutCN8SEPZkiG2X/syGBUyl5sfydV/BykEVAoldspZtoEn4pffuKWsNF8W8yk8DuchgP8yEqOx0jazdhNGjQJxEkZ9qOAOP1OOn8z6mRKR+mJ0e8KbXQL1Z5SvWaFLHV5W7IxH6AplXDn1EMcF8gXDVG7T/BMnkEX5ZQIATq/gUQfqkbkXbJmny82a9AYhmvRVqzpUHZ4rhtVA30SfvJaLjUYHHHw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Received: from DM6PR18MB2507.namprd18.prod.outlook.com (20.179.71.218) by
+ DM6PR18MB2620.namprd18.prod.outlook.com (20.179.106.207) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2516.13; Wed, 4 Dec 2019 09:38:47 +0000
+Received: from DM6PR18MB2507.namprd18.prod.outlook.com
+ ([fe80::2069:4bc2:2443:c7db]) by DM6PR18MB2507.namprd18.prod.outlook.com
+ ([fe80::2069:4bc2:2443:c7db%6]) with mapi id 15.20.2516.013; Wed, 4 Dec 2019
+ 09:38:47 +0000
+To: Ralph Boehme <slow@samba.org>, Noel Power <NoPower@suse.com>, Noel Power
+ <NoPower@suse.com>, npower <npower@samba.org>
 Subject: Re: Converting SMB1 tests to SMB2
-To: noel.power@suse.com, Noel Power <NoPower@suse.com>,
- npower <npower@samba.org>
+Thread-Topic: Converting SMB1 tests to SMB2
+Thread-Index: AQHVdUNqiOZWCa16a0elHejFomZ1kadQugh0gA6wbN+AAQJmgIAARkCAgAAQXgCAB2I8AIAAAnuAgAAJSYCAAAhSAIAADaSAgAAIYx6ADoq/AIAHznWAgALm3ICACU8HAIAMyTUAgAYLbYCAAEmiAIACBI8AgAjtegCAATN2gA==
+Date: Wed, 4 Dec 2019 09:38:46 +0000
+Message-ID: <16a391a4-c82b-5809-94b1-f4eb8fd8efb0@suse.com>
 References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
- <0981db46-93bf-f153-c98f-15d5cf404353@suse.com>
  <ed7eb92f-46a7-758e-f3b5-185d71b8b98a@samba.org>
  <002434db-63ef-edad-d091-76e3efe783d1@samba.org>
  <15dfbaf6-c774-debe-b61e-c3ef4e7f9727@samba.org>
@@ -55,15 +74,35 @@ References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
  <e09044be-713a-f074-ed2f-e41168646d81@samba.org>
  <7a86b0cd-9eea-d077-69ac-9077d0cc12c8@suse.com>
  <70b3cc00-1f71-4f17-f9c4-8fd72b41543f@suse.de>
-Message-ID: <150ed4fe-84d7-f1b4-18aa-5443e063a355@samba.org>
-Date: Tue, 3 Dec 2019 16:18:08 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
-MIME-Version: 1.0
-In-Reply-To: <70b3cc00-1f71-4f17-f9c4-8fd72b41543f@suse.de>
-Content-Type: text/plain; charset=utf-8
+ <150ed4fe-84d7-f1b4-18aa-5443e063a355@samba.org>
+In-Reply-To: <150ed4fe-84d7-f1b4-18aa-5443e063a355@samba.org>
+Accept-Language: en-GB, en-US
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=NoPower@suse.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [51.37.208.226]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 9ea2ff39-dfbe-4df4-1469-08d7789dc22c
+x-ms-traffictypediagnostic: DM6PR18MB2620:
+x-ld-processed: 856b813c-16e5-49a5-85ec-6f081e13b527,ExtFwd
+x-ms-exchange-transport-forked: True
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: xEdpXZqfAl9h3p+aJzqBIuXImn2eIEp0IbqFqnFUR4Je1znaG1kWCU8tRy+nMP4d1/xN6NTxw35FeZ5mDMeZ1FWex2DIPcZUbFYjJsWqKvie0aI/T1alPfRCzSFHg9VT3toHuLgEMV7hAsFjMreQEbM4ddIurXHjACYp8duTH0CBoPxgl4FVOdiAE8A2W42NAiA7xjsNRi3mcC5dJidP6wyBXt8lV4xCtgTb8d3/0d7hsh7vSHq/TCm9UCyJn5DhYptZfQcrC0Zh9CKemW8zKLD8MHZezgSYsX1V9dF5fM7Sf0TqOdLFaz+Rb4SYi4SPxs+Dv9Zin6+Mv9Ifbc3EgV0ihevu0qIG43yrvYs5Y/IFOGfi/b17yuRwynB4vfT64AjIXPEV1kFizfRH3zRo0N591ay7KAqj4jUirMAtjBOaP+E1fkSkTKtLBVioIYMthsrrzg51OgNNQ0yuh7QZSMaj4K5VZ7XjpHuAuIluts0=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <0CE88AF61E05BF4CB4F9FE96D8E8D71D@namprd18.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9ea2ff39-dfbe-4df4-1469-08d7789dc22c
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: G6rNP+y8uLne7sY+UqJqXPOKojNbX9swdeereF8YOYaXp+s6WBkMHNU3SNNzRAVMHLMeyho0qXXSWrykcitywA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR18MB2620
+X-OriginatorOrg: suse.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,202 +116,95 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Noel Power via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Noel Power <NoPower@suse.com>
 Cc: Stefan Metzmacher <metze@samba.org>, David Mulder <david.mulder@suse.com>,
  samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Noel,
-
-On 11/27/19 11:58 PM, Noel Power wrote:
-> Hi Ralph & *
-> 
-> Some observations
-> 
-> On 26/11/2019 16:09, Noel Power wrote:
->> Hi Ralph
->>
->> On 26/11/2019 11:45, Ralph Boehme via samba-technical wrote:
-> [...]
->>> Stepping back a little I think we only need the following:
->>>
->>> 1. The file with the list of failing tests should not be used as a skip
->>> list. Just maintain a private branch with the changes needed to generate
->>> the list. The list can go into master as eg selftest/smb1-todo or
->>> similarily named.
->>>
->>> Ideally the commit that adds the list also included instructions and the
->>> patchset as file that is needed to regenerate the list on sn-devel.
->> currently the skip file is effectively documentation, the commits around
->> this at the start of the patch set are just to prove it was a valid list
->> (after migrating the envs to default only negotiate >= SMB2)
->>
->> There are no 'changes' to generate the the list of skip tests other than
->> making all envs by default not negotiate SMB1 and then trying to see
->> what fails (and unfortunately this isn't as straight forward as running
->> the tests with FAIL_IMMEDIATELY=0 as some tests hang etc.
->>
->> So I am not sure which changes you mean should be in a private branch. I
->> guess I misunderstand what you mean
-> 
-> ok, I poked around a bit with this again today, with the ad_dc_ntvfs
-> changes the landscape of errors seems a little different and my
-> impression is not as many now hang. So maybe such instructions could be
-> 
->   + apply a small patch to the existing skip file [1]
-> 
->   + apply patches we have already to make the envs default not negotiate
-> SMB1 (with the exception of ad_dc_ntvfs)
-> 
->   + run autobuild or submit to gitlab and scrape the stdout logs with [2]
-> 
-> That should suffice for (re)creating a skip file
-> 
-> skip file at
-> 
-> https://gitlab.com/samba-team/devel/samba/commits/npower_with_smb2_ntvfs
-> 
-> was generated using above steps, verified here
-> 
-> https://gitlab.com/samba-team/devel/samba/pipelines/99046676
-
-Looking much better.
-
-Many, many torture test really could be run only against one env instead
-of ad_dc and nt4_dc, eg
-
-samba3.base -> fileserver (and then fileserver_smb1)
-samba3.raw -> dito
-
-But that is probably a lot of work only saving one smb1 env.
-
->>> 5. Add correspondong _smb1_done alias envs.
->>>
->>> 6. Go through the todo list, either
->>>    a) just fixing the test if it should genuinely
->>>       work with smb2 => remove test from todo list
->>>    b) convert failing smb1 tests to use the
->>>       envs from 4 => update used test env in todo list
->> I guess this answers my question above wrt. above
-> 
-> It would be great to know what environments are perhaps suitable
-> alternatives to problematic ones especially if there is a need to keep
-> the number of new environments at  minimum.
-> 
-> Looking even at existing tests that already are already split between
-> SMB1 & >= SMB2 the following environments are affected
-> 
-> e.g. The following are just a few examples of legitimate tests (that
-> don't need porting) that currently would fail if run against
-> environments that cannot negotiate SMB1
-> 
-> samba3.blackbox.acl_xattr.NT1\(fileserver\)
-
-remove this one, only run the SMB3 variant.
-
-> samba3.blackbox.inherit_owner.default.NT1\(fileserver\)
-
-dito. Also likely true for all the other blackbox tests that run NT1 and
-SMB3. BUt again please make micro commits so we can review and test
-individually.
-
-> samba3.blackbox.smbclient_basic.NT1\(nt4_dc_schannel\)
-
-remove it.
-
-> samba3.blackbox.smbclient_large_file -mNT1 -e NTLM\(nt4_dc:local\)
-
-remove it.
-
-> there are many more, plus tests than need to be split (because they
-> currently mix SMB1 & SMB2 tests in the same test driver script file)
-> 
-> quickly scanning the following tests involved use the following environments
-> 
->     fileserver, nt4_dc, nt4_member, nt4_dc_schannel, fl2000dc,
-> maptoguest, s4member, ad_member, ad_dc
-> 
-> There are quite a few environments here, certainly more than the 3, any
-> advice on substitutions ?
-
-See my previous mail.
-
-> 
-> Additionally there are quite a few tests that  use smbclient4 (and other
-> s4 clients, e.g. cifsdd, locktest etc.) and these all will fail because
-> they afaics cannot handle smb2. Could we replace use of smbclient4 with
-> s3 smbclient in these tests?
-
-Oh, that's a good question. :) I guess at least the
-samba4.blackbox.kinit tests could use smbclient from s3.
-
-> what is the plan for smbclient4, it doesn't
-> seem fully featured, is it really used outside the tests, is it worth
-> investing time to convert it to use smb2 ?
-
-No.
-
-> I see cifsdd is part of the
-> samba suite so this one needs adjusting to be able to use >= SMB2
-
-If feel like removing it, but maybe someone want to convert it. Until
-then the test uses ad_dc_ntvfs env, so it can stay as it is.
-
-> What about s4member? (and other envs that are dependant on ad_dc_ntvfs)
-> should these be additionally treated the same as ad_dc_ntvfs and allow
-> SMB1 also ?
-
-Iirc s4member still uses the NTVFS s4 fileserver in my branch, so yes,
-iirc my idea was that all those should keep smb1.
-
-> it seems strange to set up an environment which is going to
-> have communication issues because half it can talk SMB1 and the other
-> half can't
-> 
->>>    Step 6 can be spread across volunteers.
->>>
->>> 7. When the list is fully processed and all remaining tests on the todo
->>> list that still need smb1 use one of the new _smb1 envs, disable smb1 in
->>> all other envs except ad_dc_ntvfs and s4member.
->> I don't like that disabling smb1 by default for the 'normal'
->> environments is now a final step, that isn't as nice as starting from an
->> initial point where we can clearly see what runs >=SMB2 and what
->> doesn't, not only see but actually know (because the default env setup
->> would prevent any accidently SMB1 usage) and similarly when you port a
->> test you know it isn't still using some SMB1 that you didn't notice.
->>
->> I wonder how far off we would be if I merged your slow-ad_dc_ntvfs in
->> terms of what extra (if any) envs are needed, I will try
-> 
-> well current 13 envs appear in the latest skip file
-> 
-> ad_dc
-> ad_dc_default
-> ad_member
-> chgdcpass
-> fileserver
-> fl2000dc
-> maptoguest
-> nt4_dc
-> nt4_dc_schannel
-> nt4_member
-> rpc_proxy
-> s4member
-> simpleserver
-> 
-> btw I opened https://gitlab.com/samba-team/samba/merge_requests/947 for
-> some prep work to split tests so they can be divided across envs that
-> are SMB2 only and still support SMB1 (if we ever get to that point :->>>>)
-
-I'll take a look tomorrow!
-
-Thanks!
--slow
-
--- 
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+SGkgUmFscGgNCg0KT24gMDMvMTIvMjAxOSAxNToxOCwgUmFscGggQm9laG1lIHdyb3RlOg0KWy4u
+Ll0NCj4+IG9rLCBJIHBva2VkIGFyb3VuZCBhIGJpdCB3aXRoIHRoaXMgYWdhaW4gdG9kYXksIHdp
+dGggdGhlIGFkX2RjX250dmZzDQo+PiBjaGFuZ2VzIHRoZSBsYW5kc2NhcGUgb2YgZXJyb3JzIHNl
+ZW1zIGEgbGl0dGxlIGRpZmZlcmVudCBhbmQgbXkNCj4+IGltcHJlc3Npb24gaXMgbm90IGFzIG1h
+bnkgbm93IGhhbmcuIFNvIG1heWJlIHN1Y2ggaW5zdHJ1Y3Rpb25zIGNvdWxkIGJlDQo+Pg0KPj4g
+wqAgKyBhcHBseSBhIHNtYWxsIHBhdGNoIHRvIHRoZSBleGlzdGluZyBza2lwIGZpbGUgWzFdDQo+
+Pg0KPj4gwqAgKyBhcHBseSBwYXRjaGVzIHdlIGhhdmUgYWxyZWFkeSB0byBtYWtlIHRoZSBlbnZz
+IGRlZmF1bHQgbm90IG5lZ290aWF0ZQ0KPj4gU01CMSAod2l0aCB0aGUgZXhjZXB0aW9uIG9mIGFk
+X2RjX250dmZzKQ0KPj4NCj4+IMKgICsgcnVuIGF1dG9idWlsZCBvciBzdWJtaXQgdG8gZ2l0bGFi
+IGFuZCBzY3JhcGUgdGhlIHN0ZG91dCBsb2dzIHdpdGggWzJdDQo+Pg0KPj4gVGhhdCBzaG91bGQg
+c3VmZmljZSBmb3IgKHJlKWNyZWF0aW5nIGEgc2tpcCBmaWxlDQo+Pg0KPj4gc2tpcCBmaWxlIGF0
+DQo+Pg0KPj4gaHR0cHM6Ly9naXRsYWIuY29tL3NhbWJhLXRlYW0vZGV2ZWwvc2FtYmEvY29tbWl0
+cy9ucG93ZXJfd2l0aF9zbWIyX250dmZzDQo+Pg0KPj4gd2FzIGdlbmVyYXRlZCB1c2luZyBhYm92
+ZSBzdGVwcywgdmVyaWZpZWQgaGVyZQ0KPj4NCj4+IGh0dHBzOi8vZ2l0bGFiLmNvbS9zYW1iYS10
+ZWFtL2RldmVsL3NhbWJhL3BpcGVsaW5lcy85OTA0NjY3Ng0KPiBMb29raW5nIG11Y2ggYmV0dGVy
+Lg0KPg0KPiBNYW55LCBtYW55IHRvcnR1cmUgdGVzdCByZWFsbHkgY291bGQgYmUgcnVuIG9ubHkg
+YWdhaW5zdCBvbmUgZW52IGluc3RlYWQNCj4gb2YgYWRfZGMgYW5kIG50NF9kYywgZWcNCj4NCj4g
+c2FtYmEzLmJhc2UgLT4gZmlsZXNlcnZlciAoYW5kIHRoZW4gZmlsZXNlcnZlcl9zbWIxKQ0KPiBz
+YW1iYTMucmF3IC0+IGRpdG8NCj4NCj4gQnV0IHRoYXQgaXMgcHJvYmFibHkgYSBsb3Qgb2Ygd29y
+ayBvbmx5IHNhdmluZyBvbmUgc21iMSBlbnYuDQoNCnNvIGp1c3QgdG8gYmUgY2xlYXIsIGZvciBl
+eGFtcGxlIHNhbWJhMy5iYXNlIC4qIHRlc3RzIHJ1biBnZW5lcmFsbHkgaW4NCm9uZSBvciBtb3Jl
+IG9mIHRocmVlIGVudmlyb25tZW50cyAoYWRfZGMsIGZpbGVzZXJ2ZXIsIG50NF9kYykgZWl0aGVy
+DQpmaWxlc2VydmVyICpvciogYm90aCAoYWRfZGMgJiBudDRfZGMpIHNvIHlvdSBwcm9wb3NlIGFz
+IGEgZ2VuZXJhbCBydWxlDQp3ZSBydW4gYWxsIHRoZXNlIHRlc3RzIG5vdyBpbiBmaWxlc2VydmVy
+ID8gKHJlYWxpc2luZyBvZiBjb3Vyc2UgdGhlcmUNCm1heSBiZSBzb21lIHRlc3RzIHRoYXQgZm9y
+IHNvbWUgcmVhc29uIHJlYWxseSBkbyBuZWVkIHRvIHJ1biBpbiBhZF9kYyBvcg0KbnQ0X2RjIGJ1
+dCBub3QgYm90aCkNCg0KYW5kIHNhbWUgcHJvcG9zYWwgZm9yIHNhbWJhMy5yYXcgKHdoaWNoIHVz
+ZXMgYWRfZGMsIG50NF9kYyBvcg0KKnNpbXBsZXNlcnZlciopIHNvIGFnYWluIHJ1biBhbGwgaW4g
+ZmlsZXNlcnZlciA/DQoNCkkga25vdyB0aGVzZSBhcmUgcHJvYmFibHkgYm9yaW5nIHF1ZXN0aW9u
+cyBidXQgY3VycmVudGx5IHdoaWxlIEkNCnVuZGVyc3RhbmQgYSBiaXQgYWJvdXQgdGhlIG1lY2hh
+bmljcyBvZiBob3cgdGhlIHRlc3Qgc3lzdGVtIHdvcmtzIEkNCmRvbid0IHJlYWxseSBoYXZlIGFu
+eSBrbm93bGVkZ2UgYWJvdXQgdGhlIGVudmlyb25tZW50cyBhbmQgd2hhdCB0aGV5DQp0YXJnZXQs
+IHdoZW4geW91IHNob3VsZCB1c2Ugb25lIGluc3RlYWQgb2YgYW5vdGhlciBldGMuIFNvLi4uIGhv
+cGVmdWxseQ0KeW91IHdpbGwgdW5kZXJzdGFuZCB3aHkgSSBjdXJyZW50bHkgbG9vayBmb3Igc3Bl
+Y2lmaWMgKGFuZCBwcm9iYWJseQ0Kb2J2aW91cyB0byBldmVyeW9uZSBlbHNlKSBkZXRhaWxzDQoN
+Cj4NClsuLi5dDQo+PiAmID49IFNNQjIgdGhlIGZvbGxvd2luZyBlbnZpcm9ubWVudHMgYXJlIGFm
+ZmVjdGVkDQo+PiBlLmcuIFRoZSBmb2xsb3dpbmcgYXJlIGp1c3QgYSBmZXcgZXhhbXBsZXMgb2Yg
+bGVnaXRpbWF0ZSB0ZXN0cyAodGhhdA0KPj4gZG9uJ3QgbmVlZCBwb3J0aW5nKSB0aGF0IGN1cnJl
+bnRseSB3b3VsZCBmYWlsIGlmIHJ1biBhZ2FpbnN0DQo+PiBlbnZpcm9ubWVudHMgdGhhdCBjYW5u
+b3QgbmVnb3RpYXRlIFNNQjENCj4+DQo+PiBzYW1iYTMuYmxhY2tib3guYWNsX3hhdHRyLk5UMVwo
+ZmlsZXNlcnZlclwpDQo+IHJlbW92ZSB0aGlzIG9uZSwgb25seSBydW4gdGhlIFNNQjMgdmFyaWFu
+dC4NCj4NCj4+IHNhbWJhMy5ibGFja2JveC5pbmhlcml0X293bmVyLmRlZmF1bHQuTlQxXChmaWxl
+c2VydmVyXCkNCj4gZGl0by4gQWxzbyBsaWtlbHkgdHJ1ZSBmb3IgYWxsIHRoZSBvdGhlciBibGFj
+a2JveCB0ZXN0cyB0aGF0IHJ1biBOVDEgYW5kDQo+IFNNQjMuIEJVdCBhZ2FpbiBwbGVhc2UgbWFr
+ZSBtaWNybyBjb21taXRzIHNvIHdlIGNhbiByZXZpZXcgYW5kIHRlc3QNCj4gaW5kaXZpZHVhbGx5
+Lg0KPg0KPj4gc2FtYmEzLmJsYWNrYm94LnNtYmNsaWVudF9iYXNpYy5OVDFcKG50NF9kY19zY2hh
+bm5lbFwpDQo+IHJlbW92ZSBpdC4NCj4NCj4+IHNhbWJhMy5ibGFja2JveC5zbWJjbGllbnRfbGFy
+Z2VfZmlsZSAtbU5UMSAtZSBOVExNXChudDRfZGM6bG9jYWxcKQ0KPiByZW1vdmUgaXQuDQpJIHRo
+b3VnaHQgZnJvbSBwcmV2aW91cyBjb252ZXJzYXRpb25zIHRoYXQgdGhlcmUgd2FzIGEgcmVxdWly
+ZW1lbnQgdG8NCmxlYXZlIGFsbCBTTUIxIHRlc3RzIGludGFjdCBhbmQgcnVubmluZyB1bnRpbCB0
+aGUgU01CMSBjb2RlIGlzIHJlbW92ZWQ/DQpJcyB0aGlzIG5vIGxvbmdlciBhIHJlcXVpcmVtZW50
+IG9yIGlzIHRoZXJlIGEgc3BlY2lhbCBydWxlIHRvIHVzZSB3aGVuDQp3aWVsZGluZyB0aGUgYXgg
+KGp1c3QgdG8gYmUgY2xlYXIgSSBhbSBub3Qgb3Bwb3NlZCB0byByZW1vdmUgU01CMSB0ZXN0cw0K
+Oi0pIEkganVzdCB3YW50IHRvIHVuZGVyc3RhbmQgdG8gdW5kZXJzdGFuZCB0aGUgYW1iaWd1aXR5
+IChvciByZWFsaXNlIGlmDQpJIG1pc3VuZGVyc3Rvb2QpDQo+PiBBZGRpdGlvbmFsbHkgdGhlcmUg
+YXJlIHF1aXRlIGEgZmV3IHRlc3RzIHRoYXTCoCB1c2Ugc21iY2xpZW50NCAoYW5kIG90aGVyDQo+
+PiBzNCBjbGllbnRzLCBlLmcuIGNpZnNkZCwgbG9ja3Rlc3QgZXRjLikgYW5kIHRoZXNlIGFsbCB3
+aWxsIGZhaWwgYmVjYXVzZQ0KPj4gdGhleSBhZmFpY3MgY2Fubm90IGhhbmRsZSBzbWIyLiBDb3Vs
+ZCB3ZSByZXBsYWNlIHVzZSBvZiBzbWJjbGllbnQ0IHdpdGgNCj4+IHMzIHNtYmNsaWVudCBpbiB0
+aGVzZSB0ZXN0cz8NCj4gT2gsIHRoYXQncyBhIGdvb2QgcXVlc3Rpb24uIDopIEkgZ3Vlc3MgYXQg
+bGVhc3QgdGhlDQo+IHNhbWJhNC5ibGFja2JveC5raW5pdCB0ZXN0cyBjb3VsZCB1c2Ugc21iY2xp
+ZW50IGZyb20gczMuDQpnb29kDQo+DQo+PiB3aGF0IGlzIHRoZSBwbGFuIGZvciBzbWJjbGllbnQ0
+LCBpdCBkb2Vzbid0DQo+PiBzZWVtIGZ1bGx5IGZlYXR1cmVkLCBpcyBpdCByZWFsbHkgdXNlZCBv
+dXRzaWRlIHRoZSB0ZXN0cywgaXMgaXQgd29ydGgNCj4+IGludmVzdGluZyB0aW1lIHRvIGNvbnZl
+cnQgaXQgdG8gdXNlIHNtYjIgPw0KPiBOby4NCm9rIDotKQ0KPg0KPj4gSSBzZWUgY2lmc2RkIGlz
+IHBhcnQgb2YgdGhlDQo+PiBzYW1iYSBzdWl0ZSBzbyB0aGlzIG9uZSBuZWVkcyBhZGp1c3Rpbmcg
+dG8gYmUgYWJsZSB0byB1c2UgPj0gU01CMg0KPiBJZiBmZWVsIGxpa2UgcmVtb3ZpbmcgaXQsIGJ1
+dCBtYXliZSBzb21lb25lIHdhbnQgdG8gY29udmVydCBpdC4gVW50aWwNCj4gdGhlbiB0aGUgdGVz
+dCB1c2VzIGFkX2RjX250dmZzIGVudiwgc28gaXQgY2FuIHN0YXkgYXMgaXQgaXMuDQp3ZWxsIGNp
+ZnNkZCBpcyBhZmFpY3Mgbm90IHNwZWNpZmljIHRvIGFkL2RjIG9yIGFkX2RjX250dmZzLCBwcm9i
+YWJseQ0KZmlsZXNlcnZlciBpcyBhIGJldHRlciBjaG9pY2UsIEkgYWxyZWFkeSBzdGFydGVkIHRv
+IHBvcnQgaXQgKGFuZCBoYXZlIGFuDQp1Z2x5IHZlcnNpb24gd29ya2luZywgb24gdGhlIGJhY2sg
+YnVybmVyIGZvciB0aGUgbW9tZW50LCBJIGd1ZXNzIEknbGwNCmNvbWUgYmFjayB0byBpdCBsYXRl
+cikNCj4NCj4+IFdoYXQgYWJvdXQgczRtZW1iZXI/IChhbmQgb3RoZXIgZW52cyB0aGF0IGFyZSBk
+ZXBlbmRhbnQgb24gYWRfZGNfbnR2ZnMpDQo+PiBzaG91bGQgdGhlc2UgYmUgYWRkaXRpb25hbGx5
+IHRyZWF0ZWQgdGhlIHNhbWUgYXMgYWRfZGNfbnR2ZnMgYW5kIGFsbG93DQo+PiBTTUIxIGFsc28g
+Pw0KPiBJaXJjIHM0bWVtYmVyIHN0aWxsIHVzZXMgdGhlIE5UVkZTIHM0IGZpbGVzZXJ2ZXIgaW4g
+bXkgYnJhbmNoLCBzbyB5ZXMsDQo+IGlpcmMgbXkgaWRlYSB3YXMgdGhhdCBhbGwgdGhvc2Ugc2hv
+dWxkIGtlZXAgc21iMS4NCm9rDQoNCj4NCj4gYnR3IEkgb3BlbmVkIGh0dHBzOi8vZ2l0bGFiLmNv
+bS9zYW1iYS10ZWFtL3NhbWJhL21lcmdlX3JlcXVlc3RzLzk0NyBmb3INCj4gc29tZSBwcmVwIHdv
+cmsgdG8gc3BsaXQgdGVzdHMgc28gdGhleSBjYW4gYmUgZGl2aWRlZCBhY3Jvc3MgZW52cyB0aGF0
+DQo+IGFyZSBTTUIyIG9ubHkgYW5kIHN0aWxsIHN1cHBvcnQgU01CMSAoaWYgd2UgZXZlciBnZXQg
+dG8gdGhhdCBwb2ludCA6LT4+Pj4pDQo+IEknbGwgdGFrZSBhIGxvb2sgdG9tb3Jyb3chDQo+DQp0
+aGFua3MgYWxvdCwNCg0KTm9lbA0KDQo=
 
