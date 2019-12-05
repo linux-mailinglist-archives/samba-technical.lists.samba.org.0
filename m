@@ -2,40 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8666114022
-	for <lists+samba-technical@lfdr.de>; Thu,  5 Dec 2019 12:31:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A22F114071
+	for <lists+samba-technical@lfdr.de>; Thu,  5 Dec 2019 13:01:56 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=tyvGd/kwKxc1Rwgr7dIyhCk7W7RUIV2wigyizJx7Asg=; b=hgOVadHII+Mh7ClwE2TLC04N8f
-	AiENQWx17oXFyQ9WmqMtot1ncVF2OQsu03u8bDXzdRNgrAP6zwSdt97ypceDJdcrra3QiWjK4cUb1
-	oKNrv4QBM1/TnRQiy/iq3wQLiIAC9RaFFwHLIK2WXjUAoQESO9hwCvPtHuqpx4RsHvfjPG3WhdeQJ
-	gkMHwmb7sQXPjITniA1Z5B/kn0gq6O23SfPuGV0GaUduSALAu4MLS8kely5viIwVy8M2kvbpRUUXF
-	3TX6G9uUjyhVeGCB/TlgGjK5hm+hS4CUjX/8LL70XXz+lDtXprqiG5dRi9nyr2h97o12pAGlebl1x
-	HBKqq+Jw==;
-Received: from localhost ([::1]:43074 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=gZ974NLdMJxhPNM/+ruLPQ63W5Bi2JQURmwTRu56c+I=; b=hHc5JsJ2ExdLdNI/quDOrekU4M
+	jpwpGMvgMy7A4IWq7HcIshNwXpO0wLSHptmPJgZeIbgNjgkd/8eYyYvwttioGZ4wXB7jBwhAB+pH0
+	0HH9iev89sjFBowlu4rPD89tvOGlUtHLO62tDXSEFwkwKPJxegWOC5GPcQp21wmWe6dmqyiLmcRC6
+	RTPmts+D0rGHQL1hVqpgEVkEjSyneXpQq5m1HkwbwX+8nstHC/PSuc4dH14G6YBGI7hJYQ3BpHiyy
+	tdwDZCWSKx0jS+txSYz27HJ0I3o8HIBGbRfUZECkwis4m2+CTLCZIZLYYvOicLEgcqnBTPeWqEdwq
+	W09veB0g==;
+Received: from localhost ([::1]:45096 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1icpLO-006Bld-Ro; Thu, 05 Dec 2019 11:30:50 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24878) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1icpLE-006BlW-Sl
- for samba-technical@lists.samba.org; Thu, 05 Dec 2019 11:30:44 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=tyvGd/kwKxc1Rwgr7dIyhCk7W7RUIV2wigyizJx7Asg=; b=Qf4XkPM1na6HiAIO090uNyXnI1
- zofqAd97YLiptNYmvF0NYeBiBfjPVAtc+D3BFLva5K9KC8LWLgUif6VDVjAZRsiTOPW5XJDacQ+Bp
- 9li4CpKYGVolzxVHlQeaaknT3IfarjH51RPbZMQLG6NtiK4wDR7fXScDhzpbFYOwWZj0Sg6V22RpB
- bHwnuVF9iXdN22/BwuuzQUU+ozumB/zdd9sdPX+WUwzvYhjxqp8tpjJgXDkpiOHBdwiHyyZX54064
- WYlefcqriblqxrrc/VFCt4Pjmq1NxetDHtxPqT7ek2WoHx+jst45AQ+GBqRsitkw/250OO7TOVro4
- gurN+wZIFyJKUE8vRfPxH9VYqyCMsUnLlHTBrF0DmLsZdKhNhi7GroNdLOBtUwdCCZm5nrI88lNlS
- EtoT4gKHBEyXLCEQkBjBxEYdvBrAivFLk70r/XjTjNNbJU7BIa9ePDAjVKbS14FOsbRZpDFllvwoP
- 0D50KsCIZZ+xBfYjR7EkpYwT;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1icpLB-0002ff-KM; Thu, 05 Dec 2019 11:30:37 +0000
+	id 1icpp0-006C7f-Kk; Thu, 05 Dec 2019 12:01:26 +0000
+Received: from m9a0002g.houston.softwaregrp.com ([15.124.64.67]:38856) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1icpow-006C5w-Cg
+ for samba-technical@lists.samba.org; Thu, 05 Dec 2019 12:01:24 +0000
+Received: FROM m9a0002g.houston.softwaregrp.com (15.121.0.191) BY
+ m9a0002g.houston.softwaregrp.com WITH ESMTP; 
+ Thu,  5 Dec 2019 12:00:34 +0000
+Received: from M9W0068.microfocus.com (2002:f79:bf::f79:bf) by
+ M9W0068.microfocus.com (2002:f79:bf::f79:bf) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10; Thu, 5 Dec 2019 11:55:21 +0000
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (15.124.72.10) by
+ M9W0068.microfocus.com (15.121.0.191) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10 via Frontend Transport; Thu, 5 Dec 2019 11:55:21 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QUez4KZF1+gbdIQz+XSp04TV3FVvJxP7yC824jvnPuMWXdCrNMCVFAVgKjvqYtlD0TkAmvg2wwWaKtxm7CV9YV0uLEaL0cnSho3rALllF7LJ/5GqX4rzkyaJLfxaIkXo9OOJGsAQjocAvOalZbeu43YcZBhjR4INp5Sf5WW7/lTvWrlA5UsvhTPUDboYwGqRe3uoasenxiamn9wni4Kvpd/Dsj3mhOy0yDk5lv1JNLxiA0zprlpOHkpm1L1Rg0W0BDYKgIJlWiEiaXf+3CzWp79KF+b6YHmL0MQOOhKto/kEaHDJ/StJbAROa2QQhdJPgKY1osGG/N0E6WzoDIvG9w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3PzOWLO+LnhzW2E9vrqujd0a4Dc7hV9ePbDE2M1NCzM=;
+ b=iYeefgZLlkL7VcSq+HbZw9uMQFuu+agu+0ZugxS7lJ+BcUrL8mcFjYyvKScwvpQIs4zogs3dP8Blk3jJZP86KskkrcjxUH9rgeZ5iL3TTAUnSufWeUi2ZULGVbGX1oxGbE3W+WnDcdaxPS6AydqOVHSUGWerftsF4SHYgyx4+1jBoor/yqwpcWA8KF8B9ECpackEgB91SnZlrDABTBuCrgdGUls8SzcZjAibEPqK2B4+bu1YVD9BXBi5X4piKyRUrnEp2/AyKu51TzSVa/jeVkdsSaXQ1DlowCV2wswIOyabVLbKiDFQf70Vgjen2dCVRkL2DHW/vWhK0yN+jqWxrQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Received: from DM6PR18MB2507.namprd18.prod.outlook.com (20.179.71.218) by
+ DM6PR18MB3402.namprd18.prod.outlook.com (10.255.172.27) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2495.18; Thu, 5 Dec 2019 11:55:19 +0000
+Received: from DM6PR18MB2507.namprd18.prod.outlook.com
+ ([fe80::2069:4bc2:2443:c7db]) by DM6PR18MB2507.namprd18.prod.outlook.com
+ ([fe80::2069:4bc2:2443:c7db%6]) with mapi id 15.20.2516.013; Thu, 5 Dec 2019
+ 11:55:19 +0000
+To: Ralph Boehme <slow@samba.org>, Noel Power <NoPower@suse.com>, npower
+ <npower@samba.org>
 Subject: Re: Converting SMB1 tests to SMB2
-To: Noel Power <NoPower@suse.com>, npower <npower@samba.org>
+Thread-Topic: Converting SMB1 tests to SMB2
+Thread-Index: AQHVdUNqiOZWCa16a0elHejFomZ1kadQugh0gA6wbN+AAQJmgIAARkCAgAAQXgCAB2I8AIAAAnuAgAAJSYCAAAhSAIAADaSAgAAIYx6ADoq/AIAHznWAgALm3ICACU8HAIAMyTUAgAYLbYCAAEmiAIAK4e2AgAFSIYCAAaMSAIAABuOA
+Date: Thu, 5 Dec 2019 11:55:19 +0000
+Message-ID: <222974de-4a41-7431-ea83-3d22baac5c93@suse.com>
 References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
- <ed7eb92f-46a7-758e-f3b5-185d71b8b98a@samba.org>
  <002434db-63ef-edad-d091-76e3efe783d1@samba.org>
  <15dfbaf6-c774-debe-b61e-c3ef4e7f9727@samba.org>
  <d9625941-c85a-a686-2162-30c80a2e84b3@samba.org>
@@ -54,15 +74,35 @@ References: <f0f71737-cd07-b361-1c26-58116e6e8ed8@suse.com>
  <7a86b0cd-9eea-d077-69ac-9077d0cc12c8@suse.com>
  <eefa22c5-b0cf-b9e5-3d20-2fe171c53980@samba.org>
  <c6375fc6-7670-56c6-e7fa-e14acd4a4c08@suse.com>
-Message-ID: <757e29c2-54bd-74d4-ca66-b4a510404401@samba.org>
-Date: Thu, 5 Dec 2019 12:30:36 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
-MIME-Version: 1.0
-In-Reply-To: <c6375fc6-7670-56c6-e7fa-e14acd4a4c08@suse.com>
-Content-Type: text/plain; charset=utf-8
+ <757e29c2-54bd-74d4-ca66-b4a510404401@samba.org>
+In-Reply-To: <757e29c2-54bd-74d4-ca66-b4a510404401@samba.org>
+Accept-Language: en-GB, en-US
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=NoPower@suse.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [51.37.208.226]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 0551908b-370a-4494-4ac1-08d7797a0014
+x-ms-traffictypediagnostic: DM6PR18MB3402:
+x-ld-processed: 856b813c-16e5-49a5-85ec-6f081e13b527,ExtFwd
+x-ms-exchange-transport-forked: True
+x-ms-oob-tlc-oobclassifiers: OLM:2803;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: tcY5rS+EEXeIScgcm+n23acoMUM+nfGIXsbxqUva4rO3VlWVRwWCEmUR37QceFHB5fnef6CDVMzuAFMUfeXluAGYQtlPRpNRuoX2AlDr1JJa/JwT5mJ0OZ3PTqRldFHZHYGy4ZEC5esiQjbo/3nAfEWIC4DHSU85tRhSE0LuSCuU2TTiKcBNjYhFFhEcTOQmSDZdKCspy2j82+OSl6ribX0h2t5NigwDC93SDnq9cqx2dmQGBUzzduV7FpDDhHFpsrg8ml1KLsWmkdl71P19bX0fInD5KUjyWR+LOCdD0CChwseq4U/0FXvqkrXvoCoT8NMmiA2ODuP+pH4IU3WARRbOZsIIYKVkdTDsfyzqKODmdmpagLMiTSbwmItG5YKTI0HpThgXp6dncALT8Qyk+j6feLCqK2wSAfpNOhFugUdv4CIHHB2BtPLR9g36R6hD
+MIME-Version: 1.0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0551908b-370a-4494-4ac1-08d7797a0014
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Mli3AQ/3b9YnRPhFjQRXu0+wq70Q4MOrnjEWvvb2zCky+iWJtWlAFMXX3IhznuqZ9muru3GL1h51TfP+OBl/WQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR18MB3402
+X-OriginatorOrg: suse.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,83 +116,26 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Noel Power via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Noel Power <NoPower@suse.com>
 Cc: David Mulder <david.mulder@suse.com>,
  samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 12/4/19 11:30 AM, Noel Power wrote:
-> On 03/12/2019 14:20, Ralph Boehme wrote:
->> sorry for late reply, but I've got my head wrapped in
->> <https://gitlab.com/samba-team/samba/merge_requests/937>.
-> understood
->>
->> Sure. Btw, how did you figure out which tests hang?
-> Looking in the CI logs
-
-ahh... :)
-
->>  Do you have a list
->> of those?
-> In the last mail I sent, there were instructions for generating the list
-> tests that fail when all the envs by default do not negotiate SMB1, part
-> of the instructions included an initial skip list, that list was
-> attached to the mail, 
-
-yeah, I know, but I was not asking for the list of failing tests, but a
-list with *only* the hanging tests.
-
-I was just curious, if you don't have this, nevermind.
-
-Btw, can you add a commit with the instructions and the script? Easier
-to find then a mail in this thread... :)
-
-this list also is the list of hanging tests. As
-> mentioned my impression was the amount of hanging tests was greatly
-> reduced by your ntvfs branch.
-
-Oh, good.
-
->> https://gitlab.com/samba-team/samba/merge_requests/941
->>
->> Ideally we can make the skiplist a knownfail list. Then every commit
->> that moves a failing test to a new *_smb1 env can comment out the list
->> entry.
->
-> well that would mean starting from a point where we have tests not
-> running, I don't really like that
-
-well, only starting at one point in the patchset where you disable smb1,
-but at the end of the patchset all tests would be running again. My idea
-was, that this would aid in having clear, simple, reviewable, CIable
-commits.
-
->>>> $ egrep 'ad_dc_ntvfs|ad_dc_default|ad_dc_slowtest|chgdc'
->>>> selftest/skip_smb1_fails  | wc -l
->>>> 199
->>>>
->>>> 4. Add three new envs that support smb1: ad_dc_smb1, ad_member_smb1,
->>>> fileserver_smbd1, maybe more if featurewise required.
->>> when you say adding envs do you mean just 'shallow' copies or do we
->>> really need to try and go the extra mile to make these new environments
->>> properly independent (my previous attempt failed and it looked like
->>> perhaps alot of changes could ripple from trying this for little gain
->>> since the environments will be removed)
->> yes, just normal/full envs.
-> I do believe (from my previous experience) that this is a can of worms,
-> admittedly I may have been trying to do this the wrong way or just don't
-> see the 'easy' solution, I'll try again
-
-Let me know if you need help. 4a7ec5b7604 is an example how to add a s3
-env. Just remember to also update get_realm_ip_mappings() when adding
-new s4 DC envs.
-
--slow
-
--- 
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
-
+DQpPbiAwNS8xMi8yMDE5IDExOjMwLCBSYWxwaCBCb2VobWUgd3JvdGU6DQoNCkluIHRoZSBsYXN0
+IG1haWwgSSBzZW50LCB0aGVyZSB3ZXJlIGluc3RydWN0aW9ucyBmb3IgZ2VuZXJhdGluZyB0aGUg
+bGlzdA0KdGVzdHMgdGhhdCBmYWlsIHdoZW4gYWxsIHRoZSBlbnZzIGJ5IGRlZmF1bHQgZG8gbm90
+IG5lZ290aWF0ZSBTTUIxLCBwYXJ0DQpvZiB0aGUgaW5zdHJ1Y3Rpb25zIGluY2x1ZGVkIGFuIGlu
+aXRpYWwgc2tpcCBsaXN0LCB0aGF0IGxpc3Qgd2FzDQphdHRhY2hlZCB0byB0aGUgbWFpbCwNCg0K
+DQp5ZWFoLCBJIGtub3csIGJ1dCBJIHdhcyBub3QgYXNraW5nIGZvciB0aGUgbGlzdCBvZiBmYWls
+aW5nIHRlc3RzLCBidXQgYQ0KbGlzdCB3aXRoICpvbmx5KiB0aGUgaGFuZ2luZyB0ZXN0cy4NCg0K
+DQp0aGUgaW5pdGlhbCBza2lwIGZpbGUgYXR0YWNoZWQgdG8gdGhhdCBtYWlsIGFuZCB1c2VkIGFz
+IHBhcnQgb2YgdGhlIGluc3RydWN0aW9ucyBmb3IgZ2VuZXJhdGluZyB0aGUgZnVsbCBza2lwIGZp
+bGUgKmlzKiBhY3R1YWxseSB0aGUgbGlzdCBvZiBoYW5naW5nIHRlc3RzLCB3aXRoIHRoZSBoYW5n
+aW5nIHRlc3RzIHByZXZlbnRlZCBmcm9tIHJ1bm5pbmcgdGhlIHN0ZG91dCBmb3IgdGhlIHRlc3Rz
+IHJ1bnMgY2FuIGJlIHBhcnNlZCB0byBnZW5lcmF0ZSB0aGUgcmVtYWluZGVyIG9mIHRoZSBza2lw
+IGVudHJpZXMNCg0KDQpCdHcsIGNhbiB5b3UgYWRkIGEgY29tbWl0IHdpdGggdGhlIGluc3RydWN0
+aW9ucyBhbmQgdGhlIHNjcmlwdD8gRWFzaWVyDQp0byBmaW5kIHRoZW4gYSBtYWlsIGluIHRoaXMg
+dGhyZWFkLi4uDQoNCnN1cmUsIHByb2JhYmx5IHdpbGwgdXNlIG5wb3dlcl93aXRoX3NtYjJfbnR2
+ZnMNCg0KTm9lbA0K
