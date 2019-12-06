@@ -2,58 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65D9C115337
-	for <lists+samba-technical@lfdr.de>; Fri,  6 Dec 2019 15:34:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BAE1115644
+	for <lists+samba-technical@lfdr.de>; Fri,  6 Dec 2019 18:15:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=wfIc+STMqWgKnJDy3LQS8TeLEyJ+0bzh8e1h+xpUCIw=; b=NJ/3+hrbVO5hVEub9/qIPea6St
-	nCvk5vRNJM/mOcYW15fxxkXI9XxE3tQeZT53vmu7yrKnz4qI5YFvvmcXO6KR+EcvJYVzvDAcOeMEI
-	syWnc9J+gE6O0ncJ/U+btwpOd29v7Q6YILOFy2d52tGMJfnOXjAw4DxPrAPW81ZAoWauPHa1F659q
-	ytn74Cffb5Kq93kS1X+t1aQeqr2clHXSHmfy3AggaTM8llG6DIs7srf+kXONnWcVjHU/AN+tn6Bxo
-	df6o11ojz6ntZb2/sbFZ2U22exL9xRgDsmbi+oTHJazBnMOMVfggfNUjAYEdCEPSEBDiSDXXQrG+8
-	ktxJqX1A==;
-Received: from localhost ([::1]:31312 helo=hr1.samba.org) 
+	bh=aVfoLoCfJpKymmgLwDkjmSpVYIXUlTZXT2AsBOWW1tM=; b=sEzyohoXrhZLDcE38MLWAyke2i
+	sdugwnzRUynIRWatCas8MkCjOoWwjZTb963rPl/B8hTY9B9x6iJi8nSch3qOzDO/pkj49nX+xuRn2
+	EpjaxajPh456FQEWx7nldQoCfhUqb3inLwIedyUGIEjtP5+QUXrI7+UbBn3pXqFy/UN+IvcO8jYMH
+	exQvpUwxOCnZ6hD6Be61hI7znvgdJmw54UYxvDSCpIS+ln68h3CcO11JY7fPGWmCeDU5pR/P1gNOY
+	kdK8ETEkg4cEYPprJKz7XELWWpg2xYIcVOcNvY5j3ZA6cn9KiFh7w1iw8ZM5qVr6Y60HZF5oPdKUV
+	vExIn/wQ==;
+Received: from localhost ([::1]:32446 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1idEfa-006QpJ-SH; Fri, 06 Dec 2019 14:33:22 +0000
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d]:54349) 
+	id 1idHC1-006REH-Cv; Fri, 06 Dec 2019 17:15:01 +0000
+Received: from mail-il1-x129.google.com ([2607:f8b0:4864:20::129]:43602) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1idEfV-006QpC-QF
- for samba-technical@lists.samba.org; Fri, 06 Dec 2019 14:33:20 +0000
-Received: by mail-wm1-x32d.google.com with SMTP id b11so8032592wmj.4
- for <samba-technical@lists.samba.org>; Fri, 06 Dec 2019 06:33:16 -0800 (PST)
+ (Exim) id 1idHBw-006REA-9w
+ for samba-technical@lists.samba.org; Fri, 06 Dec 2019 17:14:58 +0000
+Received: by mail-il1-x129.google.com with SMTP id u16so6845757ilg.10
+ for <samba-technical@lists.samba.org>; Fri, 06 Dec 2019 09:14:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to
- :content-transfer-encoding;
- bh=wfIc+STMqWgKnJDy3LQS8TeLEyJ+0bzh8e1h+xpUCIw=;
- b=QEsIe/Q4NoBEXL3cX1JnFBAISTqJZx9evyNCX5Lvg7YoYJfsgfL6D9YuBwppANE/71
- fiI91OlMNHmPV84VIkaYOOt8IPzCx5dbnqEn6tst52E+aBUZZb38zrJgpKL1x41VdV+W
- HcHlrMKiV7UgLrjZRNAbaYbm+jDmfTcIDCjvFJ65QLUvBBbp/45TfCbetajkxgYtC4Ip
- ihzToiKCOvmcbT3QHuQnbVgMsNrEuy2BUKKScSgLh/BFVIGbsXUWO+AAVR+FP6TdC2tQ
- p6z/v78by+TyivYLQMSd7z16xQROkQedtDxSRcmLMgx20OYPVURfcSOMyTpx0bGSjAzH
- WolQ==
+ h=mime-version:from:date:message-id:subject:to;
+ bh=aVfoLoCfJpKymmgLwDkjmSpVYIXUlTZXT2AsBOWW1tM=;
+ b=MbGokAL/PrFi7zCGS+H9oIKHOe0JYfA11BUe7Fzz/1iJ2IcqHsKPCLtoBXMeIevHtf
+ neBoNZgm01U8bSsE/lTrq6Orbl2RDcLOwYRgco1H5WBLVt+x7db8mC29dgBka7LqbqXh
+ LSr7yq8FemkFU5flvvNcTNkLpmgIEjBBHv+j4pc+00XetpO5asUCwME/PypNYQV1DIqS
+ VE9+kQvQr+ajpVUCxQrPquXKN/H73I/h1urnqU46dGeAMxtV6SYuQGLPblhiBXWZq9lj
+ y6Bh7vCQJvHZ8icmgpvDFrlKfDSg572VY4s9HKjnU2bUU/McYxs7mG1q10uDQHY3cy7D
+ qonQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to
- :content-transfer-encoding;
- bh=wfIc+STMqWgKnJDy3LQS8TeLEyJ+0bzh8e1h+xpUCIw=;
- b=bOKzUhFSnmMy5debpkcq2Odk2X02m0IUwt5+rO/5Nwf3Glb7edIiq6KKZ+K5lsnhVx
- /Xa38n+i+G+1JxAOPgR/Jfas3cEfLULbd3PuoXDKx2iFGKQgU14Fq4LSL96le6iFu0Xt
- OH2wR3VG9eaChEjeIZ79p8bs9+ZezS10y1wU0UAnzq/OMe2lOYffG00Gghi532RNPlzT
- jxKLPtFP6TQQ+54kcw+pWeDSDEfI/9vQIV0WYD+hGdvR3JOIj9Bvg6yG2iTVnus30fRe
- G6oj/WEmjL6opxhtrJIdbi90Luj/rihoHC0byEZi0nreJX4nchC0R5lpt9yu3qnZ9tIm
- PN8w==
-X-Gm-Message-State: APjAAAXo4LvKTHMDwyX9OLXN1/Sy9fVf5AeIjz625Glp0ZfE4kuJyEcl
- yRW+zPu3be9wf7Lakol7kqUr7l/HOAUoaPnQnPI/Mspw
-X-Google-Smtp-Source: APXvYqzJOm/32TYnwOlgxu7BdqXxO/43UtnG2YgbTdRyDiKQVSvfzFCwlBeTz6lFnzpeBf6YrivMc+CLTK5Lw6+fO9k=
-X-Received: by 2002:a1c:4483:: with SMTP id r125mr10660230wma.97.1575642794514; 
- Fri, 06 Dec 2019 06:33:14 -0800 (PST)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=aVfoLoCfJpKymmgLwDkjmSpVYIXUlTZXT2AsBOWW1tM=;
+ b=CaivgHfNx1yLPsDzD52UjoX6lZorJWLhPVEu8uPYFCIXKn4AdtZ/eTedRm8pRMrpTY
+ 342fqa/guIoEAORQ3q+iKLZvI9YO4ygFcg45msCM/gQdxXWIIB+Jy4qGGKMva3X+b4qf
+ xOuuGY3gLUIQ7OfvUHXGV+mwrY3tywKl7UZPRaKsQlj1G5lW940hcvnI9wzlZ/KfQg5O
+ H9bJ25jizHZFRZWAHwUnyt9F7poHKtzdC+Rf5mfYEuOJiolHgf4z82qvGxaigZIX1Dop
+ 4t1OIaqYvYntggXCM1Eh0f9AKgrGJ+7cUjlD5qm3t/IqoIxpE9/RDjacfiYBQOIKnUkr
+ 7ZSQ==
+X-Gm-Message-State: APjAAAUr36Ch3zEl6m1Dg/qGVA5g3C2y8uNgfjWG89bVZfb57RAyYoT0
+ qPIfAtmDZGqRj5rqG2qAZd5jjclHkA2f9jr1o66xiA==
+X-Google-Smtp-Source: APXvYqz9tweXYrmYX2R1MOnVodpRdaM11QnAH6qIRyKW0I4HWblA4qXyiwYHDI1QE3+GeaVcp5SyeAvodUtoDBXrqeU=
+X-Received: by 2002:a92:1607:: with SMTP id r7mr14725438ill.272.1575652493954; 
+ Fri, 06 Dec 2019 09:14:53 -0800 (PST)
 MIME-Version: 1.0
-Date: Fri, 6 Dec 2019 06:31:15 -0800
-Message-ID: <CACyXjPynemywXYPzdz5eB=gYJawxxU8M+XKCaZAt0CZc8WHnYQ@mail.gmail.com>
-Subject: Do the tests not like documentation changes or ...
+Date: Fri, 6 Dec 2019 11:14:43 -0600
+Message-ID: <CAH2r5mve-AG26FVNQRZLPO5pqgkGLDkqN9xQ2=hh90_QzUWHAw@mail.gmail.com>
+Subject: Control fields in Security Descriptor
 To: samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,53 +64,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi folks,
+I noticed a Samba server bug when I was debugging a problem in a
+client patch I was testing.  The client patch was sending the
+incorrect (endian reversed) Control flags in the security descriptor I
+was sending to Samba on create.
 
-I created the following change to the documentation:
+I noticed that Windows server correctly rejected it, but Samba server
+accepted the security descriptor with the incorrect (endian reversed)
+Control field.   Probably Samba server bug to ignore validation of the
+Control flags in the SD.
 
---------------------
-index 8275d313ed1..948b98936a2 100644
---- a/docs-xml/Samba-Developers-Guide/vfs.xml
-+++ b/docs-xml/Samba-Developers-Guide/vfs.xml
-@@ -235,14 +235,14 @@ DO NOT ACCESS conn-&gt;vfs.ops.* directly !!!
- #define SMB_VFS_CLOSE(fsp, fd) \
-        ((fsp)-&gt;conn-&gt;vfs.ops.close(\
-        (fsp)-&gt;conn-&gt;vfs.handles.close, (fsp), (fd)))
--#define SMB_VFS_READ(fsp, fd, data, n) \
-+#define SMB_VFS_PREAD(fsp, fd, data, n, off) \
-        ((fsp)-&gt;conn-&gt;vfs.ops.read(\
-        (fsp)-&gt;conn-&gt;vfs.handles.read,\
--        (fsp), (fd), (data), (n)))
--#define SMB_VFS_WRITE(fsp, fd, data, n) \
-+        (fsp), (fd), (data), (n), (off)))
-+#define SMB_VFS_PWRITE(fsp, fd, data, n, off) \
-        ((fsp)-&gt;conn-&gt;vfs.ops.write(\
-        (fsp)-&gt;conn-&gt;vfs.handles.write,\
--        (fsp), (fd), (data), (n)))
-+        (fsp), (fd), (data), (n), (off)))
- #define SMB_VFS_LSEEK(fsp, fd, offset, whence) \
-        ((fsp)-&gt;conn-&gt;vfs.ops.lseek(\
-        (fsp)-&gt;conn-&gt;vfs.handles.lseek,\
-------------------
+-- 
+Thanks,
 
-I did a build locally to ensure every thing looked OK.
-
-I then created a PR (merge request) on GitLab, and it failed.
-(https://gitlab.com/samba-team/samba/merge_requests/975)
-
-Did I do something wrong?
-
-Is there something else I should have done?
-
---=20
-Regards,
-Richard Sharpe
-(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
-=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
-=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
+Steve
 
