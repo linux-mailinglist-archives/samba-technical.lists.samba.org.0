@@ -2,84 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99940114D77
-	for <lists+samba-technical@lfdr.de>; Fri,  6 Dec 2019 09:18:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0ADE9114E20
+	for <lists+samba-technical@lfdr.de>; Fri,  6 Dec 2019 10:27:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=05kOKfczLY6YlVBtG9PLmSOsqoJfn1BNWHZT2nOkO5o=; b=hG0Er6EzqpiWI60vfX7mPhxKSM
-	EHK3Kj4B3TdrS8h54k6fyVQAA10Y40K6r++ICufOsAeKd9kua579Aj42h+5y7IGAUOKVSydh0rchz
-	OKUw86Tas7+hi3qPxMKu7/Wn91okjnsnXEjnmL6TF/EmiLQ/snHix4o3FBgUtAEsBV1f1eG2OLCNr
-	UZ8uJCzNPOD2hD+jn33k7p2TnDNFIitEYDoKbxkhKh5K1XC0m842bG8jF0gWBs16xkgI2UZiDIk3d
-	vY7itsgM/0g3dl/3Dw/bzJNHzXRuroP4psJjShavoDJJk6M+8kyQzzMcwvul9IkCEbnG/ORJe+008
-	CwO1v5hA==;
-Received: from localhost ([::1]:60382 helo=hr1.samba.org) 
+	bh=iDmdhLO0rC4OCNR9PJSklSszmVuna2Ul4WEO85qNWv4=; b=H1hSzXmZ44wyRp36DD/df8L57g
+	QqN4DkyclKMvCAhbqmc8uzOO0h5bz0GfQdXJWiArcQk4CdTPALgWvYJqvi5lDiCTnSdNAkDFCUUDX
+	tSQtg4zotdJSuCaDPFPAyguFi6DbH+f0d3auZJz4I6PMctHjESaZqD2PtdcCXCNr0es42JYVA+zz+
+	ZtBgpnsm90fOCqTDtB174pLhOgWgJffuM6oLsTZNhn9T4/yMyrvTR/5CngetZY0atsqeklkFhP/Ga
+	BJVYVdMTeZghZRECxipEp//39upIvr32XwiWclKLikC4a0UFkXCiMuHW9zAk/7mcqstV9EOIEwkh5
+	0CHobrJg==;
+Received: from localhost ([::1]:18840 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1id8ov-006NXv-DP; Fri, 06 Dec 2019 08:18:37 +0000
-Received: from m9a0002g.houston.softwaregrp.com ([15.124.64.67]:60229) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1id8oq-006NXU-UT
- for samba-technical@lists.samba.org; Fri, 06 Dec 2019 08:18:35 +0000
-Received: FROM m9a0002g.houston.softwaregrp.com (15.121.0.191) BY
- m9a0002g.houston.softwaregrp.com WITH ESMTP
- FOR samba-technical@lists.samba.org; Fri,  6 Dec 2019 08:17:53 +0000
-Received: from M4W0334.microfocus.com (2002:f78:1192::f78:1192) by
- M9W0068.microfocus.com (2002:f79:bf::f79:bf) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10; Fri, 6 Dec 2019 08:15:31 +0000
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com (15.124.8.14) by
- M4W0334.microfocus.com (15.120.17.146) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10 via Frontend Transport; Fri, 6 Dec 2019 08:15:31 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ljqzVbAaF52XKlYURyOkvbYThLOrg9tXBDSZwC9r5qdWH7xDklXU8YNlDIYw9tKjGb01XOtjnL6uFGZkcE6VxtCXLeJ/W8BIM9gSGwKnNIl2lz10aT5Dci/zebhy7MjPMpfDJ2D2+ElvNgGBI+tinkngqqQLLzu03HcIf3NZJTRJL7jOD2Dtg34pWwb1kNPv1bvEU4rId3dLa3TBGQx1xag/Coh4knFcka1TIVHy7YxWuXhKZGzjN7ElSHBtIs6NpphnTTN0qcFhrniqNHOL5F/4wHROgtNdXjQAlbivZAuanUsY1aYnXC8sbvOh12Sopp7qUhRI6Za6ItYrbf8WoA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=05kOKfczLY6YlVBtG9PLmSOsqoJfn1BNWHZT2nOkO5o=;
- b=IwhhFbv+/McDinyiJJvEUQGu99Zv5h6RyBfwKXHaUnCAT861p5RGXJjrv7/Ml6r8djKN0zrc+VOEIGwbNWjmUjH3M4QRJM/oLZZC/Kpb0jsuB6nzfif7J9npEO+uRr6QMQSwkjuUgJlb9zVmdU1l3ZvEtOI7ivsGMI946+r3bzc/U01erBGME+kVfloAprAXgolB2KfENdAn8Uv2FpyxyO2KLM7io6z2voTEXjdWpRTuTU5vZ0CFvUyMynAWpq08BykmzzJtcViPdfh2JUEuVt7+9xiVYbEuA5qVHqoMeUJkmArtV8IVZb8bkcFEisnqrGKyQMd0GjybWWSa2sry7w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Received: from DM6PR18MB2507.namprd18.prod.outlook.com (20.179.71.218) by
- DM6PR18MB2890.namprd18.prod.outlook.com (20.179.49.208) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2516.17; Fri, 6 Dec 2019 08:15:29 +0000
-Received: from DM6PR18MB2507.namprd18.prod.outlook.com
- ([fe80::2069:4bc2:2443:c7db]) by DM6PR18MB2507.namprd18.prod.outlook.com
- ([fe80::2069:4bc2:2443:c7db%6]) with mapi id 15.20.2516.013; Fri, 6 Dec 2019
- 08:15:29 +0000
-To: samba-technical <samba-technical@lists.samba.org>
-Subject: creating certificates for dc, user etc for samba tests
-Thread-Topic: creating certificates for dc, user etc for samba tests
-Thread-Index: AQHVrA1SBi1NkoR2Nk6XE0eutegUWA==
-Date: Fri, 6 Dec 2019 08:15:29 +0000
-Message-ID: <5f6a93e3-ff99-6a5e-9465-9249bbd8aeb4@suse.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=NoPower@suse.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [51.37.208.226]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: e9712a94-0917-470e-989f-08d77a2474cf
-x-ms-traffictypediagnostic: DM6PR18MB2890:
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: XS32WNIgz+NEmYdbrV7NW10e4oO2pU1jLE8wHMAOdGSyG6kH9AmlAWtQZL2n+mFgohHaO2syJrh6WCcchhf/PlsFy/zR6Bg4ds2+lgt2NFVYrPI6ZEMQ1alUvm5LllmkiinhnTz1dh1PwJOaSRPP35mw/2FfF2QQHrYicUdffC15vQ6t/RFJwUzs4opzVerdJ/thWBK8RwQGWlCss4jPCtzoKI6+CorfYRM7mFBODtrh0D0oa+yvP3pd1Zar8QK3gj0LneSrrFZKiz8zFLGqGVtvpLKTAJv72awUCPanOna8pawdO+NOrCSlplHHeliLFn694BUYB5+Z2WIBqcQVEUEDVwieKk+GSU9ugLLAQ2R4G+8ES3zVublnsQl81pSugjnRiSRJcnnZ0cydSnZz024usDqc3kNNN0dsCegNN9HOLjkObpz6Pn1+pmJuxjIW
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <ACBCE229A76E8B41A620380CB90B5067@namprd18.prod.outlook.com>
-Content-Transfer-Encoding: base64
+	id 1id9sk-006OUy-7K; Fri, 06 Dec 2019 09:26:38 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51174) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1id9sf-006OUq-6M
+ for samba-technical@lists.samba.org; Fri, 06 Dec 2019 09:26:35 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=iDmdhLO0rC4OCNR9PJSklSszmVuna2Ul4WEO85qNWv4=; b=E3+b7pcAbgjUN7VqXsbFPrW9QA
+ gIlTyUQj/wjWSIoFYye32AflBdgbaOycT5H4TPsG4XI6lkbcPDGk1bTH1tVvTwrgBwlsQWSy+TMyd
+ B9f9nFAHuOKP9aRXMsGB0f4VxBBO0cFUa3qLkDtjSp/Bd11OB2ZQqwsIQN2wNa5aT1rNMSU/KlQjT
+ bevDdfhAHf0Dz6SL/rK18N0th23YnaF9O4oPmidKaLKifgn+OGXzdk3bbGKS/Ew5STQTfG2N4FQJA
+ 7T7XaYqMXPnCS1UBYEaRjx6RP7uSfw2YxUKLz23EDD+bujSM6ipUSXLFOjSbhatkcxBjdz9WSjGn1
+ 9PUp9GgPFM+kGSjiy4VHLeXb/xbpRYwBeIkS35YBwufkIH9IWOn4+zYxtW7GeF45WKzo80Nzhs1CZ
+ DaJXuE9wm1rQTjKYZNB0rVF3Bez7LUzegzmXF7/9tL7mAvk/0Lz16EXAgH4gEeVWJMgvXAoTdbyWK
+ dCF3lZ3huq6z1taAIO/Wlmsf;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1id9se-0006VX-Tf
+ for samba-technical@lists.samba.org; Fri, 06 Dec 2019 09:26:33 +0000
+To: <samba-technical@lists.samba.org>
+References: <5f6a93e3-ff99-6a5e-9465-9249bbd8aeb4@suse.com>
+ <4B983F292AE847D2B13D20B8B693833C@rotterdam.bazuin.nl>
+ <22a199fa-1f25-ee46-03b5-5b2bfd130234@samba.org>
+In-Reply-To: <22a199fa-1f25-ee46-03b5-5b2bfd130234@samba.org>
+Subject: RE: creating certificates for dc, user etc for samba tests
+Date: Fri, 6 Dec 2019 10:26:33 +0100
+Message-ID: <2CDF14C89900408E89747F08BE359F61@rotterdam.bazuin.nl>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: e9712a94-0917-470e-989f-08d77a2474cf
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 9Mwn0AB0RdCrvLujMQrLTu55Ga1P0cr/ftCjKqs6tzc+Hu00Nkd7si60nf50qIweQo2YLAMPB0Iflo5ax2e/Bw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR18MB2890
-X-OriginatorOrg: suse.com
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Office Outlook 11
+Thread-Index: AdWsFonks3h6ODgbQpa7eSS9yxCCPQAADVyw
+X-MimeOLE: Produced By Microsoft MimeOLE
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,42 +61,145 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Noel Power via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Noel Power <NoPower@suse.com>
+From: "L. van Belle via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: belle@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-SGVscCEhDQoNCkRvZXMgYW55b25lIGtub3cgYW55dGhpbmcgYWJvdXQgb3BlbnNzbCAmIGdlbmVy
-YXRpbmcgY2VydHMgPw0KDQpJIHRyaWVkIHRvIGZvbGxvdyB0aGUgaW5zdHJ1Y3Rpb25zIGF0DQpz
-ZWxmdGVzdC9tYW5hZ2UtY2EvbWFuYWdlLUNBLXNhbWJhLmV4YW1wbGUuY29tLnNoDQoNCmUuZy4N
-Cg0KwqAgLi9tYW5hZ2UtY2Euc2ggbWFuYWdlLUNBLXNhbWJhLmV4YW1wbGUuY29tLmNuZiBjcmVh
-dGVfZGMNCnRlc3RkYy5zYW1iYS5leGFtcGxlLmNvbSAwMTIzNDU2Nzg5QUJDREVGDQoNCsKgIHBy
-b2JsZW0gY3JlYXRpbmcgb2JqZWN0IHNjYXJkTG9naW49MS4zLjYuMS40LjEuMzExLjIwLjIuMg0K
-DQrCoCAxNDAwODc0MDM5NDc4NDA6ZXJyb3I6MDgwNjQwNjY6b2JqZWN0IGlkZW50aWZpZXINCnJv
-dXRpbmVzOk9CSl9jcmVhdGU6b2lkIGV4aXN0czpjcnlwdG8vb2JqZWN0cy9vYmpfZGF0LmM6NzA4
-Og0KDQpzb21lIGdvb2dsZSByZXN1bHRzIHNlZW1lZCB0byBpbmRpY2F0ZSB0aGlzIGVycm9yIHJl
-c3VsdHMgZnJvbSBjaGFuZ2VzDQppbiBvcGVuc3NsIHdoZXJlIHNvbWUgYXR0cmlidXRlcyBhcmUg
-bm93IGluY2x1ZGVkIGJ5IGRlZmF1bHQgKGlpdWMpIHNvIEkNCmNvbW1lbnRlZCBvdXQgdGhhdCBh
-dHRyaWJ1dGUgaW4NCm1hbmFnZS1jYS50ZW1wbGF0ZXMuZC9vcGVuc3NsLUJBU0UtdGVtcGxhdGUu
-Y25mDQoNCnRoZW4gdGhlIHNhbWUgZXJyb3IgZm9yIG1zVVBOICYgbXNLREMgKHNvIEkgZGlkIHRo
-ZSBzYW1lKQ0KDQp0aGUgcHJvY2VzcyBnZXRzIGZ1cnRoZXIgYnV0IGVycm9yIG91dCB3aXRoDQoN
-ClVzaW5nIGNvbmZpZ3VyYXRpb24gZnJvbQ0KQ0Etc2FtYmEuZXhhbXBsZS5jb20vRENzL3Rlc3Rk
-Yy5zYW1iYS5leGFtcGxlLmNvbS9EQy10ZXN0ZGMuc2FtYmEuZXhhbXBsZS5jb20tUzA2LW9wZW5z
-c2wuY25mDQpFbnRlciBwYXNzIHBocmFzZSBmb3INCkNBLXNhbWJhLmV4YW1wbGUuY29tL1ByaXZh
-dGUvQ0Etc2FtYmEuZXhhbXBsZS5jb20tcHJpdmF0ZS1rZXkucGVtOg0KRXJyb3IgTG9hZGluZyBl
-eHRlbnNpb24gc2VjdGlvbiB0ZW1wbGF0ZV94NTA5X2V4dGVuc2lvbnMNCjE0MDE4OTgzODAzMDY1
-NjplcnJvcjowRTA2RDA2Qzpjb25maWd1cmF0aW9uIGZpbGUNCnJvdXRpbmVzOk5DT05GX2dldF9z
-dHJpbmc6bm8NCnZhbHVlOmNyeXB0by9jb25mL2NvbmZfbGliLmM6Mjc1Omdyb3VwPUNBX2RlZmF1
-bHQgbmFtZT1lbWFpbF9pbl9kbg0KMTQwMTg5ODM4MDMwNjU2OmVycm9yOjBEMDY0MDdBOmFzbjEg
-ZW5jb2RpbmcNCnJvdXRpbmVzOmEyZF9BU04xX09CSkVDVDpmaXJzdCBudW0gdG9vIGxhcmdlOmNy
-eXB0by9hc24xL2Ffb2JqZWN0LmM6NzI6DQoxNDAxODk4MzgwMzA2NTY6ZXJyb3I6MjIwNjcwNkU6
-WDUwOSBWMw0Kcm91dGluZXM6djJpX0VYVEVOREVEX0tFWV9VU0FHRTppbnZhbGlkIG9iamVjdA0K
-aWRlbnRpZmllcjpjcnlwdG8veDUwOXYzL3YzX2V4dGt1LmM6OTM6c2VjdGlvbjosbmFtZTptc0tE
-Qyx2YWx1ZToNCjE0MDE4OTgzODAzMDY1NjplcnJvcjoyMjA5ODA4MDpYNTA5IFYzIHJvdXRpbmVz
-Olg1MDlWM19FWFRfbmNvbmY6ZXJyb3INCmluIGV4dGVuc2lvbjpjcnlwdG8veDUwOXYzL3YzX2Nv
-bmYuYzo0NzpuYW1lPWV4dGVuZGVkS2V5VXNhZ2UsDQp2YWx1ZT1jbGllbnRBdXRoLHNlcnZlckF1
-dGgsbXNLREMNCg0Kc28gSSBhbSBzdHVtcHRlZCBhcyBJIGFtIHRvdGFsbHkgY2x1ZWxlc3MgYWJv
-dXQgdGhlc2UgZmlsZXMgYW5kIHRoZWlyDQpjb250ZW50LCB0aGVyZSBzZWVtcyBwbGVudHkgb2Yg
-Z29vZ2xlIGhpdHMgYWJvdXQgc2ltaWxhciBlcnJvcnMgYnV0IEkNCmRvbid0IGtub3cgZW5vdWdo
-IHRvIGludGVycHJldCB0aGVtLCBjYW4gYW55b25lIGhlbHAgPz8NCg0KTm9lbA0KDQoNCg==
+As far i can tell there solution is to make 2 config for openssl.=20
+
+https://github.com/PADL/heimdal/commit/d26daefd4ae35ef7448f8b3e7fba895b0f=
+901
+bd7=20
+
+shows
+data/openssl.cnf.1.0 \
+data/openssl.cnf.1.1 \=20
+> workaround until openssl -objects lands <=20
+
+And=20
+https://github.com/PADL/heimdal/commit/d26daefd4ae35ef7448f8b3e7fba895b0f=
+901
+bd7#diff-71fc8c9f169ce490db429f9031aee4fa=20
+
+Shows the example openssl1.1.cnf
+You could compair this one with the one your using atm.=20
+
+What is the os your using and openssl version?=20
+
+
+Greetz,
+
+Louis
+
+
+
+> -----Oorspronkelijk bericht-----
+> Van: npower [mailto:npower@samba.org]=20
+> Verzonden: vrijdag 6 december 2019 10:21
+> Aan: belle@samba.org; samba-team@lists.samba.org
+> Onderwerp: Re: creating certificates for dc, user etc for samba tests
+>=20
+> hmm, I thought I sent this to samba-technical... damn=20
+> autocompletion :-)
+>=20
+> On 06/12/2019 08:47, L. van Belle via samba-team wrote:
+> > Which openssl version?=20
+> 1.1.0
+> >
+> > You might be hitting these bugs.=20
+> > https://github.com/openssl/openssl/issues/6696=20
+> > https://github.com/heimdal/heimdal/issues/392=20
+>=20
+> yes, I had seen those and while they describe somewhat the situation I
+> don't see a solution, I tried commenting out those entries and get
+> similar results as described in =A0
+> https://github.com/openssl/openssl/issues/6696
+>=20
+> if there is a solution in the report there I didn't see it, my plan B
+> was to dig out an old system with older openssl. Be good though if
+> someone who knows about this can either fix the config files or update
+> the instructions or... :-)
+>=20
+> Anyway thanks
+>=20
+> Noel
+>=20
+> >
+> >
+> > Greetz,=20
+> >
+> > Louis
+> >
+> >
+> >> -----Oorspronkelijk bericht-----
+> >> Van: samba-technical=20
+> >> [mailto:samba-technical-bounces@lists.samba.org] Namens Noel=20
+> >> Power via samba-technical
+> >> Verzonden: vrijdag 6 december 2019 9:15
+> >> Aan: samba-technical
+> >> Onderwerp: creating certificates for dc, user etc for samba tests
+> >>
+> >> Help!!
+> >>
+> >> Does anyone know anything about openssl & generating certs ?
+> >>
+> >> I tried to follow the instructions at
+> >> selftest/manage-ca/manage-CA-samba.example.com.sh
+> >>
+> >> e.g.
+> >>
+> >> =A0 ./manage-ca.sh manage-CA-samba.example.com.cnf create_dc
+> >> testdc.samba.example.com 0123456789ABCDEF
+> >>
+> >> =A0 problem creating object scardLogin=3D1.3.6.1.4.1.311.20.2.2
+> >>
+> >> =A0 140087403947840:error:08064066:object identifier
+> >> routines:OBJ_create:oid exists:crypto/objects/obj_dat.c:708:
+> >>
+> >> some google results seemed to indicate this error results=20
+> from changes
+> >> in openssl where some attributes are now included by default=20
+> >> (iiuc) so I
+> >> commented out that attribute in
+> >> manage-ca.templates.d/openssl-BASE-template.cnf
+> >>
+> >> then the same error for msUPN & msKDC (so I did the same)
+> >>
+> >> the process gets further but error out with
+> >>
+> >> Using configuration from
+> >> CA-samba.example.com/DCs/testdc.samba.example.com/DC-testdc.sa
+> >> mba.example.com-S06-openssl.cnf
+> >> Enter pass phrase for
+> >> CA-samba.example.com/Private/CA-samba.example.com-private-key.pem:
+> >> Error Loading extension section template_x509_extensions
+> >> 140189838030656:error:0E06D06C:configuration file
+> >> routines:NCONF_get_string:no
+> >> value:crypto/conf/conf_lib.c:275:group=3DCA_default =
+name=3Demail_in_dn
+> >> 140189838030656:error:0D06407A:asn1 encoding
+> >> routines:a2d_ASN1_OBJECT:first num too=20
+> >> large:crypto/asn1/a_object.c:72:
+> >> 140189838030656:error:2206706E:X509 V3
+> >> routines:v2i_EXTENDED_KEY_USAGE:invalid object
+> >> identifier:crypto/x509v3/v3_extku.c:93:section:,name:msKDC,value:
+> >> 140189838030656:error:22098080:X509 V3=20
+> routines:X509V3_EXT_nconf:error
+> >> in extension:crypto/x509v3/v3_conf.c:47:name=3DextendedKeyUsage,
+> >> value=3DclientAuth,serverAuth,msKDC
+> >>
+> >> so I am stumpted as I am totally clueless about these=20
+> files and their
+> >> content, there seems plenty of google hits about similar=20
+> errors but I
+> >> don't know enough to interpret them, can anyone help ??
+> >>
+> >> Noel
+> >>
+> >>
+> >>
+> >
+>=20
+
 
