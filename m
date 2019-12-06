@@ -2,63 +2,84 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96B7E114D08
-	for <lists+samba-technical@lfdr.de>; Fri,  6 Dec 2019 08:58:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99940114D77
+	for <lists+samba-technical@lfdr.de>; Fri,  6 Dec 2019 09:18:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=nZiHdwSaBOEwKI9UCnDG9SLWHF5Q3nvmaz5gFgnBIgo=; b=0etyuu/hf5667AjPIgkqMFLc/x
-	FB5t1G8AL15BrfLDfGJzgde7VvKFJTymH7XCyl+OyNS3vxKNkq4TMHBsTEs5RwAS35lE0vKuZwUNq
-	Ab2EhLSseoUnux9qjKIF/kV2CIMEaHAIyiqwrDEn5nu3ivbYwiUm4YlVJIjhqPg5FvXvr40iJR1Xf
-	ugP7/FooqT5oz8OQGzNrAFhAQ9hQJjEiDs/rYKhxWLdlpQH2amiY7VnLZjfmP45hw1UY6zqGm73qq
-	VuMhC8AgQuKPJUjOhV3vO+fNctvzmvDkbvQs0gahk/DCmdVNjWkYFPpPLIT1nxhW2cTRkqcSDOZGj
-	vDm6+EnQ==;
-Received: from localhost ([::1]:59480 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=05kOKfczLY6YlVBtG9PLmSOsqoJfn1BNWHZT2nOkO5o=; b=hG0Er6EzqpiWI60vfX7mPhxKSM
+	EHK3Kj4B3TdrS8h54k6fyVQAA10Y40K6r++ICufOsAeKd9kua579Aj42h+5y7IGAUOKVSydh0rchz
+	OKUw86Tas7+hi3qPxMKu7/Wn91okjnsnXEjnmL6TF/EmiLQ/snHix4o3FBgUtAEsBV1f1eG2OLCNr
+	UZ8uJCzNPOD2hD+jn33k7p2TnDNFIitEYDoKbxkhKh5K1XC0m842bG8jF0gWBs16xkgI2UZiDIk3d
+	vY7itsgM/0g3dl/3Dw/bzJNHzXRuroP4psJjShavoDJJk6M+8kyQzzMcwvul9IkCEbnG/ORJe+008
+	CwO1v5hA==;
+Received: from localhost ([::1]:60382 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1id8Uf-006NNU-44; Fri, 06 Dec 2019 07:57:41 +0000
-Received: from mail.rosalinux.ru ([195.19.76.54]:50934) 
+	id 1id8ov-006NXv-DP; Fri, 06 Dec 2019 08:18:37 +0000
+Received: from m9a0002g.houston.softwaregrp.com ([15.124.64.67]:60229) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1id8Ua-006NNN-2r
- for samba-technical@lists.samba.org; Fri, 06 Dec 2019 07:57:38 +0000
-Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id E15C5D53F64EC;
- Fri,  6 Dec 2019 10:57:32 +0300 (MSK)
-Received: from mail.rosalinux.ru ([127.0.0.1])
- by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id lhxigPwhjUzr; Fri,  6 Dec 2019 10:57:32 +0300 (MSK)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id 3CE7AD53F64F5;
- Fri,  6 Dec 2019 10:57:32 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rosalinux.ru 3CE7AD53F64F5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosalinux.ru;
- s=A1AAD92A-9767-11E6-A27F-AC75C9F78EF4; t=1575619052;
- bh=nZiHdwSaBOEwKI9UCnDG9SLWHF5Q3nvmaz5gFgnBIgo=;
- h=Date:MIME-Version:To:From:Message-ID;
- b=NwJGyXY960DyQ3t5cdCmz9oFBGd8ElaGbWuFH8Q1ShuQ6oe84btky68DIFUr1InGL
- FQG8xP26AUb/aAk5sPGF/rPmyxFIvHDWzFtO9TlI5uLIT2PUOvIj/TJrNletCWMOBZ
- Erb54ZpGxQVXoh5dH6w4gD4TTKwcQrbUtcuR7H01pIvtwsaH4goxTvpD/jv7AHFyNI
- ow2jeJfHFlAilkgZQ1IFd5uhJLCixJrnN0epV2u0+3MXKHc3gttI8eoefqaPHnDYYF
- Rnx1QcKxgbCdDVfr3K1oh8Uog4FUHsnMZwKB75odXwM8032hS47Ft1wAb6HyL4qg8p
- LmJldmN3zKiRA==
-Received: from mail.rosalinux.ru ([127.0.0.1])
- by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id 4fbBEjopnweY; Fri,  6 Dec 2019 10:57:32 +0300 (MSK)
-Received: from [10.80.41.95] (unknown [176.59.48.30])
- by mail.rosalinux.ru (Postfix) with ESMTPSA id 11474D53F64EC;
- Fri,  6 Dec 2019 10:57:30 +0300 (MSK)
-Date: Fri, 06 Dec 2019 10:57:25 +0300
-User-Agent: K-9 Mail for Android
-In-Reply-To: <3908966.9OaNKuxUIl@magrathea>
-References: <af8412ee-5493-0406-e95b-8d3175ec069a@rosalinux.ru>
- <3533791.v9fxMDVjKa@magrathea>
- <c5977820-2814-183b-d29b-01fab733a995@rosalinux.ru>
- <3908966.9OaNKuxUIl@magrathea>
+ (Exim) id 1id8oq-006NXU-UT
+ for samba-technical@lists.samba.org; Fri, 06 Dec 2019 08:18:35 +0000
+Received: FROM m9a0002g.houston.softwaregrp.com (15.121.0.191) BY
+ m9a0002g.houston.softwaregrp.com WITH ESMTP
+ FOR samba-technical@lists.samba.org; Fri,  6 Dec 2019 08:17:53 +0000
+Received: from M4W0334.microfocus.com (2002:f78:1192::f78:1192) by
+ M9W0068.microfocus.com (2002:f79:bf::f79:bf) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10; Fri, 6 Dec 2019 08:15:31 +0000
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com (15.124.8.14) by
+ M4W0334.microfocus.com (15.120.17.146) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10 via Frontend Transport; Fri, 6 Dec 2019 08:15:31 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ljqzVbAaF52XKlYURyOkvbYThLOrg9tXBDSZwC9r5qdWH7xDklXU8YNlDIYw9tKjGb01XOtjnL6uFGZkcE6VxtCXLeJ/W8BIM9gSGwKnNIl2lz10aT5Dci/zebhy7MjPMpfDJ2D2+ElvNgGBI+tinkngqqQLLzu03HcIf3NZJTRJL7jOD2Dtg34pWwb1kNPv1bvEU4rId3dLa3TBGQx1xag/Coh4knFcka1TIVHy7YxWuXhKZGzjN7ElSHBtIs6NpphnTTN0qcFhrniqNHOL5F/4wHROgtNdXjQAlbivZAuanUsY1aYnXC8sbvOh12Sopp7qUhRI6Za6ItYrbf8WoA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=05kOKfczLY6YlVBtG9PLmSOsqoJfn1BNWHZT2nOkO5o=;
+ b=IwhhFbv+/McDinyiJJvEUQGu99Zv5h6RyBfwKXHaUnCAT861p5RGXJjrv7/Ml6r8djKN0zrc+VOEIGwbNWjmUjH3M4QRJM/oLZZC/Kpb0jsuB6nzfif7J9npEO+uRr6QMQSwkjuUgJlb9zVmdU1l3ZvEtOI7ivsGMI946+r3bzc/U01erBGME+kVfloAprAXgolB2KfENdAn8Uv2FpyxyO2KLM7io6z2voTEXjdWpRTuTU5vZ0CFvUyMynAWpq08BykmzzJtcViPdfh2JUEuVt7+9xiVYbEuA5qVHqoMeUJkmArtV8IVZb8bkcFEisnqrGKyQMd0GjybWWSa2sry7w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Received: from DM6PR18MB2507.namprd18.prod.outlook.com (20.179.71.218) by
+ DM6PR18MB2890.namprd18.prod.outlook.com (20.179.49.208) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2516.17; Fri, 6 Dec 2019 08:15:29 +0000
+Received: from DM6PR18MB2507.namprd18.prod.outlook.com
+ ([fe80::2069:4bc2:2443:c7db]) by DM6PR18MB2507.namprd18.prod.outlook.com
+ ([fe80::2069:4bc2:2443:c7db%6]) with mapi id 15.20.2516.013; Fri, 6 Dec 2019
+ 08:15:29 +0000
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: creating certificates for dc, user etc for samba tests
+Thread-Topic: creating certificates for dc, user etc for samba tests
+Thread-Index: AQHVrA1SBi1NkoR2Nk6XE0eutegUWA==
+Date: Fri, 6 Dec 2019 08:15:29 +0000
+Message-ID: <5f6a93e3-ff99-6a5e-9465-9249bbd8aeb4@suse.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=NoPower@suse.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [51.37.208.226]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: e9712a94-0917-470e-989f-08d77a2474cf
+x-ms-traffictypediagnostic: DM6PR18MB2890:
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: XS32WNIgz+NEmYdbrV7NW10e4oO2pU1jLE8wHMAOdGSyG6kH9AmlAWtQZL2n+mFgohHaO2syJrh6WCcchhf/PlsFy/zR6Bg4ds2+lgt2NFVYrPI6ZEMQ1alUvm5LllmkiinhnTz1dh1PwJOaSRPP35mw/2FfF2QQHrYicUdffC15vQ6t/RFJwUzs4opzVerdJ/thWBK8RwQGWlCss4jPCtzoKI6+CorfYRM7mFBODtrh0D0oa+yvP3pd1Zar8QK3gj0LneSrrFZKiz8zFLGqGVtvpLKTAJv72awUCPanOna8pawdO+NOrCSlplHHeliLFn694BUYB5+Z2WIBqcQVEUEDVwieKk+GSU9ugLLAQ2R4G+8ES3zVublnsQl81pSugjnRiSRJcnnZ0cydSnZz024usDqc3kNNN0dsCegNN9HOLjkObpz6Pn1+pmJuxjIW
+x-ms-exchange-transport-forked: True
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <ACBCE229A76E8B41A620380CB90B5067@namprd18.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: Automating usage of smbspool_krb5_wrapper
-To: Andreas Schneider <asn@samba.org>
-Message-ID: <61AD23D8-A377-4962-B9AC-AF12A96E7546@rosalinux.ru>
+X-MS-Exchange-CrossTenant-Network-Message-Id: e9712a94-0917-470e-989f-08d77a2474cf
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 9Mwn0AB0RdCrvLujMQrLTu55Ga1P0cr/ftCjKqs6tzc+Hu00Nkd7si60nf50qIweQo2YLAMPB0Iflo5ax2e/Bw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR18MB2890
+X-OriginatorOrg: suse.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,87 +93,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Mikhail Novosyolov via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
-Cc: samba-technical@lists.samba.org
+From: Noel Power via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Noel Power <NoPower@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-
-
-6 =D0=B4=D0=B5=D0=BA=D0=B0=D0=B1=D1=80=D1=8F 2019 =D0=B3=2E 9:56:32 GMT+03=
-:00, Andreas Schneider <asn@samba=2Eorg> =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
->On Friday, 6 December 2019 07:36:50 CET Mikhail Novosyolov wrote:
->> 06=2E12=2E2019 09:30, Andreas Schneider =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
->> > On Thursday, 5 December 2019 22:27:59 CET Mikhail Novosyolov wrote:
->> >> 26=2E11=2E2019 19:20, Andreas Schneider =D0=BF=D0=B8=D1=88=D0=B5=D1=
-=82:
->> >>> On Tuesday, 26 November 2019 00:49:08 CET Mikhail Novosyolov via
->samba-
->> >>>=20
->> >>>> I have tested those 4 patches (2 yours, Andreas, and 2 mine that
->I sent
->> >>>> here previously)=2E Behaviour of /usr/lib/cups/backend/smb
->symlinked to
->> >>>> patched smbspool_krb5_wrapper seems to be correct: it passes
->printing
->> >>>> tasks from printers without "AuthInfoRequired negotiate"
->directly to
->> >>>> smbspool and correctly finds /tmp/krb5cc_$UID for printers with
->> >>>> "AuthInfoRequired negotiate", where UID is a local ID of a
->domain user=2E
->> >>>> I clearly see this in /var/log/cups/error_log when it is
->"LogLevel
->> >>>> debug2" in /etc/cups/cupsd=2Econf=2E
->> >>>>=20
->> >>>> So, these patches are ready to be merged, I think=2E
->> >>>=20
->> >>> I'm not able to apply your patches=2E Could you please send patches
->> >>> created
->> >>> with 'git format-patch' or point me to a git repo where I could
->pick
->> >>> them?
->> >>=20
->> >> Hello Andreas,
->> >> I have recently read how it is recommended to send patches to
->Linux
->> >> kernel
->> >> and it is recommended to send them as plain text, not as
->attachments, so
->> >> I'm resending them as plain text emails in the following emails=2E
->> >=20
->> > For samba we prefer one attachment as a patchset or a merge
->request=2E
->>=20
->> Ok, thanks=2E
->>=20
->> > I opened one here:
->> >=20
->> > https://gitlab=2Ecom/samba-team/samba/merge_requests/961
->>=20
->> Why are you sure that the root user cannot print using Kerberos
->> authorization? There should be no problem to get a kerberos ticket
->from
->> root and sometimes it can be needed, for example if
->system-config-printer
->> GTK+ GUI is run from root via consolekit or if a crappy proprietary
->> applications works from root and requires printing=2E
->
->If we are root and have a valid kerberos ticket and we want to print a
->doc,=20
->there is no need to do any uid changing and trying to find the
->credential=20
->cache=2E We should just call smbspool directly=2E
->
->Rembember: smbspool_krb5_wrapper is there to switch to the uid of the
->user=20
->printing the document, so that we get access to the krb5 credential
->cache=2E If=20
->we're already root:
->
->a) we already are the right user
->b) we have access to the krb5 credential cache
-
-I see, sorry, forgot that smbspool is capable of finding krb5 ccache=2E Th=
-anks for explaining=2E
+SGVscCEhDQoNCkRvZXMgYW55b25lIGtub3cgYW55dGhpbmcgYWJvdXQgb3BlbnNzbCAmIGdlbmVy
+YXRpbmcgY2VydHMgPw0KDQpJIHRyaWVkIHRvIGZvbGxvdyB0aGUgaW5zdHJ1Y3Rpb25zIGF0DQpz
+ZWxmdGVzdC9tYW5hZ2UtY2EvbWFuYWdlLUNBLXNhbWJhLmV4YW1wbGUuY29tLnNoDQoNCmUuZy4N
+Cg0KwqAgLi9tYW5hZ2UtY2Euc2ggbWFuYWdlLUNBLXNhbWJhLmV4YW1wbGUuY29tLmNuZiBjcmVh
+dGVfZGMNCnRlc3RkYy5zYW1iYS5leGFtcGxlLmNvbSAwMTIzNDU2Nzg5QUJDREVGDQoNCsKgIHBy
+b2JsZW0gY3JlYXRpbmcgb2JqZWN0IHNjYXJkTG9naW49MS4zLjYuMS40LjEuMzExLjIwLjIuMg0K
+DQrCoCAxNDAwODc0MDM5NDc4NDA6ZXJyb3I6MDgwNjQwNjY6b2JqZWN0IGlkZW50aWZpZXINCnJv
+dXRpbmVzOk9CSl9jcmVhdGU6b2lkIGV4aXN0czpjcnlwdG8vb2JqZWN0cy9vYmpfZGF0LmM6NzA4
+Og0KDQpzb21lIGdvb2dsZSByZXN1bHRzIHNlZW1lZCB0byBpbmRpY2F0ZSB0aGlzIGVycm9yIHJl
+c3VsdHMgZnJvbSBjaGFuZ2VzDQppbiBvcGVuc3NsIHdoZXJlIHNvbWUgYXR0cmlidXRlcyBhcmUg
+bm93IGluY2x1ZGVkIGJ5IGRlZmF1bHQgKGlpdWMpIHNvIEkNCmNvbW1lbnRlZCBvdXQgdGhhdCBh
+dHRyaWJ1dGUgaW4NCm1hbmFnZS1jYS50ZW1wbGF0ZXMuZC9vcGVuc3NsLUJBU0UtdGVtcGxhdGUu
+Y25mDQoNCnRoZW4gdGhlIHNhbWUgZXJyb3IgZm9yIG1zVVBOICYgbXNLREMgKHNvIEkgZGlkIHRo
+ZSBzYW1lKQ0KDQp0aGUgcHJvY2VzcyBnZXRzIGZ1cnRoZXIgYnV0IGVycm9yIG91dCB3aXRoDQoN
+ClVzaW5nIGNvbmZpZ3VyYXRpb24gZnJvbQ0KQ0Etc2FtYmEuZXhhbXBsZS5jb20vRENzL3Rlc3Rk
+Yy5zYW1iYS5leGFtcGxlLmNvbS9EQy10ZXN0ZGMuc2FtYmEuZXhhbXBsZS5jb20tUzA2LW9wZW5z
+c2wuY25mDQpFbnRlciBwYXNzIHBocmFzZSBmb3INCkNBLXNhbWJhLmV4YW1wbGUuY29tL1ByaXZh
+dGUvQ0Etc2FtYmEuZXhhbXBsZS5jb20tcHJpdmF0ZS1rZXkucGVtOg0KRXJyb3IgTG9hZGluZyBl
+eHRlbnNpb24gc2VjdGlvbiB0ZW1wbGF0ZV94NTA5X2V4dGVuc2lvbnMNCjE0MDE4OTgzODAzMDY1
+NjplcnJvcjowRTA2RDA2Qzpjb25maWd1cmF0aW9uIGZpbGUNCnJvdXRpbmVzOk5DT05GX2dldF9z
+dHJpbmc6bm8NCnZhbHVlOmNyeXB0by9jb25mL2NvbmZfbGliLmM6Mjc1Omdyb3VwPUNBX2RlZmF1
+bHQgbmFtZT1lbWFpbF9pbl9kbg0KMTQwMTg5ODM4MDMwNjU2OmVycm9yOjBEMDY0MDdBOmFzbjEg
+ZW5jb2RpbmcNCnJvdXRpbmVzOmEyZF9BU04xX09CSkVDVDpmaXJzdCBudW0gdG9vIGxhcmdlOmNy
+eXB0by9hc24xL2Ffb2JqZWN0LmM6NzI6DQoxNDAxODk4MzgwMzA2NTY6ZXJyb3I6MjIwNjcwNkU6
+WDUwOSBWMw0Kcm91dGluZXM6djJpX0VYVEVOREVEX0tFWV9VU0FHRTppbnZhbGlkIG9iamVjdA0K
+aWRlbnRpZmllcjpjcnlwdG8veDUwOXYzL3YzX2V4dGt1LmM6OTM6c2VjdGlvbjosbmFtZTptc0tE
+Qyx2YWx1ZToNCjE0MDE4OTgzODAzMDY1NjplcnJvcjoyMjA5ODA4MDpYNTA5IFYzIHJvdXRpbmVz
+Olg1MDlWM19FWFRfbmNvbmY6ZXJyb3INCmluIGV4dGVuc2lvbjpjcnlwdG8veDUwOXYzL3YzX2Nv
+bmYuYzo0NzpuYW1lPWV4dGVuZGVkS2V5VXNhZ2UsDQp2YWx1ZT1jbGllbnRBdXRoLHNlcnZlckF1
+dGgsbXNLREMNCg0Kc28gSSBhbSBzdHVtcHRlZCBhcyBJIGFtIHRvdGFsbHkgY2x1ZWxlc3MgYWJv
+dXQgdGhlc2UgZmlsZXMgYW5kIHRoZWlyDQpjb250ZW50LCB0aGVyZSBzZWVtcyBwbGVudHkgb2Yg
+Z29vZ2xlIGhpdHMgYWJvdXQgc2ltaWxhciBlcnJvcnMgYnV0IEkNCmRvbid0IGtub3cgZW5vdWdo
+IHRvIGludGVycHJldCB0aGVtLCBjYW4gYW55b25lIGhlbHAgPz8NCg0KTm9lbA0KDQoNCg==
 
