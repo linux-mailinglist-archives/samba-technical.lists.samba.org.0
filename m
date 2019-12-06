@@ -2,55 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BAE1115644
-	for <lists+samba-technical@lfdr.de>; Fri,  6 Dec 2019 18:15:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97DC5115659
+	for <lists+samba-technical@lfdr.de>; Fri,  6 Dec 2019 18:23:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=aVfoLoCfJpKymmgLwDkjmSpVYIXUlTZXT2AsBOWW1tM=; b=sEzyohoXrhZLDcE38MLWAyke2i
-	sdugwnzRUynIRWatCas8MkCjOoWwjZTb963rPl/B8hTY9B9x6iJi8nSch3qOzDO/pkj49nX+xuRn2
-	EpjaxajPh456FQEWx7nldQoCfhUqb3inLwIedyUGIEjtP5+QUXrI7+UbBn3pXqFy/UN+IvcO8jYMH
-	exQvpUwxOCnZ6hD6Be61hI7znvgdJmw54UYxvDSCpIS+ln68h3CcO11JY7fPGWmCeDU5pR/P1gNOY
-	kdK8ETEkg4cEYPprJKz7XELWWpg2xYIcVOcNvY5j3ZA6cn9KiFh7w1iw8ZM5qVr6Y60HZF5oPdKUV
-	vExIn/wQ==;
-Received: from localhost ([::1]:32446 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=06ApTSF8vnA8He++K5LZbylJXIB/lU6JBBeN6qGb5s8=; b=si5ZHFoixCL0demUk/c8F4aPMj
+	C5bJTlsRCO8ISWTSUnmif/30G0bqKMc/aBgSbZZ6kb5GtIZP6y+q6OI5VhDH4Pj0L+xnJ0M46QN39
+	n3GM82lH9RLqO/JF9cL9hAjgh2beGquML0XDAIiwXMxVq85hynJyiot3r25BIyRNo6mLDKR7iXocs
+	al46eQYAPv+iUvjnAEURZa+UE9Gt/eSRXZ55HUeVaMyU3ohEOISP0Mk+X85zU8vPeFnJF9wSNNeBy
+	ePL5QWakbv0WD5C9HgjO7MY+wEhD0VhtSfJ1sYii1LpQBj92tabSTcPPebAFxPcJGzR0yFx6RC/jQ
+	f39k8q1w==;
+Received: from localhost ([::1]:33222 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1idHC1-006REH-Cv; Fri, 06 Dec 2019 17:15:01 +0000
-Received: from mail-il1-x129.google.com ([2607:f8b0:4864:20::129]:43602) 
+	id 1idHK1-006RLM-SM; Fri, 06 Dec 2019 17:23:17 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57058) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1idHBw-006REA-9w
- for samba-technical@lists.samba.org; Fri, 06 Dec 2019 17:14:58 +0000
-Received: by mail-il1-x129.google.com with SMTP id u16so6845757ilg.10
- for <samba-technical@lists.samba.org>; Fri, 06 Dec 2019 09:14:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=aVfoLoCfJpKymmgLwDkjmSpVYIXUlTZXT2AsBOWW1tM=;
- b=MbGokAL/PrFi7zCGS+H9oIKHOe0JYfA11BUe7Fzz/1iJ2IcqHsKPCLtoBXMeIevHtf
- neBoNZgm01U8bSsE/lTrq6Orbl2RDcLOwYRgco1H5WBLVt+x7db8mC29dgBka7LqbqXh
- LSr7yq8FemkFU5flvvNcTNkLpmgIEjBBHv+j4pc+00XetpO5asUCwME/PypNYQV1DIqS
- VE9+kQvQr+ajpVUCxQrPquXKN/H73I/h1urnqU46dGeAMxtV6SYuQGLPblhiBXWZq9lj
- y6Bh7vCQJvHZ8icmgpvDFrlKfDSg572VY4s9HKjnU2bUU/McYxs7mG1q10uDQHY3cy7D
- qonQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=aVfoLoCfJpKymmgLwDkjmSpVYIXUlTZXT2AsBOWW1tM=;
- b=CaivgHfNx1yLPsDzD52UjoX6lZorJWLhPVEu8uPYFCIXKn4AdtZ/eTedRm8pRMrpTY
- 342fqa/guIoEAORQ3q+iKLZvI9YO4ygFcg45msCM/gQdxXWIIB+Jy4qGGKMva3X+b4qf
- xOuuGY3gLUIQ7OfvUHXGV+mwrY3tywKl7UZPRaKsQlj1G5lW940hcvnI9wzlZ/KfQg5O
- H9bJ25jizHZFRZWAHwUnyt9F7poHKtzdC+Rf5mfYEuOJiolHgf4z82qvGxaigZIX1Dop
- 4t1OIaqYvYntggXCM1Eh0f9AKgrGJ+7cUjlD5qm3t/IqoIxpE9/RDjacfiYBQOIKnUkr
- 7ZSQ==
-X-Gm-Message-State: APjAAAUr36Ch3zEl6m1Dg/qGVA5g3C2y8uNgfjWG89bVZfb57RAyYoT0
- qPIfAtmDZGqRj5rqG2qAZd5jjclHkA2f9jr1o66xiA==
-X-Google-Smtp-Source: APXvYqz9tweXYrmYX2R1MOnVodpRdaM11QnAH6qIRyKW0I4HWblA4qXyiwYHDI1QE3+GeaVcp5SyeAvodUtoDBXrqeU=
-X-Received: by 2002:a92:1607:: with SMTP id r7mr14725438ill.272.1575652493954; 
- Fri, 06 Dec 2019 09:14:53 -0800 (PST)
+ (Exim) id 1idHJx-006RLE-WC
+ for samba-technical@lists.samba.org; Fri, 06 Dec 2019 17:23:15 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=06ApTSF8vnA8He++K5LZbylJXIB/lU6JBBeN6qGb5s8=; b=iCixh1PV/pv9HLKkXrO5YKlt/g
+ 1zJ31CrT/sYkuqq8QIg5MwEPxf0bHtuB5BUyxi1gmcbX/BjhHDQq38WOjuBi22qobZJqBsQRLcyro
+ DHppbMgZG84XfR7X5nuXSIbiGN0HmmrxX5T9/PPIxcBC5nwQATRhVd4slCdBjyX5NdEAGH7RRrPkh
+ nrwu2Tm4q31Er44f6zdE0sVBSXLdxNtGzxUXS7swFvS3AMKjOHYaZ9EGW3qToWDK/dgyEBZwDYGEN
+ QiASqYdeBnWMTaJRForJy68EHxXI5MbYWbIekRe8Alb0QORfBhJmRYm1hbk3hNYsWwF3/qKOv7xP6
+ sPO6aPOjO/mURP/DB44f7s7h4HQq49kCQO3ZeBKRjGKTZyWlW2IqEPczx/PAzLqVCUnT2RlqcYw1q
+ Nc3IZp1EGcmCasJbg7lNpST27xsEn1E0IczqR8cvcUK9JQO/yc3AJhUhqW5vTsJa7OJ9CNQgKi7yd
+ 4UvN8J0Th40FrdUHQ5uxvb4D;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1idHJs-00020x-EH; Fri, 06 Dec 2019 17:23:08 +0000
+Date: Fri, 6 Dec 2019 09:23:06 -0800
+To: Steve French <smfrench@gmail.com>
+Subject: Re: Control fields in Security Descriptor
+Message-ID: <20191206172306.GC16790@jra4>
+References: <CAH2r5mve-AG26FVNQRZLPO5pqgkGLDkqN9xQ2=hh90_QzUWHAw@mail.gmail.com>
 MIME-Version: 1.0
-Date: Fri, 6 Dec 2019 11:14:43 -0600
-Message-ID: <CAH2r5mve-AG26FVNQRZLPO5pqgkGLDkqN9xQ2=hh90_QzUWHAw@mail.gmail.com>
-Subject: Control fields in Security Descriptor
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAH2r5mve-AG26FVNQRZLPO5pqgkGLDkqN9xQ2=hh90_QzUWHAw@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,23 +55,28 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I noticed a Samba server bug when I was debugging a problem in a
-client patch I was testing.  The client patch was sending the
-incorrect (endian reversed) Control flags in the security descriptor I
-was sending to Samba on create.
+On Fri, Dec 06, 2019 at 11:14:43AM -0600, Steve French via samba-technical wrote:
+> I noticed a Samba server bug when I was debugging a problem in a
+> client patch I was testing.  The client patch was sending the
+> incorrect (endian reversed) Control flags in the security descriptor I
+> was sending to Samba on create.
 
-I noticed that Windows server correctly rejected it, but Samba server
-accepted the security descriptor with the incorrect (endian reversed)
-Control field.   Probably Samba server bug to ignore validation of the
-Control flags in the SD.
+> I noticed that Windows server correctly rejected it, but Samba server
+> accepted the security descriptor with the incorrect (endian reversed)
+> Control field.   Probably Samba server bug to ignore validation of the
+> Control flags in the SD.
 
--- 
-Thanks,
+Can you give an example of what you were sending when incorrect and
+when correct please. That'll help track this down / allow tests to
+be written.
 
-Steve
+Cheers,
+
+Jeremy.
 
