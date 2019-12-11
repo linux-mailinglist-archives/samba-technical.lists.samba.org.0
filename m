@@ -2,46 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D02F3118303
-	for <lists+samba-technical@lfdr.de>; Tue, 10 Dec 2019 10:07:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B384A11A074
+	for <lists+samba-technical@lfdr.de>; Wed, 11 Dec 2019 02:26:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=o2P5VKa/5wv3zT1f/rH2gPbrbN9mTH1LO++x9huy8BI=; b=A/eeg/rDOZSfnpK/lsd6pFBv4k
-	pEEaLuQOkQDX6D9seYMkxTjBS4uOd9Uxzx5TfWKliWdsGdNHBE2ajxV7JFMx9jy4naTqzDFFnUCUR
-	a6zuLLqapqqtvHzNXtgFbcYhq/aMzRRpSLe3RyfgH3X8gJ0tVMaza1jNP/OhaUVc/UK/iPD4fyEAY
-	EPtQ93e3lP4aGsSGM149WpAF5x/wCZcfihnhBEaKyd3Xsg8VFSDvH6IcFPZ2AEQurhptA1D7EtMDq
-	2Fflq2t36NnL/Ik4AIaIt+FY36QRM949aaQxFh8b61jPZEdpUA+a4efOokkAgtc83BLfhb+e4TLwj
-	xWin45oA==;
-Received: from localhost ([::1]:28266 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=xJsleC8WpIVAV3azUz7G/DNA4sxNKbb0D/j6J9ZES4Y=; b=EAdwuxewNrtIyCOFbdkfsZRSnu
+	Ns+1En10zMaZnsmwUUuHSoNkS8bkf68HST3iS6TNErvOztmyo0CxvyCFwqimK0qTBWgqokPvg5pGh
+	QCqxJJQwkgbC7PfgI8jHFgpWX8e/W2+B2J3RPDwsOwpAW6UCPK9hv9CYOJRZltAAa2edycInk2crZ
+	QFvtQsHDvldrun9v00u1gbX7u7l/xDxC3yw1jFVw2HAtsoQEcJ8rmZn9Cv88Dm+vzw9SE6FX33kKM
+	IEIbdgL+AASJUP198Lg13vxfz9giEHViYfNa+8ajcwakNIW6HsPwl1qT4t6bw4AeYysg0MGGRTJ0S
+	gaC9LKFA==;
+Received: from localhost ([::1]:45060 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iebTt-006eKH-K8; Tue, 10 Dec 2019 09:06:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55916) 
+	id 1ieqlS-006oPg-0u; Wed, 11 Dec 2019 01:26:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:52476) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iebTg-006eJb-SZ; Tue, 10 Dec 2019 09:06:47 +0000
+ (Exim) id 1ieqlL-006oPZ-J2
+ for samba-technical@lists.samba.org; Wed, 11 Dec 2019 01:26:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=o2P5VKa/5wv3zT1f/rH2gPbrbN9mTH1LO++x9huy8BI=; b=j9Qf28zObJUUMKqoaX+1UXKDPZ
- YQt9pT46el031ok3QujZ8h8JZ0hAfbWm2M1tS6xxYBTZyK9MzjvknjZ9ccNZoDRLIUM4efe9joqe2
- ZfS3dCNSic/FVUDXieIpu/h772yDSvg5Sr11K1ytgCGpavpIKtGOGrDNNho/33eNnxFxje3ne9LZ9
- o0kOmKFZ+AdJoh6a3S24dYnUIO0wNKtm2ZoLXfmZFNIY5uf+a1qdewGbTqoWD5JHt586Rlw3P4/Za
- kMnUrs6cYVSnqs8Nl+bVhMPESXAvsjY/PoXSZ+rgW2Mgv4C3h9qLkLJ6TXNoLidCK3DzAAK0pq22C
- Fzsdup59oyKNfDNm7cGjkrPc5H22fJH4ng2GDl4qAd02dMnjmGxvlLeaCBsw8Aa9R9u7KrO32X38S
- 7dCqAHglgY11rrxJImvMekxd3SEjpKaBfo3bwTC+Nk3b7Dk4RvviBp9JHZ2Qq8wNbkGom3xEggBfy
- GnyNLAplULOpstHFvL6GGMTD;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=xJsleC8WpIVAV3azUz7G/DNA4sxNKbb0D/j6J9ZES4Y=; b=1zVyvzGomgvm2Iml8LgWg6Xnga
+ p6ki5JAqvAxte0kEAp9Hb47Kuqu+4eMkHCwa6nzw4W4rlH9q7RfB2I8Sk1ujNlWucobnAzmmG+NKZ
+ 2ZE8eJydZplH4z4aogrklqtJFj3xuSPEn5cfe0iQvCi7cL5jE+t3Ami5iR/ScdqlAPpDc7Lg5ll94
+ cxL/aOkCWaS8IjiJK/crQ6O6cCCZQPk39ecrhayQ96xR3k+hA06h7tk7K0ep2K6X60ecd/1k93k3C
+ JDd4NN1iM+cKmXmiF9lO+vjfXGm+9FjpujdI9lWCxAPtviTfjDOUFU5v04yZaZmP5OSLy9mRqoGW/
+ Ghp2lETqKtg56Or6WG8YR642nkpHfPOV8ZGbu1/bb4HvNVrsqTlXkd1DHH0VsecYO1aLMkf1fHnKW
+ GnXe7sTpocJ7zscqMkjSy9V/Whdb/SZhSPKeWWMgg+Zs5f6e2/AE1XsiGenKHO1xN0mjfiQQjHVtF
+ gGgyswlNRojxabn/hnBBbL5e;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iebTg-0005Fs-F6; Tue, 10 Dec 2019 09:06:44 +0000
-Date: Tue, 10 Dec 2019 10:06:42 +0100
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.11.3, 4.10.11 and 4.9.17 Security Releases
- Available
-Message-ID: <20191210090640.GA12719@carrie2>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="CE+1k2dSO48ffgeK"
-Content-Disposition: inline
-User-Agent: Mutt/1.9.4 (2018-02-28)
+ (Exim) id 1ieqlK-0007hW-FB
+ for samba-technical@lists.samba.org; Wed, 11 Dec 2019 01:25:59 +0000
+Message-ID: <e86313d7de869d8f9e56fc636183fbce2acc0116.camel@samba.org>
+Subject: Going, going, gone: home-grown crypto in Samba!
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Wed, 11 Dec 2019 14:25:55 +1300
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,113 +54,47 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: kseeger@samba.org
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+I wanted to say a big thanks to everyone working on removing our home-
+grown and imported cryptographic code in Samba.
 
---CE+1k2dSO48ffgeK
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+It was with great pleasure that I finally ticked 'met' on the "do not
+implement cryptography" section of: 
+https://bestpractices.coreinfrastructure.org/en/projects/200#security
 
-Release Announcements
----------------------
+We now just have AES-CMAC, and only if we don't have a recent enough
+GnuTLS, so this will go in time.  Perhaps even that could be
+reimplemented in terms of raw AES using GnuTLS, I'm not sure, and I'm
+not sure the change is worth it.
 
-These are a security release in order to address the following defects:
+(I realise we also have MD4, but I don't count that).
 
-o CVE-2019-14861: Samba AD DC zone-named record Denial of Service in DNS
-		  management server (dnsserver).
-o CVE-2019-14870: DelegationNotAllowed not being enforced in protocol trans=
-ition
-		  on Samba AD DC.
+So a big thank-you in particular to the team from Red Hat, I've seen
+Andreas, Issac and Günther's name on quite a few patches.  Thank also
+for all the work done adding tests, I know that has been quite tedious.
 
+We should make sure to celebrate this with a WHATSNEW.
 
-=3D=3D=3D=3D=3D=3D=3D
-Details
-=3D=3D=3D=3D=3D=3D=3D
+(We of course have crypto code in the imported Heimdal, but that is a
+different matter.  Someone truly brave could try and re-implement that
+in terms of gnutls...). 
 
-o  CVE-2019-14861:
-   An authenticated user can crash the DCE/RPC DNS management server by cre=
-ating
-   records with matching the zone name.
+Thanks!
 
-o  CVE-2019-14870:
-   The DelegationNotAllowed Kerberos feature restriction was not being appl=
-ied
-   when processing protocol transition requests (S4U2Self), in the AD DC KD=
-C.
-
-For more details and workarounds, please refer to the security advisories.
-
-
-Changes:
---------
-
-o  Andrew Bartlett <abartlet@samba.org>
-   * BUG 14138: CVE-2019-14861: Fix DNSServer RPC server crash.
-
-o  Isaac Boukris <iboukris@gmail.com>
-   * BUG 14187: CVE-2019-14870: DelegationNotAllowed not being enforced.
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the "Samba 4.1 and newer" product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=3D=3D Our Code, Our Bugs, Our Responsibility.
-=3D=3D The Samba Team
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Andrew Bartlett
+-- 
+Andrew Bartlett
+https://samba.org/~abartlet/
+Authentication Developer, Samba Team         https://samba.org
+Samba Development and Support, Catalyst IT   
+https://catalyst.net.nz/services/samba
 
 
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Download Details
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
-=66rom:
 
-        https://download.samba.org/pub/samba/stable/
-
-The release notes are available online at:
-
-        https://www.samba.org/samba/history/samba-4.11.3.html
-        https://www.samba.org/samba/history/samba-4.10.11.html
-        https://www.samba.org/samba/history/samba-4.9.17.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                        --Enjoy
-                        The Samba Team
-
---CE+1k2dSO48ffgeK
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCXe9gHQAKCRAoaL1+KxeT
-UZy3AJ44+8KANVh+/aIEXemWMpRjdyRZFACgkFSlN/mmf+TLSf8bPTM+/H2Z+SM=
-=BMih
------END PGP SIGNATURE-----
-
---CE+1k2dSO48ffgeK--
 
