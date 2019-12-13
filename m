@@ -2,47 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 009E911DA0D
-	for <lists+samba-technical@lfdr.de>; Fri, 13 Dec 2019 00:33:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B971F11E007
+	for <lists+samba-technical@lfdr.de>; Fri, 13 Dec 2019 09:59:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=oBlCCih8itINZ+hI4vGOK4dVVUzxfOS2WabUEOw/Fa4=; b=3lfn9sXKjDed1Qwmf/uafN65kD
-	c1ouBk1tOl5ESwUvRfxGu4JQGZ0inqWbaGSzNhzUmHz7CxcfW+22wWu6WtntVrLkhgyYhvkrpTIhj
-	KQ70wlVCOtoFZg/lRVpgatTZrVpx0ut6tDStV5g1rUFbBOEUhgRCGooQFjmcb28+WBavCu8vm42It
-	jppG8JiVPTXdOpf3ywJJWVt+gyru/K8n+NU5FMfb7/6UT6sYSgc3VwFFJ0y/tSzGeDaMzdT3x+lPm
-	g5QkpCkCPllqqYm13mdxmrA+YvkWVaDfeNbWEZOOQ796bhJ0rjv+zSrvfq7AFN0IRwtSXrz0hkCGN
-	i/gLP29g==;
-Received: from localhost ([::1]:28682 helo=hr1.samba.org) 
+	bh=Bb3GDU+1K6FSgfxU9SPcA0kFFPiLNdSiB0fjbtWkNJk=; b=yzYRndni8yYkmBjcIr2Aka/QaX
+	VFOetNsBsZnHKKtnfE0bsa5nMq1eTxTsdpv1fF98PGazChS2IedM6q5WeKeD183YtzjUFdfbEefos
+	B5wtgZH4URIFZOSE53RMyke1558FIQNnzEsQeVv83vTsWHQqMsvO0EAnz9OLIODmD+mMf7T+GL3jn
+	At9y8i1zspVFyvaqgZIWiG7mwXm6jgsN7RhbHUHsG4ksVBbTSwUMJ1V6D3Slgw+dxy7wTbOziQZ8a
+	Cup2jFTZD9iNi2SqFri0P/QYayf2LdRkmWKgbvB4ikTOKilzmPsc8YozPs4GyZdBSW7tKua/c+QTc
+	W4ETU/cw==;
+Received: from localhost ([::1]:44554 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ifXx5-0075UB-3X; Thu, 12 Dec 2019 23:32:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18280) 
+	id 1ifgmi-0078io-0H; Fri, 13 Dec 2019 08:58:52 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54850) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ifXwz-0075U4-Vk
- for samba-technical@lists.samba.org; Thu, 12 Dec 2019 23:32:57 +0000
+ (Exim) id 1ifgmc-0078ih-Cs
+ for samba-technical@lists.samba.org; Fri, 13 Dec 2019 08:58:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=oBlCCih8itINZ+hI4vGOK4dVVUzxfOS2WabUEOw/Fa4=; b=MRuISrzcM9m5QpnHRQtIo9xsWx
- vmlfsscw+DZgnZQVCNfmUYf8a1Ir3dnCgPuMZWdAIkH9dIb0eIWmHLJZMEHxMMmx+PofEmJyWEncL
- DZxF0s/uxoO/B3u2LcJx8HQy61sV9utAqfvZ5YQn4yeFNG4oJVNWdItl9DWFjvzVwuTbkY+dfk7fi
- R+KQ0SE5aRozfuXRRej8QpY0aaevCjKlC/xsCDhZYEt9y3pngZjFqurm2yy9cBXfam/oxZvuHVfVE
- w0f3jIiP1OnqU+6k/Vbkkz317VabX1vrlpGBE1RVi0uN+s6zENz7jWodNprMQu0S5tc8dKwHM8LOv
- tKwiFgHmHrkgh8a/A8hAz7ozmYe1ZGGnVPsue5ajXgD5a5VR8JUCLgJGOU4miExkAGWSKZr/xTDLc
- HhjnMAhuDFdluAT3eA0MMxnBp3iqrczL3cTxQqZ5ITY2xF8gzq+7YzO0rFnqiW8s1n+lu39HI1wZ6
- HSDZk7ezXvB9yU5YQxXqEesr;
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=Bb3GDU+1K6FSgfxU9SPcA0kFFPiLNdSiB0fjbtWkNJk=; b=LoqUjELR11rtWNfeFqXKaTJbgz
+ Q/frLnPVvVzxU0d6hmUr293hYAVY12HNmSjkIWJvpqlYQmmV5xUmDyzcJZljPoQOIUbJAD2G6SYkC
+ amrMl52uoJ7fZGoVIuFU8epsMZ6dI5AHt44IoUrFsZUyKN8radX6tewOuOlsV+AY7XwlMpgUnr16X
+ ojUXzE6E+pvh1zuZcR7fpDhArEurwz2LUwubBaxIs240gGYdFvY5uQJXsObPQetODmJWFu5ckuxEW
+ 9xeRber4B7BqBHYwLPXNCcL4kUQnJLppPOiMI80qryB2Q0Omtr8cN4cAI86U+iATF99Cm6ab6NF6y
+ culsRNyPNiEsbll7VeHFg91Kl2xU0oYdXOSj0eafiwCIR+6D98p8xczqksjXDYF/m9Q1vZQTAPYUd
+ tBD+FOHV8M8BYs9kHskX6nMHwR2OAJQBVlcImz0XMMnMlAbkLWqr9NA7RLDluNSkYBsM9bmBTeLmD
+ mPxp1Eh8YQg4w5beQJ8xWFJP;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1ifXwy-0004t0-Fv; Thu, 12 Dec 2019 23:32:53 +0000
-Message-ID: <7b03dac06c57cb6c0954861964c9d98a014888ac.camel@samba.org>
-Subject: Re: Parse::Yapp::Driver on platforms other than Linux
-To: Jeremy Allison <jra@samba.org>, "Christopher O Cowan -
- Christopher.O.Cowan@ibm.com" <Christopher.O.Cowan@ibm.com>
-Date: Fri, 13 Dec 2019 12:32:48 +1300
-In-Reply-To: <20191212214432.GC228793@jra4>
-References: <9ff45788c1634239b78dea68d22e4fad@ibm.com>
- <20191212214432.GC228793@jra4>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ifgmb-00018n-T3; Fri, 13 Dec 2019 08:58:46 +0000
+Subject: Re: parse_dos_attribute_blob() inconsistent file_id through
+ make_file_id_from_itime()
+To: Krasimir Ganchev <ganchev@fixity.net>
+References: <BYAPR08MB4872E120915FF5A02939D29CC8550@BYAPR08MB4872.namprd08.prod.outlook.com>
+Message-ID: <117698c8-f1a1-5c0d-8fa5-8a0afb4745b1@samba.org>
+Date: Fri, 13 Dec 2019 09:58:45 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
+MIME-Version: 1.0
+In-Reply-To: <BYAPR08MB4872E120915FF5A02939D29CC8550@BYAPR08MB4872.namprd08.prod.outlook.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -57,43 +58,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 2019-12-12 at 13:44 -0800, Jeremy Allison via samba-technical
-wrote:
-> On Thu, Dec 12, 2019 at 06:43:24PM +0000, Christopher O Cowan -
-> Christopher.O.Cowan--- via samba-technical wrote:
-> > 
-> > Easy enough to fix with a cpan install.   On AIX this is not a
-> > default with the freeware perl offering.  I do have to wonder
-> > whether this module is in the base packages of other Linux
-> > distros?   I use RHEL at work, but I'm not going to check other
-> > distros, obviously.
+Am 12/12/19 um 11:26 PM schrieb Krasimir Ganchev via samba-technical:
+> I have recently experienced some strange behavior while browsing folders with clients that respect SMB fileid e.g. most recent Windows 10, Windows 2019 Server, MacOS Catalina. On folders with multiple image files, on Windows there would be repeated thumbnails among files and on MacOS thumbnails for certain files would not be showed at all. This behavior could not be reproduced with older version of the mentioned OSes without fileid support in the SMB implementation.
 > 
-> On ubuntu it's in libparse-yapp-perl. I had
-> to scramble to find it also after this commit :-).
+> Tracking down the issue I noticed that copying files with multiple threads will often produce the same change timestamp for different batches of files even though we have granularity information from the underlying file system (e.g. we have proper nsec information).
+> 
+> This is an issue because parse_dos_attribute_blob() is presented the same fileid for different files through make_file_id_from_itime(). The same method of getting fileid is also used in open_file_ntcreate().
+> 
+> Looking at make_file_id_from_itime() I noticed that when ST_EX_IFLAG_CALCULATED_ITIME flag is unset this will return a fileid based of the invented time only which in the aforementioned case is producing the same fileid for files that have the same change timestamp in the underlying fs.
+> 
+> Based on MS-SMB specification fileid must be unique for a file on a given object store and must persist for the lifetime of the file. It also should not be changed when a file is renamed.
+> 
+> I am about to open a bug report and I would like to suggest a patch, but for the sakes of implementing the patch in a proper way I would like to ask if there is a particular reason why fileid is based only on itime in make_file_id_from_itime() when ST_EX_IFLAG_CALCULATED_ITIME is unset?
 
-We know it can be found on major Linux distributions because we test
-with the big 4 during every CI run.  That is were we generate these
-package lists from:
+this is a recent Samba change to overcome the problematic use of inode
+numbers for the file-ids. The assumption was that with nsec filesystem
+timestamp granularity, the itime, which stands for invented time and is
+basically an immutable birthtime, will alway be unique.
 
-https://wiki.samba.org/index.php/Package_Dependencies_Required_to_Build_Samba#Verified_Package_Dependencies
+Can you share a network trace of a minimal reproducer?
 
-Andrew Bartlett
+-slow
 
 -- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT   
-https://catalyst.net.nz/services/samba
-
-
-
-
-
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
