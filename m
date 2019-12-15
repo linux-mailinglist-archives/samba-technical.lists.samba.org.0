@@ -2,87 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE23811F187
-	for <lists+samba-technical@lfdr.de>; Sat, 14 Dec 2019 12:26:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 472BA11F7BA
+	for <lists+samba-technical@lfdr.de>; Sun, 15 Dec 2019 13:31:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=L/MT3V2L9hxc95eZ0oCe5RPKNFcMfDfiFUBliU1UCP4=; b=LBoXbxg8rZS/4mUmPmaHvX7VUg
-	qSI2EhHrYhbvSNy9glu7pXodJUPN+vhoQJyU2vRguuJ/dhMEDHWr9vtSkcMid8f8lcXyo3EwQUQlO
-	EC1NT965hGg8TWEbioJkGVtO3r3kBJBWNeqKUSK+e0aXuMQEeJKykvZGGuOfW/VcVeuuPL04iofTQ
-	yxdUk2QxPzhCM0lY4BMiHjqVOXFw1TxEiGPoglcIlad3zGGMrCg4/PLPxQ9Tabvu2R7RaLYNxbSRp
-	02YDqaBa2QJpw3EhpZdYogciuLYSjbCHjcwj+kHklbI1J+9j/nEX1G+YFiciWZJo55yp+thOTAD76
-	PiDvzE2A==;
-Received: from localhost ([::1]:40154 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=VtNWogBSBECThbpMvvbkWHl2d1t1fBAYzt83+BhSYW4=; b=puptVOvDc6VVHXTLtIYinTOM9T
+	p2d9HzNyq+PpFSoG8j1rQitzT5+wseLdstZbBcglBb1dV2FtCgnphaozGx6uBn4R4eTDu7Ibh5Rjc
+	Wt4Rv4O856SebrAPr+4iGWm8LKRoeMByv8JZZNWSzoR/yh49yfSCQ0ZV/plw4uBzj4J6HkAOPbaaq
+	s43DcFtt6raVppuctqvHrUawJ1rX66Bofyu5hLcIt2ExhcTIohxx5laoT6h53wqeRzZO5YGjNbltR
+	+asugG9gB1wsxq0SOiqxU8maci8IicoD4/Sm2c8QTdmuTEFLd6MUA0A3XyUGpg8qFDl/twX1PXZaF
+	FPit8uug==;
+Received: from localhost ([::1]:49112 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ig5YM-007HdN-KS; Sat, 14 Dec 2019 11:25:42 +0000
-Received: from mail-eopbgr680074.outbound.protection.outlook.com
- ([40.107.68.74]:16036 helo=NAM04-BN3-obe.outbound.protection.outlook.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1ig5YH-007HdG-T7
- for samba-technical@lists.samba.org; Sat, 14 Dec 2019 11:25:40 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nGwYgb7GacgkroO5Bu4wSeacoQRBmoETKbNkk28LceHtamE/W+rXczo/c51PB6RZBgiC0T7U4e3sU8Drk/HsBoKb8AwW/3x1JqGkSExRLdus+1ozvyy/SpsXp3iZSGL7mh2b0w3zVnK57020QsnH81ogljHHaOUIyQaKQaHZ+aqpreDlHlHwQ6wn6vmx7oyQOGdfgrfGqPi6Z9s96voKuHKRia+O3pE7TQIIU3iGdMF1kqtTKQjsUL9Q4exHvOv8MT1slqwZkSY+a1dLrfg56uA594BOO57Hr0b9B12NZEZShwkSo2p4pGHEIyQLYR4+35oqIWa/cbN8OwmYsgRbgg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=L/MT3V2L9hxc95eZ0oCe5RPKNFcMfDfiFUBliU1UCP4=;
- b=R0evcWExdy92QQF3IDZINleAEFMyaVxrQ8wycVyfwqHPmC/vywU4VGmCepPSJ1P2oLwpUnkSbh9hcmYJ4KAUGOpZflaTN/gnjXpbPE/WhogG0gnbXjD5cSJIHTtB85N0xKTCgb6QOjjcxKMGZ4B1cuEOHdJgnwYr+vwTl0TtyXr4hLc4+TYSYvKU/Po28K78rRuGH5Y1s+d/TeOAyGALYYzvZ/uypjCoaGY/gk7LshgqFTL0q52n+8pLAXDjtHRXIYaJGGNaaGczy0T0SHCkFrhldKwPKT28IlpENfCKLPaiQWReTeCghKtxAfJjpyJoLCqL2zwZGEKHDSIWyQTOog==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=fixity.net; dmarc=pass action=none header.from=fixity.net;
- dkim=pass header.d=fixity.net; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=fixity.onmicrosoft.com; s=selector2-fixity-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=L/MT3V2L9hxc95eZ0oCe5RPKNFcMfDfiFUBliU1UCP4=;
- b=AxVMsGjQ01DEUfc/GWg01r/YCyVjbHhUr9B5suaT0F83uZlZ6/Lbsm4u5MvlRrGM4sPJzI+lq/9Fs5fQ70wG5OeiZu/PYruBgiyfOqysJQOwjqD6D9+IYzDycMVyk6iRm4CMAz0HZ3Zf4IRcfi3NsaE8dRzQuTedkmisOQIYF0k=
-Received: from BYAPR08MB4872.namprd08.prod.outlook.com (20.176.254.17) by
- BYAPR08MB5704.namprd08.prod.outlook.com (20.179.88.75) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2538.18; Sat, 14 Dec 2019 11:25:19 +0000
-Received: from BYAPR08MB4872.namprd08.prod.outlook.com
- ([fe80::96b:f210:c239:ea5c]) by BYAPR08MB4872.namprd08.prod.outlook.com
- ([fe80::96b:f210:c239:ea5c%5]) with mapi id 15.20.2516.021; Sat, 14 Dec 2019
- 11:25:19 +0000
-To: Ralph Boehme <slow@samba.org>
-Subject: RE: parse_dos_attribute_blob() inconsistent file_id through
+	id 1igT1s-007Lh1-Gw; Sun, 15 Dec 2019 12:29:44 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44608) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1igT1m-007Lgu-LQ
+ for samba-technical@lists.samba.org; Sun, 15 Dec 2019 12:29:42 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=VtNWogBSBECThbpMvvbkWHl2d1t1fBAYzt83+BhSYW4=; b=WM25xDglvASL+xr7dZCYwLdv3J
+ IBuzXwNOGx1fHWc+2ViFLC3nA9k9uYk1nNigb0MTGDWXOQYlsS8Ev3K7zCT8C6UpC45bV/wu5SOnq
+ Gt3Uuq3URTianqnEvUlOH+aSzlPqX07PF1CwJIy3BZjej90zawI07Pduc+XtEghN91kzOVbgxxp1C
+ yK39kXHs/xZn86yfwsD/M/v7wi+/hrt5VNbfKBTWp8mmZJcr5N08HUwbjaoFLRpxIQU4cCwfBamXN
+ H2mxDTo5wi1qC7RY32vtRX9iUz2OwMCz5VCqNH4J1o9VxdDM9keBKhk8e7RbJD8DV0V01wi6IQqXn
+ pa35jw3Qva6e5EoRG3OHz/Zc5D36QcJletmno2UDdxKhCNM5y9dMyars6Jz9UmePzXbO7ozURpNJf
+ 4r/zb79F9/XvosxymBX9PmfAwj1J9EwlFzJXfZDEl7ep3KpGKgvEvn25dhjoSrs6cYyzAQSaEooBp
+ CrX+s6xGVihoEAuATFO7cDtL;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1igT1i-000571-5f; Sun, 15 Dec 2019 12:29:34 +0000
+Subject: Re: parse_dos_attribute_blob() inconsistent file_id through
  make_file_id_from_itime()
-Thread-Topic: parse_dos_attribute_blob() inconsistent file_id through
- make_file_id_from_itime()
-Thread-Index: AdWxNaYnq/Wm1GDZS1WYB4slT1gMNAAXeA6AACnclnAAC1yWAAAAKE9w
-Date: Sat, 14 Dec 2019 11:25:18 +0000
-Message-ID: <BYAPR08MB48727CE3A59EA39A14AED9B6C8570@BYAPR08MB4872.namprd08.prod.outlook.com>
+To: Krasimir Ganchev <ganchev@fixity.net>
 References: <BYAPR08MB4872E120915FF5A02939D29CC8550@BYAPR08MB4872.namprd08.prod.outlook.com>
  <117698c8-f1a1-5c0d-8fa5-8a0afb4745b1@samba.org>
  <BYAPR08MB487223100DE8B50DFA0EDB6AC8570@BYAPR08MB4872.namprd08.prod.outlook.com>
  <d1fa0fc3-72b9-e1cd-b139-18d5fe1e5e09@samba.org>
-In-Reply-To: <d1fa0fc3-72b9-e1cd-b139-18d5fe1e5e09@samba.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=ganchev@fixity.net; 
-x-originating-ip: [76.126.95.13]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 7a7b653f-a497-4428-cfc3-08d780884cfa
-x-ms-traffictypediagnostic: BYAPR08MB5704:
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: duy0wVrXAqsDKnfFP+PLsDqkB1RpevDxH3MAtEPBFLYvz8Nn+COC7vw9w3sDqPy6qiGIKTC21RYOhpJxtVMqVInzO6A4aVJeNrdsgOtkoilLKCEXvClCBA9WT1omtSVg+X3YgmWz6qev3W/3fQxGNrUedMqOXFTe8hK/7xJJUBJR5TW/56h2iTibzPwkhqtu5dU6oa9I2RwZD1ms6zt2DJ3KKN5lz2wfvPoMvZ+NNyWeioDVtHlkeDok+23Lm/Goe1qOlTX01MphBmb5hZ5ZmI+PFIHE0NCRlIAbwyT65cA5XtOBi9NXsGyrgg8j0fPUWKZbIXuzUxuiQuQcj86aHy4T0sZtkXs2qOL9rJJJa8OZnuZEh+gJBOCO4LIoZvWEotrB3yhAjj/h9S87Muuz8PTDdgzpWjzq66rFkoY2IPiUyYg2Rb5IJbJEIgi5Ro9+gwHzhmrooUYL2Z4qv8IRihE/ZZIeDh7SUjtkUa75UFoxekOg1nRsaXK1ysl4TZeS
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ <BYAPR08MB48727CE3A59EA39A14AED9B6C8570@BYAPR08MB4872.namprd08.prod.outlook.com>
+Message-ID: <99db458b-38f1-d180-3e6b-2dc1e10fabe2@samba.org>
+Date: Sun, 15 Dec 2019 13:29:33 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-X-OriginatorOrg: fixity.net
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7a7b653f-a497-4428-cfc3-08d780884cfa
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 13356338-6079-49fe-a1ed-7b1546e29bff
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: NvEAWWRKkcq6qN4HLwtrBWympqwhJxa5B5UBhYOpt+L3PrOmdx6ICp9V8oWQ5CphEKz3fUpIfIHpbXpOkD1jyg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR08MB5704
-X-Warn: EHLO/HELO not verified: Remote host 40.107.68.74
- (mail-eopbgr680074.outbound.protection.outlook.com) incorrectly presented
- itself as NAM04-BN3-obe.outbound.protection.outlook.com
+In-Reply-To: <BYAPR08MB48727CE3A59EA39A14AED9B6C8570@BYAPR08MB4872.namprd08.prod.outlook.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -96,86 +62,116 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Krasimir Ganchev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Krasimir Ganchev <ganchev@fixity.net>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-T24gU2F0dXJkYXksIERlY2VtYmVyIDE0LCAyMDE5IDI6MjMgQU0sIFJhbHBoIEJvZWhtZSB3cm90
-ZToNCg0KPiBBbSAxMi8xNC8xOSB1bSA2OjExIEFNIHNjaHJpZWIgS3Jhc2ltaXIgR2FuY2hldjoN
-Cj4gPiBPbiBGcmlkYXksIERlY2VtYmVyIDEzLCAyMDE5IDEyOjU5IEFNLCBSYWxwaCBCb2VobWUg
-d3JvdGU6DQo+ID4+IHRoaXMgaXMgYSByZWNlbnQgU2FtYmEgY2hhbmdlIHRvIG92ZXJjb21lIHRo
-ZSBwcm9ibGVtYXRpYyB1c2Ugb2YgaW5vZGUgbnVtYmVycyBmb3IgdGhlIGZpbGUtaWRzLiBUaGUg
-YXNzdW1wdGlvbiB3YXMgdGhhdCB3aXRoIG5zZWMgZmlsZXN5c3RlbSB0aW1lc3RhbXAgZ3JhbnVs
-YXJpdHksIHRoZSBpdGltZSwgd2hpY2ggc3RhbmRzIGZvciBpbnZlbnRlZCB0aW1lIGFuZCBpcyBi
-YXNpY2FsbHkgYW4gaW1tdXRhYmxlIGJpcnRodGltZSwgd2lsbCBhbHdheSBiZSB1bmlxdWUuDQo+
-ID4+DQo+PiBDYW4geW91IHNoYXJlIGEgbmV0d29yayB0cmFjZSBvZiBhIG1pbmltYWwgcmVwcm9k
-dWNlcj8NCj4gPiANCj4gPiBJIGFtIGF0dGFjaGluZyBhIG1pbmltYWwgcGFja2V0IGNhcHR1cmUg
-YXQgdGhlIHRpbWUgdGhlIGRpcmVjdG9yeSB3YXMgYnJvd3NlZC4NCg0KPiBzb3JyeSBpZiB0aGF0
-IHdhc24ndCBjbGVhciwgYnV0IHdlIGFsc28gbmVlZCB0aGUgY2FwdHVyZSB0byBjb3ZlciB3aGVu
-IHRoZSBmaWxlcyB3ZXJlIGNyZWF0ZWQuDQoNCldoYXQgbW9yZSBpbmZvcm1hdGlvbiB3b3VsZCB0
-aGF0IGdpdmUgdXM/IEFwcGFyZW50bHkgd2UgYXJlIGRlYWxpbmcgd2l0aCBsb2NhbCBpc3N1ZSBv
-biB0aGUgc2FtYmEgc2lkZS4gSXQncyA4TUIgZmlsZSwgSSBjYW4gcHJvdmlkZSBhIGRvd25sb2Fk
-IGxpbmsgaWYgbmVlZGVkLCBidXQgSSBkb24ndCBmZWVsIGxpa2UgYmxvd2luZyBzdWNoIGFuIGF0
-dGFjaG1lbnQgaGVyZS4NCg0KPiBXaGF0J3Mgc3RyYW5nZSBpcyB0aGF0IHRoZSBjYXB0dXJlIHNo
-b3dzIHRoYXQgZm9yIGZpbGVzIHdoZXJlIHRoZSBmaWxlLWlkIGlzIHRoZSBzYW1lLCB0aGUgY3Jl
-YXRpb24tZGF0ZXMgYXJlIGRpZmZlcmVudCwgc28gSSB3b3VsZCBleHBlY3QgdGhlIGl0aW1lIHRv
-IGJlIGRpZmZlcmVudCBhcyB3ZWxsIHdoaWNoIHNob3VsZCByZXN1bHQgaW4gdW5pcXVlIGZpbGUt
-aWRzLg0KDQpJZiBhbSBub3QgbWlzdGFrZW4sIEkgdGhpbmsgdGhlcmUgaXMgc3RpbGwgbm8gY29u
-c2Vuc3VzIG9uIGltcGxlbWVudGluZyBjcmVhdGlvbiB0aW1lIG9uIExpbnV4LCBhbHRob3VnaCBz
-b21lIEZTIGFjdHVhbGx5IHN1cHBvcnQgaXQuIEFsbCB5b3UgaGF2ZSBpcyB0aGUgY2hhbmdlIHRp
-bWUuIENyZWF0aW9uIHRpbWUgaXMgY29waWVkIG92ZXIgZnJvbSBXaW5kb3dzIGFzIGEgRE9TIGF0
-dHJpYnV0ZSB3aGljaCBpbiB0aGlzIGNhc2UgaXMgaXJyZWxldmFudCBhcyBpbnZlbnRlZCB0aW1l
-IChpdGltZSkgaXMgYmFzZWQgb24gdGhlIGNoYW5nZSB0aW1lIHN1cHBsaWVkIGJ5IHRoZSBGUyAo
-Y3JlYXRpb24gdGltZSBpcyBvbmx5IHVzZWQgaWYgbm90aGluZyBpcyBzdXBwbGllZCBieSB0aGUg
-RlMpLiANCg0KSWYgeW91IGxvb2sgY2xvc2VseSBpbiB0aGUgdGV4dCBmaWxlIGluIHRoZSB6aXAg
-eW91IHdpbGwgZmluZCB0aGUgb3V0cHV0IG9mIHN0YXQgb24gZWFjaCBvZiB0aGUgZmlsZXMgYW5k
-IHlvdSBjYW4gY2xlYXJseSBzZWUgdGhhdCBpdGltZSB3YXMgaW5kZWVkIGJhc2VkIG9uIHRoZSBn
-cmFudWxhciBjaGFuZ2UgdGltZSBvZiB0aGUgRlMuIFRoZSBwcm9ibGVtIGhlcmUgaXMgYXMgSSBt
-ZW50aW9uZWQgaW4gbXkgaW5pdGlhbCBwb3N0IHdoZW4gY29weWluZyBmaWxlcyBpbiBwYXJhbGxl
-bCB0aGVyZSBhcmUgZGVmaW5pdGVseSBiYXRjaGVzIG9mIGZpbGVzIHRoYXQgZ2V0IHRoZSBzYW1l
-IGNoYW5nZSB0aW1lIGluIHRoZSBGUyAoYWN0dWFsbHkgbWF5YmUgSSB3YXMgbm90IGNsZWFyIGVu
-b3VnaCBpbiBteSBpbml0aWFsIHBvc3QgbWVudGlvbmluZyB0aGUgY3JlYXRpb24gdGltZSBidXQg
-SSB3YXMgcmVmZXJyaW5nIHRvIHRoZSBjcmVhdGlvbiB0aW1lIGluIHRoZSBsb2NhbCBGUykuDQoN
-Cj4gR28gZmlndXJlLCB3ZSBkZWZpbml0ZWx5IG5lZWQgYSBuZXR3b3JrIHRyYWNlIHdpdGggKnBh
-cmFsbGVsKiBsb2cgbGV2ZWwgMTAuIHNtYi5jb25mIGFzIHdlbGwuDQoNClRoZSBwcm9ibGVtIHdp
-dGggcHJvdmlkaW5nIGxvZyBsZXZlbCAxMCBkZWJ1ZyBpcyB0aGF0IHRoZSBtb21lbnQgSSBlbmFi
-bGUgbGV2ZWwgMTAgZGVidWcgZm9yIHRoZSBwYXJ0aWN1bGFyIGNsaWVudCwgZHVlIHRvIHRoZSBm
-YWN0IHRoYXQgY29weWluZyBiZWNvbWVzIG11Y2ggc2xvd2VyIEkgYW0gdW5hYmxlIHRvIHJlcHJv
-ZHVjZSB0aGUgaXNzdWUgYXMgaXQgdGFrZXMgbW9yZSB0aW1lIHRvIGNvbW1pdCB0aGUgZmlsZXMg
-YW5kIHRoZXkgZ2V0IGRpZmZlcmVudCBjaGFuZ2UgdGltZSBhbmQgaXRpbWUgcmVzcGVjdGl2ZWx5
-LiBMb29raW5nIGF0IHRoZSBjb2RlIGFuZCB0aGUgZGF0YSBJIHN1cHBsaWVkIHNvIGZhciAoc2Ft
-YmEtdG9vbCwgc3RhdCwgZXh0cmFjdHMgZnJvbSBkZWJ1ZykgSSBmZWVsIHdlIGNhbiBjbGVhcmx5
-IHBpbnBvaW50IHRoaXMgdG8gZ2VuZXJhdGluZyBmaWxlaWRzIG9mZiB0aGUgaW52ZW50ZWQgdGlt
-ZSBYQVRUUl9ET1NJTkZPX0lUSU1FLg0KDQo+ID4gWW91IGNhbiBjbGVhcmx5IHNlZSB0aGF0IHRo
-ZSBmaWxlaWRzIHJldHVybmVkIGFyZSB0aGUgc2FtZSBmb3IgZmlsZXMgd2l0aCB0aGUgc2FtZSB0
-aW1lc3RhbXAgKGZpbmQgcmVzcG9uc2UgcGFja2V0IDUzIGZyb20gdGhlIGNhcHR1cmUpLg0KPiA+
-DQo+ID4gV2l0aGluIHRoZSBhdHRhY2htZW50IHRoZXJlIGlzIGFsc28gYSB0ZXh0IGZpbGUgY29u
-dGFpbmluZyBzb21lIHBhcnQgb2YgdGhlIGNsaWVudCBkZWJ1ZyBsb2csIHN0YXQgb2YgdGhlIHNo
-YXJlZCBkaXJlY3RvcnkgY29udGVudHMsIGFuZCBzYW1iYS10b29sIG50YWNsIGdldGRvc2luZm8g
-b2YgZWFjaCBmaWxlIGluIHRoZSBkaXJlY3RvcnkuDQoNCj4gVW5mb3J0dW5hdGVseSB0aGUgb3V0
-cHV0IGlzIG9ubHkgd2l0aCBzZWNvbmRzIGdyYW51bGFyaXR5Lg0KDQpUaGlzIGFnYWluIGlzIGly
-cmVsZXZhbnQgYmVjYXVzZSB5b3UgYXJlIHJlZmVycmluZyB0byB0aGUgWEFUVFJfRE9TSU5GT19D
-UkVBVEVfVElNRSB3aGljaCBpcyBpbnRlbnRpb25hbGx5IGNhcnJpZWQgb3ZlciBhcyBET1MgYXR0
-cmlidXRlIHdoaWxlIGNvcHlpbmcgdGhlIGZpbGVzLiBJbiBvdXIgY2FzZSBpdGltZSB3YXMgbm90
-IGJhc2VkIG9mIHRoaXMgRE9TIGF0dHJpYnV0ZSAoc2VlIHRoZSBvdXRwdXQgb2YgInNhbWJhLXRv
-b2wgbnRhY2wgZ2V0ZG9zaW5mbyIpIGluIHRoZSBwcmV2aW91c2x5IGF0dGFjaGVkIFpJUC4NCg0K
-PiA+IFlvdSBtZW50aW9uZWQgdGhlIGNoYW5nZSB3YXMgbmVlZGVkIGR1ZSB0byBwcm9ibGVtYXRp
-YyB1c2Ugb2YgaW5vZGUgbnVtYmVycy4gSSBzdXBwb3NlIHRoaXMgbWlnaHQgYmUgYW4gaXNzdWUg
-d2l0aCBmaWxlc3lzdGVtcyB3aXRob3V0IGlub2RlIHRhYmxlLiBDYW4geW91IHBsZWFzZSBlbGFi
-b3JhdGU/DQoNCj4gaW5vZGUgbnVtYmVycyBhcmUgcmV1c2VkIGJ5IHRoZSBrZXJuZWwsIHNvIHRo
-ZXkncmUgbm90IHVuaXF1ZSBpZGVudGlmaWVycy4NCg0KQ29ycmVjdCBtZSBpZiBJIGFtIHdyb25n
-LCBidXQgbXkgdW5kZXJzdGFuZGluZyBpcyB0aGF0IGlub2RlcyBhcmUgb25seSByZXVzZWQgYWZ0
-ZXIgdGhlIGxhc3QgbGluayB0byBhIHBhcnRpY3VsYXIgaW5vZGUgaXMgZGVsZXRlZD8gSSB0aGlu
-ayB0aGlzIGNvbXBsaWVzIHdpdGggdGhlIHJlcXVpcmVtZW50cyBmb3IgZmlsZWlkIGluIHRoZSBN
-aWNyb3NvZnQncyB3aGl0ZXBhcGVyIGUuZy4gIkZpbGVJZCBmb3IgYSBmaWxlIE1VU1QgcGVyc2lz
-dCBmb3IgdGhlIGxpZmV0aW1lIG9mIGEgZmlsZSBvbiBhIGdpdmVuIG9iamVjdCBzdG9yZS4gQSBG
-aWxlSWQgTVVTVCBOT1QgYmUgY2hhbmdlZCB3aGVuIGEgZmlsZSBpcyByZW5hbWVkLiBXaGVuIHRo
-ZSBmaWxlIGlzIGRlbGV0ZWQsIHRoZSBGaWxlSWQgTUFZIGJlIHJldXNlZC4iIA0KDQpJZiB0aGF0
-J3MgdGhlIGNhc2UsIG1heWJlIHNvbWUgY29tYmluYXRpb24gb2YgaXRpbWUgKyBpbm9kZSBjb3Vs
-ZCBiZSBhIGJldHRlciBhcHByb2FjaCBleGNlcHQgdGhhdCBpdCB3b3VsZCBzdGlsbCBjYXVzZSBp
-c3N1ZXMgd2l0aCBmaWxlc3lzdGVtcyB0aGF0IGRvbid0IHVzZSBpbm9kZXMuIA0KDQpJIHRoaW5r
-IHRoZSByaWdodCB0aGluZyB0byBkbyBoZXJlIGlzIHRvIGZpbmQgYSBnb29kIG1ldGhvZCBvZiBn
-ZW5lcmF0aW5nIHVuaXF1ZSBmaWxlaWRzLg0KDQoNCg0KQmVzdCwNCktyYXNpbWlyDQo=
+Am 12/14/19 um 12:25 PM schrieb Krasimir Ganchev:
+> On Saturday, December 14, 2019 2:23 AM, Ralph Boehme wrote:
+> 
+>> Am 12/14/19 um 6:11 AM schrieb Krasimir Ganchev:
+>>> On Friday, December 13, 2019 12:59 AM, Ralph Boehme wrote:
+>>>> this is a recent Samba change to overcome the problematic use of inode numbers for the file-ids. The assumption was that with nsec filesystem timestamp granularity, the itime, which stands for invented time and is basically an immutable birthtime, will alway be unique.
+>>>>
+>>> Can you share a network trace of a minimal reproducer?
+>>>
+>>> I am attaching a minimal packet capture at the time the directory was browsed.
+> 
+>> sorry if that wasn't clear, but we also need the capture to cover when the files were created.
+> 
+> What more information would that give us? Apparently we are dealing with local issue on the samba side. It's 8MB file, I can provide a download link if needed, but I don't feel like blowing such an attachment here.
+
+Just share a link where I can download the traces.
+
+>> What's strange is that the capture shows that for files where the file-id is the same, the creation-dates are different, so I would expect the itime to be different as well which should result in unique file-ids.
+> 
+> If am not mistaken, I think there is still no consensus on implementing creation time on Linux, although some FS actually support it.
+
+there's now statx() and eg btrfs supports it, but this is currently not
+used in Samba.
+
+> All you have is the change time. Creation time is copied over from Windows as a DOS attribute which in this case is irrelevant as invented time (itime) is based on the change time supplied by the FS (creation time is only used if nothing is supplied by the FS).
+
+I was suspecting a bug in Samba where possibly if the client sets the
+creation date this would somehow munge itime and file-id.
+
+To give some context: it was me who added added the feature of basing
+the file-id on a immutable itime a few months ago.
+
+> If you look closely in the text file in the zip you will find the output of stat on each of the files and you can clearly see that itime was indeed based on the granular change time of the FS. The problem here is as I mentioned in my initial post when copying files in parallel there are definitely batches of files that get the same change time in the FS (actually maybe I was not clear enough in my initial post mentioning the creation time but I was referring to the creation time in the local FS).
+
+Yeah, this is likely the problem. I wonder how the files end up with
+identical ctime, as in Samba the file creation will be serialized so
+they *can't* happen at the same time.
+
+>> Go figure, we definitely need a network trace with *parallel* log level 10. smb.conf as well.
+> 
+> The problem with providing log level 10 debug is that the moment I enable level 10 debug for the particular client, due to the fact that copying becomes much slower I am unable to reproduce the issue as it takes more time to commit the files and they get different change time and itime respectively.
+
+Drat, I see. You could try and use the ringbuffer for logging. Given a
+large enough buffer, maybe the full log fits into it so you can extract
+it after running the reproducer:
+
+  logging = ringbuf:size=NBYTES
+
+Then
+
+  # smbcontrol PID ringbuf-log
+
+This won't work with more then 128 MB (iirc).
+
+> Looking at the code and the data I supplied so far (samba-tool, stat, extracts from debug) I feel we can clearly pinpoint this to generating fileids off the invented time XATTR_DOSINFO_ITIME.
+
+As the itime is based on the ctime, the question is, how can the files
+end up with identical ctime? As mentioned above, file creation in Samba
+is serialized, so there's no parallelism.
+
+>>> You can clearly see that the fileids returned are the same for files with the same timestamp (find response packet 53 from the capture).
+>>>
+>>> Within the attachment there is also a text file containing some part of the client debug log, stat of the shared directory contents, and samba-tool ntacl getdosinfo of each file in the directory.
+> 
+>> Unfortunately the output is only with seconds granularity.
+> 
+> This again is irrelevant because you are referring to the XATTR_DOSINFO_CREATE_TIME which is intentionally carried over as DOS attribute while copying the files.
+
+If you look closely, the itime is there as well.
+
+> In our case itime was not based of this DOS attribute (see the output of "samba-tool ntacl getdosinfo") in the previously attached ZIP.
+
+For file handles referring to files just created via that handle, the
+itime is taken from the ctime (lacking native btime support) and stored
+in the DOS attribute xattr. Subsequently opens of the same file will use
+the itime from the DOS attrubte. This itime value in the DOS attribute
+is immutable once set, in contrast to the creation-date which can be
+modified on client request.
+
+>>> You mentioned the change was needed due to problematic use of inode numbers. I suppose this might be an issue with filesystems without inode table. Can you please elaborate?
+> 
+>> inode numbers are reused by the kernel, so they're not unique identifiers.
+> 
+> Correct me if I am wrong, but my understanding is that inodes are only reused after the last link to a particular inode is deleted?
+
+Yup.
+
+> I think this complies with the requirements for fileid in the Microsoft's whitepaper e.g. "FileId for a file MUST persist for the lifetime of a file on a given object store. A FileId MUST NOT be changed when a file is renamed. When the file is deleted, the FileId MAY be reused." 
+
+Yes, this is sufficient for WIndows clients, unfortunately other client
+assume no reuse, name the macOS client.
+
+> If that's the case, maybe some combination of itime + inode could be a better approach except that it would still cause issues with filesystems that don't use inodes. 
+> 
+> I think the right thing to do here is to find a good method of generating unique fileids.
+
+Samba has long been just using the inode number which worked fine, it's
+just the macOS client that uses the server provided file-id as CNID wich
+requires no number reuse.
+
+-slow
+
+-- 
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
