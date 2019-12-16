@@ -2,51 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97BC91209CA
-	for <lists+samba-technical@lfdr.de>; Mon, 16 Dec 2019 16:35:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20F5A120A04
+	for <lists+samba-technical@lfdr.de>; Mon, 16 Dec 2019 16:46:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=PVSnCLr4Tfu943Hyh7AhB4h77P8iKtGYkG4eBGTBdWs=; b=qghlEOxBdmRMAOjDU/oK/sBDYr
-	Mv14nbMvCaiz9h9dCIjv4ZhABgr8l1JrmNZ4Z5TkWpQxMkEiGJgeW95i7jA83zWye0ONPV19V9WvB
-	oskYg1oKwt55wtYCGEHTmg9BGXIgGfRKAL0ccqgKA9dK2z9AQ+8XzeFRvB8SUvSZ7MFKLdb+Ez9ch
-	fnAaPia7ojMTvFjeOGfoyrT4qJIhBD96xzuQFnDTfU9bLZCOPEMd90DrXMSxol4croBM/yWRe5TGV
-	7RLy8nrxdDmB0+XM4g1PFhyFtrKD9TMjg3YsHyvuv3Xn2jYbd6BtQLJPH4bFs5CKscHkhuKZPGtzL
-	9i56dO1w==;
-Received: from localhost ([::1]:24358 helo=hr1.samba.org) 
+	bh=NFDkySN8L7CvnPh9A90x/OMP5Cw3OTRSIMrbPaIJJrk=; b=4ZMFjVJPposo3UOwbCw0Res0j8
+	nn5VO3krW256Fcav9t+dW0CgmEvQEPY6edY/OPBk+wGOLpINr6nxoJrISisekQjlm6YO2uMG85BPZ
+	rfYFXv26tk4QnJeQle01txXjirknKOl5t4Jwc+PY6LcPGVeX6GWVJomHFyYA8CUtFy8i3M9p/ILHc
+	Aybvc3+XFq2v1tqI375y1LnNfAKkbUdZVaaRsFbxBZqGC4Ui8SccMGz7sq9qNdoOfzSv1hQoJJYZx
+	ux2l/xCtM1qrQ13k/YWcUwz6eGEAItSFL6xV6zPycyjtH8leiGDjjEVYwAiJ3rHCr8alUWLXxjv5S
+	HjoKMoGA==;
+Received: from localhost ([::1]:25184 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1igsOp-007QKW-KF; Mon, 16 Dec 2019 15:35:07 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50284) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1igsOk-007QKP-Os
- for samba-technical@lists.samba.org; Mon, 16 Dec 2019 15:35:04 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=PVSnCLr4Tfu943Hyh7AhB4h77P8iKtGYkG4eBGTBdWs=; b=xZex6DqZdrFoQCJyTy3kcQe9Ug
- cORj/7lXsLb7Uw+cmztrvl07c0LpXxdrMmRISVhGiiW8lO/xyJMbcJAmsw6Ni5JmBpR2PNUQS+QZT
- h6BIEBGDfRPULXqDiAt5vax1do2QGmtow2oPAe1ARVVGTjjz8Y8NLJwT5TAi7lOmiGV/vN9FI4IfA
- p+aymQwjTnLLi/KesWUIgGK98//6TDw7mRBzXC5BnnuIBGwBG8FD+g1X3/midqNxVVPKdunhS4H5b
- Aj+aK58Of0CZK9wTY89oRwvZYivbkvt+rEKz21mD7/W+XiRL6JyLnPsdJGh0M53B11sDLSwc342HK
- sbI986va8a1OpFNaOuAIbIIQIRLk+cemGS6Pq/hm7YKN1eGHw+/T71profe6Oq5zw2mfSSlvT1Lvy
- 1L3vC2adpAnXiXEdncmrM9fxpGknbJKbOxBxEKEqIJVpcaMbXHcgE3vRG0kEXD9rL45uJtTG+KyHN
- GmuWC6qn7QBoUiEib37VvpZF;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1igsOk-0007UL-97
- for samba-technical@lists.samba.org; Mon, 16 Dec 2019 15:35:02 +0000
-Subject: Re: Spelling/typos. /Fix multiple typos found by lintian on debian
+	id 1igsZi-007QSQ-NZ; Mon, 16 Dec 2019 15:46:22 +0000
+Received: from mailhopper2.bazuin.nl ([195.134.173.123]:46722) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1igsZe-007QSJ-9k
+ for samba-technical@lists.samba.org; Mon, 16 Dec 2019 15:46:20 +0000
+X-Bazuin-en-Partners-MailScanner-Watermark: 1577115980.42108@y/+w3tv3QeUayTWHx5bzvQ
+X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
+X-Bazuin-en-Partners-MailScanner: Found to be clean
+X-Bazuin-en-Partners-MailScanner-ID: 12BE911F07D.A72D7
+X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
+ Partners for more information
+Received: from ms249-lin-003.rotterdam.bazuin.nl
+ (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
+ by mailhopper2.bazuin.nl (Postfix) with ESMTP id 12BE911F07D
+ for <samba-technical@lists.samba.org>; Mon, 16 Dec 2019 16:46:17 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
+ s=mail20180308; t=1576511177;
+ bh=u9QLAboCnEVh/8pXBrx1fHXzWjy1cv248DYLWbQoBdQ=;
+ h=Subject:From:To:Date:In-Reply-To:References:From;
+ b=Db/uQPmJ0lbHvLQcexGMVZ8bOI/th1vy+ceKRCYGtIbS5F04LCMRmafDixouQn+0v
+ 9QEtEEnYO7iRlUMVhAMuYHW17XP2HIP2ewUS9YhGAvENNjUEHVPMjKeVUTRlmoPfpN
+ fNLfdMA5bkrp11aKeN9Hs+X3uEPTSwzrBGoJlpefqG05bcvLOEwB37nyTfRzSeoIcp
+ Z+vRg4YcL0yhaComT76g/v5iDHwYrPKfMQ7JxiYAzplskDUgZB8bz1Nd5xiSwUlYrO
+ O3risvfGNWadt0r5B5EwYURU5wtJGtotq218Y1ZkJzuXFdxwnSprqKfTg/L7CI8+So
+ 1DXzs/2KG3Hzg==
+Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
+ by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 5362C3AF8C
+ for <samba-technical@lists.samba.org>; Mon, 16 Dec 2019 16:46:09 +0100 (CET)
+Subject: RE: Spelling/typos. /Fix multiple typos found by lintian on debian
  patch included.
-To: samba-technical@lists.samba.org
-References: <vmime.5df7707d.74d7.61e0656b532253cd@ms249-lin-003.rotterdam.bazuin.nl>
- <7ED1B3EB46AE40D3845A260EA8E4FBD2@rotterdam.bazuin.nl>
-Message-ID: <066f97b6-3e24-81f2-f91a-82e537436e44@samba.org>
-Date: Mon, 16 Dec 2019 15:35:01 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
-MIME-Version: 1.0
-In-Reply-To: <7ED1B3EB46AE40D3845A260EA8E4FBD2@rotterdam.bazuin.nl>
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+To: =?windows-1252?Q?samba-technical=40lists.samba.org?=
+ <samba-technical@lists.samba.org>
+Date: Mon, 16 Dec 2019 16:46:09 +0100
+Mime-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <066f97b6-3e24-81f2-f91a-82e537436e44@samba.org>
+References: <7ED1B3EB46AE40D3845A260EA8E4FBD2@rotterdam.bazuin.nl>
+X-Priority: 3 (Normal)
+X-Mailer: Zarafa 6.30.19-25148
+Thread-Index: AdW0J+83mVjf+ZbsSXiOnyM0JLyAGA==
+Message-Id: <vmime.5df7a6c1.763c.aad494776a5d451@ms249-lin-003.rotterdam.bazuin.nl>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,128 +69,83 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 16/12/2019 14:46, L. van Belle via samba-technical wrote:
-> Hai,
->
-> I hoped someone would reply, but everybody seems very buzy lately.
->
-> And since i dont want to mess up git, I attached the patch with typo fixes.
-> I've also attached the lintian output where i worked from.
->
-> Not fixed:
-> ressource => resource
-> dont => don't
-> upto => up to
->
-> These three where also in variables or other code parts so i've not fixed
-> these.
->
->
-> Greetz,
->
-> Louis
->
->
->
->
->> -----Oorspronkelijk bericht-----
->> Van: samba-technical
->> [mailto:samba-technical-bounces@lists.samba.org] Namens
->> L.P.H. van Belle via samba-technical
->> Verzonden: maandag 16 december 2019 12:55
->> Aan: samba-technical@lists.samba.org
->> Onderwerp: Spelling/typos.
->>
->> Hai Guys,
->>   
->> Im currently working on fixing spelling errors found by
->> debian Lintian.
->> One im fixing now is :
->>   
->> usr/lib/x86_64-linux-gnu/samba/vfs/fruit.so:ressource:resource
->>   
->> Now im grepping on the type "ressource" but that also showed
->> me this :
->>   
->> librpc/idl/spoolss.idl:         uint32 ressource_id;
->> librpc/idl/spoolss.idl:         uint32 ressource_id;
->> source3/modules/vfs_fruit.c:
->> "ressource", fruit_rsrc, FRUIT_RSRC_ADFILE);
->> source3/rpcclient/cmd_spoolss.c:
->> info2.ressource_id      = 0;
->> source3/rpcclient/cmd_spoolss.c:
->> printf("\tressource_id: 0x%08x\n", r->ressource_id);
->> source3/locale/pam_winbind/da.po:msgstr "Domæne-controller
->> kan ikke nås, bruger cachede akkreditiver i stedet.
->> Netværksressourcer kan være utilgængelige"
->> source3/locale/pam_winbind/fr.po:msgstr "Le contrôleur de
->> domaine est injoignable. Les donnés d'identification en cache
->> seront utilisées. Certaines ressources réseaux seront indisponibles."
->>
->>   
->> my question,  things like :  uint32 ressource_id;
->>   
->> rgrep ressource_id *
->>
->> librpc/idl/spoolss.idl:         uint32 ressource_id;
->> librpc/idl/spoolss.idl:         uint32 ressource_id;
->> source3/rpcclient/cmd_spoolss.c:
->> info2.ressource_id      = 0;
->> source3/rpcclient/cmd_spoolss.c:
->> printf("\tressource_id: 0x%08x\n", r->ressource_id);
->>
->> Should i fix these also? to resource_id ?
->>   
->> And, can put these type fixes in one patch?
->> I'm tekstbook following the git steps, because i need to
->> learn to work more git.
->>   
->>   
->>   
->> Greetz,
->>   
->> Louis
->>   
->>
->>
->>
->>
-Hi Louis, believe it or not, but 'wont' is a valid English word ;-)
+Hai Rowland,=20
 
-You missed a few typos/mis-spellings:
+Well, that i missed a few that is possible. ;-)=20
 
-s/Crete/Create/
-s/behavies/behaves/
-s/Thep/The/
+Git is still hard for me, so i started with with it not, and i think safest is to try and fix typo's..=20
+And yeah.. I know,, im full of typo's, but im trying .. ;-) i used the example corrections for lintian.=20
 
-One of your changes is this:
+I also forgot everybody is buzy with 4.11.4.. Totaly forgot that release date.=20
 
-   * Heimdal libhdb library provides the backend support for Heimdal kdc
-- * and kadmind. Its here where plugins for diffrent database engines
-+ * and kadmind. Its here where plugins for different database engines
-   * can be pluged in and extend support for here Heimdal get the
-   * principal and policy data from.
 
-I think the the second to last line should be this:
+> -----Oorspronkelijk bericht-----
+> Van: samba-technical=20
+> [mailto:samba-technical-bounces@lists.samba.org] Namens=20
+> Rowland penny via samba-technical
+> Verzonden: maandag 16 december 2019 16:35
+>
+> >>
+> >>
+> >>
+> >>
+> Hi Louis, believe it or not, but 'wont' is a valid English word ;-)
 
-   * can be plugged in and extend support for where Heimdal gets the
+Ah, i knew it.. But i wat thinking, i'll bet Rowland will have a look.=20
+Best spell checker in english..  :-)=20
 
-Finally, this:
+>=20
+> You missed a few typos/mis-spellings:
+>=20
+> s/Crete/Create/
+> s/behavies/behaves/
+> s/Thep/The/
 
-+The `check_boost` configuration function allows one to specify the used 
-boost libraries.
+Yes, possible, i'll see what the next lintian output gives on 4.11.4.=20
+And try to make a new one.=20
 
-Should probably be this:
+>=20
+> One of your changes is this:
+>=20
+>  =A0 * Heimdal libhdb library provides the backend support for=20
+> Heimdal kdc
+> - * and kadmind. Its here where plugins for diffrent database engines
+> + * and kadmind. Its here where plugins for different database engines
+>  =A0 * can be pluged in and extend support for here Heimdal get the
+>  =A0 * principal and policy data from.
+>=20
+> I think the the second to last line should be this:
+>=20
+>  =A0 * can be plugged in and extend support for where Heimdal gets the
+>=20
+> Finally, this:
+>=20
+> +The `check_boost` configuration function allows one to=20
+> specify the used=20
+> boost libraries.
+>=20
+> Should probably be this:
+>=20
+> +The `check_boost` configuration function allows one to specify the=20
+> boost libraries to use.
 
-+The `check_boost` configuration function allows one to specify the 
-boost libraries to use.
+Ah,, i see, i missed "enters" also, so fixing these with sed is tricky..=20
+I'll add that on my check list, that i must read the lines and not only use sed on it.=20
 
-Rowland
+I also still have a few git questions, but when im at that point i'll ask my question.=20
+But thank very much for the reply Rowland.=20
+
+Now, upto setting up for the 4.11.4 builds.=20
+
+Greetz,=20
+
+Louis
+
 
 
 
