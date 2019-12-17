@@ -2,54 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07E95122F06
-	for <lists+samba-technical@lfdr.de>; Tue, 17 Dec 2019 15:42:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B82E5122FF7
+	for <lists+samba-technical@lfdr.de>; Tue, 17 Dec 2019 16:17:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=ZPPIrY3lwocsYHDCUB9vxohjeDpLSGK0TvDbrl58a+w=; b=Tt60RfjglELfNEtI0USAX8ws2T
-	hymD3C17QDDYe2iB5f6GZAYRF9nHgzfqAGUBHo05PyfZR1om0IZsWO9drZZzwIBqQjgs6fKrRg7QO
-	TiqgQ/dEi93I3E3WYxEjRPuPlyt+RsbXvSc5uBhWerhJztAVNk/47jrl4d0JKl/7ekimFINRO/Ey9
-	kDBpeZhOTbVUve9v836jgugr1cIQIZrN0Le6wYwfc6Hj1ig6cas7qIugxluK0Tl+nsXnsaHuKRnYr
-	+igpQJhT54K0SawZFDkIMG1U9D2ESDQMLasugVJcipioEiKfU9aGzlpmUYVhSqxP1YGFlDcx5dNAs
-	VkJu5GZQ==;
-Received: from localhost ([::1]:54214 helo=hr1.samba.org) 
+	bh=q4p04erwqpuZWenojyAqJZklw6w4fX5k6o+DZyHaSrM=; b=z+tmprCtyoS8P6puNMdKciibNr
+	VhDwzvL5xNKuSyrMV0jmvudGiPaonqMskUDwkNT+TAPiG8S9Qy5uiEFX1Ox8TzehzLnYekKYHNbXe
+	ZDvAHC35l1HQU7+L07olrADEu4LCj8jhCVk2u03RGWgA9Pl4pZi4UkpXygUfSsGOe51x0lKkxtTjv
+	BJ7IDKBd+8hKY971u9QdjsWukJSCeKbqUf33SN0aToHCet6g7vroJV5VgVBsY6atgjSitRxHSa3xH
+	tDa+9ga/JcEOcYkkLneGmk6vn0xmbjsxifyVD1FR0BpfOP/imkgJMfOF3Bcdhk4WTumceAo9LIDeY
+	fthxaovw==;
+Received: from localhost ([::1]:55000 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ihE2I-007Vfk-Sx; Tue, 17 Dec 2019 14:41:18 +0000
-Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134]:39820) 
+	id 1ihEaq-007VnS-AR; Tue, 17 Dec 2019 15:17:00 +0000
+Received: from mail-lj1-x230.google.com ([2a00:1450:4864:20::230]:41888) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ihE29-007Vfd-5d
- for samba-technical@lists.samba.org; Tue, 17 Dec 2019 14:41:13 +0000
-Received: by mail-il1-x134.google.com with SMTP id x5so5582895ila.6
- for <samba-technical@lists.samba.org>; Tue, 17 Dec 2019 06:41:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=4rhuskies.org; s=google;
+ (Exim) id 1ihEal-007VnL-9K
+ for samba-technical@lists.samba.org; Tue, 17 Dec 2019 15:16:58 +0000
+Received: by mail-lj1-x230.google.com with SMTP id h23so11346701ljc.8
+ for <samba-technical@lists.samba.org>; Tue, 17 Dec 2019 07:16:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:from:date:message-id:subject:to;
- bh=YeHH/Cg9eNiyUEXyyxIf/pYuIFUFFVyoM1TiM35VPWY=;
- b=ClxGVWkK3km/qJ9v3QqsF3uaD0URTYd36t12Ul+i87YO+JZ5jvWL3pAoP2bKW656rC
- KbTJasBwlhNywFBMguVG0bqec87jBrmMaKqgQEI+Z2Io1smzfGZ+ymZpv07dvU2+qqgN
- hntcb8XI4RSEzkj75fBY4x+q2Lt/CMg0Lc9l8=
+ bh=q4p04erwqpuZWenojyAqJZklw6w4fX5k6o+DZyHaSrM=;
+ b=JOYM6O+PHnXI56EhQ/DpKOGSPOBcIiy8FxaJVXl35EMwPL2Yx4B/zr5p2wyYEQ0fni
+ rGmISj+pGlUpaiwCgCDY5nLwEYYX54iIWJfRI5iYIb7w/+54J5XWFc24QlSJE7QzEAwH
+ nOfBgucH1Jg4WpqR6Fuu2EAvW+1hAXv8swv1FwcjPMbFIrQO0FaXGRezI720kkBdbFQp
+ YiCOq2U2VF9HoksdUTKYi98CiTHM7Uyh08qANr8af/SsADbSuSS+LHmGLADCgHmBhXLK
+ RVxMZc/5daObubxOiRLYai2RXz52RVE2ovohmAQzeKDuxthiUgyTRXtjjLAe4Vj7Ds56
+ lhig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=YeHH/Cg9eNiyUEXyyxIf/pYuIFUFFVyoM1TiM35VPWY=;
- b=IJRJOoipIAs06MrdqiSxrfVfkuCl6NvnwPDVWjSbWSz5EgzDGDxFk8qPagtHjUFNYs
- 2+2fDgmnsOzpupPtTxNZ4csU1fJybMv7GWbaVjrjc83LWhKpp4VnoyzYtJ96OkSipTIQ
- lBhOP7sAPDg33X6XaEM7tvZY0G9uS8VNSLwNF2zaCa7I6IucfZWezZZq4vTVnk9EH6h4
- VISjNNlIjA/nTEjmQ1f/vWLHev1J8BIzoOTJjm7l5/Lol29eaIhmeBkoqLNrX5brIxxE
- FxSbSxjQEfbkGjfPbQJrFIscf50Nzm3jTAbII45uTDsIpi3CpX+m3OnG6Yz9scoOIE9d
- vffw==
-X-Gm-Message-State: APjAAAWMxjKLbwBd+cQePFiX1liOsOMXolIzr84ss/L0PNkf0pc4+6B8
- C8YO7gXTvkHU4L8KNVmtt2UB9dKaoQARZpctngL+cE66
-X-Google-Smtp-Source: APXvYqwZnqn8gHz84mDwEhvGThSEYCaHZzPuZAGqli9xcBMKdWvZgl2aRyZ6BokgFtA/8gKHFBr2MI+dEzOU7cmRcuI=
-X-Received: by 2002:a92:8395:: with SMTP id p21mr16726713ilk.285.1576593667171; 
- Tue, 17 Dec 2019 06:41:07 -0800 (PST)
+ bh=q4p04erwqpuZWenojyAqJZklw6w4fX5k6o+DZyHaSrM=;
+ b=fSbmEHYsvsriH2U/8wZmM6QJwNi+EHwnpWBDinAkabW+Dd6COJPRO377ZBKsjGB+G/
+ iRT5x6kwNgJ2OUCE6AvA/zYF8aWyQqZIQt2CoHCw3JnE3yH4ztuMMng+EwqhoxEzXvIZ
+ b4XUYk3Ft8FyR6e6nLWVDE/2X6EItBq43Zmug9x2xa7oFLXuQ8D2sBVZ0g03kdMunA+G
+ z0OD693vWi1pQiJBgIoSLMYesUr6Wacp1+8v/xbd0tUnzQdmz6dlzpTO4KBS8cRtGDB7
+ rdVmKRBG22YWsqH52tfg/Q65l4hWmnGiV6eB5tzeTpI7ma6WkjMNzm5krL560QTJCXe1
+ Ro+Q==
+X-Gm-Message-State: APjAAAXnU+q3U0AzTclDxxkgdQFIbxC3aED2uEkXUGNAUAlH8OX1/iau
+ 6BOC2LiwyeOrqN/jVsOkaWhDUm6gubd2/iqGV/D9K3RUsy8=
+X-Google-Smtp-Source: APXvYqzTMXPy5beEMsApSPGBi1nCtR16OB+tc8SFIX8jbhk1kazYaGtGjFXrxYFyGe6i9Yjm3qV0ExYwtpqM3n02m38=
+X-Received: by 2002:a2e:9a93:: with SMTP id p19mr3623143lji.158.1576595813750; 
+ Tue, 17 Dec 2019 07:16:53 -0800 (PST)
 MIME-Version: 1.0
-Date: Tue, 17 Dec 2019 08:40:54 -0600
-Message-ID: <CA+eyCX=h_a3Ycj0vstTkxJDXupGo_PgZyNjSQ=ooo1a=wvOdeg@mail.gmail.com>
-Subject: I would like to receive more emails please
-To: samba-technical@lists.samba.org
+Date: Tue, 17 Dec 2019 16:16:42 +0100
+Message-ID: <CAC-fF8Q+ZE00XWe2=VohrYvLHWv96HX+VR-CFp_os3X4BoPEXg@mail.gmail.com>
+Subject: ldb: LANG=tr_TR.UTF-8 make test - fails
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,10 +64,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Koby Nachtigal via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Koby Nachtigal <Koby.Nachtigal@4rhuskies.org>
+From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Isaac Boukris <iboukris@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Im really interested in your services, and I would like to receive more
-emails.
+Hi,
+
+I'm looking into this bug, which I can reproduce on master:
+https://bugzilla.redhat.com/show_bug.cgi?id=1743531
+
+In short it looks like running the ldb tests with tr_TR.UTF-8 locale causes
+this failure:
+
+Running Python test with /usr/bin/python3: tests/python/index.py
+...F...FF...F......F...FF...F....
+======================================================================
+FAIL: test_delete_index_multi_valued_truncated_keys
+(__main__.MaxIndexKeyLengthTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "tests/python/index.py", line 999, in
+test_delete_index_multi_valued_truncated_keys
+    b"0123456789abcde1" + b"0123456789abcde1")
+  File "tests/python/index.py", line 98, in checkGuids
+    self.assertEqual(len(res), 1)
+AssertionError: 0 != 1
+
+Does anyone have a clue how to look further or how the locale impacts
+here ?
+
+Thanks!
+
