@@ -2,60 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20F5A120A04
-	for <lists+samba-technical@lfdr.de>; Mon, 16 Dec 2019 16:46:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07E95122F06
+	for <lists+samba-technical@lfdr.de>; Tue, 17 Dec 2019 15:42:11 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=NFDkySN8L7CvnPh9A90x/OMP5Cw3OTRSIMrbPaIJJrk=; b=4ZMFjVJPposo3UOwbCw0Res0j8
-	nn5VO3krW256Fcav9t+dW0CgmEvQEPY6edY/OPBk+wGOLpINr6nxoJrISisekQjlm6YO2uMG85BPZ
-	rfYFXv26tk4QnJeQle01txXjirknKOl5t4Jwc+PY6LcPGVeX6GWVJomHFyYA8CUtFy8i3M9p/ILHc
-	Aybvc3+XFq2v1tqI375y1LnNfAKkbUdZVaaRsFbxBZqGC4Ui8SccMGz7sq9qNdoOfzSv1hQoJJYZx
-	ux2l/xCtM1qrQ13k/YWcUwz6eGEAItSFL6xV6zPycyjtH8leiGDjjEVYwAiJ3rHCr8alUWLXxjv5S
-	HjoKMoGA==;
-Received: from localhost ([::1]:25184 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=ZPPIrY3lwocsYHDCUB9vxohjeDpLSGK0TvDbrl58a+w=; b=Tt60RfjglELfNEtI0USAX8ws2T
+	hymD3C17QDDYe2iB5f6GZAYRF9nHgzfqAGUBHo05PyfZR1om0IZsWO9drZZzwIBqQjgs6fKrRg7QO
+	TiqgQ/dEi93I3E3WYxEjRPuPlyt+RsbXvSc5uBhWerhJztAVNk/47jrl4d0JKl/7ekimFINRO/Ey9
+	kDBpeZhOTbVUve9v836jgugr1cIQIZrN0Le6wYwfc6Hj1ig6cas7qIugxluK0Tl+nsXnsaHuKRnYr
+	+igpQJhT54K0SawZFDkIMG1U9D2ESDQMLasugVJcipioEiKfU9aGzlpmUYVhSqxP1YGFlDcx5dNAs
+	VkJu5GZQ==;
+Received: from localhost ([::1]:54214 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1igsZi-007QSQ-NZ; Mon, 16 Dec 2019 15:46:22 +0000
-Received: from mailhopper2.bazuin.nl ([195.134.173.123]:46722) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1igsZe-007QSJ-9k
- for samba-technical@lists.samba.org; Mon, 16 Dec 2019 15:46:20 +0000
-X-Bazuin-en-Partners-MailScanner-Watermark: 1577115980.42108@y/+w3tv3QeUayTWHx5bzvQ
-X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
-X-Bazuin-en-Partners-MailScanner: Found to be clean
-X-Bazuin-en-Partners-MailScanner-ID: 12BE911F07D.A72D7
-X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
- Partners for more information
-Received: from ms249-lin-003.rotterdam.bazuin.nl
- (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
- by mailhopper2.bazuin.nl (Postfix) with ESMTP id 12BE911F07D
- for <samba-technical@lists.samba.org>; Mon, 16 Dec 2019 16:46:17 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
- s=mail20180308; t=1576511177;
- bh=u9QLAboCnEVh/8pXBrx1fHXzWjy1cv248DYLWbQoBdQ=;
- h=Subject:From:To:Date:In-Reply-To:References:From;
- b=Db/uQPmJ0lbHvLQcexGMVZ8bOI/th1vy+ceKRCYGtIbS5F04LCMRmafDixouQn+0v
- 9QEtEEnYO7iRlUMVhAMuYHW17XP2HIP2ewUS9YhGAvENNjUEHVPMjKeVUTRlmoPfpN
- fNLfdMA5bkrp11aKeN9Hs+X3uEPTSwzrBGoJlpefqG05bcvLOEwB37nyTfRzSeoIcp
- Z+vRg4YcL0yhaComT76g/v5iDHwYrPKfMQ7JxiYAzplskDUgZB8bz1Nd5xiSwUlYrO
- O3risvfGNWadt0r5B5EwYURU5wtJGtotq218Y1ZkJzuXFdxwnSprqKfTg/L7CI8+So
- 1DXzs/2KG3Hzg==
-Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
- by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 5362C3AF8C
- for <samba-technical@lists.samba.org>; Mon, 16 Dec 2019 16:46:09 +0100 (CET)
-Subject: RE: Spelling/typos. /Fix multiple typos found by lintian on debian
- patch included.
-To: =?windows-1252?Q?samba-technical=40lists.samba.org?=
- <samba-technical@lists.samba.org>
-Date: Mon, 16 Dec 2019 16:46:09 +0100
-Mime-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <066f97b6-3e24-81f2-f91a-82e537436e44@samba.org>
-References: <7ED1B3EB46AE40D3845A260EA8E4FBD2@rotterdam.bazuin.nl>
-X-Priority: 3 (Normal)
-X-Mailer: Zarafa 6.30.19-25148
-Thread-Index: AdW0J+83mVjf+ZbsSXiOnyM0JLyAGA==
-Message-Id: <vmime.5df7a6c1.763c.aad494776a5d451@ms249-lin-003.rotterdam.bazuin.nl>
+	id 1ihE2I-007Vfk-Sx; Tue, 17 Dec 2019 14:41:18 +0000
+Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134]:39820) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ihE29-007Vfd-5d
+ for samba-technical@lists.samba.org; Tue, 17 Dec 2019 14:41:13 +0000
+Received: by mail-il1-x134.google.com with SMTP id x5so5582895ila.6
+ for <samba-technical@lists.samba.org>; Tue, 17 Dec 2019 06:41:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=4rhuskies.org; s=google;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=YeHH/Cg9eNiyUEXyyxIf/pYuIFUFFVyoM1TiM35VPWY=;
+ b=ClxGVWkK3km/qJ9v3QqsF3uaD0URTYd36t12Ul+i87YO+JZ5jvWL3pAoP2bKW656rC
+ KbTJasBwlhNywFBMguVG0bqec87jBrmMaKqgQEI+Z2Io1smzfGZ+ymZpv07dvU2+qqgN
+ hntcb8XI4RSEzkj75fBY4x+q2Lt/CMg0Lc9l8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=YeHH/Cg9eNiyUEXyyxIf/pYuIFUFFVyoM1TiM35VPWY=;
+ b=IJRJOoipIAs06MrdqiSxrfVfkuCl6NvnwPDVWjSbWSz5EgzDGDxFk8qPagtHjUFNYs
+ 2+2fDgmnsOzpupPtTxNZ4csU1fJybMv7GWbaVjrjc83LWhKpp4VnoyzYtJ96OkSipTIQ
+ lBhOP7sAPDg33X6XaEM7tvZY0G9uS8VNSLwNF2zaCa7I6IucfZWezZZq4vTVnk9EH6h4
+ VISjNNlIjA/nTEjmQ1f/vWLHev1J8BIzoOTJjm7l5/Lol29eaIhmeBkoqLNrX5brIxxE
+ FxSbSxjQEfbkGjfPbQJrFIscf50Nzm3jTAbII45uTDsIpi3CpX+m3OnG6Yz9scoOIE9d
+ vffw==
+X-Gm-Message-State: APjAAAWMxjKLbwBd+cQePFiX1liOsOMXolIzr84ss/L0PNkf0pc4+6B8
+ C8YO7gXTvkHU4L8KNVmtt2UB9dKaoQARZpctngL+cE66
+X-Google-Smtp-Source: APXvYqwZnqn8gHz84mDwEhvGThSEYCaHZzPuZAGqli9xcBMKdWvZgl2aRyZ6BokgFtA/8gKHFBr2MI+dEzOU7cmRcuI=
+X-Received: by 2002:a92:8395:: with SMTP id p21mr16726713ilk.285.1576593667171; 
+ Tue, 17 Dec 2019 06:41:07 -0800 (PST)
+MIME-Version: 1.0
+Date: Tue, 17 Dec 2019 08:40:54 -0600
+Message-ID: <CA+eyCX=h_a3Ycj0vstTkxJDXupGo_PgZyNjSQ=ooo1a=wvOdeg@mail.gmail.com>
+Subject: I would like to receive more emails please
+To: samba-technical@lists.samba.org
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,83 +63,10 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
+From: Koby Nachtigal via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Koby Nachtigal <Koby.Nachtigal@4rhuskies.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hai Rowland,=20
-
-Well, that i missed a few that is possible. ;-)=20
-
-Git is still hard for me, so i started with with it not, and i think safest is to try and fix typo's..=20
-And yeah.. I know,, im full of typo's, but im trying .. ;-) i used the example corrections for lintian.=20
-
-I also forgot everybody is buzy with 4.11.4.. Totaly forgot that release date.=20
-
-
-> -----Oorspronkelijk bericht-----
-> Van: samba-technical=20
-> [mailto:samba-technical-bounces@lists.samba.org] Namens=20
-> Rowland penny via samba-technical
-> Verzonden: maandag 16 december 2019 16:35
->
-> >>
-> >>
-> >>
-> >>
-> Hi Louis, believe it or not, but 'wont' is a valid English word ;-)
-
-Ah, i knew it.. But i wat thinking, i'll bet Rowland will have a look.=20
-Best spell checker in english..  :-)=20
-
->=20
-> You missed a few typos/mis-spellings:
->=20
-> s/Crete/Create/
-> s/behavies/behaves/
-> s/Thep/The/
-
-Yes, possible, i'll see what the next lintian output gives on 4.11.4.=20
-And try to make a new one.=20
-
->=20
-> One of your changes is this:
->=20
->  =A0 * Heimdal libhdb library provides the backend support for=20
-> Heimdal kdc
-> - * and kadmind. Its here where plugins for diffrent database engines
-> + * and kadmind. Its here where plugins for different database engines
->  =A0 * can be pluged in and extend support for here Heimdal get the
->  =A0 * principal and policy data from.
->=20
-> I think the the second to last line should be this:
->=20
->  =A0 * can be plugged in and extend support for where Heimdal gets the
->=20
-> Finally, this:
->=20
-> +The `check_boost` configuration function allows one to=20
-> specify the used=20
-> boost libraries.
->=20
-> Should probably be this:
->=20
-> +The `check_boost` configuration function allows one to specify the=20
-> boost libraries to use.
-
-Ah,, i see, i missed "enters" also, so fixing these with sed is tricky..=20
-I'll add that on my check list, that i must read the lines and not only use sed on it.=20
-
-I also still have a few git questions, but when im at that point i'll ask my question.=20
-But thank very much for the reply Rowland.=20
-
-Now, upto setting up for the 4.11.4 builds.=20
-
-Greetz,=20
-
-Louis
-
-
-
-
+Im really interested in your services, and I would like to receive more
+emails.
