@@ -2,57 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66B031272F6
-	for <lists+samba-technical@lfdr.de>; Fri, 20 Dec 2019 02:44:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0D1912A43C
+	for <lists+samba-technical@lfdr.de>; Tue, 24 Dec 2019 22:56:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=sfr0DkASOT0MoT13/9e3piyeEKgEAbIuAROVb11tB/8=; b=QQ70I0tCKHMu5F98peLffEj2PI
-	YTnwh+ebYKY+mWhEkJdCHDtmy5a9qaCQMY90ms2DX9ODHJx3V9W+JU5YLZZbiFJSgfJFCN0yTE06E
-	m9sHw3zy2ln5CGZzJSwOhTQvJEGI5ZdADN7RXSell4ijhPRBrFwvDzSpeQlOMo49Xm20HxM7pDVfA
-	puyoGsbYW9eoyVMGO8B1H6s0GvdkIjl8ECPsX0cvrC6hOT1YMixqdwU6R6gtanvotlO3lOSnOoGMq
-	MAfrefxhDfji3hbnqdoMFw3dN3srpnKkl8ejkmI/el5M9cjCRRtc6IX7GiiryCZaFnOKIif72ESfH
-	ZsSyeC0Q==;
-Received: from localhost ([::1]:62038 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=CobKxrXrCDfFVNX7LHcevWEXogurSA+xi/U5Tsf7eLk=; b=1p/yi/F0+HYB2sgRQbLA1PCwAF
+	NEaHoaPGw4RCc4i7YQKbhAuefnabFyBC5E1/fa8PdNReQnPPLBjfM/B54CwjTSI6r1YF7I/a8VoT5
+	w+vTYR2P30ExRWQGC4EiXLn+hryKLDttJDkVUTkyCisc8kd1hWxasa3/9e2BQMtduKEgsEEdMqchc
+	YZu0PAS5i8U6JYWmqTToja/SMmeqxth/LQHbg13EJj1NQHHPPNKAmh/aC38F2fUj7wD1ZdVvl57He
+	ARgG45/brynkuVCpBWiCEO+KmWsh8fiFVIud+l33sN22yp5pw60vU2AQ4K7H7cHG45hO5gGdRvRmN
+	Yhc66gQg==;
+Received: from localhost ([::1]:44652 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ii7JX-007zhS-6x; Fri, 20 Dec 2019 01:42:47 +0000
-Received: from mail-il1-x143.google.com ([2607:f8b0:4864:20::143]:33081) 
+	id 1ijs90-0004tT-JR; Tue, 24 Dec 2019 21:55:10 +0000
+Received: from mail-il1-x132.google.com ([2607:f8b0:4864:20::132]:41138) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ii7JO-007zhL-N2
- for samba-technical@lists.samba.org; Fri, 20 Dec 2019 01:42:41 +0000
-Received: by mail-il1-x143.google.com with SMTP id v15so6579957iln.0
- for <samba-technical@lists.samba.org>; Thu, 19 Dec 2019 17:42:36 -0800 (PST)
+ (Exim) id 1ijs8w-0004tI-Cl
+ for samba-technical@lists.samba.org; Tue, 24 Dec 2019 21:55:08 +0000
+Received: by mail-il1-x132.google.com with SMTP id f10so17321028ils.8
+ for <samba-technical@lists.samba.org>; Tue, 24 Dec 2019 13:54:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=sfr0DkASOT0MoT13/9e3piyeEKgEAbIuAROVb11tB/8=;
- b=hDmKdmCEoRGDXnjj93XNfw6FoH8rtTZnKOYluWiw5na7UgC74B6XdOt5X1HcRAZnun
- odMTXStKNxHolBzNSxflFXZPttY+WPy9NuB7kXkL7OP1k/ur6X6NpKB/iKDkiptIEdRS
- B3pnFp6TsBm89uV38uszZHKpaaGpRnoIf1L685FfOY/qaHRt13u7hKgbWQ6mQ5cz8gRs
- 0M5S7JWjgFvHlPSo1Y0gpvuxkzFLPwBOzs/bm3M+mrbCvk1+QB6786aHyt+b7f8gEJPh
- EDWgjplRuJyYyf5oXtJ/se+QjE0zNlc4rDEb6iBCEVweQKlA1pEgVjeCj4jya3lq5jJD
- SMRQ==
+ h=mime-version:from:date:message-id:subject:to;
+ bh=CobKxrXrCDfFVNX7LHcevWEXogurSA+xi/U5Tsf7eLk=;
+ b=QQN5Ee3VhfrzJTEa7Pdw8z8ay1LOX6ElhDb4KcRVC+038LpNv8Th8uaECBspCC90eq
+ NRJS1Z2vTMEGe736H2TYegqG5krGQLhK/LSEs4nvYUcBdoSp6IhHcDEujcD27ximMYhb
+ 3BLrc8g+KPO0jqzTKyol3InqZzGM24oxtr7JCNaG0MMCYuuHgT16XZShvj0ZKQZAMFBE
+ dDGm+uE9iNt8nf7556JEYo7kadBloZC1+mQhwGgO1WLET2SQCHFO7ef3E1Xcx2UNMeuf
+ Nuy2q5+1zylSUkCVzljFOml/JeiPmz/zdAZtjmmtcPaTGVs83xHelOlDAkxOYu4ybBKP
+ R/kQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=sfr0DkASOT0MoT13/9e3piyeEKgEAbIuAROVb11tB/8=;
- b=pHsQHiHpKqj9l6OA3glv24Q37pmYREz7St1Cpu7gW7VuLWFsfJfYVqYPfUjXPuuEFV
- Iq9FtWQYrtdTNQzAvHbHRD0cVFMcnevjmuENsEFhqjYVEsz6DgQ4YUH05nHH+rM15iyN
- xD0iZNeknEy25abtngjb50L/dcWyQIqlRY78qOiHukSpnPV4gxV2IEmAUfkiOk62QcCE
- /E0G8Q3yB4riw+0y4Ld4AbdmKyScLUCtZ0xcs3niqvqlA6PwEz5xF0P2tawS1XAoXssD
- 1zZXW3F4ju/H78AKvrcSZUaGiTe9kxzu7B7I8nwBprldV+DRV/0CNNT6MKQXFs5QK0HI
- AoKw==
-X-Gm-Message-State: APjAAAUKotHABG+14qEBQDijXk5CTe/or+WSkggJEc5IlM1hEp8toRGW
- XrWtWEvEMYx3m9xkyzssnfl8FKtoitJQ5Y3kiOg=
-X-Google-Smtp-Source: APXvYqwW12fGRUInSbhFGQiF8M5rMUYdDDkl/mkcbRhVNYfiGDJz2k/OjCft5BgxUUEN5KqBimqQgZwbaY/hrYQzo6Y=
-X-Received: by 2002:a92:4883:: with SMTP id j3mr9930949ilg.272.1576806154739; 
- Thu, 19 Dec 2019 17:42:34 -0800 (PST)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=CobKxrXrCDfFVNX7LHcevWEXogurSA+xi/U5Tsf7eLk=;
+ b=sN4VXUGhIJJLCTsa8I0TgR7spyPmnHecYG25X3/SUfdF90ZEjoJQo7L5nzRsyjTaxW
+ W1mQtSwdWUv/HeE6+fjoP0S9glp+DxMvPVUxoduvetyNR+UeB9waCoWOnYb+GdcQUZoX
+ Vlm/fYVh45O8rxPJDfDq9oc4lRb7pAQK7ex0iLDoVn0TWHw4GF/xPxbGoubBYf65jfJY
+ oupizr8idJc2kVxhMeH92mdlcQ0UszQ0tnqUof8esbwaD+52hip3lucGvAo6ZN8CuqLC
+ Nx/yqeMg1HaSWWi5VKkgF2wPR5xKEJcr5p6/86gT5qfQIGdsfw3DJiD5xZWD0CEOux6s
+ DDRw==
+X-Gm-Message-State: APjAAAWUqnIOB4CiS7nrOLlpKnqY2IHjQGfQPDeAZiVMknDAkytyg4Rx
+ 5+LjF34khA5yAAAum60mAHSi1bpoq8ysBh7EDN9mFQ==
+X-Google-Smtp-Source: APXvYqy7eb0eKyCq79wY+hZWz6eMOult5eBxSYpVM030nVdEuFFgZS6+3ZBaM1jMsHGuqG7/D6t9l4bJMU5ddsk6aug=
+X-Received: by 2002:a92:17cb:: with SMTP id 72mr32203960ilx.173.1577224494448; 
+ Tue, 24 Dec 2019 13:54:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20191218030451.40994-1-natechancellor@gmail.com>
-In-Reply-To: <20191218030451.40994-1-natechancellor@gmail.com>
-Date: Thu, 19 Dec 2019 19:42:23 -0600
-Message-ID: <CAH2r5mtr=d-LYD_EQ_OQVX5s8QziHvAYNmRnwMpVjeb4JiHMYw@mail.gmail.com>
-Subject: Re: [PATCH] cifs: Adjust indentation in smb2_open_file
-To: Nathan Chancellor <natechancellor@gmail.com>
+Date: Tue, 24 Dec 2019 15:54:43 -0600
+Message-ID: <CAH2r5mthJ6t+jNUPNTepRSRVxdE3RXt3qcOxR_qRzJSnHn8n=Q@mail.gmail.com>
+Subject: Samba doesn't allow setting ACLs for special SIDs
+To: samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -69,56 +66,21 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, clang-built-linux@googlegroups.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+I noticed that Samba server doesn't allow setting ACLs for special
+SIDs (like the 'NFS' or POSIX mode bits etc.).    Looking at
+vfs_acl_xattr it automatically resets the value of
 
-On Tue, Dec 17, 2019 at 9:04 PM Nathan Chancellor
-<natechancellor@gmail.com> wrote:
->
-> Clang warns:
->
-> ../fs/cifs/smb2file.c:70:3: warning: misleading indentation; statement
-> is not part of the previous 'if' [-Wmisleading-indentation]
->          if (oparms->tcon->use_resilient) {
->          ^
-> ../fs/cifs/smb2file.c:66:2: note: previous statement is here
->         if (rc)
->         ^
-> 1 warning generated.
->
-> This warning occurs because there is a space after the tab on this line.
-> Remove it so that the indentation is consistent with the Linux kernel
-> coding style and clang no longer warns.
->
-> Fixes: 592fafe644bf ("Add resilienthandles mount parm")
-> Link: https://github.com/ClangBuiltLinux/linux/issues/826
-> Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
-> ---
->  fs/cifs/smb2file.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/fs/cifs/smb2file.c b/fs/cifs/smb2file.c
-> index 8b0b512c5792..afe1f03aabe3 100644
-> --- a/fs/cifs/smb2file.c
-> +++ b/fs/cifs/smb2file.c
-> @@ -67,7 +67,7 @@ smb2_open_file(const unsigned int xid, struct cifs_open_parms *oparms,
->                 goto out;
->
->
-> -        if (oparms->tcon->use_resilient) {
-> +       if (oparms->tcon->use_resilient) {
->                 /* default timeout is 0, servers pick default (120 seconds) */
->                 nr_ioctl_req.Timeout =
->                         cpu_to_le32(oparms->tcon->handle_timeout);
-> --
-> 2.24.1
->
+force unknown acl user to true (which prevents setting special SIDs
+that don't map to users that Samba doesn't know about).
 
+Is there a way to configure Samba allow setting special SIDs?
+Presumably if acl_xattr is not set then the ACL can't be saved and if
+acl_xattr is used then unknown SIDs are remapped so are useless.
+
+Ideas?
 
 -- 
 Thanks,
