@@ -2,62 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1ADA612CAEB
-	for <lists+samba-technical@lfdr.de>; Sun, 29 Dec 2019 21:49:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6187D12CAF3
+	for <lists+samba-technical@lfdr.de>; Sun, 29 Dec 2019 22:15:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=roplorZV/nPNwWGOyiM8vjENzr8bcR81wCByjjzTKj0=; b=sOhs/ia1OAxF21yJTZ2kUFxMGv
-	ZfrEV8cSuV366PaXVaPYoGo50NlW/u2q5AB5dl6DTw2hpJ6ML7ZFog4/FXrDmSOS5eJjVii1HH6xk
-	L5fvGppg2MOlHLhesv/hqaCNAvNwDWrL4IDqNkhJQyewJqtCL+NKkFnNhGiXJsXMr8uPZUO4Ym5hW
-	dURKidKa0aihy8+qAwATaGAxeN/fb+C749fcSAxLg4ZnVTv1Ds95IgGNXANSZrXFkkPeCy0GYmCnC
-	8astayNtmVTqFuXhfFGxa0ypu6cYj2EUvK00okY3afHlkfba+tI4nAS1Y7wX5ui2/Zl/xbTo4tP0Y
-	Bd40Ce+A==;
-Received: from localhost ([::1]:30284 helo=hr1.samba.org) 
+	bh=HMhTl81OqynJeFWJFqm0QInMyh5RtHXhuavGtcHPHGk=; b=HnHthCqcTBY8Yi2IrUi28YxVVi
+	rQcfGMlvyNFN/OKP3R5NpSkUbLxXyQISVxXOCv/zPfjaxdQsRg9WzOT2F1IhP3afDN4PstSGvXZCu
+	22tSNH6YkH5Nr1ooQ7HrpYtNGu9wcOlo9MUFSI8kV6pyzLM9bmkdyMgiDXh8by0aIEQTPBPEk1a7Q
+	SDbRBo5aNjiUWN8xsFUGectYQ+AXY8QFztulpaQCXkUzuUJWxCo/loeoNf0IrVzdC5Yi+YXZ3tDxd
+	ZdG4bxM/qjAJRi3NmsBZqg4889vu4xWyL5SYuALV69KCHAzhcTo/PkdZgJ5jXb6b15e7FA3JrlmbV
+	vC9UYsIA==;
+Received: from localhost ([::1]:31040 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ilfUz-000NG9-6v; Sun, 29 Dec 2019 20:49:17 +0000
-Received: from mail.rosalinux.ru ([195.19.76.54]:41656) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1ilfUv-000NG0-9B
- for samba-technical@lists.samba.org; Sun, 29 Dec 2019 20:49:15 +0000
-Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id 6A71DD59CF45E;
- Sun, 29 Dec 2019 23:49:01 +0300 (MSK)
-Received: from mail.rosalinux.ru ([127.0.0.1])
- by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id VHD_6Dn0Fikw; Sun, 29 Dec 2019 23:49:00 +0300 (MSK)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id B2A82D59CF460;
- Sun, 29 Dec 2019 23:49:00 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rosalinux.ru B2A82D59CF460
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosalinux.ru;
- s=A1AAD92A-9767-11E6-A27F-AC75C9F78EF4; t=1577652540;
- bh=roplorZV/nPNwWGOyiM8vjENzr8bcR81wCByjjzTKj0=;
- h=To:From:Message-ID:Date:MIME-Version;
- b=wrWqWkLx/Jw8CICwt1tG/PBzzHS+6XMzdsrHiDrxudpKgT58dm4a1JRi/cR5J94KA
- JCeACj9UhL1RO/v9bUFPA1ctP/ZpQy4hA0cnVwQMaYPKhUFCk/eTSOaosKFumaqHdE
- uGx0zewLpFpQSA8n7yjrUCsDqKOZ2urLgJrnqcMF5lR6BhbHdt3J2kEDnsRLlVg7+r
- CJ/YRJSeye4WH/TV0P2zy+/f/ud4bg4LoaqitEEE2sZI5aRP6kFZblafynVqO7ZwAT
- mveDLP/NMirKwGoaGumb4IFklj89/JZpaGPECczadzflkdFm7RhadyI9Pkg2bJbty2
- bpRpiWo2N3l1w==
-Received: from mail.rosalinux.ru ([127.0.0.1])
- by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id oKkgkIJ81zqX; Sun, 29 Dec 2019 23:49:00 +0300 (MSK)
-Received: from [192.168.1.173] (broadband-90-154-71-8.ip.moscow.rt.ru
- [90.154.71.8])
- by mail.rosalinux.ru (Postfix) with ESMTPSA id 8388ED59CF45E;
- Sun, 29 Dec 2019 23:49:00 +0300 (MSK)
+	id 1ilftx-000NOS-Qr; Sun, 29 Dec 2019 21:15:05 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26666) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ilfts-000NOI-W6
+ for samba-technical@lists.samba.org; Sun, 29 Dec 2019 21:15:03 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=HMhTl81OqynJeFWJFqm0QInMyh5RtHXhuavGtcHPHGk=; b=udo4ZyTcExgkcQqCs59KtP3buf
+ wn7xkoAkJzukN2AD3Tby2iGX9AXlDOz6RiMbeLapkDNgzAwpz5alFR9I1Z7c3hrVacuM2Je5dSOjd
+ qZtcOOgKwHXaeP2ftO6RjR/fkjNZHZxOA5omGwvuJ4fsRQc8evEOc0VTaCbXQkkkVy6PeTMlMCaSd
+ 3qyA6TGx3rz6hkjEWoVyrxImaGX9Hi1q4aLr1XBpRCaosAYXbRfOCLdZhnMadDMjse+8IWQGgnKzG
+ jE2AnJW1AEuCUnr9EBPBc6+mZBy5XhF13+IOKwM3uM1HYauLLYiyVnqpXgPHvFwwveiJHs3y+Soyy
+ /NYL06r/9g1CTgVvIEb75ylOuHxjzJdeeY64uvjRaaBVjPm2QcUHyYodQupopmM1shaxYUiXKR4Vx
+ zFnF0bLHWzKsSK9FWcvGqwd0Zjelc72hYbBoh0Jgnsb/LUWLjIWkFCp1MP66oaCDYsXW2rBTXRb9q
+ sYCPnTqSKtACEgnLKd9bkO0G;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ilfts-0007Lg-Iu
+ for samba-technical@lists.samba.org; Sun, 29 Dec 2019 21:15:00 +0000
 Subject: Re: [Release Planning 4.12] Samba 4.12.0rc1
-To: samba-technical@lists.samba.org, kseeger@samba.org
+To: samba-technical@lists.samba.org
 References: <cb8a8065-cd6b-cfc1-8de8-c156eec9895c@samba.org>
-Message-ID: <34f5bab7-32b6-198e-65d8-ccc59d67fdd1@rosalinux.ru>
-Date: Sun, 29 Dec 2019 23:48:59 +0300
+ <34f5bab7-32b6-198e-65d8-ccc59d67fdd1@rosalinux.ru>
+Message-ID: <6c7177bb-efb9-a8ca-f1bd-d62a7ffc00b4@samba.org>
+Date: Sun, 29 Dec 2019 21:15:00 +0000
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+ Thunderbird/68.3.0
 MIME-Version: 1.0
-In-Reply-To: <cb8a8065-cd6b-cfc1-8de8-c156eec9895c@samba.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: ru-RU
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <34f5bab7-32b6-198e-65d8-ccc59d67fdd1@rosalinux.ru>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,27 +59,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Mikhail Novosyolov via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-19.12.2019 14:35, Karolin Seeger via samba-technical =D0=BF=D0=B8=D1=88=D0=
-=B5=D1=82:
-> Hi,
+On 29/12/2019 20:48, Mikhail Novosyolov via samba-technical wrote:
+> 19.12.2019 14:35, Karolin Seeger via samba-technical пишет:
+>> Hi,
+>>
+>> Samba 4.12.0rc1 is scheduled for Tuesday, January 21 2020.
+>>
+>> https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.12
+>> has been updated accordingly.
+>>
+>> Please make sure that important changes end up in the release notes as
+>> soon as possible.
+> I have not found where release notes are, I wanted to say that https://gitlab.com/samba-team/samba/merge_requests/961 can be described not as "Add support for anonymous connections which smbspool", but something like "smbspool_krb5_wrapper can now be used as default CUPS smb backend for both kerberized and not kerberized printing via smb" to make the original intention of that change and its practical usage clearer than titles of commits.
 >
-> Samba 4.12.0rc1 is scheduled for Tuesday, January 21 2020.
->
-> https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.12
-> has been updated accordingly.
->
-> Please make sure that important changes end up in the release notes as
-> soon as possible.
-I have not found where release notes are, I wanted to say that https://gi=
-tlab.com/samba-team/samba/merge_requests/961 can be described not as "Add=
- support for anonymous connections which smbspool", but something like "s=
-mbspool_krb5_wrapper can now be used as default CUPS smb backend for both=
- kerberized and not kerberized printing via smb" to make the original int=
-ention of that change and its practical usage clearer than titles of comm=
-its.
+See 'WHATSNEW.txt', you will need to provide a patch to this.
+
+Rowland
+
+
 
