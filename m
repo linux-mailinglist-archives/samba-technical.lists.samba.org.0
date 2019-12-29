@@ -2,46 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35C7412CAC6
-	for <lists+samba-technical@lfdr.de>; Sun, 29 Dec 2019 21:33:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1ADA612CAEB
+	for <lists+samba-technical@lfdr.de>; Sun, 29 Dec 2019 21:49:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=XJBXeicyzkVCPK/844iTNET+iGkAjyB3zAYlIiAcE8w=; b=CgHEp54jTQn4EiikVTsQyEWXpV
-	F9ANbUgtpHiiMFKSwjNUDFQIAYSP48JgbPMhs1bjTNqFD2prc2bV8C+IZrd9+/QQ308bhiLtBWXk8
-	TnxGmBxQyOF/eSkeSAjzNNf9I4lMmoj1Q80vgadjpdBe16ggqcc06WiRZXmsws/jJmbtlkEz7WK1a
-	4AIMBIuY8mHuihoAQJhFx0YUejkw7uhfvM6pWX1GhwRktSUpc2NiYUv6HSB+Y46IFoMEt/0uA2e/k
-	qXeED6zI8Z2a9e6YZIZUeMGthy0KOmkY3QiWlUYnSfIek/y2DefXoGlRMkRAMfF5IcGq2u001dMMp
-	QJ25GM5g==;
-Received: from localhost ([::1]:29516 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=roplorZV/nPNwWGOyiM8vjENzr8bcR81wCByjjzTKj0=; b=sOhs/ia1OAxF21yJTZ2kUFxMGv
+	ZfrEV8cSuV366PaXVaPYoGo50NlW/u2q5AB5dl6DTw2hpJ6ML7ZFog4/FXrDmSOS5eJjVii1HH6xk
+	L5fvGppg2MOlHLhesv/hqaCNAvNwDWrL4IDqNkhJQyewJqtCL+NKkFnNhGiXJsXMr8uPZUO4Ym5hW
+	dURKidKa0aihy8+qAwATaGAxeN/fb+C749fcSAxLg4ZnVTv1Ds95IgGNXANSZrXFkkPeCy0GYmCnC
+	8astayNtmVTqFuXhfFGxa0ypu6cYj2EUvK00okY3afHlkfba+tI4nAS1Y7wX5ui2/Zl/xbTo4tP0Y
+	Bd40Ce+A==;
+Received: from localhost ([::1]:30284 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ilfEY-000N90-61; Sun, 29 Dec 2019 20:32:18 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18370) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ilfEU-000N8t-S7
- for samba-technical@lists.samba.org; Sun, 29 Dec 2019 20:32:16 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=XJBXeicyzkVCPK/844iTNET+iGkAjyB3zAYlIiAcE8w=; b=rUKy7KmTLb2XAZVb/Zcvhit2hS
- AFtw0KsOa1KQs7uXw8o27N3m0hwnj5Bjni23W3DpuQezLPdGYuW7vFy4XXnNnRwiTmk/Oo9qmeTEl
- +orsCTJZ7EsewrM4X1yJYB1gLenuQtfIWTQlUI3ybQc1sZxCwevsIj6x93mNPqFcWT6nbLOtrMd+E
- ZlE3bCV6pTwGEF7TfHGBzYAq09UFcemIG0yWdcSkhLV7wsbLVQLJbgMgQ+z3iwQcRckbdHFSv2Bvy
- rU3lATnHUzjiSP3T7WV7aw2a3cbSMbtsjGvJ5Rr7viblxIEteuZRBD/xmjUAcBhakQYhRpHNt6DIr
- QjdmD3YQdeJXyb96ZBkv3jmMv+hTLYjOTMC93AalJUYUxxijlwBw5m6TER9juMTWa9H1jCg6CILn7
- j/6va0jwOe9O9qITOG1ua4HBFrrAZeO5gg2s7RyZDWQpdoXW+uf5t5H1/WLlsWE5Av8idLh1iLU3w
- C7xbtIPxpzvSzdA9QyRLvEdo;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ilfEQ-00077d-K9; Sun, 29 Dec 2019 20:32:11 +0000
-Date: Sun, 29 Dec 2019 12:32:08 -0800
-To: Steve French <smfrench@gmail.com>
-Subject: Re: Samba doesn't allow setting ACLs for special SIDs
-Message-ID: <20191229203208.GA1342@jeremy-acer>
-References: <CAH2r5mthJ6t+jNUPNTepRSRVxdE3RXt3qcOxR_qRzJSnHn8n=Q@mail.gmail.com>
+	id 1ilfUz-000NG9-6v; Sun, 29 Dec 2019 20:49:17 +0000
+Received: from mail.rosalinux.ru ([195.19.76.54]:41656) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1ilfUv-000NG0-9B
+ for samba-technical@lists.samba.org; Sun, 29 Dec 2019 20:49:15 +0000
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rosalinux.ru (Postfix) with ESMTP id 6A71DD59CF45E;
+ Sun, 29 Dec 2019 23:49:01 +0300 (MSK)
+Received: from mail.rosalinux.ru ([127.0.0.1])
+ by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id VHD_6Dn0Fikw; Sun, 29 Dec 2019 23:49:00 +0300 (MSK)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rosalinux.ru (Postfix) with ESMTP id B2A82D59CF460;
+ Sun, 29 Dec 2019 23:49:00 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rosalinux.ru B2A82D59CF460
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosalinux.ru;
+ s=A1AAD92A-9767-11E6-A27F-AC75C9F78EF4; t=1577652540;
+ bh=roplorZV/nPNwWGOyiM8vjENzr8bcR81wCByjjzTKj0=;
+ h=To:From:Message-ID:Date:MIME-Version;
+ b=wrWqWkLx/Jw8CICwt1tG/PBzzHS+6XMzdsrHiDrxudpKgT58dm4a1JRi/cR5J94KA
+ JCeACj9UhL1RO/v9bUFPA1ctP/ZpQy4hA0cnVwQMaYPKhUFCk/eTSOaosKFumaqHdE
+ uGx0zewLpFpQSA8n7yjrUCsDqKOZ2urLgJrnqcMF5lR6BhbHdt3J2kEDnsRLlVg7+r
+ CJ/YRJSeye4WH/TV0P2zy+/f/ud4bg4LoaqitEEE2sZI5aRP6kFZblafynVqO7ZwAT
+ mveDLP/NMirKwGoaGumb4IFklj89/JZpaGPECczadzflkdFm7RhadyI9Pkg2bJbty2
+ bpRpiWo2N3l1w==
+Received: from mail.rosalinux.ru ([127.0.0.1])
+ by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id oKkgkIJ81zqX; Sun, 29 Dec 2019 23:49:00 +0300 (MSK)
+Received: from [192.168.1.173] (broadband-90-154-71-8.ip.moscow.rt.ru
+ [90.154.71.8])
+ by mail.rosalinux.ru (Postfix) with ESMTPSA id 8388ED59CF45E;
+ Sun, 29 Dec 2019 23:49:00 +0300 (MSK)
+Subject: Re: [Release Planning 4.12] Samba 4.12.0rc1
+To: samba-technical@lists.samba.org, kseeger@samba.org
+References: <cb8a8065-cd6b-cfc1-8de8-c156eec9895c@samba.org>
+Message-ID: <34f5bab7-32b6-198e-65d8-ccc59d67fdd1@rosalinux.ru>
+Date: Sun, 29 Dec 2019 23:48:59 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAH2r5mthJ6t+jNUPNTepRSRVxdE3RXt3qcOxR_qRzJSnHn8n=Q@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <cb8a8065-cd6b-cfc1-8de8-c156eec9895c@samba.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: ru-RU
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,32 +71,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Mikhail Novosyolov via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Dec 24, 2019 at 03:54:43PM -0600, Steve French via samba-technical wrote:
-> I noticed that Samba server doesn't allow setting ACLs for special
-> SIDs (like the 'NFS' or POSIX mode bits etc.).    Looking at
-> vfs_acl_xattr it automatically resets the value of
-> 
-> force unknown acl user to true (which prevents setting special SIDs
-> that don't map to users that Samba doesn't know about).
-> 
-> Is there a way to configure Samba allow setting special SIDs?
-> Presumably if acl_xattr is not set then the ACL can't be saved and if
-> acl_xattr is used then unknown SIDs are remapped so are useless.
-
-force unknown acl user forces owner and group SIDs to be
-valid UNIX users/groups, and causes the POSIX ACL mapping
-to ignore unknown ACE entries for users/groups.
-
-Special SIDs should still be stored in the xattr ACL
-store, just not mapped to POSIX.
-
-Can you explain *exactly* what you are trying to do
-here, because the problem you want to solve isn't
-clear.
+19.12.2019 14:35, Karolin Seeger via samba-technical =D0=BF=D0=B8=D1=88=D0=
+=B5=D1=82:
+> Hi,
+>
+> Samba 4.12.0rc1 is scheduled for Tuesday, January 21 2020.
+>
+> https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.12
+> has been updated accordingly.
+>
+> Please make sure that important changes end up in the release notes as
+> soon as possible.
+I have not found where release notes are, I wanted to say that https://gi=
+tlab.com/samba-team/samba/merge_requests/961 can be described not as "Add=
+ support for anonymous connections which smbspool", but something like "s=
+mbspool_krb5_wrapper can now be used as default CUPS smb backend for both=
+ kerberized and not kerberized printing via smb" to make the original int=
+ention of that change and its practical usage clearer than titles of comm=
+its.
 
