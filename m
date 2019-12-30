@@ -2,50 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6187D12CAF3
-	for <lists+samba-technical@lfdr.de>; Sun, 29 Dec 2019 22:15:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 862B312CCE4
+	for <lists+samba-technical@lfdr.de>; Mon, 30 Dec 2019 06:30:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=HMhTl81OqynJeFWJFqm0QInMyh5RtHXhuavGtcHPHGk=; b=HnHthCqcTBY8Yi2IrUi28YxVVi
-	rQcfGMlvyNFN/OKP3R5NpSkUbLxXyQISVxXOCv/zPfjaxdQsRg9WzOT2F1IhP3afDN4PstSGvXZCu
-	22tSNH6YkH5Nr1ooQ7HrpYtNGu9wcOlo9MUFSI8kV6pyzLM9bmkdyMgiDXh8by0aIEQTPBPEk1a7Q
-	SDbRBo5aNjiUWN8xsFUGectYQ+AXY8QFztulpaQCXkUzuUJWxCo/loeoNf0IrVzdC5Yi+YXZ3tDxd
-	ZdG4bxM/qjAJRi3NmsBZqg4889vu4xWyL5SYuALV69KCHAzhcTo/PkdZgJ5jXb6b15e7FA3JrlmbV
-	vC9UYsIA==;
-Received: from localhost ([::1]:31040 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=oaq9J86A5qT7Ev0xA8fI+XgQrZQUEfev6OaFKLCG7Dw=; b=QCQiq+DUw++o7aXm7V4C2KLp4J
+	lD1iPUOH469X7SCDThFUQboM41gf0ZFa1ho306V9GTFwh4TdH/WosStE1roYln15MHQHzSg3c2xdq
+	bL1rN9k9Pyf51O0XL1qp+i8O1JxWWffZ6yKN+56XWdHXQsHrCENmCqL7ZLWj0iqso2qQcyJlQ09aJ
+	AUbupbjSvE4m1CqRSRflVMjUF90mI+fwwjYxVyxF1ABhD0RbJD0G2YYdE0RfJrnYbzZBJbU9VHeG+
+	zV8H49vhziPn8qGWjRIr0+sSmeVq4t+c8nV6joWPWy3NsCZ828dsqSzNOSxPwVJoZepgZDBbTDKG/
+	WN3jtiaQ==;
+Received: from localhost ([::1]:31838 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ilftx-000NOS-Qr; Sun, 29 Dec 2019 21:15:05 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26666) 
+	id 1ilncO-000Nyo-CM; Mon, 30 Dec 2019 05:29:28 +0000
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:43244) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ilfts-000NOI-W6
- for samba-technical@lists.samba.org; Sun, 29 Dec 2019 21:15:03 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=HMhTl81OqynJeFWJFqm0QInMyh5RtHXhuavGtcHPHGk=; b=udo4ZyTcExgkcQqCs59KtP3buf
- wn7xkoAkJzukN2AD3Tby2iGX9AXlDOz6RiMbeLapkDNgzAwpz5alFR9I1Z7c3hrVacuM2Je5dSOjd
- qZtcOOgKwHXaeP2ftO6RjR/fkjNZHZxOA5omGwvuJ4fsRQc8evEOc0VTaCbXQkkkVy6PeTMlMCaSd
- 3qyA6TGx3rz6hkjEWoVyrxImaGX9Hi1q4aLr1XBpRCaosAYXbRfOCLdZhnMadDMjse+8IWQGgnKzG
- jE2AnJW1AEuCUnr9EBPBc6+mZBy5XhF13+IOKwM3uM1HYauLLYiyVnqpXgPHvFwwveiJHs3y+Soyy
- /NYL06r/9g1CTgVvIEb75ylOuHxjzJdeeY64uvjRaaBVjPm2QcUHyYodQupopmM1shaxYUiXKR4Vx
- zFnF0bLHWzKsSK9FWcvGqwd0Zjelc72hYbBoh0Jgnsb/LUWLjIWkFCp1MP66oaCDYsXW2rBTXRb9q
- sYCPnTqSKtACEgnLKd9bkO0G;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ilfts-0007Lg-Iu
- for samba-technical@lists.samba.org; Sun, 29 Dec 2019 21:15:00 +0000
-Subject: Re: [Release Planning 4.12] Samba 4.12.0rc1
-To: samba-technical@lists.samba.org
-References: <cb8a8065-cd6b-cfc1-8de8-c156eec9895c@samba.org>
- <34f5bab7-32b6-198e-65d8-ccc59d67fdd1@rosalinux.ru>
-Message-ID: <6c7177bb-efb9-a8ca-f1bd-d62a7ffc00b4@samba.org>
-Date: Sun, 29 Dec 2019 21:15:00 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.0
+ (Exim) id 1ilncI-000Nyh-Uk
+ for samba-technical@lists.samba.org; Mon, 30 Dec 2019 05:29:25 +0000
+Received: by mail-il1-x142.google.com with SMTP id v69so26994059ili.10
+ for <samba-technical@lists.samba.org>; Sun, 29 Dec 2019 21:29:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=oaq9J86A5qT7Ev0xA8fI+XgQrZQUEfev6OaFKLCG7Dw=;
+ b=SMehIdrSF8BkcyHoop7g/76N+O+AJj4+31Bn0PLKZUCkw2mFTTnVBShq+bgLnQ/9u0
+ wvEELyH5m+sQcYhCCKXFRMWk0NQ7qitRLqHcMk6sxP7Ymm9QrbSc2ts5V+ayAVxwA+56
+ CpnU1Z4KvqVZjRSNktnuvq3y8YO4rgzCs4qoEXGj8tDWwfqTFGKxONnN+U9EJotHsGKZ
+ mr6rYRtvRV8kI5FODrPH1KMSO8KA2iPcLMngz/txFhfMbtI6K3kjDQpJdTia2dLxmYRb
+ tXsXXP3Mvw+KGWiDqRbZb1cY+aTTXNWhQ65r6GjW8zAhUpRE7gHUvk9A+G62hvzrZoyU
+ xtYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=oaq9J86A5qT7Ev0xA8fI+XgQrZQUEfev6OaFKLCG7Dw=;
+ b=UetzKuM1HEmse9jiRLe8dTlTNHOqzQ6dqOzc5t558zW8+HdSDXNJXS1DGvkyVYjBRK
+ 2agw2dsUoY+8nVfni9/8AcsXYrxGZjmmDaS2lsTkT69ULjYsqw+/CANnEdf8oNOtxk0o
+ 4Xw3MiTOJKdy9IvJr7hZPVTb7rZ5v+h5G3+nAVOmaT0ZYPAyENDaAnaHJmSExgoK1mMB
+ TZr9gh2mlj+uAe3LpBDhz6wfmZZXZYRP0XPrFhpRMlNxnXkKDQG28EwQVeKYxGl6d0e+
+ luX2Ji7BDQiSfy4LrCaTQYIFPLRR2CRWxCBgMiODhAb+NZBNTjMdsqWuXKtbQNml3J+P
+ wMjQ==
+X-Gm-Message-State: APjAAAXLZ0Ywf98PWkFBk7+zTIdFEHZKoxNMjwCskxsin/jWEdbswrd8
+ qMQnyuxyYliFad5BAxlwZWRzE/L+zxeRZ51VdQ8=
+X-Google-Smtp-Source: APXvYqznxWMOc/zeoeuvpB4zDr6gxOrtbKhiqFQDRhYff1gxXRNYl6M6jFdOGJOqlPZESbiMwJfJRV7An3TD5Cy5fEY=
+X-Received: by 2002:a05:6e02:d05:: with SMTP id
+ g5mr37929888ilj.272.1577683759157; 
+ Sun, 29 Dec 2019 21:29:19 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <34f5bab7-32b6-198e-65d8-ccc59d67fdd1@rosalinux.ru>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+References: <1577244621-117474-1-git-send-email-zhengbin13@huawei.com>
+In-Reply-To: <1577244621-117474-1-git-send-email-zhengbin13@huawei.com>
+Date: Sun, 29 Dec 2019 23:29:08 -0600
+Message-ID: <CAH2r5msEOq877Rudaz1aOeF-sxe2qvy+Rc8nWc-Bq_-qZNqYHQ@mail.gmail.com>
+Subject: Re: [PATCH 0/2] fs/cifs: use true,false for bool variable
+To: zhengbin <zhengbin13@huawei.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,27 +68,32 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 29/12/2019 20:48, Mikhail Novosyolov via samba-technical wrote:
-> 19.12.2019 14:35, Karolin Seeger via samba-technical пишет:
->> Hi,
->>
->> Samba 4.12.0rc1 is scheduled for Tuesday, January 21 2020.
->>
->> https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.12
->> has been updated accordingly.
->>
->> Please make sure that important changes end up in the release notes as
->> soon as possible.
-> I have not found where release notes are, I wanted to say that https://gitlab.com/samba-team/samba/merge_requests/961 can be described not as "Add support for anonymous connections which smbspool", but something like "smbspool_krb5_wrapper can now be used as default CUPS smb backend for both kerberized and not kerberized printing via smb" to make the original intention of that change and its practical usage clearer than titles of commits.
+Merged into cifs-2.6.git for-next
+
+On Tue, Dec 24, 2019 at 9:23 PM zhengbin <zhengbin13@huawei.com> wrote:
 >
-See 'WHATSNEW.txt', you will need to provide a patch to this.
+> zhengbin (2):
+>   fs/cifs/smb2ops.c: use true,false for bool variable
+>   fs/cifs/cifssmb.c: use true,false for bool variable
+>
+>  fs/cifs/cifssmb.c | 4 ++--
+>  fs/cifs/smb2ops.c | 2 +-
+>  2 files changed, 3 insertions(+), 3 deletions(-)
+>
+> --
+> 2.7.4
+>
 
-Rowland
 
+-- 
+Thanks,
 
+Steve
 
