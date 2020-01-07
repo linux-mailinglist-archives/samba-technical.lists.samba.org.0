@@ -2,47 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3B3613250C
-	for <lists+samba-technical@lfdr.de>; Tue,  7 Jan 2020 12:40:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 069F81325EB
+	for <lists+samba-technical@lfdr.de>; Tue,  7 Jan 2020 13:18:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=P/5SaSWQKiSQAmPDu8ZEWbRwsjSJDKI09W/BEuw0LV0=; b=Q/aDQqK9UqKsh3og240khN1UW0
-	FmDnUmckQO0UgIHqvFHra6xApqDzEmCyM6aKPvDyCA97YeEUi7BQ3FQldx6oRGIJ/a8xl/YBfAP5P
-	6LZkwectkNDaGv09Wy0ZM1Vcyjx07l/DauKMnNP+q/EWQZnPaJ/j3ZEv2vN4/HPv3WaCahMm+BrbO
-	HDF4FdqUluhM8Y8ubPxmDTZkXy65jTmBkXcq9Nugj7vSV09a3XIK3FnXzWBQfAna57wlANB367mpY
-	nEVm26CTqwE+Nb+Q9ivnI0NqR1pUm3bJBB5zPaLWA5TRaJ9JcsLv7e7PO+Bx6JpOsnAsbN8Dr2k5d
-	w4+Llz1Q==;
-Received: from localhost ([::1]:21390 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=JsTT0L2OHpoy44xUdd3bO9Y7nTa4DLPQVNR5W5IvV/Y=; b=hzkv0p+5GQ0ZjOyq2CDeVBd28G
+	Dnl8Oe8ldF+AsEjZMtljLOEqBIsw3Mp6G7EKmrboVp8koS/KIBUk7wRsTcPKeQqd6RxX79V/vxix5
+	Jx0eUIxltVZwRNOWH5Rdrtqj8sb28TjRFI2Jfo5Ee2/L0qISGjse+HKb9/Yfo8FIsiIUa9mr6d6K4
+	+e83aZi+8l7fFbMvO65NfSyhjfhOVRLKlUK9F8k18kaJ8qqiy9ifNuWY8fwuB+QdTHxaStzsUnUFW
+	kYoM+8ddS413ENJpSToKHlpGRJhZYq3LWlk2BsNYK3gj2+WxxsTUv8one8WOAeQRbbzNfNHL4m+9b
+	z5b09YDg==;
+Received: from localhost ([::1]:32224 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ionDs-002djH-52; Tue, 07 Jan 2020 11:40:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23406) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ionDk-002diq-Nm; Tue, 07 Jan 2020 11:40:28 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=P/5SaSWQKiSQAmPDu8ZEWbRwsjSJDKI09W/BEuw0LV0=; b=R747YYCyihKaYq30YmT0A0OVqt
- /YfafBHA0OlTH95TF89CWBGiiPAbr0oS7BzL0sN3KSCDhZHf8nfEyz1jqG4vlEyMME24DjXkiEZWK
- 0dXJqpsYhFkiNCZQwY8hScBIjk/iOWqlJQs8rnLYOTJmN+qxRlzuHH3hR6StdL5o95/gCI4aFJcCb
- MW5/2RSwtmBJiPKwsFfMj/dp/mRC4fq5qOU13AoVXfTV5cXpNi/tjP4EfIwhwerRLbwQhW1WSxGIl
- TGk9X+W+nT6xBbzgjOmExNFCHycP1FajKZ1zA0hkEJUrmU2X38EKF4my2KqTKUfzLzR6JO2dL2fxS
- wAhOrh8QNRMncEjSDDmecDGjk7jTUUJLPZYJSZ1oM2E06lGMNd9lVwgH1GGd5D1tQcNgZOK9U5AMm
- cC4ww1BJ/dhB0GumcxwbyyRhJXbyrtBaKKA/Nc2EpQ7uBI8JQ7kBs5vG07TxTdTgrGBvt5cIU7eGo
- eTX0GLx/+cEXUA9zAeWaHsGP;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ionDk-0004Gw-4N; Tue, 07 Jan 2020 11:40:24 +0000
-To: samba@lists.samba.org, samba-technical <samba-technical@lists.samba.org>, 
- samba-announce@lists.samba.org
-Subject: Heads-up: Security Releases ahead (January 14th)!
-Organization: Samba Team
-Message-ID: <bea68fc1-5478-2c3f-f4eb-58b42fa87015@samba.org>
-Date: Tue, 7 Jan 2020 12:40:23 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+	id 1ionoI-002fCb-G7; Tue, 07 Jan 2020 12:18:10 +0000
+Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:52793) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ionoD-002fCU-1x
+ for samba-technical@lists.samba.org; Tue, 07 Jan 2020 12:18:07 +0000
+Received: from intern.SerNet.DE by mail.SerNet.DE with esmtps (Exim 4.92 #3)
+ id 1ionoC-0004hp-Ja; Tue, 07 Jan 2020 13:18:04 +0100
+Received: by intern.sernet.de
+ id 1ionoC-00049r-EU; Tue, 07 Jan 2020 13:18:04 +0100
+Received: from bjacke by pell.sernet.de with local (Exim 4.90_1)
+ (envelope-from <bjacke@sernet.de>)
+ id 1ionoC-00033y-AQ; Tue, 07 Jan 2020 13:18:04 +0100
+Date: Tue, 7 Jan 2020 13:18:04 +0100
+To: Rowland penny <rpenny@samba.org>
+Subject: Re: [PATCH] docs-xml/winbindnssinfo: clarify interaction with
+ idmap_ad etc.
+Message-ID: <20200107121804.GA11511@sernet.de>
+Mail-Followup-To: Rowland penny <rpenny@samba.org>,
+ samba-technical@lists.samba.org
+References: <20200107093340.GA7605@sernet.de>
+ <ad2ab7ff-21b2-92c1-03e7-48698d133363@samba.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: de-DE
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="7JfCtLOvnd9MIVvH"
+Content-Disposition: inline
+In-Reply-To: <ad2ab7ff-21b2-92c1-03e7-48698d133363@samba.org>
+X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
+ Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,26 +55,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Karolin Seeger <kseeger@samba.org>
+From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bj@SerNet.DE>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
 
-this is a heads-up that there will be Samba security updates on
-Tuesday, January 14th 2020. Please make sure that your Samba
-servers will be updated soon after the release!
+--7JfCtLOvnd9MIVvH
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Impacted components:
+On 2020-01-07 at 10:30 +0000 Rowland penny via samba-technical sent off:
+> Domain Controller supports the Microsoft "Services for Unix" (SFU)
+>=20
+> instead of:
+>=20
+> Domain Controller does support the Microsoft "Services for Unix" (SFU)
 
-o AD DC (CVSS 6.5, medium)
+I'm always happy to improve my English grammar skills, can you say why
+"supports" is wrong here or is this just a matter of taste here?
 
-Cheers,
-Karolin
 
--- 
-Karolin Seeger			https://samba.org/~kseeger/
-Release Manager Samba Team	https://samba.org
-Team Lead Samba SerNet		https://sernet.de
+> Make sure to consult the documentation of the idmap backend that you are
+> using.
+>=20
+> As it only works with idmap_ad, wouldn't it be better as:
+>=20
+> Make sure to consult the documentation for the idmap_ad backend.
+
+honestly I'm not entirely sure that no other idmap module can work with this
+parameter also, for example idmap rfc2307. Actually if no idmap module is l=
+eft
+that supports this setting of winbind nss info, then the only parameter left
+for this would be "template" and then we should actually remove this parame=
+ter
+entirely. There might however also be third-party idmap modules, which make=
+ use
+of this setting of "winbind nss info" and this is why I carefully chose the
+words this way (for now).
+
+Cheers
+Bj=F6rn
+--=20
+SerNet GmbH, Bahnhofsallee 1b, 37081 G=F6ttingen
+phone: 0551-370000-0, mail: kontakt@sernet.de
+Gesch.F.: Dr. Johannes Loxen & Reinhild Jung
+AG G=F6ttingen: HR-B 2816 - https://www.sernet.de
+
+--7JfCtLOvnd9MIVvH
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRTh3WYB8ykhrzLAI8xQwafzsNCPwUCXhR2+QAKCRAxQwafzsNC
+PxA0AP9B0Z46MmOXoopLdCCkF2+0XVcV/Tyh8Rv9k8wTGEKFcAEAqisVQ2lAk7zs
+QTc1/lT2+Zf/KAfMtqjztveDtp7yYQk=
+=y0qY
+-----END PGP SIGNATURE-----
+
+--7JfCtLOvnd9MIVvH--
 
