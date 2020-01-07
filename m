@@ -2,46 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 069F81325EB
-	for <lists+samba-technical@lfdr.de>; Tue,  7 Jan 2020 13:18:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF65E1328D9
+	for <lists+samba-technical@lfdr.de>; Tue,  7 Jan 2020 15:26:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=JsTT0L2OHpoy44xUdd3bO9Y7nTa4DLPQVNR5W5IvV/Y=; b=hzkv0p+5GQ0ZjOyq2CDeVBd28G
-	Dnl8Oe8ldF+AsEjZMtljLOEqBIsw3Mp6G7EKmrboVp8koS/KIBUk7wRsTcPKeQqd6RxX79V/vxix5
-	Jx0eUIxltVZwRNOWH5Rdrtqj8sb28TjRFI2Jfo5Ee2/L0qISGjse+HKb9/Yfo8FIsiIUa9mr6d6K4
-	+e83aZi+8l7fFbMvO65NfSyhjfhOVRLKlUK9F8k18kaJ8qqiy9ifNuWY8fwuB+QdTHxaStzsUnUFW
-	kYoM+8ddS413ENJpSToKHlpGRJhZYq3LWlk2BsNYK3gj2+WxxsTUv8one8WOAeQRbbzNfNHL4m+9b
-	z5b09YDg==;
-Received: from localhost ([::1]:32224 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=6cI3qwgkZ/aHl23u43wP27CEwMXccGcVtj4bSM6IuYU=; b=wMoq7YlQvYbLfNw+Dy0J6m0M2C
+	2m/VLX1T5WHLtwFyhUu3sLqvWmVLxGO04rT4cLHAapIZN4lW6bJ05i3+ODRjNI96QkTIqwykz/7zG
+	ir7JVqh+xKp7LX8muxGgVOT3PZ0GWOiua1u7ObFSbX9+GIgh+OT1Wj1XhApFyrB7kyeG1o9TJx0zC
+	2ckXu2yuBfl/6qfSZFyR+mj+5cYM4gavlZZ7TrrQOSFtAg2s5iP3/cGW89vKatdMzMe0avNip4tFB
+	SGrjzxmqiKdiWWqEjmW0mrSe1rF+gEZObBPzNysVaQMiToVi2LT/q4iZEH5djbUarfHV/GLyyiQtH
+	kTu5Vo2g==;
+Received: from localhost ([::1]:35702 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ionoI-002fCb-G7; Tue, 07 Jan 2020 12:18:10 +0000
-Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:52793) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ionoD-002fCU-1x
- for samba-technical@lists.samba.org; Tue, 07 Jan 2020 12:18:07 +0000
-Received: from intern.SerNet.DE by mail.SerNet.DE with esmtps (Exim 4.92 #3)
- id 1ionoC-0004hp-Ja; Tue, 07 Jan 2020 13:18:04 +0100
-Received: by intern.sernet.de
- id 1ionoC-00049r-EU; Tue, 07 Jan 2020 13:18:04 +0100
-Received: from bjacke by pell.sernet.de with local (Exim 4.90_1)
- (envelope-from <bjacke@sernet.de>)
- id 1ionoC-00033y-AQ; Tue, 07 Jan 2020 13:18:04 +0100
-Date: Tue, 7 Jan 2020 13:18:04 +0100
-To: Rowland penny <rpenny@samba.org>
+	id 1iopns-002ftq-Ry; Tue, 07 Jan 2020 14:25:52 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24004) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iopnp-002ftj-2A
+ for samba-technical@lists.samba.org; Tue, 07 Jan 2020 14:25:51 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=6cI3qwgkZ/aHl23u43wP27CEwMXccGcVtj4bSM6IuYU=; b=dI85CCrkgYj6MBkY8Ln66hZACl
+ FK19H2qQ9aH69o4+eHMm/EKfl2Qft5DT907gSSWhKVSvzEIQaYR2GyTfEvyQvRRZ+qvQhZuvLwed7
+ nQJ3KXJujA0FYXhNRplAY3xw/Gkla/JkGGiTU7OwI03zJ1ax4hprME0eAG0OuYeTjJpuaYJcdfbHk
+ OAociUb3JZcX4xDq+iWO+VoRa/nuwZWHRJsI/qXz0Nh8inlt4+QLAl0ytgywZCVVP+ixhWPKu5PD4
+ dvMfQd1V4k0GQL7D48lZl8/npjDJRP0yVahH36oX4M3GaCgm4Ycqvz9qGvaKii+p6O9N7SMCf5UMG
+ 4JGXi4tY22c5cl9uSxcuOmPfQT5lr6FljqO7i22sKVU7Zx+/1l/MqnXCmADN73pUfN4yDHa3aOP1Z
+ X2HrVKSrdT0iJ6rzFT6UX5yPX22MZbNarJXOKamxL5ITZUscwo3a+zIp0CBzSTFKW9ERUkgW52ovB
+ LNyMMUlHktTrZ3o5T7i4GBGv;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iopnn-0005yi-JA
+ for samba-technical@lists.samba.org; Tue, 07 Jan 2020 14:25:47 +0000
 Subject: Re: [PATCH] docs-xml/winbindnssinfo: clarify interaction with
  idmap_ad etc.
-Message-ID: <20200107121804.GA11511@sernet.de>
-Mail-Followup-To: Rowland penny <rpenny@samba.org>,
- samba-technical@lists.samba.org
 References: <20200107093340.GA7605@sernet.de>
  <ad2ab7ff-21b2-92c1-03e7-48698d133363@samba.org>
+ <20200107121804.GA11511@sernet.de>
+To: samba-technical@lists.samba.org
+Message-ID: <41a9c5b3-a13c-f2b7-111f-1e77339afbc9@samba.org>
+Date: Tue, 7 Jan 2020 14:25:47 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.3.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="7JfCtLOvnd9MIVvH"
-Content-Disposition: inline
-In-Reply-To: <ad2ab7ff-21b2-92c1-03e7-48698d133363@samba.org>
-X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
- Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
+In-Reply-To: <20200107121804.GA11511@sernet.de>
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,66 +61,61 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bj@SerNet.DE>
-Cc: samba-technical@lists.samba.org
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+On 07/01/2020 12:18, Björn JACKE wrote:
+> On 2020-01-07 at 10:30 +0000 Rowland penny via samba-technical sent off:
+>> Domain Controller supports the Microsoft "Services for Unix" (SFU)
+>>
+>> instead of:
+>>
+>> Domain Controller does support the Microsoft "Services for Unix" (SFU)
+> I'm always happy to improve my English grammar skills, can you say why
+> "supports" is wrong here or is this just a matter of taste here?
 
---7JfCtLOvnd9MIVvH
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I would never say 'does support' in this context:
 
-On 2020-01-07 at 10:30 +0000 Rowland penny via samba-technical sent off:
-> Domain Controller supports the Microsoft "Services for Unix" (SFU)
->=20
-> instead of:
->=20
-> Domain Controller does support the Microsoft "Services for Unix" (SFU)
+your Active Directory Domain Controller does support the Microsoft 
+"Services for Unix" (SFU) LDAP schema.
 
-I'm always happy to improve my English grammar skills, can you say why
-"supports" is wrong here or is this just a matter of taste here?
+I would say:
+
+your Active Directory Domain Controller supports the Microsoft "Services 
+for Unix" (SFU) LDAP schema.
+
+It is just the way that we English speak ;-)
+
+>
+>
+>> Make sure to consult the documentation of the idmap backend that you are
+>> using.
+>>
+>> As it only works with idmap_ad, wouldn't it be better as:
+>>
+>> Make sure to consult the documentation for the idmap_ad backend.
+> honestly I'm not entirely sure that no other idmap module can work with this
+> parameter also, for example idmap rfc2307. Actually if no idmap module is left
+> that supports this setting of winbind nss info, then the only parameter left
+> for this would be "template" and then we should actually remove this parameter
+> entirely. There might however also be third-party idmap modules, which make use
+> of this setting of "winbind nss info" and this is why I carefully chose the
+> words this way (for now).
+
+As far as I am aware, idmap_rfc2307 only uses the uidNumber & gidNumber 
+attributes, so, like 'rid' & 'autorid', it only uses 'template'. If 
+there is a third party idmap module, Samba knows nothing about it, so 
+shouldn't even be considered.
+
+Unless the idmap_ad module is removed, winbind nss info is needed and if 
+used in smb.conf, we should point users to the relevant documentation, 
+which in this case is 'man idmap_ad'.
+
+Rowland
 
 
-> Make sure to consult the documentation of the idmap backend that you are
-> using.
->=20
-> As it only works with idmap_ad, wouldn't it be better as:
->=20
-> Make sure to consult the documentation for the idmap_ad backend.
 
-honestly I'm not entirely sure that no other idmap module can work with this
-parameter also, for example idmap rfc2307. Actually if no idmap module is l=
-eft
-that supports this setting of winbind nss info, then the only parameter left
-for this would be "template" and then we should actually remove this parame=
-ter
-entirely. There might however also be third-party idmap modules, which make=
- use
-of this setting of "winbind nss info" and this is why I carefully chose the
-words this way (for now).
 
-Cheers
-Bj=F6rn
---=20
-SerNet GmbH, Bahnhofsallee 1b, 37081 G=F6ttingen
-phone: 0551-370000-0, mail: kontakt@sernet.de
-Gesch.F.: Dr. Johannes Loxen & Reinhild Jung
-AG G=F6ttingen: HR-B 2816 - https://www.sernet.de
-
---7JfCtLOvnd9MIVvH
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRTh3WYB8ykhrzLAI8xQwafzsNCPwUCXhR2+QAKCRAxQwafzsNC
-PxA0AP9B0Z46MmOXoopLdCCkF2+0XVcV/Tyh8Rv9k8wTGEKFcAEAqisVQ2lAk7zs
-QTc1/lT2+Zf/KAfMtqjztveDtp7yYQk=
-=y0qY
------END PGP SIGNATURE-----
-
---7JfCtLOvnd9MIVvH--
 
