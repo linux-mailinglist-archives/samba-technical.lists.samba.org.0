@@ -2,48 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7AA4F133C1A
-	for <lists+samba-technical@lfdr.de>; Wed,  8 Jan 2020 08:19:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D08A13451A
+	for <lists+samba-technical@lfdr.de>; Wed,  8 Jan 2020 15:35:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=qrRhfhZLSXL8+z1rRMw9IvRZnlIyvRwg5ov9ROJNzAc=; b=ks480gm9+ZZReYFzEdZjfVpyDn
-	Axsb/kYTbuHlWvDtNkY0wZBnhKthtzShcg4tsvfcPYnN6QQ12UNcnWXhlhliuYB4Hd56xEGC9QT9u
-	yzJaQd7SXzQu/09jAIQVRxemPRKhTbFyzSxuR7OGqd2Pq0CARlNT7FLfXcb3OK15M2EK5jsw3ORyf
-	fvVKJgpXj8cuzZgpMV+yrdbZfG2q272Q3WXjLuN29kzqnYc25czgzHAmBbEQX0jbjkM6Gqqc1ZQ7C
-	A30LQRQN0m1C4N+FLeyuytJq5stznTosz+fOFScUvAchX3zA+7UI/T0ndaIr/K7r1QkNjX3Fj3Bty
-	IxvdW9HA==;
-Received: from localhost ([::1]:54112 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=yQnU4oVuR5fMuh1Cln+kPSsH+v0G/8du5o790+MP97E=; b=l+ShkMDmTFjdgkdR39CFYXP8sG
+	YH9yVSCJ+NOBICSaddANQDrCXZINgov0scxctY1HCZ/XsFKQYm9c9ijjU/lE+t/M+B5gCuP5CFqyd
+	8JixNSY0VaLxLt/lmxK2Fl0A8UP/Q7FPyzmfJgSpBXJJ1qhQWWhoBv4unp2O9BawK9PHQRcBkSe2F
+	3R6gUVhi8coce9Ad+B6URiTJPvEHGj1Dfag5R1KOKgoI/1Hee77HQ1faD4ssdTwvX1hhX1l4JX3BZ
+	y2eWbhs6DkF63VH4efb1Jc+xm2xRCvPz9nWiGngL31tGZVRQD2xvecbbUE6pV2O7bJ+zpfnsJ8dUR
+	5ouadhHA==;
+Received: from localhost ([::1]:61288 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ip5bq-002jP7-Ok; Wed, 08 Jan 2020 07:18:30 +0000
-Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:50561) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ip5bb-002jP0-Kn
- for samba-technical@lists.samba.org; Wed, 08 Jan 2020 07:18:20 +0000
-Received: from intern.SerNet.DE by mail.SerNet.DE with esmtps (Exim 4.92 #3)
- for samba-technical@lists.samba.org
- id 1ip5bb-0003nQ-3b; Wed, 08 Jan 2020 08:18:15 +0100
-Received: by intern.sernet.de
- id 1ip5ba-000239-Vn; Wed, 08 Jan 2020 08:18:15 +0100
-Received: from bjacke by pell.sernet.de with local (Exim 4.90_1)
- (envelope-from <bjacke@sernet.de>) id 1ip5bb-00078j-CE
- for samba-technical@lists.samba.org; Wed, 08 Jan 2020 08:18:15 +0100
-Date: Wed, 8 Jan 2020 08:18:15 +0100
-To: samba-technical@lists.samba.org
+	id 1ipCPn-002krg-2Q; Wed, 08 Jan 2020 14:34:31 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30420) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ipCPi-002krZ-6r
+ for samba-technical@lists.samba.org; Wed, 08 Jan 2020 14:34:28 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=yQnU4oVuR5fMuh1Cln+kPSsH+v0G/8du5o790+MP97E=; b=UpA7MT28Yw3FE8udnmMGXOggbI
+ hqNnRdil2NnwW5153EOjTC6rZH6b2IecDE4VSZ6UFACom+CzxQGEBLW8bOMK/5w4DiwllRaAWoHAB
+ tbms0qI/e6pCs0nvDozE1yIp6rTSFpfuDmakbswOXIpo4wHZSX1zzKtm7+ZHy5d0Js5NUhwfsjMN6
+ BbalIbhyuhdF75W3kqjFG8aPdCX/djulg9A/rCnNaGb1YXdI8Qgwk/dkqxwYx0EBzLQvTkveyjexa
+ c9HplbS4fuqALMXaVBQaf1M23FJNbvUjhBeZ7E1hUSMjHxgsvnTwugK28mM3n8Bg43sxdJXudA4KH
+ Czk5u8+E/p44UAy6m9qNhj2r7vkFmFBAv9FP2xhEjOsS0NPIxhlB9YhN8baY3uRm8dJRV8OzYDVGH
+ mNeHi8O6BMebKUlC2qakm7sJk2dkMsU2mp4/s0KO5b3RE7LqBLVJI/S9yUOwlBHkSrDDCQvUpWcdW
+ j+Pt7epiyTxSrf6BhDQR9me4;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ipCPh-0007Ic-JH
+ for samba-technical@lists.samba.org; Wed, 08 Jan 2020 14:34:25 +0000
 Subject: Re: [PATCH] docs-xml/winbindnssinfo: clarify interaction with
  idmap_ad etc.
-Message-ID: <20200108071815.GA23016@sernet.de>
-Mail-Followup-To: samba-technical@lists.samba.org
+To: samba-technical@lists.samba.org
 References: <20200107093340.GA7605@sernet.de>
- <ad2ab7ff-21b2-92c1-03e7-48698d133363@samba.org>
- <20200107121804.GA11511@sernet.de>
- <41a9c5b3-a13c-f2b7-111f-1e77339afbc9@samba.org>
+Message-ID: <aa9bad27-fdde-8e3b-5f73-1c139b2fc395@samba.org>
+Date: Wed, 8 Jan 2020 15:34:25 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+In-Reply-To: <20200107093340.GA7605@sernet.de>
+Content-Type: text/plain; charset=windows-1252
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <41a9c5b3-a13c-f2b7-111f-1e77339afbc9@samba.org>
-X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
- Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,30 +59,20 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bj@SerNet.DE>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 2020-01-07 at 14:25 +0000 Rowland penny via samba-technical sent off:
-> attributes, so, like 'rid' & 'autorid', it only uses 'template'. If there is
-> a third party idmap module, Samba knows nothing about it, so shouldn't even
-> be considered.
+Am 1/7/20 um 10:33 AM schrieb Björn JACKE via samba-technical:
+> review and eventually push appreciated...
 
-we always care about possible third party modules
+pushed.
 
+-slow
 
-> Unless the idmap_ad module is removed, winbind nss info is needed and if
-> used in smb.conf, we should point users to the relevant documentation, which
-> in this case is 'man idmap_ad'.
-
-this is what "<refentrytitle>idmap_ad</refentrytitle>" in the patch does.
-
-Björn
 -- 
-SerNet GmbH, Bahnhofsallee 1b, 37081 Göttingen
-phone: 0551-370000-0, mail: kontakt@sernet.de
-Gesch.F.: Dr. Johannes Loxen & Reinhild Jung
-AG Göttingen: HR-B 2816 - https://www.sernet.de
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
