@@ -2,56 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A54A138D4B
-	for <lists+samba-technical@lfdr.de>; Mon, 13 Jan 2020 09:57:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 626B8138E2A
+	for <lists+samba-technical@lfdr.de>; Mon, 13 Jan 2020 10:49:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=AQNPai5uJ/qfsNx8VZSkwTka8wByDZLY++6vOOKEa3Q=; b=UDT366NO/NscHDA2GzI507yADd
-	kYEWANOlJRtR2F7zocun+ZLGBiKx2/4YLvxCL3weEOttKVQO9MhNCA30y42wDJa2aXkrCvWUdlNmn
-	vl3HcJ/W9RwLfUEl3HYlfyi2UyaY/T+PzinijjRlp9HSD5PkhkY8Z8w9VVhoajjh7kJGFZcAjK5sr
-	78WMTY4pSQ27SHZ3FhXS9BkFTO9dr2xHqeg7KNXmo0xII+wHsaSGXyryNg/Tsy96oqdQVQEvWdZDW
-	UI5VYjQ3bdyWjRsbQbocXpCh57OYtBAelue5HuOmZ5xuInbgg5ITj7RolponrcDydd/fvQVz7p2wJ
-	Y2t0drQQ==;
-Received: from localhost ([::1]:56686 helo=hr1.samba.org) 
+	bh=q2y+Ekh1KQB1mCJt1ymdeSEMPEWnjafhqutKhInBRe0=; b=EHIxnOMT6RWc2Mw1QV8cFFTTr2
+	DjlnGo+/0zrosTL1HixPGEO7DQfeA1m1cKTIPvsFZkXaQymdnDxkY9KMbl2OoTIZCpYz0N0VDweac
+	/ivTm9yDwsVpGwNq5R3CpHFul345sCnprauMBhQt5gSrivdu91Svu1K6nnfthBliaOmUmYtJZ68Js
+	iIgu+wieM/+uzavgRS0CMM4ngx7pCdc6yMKXgL6C/es3alXX+Dvv4a1xjzf1KezoqT3qQJzU5h39J
+	vhXkjvrD6iDNVWk7I8oJmURaHdpoOjFm+qtr6Ou4f2McdRTtoeJVC8hkO9HrnVgvh6amRSt/pxoD0
+	78vuT2bw==;
+Received: from localhost ([::1]:57466 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iqvVt-003AjJ-9m; Mon, 13 Jan 2020 08:55:57 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:52784) 
+	id 1iqwL5-003Av7-QG; Mon, 13 Jan 2020 09:48:51 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40298) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iqvVm-003AjA-NJ
- for samba-technical@lists.samba.org; Mon, 13 Jan 2020 08:55:54 +0000
-Received: from [192.168.1.110] (unknown [114.23.142.188])
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 9C84880F98; 
- Mon, 13 Jan 2020 21:55:25 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1578905726;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=AQNPai5uJ/qfsNx8VZSkwTka8wByDZLY++6vOOKEa3Q=;
- b=ZUARNi+Q6RnsAGSp58sN+0YOkyx1x1o0fiiGR7gX10SGQQV81hf25tllZs+HqfLPae1hPA
- WFQVxQz4HSOus+us/GjavN140ZGPAwh3h9YCaCdDnA+1Z49TL6JJcST2r1JM8hivADP1Kt
- 02IIDfKg9Fw7GXKmwe9/mpDLccaSul4TKqpqIrnUAejrx3THLQU9h86PqTYxs4dvyOasH9
- fQd1CrDEzhoi1XqAy/hWAwD9csi1zV6eb4nmrRtDO3WcrOtKSbf06IgWx2urhuuqU2FAeu
- rEC4VkOCuZq0JZLlCoJaKNoMhYx5QmH9zMH9pvFs/jOdrdG7r293A1oSeyC3yQ==
-Subject: Re: [EXAMPLE] How to add a source3 fuzz target
-To: Ralph Boehme <slow@samba.org>,
- samba-technical <samba-technical@lists.samba.org>
-References: <5af970f9-d9e1-5993-f5e0-480139c2ad2e@catalyst.net.nz>
- <433221e7-5dc8-36e7-3e91-9cc5374b6e81@samba.org>
-Message-ID: <097f16af-d2df-8b5f-e23e-967259716a18@catalyst.net.nz>
-Date: Mon, 13 Jan 2020 21:55:23 +1300
+ (Exim) id 1iqwL0-003Aur-14; Mon, 13 Jan 2020 09:48:48 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=q2y+Ekh1KQB1mCJt1ymdeSEMPEWnjafhqutKhInBRe0=; b=Ao83EoFmOOMfvcKbw5T5ZLJ3ZF
+ cPX5IalYkjL0EQI8o2UA5eNT11uKlUIaXg+VVhQKu51TOsEQynEFCB+V1L8WCtV75EZbBv18tJSW4
+ I3Uqpq21BRRc866c92WJZ9GgWTMSqCmupFpbHMg7EC2hxZcXRAWYqrGqs0vBK+7wRXaXpyORsTb0t
+ N2oWVkh4vb9CPkBFiwCvS7tVWplmMzUQ4KdfCSRMPW6GXpOHfR4K2bbq/e15MVmFXApwCythBCVQ5
+ XJdy15dBwwjNpAsb5FQthzaSxO0igwZLKLoFoSuQBS9HAVX1zwpEFR1fmMC5JybOwvSPhA7D3g6cJ
+ Hi20UD8y4XkdKsXlLf39W1iUrwZz9Y+SgLux8Uf05J2CaBfJHEGcvUDd3iq4eswplWKBnCvoQrQwt
+ xeVextQle8wgRGMIFYFHNNfh19Q9pU0enoxjCozNAi4XegbkGEsbBpQfjfZnK8scQFk0cmHeK0hyN
+ +Th+xMvxwjIn1zcCcX1ymX+z;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iqwKz-0005m6-Hv; Mon, 13 Jan 2020 09:48:45 +0000
+Subject: Re: Heads-up: Security Releases ahead (January 14th)!
+To: samba@lists.samba.org, samba-technical <samba-technical@lists.samba.org>, 
+ samba-announce@lists.samba.org
+References: <bea68fc1-5478-2c3f-f4eb-58b42fa87015@samba.org>
+Organization: Samba Team
+Message-ID: <9b8d6045-24d8-2c24-86df-abecf168e703@samba.org>
+Date: Mon, 13 Jan 2020 10:48:45 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.3.0
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-In-Reply-To: <433221e7-5dc8-36e7-3e91-9cc5374b6e81@samba.org>
+In-Reply-To: <bea68fc1-5478-2c3f-f4eb-58b42fa87015@samba.org>
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Language: de-DE
 Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=douglasb@catalyst.net.nz
- smtp.mailfrom=douglas.bagnall@catalyst.net.nz
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,38 +58,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Karolin Seeger <kseeger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-hi Ralph,
+Hi,
 
-On 12/01/20 11:50 pm, Ralph Boehme wrote:
-> Am 1/12/20 um 11:00 AM schrieb Douglas Bagnall via samba-technical:
->> Maybe you are a Samba developer who has noticed some activity around
->> automated fuzzing, but you haven't really got your head around how to
->> add a fuzz target in your subdomain. This message is meant to show you
->> how easy it is. So easy, in fact, that you might prefer to skip to the
->> attached patch.
->>
->> ...
->>
+Am 07.01.20 um 12:40 schrieb Karolin Seeger via samba-announce:
+> this is a heads-up that there will be Samba security updates on
+> Tuesday, January 14th 2020. Please make sure that your Samba
+> servers will be updated soon after the release!
 > 
-> thanks Douglas, this is awesome!
+> Impacted components:
+> 
+> o AD DC (CVSS 6.5, medium)
 
-I am glad you think so!
+I am sorry to announce that this release needs to be delayed.
+The new release date will be published as soon as possible.
 
-> Can we please add this to the wiki? I'll try to remember to check next
-> if it's already there, otherwise I'll add it.
+Karolin
 
-I had a go at transferring it to
-https://wiki.samba.org/index.php/Fuzzing/example
-
-The wiki formatting is imperfect.
-
-https://wiki.samba.org/index.php/Fuzzing
-and lib/fuzzing/README.md should also be useful.
-
-Douglas
+-- 
+Karolin Seeger			https://samba.org/~kseeger/
+Release Manager Samba Team	https://samba.org
+Team Lead Samba SerNet		https://sernet.de
 
