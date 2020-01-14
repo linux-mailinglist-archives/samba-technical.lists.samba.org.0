@@ -2,47 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC0C113A32D
-	for <lists+samba-technical@lfdr.de>; Tue, 14 Jan 2020 09:43:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DC5213A33D
+	for <lists+samba-technical@lfdr.de>; Tue, 14 Jan 2020 09:51:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=oavLJqjM7jgELd9+KXPOxBvhZiblWs4ZiaYLPO7hdm4=; b=s+1+c29GSgB1IdtheJDn3W3ogk
-	QS3DIsapeHHBuTD4U3tO4kcRJ7KqkTxyodJwY18fqgcTZUktSkV5+f9j4HRCOeRaz/Ma/sz/igz9a
-	BX8CM9UmhgvPJ/6rdTm9baNtny0VatXfniZF3wrWsl6n008SxAfzMSvQP9v7RlA7LyiclEg5r8+yS
-	YtwhVG0+6V3YQoVokXlFW0pF6JRD98dNESTSSQivAPN8U+1B5r9ZXlEFmdQrDz1m+Aymr/E49AAzc
-	2RotUM6mfeekJ8sGEOTCAdCTrRtCbMQaWlSxg/2UnJ8Tt/lIycPoZSR5TUOOxo8tZ95qBRAs8w2DL
-	gacqURwA==;
-Received: from localhost ([::1]:18056 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=TMdWr0p1ZqbLnWb67Z1UE2OWyWrXXhGgd7Czya6mI7Q=; b=dtvNJFeKIHUyFpLQErp2E+MU4Y
+	SJfXzPR6y9ug/+WmewwxR+RRjcOr9OTc98B1wOT2Q+Vgdt92rujwrI9WMhoEw6KIkEOtAG6oczEss
+	B+qPQuNGzVDit9lD4wikG6PUBSwQmfVWiLbzmrWIWbcuhJnaeSqq2/gvia1sESQrkutgsAvbLI/SV
+	KuwQbz83taKgBxHKpsVKUU6lwUHLRGx/O6mNkXJErZMpCri5mwM0E088nPxc3kbNbxHAfhB+oZQDe
+	ZcWVEK6EVDrHRKkNrlEeZvFCXusy5nLtGjeqsEomLZJYCrJlzUI73cyLJHtPvc0eyPvwVbwXGdi5J
+	sTa3PQqQ==;
+Received: from localhost ([::1]:21326 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1irHmh-003KMl-KP; Tue, 14 Jan 2020 08:42:47 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36596) 
+	id 1irHut-003Kms-40; Tue, 14 Jan 2020 08:51:15 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40092) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1irHmc-003KMW-TA; Tue, 14 Jan 2020 08:42:45 +0000
+ (Exim) id 1irHuo-003Kml-EY
+ for samba-technical@lists.samba.org; Tue, 14 Jan 2020 08:51:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:Message-ID:From:To:CC;
- bh=oavLJqjM7jgELd9+KXPOxBvhZiblWs4ZiaYLPO7hdm4=; b=hPkoQwomuMQHZZGgyLToN9QJaQ
- I7oZD/XTx1RqTTDl9naba4ufgl3s7LYUA458rr8so0gC9NbGEyjn2gT4+U1gkaALREAIaliLpD5ef
- e171A0JZFXwU+OnrcjBkemJxf9f+lhAhQgr+H83YBz7Jf/k8jIpV/Z4uKP3NeUbHoEc6cT5ukhngb
- nqJovyDLzNTx+gilUCt+MTn0eBDnQ8fJ6FsqkO8yE2ci6TCy4MO57RLKzEpaOnhafMTIZx3pofJvX
- UPtAtP40YwUUbU3pqEKvCQ+6f6IZkgtcdjenaWC2ZrvD1Y5/e0Xn2R9odUqsy1m+B+qnq74NCLHWb
- JiPCneKuv193OrDgCDlCLWYCvHeXSW79nsL3cWhDPRX4PKT48ubLbfifav7M1xlrBlFbGtmr2Vvxw
- e8jfQuG3xAitplEndMOhBA0Vz4teJS8G341yLcbNiMcer1rdDN3VxKGMuC87Y+N0SBCbXKl6NwTC8
- mf82RZz9eixLjHnOvSfzwQUi;
+ bh=TMdWr0p1ZqbLnWb67Z1UE2OWyWrXXhGgd7Czya6mI7Q=; b=sGf+NsquNp+qdQJBPxHVtJjc54
+ KTx7jiKrTLulyzhEcC5+THL/ZS9WKbX1RzEPf7B5XaYNtg+gIyyjqC6sMueR9MnFtqz9k0AWQV89j
+ CAbS0g7bKoA3lIj2WGRK89DfFiGEnYky1kDciHOjyaKJh9iU93JHCqPRKAovypuP6r4J3yRxjSSXe
+ Q5WOWrE953rLgJhByBHgd2qjN4pQSiNDRmnp4pV6qZ/IEwGPZwFwdp3Sl68ZemCcd0S5+MSgyZacU
+ kny4dFBYW1n/pfh3hYMtunqbb8fEVBuVnschLWf8we+HHKJf6WrHg/5fMwKtaTpcpiVRdo41SgQ7x
+ HRGAYa7+Ufgcc53FAVNIvvcchCnDPk6o8Pyjsum/GdVw1eFJzM4g7STAx8mr/dtcZUfPmA/mwbg1z
+ YTdK4//5bZig8Mudp5gnbkqkxIErLPioEGgKT7LnXQR3yGY4lIdbgoiCZYuu67PSDFOb/Wq240KEO
+ zdn1XMX9mP6CaNWmI9LdAIEF;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1irHmc-0007Yt-Kh; Tue, 14 Jan 2020 08:42:42 +0000
-Subject: Heads-up: Security Releases ahead (January 21th)!
-To: samba@lists.samba.org, samba-technical <samba-technical@lists.samba.org>, 
- samba-announce@lists.samba.org
-References: <bea68fc1-5478-2c3f-f4eb-58b42fa87015@samba.org>
- <9b8d6045-24d8-2c24-86df-abecf168e703@samba.org>
+ (Exim) id 1irHum-0007e7-AO
+ for samba-technical@lists.samba.org; Tue, 14 Jan 2020 08:51:08 +0000
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: [Release Planning 4.10] Samba 4.10.12
 Organization: Samba Team
-Message-ID: <795ee5d1-e602-d217-beb7-0f9d6ecffe4d@samba.org>
-Date: Tue, 14 Jan 2020 09:42:42 +0100
+Message-ID: <97641253-1ab3-c841-7d0b-e70a1336bd60@samba.org>
+Date: Tue, 14 Jan 2020 09:51:08 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.2.2
 MIME-Version: 1.0
-In-Reply-To: <9b8d6045-24d8-2c24-86df-abecf168e703@samba.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: de-DE
 Content-Transfer-Encoding: 7bit
@@ -66,20 +64,10 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 Hi,
 
-Am 13.01.20 um 10:48 schrieb Karolin Seeger via samba-announce:
-> Am 07.01.20 um 12:40 schrieb Karolin Seeger via samba-announce:
->> this is a heads-up that there will be Samba security updates on
->> Tuesday, January 14th 2020. Please make sure that your Samba
->> servers will be updated soon after the release!
->>
->> Impacted components:
->>
->> o AD DC (CVSS 6.5, medium)
-> 
-> I am sorry to announce that this release needs to be delayed.
-> The new release date will be published as soon as possible.
+the new planned release date for Samba 4.10.12 is Thursday, January 23 2020.
 
-new planned release date: Tuesday, January 21 2020
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.10
+has been updated accordingly.
 
 Cheers,
 Karolin
