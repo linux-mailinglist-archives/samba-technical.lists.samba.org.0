@@ -2,44 +2,92 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 470FC13A7BD
-	for <lists+samba-technical@lfdr.de>; Tue, 14 Jan 2020 11:57:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 67D7E13ADF9
+	for <lists+samba-technical@lfdr.de>; Tue, 14 Jan 2020 16:48:19 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=KRpN2Yef2SHtQn5bB0C3tPNir88E+Ih8jyAHlWupeIY=; b=oPKWeEpyC4d5YB4JQT/3grg748
-	G0lTS8mLS9OYDAKbacwHIxxI7QXqDZUYHdt7BQwERQPZvWMbTOaClnClHenC2zRUUnwid6cIqKPZU
-	7KIQQvq+06CdUqu8jmp18r9uSwVvEoGcs4JZL5ca3hAYOdwbpTUbWKIW7Orfm8VUV6O9imFJ8K7jJ
-	52qoERzjmrj94xEReWJZtZ74f7ffrx89Jq8c3gkhO0AyRexiRP/FfYeeVX8VCh6fnRxExl7NSj+a0
-	3D8QWqsbf7giyEGYrjlQwAzoffyhZEKrmlGZtDTcGCDSA+rc5WrOo7nEJvwMgAF7KjztxB/5p0Lzr
-	sbgxps+g==;
-Received: from localhost ([::1]:26162 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=nEI55wL87fRJ2UVcUzq2S4sH+AeS7hM9/YpdgfLoQ3M=; b=A0z6/TEcN3ohuNGnCHqDqdbsQ/
+	DA+vX9QU6tK8lMds7nXVG8hezzJcgBFBRrkroR6HZUk8qad5raEyacBnag1+VgZ2DAJjOifNPamZQ
+	ttkusICNL62nTRoK1eM/mE2ALK3kockvxnUN7QUfdZHBNMbYHf2GVoDmXblkpuNBeIIEOeY3/BbMa
+	krNOg+Evdr6Kv2+j0aD/YjoxWCzlv0eS6fuUAqmXM7VfXDCnDiIF2ZGqyh41C2ORHVSBWw28SX3dn
+	T/9RDeUdrzz0CwjVwIbhEhJILhoRf/mA0kORUXtSUhOb4E3UZPGUry+B4JuVgOHYJ8LbVHul7xnL0
+	3IM9ObHw==;
+Received: from localhost ([::1]:43604 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1irJsB-003LZm-JL; Tue, 14 Jan 2020 10:56:35 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36244) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1irJs5-003LZb-Iz; Tue, 14 Jan 2020 10:56:33 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=KRpN2Yef2SHtQn5bB0C3tPNir88E+Ih8jyAHlWupeIY=; b=HAY2at9vv/bhi0bn387RuHC803
- 2GWDEsws0DMiINAScWMPO26Hv6ngRwShb1xkYLJntIUMKE26uWquV2ZGPUVcT7Znebkl23/xHZVMu
- wOkNGp0RjU0mUz4NCfVwXVhBMHivD+W0ccJkelElCXxuLyDcOEtcM35LMHX/QjKz4Exd8nL29h2iP
- uYWN+eoS4eYHnpo5lqRVoXRYRzAx/X3+7xwqFwQlWj/8JJhKL+iWI2Kc0x3jP8n2epUsBSbp0BbHB
- VtH/bYyxWGZx5QZQ6PJycDvaQcKAHpJma3tFemJGifAG5YJP14NM6b33u9GDp4URdffRe7+W/8DHU
- IzpBST3/DorEQRsrT8l95Vqps7PxuO06FGaX97h2P6GCntw3kMUM98xYg94PwP/BN0Fr1S8OAIrDO
- Vhni1oMWr1St/TxIaUMxieUdcpMVTONnIZYSH8bhIKmlHvzjA3XKqpmD+zim8+Y3zSJUsBuoHJnHZ
- /kMFgBb0qvhjU91IZaAenqR7;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1irJs4-0000ED-GQ; Tue, 14 Jan 2020 10:56:29 +0000
-Message-ID: <6467e06e362311231f9bf51490f1439c9f0b5ebb.camel@samba.org>
-Subject: Samba at linux.conf.au 2020:  Why are we still in the 1980s for
- authentication?
-To: samba-technical@lists.samba.org
-Date: Tue, 14 Jan 2020 20:56:27 +1000
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.34.3 (3.34.3-1.fc31) 
+	id 1irOPX-003OMT-Qy; Tue, 14 Jan 2020 15:47:19 +0000
+Received: from m9a0013g.houston.softwaregrp.com ([15.124.64.91]:34508) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1irOPQ-003OMM-0s
+ for samba-technical@lists.samba.org; Tue, 14 Jan 2020 15:47:16 +0000
+Received: FROM m9a0013g.houston.softwaregrp.com (15.121.0.190) BY
+ m9a0013g.houston.softwaregrp.com WITH ESMTP; 
+ Tue, 14 Jan 2020 15:45:48 +0000
+Received: from M4W0334.microfocus.com (2002:f78:1192::f78:1192) by
+ M9W0067.microfocus.com (2002:f79:be::f79:be) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10; Tue, 14 Jan 2020 15:09:27 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (15.124.8.12) by
+ M4W0334.microfocus.com (15.120.17.146) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10 via Frontend Transport; Tue, 14 Jan 2020 15:09:26 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=EKYQw0PcHkTCFhKrsJ630jaKewvcNJ+pxq6iYQWNxmT0ehXVrNC4zjRfuy/LocoSncxOOsnPisp+MboxW35QDzNlFo+h6rsKAm2Ix58koPyN+S75ndPdG2p5rY/lFnB1oC+rohwP0xKrV6nYsGDj5l1N/oaYPdg8wqL82W2jVCrgA5QnQLJfESQXLExIao32Lq9DwSFQVl7demcK1ePfhLCUzo75LTO9dZn1CibNytbXBpizRvFzJv/M1ByDCCG6BZvQXCMTPg99iJ5Am4uERC/RXLbJE7Z7rHVP5QCFwMG65iaIVxreGdmbEmx+2Q6PVQ2V3g8MyhLXerIakwMxvg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=t5rAHJrlPq/zEmq59o4kyBt/aHRRB0VTOIm1Waibb+Q=;
+ b=E4dBI6CzpLE+spJG2PhxTvv3hmvl0EvdpC8I6nGBL2SGFo3EA0EOu67RnA7/dCr1KTpM+DBgXwhr1ovc64hbo6Xbg7giJhTlfVkp7ZUf2jrf8ebUgOD4xXSmj84LbX7JkoOl7VnCJjeCJe9KadcYo38bUcKlJ/al10T++jb975VPvSU8LKkZjT2O5HWsXVpgJjmr3pvkb08aS1Tz7rs6uR9HYoZ1WLLxyy832CHtPGd51aibudpe/27kWt7BhnMx+EVG76m9TOBP47z1E0Pw1xKa3eRt38Ao/fIOebe+/raJ7GbYFTsquCUIkDleYNNmrAQX0gTDOidw55w1ewoxDw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Received: from DM6PR18MB3161.namprd18.prod.outlook.com (10.255.172.90) by
+ DM6PR18MB3324.namprd18.prod.outlook.com (10.255.76.11) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2623.9; Tue, 14 Jan 2020 15:09:26 +0000
+Received: from DM6PR18MB3161.namprd18.prod.outlook.com
+ ([fe80::7db1:9ede:a62a:c7a9]) by DM6PR18MB3161.namprd18.prod.outlook.com
+ ([fe80::7db1:9ede:a62a:c7a9%6]) with mapi id 15.20.2623.017; Tue, 14 Jan 2020
+ 15:09:25 +0000
+Received: from [192.168.1.10] (74.122.77.94) by
+ BYAPR08CA0015.namprd08.prod.outlook.com (2603:10b6:a03:100::28) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2623.13 via Frontend
+ Transport; Tue, 14 Jan 2020 15:09:25 +0000
+To: Jeremy Allison <jra@samba.org>
+Subject: Re: SMB2 Write truncate
+Thread-Topic: SMB2 Write truncate
+Thread-Index: AQHVymNtgk8KnRXXf02IdER3VeVXKafpSMEAgAD7qwA=
+Date: Tue, 14 Jan 2020 15:09:25 +0000
+Message-ID: <b9d6fbba-dea4-e88f-3d80-c784e073e844@suse.com>
+References: <fa364f9a-b16e-9142-177e-a98b6bf8ce0d@suse.com>
+ <20200114000836.GA157517@jra4>
+In-Reply-To: <20200114000836.GA157517@jra4>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=david.mulder@suse.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [74.122.77.94]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 36f10a08-3f15-4f9e-cf74-08d79903be77
+x-ms-traffictypediagnostic: DM6PR18MB3324:
+x-ms-oob-tlc-oobclassifiers: OLM:2512;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: 04MqHg/WJemxujO+jpCSNLdyiE/PCCanHju4LfF4R+dRM3g78h7+uVLOTAuDg0S+5Q30R79wLR58lBcmZZZ36PfsMtMUfwt6CYTaWHGvFwKnSCeYyKirU61BFyrb9mUN8rzing6jK2ZCDBx3dPrhFjAUPHc9Jz8IzMoyil2oBy7BMrzbe0w7BTs5+xFOZ1vNHqNvkGujNgHqzNB6Mr4PO0nNjKNxVMFH3T+qEiaG1/51EqHXGjmdfjliUsLLBr0LAPHhGWWurn0JW4r1UDOHAD9L0BTH8/KMs6wRTkz2y+4k6zjoPwdqM6i/VTo0vZBTWMURl62kp6+UkOJ0XIxxCK3qSHo6Twbc4FmupVB4XQbSAnJ3BNLAAai8ydVLnGXC9oOtvuqvi4h7zxBmKF5g9WZyg6GPgJxJNdHh2jARSQMmg5cxP2/Xkyf3HBVUmQ3P4Goaqp0Iwe4NtG4tz9NSSEPDm7wZ2MfjcXIkGt4Y7RSqLwZ1WGZZNX8GZB7fOiYzOMraAC44DJ67Plw8fpcpEw==
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+X-MS-Exchange-CrossTenant-Network-Message-Id: 36f10a08-3f15-4f9e-cf74-08d79903be77
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: EScVh+bx61K/CmiMz/7+4ucxaZB0B8Ka0f/xDqWBoOt5+ek25e2pl75BBFm6HSaRfFUbLgEstfKM3213QG5gcQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR18MB3324
+X-OriginatorOrg: suse.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,27 +101,17 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba@lists.samba.org
+From: David Mulder via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Mulder <dmulder@suse.com>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-My presentation video at linux.conf.au is now available:
-
-https://www.youtube.com/watch?v=D5hl0fqA0Bc
-
-https://sysadmin.miniconf.org/presentations20.html#140
-
-https://sysadmin.miniconf.org/2020/lca2020-andrew_bartlett-samba_2020_why_are_we_still_in_the_1980s_for_auth.pdf
-
-https://twitter.com/NextDayVideo/status/1216938358779203584
-
-Andrew Bartlett
--- 
-Andrew Bartlett                       http://samba.org/~abartlet/
-Authentication Developer, Samba Team  http://samba.org
-Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
-
-
-
+VG8gdHJ1bmNhdGUgaW4gU01CMiB5b3UgY2FuIGNhbGwgc2V0aW5mbyBvbiBhIGhhbmRsZQ0Kd2l0
+aCBTTUJfRklMRV9FTkRfT0ZfRklMRV9JTkZPUk1BVElPTi4NCg0KQWgsIEkgbWlzc2VkIHRoYXQg
+U0VUX0lORk8gY2FsbC4gVGhhbmtzIEplcmVteSBhbmQgUm9ubmllLg0KDQotLQ0KDQpEYXZpZCBN
+dWxkZXINCkxhYnMgU29mdHdhcmUgRW5naW5lZXIsIFNhbWJhDQpTVVNFDQoxODAwIE5vdmVsbCBQ
+bGFjZQ0KUHJvdm8sIFVUIDg0NjA2DQooUCkrMSA4MDEuODYxLjY1NzENCmRtdWxkZXJAc3VzZS5j
+b208bWFpbHRvOmRtdWxkZXJAc3VzZS5jb20+DQpbaHR0cHM6Ly93d3cuc3VzZS5jb20vZW1haWwv
+aW1nLzIwMTYvZW1haWxfc2lnbmF0dXJlX3N1c2UucG5nXTxodHRwOi8vd3d3LnN1c2UuY29tLz4N
+Cg==
