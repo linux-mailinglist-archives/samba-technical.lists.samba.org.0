@@ -2,56 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9BF91404A3
+	by mail.lfdr.de (Postfix) with ESMTPS id AEEF11404A2
 	for <lists+samba-technical@lfdr.de>; Fri, 17 Jan 2020 08:54:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=UMzj5rXvmC6rcg3TGp0r+bv48vd8zx3O/Jl+lBOM824=; b=eaBIc0Ws8fzY7inhjL3LDciBZe
-	MKTOFq9jqXGhuXayMlIlbKnBr0QKKC/dO+lC46jxiEZS0+jFSo+h4BNddZPNLM6r3wrElCuNEIcBS
-	p3ocwfRiTJnzJeDmY118+02B430gyoKA9kNYnx3C6gln33L+0AYYVK9Bhh2nRH4AuCpOte/mFc3mz
-	Q+CHt97ynUJXXwmbuhPWtuxAHqCEWn2qHyrmydimApLi3TPUekpTazaZ9DzgTW7AI/dJi9OiNMBdX
-	j+/1CKCiQyQHR7DKEX0qqEyuRl1KYgdIcKDh4PLvmFAx2JN9M777seb0ZQmqGP7sj2yFVd4GnX0na
-	+3VJ4KQQ==;
-Received: from localhost ([::1]:22606 helo=hr1.samba.org) 
+	bh=Ewcmoyl+6W8TZGkDd/S2uQ2DNIJNVj7mIuv/mX9U2rw=; b=lnUauSiM/qiIoutVMjGLFeBLcW
+	e07I/gAFQSGLWdBf0EPAUr3XnBWmeGYYl0A3y6HExHGdJgzRky31UFlHvMA2NalSc7EPhI0o4Mj5G
+	VCcJ/nxZDDOr2b0FkDefH4YNy/ptDVjNhSofs3LV8D8jd0S83pL9givt8PiljHgUcyWlsrNX6ejKr
+	9vNikhHnUiPTp6mEtjTjqnvKGpDtydm8y8MjCr9nFdsPSQeF7beRN/7WHKIEs7eMDj1Hx0rq5Yu1X
+	g0XLKViE8w425QowOgEAwp7gZx2FCy5tMfkLFTGd58hTDVSkQsTMrVHL2TFVxTO/cAmAPjjt7ruFA
+	LVCYOkew==;
+Received: from localhost ([::1]:22686 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1isMRd-003jpJ-Q9; Fri, 17 Jan 2020 07:53:29 +0000
-Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:41601) 
+	id 1isMRt-003jq7-Pe; Fri, 17 Jan 2020 07:53:45 +0000
+Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:37092) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1isMRU-003jpB-U3
- for samba-technical@lists.samba.org; Fri, 17 Jan 2020 07:53:25 +0000
-Received: by mail-io1-xd43.google.com with SMTP id m25so9388760ioo.8
- for <samba-technical@lists.samba.org>; Thu, 16 Jan 2020 23:53:20 -0800 (PST)
+ (Exim) id 1isMRm-003jq0-Ph
+ for samba-technical@lists.samba.org; Fri, 17 Jan 2020 07:53:43 +0000
+Received: by mail-il1-x141.google.com with SMTP id t8so20584723iln.4
+ for <samba-technical@lists.samba.org>; Thu, 16 Jan 2020 23:53:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=UMzj5rXvmC6rcg3TGp0r+bv48vd8zx3O/Jl+lBOM824=;
- b=K0g5FOnwioEbhVTO/BB7URoUfu9qb/FKRVhJNukEXzEcdEzffhUQKolWV8ixV8a7Ql
- xFLdWsxq8Av2nupseHiPC88OUDhbCcfiDYe5i84XCPS3BpSB7KBC8g25Hcjd/mmia4ay
- COb+x/3lurZ7DkxeqOCcly2NPnxkEQdtaKlqJXHCfNIx3hlqRoN7VN2fr85ES+Ef1UrX
- SaUZUssibEMJ/laFLSq7TjRa5WirOPf48kY2FEghBSgNl8LmmYoOP1304+W5RQnL8Efj
- RvJY3Im8zc+K5phoKOAm/24EjL1DVBv1MFGCc2HCPGcNQq5nXsYlD7LRF4wOoAUk4xrq
- jGJQ==
+ :cc; bh=Ewcmoyl+6W8TZGkDd/S2uQ2DNIJNVj7mIuv/mX9U2rw=;
+ b=tC8YASmQVV85WcRMP7qiq+zbkH7k4UzmDanPJDpIyhVnmFg8WsNqNlbgpvrNxolEml
+ dsAHC+covEKZmIy2JOMHcYF+nq/AHfDn2NtSnmIGb3NJ6bM+WNd4tuoAZx81Vb5nY8v4
+ AqxvXgFuwDg2VU8aFuSYEmeJdldRCeNQMaR4tOYKL87vB4yZIB0/Maz+kTGr+yPh13Lw
+ juE/jJWSmn2nX7tPlsLxSfSX9F5bHW1qacKlKxW5vuohcVrG7BCzkoOvKWi8OpPsYDUx
+ xlx52akyKGSBEy+LII7ccOWLlkPw/geakJB2/D9UYqTNA1bNXB+FCncFO0zBqSHw9AzR
+ +skA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=UMzj5rXvmC6rcg3TGp0r+bv48vd8zx3O/Jl+lBOM824=;
- b=cJRxia1dxuvkQWovuKQFQFKcARk1n71dRft0DONxZEYAmqyX1f8I2Tw4rDtLQGrVSZ
- c2jyrvA41c8/NDSu88y/wXkf0f/lMZtyIEQCvU93V9meJbfLOdWiY2DRZGvNOfSoGS5O
- ve4RZSeWj00Qw9p3f25w4+I0RIoXd4Sj13febtpLC5WCr3UZVBqle4mGUQBZU+f4oI9I
- cJxQxCKHLmkWzBo54dISsJ/jFbab/Oh8dXJ8MRU7tUUsjkY0G+YU7oj00FYZHc7fNe9g
- 7m82TU9m1o7L0NaskUG8z/Q6Xsgifive/nrrYFddjMfQCo35gUtpEpNFQ/RLcpJ2cXNj
- mKpg==
-X-Gm-Message-State: APjAAAVoDmhaGRgi2geOdKsS7QNbrtHj7gJRVTHSTcGQtjxDt8NuYi4r
- 072Cg9lO9cqY4IEh6PkzpFtEbbzyJkTmKKyYhnw=
-X-Google-Smtp-Source: APXvYqxN68umXck1USsTe5u758BVy+E8O+lfkcQxQNEs+860tNQagotavXediT7gRuQQRBW9n2gyJQvwSeK0rhiaKns=
-X-Received: by 2002:a02:cd12:: with SMTP id g18mr32281878jaq.76.1579247598887; 
- Thu, 16 Jan 2020 23:53:18 -0800 (PST)
+ bh=Ewcmoyl+6W8TZGkDd/S2uQ2DNIJNVj7mIuv/mX9U2rw=;
+ b=l20RRqa5E5wCJ2yBSVJ6dnQrvXktFo4NrqneHA23dFFzj/XRKpHvDgDWvTHVLUpQ37
+ P0PasuAtchb5sBHSfPlrdKAmIW8a2YtBQx8T0y2KyFmGFaDyGfrM/qYstNXanK68IpBM
+ d33XCVsrwvQ3d44hjhPGvrLqMtMUELdJN/oO6JjW2njCRW5mBjt1xx5QfiJxY1KPcoBw
+ PKoB4NXy7oZ0REJdKR3w02VP9zztORga8y+nkeSfKeW3BbYWbe1HV1FQZ3y1wYwHdWPP
+ ZeCFAst5jlfHg4BSAmp4jfokiTXc6XY0e3EeMbn+LNyCYbEW16jdw8DLz8Sz6SkeQonq
+ BQ/A==
+X-Gm-Message-State: APjAAAVurgrWygo1xuf9ilnbMahJEqSan3tmA2nHvtrjaHjrHwFJbQEc
+ LErp5BDio1c2eNj4++oxs5iDuqXU8igYR3ekD0Q=
+X-Google-Smtp-Source: APXvYqyJIO6p9W3sIvKgsnI9yM8+QC0mVX+Kx5GTkRRst1rZ6CJocMjvHEfBFMhU3gZEpc++9iMJgmfzVWEplNZ1+6s=
+X-Received: by 2002:a92:9a90:: with SMTP id c16mr1971623ill.3.1579247617119;
+ Thu, 16 Jan 2020 23:53:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20200117022156.57844-1-yuehaibing@huawei.com>
-In-Reply-To: <20200117022156.57844-1-yuehaibing@huawei.com>
-Date: Fri, 17 Jan 2020 01:53:07 -0600
-Message-ID: <CAH2r5muybvVnEF=HzT1-xi=X2209PtE5F4zKr2OnMvaMcdLJHQ@mail.gmail.com>
-Subject: Re: [PATCH] cifs: Fix return value in __update_cache_entry
+References: <20200117025717.58636-1-yuehaibing@huawei.com>
+In-Reply-To: <20200117025717.58636-1-yuehaibing@huawei.com>
+Date: Fri, 17 Jan 2020 01:53:26 -0600
+Message-ID: <CAH2r5ms=s_c5YOPfXdTE-ee6LX_Quq9_Oao4p_k0b59fDNemWQ@mail.gmail.com>
+Subject: Re: [PATCH -next] cifs: remove set but not used variable 'server'
 To: YueHaibing <yuehaibing@huawei.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
@@ -69,38 +69,49 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Paulo Alcantara <pc@cjr.nz>,
+Cc: CIFS <linux-cifs@vger.kernel.org>,
  samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Steve French <stfrench@microsoft.com>
+ LKML <linux-kernel@vger.kernel.org>, Ronnie Sahlberg <lsahlber@redhat.com>,
+ Steve French <sfrench@samba.org>, Pavel Shilovskiy <pshilov@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 merged into cifs-2.6.git for-next
 
-On Thu, Jan 16, 2020 at 9:58 PM YueHaibing <yuehaibing@huawei.com> wrote:
+On Thu, Jan 16, 2020 at 10:01 PM YueHaibing <yuehaibing@huawei.com> wrote:
 >
-> copy_ref_data() may return error, it should be
-> returned to upstream caller.
+> fs/cifs/smb2pdu.c: In function 'SMB2_query_directory':
+> fs/cifs/smb2pdu.c:4444:26: warning:
+>  variable 'server' set but not used [-Wunused-but-set-variable]
+>   struct TCP_Server_Info *server;
 >
-> Fixes: 03535b72873b ("cifs: Avoid doing network I/O while holding cache lock")
+> It is not used, so remove it.
+>
+> Reported-by: Hulk Robot <hulkci@huawei.com>
 > Signed-off-by: YueHaibing <yuehaibing@huawei.com>
 > ---
->  fs/cifs/dfs_cache.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  fs/cifs/smb2pdu.c | 5 +----
+>  1 file changed, 1 insertion(+), 4 deletions(-)
 >
-> diff --git a/fs/cifs/dfs_cache.c b/fs/cifs/dfs_cache.c
-> index 5617efe..03cfaa1 100644
-> --- a/fs/cifs/dfs_cache.c
-> +++ b/fs/cifs/dfs_cache.c
-> @@ -593,7 +593,7 @@ static int __update_cache_entry(const char *path,
+> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
+> index a23ca3d..64d5a36 100644
+> --- a/fs/cifs/smb2pdu.c
+> +++ b/fs/cifs/smb2pdu.c
+> @@ -4441,13 +4441,10 @@ SMB2_query_directory(const unsigned int xid, struct cifs_tcon *tcon,
+>         int resp_buftype = CIFS_NO_BUFFER;
+>         struct kvec rsp_iov;
+>         int rc = 0;
+> -       struct TCP_Server_Info *server;
+>         struct cifs_ses *ses = tcon->ses;
+>         int flags = 0;
 >
->         kfree(th);
+> -       if (ses && (ses->server))
+> -               server = ses->server;
+> -       else
+> +       if (!ses || !(ses->server))
+>                 return -EIO;
 >
-> -       return 0;
-> +       return rc;
->  }
->
->  static int get_dfs_referral(const unsigned int xid, struct cifs_ses *ses,
+>         if (smb3_encryption_required(tcon))
 > --
 > 2.7.4
 >
