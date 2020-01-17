@@ -2,49 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80DD013FC20
-	for <lists+samba-technical@lfdr.de>; Thu, 16 Jan 2020 23:22:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 976CA1401DE
+	for <lists+samba-technical@lfdr.de>; Fri, 17 Jan 2020 03:26:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=TJqaEI/U6YdTmkCygHmZDA2cGqNydO4aCO5/bHOmtqs=; b=F/EBiE0iCU+etzGZ7KHIkBL1N/
-	rG6pQ9XlIRjy23N0NzE0NmXwOW+zx89hiFWgLG0ck+3pKrlf8Xg9VBY03XPP2De8nSUBmP2kcvu4P
-	Q7YbzhgHxiMkOmfYhEsoHfPZCxE6/zrdO3XZWKu7EVpimXNgdxyGOcauSe5zA4rnZCOtZNH3oqLNd
-	vxlTyXmIJsBzdMfNb7ewyha+Glezb7Y5huj+kgR5g5fdR29MSuyqMTpkMroBXfL1HEm9zzcZZK9D5
-	dIkxiAhWXOpVFqlm/FImIWJj7T91U/MNzrBOkPHrGQHQbcZQQpKBu8FAbi5FgYboN8JrQZxoZCueq
-	+X6X1rqg==;
-Received: from localhost ([::1]:57984 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=1aG+Zq8Z/5/vLaonWtDgCF09ewKx5tAm60B66Be5FPg=; b=IurXOxQNxxeAAcLcW5Tt6hupr6
+	3CbNojeMWLXFSV8PCNmgtIbKHQ9pyocV/mTeRpNveHb6N4D+uduRuVQkxkLTFKotrkOdxxfzgvbH1
+	Sql5zoLNlHDKZnnRShAvMqoxYKrLXToyQarAoeCNpTDY49xjPAPGDMASgoDhmBa30RwrI6vxTJH/U
+	bAaKwWXYXePVZzteZhv7ot9hTYkOZJmmlqgJs0EKrmHC1Isn+DUdaEeM7Xm5/DITAtsSInL9228Jo
+	Ovumo5yUsXWwMTaaYUsI8tFpH/HUjY6wR7JiLPvce9RXhQa0JNSU+zqoIWwD2V4lzkApIawEooaas
+	gNJg141Q==;
+Received: from localhost ([::1]:63790 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1isDWZ-003hN7-Ew; Thu, 16 Jan 2020 22:21:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19652) 
+	id 1isHK9-003iQu-VF; Fri, 17 Jan 2020 02:25:26 +0000
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:42797) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1isDWV-003hN0-7h
- for samba-technical@lists.samba.org; Thu, 16 Jan 2020 22:21:57 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=TJqaEI/U6YdTmkCygHmZDA2cGqNydO4aCO5/bHOmtqs=; b=irAl64TX4QJdCtHAd8YI23SUgc
- XdxkIqdVj/C72QWbJEA+vVMGgD1fWZd/Z73T25iZ0gFLAhiTuMnE0nxQElHOZuQU9y0C2w7bbp4Rs
- 8AHptDAlwLksI6JD3IFjC2qduCDuAbOa08CMa4Du+S0vf26Gw+Mq7rX6gqEdX2mwuZan/KBIUM9Sr
- oXVjE35FlRgBUSxltjf4L+umkxv7w+kSOMEvHHago65kx2ZGof7o5OUUTsLPEK+ZPCDxYbY4dzoWY
- ug40REC49AnMesxCtqRFcvOo7jlo8fs6B2jAqtPEtDE22UtQOVYDkm8vwdGsk1s221XYfIeuHYaH1
- yAXUceJBy1ANVLMvTIl7bFbizkvlRqh31aOjTXr18W/oG/NlpgqXhOU3+XrP7zl2GFxNzhA520iGk
- oAmZ6fQpg/Tz6M4ZGXVydVqHUlnZRlhrWlnJHMXpInBx1VMQZiF3JMRNmw5OnRJPZZuQIWhula1yl
- N5rvMVj0rQT3On7iiwAUMfHi;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1isDWU-0004bv-K3; Thu, 16 Jan 2020 22:21:54 +0000
-To: David Mulder <dmulder@suse.com>,
- samba-technical <samba-technical@lists.samba.org>
-References: <fc2075c1-a01a-91e3-32f4-af13496f0c81@suse.com>
-Subject: Re: negnowait test for smb2
-Message-ID: <211ef3bb-834f-8d32-2208-ea640f73a2fd@samba.org>
-Date: Thu, 16 Jan 2020 23:21:50 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
+ (Exim) id 1isHK4-003iQn-Ek
+ for samba-technical@lists.samba.org; Fri, 17 Jan 2020 02:25:23 +0000
+Received: by mail-io1-xd43.google.com with SMTP id n11so24300986iom.9
+ for <samba-technical@lists.samba.org>; Thu, 16 Jan 2020 18:25:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=1aG+Zq8Z/5/vLaonWtDgCF09ewKx5tAm60B66Be5FPg=;
+ b=P5u9vqiqLG1zsnti7aCFWCautfTh3Zm/2kcW92LzAtM4NGzk12LfLCnOG5kXI5JQAh
+ 4zT+6sTZF3QAk+YlvrbkqfUB5r9ZsGAPYq8o+XuASS5DJJCI3sqlfuUqQI0LNvjivZMc
+ AwEEPwPfFZ4tmwiQp6Gti03wvvG85+pG0365PgfIwESYg3p8KMTjgb5hVNTzZMEIJnFY
+ BoO40k1HoqUm5fnVFGyyMv2uuhWcpNJOL8pb5e0WJOexD+pN8otUKM353X8CK4JX+372
+ qCuF/SoUrUGsnSUFxZjjRREtYwXVBOLZ3Mh7M4/l8/f2AxVsNRuqrLq+rljFwocabfL/
+ UZgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=1aG+Zq8Z/5/vLaonWtDgCF09ewKx5tAm60B66Be5FPg=;
+ b=nAKeC60orEcLLN+LGpWEd8FgRPBfbykZN2szcp9PdyGa8ky9DxOj++na2f+C56mlTB
+ J0GMG1fuV7K5ds1V1YT3xtmG3yjF7NA41KNZi6OE3FeFf/A6I5tVv7Hx4slFiXVuuHYT
+ Jb+rBDFY3BorIXPrfzWiEVPzHWGBy22Dv4L8UiUDiqwHGnCCNOmfiWLNWnG58I2v90Rn
+ xXLUqBlR66U2O7jiklwJUVwWh36H08JjbuvlSm6vx0N3sk2xbFHvleV97dRMeteLzQ83
+ hVcqGSUTfERGR4kfluiHZobfOz4/WdfKY3d/sN/s1zz63pJytosvQmVVJIC3BfSy9bcr
+ 3Esg==
+X-Gm-Message-State: APjAAAWKQV1l3/ghFqYFVary5ElNQiFqPt/yWBKf6LEOOuCJlH0xXf9O
+ hZXnX60MD452B/IZMb10h/9vqkNAlmWFSC03dNg=
+X-Google-Smtp-Source: APXvYqy9Jz1ItLcWlR20Wv8trbIhRGLOfd2syRA6Zz42YUGHSAT0R/XGGTMkA8YadKBVR1JuftIooJX1vq+CJdbidwc=
+X-Received: by 2002:a02:2446:: with SMTP id q6mr30465004jae.78.1579227917969; 
+ Thu, 16 Jan 2020 18:25:17 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <fc2075c1-a01a-91e3-32f4-af13496f0c81@suse.com>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="xPzuHWJdqK3f78ZvBERESKWN4uICNolPs"
+References: <20191219165250.2875-1-bprotopopov@hotmail.com>
+In-Reply-To: <20191219165250.2875-1-bprotopopov@hotmail.com>
+Date: Thu, 16 Jan 2020 20:25:04 -0600
+Message-ID: <CAH2r5muGF51LgNe3hgGrdA-D5YivGDXQ_hZUKzaVn1V9EX2XBg@mail.gmail.com>
+Subject: Re: [PATCH] Add support for setting owner info, dos attributes, and
+ create time
+To: Boris Protopopov <boris.v.protopopov@gmail.com>
+Content-Type: multipart/mixed; boundary="0000000000001226ea059c4ca73d"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,69 +68,388 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>, Steve French <sfrench@samba.org>,
+ Boris Protopopov <bprotopopov@hotmail.com>, sblbir@amazon.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---xPzuHWJdqK3f78ZvBERESKWN4uICNolPs
-Content-Type: multipart/mixed; boundary="OhM7AO3nzA1Ik7mEwXuyFO05buPEFwWW5";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: David Mulder <dmulder@suse.com>,
- samba-technical <samba-technical@lists.samba.org>
-Message-ID: <211ef3bb-834f-8d32-2208-ea640f73a2fd@samba.org>
-Subject: Re: negnowait test for smb2
-References: <fc2075c1-a01a-91e3-32f4-af13496f0c81@suse.com>
-In-Reply-To: <fc2075c1-a01a-91e3-32f4-af13496f0c81@suse.com>
+--0000000000001226ea059c4ca73d
+Content-Type: text/plain; charset="UTF-8"
 
---OhM7AO3nzA1Ik7mEwXuyFO05buPEFwWW5
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Am 16.01.20 um 16:45 schrieb David Mulder via samba-technical:
-> I converted the base.negnowait test to smb2, but it seems that this tes=
-t is meaningless in smb2. The server never seems to grant more than 1 cre=
-dit during a negotiate, so we almost immediately run out of credits and b=
-reak from the loop.
->=20
-> It seems to me that I should just ignore this old test and move on. Doe=
-s anyone disagree? Maybe I could run this differently somehow?
-
-Yes, that's an smb1 only test.
-
-A more useful test might be checking what happens on a tcp connection
-1. without any request at all.
-2. without finished session setup
-
-metze
+updated patch to fix minor endian errors and remerged into cifs-2.6.git for-next
 
 
---OhM7AO3nzA1Ik7mEwXuyFO05buPEFwWW5--
+On Thu, Dec 19, 2019 at 10:53 AM Boris Protopopov
+<boris.v.protopopov@gmail.com> wrote:
+>
+> Add extended attribute "system.cifs_ntsd" (and alias "system.smb3_ntsd")
+> to allow for setting owner and DACL in the security descriptor. This is in
+> addition to the existing "system.cifs_acl" and "system.smb3_acl" attributes
+> that allow for setting DACL only. Add support for setting creation time and
+> dos attributes using set_file_info() calls to complement the existing
+> support for getting these attributes via query_path_info() calls.
+>
+> Signed-off-by: Boris Protopopov <bprotopopov@hotmail.com>
+> ---
+>  fs/cifs/xattr.c | 128 +++++++++++++++++++++++++++++++++++++++++++++++++++-----
+>  1 file changed, 117 insertions(+), 11 deletions(-)
+>
+> diff --git a/fs/cifs/xattr.c b/fs/cifs/xattr.c
+> index 9076150758d8..c41856e6fa22 100644
+> --- a/fs/cifs/xattr.c
+> +++ b/fs/cifs/xattr.c
+> @@ -32,7 +32,8 @@
+>  #include "cifs_unicode.h"
+>
+>  #define MAX_EA_VALUE_SIZE CIFSMaxBufSize
+> -#define CIFS_XATTR_CIFS_ACL "system.cifs_acl"
+> +#define CIFS_XATTR_CIFS_ACL "system.cifs_acl" /* DACL only */
+> +#define CIFS_XATTR_CIFS_NTSD "system.cifs_ntsd" /* owner plus DACL */
+>  #define CIFS_XATTR_ATTRIB "cifs.dosattrib"  /* full name: user.cifs.dosattrib */
+>  #define CIFS_XATTR_CREATETIME "cifs.creationtime"  /* user.cifs.creationtime */
+>  /*
+> @@ -40,12 +41,62 @@
+>   * confusing users and using the 20+ year old term 'cifs' when it is no longer
+>   * secure, replaced by SMB2 (then even more highly secure SMB3) many years ago
+>   */
+> -#define SMB3_XATTR_CIFS_ACL "system.smb3_acl"
+> +#define SMB3_XATTR_CIFS_ACL "system.smb3_acl" /* DACL only */
+> +#define SMB3_XATTR_CIFS_NTSD "system.smb3_ntsd" /* owner plus DACL */
+>  #define SMB3_XATTR_ATTRIB "smb3.dosattrib"  /* full name: user.smb3.dosattrib */
+>  #define SMB3_XATTR_CREATETIME "smb3.creationtime"  /* user.smb3.creationtime */
+>  /* BB need to add server (Samba e.g) support for security and trusted prefix */
+>
+> -enum { XATTR_USER, XATTR_CIFS_ACL, XATTR_ACL_ACCESS, XATTR_ACL_DEFAULT };
+> +enum { XATTR_USER, XATTR_CIFS_ACL, XATTR_ACL_ACCESS, XATTR_ACL_DEFAULT,
+> +       XATTR_CIFS_NTSD };
+> +
+> +static int cifs_attrib_set(unsigned int xid, struct cifs_tcon *pTcon,
+> +                          struct inode *inode, char *full_path,
+> +                          const void *value, size_t size)
+> +{
+> +       ssize_t rc = -EOPNOTSUPP;
+> +       __u32 *pattrib = (__u32 *)value;
+> +       __u32 attrib;
+> +       FILE_BASIC_INFO info_buf;
+> +
+> +       if ((value == NULL) || (size != sizeof(__u32)))
+> +               return -ERANGE;
+> +
+> +       memset(&info_buf, 0, sizeof(info_buf));
+> +       info_buf.Attributes = attrib = cpu_to_le32(*pattrib);
+> +
+> +       if (pTcon->ses->server->ops->set_file_info)
+> +               rc = pTcon->ses->server->ops->set_file_info(inode, full_path,
+> +                               &info_buf, xid);
+> +       if (rc == 0)
+> +               CIFS_I(inode)->cifsAttrs = attrib;
+> +
+> +       return rc;
+> +}
+> +
+> +static int cifs_creation_time_set(unsigned int xid, struct cifs_tcon *pTcon,
+> +                                 struct inode *inode, char *full_path,
+> +                                 const void *value, size_t size)
+> +{
+> +       ssize_t rc = -EOPNOTSUPP;
+> +       __u64 *pcreation_time = (__u64 *)value;
+> +       __u64 creation_time;
+> +       FILE_BASIC_INFO info_buf;
+> +
+> +       if ((value == NULL) || (size != sizeof(__u64)))
+> +               return -ERANGE;
+> +
+> +       memset(&info_buf, 0, sizeof(info_buf));
+> +       info_buf.CreationTime = creation_time = cpu_to_le64(*pcreation_time);
+> +
+> +       if (pTcon->ses->server->ops->set_file_info)
+> +               rc = pTcon->ses->server->ops->set_file_info(inode, full_path,
+> +                               &info_buf, xid);
+> +       if (rc == 0)
+> +               CIFS_I(inode)->createtime = creation_time;
+> +
+> +       return rc;
+> +}
+>
+>  static int cifs_xattr_set(const struct xattr_handler *handler,
+>                           struct dentry *dentry, struct inode *inode,
+> @@ -86,6 +137,23 @@ static int cifs_xattr_set(const struct xattr_handler *handler,
+>
+>         switch (handler->flags) {
+>         case XATTR_USER:
+> +               cifs_dbg(FYI, "%s:setting user xattr %s\n", __func__, name);
+> +               if ((strcmp(name, CIFS_XATTR_ATTRIB) == 0) ||
+> +                   (strcmp(name, SMB3_XATTR_ATTRIB) == 0)) {
+> +                       rc = cifs_attrib_set(xid, pTcon, inode, full_path,
+> +                                       value, size);
+> +                       if (rc == 0) /* force revalidate of the inode */
+> +                               CIFS_I(inode)->time = 0;
+> +                       break;
+> +               } else if ((strcmp(name, CIFS_XATTR_CREATETIME) == 0) ||
+> +                          (strcmp(name, SMB3_XATTR_CREATETIME) == 0)) {
+> +                       rc = cifs_creation_time_set(xid, pTcon, inode,
+> +                                       full_path, value, size);
+> +                       if (rc == 0) /* force revalidate of the inode */
+> +                               CIFS_I(inode)->time = 0;
+> +                       break;
+> +               }
+> +
+>                 if (cifs_sb->mnt_cifs_flags & CIFS_MOUNT_NO_XATTR)
+>                         goto out;
+>
+> @@ -95,7 +163,8 @@ static int cifs_xattr_set(const struct xattr_handler *handler,
+>                                 cifs_sb->local_nls, cifs_sb);
+>                 break;
+>
+> -       case XATTR_CIFS_ACL: {
+> +       case XATTR_CIFS_ACL:
+> +       case XATTR_CIFS_NTSD: {
+>                 struct cifs_ntsd *pacl;
+>
+>                 if (!value)
+> @@ -106,12 +175,25 @@ static int cifs_xattr_set(const struct xattr_handler *handler,
+>                 } else {
+>                         memcpy(pacl, value, size);
+>                         if (value &&
+> -                           pTcon->ses->server->ops->set_acl)
+> -                               rc = pTcon->ses->server->ops->set_acl(pacl,
+> -                                               size, inode,
+> -                                               full_path, CIFS_ACL_DACL);
+> -                       else
+> +                           pTcon->ses->server->ops->set_acl) {
+> +                               rc = 0;
+> +                               if (handler->flags == XATTR_CIFS_NTSD) {
+> +                                       /* set owner and DACL */
+> +                                       rc = pTcon->ses->server->ops->set_acl(
+> +                                                       pacl, size, inode,
+> +                                                       full_path,
+> +                                                       CIFS_ACL_OWNER);
+> +                               }
+> +                               if (rc == 0) {
+> +                                       /* set DACL */
+> +                                       rc = pTcon->ses->server->ops->set_acl(
+> +                                                       pacl, size, inode,
+> +                                                       full_path,
+> +                                                       CIFS_ACL_DACL);
+> +                               }
+> +                       } else {
+>                                 rc = -EOPNOTSUPP;
+> +                       }
+>                         if (rc == 0) /* force revalidate of the inode */
+>                                 CIFS_I(inode)->time = 0;
+>                         kfree(pacl);
+> @@ -179,7 +261,7 @@ static int cifs_creation_time_get(struct dentry *dentry, struct inode *inode,
+>                                   void *value, size_t size)
+>  {
+>         ssize_t rc;
+> -       __u64 * pcreatetime;
+> +       __u64 *pcreatetime;
+>
+>         rc = cifs_revalidate_dentry_attr(dentry);
+>         if (rc)
+> @@ -244,7 +326,9 @@ static int cifs_xattr_get(const struct xattr_handler *handler,
+>                                 full_path, name, value, size, cifs_sb);
+>                 break;
+>
+> -       case XATTR_CIFS_ACL: {
+> +       case XATTR_CIFS_ACL:
+> +       case XATTR_CIFS_NTSD: {
+> +               /* the whole ntsd is fetched regardless */
+>                 u32 acllen;
+>                 struct cifs_ntsd *pacl;
+>
+> @@ -382,6 +466,26 @@ static const struct xattr_handler smb3_acl_xattr_handler = {
+>         .set = cifs_xattr_set,
+>  };
+>
+> +static const struct xattr_handler cifs_cifs_ntsd_xattr_handler = {
+> +       .name = CIFS_XATTR_CIFS_NTSD,
+> +       .flags = XATTR_CIFS_NTSD,
+> +       .get = cifs_xattr_get,
+> +       .set = cifs_xattr_set,
+> +};
+> +
+> +/*
+> + * Although this is just an alias for the above, need to move away from
+> + * confusing users and using the 20 year old term 'cifs' when it is no
+> + * longer secure and was replaced by SMB2/SMB3 a long time ago, and
+> + * SMB3 and later are highly secure.
+> + */
+> +static const struct xattr_handler smb3_ntsd_xattr_handler = {
+> +       .name = SMB3_XATTR_CIFS_NTSD,
+> +       .flags = XATTR_CIFS_NTSD,
+> +       .get = cifs_xattr_get,
+> +       .set = cifs_xattr_set,
+> +};
+> +
+>  static const struct xattr_handler cifs_posix_acl_access_xattr_handler = {
+>         .name = XATTR_NAME_POSIX_ACL_ACCESS,
+>         .flags = XATTR_ACL_ACCESS,
+> @@ -401,6 +505,8 @@ const struct xattr_handler *cifs_xattr_handlers[] = {
+>         &cifs_os2_xattr_handler,
+>         &cifs_cifs_acl_xattr_handler,
+>         &smb3_acl_xattr_handler, /* alias for above since avoiding "cifs" */
+> +       &cifs_cifs_ntsd_xattr_handler,
+> +       &smb3_ntsd_xattr_handler, /* alias for above since avoiding "cifs" */
+>         &cifs_posix_acl_access_xattr_handler,
+>         &cifs_posix_acl_default_xattr_handler,
+>         NULL
+> --
+> 2.14.5
+>
 
---xPzuHWJdqK3f78ZvBERESKWN4uICNolPs
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+-- 
+Thanks,
 
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl4g4f4ACgkQDbX1YShp
-vVblexAAroHVrG5Ej5VhpbkOkYLhpbsbQDmlOuWnkpixhMtjCy0dLx5vFPFGAdfO
-zfe/E5RaECbsVpnRNHHyi9jlTnPG8hTML0UAmrgE9FhXjxEl7g6Evwg5q3elwL7A
-qKFgUxhHnv5oE9jZ+/3NuU7BFDG+cim/BVLVEjwdIgU6AjGbOY/ZziANX2gg0fUl
-1HmjJml8LoX6aOY1b4Hzl97lot1XPzjwtAclpMUqbqf7Q5xR24pttIC4F4aRcJM8
-ZodI23z10sboJit7qMKzbR6WV3VKYRqMyiOivGoEzklSq7B8WmopnNX/8w3eZ3oD
-0CZAz83rr5Pf0esGcVDMEvExkBt3cBaINcpc61pOXYTxvrMwFwU/EjJ6v3euTXOa
-PimFaSaQcEEk4Aa12sHx68dYS9xnU3PlRxOhoJp6Igm513zuVpXyYp6IlyvDM5w5
-mrTuHvK5RMo/1UoWQJIYcJHWUxaakg7rz7QigfPgysso3ji+bar++qxia5WbP3zc
-+mTIX0uEzCmgxcVw0G6093B4IhrsgTyXT9FZoprO6qvt/vHemc3N42iz3VNTWTHR
-95ZIpNPTxpzcnwc+PY6YRDRpWAU/w8jS5jzjAhyGuLmigMHZ2JrsBFc8gxCf3p2B
-/mJqkOJPy3KRV0bEM7JwexzpmsHAAoKmRKWaNNiQzq3pUQhYwVI=
-=o/AT
------END PGP SIGNATURE-----
+Steve
 
---xPzuHWJdqK3f78ZvBERESKWN4uICNolPs--
+--0000000000001226ea059c4ca73d
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-CIFS-Add-support-for-setting-owner-info-dos-attribut.patch"
+Content-Disposition: attachment; 
+	filename="0001-CIFS-Add-support-for-setting-owner-info-dos-attribut.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_k5hjin5k0>
+X-Attachment-Id: f_k5hjin5k0
+
+RnJvbSBmZjRkZGRjZjUwZDIwNjM3M2IyOTE0Y2Y3MmY0NTlhNzAwMzBhYjkyIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBCb3JpcyBQcm90b3BvcG92IDxicHJvdG9wb3BvdkBob3RtYWls
+LmNvbT4KRGF0ZTogVGh1LCAxOSBEZWMgMjAxOSAxNjo1Mjo1MCArMDAwMApTdWJqZWN0OiBbUEFU
+Q0ggMS8zXSBDSUZTOiBBZGQgc3VwcG9ydCBmb3Igc2V0dGluZyBvd25lciBpbmZvLCBkb3MgYXR0
+cmlidXRlcywKIGFuZCBjcmVhdGUgdGltZQoKVGhpcyBpcyBuZWVkZWQgZm9yIGJhY2t1cC9yZXN0
+b3JlIHNjZW5hcmlvcyBhbW9uZyBvdGhlcnMuCgpBZGQgZXh0ZW5kZWQgYXR0cmlidXRlICJzeXN0
+ZW0uY2lmc19udHNkIiAoYW5kIGFsaWFzICJzeXN0ZW0uc21iM19udHNkIikKdG8gYWxsb3cgZm9y
+IHNldHRpbmcgb3duZXIgYW5kIERBQ0wgaW4gdGhlIHNlY3VyaXR5IGRlc2NyaXB0b3IuIFRoaXMg
+aXMgaW4KYWRkaXRpb24gdG8gdGhlIGV4aXN0aW5nICJzeXN0ZW0uY2lmc19hY2wiIGFuZCAic3lz
+dGVtLnNtYjNfYWNsIiBhdHRyaWJ1dGVzCnRoYXQgYWxsb3cgZm9yIHNldHRpbmcgREFDTCBvbmx5
+LiBBZGQgc3VwcG9ydCBmb3Igc2V0dGluZyBjcmVhdGlvbiB0aW1lIGFuZApkb3MgYXR0cmlidXRl
+cyB1c2luZyBzZXRfZmlsZV9pbmZvKCkgY2FsbHMgdG8gY29tcGxlbWVudCB0aGUgZXhpc3RpbmcK
+c3VwcG9ydCBmb3IgZ2V0dGluZyB0aGVzZSBhdHRyaWJ1dGVzIHZpYSBxdWVyeV9wYXRoX2luZm8o
+KSBjYWxscy4KClNpZ25lZC1vZmYtYnk6IEJvcmlzIFByb3RvcG9wb3YgPGJwcm90b3BvcG92QGhv
+dG1haWwuY29tPgpTaWduZWQtb2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29m
+dC5jb20+Ci0tLQogZnMvY2lmcy94YXR0ci5jIHwgMTI4ICsrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKystLS0tLQogMSBmaWxlIGNoYW5nZWQsIDExNyBpbnNlcnRpb25z
+KCspLCAxMSBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9mcy9jaWZzL3hhdHRyLmMgYi9mcy9j
+aWZzL3hhdHRyLmMKaW5kZXggZGI0YmE4ZjYwNzdlLi40MTQyYzk1OTlmNjggMTAwNjQ0Ci0tLSBh
+L2ZzL2NpZnMveGF0dHIuYworKysgYi9mcy9jaWZzL3hhdHRyLmMKQEAgLTMyLDcgKzMyLDggQEAK
+ICNpbmNsdWRlICJjaWZzX3VuaWNvZGUuaCIKIAogI2RlZmluZSBNQVhfRUFfVkFMVUVfU0laRSBD
+SUZTTWF4QnVmU2l6ZQotI2RlZmluZSBDSUZTX1hBVFRSX0NJRlNfQUNMICJzeXN0ZW0uY2lmc19h
+Y2wiCisjZGVmaW5lIENJRlNfWEFUVFJfQ0lGU19BQ0wgInN5c3RlbS5jaWZzX2FjbCIgLyogREFD
+TCBvbmx5ICovCisjZGVmaW5lIENJRlNfWEFUVFJfQ0lGU19OVFNEICJzeXN0ZW0uY2lmc19udHNk
+IiAvKiBvd25lciBwbHVzIERBQ0wgKi8KICNkZWZpbmUgQ0lGU19YQVRUUl9BVFRSSUIgImNpZnMu
+ZG9zYXR0cmliIiAgLyogZnVsbCBuYW1lOiB1c2VyLmNpZnMuZG9zYXR0cmliICovCiAjZGVmaW5l
+IENJRlNfWEFUVFJfQ1JFQVRFVElNRSAiY2lmcy5jcmVhdGlvbnRpbWUiICAvKiB1c2VyLmNpZnMu
+Y3JlYXRpb250aW1lICovCiAvKgpAQCAtNDAsMTIgKzQxLDYyIEBACiAgKiBjb25mdXNpbmcgdXNl
+cnMgYW5kIHVzaW5nIHRoZSAyMCsgeWVhciBvbGQgdGVybSAnY2lmcycgd2hlbiBpdCBpcyBubyBs
+b25nZXIKICAqIHNlY3VyZSwgcmVwbGFjZWQgYnkgU01CMiAodGhlbiBldmVuIG1vcmUgaGlnaGx5
+IHNlY3VyZSBTTUIzKSBtYW55IHllYXJzIGFnbwogICovCi0jZGVmaW5lIFNNQjNfWEFUVFJfQ0lG
+U19BQ0wgInN5c3RlbS5zbWIzX2FjbCIKKyNkZWZpbmUgU01CM19YQVRUUl9DSUZTX0FDTCAic3lz
+dGVtLnNtYjNfYWNsIiAvKiBEQUNMIG9ubHkgKi8KKyNkZWZpbmUgU01CM19YQVRUUl9DSUZTX05U
+U0QgInN5c3RlbS5zbWIzX250c2QiIC8qIG93bmVyIHBsdXMgREFDTCAqLwogI2RlZmluZSBTTUIz
+X1hBVFRSX0FUVFJJQiAic21iMy5kb3NhdHRyaWIiICAvKiBmdWxsIG5hbWU6IHVzZXIuc21iMy5k
+b3NhdHRyaWIgKi8KICNkZWZpbmUgU01CM19YQVRUUl9DUkVBVEVUSU1FICJzbWIzLmNyZWF0aW9u
+dGltZSIgIC8qIHVzZXIuc21iMy5jcmVhdGlvbnRpbWUgKi8KIC8qIEJCIG5lZWQgdG8gYWRkIHNl
+cnZlciAoU2FtYmEgZS5nKSBzdXBwb3J0IGZvciBzZWN1cml0eSBhbmQgdHJ1c3RlZCBwcmVmaXgg
+Ki8KIAotZW51bSB7IFhBVFRSX1VTRVIsIFhBVFRSX0NJRlNfQUNMLCBYQVRUUl9BQ0xfQUNDRVNT
+LCBYQVRUUl9BQ0xfREVGQVVMVCB9OworZW51bSB7IFhBVFRSX1VTRVIsIFhBVFRSX0NJRlNfQUNM
+LCBYQVRUUl9BQ0xfQUNDRVNTLCBYQVRUUl9BQ0xfREVGQVVMVCwKKwlYQVRUUl9DSUZTX05UU0Qg
+fTsKKworc3RhdGljIGludCBjaWZzX2F0dHJpYl9zZXQodW5zaWduZWQgaW50IHhpZCwgc3RydWN0
+IGNpZnNfdGNvbiAqcFRjb24sCisJCQkgICBzdHJ1Y3QgaW5vZGUgKmlub2RlLCBjaGFyICpmdWxs
+X3BhdGgsCisJCQkgICBjb25zdCB2b2lkICp2YWx1ZSwgc2l6ZV90IHNpemUpCit7CisJc3NpemVf
+dCByYyA9IC1FT1BOT1RTVVBQOworCV9fdTMyICpwYXR0cmliID0gKF9fdTMyICopdmFsdWU7CisJ
+X191MzIgYXR0cmliOworCUZJTEVfQkFTSUNfSU5GTyBpbmZvX2J1ZjsKKworCWlmICgodmFsdWUg
+PT0gTlVMTCkgfHwgKHNpemUgIT0gc2l6ZW9mKF9fdTMyKSkpCisJCXJldHVybiAtRVJBTkdFOwor
+CisJbWVtc2V0KCZpbmZvX2J1ZiwgMCwgc2l6ZW9mKGluZm9fYnVmKSk7CisJYXR0cmliID0gKnBh
+dHRyaWI7CisJaW5mb19idWYuQXR0cmlidXRlcyA9IGNwdV90b19sZTMyKGF0dHJpYik7CisJaWYg
+KHBUY29uLT5zZXMtPnNlcnZlci0+b3BzLT5zZXRfZmlsZV9pbmZvKQorCQlyYyA9IHBUY29uLT5z
+ZXMtPnNlcnZlci0+b3BzLT5zZXRfZmlsZV9pbmZvKGlub2RlLCBmdWxsX3BhdGgsCisJCQkJJmlu
+Zm9fYnVmLCB4aWQpOworCWlmIChyYyA9PSAwKQorCQlDSUZTX0koaW5vZGUpLT5jaWZzQXR0cnMg
+PSBhdHRyaWI7CisKKwlyZXR1cm4gcmM7Cit9CisKK3N0YXRpYyBpbnQgY2lmc19jcmVhdGlvbl90
+aW1lX3NldCh1bnNpZ25lZCBpbnQgeGlkLCBzdHJ1Y3QgY2lmc190Y29uICpwVGNvbiwKKwkJCQkg
+IHN0cnVjdCBpbm9kZSAqaW5vZGUsIGNoYXIgKmZ1bGxfcGF0aCwKKwkJCQkgIGNvbnN0IHZvaWQg
+KnZhbHVlLCBzaXplX3Qgc2l6ZSkKK3sKKwlzc2l6ZV90IHJjID0gLUVPUE5PVFNVUFA7CisJX191
+NjQgKnBjcmVhdGlvbl90aW1lID0gKF9fdTY0ICopdmFsdWU7CisJX191NjQgY3JlYXRpb25fdGlt
+ZTsKKwlGSUxFX0JBU0lDX0lORk8gaW5mb19idWY7CisKKwlpZiAoKHZhbHVlID09IE5VTEwpIHx8
+IChzaXplICE9IHNpemVvZihfX3U2NCkpKQorCQlyZXR1cm4gLUVSQU5HRTsKKworCW1lbXNldCgm
+aW5mb19idWYsIDAsIHNpemVvZihpbmZvX2J1ZikpOworCWNyZWF0aW9uX3RpbWUgPSAqcGNyZWF0
+aW9uX3RpbWU7CisJaW5mb19idWYuQ3JlYXRpb25UaW1lID0gY3B1X3RvX2xlNjQoY3JlYXRpb25f
+dGltZSk7CisJaWYgKHBUY29uLT5zZXMtPnNlcnZlci0+b3BzLT5zZXRfZmlsZV9pbmZvKQorCQly
+YyA9IHBUY29uLT5zZXMtPnNlcnZlci0+b3BzLT5zZXRfZmlsZV9pbmZvKGlub2RlLCBmdWxsX3Bh
+dGgsCisJCQkJJmluZm9fYnVmLCB4aWQpOworCWlmIChyYyA9PSAwKQorCQlDSUZTX0koaW5vZGUp
+LT5jcmVhdGV0aW1lID0gY3JlYXRpb25fdGltZTsKKworCXJldHVybiByYzsKK30KIAogc3RhdGlj
+IGludCBjaWZzX3hhdHRyX3NldChjb25zdCBzdHJ1Y3QgeGF0dHJfaGFuZGxlciAqaGFuZGxlciwK
+IAkJCSAgc3RydWN0IGRlbnRyeSAqZGVudHJ5LCBzdHJ1Y3QgaW5vZGUgKmlub2RlLApAQCAtODYs
+NiArMTM3LDIzIEBAIHN0YXRpYyBpbnQgY2lmc194YXR0cl9zZXQoY29uc3Qgc3RydWN0IHhhdHRy
+X2hhbmRsZXIgKmhhbmRsZXIsCiAKIAlzd2l0Y2ggKGhhbmRsZXItPmZsYWdzKSB7CiAJY2FzZSBY
+QVRUUl9VU0VSOgorCQljaWZzX2RiZyhGWUksICIlczpzZXR0aW5nIHVzZXIgeGF0dHIgJXNcbiIs
+IF9fZnVuY19fLCBuYW1lKTsKKwkJaWYgKChzdHJjbXAobmFtZSwgQ0lGU19YQVRUUl9BVFRSSUIp
+ID09IDApIHx8CisJCSAgICAoc3RyY21wKG5hbWUsIFNNQjNfWEFUVFJfQVRUUklCKSA9PSAwKSkg
+eworCQkJcmMgPSBjaWZzX2F0dHJpYl9zZXQoeGlkLCBwVGNvbiwgaW5vZGUsIGZ1bGxfcGF0aCwK
+KwkJCQkJdmFsdWUsIHNpemUpOworCQkJaWYgKHJjID09IDApIC8qIGZvcmNlIHJldmFsaWRhdGUg
+b2YgdGhlIGlub2RlICovCisJCQkJQ0lGU19JKGlub2RlKS0+dGltZSA9IDA7CisJCQlicmVhazsK
+KwkJfSBlbHNlIGlmICgoc3RyY21wKG5hbWUsIENJRlNfWEFUVFJfQ1JFQVRFVElNRSkgPT0gMCkg
+fHwKKwkJCSAgIChzdHJjbXAobmFtZSwgU01CM19YQVRUUl9DUkVBVEVUSU1FKSA9PSAwKSkgewor
+CQkJcmMgPSBjaWZzX2NyZWF0aW9uX3RpbWVfc2V0KHhpZCwgcFRjb24sIGlub2RlLAorCQkJCQlm
+dWxsX3BhdGgsIHZhbHVlLCBzaXplKTsKKwkJCWlmIChyYyA9PSAwKSAvKiBmb3JjZSByZXZhbGlk
+YXRlIG9mIHRoZSBpbm9kZSAqLworCQkJCUNJRlNfSShpbm9kZSktPnRpbWUgPSAwOworCQkJYnJl
+YWs7CisJCX0KKwogCQlpZiAoY2lmc19zYi0+bW50X2NpZnNfZmxhZ3MgJiBDSUZTX01PVU5UX05P
+X1hBVFRSKQogCQkJZ290byBvdXQ7CiAKQEAgLTk1LDcgKzE2Myw4IEBAIHN0YXRpYyBpbnQgY2lm
+c194YXR0cl9zZXQoY29uc3Qgc3RydWN0IHhhdHRyX2hhbmRsZXIgKmhhbmRsZXIsCiAJCQkJY2lm
+c19zYi0+bG9jYWxfbmxzLCBjaWZzX3NiKTsKIAkJYnJlYWs7CiAKLQljYXNlIFhBVFRSX0NJRlNf
+QUNMOiB7CisJY2FzZSBYQVRUUl9DSUZTX0FDTDoKKwljYXNlIFhBVFRSX0NJRlNfTlRTRDogewog
+CQlzdHJ1Y3QgY2lmc19udHNkICpwYWNsOwogCiAJCWlmICghdmFsdWUpCkBAIC0xMDYsMTIgKzE3
+NSwyNSBAQCBzdGF0aWMgaW50IGNpZnNfeGF0dHJfc2V0KGNvbnN0IHN0cnVjdCB4YXR0cl9oYW5k
+bGVyICpoYW5kbGVyLAogCQl9IGVsc2UgewogCQkJbWVtY3B5KHBhY2wsIHZhbHVlLCBzaXplKTsK
+IAkJCWlmICh2YWx1ZSAmJgotCQkJICAgIHBUY29uLT5zZXMtPnNlcnZlci0+b3BzLT5zZXRfYWNs
+KQotCQkJCXJjID0gcFRjb24tPnNlcy0+c2VydmVyLT5vcHMtPnNldF9hY2wocGFjbCwKLQkJCQkJ
+CXNpemUsIGlub2RlLAotCQkJCQkJZnVsbF9wYXRoLCBDSUZTX0FDTF9EQUNMKTsKLQkJCWVsc2UK
+KwkJCSAgICBwVGNvbi0+c2VzLT5zZXJ2ZXItPm9wcy0+c2V0X2FjbCkgeworCQkJCXJjID0gMDsK
+KwkJCQlpZiAoaGFuZGxlci0+ZmxhZ3MgPT0gWEFUVFJfQ0lGU19OVFNEKSB7CisJCQkJCS8qIHNl
+dCBvd25lciBhbmQgREFDTCAqLworCQkJCQlyYyA9IHBUY29uLT5zZXMtPnNlcnZlci0+b3BzLT5z
+ZXRfYWNsKAorCQkJCQkJCXBhY2wsIHNpemUsIGlub2RlLAorCQkJCQkJCWZ1bGxfcGF0aCwKKwkJ
+CQkJCQlDSUZTX0FDTF9PV05FUik7CisJCQkJfQorCQkJCWlmIChyYyA9PSAwKSB7CisJCQkJCS8q
+IHNldCBEQUNMICovCisJCQkJCXJjID0gcFRjb24tPnNlcy0+c2VydmVyLT5vcHMtPnNldF9hY2wo
+CisJCQkJCQkJcGFjbCwgc2l6ZSwgaW5vZGUsCisJCQkJCQkJZnVsbF9wYXRoLAorCQkJCQkJCUNJ
+RlNfQUNMX0RBQ0wpOworCQkJCX0KKwkJCX0gZWxzZSB7CiAJCQkJcmMgPSAtRU9QTk9UU1VQUDsK
+KwkJCX0KIAkJCWlmIChyYyA9PSAwKSAvKiBmb3JjZSByZXZhbGlkYXRlIG9mIHRoZSBpbm9kZSAq
+LwogCQkJCUNJRlNfSShpbm9kZSktPnRpbWUgPSAwOwogCQkJa2ZyZWUocGFjbCk7CkBAIC0xNzks
+NyArMjYxLDcgQEAgc3RhdGljIGludCBjaWZzX2NyZWF0aW9uX3RpbWVfZ2V0KHN0cnVjdCBkZW50
+cnkgKmRlbnRyeSwgc3RydWN0IGlub2RlICppbm9kZSwKIAkJCQkgIHZvaWQgKnZhbHVlLCBzaXpl
+X3Qgc2l6ZSkKIHsKIAlzc2l6ZV90IHJjOwotCV9fdTY0ICogcGNyZWF0ZXRpbWU7CisJX191NjQg
+KnBjcmVhdGV0aW1lOwogCiAJcmMgPSBjaWZzX3JldmFsaWRhdGVfZGVudHJ5X2F0dHIoZGVudHJ5
+KTsKIAlpZiAocmMpCkBAIC0yNDQsNyArMzI2LDkgQEAgc3RhdGljIGludCBjaWZzX3hhdHRyX2dl
+dChjb25zdCBzdHJ1Y3QgeGF0dHJfaGFuZGxlciAqaGFuZGxlciwKIAkJCQlmdWxsX3BhdGgsIG5h
+bWUsIHZhbHVlLCBzaXplLCBjaWZzX3NiKTsKIAkJYnJlYWs7CiAKLQljYXNlIFhBVFRSX0NJRlNf
+QUNMOiB7CisJY2FzZSBYQVRUUl9DSUZTX0FDTDoKKwljYXNlIFhBVFRSX0NJRlNfTlRTRDogewor
+CQkvKiB0aGUgd2hvbGUgbnRzZCBpcyBmZXRjaGVkIHJlZ2FyZGxlc3MgKi8KIAkJdTMyIGFjbGxl
+bjsKIAkJc3RydWN0IGNpZnNfbnRzZCAqcGFjbDsKIApAQCAtMzgyLDYgKzQ2NiwyNiBAQCBzdGF0
+aWMgY29uc3Qgc3RydWN0IHhhdHRyX2hhbmRsZXIgc21iM19hY2xfeGF0dHJfaGFuZGxlciA9IHsK
+IAkuc2V0ID0gY2lmc194YXR0cl9zZXQsCiB9OwogCitzdGF0aWMgY29uc3Qgc3RydWN0IHhhdHRy
+X2hhbmRsZXIgY2lmc19jaWZzX250c2RfeGF0dHJfaGFuZGxlciA9IHsKKwkubmFtZSA9IENJRlNf
+WEFUVFJfQ0lGU19OVFNELAorCS5mbGFncyA9IFhBVFRSX0NJRlNfTlRTRCwKKwkuZ2V0ID0gY2lm
+c194YXR0cl9nZXQsCisJLnNldCA9IGNpZnNfeGF0dHJfc2V0LAorfTsKKworLyoKKyAqIEFsdGhv
+dWdoIHRoaXMgaXMganVzdCBhbiBhbGlhcyBmb3IgdGhlIGFib3ZlLCBuZWVkIHRvIG1vdmUgYXdh
+eSBmcm9tCisgKiBjb25mdXNpbmcgdXNlcnMgYW5kIHVzaW5nIHRoZSAyMCB5ZWFyIG9sZCB0ZXJt
+ICdjaWZzJyB3aGVuIGl0IGlzIG5vCisgKiBsb25nZXIgc2VjdXJlIGFuZCB3YXMgcmVwbGFjZWQg
+YnkgU01CMi9TTUIzIGEgbG9uZyB0aW1lIGFnbywgYW5kCisgKiBTTUIzIGFuZCBsYXRlciBhcmUg
+aGlnaGx5IHNlY3VyZS4KKyAqLworc3RhdGljIGNvbnN0IHN0cnVjdCB4YXR0cl9oYW5kbGVyIHNt
+YjNfbnRzZF94YXR0cl9oYW5kbGVyID0geworCS5uYW1lID0gU01CM19YQVRUUl9DSUZTX05UU0Qs
+CisJLmZsYWdzID0gWEFUVFJfQ0lGU19OVFNELAorCS5nZXQgPSBjaWZzX3hhdHRyX2dldCwKKwku
+c2V0ID0gY2lmc194YXR0cl9zZXQsCit9OworCiBzdGF0aWMgY29uc3Qgc3RydWN0IHhhdHRyX2hh
+bmRsZXIgY2lmc19wb3NpeF9hY2xfYWNjZXNzX3hhdHRyX2hhbmRsZXIgPSB7CiAJLm5hbWUgPSBY
+QVRUUl9OQU1FX1BPU0lYX0FDTF9BQ0NFU1MsCiAJLmZsYWdzID0gWEFUVFJfQUNMX0FDQ0VTUywK
+QEAgLTQwMSw2ICs1MDUsOCBAQCBjb25zdCBzdHJ1Y3QgeGF0dHJfaGFuZGxlciAqY2lmc194YXR0
+cl9oYW5kbGVyc1tdID0gewogCSZjaWZzX29zMl94YXR0cl9oYW5kbGVyLAogCSZjaWZzX2NpZnNf
+YWNsX3hhdHRyX2hhbmRsZXIsCiAJJnNtYjNfYWNsX3hhdHRyX2hhbmRsZXIsIC8qIGFsaWFzIGZv
+ciBhYm92ZSBzaW5jZSBhdm9pZGluZyAiY2lmcyIgKi8KKwkmY2lmc19jaWZzX250c2RfeGF0dHJf
+aGFuZGxlciwKKwkmc21iM19udHNkX3hhdHRyX2hhbmRsZXIsIC8qIGFsaWFzIGZvciBhYm92ZSBz
+aW5jZSBhdm9pZGluZyAiY2lmcyIgKi8KIAkmY2lmc19wb3NpeF9hY2xfYWNjZXNzX3hhdHRyX2hh
+bmRsZXIsCiAJJmNpZnNfcG9zaXhfYWNsX2RlZmF1bHRfeGF0dHJfaGFuZGxlciwKIAlOVUxMCi0t
+IAoyLjI0LjEKCg==
+--0000000000001226ea059c4ca73d--
 
