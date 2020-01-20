@@ -2,58 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AEEF11404A2
-	for <lists+samba-technical@lfdr.de>; Fri, 17 Jan 2020 08:54:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 791CE14218C
+	for <lists+samba-technical@lfdr.de>; Mon, 20 Jan 2020 03:02:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Ewcmoyl+6W8TZGkDd/S2uQ2DNIJNVj7mIuv/mX9U2rw=; b=lnUauSiM/qiIoutVMjGLFeBLcW
-	e07I/gAFQSGLWdBf0EPAUr3XnBWmeGYYl0A3y6HExHGdJgzRky31UFlHvMA2NalSc7EPhI0o4Mj5G
-	VCcJ/nxZDDOr2b0FkDefH4YNy/ptDVjNhSofs3LV8D8jd0S83pL9givt8PiljHgUcyWlsrNX6ejKr
-	9vNikhHnUiPTp6mEtjTjqnvKGpDtydm8y8MjCr9nFdsPSQeF7beRN/7WHKIEs7eMDj1Hx0rq5Yu1X
-	g0XLKViE8w425QowOgEAwp7gZx2FCy5tMfkLFTGd58hTDVSkQsTMrVHL2TFVxTO/cAmAPjjt7ruFA
-	LVCYOkew==;
-Received: from localhost ([::1]:22686 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=IWKJOhsJLuY717lW5KfjFEIK6M2xXGxYw3KH74/Wuco=; b=vueGz9zNRFVHQexpwm9axFDMW9
+	cUrX41QYYzINM5JcFEIkwTo99lPLOKJ9gVlt9LE8UKF/KqFdAyqokmdurcchjLl/zKGAIHPNG4sLR
+	9dWMTuEONWK/ykEsnzivRFAOJEpUJILGTPY96YqndvEZ/j28C3EDAZg2K6HaYfexjDGr8bscNFwo4
+	lN0nLZA1En+84gBzJBuPo50F19vlwvI2oiJwOjmsyURRB3Ol0OaQmQCXKiXUrIvMaHimtWlzAqarQ
+	Tx7FkR/dI933OOn3FFNeJ5c/1wWp51gAvnGymJiQAYHvXnPb3k0mymI4cVeraNrbccCwpM9tZGUgn
+	uA7pPe1g==;
+Received: from localhost ([::1]:59450 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1isMRt-003jq7-Pe; Fri, 17 Jan 2020 07:53:45 +0000
-Received: from mail-il1-x141.google.com ([2607:f8b0:4864:20::141]:37092) 
+	id 1itMNP-003sf7-R6; Mon, 20 Jan 2020 02:01:15 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:57404) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1isMRm-003jq0-Ph
- for samba-technical@lists.samba.org; Fri, 17 Jan 2020 07:53:43 +0000
-Received: by mail-il1-x141.google.com with SMTP id t8so20584723iln.4
- for <samba-technical@lists.samba.org>; Thu, 16 Jan 2020 23:53:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Ewcmoyl+6W8TZGkDd/S2uQ2DNIJNVj7mIuv/mX9U2rw=;
- b=tC8YASmQVV85WcRMP7qiq+zbkH7k4UzmDanPJDpIyhVnmFg8WsNqNlbgpvrNxolEml
- dsAHC+covEKZmIy2JOMHcYF+nq/AHfDn2NtSnmIGb3NJ6bM+WNd4tuoAZx81Vb5nY8v4
- AqxvXgFuwDg2VU8aFuSYEmeJdldRCeNQMaR4tOYKL87vB4yZIB0/Maz+kTGr+yPh13Lw
- juE/jJWSmn2nX7tPlsLxSfSX9F5bHW1qacKlKxW5vuohcVrG7BCzkoOvKWi8OpPsYDUx
- xlx52akyKGSBEy+LII7ccOWLlkPw/geakJB2/D9UYqTNA1bNXB+FCncFO0zBqSHw9AzR
- +skA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Ewcmoyl+6W8TZGkDd/S2uQ2DNIJNVj7mIuv/mX9U2rw=;
- b=l20RRqa5E5wCJ2yBSVJ6dnQrvXktFo4NrqneHA23dFFzj/XRKpHvDgDWvTHVLUpQ37
- P0PasuAtchb5sBHSfPlrdKAmIW8a2YtBQx8T0y2KyFmGFaDyGfrM/qYstNXanK68IpBM
- d33XCVsrwvQ3d44hjhPGvrLqMtMUELdJN/oO6JjW2njCRW5mBjt1xx5QfiJxY1KPcoBw
- PKoB4NXy7oZ0REJdKR3w02VP9zztORga8y+nkeSfKeW3BbYWbe1HV1FQZ3y1wYwHdWPP
- ZeCFAst5jlfHg4BSAmp4jfokiTXc6XY0e3EeMbn+LNyCYbEW16jdw8DLz8Sz6SkeQonq
- BQ/A==
-X-Gm-Message-State: APjAAAVurgrWygo1xuf9ilnbMahJEqSan3tmA2nHvtrjaHjrHwFJbQEc
- LErp5BDio1c2eNj4++oxs5iDuqXU8igYR3ekD0Q=
-X-Google-Smtp-Source: APXvYqyJIO6p9W3sIvKgsnI9yM8+QC0mVX+Kx5GTkRRst1rZ6CJocMjvHEfBFMhU3gZEpc++9iMJgmfzVWEplNZ1+6s=
-X-Received: by 2002:a92:9a90:: with SMTP id c16mr1971623ill.3.1579247617119;
- Thu, 16 Jan 2020 23:53:37 -0800 (PST)
+ (Exim) id 1itMNC-003sez-41
+ for samba-technical@lists.samba.org; Mon, 20 Jan 2020 02:01:11 +0000
+Received: from [192.168.1.110] (unknown [114.23.142.188])
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id A594880F2F; 
+ Mon, 20 Jan 2020 15:00:48 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1579485649;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=IWKJOhsJLuY717lW5KfjFEIK6M2xXGxYw3KH74/Wuco=;
+ b=wvwmf0WU4hlEaSzgsFgfG90pL0YYvFuX4bgtWQ9V7GM5aw3JP8HB99TjpNClHo9TJGcxN5
+ +K61pKD5fk9ROub73HpSg2T02mGELsEmWrGOzlN6oHXiOA546bhAZ03lmv2fFUjpO2YLiU
+ 6EFKN/Po/ukrvS+SAcSXOTI3/IcKp4T6mqlrCchpLY/1P/vTNgZrSMc23h6TXja2ugDnUq
+ d7zbXYpoOqCAC3/RR2qZVhf0DRG/n+DwvP8nOAnhohrsBgGjbDNdF90/TwSJ61MjevR2j0
+ ALlemIyyWdEOy0p5bGgCSCO33Mv2QIoj8OFz5xstkAn7ItLUUipYJBtRo9l16g==
+Subject: Re: fuzzers
+To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+References: <2546695.cijFyKqbAK@magrathea>
+Message-ID: <0f82d428-6115-a26a-dfd1-02e79e573c8a@catalyst.net.nz>
+Date: Mon, 20 Jan 2020 15:00:47 +1300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.3.0
 MIME-Version: 1.0
-References: <20200117025717.58636-1-yuehaibing@huawei.com>
-In-Reply-To: <20200117025717.58636-1-yuehaibing@huawei.com>
-Date: Fri, 17 Jan 2020 01:53:26 -0600
-Message-ID: <CAH2r5ms=s_c5YOPfXdTE-ee6LX_Quq9_Oao4p_k0b59fDNemWQ@mail.gmail.com>
-Subject: Re: [PATCH -next] cifs: remove set but not used variable 'server'
-To: YueHaibing <yuehaibing@huawei.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <2546695.cijFyKqbAK@magrathea>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=douglasb@catalyst.net.nz
+ smtp.mailfrom=douglas.bagnall@catalyst.net.nz
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,59 +63,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Ronnie Sahlberg <lsahlber@redhat.com>,
- Steve French <sfrench@samba.org>, Pavel Shilovskiy <pshilov@microsoft.com>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+On 16/01/20 10:58 pm, Andreas Schneider via samba-technical wrote:
+> 
+> However before we add *more* fuzzers, it might be a good idea to first fix the 
+> bugs found by the fuzzers ;-)
+> 
 
-On Thu, Jan 16, 2020 at 10:01 PM YueHaibing <yuehaibing@huawei.com> wrote:
->
-> fs/cifs/smb2pdu.c: In function 'SMB2_query_directory':
-> fs/cifs/smb2pdu.c:4444:26: warning:
->  variable 'server' set but not used [-Wunused-but-set-variable]
->   struct TCP_Server_Info *server;
->
-> It is not used, so remove it.
->
-> Reported-by: Hulk Robot <hulkci@huawei.com>
-> Signed-off-by: YueHaibing <yuehaibing@huawei.com>
-> ---
->  fs/cifs/smb2pdu.c | 5 +----
->  1 file changed, 1 insertion(+), 4 deletions(-)
->
-> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
-> index a23ca3d..64d5a36 100644
-> --- a/fs/cifs/smb2pdu.c
-> +++ b/fs/cifs/smb2pdu.c
-> @@ -4441,13 +4441,10 @@ SMB2_query_directory(const unsigned int xid, struct cifs_tcon *tcon,
->         int resp_buftype = CIFS_NO_BUFFER;
->         struct kvec rsp_iov;
->         int rc = 0;
-> -       struct TCP_Server_Info *server;
->         struct cifs_ses *ses = tcon->ses;
->         int flags = 0;
->
-> -       if (ses && (ses->server))
-> -               server = ses->server;
-> -       else
-> +       if (!ses || !(ses->server))
->                 return -EIO;
->
->         if (smb3_encryption_required(tcon))
-> --
-> 2.7.4
->
->
+Should we adopt a convention similar to our BUG: links?
+That is, add lines like this in our commits:
 
+OSS-Fuzz: https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=19395
 
--- 
-Thanks,
+Obviously this doesn't have the significance of BUG: in our release
+process, but with our tools and discussions wandering out over more and
+more systems, habitual cross-referencing seems sensible.
 
-Steve
+The oss-fuzz links will initially be private, automatically lapsing into
+the public 30 days after the fix or 90 days after the discovery, whichever
+comes first.
+
+(Also, they ask that we add the words "credit to OSS-Fuzz").
+
+Douglas
 
