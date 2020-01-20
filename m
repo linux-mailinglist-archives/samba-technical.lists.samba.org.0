@@ -2,58 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F8E2142264
-	for <lists+samba-technical@lfdr.de>; Mon, 20 Jan 2020 05:32:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7E4A142D84
+	for <lists+samba-technical@lfdr.de>; Mon, 20 Jan 2020 15:28:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=xtNvPkHQ9HB3s32pv6NxTrVxG8rlEPe4v1ldntNKR9Q=; b=4+pkqoeyh5iiDI3VnmeOpbav0G
-	E1IN+kpMlo/AP4Ij+8G+xShC24n9eH/GRWv6/Jhdo8mLmbgQIxc+dULSMfohL1vVsKgXNnAsHlCnx
-	cH5hnekQFbHRpkoncxJ9uMaiShSvXh8F+JBkkaTkeK4O/10bsPmk7kn3ydsEe6695r95YT5Je6r3Z
-	1t4Pe7H9Q7HsRKGMR9bS/IzD038HzIRYrjbFVBprRQsp9oj26ifPugJB3htOBgj+QYE5U2AVPeWyz
-	OHUMTUchA0404nvu5WKACVewBo/NOmTgqG2BpFsWVMvwYJFcXpiJ9EaELeFmE52q9U3wWBuYU/Dfz
-	cb4mRL5g==;
-Received: from localhost ([::1]:60358 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=quxo4FKc9i67fqlm1KPQGWY1Ds8Axy5hdw93lYnygxE=; b=45/WdD+F7pD4aOXHokH4lAkBuf
+	JnWk24HzS12RGTdAYiWtlYDaPtVtgFbT50G8xBIUSVhGU+x6fNgzz1D0aR4R9pTiikIec7OZ5uaX1
+	pW4UYcTQkf77tPmxwOH9fcxJQczkoiqtSuQ+I2DJh4uGVaMxvpGmCU//BNKzTGAvy3IVCL0L7hOuf
+	PtRj/1kvMhabOakD80cSdt+D6tr6BWLxBZk7Lsrn49OCLuMUG/xue0yh0OUSkOtS76FvWyfnQlDbj
+	KV6bnq1YsSZHe6bEcEqtkI/SplegVHZ6DsYxc8jJ7N642dtCjT8hpGaZOHQ68GAKiKGJK4vMjZ04Y
+	oDVBP2KA==;
+Received: from localhost ([::1]:20076 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1itOjD-003st5-U9; Mon, 20 Jan 2020 04:31:55 +0000
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332]:39285) 
+	id 1itY0y-003uhL-28; Mon, 20 Jan 2020 14:26:52 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58116) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1itOj9-003ssy-KP
- for samba-technical@lists.samba.org; Mon, 20 Jan 2020 04:31:53 +0000
-Received: by mail-wm1-x332.google.com with SMTP id 20so13282913wmj.4
- for <samba-technical@lists.samba.org>; Sun, 19 Jan 2020 20:31:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to
- :content-transfer-encoding;
- bh=xtNvPkHQ9HB3s32pv6NxTrVxG8rlEPe4v1ldntNKR9Q=;
- b=fvOkxjjnop0HkxbkkuNFJaN/bJrRm65O7pH0jGUB0BOv90sWOKy3+9pdWbar17d3HW
- 0sXPzRSn+asH1wShhZFFcox0jRwlJEcBrO4uPlaIWr2Z0SAwwKMTgEP8Xs7L49MViS1P
- DAsppLiuKsldWhhAJ5c6ENF55sQ+ogoUlzLfHv+Q7hN1k6fVFEXcBrFi1TodQME2MkoI
- YsGiK8F9F/M4gc30TcSGCEROWdr91AC8wF44FdQGAyn51C9OCAUVr0S7sv/vOC241XUu
- vWEmF8WH4xKGfpRrKOmxbiQbmBl+SDsm/xBbGX8mG/ThsQtrHSNv111rlwD/9IlCyHQZ
- Arng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to
- :content-transfer-encoding;
- bh=xtNvPkHQ9HB3s32pv6NxTrVxG8rlEPe4v1ldntNKR9Q=;
- b=LhznlFmX8cnaxONW6OcGBrhnoWNUb3qW2z0r9MTUs4Z8PQxsshhXjkYIx8pRfPuk31
- La9QULYuQAbIPTv2EdLwjTrN4ytNi2QTRxUw84M8e3Kk/dZtRsb1m8nRbOlUPq13mdvd
- uwKqagp+A4i6kQsvfWLtm03BhiwzoavD3IdE3gCgGtRMcygebD7f+2tmiIZq7blG+WU2
- 8FyjzNnu4TsfMkmuGaG03OMm+nVw84oI8lZedJdjiv8unScYGoijy1Gnw721C7bO2M+w
- mZ6rMRYwZQAv/vcaMmJcflQdUVr4FWoKtbD6fiuJ8JCkxA/4J/QgE+akPax52WhbIVkb
- e2UA==
-X-Gm-Message-State: APjAAAWdZ5ZYQxfpfq5gjTglqgmXCj2Iygx+FFPSIptJPJWY71TfB2Qh
- j7hMHAA8SerCh9Bu+lI6j6F5erUYCbmt6adPScyO4g==
-X-Google-Smtp-Source: APXvYqwyp67P5TnTyctz87WnQ1coldxA7RinjblpvYsNLR2H/j4TVl6cMbr8YB7ZhDEaxOS4tF9Ag26UzTv1zUCf600=
-X-Received: by 2002:a1c:a78c:: with SMTP id q134mr16915865wme.98.1579494709860; 
- Sun, 19 Jan 2020 20:31:49 -0800 (PST)
+ (Exim) id 1itY0q-003uhD-AH
+ for samba-technical@lists.samba.org; Mon, 20 Jan 2020 14:26:50 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=quxo4FKc9i67fqlm1KPQGWY1Ds8Axy5hdw93lYnygxE=; b=vCBZDkqtGHpmrlR8ugPSq6AMHw
+ 1X2AR8S7jv3XWyaFrM5XyFuxlN6FSiSefKBJd9TkRdua+uxoc0JR5Z2sSO2zHZBFJNMhlPg/mOV6A
+ Nk0fKwo8qC/qyFkvuIY4liFUpbRq2kFO0uiGhpbfcf46xMHu4xI2sPtUX7zOdBPhIX7rK92UDJgB7
+ jfeS0cW3JfTYroQKVGBYuLX3xcNUPWpfgVedV7evSDaqq8wZja4qE5s6sEKYJOfZlsaDm4745PuLt
+ ivJOQHRDT+3GyeFZTBoMy67DXMlo2Z0nGNJoZHDSUiRuzqSuh0PNxe3+H/dW+gRTymANqKBn8H746
+ BGaCO0ihaJfJuwC616+MTG3jgifwU/Akt0LIO0tiNdl0EL6CIEACY8yHo6uPgXRalBog4QRbiolkV
+ Me3T5e3U7i1ow2e1QX+Y792GgeVkjnn1uEOiCBsScM6SiJgxP77I/SC4VroYWwjssN+Wiux0+fT0E
+ TlCfqGsKFvIrJRjgURbxvA/a;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1itY0n-0007tL-Ne; Mon, 20 Jan 2020 14:26:41 +0000
+To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+Subject: Re: fuzzers
+Date: Mon, 20 Jan 2020 15:26:40 +0100
+Message-ID: <5581293.AJOmeAHnFV@krikkit>
+In-Reply-To: <0f82d428-6115-a26a-dfd1-02e79e573c8a@catalyst.net.nz>
+References: <2546695.cijFyKqbAK@magrathea>
+ <0f82d428-6115-a26a-dfd1-02e79e573c8a@catalyst.net.nz>
 MIME-Version: 1.0
-Date: Sun, 19 Jan 2020 20:29:19 -0800
-Message-ID: <CACyXjPy3DwDAX9gDZT6FuqWLGMg_yKFObcZcNBfeXX_JtfqyCA@mail.gmail.com>
-Subject: Weird Windows Server 2012 behavior with compound requests
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,48 +55,28 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi folks,
+On Monday, 20 January 2020 03:00:47 CET Douglas Bagnall wrote:
+> On 16/01/20 10:58 pm, Andreas Schneider via samba-technical wrote:
+> > However before we add *more* fuzzers, it might be a good idea to first fix
+> > the bugs found by the fuzzers ;-)
+> 
+> Should we adopt a convention similar to our BUG: links?
+> That is, add lines like this in our commits:
+> 
+> OSS-Fuzz: https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=19395
 
-I am seeing what looks like weird behavior with Windows Server 2012.
+:+1:
 
-I am sending it a long series of compound request with:
 
-1. CREATE <some-file> with OPEN for backup intent, READ CONTROL.
-2. GET INFO for the SD.
-3. CLOSE.
+:-)
 
-Early on the server give me lots of credits (around 35) but eventually
-it scales that back to just three credits per request.
+	Andreas
 
-I never send a request unless I have credits, I believe.
 
-Every now and then the server fails all of the requests in the
-compound with ACCESS_DENIED (which seems wrong, because I would only
-expect the CREATE to get ACCESS_DENIED and the other two to get
-FILE_ALREADY_CLOSED or some such.)
-
-If I restart the operation where it left off, everything runs to completion=
-.
-
-I must admit that I was doing reboot testing where I reboot the
-Windows server to ensure that the whole operation picked up where it
-left off. I have ~40,000 files in my test set, and if I don't do any
-reboots, it runs to completion.
-
-However, if I throw a couple of reboots into the mix I see the above behavi=
-or.
-
-Has anyone seen this sort of behavior. Is there anything I should look for?
-
---=20
-Regards,
-Richard Sharpe
-(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
-=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
-=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
 
