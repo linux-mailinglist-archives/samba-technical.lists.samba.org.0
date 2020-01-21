@@ -2,48 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A6C4143957
+	by mail.lfdr.de (Postfix) with ESMTPS id 66612143958
 	for <lists+samba-technical@lfdr.de>; Tue, 21 Jan 2020 10:19:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=Mvmkap3PzF1g+EiyziwrWTp7xKlOYjVcoltHVh1DxHw=; b=3Fc1GPByIW2LGaGUPP6aNX/Ugs
-	DfekWdr1l8n0ZiycQfmbt5H9sWsqTYHcd5uvrf+97Lg31S/M9KjnafOvJJdNbMx5dwvhDy6cPmz02
-	Q7sEx8nEtu6se1IrbTkepyT1v/xtoi9KxDonckdMqDe6qpHR8a3XUfrU8O1+1f9LFnJ8GZffKVZ9T
-	bWOppRlu9BYvIHrToZ489lxCZO0mZ508ueCOeZhzD9l5uhjiKGz2n+adMGVrkKxeTx8596wYZbt23
-	K6PxRkly+U/JZ3X35UQdQ22z1Mwy1XjGp+FIkv8evxzZhupZl/bg15ywgKlhwqAxE4wbCFXC5brRn
-	zFAdq8UQ==;
-Received: from localhost ([::1]:48356 helo=hr1.samba.org) 
+	bh=XWoGU9YSUMueOueNtZ/FYPnBfHZdgJXiGKWZCV/sVU0=; b=R+eTcQbsz3zPLbrSk13zfZFDS8
+	omPsIgoxvUh4CLv1h8Tm7/UOIbDIegmeYW+T4KDUXeWr7j9REcsbmpEtHe1Pdt+5uoqf5+dzQim1I
+	sLuefGxjcgnOXGnwfp/YyECSMOTs8DqWsnQBQeTiJNH93W858orzeM9lYAR5iwMsJ4mVWpEesS4bF
+	F/9dx+tL+eP1bTxnYUOSz0WGch5IzvYaC8ey+EMVDgOLUhwVw8xSyYvl3WiNU9vJ4Gypwr11j58MN
+	EN3sYXKh6+aPyg0zI+DdLDO4+zVoKnggUNHB21LmmY/D/wj4F3D9iddftCnlBDAhFv1IwoC0UNekX
+	ItndcT0A==;
+Received: from localhost ([::1]:48434 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1itpgS-003zV9-7k; Tue, 21 Jan 2020 09:18:52 +0000
+	id 1itpgY-003zVw-K7; Tue, 21 Jan 2020 09:18:58 +0000
 Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38532) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1itpgK-003zUx-NV
- for samba-technical@lists.samba.org; Tue, 21 Jan 2020 09:18:50 +0000
+ (Exim) id 1itpgS-003zUx-Er
+ for samba-technical@lists.samba.org; Tue, 21 Jan 2020 09:18:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-Id:Date:From:To:CC;
- bh=zKp5u4tkGPeo04Y1AELh0DjVaFuhqlr7O/DKDmD87Pg=; b=Q5I1jpTVTByx+ylmLIja6XrzDB
- DODOvJgdta4XopWwRNiGmeiqy4mDiC8+XLpkEHqJXGIlkAtwTOA5XNv0Uq8sAuLwqvL1tcvXkl7V1
- j1p9C0g0boUO8xHJnpBGTKTIitfAnkcYF4iyra4peNtfY4ZofWMKNtU/gTni1PiEUb/Lxwm9fGjYV
- Mmpf/2Yp/f34LKn6CBJapHQNn6WImrK7OwvFFFjKEwpy28NyhfLkETlIBDMhtFJWSKpwISaTyInLU
- UQFHK6t2ZFHmZluvUKs4+LvwjtcTwMIg9pXTx9tlIlAw+fVCRC2FV6Sl1NTDK4M7uQ/02f+ng+UuM
- iAi54DeV6EtvbUKhKHiExIQqwhobKokXbVtxcR//r3Y0f08pnr7zVN56xvL6wwnB2jKapmUy8+/eV
- yWTnQLi59tD1sS3ziiI1nWYcOwuW5wf1xiCvrSlBF7Hjn6+C5E9T4ohnbK7LMb/Na2hzstM1Eaz2e
- DxVn3+WQipuKvf9IX0DCiBr8;
+ bh=9DdJ1TC8t2t6OkRpalqfGbkeJDCPm/fLUXfMaFAWf5M=; b=nMJVwQsKe5A00Jer30Z0KQEuM5
+ CDl9idoU+3JlNrRI8RFM1q02Bb17d54sxQnWPIINSyD4mhLB6d+POUbb8PN06Nnvc0p9eG1VBKSo9
+ puoe1if5B7NMPGYIXSSyCbjajSoJ3uQIWAdHQ5GxfjwrxFW7XXK1OJ3xwTAf0f1FAtlORvrtTBEBC
+ rFKSbPC8cszdhubVmusodvUoU3NMAm2k9kVpEcmj1tla2L1LdwlvZez1yLolPdDe8ZaJnJbJd72le
+ W6CFhjXGhn4++uPA4Kr90PODYrDIoy9JTzGUm2q8XIjVk7zNQJ3iauODvMbiIZOpQVUohYhs14qED
+ +H+UDJd/KzavMkMp5tLW2MUyqFtUvziC0uGa2S/vmpB6Ry2Kask+eqkWYhtGJETAatO3Ubnbutxg5
+ kNClDJP8RfPOE+DIJA8sKSWwUKivvhZWOnkgjTWNxeIlHW9IHUqKkX4zeN6Pe6GrA6lJlB0VUVFYl
+ IA3vzlwVj0o8qn304ueDstGW;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1itpgK-0007vb-6c
+ (Exim) id 1itpgK-0007vj-Gc
  for samba-technical@lists.samba.org; Tue, 21 Jan 2020 09:18:44 +0000
 Received: from localhost ([::1] helo=hr3.samba.org)
  by hr3.samba.org with esmtp (Exim 4.92)
- (envelope-from <github@samba.org>) id 1itpgK-00GEiW-0a
+ (envelope-from <github@samba.org>) id 1itpgK-00GEiZ-Dn
  for samba-technical@lists.samba.org; Tue, 21 Jan 2020 09:18:44 +0000
 MIME-Version: 1.0
-Subject: Re: Update gpo.py
+Subject: Re: [PR PATCH] [Closed]: Update gpo.py
 To: samba-technical@lists.samba.org
 In-Reply-To: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-123@samba.org>
 References: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-123@samba.org>
 Date: Tue, 21 Jan 2020 09:18:44 +0000
-Message-Id: <E1itpgK-00GEiW-0a@hr3.samba.org>
+Message-Id: <E1itpgK-00GEiZ-Dn@hr3.samba.org>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
@@ -66,7 +66,8 @@ Cc: github@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-TmV3IGNvbW1lbnQgYnkgbGF1c3NlciBvbiBTYW1iYSBHaXRodWIgcmVwb3NpdG9yeQoKaHR0cHM6
-Ly9naXRodWIuY29tL3NhbWJhLXRlYW0vc2FtYmEvcHVsbC8xMjMjaXNzdWVjb21tZW50LTU3NjU5
-MDQwMQpDb21tZW50OgpPaCwgc3VycHJpc2UhIEkgaGFkIGZvcmdvdHRlbiB0byByZXNwb25kIDot
-KQo=
+VGhlcmUncyBhIGNsb3NlZCBwdWxsIHJlcXVlc3Qgb24gdGhlIFNhbWJhIFNhbWJhIEdpdGh1YiBy
+ZXBvc2l0b3J5CgpVcGRhdGUgZ3BvLnB5Cmh0dHBzOi8vZ2l0aHViLmNvbS9zYW1iYS10ZWFtL3Nh
+bWJhL3B1bGwvMTIzCkRlc2NyaXB0aW9uOiBUaGlzIGlmIHdpbGwgYWx3YXlzIGZhaWwgYmVjYXVz
+ZSB0aGUgc3RyaW5nIGNhbid0IHN0YXJ0IHdpdGggXFxcXCBhbmQgLy8gYXQgdGhlIHNhbWUgdGlt
+ZQo=
