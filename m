@@ -2,61 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 770DD1439B8
-	for <lists+samba-technical@lfdr.de>; Tue, 21 Jan 2020 10:43:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2CEF9143A14
+	for <lists+samba-technical@lfdr.de>; Tue, 21 Jan 2020 10:57:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=rSC80w1hqN7I9WREwEfl+koEvmU+Z7Kf4VwNXG3N+/I=; b=IlXs9WhHl2XwpIBqDwPpRkzupF
-	o++syGhIAo+C4n8eRZlhaUfjPgP0XUdwFhx1LA+D+T7YkNSrOYZJXXMep/GndB39fLDaDLqlomGqJ
-	/BCUmPQ+ri4bT7xaMrL7Kyj7rGwWY/e4KBeHXfgd7fGSPlzd+uEpSmZDyqX8kntu8QsRiW5emYPW0
-	lfmAkQRRnzeqxh/UPrQvGmXw5tpY01UbHH3r+Lw65IFBXDZFUpIndysw95EIKz1AlUmkfhXsCj0SV
-	gnNr6m/7On+VO1EFeczMIfMCl37ddJvPCrzWgYRsMdrVk3UaSNxiYsetoPK558a4bOBepeBtkKjAv
-	wNFNBXrQ==;
-Received: from localhost ([::1]:49984 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=A1/zmSI3OtDuEQo/Qreg2J3U9lOsvTXeNNo5AOlCQH0=; b=LKvmo6uu62T4GGuHbWBm22NMhp
+	lDTUoqRl7LowaeHTvQNcdZX66Q6WHYcij7Dondir0EzAVyHN22urMOeoDwA6+mM4RwzYmkMxLMTwa
+	eUhzUmnrEmQSKTubSS7g2wBxsKN+grA8A/SZVrPZ0o0wgwggnZZK4tK/bSFVmPA/nWa6KiS30wv1o
+	BSLlJt2H77yVdjgtc7Ia74jl0lInCektHJW0BPxmD+jqnS8ZCwgjVzp3Wd3bZ9t3woxn0IZyWHcV6
+	gY6qAFPxbnfvzASBUBKoRXvdeIsoNRCo6vz4GooCflLpvH6A6034ZSVNiFJSBlEv1x4kpyaXYCuFf
+	YqKX5IJw==;
+Received: from localhost ([::1]:50748 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1itq4A-003zku-SR; Tue, 21 Jan 2020 09:43:22 +0000
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:45943) 
+	id 1itqHJ-003ztU-2C; Tue, 21 Jan 2020 09:56:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58806) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1itq46-003zkn-7z
- for samba-technical@lists.samba.org; Tue, 21 Jan 2020 09:43:20 +0000
-Received: by mail-io1-xd44.google.com with SMTP id i11so2122599ioi.12
- for <samba-technical@lists.samba.org>; Tue, 21 Jan 2020 01:43:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=rSC80w1hqN7I9WREwEfl+koEvmU+Z7Kf4VwNXG3N+/I=;
- b=iDhWr5DHulz2CjWIl8UqyGsfO41PP0v73orZ/uai7miM82+1XtTvcibof1v+wK9bBP
- hQVdNCdkXPXZsOsJj4pScBZoswTrzpnKzTTkhr3TewxaGxbfNspR5HDYGjRhtKfaNhrf
- K41KxmOKXz8LCI+qrHqkVId+gCHH7TXkKZIHWaYrr/WTykCarUHwXgcZNQUimBEHk/1C
- eE9/RiX8+2JY8NMkul1WXNwD670pE6n/O/pjOGSLpeaJc2VuX40VPdfmTePtioCynHdw
- xFGITUoqM4LagiBBPu79msqCSow4sSJTs9sjH7xyXrGT1Yg0EQyYFwpW33tIMd8pcx6B
- CvdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=rSC80w1hqN7I9WREwEfl+koEvmU+Z7Kf4VwNXG3N+/I=;
- b=sUA816+Rv9R4zkES2egGorZUdvvh4AyffBw2lQB+IB5JFX83e1luFw8lOm36AMFQEZ
- lyijQYyuNY+ar1738IBM/p+jTFnF3fdzDP55E6d77+bpvHWhFPe+cN6zpEzwtUoGHETz
- rcsF4JsLim/1FSk1Lp1h2Xagji3fVOS4kHsYqctyX6MBeOgcmYS6heiQVOxApOfCRQh3
- +L9R5Jn4pWzvt5g6kOkcIs7KC9sJxA02D3y3KY4UxOCmU3ymTqyHykebf0R0/CuyJA8N
- 8MzVnMzgLzgZunxanKmK/Qz6LTtLpX+LZ9I35Fs4edOiurG7ymxz8p30k/zyLvj7q8FZ
- f+qA==
-X-Gm-Message-State: APjAAAV9ig1CFC6Odu2GwEuL2H9DNOWIPuQBnyq+bv6/3N7YT4vFYG8C
- ywfCwNVir1bTjkFNqJX6JlzbsLxBGAS1jo+4aas=
-X-Google-Smtp-Source: APXvYqyC3Q2o+FEXJZs0Ii3xtV0ucBq9A76dblPtJcymujCucsXIJDoVrpoFepmICsakC+pFR+N+rX0JwR8T6ovFrrQ=
-X-Received: by 2002:a6b:f214:: with SMTP id q20mr2520410ioh.137.1579599796371; 
- Tue, 21 Jan 2020 01:43:16 -0800 (PST)
+ (Exim) id 1itqHA-003zsm-K4; Tue, 21 Jan 2020 09:56:51 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=A1/zmSI3OtDuEQo/Qreg2J3U9lOsvTXeNNo5AOlCQH0=; b=XhZ8ah7Zo1vGU9pw3RFV2Vl4ZJ
+ YJxs7VHCxCmBFUvYxyYkUDIJCSxxd5wIPP37BUJZQY7Imhg5A1YzABx1gd+pw8XQgJefKZQm9BP1L
+ rQw+SqXnDr1SQVK7y1Z3TOg6s8feDA2TJlNK3f75Vt+/WspomcG0bZ7Z8xlGJeyfNuYC+MZz7SHlV
+ eHY47VWnqUzHoECHa027N67S16TsbSySc+7vQTOL14sqdStscXWtUwN91/rFlr53hPf1FY9FGSXvV
+ j0ULZv9n8aQce5mStSU9x/OabLboPN/CFONesMENdUhpitzxsVzRZ8BvbRFUvtpSx/pMAp8Im6YgI
+ iNYEubH7IhbjT7DX5XIPuwFlrG2bjh3SybMNa42aLb2hHjfUtAiBbOQOKn6oiiL/GZH8yvwDkeopO
+ dWrSjwcBzvphxn55nSHfgV84hNmaY83Yt0+SqBLy+Yu0hw9FfaLvFholzPzR8fh9PE58UE1Uq13nd
+ nsPvpWZp7RT1MCKjj6fWGxj+;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1itqHA-00007M-3u; Tue, 21 Jan 2020 09:56:48 +0000
+Date: Tue, 21 Jan 2020 10:56:45 +0100
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.11.5, 4.10.12 and 4.9.18 Security Releases
+ Available
+Message-ID: <20200121095643.GA8032@carrie2>
 MIME-Version: 1.0
-References: <CAH2r5mvUmZca8TRVsyZvrB_Loeeo4Kd8T7rHw5s6iaN=yC+O_Q@mail.gmail.com>
- <CAOQ4uxipauh1UXHSFt=WsiaDexqecjm4eDkVfnQXN8eYofdg2A@mail.gmail.com>
- <CAN05THQeUs1ksOv5sRTx7Dvr0=WKxSguw+gWpw2KpX3byEJagw@mail.gmail.com>
-In-Reply-To: <CAN05THQeUs1ksOv5sRTx7Dvr0=WKxSguw+gWpw2KpX3byEJagw@mail.gmail.com>
-Date: Tue, 21 Jan 2020 11:43:05 +0200
-Message-ID: <CAOQ4uxgNEoO-NHb9V=Nqho5dBz2U034Q6wa_Gw=sKmYj2uUJMQ@mail.gmail.com>
-Subject: Re: [LFS/MM TOPIC] Enabling file and directory change notification
- for network and cluster file systems
-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="4Ckj6UjgE2iN1+kY"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,82 +55,131 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Amir Goldstein via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Amir Goldstein <amir73il@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Jan Kara <jack@suse.cz>,
- Miklos Szeredi <miklos@szeredi.hu>,
- samba-technical <samba-technical@lists.samba.org>,
- Steve French <smfrench@gmail.com>,
- linux-fsdevel <linux-fsdevel@vger.kernel.org>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Jan 21, 2020 at 10:30 AM ronnie sahlberg
-<ronniesahlberg@gmail.com> wrote:
->
-> On Tue, Jan 21, 2020 at 5:48 PM Amir Goldstein <amir73il@gmail.com> wrote:
-> >
-> > On Tue, Jan 21, 2020 at 5:55 AM Steve French <smfrench@gmail.com> wrote:
-> > >
-> > > Currently the inotify interface in the kernel can only be used for
-> > > local file systems (unlike the previous change notify API used years
-> > > ago, and the change notify interface in Windows and other OS which is
-> > > primarily of interest for network file systems).
-> > >
-> > > I wanted to discuss the VFS changes needed to allow inotify requests
-> > > to be passed into file systems so network and cluster file systems (as
-> > > an example in the SMB3 case this simply means sending a
-> > > SMB3_CHANGE_NOTIFY request to the server, whether Samba or Cloud
-> > > (Azure) or Mac or Windows or Network Appliance - all support the API
-> > > on the server side, the problem is that the network or cluster fs
-> > > client isn't told about the request to wait on the inotify event).
-> > > Although user space tools can use file system specific ioctls to wait
-> > > on events, it is obviously preferable to allow network and cluster
-> > > file systems to wait on events using the calls which current Linux
-> > > GUIs use.
-> > >
-> > > This would allow gnome file manager GUI for example to be
-> > > automatically updated when a file is added to an open directory window
-> > > from another remote client.
-> > >
-> > > It would also fix the embarrassing problem noted in the inotify man page:
-> > >
-> > > "Inotify  reports  only events that a user-space program triggers
-> > > through the filesystem
-> > >        API.  As a result, it does not catch remote events that occur
-> > > on  network  filesystems."
-> > >
-> > > but that is precisely the types of notifications that are most useful
-> > > ... users often are aware of updates to local directories from the
-> > > same system, but ... automatic notifications that allow GUIs to be
-> > > updated on changes from **other** clients is of more value (and this
-> > > is exactly what the equivalent API allows on other OS).
-> > >
-> > > The changes to the Linux VFS are small.
-> > >
-> > >
-> >
-> > Miklos has already posted an RFC patch:
-> > https://lore.kernel.org/linux-fsdevel/20190507085707.GD30899@veci.piliscsaba.redhat.com/
-> >
-> > Did you try it?
-> >
-> > You also did not answer Miklos' question:
-> > does the smb protocol support whole filesystem (or subtree) notifications?
-> > (or just per-directory notifications)?
->
-> SMB can do both. There is a flag that specifies if you want to just
-> get notified about the directory itself
-> or whether  you want notifications from the whole subtree.
->
 
-I see. There is no user API in Linux to request a "subtree" watch.
-For the private case that the user requests a FAN_MARK_FILESYSTEM,
-cifs may translate that into a SMB2_WATCH_TREE for the share root dir.
+--4Ckj6UjgE2iN1+kY
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-For that, Miklos' RFC of vfs interface inode->i_op->notify_update(inode)
-should be enriched with sb->s_op->notify_update(sb).
+Release Announcements
+---------------------
 
-Thanks,
-Amir.
+These are security releases in order to address the following defects:
+
+o CVE-2019-14902: Replication of ACLs set to inherit down a subtree on AD
+		  Directory not automatic.       =20
+o CVE-2019-14907: Crash after failed character conversion at log level 3 or
+		  above.                                              =20
+o CVE-2019-19344: Use after free during DNS zone scavenging in Samba AD DC.
+                                                                           =
+    =20
+                                                                           =
+    =20
+=3D=3D=3D=3D=3D=3D=3D                                                      =
+                  =20
+Details                                                                    =
+    =20
+=3D=3D=3D=3D=3D=3D=3D                                                      =
+                  =20
+                                                                           =
+    =20
+o  CVE-2019-14902:                                                         =
+                      =20
+   The implementation of ACL inheritance in the Samba AD DC was not complet=
+e,
+   and so absent a 'full-sync' replication, ACLs could get out of sync betw=
+een
+   domain controllers.=20
+
+o  CVE-2019-14907:
+   When processing untrusted string input Samba can read past the end of the
+   allocated buffer when printing a "Conversion error" message to the logs.
+
+o  CVE-2019-19344:                                                         =
+                      =20
+   During DNS zone scavenging (of expired dynamic entries) there is a read =
+of
+   memory after it has been freed.
+
+For more details and workarounds, please refer to the security advisories.
+
+
+Changes:
+--------
+
+o  Andrew Bartlett <abartlet@samba.org>
+   * BUG 12497: CVE-2019-14902: Replication of ACLs down subtree on AD Dire=
+ctory
+     not automatic.
+   * BUG 14208: CVE-2019-14907: lib/util: Do not print the failed to convert
+     string into the logs.
+
+o  Gary Lockyer <gary@catalyst.net.nz>
+   * BUG 14050: CVE-2019-19344: kcc dns scavenging: Fix use after free in
+     dns_tombstone_records_zone.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the "Samba 4.1 and newer" product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+        https://www.samba.org/samba/history/samba-4.11.5.html
+        https://www.samba.org/samba/history/samba-4.10.12.html
+        https://www.samba.org/samba/history/samba-4.9.18.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--4Ckj6UjgE2iN1+kY
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCXibK1wAKCRAoaL1+KxeT
+UawKAJ95lnMB/g06GNXubVVS0eOKHDou2QCgiTqr5urPPLFk+P1YIjKvJcOsYzs=
+=qQcb
+-----END PGP SIGNATURE-----
+
+--4Ckj6UjgE2iN1+kY--
 
