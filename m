@@ -2,45 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5A6A146D5E
-	for <lists+samba-technical@lfdr.de>; Thu, 23 Jan 2020 16:52:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9986146E4B
+	for <lists+samba-technical@lfdr.de>; Thu, 23 Jan 2020 17:27:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=mhygbaDtf08L+5t9jv0+kQV/bO0j51OAS4R1RXFrBjI=; b=rv6/f0IK8q/eJw1K1JuzMYpMcp
-	7GLdYQb/zMND3K3a0JeyDQmhcBC3WmxQL5hzqtIpQ9e18ZFwYfFOOahHucumJyne6qO6agvFfMgH+
-	9+tQbyL2zExIz3eiQ2UF9R68mtlb7FKXMU5Umx8092xn2txPDbV2gKPdEcYaaOPYKUTxkrWCEoNI+
-	pWK0v0aguPmKMRok3nr0h7C5cTBERCqZv0raR4HeHTR2zyaArb8tKzcTx9WZo7aIA8srLJgX9x68P
-	6ftPceByW8FQwIwhvJDibxZlqncUZAtHDnfPM8iEuKWjMwK0urAsWwZGjbJ7D1gUoT+3XHGSkno66
-	mQ0+YjDQ==;
-Received: from localhost ([::1]:64308 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=jHV6vjf4FzryyV7vW/2pOcTQap+xZIAHbMWsB8K4lJM=; b=ZM+IcmQd0j9+78E8a1Lg3+UzCd
+	Isc9q3oMTfMjxTs49THhw2TH2OgzH5TzQs0fupfLvXJ0xiW1yXUVZU+IcBUfKmCjqXf/KqBAL2CrM
+	K/fNw1YgvG8N+RWvB5oh7VhpVAsVSBMTmyfOwEPhv0tYqtD+iwXbNuBv1Boj1us4cvxLhk4I4c6eZ
+	PRNOb1W0T2UNGoSbO7k95HTEpZJOsJ2ZPYSp+8dSuxcAms1L2tFeZ1YQFbqAPlK/V5uNFF4f7dUBW
+	WS6Ws6mjU2c1d8Bx0PUG/UcTfFrf2xUxWrCLdNOLD2W6cAmoy9KFKvM4YAOYc7oEsll/VgEKh3v/H
+	TV4a/9EA==;
+Received: from localhost ([::1]:28024 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iuelv-004PEI-89; Thu, 23 Jan 2020 15:51:55 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18294) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iuelm-004PDc-Cj; Thu, 23 Jan 2020 15:51:49 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=mhygbaDtf08L+5t9jv0+kQV/bO0j51OAS4R1RXFrBjI=; b=uoQH2+9387I85TZkeXHjlWVU46
- wpqpc7eDQe2sLv5TIypnxXYNKKQtboegZwf2DaM7ioy4GbsBMmub/MPyLuqsN7H9LhqKsO0JXEzPo
- Xi4ARF93pcZ4nDsASPaLmUnCHssKu2zJsFPiTJ5qjngFao/tKYM7JiOc2wuP+xtJjVy6+pb86ngNW
- wNLfg0BlxhXN9WiV4SzXO5eO4jZvKS55QOzge617pB7R0hWVz4fln57SO2NTfg5Erixa7RkkFnjwH
- Zukb0Qq/BNL6H76OmM/gjxLVxXZ5XQuG9aMo6jtkvdG72wEivgJO3HzKDgLqSIG888lCkretQeFXX
- d2G4EXe7HaNLbKmuC7gXJnZfiHa1x7LsX1ZjXzV2MnNZo9Y06BvuOQFuVhmo5/uWLP01HI0vErZB1
- f97udzLToetzIvPrrTz8tQYTTS8WuduqDNenzYeF/oCLCu5sF3HzaFz/LfAWPaBaUt861JeWcxlCe
- jw9x8ULnj/3Vir4ismiP0q9X;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1iuell-0002A5-Vq; Thu, 23 Jan 2020 15:51:46 +0000
-Date: Thu, 23 Jan 2020 16:51:44 +0100
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.10.13 Available for Download
-Message-ID: <20200123155142.GA18422@carrie2>
+	id 1iufJN-004QkM-RN; Thu, 23 Jan 2020 16:26:29 +0000
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11]:57122
+ helo=outgoing.mit.edu) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1iufJF-004QkD-Th
+ for samba-technical@lists.samba.org; Thu, 23 Jan 2020 16:26:24 +0000
+Received: from [18.30.9.159] ([18.30.9.159]) (authenticated bits=0)
+ (User authenticated as ghudson@ATHENA.MIT.EDU)
+ by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 00NGFWAd005533
+ (version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=NOT);
+ Thu, 23 Jan 2020 11:15:34 -0500
+Subject: Re: [kitten] Checking the transited list of a kerberos ticket in a
+ transitive cross-realm trust situation...
+To: Stefan Metzmacher <metze=40samba.org@dmarc.ietf.org>,
+ Nico Williams <nico@cryptonector.com>
+References: <69d80d24-d461-1652-3cfb-e55d90d31fbf@samba.org>
+ <ec067a72-313e-1878-33a0-a3259d2979d5@mit.edu>
+ <1503578184.3428.19.camel@redhat.com>
+ <db882372-aa1d-e58e-4c94-a268539bd2ee@samba.org>
+ <1503596189.3428.26.camel@redhat.com>
+ <F363B51E-FDF7-4C91-9ABD-B623B5CE97BC@dukhovni.org>
+ <8f68cfb0-2d6b-d86f-4ff0-a9282aa0bf55@samba.org>
+ <cb0d7433-9e23-5bce-4e06-1213bf88cade@samba.org>
+ <20191121223908.GC26241@localhost>
+ <22f96c93-0217-0b2b-d7e1-684f9269fba4@samba.org>
+ <20191122224526.GA28614@localhost>
+ <8b72197d-2fcc-5b4f-4392-12d53d1ec624@samba.org>
+ <5bcc2951-afdf-0849-5c16-f542afe214a1@samba.org>
+Openpgp: preference=signencrypt
+Message-ID: <3d693bdd-9a4c-7135-318e-593e18e52cd0@mit.edu>
+Date: Thu, 23 Jan 2020 11:15:32 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="d6Gm4EdcadzBjdND"
-Content-Disposition: inline
-User-Agent: Mutt/1.9.4 (2018-02-28)
+In-Reply-To: <5bcc2951-afdf-0849-5c16-f542afe214a1@samba.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Warn: EHLO/HELO not verified: Remote host 18.9.28.11
+ (outgoing-auth-1.mit.edu) incorrectly presented itself as outgoing.mit.edu
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,162 +67,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: kseeger@samba.org
+From: Greg Hudson via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Greg Hudson <ghudson@mit.edu>
+Cc: kitten@ietf.org, "heimdal-discuss@sics.se" <heimdal-discuss@sics.se>,
+ Samba Technical <samba-technical@lists.samba.org>,
+ "krbdev@mit.edu Dev List" <krbdev@mit.edu>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+On 1/23/20 6:25 AM, Stefan Metzmacher wrote:
+> it would be great if we could make some progress here...
 
---d6Gm4EdcadzBjdND
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Does this need to be an application flag, or can it be in the krb5.conf
+realm configuration?  Presumably people are currently working around
+this by setting [capaths] on the server; a realm variable would simplify
+this workaround by not requiring specific knowledge of the domain geometry.
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D
-			"It's better to be a lion for a
-			 day than a sheep all your
-			 life."
-
-			 Elizabeth Kenny
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D
-
-
-Release Announcements
----------------------
-
-This is the latest stable release of the Samba 4.10 release series.
-
-
-Changes since 4.10.12
-----------------------
-
-o  Jeremy Allison <jra@samba.org>
-   * BUG 14161: s3: libsmb: Ensure SMB1 cli_qpathinfo2() doesn't return an
-     inode number.
-   * BUG 14174: s3: utils: smbtree. Ensure we don't call cli_RNetShareEnum()
-     on an SMB1 connection.
-   * BUG 14176: s3: libsmb: Ensure return from net_share_enum_rpc() sets
-     cli->raw_status on error.
-   * BUG 14189: s3: smbd: SMB2 - Ensure we use the correct session_id if
-     encrypting an interim response.
-   * BUG 14205: s3: smbd: Only set xconn->smb1.negprot.done =3D true after
-     supported_protocols[protocol].proto_reply_fn() succeeds.
-
-o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-   * BUG 14209: pygpo: Use correct method flags.
-
-o  Ralph Boehme <slow@samba.org>
-   * BUG 13925: s3: Remove now unneeded call to cmdline_messaging_context().
-   * BUG 14069: Incomplete conversion of former parametric options.
-   * BUG 14070: Fix sync dosmode fallback in async dosmode codepath.
-   * BUG 14171: vfs_fruit returns capped resource fork length.
-   * BUG 13745: s3:printing: Fix %J substition.
-
-o  Isaac Boukris <iboukris@gmail.com>
-   * BUG 14116: libnet_join: Add SPNs for additional-dns-hostnames entries.
-
-o  Torsten Fohrer <torsten.fohrer@sbe.de>
-   * BUG 14209: Avoiding bad call flags with python 3.8, using METH_NOARGS
-     instead of zero.
-
-o  Bj=C3=B6rn Jacke <bjacke@samba.org>
-   * BUG 14122: docs-xml/winbindnssinfo: Clarify interaction with idmap_ad =
-etc.
-
-o  Volker Lendecke <vl@samba.org>
-   * BUG 14175: ctdb-tcp: Close inflight connecting TCP sockets after fork.
-
-o  Stefan Metzmacher <metze@samba.org>
-   * BUG 14153: s4:dirsync: Fix interaction of dirsync and extended_dn cont=
-rols.
-
-o  Gary Lockyer <gary@catalyst.net.nz>
-   * BUG 14199: upgradedns: Ensure lmdb lock files linked.
-
-o  Anoop C S <anoopcs@redhat.com>
-   * BUG 14182: s3: VFS: glusterfs: Reset nlinks for symlink entries during
-     readdir.
-
-o  Christof Schmitt <cs@samba.org>
-   * BUG 14140: wscript: Remove checks for shm_open and shmget.
-
-o  Andreas Schneider <asn@samba.org>
-   * BUG 14101: libsmbclient: smbc_stat() doesn't return the correct st_mode
-     and also the uid/gid is not filled (SMBv1).
-   * BUG 14168: replace: Only link libnsl and libsocket if required.
-   * BUG 14219: librpc: Fix string length checking in
-     ndr_pull_charset_to_null().
-
-o  Uri Simchoni <uri@samba.org>
-   * BUG 13856: heimdal-build: Avoid hard-coded /usr/include/heimdal in
-     asn1_compile-generated code.
-
-o  Martin Schwenke <martin@meltin.net>
-   * BUG 14175: ctdb-tcp: Drop tracking of file descriptor for incoming
-     connections.
-   * BUG 14227: ctdb-scripts: Strip square brackets when gathering connecti=
-on
-     info.
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the "Samba 4.1 and newer" product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=3D=3D Our Code, Our Bugs, Our Responsibility.
-=3D=3D The Samba Team
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Download Details
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
-=66rom:
-
-        https://download.samba.org/pub/samba/stable/
-
-The release notes are available online at:
-
-        https://www.samba.org/samba/history/samba-4.10.13.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                        --Enjoy
-                        The Samba Team
-
---d6Gm4EdcadzBjdND
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCXinBCwAKCRAoaL1+KxeT
-UYV+AJ9G9dvUIyBBWaAcM8OGyncKsrtgegCdHgZoRSP0gqN2ZhltL35FoaYa3JY=
-=UFVm
------END PGP SIGNATURE-----
-
---d6Gm4EdcadzBjdND--
+I reviewed the thread, and it sounds like the current understanding is
+that AD applies a transited check (of sorts) to cross-realm tickets, but
+ doesn't say so by setting the transit-policy-checked flag in the
+ticket.  From the upstream point of view the server's realm
+configuration is in a better position to know that the realm is an AD
+realm than the server application; perhaps that is not true from Samba's
+point of view, but I thought I would check.
 
