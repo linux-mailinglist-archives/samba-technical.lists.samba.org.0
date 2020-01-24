@@ -2,57 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D9361490BC
-	for <lists+samba-technical@lfdr.de>; Fri, 24 Jan 2020 23:12:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1A4D1490BD
+	for <lists+samba-technical@lfdr.de>; Fri, 24 Jan 2020 23:12:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=/ceU96q3qGQlNuXBuGpQ+o+zIP4nKm+q0CHAG49ZxSk=; b=4rK7/PGd0up/HZkvjCdGyqJwkH
-	cwmKRf/M8qJ68E+3sGMxCz4bXFo1qP6im/8DVuGelsY+E6LaqeK63vK0dwfun7opWaL9dvJyjk4+F
-	x4lCC/x5xKpBlFYUebFtDivdRRgSCOdjK6ncx1JiQuZv82UaU8L54SiHsTm5kYKwZRjB44Ew0etLN
-	jEuRqcX093V/2kKKhI/YgGHZgBndE2rUMvtWD2aVc6kPPkXNzW4Zjvfzf8KhOsI/38SiXOK3cHtDe
-	4l2Tza1xaMf5LX0qZFS+8ArD9w6clFMKkvR3T51wEzQy9j1yqHD60hSSwXsjsC1UZWO7DryFxVgHa
-	twAekx8w==;
-Received: from localhost ([::1]:58982 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=Q29Py9yHQd9qeqqsM7NAg+yMXAfbxy952BxJq43WEeg=; b=HQ1n63ZKk80pH5iNFazFFf9dtP
+	hG9IE9XeB6J4qdB2UONoMcKI0YBv7Nny8W/cxn2MHwy/Bz7LGg34fFRdUSrxTMEToVt3nTeqRPOeO
+	7uYt2VjxR8l3U2dVephqWe5+/IUfOTu7IU+BSgk2aBWk8BDWTTy2vRhOyQSRVN/JJDgmq8QU8rHRZ
+	Bx8sWB+PD1dVo4FcVsa1RQ1ddBHe4ic7kj7QbdezVpPyQSJXwreoucOHDyWlNviYT4TSNazb6OtzB
+	othXH6kFd4Dg3BgZDdrZ2wykXpsgEatNWa/8qZ8LE5B945OW/h82279apNsZGTnfZd8NAgKIYG+RD
+	pWm7+YuA==;
+Received: from localhost ([::1]:59726 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iv7Af-004eYH-SK; Fri, 24 Jan 2020 22:11:21 +0000
-Received: from mail.rosalinux.ru ([195.19.76.54]:55466) 
+	id 1iv7Bv-004eeJ-1n; Fri, 24 Jan 2020 22:12:39 +0000
+Received: from mail.rosalinux.ru ([195.19.76.54]:55584) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iv7Ab-004eYA-JN
- for samba-technical@lists.samba.org; Fri, 24 Jan 2020 22:11:20 +0000
+ (Exim) id 1iv7Br-004eeC-MD
+ for samba-technical@lists.samba.org; Fri, 24 Jan 2020 22:12:37 +0000
 Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id DFD3ED61CB48B;
- Sat, 25 Jan 2020 01:11:13 +0300 (MSK)
+ by mail.rosalinux.ru (Postfix) with ESMTP id 24937D290FBCF;
+ Sat, 25 Jan 2020 01:12:33 +0300 (MSK)
 Received: from mail.rosalinux.ru ([127.0.0.1])
  by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id zW29zmc9g0WM; Sat, 25 Jan 2020 01:11:13 +0300 (MSK)
+ with ESMTP id scbTbzAmbvB2; Sat, 25 Jan 2020 01:12:32 +0300 (MSK)
 Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id 31ECED61CB4AD;
- Sat, 25 Jan 2020 01:11:13 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rosalinux.ru 31ECED61CB4AD
+ by mail.rosalinux.ru (Postfix) with ESMTP id BE9ECD61CB4AD;
+ Sat, 25 Jan 2020 01:12:32 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rosalinux.ru BE9ECD61CB4AD
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosalinux.ru;
- s=A1AAD92A-9767-11E6-A27F-AC75C9F78EF4; t=1579903873;
- bh=/ceU96q3qGQlNuXBuGpQ+o+zIP4nKm+q0CHAG49ZxSk=;
- h=To:From:Message-ID:Date:MIME-Version;
- b=SNPDlksfs8l8OsFMogcMHsnMZjG+ja32UIri4tlnA/Ec3HzBEz4WA6qHx7yYH/L5I
- VnaWlPU4XPrMyszxvj36jgvhcEWnH8J2AXlX5A9wQHWADzsKO2HnKeyss6Rby2RKz4
- QPpuiQhAA47qObB8fNZyjP4+m6Mcq+JCywgweoInflkCRCeQbJopQweDYVBk3903Dy
- M8E5DqHEUdmewiyrmQ8oHhmYsvLBGubUtDoAnZkdcBXYU+uEihNouGdeL0rLZ3/Lzg
- bjVBXMYztS8G2jSw49Mh1QJB5xhDcKWdEQxRhJShQQPs1Zbft4rBdjFRqy0ZSEs0aK
- 6vPU+msVDbjNg==
+ s=A1AAD92A-9767-11E6-A27F-AC75C9F78EF4; t=1579903952;
+ bh=Q29Py9yHQd9qeqqsM7NAg+yMXAfbxy952BxJq43WEeg=;
+ h=From:To:Message-ID:Date:MIME-Version;
+ b=UROuJ7iY+TMY864HL46YYBw4Qb26hvWX8VBT23tIxHM3DxmIo3UfBCRlmsYe6T5+p
+ NYMcYU/fOcrDOh211XWvFI5yn8LPv3s0KCYhd+lzV4FUSmC5o2YFsIvlwYEH/UbcJU
+ Nov+Qcs/xwz1wUtbAu6sBtIKGo0QPgNaTAz5V1/uUWVjZ8hrHa11UHOgpUZBNGRGpq
+ hbTpXRiKOEVC2Rkw7uwhmWD0X4JFLL3RGnuZX2O8ZErk/BON6je2dX+NpH819AxUfi
+ KGJbTlIjitk4Qu3t6+nnxfBuwPjlfYBOsUB7NS+6zKsSxzEfE7gqiWVePLgriAOjAH
+ CFjda5aP0SH0g==
 Received: from mail.rosalinux.ru ([127.0.0.1])
  by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id 6DNwgaWYEoL8; Sat, 25 Jan 2020 01:11:13 +0300 (MSK)
+ with ESMTP id mabagQfEgzaK; Sat, 25 Jan 2020 01:12:32 +0300 (MSK)
 Received: from [192.168.1.173] (broadband-90-154-71-217.ip.moscow.rt.ru
  [90.154.71.217])
- by mail.rosalinux.ru (Postfix) with ESMTPSA id F3DDFD61CB48B;
- Sat, 25 Jan 2020 01:11:12 +0300 (MSK)
+ by mail.rosalinux.ru (Postfix) with ESMTPSA id 6A7ABD290FBCF;
+ Sat, 25 Jan 2020 01:12:32 +0300 (MSK)
+Subject: Re: [PATH 2/2] cifs-utils: Don't create symlinks for mans if mans are
+ disabled
 To: samba-technical@lists.samba.org, Pavel Shilovsky <pshilov@microsoft.com>
-Subject: [PATH 1/2] cifs-utils: Respect DESTDIR when installing smb3 stuff
-Message-ID: <92faad42-2c69-a906-8da9-14a9f6404b83@rosalinux.ru>
-Date: Sat, 25 Jan 2020 01:11:12 +0300
+References: <92faad42-2c69-a906-8da9-14a9f6404b83@rosalinux.ru>
+Message-ID: <baa6ba65-efe7-0d1f-f93e-b893eb8b2f26@rosalinux.ru>
+Date: Sat, 25 Jan 2020 01:12:31 +0300
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
+In-Reply-To: <92faad42-2c69-a906-8da9-14a9f6404b83@rosalinux.ru>
 Content-Type: text/plain; charset=utf-8
 Content-Language: ru-RU
 Content-Transfer-Encoding: quoted-printable
@@ -74,50 +77,29 @@ Reply-To: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-When make install is run during package building, DESTDIR parameter is pa=
-ssed, e.g.:
-$ rpm --eval %makeinstall_std
-make DESTDIR=3D/root/rpmbuild/BUILDROOT/%{name}-%{version}-%{release}-ros=
-a2016.1.x86_64-buildroot install
 
-Without DESTDIR build scripts tried to create symlinks outside of the bui=
-ld root:
-make[3]: Entering directory '/tmp/abf/rpmbuild/BUILD/cifs-utils-6.10'
-(cd /sbin && ln -sf mount.cifs mount.smb3)
-ln: failed to create symbolic link 'mount.smb3': Permission denied
-
-The same fix was introduced in Arch Linux package when updating from 6.9 =
-to 6.10:
-https://git.archlinux.org/svntogit/packages.git/commit/trunk/PKGBUILD?h=3D=
-packages/cifs-utils&id=3Dc75b246a762ea9b90db404dfebc6d35d5b16972f
 ---
-=C2=A0Makefile.am | 8 ++++----
-=C2=A01 file changed, 4 insertions(+), 4 deletions(-)
+=C2=A0Makefile.am | 4 +++-
+=C2=A01 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index fe9cd34..09ef293 100644
+index 09ef293..39ef1c2 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -119,11 +119,11 @@ endif
-=C2=A0SUBDIRS =3D contrib
-=C2=A0
-=C2=A0install-exec-hook:
--=C2=A0=C2=A0 =C2=A0(cd $(ROOTSBINDIR) && ln -sf mount.cifs mount.smb3)
-+=C2=A0=C2=A0 =C2=A0(cd $(DESTDIR)$(ROOTSBINDIR) && ln -sf mount.cifs mou=
-nt.smb3)
+@@ -122,7 +122,9 @@ install-exec-hook:
+=C2=A0=C2=A0=C2=A0 =C2=A0(cd $(DESTDIR)$(ROOTSBINDIR) && ln -sf mount.cif=
+s mount.smb3)
 =C2=A0
 =C2=A0install-data-hook:
--=C2=A0=C2=A0 =C2=A0(cd $(man8dir) && ln -sf mount.cifs.8 mount.smb3.8)
-+=C2=A0=C2=A0 =C2=A0(cd $(DESTDIR)$(man8dir) && ln -sf mount.cifs.8 mount=
+-=C2=A0=C2=A0 =C2=A0(cd $(DESTDIR)$(man8dir) && ln -sf mount.cifs.8 mount=
 .smb3.8)
++if CONFIG_MAN
++=C2=A0=C2=A0 =C2=A0( cd $(DESTDIR)$(man8dir) && ln -sf mount.cifs.8 moun=
+t.smb3.8)
++endif
 =C2=A0
 =C2=A0uninstall-hook:
--=C2=A0=C2=A0 =C2=A0(cd $(ROOTSBINDIR) && rm -f $(ROOTSBINDIR)/mount.smb3=
-)
--=C2=A0=C2=A0 =C2=A0(cd $(man8dir) && rm -f $(man8dir)/mount.smb3.8)
-+=C2=A0=C2=A0 =C2=A0(cd $(DESTDIR)$(ROOTSBINDIR) && rm -f $(ROOTSBINDIR)/=
-mount.smb3)
-+=C2=A0=C2=A0 =C2=A0(cd $(DESTDIR)$(man8dir) && rm -f $(DESTDIR)$(man8dir=
-)/mount.smb3.8)
+=C2=A0=C2=A0=C2=A0 =C2=A0(cd $(DESTDIR)$(ROOTSBINDIR) && rm -f $(ROOTSBIN=
+DIR)/mount.smb3)
 
 
