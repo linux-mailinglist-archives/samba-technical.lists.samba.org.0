@@ -2,63 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1A4D1490BD
-	for <lists+samba-technical@lfdr.de>; Fri, 24 Jan 2020 23:12:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 234C314924C
+	for <lists+samba-technical@lfdr.de>; Sat, 25 Jan 2020 01:22:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=Q29Py9yHQd9qeqqsM7NAg+yMXAfbxy952BxJq43WEeg=; b=HQ1n63ZKk80pH5iNFazFFf9dtP
-	hG9IE9XeB6J4qdB2UONoMcKI0YBv7Nny8W/cxn2MHwy/Bz7LGg34fFRdUSrxTMEToVt3nTeqRPOeO
-	7uYt2VjxR8l3U2dVephqWe5+/IUfOTu7IU+BSgk2aBWk8BDWTTy2vRhOyQSRVN/JJDgmq8QU8rHRZ
-	Bx8sWB+PD1dVo4FcVsa1RQ1ddBHe4ic7kj7QbdezVpPyQSJXwreoucOHDyWlNviYT4TSNazb6OtzB
-	othXH6kFd4Dg3BgZDdrZ2wykXpsgEatNWa/8qZ8LE5B945OW/h82279apNsZGTnfZd8NAgKIYG+RD
-	pWm7+YuA==;
-Received: from localhost ([::1]:59726 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=4iJJPPykQInAhPntkUSB4+0bwjPciU2J3zQI+Kmwfcw=; b=yH7iu81fMhGZMMA4C4xZ2EkSMQ
+	WuhQnZL1s2UzlGipB9eOpwl0U4VzIdtm9+wrEhPuMdfhMasG5x3SgJq1t5LSOyVbWyt9ruipu77n8
+	OQVptXazsOZo3qz0NTRYEmZous2bXRn5QRCCNc4nXRlJveTmw5EWRcYhPz4KWImEQJNLowh5OuQK2
+	uUV4N0GwcMu2eMiZk0O2z9fN1Z4EMOmvDqpm+2sH4Bb2/Ve29dca7xdSbRX37c/pUBW8E23KPvM1H
+	+o1YSoLLUclx2dMv85NyeemdFPL1CoMiqqshFW0TwwCt6OjksoArzbJxeG2ipP7vvednsqWuHl/oa
+	lyXhuOtA==;
+Received: from localhost ([::1]:20378 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iv7Bv-004eeJ-1n; Fri, 24 Jan 2020 22:12:39 +0000
-Received: from mail.rosalinux.ru ([195.19.76.54]:55584) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1iv7Br-004eeC-MD
- for samba-technical@lists.samba.org; Fri, 24 Jan 2020 22:12:37 +0000
-Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id 24937D290FBCF;
- Sat, 25 Jan 2020 01:12:33 +0300 (MSK)
-Received: from mail.rosalinux.ru ([127.0.0.1])
- by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id scbTbzAmbvB2; Sat, 25 Jan 2020 01:12:32 +0300 (MSK)
-Received: from localhost (localhost [127.0.0.1])
- by mail.rosalinux.ru (Postfix) with ESMTP id BE9ECD61CB4AD;
- Sat, 25 Jan 2020 01:12:32 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rosalinux.ru BE9ECD61CB4AD
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosalinux.ru;
- s=A1AAD92A-9767-11E6-A27F-AC75C9F78EF4; t=1579903952;
- bh=Q29Py9yHQd9qeqqsM7NAg+yMXAfbxy952BxJq43WEeg=;
- h=From:To:Message-ID:Date:MIME-Version;
- b=UROuJ7iY+TMY864HL46YYBw4Qb26hvWX8VBT23tIxHM3DxmIo3UfBCRlmsYe6T5+p
- NYMcYU/fOcrDOh211XWvFI5yn8LPv3s0KCYhd+lzV4FUSmC5o2YFsIvlwYEH/UbcJU
- Nov+Qcs/xwz1wUtbAu6sBtIKGo0QPgNaTAz5V1/uUWVjZ8hrHa11UHOgpUZBNGRGpq
- hbTpXRiKOEVC2Rkw7uwhmWD0X4JFLL3RGnuZX2O8ZErk/BON6je2dX+NpH819AxUfi
- KGJbTlIjitk4Qu3t6+nnxfBuwPjlfYBOsUB7NS+6zKsSxzEfE7gqiWVePLgriAOjAH
- CFjda5aP0SH0g==
-Received: from mail.rosalinux.ru ([127.0.0.1])
- by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id mabagQfEgzaK; Sat, 25 Jan 2020 01:12:32 +0300 (MSK)
-Received: from [192.168.1.173] (broadband-90-154-71-217.ip.moscow.rt.ru
- [90.154.71.217])
- by mail.rosalinux.ru (Postfix) with ESMTPSA id 6A7ABD290FBCF;
- Sat, 25 Jan 2020 01:12:32 +0300 (MSK)
-Subject: Re: [PATH 2/2] cifs-utils: Don't create symlinks for mans if mans are
- disabled
-To: samba-technical@lists.samba.org, Pavel Shilovsky <pshilov@microsoft.com>
-References: <92faad42-2c69-a906-8da9-14a9f6404b83@rosalinux.ru>
-Message-ID: <baa6ba65-efe7-0d1f-f93e-b893eb8b2f26@rosalinux.ru>
-Date: Sat, 25 Jan 2020 01:12:31 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+	id 1iv9CL-004g2m-TE; Sat, 25 Jan 2020 00:21:13 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18018) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iv9CF-004g2f-Rf
+ for samba-technical@lists.samba.org; Sat, 25 Jan 2020 00:21:10 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=4iJJPPykQInAhPntkUSB4+0bwjPciU2J3zQI+Kmwfcw=; b=DER5+OLHRQPeJ/wiPaPRvsVIA0
+ 4P9Df3IXaLKcNE475K2NdtjyXpqp4hig0d9umKS7VwMVLSiIqF78vEj1hPje07rzpovBMFlqqgIM2
+ dakIlnALiYF6rtZxFByLuyHMJkBBCBZMl76grxPs7XCB0y/06A9ad3q6pgsDYB0CmGSThpefZF17t
+ cO/ZbFrgYo0hFVM/SqAGueSKOjNduNmETP8neAsgAs2fYQk77YP6eVqnqHWTwajDC0NYPzaNOclj3
+ PcFdtJXy5F/v+zsswR1GOf+t5g4oIyVChv4UQ3lwI7hlUQ4oFMub1lEdJeZ2YHr7+1I4AXoriL5ry
+ /GaxUaH8e1y0jJZi8R2z0Sfd94QO6dnV6qkqz9vs2HiUaTDt70ruSIU3Y4KVr/Zq3cIrGH7KDNDk7
+ D4yE3Kz9jhNpfPBRd/toV7AC7A+ZJC5WjXyzimQH+TMuDtvhhUhmeecl2oLRgL137YSN+9wxp2egg
+ Whtrlk/mj5ERmvUWEvm9+lNP;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iv9CE-0000UB-Qo; Sat, 25 Jan 2020 00:21:07 +0000
+Date: Fri, 24 Jan 2020 16:21:04 -0800
+To: samba-technical@lists.samba.org, metze@samba.org
+Subject: Linux io_uring VFS backend.
+Message-ID: <20200125002104.GA188423@jra4>
 MIME-Version: 1.0
-In-Reply-To: <92faad42-2c69-a906-8da9-14a9f6404b83@rosalinux.ru>
-Content-Type: text/plain; charset=utf-8
-Content-Language: ru-RU
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,34 +53,22 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Mikhail Novosyolov via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Hi Metze,
 
----
-=C2=A0Makefile.am | 4 +++-
-=C2=A01 file changed, 3 insertions(+), 1 deletion(-)
+Any chance we can get the io_uring VFS
+code checked in for 4.12 ?
 
-diff --git a/Makefile.am b/Makefile.am
-index 09ef293..39ef1c2 100644
---- a/Makefile.am
-+++ b/Makefile.am
-@@ -122,7 +122,9 @@ install-exec-hook:
-=C2=A0=C2=A0=C2=A0 =C2=A0(cd $(DESTDIR)$(ROOTSBINDIR) && ln -sf mount.cif=
-s mount.smb3)
-=C2=A0
-=C2=A0install-data-hook:
--=C2=A0=C2=A0 =C2=A0(cd $(DESTDIR)$(man8dir) && ln -sf mount.cifs.8 mount=
-.smb3.8)
-+if CONFIG_MAN
-+=C2=A0=C2=A0 =C2=A0( cd $(DESTDIR)$(man8dir) && ln -sf mount.cifs.8 moun=
-t.smb3.8)
-+endif
-=C2=A0
-=C2=A0uninstall-hook:
-=C2=A0=C2=A0=C2=A0 =C2=A0(cd $(DESTDIR)$(ROOTSBINDIR) && rm -f $(ROOTSBIN=
-DIR)/mount.smb3)
+Would love to see that as an option
+for Linux users.
 
+I'm happy to review / test !
+
+Cheers,
+
+	Jeremy.
 
