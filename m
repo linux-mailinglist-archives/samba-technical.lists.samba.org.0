@@ -2,42 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67A5C14B38D
-	for <lists+samba-technical@lfdr.de>; Tue, 28 Jan 2020 12:38:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 477A314B3D3
+	for <lists+samba-technical@lfdr.de>; Tue, 28 Jan 2020 12:57:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=LLUYXuaR2YqPreLwRWuyeLyTBMDmIpUGdFFRO1v+7IQ=; b=TuGXtUqtqdZH2RWY2zP+ODi1a+
-	DPFJOGr1Hx8kY/eQQLTLo4CtvUoC7YdQsuWzyxuuyUTIas4ZR83n2x4ItPH/yI9SGtMfdV6iZGjC0
-	8UAFYHXvepZ0oSFNizmQwH1xpqBrc3s4utgCK1kJ0KVhhHXeQ1n7ahQSU0MOz8VjsyX3A1yZ1vFUs
-	DQLGTnX26dO96YpUOP6mxNFtentqbKBPWktQdMPtrUzlZS79EhCJnb+CL85Ht+gFCdr84nOUZVKn9
-	2dZha979PzmUUpkrAeCQ38WJVGFxWA5TeNWU2SdWVVnJ86abKtRE100Sg4xYBt9UBpY2nTFJHvz29
-	uIytaw0Q==;
-Received: from localhost ([::1]:55750 helo=hr1.samba.org) 
+	bh=ZGpxNsU8x7/fNZxxULfFZpau5IH3hz/dSvSTJXFySBA=; b=sjlaKNGTQkYvIOwdKu6XbD9NOY
+	apSkF0P4PJVQ7NSEE6dsQplsGHaxj77d16wiyDtqcDMQLkfsE+vFkCR8f4TEaIFXuElLBUIVdKusM
+	YhtroigUJJQ22hCiIhkOWUtrkZUx24BHdjgxOkjYeu1alh9Ix/zwLmeBk22MKW5opKqu6toblrvb+
+	6t7yiETpBNZzzv5ptOjKMDcYVxZsuJCcSD06BpHrLxiV3kLNfDCiW3kLNl7J/KvWzBK4lPJWLCKq2
+	7cQqOzzgoEZk0Fa7QvOkkO6DCfwdP7NKezdWa9oRWXtvE2NGkVVrp77Xlcyjky/Zh4gdWo6WQJXUz
+	IoG9YjOQ==;
+Received: from localhost ([::1]:56496 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iwPBg-0056GZ-MN; Tue, 28 Jan 2020 11:37:44 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20318) 
+	id 1iwPUb-0056N4-TK; Tue, 28 Jan 2020 11:57:17 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28848) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iwPBc-0056GS-7r
- for samba-technical@lists.samba.org; Tue, 28 Jan 2020 11:37:42 +0000
+ (Exim) id 1iwPUX-0056Mx-Ut
+ for samba-technical@lists.samba.org; Tue, 28 Jan 2020 11:57:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:Message-ID:From:To:CC;
- bh=LLUYXuaR2YqPreLwRWuyeLyTBMDmIpUGdFFRO1v+7IQ=; b=Pqp+vdUD7D/jPuLPVbRuM4iPD/
- AgT5v84Yuygl82BVpKHJjH3AQBRyBEloineS2pSXXJJJ/ci0ELZ57gxw5BsasHKo/kAJZ+rwjj/0B
- KYbZGfSjISfKK3KCGYqdSBF3EArgKsYNEHE91dRKWpiZ5sqH2GQadHyEom0v4AJXQC3IJcE2sO7DN
- yubOWHCmWnVjHBHlXjqC/cKhiv6zz++z0SSdUbYD0kajJFfVXF+PVWitcwemhZBTrJx2fef7nmbZj
- YxavFO/UoQx4A5Ky5BLTuJLgDBNRoBdP4LccQ/ISnEd7STDFLB2kZOwBcyqzMhFB09PV11BbgctKp
- wmgMI4kU9YOREN1VOYnNcvnu16/DKdqQlk6w7+52pJxdpW475bFpmI7VTv2tll40f2EmXdd/FcGLW
- 5qzo+tLYACe5v4uhXElwIr7AAZvfR6DZ8/Uda+QC6iot+cfTN43c+xRp8v8wF+6PNDOVOxRoLFVvi
- g5btnVXoZKebqMnd3kfESVKR;
+ bh=ZGpxNsU8x7/fNZxxULfFZpau5IH3hz/dSvSTJXFySBA=; b=hwmclWoxwdI0TSPkG0SP3DmrDo
+ xMajaXMR316WhncOxhgyeTWv33gPKLe93/7qf2qYNSfpG4EZxJmOMZTTdmzcxXP+Kt4l34ErfpUk0
+ I9CqPv9NQztsU4xgR7P4fQPncUuNTTlI9zNEb6JZVMUWPxf3Tqp4SpJZ+mdnnD+6D895/+mI8LVYN
+ JGSPpkYm60v6jx4iChlhSpkxQhZgsLUt21cMKdu9hukIjqQTxKUOerhWB3Xz8qQi/Pi4VJHLzZT8f
+ G/pwUTA6qvU5UY12KYPOIpUtUgS7wlVPEeubxIL1nElU4rFXCWRDuUV1VwB5RzC9T1lG2D2PTmZcp
+ +fHvHYUGIUXRjckjkN3m91iqX97ve5wTyNHaBSzhgwS7qcOZe5xmlF4ttiT1K7sqvLfMuoZxyT1qR
+ /ir1OOXT9vc4xzEZEgX/Mc8OyPwKExne2ixQhLJDtY4Ve+rN3U5S+ROikNNztoVdtu7jRIwjKQ1Ba
+ rkMsTVcsXQ4as36cu2x6/K1x;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iwPBb-0003DY-Tq
- for samba-technical@lists.samba.org; Tue, 28 Jan 2020 11:37:39 +0000
+ (Exim) id 1iwPUX-0003MU-Gw
+ for samba-technical@lists.samba.org; Tue, 28 Jan 2020 11:57:13 +0000
 To: samba-technical <samba-technical@lists.samba.org>
-Subject: [Release Planning 4.11] Samba 4.11.7
+Subject: [Release Planning 4.12] Samba 4.12.0rc1
 Organization: Samba Team
-Message-ID: <36547767-0535-93e5-ed5f-38665bb68ada@samba.org>
-Date: Tue, 28 Jan 2020 12:37:39 +0100
+Message-ID: <e0031673-5e5b-cc28-b28a-f6a508ccb9af@samba.org>
+Date: Tue, 28 Jan 2020 12:57:13 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
@@ -64,9 +64,9 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 Hi,
 
-Samba 4.11.7 is scheduled for Tuesday, March 10 2020.
+Samba 4.12.0rc2 is scheduled for Tuesday, February 4 2020.
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.11
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.12
 has been updated accordingly.
 
 Cheers,
