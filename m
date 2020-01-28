@@ -2,48 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E96B214A220
-	for <lists+samba-technical@lfdr.de>; Mon, 27 Jan 2020 11:40:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7672314B31A
+	for <lists+samba-technical@lfdr.de>; Tue, 28 Jan 2020 11:57:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=wUpdoHXOO3jIE8CZV0TvH6/Hch3Km5eloJsWkg3WLqI=; b=kKF/ZzxSv32tl/ho0UvE6okgdI
-	PXlC6XXRl0JcvTTAbg0BQ2kDrZ7p7311bWqa6vE8bsxFQKXVQKMXlc2AtUbSFbiPVezrVQjr62mx3
-	D2ikCa0w1BrluFJv3MvdlwDK0clydAgaMIT2zdz1MYzg/Eg4yGCDmkkqfZy26ysGg68iJwyjEATwf
-	eqT6EEtj3ct9gGkPu3re4vxqoHwTMwRyKCeSUf6ljZHrSHVLYjKCqd38VY6pl379Ot3EUHkPUhyVl
-	Rq1ok6t0YBl0ibIerAG01IfDOjHWgHa3KZoPbdQYU0MNnRwhP751/HkLELG+e5W7G9dP7nrxtuH5d
-	13KRJVTg==;
-Received: from localhost ([::1]:29674 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=wKoat79cZioZq35X95EvfOh4+PSFV6uFrwp9n6wlUP8=; b=ndJlieGSOc1zmgee2t6WzFa9Yx
+	+T9eCLpP8xA+W6Ab2TqakdtbmYuUoPO9g2TN1CDMUxID+4u9UGIYXxjaCvCzBbMI++0W2yZNnUkUB
+	1tQIzJnAYW7J7/6OY94CfS2uDRydJInDN71Z3ev5ys9GLfNxX8uAhb8xUTR9fnpYveE0b+zIeiSZs
+	vJLT7w3Ws8DtGvbnfcSe/bcZH9O4aKijzxbIHWH/Qr1nTWWqksrxUt9voGljCyGYZ0lIOWAwkTUzW
+	zU/fI3TynXZcrgiiIp2wF2E0ITmTb6XxGumVw/jsRtRDOio3yq2YXITbcUZ3zw79HkwgMYVVim2rF
+	zrgsnbTw==;
+Received: from localhost ([::1]:46916 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iw1og-004up1-3p; Mon, 27 Jan 2020 10:40:26 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34454) 
+	id 1iwOYD-005554-5U; Tue, 28 Jan 2020 10:56:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58416) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iw1ob-004uot-JH
- for samba-technical@lists.samba.org; Mon, 27 Jan 2020 10:40:24 +0000
+ (Exim) id 1iwOY0-00554N-SL; Tue, 28 Jan 2020 10:56:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=wUpdoHXOO3jIE8CZV0TvH6/Hch3Km5eloJsWkg3WLqI=; b=i96MmOKpHLI7xm1HE9/J8lWi7w
- Pj4re+ETjPuBrIxUC+LEWRhFeHRggNsDgtIUcGh0lHZi62mQP38bvzW8eyI1Iq8dkmnI4S/mjRY0f
- r6jjliOn8kdUPb1slxFvyhSeIxOSG2i0QtK9j9CJdL0mnGyQklApusfQhtVgVBtW/iKGNU2VY4F7k
- 5I6mutyGHgPrzspSQZvlY9/1HOMy+r1+HeXDRF44yk8aZEUgJ+hAOdWg4UOYZv/vePRSxXFwQTFoN
- QHKQj1jWMtF88YRB7BO1pCLaRIuyUVoSFLu449yP/x4rRL58S21mEQ6b6rdK4mMwScuCq/pDleOfj
- D82zlmqeGaO7c8p3csYUDVGVf4456l2Nr6YTvcH6iVQOOqW6i4kfcDBOeDjDulSFSBH5Mu9EIA+mX
- 59wbQb2d9ypRV4K/jFmbi40Bz6I6zZdZDfHUlzLZ5uTFEc0ivCFtL/TMxN+NQGAzxwiIfa6M0/AsA
- AXMXJ0kO+WerxHqgpUR2K9B/;
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=wKoat79cZioZq35X95EvfOh4+PSFV6uFrwp9n6wlUP8=; b=fhXoLGS5HMcsgnVMtKHTuWAFUm
+ h5UGG4myNCnX6WWoHPPq9u7wfGSE1DDuAS8TG9wIaN2qSaQBeslVydGbNd75Dh7/NdN/xTtOeATRB
+ L+oYBwMMLCCkLlBosSG4wz5eGvn//DqJ2G9ESvxKGZ4ujVNUjmK2D9bm9dqhOJI3099EV5oc0HHro
+ hVusytigPKhKIiH6mWJldUlHTBJVmEJxpeJXsYQ8iqmwZGTOW1U/mJ9gN5UU7i9nIMIIIdfDQDK6a
+ Q3sBbvUrUJepFZxyUSfLEoeIIpRDnUfnmDWL0tv1xrNqXzrjFlcEI7SKlYoAOQGHg4l2OT9308Qcq
+ Klc30/eJMBXKTWyM+kKb4/LsC8+lH61E9NHqv9MyhZDQSVMwn9kqzO562prPZbayDV5CGHU2swzp8
+ S3QutQ/llIJAErwND/XMpDYKHtPlkUpASEuLZxNLk3Fa+LLEx1cl8cnXIltkxkzAZzluR6WgLbtJK
+ BClxuOjHnpV6OSQVVyyQAkI0;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iw1oZ-0000QI-BX; Mon, 27 Jan 2020 10:40:19 +0000
-To: Jeremy Allison <jra@samba.org>, samba-technical@lists.samba.org
-References: <20200125002104.GA188423@jra4>
-Subject: Re: Linux io_uring VFS backend.
-Message-ID: <9de9b007-07ec-e9d2-f2ff-8c3c4eee215c@samba.org>
-Date: Mon, 27 Jan 2020 11:40:14 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1iwOY0-0002qU-Dn; Tue, 28 Jan 2020 10:56:44 +0000
+Date: Tue, 28 Jan 2020 11:56:43 +0100
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.11.6 Available for Download
+Message-ID: <20200128105641.GA23769@carrie2>
 MIME-Version: 1.0
-In-Reply-To: <20200125002104.GA188423@jra4>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="Rys1xoiKhFqMSeGmB8KiiPGa34xYoVaTa"
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="7JfCtLOvnd9MIVvH"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,96 +54,121 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---Rys1xoiKhFqMSeGmB8KiiPGa34xYoVaTa
-Content-Type: multipart/mixed; boundary="areBJQ5JxboHCymu3o8d6qpDHlMTiyUqA";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Jeremy Allison <jra@samba.org>, samba-technical@lists.samba.org
-Message-ID: <9de9b007-07ec-e9d2-f2ff-8c3c4eee215c@samba.org>
-Subject: Re: Linux io_uring VFS backend.
-References: <20200125002104.GA188423@jra4>
-In-Reply-To: <20200125002104.GA188423@jra4>
 
---areBJQ5JxboHCymu3o8d6qpDHlMTiyUqA
+--7JfCtLOvnd9MIVvH
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Jeremy,
-
-> Any chance we can get the io_uring VFS
-> code checked in for 4.12 ?
->=20
-> Would love to see that as an option
-> for Linux users.
->=20
-> I'm happy to review / test !
-
-Look at https://gitlab.com/samba-team/samba/merge_requests/529
-I just rebased on current master.
-
-The ubuntu 18.04 hwe kernel is up to 5.3 now.
-But you need the liburing library from https://git.kernel.dk/liburing
-
-I typically use
- ./configure --prefix=3D$HOME/prefix/liburing
- make
- make install
-
-And for Samba
-
- PKG_CONFIG_PATH=3D"$HOME/prefix/liburing/lib/pkgconfig/:${PKG_CONFIG_PAT=
-H}"
- export PKG_CONFIG_PATH
- ./configure ...
-
-Note it won't currently work with a 5.4.15 kernel. The regression
-is revert in 5.5 and most likely backported to 5.4.16.
-
-Please test and it and play with the possible config options.
-If you can provide some numbers, which show if the options have
-any impact.
-
-If everything works out ok, I'm happy to push it to master and
-backport to v4-12-test.
-
-I guess in the long run that module will be the default on
-Linux. I'm currently discussing how to use IORING_OP_OPENAT2
-from Samba and have the correct impersonation for the async
-requests.
-
-metze
+Release Announcements
+---------------------
 
 
---areBJQ5JxboHCymu3o8d6qpDHlMTiyUqA--
+This is the latest stable release of the Samba 4.11 release series.
 
---Rys1xoiKhFqMSeGmB8KiiPGa34xYoVaTa
+
+Changes since 4.11.5:
+---------------------
+
+o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+   * BUG 14209: pygpo: Use correct method flags.
+
+o  David Disseldorp <ddiss@samba.org>
+   * BUG 14216: vfs_ceph_snapshots: Fix root relative path handling.
+
+o  Torsten Fohrer <torsten.fohrer@sbe.de>
+   * BUG 14209: Avoiding bad call flags with python 3.8, using METH_NOARGS
+     instead of zero.
+
+o  Fabrice Fontaine <fontaine.fabrice@gmail.com>
+   * BUG 14218: source4/utils/oLschema2ldif: Include stdint.h before cmocka=
+=2Eh.
+
+o  Bj=C3=B6rn Jacke <bjacke@samba.org>
+   * BUG 14122: docs-xml/winbindnssinfo: Clarify interaction with idmap_ad =
+etc.
+
+o  Volker Lendecke <vl@samba.org>
+   * BUG 14251: smbd: Fix the build with clang.
+
+o  Gary Lockyer <gary@catalyst.net.nz>
+   * BUG 14199: upgradedns: Ensure lmdb lock files linked.
+
+o  Anoop C S <anoopcs@redhat.com>
+   * BUG 14182: s3: VFS: glusterfs: Reset nlinks for symlink entries during
+     readdir.
+
+o  Andreas Schneider <asn@samba.org>
+   * BUG 14101: smbc_stat() doesn't return the correct st_mode and also the
+     uid/gid is not filled (SMBv1) file.
+   * BUG 14219: librpc: Fix string length checking in
+     ndr_pull_charset_to_null().
+
+o  Martin Schwenke <martin@meltin.net>
+   * BUG 14227: ctdb-scripts: Strip square brackets when gathering connecti=
+on
+     info.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the "Samba 4.1 and newer" product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+        https://www.samba.org/samba/history/samba-4.11.6.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--7JfCtLOvnd9MIVvH
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl4uvg4ACgkQDbX1YShp
-vVYachAAsqNkrnOEivZwLbhmEUHhEpEdJ1sty1hJd7dPd85enjnrpHkuJTeStYlt
-WtYFG7zPEIkJ7Gkxjmzj3ByW0Tmi/cg1zVysS5fPg3tn84wvZrGJm31+b5gWf0tx
-jYQJf9xK+ZHT4+Mi7Uui5dtEfP3WwbBS7Mty7zN8owETLURIMtpztsd5HSHgNpQY
-oCjkTSf4QHGpD6Ah/ppCj3FToRe7l99xs/UUjYfptx2QEaebWkBt9zYJCYSCS4it
-tCYAagGWhScwdupmYIUEMZCmzQ8IvqNdjPfvK+E5kAlHC1B9KL9xjqeNXaEtXP0M
-UZrA9gGyiMoxLxREhp9BKZDlyDH+HsDyagKs9FIL7EiS76hiLBd3GA/l5B4AfL5E
-qOa3PBr1njd/jqMmB4o1mCoiSdwG8hS5Ohmn9ARkDcLMHZjsWcApL8LsB0CAtWzD
-5aYZJznaTciA4TOQ2RAdyRqKNyxHLEH8jD6owWgQHo/xpv2BtXXmUgWpoX5nVkAh
-ylpraRaXGpeWG0Rs22Ye2n7feX7LOKblNNp6OhwcDOgf1NlezugjCyXUohtEXbUx
-IEjPYaZ1dlFQpqX0rkxcRh1u71Q+v25Jh9bqCFaWshYEfQ7XSYSJkQSjNsUytnfk
-8Wr5GTw1W0CNNm5JJZ+XYzJxxzWbNkItzP3DseguqZN7lt9lnNo=
-=yXuc
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCXjATZgAKCRAoaL1+KxeT
+UUL+AJ4oVLjhCeEHCQ0lv3gq8uLwcu6jXwCfafZwiUydvqv1+eouSQlTI+3jdZw=
+=SFx5
 -----END PGP SIGNATURE-----
 
---Rys1xoiKhFqMSeGmB8KiiPGa34xYoVaTa--
+--7JfCtLOvnd9MIVvH--
 
