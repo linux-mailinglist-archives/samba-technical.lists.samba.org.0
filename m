@@ -2,57 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BA4014D2AB
-	for <lists+samba-technical@lfdr.de>; Wed, 29 Jan 2020 22:43:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D65E14D561
+	for <lists+samba-technical@lfdr.de>; Thu, 30 Jan 2020 04:40:16 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=CNZJ92jFTzaihOtjKpuE5ujv29wiHhLGQPCRH7NQ1Zs=; b=sItTnj2SFqsZq1Eb1w8gv4fB8k
-	+uk22i3gSUuZ4FO2wk4vlbIYsmOptQcsXMO2y4xuDX3UD7afDSxpb9/2OyRZtwibi6D94BP++TF/3
-	vSoVHBoAoc59vbhj39mX45Jbuqgr86cTx5t12oDVrB2sFbY9r12Md+NiwaWsT4UUAjEvTZ3BKPrWP
-	Z3h3bNcb7OmA2j2vfzX1tEzhaARKdioCF/xbJ2/hZ/L0ZbIUS3m+Dj0xKFusEpnbO8/BpmA6AHQ9X
-	9ui9Ujv1ECCXO5cOhFM8cdAHX5gMKP9YWhzqNiUJvTEkNKh3Z7iJkRsoaIWtcohCDd5Nj7X2JRGCw
-	723dVT/g==;
-Received: from localhost ([::1]:20960 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=ecgDIRlaXBwoQEpgNoqgE17XeCASHz7xplSZ2VE9IVo=; b=fDJIdrFCk35Bcy+tXJNtsOK3f1
+	6iNUHI/FZZR5lytLTmx5K318lUwI+f0ti76ey3A4EQYR1b//tZ+d352cLAzycimkvyu9rmOLtshBj
+	/eHvbvnu2bpK78dMuOQSn51XlGdJtd5gJ762nMKRT7WZ6ETOavXHxGiO8oYZCYcdp2inpgY3PolDn
+	zdcDSwgyWgaeaB19e6Dn0KBJdVMeJgRThmMGCyk1LAZzAF39ckp5GIFVZnDK6DfbqaOQcMD+MojCf
+	hcImyfuz2aQqqwpkEE8eb/rGcH6gjqtpGCrSypJIWgTwI7st2Cb4paD05QSFokJqeQuE/KF3JrXsQ
+	7tgyc5nw==;
+Received: from localhost ([::1]:36372 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1iwv7N-005ONZ-0c; Wed, 29 Jan 2020 21:43:25 +0000
-Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:44293) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1iwv7H-005ONS-Vx
- for samba-technical@lists.samba.org; Wed, 29 Jan 2020 21:43:22 +0000
-Received: by mail-lj1-x241.google.com with SMTP id q8so1002515ljj.11
- for <samba-technical@lists.samba.org>; Wed, 29 Jan 2020 13:43:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=keepertech-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:from:date:message-id:subject:to;
- bh=5w6Ch8CzPKaQ/xLJ0wpAeLoNFGTaa8maUZM8CFuTQAY=;
- b=alKsfnWozXWBJHVhIfmHfveevzevHee6q+Nj44jfU3KrsF7704wIDZOvEr4vQNqP0y
- A+5ILigknJHR6u6oOsilzuQD8a7dUv08+mIxjiahuO/tYGrtnEWrbXqqX0ucM6LFR6DL
- oG9TQ5s/7pZZk4ll9kcQJQ5vMItRt6LA8VRHzL6fy8hXl/00TP3admbargJnSP2+LpVz
- dQ4iowz7PkRJdW7Ge5ZKBXcSxMOc7hCjthkz2SiAQU6CStfXqMPUQX6SqESsPZRAMkxL
- eEf6gzuCLqSoSdJTMFMKPjVHDzxNH+mGoTRTtYkcansy5/iN4MxTujm6TxiGnq0Orz6M
- TLNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=5w6Ch8CzPKaQ/xLJ0wpAeLoNFGTaa8maUZM8CFuTQAY=;
- b=qnKRfDz/ocF9epvF75cA0fAdCh5gUkFTJzW6LSPwzbltyuOlnxHYcO760dhr+xlbW0
- zYtzXYOfVpaZqggJnfthaFM91pFspHER3vUtAmy2itujZ0fZHISEGZhuqVazinx+N6HO
- rWDt95xYzhuAkab1xmbgQfZCTsY1gBUT1A9uOPxGoMz949yz+0LuaovJWdQq+TXikMGy
- uIXs0oHOc3xQLKoO4SH7wP7acAbDkPcAoRDh4rmlhpAtRHu6Zr5X6fAOfQcsE30fC/lq
- mVkeW6wa1k5Vsi5LFL8JpFDCiDoMauqQVhexpxtdXl5le9TlpxMvhZGIZdGH6Ndkt7ep
- 9Aeg==
-X-Gm-Message-State: APjAAAXLuNZb4ecscF7bxKb6qCWvLFhCF4jk7SjwEiFe7k/bKtPZsZLJ
- lIHAnPc8MgRMgB9btOt+ClV4v/RU8IC5TFKgqsjcvTvHc0y+og==
-X-Google-Smtp-Source: APXvYqxqr0H7pXbFdGeie6qOKLQ63ZPme74nxIne/Y6Ly8ayqjr3Vbr7ukRbkR5V+T+r0ZT6f2NxAvxMDTv7eiewnxw=
-X-Received: by 2002:a2e:b4f6:: with SMTP id s22mr704288ljm.218.1580334198524; 
- Wed, 29 Jan 2020 13:43:18 -0800 (PST)
+	id 1ix0fj-005RGK-2j; Thu, 30 Jan 2020 03:39:15 +0000
+Received: from userp2130.oracle.com ([156.151.31.86]:46982) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1ix0fd-005RGD-LL
+ for samba-technical@lists.samba.org; Thu, 30 Jan 2020 03:39:12 +0000
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+ by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id 00U1r4L1117242;
+ Thu, 30 Jan 2020 01:54:15 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2019-08-05;
+ bh=ecgDIRlaXBwoQEpgNoqgE17XeCASHz7xplSZ2VE9IVo=;
+ b=qVJw16Vccb5PJ/8bEMeZ5hlqFMDsXEG6h0IuqVGlZiayps77itHQQ9AFUg52kMibrqiH
+ sCqdml9ywwxzghItNKz93AGxXm2mLApiol1yF8OZeuHs3rTSaHFG0w5UrVY3zp3yZXJI
+ x9ayFV0EYvJ2WsWvXLcef/8Zeq/Tsle3+iohS+yNa1tapKnq0tOj4UPx17Hs443tpMjU
+ x1OPMSwKmIO7xrLbRX5DTVFjYK1ohmoK/OHLcxxURXAFtDVhvtLy/CcWQ/xSeAfdMGsr
+ YjqwFsH2o+m7cJNyvYnVXSPqOsbNlUJLWEW6wsanMxe9cEa2LnHPdAIi0+kBeWoNPIaW vw== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+ by userp2130.oracle.com with ESMTP id 2xrd3uh63j-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 30 Jan 2020 01:54:15 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+ by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id 00U1hjbt080079;
+ Thu, 30 Jan 2020 01:52:14 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by userp3030.oracle.com with ESMTP id 2xuemva2br-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 30 Jan 2020 01:52:14 +0000
+Received: from abhmp0010.oracle.com (abhmp0010.oracle.com [141.146.116.16])
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 00U1qBo2025023;
+ Thu, 30 Jan 2020 01:52:11 GMT
+Received: from localhost (/10.159.240.218)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Wed, 29 Jan 2020 17:52:11 -0800
+Date: Wed, 29 Jan 2020 17:52:10 -0800
+To: Steve French <smfrench@gmail.com>
+Subject: Re: [LSF/MM/BPF TOPIC] Enhancing Linux Copy Performance and Function
+ and improving backup scenarios
+Message-ID: <20200130015210.GB3673284@magnolia>
+References: <CAH2r5mvYTimXUfJB+p0mvYV3jAR1u5G4F3m+OqA_5jKiLhVE8A@mail.gmail.com>
 MIME-Version: 1.0
-Date: Wed, 29 Jan 2020 16:43:07 -0500
-Message-ID: <CAGbvivLQB+MfGGX-DH+7VUSB2RjPm2qr7CfpgzZZwoui3w6fdw@mail.gmail.com>
-Subject: ctdb, haproxy, and ip_nonlocal_bind
-To: samba-technical@lists.samba.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAH2r5mvYTimXUfJB+p0mvYV3jAR1u5G4F3m+OqA_5jKiLhVE8A@mail.gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,41 +73,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Wyllys Ingersoll via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Wyllys Ingersoll <wyllys.ingersoll@keepertech.com>
+From: "Darrick J. Wong via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: "Darrick J. Wong" <darrick.wong@oracle.com>
+Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ CIFS <linux-cifs@vger.kernel.org>, lsf-pc@lists.linux-foundation.org,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I have a cluster in which I want to use both haproxy AND ctdb on the same
-nodes - haproxy to manage NFSv4 (ganesha) and CTDB to manage SMB.  The
-reason for doing this is that I've read several warnings about NOT using
-NFSv4 with CTDB.
+On Wed, Jan 22, 2020 at 05:13:53PM -0600, Steve French wrote:
+> As discussed last year:
+> 
+> Current Linux copy tools have various problems compared to other
+> platforms - small I/O sizes (and most don't allow it to be
+> configured), lack of parallel I/O for multi-file copies, inability to
+> reduce metadata updates by setting file size first, lack of cross
 
-haproxy + keepalived require that the net.ipv4.ip_nonlocal_bind flag be set
-to 1 which breaks ctdb's ability to manage the virtual public IP addresses
-(among other things).
+...and yet weirdly we tell everyone on xfs not to do that or to use
+fallocate, so that delayed speculative allocation can do its thing.
+We also tell them not to create deep directory trees because xfs isn't
+ext4.
 
-If I do not configure any public_addresses and just let haproxy configure
-the virtual public IP addresses, CTDB is still unable to startup on both of
-the nodes in my test cluster.  It will start on one or the other, but they
-never sync up and come to an "OK" state on both nodes.
+> mount (to the same file system) copy optimizations, limited ability to
+> handle the wide variety of server side copy (and copy offload)
+> mechanisms and error handling problems.   And copy tools rely less on
+> the kernel file system (vs. code in the user space tool) in Linux than
+> would be expected, in order to determine which optimizations to use.
 
-I have the "node address" value set in the [cluster] section of ctdb.conf
-on each node to be the private address of that node and both private
-addresses are listed in the nodes configuration file and the nodes are
-connecting to each other privately, but they don't stay connected and the
-2nd ctdb node never fully initializes and starts up.  At some point it just
-begins flooding the logs with messages like this "node 192.168.113.14:4379
-is already marked disconnected: 0 connected" and pegging the CPU at almost
-100% until the disk with the logging completely fills up (which sounds like
-a bug, btw).
+What kernel interfaces would we expect userspace to use to figure out
+the confusing mess of optimizations? :)
 
-Does anyone know of any way to make this sort of configuration work ?
+There's a whole bunch of xfs ioctls like dioinfo and the like that we
+ought to push to statx too.  Is that an example of what you mean?
 
-Currently running Samba 4.10.10, haproxy 1.6.3, and Linux Kernel 4.19.34 on
-Ubuntu 16.04.4
+(I wasn't at last year's LSF.)
 
-Any help would be much appreciated.
+> But some progress has been made since last year's summit, with new
+> copy tools being released and improvements to some of the kernel file
+> systems, and also some additional feedback on lwn and on the mailing
+> lists.  In addition these discussions have prompted additional
+> feedback on how to improve file backup/restore scenarios (e.g. to
+> mounts to the cloud from local Linux systems) which require preserving
+> more timestamps, ACLs and metadata, and preserving them efficiently.
 
--Wyllys Ingersoll
- Keeper Technology, LLC
+I suppose it would be useful to think a little more about cross-device
+fs copies considering that the "devices" can be VM block devs backed by
+files on a filesystem that supports reflink.  I have no idea how you
+manage that sanely though.
+
+--D
+
+> Let's continue our discussions from last year, and see how we can move
+> forward on improving the performance and function of Linux fs
+> (including the VFS and user space tools) for various backup, restore
+> and copy scenarios operations.
+
