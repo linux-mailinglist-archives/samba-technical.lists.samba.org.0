@@ -2,46 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C540E14D841
-	for <lists+samba-technical@lfdr.de>; Thu, 30 Jan 2020 10:32:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57CFC14DAED
+	for <lists+samba-technical@lfdr.de>; Thu, 30 Jan 2020 13:47:34 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=AG2TV6ZoPT+eCHCisca1prbIoL9p8NQSRk+T1m80kG4=; b=0D5RVOIxvX1r7XR8521Mi0lkS8
-	DL3DADt9et50FdGFRW14q5BIX7fEzvCqqWPRaG0KTWQrpRtpXASuYBb5ErIdeYnKzWCYpxDfEA3Bp
-	qX27iZfx3Zs1wElg5eEmnqxzxvx2lNLCvXwgj6vHz2nXU6NH45XkS6jhssikvz3pZUqxuRQQsk2Pn
-	qvxEPM9XgIYgPNXUN9TmU5OL6MLyNy3eoUWMM/PH6pXG1cMGgY2QTPzRAkpWGCFT6Kt2UHLthsFdm
-	H6ZZp2ts330Yc/T8pIuZ66AO5B4kkBmNVAgFDiFIdgXGvfNp+TBVCidqfhW2asMOn3Fi2Zj3+ecT7
-	hrrAxJmQ==;
-Received: from localhost ([::1]:45526 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=cvwV/YlglHMOvPzY6YKfoeEbOoFoRryeG3lqYhagzXU=; b=kLka8nUraErGEit4Z5DubYx3un
+	bGKFjcDBSV26CSe2wOUmA16vuBN1Vp9MPgJTjEE+/yJFBs59E9gbw1hDT9Fwrin437iMMZED6A2mi
+	Bvbsi8s2Gare+PjpZzCeH1V2s39TkWFH6R4ST1TkNKZw27IJAgp0iYk1gc3+GdS6+Kc2v7ZRKZrzk
+	W735F9EhauOJMaK3P/F7R7Un4kEPluBHny4DnUGmxKYcXCneFzsMMazKeWMDrXra9Vmgqot2tnBHM
+	HTeYXcQD6PvaV4DiHblqWmUmK5PDqbpq+I2TkhE9IccY4zu03UaDyQ/0HjFsmXub0unxHneg7ohfT
+	USQ1JC3g==;
+Received: from localhost ([::1]:50120 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ix6AS-005THV-Np; Thu, 30 Jan 2020 09:31:20 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38272) 
+	id 1ix9DU-005UEr-BZ; Thu, 30 Jan 2020 12:46:40 +0000
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:44253) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ix6AO-005THO-SN
- for samba-technical@lists.samba.org; Thu, 30 Jan 2020 09:31:19 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=AG2TV6ZoPT+eCHCisca1prbIoL9p8NQSRk+T1m80kG4=; b=ShpOhyqycGzr8DMGSqArl8qUVf
- IahzkbTipHxMiiUmYR4O+OgdwYJdZZH12JNHv3H8MY+mB9k2Imf2b+ktDdzKvPsWt6Nx6C9dkv6yo
- HiTMYCk3zdAb3SqDAs6O1FGbCy95NovNadi4w6UaoeKS4m+sFWxw4WfIA/6RNOJBWvQSFf6neyEBR
- aipktdlwfYXhhdBl/nRiCRb1HEk/HY9pAdP/2257YEQSfRtGG0K4TXtJAycGrdmkelTI2pHO/+lk/
- O6FvdxM26krHiS0G/Pt80aa8uFJPzJRt5g2eUcp8Uexf6zKQAUQyL47+A3FFiwxa6FpfZcR/7G8i9
- Qpv6JItaxCgoLnEvdlrZ11AgWserXACf/qzMdlFImXbEwJygSFbNQy68b0CJcnCYqRs5aIfPjgC9w
- VHUk8F1cmerksjx+iNrQ/olM/ymCCg3Hca1NkytMEgyaiNTFzFPJdD8xX1Dajgb7oqqVd/tIikfdi
- oJXbZwn/18mHK9lmSS5ixVJH;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ix6AN-0001E9-Rd; Thu, 30 Jan 2020 09:31:15 +0000
-To: samba-technical@lists.samba.org
-Subject: Re: The samba3.base.delete test
-Date: Thu, 30 Jan 2020 10:31:14 +0100
-Message-ID: <2891334.gmRuezT9A3@magrathea>
-In-Reply-To: <50d2453f-0412-d41e-a1fa-4f6e1543a816@samba.org>
-References: <1772232.gcRF95uoko@magrathea>
- <50d2453f-0412-d41e-a1fa-4f6e1543a816@samba.org>
+ (Exim) id 1ix9DQ-005UEj-7V
+ for samba-technical@lists.samba.org; Thu, 30 Jan 2020 12:46:38 +0000
+Received: by mail-lj1-x243.google.com with SMTP id q8so3150106ljj.11
+ for <samba-technical@lists.samba.org>; Thu, 30 Jan 2020 04:46:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=keepertech-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=XDk2f23WUxaKEuGlnQgPDA5B6jw31ao4pL6dtlsOhh4=;
+ b=Zjof9q8LcKouwQv7qud2SQONwCXdW8QPnoBCOfFK6L36WIP0SeF4hnRWysg9ej+lUT
+ Yr9+21nuCd6Qh3PI+RgDizgz63+Pw/Casthio4KlYlOyQyzKyDaj5tpEs8LZoHPpwoer
+ 1J1mTXpKEBgj6YtSndkwYIKYjjpywxnUm5mjbETlEdLOKLdYfibVflZRkpY2RWtCXcuy
+ fhUWGcBedsUffYaNTKRtC/Y/X+3ARnKq29L34Yzq8/izOGRnDOByzf2g0aPBQEC/6bmu
+ 4Kv0vQZJszP0Cea3JxvDvKzoUHn18mjUvpOhYRjC/kcYeovGovrrRkH9sWzbEPW8j24p
+ E+cg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=XDk2f23WUxaKEuGlnQgPDA5B6jw31ao4pL6dtlsOhh4=;
+ b=JWuCwMMWqLF6eO27s/yyea43zsm+6Us0xc584O/eXYgu4BusKcKXhEBL7gaonPaDsx
+ Pwl91cwJqlInOyoI3Rgez6Ev51Q0esFRJbUN8npmve4rnlNwPoISGsa5bHwNE02ZvCaV
+ NED3TLWv9gcDAp2mhMznFVOhOwuAr6nRQORlHmPJjkSv5CLvwFqrBBaKyCRROU8ec8oy
+ AMBwGrrK9WeUv5vxCEvtd+4S+qLdFvhhwFQCvMPWgR8PJJSnV4L/VYCT81LUGcIGJqmW
+ oVml6V/hpI1UddP22k8vrHBZ5r8q16cOguLbFI+IOht7FFa6PfTn19Wq2SjOGWYZhaYG
+ vupA==
+X-Gm-Message-State: APjAAAXCsjXd2aeris6hqKTWGX5sHjaR9YSkV7NyOxzKbhlfg/UBixuM
+ K07uGhazRQpNMiRlj2I9sk4sV1sow1Cml3MCN/RQSY6rj/Q=
+X-Google-Smtp-Source: APXvYqx4NwaBEqGSj3e0z/2VH0p/JqsTs+BhcYd8RW5j2cewEgNiHy4tJ0oqtK57N1jGSxjUSfMeIip4RnvTWhRbtz8=
+X-Received: by 2002:a2e:3e0d:: with SMTP id l13mr2846680lja.70.1580388394453; 
+ Thu, 30 Jan 2020 04:46:34 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+References: <CAGbvivLQB+MfGGX-DH+7VUSB2RjPm2qr7CfpgzZZwoui3w6fdw@mail.gmail.com>
+ <20200130161536.271df9ca@martins.ozlabs.org>
+In-Reply-To: <20200130161536.271df9ca@martins.ozlabs.org>
+Date: Thu, 30 Jan 2020 07:46:23 -0500
+Message-ID: <CAGbvivJ4-ZPpz9iaqPT_BEuRX5qUm9E8yQ4ePYQYHydUg_vr4g@mail.gmail.com>
+Subject: Re: ctdb, haproxy, and ip_nonlocal_bind
+To: Martin Schwenke <martin@meltin.net>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,30 +70,72 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Wyllys Ingersoll via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Wyllys Ingersoll <wyllys.ingersoll@keepertech.com>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wednesday, 29 January 2020 18:11:26 CET Ralph Boehme via samba-technical 
-wrote:
-> Am 1/29/20 um 5:47 PM schrieb Andreas Schneider via samba-technical:
-> > The deltest20 of base.delete works if you run it as a user, but it fails
-> > if
-> > you run it as root!
-> > 
-> > Is this a bug or expected behavior?
-> 
-> sounds like a bug, -v please.
+Thanks, Ill try it and let you know.
 
--v see:
+-Wyllys
 
-https://bugzilla.samba.org/show_bug.cgi?id=14257
+On Thu, Jan 30, 2020 at 12:15 AM Martin Schwenke <martin@meltin.net> wrote:
 
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
-
+> On Wed, 29 Jan 2020 16:43:07 -0500, Wyllys Ingersoll via
+> samba-technical <samba-technical@lists.samba.org> wrote:
+>
+> > I have a cluster in which I want to use both haproxy AND ctdb on the same
+> > nodes - haproxy to manage NFSv4 (ganesha) and CTDB to manage SMB.  The
+> > reason for doing this is that I've read several warnings about NOT using
+> > NFSv4 with CTDB.
+> >
+> > haproxy + keepalived require that the net.ipv4.ip_nonlocal_bind flag be
+> set
+> > to 1 which breaks ctdb's ability to manage the virtual public IP
+> addresses
+> > (among other things).
+> >
+> > If I do not configure any public_addresses and just let haproxy configure
+> > the virtual public IP addresses, CTDB is still unable to startup on both
+> of
+> > the nodes in my test cluster.  It will start on one or the other, but
+> they
+> > never sync up and come to an "OK" state on both nodes.
+> >
+> > I have the "node address" value set in the [cluster] section of ctdb.conf
+> > on each node to be the private address of that node and both private
+> > addresses are listed in the nodes configuration file and the nodes are
+> > connecting to each other privately, but they don't stay connected and the
+> > 2nd ctdb node never fully initializes and starts up.  At some point it
+> just
+> > begins flooding the logs with messages like this "node
+> 192.168.113.14:4379
+> > is already marked disconnected: 0 connected" and pegging the CPU at
+> almost
+> > 100% until the disk with the logging completely fills up (which sounds
+> like
+> > a bug, btw).
+> >
+> > Does anyone know of any way to make this sort of configuration work ?
+> >
+> > Currently running Samba 4.10.10, haproxy 1.6.3, and Linux Kernel 4.19.34
+> on
+> > Ubuntu 16.04.4
+> >
+> > Any help would be much appreciated.
+>
+> Using "node address" should make this work.
+>
+> However, you're being bitten this bug:
+>
+>   https://bugzilla.samba.org/show_bug.cgi?id=14175
+>
+> This is fixed in Samba 4.10.13.
+>
+> I hope that upgrading makes this work for you.  Please let us know if
+> it doesn't...
+>
+> peace & happiness,
+> martin
+>
