@@ -2,60 +2,71 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BE9514FA73
-	for <lists+samba-technical@lfdr.de>; Sat,  1 Feb 2020 20:55:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA56E14FAF0
+	for <lists+samba-technical@lfdr.de>; Sun,  2 Feb 2020 00:17:19 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=5ZM+XG0Qafoo8yoA94Tb8BHY4hUIVe3CK4bN+n5GzG8=; b=SvQ6xGvvQdZ7h6Ok24ReiJaL4X
-	priG8SOA+wGvVmrzIJKfaReWjUyQIG/zJ+IwwgtrMRqlvrUNTVuI4K4VcPhoKfsvLNW7dXf3k5iqD
-	E6Yo/UO4TPIUgB6R06AV77PREOHiT3l/1OF+v3NJtCG3PHxihwJf8EqqQfSIWBqNqv93iY2j5VGoN
-	YcEHjp1lYs25Kuc4amRP3n0PgNppvXscP3LGdvVTplqcY6WwzaMQiyKSVDwiIRYDamCyYl7ZlasKu
-	WGkGLys7UyFbk6KYhmD4sGazVU4liTJNh8yCMeadc6zUz0y3bjiCQoj01TGHTlGCkAXe4Tt5sBTKq
-	nU0npeWQ==;
-Received: from localhost ([::1]:61622 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Date:Subject;
+	bh=iGWodyo7BE3SjtJqSzBK4M9PQhoTpRtuGVVx63VdcvE=; b=b1lBN4BOnUaPRxnm0Gqi1G8QAX
+	GUROPMeCSU7yb2/IntFivOco7Q0cjxmhrFVxOAJieLY4WONx4OuLc4e7Gomb66awgC6AUu3h+8XX6
+	5BPDPx7JK87qupn6lOUuCUoeMHLzSMo45wId3anqp8yX3qt1+UNOaqYvjlYqIEsURhEhJll1rjL/I
+	bFmNYzWtYJuKqlPoR7KLSug4z7h1T84TqRvAO85ecBSU8tjLgKl8zwPs1DYOHvjvhd74zP/5lfL6e
+	m8TbX+OYsCf1lFPY4Sh89+AKO3oldPkIG8c6zVeWfqj5SoBrtjZkEJDUNqXD5uKgYXv22JB3vkWuC
+	eZYiwLrA==;
+Received: from localhost ([::1]:62416 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ixyr9-007l4x-Gn; Sat, 01 Feb 2020 19:55:03 +0000
-Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:36172) 
+	id 1iy202-007lqk-9H; Sat, 01 Feb 2020 23:16:26 +0000
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036]:35435) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ixyr5-007l4n-Ke
- for samba-technical@lists.samba.org; Sat, 01 Feb 2020 19:55:01 +0000
-Received: by mail-il1-x142.google.com with SMTP id b15so9252679iln.3
- for <samba-technical@lists.samba.org>; Sat, 01 Feb 2020 11:54:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=5ZM+XG0Qafoo8yoA94Tb8BHY4hUIVe3CK4bN+n5GzG8=;
- b=nM4GcWpAjqrvtL0Lcot/MfvVHtdRX+7g84363eMq/9AuOgxISlHekqaj3V52RNVmkm
- /ioWKfJZAkxg9iBcZUCW+mJwCkoFS+Gb2xhExyOKZiXItEGsDEX6Dt5Bf541NXK0sTHQ
- OfSkxk/se9sB5wMFojGXz6KvoP2KlTASo44Wb5gNchmhOs5LdCdGhr1HSlyzGMHAbUM0
- 1vOEEpt5AHGPBBXSY3iF3kHqh/J8eRjPlfPcq8DEwu8wYUDvZ1sFG07i5GXZDeTamJaW
- wKuM+UDaxinaG+hK+FRey6eXOpNF3EFJAePEkon67a03z3EeFPsWnfyVfm251IsJtyWl
- LvbA==
+ (Exim) id 1iy1zw-007lqd-9T
+ for samba-technical@lists.samba.org; Sat, 01 Feb 2020 23:16:24 +0000
+Received: by mail-pj1-x1036.google.com with SMTP id q39so4689746pjc.0
+ for <samba-technical@lists.samba.org>; Sat, 01 Feb 2020 15:16:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dilger-ca.20150623.gappssmtp.com; s=20150623;
+ h=from:message-id:mime-version:subject:date:in-reply-to:cc:to
+ :references; bh=iGWodyo7BE3SjtJqSzBK4M9PQhoTpRtuGVVx63VdcvE=;
+ b=VG8VHgFW5Y8I1qQ+mKKmHk3CK1FeLilftSPodp/gAQLO7H0iMnXo/hbXzzW+1sBgCy
+ FVFZJbW2QCXRlgfWq52EZyv8hyFKxVc7n0VUJSzxoGj6M0Ma3oBg8m+qb8v9DwzpC1t6
+ dmK7lN+1vbf5qhYIMTy8ObDbZgfXaAI1SCI/gBHNGC6XQG6/ZWuKSSBrPUefrSvYszQZ
+ zyCWCNDZn5eh9psagZ4lktWyeufza8klNNhqusERsju64VtmXzSxDL/TjlaX9lL62+1N
+ lad3q8zuHBPNqmJ3WN0Ev/jLSE9OK/3/+q+Kr6aTOKtX3lqH7aN9HchPQuvDC+FRxgC4
+ U6ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=5ZM+XG0Qafoo8yoA94Tb8BHY4hUIVe3CK4bN+n5GzG8=;
- b=knq9f9WmvVCkB515dJTDVEwo6hfkiV4SiI0FenTJkEFp5DaJF2KcujGg0vpMvbmuGe
- eAT5ax1gzeJBWWnOtUSIDEXd1MlmgoBOCkNZsoi0KbvdOhGl2I8IQwaNk1W3PoTNcTgz
- Dz9eeSB4oPpT69yne3DK9NoW461s5Ji71UXbgXZkiEL4j0auEQ7fa+1/ubV0eaKbdHlh
- +kCliATrV2dyHeliBvgxdtL0yCMxOjmQN2RnKGDfabhcLT/As05GJmb26omD9zcuJlTF
- 9hRR3wcbMDGGXaMHfGE7ANjNcgUsUYq01N6cA84/ZXbO0eHlIEMUnswQaBTvhhL77a8s
- y/Ww==
-X-Gm-Message-State: APjAAAVlWR4KmeWvRnSa+tpHUrLeEtac3+dele6BZBwYvNkUciPRgukB
- 2snc5mSUFQGtBLBlpkNbKXiDYe2F8D5eF8CVpY8=
-X-Google-Smtp-Source: APXvYqwLHAZsySBQ5toZfqW/3M9sNi5WUjCIwF+SI1xCAeDRgfX4LKqJmF2bmQV/9y0r2Ld5SOqDmVCpjzeN7PYQtxs=
-X-Received: by 2002:a92:d642:: with SMTP id x2mr8368738ilp.169.1580586897434; 
- Sat, 01 Feb 2020 11:54:57 -0800 (PST)
-MIME-Version: 1.0
-References: <CAH2r5mvYTimXUfJB+p0mvYV3jAR1u5G4F3m+OqA_5jKiLhVE8A@mail.gmail.com>
- <20200130015210.GB3673284@magnolia>
-In-Reply-To: <20200130015210.GB3673284@magnolia>
-Date: Sat, 1 Feb 2020 13:54:46 -0600
-Message-ID: <CAH2r5mv55Ua3B8WX1Qht1xfWL-k5pGJrN+Uz0L4jHtYOo9RMKw@mail.gmail.com>
+ h=x-gm-message-state:from:message-id:mime-version:subject:date
+ :in-reply-to:cc:to:references;
+ bh=iGWodyo7BE3SjtJqSzBK4M9PQhoTpRtuGVVx63VdcvE=;
+ b=O58VbbxXVpbdDfWNUCBQoUiJeKec3SZkKcBD/De2/VkCJb2rT6/vMFNi/8qiar50Tj
+ WiExwkV5MbCFVwhrStAKRjcl18bSiphbU351YvVu4VvrINk1WjvbGFXqev98xO/nn/c4
+ FpGoAUluI/LJC8JCqZ6LAh19v5sOcu/EyyRdhJRUf18pFWuJNyTIQfMEfuly7g1WnOnF
+ usJaaektQoi0M0t4MOdA2IOiEk0/GHdNtC+EncAkDIj4XBw68GKPo54G65REQ4VbvReV
+ T5L4QGXnJUVkPRmxFl33mS5SfjQar/TJ9IBuQ7xyGdKeV2a8HDGRAFKC33+TIFJsZYzr
+ IBIQ==
+X-Gm-Message-State: APjAAAWxHdhd3c8xe18vdJusIjCPQ1R5K7crWdJ6FZjFHRZaR/rQDsjO
+ TKhDBpKV5LUZmBiNuOW1QHbE0A==
+X-Google-Smtp-Source: APXvYqzwWU/jmICW8I0Bs+kQESOAJUhqZqQrxBQZImpPgkzh/M14GEdRdgArFATUrqRq68VbajhSyA==
+X-Received: by 2002:a17:902:8688:: with SMTP id
+ g8mr16718690plo.277.1580598976077; 
+ Sat, 01 Feb 2020 15:16:16 -0800 (PST)
+Received: from cabot-wlan.adilger.int (S0106a84e3fe4b223.cg.shawcable.net.
+ [70.77.216.213])
+ by smtp.gmail.com with ESMTPSA id 136sm14221343pgg.74.2020.02.01.15.16.14
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Sat, 01 Feb 2020 15:16:15 -0800 (PST)
+Message-Id: <497E0258-F69E-4739-B9B5-B3DA92571A27@dilger.ca>
+Content-Type: multipart/signed;
+ boundary="Apple-Mail=_18888712-B94F-4C77-8A59-99C68A3C505C";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
+Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
 Subject: Re: [LSF/MM/BPF TOPIC] Enhancing Linux Copy Performance and Function
  and improving backup scenarios
-To: "Darrick J. Wong" <darrick.wong@oracle.com>
-Content-Type: text/plain; charset="UTF-8"
+Date: Sat, 1 Feb 2020 16:16:11 -0700
+In-Reply-To: <CAH2r5mv55Ua3B8WX1Qht1xfWL-k5pGJrN+Uz0L4jHtYOo9RMKw@mail.gmail.com>
+To: Steve French <smfrench@gmail.com>
+References: <CAH2r5mvYTimXUfJB+p0mvYV3jAR1u5G4F3m+OqA_5jKiLhVE8A@mail.gmail.com>
+ <20200130015210.GB3673284@magnolia>
+ <CAH2r5mv55Ua3B8WX1Qht1xfWL-k5pGJrN+Uz0L4jHtYOo9RMKw@mail.gmail.com>
+X-Mailer: Apple Mail (2.3273)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,71 +80,199 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Andreas Dilger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Dilger <adilger@dilger.ca>
 Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>,
  CIFS <linux-cifs@vger.kernel.org>, lsf-pc@lists.linux-foundation.org,
- samba-technical <samba-technical@lists.samba.org>
+ samba-technical <samba-technical@lists.samba.org>,
+ "Darrick J. Wong" <darrick.wong@oracle.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jan 29, 2020 at 7:54 PM Darrick J. Wong <darrick.wong@oracle.com> wrote:
->
-> On Wed, Jan 22, 2020 at 05:13:53PM -0600, Steve French wrote:
-> > As discussed last year:
-> >
-> > Current Linux copy tools have various problems compared to other
-> > platforms - small I/O sizes (and most don't allow it to be
-> > configured), lack of parallel I/O for multi-file copies, inability to
-> > reduce metadata updates by setting file size first, lack of cross
->
-> ...and yet weirdly we tell everyone on xfs not to do that or to use
-> fallocate, so that delayed speculative allocation can do its thing.
-> We also tell them not to create deep directory trees because xfs isn't
-> ext4.
 
-Delayed speculative allocation may help xfs but changing file size
-thousands of times for network and cluster fs for a single file copy
-can be a disaster for other file systems (due to the excessive cost
-it adds to metadata sync time) - so there are file systems where
-setting the file size first can help
+--Apple-Mail=_18888712-B94F-4C77-8A59-99C68A3C505C
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-> >  And copy tools rely less on
-> > the kernel file system (vs. code in the user space tool) in Linux than
-> > would be expected, in order to determine which optimizations to use.
->
-> What kernel interfaces would we expect userspace to use to figure out
-> the confusing mess of optimizations? :)
+On Feb 1, 2020, at 12:54 PM, Steve French <smfrench@gmail.com> wrote:
+>=20
+> On Wed, Jan 29, 2020 at 7:54 PM Darrick J. Wong =
+<darrick.wong@oracle.com> wrote:
+>>=20
+>> On Wed, Jan 22, 2020 at 05:13:53PM -0600, Steve French wrote:
+>>> As discussed last year:
+>>>=20
+>>> Current Linux copy tools have various problems compared to other
+>>> platforms - small I/O sizes (and most don't allow it to be
+>>> configured), lack of parallel I/O for multi-file copies, inability =
+to
+>>> reduce metadata updates by setting file size first, lack of cross
+>>=20
+>> ...and yet weirdly we tell everyone on xfs not to do that or to use
+>> fallocate, so that delayed speculative allocation can do its thing.
+>> We also tell them not to create deep directory trees because xfs =
+isn't
+>> ext4.
+>=20
+> Delayed speculative allocation may help xfs but changing file size
+> thousands of times for network and cluster fs for a single file copy
+> can be a disaster for other file systems (due to the excessive cost
+> it adds to metadata sync time) - so there are file systems where
+> setting the file size first can help
 
-copy_file_range and clone_file_range are a good start ... few tools
-use them ...
+Sometimes I think it is worthwhile to bite the bullet and just submit
+patches to the important upstream tools to make them work well.  I've
+sone that in the past for cp, tar, rsync, ls, etc. so that they work
+better.  If you've ever straced those tools, you will see they do a
+lot of needless filesystem operations (repeated stat() in particular)
+that could be optimized - no syscall is better than a fast syscall.
 
-> There's a whole bunch of xfs ioctls like dioinfo and the like that we
-> ought to push to statx too.  Is that an example of what you mean?
+For cp it was changed to not allocate the st_blksize buffer on the
+stack, which choked when Lustre reported st_blksize=3D8MB.  I'm starting
+to think that it makes sense for all filesystems to use multi-MB buffers
+when reading/copying file data, rather than 4KB or 32KB as it does =
+today.
+It might also be good for cp to use O_DIRECT for large file copies =
+rather
+than buffered IO to avoid polluting the cache?  Having it use AIO/DIO
+would likely be a huge improvement as well.
 
-That is a good example.   And then getting tools to use these,
-even if there are some file system dependent cases.
+That probably holds true for many other tools that still use st_blksize.
+Maybe filesystems like ext4/xfs/btrfs should start reporting a larger
+st_blksize as well?
 
->
-> > But some progress has been made since last year's summit, with new
-> > copy tools being released and improvements to some of the kernel file
-> > systems, and also some additional feedback on lwn and on the mailing
-> > lists.  In addition these discussions have prompted additional
-> > feedback on how to improve file backup/restore scenarios (e.g. to
-> > mounts to the cloud from local Linux systems) which require preserving
-> > more timestamps, ACLs and metadata, and preserving them efficiently.
->
-> I suppose it would be useful to think a little more about cross-device
-> fs copies considering that the "devices" can be VM block devs backed by
-> files on a filesystem that supports reflink.  I have no idea how you
-> manage that sanely though.
+As for parallel file copying, we've been working on MPIFileUtils, which
+has parallel tree/file operations (also multi-node), but has the =
+drawback
+that it depends on MPI for remote thread startup, and isn't for =
+everyone.
+It should be possible to change it to run in parallel on a single node =
+if
+MPI wasn't installed, which would make the tools more generally usable.
 
-I trust XFS and BTRFS and SMB3 and cluster fs etc. to solve this better
-than the block level (better locking, leases/delegation, state management, etc.)
-though.
+>>> And copy tools rely less on
+>>> the kernel file system (vs. code in the user space tool) in Linux =
+than
+>>> would be expected, in order to determine which optimizations to use.
+>>=20
+>> What kernel interfaces would we expect userspace to use to figure out
+>> the confusing mess of optimizations? :)
+>=20
+> copy_file_range and clone_file_range are a good start ... few tools
+> use them ...
 
--- 
-Thanks,
+One area that is really lacking a parallel interface is for directory
+and namespace operations.  We still need to do serialized readdir()
+and stat for operations in a directory.  There are now parallel VFS
+lookups, but it would be useful to allow parallel create and unlink
+for regular files, and possibly renames of files within a directory.
 
-Steve
+For ext4 at least, it would be possible to have parallel readdir()
+by generating synthetic telldir() cookies to divide up the directory
+into several chunks that can be read in parallel.  Something like:
+
+     seek(dir_fd[0], 0, SEEK_END)
+     pos_max =3D telldir(dir_fd[0])
+     pos_inc =3D pos_max / num_threads
+     for (i =3D 0; i < num_threads; i++)
+         seekdir(dir_fd[i], i * pos_inc)
+
+but I don't know if that would be portable to other filesystems.
+
+XFS has a "bulkstat" interface which would likely be useful for
+directory traversal tools.
+
+>> There's a whole bunch of xfs ioctls like dioinfo and the like that we
+>> ought to push to statx too.  Is that an example of what you mean?
+>=20
+> That is a good example.   And then getting tools to use these,
+> even if there are some file system dependent cases.
+
+I've seen that copy to/from userspace is a bottleneck if the storage is
+fast.  Since the cross-filesystem copy_file_range() patches have landed,
+getting those into userspace tools would be a big performance win.
+
+Dave talked a few times about adding better info than st_blksize for
+different IO-related parameters (alignment, etc).  It was not included
+in the initial statx() landing because of excessive bikeshedding, but
+makes sense to re-examine what could be used there.  Since statx() is
+flexible, applications could be patched immediately to check for the
+new fields, without having to wait for a new syscall to propagate out.
+
+That said, if data copies are done in the kernel, this may be moot for
+some tools, but would still be useful for others.
+
+>>> But some progress has been made since last year's summit, with new
+>>> copy tools being released and improvements to some of the kernel =
+file
+>>> systems, and also some additional feedback on lwn and on the mailing
+>>> lists.
+
+I think if the tools are named anything other than cp, dd, tar, find
+it is much less likely that anyone will use them, so focussing developer
+efforts on the common GNU tools is more likely to be a win than making
+another new copy tool that nobody will use, IMHO.
+
+>>> In addition these discussions have prompted additional
+>>> feedback on how to improve file backup/restore scenarios (e.g. to
+>>> mounts to the cloud from local Linux systems) which require =
+preserving
+>>> more timestamps, ACLs and metadata, and preserving them efficiently.
+>>=20
+>> I suppose it would be useful to think a little more about =
+cross-device
+>> fs copies considering that the "devices" can be VM block devs backed =
+by
+>> files on a filesystem that supports reflink.  I have no idea how you
+>> manage that sanely though.
+>=20
+> I trust XFS and BTRFS and SMB3 and cluster fs etc. to solve this =
+better
+> than the block level (better locking, leases/delegation, state =
+management,
+> etc.) though.
+
+Getting RichACLs into the kernel would definitely help here.  Non-Linux
+filesystems have some variant of NFSv4 ACLs, and having only POSIX ACLs
+on Linux is a real hassle here.  Either the outside ACLs are stored as =
+an
+xattr blob, which leads to different semantics depending on the access
+method (CIFS, NFS, etc) or they are shoe-horned into the POSIX ACL and
+lose information.
+
+Cheers, Andreas
+
+
+
+
+
+
+--Apple-Mail=_18888712-B94F-4C77-8A59-99C68A3C505C
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - http://gpgtools.org
+
+iQIzBAEBCAAdFiEEDb73u6ZejP5ZMprvcqXauRfMH+AFAl42BrsACgkQcqXauRfM
+H+AxlQ/9FywysisQOOCc/ouusT5nKTjv6mvLQmY+1TxXBie24tz+ndWXs6gz68MF
+j8Lqz7BYaTTfeLc98s488jHPA9O/MIounuAtUfx/mqiwFIwPlysrXhAXam9lo+HZ
+DnhMYBzlGtoHy/82Wb3pkl5iNauqFNMVeInnHOaRtmEmutqSsZ1EPXId6MMIGr1N
+LbjkXXLpL2LXmn3pVM+0xVRdaWRYUEe8DBQ3YskaIf4lqjw6HlAHOHsrRm9DZqTi
+B4C9zVVfIdDFss8N9lOemMRX7yMVDNKMxBdHRQExLpKN4B9p4rK405K5YDuxY0yp
+3wYcZPEBXlIDsR2y7EkJR4DQ80DF3W4rlsACzLDp6wsjdIRLq0IxlZEZuzptoyiN
+RJvgy4e6nyVWcX3j864vqHcAAd5NQ3XVCAMRNPy4OXOPWmWovcN845uDL6mcX5SN
+fykRtlAKJs/+L8LRy+tbAt4FJD0e+fIuBls7t8M90tGEs49bg8GZIzk3HMvOdKvD
+ld9VkWf6lFIwg/zkidEvYxRpYFwwdh9j9LPg6cgc1VKneMzNbAuEK9OmODXmT8gy
+s/YNiqj8JMWVU50V5MDYRda4LoTcH6eUR4ANXcnNiF0UlIdoj9Id2BpUbr92KvoD
+/Fw+XQIy96XHZGrM7wly17Jqz3NGu5e/O8hJKVUWXlaAqRx09nQ=
+=zjhF
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_18888712-B94F-4C77-8A59-99C68A3C505C--
 
