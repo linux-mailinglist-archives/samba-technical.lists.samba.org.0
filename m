@@ -2,62 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3BE914F35A
-	for <lists+samba-technical@lfdr.de>; Fri, 31 Jan 2020 21:50:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BE9514FA73
+	for <lists+samba-technical@lfdr.de>; Sat,  1 Feb 2020 20:55:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=ntPtn5eseBUhbmRB+3EW23i8kGGOgfDTich5/nx6QLs=; b=NZ7Kl1o0W30DhJFwb/v23kcgNf
-	xeFuATzw0xPj/gu7FJo68ByGtmgF3DJYxGaMsUiuIUMtHtsxsfOYX7LM7gqtfUagRzuV6UY8zApt/
-	JaclgSmV+QEOQ0T2zcFKwKG01GkhXPqNrLIPMJjBmhEM/4GCxcYgjKtowtVmtXRuoz8OcZyW7w/G7
-	3J5B88d95mon7sfajsrRcHy3tT7jj3DuJmnQ8LT4rzDmIg9rR8t/W+urwhtTmfZGF1l2SKN2YP+qW
-	r/kpdwIMF4CVVX0RTwpkWjyz6OZsEeO9tMuZzu1q6VqoeSysy/suL9bgavxQEDz2humDQWzUDpZf/
-	c1O8Abdg==;
-Received: from localhost ([::1]:59166 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=5ZM+XG0Qafoo8yoA94Tb8BHY4hUIVe3CK4bN+n5GzG8=; b=SvQ6xGvvQdZ7h6Ok24ReiJaL4X
+	priG8SOA+wGvVmrzIJKfaReWjUyQIG/zJ+IwwgtrMRqlvrUNTVuI4K4VcPhoKfsvLNW7dXf3k5iqD
+	E6Yo/UO4TPIUgB6R06AV77PREOHiT3l/1OF+v3NJtCG3PHxihwJf8EqqQfSIWBqNqv93iY2j5VGoN
+	YcEHjp1lYs25Kuc4amRP3n0PgNppvXscP3LGdvVTplqcY6WwzaMQiyKSVDwiIRYDamCyYl7ZlasKu
+	WGkGLys7UyFbk6KYhmD4sGazVU4liTJNh8yCMeadc6zUz0y3bjiCQoj01TGHTlGCkAXe4Tt5sBTKq
+	nU0npeWQ==;
+Received: from localhost ([::1]:61622 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ixdEM-005sJ7-Bn; Fri, 31 Jan 2020 20:49:34 +0000
-Received: from smtp-fw-9101.amazon.com ([207.171.184.25]:37050) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1ixdEH-005sJ0-MM
- for samba-technical@lists.samba.org; Fri, 31 Jan 2020 20:49:32 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
- t=1580503770; x=1612039770;
- h=from:to:subject:date:message-id:in-reply-to:references:
- mime-version; bh=ntPtn5eseBUhbmRB+3EW23i8kGGOgfDTich5/nx6QLs=;
- b=W8VCoZeM48OIjxbv6kw9naKmdb7+KdOXD5ffYeaW7Qc9L57Q8MU4B7VP
- iFfnpkf++MHf39Gp/B9qktM9p2CQ61krzA+gplXW6CKw6n1WhjAgW5X1l
- 7cGk/pKZYGFTZDBXoeiQe047xOH+QcnwIG4bojlvZDaZfAGv3B4NCgFhL Y=;
-IronPort-SDR: ovFeOcsrUQowdtGQl/lvxCJCIKMkTTNEh1+x9wJl/YI3JO5NN9Y34G4TjHhixOIYkpuD8mlF2H
- Xuo54XU+oUbA==
-X-Amazon-filename: signature.asc
-Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
- email-inbound-relay-1d-98acfc19.us-east-1.amazon.com) ([10.47.23.38])
- by smtp-border-fw-out-9101.sea19.amazon.com with ESMTP;
- 31 Jan 2020 20:33:53 +0000
-Received: from EX13MTAUWA001.ant.amazon.com
- (iad55-ws-svc-p15-lb9-vlan3.iad.amazon.com [10.40.159.166])
- by email-inbound-relay-1d-98acfc19.us-east-1.amazon.com (Postfix) with ESMTPS
- id 35800A24F8; Fri, 31 Jan 2020 20:33:51 +0000 (UTC)
-Received: from EX13D27UWA002.ant.amazon.com (10.43.160.30) by
- EX13MTAUWA001.ant.amazon.com (10.43.160.58) with Microsoft SMTP Server (TLS)
- id 15.0.1367.3; Fri, 31 Jan 2020 20:33:51 +0000
-Received: from u33b4e6d89a065e.ant.amazon.com (10.43.162.69) by
- EX13D27UWA002.ant.amazon.com (10.43.160.30) with Microsoft SMTP Server (TLS)
- id 15.0.1367.3; Fri, 31 Jan 2020 20:33:51 +0000
-To: Andrew Bartlett <abartlet@samba.org>, Alexey A Nikitin
- <nikitin@amazon.com>, <samba-technical@lists.samba.org>
-Subject: Re: [Samba] LDAP signing and channel binding
-Date: Fri, 31 Jan 2020 12:33:40 -0800
-Message-ID: <1805163.6tgchFWduM@u33b4e6d89a065e.ant.amazon.com>
-Organization: WorkSpaces Linux Desktop
-In-Reply-To: <20200131193507.GF12961@sernet.de>
-References: <1761956.tdWV9SEqCh@u33b4e6d89a065e.ant.amazon.com>
- <7f97655db06e40a7d1d6afa7d7d10329a92eceec.camel@samba.org>
- <20200131193507.GF12961@sernet.de>
+	id 1ixyr9-007l4x-Gn; Sat, 01 Feb 2020 19:55:03 +0000
+Received: from mail-il1-x142.google.com ([2607:f8b0:4864:20::142]:36172) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ixyr5-007l4n-Ke
+ for samba-technical@lists.samba.org; Sat, 01 Feb 2020 19:55:01 +0000
+Received: by mail-il1-x142.google.com with SMTP id b15so9252679iln.3
+ for <samba-technical@lists.samba.org>; Sat, 01 Feb 2020 11:54:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=5ZM+XG0Qafoo8yoA94Tb8BHY4hUIVe3CK4bN+n5GzG8=;
+ b=nM4GcWpAjqrvtL0Lcot/MfvVHtdRX+7g84363eMq/9AuOgxISlHekqaj3V52RNVmkm
+ /ioWKfJZAkxg9iBcZUCW+mJwCkoFS+Gb2xhExyOKZiXItEGsDEX6Dt5Bf541NXK0sTHQ
+ OfSkxk/se9sB5wMFojGXz6KvoP2KlTASo44Wb5gNchmhOs5LdCdGhr1HSlyzGMHAbUM0
+ 1vOEEpt5AHGPBBXSY3iF3kHqh/J8eRjPlfPcq8DEwu8wYUDvZ1sFG07i5GXZDeTamJaW
+ wKuM+UDaxinaG+hK+FRey6eXOpNF3EFJAePEkon67a03z3EeFPsWnfyVfm251IsJtyWl
+ LvbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=5ZM+XG0Qafoo8yoA94Tb8BHY4hUIVe3CK4bN+n5GzG8=;
+ b=knq9f9WmvVCkB515dJTDVEwo6hfkiV4SiI0FenTJkEFp5DaJF2KcujGg0vpMvbmuGe
+ eAT5ax1gzeJBWWnOtUSIDEXd1MlmgoBOCkNZsoi0KbvdOhGl2I8IQwaNk1W3PoTNcTgz
+ Dz9eeSB4oPpT69yne3DK9NoW461s5Ji71UXbgXZkiEL4j0auEQ7fa+1/ubV0eaKbdHlh
+ +kCliATrV2dyHeliBvgxdtL0yCMxOjmQN2RnKGDfabhcLT/As05GJmb26omD9zcuJlTF
+ 9hRR3wcbMDGGXaMHfGE7ANjNcgUsUYq01N6cA84/ZXbO0eHlIEMUnswQaBTvhhL77a8s
+ y/Ww==
+X-Gm-Message-State: APjAAAVlWR4KmeWvRnSa+tpHUrLeEtac3+dele6BZBwYvNkUciPRgukB
+ 2snc5mSUFQGtBLBlpkNbKXiDYe2F8D5eF8CVpY8=
+X-Google-Smtp-Source: APXvYqwLHAZsySBQ5toZfqW/3M9sNi5WUjCIwF+SI1xCAeDRgfX4LKqJmF2bmQV/9y0r2Ld5SOqDmVCpjzeN7PYQtxs=
+X-Received: by 2002:a92:d642:: with SMTP id x2mr8368738ilp.169.1580586897434; 
+ Sat, 01 Feb 2020 11:54:57 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPart1714089.8hzESeGDPO";
- micalg=pgp-sha512; protocol="application/pgp-signature"
-X-Originating-IP: [10.43.162.69]
+References: <CAH2r5mvYTimXUfJB+p0mvYV3jAR1u5G4F3m+OqA_5jKiLhVE8A@mail.gmail.com>
+ <20200130015210.GB3673284@magnolia>
+In-Reply-To: <20200130015210.GB3673284@magnolia>
+Date: Sat, 1 Feb 2020 13:54:46 -0600
+Message-ID: <CAH2r5mv55Ua3B8WX1Qht1xfWL-k5pGJrN+Uz0L4jHtYOo9RMKw@mail.gmail.com>
+Subject: Re: [LSF/MM/BPF TOPIC] Enhancing Linux Copy Performance and Function
+ and improving backup scenarios
+To: "Darrick J. Wong" <darrick.wong@oracle.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,110 +69,71 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexey A Nikitin via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexey A Nikitin <nikitin@amazon.com>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ CIFS <linux-cifs@vger.kernel.org>, lsf-pc@lists.linux-foundation.org,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---nextPart1714089.8hzESeGDPO
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
+On Wed, Jan 29, 2020 at 7:54 PM Darrick J. Wong <darrick.wong@oracle.com> wrote:
+>
+> On Wed, Jan 22, 2020 at 05:13:53PM -0600, Steve French wrote:
+> > As discussed last year:
+> >
+> > Current Linux copy tools have various problems compared to other
+> > platforms - small I/O sizes (and most don't allow it to be
+> > configured), lack of parallel I/O for multi-file copies, inability to
+> > reduce metadata updates by setting file size first, lack of cross
+>
+> ...and yet weirdly we tell everyone on xfs not to do that or to use
+> fallocate, so that delayed speculative allocation can do its thing.
+> We also tell them not to create deep directory trees because xfs isn't
+> ext4.
 
-Thank you for the RFC reference, that actually helps me a great deal to und=
-erstand what's going on there.
+Delayed speculative allocation may help xfs but changing file size
+thousands of times for network and cluster fs for a single file copy
+can be a disaster for other file systems (due to the excessive cost
+it adds to metadata sync time) - so there are file systems where
+setting the file size first can help
 
+> >  And copy tools rely less on
+> > the kernel file system (vs. code in the user space tool) in Linux than
+> > would be expected, in order to determine which optimizations to use.
+>
+> What kernel interfaces would we expect userspace to use to figure out
+> the confusing mess of optimizations? :)
 
-On Friday, 31 January 2020 11:35:42 PST Bj=C3=B6rn JACKE via samba-technica=
-l wrote:
-> On 2020-01-29 at 14:01 +1300 Andrew Bartlett via samba sent off:
-> > On Tue, 2020-01-28 at 16:38 -0800, Alexey A Nikitin wrote:
-> > > On Tuesday, 28 January 2020 15:57:47 PST Andrew Bartlett wrote:
-> > > > On Tue, 2020-01-28 at 15:24 -0800, Alexey A Nikitin via samba
-> > > > wrote:
-> > > > > I'm having hard time finding any definitive information on
-> > > > > whether
-> > > > > Winbind supports LDAP signing (I assume 'yes') and channel
-> > > > > binding.
-> > > > > I read=20
-> > > > >=20
-> > https://wiki.samba.org/index.php/Samba_Security_Documentation#Special_d=
-angers_of_NTLMSSP_and_Kerberos_over_TLS
-> > > > > to mean 'no' for channel binding, unless that documentation is
-> > > > > outdated or I misunderstand it.
-> > > >=20
-> > > > Correct.  We don't support channel binding in our client or
-> > > > server.=20
-> > > > While we avoid this combination where possible, we would gladly
-> > > > accept
-> > > > funding to add it client and server (DC) side for the the cases
-> > > > where
-> > > > (per below) it is forced.
-> > > >=20
-> > >=20
-> > > So considering Microsoft is planning to release a patch in March 2020
-> > > (
-> > > https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/AD=
-V190023
-> > > ) that would force signing and channel binding for LDAP,
-> > > Samba/Winbind developers seem to be rather calm about it. I admit I'm
-> > > still learning about AD DS (as well as Winbind), so please correct me
-> > > if my understanding is wrong - the above mentioned upcoming patch is
-> > > generally not a concern because channel binding applies only to LDAP
-> > > authentication over TLS, and there is usually still an option of
-> > > authentication using Kerberos and SPNEGO instead of LDAPS. Is my
-> > > understanding correct?
-> >=20
-> > In short, we hope so.  It would still be great if this could be
-> > developed, we know that some sites do enforce the use of TLS for
-> > various reasons.
-> >=20
-> > Also, even with the warnings, the Samba development community is small
-> > and is funded significantly by customer needs/priorities.  So it can
-> > happen that even with warnings such as these it needs a customer to
-> > jump up and down before someone is able to put in the time.
-> >=20
-> > A fix for this in Samba (for the winbind side) won't be trivial, we
-> > would need to read the SSL session ID from inside OpenLDAP's use of
-> > OpenSSL.  The Samba AD DC may be easier to patch, as we control the
-> > stack down to GnuTLS is that case.
->=20
-> the LdapEnforceChannelBinding from ADV190023 is obviously for enforcing t=
-he
-> standarized TLS extension for Channel Bindings, see RFC5929. And I
-> just saw that GnuTLS supports that since 2.11.4 already.
->=20
-> For our client site it looks like it's time to move away from openldap to=
- tldap
-> finally to get control over the TLS layer. Has someone already started to=
- work
-> out getting tldap for our client side?
->=20
-> Bj=C3=B6rn
->=20
->=20
+copy_file_range and clone_file_range are a good start ... few tools
+use them ...
 
+> There's a whole bunch of xfs ioctls like dioinfo and the like that we
+> ought to push to statx too.  Is that an example of what you mean?
 
---nextPart1714089.8hzESeGDPO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
+That is a good example.   And then getting tools to use these,
+even if there are some file system dependent cases.
 
------BEGIN PGP SIGNATURE-----
+>
+> > But some progress has been made since last year's summit, with new
+> > copy tools being released and improvements to some of the kernel file
+> > systems, and also some additional feedback on lwn and on the mailing
+> > lists.  In addition these discussions have prompted additional
+> > feedback on how to improve file backup/restore scenarios (e.g. to
+> > mounts to the cloud from local Linux systems) which require preserving
+> > more timestamps, ACLs and metadata, and preserving them efficiently.
+>
+> I suppose it would be useful to think a little more about cross-device
+> fs copies considering that the "devices" can be VM block devs backed by
+> files on a filesystem that supports reflink.  I have no idea how you
+> manage that sanely though.
 
-iQIzBAABCgAdFiEEpRZyqYrXfmxeMjWyd71YSxgxbEgFAl40jyQACgkQd71YSxgx
-bEgVPg/+Jjhjyb5xAIvSoVSsQCHWbwJp52RsUcuF3d9/XjbH2u+NVh7Nc03lusqS
-vLaR8QXEcD4pIBL74qKgSFwlGZWIxNA/S+GPHP380PuFDDksFNMtu5b2fbq9OBwL
-pxCVlL1NtY6O9CuNgwU0zObCc/bska6rnOXcvXZCTkwOb11Rvg2fyLfEQfCPqau2
-ZuaEU9VS/83zVwk0FIGTCl9zPHml3bgumECI9/XN2uQ/+HAn/AM8apKbt1ivGdaj
-jpKOfpYk1uVIlZ74jov5rw86Qgd6G1sW+NI8SFZ2FysOZH6L6dRl87iJxAe4CwsS
-IAnCUaHHL6Ot2Q7cAIPhEZ6mvarORLuDpgBT2a1GJAmtHVTxz51PrWl3YBV6ckpl
-4TaVuDYuZ3L3f/0tXNroBqGfHJQ7dM74KmAupkLmqskgkQxjoKS8pF4U70oUGvtm
-5gc0kM/Y5b+YEHZj1Qu4ZlJSNYh7e5zsMsSavoB2rj7Xnf08L1o0H6kBCCfvGaNm
-AbjMNvcwadpj7Hudoo649xniz2JQNHMrsuOpQW2FaJrL95thvaoYspgyv9VkveiY
-MQWETHfyiIWAEHwYTQFN4TcsFLTXGj/nWudo0ubte4Xey9IpZJIrTjdz3mOc6NhQ
-q8uSKphSKMORBaVq0RwR5MBIIthP69VlJsjaV5CV/UQjxV/W5+4=
-=qXXy
------END PGP SIGNATURE-----
+I trust XFS and BTRFS and SMB3 and cluster fs etc. to solve this better
+than the block level (better locking, leases/delegation, state management, etc.)
+though.
 
---nextPart1714089.8hzESeGDPO--
+-- 
+Thanks,
+
+Steve
 
