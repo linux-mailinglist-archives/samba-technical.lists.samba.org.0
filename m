@@ -2,62 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01615154FC7
-	for <lists+samba-technical@lfdr.de>; Fri,  7 Feb 2020 01:35:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B5FBF1552CA
+	for <lists+samba-technical@lfdr.de>; Fri,  7 Feb 2020 08:18:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=ZL3/oebDaCZaZmD2f0fcYZVXDdD62A31uvm8GzpJpdc=; b=rLIBG+hR69uhiiaB0x9OXrBMJe
-	f9ltgfkEIPrFs/xFhHGcrs8nMXHu/KVBk3+OcVUryuyuSKwVUwHRqdShFYeQghz7QW3GB2Om7yPMG
-	t1oZkbZYoTM5X/yyHxVbvKoijqH5M8Zqu26r7p/RoZAfwUzptgx4OZwf1+kmlIRfzJl4r7hm/zy1w
-	x/dGMzvnHQLz+UrGOrNn+p42Wr5++ySml/EzKW7tq/wxXtvOrqzFoNpd4eIwMV0VYhGJCQ5uuDww+
-	0zE9pSZUf1Il+GAlHG4LjgS/JJBsLX/JFQBmV1Yp5FSn8jU85nI3k2XqzLJQTeaT5EBVLxKTKZdnE
-	A0No+hLQ==;
-Received: from localhost ([::1]:51734 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=/sfTkY5tp7azoYCuKI3aNo+mExBS4Kn0e3uAYDDWgUQ=; b=nqx9mI/bi6qRXHGejFJ9E+0/1N
+	evjtlmPxC3ltktmq9Knk2VHy/i34f1k61FlVnzpAkVNaanOBtsHF9kdi9xXkgKGl+7fD5ek68mj7l
+	p2hvhKkBr6e6NYmH33Yiri9PiAVhqNrU06NLHG9IfXAp1LaqKP5IPibRhh91eHqunRtbLNxUNZV83
+	sW+lqFU0fdlY3uR4n6VRaZTloLgPxyuOZyJNQUBUpGMUbYbHqgo550iwIa8vMT0gxkZ+PX4HPVsCy
+	kq9x5vNic6s0OG+Ub/+sQnyQBNIBTJWcyEHsts4wBpQTdOK4XNqz3qMoTNVr8D+t1wqyrL/fAArxY
+	4MARNx9A==;
+Received: from localhost ([::1]:60972 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1izrbS-008XrH-RU; Fri, 07 Feb 2020 00:34:38 +0000
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:46193) 
+	id 1izxtE-008Zgb-BY; Fri, 07 Feb 2020 07:17:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53212) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1izrbO-008XrA-Qc
- for samba-technical@lists.samba.org; Fri, 07 Feb 2020 00:34:37 +0000
-Received: by mail-io1-xd41.google.com with SMTP id t26so185580ioi.13
- for <samba-technical@lists.samba.org>; Thu, 06 Feb 2020 16:34:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ZL3/oebDaCZaZmD2f0fcYZVXDdD62A31uvm8GzpJpdc=;
- b=LpvPdS1DplYt6cW0DEl/6O1Ryar2GRW+2ekUTfetVtCbN6b6J7fOQdA3KBaBl2IngD
- nJWBWtzb86NfB1V9BGHMPMYC3cC+GGhhGxYVyYvDuZJUrGwLCy7UYtee6GuBnN/or64z
- ZjKzMEu+oqgkLCAeMIvPW7tXfLczY4L/8ihU9IA2f3yZ8VXjimGpNL5+J5dgqreeAJkW
- pqBuyMwkSIiFZpbYZz1aQEqZirIOegOS+LmQQJ6KPVY45O4LB/wNXSWk1aNkA0LHh3p3
- DZBn/zQW+UODFuUMbBv0Dpd8KeH+ws9GJMln0aGw+DHvHAKb+KFSnW1K58m2ykM8TPgF
- NDxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ZL3/oebDaCZaZmD2f0fcYZVXDdD62A31uvm8GzpJpdc=;
- b=gP0VD7y1jWXPDlSCk0cllGoalJQ2JGyQmnW4FouRd3WypZc/Mo7JJ3U1kSuNS3kTL1
- 4NtQXMUnqv7VALLjwxRBvEAKN2XV7cuBN2MBv4uVKMHW80g33gEIQByZ3AN7gtpKaDcf
- fHlOW3RfwFb73gXNVPTzwxDa9ySJje4rwhM4ydMrbePOrX+1UA6yESMrur9DU3dCAwtn
- FP8sInSugFVzVGWIUZlEmaaJVO0ZzIxM34n7FcWVsTa1l1wS2ryteFgSBMMmMsYA74Gl
- E3TYVkrZH098tVpP6ZfhaHs2TNYB+lEriah4GDMMvhLOBVeWFtZiDfl46jVkIpVx9f2r
- YIXg==
-X-Gm-Message-State: APjAAAUHZTdQxgpxPx5grVw9DXJhCgKS19Vgek81WmlBxT+F+3kYJkQT
- eMoEOlgcMA5P/VCoXm8gEgA4s0btGvVvGTrPPxI=
-X-Google-Smtp-Source: APXvYqyyTggiju1Y3Vtk1u2yj2l8ktJHDrRafg2cRgLPmNDssUQkpWtJumKZuuwVBNG3f2Zgur+4KtvDJIwmRoFJmPM=
-X-Received: by 2002:a5d:9cc7:: with SMTP id w7mr763709iow.159.1581035671047;
- Thu, 06 Feb 2020 16:34:31 -0800 (PST)
+ (Exim) id 1izxt3-008ZgU-LX
+ for samba-technical@lists.samba.org; Fri, 07 Feb 2020 07:17:16 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=/sfTkY5tp7azoYCuKI3aNo+mExBS4Kn0e3uAYDDWgUQ=; b=bChZNENJGVenYuVDG+LLxqYrPb
+ avQtU9lFeI2YTvOCeIy+bt/JrCyxMZWGVzzonj6fQeXlGj5t03RyAbNa0VTQo9NXdfPRckGsqR/bc
+ cxGLtHY6uUczYknPD/7T/3gCdcTUgx4Yp+A7Y+yHGi1mDreooTgopoNYp1nJWIzwa0NZl4xAZTlXU
+ sP5T3MZvvUKN4M2+PBzlElFK/Kv9Gg5pB+smkRHnhpAa+T+gVBMzzTHNu8CBvIx+8JQlE1nznhda9
+ dj2zktpBHYYXJ/OJxfuZ53ykOdDW9SwaR5E3mhM5Yo2Js3nlzYtsVV6I+og9jyxcWLnNP/tbj9RfR
+ u013cIO8l0cNPlJjL5txNAOvHm3YaeIeA09IMi2GoVPV3TY/RKYXH6y8NPHDxK1v3Xdi5BLbebM0t
+ 23IdTAa/Y4FLISKH3cXn0oCObvfZUD24/iYDYoij8Kwsgklv8fbWwz94ffbcf0CM67Uo9W6utQs0L
+ jutWYYm7oXPENkEHcuCFx9/a;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1izxt1-00061S-0d; Fri, 07 Feb 2020 07:17:11 +0000
+To: gd@samba.org
+Subject: Re: Video of my FOSDEM Samba talk.
+Date: Fri, 07 Feb 2020 08:17:08 +0100
+Message-ID: <1629429.vCTcVmRLes@magrathea>
+In-Reply-To: <20200206165543.GA214397@jra4>
+References: <20200206165543.GA214397@jra4>
 MIME-Version: 1.0
-References: <202002070617.AbeYy9qc%lkp@intel.com>
- <CAH2r5mtHY6OGMpMdpLcxZ_xyjzZHANhqr_NoeGERiFiQyfc-PQ@mail.gmail.com>
- <CAN05THQ8ajLM58-dyQA0teD56Hkt7wmJMRtHB8DW1Yh5qKBrjg@mail.gmail.com>
- <CAH2r5mvtYcc+=bKApMsb=Cg2VgiwPoEfV92cncfhFswjBmkKFw@mail.gmail.com>
-In-Reply-To: <CAH2r5mvtYcc+=bKApMsb=Cg2VgiwPoEfV92cncfhFswjBmkKFw@mail.gmail.com>
-Date: Fri, 7 Feb 2020 10:34:19 +1000
-Message-ID: <CAN05THQJBQiT5k4AUQcDtp=QkTnxjf3kiPnRmxMb7BCiDRsMaQ@mail.gmail.com>
-Subject: Re: [cifs:for-next 10/11] fs/cifs/smb2pdu.c:1985:38: error: macro
- "memcmp" passed 18 arguments, but takes just 3
-To: Steve French <smfrench@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,145 +54,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- kbuild test robot <lkp@intel.com>,
- =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: samba-technical@lists.samba.org, Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Looks good to me.
-Reviewed-by: Ronnie Sahlberg <lsahlber@redhat.com>
+On Thursday, 6 February 2020 17:55:43 CET Jeremy Allison via samba-technica=
+l=20
+wrote:
+> For people who couldn't be there who might
+> be interested !
+>=20
+> https://ftp.osuosl.org/pub/fosdem/2020/H.1308/whats_new_in_samba.webm
+> https://video.fosdem.org/2020/H.1308/whats_new_in_samba.mp4
 
-On Fri, Feb 7, 2020 at 9:33 AM Steve French <smfrench@gmail.com> wrote:
->
-> ok - changed as suggested. Tested out ok
->
-> See attached.
->
-> On Thu, Feb 6, 2020 at 5:16 PM ronnie sahlberg <ronniesahlberg@gmail.com> wrote:
-> >
-> > It is probably that m68k lage quite behind in GCC versions and
-> > probably that compiler can not handle this construct:
-> > > 1983                          if (memcmp(name, (char []) {0x93, 0xAD, 0x25, 0x50,
-> >   1984                                  0x9C, 0xB4, 0x11, 0xE7, 0xB4,
-> > 0x23, 0x83,
-> > > 1985                                  0xDE, 0x96, 0x8B, 0xCD, 0x7C}, 16) == 0)
-> > and you would probably need something like this:
-> >      const char foo[] = {0x93, 0xAD, 0x25, 0x50, 0x9C, 0xB4, 0x11,
-> > 0xE7, 0xB4, 0x23, 0x83, 0xDE, 0x96, 0x8B, 0xCD, 0x7C};
-> >      if (memcmp(name, foo, sizeof(foo)) == 0)
-> > ...
-> >
-> > On Fri, Feb 7, 2020 at 8:48 AM Steve French <smfrench@gmail.com> wrote:
-> > >
-> > > It compiled and tested ok.  Is this warning a limitation of the kbuild robot?
-> > >
-> > > On Thu, Feb 6, 2020 at 4:26 PM kbuild test robot <lkp@intel.com> wrote:
-> > > >
-> > > > tree:   git://git.samba.org/sfrench/cifs-2.6.git for-next
-> > > > head:   58b322cfd219fd570d4fcc2e2eb8b5d945389d46
-> > > > commit: 3d9d8c48232a668ada5f680f70c8b3d366629ab6 [10/11] smb3: print warning once if posix context returned on open
-> > > > config: m68k-multi_defconfig (attached as .config)
-> > > > compiler: m68k-linux-gcc (GCC) 7.5.0
-> > > > reproduce:
-> > > >         wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-> > > >         chmod +x ~/bin/make.cross
-> > > >         git checkout 3d9d8c48232a668ada5f680f70c8b3d366629ab6
-> > > >         # save the attached .config to linux build tree
-> > > >         GCC_VERSION=7.5.0 make.cross ARCH=m68k
-> > > >
-> > > > If you fix the issue, kindly add following tag
-> > > > Reported-by: kbuild test robot <lkp@intel.com>
-> > > >
-> > > > All errors (new ones prefixed by >>):
-> > > >
-> > > >    fs/cifs/smb2pdu.c: In function 'smb2_parse_contexts':
-> > > > >> fs/cifs/smb2pdu.c:1985:38: error: macro "memcmp" passed 18 arguments, but takes just 3
-> > > >         0xDE, 0x96, 0x8B, 0xCD, 0x7C}, 16) == 0)
-> > > >                                          ^
-> > > > >> fs/cifs/smb2pdu.c:1983:8: error: 'memcmp' undeclared (first use in this function); did you mean 'memchr'?
-> > > >        if (memcmp(name, (char []) {0x93, 0xAD, 0x25, 0x50,
-> > > >            ^~~~~~
-> > > >            memchr
-> > > >    fs/cifs/smb2pdu.c:1983:8: note: each undeclared identifier is reported only once for each function it appears in
-> > > >
-> > > > vim +/memcmp +1985 fs/cifs/smb2pdu.c
-> > > >
-> > > >   1951
-> > > >   1952  void
-> > > >   1953  smb2_parse_contexts(struct TCP_Server_Info *server,
-> > > >   1954                         struct smb2_create_rsp *rsp,
-> > > >   1955                         unsigned int *epoch, char *lease_key, __u8 *oplock,
-> > > >   1956                         struct smb2_file_all_info *buf)
-> > > >   1957  {
-> > > >   1958          char *data_offset;
-> > > >   1959          struct create_context *cc;
-> > > >   1960          unsigned int next;
-> > > >   1961          unsigned int remaining;
-> > > >   1962          char *name;
-> > > >   1963
-> > > >   1964          *oplock = 0;
-> > > >   1965          data_offset = (char *)rsp + le32_to_cpu(rsp->CreateContextsOffset);
-> > > >   1966          remaining = le32_to_cpu(rsp->CreateContextsLength);
-> > > >   1967          cc = (struct create_context *)data_offset;
-> > > >   1968
-> > > >   1969          /* Initialize inode number to 0 in case no valid data in qfid context */
-> > > >   1970          if (buf)
-> > > >   1971                  buf->IndexNumber = 0;
-> > > >   1972
-> > > >   1973          while (remaining >= sizeof(struct create_context)) {
-> > > >   1974                  name = le16_to_cpu(cc->NameOffset) + (char *)cc;
-> > > >   1975                  if (le16_to_cpu(cc->NameLength) == 4 &&
-> > > >   1976                      strncmp(name, SMB2_CREATE_REQUEST_LEASE, 4) == 0)
-> > > >   1977                          *oplock = server->ops->parse_lease_buf(cc, epoch,
-> > > >   1978                                                             lease_key);
-> > > >   1979                  else if (buf && (le16_to_cpu(cc->NameLength) == 4) &&
-> > > >   1980                      strncmp(name, SMB2_CREATE_QUERY_ON_DISK_ID, 4) == 0)
-> > > >   1981                          parse_query_id_ctxt(cc, buf);
-> > > >   1982                  else if ((le16_to_cpu(cc->NameLength) == 16)) {
-> > > > > 1983                          if (memcmp(name, (char []) {0x93, 0xAD, 0x25, 0x50,
-> > > >   1984                                  0x9C, 0xB4, 0x11, 0xE7, 0xB4, 0x23, 0x83,
-> > > > > 1985                                  0xDE, 0x96, 0x8B, 0xCD, 0x7C}, 16) == 0)
-> > > >   1986                                  parse_posix_ctxt(cc, NULL);
-> > > >   1987                  }
-> > > >   1988                  /* else {
-> > > >   1989                          cifs_dbg(FYI, "Context not matched with len %d\n",
-> > > >   1990                                  le16_to_cpu(cc->NameLength));
-> > > >   1991                          cifs_dump_mem("Cctxt name: ", name, 4);
-> > > >   1992                  } */
-> > > >   1993
-> > > >   1994                  next = le32_to_cpu(cc->Next);
-> > > >   1995                  if (!next)
-> > > >   1996                          break;
-> > > >   1997                  remaining -= next;
-> > > >   1998                  cc = (struct create_context *)((char *)cc + next);
-> > > >   1999          }
-> > > >   2000
-> > > >   2001          if (rsp->OplockLevel != SMB2_OPLOCK_LEVEL_LEASE)
-> > > >   2002                  *oplock = rsp->OplockLevel;
-> > > >   2003
-> > > >   2004          return;
-> > > >   2005  }
-> > > >   2006
-> > > >
-> > > > ---
-> > > > 0-DAY CI Kernel Test Service, Intel Corporation
-> > > > https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
-> > >
-> > >
-> > >
-> > > --
-> > > Thanks,
-> > >
-> > > Steve
->
->
->
-> --
-> Thanks,
->
-> Steve
+G=FCnther, he called our (MS-PAR) work legacy! I think we should assign som=
+e=20
+printing bugs to Jeremy ... :-)
+
+=2D-=20
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
+
 
