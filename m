@@ -2,49 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0850B156E85
-	for <lists+samba-technical@lfdr.de>; Mon, 10 Feb 2020 05:54:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 020A01583F8
+	for <lists+samba-technical@lfdr.de>; Mon, 10 Feb 2020 20:58:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=3+J3zfSrNmpqIR/nKvcZCPdhlLjmJtosEZDm/16okgo=; b=4dytMwB9jkXz18s8sbS2e7Kxif
-	S6fkENLBvG0FFOCNYuekmwEcpI+kVe6g51Hzpea8OCnGIYgsNJczqLlVuJ/1KyYo9VVJ2wSbZpIfy
-	sCAaxT00hNbDjkpH4LpfNT8UpcYO3HJmXzSv/MgazvbwpdNoQj27QTIKQ8BH1w0BtUw0ABgKekVZX
-	Mqcs9Nt1dpS/0q9GR+YhzVi6IEWuk68LH5zvogC3GsT9wVw2LdjqPuaPsSOhUh1CkKaYtlwMh9BAW
-	xHGPxwP3q3WcKj5n25U1yw305VkjvZaVaxR4xSzsZlz73G351+LqrKWrdxfQEEhRhT8elKxsOLmVu
-	Hh1gG2nA==;
-Received: from localhost ([::1]:46364 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=OzDWtZ8WmSlMfqraDi2jm8rCYDseu+MFtRpulQ7a36s=; b=PbaQhru4vyEbdt4RKFVROB4JqP
+	+LHj6lnMrhgprLq3Q3GUkMUe/yBddZXq6y4HBo/v4C5Re7NOgLASbD9B0U5CER2LhpLjeQIrihoQS
+	7gFQyTUTZN3BBmcD4B3A5jMCxtxXrlOZVECDK4VyDz/s3Y5s6/H1kaxFS/mkWgetpNPGz9XNwwO+j
+	8k4vurKAJOVBeE34JG5qMZjNVH8jmX05aoQA/92isK/fpmpdYgO+ze8WgaIzK73j6lFA5zLLd93Xj
+	rKHE+8yX9+TN8oycsYuv2B5Wz3ahTEAiTFqXUY7738UjS0yIkn5o3xyNxgxkCqKzO6aEidiOoAT9l
+	6K/+O+MA==;
+Received: from localhost ([::1]:22158 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j114A-0094H2-Lo; Mon, 10 Feb 2020 04:53:02 +0000
-Received: from ozlabs.org ([2401:3900:2:1::2]:46915) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j1145-0094Gv-AY
- for samba-technical@lists.samba.org; Mon, 10 Feb 2020 04:53:00 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 48GD6X1hvYz9sRQ;
- Mon, 10 Feb 2020 15:52:34 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1581310356; bh=gtx2HS2ca9QZG9TDGesIOtXzBf2YjK4hLLdc1dvQn+8=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=FyTNujCF2amHekv8nIdIadgKLZrHeRMVUziG/uqqDcWOp573V89zyeW/2N2Q6f6IV
- MzNVP9S0QYfRtzbf4OqTbdzLDoEGF4ro4+umSX8OZV2ri+w69gSPkKFhzm6fnzEERV
- BQ7+JCP/QY+xdQzsVkqi0CZzhqqi8zbPR3rxJFC3rclF2OgXit2FqOm5J9BFb8jKt1
- xkRl9u83GsIFBsYgS9sUyj01SEm7U4yr8Ci5tRV3htMLKGCoQ+Jq5RyLakqhpNMYPd
- 1ZX3D8+wdi4srUuC23Ebx1Uq1KqKp16Ih1LW6r6q2teiXDMgZkb+sNZd25y0Gnkpik
- KpvAMTfQLYKDQ==
-Date: Mon, 10 Feb 2020 15:52:33 +1100
-To: =?UTF-8?B?6IC/57qq6LaF?= <gengjichao@jd.com>
-Subject: Re: ctdb 4.11.2 version failed to recover
-Message-ID: <20200210155233.1fbee1e4@martins.ozlabs.org>
-In-Reply-To: <514ee7328ed64e62bda7f2ab5fcc70fa@jd.com>
-References: <07289a1fd0a740db8e1f0abad2b7a49c@jd.com>
- <20191203142321.29eb01a3@martins.ozlabs.org>
- <514ee7328ed64e62bda7f2ab5fcc70fa@jd.com>
-X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+	id 1j1FBb-009G1T-Se; Mon, 10 Feb 2020 19:57:39 +0000
+Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:59669) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j1FBW-009G1M-G2
+ for samba-technical@lists.samba.org; Mon, 10 Feb 2020 19:57:37 +0000
+Received: from intern.SerNet.DE by mail.SerNet.DE with esmtps (Exim 4.92 #3)
+ for samba-technical@lists.samba.org
+ id 1j1FBT-0003Fu-LB; Mon, 10 Feb 2020 20:57:31 +0100
+Received: by intern.sernet.de
+ id 1j1FBT-0001lm-IX; Mon, 10 Feb 2020 20:57:31 +0100
+To: samba-technical@lists.samba.org
+References: <B14B9A04-A84E-4DCB-95BE-E029378E49C6@gmail.com>
+ <20171105085753.axk2m5lsdjns6u37@kazak>
+ <CALdFvJGSw9WSm9UtAB32Nqgt=4qA_whai15Fo9C6ypspdKQt5A@mail.gmail.com>
+ <20171106094708.ku75kutkm3s6i23c@kazak>
+ <441FAF42-21F1-444D-BECB-843F2CF4A73A@gmail.com>
+Organization: SerNet GmbH
+Subject: Re: [Proposal] Remove dns_sd API
+Message-ID: <509e99ca-dfed-e09a-1da5-f1b0c1238d5a@sernet.de>
+Date: Mon, 10 Feb 2020 20:57:31 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.3.0
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="MP_/KNs03M/6/sX/gaAx4v+ec57"
+In-Reply-To: <441FAF42-21F1-444D-BECB-843F2CF4A73A@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,164 +54,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+From: =?utf-8?q?Bj=C3=B6rn_Baumbach_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?UTF-8?Q?Bj=c3=b6rn_Baumbach?= <bb@sernet.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---MP_/KNs03M/6/sX/gaAx4v+ec57
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+Hi!
 
-Hi,
+now, some years later, nobody requested the dns-sd functionality.
 
-On Tue, 3 Dec 2019 11:40:30 +0000, =E8=80=BF=E7=BA=AA=E8=B6=85 <gengjichao@=
-jd.com> wrote:
+I've created a merge request which removes the code, which is not used
+since a lot of years:
 
-> >  I am wondering if you are using: =20
->=20
-> >  * ifdown <device> (which unassigned the IP address) =20
->=20
-> >  * ip link set <device> down (or ifconfig <device> down) =20
->=20
-> I used *ifdown <device> command. There are two purposes of my testing:
-> The most important one is to simulate network card failure. The
-> second is that admin accidentally takes down the wrong interface.
+https://gitlab.com/samba-team/samba/-/merge_requests/1134
 
-I have opened this bug to track the issue:
+Best regards,
+Björn
 
-  https://bugzilla.samba.org/show_bug.cgi?id=3D14274
+-- 
+SerNet GmbH, Bahnhofsallee 1b, 37081 Göttingen
+phone: 0551-370000-0, mailto:kontakt@sernet.de
+Gesch.F.: Dr. Johannes Loxen und Reinhild Jung
+AG Göttingen: HR-B 2816 - http://www.sernet.de
 
-I am proposing the attached more general patch to fix this issue.
+SerNet Hausmesse - am 12. Februar 2020
+im Göttinger "COWORKING" (Pro-Office)
+Anmeldung: http://sernet.de/hausmesse
 
-Will this work for you?
-
-Thanks...
-
-peace & happiness,
-martin
-
---MP_/KNs03M/6/sX/gaAx4v+ec57
-Content-Type: text/x-patch
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
- filename=0001-ctdb-tcp-Make-error-handling-for-outbound-connection.patch
-
-=46rom 6da9f25fc27cf93b0b107d53a4e242ab6c672615 Mon Sep 17 00:00:00 2001
-From: Martin Schwenke <martin@meltin.net>
-Date: Tue, 28 Jan 2020 16:49:14 +1100
-Subject: [PATCH] ctdb-tcp: Make error handling for outbound connection
- consistent
-MIME-Version: 1.0
-Content-Type: text/plain; charset=3DUTF-8
-Content-Transfer-Encoding: 8bit
-
-If we can't bind the local end of an outgoing connection then
-something has gone wrong.  Retrying is better than failing into a
-zombie state.  The interface might come back up and/or the address my
-be reconfigured.
-
-While here, do the same thing for the other (potentially transient)
-failures.
-
-The unknown address family failure is special but just handle it via a
-retry.  Technically it can't happen because the node address parsing
-can only return values with address family AF_INET or AF_INET6.
-
-BUG: https://bugzilla.samba.org/show_bug.cgi?id=3D14274
-
-Reported-by: =E8=80=BF=E7=BA=AA=E8=B6=85 <gengjichao@jd.com>
-Signed-off-by: Martin Schwenke <martin@meltin.net>
----
- ctdb/tcp/tcp_connect.c | 36 +++++++++++++++++-------------------
- 1 file changed, 17 insertions(+), 19 deletions(-)
-
-diff --git a/ctdb/tcp/tcp_connect.c b/ctdb/tcp/tcp_connect.c
-index f54086fcd3c..559442f14bf 100644
---- a/ctdb/tcp/tcp_connect.c
-+++ b/ctdb/tcp/tcp_connect.c
-@@ -181,16 +181,14 @@ void ctdb_tcp_node_connect(struct tevent_context *ev,=
- struct tevent_timer *te,
- 	tnode->out_fd =3D socket(sock_out.sa.sa_family, SOCK_STREAM, IPPROTO_TCP);
- 	if (tnode->out_fd =3D=3D -1) {
- 		DBG_ERR("Failed to create socket\n");
--		return;
-+		goto failed;
- 	}
-=20
- 	ret =3D set_blocking(tnode->out_fd, false);
- 	if (ret !=3D 0) {
- 		DBG_ERR("Failed to set socket non-blocking (%s)\n",
- 			strerror(errno));
--		close(tnode->out_fd);
--		tnode->out_fd =3D -1;
--		return;
-+		goto failed;
- 	}
-=20
- 	set_close_on_exec(tnode->out_fd);
-@@ -222,32 +220,22 @@ void ctdb_tcp_node_connect(struct tevent_context *ev,=
- struct tevent_timer *te,
- 		sockout_size =3D sizeof(sock_out.ip6);
- 		break;
- 	default:
--		DEBUG(DEBUG_ERR, (__location__ " unknown family %u\n",
--			sock_in.sa.sa_family));
--		close(tnode->out_fd);
--		tnode->out_fd =3D -1;
--		return;
-+		DBG_ERR("Unknown address family %u\n", sock_in.sa.sa_family);
-+		/* Can't happen to due to address parsing restrictions */
-+		goto failed;
- 	}
-=20
- 	ret =3D bind(tnode->out_fd, (struct sockaddr *)&sock_in, sockin_size);
- 	if (ret =3D=3D -1) {
- 		DBG_ERR("Failed to bind socket (%s)\n", strerror(errno));
--		close(tnode->out_fd);
--		tnode->out_fd =3D -1;
--		return;
-+		goto failed;
- 	}
-=20
- 	ret =3D connect(tnode->out_fd,
- 		      (struct sockaddr *)&sock_out,
- 		      sockout_size);
- 	if (ret !=3D 0 && errno !=3D EINPROGRESS) {
--		ctdb_tcp_stop_connection(node);
--		tnode->connect_te =3D tevent_add_timer(ctdb->ev,
--						     tnode,
--						     timeval_current_ofs(1, 0),
--						     ctdb_tcp_node_connect,
--						     node);
--		return;
-+		goto failed;
- 	}
-=20
- 	/* non-blocking connect - wait for write event */
-@@ -266,6 +254,16 @@ void ctdb_tcp_node_connect(struct tevent_context *ev, =
-struct tevent_timer *te,
- 					     timeval_current_ofs(1, 0),
- 					     ctdb_tcp_node_connect,
- 					     node);
-+
-+	return;
-+
-+failed:
-+	ctdb_tcp_stop_connection(node);
-+	tnode->connect_te =3D tevent_add_timer(ctdb->ev,
-+					     tnode,
-+					     timeval_current_ofs(1, 0),
-+					     ctdb_tcp_node_connect,
-+					     node);
- }
-=20
- /*
---=20
-2.25.0
-
-
---MP_/KNs03M/6/sX/gaAx4v+ec57--
+Besuchen Sie die verinice.XP 2020 in Berlin!
+Anwenderkonferenz für Informationssicherheit
+25.-27. Februar 2020 - im Hotel Radisson Blu
+Info & Anmeldung hier: http://veriniceXP.org
 
