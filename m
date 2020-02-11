@@ -2,66 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5197315842F
-	for <lists+samba-technical@lfdr.de>; Mon, 10 Feb 2020 21:17:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE0DD158C12
+	for <lists+samba-technical@lfdr.de>; Tue, 11 Feb 2020 10:48:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=xwdiqmJSYEWJaaEb/gdOx/MD1m+OfSjJKcHqC9Rw2KU=; b=ZYxRFE2WtHVI0SwwIqvErsghQk
-	D3ywTXKp5wnq5Vp12oDXD+bG//Rr9vRIx/6s5BJiyb4DFfcD6a42fN4v6CzB+bGuR9z+0leSKcMSe
-	QQByNmZ1P+0AjpL0VpHHqRqGe98LOkk9qpXtzfK7Vw1Ax8yFB7O0XYvfP4wbu3QSi0Frckv+bSkpy
-	FPfTuqVOmHH0JvyKSmsfIQBDAgBc5UdHEe4vznPx8GATmd5Blq4k+acprI5uzcZ11cJhz93CJsziS
-	/9OENmL+Ry61crCpsnGc3wRqQQ2mbn3rsOk6uwUcRmX+/TtSLS8SmLXeH6D/YhO6QzDZUN/oy/gIy
-	ybOSR/Fg==;
-Received: from localhost ([::1]:22916 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Bx69/Ixd9G8TPUNoMtmv7xeqx+y9qvGhHS3J7+DB+nU=; b=Ocx6hDV4VWIj5Rvxp6xFLb0tnM
+	Q28fcuXZLLD+dLZRPXFkir/M2pgtZcZ+5Wh4SUxH+iHBY+W3vCSo0MUcWivniajcyl7+7vWBGTelF
+	4Fjf2fFa8ve3UjQhpoFBWH6zhrTyiC+8KaHALb2OD+miR5sPvwqRgyi7KnrZaufQKEA2R3kCxlisS
+	EpcQvo0WeTwacqyPPcWkjIRKi6V99jxmFonVTvTy9Fy4DPrf+GIlFnxyNjOuD6XVJ+E2BZNwGz10U
+	4WMzfOpWY5Ky82QZ9P4q0PUTgLROMp5Ni2JWBQftDM9IeRCUIGE+L8sfwHUX+9zySxbtg7H5E00os
+	3rdjCC1A==;
+Received: from localhost ([::1]:45850 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j1FU8-009G8K-EC; Mon, 10 Feb 2020 20:16:48 +0000
-Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d]:34948) 
+	id 1j1S9L-009KaD-2U; Tue, 11 Feb 2020 09:48:11 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:22166) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j1FU3-009G8D-Bx
- for samba-technical@lists.samba.org; Mon, 10 Feb 2020 20:16:46 +0000
-Received: by mail-ot1-x32d.google.com with SMTP id r16so7755402otd.2
- for <samba-technical@lists.samba.org>; Mon, 10 Feb 2020 12:16:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ixsystems.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+KO4kRPN/vb4Os+HpkQjJH7/VAXhw0T891EA1PrhN4U=;
- b=DPPA2A3YiMGSNz9eKKG1ZzJPfvywO88C1MOSKDmCSQH4rUjgNscq2efOI8kz+l5yzz
- qTXDWSGKxmhLXbrwIhgZSJm+DqSHT0OxQQmutkK5Sa5oQDPbl4mGOZYV0CjuGvsNaUUq
- /zrd++JXsn2NJ09QcTJeIzKHLBR7Daf34o9CkZ/XgP4pQCcrY4gVPGKF2avWKlzdjAWb
- ljIZO41Xl2F5lLVw99PRQ5rDOQwOtLVtewnv1AwVTGHwpmnZWWN3965bnYrk06U80k1S
- ID21bbDOgVddYl2rkDNI/FYeO8hu4vtihnwmMQpbeXvwMc15s5EGpiBEyfaK6KO4Qpj2
- s7aA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=+KO4kRPN/vb4Os+HpkQjJH7/VAXhw0T891EA1PrhN4U=;
- b=VE/bunab9eNS5LeRMPiLClf+7XxK/mejjwrhA4+stOgmUEyrNAXA+nIadngF8b3VbD
- Wd10gCbv+nuwykbQjxwN7bMTU+67eUMguMCWbKjENU5Hyl92lw6CPl1rtK7/zXDTWUig
- fWtbBgyWe6GK4vpaK5GYxSE8dm3jqLF1u69MrGyD9+1DuVbHhLRSnwzgLLZUVSoJDFj6
- HYxI67AFABEljUpNvKsDLJ3YWA2a+ZklrmerxDyjwuCPXW31wnI4AAudA6SrWtJL7Kew
- WeQ7fxU5sJusGKNmOt+w8msbbnLHJCmipe4QThQtYEJH4KEsWWJK7uTe9/8HBp/8FAY0
- XusA==
-X-Gm-Message-State: APjAAAXgGzr9mnf6hICXaWi3zpiDp6cAtkJY8TLJtugyahIIOrrxlyNc
- LRIrsB0csu49mGAly5hW0KFI3EiDVeGHrudjGETqPxcE
-X-Google-Smtp-Source: APXvYqydgCfkJ5guStyOf5f6FmiP3NsdDCPp1guyToKtzm0gUT6H3Dsm1MxLbIhGA059mc1ENoJDEUMa/WTZxWDYB8Y=
-X-Received: by 2002:a9d:6c06:: with SMTP id f6mr2482767otq.318.1581365798768; 
- Mon, 10 Feb 2020 12:16:38 -0800 (PST)
+ (Exim) id 1j1S9E-009KZo-U6; Tue, 11 Feb 2020 09:48:07 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=Bx69/Ixd9G8TPUNoMtmv7xeqx+y9qvGhHS3J7+DB+nU=; b=d577ZYsJsDRR0jXAnYFzOVYYzX
+ wsJdPnlYRxcjWUrK7wiuxf/L7bPaDFvbY5xbiJOItg0zMGEE5UVnnh9YuyunzGFzN0F6yqykxgPol
+ EMG00Kcxjulvh7+ZP2dpw0JdPSZ/sXK3fNX+M7ScNkRIKAYO8is4B5fT/ArlXmAmIucrj6MM9Cc2D
+ PAN7KnH3z9FDFMf60Y7AQ8ZEAgSob39EBu2lLthfGHfLr53tvanhyGzg7WpkrUDge+/VQt/JimzFj
+ 6cvbgndKpmPQh7cYPh7bECD6iQOg7Lo+yD6Lah3MD8q2oFNEkIUMtT5K0UqD8XW2AdrC1C23M6Vb+
+ p6HlRunuhV0+D4wOrlxTVXEwrN98dwpJy7MGnZVWOi1itczn3N9qIhgcUNPXJzd4GagWaaa7f2ofl
+ lctHi03z0cN1JhI6NzsT9iC95kfO0ACYSPAX2HWWv5BBM+Ta0ulwD+pRVJIksf9WRD2JZH/knDFmO
+ NfGhJtaDYdgvY/WYhPRWTSBT;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j1S9E-0003FR-Jl; Tue, 11 Feb 2020 09:48:04 +0000
+To: samba-technical <samba-technical@lists.samba.org>, samba@lists.samba.org
+Subject: sambaXP 2020
+Organization: Samba Team
+Message-ID: <1dde7241-b6a9-73f6-23ec-4ac854b2c8b5@samba.org>
+Date: Tue, 11 Feb 2020 10:48:04 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-References: <B14B9A04-A84E-4DCB-95BE-E029378E49C6@gmail.com>
- <20171105085753.axk2m5lsdjns6u37@kazak>
- <CALdFvJGSw9WSm9UtAB32Nqgt=4qA_whai15Fo9C6ypspdKQt5A@mail.gmail.com>
- <20171106094708.ku75kutkm3s6i23c@kazak>
- <441FAF42-21F1-444D-BECB-843F2CF4A73A@gmail.com>
- <509e99ca-dfed-e09a-1da5-f1b0c1238d5a@sernet.de>
-In-Reply-To: <509e99ca-dfed-e09a-1da5-f1b0c1238d5a@sernet.de>
-Date: Mon, 10 Feb 2020 15:16:28 -0500
-Message-ID: <CAB5c7xokf5Fs-hcx=uREuiOb2LO1D3AbDAg+kyGzy+Yvpn_4ww@mail.gmail.com>
-Subject: Re: [Proposal] Remove dns_sd API
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=utf-8
+Content-Language: de-DE
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,45 +55,38 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Walker <awalker@ixsystems.com>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Karolin Seeger <kseeger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is used in the FreeBSD port for samba, and is currently used in
-FreeNAS 11.2 (though future versions are moving away from). We can work on
-upstreaming the fixes and time machine support if there is interest.
+Hi,
 
-Andrew
+The 19th International User and Developer Conference sambaXP
+(https://sambaxp.org/) will take place from 26th - 28th of May 2020 in
+Göttingen, Germany.
 
-On Mon, Feb 10, 2020 at 2:58 PM Bj=C3=B6rn Baumbach via samba-technical <
-samba-technical@lists.samba.org> wrote:
+If you would like to give a presentation, you can submit your
+paper here:
 
-> Hi!
->
-> now, some years later, nobody requested the dns-sd functionality.
->
-> I've created a merge request which removes the code, which is not used
-> since a lot of years:
->
-> https://gitlab.com/samba-team/samba/-/merge_requests/1134
->
-> Best regards,
-> Bj=C3=B6rn
->
-> --
-> SerNet GmbH, Bahnhofsallee 1b, 37081 G=C3=B6ttingen
-> phone: 0551-370000-0, mailto:kontakt@sernet.de
-> Gesch.F.: Dr. Johannes Loxen und Reinhild Jung
-> AG G=C3=B6ttingen: HR-B 2816 - http://www.sernet.de
->
-> SerNet Hausmesse - am 12. Februar 2020
-> im G=C3=B6ttinger "COWORKING" (Pro-Office)
-> Anmeldung: http://sernet.de/hausmesse
->
-> Besuchen Sie die verinice.XP 2020 in Berlin!
-> Anwenderkonferenz f=C3=BCr Informationssicherheit
-> 25.-27. Februar 2020 - im Hotel Radisson Blu
-> Info & Anmeldung hier: http://veriniceXP.org
->
->
+https://sambaxp.org/#c11
+
+Call for paper ends on February 29th.
+
+New for this year's event: the Microsoft SMB3 Interoperability Lab (IO
+Lab) from May 24th-29th, 2020, co-located with SambaXP!
+The purpose of the IO Lab is for vendor is to bring their
+implementations of SMB3 to test, identify, and fix bugs in a
+collaborative setting with the goal of providing a forum in which
+companies can develop interoperable products.
+
+Looking forward to meet you there! :-)
+
+Cheers,
+Karolin
+
+-- 
+Karolin Seeger			https://samba.org/~kseeger/
+Release Manager Samba Team	https://samba.org
+Team Lead Samba SerNet		https://sernet.de
+
