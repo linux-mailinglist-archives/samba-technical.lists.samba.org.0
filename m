@@ -2,46 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1124F15F82E
-	for <lists+samba-technical@lfdr.de>; Fri, 14 Feb 2020 21:51:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 90D2115F84E
+	for <lists+samba-technical@lfdr.de>; Fri, 14 Feb 2020 21:58:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=4Ww2WDg6o+1pRoqQLaLauste+g7vWIGduG7CGDVwPp0=; b=lMqitAyfOavcUN93642ha8gpVM
-	xrDKCJKdiRQbTWvbWNJAftcHuXw0eJJ1Hjh52kVL82Sr358xMdqkdlsuBd+GfVkEUol+d4bPFWtH0
-	Lu/5CMvTdiuQv3orPgUrfsNrVFW4UpFo/ECwH8F8+lzoQE3azwv6oAnCWDw6eo+hT7xq65ZW/xxb4
-	WghV9FP8LSF9ddnoNRMZ1SDOdO/Il1CNyQQBRw432bCoLoe+vwYadZk89K7HIYaNCwteyzBM7Zn4k
-	vKiGMJEnlmU4/R/SX6d34KdOSxgt19qRZ70GhX5jeI/S6oPN/lkM66N/LZpPDbUMnRO67lEyicg7O
-	uRev/hQQ==;
-Received: from localhost ([::1]:48270 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=ll8ypFcvSzKgZSKmdBDAROhovxXC4Pozg7QHNrEsqC4=; b=bsxyEfNdbEOZE6veyLvEGnMHLB
+	JRhJrh8+ZDmVxJqkT2eSHwe1K84FqIN6eqMhRMLFF18enpPB7WL5gX0q0zVrt6kHzmotyoX/C22en
+	Rlfq9TXHX3bZGjRQGru/Ou7yCsp8oRcJ54z4hBAHqVLQGNmBwfcPfEip0wuHJTHSFytCBfKUhZfNq
+	LOwAtEbxLWLq2C+PzRabcqavkN7nHO/yPsXi5Irbx7+qcJyw9erhdh5yNqwTLQjl31c3Cpa+iiuOz
+	z0h5ofht3zAd0M24cjVu2fphh5loK6VrKV/vPKF0aGRwPNLse89pe1ghKjKAK9o0dSyDHYG4YjHCH
+	8Z7aOFvQ==;
+Received: from localhost ([::1]:49012 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j2hvN-009x8m-Mn; Fri, 14 Feb 2020 20:50:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24922) 
+	id 1j2i2I-009xF1-RJ; Fri, 14 Feb 2020 20:58:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26572) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j2hvI-009x8f-R0
- for samba-technical@lists.samba.org; Fri, 14 Feb 2020 20:50:55 +0000
+ (Exim) id 1j2i2E-009xEu-3t
+ for samba-technical@lists.samba.org; Fri, 14 Feb 2020 20:58:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=4Ww2WDg6o+1pRoqQLaLauste+g7vWIGduG7CGDVwPp0=; b=0xlgvRxL7ycpaAmJmB7pshRKd5
- nH4BY+WGR5XngtUzfjhPSXl2HRB1AeFP+hHCQVc0XSrBt3uGJgW9/3mLoxzBp5Kj2b6r1hXLC2LJf
- OBv3fmDmNcVgTF3XDhzMPVRPXidOyQrA4vzc/S5HOLf1pruyr9N+tRDsbgK2BWM4a17RdGTvVyGcv
- 8t9Jgw0+E8sZuDOkVrG+Jo/1Tp0GeH9uaP+E/8VD3qKiw8ZqcJMAxxe49E+VaGmne4n104dLmz7/4
- n+5wgxIj+eOnXdWPVUqlTUF2Cs+67K4rEovhgvtyLBet3yApitc6eLaKCwxEM/BqcEooWe0Gq9o/m
- 2i4o0fp0ENSrsMeW93eYWccO/opNUkpKUvXQEHIWUzTmjXHUbzVSq5HrPWJsUa/xz5W3FHsWJcLNk
- 5+77E24F+ZjXq3rv2c4MPB2ItmyZdM35E1qYIhHvxRlcckjWwdTYMNUPCuhWaTnpcdUAOYIP3nzih
- RQSjunyDcBSGIyQa5mLnB+32;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=ll8ypFcvSzKgZSKmdBDAROhovxXC4Pozg7QHNrEsqC4=; b=s/7zoUgRbF1ZTQsx5LullnnDZs
+ zZY5oOSTZ9SuY1WAz3ZtEr1P87Pk4Kc9z9AbXNmlZGHlaJpjhdq6WUhXKAXOV6C3mqcou/XSVVhdw
+ Mtyvkmp8dodcwJ/wNPN/lpIJ6eBv4ZgPrQv359aHfsEq9MnbEvexvgTHpzpqBtDpmvAT1SE2xQ5bl
+ Mw2e1mcNMu7qKPAB3S9P2TaF6CuBTJuOnSfJ3ni2tm9SR3VX6Ih5JMevU2xcCrOnc08woiuS0uMaz
+ HQMwIG0hhoLIbtSW8NGyuN9IIyq6P0j3mpQtv7Zd2enwRFtxib5QESAjEt6beGFH54O+sUbFdEqFv
+ ec8HipbLHMrJK4f1Hyb49p6NvHqCXC8JPEP6Ul4IqsjRMcRIsrq/TMsPQY/irqgEG1tqy4qFJKG/4
+ U7rU4aZvu8lOUd8zopVD2C4XpxSN+UncFlOBZoAiuMzgWKk6BTTi0uj1UcyWcSKRZCi3dHE9f0huN
+ bHUvGaZ19psBM8w1CisB20YH;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j2hvH-00042Y-Q8; Fri, 14 Feb 2020 20:50:52 +0000
-Date: Fri, 14 Feb 2020 12:50:49 -0800
-To: Andrew Bartlett <abartlet@samba.org>
-Subject: Re: GitLab CI back
-Message-ID: <20200214205049.GA51881@jra4>
+ (Exim) id 1j2i2D-00045g-1Y; Fri, 14 Feb 2020 20:58:01 +0000
+Message-ID: <ffbb3c2912a79ca4c32232280b0ce689597aa99c.camel@samba.org>
+Subject: DFS/VFS failures in GitLab CI
+To: Jeremy Allison <jra@samba.org>
+Date: Sat, 15 Feb 2020 09:57:58 +1300
+In-Reply-To: <20200214205049.GA51881@jra4>
 References: <1f5483b6c7349f261b79990f3daea501d7636ffe.camel@samba.org>
+ <20200214205049.GA51881@jra4>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.34.3 (3.34.3-1.fc31) 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <1f5483b6c7349f261b79990f3daea501d7636ffe.camel@samba.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,55 +56,50 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Feb 14, 2020 at 06:01:16PM +1300, Andrew Bartlett via samba-technical wrote:
-> G'Day,
+On Fri, 2020-02-14 at 12:50 -0800, Jeremy Allison wrote:
+> keep getting (for example):
 > 
-> A big thank you to everyone for their patience, the GitLab CI private
-> runners are back now.
+> https://gitlab.com/samba-team/devel/samba/-/jobs/438181318
 > 
-> There are still things I would like to do:
->  - ensure the alternate configuration for really old Samba versions
-> still works (I think that image ID also changed)
->  - decouple the system from the catalyst_samba key and use an ephemeral
-> key instead
->  - provide a top-to-bottom script that pulls a docker image, installs
-> the required software and runs ansible that only needs the credentials
-> as input
+> Failed to start up environment 'ad_member' at /tmp/samba-testbase/b21/samba-admem/selftest/target/Samba.pm line 125.
+> 7206 samba can't start up known environment 'ad_member' at /tmp/samba-testbase/b21/samba-admem/selftest/selftest.pl line 840.
+> 7207 ==> /builds/samba-team/devel/samba/samba-admem.stdout <==
+> 7208 [1(0)/138 at 0s] samba.tests.pam_winbind(local+krb5)(ad_member)
+> 7209 ERROR: Testsuite[samba.tests.pam_winbind(local+krb5)(ad_member)]
+> 7210 REASON: unable to set up environment ad_member - exiting
 > 
-> But for now, it is back, and the bastian host is now running a 2020 set
-> of updates, which is a good thing regardless. 
+> The code changes I'm making (DFS/VFS stuff) aren't anything
+> to do with this.
 > 
-> Let me know if you have any further problems, otherwise please just
-> restart the failed jobs.
+> Any ideas on what might be going wrong ?
 
-Thanks a lot for your work Andrew. However I'm still having
-problems getting jobs going through.
+I'm pretty sure it is your changes.  This looks generic enough to
+reproduce locally, so try that to get good logs. 
 
-I re-submitted:
+make test FAIL_IMMEDIATELY=1 TESTS='--include-env=ad_member --include-env=ad_member_idmap_rid --include-env=ad_member_idmap_ad --include-env=ad_member_rfc2307'
 
-https://gitlab.com/samba-team/devel/samba/-/merge_requests/new?merge_request%5Bsource_branch%5D=jra-add-VFS-READ-DFS-PATHAT-1
+It does say this a lot earlier, which does look like DFS/VFS stuff:
 
-and keep getting (for example):
+checking for winbindd
+wait for smbd
+tree connect failed: NT_STATUS_CONNECTION_DISCONNECTED
+tree connect failed: NT_STATUS_CONNECTION_DISCONNECTED
+tree connect failed: NT_STATUS_CONNECTION_DISCONNECTED
 
-https://gitlab.com/samba-team/devel/samba/-/jobs/438181318
+Sorry,
 
-Failed to start up environment 'ad_member' at /tmp/samba-testbase/b21/samba-admem/selftest/target/Samba.pm line 125.
-7206 samba can't start up known environment 'ad_member' at /tmp/samba-testbase/b21/samba-admem/selftest/selftest.pl line 840.
-7207 ==> /builds/samba-team/devel/samba/samba-admem.stdout <==
-7208 [1(0)/138 at 0s] samba.tests.pam_winbind(local+krb5)(ad_member)
-7209 ERROR: Testsuite[samba.tests.pam_winbind(local+krb5)(ad_member)]
-7210 REASON: unable to set up environment ad_member - exiting
+Andrew Bartlett
 
-The code changes I'm making (DFS/VFS stuff) aren't anything
-to do with this.
+-- 
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
 
-Any ideas on what might be going wrong ?
 
-Jeremy.
 
