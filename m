@@ -2,61 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2131815D7B4
-	for <lists+samba-technical@lfdr.de>; Fri, 14 Feb 2020 13:53:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04DD015F6BC
+	for <lists+samba-technical@lfdr.de>; Fri, 14 Feb 2020 20:23:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=/3Y4w/Q79xB8ju03R+kZh1hDe1AVIbdJ5+glSKIrlP8=; b=FHT8K/TRNpCUYbcIKFlKeUGJ0k
-	VWEQETiqaRyRu/UhYxO6lt6puoYGXnGBVuu+aMzXhMDu/6/RqpO9HITWdTR2+H6843Ju7IKX4Z1nZ
-	dAYsj7L0bKXzblwQV3fSjmTgIHUX3i6DYwST8NUdXcEVyAYj4rOOfdOmN/r3NORgPP3rgKSRbh86a
-	It18YjavkkQ4/US+akRQDItb/m4bmSrOiSv3FSJWVuTazGDm15YPNsx9aJyZTHaJ+oaXND7kYkjez
-	K66abdPBDraC603UEg0bSDSSV/zVSrqGLSeLqxKw+KtY0gJ1WwbogCHeAC3ivl0GdjnqdrSiTEgVJ
-	IZ1GGkLQ==;
-Received: from localhost ([::1]:21674 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=97vMM0MBbQ9ghyOAxk72i+PK3Xh+yRFbYxPf5SSOWE8=; b=qWCIYmHTUHaUfchaANftXPVQNB
+	Nv6zBcm8kK6BNTd1PZelHif+TnqBCi3KPdLy+KbOYAJoEflCPW+8VOFaG2VZGwxns6tUr86INQDwO
+	tVskCA4dPRxPRK26SU5vUCe8wkkGrHBWF69kggalV6u98RPXTRaoPIOcWxDR61QTedrmj4kkw12SN
+	ZOdBeUjjyU7rAKCK8qdiqBTNt/q67WYyMeNLrqfSy9xxqs0xiV9Dnnty3RBDH503j3tWKLu2bLNTF
+	rY6IBDJOcHFAf3DcUJE5pRCPcb9AGoC603SJ6LDGsRov+JcPiEjenqeea67yf6X0ptpGIaQLcFOWN
+	WQ2XnA+w==;
+Received: from localhost ([::1]:40076 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j2aSA-009t5b-Jz; Fri, 14 Feb 2020 12:52:18 +0000
-Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233]:43566) 
+	id 1j2gXg-009vyN-CQ; Fri, 14 Feb 2020 19:22:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50968) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j2aS6-009t5U-2Q
- for samba-technical@lists.samba.org; Fri, 14 Feb 2020 12:52:16 +0000
-Received: by mail-lj1-x233.google.com with SMTP id a13so10611244ljm.10
- for <samba-technical@lists.samba.org>; Fri, 14 Feb 2020 04:52:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=keepertech-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=uFtFCYV2HdnQkb6v4m8acI/30PwfM3RkddyGEUM9liE=;
- b=JMhWJcy98IIiOD/yJ7E7FUSWv5okk18hcUrfmThzkKo2YKl11mjMdPrGEmi0SYqFR+
- SG79aNwQ1KHcobTPNBTNUJh9GAXfxoyv7+rJUkWQEz65teJADuBHGDJpQnjsOJVauusw
- Vl2Pk3pgyaalwjy6PBRecqbODyDhT6b2LjkHIwt2UFyDCvcYb1yczB9vex0ZnAdFePIA
- VQBFMkBT8GfGOaRayqBVf4jnq/v11YkWDOK6ZoziOM2FkrxW3zP1qdeObhWoyxUS8WLZ
- f++m0WGWp/YlBRW2lnJnLqb/ULS++QTN49wcqNF4bjhXc3+RihTDIXxMOlmIsuC8I248
- yLng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=uFtFCYV2HdnQkb6v4m8acI/30PwfM3RkddyGEUM9liE=;
- b=No/ZzfiojnJCtOwGJjlJ/CGKcumnTLS8ztkH+oITIdjECkmCYdjG+GWqyNV5XwGQl+
- SIYw+OQFOd/C5NGJqvwZVQV56t4G/kBj2MxX72LE2oH9T3neCqDDh56gIDCXWnIeDi35
- ZweaazrUqgd+8cRSWOPbqlDeJPXgAsJXyZdw1kc3i3M37wENVDBr/VIS4hy7lFyNPMo6
- FYMvjJ1txNvyG1IhFNf3vegcpg9Kx2trhr4QLotoLYBSUOM14SZkhDphAokqO/77yAl0
- 6HVaiJ/dVFd/HBcZrJLrhvPVLf94Df0xMvvVizMLi9Cgz/wYJALvryfQ9VStjbGicR3y
- zIzg==
-X-Gm-Message-State: APjAAAWJUoUn2jHfjG/Xe9Xh1TfBreU/i4NN/zwNEFhUrW/qkgbAcC7B
- XPa9+D8GZBhkRlJI/f5tH08Y7ZQn9Um4a8bNYyFFeZOT
-X-Google-Smtp-Source: APXvYqyqljzD8Qh8CxIFDcWz3SCbczWuoTNv7Dk95Top1u/gtifk2Y6/yIrjUePyS5lewN3uoYd2rxGoWtdzHdqnMhk=
-X-Received: by 2002:a2e:3e0d:: with SMTP id l13mr2123914lja.70.1581684731848; 
- Fri, 14 Feb 2020 04:52:11 -0800 (PST)
+ (Exim) id 1j2gXb-009vyG-Dd
+ for samba-technical@lists.samba.org; Fri, 14 Feb 2020 19:22:21 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=97vMM0MBbQ9ghyOAxk72i+PK3Xh+yRFbYxPf5SSOWE8=; b=NN7JNEM9qeUA4UG1isH1kuiwuY
+ bmn61XUPROX0URKgnPQQ22vJvmDtVNiMnqfOoRNUvC1nT7p+PSr2AG08dMAkq3o+yIFcMoQGB1ZGk
+ 0Q+TmVYZnp/QqB+nGnoCZgc3DImIx/YLF+lyCwkwzUIgMBJ7kIej4GpaqwGDfi4dxT/peSB09Gg1q
+ ptMex9EJ7ZR+MCb9xBbzv+LRT1S3huRzYFxz7Fmg2w6Ka0AxjIKzEBKQZqibOjriI1K9F1YB29Xzt
+ 9XVIvqe2WTTy2BJiQpQtnTMJx5wrzGxE0GcDTdRrQreZ9h/0uT/rjUbfPGrJU0hKFKCerWx0H1Mcm
+ QIEp86DSEy+h2HvlQm7Mte/wgFVnL+Z/4s9dzQAW6JAdwzbdnBdPg6X1+EhfDfYs7Oekzt+IcrVCm
+ Lki8UDA910ZsZr5aGsQRZYQQPjCLDm/nygcj9hHTSm7Qxu1GwRZXctMfjvqXRzi/8FmArmOn8EyA+
+ j48gw5F9BBnHHppjvUOn+Pwn;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j2gXa-0003He-Lv; Fri, 14 Feb 2020 19:22:18 +0000
+Subject: Re: QNX6.6 cross-compilation problem
+To: Nicolas Pinault <nicolasp@aaton.com>, samba-technical@lists.samba.org
+References: <7e220de2-1a52-02a8-ba8e-2fc963fa7699@aaton.com>
+Message-ID: <116a320e-62d5-b51e-0b0d-7c0709237d0c@samba.org>
+Date: Fri, 14 Feb 2020 21:22:15 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-References: <CAGbviv+X9gYosw0QmeMSqBmbwkfc4WtBVQ9h3X0+meBEmXQ7PA@mail.gmail.com>
- <20200214205600.5d82b43f@martins.ozlabs.org>
-In-Reply-To: <20200214205600.5d82b43f@martins.ozlabs.org>
-Date: Fri, 14 Feb 2020 07:51:58 -0500
-Message-ID: <CAGbviv+DK8h9Yqm4Qg59EzRSzdPcC+kk5FMqVyZAK6GKdTfCew@mail.gmail.com>
-Subject: Re: ctdb failover problem
-To: Martin Schwenke <martin@meltin.net>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+In-Reply-To: <7e220de2-1a52-02a8-ba8e-2fc963fa7699@aaton.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,41 +57,104 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Wyllys Ingersoll via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Wyllys Ingersoll <wyllys.ingersoll@keepertech.com>
-Cc: samba-technical@lists.samba.org
+From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Uri Simchoni <uri@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Feb 14, 2020 at 4:56 AM Martin Schwenke <martin@meltin.net> wrote:
+That looks like something in Waf or in the Samba configuration scripts
+that Waf runs. Waf 2.0.x which is used by Samba 4.11.x has a worker
+process pool to carry out build / test jobs, and this pool seems to be
+stuck - won't execute a simple compilation command to run a
+configuration test.
 
-> On Thu, 13 Feb 2020 11:32:55 -0500, Wyllys Ingersoll via
-> samba-technical <samba-technical@lists.samba.org> wrote:
->
-> > Running 4.10.13 with ctdb and 2 nodes behind haproxy.
-> >
-> > The ctdb configuration does NOT use public addresses (since these are
-> > managed by haproxy).
-> >
-> > Both nodes come up and join together successfully, and one of them is
-> > joined to the AD domain. The problem is that if the node that is joined
-> to
-> > AD fails, the 2nd node doesn't rejoin the domain and so even though new
-> > requests are routed to it (via haproxy), since it is not explicitly
-> joined
-> > to the domain, clients fail to authenticate and cannot access the shares
-> or
-> > services.
->
-> Do you have the Samba "netbios name" parameter set to the same value on
-> both nodes?
->
+Which version of Ubuntu are you using exactly? What version of Python?
+is it vanilla Samba or did you use patches?
+
+I don't have access to QNX toolchain, but if the problem is with the
+Samba build system and the build machine (as it appears to be), then
+perhaps we can reproduce this without the specific toolchain.
+
+Thanks,
+Uri.
+
+On 14/02/2020 11:17, Nicolas Pinault via samba-technical wrote:
+> Hi,
+> 
+> I'm trying to cross-compile Samba (V4.11.6) for QNX6.6.0.
+> For this, I've installed QNX dev tools on Ubuntu in a VMWare virtual
+> machine (My PC runs Windows10).
+> 
+> To cross-compile Samba, the command I run is :
+> CC=ntoarmv7-gcc AR=ntoarmv7-ar LD=armv7nto-ld GDB=armv7nto-gdb
+> CFLAGS=-I/home/nicolas/qnx660/target/qnx6/usr/include waf configure
+> --cross-compile --cross-anwsers=qnx.txt
+> 
+> I filled the unknown fields in the qnx.txt as requested.
+> 
+> The configuration runs till it hangs at this step :
+> ...
+> Checking for pthread_mutexattr_setrobust_np : not found
+> Checking for library
+> pthread                                                      : no
+> Checking for pthread_mutexattr_setrobust_np : not found
+> Checking for declaration of
+> PTHREAD_MUTEX_ROBUST                                  : not found
+> Checking for declaration of PTHREAD_MUTEX_ROBUST (as
+> enum)                        :
+> 
+> Sometimes, configuration hangs one or two steps earlier.
+> 
+> bin/config.log shows :
+> ...
+> #include <pthread.h>
+> 
+>  int main(void) {
+>                       return (int)PTHREAD_MUTEX_ROBUST;
+>                       ; return 0; }
+> 
+> <==
+> [1/1] Compiling
+> [32mbin/.conf_check_c3306603f996021a8dd585a3c7167deb/test.c[0m
+> 
+> 
+> While the configurafion is hung, ps-ax shows the following :
+>  8302 pts/0    Sl+    0:08 python3
+> /home/nicolas/samba/samba-4.11.6/buildtools/bin/waf configure
+> --cross-compile --cross-answers=qnx.txt --jobs=4
+>  8304 pts/0    S+     0:00 /usr/local/bin/python3 -c #! /usr/bin/env
+> python # encoding: utf-8 # Thomas Nagy, 2016-2018 (ita) log_base_path =
+> "/home/nicolas/samba/"  import ...
+>  8305 pts/0    S+     0:00 /usr/local/bin/python3 -c #! /usr/bin/env
+> python # encoding: utf-8 # Thomas Nagy, 2016-2018 (ita) log_base_path =
+> "/home/nicolas/samba/"  import ...
+>  8306 pts/0    S+     0:00 /usr/local/bin/python3 -c #! /usr/bin/env
+> python # encoding: utf-8 # Thomas Nagy, 2016-2018 (ita) log_base_path =
+> "/home/nicolas/samba/"  import ...
+>  8307 pts/0    S+     0:00 /usr/local/bin/python3 -c #! /usr/bin/env
+> python # encoding: utf-8 # Thomas Nagy, 2016-2018 (ita) log_base_path =
+> "/home/nicolas/samba/"  import ...
+> 
+> 
+> When I comment out "Mutext Robust" tests, the configuration hangs much
+> further. But it hangs.
+> 
+> As I thought it might be a concurrency problem, I tried with --jobs=1
+> option.
+> This does not work at all. Exceptions are generated at the very
+> beginning of the process.
+> 
+> 
+> I also tried using --cross-execute option. Same problem.
+> 
+> 
+> I spent days on this problem, trying different things but I'm stuck at
+> this problem.
+> 
+> Any pointers ?
+> 
+> Regards,
+> Nicolas
+> 
 
 
-Shortly after posting my question, I found that this was indeed the
-problem.  The netbios name was different on each host instead of being set
-to a common, shared, name.
-
-Fixed and now its all working.
-
-Thanks!
