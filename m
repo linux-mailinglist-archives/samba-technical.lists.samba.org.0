@@ -2,40 +2,40 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 981BA15F860
-	for <lists+samba-technical@lfdr.de>; Fri, 14 Feb 2020 22:02:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7170715F86D
+	for <lists+samba-technical@lfdr.de>; Fri, 14 Feb 2020 22:06:34 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=dTAF4VJ0fuSsdtao1vQiDRZtIL4+btYC/IBvzNqwwgM=; b=Z6omJxt8jyo6bnN79hBnIfZc/l
-	hcXHvyF36RI6qM5wRr8RoifQdTneZbtiHThG/n7ZUjcCkpiuyXnhaHtCVWPo1Z/JhAVY9EanFziSX
-	sxOzM22gpFN3lSlywiTydPMW5ra8AkS9g/DRd+rLq4zBUXIGmqIZM0op66TqL22dtp7qX6ojms65E
-	xoM16L/ALLofaZ68kMU3xef1yn6dFd5okZx/oDTwMN8LTYuoKvc+MOvoZf5eoNFK1ikzfLfe4MKuP
-	OaPRbYO2baYo7EK1y2anE7P/2sevKW4LZ43Mqc9mbGF7BFudYLxunNMA7nw6ODDewNjmymj4ZLbhI
-	yZ5p+1EQ==;
-Received: from localhost ([::1]:49760 helo=hr1.samba.org) 
+	bh=DakOQq6EyaABKgbNRl8SizrTrah5Xs/2l79qvaN+YRE=; b=F+GcJNVFj6G8J1x/D3M8D1sSqU
+	x82M5JCpdJ0Iq0L9p+s6MXcdC6PHooraRNlnjDy4EfRfjzmLfITMlRRi3vdE7rImsn6ynNKjYGi+f
+	d0ULMEEW6VIvBAPnLV/WcPzuzKZ5j5iOyq/oUMJUEWULgWXXqRiwTQ18vY3e0EdWrLTLq+gUm/GAX
+	z3iAPOYDeMZ/RlfaZMSquvH1SA7Otp5ZlKuf/iNCTECNhJkqnE9ZT8G7Kx7XYF4P3wchDutlB7LdG
+	Ybm5X9pZeiT5rs8E9GAU3gfZpEiA++tmuyX1H7mkJLFOqM/ibjYY0LWBayOlOk5OH7BoRuRZhNJSu
+	NJAItqlA==;
+Received: from localhost ([::1]:50508 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j2i6N-009xL7-HT; Fri, 14 Feb 2020 21:02:19 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:27708) 
+	id 1j2iAK-009xRI-9q; Fri, 14 Feb 2020 21:06:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29032) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j2i6I-009xL0-Ar
- for samba-technical@lists.samba.org; Fri, 14 Feb 2020 21:02:16 +0000
+ (Exim) id 1j2iAE-009xRB-SB
+ for samba-technical@lists.samba.org; Fri, 14 Feb 2020 21:06:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=dTAF4VJ0fuSsdtao1vQiDRZtIL4+btYC/IBvzNqwwgM=; b=MNY8CnecvaZfi7bzlnjQsyMUs4
- LxNZr4disCFyON7bAqj6vK7ATcMwpbJOLPRcPDA48tsw0IW/UMwcC3GzMPyi2MkSJ6Rx9uaeFNyQK
- D4Ca5BBsIwkDv/qNc1wwhRw9Lg9z0f58jH3qbcLeaHv6Mlw4L9Aw6teD9hYN2HFnvBhpHsyR/kfu7
- ehULchPHDDDW6tkkjvGoSX0dvBa2RFAeibv2DUApgJp6ZYvAjFWjjEFG4J67esQE4vM/6VYJHcFW8
- cUCMB4fYmahgFAPlnUXwObO/roEujNMPnwHIw5We8B8ZUq6dyz1VsGMQn+laYgsWp9pP3C9mPz2z2
- LbCN07SokqZ59nkIhKoHm7Ye3OkO/aWKo5ksygDhrMsu+HD+lwl7mlfv2elEoz+XTOKS4YFWvH6kw
- BRRnmBYgHDIIg90oJPukIMublJ1dxfzylDD1ubUP1GFGgsyfXKxk7fzaMwr+J0LZZoBqeFdmpqRbr
- oUIcxPuBxhHbmub8nM0ovF+Y;
+ bh=DakOQq6EyaABKgbNRl8SizrTrah5Xs/2l79qvaN+YRE=; b=Qdq4ZtYEDp5AP0TDXgBIajfXnq
+ ZlR6I1pRj0svsxu6RL4Om50gavvnUJ+VCply5//DrUWzUYau7xwl702mV1FhltDqIcTSANQ1c5v/Y
+ 9AtG88V4KOjBT7WSU0prBqjY107l1Yw24Ckk1ySvQX+2Qi4QeHHvA1XzDdO5ge53eqnfDqQb7OzvD
+ Ny4TEKDDGyCO291ODJU9ZMVrfJ895i4cf1cLDwD7iY8zAV2ZOIAQl8jDoo4QvjIoSvTakchnyiPcd
+ advGzMH//3IpixbnqkOqC3jVM4I60A9qrtBKPi5Yvw8Ru79AUE6mix3CdpS4XzX9ZyYTwXc427HSt
+ n4tLvisvWlvAyQfhqz8c2bIHnXUa3ilkLQsyH+8MGLctjiCHiKgJpbnfm35QW7fpnQMF6cIvEg2N/
+ A/xEv10FhjncP/FJKtahaAjSCAJQ8ib72HFD1hJ03cc0qN5WXwuZgfTNZkCfHm8aeIg+LAT1fWCkx
+ 8VIBC5mrREMCzCamuhwbxfaC;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j2i6H-00048q-A4; Fri, 14 Feb 2020 21:02:13 +0000
-Date: Fri, 14 Feb 2020 13:02:10 -0800
+ (Exim) id 1j2iAE-0004C2-20; Fri, 14 Feb 2020 21:06:18 +0000
+Date: Fri, 14 Feb 2020 13:06:15 -0800
 To: Andrew Bartlett <abartlet@samba.org>
 Subject: Re: DFS/VFS failures in GitLab CI
-Message-ID: <20200214210210.GB56355@jra4>
+Message-ID: <20200214210615.GC56355@jra4>
 References: <1f5483b6c7349f261b79990f3daea501d7636ffe.camel@samba.org>
  <20200214205049.GA51881@jra4>
  <ffbb3c2912a79ca4c32232280b0ce689597aa99c.camel@samba.org>
@@ -96,11 +96,7 @@ On Sat, Feb 15, 2020 at 09:57:58AM +1300, Andrew Bartlett wrote:
 > 
 > Sorry,
 
-Don't be sorry, that's really helpful info to help
-track stuff down - thanks ! :-).
+Found it. Easy when you know how :-) :-).
 
-The way the test environments are set up and
-invoked is still a mystery to me unfortunately :-(.
-
-Jeremy.
+Thanks a *LOT* for that hint !
 
