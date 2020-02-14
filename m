@@ -2,57 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B20E315C84C
-	for <lists+samba-technical@lfdr.de>; Thu, 13 Feb 2020 17:34:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A67F715D14F
+	for <lists+samba-technical@lfdr.de>; Fri, 14 Feb 2020 06:02:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=TnR330W/oFzUVsVI9Q26VPsSEdvufVwqCuEGf4fNz1w=; b=hgmmZSKxHmMBxAsFDFvlHW0OI4
-	i4+VRkksCNYsN6h6ykoYUzyLvvl8DmZowtlrpzH+i1t7+mj0nVTTfst+X+u3pLIvd6ZHXnKz/xdd0
-	VsxT7UEmDRXhRj7Zt/0+emkJp0aBsF/WUHnj6Fys/f+RQtNRb9aCf7/H+YKPIjrVgy3OKNeBRHNJR
-	OhRtlRj43DFsW+v5mtAr6HbBJTA2TB+TRkeBXeURy2egIsJyBNu+/juYO88XrQcZrfNIRQrV2TR/e
-	EZWFr99VIzD1t/k0GkfWMbok8ENkCEDFLxEhZ4APMPt4mNYa/Rop5V+IjtXyzalrad8iXGwGuSxY7
-	kCJ5qylg==;
-Received: from localhost ([::1]:62860 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=DvMA+fe03BnoDyFOKki9oft3XoTVKpanP9u0TxWbWYM=; b=u6i0UccJCFIRPXvXwq4ubjzF/m
+	RnKdDSIELdxZ2hLM2g+ZzG6LhVcpTd8lfO33peufRQacCU+uKiqp4K+yBbjRae/Oxb8AbmKHyvTe/
+	3D1j6rmPf4Z7KadF359jS3ory7UCAs/Chs9enuaEvoTmq5Q6GwEZlFHwgOwHZsZ5jAw+KwQCt3rNy
+	Z490SZ2WX7XyfaMMiqE0o8+/Wbwtvri9obyrCZmzYsJGYFKeelDvXUbIKEWqcX/JAsXCl33RBdFxh
+	qhN3ZyGWEAHMXU1n9qYq8WXBMaOa9Yhr7JHsv7u37XibF/peLF0y9N4XdrFAxUkA2gIPsuGR0KMp8
+	3L2ZzRQQ==;
+Received: from localhost ([::1]:46048 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j2HQN-009kUg-Uv; Thu, 13 Feb 2020 16:33:12 +0000
-Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132]:39531) 
+	id 1j2T6Z-009pL3-SK; Fri, 14 Feb 2020 05:01:31 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51354) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j2HQJ-009kUZ-4C
- for samba-technical@lists.samba.org; Thu, 13 Feb 2020 16:33:09 +0000
-Received: by mail-lf1-x132.google.com with SMTP id t23so4711262lfk.6
- for <samba-technical@lists.samba.org>; Thu, 13 Feb 2020 08:33:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=keepertech-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:from:date:message-id:subject:to;
- bh=NqIAi63jiy/uAgn1sI8Ta7Yd83hshXT4UfTWTMqD86k=;
- b=Augq6oLHDvd2zXvxN6xEsNJILdsXXsmqtpyGJQIPjOh2OhbAtQa2Y2V3ae8npY3aie
- CDfpR3fBsLyHOZnCRt7ojZ42faZQFkOQKIk/RNtwd4eibnsTVM3sSpWfJ8NEpgKMNC6q
- 3C3bWnQ7MZ54c/7mdQNRsUfO1G6P52yLyfSteSOGw0WePiG1S25zw2kkiqvPle6KE4s4
- r2lneM/N6pBvg/d+wnu1LGhKVgo0PU7+NKeQuCqn2GMNPn/ylx46WyK/InVUKV+3F3tg
- TbRLIFTMbHevatpyVisUpdlmLNdy0ro4XSz0+wHuUsweFgFfF4C+O83ucVAG6TQ8M/Qn
- XyyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=NqIAi63jiy/uAgn1sI8Ta7Yd83hshXT4UfTWTMqD86k=;
- b=YF14pDtde8WpV+j8k9hbDppEw/IfMBj6HHSDmwFoK9iclordFLNpG1re0HLVZuOO0m
- lFJf4KLfyBs5kZKoYjtAtV4bbzxVIN3FCbjZr3D5q/Ew3Gqa7pdfGGbFwFPPOBtZcbcr
- jnl3vdKoFelyiucXlmgWMZdl837Hv5A6+jqpjlhMXMvwSRbVuJLuJupScQbS8oqP4APu
- gbA99g78wcPy2sS6/wDI1F567AzfkOzn3jFXZ89BZYXtM5vOXqdw0ZLWLXlmo0FvMfqr
- uWKR5igOu3MQlTUlBDyMg0cr6sGMy6MTT4UoAuuYKEiqkBCrkRy7pJFcVZbWc663WDba
- wuOQ==
-X-Gm-Message-State: APjAAAVA2Ly4tSLNNwiOMryxZkzaSGzQHMEkNebKtZHz7BzgI9/+QEke
- F7w2qiRD1flBGUQhu6ccTCSLUm7uBglcNVbtpu/uT45B
-X-Google-Smtp-Source: APXvYqx/8O2mrmyyuNrU4+UtpvmYzjF6mX3HQ+gAeZsuKCpahc+inAKZkqevsHH2PSjk6rrNALUyNM11Xs0wfU4tXuI=
-X-Received: by 2002:a19:5e41:: with SMTP id z1mr9972385lfi.101.1581611585795; 
- Thu, 13 Feb 2020 08:33:05 -0800 (PST)
-MIME-Version: 1.0
-Date: Thu, 13 Feb 2020 11:32:55 -0500
-Message-ID: <CAGbviv+X9gYosw0QmeMSqBmbwkfc4WtBVQ9h3X0+meBEmXQ7PA@mail.gmail.com>
-Subject: ctdb failover problem
-To: samba-technical@lists.samba.org
+ (Exim) id 1j2T6T-009pKw-19
+ for samba-technical@lists.samba.org; Fri, 14 Feb 2020 05:01:29 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=DvMA+fe03BnoDyFOKki9oft3XoTVKpanP9u0TxWbWYM=; b=wfQ89zMzRfOBXbJHS+Ku0WL41e
+ eOlaJ/MyrhO7d4xMs3PVJc1RfYme/vSP+H66vkWwwo4kpE/VvHQCrpmf5ZVQMI8koijf5gHnaLxIb
+ b8AW+U9n1rtUGOJ5djcw6V4VktuUpDSnAqidE6p1J/ddJzRfAuocuafUY7PIt8Eby8kszt5Et/svL
+ MNHH//ONWjwWI7wKfnf1Q7zUcN6Eg8HHhwRuaWSX9aUJd/tafB0e/BvrXjmCd5fMaXBF4BJOcx3GF
+ k51fhY1HGukRZg60SG5lLK3k5cf7LTOgUJ2GDmRufWY2iJbLP4PCR5GF+yi0Doi7AUTVO2QkOogNV
+ K7mvs3bPKvs2nncoJX50IyiFysVXKTMvzlpG/sDLOJB2wGh86wfMBmMjFinJmAJ3mkolggJ0QvdOc
+ GUe6snHkerReupSu5jPiYRRQozbBEDt6/SZapa1ClgFG1XqznMvPu9RDY5UGi1rmjFBcA0uDrCX6x
+ +lLx4wSedvrxzc+QGGE22/kO;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j2T6P-0004z4-Q0
+ for samba-technical@lists.samba.org; Fri, 14 Feb 2020 05:01:22 +0000
+Message-ID: <1f5483b6c7349f261b79990f3daea501d7636ffe.camel@samba.org>
+Subject: GitLab CI back
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Fri, 14 Feb 2020 18:01:16 +1300
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,25 +54,49 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Wyllys Ingersoll via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Wyllys Ingersoll <wyllys.ingersoll@keepertech.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Running 4.10.13 with ctdb and 2 nodes behind haproxy.
+G'Day,
 
-The ctdb configuration does NOT use public addresses (since these are
-managed by haproxy).
+A big thank you to everyone for their patience, the GitLab CI private
+runners are back now.
 
-Both nodes come up and join together successfully, and one of them is
-joined to the AD domain. The problem is that if the node that is joined to
-AD fails, the 2nd node doesn't rejoin the domain and so even though new
-requests are routed to it (via haproxy), since it is not explicitly joined
-to the domain, clients fail to authenticate and cannot access the shares or
-services.
+There are still things I would like to do:
+ - ensure the alternate configuration for really old Samba versions
+still works (I think that image ID also changed)
+ - decouple the system from the catalyst_samba key and use an ephemeral
+key instead
+ - provide a top-to-bottom script that pulls a docker image, installs
+the required software and runs ansible that only needs the credentials
+as input
 
-What is the trick to make ctdb automatically join the domain when a
-secondary node becomes the primary?
+But for now, it is back, and the bastian host is now running a 2020 set
+of updates, which is a good thing regardless. 
 
-thanks,
-  Wyllys Ingersoll
+Let me know if you have any further problems, otherwise please just
+restart the failed jobs.
+
+Finally, I would plea that some other interested team members learn how
+all this works, so as to avoid having a single point of failure in
+myself.
+
+Thanks!
+
+Andrew Bartlett
+-- 
+Andrew Bartlett
+https://samba.org/~abartlet/
+Authentication Developer, Samba Team         https://samba.org
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+https://catalyst.net.nz/services/samba
+
+
+
+
+
+
+
