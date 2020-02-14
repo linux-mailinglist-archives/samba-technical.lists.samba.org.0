@@ -2,44 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A67F715D14F
-	for <lists+samba-technical@lfdr.de>; Fri, 14 Feb 2020 06:02:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA9AB15D15D
+	for <lists+samba-technical@lfdr.de>; Fri, 14 Feb 2020 06:10:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=DvMA+fe03BnoDyFOKki9oft3XoTVKpanP9u0TxWbWYM=; b=u6i0UccJCFIRPXvXwq4ubjzF/m
-	RnKdDSIELdxZ2hLM2g+ZzG6LhVcpTd8lfO33peufRQacCU+uKiqp4K+yBbjRae/Oxb8AbmKHyvTe/
-	3D1j6rmPf4Z7KadF359jS3ory7UCAs/Chs9enuaEvoTmq5Q6GwEZlFHwgOwHZsZ5jAw+KwQCt3rNy
-	Z490SZ2WX7XyfaMMiqE0o8+/Wbwtvri9obyrCZmzYsJGYFKeelDvXUbIKEWqcX/JAsXCl33RBdFxh
-	qhN3ZyGWEAHMXU1n9qYq8WXBMaOa9Yhr7JHsv7u37XibF/peLF0y9N4XdrFAxUkA2gIPsuGR0KMp8
-	3L2ZzRQQ==;
-Received: from localhost ([::1]:46048 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=BrIn2RbgGfDqR3uxP1kHlSwPEOjjMFTXpvHTQpCwsfY=; b=2mwpPqGuItpMFspVV9uWgPTS/1
+	w2vbode3M7Yqu59XsaGCLR14Bo+1LCo76AQFd0Vpq4puyoSV4LQvFeLULXEUjasEzWbnfYPzFvDlv
+	Qe3UEPKBmdO8QCysxIiLn/4aOiVWCX+Zj515tYglJuY4zelJI6Z3Vl5/82tPDgID9USfkqbK7mtrS
+	nVQqDFyd9TIqOpXdWT994j9bqTCzCTEn1KAtBRqg5cjrffH0Anw1cBD213ZvhDnpIr3BFWlUJIrH9
+	DG+x6Rvxo3mylE75Tp9+4MHYZKo7dsvPMoQdbIHGvQk2ZdwXQvSBy3zMq5TC0m1fCwENtaXW3YvmT
+	pDdMZWYw==;
+Received: from localhost ([::1]:46826 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j2T6Z-009pL3-SK; Fri, 14 Feb 2020 05:01:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51354) 
+	id 1j2TEi-009pRX-MX; Fri, 14 Feb 2020 05:09:56 +0000
+Received: from ozlabs.org ([2401:3900:2:1::2]:44689) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j2T6T-009pKw-19
- for samba-technical@lists.samba.org; Fri, 14 Feb 2020 05:01:29 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=DvMA+fe03BnoDyFOKki9oft3XoTVKpanP9u0TxWbWYM=; b=wfQ89zMzRfOBXbJHS+Ku0WL41e
- eOlaJ/MyrhO7d4xMs3PVJc1RfYme/vSP+H66vkWwwo4kpE/VvHQCrpmf5ZVQMI8koijf5gHnaLxIb
- b8AW+U9n1rtUGOJ5djcw6V4VktuUpDSnAqidE6p1J/ddJzRfAuocuafUY7PIt8Eby8kszt5Et/svL
- MNHH//ONWjwWI7wKfnf1Q7zUcN6Eg8HHhwRuaWSX9aUJd/tafB0e/BvrXjmCd5fMaXBF4BJOcx3GF
- k51fhY1HGukRZg60SG5lLK3k5cf7LTOgUJ2GDmRufWY2iJbLP4PCR5GF+yi0Doi7AUTVO2QkOogNV
- K7mvs3bPKvs2nncoJX50IyiFysVXKTMvzlpG/sDLOJB2wGh86wfMBmMjFinJmAJ3mkolggJ0QvdOc
- GUe6snHkerReupSu5jPiYRRQozbBEDt6/SZapa1ClgFG1XqznMvPu9RDY5UGi1rmjFBcA0uDrCX6x
- +lLx4wSedvrxzc+QGGE22/kO;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1j2T6P-0004z4-Q0
- for samba-technical@lists.samba.org; Fri, 14 Feb 2020 05:01:22 +0000
-Message-ID: <1f5483b6c7349f261b79990f3daea501d7636ffe.camel@samba.org>
-Subject: GitLab CI back
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Fri, 14 Feb 2020 18:01:16 +1300
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
+ (Exim) id 1j2TEc-009pRL-Vr
+ for samba-technical@lists.samba.org; Fri, 14 Feb 2020 05:09:54 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 48JhJ731Ykz9s29;
+ Fri, 14 Feb 2020 16:09:27 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
+ t=1581656967; bh=OYFp+u5ZQ9/tUh6jVoD3y0XJ0k9A81hsXmP2qSZ/u6o=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=tgsImfAl3EOCtq/yYUrhK3jEyNQtLSmraNr8pLFslAdw6aKSrm9w8ygRi0htaAfCz
+ PuQtENtK4TcG537qzx8YYSNHvV4Jh3zNfh3PuUoJCcJ9oMXfDW7WHbngWTl9HszAYf
+ HmXzq8bews7PW5HR9vCavFK9qJnWAFPGMsPH3h/daZ8mjDG91SRLBob6Zfrj3uZ8lW
+ THyKUGxOWC4wdgoH1dW4lJcOd478+6adwnOgyUzBSkXDJB6id/OO1iDvNdoTN1L3qY
+ CFkAJ6aYVeTXATpB5r6Wu51xH8WJ1jABGfshX7i+/zl4+Lmw49Ytm6NjCuRP5YD9Gu
+ KVDcDs2lu0njA==
+Date: Fri, 14 Feb 2020 16:09:26 +1100
+To: Andrew Bartlett <abartlet@samba.org>
+Subject: Re: GitLab CI back
+Message-ID: <20200214160926.6a23841d@martins.ozlabs.org>
+In-Reply-To: <1f5483b6c7349f261b79990f3daea501d7636ffe.camel@samba.org>
+References: <1f5483b6c7349f261b79990f3daea501d7636ffe.camel@samba.org>
+X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -54,49 +57,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-G'Day,
+On Fri, 14 Feb 2020 18:01:16 +1300, Andrew Bartlett via samba-technical
+<samba-technical@lists.samba.org> wrote:
 
-A big thank you to everyone for their patience, the GitLab CI private
-runners are back now.
+> A big thank you to everyone for their patience, the GitLab CI private
+> runners are back now.
 
-There are still things I would like to do:
- - ensure the alternate configuration for really old Samba versions
-still works (I think that image ID also changed)
- - decouple the system from the catalyst_samba key and use an ephemeral
-key instead
- - provide a top-to-bottom script that pulls a docker image, installs
-the required software and runs ansible that only needs the credentials
-as input
+> [...]
 
-But for now, it is back, and the bastian host is now running a 2020 set
-of updates, which is a good thing regardless. 
+> Let me know if you have any further problems, otherwise please just
+> restart the failed jobs.
+> 
+> Finally, I would plea that some other interested team members learn how
+> all this works, so as to avoid having a single point of failure in
+> myself.
+> 
+> Thanks!
 
-Let me know if you have any further problems, otherwise please just
-restart the failed jobs.
+No!  Thank you!  :-D
 
-Finally, I would plea that some other interested team members learn how
-all this works, so as to avoid having a single point of failure in
-myself.
-
-Thanks!
-
-Andrew Bartlett
--- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-https://catalyst.net.nz/services/samba
-
-
-
-
-
-
+peace & happiness,
+martin
 
