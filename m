@@ -2,48 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32AFE15D4B1
-	for <lists+samba-technical@lfdr.de>; Fri, 14 Feb 2020 10:27:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88B9A15D4AC
+	for <lists+samba-technical@lfdr.de>; Fri, 14 Feb 2020 10:26:04 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=wVkZmL0Ww4s4ptwv8IndcpMaOmIM8ig6nG3wKP+R9wY=; b=CFk3/N8J3amqhb8vlfiX5veaAT
-	12pd4086iVTgruroKeq/mFB1uFcTfPmHk17NzF6TqBVuZv55xouNgBgDFfd67/6VkCE2H0Hv03f7V
-	itnALzRo+mxzEqZjPcvN+zPnw7NjQZUFay0VAVEGE2xyToFU08lPngiHtebXMrVDKvF22AztJ12CL
-	Mj0ulq1EM+Rl1//yj1t3g3wCRI/UWu2gGiBJbakBGITwYKslY1Dhlh0MSM4pqojlORMSJP2Efo2LU
-	+CC5eoHWlGrHs3si8VjhDu/R2hFUs9gFhpqCCM0LlSIltW0XvVvEuxhiTuN8HkpHZ5YuL3Y2VuvO4
-	rhb61+6A==;
-Received: from localhost ([::1]:61478 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=oPdR73Vf0ctAs2KLERylrZOs9pNRZrLvAzZmqn76VRg=; b=MSq0O+FoR00g8JqTtKFTW/KssU
+	nefSQYuM0dD00PlB76ORHOsoj8+m9a33GI6sxlEyG11PUtlldhjHhZpmWuTQMqOlmCJWaS71Vq8rN
+	htpcU6R08Bvqk4+cngfBjgymeCNqXD2MlDoIOHNK77Q1yI5zwvFeNeIeeVvqwTBJ/DQAzIUxUXVmS
+	StrKAsd+7ah100OiLVgsvo3/JB78su9jOK5f93TsMGirJlhXc6MeRSbf/Edbvep8zK2aRn+Mwi48w
+	QONcem8LgWi7HiB7ZcPlZJ+YYuyoel+0pElAtzer+L07oboIyC2g/GTOheegFbMC0L/ahVRl+857k
+	3ptYddKA==;
+Received: from localhost ([::1]:60730 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j2XFu-009rlF-Mu; Fri, 14 Feb 2020 09:27:26 +0000
-Received: from filter1.mail4ce.com ([2a0b:f380:0:1:10::3]:36875) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1j2XFr-009rl8-0f
- for samba-technical@lists.samba.org; Fri, 14 Feb 2020 09:27:25 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=aaton.com; 
- s=_key;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:
- Message-ID:Subject:From:To:Sender:Reply-To:Cc:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=wVkZmL0Ww4s4ptwv8IndcpMaOmIM8ig6nG3wKP+R9wY=; b=3guxJLh5cUx2PijJ47fB9o2bT7
- ZJKGeASx5dxWywkvQrMYFqHzfVoQUBW7b5W2Q4RX5wmxYi5LuM8eTtXe+kdHbvo6J83KQg9Q/+4sw
- JMkh/kcOxmCFmEqKyMPg3GZjs8k/hyHPaCxgLnBTCkQig9/Vuw0QaNfcjT8a+Jf5luEE=;
-Received: from [195.101.33.1] (helo=[192.168.2.16])
- by filter1.mail4ce.com stage1 with esmtpsa (Exim MailCleaner) 
- id 1j2X6d-0001zM-VD for <samba-technical@lists.samba.org> 
- from <nicolasp@aaton.com>; Fri, 14 Feb 2020 10:17:52 +0100
-To: samba-technical@lists.samba.org
-Subject: QNX6.6 cross-compilation problem
-Message-ID: <7e220de2-1a52-02a8-ba8e-2fc963fa7699@aaton.com>
-Date: Fri, 14 Feb 2020 10:17:17 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+	id 1j2XDw-009rf9-N2; Fri, 14 Feb 2020 09:25:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16386) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j2XDq-009rf2-H6
+ for samba-technical@lists.samba.org; Fri, 14 Feb 2020 09:25:22 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=oPdR73Vf0ctAs2KLERylrZOs9pNRZrLvAzZmqn76VRg=; b=1YJAE1myY89vY95XqpyyYHCW8I
+ KSw8uDEG61G+l3ZBSMDR4YKOp737Wjcnf6ds8q4ECTKwWZ3ysuHZwTP+AQFeV/28cvSJC6+aZl86l
+ dBlmqyEBHffV4xf20W5R10SFFSCupev8WNF/wXCUMsK1w4FhlP86cTsSnvzQvp/GEv4Yx59Otcd5m
+ Kb7X9BCMsmIH8qZ+KsN3kzgD1jgqWGLOs/l9n3c9ejxqwjBFt5Vz+j5ZrZRqddj8ra7CIZjm04BvK
+ UR7ywHiixsRY29BKpu94jmzYsnz3pS7IhaFD/8I4UYwaw+Bdfb5yGZNkKhOWnYiscm2AkJDe4dvME
+ S2560BWgCrRPM2W6sZhPLVd0wQwQCFElI+uEK9/BZEw4GFXZ2h7Wz6VU+M3K7NJRh9ZZ4sADPFLvY
+ GET39eweFIS8OQsZ2Roi2JuHPGRxAHIe98ZA+AwNBoHCfcrl7sePPkIf713Y3cO2LJiLEtazRip+X
+ 6QDcoWvNGKbRTQnreolQpV8q;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j2XDn-00076o-Gd; Fri, 14 Feb 2020 09:25:16 +0000
+Message-ID: <37bb1fc80d788e66c253275fba9d90fed258dc36.camel@samba.org>
+Subject: Re: GitLab CI back
+To: Martin Schwenke <martin@meltin.net>
+Date: Fri, 14 Feb 2020 22:25:12 +1300
+In-Reply-To: <20200214160926.6a23841d@martins.ozlabs.org>
+References: <1f5483b6c7349f261b79990f3daea501d7636ffe.camel@samba.org>
+ <20200214160926.6a23841d@martins.ozlabs.org>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.34.3 (3.34.3-1.fc31) 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-MailCleaner-RDNS: invalid reverse DNS for 195.101.33.1
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,85 +56,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Nicolas Pinault via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Nicolas Pinault <nicolasp@aaton.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+On Fri, 2020-02-14 at 16:09 +1100, Martin Schwenke wrote:
+> On Fri, 14 Feb 2020 18:01:16 +1300, Andrew Bartlett via samba-technical
+> <samba-technical@lists.samba.org> wrote:
+> 
+> > A big thank you to everyone for their patience, the GitLab CI private
+> > runners are back now.
+> > [...]
+> > Let me know if you have any further problems, otherwise please just
+> > restart the failed jobs.
+> > 
+> > Finally, I would plea that some other interested team members learn how
+> > all this works, so as to avoid having a single point of failure in
+> > myself.
+> > 
+> > Thanks!
+> 
+> No!  Thank you!  :-D
+> 
+> peace & happiness,
+> martin
 
-I'm trying to cross-compile Samba (V4.11.6) for QNX6.6.0.
-For this, I've installed QNX dev tools on Ubuntu in a VMWare virtual 
-machine (My PC runs Windows10).
+Thanks everyone for the kind words. 
 
-To cross-compile Samba, the command I run is :
-CC=ntoarmv7-gcc AR=ntoarmv7-ar LD=armv7nto-ld GDB=armv7nto-gdb 
-CFLAGS=-I/home/nicolas/qnx660/target/qnx6/usr/include waf configure 
---cross-compile --cross-anwsers=qnx.txt
+I also want to say a big thanks to Joe Guo, who did this work
+originally.  It would not be possible to re-build the runner so quickly
+without the ansible playbooks he wrote, I just had to:
+ - understand them (or more particularly, read the README.md)
+ - find where the images were being declared and
+ - set up an environment to run them in.  
 
-I filled the unknown fields in the qnx.txt as requested.
+The entire design here is 'infrastructure as code', and the way we fix
+configuration issues like this is to rebuild the runner from scratch,
+rather than update the configuration online.
 
-The configuration runs till it hangs at this step :
-...
-Checking for pthread_mutexattr_setrobust_np : not found
-Checking for library 
-pthread                                                      : no
-Checking for pthread_mutexattr_setrobust_np : not found
-Checking for declaration of 
-PTHREAD_MUTEX_ROBUST                                  : not found
-Checking for declaration of PTHREAD_MUTEX_ROBUST (as 
-enum)                        :
+The starting point is: 
+https://gitlab.com/catalyst-samba/samba-cloud-autobuild/-/blob/master/ansible-env-setup.sh
 
-Sometimes, configuration hangs one or two steps earlier.
+https://gitlab.com/catalyst-samba/samba-cloud-autobuild/-/blob/master/ansible-roles-clone-or-update.yml
 
-bin/config.log shows :
-...
-#include <pthread.h>
+https://gitlab.com/catalyst-samba/samba-cloud-autobuild/-/blob/master/gitlab-ci/run-rackspace.sh
 
-  int main(void) {
-                       return (int)PTHREAD_MUTEX_ROBUST;
-                       ; return 0; }
-
-<==
-[1/1] Compiling 
-[32mbin/.conf_check_c3306603f996021a8dd585a3c7167deb/test.c[0m
-
-
-While the configurafion is hung, ps-ax shows the following :
-  8302 pts/0    Sl+    0:08 python3 
-/home/nicolas/samba/samba-4.11.6/buildtools/bin/waf configure 
---cross-compile --cross-answers=qnx.txt --jobs=4
-  8304 pts/0    S+     0:00 /usr/local/bin/python3 -c #! /usr/bin/env 
-python # encoding: utf-8 # Thomas Nagy, 2016-2018 (ita) log_base_path = 
-"/home/nicolas/samba/"  import ...
-  8305 pts/0    S+     0:00 /usr/local/bin/python3 -c #! /usr/bin/env 
-python # encoding: utf-8 # Thomas Nagy, 2016-2018 (ita) log_base_path = 
-"/home/nicolas/samba/"  import ...
-  8306 pts/0    S+     0:00 /usr/local/bin/python3 -c #! /usr/bin/env 
-python # encoding: utf-8 # Thomas Nagy, 2016-2018 (ita) log_base_path = 
-"/home/nicolas/samba/"  import ...
-  8307 pts/0    S+     0:00 /usr/local/bin/python3 -c #! /usr/bin/env 
-python # encoding: utf-8 # Thomas Nagy, 2016-2018 (ita) log_base_path = 
-"/home/nicolas/samba/"  import ...
+Andrew Bartlett
+-- 
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
 
 
-When I comment out "Mutext Robust" tests, the configuration hangs much 
-further. But it hangs.
-
-As I thought it might be a concurrency problem, I tried with --jobs=1 
-option.
-This does not work at all. Exceptions are generated at the very 
-beginning of the process.
-
-
-I also tried using --cross-execute option. Same problem.
-
-
-I spent days on this problem, trying different things but I'm stuck at 
-this problem.
-
-Any pointers ?
-
-Regards,
-Nicolas
 
