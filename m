@@ -2,48 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D40B15FC8F
-	for <lists+samba-technical@lfdr.de>; Sat, 15 Feb 2020 05:24:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B23E15FD2E
+	for <lists+samba-technical@lfdr.de>; Sat, 15 Feb 2020 07:54:16 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=X4568c0UPrVG8RNetFg9tLeoBz6fBYS+2lj1TEhwVpk=; b=L84pcMVihp2rzpBSiLyvpcqGYA
-	Z9NRXos+PdMFX12MR0qxNvvqIbVv98riS7Mc6XetiOfJhaI/13pwnbx//eUBFoOoZIQBZAycJuL6d
-	TdD8ojhDnEBdSzSQpaC5E491qr42uj9EP5KPAG29AphU5bzTn+N34kNGKEmXjXyPcx+c/nQO33KfY
-	uA62IQWtVXDbzRlsn2W94WsRoDvrHKinGOfX2uJEzP2tlxlBYl2Sohvckz0lDN/0LYXrCquwLQZ3T
-	X9HyoJ/8C46HY4kYdNm62URYrTBeDKntYB+ET8Jqz8pNWA9qu3HK5f6DjchggJCCZ1bKLgPkv1BXV
-	1tQrHq7Q==;
-Received: from localhost ([::1]:62462 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=e0Qn1SPolaoiYelVB/vjm5yX+sfPaFB/B5dDJvpRMUE=; b=ta8svk/k5J6s+CwV7EBsQJCG2k
+	czDQdeMbNkiUQVhqGijNRd3ALn3cZDofN39CxvbS/i9x5Fb4qGD3++F/3u/ViQzARloxx7CmUs+I5
+	kZW93HtCMv85X5kLbjqtAGODY9ansLv1R0FAL0iEenw7ASBTIKO0l4tbSgoroautU4+PjuisbisGy
+	9G+klvFX5kgZ7TO7AWpRhUayYM49YA1xGn2yXzTY92EbDvRPbwwsKYZuiGkz8GG0FpgqYCXX4QNf8
+	EQvOVh196q6SMPonz4oJSYAlMB0eCYOT26qXewIAUhiUyx2l91ncbNJmG/awYbTUwXnzlVpfx482I
+	8hp79DFA==;
+Received: from localhost ([::1]:18184 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j2ozZ-009zR5-NU; Sat, 15 Feb 2020 04:23:45 +0000
-Received: from m13-153.163.com ([220.181.13.153]:48602) 
- by hr1.samba.org with esmtps (TLS1.2:RSA_AES_256_CBC_SHA1:256) (Exim)
- id 1j2ozS-009zQw-E5
- for samba-technical@lists.samba.org; Sat, 15 Feb 2020 04:23:42 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=ftibg
- X07AZtVAm+cA4cbUdJYZWdVixdwslVDU/NAM2E=; b=qD36qMdreU9l1M3aSGXwj
- oOoU+DrATK6y3fNhp9ZvoGoDAIpzHVVLdtoFbfSbas+yJQbqjQBC11GISJHyPZUI
- UDY+DVXjr/4gGcoNptFMT85zoTPhOt00diEmOKAlmYfW8fJybSJZOoT1OACi3WMe
- Do2DAx6ChwuGlr43XMenp8=
-Received: from wuming_81$163.com ( [221.216.50.114] ) by
- ajax-webmail-wmsvr153 (Coremail) ; Sat, 15 Feb 2020 12:08:08 +0800 (CST)
-X-Originating-IP: [221.216.50.114]
-Date: Sat, 15 Feb 2020 12:08:08 +0800 (CST)
-To: samba-technical@lists.samba.org
-Subject: about ctdb deployment  without clustered file system
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.10 build 20190724(ac680a23)
- Copyright (c) 2002-2020 www.mailtech.cn 163com
-X-CM-CTRLDATA: RYB6FWZvb3Rlcl9odG09MTIzODo1Ng==
+	id 1j2rKd-00A0Fb-Ti; Sat, 15 Feb 2020 06:53:39 +0000
+Received: from ozlabs.org ([2401:3900:2:1::2]:42209) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j2rKR-00A0FU-Se
+ for samba-technical@lists.samba.org; Sat, 15 Feb 2020 06:53:30 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 48KLYS62H2z9sRG;
+ Sat, 15 Feb 2020 17:53:16 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
+ t=1581749596; bh=FKClNtlddhglaOH23gmFeevmjmS8LS19d+hRY6nDE8o=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=khi41FJSqDp/ylCoxkSL6sVzjgKyWw3ucMP7PGzQOIsNL2ngilDxZHbRjNozvHJ8f
+ 0w3GoSwsX3/Hofnukx5x4Ouu3dPxKBVzHKmAhvIgqO/iRC1vtAPbKfttGp6prwla0l
+ LuWB29lYiUeVqV48uZV7Oy1cWT1t25l0ckWDj4DThoBaNQVG+BakQmiejNkOB++aYP
+ A8mHLX4g90meqG1zq0CsT3ASNubHnDu7wbjDyMBtBuroMTqwe9ynRkLsXJUCIv2/Az
+ XDpZw+GsyypZ0Nps4/yZv2Nn+sMqXZleSatMZr9TFHBVYO+n70rM3HoS8LoNdmj0kf
+ 2PSHwQ1CWwGjg==
+Date: Sat, 15 Feb 2020 17:53:15 +1100
+To: =?UTF-8?B?6aOO5peg5ZCN?= <wuming_81@163.com>
+Subject: Re: about ctdb deployment  without clustered file system
+Message-ID: <20200215175315.2086f01a@martins.ozlabs.org>
+In-Reply-To: <3dd860da.2394.17047084308.Coremail.wuming_81@163.com>
+References: <3dd860da.2394.17047084308.Coremail.wuming_81@163.com>
+X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Message-ID: <3dd860da.2394.17047084308.Coremail.wuming_81@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: mcGowAA3P6eobkde3JhqAg--.14871W
-X-CM-SenderInfo: pzxpx0ljbyiqqrwthudrp/xtbBRQDKcFPAEhBDsAACsf
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
-Content-Type: text/plain; charset=GBK
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,21 +57,45 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?b?6aOO5peg5ZCNIHZpYSBzYW1iYS10ZWNobmljYWw=?=
- <samba-technical@lists.samba.org>
-Reply-To: =?GBK?B?t+fO3sP7?= <wuming_81@163.com>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-aGVsbG8sCgpldnJ5b25lLkknbSBzb3JyeSB0byBib3RoZXIgeW91IGd1eXMuIEkgd2FudCB0byBh
-c2sgIGEgcXVlc3Rpb24gYWJvdXQgY3RkYi4KCkluIG9yZGluYXJ5IGNvbmZpZywgd2UgbmVlZCBh
-IGNsdXN0ZXJlZCBmaWxlIHN5c3RlLCBzdWNoIGFzIGdsdXN0ZXJmcy9jZXBoIHRvIHByb3ZpZGUg
-YSBzaGFyaW5nIHZvbHVtZSBmb3IgY3RkYi4KCklmIEkgZG8gbm90IGRlcGxveSBhbnkgY2x1dGVy
-ZWQgZmlsZSBzeXN0ZW0sICB1c2Ugc2FtYmEvY3RkYi91dGlscy9ldGNkL2N0ZGJfZXRjZF9sb2Nr
-IChtYXliZSBpdCBuZWVkcyByZXdyaXR0ZW4vbW9kaWZpZWQpICBpbnN0ZWFkIG9mIHRoZSBmaWxl
-IGxvY2ssIGFuZCBwbGFjZSBldmVyeSBjb25maWcgZmlsZSBpbiBsb2NhbCBzZXJ2ZXJzIGluc3Rl
-YWQgb2YgdGhlIHNoYXJpbmcgdm9sdW1lLCB3aWxsIGN0ZGIgd29yayB3ZWxsID8KCkkgaGF2ZSB0
-ZXN0ZWQgc29tZSBzaXR1YXRpb25zIGFuZCBub3QgZm91bmQgYW55dGhpbmcgYWJub3JtYWwuSSBh
-bSBhZnJhaWQgdGhhdCB0aGUgdGVzdHMgYXJlIG5vdCBlbm91Z2guCgp0aGFua3MgZm9yIGFueSBh
-ZHZpY2UuCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHd1bWluZwoK
+Hi,
+
+On Sat, 15 Feb 2020 12:08:08 +0800 (CST), =E9=A3=8E=E6=97=A0=E5=90=8D via s=
+amba-technical
+<samba-technical@lists.samba.org> wrote:
+
+> evryone.I'm sorry to bother you guys. I want to ask  a question about ctd=
+b.
+>=20
+> In ordinary config, we need a clustered file syste, such as
+> glusterfs/ceph to provide a sharing volume for ctdb.
+>=20
+> If I do not deploy any clutered file system,  use
+> samba/ctdb/utils/etcd/ctdb_etcd_lock (maybe it needs
+> rewritten/modified)  instead of the file lock, and place every config
+> file in local servers instead of the sharing volume, will ctdb work
+> well ?
+>=20
+> I have tested some situations and not found anything abnormal.I am
+> afraid that the tests are not enough.
+
+CTDB will work in this mode, as a replicated and distributed database
+without any problems.
+
+However, CTDB's main job is to provide a distributed (and, depending on
+the database, replicated) database for Samba file metadata. If you have
+smbd instances running on multiple nodes but do not have a cluster
+filesystem then the different smbd instances can not service the same
+files.  This means you don't get either the scale-out offered by
+Clustered Samba or the redundancy.
+
+So it will work, but I wonder why you would do it...  :-)
+
+peace & happiness,
+martin
+
