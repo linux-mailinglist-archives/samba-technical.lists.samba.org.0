@@ -2,58 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A01C616010B
-	for <lists+samba-technical@lfdr.de>; Sun, 16 Feb 2020 00:11:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC15216015F
+	for <lists+samba-technical@lfdr.de>; Sun, 16 Feb 2020 02:33:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=vI7kLh0uJo8X8KLc5GHN3nhCOLfL5+c3D63Si8xFlNw=; b=Yk+tikTRMqpTyG5LQ87FZwgZ2X
-	pFG1K1C/qw/Z0fFBVTXXBU6VB3gWhxkVgmZsMh2tPXDIKrGcncuvyddfCWrHih5pS4gmgTw/1KeCy
-	DLerYD0ty/cxvMpPwH9uGrYUqVU0b9Kb1w275lKk52U5lhZOoj/f7x4YiYO9FTlQRoOyewQb/txss
-	b+nACltnWpHd4rscq0aCsfJkytMsIF8sKPqNxGPIWGf4bZw7m+RYuPQVfC8RDLis5d0o7b3dwFzHx
-	CADxBOWpvhqPWqlgoZ2X5zBlPEz8quyC1WKF5SFRplK93/JtK+cPXBu+yuJy/6KSOOQvGTBRicH+P
-	X/RkYIIg==;
-Received: from localhost ([::1]:37718 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=JS6jJCJeTQ6vSCqLJCcOpp11D1m1PUDV6Kn7oSS9IfU=; b=aBXc/euUgWUjHXWFTtLj/QknBU
+	Hmd+5lmQ88+ocQAogQWbITbEJJZ8Vnqb8wvwEMFXCjTZerjy5Ldv4shIPtHV4ICBKXixVGdeeKqXf
+	asdHw0lfAu477RD7KvTvF7A47iDQ5zYx9HStRv+ZK1MnaDiHID0lPAit0KsqNZhGzBa8TXp2cl/nB
+	KHdlcNbbGhYfwDAQk2o0iWv9T3kbE7XY1U82SuUGbw2IFxZrqOMgHUL2rONSD8G97E5zInf+VLAcZ
+	s5OOcizQ2EaRFzi7tT6sgNXHDWDMGg+BETod2DXysJ6RIq/lLasd3XzxuD5OFi1h5BdjMkI/8LKR6
+	yDE9VEzw==;
+Received: from localhost ([::1]:38486 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j36aA-00A3al-RZ; Sat, 15 Feb 2020 23:10:42 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:54738) 
+	id 1j38nC-00A3sq-SG; Sun, 16 Feb 2020 01:32:18 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10754) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j36a4-00A3ae-7M
- for samba-technical@lists.samba.org; Sat, 15 Feb 2020 23:10:39 +0000
-Received: from [192.168.1.110] (unknown [114.23.142.188])
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 1BCC181194; 
- Sun, 16 Feb 2020 12:10:09 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1581808211;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vI7kLh0uJo8X8KLc5GHN3nhCOLfL5+c3D63Si8xFlNw=;
- b=PrRK8yGAQ0h3gvNopawYf0qQN1tETlU5eAfm9IWuoRKnkCCf06foJWKYEtOqOKZDDbhUTN
- wxvmvVhmoQUmhSGXmRDZ2Cx0xeR104vfN7Cu74mZxNxRwtQr5MbxoI23PA8BuvKjyuyidy
- GgB4KpU4sfOXqla1t0n4/U2VamQI3zHraOp95+9jOpJWRWAO8BkyG+GXFBG4Jr55vOOlKF
- ddmM+uzSWRB1Ui9XK+ixoL7btEPF0vrvTSWIRo4z0AKjNAjELnVAro4bEPRp1OjtZnOWFk
- Cpbw3p8GHX0+cMOa4ZJaVE72KOSrWIuBbb4+oAYDw7++fn0e93QyUhrz8nIgeA==
+ (Exim) id 1j38n1-00A3sj-O1
+ for samba-technical@lists.samba.org; Sun, 16 Feb 2020 01:32:11 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=JS6jJCJeTQ6vSCqLJCcOpp11D1m1PUDV6Kn7oSS9IfU=; b=KRBiHW70JACce7ni36ToVSXIME
+ 7s3h33uIR/GM3paQg5fDcA9wWRUCrThh6j7Y/sZMMcSnW1YHidfsUT10a7D3u5WQQElazRNJL5RRK
+ rOFtiIdPHXztz+PEfkj17Cw2vL5wIoYSMAlDX1vEY5bcft8eSQ1upC/y133ZsKr3KDTKoeY4EY8q0
+ BrDifUVSrefUY8/gtk/CqX3k1zZHcjhgXthFVi9nja+XWzwsi0RgKVHfKmxBcLX6214SGNP5KDNrD
+ 8swAXVawk7FRKu4CpwFdggpELVi1ZlAVb7v9CbgJhfzuPiZKKZKgT35xDxZhmGsDQ4p3vbbN7BT77
+ 2Lc9IxoIWNY9jEc7BBc0nKJakxQhYoyRiemWCz5D07LmaMm4/YtMldAj7AI+6WTz3EIR3M6UVi1EJ
+ eOBEfEJYbPRa1rT038sV//wQrOjffWsFYrv5zxnOmhxcBIMPVxPKBmo0+nePQbF7dfmHRhpZlDGFg
+ VTHB145QjBGt6N5q2z/jtfBT;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j38mx-0002nV-At; Sun, 16 Feb 2020 01:32:03 +0000
+Date: Sat, 15 Feb 2020 17:31:45 -0800
+To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Subject: Re: too many layers in selftest
-To: Andrew Bartlett <abartlet@samba.org>, Jeremy Allison <jra@samba.org>
+Message-ID: <20200216013145.GB13472@jeremy-acer>
 References: <1f5483b6c7349f261b79990f3daea501d7636ffe.camel@samba.org>
  <20200214205049.GA51881@jra4>
  <ffbb3c2912a79ca4c32232280b0ce689597aa99c.camel@samba.org>
  <20200214210210.GB56355@jra4>
  <d5ecfe8e74ddd8d62ef76203fd8784d3cd7aee5e.camel@samba.org>
-Message-ID: <7f8c06ad-11f5-52bd-2319-30f2cc081df3@catalyst.net.nz>
-Date: Sun, 16 Feb 2020 12:10:07 +1300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ <7f8c06ad-11f5-52bd-2319-30f2cc081df3@catalyst.net.nz>
 MIME-Version: 1.0
-In-Reply-To: <d5ecfe8e74ddd8d62ef76203fd8784d3cd7aee5e.camel@samba.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=douglasb@catalyst.net.nz
- smtp.mailfrom=douglas.bagnall@catalyst.net.nz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <7f8c06ad-11f5-52bd-2319-30f2cc081df3@catalyst.net.nz>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,45 +60,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 15/02/20 10:45 am, Andrew Bartlett via samba-technical wrote:
-
->> The way the test environments are set up and
->> invoked is still a mystery to me unfortunately :-(.
+On Sun, Feb 16, 2020 at 12:10:07PM +1300, Douglas Bagnall wrote:
+> On 15/02/20 10:45 am, Andrew Bartlett via samba-technical wrote:
 > 
-> There are two many layers:
->  - GitLab CI
->  - The bootstrap docker image
->  - autobuild.py
->  - make test (selftest/wscript)
->  - selftest.pl
->  - selftest/targets/Samba*.pm
->  - selftest/*/tests.py
-
-You are forgetting or subsuming format-subunit and filter-subunit.
-
-Samba's test infrastructure is a psychedelic fractal -- if you
-stare for too long at any part, intricate detail oozes out of the
-cracks.
-
-> We got to this because each layer was added without harming the layers
-> below, because incremental change is how we do things in Samba.  But we
-> have built quite the contraption!
+> >> The way the test environments are set up and
+> >> invoked is still a mystery to me unfortunately :-(.
+> > 
+> > There are two many layers:
+> >  - GitLab CI
+> >  - The bootstrap docker image
+> >  - autobuild.py
+> >  - make test (selftest/wscript)
+> >  - selftest.pl
+> >  - selftest/targets/Samba*.pm
+> >  - selftest/*/tests.py
 > 
-> It would involve a closer commitment to GitLab CI (which might not be
-> popular this week), but long term we could bid autobuild.py a fond
-> farewell and distribute the data it contains between .gitlab-ci.yml
-> (which also does the task of running scripts in order) and selftest
-> (which could be told about which environments run in which job). 
+> You are forgetting or subsuming format-subunit and filter-subunit.
+> 
+> Samba's test infrastructure is a psychedelic fractal -- if you
+> stare for too long at any part, intricate detail oozes out of the
+> cracks.
 
-Apart from the ordinary works-for-us inertia, there is a tragedy of the
-commons thing -- people will pay for new features, but not for basic
-infrastructure (or UI, documentation, security).
-
-Douglas
+Hmmm. Does you end up seeing dog faces everywhere in the
+code ? That's a strong argument for us living in a simulation :-).
 
