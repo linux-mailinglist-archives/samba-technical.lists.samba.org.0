@@ -2,60 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B96D162AEA
-	for <lists+samba-technical@lfdr.de>; Tue, 18 Feb 2020 17:44:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7A18162B04
+	for <lists+samba-technical@lfdr.de>; Tue, 18 Feb 2020 17:48:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=UowvKP4AfSGPathz7oN/TKD0+F2pY0e6Xr2t/PYhiv0=; b=TFiwb2zfTIp4bWKJ2beFnJgHEe
-	JwnQ93M9AJzc2UELpNL5uKIyp73zAJn/L3TY/3hRK1lVsSq2TrfKWa0t/NdKsMlDW30/4MSxr5hNK
-	7C72IWSxeqL3W+6BG4CUwqQDDleqNAzmaA0CZhrzEI1iAnpRLCrRPDyORH5ppZuAasFSPlwLd+573
-	KNUHxL6RTV0slGt9iAAIk9HKM/XInts1tauGjM+hHsSLf9XBOfQj0k6eKkUwElLRJdeUn9iuCYgRU
-	fOTee/DDYD7PHqQ8Km7UAO0mOM3G/8pkaIY5hyGFh25HWZlGajBsePh/C4IkC/wD6Ba7+JBlFlS1G
-	+h24Ppjw==;
-Received: from localhost ([::1]:63596 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Xqta4k8kgeaUfoUTkJPD8Y1TnadvUiw1oFut9hzkzPM=; b=CRLkeIgM/hA7o00VDZ/uAO8ovQ
+	HQEozcIvBWG8h82hhzgnMmGRwfI7MM8F+VwHli6hoEEzxbsjwYQz3ivrADzSlNUkLuuopz1My8syJ
+	cEMSqG5G5q8MTY2adHgUx2cdVBdRTVOSCeSd5hZDZICKk+TsdVf7WIPdHdR2IBQNwsmXmVw882QyD
+	LVp44I5lnUsWtYJGVBcpq53Oc2pHwD3X50pjSRS1SDIdh6soY5jv9kcJvnvo/L5VPKKLwCaJGAFzg
+	13Ws/n7SOwfSC0FxrlMyWDuc4WLxS9YhjqFdT8+euHuFpXZVqX73EERSIoeuRh38MxYIIb8DuQMZc
+	17+yIJ1w==;
+Received: from localhost ([::1]:64346 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j45yz-00AP80-Gn; Tue, 18 Feb 2020 16:44:25 +0000
-Received: from mail-oi1-x232.google.com ([2607:f8b0:4864:20::232]:44288) 
+	id 1j462Y-00APGR-Gj; Tue, 18 Feb 2020 16:48:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40396) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j45yt-00AP7t-G5
- for samba-technical@lists.samba.org; Tue, 18 Feb 2020 16:44:22 +0000
-Received: by mail-oi1-x232.google.com with SMTP id d62so20689170oia.11
- for <samba-technical@lists.samba.org>; Tue, 18 Feb 2020 08:44:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ixsystems.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
- bh=s80kGxy/9a9oG2lyikTjdtptBjfQHDSRao6Zzy3mYCU=;
- b=Wcuonsq6wNIRDSbJEMfeqclVmrs/HYtKq0i5gmX0HxYcwweyVjmmxN8q1atbGKRRDX
- RNztFaKoC0IZfFsWUpUZePE1HD4RooAod07sjicoaGF50R+F9QP7ErpP3ltiHEC1IdkO
- uuOMdUUV3aEkXUMoaUMGwlvw/bZoSDzun7WUQ9QNAG3Y8GDStAvi+sBmC1ardiDalaW4
- oMrcrJOdgrgP543FhxoxBhXYqYSCWLk06OBJZKwthM/pc9NuUxk5H/3aOOEv2bWhbcc7
- kQ37dH4CYMMQH8lT0dHY9O5CzHDXI8zD6IT4WRHi1AFhFR0yB4ORUpApoMf5cFzy/Ix1
- 1o3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to;
- bh=s80kGxy/9a9oG2lyikTjdtptBjfQHDSRao6Zzy3mYCU=;
- b=S0qbhWc29w+6zVKUypktLJew5xdirM/BQ3V6mfISrXe6849Nym4zMSXf61fhUm/jYH
- FAmHEdR/ciXgaHhFziFYXmWPhHHplqzVYx9mM+Z+2qDY71GiGSxY+WinvC5gzGg8SFXs
- ZN0sA7YXKqzD59fXlw1YjtJB9rW8sDtRqLOw7e841pt8DftEhi9i4fRRwSkR65h3t/sZ
- dxfVNbvzhJPihL2dlJeCNBQDNhuPXQjyOqcq2gqvVjE3kOW7RN+vi3mk0kgBKTP4mDHz
- OeQ3cj5UvEmVJavnHEPpc+O5PwrqgDXej3z8oO8Oxbnutc+Ld6GcsFZm4aCyaSkV8qZr
- 321w==
-X-Gm-Message-State: APjAAAXlWsF7eHKEEb7oDDnEcHD01Ll51QgQRgJ80LP2jsW6peh7phEr
- c1NYbQwz3BLPtpsso96inejnSccIGupj/W5i3NFGagvy6vY=
-X-Google-Smtp-Source: APXvYqxN1SVxn+u9KIdDCPYjInQT0jlT9hPn/nu6CRvHHFqS6eiiXlF1XMTj7pkdcwAEyd7i47lpG/xKKCPnUnkgU1A=
-X-Received: by 2002:aca:1c0d:: with SMTP id c13mr1732247oic.44.1582044257262; 
- Tue, 18 Feb 2020 08:44:17 -0800 (PST)
-MIME-Version: 1.0
+ (Exim) id 1j462T-00APGJ-P1
+ for samba-technical@lists.samba.org; Tue, 18 Feb 2020 16:48:03 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=Xqta4k8kgeaUfoUTkJPD8Y1TnadvUiw1oFut9hzkzPM=; b=UA00+TJI8kI+08MTqB0V48nzMv
+ YYIYROdLpoyAcV/NIuNmix7K0hFEe3tfHaVFZ51t+aqGwUOB7J+oU9a21HRcwcNOk2dPiKLgNw+3y
+ vmfsA7Ce3/o7wrVWtt/rDQNzuwwRUuWLpYUxqa7/wzYfP9VZwBH2xF+jf0VbNCOfB7hT4wCfuGMGn
+ FtKs6gWP/2bfYLzvnQd1Yvpi6ehACT+Z6BQk6HGhNimf6kRL77kiBJQLN8kjffwMWGDyec+3PPXG0
+ 2j+Yt8QP0o5L0LcqlQnX8V+eU4yjwtV99QQQ1y6T86aVXqiDYOWAfug1Ey2IuIQhihNrU9numtkPG
+ Iysfwjkbc+wGI+c6lbx/LssXs5RCJx7sHsARgj9N9WfwEVBdgNODVTZVv5cRumym70bkGyQeqelAo
+ iCCTmfyI/Q56v153idPrC/fJ5V4rXE1XhNNWW98XG7nkYwsAJBjJ8tGEGko6zBB52X433fMzW+vvh
+ pZMCEWuiMxSoAFosC5+nosf/;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j462S-0008Fu-UY; Tue, 18 Feb 2020 16:48:01 +0000
+To: Isaac Boukris <iboukris@gmail.com>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Andreas Schneider <asn@samba.org>, Andrew Bartlett <abartlet@samba.org>
 References: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
-In-Reply-To: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
-Date: Tue, 18 Feb 2020 11:44:06 -0500
-Message-ID: <CAB5c7xrk1JJWmLoW9LQ3AmjMF_CMKFbdbLCqUt5S8JK2RenEYQ@mail.gmail.com>
 Subject: Re: ADV190023 | LDAP channel binding support
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Message-ID: <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
+Date: Tue, 18 Feb 2020 17:47:51 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
+MIME-Version: 1.0
+In-Reply-To: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="BXvG7xDVWx7ZJyZXS3Y471DYHLD6DJxFd"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,24 +59,91 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Walker <awalker@ixsystems.com>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Feb 18, 2020 at 11:07 AM Isaac Boukris via samba-technical <
-samba-technical@lists.samba.org> wrote:
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--BXvG7xDVWx7ZJyZXS3Y471DYHLD6DJxFd
+Content-Type: multipart/mixed; boundary="HB9MYQbqgYzreKgQSR1EmzASpo2TdLNfY";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Isaac Boukris <iboukris@gmail.com>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Andreas Schneider <asn@samba.org>, Andrew Bartlett <abartlet@samba.org>
+Message-ID: <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
+Subject: Re: ADV190023 | LDAP channel binding support
+References: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
+In-Reply-To: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
 
+--HB9MYQbqgYzreKgQSR1EmzASpo2TdLNfY
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Am 18.02.20 um 17:06 schrieb Isaac Boukris:
 > Hi,
->
+>=20
 > I tested net-ads-search from a joined machine configured with "ldap
-> ssl ads = yes", and it works once I also set "client ldap sasl
-> wrapping = plain".
-> However it doesn't work when I configure the DC to require
-> channel-binding with LdapEnforceChannelBinding=2 as per ADV190023.
+> ssl ads =3D yes", and it works once I also set "client ldap sasl
+> wrapping =3D plain".
 >
+> However it doesn't work when I configure the DC to require
+> channel-binding with LdapEnforceChannelBinding=3D2 as per ADV190023.
 
-My understanding is that the new defaults for Windows in March are:
-- LDAP Channel Binding = 1
-- Domain controller: LDAP server signing requirements" = Require Signing
-- Network security: LDAP client signing requirements = Require Signing
+I think that's expected, can you paste the error message?
+
+Is it possible to reproduce with ldbsearch as well?
+
+But do the default settings still work?
+
+> Has anyone looked into channel-binding or has any idea what is needed
+> to implement in samba (or upstream) for this to work?
+> Is there other ldap client code in samba that would also be impacted?
+
+Yes.
+
+> BTW, I noticed windows clients use both singing and sealing, should we
+> consider changing the defaults of "client ldap sasl wrapping" to seal?
+
+I looked at it a bit, see
+https://git.samba.org/?p=3Dmetze/samba/wip.git;a=3Dshortlog;h=3Dac8fd11f1=
+d4b9deb48d6c7942af0c83b52d69d7f
+
+I think we need input from dochelp to answer 2 questions:
+1. which kind of channel bindings are expected/used by windows?
+   I assume tls-server-end-point. I guess MS-ADTS would be the place
+   to define these details for ldaps.
+2. how is the ChannelBindingsUnhashed blob constructed for
+   NTLMSSP (MS-NLMP)
+
+metze
+
+
+--HB9MYQbqgYzreKgQSR1EmzASpo2TdLNfY--
+
+--BXvG7xDVWx7ZJyZXS3Y471DYHLD6DJxFd
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl5MFTsACgkQDbX1YShp
+vVY5sw//XV1SEOOmdRTWa9lCfTQdSnGG07gusgwxH9gHRd12BTlXhZzjKjJ+zhUM
+3g4hzlSvLaUQKvMwDOGX04gt3FO3CM0b3bZzbr2UjoWl+yNecwUyizQs0fR89sCc
+WqAdXtE1Q3MVjhwrd9tOee6i0u9hWIfbmwHkfNmr4ing9AyAck3iDV8JtzEnWljf
+GV+7ToXzdguKKMXYMXNoL1leJL4/2x8RQguc0NAGlPNeD/hJvNvTVullSKlEPMAG
+RzztpPuWfSlFcJvNZw8L2jgWckCvm/1ZI+9t1mv4nX2Uy+tJQnazn57m4vcn+8z8
+nmahaiu8wsdnPiDfMPx8FgFoJmwekpyEFjjXh1v9ZCkd7ccJ9nTTjC45Ks7u5b30
+6pmPW9emYcyiOKJe0DXxJYpJunEejwXgVVOYGK7dQclMOhOGAKyJHfvdJWXZNcfR
+EqUmFBf3Cf/dEuLOL3uoZF7SBIDAP8iIaGchvL+NEHYWOryJIyb0nCFlT51tIYYi
+22/66+5OtrYj6xyKt0lAYMQZMSYds+sxQ/+Upxc94DEIA8W/Q3eiYIhPyZiNpKKR
+cfrDEBL2wIqGMp9XzJ71buG5/ZmBLiK7xncgCdWlFC3XhNUX7E3b+j1yFCnU5yRr
+1Uq/DGffzJJW8dxwCxDQQzQMO7ByYb3IzpgtcUGWHyDMoT78ojs=
+=+/Ie
+-----END PGP SIGNATURE-----
+
+--BXvG7xDVWx7ZJyZXS3Y471DYHLD6DJxFd--
+
