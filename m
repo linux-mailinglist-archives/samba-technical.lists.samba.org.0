@@ -2,60 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AD47162CEF
-	for <lists+samba-technical@lfdr.de>; Tue, 18 Feb 2020 18:32:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2CA4162DA3
+	for <lists+samba-technical@lfdr.de>; Tue, 18 Feb 2020 19:02:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=Vr0PZJC8lMcQIEI8os70kgXZ2mA3cNYdyrKscaqJ3zI=; b=aOEdSMaZDiRqEMhVkQT2AKhu2e
-	xbK1pbsVFYS0jZxexircgQqsE1ndQy9nU7KPH1J+N7MExk46ZkudKbtMS19kl1oRN12ttGRX163u1
-	GYn8BuJm+sKCQ30sAFpApyG4IuR3KAmkb8lGISZuKIooyi9XVJFAJn94t6eNQBl6KDfEfu4gR5CWv
-	/V8V90fvDSlmzmsKhu6jbTmsRaBDi1eNafsdGtcG76yu4ifjhD+kgJfnOMOvKCOoVet9WfCfwdnBn
-	bAdw4QrFgJeX58/BoIOH1MaOaRQOWcaAqjWeo8CJ1D5U7kqoqxZTOj43XNR2twNw5arKwyEy6TL24
-	9tWz+qpg==;
-Received: from localhost ([::1]:18314 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=VQyqWcaG6/o+98HavKxxKvjWEpiScrZxL1n65gRZYXA=; b=XFJiUQxNP4bOC5s/6MIN6jFnYG
+	u7c7+9CabttdueSjyEw9YA8uc9PpIN2/Bp20xgjt3MSxxQsjb27PPYH4pxEbDIwI4I9AMdHg6d0LU
+	w8Rle0gEAyjn5JmqW+1+DYP4PxuOjYRRoM6PgSvHOOpMqJ0Kb53t17zy5YcnP8OHsGkM3is1SayFl
+	lXd4K8v8hANX15qjwmcz4LdsDM4auZ+8NVq8mizYG/VnX0Hh67U4DNwNg0IJC/zOGkYRbBQY1rkwM
+	QRIyrfr7vRt9sdN8Ls+nAFEdSBcw0677I+T2bmrpzD1qp91KnBz14nD5rHeUJIHFif1BFzDF+ADmo
+	+odsof9w==;
+Received: from localhost ([::1]:21482 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j46j0-00APVi-75; Tue, 18 Feb 2020 17:31:58 +0000
-Received: from mail-oi1-x234.google.com ([2607:f8b0:4864:20::234]:36433) 
+	id 1j47C9-00APyZ-Cg; Tue, 18 Feb 2020 18:02:05 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10732) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j46iu-00APVa-PB
- for samba-technical@lists.samba.org; Tue, 18 Feb 2020 17:31:55 +0000
-Received: by mail-oi1-x234.google.com with SMTP id c16so20923074oic.3
- for <samba-technical@lists.samba.org>; Tue, 18 Feb 2020 09:31:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ixsystems.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
- bh=RuU1eY4VofcfxTeWqCmL58I/EZ6C79ErugA5oZHFzi8=;
- b=CqorQ+Tl8X2YQVFdRCPRQrN7czfPuE5gZrsNE8tsCoy36++x2LttK0TfnIAyXu0MHF
- 7Vtq+ocK/1jMnW/qmr3NxoDQCOHQ4shZ5hVxUMeSF0NCJ+GZS19XRVw1KtsJwHwO2qhd
- cgJjN2+tXK0sKbWYQFYs2iy07lhtmrX1mB+3y2SgCvtaqiTdhPLVTLOsZ1TZywXu0VXg
- xqprAcnyDWZ0A+ciZdUgRjt1JVEKFMeqHR9Driqgh8BuxrUYRLFWj5a2njGFQ7/RLzUw
- RNn9EFU4YaLmInFKNj/jK07nyN1/Z93Gawd1Ys3M4b+Whryycr/cY3ih8JaQGqfxes9S
- dpPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to;
- bh=RuU1eY4VofcfxTeWqCmL58I/EZ6C79ErugA5oZHFzi8=;
- b=rfWGu5r8RyqEOuAw7MXP/kIRoR0LSI5n9qBzOefC/YWMrBNfGRH5D3P/DMjLsQDqUu
- V02ZzWLOfMvPViTh6K8L0EgCPhuphkrSINDQ9fh/doSTF76HGX25IgfZLIzqrOIRj527
- 3bEtw7DZ9B1Dm6AeWe/EeNxToyVMm8FX2lavYrxTUS27pf1OoobBLJ1J/ZapD/7Aurt/
- rx2BGPC4aaxuDK8LxqJTBQf6m1oPU+SbKbFkUNjaC7hTzHt9sPDFL1QMNqQwDR7YThAM
- pYgL8dBlUQX/NKmL2fMcvFEWRviVv3Owc4gutMOF+QngEJs+r9manTvR/tCbaZK6Iytf
- lUBA==
-X-Gm-Message-State: APjAAAVHSJLMx6VLXJepCpY8Ij6ArEmE1ohG8z97IpPnloJSieygLKri
- X6x08snTReth/NfTmaqKbh8d+wfFOADlIfanODJEJwUnRCg=
-X-Google-Smtp-Source: APXvYqwKNXJkYgCZHjgpFQ2fB9mOD5eUtBjmprceTMNVG2vcAvPaeVNYNCLSIE0TtcwV4HtI8g18Boo3KaGS3Mjgycw=
-X-Received: by 2002:aca:560b:: with SMTP id k11mr1929202oib.53.1582047109027; 
- Tue, 18 Feb 2020 09:31:49 -0800 (PST)
-MIME-Version: 1.0
-References: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
-In-Reply-To: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
-Date: Tue, 18 Feb 2020 12:31:37 -0500
-Message-ID: <CAB5c7xrB0O=zfaQetSpSW-Pp1O1bd9=DY89=4njUQ7VYF=P74w@mail.gmail.com>
+ (Exim) id 1j47C4-00APyS-Rf
+ for samba-technical@lists.samba.org; Tue, 18 Feb 2020 18:02:03 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=VQyqWcaG6/o+98HavKxxKvjWEpiScrZxL1n65gRZYXA=; b=ksUCeNjWkT9MYY6xqqmhx1iUBR
+ kNrJ6fT1eoKgt66C4n9QX6eU0MsWsm54GDnsvzN6jQZTrpCMVKY6W9g7kJfuR3inApW85bPqQpEA1
+ 6TErLsXTAxAns60oKUdJOkZsicXATJ9uOXHH8mTtHAhaaa2VQzP9o1o3za/zL1yYOLOh/Dm7uYmqN
+ RVPX3bTnsDC4JsA4IzXNj2Wx41mjXB5VJ8ksoaf2RQD9s4Mb76CqWNqEt5nviwI/2NlF2SOc+Vz8O
+ d7r/ZJ11MhLjN1R7u9ZX/qDM9dLIDy8+D22MtbKb7Z+X45XUK9domd0HeHHrDVR61aRu3C4CZFDYw
+ GNc2fh5IjGL3ar4T0h3dxJDLtnn59L43NYXH6mjs0j5rTQSmSrToXS40QB+SMzai/XwTulmZpUQAk
+ Jl814quQ2lxuP5Jiyee0NQp+CicqJACwhJDeGrPW+hSwcHiD0YUwtmlXbN6msk+LU6gCPTRDqr99A
+ tiDjSUkDXlryn4cgDyUjXY7T;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j47C3-0000ap-93; Tue, 18 Feb 2020 18:01:59 +0000
+Message-ID: <e3096e1aa34f32b1e10960c3b68658065850330c.camel@samba.org>
 Subject: Re: ADV190023 | LDAP channel binding support
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+To: Stefan Metzmacher <metze@samba.org>, Isaac Boukris <iboukris@gmail.com>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Andreas Schneider <asn@samba.org>
+Date: Wed, 19 Feb 2020 07:01:53 +1300
+In-Reply-To: <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
+References: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
+ <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,22 +58,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Walker <awalker@ixsystems.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Feb 18, 2020 at 11:07 AM Isaac Boukris via samba-technical <
-samba-technical@lists.samba.org> wrote:
+On Tue, 2020-02-18 at 17:47 +0100, Stefan Metzmacher wrote:
+> 
+> I looked at it a bit, see
+> 
+https://git.samba.org/?p=metze/samba/wip.git;a=shortlog;h=ac8fd11f1d4b9deb48d6c7942af0c83b52d69d7f
+> 
+> I think we need input from dochelp to answer 2 questions:
+> 1. which kind of channel bindings are expected/used by windows?
+>    I assume tls-server-end-point. I guess MS-ADTS would be the place
+>    to define these details for ldaps.
+> 2. how is the ChannelBindingsUnhashed blob constructed for
+>    NTLMSSP (MS-NLMP)
 
-> Hi,
->
-> I tested net-ads-search from a joined machine configured with "ldap
-> ssl ads = yes", and it works once I also set "client ldap sasl
-> wrapping = plain".
->
+There was a very, very old patch from Microsoft to ntlm_auth to do this
+a long, long time ago for NTLMSSP over HTTPS (to aid Firefox's use of
+ntlm_auth).  It was at the wrong layer but it will be the same protocol
+I presume.
 
-This is part is I believe expected. MS-ADTS 5.1.1.2 states:
-"While Active Directory permits SASL binds to be performed on an
-SSL/TLS-protected connection, it does not permit the use of SASL-layer
-confidentiality/integrity protection mechanisms on such a connection."
+My current inbox doesn't go back that far but finding that might be a
+good pointer. 
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
+
+
+
