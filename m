@@ -2,47 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FD4C1654FD
-	for <lists+samba-technical@lfdr.de>; Thu, 20 Feb 2020 03:22:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 440C7165EA7
+	for <lists+samba-technical@lfdr.de>; Thu, 20 Feb 2020 14:23:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=NKT8YKHzAjQ85ph/7xTi1DUtOlGXYPNOpx9J6c/d3lE=; b=sgqjOBuAyAFUJzbQMDf3FbPtes
-	5kmFtmebJfCNwlH47PG6BVYujXeb6PXbpxFKjLBRJbw0C+lV3E0lshqa11JvNiHBToXgL58M54ZoA
-	fR/yzI8Ne22UUySY+nVXQM2SZT14rrllqASM2SME3527Niz3pLvhHd8dbCwVepiKy5QVrfhiNrBu6
-	E1pFQdWh6Ed1Ejtqg403b00VyqRncA5AlbAW6VaUfUgU4KiD42Bonb8WEcqsuFrFk+Tu4iFD8Uq2x
-	CTFopDwv9AdA7xn7owmWAnfUzIgLOitPYGkDZVZM6dmk+51ljawZxGxlg3Pzwk5VBHKm4euENQtJ5
-	mmuZZYXg==;
-Received: from localhost ([::1]:42642 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=4ELamNbr4RxvFSm3XJJCqeYrt9yKkb79lqP7BYJEDn4=; b=F92hZIT5fd7emTGPbyQDesa9dd
+	dja8656BsEktWPGrHjqIhmoGbIVPHqYCcHxD+7ZrgACWwgEV7QVdC/Pi5E7JrDP5QHHvdrfSnaeXI
+	04+tD3qPTkO1NtSR2u3bx7OyThsNu89PKWZSn9pFJpHY1LpGDjAuSnZslINNiRCIKVNG11v7g5ag5
+	6nwvrmWigVHvpn98b4pODa0wd5Ulvogr8pbEanVxXUGKaYA1lO6xDraXPVzGZbOHKIWdRIbBtFgrB
+	Pof0+GDB5kMpQxzvjQHVo5qWhXVWUa5snmxAj/P6vDXUbxSt8/SR14lPRwbMtjqyyRBEosIZJY1OK
+	APtco9rA==;
+Received: from localhost ([::1]:55096 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j4bTR-00AiBA-Bj; Thu, 20 Feb 2020 02:21:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58322) 
+	id 1j4lmd-00AkyE-2A; Thu, 20 Feb 2020 13:22:27 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41196) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j4bTJ-00AiB3-Bf
- for samba-technical@lists.samba.org; Thu, 20 Feb 2020 02:21:54 +0000
+ (Exim) id 1j4lmW-00Aky7-C2
+ for samba-technical@lists.samba.org; Thu, 20 Feb 2020 13:22:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=NKT8YKHzAjQ85ph/7xTi1DUtOlGXYPNOpx9J6c/d3lE=; b=jr67foP0UknCfe8Ts9i9M/hMy1
- Tehiw1xgJor7BUMBHYmQUnryLXeouahYwbUq2RDT3bbzD9o5tWUS6d6l1M6MXsZhLeLf4rXGi4RJk
- eEv4HZzYj/8VDCxbEC7I9IDvRn8kV7vk+Q0pHQBt/8S9mROBWsy0f9A5oKlW+7P2biw6xtNrvzW9Z
- exduMzcjmDQ+ILLT45l5AQAzpDoUvVM7NufNSSyoahX3v19ZsxYpBV9uBIeAfWeQ5W3fgB2ZbUAvy
- YgUP9J/5k6BySR0u6ynho5H6qERiZLYt2iF3uyOouVPMwj+echnfPYY8SyZvhbphSy4Ka6mWmquvR
- 2+zdmKgCMGV/b2eQr+GE5dcaGHiEOJ2YjKnxpI5X3H3Xx7Lp1B+MNDESPMuZFiKSutA5N13683cLm
- 01ufy6fzxwUB3Q91yN7f3DBUPSOOt05MWAV0aw7ApfcM00PR5Wl47XykA8F67gOu47BTGDQapXTiN
- 8+/VIKEHgKNldQNDeH0bMtfG;
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=4ELamNbr4RxvFSm3XJJCqeYrt9yKkb79lqP7BYJEDn4=; b=f39BByEmGcOqIXStf7JQCbOY61
+ jTZKpbvoAml5sEWBsIKzdC2BSHq8iJYrY4g1aSsUq6JEZ1Ve5d5OSvOwhg/fRt84GNTPyWbVM8KRV
+ 4dKjwVdWhiVFViBvVuMc3rAbajucCIWgaJDBwF5iARonc82wQW9z4DwUSqNPq6aUs7uB5mIYIdP1I
+ BS2vvzXPTZsXCScS7iD6EFvNJhtIX0fvQVRFUhWUrZemANkt7S++K8eqYcsj0x6Il423duUHv7KDX
+ 1WuabZKRM7BXBbC9AMdaMgxsBRu3aJzMBIB2UOUledCW6JkvhDBO1zxHXESUV8/GILCOzJSyFd1G+
+ DJTuqfPBEw76YOFlYm425iaOjPQaKYj5oV+kOlZz3NdPvIioTL5n0KGFQCqkMrqhiyh5zw+dvZslz
+ 5t2v576DJ2aaxngLeEcPFZFF2ZbzLp+WgMLNvXVQSu4BRq1hwau5yLP8kY34DCwXM1Lq4EzFqIr+V
+ c4HjjygaWB2Z6RoIhuhVUT9J;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1j4bTI-0006av-2r
- for samba-technical@lists.samba.org; Thu, 20 Feb 2020 02:21:48 +0000
-Message-ID: <bc4cc8f0b211ea0746ff66724edb3c1890c16836.camel@samba.org>
-Subject: Re: GitLab CI back
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Thu, 20 Feb 2020 15:21:44 +1300
-In-Reply-To: <1f5483b6c7349f261b79990f3daea501d7636ffe.camel@samba.org>
-References: <1f5483b6c7349f261b79990f3daea501d7636ffe.camel@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j4lmU-0003hv-JC; Thu, 20 Feb 2020 13:22:18 +0000
+To: Karolin Seeger <kseeger@samba.org>
+Subject: [PATCH] WHATSNEW: Spotlight backend for Elasticsearch
+Message-ID: <70cf0568-9589-7bd0-ed36-cee40893b8e0@samba.org>
+Date: Thu, 20 Feb 2020 14:22:17 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="------------0A9509E7614D68985F52C2F2"
+Content-Language: en-US
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,57 +54,95 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2020-02-14 at 18:01 +1300, Andrew Bartlett via samba-technical
-wrote:
-> G'Day,
-> 
-> A big thank you to everyone for their patience, the GitLab CI private
-> runners are back now.
-> 
-> There are still things I would like to do:
->  - ensure the alternate configuration for really old Samba versions
-> still works (I think that image ID also changed)
->  - decouple the system from the catalyst_samba key and use an
-> ephemeral
-> key instead
->  - provide a top-to-bottom script that pulls a docker image, installs
-> the required software and runs ansible that only needs the
-> credentials
-> as input
+This is a multi-part message in MIME format.
+--------------0A9509E7614D68985F52C2F2
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-I've done these last two steps.  I don't have time to sort out the old
-image id for Ubuntu 14.04, but I'll carve out some time for that in the
-near future.
+Hi Karo,
 
-This means anyone with Rackspace access and who knows the ansible vault
-password can rebuild the runners with just one command.
+please add the following for the 4.12 release notes. Thanks!
 
-Ideas on where to put the 'ansible vault' password most welcome.  The
-valut contains the runner tokens, which in turn protects the GitLab
-server from a rouge client offering to be a runner (runners are passed
-sensitive credentials). 
+-slow
 
-I would very much appreciate another Samba Team member putting their
-hand up for access and giving this a go, so we know others can rebuild
-this also.
-
-Andrew Bartlett
 -- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-https://catalyst.net.nz/services/samba
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+
+--------------0A9509E7614D68985F52C2F2
+Content-Type: text/x-patch; charset=UTF-8;
+ name="WHATSNEW.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="WHATSNEW.patch"
+
+From b8fcfa19a839bf879796d9fe18526af8df871b54 Mon Sep 17 00:00:00 2001
+From: Ralph Boehme <slow@samba.org>
+Date: Thu, 20 Feb 2020 14:19:04 +0100
+Subject: [PATCH] WHATSNEW: Announce new Spotlight backend for Elasticsearch
+
+Signed-off-by: Ralph Boehme <slow@samba.org>
+---
+ WHATSNEW.txt | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+diff --git a/WHATSNEW.txt b/WHATSNEW.txt
+index ab161cbe811..fd947483f56 100644
+--- a/WHATSNEW.txt
++++ b/WHATSNEW.txt
+@@ -58,6 +58,29 @@ cryptography effectively wraps bad cryptography, but for now that above
+ applies.
+ 
+ 
++New Spotlight backend for Elasticsearch
++---------------------------------------
++
++Support for the macOS specific Spotlight search protocol has been enhanced
++significantly. Starting with 4.12 Samba supports using Elasticsearch as search
++backend. Various new parameters have been added to configure this:
++
++  spotlight backend = noindex | elasticsearch | tracker
++  elasticsearch:address = ADDRESS
++  elasticsearch:port = PORT
++  elasticsearch:use tls = BOOLEAN
++  elasticsearch:index = INDEXNAME
++  elasticsearch:mappings = PATH
++  elasticsearch:max results = NUMBER
++
++Samba also ships a Spotlight client command "mdfind" which can be used to search
++any SMB server that runs the Spotlight RPC service. See the manpage of mdfind
++for details.
++
++Note that when upgrading existing installations that are using the previous
++default Spotlight backend Gnome Tracker must explicitly set "spotlight backend =
++tracker" as the new default is "noindex".
++
+ "net ads kerberos pac save" and "net eventlog export"
+ -----------------------------------------------------
+ 
+@@ -189,6 +212,12 @@ smb.conf changes
+   Parameter Name                     Description                Default
+   --------------                     -----------                -------
+ 
++  elasticsearch:address              New                        localhost
++  elasticsearch:port                 New                        9200
++  elasticsearch:use tls              New                        No
++  elasticsearch:index                New                        _all
++  elasticsearch:mappings             New                        DATADIR/elasticsearch_mappings.json
++  elasticsearch:max results          New                        100
+   nfs4:acedup                        Changed default            merge
+   rndc command                       Removed
+   write cache size                   Removed
+-- 
+2.24.1
 
 
-
-
-
-
+--------------0A9509E7614D68985F52C2F2--
 
