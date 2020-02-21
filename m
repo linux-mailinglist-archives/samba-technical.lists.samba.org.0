@@ -2,48 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D965B166E0B
-	for <lists+samba-technical@lfdr.de>; Fri, 21 Feb 2020 04:47:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C81DA1675FF
+	for <lists+samba-technical@lfdr.de>; Fri, 21 Feb 2020 09:32:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=CIaH0DqmHBNjpHmiSLNyqyVyvnJj/fxOqbCuXEsJSGE=; b=vwn/4X9P2YvJZrsOF3pl/xOYCp
-	MaeRZMspeVFbMfiwRL9+wgtpQ8UGFjM8N2286B0/GvXZyUGHTDTXVGk/6Og4jOgQaXrzB2zXHqWvk
-	siNmuqzmS0L43az6lNjfjeaU95z5pTCgxzBJK/VVbHqyoqrjY/n/u2JpfJFENIaiqa1psJDxamOCm
-	PpIhXWfl0Xv3MlLcyReuB60USvNSGrKDBNIUDLsl2h4zq4SSICXWrpg9fY60SsqNHxDIpqI96fezD
-	0bsuS0sMy9P2pH21SoOVrNLcj0M5kHf32Kry/FncmSduwQqihSRFYJVmXEF90eW/OQO46/MT9xmrN
-	mvpqHJUw==;
-Received: from localhost ([::1]:45954 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=UU03PSLf1uWzij637QjYFnWQ6BDZoP1n2AEZ0atUoEg=; b=QFDbXEJ2H/Cvij2VOxE5xwVeIH
+	rCS81v+OzKecJKbkIGEOJ0RPFTxBpXerpuWBKDr4E0GzDSoHxqBHYTA45TrKUudhl488iQU/J72bi
+	UNVP9zGty1G1D+jD2HOu8oNRz/k3Qz02mS7lZHqAkd+sRckvl0zx10PL/xJ/oklcSrZXnb1tQMgSM
+	rX7nL+LQwYUaTeAZrM67fHVWANAiTuHGuegJYcczAVI3NZ4uVNmitD9CooiUQo2jvlYh6qmvsSXl1
+	9PKgV4EGpVVUB3Qv4pn+IhKlX9P/Q2ClG3fiyah2j5oVUoRFPiaZLRu1DrfG2p+vzfaJYJb+AB7jm
+	p0Klc38g==;
+Received: from localhost ([::1]:52050 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j4zGc-00ArKz-Fq; Fri, 21 Feb 2020 03:46:18 +0000
-Received: from bilbo.ozlabs.org ([203.11.71.1]:47959 helo=ozlabs.org) 
+	id 1j53j8-00AsuZ-Pm; Fri, 21 Feb 2020 08:32:02 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36780) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j4zGX-00ArKs-U7
- for samba-technical@lists.samba.org; Fri, 21 Feb 2020 03:46:16 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 48Ny6g6NgDz9sRs;
- Fri, 21 Feb 2020 14:46:03 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
- t=1582256763; bh=ca4Sq5D9a2WuFc1KLbob6Lq2vXD3lGzMhimfUsfso4s=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=SReaYHGJq2Ux/Wv4a22n8ZuXhgNs4PDDuTFbM8DAR3nf/DdDs+xuQdSnlc0eckhB7
- Q852x/ANYzHtj4zAjg3jCCqn6jHkv8GaYyjlJjYp0mvV2vw2WIHmENanP+URCU/d/7
- kggYE9OM7ThA/WU4ZlgUOEDdsKWJQtazIYjRjtAPD9CbPH1bZHL0S6qfeF1qlg790U
- k2GVYpxWIsxtdjqvavljf9G0ZnVmMU4t7O7HT5iihaQzFD6a0+x3nIJku3Ox0PO8TV
- ud6QbPmErsrPmBaUmR/um0cIeFVQxKayFgH9TNDhL8KdgZM3nHzYyTtoGNKIrV7bsI
- f+uVGACi380kA==
-Date: Fri, 21 Feb 2020 14:45:58 +1100
-To: =?UTF-8?B?6aOO5peg5ZCN?= <wuming_81@163.com>
-Subject: Re: about doc of ctdb
-Message-ID: <20200221144558.5e6f9914@martins.ozlabs.org>
-In-Reply-To: <676e7866.55a7.170520a6ed8.Coremail.wuming_81@163.com>
-References: <676e7866.55a7.170520a6ed8.Coremail.wuming_81@163.com>
-X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+ (Exim) id 1j53j3-00AsuS-UW
+ for samba-technical@lists.samba.org; Fri, 21 Feb 2020 08:32:00 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=UU03PSLf1uWzij637QjYFnWQ6BDZoP1n2AEZ0atUoEg=; b=pihcdMKocHKEtPOtPGGat+IF/h
+ FDtUZr6mt94ESWOCq2wmWVNGaiEDpSUKk0p5nxuW/cC9UkirJwBdvsvuO0hJXRY/QbOT30EfIgEM1
+ XrvHWw6f7ehc7wtc9XhZzu7HdmkqtxZVTAwaC//0hZnU5eEqK5RlZoVkJRw559BdZa01o+sDcdCY1
+ oPv8Nh/C8rfzMA+aRLK+3M13P2S2gLgpo7PNN/jKV01cZthoDkRrkrVMDRsA35oYpAjL5VDrixG4m
+ pKmy8ZjMpZUA6Uyj58rajGsVNwFZB0mnBQX2AuJXYfa7w6lyG3t6znLlI5aB5t/p3B8L0se13N8TE
+ 2Dt+T3moi9yaRR8o7AwzOdRAqVccMcdV7ivtmE1M7J9Mo1uZTMqxIcuklvaZJsEvgJhveGQXlTd99
+ T54ET+5VXAJePgmo9BYOzxX1wlWWk2NsUG9tsLU9IGs9XzBzixFz1+zRWfAvBb4JjKnIOxe7xneoe
+ JkOjWp8N51hIxIm+8HLLuy4P;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j53j0-0004BN-Cr; Fri, 21 Feb 2020 08:31:54 +0000
+Subject: Re: [PATCH] WHATSNEW: Spotlight backend for Elasticsearch
+To: Ralph Boehme <slow@samba.org>
+References: <70cf0568-9589-7bd0-ed36-cee40893b8e0@samba.org>
+Organization: Samba Team
+Message-ID: <6573948e-321f-488e-46fe-93d6dc5306d0@samba.org>
+Date: Fri, 21 Feb 2020 09:31:54 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <70cf0568-9589-7bd0-ed36-cee40893b8e0@samba.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: de-DE
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,57 +58,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: samba-technical@lists.samba.org
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Karolin Seeger <kseeger@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Wuming,
+Hi Ralph,
 
-On Mon, 17 Feb 2020 15:26:20 +0800 (CST), =E9=A3=8E=E6=97=A0=E5=90=8D via s=
-amba-technical
-<samba-technical@lists.samba.org> wrote:
+Am 20.02.20 um 14:22 schrieb Ralph Boehme:
+> please add the following for the 4.12 release notes. Thanks!
 
->     sorry to bother  you again.
+done. Thanks!
 
->     I have not found any doc on the implementation/desgin of ctdb. I
->     want to read the source code of ctdb, mybe do some debugs.
+Karo
 
->     Is there some doc ? or how to find ?
-
-There is some incomplete documentation in different places...
-
-Wiki:
-
-  https://wiki.samba.org/index.php/CTDB_database_design
-
-  https://wiki.samba.org/index.php/CTDB_and_Clustered_Samba#Historical_and_=
-Background_Information
-
-Source tree:
-
-  $ ls -1 ctdb/doc/*.txt
-  ctdb/doc/cluster_mutex_helper.txt
-  ctdb/doc/readonlyrecords.txt
-  ctdb/doc/recovery-process.txt
-
-I recent years Amitay Isaacs and I have given a series of talks about
-CTDB development at the SambaXP conference (https://sambaxp.org/).
-Many of the talks are linked to via
-
-  https://wiki.samba.org/index.php/Presentations=20
-
-Some of these talk are about future directions and some cover recent
-development.
-
-Some of this may not be up-to-date but the principle are mostly
-unchanged...
-
-If you can't find documentation about the part(s) of CTDB that you are
-interested in then please ask again.  We would like to see more
-developers working on CTDB!
-
-peace & happiness,
-martin
+-- 
+Karolin Seeger			https://samba.org/~kseeger/
+Release Manager Samba Team	https://samba.org
+Team Lead Samba SerNet		https://sernet.de
 
