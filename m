@@ -2,60 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE27016917A
-	for <lists+samba-technical@lfdr.de>; Sat, 22 Feb 2020 20:11:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50EE516965F
+	for <lists+samba-technical@lfdr.de>; Sun, 23 Feb 2020 07:09:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Lz1YjtcioOW4m4t6KB3py6mfoASqwxJwGV8yYcBn/SQ=; b=YLdyLblGvp8fqspdC3auOnLTLp
-	aFU4RQdYLuTrFUi1axHH8zth3oQCkjiS+yHo7OCFqXYcBkfib3WMift1nFqzhWfGmqm98BDpZ5iHp
-	vZP8FPM/Kf+LuIWgPnX+9e7oJvVTKkjCfaXiLYwWHm6/rSCJHQaEtZC7n/OnDW+g5Y/Su54ez5iG1
-	O4JDvEoDI/C32KhzWu9j1oRR6yqdimzjdc+I+ULAvUnyj0pOSIyWM5GmAnJCrlTiDJuiQD/6tE2Hn
-	OIIGx2rsiNd1//ttlGvv7l4R/L4pW/FOMv9E/pKXN6wGtfFWfPyjPNhloBENpDkWhY3dl8ndLetDe
-	owYlV73Q==;
-Received: from localhost ([::1]:63058 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=owQJvgeXB5EhPP5ncFEAYXczSkJ4Xh6Imare7fd8KNE=; b=WDcCmebZAMgt/4ZLUBeudW8bVW
+	0xSQm3z+vEoVzKdQuNaEcDA3SV89rb3iTyolEhRMikTZsSVVfgjchKMb74RLXvGpVksiSFhARfQgv
+	EVXbx+eht6InCmjbSy7EZuGOCaZTj8rNY/X6AfuMrMWCPem1Hgrdj6eo15BivT1mhBAUthzKymZON
+	xBxVu3GCOcea2/SotVg/sfGKFcl2/haJCN9uOfY9iR0X0j0x22mTILLAYjRmyj4OV5VvclJSr+cfC
+	Db6v6bL0O6Y5qk+3qulUfCPgQEUKGoAa5hveopWrzFZ25Aip3/CfAw9IB0g7HwWcUBM/U7mmNQBQ9
+	pVSl7PKg==;
+Received: from localhost ([::1]:21466 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j5aAP-00B6IC-OB; Sat, 22 Feb 2020 19:10:21 +0000
-Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:44575) 
+	id 1j5kR7-00B95r-KD; Sun, 23 Feb 2020 06:08:17 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51722) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j5aAF-00B6I5-Bo
- for samba-technical@lists.samba.org; Sat, 22 Feb 2020 19:10:15 +0000
-Received: by mail-lf1-x141.google.com with SMTP id 7so3908617lfz.11
- for <samba-technical@lists.samba.org>; Sat, 22 Feb 2020 11:10:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Lz1YjtcioOW4m4t6KB3py6mfoASqwxJwGV8yYcBn/SQ=;
- b=udI1HSJi3BdJdYXY9FKwWoVnE38EZ3jYGELHZKwFBFbqJJhqx0o2c8dRUXjxIrqIEy
- Jz8V/+/qAqutJC1Ven0+rckIr4IzdvB0Ad8tTTSsgGNJ5Czy86IdWKgcWpCHP+ITnRAE
- /3xIq5sXfndjUAfgBvvOPbaOJjpYvgXHqdUHgfvzhVP5q6cjWUqqOJ2BK9PTvxe5NqZb
- thNZB8A++24X6blhvM4rO1bDeDr01amwPYO4qxZR0iPfwVwffAjghsWtJvYc3Zg/4CoT
- suHobDjPVwmDzGxBSypuEHKnJdUtX34gjARtREtb+5fGecza5JjxA3OmVZvR1WH3oNww
- 23xw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Lz1YjtcioOW4m4t6KB3py6mfoASqwxJwGV8yYcBn/SQ=;
- b=QkK9s5BfniU163x9lGLbiCHkoWOtaLTKHL3R1rFW5uk9JP5Yd2Ab/dl9ODurEY51vT
- wQQE8ST65fmZCcm+wrjVfKVDwykjSTF5uh5DrU3dd+tCD2Q6wiNSeaiksmcJPnjE0jzk
- V4b3cFqanif62OhR00Fw3lDUsaJlxXn1uVzAqdjZ9lURm0i2QDTfOhmIrm0hlNmO8KQX
- B2Dks+PEKLXEfvfVupkF+O0TTIzY3KwuMlNKaNyi/QDI/4MH46ro1aoa8Z44jBx4jwuI
- 3YMu5hX48UU3NZ9p7UAeWFBdBFacMwNFz/rxVAyLrKQ9NrYVehbU1rNu2wxaPiYBE2Ls
- 9Hpw==
-X-Gm-Message-State: APjAAAUfy2P1Te2QX9xLDmQ2lktB1Lj3+5IKhXkAtoxv6xUeNOvnnmyY
- X/3FRzbQ9SMbpXBf6zA1gcDABkISMg1n5eJM5/o=
-X-Google-Smtp-Source: APXvYqxZKNfHQLgdASPJ+qihzDX5XpsNjGt7MKfJQspHW98qcQ67l9/QSpfK4qS1ItPvp/6WQfD2m4LoWaVrkrnTQ24=
-X-Received: by 2002:a05:6512:687:: with SMTP id
- t7mr23817495lfe.30.1582398608648; 
- Sat, 22 Feb 2020 11:10:08 -0800 (PST)
+ (Exim) id 1j5kR3-00B95k-Bb
+ for samba-technical@lists.samba.org; Sun, 23 Feb 2020 06:08:15 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=owQJvgeXB5EhPP5ncFEAYXczSkJ4Xh6Imare7fd8KNE=; b=goSV2KUIgDm45eV0twNDtRAInn
+ TobUWo1AMFA4xMt/G4SgzrwJAQe+V9ac6fV/0tt7bvP44bansu+Sa5UJGk0497WR+NMluiV9hBQ3w
+ +WvqmiHkKQaa9i3X/KPqpt0rrZrRJF34hxEFOQK0Wq4O3QtbEpv9ed+OiWzmtsoylSaIPpwAxstnm
+ D9R+gIDOff/nHmeiUrIF5AxFOEa0ZWbSY9dm3CzS7fTtEcgVdYswerCHw38WXsdl7pA+K7hF3SO/1
+ Efe5dtbJuQrXxU/V+fxeatKwg8L0LQLctbPPah4zjuOlJtNy7AiNjwereqD1/OX9cuVxVjfKc3UG9
+ W8gge++jTqggVblj4hJ0gxOTFgkJxESMJF+eBtVB5u6e1Qj8NGCZrx/1jQM+KVN3t5Ii/GEJYUw+R
+ HYceHpmFPBkAbIi7xD5DbNfwC59H8E2FrY9mW36Dd3S0STDCkOWm1s+pSqees7eqfw5Yp1oGfsjJp
+ wlJ0rm8/zGkMqa6DZagNWYor;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j5kR0-0002YK-Mo; Sun, 23 Feb 2020 06:08:11 +0000
+Date: Sat, 22 Feb 2020 22:08:04 -0800
+To: ronnie sahlberg <ronniesahlberg@gmail.com>
+Subject: Re: ndr64 support
+Message-ID: <20200223060804.GA32193@jeremy-acer>
+References: <CAN05THSsnmesxc0UH17OK95KXAY5NCYisNc6pNyGDykYd=R1ig@mail.gmail.com>
 MIME-Version: 1.0
-References: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
- <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
-In-Reply-To: <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
-Date: Sat, 22 Feb 2020 20:09:57 +0100
-Message-ID: <CAC-fF8T6dGjDbH3YFpZpEA+Rtoppj+sJ4bZtt9ZDMfH85_UuUg@mail.gmail.com>
-Subject: Re: ADV190023 | LDAP channel binding support
-To: Stefan Metzmacher <metze@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAN05THSsnmesxc0UH17OK95KXAY5NCYisNc6pNyGDykYd=R1ig@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,61 +55,28 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@gmail.com>
-Cc: Andreas Schneider <asn@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Simo Sorce <simo@redhat.com>, Andrew Bartlett <abartlet@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Feb 18, 2020 at 5:48 PM Stefan Metzmacher <metze@samba.org> wrote:
->
-> Am 18.02.20 um 17:06 schrieb Isaac Boukris:
-> >
-> > Has anyone looked into channel-binding or has any idea what is needed
-> > to implement in samba (or upstream) for this to work?
-> > Is there other ldap client code in samba that would also be impacted?
->
-> Yes.
->
-> > BTW, I noticed windows clients use both singing and sealing, should we
-> > consider changing the defaults of "client ldap sasl wrapping" to seal?
->
-> I looked at it a bit, see
-> https://git.samba.org/?p=metze/samba/wip.git;a=shortlog;h=ac8fd11f1d4b9deb48d6c7942af0c83b52d69d7f
->
-> I think we need input from dochelp to answer 2 questions:
-> 1. which kind of channel bindings are expected/used by windows?
->    I assume tls-server-end-point. I guess MS-ADTS would be the place
->    to define these details for ldaps.
+On Sat, Feb 22, 2020 at 06:03:13PM +1000, ronnie sahlberg via samba-technical wrote:
+> List
+> 
+> Does samba support the NDR64 transfer syntax?
+> This was introduced in 2008 and makes alignment better for various
+> fields.
+> 
+> I just noticed that when I use libsmb2 against samba 4.10 it always reject
+> NDR64 as an unsupported transfer syntax and instead always pick NDR32.
+> If I disable NDR32 support then the bind will fail completely with no
+> suitable transfer syntaxes.
+> 
+> I am testing against 4.10. Which is reasonable new.
 
-I noticed more another reference to channel-bindings in MS-KILE, I
-think maybe KERB_AP_OPTIONS_CBT ad element is the way to tell the
-server to require CB when LdapEnforceChannelBinding is set to 1 only,
-needs testing.
-
-3.2.5.8 AP Exchange
-If ChannelBinding is set to TRUE, the client sends
-AD-AUTH-DATA-AP-OPTIONS data in an AD-IF-
-RELEVANT element ([RFC4120] section 5.2.6.1). The Authorization Data
-Type AD-AUTH-DATA-AP-
-OPTIONS has an ad-type of 143 and ad-data of KERB_AP_OPTIONS_CBT
-(0x4000). The presence of
-this element indicates that the client expects the applications
-running on it to include channel binding
-information ([RFC2743] section 1.1.6 and [RFC2744]) in AP requests
-whenever Kerberos
-authentication takes place over an "outer channel" such as TLS.
-Channel binding is provided using the
-ChannelBinding variable specified in section 3.2.1.
-
-3.4.5
-If the ApplicationRequiresCBT parameter (section 3.4.1) is set to
-TRUE, the server, if so configured,
-SHOULD<67> return GSS_S_BAD_BINDINGS whenever the AP exchange request
-message contains
-an all-zero channel binding value and does not contain the
-AD-IF-RELEVANT element ([RFC4120]
-section 5.2.6.1) KERB_AP_OPTIONS_CBT.
+I *think* (although I'm sure Metze will be able
+to give a comprehensive answer) that we support
+it as a client for testing purposes, but not as
+a server.
 
