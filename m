@@ -2,49 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D09616978E
-	for <lists+samba-technical@lfdr.de>; Sun, 23 Feb 2020 13:30:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 349D116980F
+	for <lists+samba-technical@lfdr.de>; Sun, 23 Feb 2020 15:25:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=SEgyGvJnPGm5psFjSDxiGpz7dumzEQ0y6qK03tVAETI=; b=Xsi1lveWH199c+j7Cb4Kh6W/yP
-	TyhJi1q1MUm/fGsU5wam1sLJDBQvrrCmElVwzUkQetuoq0XzxLfBimDZpol3kQdZystPgfqO/2aIY
-	m2MNg2jLd29H00VHmCrzRILyGsHoyM2Mf0YyPH7LmxY3aliE+qR+14N/WWnSBAc2clPOVx9ur5bDI
-	9NwMdCarxW5jm/+NIQAJROMfDuWrAYSQlgsdSWqy2Z08CnLmVhvtKUAvKwo7lxh8RNx5eKjB0eove
-	U9Kxvh7nsvrrv5JhD+aGTqIdqQDx5f3lv/63AbehH3U5VGFrFjLpDV6TYp20vQjYkg7OtKT6B+xfV
-	blni5eUg==;
-Received: from localhost ([::1]:26880 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=bHZB20JCojvC9AoLYKbDTdSEvF2pcJlBfdW1xfFyhm8=; b=m/yVq9SItbmoKw+6Yhlk34xZwC
+	iiWViZpU+xcl0NzZC5U/+dRiG16H3pq0hja2bDiWp0JHY4N1buDowxKQCdPXFgKrXy6W5wR05nSmb
+	cRjC6oz6W1CQSVIaxpGfRSMfxP1V8muQQc6rxwHSb1h0yYK8vghMt+ODD7XGupQJgaxxF74lYmfAV
+	Lu2XaZKOlzTNU7Q+URRAV8nh98jiB44heJFwQA3fBHj3nZZUL/LT9/oO2JjYzaRdb4qNGuEWyIQHb
+	qIaqh3/K7tgQbn/wbbPkIF6kPE/DwG+EXm7ZLjaYbJSgZ3/z3Ruatqclif5iZqrdmoGxKGjzIO+bX
+	dBAuYMNQ==;
+Received: from localhost ([::1]:27654 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j5qNj-00BAvf-5n; Sun, 23 Feb 2020 12:29:11 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17504) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j5qNe-00BAvY-24
- for samba-technical@lists.samba.org; Sun, 23 Feb 2020 12:29:08 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=SEgyGvJnPGm5psFjSDxiGpz7dumzEQ0y6qK03tVAETI=; b=u8HYeu/ADkhOCgaC3n+cwHpFGT
- 1h/PC1mOYLsm6d7efPwZfwfFNXCTXONCSfepgovP4vZddkpwI31EfZM24A0P6V/Gr7YFRCy26bHBP
- B+QtL1hNoscBjm/pnRkPhSbNauuFZOV9r3Dynah+zuDb+snjDJSnMMDyPGwGFSuEHhh3+DV4OaLIu
- Wd4trXLimNBXq8NLRJyy//66SLiilpYKsTH7GS8WxoEynYXgJI8PmqwPGeEiFX6/TSVPq4t8iPqRY
- YErWf/VLfOqMM31FzchfpJ39S9fdsA0tqret3xb2bIVfSh041lHb+OuAjJf9/7gKtX+zFl9BqxGLN
- 50LuHK0qb/T8c1+YRYYGwhlt3+tMUF56GMUTpBupDOWArdOpSor/oKzVrpBSu8epl1hLAFZiZeudz
- l5CWjMfNN2/4MAD9nxJU2V0mauWm85uef3VoIWPnGVAgF+LXn+4MVy2iONjhmWdCXuS26Nu9TOrLM
- GYdI5n0tkcumsMr3MPbZtgQa;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j5qNc-0004oa-K7
- for samba-technical@lists.samba.org; Sun, 23 Feb 2020 12:29:04 +0000
-Subject: Re: Samba 4.12 rc3: bind DNS say "named: client update denied"
-To: samba-technical@lists.samba.org
-References: <a144cd2c0219399cea4473f6cf7e86b3dba5d6cf.camel@solinos.it>
-Message-ID: <5b43a40c-9d80-a6d1-cb63-046cef3bbf77@samba.org>
-Date: Sun, 23 Feb 2020 12:29:03 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+	id 1j5sBB-00BBSr-Bh; Sun, 23 Feb 2020 14:24:21 +0000
+Received: from youngberry.canonical.com ([91.189.89.112]:36241) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1j5sB5-00BBSk-Sn
+ for samba-technical@lists.samba.org; Sun, 23 Feb 2020 14:24:18 +0000
+Received: from mail-ot1-f71.google.com ([209.85.210.71])
+ by youngberry.canonical.com with esmtps
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
+ (envelope-from <andreas.hasenack@canonical.com>) id 1j5rtk-00011p-I6
+ for samba-technical@lists.samba.org; Sun, 23 Feb 2020 14:06:20 +0000
+Received: by mail-ot1-f71.google.com with SMTP id a20so4451264otl.11
+ for <samba-technical@lists.samba.org>; Sun, 23 Feb 2020 06:06:20 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=bHZB20JCojvC9AoLYKbDTdSEvF2pcJlBfdW1xfFyhm8=;
+ b=O1UFEWrNcGnYmAFqt6gywfXfkltRcz3k+cXAA/OLvMHDBfSPfzr4n5wKwik1Lj/7hy
+ T4LBWp4U8G78uqYeY2PbFyDT0qE5YCrH4PSPWArNn+UswdYo2sLJH+uu5urOJ/M1tp7p
+ 9Rf1HjaR8zej/9uK0SZTiHWf8oa2QVPry2V0qGISdWowBHUws0T0ptkfS5cGPegzRUUd
+ 4JbhYCZPBpL0yZ8YXGqjciiGXZMqpRkWkTzTZnsA6ChB44D7lZOzEiq+ei/mC0YQpF0N
+ v78FCiH6raOQ2USglAeiOqVv19vbYbEOdTOv/UrlOuW6ypU+zZ0sYmLTSofBhZKmFvD+
+ zR1g==
+X-Gm-Message-State: APjAAAWrFNlxJvyjonm1c8Oam6bPpi79lChqaMBHtZOBrfQzD/477Dc3
+ NgSzBMU08DEIFqEY3f8Yad0sjSVvAGjWeA7abrnYgh+Icr7WrzIFHTfefj+0IWj5u9xELt4pruN
+ DCcT8al6aoTtDQC65u5dp5A7SUaZw48ogFDZidn2zXtDbSyCmSQoiYdOhS+qJ5w==
+X-Received: by 2002:a9d:1c96:: with SMTP id l22mr36989213ota.322.1582466779325; 
+ Sun, 23 Feb 2020 06:06:19 -0800 (PST)
+X-Google-Smtp-Source: APXvYqyaQDZQOoSTZ3C8Uf/IjuhBqL9OUM173g6XEk7kp3vXLfp9s0opvs/DCiRm0ZUTHALKepzoSfc4eBh7o5PS7Fk=
+X-Received: by 2002:a9d:1c96:: with SMTP id l22mr36989193ota.322.1582466778988; 
+ Sun, 23 Feb 2020 06:06:18 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <a144cd2c0219399cea4473f6cf7e86b3dba5d6cf.camel@solinos.it>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
+Date: Sun, 23 Feb 2020 11:06:08 -0300
+Message-ID: <CANYNYEF_9x1tWBehG6BvHEXs_59YR0B_2Mnfxw-mWAz8Tps-Jw@mail.gmail.com>
+Subject: samba-tool testparm and netbios name length: error or warning?
+To: samba-technical@lists.samba.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,39 +63,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: Andreas Hasenack via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Hasenack <andreas@canonical.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 23/02/2020 10:31, Dario Lesca via samba-technical wrote:
-> Hi, I'm doing some tests samba DC 4.12.rc3  MIT Kerberos  + Bind DNS +
-> Dhcpd script  on Fedora 32 beta.
-I wouldn't suggest using this in production, MIT on an AD DC is still 
-experimental.
-> All work fine except this issue:
->
-> The dhcp for a workstation "win10a.fedora.loc" NOT joined to domain
-> work great, name and reverse are added to Samba Bind DNS.
->
-> But after this join, some time (10/15 minutes) into syslog I get this
-> error:
->
-> named[718]: client @0x7f128c3e5eb0 192.168.122.103#54566: update
-> 'fedora.loc/IN' denied
-> But despite this, everything works well
+Hi,
 
-First, there is no point in asking Fedora about this, the dhcp script is 
-supplied by Samba (or to be more precise, by myself).
+I just came across this different behavior between testparm(1) and
+samba-tool testparm:
 
-Secondly, it looks like your clients are trying to update their own 
-records in AD, which they cannot, because they do not belong to them, so 
-stop your clients trying to do this..
+$ testparm
+Load smb config files from /etc/samba/smb.conf
+Loaded services file OK.
+WARNING: The 'netbios name' is too long (max. 15 chars).
+...
+$ echo $?
+0
 
-Thirdly, this is the wrong place to ask, you should have asked on the 
-samba mailing list.
+But:
+$ samba-tool testparm
+INFO 2020-02-22 21:16:42,905 pid:37370
+/usr/lib/python3/dist-packages/samba/netcmd/testparm.py #96: Loaded
+smb config files from /etc/samba/smb.conf
+INFO 2020-02-22 21:16:42,905 pid:37370
+/usr/lib/python3/dist-packages/samba/netcmd/testparm.py #97: Loaded
+services file OK.
+ERROR 2020-02-22 21:16:42,905 pid:37370
+/usr/lib/python3/dist-packages/samba/netcmd/testparm.py #124: netbios
+name FOCAL-BIND9-UPGRADE-TEST is not a valid netbios name
+Press enter to see a dump of your service definitions
+(...)
+ERROR: Invalid smb.conf
+$ echo $?
+255
 
-Rowland
+I noticed that nmbd just truncates the name to 15 chars and starts up
+fine. Should this issue be a warning (like testparm(1) treats it), or
+a fatal error, like samba-tool's testparm behavior?
 
+A second question, and that is more of packaging and this might be the
+wrong audience, but Debian/Ubuntu use "samba-tool testparm" to check
+the config when the role is "active directory domain controller". Is
+the netbios name length more critical in that scenario, and thus the
+service should really fail hard to start?
 
+I was thinking about patching samba-tool testparm to treat the over
+length of the netbios name as just a warning, and exit 0 instead of
+255 in that case, but wanted to get more opinions about this since I
+rarely setup samba in that AD role.
 
