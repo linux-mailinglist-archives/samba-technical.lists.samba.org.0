@@ -2,51 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94FFD16B100
-	for <lists+samba-technical@lfdr.de>; Mon, 24 Feb 2020 21:34:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74C9F16B104
+	for <lists+samba-technical@lfdr.de>; Mon, 24 Feb 2020 21:37:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=5KmY4mxGU3QA5ZE5dJRw2FyTQcNWZxC4ebUikiGyHjs=; b=X7J8HfjjjDlguNwUWxhe/+Uff4
-	XeEuTwLhH/0fiY3d/oyTRMWFgkFJfvRLD7Rh1So/vRW2lzU1jc83UeY481Ge+7Bm7flN2dIrYkOAl
-	f9/LKJm9RZzZt7oDlnHssf29p86A9e92DnoAqx5+uaSv1w34OAZAxKS/Mv4nfqL3YviYoHsw2OPM7
-	AEUXJ4NnJYflF9rKamf6rWgmulggvN1DVT7GpoDl14bIt3lG7UqGXm6eVVbnMFJU5zCIldbWuBcEW
-	e9w2fP6GJQleNbYkZwxt5KpBhxrrhhrA5pSWofdtgCen3GbSAB4xWGAmRmEHwRqmj0cjuF9mrthHo
-	cvliwsOA==;
-Received: from localhost ([::1]:24022 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=rvzCg1g8gmMJGWyH2mVG2fw15B/D+Pvw2N6yAqcWP5k=; b=TgJnud9dbAXdi8beH5wRfCX1wu
+	6OlxiWFJEOM9oW5UO40Ob1tb1xPXC+r/44rfM8k9K3nkUrygsl0gvB0gXqMeNUqxK9qLH80ozGDMA
+	hJuvEmEIAVJVGr2I42SBiJ66W8mYrB+ZarT+qby9LBRBXo/Hd51tbag1/tMuutPCM6xTfF369OJ9X
+	j0ALmdjAorcq+h6iJ/azHaVLa9jWnZmRsjiSzr04hsOgOcp4wBuqcqpDL7kUC/FAag1fvvpWaNy+i
+	nQrzzLvrP+7hTTQDHjcFheYvRAVzeXnIf93CynOAXUTERDm+hK7tufIAMn42MeGiRhPDo44D0mQyo
+	tGJxULqg==;
+Received: from localhost ([::1]:24772 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j6KQb-00BTx2-8w; Mon, 24 Feb 2020 20:34:09 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26648) 
+	id 1j6KTn-00BU3H-Se; Mon, 24 Feb 2020 20:37:27 +0000
+Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c]:43141) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j6KQX-00BTwv-7d
- for samba-technical@lists.samba.org; Mon, 24 Feb 2020 20:34:07 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=5KmY4mxGU3QA5ZE5dJRw2FyTQcNWZxC4ebUikiGyHjs=; b=M0jhEwGamjAJWMyO82mDPgswUy
- trzi6Ry2/K+v4qT0N17/s7vpiEIfMSM8ruv5MnksSpBKSB7UkZw2XBKeyIbcsKwO2oP374B2+HROk
- /72+JRpSeCW2DiRkxXMEJb5Ej0aH0X0QTitXmYHaxjgVo2vHSTL2y+pQSwq6N4cYZueazfzaD0RYo
- AQU/Aj+57YkjEB5nZbrKmTjsuCv6rVhGj1hGvGfj3dorpPLgHOrLzZrsBxl3LFghq8pKa36L/WTJo
- YcMweLozTgW9/LpQhE21w9dd/corxTXk4vUYw2uv4txLlSQxON8SzyBqA8mlcI/CrGhNKySPxe3z3
- 36fuON1BaqWTW0/P1uCXuvVwgNcgtlsp0tDv3rL4iw/U+Z4qzjyX/fckL8gehB0i+NLKfKv2TqDYU
- NN3VA0z/Jawfg4/JRwGDOwE6AhnY3Ecjam8d5P1WX/rXW3C6BJWJoDEiXH0sBn24e3A7wIRJhE7A9
- xL9fMubLCasqjLqQth1DUto2;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1j6KQW-0001ii-G1; Mon, 24 Feb 2020 20:34:04 +0000
-Date: Mon, 24 Feb 2020 12:34:01 -0800
-To: "Arthur M. Gallagher" <art@arthurmgallagher.com>
-Subject: Re: [Samba] vfs fruit disk_free fails on tmsize overflow with macOS
- Time Machine
-Message-ID: <20200224203401.GB15879@jeremy-ThinkPad-X1>
-References: <mailman.231.1582110513.713.samba@lists.samba.org>
- <f09b7d28-4b3d-4211-b151-bb51d783ef4d@www.fastmail.com>
- <20200224193237.GA15759@jeremy-ThinkPad-X1>
- <d3a08bb5-3f56-4c51-b50c-78b7aeacb75d@www.fastmail.com>
+ (Exim) id 1j6KTj-00BU3A-Vq
+ for samba-technical@lists.samba.org; Mon, 24 Feb 2020 20:37:25 +0000
+Received: by mail-lj1-x22c.google.com with SMTP id a13so11587380ljm.10
+ for <samba-technical@lists.samba.org>; Mon, 24 Feb 2020 12:37:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=rvzCg1g8gmMJGWyH2mVG2fw15B/D+Pvw2N6yAqcWP5k=;
+ b=nOcJ8wbPEIYHj+gKhLd6SCqo11wRlmLS92n87wt/hFqhWLtdWTdKLZry+VIvRocfo1
+ 1MdRHayONQPv/hr028IblKenZuKy2vuo1ktynlIr+yi5OWK0wBu07iPxXfHkXHpHQ8hL
+ YfWR7286yUKWiIe1SH0VKEBv+TaDDESu5r2PkZyKlyHr1LDGP5C3u/Mjzbili7j3s7Yi
+ uxTHc+nb3U4+Aec/hwTl9x3GBS4GXqShr7AQFHL4bGfmh5+VcDwSkfUsv4RSkuGRZiZF
+ yg85+sI+hJwMB+38Jr0hfVgj+1t2I5Uu61d2Iwl5g+LpJXoQkd9tXF3FAPpyuSuCmZxL
+ BTuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=rvzCg1g8gmMJGWyH2mVG2fw15B/D+Pvw2N6yAqcWP5k=;
+ b=fo0U7L7FgKim5LQcMSWcmyl6bqyDw2fjQQXZn4rc2JD2glL6S5hktyCCMwbA1d7Yrt
+ 5oMxnHgEqLdNCP/cqPhMiiiwO6iDBq0vJNtmhpaAkuf1cBxH7WZ+1YhDkNNKRMPYx798
+ Fg9oEEePPrQjdLD0baD9jiR+GgQ319x4eyZWVvRdfdzgTsUTndFAncurdRgqaHjvWBwR
+ bOZC3dzHbBiwojpPuWGCRhpWMQS1gCZ/+vjNj+UYIXqubsQ+y97WLhi0kHYp2jI0SwmK
+ fjwN7Ck3v5bjXN5GUUlVLsd5LCVe8U/IcXAKtmyaGyU7Svo5fRjKRyILFXq2MM6K/Z/5
+ 9I/w==
+X-Gm-Message-State: APjAAAXL/vyoZx7oI9+jtyl1qTui5TaA4bR7wxt9vnXl2s4JLnyIZc+n
+ WcNIRh9GoGEDXsNuSi8e1nT5UyvaD1SPtbI859k=
+X-Google-Smtp-Source: APXvYqxKCAGxOWHtntWZacB5I32b7NC59QCEvjsI0pUnYDt7Ms/gdnscTuWLjI6xyOvqfiji25LdEikhwuIDOkLJuhQ=
+X-Received: by 2002:a2e:5304:: with SMTP id h4mr31070571ljb.75.1582576640879; 
+ Mon, 24 Feb 2020 12:37:20 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <d3a08bb5-3f56-4c51-b50c-78b7aeacb75d@www.fastmail.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
+References: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
+ <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
+ <CAC-fF8T6dGjDbH3YFpZpEA+Rtoppj+sJ4bZtt9ZDMfH85_UuUg@mail.gmail.com>
+ <29a0fc8162de6bde7ea127956efb7de29b4fce3e.camel@redhat.com>
+ <CAC-fF8QyT+t0Cmi3BdJe8kJ-LRL_BvvhQr76GwF2t3ZQJWsDDw@mail.gmail.com>
+ <dc76b713e4e4c94d396a0d95ebb5145c63ce4a4d.camel@redhat.com>
+In-Reply-To: <dc76b713e4e4c94d396a0d95ebb5145c63ce4a4d.camel@redhat.com>
+Date: Mon, 24 Feb 2020 21:37:09 +0100
+Message-ID: <CAC-fF8RrV1XtnaB0va3Bv8++c17qXKh+JtdSUqS00Eg-3OZUfQ@mail.gmail.com>
+Subject: Re: ADV190023 | LDAP channel binding support
+To: Simo Sorce <simo@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,29 +72,68 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Isaac Boukris <iboukris@gmail.com>
+Cc: Stefan Metzmacher <metze@samba.org>, Andreas Schneider <asn@samba.org>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Feb 24, 2020 at 08:11:34PM +0000, Arthur M. Gallagher wrote:
-> On Mon, Feb 24, 2020 at 7:32PM +0000, Jeremy Allison via samba wrote:
-> 
-> > Having said that, your fix looks like it's
-> > removing a bunch of overflow safety checks,
-> > so I'm not sure it's the right one.
-> 
-> >> - if (bandsize > SIZE_MAX/nbands) {
-> >> - DBG_ERR("tmsize overflow: bandsize [%zu] nbands [%zu]\n",
-> >> <snip>
-> >> - if (state->total_size + tm_size < state->total_size) {
-> >> - DBG_ERR("tmsize overflow: bandsize [%zu] nbands [%zu]\n",
-> >> <snip>
-> >> + tm_size = (off_t)bandsize * (off_t)nbands;
-> 
-> The problem was that the overflow failsafes were tripping, so this simply increased the precision by forced typing in the arithmetic – that should obviate the need for the overflow checks in the first place. However if you'd rather I can ensure it scales up to check for bigger overflows instead
+On Mon, Feb 24, 2020 at 9:28 PM Simo Sorce <simo@redhat.com> wrote:
+>
+> On Mon, 2020-02-24 at 17:41 +0100, Isaac Boukris wrote:
+> > On Mon, Feb 24, 2020 at 2:35 PM Simo Sorce <simo@redhat.com> wrote:
+> > > On Sat, 2020-02-22 at 20:09 +0100, Isaac Boukris wrote:
+> > > > On Tue, Feb 18, 2020 at 5:48 PM Stefan Metzmacher <metze@samba.org> wrote:
+> > > >
+> > > > > I think we need input from dochelp to answer 2 questions:
+> > > > > 1. which kind of channel bindings are expected/used by windows?
+> > > > >    I assume tls-server-end-point. I guess MS-ADTS would be the place
+> > > > >    to define these details for ldaps.
+> > > >
+> > > > I noticed more another reference to channel-bindings in MS-KILE, I
+> > > > think maybe KERB_AP_OPTIONS_CBT ad element is the way to tell the
+> > > > server to require CB when LdapEnforceChannelBinding is set to 1 only,
+> > > > needs testing.
+> > > >
+> > > > 3.2.5.8 AP Exchange
+> > > > If ChannelBinding is set to TRUE, the client sends
+> > > > AD-AUTH-DATA-AP-OPTIONS data in an AD-IF-
+> > > > RELEVANT element ([RFC4120] section 5.2.6.1). The Authorization Data
+> > > > Type AD-AUTH-DATA-AP-
+> > > > OPTIONS has an ad-type of 143 and ad-data of KERB_AP_OPTIONS_CBT
+> > > > (0x4000). The presence of
+> > > > this element indicates that the client expects the applications
+> > > > running on it to include channel binding
+> > > > information ([RFC2743] section 1.1.6 and [RFC2744]) in AP requests
+> > > > whenever Kerberos
+> > > > authentication takes place over an "outer channel" such as TLS.
+> > > > Channel binding is provided using the
+> > > > ChannelBinding variable specified in section 3.2.1.
+> > > >
+> > > > 3.4.5
+> > > > If the ApplicationRequiresCBT parameter (section 3.4.1) is set to
+> > > > TRUE, the server, if so configured,
+> > > > SHOULD<67> return GSS_S_BAD_BINDINGS whenever the AP exchange request
+> > > > message contains
+> > > > an all-zero channel binding value and does not contain the
+> > > > AD-IF-RELEVANT element ([RFC4120]
+> > > > section 5.2.6.1) KERB_AP_OPTIONS_CBT.
+> > >
+> > > Very interesting, we should add support to decode this AD in MIT krb5
+> > > and exposes it via naming attributes or context options, whatever makes
+> > > the most sense.
+> >
+> > Yeah, although I can't really think of something that would work,
+> > given we want to know that before calling accept() on the input token.
+> > On clients supporting CB, maybe we can add this ad-element via a
+> > gss_set_name_attribute() call, not sure.
+>
+> We might even just see there are CBs in gss_init_sec_context() and just
+> do it automatically. The only question is whether this can cause
+> interop issues which requires a more nuanced use of these.
 
-Yes please. We need to keep the overflow checks,
-as this is on user-supplied data I believe.
+Right, doing it automatically make sense. I think an unknown
+ad-element in ad-if-relevant container shouldn't cause interop issues.
 
