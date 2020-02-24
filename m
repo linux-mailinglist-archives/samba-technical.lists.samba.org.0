@@ -2,47 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FE6E16B0BB
-	for <lists+samba-technical@lfdr.de>; Mon, 24 Feb 2020 21:00:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6155316B0F9
+	for <lists+samba-technical@lfdr.de>; Mon, 24 Feb 2020 21:29:09 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=v3z5DG6SSs9yzF8DZmGugxU+J2w73WAJ/k2SZlnJ8BE=; b=5A1YMPQFr+yrxA/aemtKgNwJuJ
-	r+RJ+FGKAiL5lwgbp8d5DQJV45cZ4rv01klVzK/2dpcVPBVGeVOc8YrXoYxu/eeTmmkpH2fCgF3zv
-	WbSfvXAT/cVKpeguheT3jOsuznMW/6kHU7sgb0yiqgGAWMP7UGgX4/jyAMGVTh5esr70hRL/SFIer
-	fLsQojuOPtWP4oG2K79Su/upUY9GZg7vwAekeqKmqLAnIm8QXFsDgvvavXbHL+/LvH1J4GEUiqKu2
-	w+hcJ+YjpyK9LfkpYEL1lU4tSVQwQKNjcdSyXAsqYuQvp41k6sq3oKn6FnxuyFHEhDSkRAVdPt9vR
-	TfqVkjwg==;
-Received: from localhost ([::1]:20086 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=THl+DjBzV563ZZ6BXYWXt4IC42VUcWU1LdRFjtCZGWM=; b=JwXsRt6Y+UfaywfbI6F6lxr5tF
+	GKtFcmjFRIqi8ymwETc2TnxmIARt/sqztNszOtc7sVUriXpCpcjo/KXyBQrKjD6RVVk9AtURzoq0j
+	ULikdkzTod6HIwaHH2Dko4pScJJUVQfFQ7lGFwQyhHMyOcnOQ5OxWGyE4MKbh/rDLRpfAj5uxn0ro
+	nNNIMJGPLU+VweG8cYSx5cfa/BjttsahD6cCOTFVmU8f6FLptTAKZoMWxFbwTz6yNvidi/vxjJFyb
+	Tw1Eh3bBNEcP9SvCeE9S/QbAZgf0qKEcI+YkoWSzW3WKGJiWTRy9Os3ukZnj43FDclb1qcd4Qw0Aq
+	GrgY1wEA==;
+Received: from localhost ([::1]:23262 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j6Jtb-00BTPE-KF; Mon, 24 Feb 2020 20:00:03 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11374) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j6JtT-00BTOp-2l; Mon, 24 Feb 2020 19:59:57 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=v3z5DG6SSs9yzF8DZmGugxU+J2w73WAJ/k2SZlnJ8BE=; b=AI6926jQvJ7kvYuwM6tceL1tW4
- P71xEMwj2n6T3HKUu2SyNeg6kWTw70S/vg9pKXT7Baewy3jfZB7LsGZxx5wzEaaVV7ULDE+6F2MWJ
- F/vidwKcALgObTG2ypfyymfW0SmQjvI1MBjP3rzWf13/jzixOiPOzv1vYZJTYsXFBEpGrHHvxoVFG
- 6ycGPtj7ivh788eAaC2B2oev4uY+5Pim6PWSeVA8YyzpPLTdEnTtA0FrO1mIpZciawkTqqsr4A0Ag
- GrkIHACfL+3sdD2AJDbArJUxBBq+FSm3qWMqHwys9lDNEoTJOoc+d+LPqHpgKXc0YGei7BT8PdVqP
- euhLrZ3cyxcMS43UZDUj25/T7LlDilEakk9LAunwnrb3YKPXyJ8ifivzPNhKrJTHALuOOPPTlp/dk
- KqWZFYz8eNyU+Xe6UIsD8pzlqLWk6UX9XShDz5z/99coRkNxt2hnWrK53LVubTIEvHfCMnqYoewR/
- 8Cm1dgy/oQMnmhY6dYUsBNEb;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1j6JtS-0001Ng-0n; Mon, 24 Feb 2020 19:59:54 +0000
-Date: Mon, 24 Feb 2020 11:59:50 -0800
-To: Peter Eriksson <pen@lysator.liu.se>
-Subject: Re: [Samba] Patches for Samba 4.12.0rc3 for OmniOS
-Message-ID: <20200224195950.GA15879@jeremy-ThinkPad-X1>
-References: <20200219110826.GA32753@carrie2>
- <6FA00733-FCD5-4EC7-BA66-0CD047A81EC7@lysator.liu.se>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <6FA00733-FCD5-4EC7-BA66-0CD047A81EC7@lysator.liu.se>
-User-Agent: Mutt/1.9.4 (2018-02-28)
+	id 1j6KLO-00BTqh-FB; Mon, 24 Feb 2020 20:28:46 +0000
+Received: from us-smtp-2.mimecast.com ([205.139.110.61]:40088
+ helo=us-smtp-delivery-1.mimecast.com) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1j6KLJ-00BTqa-Lc
+ for samba-technical@lists.samba.org; Mon, 24 Feb 2020 20:28:43 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1582576112;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=THl+DjBzV563ZZ6BXYWXt4IC42VUcWU1LdRFjtCZGWM=;
+ b=Gu6aEUTW+ShVBev9mtPcKRou6xvPQALNOVInRCVjs9j3jOCJB30ImuGQYlrJJLCWDuWn6d
+ rDf+KwVpU6QoH62w5uNUvBqLPNklfm7RYlgHHT7DJLOfOk9E1XocoCfNi8B0ggxqVa6RrE
+ e+uQjmou0HW6XRW6vGvyosLaPtiFK+0=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-48-LWEC1rbTMey38exAfykcVw-1; Mon, 24 Feb 2020 15:28:27 -0500
+X-MC-Unique: LWEC1rbTMey38exAfykcVw-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AF6A8189F764;
+ Mon, 24 Feb 2020 20:28:26 +0000 (UTC)
+Received: from ovpn-116-244.phx2.redhat.com (ovpn-116-244.phx2.redhat.com
+ [10.3.116.244])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id ACF4D86810;
+ Mon, 24 Feb 2020 20:28:25 +0000 (UTC)
+Message-ID: <dc76b713e4e4c94d396a0d95ebb5145c63ce4a4d.camel@redhat.com>
+Subject: Re: ADV190023 | LDAP channel binding support
+To: Isaac Boukris <iboukris@gmail.com>
+Date: Mon, 24 Feb 2020 15:28:24 -0500
+In-Reply-To: <CAC-fF8QyT+t0Cmi3BdJe8kJ-LRL_BvvhQr76GwF2t3ZQJWsDDw@mail.gmail.com>
+References: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
+ <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
+ <CAC-fF8T6dGjDbH3YFpZpEA+Rtoppj+sJ4bZtt9ZDMfH85_UuUg@mail.gmail.com>
+ <29a0fc8162de6bde7ea127956efb7de29b4fce3e.camel@redhat.com>
+ <CAC-fF8QyT+t0Cmi3BdJe8kJ-LRL_BvvhQr76GwF2t3ZQJWsDDw@mail.gmail.com>
+Organization: Red Hat, Inc.
+Mime-Version: 1.0
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Warn: EHLO/HELO not verified: Remote host 205.139.110.61
+ (us-smtp-2.mimecast.com) incorrectly presented itself as
+ us-smtp-delivery-1.mimecast.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,64 +77,79 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: SAMBA Mailing List <samba@lists.samba.org>, samba-technical@lists.samba.org
+From: Simo Sorce via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Simo Sorce <simo@redhat.com>
+Cc: Stefan Metzmacher <metze@samba.org>, Andreas Schneider <asn@samba.org>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Feb 21, 2020 at 10:51:15PM +0100, Peter Eriksson via samba wrote:
-> A little summary of building Samba 4.12.0rc3 on OmniOS:
+On Mon, 2020-02-24 at 17:41 +0100, Isaac Boukris wrote:
+> On Mon, Feb 24, 2020 at 2:35 PM Simo Sorce <simo@redhat.com> wrote:
+> > On Sat, 2020-02-22 at 20:09 +0100, Isaac Boukris wrote:
+> > > On Tue, Feb 18, 2020 at 5:48 PM Stefan Metzmacher <metze@samba.org> wrote:
+> > > 
+> > > > I think we need input from dochelp to answer 2 questions:
+> > > > 1. which kind of channel bindings are expected/used by windows?
+> > > >    I assume tls-server-end-point. I guess MS-ADTS would be the place
+> > > >    to define these details for ldaps.
+> > > 
+> > > I noticed more another reference to channel-bindings in MS-KILE, I
+> > > think maybe KERB_AP_OPTIONS_CBT ad element is the way to tell the
+> > > server to require CB when LdapEnforceChannelBinding is set to 1 only,
+> > > needs testing.
+> > > 
+> > > 3.2.5.8 AP Exchange
+> > > If ChannelBinding is set to TRUE, the client sends
+> > > AD-AUTH-DATA-AP-OPTIONS data in an AD-IF-
+> > > RELEVANT element ([RFC4120] section 5.2.6.1). The Authorization Data
+> > > Type AD-AUTH-DATA-AP-
+> > > OPTIONS has an ad-type of 143 and ad-data of KERB_AP_OPTIONS_CBT
+> > > (0x4000). The presence of
+> > > this element indicates that the client expects the applications
+> > > running on it to include channel binding
+> > > information ([RFC2743] section 1.1.6 and [RFC2744]) in AP requests
+> > > whenever Kerberos
+> > > authentication takes place over an "outer channel" such as TLS.
+> > > Channel binding is provided using the
+> > > ChannelBinding variable specified in section 3.2.1.
+> > > 
+> > > 3.4.5
+> > > If the ApplicationRequiresCBT parameter (section 3.4.1) is set to
+> > > TRUE, the server, if so configured,
+> > > SHOULD<67> return GSS_S_BAD_BINDINGS whenever the AP exchange request
+> > > message contains
+> > > an all-zero channel binding value and does not contain the
+> > > AD-IF-RELEVANT element ([RFC4120]
+> > > section 5.2.6.1) KERB_AP_OPTIONS_CBT.
+> > 
+> > Very interesting, we should add support to decode this AD in MIT krb5
+> > and exposes it via naming attributes or context options, whatever makes
+> > the most sense.
 > 
-> The following 4 (5) small patches are needed in order to compile and run Samba 4.12.0rc3 on the latest OmniOS r151032p (OpenSolaris/Illumos variant):
-> 
-> 1. ARRAY_SIZE is already defined in <sys/sysmacros.h> on OmniOS, put an #ifndef around it in lib/replace/replace.h (can be ignored but causes a gazillion compiler warnings :-):
-> 
->    https://www.grebo.net/~peter/omnios/samba/4.12/array_size.patch <https://www.grebo.net/~peter/omnios/samba/4.12/array_size.patch>
-> 
-> 2. s_addr is a define and causes compilation problems (errors), change the argument to “xs_addr” instead in lib/tsocket/tsocket.h and tsocket_bsd.c:
-> 
->    https://www.grebo.net/~peter/omnios/samba/4.12/s_addr.patch <https://www.grebo.net/~peter/omnios/samba/4.12/s_addr.patch>
-> 
-> 3. The “wscript” build tool generates invalid compiler/linker options (when compiling with Gcc8) - build/link failures:
-> 
->    https://www.grebo.net/~peter/omnios/samba/4.12/wscript.patch <https://www.grebo.net/~peter/omnios/samba/4.12/wscript.patch>
-> 
-> 4. Errors about tdb_mutex_init failing with Device Busy (when using robust mutex:es) at runtime (“net ads info”):
-> 
-> tdb(/var/samba/lock/gencache.tdb): tdb_open_ex: tdb_mutex_init failed for /var/samba/lock/gencache.tdb: Device busy
-> tdb(/var/samba/lock/gencache.tdb): tdb_open_ex: tdb_mutex_init failed for /var/samba/lock/gencache.tdb: Device busy
-> tdb(/var/samba/lock/gencache.tdb): tdb_open_ex: tdb_mutex_init failed for /var/samba/lock/gencache.tdb: Device busy
-> 
-> This patch fixes this:
-> 
->    https://www.grebo.net/~peter/omnios/samba/4.12/mutexattr.patch <https://www.grebo.net/~peter/omnios/samba/4.12/mutexattr.patch>
-> 
-> (Probably an OmniOS bug, but it’s an easy patch in Samba so…)
-> 
-> 5. fmemopen() doesn’t exist on OmniOS. This is just a test program and it’s not built by default in rc3 but anyway:
-> 
->    https://www.grebo.net/~peter/omnios/samba/4.12/fmemopen.patch <https://www.grebo.net/~peter/omnios/samba/4.12/fmemopen.patch>
-> 
-> 
-> In order to build it I also compiled and built local versions of:
-> 
-> gmp-6.2.0
-> gnutls-3.6.12
-> jansson-2.12
-> libarchive-3.4.2
-> libidn2-2.3.0
-> libtasn1-4.16.0
-> libunistring-0.9.10
-> nettle-3.5.1
-> openldap-2.4.49
-> p11-kit-0.23.20
-> 
-> I built Samba as a 64 bit binary (gcc -m64). 
-> 
-> With -m32 anything that uses Python fails since the OmniOS Python installation seems to be 64 bit.
+> Yeah, although I can't really think of something that would work,
+> given we want to know that before calling accept() on the input token.
+> On clients supporting CB, maybe we can add this ad-element via a
+> gss_set_name_attribute() call, not sure.
 
-Thanks for these Peter ! Can you try running a gitlab
-Samba CI run and then submit them as gitlab-PR's so
-we can review.
+We might even just see there are CBs in gss_init_sec_context() and just
+do it automatically. The only question is whether this can cause
+interop issues which requires a more nuanced use of these.
+ 
+> I'd like to send a mail on krbdev, but first I need test and see if it
+> is really what it looks like.
+
+Makes sense.
+
+Simo.
+
+-- 
+Simo Sorce
+RHEL Crypto Team
+Red Hat, Inc
+
+
+
+
 
