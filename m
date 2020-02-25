@@ -2,56 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C14C16EFEF
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Feb 2020 21:18:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 56E9F16F1A3
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Feb 2020 22:49:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=NDVVlyvpEnDCV6imGsKVeoqqg0/3f9x9kVIxtgVT0DQ=; b=1e2HUDSFGsYCpad3fiWjFOltPm
-	BHoAqj6/TcuzDO5uRl7l6sOxV/kdSXWgICW4BK88397CQ6oGRf226xWeQjK9IHwSTNsa1FWkh8ak7
-	0GS7C3iFTDtRtw3+89sfPwRoGODaz63Pf5tgv4zf3cuY+VE3OW5PE/5/OfsceMBpDrBZgOLSoXNNo
-	O70/kuF21qQRIeXrffaLAeJbEAdPnUYd37/XGN95Ne+y5wBPCylDdq1aMHGSpUAa+3A+9YknC2mPc
-	ThMf+Ry2kzjIESxMbtgk+NLJD0Hlx5ndrwyPOmUmiB0YzbTGE4THYjV8UPSAHaXxhkxmAu6Mp8DJk
-	GUmzi57Q==;
-Received: from localhost ([::1]:48264 helo=hr1.samba.org) 
+	bh=GFL+JFSeK8Pf05fysDahqfMvWqdD2QNFZNTabpiCQ0s=; b=nSnZBhTAaRcrBvepASD1WzRN5g
+	hoHFeEVn9yAfHC4eCEPB3wRSDgsdX1yFIce9yqkHjwwIf7ZuEhrBww6KFb9twrn+cuxmCffTLlINa
+	AZFqQoUcIGR1CU5oI8gg5GHHbqUL0QxB+ISnrEFzjXsiB8i0shTeVpoYUsxIa+cKW+htLMmLqd+OK
+	Kx1+Yegfwt/tK2DxYhyUGCcDPv1WConZPrXoK/IqwYsmHfT6ETcC0SlVs5FH43ZjJdjPdRgzLuqwc
+	DcFUV3Mckeql/eyqL1LkYWAB8AXMrPgbVyVZqfw8SMaqpS1qqgt7Up2/d85B+EzQNdp85m5QP78Lk
+	VVVccN4A==;
+Received: from localhost ([::1]:54078 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j6geU-00Bf3h-39; Tue, 25 Feb 2020 20:17:58 +0000
-Received: from mail-lf1-x141.google.com ([2a00:1450:4864:20::141]:35021) 
+	id 1j6i4H-00Bfsn-0r; Tue, 25 Feb 2020 21:48:41 +0000
+Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:42299) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j6geO-00Bf3a-Jn
- for samba-technical@lists.samba.org; Tue, 25 Feb 2020 20:17:55 +0000
-Received: by mail-lf1-x141.google.com with SMTP id z9so186463lfa.2
- for <samba-technical@lists.samba.org>; Tue, 25 Feb 2020 12:17:51 -0800 (PST)
+ (Exim) id 1j6i4B-00Bfsg-ME
+ for samba-technical@lists.samba.org; Tue, 25 Feb 2020 21:48:38 +0000
+Received: by mail-lj1-x243.google.com with SMTP id d10so563964ljl.9
+ for <samba-technical@lists.samba.org>; Tue, 25 Feb 2020 13:48:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=NDVVlyvpEnDCV6imGsKVeoqqg0/3f9x9kVIxtgVT0DQ=;
- b=uf9RlGCjO4/7Mi02Cqjcg7AvDORPNV3FC4BLhVbt3LcEWATyju9MXiR7KooUgr3pSQ
- aNbuXuLaJwPZO/fIiyYm6/ID39+KholFJaoKEEG+tdYpWIZN8iHjT99ad4FmEFFELT58
- vvFWIelTdVBdUhaxzmmcWUW0aaeBjurdgbEJ55NmiX0veScCQNj0DJBzx+diDDAf2Ob8
- JLhRgrQlnK8lOKI1JDG5PTjHSQm46BGLFKtVI5NYpgcMXiBAwmNL5b36fxcREmRHXZqq
- f0GdQZs1wDyyia7YTaJEr01p5uRm5+UOc+H7gnE8Fs++T6SqciClizkrLSH02ZHB5FA8
- QYXw==
+ :cc; bh=GFL+JFSeK8Pf05fysDahqfMvWqdD2QNFZNTabpiCQ0s=;
+ b=eyyOVvjXkCGNvg8gvaN5NB9FmldzBAcoAso+hFf3aBrIhNjsjTl1Qmdh+CjkyuxFQj
+ kD/UCGHWxTrCk4COLlDEDZB0356bwMpJNsVU2INXffi31XZouE77m0XftJ+xzlZI3b5B
+ pvYOjtHIbZVk+S37zcnR50onZ1i4QdtIepMovMFLfmXNLP/fJY+mTWCk5e6+TxF5Ag1c
+ 26hDAAvOdeEJwle5g2Pf3bImC3CuQMJ50USMHFEXBLRdXQQk9VhDhyn8NxUMnmpCaWGk
+ swpvG32sl19bFwxzpEuUWH68OeqqM5RlTRYZdFJ1q5gfb+j0BT4o8A7rCJ1gMrLzStBG
+ TAtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=NDVVlyvpEnDCV6imGsKVeoqqg0/3f9x9kVIxtgVT0DQ=;
- b=ha334sOvJxV1H9NpflKEDG4B6Tz8hD75p+mKhWa11vGQouV8T55t0x5beTiGl2zie4
- jLXiNCTIFOJAy7h9o/nnX+EuZtHfqBWMInrJwG5Yf5WSw/bH1Dh7zuE3OAgtzy5ayczM
- qQMcI4onErHAQGfly/CRchTqxWxsOqJetgKTIHcdKHlufTmVcmL4afMN9lePnOPT+8mc
- 8RT3BfcIoKEjf2IxoCe/N1gYLt3yMd2/XB9t6cF/nW9NCOvBxobx76RXf4T4+J4mJ5cu
- 9cQOUjrZvyKjUrtpbElZwn6qlwBKG2+EprEZZpNTXQzqxCv+UHNkeXoF+sqtNygt2yB1
- kOtA==
-X-Gm-Message-State: APjAAAXCi6qWGqE8MkY6PHfxQudj0vNfwn3i6Af8rjWV8Sj4uCeW3Rzv
- Sx5RA03DV2HVncKCzv7lyBdTWdX+hsaQu1GFwcc=
-X-Google-Smtp-Source: APXvYqxffHQn6QRmVisLv2IUIByE4nmxRRtujIpzbMbOFzmLm9dHfdiYRqjZX2hgtzjT5f69OPoLKBQORgjrzaJtoHk=
-X-Received: by 2002:a19:6b0e:: with SMTP id d14mr320008lfa.46.1582661870725;
- Tue, 25 Feb 2020 12:17:50 -0800 (PST)
+ bh=GFL+JFSeK8Pf05fysDahqfMvWqdD2QNFZNTabpiCQ0s=;
+ b=EBl9c+r0swY7+JeuMpOSC8/3Pbpk08QGdtV3Wys/K8cLWbs18+5ay8TC1ZaRy7XqSz
+ bgzTQ7hqjuwpxlA7t3SSP7zdgtlynui7ExugMFCl51wgRs19fwO8H5ESvqdNbnp7bUbF
+ vfbPbaK2rIlYhVWfmSE2sIjVWb+e1Ehm2rC0W9plHW+NqMKa5k4SPSTO15nT8/ibetBt
+ k3dJWk219ILPYezOiIKmUnuNeBwsI9v3c2c8f496iO46egxDrShY29Mbc1gTsxMa8JHA
+ PQ/uf4kkzgoZqfzrZZRGNJ73EncOm+4GcOL74zqTb7EhGy7rB8g/sU2zToFjprDBK3Sc
+ /w8g==
+X-Gm-Message-State: ANhLgQ1jjWlMx8S9dGhNd8mJOMKcIGkN5myCKAiizUYqrTlULyMBB5vH
+ T1tMkmiUkAkeprXYmh0gmwCmt7kUMrN4vsw4ZylIxautezc=
+X-Google-Smtp-Source: ADFU+vtW6k4eoJuAKVStKdNuPMsiHBoWn9M6a0/AboDob8v3q+3WOecPEKuaqCfHOo3bc4Tws6G02WckjlQCXDIJCUE=
+X-Received: by 2002:a2e:9008:: with SMTP id h8mr619141ljg.217.1582667314589;
+ Tue, 25 Feb 2020 13:48:34 -0800 (PST)
 MIME-Version: 1.0
 References: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
  <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
-In-Reply-To: <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
-Date: Tue, 25 Feb 2020 21:17:39 +0100
-Message-ID: <CAC-fF8SF+FUQBWxsPnSRtAXEqE=TWBm0Meb8swERSvHqpQf0yw@mail.gmail.com>
+ <CAC-fF8SF+FUQBWxsPnSRtAXEqE=TWBm0Meb8swERSvHqpQf0yw@mail.gmail.com>
+In-Reply-To: <CAC-fF8SF+FUQBWxsPnSRtAXEqE=TWBm0Meb8swERSvHqpQf0yw@mail.gmail.com>
+Date: Tue, 25 Feb 2020 22:48:22 +0100
+Message-ID: <CAC-fF8TfRsx3WT3Gx3h=W28tT_V9Gfi_dvyA-XY_1zYoRAmbcg@mail.gmail.com>
 Subject: Re: ADV190023 | LDAP channel binding support
 To: Stefan Metzmacher <metze@samba.org>
 Content-Type: text/plain; charset="UTF-8"
@@ -76,52 +77,18 @@ Cc: Andreas Schneider <asn@samba.org>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi metze
-
-On Tue, Feb 18, 2020 at 5:48 PM Stefan Metzmacher <metze@samba.org> wrote:
+On Tue, Feb 25, 2020 at 9:17 PM Isaac Boukris <iboukris@gmail.com> wrote:
 >
-> Am 18.02.20 um 17:06 schrieb Isaac Boukris:
-> >
-> > I tested net-ads-search from a joined machine configured with "ldap
-> > ssl ads = yes", and it works once I also set "client ldap sasl
-> > wrapping = plain".
-> >
-> > However it doesn't work when I configure the DC to require
-> > channel-binding with LdapEnforceChannelBinding=2 as per ADV190023.
->
-> I looked at it a bit, see
-> https://git.samba.org/?p=metze/samba/wip.git;a=shortlog;h=ac8fd11f1d4b9deb48d6c7942af0c83b52d69d7f
+> And:
+> LD_LIBRARY_PATH=/usr/local/lib /usr/local/bin/ldapsearch -h
+> sdc.smb.net -b dc=smb,dc=net cn=administrator -Y GSSAPI -N -ZZ -O
+> maxssf=0
+> SASL/GSSAPI authentication started
+> ldap_sasl_interactive_bind: Invalid credentials (49)
+> additional info: 8009030C: LdapErr: DSID-0C0904DC, comment:
+> AcceptSecurityContext error, data 52e, v1db1
 
-FYI, I got net-ads working against AD server by adding some logic in
-source3, look:
-https://gitlab.com/samba-team/devel/samba/-/commits/iboukris-metze-cbind
-
-However the fixed clients aren't working against samba server yet,
-unless require-strong-auth is set to "no", while non-fixed clients
-still work. I get this error (I also wonder how can I trigger the
-source4 client code).
-
-LD_LIBRARY_PATH=/usr/local/lib /usr/local/samba/bin/net ads
--U"administrator@SMB.NET" -d3 search cn=apache -d3
-...
-Connected to LDAP server sdc.smb.net
-StartTLS issued: using a TLS connection
-ads_sasl_spnego_bind: got OID=1.2.840.48018.1.2.2
-ads_sasl_spnego_bind: got OID=1.2.840.113554.1.2.2
-ads_sasl_spnego_bind: got OID=1.3.6.1.4.1.311.2.2.10
-kinit succeeded but ads_sasl_spnego_gensec_bind(KRB5) failed for
-ldap/sdc.smb.net with user[administrator] realm[SMB.NET]: Invalid
-credentials
-ads_sasl_spnego_gensec_bind(KRB5) failed for ldap/sdc.smb.net with
-user[administrator] realm=[SMB.NET]: Invalid credentials
-return code = -1
-
-And:
-LD_LIBRARY_PATH=/usr/local/lib /usr/local/bin/ldapsearch -h
-sdc.smb.net -b dc=smb,dc=net cn=administrator -Y GSSAPI -N -ZZ -O
-maxssf=0
-SASL/GSSAPI authentication started
-ldap_sasl_interactive_bind: Invalid credentials (49)
-additional info: 8009030C: LdapErr: DSID-0C0904DC, comment:
-AcceptSecurityContext error, data 52e, v1db1
+btw, here are the openldap/cyrus wip branches I test with:
+https://github.com/iboukris/openldap/commits/gssapi_cbind
+https://github.com/iboukris/cyrus-sasl/commits/sasl_gssapi_cbt
 
