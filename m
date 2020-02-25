@@ -2,63 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74C9F16B104
-	for <lists+samba-technical@lfdr.de>; Mon, 24 Feb 2020 21:37:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16E5216C3DF
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Feb 2020 15:28:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=rvzCg1g8gmMJGWyH2mVG2fw15B/D+Pvw2N6yAqcWP5k=; b=TgJnud9dbAXdi8beH5wRfCX1wu
-	6OlxiWFJEOM9oW5UO40Ob1tb1xPXC+r/44rfM8k9K3nkUrygsl0gvB0gXqMeNUqxK9qLH80ozGDMA
-	hJuvEmEIAVJVGr2I42SBiJ66W8mYrB+ZarT+qby9LBRBXo/Hd51tbag1/tMuutPCM6xTfF369OJ9X
-	j0ALmdjAorcq+h6iJ/azHaVLa9jWnZmRsjiSzr04hsOgOcp4wBuqcqpDL7kUC/FAag1fvvpWaNy+i
-	nQrzzLvrP+7hTTQDHjcFheYvRAVzeXnIf93CynOAXUTERDm+hK7tufIAMn42MeGiRhPDo44D0mQyo
-	tGJxULqg==;
-Received: from localhost ([::1]:24772 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=yYqyeuI/of9A069uFI42HcoeZJ+YDh489i2p/gem3KY=; b=Bgo0TJavE9PSzRlQPykvGv7eq8
+	vOIt6jjBJj3v4Sl5mIIJbOxQxFSejlmxW8FmvEfi8aguFIF4G03c6cbyvts26ovJ6aXVpsX0Sp44W
+	bKw9jQ795zs5FJkGH188Yn54y8Jd78r/vgIapXGuLbM1MY3k5yIE1tRuTgJlrSc1WIgvtoURj/En6
+	24kouj5KMMCQ81pDMC13gwpqxvgqpY2AO001g95Mw4kBz9T01MbSyFHJ5v/vJjdAtTYPLJi3XvUlu
+	Vf3tPQZaMreF47peYcpYmFKxbZPbRKz0Yuqs6mb2BTImMMiqkTxLFyvwD+6t3gh0XLfEU8ChT8s8+
+	MfHazAKg==;
+Received: from localhost ([::1]:36666 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j6KTn-00BU3H-Se; Mon, 24 Feb 2020 20:37:27 +0000
-Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c]:43141) 
+	id 1j6bB6-00BdIg-CJ; Tue, 25 Feb 2020 14:27:16 +0000
+Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930]:42437) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j6KTj-00BU3A-Vq
- for samba-technical@lists.samba.org; Mon, 24 Feb 2020 20:37:25 +0000
-Received: by mail-lj1-x22c.google.com with SMTP id a13so11587380ljm.10
- for <samba-technical@lists.samba.org>; Mon, 24 Feb 2020 12:37:21 -0800 (PST)
+ (Exim) id 1j6bB0-00BdIZ-Pe
+ for samba-technical@lists.samba.org; Tue, 25 Feb 2020 14:27:13 +0000
+Received: by mail-ua1-x930.google.com with SMTP id p2so4559948uao.9
+ for <samba-technical@lists.samba.org>; Tue, 25 Feb 2020 06:27:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=rvzCg1g8gmMJGWyH2mVG2fw15B/D+Pvw2N6yAqcWP5k=;
- b=nOcJ8wbPEIYHj+gKhLd6SCqo11wRlmLS92n87wt/hFqhWLtdWTdKLZry+VIvRocfo1
- 1MdRHayONQPv/hr028IblKenZuKy2vuo1ktynlIr+yi5OWK0wBu07iPxXfHkXHpHQ8hL
- YfWR7286yUKWiIe1SH0VKEBv+TaDDESu5r2PkZyKlyHr1LDGP5C3u/Mjzbili7j3s7Yi
- uxTHc+nb3U4+Aec/hwTl9x3GBS4GXqShr7AQFHL4bGfmh5+VcDwSkfUsv4RSkuGRZiZF
- yg85+sI+hJwMB+38Jr0hfVgj+1t2I5Uu61d2Iwl5g+LpJXoQkd9tXF3FAPpyuSuCmZxL
- BTuQ==
+ h=mime-version:from:date:message-id:subject:to;
+ bh=UDupd6e94gZGRB2bo+o9sF2jIpCp+v1uoAJkJ/i0uDw=;
+ b=can8lfNBG5m7jXRKIZMh6tppap5kSz7x6T9WFCQ7Qdi56dY3xGTD+V+AZsIzxuM61k
+ pzGt5W0RK5z6sSXDj3Owds+O7lkXNmOVLMlz6bafHVLoocHd28fEgS9imaaY2IveNSjA
+ pJMwKvWkELx1/atFPka2UCXk2hoUf0h6LHFS5J8Tu8Z4EQJX0YAsIrCOw6RanUxM560j
+ 9BhGoS3o461ANMDKOdz6uQuq9xtz2HrELjOPqklioLLVWCPg2UVXGX8IB0LzvQXMD3hW
+ 1af/0yF3tKGIdr6JzgP73B/UqWr+TJk8heaUzWHqpN2dFIsUj32Ha8Vi96gGuBghZjd/
+ plFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=rvzCg1g8gmMJGWyH2mVG2fw15B/D+Pvw2N6yAqcWP5k=;
- b=fo0U7L7FgKim5LQcMSWcmyl6bqyDw2fjQQXZn4rc2JD2glL6S5hktyCCMwbA1d7Yrt
- 5oMxnHgEqLdNCP/cqPhMiiiwO6iDBq0vJNtmhpaAkuf1cBxH7WZ+1YhDkNNKRMPYx798
- Fg9oEEePPrQjdLD0baD9jiR+GgQ319x4eyZWVvRdfdzgTsUTndFAncurdRgqaHjvWBwR
- bOZC3dzHbBiwojpPuWGCRhpWMQS1gCZ/+vjNj+UYIXqubsQ+y97WLhi0kHYp2jI0SwmK
- fjwN7Ck3v5bjXN5GUUlVLsd5LCVe8U/IcXAKtmyaGyU7Svo5fRjKRyILFXq2MM6K/Z/5
- 9I/w==
-X-Gm-Message-State: APjAAAXL/vyoZx7oI9+jtyl1qTui5TaA4bR7wxt9vnXl2s4JLnyIZc+n
- WcNIRh9GoGEDXsNuSi8e1nT5UyvaD1SPtbI859k=
-X-Google-Smtp-Source: APXvYqxKCAGxOWHtntWZacB5I32b7NC59QCEvjsI0pUnYDt7Ms/gdnscTuWLjI6xyOvqfiji25LdEikhwuIDOkLJuhQ=
-X-Received: by 2002:a2e:5304:: with SMTP id h4mr31070571ljb.75.1582576640879; 
- Mon, 24 Feb 2020 12:37:20 -0800 (PST)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=UDupd6e94gZGRB2bo+o9sF2jIpCp+v1uoAJkJ/i0uDw=;
+ b=Q9sAzC6fmdA60B1lLVWaPENWjz4aP9o5ZEEtC1gDEXWF8GakZcduhbl8jy3ryR1GIn
+ cP5goojVdQhQKHjfwUqrgEbHVeqF1os0vhxAyhZ4ARvOCuMwWyvGthdbRhxc+Vz7HEBA
+ zNxaABNcYgajEgEw6mq4C4rI6KBGB78BM05jNRg5deYVpgnVLOO0k1FHaJxzKPKvzz7Z
+ aK3zySWklg3T6YwH09424guqyKsGmi0XOx+wmnqchJQlL83lpqHWXi92AckGx0GwGQfH
+ xdfwdJovUfwGBhWPnN+5mrdcmGYHXTSCO2PIg+PuUfHgs0S6z53XIAOcytSUL1NusVAA
+ laOw==
+X-Gm-Message-State: APjAAAW8QmCHJXP4UfnW01WXMzrOjVLhndAHEjeZYSaqeQ4pHbZoXHF4
+ 8it3vkEvwglkrhBd14f/erhbRx/JEHZ1XZoO5URUJHNrQF4=
+X-Google-Smtp-Source: APXvYqwLd5EVam3imjS3NthFaC1BogwN2pD36anPA/KxyVRaGkmXPZCD2GnGscnvItOqn422HT8d2wCKk8QfB/EAolg=
+X-Received: by 2002:ab0:7792:: with SMTP id x18mr28094945uar.116.1582640825148; 
+ Tue, 25 Feb 2020 06:27:05 -0800 (PST)
 MIME-Version: 1.0
-References: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
- <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
- <CAC-fF8T6dGjDbH3YFpZpEA+Rtoppj+sJ4bZtt9ZDMfH85_UuUg@mail.gmail.com>
- <29a0fc8162de6bde7ea127956efb7de29b4fce3e.camel@redhat.com>
- <CAC-fF8QyT+t0Cmi3BdJe8kJ-LRL_BvvhQr76GwF2t3ZQJWsDDw@mail.gmail.com>
- <dc76b713e4e4c94d396a0d95ebb5145c63ce4a4d.camel@redhat.com>
-In-Reply-To: <dc76b713e4e4c94d396a0d95ebb5145c63ce4a4d.camel@redhat.com>
-Date: Mon, 24 Feb 2020 21:37:09 +0100
-Message-ID: <CAC-fF8RrV1XtnaB0va3Bv8++c17qXKh+JtdSUqS00Eg-3OZUfQ@mail.gmail.com>
-Subject: Re: ADV190023 | LDAP channel binding support
-To: Simo Sorce <simo@redhat.com>
+Date: Tue, 25 Feb 2020 14:26:51 +0000
+Message-ID: <CAGYhc9ks4Fg1tYxb4XrK92AUuyjrPpO17aBVcdJUkX_dLJ0Acw@mail.gmail.com>
+Subject: access denied for network sam logon
+To: samba-technical@lists.samba.org
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,68 +65,63 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@gmail.com>
-Cc: Stefan Metzmacher <metze@samba.org>, Andreas Schneider <asn@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
+From: moore chestnut via samba-technical <samba-technical@lists.samba.org>
+Reply-To: moore chestnut <moore.43132@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Feb 24, 2020 at 9:28 PM Simo Sorce <simo@redhat.com> wrote:
->
-> On Mon, 2020-02-24 at 17:41 +0100, Isaac Boukris wrote:
-> > On Mon, Feb 24, 2020 at 2:35 PM Simo Sorce <simo@redhat.com> wrote:
-> > > On Sat, 2020-02-22 at 20:09 +0100, Isaac Boukris wrote:
-> > > > On Tue, Feb 18, 2020 at 5:48 PM Stefan Metzmacher <metze@samba.org> wrote:
-> > > >
-> > > > > I think we need input from dochelp to answer 2 questions:
-> > > > > 1. which kind of channel bindings are expected/used by windows?
-> > > > >    I assume tls-server-end-point. I guess MS-ADTS would be the place
-> > > > >    to define these details for ldaps.
-> > > >
-> > > > I noticed more another reference to channel-bindings in MS-KILE, I
-> > > > think maybe KERB_AP_OPTIONS_CBT ad element is the way to tell the
-> > > > server to require CB when LdapEnforceChannelBinding is set to 1 only,
-> > > > needs testing.
-> > > >
-> > > > 3.2.5.8 AP Exchange
-> > > > If ChannelBinding is set to TRUE, the client sends
-> > > > AD-AUTH-DATA-AP-OPTIONS data in an AD-IF-
-> > > > RELEVANT element ([RFC4120] section 5.2.6.1). The Authorization Data
-> > > > Type AD-AUTH-DATA-AP-
-> > > > OPTIONS has an ad-type of 143 and ad-data of KERB_AP_OPTIONS_CBT
-> > > > (0x4000). The presence of
-> > > > this element indicates that the client expects the applications
-> > > > running on it to include channel binding
-> > > > information ([RFC2743] section 1.1.6 and [RFC2744]) in AP requests
-> > > > whenever Kerberos
-> > > > authentication takes place over an "outer channel" such as TLS.
-> > > > Channel binding is provided using the
-> > > > ChannelBinding variable specified in section 3.2.1.
-> > > >
-> > > > 3.4.5
-> > > > If the ApplicationRequiresCBT parameter (section 3.4.1) is set to
-> > > > TRUE, the server, if so configured,
-> > > > SHOULD<67> return GSS_S_BAD_BINDINGS whenever the AP exchange request
-> > > > message contains
-> > > > an all-zero channel binding value and does not contain the
-> > > > AD-IF-RELEVANT element ([RFC4120]
-> > > > section 5.2.6.1) KERB_AP_OPTIONS_CBT.
-> > >
-> > > Very interesting, we should add support to decode this AD in MIT krb5
-> > > and exposes it via naming attributes or context options, whatever makes
-> > > the most sense.
-> >
-> > Yeah, although I can't really think of something that would work,
-> > given we want to know that before calling accept() on the input token.
-> > On clients supporting CB, maybe we can add this ad-element via a
-> > gss_set_name_attribute() call, not sure.
->
-> We might even just see there are CBs in gss_init_sec_context() and just
-> do it automatically. The only question is whether this can cause
-> interop issues which requires a more nuanced use of these.
+Hello samba folks,
 
-Right, doing it automatically make sense. I think an unknown
-ad-element in ad-if-relevant container shouldn't cause interop issues.
+I'm very interested in network based logon ( netlogon over rpc over tcp).
+Have been doing alot of reading from the hack samba page and code browsing
+per the recommendations on https://www.samba.org/samba/devel/
+Also reading
+https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-nrpc/ff8f970f-3e37-40f7-bd4b-af7336e4792f
 
+
+So to simplify things for my own understanding, I have created a client
+with the sole purpose of netlogon over rpc over tcp with view to do ntlm
+pass thru.
+
+Here is a summary of the flow.
+
+NTLM enabled browser client and a bespoke http server.
+The http server is a machine that I have added computer account to MS
+active directory domain - essentially like torture_join_domain
+The account flags is just set for ACB_WSTRUST only.
+cli_credentials_set_secure_channel_type() with SEC_CHAN_WKSTA
+
+With creds for the http server machine, I have been able to use
+dcerpc_pipe_connect_b() to establish a schannel.
+
+all looks reasonably good on wireshark per my reading of the code and spec.
+I can see the epm and server request challenge req/resp and server
+authenticate2 request response.
+
+I can then do a ntlm handshake with the client.
+Save the random nonce from the generated type 2 and get the LM resp and
+NTLM response from the type 3 message.
+
+These are then used to build up the netr_NetworkInfo and
+netr_LogonSamLogonEx and call dcerpc_netr_LogonSamLogonEx_r()
+
+But the response from AD, is access denied.
+
+From the MS NRPC spec, it says:
+3.5.4.5.1 NetrLogonSamLogonEx (Opnum 39)
+"If the server cannot service the request due to an implementation-specific
+condition, the server returns STATUS_ACCESS_DENIED."
+
+And in section:
+3.4.5.3.2 Calling NetrLogonSamLogonEx
+it says:
+"On receiving STATUS_ACCESS_DENIED, the client SHOULD<104> re-establish the
+secure channel with the DC."
+
+The random password for the machine computer account has not changed. Would
+there be value in actually reestablishing the schannel? is there any known
+subtlety on AD side?
+
+Any suggestions on approach, methods used and the access denied?
+
+Thank you.
