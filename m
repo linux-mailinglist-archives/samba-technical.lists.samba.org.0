@@ -2,56 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16E5216C3DF
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Feb 2020 15:28:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9DA016EF84
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Feb 2020 21:01:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=yYqyeuI/of9A069uFI42HcoeZJ+YDh489i2p/gem3KY=; b=Bgo0TJavE9PSzRlQPykvGv7eq8
-	vOIt6jjBJj3v4Sl5mIIJbOxQxFSejlmxW8FmvEfi8aguFIF4G03c6cbyvts26ovJ6aXVpsX0Sp44W
-	bKw9jQ795zs5FJkGH188Yn54y8Jd78r/vgIapXGuLbM1MY3k5yIE1tRuTgJlrSc1WIgvtoURj/En6
-	24kouj5KMMCQ81pDMC13gwpqxvgqpY2AO001g95Mw4kBz9T01MbSyFHJ5v/vJjdAtTYPLJi3XvUlu
-	Vf3tPQZaMreF47peYcpYmFKxbZPbRKz0Yuqs6mb2BTImMMiqkTxLFyvwD+6t3gh0XLfEU8ChT8s8+
-	MfHazAKg==;
-Received: from localhost ([::1]:36666 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=+A2BiEqdZl0HYACbeyq92PSgT1rWdqBQY6Sq5LFytiI=; b=d+PQ5oMTZAfHE165YxB6+qBwIM
+	A+4qEz+TpZI6vL/arD2MZsH9HpCGgjVra2Vn6wIJ09k5civ9W0BIFmM1d95AhF3e0aE2W/UMMEj7D
+	5ZPFjFm8iHL5kl+bCzP9BWUKLk3Im2ZECfMKnrE2gSG0k+clZbFS1XSoYfPaGLABZkSKhggoeVaNd
+	HEnANfvmOs7TSSYiDMRPqli2ymsUh/wesQvxGXxSDCRpBTZ57Z/0cRvtnjXz7GFyx7rimCQp0U8xl
+	6LQAMINMDl1QmBDNGjpAHdLANiXeo6TFausrPFalvXexsxSxbRzuGmb8Bpkgib8mj6DjkvGFsb1Ct
+	bzZm5THw==;
+Received: from localhost ([::1]:47494 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j6bB6-00BdIg-CJ; Tue, 25 Feb 2020 14:27:16 +0000
-Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930]:42437) 
+	id 1j6gNW-00BewT-0j; Tue, 25 Feb 2020 20:00:26 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35264) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j6bB0-00BdIZ-Pe
- for samba-technical@lists.samba.org; Tue, 25 Feb 2020 14:27:13 +0000
-Received: by mail-ua1-x930.google.com with SMTP id p2so4559948uao.9
- for <samba-technical@lists.samba.org>; Tue, 25 Feb 2020 06:27:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=UDupd6e94gZGRB2bo+o9sF2jIpCp+v1uoAJkJ/i0uDw=;
- b=can8lfNBG5m7jXRKIZMh6tppap5kSz7x6T9WFCQ7Qdi56dY3xGTD+V+AZsIzxuM61k
- pzGt5W0RK5z6sSXDj3Owds+O7lkXNmOVLMlz6bafHVLoocHd28fEgS9imaaY2IveNSjA
- pJMwKvWkELx1/atFPka2UCXk2hoUf0h6LHFS5J8Tu8Z4EQJX0YAsIrCOw6RanUxM560j
- 9BhGoS3o461ANMDKOdz6uQuq9xtz2HrELjOPqklioLLVWCPg2UVXGX8IB0LzvQXMD3hW
- 1af/0yF3tKGIdr6JzgP73B/UqWr+TJk8heaUzWHqpN2dFIsUj32Ha8Vi96gGuBghZjd/
- plFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=UDupd6e94gZGRB2bo+o9sF2jIpCp+v1uoAJkJ/i0uDw=;
- b=Q9sAzC6fmdA60B1lLVWaPENWjz4aP9o5ZEEtC1gDEXWF8GakZcduhbl8jy3ryR1GIn
- cP5goojVdQhQKHjfwUqrgEbHVeqF1os0vhxAyhZ4ARvOCuMwWyvGthdbRhxc+Vz7HEBA
- zNxaABNcYgajEgEw6mq4C4rI6KBGB78BM05jNRg5deYVpgnVLOO0k1FHaJxzKPKvzz7Z
- aK3zySWklg3T6YwH09424guqyKsGmi0XOx+wmnqchJQlL83lpqHWXi92AckGx0GwGQfH
- xdfwdJovUfwGBhWPnN+5mrdcmGYHXTSCO2PIg+PuUfHgs0S6z53XIAOcytSUL1NusVAA
- laOw==
-X-Gm-Message-State: APjAAAW8QmCHJXP4UfnW01WXMzrOjVLhndAHEjeZYSaqeQ4pHbZoXHF4
- 8it3vkEvwglkrhBd14f/erhbRx/JEHZ1XZoO5URUJHNrQF4=
-X-Google-Smtp-Source: APXvYqwLd5EVam3imjS3NthFaC1BogwN2pD36anPA/KxyVRaGkmXPZCD2GnGscnvItOqn422HT8d2wCKk8QfB/EAolg=
-X-Received: by 2002:ab0:7792:: with SMTP id x18mr28094945uar.116.1582640825148; 
- Tue, 25 Feb 2020 06:27:05 -0800 (PST)
+ (Exim) id 1j6gNK-00BewM-Vf
+ for samba-technical@lists.samba.org; Tue, 25 Feb 2020 20:00:17 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=+A2BiEqdZl0HYACbeyq92PSgT1rWdqBQY6Sq5LFytiI=; b=zyl3UiWKosE82OKTsyb36FXjlQ
+ Wupdgb3K2srtZMVKakxwiHVl6p8jfnt4o6+evyGKV0GTPuljcYbUfZzNn8N/bdU5qhVt7nXubSC72
+ 0oqZXyK42DRJZ2weviLUzcG+pXarkQg3PvcJQBhJg1ivxVWCraqKD7KMdQFBTH+8a9qGohZczLxit
+ NS194j95VJxptjT/+X8bnK+o5yaKElu0pGj8bsN8Kb7L33eQCK19IiGJauDvXL0H/cZkrz1PV3QM+
+ 9rNd0SDqL28grA1rFakzda8CjH9pF0p9VDBEd5F1BteTvVaRn6hVGq3N09MutOppKj4TiMoqCGlAY
+ +MsGV1h1Gi3QdLzTz9fFjHmm/x1M8AVLoV0319oKhPK0GQatd5j9oU/2iswEDqjpOY4Ifx4mLR5n1
+ Tj7SNzBa85InrB5RHV0XIdj/o0sJqkmaHCEKwg51iDvAej/PONUu5itusBjSgzxiZmtUj/AY3Hjag
+ zv9CTgVoEJnulTnLNg2y0IOa;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j6gNJ-0007J1-SL; Tue, 25 Feb 2020 20:00:14 +0000
+Date: Tue, 25 Feb 2020 12:00:10 -0800
+To: David Mulder <dmulder@suse.com>
+Subject: Re: rpc.spoolss and rpc.wkssvc use RAP
+Message-ID: <20200225195856.GA2116@jeremy-ThinkPad-X1>
+References: <7b5a4761-1490-7aac-5ee5-1271eae751d2@suse.com>
 MIME-Version: 1.0
-Date: Tue, 25 Feb 2020 14:26:51 +0000
-Message-ID: <CAGYhc9ks4Fg1tYxb4XrK92AUuyjrPpO17aBVcdJUkX_dLJ0Acw@mail.gmail.com>
-Subject: access denied for network sam logon
-To: samba-technical@lists.samba.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <7b5a4761-1490-7aac-5ee5-1271eae751d2@suse.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,63 +55,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: moore chestnut via samba-technical <samba-technical@lists.samba.org>
-Reply-To: moore chestnut <moore.43132@gmail.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello samba folks,
+On Fri, Feb 21, 2020 at 08:42:48AM -0700, David Mulder via samba-technical wrote:
+> When looking to create SMB2 tests for spoolss and wkssvc, I was blocked
+> because they make calls to RAP, which is deprecated with SMB2 (according
+> to
+> https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-rap/6676494b-2a48-41dc-8289-009895f22ab9).
+> Specifically these tests use smbcli_rap_netservergetinfo(). I couldn't
+> think of the best alternative here. Anybody have any thoughts how to
+> work around this?
 
-I'm very interested in network based logon ( netlogon over rpc over tcp).
-Have been doing alot of reading from the hack samba page and code browsing
-per the recommendations on https://www.samba.org/samba/devel/
-Also reading
-https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-nrpc/ff8f970f-3e37-40f7-bd4b-af7336e4792f
+ think all they're using this for is:
 
+rap_get_servername()
 
-So to simplify things for my own understanding, I have created a client
-with the sole purpose of netlogon over rpc over tcp with view to do ntlm
-pass thru.
+to get the target server NetBIOS name.
 
-Here is a summary of the flow.
+I think there are other DCE calls to
+get this name (can't remember offhand
+which ones but I know they're there :-)
+or just pass in the server name as a
+test parameter.
 
-NTLM enabled browser client and a bespoke http server.
-The http server is a machine that I have added computer account to MS
-active directory domain - essentially like torture_join_domain
-The account flags is just set for ACB_WSTRUST only.
-cli_credentials_set_secure_channel_type() with SEC_CHAN_WKSTA
+Shouldn't be a blocker long term I think.
 
-With creds for the http server machine, I have been able to use
-dcerpc_pipe_connect_b() to establish a schannel.
+Jeremy.
 
-all looks reasonably good on wireshark per my reading of the code and spec.
-I can see the epm and server request challenge req/resp and server
-authenticate2 request response.
-
-I can then do a ntlm handshake with the client.
-Save the random nonce from the generated type 2 and get the LM resp and
-NTLM response from the type 3 message.
-
-These are then used to build up the netr_NetworkInfo and
-netr_LogonSamLogonEx and call dcerpc_netr_LogonSamLogonEx_r()
-
-But the response from AD, is access denied.
-
-From the MS NRPC spec, it says:
-3.5.4.5.1 NetrLogonSamLogonEx (Opnum 39)
-"If the server cannot service the request due to an implementation-specific
-condition, the server returns STATUS_ACCESS_DENIED."
-
-And in section:
-3.4.5.3.2 Calling NetrLogonSamLogonEx
-it says:
-"On receiving STATUS_ACCESS_DENIED, the client SHOULD<104> re-establish the
-secure channel with the DC."
-
-The random password for the machine computer account has not changed. Would
-there be value in actually reestablishing the schannel? is there any known
-subtlety on AD side?
-
-Any suggestions on approach, methods used and the access denied?
-
-Thank you.
