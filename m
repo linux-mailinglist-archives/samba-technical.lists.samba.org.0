@@ -2,59 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 801111706DD
-	for <lists+samba-technical@lfdr.de>; Wed, 26 Feb 2020 18:59:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5931D17081D
+	for <lists+samba-technical@lfdr.de>; Wed, 26 Feb 2020 19:55:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=p4GsBFDQ4IQsEk0OqXkHNQ0hSxYHmVqmg2/DSU7zXzM=; b=keG4iIi0/ebvVG6WeWr3MzgSdw
-	LLhUFMr+5+K/Od7J/AkNCCtBVHiJAV0eMhQzxg1JQOhxWRj8ti1baFuzGm2tXLilt95P3Zp1ANhQt
-	cIrOVjTsMU+kD2+vZaFS6BABEqbg00twJM0KxY1JqY/aDgARCMEv6j8SRJ2dpus8hM62YyQrETR1t
-	KhBcNC5lEfx2P4MxI5LVwmjD9lpqpx2wziZbX4293Frag+HHoWXsssGDHuowYj9b8xeB/T+jiCRAI
-	QvBVAeH/2TVdmp8SRlBqNHdjv6us7J09NGNqYNNQkG7yHEk4qI/TOx47HCBWupfbXyBXD0x0dnD5C
-	Z4WUbnqQ==;
-Received: from localhost ([::1]:24366 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=sSjFVmqtKPBgfGr0h7t+EILRgcnsjaiy3qlT2FJqOZM=; b=NWjC08JOAjQjterg01Sn8eegMw
+	NGsVFt5AvyZacQAQwaCiFI7GeD660HhFd7Lppj/N5XJCfo4DnjDIw5zgFk1DcFK0+vUYcZduiiFsL
+	5RHejUcDUptEtOdcJYcx5L9xjQ4kkVSStvhSnjRXBvrmnIda3Ac/Qk+6O5onS/haRC4hpRv4AdYj8
+	mz6lEYaNe2LI4R3I6vmzUuG2BtfqitDSVcca0LV78+IskYm64cnKzmuV0M4anavC1ZQfXrt2UYVix
+	3EWjbTmW17mftMa3VgeKvY7M7v9zd2NwPKDDAMx58SKqUC3o1D1aR7DWVkAIqV74bl2K6gTuB9MqD
+	zSuTACWg==;
+Received: from localhost ([::1]:25540 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j70xY-00Bq3P-JN; Wed, 26 Feb 2020 17:59:00 +0000
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331]:51828) 
+	id 1j71pn-00BqJ0-CH; Wed, 26 Feb 2020 18:55:03 +0000
+Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133]:44291) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j70xQ-00Bq3I-RW
- for samba-technical@lists.samba.org; Wed, 26 Feb 2020 17:58:55 +0000
-Received: by mail-wm1-x331.google.com with SMTP id t23so235030wmi.1
- for <samba-technical@lists.samba.org>; Wed, 26 Feb 2020 09:58:49 -0800 (PST)
+ (Exim) id 1j71pi-00BqIt-Gd
+ for samba-technical@lists.samba.org; Wed, 26 Feb 2020 18:55:00 +0000
+Received: by mail-lf1-x133.google.com with SMTP id 7so97886lfz.11
+ for <samba-technical@lists.samba.org>; Wed, 26 Feb 2020 10:54:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :content-transfer-encoding;
- bh=p4GsBFDQ4IQsEk0OqXkHNQ0hSxYHmVqmg2/DSU7zXzM=;
- b=txk9x7m10wbEnQB83XIEdPgsfGhURpwjbLfZV5CWsiyhZueYQjFnmj3OGmlW26g/LX
- JE+Z0lkp1TgEb+7aE+HhSWt6e1gxnLM5v59ij1XQv7RWQVPyvB1FzfqgACpt3IVK4+E9
- pNgcU1DpAUlUkDFowueFAUOKg+tRQ2x+EWuo/PCwL9/2NmKXS7jYcFhGkrhiPvLYT/F5
- axeQaCAuRdgMe1hVZdL+1Iuu3SIJoDC1YMRxEh5jvV5ct3eloyDSM0RfzdgWT5YMeIyf
- vDZJdagWE2Y9kuX3ISSSsxTky+Uc34lrkPHqbU2qN4WdgzIpknULYbRoJd2MAUG9KTXh
- B5lA==
+ :cc:content-transfer-encoding;
+ bh=sSjFVmqtKPBgfGr0h7t+EILRgcnsjaiy3qlT2FJqOZM=;
+ b=QzkOcRvGQ7YB1tcwWCmCuvrZp62eNFXnjq3oUJhVz9GmUbkfkgW8t6C8XgqOB8Yg8U
+ qdyQ3fTsHJBaTDPfUIZo3vkx2SSk8bJTsHS4MJH6FS9St37XPc5Z7cUk4GJET5EfKpH5
+ 9T/FefNbISdixq037z00hUOaIkSncCTeIOnsNx9XStwTO0odKAe41qIyMmX3NUK0xHMa
+ PQiS5MA1kpJMdrkk8UcvrkI53TsCnvg98kVdDEmpkcDtYR4/oy9AhCHgZHkSKEx3PfzS
+ 8S4v7OTYuWAZzHju/gkOGrGLY59xUBBUSRaDkg5B1U1uUNx5Wpg11nk10CfEVwxIAJ8B
+ 3uUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:content-transfer-encoding;
- bh=p4GsBFDQ4IQsEk0OqXkHNQ0hSxYHmVqmg2/DSU7zXzM=;
- b=pyaRxpdPGzlfI6VKdZ+gZDP6mZhp5JtcERavd9+pWvB6lqEhLG53YGArrF0fZPkmbI
- 0cyRkHZjfh0ykwqoY+Uxh7PDrTWiYBKec7SAxHqNFGgyS1zXyABeGG1oA5GK7DVpf5MA
- gCdKL6vytueQ+WdtUNMILzKpiBnEJ+NzuvcRF5scFDM3aSLToB7vQHZxh3lWWSn+t9tn
- VwP7qY9CtFy+JDz01WX4pR42NuJC5/S+0nG3ezNaYoJwhOFifToZKPphwR8dEc/6tSJP
- 0qAmbXdjbk7cl2i35iyos7a7zDOsORHk3/16fW/1swj4ejgaZZUlpCw7Ik/vs15U/jPU
- z3ew==
-X-Gm-Message-State: APjAAAWFprhupK8haE6uHwerG/BCbUtRGDkUOcYm6WJ37LkLj3bxb895
- YlpckaXDaJInEOSm0Y7hs4PIgfCvO4sblDi8s/Gv2dsE
-X-Google-Smtp-Source: APXvYqw7oSVcEgXZmZsRu/jVmUYB37cDj+xv9fZpe+TcNfFaYsDXBTK/ZvUHythiZMuDKRLRoohFbGzNmSs59DZ2MgU=
-X-Received: by 2002:a7b:c204:: with SMTP id x4mr96949wmi.20.1582739928569;
- Wed, 26 Feb 2020 09:58:48 -0800 (PST)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=sSjFVmqtKPBgfGr0h7t+EILRgcnsjaiy3qlT2FJqOZM=;
+ b=iZAI+J/SMQyO/ktE0FWXPVtFMPWnJFLYQF7ARBTPWuZT2OxSQOYARlir5zhdZ8aL0w
+ Gn7laeK2Yagw1RAdgLKgQ104qS0ORPWPEFzoaFtcVnHDzMS7N8JTeQc/Z1XZSulO819D
+ 2tXM8n2mrlQOb3cO6eQNl3BCyZiPfGWqqRwlz1zxrIZR+3NjrSrssgFcla4GLjL4oQcn
+ t2IB0Z3FA5OfPbKTi65g/k5T7nPW/UHlK3SseZ/jtB9ZY/PEer5nPp+Q7brQRMEVivkU
+ DRal3td+DX4n75/ftNMyWQx0/iyxgtD6ND7nxl7VH5Bk4FMhmXso4Jsa1mplF54Coac6
+ AjoA==
+X-Gm-Message-State: ANhLgQ2mwxI69Mm9vqnQXbWxjpZqV5ohbJ4pDL6x8Dd1oCc2SBeBFJA8
+ v1pUfIIKVosbgKzgIMdIQm4LGLMUtjw4QJkqz0Ma9CX+L8M=
+X-Google-Smtp-Source: ADFU+vseoogeusiwtTcDF9gTmloNdoXpN3NLoPLYVIPunQDTQgoK0aWRAqZ1pi08Wd/UQHLkcAezmEUf6gLdoo3T0XE=
+X-Received: by 2002:a19:6b0e:: with SMTP id d14mr50990lfa.46.1582743297255;
+ Wed, 26 Feb 2020 10:54:57 -0800 (PST)
 MIME-Version: 1.0
-References: <CACyXjPxG-_MQst10GR61-A4LNe1bg4LE9NRCGH3myX=hSUN3iw@mail.gmail.com>
- <87eeuh44r3.fsf@suse.com>
-In-Reply-To: <87eeuh44r3.fsf@suse.com>
-Date: Wed, 26 Feb 2020 09:56:02 -0800
-Message-ID: <CACyXjPxumYsEHxOcn=Ho=ZuUNmThsYfzWy1VO=tLq-MEvEa+tA@mail.gmail.com>
-Subject: Re: Anyone seen SMB2 signing issues with Hitachi HNAS?
-To: samba-technical <samba-technical@lists.samba.org>
+References: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
+ <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
+ <CAC-fF8SF+FUQBWxsPnSRtAXEqE=TWBm0Meb8swERSvHqpQf0yw@mail.gmail.com>
+ <CAC-fF8SFX0ndOpY2w9zASJd8FagnT_6Mh0Xd4=ejQKQYDcK-uQ@mail.gmail.com>
+ <374481b4-af4c-7b0b-cb80-feec96046b53@samba.org>
+ <CAC-fF8RVr4qA1HSthHiRn1eaWWxwN=ke8EtfZPMbQmK+Wf+ajQ@mail.gmail.com>
+In-Reply-To: <CAC-fF8RVr4qA1HSthHiRn1eaWWxwN=ke8EtfZPMbQmK+Wf+ajQ@mail.gmail.com>
+Date: Wed, 26 Feb 2020 19:54:45 +0100
+Message-ID: <CAC-fF8Quxxrx+gaqBMtzaB2zdppJNWUG7OQ70BM_qP4k-b2aMQ@mail.gmail.com>
+Subject: Re: ADV190023 | LDAP channel binding support
+To: Stefan Metzmacher <metze@samba.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -70,40 +74,126 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
+From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Isaac Boukris <iboukris@gmail.com>
+Cc: Andreas Schneider <asn@samba.org>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Feb 26, 2020 at 9:50 AM Aur=C3=A9lien Aptel <aaptel@suse.com> wrote=
+On Wed, Feb 26, 2020 at 3:57 PM Isaac Boukris <iboukris@gmail.com> wrote:
+>
+> On Wed, Feb 26, 2020 at 3:39 PM Stefan Metzmacher <metze@samba.org> wrote=
 :
->
-> Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
-> writes:
-> > Tried connecting with smbclient and on the Session Setup response,
-> > which is signed we exit with "Bad SMB2 signature for message".
 > >
-> > I tested against a Windows 2012 DC and a capture shows that the DC is
-> > also signing the SMB2 Session Setup response and smbclient has no
-> > problems with it.
+> > Am 26.02.20 um 15:21 schrieb Isaac Boukris via samba-technical:
+>
+> > So for NTLMSSP the presence of MsvChannelBindings means strict checking
+> > of the provided channel bindings, even if 16 zero bytes are send.
 > >
-> > Is this something broken with the HNAS?
+> > For kerberos only AD-AP-OPTIONS means strict checking and not ignoring
+> > 16 zeros.
 >
-> * Signing key generation changed between SMB 3.0 and 3.11, is the HNAS
->   using the same dialect your 2012 DC?
->
-> * Signing keys are generated based on the Session Key (which comes from
->   kerberos or NTLMSSP) and it uses time as input. Maybe check the clocks
->   are not too far off from each other.
+> So they are the same flag I guess.
 
-Thanks for that. The HNAS supports SMB 2.1 ...
+Oh i misread you, they slightly differ then.
 
-Clocks may be the issue.
+As about the net-ads / ldapsearch failure, this is the error:
 
---=20
-Regards,
-Richard Sharpe
-(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
-=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
-=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
+[2020/02/26 19:18:16.627426,  1]
+../../source4/auth/gensec/gensec_gssapi.c:806(gensec_gssapi_update_internal=
+)
+  GSS server Update(krb5)(1) Update failed:  Incorrect channel
+bindings were supplied: Success
+
+Although they send the same bindings...
+
+ldapsearch - fails:
+
+authenticator
+    authenticator-vno: 5
+    crealm: SMB.NET
+    cname
+    cksum
+        cksumtype: cKSUMTYPE-GSSAPI (32771)
+        checksum: 100000009e41a51ed7c90b3597bc7217c4d3c41e3a010000
+        Length: 16
+        Bnd: 9e41a51ed7c90b3597bc7217c4d3c41e
+        .... .... .... .... ...0 .... .... .... =3D DCE-style: Not using DC=
+E-STYLE
+        .... .... .... .... .... .... ..1. .... =3D Integ: Integrity
+protection (signing) may be invoked
+        .... .... .... .... .... .... ...1 .... =3D Conf:
+Confidentiality (sealing) may be invoked
+        .... .... .... .... .... .... .... 1... =3D Sequence: Enable
+Out-of-sequence detection for sign or sealed messages
+        .... .... .... .... .... .... .... .0.. =3D Replay: Do NOT
+enable replay protection
+        .... .... .... .... .... .... .... ..1. =3D Mutual: Request that
+remote peer authenticates itself
+        .... .... .... .... .... .... .... ...0 =3D Deleg: Do NOT delegate
+    cusec: 721923
+    ctime: 2020-02-26 18:43:22 (UTC)
+    subkey
+    seq-number: 840038277
+
+Windows client - success:
+
+authenticator
+    authenticator-vno: 5
+    crealm: SMB.NET
+    cname
+    cksum
+        cksumtype: cKSUMTYPE-GSSAPI (32771)
+        checksum: 100000009e41a51ed7c90b3597bc7217c4d3c41e02400000
+        Length: 16
+        Bnd: 9e41a51ed7c90b3597bc7217c4d3c41e
+        .... .... .... .... ...0 .... .... .... =3D DCE-style: Not using DC=
+E-STYLE
+        .... .... .... .... .... .... ..0. .... =3D Integ: Do NOT use
+integrity protection
+        .... .... .... .... .... .... ...0 .... =3D Conf: Do NOT use
+Confidentiality (sealing)
+        .... .... .... .... .... .... .... 0... =3D Sequence: Do NOT
+enable out-of-sequence detection
+        .... .... .... .... .... .... .... .0.. =3D Replay: Do NOT
+enable replay protection
+        .... .... .... .... .... .... .... ..1. =3D Mutual: Request that
+remote peer authenticates itself
+        .... .... .... .... .... .... .... ...0 =3D Deleg: Do NOT delegate
+    cusec: 73
+    ctime: 2020-02-26 18:24:27 (UTC)
+    subkey
+    seq-number: 2072188652
+    authorization-data: 1 item
+        AuthorizationData item
+            ad-type: AD-IF-RELEVANT (1)
+            ad-data:
+3081a9303fa0040202008da137043530333031a003020100a12a04280000000000300000=E2=
+=80=A6
+                AuthorizationData item
+                    ad-type: AD-TOKEN-RESTRICTIONS (141)
+                    ad-data:
+30333031a003020100a12a04280000000000300000f450fe871880d38a409147a4f8e2d7=E2=
+=80=A6
+                        restriction-type: 0
+                        restriction:
+0000000000300000f450fe871880d38a409147a4f8e2d79a2107498eaab6449f374a2ec1=E2=
+=80=A6
+                AuthorizationData item
+                    ad-type: AD-LOCAL (142)
+                    ad-data: b0b55b71c9010000876ec90000000000
+                AuthorizationData item
+                    ad-type: AD-AP-OPTIONS (143)
+                    ad-data: 00400000
+                        AD-AP-Options: 0x00004000, ChannelBindings
+                            .... .... .... .... .1.. .... .... .... =3D
+ChannelBindings: Set
+                AuthorizationData item
+                    ad-type: AD-TARGET-PRINCIPAL (144)
+                    ad-data:
+6c006400610070002f007300640063002e0073006d0062002e006e006500740040005300=E2=
+=80=A6
+                        Target Principal: ldap/sdc.smb.net@SMB.NET
 
