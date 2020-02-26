@@ -2,58 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3DC6170418
-	for <lists+samba-technical@lfdr.de>; Wed, 26 Feb 2020 17:16:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 592B3170511
+	for <lists+samba-technical@lfdr.de>; Wed, 26 Feb 2020 17:59:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=+zfQwVf9il0QnCDWYLbCIDKq2Cu6oGQroit8fzSLQJs=; b=xqYOVic84UA0rSa6wfkajTk/3y
-	X4MDsfTg+13UpMg7r6qqtyOuQk5BK7QIAKjULjHVqm3VoPqh5uHQRScolNnhH1leVWbKbrNonEXqm
-	CxnI09A/P5uCpnZY3adtoYXnSvuyZ3CRxuAkXLa3h6ivbmZO5nLgABLhua4BXpM1tteL9yB26mpI/
-	Ll1T96w+ptbLn6hymHKSbtzQjIaGVM9rVnQQ2Kct2PQx18fkTC7Vp2qtbXs1/SzNRb6DbV8uMj4JQ
-	cmppKv7GVKiXQrHO1pMl8bSLFOAm5BEBgLlY15mzvcRelzIPHTYUK3LcvZwK7WX92J8uRhHp7xrUu
-	Z1wFNHcA==;
-Received: from localhost ([::1]:19636 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=+mjpoGRs2HVw1iIh0gm1q1r1c5vkhfAX83Fjfoc/Kwo=; b=tfK6JTanmqdVNryquHqWalX4H0
+	ybaJULgSgzrshhPU3+dekiIvKn1LXVkt0JQz/W3io3tOOYLNQIFpFG/ps4A6SXi+eEk5uwDqJ9xH6
+	7KnGbHph7MWmR7AIsqlXuXKO9HLTtnGfeaIfOYbCoH61SFz1fLyldTGtbHW+kFZD3ZPTbWY67YwEI
+	/1FhioXQzmkXHGzFXGjJwkMprugN16vJ7f5iN0WVbenPyg8VYoeOIN1UOU3Z8gPKKpjVeTh1S+HGM
+	skVqlDmXkBHNDzpQ8zfoUENNcT2pBOmXDMWVimupm0+cFFVbnG2+CnOfklBNoH4rf/2tBKXswSx9t
+	L/xJ4rkg==;
+Received: from localhost ([::1]:22868 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j6zMT-00BpLR-Bf; Wed, 26 Feb 2020 16:16:37 +0000
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433]:40517) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j6zMO-00BpLK-PN
- for samba-technical@lists.samba.org; Wed, 26 Feb 2020 16:16:34 +0000
-Received: by mail-wr1-x433.google.com with SMTP id r17so1650238wrj.7
- for <samba-technical@lists.samba.org>; Wed, 26 Feb 2020 08:16:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to
- :content-transfer-encoding;
- bh=+zfQwVf9il0QnCDWYLbCIDKq2Cu6oGQroit8fzSLQJs=;
- b=kX9SV9PEm1FZIlopXbTB6nSSQ+LlFi/0BlppGx5wGVlMUNQtkuJRpl0LSecpwzBy8J
- 2J5p97wBnUx+9y78ucBg+lmFQErHg9djcCxcdwoCr6xAiXglAf8lO2uqjXkzG+5yL+U0
- xznSKh0cOwlG8hNi3bQAU/OR/cncotv6l/l/eg/rQCLcdL0NWfer/ovlut28gOiipy/2
- j6vpY3KmHABPC2KGAYEXAwQZpD5HeTkIQ1+dVIymsKQQMQfCLepqPE4CsHWXYVCcwuT+
- tEwPO9JotnHI7Qcl1eall/5fiwTQvTC6Ff8puN+droNgqsR0YdgPB/nnTpRUcNUvFVtP
- h6hw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to
- :content-transfer-encoding;
- bh=+zfQwVf9il0QnCDWYLbCIDKq2Cu6oGQroit8fzSLQJs=;
- b=nyOiHNCR8lRWD6dHjXQVO+ktRb+OdnUfN5k+cGOX7VvWC+5TlIwKwmsXanfe5PmM3y
- zx9GYXhqSzG0wpIHabrGjJoHoSWVDzAqghrfY1cNmxUt2A8FIvpsiFucIBkQ73ykMHIn
- vviNYwxTdTgA9uNi7CMnDZ+qYGQVJf9+eaWM1BqFmoM6NMwDN/9THldgGyvMJMysfQXA
- brz2IXtS+R+st3UVvYGLanVVGDg2Phe01Y4AImATroKIweB3zggDGgGDrLWYULfuAiOx
- joUKpWZmWPKOnvfhTq7KU6EuKKrCRJDsrjudCwYJyAMC9T6HoqDsZluY/lfVd3rMfoVp
- h6gA==
-X-Gm-Message-State: APjAAAUaR4CYyQtr2TSuWRn7cjxIFXEuc/r23xN/DM5a/bqsmznHeQrQ
- ktiRdw4X4bBOQEuWQPmj/QQ8KvvfkOB+ypAIalHTbqV7
-X-Google-Smtp-Source: APXvYqz4IPptklvVBRctTK0Tw5wAgm/DkPBwNgY7mJLcJyTFQascOlIoh7aSZFkq3ikC4/55jVg+3tNE+zOuWUusdIU=
-X-Received: by 2002:adf:e80e:: with SMTP id o14mr6249763wrm.212.1582733791531; 
- Wed, 26 Feb 2020 08:16:31 -0800 (PST)
-MIME-Version: 1.0
-Date: Wed, 26 Feb 2020 08:13:43 -0800
-Message-ID: <CACyXjPxG-_MQst10GR61-A4LNe1bg4LE9NRCGH3myX=hSUN3iw@mail.gmail.com>
-Subject: Anyone seen SMB2 signing issues with Hitachi HNAS?
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
+	id 1j701J-00BpnR-V6; Wed, 26 Feb 2020 16:58:50 +0000
+Received: from bex-173-206-187-6.static.tor.primus.ca ([173.206.187.6]:21157
+ helo=mail.cord3inc.com) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim) id 1j701F-00BpnK-0c
+ for samba-technical@lists.samba.org; Wed, 26 Feb 2020 16:58:47 +0000
+Received: from Cord3-EX-2.Cord3Inc.com (10.15.60.53) by
+ Cord3-EX-2.Cord3Inc.com (10.15.60.53) with Microsoft SMTP Server (TLS) id
+ 15.0.1347.2; Wed, 26 Feb 2020 11:43:22 -0500
+Received: from Cord3-EX-2.Cord3Inc.com ([fe80::78a8:bf:478d:fa71]) by
+ Cord3-EX-2.Cord3Inc.com ([fe80::78a8:bf:478d:fa71%12]) with mapi id
+ 15.00.1347.000; Wed, 26 Feb 2020 11:43:22 -0500
+To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Subject: re: Writing a Windows Explorer plugin that uses a Vendor Specific
+ FSCTL to access extra metadata about files from Samba
+Thread-Topic: Writing a Windows Explorer plugin that uses a Vendor Specific
+ FSCTL to access extra metadata about files from Samba
+Thread-Index: AQHV7MOTfyqpRSHxbEGGZ3fyMocX+g==
+Date: Wed, 26 Feb 2020 16:43:22 +0000
+Message-ID: <1582735404048.59085@Cord3Inc.com>
+Accept-Language: en-CA, en-US
+Content-Language: en-CA
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [174.114.52.125]
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,28 +57,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
+From: Dan Seguin via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Dan Seguin <dan.seguin@Cord3Inc.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi folks,
-
-Seeing a problem with a Hitachi HNAS (ex Bluearc) with SMB2 signing.
-
-Tried connecting with smbclient and on the Session Setup response,
-which is signed we exit with "Bad SMB2 signature for message".
-
-I tested against a Windows 2012 DC and a capture shows that the DC is
-also signing the SMB2 Session Setup response and smbclient has no
-problems with it.
-
-Is this something broken with the HNAS?
-
---=20
-Regards,
-Richard Sharpe
-(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
-=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
-=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
+On 9/25/19 11:53 AM, Richard Sharpe via samba-technical wrote:=0A=
+> Hi folks,=0A=
+> =0A=
+> Over the last few weeks, as a part-time activity, I have been writing=0A=
+> a Windows Explorer plugin that uses a Vendor Specific FSCTL to=0A=
+> communicate with a Samba VFS module to retrieve some of the plethora=0A=
+> of extra metadata we have in our file system.=0A=
+> =0A=
+> It also allows us to set some of that metadata as well.=0A=
+> =0A=
+> Since knowing that something can be done is often the most important=0A=
+> step in doing that thing, I thought I would mention it.=0A=
+> =0A=
+> I hope to find the time to provide a tutorial on this subject as well,=0A=
+> probably on the Samba Wiki.=0A=
+=0A=
+Hi Richard,=0A=
+=0A=
+Wasn't sure if I should ask this on the samba technical list or not, but di=
+d you get something like this going?=0A=
+=0A=
+Dan=0A=
 
