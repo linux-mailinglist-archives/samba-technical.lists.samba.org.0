@@ -2,62 +2,71 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73A471701B0
-	for <lists+samba-technical@lfdr.de>; Wed, 26 Feb 2020 15:58:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1281A170237
+	for <lists+samba-technical@lfdr.de>; Wed, 26 Feb 2020 16:21:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=r1wRVGOw/Aicst/SP4laFS7+ZdiWnjLIF1oAmKE137U=; b=EEPLpwOGmmRpMQkExya9w6ywiV
-	Cc92izIqZNzy8G0j53A+15Q9dejRj0I4nBbO81K0oOMLk7fyLysU0lrMXfnpAmbQZwiGA0DDkQVXs
-	1YYlujXaTFB/vsXtHzXGyKR3Ujldto13Zh+0v3u+tG9e1pIfh1MajQDdvS+4fviiVy7gp7rmTVA9d
-	YDhrQW8Bqtm0V/rpLcsbvUIASoPRTNjMEQMwB64CM9H6PKxjXtofdblkRe2xBXKJ1weJDsi9h+YXK
-	IBzh36jQsm3zslOchpXjc2fbkO00h0ORBQKru8ad+gtV9w8ylXM5CASsLO7G75alC/T0h2iqDDUiF
-	NR3hP2mw==;
-Received: from localhost ([::1]:57586 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=/OTdqttkwrl0daeq2nnh+QX3bdKcG1SuX8r686Uc6q8=; b=wQhtwC6O9b0iiM1KxdY1GIp0Yw
+	WMrXbq5d0XO925DdmaNGjrUQk1UjS+oxiPUjqQ5ZFecifQI/CwRjLq84U1bPe6xVjpMkB76J8Dk3E
+	vnspz4if8iqOS8A0Jg6dDyVuhjGbYnaw3LGh2PcA5GS7C49QemqHtVZYmXc411XGp0VS+oZS/YqXc
+	bUa1r3bexHWh1VUYkI4ljHtl6tNT2BkVFabmwcYDjawFlPoGmU0UtPTaTUOfCxEyXH7KvyxAir2xe
+	hVRPdKtrG+oUoSBGbY2ANFQg+BVk+NdwIZ37QuQnG7k/6DvBVmQvCh7OCLRaZti0Zj2vSCOZp2OhK
+	xKuHDrvg==;
+Received: from localhost ([::1]:61936 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j6y8F-00BnzA-Ks; Wed, 26 Feb 2020 14:57:51 +0000
-Received: from mail-lj1-x230.google.com ([2a00:1450:4864:20::230]:43687) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j6y8A-00Bnz3-NZ
- for samba-technical@lists.samba.org; Wed, 26 Feb 2020 14:57:49 +0000
-Received: by mail-lj1-x230.google.com with SMTP id e3so2372538lja.10
- for <samba-technical@lists.samba.org>; Wed, 26 Feb 2020 06:57:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=r1wRVGOw/Aicst/SP4laFS7+ZdiWnjLIF1oAmKE137U=;
- b=NkMY0O9dTSz0IIzL8a1lsy2RGPbAy8EZ3/8VWUjiNoH+fT3o+tfwr5OHyj0JnI7jZE
- FwKz+Z59qLtHd7qRMy+nhjUycCy8wt9DqD0rMYcQrPVen7A/DfPPghrWFiSNzDebDR5J
- FzYn9tFUCGIj515VL4jdJtRhI8bI6GmjtLmXUNJdvPX+UzsBA7AcW0HahqA9qSkkgrUF
- 55p4YhKu8gC92L7cp/rO0SRR23SL745p6gP2px8rAGCD9y1xSv/2r7j9b3PvbgDn9pBx
- XQB4di9KfD/7MhKgD0IMefvfYkeoAO3DRdH2xI5bOZpAffjJGcg2D0PUjDHTyIHH5UMy
- xvpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=r1wRVGOw/Aicst/SP4laFS7+ZdiWnjLIF1oAmKE137U=;
- b=IJDiinKcFgwdDX4/Jr9HTbiA8ZLg5WTs/TxzC72GDbfnStC7Cnng6gx51+FBMIkzW+
- Zol24yMVFRdkN/CjcFj1nJL1cDxMdhrsJaUMbFX02gxHXLvqUwJgGvDmTxZ948Uj0N2u
- FbRohO+lflqc/hV1qpxtnRd8Swr7u/1yqEFUm0nRNyYa9rtvcSvUIqujZ0khypPAdKB2
- B9aSBy0MQGclTt0saxYcCQta9I2C21J721ldyVHPhS9A3sl601XCwliOUjgqNDAdk+0I
- xps5hySTMjh3FiQ6lyLL8WJ7wFYZRrbSqgfGE/bEdf18NtIJfTmmU63w6hdTO86u8wVL
- bo9w==
-X-Gm-Message-State: APjAAAVr+CplV6d5WNLwuwpSyB9nhiEyp1bHDxgFFR+9PY8uRuJ/vMH5
- zUXEjgQkGsFCoZFkkr3hOQkiGqlIlDUWgFASkun41Kmf0yw=
-X-Google-Smtp-Source: APXvYqxKpCKRGEraprMhPeLYxd8XQcUZ0xjNRDtOu9g8+7L5uu//+uyaJTIDmZVM/mDw8wYEPGqeqh572K5sObfG0bg=
-X-Received: by 2002:a2e:a408:: with SMTP id p8mr3405087ljn.145.1582729064924; 
- Wed, 26 Feb 2020 06:57:44 -0800 (PST)
-MIME-Version: 1.0
+	id 1j6yV7-00Boah-EN; Wed, 26 Feb 2020 15:21:29 +0000
+Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:25260
+ helo=us-smtp-1.mimecast.com) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1j6yV2-00BoTo-HX
+ for samba-technical@lists.samba.org; Wed, 26 Feb 2020 15:21:26 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1582730474;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/OTdqttkwrl0daeq2nnh+QX3bdKcG1SuX8r686Uc6q8=;
+ b=JAYCkESdtvozpSwfSY/FRPekUXhDA8MWVXu/UeUOJ/wrQi3qICsoOGZKZf6x4+rpYyBjWa
+ n7dSnbmmwXaqZWoIybvZ17nrRzbwWws4Iz2l3d7i+fntnqV6Ypw7PyqzykVDaOyF2E1XB7
+ t1dGdJCoWkQtDzca0Oba4DmNNT/ovzY=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-280-jxRqXNhrP1O1u_sIAPrraA-1; Wed, 26 Feb 2020 10:21:10 -0500
+X-MC-Unique: jxRqXNhrP1O1u_sIAPrraA-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0AAA310CE794;
+ Wed, 26 Feb 2020 15:21:09 +0000 (UTC)
+Received: from ovpn-116-244.phx2.redhat.com (ovpn-116-244.phx2.redhat.com
+ [10.3.116.244])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 5BF2B1CB;
+ Wed, 26 Feb 2020 15:21:08 +0000 (UTC)
+Message-ID: <ac934c852d7aad518a4d7261b097095064da38fe.camel@redhat.com>
+Subject: Re: ADV190023 | LDAP channel binding support
+To: Isaac Boukris <iboukris@gmail.com>
+Date: Wed, 26 Feb 2020 10:21:07 -0500
+In-Reply-To: <CAC-fF8RSs2NaB6B_v=UKp0KpDiu75kzLy+ioX9nZNy09miSQMg@mail.gmail.com>
 References: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
  <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
- <CAC-fF8SF+FUQBWxsPnSRtAXEqE=TWBm0Meb8swERSvHqpQf0yw@mail.gmail.com>
- <CAC-fF8SFX0ndOpY2w9zASJd8FagnT_6Mh0Xd4=ejQKQYDcK-uQ@mail.gmail.com>
- <374481b4-af4c-7b0b-cb80-feec96046b53@samba.org>
-In-Reply-To: <374481b4-af4c-7b0b-cb80-feec96046b53@samba.org>
-Date: Wed, 26 Feb 2020 15:57:33 +0100
-Message-ID: <CAC-fF8RVr4qA1HSthHiRn1eaWWxwN=ke8EtfZPMbQmK+Wf+ajQ@mail.gmail.com>
-Subject: Re: ADV190023 | LDAP channel binding support
-To: Stefan Metzmacher <metze@samba.org>
+ <CAC-fF8T6dGjDbH3YFpZpEA+Rtoppj+sJ4bZtt9ZDMfH85_UuUg@mail.gmail.com>
+ <29a0fc8162de6bde7ea127956efb7de29b4fce3e.camel@redhat.com>
+ <CAC-fF8QyT+t0Cmi3BdJe8kJ-LRL_BvvhQr76GwF2t3ZQJWsDDw@mail.gmail.com>
+ <dc76b713e4e4c94d396a0d95ebb5145c63ce4a4d.camel@redhat.com>
+ <CAC-fF8RrV1XtnaB0va3Bv8++c17qXKh+JtdSUqS00Eg-3OZUfQ@mail.gmail.com>
+ <CAC-fF8RSs2NaB6B_v=UKp0KpDiu75kzLy+ioX9nZNy09miSQMg@mail.gmail.com>
+Organization: Red Hat, Inc.
+Mime-Version: 1.0
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Warn: EHLO/HELO not verified: Remote host 205.139.110.120
+ (us-smtp-delivery-1.mimecast.com) incorrectly presented itself as
+ us-smtp-1.mimecast.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,64 +80,121 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@gmail.com>
-Cc: Andreas Schneider <asn@samba.org>,
+From: Simo Sorce via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Simo Sorce <simo@redhat.com>
+Cc: Stefan Metzmacher <metze@samba.org>, Andreas Schneider <asn@samba.org>,
  Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
  Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Feb 26, 2020 at 3:39 PM Stefan Metzmacher <metze@samba.org> wrote:
->
-> Am 26.02.20 um 15:21 schrieb Isaac Boukris via samba-technical:
-> > On Tue, Feb 25, 2020 at 9:17 PM Isaac Boukris <iboukris@gmail.com> wrote:
-> >>
-> >>> I looked at it a bit, see
-> >>> https://git.samba.org/?p=metze/samba/wip.git;a=shortlog;h=ac8fd11f1d4b9deb48d6c7942af0c83b52d69d7f
-> >>
-> >> FYI, I got net-ads working against AD server by adding some logic in
-> >> source3, look:
-> >> https://gitlab.com/samba-team/devel/samba/-/commits/iboukris-metze-cbind
-> >>
-> >> However the fixed clients aren't working against samba server yet,
-> >> unless require-strong-auth is set to "no", while non-fixed clients
-> >> still work. I get this error (I also wonder how can I trigger the
-> >> source4 client code).
-> >
-> > Actually, Windows client seem to work fine against your source4 server
-> > code, even with require-strong-auth=yes.  So I'm still missing
-> > something on the client side :(
->
-> Why? I guess the server just completely ignores the channel bindings.
+On Wed, 2020-02-26 at 14:33 +0100, Isaac Boukris wrote:
+> On Mon, Feb 24, 2020 at 9:37 PM Isaac Boukris <iboukris@gmail.com> wrote:
+> > On Mon, Feb 24, 2020 at 9:28 PM Simo Sorce <simo@redhat.com> wrote:
+> > > On Mon, 2020-02-24 at 17:41 +0100, Isaac Boukris wrote:
+> > > > On Mon, Feb 24, 2020 at 2:35 PM Simo Sorce <simo@redhat.com> wrote:
+> > > > > On Sat, 2020-02-22 at 20:09 +0100, Isaac Boukris wrote:
+> > > > > > On Tue, Feb 18, 2020 at 5:48 PM Stefan Metzmacher <metze@samba.=
+org> wrote:
+> > > > > >=20
+> > > > > > > I think we need input from dochelp to answer 2 questions:
+> > > > > > > 1. which kind of channel bindings are expected/used by window=
+s?
+> > > > > > >    I assume tls-server-end-point. I guess MS-ADTS would be th=
+e place
+> > > > > > >    to define these details for ldaps.
+> > > > > >=20
+> > > > > > I noticed more another reference to channel-bindings in MS-KILE=
+, I
+> > > > > > think maybe KERB_AP_OPTIONS_CBT ad element is the way to tell t=
+he
+> > > > > > server to require CB when LdapEnforceChannelBinding is set to 1=
+ only,
+> > > > > > needs testing.
+> > > > > >=20
+> > > > > > 3.2.5.8 AP Exchange
+> > > > > > If ChannelBinding is set to TRUE, the client sends
+> > > > > > AD-AUTH-DATA-AP-OPTIONS data in an AD-IF-
+> > > > > > RELEVANT element ([RFC4120] section 5.2.6.1). The Authorization=
+ Data
+> > > > > > Type AD-AUTH-DATA-AP-
+> > > > > > OPTIONS has an ad-type of 143 and ad-data of KERB_AP_OPTIONS_CB=
+T
+> > > > > > (0x4000). The presence of
+> > > > > > this element indicates that the client expects the applications
+> > > > > > running on it to include channel binding
+> > > > > > information ([RFC2743] section 1.1.6 and [RFC2744]) in AP reque=
+sts
+> > > > > > whenever Kerberos
+> > > > > > authentication takes place over an "outer channel" such as TLS.
+> > > > > > Channel binding is provided using the
+> > > > > > ChannelBinding variable specified in section 3.2.1.
+> > > > > >=20
+> > > > > > 3.4.5
+> > > > > > If the ApplicationRequiresCBT parameter (section 3.4.1) is set =
+to
+> > > > > > TRUE, the server, if so configured,
+> > > > > > SHOULD<67> return GSS_S_BAD_BINDINGS whenever the AP exchange r=
+equest
+> > > > > > message contains
+> > > > > > an all-zero channel binding value and does not contain the
+> > > > > > AD-IF-RELEVANT element ([RFC4120]
+> > > > > > section 5.2.6.1) KERB_AP_OPTIONS_CBT.
+> > > > >=20
+> > > > > Very interesting, we should add support to decode this AD in MIT =
+krb5
+> > > > > and exposes it via naming attributes or context options, whatever=
+ makes
+> > > > > the most sense.
+> > > >=20
+> > > > Yeah, although I can't really think of something that would work,
+> > > > given we want to know that before calling accept() on the input tok=
+en.
+> > > > On clients supporting CB, maybe we can add this ad-element via a
+> > > > gss_set_name_attribute() call, not sure.
+> > >=20
+> > > We might even just see there are CBs in gss_init_sec_context() and ju=
+st
+> > > do it automatically. The only question is whether this can cause
+> > > interop issues which requires a more nuanced use of these.
+> >=20
+> > Right, doing it automatically make sense. I think an unknown
+> > ad-element in ad-if-relevant container shouldn't cause interop issues.
+>=20
+> It seems Windows clients send this same list of ad-element, over TLS
+> or not.  I think "AD-TARGET-PRINCIPAL" is for what they called in the
+> blog post "bound to SPN", not sure.
+>=20
+> authorization-data: 1 item
+>     AuthorizationData item
+>         ad-type: AD-IF-RELEVANT (1)
+>         ad-data: 3081a9938298930=E2=80=A6
+>             AuthorizationData item
+>                 ad-type: AD-TOKEN-RESTRICTIONS (141)
+>                 ad-data: 303330=E2=80=A6
+>             AuthorizationData item
+>                 ad-type: AD-LOCAL (142)
+>                 ad-data: f0bca424242eaf2...
+>             AuthorizationData item
+>                 ad-type: AD-AP-OPTIONS (143)
+>                 ad-data: 00400000
+>                     AD-AP-Options: 0x00004000, ChannelBindings
+>                         .... .... .... .... .1.. .... .... .... =3D
+> ChannelBindings: Set
+>             AuthorizationData item
+>                 ad-type: AD-TARGET-PRINCIPAL (144)
+>                 ad-data: 6c006400602=E2=80=A6
+>                     Target Principal: ldap/sdc.smb.net@SMB.NET
+>=20
 
-I need to debug the server, but it fails the fixed net-ads and
-ldapsearch which works against AD, and doesn't fail windows clients.
-The only difference to my understanding, is that Windows client will
-add the ad-elements, can that be the cause?
+Sp this is just an AD element, not actual Channel Bindings, right ?
 
-> What application on the Windows client uses ldaps?
+--=20
+Simo Sorce
+RHEL Crypto Team
+Red Hat, Inc
 
-Run "ldp.exe", it has everything.
 
-> Note that I fixed the channel binding checksum for NTLMSSP here:
-> https://git.samba.org/?p=metze/samba/wip.git;a=commitdiff;h=e5afb9ff2aa23d43d0b968a3eca7ceffe1c8d606
->
-> With this commit where're able to pass the LdapEnforceChannelBinding=1
-> checks:
-> https://git.samba.org/?p=metze/samba/wip.git;a=commitdiff;h=ad59689961c860e38fb1d0e8c8996070faf77180
 
-I'll keep rebasing on metze/master-auth branch.
 
-> So for NTLMSSP the presence of MsvChannelBindings means strict checking
-> of the provided channel bindings, even if 16 zero bytes are send.
->
-> For kerberos only AD-AP-OPTIONS means strict checking and not ignoring
-> 16 zeros.
-
-So they are the same flag I guess.
-
-> And MsvAvTargetName is similar to AD-TARGET-PRINCIPAL.
-
-Thanks!
 
