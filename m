@@ -2,66 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6E12170BF9
-	for <lists+samba-technical@lfdr.de>; Wed, 26 Feb 2020 23:55:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F84A170E49
+	for <lists+samba-technical@lfdr.de>; Thu, 27 Feb 2020 03:12:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Rqak5LzVuAjk3JeKh5e+pRIZmB8x8YKQOpiIZcgpJbY=; b=2DjHM62wCpzd28BdjqKzqVlf55
-	PQ2GtCOIpwn6DceZn06BWcSCrALbNUL9pCBS+XORpppcFcvvWbs3IgkObJUNx6BI0Bu6JLmi9w/cw
-	ksZaanAwLMFe2wVAHsWldH2QkB0LCBSiXERMkLQTzv6PurmFcDhAFrU+IPulg28li6rpMpygED/S3
-	ZqP0ux6p9U4hwUIGJ9qzjlxhfZYTzQkmiyLDaRwsSzAmw+5+TJu05VhLORXnZ0iNuszRn282FEFAe
-	hRDx1XZYqVGrB85+I+W7JBI1Ycube4f/htwYkAzNpW95N0pSSlKtr1aneHa9sSc0qA9dl8Cu4+pg/
-	fPE4JTBw==;
-Received: from localhost ([::1]:30202 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=5uE8d1KtF1pAkwb4LxhX8OdHwYl5qSUWHSs4ee8FNMU=; b=Nx1KHd6v7iayxrwRxLxFqOHuBw
+	bZMRnfW1FRdX1C6KruA1kR2DPTyvpIOsPZKEjPW54AUITAQzASIEXV5lWybLZOlIT3jjGeNukG9S6
+	rAjDksC7VREL1CPQhoQMg1G4npqif5v9jf4sRJ72cYlGRJ/g53Ub40i+Bj6HdATn/oCLzI+GBeZBD
+	pnoHoZEyc4OMG4nuUCDHbiW92jqYq7CQh8V5kejrrL+I4R6mwwNcrCp6NQajtaYs2RnvXB+FXlsfJ
+	AjttLgVnc1QxJSn71IR+VWBB1ql/EPfKD4zI2S0wV8ihyNRr0AG8vRH0kIpC7HSJX2mCvvT7iefIT
+	x53n3tAQ==;
+Received: from localhost ([::1]:36138 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j75aS-00BrEU-OL; Wed, 26 Feb 2020 22:55:28 +0000
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:33235) 
+	id 1j78eX-00BsH8-Uz; Thu, 27 Feb 2020 02:11:54 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44814) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j75aM-00BrDn-8f
- for samba-technical@lists.samba.org; Wed, 26 Feb 2020 22:55:25 +0000
-Received: by mail-lf1-x143.google.com with SMTP id n25so589334lfl.0
- for <samba-technical@lists.samba.org>; Wed, 26 Feb 2020 14:55:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Rqak5LzVuAjk3JeKh5e+pRIZmB8x8YKQOpiIZcgpJbY=;
- b=lhtHnfnglNqxsDO2DQL2C6ofebLZvqgGbhj21k+GeK9XzKFh1zq8lMTbudm0qc+oi2
- 43ac6X10ff5mzodzKghKXBKg8+snluFrF9bEFvk0fNenZixLHsPKXaI/k7a4aUT4Rjfx
- fkMthpcwAYH9EzsYAJsYZFMwb2vEJfRNbW/FZBnjcIOEQum7XLzv224HtPwYXgTtE3xG
- 7oWEJMUnst2wjFGs+fb4nCSbsf/2z5DtnU4gg4yT7SxcNhY96xO+4mnN0JQGHlhEk4W4
- NvXlBQW7IymcN54LOmRtTbIOqoLKbUned/VFoCsLseazxYjTkOqfwPCL9RkaGLiUIC/l
- RnhQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Rqak5LzVuAjk3JeKh5e+pRIZmB8x8YKQOpiIZcgpJbY=;
- b=Aoj6QWLMoNj+G8heLYhKZ88h/o30ipmZ35xDnWB4tF3QpKfvkt8g5d5pSaKsX4+srj
- DW/FJdRawQm217rFWvlQX37x5d0NH0Q1vz+qVbqac4ORp4z7hJcyL58UKo0voSA1qmY9
- y4Qijpkk3gRvUC/TMtMsOpEDyveBHtigILX98lJWl8GlIS6Ixu0fMBlp36heTlyOYC/K
- W0qGgEOfuZNt+PRHaf31Z4Q4LcWLts9MU64bJ6mpPf/Yk9F6ijEFEx/K6VJlFHi7EAqA
- 50qwOxZ4GtbKYjKWX1xnya0s/ag71Z4AGrpNE6hfCE8sb6ENadEmpOte7Wy5seZB2egj
- ELPQ==
-X-Gm-Message-State: ANhLgQ3IIUWlRjQYgcmcijzSlPh5TJD2h21qKuTmsQYXPCvtcWYeL+Ax
- Pnsaj+dFMs1jbW6W0FZYPeWwaZchT/EE39i9iWllS1pi1Gk=
-X-Google-Smtp-Source: ADFU+vtUk05rssFwav10tnNFvNmw/325kgJ7JFFiguJ3WIIWpZNwMZPxcoxE1obgHq4k94f0netVWcSerOBmpj+h+1o=
-X-Received: by 2002:a05:6512:1041:: with SMTP id
- c1mr440245lfb.211.1582757717920; 
- Wed, 26 Feb 2020 14:55:17 -0800 (PST)
-MIME-Version: 1.0
-References: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
- <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
- <CAC-fF8SF+FUQBWxsPnSRtAXEqE=TWBm0Meb8swERSvHqpQf0yw@mail.gmail.com>
- <CAC-fF8SFX0ndOpY2w9zASJd8FagnT_6Mh0Xd4=ejQKQYDcK-uQ@mail.gmail.com>
- <374481b4-af4c-7b0b-cb80-feec96046b53@samba.org>
- <CAC-fF8RVr4qA1HSthHiRn1eaWWxwN=ke8EtfZPMbQmK+Wf+ajQ@mail.gmail.com>
- <CAC-fF8Quxxrx+gaqBMtzaB2zdppJNWUG7OQ70BM_qP4k-b2aMQ@mail.gmail.com>
- <CAC-fF8TonKJ4JTPfxdTueW-pdqqEMAHH0qFkxfy1SLBm2Eme_w@mail.gmail.com>
-In-Reply-To: <CAC-fF8TonKJ4JTPfxdTueW-pdqqEMAHH0qFkxfy1SLBm2Eme_w@mail.gmail.com>
-Date: Wed, 26 Feb 2020 23:55:06 +0100
-Message-ID: <CAC-fF8RxPDyQeVQTfskQdgXMqSfFbBW=cTCWCQy=cKyvh_3GbA@mail.gmail.com>
-Subject: Re: ADV190023 | LDAP channel binding support
-To: Stefan Metzmacher <metze@samba.org>
+ (Exim) id 1j78eS-00BsH1-0q
+ for samba-technical@lists.samba.org; Thu, 27 Feb 2020 02:11:51 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=5uE8d1KtF1pAkwb4LxhX8OdHwYl5qSUWHSs4ee8FNMU=; b=EahR/92Ic9VOkgGKCJ43xtYClZ
+ vwVqyMBmckN00sw265KlM5CHF64+4X5cAuCM1BfJG9QZJ9SbqM2pbZr7vI6/KYwkzuPYG6egPx0L7
+ ubcLP0LJIgxaqcCuC14O2bznySo+fN4fOzFEevKAfGlKvZGaXktwr1EtCjAEpXI3VmSFvGfeNeUg5
+ pvvyZ2JvdlJJ8K+2GVwMv8H+ZFE3nNOfFZ0O2yR/yfeaKMF/R1KorfQZzuOeuyu8Gw4dXQh8bXSnu
+ EDiYFDY2WdZxbdXm+6jhZgkJKDEBrwmhrDr3zxeo/YKOWNqdsg0LW2ykueID9FhIHWO+LyXA5HKcj
+ JdMAr2P21/6cACdHjEymwM2217+s1+BePOz7t8DSFsdDCNaiL6wrrLllGUoZjKOPUY6UFmZK20eHk
+ 9vDzvhs/Z/cFneOkRlV96hFzbqPY//F9LsLeSvE1fKysfuDROaHlEJnHkOxZIuJMXMs8wOND3Wf0s
+ Rb6Puu2NjqCgV5wV68Q3YeMc;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j78eQ-000549-Hj; Thu, 27 Feb 2020 02:11:47 +0000
+Message-ID: <49d4d99c814983f7f075a8d70c5030350bf30810.camel@samba.org>
+Subject: Getting seeds into oss-fuzz
+To: gary@samba.org
+Date: Thu, 27 Feb 2020 15:11:42 +1300
 Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,24 +53,90 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@gmail.com>
-Cc: Andreas Schneider <asn@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Debug shows the error is due to wrong input_chan_bindings provided by
-ldap server.
+G'Day Gary,
 
-This lead me realize the difference between Windows and ldapsearch /
-net-ads, is LDAP vs start-tls.
-If I use LDAPS in ldapsearch it works fine:
-LD_LIBRARY_PATH=/usr/local/lib /usr/local/bin/ldapsearch -H
-ldaps://sdc.smb.net -b dc=smb,dc=net cn=administrator -Y GSSAPI -N -O
-maxssf=0
+We discussed in person a long-delayed task for the fuzzing effort,
+which is to provide oss-fuzz with good seeds for each of our fuzz
+targets.  It would be awesome if you can slow-burn at this when you get
+some cycles.
 
-So in the start-tls case, the input_chan_bindings provided by the ldap
-server seem not right.
+For the NDR targets, we do have a source of good seeds, because we
+changed make test to save them.  We need to provide some for the other
+fuzzers, like LDIF examples, LDAP packets, DNs and ini files etc.
+
+The specification for how the zip file should be constructed is here:
+https://google.github.io/oss-fuzz/getting-started/new-project-guide/#seed-corpus
+
+The script to be modified is lib/fuzzing/oss-fuzz/build_samba.sh
+
+This needs to be extended to prepare the zip files of seeds. 
+
+The zip file needs to be along-side the binary in $OUT named
+$fuzzer_seed_corpus.zip, with each file being the SHA1 of its contents
+(many of our existing seeds are not named this way).. 
+
+See for example this from nss:
+https://hg.mozilla.org/projects/nss/file/tip/automation/ossfuzz/build.sh
+and tor:
+https://github.com/google/oss-fuzz/blob/2d5e2ef84f281e6ab789055aa735606d3122fda9/projects/tor/build.sh
+
+The seeds should be in their own git repo, with a specific revision
+checked out over https:// at build time: I've just created 
+https://gitlab.com/samba-team/samba-fuzz-seeds
+
+We should grab a copy of Google's Corpara:
+
+https://google.github.io/oss-fuzz/advanced-topics/corpora/#downloading-the-corpus
+
+
+https://google.github.io/oss-fuzz/faq/#are-there-any-restrictions-on-using-test-cases--corpora-generated-by-oss-fuzz
+
+Then add in the seeds from Douglas (just ask him in person), both from
+a 'make test' and hongfuzz on the make test seeds, which he can share
+with you.  Some of these will need to be split up into _IN, _OUT and
+_STRUCT as the 'make test' system created one directory per pipe, and
+we split the fuzzers up later.
+
+Finally, we should run our fuzzers against the zip files (unzipped) in 
+lib/fuzzing/oss-fuzz/check_build.sh, to show that this all works.
+
+All in all a lot of work, but we can chip away at it.
+
+To test, clone https://github.com/google/oss-fuzz
+
+./infra/helper.py build_image samba
+./infra/helper.py shell samba
+
+Run 'compile' in the shell after changing code and pulling into the
+checkout there.
+
+To run end-to-end you can change projects/samba/Dockerfile to point at
+your repo and run
+
+./infra/helper.py build_image samba
+
+./infra/helper.py build_fuzzers samba
+
+./infra/helper.py run_fuzzers samba $fuzzer_name
+
+Andrew Bartlett
+-- 
+Andrew Bartlett
+https://samba.org/~abartlet/
+Authentication Developer, Samba Team         https://samba.org
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+https://catalyst.net.nz/services/samba
+
+
+
+
+
+
 
