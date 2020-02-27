@@ -2,66 +2,77 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E30FF172621
-	for <lists+samba-technical@lfdr.de>; Thu, 27 Feb 2020 19:11:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 202FE172A72
+	for <lists+samba-technical@lfdr.de>; Thu, 27 Feb 2020 22:52:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=jBWoSQ/gizrCoImYhvby+QXQDcxaU7lapB30jtE5cBM=; b=P97gAcEgWBBy354hx2PHpPcYLl
-	fl0p9C/8j+xQl4F+r/XrjXqOzvXmLzhShcCE2+GSG+zzU6s4OTVBQITTU2lbkUTImo2EuX7nIacx1
-	JcVNjs9EdSNv4Knrej/32xVCjm9xARwtPa5BL0bw2bgfx28j5BbeZiD2YJB45xaqydOfAWmT4sb+X
-	J07ERAb0fsjOJFV3/0qP3PtuxlOF8B9LBhVXpzvFei6beTeddqO4HtA+kbVkur/eT0VLBmg9kdxWI
-	Ny7ho+/LVMWvPJLvm8ORuwPo3G8UqmPUkPsFPoASUSKohhfO0LCa9Rsn1YViPTNgswUWszFTkgygR
-	msCGC4xw==;
-Received: from localhost ([::1]:52788 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=fDdY/vVe1W6SuujFflC3cJEXHGhOo5VIWcjs7yJrlvI=; b=zqENm6ThSA6uwfN8ranYv5MkK3
+	tph4mReGsBLzMqS72NoJZZc+icjsLkfgD2B44ukMOjIfezFD2Ca9t2pb4UDAbYCiQEjunq93Eynyd
+	TKHakawDVP0Y7UaPcv6LLCvZL5qXZf0eebwX7VGJb9SO7uHWJN5+nV5zt17VzwRQ2fEkCI6YLQBoP
+	V4ESmrSOrAfq/bdoKFYjdE34dRNpaT2tDMRbDiQN3ly2g6ItTIsf8uT7mJmwjCbZsJmJilr+ht5PA
+	jqc6lMGX8iAJ+e/FEWt3X4SJ0K8046MB1GAf4To93ZbfS41z4uJS+GqeKLjTRT3M3dyfnNsEEGhmo
+	YcgvBcaA==;
+Received: from localhost ([::1]:58754 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j7NcD-00C8CZ-4x; Thu, 27 Feb 2020 18:10:29 +0000
-Received: from mail-lj1-x236.google.com ([2a00:1450:4864:20::236]:43507) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j7Nc5-00C8CS-Qt
- for samba-technical@lists.samba.org; Thu, 27 Feb 2020 18:10:25 +0000
-Received: by mail-lj1-x236.google.com with SMTP id e3so226198lja.10
- for <samba-technical@lists.samba.org>; Thu, 27 Feb 2020 10:10:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=jBWoSQ/gizrCoImYhvby+QXQDcxaU7lapB30jtE5cBM=;
- b=jjNBZvNazpApl8lXU7Wo7rkiKPnYrQi8jkKuvsw50AfPSuj7LNHWnD+wmniwxSGFqr
- 1HBQijX4pqypQqPTWmvsNbLiK2B5CFmA+PvTRgIzba5M1Dx1qtVdf6r4B5B9KVEiOymr
- lZesLnrZUh5LeJl3zMEzxSZJzbNaNpHgQuyef9S21NELBiphvaDeNFwbSxVqMs5z+RUc
- UEfQIeAGiTCVnDkJT5vLbP59dM/lGX2h5k2DsG6aVf5Ka+MTOkdlscuSsnqqQkaCiBn+
- zUSPDRGa68djALo2JYqZoGwdI9T3Ss0M6RHfqAjE4IRBnClnhNgD3dQlc6LXYYWelKzj
- Ai+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=jBWoSQ/gizrCoImYhvby+QXQDcxaU7lapB30jtE5cBM=;
- b=eI+3DH0aczVDB4d/VjS+r/ah8rLC2td2SJtHPFvVPH2APg/yf08gudTF2uhxngF2nY
- y2v8P5Ia9azczKIi5qpZ3Ze6ESvcqyZvRJ4d9EwRMnoaNbxSpAHglRV0eldL9lJmvRkr
- pEB/DYuuBeUuaDZZT0EDVlEa5U/1FtA162mD44B2oN+baChHsSbXWKiq9v9V3u4rpoDN
- jWE6yfKh3p/X7qN2W1tdBPGHNNmb0Ipo8E0Dgil6qb3SFLggQz2TnFAlQJI5L153LU1V
- 386iBWklnxSbLtaJMnxZly6fsXVaJNZeR035xDqre3kGvfZdtECB7n/fHoSDuUTqQW2f
- 0OKw==
-X-Gm-Message-State: ANhLgQ0fXozvkKr8lvnqhr7+gg48b8jk6Xt9eccXjo7tiD36/XuhTY0L
- FkJpiyF7REDIScqy1PTbl0tRlSsONf3UYWeMG50=
-X-Google-Smtp-Source: ADFU+vsPN388Q9HR0jHs1iHty8ypDSqtmCWKtZCqnJ4aJ3FndNb8jZnrmwC5fwIezMngMWOe+z5ntD3uClCU41mAiJ8=
-X-Received: by 2002:a2e:7d0e:: with SMTP id y14mr207401ljc.158.1582827020823; 
- Thu, 27 Feb 2020 10:10:20 -0800 (PST)
-MIME-Version: 1.0
-References: <CAC-fF8Tp_mPkza63VxtiXm3fdnDSfr616roVnK-PwDXqBodnhQ@mail.gmail.com>
- <6408dd32-53f3-2622-d6b9-04928793cc8b@samba.org>
- <CAC-fF8SF+FUQBWxsPnSRtAXEqE=TWBm0Meb8swERSvHqpQf0yw@mail.gmail.com>
- <CAC-fF8SFX0ndOpY2w9zASJd8FagnT_6Mh0Xd4=ejQKQYDcK-uQ@mail.gmail.com>
- <374481b4-af4c-7b0b-cb80-feec96046b53@samba.org>
- <CAC-fF8RVr4qA1HSthHiRn1eaWWxwN=ke8EtfZPMbQmK+Wf+ajQ@mail.gmail.com>
- <CAC-fF8Quxxrx+gaqBMtzaB2zdppJNWUG7OQ70BM_qP4k-b2aMQ@mail.gmail.com>
- <CAC-fF8TonKJ4JTPfxdTueW-pdqqEMAHH0qFkxfy1SLBm2Eme_w@mail.gmail.com>
- <CAC-fF8RxPDyQeVQTfskQdgXMqSfFbBW=cTCWCQy=cKyvh_3GbA@mail.gmail.com>
-In-Reply-To: <CAC-fF8RxPDyQeVQTfskQdgXMqSfFbBW=cTCWCQy=cKyvh_3GbA@mail.gmail.com>
-Date: Thu, 27 Feb 2020 19:10:09 +0100
-Message-ID: <CAC-fF8TmWRW2BUmemqGPm3nDa=0gG7XHxJ1siPZ8VY+CRCeRZA@mail.gmail.com>
-Subject: Re: ADV190023 | LDAP channel binding support
-To: Stefan Metzmacher <metze@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+	id 1j7R3l-00C9Ac-K6; Thu, 27 Feb 2020 21:51:09 +0000
+Received: from wout4-smtp.messagingengine.com ([64.147.123.20]:59805) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1j7R3e-00C9AV-94
+ for samba-technical@lists.samba.org; Thu, 27 Feb 2020 21:51:06 +0000
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.west.internal (Postfix) with ESMTP id CB0193AB;
+ Thu, 27 Feb 2020 16:26:08 -0500 (EST)
+Received: from imap1 ([10.202.2.51])
+ by compute5.internal (MEProxy); Thu, 27 Feb 2020 16:26:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=artmg.org; h=
+ mime-version:message-id:in-reply-to:references:date:from:to:cc
+ :subject:content-type; s=fm2; bh=fDdY/vVe1W6SuujFflC3cJEXHGhOo5V
+ IWcjs7yJrlvI=; b=lpmeSjXj7bHXeYTgXoKlRufJgH49IhC7LqeiAJiH72FTsR5
+ fR+ZAe68L81FUlvTohHdjOd39rWn3a5DboxcR18dD16Lndyypce1k5jNKcSKC9Oo
+ umS9FSWRZNMNm3gw0o+DEuui6l6+jWbYvHeWWleaPl44NL+xskxPKdnpE3cXIGuT
+ cBfjXoB5JDrwiG2zloQ9bY9viCSnnLh8MDyB3RUlrDStClnjkt9QXDWKhCz/IdI3
+ kokyHDq7s/xbh3sizxv55+TKlhDvrafUua3/1h/EJUqy/nb1+xF+qkmg5ISFIHf6
+ /OXRO1jH0HsDeNT1ffYOdkpkU0nfdsDAZs5yyRg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to:x-me-proxy
+ :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=fDdY/v
+ Ve1W6SuujFflC3cJEXHGhOo5VIWcjs7yJrlvI=; b=K9Il66jiUibj2CgdcWjG5i
+ 60NsXTcJ4z5vqIYppy/qiL/KifFpNfT51A/B0U0niiAiJ78IrdAciMt2sFNzvH0A
+ NXs8QfHVHyoe1fX9+S4ClNj2hNKfs0wheKbhr7o8r2+2JFujJqB7T0UQjFAy4XVU
+ 8MOnkYQ9K2okJk1YwEYhGsKQ0/4DSlkWhmgAaRBywAUT1sJsVgGSjmdtdOicvW2H
+ QytGjAW+PEr1kxXzPzPYjElNqOmljZCHAjRfb6oKwGo4RaYH4UJ4jdxa1Wets1Ds
+ y+H+RY75SDbwaVrJc0o7pU3YXFInxQr6N+gtrPa5M3QPaHt2/J/IYBrdKyXtrMdg
+ ==
+X-ME-Sender: <xms:7zNYXvaT0ppEoirCzqhwqbK8C8rzn8BeO1Xeyzn-Qkv2pPV01i_zBA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedugedrleeigddugeeiucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucenucfjughrpefofgggkfgjfhffhffvufgtsehttd
+ ertderreejnecuhfhrohhmpedftehrthcuoffifdcuoehsmhgslhhotghksegrrhhtmhhg
+ rdhorhhgqeenucffohhmrghinhepghhithhlrggsrdgtohhmnecuvehluhhsthgvrhfuih
+ iivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepshhmsghlohgtkhesrghrthhmghdr
+ ohhrgh
+X-ME-Proxy: <xmx:7zNYXleau5fHsjX-9rCIAP0RRIOoVG4SU4sgjUQX_vC_cLxILJfUWQ>
+ <xmx:7zNYXpoCiesp819IZnjXz-NUmpAB20PJJjKhIsiGVqbSv2fTxNPSJg>
+ <xmx:7zNYXsArsx28gDe7GrSUUnPhw1y60fkiiOtNfpY2IMQ0mLLHKZMAJg>
+ <xmx:8DNYXoi27Oh-P-qYEZlK_LudwxEstTn9UteKus2X-BY9nrKMv9OaSA>
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id CA023C200A4; Thu, 27 Feb 2020 16:26:07 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.1.7-967-g014f925-fmstable-20200226v1
+Mime-Version: 1.0
+Message-Id: <058076d9-60d8-4967-805b-3b2cf718600b@www.fastmail.com>
+In-Reply-To: <20200224203401.GB15879@jeremy-ThinkPad-X1>
+References: <mailman.231.1582110513.713.samba@lists.samba.org>
+ <f09b7d28-4b3d-4211-b151-bb51d783ef4d@www.fastmail.com>
+ <20200224193237.GA15759@jeremy-ThinkPad-X1>
+ <d3a08bb5-3f56-4c51-b50c-78b7aeacb75d@www.fastmail.com>
+ <20200224203401.GB15879@jeremy-ThinkPad-X1>
+Date: Thu, 27 Feb 2020 21:25:37 +0000
+To: "Jeremy Allison" <jra@samba.org>
+Subject: =?UTF-8?Q?Re:_[Samba]_vfs_fruit_disk=5Ffree_fails_on_tmsize_overflow_wit?=
+ =?UTF-8?Q?h_macOS_Time_Machine?=
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,19 +86,64 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@gmail.com>
-Cc: Andreas Schneider <asn@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
+From: Art MG via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Art MG <smblock@artmg.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Feb 26, 2020 at 11:55 PM Isaac Boukris <iboukris@gmail.com> wrote:
->
-> So in the start-tls case, the input_chan_bindings provided by the ldap
-> server seem not right.
+> On Mon, Feb 24, 2020 at 08:34:11PM +0000, Jeremy Allison via samba wrote:
+> We need to keep the overflow checks,
+> as this is on user-supplied data I believe.
 
-Pushed an ugly fix, it now works ok in start-tls as well:
-https://gitlab.com/samba-team/devel/samba/-/commits/iboukris-metze-cbind
+I appreciate the advice, Jeremy, and have modified the patch as below, in a new branch
+
+I have ADDED the fix, AND left the error checking, but with better explanation 
+in the debug log message and in the code itself.
+The issue is now unlikely to arise, but at least it won't be fatal if it does :) win / win
+My tests indicate that this code now resolves the issue. 
+
+I will raise the PR shortly from
+https://gitlab.com/artmg/samba/-/blob/artmg-tmsize-prevent-overflow/source3/modules/vfs_fruit.c
+
+Will I need to create an account on the bugzilla to refer to the PR in the issue, 
+or will the release manager arrange that as part of the process?
+
+Thanks
+Art
+
+________
+
+
+diff --git a/source3/modules/vfs_fruit.c b/source3/modules/vfs_fruit.c
+index b8ede0cdfdb5661cc9579f25b81613f30e410215..3b1dd3ca853329cc156e747df0eefd427511594e 100644
+--- a/source3/modules/vfs_fruit.c
++++ b/source3/modules/vfs_fruit.c
+@@ -6971,15 +6971,22 @@ static bool fruit_tmsize_do_dirent(vfs_handle_struct *handle,
+ 		return true;
+ 	}
+ 
++	/*
++	 * Arithmetic on 32-bit systems may cause overflow, depending on
++	 * size_t precision. First we check its unlikely, then we
++	 * force the precision into target off_t, then we check that
++	 * the total did not overflow either.
++	 */
+ 	if (bandsize > SIZE_MAX/nbands) {
+-		DBG_ERR("tmsize overflow: bandsize [%zu] nbands [%zu]\n",
++		DBG_ERR("tmsize potential overflow: bandsize [%zu] nbands [%zu]\n",
+ 			bandsize, nbands);
+ 		return false;
+ 	}
+-	tm_size = bandsize * nbands;
++
++	tm_size = (off_t)bandsize * (off_t)nbands;
+ 
+ 	if (state->total_size + tm_size < state->total_size) {
+-		DBG_ERR("tmsize overflow: bandsize [%zu] nbands [%zu]\n",
++		DBG_ERR("tm total size overflow: bandsize [%zu] nbands [%zu]\n",
+ 			bandsize, nbands);
+ 		return false;
+ 	}
+
 
