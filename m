@@ -2,46 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B155173F34
-	for <lists+samba-technical@lfdr.de>; Fri, 28 Feb 2020 19:10:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 610DC173FE7
+	for <lists+samba-technical@lfdr.de>; Fri, 28 Feb 2020 19:45:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=GUMkek8vym52sPlLiJKF95vRs4XtDjOJUOyLoj5RIGI=; b=rB87ve4hRz7InaskjMpTds2COR
-	HN0wuBQPavD68fUjbX5U9lqMF2P5+mpxAX/eGiHw0HN44clnShnWtW6tGBhKQhcL6XAD2x+SPl3Nr
-	Xv6n/bBQwypVi/uB99493m4qMElki/2Ygt5YRmMqSsNY5vuGWU4we38A+OXRt8gaaTrUl3HAO2c/w
-	x0C5l4O/L/FCUzJxxMwXv4z488VopjTHrn7TKpLhEOEp7HDEAt6gYbWfE/cAmwwDfMBJP9ebSp6ae
-	2+UHDy8+/5rwtML5urGSWErFfRX1qXyo+ujc+QV1Dz9CbXkFABtn7rfLKNngVDgI3qX5vm7YQOKtQ
-	SI2VtnoQ==;
-Received: from localhost ([::1]:61004 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=bmSSdDRVCwqbK4Qt0Ee3kcypbrveuzK6kf30t7tAC6g=; b=ZPGhEHhDqw0qFfkaMDIWf+RqOU
+	YvtXcfExoWe5PuPqc/PaVpBqAy5D7py9UnS5Zw+8vrTjNs+RzP42Bbw9/6sTy7RZkNjXkbq+1UIBk
+	Rr02ajyTNF+Kn0azBG19Ob/LZL/iQsDrTpT1nmXRnB8zdAkwpK41CUxtkrshDBfZevyPSSVaIaznU
+	MvG7IOIIxjLaa7GUyg6Q/Tyr8yIoU5D/dstOXr5ePaVHtdw/eX/SQTRCWJ3pbcgnHBEd3aacbvmHp
+	llide9MLodC73SECgDhGEeK/fvhHoQM5fYV4khr4zJhbAaKTgQ4X8LJN6K8fUl6mtLKVSZ01RuqBD
+	LDz3E0cw==;
+Received: from localhost ([::1]:19062 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j7k5N-00CNk0-1k; Fri, 28 Feb 2020 18:10:05 +0000
-Received: from [80.20.169.36] (port=44085 helo=mail.promoturviaggi.com) 
- by hr1.samba.org with smtp (Exim) id 1j7k5H-00CNjt-PT
- for samba-technical@lists.samba.org; Fri, 28 Feb 2020 18:10:01 +0000
-Received: (qmail 1432 invoked by uid 121); 28 Feb 2020 19:09:56 +0100
-Received: from 172.16.1.1 (dario.lesca@solinos.it@172.16.1.1) by
- albatros.promoturviaggi.com (envelope-from <d.lesca@solinos.it>,
- uid 89) with qmail-scanner-2.08 
- (clamdscan: 0.98.6/25735. spamassassin: 3.3.1.  
- Clear:RC:0(172.16.1.1):SA:0(-102.5/5.0):. 
- Processed in 0.188554 secs); 28 Feb 2020 18:09:56 -0000
-Received: from unknown (HELO dodo.home.solinos.it)
- (dario.lesca@solinos.it@172.16.1.1)
- by mail.promoturviaggi.com with SMTP; 28 Feb 2020 19:09:56 +0100
-Message-ID: <33fafd6a8ff5f53a6e70f752fa879a903b0b0065.camel@solinos.it>
-Subject: Re: Samba 4.12 rc3: bind DNS say "named: client update denied"
-To: samba-technical@lists.samba.org
-Date: Fri, 28 Feb 2020 19:09:55 +0100
-In-Reply-To: <d804f548-50d1-f188-959c-57cd828174e8@samba.org>
-References: <a144cd2c0219399cea4473f6cf7e86b3dba5d6cf.camel@solinos.it>
- <5b43a40c-9d80-a6d1-cb63-046cef3bbf77@samba.org>
- <88708706a3ddaf37a6ea43ecd86289c0ada99b69.camel@solinos.it>
- <d804f548-50d1-f188-959c-57cd828174e8@samba.org>
-Organization: Solinos
-User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
+	id 1j7kdZ-00COVz-Vz; Fri, 28 Feb 2020 18:45:26 +0000
+Received: from mail-yw1-xc2f.google.com ([2607:f8b0:4864:20::c2f]:42969) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j7kdT-00COVs-Uc
+ for samba-technical@lists.samba.org; Fri, 28 Feb 2020 18:45:22 +0000
+Received: by mail-yw1-xc2f.google.com with SMTP id n127so4248659ywd.9
+ for <samba-technical@lists.samba.org>; Fri, 28 Feb 2020 10:45:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=+vT6b199TkuXlwgrFRReeOUJTXSIWJ1eAfz6tBN33BU=;
+ b=D7P6ummZtEgDRS/kmez111dDPj9sCrhk2NzplxacaZPItf+erqn2+1g8c3p3hLMUST
+ oPY0HEyaaJfUD60zQ8MdJqAJiaOlIqSjj7OYZr0I09ZhH1tuhmycGhnKN4eymfCrfnYF
+ HfF+NquRoMwAsi9dIJoWUDlMF9v0lohDL3q5CbBcCrKrr1Y9Jzq/zj5OgcYRxXjJezHU
+ NIiIjE13i4TimCzoN2AJbPgU/CwNfrgSga8yICIZYTVPXXhZY+pCPVaseISyn0nxs6Tu
+ Wf7RG0kfQ+gEp/BBAKmM6ehAa5Mngl/FAvUmVSsi+r0BAN5hrR2R2IGG82R/cRJg5nYR
+ i3QA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+vT6b199TkuXlwgrFRReeOUJTXSIWJ1eAfz6tBN33BU=;
+ b=sxYPkmXws9E6XXFcGnpzO/eT8Jgg2mTApcNfMmAbS7T2i5n3fbg6XcWj7m3Edhce2a
+ OLThLXlw6lKyTIjEXojr7DqcizxMotZz/fdMJJuG+7F+BrIqEQ0Xpw8RbTRSNxQ0snay
+ BH7uUNy1AO/sutG17SBE9Y2haN7Wiqy54b7Q5nmB3H6I26Re3rmD8DEwE1cPth3+E07X
+ F0/vESlKs4dPPULRea6z7DlJ4/obFLDgJEFi/8gqnXxzwHXV8yJ8AQTNXEOmpVcN3oU3
+ yPZCjwg2/j3l07BxZ3ISggYrwv230gVQef+bW8u6R0rag2ZJomlwNJljANMwvPvhczkS
+ 8KAQ==
+X-Gm-Message-State: APjAAAXdv4KTLTKCKrlPJBlGNqk6fft/b8cX8nUUTiP7Pkoy02RdUYE7
+ KMH13MzJKbRJj+LKHCkoi4wrgXEj7Tz/mjarkVQ=
+X-Google-Smtp-Source: APXvYqyPaDK1m1wZgfOJ1rhbt1AMs2fk2jJ5Cl6F7RtNJQOIQ8XZ1mR2wdCUyj6gXfFZezGMLMYy3yTAuUieRy0gRV8=
+X-Received: by 2002:a5b:2cc:: with SMTP id h12mr4874302ybp.85.1582915516686;
+ Fri, 28 Feb 2020 10:45:16 -0800 (PST)
 MIME-Version: 1.0
+References: <CAH2r5mvW_cpUhg-JA7pFd=rcYSSvT43rT2z9RGbkUpdR1fiLsg@mail.gmail.com>
+ <871rqfaqk8.fsf@suse.com>
+In-Reply-To: <871rqfaqk8.fsf@suse.com>
+Date: Fri, 28 Feb 2020 12:45:05 -0600
+Message-ID: <CAH2r5msk3sQr32a0L9vyQNHA_Z9-WGGzPKuTVsAa-=CNG57=QA@mail.gmail.com>
+Subject: Re: [SMB311][PATCHES] parse posix create context in order to handle
+ getattr
+To: =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -56,31 +71,45 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Dario Lesca via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Dario Lesca <d.lesca@solinos.it>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Il giorno dom, 23/02/2020 alle 14.41 +0000, Rowland penny via samba-
-technical ha scritto:
-> Yes, stop using the script, you only really need it if you have Unix
-> clients.
+I wanted to make sure this first patch which was closer to ready didn't
+regress anything so I temporarily put it in to run buildbot testing (which
+passed)
 
-Today I have try what you suggested: stop using script.
-Then I have remove from dhcpd.conf the "on {commit,release,expiry}"
-sessions, restart dhcpd, remove with samba-tool from DNS the A and PTR
-record added by the script, and power on win10a.
-Into DC log I have get this message:
-feb 28 18:54:18 addc1.fedora.loc named[718]: samba_dlz: starting
-transaction on zone fedora.locfeb 28 18:54:18 addc1.fedora.loc
-named[718]: client @0x7f128c3e5eb0 192.168.122.103#51072: update
-'fedora.loc/IN' deniedfeb 28 18:54:18 addc1.fedora.loc named[718]:
-samba_dlz: cancelling transaction on zone fedora.loc
-Also if I run on win10a the command "ipconfig /registerdns" I get these
-messages
-I must unjoind and rejoin win10a to domain?
-Thanks
+http://smb3-test-rhel-75.southcentralus.cloudapp.azure.com/#/builders/2/bui=
+lds/318
 
--- 
-Dario Lesca
-(inviato dal mio Linux Fedora 31 Workstation)
+
+On Fri, Feb 28, 2020, 05:39 Aur=C3=A9lien Aptel <aaptel@suse.com> wrote:
+
+> Steve French <smfrench@gmail.com> writes:
+> > First 1/2 of changes needed to support SMB3.1.1 POSIX Extensions
+> > support for getattr (stat) - the main remaining item left for the
+> > Linux kernel client support of the SMB3.1.1 POSIX Extensions.
+> >
+> > The patch from Aurelien allows SMB2_open() callers to pass down a
+> > POSIX data buffer that will trigger requesting POSIX create context
+> > and parsing the response into the provided buffer, and the second
+> > patch fixes some minor problems with the first patch.
+>
+> I know we want progress on this but this patch is part of a WIP series I
+> shared with Steve not meant to be sent here yet (cf all XXX which I use
+> in dev/debug). Thanks for spotting the errors and typos but please don't
+> merge this yet. I will send an updated version if you really want to
+> have it.
+>
+> Cheers,
+> --
+> Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+> GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+> SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg,=
+ DE
+> GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=
+=BCnchen)
+>
