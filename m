@@ -2,44 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8BD5A1750E6
-	for <lists+samba-technical@lfdr.de>; Mon,  2 Mar 2020 00:10:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B928176167
+	for <lists+samba-technical@lfdr.de>; Mon,  2 Mar 2020 18:45:09 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=LC9QHvk/WMA1y2EfeB24Z9Tj39CiORd8kg4l7zmNwf8=; b=oLZnECDxYIY/tl3X2hxO8DzE3Z
-	UPh+85XVeZdEai+gxB1n2LBxJCRTPLyhy5B8I2l/boU1yJ51pu+He/R5DqUJeex88P6iVB4uixZej
-	33Ssz2z072A49sFnLO5HndT18OEnySSrRo2nUPpS2mkB6/4L/lNCyz+FjzkvSnaDL99HfNWLt8z+k
-	kbZRRh+EqRzh0jkBpfGFxJlymJLIE8pfNlD6ddQipn3oVPhj6RTpNGNQs4DZhJUO8DOjMADyj87dY
-	Yu5/eMWYwO870e8mNAH2DcBNFiCooMrMUXUqkjZiwv7w0mjptkwO51QPbw07RIz673/22RPtAxVGW
-	V4vw2qrw==;
-Received: from localhost ([::1]:46886 helo=hr1.samba.org) 
+	bh=/xduGi7MecDfN+jwCHcvgRSlbk8ZE4f3qy6Us9qfS3c=; b=Iugp20fAC+glMGgtxjL0Lgd7WF
+	omZ24nkYzQtPoUZ45wCwa+7U1nU9nYRLNaqyAVQznE80dT+/P6FIkHweP+1Z2eD4w0F28ChbAYG/R
+	dMN15QCOEUdEjNV233KU7AicwWjKCeqxkRa7EwiiBB0uqLZToPIbWB2FWfcuPMi9Y90dRm19cPDy6
+	P5h1SqtwcF37XearI20dCT2Kr4RsqwYqffRJVYOhI77X+U/9aTs0AUEo0gqaALSZWdY57FCUrQ0vn
+	gIPgQoN6tzaP7jU5CgoZ519afXOzJEfUop+OuiRodQI5bQ4BDhGVDI1rdxPkQm9s5nf+sSMHqX7qo
+	/U+m43hg==;
+Received: from localhost ([::1]:32780 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j8Xhv-00ELs7-8S; Sun, 01 Mar 2020 23:09:11 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34866) 
+	id 1j8p6S-00EYjy-4l; Mon, 02 Mar 2020 17:43:40 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25900) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j8Xhq-00ELs0-B7
- for samba-technical@lists.samba.org; Sun, 01 Mar 2020 23:09:08 +0000
+ (Exim) id 1j8p6M-00EYjr-8R
+ for samba-technical@lists.samba.org; Mon, 02 Mar 2020 17:43:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:To:From:Message-ID:CC;
- bh=LC9QHvk/WMA1y2EfeB24Z9Tj39CiORd8kg4l7zmNwf8=; b=UD6uJ6dod94RhB9ZymHyatugq9
- wCuyzoYw3uDEdftxD7gWEJtripHJ1fpsQB7+WKPvm1agcy1Gr3uCSNarYt3tZ6CsPdMjNTD3zu6js
- lvziGR+gTyepLW/+J1EZGv1OGKLLuzAkXF2aHh/51nMmbLetXoavf8f3DKCGrVCQaLfLE+6pO18Qf
- lMb67UQybPwfxUCMBRotzp6wAMntw78Zvc2gnfVel1vvCZMfVw/1T1KtfNgVqupslBzxfUN/jsolp
- 86ewFOoxSyDSgdxVyejeL6BKHNJLnL0DLNYPlc9GWZxT6BTZjqcHIz6dB6TtiUPgoGjSAv/9xKFks
- MTywA78aFg0a6lBbwYBq+m6z6D8yZH52l44/kLCB+SEx2Yj8IqJOWJUXnxGswqPt5Jkq1di5vF2Ao
- XZAd5HBO6nLrM3qJlHTbBwSM9S/Ymrvq5C+yq6rZL251Ys7v1f/fE2aOgDy5luhdSxRC5CYPz5V6L
- 1G7/74baQq3q//xFCO4z/Vss;
+ bh=/xduGi7MecDfN+jwCHcvgRSlbk8ZE4f3qy6Us9qfS3c=; b=BMUAhAXuFS8Xofo0TcEgYe4sjV
+ utbXMJWKR+D18fhgEFZyrMZI72bxE1GWlSJ5gDZwisU2uonSxrpOFIhqjP1nj7Eg80WZDIAjrvFqP
+ c2JruS5X7kkylPs0bLMKA+ZsGBsT0a/pjSmobU6xhUGfYp9lmN8iL3BcGVzUaCbl5Anj9Y7Qr62ay
+ GzLmWDfe0SGxOtCF/t1xToj7ucdBemvAibHGkaXiozRZ6PgRHd+wpt8yvCieIj5gtPzuZlZPM0SMH
+ wBm0yljSRjx+l+77TEvndiXn83xCMZIu3ZtGoRlZBOIi48owokxCTq6jCeuDvv6/N6NOOMSfXv9qS
+ v9E4fhv/BCwtzExKM59ZjJ3ZPi+FXOz7OqwlAFgUyEkfzSPvFjn+FA9iYM6CRg9HA63+3BqbjoPXM
+ 9JfInfTNiQgh5wGTdJ63/wp/3Q7/nxYxopYgFNddfb86g47fgLFk+biLNczBZDobwgAvxn4El0t8c
+ wFpkfcXXru4uqAuwqUQYK8eC;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1j8Xho-0008Qi-7d
- for samba-technical@lists.samba.org; Sun, 01 Mar 2020 23:09:04 +0000
-Message-ID: <e72619e6e317195481e7af331204fd6b0c3956ca.camel@samba.org>
-Subject: Samba code coverage improved!
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Mon, 02 Mar 2020 12:09:01 +1300
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j8p6K-00080N-2H; Mon, 02 Mar 2020 17:43:32 +0000
+Message-ID: <7ce9976d10ab6c13580bd3713f3c537fc842c091.camel@samba.org>
+Subject: Re: Question with compiling 4.12rc2 and ceph.
+To: belle@samba.org, samba-technical@lists.samba.org
+Date: Tue, 03 Mar 2020 06:43:28 +1300
+In-Reply-To: <FA363CC88056472198851E19496FC799@rotterdam.bazuin.nl>
+References: <FA363CC88056472198851E19496FC799@rotterdam.bazuin.nl>
 Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
+User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -59,37 +60,33 @@ Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Recently, Gary patched Samba so the code coverage build finally
-succeeds, and I changed our CI settings so the run on the main
-gitlab.com mirror repo gets a full CI.
+On Wed, 2020-02-05 at 17:06 +0100, L. van Belle via samba-technical
+wrote:
+> hai, 
+>  
+> I have a question, 
+> Im working on the 4.12.0rc2  packages for debian buster.
+> im having a few problems with these parts in source3/wscript mainly the ceph
+> part. 
+> 
+> 
+> I was thinking base on : 
+>   --with-libcephfs no longer supported, please use compiler
+>   flags instead, e.g. GCC LIBRARY_PATH and C_INCLUDE_PATH''') 
+> 
+> That this would be correct : 
+>   --with-libcephfs=/usr/lib/$(DEB_HOST_MULTIARCH) \  
 
-This means we can see weekly updated code coverage here:
+I think you want --enable-cephfs.
 
-http://samba-team.gitlab.io/samba/index.html
-
-And if you look at my recent wiki edits, we have slightly increased our
-C code coverage in the past 10 months, while still increasing lines of
-code:
- 
-https://wiki.samba.org/index.php?title=Code_Coverage&type=revision&diff=16520&oldid=15683
-
-Well done all!
-
-(And someone else can finish updating the other figures if they like)
+You are building for packages installed in the normal paths on your
+host OS, so you shouldn't need to set any other paths.
 
 Andrew Bartlett
-
 -- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-https://catalyst.net.nz/services/samba
-
-
-
-
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
 
 
 
