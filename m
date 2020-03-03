@@ -2,45 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CA7D17747E
-	for <lists+samba-technical@lfdr.de>; Tue,  3 Mar 2020 11:48:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 456A41775D5
+	for <lists+samba-technical@lfdr.de>; Tue,  3 Mar 2020 13:26:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=srScjDv8u/BFqW8nelKtF0FyIOMvLpbZ9Ab3iI6CPJg=; b=U2RGc2h9eHbZ6G0c0UZlvCiTPi
-	ds9BK7yHIIOKcLV1NfW1YXXhw3lzN6jlo6EMPRMpBhLdKVdCv1LV9peQmiUWlNDN8EvS9Ah4g2LCy
-	zOBigUJ1v6YpJZI2+98YUEQfSnLulSrJ7GyYQnyoieNsOfFnpoKST6WyJokFyybqISo8IoKyHQEpE
-	jChSsEcsmJlK25leDdMAx8CDI0O8tl2AwlgHO/V7kD76tbxvDWtBkYuHMA18kjvt4Wn4eVv5sIhs9
-	gFfO35Bfmp1DZBVjwTo7DJjVlF3LPH6LBzvZEehkQPmKlHoNW6Jm48Yb2P/3d6fWuZvQXgJuT6sgQ
-	AdCg+H6A==;
-Received: from localhost ([::1]:53702 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=9/htpKz0LjoCZKoDIt8xAK/EkQTe9ymJmvvzc0ZPeZ8=; b=tv3K2mykwT3ZhN9flgzeCQajrm
+	WAK5pfnfuOG7xbwcDCgASv6FDq8D7/JHSxSF1PG8QuEYVJA9f3KOqnkbZK/RM4QO2ECmr/yHE+qkK
+	jP74k8rn6xEt6LROzh80ZqevxxWFoiCnBAGRjcb2mKFvDStJi+0M4gbIG4Y0GvRIrwsqM9CrPmSQe
+	axy+okzSoIU+H9wSWWco2NjBFGDBHZeb7VMXKMmWep91CsNLUup/lPzMUaiBd531dJTte+oeZg2dO
+	3k5szONC/IaIiKZ6eoeFS4pOkk5hbmAnvH1Rknk5SqcoZowF/kUu8PzN7IiiVdUORKtpSPtUn/+2w
+	yy3/vOwg==;
+Received: from localhost ([::1]:23790 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j955H-00EilB-14; Tue, 03 Mar 2020 10:47:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30224) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j9555-00EikV-A2; Tue, 03 Mar 2020 10:47:22 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=srScjDv8u/BFqW8nelKtF0FyIOMvLpbZ9Ab3iI6CPJg=; b=jH6q1vDOpXuYNnL6GsD947aTLA
- njD8qsZmBwVAL2KNYpAO7cE7uk2sVkLhA0/DLoY8VlnlKwYRPzrGtiUYsa3BYc9ELVCIks64D6H2E
- 9aVKiaZDWH61otgrXpkI9SZ1TadGFi7mq932p+Hh1n0i1/BUumuYtbEGOcnsx6ZKinfhIHljzOLAp
- US8NXtkKx8c25uyEDDgC8VvX2NbE43vNgMuEkoAew6b+c550LlDCtE4VLbGODxBeiSrHHggkQRNkm
- DxzR9BGs2ldFfj15UZ8tY5UMRm6/FFebxHdoEw3fnPkmOmK1PIKXk42mql/wT1OB2aW4lVy3S1J1Q
- Ma4n16VZYpfCIr2MSoSK0GbiicLF5GgDByRg93d70tc6KJsey5z1PRsIBOOFAYKO1a3hFgUfpeRyg
- XkvEBNL1eFTVcAc9xYzvmwTOaNWuFCTrJFt24jfQxySBUME6goek3KP6oNVmhEX6U/V3LOCQHMmWV
- M7reR6zV9bsgVqZ9I5a02g2J;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1j9554-0006ud-Ma; Tue, 03 Mar 2020 10:47:18 +0000
-Date: Tue, 3 Mar 2020 11:47:17 +0100
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.12.0 Available for Download
-Message-ID: <20200303104715.GA11956@carrie2>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="CE+1k2dSO48ffgeK"
-Content-Disposition: inline
-User-Agent: Mutt/1.9.4 (2018-02-28)
+	id 1j96c8-00ElCr-8w; Tue, 03 Mar 2020 12:25:32 +0000
+Received: from mailhopper2.bazuin.nl ([195.134.173.123]:41310) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j96c3-00ElCk-DH
+ for samba-technical@lists.samba.org; Tue, 03 Mar 2020 12:25:29 +0000
+X-Bazuin-en-Partners-MailScanner-Watermark: 1583842147.8212@JGhGzOFm+zMYlRFytDPsow
+X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
+X-Bazuin-en-Partners-MailScanner: Found to be clean
+X-Bazuin-en-Partners-MailScanner-ID: E1F6111F09A.A75D9
+X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
+ Partners for more information
+Received: from ms249-lin-003.rotterdam.bazuin.nl
+ (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
+ by mailhopper2.bazuin.nl (Postfix) with ESMTP id E1F6111F09A;
+ Tue,  3 Mar 2020 13:09:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
+ s=mail20180308; t=1583237346;
+ bh=DWm4FKKOtdZX0EUBdE+me7OYDeWraWMOfKbZBaNoRRg=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=IeUj5al/4KvXUDNc/Ey3yp7Fs56FxOYu30wpiLQUKmuU2LoTilVQKS1MqFdvpNK+D
+ fYIz8c+lKV6pk8nJfa/F3g4NaZSxdQgFHJ0UxjnNDnmerVGH6VJVzWxvpa3Xt8lNvq
+ stC/nDXK/ijKkXkkvgUUktcgvxofrDjhq9ghN8yPIJmvqtPDXx37QP4E5vZ4wc4t63
+ YO/ZPnXKGtyI3DcPJsrr5GneSsJDvTSvgNgCtbe7jBTRbOQfXTfeDdA2opDKY6YLEY
+ RT69Ks4vZ99xg8Td5VqWHhWh+1OfJcYsVY9QZt/5IKP11u55ZH2e4Y1nEK+VkXWVLk
+ 0CQG1m8ICizfA==
+Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
+ by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 362A83AF8C;
+ Tue,  3 Mar 2020 13:09:02 +0100 (CET)
+Subject: RE: Question with compiling 4.12rc2 and ceph.
+To: =?windows-1252?Q?Andrew_Bartlett?= <abartlet@samba.org>
+Date: Tue, 3 Mar 2020 13:09:02 +0100
+Mime-Version: 1.0
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <7ce9976d10ab6c13580bd3713f3c537fc842c091.camel@samba.org>
+References: <FA363CC88056472198851E19496FC799@rotterdam.bazuin.nl>
+X-Priority: 3 (Normal)
+X-Mailer: Zarafa 6.30.19-25148
+Thread-Index: AdXxVIapUEnjPp5eQI66b5Ljfz9zyw==
+Message-Id: <vmime.5e5e48de.4e44.62d64a126298e3be@ms249-lin-003.rotterdam.bazuin.nl>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,418 +67,56 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: kseeger@samba.org
+From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
+Cc: "=?windows-1252?Q?samba-technical=40lists.samba.org?="
+ <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Hai Andrew,=20
+
+Thank you, so simpel but so unclear to me ..=20
+I had to much focus on setting the compiler flags.=20
+
+Well, at least some .deb's are produced now, can i finaly go to fix that other parts found with lintian.
+
+Thank you very much.=20
+
+Greetz,=20
+
+Louis
+
+
+> -----Oorspronkelijk bericht-----
+> Van: samba-technical=20
+> [mailto:samba-technical-bounces@lists.samba.org] Namens=20
+> Andrew Bartlett via samba-technical
+> Verzonden: maandag 2 maart 2020 18:43
+> Aan: belle@samba.org; samba-technical@lists.samba.org
+> Onderwerp: Re: Question with compiling 4.12rc2 and ceph.
+>=20
+> On Wed, 2020-02-05 at 17:06 +0100, L. van Belle via samba-technical
+> wrote:
+> > hai,=20
+> > =20
+> > I have a question,=20
+> > Im working on the 4.12.0rc2  packages for debian buster.
+> > im having a few problems with these parts in=20
+> source3/wscript mainly the ceph
+> > part.=20
+> >=20
+> >=20
+> > I was thinking base on :=20
+> >   --with-libcephfs no longer supported, please use compiler
+> >   flags instead, e.g. GCC LIBRARY_PATH and C_INCLUDE_PATH''')=20
+> >=20
+> > That this would be correct :=20
+> >   --with-libcephfs=3D/usr/lib/$(DEB_HOST_MULTIARCH) \ =20
+>=20
+> I think you want --enable-cephfs.
+>=20
+> You are building for packages installed in the normal paths on your
+> host OS, so you shouldn't need to set any other paths.
 
---CE+1k2dSO48ffgeK
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Release Announcements
----------------------
-
-This is the first stable release of the Samba 4.12 release series.
-Please read the release notes carefully before upgrading.
-
-
-NEW FEATURES/CHANGES
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-Python 3.5 Required
--------------------
-
-Samba's minimum runtime requirement for python was raised to Python
-3.4 with samba 4.11.  Samba 4.12 raises this minimum version to Python
-3.5 both to access new features and because this is the oldest version
-we test with in our CI infrastructure.
-
-(Build time support for the file server with Python 2.6 has not
-changed)
-
-Removing in-tree cryptography: GnuTLS 3.4.7 required
-----------------------------------------------------
-
-Samba is making efforts to remove in-tree cryptographic functionality,
-and to instead rely on externally maintained libraries.  To this end,
-Samba has chosen GnuTLS as our standard cryptographic provider.
-
-Samba now requires GnuTLS 3.4.7 to be installed (including development
-headers at build time) for all configurations, not just the Samba AD
-DC.
-
-Thanks to this work Samba no longer ships an in-tree DES
-implementation and on GnuTLS 3.6.5 or later Samba will include no
-in-tree cryptography other than the MD4 hash and that
-implemented in our copy of Heimdal.
-
-Using GnuTLS for SMB3 encryption you will notice huge performance and copy
-speed improvements. Tests with the CIFS Kernel client from Linux Kernel 5.3
-show a 3x speed improvement for writing and a 2.5x speed improvement for re=
-ads!
-
-NOTE WELL: The use of GnuTLS means that Samba will honour the
-system-wide 'FIPS mode' (a reference to the US FIPS-140 cryptographic
-standard) and so will not operate in many still common situations if
-this system-wide parameter is in effect, as many of our protocols rely
-on outdated cryptography.
-
-A future Samba version will mitigate this to some extent where good
-cryptography effectively wraps bad cryptography, but for now that above
-applies.
-
-zlib library is now required to build Samba
--------------------------------------------
-
-Samba no longer includes a local copy of zlib in our source tarball.
-By removing this we do not need to ship (even where we did not
-build) the old, broken zip encryption code found there.
-
-New Spotlight backend for Elasticsearch
----------------------------------------
-
-Support for the macOS specific Spotlight search protocol has been enhanced
-significantly. Starting with 4.12 Samba supports using Elasticsearch as sea=
-rch
-backend. Various new parameters have been added to configure this:
-
-  spotlight backend =3D noindex | elasticsearch | tracker
-  elasticsearch:address =3D ADDRESS
-  elasticsearch:port =3D PORT
-  elasticsearch:use tls =3D BOOLEAN
-  elasticsearch:index =3D INDEXNAME
-  elasticsearch:mappings =3D PATH
-  elasticsearch:max results =3D NUMBER
-
-Samba also ships a Spotlight client command "mdfind" which can be used to s=
-earch
-any SMB server that runs the Spotlight RPC service. See the manpage of mdfi=
-nd
-for details.
-
-Note that when upgrading existing installations that are using the previous
-default Spotlight backend Gnome Tracker must explicitly set "spotlight back=
-end =3D
-tracker" as the new default is "noindex".
-
-'net ads kerberos pac save' and 'net eventlog export'
------------------------------------------------------
-
-The 'net ads kerberos pac save' and 'net eventlog export' tools will
-no longer silently overwrite an existing file during data export.  If
-the filename given exits, an error will be shown.
-
-Fuzzing
--------
-
-A large number of fuzz targets have been added to Samba, and Samba has
-been registered in Google's oss-fuzz cloud fuzzing service.  In
-particular, we now have good fuzzing coverage of our generated NDR
-parsing code.
-
-A large number of issues have been found and fixed thanks to this
-effort.
-
-'samba-tool' improvements add contacts as member to groups
-----------------------------------------------------------
-
-Previously 'samba-tool group addmemers' can just add users, groups and
-computers as members to groups. But also contacts can be members of
-groups. Samba 4.12 adds the functionality to add contacts to
-groups. Since contacts have no sAMAccountName, it's possible that
-there are more than one contact with the same name in different
-organizational units. Therefore it's necessary to have an option to
-handle group members by their DN.
-
-To get the DN of an object there is now the "--full-dn" option available
-for all necessary commands.
-
-The MS Windows UI allows to search for specific types of group members
-when searching for new members for a group. This feature is included
-here with the new samba-tool group addmembers "--object-type=3DOBJECTYPE"
-option. The different types are selected accordingly to the Windows
-UI. The default samba-toole behaviour shouldn't be changed.
-
-Allow filtering by OU or subtree in samba-tool
-----------------------------------------------
-
-A new "--base-dn" and "--member-base-dn" option is added to relevant
-samba-tool user, group and ou management commands to allow operation
-on just one part of the AD tree, such as a single OU.
-
-VFS
-=3D=3D=3D
-
-SMB_VFS_NTIMES
---------------
-
-Samba now uses a sentinel value based on utimensat(2) UTIME_OMIT to denote
-to-be-ignored timestamp variables passed to the SMB_VFS_NTIMES() VFS functi=
-on.
-
-VFS modules can check whether any of the time values inside a struct
-smb_file_time is to be ignored by calling is_omit_timespec() on the value.
-
-'io_uring' vfs module
----------------------
-
-The module makes use of the new io_uring infrastructure
-(intruduced in Linux 5.1), see https://lwn.net/Articles/776703/
-
-Currently this implements SMB_VFS_{PREAD,PWRITE,FSYNC}_SEND/RECV
-and avoids the overhead of the userspace threadpool in the default
-vfs backend. See also vfs_io_uring(8).
-
-In order to build the module you need the liburing userspace library
-and its developement headers installed, see
-https://git.kernel.dk/cgit/liburing/
-
-At runtime you'll need a Linux kernel with version 5.1 or higher.
-Note that 5.4.14 and 5.4.15 have a regression that breaks the Samba
-module! The regression was fixed in Linux 5.4.16 again.
-
-MS-DFS changes in the VFS
--------------------------
-
-This release changes set getting and setting of MS-DFS redirects
-on the filesystem to go through two new VFS functions:
-
-SMB_VFS_CREATE_DFS_PATHAT()
-SMB_VFS_READ_DFS_PATHAT()
-
-instead of smbd explicitly storing MS-DFS redirects inside
-symbolic links on the filesystem. The underlying default
-implementations of this has not changed, the redirects are
-still stored inside symbolic links on the filesystem, but
-moving the creation and reading of these links into the VFS
-as first-class functions now allows alternate methods of
-storing them (maybe in extended attributes) for OEMs who
-don't want to mis-use filesystem symbolic links in this
-way.
-
-
-CTDB changes
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-* The ctdb_mutex_fcntl_helper periodically re-checks the lock file
-
-  The re-check period is specified using a 2nd argument to this
-  helper.  The default re-check period is 5s.
-
-  If the file no longer exists or the inode number changes then the
-  helper exits.  This triggers an election.
-
-
-REMOVED FEATURES
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-The smb.conf parameter "write cache size" has been removed.
-
-Since the in-memory write caching code was written, our write path has
-changed significantly. In particular we have gained very flexible
-support for async I/O, with the new linux io_uring interface in
-development.  The old write cache concept which cached data in main
-memory followed by a blocking pwrite no longer gives any improvement
-on modern systems, and may make performance worse on memory-contrained
-systems, so this functionality should not be enabled in core smbd
-code.
-
-In addition, it complicated the write code, which is a performance
-critical code path.
-
-If required for specialist purposes, it can be recreated as a VFS
-module.
-
-Retiring DES encryption types in Kerberos.
-------------------------------------------
-With this release, support for DES encryption types has been removed from
-Samba, and setting DES_ONLY flag for an account will cause Kerberos
-authentication to fail for that account (see RFC-6649).
-
-Samba-DC: DES keys no longer saved in DB.
------------------------------------------
-When a new password is set for an account, Samba DC will store random keys
-in DB instead of DES keys derived from the password.  If the account is bei=
-ng
-migrated to Windbows or to an older version of Samba in order to use DES ke=
-ys,
-the password must be reset to make it work.
-
-Heimdal-DC: removal of weak-crypto.
------------------------------------
-Following removal of DES encryption types from Samba, the embedded Heimdal
-build has been updated to not compile weak crypto code (HEIM_WEAK_CRYPTO).
-
-vfs_netatalk: The netatalk VFS module has been removed.
--------------------------------------------------------
-
-The netatalk VFS module has been removed. It was unmaintained and is not ne=
-eded
-any more.
-
-BIND9_FLATFILE deprecated
--------------------------
-
-The BIND9_FLATFILE DNS backend is deprecated in this release and will
-be removed in the future.  This was only practically useful on a single
-domain controller or under expert care and supervision.
-
-This release removes the 'rndc command' smb.conf parameter, which
-supported this configuration by writing out a list of DCs permitted to
-make changes to the DNS Zone and nudging the 'named' server if a new
-DC was added to the domain.  Administrators using BIND9_FLATFILE will
-need to maintain this manually from now on.
-
-
-smb.conf changes
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-  Parameter Name                     Description                Default
-  --------------                     -----------                -------
-
-  elasticsearch:address              New                        localhost
-  elasticsearch:port                 New                        9200
-  elasticsearch:use tls              New                        No
-  elasticsearch:index                New                        _all
-  elasticsearch:mappings             New                        DATADIR/ela=
-sticsearch_mappings.json
-  elasticsearch:max results          New                        100
-  nfs4:acedup                        Changed default            merge
-  rndc command                       Removed
-  write cache size                   Removed
-  spotlight backend		     New			noindex
-
-
-CHANGES SINCE 4.12.0rc4
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-o  Andrew Bartlett <abartlet@samba.org>
-   * BUG 14258: dsdb: Correctly handle memory in objectclass_attrs.
-
-
-CHANGES SINCE 4.12.0rc3
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-o  Jeremy Allison <jra@samba.org>
-   * BUG 14269: s3: DFS: Don't allow link deletion on a read-only share.
-
-o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-   * BUG 14284: pidl/wscript: configure should insist on Parse::Yapp::Drive=
-r.
-
-o  Andrew Bartlett <abartlet@samba.org>
-   * BUG 14270: ldb: Fix search with scope ONE and small result sets.=20
-   * BUG 14284: build: Do not check if system perl modules should be bundle=
-d.
-
-o  Volker Lendecke <vl@samba.org>
-   * BUG 14285: smbd fails to handle EINTR from open(2) properly.
-
-o  Stefan Metzmacher <metze@samba.org>
-   * BUG 14270: ldb: version 2.1.1.
-
-
-CHANGES SINCE 4.12.0rc2
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-o  Jeremy Allison <jra@samba.org>
-   * BUG 14282: Set getting and setting of MS-DFS redirects on the filesyst=
-em
-     to go through two new VFS functions SMB_VFS_CREATE_DFS_PATHAT() and
-     SMB_VFS_READ_DFS_PATHAT().
-
-o  Andrew Bartlett <abartlet@samba.org>
-   * BUG 14255: bootstrap: Remove un-used dependency python3-crypto.
-
-o  Volker Lendecke <vl@samba.org>
-   * BUG 14247: Fix CID 1458418 and 1458420.
-   * BUG 14281: lib: Fix a shutdown crash with "clustering =3D yes".
-
-o  Stefan Metzmacher <metze@samba.org>
-   * BUG 14247: Winbind member (source3) fails local SAM auth with empty do=
-main
-     name.
-   * BUG 14265: winbindd: Handle missing idmap in getgrgid().
-   * BUG 14271: Don't use forward declaration for GnuTLS typedefs.
-   * BUG 14280: Add io_uring vfs module.
-
-o  Andreas Schneider <asn@samba.org>
-   * BUG 14250: libcli:smb: Improve check for gnutls_aead_cipher_(en|de)cry=
-ptv2.
-
-
-CHANGES SINCE 4.12.0rc1
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-o  Jeremy Allison <jra@samba.org>
-   * BUG 14239: s3: lib: nmblib. Clean up and harden nmb packet processing.
-
-o  Andreas Schneider <asn@samba.org>
-   * BUG 14253: lib:util: Log mkdir error on correct debug levels.
-
-
-KNOWN ISSUES
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.12#Release_bl=
-ocking_bugs
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=3D=3D Our Code, Our Bugs, Our Responsibility.
-=3D=3D The Samba Team
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Download Details
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
-=66rom:
-
-        https://download.samba.org/pub/samba/stable/
-
-The release notes are available online at:
-
-        https://www.samba.org/samba/history/samba-4.12.0.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                        --Enjoy
-                        The Samba Team
-
---CE+1k2dSO48ffgeK
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCXl41sAAKCRAoaL1+KxeT
-UZDjAKCVcj+YIenepR2tMRFzgXip+KHB2QCgwR+GENR228H2vc3qjT/LqbAIU9I=
-=U82i
------END PGP SIGNATURE-----
-
---CE+1k2dSO48ffgeK--
 
