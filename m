@@ -2,58 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 456A41775D5
-	for <lists+samba-technical@lfdr.de>; Tue,  3 Mar 2020 13:26:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 011F3178793
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Mar 2020 02:26:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=9/htpKz0LjoCZKoDIt8xAK/EkQTe9ymJmvvzc0ZPeZ8=; b=tv3K2mykwT3ZhN9flgzeCQajrm
-	WAK5pfnfuOG7xbwcDCgASv6FDq8D7/JHSxSF1PG8QuEYVJA9f3KOqnkbZK/RM4QO2ECmr/yHE+qkK
-	jP74k8rn6xEt6LROzh80ZqevxxWFoiCnBAGRjcb2mKFvDStJi+0M4gbIG4Y0GvRIrwsqM9CrPmSQe
-	axy+okzSoIU+H9wSWWco2NjBFGDBHZeb7VMXKMmWep91CsNLUup/lPzMUaiBd531dJTte+oeZg2dO
-	3k5szONC/IaIiKZ6eoeFS4pOkk5hbmAnvH1Rknk5SqcoZowF/kUu8PzN7IiiVdUORKtpSPtUn/+2w
-	yy3/vOwg==;
-Received: from localhost ([::1]:23790 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=OaUo1cV0A4HpPE+hq0yXLjaoxwgmqdr4CR3E3siTMYA=; b=3LSD9u6tNjCOUIsm2eWj8PUo/j
+	trsdj7AhEIvAKFXvI7HVOvtpiWkTRNSdQKRuV9Uay8I0vvZLtz7XyGf+szX9SLhXa7o30Q8D7Tr28
+	HYPKwR0osj/CuMBB5mZJZ3C1gjGNna0t6nwSfm4DMTIleb1RMi+ZjOyQvqSa0bCn7RGc9i+3GVyyt
+	L3s6rV7ZNX7BEkK1dyGn+wCwXS6itdFFshhPrWUuEGNWnG/JBH59/9XKqVAVxiMLeABMHrMJBF6w9
+	8kGjJhoxAzxlpyVy8mPehLd8vWNL5rW3Q5WWKhNFZ471BOnMskv2xbKVg1hpV49LjRiKwLkoTh/tK
+	4s/lCDqg==;
+Received: from localhost ([::1]:61960 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j96c8-00ElCr-8w; Tue, 03 Mar 2020 12:25:32 +0000
-Received: from mailhopper2.bazuin.nl ([195.134.173.123]:41310) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j96c3-00ElCk-DH
- for samba-technical@lists.samba.org; Tue, 03 Mar 2020 12:25:29 +0000
-X-Bazuin-en-Partners-MailScanner-Watermark: 1583842147.8212@JGhGzOFm+zMYlRFytDPsow
-X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
-X-Bazuin-en-Partners-MailScanner: Found to be clean
-X-Bazuin-en-Partners-MailScanner-ID: E1F6111F09A.A75D9
-X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
- Partners for more information
-Received: from ms249-lin-003.rotterdam.bazuin.nl
- (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
- by mailhopper2.bazuin.nl (Postfix) with ESMTP id E1F6111F09A;
- Tue,  3 Mar 2020 13:09:06 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
- s=mail20180308; t=1583237346;
- bh=DWm4FKKOtdZX0EUBdE+me7OYDeWraWMOfKbZBaNoRRg=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=IeUj5al/4KvXUDNc/Ey3yp7Fs56FxOYu30wpiLQUKmuU2LoTilVQKS1MqFdvpNK+D
- fYIz8c+lKV6pk8nJfa/F3g4NaZSxdQgFHJ0UxjnNDnmerVGH6VJVzWxvpa3Xt8lNvq
- stC/nDXK/ijKkXkkvgUUktcgvxofrDjhq9ghN8yPIJmvqtPDXx37QP4E5vZ4wc4t63
- YO/ZPnXKGtyI3DcPJsrr5GneSsJDvTSvgNgCtbe7jBTRbOQfXTfeDdA2opDKY6YLEY
- RT69Ks4vZ99xg8Td5VqWHhWh+1OfJcYsVY9QZt/5IKP11u55ZH2e4Y1nEK+VkXWVLk
- 0CQG1m8ICizfA==
-Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
- by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 362A83AF8C;
- Tue,  3 Mar 2020 13:09:02 +0100 (CET)
-Subject: RE: Question with compiling 4.12rc2 and ceph.
-To: =?windows-1252?Q?Andrew_Bartlett?= <abartlet@samba.org>
-Date: Tue, 3 Mar 2020 13:09:02 +0100
+	id 1j9InP-00Er3q-DZ; Wed, 04 Mar 2020 01:25:59 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55596) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j9InG-00Er3j-Gv
+ for samba-technical@lists.samba.org; Wed, 04 Mar 2020 01:25:52 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=OaUo1cV0A4HpPE+hq0yXLjaoxwgmqdr4CR3E3siTMYA=; b=v/CGEVHQUcLOLlBCeBT8+gDEnk
+ YGwncYmSJOBzx7vXHZVK2H5DPG1NUyOKpTc8LO7C0VkMH48RUwe+9iRU/wX4zEDFTSOHtjFGfeRxb
+ +CI6MOjevbXJpTRrINCA7mnsJWKG0dwgF+RsEGOoliZCVyZ26qyCpBH1OnGUbxOoOzOUpIxDqC8xB
+ pL1VpNS64CdvUfq0lMIhcX2gTV1xUjwkI2kNYT6pPwd2unus1Evoxj713nRlGLmXLTNkZn7u/uQNY
+ bxe0wL84nKzFr1dNVlwDE9E67sS/ZUEDNnThLCwW+TBUwPvQx7HnsPuquCC5NhiXl3kIQgs32rNvv
+ BfYGzicHIJjUO24FmInVcauM2l15Qxts+hCKeBYYeGO5wL9BforPVfaAh6TmzZ07e8IqURsVL7Eh+
+ GGUK1qWCuXN86vqZJkCGsRrkPohQN6FXwsaj5HuXAnd2uZWffiMobtUSBMjQSOUm253GlGa4Z1rL6
+ TbncJMKZXwVdROXX7swK/85k;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j9InE-0002lw-SH
+ for samba-technical@lists.samba.org; Wed, 04 Mar 2020 01:25:49 +0000
+Message-ID: <7fa9094832aa924f9526d656e1dc21de823c0075.camel@samba.org>
+Subject: Python 3.6 for Samba 4.13 in Sep 2020?
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Wed, 04 Mar 2020 14:25:44 +1300
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
 Mime-Version: 1.0
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <7ce9976d10ab6c13580bd3713f3c537fc842c091.camel@samba.org>
-References: <FA363CC88056472198851E19496FC799@rotterdam.bazuin.nl>
-X-Priority: 3 (Normal)
-X-Mailer: Zarafa 6.30.19-25148
-Thread-Index: AdXxVIapUEnjPp5eQI66b5Ljfz9zyw==
-Message-Id: <vmime.5e5e48de.4e44.62d64a126298e3be@ms249-lin-003.rotterdam.bazuin.nl>
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,56 +54,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
-Cc: "=?windows-1252?Q?samba-technical=40lists.samba.org?="
- <samba-technical@lists.samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hai Andrew,=20
+G'Day,
 
-Thank you, so simpel but so unclear to me ..=20
-I had to much focus on setting the compiler flags.=20
+I wondered if we could set our minimum python version at Python 3.6 for
+Samba 4.13?
 
-Well, at least some .deb's are produced now, can i finaly go to fix that other parts found with lintian.
+It has useful new features like PEP 498: Formatted string literals
 
-Thank you very much.=20
+https://docs.python.org/3/whatsnew/3.6.html#whatsnew36-pep498
 
-Greetz,=20
+More particularly, recent tests showed that the only two platforms
+without it are Ubuntu 16.04 (Xenial) and Debian 9 (Streach).
 
-Louis
+Debian 10 has been released for 6 months now, and will have been out
+for more than a year by the time we release Samba 4.13, and likewise
+there will be a new Ubuntu LTS 20.04.
+
+This came up because a small helper script failed to parse when we
+extended the samba-o3 tests (which run on each host) to include the
+local "none" tests 
+https://gitlab.com/samba-team/samba/-/merge_requests/938
+
+I realise it would be 'simpler' to just change that script, but I
+wanted to raise the broader question in the hope that we could steadily
+increase that minimum version.
+
+See https://gitlab.com/samba-team/samba/-/merge_requests/1193
+
+Thanks!
+
+Andrew Bartlett
+-- 
+Andrew Bartlett
+https://samba.org/~abartlet/
+Authentication Developer, Samba Team         https://samba.org
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+https://catalyst.net.nz/services/samba
 
 
-> -----Oorspronkelijk bericht-----
-> Van: samba-technical=20
-> [mailto:samba-technical-bounces@lists.samba.org] Namens=20
-> Andrew Bartlett via samba-technical
-> Verzonden: maandag 2 maart 2020 18:43
-> Aan: belle@samba.org; samba-technical@lists.samba.org
-> Onderwerp: Re: Question with compiling 4.12rc2 and ceph.
->=20
-> On Wed, 2020-02-05 at 17:06 +0100, L. van Belle via samba-technical
-> wrote:
-> > hai,=20
-> > =20
-> > I have a question,=20
-> > Im working on the 4.12.0rc2  packages for debian buster.
-> > im having a few problems with these parts in=20
-> source3/wscript mainly the ceph
-> > part.=20
-> >=20
-> >=20
-> > I was thinking base on :=20
-> >   --with-libcephfs no longer supported, please use compiler
-> >   flags instead, e.g. GCC LIBRARY_PATH and C_INCLUDE_PATH''')=20
-> >=20
-> > That this would be correct :=20
-> >   --with-libcephfs=3D/usr/lib/$(DEB_HOST_MULTIARCH) \ =20
->=20
-> I think you want --enable-cephfs.
->=20
-> You are building for packages installed in the normal paths on your
-> host OS, so you shouldn't need to set any other paths.
+
+
+
 
 
