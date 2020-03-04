@@ -2,41 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 011F3178793
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Mar 2020 02:26:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07F391787B5
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Mar 2020 02:47:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=OaUo1cV0A4HpPE+hq0yXLjaoxwgmqdr4CR3E3siTMYA=; b=3LSD9u6tNjCOUIsm2eWj8PUo/j
-	trsdj7AhEIvAKFXvI7HVOvtpiWkTRNSdQKRuV9Uay8I0vvZLtz7XyGf+szX9SLhXa7o30Q8D7Tr28
-	HYPKwR0osj/CuMBB5mZJZ3C1gjGNna0t6nwSfm4DMTIleb1RMi+ZjOyQvqSa0bCn7RGc9i+3GVyyt
-	L3s6rV7ZNX7BEkK1dyGn+wCwXS6itdFFshhPrWUuEGNWnG/JBH59/9XKqVAVxiMLeABMHrMJBF6w9
-	8kGjJhoxAzxlpyVy8mPehLd8vWNL5rW3Q5WWKhNFZ471BOnMskv2xbKVg1hpV49LjRiKwLkoTh/tK
-	4s/lCDqg==;
-Received: from localhost ([::1]:61960 helo=hr1.samba.org) 
+	bh=ARiVq/5f9Bs9V0+lnxVKbNzTc5VGuBH2A+kjQq32Zbw=; b=GcKPI5Che7PRpiloV1UT3NSGuC
+	9Xvvu4W4Td8Q9sHBpbzs0o/EDfPt2EnRCt76QMmk3w4stL8XSyhDexoaGUvKOtkGSmVN64SlJcHaQ
+	cn6OOMMht6hd0QgqRXAGj8UY1w4P/CtAy8Y9Y0ak3wVfsoQZ7EifFxiDJtJKEtEOlXIg0vv8lwfDc
+	bREMHQicP8FewyvlQy8pAi6dQv+3tXUR/maCACY7YWkj4ZNwzoGDaT8KjJkZEn5CESnTe0BYO++j5
+	2nYTCyp94jQ+bBsewxBsUgSAgclCwBZZpsw0psffMxdypSyG/rr6Nk4Q7t+RDgDzdF0DVxYHWLaRT
+	8wjSorRA==;
+Received: from localhost ([::1]:62716 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j9InP-00Er3q-DZ; Wed, 04 Mar 2020 01:25:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55596) 
+	id 1j9J87-00ErAd-SL; Wed, 04 Mar 2020 01:47:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61268) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j9InG-00Er3j-Gv
- for samba-technical@lists.samba.org; Wed, 04 Mar 2020 01:25:52 +0000
+ (Exim) id 1j9J80-00ErAW-DO
+ for samba-technical@lists.samba.org; Wed, 04 Mar 2020 01:47:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:To:From:Message-ID:CC;
- bh=OaUo1cV0A4HpPE+hq0yXLjaoxwgmqdr4CR3E3siTMYA=; b=v/CGEVHQUcLOLlBCeBT8+gDEnk
- YGwncYmSJOBzx7vXHZVK2H5DPG1NUyOKpTc8LO7C0VkMH48RUwe+9iRU/wX4zEDFTSOHtjFGfeRxb
- +CI6MOjevbXJpTRrINCA7mnsJWKG0dwgF+RsEGOoliZCVyZ26qyCpBH1OnGUbxOoOzOUpIxDqC8xB
- pL1VpNS64CdvUfq0lMIhcX2gTV1xUjwkI2kNYT6pPwd2unus1Evoxj713nRlGLmXLTNkZn7u/uQNY
- bxe0wL84nKzFr1dNVlwDE9E67sS/ZUEDNnThLCwW+TBUwPvQx7HnsPuquCC5NhiXl3kIQgs32rNvv
- BfYGzicHIJjUO24FmInVcauM2l15Qxts+hCKeBYYeGO5wL9BforPVfaAh6TmzZ07e8IqURsVL7Eh+
- GGUK1qWCuXN86vqZJkCGsRrkPohQN6FXwsaj5HuXAnd2uZWffiMobtUSBMjQSOUm253GlGa4Z1rL6
- TbncJMKZXwVdROXX7swK/85k;
+ bh=ARiVq/5f9Bs9V0+lnxVKbNzTc5VGuBH2A+kjQq32Zbw=; b=GDM6RIIKCFGpa0WAaSQpHfQQ+S
+ AdL4BPDvqlGI9YcODrqs9sgQ8Kt02W1/ExSvIlrd6mwy/qi+P/G9T7Wz4HxLbptElvStBUblmHt2g
+ HQwPQ+ay8yHqmW3X4BwM6IYDkZNTX05m/nHoYz8BQ4novRZ1DKe9iZSXBo4svnQr+Ks3vfduhqKCh
+ FXTD4P6cL6RZdnINw340b2dnznyT26zZVwh4KuZHKKcDeZlFpMGrRO6bO9u27wcPNWemgZy7qKvvJ
+ TlGz2vBEWDXClNJDpXDmxCniUW26Hrizjh1pp2pUP9BSWCFrmED6s8COsd2ReoYdmPg2HorkmtT9o
+ WfYttcaw+ac23W/eOKFp9J6RckH8nVmQp+vZSRcwInmnXfrHiglhmhiCcuXAdDn8UCHvHlE5vMGjS
+ Hsm86K6XlPR7bwLclnCHAQzRBDZHLRYpKztSsF2dQrflm8gmWPpHC3wj8J59OzO6WWeIMJU5FmUpJ
+ LUrJ2kuvH099UPGg9J3AMOSm;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1j9InE-0002lw-SH
- for samba-technical@lists.samba.org; Wed, 04 Mar 2020 01:25:49 +0000
-Message-ID: <7fa9094832aa924f9526d656e1dc21de823c0075.camel@samba.org>
-Subject: Python 3.6 for Samba 4.13 in Sep 2020?
+ (Exim) id 1j9J7z-0002x9-3y
+ for samba-technical@lists.samba.org; Wed, 04 Mar 2020 01:47:15 +0000
+Message-ID: <83b3b489fe59f7a6b6c4528292ea7cbecd97dc21.camel@samba.org>
+Subject: In-tree Crypto removal progress
 To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Wed, 04 Mar 2020 14:25:44 +1300
+Date: Wed, 04 Mar 2020 14:47:12 +1300
 Content-Type: text/plain; charset="UTF-8"
 X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
 Mime-Version: 1.0
@@ -59,34 +59,18 @@ Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-G'Day,
+While checking on the previous thread I thought I would see where we
+are at with being able to remove the in-tree AES code.
 
-I wondered if we could set our minimum python version at Python 3.6 for
-Samba 4.13?
+The blocking OS versions (missing the CFB8 and CMAC support) are:
+ - Ubuntu 16.04
+ - Ubuntu 18.04
+ - Debian 9
+ - Centos 7 (or build a newer compat library)
 
-It has useful new features like PEP 498: Formatted string literals
-
-https://docs.python.org/3/whatsnew/3.6.html#whatsnew36-pep498
-
-More particularly, recent tests showed that the only two platforms
-without it are Ubuntu 16.04 (Xenial) and Debian 9 (Streach).
-
-Debian 10 has been released for 6 months now, and will have been out
-for more than a year by the time we release Samba 4.13, and likewise
-there will be a new Ubuntu LTS 20.04.
-
-This came up because a small helper script failed to parse when we
-extended the samba-o3 tests (which run on each host) to include the
-local "none" tests 
-https://gitlab.com/samba-team/samba/-/merge_requests/938
-
-I realise it would be 'simpler' to just change that script, but I
-wanted to raise the broader question in the hope that we could steadily
-increase that minimum version.
-
-See https://gitlab.com/samba-team/samba/-/merge_requests/1193
-
-Thanks!
+We should re-consider our minimum OS versions again 6 months time when
+CentOS 7 will feel quite old and Ubuntu 20.20 is likely to be both well
+accepted and hopefully installed on sn-devel.
 
 Andrew Bartlett
 -- 
