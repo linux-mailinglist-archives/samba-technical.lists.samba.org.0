@@ -2,58 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39428178A8E
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Mar 2020 07:24:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECD12178C42
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Mar 2020 09:09:09 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=tbcuDfYaDl0s2pOUxHvvOkfOWHYsJpebfP0ObmyJLhA=; b=DjNRtTSwQWe0vEhPBGcWIFPZoH
-	NmKdqoPFqAsSfuexhcjU+bzdRwqk4jCaNZ/dvGqJ7l5QRltMyZ2RarJY2aQfwiY17AVkojB4PpVL8
-	/eVKIlm8yOuteJO1vkUtCfqw1mQR2mUzBL3R7Zn71tUfCaUSYRGXwCTo59eA3mtTfuEVixcDLvpQ/
-	bKgMA3Ivxr6gqdpDu6KPihs8w2laFlt69UwOmueeSqDG+/92paztOlx4r8oGhZoWmgnOnRCLe7VMQ
-	CATwRXdcqagOu3hQkMfYCt4C6q9T2tSb3co6XCMWjJQaFjFKgRbUhqcGppr4tadfVhyVGhLtRxmEw
-	b20poZhA==;
-Received: from localhost ([::1]:65062 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=KfJFyFSk2wamDB5xMC8LiByh0E4BM6qx2g/WkMV7Qos=; b=YkGkQ+IBrCcgBkXdz1KeHJNgos
+	aYtdYmLCgZ0gGan5wPC0Ilr9p6xCrAKykJ8by5QivZrzr8bRgJA5ozqVCygdZ3Nwy7mJUUCVI8+AX
+	SAvW8HxrObaI+kpHE9lzqRxiUDKd3i//+SaP2rWOQLQE1uJkM6959AEDnSQbmkPsGwgZ6D13qRjaQ
+	eiWqoJwZKhN3bOJInnObQjPGjUTADxJgo2CPyVefPynVm+XyGRgth2/v7VUr2pqPZgMEhfhzZ8h53
+	1ozXAjWdTwAJU2WVap9kqlEFeNoZEa6jceSfGjn4ftH3JMBpkFBSVo6DRKgmUo7HYV9QBknGWJ3fG
+	Z2/k/TPg==;
+Received: from localhost ([::1]:25584 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j9NRO-00ErmG-DN; Wed, 04 Mar 2020 06:23:34 +0000
-Received: from mail-yw1-xc43.google.com ([2607:f8b0:4864:20::c43]:34620) 
+	id 1j9P55-00Et3k-Uh; Wed, 04 Mar 2020 08:08:40 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60730) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j9NRJ-00Erm8-6j
- for samba-technical@lists.samba.org; Wed, 04 Mar 2020 06:23:31 +0000
-Received: by mail-yw1-xc43.google.com with SMTP id o186so1012486ywc.1
- for <samba-technical@lists.samba.org>; Tue, 03 Mar 2020 22:23:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=tbcuDfYaDl0s2pOUxHvvOkfOWHYsJpebfP0ObmyJLhA=;
- b=pnUUEvB3emIIYIR+4DE+c2kjKv/n3JDAttQZl/Z8rY5peVO84IFZ7XMRFn9sGz13ki
- 7xYAbcCnds8+jE3Az1o6tS6Vm0utLaCW75ICVgGZ36fvpIW5pNm4AhSJONxVtqsMlhQ8
- tJNldWnRN0W9DXGj6W9iGcdmxomrCXhDZGwPgyezJSieiMeBjiVcstmnvKXulRAZssbP
- g6lqxXdV6UB42snjshIGMEvZF/8PUKHp1iQi71wp2TNfyJxRXDZSlyyOZFv8kvSe+hSV
- fORT4Wbocws1DsnD1VTADO3nTJX4Rrpndhhm5qtsli8VqT35VW9LbRPAC6+kFYnx+51p
- E96A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=tbcuDfYaDl0s2pOUxHvvOkfOWHYsJpebfP0ObmyJLhA=;
- b=TYp4k5VanMvh2M3+Z568YBHAGXiv9JbgjPNRhvz12ByKIj8sbfc3SnmzdkDOpct4bd
- V1VtOkBdxIpRSFjyRleLuu6NUrGRuVQ0xOSh3horpqz2C8+mwow77+BZIrPwSaUKgYsx
- E3tj/aZ+0GjzbxGpak3DjangtVcl3wgcxcFwbiPw3ETHWTI8ZtJSi+N4QWJY3XHrjdHJ
- TaF0mmEBP9DP44U7X6ES1oXd1hmhnWzx3650Wiynsui//QgSYWlKOB3KEt1G3jw6mHlG
- 6gwAggDmArqOB22KTfSdRymEp6+hMzRCe9RYKZvA7nyjaH5PtL80I/O0XvAc//6YjqAN
- xDKQ==
-X-Gm-Message-State: ANhLgQ3ftVYfj1sEU+xgC5urTkxhHAXiA1c5+xa6fHsfLQ6sIPnJD8uU
- /rH+T8G9xkh7mzmyF1imUNSPhScEIidmqHrBKmY=
-X-Google-Smtp-Source: ADFU+vtJJiFniW/eKxBD4MR+qeAqmZ5k8NJak28YOj5w+Lndf/ByC4XUp8y8n7q9Pqhtb5af3SjTW245SjErulbzu/Q=
-X-Received: by 2002:a81:4cc2:: with SMTP id z185mr1475074ywa.357.1583303007222; 
- Tue, 03 Mar 2020 22:23:27 -0800 (PST)
+ (Exim) id 1j9P51-00Et3d-DR
+ for samba-technical@lists.samba.org; Wed, 04 Mar 2020 08:08:37 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=KfJFyFSk2wamDB5xMC8LiByh0E4BM6qx2g/WkMV7Qos=; b=xCxGxRtBFzhKsxSZUB6HW9qGEa
+ gYApqcbQoqda4fdpdSizyHcPRx1/vlvmChjPufRShS5OJHmmNeAdWO0uAJL5dU36GlWr/BWpyc9Eb
+ WCSJLG4Pw+mnuuRZ0EK7G8su89uuKrPW+9NdEWOQMmbKggeUtpREBmqcJMR8yS2RVQe9I/atUM5rH
+ 0XIBc9saiYIa62pQfOQ1SReVcmZmM+akfE4+hbqIup8KDqOL/om2A82ZbwABZUihmiggOA1+unuZv
+ m9KVCAZvWS9OrVTw1oK34WrbPDn+usxRAtz4S+pjlGCmOQNdsxG41/VMB0NMaemOB5lLDeOr4R4AZ
+ CCWksOom2qvRCfgCEGm7HSOx7uebIV903oZwOFf16i1Pmy2o0hpyLPi0klEe/Ap0neodjNfX7rxSr
+ qZODIdqy/xd9a5G/aAY4q4Yq+iLgqQDS+d9VVTQ7OWj9uMM60suBYYTmcB82T6HovxEqPuzt70a5x
+ evLhXy9hMUIYMSJDhRw4807G;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j9P50-0005kM-Ok
+ for samba-technical@lists.samba.org; Wed, 04 Mar 2020 08:08:34 +0000
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: [Release Planning] Supported release branches, Planning 4.12.1
+Organization: Samba Team
+Message-ID: <5dfd4058-02a5-056c-1b7d-51535042af9a@samba.org>
+Date: Wed, 4 Mar 2020 09:08:34 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-References: <1583278783-11584-1-git-send-email-hqjagain@gmail.com>
-In-Reply-To: <1583278783-11584-1-git-send-email-hqjagain@gmail.com>
-Date: Wed, 4 Mar 2020 00:23:16 -0600
-Message-ID: <CAH2r5mv9N_vo+vX7TaaPc2MBNFgsOAO6nGZcfaiaz8JqjM0BnQ@mail.gmail.com>
-Subject: Re: [PATCH] fs/cifs/cifsacl: remove set but not used variable 'rc'
-To: Qiujun Huang <hqjagain@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Language: de-DE
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,66 +57,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Karolin Seeger <kseeger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Isn't it not used because of a potential bug - missing returning an
-error in two cases.
+Hi,
 
-If we leave the two lines you removed in - and set rc=0 in its
-declaration (and return rc at the end as you originally had suggested)
-- doesn't that solve the problem?  A minor modification to your first
-proposed patch?
+with yesterday's release of Samba 4.12.0 (current stable release branch),
+o Samba 4.11 release series has been turned into the maintenance mode,
+o Samba 4.10 release series has been turned into the security releases
+only mode and
+o Samba 4.9 has reached its end of life.
 
-On Tue, Mar 3, 2020 at 5:39 PM Qiujun Huang <hqjagain@gmail.com> wrote:
->
->  It is set but not used, So can be removed.
->
-> Signed-off-by: Qiujun Huang <hqjagain@gmail.com>
-> ---
->  fs/cifs/cifsacl.c | 3 ---
->  1 file changed, 3 deletions(-)
->
-> diff --git a/fs/cifs/cifsacl.c b/fs/cifs/cifsacl.c
-> index 716574a..1cf3916 100644
-> --- a/fs/cifs/cifsacl.c
-> +++ b/fs/cifs/cifsacl.c
-> @@ -342,7 +342,6 @@
->  sid_to_id(struct cifs_sb_info *cifs_sb, struct cifs_sid *psid,
->                 struct cifs_fattr *fattr, uint sidtype)
->  {
-> -       int rc;
->         struct key *sidkey;
->         char *sidstr;
->         const struct cred *saved_cred;
-> @@ -403,7 +402,6 @@
->         saved_cred = override_creds(root_cred);
->         sidkey = request_key(&cifs_idmap_key_type, sidstr, "");
->         if (IS_ERR(sidkey)) {
-> -               rc = -EINVAL;
->                 cifs_dbg(FYI, "%s: Can't map SID %s to a %cid\n",
->                          __func__, sidstr, sidtype == SIDOWNER ? 'u' : 'g');
->                 goto out_revert_creds;
-> @@ -416,7 +414,6 @@
->          */
->         BUILD_BUG_ON(sizeof(uid_t) != sizeof(gid_t));
->         if (sidkey->datalen != sizeof(uid_t)) {
-> -               rc = -EIO;
->                 cifs_dbg(FYI, "%s: Downcall contained malformed key (datalen=%hu)\n",
->                          __func__, sidkey->datalen);
->                 key_invalidate(sidkey);
-> --
-> 1.8.3.1
->
+For more details on the release modes etc., please see
+https://wiki.samba.org/index.php/Samba_Release_Planning
 
+Samba 4.12.1 is scheduled for Tuesday, April 7 2020.
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.12
+has been updated accordingly.
+
+Cheers,
+Karolin
 
 -- 
-Thanks,
-
-Steve
+Karolin Seeger			https://samba.org/~kseeger/
+Release Manager Samba Team	https://samba.org
+Team Lead Samba SerNet		https://sernet.de
 
