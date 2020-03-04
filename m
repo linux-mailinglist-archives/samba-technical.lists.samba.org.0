@@ -2,82 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38C681789C3
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Mar 2020 05:54:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39428178A8E
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Mar 2020 07:24:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=gLwvJPGMZ2BjpmK91zhF7u8Xm/EJ1mbPNDQ8ODoi8Us=; b=5zno0Zi28TpltTrHvqiVgkiZfv
-	Ej41y8SRp80iKIzI2V1r04gnxLXKTgmgRIhrCwlwFtE9ZDzzA4A4I03cJH9qIqFTBYkPKgmcYdQJN
-	X6jmGfXh7orz/9yvePnh3oaAywPjkWBqSOPY/aMomF26TH1T0ztlUInt46HBGzfdCXsmynvDOgPWI
-	XMA96Wov9bhTaWfjod6ZwZXzfwkHTjetg/ADpjCIj9FccnE/7M5I7wRGaplczRsu+vWvigaorFlb8
-	LmjpUP8E11IUyi16dre40craaNrEmJVChWnazWvBINn2T1AK88BZKUWsCm2Z1KLfrcsuAqz/NWGPA
-	OeR+DY4w==;
-Received: from localhost ([::1]:64258 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=tbcuDfYaDl0s2pOUxHvvOkfOWHYsJpebfP0ObmyJLhA=; b=DjNRtTSwQWe0vEhPBGcWIFPZoH
+	NmKdqoPFqAsSfuexhcjU+bzdRwqk4jCaNZ/dvGqJ7l5QRltMyZ2RarJY2aQfwiY17AVkojB4PpVL8
+	/eVKIlm8yOuteJO1vkUtCfqw1mQR2mUzBL3R7Zn71tUfCaUSYRGXwCTo59eA3mtTfuEVixcDLvpQ/
+	bKgMA3Ivxr6gqdpDu6KPihs8w2laFlt69UwOmueeSqDG+/92paztOlx4r8oGhZoWmgnOnRCLe7VMQ
+	CATwRXdcqagOu3hQkMfYCt4C6q9T2tSb3co6XCMWjJQaFjFKgRbUhqcGppr4tadfVhyVGhLtRxmEw
+	b20poZhA==;
+Received: from localhost ([::1]:65062 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j9M2t-00ErcT-Ic; Wed, 04 Mar 2020 04:54:11 +0000
-Received: from mail-dm6nam12on2072d.outbound.protection.outlook.com
- ([2a01:111:f400:fe59::72d]:34107
- helo=NAM12-DM6-obe.outbound.protection.outlook.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1j9M2n-00ErcL-Hq
- for samba-technical@lists.samba.org; Wed, 04 Mar 2020 04:54:08 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NGikyKV+KF00vWLH5qXjYT5gYGFG2YGrZ6WRyxZY7nr9/U4LUDDUfrkgs0vPid92JAsV8KUENjrO+Lt5NdTCw3DyyU//ecRvMRG+9fKswggOpaX4qlns50xhcUBaRTaWfEFIp4zTjlcnYGf1lDdxQCHBr9o3wVtUw260/+CMEdOrHBB1bhPOxzYiUC5geahtI0xV030vo85njbRrFN9GRo54smXkoDsTf/Ymcc7flRBcwk1BKANt8gfM9DfuZJxepo6qTFxWYHTMO+FZ5Cmsunbrk65QCGAMD7wP+j124MZ3ig1FsoZhdQNBIwGBIoZtunpIeoyfmLxS7hWXA0JW/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AX6YkDAIAs6HSq3Y5xUQrplKbktZwD21vnkAOBYIo58=;
- b=F4JEC0PYUoWkBp2CZQ/t4PJpM684NSA7Zse7Ohz8mCeRFX+jiXWjtK4Ajkuzv4kudOHnGao5n89x53GH8SbYmZlTdvFIPfjcx74oeegVlBCtrRWmayN26TPkRI01Frps6SdatesOduNb0mfnGKhuCxZCbh2lOvGorTOeihFG3P+LPCkdK7ChgyE2JHOSIwvq3p40RVJycO+oeZ1tBLTC21sMT3qbDPfi0Gww/cWH6DZvSDVviYmLGGv/6p3osCBbM9fHKURT3PNX5e9MOBwXdtCaqUAyeaBzgkDhaomrvsmU/fz0N8D+n8S22H8XkxKJ4ThLAGbv08/cRu15mGCMuA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oregonstate.edu; dmarc=pass action=none
- header.from=oregonstate.edu; dkim=pass header.d=oregonstate.edu; arc=none
-Received: from BYAPR11MB3782.namprd11.prod.outlook.com (2603:10b6:a03:fd::32)
- by BYAPR11MB3846.namprd11.prod.outlook.com (2603:10b6:a03:f5::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2772.15; Wed, 4 Mar
- 2020 02:19:53 +0000
-Received: from BYAPR11MB3782.namprd11.prod.outlook.com
- ([fe80::50f8:84b3:699:1f0a]) by BYAPR11MB3782.namprd11.prod.outlook.com
- ([fe80::50f8:84b3:699:1f0a%7]) with mapi id 15.20.2772.019; Wed, 4 Mar 2020
- 02:19:53 +0000
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
-Subject: Re: Python 3.6 for Samba 4.13 in Sep 2020?
-Thread-Topic: Python 3.6 for Samba 4.13 in Sep 2020?
-Thread-Index: AQHV8cPrjldwcwyRUEWq0C2KJ4nFI6g3sk/G
-Date: Wed, 4 Mar 2020 02:19:52 +0000
-Message-ID: <BYAPR11MB378209425F94DF58453AE96CD1E50@BYAPR11MB3782.namprd11.prod.outlook.com>
-References: <7fa9094832aa924f9526d656e1dc21de823c0075.camel@samba.org>
-In-Reply-To: <7fa9094832aa924f9526d656e1dc21de823c0075.camel@samba.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=morgan@oregonstate.edu; 
-x-originating-ip: [128.193.8.81]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 121f39b7-e888-4100-5190-08d7bfe28635
-x-ms-traffictypediagnostic: BYAPR11MB3846:
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: CZv59e7xyFAk15mANrwM+UkFnZIIm1GNgyOWdq/VuQCO/BL3VBI984FXU4VT/4JCa4qhzjuW4L6Z+qlU1dJCsJt6DAOUQEbrM8Oy2A1NUwncYxqYC+LlcgcLFEY5dEx03mZ8SINak9KIC16QGq0aZ6uMba9aVB6seiHwA0WYinh1ul2pMVW0T7RSk8YuQWkhZ3xZOnxLjhUHtsipemAix2vzXUXuqXlGBisCG21XQxHIEOkSVSYo0LeINJva1BsfYDQ/Q6zmR85cVHXFK8FhwRNQDBaMtTnJpc+U8QFNytvJFW6j3fvCVNGQUx6EyinZWg94IWjf2thsLHC59vF5/PJUIMhrz8GIc0TXk5/hpfOICbVRpArCIKE/p5Mmp/ZAfQfH2xZwbIK+4iLm3qqCF1lKKdobr4EHm4lP0NMnvcG4zqBfpQQSXu8dp+YCEX9Y81oW6hdnDgbA9Gg+29kP8lSlCr+1zSlfpQDcuklwkkAVJrXrDLVrwOKXQVy2dR/g0np2aJntcSHV3J7theMa8g==
-x-ms-exchange-antispam-messagedata: a6j2Vj8JwLKpvNk73CCrE0R1tRI2IKoyChKcpb1hXMCRZRCpWOCOs7QJ610KAx3WDv/sdj643YLuYyKBgiAIsdw3BDLmfZqRerCFZFm4aj6DMGy1cZXkvTDf3nNhXbAGow8BR+U8mNKowDORHOehiQ==
-x-ms-exchange-transport-forked: True
+	id 1j9NRO-00ErmG-DN; Wed, 04 Mar 2020 06:23:34 +0000
+Received: from mail-yw1-xc43.google.com ([2607:f8b0:4864:20::c43]:34620) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1j9NRJ-00Erm8-6j
+ for samba-technical@lists.samba.org; Wed, 04 Mar 2020 06:23:31 +0000
+Received: by mail-yw1-xc43.google.com with SMTP id o186so1012486ywc.1
+ for <samba-technical@lists.samba.org>; Tue, 03 Mar 2020 22:23:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=tbcuDfYaDl0s2pOUxHvvOkfOWHYsJpebfP0ObmyJLhA=;
+ b=pnUUEvB3emIIYIR+4DE+c2kjKv/n3JDAttQZl/Z8rY5peVO84IFZ7XMRFn9sGz13ki
+ 7xYAbcCnds8+jE3Az1o6tS6Vm0utLaCW75ICVgGZ36fvpIW5pNm4AhSJONxVtqsMlhQ8
+ tJNldWnRN0W9DXGj6W9iGcdmxomrCXhDZGwPgyezJSieiMeBjiVcstmnvKXulRAZssbP
+ g6lqxXdV6UB42snjshIGMEvZF/8PUKHp1iQi71wp2TNfyJxRXDZSlyyOZFv8kvSe+hSV
+ fORT4Wbocws1DsnD1VTADO3nTJX4Rrpndhhm5qtsli8VqT35VW9LbRPAC6+kFYnx+51p
+ E96A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=tbcuDfYaDl0s2pOUxHvvOkfOWHYsJpebfP0ObmyJLhA=;
+ b=TYp4k5VanMvh2M3+Z568YBHAGXiv9JbgjPNRhvz12ByKIj8sbfc3SnmzdkDOpct4bd
+ V1VtOkBdxIpRSFjyRleLuu6NUrGRuVQ0xOSh3horpqz2C8+mwow77+BZIrPwSaUKgYsx
+ E3tj/aZ+0GjzbxGpak3DjangtVcl3wgcxcFwbiPw3ETHWTI8ZtJSi+N4QWJY3XHrjdHJ
+ TaF0mmEBP9DP44U7X6ES1oXd1hmhnWzx3650Wiynsui//QgSYWlKOB3KEt1G3jw6mHlG
+ 6gwAggDmArqOB22KTfSdRymEp6+hMzRCe9RYKZvA7nyjaH5PtL80I/O0XvAc//6YjqAN
+ xDKQ==
+X-Gm-Message-State: ANhLgQ3ftVYfj1sEU+xgC5urTkxhHAXiA1c5+xa6fHsfLQ6sIPnJD8uU
+ /rH+T8G9xkh7mzmyF1imUNSPhScEIidmqHrBKmY=
+X-Google-Smtp-Source: ADFU+vtJJiFniW/eKxBD4MR+qeAqmZ5k8NJak28YOj5w+Lndf/ByC4XUp8y8n7q9Pqhtb5af3SjTW245SjErulbzu/Q=
+X-Received: by 2002:a81:4cc2:: with SMTP id z185mr1475074ywa.357.1583303007222; 
+ Tue, 03 Mar 2020 22:23:27 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: oregonstate.edu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 121f39b7-e888-4100-5190-08d7bfe28635
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: ce6d05e1-3c5e-4d62-87a8-4c4a2713c113
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: xmUIAgxO7EewoSmw2uQBm/o32mj6UDx47rQ0JFWb446YJyQ+UXaJlqBoMmcO3UedGgm4p/Bv4uZclr4hc80Fsw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3846
-X-Warn: EHLO/HELO not verified: Remote host 2a01:111:f400:fe59::72d
- (mail-dm6nam12on2072d.outbound.protection.outlook.com) incorrectly presented
- itself as NAM12-DM6-obe.outbound.protection.outlook.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+References: <1583278783-11584-1-git-send-email-hqjagain@gmail.com>
+In-Reply-To: <1583278783-11584-1-git-send-email-hqjagain@gmail.com>
+Date: Wed, 4 Mar 2020 00:23:16 -0600
+Message-ID: <CAH2r5mv9N_vo+vX7TaaPc2MBNFgsOAO6nGZcfaiaz8JqjM0BnQ@mail.gmail.com>
+Subject: Re: [PATCH] fs/cifs/cifsacl: remove set but not used variable 'rc'
+To: Qiujun Huang <hqjagain@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -91,46 +67,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "Morgan,
- Andrew Jason via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: "Morgan, Andrew Jason" <morgan@oregonstate.edu>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-SG93IGxvbmcgY2FuIHdlIGV4cGVjdCB0byByZWNlaXZlIHN1cHBvcnQgZm9yIFNhbWJhIHY0LjEy
-ICh0aGUgdmVyc2lvbiB0aGF0IHdpbGwgd29yayBvbiBEZWJpYW4gOSk/ICBXaWxsIHRoYXQgc3Vw
-cG9ydCBhbGlnbiB3aXRoIHRoZSBzdXBwb3J0IHRpbWVmcmFtZSBmb3IgRGViaWFuIDksIGV0Yz8N
-Cg0KV2UgdGVuZCB0byBsYWcgYmVoaW5kIG9uIHVwZ3JhZGluZyBvdXIgT1MgdmVyc2lvbnMgYmVj
-YXVzZSBpdCdzIGEgYml0IHBhaW5mdWwgb24gYSBsYXJnZSBmaWxlIHNlcnZlci4gIEkga25vdyB0
-aGF0J3Mgbm90IGEgZ3JlYXQgcmVhc29uLCBidXQgaXQncyBuaWNlIHRvIHN0YXkgb24gYSBzdXBw
-b3J0ZWQgcGxhdGZvcm0gYXMgbG9uZyBhcyBwb3NzaWJsZS4gIPCfmYINCg0KVGhhbmtzLA0KQW5k
-eSBNb3JnYW4NCklkZW50aXR5ICYgQWNjZXNzIE1hbmFnZW1lbnQNCk9yZWdvbiBTdGF0ZSBVbml2
-ZXJzaXR5DQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQpGcm9tOiBzYW1iYS10
-ZWNobmljYWwgPHNhbWJhLXRlY2huaWNhbC1ib3VuY2VzQGxpc3RzLnNhbWJhLm9yZz4gb24gYmVo
-YWxmIG9mIEFuZHJldyBCYXJ0bGV0dCB2aWEgc2FtYmEtdGVjaG5pY2FsIDxzYW1iYS10ZWNobmlj
-YWxAbGlzdHMuc2FtYmEub3JnPg0KU2VudDogVHVlc2RheSwgTWFyY2ggMywgMjAyMCA1OjI1IFBN
-DQpUbzogVXBzdHJlYW0gU2FtYmEgVGVjaG5pY2FsIE1haWxpbmcgbGlzdCA8c2FtYmEtdGVjaG5p
-Y2FsQGxpc3RzLnNhbWJhLm9yZz4NClN1YmplY3Q6IFB5dGhvbiAzLjYgZm9yIFNhbWJhIDQuMTMg
-aW4gU2VwIDIwMjA/DQoNCkcnRGF5LA0KDQpJIHdvbmRlcmVkIGlmIHdlIGNvdWxkIHNldCBvdXIg
-bWluaW11bSBweXRob24gdmVyc2lvbiBhdCBQeXRob24gMy42IGZvcg0KU2FtYmEgNC4xMz8NCg0K
-SXQgaGFzIHVzZWZ1bCBuZXcgZmVhdHVyZXMgbGlrZSBQRVAgNDk4OiBGb3JtYXR0ZWQgc3RyaW5n
-IGxpdGVyYWxzDQoNCmh0dHBzOi8vZG9jcy5weXRob24ub3JnLzMvd2hhdHNuZXcvMy42Lmh0bWwj
-d2hhdHNuZXczNi1wZXA0OTgNCg0KTW9yZSBwYXJ0aWN1bGFybHksIHJlY2VudCB0ZXN0cyBzaG93
-ZWQgdGhhdCB0aGUgb25seSB0d28gcGxhdGZvcm1zDQp3aXRob3V0IGl0IGFyZSBVYnVudHUgMTYu
-MDQgKFhlbmlhbCkgYW5kIERlYmlhbiA5IChTdHJlYWNoKS4NCg0KRGViaWFuIDEwIGhhcyBiZWVu
-IHJlbGVhc2VkIGZvciA2IG1vbnRocyBub3csIGFuZCB3aWxsIGhhdmUgYmVlbiBvdXQNCmZvciBt
-b3JlIHRoYW4gYSB5ZWFyIGJ5IHRoZSB0aW1lIHdlIHJlbGVhc2UgU2FtYmEgNC4xMywgYW5kIGxp
-a2V3aXNlDQp0aGVyZSB3aWxsIGJlIGEgbmV3IFVidW50dSBMVFMgMjAuMDQuDQoNClRoaXMgY2Ft
-ZSB1cCBiZWNhdXNlIGEgc21hbGwgaGVscGVyIHNjcmlwdCBmYWlsZWQgdG8gcGFyc2Ugd2hlbiB3
-ZQ0KZXh0ZW5kZWQgdGhlIHNhbWJhLW8zIHRlc3RzICh3aGljaCBydW4gb24gZWFjaCBob3N0KSB0
-byBpbmNsdWRlIHRoZQ0KbG9jYWwgIm5vbmUiIHRlc3RzDQpodHRwczovL2dpdGxhYi5jb20vc2Ft
-YmEtdGVhbS9zYW1iYS8tL21lcmdlX3JlcXVlc3RzLzkzOA0KDQpJIHJlYWxpc2UgaXQgd291bGQg
-YmUgJ3NpbXBsZXInIHRvIGp1c3QgY2hhbmdlIHRoYXQgc2NyaXB0LCBidXQgSQ0Kd2FudGVkIHRv
-IHJhaXNlIHRoZSBicm9hZGVyIHF1ZXN0aW9uIGluIHRoZSBob3BlIHRoYXQgd2UgY291bGQgc3Rl
-YWRpbHkNCmluY3JlYXNlIHRoYXQgbWluaW11bSB2ZXJzaW9uLg0KDQpTZWUgaHR0cHM6Ly9naXRs
-YWIuY29tL3NhbWJhLXRlYW0vc2FtYmEvLS9tZXJnZV9yZXF1ZXN0cy8xMTkzDQoNClRoYW5rcyEN
-Cg0KQW5kcmV3IEJhcnRsZXR0DQotLQ0KQW5kcmV3IEJhcnRsZXR0DQpodHRwczovL3NhbWJhLm9y
-Zy9+YWJhcnRsZXQvDQpBdXRoZW50aWNhdGlvbiBEZXZlbG9wZXIsIFNhbWJhIFRlYW0gICAgICAg
-ICBodHRwczovL3NhbWJhLm9yZw0KU2FtYmEgRGV2ZWxvcG1lbnQgYW5kIFN1cHBvcnQsIENhdGFs
-eXN0IElUIC0gRXhwZXJ0IE9wZW4gU291cmNlDQpTb2x1dGlvbnMNCmh0dHBzOi8vY2F0YWx5c3Qu
-bmV0Lm56L3NlcnZpY2VzL3NhbWJhDQoNCg0KDQoNCg0KDQoNCg==
+Isn't it not used because of a potential bug - missing returning an
+error in two cases.
+
+If we leave the two lines you removed in - and set rc=0 in its
+declaration (and return rc at the end as you originally had suggested)
+- doesn't that solve the problem?  A minor modification to your first
+proposed patch?
+
+On Tue, Mar 3, 2020 at 5:39 PM Qiujun Huang <hqjagain@gmail.com> wrote:
+>
+>  It is set but not used, So can be removed.
+>
+> Signed-off-by: Qiujun Huang <hqjagain@gmail.com>
+> ---
+>  fs/cifs/cifsacl.c | 3 ---
+>  1 file changed, 3 deletions(-)
+>
+> diff --git a/fs/cifs/cifsacl.c b/fs/cifs/cifsacl.c
+> index 716574a..1cf3916 100644
+> --- a/fs/cifs/cifsacl.c
+> +++ b/fs/cifs/cifsacl.c
+> @@ -342,7 +342,6 @@
+>  sid_to_id(struct cifs_sb_info *cifs_sb, struct cifs_sid *psid,
+>                 struct cifs_fattr *fattr, uint sidtype)
+>  {
+> -       int rc;
+>         struct key *sidkey;
+>         char *sidstr;
+>         const struct cred *saved_cred;
+> @@ -403,7 +402,6 @@
+>         saved_cred = override_creds(root_cred);
+>         sidkey = request_key(&cifs_idmap_key_type, sidstr, "");
+>         if (IS_ERR(sidkey)) {
+> -               rc = -EINVAL;
+>                 cifs_dbg(FYI, "%s: Can't map SID %s to a %cid\n",
+>                          __func__, sidstr, sidtype == SIDOWNER ? 'u' : 'g');
+>                 goto out_revert_creds;
+> @@ -416,7 +414,6 @@
+>          */
+>         BUILD_BUG_ON(sizeof(uid_t) != sizeof(gid_t));
+>         if (sidkey->datalen != sizeof(uid_t)) {
+> -               rc = -EIO;
+>                 cifs_dbg(FYI, "%s: Downcall contained malformed key (datalen=%hu)\n",
+>                          __func__, sidkey->datalen);
+>                 key_invalidate(sidkey);
+> --
+> 1.8.3.1
+>
+
+
+-- 
+Thanks,
+
+Steve
+
