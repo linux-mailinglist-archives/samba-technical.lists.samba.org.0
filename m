@@ -2,46 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 232D017AD6E
-	for <lists+samba-technical@lfdr.de>; Thu,  5 Mar 2020 18:40:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7660717AD76
+	for <lists+samba-technical@lfdr.de>; Thu,  5 Mar 2020 18:42:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=uE6OkgMPZz6nZpgwCshWvEDzyGzmQZyQeTjB3tunBQY=; b=ofxFHcSZZ1HsgWDmAzmmbIEQHh
-	WTDbF21y8kYts79uHYC9Xji6ZjfLx5IXWogVcbVQSJSHaD5i117s3PJDDZlXMnAi+rgc7Pr7cEoxl
-	652x75bNYXJFPWc7itynVnsoogUQkVDoA5rU7CE5wqcsGRWIh4ODM908gUxEQP+/2aZ0NoMGouJUR
-	t4mRFAvRZIb26zCpnpKc09iyluf0fei33nOzcLJaYIX4i5i6czWPsksecpc7jUdmWBW+zE6dQHGhO
-	zlUyfPuWBPB6IgQg7R9S7dX1NHl0rCFG4odr01vA7mcty32tv81dxgJzVs4/zwBwivMcF7n481ZwO
-	c+7E0+mA==;
-Received: from localhost ([::1]:35098 helo=hr1.samba.org) 
+	bh=agt7Rki66ENijSQkAU/qXXAReXmokeScygGDKMEcCYc=; b=JhHZitkD84TTbpnolNSNcgWh9t
+	+zoQ5TjEU/uv3aHsUn+0tDPvPZrfkc5e9steh+N8xGDmarC02+K2J1KyW6KhcqZhxxuPZ7FbbHHAo
+	aYXM2Aq9WD0jJQj61QJ39cF6cVuVN04UJKE1kj2K2rOY2LyNb6AaBhC8aEkeNN+ReampYnPO1LJxD
+	Kr6ofRG6ETeVa3RMRmkbnGTUqo0RgII8wV0uZAdo9SHNNpbLlZ52PNin7ljLzh+f8qxLX0ay4ykc7
+	wmsXHiiqPVl4AuWoxqEZhdtZp41IDssOn28Kduv1PFa33wDI+T8x5wdTfCDbDcuIFca7/wVR36cno
+	HFotW1hA==;
+Received: from localhost ([::1]:35842 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1j9uT5-00FAHL-FB; Thu, 05 Mar 2020 17:39:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56440) 
+	id 1j9uW3-00FANO-Dr; Thu, 05 Mar 2020 17:42:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57630) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j9uT0-00FAHE-PC
- for samba-technical@lists.samba.org; Thu, 05 Mar 2020 17:39:28 +0000
+ (Exim) id 1j9uVy-00FANH-BY
+ for samba-technical@lists.samba.org; Thu, 05 Mar 2020 17:42:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:To:From:Message-ID:CC;
- bh=uE6OkgMPZz6nZpgwCshWvEDzyGzmQZyQeTjB3tunBQY=; b=0twT/GUB745WnRqLQbo585N/uq
- G0S9nTH5GIYRtNfPv9+/Y1XeKlP/dUMNaoxa0KNEef29Yor9ytmOT3xnRafjNwP6hf6+qstX0xzTL
- ZeiEYgH7XLAaouaGWK1MXnxVtKHNAOfNMdBLDJlZn4wbGMPkHuIvcXK5x4nsQFhjxb59/73u2LWMP
- KiNWz623GhcRuNDsaU6n1/YdCHKQntWP+GdlIeqhM7V8xnZFLAH7gU726BKN+XR4gmYC+px+Bi2mV
- N1bHeDC6aHh6UaYoYhiV4N5y57IEDyneGOwuJNe4sEYq0pJJCvF605OH/2Tm1S+HrhBDUQTvnTtOv
- ws8ZSt4oblgvd39JvunsbLsmt/c0ol3T2qIG4x1A880Fr9NRHzLoOtgsRjIAqfwmNoeXt6h1yd4K/
- ln4DWGNOxU9xU+RlbAATvxtW2oZDACjn3sPneefMvoOLmWLTe4ndMqBf6nvxdT5E+2YtZaZ823NNF
- tzS/EigLAjZHbScHrW/GWg1q;
+ bh=agt7Rki66ENijSQkAU/qXXAReXmokeScygGDKMEcCYc=; b=TRvVIcFNHYeXl3EFgytWo1F54g
+ AeTn0/09RHtZVrnPb3eER/UuFxzcC79s+SdeydJk5edp6WH7tlJ4fd4aYBML2S0YMtXYfbXSoyEFp
+ hCkbrhQrLg59Z+MWWNBDwecT2CRmnQyao0syRhBaMiVawHtxBHoAO0RBWk3fC377vKorJp7ywm0ac
+ b/pLJSermuJQeml9K7SorvLdgaSFl2Gjc6aLwVFzltDAKqP0quOUVaJQP2SADf0Js3LvA6RCEa7Cd
+ Xb9MZvRV/NtZfO77Svo090UcSoXS3Mg5qboQTZqyndvnaxpz9nTc3cMvSN3kbzMM05m0f7MGafsdx
+ VVSJh3Qo+TQnQjxbVaH+myfqYOVKnUcJrKecho9C78ypyxRfhfO9sAkUWdCJwuNCf/FBMXtX+6GhI
+ aFRCknkuouyuKhiuEqnMRPr5D4Djm5I/7BZyGaQhGSYDk8AoAdOXd/YfklRmRVLVJlkiUc2dZRXtc
+ lhcb//ITDI3ljr71n2Tn51/Q;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1j9uSz-0005vV-9N; Thu, 05 Mar 2020 17:39:25 +0000
-Message-ID: <8767977743a6cf16167e1e5f3d951664d3e1a524.camel@samba.org>
-Subject: About 4.11/4.12 and SMB1 being disabled by default
-To: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>, 
- samba-technical@lists.samba.org
-Date: Fri, 06 Mar 2020 06:39:21 +1300
-In-Reply-To: <DDE986AD-16BC-44FB-BD4A-CD17F9E8BA16@rosalinux.ru>
-References: <20200303104715.GA11956@carrie2>
- <F5AB518A-4210-4A4F-B6E7-3FED4A78F7E6@rosalinux.ru>
- <bcca2904922f9c6f0a3594c39a336f0ab175c4e8.camel@samba.org>
- <DDE986AD-16BC-44FB-BD4A-CD17F9E8BA16@rosalinux.ru>
+ (Exim) id 1j9uVx-0005yk-CM
+ for samba-technical@lists.samba.org; Thu, 05 Mar 2020 17:42:30 +0000
+Message-ID: <6800dbbcf9913acd1a8d002b3bef578a61757f96.camel@samba.org>
+Subject: s3-libads: use dns name to open a ldap session
+To: samba-technical@lists.samba.org
+Date: Fri, 06 Mar 2020 06:42:26 +1300
+In-Reply-To: <20200305123003.2E8381402BF@sn.samba.org>
+References: <20200305123003.2E8381402BF@sn.samba.org>
 Content-Type: text/plain; charset="UTF-8"
 User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
 MIME-Version: 1.0
@@ -64,34 +61,36 @@ Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 2020-03-05 at 10:44 +0300, Mikhail Novosyolov via samba-
-technical wrote:
+On Thu, 2020-03-05 at 12:30 +0000, Björn Baumbach wrote:
+> The branch, master has been updated
+>        via  e45e0912d99 s3-libads: use dns name to open a ldap session
+>       from  4d784590a9c [s4] possible memleak in torture vfs-fruit
 > 
-> 5 марта 2020 г. 9:34:36 GMT+03:00, Andrew Bartlett <abartlet@samba.org> пишет:
-> > On Thu, 2020-03-05 at 08:13 +0300, Mikhail Novosyolov via samba-
-> > technical wrote:
-> > > Hello,
-> > > 
-> > > What is the status of SMBv1 in Samba 4.12?
-> > 
-> > Unchanged from Samba 4.11, that is off by default but fully supported.
-> > 
-> > We are still planning to remove SMB1 in a future version because not
-> > only is is an old arcane protocol, it makes being a great SMB2 server
-> > harder.
+> https://git.samba.org/?p=samba.git;a=shortlog;h=master
 > 
-> Thanks. I have looked into the changelog of samba 4.11.0 [1], but
-> 'client min protocol = NT1' had to be explicitly set in 4.8+. Could
-> you please clearify what exactly changed in 4.11 regarding smb1? Or
-> maybe point to a commit that made the change.
 > 
-> [1] https://www.samba.org/samba/history/samba-4.11.0.html
+> - Log -----------------------------------------------------------------
+> commit e45e0912d99335f4feec7f937180ea21f7f62a72
+> Author: Björn Baumbach <bb@sernet.de>
+> Date:   Mon Feb 10 19:19:44 2020 +0100
+> 
+>     s3-libads: use dns name to open a ldap session
+>     
+>     Required for working certificate verification.
+>     
+>     Bug: https://bugzilla.samba.org/show_bug.cgi?id=13124
+>     Signed-off-by: Björn Baumbach <bb@sernet.de>
+>     Reviewed-by: Bjoern Jacke <bjacke@samba.org>
+>     
+>     Autobuild-User(master): Björn Baumbach <bb@sernet.de>
+>     Autobuild-Date(master): Thu Mar  5 12:29:26 UTC 2020 on sn-devel-184
 
-In 4.11 we changed the default for "min protocol", which is the server-
-side setting.
+I gave feedback on the MR, and had assumed this as going nowhere per
+https://gitlab.com/samba-team/samba/-/merge_requests/1135#note_299564233 so what changed?
+
+Thanks,
 
 Andrew Bartlett
-
 -- 
 Andrew Bartlett                       http://samba.org/~abartlet/
 Authentication Developer, Samba Team  http://samba.org
