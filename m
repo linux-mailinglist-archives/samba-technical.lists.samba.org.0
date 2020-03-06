@@ -2,51 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD9DB17BF62
-	for <lists+samba-technical@lfdr.de>; Fri,  6 Mar 2020 14:43:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C6AE17C016
+	for <lists+samba-technical@lfdr.de>; Fri,  6 Mar 2020 15:20:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=voI0csvC36AzZ4ZTYpHbBEpjGaEkaJIZJxtBpjPgffg=; b=XTJwPZOHcE7TR9I9QGNZCDTtv7
-	mKedzmta3rzsiruAsLwDMrlUCqRYUNsGxSWzim81U9uMym9uSxuxVD89YvA4s78dJgGFZJkVu5+eE
-	EJ7x7ObWfWx1WmvH9PA1C9kTt0zTk+qy4071tai3MthjjaQpOncxU1gr/mua2S6I2KmWfFkp/8Z+V
-	X1/jNKl/hd8KWRR8QseoHMLzhdOvGX3PnfqzcntnNSJc9w0O8Y0ZwyKVx4LG+U58hfN5YqHL2R4b1
-	uncYFJXW6nDlBWlXkW0431p6R6av2ZDLRIprkddCSg0xPaX5QOxisCc6ODUaF8Z3nIbwAHbo5HiA0
-	w1NMFQtA==;
-Received: from localhost ([::1]:27164 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=jjgrsfbK40vDTdnS2TEhJjX/lVYgnpW0Ta8ydbMPasg=; b=K+qe/o/JXnS7jtQ2j243ZSE8/M
+	Lo/X+Ww7zCTD8fBz4eriGpTv5bxiDfJx3z6SgWUhm+R06HsAOO/iE+qK3cOBGjmyHekxaajyx9ss1
+	a1PIlWKdOZv1YaXBFdU6LT04qzv8YuGCvWpWykUp9XCFSRP47dYSirBcb9ue6C8PHiIv/ArwIK/s5
+	vtOLP2uHx4ZSV3uiUb+YFIYAd9cefau3GdMvZZMo9nyTJjFyXXTygbDFtXIOwLem3sAgdpyGecW4Y
+	3PuSxvUi5JeEnUacOLrOv27OCByfQBF42axsYGctdT0w5PVA9N8J8BFXU2Xn7caYQAaTR1yeo4MUs
+	wBa4xG6Q==;
+Received: from localhost ([::1]:27914 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jADEV-00FIcu-Ms; Fri, 06 Mar 2020 13:41:43 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30868) 
+	id 1jADp8-00FIkI-NM; Fri, 06 Mar 2020 14:19:34 +0000
+Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133]:36190) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jADEP-00FIcn-Qf
- for samba-technical@lists.samba.org; Fri, 06 Mar 2020 13:41:40 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=voI0csvC36AzZ4ZTYpHbBEpjGaEkaJIZJxtBpjPgffg=; b=GuKUmMmL/t3C1H8lgt0zz4Sg8p
- pjqfdDsUEhLEe7GYXsKa9CnEBHI59LSxVZ2RoA86qqGB46X3ipNERwnV3bZnnpGS6mk0iGD4YYSTC
- EPYpq4c2mpPVkGRSxDHOVgjHrw+BH2seDqgpqt0W446SKt9eNTIobdoh7whXPbp9IXhe33Wb93+ww
- 8/cGK/CHiqfd2exIq2kB+QiQq6gCDvdeDpI7S9BH3cV3+5vIVDwvZ2Iseqdv59gBVm3rR0qtDbwt3
- qkmdfmz6uMJg4+3wEDjSqigL5q702EqybueqxBYuWqCDZfJkxDCjFA3dKsX8rb/J63xext2lmoS6k
- vkunDv3DRFu9OrB41zuG9Gqny7Vkhvys+luq4yO2xQGJIDIA9SyPDpk2hCVrqtXRG0XYfGkDUkipG
- brUxlxwuOu4GKs8cmdkeZcn35j6tIKAMFTA63ze3dIg0jANxpKoc2RHV2JoJMlCIk5GpwZBqR8Nqz
- SMfr14MkwEL/eFLKvkQr4Lin;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jADEO-0006kE-7y; Fri, 06 Mar 2020 13:41:36 +0000
-Subject: Re: Using vfs_fruit alongside vfs_recycle
-To: Isaac Boukris <iboukris@gmail.com>
+ (Exim) id 1jADp2-00FIkB-Sq
+ for samba-technical@lists.samba.org; Fri, 06 Mar 2020 14:19:31 +0000
+Received: by mail-lf1-x133.google.com with SMTP id s1so2063836lfd.3
+ for <samba-technical@lists.samba.org>; Fri, 06 Mar 2020 06:19:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=jjgrsfbK40vDTdnS2TEhJjX/lVYgnpW0Ta8ydbMPasg=;
+ b=i73CHQ+3DueUnNk8mEcMtIdSb2s4pOPJuHngaQYXYwJLWT983QiuRefjEAB6YwxWOL
+ VGojO/3q7BL9oAhWcOcyCXCszOFl1Hgpttwi2YE7l50PYJ1xhpC7uMqu3tTKF5jm+TYD
+ vrXLfkaGBZGPYEr0I8nUCWL3OmOND9rPeYoCsmr6U2VvprmtKf/uY8DyxQc4t9JTD3B1
+ 2UyyVQItBK900iZA7ppwOQPGikBAKSDKefgSWU6cawcA08iTb05g90IP968aJIpTTQ79
+ 5BB4vrdXLHsWdaXA7yKiZHB4BLEim5KIRBiA0SmM/TBoB5La0NNGSeRZtSdD4PR9Muq4
+ Qa8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=jjgrsfbK40vDTdnS2TEhJjX/lVYgnpW0Ta8ydbMPasg=;
+ b=UmlBeK0wia/rTbnJ1ghWlapLR4OCWiHj9X1GEHiFz+261PTibsC0NkzPfhjUJfefvq
+ OUC5cKPwJ4BBL52BnHvzz724dJ3+w70cZ/wb2FQd3msbjT8Jb88W+Os698k+SaK1O2b5
+ Ck+Ws88bW/mugVlTbDkhXgyIj1DvMp7L42a5pv7nPhS4mThv+mENQAhlamXXqLnTwtfl
+ m5wa3VIBNNNUGAWoB/PC98HnMqyZ4T4RZXC/Kzvkeq24pjB1IHVXnrRdYi9ufZ04NtvX
+ hSQYMd7pa1q/KA0DKi3dY//GdnrLLm2ZOAjCMtPIrZWELJ3l52Romx/h8koAHsk36O2J
+ oX7A==
+X-Gm-Message-State: ANhLgQ1GdT3yK9VavJ/uaFAUo7+44i7LjhTnDo5i7aKuHJmoCH8yGRx6
+ Dgc/yG+To3gcN2RrtLGWRvfVDk+MfXA1fEAqCtU=
+X-Google-Smtp-Source: ADFU+vuhGiRPbPEzkWcN7XV6w0SmJ0PSNQ9p4Qhz2mASmR0IVswYptbzLHc0cAIOLy1BUTU+85U1vljgoT/psl/WITY=
+X-Received: by 2002:a19:520a:: with SMTP id m10mr2152130lfb.30.1583504367849; 
+ Fri, 06 Mar 2020 06:19:27 -0800 (PST)
+MIME-Version: 1.0
 References: <CAC-fF8Tc=3A=fBU5DpstKcg7YxYvi0ugFSBTAGSMz2tp6H1MFA@mail.gmail.com>
  <73341d2e-2a86-a43f-6fa5-dd1473cdef6e@samba.org>
  <5b8bae24-553b-25cf-b942-6d6b2404d8c0@samba.org>
  <CAC-fF8R8hsBuCeGQX99ZVY=C7vuEuCf2L+KNbdGARJorSEzoAA@mail.gmail.com>
-Message-ID: <089d3ced-cf08-5276-daaa-54eb54b87850@samba.org>
-Date: Fri, 6 Mar 2020 14:41:35 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
-MIME-Version: 1.0
-In-Reply-To: <CAC-fF8R8hsBuCeGQX99ZVY=C7vuEuCf2L+KNbdGARJorSEzoAA@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+ <089d3ced-cf08-5276-daaa-54eb54b87850@samba.org>
+In-Reply-To: <089d3ced-cf08-5276-daaa-54eb54b87850@samba.org>
+Date: Fri, 6 Mar 2020 15:19:16 +0100
+Message-ID: <CAC-fF8Tm3ce4gByhHTgDieMux4ZZX_4DoHcbBP2A7PQT9Nm_wA@mail.gmail.com>
+Subject: Re: Using vfs_fruit alongside vfs_recycle
+To: Ralph Boehme <slow@samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,23 +71,25 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Isaac Boukris <iboukris@gmail.com>
 Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Am 3/6/20 um 12:48 PM schrieb Isaac Boukris:
-> https://bugzilla.samba.org/show_bug.cgi?id=14316
+Hi Ralph
 
-thanks!
+On Fri, Mar 6, 2020 at 2:41 PM Ralph Boehme <slow@samba.org> wrote:
+>
+> Am 3/6/20 um 12:48 PM schrieb Isaac Boukris:
+> > https://bugzilla.samba.org/show_bug.cgi?id=14316
+>
+> thanks!
+>
+> May I push the patch with your +1?
 
-May I push the patch with your +1?
+The change looks fine, but I'm not so familiar with vfs and the flow
+is unclear to me. I'll look more next week.
 
--slow
-
--- 
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+Thank you
 
