@@ -2,68 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C47F017C9B1
-	for <lists+samba-technical@lfdr.de>; Sat,  7 Mar 2020 01:26:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A217617CFE9
+	for <lists+samba-technical@lfdr.de>; Sat,  7 Mar 2020 21:05:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=QBx+0jpZP7rW/MTKMoiF2yVAqNZXdf/xXTMb+u8UNSM=; b=cWhBX2cL3fqciLyG4Kk90Gx3PG
-	5uiBTA923GBw76JTxIhaMFap94Q9I+uZcQSV2oy+RK0GU6UeIKZYNTyKLM/Cq2xZfLXBJeSPYFr9x
-	UQsWpckGl7+V6eTpappu3x7rcbFttUZRu/LLSo0NjjkMei2FogbjB+EhyoOkLVIzPdbh4FLDwYtz+
-	3pbPoElArem2HBkfXzd9XhIYOckEE71+SeSv4lsfWWC5QgQZRtLp35iHY8OipQSPNmFwBJex2b9dR
-	k33PmAuLOHeyn0/hA2lW1ig0y/Ai8DQiv+e1fmSIYmwM2U/ZEmAwZc5Ar0THnd4EiaQZ4ZnwvwgwV
-	QUpxpVdQ==;
-Received: from localhost ([::1]:47682 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=/rR/M+LiYBCWNmfBPwlVH/wzXuH1CUAi97im8uVf3hE=; b=mZn+WD+46efvcwkFrJ5pAU5KW4
+	3GUE6cRjj812wD9QX44ZZWzQjkP78D84p4hSHcd3FknX9EztuxPndT9Lx21so3pxEFJ+QPkJbfB++
+	l7kN5bHQTJPgmCsONXGvvTELfIxwf3kuPvYsQCdwKltFPh2fBEN+hPWTIpcA34pY/TAVwmxaoTpQx
+	l2oc3ZvEJN8YKGH6TbjUzjJugH2XCLpJob/J6FdpKwMSErJ/WX31Eq9eHQr6QG3ZvJbEhOZ2/LkSS
+	ggk4fRfn16ApxVVh1hpyUzw1dpoq1seIIzZjSLPTDMNZz3JCdjNLHV4MjKIb+I6u9iFZo3dNWxKe2
+	irCyNOlw==;
+Received: from localhost ([::1]:59784 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jANHQ-00FLii-AM; Sat, 07 Mar 2020 00:25:24 +0000
-Received: from smtp-fw-33001.amazon.com ([207.171.190.10]:65019) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jANHK-00FLib-CL
- for samba-technical@lists.samba.org; Sat, 07 Mar 2020 00:25:21 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
- t=1583540718; x=1615076718;
- h=from:to:subject:date:message-id:mime-version;
- bh=nQmOK7uqRLuvFFDg+Wg1TBjlQmyObhEPsi8FuBX1508=;
- b=vE122+uELcuc2uY/naulipvb5WMuuCsPIciphwyqazwh0JscoqpUzP5U
- 1XOt4+X6/ZJ/6Mok9SOHXSF4akWA1ysP91fmFEsJ/4l+ku4MibAsYBRcy
- NuLbq3ZcwXJgnL87qeB4kOBfyk3hPrcIKEn2UBejDxHQs8bINDMostbsR g=;
-IronPort-SDR: kEzFmyv+OPS92szpnCiiqf1MdvxJmxqYjUyY79LSC6Xxy0gEc+GAr+zAaGp646Xp0r30Mh/eWf
- S5VTVwGbj53g==
-Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
- email-inbound-relay-1d-38ae4ad2.us-east-1.amazon.com) ([10.47.23.38])
- by smtp-border-fw-out-33001.sea14.amazon.com with ESMTP;
- 07 Mar 2020 00:09:52 +0000
-Received: from EX13MTAUWA001.ant.amazon.com
- (iad55-ws-svc-p15-lb9-vlan3.iad.amazon.com [10.40.159.166])
- by email-inbound-relay-1d-38ae4ad2.us-east-1.amazon.com (Postfix) with ESMTPS
- id 43A49A212E; Sat,  7 Mar 2020 00:09:51 +0000 (UTC)
-Received: from EX13D21UWA004.ant.amazon.com (10.43.160.252) by
- EX13MTAUWA001.ant.amazon.com (10.43.160.58) with Microsoft SMTP Server (TLS)
- id 15.0.1367.3; Sat, 7 Mar 2020 00:09:51 +0000
-Received: from EX13D21UWA003.ant.amazon.com (10.43.160.184) by
- EX13D21UWA004.ant.amazon.com (10.43.160.252) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Sat, 7 Mar 2020 00:09:50 +0000
-Received: from EX13D21UWA003.ant.amazon.com ([10.43.160.184]) by
- EX13D21UWA003.ant.amazon.com ([10.43.160.184]) with mapi id 15.00.1497.006;
- Sat, 7 Mar 2020 00:09:50 +0000
-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- "vl@samba.org" <vl@samba.org>
-Subject: Samba 4.11.6: Consecutive calls to smb_raw_open fail
-Thread-Topic: Samba 4.11.6: Consecutive calls to smb_raw_open fail
-Thread-Index: AQHV9BS48Gs3j9vymkq31I+HZNfjAg==
-Date: Sat, 7 Mar 2020 00:09:50 +0000
-Message-ID: <9F04A360-00D2-4FA1-B8B1-966B05D6E2A7@amazon.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.43.160.16]
+	id 1jAfgZ-00FOMZ-Iy; Sat, 07 Mar 2020 20:04:35 +0000
+Received: from mail-yw1-xc41.google.com ([2607:f8b0:4864:20::c41]:43546) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jAfgU-00FOMS-VL
+ for samba-technical@lists.samba.org; Sat, 07 Mar 2020 20:04:33 +0000
+Received: by mail-yw1-xc41.google.com with SMTP id p69so5841154ywh.10
+ for <samba-technical@lists.samba.org>; Sat, 07 Mar 2020 12:04:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=/rR/M+LiYBCWNmfBPwlVH/wzXuH1CUAi97im8uVf3hE=;
+ b=IzCg+DgshWulZUq80/28tRdF0HPsUS1Hft+N9NAOtOIQfjvPpzSw6nk1B8nb5dcUwd
+ SidMdfdrwiPQsseOyQWc/pzvrYdtxtGGv3ICelDqvYBOcy/K5AytXw9F4J6Js7EMDVfw
+ rSnVOSA3MlLgvpIb81Zgg4hviSNaQhgSLgDF3B4O4TaZAs4udYbm+ZtwWfaQipLSEZ9l
+ qhcRd/QlJ3DxGog5KejIctKwcYosnKv3/HOibeBi6+EKQWlSIL6wfGKnPPkO4gC1fQfl
+ p3vozBbvreU2YiEfNiy1d79KuPrpu3ZQzvR1qQJ0HgvP12J0ZDfy1451P3lPQuC7TDQL
+ NrTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=/rR/M+LiYBCWNmfBPwlVH/wzXuH1CUAi97im8uVf3hE=;
+ b=LWkejoSM8rWY26jjeJgytDRCj1esrWWCBbobS9PQ+U0Vqo6xI+4cqjofjhGOKDq/bO
+ qR01gSQNFVZFCcXtn0CKQx8mp0VK9ZEjfpLrlj/QXBkCTHxtCKvZIr/m33MjZXpxhRKL
+ rmp4sOKeyIWTg7knMnoF4H8gBnrjSq0CMGEx9nCx0mMVthrOAtaNkGOAO2+gHLk4MLZX
+ m+Q+CmwKmpo+hyb+W+OUbaSYCw2kf8OKoQZlUX2HyGmSM7V7c0iV3WQhOoJuhY4IU/lx
+ +K0AWInzygqMQ0eI6lBooe2pO6+7BTAfO/KataHi0+zVmhuR/DEuUaXolHjFiKLbgy/P
+ OSPg==
+X-Gm-Message-State: ANhLgQ1tCOb2VHQ9KP8+c4QZWwXUJkmaJ/mfIBRMPL6rC4511Zwv/TfH
+ +lSKqfOimqAt5a3aDuFNnOpkyUUgLf7z2OpclGg=
+X-Google-Smtp-Source: ADFU+vuBTktkE7VEjjPZrONxkb/cDFSxDE0LzO5UJB3I8x3It6D/F0K7wDZKzC7QuR0lnyvVKPUOepBbnLb0aP1rTS4=
+X-Received: by 2002:a0d:f583:: with SMTP id
+ e125mr10608364ywf.176.1583611467702; 
+ Sat, 07 Mar 2020 12:04:27 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+References: <20200306221740.GA31410@embeddedor>
+In-Reply-To: <20200306221740.GA31410@embeddedor>
+Date: Sat, 7 Mar 2020 14:04:17 -0600
+Message-ID: <CAH2r5muV_W9T4s1HYK-Bv+XVAwz8tqgKORnzMHCpKi8VUW0EfQ@mail.gmail.com>
+Subject: Re: [PATCH][next] cifs: cifspdu.h: Replace zero-length array with
+ flexible-array member
+To: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,46 +69,144 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "Rungta, Vandana via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: "Rungta, Vandana" <vrungta@amazon.com>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-SGVsbG8gVm9sa2VyLA0KDQpUaGUgZm9sbG93aW5nIGNvbW1pdCBicmVha3MgdGhlIHJhdyBvcGVu
-IHRlc3QgdGhhdCBoYXMgY29uc2VjdXRpdmUgY2FsbHMgdG8gc21iX3Jhd19vcGVuIHdoZW4gdXNp
-bmcgYSBWRlMgbW9kdWxlIHdoaWNoIHNldHMgaXRzIG93biBmc3AgZXh0ZW5zaW9uIGR1cmluZyBv
-cGVuOg0KIGh0dHBzOi8vZ2l0aHViLmNvbS9zYW1iYS10ZWFtL3NhbWJhL2NvbW1pdC8zMjc2NmRi
-MjEwNDI2ZDkyOTQ4YTdkODFkOTIzZjlkNjY5ZmYzZWQ2I2RpZmYtMTZiOTA0NWI3ZmU1NjcxMGYz
-YTNlNDJhMzljYTFlYzENCg0KVGVzdCBzZXF1ZW5jZSBmcm9tIHNtYnRvcnR1cmUgdGVzdCBzb3Vy
-Y2U0L3RvcnR1cmUvcmF3L29wZW4uYyAodGVzdCBSQVdfT1BFTl9PUEVOKToNCg0KICAgICAgICAg
-IHN0YXR1cyA9IHNtYl9yYXdfb3BlbihjbGktPnRyZWUsIHRjdHgsICZpbyk7DQoNCiAgICAgICAg
-ICBDSEVDS19TVEFUVVMoc3RhdHVzLCBOVF9TVEFUVVNfT0spOw0KDQogICAgICAgICAgZm51bSA9
-IGlvLm9wZW5vbGQub3V0LmZpbGUuZm51bTsNCg0KICAgICAgICAgIENIRUNLX1JEV1IoZm51bSwg
-UkRXUl9SRFdSKTsNCg0KDQoNCiAgICAgICAgICBzdGF0dXMgPSBzbWJfcmF3X29wZW4oY2xpLT50
-cmVlLCB0Y3R4LCAmaW8pOw0KDQogICogICBTdWNjZWVkcyAtLT4gICAgICAgICBDSEVDS19TVEFU
-VVMoc3RhdHVzLCBOVF9TVEFUVVNfT0spOw0KDQogICAgICAgICAgZm51bTIgPSBpby5vcGVub2xk
-Lm91dC5maWxlLmZudW07DQoNCiAtLT4gRkFJTFMgLS0+IENIRUNLX1JEV1IoZm51bTIsIFJEV1Jf
-UkRXUik7ICAgLy8gRG9lcyBhIHByZWFkL3B3cml0ZQ0KDQogICAgICAgICAgc21iY2xpX2Nsb3Nl
-KGNsaS0+dHJlZSwgZm51bTIpOw0KDQogICAgICAgICAgc21iY2xpX2Nsb3NlKGNsaS0+dHJlZSwg
-Zm51bSk7DQoNCg0KDQpBbmFseXNpczogIE91ciB1c2VyIHNwYWNlIGZpbGUgc3lzdGVtIFZGUyBt
-b2R1bGUgd2lsbCBhZGQgYSBmc3AgZXh0ZW5zaW9uIHRvIHRoZSBmc3Agc3RydWN0dXJlIG9uIG9w
-ZW4uICBBZnRlciB0aGUgMm5kIG9wZW4sIHRoZSBwcmVhZCBhbmQgcHdyaXRlIGNhbGxzIGFyZSBw
-YXNzZWQgYSBmc3AgdGhhdCBkb2VzIG5vdCBoYXZlIHRoZSBGU1AgZXh0ZW5zaW9uIHNldC4NCg0K
-DQpUaGUgdGVzdCBwYXNzZXMgaWYgd2UgcmV2ZXJ0IHRoZSBjb21taXQuIFNpbmNlIHRoZSBjb21t
-aXQgbW92ZWQgdGhlICBmY2Jfb3JfZG9zX29wZW4gY2FsbCBhbmQgY2hhbmdlZCBpdCB0byBubyBs
-b25nZXIgdGFrZXMgYSBmc3AgcGFyYW1ldGVyIGFuZCBzaW5jZSBpdCBjcmVhdGVzIGEgbmV3IGZz
-cCBhbmQgd2hlbiBkdXDigJluZyBmcm9tIHRoZSBvcmlnaW5hbCBmc3AgZG9lcyBub3QgY29weSB0
-aGUgZnNwIGV4dGVuc2lvbiwgdGhlIGZzcCBleHRlbnNpb24gaXMgbm90IHByZXNlcnZlZC4gIFRo
-aXMgZnNwIGlzIHRoZW4gcGFzc2VkIHRvIG91ciBWRlMgbW9kdWxl4oCZcyBwcmVhZC9wd3JpdGUg
-d2l0aG91dCB0aGUgZnNwIGV4dGVuc2lvbiAtPiByZXN1bHRpbmcgaW4gb3VyIFZGUyBtb2R1bGUg
-cmV0dXJuaW5nIGFuIGVycm9yIOKAnEZpbGUgbm90IG9wZW7igJ0uICBJbnRlcm5hbGx5IGluIHRo
-ZSBTYW1iYSBjb2RlIGl0IGlzIHByb2Nlc3NpbmcgTlRfU1RBVFVTX1NIQVJJTkdfVklPTEFUSU9O
-IGNvZGUgcGF0aHMuDQoNClByZXZpb3VzIHRvIHRoaXMgY29tbWl0LCB0aGUgZGVzdGluYXRpb24g
-ZnNwIHRoYXQgd2FzIHBhc3NlZCB0byBmY2Jfb3JfZG9zX29wZW4gaGFkIHRoZSBmc3BfZXh0ZW5z
-aW9uIGFscmVhZHkgc2V0LCBzbyB3aGVuIGR1cOKAmWluZyBpdCBkaWQgbm90IG5lZWQgdG8gYmUg
-Y29waWVkLiAgTm93IHRoYXQgdGhlIGRlc3RpbmF0aW9uIGZzcCBpcyBuZXcsIGl0IGRvZXMgbm90
-IGhhdmUgdGhlIGZzcCBleHRlbnNpb24gc2V0IGFuZCB3aGVuIHRoZSBmc3AgaXMgcGFzc2VkIHRv
-IHRoZSBWRlMgbW9kdWxlIGludGVyZmFjZSBpdCBubyBsb25nZXIgaGFzIHRoZSBWRlMgbW9kdWxl
-IGNvbnRleHQuDQoNCkkgaGFwcHkgdG8gcHJvdmlkZSBhbnkgYWRkaXRpb25hbCBpbmZvcm1hdGlv
-biAvIGNhbGwgdHJhY2VzIHRoYXQgeW91IG5lZWQuDQoNCg0KDQpUaGFua3MsDQoNClZhbmRhbmEg
-UnVuZ3RhDQoNCg==
+merged into cifs-2.6.git for-next
+
+On Fri, Mar 6, 2020 at 5:01 PM Gustavo A. R. Silva
+<gustavo@embeddedor.com> wrote:
+>
+> The current codebase makes use of the zero-length array language
+> extension to the C90 standard, but the preferred mechanism to declare
+> variable-length types such as these ones is a flexible array member[1][2],
+> introduced in C99:
+>
+> struct foo {
+>         int stuff;
+>         struct boo array[];
+> };
+>
+> By making use of the mechanism above, we will get a compiler warning
+> in case the flexible array does not occur last in the structure, which
+> will help us prevent some kind of undefined behavior bugs from being
+> inadvertently introduced[3] to the codebase from now on.
+>
+> Also, notice that, dynamic memory allocations won't be affected by
+> this change:
+>
+> "Flexible array members have incomplete type, and so the sizeof operator
+> may not be applied. As a quirk of the original implementation of
+> zero-length arrays, sizeof evaluates to zero."[1]
+>
+> This issue was found with the help of Coccinelle.
+>
+> [1] https://gcc.gnu.org/onlinedocs/gcc/Zero-Length.html
+> [2] https://github.com/KSPP/linux/issues/21
+> [3] commit 76497732932f ("cxgb3/l2t: Fix undefined behaviour")
+>
+> Signed-off-by: Gustavo A. R. Silva <gustavo@embeddedor.com>
+> ---
+>  fs/cifs/cifspdu.h | 18 +++++++++---------
+>  1 file changed, 9 insertions(+), 9 deletions(-)
+>
+> diff --git a/fs/cifs/cifspdu.h b/fs/cifs/cifspdu.h
+> index 8e15887d1f1f..593d826820c3 100644
+> --- a/fs/cifs/cifspdu.h
+> +++ b/fs/cifs/cifspdu.h
+> @@ -1021,7 +1021,7 @@ typedef struct smb_com_writex_req {
+>         __le16 ByteCount;
+>         __u8 Pad;               /* BB check for whether padded to DWORD
+>                                    boundary and optimum performance here */
+> -       char Data[0];
+> +       char Data[];
+>  } __attribute__((packed)) WRITEX_REQ;
+>
+>  typedef struct smb_com_write_req {
+> @@ -1041,7 +1041,7 @@ typedef struct smb_com_write_req {
+>         __le16 ByteCount;
+>         __u8 Pad;               /* BB check for whether padded to DWORD
+>                                    boundary and optimum performance here */
+> -       char Data[0];
+> +       char Data[];
+>  } __attribute__((packed)) WRITE_REQ;
+>
+>  typedef struct smb_com_write_rsp {
+> @@ -1306,7 +1306,7 @@ typedef struct smb_com_ntransact_req {
+>         /* SetupCount words follow then */
+>         __le16 ByteCount;
+>         __u8 Pad[3];
+> -       __u8 Parms[0];
+> +       __u8 Parms[];
+>  } __attribute__((packed)) NTRANSACT_REQ;
+>
+>  typedef struct smb_com_ntransact_rsp {
+> @@ -1523,7 +1523,7 @@ struct file_notify_information {
+>         __le32 NextEntryOffset;
+>         __le32 Action;
+>         __le32 FileNameLength;
+> -       __u8  FileName[0];
+> +       __u8  FileName[];
+>  } __attribute__((packed));
+>
+>  /* For IO_REPARSE_TAG_SYMLINK */
+> @@ -1536,7 +1536,7 @@ struct reparse_symlink_data {
+>         __le16  PrintNameOffset;
+>         __le16  PrintNameLength;
+>         __le32  Flags;
+> -       char    PathBuffer[0];
+> +       char    PathBuffer[];
+>  } __attribute__((packed));
+>
+>  /* Flag above */
+> @@ -1553,7 +1553,7 @@ struct reparse_posix_data {
+>         __le16  ReparseDataLength;
+>         __u16   Reserved;
+>         __le64  InodeType; /* LNK, FIFO, CHR etc. */
+> -       char    PathBuffer[0];
+> +       char    PathBuffer[];
+>  } __attribute__((packed));
+>
+>  struct cifs_quota_data {
+> @@ -1762,7 +1762,7 @@ struct set_file_rename {
+>         __le32 overwrite;   /* 1 = overwrite dest */
+>         __u32 root_fid;   /* zero */
+>         __le32 target_name_len;
+> -       char  target_name[0];  /* Must be unicode */
+> +       char  target_name[];  /* Must be unicode */
+>  } __attribute__((packed));
+>
+>  struct smb_com_transaction2_sfi_req {
+> @@ -2451,7 +2451,7 @@ struct cifs_posix_acl { /* access conrol list  (ACL) */
+>         __le16  version;
+>         __le16  access_entry_count;  /* access ACL - count of entries */
+>         __le16  default_entry_count; /* default ACL - count of entries */
+> -       struct cifs_posix_ace ace_array[0];
+> +       struct cifs_posix_ace ace_array[];
+>         /* followed by
+>         struct cifs_posix_ace default_ace_arraay[] */
+>  } __attribute__((packed));  /* level 0x204 */
+> @@ -2757,7 +2757,7 @@ typedef struct file_xattr_info {
+>         /* BB do we need another field for flags? BB */
+>         __u32 xattr_name_len;
+>         __u32 xattr_value_len;
+> -       char  xattr_name[0];
+> +       char  xattr_name[];
+>         /* followed by xattr_value[xattr_value_len], no pad */
+>  } __attribute__((packed)) FILE_XATTR_INFO; /* extended attribute info
+>                                               level 0x205 */
+> --
+> 2.25.0
+>
+
+
+-- 
+Thanks,
+
+Steve
+
