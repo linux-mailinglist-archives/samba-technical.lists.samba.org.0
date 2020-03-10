@@ -2,42 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49FF417F07B
-	for <lists+samba-technical@lfdr.de>; Tue, 10 Mar 2020 07:26:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD82F17F113
+	for <lists+samba-technical@lfdr.de>; Tue, 10 Mar 2020 08:33:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=Bol1waKmXROzSufRxoEHYxtmEtXxFpt+ZnlbvquOVSg=; b=sIgIFAVpv3MFjRFaVr8CUW2P9h
-	bUr9rw1OJH/P4/wRw1mG6wDDA1yJk1i07nEfzcw0wAxKE9YHq0BY2BvJ5qgxulYSxVPmRbRGo4bes
-	tPBdw6ZIo8+t5+DAG7UUfQPQjaT+i9CthOnVIcUgNPM0L8gQHR7c9h/DCybUtUnt1p1l2LQqw+Ibh
-	+bRYB15h4xleCzSfC1RRswGBIXL8MwGS+aJ+zRlsz2Dr7yLKqTNsw1hXI2aXBPPyh+NuHvAZwj12R
-	/whGw11yqeG/EmdacI9gHoWdc7lI5bC9PY+S864pXgWISGQJPbOlQilSlNcWXi++8ldWa8O1fi0VG
-	gwKgJxCA==;
-Received: from ip6-localhost ([::1]:27644 helo=hr1.samba.org) 
+	bh=BP/FOQ5LIlQsix2PvwINGZdfcTG/rTYSueuJfnwLs2Q=; b=dqpJ9FTvL0OWr10pE5c2VmSnfP
+	S80bLbIfzuyovhYcqfmoNpcn73icQHKd9cn+wuyuogxbXNb5q3qgtZOTYwSqrcO4aLzNrwdSk2NQ1
+	eQ3+7W+t1pH3NO7rLks4KLXlWTAA7A5dduRlRJItMfHKq+LYz9nTK7o45ED5v9942LdRgYI8NUuQh
+	yjOvX7ceZWmfs3W9sCTDKPU6ToY8hji81kMirvf7bm6OQltDWjAt8m/hz0i8QPHP2DUqMq1Ohtxrm
+	nWu/VH2SPIdXszJ5cr4o1cSRlau/5+FcM7pg+cyMG3zwJa8Ir6XsmZ6N2vpqKpIPUOWL0cOdEx+gd
+	qoRxojDA==;
+Received: from ip6-localhost ([::1]:30768 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jBYKu-00Fb9c-Qk; Tue, 10 Mar 2020 06:25:52 +0000
-Received: from bex-173-206-187-6.static.tor.primus.ca ([173.206.187.6]:18341
+	id 1jBZNW-00FbhQ-FQ; Tue, 10 Mar 2020 07:32:38 +0000
+Received: from bex-173-206-187-6.static.tor.primus.ca ([173.206.187.6]:25321
  helo=mail.cord3inc.com) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim) id 1jBYKn-00Fb9V-Ig
- for samba-technical@lists.samba.org; Tue, 10 Mar 2020 06:25:48 +0000
+ (Exim) id 1jBZNI-00FbhJ-Dm
+ for samba-technical@lists.samba.org; Tue, 10 Mar 2020 07:32:30 +0000
 Received: from Cord3-EX-2.Cord3Inc.com (10.15.60.53) by
  Cord3-EX-2.Cord3Inc.com (10.15.60.53) with Microsoft SMTP Server (TLS) id
- 15.0.1347.2; Tue, 10 Mar 2020 02:25:38 -0400
+ 15.0.1347.2; Tue, 10 Mar 2020 03:32:14 -0400
 Received: from Cord3-EX-2.Cord3Inc.com ([fe80::78a8:bf:478d:fa71]) by
  Cord3-EX-2.Cord3Inc.com ([fe80::78a8:bf:478d:fa71%12]) with mapi id
- 15.00.1347.000; Tue, 10 Mar 2020 02:25:38 -0400
+ 15.00.1347.000; Tue, 10 Mar 2020 03:32:14 -0400
 To: Andrew Bartlett <abartlet@samba.org>, "samba-technical@lists.samba.org"
  <samba-technical@lists.samba.org>
 Subject: Re: Samba File Server and Docker
 Thread-Topic: Samba File Server and Docker
-Thread-Index: AQHV9k0+OD+QMSW56EOhLcjKYAK8fqhBGuwAgAAqqGyAAFdBAP//vT3Y
-Date: Tue, 10 Mar 2020 06:25:37 +0000
-Message-ID: <1583821540979.90575@Cord3Inc.com>
+Thread-Index: AQHV9k0+OD+QMSW56EOhLcjKYAK8fqhBGuwAgAAqqGyAAFdBAP//vT3YgAAGhbOAAAzzag==
+Date: Tue, 10 Mar 2020 07:32:14 +0000
+Message-ID: <1583825537720.74678@Cord3Inc.com>
 References: <1583784238870.92348@Cord3Inc.com>	,
  <5703e4c814b59b0624e2dbe99f7d89e79775115f.camel@samba.org>
  <1583819968953.36738@Cord3Inc.com>,
- <186d5e75133319a7620bedd5776729a852634657.camel@samba.org>
-In-Reply-To: <186d5e75133319a7620bedd5776729a852634657.camel@samba.org>
+ <186d5e75133319a7620bedd5776729a852634657.camel@samba.org>,
+ <1583821540979.90575@Cord3Inc.com>, <1583822659492.67452@Cord3Inc.com>
+In-Reply-To: <1583822659492.67452@Cord3Inc.com>
 Accept-Language: en-CA, en-US
 Content-Language: en-CA
 X-MS-Has-Attach: 
@@ -66,6 +67,19 @@ Reply-To: Dan Seguin <dan.seguin@Cord3Inc.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+=0A=
+________________________________________=0A=
+From: Dan Seguin=0A=
+Sent: March 10, 2020 2:44 AM=0A=
+To: Andrew Bartlett; Dan Seguin=0A=
+Subject: Re: Samba File Server and Docker=0A=
+=0A=
+________________________________________=0A=
+From: samba-technical <samba-technical-bounces@lists.samba.org> on behalf o=
+f Dan Seguin via samba-technical <samba-technical@lists.samba.org>=0A=
+Sent: March 10, 2020 2:25 AM=0A=
+To: Andrew Bartlett; samba-technical@lists.samba.org=0A=
+Subject: Re: Samba File Server and Docker=0A=
 =0A=
 ________________________________________=0A=
 From: Andrew Bartlett <abartlet@samba.org>=0A=
@@ -115,17 +129,41 @@ Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba=
 =0A=
 =0A=
 =0A=
-I understand. =0A=
+I understand.=0A=
 =0A=
 My proposed design is that the shares (files) are "show only",  any open me=
 ans if  "policy" allows, a decrypted copy is made to an isolated "session a=
 rea", say a hashed username DOT subdir, the resulting "OPEN" call will then=
- get the decrypted FD returned.  =0A=
+ get the decrypted FD returned.=0A=
 =0A=
 I'm only worried about the STAT calls in the FSP before any close.  Can I r=
 e-write the FSP filename for STAT/LSTAT/etc calls?=0A=
 =0A=
-Hope this makes sense. =0A=
+Hope this makes sense.=0A=
+=0A=
+Apologies, I missed posting to the list: =0A=
+=0A=
+Further on this, is that once the client is done with this isolated file, o=
+n close, it will get encrypted, and an atomic rename to the "show only" are=
+a is done.=0A=
+=0A=
+There is no file contention or locking, or any of that at this point: it's =
+last man writing still wins, but at a macro level.  Advisory read locks via=
+ VFS would be respected before rename, of course.=0A=
+=0A=
+=0A=
+Addendum:=0A=
+=0A=
+=0A=
+What I'm not sure about is the FSP to client relationship. If I rewrite the=
+ asked for file (path/file, relative) in the request header (because I move=
+d it), does the client use the "FSP" or will it ask for a STAT/LSTAT on the=
+ original path/file?  This is a state/context/session issue. =0A=
+=0A=
+Lend me your eyes, thanks. =0A=
+=0A=
+=0A=
+=0A=
 =0A=
 =0A=
 
