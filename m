@@ -2,45 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 735A5180CD3
-	for <lists+samba-technical@lfdr.de>; Wed, 11 Mar 2020 01:32:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21AD1180D0C
+	for <lists+samba-technical@lfdr.de>; Wed, 11 Mar 2020 01:59:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=1a4cdwd4S2A1VxE1UpO8nqCyAXh/Ms5HeKlRu+jzhB4=; b=C0MNk1TGbNSogHJhjUqmJ1hG0p
-	kh1alIC2Wtf1c2Uz69XbhSqjbzFoH9uC2jxDBk28htQ8T4Q6LSszyquv7MUzuuS4FnS36ZX6bTIaB
-	wI/PBdAbA4AzaIsBYouLbZ6FrKgL+fW/lhEarIoJ8T3XM9h3dFmH/+7wN186bxgMg/21QaWHfQIAu
-	NhtugmfjDKhioD/o+LDhNCOwWqUqGZiTtS/qf0qmNmPfHEbMVIiQJqPkCbKImqMa+dOrDdi7nopAi
-	fIjow9CmVn/XtLhPFpJhDKwxraqrvgsCVdgfwQ3BLLEouTxope3vrgHPIcY3axKlYRICbR3+K7G9J
-	CYFijlFA==;
-Received: from ip6-localhost ([::1]:53570 helo=hr1.samba.org) 
+	bh=Gpr+UadmaB+r0Bo6LUn87vancMB7AQnSdgOU+1tiLH0=; b=uBtnkIfiTR6aY4P14OAmQ4iWPO
+	+/XoG3bweOcabJRSHL1L278z626XVdjIQffoF7uYYlhC2dYCVwmH6hSAcuGLUse46/zzpTQLT7naO
+	gWv/6uWmf9ur+Lex7wWbODp6PSpzWYwJtfqT5SfCGD15fXa+hBpsYePk1GLEIS4cDyNo1dTp/5i9S
+	Cqyd6a6k3gEA3qWaTVQoy0OCMKUHxV4K/7WXUC6uWBsJ0rLHRC9bnfd/0+eoTlCOT+YSYlTUhxESf
+	ogvH6gqCw6TkUS9oh9d/uPAWYfCxH7w0taVwoPx21p0iL/a62l0MkNI23/pU+jUUkwO4KD5apDpTF
+	O+bxv/xw==;
+Received: from ip6-localhost ([::1]:54316 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jBpHY-00FmpP-IB; Wed, 11 Mar 2020 00:31:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14794) 
+	id 1jBphs-00FmzM-05; Wed, 11 Mar 2020 00:58:44 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:42114) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jBpHS-00FmpG-Bh
- for samba-technical@lists.samba.org; Wed, 11 Mar 2020 00:31:29 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=1a4cdwd4S2A1VxE1UpO8nqCyAXh/Ms5HeKlRu+jzhB4=; b=usYPZPLH07NzdW4WRbwP7s3fZ4
- +GRIf7LsZYON3p/8DdWugbx+btd8opotdCmF2846uejDGINR9ZXrCgcCH2z4zrc0emL0eiGDUZ4+1
- lRFdC6RsMLj4fga1nuL42BxKa9c1K3kuKQIHyNjw9+L5ehz25Mc8d+KpJnuTwjAwIG1mzrDLYD2rM
- W0yzuHihvUoRWmFpGLgU2fT6Eq0jcelfw/IrDFvNz+DDYhX0ZXiRCxSrRwUcfzofvWBje3/UbcxNM
- h3g0ubntd2ACwAWgrUbDumyYEaigs0POptmQo3ssQFEjKWiphjOFS7lU5YOhhA8y6Ia1Qz9MQo6c1
- PYqfeNEhlIE35bHRt2up97akC5cCezdmzFvB040na0ERxxhZdFL+h0a5ruIKgC7Axf3/YYrGtfk70
- 2JQQmSh0oe0XFsdbRhaIANTGCC4Fg0AQ18LeP8UQr2V0jhipsSjmgJ9+RO9HeD8Cq0EXeGySgVnd3
- FyE5HP208cA+XmO+9xsXvpZ7;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jBpHQ-0005YM-AA
- for samba-technical@lists.samba.org; Wed, 11 Mar 2020 00:31:24 +0000
-Message-ID: <b164abb5639ec380a113634ef0831bcb5063b1df.camel@samba.org>
-Subject: SMB3 compression exploit in Windows: ADV200005
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Wed, 11 Mar 2020 13:31:20 +1300
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
+ (Exim) id 1jBphl-00FmzF-Lu
+ for samba-technical@lists.samba.org; Wed, 11 Mar 2020 00:58:40 +0000
+Received: from [192.168.1.110] (unknown [114.23.142.188])
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 311CF80E61; 
+ Wed, 11 Mar 2020 13:58:18 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1583888298;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Gpr+UadmaB+r0Bo6LUn87vancMB7AQnSdgOU+1tiLH0=;
+ b=E/oOa/dB+Ww8a53PP1DyB2wg6XHUGcBbsM0b0HwdP1ftPIYL36cgWiysvWD1bmYQkNM/eD
+ 7B4Cbm/0vrcscW9v2Is28+KsD0K2mc7pMegAkIgwRAXJBhyx3hQrJQtzBGd/80ndiNmgek
+ KobQdWoBU9eHEUkSslsI01YbeDZBgRXd3NM31psalnfGyn14ACLFEjiILdL43O39U98G6z
+ nRdAEBMVRl6cDN8jmPVBW731HuEcxmIaY1QyG/Ev98rnko8ITR3V2mFZbNN4sSw3uYaSAU
+ gNitOs4MZLh2HnodMnXYGI5zx6CwaqnlzG1vW+Gf6iOU/ujoH4O1M0xU2cD9Jg==
+Subject: Re: Idea for someone: Run with python warnings in --enable-developer
+ mode
+To: Andrew Bartlett <abartlet@samba.org>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+References: <6288bb3c3367182cf773c932d85e0144de6fa3a3.camel@samba.org>
+Message-ID: <dee6a471-b4e4-669b-6632-b102b3765eb4@catalyst.net.nz>
+Date: Wed, 11 Mar 2020 13:58:16 +1300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
+MIME-Version: 1.0
+In-Reply-To: <6288bb3c3367182cf773c932d85e0144de6fa3a3.camel@samba.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=douglasb@catalyst.net.nz
+ smtp.mailfrom=douglas.bagnall@catalyst.net.nz
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,39 +65,57 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I wanted to write a public heads up that Microsoft has published an
-advisory about an exploit in their client and server SMBv3 compression
-code.
+On 11/03/20 10:21 am, Andrew Bartlett via samba-technical wrote:
+> We got a wake-up-call with "samba fails to build with Python 3.9:
+> invalid open() mode U"
+> https://bugzilla.samba.org/show_bug.cgi?id=14266
+> 
+> We need to find a way to run waf and selftest with python warnings
+> turned on.
 
-We may start to get questions about this in Samba, and Samba users with
-windows clients might wish to carefully consider the guidance here in
-the meantime:
+With Python 3.7 at least, you see a lot of warnings with:
 
-https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/adv200005
+PYTHONDEVMODE=1 make test
 
-On the Samba side of things while our lzexpress compression code
-sucks[1], it isn't use in a vulnerable context, and certainly not in
-SMB3.
+which leads to crazy commits like  c247afbda00013bf4821e5a2d4f3166bf31814f0.
 
-Andrew Bartlett
+From memory, most of the warnings are really false positives, warning
+about unclosed files in situations where we know the GC will close the
+file soon and we aren't opening them in a tight loop or in long running
+processes.
 
-[1] https://bugzilla.samba.org/show_bug.cgi?id=14190
--- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-https://catalyst.net.nz/services/samba
+Also from memory, there are more interesting warnings in waf and the
+wscripts than samba itself.
 
+> It might be as simple as setting an environment variable in autobuild
+> or .gitlab-ci.yml, but my current gut feeling is to control it in waf
+> so we can see it during routine pre-commit testing.
+> 
+> I would like, just with our C warnings, for --disable-warnings-as-
+> errors to work, so we can still build older versions of Samba with
+> developer features on newer python (which might have deprecated things
+> we use). 
+> 
+> https://docs.python.org/3/library/warnings.html
+> 
+> I think we want to set PYTHONWARNINGS=error into the environment and
+> have waf set on itself
+>  
+> import warnings
+>     warnings.simplefilter("error")
+> 
+> Is anyone interested in taking this on?  Of course what follows would
+> be no doubt a pile of warning fixes, so it may not be a small task.  
 
+I think it would be quite a small task once the file warnings are ignored,
+so long as third_party/ is swept back under its rug.
 
+(that is not me volunteering).
 
-
-
+Douglas
 
