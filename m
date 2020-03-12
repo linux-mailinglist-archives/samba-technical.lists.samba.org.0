@@ -2,37 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA12318278D
-	for <lists+samba-technical@lfdr.de>; Thu, 12 Mar 2020 04:54:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D2E3D1828F1
+	for <lists+samba-technical@lfdr.de>; Thu, 12 Mar 2020 07:26:07 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Date:Subject;
-	bh=kfnphghRFvCtUXEK7juO8WhE05BBbllYbop9uaBsCYY=; b=WiBhc5o4+EaD5xLU2zNZSyA0zJ
-	GRL/7p4w50LF84FVE/7L9ztDv/9u4KFouavtQvyeJw96OC1RP1xdx2zjAMFdsEHHOshM7sZ1r1NdD
-	5JWaT+oCewJihUq40AZvUw8lpY0QW5DlT39Ez5Ien4SDEqOvNs69kZ0SHUnw8bHlradaoyS0w7D1S
-	M5gZ7tqTK49Ydd2Dk3m5JRaFhVrsCnyOsgSiaWSTNy0MJ2tOVyC+fVNfBoAQ1x75vZwjBGldYo+Jr
-	psJ2b509EVseGVoOIeVkdrl+aDissMrF3Ygw1MxhXUm+cBQJmzPa5hyEyjhr/ygwR3oFPMYX6wv1Z
-	IEXP70bg==;
-Received: from ip6-localhost ([::1]:34824 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=Bzxispl+lJEjI8FMs+X4lqCUiSpVRrBWekD4Z2vOkC4=; b=ywyC5akx+vAX1W/fS3rnguxMSz
+	XuxAzsZzcA40MQbs202tOi1rtw1r9SfV4GuxbFTPhblS4Wrl3RNqldKgX5c/IVLZ8OjWqyNY4vHD/
+	CTZuobuXYPPJtSCAmKxq6bo8a9DKHIQtxbDFM+ROKbIWfYbBWLFoPEcGBtbUDTy8Kb6kXSjMdgpwo
+	Pk9AgHhIrU3J/dum44PXMHKupAo2vmw6bHpTH2jcdpm7fiBsZ+4706925/6TX57+UQEVDwoLy+aOz
+	pfDlcp+zeNeSNWJEJxU6GszBTnCFvys6Of3k4sy0qxrngYUmy0SIC65VO1tWMYkrozeo34tnMmQga
+	CAGbooCw==;
+Received: from ip6-localhost ([::1]:35778 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jCEuw-00Ft1P-QL; Thu, 12 Mar 2020 03:53:54 +0000
-Received: from mx2.suse.de ([195.135.220.15]:48628) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jCEur-00Ft1I-P2
- for samba-technical@lists.samba.org; Thu, 12 Mar 2020 03:53:52 +0000
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id CD95BB2D8;
- Thu, 12 Mar 2020 03:40:52 +0000 (UTC)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 13.0 \(3608.60.0.2.5\))
+	id 1jCHHK-00FtOC-MI; Thu, 12 Mar 2020 06:25:10 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16946) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jCHHD-00FtMp-47
+ for samba-technical@lists.samba.org; Thu, 12 Mar 2020 06:25:05 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=Bzxispl+lJEjI8FMs+X4lqCUiSpVRrBWekD4Z2vOkC4=; b=cO0Z/UHpZ1Pv1I41z1sNJwATXL
+ t5AAamSnMOUYbHjKzF1TA0AMHOBb1We9CRfZOGKd3apFTWI7KAR/F4sPpn8f4qoWuh+EY7BmSZyLu
+ nUUz9Wkoq8/5W6hOJw86OOZy4nH6oOOKBXT61sGQfesUggKdEROkByjJ7lZkO0S6SXwD3J8sVaIfT
+ 2hJjUvstmxKBr3Cpv78DOc+TJnQ4uebpok30rkCTgPkOZpZCL5A73mV2kWi0EiURKhc+vm+RcjepY
+ gNfk/GnVM4FZoMkTRA50XjmGskQNQ3UCucxH9TfDPnOUtpaoXxkYyU1h9Ym2AKjr/0OrCM8+y32Mo
+ ZG2K8aq6pbNtiTBoy1E9bfB9qfExxwFEc2evDMGty4Ht18HvQZYTG1x1CR1J5MoMTnmIqJF1PGMyA
+ tAvtPBT0+yV6IJkUEKYPMHSJfAnNXNHZfRBG03cSf3u1JVZDaidOUs4GMhZ9X09xCLVCvGaEHKQzZ
+ AiqyxDNi4g65N0P0HY0xBrZW;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jCHHA-0002Lf-RZ; Thu, 12 Mar 2020 06:25:00 +0000
+To: Andrew Bartlett <abartlet@samba.org>, William Brown <wbrown@suse.de>
 Subject: Re: Retire Fedora 29 / OpenSUSE 15.0 from CI?
-In-Reply-To: <7999f917f76d922dfd725d185903fdf47e1a7e9b.camel@samba.org>
-Date: Thu, 12 Mar 2020 13:40:47 +1000
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <E8F6741C-BEC9-43A6-B683-E21BD9F61372@suse.de>
+Date: Thu, 12 Mar 2020 07:24:59 +0100
+Message-ID: <38643263.Z8vMgeSRLk@magrathea>
+In-Reply-To: <E8F6741C-BEC9-43A6-B683-E21BD9F61372@suse.de>
 References: <7999f917f76d922dfd725d185903fdf47e1a7e9b.camel@samba.org>
-To: Andrew Bartlett <abartlet@samba.org>
-X-Mailer: Apple Mail (2.3608.60.0.2.5)
+ <E8F6741C-BEC9-43A6-B683-E21BD9F61372@suse.de>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -46,59 +55,55 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: William Brown via samba-technical <samba-technical@lists.samba.org>
-Reply-To: William Brown <wbrown@suse.de>
-Cc: asn@samba.org,
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: ab@samba.org,
  Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+On Thursday, 12 March 2020 04:40:47 CET William Brown wrote:
+> > On 12 Mar 2020, at 13:17, Andrew Bartlett via samba-technical
+> > <samba-technical@lists.samba.org> wrote:
+> > 
+> > G'Day Andreas and the list,
+> > 
+> > It bothers me a little that for every Samba change we make we spin up
+> > 37 builds on 37 VMs.  It feels a little excessive, and while CI is
+> > awesome when it saves us all time we should also use the earth and
+> > Samba Team's resources carefully.  (Even jobs aimed at the 'free' CI
+> > can be run on our servers if GitLab.com's servers are busy, and the
+> > planet pays either way).
+> > 
+> > Therefore I wondered if we should also stop running CI on Fedora 29 and
+> > OpenSUSE 15.0, both of which are now it is EOL upstream?
+> > 
+> > Both went EOL in Nov/Dec 2019.
+> > 
+> > In the future I think we should set policy to only CI on (some, subject
+> > to other constraints) supported distributions.
+> > 
+> > What do folks think?
+> 
+> This sounds like a 100% reasonable policy to only run CI on active/supported
+> distributions. :)
+
+Yes, we can drop them.
+
+I think we can also just run the latest Fedora version (two versions when a 
+new release comes out for a few days). We have CentOS which provide old enough 
+distros to show we still run on that stuff.
 
 
-> On 12 Mar 2020, at 13:17, Andrew Bartlett via samba-technical =
-<samba-technical@lists.samba.org> wrote:
->=20
-> G'Day Andreas and the list,
->=20
-> It bothers me a little that for every Samba change we make we spin up
-> 37 builds on 37 VMs.  It feels a little excessive, and while CI is
-> awesome when it saves us all time we should also use the earth and
-> Samba Team's resources carefully.  (Even jobs aimed at the 'free' CI
-> can be run on our servers if GitLab.com's servers are busy, and the
-> planet pays either way).=20
->=20
-> Therefore I wondered if we should also stop running CI on Fedora 29 =
-and
-> OpenSUSE 15.0, both of which are now it is EOL upstream?
->=20
-> Both went EOL in Nov/Dec 2019.
->=20
-> In the future I think we should set policy to only CI on (some, =
-subject
-> to other constraints) supported distributions.=20
->=20
-> What do folks think?
+Alexander, what do you think?
 
-This sounds like a 100% reasonable policy to only run CI on =
-active/supported distributions. :)=20
 
->=20
-> Andrew Bartlett
-> --=20
-> Andrew Bartlett
-> https://samba.org/~abartlet/
-> Authentication Developer, Samba Team         https://samba.org
-> Samba Development and Support, Catalyst IT - Expert Open Source
-> Solutions
-> https://catalyst.net.nz/services/samba
->=20
+	Andreas
 
-=E2=80=94
-Sincerely,
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
-William Brown
-
-Senior Software Engineer, 389 Directory Server
-SUSE Labs
 
 
