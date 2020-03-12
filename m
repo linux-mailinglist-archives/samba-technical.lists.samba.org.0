@@ -2,56 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21AD1180D0C
-	for <lists+samba-technical@lfdr.de>; Wed, 11 Mar 2020 01:59:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED9FB182762
+	for <lists+samba-technical@lfdr.de>; Thu, 12 Mar 2020 04:18:56 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=Gpr+UadmaB+r0Bo6LUn87vancMB7AQnSdgOU+1tiLH0=; b=uBtnkIfiTR6aY4P14OAmQ4iWPO
-	+/XoG3bweOcabJRSHL1L278z626XVdjIQffoF7uYYlhC2dYCVwmH6hSAcuGLUse46/zzpTQLT7naO
-	gWv/6uWmf9ur+Lex7wWbODp6PSpzWYwJtfqT5SfCGD15fXa+hBpsYePk1GLEIS4cDyNo1dTp/5i9S
-	Cqyd6a6k3gEA3qWaTVQoy0OCMKUHxV4K/7WXUC6uWBsJ0rLHRC9bnfd/0+eoTlCOT+YSYlTUhxESf
-	ogvH6gqCw6TkUS9oh9d/uPAWYfCxH7w0taVwoPx21p0iL/a62l0MkNI23/pU+jUUkwO4KD5apDpTF
-	O+bxv/xw==;
-Received: from ip6-localhost ([::1]:54316 helo=hr1.samba.org) 
+	bh=HPirIpIK1Y3A3NDO954+t9AKxj2tzyQ2zFDmrcW6/0s=; b=GTaXT3GtwgalyqB/Styj/35Vij
+	6HJaBClvTzxq66XkVAfdgI48WiF2ZsMb/hsD2kQDzvD5YE12OetlUn3VFN4VcM25kGc6+b5AEhgFk
+	bFadN7kon5kTPO327blT5BjTq3TJnUsHq5i5Aa0lH35H0CABFTWe37RO65z8fvgAd9AMV8+r6f8+F
+	Uj50dMsQbWB1nRmlpqI8cadsR/ue5Osnc4W3EP/QJGkrmsUIQ928XJ9q73KR24V4zVDyGcspCGxr4
+	uGQtZLYaPXYjjJkOlICmJJ0Pw90h8SK2CJY4obaGrhFeMNwfq52PZkEGWwXaotwhL5gYvaccXXGIQ
+	wryFb1Sw==;
+Received: from ip6-localhost ([::1]:34022 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jBphs-00FmzM-05; Wed, 11 Mar 2020 00:58:44 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:42114) 
+	id 1jCELw-00FstU-6X; Thu, 12 Mar 2020 03:17:44 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25390) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jBphl-00FmzF-Lu
- for samba-technical@lists.samba.org; Wed, 11 Mar 2020 00:58:40 +0000
-Received: from [192.168.1.110] (unknown [114.23.142.188])
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 311CF80E61; 
- Wed, 11 Mar 2020 13:58:18 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1583888298;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Gpr+UadmaB+r0Bo6LUn87vancMB7AQnSdgOU+1tiLH0=;
- b=E/oOa/dB+Ww8a53PP1DyB2wg6XHUGcBbsM0b0HwdP1ftPIYL36cgWiysvWD1bmYQkNM/eD
- 7B4Cbm/0vrcscW9v2Is28+KsD0K2mc7pMegAkIgwRAXJBhyx3hQrJQtzBGd/80ndiNmgek
- KobQdWoBU9eHEUkSslsI01YbeDZBgRXd3NM31psalnfGyn14ACLFEjiILdL43O39U98G6z
- nRdAEBMVRl6cDN8jmPVBW731HuEcxmIaY1QyG/Ev98rnko8ITR3V2mFZbNN4sSw3uYaSAU
- gNitOs4MZLh2HnodMnXYGI5zx6CwaqnlzG1vW+Gf6iOU/ujoH4O1M0xU2cD9Jg==
-Subject: Re: Idea for someone: Run with python warnings in --enable-developer
- mode
-To: Andrew Bartlett <abartlet@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-References: <6288bb3c3367182cf773c932d85e0144de6fa3a3.camel@samba.org>
-Message-ID: <dee6a471-b4e4-669b-6632-b102b3765eb4@catalyst.net.nz>
-Date: Wed, 11 Mar 2020 13:58:16 +1300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
-MIME-Version: 1.0
-In-Reply-To: <6288bb3c3367182cf773c932d85e0144de6fa3a3.camel@samba.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+ (Exim) id 1jCELq-00FstN-78
+ for samba-technical@lists.samba.org; Thu, 12 Mar 2020 03:17:41 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=HPirIpIK1Y3A3NDO954+t9AKxj2tzyQ2zFDmrcW6/0s=; b=OepVkvzY5Ib3RJd57YQZoZ0ciF
+ A3wDXQaza/69Hs9lLbAuvAbF7dindr75VfarMOM6FVuRANbFlXBR2WNtwjhI4vwc3ZQFarp1q4HNP
+ g/LGAX/jKYN2MWXazFNt71kK4CFuTJyjL1A9XWBHLEcC88KehckU0+eCrp7Zb0BwKTBrASoP0L664
+ JhT0tR/Zk5oCqO+9xj3pCv90YfFR1pNmwNALnSlVqXkZpf0gK0RUJw49NM8RwowhZkEPKB1uApsGO
+ i1xr2xzw2lxJ1s6t3dsBsUNpZ0kD1z48gFfgglRy6qjaGaEtHhGCk8brrehc8vblZxXbzImBwqS9U
+ zUGdYTSwtD+GLpxsyBkKL6e/xhcdWWOXUWvt925K/JtbW/pRkjQX1C+NQsQud6I3O9STF3ZCKnTS2
+ 150ATyQFAYcLQHo+2eohgIzWDps8wA4I3zlgDX2zGkh8kOO3Qev9qF+fpa47XHN8YPRP9tM60sLh/
+ F6vbLBlHyqjx8H+qhkyedzNH;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jCELo-0000p1-JO; Thu, 12 Mar 2020 03:17:37 +0000
+Message-ID: <7999f917f76d922dfd725d185903fdf47e1a7e9b.camel@samba.org>
+Subject: Retire Fedora 29 / OpenSUSE 15.0 from CI?
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ asn@samba.org
+Date: Thu, 12 Mar 2020 16:17:32 +1300
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=douglasb@catalyst.net.nz
- smtp.mailfrom=douglas.bagnall@catalyst.net.nz
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,57 +54,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 11/03/20 10:21 am, Andrew Bartlett via samba-technical wrote:
-> We got a wake-up-call with "samba fails to build with Python 3.9:
-> invalid open() mode U"
-> https://bugzilla.samba.org/show_bug.cgi?id=14266
-> 
-> We need to find a way to run waf and selftest with python warnings
-> turned on.
+G'Day Andreas and the list,
 
-With Python 3.7 at least, you see a lot of warnings with:
+It bothers me a little that for every Samba change we make we spin up
+37 builds on 37 VMs.  It feels a little excessive, and while CI is
+awesome when it saves us all time we should also use the earth and
+Samba Team's resources carefully.  (Even jobs aimed at the 'free' CI
+can be run on our servers if GitLab.com's servers are busy, and the
+planet pays either way). 
 
-PYTHONDEVMODE=1 make test
+Therefore I wondered if we should also stop running CI on Fedora 29 and
+OpenSUSE 15.0, both of which are now it is EOL upstream?
 
-which leads to crazy commits like  c247afbda00013bf4821e5a2d4f3166bf31814f0.
+Both went EOL in Nov/Dec 2019.
 
-From memory, most of the warnings are really false positives, warning
-about unclosed files in situations where we know the GC will close the
-file soon and we aren't opening them in a tight loop or in long running
-processes.
+In the future I think we should set policy to only CI on (some, subject
+to other constraints) supported distributions. 
 
-Also from memory, there are more interesting warnings in waf and the
-wscripts than samba itself.
+What do folks think?
 
-> It might be as simple as setting an environment variable in autobuild
-> or .gitlab-ci.yml, but my current gut feeling is to control it in waf
-> so we can see it during routine pre-commit testing.
-> 
-> I would like, just with our C warnings, for --disable-warnings-as-
-> errors to work, so we can still build older versions of Samba with
-> developer features on newer python (which might have deprecated things
-> we use). 
-> 
-> https://docs.python.org/3/library/warnings.html
-> 
-> I think we want to set PYTHONWARNINGS=error into the environment and
-> have waf set on itself
->  
-> import warnings
->     warnings.simplefilter("error")
-> 
-> Is anyone interested in taking this on?  Of course what follows would
-> be no doubt a pile of warning fixes, so it may not be a small task.  
+Andrew Bartlett
+-- 
+Andrew Bartlett
+https://samba.org/~abartlet/
+Authentication Developer, Samba Team         https://samba.org
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+https://catalyst.net.nz/services/samba
 
-I think it would be quite a small task once the file warnings are ignored,
-so long as third_party/ is swept back under its rug.
 
-(that is not me volunteering).
 
-Douglas
+
+
+
 
