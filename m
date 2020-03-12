@@ -2,50 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4151F182AFC
-	for <lists+samba-technical@lfdr.de>; Thu, 12 Mar 2020 09:16:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 00B40182B96
+	for <lists+samba-technical@lfdr.de>; Thu, 12 Mar 2020 09:53:16 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=Yn3BM3b5P4NCSJA3QL9gdyIkJfPHdTURvjTa3SXZ8v8=; b=qD+FQJshZvm+w2XrtBCYf4VurA
-	S+S/sTyWqRYgKWhH9g4wQ/bOYYhcLV4/Trb+WqNzgLC9J6YBZOmbfsbhKuX8ZcEr8AWNQv3jLDhg/
-	p44VgOPQTsxRF7OW5UHjKoZYkFRCN9f1RlmfIkPnKRU8ktZac96/8p0pipb23da8Q5r4lw4K29B/s
-	g6GXT9/fRSqas31gsaT7Vo8BpEhPmJrKvdFXE+RzXvMTH0+zu3k6QTYzLuKxO0ipqNXKgGFrBOFPG
-	uCLCTx5LrR4IMPtDU3+AT6yqGCahDESwrUWaXvWWihT0EB5N7jEb9wASQHeYwhGN3u8Ox+yMsTM3W
-	eKVwkVSg==;
-Received: from ip6-localhost ([::1]:37324 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=EVTseirLQZ0+h9koP8JFvtt40lRfr/TKrAAx1hf3enI=; b=BY6svcuJ3QrWO4/chDytDLpbLp
+	VEHBFMMgwLJ68YX3bxwv2fr7ba3mOptyfuajrLl4u4hynmd62Ro3P//eFL1q5YiWJwdujzKVZN9qD
+	GBa6yEpnJjYwpQILD1PP3g1SNvK4v1XmfYWLKLfzplKQSVM9Rq6PGc2cwy+z4VQtjNjcw9gZVnk22
+	J8mpL+DyBphG52XUBocpmbjhKCvI7xLNnT9FNrUpgRhxyYfzrKpfOrdzTzLL4+xS19pn3yCBwI4zG
+	I0xWwjzEyLTVAFqt6nQgBI6BGjEoKPWfZIQXf0TubiV/e8e9lMNtn4lvLAMQx6y/uQ8Ft6yg6FQA8
+	CdxX6saQ==;
+Received: from ip6-localhost ([::1]:38060 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jCJ0a-00FtnT-6x; Thu, 12 Mar 2020 08:16:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49352) 
+	id 1jCJa8-00Ftul-7o; Thu, 12 Mar 2020 08:52:44 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62896) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jCJ0W-00FtnM-1Y
- for samba-technical@lists.samba.org; Thu, 12 Mar 2020 08:15:58 +0000
+ (Exim) id 1jCJa3-00Ftue-CB
+ for samba-technical@lists.samba.org; Thu, 12 Mar 2020 08:52:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=Yn3BM3b5P4NCSJA3QL9gdyIkJfPHdTURvjTa3SXZ8v8=; b=byhbTfDBWIr7Ex0xdY0aSlUZpE
- FEPa4+kjvareTGI5jZ1OUr4MaWDD8YGnPWbVmuCOK/eD8+6nOEI7NF+86HgYnO8nsso0juIRBBbhL
- yGFF71JKW/Hvqe5fgYHYxoYw8GRBRxQt7Oz8yi2CbrufnhbP6txeZc6byUhfCfoVOySHAvS14L2yN
- ufvg5b3EJFNlh2bW7vHecJnvDwju0mCmdKbduwaiEzy9RyWfEBvSabVeRXCmbOAig7h2oiod1FedQ
- 9ZiqXAfjnVkCob+pY2rIdJqXID+Cdp3IRwe2hweRnWPvtyUCDVPR0YCdF1TKVgmMljGCPRYqO0sT1
- 9S/rI3jKw8kxsL8lO+gZutGJ/r8DR4vlBOWQWdTzS3tf54GROzOM4f3ki1cj/km/s4U2SSPOHOhLK
- eKyyQpDdxzbaortivcBgjSdvBOG+6dju8pvQLKx2+Qr0r/fhJ6XY5c780LS/uvyRXqaWgX3pJhICK
- 7EzUV2xEhpsQMDMKE3XVaTc/;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=EVTseirLQZ0+h9koP8JFvtt40lRfr/TKrAAx1hf3enI=; b=ZVWH2yNKfC1kgUbou8wfoN/mkb
+ xzWi/SGB2BYVJ/C8hRXKduc3T2h0vGrNs3KFv01MBocyWMoqi5zIb0/JzUnJvoH585jdbyoB6k7Js
+ pdx5QzGx0a7eQ2WE8KV4AtwTYHG+qyOhklgHezM20Z3IPsvK9iJ64dsD/t3e/DEG3tmWFhOVO6EX/
+ SwG5yypyTdKetPI6oSdn+kM8/73OU4SW2BaJbwOvXXbfj0gFwQDAHV7V0z1xJfMuaEVujM9bg0whE
+ l4+uvIRzo+PSyj5/2E1wzlOKhzTaSVF1cO8cKmlITRhleuanQC7SBIsQXSkWcX77LBlBRZfQbCLCe
+ 0E4EseviYS8d2m5YKYsd8Kxq/wcgkTeMrxn8HfaBnHAZO7L8hOS3xp227PUOFih9Dj71PrsyoDsCl
+ TZxRLjxqyAykQUN1gyblIk/yOJApYXb9+ODbvVWJkCbAf67TnC/fUMfuwEUophUdgxwZe2ZGHh75i
+ viJa0bN2LC3XLu013qYZn+7n;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jCJ0U-0003oF-UY; Thu, 12 Mar 2020 08:15:55 +0000
-To: Andrew Bartlett <abartlet@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- asn@samba.org
-References: <7999f917f76d922dfd725d185903fdf47e1a7e9b.camel@samba.org>
+ (Exim) id 1jCJa2-00044d-2Z; Thu, 12 Mar 2020 08:52:38 +0000
+Message-ID: <939198702b7086a3194077b8ef1b6b244a99fcf6.camel@samba.org>
 Subject: Re: Retire Fedora 29 / OpenSUSE 15.0 from CI?
-Message-ID: <a308b5b2-7778-7ebd-1023-52ae28585c13@samba.org>
-Date: Thu, 12 Mar 2020 09:15:51 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+To: Alexander Bokovoy <ab@samba.org>, Andreas Schneider <asn@samba.org>
+Date: Thu, 12 Mar 2020 21:52:33 +1300
+In-Reply-To: <20200312065506.GN2735275@onega.vda.li>
+References: <7999f917f76d922dfd725d185903fdf47e1a7e9b.camel@samba.org>
+ <E8F6741C-BEC9-43A6-B683-E21BD9F61372@suse.de>
+ <38643263.Z8vMgeSRLk@magrathea> <20200312065506.GN2735275@onega.vda.li>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
 MIME-Version: 1.0
-In-Reply-To: <7999f917f76d922dfd725d185903fdf47e1a7e9b.camel@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="JzJTqyrpBFBmVM25Df8eAAIZzrTJdKmdo"
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,77 +57,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ William Brown <wbrown@suse.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---JzJTqyrpBFBmVM25Df8eAAIZzrTJdKmdo
-Content-Type: multipart/mixed; boundary="qyhl5vlRnySB8yV3owEjcGX9Jz2CIKbZF";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Andrew Bartlett <abartlet@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- asn@samba.org
-Message-ID: <a308b5b2-7778-7ebd-1023-52ae28585c13@samba.org>
-Subject: Re: Retire Fedora 29 / OpenSUSE 15.0 from CI?
-References: <7999f917f76d922dfd725d185903fdf47e1a7e9b.camel@samba.org>
-In-Reply-To: <7999f917f76d922dfd725d185903fdf47e1a7e9b.camel@samba.org>
+On Thu, 2020-03-12 at 08:55 +0200, Alexander Bokovoy wrote:
+> On to, 12 maalis 2020, Andreas Schneider wrote:
+> > 
+> > Yes, we can drop them.
+> > 
+> > I think we can also just run the latest Fedora version (two versions when a 
+> > new release comes out for a few days). We have CentOS which provide old enough 
+> > distros to show we still run on that stuff.
+> > 
+> > 
+> > Alexander, what do you think?
+> 
+> F31 and F32 would be perfect. They differ enough (different gcc,
+> different Python versions) to catch bugs.
 
---qyhl5vlRnySB8yV3owEjcGX9Jz2CIKbZF
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+That makes a lot of sense.  I've got what I proposed up in a MR, but it
+would be awesome to build on that and move to F31 and F32, because by
+the time master is released, Fedora 30 will also be EOL, so no point
+wasting CPU it keep it building.
 
-Am 12.03.20 um 04:17 schrieb Andrew Bartlett via samba-technical:
-> G'Day Andreas and the list,
->=20
-> It bothers me a little that for every Samba change we make we spin up
-> 37 builds on 37 VMs.  It feels a little excessive, and while CI is
-> awesome when it saves us all time we should also use the earth and
-> Samba Team's resources carefully.  (Even jobs aimed at the 'free' CI
-> can be run on our servers if GitLab.com's servers are busy, and the
-> planet pays either way).=20
->=20
-> Therefore I wondered if we should also stop running CI on Fedora 29 and=
+Can you have a go at it?
 
-> OpenSUSE 15.0, both of which are now it is EOL upstream?
->=20
-> Both went EOL in Nov/Dec 2019.
->=20
-> In the future I think we should set policy to only CI on (some, subject=
+Andrew Bartlett
 
-> to other constraints) supported distributions.=20
-
-Sounds useful.
-
-metze
+-- 
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
 
 
---qyhl5vlRnySB8yV3owEjcGX9Jz2CIKbZF--
-
---JzJTqyrpBFBmVM25Df8eAAIZzrTJdKmdo
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl5p77cACgkQDbX1YShp
-vVYwAQ//Xdnq5Z+5n7I1ZM8sT6pfhP5WpxS0gOy/f0LcnfD6oVPguF645grSMREk
-yh+iFCRbAXHXIIpKKJwu5PJVOwWvlE4V+qXUJx2Gl8ltMTcv7/BXq0KbWjt7DjzO
-eA4IvLmlIsZNLrbtM6xniYriIKMyLspdLGdEE4h55PBa7worc18SIJymVdJM0hU8
-AfWyS5iP10aZQZOQfdqoV//dV/WpmkBuMhT26LXwzELGmWbwpKdOqJpq1sKtuQn2
-djn/5EIQDSzL95PKYPACKnMe5jG3U5gYx+3lYrjla6WeijxmekEP1b40BpvMwRFU
-34ehKeXsyi19XkZA8q9yYMfrjj7XTKaJADsUzqueKW7OB0ptekvhjgRUmmvZgqSa
-sZ1jXV7yELNlc5MTE5wifNy+F1fl6k9Q9nmuD8kNKS+THtZjou/rslR/gH24WBij
-KiA/M1HHZqkWsj1OHs2NihVt6Xcjz4C6ZPkmpTND5/3jXGwwqWttTagyze/FDFNg
-YmDitcV7Gt4OpWrApJFrhtPdg1+MfSVJw0/z+qGdq6jhd9ja+/LoEFKkvtM8jHyh
-0YfjRCkzv4xK6MzRiP+pSE+KKcmxQNzJyKC7QFEd5xe106J7/QYzLdRt0emrkzbN
-ghTtPjmBZDtBzU2WK2qKMXCUG34e7s2vKb0A4Okum8HZryYr7BE=
-=OT49
------END PGP SIGNATURE-----
-
---JzJTqyrpBFBmVM25Df8eAAIZzrTJdKmdo--
 
