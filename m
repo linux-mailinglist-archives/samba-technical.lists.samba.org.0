@@ -2,43 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9FFEA185439
-	for <lists+samba-technical@lfdr.de>; Sat, 14 Mar 2020 04:17:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50E4A1854B8
+	for <lists+samba-technical@lfdr.de>; Sat, 14 Mar 2020 05:59:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=H4rF1tzSX3gyv0BFtgf3Sq+ZNAGWrlxouIk72Ow0J1Y=; b=CTF47wZ/XAX4Gusqt4tDnF7DzA
-	/25Xb4ttWEwujvYzafEHs/RkMLvw1X6mcGF3D02giV4wcf2RNjan0lkbHsxwyywg6NcLkhCTYw1fN
-	/tUyYhujZoV1afEzmKxSH8W6E2hh0mAhbUpiP3es71XsXSxlE7qaXUQMhPoPJyGQ+jQfCdjQrQmaS
-	m4pm37VPsry/YgRKW5eYTYoTDU2pVZthIuwqdvnhODfgAqqfJK1Bvtm12fsO/Z7DMl6Fbw+a+aTn8
-	mVUl2H4bAE+4jR0BKWrNR28GaGEkc4ROOvoFDIZoLhEepPcdLmN9X+paiuI1JD6RtZpylhOOK0UD/
-	ynJBH7YA==;
-Received: from ip6-localhost ([::1]:34034 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=xFoyW43hDXXeCgLaC5BSGF7eL2y931ZOwE1D9bkhHPg=; b=sw6R5/ERfoQZlhq+7anVn9AavT
+	bWnUmQn99ERx+fpJfqWnzd9LKJBblZA0Z17zaBDoS15K8mVUTrGB3NiCHle3a94f+f7om5PZb7LrI
+	CPX5LDP0EL5uaH68me0n5SH2bm/nGGrnMns+spuVfqihsyPEI7kWZ7fbQy41a0goFYImDTOTDqiDN
+	0BK0HpQEFZ8dmX5Zfnfjg6X6S6S/TpCJiw47CGEQPNT4eSCe/VwVEt+OJqtQ/pW2l5/vIJOB82bwv
+	r3Xem6U15My0fNu1odKjrycxNu/k/mZ+nzNpRJ+5l8/ncSbJWXuXtshboFqsjW/w8iRXRu99xCtA4
+	RAwLWjzA==;
+Received: from ip6-localhost ([::1]:34820 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jCxHS-00G2Sx-H3; Sat, 14 Mar 2020 03:16:06 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59026) 
+	id 1jCyso-00G2lM-LL; Sat, 14 Mar 2020 04:58:46 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:22166) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jCxHN-00G2Sq-Pr
- for samba-technical@lists.samba.org; Sat, 14 Mar 2020 03:16:03 +0000
+ (Exim) id 1jCysj-00G2lF-TX
+ for samba-technical@lists.samba.org; Sat, 14 Mar 2020 04:58:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=H4rF1tzSX3gyv0BFtgf3Sq+ZNAGWrlxouIk72Ow0J1Y=; b=UK/jJZbNHEx+mIPn5H2HDxMdvi
- m79Bi5Pdqqn447QZfTJ8aIcbX2C87FC4dx2fwtajH6T1A8sYZPmpNLUvsKxyRgEOnxq06K4IbQFG1
- aemGeviGF1CGsT/HbMUXR2F6B1KzBcLd9cFVZpWgOiB5uCV13D4OaU7HCbQ/JZHShsNh1i2G5i6Hr
- xVJis1qKjBkKwYlJqNmiqmy00UkZJAMi9Vxt6uYCEEdaorp6vGcQB+9IIiT1BrJappkMq0Qf17Nov
- Ll+a3E82joVrs5JmvH/MMD0k//4/JJZ/rdb7TPv/uauFq2prRePtAB2PUy8RdRouy43Trf+dgJZlx
- P765mfqVyxTwm54ck+5L7EmqRTOYcXsYIEDOEKC54SY0ujIOGQSpoGHo1HDaD78i39qTXrULbYwEV
- 1xhNhnqYB2V0k0k1PrCoMHqvUhohPdk4ZC+rjOYqymcCCAJ7fK6ofJBcoTIejcD3KaSZUV/4h6WKQ
- SNrMtEMyJf62kWHOnXeovlFD;
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=xFoyW43hDXXeCgLaC5BSGF7eL2y931ZOwE1D9bkhHPg=; b=NrDZcvhMiFHb/klaOWvMCvhJwM
+ W5uG9C8uaQudrlJN1b4ylEC+ce2fp8yHzoOSBG62KqFiGbZeiEqmz/tBhR6OUviuxz3zQyGMxA5te
+ vZ1nYbCRRFj88Hf02tq5wCPnbcaiA+cXSLjSFWhUWYjzSwO/i6DytoFz/mP6ixzkFAi4cqUQcQJLt
+ VEYizsP16JzC2w9TIc9McJ3SGyOnB0cVV8H2cz48TSk8bAI6yACgJt4aHna8BBy8RIqRmx5qvxgaz
+ 2vKf0g/ovYWolXwhO4qXXoXPxx/dAm4dYKQ5mu1p1z2ltBPKKM96t26JZAwyb/nzLpUR9BP2TVUcF
+ IhsKhrxGepvGZNMjwn3gat0/6wGYcHA9ujp3Qe8xkggFkHJZouMRlqinTdgv3g00sxaCcyfNVGa6s
+ jGoJ7bpc/UQEC5x7GvP9YvmO1v5me5+3NK1pY2f/31Mea7zxS5DnPT7ktU2odcL6FWjIlC6bhohNT
+ 7IZGc/hlhM4hntvxE01auvuM;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jCxHL-000530-1G; Sat, 14 Mar 2020 03:15:59 +0000
-Date: Fri, 13 Mar 2020 20:15:55 -0700
-To: metze@samba.org
-Subject: Fighting waf for C preprocessor output.
-Message-ID: <20200314031555.GA16932@jeremy-acer>
+ (Exim) id 1jCysh-0005ae-2s; Sat, 14 Mar 2020 04:58:39 +0000
+Date: Fri, 13 Mar 2020 21:58:35 -0700
+To: metze@samba.org, samba-technical@lists.samba.org
+Subject: Re: Fighting waf for C preprocessor output.
+Message-ID: <20200314045835.GA22912@jeremy-acer>
+References: <20200314031555.GA16932@jeremy-acer>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+In-Reply-To: <20200314031555.GA16932@jeremy-acer>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -55,21 +57,22 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Does anyone know how to make waf generate
-the actual gcc command line it uses to
-compile .c -> .o ?
+On Fri, Mar 13, 2020 at 08:15:55PM -0700, Jeremy Allison via samba-technical wrote:
+> Does anyone know how to make waf generate
+> the actual gcc command line it uses to
+> compile .c -> .o ?
+> 
+> Doing:
+> 
+> PYTHONHASHSEED=1 WAF_MAKE=1  ./buildtools/bin/waf -v build
+> 
+> causes it to dump out a python array, bracketed
+> by [] characters, but I was hoping not to have
+> to fight it any more :-).
 
-Doing:
-
-PYTHONHASHSEED=1 WAF_MAKE=1  ./buildtools/bin/waf -v build
-
-causes it to dump out a python array, bracketed
-by [] characters, but I was hoping not to have
-to fight it any more :-).
-
-Jeremy.
+Never mind, I turned it into a command line using
+the magic of Emacs macros :-).
 
