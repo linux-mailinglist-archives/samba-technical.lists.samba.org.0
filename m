@@ -2,48 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11759185607
-	for <lists+samba-technical@lfdr.de>; Sat, 14 Mar 2020 17:46:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15E2818560F
+	for <lists+samba-technical@lfdr.de>; Sat, 14 Mar 2020 18:06:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=FQXenuDuCHBeaBTYT978xVGP+keL16eOQEX/mFZubMM=; b=auuV0t9MiqC5HcXB3vk1PtumV2
-	GpyUxQ+O2hw4+iHGPuzQ+4ONrSgp0SOo536zxLFe5VEwB5VLVXrq1zz8Ll+qSBw8JeJ2MO87UsjpV
-	HcOxa+zpGjqxuiZlQq/0hZKRAqbtPVHPV+HHtwbYIMgGIsipyAoz3sr5c62xmqRv+pmif4vfbfCUq
-	Ctc/1pIx51QnwsYlhagsf2SMq8JsgvbwHxnAPzt5U3MXDZMiQ0Axt/42v9ZFzAlJi9yljT1vSI54z
-	oZygq3fKwvfyMdBB4aaNCUaZY85lfnrfChF4Xv9vHgSmbOrFC+LRB2y2Nmncp+N26ED9yMKKncqzw
-	fF0G4Hdg==;
-Received: from ip6-localhost ([::1]:54314 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=Jyw3g0dlej1TglwNxnq0Cu0mbTW+rKW/QYcmdhx3PGQ=; b=wNWYDGNdPjJnn0c8fQhpful2nW
+	AxqGuAqcq64mjscDaMomoYA306wQE58a/uJZlTD8F55/NyoRHKmUeOx6q2ueK0I2RZaKzb8ywSf6F
+	2Co4tLaT9Dl3V6cw8TwlQfm8Nqc5aU5vzjEra9939JRpiibm/D08AEujL1lFbzf9Jv5a7e9LNumHZ
+	hPlZ/E1EPLRVrd8URFnfYT+bwXVxlcetmALaGPlyUIoV9UXjlD7d8aky6RUQ1wc6PmJiDzZbzuT7z
+	Qn6eUqfJ+zJT4tcIPqnAHsbRqkGmX+mY7H7vWxQHNc3LE11i1MP6NPXlzod1PF2AFLiuFDaowgSvN
+	FZa3HstA==;
+Received: from ip6-localhost ([::1]:55044 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jD9vE-00G6LR-BX; Sat, 14 Mar 2020 16:46:00 +0000
-Received: from [80.20.169.36] (port=36119 helo=mail.promoturviaggi.com) 
- by hr1.samba.org with smtp (Exim) id 1jD9v9-00G6LK-1r
- for samba-technical@lists.samba.org; Sat, 14 Mar 2020 16:45:56 +0000
-Received: (qmail 9761 invoked by uid 121); 14 Mar 2020 17:45:51 +0100
-Received: from 172.16.1.1 (dario.lesca@solinos.it@172.16.1.1) by
- albatros.promoturviaggi.com (envelope-from <d.lesca@solinos.it>,
- uid 89) with qmail-scanner-2.08 
- (clamdscan: 0.98.6/25750. spamassassin: 3.3.1.  
- Clear:RC:0(172.16.1.1):SA:0(-102.5/5.0):. 
- Processed in 0.162293 secs); 14 Mar 2020 16:45:51 -0000
-Received: from unknown (HELO dodo.home.solinos.it)
- (dario.lesca@solinos.it@172.16.1.1)
- by mail.promoturviaggi.com with SMTP; 14 Mar 2020 17:45:51 +0100
-Message-ID: <0d5fc070b38d2ca948588126848613835255cc6d.camel@solinos.it>
-Subject: Re: Samba 4.12 rc3: bind DNS say "named: client update denied"
-To: samba-technical@lists.samba.org
-Date: Sat, 14 Mar 2020 17:45:50 +0100
-In-Reply-To: <1e12e848-3540-7651-8712-752600680296@samba.org>
-References: <a144cd2c0219399cea4473f6cf7e86b3dba5d6cf.camel@solinos.it>
- <20200309100715.GK2735275@onega.vda.li>
- <dad25a37497ed4d4b70829925da512b3abb4eb39.camel@solinos.it>
- <52a0f365-579c-5adc-a470-7cf543a0c868@samba.org>
- <2ee4998776b6d690b9f458cdfca7c11626e86784.camel@solinos.it>
- <1e12e848-3540-7651-8712-752600680296@samba.org>
-Organization: Solinos
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
+	id 1jDAEa-00G6SU-AR; Sat, 14 Mar 2020 17:06:00 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10152) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jDAEV-00G6SN-2k
+ for samba-technical@lists.samba.org; Sat, 14 Mar 2020 17:05:57 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=Jyw3g0dlej1TglwNxnq0Cu0mbTW+rKW/QYcmdhx3PGQ=; b=2UQoWflJgfsp6VWeLCg+wqRw3N
+ k6DG9qwMZ1pcQYminwYb7EDKU7rIJJAx64UZRK7K0Kp2ilyqLmfoLT8il5LZkMYhW6lh27w5FgMar
+ lL1Ceg8aP4t/trV2kyVtYCSAYNmlhEGH3r6imX6OgOnWm7yCUyaBbA0MPR/JHFTN/bcZLpAoY4oWH
+ c+/r2iN1Bt1GdW9dP1tjned8OOMfKB4TrLg6jeQiTgnb4GWbyjn/dlVVzv7WQ4SYMu7tpJs4Eg/xy
+ i8VT2CUvLPhuFFawfkGC3wWKsKG4qbeqBL9mvN7tTRkWwQadzKb/JPrDO54FHIlgY5LG7+PId2Usz
+ Yt7jaUCjqTSnVNUrXSiyp+hNKoxhUUxFRFk+fgJ/3QxhTj4iIK+uIcBzSKxp30FUobSYKPQVaOeLy
+ /dzzMrRM0CWmRB1YoQaR2l4meocboRGafmODtfvv+vBwwsbB9G78+CCL6ER7/zAR6OBrYVzQ35O/G
+ sWPu8xf6Xt5H3J0tybaSk5l3;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jDAET-0001Gl-IT; Sat, 14 Mar 2020 17:05:53 +0000
+Date: Sat, 14 Mar 2020 10:05:49 -0700
+To: Andrew Bartlett <abartlet@samba.org>
+Subject: Re: Fighting waf for C preprocessor output.
+Message-ID: <20200314170549.GA796@jeremy-acer>
+References: <20200314031555.GA16932@jeremy-acer>
+ <20200314045835.GA22912@jeremy-acer>
+ <91c865a391d97aacc0fcc50c50a699a8c7f7d800.camel@samba.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <91c865a391d97aacc0fcc50c50a699a8c7f7d800.camel@samba.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,53 +57,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Dario Lesca via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Dario Lesca <d.lesca@solinos.it>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: metze@samba.org, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Il giorno sab, 14/03/2020 alle 15.45 +0000, Rowland penny via samba-
-technical ha scritto:
-> Both ;-), the record should be added when you join a Samba DC, 
-What you means exactly with "when you join a Samba DC"?
-"join a PC to a Samba DC" or "join a Samba DC to a ..."?
-I think the first is right
-
-> Ahh, a Windows DC will not have samba_dnsupdate, 
-Yes, it not have. But here I do not use a Windows DC, it's a Samba DC.
-The Windows are the client.
-Why you say "a Windows DC" ? what does it mean?
-
-> you will probably have 
-> to create the records manually with samba-tool or ADUC
-Yes I have do that initially.
-But now the record it's gone, I have remove it and I have un-join and
-re-join the win10a pc and join the new win10b
-
-> You are using the Fedora packages to provision a DC, 
-Yes I use the Fedora packages for test it. 
-
-> it looks like you might just have found another reason not use them
-> for a DC ;-)
-No eventually, if so, I have found another reason to fill a bug on
-RedHat Bugzilla.
-
-Since you tell me it should do it, this is a bug
-
-> > Many thanks for you patient.
+On Sat, Mar 14, 2020 at 07:48:47PM +1300, Andrew Bartlett via samba-technical wrote:
+> On Fri, 2020-03-13 at 21:58 -0700, Jeremy Allison via samba-technical
+> wrote:
+> > On Fri, Mar 13, 2020 at 08:15:55PM -0700, Jeremy Allison via samba-technical wrote:
+> > > Does anyone know how to make waf generate
+> > > the actual gcc command line it uses to
+> > > compile .c -> .o ?
+> > > 
+> > > Doing:
+> > > 
+> > > PYTHONHASHSEED=1 WAF_MAKE=1  ./buildtools/bin/waf -v build
+> > > 
+> > > causes it to dump out a python array, bracketed
+> > > by [] characters, but I was hoping not to have
+> > > to fight it any more :-).
+> > 
+> > Never mind, I turned it into a command line using
+> > the magic of Emacs macros :-).
 > 
-> Couple of answers to that ;-)
-> 
-> Either: 'yes doctor'
-> 
-> Or: I think you mean 'patience'
+> I wrote this script to help a while ago:
+> https://wiki.samba.org/index.php/Testing_removal_of_ifdef_or_configure_checks#A_script_to_help
 
-Yes, I mean "patience", a lot of patience for my bad English !
+Oh that's really helpful Andrew, thanks a bunch !
 
-Thanks
-
--- 
-Dario Lesca
-(inviato dal mio Linux Fedora 31 Workstation)
-
+I'll save that off in my 'useful waf tools' folder :-).
 
