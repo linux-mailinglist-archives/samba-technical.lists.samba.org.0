@@ -2,43 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3463318553B
-	for <lists+samba-technical@lfdr.de>; Sat, 14 Mar 2020 09:58:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2076F18559F
+	for <lists+samba-technical@lfdr.de>; Sat, 14 Mar 2020 12:31:32 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=IeVDLcjME9gFrklOR3X2aRi377rrnYOKw6ZV7P/mxDA=; b=QlfdzjCiayK8HOLSfNF1fGJ2qo
-	FDGr/50ly4mI9st8rO3Z4LFSJ/4V61b7QQEZ3g1tB7wdBtcUX7+07JqhnF7lSFlRNSSZ9UcWCeeDl
-	Y7ZAOiscXEprsIrzpWXdS6wo6ArvZRKAJ3rFwmVlFKWc4GB0DL/Fe981HRsShDGZ7w2Mki60HQbFx
-	L6gfU+RU5eyD7tR5r5UzCQ12avroZhrZbMUq9FCRmwkmhmuDcBLJmrwVBbQuKAPAZoLe+RIiAf1fp
-	D9W2e3eASaEVaMxFR8w1uraH8W3J+WGt1rTFmP/N6L9IpT6iR5/CzK0RAqujB5Da+UZJwigqKJOP5
-	aVIWBNoQ==;
-Received: from ip6-localhost ([::1]:36666 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=wZXLdrV2kXa8CQ5pxEgn2qg5XbdMj21rWvZlw1OPJ/Y=; b=1ahuNgF9jZpAhgTuxofUE3n3ni
+	D7u0NIQa/jAAZVuHUyOcOIguirf5jcAD+s1Snh9c/6ikxM/8G49GuYGNuBTLyVxfOId48SyGagPgZ
+	V1i7u3/f0bq02kACef5kqmi1f+p/dA9IpRzYLjAiFPN1iM0me1BKmaGGdRmu1wlb22vGRKYtR3UtS
+	mPlbZwGVJOhZi5Qy4d/BZ0x8sL8QJDUQ7HCMgRhqDUA8ApmY8EHYlqyhluQ14MNFVYSn4/sgw+Vsr
+	+G9/KTFQnQNIZ4kJgjGq7Z/HAOxyptay1gl8S7IagWcD42BCL2nI0W0xxWzG6+VIXPIbIoBEAUSal
+	Wh/DE8MQ==;
+Received: from ip6-localhost ([::1]:37428 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jD2bL-00G3Ni-S6; Sat, 14 Mar 2020 08:56:59 +0000
-Received: from aibo.runbox.com ([91.220.196.211]:36738) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jD2bG-00G3Nb-IS
- for samba-technical@lists.samba.org; Sat, 14 Mar 2020 08:56:56 +0000
-Received: from [10.9.9.128] (helo=rmmprod06.runbox)
- by mailtransmit02.runbox with esmtp (Exim 4.86_2)
- (envelope-from <tnagy@waf.io>)
- id 1jD20v-00014j-Qx; Sat, 14 Mar 2020 09:19:21 +0100
-Received: from mail by rmmprod06.runbox with local (Exim 4.86_2)
- (envelope-from <tnagy@waf.io>)
- id 1jD20v-0001Go-QB; Sat, 14 Mar 2020 09:19:21 +0100
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
-Received: from [Authenticated alias (664370)] by runbox.com with http
- (RMM6); Sat, 14 Mar 2020 08:19:21 GMT
-To: "Jeremy Allison" <jra@samba.org>
+	id 1jD4zs-00G3dz-Mh; Sat, 14 Mar 2020 11:30:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42028) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jD4zn-00G3dr-RJ
+ for samba-technical@lists.samba.org; Sat, 14 Mar 2020 11:30:26 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=wZXLdrV2kXa8CQ5pxEgn2qg5XbdMj21rWvZlw1OPJ/Y=; b=LFXdb1MBsx1FuKfcEbVNv9NMgO
+ BD7B4Fo4ztYiWQpO+Rv4PN/7EMS/ttYkJfRY9MnGYZaFZy0rEhnG3YHkVwoJGboetybsKn3f/Fm74
+ KleEeQLhz7PIgUawYK1e2d2C4lHI1GDjbOb4XGfcaK+TZPY/ASTbba1czSHINNum6zSoyvHMj1zSS
+ bZmQQ+O7OcaO8l13s2CBUwD1YYdHIR0//RvjORvab56ZSDcjEiMmYa639+tr9f4GiFXC72SF0wIMb
+ e/eagJGVurqTUWGAZ916SoVMs9T15yyFiugs+OzTqlT/23W4wIU8BzcgNcH2h4ud6sJvuVy0YlUD+
+ LfHEkTde2IvA8p/Rd8rTdnZujPBV2m/Y6dLl0wqG9AEynKI3K31RZmn6PqYq5ltcdJy362gBJCj7f
+ ryTwIyytTo0ZMFoMrorZleDx9yoQF2XS7XqfFRVLLPeTHWZPfb9zDnOBgMmUjQ8IUbwQbo27BRnVY
+ R+6EMCjVAerSLDmk2tMkAwC7;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jD4zm-00085q-1z; Sat, 14 Mar 2020 11:30:22 +0000
 Subject: Re: Fighting waf for C preprocessor output.
-Date: Sat, 14 Mar 2020 09:19:21 +0100 (CET)
-X-RMM-Aliasid: 664370
-X-Mailer: RMM6
-In-Reply-To: <20200314031555.GA16932@jeremy-acer>
-Message-Id: <E1jD20v-0001Go-QB@rmmprod06.runbox>
+To: Thomas Nagy <tnagy@waf.io>, Jeremy Allison <jra@samba.org>
+References: <E1jD20v-0001Go-QB@rmmprod06.runbox>
+Message-ID: <881d685a-b733-98b6-2ceb-1d52cc6805fc@samba.org>
+Date: Sat, 14 Mar 2020 12:30:20 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
+MIME-Version: 1.0
+In-Reply-To: <E1jD20v-0001Go-QB@rmmprod06.runbox>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,30 +57,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Thomas Nagy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Thomas Nagy <tnagy@waf.io>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 13 Mar 2020 20:15:55 -0700, Jeremy Allison via samba-technical <sam=
-ba-technical@lists.samba.org> wrote:
+Am 3/14/20 um 9:19 AM schrieb Thomas Nagy via samba-technical:
+> WAF_CMD_FORMAT=string PYTHONHASHSEED=1 WAF_MAKE=1  ./buildtools/bin/waf -v build
 
-> Does anyone know how to make waf generate
-> the actual gcc command line it uses to
-> compile .c -> .o ?
->=20
-> Doing:
->=20
-> PYTHONHASHSEED=3D1 WAF_MAKE=3D1  ./buildtools/bin/waf -v build
->=20
-> causes it to dump out a python array, bracketed
-> by [] characters, but I was hoping not to have
-> to fight it any more :-).
+awesome! Added here:
 
-Try this instead:
-WAF_CMD_FORMAT=3Dstring PYTHONHASHSEED=3D1 WAF_MAKE=3D1  ./buildtools/bin/w=
-af -v build
+https://wiki.samba.org/index.php/Waf#Debugging_builds
 
-Thomas
+Thanks!
+-slow
+
+-- 
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
