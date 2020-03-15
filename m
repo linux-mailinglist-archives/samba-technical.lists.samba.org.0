@@ -2,51 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CA17185B0A
-	for <lists+samba-technical@lfdr.de>; Sun, 15 Mar 2020 08:35:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 467B818604F
+	for <lists+samba-technical@lfdr.de>; Sun, 15 Mar 2020 23:51:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=luVUI3npsXtWATXdKJnoIn8A+HJirlGy92/EEgcMAZo=; b=5+sPqGWmKSSe+sIg95JSYIymIx
-	1jsRlgUSdoZMak4MqNbvnKCF1BRZ0Tv9ch3YlYbfEcQ7BZKWxdhldWeN583//T8wC+v67vZYH/0S9
-	cM5Be9atcV7QkckfkV7BKpoexyPzd/DQEHWEhC4fmKsJJZkXb668bypUO9MdD/nKkfP9hOlRnVhlP
-	Voi32QtRIKX0XSptI0X+UP8BbLGZ2P02IfiTradmC1z8/Xy2d01kZB7seCW6ecCTCnXuxOoXR3Qa+
-	3zsiTm0RwXFvGfZpDTey6Q4XzMtme/o774k91hj9ze0IZ/6ctUYcKYFkrdrsDJOz/HPqGHVn3IQyr
-	bPZI7Gww==;
-Received: from ip6-localhost ([::1]:28820 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=1yhoUv4kMXivgY0Sb7etbcjFy39MOeOnu80PF6qEXxU=; b=KgG0IjB9Yp68GS/dNlMQpUIRcn
+	XLVsV7z3M72zd94sfeeKguKhQJnNRart8yFUUTiQHldYnKF/zUIF+sMZh1CLbAOxl8u1jYMYZSuEU
+	5ggHTIWFrfz9YDxj4neSjRnAY8sw93BpEVKULbHubYf18IrGWF4VMxRUPkJ6ncy0iChqAJKbUsUUc
+	5cbApdAOEGEefZ8zR6aNvPoWySkbF8XqCfi9rXgjvgAutJt/ar1NB4hFrs+5MGbqyCnAKn0We6aT3
+	fnCc3frpnGxxvi+OSrydOlHHQyEQ0Jo5nNeEcz0Yt75aaMZjqY0y42CZrCx4gVVsQd/VOQdKLWDfW
+	GxC7IlLw==;
+Received: from localhost ([::1]:24936 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jDNnQ-00GAdz-Pz; Sun, 15 Mar 2020 07:34:52 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36556) 
+	id 1jDc5W-00016x-U2; Sun, 15 Mar 2020 22:50:30 +0000
+Received: from mail-qk1-x734.google.com ([2607:f8b0:4864:20::734]:43968) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jDNnK-00GAds-AF
- for samba-technical@lists.samba.org; Sun, 15 Mar 2020 07:34:48 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=luVUI3npsXtWATXdKJnoIn8A+HJirlGy92/EEgcMAZo=; b=3mNUF0eFuklJa8tiKg2Gibd3P8
- yq6BCFkkfamg6A3696ShqfDxuJxFnS/LmVdSz8xwZ2ILSMGKInD4u+bJCDLknnW4DaWcFdHW2Xd+V
- mWRxe/lEoGNf8XgG4OVZgNLYT8edS6aZkOD+AXNXO3zws/wQYRmhl4m1H18vkaY2zTfZzCWPwEyAE
- zWiNvk1x96nY6awCioPZak5VQp/CdkON/2HZuSrj87WDD1RZ47TvreFGov4OUCdkW7eCcHUJHhsbt
- mEF2th4I62MyUXTJ5mNQ+dSzRnblZ6TZ0yo81vpHztY6cRIA8/wnHbzbb6PRpq0+von4WOlXtVexe
- +ufcUj+d2piuOT6Fgnib8uVSo9s+bt2WwecmTFpi5N51NlUe1OgNf4jjaFRzANwHEt/np0C1Bw8rk
- 7jOH5V360rbjmhTHAGNpQGSVtkYMFlriDm+qlqNUpTUJxTTL+0lo9sdCFClxcO+o63vkaFO3J28JI
- cFdV0iA3apdwUcN6yC/mqMiK;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jDNnG-0006by-SQ; Sun, 15 Mar 2020 07:34:43 +0000
-Message-ID: <f07b680930f950b4ad932666f663a9ed527dc198.camel@samba.org>
-Subject: Re: bug 9612 fix
-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>, 
- =?UTF-8?Q?=D0=A1=D0=B5=D1=80=D0=B3=D0=B5=D0=B9_?=
- =?UTF-8?Q?=D0=9A=D0=BE=D1=80=D1=87=D0=B0=D0=BA?=
- <skorchak@astralinux.ru>, "samba-technical@lists.samba.org"
- <samba-technical@lists.samba.org>
-Date: Sun, 15 Mar 2020 20:34:34 +1300
-In-Reply-To: <890d064e-9f34-91b0-6186-3b9925719abd@catalyst.net.nz>
-References: <ximss-1128743@fe1.astralinux.ru>
- <890d064e-9f34-91b0-6186-3b9925719abd@catalyst.net.nz>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
+ (Exim) id 1jDc5R-00016q-Lp
+ for samba-technical@lists.samba.org; Sun, 15 Mar 2020 22:50:27 +0000
+Received: by mail-qk1-x734.google.com with SMTP id x18so2905935qki.10
+ for <samba-technical@lists.samba.org>; Sun, 15 Mar 2020 15:50:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=1yhoUv4kMXivgY0Sb7etbcjFy39MOeOnu80PF6qEXxU=;
+ b=W3eCO7z8rT4gPvjr2fsnZMo6/ZhY+NdcFkyZPqJpyWJMzWopnoYOnwvjjL8yYKqabI
+ vWlKE3jBP8ZjU4j5qX56GymNVL2TIdfECJZ9EyOqRcsmgFXGhsQoCd8hGu2CkYnChA3j
+ phL4t5vBVcyHoTUiZysNh7EZvBqXTBICRRTCIO7mRAINNFH3WjDKu9oyE7+9PlUwPPv8
+ WqFnuGxrBO0ZFSjC3a4WjOHAz78xJR2RcVnASfFCJxCthO4t1l01axYJrdFxBfP4zlZe
+ 5Z7K+S3mE2OBXQSjTLc0fORZlvGrEpjhhiOCEIZiLjE1LwXsj/Y2+g55uhxU34y15RmY
+ M9uQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=1yhoUv4kMXivgY0Sb7etbcjFy39MOeOnu80PF6qEXxU=;
+ b=X7QontjnqJGkeeAc5KzYrfolThpdwAsHhpiLPQ6EO/tj5j+v9VCVhWuUzSDPaQi46u
+ 0yiOAotcBV8YLWkpbO39gGuMDy97Hk48SiXW4MJPIG5ToLLfEsVQiwjpN7gL7b3TF/OQ
+ mQH0LM0NP6JQzXKQAcR72QWFcEkVSaWAbSoF30Y7ZXW4QDp8lkjcm6TGHhV9m/ZTF+vi
+ M5RwyOIgWLkh4QT4sXH+2W0ksdwLs5qnx1UJdVOdZ8rvxRHYDp7Kwg+SLEjlSrY+OHpp
+ Pp5jMQe05cI4qGyX2ipGwDiw/PySsAekgHtjplBUegCQNad43ULEp3ErNN6kAcmT6P86
+ hywA==
+X-Gm-Message-State: ANhLgQ1e67LIEyMP02xOrvOF/oBzRKm9NYIYU7Wf1T3GKrTt0sP6lfjl
+ SdliYw4r5Io300CCmKoc0Jme4Fq68gC51ccRErg=
+X-Google-Smtp-Source: ADFU+vtdKxen4Ixwp1iR7WDaYWja5LFL8CFEtu1wHKEsxR5juGB1Z3gJoq/bLxbmVT6yLXtIQxmLsoDJt32n7Q2rVOc=
+X-Received: by 2002:a25:f20f:: with SMTP id i15mr30560794ybe.364.1584312621004; 
+ Sun, 15 Mar 2020 15:50:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Sun, 15 Mar 2020 17:50:09 -0500
+Message-ID: <CAH2r5ms_oxqwHm56nzabM-x2XMR1Ni-WD1_LEYYxOW_NkswsOQ@mail.gmail.com>
+Subject: [SMB3] New compression flags
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
+Content-Type: multipart/mixed; boundary="000000000000fd147c05a0ec86f9"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,69 +65,56 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-G'Day Sergey,
+--000000000000fd147c05a0ec86f9
+Content-Type: text/plain; charset="UTF-8"
 
-Recently another user asked about our smart card login feature, it
-would be awesome if you could do as Douglas requests so we can progress
-this.
+Some compression related flags I noticed were added in the latest MS-SMB2
 
-Did you ever submit this upstream?  If so, can you point me to the pull
-request so I can look into it?
 
-Thanks!
 
-Andrew Bartlett
-
-On Fri, 2019-06-28 at 09:57 +1200, Douglas Bagnall via samba-technical
-wrote:
-> Hi Sergey,
-> 
-> On 27/06/19 11:03 PM, Сергей Корчак via samba-technical wrote:
-> > Hello!
-> > My name Sergey Korchak, and i work in AstraLinux company. see
-> > http://astralinux.ru
-> > 
-> > I have fixed bug 9612
-> > https://bugzilla.samba.org/show_bug.cgi?id=9612
-> > 
-> > According to GNU GPL we wish to publish our patch.
-> 
-> Thanks for your work on Samba!
-> 
-> There are a few more steps to get through, not all of which will be
-> easy for this patch, for unfortunate non-technical reasons.
-> 
-> Firstly, and this is the tricky one, as mentioned in
-> https://bugzilla.samba.org/show_bug.cgi?id=9612#c5, our Heimdal is
-> horribly entangled with upstream Heimdal, so we really want to get
-> patches via upstream.
-> 
-> Secondly, I anticipate there might be stylistic issues with the patch,
-> though it isn't for me to say, since we're delegating review to
-> upstream Heimdal. Nevertheless, I wouldn't recommend doing this:
-> 
-> > +// Begin of AstraLinux patch by Sergey Korchak
-> > +// End of AstraLinux patch by Sergey Korchak
-> 
-> People will use `git blame` to find that out when they need to.
-> 
-> Thirdly, if you are wanting to contribute to Samba directly, could you
-> please send in a Developer's Certificate of Origin as described at
-> https://www.samba.org/samba/devel/copyright-policy.html.
-> 
-> Thanks
-> 
-> Douglas
-> 
 -- 
-Andrew Bartlett                       http://samba.org/~abartlet/
-Authentication Developer, Samba Team  http://samba.org
-Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+Thanks,
 
+Steve
 
+--000000000000fd147c05a0ec86f9
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-SMB3-Add-new-compression-flags.patch"
+Content-Disposition: attachment; 
+	filename="0001-SMB3-Add-new-compression-flags.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_k7tmte1v0>
+X-Attachment-Id: f_k7tmte1v0
+
+RnJvbSAxMjgzN2FlMDkxZDUzM2I1OGM4MGEwZGE0M2I5Mjk4MGI3ZmY1YjZiIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+CkRhdGU6IFN1biwgMTUgTWFyIDIwMjAgMTc6NDI6NDEgLTA1MDAKU3ViamVjdDogW1BBVENIXSBT
+TUIzOiBBZGQgbmV3IGNvbXByZXNzaW9uIGZsYWdzCgpBZGRpdGlvbmFsIGNvbXByZXNzaW9uIGNh
+cGFiaWxpdGllcyBjYW4gbm93IGJlIG5lZ290aWF0ZWQgYW5kIGEKbmV3IGNvbXByZXNzaW9uIGFs
+Z29yaXRobS4gIEFkZCB0aGUgZmxhZ3MgZm9yIHRoZXNlLgoKU2VlIG5ld2x5IHVwZGF0ZWQgTVMt
+U01CMiBzZWN0aW9ucyAzLjEuNC40LjEgYW5kIDIuMi4zLjEuMwoKU2lnbmVkLW9mZi1ieTogU3Rl
+dmUgRnJlbmNoIDxzdGZyZW5jaEBtaWNyb3NvZnQuY29tPgotLS0KIGZzL2NpZnMvc21iMnBkdS5o
+IHwgOCArKysrKysrLQogMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlv
+bigtKQoKZGlmZiAtLWdpdCBhL2ZzL2NpZnMvc21iMnBkdS5oIGIvZnMvY2lmcy9zbWIycGR1LmgK
+aW5kZXggODE3YmMwNTMxNTM2Li40YTdkMTU0ZmZmYWUgMTAwNjQ0Ci0tLSBhL2ZzL2NpZnMvc21i
+MnBkdS5oCisrKyBiL2ZzL2NpZnMvc21iMnBkdS5oCkBAIC0zMDcsMTEgKzMwNywxNyBAQCBzdHJ1
+Y3Qgc21iMl9lbmNyeXB0aW9uX25lZ19jb250ZXh0IHsKICNkZWZpbmUgU01CM19DT01QUkVTU19M
+Wk5UMQljcHVfdG9fbGUxNigweDAwMDEpCiAjZGVmaW5lIFNNQjNfQ09NUFJFU1NfTFo3NwljcHVf
+dG9fbGUxNigweDAwMDIpCiAjZGVmaW5lIFNNQjNfQ09NUFJFU1NfTFo3N19IVUZGCWNwdV90b19s
+ZTE2KDB4MDAwMykKKy8qIFBhdHRlcm4gc2Nhbm5pbmcgYWxnb3JpdGhtIFNlZSBNUy1TTUIyIDMu
+MS40LjQuMSAqLworI2RlZmluZSBTTUIzX0NPTVBSRVNTX1BBVFRFUk4JY3B1X3RvX2xlMTYoMHgw
+MDA0KQorCisvKiBDb21wcmVzc2lvbiBGbGFncyAqLworI2RlZmluZSBTTUIyX0NPTVBSRVNTSU9O
+X0NBUEFCSUxJVElFU19GTEFHX05PTkUJCWNwdV90b19sZTMyKDB4MDAwMDAwMDApCisjZGVmaW5l
+IFNNQjJfQ09NUFJFU1NJT05fQ0FQQUJJTElUSUVTX0ZMQUdfQ0hBSU5FRAljcHVfdG9fbGUzMigw
+eDAwMDAwMDAxKQogCiBzdHJ1Y3Qgc21iMl9jb21wcmVzc2lvbl9jYXBhYmlsaXRpZXNfY29udGV4
+dCB7CiAJX19sZTE2CUNvbnRleHRUeXBlOyAvKiAzICovCiAJX19sZTE2ICBEYXRhTGVuZ3RoOwot
+CV9fdTMyCVJlc2VydmVkOworCV9fdTMyCUZsYWdzOwogCV9fbGUxNglDb21wcmVzc2lvbkFsZ29y
+aXRobUNvdW50OwogCV9fdTE2CVBhZGRpbmc7CiAJX191MzIJUmVzZXJ2ZWQxOwotLSAKMi4yMC4x
+Cgo=
+--000000000000fd147c05a0ec86f9--
 
