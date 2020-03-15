@@ -2,59 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B248186057
-	for <lists+samba-technical@lfdr.de>; Mon, 16 Mar 2020 00:07:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F1C318605A
+	for <lists+samba-technical@lfdr.de>; Mon, 16 Mar 2020 00:10:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=Wf1kZg8JHvWKhlG2DR9z0kO5EKLkK+UvZOrDdO+UlSQ=; b=jkyBqPMoaI+xvVgJK5gNcUlJ4V
-	VBSI3aRa/x/mUdmJ469ahtXn/XcamY/zqWvzuxH58D3TStm6Av0+P87fffH/4zT4b6DO7zBx60NkK
-	2Z9pLSSGC/qlU2NoQ9H0jbyH9QsYDiHyS09sFJfXJkelDsfOjU6jcjxsxqmvfCeQGKHdAOA2t7MG9
-	sKHE97+VssiBYZ1qxdvkpYp1tpVH3rAYwTdh40qdS8CN+JUREnMHkqVLxkwpYRF8R6C7Zmu5GIqZv
-	L2AqguMmxO2zXSYBPTTWVeqPFEQj4hkgCLsvu+5HAZJgOiejJVNLwqWLc9W9Cc8mJvlCxKpo8xPqq
-	6mSdM6aQ==;
-Received: from localhost ([::1]:28070 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=R2SS6FrZJe3tO26unNeweEHgIjlkku2FwfROK8gK5/Q=; b=gCjUPHL/y0mod1z8brqDJ9Pg+C
+	xTJUJYrm/ijnvHZaVpdle47Emzmxi9VDnqvE+dUwphqH6hwDVQAcMC56ybWUBGsbKpRuA5WFtvwMO
+	MworJ6y71LXRjpGDlSXNPZ4eY6026R1UD838QFz0mpi7eihJsE/0U2iu2Y/I7vqs5sv5y303tIhpr
+	Tf6xH4WT7W3jfjZ2SQ+pyQ38CbfWpC53aV2KjXNHPlVbjrJIu8CGtSipXE8B6E2YgQDzln/Sih8Cb
+	SKBvwXI9pDm243B3CMrfRTJqGDiLrPZpc6nqZ6zhOZX2pb+cxGji7S6GwQSVzecdlqqa8z9kuCzNn
+	HyB9LJ/A==;
+Received: from localhost ([::1]:31204 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jDcLm-0001Wi-Ot; Sun, 15 Mar 2020 23:07:18 +0000
-Received: from mail-qk1-x72a.google.com ([2607:f8b0:4864:20::72a]:43011) 
+	id 1jDcOi-0001wE-Io; Sun, 15 Mar 2020 23:10:20 +0000
+Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:36859) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jDcLi-0001Wb-W7
- for samba-technical@lists.samba.org; Sun, 15 Mar 2020 23:07:17 +0000
-Received: by mail-qk1-x72a.google.com with SMTP id x18so2952586qki.10
- for <samba-technical@lists.samba.org>; Sun, 15 Mar 2020 16:07:14 -0700 (PDT)
+ (Exim) id 1jDcOZ-0001w7-Cm
+ for samba-technical@lists.samba.org; Sun, 15 Mar 2020 23:10:14 +0000
+Received: by mail-io1-xd30.google.com with SMTP id d15so15312836iog.3
+ for <samba-technical@lists.samba.org>; Sun, 15 Mar 2020 16:10:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
- bh=Wf1kZg8JHvWKhlG2DR9z0kO5EKLkK+UvZOrDdO+UlSQ=;
- b=UOn1+ESPUV9oo0HgXMYrjUDp5fQvsSgvVyEOSIn8IYIEzNFGa3Tl9/HAq93xUNrLLK
- KXIevfdgBsuxTLEuGZtNewguc7mtpwxbWbvK4lso/awa/nlQPUjcpficPFTvKEu8K0OX
- mEIse8bYmT5+rOr5RbcI96QWPOqp0I/ud/FN+9rakoieMVEhrfBezd1U0UYstF/WL949
- 2GX1SdYFdVULK9IzBNIK7lb9scdD6M2R/PTu2bT6O0HN2hSVsUaZKT3kpfKHiHaZRNKN
- wE8TLeEnrKNhgCuqKlgtd6oyB2bPvp0pi1tln/kyKb4mE0UwADbPrG5fCxTLr1d1Qk6Q
- lhJA==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=R2SS6FrZJe3tO26unNeweEHgIjlkku2FwfROK8gK5/Q=;
+ b=Xv6hae6GQVv7ey7vHDlh+0Ux8FRdbMJ3t4Iyn0I/xq9+yCahd0xhMlZf4q2/xBXAQj
+ LPetS6ml60SSK9+IsfIgA7aLDDcF9zNo4O+H4raxL8HpJcO5CME+okVeaDZhD3yYBOkb
+ hVVrqxr19lRcbtVFEQ0w1NN7qG08vsJcQQ6Ft4PX0UZLH3gXEGXFas9fzWxC+RMAyjLS
+ r3fHXbyJ5niYLYPh6Mb9KvoPSxaSoZpQBM3CZxyrwDyeS2McEN96ekAra+YjoeIHzrUZ
+ F3sCKf3io57/ffCAmR7T30diifAWsx4fhChEq0QlWmWeSIY0qfOmlrJpKWP6D/KFNLHc
+ WfGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to;
- bh=Wf1kZg8JHvWKhlG2DR9z0kO5EKLkK+UvZOrDdO+UlSQ=;
- b=K8aWTDY3IgYZKesL6ZPQox7JwaW17RJc3lYXHF+GCa26P0KPjAUyKKg7LD/bF4w1wU
- F04JP+tZUNcGiV3oqjumjZL5MhIclsRjuLe5zLmBZEZq3SicU6/kccl1rY78PNVb8iVi
- de0P3loDi46hvBqvJPl+mpGblYM7gCywFsdJIXqxAz3GSdL2ZQoedjbrekBNeTY8vheO
- 9WSIkZ0udOZfeOkYy3BQXM6It8T/ebaT7DnlQO5ZC2BtkjIUzq0BVEzhGLWZUp5VTCGb
- ymCa/VFI14QTfCM5GPYjdcaQwtLNst7REARG/NI4RxJtNUYKLnb39cV4nGAnQZ0FowUt
- fkrw==
-X-Gm-Message-State: ANhLgQ2K+ZtiVVcBNhPBPVtGK/5Ndpsj/Fpsdx7wVjJfUPcUPFty9m9m
- 0J2uT3fvX0gDeBeCDsTPZD/jTSSs5XKDqcjDyM21DUqk
-X-Google-Smtp-Source: ADFU+vs55TzVS4OS7NrxkGuoLBBUeweGw0Z2M6iyPGNNTinjzfdvo/CtOZ6ggrYie7eV8n9Cdgtswjr9b+2BB9D7T7Q=
-X-Received: by 2002:a25:f20f:: with SMTP id i15mr30636068ybe.364.1584313633297; 
- Sun, 15 Mar 2020 16:07:13 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=R2SS6FrZJe3tO26unNeweEHgIjlkku2FwfROK8gK5/Q=;
+ b=mVXwSlrxjSTfsW5zUioOeTl8tV9dYJBG2CAF2QDCLYrs/T5y4b+wgfS37TOLG2KPDD
+ NWso/N3F0Cc46CaaGFKd4RoGgkB4KcHberHje9tS6B7RAgygAAmC5zcVitIfxUpffheg
+ faDyoKacyg2lyz6zaFH0d/YsciFZSPhHyZW4mnyJANWQEYfLHtrhUD8qPRBPmfUO826u
+ KENOj4bd2TaVRzf5LBdRkDyGgPLNj0oOUhcQVfQNe3/F/2/R6iW8BqlmDd7j1xS9bwjp
+ 5IlJlQ702UeK+jawZ+bDnHDYQAfhac1wQOtWQPsBu5KpBXnT/OGvQVyesKfUpl3+715a
+ fNEg==
+X-Gm-Message-State: ANhLgQ1tZgcokh+9tESHv6Wn5ra/IdpsJsC+eS7SiPuSbgkPoku++Hfw
+ HxBnQZwYyC7S1ITMh2yOCyiSo9/DAXh938nACUCltfZg
+X-Google-Smtp-Source: ADFU+vu7juPjWjAl5CNLkH9wtAxY9dOc3eBt6WPUDcs7Ci2eWvn1po3hHno0EdftVfhsnTVYdQizKwj5LXO15hNQinY=
+X-Received: by 2002:a02:340c:: with SMTP id x12mr23597047jae.20.1584313807473; 
+ Sun, 15 Mar 2020 16:10:07 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAH2r5ms_oxqwHm56nzabM-x2XMR1Ni-WD1_LEYYxOW_NkswsOQ@mail.gmail.com>
-In-Reply-To: <CAH2r5ms_oxqwHm56nzabM-x2XMR1Ni-WD1_LEYYxOW_NkswsOQ@mail.gmail.com>
-Date: Sun, 15 Mar 2020 18:07:02 -0500
-Message-ID: <CAH2r5mvN5ri_7x3dVah8tUft6Xxbjia9MSANZV04TkVwtqY9Tw@mail.gmail.com>
+ <CAH2r5mvN5ri_7x3dVah8tUft6Xxbjia9MSANZV04TkVwtqY9Tw@mail.gmail.com>
+In-Reply-To: <CAH2r5mvN5ri_7x3dVah8tUft6Xxbjia9MSANZV04TkVwtqY9Tw@mail.gmail.com>
+Date: Mon, 16 Mar 2020 09:09:56 +1000
+Message-ID: <CAN05THSjfj2ZJCSEdgdEfiEcxG8=xd-e5zR6KrF8gR_O1Mxb7w@mail.gmail.com>
 Subject: Re: [SMB3] New compression flags
-To: CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="0000000000005376cf05a0ecc32b"
+To: Steve French <smfrench@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,21 +68,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
+Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---0000000000005376cf05a0ecc32b
-Content-Type: text/plain; charset="UTF-8"
+Typo in
++    __le32    Repititions;
 
-And one more small set of structures for the updated transform header.
-See MS-SMB2 2.2.42.1 and 2.2.42.2
+otherwise looks good.
+Acked-by me for both.
 
-
-On Sun, Mar 15, 2020 at 5:50 PM Steve French <smfrench@gmail.com> wrote:
+On Mon, Mar 16, 2020 at 9:07 AM Steve French via samba-technical
+<samba-technical@lists.samba.org> wrote:
 >
-> Some compression related flags I noticed were added in the latest MS-SMB2
+> And one more small set of structures for the updated transform header.
+> See MS-SMB2 2.2.42.1 and 2.2.42.2
+>
+>
+> On Sun, Mar 15, 2020 at 5:50 PM Steve French <smfrench@gmail.com> wrote:
+> >
+> > Some compression related flags I noticed were added in the latest MS-SMB2
+> >
+> >
+> >
+> > --
+> > Thanks,
+> >
+> > Steve
 >
 >
 >
@@ -90,47 +105,4 @@ On Sun, Mar 15, 2020 at 5:50 PM Steve French <smfrench@gmail.com> wrote:
 > Thanks,
 >
 > Steve
-
-
-
--- 
-Thanks,
-
-Steve
-
---0000000000005376cf05a0ecc32b
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-SMB3-Additional-compression-structures.patch"
-Content-Disposition: attachment; 
-	filename="0001-SMB3-Additional-compression-structures.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_k7tnf80b0>
-X-Attachment-Id: f_k7tnf80b0
-
-RnJvbSBlZWI2NzJmYzVlMGVjMDdkMzU1YTBkNzgyYTIwZjljZDI4ZjM0YmU3IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFN1biwgMTUgTWFyIDIwMjAgMTg6MDQ6MTMgLTA1MDAKU3ViamVjdDogW1BBVENIXSBT
-TUIzOiBBZGRpdGlvbmFsIGNvbXByZXNzaW9uIHN0cnVjdHVyZXMKCk5ldyB0cmFuc2Zvcm0gaGVh
-ZGVyIHN0cnVjdHVyZXMuIFNlZSByZWNlbnQgdXBkYXRlcwp0byBNUy1TTUIyIGFkZGluZyBzZWN0
-aW9uIDIuMi40Mi4xIGFuZCAyLjIuNDIuMgoKU2lnbmVkLW9mZi1ieTogU3RldmUgRnJlbmNoIDxz
-dGZyZW5jaEBtaWNyb3NvZnQuY29tPgotLS0KIGZzL2NpZnMvc21iMnBkdS5oIHwgMTcgKysrKysr
-KysrKysrKysrKy0KIDEgZmlsZSBjaGFuZ2VkLCAxNiBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9u
-KC0pCgpkaWZmIC0tZ2l0IGEvZnMvY2lmcy9zbWIycGR1LmggYi9mcy9jaWZzL3NtYjJwZHUuaApp
-bmRleCA0YTdkMTU0ZmZmYWUuLjhiOGZiYmM0NjRjNyAxMDA2NDQKLS0tIGEvZnMvY2lmcy9zbWIy
-cGR1LmgKKysrIGIvZnMvY2lmcy9zbWIycGR1LmgKQEAgLTEzNyw2ICsxMzcsMjEgQEAgc3RydWN0
-IHNtYjJfdHJhbnNmb3JtX2hkciB7CiAJX191NjQgIFNlc3Npb25JZDsKIH0gX19wYWNrZWQ7CiAK
-Ky8qIFNlZSBNUy1TTUIyIDIuMi40Mi4xICovCitzdHJ1Y3QgY29tcHJlc3Npb25fcGxheWxvYWRf
-aGVhZGVyIHsKKwlfX2xlMTYJQWxnb3JpdGhtSWQ7CisJX19sZTE2CVJlc2VydmVkOworCV9fbGUz
-MglMZW5ndGg7Cit9IF9fcGFja2VkOworCisvKiBTZWUgTVMtU01CMiAyLjIuNDIuMiAqLworc3Ry
-dWN0IGNvbXByZXNzaW9uX3BhdHRlcm5fcGF5bG9hZF92MSB7CisJX19sZTE2CVBhdHRlcm47CisJ
-X19sZTE2CVJlc2VydmVkMTsKKwlfX2xlMTYJUmVzZXJ2ZWQyOworCV9fbGUzMglSZXBpdGl0aW9u
-czsKK30gX19wYWNrZWQ7CisKIC8qCiAgKglTTUIyIGZsYWcgZGVmaW5pdGlvbnMKICAqLwpAQCAt
-MTE4Niw3ICsxMjAxLDcgQEAgc3RydWN0IHNtYjJfd3JpdGVfcmVxIHsKIAlfX2xlNjQgT2Zmc2V0
-OwogCV9fdTY0ICBQZXJzaXN0ZW50RmlsZUlkOyAvKiBvcGFxdWUgZW5kaWFubmVzcyAqLwogCV9f
-dTY0ICBWb2xhdGlsZUZpbGVJZDsgLyogb3BhcXVlIGVuZGlhbm5lc3MgKi8KLQlfX2xlMzIgQ2hh
-bm5lbDsgLyogUmVzZXJ2ZWQgTUJaICovCisJX19sZTMyIENoYW5uZWw7IC8qIE1CWiB1bmxlc3Mg
-U01CMy4wMiBvciBsYXRlciAqLwogCV9fbGUzMiBSZW1haW5pbmdCeXRlczsKIAlfX2xlMTYgV3Jp
-dGVDaGFubmVsSW5mb09mZnNldDsKIAlfX2xlMTYgV3JpdGVDaGFubmVsSW5mb0xlbmd0aDsKLS0g
-CjIuMjAuMQoK
---0000000000005376cf05a0ecc32b--
 
