@@ -2,60 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CDD9186141
-	for <lists+samba-technical@lfdr.de>; Mon, 16 Mar 2020 02:19:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F31781867B8
+	for <lists+samba-technical@lfdr.de>; Mon, 16 Mar 2020 10:20:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=tdNus9zNxtSOm7qlUBtshsyO4JEC1pBu4ig8znf74kI=; b=YxP5sOaV0kn3V/rh0taUjz+761
-	Xfug/tUiIsc5gHrBvWVi9fL3kZ5Gs7KHfGtuBezovXvo0mpRi1caKaebuGyJZo8zHDEU4Mxl5qZRX
-	3s5UeRHPI8gt/DACluDmeMekbl0TkSMwb0E/k2UFO+CFHNg4bmC9xkQQR41l3juSHlJNrK8KDI3nE
-	WQincqdkDKoHkPMqm99aykyQ4M5SJ+VjvrTQ3txdLzsmEegUNB6Fo6FCTq8xUi81FNfCUHtVBZO14
-	9O71MDPNZIJv/74ZPZ0Lsf9WlLlqDNhKmvaQ3HaVquHY7SI5iLRV4BXfDXNTQab3owtjOg0tBRflJ
-	dEyXjBnA==;
-Received: from localhost ([::1]:36854 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=MS6ra06hQP5jy3yprrY9FXnzu5y+NFV6Q8uZFSdYAGY=; b=FasCo2VaznQeRHsM+hGMt3J9Ed
+	ty0R6f+SoLRMPE7/7PgIuvTXXgVEMvVrrjNvMhif63CyhdwWUGl8N5tcMdML01sP21N/CqD/VSDQO
+	T8mmZQDbHi+mxdJETPiUlXYjl5GS69EP2mQlgt7lOzYi6F2psK3UFUh8GzE/P6YXa3HA3gP/1Ffoc
+	xZmSFAA/5tlFcHvPDobzc8SjynKodJTOwUEZZgTEzUBukPStsz3hBN3xu+OGDMjoIkaRTFJP+kt2h
+	FvbCj5tZ9jB7WdoYEHAN83fr/vMUljmsqPlT9lTOvq7b9t9gv2nnNkftrByK3/s9dqxtDIVJHx7BI
+	1b0QEDcw==;
+Received: from localhost ([::1]:49796 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jDePa-0002o3-HO; Mon, 16 Mar 2020 01:19:22 +0000
-Received: from mail-qk1-x72e.google.com ([2607:f8b0:4864:20::72e]:44890) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jDePW-0002nw-Ho
- for samba-technical@lists.samba.org; Mon, 16 Mar 2020 01:19:20 +0000
-Received: by mail-qk1-x72e.google.com with SMTP id j4so6882839qkc.11
- for <samba-technical@lists.samba.org>; Sun, 15 Mar 2020 18:19:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=tdNus9zNxtSOm7qlUBtshsyO4JEC1pBu4ig8znf74kI=;
- b=HLZx8I99a+P4axfDNAujOaj/sQ1oqWAkLLgslZHbQu3jOXcgPkidzv+SVdME8bPtHg
- SetElvl+jvyP8ArVe1imVQSMEAqraHsIHuO7It27JfTDq2shH5ZAqozXZfGuaKP3N1CI
- +RlGyyQFey82asFc2MLft70ftZNdw5QZllCoiOGR3l7TSkXuDaN62sQRFUYqsslaRb+f
- EvOtozGv6wxJHGalAc2mPYdOxZnhxQYkNijy6rsu8m9TMQmXPhJGWQPE5vCW1h9bapQ+
- zLn4wqFtX5DgonwWspODRTSHwSG1QRsHg9IO+RvJc+v3TTVTOwfI1cD4MBQRreyNxGHB
- FD0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=tdNus9zNxtSOm7qlUBtshsyO4JEC1pBu4ig8znf74kI=;
- b=ffX7qniDIxZv87dRkblxz/eGjoaPmyuwLF3MHpDsriUGd3y8hHPrlaoVyAKFxAwKBd
- Obkbw8X5AmgdzfuoYHuS1FwFVmax6uLFoqzHQrcxG/ev0hR6o77y6kOgwxtlGCgIv35O
- vpMJz42vntKqfR+kk1VxJm72x8tMlPbLPNQ0ftldN0MhNNpdPj+xDt+T3BvWXPbpozX5
- 618K0TKgDpm+yCk3Bbqho7QWKDfW940Ux3L7jQzuzN4rWwPbp6d5ePhrjVidJMFX2XJ8
- TUF7ZnW38cA42DOA3A0n/2NQeqWZbzeU3wkqTwx+NJBGfGsTDMym+BQM7NgUfxvJ0ZU6
- kJbA==
-X-Gm-Message-State: ANhLgQ3Ajln0S96+ClOS4i+YbrbruaeArOnWFLCSUV/DpNPDfRdwHwWp
- PMfFGYilJIvKwuyxxpMQsNhPzO2Y+2QYUEwDriU=
-X-Google-Smtp-Source: ADFU+vvw/EgWwz9qn98zRlv/vkB/Ds3xaZkM10Q58FUN+jkPEolnt14MxubPuUTRaVB71Gb83IcXCHDVqcN0gHs8nAc=
-X-Received: by 2002:a25:2554:: with SMTP id l81mr32492135ybl.375.1584321556736; 
- Sun, 15 Mar 2020 18:19:16 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAH2r5ms_oxqwHm56nzabM-x2XMR1Ni-WD1_LEYYxOW_NkswsOQ@mail.gmail.com>
- <CAH2r5mvN5ri_7x3dVah8tUft6Xxbjia9MSANZV04TkVwtqY9Tw@mail.gmail.com>
- <CAN05THSjfj2ZJCSEdgdEfiEcxG8=xd-e5zR6KrF8gR_O1Mxb7w@mail.gmail.com>
-In-Reply-To: <CAN05THSjfj2ZJCSEdgdEfiEcxG8=xd-e5zR6KrF8gR_O1Mxb7w@mail.gmail.com>
-Date: Sun, 15 Mar 2020 20:19:05 -0500
-Message-ID: <CAH2r5mtO_dC88hNj-UAj61Oy2OA4XX+LKjftK_+jwwzXzdnwEw@mail.gmail.com>
-Subject: Re: [SMB3] New compression flags
-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+	id 1jDluq-0004zK-Oz; Mon, 16 Mar 2020 09:20:08 +0000
+Received: from [80.20.169.36] (port=41343 helo=mail.promoturviaggi.com) 
+ by hr1.samba.org with smtp (Exim) id 1jDlum-0004zD-5E
+ for samba-technical@lists.samba.org; Mon, 16 Mar 2020 09:20:06 +0000
+Received: (qmail 6446 invoked by uid 121); 16 Mar 2020 10:20:01 +0100
+Received: from 172.16.1.1 (dario.lesca@solinos.it@172.16.1.1) by
+ albatros.promoturviaggi.com (envelope-from <d.lesca@solinos.it>,
+ uid 89) with qmail-scanner-2.08 
+ (clamdscan: 0.98.6/25752. spamassassin: 3.3.1.  
+ Clear:RC:0(172.16.1.1):SA:0(-102.5/5.0):. 
+ Processed in 0.251281 secs); 16 Mar 2020 09:20:01 -0000
+Received: from unknown (HELO dodo.home.solinos.it)
+ (dario.lesca@solinos.it@172.16.1.1)
+ by mail.promoturviaggi.com with SMTP; 16 Mar 2020 10:20:00 +0100
+Message-ID: <35cc3bc0726ca04c7613a6aa03cee7dd48776eb7.camel@solinos.it>
+Subject: Re: Samba 4.12 rc3: bind DNS say "named: client update denied"
+To: samba-technical@lists.samba.org
+Date: Mon, 16 Mar 2020 10:19:59 +0100
+In-Reply-To: <20200315064050.GR2735275@onega.vda.li>
+References: <a144cd2c0219399cea4473f6cf7e86b3dba5d6cf.camel@solinos.it>
+ <20200309100715.GK2735275@onega.vda.li>
+ <dad25a37497ed4d4b70829925da512b3abb4eb39.camel@solinos.it>
+ <52a0f365-579c-5adc-a470-7cf543a0c868@samba.org>
+ <2ee4998776b6d690b9f458cdfca7c11626e86784.camel@solinos.it>
+ <1e12e848-3540-7651-8712-752600680296@samba.org>
+ <20200315064050.GR2735275@onega.vda.li>
+Organization: Solinos
 Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,55 +58,22 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Dario Lesca via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Dario Lesca <d.lesca@solinos.it>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-fixed typo - thx
+Il giorno dom, 15/03/2020 alle 08.40 +0200, Alexander Bokovoy via
+samba-technical ha scritto:
+> Authorization doesn't work because bind_dlz doesn't provide any
+> and there is no way to set it up otherwise.
 
-(and also added acked-by) and pushed to cifs-2.6.git for-next
-
-On Sun, Mar 15, 2020 at 6:10 PM ronnie sahlberg
-<ronniesahlberg@gmail.com> wrote:
->
-> Typo in
-> +    __le32    Repititions;
->
-> otherwise looks good.
-> Acked-by me for both.
->
-> On Mon, Mar 16, 2020 at 9:07 AM Steve French via samba-technical
-> <samba-technical@lists.samba.org> wrote:
-> >
-> > And one more small set of structures for the updated transform header.
-> > See MS-SMB2 2.2.42.1 and 2.2.42.2
-> >
-> >
-> > On Sun, Mar 15, 2020 at 5:50 PM Steve French <smfrench@gmail.com> wrote:
-> > >
-> > > Some compression related flags I noticed were added in the latest MS-SMB2
-> > >
-> > >
-> > >
-> > > --
-> > > Thanks,
-> > >
-> > > Steve
-> >
-> >
-> >
-> > --
-> > Thanks,
-> >
-> > Steve
-
-
+I have fill a bug on bugzilla.samba.org.
+https://bugzilla.samba.org/show_bug.cgi?id=14321
+Thanks
 
 -- 
-Thanks,
+Dario Lesca
+(inviato dal mio Linux Fedora 31 Workstation)
 
-Steve
 
