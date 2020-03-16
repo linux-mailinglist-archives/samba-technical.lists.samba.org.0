@@ -2,36 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA4BA186974
-	for <lists+samba-technical@lfdr.de>; Mon, 16 Mar 2020 11:51:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7ADBC186F71
+	for <lists+samba-technical@lfdr.de>; Mon, 16 Mar 2020 16:57:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=6EYM/Sp0JN8yy7fSA9P2RTKtN7T5owoTMo/xt5LndPQ=; b=2vnT3tw6MsNIZv3XgnV4k1QDtQ
-	7rJVmnsSsUbVyEzMBdjQQL8HAXf9foTIn4/UoZ9H7sa+7JoOItJ0Xbr4/CqmRRwdo5XO8QXOiMPsn
-	FGV1GAdBV1bL37slaJjeQU8fO99SkHrnUtZwO/VF1NpDQ6E03ElFRK28/rtQqSyQ/R7yMWQTNF7M/
-	5BtuOa0OPxq976fOJzyzb4NeF+mg8x8LsYNndf7WkiK4NWrZ6ayDij6ji2X6VrQrfj15LNpZ6rzA4
-	ng4Hx9L4Oikw1UZpfthSWJPMrSs5zFJvgSKGO9+tXPpIuXIbrtr/umeUu0kM944v6R0ak/4EmV8yq
-	keARlIAw==;
-Received: from localhost ([::1]:55440 helo=hr1.samba.org) 
+	bh=/G8EEmRy7DbaJQlXDAOdKHmatKVrz4a4uYEgizdxteE=; b=hiJzsGCKGw9Uih0B32ZCrFd4tW
+	IGRN/8iXPx2MCykzki9j0QtAqMftxniH2do7ifL0pM1vvF/axxSaQMvTI2/ehIxdNdEJhnIHJ8CWo
+	1uN2VwLuROoFrUvyuGjqkCjJEvEBF0xUdLbyV3lUX0rxzlxnxkpE24b0Ozzvy/K17fKFjLY3yPQKn
+	lixYHmt4yGrCcmcB91i2BVxLzsS/PhR3ZZ3jxzqal1xPFpxPd2dRlJrk1hUr87/ul4M7D2HJMXiFe
+	ScmB352xTCnUcDeKnhlByIUwVhuyelSt8ZHvhqUC331qdDOiBDECnXuae2QReHNX6kbqqQGjVdsjt
+	AH8izyVg==;
+Received: from localhost ([::1]:42652 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jDnKQ-0005m7-RQ; Mon, 16 Mar 2020 10:50:38 +0000
-Received: from mx2.suse.de ([195.135.220.15]:45738) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jDnKM-0005m0-KZ
- for samba-technical@lists.samba.org; Mon, 16 Mar 2020 10:50:36 +0000
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id EA92DAE2B;
- Mon, 16 Mar 2020 10:50:31 +0000 (UTC)
-To: Steve French <smfrench@gmail.com>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
-Subject: Re: [SMB3] New compression flags
-In-Reply-To: <CAH2r5ms_oxqwHm56nzabM-x2XMR1Ni-WD1_LEYYxOW_NkswsOQ@mail.gmail.com>
-References: <CAH2r5ms_oxqwHm56nzabM-x2XMR1Ni-WD1_LEYYxOW_NkswsOQ@mail.gmail.com>
-Date: Mon, 16 Mar 2020 11:50:30 +0100
-Message-ID: <87sgi8mv49.fsf@suse.com>
+	id 1jDs6P-000Ae7-75; Mon, 16 Mar 2020 15:56:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54744) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jDs6K-000AdZ-N3
+ for samba-technical@lists.samba.org; Mon, 16 Mar 2020 15:56:26 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=/G8EEmRy7DbaJQlXDAOdKHmatKVrz4a4uYEgizdxteE=; b=PlX5+H7PJeNs8Et25PPppd5iZm
+ bsBoD8wSnWWWGtNMD/LJnG26sykOJKGhZ8t+rHmeRjxAYw1oXa9V8ngjU0AIX1mzaH23dfIyLuzkH
+ wc2hlSxptgUqrz1O3I/MUqR/Icxp6r0BFhvA6H8EWA8IL1MY6DbuQFQ5WeQZsNdr9VZWhSYFY9YBp
+ mEBIWwr+GoMz54RkLr9LpJojoGN+AqOGZsnmHflpNbOb81lqzIjs2kZsdKARdkRI0TuSzOeN2mB00
+ LisX9kMnjjg8QEoc5VmKX+qakr1lrAHmpDHPKmJKZH2XJy5YDrxWsYUfGzAiTdcqhwUMI/g90PYhD
+ txeA65GZ+y0cMo4QKPoTbaqaMR3FlqLWDQl7t52bt8Q5Zrql+Z9KAwJKb4DsMmf1A2uroRsatEuEF
+ u/0XanZmoXP8kPN7Lilel6ziU78JVAiqGh9B4cyOKWx87MXkRsPt6CgFfvz5+0zaIHFd9U499Re0v
+ k1stTQ9EXartc/Xf4patDefI;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jDs6K-0000Rd-9R
+ for samba-technical@lists.samba.org; Mon, 16 Mar 2020 15:56:24 +0000
+To: samba-technical@lists.samba.org
+Subject: A question about LDB contexts in the standard and prefork process
+ models
+Message-ID: <5c5bca48-d685-4144-49ed-7e63d2449087@samba.org>
+Date: Mon, 16 Mar 2020 17:56:14 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -45,25 +57,26 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
+From: Nadezhda Ivanova via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Nadezhda Ivanova <nivanova@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Hi team,
 
-Changes looks good.
+For various reasons I got very much behind the current state of samba, 
+and I am trying to remedy that :). So I was looking into the work of the 
+LDAP server, and based on the code and some debugging, it seems to me 
+that a new ldb context is created per connection, when samdb_connect is 
+done during bind, and the same context is used until the connection is 
+closed. So, am I right in understanding that in standard process model, 
+there is essentially a separate ldb context per process, whereas in 
+pre-fork, there is still one per connection, but is shared between 
+processes? Also, it is unclear to me still what  ldap_service->sam_ctx 
+is used for?
 
-I had a quick look at this new stuff with Pike recently but it seems
-even the latest windows server (1909) doesn't support it yet (not
-returned in negprot).
+Thanks,
 
-Cheers,
---=20
-Aur=C3=A9lien Aptel / SUSE Labs Samba Team
-GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
-SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, DE
-GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
-nchen)
+Nadya
+
 
