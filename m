@@ -2,60 +2,77 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15DEA189512
-	for <lists+samba-technical@lfdr.de>; Wed, 18 Mar 2020 05:48:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C8C5189C4D
+	for <lists+samba-technical@lfdr.de>; Wed, 18 Mar 2020 13:51:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=9t6OER6Nr8rTZmv9fIvbSoay6iMJgVOYfySsd9QPfc4=; b=QQDtgO/jApRyMX4wWMnEZlXP5O
-	OcBAxEOHX75mJ4XxoeKJN8WVXMlu1nwVfPnuNmPUgCiQG3MBHRHnNuQbV5OcZaRon98hccSekik/Z
-	vYeX3kTzLQbIZh9tLuwar2xP5Zi6DU97uV0on7OPQv+TRMAWYrHi4GigY/WWsqZN9CDkduKgEqqAF
-	6LAI15O2nskoNGe17oC+rJ0uSLiX5FRO8zjoOYleE2DVp0ECjoCfV+9MKuIuV9EqXRAhM8ybdJIZZ
-	TVNqRauuAZEQDP6qDB514zNp0Fy2vsKgtX+qrNTqtk5uhj2BZVwE5UzfGGGqwVh4XH8pc7jgAAU7W
-	//ELPH6Q==;
-Received: from localhost ([::1]:28106 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=GMP5eq1E+2o0+Ga8CPSANAL5MDDDuS7Z/BFb+a+m+ts=; b=Ap/OIWxboeekUW4qmX1aVW6+5+
+	fg7Z5f6bmOI+DDq1+IYRkZRDeYUe1FZ0J8p/ZfaYeuybn2kLbnt5G+kWToKRLMPELtoxpZcFrqXQQ
+	vmMoWl6JqhwgMA8jgjF42MYQCfyJyWcWkuHGHP4D9UFJa2NzK79lU9IwGN25up/pCC1gRNN2WQfMA
+	kIQwta4whBmLTwgwLM7RcfPL2L5IOO8AiqzjGrDitEhyX9WoVe8k/tDJrHIOQJzqoHOGtt/LUpLEb
+	5T2CBDQVM1t1SPi244c6RyBWlZlHDOtjOsZch1n1P33Agd/FhPIR7+4NbZFJ6k7TdH1pG7kCdXhZv
+	9v88l0aQ==;
+Received: from localhost ([::1]:52780 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jEQcR-000H6T-Ao; Wed, 18 Mar 2020 04:47:51 +0000
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:34317) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jEQcL-000H6M-UO
- for samba-technical@lists.samba.org; Wed, 18 Mar 2020 04:47:48 +0000
-Received: by mail-io1-xd42.google.com with SMTP id h131so23645423iof.1
- for <samba-technical@lists.samba.org>; Tue, 17 Mar 2020 21:47:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9t6OER6Nr8rTZmv9fIvbSoay6iMJgVOYfySsd9QPfc4=;
- b=mfA+GMmCp4qNgKXbNcNzf8cghnXV6QQ3GtKTAxFhMdD6bRnE36h5Xo3rZwAUXBoNmZ
- nuGj1WreHi2fmsfZ3wRWJPTwZWKbcwxcHCJJ3wl1PhnaN1X95rsCkpPT9b//wmJeXFSN
- XgakKl2ogf7QvmgHiMGwTU/vTm6WUgtHxfFXS3ERvHEJEVThIiLpq+cKdg5fLQ27W3sx
- JoeBXDa85cjpI5pO1PUKyF2t9NggC9wu7zf4SnCNRVVI10Kgcis7Op2/Aujk5er8KzEa
- ij3V20oD2QMnmLU2JgWxoztvhNaHbXh9ndRIQm31FQ/yG/EtZrOI8COKYz9SBZiJchp4
- h0Mg==
+	id 1jEY9f-00027t-UW; Wed, 18 Mar 2020 12:50:40 +0000
+Received: from us-smtp-delivery-74.mimecast.com ([216.205.24.74]:57169) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1jEY9a-00027m-Ix
+ for samba-technical@lists.samba.org; Wed, 18 Mar 2020 12:50:37 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1584535831;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=4t12sejmyU2kV4Nm9FvGDfyZiybblS1HJpmNRiAYbps=;
+ b=AOO/ROZeWW49cdUxC6ndtiejvzfGZGZ2FjM/NLLJ/HKPnKrH+4inP0CXoBDV1BwD83NOq4
+ PodMuvaphC2ruAEpy1Va6BQwx9MwAfCkfe+HFbD87Uh8mzyKqzzRF2rSRrzsEwRVO4iEAJ
+ ugPEY0ilC5Ed45cnjNna4P+UYg84/ww=
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-318-YT0SPiUCPQaCBZKR8mcWDQ-1; Wed, 18 Mar 2020 08:34:52 -0400
+X-MC-Unique: YT0SPiUCPQaCBZKR8mcWDQ-1
+Received: by mail-pj1-f70.google.com with SMTP id np18so1870840pjb.1
+ for <samba-technical@lists.samba.org>; Wed, 18 Mar 2020 05:34:52 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=9t6OER6Nr8rTZmv9fIvbSoay6iMJgVOYfySsd9QPfc4=;
- b=BATrgJNZosPvuSefMRELazORte0UAKFsl3QvOI59+G+k++DTwgrO6dSfwO+ioPGW67
- dvpFTLJLM812SnUlYDD1NPMp2Av8iM6YIcIUyihQxXm+F/ofkkdEw42BvsjopE/8rlX1
- 77idPdvRJOSbcf82KTwfJSvHfa70f8DUd+2cephxLPA38f4SE1+QUevgwiyYRTo4vuyX
- yVjOHBACCRBgZv6NSTntYiFW9pt9QdYqskSNzE4fGcmXRtBdOcQf+7nznQuIqNv0uHAI
- HkA0bGOlFM7j9w2oETLKOLs/8vxmvrRX8X+9VGC13ta1cYCqoO27wPl2GI1LVR4Co85/
- cdGA==
-X-Gm-Message-State: ANhLgQ0vhTAx+SzmLe5tClB7EubWm9KVje2Dql2PxKrSlINHcpdLVege
- NkzWoGUdDcfWn5lQIFCNPd6tYf03Et5XJ8DcoGg=
-X-Google-Smtp-Source: ADFU+vsgQ+qx2CLoR9BIj0WDMTsdIGixCf0zjYOE9Lr8efHI5AIL3zlIgFhzUgrpb+kZOdFKxZALyNWkE4zVHAWjSU8=
-X-Received: by 2002:a05:6638:a99:: with SMTP id
- 25mr2729836jas.37.1584506863812; 
- Tue, 17 Mar 2020 21:47:43 -0700 (PDT)
+ h=x-gm-message-state:from:to:subject:message-id:date:user-agent
+ :mime-version:content-language;
+ bh=H9JwQSVZmuc+r62MfIfvGd/1ZOagh+dkhI3o5D1aeNI=;
+ b=KEoBoyffoEfWQcbgjGb8ozL/Va0aRU/OikQxGSOST9da9yN7Q8OkKjAyZ1QtF7pDwi
+ QRuacqKY9aF7YrLlfcbSDLfc5twlW2L+UFslyN/uRo3J/yDGhbnW7vevW2kl5eUy/Z+i
+ wktp9FjWVSXUxmWHmI0JeFqoo/hPio/IVMwv9WVPgCzUxcBPRplRx9R3VKmeq7hiQWTG
+ F9zxk1dk9h0RTFH9/QWwVWVpM5jqPn76kPBTPnurP8Rsj+p0BE4OH1e8SXnt1RnbU9FF
+ pojqHxnkJoQ7G6+ROPLiLdIpxrQwG8vp3Qq73BXX+Qsiva8veKqtp4j97teOYyHOCne7
+ yxwg==
+X-Gm-Message-State: ANhLgQ1Q9sBgymGGVqAJfDnLAvmcCDiR/kdk1qBkvOqLr32VxJ/s5ytT
+ bhiSAPMo61WxqKkyesqt3VxxvNLr2cxTuiyG1DvtH9EigNLsycI8Ukm8Yp67bDYI6thF0yYVA1D
+ 8b4z9xs4me5GJPjWJbr+PU5aQQ0hF
+X-Received: by 2002:a17:90a:7309:: with SMTP id
+ m9mr4374435pjk.52.1584534891464; 
+ Wed, 18 Mar 2020 05:34:51 -0700 (PDT)
+X-Google-Smtp-Source: ADFU+vvTc1F/NUitfA3nYiDrW31HYVZjvUXblOxMHwEDi6aoDIBLDYLBw5t4iNZvs1R++FiZaUt7Bg==
+X-Received: by 2002:a17:90a:7309:: with SMTP id
+ m9mr4374398pjk.52.1584534891135; 
+ Wed, 18 Mar 2020 05:34:51 -0700 (PDT)
+Received: from amitkuma.pnq.csb ([103.83.215.40])
+ by smtp.gmail.com with ESMTPSA id ck11sm2443990pjb.32.2020.03.18.05.34.49
+ for <samba-technical@lists.samba.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Mar 2020 05:34:50 -0700 (PDT)
+To: samba-technical@lists.samba.org
+Subject: smbclient(samba-4.10.4) cannot log data in log.smbclient while
+ samba-3.6.23 can
+Message-ID: <639e0583-ccbf-9fa3-893f-730283c8abb1@redhat.com>
+Date: Wed, 18 Mar 2020 18:04:47 +0530
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-References: <ef49e240-fc8f-9eb4-af98-26bfd39104aa@huawei.com>
-In-Reply-To: <ef49e240-fc8f-9eb4-af98-26bfd39104aa@huawei.com>
-Date: Wed, 18 Mar 2020 14:47:32 +1000
-Message-ID: <CAN05THQYxPcsgiHTqMcsTgB6ZDYaBMamu-sOe428H7EwSRU2HQ@mail.gmail.com>
-Subject: Re: [PATCH] CIFS: Fix bug which the return value by asynchronous read
- is error
-To: Yilu Lin <linyilu@huawei.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Language: en-US
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,81 +86,143 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: Steve French <sfrench@samba.org>, linux-cifs <linux-cifs@vger.kernel.org>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, alex.chen@huawei.com
+From: Amit Kumar via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Amit Kumar <amitkuma@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Yilu,
+Hello,
 
-I think your reasoning makes sense.
-Do you have a small reproducer for this? A small C program that triggers this?
+smbclient cannot create log file when log-basename is specified in=20
+samba-master.
 
-I am asking because if you do we would like to add it to our buildbot
-to make  sure we don't get regressions.
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -l|--log-basename=3Dlogdirectory
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Base director=
+y name for log/debug files. The extension=20
+".progname" will
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 be appended (=
+e.g. log.smbclient, log.smbd, etc...). The log=20
+file is
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 never removed=
+ by the client.
+
+*On samba-4.10.4*:
+# smbclient -l /var/log/samba //<samba-server-ip>/<share-name>=C2=A0=C2=A0 =
+-U=20
+username%password
+smb: \> ls
+ =C2=A0 .=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 D=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0=C2=A0 Wed Mar 18 05:34:29 2020
+ =C2=A0 ..=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 D=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0=C2=A0 Mon Mar=C2=A0 2 06:46:14 2020
+ =C2=A0 test1.xml =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 A=C2=A0 9727426=C2=A0 Mon Mar=C2=A0 2=20
+06:50:39 2020
+
+ =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 26699940 blocks of size 1024. 152430=
+4 blocks available
+smb: \> q
+# ls -ltr /var/log/samba
+-rw-r--r--. 1 root root=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0 Mar 18 05:35 =
+log.smbclient=20
+<<<<<<<<<<<See file size=3D0
+#
+
+*samba-3.6.23:
+*# smbclient -l /var/log/samba //<samba-server-ip>/<share-name>=C2=A0=C2=A0=
+ -U=20
+username%password
+smb: \> ls
+ =C2=A0 .=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 D=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0=C2=A0 Wed Mar 18 06:41:49 2020
+ =C2=A0 ..=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 DR=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0 0=C2=A0 Wed Mar 18 06:41:45 2020
+ =C2=A0 file-1=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 0=C2=A0 Wed Mar 18 06:41:49 2020
+
+ =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 44732 blocks of size 1048576. 36679 =
+blocks available
+smb: \> q
+# ls -ltr /var/log/samba/
+-rw-r--r--. 1 root root=C2=A0=C2=A0=C2=A0 242 Mar 18 08:13 log.smbclient <<=
+<<<<<Creates=20
+the file.
 
 
-regards
-ronnie sahlberg
+I tried breaking samba-4.10.4 in setup_logging() using gdb but on=20
+running gdb "Single stepping until exit from function setup_logging,=20
+which has no line number information", maybe its pproblem of gdb ad gcc=20
+version mismatch but i am using both latest version.
+samba-3.23 breaks perfactly into setup_logging().
 
-On Wed, Mar 18, 2020 at 1:59 PM Yilu Lin <linyilu@huawei.com> wrote:
->
-> This patch is used to fix the bug in collect_uncached_read_data()
-> that rc is automatically converted from a signed number to an
-> unsigned number when the CIFS asynchronous read fails.
-> It will cause ctx->rc is error.
->
-> Example:
-> Share a directory and create a file on the Windows OS.
-> Mount the directory to the Linux OS using CIFS.
-> On the CIFS client of the Linux OS, invoke the pread interface to
-> deliver the read request.
->
-> The size of the read length plus offset of the read request is greater
-> than the maximum file size.
->
-> In this case, the CIFS server on the Windows OS returns a failure
-> message (for example, the return value of
-> smb2.nt_status is STATUS_INVALID_PARAMETER).
->
-> After receiving the response message, the CIFS client parses
-> smb2.nt_status to STATUS_INVALID_PARAMETER
-> and converts it to the Linux error code (rdata->result=-22).
->
-> Then the CIFS client invokes the collect_uncached_read_data function to
-> assign the value of rdata->result to rc, that is, rc=rdata->result=-22.
->
-> The type of the ctx->total_len variable is unsigned integer,
-> the type of the rc variable is integer, and the type of
-> the ctx->rc variable is ssize_t.
->
-> Therefore, during the ternary operation, the value of rc is
-> automatically converted to an unsigned number. The final result is
-> ctx->rc=4294967274. However, the expected result is ctx->rc=-22.
->
-> Signed-off-by: Yilu Lin <linyilu@huawei.com>
-> ---
->  fs/cifs/file.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/fs/cifs/file.c b/fs/cifs/file.c
-> index 022029a5d..ff4ac244c 100644
-> --- a/fs/cifs/file.c
-> +++ b/fs/cifs/file.c
-> @@ -3323,7 +3323,7 @@ again:
->         if (rc == -ENODATA)
->                 rc = 0;
->
-> -       ctx->rc = (rc == 0) ? ctx->total_len : rc;
-> +       ctx->rc = (rc == 0) ? (ssize_t)ctx->total_len : rc;
->
->         mutex_unlock(&ctx->aio_mutex);
->
-> --
-> 2.19.1
->
->
+I think using git bisect between these versions would be tough as,=20
+versions are far apart.
+
+Even there is significant change log handling between two versions. I=20
+tried adding the old code back but still no luck.
+
+samba-4.10.4/lib/util/debug.c
+void setup_logging(const char *prog_name, enum debug_logtype new_logtype)
+
+{
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 debug_init();
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (state.logtype < new_logtype=
+) {
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 state.logtype =3D new_logtype;
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (prog_name) {
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 const char *p =3D strrchr(prog_name, '/');
+
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 if (p) {
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 prog_nam=
+e =3D p + 1;
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 }
+
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 state.prog_name =3D prog_name;
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 reopen_logs_internal();
+ =C2=A0+ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (state.logtype =3D=3D DEBUG_FILE=
+) {
++#ifdef WITH_SYSLOG
++ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
+//const char *p =3D strrchr_m( prog_name,'/' );
++ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 const char *=
+p =3D "/log.smbclient";
++=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 if (p)
++ =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 prog_name =3D p + 1;
++#ifdef LOG_DAEMON
++ openlog( prog_name, LOG_PID, SYSLOG_FACILITY );
++#else
++ /* for old systems that have no facility codes. */
++ openlog( prog_name, LOG_PID );
++#endif
++#endif
++=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+
+}
+--=20
+
+Thank you,
+Amit Kumar
+
+<https://www.redhat.com/en/openshift-4>
 
