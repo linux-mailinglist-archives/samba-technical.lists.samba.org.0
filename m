@@ -2,48 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49C7218C8A5
-	for <lists+samba-technical@lfdr.de>; Fri, 20 Mar 2020 09:09:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 14E0E18CAEE
+	for <lists+samba-technical@lfdr.de>; Fri, 20 Mar 2020 10:56:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=ywJNltKSTW0rcbaDRiBniKI9wjCsVcJoHDJjcXv14W4=; b=UJIuTwGYNcmzb2txbDBnmyFLl1
-	K9A9t1GMzxqhhpWrrSSmaC2m9yiVedFcaV5IkMDlPY2NF6iccB/b2rmXoaaaxDZXbZCJ3LwEPFD5P
-	rzqUDGGbyJOBF+mmuCxPfKW2zCBujOwpD/lBt5XSjR39hwhDIH8jVhsYp8sdtyn0znNzUCNBtzRfT
-	IakhY9r/v+w2Qakhojv5vv3ajPwFn9p5OkebhEjw2eoU0hBXAAF4/7HZOLXw+9p+/GQTkDjDuQLx2
-	X0qFHIJh271k1aWX+qzpW2IdV/80UXVOJGc2DTIbKW5BLgjvSeNp+2KQPpZkl0yucOm+GdpB/+N6s
-	gU1ObJLg==;
-Received: from localhost ([::1]:31350 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=LoDQjo+aQgxapbS4UxoNLvMrEHAAx2QHwAnnCXEELR0=; b=rkX+bQgjFRL2aSYExgDnjnI9GN
+	XmtEnPKmGMedhrWGBw5W8dH0z50Z5SvDo50rJwGRDAGKZumF/bwUTgE0uiFkbunsE/D1HEi8yVK3h
+	8ootCI7ZCr1Ac+G8UX4WRRy4LjpHjHeJAwArFj4N+WOL57VnbE/oUBYCEkHayhVtZiy4HUYWfGeZH
+	71ZCIxdFvKIKj9VbuTsujZRK92ZvJjd0vr5iQk8+wa5d4xUJzOHDxQzrr8rvWFahm24P4Bs0fiBHn
+	ykdwxYremLfwGbBqqtqPtZ1gvwIPRUlTIsg/VRP1UGihnUSLv0eXbEtWg+/dEHa6wIthLVMYI147W
+	gvmjGJsQ==;
+Received: from localhost ([::1]:39440 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jFChE-000FjP-Ji; Fri, 20 Mar 2020 08:08:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:27524) 
+	id 1jFENH-000GsH-EJ; Fri, 20 Mar 2020 09:55:31 +0000
+Received: from bilbo.ozlabs.org ([203.11.71.1]:53133 helo=ozlabs.org) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jFCh9-000FjI-RV
- for samba-technical@lists.samba.org; Fri, 20 Mar 2020 08:07:57 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=ywJNltKSTW0rcbaDRiBniKI9wjCsVcJoHDJjcXv14W4=; b=yT4IB/kd6sbOXs2dETpoLuZQ1p
- I95Qm4fAHmrkrFgOPMmaCajaV0UnFArWgdmoWGFIIwjacGcOxI8BwZwINGWlSoiBhW7xX9VzKy/W+
- 4xrGcHzp+qPZPTAjnXeE7YP3+uiHzmUV4+lFXt5Q/rzZpIKuThWkVSI37CkM46g+S+G234hcrlBTF
- zdLe/2HWugR4vtYpJ9lRjiVV54swB/8cjW4fKBm338YGaIuFxmNOhXQpQUEOz0kxfQw6ZY9BCbm4Q
- UQYtbYYBvWFKgO4a3NRmshDcx/Ztbr0nDm3nqvdZnVIgtI8OVeXcZH0k00PjlF+mOnc2hU3288MV7
- KXHtcq8H6KqDzTXC4wLB7+5GhccbPxVBFkCIONxt8R+AkoucaHhn4FZo2pprEP1w+hUPOq7y6VL6j
- K3oE4uhHLU7WDmw6c0lMq+oSEBu+q8Cu7kTOmupOyvTknrJfnBqSeI6VPMilk3bfjtH0coEZrSKPs
- 5S9OFd3G3qJ00yCclHC20eqp;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jFCh9-0005NP-6o
- for samba-technical@lists.samba.org; Fri, 20 Mar 2020 08:07:55 +0000
-To: samba-technical <samba-technical@lists.samba.org>
-Subject: [Release Planning 4.10] Last 4.10 bugfix release
-Organization: Samba Team
-Message-ID: <b416c744-ddb7-bbb9-807f-cae6b310513a@samba.org>
-Date: Fri, 20 Mar 2020 09:07:54 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ (Exim) id 1jFEN9-000GsA-Uu
+ for samba-technical@lists.samba.org; Fri, 20 Mar 2020 09:55:28 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 48kJzm1zZWz9sPF;
+ Fri, 20 Mar 2020 20:55:16 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=201810;
+ t=1584698116; bh=LwU4/qqc2JS1NWIPlLjsG0WUmBVQjMXhflzAPE7eF4Y=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=JTB5heQ3Jk4OjlYnjDrXe1Z7N6WwNgYcz/bWVNzBw0wPybS9yKqXPUmeqHiQANcoa
+ Nt83ORUyio5FUd0lD4B2YSLRyOzN0XKnVXUQC/MnUyDzaQrsXzcsjWR2UIcvPNnVVx
+ 1+DLL9vdHBmqkw3+uIuBMDZJK2+hdh4Scys9TsCoGm3Gh2LVRn7vqxk3SaFhD74p6Q
+ /rg/d0QrUKQorXTFthm+ablJE/Sgk7SXjJe+mbrjr5DViUwr2i1lASb8EgwpcuIXOm
+ bL09zLZrh2PpTjXTjmpWwr4/14N40BbKbkCfOh5eXg2DHIlkQFACYR4mgM9fJr7njN
+ vrADtXotgCyzA==
+Date: Fri, 20 Mar 2020 20:55:12 +1100
+To: Karolin Seeger <kseeger@samba.org>
+Subject: Re: [Release Planning 4.10] Last 4.10 bugfix release
+Message-ID: <20200320205512.651c6196@martins.ozlabs.org>
+In-Reply-To: <b416c744-ddb7-bbb9-807f-cae6b310513a@samba.org>
+References: <b416c744-ddb7-bbb9-807f-cae6b310513a@samba.org>
+X-Mailer: Claws Mail 3.17.5 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: de-DE
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,28 +57,39 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Karolin Seeger <kseeger@samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Hi Karolin,
 
-for your convenience, there will be a last 4.10.14 bugfix release on
-Thursday, March 26 2020.
+On Fri, 20 Mar 2020 09:07:54 +0100, Karolin Seeger via samba-technical
+<samba-technical@lists.samba.org> wrote:
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.10
-has been updated accordingly.
+> for your convenience, there will be a last 4.10.14 bugfix release on
+> Thursday, March 26 2020.
+> 
+> https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.10
+> has been updated accordingly.
+> 
+> If there are any important fixes that should go in, please let me know asap.
 
-If there are any important fixes that should go in, please let me know asap.
+I think that this is a very good candidate:
 
-Thanks!
+  https://bugzilla.samba.org/show_bug.cgi?id=14295
 
-Cheers,
-Karolin
+Strangely, the v4-11 patch won't apply with "git am".  However, if I
+cherry-pick the very same commits from v4-11, it works fine.  That is,
+the following works:
 
--- 
-Karolin Seeger			https://samba.org/~kseeger/
-Release Manager Samba Team	https://samba.org
-Team Lead Samba SerNet		https://sernet.de
+$ git cherry-pick 46e19f9f402..783335f207d
+
+Want me to attach a patch for v4-10?
+
+Thanks...
+
+peace & happiness,
+martin
 
