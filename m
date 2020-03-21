@@ -2,45 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C54F18DE91
-	for <lists+samba-technical@lfdr.de>; Sat, 21 Mar 2020 08:45:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D4F818E551
+	for <lists+samba-technical@lfdr.de>; Sat, 21 Mar 2020 23:51:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=hg2WDBJCVbhGgTS7rtgeuZ+pG3gVmDkmBcRPhDG7xuo=; b=RPCyykX6NcqgYkbAq1sfbB1eud
-	qeMb8IfpzlZJ2JosTUdc3rSEza+LuczLJ8v/xQvpb8onda5umBc42ssAikG9N8KtSOXNBPo5KZ3iz
-	9nrusFIy/F1anSn7Lgb4raoO/YswT1W9Og4q5lxNFb+PAfdIBJmoon6ivngtl+Is9h2jdA0OP4mdd
-	GuPdEtx1RPuglzprW0gzHkvIsq3lKW9Tm4DogzFxVxm8QVrwl+V73mmsZXRy4fqz/JgqyZo+OBsF6
-	Tq58IHfTTPm/kZMGtlupRch6qWph95xNGKwNUWhHbtpM0WntfnCbUJJQstt/q+ssWuHRpLAJMjZH5
-	40zTZr2g==;
-Received: from localhost ([::1]:27614 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=PM+/QGCjQ3ThAVNlGg2OZpJuO+zWUXsukPZoPaOzjE4=; b=NSM4LEtmYXIev5il8ZaF+40U2o
+	x4gnF32GvDrlmYIBrTa/53wDbcuFxiGJ226RB1/y9QTnSLds4VjQF6vxDjI560KWU4k6ZInIOrO0b
+	BddQIdRILcO8ArV4sVS4zKsytCvQA0Fog45iQ8BoO4vjhsjoXHZvAmOBIBpdwWApSdh7NrTNHgrV/
+	I7QOs7AAVaFz9jtyXLhfYn5RC3pXMRCBA4EYH9jWk6t2i8Y2aCAwPi/phrVkpxdjfJhyI6AeR1A4U
+	RzdHIRyL6LBn0x0sdazKSD29vKBuC/b+btZSswlM6jcI6LkI9OEreqWQoid/eeTCuIu/krMMssKcD
+	p0ZmhTYg==;
+Received: from localhost ([::1]:35104 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jFYoW-000Mwx-1B; Sat, 21 Mar 2020 07:45:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16786) 
+	id 1jFmww-000OYj-3o; Sat, 21 Mar 2020 22:50:38 +0000
+Received: from mail-yb1-xb2c.google.com ([2607:f8b0:4864:20::b2c]:41167) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jFYoN-000Mwq-Ou
- for samba-technical@lists.samba.org; Sat, 21 Mar 2020 07:44:56 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:To:From:CC;
- bh=hg2WDBJCVbhGgTS7rtgeuZ+pG3gVmDkmBcRPhDG7xuo=; b=DsZ56a4XKlM5U2JkLm4KNQck0G
- tD5aylSSoGLUODFlRocO0CXOXRpoRvnk5NzlsFpVB09qcBbUSqpRtmubRDsD+P5eXSYS26ukrDL5h
- WUf3Xl3rv4XlVzFUpUlSV5KxcSPTOmuieh6I+3XG/85CSlQ6mTDA37Gs268RRIFeTGKJtCKpZIOMF
- K73cfbjql3S8hx5KxCGe1g33UTooCD4R71zBLbvJ6YF5UhecmeYEpLBLi82INzYtZcP9Zl6ljvS2s
- Jh3qIfzi7FFM0eih+pN4LBGOelrgsbwk4a8fZavHnFaqaEqX/IVfZLYuYPbe8dv2ihysH4mgh+GpW
- BDBJuIJn45b1LAq7mMZ2DYtc0nyT0rqOhkLPFOKbOTJcGQ2vPe/1r6avFESNsXGhRongqr4HbO9C+
- bEgY/aRWit70Qdn406qGpUGd5ZHIhjleYxPfJqc/A6H9PKERXV34xjAE7zRx9CHUNq6WdkhbC2yM4
- 89bZfL+GJI5D9FNFu11Lkb5N;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jFYoM-0005fB-Tb; Sat, 21 Mar 2020 07:44:51 +0000
-To: samba-technical@lists.samba.org, Karolin Seeger <kseeger@samba.org>
-Subject: Re: [Release Planning 4.10] Last 4.10 bugfix release
-Date: Sat, 21 Mar 2020 08:44:49 +0100
-Message-ID: <1964484.BGPSZMXGVg@krikkit>
-In-Reply-To: <b416c744-ddb7-bbb9-807f-cae6b310513a@samba.org>
-References: <b416c744-ddb7-bbb9-807f-cae6b310513a@samba.org>
+ (Exim) id 1jFmwr-000OYc-7i
+ for samba-technical@lists.samba.org; Sat, 21 Mar 2020 22:50:35 +0000
+Received: by mail-yb1-xb2c.google.com with SMTP id d5so4761834ybs.8
+ for <samba-technical@lists.samba.org>; Sat, 21 Mar 2020 15:50:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=Y53AUEo9bZKJnjtXkQB+mcrwVymlzuxy8y14/JhruvQ=;
+ b=i3iJNWeFi41MplQx7tvZRlriaXyMGY/JYvYNtds1uNMlbHonlmqcJ+bwfyX12eeQi3
+ EuXaaaeIV07m6ifwZXIC2BFCJCp0I8Jy65Sgt8smMVfWgepyl8y5R+QV19zaGa054wVN
+ DkYdR8+zVNTV0fCuLxTY2zx5v715LMe4GhjdAYGl3dXcTu0bNdHhtw0+mKSVCb9QLl0M
+ QCiYcJCqsc5nxOXGlTHac96ZmOMP/oHSkK8tPXCvf99CElPc7Dc4o/uxg57rhL95xKlz
+ oV1DTJ3KEXiN48kEpNREmR+mqED8ZJe6ngpMg4JgQ1bQ/5Xj81wiiDpjm8JET1aZe14R
+ +lvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=Y53AUEo9bZKJnjtXkQB+mcrwVymlzuxy8y14/JhruvQ=;
+ b=lhFXMOzEzhtACenwLR3vRbNtjSF+gD1LBFap7DjUxXSZZSFRDitjTSYfFW7slIzYQe
+ Sp9qoVIvQHZQSTLVbZ2/j1Pp/stjrVYnbp+RxpfNhQoPLw/JsUtoOaVrlpLVkCEUv3aJ
+ A4HsY6UTt15r9qZFfbahjBxsk8D1pePHgWT/VJzjosxOZ5YoupPc1TqA7iTd+7jEsPre
+ uhT0mEXDL+TgnrO/QKm71pigF8Ax6j/gaToB+jSvVJfSf+0PMtnwIpS9Xjz4Pwafem0I
+ 3o/JFXc3B5t1jr/QIcup0IqWo4Ie3IhDfajEYKDwK8qAeKkzHRAhfihZITAaIO2SaMsA
+ Awlg==
+X-Gm-Message-State: ANhLgQ3GOsOFK347C6WDy2PgA+wgRaIu8xhYRYp+cjejfogcXKYRXWrN
+ 1EUZoZ4wvKLG8HvNcePv0spBDqNwzzL5DJU4viWxk/xE
+X-Google-Smtp-Source: ADFU+vszXkg8fmPYHZp9dN2d3iuuEZk0W8dsgDp3FQnNLI+u6EV6reBeTpBh1Az/9yyfFGX24rMEdRcB6BNpCc/zAUo=
+X-Received: by 2002:a25:3187:: with SMTP id
+ x129mr23985595ybx.397.1584831028478; 
+ Sat, 21 Mar 2020 15:50:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Date: Sun, 22 Mar 2020 04:20:16 +0530
+Message-ID: <CAKJM6MkeM-qmg71j0cykaRexFC6f4q8XTL9se_Fi8BKfFb4VCQ@mail.gmail.com>
+Subject: GSoC 2020 introduction and query
+To: samba-technical@lists.samba.org
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,21 +66,21 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Rohit Dandamudi via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rohit Dandamudi <rohitdandamudi.1100@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Friday, 20 March 2020 09:07:54 CET Karolin Seeger via samba-technical 
-wrote:
-> Hi,
+Hello all,
 
-Hey!
+I am currently doing my undergrad in Computer science and Engineering at
+CBIT Hyderabad, India.
 
-> for your convenience, there will be a last 4.10.14 bugfix release on
-> Thursday, March 26 2020.
+I am interested to work on the project idea "Samba binary size reduction"
+as part of GSoC 2020. I have prior knowledge of C and Python as well as
+contributed to open source organizations like FOSSASIA, Macports before.
+Hopefully I am not too late, kindly let me know where to get started, and
+what should be done to make a strong proposel.
 
-Thank you very much Karolin!
-
-
-
+Regards,
+Rohit Dandamudi
