@@ -2,48 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B81018EAFC
-	for <lists+samba-technical@lfdr.de>; Sun, 22 Mar 2020 18:45:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 59A351908DF
+	for <lists+samba-technical@lfdr.de>; Tue, 24 Mar 2020 10:16:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=cV4ZsmBSuopv+75NjqIE85Zy5F6y71zj/rkd8vtIlMk=; b=MqnCvlMI1FmPzb5qIYVR62A97l
-	LPRpqO/QDW3mtkZLWpAbOGD5+hckw+gjinScrbJoYXLVCBagYRN3zyvYBL6FBIiUCWzXnwal/jDgn
-	4G+dFfMz9bxpRBgj7cdB7ZMo7TPgRWMNGFx0dw08jz8AfDLyecCAHoQnfBFCqlnTWInVnCtDVfWCA
-	9HkBhYdVhHe5t/FvgyeT68Fq1Tln9Y0Sq+ALxbL5/9SvJi90Ah8rlYYdsuNiHMppOU0zFNK/RCGiW
-	9kmR4hIdA0mHXPwZC4umrJuB5hGmKA1hvMBpQDlpfwwnCBTRbgRqaAIZPCWiWyAA9CemZgYPCH++q
-	vcfiu01Q==;
-Received: from localhost ([::1]:47164 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=GLbs6Qg1eT6JD3PUvI7k2aHX0F2/F3ytGX64IHy9EPI=; b=ascCqBiXHsTqYak5rmLmaa5Gw5
+	CJd9SrzAc3XdqxS/kOS7/HCsPAmBY+o3YVhnX35Qa9gGkXn7xYHVSymUiYPoDoKItx8Rnl+JIsntW
+	36NhWOIMraa5EUO6UCaK4nMbnpSWUltt96+5w57E7FcZjNKsMfT/NqLwFcp4GRjU45KGdTy2EDabd
+	poOGEj41JOUFCmpTdRG0C5IwebnhWqYGr0N5icQCXFKMXVjaXYr1LbLN5k15wMFnYOD4t7P72x+lO
+	sBFgZttNBsAwNgldtMGQQQNx4yN0zorn+XZufr4YUP1IM7fEmnkZX4PGk49Sm0DgnEgq7GzTj3wny
+	XxJFiZ2w==;
+Received: from localhost ([::1]:25682 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jG4fA-000RBk-RJ; Sun, 22 Mar 2020 17:45:28 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51856) 
+	id 1jGfes-000X8W-LS; Tue, 24 Mar 2020 09:15:38 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51738) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jG4f5-000RBd-SD
- for samba-technical@lists.samba.org; Sun, 22 Mar 2020 17:45:26 +0000
+ (Exim) id 1jGfeo-000X8P-8t
+ for samba-technical@lists.samba.org; Tue, 24 Mar 2020 09:15:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=cV4ZsmBSuopv+75NjqIE85Zy5F6y71zj/rkd8vtIlMk=; b=c4K0bc+Z1uelYf4T8rnJqOMO38
- 9FOajswrzXtDKaER02kWolQZWO1qmI6DvwPA0ZY6iDH8sZGptZd6oKwWYCePosbzIwXB2jMQa50rl
- gml2tXzRIICgeW7yP5n4/AQmKEkospSMMmAAa9+QR/BZiyDTOwyIAOUClltA+gZM5HuHRl077HZ23
- bWK5lt7FjCMy/KCl6N3v+S6AcP4Hk3PsKcutKr2G6tglVNKZpGJQZjepcsdblyOUYkiDaKJQyb2Q3
- 2BCb2bPsAjbbHVHGbU382Bvib6v6l3HYmcszxj4RZJSAA0XC6hB3+jTHUi+qaZHXTmSzOHzpLQe3e
- u5HIm81+ZMop1F4JmE7Cpf6eR1j5h2eh/KoDdO8l4ncvfxuYNDCZoMwmCkvie4hi6PYLLg0NIuLC9
- Cwhgw9k5g4orF4b75Ht3+TpRsiPJoxR0bkHDIQIQN4nN2pTxa4C/3yRKfrfndcQSqHGhu26kKHq2P
- X5qF/Ed+vNFIYi961M1MmMkc;
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=GLbs6Qg1eT6JD3PUvI7k2aHX0F2/F3ytGX64IHy9EPI=; b=Eb9mFkavLIVCfbJOoUVIAx6je1
+ 1sg8hxyf5x15mfr5OoAwZXf+BpuplCK1C+yiY3yEGMh+qUBj/HIS8MupX4cjMIw/vcPrurhtRaPQL
+ EiQUe0vtAfU462H6qyjbdY/yb4Hxo8x44eGdBXDLfpcLLgvLNTT/kRaB5zJGg0o49h9z6HNwkZOyx
+ 5cPilL6RnknKKbvMn7qMdCBKMK34Yh06Am2j7Vy6Ax4kw+uPcawaYWI2c3Chx68vS7bpn4STRFNnd
+ sLjJweWG8Tj4wL0imHxr8dioiVsO+gW9ewu7YzVN1z9d7NVQUoqr0hv0bXYO33H4H/d9EwTtZp00y
+ /nmIzqPFO8s54AscORccK5WZQA+TeYdvSWbGU+oHrIISUYftjcp9MiP4SC4yw0SXQHpnhz0iP+5Ei
+ Da4O4j5ygJJbSSYWBAXISVsBV7V8M4mwaLMoIV7lN29cz+HkgQ/bdp7PuTGV+pCg9S/RZukoD6xSP
+ ou1R+F3vx5fmaCnX3aFiLkY3;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jG4f4-0006TF-Hk; Sun, 22 Mar 2020 17:45:23 +0000
-Message-ID: <5c944d9e02acaca977b490498bdb403e8ba04114.camel@samba.org>
-Subject: Re: GSOC 2020: Introduction and queries about the MS-PAR related
- project
-To: Rajendra Prajapat <raj.code.pra@gmail.com>, 
- samba-technical@lists.samba.org
-Date: Mon, 23 Mar 2020 06:45:18 +1300
-In-Reply-To: <CAMO=cWeDUEKZYm5fDDgLhUpsagMcf_+mzmfBqaHDim4fU1W=ew@mail.gmail.com>
-References: <CAMO=cWeDUEKZYm5fDDgLhUpsagMcf_+mzmfBqaHDim4fU1W=ew@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jGfen-00042J-MF
+ for samba-technical@lists.samba.org; Tue, 24 Mar 2020 09:15:33 +0000
+To: samba-technical@lists.samba.org
+Subject: Flapping drs replica_sync test
+Date: Tue, 24 Mar 2020 10:15:31 +0100
+Message-ID: <1654325.iZmO6VesHS@magrathea>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,66 +53,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sun, 2020-03-22 at 21:54 +0530, Rajendra Prajapat via samba-
-technical wrote:
-> Hello Everyone
-> 
-> This is Rajendra Prajapat, 3rd-year computer science student from
-> IIIT-Dharwad, India. I am interested to work on the project idea
-> "Print
-> System Asynchronous Remote Protocol Wireshark Dissectors" during
-> GSOC-2020.
-> Last few days I was exploring MS-CIFS, MS-PAR and MS-RPRN protocols.
-> I am
-> good at C, C++ and python programming. I have prior knowledge of
-> working
-> with Wireshark.
+Hello,
 
-That will be a big bonus.  
+the samba-ad-dc4 job fails for me very often in CI and always with the same 
+error:
 
-> I am not able to connect to IRC channel #samba-technical.
+UNEXPECTED(error): 
+samba4.drs.replica_sync.python(vampire_dc).replica_sync.DrsReplicaSyncTestCase.test_ReplConflictsRemoteWin_with_child(vampire_dc:local)
+REASON: Exception: Exception: Traceback (most recent call last):
+  File "/tmp/samba-testbase/b21/samba-ad-dc-2/source4/torture/drs/python/
+replica_sync.py", line 278, in test_ReplConflictsRemoteWin_with_child
+    self.ou2 = self._create_ou(self.ldb_dc2, "OU=Test Parent Remote Conflict")
+  File "/tmp/samba-testbase/b21/samba-ad-dc-2/source4/torture/drs/python/
+replica_sync.py", line 126, in _create_ou
+    samdb.add_ldif(ldif)
+  File "bin/python/samba/__init__.py", line 230, in add_ldif
+    self.add(msg, controls)
+_ldb.LdbError: (68, 'LDAP error 68 LDAP_ENTRY_ALREADY_EXISTS -  <Entry OU=Test 
+Parent Remote Conflict,OU=replica_sync1279459,DC=samba,DC=example,DC=com 
+already exists> <>')
+FAILED (0 failures, 1 errors and 0 unexpected successes in 0 testsuites)
 
-Don't worry, IRC is not very active these days.
 
-> From the idea page, I got to know about the following tasks
-> 
-> - Write Wireshark dissectors for MS-PAR
-> 
-> - Improve existing smbtorture tests, Which demonstrate how the
-> protocol
-> works against a Windows server.
-> 
-> 
-> Please let me know where to get started for MS-PAR protocol and are
-> there
-> any tasks, which we can do to improve the proposal before submitting
-> it?
-> 
-> 
-> The link for Günther and Andreas' SambaXP presentation
-> is
-> not working on the idea page. Can you please provide the new link of
-> the
-> Günther and Andreas' SambaXP presentation?
+Why does that entry already exist? Missing cleanup or timing issue?
 
-To be clear, I won't be your mentor, but I've found the slides and
-fixed the link.
 
-All the best preparing your submission!
 
-Andrew Bartlett
+	Andreas
+
 
 -- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
-
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
 
 
