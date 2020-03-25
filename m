@@ -2,42 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55BC6192182
-	for <lists+samba-technical@lfdr.de>; Wed, 25 Mar 2020 08:03:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97F601923D4
+	for <lists+samba-technical@lfdr.de>; Wed, 25 Mar 2020 10:15:35 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=0u6N6+HsNeAaU5TmvWyL9kDd3kE9/f6hWvjGnX1Xy8g=; b=jq7nHWdqjiha+RkBAafDtiHqzH
-	Fg1vKpPUsAiiyqg3wsH8zGJmLzlEzIjmb9iflM9yO1LPcPm3T/PVPjPQ8aw+8SDjhPJ2Pl0Smd1pC
-	93wnYK8aaEx7mZxbRmQwtL2A6dq7EGsqIr2EmYW5TkZTKbr4PeLl5uwMee8QYXeXUEe8pR8jqtUI4
-	mXqdrgWh14Et4RIVlJ3zYtP3v0mkfJmVv4SvJFRMTwFlO1B4ZBtINY8pvQZ/nqPJrZA0G45H0OWWk
-	3tvOnNvVafQvmL1+BBqqIkV3eI/Z+J0KOYtBIFc+AHkEmDnBiOU4NXjKU6xRtaWbleVvQYnyixgg/
-	ysYrTZqA==;
-Received: from localhost ([::1]:27158 helo=hr1.samba.org) 
+	bh=WPbmoFeFYe+LhoqWr5x8XtJJOhyXSmP8W/eyJ/Fc/lc=; b=yK23HLPfeFmjFyF/+GjO9hXflQ
+	uE1ZzouIfC43Arv/bNoteB53r67+N89eOmU5jVqZETHF7rUOyZdbOT91vQ+SRO9T/N7R+KVLwvlNy
+	cuFXyfKewrmG6ya49Jfb5YNbrp0N14TfiMMAZcOkpdV9zrjZPqKA+MvVyxierDKQPmrbDJ+kUM8G3
+	KNbgnpOx9QAmVf3CgD9iwY4N6q5pa5/gmiV/mfhOiLwaLMS2ngTG+DPyNTh3lL4cI4VJFiuAZqOkm
+	VvUDg7QFfPiGNiW/ldlgdVGadJShLsaH+FjGkZmwXNdac05fbRifpnq0+74GguKRnYBYsBfm4BvNA
+	RzUs9WeA==;
+Received: from localhost ([::1]:30588 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jH03d-000exc-Pa; Wed, 25 Mar 2020 07:02:33 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60134) 
+	id 1jH27m-000fY9-Th; Wed, 25 Mar 2020 09:14:58 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43282) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jH03R-000exV-0l
- for samba-technical@lists.samba.org; Wed, 25 Mar 2020 07:02:23 +0000
+ (Exim) id 1jH27i-000fY2-1P
+ for samba-technical@lists.samba.org; Wed, 25 Mar 2020 09:14:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:To:From:CC;
- bh=0u6N6+HsNeAaU5TmvWyL9kDd3kE9/f6hWvjGnX1Xy8g=; b=GcVuM1e4IydPiCVa+2mFWWbfCq
- MYsvAQLKj6So5XtES/fXUbz+HwJLxq7COJhYKbrI9h4EFfLlxLHaJEM+W6EDXlgtdott0zCy+a56I
- Dx5veD6k1ywnoD8omdBPluFy1NAEQn8dLIcJN/lxugdODgNDoejkHhRnUfdK1RltI/lR9CD5lhcq0
- LpK4emD6Uy25YAlkAOxPVLQD0axMMIqHIZNsXPi2l9AvDJKj/n0yDOqPpRg00fJuvY7Y++RCgH+Nw
- vBQ/QADV67SOntJ2YQMRHhIu9g/wwE60P/+B9lFEaEnFyrkXCUWPk8QMcnmoJkyAv89XZN3UtAXn3
- SJpfHrd/qI7ETnqIlKSURmQ6xlNdaW/Px2vCUvYYUQ6gTyq4GF7f2vJN7PZqACVoEkLNCG2I47A3P
- STFWZHF6TBLsu4EZJ8IiLNI1t6WCKtPuPqpKpnfmLWRyxC7FOb+t++uIApgd86FZLfLfnhbpp217P
- dHa6S1T8KGOZ4sK/y8dLaQvl;
+ bh=WPbmoFeFYe+LhoqWr5x8XtJJOhyXSmP8W/eyJ/Fc/lc=; b=vcfzdeVaFEpGcOVdLm13AVGjlo
+ hGYdOcZWNWU8Z8N3hzMc8PExtn12hwndtp2ip6oAoi937JJjP6bAl/X3BtDVFxhzbqKuzhB7nak/I
+ fjrNoYQG+9c6ZafjkfliW1hM3Q5Q+Uq5wxUVQcOdETGYHw1cwF0fYCDGcyRYuV/nQzY9/x8XZ056B
+ vQidPrVBlhXvVZQeQQdTKCNZoK0E/knKIqU7fJZXsPSJ2jvBgMZJoj6mOZ8ZyJZKNLPQy7OjDEbAy
+ c3ytMEOIJivYmeXdVd7HoOC8U46xOyDJna9frigCFIw/6C3YEHYNWMnmae6MurWUwIChIh+/QYNid
+ pz4AzDwDaIWMXh1XOSE+aoDEqzTzsd0/JZeXbDREZLwuohuqGhg+Ti8K4fDaga3fjxj0PH/zLwtwj
+ 1xqcnpKmD1YyKQbe6pkCIoQGf84Pzs3j5VD1qaHkGLOs2htw6Zlxb7/sr1Yloo6d15I2LLqk1q74r
+ nmXSbWgAdpzniAx+GMIw5vgu;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jH03P-0005bq-Mv; Wed, 25 Mar 2020 07:02:19 +0000
-To: samba-technical@lists.samba.org, David Disseldorp <ddiss@samba.org>
-Subject: Re: git signoff+ and review+
-Date: Wed, 25 Mar 2020 08:02:19 +0100
-Message-ID: <3108280.U1x5aBp6Oi@magrathea>
-In-Reply-To: <20200324125146.0479f8a0@samba.org>
-References: <2070261.IvKQ8U6GgO@magrathea> <20200324125146.0479f8a0@samba.org>
+ (Exim) id 1jH27h-0006NZ-DY
+ for samba-technical@lists.samba.org; Wed, 25 Mar 2020 09:14:53 +0000
+To: samba-technical@lists.samba.org
+Subject: We are ready for Sanitizers!
+Date: Wed, 25 Mar 2020 10:14:48 +0100
+Message-ID: <2428697.1TPDjVqDAD@magrathea>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
@@ -59,62 +58,22 @@ Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tuesday, 24 March 2020 12:51:46 CET David Disseldorp wrote:
-> Hi,
-> 
-> On Tue, 24 Mar 2020 11:00:11 +0100, Andreas Schneider via samba-technical 
-wrote:
-> > Hello,
-> > 
-> > as a daily task I have to sign commits and also add my review tag after
-> > inspection.
-> > 
-> > As git-filter-branch has been deprecated and the replacement is
-> > git-filter-
-> > repo [1], I've written some really nice python tools to make my life
-> > easier.
-> > 
-> > In a git repository I and do:
-> > 
-> > git signoff+            # Add my signoff to commits I authored.
-> > git signoff+ --by metze # Sign commits authored by metze,
-> > 
-> >                         # because he forgot :-)
-> > 
-> > git review+             # Add my RB tag to commits I'm not the
-> > 
-> >                         # author of or which has my sign tag
-> > 
-> > git review+ --by metze  # Add review by metze
-> 
-> These look helpful. Keep in mind that git comes with a built-in
-> interpret-trailers command, which is also pretty useful for this (and
-> handles duplicates, etc.). I have the following in my git config:
-> 
-> [alias]
->   # add a Reviewed-by: David Disseldorp <ddiss@samba.org> trailer to top
-> commit msg rbm = "!f() { \
->     t=\"Reviewed-by: $(git config --get user.name) <$(git config --get
-> user.email)>\"; \ GIT_EDITOR=\"git interpret-trailers --trailer \\\"$t\\\"
-> --in-place\" git commit --amend; \ }; f"
-> 
->   # add a trailing Reviewed-by: $1 trailer to top commit msg
->   rbo = "!f() { \
->     t=\"Reviewed-by: $1\"; \
->     GIT_EDITOR=\"git interpret-trailers --trailer \\\"$t\\\" --in-place\"
-> git commit --amend; \ }; f"
-> 
-> For batch reviewed-bys, I use "git rebase -i" and run "git rbm" via
-> execute hook.
+Hi,
 
-'git review+' is doing that for you in one go. It is also really fast. Also I 
-don't see that intper-trailers checks e.g. the author of the commit.
+we updated all the wrappers from https://cwrap.org/ with the latest features 
+and thus can run with AddressSanitizer, UndefindedSanitizer etc. now!
 
+For at least AddressSanitzer you have to LD_PRELOAD=libasan.so, to disable 
+deep binding of dlopen there are env vairables available like:
 
-git-repo-filter is available on Fedora and openSUSE as a package.
+SOCKET_WRAPPER_DISABLE_DEEPBIND=1
+
+We have a lot of work to do with UndefinedSanitzer ...
+
 
 
 	Andreas
+
 
 -- 
 Andreas Schneider                      asn@samba.org
