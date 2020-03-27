@@ -2,42 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0A161955F7
-	for <lists+samba-technical@lfdr.de>; Fri, 27 Mar 2020 12:06:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2519A195B1B
+	for <lists+samba-technical@lfdr.de>; Fri, 27 Mar 2020 17:31:11 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=MMJ2/TmsYjIGC9CXRySmZcqv5SiieINr7ELLHBGKO5Q=; b=Oa1W+hpQ+mDQyvW4Po5PrGKwfG
-	Jd5sfvvDCPT3kJE4gzDHycCbW1zTLWxszx5ESR0W5qtYQu3FGWK6ueLliVHy+/90se+3B2F8HxAhe
-	kBtiuBuw0d6rz4xkipoCAMe8Gs/uKKOVbJis2Egd9LpwvyOueF/UZN1hkozYYcce4JOCtsF91N93i
-	0rsIXRYR8D0Ox8BbltyO0VCOAXuyAOG7jIkG+kj7VyaqJAr0C5czzpNK2ah3dUl+lhR0rKiheWDtH
-	CzGufmh/LtCjJ4EjQwTitrhXW32ePELi488bVXwPBfAKCcYUy/7hwnGCOcHlJz8smCe8sNw1JcB2T
-	jZXB8XGg==;
-Received: from localhost ([::1]:42698 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=zcyWhGkyoM7xi1g6fSOS8uUelZxM39Ohf3lbqEXYugc=; b=RUcwfY1ThVlshXEntW5V0tn1Kc
+	4jwZMIkJySnlpfAhb8e91gY7+tyG4J6harB4AsRVqGVsQc5uEHSIo9jYupiHAN4fRAqt/Ra2ZZ6Tu
+	+lNtC6Zg+xbP4IWXhPoJbXjVxnWaPGO5lDTUGe90lNDhrjjPdmCwVKChhKadxGVl8dmU/d0SWbaB2
+	oyXr11jwgMFS/ZkCmmC0oaDvQib+pfGd/P6j+RuwMqgM84pAahhfL9ixL61CU7EGo3bM7AcuuHPQN
+	k0oUY+lScXO0FEbTZYc7mDwk9kU/+rn80MNPAz2p/qxl7qVr5XTyyg6duAcKYMBOD6xFsLdBDxz/X
+	Vl7yeVWA==;
+Received: from localhost ([::1]:46470 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jHmnt-000qTb-4d; Fri, 27 Mar 2020 11:05:33 +0000
-Received: from mx2.suse.de ([195.135.220.15]:53702) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jHmnn-000qTU-52
- for samba-technical@lists.samba.org; Fri, 27 Mar 2020 11:05:29 +0000
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 78030ADFE;
- Fri, 27 Mar 2020 11:05:24 +0000 (UTC)
-To: Long Li <longli@microsoft.com>, "longli\@linuxonhyperv.com"
- <longli@linuxonhyperv.com>, Steve French <sfrench@samba.org>,
- "linux-cifs\@vger.kernel.org" <linux-cifs@vger.kernel.org>,
- "samba-technical\@lists.samba.org" <samba-technical@lists.samba.org>,
- "linux-kernel\@vger.kernel.org" <linux-kernel@vger.kernel.org>
-Subject: RE: [PATCH] cifs: Remove locking in smb2_verify_signature() when
- calculating SMB2/SMB3 signature on receiving packets
-In-Reply-To: <BN8PR21MB1155DCB17C62EDCE529922ABCECC0@BN8PR21MB1155.namprd21.prod.outlook.com>
-References: <1585159997-115196-1-git-send-email-longli@linuxonhyperv.com>
- <87d08zzbg6.fsf@suse.com>
- <BN8PR21MB1155DCB17C62EDCE529922ABCECC0@BN8PR21MB1155.namprd21.prod.outlook.com>
-Date: Fri, 27 Mar 2020 12:05:23 +0100
-Message-ID: <877dz6njm4.fsf@suse.com>
+	id 1jHrs0-000rMY-JN; Fri, 27 Mar 2020 16:30:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:65152) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jHrrq-000rMQ-PL
+ for samba-technical@lists.samba.org; Fri, 27 Mar 2020 16:30:06 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-Id:Date:Cc:To:From;
+ bh=zcyWhGkyoM7xi1g6fSOS8uUelZxM39Ohf3lbqEXYugc=; b=RfvvtnpO4Z+fkJwC8Ei+68AnYJ
+ rzY7zwedYBmmnZK+pMGzF3HMitcDn30kABrZooyE2WA+zwugtgC9CXnr99OwTU9aBp8nkWk+RTcev
+ aXj/g33UzpOEyvORmNOOn0fyR260MNns6rJjocbzk7LJCtfLvB8j3qLIz93NNR6CpWBCM7SWSB3Ru
+ mDLFdAgMnIyLk46C0rp6xq0a/nmNF92QhivlXnXc/4VE+Q/nlMG+x4JfPcBFcqRRMqk1m7sPfc1qR
+ LchIXJANJUG6V41g6OIcnXupZwaEj6UgdYEZeZazkn+88giEVqVCRygDW1U/oCTWwuXPDdCCLg7wQ
+ eKLz8M6h2yW798I5/253gOtGVOOI3o1a8oT6XvP/DpDGNCMP9tCMGo/hxK7iO6VVjwRqwrM9yham2
+ d+NTgmkvJ1s3AGkBE+rNc1GTgdYsB7YxenS1etvOoCGYrhlWTA2prhpNEYNJcRxmpXfsxKbZeTjhg
+ LQV2j8V753DV87gk+zvMMCr3;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jHrrk-00078a-0s; Fri, 27 Mar 2020 16:29:52 +0000
+To: samba-technical@lists.samba.org
+Subject: [RFC PATCH RESEND] vfs_ceph: allow mounting a named filesystem
+Date: Fri, 27 Mar 2020 12:29:50 -0400
+Message-Id: <20200327162950.94545-1-jlayton@samba.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,28 +52,114 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
+From: Jeff Layton via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeff Layton <jlayton@samba.org>
+Cc: Marco Savoca <quaternionma@gmail.com>, ddiss@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Long Li <longli@microsoft.com> writes:
->>need for locks). AFAIK there's no state that need to be kept between
->>signing/encrypting calls beside the access to keys. Is it that expensive =
-to
->>create/release?
->
-> My guess is that crypto_alloc_shash() is a heavy call?
+Signed-off-by: Jeff Layton <jlayton@samba.org>
+---
+ docs-xml/manpages/vfs_ceph.8.xml | 16 ++++++++++++++++
+ source3/modules/vfs_ceph.c       | 16 ++++++++++++++++
+ source3/wscript                  |  6 ++++++
+ 3 files changed, 38 insertions(+)
 
-AFAIK there's no IO, just some memory allocation. Could be faster than
-locking. Something to look into, maybe...
+I had a few spare cycles today and went ahead and plumbed in this
+support since Marco had asked about it on the ceph-users list.
 
-Cheers,
---=20
-Aur=C3=A9lien Aptel / SUSE Labs Samba Team
-GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
-SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, DE
-GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
-nchen)
+This builds but is otherwise untested. If it looks reasonable, I can
+clean it up and test it out in the near future.
+
+Thanks,
+Jeff
+
+diff --git a/docs-xml/manpages/vfs_ceph.8.xml b/docs-xml/manpages/vfs_ceph.8.xml
+index 5b32122113a8..6f0001c8f52c 100644
+--- a/docs-xml/manpages/vfs_ceph.8.xml
++++ b/docs-xml/manpages/vfs_ceph.8.xml
+@@ -127,6 +127,22 @@
+ 		</listitem>
+ 		</varlistentry>
+ 
++		<varlistentry>
++		<term>ceph:fsname = name</term>
++		<listitem>
++		<para>
++			Allows one to explicitly set the filesystem name that
++			should be mounted for export via SMB. This is only
++			supported on Ceph v14 (Mimic) or later. Empty by default
++			which makes samba mount the "default" filesystem in the
++			cluster.
++		</para>
++		<para>
++			Example: ceph:fsname = home
++		</para>
++		</listitem>
++		</varlistentry>
++
+ 	</variablelist>
+ 
+ </refsect1>
+diff --git a/source3/modules/vfs_ceph.c b/source3/modules/vfs_ceph.c
+index 7f4d65d48718..5c0a939390f6 100644
+--- a/source3/modules/vfs_ceph.c
++++ b/source3/modules/vfs_ceph.c
+@@ -90,6 +90,7 @@ static int cephwrap_connect(struct vfs_handle_struct *handle,  const char *servi
+ 	int snum = SNUM(handle->conn);
+ 	const char *conf_file;
+ 	const char *user_id;
++	const char *fsname;
+ 
+ 	if (cmount) {
+ 		handle->data = cmount; /* We have been here before */
+@@ -100,6 +101,7 @@ static int cephwrap_connect(struct vfs_handle_struct *handle,  const char *servi
+ 	/* if config_file and/or user_id are NULL, ceph will use defaults */
+ 	conf_file = lp_parm_const_string(snum, "ceph", "config_file", NULL);
+ 	user_id = lp_parm_const_string(snum, "ceph", "user_id", NULL);
++	fsname = lp_parm_const_string(snum, "ceph", "fsname", NULL);
+ 
+ 	DBG_DEBUG("[CEPH] calling: ceph_create\n");
+ 	ret = ceph_create(&cmount, user_id);
+@@ -131,6 +133,20 @@ static int cephwrap_connect(struct vfs_handle_struct *handle,  const char *servi
+ 		goto err_cm_release;
+ 	}
+ 
++#ifdef HAVE_CEPH_SELECT_FILESYSTEM
++	if (fsname) {
++		ret = ceph_select_filesystem(cmount, fsname);
++		if (ret < 0)
++			goto err_cm_release;
++	}
++#else /* HAVE_CEPH_SELECT_FILESYSTEM */
++	if (fsname) {
++		DBG_DEBUG("[CEPH] fsname setting only supported on Ceph Mimic and later\n");
++		ret = -EINVAL;
++		goto err_cm_release;
++	}
++#endif /* HAVE_CEPH_SELECT_FILESYSTEM */
++
+ 	DBG_DEBUG("[CEPH] calling: ceph_mount\n");
+ 	ret = ceph_mount(cmount, NULL);
+ 	if (ret < 0) {
+diff --git a/source3/wscript b/source3/wscript
+index 48194f261a48..608f4ef4b237 100644
+--- a/source3/wscript
++++ b/source3/wscript
+@@ -1724,6 +1724,12 @@ main() {
+                       or lack of ceph_statx support''')
+             conf.undefine('HAVE_CEPH')
+ 
++        if (conf.CHECK_FUNCS_IN('ceph_select_filesystem', 'cephfs',
++                                headers='cephfs/libcephfs.h')):
++            conf.DEFINE('HAVE_CEPH_SELECT_FILESYSTEM', '1')
++        else:
++            conf.undefine('HAVE_CEPH_SELECT_FILESYSTEM')
++
+     if Options.options.with_glusterfs:
+         conf.CHECK_CFG(package='glusterfs-api', args='"glusterfs-api >= 4" --cflags --libs',
+                        msg='Checking for glusterfs-api >= 4', uselib_store="GFAPI")
+-- 
+2.25.1
+
 
