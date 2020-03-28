@@ -2,49 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D615196957
-	for <lists+samba-technical@lfdr.de>; Sat, 28 Mar 2020 21:46:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F28D19695C
+	for <lists+samba-technical@lfdr.de>; Sat, 28 Mar 2020 21:57:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=r0Dh59FRN6Mwrb5ybYHe6chJOlyBjiMXM90yzuBohBM=; b=T0iXA91ilFl6AMRzlpu3QJLEuh
-	5Gxg9INzneVxYnW9rDgWX7PU+Q0CR7qRxoHYeppWt9Gg8w5vUqq9u7BPuMOVEqCwwpj/Muf93NbI0
-	znwxZFXit9bXXdnzikyWAIFxUpQ7DWdK7ZYduJFuqAzLl6RbqE2psT9B5sgoxugFbS0oSpffQNsTz
-	S2MB4xfZowlmhShdYpw7ZFfj91XSmdblL0IUvX3EzdzsM4l0Cx35frfRMASThC1V4jOpEk1zkvy86
-	ZL2rUXukA2HGCmB7qvaOQjcI+GtijRhxou66XUQuJLRx7GjnP3Ball6ceZg8hL/Y3CClC5nq+7nHZ
-	Umt999eg==;
-Received: from localhost ([::1]:58476 helo=hr1.samba.org) 
+	bh=C7te3ehZtxS6LsJQHHzuNsukXgsJXQWNXNl+sgVHSkA=; b=0E3eaLkruOjVp/ZW2WPfJBSn0F
+	Ddw0nj0aP9EEoX1670Py179vHMTXSjOUcx7P/Vu5JUNvntC4q6zHwkBbxkBEsdBBuaUQUeFLnMWOS
+	UyzqU9O9FJ0kdlZ4elUKVby9nL7aDV0/THs4b6Msa1yTjCQwFFGciDxmkLu4jWsnC0ANMqYrrL7FB
+	981PnuCz9sLpSVb2+S4wi1l5988zOZlO2hRRVw+SMy+hZNIQaMaKxrGHHTiUqN52FTGxLwGzxRuyU
+	P87Mm2+CJ8z2PXS+nNUiR4Fhsa7EQ1liOLTlXC37rE0hbdkY2UBPGjbGnGX5qashVsNq3S1F7LZ/3
+	JxkLJNWg==;
+Received: from localhost ([::1]:59224 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jIIKe-000v0j-72; Sat, 28 Mar 2020 20:45:28 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43922) 
+	id 1jIIVv-000v7I-Cy; Sat, 28 Mar 2020 20:57:07 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:46916) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jIIKT-000v0c-8B
- for samba-technical@lists.samba.org; Sat, 28 Mar 2020 20:45:25 +0000
+ (Exim) id 1jIIVq-000v7B-00
+ for samba-technical@lists.samba.org; Sat, 28 Mar 2020 20:57:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=r0Dh59FRN6Mwrb5ybYHe6chJOlyBjiMXM90yzuBohBM=; b=AGDNrthdK4N33r0kqllGtssZJQ
- dH79pScZoFFiKPFK6/GrCyMViupJDoxFO5XNFGTl7x5pUbFO2RhJHS9KGOjrMoRDvPaDdv2B4hmQp
- fI+nYpxYcXtBMTPIZPBK/6g5SqlrCIbzhUU5wbL8+37i85jK1sBwGv6533hd3pN+IjrhUl7mtq6PJ
- DbA9KuSmmRhC2KJF2jtOnmSRtJ7GvrqGTylodcKcHXD58Ia5yXCz8kc3IN2fyqF6fR2hfxDVAzmbx
- /THq4XhcH085fotBefIspki2btmUG5zyF/wpHvqFGrE4hWXV4lPgVvrwh6bOTCzrkQ9OL2Bg0IJC+
- 6tNgjSnDPbrMsUZJuwEyDYPPKIvkn0wqZrIPkF1fbm7NuGjMnopvrJnsneeIqxsJGDozB6wwEDaFp
- D+pF1bRLnv9QLQYuioGnFLMaTcUtpglNDlcBtUezUtmRs7lqcJIwFXK2lv4H8lynrid1MmII30ROu
- WCoGgCO4RuHL+15ChEKQnYto;
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=C7te3ehZtxS6LsJQHHzuNsukXgsJXQWNXNl+sgVHSkA=; b=yzTojfx2/f9jCkMX9ky3kpP8sp
+ GZAmRZNt/uj+eESOdt9TmiS+wm0lC2fb0hM+ZFhUHklSMb5SNQXG7EZKqBzWSodTk+FwvlCOvAUR3
+ W4XBiNrKOl1TFMOsf02XMj8r8tX2h3Xhohwk2CCJjYVALJuXRaH5GiKwhZvSunK7U3geCE0iXyXlF
+ qswLrs67W22/sENaXqc5x7jmcaDUpUyBVOTFoSAw6w4ySQ/C4m7ieASxFGxPwoAnjMD5BoQ/JKjnx
+ D1IEh8JLZR0O5wNbm35ubyjJ+16BAr82+q+umVZFWqBc1BRbtXXW+jz77ulmXDdGW123l7FQ3YYxB
+ 52OFJ0kIt0Mf/QtZprsL8E7mipp7cHsZ9xlhyfFDvHEElwDszUW16B4ybX4jZOdm9Td2ECm80oR7j
+ yrXf+DiRJbdFdVXTHroHvbEAk5TDjazgd6lrTyik23lf33O13aUPb56GACZc0gdxll068DgPR7kVv
+ RUFu2kDmEdtrhOaQQPsZ+md3;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jIIKN-0007o3-O8; Sat, 28 Mar 2020 20:45:12 +0000
-Message-ID: <53cee256c7ba658fa51771fec9c91296fd5eac81.camel@samba.org>
+ (Exim) id 1jIIVn-0007rv-L5; Sat, 28 Mar 2020 20:56:59 +0000
 Subject: Re: [RFC PATCH RESEND] vfs_ceph: allow mounting a named filesystem
-To: Jeremy Allison <jra@samba.org>
-Date: Sat, 28 Mar 2020 16:45:09 -0400
-In-Reply-To: <20200328174754.GB2323@jeremy-acer>
+To: Jeff Layton <jlayton@samba.org>, Jeremy Allison <jra@samba.org>
 References: <20200327162950.94545-1-jlayton@samba.org>
  <20200327175458.314ac804@samba.org>
  <2482855b759f39c2c7fe2c31966d8f4184b58d97.camel@samba.org>
  <20200328174754.GB2323@jeremy-acer>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
+ <53cee256c7ba658fa51771fec9c91296fd5eac81.camel@samba.org>
+Message-ID: <f6ec73d4-c3f7-ed2e-cd52-5b8f0172be9f@samba.org>
+Date: Sat, 28 Mar 2020 21:56:57 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <53cee256c7ba658fa51771fec9c91296fd5eac81.camel@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="GsuyPVfwquOeHea4vILahEpnoeIOpOJxp"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,56 +61,64 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeff Layton via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeff Layton <jlayton@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Cc: Marco Savoca <quaternionma@gmail.com>,
  Jeff Layton via samba-technical <samba-technical@lists.samba.org>,
  David Disseldorp <ddiss@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sat, 2020-03-28 at 10:47 -0700, Jeremy Allison wrote:
-> On Sat, Mar 28, 2020 at 10:31:35AM -0400, Jeff Layton via samba-technical wrote:
-> > On Fri, 2020-03-27 at 17:54 +0100, David Disseldorp wrote:
-> > > Hi Jeff,
-> > > 
-> > > On Fri, 27 Mar 2020 12:29:50 -0400, Jeff Layton via samba-technical wrote:
-> > > 
-> > > > Signed-off-by: Jeff Layton <jlayton@samba.org>
-> > > > ---
-> > > >  docs-xml/manpages/vfs_ceph.8.xml | 16 ++++++++++++++++
-> > > >  source3/modules/vfs_ceph.c       | 16 ++++++++++++++++
-> > > >  source3/wscript                  |  6 ++++++
-> > > >  3 files changed, 38 insertions(+)
-> > > > 
-> > > > I had a few spare cycles today and went ahead and plumbed in this
-> > > > support since Marco had asked about it on the ceph-users list.
-> > > > 
-> > > > This builds but is otherwise untested. If it looks reasonable, I can
-> > > > clean it up and test it out in the near future.
-> > > 
-> > > Thanks for the patch!
-> > > Give that the cmount context may be reused between shares, this would
-> > > be problematic if the shares are configured with differing fsnames. That
-> > > said, I think we have the same issue with config_file / user_id, so I
-> > > don't think it's a showstopper.
-> > > Otherwise, the change looks reasonable.
-> > > 
-> > > Cheers, David
-> > 
-> > Oof, yeah...I had forgotten that cmount is global. Ideally we'd have
-> > some sort of pool of cmounts or create one on a per-service basis.
-> > 
-> > Is there some sort of per-share object in the vfs plugin interface off
-> > which you could hang a cmount?
-> 
-> Yes, you can hang a private pointer off the connection (per share
-> instance) handle.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--GsuyPVfwquOeHea4vILahEpnoeIOpOJxp
+Content-Type: multipart/mixed; boundary="xnEzC22sD2alZsaXh0bKuGd1pHDUMJHqk"
 
-I assume you mean the connection_struct? Which field is the private
-pointer?
+--xnEzC22sD2alZsaXh0bKuGd1pHDUMJHqk
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
--- 
-Jeff Layton <jlayton@samba.org>
+Am 3/28/20 um 9:45 PM schrieb Jeff Layton via samba-technical:
+> On Sat, 2020-03-28 at 10:47 -0700, Jeremy Allison wrote:
+>> Yes, you can hang a private pointer off the connection (per share
+>> instance) handle.
+>=20
+> I assume you mean the connection_struct? Which field is the private
+> pointer?
 
+cf SMB_VFS_HANDLE_[S|G]ET_DATA
+
+-slow
+
+--=20
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+
+
+--xnEzC22sD2alZsaXh0bKuGd1pHDUMJHqk--
+
+--GsuyPVfwquOeHea4vILahEpnoeIOpOJxp
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAl5/uhoACgkQqh6bcSY5
+nkYdSQ//YsowxYQKnAQto+V6HA9aBBQfRmV5eDEvzmxGayluNJmXVtvp2/3/hvb3
+KzSMK1Du947XAXDX4aUxgP2dEhwLkwu8QGLV+3tEPg/ML0H1SX6KFBWxszms8XcF
+KTUcY54A5Lbxcup21SXY61+6iNMVftv7AMDWkKpbawhOmGSzqdtyiZlInFA1xwrL
+fOBQtfxIS3QZaqMb2gbz8NgBdvqKePcQQf5CYtsENBDocvOTGcQcfINsab3KN75u
+cts1k+kh/L8ALYVqRbLlhf2Cmgvzd9t5WYZJ36J/bZulgvW6laylwj3qlGV5eIUo
+4L8qp0yCTmS1HGLpgw9XcT9uHp5fIX3Db/lhOmaepzGleHm/afF3LrsyvijViqc2
+V/2kQD7OIGfOBfAaWU7XCOGR6lS1Y+ZvZgKDUN5+T5QZwT9Gam17jGd0EDTo6Y4o
+re/piJM3VPFZqsCCbxEtQPu0Bu99KpBSadkBBWZvqboPGWygc6IQvx1p8HUbpZWy
+R2i/AeGEMl5Z0nuP3JM/+25Ztz8Qgrzo7vEYGZLhRzaKn6R6F25Vracc0E5XJXZj
+ktGQo1ajPsD7xvHBy+Cdb/2W6WfaqbelR1xaJyhL+NtNSMrkvPV1WYwppd1PYf29
+3NaaQE6fL+aDzNcQEDkLTsTdij0+LwIcSwX3FqEAfW+K5rX0wg8=
+=KaQ+
+-----END PGP SIGNATURE-----
+
+--GsuyPVfwquOeHea4vILahEpnoeIOpOJxp--
 
