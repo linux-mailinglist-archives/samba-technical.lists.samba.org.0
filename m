@@ -2,52 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F28D19695C
-	for <lists+samba-technical@lfdr.de>; Sat, 28 Mar 2020 21:57:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E050E19698B
+	for <lists+samba-technical@lfdr.de>; Sat, 28 Mar 2020 22:41:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=C7te3ehZtxS6LsJQHHzuNsukXgsJXQWNXNl+sgVHSkA=; b=0E3eaLkruOjVp/ZW2WPfJBSn0F
-	Ddw0nj0aP9EEoX1670Py179vHMTXSjOUcx7P/Vu5JUNvntC4q6zHwkBbxkBEsdBBuaUQUeFLnMWOS
-	UyzqU9O9FJ0kdlZ4elUKVby9nL7aDV0/THs4b6Msa1yTjCQwFFGciDxmkLu4jWsnC0ANMqYrrL7FB
-	981PnuCz9sLpSVb2+S4wi1l5988zOZlO2hRRVw+SMy+hZNIQaMaKxrGHHTiUqN52FTGxLwGzxRuyU
-	P87Mm2+CJ8z2PXS+nNUiR4Fhsa7EQ1liOLTlXC37rE0hbdkY2UBPGjbGnGX5qashVsNq3S1F7LZ/3
-	JxkLJNWg==;
-Received: from localhost ([::1]:59224 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=hprHqV2j/H/0N6PkWlp9iuUQpAjbLW8J5rQjHrH8ZwI=; b=BvmtlTp5j8IcaNz1q/2SC5fBrW
+	Auw+UHJjATkfVKx0KMtt0t807NGMQwX2BL/QpQ5Y21s47Fx/4872uyXA2NES96N3wWw3tciHEUSW/
+	ojLR++himWoNRqCDK5PnpH7b9HiHZkRnG0Ig04w+esZ2XGUuIjzEAvbqkXAyEC0oSHEiQuOcNT6NH
+	hHS/MlWhfJgLl0Js0l+3Oaute4adokj4pYTXfeUvRuyoqL9vCRymZDnBAiMqJuTamRpe2vWg+qcbw
+	Xr2PHsdMA9lmpHbpIZEkOJDshNGQMo4PHZ4zjZPhr7mqtILjL77LdArc1tOx/9nMmZUGTbHqqxUCT
+	u/QE2G6w==;
+Received: from localhost ([::1]:61434 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jIIVv-000v7I-Cy; Sat, 28 Mar 2020 20:57:07 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:46916) 
+	id 1jIJCh-000vSA-AX; Sat, 28 Mar 2020 21:41:19 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58756) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jIIVq-000v7B-00
- for samba-technical@lists.samba.org; Sat, 28 Mar 2020 20:57:04 +0000
+ (Exim) id 1jIJCc-000vS3-Pu
+ for samba-technical@lists.samba.org; Sat, 28 Mar 2020 21:41:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=C7te3ehZtxS6LsJQHHzuNsukXgsJXQWNXNl+sgVHSkA=; b=yzTojfx2/f9jCkMX9ky3kpP8sp
- GZAmRZNt/uj+eESOdt9TmiS+wm0lC2fb0hM+ZFhUHklSMb5SNQXG7EZKqBzWSodTk+FwvlCOvAUR3
- W4XBiNrKOl1TFMOsf02XMj8r8tX2h3Xhohwk2CCJjYVALJuXRaH5GiKwhZvSunK7U3geCE0iXyXlF
- qswLrs67W22/sENaXqc5x7jmcaDUpUyBVOTFoSAw6w4ySQ/C4m7ieASxFGxPwoAnjMD5BoQ/JKjnx
- D1IEh8JLZR0O5wNbm35ubyjJ+16BAr82+q+umVZFWqBc1BRbtXXW+jz77ulmXDdGW123l7FQ3YYxB
- 52OFJ0kIt0Mf/QtZprsL8E7mipp7cHsZ9xlhyfFDvHEElwDszUW16B4ybX4jZOdm9Td2ECm80oR7j
- yrXf+DiRJbdFdVXTHroHvbEAk5TDjazgd6lrTyik23lf33O13aUPb56GACZc0gdxll068DgPR7kVv
- RUFu2kDmEdtrhOaQQPsZ+md3;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=hprHqV2j/H/0N6PkWlp9iuUQpAjbLW8J5rQjHrH8ZwI=; b=n76QyovdCFq1wqcMe94aIsBwUH
+ zQrLPguF24aS4MdUJuXnzS4gwH2pGy8KRnpblfBnlokz5R/cwSTf7v7zDUktTosAq8pHqHnc2q3wZ
+ dotw7H6jba7K80DA4/U4bBEPEhC9ke7bg+f112Pr9pDoJ/CvMNjwXCwlnThi59VubORwN2c2HxUEP
+ qnrr6PRPzeIzp6uZ47pY67nbe+NlSp3GXVkzZTaizZt+cCGy5MiIQ9AFkiH14W4cCDfgyUCovmhyB
+ DjtmWpC4h3XVIpkEkbXdnGqhlMWu+OkSzuejkkJjPmfuROJlSrnAGX9mFh6lJmWVsXmRQoER/Ufud
+ rm1LZg4Nzt9u7Zyt4e2vmUTQjhOLOKYPgSB69moddPY82CfuSFChsnZBawwhMS/m1A3dcXn7l2k+b
+ QjPPz/jEtxiCaJu1Mczp4AhlSAz3746loSPGLje05f6a/hkszBrjQi7F1AHed2RlgnYDV9lf5fJM9
+ QXtbVP1lhMLOIizODVzBZh3q;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jIIVn-0007rv-L5; Sat, 28 Mar 2020 20:56:59 +0000
-Subject: Re: [RFC PATCH RESEND] vfs_ceph: allow mounting a named filesystem
-To: Jeff Layton <jlayton@samba.org>, Jeremy Allison <jra@samba.org>
-References: <20200327162950.94545-1-jlayton@samba.org>
- <20200327175458.314ac804@samba.org>
- <2482855b759f39c2c7fe2c31966d8f4184b58d97.camel@samba.org>
- <20200328174754.GB2323@jeremy-acer>
- <53cee256c7ba658fa51771fec9c91296fd5eac81.camel@samba.org>
-Message-ID: <f6ec73d4-c3f7-ed2e-cd52-5b8f0172be9f@samba.org>
-Date: Sat, 28 Mar 2020 21:56:57 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ (Exim) id 1jIJCb-000846-CF; Sat, 28 Mar 2020 21:41:13 +0000
+Date: Sat, 28 Mar 2020 23:41:10 +0200
+To: hezekiah maina <hezekiahmaina3@gmail.com>
+Subject: Re: Gsoc: Integrate Samba AD DC deployment and management with
+ Cockpit idea
+Message-ID: <20200328214110.GU2735275@onega.vda.li>
+References: <CAH72RCVu_qmFy2POqxfWZnZqQRhhiys+nYVtEc2EdYj9YuX_Fw@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <53cee256c7ba658fa51771fec9c91296fd5eac81.camel@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="GsuyPVfwquOeHea4vILahEpnoeIOpOJxp"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAH72RCVu_qmFy2POqxfWZnZqQRhhiys+nYVtEc2EdYj9YuX_Fw@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,64 +55,59 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Marco Savoca <quaternionma@gmail.com>,
- Jeff Layton via samba-technical <samba-technical@lists.samba.org>,
- David Disseldorp <ddiss@samba.org>
+From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Alexander Bokovoy <ab@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---GsuyPVfwquOeHea4vILahEpnoeIOpOJxp
-Content-Type: multipart/mixed; boundary="xnEzC22sD2alZsaXh0bKuGd1pHDUMJHqk"
+Hi Hezekiah,
 
---xnEzC22sD2alZsaXh0bKuGd1pHDUMJHqk
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+On la, 28 maalis 2020, hezekiah maina via samba-technical wrote:
+> Hi, I'm Hezekiah a student interested in working with Samba during Gsoc
+> period. I've cloned the repo(https://github.com/abbra/cockpit-app-samba-ad) but
+> the installation steps don't seem to work. Is there a way I can access the
+> frontend design so that I know how to proceed with my proposal.
 
-Am 3/28/20 um 9:45 PM schrieb Jeff Layton via samba-technical:
-> On Sat, 2020-03-28 at 10:47 -0700, Jeremy Allison wrote:
->> Yes, you can hang a private pointer off the connection (per share
->> instance) handle.
->=20
-> I assume you mean the connection_struct? Which field is the private
-> pointer?
+The code you see in my github repo was a prototype to assess how far can
+we get within a day of experiment. If we would start from scratch (most
+likely) then I'd suggest you to look at several things:
 
-cf SMB_VFS_HANDLE_[S|G]ET_DATA
+- cockpit-design, as they provide a good researched UX and UI designs
+  for Cockpit apps for multiple areas over past few years,
+  https://github.com/cockpit-project/cockpit-design/
+- SuSE YaST work around https://github.com/yast?q=samba
+  (see
+  https://sambaxp.org/fileadmin/user_upload/sambaxp2019-slides/mulder_sambaxp2019_samba_active_adrectory_tools_windows_admin.pdf
+  for some details)
+- Cockpit starter kit, https://github.com/cockpit-project/starter-kit
+- 389-ds Cockpit plugin, https://pagure.io/389-ds-base/blob/master/f/src/cockpit/389-console
+- Cockpit virtual machines interfaces (both cockpit-docker and
+  cockpit-podman), see more https://github.com/cockpit-project
 
--slow
+The project would need to investigate:
 
---=20
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+- a possible UX and UI design
 
+- define base set of use cases that can be mapped to distinct Samba AD
+  as covered in
+  https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller,
+  https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Domain_Member,
+  https://wiki.samba.org/index.php/Joining_a_Samba_DC_to_an_Existing_Active_Directory,
+  and other domain controller related tasks as described in https://wiki.samba.org/index.php/User_Documentation
 
---xnEzC22sD2alZsaXh0bKuGd1pHDUMJHqk--
+- build actual Cockpit app that implements a clearly defined subset of
+  those use cases.
 
---GsuyPVfwquOeHea4vILahEpnoeIOpOJxp
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+From my perspective, a successful project proposal would be able to
+present a set of use cases proposed to focus on since this is a huge
+area, a scope to work on, how one would expect to work on deliverables,
+technology and process wise.
 
------BEGIN PGP SIGNATURE-----
+It would be nice to see how this project would evolve after the GSoC session
+would end, since it is clearly a longer term work that would need to be
+passed over and shared with more contributors.
 
-iQIzBAEBCAAdFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAl5/uhoACgkQqh6bcSY5
-nkYdSQ//YsowxYQKnAQto+V6HA9aBBQfRmV5eDEvzmxGayluNJmXVtvp2/3/hvb3
-KzSMK1Du947XAXDX4aUxgP2dEhwLkwu8QGLV+3tEPg/ML0H1SX6KFBWxszms8XcF
-KTUcY54A5Lbxcup21SXY61+6iNMVftv7AMDWkKpbawhOmGSzqdtyiZlInFA1xwrL
-fOBQtfxIS3QZaqMb2gbz8NgBdvqKePcQQf5CYtsENBDocvOTGcQcfINsab3KN75u
-cts1k+kh/L8ALYVqRbLlhf2Cmgvzd9t5WYZJ36J/bZulgvW6laylwj3qlGV5eIUo
-4L8qp0yCTmS1HGLpgw9XcT9uHp5fIX3Db/lhOmaepzGleHm/afF3LrsyvijViqc2
-V/2kQD7OIGfOBfAaWU7XCOGR6lS1Y+ZvZgKDUN5+T5QZwT9Gam17jGd0EDTo6Y4o
-re/piJM3VPFZqsCCbxEtQPu0Bu99KpBSadkBBWZvqboPGWygc6IQvx1p8HUbpZWy
-R2i/AeGEMl5Z0nuP3JM/+25Ztz8Qgrzo7vEYGZLhRzaKn6R6F25Vracc0E5XJXZj
-ktGQo1ajPsD7xvHBy+Cdb/2W6WfaqbelR1xaJyhL+NtNSMrkvPV1WYwppd1PYf29
-3NaaQE6fL+aDzNcQEDkLTsTdij0+LwIcSwX3FqEAfW+K5rX0wg8=
-=KaQ+
------END PGP SIGNATURE-----
-
---GsuyPVfwquOeHea4vILahEpnoeIOpOJxp--
+-- 
+/ Alexander Bokovoy
 
