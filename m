@@ -2,39 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A9CDC198CD3
-	for <lists+samba-technical@lfdr.de>; Tue, 31 Mar 2020 09:19:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B046199CF8
+	for <lists+samba-technical@lfdr.de>; Tue, 31 Mar 2020 19:35:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Zh/cLcI+Ah3wcuYsIdpQ01rlvOu5+wS8MBqhfVdQiOU=; b=gNLYA/KHoKuxSByELc91dFkhnv
-	BWyLrzvscpna32D4cwqXLJEUlN/q/Xckehs3nIIdXjbSewyrwd78mk9T+J0ijNrRKWTYkCnGfpEPY
-	4UP2qCdMeIolPXUsdqYduA34EzF5CMDpsbXaQuow3zikLjPgCEYOXF70cKxoyOLwfHGzdx3RgbQDQ
-	rqdb+s8yeuCNr5IYcLtya9iDNSzHcsarnDfMSppekGFk1k6jeFg/WQvaMnuASNR7FNyQ5aoVg2veW
-	Q0NwdVGRJfsI+2633mLO2MmfuzO2yB/0A50V2wtO04bQ0Ks79+eA0MiMO2xWBqui1yJUgzsJi5G6c
-	Tbl7Y8yw==;
-Received: from localhost ([::1]:47956 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=G8hJ4UVyWJPf6ZxATm4trC9WHG4qmKsL0tFE0r/Rh2I=; b=F/9a+zESQZkYXEdeGTMQoYxLCD
+	9rO4+LWelJonPBmjtu9cWAjYVlNnvSntuYNmODUNZPludhNmSYYkuuXBSWgx4lFOLKxbrZ1+RNVgB
+	1KP8XYehSrirZxPQD275a2ItQ4wGuwT23/nnrd+cPAnqi3DnXhR02F1CXhMPACc7NzIMrZZprYi9p
+	7P1JZYotXgA3ZbEGxCeNxWqVazaXMc6NvPUj1CGuxQa8PykBM9f0eIgySayC4BZGN+BhMx8FOPNug
+	qHQO/WnSu3Fu1TDuUUWY2QvkGT344xKbVjY6J0ZPEleT2Gr5ddval5V9ECSS+M2xUGCztx7lqRVgL
+	kTSZpogw==;
+Received: from localhost ([::1]:50412 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jJBAd-0014cm-Hv; Tue, 31 Mar 2020 07:18:47 +0000
-Received: from [13.77.154.182] (port=60700 helo=linux.microsoft.com) 
- by hr1.samba.org with esmtp (Exim) id 1jJBAL-0014cF-F3
- for samba-technical@lists.samba.org; Tue, 31 Mar 2020 07:18:32 +0000
-Received: by linux.microsoft.com (Postfix, from userid 1004)
- id 74EC520B46F0; Tue, 31 Mar 2020 00:18:24 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 74EC520B46F0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linuxonhyperv.com;
- s=default; t=1585639104;
- bh=Zh/cLcI+Ah3wcuYsIdpQ01rlvOu5+wS8MBqhfVdQiOU=;
- h=From:To:Cc:Subject:Date:Reply-To:From;
- b=rMSDw//jQGt+IvEV719WbBHeCl6MGjNajTHyFvacQFtTY/DT9pxa2zKdgFcSYWGZe
- n/k3RKEQjEGghDm8r4kt3bS7kywxAXjsM2h9ThIFMnHaY2GKaZRYnzf2zyXA3w3/8H
- g3Mjy6gf1Jso3yxSLm1ri6gj53hdeWhjeO1hVHCE=
-To: Steve French <sfrench@samba.org>, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org
-Subject: [PATCH] cifs: smbd: Update receive credits before sending and deal
- with credits roll back on failure before sending
-Date: Tue, 31 Mar 2020 00:18:21 -0700
-Message-Id: <1585639101-117035-1-git-send-email-longli@linuxonhyperv.com>
-X-Mailer: git-send-email 1.8.3.1
+	id 1jJKmh-001C6h-7x; Tue, 31 Mar 2020 17:34:43 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44916) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jJKmb-001C6a-E9
+ for samba-technical@lists.samba.org; Tue, 31 Mar 2020 17:34:39 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=G8hJ4UVyWJPf6ZxATm4trC9WHG4qmKsL0tFE0r/Rh2I=; b=tdcGVsthkkW7lK54p/j8iQL7SN
+ jzSWEreEJlMg8zn1vP42iuskz6e8Nzt8Aa3mt5QYQNuEiuJZV9sMT0JaWrKb0TxUR7FFUrVjgsCe7
+ 6fBDcTDS99anPFvBJWsEI5uu5hPzrSn4Oo2Es2Lr1nHX/o/IWfCCRYn+DYScCxky/RT905bP+gDvn
+ 2E/GM7IAT8MBb5cSgKrqDbDAY1X779WiXaqy3bJXsc6HGe1zljXwODxGFjVR2VvpKZNNYq1lXn1bP
+ +EfhXsNp+5h5Ie12x75So/7dp6yW7H0M8LcOrjjwQe3HtsTy6utRZ/blnMdgronH6wRto3bHhZkZ6
+ qHRB0FiCWDKGgsHmu/Wp1JGr2ecMe8nutoQO7LZ7X7bnI/7cbOfffOH3Z+GF3OQMsoqCxNi6SJJGe
+ xKGqmFFt96xGKcJVzhnuyCJIl8JIY8YaTCNqJ+3F/3HluAr02cGztDKBsrxESmYt/9cUTuwQm1lmN
+ 88bhGpHf+pvoSdWtMH/FqMMz;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jJKmY-0007hJ-H5; Tue, 31 Mar 2020 17:34:34 +0000
+Date: Tue, 31 Mar 2020 10:34:28 -0700
+To: dongleilei <ssdl.566@163.com>
+Subject: Re: problem about smbd_smb2_flush_send_queue
+Message-ID: <20200331173428.GC13958@jeremy-acer>
+References: <3d2ae9a3.3208.1712eaf2c90.Coremail.ssdl.566@163.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3d2ae9a3.3208.1712eaf2c90.Coremail.ssdl.566@163.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,82 +55,43 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: longli--- via samba-technical <samba-technical@lists.samba.org>
-Reply-To: longli@microsoft.com
-Cc: longli@linuxonhyperv.com
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-From: Long Li <longli@microsoft.com>
+On Tue, Mar 31, 2020 at 11:42:44AM +0800, dongleilei wrote:
+> Hi all:
+>           I encountered a problem recently. 
+>           when i copy files from samba share to windows client,  the copy process suddenly hung up waiting for response from samba ser
+>           when i debug smbd process, i found the program enter here.
+> 
+> 
+> in source3/smbd/smb2_server  smbd_smb2_flush_send_queue
+> 
+> 
+>  ok = iov_advance(&e->vector, &e->count, ret);
+> if (!ok) {
+> return NT_STATUS_INTERNAL_ERROR;
+> }
+> 
+> 
+> if (e->count > 0) {
+> /* we have more to write */                                enter here
+> TEVENT_FD_WRITEABLE(xconn->transport.fde);
+> return NT_STATUS_OK;
+> }
+> 
+> 
+> -----
+> my question is : is there any way for smbd to resend the remaining data?
+>                            why my client hung up for a long time?
+> 
 
-Recevie credits should be updated before sending the packet, not
-before a work is scheduled. Also, the value needs roll back if
-something fails and cannot send.
+TEVENT_FD_WRITEABLE should be setting the outgoing fd as
+ready to write out more data, and so the next trip through
+the main event loop it should send more data.
 
-Signed-off-by: Long Li <longli@microsoft.com>
----
- fs/cifs/smbdirect.c | 18 +++++++++++++-----
- 1 file changed, 13 insertions(+), 5 deletions(-)
-
-diff --git a/fs/cifs/smbdirect.c b/fs/cifs/smbdirect.c
-index c7ef2d7ce0ef..bdae6d41748c 100644
---- a/fs/cifs/smbdirect.c
-+++ b/fs/cifs/smbdirect.c
-@@ -450,8 +450,6 @@ static void smbd_post_send_credits(struct work_struct *work)
- 	info->new_credits_offered += ret;
- 	spin_unlock(&info->lock_new_credits_offered);
- 
--	atomic_add(ret, &info->receive_credits);
--
- 	/* Check if we can post new receive and grant credits to peer */
- 	check_and_send_immediate(info);
- }
-@@ -840,7 +838,7 @@ static int smbd_create_header(struct smbd_connection *info,
- 	request = mempool_alloc(info->request_mempool, GFP_KERNEL);
- 	if (!request) {
- 		rc = -ENOMEM;
--		goto err;
-+		goto err_alloc;
- 	}
- 
- 	request->info = info;
-@@ -851,6 +849,7 @@ static int smbd_create_header(struct smbd_connection *info,
- 	packet->credits_granted =
- 		cpu_to_le16(manage_credits_prior_sending(info));
- 	info->send_immediate = false;
-+	atomic_add(packet->credits_granted, &info->receive_credits);
- 
- 	packet->flags = 0;
- 	if (manage_keep_alive_before_sending(info))
-@@ -887,7 +886,7 @@ static int smbd_create_header(struct smbd_connection *info,
- 	if (ib_dma_mapping_error(info->id->device, request->sge[0].addr)) {
- 		mempool_free(request, info->request_mempool);
- 		rc = -EIO;
--		goto err;
-+		goto err_dma;
- 	}
- 
- 	request->sge[0].length = header_length;
-@@ -896,8 +895,17 @@ static int smbd_create_header(struct smbd_connection *info,
- 	*request_out = request;
- 	return 0;
- 
--err:
-+err_dma:
-+	/* roll back receive credits */
-+	spin_lock(&info->lock_new_credits_offered);
-+	info->new_credits_offered += packet->credits_granted;
-+	spin_unlock(&info->lock_new_credits_offered);
-+	atomic_sub(packet->credits_granted, &info->receive_credits);
-+
-+err_alloc:
-+	/* roll back send credits */
- 	atomic_inc(&info->send_credits);
-+
- 	return rc;
- }
- 
--- 
-2.17.1
-
+What platform are you running on ?
 
