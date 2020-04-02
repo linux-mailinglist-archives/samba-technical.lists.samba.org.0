@@ -2,46 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96DF219BDBD
-	for <lists+samba-technical@lfdr.de>; Thu,  2 Apr 2020 10:45:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23A7919BE57
+	for <lists+samba-technical@lfdr.de>; Thu,  2 Apr 2020 11:05:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=ZD0/M5H1ixEiyili5YONRAbHbbB7P7HIxIaDW+N+HgA=; b=h3NAlTQtkSTqn0FY+PvQEWTh70
-	NWgMJeY6jZT08izdSrbBok20vSmmNknrvl/+aH1hV+Lzuy6qvZE3tB/O/q5P+semVhf/gJdKVKEtz
-	sArxgU6KhgZbkFaecueYwwyh/SN3eLC009K9RZwytLBjPJXerC4vAgG8KI5digwLDM6GA4ov/6//M
-	2oXSPLIcqhuh5Jvz55htTxgrBrVTWO7kRm5y7Mx4rZMPbamHxnPye6FbyT3KKaD6znm+dDtJRpIBt
-	BwlyxhvglyfCkHb4tMHkiQ9yeHBFetguVo7++sH/ZV7TKwzbi3Nwvc6qAD2W8Ut0P3ZAYy8mY3C89
-	mbmXnsdA==;
-Received: from localhost ([::1]:56136 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=QnD0f+/Vobdd6V5m38wYoWtr74Kix+6IRXacVKtgJ2U=; b=2FpSSJGwvPG3zgYrJ7TpM3U+Fu
+	iz/+UZjSRp5uKtEdWopODo7tbhtkeMogbiHLRWjrHCcvhY2WLN5KQoLpSh8ElaD9vETtuFYdObIs7
+	Ma2Ns5wkFVk4difqtqNovDFAdIq7fzdb4P+IixTBzZ8AxRJt3xujzGvJjucFRYKYSzYH3ZhXOu0i7
+	poibGqovHbCD+prJTK9h2NnNSsVnkkkjURlPtIyfLF1MBvsJoZZDKlD51kgrNXN5YbQkKLyAplqGd
+	Owrve+u9Y4hSjR0KWJ0PHZd1z52LHckY5ETHNpW5IKgadIMNXl1hCMqWCM/0uAJ8oUxj6WsB+zxte
+	pmgkAnvQ==;
+Received: from localhost ([::1]:61746 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jJvSX-0034rW-5w; Thu, 02 Apr 2020 08:44:21 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26284) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jJvSS-0034rO-0p
- for samba-technical@lists.samba.org; Thu, 02 Apr 2020 08:44:18 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=ZD0/M5H1ixEiyili5YONRAbHbbB7P7HIxIaDW+N+HgA=; b=mc15pcWeilohNSdunNtsnRhneB
- 2m1eCPw0tOe3QMu6RdKVKC4LuxSTWTLnKSyDt8XdPzu3Dj1Hw8aogSyVhWVkG5AEOnqQ8qLWG5jtq
- zWxL0Vsno4pwBQOaNw+97ValN2iGFn2voTAeT0Pf8vD1VCZL7mFwJSnLeswrIH5dHQRCbVXfJsyjd
- VbDHAA72FijB5/J1U5NvILUoBjX4waNx6cNvNsiAQX4FaNu1+FHf9RLwY5XWmZqRXqE5RSPIx6HWZ
- DsGb465CH6tz/34FwXXtxumEKXCc/7rrCj0gnJUf07oMkzAJZbEyxYCmvmj0/RE4/oi5t1otL2SKx
- Maj5D+u00DEZGrDyMXC7CiDoaCcI8D5QXPHv/zmdY47vE/j7AZpNe5IS9BO859mx2PjOOEJEkSnqp
- HJeUyQYhIhoXp6AZrB8370booLflvkFJgF6AVqoBPE95XmtxWt9dUGyt0I+rbRDLD4uh22T/lKl86
- fUxSAmyjDqsDhfIEGKEVagTV;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jJvSQ-0007yo-Qa
- for samba-technical@lists.samba.org; Thu, 02 Apr 2020 08:44:14 +0000
+	id 1jJvn0-0035d6-76; Thu, 02 Apr 2020 09:05:30 +0000
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:56430) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1jJvmv-0035cz-II
+ for samba-technical@lists.samba.org; Thu, 02 Apr 2020 09:05:28 +0000
+Received: from pps.filterd (m0098410.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 03294QFp102163
+ for <samba-technical@lists.samba.org>; Thu, 2 Apr 2020 05:05:21 -0400
+Received: from e06smtp03.uk.ibm.com (e06smtp03.uk.ibm.com [195.75.94.99])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 304swspv55-1
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <samba-technical@lists.samba.org>; Thu, 02 Apr 2020 05:05:20 -0400
+Received: from localhost
+ by e06smtp03.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+ Violators will be prosecuted
+ for <samba-technical@lists.samba.org> from <swen@linux.ibm.com>;
+ Thu, 2 Apr 2020 10:05:10 +0100
+Received: from b06cxnps3074.portsmouth.uk.ibm.com (9.149.109.194)
+ by e06smtp03.uk.ibm.com (192.168.101.133) with IBM ESMTP SMTP Gateway:
+ Authorized Use Only! Violators will be prosecuted; 
+ (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+ Thu, 2 Apr 2020 10:05:08 +0100
+Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
+ [9.149.105.59])
+ by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 03295FXl50200584
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 2 Apr 2020 09:05:15 GMT
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 4076CA4057;
+ Thu,  2 Apr 2020 09:05:15 +0000 (GMT)
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 1AF31A405B;
+ Thu,  2 Apr 2020 09:05:15 +0000 (GMT)
+Received: from sig-9-145-190-117.de.ibm.com (unknown [9.145.190.117])
+ by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Thu,  2 Apr 2020 09:05:15 +0000 (GMT)
+Subject: Extending tldap paged search
 To: samba-technical <samba-technical@lists.samba.org>
-Subject: [PATCH] samba-tool group show
-Message-ID: <0acb2828-a298-4a79-421d-683a771d9a93@samba.org>
-Date: Thu, 2 Apr 2020 09:44:14 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+Date: Thu, 02 Apr 2020 11:05:10 +0200
+Content-Type: multipart/signed; micalg="pgp-sha512";
+ protocol="application/pgp-signature"; boundary="=-8RerXina7HvziHIvzpAJ"
+User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------25755313B826A17A15CDFCD1"
-Content-Language: en-GB
+X-TM-AS-GCONF: 00
+x-cbid: 20040209-0012-0000-0000-0000039CC8B2
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 20040209-0013-0000-0000-000021D9DB9A
+Message-Id: <c21a3a0388963ca913be702d527c6989e29e8ab4.camel@linux.ibm.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,69 +77,61 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: swen via samba-technical <samba-technical@lists.samba.org>
+Reply-To: swen@linux.ibm.com
+Cc: Volker Lendecke <vl@samba.org>, metze@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a multi-part message in MIME format.
---------------25755313B826A17A15CDFCD1
-Content-Type: text/plain; charset=utf-8; format=flowed
+
+--=-8RerXina7HvziHIvzpAJ
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi
+
+I've created a small patch-set which is extending the current code for
+paged searches in LDAP.
+
+Unlike earlier versions of this "plan", I tried to be as minimal
+invasive as possible and used existing routines wherever possible.
+
+The "extension" coming with this patch-set includes
+- a larger test in torture, demonstrating the the use of async paged search
+- externalization of the tldap context's last_msg information
+- sync wrapper to collect all search results in one go
+
+The patch-set passed the test on gitlab and a MR is created at
+https://gitlab.com/samba-team/samba/-/merge_requests/1258
+
+Comments, feedback appreicated !
+
+Thanks in advance for your support.
+
+Cheers Swen
+
+--=-8RerXina7HvziHIvzpAJ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
-Hi, <samba-tool group show 'groupname'> will only show the groups info 
-if it is a global security group.
+-----BEGIN PGP SIGNATURE-----
 
-The attached patch fixes this.
+iQIzBAABCgAdFiEErGbWt5PHCTgy2J0tug2knLYPYasFAl6FqsYACgkQug2knLYP
+Yav6lg/+Kyk9rrinoNsYSuWR7CVBMue03RJfH5lf/lLO9hXvMUE64s8Cb74skk6o
+lJksya2bsAM19lWT7+rAHauUG3JCYxYMkFcglMoqcUQIg6IWvBwCTyKV4rQ6BTJj
+OT+PfONQDAvb375LEam6JBmk5dc8i/dRHfSG4mMJNrRP76VBqjDhjzJSSdE4OmLJ
+/SR0LTMgG2dcbRmcf3NN4yfE45Zco/19y04ZTBWVQfz40ditsWoZ4kgR94JYvqht
+gSX7qKvGZDMx8shuhQPzTm0Npitkjdu7DdxsHTnm6Xb0W1PlIUCEl5ZNjTyhptse
+fEvweEf471HjR1VbrkU1Fu0Aygh01B/nqasBndPGdh2BQUJIVlyXXOQn7k9j7xmP
+fy6GGKPv7uC4cMfo/sHhSWGLbDHbJeX1anvtIgBi4T9Wm7SJhXvQZMzn2fgteuQo
+HQpHZaWviOLts3ItErWx9p+DcqfH8hpMkVzmEonoEW7k+wStc2Ry/0jsoP2rKYwO
+WTO1D2VkyxEW6dbLiiWs1H29kNqmYZcpWbxLFFOVfpPqGFFumnEqTifY+Tz/hDao
+0RvBkpmUYT5Ikt4Jbpsw6JATrgRi0FABBaXpEQvprMDgn7ksUfgvLN12zwVNo4Xp
+U6FNWhFkwqHhMrAlBXAjxAWTxXwrzMj12uEyFMC17onFbtieFVo=
+=LnYW
+-----END PGP SIGNATURE-----
 
-See bug: https://bugzilla.samba.org/show_bug.cgi?id=14335
+--=-8RerXina7HvziHIvzpAJ--
 
-See: https://lists.samba.org/archive/samba/2020-March/229069.html for 
-the user who found this.
-
-Rowland
-
-
-
---------------25755313B826A17A15CDFCD1
-Content-Type: text/x-patch; charset=UTF-8;
- name="Subject-PATCH-samba-tool-group-show-only-shows-globa.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename*0="Subject-PATCH-samba-tool-group-show-only-shows-globa.patch"
-
-From 1b3de4cd13abdc6ed22273682827b38ccf8033bb Mon Sep 17 00:00:00 2001
-From: Rowland Penny <rpenny@samba.org>
-Date: Thu, 2 Apr 2020 09:29:18 +0100
-Subject: [PATCH] Subject: [PATCH] samba-tool group show: only shows global
- security groups, this patch makes it show all groups.
-
-BUG: https://bugzilla.samba.org/show_bug.cgi?id=14335
-
-Signed-off-by: Rowland Penny <rpenny@samba.org>
----
- python/samba/netcmd/group.py | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
-
-diff --git a/python/samba/netcmd/group.py b/python/samba/netcmd/group.py
-index 76705100960..d973c750b86 100644
---- a/python/samba/netcmd/group.py
-+++ b/python/samba/netcmd/group.py
-@@ -696,9 +696,8 @@ Example3 shows how to display a groups objectGUID and member attributes.
-         if group_attrs:
-             attrs = group_attrs.split(",")
- 
--        filter = ("(&(sAMAccountType=%d)(sAMAccountName=%s))" %
--                  (ATYPE_SECURITY_GLOBAL_GROUP,
--                   ldb.binary_encode(groupname)))
-+        filter = ("(&(objectCategory=group)(sAMAccountName=%s))" %
-+                   ldb.binary_encode(groupname))
- 
-         domaindn = samdb.domain_dn()
- 
--- 
-2.20.1
-
-
---------------25755313B826A17A15CDFCD1--
 
