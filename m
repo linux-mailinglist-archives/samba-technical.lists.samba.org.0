@@ -2,43 +2,39 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9F4519C334
-	for <lists+samba-technical@lfdr.de>; Thu,  2 Apr 2020 15:52:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4553A19CBCC
+	for <lists+samba-technical@lfdr.de>; Thu,  2 Apr 2020 22:42:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=1uvL2MEbadE2iTUhFD+w2hwqN20r4gXMCHsUipYJYz8=; b=jnCmU2EHxmI/bz3kl3eoFJIG/x
-	PMGm0DyuGykLPDTvd6Hg6OPX1WZ/YJHq4BDsl/zZgq98hPzEtRU9/V9ZdovgidYCRY0yr1ZLivi6P
-	OG03655nBiG9H2i307FGAK1M4AWyosg98abgAR94NLDb/mQZJrRLD8h09eqDz9fsIfKAKE5CiXHmm
-	TdMNBenFaXchzaHcdj8EHIUOILx6pZnNrgO+7sM57r336mEvWDnx/EeLAsQifYZD+o41xy6n0nEyM
-	R47Hx294s1BLo8whDlGqsFle7E7Q9gaDV5znyYG3qlhAylqceZg8DWl8XYblq+TWBXXSnt4Al0yD3
-	YLQs25ug==;
-Received: from localhost ([::1]:19298 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=T7M811vVoO8LHYy+OccoE+fza63+weNdKO1rucXW+T4=; b=ws9lEQ185Tc87KPebR9gqHq0gx
+	mKmWjh5m6PRGGMoSfuyK0gQi6WbfOhJe1nU7wBz9+av8j/WIKwAvX0t1oqc7uU/6/IXh8srAS6Ewi
+	pUSAVPlcEq8lqB5ez51/DNIF7CzC0K3mIQL+NOXzgcc73K0C0YQW7JVhBB0ADHpC0QnGsB2wEJDaa
+	p9uJXAdCuju9ohK3ejT7/zwT15jmqo4Im9rqwqIzlNGFzBYEf3oKav0+RL6IsXWvXQdN2N7Ux5Ye9
+	4ovBodMKUIoGYOaQRcXpDzFXDy+uJUEku/HksyONkpMrQuxyejOzNoNYd275uKS1pwDjgopD0A5YF
+	OaKZ3TVg==;
+Received: from localhost ([::1]:33348 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jK0G1-0036nv-8J; Thu, 02 Apr 2020 13:51:45 +0000
-Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:52141) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jK0Fv-0036no-6c
- for samba-technical@lists.samba.org; Thu, 02 Apr 2020 13:51:42 +0000
-Received: from intern.sernet.de by mail.sernet.de with esmtps (Exim 4.92 #3)
- id 1jK0Fu-0002Jg-EU; Thu, 02 Apr 2020 15:51:38 +0200
-Received: by intern.sernet.de
- id 1jK0Fu-0003m1-9A; Thu, 02 Apr 2020 15:51:38 +0200
-To: Rowland penny <rpenny@samba.org>,
- samba-technical <samba-technical@lists.samba.org>
-References: <0acb2828-a298-4a79-421d-683a771d9a93@samba.org>
- <9a67100a-d672-5765-227e-641ced43e683@sernet.de>
- <ebeb8392-183a-8eed-9efe-14bbc40ec31f@samba.org>
-Organization: SerNet GmbH
-Subject: Re: [PATCH] samba-tool group show
-Message-ID: <e50908f4-1272-618e-2bdc-b0f403541193@sernet.de>
-Date: Thu, 2 Apr 2020 15:51:17 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
-MIME-Version: 1.0
-In-Reply-To: <ebeb8392-183a-8eed-9efe-14bbc40ec31f@samba.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+	id 1jK6fO-0039BE-B4; Thu, 02 Apr 2020 20:42:22 +0000
+Received: from [13.77.154.182] (port=53292 helo=linux.microsoft.com) 
+ by hr1.samba.org with esmtp (Exim) id 1jK6fJ-0039B7-4X
+ for samba-technical@lists.samba.org; Thu, 02 Apr 2020 20:42:19 +0000
+Received: by linux.microsoft.com (Postfix, from userid 1004)
+ id 04F1620B46F0; Thu,  2 Apr 2020 13:42:10 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 04F1620B46F0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linuxonhyperv.com;
+ s=default; t=1585860130;
+ bh=T7M811vVoO8LHYy+OccoE+fza63+weNdKO1rucXW+T4=;
+ h=From:To:Cc:Subject:Date:Reply-To:From;
+ b=F3CHGz/rYb1cNT869Csn98lvD2yLrx7hJ8tKWAjWcZtzOy8+NhsYkI52KR413hW/Q
+ MLYPu5KzCG6P/hwB+UFpdVxVXYTLtsvrqb8zKZNYuW2Jl1PAL7TyKWGSvB03RcKpsv
+ peb8i9FKM1vutcerJsv4Y6rJzGKVNJvFpcOPqGoc=
+To: Steve French <sfrench@samba.org>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org
+Subject: [Patch v2] cifs: smbd: Update receive credits before sending and deal
+ with credits roll back on failure before sending
+Date: Thu,  2 Apr 2020 13:42:06 -0700
+Message-Id: <1585860126-72170-1-git-send-email-longli@linuxonhyperv.com>
+X-Mailer: git-send-email 1.8.3.1
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,59 +48,100 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Bj=C3=B6rn_Baumbach_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?Bj=c3=b6rn_Baumbach?= <bb@sernet.de>
+From: longli--- via samba-technical <samba-technical@lists.samba.org>
+Reply-To: longli@microsoft.com
+Cc: longli@linuxonhyperv.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 4/2/20 12:35 PM, Rowland penny wrote:
-> On 02/04/2020 10:58, Björn Baumbach wrote:
->> Hi Rowland,
->>
->> On 4/2/20 10:44 AM, Rowland penny via samba-technical wrote:
->>> Hi, <samba-tool group show 'groupname'> will only show the groups info
->>> if it is a global security group.
->>>
->>> The attached patch fixes this.
->>>
->>> See bug: https://bugzilla.samba.org/show_bug.cgi?id=14335
->> Thank you for fixing this!
->> I wonder about the use of "objectCategory=group". I would expect the use
->> of "objectClass=group" instead. But I tried the patch and it works - I
->> did not try to understand why, yet. The objectCategory looks like
->> "objectCategory: CN=Group,CN=Schema,CN=Configuration,..."
->> I checked the samba-tool code and see that we typically use the
->> objectClass attribute.
->> Is there a special reason for the use of "objectCategory"?
-> 
-> From my investigations, this is the recommended Windows way of carrying
-> out searches
-> 
-> For instance, you can use '(&(objectCategory=person)(objectClass=user))'
-> to search for all users.
+From: Long Li <longli@microsoft.com>
 
-Thank you and Alexander very much for the explanation!
+Recevie credits should be updated before sending the packet, not
+before a work is scheduled. Also, the value needs roll back if
+something fails and cannot send.
 
->> If "objectClass" is also fine, I would adapt the patch, add my RB and
-> 
-> Nope, I am fairly sure my way is the best way, so can I still have your
-> RB ?
-> 
-> If so, can I also ask you to push it, I haven't a clue how to do this. ;-)
+Signed-off-by: Long Li <longli@microsoft.com>
+Reported-by: kbuild test robot <lkp@intel.com>
+---
 
-Yes, RB+ and pushed to autobuild. :-)
+change in v2: fixed sparse errors reported by kbuild test robot
 
-Best regards,
-Björn
+ fs/cifs/smbdirect.c | 25 ++++++++++++++++++-------
+ 1 file changed, 18 insertions(+), 7 deletions(-)
 
+diff --git a/fs/cifs/smbdirect.c b/fs/cifs/smbdirect.c
+index c7ef2d7ce0ef..fa52bf3e0236 100644
+--- a/fs/cifs/smbdirect.c
++++ b/fs/cifs/smbdirect.c
+@@ -450,8 +450,6 @@ static void smbd_post_send_credits(struct work_struct *work)
+ 	info->new_credits_offered += ret;
+ 	spin_unlock(&info->lock_new_credits_offered);
+ 
+-	atomic_add(ret, &info->receive_credits);
+-
+ 	/* Check if we can post new receive and grant credits to peer */
+ 	check_and_send_immediate(info);
+ }
+@@ -822,6 +820,7 @@ static int smbd_create_header(struct smbd_connection *info,
+ 	struct smbd_request *request;
+ 	struct smbd_data_transfer *packet;
+ 	int header_length;
++	int new_credits;
+ 	int rc;
+ 
+ 	/* Wait for send credits. A SMBD packet needs one credit */
+@@ -840,7 +839,7 @@ static int smbd_create_header(struct smbd_connection *info,
+ 	request = mempool_alloc(info->request_mempool, GFP_KERNEL);
+ 	if (!request) {
+ 		rc = -ENOMEM;
+-		goto err;
++		goto err_alloc;
+ 	}
+ 
+ 	request->info = info;
+@@ -848,8 +847,11 @@ static int smbd_create_header(struct smbd_connection *info,
+ 	/* Fill in the packet header */
+ 	packet = smbd_request_payload(request);
+ 	packet->credits_requested = cpu_to_le16(info->send_credit_target);
+-	packet->credits_granted =
+-		cpu_to_le16(manage_credits_prior_sending(info));
++
++	new_credits = manage_credits_prior_sending(info);
++	atomic_add(new_credits, &info->receive_credits);
++	packet->credits_granted = cpu_to_le16(new_credits);
++
+ 	info->send_immediate = false;
+ 
+ 	packet->flags = 0;
+@@ -887,7 +889,7 @@ static int smbd_create_header(struct smbd_connection *info,
+ 	if (ib_dma_mapping_error(info->id->device, request->sge[0].addr)) {
+ 		mempool_free(request, info->request_mempool);
+ 		rc = -EIO;
+-		goto err;
++		goto err_dma;
+ 	}
+ 
+ 	request->sge[0].length = header_length;
+@@ -896,8 +898,17 @@ static int smbd_create_header(struct smbd_connection *info,
+ 	*request_out = request;
+ 	return 0;
+ 
+-err:
++err_dma:
++	/* roll back receive credits */
++	spin_lock(&info->lock_new_credits_offered);
++	info->new_credits_offered += new_credits;
++	spin_unlock(&info->lock_new_credits_offered);
++	atomic_sub(new_credits, &info->receive_credits);
++
++err_alloc:
++	/* roll back send credits */
+ 	atomic_inc(&info->send_credits);
++
+ 	return rc;
+ }
+ 
 -- 
-SerNet GmbH, Bahnhofsallee 1b, 37081 Göttingen
-phone: 0551-370000-0, mailto:kontakt@sernet.de
-Gesch.F.: Dr. Johannes Loxen und Reinhild Jung
-AG Göttingen: HR-B 2816 - http://www.sernet.de
+2.17.1
 
-Samba eXPerience 2020 - online edition!
-sponsored by Google, Microsoft & SerNet
-May 26th-28th 2020, https://sambaXP.org
 
