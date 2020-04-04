@@ -2,51 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0301919E5F0
-	for <lists+samba-technical@lfdr.de>; Sat,  4 Apr 2020 16:56:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C08C19E600
+	for <lists+samba-technical@lfdr.de>; Sat,  4 Apr 2020 17:06:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=kv9YjvCHehnGDJZzNiM24DSjfxVaUF/fGBJJSqGIUc0=; b=E2whWmf8v0DkyxbFeF/kAD46yn
-	eK7NM16m+6h8onj2rVfpvrpC9ZIZa4X6ioo9INLWms+17OEhSf8EKe6mysXRD8drOow9yaiz9DNgr
-	fFQfTuSkb1P0evogqH4Sl1+gr2+FUU8zI6d16w/0ESykZ1GjCCPCaLlsER/72I0t/eQ4HF3koocnD
-	I8cAdymrLEQijAUNol73Wdyky2VIc87U2P+dRucDpxsrb8/qmQKkjUvWDnbkUDikNvXTVncDUT2gA
-	5E2ArDbPLMKiiAZDWdztyQ+qLgJNcLrc8z9IKhIjfLK/Fagfl3Rhs1ey9gC9slNJzoU7PRNR1Y5KS
-	R599ER9g==;
-Received: from localhost ([::1]:37250 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=ghRYxnSRqOpP1kwR0YldqZD/CBa33sxaBbn24AbF+Lk=; b=O64bvcewWL+gN5onlqTiJOSujJ
+	7hj+VflWwTGvliEiSP4CBXDVc1vo/+a/D6k2tE9mkZylgT6nva2yCPzjhq0c+dsixrCKOHX8mKdrT
+	36XI/VPGvSoZ4eU4LsLLOIpoAFcSL5YlOwENtt/S9V0fX0duIUC7LQPDsD6LhI6toFOGnUYF20sj9
+	qqZRRMa37vHuOXgjSZ/oMwY0+G5uI5u5jMmWxG7q6J3BUQHWGkjFxu1GUhM4hSfE2HEzve5GECAdH
+	8w4+gztZzx8Wkih+MnHziQizCtk0+7BIZgPW8E7PsvUQ1NplFhdNhaUOnnVxPCutrClxNfstURIAi
+	LjTfgQWQ==;
+Received: from localhost ([::1]:38016 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jKkCP-003JDT-OG; Sat, 04 Apr 2020 14:55:05 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62748) 
+	id 1jKkMn-003JKC-30; Sat, 04 Apr 2020 15:05:49 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10356) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jKkCE-003JDJ-H2
- for samba-technical@lists.samba.org; Sat, 04 Apr 2020 14:55:02 +0000
+ (Exim) id 1jKkMi-003JK5-NB
+ for samba-technical@lists.samba.org; Sat, 04 Apr 2020 15:05:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=kv9YjvCHehnGDJZzNiM24DSjfxVaUF/fGBJJSqGIUc0=; b=pT1uRYNrMz0cWAeb0dQkA69aC6
- Qd1+pTFCrBO5TcC14j/eJQZg9ghie+aVwW2Hn7eq1giwA/IM1fM0Rh7mx9xyzxrzEiw5fV3bhptRn
- IJuTSbos/HuJfFThXHSI7d5dL9xPaJwlWsvcbJ3LuD4DhJQs18fq2pVcTIJuucnVdG0ularWQgtLM
- Dv8YkE9SNmHQq2MOeL2SaZnYT/gknBIOeQa1ZNQwx6ivLckWWzULSa+0YgomZMXGCIPNZbalJJz9j
- A63NnSe0K+iLccEF0qLOw1YCxjgOAGyG9k1FbHr6iCz4WcUgMF+A6zW+w39+71fWt13IsihZGEWi1
- mMw2vj/bmnk0I0/9PssjuR23IVzrJDG1/+RFQca4SgCy71vF15U6K4ZmU/eUFKCAtp7WQtjMJ4R7Y
- AZrMo9gqhmaQyYI92wDhH6JhpSb4jooIQ6Fqp+u01OW+1iMyGdBNwF4g2IIKO6BA8gWEtVV9OBw4g
- CUhxD72HdYvkyaZcrDwb8yNW;
+ s=42; h=Message-Id:Date:From:To:CC;
+ bh=2uJOjEJ5sSgb/B5mETwAwCNQT1cGxn/yY9bEVgbAn1M=; b=U/dfOPHCrCUBm3sgpNi/ut294m
+ u5xwGHP3po28SlmXIgMkl+h/zO1gJXZVs+Bso/oMvJfoVakx4F3dRqhiUsagh8Uq+lucB+d+T4oZH
+ BiAj65XIRmsGyasnthLh7JQYqYdJ2L7u3q7wDsD9hcbGqXK8X2y9UMq6dFHUF7oPdCJVpLvfiMaWj
+ kVcBDLhRWRbgtjLy4PdPeq3a/MIneB1zmp/Gt0lNb2z/A68O9DcNfclYFAu8D6gKbW+NEfv/mulS2
+ kMhK/zalalB28eNW6t0kPt2joWMGJw1bGVybjXzxqhsk/FrH+ym5Wj8EyhdUohhGmkql4mDILflKy
+ RXCpqOsSel9cqoCeKjXDH6hE0d7sxrASbyIUyVXi2dxP0z/k8DDU0eWsBSCI+Ao7MX4TG0arQba61
+ B4mrcpE4WiODpSeO8B/LbG/yP7tn8pOBdlBMEKDZzEqOqbnYtFrk9AHoz9Lv4gXJLmSrQCmBcPVOd
+ D57OO83Uo2UHYMF5kh9xrMr2;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jKkCA-0003KR-Ky; Sat, 04 Apr 2020 14:54:50 +0000
-Subject: Re: selftest/flapping: mark samba3.nbt.dgram.netlogon.* as flapping
-To: Noel Power <nopower@suse.com>, samba-technical@lists.samba.org,
- Noel Power <noel.power@suse.com>
-References: <20200404011303.EF6081400BD@sn.samba.org>
- <7206459d8324b34757339d9d858266c9cbf47303.camel@samba.org>
- <96732fcc-6632-f93d-c075-bec077475165@suse.com>
-Message-ID: <abafcbc0-a433-12b1-58d4-011e934b42c3@samba.org>
-Date: Sat, 4 Apr 2020 16:54:49 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ (Exim) id 1jKkMa-0003PB-M3
+ for samba-technical@lists.samba.org; Sat, 04 Apr 2020 15:05:36 +0000
+Received: from localhost ([::1] helo=hr3.samba.org)
+ by hr3.samba.org with esmtp (Exim 4.92)
+ (envelope-from <github@samba.org>) id 1jKkMZ-004Upz-Jg
+ for samba-technical@lists.samba.org; Sat, 04 Apr 2020 15:05:36 +0000
 MIME-Version: 1.0
-In-Reply-To: <96732fcc-6632-f93d-c075-bec077475165@suse.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="pxJiLWX3up8VUPP2dbcCrvypbWCLdnx2N"
+Subject: Re: samba-tool - uncaught exception bad call flags
+To: samba-technical@lists.samba.org
+In-Reply-To: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-217@samba.org>
+References: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-217@samba.org>
+Date: Sat, 04 Apr 2020 15:05:35 +0000
+Message-Id: <E1jKkMZ-004Upz-Jg@hr3.samba.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,63 +60,15 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Github bot account via samba-technical <samba-technical@lists.samba.org>
+Reply-To: samba-technical@lists.samba.org
+Cc: github@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---pxJiLWX3up8VUPP2dbcCrvypbWCLdnx2N
-Content-Type: multipart/mixed; boundary="aO1UTkh0F2Nw83NKSzHxWpIPWsbGEtj0t"
-
---aO1UTkh0F2Nw83NKSzHxWpIPWsbGEtj0t
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Am 4/4/20 um 2:35 PM schrieb Noel Power via samba-technical:
-> interesting, I didn't know that, must say don't recall this one in CI
-> but post these changes this test started flapping more frequently on
-> gitlab CI on the merge branch. But it took 3 attempts I think to get
-> this patchset through on autobuild (all failing on this test) strangely=
-
-> it seems it on the samba-ad-dc-1-mitkrb5 job that it fails in (can't
-> recall seeing it fail on the normal samba-ad-dc either on gitlab or
-> sn-devel)
-
-fwiw, it was flapping on ad-dc as well quite often in the branch CIs.
-
--slow
-
---=20
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
-
-
---aO1UTkh0F2Nw83NKSzHxWpIPWsbGEtj0t--
-
---pxJiLWX3up8VUPP2dbcCrvypbWCLdnx2N
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAl6In7kACgkQqh6bcSY5
-nkbBbA/+MF9OD63shDAWdGrmkG/pAsinvx/AuH52ZjdPz+Jg6wu055KWTayv9lbZ
-R3yQaPjQbg4n1opKxY1Yl+Dw2PRLFyAnPxH4sTQGYXI7uGbBtG4DSAmkMF7gG/Bk
-3muBUd5ZXjqJErzdd/7y+9XCjwYPdWE9GOxMqxTUpKyPx0svfAFFp98qcezRHoNq
-vIBlfeYCwONWO80SHbKAkmXjR5GBm5GD6XpnaPU76BX/tefsuRylzYFCJusxAnD3
-6nzdCuTgNMgvOwVJ1LZNFqg6BYri1jgMhyYyZGxYRJ1sqCIO94xHLVmcjp/f3fhW
-Lh735ufiwPMoulSrkKwLloFd8KvfipxCvnIUKNqZlnhQeh0WhxqUhr15ArcGBSwF
-oxVpnHnUrvUFLuLTWdeHDriHkJqAnOR8KhVDcrSE8amZRZZlFW3L1fhVciq0p+i/
-bdKiWd9jnRdhnOzLYbWuPcoIxujWgrQcuNBA/2ykWoc91/kHTfb1CSW5gBIFAtr2
-fCm7laEiUHt0fRRDROU+UUuIizgepv9c5POD7Wlvy475Bva8E9e8FHFnkWGyq3fZ
-hrZcYAWDWZg6CXPwb9jxhOkSUmGNKFu8tz0H2xwB7YkxBlUl/guEtHTGItz8HOiJ
-2V+DqYE8VZDTymh9Wndu2DSQ4ThLfjLYGr/DSVcBR8BA/aBHS4A=
-=PKF9
------END PGP SIGNATURE-----
-
---pxJiLWX3up8VUPP2dbcCrvypbWCLdnx2N--
-
+TmV3IGNvbW1lbnQgYnkgamVsbWVyIG9uIFNhbWJhIEdpdGh1YiByZXBvc2l0b3J5CgpodHRwczov
+L2dpdGh1Yi5jb20vc2FtYmEtdGVhbS9zYW1iYS9wdWxsLzIxNyNpc3N1ZWNvbW1lbnQtNjA5MDQy
+MTUwCkNvbW1lbnQ6CkZvciBoZWxwIHdpdGggcnVubmluZyBTYW1iYSwgcGxlYXNlIGFzayBvbiB0
+aGUgbWFpbGluZyBsaXN0OiBodHRwczovL2xpc3RzLnNhbWJhLm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3NhbWJhDQoNClBsZWFzZSByZXBvcnQgYnVncyBvbiBodHRwczovL2J1Z3ppbGxhLnNhbWJhLm9y
+Zy8uCg==
