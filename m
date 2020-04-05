@@ -2,56 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19B8019E609
-	for <lists+samba-technical@lfdr.de>; Sat,  4 Apr 2020 17:13:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 339B919E9B0
+	for <lists+samba-technical@lfdr.de>; Sun,  5 Apr 2020 09:05:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=cBIaFBiVnvBFOGSgAFwzJ5KjiTyvqM5neCtriEqKz+s=; b=x/PlAygm6IfOirwhNJ5az2a5JK
-	GQKfs5XyI5f3AV/e4cfk6WLHEuakJpX96U7N0c4Jc5M6VEbFzen0IZ0rrr3berdX+u4XxsrF36lOI
-	edbHNxZOPRTEgaUXIbz1nQKL3PLD1/MmUlUhhmXPgC/5tZgVS/+BY9uKjIjyE7e8s5hvafvF0y6JL
-	kBpa8jjykNka+SX//r2KTsHZBxcHniL5Q7gBlDIjnUBtVNlTL8MI+3zg1R6suO2TEYvrYoSFq8d1Q
-	ymxYdIGq9PM4JFMOuyW8v+Iw3rSpPqf2n+3UOzqCJZzykmi6XeMrSdEOP2iKyBdyfJ4JyIx1kjrtz
-	PI4qUshQ==;
-Received: from localhost ([::1]:39542 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=JJQAzq0ax2arX2iwAo5YXAmCHZh6i5Gw6ZZ3O0fFkDY=; b=Ivv9MSsvuULEiJbla0MaMnGq+H
+	oznOZ0EpjD4/K0UwaBMOSNgbxSX2Zj6MCgaaggVLjWDbiV9/pfOEcMBlXUTrV6uWaRQPx3Deb/7c/
+	Dyr9C0R2tqadc6mnYvsOc2gpiLgV8rmu5vsSsFt4IjRf1IaP+ecisNP/k3Hz6KB6h3f7gdnCpDTs0
+	GV2oBm3RZLyRvDQW1HuXOa8LuPQa5TQg15TOpsZRb9nhUWECHBL5ufoZmYggzzuWMhw4XM/QBg5yV
+	C8HsEFLN8F4B6ekk9sBz/Wt1KtkLPkAGOx8Wujo9uAsDb2PRSd9G/Vyymy9SyG9Vi4+gJ0YHoTY1Q
+	DCphckvA==;
+Received: from localhost ([::1]:47316 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jKkTg-003JWf-G9; Sat, 04 Apr 2020 15:12:56 +0000
-Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232]:38226) 
+	id 1jKzKG-003Mto-Qk; Sun, 05 Apr 2020 07:04:12 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63148) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jKkTb-003JWY-2C
- for samba-technical@lists.samba.org; Sat, 04 Apr 2020 15:12:53 +0000
-Received: by mail-lj1-x232.google.com with SMTP id v16so10033282ljg.5
- for <samba-technical@lists.samba.org>; Sat, 04 Apr 2020 08:12:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=cBIaFBiVnvBFOGSgAFwzJ5KjiTyvqM5neCtriEqKz+s=;
- b=KHszeCjTx+I/oIXUxmAnPhvZu4U+2Kvb5fzisv53cbXh3zojOsdm6MFPqxwtSksrPq
- DiEi/PmwOKpu/L5SSPp4XF36WkilNcqldXtQtj36XoxUQGaH49625SQOVAMx6ZfffFz8
- OXgIfjb+PXkstkBFzN4tChokHm47LAcwbX+0un1J2cscXPze+Gs8NqamgoWi4bNUFJQh
- leNkUhKQiVRETPfJqEcuws//KB8Bkg4nTGW+w5xG+C9QId1FWVOiqOPdauWDREq6Fba1
- upzNvFX+noPaj9Eurj/V/Sl/HVUv+6Grzup+gR6iZFlnypRUuhlcWnj9MkCevPSJyNhI
- Aj0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=cBIaFBiVnvBFOGSgAFwzJ5KjiTyvqM5neCtriEqKz+s=;
- b=mlmjugOVE3A+4evQ7pvuZWgDp6Ki9/J4lU3KDSAXwdKU9tv+NRt0L3ScmDRFqNPZyq
- 1CYRAEoQQ8LlC/yR1kCrnMZyqvXdLW4AI0KPoDSgMVdyjyPz0pRolqTY4piaA9aZ2OKH
- XbUd+6kGEo7pm8DgjBXsZBv+7wjNoyKLEuMo22KAzTofl32LRU16oN2yRV8t+C7YKeKB
- Gk2pZQCdBP/nqR2U00BatIREZdARpAJY1K3B7TWn8bC7++ytURUPK1oPI++LC2ykeA2z
- X41rffjPDuBPbn3mpcKql8KP1tQARelNQ3SwAnQPeUsFwlJIbASWzfG8DIjZ9otoMzU0
- tkrg==
-X-Gm-Message-State: AGi0PuZTSe7ZaVRVdQH7VT8QF5dx2xOrbOWS4pT63Sjpnzi8sMGACh6X
- OTD6ljeKxMNtdpNFh31DHvU5PVWngbKwsQKnPCMhYlXC
-X-Google-Smtp-Source: APiQypLd6wcHzEm9ZzkPWw5wPxohuaGYwN4c89ij/JfbkIwXr9fpY+xwPj92vnEJxJSS69wpErP+DTrSFhFpKRKC8Ek=
-X-Received: by 2002:a2e:9b41:: with SMTP id o1mr7692493ljj.145.1586013168979; 
- Sat, 04 Apr 2020 08:12:48 -0700 (PDT)
-MIME-Version: 1.0
-Date: Sat, 4 Apr 2020 17:12:38 +0200
-Message-ID: <CAC-fF8Ry1imc+yxKpwi4qpZsjbzLejeRX5UB-LAvGM3=yM0A5g@mail.gmail.com>
-Subject: gitlab: mit-kdc on fedora 32 with krb5 v1.18
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Andreas Schneider <asn@samba.org>, Alexander Bokovoy <ab@samba.org>
+ (Exim) id 1jKzK0-003Mtg-Iq
+ for samba-technical@lists.samba.org; Sun, 05 Apr 2020 07:04:01 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=JJQAzq0ax2arX2iwAo5YXAmCHZh6i5Gw6ZZ3O0fFkDY=; b=ch/YRSuRvw3vHnwR19TucrpJoF
+ 0itklAxCgRre1iHKhct3dijZFWrQuutVFBflpiajmkahqea/hF/+mb3YyXDSzH9UUx6SY6kPiJCAX
+ ktnerijfy15Eu1UJNBWAWTKQsuOXq5uNGIf64vQqOHEqXJVQtM2qBXgXhf359tQGAvLzDNpqTrBRb
+ gO66DftJjYgGrGApwIOyfTkHDGBRkUT41Qr1kTpr1lraWLs6GNtMMV8v+gO/JaXabJCmygvb8k4w0
+ GD+zIW/hKGAleQyQulooRBGE4maSQHhoJqiP8VaJ/tqcei4EWIkHCcBGT7+lkbfl2lxpdkApVSSNM
+ c6HKS1gnRNVAdmnAqC3GdxBpI2/2yOVUye0FgSvZskpLBZb19oVEgB8YzB9q51Qzyv4abWZOHnLrS
+ kKmoweZW7CBuxp6ccjDl/J4aSd7P2LY+RaSZy7D5s2zlXVnwLWTBD9NXap5xSY3hFa3eNa/HNjJST
+ RYaZjgVG8j2KXmIS3UqDu2il;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jKzJx-0008Do-Ep; Sun, 05 Apr 2020 07:03:54 +0000
+Message-ID: <8b233592cbf1e7db6e6aebe4d273fd5a186aa66d.camel@samba.org>
+Subject: Re: selftest/flapping: mark samba3.nbt.dgram.netlogon.* as flapping
+To: Ralph Boehme <slow@samba.org>, Noel Power <nopower@suse.com>, 
+ samba-technical@lists.samba.org, Noel Power <noel.power@suse.com>
+Date: Sun, 05 Apr 2020 19:03:49 +1200
+In-Reply-To: <abafcbc0-a433-12b1-58d4-011e934b42c3@samba.org>
+References: <20200404011303.EF6081400BD@sn.samba.org>
+ <7206459d8324b34757339d9d858266c9cbf47303.camel@samba.org>
+ <96732fcc-6632-f93d-c075-bec077475165@suse.com>
+ <abafcbc0-a433-12b1-58d4-011e934b42c3@samba.org>
 Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,17 +59,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@gmail.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Andreas, all
+On Sat, 2020-04-04 at 16:54 +0200, Ralph Boehme via samba-technical
+wrote:
+> Am 4/4/20 um 2:35 PM schrieb Noel Power via samba-technical:
+> > interesting, I didn't know that, must say don't recall this one in CI
+> > but post these changes this test started flapping more frequently on
+> > gitlab CI on the merge branch. But it took 3 attempts I think to get
+> > this patchset through on autobuild (all failing on this test) strangely
+> > it seems it on the samba-ad-dc-1-mitkrb5 job that it fails in (can't
+> > recall seeing it fail on the normal samba-ad-dc either on gitlab or
+> > sn-devel)
+> 
+> fwiw, it was flapping on ad-dc as well quite often in the branch CIs.
 
-Any idea how to make the mit-kdc build run on fedora 32 with krb5
-v1.18 in gitlab? It looks like it currently isn't.
+There are others in this area, we never understood why:
 
-https://gitlab.com/samba-team/devel/samba/-/commits/iboukris-test
+This flapped in the weekly CI run:
+UNEXPECTED(failure): samba3.nbt.dgram.ntlogon(ad_dc)
 
-Thanks!
+Andrew Bartlett
+-- 
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+
+
 
