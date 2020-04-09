@@ -2,52 +2,73 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF1991A2868
-	for <lists+samba-technical@lfdr.de>; Wed,  8 Apr 2020 20:21:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8876C1A37B7
+	for <lists+samba-technical@lfdr.de>; Thu,  9 Apr 2020 18:06:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=0NbN+zZ6nJkPwRW9EFOaT3oJuAFOk6yMjO8wL1c24sw=; b=v0f/EBMUKFOzHYcJ3LnvJvD06A
-	YHUvneuGQi/kSpbkh9XEpC1Q2zCd9AA59vYFduj8JSUfh1cxY8zf0c3FzuW3SM5OZ05t+MX/ns5Ue
-	yb0vZXJpDR7nVi8ZHAtWAwT8Cn9naUQDrafsT/2i1z3+bkuDuytVvixnhua1a3C5lPtwQhVwdEO8e
-	wR3shd7eABB1m6hLsr17S52bQw6/qjXKZTvRYsZR8fR4zGv2Y3R6YVw+9GzPH0HsFY47oNjwPiMq7
-	IFtpCbccVAk71by9b4aC7e+UGT3LXU6HYVjmKABzKsQqwauW8S+YBs7YxbYiMFhtXRvKpkXf/Nejc
-	hFeKNHFQ==;
-Received: from localhost ([::1]:61452 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=CKQN/9hAov1+m3illzHFaU0bQP6l0e8lPgaEfoyoCzc=; b=nJICp70DqTdn18oKIF2ZVvicL1
+	FB3j7JD2ZUno7BV/7VUujyHNMakxXo1hfju+pGGMPbRsPuRFOYzKH/rWdmVDD031L73NKU1wB7jdw
+	gbg14t+pFevCxdYVxPU8NPPH31/UY+CbqKBxGxTLrIpUg4v7FD3D3qvzgvJBCfTUq5gUe0iiSXAvN
+	GKjm7/n/5vhBB3X1bdsRLb7L/Infal335tHrkH2EjaFarNGtp2tylYW78S3OwTBpP+ixIlFqDGms/
+	ODODdqEjcGHvKClp5AKL5aAj/Lhnxyb/bLb2P43XFZN95QeJjH3RfKT7rs6/yTHQgcW6Xt9kfqyhe
+	M6j6fSqg==;
+Received: from localhost ([::1]:61538 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jMFJl-000CWl-2g; Wed, 08 Apr 2020 18:20:53 +0000
-Received: from smithers.houseofnate.net ([66.175.213.200]:37388) 
+	id 1jMZgW-000KJH-7J; Thu, 09 Apr 2020 16:05:44 +0000
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:21734) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jMFJf-000CWe-Kk
- for samba-technical@lists.samba.org; Wed, 08 Apr 2020 18:20:50 +0000
-Received: from localhost (localhost [127.0.0.1])
- by smithers.houseofnate.net (Postfix) with ESMTP id 0C8B621F480
- for <samba-technical@lists.samba.org>; Wed,  8 Apr 2020 13:55:51 -0400 (EDT)
-Received: from smithers.houseofnate.net ([127.0.0.1])
- by localhost (smithers.houseofnate.net [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id iEN_By8Dukv0 for <samba-technical@lists.samba.org>;
- Wed,  8 Apr 2020 13:55:50 -0400 (EDT)
-Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com
- [209.85.208.182])
- (using TLSv1 with cipher ECDHE-RSA-AES128-SHA (128/128 bits))
- (No client certificate requested) (Authenticated sender: nturner)
- by smithers.houseofnate.net (Postfix) with ESMTPSA id 2852421EF56
- for <samba-technical@lists.samba.org>; Wed,  8 Apr 2020 13:55:50 -0400 (EDT)
-Received: by mail-lj1-f182.google.com with SMTP id 142so4063898ljj.7
- for <samba-technical@lists.samba.org>; Wed, 08 Apr 2020 10:55:50 -0700 (PDT)
-X-Gm-Message-State: AGi0PuYsMSsoeEn00rrsBCIRYd5wWng/BkIMx2fNv2k3tcxvR+m84Mil
- 7pxJK4XiRI9zjL830t7wculf44mifNWmxFFIrp8=
-X-Google-Smtp-Source: APiQypLSvRe/9cNtNAhWbrI8UMYhuJ7L7Sa3MuQ/m3RraLg1Lb5+If85yqLkZRX/whXq9hJYoCmPC0WiCFrBidyvkWg=
-X-Received: by 2002:a05:651c:201d:: with SMTP id
- s29mr5952066ljo.214.1586368548883; 
- Wed, 08 Apr 2020 10:55:48 -0700 (PDT)
+ (Exim) id 1jMZgQ-000KJ8-Vk
+ for samba-technical@lists.samba.org; Thu, 09 Apr 2020 16:05:41 +0000
+Received: from pps.filterd (m0098393.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 039G3MsT089856
+ for <samba-technical@lists.samba.org>; Thu, 9 Apr 2020 12:05:35 -0400
+Received: from e06smtp04.uk.ibm.com (e06smtp04.uk.ibm.com [195.75.94.100])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 309206n2qa-1
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <samba-technical@lists.samba.org>; Thu, 09 Apr 2020 12:05:34 -0400
+Received: from localhost
+ by e06smtp04.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+ Violators will be prosecuted
+ for <samba-technical@lists.samba.org> from <swen@linux.ibm.com>;
+ Thu, 9 Apr 2020 17:04:52 +0100
+Received: from b06cxnps4075.portsmouth.uk.ibm.com (9.149.109.197)
+ by e06smtp04.uk.ibm.com (192.168.101.134) with IBM ESMTP SMTP Gateway:
+ Authorized Use Only! Violators will be prosecuted; 
+ (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+ Thu, 9 Apr 2020 17:04:48 +0100
+Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
+ [9.149.105.59])
+ by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 039G5EEY59900130
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 9 Apr 2020 16:05:14 GMT
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 29FBFA4057;
+ Thu,  9 Apr 2020 16:05:14 +0000 (GMT)
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id D2C32A4055;
+ Thu,  9 Apr 2020 16:05:13 +0000 (GMT)
+Received: from sig-9-145-88-164.uk.ibm.com (unknown [9.145.88.164])
+ by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+ Thu,  9 Apr 2020 16:05:13 +0000 (GMT)
+Subject: Re: tldap search paged
+To: Jeremy Allison <jra@samba.org>
+Date: Thu, 09 Apr 2020 18:05:06 +0200
+In-Reply-To: <20200408171948.GA13874@jeremy-acer>
+References: <9ee1108dab93f774bb1be3eef0dceb711d2f1221.camel@linux.ibm.com>
+ <20200408160707.GA8347@jeremy-acer>
+ <697ec73e9ff11f54648f4e2519c3316031b53027.camel@linux.ibm.com>
+ <20200408171948.GA13874@jeremy-acer>
+Content-Type: multipart/signed; micalg="pgp-sha512";
+ protocol="application/pgp-signature"; boundary="=-5yPpy7XTQuo9PdaEdDV4"
+User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
 MIME-Version: 1.0
-Date: Wed, 8 Apr 2020 13:55:37 -0400
-X-Gmail-Original-Message-ID: <CAPw4iV6hCi_hvWAgJrQoovW9D5fM8TOcWSFBWn96X21qwC0JAg@mail.gmail.com>
-Message-ID: <CAPw4iV6hCi_hvWAgJrQoovW9D5fM8TOcWSFBWn96X21qwC0JAg@mail.gmail.com>
-Subject: autorid broken in samba 4.9?
-To: samba-technical@lists.samba.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+X-TM-AS-GCONF: 00
+x-cbid: 20040916-0016-0000-0000-0000030186DD
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 20040916-0017-0000-0000-000033656D23
+Message-Id: <45c482f7a6047743ba129bbbc585066d01899aaf.camel@linux.ibm.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,44 +82,96 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "Nathaniel W. Turner via samba-technical"
- <samba-technical@lists.samba.org>
-Reply-To: "Nathaniel W. Turner" <nate@houseofnate.net>
+From: swen via samba-technical <samba-technical@lists.samba.org>
+Reply-To: swen@linux.ibm.com
+Cc: samba-technical <samba-technical@lists.samba.org>, metze@samba.org,
+ Simo <simo@samba.org>, Volker Lendecke <vl@samba.org>, uri@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I have a configuration that is working correctly with samba 4.8 (in CentOS
-7.6). When I apply the same basic configuration to a system running samba
-4.9 (CentOS 7.7), I see a very strange behavior: The ID mapping for trusted
-domains does not work right.
 
-Both systems are joined to the domain tc84.local (TC84), which has a forest
-trust with TC83, and they have identical smb.conf files. Here's the idmap
-related bit:
+--=-5yPpy7XTQuo9PdaEdDV4
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-# testparm 2>/dev/null </dev/null | grep idmap
-        idmap config * : range = 1000000-19999999
-        idmap config * : backend = autorid
+On Wed, 2020-04-08 at 10:19 -0700, Jeremy Allison wrote:
+> On Wed, Apr 08, 2020 at 07:07:57PM +0200, swen wrote:
+> > On Wed, 2020-04-08 at 09:07 -0700, Jeremy Allison wrote:
+> > > You haven't explained *why* you need this code.
+> > Hmm sorry, I thought I did say that I'm in the process of creating
+> > a
+> > winbindd_ldap which is supposed to replace winbindd_ads.
+>=20
+> Can you start with explaining your overall design
+> for this, rather than diving into low-level coding.
+>=20
+The base goal is to lay the foundation for a series
+of winbind improvements.
+The replacement of the ADS-API in winbindd by the tldap library
+is just
+the first step.
 
-Here's the samba 4.8 system:
+Further goals in this area are:
 
-[root@kvm7246-vm005 ~]# wbinfo -i TC84\\administrator
-TC84\administrator:*:1100500:1100513::/home/administrator@TC84:/bin/bash
-[root@kvm7246-vm005 ~]# wbinfo -i TC83\\administrator
-TC83\administrator:*:1200500:1200513::/home/administrator@TC83:/bin/bash
+- Improve the failover times for disappeared DC
 
-And here's the same config on a samba 4.9 system:
+- optimize the kerberos ticket handling in such a way that=20
+  existing
+tickets are used instead of triggering a new auth request
 
-[root@kvm7246-vm008 ~]# wbinfo -i TC84\\administrator
-TC84\administrator:*:2000500:2000513::/home/administrator@TC84:/bin/bash
-[root@kvm7246-vm008 ~]# wbinfo -i TC83\\administrator
-TC83\administrator:*:10000:10000::/home/administrator@TC83:/bin/bash
+- centralize the DC connection management to support a reliable and=20
+=20
+fast detection of connection loss and reconnection process
 
-The UID 10000 is not within the idmap configured range!
+- integrate and condense the required code and functionality to
+  a minimum number of layers and remove APIs and layers not required.
 
-I looked a the idmap_autorid(8) manpage, and very very quickly scanned the
-source diffs between these versions, but nothing jumps out at me. Is this a
-known issue, or is there some new idmap configuration setting that's now
-needed?
+As a first step we decided to align the ldap libraries and
+move the
+functionality, included in winbindd_ads.c,
+to use the tldap library.
 
-n
+Since we didn't want to reinvent the wheel we started using the=20
+functio
+nality offered by the tldap-/tldap_util-library which does offer
+already a few of the required features.
+
+As a starting point of this first step, we replace each externally=20
+trig
+gered function (callbacks) from the winbindd_ads.c=20
+by pure-ldap
+versions.
+Not only that this is the least invasive approach but it eases the=20
+test
+ing as the results and timings are easy to compare.
+
+I hope this explains things and motivates you all to support the small
+modifications suggested by my patch-set.
+
+Cheers Swen
+
+--=-5yPpy7XTQuo9PdaEdDV4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEErGbWt5PHCTgy2J0tug2knLYPYasFAl6PR7IACgkQug2knLYP
+YavreQ//YWnCKSYLT3TaNGcJdAWZp2kqPPjQEzNyUpr4OZubx5r4Natzv3+ZhtUR
+krlcEhhs0RfpNob3RSjDSUoMiAZ+15FNw7lEn8+PGNCSgDXJL+8McYehgiCmQqJ2
+HTw/6IL5QegVyiqKZpslogia8zM0zSIB290C5Daq6AqiCLDaUhs1VmgKp/5z6HJj
+IRMRF6EwtW0m9gzJVuLL3l/4evhVq2FTY9zQIKvQzIc7g/Cn9EAKhNAx6WAjTmIh
+ygTG2bgdJz1J/thUdvyf7BVaiBrAxk9NWKr6sAaWyOwXGXFCq+i82YQMv4fblldM
+y/kdplPzsLGVj3KMKtug8ZWLDY/KFAGhjs9ciQgsjdBTpX4zHs3593MsbZEvyRJI
+N2PfNkzJZRb/wYjN3uAKUNXPTATsooQek7GKRWul7DOo/WdMPYwUD68Bb6AAAFi4
+7rBV1vxq/oOODlkJuSXsGt9SfWFL0gY/8tbubKdHx6uxPsj0AELt0YxwWh1oqzT5
+DDweNX4uTEP59BEDgmQwWPd3gjkEcBjvx0p4twhkcR7Sem0mJJY5/rI4RpCAkwOK
+ktCqodsrsUlS5HeQdiX/04qzc59+Kc8B+GVnxPrgv2EFAi3PwIFeyehDNKKaQmSo
+8uy4qoJ4MYPHT8KFAZFGbkDy8SOwFm+VCaz4y0gKDYzjtA98XAY=
+=TeSi
+-----END PGP SIGNATURE-----
+
+--=-5yPpy7XTQuo9PdaEdDV4--
+
+
