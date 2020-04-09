@@ -2,73 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8876C1A37B7
-	for <lists+samba-technical@lfdr.de>; Thu,  9 Apr 2020 18:06:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EB061A38E2
+	for <lists+samba-technical@lfdr.de>; Thu,  9 Apr 2020 19:29:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=CKQN/9hAov1+m3illzHFaU0bQP6l0e8lPgaEfoyoCzc=; b=nJICp70DqTdn18oKIF2ZVvicL1
-	FB3j7JD2ZUno7BV/7VUujyHNMakxXo1hfju+pGGMPbRsPuRFOYzKH/rWdmVDD031L73NKU1wB7jdw
-	gbg14t+pFevCxdYVxPU8NPPH31/UY+CbqKBxGxTLrIpUg4v7FD3D3qvzgvJBCfTUq5gUe0iiSXAvN
-	GKjm7/n/5vhBB3X1bdsRLb7L/Infal335tHrkH2EjaFarNGtp2tylYW78S3OwTBpP+ixIlFqDGms/
-	ODODdqEjcGHvKClp5AKL5aAj/Lhnxyb/bLb2P43XFZN95QeJjH3RfKT7rs6/yTHQgcW6Xt9kfqyhe
-	M6j6fSqg==;
-Received: from localhost ([::1]:61538 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=SkgkdedU9o4nCMVwJFVOwvurdQlaw3CYN1eObS5TPHU=; b=KsFwZ463pb1fl/rxS2N7lcK1O/
+	1d8cMVSc9C15Y6y8riBr/+naAviWETB8ksPJOYMBoIu+mbGw5OW2YOtTa9f5Ht3cYLg4TdCtQ3gsM
+	ahWabid3kGrVeYLk2zo0L6lq2FKBChJVDx9p930I2Do6nJ9U0tvxsjMlo5jKX5WO+CIM+8qzRHWeV
+	O8aLkKhQP1zRoGowzy64m+fYxoLFuEJ9aULN+N1mhZHwXo12HeK682IyXPWNWim6wBiZJvuPBt4sz
+	8tkKp8Jywlx9CugqmlLBqW2aw7RRA3R3VOVpxoWB1Vp7RwVtSI4HyuUsBooYC4NwNXAs0vD0EDCwz
+	umPDWT0w==;
+Received: from localhost ([::1]:63748 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jMZgW-000KJH-7J; Thu, 09 Apr 2020 16:05:44 +0000
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:21734) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jMZgQ-000KJ8-Vk
- for samba-technical@lists.samba.org; Thu, 09 Apr 2020 16:05:41 +0000
-Received: from pps.filterd (m0098393.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 039G3MsT089856
- for <samba-technical@lists.samba.org>; Thu, 9 Apr 2020 12:05:35 -0400
-Received: from e06smtp04.uk.ibm.com (e06smtp04.uk.ibm.com [195.75.94.100])
- by mx0a-001b2d01.pphosted.com with ESMTP id 309206n2qa-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <samba-technical@lists.samba.org>; Thu, 09 Apr 2020 12:05:34 -0400
-Received: from localhost
- by e06smtp04.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <samba-technical@lists.samba.org> from <swen@linux.ibm.com>;
- Thu, 9 Apr 2020 17:04:52 +0100
-Received: from b06cxnps4075.portsmouth.uk.ibm.com (9.149.109.197)
- by e06smtp04.uk.ibm.com (192.168.101.134) with IBM ESMTP SMTP Gateway:
- Authorized Use Only! Violators will be prosecuted; 
- (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
- Thu, 9 Apr 2020 17:04:48 +0100
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
- [9.149.105.59])
- by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 039G5EEY59900130
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 9 Apr 2020 16:05:14 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 29FBFA4057;
- Thu,  9 Apr 2020 16:05:14 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id D2C32A4055;
- Thu,  9 Apr 2020 16:05:13 +0000 (GMT)
-Received: from sig-9-145-88-164.uk.ibm.com (unknown [9.145.88.164])
- by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Thu,  9 Apr 2020 16:05:13 +0000 (GMT)
+	id 1jMaz2-000Keq-MY; Thu, 09 Apr 2020 17:28:56 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39292) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jMayy-000Kej-60
+ for samba-technical@lists.samba.org; Thu, 09 Apr 2020 17:28:54 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=SkgkdedU9o4nCMVwJFVOwvurdQlaw3CYN1eObS5TPHU=; b=MWOXtV5iEJ3DKZHOkxVFgf1YdY
+ 1ffB0e4Mcjz9DW1uP588A+ArzIIueeKpQixDB0o8N/MDUVN6rASUucunHciQ6uCeJy7LbCZCoAkgh
+ hawWco2FilrxWOIX0GSGG50YWYOEaLPWCeCS21qsRQcXhdzTNXkE9Va38XXT4XMAmQvkqTZUweSWT
+ Aq6yOIFi5MXYz48Ls0GJx3JAAV5sSKxVd3/NB879Nwecr8h3HOHSUmXNnAvtLaakfryySv3YFr6jq
+ RXIwSPD8uYFqv69jas38nI091zixr5y0mCe5cwMyWAzey33EBLaQo/W4rUtuQ1Clu5JN6hhl3566q
+ kPJKIZtmKcsMT/ywfSXP5AH8GAg3GzDrdMo5tuCp+i7uw6HIf8ugk4PaZG3cDyoNi3/mSDo7hn5wz
+ nTF+HOFWL4OzVZRbIfIE3ujKElBzvW75k4tQUwQrmovN8f507eRIxEeLSleRpqnz67EK+87smCXGu
+ DowdOUSxEX0DuCO8MpKCXafV;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1jMayv-0003LF-R3; Thu, 09 Apr 2020 17:28:50 +0000
+Date: Thu, 9 Apr 2020 10:28:45 -0700
+To: swen@linux.ibm.com
 Subject: Re: tldap search paged
-To: Jeremy Allison <jra@samba.org>
-Date: Thu, 09 Apr 2020 18:05:06 +0200
-In-Reply-To: <20200408171948.GA13874@jeremy-acer>
+Message-ID: <20200409172845.GA7638@samba.org>
 References: <9ee1108dab93f774bb1be3eef0dceb711d2f1221.camel@linux.ibm.com>
  <20200408160707.GA8347@jeremy-acer>
  <697ec73e9ff11f54648f4e2519c3316031b53027.camel@linux.ibm.com>
  <20200408171948.GA13874@jeremy-acer>
-Content-Type: multipart/signed; micalg="pgp-sha512";
- protocol="application/pgp-signature"; boundary="=-5yPpy7XTQuo9PdaEdDV4"
-User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
+ <45c482f7a6047743ba129bbbc585066d01899aaf.camel@linux.ibm.com>
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-x-cbid: 20040916-0016-0000-0000-0000030186DD
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 20040916-0017-0000-0000-000033656D23
-Message-Id: <45c482f7a6047743ba129bbbc585066d01899aaf.camel@linux.ibm.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <45c482f7a6047743ba129bbbc585066d01899aaf.camel@linux.ibm.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,96 +59,79 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: swen via samba-technical <samba-technical@lists.samba.org>
-Reply-To: swen@linux.ibm.com
+From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christof Schmitt <cs@samba.org>
 Cc: samba-technical <samba-technical@lists.samba.org>, metze@samba.org,
- Simo <simo@samba.org>, Volker Lendecke <vl@samba.org>, uri@samba.org
+ Volker Lendecke <vl@samba.org>, Simo <simo@samba.org>, uri@samba.org,
+ Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+On Thu, Apr 09, 2020 at 06:05:06PM +0200, swen via samba-technical wrote:
+> On Wed, 2020-04-08 at 10:19 -0700, Jeremy Allison wrote:
+> > On Wed, Apr 08, 2020 at 07:07:57PM +0200, swen wrote:
+> > > On Wed, 2020-04-08 at 09:07 -0700, Jeremy Allison wrote:
+> > > > You haven't explained *why* you need this code.
+> > > Hmm sorry, I thought I did say that I'm in the process of creating
+> > > a
+> > > winbindd_ldap which is supposed to replace winbindd_ads.
+> > 
+> > Can you start with explaining your overall design
+> > for this, rather than diving into low-level coding.
+> > 
+> The base goal is to lay the foundation for a series
+> of winbind improvements.
+> The replacement of the ADS-API in winbindd by the tldap library
+> is just
+> the first step.
+> 
+> Further goals in this area are:
+> 
+> - Improve the failover times for disappeared DC
+> 
+> - optimize the kerberos ticket handling in such a way that 
+>   existing
+> tickets are used instead of triggering a new auth request
+> 
+> - centralize the DC connection management to support a reliable and 
+>  
+> fast detection of connection loss and reconnection process
+> 
+> - integrate and condense the required code and functionality to
+>   a minimum number of layers and remove APIs and layers not required.
+> 
+> As a first step we decided to align the ldap libraries and
+> move the
+> functionality, included in winbindd_ads.c,
+> to use the tldap library.
+> 
+> Since we didn't want to reinvent the wheel we started using the 
+> functio
+> nality offered by the tldap-/tldap_util-library which does offer
+> already a few of the required features.
+> 
+> As a starting point of this first step, we replace each externally 
+> trig
+> gered function (callbacks) from the winbindd_ads.c 
+> by pure-ldap
+> versions.
+> Not only that this is the least invasive approach but it eases the 
+> test
+> ing as the results and timings are easy to compare.
+> 
+> I hope this explains things and motivates you all to support the small
+> modifications suggested by my patch-set.
 
---=-5yPpy7XTQuo9PdaEdDV4
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Since the proposed merge request is only one piece, it probably does not
+make much sense to just merge this individually. Gitlab has the
+convention of tagging "work in progress" as WIP. What about the idea of
+marking the merge request as "WIP", and you continue working on the MR.
+If more patches are ready for review, you can update the WIP merge
+request, ask for feedback and then adjust. Once individual patches look
+good, they can be tagged with "Reviewed-by". When the rework is complete
+and we see the proposed API changes, the API usage and ideally test
+coverage, we can do a final review and merge. Does that sound like a
+possible way forward?
 
-On Wed, 2020-04-08 at 10:19 -0700, Jeremy Allison wrote:
-> On Wed, Apr 08, 2020 at 07:07:57PM +0200, swen wrote:
-> > On Wed, 2020-04-08 at 09:07 -0700, Jeremy Allison wrote:
-> > > You haven't explained *why* you need this code.
-> > Hmm sorry, I thought I did say that I'm in the process of creating
-> > a
-> > winbindd_ldap which is supposed to replace winbindd_ads.
->=20
-> Can you start with explaining your overall design
-> for this, rather than diving into low-level coding.
->=20
-The base goal is to lay the foundation for a series
-of winbind improvements.
-The replacement of the ADS-API in winbindd by the tldap library
-is just
-the first step.
-
-Further goals in this area are:
-
-- Improve the failover times for disappeared DC
-
-- optimize the kerberos ticket handling in such a way that=20
-  existing
-tickets are used instead of triggering a new auth request
-
-- centralize the DC connection management to support a reliable and=20
-=20
-fast detection of connection loss and reconnection process
-
-- integrate and condense the required code and functionality to
-  a minimum number of layers and remove APIs and layers not required.
-
-As a first step we decided to align the ldap libraries and
-move the
-functionality, included in winbindd_ads.c,
-to use the tldap library.
-
-Since we didn't want to reinvent the wheel we started using the=20
-functio
-nality offered by the tldap-/tldap_util-library which does offer
-already a few of the required features.
-
-As a starting point of this first step, we replace each externally=20
-trig
-gered function (callbacks) from the winbindd_ads.c=20
-by pure-ldap
-versions.
-Not only that this is the least invasive approach but it eases the=20
-test
-ing as the results and timings are easy to compare.
-
-I hope this explains things and motivates you all to support the small
-modifications suggested by my patch-set.
-
-Cheers Swen
-
---=-5yPpy7XTQuo9PdaEdDV4
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEErGbWt5PHCTgy2J0tug2knLYPYasFAl6PR7IACgkQug2knLYP
-YavreQ//YWnCKSYLT3TaNGcJdAWZp2kqPPjQEzNyUpr4OZubx5r4Natzv3+ZhtUR
-krlcEhhs0RfpNob3RSjDSUoMiAZ+15FNw7lEn8+PGNCSgDXJL+8McYehgiCmQqJ2
-HTw/6IL5QegVyiqKZpslogia8zM0zSIB290C5Daq6AqiCLDaUhs1VmgKp/5z6HJj
-IRMRF6EwtW0m9gzJVuLL3l/4evhVq2FTY9zQIKvQzIc7g/Cn9EAKhNAx6WAjTmIh
-ygTG2bgdJz1J/thUdvyf7BVaiBrAxk9NWKr6sAaWyOwXGXFCq+i82YQMv4fblldM
-y/kdplPzsLGVj3KMKtug8ZWLDY/KFAGhjs9ciQgsjdBTpX4zHs3593MsbZEvyRJI
-N2PfNkzJZRb/wYjN3uAKUNXPTATsooQek7GKRWul7DOo/WdMPYwUD68Bb6AAAFi4
-7rBV1vxq/oOODlkJuSXsGt9SfWFL0gY/8tbubKdHx6uxPsj0AELt0YxwWh1oqzT5
-DDweNX4uTEP59BEDgmQwWPd3gjkEcBjvx0p4twhkcR7Sem0mJJY5/rI4RpCAkwOK
-ktCqodsrsUlS5HeQdiX/04qzc59+Kc8B+GVnxPrgv2EFAi3PwIFeyehDNKKaQmSo
-8uy4qoJ4MYPHT8KFAZFGbkDy8SOwFm+VCaz4y0gKDYzjtA98XAY=
-=TeSi
------END PGP SIGNATURE-----
-
---=-5yPpy7XTQuo9PdaEdDV4--
-
+Christof
 
