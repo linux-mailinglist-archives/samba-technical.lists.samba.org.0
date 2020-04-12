@@ -2,61 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 219751A49CD
-	for <lists+samba-technical@lfdr.de>; Fri, 10 Apr 2020 20:25:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB3131A5DBE
+	for <lists+samba-technical@lfdr.de>; Sun, 12 Apr 2020 11:25:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=/8e9T1aA34gtipux6MRR5JeX22u4u6r+1ck6KMnDmCE=; b=f93NLeVfA7J1ktEdIFg15s50JI
-	cgs+zG8eqApVviQxJiLEQM3tvYEKVPywrHeiwx+uWapPG65RZzNtMLYoxOdDWw738a1mG9hHCBjp6
-	9W+zX3eocBG5U65W25T90uFdBGhK24u6JrcXxc54pEXDvMKOpkZtRq3dhWBM4LSFI+Afvy3rbHiYE
-	R0S20bMGoN7POFknxd3lo9FOgRL0AL/meDRxKxNFhR9zNJWHIM0Dal+uMkB9Y0iVi4rhQxhteAJf1
-	M1huLEOI/y4iYjc1ZQytS3E+M/R5DvA+Z99/LceYuBx7XjubjCBidpsBRfucTndQz2sYWtI59EmH7
-	i1uYekLA==;
-Received: from localhost ([::1]:28826 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=hW2pYTh8+4yHL5H21H62Mt9cmsugYGKpOZT9R76tU1s=; b=lOUvU5g3L1wiw1NkY8rHaBiEvn
+	zNx6o3kcyXqMva6teRq63aCjyfD65s3L+ruEVaTWkPH2DPh9qEccUCCDB9z/P5h/jjYEdMG6C1xMg
+	kzmpRb2EYpz0Y7C4l+FWpqe6Jb+mJ9asIZMpSKjrOZh5it8xxJMzB2TKDc2v1qfwpQ3LDRIhOhcTb
+	Q+sSBLXPEC9ibCHHcricj5dE9PUlAM7jYfegEnki3y/C6CEVBtNyV63l3VPHRryo1KGKolhLTnrzZ
+	iv+0i93h4PX8GL1kZXKm0xR81Tjm4dW1k2zEsS4kq/JgDylnRh3RjwTT6I4tSyXPoqohNeDtGFR4J
+	d9x4YXQw==;
+Received: from localhost ([::1]:35352 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jMyLF-000Nlz-O5; Fri, 10 Apr 2020 18:25:25 +0000
-Received: from mail-lj1-x242.google.com ([2a00:1450:4864:20::242]:40195) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jMyL3-000Nls-9s
- for samba-technical@lists.samba.org; Fri, 10 Apr 2020 18:25:18 +0000
-Received: by mail-lj1-x242.google.com with SMTP id 142so2778625ljj.7
- for <samba-technical@lists.samba.org>; Fri, 10 Apr 2020 11:25:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=/8e9T1aA34gtipux6MRR5JeX22u4u6r+1ck6KMnDmCE=;
- b=kuBRYMu3ElDdUOqhfqRSlgM/BaOIhxXtbQtiKml+rK+iyzUZA43MpO84UTIkfHrVN9
- Dvn1KyBG5uOLPETwcDcKZnG+2R35EJiA+e4Zb/nzsqh2CmhAX76tnPzDqSMeu+A6dZ4V
- gSL/kwpLt846Hk2vlz1vx+4AEg2KUVvde7y6jMWzwR3/kWVuECqx4qB4pbD0nQ5BLy6J
- aTkFFVl7e6OlRAqzXKZjBP6gLuqP+gszOlydcDkyctpCR67a6J7vO2Y7ekvjS1s7QK3e
- zNUmogZmUf665osEUT1X6SU0WhGtPtcXMRK06NMRCAXGf639kIUGjiThmt9k4RV3LFj3
- UdeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=/8e9T1aA34gtipux6MRR5JeX22u4u6r+1ck6KMnDmCE=;
- b=ubH2TAqVN/krFr4dRzBDuIeOUeSQyPoHiJKs8A02kHhWqCf4hvaf0RjtypNqancxCE
- eBsXj8LYd2pQQTT9JQobb7CGbpIQsL7IkQdKy4qsoZ7nwfW5bFiB7sYUKSSWzUL2NglJ
- zjVvpD0H5Q7z2BJKkuS7l7/TE+VzHCyFPRKyV0FgoEfuY8NPPPU8wW5pyfdwdhNbX2rC
- MsuOanlng9YDJgBbbV0PGY1AvUlzHnkOcJA6GhVMhn6yU9rcrEUEKGqAbMr6JGGaptuL
- 5AkBA9UeCaWMqNXisO9M1mAv5OMPtzpXwWezeLbEfz+BikAlb243mowEIYCw31hcaY2m
- rSsA==
-X-Gm-Message-State: AGi0PuZCc+q+C7xyuYPFYjNugp2AE2Qw5UGiclHI7lB3pUJN2XaMbNHZ
- MuYqDfPxTwiMDiLAkcdLyEo8b7F0vGI4MX7orA==
-X-Google-Smtp-Source: APiQypJLhl8RsaXEReBMlt91OnPROxZF63+qBAZ8RukrkovkRVtTQ56I5ehkCEz6EsrUA0oYgsuMJr129K7uzU2Va6Q=
-X-Received: by 2002:a2e:2286:: with SMTP id i128mr3641945lji.109.1586543112254; 
- Fri, 10 Apr 2020 11:25:12 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAEUGjKiLPQP9wp0AgLUvHgKBOe9We2a-RQaZ7cd7CvhnarwWiw@mail.gmail.com>
-In-Reply-To: <CAEUGjKiLPQP9wp0AgLUvHgKBOe9We2a-RQaZ7cd7CvhnarwWiw@mail.gmail.com>
-Date: Fri, 10 Apr 2020 11:25:01 -0700
-Message-ID: <CAKywueT0Q9WkANNsg8cEDwGZSMaaE5c4LHuEeMhVDzJAzycroQ@mail.gmail.com>
-Subject: Re: [PATCH] cifs: improve read performance for page size 64KB &
- cache=strict & vers=2.1+
-To: Jones Syue <jonessyue@qnap.com>
-Content-Type: text/plain; charset="UTF-8"
+	id 1jNYr2-000Xuq-Gf; Sun, 12 Apr 2020 09:24:40 +0000
+Received: from mout.gmx.net ([212.227.15.18]:45467) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1jNYqx-000Xuj-T9
+ for samba-technical@lists.samba.org; Sun, 12 Apr 2020 09:24:38 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+ s=badeba3b8450; t=1586683472;
+ bh=d1OVYchU0okY0vneXpJW80HrYiDs8aGwABehfrE5rXA=;
+ h=X-UI-Sender-Class:From:Subject:References:To:Date;
+ b=MnLA9sZ3gh7q4IatJKv4j3Ii6o5LJRudqKgo9B3WIzRLnIwsZp49vrWvM6uiP5RxO
+ rE4XIVNHCj9ol+qNJT1o0nElRJ5l2nji2Xlp3XDHeWLJRfFQca0uu/4Ao+u2Wnlp+e
+ NCwkAitU/bToGJwRQgz3cgX4b8dH45H6ZIUzmdSo=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from [192.168.47.100] ([217.250.86.248]) by mail.gmx.com (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M2f5Z-1jQZWp2GOF-004FQq for
+ <samba-technical@lists.samba.org>; Sun, 12 Apr 2020 11:24:32 +0200
+Content-Type: text/plain;
+	charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+Mime-Version: 1.0 (Mac OS X Mail 13.4 \(3608.80.23.2.2\))
+Subject: PANIC: vfs_fruit for time machine backup causes PANIC
+Message-Id: <9644B646-2EDF-448E-BF4A-8770157AAC71@gmx.net>
+References: <03B0942F-6362-4FCD-9DC0-F267968A64FC@gmx.net>
+To: samba-technical <samba-technical@lists.samba.org>
+Date: Sun, 12 Apr 2020 11:24:31 +0200
+X-Mailer: Apple Mail (2.3608.80.23.2.2)
+X-Provags-ID: V03:K1:AGsWOho97ZsLPTs5nFV3MfN7c9XbWzSgVYvKeIYpjZwKcB49Bza
+ 3/TSpNO+9sK7C1ZvRat/pBd+p8023Bs+wJnmZzWBI8wIgP9MqNuQwMcqoYomodGZYNCT6dH
+ fAgKeGWsz58euwOqcvI4BBRY32AeCgBbwt/m8xgVfdUtRq2D3GeKgbQ8Fu+q/4oJAzGH23n
+ bVMHzes9nH1YgZlCSTVeQ==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:wo+SFlpzHgM=:v/AyFMy16+WqHeVegC86zk
+ UjgfeJqhVIFBTtmOW9ZvrIx/8Z28W4hYo47mBYcm5Qd7MwGWUkMrNsalQnEfS3Biilbq/JEDL
+ ad44OHY9xKZKIyJ4lI4C81XuUnh7y++oen9uEGWkxNQYsHjCNuEf/Hm1wcNoQnTJFFssPvor3
+ oVUeGqmvNdc9fPsEyNqRbgigKO1BxstHbPt/zc3LOm5IUIc58Oa2ThOaQJlUb+N1gXet6Rxcr
+ TxjrxG/FKCnbd99Jy/sVSQLjYODStOuFW+aJfz7Q1gtepS4C2klpz52znu4Sl9qgKY0Zq646+
+ WP/FltqOSNdVf2Px0nRitaaKB0Sts2oTbufk3WXGjHo4pY0pFN+1oMGyPDXPS69oRbI5cfdkf
+ ClXRTfsr3UzdDKiqdbb0YXXKYLOI0GGwyJrPTYu3YGcybozTGAWUa0NM7lpVYHTDETpPIeuAG
+ x6xs7tgAE2SnK+kI7GE6p7APU04+yiBAuXp4jyEGgepjk8luEv09MRG6kqUfdHKuraXYyheuU
+ LDj6sPuk7JEFKKxDXRoyjfvM5pKuvBb3RaejRSkFI8VSXiuRXr9SNa9gokIMgGoHEZdA8P44J
+ 4L6JHcpF5QtG6ybxNSOuyjv+QFxdZetupfMDqAxWaLQPgweZOid0ty3BfxnBrLJV8oCSHT/kh
+ +OGAs2n2nvMwqAouLl22TW+TB5NVtNjZ8t22aBIewdxFv2iqZwiuy/bC9gIhzTULQjo48c1K5
+ JBb0ctrRfnWKuciCyrolW14sIET+bKf0wckxJQv1iEEhLOjo4crexSJIhvNlL7WVbqgMe39y1
+ HvOgkiL49wTeoJ65lv29sIvCHMK4PjjuuwHfYkzD2b30qC5zLwk5AgyxDKCbgw72KCUTtDWx+
+ Ax/lqp/UVoK7O1smp5Xx0bti1korpjFFQ/XABBn8eQYi/8/ZpbfNWZHJDaoZiV41AefWMm5jM
+ GvVGdijVDhzDOVxvpekBBqA5urhXFVmoUHrQ61btw6muoEuQW9kZxVgc3J3JG+/dEjPCrCbvS
+ i+JnsJDuTmRtXTuYPsCXwUOwPLD8644XK6tej6fUOtQqrcFPb12VpAyIrTNIXzt2t7EmZ3OIy
+ dAtOdxQeR3fuSLNuAXDKWt+srWN7TlTFcbPFWH8L0r84WCPxnhFGGAi4BhGg65A1h3GuiVW07
+ eu+rAefzWZcV9TexfGBRJ0deLoBsc0LclHs4QPPwHRJewzVXmT6PyCx2vl1Ehy9AHQKrLk3CR
+ ZXo6tUXY5/C96Augo
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,108 +77,342 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Pavel Shilovsky <piastryyy@gmail.com>
-Cc: linux-cifs <linux-cifs@vger.kernel.org>,
- Samba Technical <samba-technical@lists.samba.org>,
- Kernel Mailing List <linux-kernel@vger.kernel.org>
+From: Rouven WEILER via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rouven WEILER <Rouven_Weiler@gmx.net>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-=D0=BF=D1=82, 10 =D0=B0=D0=BF=D1=80. 2020 =D0=B3. =D0=B2 09:50, Jones Syue =
-via samba-technical
-<samba-technical@lists.samba.org>:
->
-> Hello list,
->
-> please help review whether the attached patch is correct, thank you.
->
-> Found a read performance issue when linux kernel page size is 64KB.
-> If linux kernel page size is 64KB and mount options cache=3Dstrict &
-> vers=3D2.1+,
-> it does not support cifs_readpages(). Instead, it is using cifs_readpage(=
-)
-> and
-> cifs_read() with maximum read IO size 16KB, which is much slower than rea=
-d
-> IO
-> size 1MB when negotiated SMB 2.1+. Since modern SMB server supported SMB
-> 2.1+
-> and Max Read Size can reach more than 64KB (for example 1MB ~ 8MB), this
-> patch
-> do one more check on max_read to determine whether server support
-> readpages()
-> and improve read performance for page size 64KB & cache=3Dstrict & vers=
-=3D2.1+.
->
-> The client is a linux box with linux kernel 4.2.8,
-> page size 64KB (CONFIG_ARM64_64K_PAGES=3Dy),
-> cpu arm 1.7GHz, and use mount.cifs as smb client.
-> The server is another linux box with linux kernel 4.2.8,
-> share a file '10G.img' with size 10GB,
-> and use samba-4.7.12 as smb server.
->
-> The client mount a share from the server with different
-> cache options: cache=3Dstrict and cache=3Dnone,
-> mount -tcifs //<server_ip>/Public /cache_strict
-> -overs=3D3.0,cache=3Dstrict,username=3D<xxx>,password=3D<yyy>
-> mount -tcifs //<server_ip>/Public /cache_none
-> -overs=3D3.0,cache=3Dnone,username=3D<xxx>,password=3D<yyy>
->
-> The client download a 10GbE file from the server accross 1GbE network,
-> dd if=3D/cache_strict/10G.img of=3D/dev/null bs=3D1M count=3D10240
-> dd if=3D/cache_none/10G.img of=3D/dev/null bs=3D1M count=3D10240
->
-> Found that cache=3Dstrict (without patch) is slower read throughput and
-> smaller
-> read IO size than cache=3Dnone.
-> cache=3Dstrict (without patch): read throughput 40MB/s, read IO size is 1=
-6KB
-> cache=3Dstrict (with patch): read throughput 113MB/s, read IO size is 1MB
-> cache=3Dnone: read throughput 109MB/s, read IO size is 1MB
->
-> Looks like if page size is 64KB,
-> cifs_set_ops() would use cifs_addr_ops_smallbuf instead of cifs_addr_ops,
->
-> /* check if server can support readpages */
-> if (cifs_sb_master_tcon(cifs_sb)->ses->server->maxBuf <
-> PAGE_SIZE + MAX_CIFS_HDR_SIZE)
-> inode->i_data.a_ops =3D &cifs_addr_ops_smallbuf;
-> else
-> inode->i_data.a_ops =3D &cifs_addr_ops;
->
-> maxBuf is came from 2 places, SMB2_negotiate() and CIFSSMBNegotiate(),
-> (SMB2_MAX_BUFFER_SIZE is 64KB)
-> SMB2_negotiate():
-> /* set it to the maximum buffer size value we can send with 1 credit */
-> server->maxBuf =3D min_t(unsigned int, le32_to_cpu(rsp->MaxTransactSize),
->       SMB2_MAX_BUFFER_SIZE);
-> CIFSSMBNegotiate():
-> server->maxBuf =3D le32_to_cpu(pSMBr->MaxBufferSize);
->
-> Page size 64KB and cache=3Dstrict lead to read_pages() use cifs_readpage(=
-)
-> instead
-> of cifs_readpages(), and then cifs_read() using maximum read IO size 16KB=
-,
-> which is much slower than maximum read IO size 1MB.
-> (CIFSMaxBufSize is 16KB by default)
->
-> /* FIXME: set up handlers for larger reads and/or convert to async */
-> rsize =3D min_t(unsigned int, cifs_sb->rsize, CIFSMaxBufSize);
->
+In a previous email I mentioned that I got issue with samba 4.12.1 on =
+Illumos/OpenIndiana and MacOS 10.15.4.
+I digged a little bit more and found out that the PANIC is caused when =
+trying to do a time machine backup.
 
-Hi Jones,
+Plain samba works a as always. There seems to be only issues with time =
+machine backup.
 
-Thanks for the patch!
+Everything worked before samba-4.12.0 and MacOS 10.15.4. I cannot tell =
+which change cause the issues...
 
-It will work although it is probably a little bit cleaner to
-initialize server->max_read to server->maxBuf for SMB1 and use the
-server->max_read in the readpages condition check instead.
+Staring from a new time capsule share I got the following:
+Creating a new time machine backup shows, I get a =
+=E2=80=9E.com.apple.timemachine.supported=E2=80=9C file added in to the =
+share.
 
-@Others, thoughts?
+MacOS tells in it=E2=80=99s logs: =E2=80=9EFailed to read capabilities =
+for 'file:///Volumes/FileVault/', error: Socket is not connected=E2=80=9C.=
 
---
-Best regards,
-Pavel Shilovsky
+
+The smbd.log with loglevel vfs:10 shows:
+
+[2020/04/12 11:15:21.534742,  5, pid=3D1707, effective(500, 500), =
+real(0, 0), class=3Dvfs] =
+../../source3/smbd/vfs.c:1395(check_reduced_name)
+  check_reduced_name: .com.apple.timemachine.supported reduced to =
+/export/home/timecapsule/.com.apple.timemachine.supported
+[2020/04/12 11:15:21.534789, 10, pid=3D1707, effective(500, 500), =
+real(0, 0), class=3Dvfs] =
+../../source3/modules/vfs_streams_xattr.c:379(streams_xattr_open)
+  streams_xattr_open called for .com.apple.timemachine.supported with =
+flags 0x20080
+[2020/04/12 11:15:21.535160,  0] =
+../../lib/dbwrap/dbwrap.c:82(dbwrap_record_get_value)
+  PANIC: assert failed at ../../lib/dbwrap/dbwrap.c(82): =
+rec->value_valid
+[2020/04/12 11:15:21.535322,  0] =
+../../source3/lib/util.c:830(smb_panic_s3)
+  PANIC (pid 1707): assert failed: rec->value_valid
+[2020/04/12 11:15:21.536138,  0] =
+../../lib/util/fault.c:265(log_stack_trace)
+  BACKTRACE: 37 stack frames:
+   #0 /usr/lib/samba/amd64/libsamba-util.so.0.0.1'log_stack_trace+0x26 =
+[0xfffffd7fee51de66]
+   #1 /usr/lib/samba/amd64/libsmbconf.so.0'smb_panic_s3+0x26 =
+[0xfffffd7fedf5a596]
+   #2 /usr/lib/samba/amd64/libsamba-util.so.0.0.1'smb_panic+0x1f =
+[0xfffffd7fee51df3f]
+   #3 =
+/usr/lib/samba/private/amd64/libdbwrap-samba4.so'dbwrap_record_get_value+0=
+x2a [0xfffffd7fece2627a]
+   #4 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'get_share_mode_lock+0x=
+109 [0xfffffd7fee7195c9]
+   #5 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'smbd_contend_level2_op=
+locks_begin+0xa1 [0xfffffd7fee7f7761]
+   #6 /usr/lib/samba/private/amd64/libsmbd-base-samba4.so'brl_lock+0x635 =
+[0xfffffd7fee710f45]
+   #7 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'do_lock_fn+0xa4 =
+[0xfffffd7fee70d534]
+   #8 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'share_mode_do_locked_f=
+n+0x86 [0xfffffd7fee7174b6]
+   #9 =
+/usr/lib/samba/amd64/libsmbconf.so.0'dbwrap_watched_do_locked_fn+0xfa =
+[0xfffffd7fedf622ca]
+   #10 =
+/usr/lib/samba/private/amd64/libdbwrap-samba4.so'db_tdb_do_locked+0x12f =
+[0xfffffd7fece295cf]
+   #11 =
+/usr/lib/samba/private/amd64/libdbwrap-samba4.so'dbwrap_do_locked+0x48 =
+[0xfffffd7fece269a8]
+   #12 =
+/usr/lib/samba/amd64/libsmbconf.so.0'dbwrap_watched_do_locked+0x6f =
+[0xfffffd7fedf60d7f]
+   #13 =
+/usr/lib/samba/private/amd64/libdbwrap-samba4.so'dbwrap_do_locked+0x48 =
+[0xfffffd7fece269a8]
+   #14 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'share_mode_do_locked+0=
+xd2 [0xfffffd7fee719b82]
+   #15 /usr/lib/samba/private/amd64/libsmbd-base-samba4.so'do_lock+0xf0 =
+[0xfffffd7fee70dfe0]
+   #16 /usr/lib/samba/amd64/vfs/fruit.so'fruit_create_file+0x7ba =
+[0xfffffd7fe88a55aa]
+   #17 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'smbd_smb2_request_proc=
+ess_create+0xa07 [0xfffffd7fee7d3237]
+   #18 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'smbd_smb2_request_disp=
+atch+0xc8f [0xfffffd7fee7c985f]
+   #19 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'smbd_smb2_connection_h=
+andler+0x621 [0xfffffd7fee7ca7e1]
+   #20 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'tevent_common_invoke_fd_h=
+andler+0x80 [0xfffffd7fecfca580]
+   #21 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'epoll_event_loop_once+0x2=
+2c [0xfffffd7fecfd180c]
+   #22 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'std_event_loop_once+0x40 =
+[0xfffffd7fecfcf8f0]
+   #23 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'_tevent_loop_once+0x95 =
+[0xfffffd7fecfc9bd5]
+   #24 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'tevent_common_loop_wait+0=
+x23 [0xfffffd7fecfc9e43]
+   #25 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'std_event_loop_wait+0x40 =
+[0xfffffd7fecfcf870]
+   #26 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'smbd_process+0x777 =
+[0xfffffd7fee7b8677]
+   #27 /usr/lib/samba/sbin/amd64/smbd'smbd_accept_connection+0x189 =
+[0x40d5b9]
+   #28 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'tevent_common_invoke_fd_h=
+andler+0x80 [0xfffffd7fecfca580]
+   #29 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'epoll_event_loop_once+0x2=
+2c [0xfffffd7fecfd180c]
+   #30 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'std_event_loop_once+0x40 =
+[0xfffffd7fecfcf8f0]
+   #31 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'_tevent_loop_once+0x95 =
+[0xfffffd7fecfc9bd5]
+   #32 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'tevent_common_loop_wait+0=
+x23 [0xfffffd7fecfc9e43]
+   #33 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'std_event_loop_wait+0x40 =
+[0xfffffd7fecfcf870]
+   #34 /usr/lib/samba/sbin/amd64/smbd'main+0x1a0f [0x40f9ff]
+   #35 /usr/lib/samba/sbin/amd64/smbd'_start_crt+0x83 [0x408e73]
+   #36 /usr/lib/samba/sbin/amd64/smbd'_start+0x18 [0x408dd8]
+[2020/04/12 11:15:21.538230,  0] =
+../../source3/lib/dumpcore.c:315(dump_core)
+  dumping core in /var/samba/log/cores/smbd
+[2020/04/12 11:15:21.949051,  0] =
+../../lib/util/become_daemon.c:136(daemon_ready)
+  daemon_ready: daemon 'smbd' finished starting up and ready to serve =
+connections
+
+
+My smb.conf is:
+#=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =
+Global Settings =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+[global]
+
+    workgroup =3D mano-de.dios
+    netbios name =3D wutz
+    mdns name =3D mdns
+    multicast dns register =3D yes
+    server string =3D Filet Server (%v)
+    server role =3D standalone server
+    log file =3D /var/log/samba/smbd.log
+    max log size =3D 50
+    wins support =3D yes
+    dns proxy =3D no
+    guest account =3D nobody
+    fruit:aapl =3D yes
+    fruit:model =3D RackMac
+    log level =3D vfs:10
+
+#=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D Share Definitions =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+[homes]
+    comment =3D Home Share=20
+    browseable =3D no
+    writable =3D yes
+    guest ok =3D no
+    vfs objects =3D catia fruit zfsacl streams_xattr=20
+    fruit:resource =3D xattr
+    fruit:metadata =3D netatalk
+    fruit:locking =3D netatalk
+    fruit:encoding =3D native
+
+[FileVault]
+    comment =3D Apple Time Capsule
+    path =3D /export/home/timecapsule
+    browseable =3D no
+    writeable =3D no
+    valid users =3D @admin
+    write list =3D @admin
+    guest ok =3D no
+    vfs objects =3D catia fruit zfsacl streams_xattr=20
+    fruit:resource =3D xattr
+    fruit:metadata =3D netatalk
+    fruit:locking =3D netatalk
+    fruit:encoding =3D native
+    fruit:time machine =3D yes
+
+
+
+
+
+> Anfang der weitergeleiteten Nachricht:
+>=20
+> Von: Rouven WEILER <Rouven_Weiler@gmx.net>
+> Betreff: PANIC: assert failed at ../../lib/dbwrap/dbwrap.c(82): =
+rec->value_valid when connecting to samba
+> Datum: 10. April 2020 um 08:07:18 MESZ
+> An: samba-technical <samba-technical@lists.samba.org>
+>=20
+> With samba-4.12.1 on OpenIndiana/Illumos (latest pkg set) I get the =
+following log error when trying to connect with MacOS 10.15.4. Is there =
+anything I can provide/do to help to fix that issue?
+>=20
+> [2020/04/10 08:00:38.107917,  0] =
+../../lib/dbwrap/dbwrap.c:82(dbwrap_record_get_value)
+>  PANIC: assert failed at ../../lib/dbwrap/dbwrap.c(82): =
+rec->value_valid
+> [2020/04/10 08:00:38.108499,  0] =
+../../source3/lib/util.c:830(smb_panic_s3)
+>  PANIC (pid 3427): assert failed: rec->value_valid
+> [2020/04/10 08:00:38.109541,  0] =
+../../lib/util/fault.c:265(log_stack_trace)
+>  BACKTRACE: 37 stack frames:
+>   #0 /usr/lib/samba/amd64/libsamba-util.so.0.0.1'log_stack_trace+0x26 =
+[0xfffffd7fee51de66]
+>   #1 /usr/lib/samba/amd64/libsmbconf.so.0'smb_panic_s3+0x26 =
+[0xfffffd7fedf5a596]
+>   #2 /usr/lib/samba/amd64/libsamba-util.so.0.0.1'smb_panic+0x1f =
+[0xfffffd7fee51df3f]
+>   #3 =
+/usr/lib/samba/private/amd64/libdbwrap-samba4.so'dbwrap_record_get_value+0=
+x2a [0xfffffd7feccb627a]
+>   #4 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'get_share_mode_lock+0x=
+109 [0xfffffd7fee7195c9]
+>   #5 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'smbd_contend_level2_op=
+locks_begin+0xa1 [0xfffffd7fee7f7761]
+>   #6 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'brl_lock+0x635 =
+[0xfffffd7fee710f45]
+>   #7 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'do_lock_fn+0xa4 =
+[0xfffffd7fee70d534]
+>   #8 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'share_mode_do_locked_f=
+n+0x86 [0xfffffd7fee7174b6]
+>   #9 =
+/usr/lib/samba/amd64/libsmbconf.so.0'dbwrap_watched_do_locked_fn+0xfa =
+[0xfffffd7fedf622ca]
+>   #10 =
+/usr/lib/samba/private/amd64/libdbwrap-samba4.so'db_tdb_do_locked+0x12f =
+[0xfffffd7feccb95cf]
+>   #11 =
+/usr/lib/samba/private/amd64/libdbwrap-samba4.so'dbwrap_do_locked+0x48 =
+[0xfffffd7feccb69a8]
+>   #12 =
+/usr/lib/samba/amd64/libsmbconf.so.0'dbwrap_watched_do_locked+0x6f =
+[0xfffffd7fedf60d7f]
+>   #13 =
+/usr/lib/samba/private/amd64/libdbwrap-samba4.so'dbwrap_do_locked+0x48 =
+[0xfffffd7feccb69a8]
+>   #14 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'share_mode_do_locked+0=
+xd2 [0xfffffd7fee719b82]
+>   #15 /usr/lib/samba/private/amd64/libsmbd-base-samba4.so'do_lock+0xf0 =
+[0xfffffd7fee70dfe0]
+>   #16 /usr/lib/samba/amd64/vfs/fruit.so'fruit_create_file+0x7ba =
+[0xfffffd7fe88855aa]
+>   #17 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'smbd_smb2_request_proc=
+ess_create+0xa07 [0xfffffd7fee7d3237]
+>   #18 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'smbd_smb2_request_disp=
+atch+0xc8f [0xfffffd7fee7c985f]
+>   #19 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'smbd_smb2_connection_h=
+andler+0x621 [0xfffffd7fee7ca7e1]
+>   #20 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'tevent_common_invoke_fd_h=
+andler+0x80 [0xfffffd7fecd3a580]
+>   #21 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'epoll_event_loop_once+0x2=
+2c [0xfffffd7fecd4180c]
+>   #22 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'std_event_loop_once+0x40 =
+[0xfffffd7fecd3f8f0]
+>   #23 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'_tevent_loop_once+0x95 =
+[0xfffffd7fecd39bd5]
+>   #24 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'tevent_common_loop_wait+0=
+x23 [0xfffffd7fecd39e43]
+>   #25 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'std_event_loop_wait+0x40 =
+[0xfffffd7fecd3f870]
+>   #26 =
+/usr/lib/samba/private/amd64/libsmbd-base-samba4.so'smbd_process+0x777 =
+[0xfffffd7fee7b8677]
+>   #27 /usr/lib/samba/sbin/amd64/smbd'smbd_accept_connection+0x189 =
+[0x40d5b9]
+>   #28 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'tevent_common_invoke_fd_h=
+andler+0x80 [0xfffffd7fecd3a580]
+>   #29 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'epoll_event_loop_once+0x2=
+2c [0xfffffd7fecd4180c]
+>   #30 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'std_event_loop_once+0x40 =
+[0xfffffd7fecd3f8f0]
+>   #31 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'_tevent_loop_once+0x95 =
+[0xfffffd7fecd39bd5]
+>   #32 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'tevent_common_loop_wait+0=
+x23 [0xfffffd7fecd39e43]
+>   #33 =
+/usr/lib/samba/private/amd64/libtevent.so.0.10.2'std_event_loop_wait+0x40 =
+[0xfffffd7fecd3f870]
+>   #34 /usr/lib/samba/sbin/amd64/smbd'main+0x1a0f [0x40f9ff]
+>   #35 /usr/lib/samba/sbin/amd64/smbd'_start_crt+0x83 [0x408e73]
+>   #36 /usr/lib/samba/sbin/amd64/smbd'_start+0x18 [0x408dd8]
+> [2020/04/10 08:00:38.111622,  0] =
+../../source3/lib/dumpcore.c:315(dump_core)
+>  dumping core in /var/samba/log/cores/smbd
+> [2020/04/10 08:00:38.514100,  0] =
+../../lib/util/become_daemon.c:136(daemon_ready)
+>  daemon_ready: daemon 'smbd' finished starting up and ready to serve =
+connections
+>=20
+
 
