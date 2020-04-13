@@ -2,58 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C29631A6181
-	for <lists+samba-technical@lfdr.de>; Mon, 13 Apr 2020 04:24:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2D381A65BB
+	for <lists+samba-technical@lfdr.de>; Mon, 13 Apr 2020 13:48:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=wuZfNn8fJ5MfrbpASmHdYV51l0a/j2mZhF3GNeqjeyQ=; b=4PeGtcskPW7+x5+pXfpIH8xxtg
-	dFuXub4MQ6yyWJKcFcDFqI6POfRXMCk9h4QughrlJgAbSpZhRbculNQAJmOOz4oGIvHxYtEe5WCL9
-	uJSHqZRhPZ2U6rynSL/cIlHKx9MCRVD0q1+0fXDfe1adK3P3wWCGEPRiti5Z56BZav4L7mrUb4FNV
-	MpH8EoLbKO7RzzMsDeXFAPmQI42VJv/i8s9iFX2ChEwaKctl4yFOqbFkhg9wRZa4zF9w6ABxBQbwe
-	tU76DhJfS921J4LI5okPBayUjEMv3HMMZX8I2RUI1a7BQ96wFHtBL1jGG+r3NMH1emyxx6+NwXDPA
-	KQ0BI4cA==;
-Received: from localhost ([::1]:44060 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=YHs98vmL04FnLeK7IZ+8EppSMqW1Ls9pcEBw/B4nfw8=; b=tlJAZ1Srgsm4eSExw1JHLueQew
+	9Npkq7YCbfnvvKQjavY5V/MRXKVyGVMEv4mNMWQML4nimEBGcK6wnEUz8O7+js+L2z4fXURHqnXDK
+	HjkmDrIdl1eQiM70H7Ze8RPt9/pqg4v2eehcwjoYyz3+Tiq7zCVPQjNy/pAFsKhGXKralk5vu/xtE
+	L256dm4ujvabQ5WG7R0hjk6vpvT+qye2jrWs5naktvR/DsB4L5YCv5pKGF+D9mUPlriwzXEeA+0gk
+	tY77w8j6vnrKlt9oiFoEP0J1J19TUkNhr3qIMGEOkNh/TO++GBKGg1YLe5qPVc7OX2PcyNA5ZRK2m
+	UURWw2aA==;
+Received: from localhost ([::1]:45864 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jNolF-000aTY-3M; Mon, 13 Apr 2020 02:23:45 +0000
-Received: from mail-qv1-xf2b.google.com ([2607:f8b0:4864:20::f2b]:35827) 
+	id 1jNxYc-000bdM-Aq; Mon, 13 Apr 2020 11:47:18 +0000
+Received: from latitanza.investici.org ([2001:888:2000:56::19]:39123) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jNol8-000aTR-LU
- for samba-technical@lists.samba.org; Mon, 13 Apr 2020 02:23:41 +0000
-Received: by mail-qv1-xf2b.google.com with SMTP id q73so3789421qvq.2
- for <samba-technical@lists.samba.org>; Sun, 12 Apr 2020 19:23:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qnap.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ifp4C6U5p70UZeVGLKYhFIijC6BDeTbz5O2MpPnEDOU=;
- b=i4qEQCaUVZb78XR17jsKse+J+f+GK+CcPr4/GS5u/yM2ktHuoV4H3mH7jiZkbhlbIj
- PvkPbsGBJCds4Vo56i4QMHvXYnjbqKSYVGgx2oV0onlAqk2c0VavJzhTzSD+uVSoDJv4
- XTNtG2noKUr8mgtI2UymddjAoM2xvvkHq//uY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ifp4C6U5p70UZeVGLKYhFIijC6BDeTbz5O2MpPnEDOU=;
- b=Tzn2TpP6g3zrKwPDqRL1lGCgTdgZwbN06ac8A0Kkx/1PRR4pwW4aLM7QToTwutbLHQ
- op5McR/I+/66OanjICL0+ZBGRPXHOLIUo4EDtdJdq3RIV48+X4+g+vIxtTHpfmBySokR
- 8T3w1DtTXMFqQtNtKH5LG3lXgJI3BvaWfNooUMSobwQsmR9I7pV+0AK03d0bXLMvin9O
- jltdFyRjkDkazvHVPGWA2gYaPkMUkjCYAofm1nPWhGb3MBiDHCJpVA+EpywYzhigtMyQ
- T+SP2EQ36rg3vS7CnG996f08eQRWnUPiZm3d0QhRHfc4aGRavdPRprQ8vEpA/tgRScFB
- VErg==
-X-Gm-Message-State: AGi0PuZi8lwTx5xW+YROib6mi2tEvKDBdkocCBOox1y0/l9n1nGmbZCH
- T5ouXsDGvjLvh2esiSwrkKCYZrGjEfeoKXs8D2cHdQ==
-X-Google-Smtp-Source: APiQypKalBVLfCWtQM/rDJZOaI+7XFotkSej8kX9ET0uFa9OzcDCutAJp8qeR6q2aqCLWge7qVwQQky2QUGlIbiGuLQ=
-X-Received: by 2002:a0c:ba9b:: with SMTP id x27mr15805477qvf.194.1586744616459; 
- Sun, 12 Apr 2020 19:23:36 -0700 (PDT)
+ (Exim) id 1jNxYV-000bdF-Go
+ for samba-technical@lists.samba.org; Mon, 13 Apr 2020 11:47:14 +0000
+Received: from mx3.investici.org (unknown [127.0.0.1])
+ by latitanza.investici.org (Postfix) with ESMTP id 4CD781201C2;
+ Mon, 13 Apr 2020 11:31:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cryptolab.net;
+ s=stigmate; t=1586777506;
+ bh=YHs98vmL04FnLeK7IZ+8EppSMqW1Ls9pcEBw/B4nfw8=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=tzTCZxw2I5XNh7Gp7WI5tM2I7a7eAfD6Q2KAYhYU0Dm8BHKDO8KEPYw612qXhK1j4
+ pjtb3rpzKO+GyTkzfLnQoY8v2UmG09buK1pFELcL7i545aPxNpmLD9moTO8w36kuCL
+ Vjzc0tVtEZzH77XIV9/jGl14Ui9E8I/04g7D5bks=
+Received: from [82.94.249.234] (mx3.investici.org [82.94.249.234])
+ (Authenticated sender: anoopcs@autistici.org) by localhost (Postfix) with
+ ESMTPSA id 6D67D1201BB; Mon, 13 Apr 2020 11:31:43 +0000 (UTC)
+Message-ID: <2b8eec59f1cc1312f3740c0ca736517a9e6337fd.camel@cryptolab.net>
+Subject: Re: PANIC: vfs_fruit for time machine backup causes PANIC
+To: Rouven WEILER <Rouven_Weiler@gmx.net>
+Date: Mon, 13 Apr 2020 17:01:37 +0530
+In-Reply-To: <9644B646-2EDF-448E-BF4A-8770157AAC71@gmx.net>
+References: <03B0942F-6362-4FCD-9DC0-F267968A64FC@gmx.net>
+ <9644B646-2EDF-448E-BF4A-8770157AAC71@gmx.net>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
 MIME-Version: 1.0
-References: <CAEUGjKiLPQP9wp0AgLUvHgKBOe9We2a-RQaZ7cd7CvhnarwWiw@mail.gmail.com>
- <CAKywueT0Q9WkANNsg8cEDwGZSMaaE5c4LHuEeMhVDzJAzycroQ@mail.gmail.com>
-In-Reply-To: <CAKywueT0Q9WkANNsg8cEDwGZSMaaE5c4LHuEeMhVDzJAzycroQ@mail.gmail.com>
-Date: Mon, 13 Apr 2020 10:23:25 +0800
-Message-ID: <CAEUGjKhSBNQboKOMFMgos9OQfxcLQZsXp8aBrUSFcaSe1saH2Q@mail.gmail.com>
-Subject: Re: [PATCH] cifs: improve read performance for page size 64KB &
- cache=strict & vers=2.1+
-To: Pavel Shilovsky <piastryyy@gmail.com>
-Content-Type: multipart/mixed; boundary="00000000000036d2a305a322c5dd"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,139 +56,203 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jones Syue via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jones Syue <jonessyue@qnap.com>
-Cc: linux-cifs <linux-cifs@vger.kernel.org>,
- Samba Technical <samba-technical@lists.samba.org>,
- Kernel Mailing List <linux-kernel@vger.kernel.org>
+From: Anoop C S via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Anoop C S <anoopcs@cryptolab.net>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---00000000000036d2a305a322c5dd
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Sun, 2020-04-12 at 11:24 +0200, Rouven WEILER via samba-technical
+wrote:
+> In a previous email I mentioned that I got issue with samba 4.12.1 on
+> Illumos/OpenIndiana and MacOS 10.15.4.
+> I digged a little bit more and found out that the PANIC is caused
+> when trying to do a time machine backup.
+> 
+> Plain samba works a as always. There seems to be only issues with
+> time machine backup.
+> 
+> Everything worked before samba-4.12.0 and MacOS 10.15.4. I cannot
+> tell which change cause the issues...
+> 
+> Staring from a new time capsule share I got the following:
+> Creating a new time machine backup shows, I get a
+> „.com.apple.timemachine.supported“ file added in to the share.
+> 
+> MacOS tells in it’s logs: „Failed to read capabilities for
+> 'file:///Volumes/FileVault/', error: Socket is not connected“.
+> 
+> The smbd.log with loglevel vfs:10 shows:
 
-Hello Pavel
+Is it possible for you to reproduce with log level 10 set in general
+rather than just vfs? It might gives us more context around the
+assertion failure leading to smbd panic.
 
-Thanks for kindly reviewing!
-Please find the attached v2.patch.
+> [2020/04/12 11:15:21.534742,  5, pid=1707, effective(500, 500),
+> real(0, 0), class=vfs]
+> ../../source3/smbd/vfs.c:1395(check_reduced_name)
+>   check_reduced_name: .com.apple.timemachine.supported reduced to
+> /export/home/timecapsule/.com.apple.timemachine.supported
+> [2020/04/12 11:15:21.534789, 10, pid=1707, effective(500, 500),
+> real(0, 0), class=vfs]
+> ../../source3/modules/vfs_streams_xattr.c:379(streams_xattr_open)
+>   streams_xattr_open called for .com.apple.timemachine.supported with
+> flags 0x20080
+> [2020/04/12 11:15:21.535160,  0]
+> ../../lib/dbwrap/dbwrap.c:82(dbwrap_record_get_value)
+>   PANIC: assert failed at ../../lib/dbwrap/dbwrap.c(82): rec-
+> >value_valid
 
---
-Regards,
-Jones Syue | =E8=96=9B=E6=87=B7=E5=AE=97
-QNAP Systems, Inc.
+Similar assertion failures were fixed sometime back and I could see
+those present in v4-12-stable branch. May be we missed some other
+place..
 
+> [2020/04/12 11:15:21.535322,  0]
+> ../../source3/lib/util.c:830(smb_panic_s3)
+>   PANIC (pid 1707): assert failed: rec->value_valid
+> [2020/04/12 11:15:21.536138,  0]
+> ../../lib/util/fault.c:265(log_stack_trace)
+>   BACKTRACE: 37 stack frames:
+>    #0 /usr/lib/samba/amd64/libsamba-
+> util.so.0.0.1'log_stack_trace+0x26 [0xfffffd7fee51de66]
+>    #1 /usr/lib/samba/amd64/libsmbconf.so.0'smb_panic_s3+0x26
+> [0xfffffd7fedf5a596]
+>    #2 /usr/lib/samba/amd64/libsamba-util.so.0.0.1'smb_panic+0x1f
+> [0xfffffd7fee51df3f]
+>    #3 /usr/lib/samba/private/amd64/libdbwrap-
+> samba4.so'dbwrap_record_get_value+0x2a [0xfffffd7fece2627a]
+>    #4 /usr/lib/samba/private/amd64/libsmbd-base-
+> samba4.so'get_share_mode_lock+0x109 [0xfffffd7fee7195c9]
+>    #5 /usr/lib/samba/private/amd64/libsmbd-base-
+> samba4.so'smbd_contend_level2_oplocks_begin+0xa1 [0xfffffd7fee7f7761]
+>    #6 /usr/lib/samba/private/amd64/libsmbd-base-
+> samba4.so'brl_lock+0x635 [0xfffffd7fee710f45]
+>    #7 /usr/lib/samba/private/amd64/libsmbd-base-
+> samba4.so'do_lock_fn+0xa4 [0xfffffd7fee70d534]
+>    #8 /usr/lib/samba/private/amd64/libsmbd-base-
+> samba4.so'share_mode_do_locked_fn+0x86 [0xfffffd7fee7174b6]
+>    #9
+> /usr/lib/samba/amd64/libsmbconf.so.0'dbwrap_watched_do_locked_fn+0xfa
+> [0xfffffd7fedf622ca]
+>    #10 /usr/lib/samba/private/amd64/libdbwrap-
+> samba4.so'db_tdb_do_locked+0x12f [0xfffffd7fece295cf]
+>    #11 /usr/lib/samba/private/amd64/libdbwrap-
+> samba4.so'dbwrap_do_locked+0x48 [0xfffffd7fece269a8]
+>    #12
+> /usr/lib/samba/amd64/libsmbconf.so.0'dbwrap_watched_do_locked+0x6f
+> [0xfffffd7fedf60d7f]
+>    #13 /usr/lib/samba/private/amd64/libdbwrap-
+> samba4.so'dbwrap_do_locked+0x48 [0xfffffd7fece269a8]
+>    #14 /usr/lib/samba/private/amd64/libsmbd-base-
+> samba4.so'share_mode_do_locked+0xd2 [0xfffffd7fee719b82]
+>    #15 /usr/lib/samba/private/amd64/libsmbd-base-
+> samba4.so'do_lock+0xf0 [0xfffffd7fee70dfe0]
+>    #16 /usr/lib/samba/amd64/vfs/fruit.so'fruit_create_file+0x7ba
+> [0xfffffd7fe88a55aa]
+>    #17 /usr/lib/samba/private/amd64/libsmbd-base-
+> samba4.so'smbd_smb2_request_process_create+0xa07 [0xfffffd7fee7d3237]
+>    #18 /usr/lib/samba/private/amd64/libsmbd-base-
+> samba4.so'smbd_smb2_request_dispatch+0xc8f [0xfffffd7fee7c985f]
+>    #19 /usr/lib/samba/private/amd64/libsmbd-base-
+> samba4.so'smbd_smb2_connection_handler+0x621 [0xfffffd7fee7ca7e1]
+>    #20
+> /usr/lib/samba/private/amd64/libtevent.so.0.10.2'tevent_common_invoke
+> _fd_handler+0x80 [0xfffffd7fecfca580]
+>    #21
+> /usr/lib/samba/private/amd64/libtevent.so.0.10.2'epoll_event_loop_onc
+> e+0x22c [0xfffffd7fecfd180c]
+>    #22
+> /usr/lib/samba/private/amd64/libtevent.so.0.10.2'std_event_loop_once+
+> 0x40 [0xfffffd7fecfcf8f0]
+>    #23
+> /usr/lib/samba/private/amd64/libtevent.so.0.10.2'_tevent_loop_once+0x
+> 95 [0xfffffd7fecfc9bd5]
+>    #24
+> /usr/lib/samba/private/amd64/libtevent.so.0.10.2'tevent_common_loop_w
+> ait+0x23 [0xfffffd7fecfc9e43]
+>    #25
+> /usr/lib/samba/private/amd64/libtevent.so.0.10.2'std_event_loop_wait+
+> 0x40 [0xfffffd7fecfcf870]
+>    #26 /usr/lib/samba/private/amd64/libsmbd-base-
+> samba4.so'smbd_process+0x777 [0xfffffd7fee7b8677]
+>    #27 /usr/lib/samba/sbin/amd64/smbd'smbd_accept_connection+0x189
+> [0x40d5b9]
+>    #28
+> /usr/lib/samba/private/amd64/libtevent.so.0.10.2'tevent_common_invoke
+> _fd_handler+0x80 [0xfffffd7fecfca580]
+>    #29
+> /usr/lib/samba/private/amd64/libtevent.so.0.10.2'epoll_event_loop_onc
+> e+0x22c [0xfffffd7fecfd180c]
+>    #30
+> /usr/lib/samba/private/amd64/libtevent.so.0.10.2'std_event_loop_once+
+> 0x40 [0xfffffd7fecfcf8f0]
+>    #31
+> /usr/lib/samba/private/amd64/libtevent.so.0.10.2'_tevent_loop_once+0x
+> 95 [0xfffffd7fecfc9bd5]
+>    #32
+> /usr/lib/samba/private/amd64/libtevent.so.0.10.2'tevent_common_loop_w
+> ait+0x23 [0xfffffd7fecfc9e43]
+>    #33
+> /usr/lib/samba/private/amd64/libtevent.so.0.10.2'std_event_loop_wait+
+> 0x40 [0xfffffd7fecfcf870]
+>    #34 /usr/lib/samba/sbin/amd64/smbd'main+0x1a0f [0x40f9ff]
+>    #35 /usr/lib/samba/sbin/amd64/smbd'_start_crt+0x83 [0x408e73]
+>    #36 /usr/lib/samba/sbin/amd64/smbd'_start+0x18 [0x408dd8]
+> [2020/04/12 11:15:21.538230,  0]
+> ../../source3/lib/dumpcore.c:315(dump_core)
+>   dumping core in /var/samba/log/cores/smbd
+> [2020/04/12 11:15:21.949051,  0]
+> ../../lib/util/become_daemon.c:136(daemon_ready)
+>   daemon_ready: daemon 'smbd' finished starting up and ready to serve
+> connections
+> 
+> 
+> My smb.conf is:
+> #======================= Global Settings
+> =====================================
+> [global]
+> 
+>     workgroup = mano-de.dios
+>     netbios name = wutz
+>     mdns name = mdns
+>     multicast dns register = yes
+>     server string = Filet Server (%v)
+>     server role = standalone server
+>     log file = /var/log/samba/smbd.log
+>     max log size = 50
+>     wins support = yes
+>     dns proxy = no
+>     guest account = nobody
+>     fruit:aapl = yes
+>     fruit:model = RackMac
+>     log level = vfs:10
+> 
+> #============================ Share Definitions
+> ==============================
+> [homes]
+>     comment = Home Share 
+>     browseable = no
+>     writable = yes
+>     guest ok = no
+>     vfs objects = catia fruit zfsacl streams_xattr 
+>     fruit:resource = xattr
+>     fruit:metadata = netatalk
+>     fruit:locking = netatalk
+>     fruit:encoding = native
+> 
+> [FileVault]
+>     comment = Apple Time Capsule
+>     path = /export/home/timecapsule
+>     browseable = no
+>     writeable = no
+>     valid users = @admin
+>     write list = @admin
+>     guest ok = no
+>     vfs objects = catia fruit zfsacl streams_xattr 
+>     fruit:resource = xattr
+>     fruit:metadata = netatalk
+>     fruit:locking = netatalk
+>     fruit:encoding = native
+>     fruit:time machine = yes
 
-On Sat, Apr 11, 2020 at 2:25 AM Pavel Shilovsky <piastryyy@gmail.com> wrote=
-:
->
-> Hi Jones,
->
-> Thanks for the patch!
->
-> It will work although it is probably a little bit cleaner to
-> initialize server->max_read to server->maxBuf for SMB1 and use the
-> server->max_read in the readpages condition check instead.
->
-> @Others, thoughts?
->
-> --
-> Best regards,
-> Pavel Shilovsky
-
---00000000000036d2a305a322c5dd
-Content-Type: application/octet-stream; name="v2.patch"
-Content-Disposition: attachment; filename="v2.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_k8xup7700>
-X-Attachment-Id: f_k8xup7700
-
-RnJvbSBkODc0M2M4NzI2YTQ3MjcxODdmM2I5MTNjNzU5MjQyYzIzMjVhZWNlIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBKb25lcyBTeXVlIDxqb25lc3N5dWVAcW5hcC5jb20+CkRhdGU6
-IE1vbiwgMTMgQXByIDIwMjAgMDk6Mzc6MjMgKzA4MDAKU3ViamVjdDogW1BBVENIXSBjaWZzOiBp
-bXByb3ZlIHJlYWQgcGVyZm9ybWFuY2UgZm9yIHBhZ2Ugc2l6ZSA2NEtCICYKIGNhY2hlPXN0cmlj
-dCAmIHZlcnM9Mi4xKwpNSU1FLVZlcnNpb246IDEuMApDb250ZW50LVR5cGU6IHRleHQvcGxhaW47
-IGNoYXJzZXQ9VVRGLTgKQ29udGVudC1UcmFuc2Zlci1FbmNvZGluZzogOGJpdAoKRm91bmQgYSBy
-ZWFkIHBlcmZvcm1hbmNlIGlzc3VlIHdoZW4gbGludXgga2VybmVsIHBhZ2Ugc2l6ZSBpcyA2NEtC
-LgpJZiBsaW51eCBrZXJuZWwgcGFnZSBzaXplIGlzIDY0S0IgYW5kIG1vdW50IG9wdGlvbnMgY2Fj
-aGU9c3RyaWN0ICYKdmVycz0yLjErLCBpdCBkb2VzIG5vdCBzdXBwb3J0IGNpZnNfcmVhZHBhZ2Vz
-KCkuIEluc3RlYWQsIGl0IGlzIHVzaW5nCmNpZnNfcmVhZHBhZ2UoKSBhbmQgY2lmc19yZWFkKCkg
-d2l0aCBtYXhpbXVtIHJlYWQgSU8gc2l6ZSAxNktCLCB3aGljaCBpcwptdWNoIHNsb3dlciB0aGFu
-IHJlYWQgSU8gc2l6ZSAxTUIgd2hlbiBuZWdvdGlhdGVkIFNNQiAyLjErLiBTaW5jZSBtb2Rlcm4K
-U01CIHNlcnZlciBzdXBwb3J0ZWQgU01CIDIuMSsgYW5kIE1heCBSZWFkIFNpemUgY2FuIHJlYWNo
-IG1vcmUgdGhhbiA2NEtCCihmb3IgZXhhbXBsZSAxTUIgfiA4TUIpLCB0aGlzIHBhdGNoIGNoZWNr
-IG1heF9yZWFkIGluc3RlYWQgb2YgbWF4QnVmIHRvCmRldGVybWluZSB3aGV0aGVyIHNlcnZlciBz
-dXBwb3J0IHJlYWRwYWdlcygpIGFuZCBpbXByb3ZlIHJlYWQgcGVyZm9ybWFuY2UKZm9yIHBhZ2Ug
-c2l6ZSA2NEtCICYgY2FjaGU9c3RyaWN0ICYgdmVycz0yLjErLCBhbmQgZm9yIFNNQjEgaXQgaXMg
-bW9yZQpjbGVhbmVyIHRvIGluaXRpYWxpemUgc2VydmVyLT5tYXhfcmVhZCB0byBzZXJ2ZXItPm1h
-eEJ1Zi4KClRoZSBjbGllbnQgaXMgYSBsaW51eCBib3ggd2l0aCBsaW51eCBrZXJuZWwgNC4yLjgs
-CnBhZ2Ugc2l6ZSA2NEtCIChDT05GSUdfQVJNNjRfNjRLX1BBR0VTPXkpLApjcHUgYXJtIDEuN0dI
-eiwgYW5kIHVzZSBtb3VudC5jaWZzIGFzIHNtYiBjbGllbnQuClRoZSBzZXJ2ZXIgaXMgYW5vdGhl
-ciBsaW51eCBib3ggd2l0aCBsaW51eCBrZXJuZWwgNC4yLjgsCnNoYXJlIGEgZmlsZSAnMTBHLmlt
-Zycgd2l0aCBzaXplIDEwR0IsCmFuZCB1c2Ugc2FtYmEtNC43LjEyIGFzIHNtYiBzZXJ2ZXIuCgpU
-aGUgY2xpZW50IG1vdW50IGEgc2hhcmUgZnJvbSB0aGUgc2VydmVyIHdpdGggZGlmZmVyZW50CmNh
-Y2hlIG9wdGlvbnM6IGNhY2hlPXN0cmljdCBhbmQgY2FjaGU9bm9uZSwKbW91bnQgLXRjaWZzIC8v
-PHNlcnZlcl9pcD4vUHVibGljIC9jYWNoZV9zdHJpY3QgLW92ZXJzPTMuMCxjYWNoZT1zdHJpY3Qs
-dXNlcm5hbWU9PHh4eD4scGFzc3dvcmQ9PHl5eT4KbW91bnQgLXRjaWZzIC8vPHNlcnZlcl9pcD4v
-UHVibGljIC9jYWNoZV9ub25lIC1vdmVycz0zLjAsY2FjaGU9bm9uZSx1c2VybmFtZT08eHh4Pixw
-YXNzd29yZD08eXl5PgoKVGhlIGNsaWVudCBkb3dubG9hZCBhIDEwR2JFIGZpbGUgZnJvbSB0aGUg
-c2VydmVyIGFjY3Jvc3MgMUdiRSBuZXR3b3JrLApkZCBpZj0vY2FjaGVfc3RyaWN0LzEwRy5pbWcg
-b2Y9L2Rldi9udWxsIGJzPTFNIGNvdW50PTEwMjQwCmRkIGlmPS9jYWNoZV9ub25lLzEwRy5pbWcg
-b2Y9L2Rldi9udWxsIGJzPTFNIGNvdW50PTEwMjQwCgpGb3VuZCB0aGF0IGNhY2hlPXN0cmljdCAo
-d2l0aG91dCBwYXRjaCkgaXMgc2xvd2VyIHJlYWQgdGhyb3VnaHB1dCBhbmQKc21hbGxlciByZWFk
-IElPIHNpemUgdGhhbiBjYWNoZT1ub25lLgpjYWNoZT1zdHJpY3QgKHdpdGhvdXQgcGF0Y2gpOiBy
-ZWFkIHRocm91Z2hwdXQgNDBNQi9zLCByZWFkIElPIHNpemUgaXMgMTZLQgpjYWNoZT1zdHJpY3Qg
-KHdpdGggcGF0Y2gpOiByZWFkIHRocm91Z2hwdXQgMTEzTUIvcywgcmVhZCBJTyBzaXplIGlzIDFN
-QgpjYWNoZT1ub25lOiByZWFkIHRocm91Z2hwdXQgMTA5TUIvcywgcmVhZCBJTyBzaXplIGlzIDFN
-QgoKTG9va3MgbGlrZSBpZiBwYWdlIHNpemUgaXMgNjRLQiwKY2lmc19zZXRfb3BzKCkgd291bGQg
-dXNlIGNpZnNfYWRkcl9vcHNfc21hbGxidWYgaW5zdGVhZCBvZiBjaWZzX2FkZHJfb3BzLAoKCS8q
-IGNoZWNrIGlmIHNlcnZlciBjYW4gc3VwcG9ydCByZWFkcGFnZXMgKi8KCWlmIChjaWZzX3NiX21h
-c3Rlcl90Y29uKGNpZnNfc2IpLT5zZXMtPnNlcnZlci0+bWF4QnVmIDwKCQkJUEFHRV9TSVpFICsg
-TUFYX0NJRlNfSERSX1NJWkUpCgkJaW5vZGUtPmlfZGF0YS5hX29wcyA9ICZjaWZzX2FkZHJfb3Bz
-X3NtYWxsYnVmOwoJZWxzZQoJCWlub2RlLT5pX2RhdGEuYV9vcHMgPSAmY2lmc19hZGRyX29wczsK
-Cm1heEJ1ZiBpcyBjYW1lIGZyb20gMiBwbGFjZXMsIFNNQjJfbmVnb3RpYXRlKCkgYW5kIENJRlNT
-TUJOZWdvdGlhdGUoKSwKKFNNQjJfTUFYX0JVRkZFUl9TSVpFIGlzIDY0S0IpClNNQjJfbmVnb3Rp
-YXRlKCk6CgkvKiBzZXQgaXQgdG8gdGhlIG1heGltdW0gYnVmZmVyIHNpemUgdmFsdWUgd2UgY2Fu
-IHNlbmQgd2l0aCAxIGNyZWRpdCAqLwoJc2VydmVyLT5tYXhCdWYgPSBtaW5fdCh1bnNpZ25lZCBp
-bnQsIGxlMzJfdG9fY3B1KHJzcC0+TWF4VHJhbnNhY3RTaXplKSwKCQkJIMKgIMKgIMKgIFNNQjJf
-TUFYX0JVRkZFUl9TSVpFKTsKQ0lGU1NNQk5lZ290aWF0ZSgpOgoJc2VydmVyLT5tYXhCdWYgPSBs
-ZTMyX3RvX2NwdShwU01Cci0+TWF4QnVmZmVyU2l6ZSk7CgpQYWdlIHNpemUgNjRLQiBhbmQgY2Fj
-aGU9c3RyaWN0IGxlYWQgdG8gcmVhZF9wYWdlcygpIHVzZSBjaWZzX3JlYWRwYWdlKCkKaW5zdGVh
-ZCBvZiBjaWZzX3JlYWRwYWdlcygpLCBhbmQgdGhlbiBjaWZzX3JlYWQoKSB1c2luZyBtYXhpbXVt
-IHJlYWQgSU8Kc2l6ZSAxNktCLCB3aGljaCBpcyBtdWNoIHNsb3dlciB0aGFuIG1heGltdW0gcmVh
-ZCBJTyBzaXplIDFNQi4KKENJRlNNYXhCdWZTaXplIGlzIDE2S0IgYnkgZGVmYXVsdCkKCgkvKiBG
-SVhNRTogc2V0IHVwIGhhbmRsZXJzIGZvciBsYXJnZXIgcmVhZHMgYW5kL29yIGNvbnZlcnQgdG8g
-YXN5bmMgKi8KCXJzaXplID0gbWluX3QodW5zaWduZWQgaW50LCBjaWZzX3NiLT5yc2l6ZSwgQ0lG
-U01heEJ1ZlNpemUpOwoKU2lnbmVkLW9mZi1ieTogSm9uZXMgU3l1ZSA8am9uZXNzeXVlQHFuYXAu
-Y29tPgotLS0KIGZzL2NpZnMvY2lmc3NtYi5jIHwgNCArKysrCiBmcy9jaWZzL2lub2RlLmMgICB8
-IDIgKy0KIDIgZmlsZXMgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpk
-aWZmIC0tZ2l0IGEvZnMvY2lmcy9jaWZzc21iLmMgYi9mcy9jaWZzL2NpZnNzbWIuYwppbmRleCA2
-ZjZmYjM2Li5jZmVmMDJiIDEwMDY0NAotLS0gYS9mcy9jaWZzL2NpZnNzbWIuYworKysgYi9mcy9j
-aWZzL2NpZnNzbWIuYwpAQCAtNTgzLDYgKzU4Myw4IEBAIGRlY29kZV9sYW5tYW5fbmVncHJvdF9y
-c3Aoc3RydWN0IFRDUF9TZXJ2ZXJfSW5mbyAqc2VydmVyLCBORUdPVElBVEVfUlNQICpwU01CcikK
-IAkJCSAgICAgICBjaWZzX21heF9wZW5kaW5nKTsKIAlzZXRfY3JlZGl0cyhzZXJ2ZXIsIHNlcnZl
-ci0+bWF4UmVxKTsKIAlzZXJ2ZXItPm1heEJ1ZiA9IGxlMTZfdG9fY3B1KHJzcC0+TWF4QnVmU2l6
-ZSk7CisJLyogc2V0IHVwIG1heF9yZWFkIGZvciByZWFkcGFnZXMgY2hlY2sgKi8KKwlzZXJ2ZXIt
-Pm1heF9yZWFkID0gc2VydmVyLT5tYXhCdWY7CiAJLyogZXZlbiB0aG91Z2ggd2UgZG8gbm90IHVz
-ZSByYXcgd2UgbWlnaHQgYXMgd2VsbCBzZXQgdGhpcwogCWFjY3VyYXRlbHksIGluIGNhc2Ugd2Ug
-ZXZlciBmaW5kIGEgbmVlZCBmb3IgaXQgKi8KIAlpZiAoKGxlMTZfdG9fY3B1KHJzcC0+UmF3TW9k
-ZSkgJiBSQVdfRU5BQkxFKSA9PSBSQVdfRU5BQkxFKSB7CkBAIC03NDQsNiArNzQ2LDggQEAgQ0lG
-U1NNQk5lZ290aWF0ZShjb25zdCB1bnNpZ25lZCBpbnQgeGlkLCBzdHJ1Y3QgY2lmc19zZXMgKnNl
-cykKIAlzZXRfY3JlZGl0cyhzZXJ2ZXIsIHNlcnZlci0+bWF4UmVxKTsKIAkvKiBwcm9iYWJseSBu
-byBuZWVkIHRvIHN0b3JlIGFuZCBjaGVjayBtYXh2Y3MgKi8KIAlzZXJ2ZXItPm1heEJ1ZiA9IGxl
-MzJfdG9fY3B1KHBTTUJyLT5NYXhCdWZmZXJTaXplKTsKKwkvKiBzZXQgdXAgbWF4X3JlYWQgZm9y
-IHJlYWRwYWdlcyBjaGVjayAqLworCXNlcnZlci0+bWF4X3JlYWQgPSBzZXJ2ZXItPm1heEJ1ZjsK
-IAlzZXJ2ZXItPm1heF9ydyA9IGxlMzJfdG9fY3B1KHBTTUJyLT5NYXhSYXdTaXplKTsKIAljaWZz
-X2RiZyhOT0lTWSwgIk1heCBidWYgPSAlZFxuIiwgc2VzLT5zZXJ2ZXItPm1heEJ1Zik7CiAJc2Vy
-dmVyLT5jYXBhYmlsaXRpZXMgPSBsZTMyX3RvX2NwdShwU01Cci0+Q2FwYWJpbGl0aWVzKTsKZGlm
-ZiAtLWdpdCBhL2ZzL2NpZnMvaW5vZGUuYyBiL2ZzL2NpZnMvaW5vZGUuYwppbmRleCBiMTZmOGQy
-Li5iMmViYTY3IDEwMDY0NAotLS0gYS9mcy9jaWZzL2lub2RlLmMKKysrIGIvZnMvY2lmcy9pbm9k
-ZS5jCkBAIC02MSw3ICs2MSw3IEBAIHN0YXRpYyB2b2lkIGNpZnNfc2V0X29wcyhzdHJ1Y3QgaW5v
-ZGUgKmlub2RlKQogCQl9CiAKIAkJLyogY2hlY2sgaWYgc2VydmVyIGNhbiBzdXBwb3J0IHJlYWRw
-YWdlcyAqLwotCQlpZiAoY2lmc19zYl9tYXN0ZXJfdGNvbihjaWZzX3NiKS0+c2VzLT5zZXJ2ZXIt
-Pm1heEJ1ZiA8CisJCWlmIChjaWZzX3NiX21hc3Rlcl90Y29uKGNpZnNfc2IpLT5zZXMtPnNlcnZl
-ci0+bWF4X3JlYWQgPAogCQkJCVBBR0VfU0laRSArIE1BWF9DSUZTX0hEUl9TSVpFKQogCQkJaW5v
-ZGUtPmlfZGF0YS5hX29wcyA9ICZjaWZzX2FkZHJfb3BzX3NtYWxsYnVmOwogCQllbHNlCi0tIAoy
-LjEuNAoK
---00000000000036d2a305a322c5dd--
 
