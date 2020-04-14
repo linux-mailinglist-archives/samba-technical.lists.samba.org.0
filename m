@@ -2,64 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 094701A7076
-	for <lists+samba-technical@lfdr.de>; Tue, 14 Apr 2020 03:15:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7AAFD1A7529
+	for <lists+samba-technical@lfdr.de>; Tue, 14 Apr 2020 09:49:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=2sFM4m+/5d21PqXw6kWTfIsYI0G/LoNNZv0ieGfL4mY=; b=PzxyMHQHlxCyzUtsu1K+39OvhL
-	Vs83aGmW33byXEeV5iGWdLfmtCgv9BLuCZQ1d0BEGykDAvd/AWExyjzTnwWibeyWUlbU9j1L3bxmK
-	T6znhLEmb8UuOjAY6rqdVRAFYghPTAbSg/sZ9pok0Nlk65osKTbMUPcr5SiFoIvIsZLjh+nsUF3qD
-	s9Vq0oHkoISzVqJMAvf0cLmW8thftPFuheJB3cazT4GQhnlTrX8Y9W87mbI4hKBkxepD2P1VHHfdu
-	Zsh9unr0sgdTKr5a6UkvM/UXucfdc6TPxNysApXRuqxA5Ni4Eiy6D6QsT/6to3lbrVBduDvwEhTfb
-	wpHTuIDw==;
-Received: from localhost ([::1]:55620 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=dSB/4I76m76tRNleCh24cACZ/lLVu/9szhK8v0OJ0yk=; b=ALYox+d0iiB22S6MQyIz6DyQfB
+	SQnzMyWBPRtrRY7VWEKL3zC2RF3OPtF649MxOc7xQ0k0j/O869R8OS0+u+JNy0m+0lOAnu5JcmDYN
+	T6q8+0GvTuqyjK+Vd75Ihvr69UbFgAIFUTR8O3qp7JQIlntIX3nF7fuMp7el2AFbvlQYj8fuLyegJ
+	UoodFPKNdlIGXVOyORf2vDPc4g9+bESU25keMsMGrb5T5jzTdDq+8sfbyeD5gGrpv9SFSMU065XPC
+	SPDhPxUW/5yEu7t65ejmfW9npvJA/IY1TKUsVUEgU2qjAPxeXk/OpZOo/wzt9/3ir1JjKA3Z5GzBw
+	MmpoVhLA==;
+Received: from localhost ([::1]:56572 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jOA9B-000eFE-P3; Tue, 14 Apr 2020 01:13:53 +0000
-Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:36149) 
+	id 1jOGIg-000f7C-S8; Tue, 14 Apr 2020 07:48:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60332) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jOA95-000eF7-4n
- for samba-technical@lists.samba.org; Tue, 14 Apr 2020 01:13:49 +0000
-Received: by mail-yb1-xb44.google.com with SMTP id n188so5740096ybc.3
- for <samba-technical@lists.samba.org>; Mon, 13 Apr 2020 18:13:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=2sFM4m+/5d21PqXw6kWTfIsYI0G/LoNNZv0ieGfL4mY=;
- b=fmR7HTlFN8bGdgVEuVFhcrWDbj6/YppDbyyN1mukit2yis/44I+arnJOqNlnimdoNM
- ldNi1L6NHj9Mc93EwF76K3W3Fw/R1It1LhVbLGjAupuzpwhjFdzknMpjOB6713LOHl2/
- HcAuhVo57ujEqqMjbM3CSmBvX+8DAMjlQbEIkL6iMf3EiDXINCqLyv76wzM5hPYsLhhC
- rJepqxkg9AjLLcRLKRycDDh5sks4o7r9liuYZlvRIR7KCoGAnS8M3YBuUQsKxzbkjl6G
- 885j+DnhsY3coLPx27US9GZlz35DY4FbvfO54ht1IYJL9Zp/WgfqQ8D6lLaPlH1gjXod
- wgHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=2sFM4m+/5d21PqXw6kWTfIsYI0G/LoNNZv0ieGfL4mY=;
- b=izTs2MezDf0l4yCvmR2fHRjd9GG4Cs4JeRrIHmaYdxC70ZW3uWQ8Td0yCjG0KBFz5P
- UPsBh70V2BeSOBV3wEuikEFMaluGEHujDUsHHNO7ZlZwwJBJXoHqVIrihPbMTHrgdNmS
- 8KworTuAB8HDBG4/omX33i8ozmclRUaJsqBCmMFzEIXelMxEu+070qcHZZzc6YNo3fBi
- IQlYgezG0ixoNYsR5TtuMv1GkKBN5CDC6tX18wuP5dzLKfpu0FTFb6VnuM+ZGKnJfW6J
- OaJ2+mHXYgSeYz2zgvMRMlgIiqya7QCbzseKlxizHv7n+TPgPDMXefNTwf0eFJ7s/KgM
- cgOQ==
-X-Gm-Message-State: AGi0PubizIefFCRZdwnZjeuqL6ETIv9lXAGPtr5rHqtW4JMX6XKA7NBw
- yimG67tOLIxWL44HJf7urvhuukOyizsJon21xEE=
-X-Google-Smtp-Source: APiQypIRYMTbUeX+KJRP1eOtVtG/KITpkD0lHYLP/DV/y5FEmDRT58Z7li7yhzS//x4ix2pavP/YpuAas7Yhp/BuvNc=
-X-Received: by 2002:a5b:443:: with SMTP id s3mr31274381ybp.14.1586826823528;
- Mon, 13 Apr 2020 18:13:43 -0700 (PDT)
+ (Exim) id 1jOGIW-000f75-6m
+ for samba-technical@lists.samba.org; Tue, 14 Apr 2020 07:48:00 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=dSB/4I76m76tRNleCh24cACZ/lLVu/9szhK8v0OJ0yk=; b=bLRF2ac9/9npwpzEUvzTmauaGd
+ sxX6cC8IWIJKkdFMihIyN4qLRglhP20G28zbbr9IneQffW98onlojDlq0oh5r1H8IvCzshRh/ebKx
+ W0wATrt2VCRh9K3+B7On/aBwUM2qBH8SgKxYflSyY1jYiegOTtYSIYNiMcymhZIDYh4o0orfdHxWr
+ TbATsxjus7+tQK6YLKoOzdcaVUs8Tk+8N+GridisTWMuizsQwEQrrcnzz9D1lyX4qJr/0rpsabBU3
+ AdOrJ1btAxzEc4UnUa81MoT9GqzdkOTYcXFksKYpjaOt+fgDfJ7UYBfDP/kQSY0zLn+kzW7DXHLXR
+ XNBQxYJ4kvvMTlHk5fI4dYIOCYPM9SBse53BHIymgy+rsseIKWDXhk9P2GQd/MxAt0tQRiEeeEnm4
+ E3zZFh4Dp9uXgVqz1GdWsPQKlQvaxWo6dwgkDpQ8mGpmgrsp1Ww6WHtdi7bQYjnBM2X70vAtyHMhe
+ TLEO0T/hnO6cdf7RdHjftHaD;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1jOGIV-0006v7-7n; Tue, 14 Apr 2020 07:47:55 +0000
+To: <130273@edu.singelland.nl>
+References: <mailman.12.1586520002.86114.samba-technical@lists.samba.org>
+ <DA77E830-62F3-444B-B403-6692EB35833F@edu.singelland.nl>
+In-Reply-To: <DA77E830-62F3-444B-B403-6692EB35833F@edu.singelland.nl>
+Subject: RE: samba-technical Digest, Vol 208, Issue 10
+Date: Tue, 14 Apr 2020 09:47:54 +0200
+Message-ID: <753C569ECE9A49C1B3B9625BADACEE5C@rotterdam.bazuin.nl>
 MIME-Version: 1.0
-References: <CAEUGjKiLPQP9wp0AgLUvHgKBOe9We2a-RQaZ7cd7CvhnarwWiw@mail.gmail.com>
- <CAKywueT0Q9WkANNsg8cEDwGZSMaaE5c4LHuEeMhVDzJAzycroQ@mail.gmail.com>
- <CAEUGjKhSBNQboKOMFMgos9OQfxcLQZsXp8aBrUSFcaSe1saH2Q@mail.gmail.com>
- <CAKywueTsaRfut9C4qj96Qc5VaeuRKO2WjahS==bz5kAqWB1KNQ@mail.gmail.com>
-In-Reply-To: <CAKywueTsaRfut9C4qj96Qc5VaeuRKO2WjahS==bz5kAqWB1KNQ@mail.gmail.com>
-Date: Mon, 13 Apr 2020 20:13:32 -0500
-Message-ID: <CAH2r5msxaB5tC=09Kz3AoFb2e6x55V_HHWoqpYPAa4-pXhP71g@mail.gmail.com>
-Subject: Re: [PATCH] cifs: improve read performance for page size 64KB &
- cache=strict & vers=2.1+
-To: Pavel Shilovsky <piastryyy@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Office Outlook 11
+X-MimeOLE: Produced By Microsoft MimeOLE
+Thread-Index: AdYSMQFbuuUy7ExeRWuMLoZiuDn4vw==
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,62 +59,89 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: linux-cifs <linux-cifs@vger.kernel.org>,
- Samba Technical <samba-technical@lists.samba.org>,
- Kernel Mailing List <linux-kernel@vger.kernel.org>
+From: "L. van Belle via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: belle@samba.org
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next pending testing
+(Dutch version)
 
-On Mon, Apr 13, 2020 at 11:39 AM Pavel Shilovsky via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> Looks good, thanks!
->
-> Reviewed-by: Pavel Shilovsky <pshilov@microsoft.com>
->
-> --
-> Best regards,
-> Pavel Shilovsky
->
-> =D0=B2=D1=81, 12 =D0=B0=D0=BF=D1=80. 2020 =D0=B3. =D0=B2 19:23, Jones Syu=
-e <jonessyue@qnap.com>:
-> >
-> > Hello Pavel
-> >
-> > Thanks for kindly reviewing!
-> > Please find the attached v2.patch.
-> >
-> > --
-> > Regards,
-> > Jones Syue | =E8=96=9B=E6=87=B7=E5=AE=97
-> > QNAP Systems, Inc.
-> >
-> >
-> > On Sat, Apr 11, 2020 at 2:25 AM Pavel Shilovsky <piastryyy@gmail.com> w=
-rote:
-> > >
-> > > Hi Jones,
-> > >
-> > > Thanks for the patch!
-> > >
-> > > It will work although it is probably a little bit cleaner to
-> > > initialize server->max_read to server->maxBuf for SMB1 and use the
-> > > server->max_read in the readpages condition check instead.
-> > >
-> > > @Others, thoughts?
-> > >
-> > > --
-> > > Best regards,
-> > > Pavel Shilovsky
->
+Hallo,=20
+
+Zolang je zelf niet afmeld blijf je deze emails krijgen.=20
+Reply zoals onderstaande werkt dus niet.=20
+Via : https://lists.samba.org/mailman/listinfo/samba-technical=20
+Kan je afmelden.=20
+
+( Frysk version)=20
+
+Salang't jo jo net =F4fskriuwe, sille jo dizze e-mails trochgean.
+Antwurd lykas hjir=FBnder wurket net.
+Fia:  https://lists.samba.org/mailman/listinfo/samba-technical=20
+Jo kinne jo =FAtskriuwe.
+
+(English version)
+Hello
+
+As long your not unsubscribing yourself, you will keep getting these =
+mailing
+e-mails.=20
+Replying like that does not do anything.=20
+Through : https://lists.samba.org/mailman/listinfo/samba-technical=20
+Your able to unsubscribe.=20
 
 
---=20
-Thanks,
+De beste groeten/mei freonlike groetnis/Best regards,=20
 
-Steve
+Louis
+
+
+
+> -----Oorspronkelijk bericht-----
+> Van: samba-technical=20
+> [mailto:samba-technical-bounces@lists.samba.org] Namens=20
+> 130273--- via samba-technical
+> Verzonden: maandag 13 april 2020 21:28
+> Aan: samba-technical@lists.samba.org
+> Onderwerp: Re: samba-technical Digest, Vol 208, Issue 10
+>=20
+> Kap hiermee
+>=20
+> Verstuurd vanaf mijn iPhone
+>=20
+> > Op 10 apr. 2020 om 14:00 heeft=20
+> samba-technical-request@lists.samba.org het volgende geschreven:
+> >=20
+> > ???Send samba-technical mailing list submissions to
+> >    samba-technical@lists.samba.org
+> >=20
+> > To subscribe or unsubscribe via the World Wide Web, visit
+> >    https://lists.samba.org/mailman/listinfo/samba-technical
+> > or, via email, send a message with subject or body 'help' to
+> >    samba-technical-request@lists.samba.org
+> >=20
+> > You can reach the person managing the list at
+> >    samba-technical-owner@lists.samba.org
+> >=20
+> > When replying, please edit your Subject line so it is more specific
+> > than "Re: Contents of samba-technical digest..."
+> > Today's Topics:
+> >=20
+> >   1. Re: tldap search paged (swen)
+> >   2. Re: tldap search paged (Christof Schmitt)
+> >   3. Re: tldap search paged (Jeremy Allison)
+> >   4. PANIC: assert failed at ../../lib/dbwrap/dbwrap.c(82):
+> >      rec->value_valid when connecting to samba (Rouven WEILER)
+> > <mime-attachment>
+> > <mime-attachment>
+> > <mime-attachment>
+> > <mime-attachment>
+> > _______________________________________________
+> > samba-technical mailing list
+> > samba-technical@lists.samba.org
+> > https://lists.samba.org/mailman/listinfo/samba-technical
+>=20
+>=20
+
 
