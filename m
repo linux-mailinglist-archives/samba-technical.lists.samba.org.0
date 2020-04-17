@@ -2,62 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 380021ABA00
-	for <lists+samba-technical@lfdr.de>; Thu, 16 Apr 2020 09:34:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DFA5A1AE0E7
+	for <lists+samba-technical@lfdr.de>; Fri, 17 Apr 2020 17:19:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=UUNY3ShQiEMlKdA2OtEmjXgSE2HQo1VpKsXAZEAB++8=; b=2ynNqBYEhWdi+gMMwzWTNmQaUH
-	WFjMWZFUxLP0q9keU2S2WbEAXKE1izGnrfsN94vk2/IchV7+8/vk/Y7vElzKK9vQiLgHiulQG2MfM
-	S2/YvLbEyawAB+ZhBhGujplIvSpbKvfW26eDnGXlpVLw6t+AUU82W9Cbp4zSsU8jdQVdZ0xS4Gmpj
-	HnrwGDRNXR1Yr8Ub5YsjaXAuUqI/v4MDMoG++oXHMUbNbVc79eNK9XrT++2/n2Fes6U6RmQAwveRf
-	st3lc1Q27dQOPQEbUDqXQqfMNOqfLTVtLsXT2iZ2CkRFbi/ugu9LiVWGbW+Q85D1z/DRpaZ0lv9Rp
-	TRvJ0fBQ==;
-Received: from localhost ([::1]:23770 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=9D7RVQMXonZ/04NMPIVsBTqOqToJbnvL9baxwMLrqCA=; b=y308+mpVIyjSrG4NlE6GSus20E
+	1zf8qANCFKnRiit1MBbO5hbDAJR/UrjUT87JzlNVC4WUy0rYrrWMuD/y7sgiL8BTI2VozEFxzwc8V
+	HTlN5VdgH3HEBblL3z3Kp6TQiTmK1UlhssnB5+HW4S71gi82bdJ0iBVrtOgAQnPDs+Xo7/VTYbv2n
+	JX9O7PoGLnclu7dDcA8payECprOg2zxak371DM2zsCjkPbWfPAxv9fFyKBOkSczmmpwVXapxZdpLQ
+	UIPgqcBkpvBtrQu+wVdSbv/RzaeI1UESfUe1lfGz0yRFLUS91kFFSuEAb3V14KwFoenBcbup8ETls
+	DSVc+DeQ==;
+Received: from localhost ([::1]:37760 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jOz1p-000s0s-8l; Thu, 16 Apr 2020 07:33:41 +0000
-Received: from mail-qk1-x744.google.com ([2607:f8b0:4864:20::744]:46713) 
+	id 1jPSkm-00145m-Nb; Fri, 17 Apr 2020 15:18:04 +0000
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335]:33252) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jOz1e-000s0l-Q8
- for samba-technical@lists.samba.org; Thu, 16 Apr 2020 07:33:33 +0000
-Received: by mail-qk1-x744.google.com with SMTP id g74so20262959qke.13
- for <samba-technical@lists.samba.org>; Thu, 16 Apr 2020 00:33:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qnap.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=UUNY3ShQiEMlKdA2OtEmjXgSE2HQo1VpKsXAZEAB++8=;
- b=hAAkkXoJSeTZMtgLyumWdDpGnE/XBC+aHvFhGPPys8ToYyqHksL4ZpwqW5T+JaRcXl
- o43Nn1KGZaVBKhFR5FOvCjbaxWqLrHV8OuMXkvtnh//zZQZGZaqTPXCj5qByMUT5RFbh
- SJPoK/fhkM3ssd3iqshhMe81Lr0zwvKA7RXU0=
+ (Exim) id 1jPSkg-00145e-P3
+ for samba-technical@lists.samba.org; Fri, 17 Apr 2020 15:18:00 +0000
+Received: by mail-wm1-x335.google.com with SMTP id v8so5177809wma.0
+ for <samba-technical@lists.samba.org>; Fri, 17 Apr 2020 08:17:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=message-id:subject:from:reply-to:to:date:mime-version
+ :content-transfer-encoding;
+ bh=9D7RVQMXonZ/04NMPIVsBTqOqToJbnvL9baxwMLrqCA=;
+ b=DQVm/qlh7xFDalmsIPu9avZ5uxY4oTT9z/qCas4Nf7Lj6yTqOAwFjaPcOTigEW2JLK
+ WwqTwrpw49ienQwsw45ZQY/HQz8bl1Aq2YEGgzFsy9CIppGWagAybjv5PpZ/u0te1KQL
+ cfeXjF4uhXfw/SORAIl7wVtiT+ml0tqOvnxdneGoNrRQJ9pQNNAvHhG7xDeXCBb187XF
+ qUnUF/6shvqyboC/NvmDTV3d7W/KiRxDsrOS6tGMK0pRGgpHpNUfY/+v7MRBQsJAdoKW
+ YmPkxBYnAo+6sNtZqtXMeZT6uGOIcHO8CfKgXuyvjgTPwfipUWQnFkbncwtaasPUn51j
+ Mpng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=UUNY3ShQiEMlKdA2OtEmjXgSE2HQo1VpKsXAZEAB++8=;
- b=eHoJrJe10+5T3I8AzoHnk+wgWT7W6XkhMoOISF2cJY8riP5YKD8R8Cp3RsVEhafTpZ
- uOf8RtgLHk2DU+i8SXX0sEbS2DWWZfkMxHIQDqGamDWPQvd0jrDcxjBUxBOWNvIsNwpS
- cDqhXhp2iPesezPaOgJK7XOwVNUMZD1Uk6YTtgy4R9QsbQOX9ZxTPjobuSDvuuGo9BCZ
- iswf2UWelYAr2sVTz7KPgGIJebDNxvybAJtV8cPDqcPFhKH47kFlLujZK39+5T9WAeBD
- yUmmV0SCcJU3fXEIrGPMfUKqzdsEgFY6vZChop/QPWER93qcE6DEiCVWFBeYHXbbckvE
- lS3g==
-X-Gm-Message-State: AGi0Pub6QUzDKHPYa8lLL71JjO4v5FItFxM7+Zj3jUT0cH+33srxznRu
- GklAWbxmTdWD7F8/qdSr0HhRJTPh2OaV5JAiniWqLA==
-X-Google-Smtp-Source: APiQypLjMQQF6xFJgGIcXivLrWGvnotQ+D6p4pL53qIa6tvjRUBiKhdEepCEpb+H3UzPYGRtQEGOvPOSLCAH19n/LJg=
-X-Received: by 2002:a37:8b04:: with SMTP id n4mr30253412qkd.222.1587022408701; 
- Thu, 16 Apr 2020 00:33:28 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAEUGjKiLPQP9wp0AgLUvHgKBOe9We2a-RQaZ7cd7CvhnarwWiw@mail.gmail.com>
- <CAKywueT0Q9WkANNsg8cEDwGZSMaaE5c4LHuEeMhVDzJAzycroQ@mail.gmail.com>
- <CAEUGjKhSBNQboKOMFMgos9OQfxcLQZsXp8aBrUSFcaSe1saH2Q@mail.gmail.com>
- <CAH2r5mt1k5t8rSH1KizeSrcLaN1Fn3GWeMvDPwT2Kfq43UAWaQ@mail.gmail.com>
- <CAEUGjKhpgmhj9RzcGQXPuFUyoqsUnk2d3oCpOYBdR=EwCO21YQ@mail.gmail.com>
-In-Reply-To: <CAEUGjKhpgmhj9RzcGQXPuFUyoqsUnk2d3oCpOYBdR=EwCO21YQ@mail.gmail.com>
-Date: Thu, 16 Apr 2020 15:33:18 +0800
-Message-ID: <CAEUGjKh5mj0rFUZPoguFh4G-_YfwACV+_jVK7TNi+jK_fE1dgQ@mail.gmail.com>
-Subject: Re: [PATCH] cifs: improve read performance for page size 64KB &
- cache=strict & vers=2.1+
-To: Steve French <smfrench@gmail.com>
+ h=x-gm-message-state:message-id:subject:from:reply-to:to:date
+ :mime-version:content-transfer-encoding;
+ bh=9D7RVQMXonZ/04NMPIVsBTqOqToJbnvL9baxwMLrqCA=;
+ b=jdLu4Qquo6vboQ43HfCBslAxtWaRiafxvl9uI3FM2B8ySqPmI1KGb2EkRUdtIOMrWx
+ daRA+lSrErwRsJH+Cfz4phB2IqjyQBQJYHboJ9ZPHj7YCYQLvdMGgsGILreKFkIuxKNf
+ UfHIGkigtox5DqO3HHX4411ZdJH87SJOO/hBTK+QPJXs4Laad7kxYn+N794lz2nHQS/t
+ FK0SEqtE4yROTtebpP+2s/fW6yYr4cc4aso5TR4q+0QVvBS/7H7CFC/4ifRMo/VZSbPk
+ 02dQyC0uDizKLKhleMd3cK/ucFAwSex8sn7gKFrK+9lY6q0wbatHQuYCFdkm9Gtt7eVJ
+ pO9w==
+X-Gm-Message-State: AGi0Puac4dayRQLZcndZ6yVl5Gdnogn9aiz4to51cflkw8rGcOWf5lyQ
+ eZYcHc5/+XIeff8Ta2vPfpH6c5bj
+X-Google-Smtp-Source: APiQypJ7zP9n0ztenoDheB8weLFIOHGg5i2Lf7Vu4FwFfdXURE9o45efaPOQfof0MKeCL6u9NwIKlA==
+X-Received: by 2002:a7b:c5cb:: with SMTP id n11mr4135093wmk.160.1587136672219; 
+ Fri, 17 Apr 2020 08:17:52 -0700 (PDT)
+Received: from dakota.homenet.telecomitalia.it
+ (host79-41-dynamic.54-82-r.retail.telecomitalia.it. [82.54.41.79])
+ by smtp.googlemail.com with ESMTPSA id p3sm14157283wrx.82.2020.04.17.08.17.50
+ for <samba-technical@lists.samba.org>
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Fri, 17 Apr 2020 08:17:51 -0700 (PDT)
+Message-ID: <accf84390fb0dfd9160359a802eb0d523fcca4c1.camel@gmail.com>
+Subject: VPN Single SignOn with Samba AD
+To: samba-technical@lists.samba.org
+Date: Fri, 17 Apr 2020 17:17:50 +0200
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,101 +74,49 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jones Syue via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jones Syue <jonessyue@qnap.com>
-Cc: linux-cifs <linux-cifs@vger.kernel.org>,
- Samba Technical <samba-technical@lists.samba.org>,
- Kernel Mailing List <linux-kernel@vger.kernel.org>
+From: Daniele Dario via samba-technical <samba-technical@lists.samba.org>
+Reply-To: d.dario76@gmail.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello Steve
+Hi samba team,
+these days of lockdown, I had to set up a VPN server to allow my colleagues to
+work from home and I found really useful the page on your wiki so, again, thanks
+to everyone for the great job you do.
 
-> Test read performance over 1GbE network with command:
-Also test read performance over 10GbE network,
-vers=3D2.1+ can reach over 600 MB/s with v2.patch.
+My company LAN topology has 2 AD DCs + 1 domain member acting as file server + 1
+domain member used to authenticate remote users logging in through SSH and now
+IPSec VPN users. All machines are running samba 4.11.6.
 
-aarch64, page size 64KB (CONFIG_ARM64_64K_PAGES=3Dy), linux-4.2.8,
-cpu Annapurna Labs Alpine AL324 Quad-core ARM Cortex-A57 CPU @ 1.70GHz,
-ram 8GB,
-with patch,
-vers=3D1.0,cache=3Dstrict: read throughput 110MB/s, max read IO size 16KB
-vers=3D2.0,cache=3Dstrict: read throughput 106MB/s, max read IO size 16KB
-vers=3D2.1,cache=3Dstrict: read throughput 667MB/s, max read IO size 1MB
-vers=3D3.0,cache=3Dstrict: read throughput 639MB/s, max read IO size 1MB
-without patch,
-vers=3D1.0,cache=3Dstrict: read throughput 107MB/s, max read IO size 16KB
-vers=3D2.0,cache=3Dstrict: read throughput 107MB/s, max read IO size 16KB
-vers=3D2.1,cache=3Dstrict: read throughput 106MB/s, max read IO size 16KB
-vers=3D3.0,cache=3Dstrict: read throughput 106MB/s, max read IO size 16KB
+Unfortunately the page "VPN Single SignOn with Samba AD" is not complete and I
+found some troubles specially with libradiusclient-ng2 which on Ubuntu 18.04 has
+been replaced by libradcli.
 
-command:
-mount -tcifs //<server_ip>/<share> /remote_strict
--overs=3D<x.y>,cache=3Dstrict,username=3D<uu>,password=3D<pp>
-dd if=3D/remote_strict/10G.img of=3D/dev/null bs=3D1M count=3D10240
+After some tries and searches I found that there's a ppp plugin that
+authenticate against winbind and started wondering why it's not mentioned in the
+wiki page.
 
---
-Regards,
-Jones Syue | =E8=96=9B=E6=87=B7=E5=AE=97
-QNAP Systems, Inc.
+With ppp winbind plugin I easily got a working xl2tpd server able to
+authenticate using PAP.
 
-On Thu, Apr 16, 2020 at 11:46 AM Jones Syue <jonessyue@qnap.com> wrote:
->
-> Hello Steve
->
-> > Did you also test (at least briefly) with vers=3D1.0 since some of your
-> > code affects that code path too?
->
-> Yes test v2.patch on 2 platforms aarch64 (page size 64KB) and x86_64
-> (page size 4KB), vers=3D1.0 read function works fine on both.
->
-> Test read performance over 1GbE network with command:
-> 'dd if=3D/remote_strict/10G.img of=3D/dev/null bs=3D1M count=3D10240'
->
-> For read performance on aarch64 (page size 64KB), vers=3D[1.0|2.0] is not=
- as
-> fast as vers=3D2.1+, max_read on both SMB 1 (16KB) and SMB 2.0 (64KB) are
-> still smaller then page size 64KB plus packet header size, hence do not
-> support readpages.
-> aarch64, page size 64KB (CONFIG_ARM64_64K_PAGES=3Dy), linux-4.2.8,
-> cpu Annapurna Labs Alpine AL324 Quad-core ARM Cortex-A57 CPU @ 1.70GHz,
-> ram 8GB,
-> with patch,
-> vers=3D1.0,cache=3Dstrict: read throughput 40MB/s, max read IO size 16KB
-> vers=3D2.0,cache=3Dstrict: read throughput 40MB/s, max read IO size 16KB
-> vers=3D2.1,cache=3Dstrict: read throughput 115MB/s, max read IO size 1MB
-> vers=3D3.0,cache=3Dstrict: read throughput 115MB/s, max read IO size 1MB
-> without patch,
-> vers=3D1.0,cache=3Dstrict: read throughput 40MB/s, max read IO size 16KB
-> vers=3D2.0,cache=3Dstrict: read throughput 40MB/s, max read IO size 16KB
-> vers=3D2.1,cache=3Dstrict: read throughput 40MB/s, max read IO size 16KB
-> vers=3D3.0,cache=3Dstrict: read throughput 40MB/s, max read IO size 16KB
->
-> For read performance on x86_64 (page size 4KB), all vers can support
-> readpages because max_read is bigger than page size 4KB plus packet heade=
-r
-> size.
-> x86_64, page size 4KB, linux-4.2.8,
-> cpu AMD Embedded R-Series RX-421ND 2.10GHz,
-> ram 4GB,
-> without patch,
-> vers=3D1.0,cache=3Dstrict: read throughput 109MB/s, read IO size 60KB
-> vers=3D2.0,cache=3Dstrict: read throughput 115MB/s, read IO size 64KB
-> vers=3D2.1,cache=3Dstrict: read throughput 117MB/s, read IO size 1MB
-> vers=3D3.0,cache=3Dstrict: read throughput 117MB/s, read IO size 1MB
-> with patch,
-> vers=3D1.0,cache=3Dstrict: read throughput 110MB/s, read IO size 60KB
-> vers=3D2.0,cache=3Dstrict: read throughput 115MB/s, read IO size 64KB
-> vers=3D2.1,cache=3Dstrict: read throughput 117MB/s, read IO size 1MB
-> vers=3D3.0,cache=3Dstrict: read throughput 117MB/s, read IO size 1MB
->
-> > And if anyone figures out how to configure an x86_64 Linux to use
-> > PAGE_SIZE of 64K or larger let me know...
-> I am using physical platform with arm cpu and aarch64 toolchain,
-> perhaps try qemu-system-aarch64 later.
->
-> --
-> Regards,
-> Jones Syue | =E8=96=9B=E6=87=B7=E5=AE=97
-> QNAP Systems, Inc.
+In order to allow MS-CHAPv2 login, I found that it's needed to change the
+default ntlm auth parameter in smb.conf to mschapv2-and-ntlmv2-only.
+
+Questions:
+   1. Is the use of ppp winbind plugin deprecated for some reason? (on wiki the
+      proposed setup is with ppp radius plugin + freeradius)
+   2. In the proposed setup with radius plugin, it's stated "Please note that if
+      you installed the Samba4 on the Firewall server, then MS-CHAP/MS-CHAPv2
+      authentication will not work". What does this mean?
+   3. If I use ppp winbind plugin with PAP there's no need to change "ntlm auth"
+      default value so I have the perception that this is preferable than CHAP or
+      MS-CHAPv[1,2]. On the other hand I thougt [MS-]CHAP[vX] is better than PAP
+      so: which is your advice?
+   4. If I change "ntlm auth", do I have to change it on DCs and on domain member
+      that runs winbind used to authenticate VPN logins or only on the latter? How
+      much does this change(s) affect security? 
+
+Thanks in advance for your help,
+Daniele.
+
 
