@@ -2,45 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E5791B23DD
-	for <lists+samba-technical@lfdr.de>; Tue, 21 Apr 2020 12:30:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A0D51B2450
+	for <lists+samba-technical@lfdr.de>; Tue, 21 Apr 2020 12:49:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=0NM6xGPJvMrJB3mgc9uPZ6Ci4kXm9OYYpBq7KDG+1dE=; b=qZmb3eO6UbHihEOZpyUYflR/RA
-	RM458CgdJOakBEtXXx+SRknE2d3/WbgEM3Tqvm5C/lHiRdrDUZTrPhoZ2FOm2ZoDd6hRiZTBKVDxF
-	vEQwHJ8mIcKhrleqQGhEcsfoDUSzOCpprh3dVd0hCBlLmX3k8Bx0xJuK/omLbh8q0UkdTfHYhwme7
-	gNljDdAG4lxIPD/mPEXr3ZgEP/x7npi4CgNOOWosqGnqOB9Ly5PNpdAv474RQWX1RwcAy9Z+yjBNO
-	ntqdf+qftNVgfraWbenH5IJB2v/o0sE9jAnnJy16qbIhs67+xsOg8/YblGha6zz2u58b9O0a5A7Rw
-	WvfnGwYA==;
-Received: from localhost ([::1]:21298 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=ngf/QJNoLPkbr33G43erLtvjdepFX+w3/5/OAcrCc0k=; b=xVVxdygZmhZiG65JeVXsqusVpV
+	8+xPtgUPceXTlVP5vetDmTqi1IUMZQuyYOy59coaX7ZY/NjC+5gFJCMIesWqTN7gSfFJWiSxBqXfE
+	6yF7HG2vRCfYKdyjoekkMO5f+6gj+nsKMuwDNGFRlmrOCdQdcR6IKiQYGstt0HopJyvj4ro2sM9fb
+	FOD+T8b37Z0tcaj/D+vXqxH9KKaxBcl2WK6UYhKGoxO7QAJkqC1azC2WrSuLAmmEjKF08f8XYdkC5
+	kvb2StVq6UhHJzbWEeXbyQ+9KfcEqFKDRhf5nwC1xbgMJL4PtmrLeMzCSLuf4hYE0Ssi7/gYGV4/0
+	2gkM7A+Q==;
+Received: from localhost ([::1]:22038 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jQqAU-001N2v-Al; Tue, 21 Apr 2020 10:30:18 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53144) 
+	id 1jQqST-001N9P-KE; Tue, 21 Apr 2020 10:48:53 +0000
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:37380) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jQqAN-001N2o-D1
- for samba-technical@lists.samba.org; Tue, 21 Apr 2020 10:30:14 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=0NM6xGPJvMrJB3mgc9uPZ6Ci4kXm9OYYpBq7KDG+1dE=; b=Bd+jxoQi1BYIzlbyBg54kxU2Oj
- T6/sfyNqmVGIcmMNvc1+Bt7rp7jZl4ZZJdh6fkFM6ksG/GfVWTnrpYEjnMPs9ahDGmSsSx8cvqoHl
- cdlA5jDYEcvAG+3dzlx9sereRrtewdL7890H0O1y3X1YeFG3KfU0j+10kH6LePJWTdYWxKo1Fs0ZG
- 46lhP/JWhjGw1ArA9m8owL06tgdnvs9w3GMxgPGtlAt/uGkK/ScqVTNNEJfNU1BeZX/VYd8U5FcNh
- ilqady2kT7QVlu8eFT5S71jF3ylV2actPAZbom+cCbxzI55VCw5Yok2OGyhq8TKMzSkPx/1p9ZK70
- uCTnmoI1wzP1/7mmXhe/93+yLPpCHZ1yFeNlktA3VTY1bZ1cbkbUWuBluw2sUdxwo+x/V6BPXghPH
- JEBGZpSm+06QeZhSSzPtw6zsjtyarKiGnB9LwpUNYPUihUPNzvzae/ZjIhVM6IlOakWY9P2x7oeVE
- a1GyeduQarDE4GTzRlePzZbz;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jQqAM-0000B8-M5; Tue, 21 Apr 2020 10:30:10 +0000
-Date: Tue, 21 Apr 2020 12:30:08 +0200
-To: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
-Subject: Re: question on testing 4.12.1 on Ubuntu 20.04 Focal..
-Message-ID: <20200421123008.285c64b0@samba.org>
-In-Reply-To: <vmime.5e9ec3fd.695.3f5eadeb60ec1f4d@ms249-lin-003.rotterdam.bazuin.nl>
-References: <vmime.5e9ec3fd.695.3f5eadeb60ec1f4d@ms249-lin-003.rotterdam.bazuin.nl>
+ (Exim) id 1jQqSM-001N9I-Rp
+ for samba-technical@lists.samba.org; Tue, 21 Apr 2020 10:48:49 +0000
+Received: by mail-io1-xd43.google.com with SMTP id u11so14548364iow.4
+ for <samba-technical@lists.samba.org>; Tue, 21 Apr 2020 03:48:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ngf/QJNoLPkbr33G43erLtvjdepFX+w3/5/OAcrCc0k=;
+ b=HIkIFZT8qT3vQ0g5wTef0guyS+9vkQoEDDzDSKvzxqc349UrB8FrMo17JrtUe1bQni
+ tK15U6ufIgOpq4NvSnjyMAMKBKSWsZlPtfGwTx8CDW1qcXlp9KWSHhjFmVdCb6nRTqBf
+ dcgDI/pmlQUqoNdjUtHxkpTX6oq6+5Xfv0hzUhhy7zbk0Q/bJKVDER4/NfnSvI7qd6J7
+ O4V/XLno29/dulSI5TYMl0CInM5dv/c4PCsH6mwJR53KXZvYDlDwjXRzvpqm6l7ViSCJ
+ uguWrv+AyKaWrr65Rs+aK81IFl6a6ouIzuEiS7cBZvfO67PRQqoGOcrkiFSlNx7SIexU
+ nDlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ngf/QJNoLPkbr33G43erLtvjdepFX+w3/5/OAcrCc0k=;
+ b=Bx2sT+QDASq9hKiBBFSbniwR+jf4MxP3IqBt8cjV6PYBNn3dW9YJgvmsTFhukh7bGf
+ mWWv6SKpVi9Fo9ioPtLC8yll6zfDadeef0hnC5sfEZH9aTdvxhevq1WWXsVc7fLUCJl5
+ r67rqDQ2XaYDEMxPR1SQKoooWyyVgeaVK8vBhEWJ07RDRIQP98JcrmRKP+HDxvp/9XgA
+ yakbS8wSmeHIcCoL4FxxoF64pnVCDN8BwL7QVi4X3kGGHBwc2LLxjwgMp88TOj40beRf
+ yc3IGBycEAoSm4WyPLqvWj9MNjDyINXm55/T1ddgmhKoAszRPqMO/KklZoSgO+HWLbs/
+ iVuA==
+X-Gm-Message-State: AGi0PuZmaXbPigx6D27hVHFj9P75FLU+wxsmrdPwHnsUpRueaOFLbGqy
+ vSV95ByI9NnzchlcwXfxOoodduaM2IMXAiB/mXQ=
+X-Google-Smtp-Source: APiQypLQaqfAcQS/YqcLKdT4ZU5tBP1e1L7GgGmYhCTRc3/Jty+5caS/qwL+I+ImaS0QHoDyYQ/hM6XmrQw1T+La4TI=
+X-Received: by 2002:a5d:940d:: with SMTP id v13mr20035780ion.1.1587466124914; 
+ Tue, 21 Apr 2020 03:48:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+References: <20200421024424.3112-1-pc@cjr.nz>
+In-Reply-To: <20200421024424.3112-1-pc@cjr.nz>
+Date: Tue, 21 Apr 2020 20:48:33 +1000
+Message-ID: <CAN05THQxSOa-YLmNODTXdcdOoEUkX2vMqcNyjP1bcf2=yb_9+g@mail.gmail.com>
+Subject: Re: [PATCH 1/3] cifs: do not share tcons with DFS
+To: Paulo Alcantara <pc@cjr.nz>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,52 +67,51 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Disseldorp <ddiss@samba.org>
-Cc: "L.P.H. van Belle" <belle@bazuin.nl>
+From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
+Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+Cc: linux-cifs <linux-cifs@vger.kernel.org>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ Aurelien Aptel <aaptel@suse.com>, Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Louis,
+series looks good after initial review
 
-On Tue, 21 Apr 2020 11:59:25 +0200, L.P.H. van Belle via samba-technical wr=
-ote:
+Reviewed-by: Ronnie Sahlberg <lsahlber@redhat.com>
 
-> Hai guys,=20
-> =C2=A0
-> I noticed the following with the first packages on Ubuntu 20.04..=20
-> So far i seen it installs nicely but i noticed the message below.=20
-> Can we ignore it, i suspect this is a python 3.8 thingy .. but as im not =
-a coder ...=20
-> Well, anyone suggestions?=C2=A0 :-)=20
-> =C2=A0
-> =C2=A0
-> Setting up python3-samba (2:4.12.1+dfsg-0.1focal1) ...
-> /usr/lib/python3/dist-packages/samba/emulate/traffic_packets.py:339: Synt=
-axWarning: "is" with a literal. Did you mean "=3D=3D"?
-> =C2=A0 if (filter is None or filter is '') and scope !=3D SCOPE_BASE:
 
-See https://bugs.python.org/issue34850
-  the "is" and "is not" operator sometimes is used with string and
-  numerical literals. This code "works" on CPython by accident, because
-  of caching on different levels (small integers and strings caches,
-  interned strings, deduplicating constants at compile time). But it
-  shouldn't work on other implementations, and can not work even on
-  early or future CPython versions.
-
-It can be ignored, but we should probably fix all such cases in future.
-This specific case can be fixed with:
-
---- a/python/samba/emulate/traffic_packets.py
-+++ b/python/samba/emulate/traffic_packets.py
-@@ -336,7 +336,7 @@ def packet_ldap_3(packet, conversation, context):
-=20
-     # try to guess the search expression (don't bother for base searches, =
-as
-     # they're only looking up a single object)
--    if (filter is None or filter is '') and scope !=3D SCOPE_BASE:
-+    if (filter is None or filter =3D=3D '') and scope !=3D SCOPE_BASE:
-         filter =3D context.guess_search_filter(attrs, dn_sig, dn)
-=20
-Cheers, David
+On Tue, Apr 21, 2020 at 12:45 PM Paulo Alcantara <pc@cjr.nz> wrote:
+>
+> This disables tcon re-use for DFS shares.
+>
+> tcon->dfs_path stores the path that the tcon should connect to when
+> doing failing over.
+>
+> If that tcon is used multiple times e.g. 2 mounts using it with
+> different prefixpath, each will need a different dfs_path but there is
+> only one tcon. The other solution would be to split the tcon in 2
+> tcons during failover but that is much harder.
+>
+> Signed-off-by: Paulo Alcantara (SUSE) <pc@cjr.nz>
+> Reviewed-by: Aurelien Aptel <aaptel@suse.com>
+> ---
+>  fs/cifs/connect.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/fs/cifs/connect.c b/fs/cifs/connect.c
+> index 95b3ab0ca8c0..ac6d286fe79f 100644
+> --- a/fs/cifs/connect.c
+> +++ b/fs/cifs/connect.c
+> @@ -3373,7 +3373,7 @@ cifs_find_tcon(struct cifs_ses *ses, struct smb_vol *volume_info)
+>         spin_lock(&cifs_tcp_ses_lock);
+>         list_for_each(tmp, &ses->tcon_list) {
+>                 tcon = list_entry(tmp, struct cifs_tcon, tcon_list);
+> -               if (!match_tcon(tcon, volume_info))
+> +               if (!match_tcon(tcon, volume_info) || tcon->dfs_path)
+>                         continue;
+>                 ++tcon->tc_count;
+>                 spin_unlock(&cifs_tcp_ses_lock);
+> --
+> 2.26.0
+>
 
