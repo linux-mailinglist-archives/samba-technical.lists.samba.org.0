@@ -2,47 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C37A1B2544
-	for <lists+samba-technical@lfdr.de>; Tue, 21 Apr 2020 13:41:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F4241B34E8
+	for <lists+samba-technical@lfdr.de>; Wed, 22 Apr 2020 04:15:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=2y4tYgrXxB0QvmcIhoBOzmgUQT87eRbFwi/i9OegMWQ=; b=sjtPjggMTIw/r7Fw7cuLwMXcjk
-	t7dXtuxrGfDwzq9S6CbbX6GuDu4crLG7AP8LnttJTnKMsSxSO7LnUVwiJeCO5l5pAF6Q89ETT+dWV
-	g/22lFp7T5F//SZYrkPGQllzSeBmRE79F7Dge/7bwNfrbk6ni4TLPdmLpcClcU9lj5FrwULO1gR4m
-	p5vSWt9gZdVp+BLe6TdLerUcAFn54Sm7eYjCBypDpFpDOOQ/Y7iyFXWUTVltCTSkI/x5NJCQOuufn
-	5I8stVONTnCF/L1ZUzmaShNLTlF43m121c6RS14RUB5KC5BjavaXjXLkSejTxQvWL9SbbdBeoi0/e
-	VoA090Tw==;
-Received: from localhost ([::1]:23558 helo=hr1.samba.org) 
+	bh=tpw6c0zRUjlus/vlCBIubfLkII0yrhxv+srR3hoCQAI=; b=ZUpUe3TyY8RVwuZTo4A99/1L12
+	nKdqw7r/9wGM0HhM4rziqmrso3eCdfL8hXnBXJzjeqYIypy24cY0s8FE6046z8TtKhO0TU1q9LDBj
+	u9KcY1YP23m7GYAtRcWnjjNWbo/OW78r8BAYw13VHEJAK/tJztiiM3a2VMsuxvqydPnhyzaKasuG6
+	YKWFMBIq5L5UUrbKuGJNvUST35wjn0owYarIOyzWSdQh0WLXLmdea0LlWl1qw5D1VfCYflXnUP59p
+	d61lfcGkCe3Xwrq+6qWsWz5Ks9EUKK3DB1Cp/X9QfYaFAZLKzvjeODtI45TdO7owAovE5EHUBFddZ
+	8NtSCX8Q==;
+Received: from localhost ([::1]:48096 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jQrHN-001NOs-IX; Tue, 21 Apr 2020 11:41:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23918) 
+	id 1jR4uN-001RiJ-SH; Wed, 22 Apr 2020 02:14:39 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17160) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jQrHF-001NOl-KR
- for samba-technical@lists.samba.org; Tue, 21 Apr 2020 11:41:24 +0000
+ (Exim) id 1jR4uH-001RiB-HK
+ for samba-technical@lists.samba.org; Wed, 22 Apr 2020 02:14:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=2y4tYgrXxB0QvmcIhoBOzmgUQT87eRbFwi/i9OegMWQ=; b=WbOHgQaXRgs8KnrbTqP8tfYfnd
- tjNSQJtb+epCWkdTRcILiPe5c179U1kaqDEdczx6pgTCpO/qZlNe7pjGkzXvV9QBmMdRtDRH1yz3q
- oZXSWF6kraZZEW9SfHQBljD+hEtM7rnH2OtnGgy1BttfJ+2x1ZN9/O13JeCnezsTKIoDtjgD9jO3g
- 710HEybE2tAOY/Gc369sg+lznBzAu6IF9g2nFolweImmU1RWdPfLnIwVJZ4ivRpWYkWPNKYvmGbh3
- oHD7QHoZLSIP/nfrtc+x0pnMZKcV62o+fORzuEWomw1bxp1OJA4GU0/4P8TqJFg6sSR/EB1y1r5G5
- tWd/JXGBjCLhJQKlFqM2ZKJAiz2GczeXFX4zv+d++MDbGYzRsFXP5jXUpj1CsPlaeoTIidcXszTNS
- IW7fdYAsnpaPXF5d80zbUeUYkTxfHKIhoodhkVV2QtWpHPbNJJlfL5a9L3mJNzZKJDu3CJjnQjlhN
- 7AWHEusqtmDZ2eHo6wqo3n+a;
+ s=42; h=Message-Id:Date:From:To:CC;
+ bh=jpXfGYvT6oxm/2dk20ZPgyTWy5dUlxk5N7GnXf796O0=; b=FlemYP4GZch8En/TyS3g7JhUZp
+ B6JyIx8+1YHcpn086Ea5DPdqk+HN95k9bXEs0Zul53ZFZL5EwFjA9InZ9f/hczXcftTkFsEJRiNS9
+ TkGRsGcfgkiAm/filgg7il2NCnKa0aJlDDhD0xi3JRgDgKUAYupGFqd3aiMq5Tq4N3pThIiDW8hPc
+ 10onNa30vzyaGxuV899mnpNydaMhGYrl8s+lpvSovLb9NpJHYyS9jkHnnMT4PZCQW8rmxqko6PEZD
+ Mfkte5JjGvyxtaDKRj80NRMwQadxpz0vyHWDJlIlOCq8xTp5fcrDY9KpJsiHxkm9lvP8WPTqDJWEJ
+ LvAKR8lmjHm9fA5+IMAlCk2jdsJGwU6c0qgUBMs5osSMTA/fg2y2+e+AUa0peuVxgxOZGby+V59qR
+ S1wI2lnbjGjEV3HYP/4zzNSMicjo9aPQmRX12LvjUhKL5bLy2jMYt2stpn0bbirF9To2tI4IoeoEx
+ GTCIqTivzGxE962TdhOyMKSI;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jQrHF-0000qT-3P
- for samba-technical@lists.samba.org; Tue, 21 Apr 2020 11:41:21 +0000
+ (Exim) id 1jR4uH-0007WN-3J
+ for samba-technical@lists.samba.org; Wed, 22 Apr 2020 02:14:33 +0000
 Received: from localhost ([::1] helo=hr3.samba.org)
  by hr3.samba.org with esmtp (Exim 4.92)
- (envelope-from <github@samba.org>) id 1jQrHE-000Rxd-Rt
- for samba-technical@lists.samba.org; Tue, 21 Apr 2020 11:41:20 +0000
-Content-Type: multipart/mixed; boundary="===============2099173529600656321=="
+ (envelope-from <github@samba.org>) id 1jR4uG-001Fv6-Rh
+ for samba-technical@lists.samba.org; Wed, 22 Apr 2020 02:14:32 +0000
 MIME-Version: 1.0
-Subject: [PR PATCH] Update nfs-ganesha-callout
+Subject: Re: Update nfs-ganesha-callout
 To: samba-technical@lists.samba.org
-Message-ID: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-218@samba.org>
-Date: Tue, 21 Apr 2020 11:41:20 +0000
+In-Reply-To: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-218@samba.org>
+References: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-218@samba.org>
+Date: Wed, 22 Apr 2020 02:14:32 +0000
+Message-Id: <E1jR4uG-001Fv6-Rh@hr3.samba.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,48 +66,7 @@ Cc: github@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-GitHub notification mails are now in MIME to allow UTF8.
-
---===============2099173529600656321==
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-
-VGhlcmUgaXMgYSBuZXcgcHVsbCByZXF1ZXN0IGJ5IHJ5bm84MyBhZ2FpbnN0IG1hc3RlciBvbiB0
-aGUgU2FtYmEgU2FtYmEgR2l0aHViIHJlcG9zaXRvcnkKCmh0dHBzOi8vZ2l0aHViLmNvbS9yeW5v
-ODMvc2FtYmEgcGF0Y2gtMQpodHRwczovL2dpdGh1Yi5jb20vc2FtYmEtdGVhbS9zYW1iYS9wdWxs
-LzIxOAoKVXBkYXRlIG5mcy1nYW5lc2hhLWNhbGxvdXQKT24gZGViaWFuIGJ1c3RlciwgdGhpcyB2
-YXJpYWJsZSBkb2Vzbid0IGV4aXN0IGFueW1vcmUuIExvb2sgYXQgdGhpcyBQUiBhcyBhIHJlZmVy
-ZW5jZToNCmh0dHBzOi8vZ2l0aHViLmNvbS9nbHVzdGVyL3N0b3JoYXVnL3B1bGwvMzANCg0KIyMg
-U2FtYmEgaXMgbW92aW5nIHRvIEdpdExhYg0KVGhlIHNhbWJhIHByb2plY3QgaXMgbW92aW5nIHRv
-IEdpdExhYiwgcGxlYXNlIGNvbnNpZGVyIG9wZW5pbmcgYSBtZXJnZSByZXF1ZXN0IHRoZXJlIGlu
-c3RlYWQuDQpJbnN0cnVjdGlvbnMgZm9yIHNldHRpbmcgdXAgY2FuIGJlIGZvdW5kIGF0OiBodHRw
-czovL3dpa2kuc2FtYmEub3JnL2luZGV4LnBocC9TYW1iYV9DSV9vbl9naXRsYWINClRoZSBHaXRM
-YWIgcmVwb3NpdG9yeSBjYW4gYmUgZm91bmQgaGVyZTogaHR0cHM6Ly9naXRsYWIuY29tL3NhbWJh
-LXRlYW0vc2FtYmENCgoKQSBwYXRjaCBmaWxlIGZyb20gaHR0cHM6Ly9naXRodWIuY29tL3NhbWJh
-LXRlYW0vc2FtYmEvcHVsbC8yMTgucGF0Y2ggaXMgYXR0YWNoZWQ=
-
---===============2099173529600656321==
-Content-Type: application/text/x-diff
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="github-pr-patch-1-218.patch"
-
-RnJvbSAyMzY4MzQ1NzAxNTgyZjc2NTg3MWNmZmEwZjg1N2VjZTllMzI3MDVkIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBSZW5hdWQgRm9ydGllciA8cmVuYXVkLmZvcnRpZXJAZnNhYS51
-bGF2YWwuY2E+CkRhdGU6IFR1ZSwgMjEgQXByIDIwMjAgMDc6Mzk6NTMgLTA0MDAKU3ViamVjdDog
-W1BBVENIXSBVcGRhdGUgbmZzLWdhbmVzaGEtY2FsbG91dAoKT24gZGViaWFuIGJ1c3RlciwgdGhp
-cyB2YXJpYWJsZSBkb2Vzbid0IGV4aXN0IGFueW1vcmUuIExvb2sgYXQgdGhpcyBQUiBhcyBhIHJl
-ZmVyZW5jZToKaHR0cHM6Ly9naXRodWIuY29tL2dsdXN0ZXIvc3RvcmhhdWcvcHVsbC8zMAotLS0K
-IGN0ZGIvZG9jL2V4YW1wbGVzL25mcy1nYW5lc2hhLWNhbGxvdXQgfCAyICstCiAxIGZpbGUgY2hh
-bmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9jdGRiL2Rv
-Yy9leGFtcGxlcy9uZnMtZ2FuZXNoYS1jYWxsb3V0IGIvY3RkYi9kb2MvZXhhbXBsZXMvbmZzLWdh
-bmVzaGEtY2FsbG91dAppbmRleCBmMDZiMzAwYzViNy4uN2M3YjA3NDEzYWIgMTAwNzU1Ci0tLSBh
-L2N0ZGIvZG9jL2V4YW1wbGVzL25mcy1nYW5lc2hhLWNhbGxvdXQKKysrIGIvY3RkYi9kb2MvZXhh
-bXBsZXMvbmZzLWdhbmVzaGEtY2FsbG91dApAQCAtMjk3LDcgKzI5Nyw3IEBAIG5mc19zdGFydHVw
-ICgpCiAKIAliYXNpY19zdGFydCAibmZzIgogCV9mPSIke3Byb2Nmc30vc3lzL25ldC9pcHY0L3Rj
-cF90d19yZWN5Y2xlIgotCWlmIFsgIiRfZiIgXSA7IHRoZW4KKwlpZiBbIC1mICIkX2YiIF0gOyB0
-aGVuCiAJCWVjaG8gMSA+IiRfZiIKIAlmaQogfQo=
-
---===============2099173529600656321==--
-
+TmV3IGNvbW1lbnQgYnkgYWJhcnRsZXQgb24gU2FtYmEgR2l0aHViIHJlcG9zaXRvcnkKCmh0dHBz
+Oi8vZ2l0aHViLmNvbS9zYW1iYS10ZWFtL3NhbWJhL3B1bGwvMjE4I2lzc3VlY29tbWVudC02MTc1
+MDYwNDQKQ29tbWVudDoKTW92ZWQgdG8gaHR0cHM6Ly9naXRsYWIuY29tL3NhbWJhLXRlYW0vc2Ft
+YmEvLS9tZXJnZV9yZXF1ZXN0cy8xMjg3Cg==
