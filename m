@@ -2,60 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F413B1B8942
-	for <lists+samba-technical@lfdr.de>; Sat, 25 Apr 2020 22:09:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6377C1B952E
+	for <lists+samba-technical@lfdr.de>; Mon, 27 Apr 2020 04:51:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=KB0484GNnw5E86EszPyBsFs7aFLJVQhLoFUSiXuY62c=; b=ZYegqGGwtrL/5RzlXy2B5Ln0ma
-	F/G2eFqiUv2lTpqYXxeDD4ZwXyJSlbjFMbCOrk1gT0J8gQV7EMxbvHzGdH7ekfOfbpLxIORw5UR7v
-	VWhrCfJzkFr9QPQCakbeuJnIT7WwEGbfdco/3awVXIfkVCXGz46iZrzClwiRCb9op7zS/46C4RUPA
-	uojAN/tNoU++g51kmV5rMEXfktvB2UHKjfB+PrkL6gLOHdgozX80tW5gJF1Lwi+vPMKDlc1jGPqxr
-	59JobJpqBTwIk9pAKrGRpQCBE4mjSAMC1+xnq5dEn+4FcNsKqzPre657x7R1wLbiWuQ4WqrzPvCPO
-	DUKmJeNA==;
-Received: from localhost ([::1]:61680 helo=hr1.samba.org) 
+	bh=6areO0hRZKPHCG/vIEUys65Eg1IGVoIsPcw+jm2s1Eo=; b=DLN7zsduMJsmY9M6oID2L9fgcp
+	3QhE4MLQKOIVyk/IF36/fVwVxth/zQVFcIIxZxv91ZDy6qB3i4zU/NbcjVK8gHIL3GfS7kizGai00
+	tcoERQyd5dM8PPlDDSS0iQ8QbA2QdTpTyP3BA3szpMN28dmyJH7+wBNkqCYeoUNOdzRZYoT7aHhY9
+	wZSvI2jCUtnbLE5isO9fyd89T9mgwa6pmrf9Jy5V0Um0mkk3g9htY9qKEXsPx2PTO5cgtlW4oIkKf
+	j/0+9C6DKCrlnom2wYipgdbCHN1cNyu9EAZDPhVyvvlDLAUUYrvcNO8VkyXa9lzUXgGQmXN55YOrP
+	5Iw7u2Pw==;
+Received: from localhost ([::1]:31134 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jSR62-00229P-6M; Sat, 25 Apr 2020 20:08:18 +0000
-Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a]:46961) 
+	id 1jStqJ-0028jm-BL; Mon, 27 Apr 2020 02:49:59 +0000
+Received: from mail-qt1-x844.google.com ([2607:f8b0:4864:20::844]:36499) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jSR5u-00229I-6i
- for samba-technical@lists.samba.org; Sat, 25 Apr 2020 20:08:13 +0000
-Received: by mail-vk1-xa2a.google.com with SMTP id q200so3712441vka.13
- for <samba-technical@lists.samba.org>; Sat, 25 Apr 2020 13:08:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ (Exim) id 1jStqC-0028jf-MN
+ for samba-technical@lists.samba.org; Mon, 27 Apr 2020 02:49:55 +0000
+Received: by mail-qt1-x844.google.com with SMTP id w29so13177651qtv.3
+ for <samba-technical@lists.samba.org>; Sun, 26 Apr 2020 19:49:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qnap.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=KB0484GNnw5E86EszPyBsFs7aFLJVQhLoFUSiXuY62c=;
- b=Xo+TxG4dRmhXbmnMmSdaa81Qu+DAC5a6fBUSZnpfipu47g+C223+Hk6IWDmY6e+L67
- +JjaTv3e3N1LBfU8ICjxJ8XG2goV7GjG3tqlf45PhxKV1WoigiMXt1tMa8YWTWT15QAI
- l66Jv8cZap5/godMnPSlCNTSiaxfDU2OstKkKAFw0qvtZJ5EUxI5W5IrKM9rh3miP+VO
- l+KvA1s+Qg4YG+odeA7nHMkxWdaHUPMtAaDGtJm1p+SKtymCm5xrA4+E3wQpvgxeefuJ
- R2O6/bVXL/wlhJpLQXiMlWxr7HGvRbfKZhdrVHAKmpXdYPl2LU6cyOTuTJ6tvx4G1XSL
- WR/Q==
+ :cc:content-transfer-encoding;
+ bh=6areO0hRZKPHCG/vIEUys65Eg1IGVoIsPcw+jm2s1Eo=;
+ b=C3QNF5GRtCMBC9Mlzcyc0ZPVn65I5g4rtLpBV+Fw5bTSS99nrnEakAyvu9IHv4v3SB
+ agUXhz9plbouXJ1p25TCAhkKfrSc2Yf+WTXtE8juiZuYDzyUOfY/VrvFf6gouGusuGJq
+ OkG4fNCI+X1sqND0HAfLNDTwZtOGYSOJvvchU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=KB0484GNnw5E86EszPyBsFs7aFLJVQhLoFUSiXuY62c=;
- b=k8tdCVMONBIql6u/Pow1pyP5Zuys+kWBq2hX8tWGsCjADnySGkiQdRz4Ry7ae7sSOI
- PC/T2zSxbRTNjIQfsy+Yf9ZYrS3Tx3Q6MoxvoE04lKllt46rnDNxkoAIzXFbWwWYag5V
- V8EGltVNjnoIUvG+VOqAw/OWQZM2NnnrJQPpLfwPwU49KGprzOY+qV50NvWyXk7VC/oJ
- afdLkTEsNdHQ6YwZJPqQhCdVpl58Rq8RrqShA0rkqeVnxk/SYEs0en+D90RhWXS7O96Z
- 3Gn+f0SG2drSMzaUZgj/WqZpr1HKCQ/T6jnPeGdR4PWeoTo+9YuGgua6onmwHkmMlOz2
- wQrQ==
-X-Gm-Message-State: AGi0Puaw5weoyBq9RaczYcPvUrg6c6Oa/jVarFwrV3MH38kF9HEUy/Kd
- 30wxdtBWUIdhKo2YEihDUZIcB6Qg7Xshbo/jrXM=
-X-Google-Smtp-Source: APiQypKOkvwetvKPFfRlduq4EK2SPIAkWUXswHMrJuvF1vY6Z6YamD4VHaXxaffu/Ma8UDErVleQILYHrsovTcWHcd4=
-X-Received: by 2002:a1f:1ed1:: with SMTP id e200mr10389353vke.96.1587845286088; 
- Sat, 25 Apr 2020 13:08:06 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=6areO0hRZKPHCG/vIEUys65Eg1IGVoIsPcw+jm2s1Eo=;
+ b=W3UsNlj+kb98Lucz3MQZb+pz7Iv20pm2SUeVOBRsiu1ADxLeojtydI+KrY1il2jl3r
+ H5Z8sxEzXN57e2J6xAXumUS8tuqZiLN307AlM3iIyPlQuKBONCKiTI8RfU6D5b6oLizQ
+ 9p7xQVM5IhuaFJ5E6L/36d9iFr42Yv1lENzhLdvwcVpJ70O1TaoUoii8kkpOk9NunpbI
+ ruMmVlKP8wbqrlStWGP/j5vJx/zFDmLYtn4M30+XluHI6cYhpexACTigY5UEcFpdYlWs
+ 3Vfw3c0qsQQTVDbyETIAKlig1+XN0CkkiGBQeXXV8jqAqu0ks8SlNOjKeM7fqNVPdzRd
+ f7tw==
+X-Gm-Message-State: AGi0Pub7/Q4WuIGp33mYQKLOCv+DB7dfmnUrPoAPOq8W/aBHHLA8jEhh
+ IhgBBKzmO10k0urcmm1alL0ljcL/y7R/I4C2TG8GRg==
+X-Google-Smtp-Source: APiQypL+Ou0nwruybxOTadtizGm5FwrO38szTf0UC8p0JC54KyEZSynuB0IuOFUBzsoAhdUxu31+0nxRlsmmPLBcgXo=
+X-Received: by 2002:ac8:4650:: with SMTP id f16mr20992760qto.168.1587955789812; 
+ Sun, 26 Apr 2020 19:49:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <af287cc4-1b97-da90-11de-60755a77fb14.ref@yahoo.co.uk>
- <af287cc4-1b97-da90-11de-60755a77fb14@yahoo.co.uk>
- <b88fbfaa-969b-8825-568c-741187b8d014@yahoo.co.uk>
-In-Reply-To: <b88fbfaa-969b-8825-568c-741187b8d014@yahoo.co.uk>
-Date: Sat, 25 Apr 2020 16:07:55 -0400
-Message-ID: <CAOCN9rxchQPzyVTKpbwuK1h05pD5wWTyRRXEvPMD63hJ5j0ViA@mail.gmail.com>
-Subject: Re: build - ldb depends on missing system library/libraries
-To: lejeczek <peljasz@yahoo.co.uk>
+References: <CAEUGjKiLPQP9wp0AgLUvHgKBOe9We2a-RQaZ7cd7CvhnarwWiw@mail.gmail.com>
+ <CAKywueT0Q9WkANNsg8cEDwGZSMaaE5c4LHuEeMhVDzJAzycroQ@mail.gmail.com>
+ <CAEUGjKhSBNQboKOMFMgos9OQfxcLQZsXp8aBrUSFcaSe1saH2Q@mail.gmail.com>
+ <CAH2r5mt1k5t8rSH1KizeSrcLaN1Fn3GWeMvDPwT2Kfq43UAWaQ@mail.gmail.com>
+ <CAEUGjKhpgmhj9RzcGQXPuFUyoqsUnk2d3oCpOYBdR=EwCO21YQ@mail.gmail.com>
+In-Reply-To: <CAEUGjKhpgmhj9RzcGQXPuFUyoqsUnk2d3oCpOYBdR=EwCO21YQ@mail.gmail.com>
+Date: Mon, 27 Apr 2020 10:49:37 +0800
+Message-ID: <CAEUGjKh--8qs_pn1OjuQk3DmtVuqLo9m5ecL-Lwb08Hk2oZTUg@mail.gmail.com>
+Subject: Re: [PATCH] cifs: improve read performance for page size 64KB &
+ cache=strict & vers=2.1+
+To: linux-cifs <linux-cifs@vger.kernel.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,25 +71,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Jones Syue via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jones Syue <jonessyue@qnap.com>
+Cc: Steve French <smfrench@gmail.com>,
+ Samba Technical <samba-technical@lists.samba.org>,
+ Kernel Mailing List <linux-kernel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Boys, building from source on CentOS 7 or CentOS 8 gts into build
-dependencies pretty fast. They are listed in order in:
+> > And if anyone figures out how to configure an x86_64 Linux to use
+> > PAGE_SIZE of 64K or larger let me know...
+> I am using physical platform with arm cpu and aarch64 toolchain,
+> perhaps try qemu-system-aarch64 later.
 
-https://github.com/nkadel/samba4repo/blob/master/Makefile
+For reference using qemu-system-aarch64 + linux-5.6.4 + 64KB page to test
+cifs read, this patch can improve cifs read performance:
+with patch: read throughput 39 MB/s, SMB read IO size 4MB
+/ # dd if=3D/mnt/cifs/1G.img of=3D/dev/null bs=3D4M count=3D256
+256+0 records in
+256+0 records out
+1073741824 bytes (1.0GB) copied, 25.982352 seconds, 39.4MB/s
+[~] # strace -p 23934
+sendfile(38, 32, [297795584] =3D> [301989888], 4194304) =3D 4194304
 
-Unless you're prepared to pretty seriously trash your working system,
-I don't recommend building and installing those system libraries for
-libtalloc, libldb, etc. one at a time. Using mock to build them as
-clean RPMs  my development *friend*, and lets me install them and play
-with them inside the chroot cage of "mock" without risking my
-development system itself.
+without patch: read throughput 18 MB/s, SMB read IO size 16KB
+/ # dd if=3D/mnt/cifs/1G.img of=3D/dev/null bs=3D4M count=3D256G
+256+0 records in
+256+0 records out
+1073741824 bytes (1.0GB) copied, 54.367686 seconds, 18.8MB/s
+[~] <0> strace -p 15786
+sendfile(38, 32, [452984832] =3D> [453001216], 16384) =3D 16384
 
-In particular, you need to use Python 3 these days, and activating
-that for default compilation can be a bit confusing. Review the .spec
-files I've been backporting for CentOS use from Fedora.
+This link is a easy way to compile aarch64 linux kernel with page size 64KB
+, a simple rootfs with busybox, and run it on qemu-system-aarch64:
+https://docs.google.com/document/d/1NSVd-dib_asugCZHmZgohLZXHxV25ftzYtUDSpp=
+Y3hA/edit?usp=3Dsharing
+
+--
+Regards,
+Jones Syue | =E8=96=9B=E6=87=B7=E5=AE=97
+QNAP Systems, Inc.
 
