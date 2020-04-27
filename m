@@ -2,62 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6377C1B952E
-	for <lists+samba-technical@lfdr.de>; Mon, 27 Apr 2020 04:51:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06E7D1BA1BB
+	for <lists+samba-technical@lfdr.de>; Mon, 27 Apr 2020 12:53:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=6areO0hRZKPHCG/vIEUys65Eg1IGVoIsPcw+jm2s1Eo=; b=DLN7zsduMJsmY9M6oID2L9fgcp
-	3QhE4MLQKOIVyk/IF36/fVwVxth/zQVFcIIxZxv91ZDy6qB3i4zU/NbcjVK8gHIL3GfS7kizGai00
-	tcoERQyd5dM8PPlDDSS0iQ8QbA2QdTpTyP3BA3szpMN28dmyJH7+wBNkqCYeoUNOdzRZYoT7aHhY9
-	wZSvI2jCUtnbLE5isO9fyd89T9mgwa6pmrf9Jy5V0Um0mkk3g9htY9qKEXsPx2PTO5cgtlW4oIkKf
-	j/0+9C6DKCrlnom2wYipgdbCHN1cNyu9EAZDPhVyvvlDLAUUYrvcNO8VkyXa9lzUXgGQmXN55YOrP
-	5Iw7u2Pw==;
-Received: from localhost ([::1]:31134 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=IQR1Sw42uvo9OodghUqBiAObvySqRhaeQUxm12gWCD0=; b=kfa6ekn6xBFw2wZDj3u8Sf8IYT
+	xDlQ6E0vlmhNSq3SbDtx3lVluwxBUjkH1tJ7yHfZYidUhbozclCMGbz9gbzW/6qIozmHc09GvdiPO
+	trYTmQF8E394hgE+LqfRvkltOc0J5sKgcT8DlFO5i7K7H093TV4iOyglPNE8uq7cVHq4fSLaqy/qf
+	r9fRf0U38OvUmLPmr5kfkw8jcAgU7gMp7pGia19fUUjOqFWSzR784/Oh4gWruoRU26M/p/vE5KTig
+	5E6/Y0VCchnfdhZChI02sPezYEI/1Qlo43k/L/zGQMHy9fY0gwvINOno+s/IMjXocbj+3MGxjWCL3
+	WPDTUiXA==;
+Received: from localhost ([::1]:39816 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jStqJ-0028jm-BL; Mon, 27 Apr 2020 02:49:59 +0000
-Received: from mail-qt1-x844.google.com ([2607:f8b0:4864:20::844]:36499) 
+	id 1jT1NG-002Abx-Ry; Mon, 27 Apr 2020 10:52:30 +0000
+Received: from mail-yb1-xb2d.google.com ([2607:f8b0:4864:20::b2d]:38950) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jStqC-0028jf-MN
- for samba-technical@lists.samba.org; Mon, 27 Apr 2020 02:49:55 +0000
-Received: by mail-qt1-x844.google.com with SMTP id w29so13177651qtv.3
- for <samba-technical@lists.samba.org>; Sun, 26 Apr 2020 19:49:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qnap.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=6areO0hRZKPHCG/vIEUys65Eg1IGVoIsPcw+jm2s1Eo=;
- b=C3QNF5GRtCMBC9Mlzcyc0ZPVn65I5g4rtLpBV+Fw5bTSS99nrnEakAyvu9IHv4v3SB
- agUXhz9plbouXJ1p25TCAhkKfrSc2Yf+WTXtE8juiZuYDzyUOfY/VrvFf6gouGusuGJq
- OkG4fNCI+X1sqND0HAfLNDTwZtOGYSOJvvchU=
+ (Exim) id 1jT1N9-002Abq-Tp
+ for samba-technical@lists.samba.org; Mon, 27 Apr 2020 10:52:26 +0000
+Received: by mail-yb1-xb2d.google.com with SMTP id d197so4782440ybh.6
+ for <samba-technical@lists.samba.org>; Mon, 27 Apr 2020 03:52:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=DTN4S3NjbQeZdO1UeLgxuRZFiPPsK9cQGVOdzJcrwLc=;
+ b=Y0uAIOYHnSe6bFYIbnCag+ds1MKaaR/eCfcfAppoUSP8NZ/ee1BqyeMg7ggFU5c4Lk
+ gvoCpfPnih/N5ISvpGfL1h3LlTZgx3ENXaD04zCMh1WoXIflb9X4qnU47m99B2IHWsT7
+ FGVlU72y8htF0IkK7VrzX9ItiGZH1mXk3YnfmeVXR2DyCZwy/aU60et2xyrUAH/QVhSa
+ x6Tm9YK0cYfZbyIacawhreJtGmYVu8vpFxABQ43bC10pzXSGd7BhqR6BH3Ks8RXpHJ5e
+ Bc4hd6su9ZcfW9YJo1MuIQFHGe2zcyYI/+JCtjXFJYZ4hTwjzyjsr9BKYVKij/4e/lK4
+ MkBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=6areO0hRZKPHCG/vIEUys65Eg1IGVoIsPcw+jm2s1Eo=;
- b=W3UsNlj+kb98Lucz3MQZb+pz7Iv20pm2SUeVOBRsiu1ADxLeojtydI+KrY1il2jl3r
- H5Z8sxEzXN57e2J6xAXumUS8tuqZiLN307AlM3iIyPlQuKBONCKiTI8RfU6D5b6oLizQ
- 9p7xQVM5IhuaFJ5E6L/36d9iFr42Yv1lENzhLdvwcVpJ70O1TaoUoii8kkpOk9NunpbI
- ruMmVlKP8wbqrlStWGP/j5vJx/zFDmLYtn4M30+XluHI6cYhpexACTigY5UEcFpdYlWs
- 3Vfw3c0qsQQTVDbyETIAKlig1+XN0CkkiGBQeXXV8jqAqu0ks8SlNOjKeM7fqNVPdzRd
- f7tw==
-X-Gm-Message-State: AGi0Pub7/Q4WuIGp33mYQKLOCv+DB7dfmnUrPoAPOq8W/aBHHLA8jEhh
- IhgBBKzmO10k0urcmm1alL0ljcL/y7R/I4C2TG8GRg==
-X-Google-Smtp-Source: APiQypL+Ou0nwruybxOTadtizGm5FwrO38szTf0UC8p0JC54KyEZSynuB0IuOFUBzsoAhdUxu31+0nxRlsmmPLBcgXo=
-X-Received: by 2002:ac8:4650:: with SMTP id f16mr20992760qto.168.1587955789812; 
- Sun, 26 Apr 2020 19:49:49 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=DTN4S3NjbQeZdO1UeLgxuRZFiPPsK9cQGVOdzJcrwLc=;
+ b=dg0172T8ye+YwTAeKO963jZlShaR7ngf6nzdfVovpSaRpPTCk+94tZni0S7tdghJZq
+ urShXxHg/aiFozBCM8hS6D588I6SC9oK3VtOAnPCS6S8d40HQ9rGbfjY3+oiD6zcYb5g
+ ILE+NHc3GU47S34jNmFI8XGE1/4iQa22ko4Obs6LdWWCxyh5StayszVTAFgv9JYqO339
+ j5yjqmEHjOldlitifDIWNFVba+GhtgHvsHU62fhW4As3IcES00LaxQuOYSDDEt5w5OXF
+ qSBPf+Ec1rLCF36WEJDP0Ve9YCPMM0jpaH5WUKTN8+HKME9r5P3zwSalc+FfSn7ZKi1B
+ WlLQ==
+X-Gm-Message-State: AGi0Puavv3kDbSHOIZej1u5c7/7cHxQ9Il4PsA/ahnkoI2TzpcSxbQxS
+ JgOMPnEtMMuxddHDlqipXQWaE16sj/KilD/ctPOxzDrU
+X-Google-Smtp-Source: APiQypKnLH+pzozwMd6n8QQNqZT5u4OaGh9ZYxQ3mcFFRsjI0wjMvms75LH9R2xorzvkrqLNBfsx7SJH4kGHIWYIB88=
+X-Received: by 2002:a25:8045:: with SMTP id a5mr36172217ybn.518.1587984740947; 
+ Mon, 27 Apr 2020 03:52:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAEUGjKiLPQP9wp0AgLUvHgKBOe9We2a-RQaZ7cd7CvhnarwWiw@mail.gmail.com>
- <CAKywueT0Q9WkANNsg8cEDwGZSMaaE5c4LHuEeMhVDzJAzycroQ@mail.gmail.com>
- <CAEUGjKhSBNQboKOMFMgos9OQfxcLQZsXp8aBrUSFcaSe1saH2Q@mail.gmail.com>
- <CAH2r5mt1k5t8rSH1KizeSrcLaN1Fn3GWeMvDPwT2Kfq43UAWaQ@mail.gmail.com>
- <CAEUGjKhpgmhj9RzcGQXPuFUyoqsUnk2d3oCpOYBdR=EwCO21YQ@mail.gmail.com>
-In-Reply-To: <CAEUGjKhpgmhj9RzcGQXPuFUyoqsUnk2d3oCpOYBdR=EwCO21YQ@mail.gmail.com>
-Date: Mon, 27 Apr 2020 10:49:37 +0800
-Message-ID: <CAEUGjKh--8qs_pn1OjuQk3DmtVuqLo9m5ecL-Lwb08Hk2oZTUg@mail.gmail.com>
-Subject: Re: [PATCH] cifs: improve read performance for page size 64KB &
- cache=strict & vers=2.1+
-To: linux-cifs <linux-cifs@vger.kernel.org>
+Date: Mon, 27 Apr 2020 16:22:10 +0530
+Message-ID: <CANT5p=o8iFSrPscQiqpeX=Qb_JBqiAVGWHsQBh1g4kBBH_u1wA@mail.gmail.com>
+Subject: Debug logs in heimdal krb5
+To: samba-technical@lists.samba.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,44 +65,16 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jones Syue via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jones Syue <jonessyue@qnap.com>
-Cc: Steve French <smfrench@gmail.com>,
- Samba Technical <samba-technical@lists.samba.org>,
- Kernel Mailing List <linux-kernel@vger.kernel.org>
+From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-> > And if anyone figures out how to configure an x86_64 Linux to use
-> > PAGE_SIZE of 64K or larger let me know...
-> I am using physical platform with arm cpu and aarch64 toolchain,
-> perhaps try qemu-system-aarch64 later.
+Hi,
 
-For reference using qemu-system-aarch64 + linux-5.6.4 + 64KB page to test
-cifs read, this patch can improve cifs read performance:
-with patch: read throughput 39 MB/s, SMB read IO size 4MB
-/ # dd if=3D/mnt/cifs/1G.img of=3D/dev/null bs=3D4M count=3D256
-256+0 records in
-256+0 records out
-1073741824 bytes (1.0GB) copied, 25.982352 seconds, 39.4MB/s
-[~] # strace -p 23934
-sendfile(38, 32, [297795584] =3D> [301989888], 4194304) =3D 4194304
+I'm currently debugging a problem I'm facing with krb5 mount in cifs, and I
+want to enable logging in the heimdal krb5 library. How do I enable all the
+logs which are printed using _krb5_debug in the code?
 
-without patch: read throughput 18 MB/s, SMB read IO size 16KB
-/ # dd if=3D/mnt/cifs/1G.img of=3D/dev/null bs=3D4M count=3D256G
-256+0 records in
-256+0 records out
-1073741824 bytes (1.0GB) copied, 54.367686 seconds, 18.8MB/s
-[~] <0> strace -p 15786
-sendfile(38, 32, [452984832] =3D> [453001216], 16384) =3D 16384
-
-This link is a easy way to compile aarch64 linux kernel with page size 64KB
-, a simple rootfs with busybox, and run it on qemu-system-aarch64:
-https://docs.google.com/document/d/1NSVd-dib_asugCZHmZgohLZXHxV25ftzYtUDSpp=
-Y3hA/edit?usp=3Dsharing
-
---
-Regards,
-Jones Syue | =E8=96=9B=E6=87=B7=E5=AE=97
-QNAP Systems, Inc.
-
+-- 
+-Shyam
