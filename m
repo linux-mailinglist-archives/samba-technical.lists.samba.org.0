@@ -2,46 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4708F1BC79F
-	for <lists+samba-technical@lfdr.de>; Tue, 28 Apr 2020 20:16:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 950A81BD95C
+	for <lists+samba-technical@lfdr.de>; Wed, 29 Apr 2020 12:18:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=gKHxx/OF7TV5LW8Y1uNx08VGCakHS3g23AvB4fTARhQ=; b=nhmYZKlqNOMGBJOGYfwxJf7Eb0
-	tWdlE8V9GxcFxxeUT/HmIM6nHTupbXPNTSKdMfilZviiS+AMbsKFAN73ak1c/fgELPgr65j/GGMsR
-	NoiS8/dsqVp/rqJL+WY8o1mrZqNFDen0jEPH8cJJ3bWP6ttM+wkEmLoOQV2qZschJwRHX5sNVOb1k
-	AgQ4QgO713NLH195Tl0MFLV/7BrFgz83pF7mfm3AUT+6Mx5QditwF+EeMq4qFskfBmlpwV63Nb1ri
-	VW23wFSMfCcze9+bsXy6Y0Dzvh0YXGo5bL7Vfs8jzsiln0dzomq/j2ZXoZFGXj4e2/T0Yxw1W5Btb
-	K4XeG4qA==;
-Received: from localhost ([::1]:65270 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Ev0dprr6nL23b1Sm2b10/0gsqE+snATFpmF15a2BYk8=; b=b+C5RmayurUyWigVpCIUf+Plfz
+	QmnYlJshmLKPvXTeTNRiRO/f/fZ1e7IbMjb1m0GS0InKzEZDPQ/uUm+YL9mJ1KVyPNlxewvIJ2SOx
+	B2GyZdNPTq5pX72qaV5+C968J+J/zBw34MW29qr1XXz5JrthLbpK1tAkvQf1Roj6Laeg03CSp8tS6
+	G+E9y61NGZLbHyfSX7zcN+dSitRRje0tFCrD7WfJXhtu2J7sAdtCttE8Obz8ZkEnhpjYTngjWfy4S
+	/Lp/2dZhp0QuKCMtREUwr5VAT8n09WHXFqXYiCv+WvOkLgUpTFqJxtGuQmxL5znsvY81stpeqBq/G
+	ivt6Aj1A==;
+Received: from localhost ([::1]:20824 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jTUl2-002MDJ-Sl; Tue, 28 Apr 2020 18:15:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33452) 
+	id 1jTjn3-002Uxk-5X; Wed, 29 Apr 2020 10:18:05 +0000
+Received: from mx1.od-net.eu ([194.59.207.220]:58502) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jTUkw-002MDA-Af
- for samba-technical@lists.samba.org; Tue, 28 Apr 2020 18:14:57 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=gKHxx/OF7TV5LW8Y1uNx08VGCakHS3g23AvB4fTARhQ=; b=ZA4nITQNZYbeed401+6nGF5MiX
- s+2qViRY3Vy2B2GPVtX07BG5DRSyoyXiLjZHd7L2xlRBa3oBGTkjiZFTy+wXOfAT7Cn82WcTgzWYa
- Q9UcWdg4nJwv65JA9nbxayLNfs29DgBXn+PvLdqdaAZWEP0cBheS9t/QmsYp8SVpv262UvOthfVG/
- NIvtsOyoq8wXmBaX2Emx8p0tQ9A1/wBPJOoW3QUsXcK/zOfh7hGeBLYAYHjVOc3GwOUXDXrLHtlly
- ruPbcDCZrqGsf7k5nik5cPP0rfS8QxRpHH2CEENZz60k2UfDbJYQdU4ZKglJolSrOnLB5jge01c3M
- mN9XKc79oeKkTtxDE7L03PZN813AF9yuNYFfNv5QkfLvioG1GDe3hVqzIRK+lre213vV3rqJ4Rgaj
- pg6PEsOd4yyfOfnVkbVRUgtDVtt8EFAotAtqK3sTUcvuf/8ox1zzAEsWPO5WfYYq0KWMHnQXyU7K/
- krz5KOET4DrLmF1CTNVVWKm2;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jTUkt-0007Zq-KC; Tue, 28 Apr 2020 18:14:52 +0000
-Date: Tue, 28 Apr 2020 11:14:41 -0700
-To: Alexander Bokovoy <ab@samba.org>
-Subject: Re: RPC handles cannot be differentiated in source3 RPC server
-Message-ID: <20200428181441.GI14581@jeremy-acer>
-References: <20200428143131.GE2735275@onega.vda.li>
+ (Exim) id 1jTjmp-002Uxb-M9
+ for samba-technical@lists.samba.org; Wed, 29 Apr 2020 10:18:01 +0000
+Received: from mail.omtn.de (ip1f105b0c.dynamic.kabel-deutschland.de
+ [31.16.91.12])
+ (using TLSv1 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: mail.omtn.de)
+ by mx1.od-net.eu (Postfix) with ESMTPSA id 9B76E61031
+ for <samba-technical@lists.samba.org>; Wed, 29 Apr 2020 11:58:32 +0200 (CEST)
+Received: from [192.168.193.28] (unknown [192.168.193.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by mail.omtn.de (Postfix) with ESMTPSA id EADC2180070
+ for <samba-technical@lists.samba.org>; Wed, 29 Apr 2020 11:58:32 +0200 (CEST)
+To: samba-technical@lists.samba.org
+Subject: samba 4.12.2: WERR_DNS_ERROR_DS_UNAVAILABLE, unable to manage samba
+ DNS
+Message-ID: <6138360f-64b7-c602-7c5d-72cb0c764014@o-dreyer.de>
+Date: Wed, 29 Apr 2020 11:58:31 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200428143131.GE2735275@onega.vda.li>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=mail.omtn.de smtp.mailfrom=dreyer@o-dreyer.de
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,65 +58,183 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: metze@samba.org, asn@samba.org, samba-technical@lists.samba.org
+From: Olaf Dreyer via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Olaf Dreyer <dreyer@o-dreyer.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Apr 28, 2020 at 05:31:31PM +0300, Alexander Bokovoy wrote:
-> I started looking where this 'first bit must be null' comes from and
-> after few refactorings I got down to the commit Jeremy did in 1998 while
-> merging NTDOM branch server code:
-> 
-> commit fdeea341ed1bae670382e45eb731db1b5838ad21
-> Author: Jeremy Allison <jra@samba.org>
-> Date:   Wed Mar 11 21:11:04 1998 +0000
-> 
->     "For I have laboured mightily on Luke's code, and hath broken
->     all I saw" - the book of Jeremy, chapter 1 :-).
-> 
->     So here is the mega-merge of the NTDOM branch server code.
->     It doesn't include the new client side pieces, we'll look
->     at that later.
-> 
->     ....
-> 
-> In source4 DCE RPC server code we have dcesrv_handle_create() which
-> allows to pass the handle type explicitly. Indeed, there
-> dcesrv_lsa_OpenTrustedDomain_common() does explictly call
-> dcesrv_handle_create() with the correct handle type:
-> 
->         handle = dcesrv_handle_create(dce_call, LSA_HANDLE_TRUSTED_DOMAIN);
-> 
-> 
-> The fix would be pretty obvious: update create_policy_hnd() and its
-> internal implementation to pass-through the handle type. This should not
-> affect many places:
-> 
-> $ git grep create_policy_hnd
-> source3/rpc_server/epmapper/srv_epmapper.c:             ok = create_policy_hnd(p, r->out.entry_handle, eps);
-> source3/rpc_server/epmapper/srv_epmapper.c:             ok = create_policy_hnd(p, r->out.entry_handle, eps);
-> source3/rpc_server/eventlog/srv_eventlog_nt.c:  if ( !create_policy_hnd( p, hnd, elog ) ) {
-> source3/rpc_server/lsa/srv_lsa_nt.c:    if (!create_policy_hnd(p, handle, info)) {
-> source3/rpc_server/mdssvc/srv_mdssvc_nt.c:      if (!create_policy_hnd(p, handle, mds_ctx)) {
-> source3/rpc_server/rpc_handles.c:  If "data_ptr" is given, this must be a talloc'ed object, create_policy_hnd
-> source3/rpc_server/rpc_handles.c:               DEBUG(0,("create_policy_hnd: ERROR: too many handles (%d) on this pipe.\n",
-> source3/rpc_server/rpc_handles.c:               DEBUG(0,("create_policy_hnd: ERROR: out of memory!\n"));
-> source3/rpc_server/rpc_handles.c:bool create_policy_hnd(struct pipes_struct *p, struct policy_handle *hnd,
-> source3/rpc_server/rpc_pipes.h:bool create_policy_hnd(struct pipes_struct *p, struct policy_handle *hnd, void *data_ptr);
-> source3/rpc_server/spoolss/srv_spoolss_nt.c:    if (!create_policy_hnd(p, hnd, new_printer)) {
-> source3/rpc_server/svcctl/srv_svcctl_nt.c:      if ( !create_policy_hnd( p, handle, info ) ) {
-> source3/rpc_server/winreg/srv_winreg_nt.c:      if ( !create_policy_hnd( p, hnd, key ) ) {
-> source3/rpc_server/winreg/srv_winreg_nt.c:      if (!create_policy_hnd(p, r->out.new_handle, new_key)) {
-> 
-> Anyone has anything against this change?
+Hi,
 
-Thanks a *LOT* for the deep dive Alexander. Much appreciated
-cleaning up my old mistakes (of which I'm sure there are many
-more to find :-).
+I run a setup with two Samba DC (currently samba 4.12.2 on debian 10 
+VMs). I started with a Windows 2003 DC but the last Windows DC has been 
+removed a few years ago from this setup.
 
-Put in an MR and I'll review !
+Yesterday I recognized (might be older though) a problem with DNS 
+administration. I am using the Samba Built-In DNS.
 
-Jeremy.
+I added two new Windows 10 clients to the domain and they did not manage 
+to register in the DNS domain.
+
+Cross check on DC:
+
+root@OMTNDC3:/usr/local/samba# samba-tool dns query omtndc3 omtn.de 
+master A -k 1
+ERROR(runtime): uncaught exception - (9717, 
+'WERR_DNS_ERROR_DS_UNAVAILABLE')
+   File 
+"/usr/local/samba/lib/python3.7/site-packages/samba/netcmd/__init__.py", 
+line 186, in _run
+     return self.run(*args, **kwargs)
+   File 
+"/usr/local/samba/lib/python3.7/site-packages/samba/netcmd/dns.py", line 
+865, in run
+     raise e
+   File 
+"/usr/local/samba/lib/python3.7/site-packages/samba/netcmd/dns.py", line 
+861, in run
+     None, record_type, select_flags, None, None)
+
+On the other hand, nslookup is working fine.
+
+root@OMTNDC3:/usr/local/samba# nslookup master
+Server:         192.168.193.223
+Address:        192.168.193.223#53
+
+Name:   master.omtn.de
+Address: 192.168.193.230
+
+Another check: The Windows RSAT DNS app says that there is no AD.
+
+So, it looks like DNS is working, but I cannot any longer use any admin 
+tool.
+
+smb.conf:
+
+# Global parameters
+[global]
+         netbios name = OMTNDC3
+         realm = OMTN.DE
+         dns forwarder = 192.168.193.230
+         workgroup = OMTN
+         server role = active directory domain controller
+         # idmap_ldb:use rfc2307 = yes
+         #debuglevel = dns:1
+
+[netlogon]
+         path = /usr/local/samba/var/locks/sysvol/omtn.de/scripts
+         read only = No
+
+[sysvol]
+         path = /usr/local/samba/var/locks/sysvol
+         read only = No
+
+The output of samba-tool drs showrepl looks strange, what does NTTIME(0) 
+mean?
+
+root@OMTNDC3:/usr/local/samba# samba-tool drs showrepl
+CorporateDataCenter\OMTNDC3
+DSA Options: 0x00000001
+DSA object GUID: 7abd666f-d3bc-4e8f-9ff3-cf3abd802ee5
+DSA invocationId: de8ee55e-2383-4f4e-aa8d-03a86c0bba2d
+
+==== INBOUND NEIGHBORS ====
+
+DC=ForestDnsZones,DC=omtn,DC=de
+         CorporateDataCenter\OMTNDC8 via RPC
+                 DSA object GUID: 2d035437-cec0-4a24-bdd0-0b599915e3b6
+                 Last attempt @ Wed Apr 29 11:25:28 2020 CEST was 
+successful
+                 0 consecutive failure(s).
+                 Last success @ Wed Apr 29 11:25:28 2020 CEST
+
+DC=omtn,DC=de
+         CorporateDataCenter\OMTNDC8 via RPC
+                 DSA object GUID: 2d035437-cec0-4a24-bdd0-0b599915e3b6
+                 Last attempt @ Wed Apr 29 11:25:28 2020 CEST was 
+successful
+                 0 consecutive failure(s).
+                 Last success @ Wed Apr 29 11:25:28 2020 CEST
+
+CN=Schema,CN=Configuration,DC=omtn,DC=de
+         CorporateDataCenter\OMTNDC8 via RPC
+                 DSA object GUID: 2d035437-cec0-4a24-bdd0-0b599915e3b6
+                 Last attempt @ Wed Apr 29 11:25:28 2020 CEST was 
+successful
+                 0 consecutive failure(s).
+                 Last success @ Wed Apr 29 11:25:28 2020 CEST
+
+CN=Configuration,DC=omtn,DC=de
+         CorporateDataCenter\OMTNDC8 via RPC
+                 DSA object GUID: 2d035437-cec0-4a24-bdd0-0b599915e3b6
+                 Last attempt @ Wed Apr 29 11:25:29 2020 CEST was 
+successful
+                 0 consecutive failure(s).
+                 Last success @ Wed Apr 29 11:25:29 2020 CEST
+
+DC=DomainDnsZones,DC=omtn,DC=de
+         CorporateDataCenter\OMTNDC8 via RPC
+                 DSA object GUID: 2d035437-cec0-4a24-bdd0-0b599915e3b6
+                 Last attempt @ Wed Apr 29 11:25:28 2020 CEST was 
+successful
+                 0 consecutive failure(s).
+                 Last success @ Wed Apr 29 11:25:28 2020 CEST
+
+==== OUTBOUND NEIGHBORS ====
+
+DC=ForestDnsZones,DC=omtn,DC=de
+         CorporateDataCenter\OMTNDC8 via RPC
+                 DSA object GUID: 2d035437-cec0-4a24-bdd0-0b599915e3b6
+                 Last attempt @ NTTIME(0) was successful
+                 0 consecutive failure(s).
+                 Last success @ NTTIME(0)
+
+DC=omtn,DC=de
+         CorporateDataCenter\OMTNDC8 via RPC
+                 DSA object GUID: 2d035437-cec0-4a24-bdd0-0b599915e3b6
+                 Last attempt @ NTTIME(0) was successful
+                 0 consecutive failure(s).
+                 Last success @ NTTIME(0)
+
+CN=Schema,CN=Configuration,DC=omtn,DC=de
+         CorporateDataCenter\OMTNDC8 via RPC
+                 DSA object GUID: 2d035437-cec0-4a24-bdd0-0b599915e3b6
+                 Last attempt @ NTTIME(0) was successful
+                 0 consecutive failure(s).
+                 Last success @ NTTIME(0)
+
+CN=Configuration,DC=omtn,DC=de
+         CorporateDataCenter\OMTNDC8 via RPC
+                 DSA object GUID: 2d035437-cec0-4a24-bdd0-0b599915e3b6
+                 Last attempt @ NTTIME(0) was successful
+                 0 consecutive failure(s).
+                 Last success @ NTTIME(0)
+
+DC=DomainDnsZones,DC=omtn,DC=de
+         CorporateDataCenter\OMTNDC8 via RPC
+                 DSA object GUID: 2d035437-cec0-4a24-bdd0-0b599915e3b6
+                 Last attempt @ NTTIME(0) was successful
+                 0 consecutive failure(s).
+                 Last success @ NTTIME(0)
+
+==== KCC CONNECTION OBJECTS ====
+
+Connection --
+         Connection name: 340530b4-a0d6-4f58-a9e3-5a524d2aac42
+         Enabled        : TRUE
+         Server DNS name : omtndc8.omtn.de
+         Server DN name  : CN=NTDS 
+Settings,CN=OMTNDC8,CN=Servers,CN=CorporateDataCenter,CN=Sites,CN=Configuration,DC=omtn,DC=de
+                 TransportType: RPC
+                 options: 0x00000001
+Warning: No NC replicated for Connection!
+
+
+samba_dnsupdate --verbose
+No DNS updates needed
+
+Any help is welcome.
+
+Best regards,
+Olaf Dreyer
+
 
