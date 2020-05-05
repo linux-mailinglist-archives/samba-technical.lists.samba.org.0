@@ -2,45 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 305621C561C
-	for <lists+samba-technical@lfdr.de>; Tue,  5 May 2020 15:00:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 320741C568D
+	for <lists+samba-technical@lfdr.de>; Tue,  5 May 2020 15:16:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=VyRQIgonUNTTcVUnpJYBROSs/IU3uOikrczXcLpBelY=; b=m/ZfSY2PUhw3NKt1sn5OrM3gvX
-	k2uUOhKZ+Od2+AMT03+LCmsCtkF/sC8cOxI1+VY71iQbO9fPk1qTMKUk+H0uuV8eRojhQhNoRRBc5
-	i7osThTfGRiDUkE5TU2qhrY8Szxu7fen4m1gEss+hUqn435+1jXUZ6ltdXTF0uq2ocgQJZBcLxLT5
-	RLzmX1KGFvGw4RCISGrOk85L3fikxaz7P+GG6sO4w677can/x24TdwGiuti2s4x8LlYLY5BjWc7RE
-	fCCa3IBn9I+UvKNLCMK0ooiKD7219Wsrd5mVlbpIIJNRDwcOpIdAdcXsXuQeMBJqn/d6Jz3eP0Q/H
-	36jNQ9VA==;
-Received: from localhost ([::1]:35216 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=D17E/gP2PfDHKBX77gyJWBm4qaHrYJbrAzQSSzEA9jI=; b=dOj7Mt0mf7ScSO6nWkNEvsr6fm
+	C2H6BaQYMec7nzu9AC8SmifrcRZryA8vH+QkwSmEOZ2YH57WP1BuGXEzIEE2wn9UlDCdZPnHHXJJe
+	KaD7tpeBQFb5Vqid50+N8ggrGycFNZm0uE4X4skrddAvfmE+KiGCUU3ekvzEJHUSGFf/C/Ma2GXfQ
+	OLjS0XNzzjnTW4hx2fhXmGX8mSR+ScQA0U1dnnNiUkTp9wrUcIhE/J5HzQs9zyqmLpmx7Fe/ERcCw
+	JOeIOb/Qd6IeTHwwXFtyX1LRs3Y2DkbNRWXfnsS0WnK6HBdjovT4ByiRRxRS/Rp/DNRakDCP3n8L9
+	lZLirr+g==;
+Received: from localhost ([::1]:35984 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jVxAW-002oyd-Ly; Tue, 05 May 2020 12:59:28 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36160) 
+	id 1jVxR0-002p78-V7; Tue, 05 May 2020 13:16:31 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43336) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jVxAP-002oyW-I8
- for samba-technical@lists.samba.org; Tue, 05 May 2020 12:59:23 +0000
+ (Exim) id 1jVxQu-002p71-CL
+ for samba-technical@lists.samba.org; Tue, 05 May 2020 13:16:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=VyRQIgonUNTTcVUnpJYBROSs/IU3uOikrczXcLpBelY=; b=BQwzNR7vdfNdWktLXv11mtd4OL
- KamhbzAfCh6NkB1/1zal7fL00ZqHg1HikVERfrAtcmOXOuDgKFfyA2knt66Crc4YtQvY/oee19U6L
- PQnJT0yhuao8w4/+ysTqI4OLYryMGsTBYzgf9JvlxizIoFZidNWfSr+3qKsorQFPoHHDmlH06oQNj
- f/7PciZrSDGOkCDr9EN0ftP3vMUoxJM0OKm1vO+Oyo8UV64cLUtv/JtT7npf4ur0N6uhqBz0ZNg67
- U9VBFuG8/drbQVv2iATImQhkjEYGL3PZOa4u+NyZ3dqkM+U+lOS1pCJxhgjd+0YVjYrNzXuFLO+kP
- R9n+2o711R/21Vom/b83C5yumK8K3IEu+bBMLSldHcVpmaiVByM4k+hIP0RyHYESr1zewc4wu5uHh
- FQqbh5atMTYDOmx70GrftMLle+YFY2r73QZjLGknTWbVjzznfnSDyBRmpthe9Cffri5wnY6KdSj+S
- YUiM098vzkt4FCcZVVuxLr6/;
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=D17E/gP2PfDHKBX77gyJWBm4qaHrYJbrAzQSSzEA9jI=; b=TNkbMu0Hh6t8icxxjKPvHFiJjS
+ n/ksv+uW5wURfQe/+6fIJ9CjsttLlDbU4uf70NsiL7gJq0zuODLcun2sx7FRCFqTGVLcwTJmV72p7
+ 3qdzT8iPWh6r3xLCCEQ2BkcW3vRsLohrlr1kFDa7ymZeq9o1MEL+g81ieK3jjOczKMV/tvYVpFrZR
+ y3cEhsubk0zS3+I5H+urn8nllTZSGllNGoxCl31gtrmAUkESqlJnBVi5ZtEFTR7acChPbjNypSydn
+ Ox/2qdlPSmnHeQFh4xbXxKJF6qf5YtaYdwQh3alCdev7oORRCfTETWQuQIgyIu1gEFEYveKcvIaY2
+ edQQa/p1dk3IvuvTEP17K65yOIBqH89EuCeS7ZiFzOfO7Kx3JV8Mnkxg+/ALuXxU2QlV5L5rdrFhk
+ YPBLlEHTO3suJWa7SDJDPQ1xl1vq9JEZ7/8cx68n2kUrHQrTy2V4IenLTT13href8bMtLMOnyO8LT
+ QUtLa2XtRKWHvHjJjH7ejW9h;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jVxAO-0002qk-09; Tue, 05 May 2020 12:59:20 +0000
-Date: Tue, 5 May 2020 14:59:18 +0200
-To: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
-Subject: Re: GSoC 2020 Community Bonding Outline
-Message-ID: <20200505145918.6cba8bed@samba.org>
-In-Reply-To: <CAH72RCX2B3z1Mv+R32yYA0GnpQY-WX7ustGtS3Npui1Dh_L+FQ@mail.gmail.com>
-References: <CAH72RCX2B3z1Mv+R32yYA0GnpQY-WX7ustGtS3Npui1Dh_L+FQ@mail.gmail.com>
+ (Exim) id 1jVxQt-00031x-Rw
+ for samba-technical@lists.samba.org; Tue, 05 May 2020 13:16:23 +0000
+To: samba-technical@lists.samba.org
+Subject: Don't break your users: keep your API/ABI stable! - DevConf.CZ 2020
+Date: Tue, 05 May 2020 15:16:19 +0200
+Message-ID: <4652597.FDRxNn04ms@magrathea>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,13 +53,25 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Disseldorp <ddiss@samba.org>
-Cc: hezekiah maina <hezekiahmaina3@gmail.com>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Welcome Hezekiah - It's a pleasure to have you join us as part of GSoC!
+Hello,
 
-Cheers, David
+you might know that I'm the maintainer of libssh.org. As we put libssh into 
+RHEL we needed to keep the API/ABI stable and manage it. For this a colleague 
+of mine, Anderson Sasaki, created a tool called abimap. He gave a great talk 
+about it at devconf.cz
+
+https://www.youtube.com/watch?v=tFuFO_bDke0
+
+
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
+
 
