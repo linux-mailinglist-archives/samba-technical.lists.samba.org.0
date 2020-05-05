@@ -2,41 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 320741C568D
-	for <lists+samba-technical@lfdr.de>; Tue,  5 May 2020 15:16:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DFCE71C5BC3
+	for <lists+samba-technical@lfdr.de>; Tue,  5 May 2020 17:41:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=D17E/gP2PfDHKBX77gyJWBm4qaHrYJbrAzQSSzEA9jI=; b=dOj7Mt0mf7ScSO6nWkNEvsr6fm
-	C2H6BaQYMec7nzu9AC8SmifrcRZryA8vH+QkwSmEOZ2YH57WP1BuGXEzIEE2wn9UlDCdZPnHHXJJe
-	KaD7tpeBQFb5Vqid50+N8ggrGycFNZm0uE4X4skrddAvfmE+KiGCUU3ekvzEJHUSGFf/C/Ma2GXfQ
-	OLjS0XNzzjnTW4hx2fhXmGX8mSR+ScQA0U1dnnNiUkTp9wrUcIhE/J5HzQs9zyqmLpmx7Fe/ERcCw
-	JOeIOb/Qd6IeTHwwXFtyX1LRs3Y2DkbNRWXfnsS0WnK6HBdjovT4ByiRRxRS/Rp/DNRakDCP3n8L9
-	lZLirr+g==;
-Received: from localhost ([::1]:35984 helo=hr1.samba.org) 
+	bh=LoNXq3VtCN6HUmTNWE+dhEmmu/vjFanE85e817KeMm0=; b=3Hj+sVHndcaJ7o0id3UgIgGAk3
+	6Dk0H9IUAkgfDDujIpZmVeRD/fcSx9hIc1lMzOPkRqEQtYLzwkTgnNN5iua/i8h8mguBS0pcInEeO
+	wS1P+wth9DW5ZQ6yhUgndZgmklaQPZkOBTvWF+12XDK2lVIGGc1dTAm56z7+lOLVsrbbQubWlxKtV
+	sgeuEPYSI+zNVrxgGSp7PiwvgktuJ+GeUr9sMa/kSugmpe1qiSq2RhmVdART/0jNJFvQSS4feh5ps
+	9kKesa98270neI35Lg+rGDVs6Q1iHSmzrUhiPpMb1GupfHgx71C1bMPnA2v0MGadRhc5eDEKdD9/g
+	MqDJmS4Q==;
+Received: from localhost ([::1]:39400 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jVxR0-002p78-V7; Tue, 05 May 2020 13:16:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43336) 
+	id 1jVzh2-002q2c-ET; Tue, 05 May 2020 15:41:12 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47410) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jVxQu-002p71-CL
- for samba-technical@lists.samba.org; Tue, 05 May 2020 13:16:27 +0000
+ (Exim) id 1jVzgu-002q2V-QJ
+ for samba-technical@lists.samba.org; Tue, 05 May 2020 15:41:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:To:From:CC;
- bh=D17E/gP2PfDHKBX77gyJWBm4qaHrYJbrAzQSSzEA9jI=; b=TNkbMu0Hh6t8icxxjKPvHFiJjS
- n/ksv+uW5wURfQe/+6fIJ9CjsttLlDbU4uf70NsiL7gJq0zuODLcun2sx7FRCFqTGVLcwTJmV72p7
- 3qdzT8iPWh6r3xLCCEQ2BkcW3vRsLohrlr1kFDa7ymZeq9o1MEL+g81ieK3jjOczKMV/tvYVpFrZR
- y3cEhsubk0zS3+I5H+urn8nllTZSGllNGoxCl31gtrmAUkESqlJnBVi5ZtEFTR7acChPbjNypSydn
- Ox/2qdlPSmnHeQFh4xbXxKJF6qf5YtaYdwQh3alCdev7oORRCfTETWQuQIgyIu1gEFEYveKcvIaY2
- edQQa/p1dk3IvuvTEP17K65yOIBqH89EuCeS7ZiFzOfO7Kx3JV8Mnkxg+/ALuXxU2QlV5L5rdrFhk
- YPBLlEHTO3suJWa7SDJDPQ1xl1vq9JEZ7/8cx68n2kUrHQrTy2V4IenLTT13href8bMtLMOnyO8LT
- QUtLa2XtRKWHvHjJjH7ejW9h;
+ bh=LoNXq3VtCN6HUmTNWE+dhEmmu/vjFanE85e817KeMm0=; b=vLPSCM2P4ilvf09NxBz5YpAaZu
+ WbBAhM52ybpwJadcyYSW90Qym58HOi3hCxEODUSCf26pfKwZKTx0yRS4WbH5toxTeLsEMpW1xcEEw
+ U4VLoQrZME/mbAzukqut9amKtLcJdv1GkPmhE00DA/kyWD8KzEW+lk8nApPrbJeXJM7/7wsqtCTZc
+ 8DMXA9pwJJSrrXePRYxGFPlYytoy/OAlQVBaghUPbcvj/OOfgE5gnAXtHozSNtx+mIIgmKUQw+tpP
+ NEPVlCsNG1jFPZD0CeC3bOtCtR5vaEHAYNFQMbd3ZEQgFpbnONXCsYBzVc73eCab7xHYYbC8ODNOL
+ 10tKu93mRtph1AQppgBb81jUZ+MlDttr162Il4KugcVbm/ROEUlGcu6VD0TsQz4/NparqCA13SM7Z
+ S8yD6iSP3kO9XgK/mmTc0NCM0BexbogRg+4fL+gUU3i0PKfj9wNb9SwhFwU3+Ym5bpaXq5soY0u+J
+ 7mX8Nx/2Js7XK8I6Jxki+DmM;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jVxQt-00031x-Rw
- for samba-technical@lists.samba.org; Tue, 05 May 2020 13:16:23 +0000
+ (Exim) id 1jVzgu-0004NW-8p
+ for samba-technical@lists.samba.org; Tue, 05 May 2020 15:41:04 +0000
 To: samba-technical@lists.samba.org
-Subject: Don't break your users: keep your API/ABI stable! - DevConf.CZ 2020
-Date: Tue, 05 May 2020 15:16:19 +0200
-Message-ID: <4652597.FDRxNn04ms@magrathea>
+Subject: Gitlab and Sign-Off trailers
+Date: Tue, 05 May 2020 17:41:03 +0200
+Message-ID: <2494384.Zab67dHBYY@magrathea>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
@@ -58,15 +58,17 @@ Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello,
+Hi,
 
-you might know that I'm the maintainer of libssh.org. As we put libssh into 
-RHEL we needed to keep the API/ABI stable and manage it. For this a colleague 
-of mine, Anderson Sasaki, created a tool called abimap. He gave a great talk 
-about it at devconf.cz
+I've looked into different solutions for checking sign-off trailers:
 
-https://www.youtube.com/watch?v=tFuFO_bDke0
+https://gitlab.com/libssh/libssh-mirror/-/merge_requests/104/commits
 
+I've found one working solution so far.
+
+
+
+	Andreas
 
 -- 
 Andreas Schneider                      asn@samba.org
