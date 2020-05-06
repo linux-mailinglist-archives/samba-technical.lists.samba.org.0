@@ -2,7 +2,7 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD6871C79B1
+	by mail.lfdr.de (Postfix) with ESMTPS id D870E1C79B0
 	for <lists+samba-technical@lfdr.de>; Wed,  6 May 2020 20:54:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Cc:Subject:to;
@@ -12,13 +12,13 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	n9bYJo/G31Ci7WEdyPhCtTQYEMpzMDH/OOIs/IsHRfR7peXbx6Tvm4FMxOfsIAivvKq0E7sGX9yig
 	3Tb7lz16detm2D75/NIV5JxrVh/W1S0ep1qty75FMvls8zHxMO83EDkSACntXHbxAAMsRdWuNsUJ4
 	i1kaRhxg==;
-Received: from localhost ([::1]:51530 helo=hr1.samba.org) 
+Received: from localhost ([::1]:51512 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jWPAZ-0033Rm-Tz; Wed, 06 May 2020 18:53:24 +0000
-Received: from sonic302-21.consmr.mail.ir2.yahoo.com ([87.248.110.84]:45143) 
+	id 1jWPAW-0033RP-9w; Wed, 06 May 2020 18:53:20 +0000
+Received: from sonic314-20.consmr.mail.ir2.yahoo.com ([77.238.177.146]:45352) 
  by hr1.samba.org with esmtps
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim) id 1jWPAQ-0033RH-Nh
- for samba-technical@lists.samba.org; Wed, 06 May 2020 18:53:18 +0000
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim) id 1jWPAP-0033RG-Ji
+ for samba-technical@lists.samba.org; Wed, 06 May 2020 18:53:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.co.uk; s=s2048;
  t=1588791189; bh=gmbv78uem//+IXDi/welxBDGmWf8xaw4cjGpLc3qSTI=;
  h=Subject:Cc:References:From:Date:In-Reply-To:From:Subject;
@@ -44,7 +44,7 @@ X-YMail-OSG: 9zTdKsAVM1nLYriN79lrFN4BVttQk7RW6JkJYbVMdY0B8KsKdRIQyRvN3b_zFlg
  TDCqvudf8x8XTJoyC3gUopWMzvIuleyYWstUK7.mflrOvdP2fxkHsO_IS_TTq.c2CZoHcQ0dgdt5
  irlBKrfA_2VbFv_DM
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic302.consmr.mail.ir2.yahoo.com with HTTP; Wed, 6 May 2020 18:53:09 +0000
+ sonic314.consmr.mail.ir2.yahoo.com with HTTP; Wed, 6 May 2020 18:53:09 +0000
 Received: by smtp412.mail.ir2.yahoo.com (VZM Hermes SMTP Server) with ESMTPA
  ID c0990f20178534ec77ef01c5baec2a37; 
  Wed, 06 May 2020 18:43:00 +0000 (UTC)
