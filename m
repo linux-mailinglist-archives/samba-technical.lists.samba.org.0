@@ -2,52 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 299691C6E50
-	for <lists+samba-technical@lfdr.de>; Wed,  6 May 2020 12:24:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13A961C6E6E
+	for <lists+samba-technical@lfdr.de>; Wed,  6 May 2020 12:34:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=0Kq2a8p93zs9xQM9Z6RiyU+4OEROWivFgggXzsmJl1E=; b=F9eCOm1L90LwmVGotBXAJbt6KL
-	3f4GGO2qQfebbiE5Rp3lMwpzDakE29iOi69SyB5cdVT+q4QJl9pf+R0DaqKncdtVkFFil3sCBNYiY
-	Szm26q+Aw+NIbuQwFMBOJsJG/tFv1U3dWj4T3/l7g20T9faa+X25UMdeSm9/W0lGYdaK330+bjmSg
-	iGHpVk3TbLfpGP/5slOuy4DEambYBn3F4ReIi7pB+wEpzWOhgxAhHKtPPGKAhoWttXF8YRFXOklIr
-	rQPZkMpWSDcbwe1yVCJ3NAdIJvZz0v8LKG4+txrYHDi1L8fh/KwsP5Nbj42IYkPhO02n/Lr9XjTjk
-	/YCIJM5Q==;
-Received: from localhost ([::1]:36786 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=ghYAX0d9yCxVjcF5lcTya2IBPrHRwUVwkdLxbg7w00I=; b=lzQWKaxocwudIaEWQG/9s7lPN6
+	6sBt5xQ2z6g59MUeiJ4LB2jm/bQ9JC59OwrNIRz+hwCkXfSWiHSB9Qfr4UBxuvD5ruOXv+/MveLWo
+	Y8CpNkqX321ldi9vfFsHxAAfNH7cL4H9cXcU/KaRpy/YlQFHsKK99AStqgxdll+lsnGsxYYHFlMqv
+	gnKZQwVec1XUZTWkxcLa8QwH1Leo9pOTpuN/ov+CliWJO0AZ7I11qZ8e4NnOtRYSzdhtU9tZnOjoN
+	zquftuAuPXio0UGBH9zqwligIcR7aIgef1jGL0J1nQsLqsfym8PgffaCG1Qgf4ejep2R9RcDdlL1a
+	ejoUdKsQ==;
+Received: from localhost ([::1]:37530 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jWHDY-00301v-P7; Wed, 06 May 2020 10:23:56 +0000
-Received: from latitanza.investici.org ([2001:888:2000:56::19]:55767) 
+	id 1jWHNX-00308F-HZ; Wed, 06 May 2020 10:34:15 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37802) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jWHDS-00301o-9L
- for samba-technical@lists.samba.org; Wed, 06 May 2020 10:23:53 +0000
-Received: from mx3.investici.org (unknown [127.0.0.1])
- by latitanza.investici.org (Postfix) with ESMTP id 0D1DE120257;
- Wed,  6 May 2020 10:23:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cryptolab.net;
- s=stigmate; t=1588760620;
- bh=0Kq2a8p93zs9xQM9Z6RiyU+4OEROWivFgggXzsmJl1E=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=tm1KHmEEcK29Jo5Hkvei0n324/DHb06Hy7dAJwEGZxwGtM8FsCa0EAW4YHrkdh3BM
- Cn4VV8Za8JTNlRI5xZxi2X5nXE2hBPEXhbhgKBZ+v/TfaPgSClG9GFgARtsNjm3wLn
- XuUrfzklLIxWWcmhRenpjmmTUkDjgEVG5DnMQ2qc=
-Received: from [82.94.249.234] (mx3.investici.org [82.94.249.234])
- (Authenticated sender: anoopcs@autistici.org) by localhost (Postfix) with
- ESMTPSA id D3F9B1201C7; Wed,  6 May 2020 10:23:37 +0000 (UTC)
-Message-ID: <3a3e311c7a4bc4d4df371b95ca0c66a792fab986.camel@cryptolab.net>
-Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
- 5.6.7/5.7rc3
-To: Jeremy Allison <jra@samba.org>
-Date: Wed, 06 May 2020 15:53:26 +0530
-In-Reply-To: <20200505174832.GC7920@jeremy-acer>
+ (Exim) id 1jWHNQ-003088-4H
+ for samba-technical@lists.samba.org; Wed, 06 May 2020 10:34:10 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=ghYAX0d9yCxVjcF5lcTya2IBPrHRwUVwkdLxbg7w00I=; b=u4UdWd/ARq9h4vogCaLKeA2r38
+ Rd5X+yxUAWOAcx0xDH4H91RiLlrxK9rD/vTFZyZXGvqTsBMFpqbluc0eC2Lz9WQrqTgwn0Jf7MaL0
+ 1zbPZiBXICbmCjLLhef0pP8GglRD/YbTsqhxTZzQRyts4n+lUfn33CgO8JMQ7dnaJZfXpDd7W8NJm
+ jLuG92XSzTa5V94gr3gSJn3xkUH1by3gJIaYGI8eYhnSA/9LOloJcmC/qa4p9oD7mPk6q5wdRLduG
+ 8uli5jyjIW6ZLQyNdOXYdcKQ6+1PAK8/h0ONitUyY27/f73HWMxbFFGl2UVj5bzMwwqEGqWiDjf7S
+ bh7xcgNuDs+q4Yc/JCYo6QqaB9KHNPbpFGwhbkzXcXvGs9u1GwJVFhb2ShcsX/bHOvm3emG+F9jXv
+ CagJJIzJaQGQpzCjITNpgY4UxQGCIXQVx0GIbCJrZO6xDHBW/Vn+boPnPI0t6OcWBgE7J6lIJIq3P
+ yCFhs4D6IAIWTC/2U/N1VNPS;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jWHNN-0004d9-OC; Wed, 06 May 2020 10:34:05 +0000
+To: Anoop C S <anoopcs@cryptolab.net>, Jeremy Allison <jra@samba.org>
 References: <0009f6b7-9139-35c7-c0b1-b29df2a67f70@samba.org>
  <102c824b-b2f5-bbb1-02da-d2a78c3ff460@kernel.dk>
  <7ed7267d-a0ae-72ac-2106-2476773f544f@kernel.dk>
  <cd53de09-5f4c-f2f0-41ef-9e0bfca9a37d@kernel.dk>
  <f782fc6d-0f89-dca7-3bb0-58ef8f662392@kernel.dk>
  <20200505174832.GC7920@jeremy-acer>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.2 (3.36.2-1.fc32) 
+ <3a3e311c7a4bc4d4df371b95ca0c66a792fab986.camel@cryptolab.net>
+Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
+ 5.6.7/5.7rc3
+Message-ID: <48c9ddf2-31a3-55f7-aa18-5b332c6be6a6@samba.org>
+Date: Wed, 6 May 2020 12:33:59 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <3a3e311c7a4bc4d4df371b95ca0c66a792fab986.camel@cryptolab.net>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="5Bi5nMIt7JpNqwwd1UNbUsQj7bbkVxNto"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,99 +64,83 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Anoop C S via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Anoop C S <anoopcs@cryptolab.net>
-Cc: Stefan Metzmacher <metze@samba.org>,
- Samba Technical <samba-technical@lists.samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: Jens Axboe <axboe@kernel.dk>,
+ Samba Technical <samba-technical@lists.samba.org>,
+ io-uring <io-uring@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2020-05-05 at 10:48 -0700, Jeremy Allison via samba-technical
-wrote:
-> On Tue, May 05, 2020 at 11:39:14AM -0600, Jens Axboe wrote:
-> > > I'll try and see if I can get an arch binary build that has the
-> > > vfs_io_uring module and reproduce.
-> > 
-> > Got that done, and I can now mount it on Linux. Been trying pretty
-> > hard to trigger any corruptions on reads, but it works for me.
-> > Checked
-> > that we see short reads, and we do, and that it handles it just
-> > fine.
-> > So pretty blank right now on what this could be.
-> > 
-> > FWIW, I'm mounting on Linux as:
-> > 
-> > # mount -t cifs -o ro,guest //arch/data /smb
-> 
-> The reporter claims this only happens with
-> a Windows client, as the Linux and Samba libsmb
-> clients don't pipeline the reads in the same
-> way for multiple files the same way that Windows
-> does.
-> 
-> Here is the bug report with all the details I've
-> managed to get out of the original reporter:
-> 
-> https://bugzilla.samba.org/show_bug.cgi?id=14361
-> 
-> I also can't reproduce the data corruption, even
-> from a Windows client although I've only tried
-> so far on my home Ubuntu 19.04 kernel 5.3.0-51-generic #44-Ubuntu SMP
-> box.
-> 
-> I tried running 2 powershell processes on the
-> Windows client and doing a copy in both of them
-> to ensure we are opening multiple files simultaneously
-> and going through the io_uring module (which I
-> saw happening by adding debug statements) but
-> I never see corruption.
-> 
-> I'm planning to try running against a Fedora32
-> VM next, as that's case the reporter claims will
-> reproduce the issue.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--5Bi5nMIt7JpNqwwd1UNbUsQj7bbkVxNto
+Content-Type: multipart/mixed; boundary="EVV2tXuzIhCj0wS29cz0ZK508UL2FrMg7";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Anoop C S <anoopcs@cryptolab.net>, Jeremy Allison <jra@samba.org>
+Cc: Samba Technical <samba-technical@lists.samba.org>,
+ io-uring <io-uring@vger.kernel.org>, Jens Axboe <axboe@kernel.dk>
+Message-ID: <48c9ddf2-31a3-55f7-aa18-5b332c6be6a6@samba.org>
+Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
+ 5.6.7/5.7rc3
+References: <0009f6b7-9139-35c7-c0b1-b29df2a67f70@samba.org>
+ <102c824b-b2f5-bbb1-02da-d2a78c3ff460@kernel.dk>
+ <7ed7267d-a0ae-72ac-2106-2476773f544f@kernel.dk>
+ <cd53de09-5f4c-f2f0-41ef-9e0bfca9a37d@kernel.dk>
+ <f782fc6d-0f89-dca7-3bb0-58ef8f662392@kernel.dk>
+ <20200505174832.GC7920@jeremy-acer>
+ <3a3e311c7a4bc4d4df371b95ca0c66a792fab986.camel@cryptolab.net>
+In-Reply-To: <3a3e311c7a4bc4d4df371b95ca0c66a792fab986.camel@cryptolab.net>
 
-I could reproduce the difference in SHA256 checksum after copying a
-directory with 100 copies of test file(provided by reporter) from
-io_uring VFS module enabled share using Windows explorer(right-click-
->copy/paste). Only 5 out of 100 files had correct checksum after copy
-operation :-/
+--EVV2tXuzIhCj0wS29cz0ZK508UL2FrMg7
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-Issue is *NOT* seen with `Copy-Item` powershell command or with
-`smbclient` utility using "mget".
+Hi Anoop,
 
-Whereas copy from a share without io_uring VFS module didn't show any
-SHA256 checksum difference using Windows explorer or `Copy-Item`
-powershell command or `smbclient` utility.
+> I could reproduce the difference in SHA256 checksum after copying a
+> directory with 100 copies of test file(provided by reporter) from
+> io_uring VFS module enabled share using Windows explorer(right-click-
+>> copy/paste). Only 5 out of 100 files had correct checksum after copy
+> operation :-/
 
-Following is my configuration:
-OS: Fedora 32
-Kernel: 5.6.8
-Samba: master
-liburing: 0.5
-Client: Win 10, build 1909
-testparm_s:
-# Global parameters
-[global]
-	clustering = Yes
-	load printers = No
-	log file = /usr/local/var/log/samba/log.%I
-	netbios name = SMB-CLUSTER
-	security = USER
-	server string = Samba Server
-	idmap config * : backend = tdb
+Great! Can you please try to collect level 1 log files with
+the patch https://bugzilla.samba.org/attachment.cgi?id=3D15955
+applied?
+
+If you use files with only 0xff please also use the
+"io_uring:check_ff=3Dyes" option.
+
+Maybe the problem is really triggered by short reads...
+
+Thanks!
+metze
 
 
-[local-ext4]
-	comment = For samba share of local ext4
-	path = /mnt/ext4/
+--EVV2tXuzIhCj0wS29cz0ZK508UL2FrMg7--
 
+--5Bi5nMIt7JpNqwwd1UNbUsQj7bbkVxNto
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
-[local-ext4-io-uring]
-	comment = For samba share of local ext4
-	path = /mnt/ext4/
-	vfs objects = io_uring
+-----BEGIN PGP SIGNATURE-----
 
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl6ykpcACgkQDbX1YShp
+vVZsMg/+Jnnm4vqVAK8ghWxaEB+YCij64ct0oSmXfQWcA72pyJYL8gJqUYWqd06P
+g4C4KMRnZwpIboCXsux33xd9pod74IK4oBu2MVOidNfOiTkho/pgrREZKZEreDXS
+jYI5FD1XoA2UCg3NpVcOSOfRhKV1OVQ6VTj+a1qlun6E9Jl/k6s03hZ7eK5e3vDa
+X712fHAPdzHcbMVzduf6nwPhrt99P7gYFEwL/Hogr6bqXVV7XOArNQoiq8AKBrNH
+XbUpA/6Z/FarC9wCoWlHrA/+tjmEc695xnKQgQHI1CkF09ojU6xxj8Cus9lWjEsK
+Low3EBW1myVOzQfNV9RZy/73JJNf6QUzEh7K2Z0keyvPlF+eIBsBaXi8BtOBvT55
++jdKnj0JFrfHVEJxSx8Uprdhv7WaHceNnjrfxtcEZJuE51mRH4q0viW+ynxfQMT2
+9LMoIBKE1mKwbk94bKsm3qabQCtMjSTtcaXg8aqmxTatKeQhGYvnlU9zaaRWuZVz
+mq8XpJbW6sVBNeq50xOmGhDUSWB+Qkd+gBeZre+mWjjdm7o2Gcd8HRaJUdLWts2c
+skFPQfx23JzY46EYrfUVH3CYpuw/47mtNAlMHZr9u/0S/VoJeyKEYKWL3AdGoYqL
+vzADcbDjw5PcKqsQjUVd4o+2djt1uRfRUe4Uc5yK5iqHtH9/dCE=
+=2PRY
+-----END PGP SIGNATURE-----
 
--Anoop C S
-
+--5Bi5nMIt7JpNqwwd1UNbUsQj7bbkVxNto--
 
