@@ -2,55 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C601F1C7759
-	for <lists+samba-technical@lfdr.de>; Wed,  6 May 2020 19:04:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A56381C7776
+	for <lists+samba-technical@lfdr.de>; Wed,  6 May 2020 19:10:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=pTnESlR5+j5OrllY6L54TWF5eBXLRvw9LXHrkFmdR7I=; b=mNoPsOzrQAGfLPfX2yT9YP4F3E
-	BaWg4OXV5vl3wd/nq37pk6KuTCpycek9YhqJvWim6OCEcgPUHI9XuiyOBJkFuZCAtZhbLTIEf/02x
-	65GIyoEvGHPw/9OPLqen6bb5tErDlFVTFci+JvsNTKUQkr5y+V6nYDgH19CxjN3W/+XjKXTBlCCcD
-	PDcr7KWBkVIbmu8Nmv2Ri64nwnxFIGqTbqsRG9UPI9+jE6E7SHsx2AzQGqyXq86rcPbf903HewIV6
-	OLDK6W5gxQ74k1vIyl3DjwJ7Ghk6W5B+Dm5uw/4GzdLS+9c2dKXAGXxhEoPpA+23EMhh2FTkLcnBm
-	/UGSjqxg==;
-Received: from localhost ([::1]:47778 helo=hr1.samba.org) 
+	bh=zx4A6sxWj79ML2fq1bwTQbgzzOhvQMG210dPCMjH19E=; b=1vjbQVQ6v0zfaI4mUicdEICiKc
+	ZeBhg5PycPk5L3Avt13AZ7djvhZwC+52hbGW2x64P+2+WNULkZm9MmFKysnq+ITr9bSm07Bjv4XSK
+	99IB2dIz//rY2usez5VCbrn+nrFDVfvc+1d6P1MJq2sZ0OASfvCoyPHejrFmFCbG3XKoA+OK+JUtx
+	2fGiVOfUsTCULYuoWqGUZVHx8CubpaQGvXYN5oosgrqOAH3VkBnglTxk1tP+Qq3roNBQhjKmxv4Ka
+	5G8XkT+04bZrBYlmL8QGEFbzP82dbGIZSOvPDqPGdFlL4Iu4G/tV++Ver8wcSjvssvk1TnU2Ka44F
+	MLVOpiXw==;
+Received: from localhost ([::1]:49236 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jWNSi-0032iE-Uf; Wed, 06 May 2020 17:04:01 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28466) 
+	id 1jWNYW-0032x9-UD; Wed, 06 May 2020 17:10:01 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30734) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jWNSb-0032i7-NZ
- for samba-technical@lists.samba.org; Wed, 06 May 2020 17:03:56 +0000
+ (Exim) id 1jWNYQ-0032x2-FU
+ for samba-technical@lists.samba.org; Wed, 06 May 2020 17:09:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=pTnESlR5+j5OrllY6L54TWF5eBXLRvw9LXHrkFmdR7I=; b=0lvoaQOF3C3UyUm+evfRCi/pgB
- gr2Sz4klLIzr4+ZdrjTcxFQ3/8AtaD8yu/1n+7ify13ePi6yGSOjT90FgUQIDiUynhxbTnJV2/AKn
- 1c429ncl0CTCw+aDer2SbUp7xD01KwZ0JxfFiHNIUoMkQyDBE6H5eilWA1HE83ZFBBs4mVfMX1uWe
- 9D/H2LeL0Y0suXb5Tqo9eL+u3EIWJnM8uCtqIWbqlDG8GehQV6dqkYngYc2EVOuzpy/IiFMZrvaIs
- DWksPZ871I6OUuf0cBFXjqRZTddmrgQk0YF97uI8TBiZoB5gtFOncXlcaHjvkZ98rs+T0c5NTxn2P
- /+V6gRMZpJsLT4cqcSGHfFk0tbCBjT8fms1lMsXyGFmKFhZ676xUlGGTHTB55ASrob49WQL+z3Use
- 19iJhYARjFdTRly7CkoVkcryz9WcsoiGVegfX4pTA1Aoaz1YKeriU3q+iCMPWMi6C9oqci1iPF3Qd
- eYrzmIACr7uWHZF7pFbTtWyr;
+ bh=zx4A6sxWj79ML2fq1bwTQbgzzOhvQMG210dPCMjH19E=; b=2zRV6toB60cJak2Q0zXv5j2j00
+ Byp6rILrurHciQevXXFLta/Jy/fdJtB6M5co4sYBtkr/1T1Zyj7uvVxXG49CU69OoQ7feWJu/skDy
+ cXpwzObXjMsPpsEYL5Lk6pVfOlQB/kBpI7OkDbzu1+WUgx9ehaWgb3hDfJFoXxgoGINQIX0rAijgV
+ v4HBkYH/2IHrVQCaALSr/PVXAFxz0LemLA5LIAJ6yhO/p5lhlggBW4LdhMl+dgmhbrP+Gnasmwjuk
+ /EVfnVukJKy2hFUdj7CJusthm9gHpTW6aiINLmHHdCABtZjKZOzkPYppqJh3h23doL6E6d1qNmalX
+ ZfGJmo+XtTqaP8EJmtrmhakfCKG+nx5iH6OCkle98YuPKnqEsfHvVawO8Z7Br/2udiP6D3cs4juNg
+ GzoAez37+WxGeP3IrSbXhIBSx/ZJjz9aOKkn2Dtef16BTGB5wy4NXkKhKwLkB3zaskhC52vnGDfrM
+ +a+Em7aAZKNqiIec6hqWiXBT;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jWNSZ-000826-La; Wed, 06 May 2020 17:03:52 +0000
-Date: Wed, 6 May 2020 10:03:44 -0700
-To: Stefan Metzmacher <metze@samba.org>
-Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
- 5.6.7/5.7rc3
-Message-ID: <20200506170344.GA32399@jeremy-acer>
-References: <0009f6b7-9139-35c7-c0b1-b29df2a67f70@samba.org>
- <102c824b-b2f5-bbb1-02da-d2a78c3ff460@kernel.dk>
- <7ed7267d-a0ae-72ac-2106-2476773f544f@kernel.dk>
- <cd53de09-5f4c-f2f0-41ef-9e0bfca9a37d@kernel.dk>
- <f782fc6d-0f89-dca7-3bb0-58ef8f662392@kernel.dk>
- <20200505174832.GC7920@jeremy-acer>
- <3a3e311c7a4bc4d4df371b95ca0c66a792fab986.camel@cryptolab.net>
- <48c9ddf2-31a3-55f7-aa18-5b332c6be6a6@samba.org>
- <62e94d8a6cecf60cfba7e5ca083e90bc8f216d61.camel@cryptolab.net>
- <36fd1c62-abfb-931c-ac31-f6afbbb313fb@samba.org>
+ (Exim) id 1jWNYO-00085m-5J; Wed, 06 May 2020 17:09:52 +0000
+Date: Wed, 6 May 2020 10:09:46 -0700
+To: lejeczek <peljasz@yahoo.co.uk>
+Subject: Re: Samba with GlusterFS - the bug is back?
+Message-ID: <20200506170946.GB3447@jeremy-acer>
+References: <4b3fdecf-e666-dd76-d618-0150b2549f07.ref@yahoo.co.uk>
+ <4b3fdecf-e666-dd76-d618-0150b2549f07@yahoo.co.uk>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <36fd1c62-abfb-931c-ac31-f6afbbb313fb@samba.org>
+In-Reply-To: <4b3fdecf-e666-dd76-d618-0150b2549f07@yahoo.co.uk>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -67,122 +58,24 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Jens Axboe <axboe@kernel.dk>, Anoop C S <anoopcs@cryptolab.net>,
- Samba Technical <samba-technical@lists.samba.org>,
- io-uring <io-uring@vger.kernel.org>, jra@samba.org
+Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, May 06, 2020 at 04:08:03PM +0200, Stefan Metzmacher wrote:
-> Am 06.05.20 um 14:41 schrieb Anoop C S:
-> > On Wed, 2020-05-06 at 12:33 +0200, Stefan Metzmacher wrote:
-> >> Hi Anoop,
-> >>
-> >>> I could reproduce the difference in SHA256 checksum after copying a
-> >>> directory with 100 copies of test file(provided by reporter) from
-> >>> io_uring VFS module enabled share using Windows explorer(right-
-> >>> click-
-> >>>> copy/paste). Only 5 out of 100 files had correct checksum after
-> >>>> copy
-> >>> operation :-/
-> >>
-> >> Great! Can you please try to collect level 1 log files with
-> >> the patch https://bugzilla.samba.org/attachment.cgi?id=15955
-> >> applied?
-> > 
-> > I have attached three log files.
-> > log.io_uring.smbd -- Copy using Windows explorer
-> > log.io_uring-mget.smd -- Copy using smbclient
-> > log.io_uring-powershell.smd -- Copy using `Copy-Item`
+On Wed, May 06, 2020 at 09:00:34AM +0100, lejeczek via samba-technical wrote:
+> hi guys,
 > 
-> Thanks! All of them show short reads like:
+> I fear this or very similar - https://bugzilla.samba.org/show_bug.cgi?id=13585 - is back and I wonder(must be no me alone): would that be(if this same old bug) Centos maintainers' fuckup or it's in the upstream?
+> samba-4.10.4-10.el7.x86_64
+> glusterfs-server-6.9-1.el7.x86_64
+> If anybody here is a glusterfs mail list consumer, then it's "Unable to create new files or folders using samba and vfs_glusterfs"
 > 
-> > [2020/05/06 17:27:28.130248,  1] ../../source3/modules/vfs_io_uring.c:103(vfs_io_uring_finish_req)
-> >   vfs_io_uring_finish_req: pread ofs=0 (0x0) len=32768 (0x8000) nread=32768 (0x32768) eof=10000000 (0x989680) blks=4096 blocks=19536 dir/1.bin fnum 1607026405
-> > [2020/05/06 17:27:28.131049,  1] ../../source3/modules/vfs_io_uring.c:103(vfs_io_uring_finish_req)
-> >   vfs_io_uring_finish_req: pread ofs=9969664 (0x982000) len=30336 (0x7680) nread=30336 (0x30336) eof=10000000 (0x989680) blks=4096 blocks=19536 dir/1.bin fnum 1607026405
-> > [2020/05/06 17:27:28.133679,  1] ../../source3/modules/vfs_io_uring.c:103(vfs_io_uring_finish_req)
-> >   vfs_io_uring_finish_req: pread ofs=61440 (0xf000) len=32768 (0x8000) nread=32768 (0x32768) eof=10000000 (0x989680) blks=4096 blocks=19536 dir/1.bin fnum 1607026405
-> > [2020/05/06 17:27:28.140184,  0] ../../source3/modules/vfs_io_uring.c:88(vfs_io_uring_finish_req)
-> >   vfs_io_uring_finish_req: Invalid pread ofs=0 (0x0) len=1048576 (0x100000) nread=32768 (0x32768) eof=10000000 (0x989680) blks=4096 blocks=19536 dir/1.bin fnum 1607026405
-> 
-> It seems the first request is at ofs=0 len=32768 (0x8000) and we get
-> 32768 back.
-> A follow up request with ofs=0 len=1048576 (0x100000) only gets the
-> first 32768 bytes which are already in the page cache.
-> 
-> I can easily reproduce this with the Ubuntu 5.4 kernel once I add
-> state->ur.sqe.rw_flags |= RWF_NOWAIT; to vfs_io_uring_pread_send()
-> and use this.
-> 
-> echo 1 > /proc/sys/vm/drop_caches
-> head -c 1024 /root/samba-test/ff1.dat | hexdump -C
-> 00000000  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff
-> |................|
-> *
-> 00000400
-> smbclient //172.31.9.167/uringff -Uroot%test -c "get ff1.dat"
-> 
-> results in this log entries:
-> > [2020/05/06 06:51:57.069990,  0] ../../source3/modules/vfs_io_uring.c:89(vfs_io_uring_finish_req)
-> >   vfs_io_uring_finish_req: Invalid pread ofs=0 (0x0) len=8388608 (0x800000) nread=16384 (0x4000) eof=8388608 (0x800000) blks=4096 blocks=16384 ff1.dat fnum 840153065
-> > [2020/05/06 06:51:57.076882,  1] ../../source3/modules/vfs_io_uring.c:104(vfs_io_uring_finish_req)
-> >   vfs_io_uring_finish_req: pread ofs=16384 (0x4000) len=8372224 (0x7fc000) nread=8372224 (0x7fc000) eof=8388608 (0x800000) blks=4096 blocks=16384 ff1.dat fnum 840153065
-> 
-> smbclient is just smart enough to recover itself from the short read.
-> But the windows client isn't.
+> I'll say this is a small catastrophe, once again, for all those of us who run with glusterfs.
+> Would you have advice with a quick fix and/or workaround?
+> many thanks, L.
 
-Well we pay attention to the amount of data returned
-and only increment the next read request by the amount
-actually returned.
+Can you re-open a new bug and assign to Anoop. He's probably
+got the resources already set up to look at this.
 
-I'm amazed that the Windows client doesn't seem to
-check this !
-
-> The attached test against liburing (git://git.kernel.dk/liburing) should
-> be able to demonstrate the problem. It can also be found in
-> https://github.com/metze-samba/liburing/tree/implicit-rwf-nowaithttps://github.com/metze-samba/liburing/commit/eb06dcfde747e46bd08bedf9def2e6cb536c39e3
-> 
-> 
-> I added the sqe->rw_flags = RWF_NOWAIT; line in order to demonstrate it
-> against the Ubuntu 5.3 and 5.4 kernels. They both seem to have the bug.
-> 
-> Can someone run the unmodified test/implicit-rwf_nowait against
-> a newer kernel?
-
-Aha. I wondered about the short read issue when this
-was first reported but I could never catch it in the
-act.
-
-If the Windows client doesn't check and the kernel
-returns short reads I guess we'll have to add logic
-similar to tstream_readv_send()/tstream_writev_send()
-that ensure all bytes requested/send actually go through
-the interface and from/into the kernel unless a read
-returns 0 (EOF) or a write returns an error.
-
-What a pain though :-(. SMB2+ server implementors
-really need to take note that Windows clients will corrupt
-files if they get a short read/write return.
-
-The fact that early kernels don't return short
-reads on io_uring but later kernels do makes it
-even worse :-(.
-
-There's even an SMB2 protocol field in SMB2_READ:
-
-"MinimumCount (4 bytes): The minimum number of bytes to be read for this operation to be
-successful. If fewer than the minimum number of bytes are read by the server, the server
-MUST return an error rather than the bytes read."
-
-We correctly return EOF if the amount read from
-the kernel is less than SMB2_READ.MinimumCount
-so I'm guessing they're not using it or looking
-at it (or setting it to zero).
-
-MinimumCount is supposed to allow the client to cope with
-this. Anoop, do you have wireshark traces so we can
-see what the Windows clients are setting here ?
-
-Jeremy.
+What Linux distro are you on ?
 
