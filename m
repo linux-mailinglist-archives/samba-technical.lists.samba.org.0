@@ -2,66 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C4C81C6B22
-	for <lists+samba-technical@lfdr.de>; Wed,  6 May 2020 10:12:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7432A1C6B44
+	for <lists+samba-technical@lfdr.de>; Wed,  6 May 2020 10:18:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=9n6p0rkof0L3IUs/OYyOVdd5ETk2m7WqJgQ1jjmYRVk=; b=1QGM97MqUNgBqv/Daqijdj7oL2
-	O64Udx4/ffWO/8h0TNR6FANmw5q7PACTF2/BgqnMFRS88DKU7i9xasjOMjo4cVF4JKguOG17AlP4H
-	WurevhLC1SBoDrlCeM26Jqclr4CTMExQ+FqFszTDlfVTGhgceQS+Ek9X4VVCmz37c74N2hU9l65Iw
-	OV42Y9QtdDZkdMbIHmz5IXMTL3y+BGUjgT1s4XrxAFTEjhvt8qFKEobSxh7MkgtqcBJxui3SD46X0
-	sQjOQvTJdO0v1e3Yld5gaIUNSqaF/FSEZVxfc2WatAB7W/WvtxuMqew/zFwb9myzgQog/zteuKfEi
-	fLkP/K9A==;
-Received: from localhost ([::1]:35256 helo=hr1.samba.org) 
+	bh=3Kptlqp7HuNmV6nm6qbp19YZvQ41zINIziZbkflYVOs=; b=JDTL7NOuHOl0YqEFZ0EKueP+dM
+	GoRCfNrm55QRHWFAm6ia20Qe7QfEXuElhZdBi0S1zqvfp1NSaJt8YiU4skLkteWVgOoeng37KlSTs
+	430NPp2WEtCRJiWvnur8AmDkf5bwOHtW+XJc9pVgEzcaTt79z4fFBEiL+dDGHrC0qZtBatELwFDGs
+	2rqTuTrMhyd8rDbHY7wmePW7ayOqIByWtXwUbwEntklqrSW0ppzawxLpjFVMrBJdi4VkmnvHL7P0/
+	Bf6AB9fs9wuZxLHHypMgiAvtGBSReQrIZCK4SPLehnEt0q7eww56rDAfEqiAzioUm6KGKnbUJhrih
+	T1tHwzrg==;
+Received: from localhost ([::1]:36008 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jWF8z-002zTZ-HE; Wed, 06 May 2020 08:11:05 +0000
-Received: from sonic308-17.consmr.mail.ir2.yahoo.com ([77.238.178.145]:42204) 
- by hr1.samba.org with esmtps
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim) id 1jWF8l-002zTS-7I
- for samba-technical@lists.samba.org; Wed, 06 May 2020 08:11:01 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.co.uk; s=s2048;
- t=1588752646; bh=9n6p0rkof0L3IUs/OYyOVdd5ETk2m7WqJgQ1jjmYRVk=;
- h=To:From:Subject:Date:References:From:Subject;
- b=AuT6gfiPq1DP312jNnbPuIG5pvNvwky4d9ep/kNJHwmUpdc2e8XGhn/0vSCKxr0LMdiiVaAht6gBvp9evV8NPZjZ7PVEewbFTXv79fh56FotYDp8K6KghrFBpWuQlCaqf1bxqMiVhtZaALmjnq49uJsYytjvgOCZ3MJd+QszOEEq6ef7WiyKMmGaLtiscYISQOqIK8loGYW7xL/QwIrSyRoEk8DMwWhAPL2y2g1iuJC1Pl4iDNbulY1rCIRGeM7SUo/E0aFa0RlgeJRvBNyAQ0j8fzYyCO4EuJq9BxZr9LGOAJ/8GKsWBkOTGe2UlygIClDobYC/H2QKO8liZP7V4Q==
-X-YMail-OSG: aXwQZfcVM1lkzY.ositVoupHIBO5izJl.QlFWVUo0bpcPb1FGkBzXJJYmY2CEt_
- 18eibBKZieohz7WKT5jZIOI1NVgaSKTZ26Vj.cZyDi1Q84xvgKa_gBCI6q5fj.3vHobvpPGBSn8w
- pUkfIKd_mNyU7wDtsMlPfPjBh_6IfJc4CBgA_hb_YYydkYlIZllz0O.YxEtBjJfp7MWdRnK_YPDR
- xhQfmF9scMvQXHd4W1wsKmqMwUnb1h_WnBrKhkNDJBtZ_VPgSQTQngcINBk7qvFCUbHP32cAJe5Z
- W3EOBTy_6D62inG4XzmJcC3mrNrozIyTMonAiah_dnr7fZfp6i7oO.RXJ7QkVFXeUe9O0iw.YDti
- QLmGvNs0fcJ0UXo4nmahIGWfXpDVnefHNHJBuABG0iafz0oTnHTDDHWMBLwvsQXUoeRcIIrySQ6a
- XTvMWhOrj.RJrYkKz1_EO9XVAvTHSQCiviJAf4Q8fvklNeZubvXcMfnaOb1BKEvNC0lwnxvNyAdj
- syB4HugwrfddzRFWiWAPUsljFS8AjG9xbKgMkjJV58stbQDbfAj016x2pDpTlOOwaeyk5NZjOEs7
- .HrUhXE0PpCBbdTcLeFa5LjXFTzuOhWOPF2ZeaMow70ek_1S6j6u8sY.ZtpKt3932D5eYT9Ax80.
- A.LthuY_w49xk7JOR4F4ce54seasvLNwyjwvs4Hc8l6AAyZwbyK9ZvnHhnOj9TlQQvLDll1tV_Il
- iYT7e31zWvOdhQgFpUXMSpJLkcUa3PPW0WQtW39W_b6rXI_BJq82r8D2LfJW9SC_dP4xlyE79rHI
- K.bcLtKaOfRzxknPVItFTC_LhjQM0afqCk0Yrt0Ev9WUZeTvK7IXnRaVnCGfuZ7l0LWWp6S_3dN9
- EBX3fYHvuYyyLdlmO3YmSIujow7UnotGrXsUkahP0TJ3bRsXVpw.iSMeWKk3npzmTk4yWduBKGax
- dl9jk4w6iMnd7uOM.GzpY6x73fqIrPvbNPtBUUWChWmqw0T9TkSnVzL4XNQVyTrOJg6PQHlNZv2V
- qiUVdBkKicqrrSs6s7vXrz9ejeDmZ_FjJRnsvM6WsyPDho4F8zq.QmZw0x4I7vaVTx2RNtrX.fem
- DwOoATME_iwz2uHX2eCOBCg.7UfOcNeWGGUSWOxWBAI.NjqjqoueuIFeI.bD9b3Ci.R7omoJ5yBE
- .dxeurJEZv24rsNoODBFct7ZUEtoC6E0slB0SM0_YQgGNg8RZtlBUdROVvh8PtEGcVZnLDKJg.N5
- 6ygXq8dufSnfX7RuVpgLtLpuozuBu0XdAzUWDIvtLGO0pEqkVjq.EJU4iD_7c4xFhOkRyo1uRv7T
- W5svsENS2R8QdZJ6_65m5VtdHEhC8orkLZI_x3X5uxNAY_dP.pAR2rSF4.0AQfWy.roJmkc0_8fz
- P
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic308.consmr.mail.ir2.yahoo.com with HTTP; Wed, 6 May 2020 08:10:46 +0000
-Received: by smtp410.mail.ir2.yahoo.com (VZM Hermes SMTP Server) with ESMTPA
- ID 63ea6bf4d97199c80d74a8a0802773fe; 
- Wed, 06 May 2020 08:00:36 +0000 (UTC)
-To: Samba Technical <samba-technical@lists.samba.org>
-Subject: Samba with GlusterFS - the bug is back?
-X-Pep-Version: 2.0
-Message-ID: <4b3fdecf-e666-dd76-d618-0150b2549f07@yahoo.co.uk>
-Date: Wed, 6 May 2020 09:00:34 +0100
+	id 1jWFFk-002zZy-2c; Wed, 06 May 2020 08:18:04 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40676) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jWFFd-002zZr-5E
+ for samba-technical@lists.samba.org; Wed, 06 May 2020 08:17:59 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=3Kptlqp7HuNmV6nm6qbp19YZvQ41zINIziZbkflYVOs=; b=Yoo4eeEtNhSh6KYOt78vLPhxNn
+ DxAkTN73T3MmA4porSYJfvxSP4CRAmAzT4tvgLzQTM92IAJXyNTV1tcVVqRDCLR/L/4zeUQ1EI6Vj
+ Lwg3WbvTe85QB+W5KFusC/sAOZInjHsLld0QTKQfx8O8oYifIkQgZIfIeLa59WQJ1J5gc6GmxueaL
+ HFGGH3eYcnrRVZ0uw5Za2eSTgZfUr7g61jksJaX0edUd8EbbFxvBlxb26eHjjfaxz2DiIexs28snt
+ H8KpcTJTVSRMQ00hZmOplZfNp4xz2gEsz4BTPnVsxai9BxTFlSUWz4MM8Yk7Fq2XKdFir1Yn4lmK0
+ ENX6y9HPwtVMExzjRyxSbibcB19cIgMPmaNQFOrZ/TpAUHstNhMMH39nahUt13EYY0CkwY8yPv8Jp
+ NFOdLsDV/n+k8krovOhhXDBi8x55KBHQDpqvZDO4LeOTSb9kYGoGJYUi3AI5bHNlTvD1dGS6r716e
+ JuSaz+VhjkuMyhFKSVLH8Xqi;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jWFFb-0003gW-At
+ for samba-technical@lists.samba.org; Wed, 06 May 2020 08:17:55 +0000
+To: samba-technical@lists.samba.org
+Subject: [Release Planning 4.11] Samba 4.11.10
+Organization: Samba Team
+Message-ID: <419598ad-cc4c-da71-f9d0-95deba1a152d@samba.org>
+Date: Wed, 6 May 2020 10:17:54 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Content-Language: en-US
-References: <4b3fdecf-e666-dd76-d618-0150b2549f07.ref@yahoo.co.uk>
-X-Mailer: WebService/1.1.15756 hermes Apache-HttpAsyncClient/4.1.4
- (Java/11.0.6)
+Content-Language: de-DE
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,25 +57,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: lejeczek via samba-technical <samba-technical@lists.samba.org>
-Reply-To: lejeczek <peljasz@yahoo.co.uk>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Karolin Seeger <kseeger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-hi guys,
+Hi,
 
-I fear this or very similar - https://bugzilla.samba.org/show_bug.cgi?id=3D=
-13585 - is back and I wonder(must be no me alone): would that be(if this =
-same old bug) Centos maintainers' fuckup or it's in the upstream?
-samba-4.10.4-10.el7.x86_64
-glusterfs-server-6.9-1.el7.x86_64
-If anybody here is a glusterfs mail list consumer, then it's "Unable to c=
-reate new files or folders using samba and vfs_glusterfs"
+Samba 4.11.10 is scheduled for Tuesday, June 30 2020.
 
-I'll say this is a small catastrophe, once again, for all those of us who=
- run with glusterfs.
-Would you have advice with a quick fix and/or workaround?
-many thanks, L.
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.11
+has been updated accordingly.
 
+Cheers,
+Karo
 
+-- 
+Karolin Seeger			https://samba.org/~kseeger/
+Release Manager Samba Team	https://samba.org
+Team Lead Samba SerNet		https://sernet.de
 
