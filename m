@@ -2,54 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1A0F1C7429
-	for <lists+samba-technical@lfdr.de>; Wed,  6 May 2020 17:21:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E6101C7444
+	for <lists+samba-technical@lfdr.de>; Wed,  6 May 2020 17:24:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=leVDtz0o3apLUBP7drHgw2sM4oX/O6KBqwkyy/kPdUE=; b=rjt5GtqaavSHLFq+4Z3PibazAo
-	qJwxlQlDWCsZtnV+Rmdl1Wf+co/YJqVy29v7FDWLwVJQtyXy+Tj59faLz2qHFRnYkqGI8Uvwe/u9j
-	jKtmTfvhubR2+9Y+8JnkV5HQhjXGLOGSCYWU7tlMnyaI1ud7wgCtDnw1CXdW8EUhSwz43rKVpKDSd
-	EN1D12nsOH32cNoGKEA9Z0dpBr9adVKvxFfLPNSNI1yfKaRI533jtR3PkrXkKUok4OamrfG78l5Ct
-	9qN6UCOof8Vl+A6OggStPHOfPLXO70jJkcqzRhLdMgT/6swKJrT8Pxxm0Ym+wqcGrJJTzxO1TkkEb
-	GJ4H/Wgg==;
-Received: from localhost ([::1]:44850 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=HN9ojInOFKYThRzc8Ql4PZMRAE8OzPwg0Rj7oohGgGQ=; b=oy5KDT58ue+5Hqm+8GtGuttJNR
+	Ygqtd1Ch+0UXDTCto4DbWrtNqwnUuPqOZDju6XWsBQbS8NRePf8iKFU9+s4d14Fw8c2QIzmomzHfD
+	v0zJquDf+cGJe9y018OPoehKqelI9Zradr0Rw9zvjkv/vjfCyNN7+z2D4lh77XVPMvxLnPVH6p4dE
+	GO1Cqc6vO8YpWHGhuWfCtjeu9Ho+sJUxUQoDj9VLoXkav9AaN2yfDyrMy2ftHpjBO+GCdeTIZGP0x
+	99VxD3p96QPGUhHbffEa8siJfOAZ/xX99xr4Qf6iZtCTSxiifLLmcystpUJRrgQlQN473he5jc4Cw
+	9tj1Rg0Q==;
+Received: from localhost ([::1]:45582 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jWLqX-003296-57; Wed, 06 May 2020 15:20:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43892) 
+	id 1jWLtp-0032FA-Hn; Wed, 06 May 2020 15:23:53 +0000
+Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:35915) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jWLqM-00328y-8Z
- for samba-technical@lists.samba.org; Wed, 06 May 2020 15:20:21 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=leVDtz0o3apLUBP7drHgw2sM4oX/O6KBqwkyy/kPdUE=; b=mq1muRmRIsFoMebjRg7CnSs4B5
- xLkgRhZ0J0HLPiSjkM1yO15RwidVcklWY9b637KPFCiGGqMmEmU6zMgobKd9jA6Mypx5Ut6qbYHQF
- h4nZGmN50NS1EtGySjORDbCfnnYHoblEr2kxBVygkBouTsyxaUA3zQHXRZ7aNFd6Zt0e8ED1ZGkG0
- QiPpyFjy3xb8Sd/LQvzJA983j8ePsZZOPwgak1tzmbu88PvHArLcSMJTBbL0niivC+YKZtnPDCVSw
- UafVM1dLszo/BUfmlwb5K1O4xVjPc8pqb9ARjjxyD4n22kf19eNsRI0Yoe/jknEjazVa+dnU/hUiG
- 8ag6Uu26B+3ZN2HCOOyyBiPuYa0/I/LNKFE7LjvXH4qxqTgOpLrhXg0TpOutxYvjYTHJ6WCKOj7QB
- DPk60v3GnTAw0sLbfFA9Ibc8NKjJB3P58EPkC/dVLMThvTMTMM687YgR2yufd6NBEX4pHf+7yyGBZ
- bnXmacifqLt0hn9NUw9Z0hcY;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jWLqK-00077j-3W; Wed, 06 May 2020 15:20:17 +0000
-To: Pavel Begunkov <asml.silence@gmail.com>, Jens Axboe <axboe@kernel.dk>
-References: <0009f6b7-9139-35c7-c0b1-b29df2a67f70@samba.org>
- <102c824b-b2f5-bbb1-02da-d2a78c3ff460@kernel.dk>
- <7ed7267d-a0ae-72ac-2106-2476773f544f@kernel.dk>
- <cd53de09-5f4c-f2f0-41ef-9e0bfca9a37d@kernel.dk>
- <a8152d38-8ad4-ee4c-0e69-400b503358f3@samba.org>
- <6fb9286a-db89-9d97-9ae3-d3cc08ef9039@gmail.com>
-Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
- 5.6.7/5.7rc3
-Message-ID: <9c99b692-7812-96d7-5e88-67912cef6547@samba.org>
-Date: Wed, 6 May 2020 17:20:10 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ (Exim) id 1jWLti-0032F3-Pk
+ for samba-technical@lists.samba.org; Wed, 06 May 2020 15:23:49 +0000
+Received: by mail-yb1-xb43.google.com with SMTP id a8so1188200ybs.3
+ for <samba-technical@lists.samba.org>; Wed, 06 May 2020 08:23:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=HN9ojInOFKYThRzc8Ql4PZMRAE8OzPwg0Rj7oohGgGQ=;
+ b=kod1vXQydzMu58nt7WS5nepff0qeObRx4XHGsshew2+imFpLAyaJDSSgKd5uPcGhdC
+ 4MGDv8sa3k7u82yjl+9XFcPt2kEpOaqykd6kiPBXAeHOOoGiZ+cWcn9ptyem/B0i/Z+F
+ QIYNrQFYk+HGtZ5wBDLqpS8ZkqQXfFTu5LgkJEtbJQJ36NK0HejTJLqty9zSxcbQai5Q
+ 3in5w6CDIvWK4cqZBK6jLiaJB5LGDwznGy7Y6I1gqs8TG6NcSUeuIxp4uVCB42DUhssW
+ ZJawDFzeIQhEPi8dfSLCdZd4r+y+sCcdFcFYBhKpnqJLbOgfxiqHvNhjkuB6XZ04T6RN
+ fKbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=HN9ojInOFKYThRzc8Ql4PZMRAE8OzPwg0Rj7oohGgGQ=;
+ b=saTNA1zZqQPhzBSqUXL5HdhARRBfX0HOFYx3xbSVQt+9dOfEGTGawlggD7Kxz2Btk7
+ 8Y4cx5mWwcPspYhCvZE6UDsMqDWyGqNzSFa+N/fPfeL5p9a/tOPBQJ1utDT0UFKX8Mjg
+ I13dLK7WtFB+ulDgrDgNHjyOLgFOJ7oCFnDtkMUQoHN+Bqn+O+MEbaCx4Yyo4x6W31F9
+ sL13uDHkuVUEYhUBKgkbYiYVVsGnVAw/FcKlnVrUSr7PoEeudIvMdaxhbAzAla4PsSYl
+ bD3ZvShTd0Ioli1SByyuIYAZQhUObYqv7QXiTdapdR5VmOAuUyFl04D32ym8UzfbQLkG
+ jNSg==
+X-Gm-Message-State: AGi0PuYai2ZpPLANc4Dtsm88eJWkBbrKqI2Uh5Oaw6eevuJu/QV259Yq
+ H1g7hmgsvL3MwUyrVM1XWQ1uK0NNIpycX+FOrSM=
+X-Google-Smtp-Source: APiQypIqRLHpjtToZNBKKvR/o1+aXAENDQ953WCIfNCcT9Ks9wfQ9MZn60jC/Fvhcd19XSLXbKMWBALmuU8M76B1tgE=
+X-Received: by 2002:a25:abcc:: with SMTP id v70mr4224871ybi.364.1588778624121; 
+ Wed, 06 May 2020 08:23:44 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <6fb9286a-db89-9d97-9ae3-d3cc08ef9039@gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="LpmOi13J4jDkafH5JJ8vghqK2Uv3NKp8v"
+References: <20200505134335.26802-1-geert+renesas@glider.be>
+In-Reply-To: <20200505134335.26802-1-geert+renesas@glider.be>
+Date: Wed, 6 May 2020 10:23:33 -0500
+Message-ID: <CAH2r5mvndbMwhcLRDG5JGG-2GnHwfQYz2kh6avBzQWnAebY_Cw@mail.gmail.com>
+Subject: Re: [PATCH trivial] CIFS: Spelling s/EACCESS/EACCES/
+To: Geert Uytterhoeven <geert+renesas@glider.be>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,115 +67,50 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>,
- io-uring <io-uring@vger.kernel.org>, Jeremy Allison <jra@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>, Jiri Kosina <trivial@kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ Aurelien Aptel <aaptel@suse.com>, LKML <linux-kernel@vger.kernel.org>,
+ Steve French <sfrench@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---LpmOi13J4jDkafH5JJ8vghqK2Uv3NKp8v
-Content-Type: multipart/mixed; boundary="uytcKIcAe5NP4UdxmS7uQ8Fln0GxZL9m3";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Pavel Begunkov <asml.silence@gmail.com>, Jens Axboe <axboe@kernel.dk>
-Cc: io-uring <io-uring@vger.kernel.org>,
- Samba Technical <samba-technical@lists.samba.org>,
- Jeremy Allison <jra@samba.org>
-Message-ID: <9c99b692-7812-96d7-5e88-67912cef6547@samba.org>
-Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
- 5.6.7/5.7rc3
-References: <0009f6b7-9139-35c7-c0b1-b29df2a67f70@samba.org>
- <102c824b-b2f5-bbb1-02da-d2a78c3ff460@kernel.dk>
- <7ed7267d-a0ae-72ac-2106-2476773f544f@kernel.dk>
- <cd53de09-5f4c-f2f0-41ef-9e0bfca9a37d@kernel.dk>
- <a8152d38-8ad4-ee4c-0e69-400b503358f3@samba.org>
- <6fb9286a-db89-9d97-9ae3-d3cc08ef9039@gmail.com>
-In-Reply-To: <6fb9286a-db89-9d97-9ae3-d3cc08ef9039@gmail.com>
+merged into cifs-2.6.git for-next
 
---uytcKIcAe5NP4UdxmS7uQ8Fln0GxZL9m3
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Am 06.05.20 um 14:55 schrieb Pavel Begunkov:
-> On 05/05/2020 23:19, Stefan Metzmacher wrote:
->> Hi Jens,
->>
->>> Got it working, but apparently the arch samba doesn't come with io_ur=
-ing...
->>> One question, though, from looking at the source:
->>
->> Thanks for taking a look!
->>
->>> static ssize_t vfs_io_uring_pread_recv(struct tevent_req *req,
->>> 				  struct vfs_aio_state *vfs_aio_state)
->>> {
->>> [...]
->>> 	if (state->ur.cqe.res < 0) {
->>> 		vfs_aio_state->error =3D -state->ur.cqe.res;
->>> 		ret =3D -1;
->>> 	} else {
->>> 		vfs_aio_state->error =3D 0;
->>> 		ret =3D state->ur.cqe.res;
->>> 	}
->>>
->>> 	tevent_req_received(req);
->>> [...]
->>>
->>> I'm assuming this is dealing with short reads?
->>>
->>> I'll try and see if I can get an arch binary build that has the
->>> vfs_io_uring module and reproduce.
->>
->> I guess I don't expect short reads for files unless the client asked
->> for a read beyond EOF. Does IORING_OP_READV may return short reads
->> similar to preadv2 with RWF_NOWAIT? And if so, did this got changed
->> since 5.3?
->=20
-> AFAIK, it can. io_uring first tries to submit a request with IOCB_NOWAI=
-T,
-> in short for performance reasons. And it have been doing so from the be=
-ginning
-> or so. The same is true for writes.
-
-See the other mails in the thread. The test I wrote shows the
-implicit IOCB_NOWAIT was not exposed to the caller in  (at least in 5.3
-and 5.4).
-
-I think the typical user don't want it to be exposed!
-I'm not sure for blocking reads on a socket, but for files
-below EOF it's really not what's expected.
-
-If that behavior is desired RWF_NOWAIT can be used explicitly.
-
-metze
+On Tue, May 5, 2020 at 8:49 AM Geert Uytterhoeven
+<geert+renesas@glider.be> wrote:
+>
+> As per POSIX, the correct spelling is EACCES:
+>
+> include/uapi/asm-generic/errno-base.h:#define EACCES 13 /* Permission denied */
+>
+> Fixes: b8f7442bc46e48fb ("CIFS: refactor cifs_get_inode_info()")
+> Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
+> ---
+>  fs/cifs/inode.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/fs/cifs/inode.c b/fs/cifs/inode.c
+> index 390d2b15ef6ef9d7..5d2965a2373054a4 100644
+> --- a/fs/cifs/inode.c
+> +++ b/fs/cifs/inode.c
+> @@ -730,7 +730,7 @@ static __u64 simple_hashstr(const char *str)
+>   * cifs_backup_query_path_info - SMB1 fallback code to get ino
+>   *
+>   * Fallback code to get file metadata when we don't have access to
+> - * @full_path (EACCESS) and have backup creds.
+> + * @full_path (EACCES) and have backup creds.
+>   *
+>   * @data will be set to search info result buffer
+>   * @resp_buf will be set to cifs resp buf and needs to be freed with
+> --
+> 2.17.1
+>
 
 
---uytcKIcAe5NP4UdxmS7uQ8Fln0GxZL9m3--
+-- 
+Thanks,
 
---LpmOi13J4jDkafH5JJ8vghqK2Uv3NKp8v
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl6y1asACgkQDbX1YShp
-vVaXHQ//b/UFVrj4B40+H6+lzZS2aDxxOU+ZI5e6/zihc9H3ZAqy3rDN+baqN/F+
-YHcMusFbLLn/2gShl1HOx1XSQqOH0FMcZ5/dFB7GDEvParOfkT7aDzr84XamEX5J
-aSRN6RzK0RYXIC1/EqAJ1LIbjLSezIOS1bP8yKkZZZPewKjSrMGu0wb8PoUT8v9Z
-A2fsfv/S+DnumdlEK4NzQg7XK5oMJv23yks8MNYh32SmqNDY1RGniTAVBze/tvvp
-z8qp9SRwcdszESmfmKcA932KN9xSDzMfn5RbXgZZBRXuEcvhBLN35Vjy9+N0/fVT
-YhFwlIjF6EjhdRtNShseQLbayYwsKmxDS6ZiS7IL4vpyw2rd9dapqT4uQU/janTR
-kAwTJ9CYu7KMTjvz0K5Q56tPeLb8zBCVNmgK3kLrJDsZi0eUpBT88hS9Jg/LpfPX
-3L3tYqtJTEet6PcSHjyqizLNTHP1V9t5CYWt5CpvNCvl61lEr7H7eCOur4mlTldB
-dpiSolYr9cyoqq4Sh1mghvI1ydr40hc1dSacJQt+F7y/FEyV3n2RrLwxpavJVYmx
-JiJC47VI6UFl/KRREZ6ZYSsm+mqiPihWdikcgpnIRQ+dqXj9jUy1UrnLkJfgsQw4
-0qkwD7/ZHLt88TwRd8GzrMnyvcsf9Z8afSkRO+w+XZ4EsmkNqKA=
-=7OxO
------END PGP SIGNATURE-----
-
---LpmOi13J4jDkafH5JJ8vghqK2Uv3NKp8v--
+Steve
 
