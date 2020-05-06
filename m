@@ -2,42 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1310C1C732F
-	for <lists+samba-technical@lfdr.de>; Wed,  6 May 2020 16:44:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EBF3E1C733A
+	for <lists+samba-technical@lfdr.de>; Wed,  6 May 2020 16:46:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=lFzGIfZyUzw09ujCQ7GaJvL7Kl/XhUaQt1wrBE8f8ww=; b=3zH0QcMD4XHc6uE0fsmwuDV3LS
-	9OmnH2mhGZI2zAHFPE67A8aqS7he24dgnMWkbzN6XoWbaGp5xiI4mqiUh0AxVYHmvk46cRejnrK7m
-	eCFD69ZHdslAnHa8sxjA+/PA5Tg7r/TPsUb28meEquOTJrSXzxKUe48FeE+YBtsbhowh++2Ik7omi
-	/whxXvbAqS2i+8vWAIm8W5gxV1QcR8Lrxllo+bvyV0kwfEZVWzVGfeDYvtxBxBC9DSO/hCQs6iZa7
-	O3eqjLC8DDXoDMDU/TvdEl66D5O1MJ+uo5qUNX4MEBtvHj5Xf7vp6/VzJNDyvjA/SroPdDuQ96yJ/
-	oujK3dOQ==;
-Received: from localhost ([::1]:42620 helo=hr1.samba.org) 
+	bh=zlenTLWGk+kuHrOXaXe7UKtKqL57QpdlqqCH3B1Lw38=; b=xzeARWu+lEAQbNu5HzdmAO1AJD
+	EKGBOuuv0y6y2yaA3/FA3cjH4eFRuZYwHC/x1wdZufK7wmQH7xW6ALzcWg5DiN0X9JKcXjh8kJmGR
+	p4nGoOTN9dj+g1fNe6awazfUXXXWWrgWBMc+K+GuEQt5ctwxFHNvz0A/9ko3jMfom1Fij8YOWl5fP
+	mLYeF1RrV5G267RphRGg9h0CdxqFcOlMWWacC+lxGB6N3mz+eL9xpm4BPQsUy+XMDxjyLzfUHrh/C
+	uEvBvXXQjCrNSYGaGnaYkvBWg+TrFms0ZJ0Trw1iodWV6r8lme/lXNd2MHHhNrfNmkt0x2vY6EOlY
+	Z13FC0Nw==;
+Received: from localhost ([::1]:43362 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jWLGj-0031iu-68; Wed, 06 May 2020 14:43:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28154) 
+	id 1jWLJS-0031pf-NO; Wed, 06 May 2020 14:46:18 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29020) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jWLGc-0031in-Jd
- for samba-technical@lists.samba.org; Wed, 06 May 2020 14:43:25 +0000
+ (Exim) id 1jWLJL-0031pY-QW
+ for samba-technical@lists.samba.org; Wed, 06 May 2020 14:46:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=lFzGIfZyUzw09ujCQ7GaJvL7Kl/XhUaQt1wrBE8f8ww=; b=JlfagcZJ0EwGy9ukNH689R3wRj
- esdqaJk4VrNCT+pbsQDkDAoE8grGAQnFiGGrkkUsNcuNaTzT4gwWUHY6XNo4EYdfORIS9UC+8IxmQ
- 3uvwIN5NKTUfaDL7T2T518KEu37CS1cNxqb4WZMWdz4cD0u+IRv/EeRGk5u8kjhBpe5LcXSpRtVef
- bRK6wyvqzXX1Kjl9S/esl75nUM7Y8LLQgBKAjgjN21xZ17MdQhE24y/b7mgXm32Ay0C4DemsHRjv2
- OG8qYCNBP2HQolILnH4F9Ea12r6xJ0ceZpm5kTh474tqzjZ95AgbjPKRel0++H7FJW9hJOJpdSHQQ
- L6WL6pUT3WB9Rm6ekwqa05wWDftY5DHtmBWST92MT/bxsObk0R2pLrO3v9447rJqJTh7RlRlG77XC
- xpAHbpdCZoMWknHscgqBxd7eNEH1ztrARY7aMRuflmX5D2/AZxCTmsOmM7JzaU7nUUaiDYv9kZknq
- eIDzrF7qqGoFU6R5Dop9B7zJ;
+ bh=zlenTLWGk+kuHrOXaXe7UKtKqL57QpdlqqCH3B1Lw38=; b=gxLI4N20vI+hJB/uXEpqXUuVEe
+ 9pa+9RQCu2G+m0fLOVVOaytDc4kIupIqlG0p4220hV47uGDuzCu6tFq3dnpUdDFTX53Fgn6/ZN75j
+ CpIb8zZlhUlUIfj6VLfX1UktDSOTRY2mXRwJn8PemoGacUCJ8DTd3ppRPz6GEPoPmT6YXIlVoYHrp
+ shadFY2tsAbXfRtsnY2/fEALtoT90szvmb6vWaGta/g6xPFf1Mx4FQLdiZN8TvpCQvcImIpA0RxX2
+ 2yCc5JODsixCOEwuHOgAZDrtBKIcM635NqdMlxiVO3d3zKhU4WlKkhpJ7ovV6hSjlcldrqEryz1U0
+ 3iicCkYt8JJCF3Y1jjbkwT1E07BIqKzs38EXkvCCIOfw37pSfDYR0taEp3Ugq94tyW7W/KfiGUXxq
+ yf/RGzHNU6cFFRTU7bFt+rELLj8f9zj3msHpUKKiNuXbmmrMvUemnSPxtz+j0i03fqnc8Azxxwarq
+ s+5lkHytNt5/ZytB1YxaNRR5;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jWLGb-0006hZ-3f; Wed, 06 May 2020 14:43:21 +0000
+ (Exim) id 1jWLJK-0006kU-KM; Wed, 06 May 2020 14:46:10 +0000
 To: Anoop C S <anoopcs@cryptolab.net>, Jeremy Allison <jra@samba.org>,
  samba-technical@lists.samba.org
 Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
  5.6.7/5.7rc3
-Date: Wed, 06 May 2020 16:43:19 +0200
-Message-ID: <3382111.jB3aVEHC4s@magrathea>
+Date: Wed, 06 May 2020 16:46:10 +0200
+Message-ID: <27882183.aulKxNbigu@magrathea>
 In-Reply-To: <36fd1c62-abfb-931c-ac31-f6afbbb313fb@samba.org>
 References: <0009f6b7-9139-35c7-c0b1-b29df2a67f70@samba.org>
  <62e94d8a6cecf60cfba7e5ca083e90bc8f216d61.camel@cryptolab.net>
@@ -149,18 +149,22 @@ wrote:
 > be able to demonstrate the problem. It can also be found in
 > https://github.com/metze-samba/liburing/tree/implicit-rwf-nowaithttps://gith
 > ub.com/metze-samba/liburing/commit/eb06dcfde747e46bd08bedf9def2e6cb536c39e3
-
-  ^^^ This link gives me 404 ...
-
+> 
+> 
 > I added the sqe->rw_flags = RWF_NOWAIT; line in order to demonstrate it
 > against the Ubuntu 5.3 and 5.4 kernels. They both seem to have the bug.
 > 
 > Can someone run the unmodified test/implicit-rwf_nowait against
 > a newer kernel?
-> 
-> Thanks!
-> metze
 
+$ uname -a
+Linux magrathea 5.6.8-1-default #1 SMP Thu Apr 30 10:47:01 UTC 2020 (63116ab) 
+x86_64 x86_64 x86_64 GNU/Linux
+$ ./a.out 
+cqe res=4096 != 8192
+
+
+	Andreas
 
 -- 
 Andreas Schneider                      asn@samba.org
