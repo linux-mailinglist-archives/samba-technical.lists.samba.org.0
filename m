@@ -2,52 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4F561C61E5
-	for <lists+samba-technical@lfdr.de>; Tue,  5 May 2020 22:20:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C4C81C6B22
+	for <lists+samba-technical@lfdr.de>; Wed,  6 May 2020 10:12:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=eWnusL2q81m/Y39y0RfZmDxiICedY+SLHkVqmlBJAzk=; b=hSngLrrbnRY5q5sAUgSr1zwX+d
-	BseL64Tc5rHkQpkTQ41Xyg0oLUoYQWBNGOodDY614sG+cFvVs7htypZ6R602hWm4VwpQy3FTvFymd
-	o1SlPNReU4w3fm5s3CFjcQTIhfKz4IaKnWCarjDGmq9fSNG4wK8Sy36AKWjBEcrgu0F6ABCJEY1Ul
-	jYNpRjAURRvNIM4IsN6A2EuHSI0JlaQID0QnXSciwgjP26/3u7o/IoPIroS7KvyC9qHtPXPBCHSTS
-	DMp+amR4mtwlOFbybr49ZBtsA34tLhJj1UHAUzEqGcLeYQSHa04O6RAk8X1Zj+1a+mwECnYOcp0eV
-	rSPIZ4Ng==;
-Received: from localhost ([::1]:20744 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=9n6p0rkof0L3IUs/OYyOVdd5ETk2m7WqJgQ1jjmYRVk=; b=1QGM97MqUNgBqv/Daqijdj7oL2
+	O64Udx4/ffWO/8h0TNR6FANmw5q7PACTF2/BgqnMFRS88DKU7i9xasjOMjo4cVF4JKguOG17AlP4H
+	WurevhLC1SBoDrlCeM26Jqclr4CTMExQ+FqFszTDlfVTGhgceQS+Ek9X4VVCmz37c74N2hU9l65Iw
+	OV42Y9QtdDZkdMbIHmz5IXMTL3y+BGUjgT1s4XrxAFTEjhvt8qFKEobSxh7MkgtqcBJxui3SD46X0
+	sQjOQvTJdO0v1e3Yld5gaIUNSqaF/FSEZVxfc2WatAB7W/WvtxuMqew/zFwb9myzgQog/zteuKfEi
+	fLkP/K9A==;
+Received: from localhost ([::1]:35256 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jW42U-002v10-HC; Tue, 05 May 2020 20:19:38 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48106) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jW42N-002v0t-FF
- for samba-technical@lists.samba.org; Tue, 05 May 2020 20:19:34 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=eWnusL2q81m/Y39y0RfZmDxiICedY+SLHkVqmlBJAzk=; b=jvmGbyEVWzeTZoy3160j6vfidU
- fzuH44xcgEL76UMpdsO3KcwsT2VPAMsaZDy+n+ARH7nTYZo4QmfxUTy81s+genZkp4sJzGWyvFDBn
- Px9KCi1AeRpa2QehUXfy+iSxS2x+r+e5jp8ZbifkkDPUQBEzRsUhbvGqtZO0RpB8k+ora8vTZx+2h
- CjuLmhAGZjDexzqUZHOQVdunVQ/RH+NU+6R/Ngxo6JJtvMFwgcAZTszcdUkhozI1dvtbhLUNhBncJ
- q7EUm91iZSjThm+6xQiqVaTdHiK0bWX/HTqzRkP31CEaom2tiKnmx3zy7SNV54NzZ8FiibFUdW0hy
- wR3KvP79zYTEkayQCrJLL8tr8E8iGbe+aq/cfaqTxyufx+DnjhdDe4EfMpwR1derqaHUYL5SPCvI2
- bhgdRrZJIEDCbiI01E3QgEUl/Rz4u+2ccwgWpmAtJDeSO411fX69vT5cD/8iuBZ/vBtOuR3S5yQMp
- bsipJBJFEEJ2vmSKHhBEQ+IB;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jW42M-0006cb-47; Tue, 05 May 2020 20:19:30 +0000
-To: Jens Axboe <axboe@kernel.dk>
-References: <0009f6b7-9139-35c7-c0b1-b29df2a67f70@samba.org>
- <102c824b-b2f5-bbb1-02da-d2a78c3ff460@kernel.dk>
- <7ed7267d-a0ae-72ac-2106-2476773f544f@kernel.dk>
- <cd53de09-5f4c-f2f0-41ef-9e0bfca9a37d@kernel.dk>
-Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
- 5.6.7/5.7rc3
-Message-ID: <a8152d38-8ad4-ee4c-0e69-400b503358f3@samba.org>
-Date: Tue, 5 May 2020 22:19:21 +0200
+	id 1jWF8z-002zTZ-HE; Wed, 06 May 2020 08:11:05 +0000
+Received: from sonic308-17.consmr.mail.ir2.yahoo.com ([77.238.178.145]:42204) 
+ by hr1.samba.org with esmtps
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim) id 1jWF8l-002zTS-7I
+ for samba-technical@lists.samba.org; Wed, 06 May 2020 08:11:01 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.co.uk; s=s2048;
+ t=1588752646; bh=9n6p0rkof0L3IUs/OYyOVdd5ETk2m7WqJgQ1jjmYRVk=;
+ h=To:From:Subject:Date:References:From:Subject;
+ b=AuT6gfiPq1DP312jNnbPuIG5pvNvwky4d9ep/kNJHwmUpdc2e8XGhn/0vSCKxr0LMdiiVaAht6gBvp9evV8NPZjZ7PVEewbFTXv79fh56FotYDp8K6KghrFBpWuQlCaqf1bxqMiVhtZaALmjnq49uJsYytjvgOCZ3MJd+QszOEEq6ef7WiyKMmGaLtiscYISQOqIK8loGYW7xL/QwIrSyRoEk8DMwWhAPL2y2g1iuJC1Pl4iDNbulY1rCIRGeM7SUo/E0aFa0RlgeJRvBNyAQ0j8fzYyCO4EuJq9BxZr9LGOAJ/8GKsWBkOTGe2UlygIClDobYC/H2QKO8liZP7V4Q==
+X-YMail-OSG: aXwQZfcVM1lkzY.ositVoupHIBO5izJl.QlFWVUo0bpcPb1FGkBzXJJYmY2CEt_
+ 18eibBKZieohz7WKT5jZIOI1NVgaSKTZ26Vj.cZyDi1Q84xvgKa_gBCI6q5fj.3vHobvpPGBSn8w
+ pUkfIKd_mNyU7wDtsMlPfPjBh_6IfJc4CBgA_hb_YYydkYlIZllz0O.YxEtBjJfp7MWdRnK_YPDR
+ xhQfmF9scMvQXHd4W1wsKmqMwUnb1h_WnBrKhkNDJBtZ_VPgSQTQngcINBk7qvFCUbHP32cAJe5Z
+ W3EOBTy_6D62inG4XzmJcC3mrNrozIyTMonAiah_dnr7fZfp6i7oO.RXJ7QkVFXeUe9O0iw.YDti
+ QLmGvNs0fcJ0UXo4nmahIGWfXpDVnefHNHJBuABG0iafz0oTnHTDDHWMBLwvsQXUoeRcIIrySQ6a
+ XTvMWhOrj.RJrYkKz1_EO9XVAvTHSQCiviJAf4Q8fvklNeZubvXcMfnaOb1BKEvNC0lwnxvNyAdj
+ syB4HugwrfddzRFWiWAPUsljFS8AjG9xbKgMkjJV58stbQDbfAj016x2pDpTlOOwaeyk5NZjOEs7
+ .HrUhXE0PpCBbdTcLeFa5LjXFTzuOhWOPF2ZeaMow70ek_1S6j6u8sY.ZtpKt3932D5eYT9Ax80.
+ A.LthuY_w49xk7JOR4F4ce54seasvLNwyjwvs4Hc8l6AAyZwbyK9ZvnHhnOj9TlQQvLDll1tV_Il
+ iYT7e31zWvOdhQgFpUXMSpJLkcUa3PPW0WQtW39W_b6rXI_BJq82r8D2LfJW9SC_dP4xlyE79rHI
+ K.bcLtKaOfRzxknPVItFTC_LhjQM0afqCk0Yrt0Ev9WUZeTvK7IXnRaVnCGfuZ7l0LWWp6S_3dN9
+ EBX3fYHvuYyyLdlmO3YmSIujow7UnotGrXsUkahP0TJ3bRsXVpw.iSMeWKk3npzmTk4yWduBKGax
+ dl9jk4w6iMnd7uOM.GzpY6x73fqIrPvbNPtBUUWChWmqw0T9TkSnVzL4XNQVyTrOJg6PQHlNZv2V
+ qiUVdBkKicqrrSs6s7vXrz9ejeDmZ_FjJRnsvM6WsyPDho4F8zq.QmZw0x4I7vaVTx2RNtrX.fem
+ DwOoATME_iwz2uHX2eCOBCg.7UfOcNeWGGUSWOxWBAI.NjqjqoueuIFeI.bD9b3Ci.R7omoJ5yBE
+ .dxeurJEZv24rsNoODBFct7ZUEtoC6E0slB0SM0_YQgGNg8RZtlBUdROVvh8PtEGcVZnLDKJg.N5
+ 6ygXq8dufSnfX7RuVpgLtLpuozuBu0XdAzUWDIvtLGO0pEqkVjq.EJU4iD_7c4xFhOkRyo1uRv7T
+ W5svsENS2R8QdZJ6_65m5VtdHEhC8orkLZI_x3X5uxNAY_dP.pAR2rSF4.0AQfWy.roJmkc0_8fz
+ P
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic308.consmr.mail.ir2.yahoo.com with HTTP; Wed, 6 May 2020 08:10:46 +0000
+Received: by smtp410.mail.ir2.yahoo.com (VZM Hermes SMTP Server) with ESMTPA
+ ID 63ea6bf4d97199c80d74a8a0802773fe; 
+ Wed, 06 May 2020 08:00:36 +0000 (UTC)
+To: Samba Technical <samba-technical@lists.samba.org>
+Subject: Samba with GlusterFS - the bug is back?
+X-Pep-Version: 2.0
+Message-ID: <4b3fdecf-e666-dd76-d618-0150b2549f07@yahoo.co.uk>
+Date: Wed, 6 May 2020 09:00:34 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <cd53de09-5f4c-f2f0-41ef-9e0bfca9a37d@kernel.dk>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="xQ63XlDeSybsHBvvgfdWmEWs50XvIWUA9"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
+References: <4b3fdecf-e666-dd76-d618-0150b2549f07.ref@yahoo.co.uk>
+X-Mailer: WebService/1.1.15756 hermes Apache-HttpAsyncClient/4.1.4
+ (Java/11.0.6)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,103 +75,25 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>,
- io-uring <io-uring@vger.kernel.org>, Jeremy Allison <jra@samba.org>
+From: lejeczek via samba-technical <samba-technical@lists.samba.org>
+Reply-To: lejeczek <peljasz@yahoo.co.uk>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---xQ63XlDeSybsHBvvgfdWmEWs50XvIWUA9
-Content-Type: multipart/mixed; boundary="H95GPMizWsTeXIPmMzAxALRfawanzZ0P6";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Jens Axboe <axboe@kernel.dk>
-Cc: io-uring <io-uring@vger.kernel.org>,
- Samba Technical <samba-technical@lists.samba.org>,
- Jeremy Allison <jra@samba.org>
-Message-ID: <a8152d38-8ad4-ee4c-0e69-400b503358f3@samba.org>
-Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
- 5.6.7/5.7rc3
-References: <0009f6b7-9139-35c7-c0b1-b29df2a67f70@samba.org>
- <102c824b-b2f5-bbb1-02da-d2a78c3ff460@kernel.dk>
- <7ed7267d-a0ae-72ac-2106-2476773f544f@kernel.dk>
- <cd53de09-5f4c-f2f0-41ef-9e0bfca9a37d@kernel.dk>
-In-Reply-To: <cd53de09-5f4c-f2f0-41ef-9e0bfca9a37d@kernel.dk>
+hi guys,
 
---H95GPMizWsTeXIPmMzAxALRfawanzZ0P6
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+I fear this or very similar - https://bugzilla.samba.org/show_bug.cgi?id=3D=
+13585 - is back and I wonder(must be no me alone): would that be(if this =
+same old bug) Centos maintainers' fuckup or it's in the upstream?
+samba-4.10.4-10.el7.x86_64
+glusterfs-server-6.9-1.el7.x86_64
+If anybody here is a glusterfs mail list consumer, then it's "Unable to c=
+reate new files or folders using samba and vfs_glusterfs"
 
-Hi Jens,
-
-> Got it working, but apparently the arch samba doesn't come with io_urin=
-g...
-> One question, though, from looking at the source:
-
-Thanks for taking a look!
-
-> static ssize_t vfs_io_uring_pread_recv(struct tevent_req *req,
-> 				  struct vfs_aio_state *vfs_aio_state)
-> {
-> [...]
-> 	if (state->ur.cqe.res < 0) {
-> 		vfs_aio_state->error =3D -state->ur.cqe.res;
-> 		ret =3D -1;
-> 	} else {
-> 		vfs_aio_state->error =3D 0;
-> 		ret =3D state->ur.cqe.res;
-> 	}
->=20
-> 	tevent_req_received(req);
-> [...]
->=20
-> I'm assuming this is dealing with short reads?
->=20
-> I'll try and see if I can get an arch binary build that has the
-> vfs_io_uring module and reproduce.
-
-I guess I don't expect short reads for files unless the client asked
-for a read beyond EOF. Does IORING_OP_READV may return short reads
-similar to preadv2 with RWF_NOWAIT? And if so, did this got changed
-since 5.3?
-
-By default Samba uses pread()/pwrite() from within a helper thread
-and I modeled the io_uring module with the same expecations that
-we wouldn't get a short read if only part of the requested buffer (can
-be up to 8MB) is returned because only some of it is already in the
-buffer cache.
-
-I'll try the ubuntu 5.4 kernel tomorrow.
-
-metze
+I'll say this is a small catastrophe, once again, for all those of us who=
+ run with glusterfs.
+Would you have advice with a quick fix and/or workaround?
+many thanks, L.
 
 
---H95GPMizWsTeXIPmMzAxALRfawanzZ0P6--
-
---xQ63XlDeSybsHBvvgfdWmEWs50XvIWUA9
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl6xyk0ACgkQDbX1YShp
-vVa0sA//eF30Crdt6N1MlYtVMVSYKMNqvbWwpCrtmlz+CROuzfKMrdqbyG01FZul
-kOT7y8w3yGBkVK0f/QGlBGBKDXwEmWPMMeXPk9cv2fD146rPw6FSuOe5Vhutp8fj
-yTH1Wr3T1PIep05muaV4P7D0OqKgjldDExVxHhqt0WKXh4d8PE4y6TjNBDNt/fYF
-/2ViQQomcSWxFlW2PTc1mRf5Sbikmx+51Jdioqqz5xyjwrh7rdGzB7/v3ZBiCrCz
-7jd7y/Tn9zmz+oVrh73rKIb45+JX/mYCqrSn3vClGIJGJX7/dppLg1fkQ6RdnAFj
-K0VKQcwO//ynY8ebpYzOXdKYIYBjsLN2xsbNz8orx8Pw+5yoiteAGcqlnHtWNVuy
-Lvd4puunk1m587GgeZLX2ueJEPwPFleafwpxFuv7H9Ehn44+5sZfKmUdTOXLx3G3
-X4GLsF7Vy40PnjaDWd+itRNIXiEsxesucyLtxX4aYF7ngxSUtax8vLhK6HY0qfSs
-J0mQJbJt0jfxWffkSiP8wlwUbnJPxo9LTh5WU97Agk9wTwm1MKidtsoTkVpCF2h0
-AUozX6pAhivLLrbiYLuCaVxAtFXwqsCL7i2Svwd/hPINNXHYeo4vbJkenYyFOvK+
-SYXmswauiPc7A4Pycbvw4QnO1YdslLCPg3o/jTcF/b/McP6DkGA=
-=OQwJ
------END PGP SIGNATURE-----
-
---xQ63XlDeSybsHBvvgfdWmEWs50XvIWUA9--
 
