@@ -2,41 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D31F51C995B
-	for <lists+samba-technical@lfdr.de>; Thu,  7 May 2020 20:32:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 129271C996A
+	for <lists+samba-technical@lfdr.de>; Thu,  7 May 2020 20:36:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=e0R7K/g7eJ+kAT/Fnl6k+iKXqG131gLUmCqsUSJUgiI=; b=XnXZ7fXDorCQrOJHD08MfmEUba
-	1rR1+xiJuGfwPbOPWY0gFycGOREqLyQfzmcWspQHjZrMJyxG2wElxO+0nhUNhNLpv9hKaEYodOPbp
-	QfSm64M4u+qxaplf4VYIK+PP9kHXpajWYJD3xIXF2or97rk6116d/EFNYyRgzqdlwc25/X7N8VorV
-	w5nkOVLgNjqnhAi8z7HIyCBVzar8ongM3XnEVCY+e9FpnmPsI7iyCdNZ9Ld9O5KQrx7EzuZPQ3dZq
-	jfwZLWdpjtfLg2l9uc2J3mr2EmXiSM9viqaZ+WKbVDie5dC64t+C6WfGbW4MKb/xNbx/Y9QRYXPvA
-	wLccuNMA==;
-Received: from localhost ([::1]:40060 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=1KPghES8o/m1guSIPS4zYl9dIDeyxiIt7bR2Kaju31k=; b=Bs6fVGrZxY85exqh8l7SOTezs1
+	BvHnWR6EdeDCmpdbDQY7zLA8rXKiVPCJNDiRHYTRBEN/o74R1lrAopYiM8fsEkt5rbJxmbM7A+wbn
+	GXvOUzHTVi7qYIC6MFSk10jcGHMgZvcrckVHfa5s/ADNy/bF1+VPzFX9Oo/xFec/K1MU7omBc1MU7
+	PUZi/0B5wEMLlvkQyjIBwKBcB0wN0eCrt2oIfaPkFjkFv6TNDcQfJJ/JcHPu+nHy+J0K+hN4vTKqO
+	5Qh/Z89m4zbtEkg0HpTL7qJCwsMF6P9v1QRthQQQIMLjBFbg29Vp1kwzZXXvALc0WCfLfgX+VV2G7
+	8Vfr56cg==;
+Received: from localhost ([::1]:41526 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jWlJL-003A79-8l; Thu, 07 May 2020 18:31:55 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54592) 
+	id 1jWlND-003AJG-1S; Thu, 07 May 2020 18:35:55 +0000
+Received: from mail-pf1-x442.google.com ([2607:f8b0:4864:20::442]:45253) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jWlJE-003A72-NE
- for samba-technical@lists.samba.org; Thu, 07 May 2020 18:31:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=e0R7K/g7eJ+kAT/Fnl6k+iKXqG131gLUmCqsUSJUgiI=; b=KAdgoZddsifmzvVYzpuT71UvV9
- V5dVNTxE9i9D12UcLANIlz1DtZ13o/3OriReDF9b7lSRIs+dkQY916XcCyPLfyAhj1+aW+iwwJKd5
- GYsjTzkKV+imEeHluBNv/kz/d83vCq5+QwD2fKAx0hvv6Se0pfo7jYK1NELU/OrtVjmcPUyZH86Wa
- vFUl2HWXOVj1IUJvDgn8RcY85qvdz1cdSV/+DNdYwC+Mf2+rLcj301nDUYI4HPB3/YmX+1JyCaFmL
- S2n9UM/FYde6F2JvGpl50DIFJYE6Lj3eQ9KqcxWUlUuyvuzhcoBZxYcImtoSgPuZkdutebUtb9euo
- 0k4Zm0MTBZ4IoFFppVaOg4XKDcV4hV1N5jr/w1WiKuuINoEGjq1Wd6t52qG+MVZq385jHSAjMBoob
- IaGdTikUpwrRjd14VOpT0JekWWq87/n+w3BRKNU4ZZSxFx3YkeFFGLd/uQ7uJAT8yHdYhhesQWmRV
- YPgylw1MFoMiuo6ws7Oit6mM;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jWlJC-0003Ww-Mn; Thu, 07 May 2020 18:31:47 +0000
-Date: Thu, 7 May 2020 11:31:40 -0700
-To: Jens Axboe <axboe@kernel.dk>
+ (Exim) id 1jWlN5-003AJ8-8K
+ for samba-technical@lists.samba.org; Thu, 07 May 2020 18:35:50 +0000
+Received: by mail-pf1-x442.google.com with SMTP id w65so3398882pfc.12
+ for <samba-technical@lists.samba.org>; Thu, 07 May 2020 11:35:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kernel-dk.20150623.gappssmtp.com; s=20150623;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=1KPghES8o/m1guSIPS4zYl9dIDeyxiIt7bR2Kaju31k=;
+ b=oNBmExnyJLuQaRuJo0le/Xge5cDrrVkjZgilY6iqUT8Q2qcp3tiCWDVQLuf9ny67Pj
+ C+UOziHRkt41hXL0SiS/yWG6M9NeY+IaHs8wQrhRWg6FQMgwO16Kj50rGa/6w4EdxjoE
+ 7GL0Pwc0MiQkUg2FJldB3thmwv6SHIzZEMyVeVR7D/OiO+9mmtObFz8YhEmAocbDxp0c
+ yL9A4XweEg8UweHlX9JK61ZyYDzLAwBZlKo+EPTWjDy6saIxT7A4XNWDMXCHoM1KuMde
+ Rphiix0WEKVfK2jygHtJFXVNcS0Ns2+DAPGkGGcB0ZbU3849zzSIFYR/mjKg2GDlukA6
+ Dltw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=1KPghES8o/m1guSIPS4zYl9dIDeyxiIt7bR2Kaju31k=;
+ b=qw8yCs/gsJBsLZ7NoE0tbR11B33q7VZaA+IuvSYQDZ1PGkFgs5bvvwqyLcspb0Xszx
+ IznzLqMvtaDF0Eoqn4ZAjnOkZaMkB76sH6JXaYmud8Uh1FmEpR9pYzwYlFNeAhCzhkVp
+ YPvHdxN0BedgmrQFwQFkZ6RyhaBGCGNjopBKIa0uQ5OGDs4LC1F9EYQmWNR4jb3BaQy5
+ e/SFU/YtwA6uZcxoPKvuKOkTeIyKut5HVP9z4hhg1Sd1fbVRCoJlqhSinwEl/pCtcYbc
+ wHE4by/8Vrvp3z/ZSvsH0k1sAmdjYOUPvbTcWsT12/fQoBHY1POe512TQXHif7veKlNY
+ RIGg==
+X-Gm-Message-State: AGi0PubtaKl7hLHXeqI0htpgNpxXx9WDrj2Zu5c0u6N3t/x+AjqD4oL+
+ q/Uy+d158Fe7A6EsR1f6vR36ySzvg/w=
+X-Google-Smtp-Source: APiQypKZZOaBKJxo5Ts58/wu7sjAw2WBE4TCd253BXco/mpOHvY9IHZA3GxU1ULOU99giX1qj17cNg==
+X-Received: by 2002:a63:fd03:: with SMTP id d3mr12059978pgh.6.1588876544516;
+ Thu, 07 May 2020 11:35:44 -0700 (PDT)
+Received: from ?IPv6:2620:10d:c085:21e8::1239? ([2620:10d:c090:400::5:ddfe])
+ by smtp.gmail.com with ESMTPSA id p8sm436526pjd.10.2020.05.07.11.35.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 May 2020 11:35:43 -0700 (PDT)
 Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
  5.6.7/5.7rc3
-Message-ID: <20200507183140.GD25085@jeremy-acer>
+To: Jeremy Allison <jra@samba.org>
 References: <102c824b-b2f5-bbb1-02da-d2a78c3ff460@kernel.dk>
  <7ed7267d-a0ae-72ac-2106-2476773f544f@kernel.dk>
  <cd53de09-5f4c-f2f0-41ef-9e0bfca9a37d@kernel.dk>
@@ -47,11 +66,16 @@ References: <102c824b-b2f5-bbb1-02da-d2a78c3ff460@kernel.dk>
  <97508d5f-77a0-e154-3da0-466aad2905e8@kernel.dk>
  <20200507164802.GB25085@jeremy-acer>
  <01778c43-866f-6974-aa4a-7dc364301764@kernel.dk>
+ <20200507183140.GD25085@jeremy-acer>
+Message-ID: <3130bca5-a2fb-a703-4387-65348fe1bdc8@kernel.dk>
+Date: Thu, 7 May 2020 12:35:42 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <01778c43-866f-6974-aa4a-7dc364301764@kernel.dk>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <20200507183140.GD25085@jeremy-acer>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,67 +89,75 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
+From: Jens Axboe via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jens Axboe <axboe@kernel.dk>
 Cc: Stefan Metzmacher <metze@samba.org>,
  Samba Technical <samba-technical@lists.samba.org>,
- Pavel Begunkov <asml.silence@gmail.com>, jra@samba.org,
- io-uring <io-uring@vger.kernel.org>
+ Pavel Begunkov <asml.silence@gmail.com>, io-uring <io-uring@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, May 07, 2020 at 10:50:40AM -0600, Jens Axboe wrote:
-> On 5/7/20 10:48 AM, Jeremy Allison wrote:
-> > On Thu, May 07, 2020 at 10:43:17AM -0600, Jens Axboe wrote:
-> >>
-> >> Just like for regular system calls, applications must be able to deal
-> >> with short IO.
-> > 
-> > Thanks, that's a helpful definitive reply. Of course, the SMB3
-> > protocol is designed to deal with short IO replies as well, and
-> > the Samba and linux kernel clients are well-enough written that
-> > they do so. MacOS and Windows however..
+On 5/7/20 12:31 PM, Jeremy Allison wrote:
+> On Thu, May 07, 2020 at 10:50:40AM -0600, Jens Axboe wrote:
+>> On 5/7/20 10:48 AM, Jeremy Allison wrote:
+>>> On Thu, May 07, 2020 at 10:43:17AM -0600, Jens Axboe wrote:
+>>>>
+>>>> Just like for regular system calls, applications must be able to deal
+>>>> with short IO.
+>>>
+>>> Thanks, that's a helpful definitive reply. Of course, the SMB3
+>>> protocol is designed to deal with short IO replies as well, and
+>>> the Samba and linux kernel clients are well-enough written that
+>>> they do so. MacOS and Windows however..
+>>
+>> I'm honestly surprised that such broken clients exists! Even being
+>> a somewhat old timer cynic...
+>>
+>>> Unfortunately they're the most popular clients on the planet,
+>>> so we'll probably have to fix Samba to never return short IOs.
+>>
+>> That does sound like the best way forward, short IOs is possible
+>> with regular system calls as well, but will definitely be a lot
+>> more frequent with io_uring depending on the access patterns,
+>> page cache, number of threads, and so on.
 > 
-> I'm honestly surprised that such broken clients exists! Even being
-> a somewhat old timer cynic...
+> OK, I just want to be *REALLY CLEAR* what you're telling me
+> (I've already written the pread/pwrite wrappers for Samba
+> that deal with short IO but want to ensure I understand
+> fully before making any changes to Samba).
 > 
-> > Unfortunately they're the most popular clients on the planet,
-> > so we'll probably have to fix Samba to never return short IOs.
+> You're saying that on a bog-standard ext4 disk file:
 > 
-> That does sound like the best way forward, short IOs is possible
-> with regular system calls as well, but will definitely be a lot
-> more frequent with io_uring depending on the access patterns,
-> page cache, number of threads, and so on.
+> ret = pread(fd, buf, count, offset);
+> 
+> can return *less* than count bytes if there's no IO
+> error and the file size is greater than offset+count
+> and no one else is in the middle of a truncate etc. ?
+> 
+> And:
+> 
+> ret = pwrite(fd, buf, count, offset);
+> 
+> can return less* than count bytes if there's no IO
+> error and there's ample space on disk ?
+> 
+> I have to say I've *never* seen that happen, and
+> Samba is widely enough used that IO corruption from
+> short reads/writes from MacOSX and Windows clients
+> would have been widely reported by now.
+> 
+> Look at how quickly someone spotted disk corruption
+> because of the change in userspace-visible behavior
+> of the io_uring interface. We only shipped that code
+> 03 March 2020 and someone *already* found it.
 
-OK, I just want to be *REALLY CLEAR* what you're telling me
-(I've already written the pread/pwrite wrappers for Samba
-that deal with short IO but want to ensure I understand
-fully before making any changes to Samba).
+I _think_ that will only happen on regular files if you use RWF_NOWAIT
+or similar, for regular blocking it should not happen. So I don't think
+you're at risk there, though I do think that anyone should write
+applications with short IOs in mind or they will run into surprises down
+the line. Should have been more clear!
 
-You're saying that on a bog-standard ext4 disk file:
+-- 
+Jens Axboe
 
-ret = pread(fd, buf, count, offset);
-
-can return *less* than count bytes if there's no IO
-error and the file size is greater than offset+count
-and no one else is in the middle of a truncate etc. ?
-
-And:
-
-ret = pwrite(fd, buf, count, offset);
-
-can return less* than count bytes if there's no IO
-error and there's ample space on disk ?
-
-I have to say I've *never* seen that happen, and
-Samba is widely enough used that IO corruption from
-short reads/writes from MacOSX and Windows clients
-would have been widely reported by now.
-
-Look at how quickly someone spotted disk corruption
-because of the change in userspace-visible behavior
-of the io_uring interface. We only shipped that code
-03 March 2020 and someone *already* found it.
-
-Jeremy.
 
