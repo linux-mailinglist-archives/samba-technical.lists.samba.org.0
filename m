@@ -2,92 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58C051CA0FC
-	for <lists+samba-technical@lfdr.de>; Fri,  8 May 2020 04:33:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1CCB1C9E83
+	for <lists+samba-technical@lfdr.de>; Fri,  8 May 2020 00:34:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=BkW0H2PaQUhp6cE9qNVxUAY+ouOZuzrkCeEv5USr8bA=; b=qBtx9v1tsUUztwfO/CgSfyAKct
-	gLcYiGZWxt4q3QnA0LNlLZkYL+O6igsy0omRgOcSIB9IGcxsSkW9LjGzEeYg+Bymj1gvpt5jtK8wI
-	AIz8PlLFOngbRNfGHDqv4wYUzSqc89RhTS3cgVqKzwuTb8Pt1aj9LawsmiaKABMYmANFao2fBirdT
-	pe1Pdkc1gGlkA7N2XNU153fbcbyUT0VnNLfSJukSnKW+LUZclmcLBK5mPSgjV0Yv4zQPqwDmzED9p
-	QRLf8hbQQbJ0wPAlUW1uJVYbnEE2LA/A63s2iLGF3ktpVCmmcCGzWgRaVshTG8dNqCLj16umqQqem
-	JlHfz3EA==;
-Received: from localhost ([::1]:50710 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=71GrwgpNagtuzLRw6i/O2qr2PKOEgPpC0Ag5zWIB4sY=; b=6In6wi0DlzFYOO0w/tuIJdRYNN
+	qPw0I8cjfvn7u84CucrY3lwFcZB6Ak7oKGOwRAxKxl1Zprj9ANAjmGNjri+Pdrjohj7vfx1iC44SN
+	r3aC7zkcyKyosQh2V4IZD9bqElawG9Ng5HRYTkjcciLD2IM47tTunGtrC/4i5bb8D1LbAl7LIltVf
+	pRfv48mc1opjYrZX/MeLJr2LDmtcDSFqkX6kVtQY9xv7DgAoBKCW6xDNk7ccWV1Ogt0L3AnLYMQ5O
+	4k9uyzePGhaa8EQ78SeaAgJD1kfzQkOSJRkhowjglixtLDW1Kj0h0C/yaQTIE+5G1HWlFQt5yv8Af
+	B32s/J1Q==;
+Received: from localhost ([::1]:49212 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jWsoW-003CBj-42; Fri, 08 May 2020 02:32:36 +0000
-Received: from mail-co1nam11on20618.outbound.protection.outlook.com
- ([2a01:111:f400:7eab::618]:26945
- helo=NAM11-CO1-obe.outbound.protection.outlook.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jWsoP-003CBZ-1P
- for samba-technical@lists.samba.org; Fri, 08 May 2020 02:32:32 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GZqlo4nkflWKsk0bveBKZ9Rj0mFci0yjDbkQRwK6tsgXAI7muHXYff72n8XZ6fAJEXnHS009sXKpec3YeVoXfhRPnvbr7OaKCjlNKXtuzQ00CxGW72JsTkTckkz4O/PrexBADEAsjmABu0tfiCJMrWUB+znFL1hRT1otovIXgtQ/gVqwJluhfs6qaOWhYgGagI9V6dEJj+XrLhh0tzcdhEbM7WiGVV0Jd9F9U08oRCDg3VPO5HygwZkXVPTBqWSEZYCbASHacPyHVSPEramQu4y7agB8Ef1ts0JT8l5IIEXsdpDS9bH8+yTEGAtpjSvobGh4nTqTTUpM2aRt6nED7A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BkW0H2PaQUhp6cE9qNVxUAY+ouOZuzrkCeEv5USr8bA=;
- b=REuPTLpURwuSLaCzr2UNCWq7BKA2zKPBWemi//YTNH1dTK6o8X/vwyN/OBeeH3mH3R13JEsTqKWtoJ4JCHMoARX1jP9UA16ohAoB2q89f53RS4aZ7S73AHUNnaTtofBSQS9oGFDlZqq0CErxm3OtG1tnlMDQ4mvZsfEZou1H41iFZgXNLpuQ0nvfr9ysNjn81igTAkw6Diz5YtLnqZziMNetMF6ILLr0CrMsTcQoYNzgL05BLKLlbq/GZWw/7UvKCDyf3fUHmARzE4CQefNpCSqIG/yVFf8qNvIYItswU2FOH5ZgTWJTfhLFzdxVr5RMqS5o5b4u1+3LMzpVPIAKWg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nasuni.com; dmarc=pass action=none header.from=nasuni.com;
- dkim=pass header.d=nasuni.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nasuni.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BkW0H2PaQUhp6cE9qNVxUAY+ouOZuzrkCeEv5USr8bA=;
- b=tVywIByj/l3ghzQH39WsvYd7wWVHAJS658KY9VKuUO9PHuvHkWPyVOIipwCUaz9z4on/H2NQ4aLVywdTbjtiuLB5+va/qrEzsGueBkbjkc6Zi+WVq9Z6PYlxaAd9PcF1WCb0RvSBJ+cD/lWH94infeSjqJhRzGQ/fbYjcVjwsEca6W2gxA/Ra1OPqci+yPfzS9fQm4KU2EwuPyHGL0duy2tVC1IJuzFst1JjsyY4Jf2BD1BeVVQv5yz7jdiumAY76Vu4eroYOVrOMpGR+HPp3h8wpKs9onpt+pjztAGPIqsOzArh5QoMwf+OywePofOi2ryOeATI8M9VFHuJphH4qg==
-Received: from BN7PR07MB4402.namprd07.prod.outlook.com (2603:10b6:406:b0::10)
- by BN7PR07MB4401.namprd07.prod.outlook.com (2603:10b6:406:b4::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2958.19; Thu, 7 May
- 2020 21:56:41 +0000
-Received: from BN7PR07MB4402.namprd07.prod.outlook.com
- ([fe80::3993:bf44:ef2c:2c3a]) by BN7PR07MB4402.namprd07.prod.outlook.com
- ([fe80::3993:bf44:ef2c:2c3a%7]) with mapi id 15.20.2958.033; Thu, 7 May 2020
- 21:56:41 +0000
-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Subject: RE: [EXTERNAL] Re: Windows 10 client opens a folder as a file and
- asks for SMB2 GetInfo SMB2_FILE_STREAM_INFO
-Thread-Topic: [EXTERNAL] Re: Windows 10 client opens a folder as a file and
- asks for SMB2 GetInfo SMB2_FILE_STREAM_INFO
-Thread-Index: AdYfzMNTD1cVwy/fSQSYgUoo68/8vAAFVqkAAAAiRgAAAFxgwAABr/+AATLI1JAAANZSgAAAHGWA
-Date: Thu, 7 May 2020 21:56:41 +0000
-Message-ID: <BN7PR07MB4402B9B805289F60A20B28BDCFA50@BN7PR07MB4402.namprd07.prod.outlook.com>
-References: <BN7PR07MB44024AA885AAD1881F852A40CFAB0@BN7PR07MB4402.namprd07.prod.outlook.com>
- <20200501175828.GC29166@jeremy-acer> <20200501180218.GD29166@jeremy-acer>
- <BN7PR07MB44024B8600FDF859C55E405FCFAB0@BN7PR07MB4402.namprd07.prod.outlook.com>
- <20200501190057.GF29166@jeremy-acer>
- <BN7PR07MB4402F1447DB39F38F1953B30CFA50@BN7PR07MB4402.namprd07.prod.outlook.com>
- <CAN05THRX3Zg04x2AHhxAFD6zBf1AbFvVSVjLnxHRXfudoCU-PA@mail.gmail.com>
-In-Reply-To: <CAN05THRX3Zg04x2AHhxAFD6zBf1AbFvVSVjLnxHRXfudoCU-PA@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=nasuni.com;
-x-originating-ip: [99.10.94.169]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 91cc15d9-d25b-4759-b0f5-08d7f2d18659
-x-ms-traffictypediagnostic: BN7PR07MB4401:
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: JhVpVZVUgDVLpMl+FknIEpRGnmNykM5bRCJr2uazR0dJ+Oa/gUcn6lpDYjXMnSwh+XKYRiC/ex6qXlqQ8Ev0sFSnoKW0eXSBq1I8nNgCXOsE+Mbarrdb9CO2JHsfB55Qj5vwzW+ooYO6nSTIECmR7TjndIPVmKxeGixDlYJPyBA1lXn/mm3KLZg/W9i23SXXDu0Uwsu48RkSTSJzmWbS2kKrGb2bYW3dPQZmMuYR0jygfOWfaMOL7bIauudQkeSsVj8loveEmQp4vlv+Wpq+VHPiTVYiIqzN6nsoPfWA6gbegdDcO+5P4EP6pLvMb1LOnWLOGUKgIiDwfWkRVG+gii/PmgUE1z/GiivOC2ai3XUo4jM4nycDCT9JMb1Wiurm/vWV0YYfKlCJtT1j1i0Qsf064oTglkz8vE334plRHQobtza3NGOLVvegQxdthAd22tYF9qkKnpUFpWWg6ALK+L2jfjYjO+pIgSPU1fMtFTUb1nFzPRwhNLihkWShwunIj77MbxlmH3ipyu6CJFqRIQ==
-x-ms-exchange-antispam-messagedata: GtBCyJeax7sM/QDPvX8WNWPKBuvIEuHC7uNOnRvgGCGJvHSWNBk2OiuYjKdLJglUPqqcf10we4/f7dmYHH7hLQdW1aBzSO5kUWWrkoTqTEyz8C9Wf6CKbvGwo1zJvKByCVh0hThlbPdItkYTznhoDIiv0WY+ip+iMzREt2MhPlaoGsHSsST+4ai91N+hGrHxbJocUQfQA5RE8pcK9GGf/8BsE/DsG+C56ARvqVph+LFH8nXOaeuMqD0F068hCCCYWJD9vZ0O2tPmIyLUlZF62TvD23aM45I1dKm/gVNYMfuFqngu6gfuWpsNbmw19c14b8mU/BLrokXSb5rOOiuJvP0D9Owi3UBgbD36an6Dx90wDov9gan1oLbh0NkiWYPocsRGIuQndhZ5TKNP5UDKrripPXLLrwK1kcx8yhbtmuuiOPdV/eUs0m0opSj9mGd9Je1eoywbXs+jro2o+KYCLUHR6agKTWvbeQoaznn+NNAPI4QmPwdkLLRAjqg+GfIKYexgmMz46BnOoubijXX8iQmT44jpPhVl/ysIWGAFh9fw6hbctwljR0Cbo3MGwiCtF+3hiVXeEfg2oaeA4+jwuP1YuFsrL4eivUgosclH4ISz6r8SNf5hsK2n9DOzPVI1Ya1SHU2A+tj9a2UemdL/c9A9DOcD+c6PASwchr2zcAqAdBbY6OESfQWY4X194fVov00BMl/9v3JHf5YBJz2r/FkSh0F0EWHSEwFpOnKCdOTwhPYIy0PU/PeMXiMwnYHwZYmRDYOswaNInDEWGYX9izKzcYEOE5voEweVYoyLWoU=
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+	id 1jWp5D-003Bdi-4b; Thu, 07 May 2020 22:33:35 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:50766) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jWp54-003Bda-FS
+ for samba-technical@lists.samba.org; Thu, 07 May 2020 22:33:30 +0000
+Received: from [192.168.1.7] (unknown [114.23.145.136])
+ (Authenticated sender: gary@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 0B7A180CC4
+ for <samba-technical@lists.samba.org>; Fri,  8 May 2020 10:08:40 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1588889320;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=71GrwgpNagtuzLRw6i/O2qr2PKOEgPpC0Ag5zWIB4sY=;
+ b=q892HBxjcTlZwRFgEDiuybG0d86/O8me1sI090uI+z5e3GXg2Gwk4CaCLBHMB+/u5NJkGF
+ uX/lEUHlYOqjczJGqcrleQm+/dTFjFvjWjvK/OgauKMB8Votsah4SdFQTSDKeJ7DtTmzEs
+ wov4ajlkcNG6AIe0Q4EdtMUmVdcadD+LDE9JQdL1IVs3NoUoizNbAIjkaTiyfShmxf2lvJ
+ RJsd/Q8+U9yQQ0PJ3UTtzdwOOlc5tRogDlXOUqxb+cajxwAGzi3dGUP2wq4vW6lBQuDrhU
+ bPgk9cJ5CIr6CadOB5i5UnJfIirI4AOp/jJ4L/8d1Ix2BdbKJXxRae2RamuwaQ==
+Subject: Re: ldb 2.1.2: test_get_size failure on ppc64el
+To: samba-technical@lists.samba.org
+References: <CANYNYEHEeDcD+5GL+wCotQG9O1XA1F_i_XmRwcGWbqj15PKxjw@mail.gmail.com>
+Message-ID: <0a650511-9ab0-4501-ee3b-c2c564b3b51f@catalyst.net.nz>
+Date: Fri, 8 May 2020 10:08:32 +1200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-X-OriginatorOrg: nasuni.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 91cc15d9-d25b-4759-b0f5-08d7f2d18659
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 146173a2-cdda-476f-b6d5-a48c6e6dd0c0
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ySZVk4NbMgrk5iYkS/Wk2elJ4J18/6m5LCtsCixfGI6foO58zVZ1SDLPmjmvRzaaoQD/qmJrJXzPiB3b4blVpZ6t8N6u+BKD95gho9ngi4A=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PR07MB4401
-X-Warn: EHLO/HELO not verified: Remote host 2a01:111:f400:7eab::618
- (mail-co1nam11on20618.outbound.protection.outlook.com) incorrectly presented
- itself as NAM11-CO1-obe.outbound.protection.outlook.com
+In-Reply-To: <CANYNYEHEeDcD+5GL+wCotQG9O1XA1F_i_XmRwcGWbqj15PKxjw@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="7wmQbpTmTTNR9JCpF1ZhWpeZfmg4ZC8up"
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=gary@catalyst.net.nz smtp.mailfrom=gary@catalyst.net.nz
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,116 +61,105 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ashok Ramakrishnan via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ashok Ramakrishnan <aramakrishnan@nasuni.com>
-Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- Jeremy Allison <jra@samba.org>
+From: Gary via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Gary <gary@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-WWVzISBJIGhhdmVuJ3QgZmlndXJlZCBvdXQgdGhlIGV4YWN0IGFsZ29yaXRobSBmb3Igd2hpY2gg
-Y29tcG9uZW50IGl0IGRyb3BzLi4uIEl0IHVzdWFsbHkgaXMgdGhlIGxhc3QgZGlyZWN0b3J5L2Zv
-bGRlciBpbiB0aGUgcGF0aCwgYnV0IEkgaGF2ZSBzZWVuIGluc3RhbmNlcyBvZiBpdCBkcm9wcGlu
-ZyBtb3JlIHRoYW4gb25lIGNvbXBvbmVudC4gU28sIHRob3VnaCBJIGNhbm5vdCBjbGFpbSBpdCBp
-cyByYW5kb20uLi4gSSBoYXZlIG5vdCBiZWVuIGFibGUgdG8gZmlndXJlIG91dCBhIHJlcGVhdGFi
-bGUgcGF0dGVybiBvZiB3aGF0IGdldHMgZHJvcHBlZC4NCg0KQ2xpZW50IGhlcmUgaXMgV2luZG93
-cyAxMCwgZmlsZSBleHBsb3JlciwgcmlnaHQgY2xpY2sgLT4gcHJvcGVydGllcy4NCg0KTm90IHN1
-cmUgaG93IG90aGVyIHVzZXJzIG9mIHRoZSB3aW5kb3dzIGZpbGUgQVBJIGJlaGF2ZS4uLg0KDQot
-QXNob2sNCg0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogcm9ubmllIHNhaGxi
-ZXJnIFttYWlsdG86cm9ubmllc2FobGJlcmdAZ21haWwuY29tXQ0KU2VudDogVGh1cnNkYXksIE1h
-eSA3LCAyMDIwIDU6NDkgUE0NClRvOiBBc2hvayBSYW1ha3Jpc2huYW4gPGFyYW1ha3Jpc2huYW5A
-bmFzdW5pLmNvbT4NCkNjOiBKZXJlbXkgQWxsaXNvbiA8anJhQHNhbWJhLm9yZz47IHNhbWJhLXRl
-Y2huaWNhbEBsaXN0cy5zYW1iYS5vcmcNClN1YmplY3Q6IFJlOiBbRVhURVJOQUxdIFJlOiBXaW5k
-b3dzIDEwIGNsaWVudCBvcGVucyBhIGZvbGRlciBhcyBhIGZpbGUgYW5kIGFza3MgZm9yIFNNQjIg
-R2V0SW5mbyBTTUIyX0ZJTEVfU1RSRUFNX0lORk8NCg0KT24gRnJpLCBNYXkgOCwgMjAyMCBhdCA3
-OjM0IEFNIEFzaG9rIFJhbWFrcmlzaG5hbiB2aWEgc2FtYmEtdGVjaG5pY2FsIDxzYW1iYS10ZWNo
-bmljYWxAbGlzdHMuc2FtYmEub3JnPiB3cm90ZToNCj4NCj4gVGhhbmtzIEplcmVteSwgUm9sYW5k
-IGFuZCBSYWxwaCBmb3IgeW91ciByZXNwb25zZXMuIEp1c3Qgd2FudGVkIHRvIGxvb3AgYmFjayBh
-bmQgdXBkYXRlIHlvdSBhbGwgb24gdGhlIHByb2dyZXNzIHdlIG1hZGUuIEl0IHR1cm5lZCBvdXQg
-dG8gYmUgdGhhdCB0aGUgcGF0aCBsZW5ndGggb2YgdGhlIG5leHQgZmlsZSB0aGUgY2xpZW50IHdh
-cyBnb2luZyB0byBvcGVuIHdhcyA+IDI1NiBjaGFyYWN0ZXJzLCBhbmQgdGhlIGNsaWVudCAod2lu
-ZG93cyAxMCAtPiBmaWxlIGV4cGxvcmVyIC0+IHJpZ2h0IGNsaWNrIG9uIGZvbGRlciAtPiBwcm9w
-ZXJ0aWVzKSBzaWxlbnRseSBkcm9wcyBhIHBhdGggY29tcG9uZW50IHdoZW4gdGhpcyBoYXBwZW5z
-Li4uIEl0IHdhc24ndCBvYnZpb3VzIHRvIG1lIHNpbmNlIHRoZSBjbGllbnQgZGlkIG5vdCB0cnVu
-Y2F0ZSB0aGUgZmlsZSBhdCB0aGUgZW5kLCBpbnN0ZWFkIGRlY2lkZWQgdG8gZHJvcCBhIGNvbXBv
-bmVudCBmcm9tIHRoZSBwYXRoLiBJbiBteSBhdHRlbXB0IHRvIG1vZGVsIHRoZSBjbGllbnQgYmVo
-YXZpb3IsIEkgcmVjcmVhdGVkIHRoZSBkaXJlY3Rvcnkgc3RydWN0dXJlIChieSBleHRyYWN0aW5n
-IHRoZSBwYXRoIGFuZCBmaWxlbmFtZXMgZnJvbSB0aGUgcGNhcCkgYW5kIHdhcyBhYmxlIHRvIHJl
-cHJvZHVjZSBpdCBteXNlbGYuDQo+DQoNCldhaXQuIFdoYXQ/DQpZb3UgYXJlIHNheWluZyB0aGF0
-IGlmIHRoZSBmdWxsIHBhdGggZXhjZWVkcyAyNTYgY2hhcmFjdGVycyB0aGVuIHRoZSBjbGllbnQg
-dHJpZXMgdG8gcmVjb3ZlciBmcm9tIHRoaXMgYnkganVzdCBkaXNjYXJkaW5nIHJhbmRvbSBwYXRo
-IGNvbXBvbmVudHMgdW50aWwgaXQgaXMgPDI1NiBieXRlcyAgYW5kIHRyaWVzIHRoYXQgaW5zdGVh
-ZD8NCg0KPg0KPg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBKZXJlbXkg
-QWxsaXNvbiBbbWFpbHRvOmpyYUBzYW1iYS5vcmddDQo+IFNlbnQ6IEZyaWRheSwgTWF5IDEsIDIw
-MjAgMzowMSBQTQ0KPiBUbzogQXNob2sgUmFtYWtyaXNobmFuIDxhcmFtYWtyaXNobmFuQG5hc3Vu
-aS5jb20+DQo+IENjOiBzYW1iYS10ZWNobmljYWxAbGlzdHMuc2FtYmEub3JnDQo+IFN1YmplY3Q6
-IFJlOiBbRVhURVJOQUxdIFJlOiBXaW5kb3dzIDEwIGNsaWVudCBvcGVucyBhIGZvbGRlciBhcyBh
-IGZpbGUNCj4gYW5kIGFza3MgZm9yIFNNQjIgR2V0SW5mbyBTTUIyX0ZJTEVfU1RSRUFNX0lORk8N
-Cj4NCj4gT24gRnJpLCBNYXkgMDEsIDIwMjAgYXQgMDY6MzA6NDhQTSArMDAwMCwgQXNob2sgUmFt
-YWtyaXNobmFuIHdyb3RlOg0KPiA+IFRoYW5rcyBKZXJlbXkgZm9yIHRoZSB0aXAuIE91ciBjdXN0
-b21lciBpcyBhYmxlIHRvIHJlcHJvZHVjZSB0aGlzIHJlYWRpbHkuIFNvLCBJIGNhbiB0cnkgcG90
-ZW50aWFsIHBhdGNoZXMuIE9uZSBpbnRlcmVzdGluZyBvYnNlcnZhdGlvbiBJIGhhdmUgc2luY2Ug
-eW91IHBvaW50ZWQgb3V0IHRoZSBSZXBhcnNlIFBvaW50IGJpdC4uLiBUaGUgcHJldmlvdXMgZ2V0
-aW5mbyBjb21tYW5kIHdhcyBmaWxlIG5ldHdvcmsgb3BlbiBpbmZvLiBBbmQgd2UgKHNhbWJhKSBy
-ZXNwb25kaW5nIHdpdGggdGhpcyBmb3IgdGhlIGZvbGRlci4uLg0KPiA+DQo+ID4gU01CMl9GSUxF
-X05FVFdPUktfT1BFTl9JTkZPDQo+ID4gICAgIENyZWF0ZWQ6IE5vdiAgNiwgMjAxNSAyMDoyMjoy
-Ni42NTg1ODY5MDAgRWFzdGVybiBTdGFuZGFyZCBUaW1lDQo+ID4gICAgIExhc3QgQWNjZXNzOiBO
-b3YgIDYsIDIwMTUgMjA6MjI6MjYuNjU5Mjk1MTAwIEVhc3Rlcm4gU3RhbmRhcmQgVGltZQ0KPiA+
-ICAgICBMYXN0IFdyaXRlOiBOb3YgIDYsIDIwMTUgMjA6MjI6MzYuNTMwNTg5OTAwIEVhc3Rlcm4g
-U3RhbmRhcmQgVGltZQ0KPiA+ICAgICBDaGFuZ2U6IE5vdiAgNiwgMjAxNSAyMDoyMjozNi41MzA1
-ODk5MDAgRWFzdGVybiBTdGFuZGFyZCBUaW1lDQo+ID4gICAgIEFsbG9jYXRpb24gU2l6ZTogMA0K
-PiA+ICAgICBFbmQgT2YgRmlsZTogMA0KPiA+ICAgICBGaWxlIEF0dHJpYnV0ZXM6IDB4MDAwMDAw
-MTANCj4gPiAgICAgICAgIC4uLi4gLi4uLiAuLi4uIC4uLi4gLi4uLiAuLi4uIC4uLi4gLi4uMCA9
-IFJlYWQgT25seTogTk9UIHJlYWQgb25seQ0KPiA+ICAgICAgICAgLi4uLiAuLi4uIC4uLi4gLi4u
-LiAuLi4uIC4uLi4gLi4uLiAuLjAuID0gSGlkZGVuOiBOT1QgaGlkZGVuDQo+ID4gICAgICAgICAu
-Li4uIC4uLi4gLi4uLiAuLi4uIC4uLi4gLi4uLiAuLi4uIC4wLi4gPSBTeXN0ZW06IE5PVCBhIHN5
-c3RlbSBmaWxlL2Rpcg0KPiA+ICAgICAgICAgLi4uLiAuLi4uIC4uLi4gLi4uLiAuLi4uIC4uLi4g
-Li4uLiAwLi4uID0gVm9sdW1lIElEOiBOT1QgYSB2b2x1bWUgSUQNCj4gPiAgICAgICAgIC4uLi4g
-Li4uLiAuLi4uIC4uLi4gLi4uLiAuLi4uIC4uLjEgLi4uLiA9IERpcmVjdG9yeTogRElSRUNUT1JZ
-DQo+ID4gICAgICAgICAuLi4uIC4uLi4gLi4uLiAuLi4uIC4uLi4gLi4uLiAuLjAuIC4uLi4gPSBB
-cmNoaXZlOiBIYXMgTk9UIGJlZW4gbW9kaWZpZWQgc2luY2UgbGFzdCBhcmNoaXZlDQo+ID4gICAg
-ICAgICAuLi4uIC4uLi4gLi4uLiAuLi4uIC4uLi4gLi4uLiAuMC4uIC4uLi4gPSBEZXZpY2U6IE5P
-VCBhIGRldmljZQ0KPiA+ICAgICAgICAgLi4uLiAuLi4uIC4uLi4gLi4uLiAuLi4uIC4uLi4gMC4u
-LiAuLi4uID0gTm9ybWFsOiBIYXMgc29tZSBhdHRyaWJ1dGUgc2V0DQo+ID4gICAgICAgICAuLi4u
-IC4uLi4gLi4uLiAuLi4uIC4uLi4gLi4uMCAuLi4uIC4uLi4gPSBUZW1wb3Jhcnk6IE5PVCBhIHRl
-bXBvcmFyeSBmaWxlDQo+ID4gICAgICAgICAuLi4uIC4uLi4gLi4uLiAuLi4uIC4uLi4gLi4wLiAu
-Li4uIC4uLi4gPSBTcGFyc2U6IE5PVCBhIHNwYXJzZSBmaWxlDQo+ID4gICAgICAgICAuLi4uIC4u
-Li4gLi4uLiAuLi4uIC4uLi4gLjAuLiAuLi4uIC4uLi4gPSBSZXBhcnNlIFBvaW50OiBEb2VzIE5P
-VCBoYXZlIGFuIGFzc29jaWF0ZWQgcmVwYXJzZSBwb2ludA0KPiA+ICAgICAgICAgLi4uLiAuLi4u
-IC4uLi4gLi4uLiAuLi4uIDAuLi4gLi4uLiAuLi4uID0gQ29tcHJlc3NlZDogVW5jb21wcmVzc2Vk
-DQo+ID4gICAgICAgICAuLi4uIC4uLi4gLi4uLiAuLi4uIC4uLjAgLi4uLiAuLi4uIC4uLi4gPSBP
-ZmZsaW5lOiBPbmxpbmUNCj4gPiAgICAgICAgIC4uLi4gLi4uLiAuLi4uIC4uLi4gLi4wLiAuLi4u
-IC4uLi4gLi4uLiA9IENvbnRlbnQgSW5kZXhlZDogTk9UIGNvbnRlbnQgaW5kZXhlZA0KPiA+ICAg
-ICAgICAgLi4uLiAuLi4uIC4uLi4gLi4uLiAuMC4uIC4uLi4gLi4uLiAuLi4uID0gRW5jcnlwdGVk
-OiBUaGlzIGlzIE5PVCBhbiBlbmNyeXB0ZWQgZmlsZQ0KPiA+ICAgICBSZXNlcnZlZDogMDAwMDAw
-MDANCj4gPg0KPiA+IFdlIHNwZWNpZmljYWxseSBzYWlkIHRoYXQgaXQgSVMgYSBEaXJlY3Rvcnkg
-YW5kIE5PVCBhIHJlcGFyc2UgcG9pbnQuIEJ1dCB0aGUgY2xpZW50IHN0aWxsIGRlY2lkZWQgdG8g
-c2VuZCB1cyBhIDB4MDAyMDAwMjAgaW4gdGhlIHN1YnNlcXVlbnQgb3BlbiBvZiB0aGUgZmlsZS4g
-SSBjYW4gcGxheSB3aXRoIHRoZSByZXNwb25zZSBhbmQgc2VlIGlmIEkgY2FuIGdldCB0aGUgY2xp
-ZW50IHRvIGJlaGF2ZSBkaWZmZXJlbnRseS4uLg0KPg0KPiBZZWFoLCBJIGp1c3QgY2hlY2tlZCB3
-aXRoIHRlc3QgY29kZSBhZ2FpbnN0IFdpbmRvd3MxMCBhbmQgdGhlIHNlcnZlciBqdXN0IGlnbm9y
-ZXMgYSByZXF1ZXN0IHRvIG9wZW4gYSByZXBhcnNlIHBvaW50IGlmIHRoZSBvYmplY3QgaXMganVz
-dCBhIHJlZ3VsYXIgZmlsZS9kaXJlY3RvcnkuDQo+DQo+IFNvIHRoaXMgbWF5IGJlIGEgcmVkIGhl
-cnJpbmcuIFdvdWxkIGJlIGludGVyZXN0aW5nIHRvIHNlZSBhIHRyYWNlIG9mIHRoaXMgYXBwbGlj
-YXRpb24gYXQgdGhlIHNhbWUgcG9pbnQgYWdhaW5zdCBhIFdpbmRvd3Mgc2VydmVyLg0KPiBUaGlz
-IGUtbWFpbCBtZXNzYWdlIGFuZCBhbGwgYXR0YWNobWVudHMgdHJhbnNtaXR0ZWQgd2l0aCBpdCBt
-YXkgY29udGFpbiBwcml2aWxlZ2VkIGFuZC9vciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24gaW50
-ZW5kZWQgc29sZWx5IGZvciB0aGUgdXNlIG9mIHRoZSBhZGRyZXNzZWUocykuIElmIHRoZSByZWFk
-ZXIgb2YgdGhpcyBtZXNzYWdlIGlzIG5vdCB0aGUgaW50ZW5kZWQgcmVjaXBpZW50LCB5b3UgYXJl
-IGhlcmVieSBub3RpZmllZCB0aGF0IGFueSByZWFkaW5nLCBkaXNzZW1pbmF0aW9uLCBkaXN0cmli
-dXRpb24sIGNvcHlpbmcsIGZvcndhcmRpbmcgb3Igb3RoZXIgdXNlIG9mIHRoaXMgbWVzc2FnZSBv
-ciBpdHMgYXR0YWNobWVudHMgaXMgc3RyaWN0bHkgcHJvaGliaXRlZC4gSWYgeW91IGhhdmUgcmVj
-ZWl2ZWQgdGhpcyBtZXNzYWdlIGluIGVycm9yLCBwbGVhc2Ugbm90aWZ5IHRoZSBzZW5kZXIgaW1t
-ZWRpYXRlbHkgYW5kIGRlbGV0ZSB0aGlzIG1lc3NhZ2UsIGFsbCBhdHRhY2htZW50cyBhbmQgYWxs
-IGNvcGllcyBhbmQgYmFja3VwcyB0aGVyZW9mLg0KPg0KVGhpcyBlLW1haWwgbWVzc2FnZSBhbmQg
-YWxsIGF0dGFjaG1lbnRzIHRyYW5zbWl0dGVkIHdpdGggaXQgbWF5IGNvbnRhaW4gcHJpdmlsZWdl
-ZCBhbmQvb3IgY29uZmlkZW50aWFsIGluZm9ybWF0aW9uIGludGVuZGVkIHNvbGVseSBmb3IgdGhl
-IHVzZSBvZiB0aGUgYWRkcmVzc2VlKHMpLiBJZiB0aGUgcmVhZGVyIG9mIHRoaXMgbWVzc2FnZSBp
-cyBub3QgdGhlIGludGVuZGVkIHJlY2lwaWVudCwgeW91IGFyZSBoZXJlYnkgbm90aWZpZWQgdGhh
-dCBhbnkgcmVhZGluZywgZGlzc2VtaW5hdGlvbiwgZGlzdHJpYnV0aW9uLCBjb3B5aW5nLCBmb3J3
-YXJkaW5nIG9yIG90aGVyIHVzZSBvZiB0aGlzIG1lc3NhZ2Ugb3IgaXRzIGF0dGFjaG1lbnRzIGlz
-IHN0cmljdGx5IHByb2hpYml0ZWQuIElmIHlvdSBoYXZlIHJlY2VpdmVkIHRoaXMgbWVzc2FnZSBp
-biBlcnJvciwgcGxlYXNlIG5vdGlmeSB0aGUgc2VuZGVyIGltbWVkaWF0ZWx5IGFuZCBkZWxldGUg
-dGhpcyBtZXNzYWdlLCBhbGwgYXR0YWNobWVudHMgYW5kIGFsbCBjb3BpZXMgYW5kIGJhY2t1cHMg
-dGhlcmVvZi4NCg==
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--7wmQbpTmTTNR9JCpF1ZhWpeZfmg4ZC8up
+Content-Type: multipart/mixed; boundary="4hAoznMjRPAFklQyQFfhn1HitO6nhTa6N"
+
+--4hAoznMjRPAFklQyQFfhn1HitO6nhTa6N
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-NZ
+Content-Transfer-Encoding: quoted-printable
+
+
+
+On 8/05/20 6:16 am, Andreas Hasenack via samba-technical wrote:
+> Hi,
+>=20
+> I'm building ldb 2.1.2 on ubuntu groovy 20.10, along with all the
+> other dependencies for samba 4.12.2, and I'm getting this test error
+> on ppc64el only:
+>=20
+> [ RUN      ] test_get_size
+> [  ERROR   ] --- 13369 is not within the range 2500-5000
+> [   LINE   ] --- ../../tests/ldb_kv_ops_test.c:1721: error: Failure!
+> [  FAILED  ] test_get_size
+> [=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D] 13 test(s) run.
+> [  PASSED  ] 12 test(s).
+> [  FAILED  ] 1 test(s), listed below:
+> [  FAILED  ] test_get_size
+>=20
+> That assert use to be
+>=20
+> assert_true( size > 2500);
+>=20
+> but was changed to
+>=20
+> assert_in_range(size, 2500, 5000);
+>=20
+> in commit
+>=20
+> commit e464e40c977cd6592240763c7dbb9c45ff16470f
+> Author: Andreas Schneider <asn@samba.org>
+> Date:   Thu Dec 5 17:14:31 2019 +0100
+>=20
+>     ldb:tests: Use assert_in_range() in test_get_size()
+>=20
+>     Signed-off-by: Andreas Schneider <asn@samba.org>
+>     Reviewed-by: Gary Lockyer <gary@samba.org>
+>=20
+>=20
+> Is that 5000 ceiling limit just a guess, or is this failure indicating
+> a real bug somewhere? The value 13369 I got on ppc64el seems a bit
+It's just a guess. for tdb we estimate the number of records with
+#define RECORD_SIZE 500
+
+static size_t ltdb_get_size(struct ldb_kv_private *ldb_kv)
+
+{
+
+    size_t map_size =3D tdb_map_size(ldb_kv->tdb);
+
+    size_t size =3D map_size / RECORD_SIZE;
+
+
+    return size;
+
+}
+
+This estimate gets used to size the in memory TDB used when re-indexing
+the database.
+
+So changing the test to assert_in_range(size, 2500, 20000);
+Should be ok.
+
+> excessive. On amd64, size is 2572, so it falls within that range.
+>=20
+
+
+
+--4hAoznMjRPAFklQyQFfhn1HitO6nhTa6N--
+
+--7wmQbpTmTTNR9JCpF1ZhWpeZfmg4ZC8up
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEDO84T/PRptSsMEixei/9ZKIyR1MFAl60huYACgkQei/9ZKIy
+R1OVJAgAkOPdtWEoFINm3CwttSGGvLIvRZXvbh19BW48ALfFKXhgbNOHuWsZXmS9
+EXERVOdHw5Y6HIyoJNGi8bqOqgJGtJms3ty82acwzGDiHWNm/qFsnWjyenpuW3nV
+TYw020Lfv6xV8aqXGVC422HZ6wuLqOnkOKibX2X9WX+qzPEL8FrHOvDoOUZICD6U
+03NsQSvnuz+/f5G4+VTEdiVFfKPbcRpAfODmjLwOoJaWQQdLNRJwuyUEpOtHVJK0
+RKcdFP0onDxanGY7kyme90jn+midO23BfZTuqWMXBNu0WIUEzacb2jTEpVlnA+Vg
+okAqP5L7mlJYChii+4qTebEWnymC0Q==
+=TLtg
+-----END PGP SIGNATURE-----
+
+--7wmQbpTmTTNR9JCpF1ZhWpeZfmg4ZC8up--
 
