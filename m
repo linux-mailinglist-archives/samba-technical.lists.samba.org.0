@@ -2,45 +2,78 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 846FC1C83C7
-	for <lists+samba-technical@lfdr.de>; Thu,  7 May 2020 09:47:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83DB71C96BE
+	for <lists+samba-technical@lfdr.de>; Thu,  7 May 2020 18:44:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=uSkK5jsEqo+iUiPlIQ+3YmUelXTX1Op8113Tia2ncNs=; b=rLkoFZoVOnDI2DLfQvkm8yxKd3
-	yMrUJn2EDPAgaA9VlcJ46bOB/aCeKnSs7dYUoBIgT00O3pe7AgnpRLSqIHj7cGdWDFoplX/6OcOHG
-	/d3JdGvkbIYuaKoLYHRKeuuthDcai+xaOILJOr04gllvj++LQ74qNSjkQUGpitLQ6pmq0n4KqRR4Y
-	O2RQjEwQJHXmAcr/QiEFfYHekYdOg6YuwqePcXSmlQJVHwpTFiHGcGF5kRorp0usTmR81sNNfBrcR
-	cqNnFwnQPte3HT6+/YTD3+CEc2Kua6PRcHQhw8O7o0/g6f0qP+/+jPbm1kuMauTP5lRfzdu2RzC58
-	+NaQfeMw==;
-Received: from localhost ([::1]:21970 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=DVBxnzqeHALknuBlJLzW73kY6O63mg542ix70lW50Dg=; b=f+SkHtlRFPHpC998psCava/IHA
+	QD/x8cBOK2kYeYTF4wlHToViPzA6bK2unZnMCwe2QvYJIlDGpek5MO09loYmPL4UNEf0SvBc3TG73
+	B2qxunD+VrJBs+T+5WcwEUwig6Hc7arWJjnJKdugCXAuecEqAU//b3Z+r/3RAh2Y+BG849XAFiEsn
+	Y+p7//37JyD/KuhvZ3fd46pUjDMsgZIxPv5mV2S5vs5GAe4Kc6NJtOi82ZGPSRxUqLiM694F9UJpE
+	IkuoeMGbOhsl3mBzsqfPG124rw0GoEQNBDhA5wCxKKVrNMsukLhQYBm5mK3LaVkj1+n235nV/mz64
+	BmMrt87g==;
+Received: from localhost ([::1]:35362 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jWbFT-0036sa-Ln; Thu, 07 May 2020 07:47:15 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35520) 
+	id 1jWjcP-0039N6-Og; Thu, 07 May 2020 16:43:29 +0000
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b]:33004) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jWbFL-0036sT-N7
- for samba-technical@lists.samba.org; Thu, 07 May 2020 07:47:10 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=uSkK5jsEqo+iUiPlIQ+3YmUelXTX1Op8113Tia2ncNs=; b=E+u5ATErHzq0RiKfi+njh0VDt3
- qI37TDb45629Chg7HyMJQDY8bNsgZcbsn3seudlWrIV48e/g+1UnjiLx8xIHRm8I+cxfuoFG1nypD
- mCjpWoDLt8ahKuoaJ7DDDjdnLlPM5iTUAioy209p/AWu7LGn1Nd/+AL0okMezM7NM9JwyY+USy2oD
- wqQgz1hBahIZjeOSm5j/Tt15meghho8HNop/ybZX4cXG/xTf2gsg8oyYwlaeoxLFIv0Y328zu4Rz5
- mcCRMhhqFmiEuOuIZ3FeIPLsvHVsVSNa0X5bitDKaqWXYoR5MmJAs0PlFZ0KtNTgSm9Y6qeN0OAqC
- Bjvj2t7cPO6JG7oZovJCx7jpIUS+9DEMaHz7G33Wq0FQpjT+eGH/yeiKZ9hnggM4HmVhupVIwj2mo
- J1wYZ2FPbxVphSzb1og+qAymbcJibQWD2VpcJTj1TD25y6nDd2NfaAAGGwntBE2Hz2NRc7vnF4XjL
- 78LoO7LQHavCiG9l82U2FoMz;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jWbFK-0006ot-BC; Thu, 07 May 2020 07:47:07 +0000
-Message-ID: <e9c9898b53bee412de56ba5429e972b150d25913.camel@samba.org>
-Subject: Re: GSoC 2020 Community Bonding Outline
-To: hezekiah maina <hezekiahmaina3@gmail.com>, samba-technical@lists.samba.org
-Date: Thu, 07 May 2020 19:47:02 +1200
-In-Reply-To: <CAH72RCX2B3z1Mv+R32yYA0GnpQY-WX7ustGtS3Npui1Dh_L+FQ@mail.gmail.com>
-References: <CAH72RCX2B3z1Mv+R32yYA0GnpQY-WX7ustGtS3Npui1Dh_L+FQ@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-Mime-Version: 1.0
+ (Exim) id 1jWjcI-0039Mz-LA
+ for samba-technical@lists.samba.org; Thu, 07 May 2020 16:43:25 +0000
+Received: by mail-pl1-x62b.google.com with SMTP id t7so2284251plr.0
+ for <samba-technical@lists.samba.org>; Thu, 07 May 2020 09:43:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kernel-dk.20150623.gappssmtp.com; s=20150623;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=DVBxnzqeHALknuBlJLzW73kY6O63mg542ix70lW50Dg=;
+ b=ARWm8Dl+xklY/OeFroqWohi49Ivi/hUwl8tznqfzxHMZgkiaDpV+b1KJQkAUxAAoVS
+ MFcqFUbhpK50VYfTTCWN6fOZisgpgviRoL+fi6MNthdEsAHf4c+EkncHBNMvPTz9S7WB
+ /Mgp6za5caYb9ST1unAGWECktUJ6FlUAK1QIXa7CoGCd16RilPIg8T1ipC+mDPn1U0w2
+ 7RKa6B4PhuX9GasUu5DapCZE/vZKK/OvRjRqPL9+s677Fyxijk5sv5634GqYYJT8Tjy/
+ aLZvYvt5ZfwnxIPXvHSauELIFfmJZbMK0ziq1X8/wu6xtK4AZwJtSEvaOOwd5M1IBOGq
+ 5coA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=DVBxnzqeHALknuBlJLzW73kY6O63mg542ix70lW50Dg=;
+ b=n9ehVLgKQ5sbk4/ZHGRKpow2E/SKr08zN0fpNvFITTnUWjuA4FtIfFvNMTcHK6N1Ny
+ BZmjsYNloAQRsHAh9LcZ+Y4mK6FLDFQ3Bb++HXYyA4UsWtHYVMXcjj7gfOD5qDOGUJTm
+ UFa7i7Z9SPGfm3VkyonZYbdilmvpL0M7UH1tqzN+Ci0xZiJFwAG7dZ3xPqmfwfu7owG4
+ 5FSvzNhcCIcCKQSIOQisTFbdGGdbNlYuKW0ssj7DhHGGIdscJIbaUKpsLV6WYIXBlowm
+ ZMBaMIIL2tliWvYvUY+eWhWMOFsC84pramqRy0lCfufc0xf63iQGrY02O8cyANjlGDDz
+ HO+g==
+X-Gm-Message-State: AGi0Publfu1FKHSNbq3iGT3aR7Y63emPKyq1I7VtqtfFBxilU3jzL6Dx
+ 0tdU2tfz34X/iP9wX0bO6AbQiA==
+X-Google-Smtp-Source: APiQypKOQXe/xM2EurYhBKW3ZUhSbmsfsJwnXmi8d7fVTA9752PzscXBYdYH4dTWh6iimwCjSK44tQ==
+X-Received: by 2002:a17:902:b598:: with SMTP id
+ a24mr13968670pls.63.1588869799793; 
+ Thu, 07 May 2020 09:43:19 -0700 (PDT)
+Received: from ?IPv6:2620:10d:c085:21e8::1239? ([2620:10d:c090:400::5:ddfe])
+ by smtp.gmail.com with ESMTPSA id h13sm5024540pfk.86.2020.05.07.09.43.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 07 May 2020 09:43:18 -0700 (PDT)
+Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
+ 5.6.7/5.7rc3
+To: Pavel Begunkov <asml.silence@gmail.com>,
+ Stefan Metzmacher <metze@samba.org>
+References: <0009f6b7-9139-35c7-c0b1-b29df2a67f70@samba.org>
+ <102c824b-b2f5-bbb1-02da-d2a78c3ff460@kernel.dk>
+ <7ed7267d-a0ae-72ac-2106-2476773f544f@kernel.dk>
+ <cd53de09-5f4c-f2f0-41ef-9e0bfca9a37d@kernel.dk>
+ <a8152d38-8ad4-ee4c-0e69-400b503358f3@samba.org>
+ <6fb9286a-db89-9d97-9ae3-d3cc08ef9039@gmail.com>
+ <9c99b692-7812-96d7-5e88-67912cef6547@samba.org>
+ <117f19ce-e2ef-9c99-93a4-31f9fff9e132@gmail.com>
+Message-ID: <97508d5f-77a0-e154-3da0-466aad2905e8@kernel.dk>
+Date: Thu, 7 May 2020 10:43:17 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
+MIME-Version: 1.0
+In-Reply-To: <117f19ce-e2ef-9c99-93a4-31f9fff9e132@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -55,59 +88,64 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Jens Axboe via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jens Axboe <axboe@kernel.dk>
+Cc: Samba Technical <samba-technical@lists.samba.org>,
+ io-uring <io-uring@vger.kernel.org>, Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2020-05-05 at 13:30 +0300, hezekiah maina via samba-technical
-wrote:
-> Hello everyone, my name is Hezekiah. I have been selected to work
-> with
-> Samba during this year's GSoC. I'm excited to work with everyone in
-> the
-> community during the entire GSoC period and become an active
-> committer
-> after it's over. During the community bonding phase I'm hoping to
-> engage
-> with the community members, getting to know the history of Samba, how
-> different people contribute, which projects the organisation works on
-> and
-> possibly contribute few patches before the coding phase begins. Any
-> resources from the community aimed at onboarding new members would be
-> greatly appreciated. Looking forward to working with you all.
+On 5/6/20 9:42 AM, Pavel Begunkov wrote:
+> On 06/05/2020 18:20, Stefan Metzmacher wrote:
+>> Am 06.05.20 um 14:55 schrieb Pavel Begunkov:
+>>> On 05/05/2020 23:19, Stefan Metzmacher wrote:
+>>> AFAIK, it can. io_uring first tries to submit a request with IOCB_NOWAIT,
+>>> in short for performance reasons. And it have been doing so from the beginning
+>>> or so. The same is true for writes.
+>>
+>> See the other mails in the thread. The test I wrote shows the
+> 
+> Cool you resolved the issue!
+> 
+>> implicit IOCB_NOWAIT was not exposed to the caller in  (at least in 5.3
+>> and 5.4).
+>>
+> 
+> # git show remotes/origin/for-5.3/io_uring:fs/io_uring grep "kiocb->ki_flags |=
+> IOCB_NOWAIT" -A 5 -B 5
+> 
+> if (force_nonblock)
+>         kiocb->ki_flags |= IOCB_NOWAIT;
+> 
+> And it have been there since 5.2 or even earlier. I don't know, your results
+> could be because of different policy in block layer, something unexpected in
+> io_uring, etc., but it's how it was intended to be.
+> 
+> 
+>> I think the typical user don't want it to be exposed!
+>> I'm not sure for blocking reads on a socket, but for files
+>> below EOF it's really not what's expected.
+> 
+> Hard to say, but even read(2) without any NONBLOCK doesn't guarantee that.
+> Hopefully, BPF will help us with that in the future.
 
-G'Day!
+Replying here, as I missed the storm yesterday... The reason why it's
+different is that later kernels no longer attempt to prevent the short
+reads. They happen when you get overlapping buffered IO. Then one sqe
+will find that X of the Y range is already in cache, and return that.
+We don't retry the latter blocking. We previously did, but there was
+a few issues with it:
 
-I'm sorry for now responding earlier.  I do trust you will feel very
-welcome in the Samba community, but in particular do feel free to ask
-me anything at all, as Jeremy has said, we are incredibly fortunate to
-have team members still with us from the earliest days of Samba.  I
-myself started in 2001 - so quite late by some standards, but have seen
-most of and with good friends built much of the Samba AD DC.
+- You're redoing the whole IO, which means more copying
 
-This means we really can answer most things (perhaps after a quick dive
-into the git history).
+- It's not safe to retry, it'll depend on the file type. For socket,
+  pipe, etc we obviously cannot. This is the real reason it got disabled,
+  as it was broken there.
 
-In terms of onboarding, please ensure you have an account on GitLab.com
-and let me know the username so I can add you to a shared repo we use
-for testing there.
-
-https://wiki.samba.org/index.php/Samba_CI_on_gitlab
-
-(I'm sorry, the page talks about this as if it were 'just' a CI
-platform, but actually we do the full code submission cycle there). 
-
-Welcome!
-
-Andrew Bartlett
+Just like for regular system calls, applications must be able to deal
+with short IO.
 
 -- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
-
-
+Jens Axboe
 
 
