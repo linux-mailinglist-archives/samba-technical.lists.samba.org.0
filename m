@@ -2,57 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B775F1CBAA4
-	for <lists+samba-technical@lfdr.de>; Sat,  9 May 2020 00:22:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2032A1CBAB2
+	for <lists+samba-technical@lfdr.de>; Sat,  9 May 2020 00:26:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=GZpyhKWxXL7BGCCB55qiO8Fy28rPbx0JmMMavsFngg0=; b=5g1ehu0fw1JwvMz2uVQkTWXywf
-	wbcUP+MrjRmn42t/BE/2a9TU088OSx/83lFzcSBYUUu+nyzEKe4Fwq5OC8M5FRwOhzDd5/TaM2MG8
-	INmV/VgEwD4LchCONyE/IiRJYCv6XQUUzqudCxnhn8FBqqkpN+3gb7ROiZDeoCMuiY7u3gd5bu3Qe
-	TURymKAB3YuekBjpG/JHmHGEFBfTKlLh9IJHirGoz1x29xV7//BCKz5LNliia35+SpqxcVdjHVvrP
-	Rf5xl7IgTd02kFCqmEJN8ZGl8dKYAaC7UPG2sctJdcUM/3onpc7cVSrcEf04hyD/iKSLm6ocvY+Zy
-	MFaT4IUQ==;
-Received: from localhost ([::1]:41930 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=LwDV7aMXTJyCxSwGKIkMg/5Sbu7F5Op6/er54e7ZuVk=; b=KJ4KC9xyRW9p5Gkkp4Iy6QKJ05
+	XoyZWlp0WVk5pvGplS0q1BTFKwotQeC9Roils4U2IngdbeYjPYLsBs3lacI9Wq0illgYBWBVT2DFv
+	2wPVJ+Odtbz1oMF8tHMiZUE9OqDMWbypqDPW85BOm42x/APpLdWZxTvue8KPSYji3SiwPSxPFGaHa
+	sSgch4fYex8Wq3p+QogPrkKTXu/Poa1+CY6aRKSQES4yqKbA9hWLxIfuXHv52Luhv0OuUAfE3m7BA
+	ongR/SAwhPqzB355Xnd5AGC8EZLowirbElY92vCsZ8/7ESjPFsLgpI0HlIfIw7PvNQVj7rURWIhIw
+	8pU8zlUQ==;
+Received: from localhost ([::1]:42700 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jXBNQ-003JX7-BY; Fri, 08 May 2020 22:21:52 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49888) 
+	id 1jXBRP-003Jdb-EI; Fri, 08 May 2020 22:25:59 +0000
+Received: from mail-ed1-f65.google.com ([209.85.208.65]:37352) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jXBNF-003JX0-UW
- for samba-technical@lists.samba.org; Fri, 08 May 2020 22:21:45 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=GZpyhKWxXL7BGCCB55qiO8Fy28rPbx0JmMMavsFngg0=; b=KTDqR9HJ7gcog7tXygxPsSwV2r
- acw/1Mk7+w9OIzx3Y9AwytU0OyBx9UR4TmrM1tpdm9XXgu+K3zGflWo6kKd/Oirn0dMOZLogxGYKf
- w9fAHEmj9Ey+dqZn+90M3fVNNOHFQGy/Hjjp4bqnNk/1TmsrjJw8VYkbC+JKZXf+4NmioewitSjIG
- bvEcxSsJoxuyaGY44ooPOUWekpuBiSvDlCUQ3Z2qudPCY3eJ/WVU9gBG8DN2ouce3DBf2KjP+ziVI
- XqRib5tqrsN8T+vLiMAD5qPX1Wc8VuQdMrBRSVPVBCrgrsUUxwY4yDh73BZQF0803bJkdm1Cz+23n
- Mc3cNd41SX2xg2FFHBAT1IwgGgev9O0rQPjzLjUO8ynmfjuIQDcnloNZobfvgKHMhzLuHRX1uiTP6
- fKHHYYnctJxX9Ys52oKjoLOcbYggi/1Su2P7x7wBeCKTUo1uY6j92UDDgg4euiO2g75mcVmBBI5uI
- jWtYkgcBUGU3A6zV6t8cG5QF;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jXBND-0001KI-Ji; Fri, 08 May 2020 22:21:39 +0000
-To: Jeremy Allison <jra@samba.org>
-References: <20200508062725.GB28687@jeremy-acer>
- <3c150c7ef40086ccb392e2911e954386f8c2bd0a.camel@cryptolab.net>
- <6e4d9002-6887-5c01-e992-1d893b3e6d63@samba.org>
- <ebdfdcd6d3ceab5f43172b3323589a5bcfcd957f.camel@cryptolab.net>
- <20200508185339.GD26399@jeremy-acer>
- <8e7d4319-a919-a364-8337-29308926f509@samba.org>
- <20200508204709.GG26399@jeremy-acer> <20200508205140.GH26399@jeremy-acer>
- <4e66af50-d900-3ed1-7d27-8b399cf63143@samba.org>
- <20200508215055.GA2912@jeremy-acer> <20200508220306.GC2912@jeremy-acer>
-Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
- 5.6.7/5.7rc3
-Message-ID: <46b84d03-2e86-c6f8-3e17-70dae620f7cd@samba.org>
-Date: Sat, 9 May 2020 00:21:32 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ (Exim) id 1jXBRK-003JdT-T2
+ for samba-technical@lists.samba.org; Fri, 08 May 2020 22:25:57 +0000
+Received: by mail-ed1-f65.google.com with SMTP id w2so2598285edx.4
+ for <samba-technical@lists.samba.org>; Fri, 08 May 2020 15:25:53 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=LwDV7aMXTJyCxSwGKIkMg/5Sbu7F5Op6/er54e7ZuVk=;
+ b=dOmvno3Eq8EOFc29gvRFaBBqS57KUnjFxolQovcbfkziiU4uANTp4/Zt+vFIMYkVHU
+ 1a3usXtve+qDNbrnVjKu8/EYa+z005EZlVfxW3lqOqCcRr4fx4TgpDg0EjSzuq1jfkwn
+ BMK3LR5Z64rX87A9+tA036SUouDmB09q2InpllFnMewkFjrcjiOq/umOgmHFf0daM7ej
+ Qv6rAo9PQVWPz6//i5BEztK4FYcDlP7We+VpqBLOY+VWpmreCT2lnvKz8t1dOgOApQHA
+ nn43sabUiii7OTKwDkj4HqeuhdkGU0H7y09Muk6L7AHKIN1CV5I5Io9x5s3e2EvQLqA8
+ FPNQ==
+X-Gm-Message-State: AGi0Pubm3DfHN2sjKYyA1oC5mjTSl1ZfT2mXxGrzq/qu4gSo4RHHY+Uf
+ CxL7HOtlmO+i2UP9fgn2d3WlzwXEeSpoIDScXc4=
+X-Google-Smtp-Source: APiQypKSBsHo/QaQ0vgcwCmNX5Rqbi5y8BFp3+tN0/FhiZwS1aR1LBh670FOCmWASmQ5e5L1KV2mTfkoOpxNRUx01As=
+X-Received: by 2002:a05:6402:7d6:: with SMTP id
+ u22mr4146370edy.149.1588976753368; 
+ Fri, 08 May 2020 15:25:53 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200508220306.GC2912@jeremy-acer>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="w7WYoGcsFEN5gBMgnlT8uGlYNWqwdiZ08"
+References: <CALSyjX5G7ps8Pafurh5L+6U_JYBA9uTRxJaEhwKL5jTvU=2ZOQ@mail.gmail.com>
+ <20200508222441.4f74c615@samba.org>
+ <29c6778ebf0a22d063042589526b98922d06301d.camel@samba.org>
+In-Reply-To: <29c6778ebf0a22d063042589526b98922d06301d.camel@samba.org>
+Date: Fri, 8 May 2020 18:25:41 -0400
+Message-ID: <CALSyjX7RkiukckU5P1xL4FBX6tWpZFB9E1t0CrO+t+0EwNaNWA@mail.gmail.com>
+Subject: Re: [PATCH] snapper: add configure option to control build (default:
+ auto)
+To: Andrew Bartlett <abartlet@samba.org>
+Content-Type: multipart/mixed; boundary="000000000000f0ff6505a52a7a2b"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,143 +62,117 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Anoop C S <anoopcs@cryptolab.net>,
- Samba Technical <samba-technical@lists.samba.org>
+From: Matt Taylor via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Matt Taylor <liverbugg@rinux.org>
+Cc: Matt Taylor via samba-technical <samba-technical@lists.samba.org>,
+ David Disseldorp <ddiss@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---w7WYoGcsFEN5gBMgnlT8uGlYNWqwdiZ08
-Content-Type: multipart/mixed; boundary="rtIe3c1tLCX3lggEhSz9vl4PfUstuQhQF";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Jeremy Allison <jra@samba.org>
-Cc: Anoop C S <anoopcs@cryptolab.net>,
- Samba Technical <samba-technical@lists.samba.org>
-Message-ID: <46b84d03-2e86-c6f8-3e17-70dae620f7cd@samba.org>
-Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
- 5.6.7/5.7rc3
-References: <20200508062725.GB28687@jeremy-acer>
- <3c150c7ef40086ccb392e2911e954386f8c2bd0a.camel@cryptolab.net>
- <6e4d9002-6887-5c01-e992-1d893b3e6d63@samba.org>
- <ebdfdcd6d3ceab5f43172b3323589a5bcfcd957f.camel@cryptolab.net>
- <20200508185339.GD26399@jeremy-acer>
- <8e7d4319-a919-a364-8337-29308926f509@samba.org>
- <20200508204709.GG26399@jeremy-acer> <20200508205140.GH26399@jeremy-acer>
- <4e66af50-d900-3ed1-7d27-8b399cf63143@samba.org>
- <20200508215055.GA2912@jeremy-acer> <20200508220306.GC2912@jeremy-acer>
-In-Reply-To: <20200508220306.GC2912@jeremy-acer>
+--000000000000f0ff6505a52a7a2b
+Content-Type: text/plain; charset="UTF-8"
 
---rtIe3c1tLCX3lggEhSz9vl4PfUstuQhQF
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+As long as the option to disable is there that works for my scenario.
+I figured since it was automatically including snapper if dbus was
+found previously I would keep that automatic behavior.
 
-Am 09.05.20 um 00:03 schrieb Jeremy Allison:
-> On Fri, May 08, 2020 at 02:50:55PM -0700, Jeremy Allison wrote:
->> On Fri, May 08, 2020 at 11:40:30PM +0200, Stefan Metzmacher wrote:
->>> Am 08.05.20 um 22:51 schrieb Jeremy Allison:
->>>> On Fri, May 08, 2020 at 01:47:09PM -0700, Jeremy Allison via samba-t=
-echnical wrote:
->>>>> On Fri, May 08, 2020 at 09:35:31PM +0200, Stefan Metzmacher via sam=
-ba-technical wrote:
->>>>>>
->>>>>> Thanks very much Jeremy! I didn't noticed that.
->>>>>>
->>>>>> I guess the attached patch should be able to fix the recursion.
->>>>>
->>>>> Oh Metze that's *really* ugly :-). I thought about
->>>>> doing that in my code and decided it was in too bad
->>>>> taste to live :-).
->>>>>
->>>>> Is there a cleaner way than putting "busy" and "retry"
->>>>> variables in the config struct ?
->>>>
->>>> And a "Goto again" as well :-(. Bleegh.
->>>
->>> This version would actually work and looks a bit similar to
->>> your version.
->>>
->>> Can you life with that version?
->>
->> Yes I can live with that :-). It at least moves the horror
->> to the wrapper function where you can at least concentrate
->> all your attention as to why it's doing what it's doing :-).
->>
->> RB+ from me if you add a comment header above the function
->> as well as in the commit so it explains what it's doing.
->>
->> Feel free to crib my ascii art to explain in the header
->> comment too :-).
->=20
-> There's just one final comment I want to make before
-> my version goes quietly into that good night... :-).
->=20
-> I will grant that your version leaves a cleaner set of code
-> paths throughout the io_uring pread/pwrite code and deals with
-> the short read/write issues in a more "natural" way
-> without my extra logic branches dealing with "short read"
-> return etc.
->=20
-> But the fact that you missed the recursion might make
-> you consider if indeed it's a simpler fix than having
-> all the extra logic made explicit. Sometimes explicit
-> is good to draw people's attention to complexity.
->=20
-> Having said that, I'll go with whatever you decide
-> on this one :-). I already gave me RB+ for the fix,
-> so I'll support whichever one you pick. But it would
-> be good to get the fix pushed and back-ported into
-> 4.12 asap to cover the data corruption.
+Updated patch attached.  Snapper is enabled by default and configure
+will error out if dbus is not found and --disable-snapper was not
+passed.
 
-I think we need to check the write case.
+I'm contributing as an individual with no corporate
+involvement/restrictions, so does that mean no Signed-Off-by tag is
+needed?  I have another trivial spelling patch to send after this.
 
-Do you know what happens when the kernel gets a negative offset?
+Thanks,
 
-Is there a way to do an O_APPEND?
-Doing an fstat to get EOF is racy.
-As well as split one write into multiple calls.
+-Matt
 
-But maybe it's ok as a start.
+On Fri, May 8, 2020 at 4:36 PM Andrew Bartlett <abartlet@samba.org> wrote:
+>
+> On Fri, 2020-05-08 at 22:24 +0200, David Disseldorp via samba-technical
+> wrote:
+> > On Fri, 8 May 2020 14:05:16 -0400, Matt Taylor via samba-technical
+> > wrote:
+> >
+> > > Recently the samba packages on Gentoo Linux had a hard dependency
+> > > on
+> > > dbus added.  This is because the vfs_snapper module is enabled
+> > > automagically on the existence of dbus headers with no option to
+> > > disable it.  See: https://bugs.gentoo.org/721320 for the Gentoo bug
+> > > where it was suggested this be reported upstream.
+> > >
+> > > This patch adds a configure option to control the build of snapper
+> > > similar to other vfs modules.
+> > >
+> > > Signed-off-by: Matt Taylor <liverbugg@rinux.org>
+> >
+> > Thanks for the patch Matt!
+> > The change looks reasonable, although I think I'd prefer to see the
+> > default be True, so that existing packagers aren't affected.
+> >
+> > Also, if this work is contributed on behalf of your employer, you'll
+> > need to sign the DCO as described at:
+> > https://www.samba.org/samba/devel/copyright-policy.html
+>
+> I agree.  I do not like ./configure parameters that default to 'auto'
+> (and the same goes for features), because of the inverse of this, that
+> the absense of a header on a build machine would mean that a feature is
+> unintentionally lost.
+>
+> The recent practice has been to have a configure option to allow a
+> distribution to disable a feature (as is desired here) but to otherwise
+> give an error if the header/library is not available and point to the
+> flag.
+>
+> Andrew Bartlett
+>
+> --
+> Andrew Bartlett                       https://samba.org/~abartlet/
+> Authentication Developer, Samba Team  https://samba.org
+> Samba Developer, Catalyst IT
+> https://catalyst.net.nz/services/samba
+>
+>
+>
 
-Once we're done I'll ask Karolin to create a new 4.12 release.
+--000000000000f0ff6505a52a7a2b
+Content-Type: text/plain; charset="US-ASCII"; name="samba-snapper_option.patch.txt"
+Content-Disposition: attachment; filename="samba-snapper_option.patch.txt"
+Content-Transfer-Encoding: base64
+Content-ID: <f_k9yrmk9i0>
+X-Attachment-Id: f_k9yrmk9i0
 
-> Thanks for working on this with me. I do learn things
-> from the elegance of your code (usually :-).
-
-Thanks for being so patient!
-Your work was really useful in order to make it easier for
-me to find my solution.
-
-metze
-
-
-
---rtIe3c1tLCX3lggEhSz9vl4PfUstuQhQF--
-
---w7WYoGcsFEN5gBMgnlT8uGlYNWqwdiZ08
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl6122wACgkQDbX1YShp
-vVb0whAAnzO/0t9r8mlhgfNl67A3TeC1iNAqzNin6qbI7M+36Qha5kIzXVbfx4Gn
-gsBOWqLEgFbNaoWlFjIOJ9i7/hURaG8bY85niRtXFPZrNBXPsbM3kytJWoFQphyo
-S59C9FVBRNRO8S1sFzLaAB4wRMPQ0NFpiqSGdPxhba+cusG97S6yKw76owG2sExX
-SKeXBE/cZtkOcjl2qiB41AGHY0kppw+4ELEqUEXyeu9NOj9Rjy9xFHrVruK6V2kj
-QOFIRkCVKGBR5jFLZ8K+pct/lNzBl4hXh+7K88+4F4lFiVInaltdQI76oAiqB/d/
-atZqZqkNDH3ArjbBvxvJttPSva+RUuGziY3EQNcQ586VlWwgnzJ1JJW/7zF42s/H
-jDSZ7ohOgiX6Ixr9mG0snrli7WIQMYBtYzOAw74wjjmWkEOusm9xa54y6ZXT3z4E
-WhRGfuktaRml9QjXBdo9s2ILu6jFUAwHlJKtZESuADupz0ySWReC8hTX9W7JdNgD
-nAo2rTIf4sbPclevLKCtOSFikwRkQbgU/nATFuS5hAvKyLBivJi0kWScc0YeXM9S
-n39DN8ZUCd8kjJLBbTvsUqh/17ZwXJzAG8tAknOH/j1Rm7c05JjHC6JYLa2Pwph8
-39wBpvyBRNb7rddEXYc4clvszXU50bp8Q9/zcSvl2udPdpQOKjI=
-=UecW
------END PGP SIGNATURE-----
-
---w7WYoGcsFEN5gBMgnlT8uGlYNWqwdiZ08--
+ZGlmZiAtdXIgc2FtYmEtbWFzdGVyL3NvdXJjZTMvd3NjcmlwdCBzYW1iYS1tYXN0ZXItcGF0Y2gv
+c291cmNlMy93c2NyaXB0Ci0tLSBzYW1iYS1tYXN0ZXIvc291cmNlMy93c2NyaXB0CTIwMjAtMDUt
+MDggMDc6MTY6MTguMDAwMDAwMDAwIC0wNDAwCisrKyBzYW1iYS1tYXN0ZXItcGF0Y2gvc291cmNl
+My93c2NyaXB0CTIwMjAtMDUtMDggMTc6MjI6NDguMDAwMDAwMDAwIC0wNDAwCkBAIC03NSw2ICs3
+NSw4IEBACiAgICAgb3B0LnNhbWJhX2FkZF9vbm9mZl9vcHRpb24oJ2dsdXN0ZXJmcycsIHdpdGhf
+bmFtZT0iZW5hYmxlIiwgd2l0aG91dF9uYW1lPSJkaXNhYmxlIiwgZGVmYXVsdD1UcnVlKQogICAg
+IG9wdC5zYW1iYV9hZGRfb25vZmZfb3B0aW9uKCdjZXBoZnMnLCB3aXRoX25hbWU9ImVuYWJsZSIs
+IHdpdGhvdXRfbmFtZT0iZGlzYWJsZSIsIGRlZmF1bHQ9VHJ1ZSkKIAorICAgIG9wdC5zYW1iYV9h
+ZGRfb25vZmZfb3B0aW9uKCdzbmFwcGVyJywgd2l0aF9uYW1lPSJlbmFibGUiLCB3aXRob3V0X25h
+bWU9ImRpc2FibGUiLCBkZWZhdWx0PVRydWUpCisgICAgCiAgICAgb3B0LmFkZF9vcHRpb24oJy0t
+ZW5hYmxlLXZ4ZnMnLAogICAgICAgICAgICAgICAgICAgaGVscD0oImVuYWJsZSBzdXBwb3J0IGZv
+ciBWeEZTIChkZWZhdWx0PW5vKSIpLAogICAgICAgICAgICAgICAgICAgYWN0aW9uPSJzdG9yZV90
+cnVlIiwgZGVzdD0nZW5hYmxlX3Z4ZnMnLCBkZWZhdWx0PUZhbHNlKQpAQCAtMTc1MiwxMSArMTc1
+NCwxNiBAQAogICAgIGlmIE9wdGlvbnMub3B0aW9ucy5lbmFibGVfdnhmczoKICAgICAgICAgY29u
+Zi5ERUZJTkUoJ0hBVkVfVlhGUycsICcxJykKIAotICAgIGlmIGNvbmYuQ0hFQ0tfQ0ZHKHBhY2th
+Z2U9J2RidXMtMScsIGFyZ3M9Jy0tY2ZsYWdzIC0tbGlicycsCisgICAgaWYgT3B0aW9ucy5vcHRp
+b25zLndpdGhfc25hcHBlcjoKKyAgICAgICAgaWYgY29uZi5DSEVDS19DRkcocGFja2FnZT0nZGJ1
+cy0xJywgYXJncz0nLS1jZmxhZ3MgLS1saWJzJywKICAgICAgICAgICAgICAgICAgICAgICBtc2c9
+J0NoZWNraW5nIGZvciBkYnVzJywgdXNlbGliX3N0b3JlPSJEQlVTLTEiKToKLSAgICAgICAgaWYg
+KGNvbmYuQ0hFQ0tfSEVBREVSUygnZGJ1cy9kYnVzLmgnLCBsaWI9J2RidXMtMScpCisgICAgICAg
+ICAgICBpZiAoY29uZi5DSEVDS19IRUFERVJTKCdkYnVzL2RidXMuaCcsIGxpYj0nZGJ1cy0xJykK
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYW5kIGNvbmYuQ0hFQ0tfTElC
+KCdkYnVzLTEnLCBzaGxpYj1UcnVlKSk6Ci0gICAgICAgICAgICBjb25mLkRFRklORSgnSEFWRV9E
+QlVTJywgJzEnKQorICAgICAgICAgICAgICAgIGNvbmYuREVGSU5FKCdIQVZFX0RCVVMnLCAnMScp
+CisgICAgICAgIGVsc2U6CisgICAgICAgICAgICBjb25mLmZhdGFsKCJ2ZnNfc25hcHBlciBpcyBl
+bmFibGVkIGJ1dCBwcmVyZXF1aXNpdGUgREJVUyBsaWJyYXJpZXMgIgorICAgICAgICAgICAgICAg
+ICAgICAgICAib3IgaGVhZGVycyBub3QgZm91bmQuIFVzZSAtLWRpc2FibGUtc25hcHBlciB0byBk
+aXNhYmxlICIKKyAgICAgICAgICAgICAgICAgICAgICAgInZmc19zbmFwcGVyIHN1cHBvcnQuIik7
+CiAKICAgICBpZiBjb25mLkNIRUNLX0NGRyhwYWNrYWdlPSdsaWJ1cmluZycsIGFyZ3M9Jy0tY2Zs
+YWdzIC0tbGlicycsCiAgICAgICAgICAgICAgICAgICAgICAgbXNnPSdDaGVja2luZyBmb3IgbGli
+dXJpbmcgcGFja2FnZScsIHVzZWxpYl9zdG9yZT0iVVJJTkciKToK
+--000000000000f0ff6505a52a7a2b--
 
