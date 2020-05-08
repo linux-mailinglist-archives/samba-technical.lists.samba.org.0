@@ -2,47 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E61FA1CB6AB
-	for <lists+samba-technical@lfdr.de>; Fri,  8 May 2020 20:06:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 927731CB7B1
+	for <lists+samba-technical@lfdr.de>; Fri,  8 May 2020 20:54:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=aOsBv47I7uvrVcAZM3oQCa2p2MeZfrcFzJ+Ek1X0FLw=; b=e7oMPZgZ9Lm6mPhiWcuQhRSSdH
-	gL9ajWo/Nk/DZ11F7Ffp9DWkyHGB4ILuVWdGS2ukev9A2OcXOwWgaohEDflxUzSfCu6Bs3oEf4pYj
-	+79DVXqdBOk0g3EBu8Oyza2mUArobH0MY7KVGBgt9aIGW6TOJIM003lGSRwamBkQIC/XEdMcSk6ee
-	KIGh+esOIXXbv4mu/o31IdI8s+o286K1vKp5Tqqd/UEAmxN22kYpUhBNkhKKfGO1iRpMn2x5aQZbX
-	xLglXB5P8f1/lRHiK3w3dNy4NZ6FAG/r2fblh2mI1tvPHOuCD1JmRbDG3+q2dwUuO2pZtFnesoraz
-	x6J2eNNQ==;
-Received: from localhost ([::1]:20664 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=+hbCRJw9dHHPOvyQd8v/JAAHgnoehLtEprrs2HpIeiM=; b=PnIcS8tC1syFaLkcYQ8UR2fhvX
+	eNFFuwbxpSOh0K4TYzKwzMlkGtUr7lSd0ToKawyvHsfv7dmzZmet85UO6Lh0sAWeBe2s4X3R6jIQf
+	PIlNeCgh5DHlCN2tsVsQMfMgdvUrl+fq3KggBQDdBmD6rVNSfwQX2hyDDi3qSLpNWKeztER6KPRNh
+	lccKw/752/ZbWkd38HplsOA7V2QDNtdV6g3S4eIMdohI5IdF6BAE4g1OZFeYSf7628VaZn+GR2PAK
+	ggiG/oTBGS5xBsH7W7Be53iXl7crrID3AP0lGVeVu4lQsSTWC/+CHd1kUB0eUWSnCBamwgLRp+sFD
+	3zaMoxew==;
+Received: from localhost ([::1]:21604 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jX7NO-003GCc-Uq; Fri, 08 May 2020 18:05:35 +0000
-Received: from mail-ed1-f54.google.com ([209.85.208.54]:35483) 
+	id 1jX88B-003GQg-9M; Fri, 08 May 2020 18:53:55 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30644) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jX7NJ-003GCU-0T
- for samba-technical@lists.samba.org; Fri, 08 May 2020 18:05:31 +0000
-Received: by mail-ed1-f54.google.com with SMTP id a8so1979834edv.2
- for <samba-technical@lists.samba.org>; Fri, 08 May 2020 11:05:27 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=aOsBv47I7uvrVcAZM3oQCa2p2MeZfrcFzJ+Ek1X0FLw=;
- b=qWlu3nyCnu+F3xJpaOqoqvqA8aWOk6vN/dDgBmoD/PqnohDvrwP2C/y8gj9FaiVkHA
- flCzwMEV6RPzUFrUo/RygSMwqh8JOPYQN7M+rN1/MDlJunSAjPEB8ikV7Xw1w6x4W78q
- L12QoNri9beHTtcSllI0e+HzkbLUDRTR6nm32r3XTX+wjt2DZi3BmGcD5Ydv3cPKg82+
- bbYTXz7YO8Lv5WVf66Szebn+Y4wr7Kg4r2NCRc1pWQ/VeIAxI047N/atemmonirykN5h
- osKgOyN8RiBuldWAyl6eBM4ciJ+wlsdXUduBZ3wsbxmydDfpDFtf/saPFhaU4YaO1s6/
- SCIA==
-X-Gm-Message-State: AGi0Pub7/tWj+9wiMJ54S/cbZUVEkWgfG1th7y/HewRHvTCp3ggP6ltk
- qyn8u6KShvZ8R34eeVqKSJsbNTD2DZyn8+Ip2n4v2zyY
-X-Google-Smtp-Source: APiQypLq+EksqYbGQYr6GtPPkuQsuVgO+y2vzo6P+Gq/56tIvBcRyP95rOO4/3V1w2vDgj8vHiQ5NVorCI6pPOex4Wo=
-X-Received: by 2002:a05:6402:1f6:: with SMTP id
- i22mr3381032edy.271.1588961127331; 
- Fri, 08 May 2020 11:05:27 -0700 (PDT)
+ (Exim) id 1jX884-003GQY-ND
+ for samba-technical@lists.samba.org; Fri, 08 May 2020 18:53:51 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=+hbCRJw9dHHPOvyQd8v/JAAHgnoehLtEprrs2HpIeiM=; b=jaXwqe4I1Lqz4Iuz7kPwQ+Lhjx
+ sq3oHWjnCUUZeHrHJZ0eO+TMv/46VbeLkrkykRJjbygjOFM0xTX5JaVFgIiCy/iiX9VGGLvxvcKLv
+ 7z3RrfAzBqV8XSnIM8rzj2zSQk8LXGOivUbOB85duQbtZZEbIgcx8macBoMvnKo+8KykaCjYj2Zg0
+ XoWOcQimWHvgevg9jF9kBONyCPLUbCeqJfFddl+cDODqa52p99iITGUJW50sQidh1hwkbQ5O1Wa3P
+ FjOQbXqKv+6A7PivmIp9PEVA5t094MoBusN1UqjhYm/KoD4usvhb7U+jOhGPUoVwCuXfagp0j6F8Y
+ 1sidly1iXivfpwnk9AWvew+iJ0d6M4JyGyNc1fLWhoNi5VnSnAxS25WzUr/USoagX6MUEyyCeKZJ5
+ M1AMkulxpy+4boCQ8L9rhGIW6Lex+WD18c2DR9nXHtWrKCNjudbQU8ALa7QpQ1RG9jibK3K6PbP4+
+ zbwkt0rPsFeuKj+ei0DPOY/M;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jX883-0007p7-2p; Fri, 08 May 2020 18:53:47 +0000
+Date: Fri, 8 May 2020 11:53:39 -0700
+To: Anoop C S <anoopcs@cryptolab.net>
+Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
+ 5.6.7/5.7rc3
+Message-ID: <20200508185339.GD26399@jeremy-acer>
+References: <f782fc6d-0f89-dca7-3bb0-58ef8f662392@kernel.dk>
+ <20200505174832.GC7920@jeremy-acer>
+ <3a3e311c7a4bc4d4df371b95ca0c66a792fab986.camel@cryptolab.net>
+ <20200507213002.GG14929@jeremy-acer>
+ <20200508040711.GC3369@jeremy-acer>
+ <e8f863ca6f5a983bc2a83eeefdd0ded99b0f7e2c.camel@cryptolab.net>
+ <20200508062725.GB28687@jeremy-acer>
+ <3c150c7ef40086ccb392e2911e954386f8c2bd0a.camel@cryptolab.net>
+ <6e4d9002-6887-5c01-e992-1d893b3e6d63@samba.org>
+ <ebdfdcd6d3ceab5f43172b3323589a5bcfcd957f.camel@cryptolab.net>
 MIME-Version: 1.0
-Date: Fri, 8 May 2020 14:05:16 -0400
-Message-ID: <CALSyjX5G7ps8Pafurh5L+6U_JYBA9uTRxJaEhwKL5jTvU=2ZOQ@mail.gmail.com>
-Subject: [PATCH] snapper: add configure option to control build (default: auto)
-To: samba-technical@lists.samba.org
-Content-Type: multipart/mixed; boundary="0000000000008ec07705a526d767"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <ebdfdcd6d3ceab5f43172b3323589a5bcfcd957f.camel@cryptolab.net>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,58 +66,68 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Matt Taylor via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Matt Taylor <liverbugg@rinux.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Stefan Metzmacher <metze@samba.org>,
+ Samba Technical <samba-technical@lists.samba.org>, jra@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---0000000000008ec07705a526d767
-Content-Type: text/plain; charset="UTF-8"
+On Fri, May 08, 2020 at 09:35:40PM +0530, Anoop C S wrote:
+>=20
+> Jeremy's patch(for handling short reads) still works with updated
+> kernel(v5.6.10).
+>=20
+> > Can you please also test the patch I posted here:
+> > https://bugzilla.samba.org/show_bug.cgi?id=3D14361#c21
+>=20
+> Unfortunately copy failed to start with this patch set. I don't know if
+> its because of updated kernel(v5.6.8 -> v5.6.10) but smbd terminated
+> with SIGABRT right at the beginning of copy. I have attached backtrace
+> and log file. Please have a look.
 
-Recently the samba packages on Gentoo Linux had a hard dependency on
-dbus added.  This is because the vfs_snapper module is enabled
-automagically on the existence of dbus headers with no option to
-disable it.  See: https://bugs.gentoo.org/721320 for the Gentoo bug
-where it was suggested this be reported upstream.
+I see the problem. It's the reason I initially introduced
+an immediate event, and then refactored my code to call
+_vfs_io_uring_queue_run() in a loop if it returned 'need_retry'.
 
-This patch adds a configure option to control the build of snapper
-similar to other vfs modules.
+Metze's current code is recursive, and it's running out
+of stack.
 
-Signed-off-by: Matt Taylor <liverbugg@rinux.org>
+It uses:
 
---0000000000008ec07705a526d767
-Content-Type: text/plain; charset="US-ASCII"; name="samba-snapper_option.patch.txt"
-Content-Disposition: attachment; filename="samba-snapper_option.patch.txt"
-Content-Transfer-Encoding: base64
-Content-ID: <f_k9yieyii0>
-X-Attachment-Id: f_k9yieyii0
+vfs_io_uring_pread_send()
+	->vfs_io_uring_pread_submit()  <-----------------------------------
+		->vfs_io_uring_request_submit()                           |
+			->vfs_io_uring_queue_run()                        |
+                                                                          |
+But inside vfs_io_uring_queue_run() once a read                           |
+completes it calls:                                                       |
+                                                                          |
+vfs_io_uring_queue_run()                                                  |
+	->vfs_io_uring_finish_req()                                       |
+		->cur->completion_fn()                                    |
+                                                                          |
+cur->completion_fn() for pread is set to vfs_io_uring_pread_completion()  |
+                                                                          |
+vfs_io_uring_pread_completion()                                           |
+	->vfs_io_uring_pread_submit() -------------------------------------
 
-ZGlmZiAtcnUgc2FtYmEtbWFzdGVyL3NvdXJjZTMvd3NjcmlwdCBzYW1iYS1tYXN0ZXItcGF0Y2gv
-c291cmNlMy93c2NyaXB0Ci0tLSBzYW1iYS1tYXN0ZXIvc291cmNlMy93c2NyaXB0CTIwMjAtMDUt
-MDggMDc6MTY6MTguMDAwMDAwMDAwIC0wNDAwCisrKyBzYW1iYS1tYXN0ZXItcGF0Y2gvc291cmNl
-My93c2NyaXB0CTIwMjAtMDUtMDggMTM6MjE6NTguMDAwMDAwMDAwIC0wNDAwCkBAIC03NSw2ICs3
-NSw4IEBACiAgICAgb3B0LnNhbWJhX2FkZF9vbm9mZl9vcHRpb24oJ2dsdXN0ZXJmcycsIHdpdGhf
-bmFtZT0iZW5hYmxlIiwgd2l0aG91dF9uYW1lPSJkaXNhYmxlIiwgZGVmYXVsdD1UcnVlKQogICAg
-IG9wdC5zYW1iYV9hZGRfb25vZmZfb3B0aW9uKCdjZXBoZnMnLCB3aXRoX25hbWU9ImVuYWJsZSIs
-IHdpdGhvdXRfbmFtZT0iZGlzYWJsZSIsIGRlZmF1bHQ9VHJ1ZSkKIAorICAgIG9wdC5zYW1iYV9h
-ZGRfb25vZmZfb3B0aW9uKCdzbmFwcGVyJywgd2l0aF9uYW1lPSJlbmFibGUiLCB3aXRob3V0X25h
-bWU9ImRpc2FibGUiLCBkZWZhdWx0PU5vbmUpCisgICAgCiAgICAgb3B0LmFkZF9vcHRpb24oJy0t
-ZW5hYmxlLXZ4ZnMnLAogICAgICAgICAgICAgICAgICAgaGVscD0oImVuYWJsZSBzdXBwb3J0IGZv
-ciBWeEZTIChkZWZhdWx0PW5vKSIpLAogICAgICAgICAgICAgICAgICAgYWN0aW9uPSJzdG9yZV90
-cnVlIiwgZGVzdD0nZW5hYmxlX3Z4ZnMnLCBkZWZhdWx0PUZhbHNlKQpAQCAtMTc1MiwxMSArMTc1
-NCwxMiBAQAogICAgIGlmIE9wdGlvbnMub3B0aW9ucy5lbmFibGVfdnhmczoKICAgICAgICAgY29u
-Zi5ERUZJTkUoJ0hBVkVfVlhGUycsICcxJykKIAotICAgIGlmIGNvbmYuQ0hFQ0tfQ0ZHKHBhY2th
-Z2U9J2RidXMtMScsIGFyZ3M9Jy0tY2ZsYWdzIC0tbGlicycsCisgICAgaWYgT3B0aW9ucy5vcHRp
-b25zLndpdGhfc25hcHBlcjoKKyAgICAgICAgaWYgY29uZi5DSEVDS19DRkcocGFja2FnZT0nZGJ1
-cy0xJywgYXJncz0nLS1jZmxhZ3MgLS1saWJzJywKICAgICAgICAgICAgICAgICAgICAgICBtc2c9
-J0NoZWNraW5nIGZvciBkYnVzJywgdXNlbGliX3N0b3JlPSJEQlVTLTEiKToKLSAgICAgICAgaWYg
-KGNvbmYuQ0hFQ0tfSEVBREVSUygnZGJ1cy9kYnVzLmgnLCBsaWI9J2RidXMtMScpCisgICAgICAg
-ICAgICBpZiAoY29uZi5DSEVDS19IRUFERVJTKCdkYnVzL2RidXMuaCcsIGxpYj0nZGJ1cy0xJykK
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYW5kIGNvbmYuQ0hFQ0tfTElC
-KCdkYnVzLTEnLCBzaGxpYj1UcnVlKSk6Ci0gICAgICAgICAgICBjb25mLkRFRklORSgnSEFWRV9E
-QlVTJywgJzEnKQorICAgICAgICAgICAgICAgIGNvbmYuREVGSU5FKCdIQVZFX0RCVVMnLCAnMScp
-CiAKICAgICBpZiBjb25mLkNIRUNLX0NGRyhwYWNrYWdlPSdsaWJ1cmluZycsIGFyZ3M9Jy0tY2Zs
-YWdzIC0tbGlicycsCiAgICAgICAgICAgICAgICAgICAgICAgbXNnPSdDaGVja2luZyBmb3IgbGli
-dXJpbmcgcGFja2FnZScsIHVzZWxpYl9zdG9yZT0iVVJJTkciKToK
---0000000000008ec07705a526d767--
+(the ascii art will probably only work in fixed-font text mailers
+but you should get the idea).
+
+I don't think this pattern will work. You have to exit
+=66rom vfs_io_uring_queue_run() all the way out so that
+you've called io_uring_cq_advance() to move the completion
+queue forward before you can submit another request to
+finish the short IO.
+
+That's what my initial patch did with an immedate event,
+until I got the idea of wrapping vfs_io_uring_queue_run()
+inside a retry wrapper function.
+
+I'll take a look to see if I can fix this so the short
+read re-submission happens *outside* of vfs_io_uring_queue_run(),
+as I think that's the only way to make this work.
+
+Jeremy.
 
