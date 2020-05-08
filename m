@@ -2,61 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B21FE1CB51F
-	for <lists+samba-technical@lfdr.de>; Fri,  8 May 2020 18:45:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E61FA1CB6AB
+	for <lists+samba-technical@lfdr.de>; Fri,  8 May 2020 20:06:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=BRw2gsgSGxYe8RsmPIpOWHeFKemslhdaf2w5eUOSGK8=; b=h+iu9wbFbwjBgYgoUIvduwPt66
-	IISZpeBATv50ItlE3ZVkbP/jjRkA52NnRMeq99rxAYxEhAcBoSqorzLOkVaIFaJHlQJ4L0MxQoQt9
-	zwDy1zdeK/QngfAejgr/hC4iQ07VBCkmTY0ZCo+AOK+bq1n/A2IxDTXF1/bfgnwT7dXC21I9nEtTh
-	GAbraDIcrG0uZDRMfE33fztFMACWaf3J5A5A+8MSVsvIsUb1K5CyJ6q0ERK5HludNe0K30UoY1t5u
-	rBMQ0UTOmN68ye3ZrtvUGaLe4ZTkzCIwfJfMcbEpRISloF4H1bM/mlnHsZQZELcyj5posxtaDlaap
-	ZupLzxBQ==;
-Received: from localhost ([::1]:64980 helo=hr1.samba.org) 
+	bh=aOsBv47I7uvrVcAZM3oQCa2p2MeZfrcFzJ+Ek1X0FLw=; b=e7oMPZgZ9Lm6mPhiWcuQhRSSdH
+	gL9ajWo/Nk/DZ11F7Ffp9DWkyHGB4ILuVWdGS2ukev9A2OcXOwWgaohEDflxUzSfCu6Bs3oEf4pYj
+	+79DVXqdBOk0g3EBu8Oyza2mUArobH0MY7KVGBgt9aIGW6TOJIM003lGSRwamBkQIC/XEdMcSk6ee
+	KIGh+esOIXXbv4mu/o31IdI8s+o286K1vKp5Tqqd/UEAmxN22kYpUhBNkhKKfGO1iRpMn2x5aQZbX
+	xLglXB5P8f1/lRHiK3w3dNy4NZ6FAG/r2fblh2mI1tvPHOuCD1JmRbDG3+q2dwUuO2pZtFnesoraz
+	x6J2eNNQ==;
+Received: from localhost ([::1]:20664 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jX66y-003FeT-Tw; Fri, 08 May 2020 16:44:33 +0000
-Received: from youngberry.canonical.com ([91.189.89.112]:35655) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jX66r-003FeM-LF
- for samba-technical@lists.samba.org; Fri, 08 May 2020 16:44:29 +0000
-Received: from mail-oi1-f199.google.com ([209.85.167.199])
- by youngberry.canonical.com with esmtps
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
- (envelope-from <andreas.hasenack@canonical.com>) id 1jX66n-0006k7-52
- for samba-technical@lists.samba.org; Fri, 08 May 2020 16:44:21 +0000
-Received: by mail-oi1-f199.google.com with SMTP id j84so6647881oib.21
- for <samba-technical@lists.samba.org>; Fri, 08 May 2020 09:44:21 -0700 (PDT)
+	id 1jX7NO-003GCc-Uq; Fri, 08 May 2020 18:05:35 +0000
+Received: from mail-ed1-f54.google.com ([209.85.208.54]:35483) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jX7NJ-003GCU-0T
+ for samba-technical@lists.samba.org; Fri, 08 May 2020 18:05:31 +0000
+Received: by mail-ed1-f54.google.com with SMTP id a8so1979834edv.2
+ for <samba-technical@lists.samba.org>; Fri, 08 May 2020 11:05:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to;
- bh=BRw2gsgSGxYe8RsmPIpOWHeFKemslhdaf2w5eUOSGK8=;
- b=a2n/che9MBasmejO5QEJTQjyOVVi4LYNIenZu6yfOy2dZZuqjZAF+FhIb40PHymd3C
- t2UXLKYGTpprGaCZR5Dp6Y5gH6ucfN04q6TC+TCR4sKZlFl09aiPbjvBIm/uxIPobgT1
- 4F/LfkovHPKhcHyGEICmMe7zQGGTgoCWqoKhpv2SlwcgijJTGLPtXrix0GyCnlIBDv31
- PeuJwAfdp7SbsbOC/WF1npWwLy4KCzkGi0lvItxqRmeFtmsXfaKWP7ObtRGRFZcaYR2g
- +dIiBFkuMKurcRklvNgUyejSfUrSM9JfYCD0JYRji2qhRbvw95esYErsE7CGRXP+FNdy
- EnWg==
-X-Gm-Message-State: AGi0Pub95xDBwqeQjpOypaPIuxhNGHGf7fxXFTS41MTn9YuK/YWuyxVd
- vjvt5son9EvyBTTfh3NqTc2KYCX+Fz5xIQ3eUn1z6gAMKDTXVBNJSCYBxLST4LDWyM74KyTqB/z
- BQM+9vrqEmYZeSm622QvcRKg/wcmb7oq+7uuOaXi9JLFwDE0NafS105mb9Pfizw==
-X-Received: by 2002:a05:6830:16d9:: with SMTP id
- l25mr2945656otr.108.1588956259754; 
- Fri, 08 May 2020 09:44:19 -0700 (PDT)
-X-Google-Smtp-Source: APiQypLGOsBz0W9kjcutp2kenFS4Ycs3+IumGtj212MA1gY4maDmQfcsHhYe5eg/T16xgZJKiRjWqOEQ8btPPUhHzHc=
-X-Received: by 2002:a05:6830:16d9:: with SMTP id
- l25mr2945638otr.108.1588956259472; 
- Fri, 08 May 2020 09:44:19 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=aOsBv47I7uvrVcAZM3oQCa2p2MeZfrcFzJ+Ek1X0FLw=;
+ b=qWlu3nyCnu+F3xJpaOqoqvqA8aWOk6vN/dDgBmoD/PqnohDvrwP2C/y8gj9FaiVkHA
+ flCzwMEV6RPzUFrUo/RygSMwqh8JOPYQN7M+rN1/MDlJunSAjPEB8ikV7Xw1w6x4W78q
+ L12QoNri9beHTtcSllI0e+HzkbLUDRTR6nm32r3XTX+wjt2DZi3BmGcD5Ydv3cPKg82+
+ bbYTXz7YO8Lv5WVf66Szebn+Y4wr7Kg4r2NCRc1pWQ/VeIAxI047N/atemmonirykN5h
+ osKgOyN8RiBuldWAyl6eBM4ciJ+wlsdXUduBZ3wsbxmydDfpDFtf/saPFhaU4YaO1s6/
+ SCIA==
+X-Gm-Message-State: AGi0Pub7/tWj+9wiMJ54S/cbZUVEkWgfG1th7y/HewRHvTCp3ggP6ltk
+ qyn8u6KShvZ8R34eeVqKSJsbNTD2DZyn8+Ip2n4v2zyY
+X-Google-Smtp-Source: APiQypLq+EksqYbGQYr6GtPPkuQsuVgO+y2vzo6P+Gq/56tIvBcRyP95rOO4/3V1w2vDgj8vHiQ5NVorCI6pPOex4Wo=
+X-Received: by 2002:a05:6402:1f6:: with SMTP id
+ i22mr3381032edy.271.1588961127331; 
+ Fri, 08 May 2020 11:05:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <CANYNYEHEeDcD+5GL+wCotQG9O1XA1F_i_XmRwcGWbqj15PKxjw@mail.gmail.com>
- <0a650511-9ab0-4501-ee3b-c2c564b3b51f@catalyst.net.nz>
- <9f10bc62317cc9ca891667330e23ce08994962db.camel@samba.org>
-In-Reply-To: <9f10bc62317cc9ca891667330e23ce08994962db.camel@samba.org>
-Date: Fri, 8 May 2020 13:44:08 -0300
-Message-ID: <CANYNYEGMh3YHkRmdw-wUCJSUGRPGeQPV4sUKatLJ7yUame_vUA@mail.gmail.com>
-Subject: Re: ldb 2.1.2: test_get_size failure on ppc64el
+Date: Fri, 8 May 2020 14:05:16 -0400
+Message-ID: <CALSyjX5G7ps8Pafurh5L+6U_JYBA9uTRxJaEhwKL5jTvU=2ZOQ@mail.gmail.com>
+Subject: [PATCH] snapper: add configure option to control build (default: auto)
 To: samba-technical@lists.samba.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/mixed; boundary="0000000000008ec07705a526d767"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,80 +56,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Hasenack via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Hasenack <andreas@canonical.com>
+From: Matt Taylor via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Matt Taylor <liverbugg@rinux.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Thanks all, I applied the suggested range bump.
+--0000000000008ec07705a526d767
+Content-Type: text/plain; charset="UTF-8"
 
-On Thu, May 7, 2020 at 7:43 PM Andrew Bartlett via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
->
->
-> On Fri, 2020-05-08 at 10:08 +1200, Gary via samba-technical wrote:
-> >
-> > On 8/05/20 6:16 am, Andreas Hasenack via samba-technical wrote:
-> > > Hi,
-> > >
-> > > I'm building ldb 2.1.2 on ubuntu groovy 20.10, along with all the
-> > > other dependencies for samba 4.12.2, and I'm getting this test
-> > > error
-> > > on ppc64el only:
-> > >
-> > > [ RUN      ] test_get_size
-> > > [  ERROR   ] --- 13369 is not within the range 2500-5000
-> > > [   LINE   ] --- ../../tests/ldb_kv_ops_test.c:1721: error:
-> > > Failure!
-> > > [  FAILED  ] test_get_size
-> > > [==========] 13 test(s) run.
-> > > [  PASSED  ] 12 test(s).
-> > > [  FAILED  ] 1 test(s), listed below:
-> > > [  FAILED  ] test_get_size
-> > >
-> > > That assert use to be
-> > >
-> > > assert_true( size > 2500);
-> > >
-> > > but was changed to
-> > >
-> > > assert_in_range(size, 2500, 5000);
-> > >
-> > > in commit
-> > >
-> > > commit e464e40c977cd6592240763c7dbb9c45ff16470f
-> > > Author: Andreas Schneider <asn@samba.org>
-> > > Date:   Thu Dec 5 17:14:31 2019 +0100
-> > >
-> > >     ldb:tests: Use assert_in_range() in test_get_size()
-> > >
-> > >     Signed-off-by: Andreas Schneider <asn@samba.org>
-> > >     Reviewed-by: Gary Lockyer <gary@samba.org>
-> > >
-> > >
-> > > Is that 5000 ceiling limit just a guess, or is this failure
-> > > indicating
-> > > a real bug somewhere? The value 13369 I got on ppc64el seems a bit
-> >
-> > It's just a guess. for tdb we estimate the number of records with
-> > #define RECORD_SIZE 500
-> >
-> >
-> > So changing the test to assert_in_range(size, 2500, 20000);
-> > Should be ok.
->
-> PPC64 is probably doing something sensible (as in not optimised for a
-> 1980s home PC) with pages and so consuming more space.
->
-> Andrew Bartlett
-> --
-> Andrew Bartlett                       https://samba.org/~abartlet/
-> Authentication Developer, Samba Team  https://samba.org
-> Samba Developer, Catalyst IT
-> https://catalyst.net.nz/services/samba
->
->
->
->
+Recently the samba packages on Gentoo Linux had a hard dependency on
+dbus added.  This is because the vfs_snapper module is enabled
+automagically on the existence of dbus headers with no option to
+disable it.  See: https://bugs.gentoo.org/721320 for the Gentoo bug
+where it was suggested this be reported upstream.
+
+This patch adds a configure option to control the build of snapper
+similar to other vfs modules.
+
+Signed-off-by: Matt Taylor <liverbugg@rinux.org>
+
+--0000000000008ec07705a526d767
+Content-Type: text/plain; charset="US-ASCII"; name="samba-snapper_option.patch.txt"
+Content-Disposition: attachment; filename="samba-snapper_option.patch.txt"
+Content-Transfer-Encoding: base64
+Content-ID: <f_k9yieyii0>
+X-Attachment-Id: f_k9yieyii0
+
+ZGlmZiAtcnUgc2FtYmEtbWFzdGVyL3NvdXJjZTMvd3NjcmlwdCBzYW1iYS1tYXN0ZXItcGF0Y2gv
+c291cmNlMy93c2NyaXB0Ci0tLSBzYW1iYS1tYXN0ZXIvc291cmNlMy93c2NyaXB0CTIwMjAtMDUt
+MDggMDc6MTY6MTguMDAwMDAwMDAwIC0wNDAwCisrKyBzYW1iYS1tYXN0ZXItcGF0Y2gvc291cmNl
+My93c2NyaXB0CTIwMjAtMDUtMDggMTM6MjE6NTguMDAwMDAwMDAwIC0wNDAwCkBAIC03NSw2ICs3
+NSw4IEBACiAgICAgb3B0LnNhbWJhX2FkZF9vbm9mZl9vcHRpb24oJ2dsdXN0ZXJmcycsIHdpdGhf
+bmFtZT0iZW5hYmxlIiwgd2l0aG91dF9uYW1lPSJkaXNhYmxlIiwgZGVmYXVsdD1UcnVlKQogICAg
+IG9wdC5zYW1iYV9hZGRfb25vZmZfb3B0aW9uKCdjZXBoZnMnLCB3aXRoX25hbWU9ImVuYWJsZSIs
+IHdpdGhvdXRfbmFtZT0iZGlzYWJsZSIsIGRlZmF1bHQ9VHJ1ZSkKIAorICAgIG9wdC5zYW1iYV9h
+ZGRfb25vZmZfb3B0aW9uKCdzbmFwcGVyJywgd2l0aF9uYW1lPSJlbmFibGUiLCB3aXRob3V0X25h
+bWU9ImRpc2FibGUiLCBkZWZhdWx0PU5vbmUpCisgICAgCiAgICAgb3B0LmFkZF9vcHRpb24oJy0t
+ZW5hYmxlLXZ4ZnMnLAogICAgICAgICAgICAgICAgICAgaGVscD0oImVuYWJsZSBzdXBwb3J0IGZv
+ciBWeEZTIChkZWZhdWx0PW5vKSIpLAogICAgICAgICAgICAgICAgICAgYWN0aW9uPSJzdG9yZV90
+cnVlIiwgZGVzdD0nZW5hYmxlX3Z4ZnMnLCBkZWZhdWx0PUZhbHNlKQpAQCAtMTc1MiwxMSArMTc1
+NCwxMiBAQAogICAgIGlmIE9wdGlvbnMub3B0aW9ucy5lbmFibGVfdnhmczoKICAgICAgICAgY29u
+Zi5ERUZJTkUoJ0hBVkVfVlhGUycsICcxJykKIAotICAgIGlmIGNvbmYuQ0hFQ0tfQ0ZHKHBhY2th
+Z2U9J2RidXMtMScsIGFyZ3M9Jy0tY2ZsYWdzIC0tbGlicycsCisgICAgaWYgT3B0aW9ucy5vcHRp
+b25zLndpdGhfc25hcHBlcjoKKyAgICAgICAgaWYgY29uZi5DSEVDS19DRkcocGFja2FnZT0nZGJ1
+cy0xJywgYXJncz0nLS1jZmxhZ3MgLS1saWJzJywKICAgICAgICAgICAgICAgICAgICAgICBtc2c9
+J0NoZWNraW5nIGZvciBkYnVzJywgdXNlbGliX3N0b3JlPSJEQlVTLTEiKToKLSAgICAgICAgaWYg
+KGNvbmYuQ0hFQ0tfSEVBREVSUygnZGJ1cy9kYnVzLmgnLCBsaWI9J2RidXMtMScpCisgICAgICAg
+ICAgICBpZiAoY29uZi5DSEVDS19IRUFERVJTKCdkYnVzL2RidXMuaCcsIGxpYj0nZGJ1cy0xJykK
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYW5kIGNvbmYuQ0hFQ0tfTElC
+KCdkYnVzLTEnLCBzaGxpYj1UcnVlKSk6Ci0gICAgICAgICAgICBjb25mLkRFRklORSgnSEFWRV9E
+QlVTJywgJzEnKQorICAgICAgICAgICAgICAgIGNvbmYuREVGSU5FKCdIQVZFX0RCVVMnLCAnMScp
+CiAKICAgICBpZiBjb25mLkNIRUNLX0NGRyhwYWNrYWdlPSdsaWJ1cmluZycsIGFyZ3M9Jy0tY2Zs
+YWdzIC0tbGlicycsCiAgICAgICAgICAgICAgICAgICAgICAgbXNnPSdDaGVja2luZyBmb3IgbGli
+dXJpbmcgcGFja2FnZScsIHVzZWxpYl9zdG9yZT0iVVJJTkciKToK
+--0000000000008ec07705a526d767--
 
