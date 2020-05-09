@@ -2,47 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50FD01CBAED
-	for <lists+samba-technical@lfdr.de>; Sat,  9 May 2020 00:52:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6CEC81CBBC6
+	for <lists+samba-technical@lfdr.de>; Sat,  9 May 2020 02:27:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=MjFOubR2fM1su4m0AlnsVNrbk/YK2h4ODLQs+9h5V18=; b=CMy3jV4i9l3ELZpt3dE+K3omud
-	y/KHuc7r62Yv4MtoP32nEyRhDBp04GKnziJFvsvqxTNUbE3/xU4cf56fCMjlU/dqCi13iMsMYuXgT
-	jklEqeEWY/nV8L/RTwc4jeATrfHLqxhelGwjZ47t6kU6zLIlnbbs3JXgVich+TXo6DPS0oRzHrFFB
-	VsLwz/8t8FyA9hGXIa3NwM6cdieFBsIfODWsz+4Stc5dJp8qdecQAcCxuhalFGfkkL9JLQokZ4Tlc
-	1SsyMzdO5He399faNUjzEG8t1cXyHw+IpqYO2PRFs8RAhsS2pSePmK+eVkbC4cF7IuELLCwAqAa00
-	dpfrQOvA==;
-Received: from localhost ([::1]:46550 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=44MjeiNPPOzxQPfjZ7m62I4tQYK6rOdPN8foN+jqtnQ=; b=Za6zr8mOE0oYpEmkNMduF7cuHN
+	v+ikdIfmnXPgoN96W8DUXfbUZVafFedsOK5XufS8HH8b4JM9MDUYNWkBQ073gsx1mGR8bdZ5pmJ0r
+	UMi0YgzhBUFoYPlRfeO9pO14QHBGXSmRk/BFnoY72NwOBMM9m4Iorx8DKulB2UFbGEduUUI+fE2c3
+	vwoUFtkQ3lTdaew8DpBnykNc5MvDs8C0QmWrQMijE+d35Ou3XF1lu6fsifnN05wAS0BJHqy/zqUAa
+	RgjbY4BRHc6riYzlvurm6gAkVn7+MYBq4eo0DWKgDDfDioSeeZ24RwsmiIU41Q+eA7rE+cK01eTqu
+	u6FXGsuQ==;
+Received: from localhost ([::1]:56814 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jXBqE-003KDH-54; Fri, 08 May 2020 22:51:38 +0000
-Received: from mail-ed1-f41.google.com ([209.85.208.41]:35040) 
+	id 1jXDKS-003Lqk-RS; Sat, 09 May 2020 00:26:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31124) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jXBq8-003KDA-54
- for samba-technical@lists.samba.org; Fri, 08 May 2020 22:51:34 +0000
-Received: by mail-ed1-f41.google.com with SMTP id h15so333077edv.2
- for <samba-technical@lists.samba.org>; Fri, 08 May 2020 15:51:30 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=MjFOubR2fM1su4m0AlnsVNrbk/YK2h4ODLQs+9h5V18=;
- b=pmbV+UUCE7E9mH7k26zg35wxKmMJS3i8zCcJQ6Ve5QaJpIDV8diWJxZp/dT+G7RSsB
- HT01dbOrBciENAcVBk92cnBWX9mL0cg0Ovn5p9Vl2nQFO0rFBJ46mv+aFhzspSFpmBLu
- FCkZByLoDFIAROxSFP8hCLuyYDYlygJl7fm43MZX1XpEaJxSRFSEab816iLxoE6TRhRa
- RawIf4mzxmm5Ra1jXnlXxh28NInhU7dvETT0xCuzj8pe1WmDtTlk3HDE825htxuBlmYe
- vAvdRmon8bjlGs0+SQbcuj3GlUPu3akZEQUBNCaU2PpmQof9WUFVMURXbcD4ikhmYl0u
- eFqQ==
-X-Gm-Message-State: AGi0PubYVK/xtBefzNfuSv26+vJbTGRUD+XoomAbzUVaxfphFx+xS0tE
- cxwXm9xm5Uq0gg6OWOBDQ6CPKc8C1QCydKcP+dN0dfMN
-X-Google-Smtp-Source: APiQypIf+ocdZ7HUBnTwJ2D31a7PmoJNgh5R9QjnxG7GKU6URMJ2nPQQWviIZxV2bvELrSJA+8D0D6Ty0FEMsMc4IHQ=
-X-Received: by 2002:a05:6402:1f6:: with SMTP id
- i22mr4367531edy.271.1588978289802; 
- Fri, 08 May 2020 15:51:29 -0700 (PDT)
+ (Exim) id 1jXDKM-003Lqd-SA
+ for samba-technical@lists.samba.org; Sat, 09 May 2020 00:26:53 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=44MjeiNPPOzxQPfjZ7m62I4tQYK6rOdPN8foN+jqtnQ=; b=boGIjDtQcPTPiILbo4oVpOPfus
+ KFR155xEvzoKEaybAs5v650PlzBTb5xPt0cjWvOtRzp/y3+tPxXXV2WnhjUgWdaHF7K78qeKgti5m
+ any8IAcqCndrVE5Jxv66JbRTmgbPUuvmIuMunPNxmF2QRX4taoJiXtdOdzV021W/D7UvzmUnC0BwK
+ TADEPrpfQZhVAVq3Jxa242NqWjWRDO+r0kWe2fI4gqin6wJZzGrlW5bXtT/N3uX215mzc+5L3iusL
+ dXssxwJ4s82exM0YaL/prQrJbmBr+7emmYKwEIKnCxtx7yqJYWXCJQA/k+0llkilZzItSu6Kr2pE3
+ 72BMEWMXmGRmdNTgMHtFF7W/Zr3kJq/A8T6ARr9nDrBhw1nu5jOgDiy1CQD8awNlUcYHXpO0nixVM
+ lNbin9CYDBVjJKI8Un84WTBXEU4ts2znoiqQDl7wBeKEl5wkw6s/K+K3eHOOXC8yQBFEOz2uDlnN9
+ hsCNc1OrOOwGDLN9Swu0ZiZg;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jXDKK-0002Lw-H1; Sat, 09 May 2020 00:26:48 +0000
+Date: Fri, 8 May 2020 17:26:42 -0700
+To: Stefan Metzmacher <metze@samba.org>
+Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
+ 5.6.7/5.7rc3
+Message-ID: <20200509002642.GA7657@jeremy-acer>
+References: <3c150c7ef40086ccb392e2911e954386f8c2bd0a.camel@cryptolab.net>
+ <6e4d9002-6887-5c01-e992-1d893b3e6d63@samba.org>
+ <ebdfdcd6d3ceab5f43172b3323589a5bcfcd957f.camel@cryptolab.net>
+ <20200508185339.GD26399@jeremy-acer>
+ <8e7d4319-a919-a364-8337-29308926f509@samba.org>
+ <20200508204709.GG26399@jeremy-acer>
+ <20200508205140.GH26399@jeremy-acer>
+ <4e66af50-d900-3ed1-7d27-8b399cf63143@samba.org>
+ <20200508215055.GA2912@jeremy-acer>
+ <9ba6f926-f0b5-6cd1-36f1-2ccdf1c8b5eb@samba.org>
 MIME-Version: 1.0
-Date: Fri, 8 May 2020 18:51:18 -0400
-Message-ID: <CALSyjX6H7DgbqJze_01MexNR=SQxozYvhtB9p6cJQicYFuyfUQ@mail.gmail.com>
-Subject: [PATCH] trivial quota wscript error message spelling fix
-To: Matt Taylor via samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="0000000000008546eb05a52ad610"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <9ba6f926-f0b5-6cd1-36f1-2ccdf1c8b5eb@samba.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,38 +65,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Matt Taylor via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Matt Taylor <liverbugg@rinux.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Anoop C S <anoopcs@cryptolab.net>,
+ Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---0000000000008546eb05a52ad610
-Content-Type: text/plain; charset="UTF-8"
+On Sat, May 09, 2020 at 12:04:55AM +0200, Stefan Metzmacher via samba-technical wrote:
+> 
+> Do you have some comments on the offset < 0 on write case?
 
-Noticed this when looking at how other options were handled while
-working on the vfs_snapper configure patch.
+I think the offset < 0 case in MS-FSA 2.1.5.3
+is talking about the behavior of the interface
+into the NtDLL layer in the Windows kernel,
+not the SMB2 layer.
 
-Trivial fix in the quota configure failure message.
+I think at the SMB2 layer all offsets for
+read and write are implicitly unsigned.
 
-Signed-off-by: Matt Taylor <liverbugg@rinux.org>
+I'll write some test code though, which
+sets the high bit for reads and writes
+on a zero length file and see what Windows10
+returns.
 
---0000000000008546eb05a52ad610
-Content-Type: text/plain; charset="US-ASCII"; name="samba-spelling_trivial.patch.txt"
-Content-Disposition: attachment; filename="samba-spelling_trivial.patch.txt"
-Content-Transfer-Encoding: base64
-Content-ID: <f_k9ysiusl0>
-X-Attachment-Id: f_k9ysiusl0
 
-ZGlmZiAtcnUgc2FtYmEtbWFzdGVyL3NvdXJjZTMvd3NjcmlwdCBzYW1iYS1tYXN0ZXItcGF0Y2gv
-c291cmNlMy93c2NyaXB0Ci0tLSBzYW1iYS1tYXN0ZXIvc291cmNlMy93c2NyaXB0CTIwMjAtMDUt
-MDggMDc6MTY6MTguMDAwMDAwMDAwIC0wNDAwCisrKyBzYW1iYS1tYXN0ZXItcGF0Y2gvc291cmNl
-My93c2NyaXB0CTIwMjAtMDUtMDggMTg6NDM6NDYuMDAwMDAwMDAwIC0wNDAwCkBAIC0xNjYzLDcg
-KzE2NjMsNyBAQAogICAgIGNvbmYuZW52WydsZWdhY3lfcXVvdGFfbGlicyddID0gbGVnYWN5X3F1
-b3RhX2xpYnMKIAogICAgIGlmIE9wdGlvbnMub3B0aW9ucy53aXRoX3F1b3RhcyA9PSBUcnVlIGFu
-ZCBub3QgY29uZi5DT05GSUdfU0VUKCdXSVRIX1FVT1RBUycpOgotICAgICAgICBjb25mLmZhdGFs
-KCdxdW90YSBzdXBwb3J0IG5vdCBmb3VuZCBidXQgaXQgd2FzIGVxdWVzdGVkICEnKQorICAgICAg
-ICBjb25mLmZhdGFsKCdxdW90YSBzdXBwb3J0IG5vdCBmb3VuZCBidXQgaXQgd2FzIHJlcXVlc3Rl
-ZCAhJykKIAogICAgIGNvbmYuQ0hFQ0tfQ09ERSgnKHZvaWQpdW5zaGFyZShDTE9ORV9GUyk7JywK
-ICAgICAgICAgICAgICAgICAgICAgaGVhZGVycz0nc2NoZWQuaCcsCg==
---0000000000008546eb05a52ad610--
 
