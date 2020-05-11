@@ -2,49 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 881CA1CC5AE
-	for <lists+samba-technical@lfdr.de>; Sun, 10 May 2020 02:08:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8CD21CD8D2
+	for <lists+samba-technical@lfdr.de>; Mon, 11 May 2020 13:48:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=ajnplmeGIiqC9bNKSjtkF0D7lqaJZqAetoa2SBLX5AY=; b=vkccHO4eNSo+6gz4k/Dwx2tt7U
-	9U3BQ5TOyNdYXlsvQzxfn0Df5uuvmdRKWUyCkwjjl95Fizinfsq/MJGsIiqnOmvvdhCUjm8jTruEg
-	ZFQwfpMUCHzPqyttEtV5tq0DCbzTKrvW/RhZXp0MlC5mwM2wZH9bRPBnNN3PPgRYdRC0rMpbGSACW
-	KRLja99Y5V3GvMP7d41erl05NQQrrYn/WkOF8G7I2WPId4oaXIkKm7WqQSVrFrFZ0Xu9NyVxRiiQO
-	6SFMDUgsEbDQuTiTnfR4BVZQpe7AQEhHxDmmDT1v0p+LYtTJ8lffyJHdzZOYsgiJpT7NUF7QcfH6b
-	jx0w7txg==;
-Received: from localhost ([::1]:29982 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=WWugl03E+Pfc1V5T63657cC2CoUa4v2ARqVRYqg9jo0=; b=wnpL5/Je1lr3yxlqSCuDvRujOs
+	h/sge/YKhwoQDZmMTJ1wmMRm4aVA2PWwhqmhrrXW1NbbjhExMM6ZnauWmvnOquk3P2bp0Ks2rhUX8
+	P0IS4bvRyNu9TG3JRGMV9K5a7vyFxa4Wzom055OGurXRu8HXmsp5AJHAB0qz3rDD/CTEvIOZJFRXW
+	5T5WWl9xQbu49jS3SofmUe5KkzxwX3cJebZc6OMgbqKlBljx+HMVOf4d7JHC08qmo2oBu/IN0shaT
+	7pwtNGw3wDNBAK5b3qkj6K75c+8kvbFZx1+416lgXQ3P+BiqjjYFd6sdKk6uquOvkUmQxoA6BPecf
+	ELf5zolg==;
+Received: from localhost ([::1]:61762 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jXZVa-003bqV-6c; Sun, 10 May 2020 00:07:54 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31946) 
+	id 1jY6u9-003kqj-Nq; Mon, 11 May 2020 11:47:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:32318) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jXZVU-003bqN-Fg
- for samba-technical@lists.samba.org; Sun, 10 May 2020 00:07:50 +0000
+ (Exim) id 1jY6u4-003kqY-AV; Mon, 11 May 2020 11:47:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=ajnplmeGIiqC9bNKSjtkF0D7lqaJZqAetoa2SBLX5AY=; b=JyES/ywyyXFHcKvTyV+GxheEhp
- 0feFQCBASrtIuBTr+2MP4/388SbeTplsSALG80PqIM9ZbC7J+cYqsqLzT01aX48Bf4mqPz+bd6ltX
- hOGyf9L6hNnYE3jNgrZDk/55zBrJueADsomRFODpkWU8by4+AUu4srhM6+LjOHymxoav1SdFVEpHd
- sb3lJw9GuyyrPLTu0Mt0vn+63G8KT0W4A7o43pY1sEK/xKbVyJcUIDgWhq4FqS7uYdttqEuKbOjkI
- ykbUl1l5NhDaN2NDkPyML+ygcnGtUNHPk9j2lB4M3vAIfKtwYSI/SMMXjmiicSq8FUJGp8Wnfrc0h
- av1eZlmiI5PmfDhIbqPXP986n2ZMV9A5dZ235w+etgAoGWFz12qDc+cvdsI8XE69+kz1maxxS6ZZ8
- O7fMcKFhJFqCBafZvKuuRcRU1nrkffvnA8LbOqoxA86ap4UDtMU6oRsAi8GjQggPIY+OlsjTkVhp1
- zaafEQx1h/l9SDm8V3znH15h;
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=WWugl03E+Pfc1V5T63657cC2CoUa4v2ARqVRYqg9jo0=; b=YvxdEIRYVT+AemJsUl2quw11oY
+ s4vwI7QipX/GHuZj1EjTBWLGkUYsvMgw91Azt6Fo/yp2dAdRJd2d2POcRwHGupkxgnoCnMHVQT9lz
+ UFcuV5adSgvCvDwWSdO3yCo3bVkkywK16fJmyS1qA9av6GeUyq/03TiTQFXC6IWirLjP70sPGg4Ep
+ p5Lgb/TsTdFQ0YxSnChtVrnvn4IhwlZBkVfI8ZGfK0Hpq/P8xr9Xh9UZOqk5FDldm4z52/a6an0d5
+ FkY1Q8Jf/dDgAavCLTaZFYQctm5bMNU/Xop1akiWuTgp0WZQ96Xujgdy/sdle9NyOwOPQPhIevGR4
+ pbU8GBYTk+HD8AXOOP7dHDsuAHYTsQWa/NRGBqmZ9bI0mTZStUISz1Rk70j4ryOUGXR0XIDBhVFM3
+ LebvygmopqVwuimJZECCmrNXfkM3uyezZrhrSH0mIvVPlD+JbQowp74OKiiF+xC5OMkHMREHCfQO1
+ PabwP/WfS2ysa1Smyou51EUr;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jXZVR-0005KX-Mh; Sun, 10 May 2020 00:07:45 +0000
-Date: Sun, 10 May 2020 02:07:44 +0200
-To: Matt Taylor via samba-technical <samba-technical@lists.samba.org>
-Subject: Re: [PATCH] snapper: add configure option to control build
- (default: auto)
-Message-ID: <20200510020744.2baaa806@samba.org>
-In-Reply-To: <CALSyjX7RkiukckU5P1xL4FBX6tWpZFB9E1t0CrO+t+0EwNaNWA@mail.gmail.com>
-References: <CALSyjX5G7ps8Pafurh5L+6U_JYBA9uTRxJaEhwKL5jTvU=2ZOQ@mail.gmail.com>
- <20200508222441.4f74c615@samba.org>
- <29c6778ebf0a22d063042589526b98922d06301d.camel@samba.org>
- <CALSyjX7RkiukckU5P1xL4FBX6tWpZFB9E1t0CrO+t+0EwNaNWA@mail.gmail.com>
+ (Exim) id 1jY6u3-0001I3-M4; Mon, 11 May 2020 11:47:23 +0000
+To: samba@lists.samba.org, samba-technical@lists.samba.org
+Subject: sambaXP 2020 - Online Edition - FOR FREE!
+Organization: Samba Team
+Message-ID: <65c84379-ff22-4bcf-97d8-8fde7f662d75@samba.org>
+Date: Mon, 11 May 2020 13:47:23 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Language: de-DE
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,45 +55,56 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Disseldorp <ddiss@samba.org>
-Cc: Matt Taylor <liverbugg@rinux.org>, Andrew Bartlett <abartlet@samba.org>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Karolin Seeger <kseeger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Matt,
+SambaXP 2020 - Online Edition
 
-On Fri, 8 May 2020 18:25:41 -0400, Matt Taylor via samba-technical wrote:
+The 19th International Conference for the open source software Samba
+will take place from 26th - 28th May 2020 as an *free* online event. The
+planned IO-Lab is cancelled.
 
-> As long as the option to disable is there that works for my scenario.
-> I figured since it was automatically including snapper if dbus was
-> found previously I would keep that automatic behavior.
-> 
-> Updated patch attached.  Snapper is enabled by default and configure
-> will error out if dbus is not found and --disable-snapper was not
-> passed.
+SambaXP is the annual meeting of the international Samba team with
+developers, users, manufacturers and system integrators within the Samba
+ecosystem, which has been held since 2002.
+Due to the current COVID-19 situation and the associated travel and
+meeting restrictions, this year's conference unfortunately cannot take
+place at the usual venue in Göttingen. Therefore the organizing
+committee is planning a digital edition of the popular conference for
+this year.
 
-There's some white-space damage below the new samba_add_onoff_option
-line. The empty line between snapper and cephfs should also be removed.
+The speakers will give their presentations live from their desks, so
+that participants can follow the conference from anywhere in the world
+via the Internet. Compared to the usual event format, the online event
+offers even more flexibility: It is easier to switch between tracks
+running in parallel or even follow two presentations at the same time.
+The event is recorded with consent of the speakers and will be available
+online after the conference.
 
-Otherwise this looks fine to me:
-Reviewed-by: David Disseldorp <ddiss@samba.org>
+The traditional tutorial by Stefan Kania will also be held as a webinar
+on the day before the conference (Tuesday, 25 May 2020). This year's
+topic: "Clustering with CTDB".
 
-I expect the new default dbus dependency will catch a few people, but
-the clear instructions on how to disable it should help.
+The IO-Lab, which is planned for the first time in the context of this
+year's SambaXP unfortunately cannot take place due to the current
+circumstances.
 
-As with your other patch, please use git format with a commit message
-and sign off.
-See https://wiki.samba.org/index.php/Contribute#Mailing_patches_to_samba-technical
+You can find all the latest information and the registration form at
+https://sambaxp.org.
+The organizing committee is available for questions at loc@sambaXP.org.
 
-> I'm contributing as an individual with no corporate
-> involvement/restrictions, so does that mean no Signed-Off-by tag is
-> needed?  I have another trivial spelling patch to send after this.
+We are looking forward to a digital SambaXP 2020 and would like to thank
+the sponsors Google and Microsoft.
 
-As Andrew mentioned, the signed-off-by tag is still needed, but
-otherwise this should be good to go.
+Stay healthy!
 
-Thanks for your contribution!
+Cheers,
+Karolin
 
-Cheers, David
+-- 
+Karolin Seeger			https://samba.org/~kseeger/
+Release Manager Samba Team	https://samba.org
+Team Lead Samba SerNet		https://sernet.de
 
