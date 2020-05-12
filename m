@@ -2,44 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDFEF1CF303
-	for <lists+samba-technical@lfdr.de>; Tue, 12 May 2020 13:02:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 453DE1CF606
+	for <lists+samba-technical@lfdr.de>; Tue, 12 May 2020 15:43:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=2/OBGOQrOaBNB9ZmNnT42KnQJZ7mZIrnX55q/2DnnIk=; b=rzUTHjRzZndKgYg4hqNO/wfDoT
-	0c0Z0ftRK/u2FTx0LPN7e4rQ/DW66hJQNGWhUK7nAtWl1HyXJAH8Q+sDrVQLcqO8fDZUJqVhMd41V
-	TTXoWbXkKCtHv6l2AeXWAivEAGYzaJ5j4Pfu4Q4CIioSR2WUOsL7AMgubUG0UsPW1r9QhQvm3on9j
-	5jVjIlWmGBxAzLWZrz52Cc5yMdii8Jd6MRc6AAlnWm47FxgvOA8EJmKU135myEIpp8qJARlg8/2jc
-	qNeT08fNH8gTizR6PIBp6hXrPRvh80xwCMLfXDfU2Zc7vsLoE11NIDPyKPYNW8UvD6S+jMPdSSV0v
-	ojmsH3gQ==;
-Received: from localhost ([::1]:27062 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=D6j5e/NtAx3mNQ7WjP01SoIAH2Fb7gYgdeSB7jsBbPc=; b=tz5yD3FRin+ZJtikmvN3O+c2UQ
+	lw349ebAzI5dDShOVJw1l90O5wn2qpCS1nMm/OQQLsE++SI72mLKqGs3PGzVk3bTPRtngnJHPuobR
+	yKs187HaFnk5mZXKCGMr/P0eUK9GD/mAbgLaSgz4hRt768Eo0ofsJqLotg3t46hb8EgOf8YbpD+Eg
+	ezRs82LtBa5P/+aREcgAUqy7UW+bYU74f6ZKPZK7l7q+lSXGSRBVAslLj1Wm+utpYizjYb5MktBT/
+	ER1qh/qdb3fX7i9h21KQ4iSn3Py7uZPiZ3bSBvNJXAuyN0Z98EouC/j2XASQ085yzq9kRKCoBeR7F
+	1wNb/Ecw==;
+Received: from localhost ([::1]:62516 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jYSf4-0041ce-2a; Tue, 12 May 2020 11:01:22 +0000
-Received: from zmf03.inasset.net ([82.193.37.22]:43458) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jYSey-0041cX-NU
- for samba-technical@lists.samba.org; Tue, 12 May 2020 11:01:19 +0000
-Received: from localhost (localhost.localdomain [127.0.0.1])
- by zmf03.inasset.net (Postfix) with ESMTP id 22F71BF6A4;
- Tue, 12 May 2020 13:01:14 +0200 (CEST)
-Received: from zmf03.inasset.net ([127.0.0.1])
- by localhost (zmf03.inasset.net [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id GTlmGupuvIbB; Tue, 12 May 2020 13:01:14 +0200 (CEST)
-Received: from dakota.saitel.loc (93-34-9-216.ip47.fastwebnet.it [93.34.9.216])
- by zmf03.inasset.net (Postfix) with ESMTPSA id D19D0BF627;
- Tue, 12 May 2020 13:01:13 +0200 (CEST)
-Message-ID: <91974a95e8f5b1c19d482794452b04bfb190784f.camel@saitelitalia.com>
-Subject: Re: Problems after upgrading file server to 4.12.1
-To: Ralph Boehme <slow@samba.org>, samba-technical
- <samba-technical@lists.samba.org>
-Date: Tue, 12 May 2020 13:01:13 +0200
-In-Reply-To: <c5a60f12-349f-e6c9-d7e3-62d07a608d23@samba.org>
-References: <c6c8418330b35b7397a4b55927e98ac66bd2d19b.camel@saitelitalia.com>
- <c5a60f12-349f-e6c9-d7e3-62d07a608d23@samba.org>
-Organization: Saitel Srl
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-Mime-Version: 1.0
+	id 1jYVBb-0046nu-6b; Tue, 12 May 2020 13:43:07 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30572) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jYVBU-0046nn-Pe
+ for samba-technical@lists.samba.org; Tue, 12 May 2020 13:43:04 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=D6j5e/NtAx3mNQ7WjP01SoIAH2Fb7gYgdeSB7jsBbPc=; b=IQ/BrNzhjXePDsC+cGX8ycOCTv
+ UNmA3Q49VO7dYhTSJLaRDRq479kqVF2Io4TxgAqIYFxELz2/LLhNhUYNRBwHU4tUPtyQOqui/t6QV
+ lUQQWtxSYCquPaLgQ8ahUEcqn+F/hxA/k5UhCMksyt4rRtMmGh7Y4dLdYKoW5zGxr4E3pNJZLckDX
+ maNz/T7QxNXabH27Ck76x4GslM3V2Ge9CB/t0/AF8UC6cg5osMTtIX6NsZaU+jCVYJwq5eywY9sF5
+ r0LnF0p1vnAJAwJb4fe9kC6SL1DuGyJMK2ioLaivcpb4zqY3kpNJWDSuDPNhZYSRmnQL2FJejcFFE
+ 8stGMI+WpjJ7gPLAQKod4mOvyYZ1hJ9gCcUUQDt5X/4ubDYR1byCmKbBvmJIXhCYdItppKkBvMy4d
+ TShs08EaRzDUaOxtrI9fj84auRoVvZ8ksvlW1ZQ2ZfI3NVycxQ05vEzQj4llSOd5Ed61L00tgApuD
+ NuJeKlYi2vJK+AxBlxloLqwI;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jYVBT-0005gl-RW; Tue, 12 May 2020 13:42:59 +0000
+Date: Tue, 12 May 2020 15:42:58 +0200
+To: Matt Taylor via samba-technical <samba-technical@lists.samba.org>
+Subject: Re: [PATCH] snapper: add configure option to control build
+ (default: auto)
+Message-ID: <20200512154258.37bdfd3d@samba.org>
+In-Reply-To: <CALSyjX46QX3HKUQoZ2oEXCyywRU2kB0KzMGm3_FzRg4tZjPHUA@mail.gmail.com>
+References: <CALSyjX5G7ps8Pafurh5L+6U_JYBA9uTRxJaEhwKL5jTvU=2ZOQ@mail.gmail.com>
+ <20200508222441.4f74c615@samba.org>
+ <29c6778ebf0a22d063042589526b98922d06301d.camel@samba.org>
+ <CALSyjX7RkiukckU5P1xL4FBX6tWpZFB9E1t0CrO+t+0EwNaNWA@mail.gmail.com>
+ <20200510020744.2baaa806@samba.org>
+ <CALSyjX46QX3HKUQoZ2oEXCyywRU2kB0KzMGm3_FzRg4tZjPHUA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -54,39 +60,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Daniele Dario via samba-technical <samba-technical@lists.samba.org>
-Reply-To: daniele.dario@saitelitalia.com
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
+Cc: Matt Taylor <liverbugg@rinux.org>, Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2020-05-12 at 12:02 +0200, Ralph Boehme via samba-technical wrote:
-> Am 5/12/20 um 11:42 AM schrieb Daniele Dario via samba-technical:
-> > Hi Samba team,
-> > some days before release of 4.12.2 I upgraded our file server and our DCs to
-> > 4.12.1 from 4.11.6 and everything went fine. These days of lockdown not many
-> > of
-> > us are in the company and as far as I could test from my linux box, auth and
-> > network shares were working.
+On Mon, 11 May 2020 16:55:48 -0400, Matt Taylor via samba-technical wrote:
+
+> On Sat, May 9, 2020 at 8:07 PM David Disseldorp <ddiss@samba.org> wrote:
+> >
+> > Hi Matt,
+> >
+> > There's some white-space damage below the new samba_add_onoff_option
+> > line. The empty line between snapper and cephfs should also be removed.
+> >
+> > Otherwise this looks fine to me:
+> > Reviewed-by: David Disseldorp <ddiss@samba.org>
+> >
+> > I expect the new default dbus dependency will catch a few people, but
+> > the clear instructions on how to disable it should help.
+> >
+> > As with your other patch, please use git format with a commit message
+> > and sign off.
+> > See https://wiki.samba.org/index.php/Contribute#Mailing_patches_to_samba-technical
+> >
 > 
-> this is probably
+> I've removed the extra white space.  I think I did this correctly,
+> it's my first time using git to try to submit a patch.
 > 
-> https://bugzilla.samba.org/show_bug.cgi?id=14375
-> 
-> A fix is underway.
-> 
-> -slow
-> 
+> Thank you for reviewing and working with me on this.
 
-Just tried to port the WIP patch for 4.12.1 and build.
+I've submitted this (and your other patch) via:
+https://gitlab.com/samba-team/samba/-/merge_requests/1335
 
-After that the problem disappeared.
+I ended up backing out the vfs_snapper-enabled-by-default behaviour,
+as I was a little worried about fallout from automated build scripts.
 
-Of course I can't say that the fix doesn't have side effects but can confirm
-that with patch I don't see that particular problem anymore.
-
-Will wait for progresses on bug fix.
-
-Cheers,
-Daniele.
-
+Cheers, David
 
