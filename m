@@ -2,51 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 453DE1CF606
-	for <lists+samba-technical@lfdr.de>; Tue, 12 May 2020 15:43:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04CAD1CFD6A
+	for <lists+samba-technical@lfdr.de>; Tue, 12 May 2020 20:38:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=D6j5e/NtAx3mNQ7WjP01SoIAH2Fb7gYgdeSB7jsBbPc=; b=tz5yD3FRin+ZJtikmvN3O+c2UQ
-	lw349ebAzI5dDShOVJw1l90O5wn2qpCS1nMm/OQQLsE++SI72mLKqGs3PGzVk3bTPRtngnJHPuobR
-	yKs187HaFnk5mZXKCGMr/P0eUK9GD/mAbgLaSgz4hRt768Eo0ofsJqLotg3t46hb8EgOf8YbpD+Eg
-	ezRs82LtBa5P/+aREcgAUqy7UW+bYU74f6ZKPZK7l7q+lSXGSRBVAslLj1Wm+utpYizjYb5MktBT/
-	ER1qh/qdb3fX7i9h21KQ4iSn3Py7uZPiZ3bSBvNJXAuyN0Z98EouC/j2XASQ085yzq9kRKCoBeR7F
-	1wNb/Ecw==;
-Received: from localhost ([::1]:62516 helo=hr1.samba.org) 
+	bh=abIRnaYuMbOtD4RGAeS56BoPAugRWh7qjUaDeZ+1Cd4=; b=bU4QdOwe1FA+TvXsihvpLhxblG
+	PIQ495tZ71ak+02Rj9XFSj2EYo67HmgvZWIRhmMk37f8T3cnKIr2/6uMS2ULvWy8ZDVlPhS2Yfa/a
+	VuSaE2J5f9NotUYOLQ0FAkAYEj3VH/iSJwP6Wl6E3ihLzgOCsp4g8CHo/cAJWOaFCkWdqrlolCU0O
+	B0WT955ndGnhnQh+nRfFAecXfE8tfJe335cNsmGIXTbFJNg7qcQAG8JxlnPQNZ8Wzrp1Z9YVcaK9o
+	aKNbh7O5Lr3TEZbyXqWDJyCQHOPPKMzNQbKaaQBzqf5XLfo/N3xFeAJc4vc7xkT58/yMFgKS1B4Yo
+	oB2OOb+g==;
+Received: from localhost ([::1]:30000 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jYVBb-0046nu-6b; Tue, 12 May 2020 13:43:07 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30572) 
+	id 1jYZm3-0049Uw-5U; Tue, 12 May 2020 18:37:03 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43034) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jYVBU-0046nn-Pe
- for samba-technical@lists.samba.org; Tue, 12 May 2020 13:43:04 +0000
+ (Exim) id 1jYZlx-0049Up-BE
+ for samba-technical@lists.samba.org; Tue, 12 May 2020 18:37:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=D6j5e/NtAx3mNQ7WjP01SoIAH2Fb7gYgdeSB7jsBbPc=; b=IQ/BrNzhjXePDsC+cGX8ycOCTv
- UNmA3Q49VO7dYhTSJLaRDRq479kqVF2Io4TxgAqIYFxELz2/LLhNhUYNRBwHU4tUPtyQOqui/t6QV
- lUQQWtxSYCquPaLgQ8ahUEcqn+F/hxA/k5UhCMksyt4rRtMmGh7Y4dLdYKoW5zGxr4E3pNJZLckDX
- maNz/T7QxNXabH27Ck76x4GslM3V2Ge9CB/t0/AF8UC6cg5osMTtIX6NsZaU+jCVYJwq5eywY9sF5
- r0LnF0p1vnAJAwJb4fe9kC6SL1DuGyJMK2ioLaivcpb4zqY3kpNJWDSuDPNhZYSRmnQL2FJejcFFE
- 8stGMI+WpjJ7gPLAQKod4mOvyYZ1hJ9gCcUUQDt5X/4ubDYR1byCmKbBvmJIXhCYdItppKkBvMy4d
- TShs08EaRzDUaOxtrI9fj84auRoVvZ8ksvlW1ZQ2ZfI3NVycxQ05vEzQj4llSOd5Ed61L00tgApuD
- NuJeKlYi2vJK+AxBlxloLqwI;
+ bh=abIRnaYuMbOtD4RGAeS56BoPAugRWh7qjUaDeZ+1Cd4=; b=nncOB66utF/Z2L5s6Weh0/HMKM
+ TT4lCO+jnX6vsr7GOMr9vlHdGaERjTXv9ukHXmOHPIlc3Yd65gtHf3w9DYEmXILrnUpGQsY0fnhYF
+ M3k4NoEegxLeNS+E/QsqVujo7SahN2OANCQ5v2aCMOfxo+gEvpwDcVf7NNEIwQ4lbZcqfHbydbfeN
+ xC8Kc2fm3iyP99rB9+oRudfcIhlqIKwKFJFcsm1dVJ0AXpAaIBGbDfaWMglc1v9BOzR/TBhYbz/lB
+ dvoViqy3HS8fmHrYAJIOjjytjFJWkkKaRScbFfEO7Zg4MF6zILsxmTSs5O9ED6Pd8r17RHxMAgFUs
+ 8HaG6ecp1HChqRy3gE5QUoRt7FNGzvcK4XJrT+UDviJ41PqAD4znJM6Ploe72P+53+bgICBzlNS/D
+ oujJVmL1e+dz3SXyPmxJAt98AJUO2QzAWgdLeP78kMxFM7mpPYZU/rxDM3XtJFDV7n5kYjtSybibi
+ d3eTEUd8Lt+9vsGyOtDgp+X2;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jYVBT-0005gl-RW; Tue, 12 May 2020 13:42:59 +0000
-Date: Tue, 12 May 2020 15:42:58 +0200
-To: Matt Taylor via samba-technical <samba-technical@lists.samba.org>
-Subject: Re: [PATCH] snapper: add configure option to control build
- (default: auto)
-Message-ID: <20200512154258.37bdfd3d@samba.org>
-In-Reply-To: <CALSyjX46QX3HKUQoZ2oEXCyywRU2kB0KzMGm3_FzRg4tZjPHUA@mail.gmail.com>
-References: <CALSyjX5G7ps8Pafurh5L+6U_JYBA9uTRxJaEhwKL5jTvU=2ZOQ@mail.gmail.com>
- <20200508222441.4f74c615@samba.org>
- <29c6778ebf0a22d063042589526b98922d06301d.camel@samba.org>
- <CALSyjX7RkiukckU5P1xL4FBX6tWpZFB9E1t0CrO+t+0EwNaNWA@mail.gmail.com>
- <20200510020744.2baaa806@samba.org>
- <CALSyjX46QX3HKUQoZ2oEXCyywRU2kB0KzMGm3_FzRg4tZjPHUA@mail.gmail.com>
+ (Exim) id 1jYZlv-0008AT-Vy; Tue, 12 May 2020 18:36:56 +0000
+Date: Tue, 12 May 2020 11:36:49 -0700
+To: Anoop C S <anoopcs@cryptolab.net>
+Subject: Re: Data Corruption bug with Samba's vfs_iouring and Linux
+ 5.6.7/5.7rc3
+Message-ID: <20200512183649.GA17994@jeremy-acer>
+References: <20200508185339.GD26399@jeremy-acer>
+ <8e7d4319-a919-a364-8337-29308926f509@samba.org>
+ <20200508204709.GG26399@jeremy-acer>
+ <20200508205140.GH26399@jeremy-acer>
+ <4e66af50-d900-3ed1-7d27-8b399cf63143@samba.org>
+ <20200508215055.GA2912@jeremy-acer>
+ <9ba6f926-f0b5-6cd1-36f1-2ccdf1c8b5eb@samba.org>
+ <20200509025010.GA9523@jeremy-acer>
+ <ea463fd4-0670-548a-f64b-275e5250a2f2@samba.org>
+ <74ef4e9e120ce50f97f8ab493f15e5530f36b847.camel@cryptolab.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <74ef4e9e120ce50f97f8ab493f15e5530f36b847.camel@cryptolab.net>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,42 +65,59 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Disseldorp <ddiss@samba.org>
-Cc: Matt Taylor <liverbugg@rinux.org>, Andrew Bartlett <abartlet@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Stefan Metzmacher <metze@samba.org>,
+ Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 11 May 2020 16:55:48 -0400, Matt Taylor via samba-technical wrote:
-
-> On Sat, May 9, 2020 at 8:07 PM David Disseldorp <ddiss@samba.org> wrote:
-> >
-> > Hi Matt,
-> >
-> > There's some white-space damage below the new samba_add_onoff_option
-> > line. The empty line between snapper and cephfs should also be removed.
-> >
-> > Otherwise this looks fine to me:
-> > Reviewed-by: David Disseldorp <ddiss@samba.org>
-> >
-> > I expect the new default dbus dependency will catch a few people, but
-> > the clear instructions on how to disable it should help.
-> >
-> > As with your other patch, please use git format with a commit message
-> > and sign off.
-> > See https://wiki.samba.org/index.php/Contribute#Mailing_patches_to_samba-technical
-> >
+On Tue, May 12, 2020 at 12:50:02PM +0530, Anoop C S wrote:
+> On Mon, 2020-05-11 at 21:54 +0200, Stefan Metzmacher via samba-
+> technical wrote:
+> > Am 09.05.20 um 04:50 schrieb Jeremy Allison via samba-technical:
+> > > On Sat, May 09, 2020 at 12:04:55AM +0200, Stefan Metzmacher via
+> > > samba-technical wrote:
+> > > > Am 08.05.20 um 23:50 schrieb Jeremy Allison:
+> > > > > RB+ from me if you add a comment header above the function
+> > > > > as well as in the commit so it explains what it's doing.
+> > > > > 
+> > > > > Feel free to crib my ascii art to explain in the header
+> > > > > comment too :-).
+> > > > > 
+> > > > > Thanks for the cleanup !
+> > > > 
+> > > > I'll do that on Monday.
+> > > 
+> > > Here's an updated version with added
+> > > comments inside
+> > > 
+> > > [PATCH 20/29] vfs_io_uring: avoid stack recursion of
+> > > vfs_io_uring_queue_run()
+> > > 
+> > > so I could actually (hopefully) understand
+> > > it if I have to go back and look at it in 5 years time :-).
+> > 
+> > Thanks! I've done some experiments with offset < 0 and it's not
+> > allowed
+> > for SMB2 read nor write.
+> > 
+> > I'll post the updated patchset to the merge request shortly.
+> > 
+> > It would be great if someone could verify it with a 5.6 kernel.
 > 
-> I've removed the extra white space.  I think I did this correctly,
-> it's my first time using git to try to submit a patch.
+> Latest patch set[1] could successfully copy from and to vfs_io_uring
+> enabled ext4 share using Windows explorer against Samba server with
+> kernel v5.6.10.	SHA256 checksum of copied files matches original value.
 > 
-> Thank you for reviewing and working with me on this.
+> [1] https://attachments.samba.org/attachment.cgi?id=15971
 
-I've submitted this (and your other patch) via:
-https://gitlab.com/samba-team/samba/-/merge_requests/1335
+Thanks for the confirmation Anoop. I've pushed Metze's latest
+patchset to master, and we can back-port to 4.12.next as soon
+as it lands.
 
-I ended up backing out the vfs_snapper-enabled-by-default behaviour,
-as I was a little worried about fallout from automated build scripts.
+I really appreciate your help in reproducing the problem on
+the latest kernels !
 
-Cheers, David
+Jeremy.
 
