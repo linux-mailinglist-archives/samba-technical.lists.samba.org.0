@@ -2,45 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 184701D390F
-	for <lists+samba-technical@lfdr.de>; Thu, 14 May 2020 20:23:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22DF51D3D53
+	for <lists+samba-technical@lfdr.de>; Thu, 14 May 2020 21:21:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=1+uCZHZY9myCrK4/M5o+3Y6VP8oHrC3Q44ScTNt9gDI=; b=NpNDSAt/SeNCrfhvHdBWeMymHs
-	Mq4SCzfxhLLub2uwjq5t/7aZuvjuShmBnuhPwyrPM3wtWmIH4L+uHpKJvV89s6Fl22ZTYZUfrdWvq
-	3sHxWPWL40JPET17JAtTJvl8ja3QYIzlg4Wcntpj0snbQD2td2wwA3t4TtKPgOAME5q3qX/DceIPZ
-	f2TQYFSvjQU4QwC8riQUiADTjP9lvFy6cPa/TVY7yWBd9bbwlNKWSM3XnSZZ1DZF57j4xzr77A2c2
-	YpIIsIjoK71xo/j/obvJaBdu8HzAiNvd1+vdA25ml9G7oN/RSsfWKGmucmEKGrIGkKu1Kz1ZtCTG3
-	EPYun9OA==;
-Received: from localhost ([::1]:33712 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=cQ0BBo4oIx9cwnhyKT7KQNOOMFVFxv16yMRDbO9zA4Q=; b=nRG5tZ0c6Z9eIhn7KWWo3aeaOB
+	fDOXNB+nS5Y89Gu3nn/zRqoAS0yX4SV6RqDXl1i9ENl8ijblUHaYAzfEbuKxagYCGZJ4sNlm5emsc
+	3w/ccjeboHxVbP9gg6Oxd99bNnEpsKGRsOwwGhFeSp3u4bEgJvG0rx/oqez0QG/5gonLDxBIRq6Bi
+	ghNJlUeyia+NmcyWAfRGDWPuftNPyGclUzpMeC3FVq+mlZ0DsLfS/uQabmTxkFPZyHBk3A4YwiO/x
+	SmljRHH0BevLFDtnovowYgaUIWz1ItcEdGdlEOH6F+BA/ZNZMOM3GGtz0AYEnL09uzDFhTnaCBpew
+	i+CPAVIQ==;
+Received: from localhost ([::1]:41578 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jZIVM-004MOP-Gk; Thu, 14 May 2020 18:22:48 +0000
-Received: from [81.174.151.90] (port=50018 helo=mail.gunas.co.uk) 
- by hr1.samba.org with esmtp (Exim) id 1jZIVE-004MOI-3S
- for samba-technical@lists.samba.org; Thu, 14 May 2020 18:22:45 +0000
-Received: from [192.168.1.101] (alibythesea.plus.com [81.174.151.90])
- by mail.gunas.co.uk (Postfix) with ESMTPSA id CC24E5403A3
- for <samba-technical@lists.samba.org>; Thu, 14 May 2020 18:57:38 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gunas.co.uk; s=mail;
- t=1589479058; bh=2iEchnIGVphJ97QpLAp+LmQ1sZbAVApsJImKQOui4JQ=;
- h=To:From:Subject:Date:From;
- b=o/aVw8VMAuvb0l5hXQ2QlACBftNf4HLpzTP2+ifB6KvOAVovxw6DACrSmTNfg1jqH
- JIJnTSQMinGFDuaWYXWldNP/+0eMINMyLIUpoRHN7sI1MXsVutkK0NxcbBwalTNqTr
- 1wwkehHHwZ9niXiPsBGEw7rz+fZ1w+CHQV65iMzxU+GMijaKBfB7IL3kv9eFpM5CWL
- U2ey2Dz0NdG7I5oqIX9+P1b+1q3imdi2raAWHjc36RUbqzzwqQDIqN+VFLIGqV8B0/
- un/rd7t9hZUX9tY12VTKIrqwV/laCKCdCGM8Uy+NR2BAENtoabQHvt1524laSRFJVQ
- foDXy4k4nqRbQ==
-To: samba-technical@lists.samba.org
+	id 1jZJPM-004NVZ-LI; Thu, 14 May 2020 19:20:40 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61864) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jZJPC-004NVQ-U9
+ for samba-technical@lists.samba.org; Thu, 14 May 2020 19:20:37 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=cQ0BBo4oIx9cwnhyKT7KQNOOMFVFxv16yMRDbO9zA4Q=; b=G8pwuuGmLeB87Zp5pftv8KTf0/
+ 2Ai+iJwgCjmvI09zR/QL5UOLp/a6bc9Rfxk0Lpc9DxPH8z8m09tZ6MJGoFvebePEjpneHjg5j4le7
+ Pj4MP/+mnp2Ktlke8fZ572WkG7Yh0EjlQyEyU4BOuZRg0OWS1gFukxNYUN1+uPUeRhmXKGogaBLXN
+ UWVvbfmZ6502HGHGisYFUq98rzztiCj+2MXPLvUIGQQmF7t2jpASuCmQbyaQiTj6Re9PmiB7GtW1z
+ E6v87darHcz07JRJe0xn/MRaRWPwbvegSHnxv5g5iWESPQ7uA67ZtyI4o7vbeakuj/QiUYqMwOdDq
+ MFBy4x9GG63aPn90AkxmM5XJf4H70QJ1oza8PvI/wmpeoBCnAjDforf+3drjzUZPMVxFkYHadqVPq
+ 4J305ss4bBoQ13E5cVYgQ1je7ADMPJ1TlGLUDywPykbsDn6tKIcEjyTYWAwkthQu66y4vhuVXwDDC
+ YEo7mwTFRZtMVoScBooC54G5;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jZJPB-0006Ts-Jv
+ for samba-technical@lists.samba.org; Thu, 14 May 2020 19:20:29 +0000
 Subject: Re: DNS problem ubuntu server 20.04
-Message-ID: <bf44e5c1-f6ed-889e-50cf-f90395136912@gunas.co.uk>
-Date: Thu, 14 May 2020 18:57:38 +0100
+To: samba-technical@lists.samba.org
+References: <bf44e5c1-f6ed-889e-50cf-f90395136912@gunas.co.uk>
+Message-ID: <d2b811c5-5433-5195-125b-6de2933d8439@samba.org>
+Date: Thu, 14 May 2020 20:20:28 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-Content-Language: en-US
+In-Reply-To: <bf44e5c1-f6ed-889e-50cf-f90395136912@gunas.co.uk>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,193 +58,64 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: RickJC1 via samba-technical <samba-technical@lists.samba.org>
-Reply-To: RickJC1 <rickjc2@gunas.co.uk>
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello everyone I am trying to get Samba 4.11.6 -Ubuntu Bind 
-9.16.1-Ubuntu to work with Ubuntu server 20.04
+On 14/05/2020 18:57, RickJC1 via samba-technical wrote:
+> Hello everyone I am trying to get Samba 4.11.6 -Ubuntu Bind 
+> 9.16.1-Ubuntu to work with Ubuntu server 20.04
+It looks like 'samba-master/source4/setup/named.conf.dlz' needs updating 
+again, the highest version is 'dlz_bind9_12.so'
+>
+>
+> Hostname: dc1s
+>
+> NetBIOS Domain: GUNAS
+>
+> DNS Domain: gunas.int
+>
+>
+> I am trying resolve a problem with not being able to find the server. 
+> After many days of failed attempts. I did not want to bother anyone 
+> but I have been defeated so I could do with some help please.
+>
+>
+> */etc/resolv.conf*
+>
+> nameserver 127.0.0.53
+It should point at the DC's ipaddress
+>
+> May 14 14:38:26 dc1s named[1389]: command channel listening on ::1#953
+>
+> May 14 14:38:26 dc1s named[1389]: managed-keys-zone: loaded serial 19
+>
+> May 14 14:38:26 dc1s named[1389]: zone 127.in-addr.arpa/IN: loaded 
+> serial 1
+>
+> May 14 14:38:26 dc1s named[1389]: zone 0.in-addr.arpa/IN: loaded serial 1
+>
+> May 14 14:38:26 dc1s named[1389]: zone 255.in-addr.arpa/IN: loaded 
+> serial 1
+>
+> May 14 14:38:26 dc1s named[1389]: zone localhost/IN: loaded serial 2
+>
+> May 14 14:38:26 dc1s named[1389]: all zones loaded
+>
+> May 14 14:38:26 dc1s named[1389]: running
+It might be running but it isn't using bind9_dlz
+
+Try opening /var/lib/samba/bind-dns/named.conf
+
+Ensure that the line: database "dlopen 
+/usr/lib/x86_64-linux-gnu/samba/bind9/dlz_bind9_12.so";
+
+is uncommented and all similar lines are commented, it 'may' work, 
+restart bind9
+
+Rowland
 
 
-Hostname: dc1s
 
-NetBIOS Domain: GUNAS
-
-DNS Domain: gunas.int
-
-
-I am trying resolve a problem with not being able to find the server. 
-After many days of failed attempts. I did not want to bother anyone but 
-I have been defeated so I could do with some help please.
-
-
-*/etc/resolv.conf*
-
-nameserver 127.0.0.53
-
-options edns0
-
-search gunas.int
-
-
-*/etc/systemd/network/enp0s3.network*
-
-[Match]
-
-Name=enp0s3
-
-
-[Network]
-
-DNS=192.168.1.123
-
-DNSSECNegativeTrustAnchors=lan
-
-Domains=lan
-
-
-If I do *host -t SRV _ldap._tcp.gunas.int *
-
-*Returns* Host _ldap._tcp.gunas.int not found: 3(NXDOMAIN)
-
-
-If I try *host -t A dc1s.gunas.int*
-
-*Returns* Host dc1s.gunas.int not found: 3(NXDOMAIN)
-
-
-I think the problem is with DNS working
-
-
-I'm not sure if after updates or not, because the monitor says it all OK.
-
-
-root@dc1s:~# dig gunas.int @localhost
-
-
-; <<>> DiG 9.16.1-Ubuntu <<>> gunas.int @localhost
-
-;; global options: +cmd
-
-;; Got answer:
-
-;; ->>HEADER<<- opcode: QUERY, status: NXDOMAIN, id: 6585
-
-;; flags: qr rd ra ad; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
-
-
-;; OPT PSEUDOSECTION:
-
-; EDNS: version: 0, flags:; udp: 4096
-
-; COOKIE: cbfd0ae2a1293dde010000005ebd4ac344d7a9c2bd4a38fc (good)
-
-;; QUESTION SECTION:
-
-;gunas.int. IN A
-
-
-;; AUTHORITY SECTION:
-
-int. 1773 IN SOA sns.dns.icann.org. noc.dns.icann.org. 2020050830 3600 
-1800 604800 3600
-
-
-;; Query time: 0 msec
-
-;; SERVER: 127.0.0.1#53(127.0.0.1)
-
-;; WHEN: Thu May 14 14:42:27 BST 2020
-
-;; MSG SIZE rcvd: 123
-
-
-----------------------------------------------------------------------------------------------------------
-
-
-root@dc1s:~# s*ystemctl status bind9*
-
-● named.service - BIND Domain Name Server
-
-Loaded: loaded (/lib/systemd/system/named.service; enabled; vendor 
-preset: enabled)
-
-Active: active (running) since Thu 2020-05-14 14:38:26 BST; 13s ago
-
-Docs: man:named(8)
-
-Main PID: 1389 (named)
-
-Tasks: 8 (limit: 2282)
-
-Memory: 17.1M
-
-CGroup: /system.slice/named.service
-
-└─1389 /usr/sbin/named -f -u bind
-
-
-May 14 14:38:26 dc1s named[1389]: command channel listening on ::1#953
-
-May 14 14:38:26 dc1s named[1389]: managed-keys-zone: loaded serial 19
-
-May 14 14:38:26 dc1s named[1389]: zone 127.in-addr.arpa/IN: loaded serial 1
-
-May 14 14:38:26 dc1s named[1389]: zone 0.in-addr.arpa/IN: loaded serial 1
-
-May 14 14:38:26 dc1s named[1389]: zone 255.in-addr.arpa/IN: loaded serial 1
-
-May 14 14:38:26 dc1s named[1389]: zone localhost/IN: loaded serial 2
-
-May 14 14:38:26 dc1s named[1389]: all zones loaded
-
-May 14 14:38:26 dc1s named[1389]: running
-
-May 14 14:38:27 dc1s named[1389]: managed-keys-zone: Key 20326 for zone 
-. is now trusted (acceptance timer complete)
-
-May 14 14:38:36 dc1s named[1389]: resolver priming query complete
-
-root@dc1s:~#
-
-
-
-*From syslog*
-
-May 14 15:39:04 dc1s systemd-resolved[644]: Server returned error 
-NXDOMAIN, mitigating potential DNS violation DVE-2018-0001, retrying 
-transaction with reduced feature level UDP.
-
-May 14 15:39:04 dc1s ntpd[717]: Soliciting pool server 81.21.65.169
-
-May 14 15:39:04 dc1s ntpd[717]: Soliciting pool server 83.137.225.123
-
-May 14 15:39:04 dc1s ntpd[717]: Soliciting pool server 37.59.47.71
-
-May 14 15:39:04 dc1s systemd-resolved[644]: Server returned error 
-NXDOMAIN, mitigating potential DNS violation DVE-2018-0001, retrying 
-transaction with reduced feature level UDP.
-
-May 14 15:39:04 dc1s systemd-resolved[644]: message repeated 2 times: [ 
-Server returned error NXDOMAIN, mitigating potential DNS violation 
-DVE-2018-0001, retrying transaction with reduc>
-
-May 14 15:39:04 dc1s ntpd[717]: Soliciting pool server 91.189.89.199
-
-May 14 15:39:04 dc1s systemd-resolved[644]: Server returned error 
-NXDOMAIN, mitigating potential DNS violation DVE-2018-0001, retrying 
-transaction with reduced feature level UDP.
-
-May 14 15:39:05 dc1s systemd-resolved[644]: message repeated 19 times: [ 
-Server returned error NXDOMAIN, mitigating potential DNS violation 
-DVE-2018-0001, retrying transaction with redu>
-
-May 14 15:39:05 dc1s ntpd[717]: Soliciting pool server 91.189.94.4
-
-May 14 15:39:05 dc1s ntpd[717]: Soliciting pool server 85.199.214.102
-
-Thanks
-
-Rick
 
