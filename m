@@ -2,44 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EF861D2C8A
-	for <lists+samba-technical@lfdr.de>; Thu, 14 May 2020 12:23:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E29A31D36A3
+	for <lists+samba-technical@lfdr.de>; Thu, 14 May 2020 18:37:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=ZcSjYPWabqn38JyOFVoOM2BmrsGHyEs9Lhi7bYeKa9M=; b=GXah8iiXanrazADZ3ElgcxFWgq
-	TRjDEk6ONVMspkNp+CwaiWpudFHHNnhFzNKic9L7a3MFpC3dIwVxLYLxEMDrkjV4D+0gPg8S8YNwy
-	+px4juj6aFq/dNWaQ8j+/zjd5FfBJQUDXZf/w5T4d0qp0SqVB5FgPPK+/cLf9BSZbfIE8s2arlxjZ
-	15kjhAhPSLhacZOFUlCq12jzqc3/6YUn6RsNv9Mna0tTUOzF5UNbVxvkOXB/fyzjDnUIxceVFvq9o
-	hdUds0GGNl8s4wxs5PB6mNQpO/By9wP/UlGAfCPiyY0VhezuncstbFEFqJok3W52iG7fdn60plMoD
-	d2FYtuEQ==;
-Received: from localhost ([::1]:59748 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=mEKdkb224Y+6uwp/g2xAfAMY363iCg9pDRDlCdS+FVQ=; b=mNXAMaMuZI4BoxonSg7fmRIPF1
+	WABZ8G+UNUoYPOJakB7iunCl1IyO1GohplGUIqkye5+clD/58IrIdKF0fPZOxtGxX/R/ic06f83Yq
+	6ItDdFP1bbjUlSWORGaMI2gQjPL4OIpT9+274BPvytOkEYuhwwytLl1FkGXvTYrLNdJrFFuDxligb
+	nuQ2PugbayqCuscDc+vlRB8r74yEMwX2GGoklmrCZTtDtTtn8I2cG+gMNGijHa7AYiS1QSThQJnrJ
+	+qwbCTIMKOJZumEn5Nis1CDFwIZO1GP1RBnEu/EjoMpEWcg9BziLnUbrAEy60DRRkCJsEPloegrTn
+	OvM+IKQQ==;
+Received: from localhost ([::1]:27354 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jZB0X-004Imu-Is; Thu, 14 May 2020 10:22:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62028) 
+	id 1jZGqv-004LPZ-4v; Thu, 14 May 2020 16:36:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47500) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jZB0N-004Imm-Oj
- for samba-technical@lists.samba.org; Thu, 14 May 2020 10:22:27 +0000
+ (Exim) id 1jZGqo-004LPS-26
+ for samba-technical@lists.samba.org; Thu, 14 May 2020 16:36:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=ZcSjYPWabqn38JyOFVoOM2BmrsGHyEs9Lhi7bYeKa9M=; b=g9ql55Gn4JwMocS7WC7euTG2LI
- BCa2epytpXiyghvL/htV7xsk0hOWr9saz30hXPvLIZkOh78tNqynCFqYj12citXZWOV3BiGYRlCTF
- wvrvdIdM5/h7Ze1W/pP3+u6bMvifrE2irlUZXudelOoEu/iUSqWqjYqWddtbfwPrYkfW/hCnGmo3J
- e+choFVwtztX5AUbARgiib5qFxEe/oc4lh7NyjWp80pLwCtC/MiILUGFZHulLGnxGXeDGdXNnAZ+k
- DKVYK4Q3md3S/GjsdTAxTOIKYk9sJXT8G4H4FJCTmy9Aa6l5AZoG5qOJ+CrIjYDOA9nuzOz7f93uD
- Qaw7eLtBpJ27hMD9gm/piGo9OOVJGE8DSkhIGFqGvPWxACdPIWhMxBk+Qu5jR4PK0D3t6m9O88gal
- eezqhzYkaLprcj9sJjCBcMdgwbdbRkht86rnStgBNQG5N7HS3mhIb85GwsUk5bcvrcS24pnChUUj8
- iHr+tr4R9+8+rcS8qz/Nze19;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=mEKdkb224Y+6uwp/g2xAfAMY363iCg9pDRDlCdS+FVQ=; b=wXEdSOCdJbmMK1vvxD3xaeSesO
+ NJhdrGGikuuh0726IMNCRCd1EM+TapHtbP4/eGfja62WsmRvCDUY1SHlNl3kpCIBZ8kEbp5cSTtdX
+ sm6l1qX+6Jna0rJbebZyPCdARfXojmmH97tejTsL5y3mO8UozHCbWvy8aimuXu+Coxk5byiXx7JeH
+ VxURlFLygzrm5YUZn/V+5s7Fcc7e7L7yVy2eYLGREbJHZFrgGGTRmoHJd6HKMGpQ2Ds+5bwDmuJMR
+ AkVzJ9D/T7pFCj01jGbIGr/f0KoVgH3ykObFRyQp1sBoxS05hkOX6CM/9IhvI2HuquZtTLNwEztqB
+ RgMggJue3SvqXLqtyP/qb1suQJLBmyvfTXUxlYJP1iK52wq31Ckn+EuMYs9GxFEr/Ll6tOGs7xLce
+ CY7TIO4Nf4+dL7Ru7ZMNBRVadB5UJEFktF4TtwYKFXEs1p6G+fe7TRbygLrmAuyKUUFpb1dEGZQRs
+ FYqiIu4qFh+FMUCj8T9nX3cv;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jZB0L-0001yO-K5; Thu, 14 May 2020 10:22:18 +0000
-Message-ID: <e245b5e81ba6066da467f371bc917d6a052ccb8b.camel@samba.org>
-Subject: Heimdal upgrade tasks
-To: Stefan Metzmacher <metze@samba.org>
-Date: Thu, 14 May 2020 22:22:13 +1200
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jZGqn-0005Dd-1G; Thu, 14 May 2020 16:36:49 +0000
+Date: Thu, 14 May 2020 09:36:42 -0700
+To: Anoop C S <anoopcs@cryptolab.net>
+Subject: Re: Behaviour mismatch between "store dos attributes" and "map
+ archive" from man smb.conf(5)
+Message-ID: <20200514163642.GB5564@jeremy-acer>
+References: <e0d86c0fb92046e0f201cc14a112701ca891196a.camel@cryptolab.net>
+ <20200513184233.GB9585@jeremy-acer>
+ <20200513221431.GA7185@samba.org>
+ <20200513225131.GG9585@jeremy-acer>
+ <20200513233612.GB7185@samba.org>
+ <20200514005508.GA21149@jeremy-acer>
+ <edbc6471b5cfbeae515111411ea5f0e49228f5b7.camel@cryptolab.net>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <edbc6471b5cfbeae515111411ea5f0e49228f5b7.camel@cryptolab.net>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,44 +62,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>,
+ Michael Adam <obnox@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-G'Day metze,
+On Thu, May 14, 2020 at 01:40:06PM +0530, Anoop C S wrote:
+> On Wed, 2020-05-13 at 17:55 -0700, Jeremy Allison via samba-technical
+> wrote:
+> > On Thu, May 14, 2020 at 01:36:12AM +0200, Michael Adam wrote:
+> > > Right, and this is done unconditionally in open_file_ntcreate(),
+> > > I mean without checking lp_store_dos_attributes() first. So the
+> > > manpage is clearly wrong. store-dos-attributes disables none of
+> > > the map options. We only see the effect for map archive since
+> > > the other three default to "no" anyway...
+> > 
+> > Yep.
+> > 
+> > > What I am wondering is this:
+> > > If the file is created with SEC_RIGHTS_FILE_ALL, shouldn't it
+> > > get execute permissions, even if "map archive = no"?
+> > > After all, "map archive = no" does not prevent execute from
+> > > being set, it just doesn't set it because of archive...
+> > 
+> > No. SEC_RIGHTS_FILE_ALL is only to do with the access permissions
+> > on the handle, not the permissions on the file.
+> 
+> But what if file does not exist and is being created? Consider
+> smb2.read.position where it starts with an already existing file. If we
+> remove the file prior to executing this sub-test, it passes even with
+> "map archive = no"(of course without execute bit set). What does that
+> mean?
 
-I've had a customer offer to commission some of the work towards Samba
-being a 2012 FL DC, and I've suggested that the Heimdal work you are
-doing might be something I could help out with.
-
-Do you have any suggestions about how I can best help you?  I don't
-have a big budget, but if you have some ideas on what I could do in a
-week or so effort that would be awesome.
-
-I'm well aware of your tree at
-https://git.samba.org/?p=metze/samba/wip.git;a=shortlog;h=refs/heads/master4-heimdal
-
-What is and isn't working with that so far?
-
-Sadly I find your WIP trees rather intimidating so some clues on how
-best to start, or if instead you would prefer me to take on review for
-example would be great.  
-
-A specific failing test or some other self-contained element would also
-be most welcome.
-
-Thanks!
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
-
-
-
+This is only the case where files are being created. Remember,
+SEC_RIGHTS_FILE_ALL is *nothing* to do with the permission on
+the file being created, it *only* concerns the rights on the
+handle (the fd).
 
