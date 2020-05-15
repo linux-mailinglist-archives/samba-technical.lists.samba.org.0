@@ -2,49 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EE6D1D54E2
-	for <lists+samba-technical@lfdr.de>; Fri, 15 May 2020 17:38:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 31B671D5B7C
+	for <lists+samba-technical@lfdr.de>; Fri, 15 May 2020 23:30:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=ICvbfda0fFPM4uG6N1nRYmHRd1wo3bK3PWDlEYsU2E0=; b=zURMDPb4qb5tQejucTmujDJYok
-	vF9CcVv20NUt3D3YTq3WOAGEMntCWr/G9M/5UV9D2B8R9m/gQ3bz6667RtLw63Hk5RcKy2VSHC20f
-	SIDkFvzcz8pyNl+15YM2gotzn3oCBjyjvv3G8p9DETwAvqvT2tEp59+r0+xoCPL+QfTgEls86rpze
-	9otkUxw1oK+g8k1Mkj4Bb1EiawivZ2vOZkQCfndWeNhOmBAd6jUAGAKR1TUqB8acX8uF95vNCk2nc
-	+WQsaNZbmMzd/lsy5n+M4poQ+aI5DlvOo3LU4FimBWmJ3vUR9buqwBsZHNtR67MOXDd12nSRV/yck
-	g8M1vVqg==;
-Received: from localhost ([::1]:22484 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=tCNcLqjkeJZwtxeLkBFVH8UIMfsTB/wf0rtch6C33qs=; b=Rzh5kOU5r1wXjq8Fhf8PKuCR6f
+	ZYVFCXfsuMTzxg/l0RGII5u7KJJfOjbbxu3AynmKbvhZemmqCfhrvfFAH2LZfcmWS2cbVISyWm4ju
+	cSdneGfiBdcXfrkjS6JyPlEhLLSvmWexjY15tiwPsIN0fIyQLU+35dLg80jTSvrwnbTui090s0eHa
+	99SkzlOD9THNfo6F+BAO9b5O/IH4chATX9ONL26BLDCmJG490737m0tlydht4Lb9SQhoEST4SrjtI
+	MGq2OjHuk70ZH9/xX5vTi7u1yhW5dlbuNfsRrgIQiQhNabnG0nNUTccBOCt1bgL9UzbQpHneN/bmr
+	Nxs9nfAQ==;
+Received: from localhost ([::1]:49368 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jZcQ6-004Zez-T6; Fri, 15 May 2020 15:38:42 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50204) 
+	id 1jZhtl-004dad-RU; Fri, 15 May 2020 21:29:41 +0000
+Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535]:38921) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jZcPz-004Zek-Pi
- for samba-technical@lists.samba.org; Fri, 15 May 2020 15:38:40 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=ICvbfda0fFPM4uG6N1nRYmHRd1wo3bK3PWDlEYsU2E0=; b=Q2X9ojNC0hVqOmum7ceDEnDrqc
- DMZeViRlCQ3BoxOSY9vX0Rn8zXDBap1OPtpUIHBL30SpJB0/fWgzlhZd+VAbWqr74lOi0n8gCJekh
- S3AgWudd2JP84UmtCYLVlZgCtt7Lf8YEwadwNJhB35FBbk16Xzf4Sj6l9ZWQZ4N2yM02rIFN+YmbU
- 9c9AogM8COP6a91mirrqN7brvn93DXdtmbwWIWVL9M+8NXxvauVpnHEN2j1UOOvi9GgvCUfGTk5Qc
- +TE2HGpNA4lXZtGEGgq2H4htd4r+MK5wRPC+0k+n7Yn5961OrnUAAEz/oVeTpd53qIAdjTZ/41jP7
- mveDBKJfZZivIAA1mJAu5dySbpVDyiu8NN7tygokjUCpI48S56zQYvnURNgZnnJ5KVCUUqPcLgVcp
- SVe609uWvNDGaVCTDQeiUU9e3ddBWUKwDKVMNk/+VMA934fVHEQeR2mZy9cGsI+7pzNZrqpKKnr01
- /tm20jyVHDmaD2j9qCM0tlmx;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jZcPz-00004t-4Z; Fri, 15 May 2020 15:38:35 +0000
-To: Andrew Bartlett <abartlet@samba.org>
-References: <e245b5e81ba6066da467f371bc917d6a052ccb8b.camel@samba.org>
- <02c579f8-1021-52c7-0671-a85645e2f353@samba.org>
-Subject: Re: Heimdal upgrade tasks
-Message-ID: <803e3c00-a223-4585-569b-6170576b7b8f@samba.org>
-Date: Fri, 15 May 2020 17:38:31 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ (Exim) id 1jZhte-004daW-9y
+ for samba-technical@lists.samba.org; Fri, 15 May 2020 21:29:38 +0000
+Received: by mail-ed1-x535.google.com with SMTP id bs4so3401537edb.6
+ for <samba-technical@lists.samba.org>; Fri, 15 May 2020 14:29:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to:cc;
+ bh=tCNcLqjkeJZwtxeLkBFVH8UIMfsTB/wf0rtch6C33qs=;
+ b=Cg5ZDjWU4kPMVUtqh6wzdZ0DnImQsMp8yQd0vSsiPmdMNeVO2aNE8WBqG9Dl796sHn
+ NI6vHJ79pWdn1TVIwRifT2OxevYr7CAPR3y6Ok2+po1/xVWLeMZAmYBi06q6Bf3lnj8M
+ OSNyK77hb/+o8lYXsiURFU68ZYYMRbz4e/17+/60YNVjj9BhbB/lXHDQ0C6XSNntgHrs
+ C9mCyb44buAEM+DsC5u2GE3dr/7vFqbX4uL11TWugHoQV289kzsyX2a8vn9iJ08adEkk
+ /A4dVuyEnleTEqmV3iMxwL0jAfj8iBm25c9E+aYZfG3IZ6RQ9bBQdxnRVZNfMnizUKZY
+ WFFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+ bh=tCNcLqjkeJZwtxeLkBFVH8UIMfsTB/wf0rtch6C33qs=;
+ b=LOPBfuH+LMseWu/61EPHNFYxsYjyzIz5Mv6layOviiKSFWeq/YsQFjjvwy0tKUXVth
+ tIhy0veXE2zg2gWo2qcHcRLNkrXVYH/HgIXHY+N7WgfNIZVC7uMhfid0LO8dVmD/O22z
+ Qb4oop7JQSMgPEyf/33sfWnKLA2zfNyubfDQ2wHHfKExlHNZCFI9d8ZPxv2S9wPgbte5
+ P+oB7KlkNiUI49u7/n3VsivMHCKUbXnhGvbR5lz/Up/cqeeS0B23p9+p+JZ1KzF7mpRr
+ gNihyYvMg334d+wnJFrwFWJcaVanQ9ZVP0LJM5CBis30tCZKgLeJjkjt57dkOv9ODNBV
+ TNmw==
+X-Gm-Message-State: AOAM533NRZH754djE1n7Uo+bkt5t0i1GKHOiHkb5Xyfc3vfE2Z4ALQks
+ Mr0ln8og2+OulvVDCJw+OSH9wK1u/HcUCo06tk774ac4
+X-Google-Smtp-Source: ABdhPJxzl1N5jbiXnmIzAUP5Rn8hsyVg+wheLnsBh0mLNuwd1qvGonfEliAfVFz+cXHNaaSUIvYilW6dNcEHzAmVIxM=
+X-Received: by 2002:a50:d65c:: with SMTP id c28mr4454990edj.21.1589578172843; 
+ Fri, 15 May 2020 14:29:32 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <02c579f8-1021-52c7-0671-a85645e2f353@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="UIbxdryysDEboeX33APBjZGaCO43f4TYz"
+Date: Sat, 16 May 2020 02:59:21 +0530
+Message-ID: <CAGuNez4rgOrtf_jEX1TC-D-bjaFVRr46=WmMi5N1hdqoYBP1ig@mail.gmail.com>
+Subject: [PATCH] SMB2 Compound related chain handling when generation of
+ FileId has failed
+To: "samba-technical@lists.samba.org (samba-technical@lists.samba.org)"
+ <samba-technical@lists.samba.org>
+Content-Type: multipart/mixed; boundary="00000000000055e2a305a5b6824d"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,98 +66,193 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Anubhav Rakshit via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Anubhav Rakshit <anubhav.rakshit@gmail.com>
+Cc: hemanth.thummala@nutanix.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---UIbxdryysDEboeX33APBjZGaCO43f4TYz
-Content-Type: multipart/mixed; boundary="1kAjFPzdxIrTNXReDYTcMZV7UAlmYDPmE";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Message-ID: <803e3c00-a223-4585-569b-6170576b7b8f@samba.org>
-Subject: Re: Heimdal upgrade tasks
-References: <e245b5e81ba6066da467f371bc917d6a052ccb8b.camel@samba.org>
- <02c579f8-1021-52c7-0671-a85645e2f353@samba.org>
-In-Reply-To: <02c579f8-1021-52c7-0671-a85645e2f353@samba.org>
+--00000000000055e2a305a5b6824d
+Content-Type: text/plain; charset="UTF-8"
 
---1kAjFPzdxIrTNXReDYTcMZV7UAlmYDPmE
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Am 15.05.20 um 16:49 schrieb Stefan Metzmacher via samba-technical:
-> Hi Andrew,
->=20
->> I've had a customer offer to commission some of the work towards Samba=
+Please review the following patches.They consist of:
+1. Smbtorture test case to verify the expected behaviour in case of
+Create failure in a compound related chain.
+2. Implement the behaviour in Samba Fileserver code.
 
->> being a 2012 FL DC, and I've suggested that the Heimdal work you are
->> doing might be something I could help out with.
->=20
-> Great!
->=20
->> Do you have any suggestions about how I can best help you?  I don't
->> have a big budget, but if you have some ideas on what I could do in a
->> week or so effort that would be awesome.
->>
->> I'm well aware of your tree at
->> https://git.samba.org/?p=3Dmetze/samba/wip.git;a=3Dshortlog;h=3Drefs/h=
-eads/master4-heimdal
->>
->> What is and isn't working with that so far?
->=20
-> Try to find the pipeline with the related commit or run a new one.
->=20
-> I think most of it was related to the test cases which rely on the
-> internals.
->=20
-> I guess it would be good to work on top of
-> https://git.samba.org/?p=3Dmetze/samba/wip.git;a=3Dshortlog;h=3Drefs/he=
-ads/master-auth
->=20
-> For a start make a copy of python/samba/tests/krb5/as_req_tests.py
-> and try to add the canon tests.
+I have attached the patches.
+The changes are also staged in github.
+https://github.com/anubhavrakshit/samba/commit/a0e7d6196b259038342569d371ff67ed30c9b6b8
+https://github.com/anubhavrakshit/samba/commit/4637b6108f188c1a2df7cce94165b621294942a1
 
-I think the key thing would be to use _generic_kdc_exchange()
-with as_exchange_dict() and tgs_exchange_dict().
+Thanks,
+Anubhav
 
-Maybe it's enough to use _test_as_exchange() and create something
-similar for _test_tgs_exchange().
+--00000000000055e2a305a5b6824d
+Content-Type: text/plain; charset="US-ASCII"; name="compound_fix.txt"
+Content-Disposition: attachment; filename="compound_fix.txt"
+Content-Transfer-Encoding: base64
+Content-ID: <f_ka8pq0h40>
+X-Attachment-Id: f_ka8pq0h40
 
-Do a grep in order to find some examples.
-
-Thanks!
-mete
-
-
-
---1kAjFPzdxIrTNXReDYTcMZV7UAlmYDPmE--
-
---UIbxdryysDEboeX33APBjZGaCO43f4TYz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl6+t3cACgkQDbX1YShp
-vVZPSQ/+Pc+3UA1WUjTRaDpRc0gEKOfrdBzJSYYT5US/WWvT3WIXyPmL4gImgum6
-bzAjS3wo/ja1dXmUK0cUZcvXJIiWfdgeBbR8eFORzzv071zvu8KFFXquN0NmpMIY
-b41W7YxC40fYP5Z6hJFD9QVBrbijdAZf64Ps+7riEeHcFu1FPPpyUzX2N5v/vPEO
-5opTT/9y/mW4uKrDGHtDassq9i1VDY3reNFoqpvkxFTH1WcO/iXYeironVt80b6E
-ttMR7M03VgjmFTw48kVVDjtn1lW/2zILJdpVznYj1MWxzKVxld9l/QpCRt9n3NWg
-0r/IxUo42EH+lQ5rauGvhF5PLDudaUPigvhur03koO6eYJvKj9jUGGZPU/tJ16j1
-dJrjrkGINZMUr3wYW5TAa4kOk4g76su2HNpeEY0VWCzTGB23TKdzKhgQsltTkHpq
-4zLjCnSZmYQyH7e1lLTv02++aZoYjkwgk7I1S4c1qv9hcEOKn+P1yYeO+/3khQi1
-NeCqa17O6Eqn84sziv19vQ9RXQJkUThDildq7jsNWTRdJxW1S2obCRIFqk8Owx70
-Kw/yLmPkgzLehRITYt7fkRiPBfhEGJyPB0VIx7acvPAYDi8NlXZDeAvwbB969odw
-82hMcudRwWkjM3UdlIpTKhoo28PPBwO0YUADspnr62YTx90HWt0=
-=0w9T
------END PGP SIGNATURE-----
-
---UIbxdryysDEboeX33APBjZGaCO43f4TYz--
+RnJvbSBhMGU3ZDYxOTZiMjU5MDM4MzQyNTY5ZDM3MWZmNjdlZDMwYzliNmI4IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBBbnViaGF2IFJha3NoaXQgPGFudWJoYXYucmFrc2hpdEBnbWFp
+bC5jb20+CkRhdGU6IFNhdCwgMTYgTWF5IDIwMjAgMDA6MDI6MTggKzA1MzAKU3ViamVjdDogW1BB
+VENIIDEvMl0gQWRkIGNvdXBsZSBvZiBjb21wb3VuZCByZWxhdGVkIHRlc3QgY2FzZXMgdG8gdmVy
+aWZ5IHRoYXQKIHNlcnZlciBzaG91bGQgcmV0dXJuIE5UU1RBVFVTIG9mIHRoZSBmYWlsZWQgQ3Jl
+YXRlIGZvciBzdWNjZWVkaW5nIHJlcXVlc3RzLgoKU2lnbmVkLW9mZi1ieTogQW51YmhhdiBSYWtz
+aGl0IDxhbnViaGF2LnJha3NoaXRAZ21haWwuY29tPgotLS0KIHNvdXJjZTQvdG9ydHVyZS9zbWIy
+L2NvbXBvdW5kLmMgfCAxMzggKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKIDEgZmls
+ZSBjaGFuZ2VkLCAxMzggaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL3NvdXJjZTQvdG9ydHVy
+ZS9zbWIyL2NvbXBvdW5kLmMgYi9zb3VyY2U0L3RvcnR1cmUvc21iMi9jb21wb3VuZC5jCmluZGV4
+IGZkNjU3YTRhMTZlLi45YWIzNzBkNjc5MiAxMDA2NDQKLS0tIGEvc291cmNlNC90b3J0dXJlL3Nt
+YjIvY29tcG91bmQuYworKysgYi9zb3VyY2U0L3RvcnR1cmUvc21iMi9jb21wb3VuZC5jCkBAIC0y
+NCw2ICsyNCw4IEBACiAjaW5jbHVkZSAibGliY2xpL3NtYjIvc21iMl9jYWxscy5oIgogI2luY2x1
+ZGUgInRvcnR1cmUvdG9ydHVyZS5oIgogI2luY2x1ZGUgInRvcnR1cmUvc21iMi9wcm90by5oIgor
+I2luY2x1ZGUgImxpYmNsaS9zZWN1cml0eS9zZWN1cml0eS5oIgorI2luY2x1ZGUgImxpYnJwYy9n
+ZW5fbmRyL25kcl9zZWN1cml0eS5oIgogI2luY2x1ZGUgIi4uL2xpYmNsaS9zbWIvc21iWGNsaV9i
+YXNlLmgiCiAKICNkZWZpbmUgQ0hFQ0tfU1RBVFVTKHN0YXR1cywgY29ycmVjdCkgZG8geyBcCkBA
+IC00NDEsNiArNDQzLDEzOCBAQCBkb25lOgogCXJldHVybiByZXQ7CiB9CiAKK3N0YXRpYyBib29s
+IHRlc3RfY29tcG91bmRfcmVsYXRlZDQoc3RydWN0IHRvcnR1cmVfY29udGV4dCAqdGN0eCwKKyAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHNtYjJfdHJlZSAqdHJlZSkg
+eworICBzdHJ1Y3Qgc21iMl9oYW5kbGUgaGQ7CisgIHN0cnVjdCBzbWIyX2NyZWF0ZSBjcjsKKyAg
+dW5pb24gc21iX3NldGZpbGVpbmZvIHNldDsKKyAgc3RydWN0IHNtYjJfaW9jdGwgaW87CisgIHN0
+cnVjdCBzbWIyX2Nsb3NlIGNsOworICBzdHJ1Y3Qgc2VjdXJpdHlfZGVzY3JpcHRvciAqc2Q7Cisg
+IE5UU1RBVFVTIHN0YXR1czsKKyAgY29uc3QgY2hhciAqZm5hbWUgPSAiY29tcG91bmRfcmVsYXRl
+ZDQuZGF0IjsKKyAgc3RydWN0IHNtYjJfcmVxdWVzdCAqcmVxWzRdOworICBib29sIHJldCA9IHRy
+dWU7CisKKyAgc21iMl91dGlsX3VubGluayh0cmVlLCBmbmFtZSk7CisKKyAgWkVST19TVFJVQ1Qo
+Y3IpOworICBjci5sZXZlbCA9IFJBV19PUEVOX1NNQjI7CisgIGNyLmluLmNyZWF0ZV9mbGFncyA9
+IDA7CisgIGNyLmluLmRlc2lyZWRfYWNjZXNzID0KKyAgICAgIFNFQ19TVERfUkVBRF9DT05UUk9M
+IHwgU0VDX1NURF9XUklURV9EQUMgfCBTRUNfU1REX1dSSVRFX09XTkVSOworICBjci5pbi5jcmVh
+dGVfb3B0aW9ucyA9IDA7CisgIGNyLmluLmZpbGVfYXR0cmlidXRlcyA9IEZJTEVfQVRUUklCVVRF
+X05PUk1BTDsKKyAgY3IuaW4uc2hhcmVfYWNjZXNzID0gTlRDUkVBVEVYX1NIQVJFX0FDQ0VTU19E
+RUxFVEUgfAorICAgICAgICAgICAgICAgICAgICAgICBOVENSRUFURVhfU0hBUkVfQUNDRVNTX1JF
+QUQgfAorICAgICAgICAgICAgICAgICAgICAgICBOVENSRUFURVhfU0hBUkVfQUNDRVNTX1dSSVRF
+OworICBjci5pbi5hbGxvY19zaXplID0gMDsKKyAgY3IuaW4uY3JlYXRlX2Rpc3Bvc2l0aW9uID0g
+TlRDUkVBVEVYX0RJU1BfT1BFTl9JRjsKKyAgY3IuaW4uaW1wZXJzb25hdGlvbl9sZXZlbCA9IE5U
+Q1JFQVRFWF9JTVBFUlNPTkFUSU9OX0FOT05ZTU9VUzsKKyAgY3IuaW4uc2VjdXJpdHlfZmxhZ3Mg
+PSAwOworICBjci5pbi5mbmFtZSA9IGZuYW1lOworCisgIHN0YXR1cyA9IHNtYjJfY3JlYXRlKHRy
+ZWUsIHRjdHgsICZjcik7CisgIENIRUNLX1NUQVRVUyhzdGF0dXMsIE5UX1NUQVRVU19PSyk7Cisg
+IGhkID0gY3Iub3V0LmZpbGUuaGFuZGxlOworICB0b3J0dXJlX2NvbW1lbnQodGN0eCwgInNldCBh
+IHNlYyBkZXNjIGFsbG93aW5nIG5vIHdyaXRlIGJ5IENSRUFUT1JfT1dORVJcbiIpOworICBzZCA9
+IHNlY3VyaXR5X2Rlc2NyaXB0b3JfZGFjbF9jcmVhdGUodGN0eCwKKwkJICAwLCBOVUxMLCBOVUxM
+LAorCQkgIFNJRF9DUkVBVE9SX09XTkVSLAorCQkgIFNFQ19BQ0VfVFlQRV9BQ0NFU1NfQUxMT1dF
+RCwKKwkJICBTRUNfUklHSFRTX0ZJTEVfUkVBRCB8IFNFQ19TVERfQUxMLAorCQkgIDAsCisJCSAg
+TlVMTCk7CisKKyAgc2V0LnNldF9zZWNkZXNjLmxldmVsID0gUkFXX1NGSUxFSU5GT19TRUNfREVT
+QzsKKyAgc2V0LnNldF9zZWNkZXNjLmluLmZpbGUuaGFuZGxlID0gaGQ7CisgIHNldC5zZXRfc2Vj
+ZGVzYy5pbi5zZWNpbmZvX2ZsYWdzID0gU0VDSU5GT19EQUNMOworICBzZXQuc2V0X3NlY2Rlc2Mu
+aW4uc2QgPSBzZDsKKworICBzdGF0dXMgPSBzbWIyX3NldGluZm9fZmlsZSh0cmVlLCAmc2V0KTsK
+KyAgQ0hFQ0tfU1RBVFVTKHN0YXR1cywgTlRfU1RBVFVTX09LKTsKKworICB0b3J0dXJlX2NvbW1l
+bnQodGN0eCwgInRyeSBvcGVuIGZvciB3cml0ZVxuIik7CisgIGNyLmluLmRlc2lyZWRfYWNjZXNz
+ID0gU0VDX0ZJTEVfV1JJVEVfREFUQTsKKyAgc21iMl90cmFuc3BvcnRfY29tcG91bmRfc3RhcnQo
+dHJlZS0+c2Vzc2lvbi0+dHJhbnNwb3J0LCA0KTsKKyAgcmVxWzBdID0gc21iMl9jcmVhdGVfc2Vu
+ZCh0cmVlLCAmY3IpOworICBoZC5kYXRhWzBdID0gVUlOVDY0X01BWDsKKyAgaGQuZGF0YVsxXSA9
+IFVJTlQ2NF9NQVg7CisKKyAgc21iMl90cmFuc3BvcnRfY29tcG91bmRfc2V0X3JlbGF0ZWQodHJl
+ZS0+c2Vzc2lvbi0+dHJhbnNwb3J0LCB0cnVlKTsKKyAgWkVST19TVFJVQ1QoaW8pOworICBpby5p
+bi5mdW5jdGlvbiA9IEZTQ1RMX0NSRUFURV9PUl9HRVRfT0JKRUNUX0lEOworICBpby5pbi5maWxl
+LmhhbmRsZSA9IGhkOworICBpby5pbi5mbGFncyA9IDE7CisKKyAgcmVxWzFdID0gc21iMl9pb2N0
+bF9zZW5kKHRyZWUsICZpbyk7CisKKyAgWkVST19TVFJVQ1QoY2wpOworICBjbC5pbi5maWxlLmhh
+bmRsZSA9IGhkOworCisgIHJlcVsyXSA9IHNtYjJfY2xvc2Vfc2VuZCh0cmVlLCAmY2wpOworCisg
+IHNldC5zZXRfc2VjZGVzYy5pbi5maWxlLmhhbmRsZSA9IGhkOworCisgIHJlcVszXSA9IHNtYjJf
+c2V0aW5mb19maWxlX3NlbmQodHJlZSwgJnNldCk7CisKKyAgc3RhdHVzID0gc21iMl9jcmVhdGVf
+cmVjdihyZXFbMF0sIHRyZWUsICZjcik7CisgIENIRUNLX1NUQVRVUyhzdGF0dXMsIE5UX1NUQVRV
+U19BQ0NFU1NfREVOSUVEKTsKKyAgc3RhdHVzID0gc21iMl9pb2N0bF9yZWN2KHJlcVsxXSwgdHJl
+ZSwgJmlvKTsKKyAgQ0hFQ0tfU1RBVFVTKHN0YXR1cywgTlRfU1RBVFVTX0FDQ0VTU19ERU5JRUQp
+OworICBzdGF0dXMgPSBzbWIyX2Nsb3NlX3JlY3YocmVxWzJdLCAmY2wpOworICBDSEVDS19TVEFU
+VVMoc3RhdHVzLCBOVF9TVEFUVVNfQUNDRVNTX0RFTklFRCk7CisgIHN0YXR1cyA9IHNtYjJfc2V0
+aW5mb19yZWN2KHJlcVszXSk7CisgIENIRUNLX1NUQVRVUyhzdGF0dXMsIE5UX1NUQVRVU19BQ0NF
+U1NfREVOSUVEKTsKK2RvbmU6CisgIHNtYjJfdXRpbF91bmxpbmsodHJlZSwgZm5hbWUpOworICBz
+bWIyX3RkaXModHJlZSk7CisgIHNtYjJfbG9nb2ZmKHRyZWUtPnNlc3Npb24pOworICByZXR1cm4g
+cmV0OworfQorCitzdGF0aWMgYm9vbCB0ZXN0X2NvbXBvdW5kX3JlbGF0ZWQ1KHN0cnVjdCB0b3J0
+dXJlX2NvbnRleHQgKnRjdHgsCisJCQkJICAgc3RydWN0IHNtYjJfdHJlZSAqdHJlZSkKK3sKKwlz
+dHJ1Y3Qgc21iMl9oYW5kbGUgaGQ7CisJc3RydWN0IHNtYjJfaW9jdGwgaW87CisJc3RydWN0IHNt
+YjJfY2xvc2UgY2w7CisJc3RydWN0IHNtYjJfcmVxdWVzdCAqcmVxWzJdOworCU5UU1RBVFVTIHN0
+YXR1czsKKwlib29sIHJldCA9IGZhbHNlOworCisJc21iMl90cmFuc3BvcnRfY29tcG91bmRfc3Rh
+cnQodHJlZS0+c2Vzc2lvbi0+dHJhbnNwb3J0LCAyKTsKKworCWhkLmRhdGFbMF0gPSBVSU5UNjRf
+TUFYOworCWhkLmRhdGFbMV0gPSBVSU5UNjRfTUFYOworCisKKwlaRVJPX1NUUlVDVChpbyk7CisJ
+aW8uaW4uZnVuY3Rpb24gPSBGU0NUTF9DUkVBVEVfT1JfR0VUX09CSkVDVF9JRDsKKwlpby5pbi5m
+aWxlLmhhbmRsZSA9IGhkOworCWlvLmluLmZsYWdzID0gMTsKKworCXJlcVswXSA9IHNtYjJfaW9j
+dGxfc2VuZCh0cmVlLCAmaW8pOworCisJc21iMl90cmFuc3BvcnRfY29tcG91bmRfc2V0X3JlbGF0
+ZWQodHJlZS0+c2Vzc2lvbi0+dHJhbnNwb3J0LCB0cnVlKTsKKworCVpFUk9fU1RSVUNUKGNsKTsK
+KwljbC5pbi5maWxlLmhhbmRsZSA9IGhkOworCisJcmVxWzFdID0gc21iMl9jbG9zZV9zZW5kKHRy
+ZWUsICZjbCk7CisKKwlzdGF0dXMgPSBzbWIyX2lvY3RsX3JlY3YocmVxWzBdLCB0cmVlLCAmaW8p
+OworCUNIRUNLX1NUQVRVUyhzdGF0dXMsIE5UX1NUQVRVU19GSUxFX0NMT1NFRCk7CisJc3RhdHVz
+ID0gc21iMl9jbG9zZV9yZWN2KHJlcVsxXSwgJmNsKTsKKwlDSEVDS19TVEFUVVMoc3RhdHVzLCBO
+VF9TVEFUVVNfRklMRV9DTE9TRUQpOworCisJcmV0ID0gdHJ1ZTsKK2RvbmU6CisJc21iMl90ZGlz
+KHRyZWUpOworCXNtYjJfbG9nb2ZmKHRyZWUtPnNlc3Npb24pOworCXJldHVybiByZXQ7Cit9CisK
+IHN0YXRpYyBib29sIHRlc3RfY29tcG91bmRfcGFkZGluZyhzdHJ1Y3QgdG9ydHVyZV9jb250ZXh0
+ICp0Y3R4LAogCQkJCSAgc3RydWN0IHNtYjJfdHJlZSAqdHJlZSkKIHsKQEAgLTE0MzYsNiArMTU3
+MCwxMCBAQCBzdHJ1Y3QgdG9ydHVyZV9zdWl0ZSAqdG9ydHVyZV9zbWIyX2NvbXBvdW5kX2luaXQo
+VEFMTE9DX0NUWCAqY3R4KQogCXRvcnR1cmVfc3VpdGVfYWRkXzFzbWIyX3Rlc3Qoc3VpdGUsICJy
+ZWxhdGVkMiIsIHRlc3RfY29tcG91bmRfcmVsYXRlZDIpOwogCXRvcnR1cmVfc3VpdGVfYWRkXzFz
+bWIyX3Rlc3Qoc3VpdGUsICJyZWxhdGVkMyIsCiAJCQkJICAgICB0ZXN0X2NvbXBvdW5kX3JlbGF0
+ZWQzKTsKKwl0b3J0dXJlX3N1aXRlX2FkZF8xc21iMl90ZXN0KHN1aXRlLCAicmVsYXRlZDQiLAor
+CQkJCSAgICAgdGVzdF9jb21wb3VuZF9yZWxhdGVkNCk7CisJdG9ydHVyZV9zdWl0ZV9hZGRfMXNt
+YjJfdGVzdChzdWl0ZSwgInJlbGF0ZWQ1IiwKKwkJCQkgICAgIHRlc3RfY29tcG91bmRfcmVsYXRl
+ZDUpOwogCXRvcnR1cmVfc3VpdGVfYWRkXzFzbWIyX3Rlc3Qoc3VpdGUsICJ1bnJlbGF0ZWQxIiwg
+dGVzdF9jb21wb3VuZF91bnJlbGF0ZWQxKTsKIAl0b3J0dXJlX3N1aXRlX2FkZF8xc21iMl90ZXN0
+KHN1aXRlLCAiaW52YWxpZDEiLCB0ZXN0X2NvbXBvdW5kX2ludmFsaWQxKTsKIAl0b3J0dXJlX3N1
+aXRlX2FkZF8xc21iMl90ZXN0KHN1aXRlLCAiaW52YWxpZDIiLCB0ZXN0X2NvbXBvdW5kX2ludmFs
+aWQyKTsKLS0gCjIuMjAuMQoKCkZyb20gNDYzN2I2MTA4ZjE4OGMxYTJkZjdjY2U5NDE2NWI2MjEy
+OTQ5NDJhMSBNb24gU2VwIDE3IDAwOjAwOjAwIDIwMDEKRnJvbTogQW51YmhhdiBSYWtzaGl0IDxh
+bnViaGF2LnJha3NoaXRAZ21haWwuY29tPgpEYXRlOiBTYXQsIDE2IE1heSAyMDIwIDAyOjA5OjE2
+ICswNTMwClN1YmplY3Q6IFtQQVRDSCAyLzJdIFNNQjIgQ29tcG91bmQgcmVsYXRlZCBjaGFpbiBo
+YW5kbGluZyB3aGVuIGdlbmVyYXRpb24gb2YKIEZpbGVJZCBoYXMgZmFpbGVkCgpJc3N1ZToKV2Ug
+aGF2ZSBhIHNjZW5hcmlvIHdoZXJlIGFuIGFwcGxpY2F0aW9uIHNlbmRzIGEgQ29tcG91bmQgUmVs
+YXRlZCBjaGFpbgpjb25zaXN0aW5nIG9mOgpTTUIyX0NSRUFURQpTTUIyX0lPQ1RMClNNQjJfU0VU
+X0lORk8KU01CMl9DTE9TRQoKU01CMl9DUkVBVEUgZmFpbGVkIHdpdGggTlRfU1RBVFVTX0FDQ0VT
+U19ERU5JRUQgYW5kIHN1YnNlcXVlbnQKcmVxdWVzdHMgYWxsIGZhaWwuIEluIFNhbWJhIHRoZXkg
+cmV0dXJuIE5UX1NUQVRVU19GSUxFX0NMT1NFRC4KCldoZW4gSSB0cmllZCB0aGUgc2FtZSBhZ2Fp
+bnN0IGEgV2luMmsxMiBzZXJ2ZXIsIEkgbm90aWNlZCB0aGF0IGFsbCB0aGUKZmFpbGVkIHJlcXVl
+c3RzIG9mIHRoZSBjaGFpbiB3b3VsZCByZXR1cm4gTlRfU1RBVFVTX0FDQ0VTU19ERU5JRUQuCgpJ
+IGJlbGlldmUgdGhpcyBiZWhhdmlvdXIgaXMgYWxzbyBtZW50aW9uZWQgaW4gdGhlIFtNUy1TTUIy
+XSBTcGVjcwozLjMuNS4yLjcuMjogSGFuZGxpbmcgQ29tcG91bmRlZCBSZWxhdGVkIFJlcXVlc3Rz
+CgoiV2hlbiB0aGUgY3VycmVudCBvcGVyYXRpb24gcmVxdWlyZXMgYSBGaWxlSWQgYW5kIHRoZSBw
+cmV2aW91cwpvcGVyYXRpb24gZWl0aGVyIGNvbnRhaW5zIG9yIGdlbmVyYXRlcyBhIEZpbGVJZCwg
+aWYgdGhlIHByZXZpb3VzCm9wZXJhdGlvbiBmYWlscyB3aXRoIGFuIGVycm9yLCB0aGUgc2VydmVy
+IFNIT1VMRDwyMjM+IGZhaWwgdGhlIGN1cnJlbnQKb3BlcmF0aW9uIHdpdGggdGhlIHNhbWUgZXJy
+b3IgY29kZSByZXR1cm5lZCBieSB0aGUgcHJldmlvdXMKb3BlcmF0aW9uLiIKCkZpeDoKU2F2ZSBO
+VEFUVVMgb2YgYSBmYWlsZWQgQ3JlYXRlIHJlcXVlc3QuIFdoZW4gd2UgcHJvY2VzcyBzdWJzZXF1
+ZW50CnJlcXVlc3RzIG9mIHRoZSBjaGFpbiB3ZSBjaGVjayBpZiB0aGUgcHJldmlvdXMgQ3JlYXRl
+IGhhcyBmYWlsZWQuIEluCmNhc2Ugb2YgYSBDcmVhdGUgZmFpbHVyZSB3ZSByZXR1cm5lZCB0aGUg
+c2F2ZWQgTlRTVEFUVVMuCgpTaWduZWQtb2ZmLWJ5OiBBbnViaGF2IFJha3NoaXQgPGFudWJoYXYu
+cmFrc2hpdEBnbWFpbC5jb20+Ci0tLQogc291cmNlMy9zbWJkL2dsb2JhbHMuaCAgICAgfCAxICsK
+IHNvdXJjZTMvc21iZC9zbWIyX2NyZWF0ZS5jIHwgMiArKwogc291cmNlMy9zbWJkL3NtYjJfc2Vy
+dmVyLmMgfCA0ICsrKysKIDMgZmlsZXMgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCspCgpkaWZmIC0t
+Z2l0IGEvc291cmNlMy9zbWJkL2dsb2JhbHMuaCBiL3NvdXJjZTMvc21iZC9nbG9iYWxzLmgKaW5k
+ZXggNzkwODZiM2M4MWMuLjFjZDUyZDY5OTQ3IDEwMDY0NAotLS0gYS9zb3VyY2UzL3NtYmQvZ2xv
+YmFscy5oCisrKyBiL3NvdXJjZTMvc21iZC9nbG9iYWxzLmgKQEAgLTcwMiw2ICs3MDIsNyBAQCBz
+dHJ1Y3Qgc21iZF9zbWIyX3JlcXVlc3QgewogCWJvb2wgZG9fZW5jcnlwdGlvbjsKIAlzdHJ1Y3Qg
+dGV2ZW50X3RpbWVyICphc3luY190ZTsKIAlib29sIGNvbXBvdW5kX3JlbGF0ZWQ7CisJTlRTVEFU
+VVMgY29tcG91bmRfY3JlYXRlX2VycjsKIAogCS8qCiAJICogR2l2ZSB0aGUgaW1wbGVtZW50YXRp
+b24gb2YgYW4gU01CMiByZXEgYSB3YXkgdG8gdGVsbCB0aGUgU01CMiByZXF1ZXN0CmRpZmYgLS1n
+aXQgYS9zb3VyY2UzL3NtYmQvc21iMl9jcmVhdGUuYyBiL3NvdXJjZTMvc21iZC9zbWIyX2NyZWF0
+ZS5jCmluZGV4IGYzZmE2ZmJhNjQ2Li5hOTcxYWU3ZGZlYSAxMDA2NDQKLS0tIGEvc291cmNlMy9z
+bWJkL3NtYjJfY3JlYXRlLmMKKysrIGIvc291cmNlMy9zbWJkL3NtYjJfY3JlYXRlLmMKQEAgLTMz
+Miw2ICszMzIsNyBAQCBzdGF0aWMgdm9pZCBzbWJkX3NtYjJfcmVxdWVzdF9jcmVhdGVfZG9uZShz
+dHJ1Y3QgdGV2ZW50X3JlcSAqdHN1YnJlcSkKIAkJCQkgICAgICAgJm91dF9jb250ZXh0X2Jsb2Jz
+KTsKIAlpZiAoIU5UX1NUQVRVU19JU19PSyhzdGF0dXMpKSB7CiAJCWVycm9yID0gc21iZF9zbWIy
+X3JlcXVlc3RfZXJyb3Ioc21iMnJlcSwgc3RhdHVzKTsKKwkJc21iMnJlcS0+Y29tcG91bmRfY3Jl
+YXRlX2VyciA9IHN0YXR1czsKIAkJaWYgKCFOVF9TVEFUVVNfSVNfT0soZXJyb3IpKSB7CiAJCQlz
+bWJkX3NlcnZlcl9jb25uZWN0aW9uX3Rlcm1pbmF0ZShzbWIycmVxLT54Y29ubiwKIAkJCQkJCQkg
+bnRfZXJyc3RyKGVycm9yKSk7CkBAIC0zNDAsNiArMzQxLDcgQEAgc3RhdGljIHZvaWQgc21iZF9z
+bWIyX3JlcXVlc3RfY3JlYXRlX2RvbmUoc3RydWN0IHRldmVudF9yZXEgKnRzdWJyZXEpCiAJCXJl
+dHVybjsKIAl9CiAKKwlzbWIycmVxLT5jb21wb3VuZF9jcmVhdGVfZXJyID0gc3RhdHVzOwogCXN0
+YXR1cyA9IHNtYjJfY3JlYXRlX2Jsb2JfcHVzaChzbWIycmVxLCAmb3V0X2NvbnRleHRfYnVmZmVy
+LCBvdXRfY29udGV4dF9ibG9icyk7CiAJaWYgKCFOVF9TVEFUVVNfSVNfT0soc3RhdHVzKSkgewog
+CQllcnJvciA9IHNtYmRfc21iMl9yZXF1ZXN0X2Vycm9yKHNtYjJyZXEsIHN0YXR1cyk7CmRpZmYg
+LS1naXQgYS9zb3VyY2UzL3NtYmQvc21iMl9zZXJ2ZXIuYyBiL3NvdXJjZTMvc21iZC9zbWIyX3Nl
+cnZlci5jCmluZGV4IDcxOGYwOTQxNTMyLi4yMzRiZGZiM2ViYyAxMDA2NDQKLS0tIGEvc291cmNl
+My9zbWJkL3NtYjJfc2VydmVyLmMKKysrIGIvc291cmNlMy9zbWJkL3NtYjJfc2VydmVyLmMKQEAg
+LTI2MjIsNiArMjYyMiwxMCBAQCBOVFNUQVRVUyBzbWJkX3NtYjJfcmVxdWVzdF9kaXNwYXRjaChz
+dHJ1Y3Qgc21iZF9zbWIyX3JlcXVlc3QgKnJlcSkKIAogCQlmc3AgPSBmaWxlX2ZzcF9zbWIyKHJl
+cSwgZmlsZV9pZF9wZXJzaXN0ZW50LCBmaWxlX2lkX3ZvbGF0aWxlKTsKIAkJaWYgKGZzcCA9PSBO
+VUxMKSB7CisJCQlpZiAoIU5UX1NUQVRVU19JU19PSyhyZXEtPmNvbXBvdW5kX2NyZWF0ZV9lcnIp
+KSB7CisJCQkJcmV0dXJuIHNtYmRfc21iMl9yZXF1ZXN0X2Vycm9yKHJlcSwKKwkJCQkJCXJlcS0+
+Y29tcG91bmRfY3JlYXRlX2Vycik7CisJCQl9CiAJCQlpZiAoIWNhbGwtPmFsbG93X2ludmFsaWRf
+ZmlsZWlkKSB7CiAJCQkJcmV0dXJuIHNtYmRfc21iMl9yZXF1ZXN0X2Vycm9yKHJlcSwKIAkJCQkJ
+CU5UX1NUQVRVU19GSUxFX0NMT1NFRCk7Ci0tIAoyLjIwLjEKCg==
+--00000000000055e2a305a5b6824d--
 
