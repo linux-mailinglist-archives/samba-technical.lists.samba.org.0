@@ -2,55 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 244D81D4258
-	for <lists+samba-technical@lfdr.de>; Fri, 15 May 2020 02:48:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BFA41D49F1
+	for <lists+samba-technical@lfdr.de>; Fri, 15 May 2020 11:53:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=chzaGccfwFRcKlr7/FjjIP7+qiO6Y2eSHRRz+2RrWyw=; b=x+a50lqau5T9Q6yWNUNl+f3vf3
-	TANU3C5dHgvhuOXW8UMhX2ARuwksQvSYOcJrHNkJRdVrR87wwuylm2QLOx3KTFo4B+9iLqRzPLaCG
-	AevaDr//8J8RNIhMoMaFoqWolVss/5tP/BzojFKuvn5SWYSeiElBkIAFo5BuObjlI0KLvolnymgcU
-	AD3EhRkzQxESlDOYjjK3p0HkvO/YLSnghAEDb5EI4OC0xnXIx2l2OrR5imV2aUhi9c5VMgN8QcVKm
-	R1QoyI9ilGqvS+TlTJnf/l0zKu2HNKHZaABvbkqP9Igrvol4bSiH9cWOWTtTFY7lTzdtpvKX//ZKO
-	3ZMecVSQ==;
-Received: from localhost ([::1]:46106 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Rpe3ljUYZMwy0prDmyPuuqIWcTPPnQBz4aCg1XK2dC0=; b=pgfuwZG/udrzw2/Kx8Bzd+zInz
+	JPlSbRHMJ5Hq6ZCv2qq8axDPjrTpwkgnwqBR/X6fZL7n3zMkd8tCgAfXT0l5VkiUMoiziQ4UJ41du
+	ZzToOnduviYefpjf0+GPwhfCWbJ2OdUUaS9c1efnKm+nRqs7udzbTSYsNKzmpgJlNm4BcgkiGLGt9
+	HsZAHPrYnHL8xb3WzD660jQuzc7xwdGAFbstpCP73n5OJixlcKsJ/hW9rfxlUiXpsyC1QBGp3vBom
+	2syOso6Kkwi/7ky5j9J6uIYcyd+kTV/vdEqHVeddQOyLe4n5dzKaxIYpPv6QtzAMeQKQ/uYd4ZpPo
+	RKy/ywYA==;
+Received: from localhost ([::1]:56840 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jZOVa-004Oh5-LL; Fri, 15 May 2020 00:47:26 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60776) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jZOVT-004Ogx-Dx
- for samba-technical@lists.samba.org; Fri, 15 May 2020 00:47:23 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=chzaGccfwFRcKlr7/FjjIP7+qiO6Y2eSHRRz+2RrWyw=; b=D23Ovyz9vHEeyQ4W3tNNKy7Z3H
- p3yvxyhmrtNLtLFVPg5Tp1jIP+adn43kmrGmme9f5CgQdPi0b6fnADlPvGG/3odlMtI0MJJvL9KAH
- kFcSwDQ/xHksEQeE2Y3tkBzLCQZzH/s55VqMhfWmUEu0ioGF2i9EJehqENA4669k/iChtQqAtX1P7
- YVRQStqx8K6Di7Qvyb1s9LX3PUqZrkrKFTmtVn5dvxxLOVjvS4pZBtiJfCK9523AMjWsahxVQwDm7
- C+DPLaIb6ER64TlHHwe5JsJZBwGgmTKRVbatksYrH48mqGQCgROVCbc1ioGbmtaJN09VLuxHTrnSq
- RCo+ofcDqHCr527K40FUOzPAvyyBpJPuijvroOXEvZBqpP/Y3oHpefFeQgElxO41T6csEMHshqI+4
- 98uaKVMto7gGuesBM4xqjZkF1phVMD7NOjWAsUdzloF/SfzGd5mAhlLi/yNQdY2Um2sux0KoIvC1r
- VfTD1K71PN4Gjb1cgf+E54s9;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jZOVS-0008Fn-94; Fri, 15 May 2020 00:47:18 +0000
-Date: Thu, 14 May 2020 17:47:12 -0700
-To: Michael Adam <obnox@samba.org>
-Subject: Re: Behaviour mismatch between "store dos attributes" and "map
- archive" from man smb.conf(5)
-Message-ID: <20200515004712.GA30423@jeremy-acer>
-References: <e0d86c0fb92046e0f201cc14a112701ca891196a.camel@cryptolab.net>
- <20200513184233.GB9585@jeremy-acer>
- <20200513221431.GA7185@samba.org>
- <20200513225131.GG9585@jeremy-acer>
- <20200513233612.GB7185@samba.org>
- <20200514005508.GA21149@jeremy-acer>
- <20200514075904.GA150211@samba.org>
- <20200514174533.GC13942@jeremy-acer>
- <20200514232614.GA483587@samba.org>
+	id 1jZX18-004R32-Il; Fri, 15 May 2020 09:52:34 +0000
+Received: from [81.174.151.90] (port=50144 helo=mail.gunas.co.uk) 
+ by hr1.samba.org with esmtp (Exim) id 1jZX10-004R2u-V7
+ for samba-technical@lists.samba.org; Fri, 15 May 2020 09:52:31 +0000
+Received: from [192.168.1.101] (alibythesea.plus.com [81.174.151.90])
+ by mail.gunas.co.uk (Postfix) with ESMTPSA id 1B20E5408A6
+ for <samba-technical@lists.samba.org>; Fri, 15 May 2020 10:52:24 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gunas.co.uk; s=mail;
+ t=1589536344; bh=Rpe3ljUYZMwy0prDmyPuuqIWcTPPnQBz4aCg1XK2dC0=;
+ h=To:From:Subject:Date:From;
+ b=IIVQ8AVU7aLa3Jxnb0y9iSk8CBKew8lh1LLT6ERTCq9sZg/1cAO3SCe/mIx0plqvv
+ e7U4MqEE+SLYg9NL1ZprJwoPZNKaWVLTqViLDul1QhpYUEbs4tc0hEcJ69Ugp36xTF
+ fT4zKWUebavuJmtUav8kLZmGA+pqko1GQx6lS2ZSsR2F4tMNUPOw2FIsMiclvY2d7a
+ Fd1KSR/e3sGUkNwLnFzFkL38+jnnUGVaNrE4k8ODl3C9Qs7ULYLSITtkthA9h394Th
+ lP/0SB2MByI6xsTxFVWBM3P5svpIyeCUurDyuB7ym/6JdA23n7AoFifHRVMj4+8nb7
+ T4EE8uJw4Fk/g==
+To: samba-technical@lists.samba.org
+Subject: Re: DNS problem ubuntu server 20.04
+Message-ID: <498d1db3-34fb-a2fa-80fd-3f881fd29019@gunas.co.uk>
+Date: Fri, 15 May 2020 10:52:23 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200514232614.GA483587@samba.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,56 +53,13 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Anoop C S <anoopcs@cryptolab.net>,
- samba-technical <samba-technical@lists.samba.org>
+From: RickJC1 via samba-technical <samba-technical@lists.samba.org>
+Reply-To: RickJC1 <rickjc2@gunas.co.uk>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, May 15, 2020 at 01:26:14AM +0200, Michael Adam wrote:
-> 
-> If I disable acl_xattr but set "inherit acls = yes", this still
-> fails the same way. Only acl_xattr sets the execute perms.
-> So at least it is not "inherit acls" alone.
+Thanks Rowland for your help. I don't know how I missed this one.
 
-You'll probably have to add extra DEBUG statements
-to see what is happening step by step.
+Rickjc1
 
-> At this point I'm mostly trying to understand.
-> I still have the impression that the behavior is somewhat
-> inconsistent and random.
-
-Yes. It isn't to a spec and there's no comprehensive
-test. Adding such things would be good.
-
-> And it seems to me that the test was not written to pass against
-> exactly the configuration of the tmp share in the test env, with
-> the awareness that it fails against other standard configurations.
-> I can't help the impression that this is somewhat accidential.
-
-Yep.
-
-> That is apparently only true for creating new files.  For opening
-> existing files however, the desired access mode seems to have a
-> lot to with the ACL on the file. So this is strangely asymmetric:
-
-No, that's only to do with what you're allowed after
-the existing ACL is read and compared with what you're
-asking or in access_mask.
-
-> (1) We create a file requesting SEC_FILE_EXECUTE.
->     The file gets created without any execut perms.
->     (without acl_xattr and with map archive = no)
->     The create call succees.
-> 
-> (2) Later open of the existing file also requesting
->     SEC_FILE_EXECUTE fails.
-> 
-> If I do acl_xattr or map archive = yes though, then #1 also
-> creates execute bits on the file. And #2 succeeds.
-
-Yes, but that's nothing to do with what you're asking for.
-That's to do with the config settings - not "requesting
-SEC_FILE_EXECUTE". I think :-).
 
