@@ -2,52 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C19F61D7854
-	for <lists+samba-technical@lfdr.de>; Mon, 18 May 2020 14:17:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EAA1D1D7C37
+	for <lists+samba-technical@lfdr.de>; Mon, 18 May 2020 17:03:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=QLzePuQBpr4sl7Ao6GkD1MlPnbTr8myVIYs7V6Fqiuc=; b=YHXGjQfIcC9eL3tZoUezrIapZN
-	jnPtVLWrvdVVDjI/UneM7fHvwG1xPrgwKRHdqMR5AMc16/DjMuvH4MPydBlF9sueh8DwxU6aZLrd4
-	yM/fxZI8QFPpxToipOCcKHKbhXUsquZAzYV+uhwGNqjn/A+nW3seWiKcUd4vszmMzHhefvhS4iI45
-	H/gEsryQjHATlZL2rYsPtjEAmrUF/1RRMV6GpGmd7NTkncpIVXf0QotxRGLLKkkjjXIYBkop8uFo2
-	kqZx+9B8XNZel1tFfdua0OG/ZlRUnNsxUCjG5GkB2/LeqS31j7k7BVjQugR5TkRIkICHygr/jgyYM
-	e9HLTWPw==;
-Received: from localhost ([::1]:37944 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=FXT2eI19txENKg7+hTScTQ4gOzu625mwMchtqxvwQXI=; b=y2tBnHXB3tHLZwa5BQy7jL9jsS
+	WFc38JR+B7evKY/dlaWJV5k+Ht7pFQ1/ureY7fUkzz1EeFlaKEpvRHzdVoB8RulYIiKkjGwZC61qR
+	xi7pX1BwzzbH/5cGA2nO6oZfQR9xcrRa+SyHJ5qtgQ7aHK/nGbYomoMjZUrXsOv4BzyQUKgdK+dcE
+	Kww9Ofbr+g78F9nc2yE2Yy9vzV94+jh3Am9U1Sx42+0wJygxChIDMwa/pJKPdeBgI/P+VDlmxnNpW
+	KsW+m/X3YDnBwzMXxaqcGiNtxwszZd8Y3Wxirt9X9bHXngpA4twoOfZZOs2AsAkn/uGum4esN7FRY
+	zfgECcQw==;
+Received: from localhost ([::1]:52990 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jaehq-004t98-LD; Mon, 18 May 2020 12:17:18 +0000
-Received: from latitanza.investici.org ([2001:888:2000:56::19]:38435) 
+	id 1jahHk-004vPy-Lx; Mon, 18 May 2020 15:02:32 +0000
+Received: from mail-qv1-xf41.google.com ([2607:f8b0:4864:20::f41]:45163) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jaehj-004t8r-Op
- for samba-technical@lists.samba.org; Mon, 18 May 2020 12:17:14 +0000
-Received: from mx3.investici.org (unknown [127.0.0.1])
- by latitanza.investici.org (Postfix) with ESMTP id 13A5112188B;
- Mon, 18 May 2020 12:17:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cryptolab.net;
- s=stigmate; t=1589804227;
- bh=QLzePuQBpr4sl7Ao6GkD1MlPnbTr8myVIYs7V6Fqiuc=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=jYVJU+AvQmsqRBFg7Q9nErIHNo8mxZ1d6HrPo8PTGusEOq5kt6trZuOJ9OQb7iUZx
- AupDgO5a18lypFmn5wLHwHTlgwm3+xQQ2eoISedyHR5/itgwlLYYolqpxyiZ2zGxML
- T5iy1EZzDU3/845H8qWWDpI6Y3JlDWcjBl0VftSs=
-Received: from [82.94.249.234] (mx3.investici.org [82.94.249.234])
- (Authenticated sender: anoopcs@autistici.org) by localhost (Postfix) with
- ESMTPSA id 20C35120184; Mon, 18 May 2020 12:17:04 +0000 (UTC)
-Message-ID: <0ea0253023c276aedf3b2eb162a9907cdcf08092.camel@cryptolab.net>
-Subject: Re: Behaviour mismatch between "store dos attributes" and "map
- archive" from man smb.conf(5)
-To: Jeremy Allison <jra@samba.org>, Michael Adam <obnox@samba.org>
-Date: Mon, 18 May 2020 17:47:00 +0530
-In-Reply-To: <20200515004712.GA30423@jeremy-acer>
-References: <e0d86c0fb92046e0f201cc14a112701ca891196a.camel@cryptolab.net>
- <20200513184233.GB9585@jeremy-acer> <20200513221431.GA7185@samba.org>
- <20200513225131.GG9585@jeremy-acer> <20200513233612.GB7185@samba.org>
- <20200514005508.GA21149@jeremy-acer> <20200514075904.GA150211@samba.org>
- <20200514174533.GC13942@jeremy-acer> <20200514232614.GA483587@samba.org>
- <20200515004712.GA30423@jeremy-acer>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.2 (3.36.2-1.fc32) 
+ (Exim) id 1jahHf-004vPr-8y
+ for samba-technical@lists.samba.org; Mon, 18 May 2020 15:02:29 +0000
+Received: by mail-qv1-xf41.google.com with SMTP id z9so4821614qvi.12
+ for <samba-technical@lists.samba.org>; Mon, 18 May 2020 08:02:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=iBsgUPPdW7WI3R9C4FsWazI5pNlAawve4NyWpKt5Nfw=;
+ b=hbpCTFvW8iQG0f3aWnHuYtVcZQFDFKcok1uMw66vn5gaMaRnmuQzjGskr/himVVR/c
+ R2JcLlWODZS2AU/piXWCtRIFRQYNYFvXz+jAzbl0uArGa9DDOo7mNIu3QKtcENIYOzvv
+ sI15FPqU7EKpDvrbAu1YTTxDi4NDRfDeEtZlk5z7l+rDcKJDmLUgJqIioWPvZS9OJa2n
+ /f1Dr/NYWEMJfF4XphMtH14Eb0TPE2GZ8LHgQiM8qu65FzBX4zRNHPODhl2k6L+lUjb8
+ +J5QXWhZHugutR4cx3fne8oUa7MSXkgWCA+dGXdwkdM0hWEQnvPlxBva6sT9li6Mbpud
+ awjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=iBsgUPPdW7WI3R9C4FsWazI5pNlAawve4NyWpKt5Nfw=;
+ b=b7VUXchgtx1vx7DCalbKtt0OMza4dldXUbaeDv0k1xfmsTKaKVraN8cIrjT7G1acQO
+ /Mav6l94Luf6dNj6LPsRUtreuTsuuWV63fmMofdB+0SRFNJjM91kPNqDvQ1jHmdOjvg+
+ kw8yQzvu9jHsbGN//o2TpfDGNtj/25fZsvOgtI4P2foTI01LIER+0sa/pY+ymVN+7dc+
+ uJuvEmLhvFUL5DWhw5NdrwYAjMoUZ3sMxYUUefkxKiKB0hFuBYwobOz20WVY+kb1XlX0
+ ZwPaiK2KjU3x+Nh6JZW0AFMtD5jK5lLLHH0fcPmOi26ziSu0hBPicUBH0lmXf1L/z2Gs
+ RkBw==
+X-Gm-Message-State: AOAM533J/6aaL5wgPmX1ZdCOsEZ0YSsnyprZ9FMg00ecP+0UMI/o6j06
+ ye8O/mt9H3o30DBaVm/cwfJSli2bMjBQVYP1qT8=
+X-Google-Smtp-Source: ABdhPJw2IUZ1QjXZsHH4o9Dklh0BHueByf5qXXYXvdIsrDws0Ke7plCrLBx3Vtb8SJRBSuiBuXSf1NM1JfRs0Meth3U=
+X-Received: by 2002:a0c:f054:: with SMTP id b20mr15806588qvl.112.1589814145076; 
+ Mon, 18 May 2020 08:02:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+References: <CAGuNez4rgOrtf_jEX1TC-D-bjaFVRr46=WmMi5N1hdqoYBP1ig@mail.gmail.com>
+ <2161e53c-ccd5-864c-8b4c-ceeb8cf120ea@samba.org>
+In-Reply-To: <2161e53c-ccd5-864c-8b4c-ceeb8cf120ea@samba.org>
+Date: Mon, 18 May 2020 20:32:12 +0530
+Message-ID: <CAPkcVAEg+PQC1Q5=2oXWZeM7ZvS6JJe46HpERAbxVydM2iz0oQ@mail.gmail.com>
+Subject: Re: [PATCH] SMB2 Compound related chain handling when generation of
+ FileId has failed
+To: Ralph Boehme <slow@samba.org>
+Content-Type: multipart/mixed; boundary="0000000000006082af05a5ed73a0"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,107 +70,137 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Anoop C S via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Anoop C S <anoopcs@cryptolab.net>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: anubhav rakshit via samba-technical <samba-technical@lists.samba.org>
+Reply-To: anubhav rakshit <anubhav.rakshit@gmail.com>
+Cc: hemanth.thummala@nutanix.com,
+ "samba-technical@lists.samba.org \(samba-technical@lists.samba.org\)"
+ <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 2020-05-14 at 17:47 -0700, Jeremy Allison via samba-technical
-wrote:
-> On Fri, May 15, 2020 at 01:26:14AM +0200, Michael Adam wrote:
-> > If I disable acl_xattr but set "inherit acls = yes", this still
-> > fails the same way. Only acl_xattr sets the execute perms.
-> > So at least it is not "inherit acls" alone.
-> 
-> You'll probably have to add extra DEBUG statements
-> to see what is happening step by step.
+--0000000000006082af05a5ed73a0
+Content-Type: text/plain; charset="UTF-8"
 
-Seems like we have two different mapping methods.
+Hi Ralph,
+I am attaching additional test case that would verify
+Create(RO)->Read->Write->Read->Close chain. As expected we see Write
+failing with ACCESS DENIED.
 
-When vfs_acl_xattr is used along with 'ignore system acls' we have
-special kind of treatment as follows inside make_default_acl_posix():
+=-=-=
+2948 35.969303 10.46.189.203 10.46.184.237 SMB2 742 Create Request File:
+compound_related6.dat;Read Request Len:1 Off:0;Write Request Len:64
+Off:0;Read Request Len:1 Off:0;Close Request
+2949 35.969500 10.46.184.237 10.46.189.203 SMB2 606 Create Response File:
+compound_related6.dat;Read Response;Write Response, Error:
+STATUS_ACCESS_DENIED;Read Response;Close Response
+=-=-=
 
-if (mode & S_IRUSR) {
-        if (mode & S_IWUSR) {
-                access_mask |= SEC_RIGHTS_FILE_ALL;
-        } else {
-                access_mask |= SEC_RIGHTS_FILE_READ | SEC_FILE_EXECUTE;
-        }
-}
-if (mode & S_IWUSR) {
-        access_mask |= SEC_RIGHTS_FILE_WRITE | SEC_STD_DELETE;
-}
+Thanks,
+Anubhav
 
-This might be the reason why smb2.read.position is always passing with
-vfs_acl_xattr + "ignore system acls = yes".  
+On Mon, May 18, 2020 at 4:19 PM Ralph Boehme <slow@samba.org> wrote:
 
-> > At this point I'm mostly trying to understand.
-> > I still have the impression that the behavior is somewhat
-> > inconsistent and random.
-> 
-> Yes. It isn't to a spec and there's no comprehensive
-> test. Adding such things would be good.
-> 
-> > And it seems to me that the test was not written to pass against
-> > exactly the configuration of the tmp share in the test env, with
-> > the awareness that it fails against other standard configurations.
-> > I can't help the impression that this is somewhat accidential.
-> 
-> Yep.
-> 
-> > That is apparently only true for creating new files.  For opening
-> > existing files however, the desired access mode seems to have a
-> > lot to with the ACL on the file. So this is strangely asymmetric:
-> 
-> No, that's only to do with what you're allowed after
-> the existing ACL is read and compared with what you're
-> asking or in access_mask.
+> Am 5/15/20 um 11:29 PM schrieb Anubhav Rakshit via samba-technical:
+> > Please review the following patches.They consist of:
+> > 1. Smbtorture test case to verify the expected behaviour in case of
+> > Create failure in a compound related chain.
+> > 2. Implement the behaviour in Samba Fileserver code.
+> >
+> > I have attached the patches.
+> > The changes are also staged in github.
+> >
+> https://github.com/anubhavrakshit/samba/commit/a0e7d6196b259038342569d371ff67ed30c9b6b8
+> >
+> https://github.com/anubhavrakshit/samba/commit/4637b6108f188c1a2df7cce94165b621294942a1
+>
+> https://gitlab.com/samba-team/samba/-/merge_requests/1350
+>
+> -slow
+>
+> --
+> Ralph Boehme, Samba Team                https://samba.org/
+> Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+> GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+>
+>
 
-Here comes the default mapping method, invoked all the way from
-smbd_check_access_rights() we have the following in
-map_canon_ace_perms():
+--0000000000006082af05a5ed73a0
+Content-Type: text/plain; charset="US-ASCII"; name="compound_smbtor.txt"
+Content-Disposition: attachment; filename="compound_smbtor.txt"
+Content-Transfer-Encoding: base64
+Content-ID: <f_kacm94t40>
+X-Attachment-Id: f_kacm94t40
 
-if (directory_ace) {
-        nt_mask |= ((perms & S_IRUSR) ? UNIX_DIRECTORY_ACCESS_R : 0 );
-        nt_mask |= ((perms & S_IWUSR) ? UNIX_DIRECTORY_ACCESS_W : 0 );
-        nt_mask |= ((perms & S_IXUSR) ? UNIX_DIRECTORY_ACCESS_X : 0 );
-} else {
-        nt_mask |= ((perms & S_IRUSR) ? UNIX_ACCESS_R : 0 );
-        nt_mask |= ((perms & S_IWUSR) ? UNIX_ACCESS_W : 0 );
-        nt_mask |= ((perms & S_IXUSR) ? UNIX_ACCESS_X : 0 );
-}
-
-Thus an existing file created without 'x' bit will end up with a
-access_mask without SEC_FILE_EXECUTE.
-
-> > (1) We create a file requesting SEC_FILE_EXECUTE.
-> >     The file gets created without any execut perms.
-> >     (without acl_xattr and with map archive = no)
-> >     The create call succees.
-> > 
-> > (2) Later open of the existing file also requesting
-> >     SEC_FILE_EXECUTE fails.
-
-This is because we never go through smbd_check_access_rights() if file
-is being created i.e, not existing. So first time it passes and fails
-from next time onwards. At least we have fixed[1] smb2.read.position to
-start with fresh file.
-
-[1] 
-https://git.samba.org/?p=samba.git;a=commit;h=dbfc197f65f28c7f4e889045d7b04c46c4f6680d
-
-> > If I do acl_xattr or map archive = yes though, then #1 also
-> > creates execute bits on the file. And #2 succeeds.
-> 
-> Yes, but that's nothing to do with what you're asking for.
-> That's to do with the config settings - not "requesting
-> SEC_FILE_EXECUTE". I think :-).
-
-Difference in behaviour is because of different mapping methods
-resulting in different access_mask when used with and without
-vfs_acl_xattr. Why is it so? Why shouldn't vfs_acl_xattr just deal with
-setting "security.NTACL" with a value obtained out of a common mapping
-method?
-
+RnJvbSA2MTllOTM0ZjZjYWFhYWYxMTQ5MmZmMmQwNWZkNjk3NzQ1ODBlZjg0IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBBbnViaGF2IFJha3NoaXQgPGFudWJoYXYucmFrc2hpdEBnbWFp
+bC5jb20+CkRhdGU6IE1vbiwgMTggTWF5IDIwMjAgMjA6MjA6MDUgKzA1MzAKU3ViamVjdDogW1BB
+VENIXSBzbWJ0b3J0dXJlIHRlc3QgY2FzZSB0byB2ZXJpZnkgQ29tcG91bmQgcmVsYXRlZCBoYW5k
+bGluZwoKVGhpcyB0ZXN0IGNhc2UgY2hlY2tzIHdoYXQgaGFwcGVucyB3aGVuIHdlIGhhdmUgYW4g
+aW50ZXJtZWRpYXRlIHJlcXVlc3QKZmFpbHVyZSBhbmQgaG93IGl0IGltcGFjdHMgcmVzdCBvZiB0
+aGUgY2hhaW4uCgpTaWduZWQtb2ZmLWJ5OiBBbnViaGF2IFJha3NoaXQgPGFudWJoYXYucmFrc2hp
+dEBnbWFpbC5jb20+Ci0tLQogc291cmNlNC90b3J0dXJlL3NtYjIvY29tcG91bmQuYyB8IDk0ICsr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwogMSBmaWxlIGNoYW5nZWQsIDk0IGluc2Vy
+dGlvbnMoKykKCmRpZmYgLS1naXQgYS9zb3VyY2U0L3RvcnR1cmUvc21iMi9jb21wb3VuZC5jIGIv
+c291cmNlNC90b3J0dXJlL3NtYjIvY29tcG91bmQuYwppbmRleCA5YWIzNzBkNjc5Mi4uNTJjNDVl
+ODNjMGQgMTAwNjQ0Ci0tLSBhL3NvdXJjZTQvdG9ydHVyZS9zbWIyL2NvbXBvdW5kLmMKKysrIGIv
+c291cmNlNC90b3J0dXJlL3NtYjIvY29tcG91bmQuYwpAQCAtNTc1LDYgKzU3NSw5OCBAQCBkb25l
+OgogCXJldHVybiByZXQ7CiB9CiAKK3N0YXRpYyBib29sIHRlc3RfY29tcG91bmRfcmVsYXRlZDYo
+c3RydWN0IHRvcnR1cmVfY29udGV4dCAqdGN0eCwKKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgc3RydWN0IHNtYjJfdHJlZSAqdHJlZSkgeworICBzdHJ1Y3Qgc21iMl9oYW5kbGUg
+aGQ7CisgIHN0cnVjdCBzbWIyX2NyZWF0ZSBjcjsKKyAgc3RydWN0IHNtYjJfcmVhZCByZDsKKyAg
+c3RydWN0IHNtYjJfd3JpdGUgd3I7CisgIHN0cnVjdCBzbWIyX2Nsb3NlIGNsOworICBOVFNUQVRV
+UyBzdGF0dXM7CisgIGNvbnN0IGNoYXIgKmZuYW1lID0gImNvbXBvdW5kX3JlbGF0ZWQ2LmRhdCI7
+CisgIHN0cnVjdCBzbWIyX3JlcXVlc3QgKnJlcVs1XTsKKyAgdWludDhfdCBidWZbNjRdOworICBi
+b29sIHJldCA9IHRydWU7CisKKyAgc21iMl91dGlsX3VubGluayh0cmVlLCBmbmFtZSk7CisKKyAg
+WkVST19TVFJVQ1QoY3IpOworICBjci5sZXZlbCA9IFJBV19PUEVOX1NNQjI7CisgIGNyLmluLmNy
+ZWF0ZV9mbGFncyA9IDA7CisgIGNyLmluLmRlc2lyZWRfYWNjZXNzID0gU0VDX1JJR0hUU19GSUxF
+X0FMTDsKKyAgY3IuaW4uY3JlYXRlX29wdGlvbnMgPSAwOworICBjci5pbi5maWxlX2F0dHJpYnV0
+ZXMgPSBGSUxFX0FUVFJJQlVURV9OT1JNQUw7CisgIGNyLmluLnNoYXJlX2FjY2VzcyA9IE5UQ1JF
+QVRFWF9TSEFSRV9BQ0NFU1NfREVMRVRFIHwKKyAgICAgICAgICAgICAgICAgICAgICAgTlRDUkVB
+VEVYX1NIQVJFX0FDQ0VTU19SRUFEIHwKKyAgICAgICAgICAgICAgICAgICAgICAgTlRDUkVBVEVY
+X1NIQVJFX0FDQ0VTU19XUklURTsKKyAgY3IuaW4uYWxsb2Nfc2l6ZSA9IDA7CisgIGNyLmluLmNy
+ZWF0ZV9kaXNwb3NpdGlvbiA9IE5UQ1JFQVRFWF9ESVNQX09QRU5fSUY7CisgIGNyLmluLmltcGVy
+c29uYXRpb25fbGV2ZWwgPSBOVENSRUFURVhfSU1QRVJTT05BVElPTl9BTk9OWU1PVVM7CisgIGNy
+LmluLnNlY3VyaXR5X2ZsYWdzID0gMDsKKyAgY3IuaW4uZm5hbWUgPSBmbmFtZTsKKworICBzdGF0
+dXMgPSBzbWIyX2NyZWF0ZSh0cmVlLCB0Y3R4LCAmY3IpOworICBDSEVDS19TVEFUVVMoc3RhdHVz
+LCBOVF9TVEFUVVNfT0spOworICBoZCA9IGNyLm91dC5maWxlLmhhbmRsZTsKKworICBaRVJPX1NU
+UlVDVChidWYpOworICBzdGF0dXMgPSBzbWIyX3V0aWxfd3JpdGUodHJlZSwgaGQsIGJ1ZiwgMCwg
+QVJSQVlfU0laRShidWYpKTsKKyAgQ0hFQ0tfU1RBVFVTKHN0YXR1cywgTlRfU1RBVFVTX09LKTsK
+KworICB0b3J0dXJlX2NvbW1lbnQodGN0eCwgInRyeSBvcGVuIGZvciByZWFkXG4iKTsKKyAgY3Iu
+aW4uZGVzaXJlZF9hY2Nlc3MgPSBTRUNfRklMRV9SRUFEX0RBVEE7CisgIHNtYjJfdHJhbnNwb3J0
+X2NvbXBvdW5kX3N0YXJ0KHRyZWUtPnNlc3Npb24tPnRyYW5zcG9ydCwgNSk7CisKKyAgcmVxWzBd
+ID0gc21iMl9jcmVhdGVfc2VuZCh0cmVlLCAmY3IpOworCisgIGhkLmRhdGFbMF0gPSBVSU5UNjRf
+TUFYOworICBoZC5kYXRhWzFdID0gVUlOVDY0X01BWDsKKworICBzbWIyX3RyYW5zcG9ydF9jb21w
+b3VuZF9zZXRfcmVsYXRlZCh0cmVlLT5zZXNzaW9uLT50cmFuc3BvcnQsIHRydWUpOworCisgIFpF
+Uk9fU1RSVUNUKHJkKTsKKyAgcmQuaW4uZmlsZS5oYW5kbGUgPSBoZDsKKyAgcmQuaW4ubGVuZ3Ro
+ICAgICAgPSAxOworICByZC5pbi5vZmZzZXQgICAgICA9IDA7CisKKyAgcmVxWzFdID0gc21iMl9y
+ZWFkX3NlbmQodHJlZSwgJnJkKTsKKworICBaRVJPX1NUUlVDVCh3cik7CisgIHdyLmluLmZpbGUu
+aGFuZGxlID0gaGQ7CisgIHdyLmluLm9mZnNldCA9IDA7CisgIHdyLmluLmRhdGEgPSBkYXRhX2Js
+b2JfdGFsbG9jKHRjdHgsIE5VTEwsIDY0KTsKKworICByZXFbMl0gPSBzbWIyX3dyaXRlX3NlbmQo
+dHJlZSwgJndyKTsKKworICBaRVJPX1NUUlVDVChyZCk7CisgIHJkLmluLmZpbGUuaGFuZGxlID0g
+aGQ7CisgIHJkLmluLmxlbmd0aCAgICAgID0gMTsKKyAgcmQuaW4ub2Zmc2V0ICAgICAgPSAwOwor
+CisgIHJlcVszXSA9IHNtYjJfcmVhZF9zZW5kKHRyZWUsICZyZCk7CisKKyAgWkVST19TVFJVQ1Qo
+Y2wpOworICBjbC5pbi5maWxlLmhhbmRsZSA9IGhkOworCisgIHJlcVs0XSA9IHNtYjJfY2xvc2Vf
+c2VuZCh0cmVlLCAmY2wpOworCisgIHN0YXR1cyA9IHNtYjJfY3JlYXRlX3JlY3YocmVxWzBdLCB0
+cmVlLCAmY3IpOworICBDSEVDS19TVEFUVVMoc3RhdHVzLCBOVF9TVEFUVVNfT0spOworICBzdGF0
+dXMgPSBzbWIyX3JlYWRfcmVjdihyZXFbMV0sIHRyZWUsICZyZCk7CisgIENIRUNLX1NUQVRVUyhz
+dGF0dXMsIE5UX1NUQVRVU19PSyk7CisgIHN0YXR1cyA9IHNtYjJfd3JpdGVfcmVjdihyZXFbMl0s
+ICZ3cik7CisgIENIRUNLX1NUQVRVUyhzdGF0dXMsIE5UX1NUQVRVU19BQ0NFU1NfREVOSUVEKTsK
+KyAgc3RhdHVzID0gc21iMl9yZWFkX3JlY3YocmVxWzNdLCB0cmVlLCAmcmQpOworICBDSEVDS19T
+VEFUVVMoc3RhdHVzLCBOVF9TVEFUVVNfT0spOworICBzdGF0dXMgPSBzbWIyX2Nsb3NlX3JlY3Yo
+cmVxWzRdLCAmY2wpOworICBDSEVDS19TVEFUVVMoc3RhdHVzLCBOVF9TVEFUVVNfT0spOworZG9u
+ZToKKyAgc21iMl91dGlsX3VubGluayh0cmVlLCBmbmFtZSk7CisgIHNtYjJfdGRpcyh0cmVlKTsK
+KyAgc21iMl9sb2dvZmYodHJlZS0+c2Vzc2lvbik7CisgIHJldHVybiByZXQ7Cit9CisKIHN0YXRp
+YyBib29sIHRlc3RfY29tcG91bmRfcGFkZGluZyhzdHJ1Y3QgdG9ydHVyZV9jb250ZXh0ICp0Y3R4
+LAogCQkJCSAgc3RydWN0IHNtYjJfdHJlZSAqdHJlZSkKIHsKQEAgLTE1NzQsNiArMTY2Niw4IEBA
+IHN0cnVjdCB0b3J0dXJlX3N1aXRlICp0b3J0dXJlX3NtYjJfY29tcG91bmRfaW5pdChUQUxMT0Nf
+Q1RYICpjdHgpCiAJCQkJICAgICB0ZXN0X2NvbXBvdW5kX3JlbGF0ZWQ0KTsKIAl0b3J0dXJlX3N1
+aXRlX2FkZF8xc21iMl90ZXN0KHN1aXRlLCAicmVsYXRlZDUiLAogCQkJCSAgICAgdGVzdF9jb21w
+b3VuZF9yZWxhdGVkNSk7CisJdG9ydHVyZV9zdWl0ZV9hZGRfMXNtYjJfdGVzdChzdWl0ZSwgInJl
+bGF0ZWQ2IiwKKwkJCQkgICAgIHRlc3RfY29tcG91bmRfcmVsYXRlZDYpOwogCXRvcnR1cmVfc3Vp
+dGVfYWRkXzFzbWIyX3Rlc3Qoc3VpdGUsICJ1bnJlbGF0ZWQxIiwgdGVzdF9jb21wb3VuZF91bnJl
+bGF0ZWQxKTsKIAl0b3J0dXJlX3N1aXRlX2FkZF8xc21iMl90ZXN0KHN1aXRlLCAiaW52YWxpZDEi
+LCB0ZXN0X2NvbXBvdW5kX2ludmFsaWQxKTsKIAl0b3J0dXJlX3N1aXRlX2FkZF8xc21iMl90ZXN0
+KHN1aXRlLCAiaW52YWxpZDIiLCB0ZXN0X2NvbXBvdW5kX2ludmFsaWQyKTsKLS0gCjIuMjAuMQoK
+--0000000000006082af05a5ed73a0--
 
