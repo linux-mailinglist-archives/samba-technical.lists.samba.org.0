@@ -2,56 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 058141D95BA
-	for <lists+samba-technical@lfdr.de>; Tue, 19 May 2020 13:57:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF7721DBD53
+	for <lists+samba-technical@lfdr.de>; Wed, 20 May 2020 20:51:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=C+lRnwUM2LzshUUeruO2MwknnQr0gIVj5T9WnbGjkJw=; b=PRVGB1Rf62Ix5AVO6OFlWQpaLc
-	RQ/S3UTIY4vnc/AL9sc1R1gLqw3VQYYWO8CGpjllKFaQ1VBwP/REU1yaaBUR/Q6jSZeumEcaoANrr
-	8diGGYtUkqc5vE111eJCTuR9je39ewYcnx8SS66fowPZTF0gmri2Wu6XbXsKdXwXbWOrvjDLvaDSE
-	jer0nqK7UQQUoJHcsJh+yMUXHggmvyf8ScLKm8Hpw3YOEtagYasr2muXZZPuqL/kRxzrkaLO38gg3
-	yi22sRq5tic6iG8uM7bCjf9GwjCRlo0IeuzE0pSF5hM4CWOhJHCl2WNsUg6lABScpZLnd1DsD+Zlh
-	TDJNeT2w==;
-Received: from localhost ([::1]:19280 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=IFb4ArdyzrAolvqt+QqWE+epQ0KSagvWb6FY/atZiRk=; b=MzP3zXzN0569Q2lQg9hi2wiafP
+	D45fQyJWPxrwLCfYSgQ/tsdsDnp8/aFFs4x+R7KYuNdOTb2kStHdPEsA92EWR6xnDz2iqZFP+Jxwm
+	5VsH17gjWMxrqiLU9B5QbW4rQABa9NTqB35rOqWRBLLCo1frOL6BdcLCEo+/dqAlPIgavqVVGWbra
+	aIPtnj+yxzm57H+ZUW3WoHpl8PpwE4f1gsq5QJ5iOHMjV97aa2ZABsMED+sEaK1pAawdKIyYb7RPK
+	35a7JdAZ1dQQvrNzHJCU7B3bhYwEyx2UwZI7TypDqP4oW3hjhoBZFqKgt1tujI20L3X3Z+k6dCcXJ
+	BSBZh8nA==;
+Received: from localhost ([::1]:47072 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jb0sJ-0055Aj-3D; Tue, 19 May 2020 11:57:35 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21322) 
+	id 1jbTnu-005H0Q-9l; Wed, 20 May 2020 18:50:58 +0000
+Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636]:38948) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jb0sD-0055Ac-UN
- for samba-technical@lists.samba.org; Tue, 19 May 2020 11:57:32 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=C+lRnwUM2LzshUUeruO2MwknnQr0gIVj5T9WnbGjkJw=; b=wNbtYKXEaCYjJQby6IzRsPZ97Z
- NGqROy1v77bwsjQ0M4+p6td/3s6mDI9++2WSlB7H7SkPZugP084eAonLKS4n9cC2ebbzbcIH/KYZG
- 51MQ61YkaAZrzPi4b43fhub46apCp7BcecGRAduabid9R4uJitGbo0YG9fYz6skSv2hsjb4gWQsXI
- WvZxHjXYbJD4lWvaHt92umxGQCpSU4bELyP7U+JoCasOHMjqnEETMviBdIQx8I64WKKI6+ZxYenKX
- ErEO7AvFig+Pnuz2wkgl2dXezXQyI5AzVUbZPC38UtYVtbTteDM144HKflm8yjWdOXfgmHN3+MwgM
- kG0lqOwYST8yWiJY8ng1yC8pU5ZKM8yOtyCHyrPdNcfh20qjzwxKTDfGq/8+MFChLnbx2f2Yq4It2
- fYEeb/802ZT3WATJjPKwxHTIStueR1IMzF05/ugm7mNwabSwFo6i0/n7q8TnY/mQ731VfFOvGj2al
- NloRaet7cSPpoRPoISLxnTyx;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jb0sD-0005I4-1E; Tue, 19 May 2020 11:57:29 +0000
-Date: Tue, 19 May 2020 13:57:27 +0200
-To: Jeremy Allison <jra@samba.org>
-Subject: Re: Behaviour mismatch between "store dos attributes" and "map
- archive" from man smb.conf(5)
-Message-ID: <20200519115727.GA613584@samba.org>
-References: <20200513221431.GA7185@samba.org>
- <20200513225131.GG9585@jeremy-acer>
- <20200513233612.GB7185@samba.org>
- <20200514005508.GA21149@jeremy-acer>
- <20200514075904.GA150211@samba.org>
- <20200514174533.GC13942@jeremy-acer>
- <20200514232614.GA483587@samba.org>
- <20200515004712.GA30423@jeremy-acer>
- <0ea0253023c276aedf3b2eb162a9907cdcf08092.camel@cryptolab.net>
- <20200518185903.GB30317@jeremy-acer>
+ (Exim) id 1jbTnp-005H0J-Ho
+ for samba-technical@lists.samba.org; Wed, 20 May 2020 18:50:55 +0000
+Received: by mail-ej1-x636.google.com with SMTP id s3so5384396eji.6
+ for <samba-technical@lists.samba.org>; Wed, 20 May 2020 11:50:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=3jens6qXPIZGVi0Ku9XUS4gxDp39ZlgW6NtlhKtjvoY=;
+ b=LyGyWus5tW/Md/pdcSgKuG6Zovq/mal8Bi8SIigtxfFqAUqXAPPwOd3XTWGfm9Bv3L
+ TuIt8+qYd5w3RxD5yWhDUOCZxvyJ/sNasn1sEyqjmne0FOQlDtbq861MKijZq33mH8Os
+ TUzG4mbKG2rTS8L1lQwUbPjkIZmNsJc7OWDEq9tJJ+c9IoZDgWUrdN61r5a5Ol6AypK4
+ 7RyZsBZl14EJDn8SIuHO6j/vYqXmRRArMvGAcC2h3bhWkNGLQSHuegrLqAiFZdM8bSlC
+ E0gCj5/HlYt7KLR/XWcJesViSRLMuPXk9ZNGNo2ppvOuAYDL5lR2UVobqE9DHW9SnA3c
+ 1GXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=3jens6qXPIZGVi0Ku9XUS4gxDp39ZlgW6NtlhKtjvoY=;
+ b=Shrl9mWJ3hKmL5Xz64J03sjpuBnuaAbHA4Y5L0efUjQ3txQoBf0OzW5Hfn52iismMI
+ MELsLal2gOUn7PhRJDIz3a1RLZamNw/JM/VreowP586yuxQCpvjfe4Hj71FS7A8EudkX
+ rzs3snWp0l15YWUNBlotLmo3yXiDztQmQRfWNei6Xl1QwgwrUNCPYnmxeqL0jdJjVKcB
+ AIUOEfBNQ0W7idh1zciAWE/7QWkmUPyq79mismavVeJ86h1Efp8Zj7dVqA7vzjwPHrpb
+ DS3SHwN4uyyYu6kL17PhneY+zogGklhWnyM+Rwjxrq5WbwwRAYbp9rBn34L4k8FcL8br
+ k2tA==
+X-Gm-Message-State: AOAM530tsbN0o3nj3hYgyHuhkGuyhGwjG2U5cnBwbQPfdKQFDWxNx35B
+ 3KKntZefXcrBcj56REqhZzsbpX4cGljeveTtFKQH0obq
+X-Google-Smtp-Source: ABdhPJxiX+1FDsHnhzRLmyYeP5PSuTDwGgMXxZTZ5lLqrF/Rw3j/wAscfn8Cno7XTkFppznpD2lyL2JgJ854pmpMOn0=
+X-Received: by 2002:a17:907:119d:: with SMTP id
+ uz29mr409692ejb.281.1590000652724; 
+ Wed, 20 May 2020 11:50:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="mP3DRpeJDSE+ciuQ"
-Content-Disposition: inline
-In-Reply-To: <20200518185903.GB30317@jeremy-acer>
+Date: Wed, 20 May 2020 21:46:02 +0300
+Message-ID: <CAH72RCX1ATg=SOwihfT0D6vDvaJPLUC0pWpaUT6RFx81RWcYaw@mail.gmail.com>
+Subject: Why use TDB and LMDB?
+To: samba-technical@lists.samba.org
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,128 +66,13 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Adam via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Adam <obnox@samba.org>
-Cc: Anoop C S <anoopcs@cryptolab.net>,
- samba-technical <samba-technical@lists.samba.org>
+From: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
+Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Hi everyone,
 
---mP3DRpeJDSE+ciuQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On 2020-05-18 at 11:59 -0700, Jeremy Allison wrote:
-> On Mon, May 18, 2020 at 05:47:00PM +0530, Anoop C S wrote:
-> >=20
-> > Seems like we have two different mapping methods.
-> >=20
-> > When vfs_acl_xattr is used along with 'ignore system acls' we have
-> > special kind of treatment as follows inside make_default_acl_posix():
-> >=20
-> > if (mode & S_IRUSR) {
-> >         if (mode & S_IWUSR) {
-> >                 access_mask |=3D SEC_RIGHTS_FILE_ALL;
-> >         } else {
-> >                 access_mask |=3D SEC_RIGHTS_FILE_READ | SEC_FILE_EXECUT=
-E;
-> >         }
-> > }
-> > if (mode & S_IWUSR) {
-> >         access_mask |=3D SEC_RIGHTS_FILE_WRITE | SEC_STD_DELETE;
-> > }
-> >=20
-> > This might be the reason why smb2.read.position is always passing with
-> > vfs_acl_xattr + "ignore system acls =3D yes". =20
->=20
-> Yes, "ignore system acls =3D yes" special cases a lot of stuff.
-
-Right, but as mentioned before, even without "ignore system
-acls", the x-bit will be set on the file upon creation.
-So even in that case, EXECUTE access rights are granted upon
-opening again and the test passes.
-
-> > Here comes the default mapping method, invoked all the way from
-> > smbd_check_access_rights() we have the following in
-> > map_canon_ace_perms():
-> >=20
-> > if (directory_ace) {
-> >         nt_mask |=3D ((perms & S_IRUSR) ? UNIX_DIRECTORY_ACCESS_R : 0 );
-> >         nt_mask |=3D ((perms & S_IWUSR) ? UNIX_DIRECTORY_ACCESS_W : 0 );
-> >         nt_mask |=3D ((perms & S_IXUSR) ? UNIX_DIRECTORY_ACCESS_X : 0 );
-> > } else {
-> >         nt_mask |=3D ((perms & S_IRUSR) ? UNIX_ACCESS_R : 0 );
-> >         nt_mask |=3D ((perms & S_IWUSR) ? UNIX_ACCESS_W : 0 );
-> >         nt_mask |=3D ((perms & S_IXUSR) ? UNIX_ACCESS_X : 0 );
-> > }
-> >=20
-> > Thus an existing file created without 'x' bit will end up with a
-> > access_mask without SEC_FILE_EXECUTE.
->=20
-> An access_mask in the reported Windows ACL, yes.
-
-But the main point is that is ONLY happening if the file on disk
-has user +x perms! And this is different from the acl-xattr
-behavior.
-=20
-> > Difference in behaviour is because of different mapping methods
-> > resulting in different access_mask when used with and without
-> > vfs_acl_xattr. Why is it so? Why shouldn't vfs_acl_xattr just deal with
-> > setting "security.NTACL" with a value obtained out of a common mapping
-> > method?
->=20
-> It's probably so due to historical reasons.
->=20
-> Can you write up a comprehensive "how I think this
-> should behave" and then we can discuss, make changes ?
-
-We will.
-
-I think the gist of it is this (with a grain of salt),
-as far as I understand it:
-
-- There are mappings from posix acls/perms to NT-acls and visa versa.
-- Access checks in smbd are done at the nt-acl level.
-- The mappings happens both with and without acl_xattr
-  (and without ignore-system-acls).
-- The main conceptual difference between the two modes is that in
-  the acl-xattr case the nt acl gets stored to disk (and becomes
-  the source of truth) while in the no-acl-xattr case it stays
-  in memory only (and the posix acl remains the source of truth).
-
-The *problem* I see is that in the two cases, *different* mapping
-functions are used. I think we should use the *same* mapping
-function in both cases to achieve a consistent behavior.
-(And FWIW, I currently think the mapping function of the
-acl-xattr case should be used, as this is the one tested in
-selftest.)
-
-It is understood that this might lead to behavior changes that
-are unexpected for or unwanted by some, but we could still keep
-the legacy behavior behind an option for a while.
-
-We will follow up with a lot more detail, but I think this is the
-crux of it.
-
-Cheers - Michael
-
-
->=20
-> Thanks,
->=20
-> Jeremy.
-
---mP3DRpeJDSE+ciuQ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQQ4hxRJ4GXWNWIKYh7JT0k4GE+QNAUCXsPJpQAKCRDJT0k4GE+Q
-NOOjAJ9UAjoiiNlippXq+GCzgE4HufamdACePMnhx+Xj37g1eGTxRn3lJLtqWyI=
-=cl+B
------END PGP SIGNATURE-----
-
---mP3DRpeJDSE+ciuQ--
-
+I'm still learning Samba and one of the question I haven't figured out yet
+is why
+Samba uses TDB or LMDB instead of RDBMS like Postgres or MySQL?
