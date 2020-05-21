@@ -2,46 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A51E1DC492
-	for <lists+samba-technical@lfdr.de>; Thu, 21 May 2020 03:23:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F130D1DC4F1
+	for <lists+samba-technical@lfdr.de>; Thu, 21 May 2020 03:54:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=MfiWo0zfXnIa28sw1RGKeyTvTTRuQ9Puj/LC9t7CdEc=; b=SfJ3HatdW318NR8HGLnvAXooGB
-	rVeQMMMOXll46/20gunaPSI5VxfYpviFpszqjlyxNAasDxxL+eOF44+bNAOown9ViBR/hr+Ue7VCI
-	8TLHTKZoBE3rZmEg1+cZ3LayW9YfDjLsH/w+alzG1E7x0mZXeVUK2WLe9QeXCHJmGthIzIc6bkgb0
-	oTuqkPejKSswGqeK/AoYow25X5oc2j7EMBc73VcQbumdW2P9jN+VzXP5lSEEiJBXqirCNc4hLvoqg
-	098EAURYA/SFIogF5h9YNeVQZaiSAXARv0WA3I3hAc5S29tgt8Ftv9Zs6Bkmy4KG+pJJAxZGrZ8lp
-	iyDqFYYA==;
-Received: from localhost ([::1]:64234 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=7vSte9OPdyoHxdYftsVy+IR69i9+Zve/pmalZhnO9BQ=; b=C1jV60JaCLtMC+GznxHhZvP3nj
+	F9/DSZKIpNpj16kTFLdpDatlIvp4+S13pHIMq8MnsmhF71p9f5hl6iFNDRhDP4hcU+DNmtYBliBIU
+	/AVxuBmcRHwGc7FtWu+krMcJF2yzDxUU10PN2+zuM26OKMfFkgn1w3D2ou0HoztY8ZNw1qZ/+Ii+T
+	m+/ImVeVpy7QtKlRZGjN3MPzDEOec31aO7hvuiTBAOh36v/nPp4zi4CFyXF6EzBYA3ojYxCHjoqYo
+	QAZvfV8fBDeY4clvRf+uhGTQOtcnyMmQmWNVO9vXLXnIA+jvGD+bOenYttazez4ZbtTbOwwDSWLRe
+	eovi49hg==;
+Received: from localhost ([::1]:64972 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jbZuU-005JoY-MZ; Thu, 21 May 2020 01:22:10 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47468) 
+	id 1jbaPK-005JvY-UY; Thu, 21 May 2020 01:54:03 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55492) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jbZuQ-005JoR-8W
- for samba-technical@lists.samba.org; Thu, 21 May 2020 01:22:08 +0000
+ (Exim) id 1jbaP3-005JvR-W2
+ for samba-technical@lists.samba.org; Thu, 21 May 2020 01:53:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=MfiWo0zfXnIa28sw1RGKeyTvTTRuQ9Puj/LC9t7CdEc=; b=ioMOOsZ+JAdWZgu19jSbrzKsrA
- GyePAjLTKsGq/gUXQitOtET/5MhHk6yUi49fEdvGRMm3ubjUqKZO7EOVH3JNqLNA6gBTVvAusEeuZ
- nkEsbP4iQL6FzI/BdEBQXgInPgw3/ZN/PyLHpTkz2KJmgdaNneA3+U5p0K5NWxdTuzs7BhFLLtIfU
- hFW1Q6ZR0IXuIwfEcem/9WF2ENIt0toX0oLGF1zqBuMd6Afo/kfB96/GKI4bb8hOyvTBs4FqRf78t
- d7NJIkLIl7L0lZgKOOnk1Br6o/sHMj9J5BeXNyTbABxyc991XntJj9hBGLvfJXAYl8fnkZYbjhOwf
- Ganp1Itr/8iicmjhGjXUH3AXEUN38u9pGDN1nMkwx7dGgGsbDLCoRxjP34YhZEWblQhg/QN/hz9vX
- vWEd5RduM2inYJicXaGFIDH/D2BVpmXpH/8P5yEQs0hhwh4AfC1SSXFvsUnniyvsxR/axdGTCzWAn
- EOH5dRV1gMstpy8CGLmDx326;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=7vSte9OPdyoHxdYftsVy+IR69i9+Zve/pmalZhnO9BQ=; b=vgeQLHuUSyd28ilywBdkEeHYZE
+ 3fPsew9MTG8/ihImJzYjYYypyIe0kAv5DNx/OzU981u+6d41H7HUC1KRraUGtzcQuRSuXV9fWrOSS
+ WxAKHudUzFSsa9/DT/MXJB+mpHzYxiJ4vzVNp1iio+aW+qTRljBWbNZLx0w3ctGtf7xk1QhkMdhpE
+ mHizLALQrJBacsLi986sngzl+XmOALJSh5u0gNPWCzOc5tFDbaBqJpovp8mDzLnWidz3HNQdmm8cO
+ QEKwIc/8SeXC7ri1u50StWJllsfAnThw6CR2CFm8rib9myI3/kmUqgwlI6NUbU/x/k96wGilnzLsY
+ BGjtyNAN943YF7YvqLmdyzGNuDusnqVpBOUDXRG0l+CixadosxBMCu+r7avKsZ+n5CIvhnH5fjxhZ
+ Wj/6abIMBTcRFi6fusk03CgTA8QBQL70mcsYqOtfUGJbnvVEFMqbgFBcI9U+pzQcsWAxVv9y8As68
+ C8x4WXYajRkNHFnk5kfsM8wc;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jbZuO-00071f-Qn; Thu, 21 May 2020 01:22:05 +0000
-Date: Wed, 20 May 2020 18:21:58 -0700
-To: Andrew Bartlett <abartlet@samba.org>
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jbaP1-0007GX-76; Thu, 21 May 2020 01:53:44 +0000
+Message-ID: <4ce022a6c65422e40e1a583f95cefbbc7585393c.camel@samba.org>
 Subject: Re: Avoiding further (LDAP) stack proliferation in Samba
-Message-ID: <20200521012158.GB10353@jeremy-acer>
+To: Jeremy Allison <jra@samba.org>
+Date: Thu, 21 May 2020 13:53:36 +1200
+In-Reply-To: <20200521012158.GB10353@jeremy-acer>
 References: <7f08ecb52a4a94d95e39af436e94ab852cf0da55.camel@samba.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <7f08ecb52a4a94d95e39af436e94ab852cf0da55.camel@samba.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+ <20200521012158.GB10353@jeremy-acer>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,57 +56,95 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: cs@samba.org, swen@linux.ibm.com,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ swen@linux.ibm.com, cs@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, May 21, 2020 at 11:47:50AM +1200, Andrew Bartlett wrote:
-> G'Day Sswen and Christian,
+On Wed, 2020-05-20 at 18:21 -0700, Jeremy Allison via samba-technical
+wrote:
+> On Thu, May 21, 2020 at 11:47:50AM +1200, Andrew Bartlett wrote:
+> > However, I quite strongly feel that we should not further
+> > proliferate
+> > the new or substantial new use of tldap in Samba without:
+> >  - offsetting work to reduce, not increase the number of LDAP
+> > protocol
+> > stacks
+> > and
+> >  - substantial sharing of structures, ASN.1 parsing and other
+> > utility
+> > code
+> > 
+> > My preference, as these are all sync or local callback based calls
+> > is
+> > that you implement this with LDB.  LDB is a mature, extensively
+> > used
+> > LDAP client library (not just the directory store for the AD DC).  
+> > 
+> > The routines you would need are ldb_search() and
+> > ldb_request().  The
+> > timeout can be easily set on each request and I can assist with
+> > further
+> > guidance if need be.
 > 
-> As this is a more 'meta' question, I wanted to write to the broader
-> mailing list in regard to: 
-> https://gitlab.com/samba-team/samba/-/merge_requests/1351#note_346327256
-> which is following on from Jermey's comment: https://gitlab.com/samba-team/samba/-/merge_requests/1258#note_320352109
-> 
-> I'm really sorry this discussion has come up on what might, in other
-> circumstances been a great demonstration of showing the broader design
-> that started the tldap changes.
-> 
-> Jermey asked earlier to see the broader designs and given the broader
-> implications I think it is appropriate to have that raised on the list
-> here.  
-> 
-> Explaining our plans in public before we have code is not something we
-> do well in Samba - we fear (and this mail shows that is a genuine fear)
-> that others will jump in and suggest things.  Much easier to have the
-> code finished and put any questions to bed with: well, this is written
-> and works!
-> 
-> However, I quite strongly feel that we should not further proliferate
-> the new or substantial new use of tldap in Samba without:
->  - offsetting work to reduce, not increase the number of LDAP protocol
-> stacks
-> and
->  - substantial sharing of structures, ASN.1 parsing and other utility
-> code
-> 
-> My preference, as these are all sync or local callback based calls is
-> that you implement this with LDB.  LDB is a mature, extensively used
-> LDAP client library (not just the directory store for the AD DC).  
-> 
-> The routines you would need are ldb_search() and ldb_request().  The
-> timeout can be easily set on each request and I can assist with further
-> guidance if need be.
+> Are there tevent_req async versions of ldb_search() and ldb_request()
+> (haven't looked, don't have the time right now, sorry) ? If not, is
+> is easy to add them ?
 
-Are there tevent_req async versions of ldb_search() and ldb_request()
-(haven't looked, don't have the time right now, sorry) ? If not, is
-is easy to add them ?
+No, and I've been told that gluing the two different async
+architectures together isn't trivial, but it would be worth someone who
+really understands (or perhaps the opposite, someone who doesn't and so
+doesn't know what is impossible?) having a red hot go.  
 
-New code is moving to tevent_req and async as much as possible, so
-to standardize on an internal ldap stack - which would be an amazingly
-good thing to do IMHO it needs to have tevent_req and async functionality
-I think.
+Thankfully in this case all the calls are synchronous (some with
+callbacks), none return to the main event loop, so this doesn't impact
+this use case.  This is why I suggested ldb_search() and ldb_request()
+would be a good match.
+
+> New code is moving to tevent_req and async as much as possible, so
+> to standardize on an internal ldap stack - which would be an
+> amazingly
+> good thing to do IMHO it needs to have tevent_req and async
+> functionality
+> I think.
+
+It may be that we are unwilling to commit to the use of LDB if there
+isn't a clear path to being able to use tevent_req in the future.  
+
+In that case, all I would ask is that we do other things to merge the
+stacks first, for example:
+ - have LDB use more common layers with tldap under the hood.  Some
+ASN.1 parsing is shared, but there is a lot that is not.
+ - have tldap and LDB share structures (and so helper functions) like
+ldb_message and ldb_dn
+ - have common ASN.1 parsing for controls
+ - do likewise with the smbldap code and libads.
+
+Currently we have at least thee different ways an LDAP search response
+is expressed, for example.  This makes it harder to have common utility
+functions.
+
+Imagine if we could prepare a struct ldb_request, but instead of
+passing it to ldb, we pass it to (say) tldap, and the responses are
+again ldb stuctures that we can use ldb utility functions on?  
+
+This would work around the existing non-tevent async architecture of
+LDB but still avoid all the collateral duplication (which is my bigger
+concern).
+
+I know I'm asking a lot, but as I said, unless we pause now and plan
+the later merge work becomes quite epic.
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
+
+
 
