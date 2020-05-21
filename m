@@ -2,46 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C5471DD90E
-	for <lists+samba-technical@lfdr.de>; Thu, 21 May 2020 23:06:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D7A01DD941
+	for <lists+samba-technical@lfdr.de>; Thu, 21 May 2020 23:18:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=4PGJLbq3Wq4EWQQLvIpUsHuLshmRr6hCLAiVNGgNUwo=; b=ppa/zsHJXmRfpPT88HUjVfA2vL
-	zEG9pEKTiVPdJ2tWXeHj/yMYEmvX8hs7BOrLo25FJLavUL8Qvn52p//XVU8a81MsUlad0RaK1YEJJ
-	kAE/0QnLKFxyweU5CkcTNubUu9M/qJSGQ5KjRpk9XlY8PyypmBIfoFttjBeZX1QuYqhymeHQg+uhY
-	JQqpQBmYHU0ZjEfdj8rdXXP5eMbU/wccus9ZtR1kH3buoUpIpnrUjHu3yoJCI2FC1H43h5I0AVZVt
-	sqg1qoUH7iJU1UPgY3Qr6O8CrLLofd48s2aStVHkoHra5adYlveQro/o1YfFukrGdY9bCHlu1JReQ
-	huwRx7cg==;
-Received: from localhost ([::1]:47160 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=/BQmGu2TBReZvZ+PAdyA2ONTFBquFcFDGn09IUvSX/E=; b=toqD9ZccB/fJOL48RQB6H3zxkz
+	uyzGet3V1hDwIsvL7rZ8nKbsvDhyi6xWx2QRTYH6/XZIhywip5OGQJzYgMKWfIkvRds5zTcTXDvKD
+	MJ/8ZUOIiorRYSF9ZUNMH7v0IVjfImPpKE4M65TfePsFCjlpZuWY0W2VrAMNulax97prEsfVb+M70
+	tSwjGcODsZ/5dcSed8HQiVjQwgD8DBggPvIyoP9Z4TkPMmoWfwczznbGQ28kqu7JsZ+UhIJsvhCBT
+	vatAugJ/uMDacCHAsBR4l9oALPxWYdlmQ2F+/HLFY7ehEh+5RXpFGRWiEuj66KJW2IXXRyh0B8FbV
+	HKl4rw2g==;
+Received: from localhost ([::1]:47898 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jbsOP-005P8o-IK; Thu, 21 May 2020 21:06:17 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30532) 
+	id 1jbsZW-005PFH-KJ; Thu, 21 May 2020 21:17:46 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33730) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jbsOF-005P8h-8H
- for samba-technical@lists.samba.org; Thu, 21 May 2020 21:06:14 +0000
+ (Exim) id 1jbsZR-005PFA-B7
+ for samba-technical@lists.samba.org; Thu, 21 May 2020 21:17:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=4PGJLbq3Wq4EWQQLvIpUsHuLshmRr6hCLAiVNGgNUwo=; b=zZeXxaRzgL9XprGLFqJZqFCzid
- j4i0nkwPG/KGAPK8a3wRx9yVqcvl9uvQawnVjFeLK5Q1ZvFeiIRfyGt8ZcRGcGqa3W0DwSiWO8N8M
- 3pJqL1nHvw9B3yHHpBIslbTj7NQq/EbXTA5ddflvgvQe5ObmnH+oWprjGOUuPiSNpWe+uu/92kvME
- WeE9sCp5rALTDyADLESn6XfI75pY1CQtBoR4D8+ML8A4VbJlCrazZoOvfNAu3E3mbNRvEHX6Y89OH
- r8Li0HrGc3XjU6X5trgDDj08C4+/KL210ysoSY1q0tuyIXxCXvwBlVRyu5N/IzzsDpPvWNXQFwYL+
- 5CySGIsnvfgo1bam0A0EuRYh542UxTtfVaDY8TrIyAlBd4p6UQckg9rjN690xxyEMj1qBUFrFkwxH
- e7thUJdlSdv7KQDXry1qSqw338oPHxM5/HoJ4sNk5l5ExF/VhcGv46+hsURrz8UIIZQz8ix8B3ne5
- eEY7LSeopiOfPLpt++qlsZE7;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=/BQmGu2TBReZvZ+PAdyA2ONTFBquFcFDGn09IUvSX/E=; b=02yETrloDTAfzNP2iLRvNga4IZ
+ +itjuBkLW1PtDHufP2l4lWEFv1H/0Cet6nDMYZ5S1AVQlYPgIE+CyJn3Ehy/3VFOxOA9jX7emp6/H
+ Fw1h7UQh71e1BlYyWG7CIS8t+HzubCMuKkMBuSDFgAT+6y3A9+HmuzWFtB5BKBL7trMk2JfjkYhnI
+ pJK8eXDpR7MwgNljphXaBfj4vBrYVezacU90sJXhDbhbch3pkEFALuQxWYgiDlT09BLbXweAw0q7Q
+ KE3tZ0KK0bM7lLWVVyCv5ao+KfQXnjxo9Bszin1jDPSRjj2hJdsO05o62VaDh+ghtXV+skoxcDIO+
+ wMj+eMm0a/sZW4p91QcRKIFAYkwOJrhlS2DUYu15rzN42X/ChdVpU/dnTIwOnEeS7h3N3LEfclLLA
+ 9ZLhZvsmMi8W717l5EnaWGEA8DqYN9z2g3jUovny2YhFXF6/HUXlsLvhspSqbidcgzxEx6tSzXOeX
+ nXwlG8QngGoAfk0gBxfwUVHy;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jbsOD-0000iC-Nq; Thu, 21 May 2020 21:06:06 +0000
-Date: Thu, 21 May 2020 14:05:59 -0700
-To: hezekiah maina <hezekiahmaina3@gmail.com>
-Subject: Re: GSoC: Community bonding questions
-Message-ID: <20200521210559.GD18572@jeremy-acer>
-References: <CAH72RCWL=4v4Ek9c-YbH0JYLX64iYK2NA83NOTYOHMN0uZ7A4A@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAH72RCWL=4v4Ek9c-YbH0JYLX64iYK2NA83NOTYOHMN0uZ7A4A@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jbsZO-0000nJ-V8; Thu, 21 May 2020 21:17:39 +0000
+Message-ID: <b5a5df35dbba7c49e19283745e7d65e45c1a1ef8.camel@samba.org>
+Subject: Re: Avoiding further (LDAP) stack proliferation in Samba
+To: Uri Simchoni <uri@samba.org>, Upstream Samba Technical Mailing list
+ <samba-technical@lists.samba.org>
+Date: Fri, 22 May 2020 09:17:33 +1200
+In-Reply-To: <530356a1-a074-9cc8-ddf2-92a79b98dae8@samba.org>
+References: <7f08ecb52a4a94d95e39af436e94ab852cf0da55.camel@samba.org>
+ <530356a1-a074-9cc8-ddf2-92a79b98dae8@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,31 +57,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Alexander Bokovoy <ab@samba.org>, samba-technical@lists.samba.org,
- abartlet@samba.org
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: swen@linux.ibm.com, cs@samba.org, Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, May 21, 2020 at 11:03:52PM +0300, hezekiah maina via samba-technical wrote:
-> G'day everyone,
-> 
-> Please correct me if I am wrong. So when you provision an AD DC using the
-> samba-tool command line utility the following files are created or modified:
->   smb.conf
->   *.ldb / *.tdb
->   krb5.conf
->   resolv.conf
->   /etc/hosts
-> 
-> Are there any other files that Samba creates or changes?
-> 
-> I have also noticed a lot of discussion on the mailing list around
-> Kerberos. My understanding is Samba uses Kerberos as it's authentication
-> protocol. Are there other authentication protocols that Samba uses apart
-> from Kerberos?
+On Thu, 2020-05-21 at 08:17 +0300, Uri Simchoni wrote:
+> Does LDB (as client) have the full AD integration (Kerberos, sasl
+> wrapping)? IIRC Only libads had that and then in 2015 the mentioned
+> winbindd change added that to tldap.
 
-NTLM (a catch-all term for all the NTLM+ varients) is the only other common one.
-Documented in MS-NLMP.pdf.
+Yes, since the very earliest days of LDB, because that is what it was
+built for.  Since 2005 or so, eg a decade prior:
+
+commit 03b0f279ed7d1ed7083e0c2301af94ff39f0e8a4
+Author: Andrew Tridgell <tridge@samba.org>
+Date:   Fri Jun 17 02:47:26 2005 +0000
+
+    r7667: added a ldb ildap backend, using our internal ldap client
+library. Next step is to
+    remove the check for the ldap libraries in configure
+    (This used to be commit 74841dbb2a86bb1c584b5c26c4cd24a818a65a34)
+
+We have come a long way since then and we are doing much better now at
+being a single project.
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
+
+
 
