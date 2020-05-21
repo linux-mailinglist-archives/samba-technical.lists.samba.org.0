@@ -2,49 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75AC01DC68C
-	for <lists+samba-technical@lfdr.de>; Thu, 21 May 2020 07:18:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 92F411DD7E8
+	for <lists+samba-technical@lfdr.de>; Thu, 21 May 2020 22:05:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=h0E1ZaoPHiC06lUNTY+PGXTfVfiu3A84N8MyzQcFUvc=; b=IPXFPRC1LgnbW7RK1LALdErP4M
-	EZK5HUvV3GaYq4Um3AYrPwX18KAtRwW6rh8tKxfoqQmQQgnMzZO+Iuva8GWhF6NK/6NWGoaz9cM+4
-	ex6g6fGu4mkNCJoxuM+CyfHKXA7AAFax9+liU0X1sH+Mw0CfCuC81tIE43sddMQgbcQh9AUB5zMsO
-	0ilGAAytehSWIZN6r7Xf/GcZtaBNitdV2uxwAZrAXfghV2CEzN5yx90meIQhFp51GD5VKz4wISoXe
-	eU5XKD/iV1q3MIC5ywES+5Z6aMntOaD5bMYK3TItDkDMzOssA/JRvKMvBPGSg1ImNzq/HvxXO4Hs6
-	jmJwDTkg==;
-Received: from localhost ([::1]:18952 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=cG23ldzaRmqKd4Gzp6NjhqVQ0Pew7Z/TiZykGS4TqcY=; b=pulBcSjXqh5zqgYxMHjQBQ9xic
+	DFbwVQAamRWfEwIwYlwfasFrFeL9cAtIGc/a4k4vNRIbw/wZr+2w4zuG3QCDdjyBICVl72GARhllz
+	neYkCriD353xbhXR+8OCduAXDTn+ofiMYlOl47b0lJD1LG407tD1fGpTZ7x2SuciJLllDbc0HiQDf
+	IxiQqiVMlTk5iwSrRdO0WDmTZr8K4rhTPUGJabgKsY9hs6vxmsQmqMhe7/uInY+XmgBHjYogOmPI0
+	v7n/zn/OJRijAuhmW0xZoCyem+/mLZhfCFASoKEyp/yUCLD/NPVokRO/Y5v9V7ZgeTKswpaZhYnLV
+	l7OTChYg==;
+Received: from localhost ([::1]:41696 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jbdaH-005KLx-Ur; Thu, 21 May 2020 05:17:34 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53930) 
+	id 1jbrQJ-005OMC-KZ; Thu, 21 May 2020 20:04:11 +0000
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f]:39158) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jbda8-005KLp-1S
- for samba-technical@lists.samba.org; Thu, 21 May 2020 05:17:30 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=h0E1ZaoPHiC06lUNTY+PGXTfVfiu3A84N8MyzQcFUvc=; b=TmmzqSw89UUWZr5cXO80IjGldf
- lNrxz1gqH1JM+SZ+71nqwpAVEgYx5jSqWKtLWQN/6cBwC30KEYDpSS0554k6pe3lcfVKz8L+zK5At
- OVtH2xjdXi73W8ghEu40o+7V3mqxG1GnNVU/ZqThnlhzunpX6RV6Ye2B7ntVtn7qGoJCG/Jiejc2r
- tSITAZE/D+okb2/vG+KJUoNot0GkIRCqpT1+1zRYE/Feads7c4TPeRNMlaQbEI5z2RQRnACjAclRc
- MjDDP8tt/gQNJrsXOHaLwVVARde3QRgUb537ELvfXs6d5HKEdXdY2zl9AAbI+QRcUfNwTEh4Bc6+y
- j0b+tbSNsSGVq6KcoUKX5V4/c/o4pHW2PDjKn6WPz6cAfD8dTQf427M1K9iIARWAHhzVw9286Mqka
- XWfpXhwqxyCy6V89QGPk/AyDpL1V09OFj0An9tn+KIWSDEo9x76HcPx1vfwIODp86LEXbGBtpN6mV
- T2m3qYul7vxRWXsEpgJs3R7A;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jbda5-0000um-Lu; Thu, 21 May 2020 05:17:21 +0000
-Subject: Re: Avoiding further (LDAP) stack proliferation in Samba
-To: Andrew Bartlett <abartlet@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-References: <7f08ecb52a4a94d95e39af436e94ab852cf0da55.camel@samba.org>
-Message-ID: <530356a1-a074-9cc8-ddf2-92a79b98dae8@samba.org>
-Date: Thu, 21 May 2020 08:17:17 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ (Exim) id 1jbrQD-005OM5-G8
+ for samba-technical@lists.samba.org; Thu, 21 May 2020 20:04:07 +0000
+Received: by mail-ej1-x62f.google.com with SMTP id s3so10361826eji.6
+ for <samba-technical@lists.samba.org>; Thu, 21 May 2020 13:04:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=wcyiWleRBc3fL9yjwg/lGvnAKa32p2QmNtKTvz0HYd0=;
+ b=JM8NFUga9quyK7ooMAexMXy7p6HGjRLgtdw8CF7CR3BGcRlSABUvnI84PpwGMqQymP
+ VFtLdHgJaUInurwV30Xz7nA8M1FPMv6frna3TBZ3l9Dxmf3RfvDFSuEwTwVzuQhut5Uq
+ 9Ct26sex1e26RJL8CPNpT8ijOVOOjdk5Mmw4Dg08FdXV2g4e/o/lpud8PiB8ux1HvqTF
+ ZNqvdXso2/fHYkMgnFyPLNioRuC83yZc6dc/VkMlRKY2gseSSjYCTDdYt4CacLZZ3fCG
+ lonLxU/ML3PtByxE+SZhj91sXoKgBTLLgtVL37n8F0nTJJqCh0PiDS7MM6pFYKTR/CSh
+ z5Jw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=wcyiWleRBc3fL9yjwg/lGvnAKa32p2QmNtKTvz0HYd0=;
+ b=rAm+nFxYttSNbMHd69/BwaO2aKoK4QKV8fU1zVBX3IfUIDLvBDomtTJd/sWfgwVKAE
+ GTY+zZxzLP53MX9dhLllDhT9Yp0bALZZfg1MJEviR+YqegTbcE385fNRhwodsOWdYMmk
+ ldVLqi2DHDAO32jLOAr6ru0BduO4UP51YTuglZVhIqDPpfpas8qgn3PW6Tj3SbOzQQ5y
+ px7y4/QeKemPolUD2vDeatwKwhOIagCuApR9BGHW/GJ39SI17xQaTuqgWiqGESfsQZJe
+ 7ukwXOhqicmWE9R8+WH3nADaiKKWqAMtSdnQHJVayB+OneODj0FKF7HDRHVIwfLEEtMi
+ PZcA==
+X-Gm-Message-State: AOAM531uynN93nHYSoaoM3WSIf89dedCbxWgp8AAsfHqXNbW3AAYQhp/
+ Tj8/pyT96hsJUcw9JPaH4QCbnKkI9JOoePlA1FoPIH8NuHs=
+X-Google-Smtp-Source: ABdhPJwZBLijgyYuatk62tT1PShrlymgKkWVvgNofFW10w2Xrq7yveTFrOveR/Z4U/NrpTZ5oea7mhZ0tEP+CUXqRyA=
+X-Received: by 2002:a17:906:a0c2:: with SMTP id
+ bh2mr5359607ejb.458.1590091443425; 
+ Thu, 21 May 2020 13:04:03 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <7f08ecb52a4a94d95e39af436e94ab852cf0da55.camel@samba.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Date: Thu, 21 May 2020 23:03:52 +0300
+Message-ID: <CAH72RCWL=4v4Ek9c-YbH0JYLX64iYK2NA83NOTYOHMN0uZ7A4A@mail.gmail.com>
+Subject: GSoC: Community bonding questions
+To: samba-technical@lists.samba.org, abartlet@samba.org, 
+ Alexander Bokovoy <ab@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,91 +67,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Uri Simchoni <uri@samba.org>
-Cc: swen@linux.ibm.com, cs@samba.org, Jeremy Allison <jra@samba.org>
+From: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
+Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Does LDB (as client) have the full AD integration (Kerberos, sasl
-wrapping)? IIRC Only libads had that and then in 2015 the mentioned
-winbindd change added that to tldap.
+G'day everyone,
 
-Protocol-wise, ldb coveres more than tldap (vlv control to name one
-example).
+Please correct me if I am wrong. So when you provision an AD DC using the
+samba-tool command line utility the following files are created or modified:
+  smb.conf
+  *.ldb / *.tdb
+  krb5.conf
+  resolv.conf
+  /etc/hosts
 
-On 5/21/20 2:47 AM, Andrew Bartlett via samba-technical wrote:
-> G'Day Sswen and Christian,
-> 
-> As this is a more 'meta' question, I wanted to write to the broader
-> mailing list in regard to: 
-> https://gitlab.com/samba-team/samba/-/merge_requests/1351#note_346327256
-> which is following on from Jermey's comment: https://gitlab.com/samba-team/samba/-/merge_requests/1258#note_320352109
-> 
-> I'm really sorry this discussion has come up on what might, in other
-> circumstances been a great demonstration of showing the broader design
-> that started the tldap changes.
-> 
-> Jermey asked earlier to see the broader designs and given the broader
-> implications I think it is appropriate to have that raised on the list
-> here.  
-> 
-> Explaining our plans in public before we have code is not something we
-> do well in Samba - we fear (and this mail shows that is a genuine fear)
-> that others will jump in and suggest things.  Much easier to have the
-> code finished and put any questions to bed with: well, this is written
-> and works!
-> 
-> However, I quite strongly feel that we should not further proliferate
-> the new or substantial new use of tldap in Samba without:
->  - offsetting work to reduce, not increase the number of LDAP protocol
-> stacks
-> and
->  - substantial sharing of structures, ASN.1 parsing and other utility
-> code
-> 
-> My preference, as these are all sync or local callback based calls is
-> that you implement this with LDB.  LDB is a mature, extensively used
-> LDAP client library (not just the directory store for the AD DC).  
-> 
-> The routines you would need are ldb_search() and ldb_request().  The
-> timeout can be easily set on each request and I can assist with further
-> guidance if need be.
-> 
-> It might be that LDB as a whole is not suitable.  If so then I would
-> ask you instead implement other offsetting measures between all our
-> LDAP client libs.
-> 
-> We have seen in many other areas of Samba the incredible cost of code
-> duplication.  The efforts needed to merge the s3 and s4 RPC stacks has
-> been monumental.  The gap between the s3 and s4 loadparm systems
-> continues to create headaches that make it significantly harder than it
-> should be to just select and use the best of Samba's library code!
-> 
-> We have also seen this done well, where the new better API is
-> introduced on the basis that it also provide an emulation for and often
-> eventual elimination of the old API.  As examples:
->  - Andreas introduced a new set of macros (PULL_LE_U32 et al) for
-> reading and writing integers, and the old macros (SIVALX et al) use
-> those.  The NDR callers have already been converted.
->  - The python3 comparability API was introduced for the py2/py3
-> transition and is now almost totally removed.
->  - gensec wrapped the old source3 authentication code first as a 'no
-> change' and then slowly the parts under it were merged.
->  - the datagram messaging system is now common, underpinning both
-> messaging APIs.
-> 
-> You might ask why I didn't make this comment in 2015 when the idmap_ad
-> code was written, and why that prior art isn't a good enough guide?
-> 
-> I'll just say that the history of LDB in the Samba Team has been
-> fraught, and it would not have been wise of me to make a criticism to
-> those involved, at that time.
-> 
-> But I must raise this now, before we end up with three fully-fledged
-> LDAP client stacks in Samba!
-> 
-> Andrew Bartlett
-> 
+Are there any other files that Samba creates or changes?
 
-
+I have also noticed a lot of discussion on the mailing list around
+Kerberos. My understanding is Samba uses Kerberos as it's authentication
+protocol. Are there other authentication protocols that Samba uses apart
+from Kerberos?
