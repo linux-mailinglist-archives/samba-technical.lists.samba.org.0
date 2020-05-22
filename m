@@ -2,49 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2B5E1DD9E4
-	for <lists+samba-technical@lfdr.de>; Fri, 22 May 2020 00:07:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54AF41DE321
+	for <lists+samba-technical@lfdr.de>; Fri, 22 May 2020 11:33:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=M1cZwBw6kVmLTQi59X4di2XZUYIsDWL5kQUwFWbJBt4=; b=2Wk0/pxiT9ltQfkZ/aqZw9JBbR
-	Ckyvak1AM5/cEe5UdQvkHxKqE1FLaAxF0/e5e/nufsgWBXCgekbm3/1kfQGJV19aediHx+QA6sRO5
-	I1R1l2sKWXY0WWxPBUUor2aQ7Tt2fcsfg0N7hKfG1vVtRApJBbnTotjtLwPt99ioUepHVl+gOOITK
-	13r4T4WbQVHqnqPtQOnyK0TgJpw8SVzs6A/de46qpiJrVZ657qiFe+TtkjmucvXXzRScO876/SX42
-	pXVC0OJ75avreGWxYDSHileT5Cd3gMYZS+gL5pIup/9HbNv0+aEaDpDlrfGh9ShR+LmFRVHKsFeuj
-	fQZIrz9Q==;
-Received: from localhost ([::1]:50374 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=11p0B8rHNjqqL8cHGVEjJLrTly4+Oqa4FAp4qO0XU0o=; b=lgLlEap1FUd66+DWp2dbtXacdB
+	kmI7/UB+Vngtey4eljWkQ5xMsmQaQMiSNcB5YE8lInPi3u27jQ9F6dyHcJxFRv7AWhHLH6U5End1R
+	KBPOuh7lMBaUYN2npIpRu4wInooUaoSkc76l3SIr/4T1lO0K5btdmUYCM+6FNUlOQMmK85unCV7ny
+	+CSj8Ug2E8Ezvjr+CSnswBWc4ivkylVuSDSzwp4LD582ItWK2RitdSexW8KsYrZu/JRTJht7pWGj4
+	0vH00TtEu9R8TS5j2hzJ6NVle22K2PglQLHDIQln8Y8EIhtWi3NPsLw2ZkG3v2gTRqy2Vr5JrZ0TK
+	p1aMChTg==;
+Received: from localhost ([::1]:25090 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jbtLM-005Pc2-06; Thu, 21 May 2020 22:07:12 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:46622) 
+	id 1jc42O-005TLF-3N; Fri, 22 May 2020 09:32:20 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14604) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jbtLH-005Pbv-4F
- for samba-technical@lists.samba.org; Thu, 21 May 2020 22:07:09 +0000
+ (Exim) id 1jc42J-005TL8-BU
+ for samba-technical@lists.samba.org; Fri, 22 May 2020 09:32:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=M1cZwBw6kVmLTQi59X4di2XZUYIsDWL5kQUwFWbJBt4=; b=diqGW/pr6lxrqCTynlPzEeI0Re
- s2OK8i4HeMkc2+uM2X4ogKpGFXoeNGwRt9TVKCycQScZOibkmtFDlzzmVrVvsI4c4n99p+Iqp8cyx
- PJQxjDxIw7/sZVkeV5YNMihjKPCADH9LgzN1gAnsjvHPwKLSTbN8/keMjr70YFzr3uxTuys/fu/FX
- 5fhS72Uo92nlMNZ7WqbMQtDhkZxQQnVAY0cyNXvd8C+1IsUQucJXTGIghegPdkheQmIIS33QFcx+X
- zzB2v8bGw7uuXQ+jxTlu8WkpCOggE6O2j2n2sA7xEm1tcqqBjEf8mJtm3AEf5I6durX8bHrQl/F9N
- ioHU+reyBCu+l3IQzL82JFi7JiEBaRPh3pUMR9QEsN7sXwbHk8L0A4DOpiR1SyaqC8l/PuDJq87FG
- 4bqSO53bLh86Fv8utA1JkVwDD4q4e2Ep1F2BY5mpwCbJW/ny2gDZn0Cthk9RWmXABU737mzIOwxKG
- D+GA/oUUbvmJosVhwQbB/KVc;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=11p0B8rHNjqqL8cHGVEjJLrTly4+Oqa4FAp4qO0XU0o=; b=luh6KQfdh4Icg/JqIozJ67uhB1
+ E99cYFAd00f6f4eM+1xaWYP87BX5kKvCSrKwr2r1QU5HiFH47ikTtPOtUkQLtzZoOQIOs2Tez02tp
+ /FaWAHwHV60KwyJQ88MzKQxcJpfuMyPb8w9suuBBZYbLElKG5zHVFxqReoilWpi/MFTuLgsq6CLr8
+ 6z1p6H2MIN5SIM4VDGzE0rotxRK8ZaZ2PQ/7CJFZrtTORaDtAKE3EERMBmpQGg7GgkKCYq9vQemEg
+ gLODv6sKVGRvgsKNvx3nAMqtwRfd7gmyteaPA/gt4QHcRlIfM4mh3SMnsh+1n1Qnk89odNYoqZDNK
+ CbX4FrHsw8uWcgncZ1keMfGismRgD+bXOXXT46QOV69hGiUPnf7RAjxdzctn6hTMT3lWPtzFEhhb7
+ wx4yMRIsvBsHMyroVhhH+dEpD3KC5gmvQMbLn2ssPrOyEd9fTvCt6uTvBxx6VVCSv2QYiTqHrHmH6
+ yahuqRrqbRDbkrtjvuspshDi;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jbtLF-0001CR-Kf; Thu, 21 May 2020 22:07:06 +0000
-Message-ID: <854ac3b5d75279a13ebf3c5a6e9f4fd5b9eb8943.camel@samba.org>
-Subject: Re: Avoiding further (LDAP) stack proliferation in Samba
-To: Christof Schmitt <cs@samba.org>, Jeremy Allison <jra@samba.org>
-Date: Fri, 22 May 2020 10:07:00 +1200
-In-Reply-To: <20200521214312.GA12586@samba.org>
-References: <7f08ecb52a4a94d95e39af436e94ab852cf0da55.camel@samba.org>
- <20200521012158.GB10353@jeremy-acer>
- <4ce022a6c65422e40e1a583f95cefbbc7585393c.camel@samba.org>
- <20200521021959.GB12847@jeremy-acer> <20200521214312.GA12586@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jc42I-00069d-B2; Fri, 22 May 2020 09:32:14 +0000
+Date: Fri, 22 May 2020 12:32:11 +0300
+To: hezekiah maina <hezekiahmaina3@gmail.com>
+Subject: Re: GSoC: Community bonding questions
+Message-ID: <20200522093211.GF5779@onega.vda.li>
+References: <CAH72RCWL=4v4Ek9c-YbH0JYLX64iYK2NA83NOTYOHMN0uZ7A4A@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAH72RCWL=4v4Ek9c-YbH0JYLX64iYK2NA83NOTYOHMN0uZ7A4A@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,77 +54,65 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: swen@linux.ibm.com,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Alexander Bokovoy <ab@samba.org>
+Cc: samba-technical@lists.samba.org, abartlet@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 2020-05-21 at 14:43 -0700, Christof Schmitt via samba-technical 
-wrote:
-> On Wed, May 20, 2020 at 07:19:59PM -0700, Jeremy Allison wrote:
-> > 
-> > That sounds like a sensible plan to me, but having said
-> > that I'm not going to be the one doing the work :-).
-> > 
-> > As we as a community have decided tevent_req is "The Way"
-> > then helping our older stacks integrate better with it
-> > is certainly a good way to make progress IMHO (and I'm
-> > as guilty as anyone as the author of the horrible hack inside smbd
-> > to do async opens which sidesteps tevent_req in order
-> > to reduce code changes).
+On to, 21 touko 2020, hezekiah maina wrote:
+> G'day everyone,
 > 
-> So i am trying to understand where this leaves us. The driver behind
-> Swen's patchset is to move away from libads with the end goal of
-> being
-> able to better control the domain controller selection.
+> Please correct me if I am wrong. So when you provision an AD DC using the
+> samba-tool command line utility the following files are created or modified:
+>   smb.conf
+>   *.ldb / *.tdb
+>   krb5.conf
+>   resolv.conf
+>   /etc/hosts
 > 
-> Now there is tldap and ldb as possible ldap libraries. Do we need to
-> look at the integration of those components first, before adding the
-> ldap library usage in winbindd?
+> Are there any other files that Samba creates or changes?
+I don't remember the full list but you can generate a difference by
+using 'find' command with -newer check:
 
-Yes.  I think so.  I know this sucks - being told to stop on a fairly
-simple change because we should do a much larger thing, but I'm really
-passionate to avoid having three full stacks. 
+ - touch a file before running samba-tool on a system
+ - run samba-tool ...
+ - run find after running samba-tool on a new system
 
-> The goal of having one ldap client stack is worthwhile. From what i
-> can
-> see, tldap implements the async tevent model, with the exception of
-> the
-> gensec part. Also the async calls are currently not used.
-> 
-> I have not looked in ldb much, on a quick look, it seems to use the
-> openldap library again. Would it make sense to have ldb use tldap as
-> backend and eventually move away from openldap?
+For example, create a reference point by creating an empty file:
 
-While there is a historical OpenLDAP backend in LDB (a legacy from a
-time when being a semi-independent project was critical, possibly still
-used by sssd) Samba uses lib/ldb-samba/ldb_ildap.c for all ldap*://
-URLs, which is based on libcli/ldap.  This one brings in the full suite
-of GENSEC, Kerberos etc.
+ # touch /root/timestamp
 
-I'm not opposed to the concept that libcli/ldap and tldap are merged in
-some way and see particular opportunity for tldap to use the LDB
-structures (which would reduce further the code in ldb_ildap). 
+Run samba-tool and then run 'find' to see files in /var, /etc, /tmp that
+were newer than the reference file:
 
-For another approach, if the initial issues are around timing handling
-in the OpenLDAP libs under libads, significant advantage could come
-from rebasing libads on LDB.  libads is a sync API (and stuck at that
-for now) so the LDB sync API would be a good match.  Doing so would
-make things like our 'tls *' parameters work consistently for all our
-outbound TLS connections, which would be a big win. 
+ # find /var /etc /tmp -newer /root/timestamp -fls /root/list
 
-I realise this is not what you were hoping, but perhaps we can find a
-way forward here.
+The /root/list file will contain an output of everything that was
+created or changed since the /root/timestamp file was created. It will
+have some cahnges unrealted to samba-tool because other applications run
+on the system anyway (for example, there might be a journal update) but
+it should be able to capture all changes done to files by samba-tool.
 
-Andrew Bartlett
+For example, on my desktop system, when I ran the test above, without
+running samba-tool, just 'touch' and then 'find', the resulting content
+of /root/list was
+
+538817386     12 drwx------   2  root     root         8192 touko 22 12:21 /var/lib/NetworkManager
+569212108     12 -rw-r--r--   1  root     root         9184 touko 22 12:21 /var/lib/NetworkManager/timestamps
+ 24183816  24580 -rw-r-----   1  root     systemd-journal 25165824 touko 22 12:20 /var/log/journal/93d3bf53b5f243388193a0c43a1dba1f/user-1000.journal
+
+So, there was some activity from NetworkManager and a systemd-journal
+wrote some entries into a user-specific journal, most likely because
+some of applications in my desktop session produced some background
+'noise'.
+
+We can filter out those unrelated changes manually.
+
+This output corresponds using 'ls -dils', you can see definitions of
+options in 'man ls'.
+
+
 -- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
-
-
-
+/ Alexander Bokovoy
 
