@@ -2,50 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E6C81DF71C
-	for <lists+samba-technical@lfdr.de>; Sat, 23 May 2020 14:10:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 399A11E07AD
+	for <lists+samba-technical@lfdr.de>; Mon, 25 May 2020 09:20:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=iQalqnALn7IsDd8eIz42ir28T535BC2hb5lJ6jDCuZQ=; b=cAbjDkosTzUV+ewB1ZFvx57xsw
-	YDVFK7nFB6yXkVW4J3nj8G5JFPASNS5a4ND45d06ZdGih1hFwjZgrhA14fLDJ/ZslX49/1ibcWCNo
-	iSbzKTsBykJHKfbCq29Lr6SVZNSUzyfdsb5ah4c/SwJhsbnjGH9iC6uYj3bphaLnVFMuaZBNtTAMB
-	OVNzB2Y6LSze2ZlZewp0TYmvl+pjaISJBdY6Pe6gpm7f4kPIh37+pPDr/PH6LbLOF0b76EBq5cpJm
-	WCBhJZMyQ1Q+HaLkLTqUl1Zpum783bu1g+EgfS6tzCl+s/Q48gREK3JJ0ZlgcQ0IPSELB235HZ6bT
-	c+Wavi5Q==;
-Received: from localhost ([::1]:18290 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=5zeeOgQcj4goccIbMkkJVC1WUz8OurO3RKSylmCAJgM=; b=kXZmlQYtRutSUeJivh4xq8RVlw
+	Yp1XFmiLiBO1F4Rl+dOkrus67FAevmb7Cyu2TfBRnSDjF60ndojEnbVFLmmi5yxQWi13YLD3ZGwrt
+	TDXsY1Q5le+eyC70ywL3SZEtrUezqIi1gr5vu9D756LnCOX2wxPP8xMeUm141k8DFslX+a9JRsRVU
+	0KZ21m9aWtR7Te41xbi/h1FzS5qdH/9v5B3n9XYcw7oARJmCHw9rW3hsvOAx9a5O82MqObk/Ffn/T
+	oAW2ZaoYWD75uk0ypOmVb9rcTYQzaNbmxj5AUormd8CpqQyHXuPHPsMfoa/4fG1oTHOzKhR/yNRa9
+	dYLGtVWQ==;
+Received: from localhost ([::1]:52962 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jcSzC-005aQE-59; Sat, 23 May 2020 12:10:42 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11274) 
+	id 1jd7Oj-005hAu-Fn; Mon, 25 May 2020 07:19:45 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54686) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jcSz0-005aQ7-HM
- for samba-technical@lists.samba.org; Sat, 23 May 2020 12:10:38 +0000
+ (Exim) id 1jd7OW-005hAi-RW
+ for samba-technical@lists.samba.org; Mon, 25 May 2020 07:19:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=iQalqnALn7IsDd8eIz42ir28T535BC2hb5lJ6jDCuZQ=; b=g+PHml01n+s3JuDC4ojqyIC3WO
- rEDTLI/M0dX3KVQtZNYSzDH3A6yuyMyov5EKtqP/ZRZE7Hsg2XhYTyEBV/grWEF1tzz0XZ4/vRZiS
- FOCp8fwXIdjc9/ZCdojomApQGOzpc0H3YU2TCcR0+pRYbtPlXRw06ZSbLBwADT673Ozz10VOBPhV3
- av048oC1QCTI1hCslnYFWYEId3i2HWJ7hVKvkwYn9i82b5U39Xjr6P9brqs3rObPZfS63di7/j01M
- MoJswCDTW1RCl7Xh+d+ZivrZjoEvkBcI9xaeMFbWgv+D21OenfIkYtBrTPFy1AeLyngWLspK0+O06
- HlmQJZHW2LU2vorS1gN4mCrKH9wm9X8ZGaYCqpNKWGEOQRcqLbV+fwZtbpKqvbZ267cyezqMpDzvb
- EvrcuL/HAd0Um0JaVB9HwjVFXyWO3nhxsor5x0TwxUoA4wSE20DyDdd30PcGY379003xBy8qgpbON
- iIFl3Dxh/gG1Z68J7XD5c/B4;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=5zeeOgQcj4goccIbMkkJVC1WUz8OurO3RKSylmCAJgM=; b=dF6qRGG1SFKWah5Af/OYn+mSfl
+ E235QWuqBSO5THOuRHPivuHIC0e0uY9bsOoktqda+q0AB75s2gyFyAc1qIZ4YN93vJxuq8HHujWuR
+ iHyE+fY65CyX6SXtDFcDMIIcTVEPz4lZ6fiUcjZfFUDyxNE7EI0OwaY+ZvCjUuFsLgoAlP4HcoQl6
+ ol0X60e76uUOl/mJ4DEb9VcO2sxd77l3SJE43bCZJUxCvwZ+i+zS+F7YxT0dQO7lUDaCLEaa+ynL1
+ V0/1UhmHjWFrYbxphBnfpYhf1XQtWhlYaGzbCDX3jERqdZv45oxzEkFj9kIQZ0x4O5JTwhI6SI1DL
+ QcAZXA8b2IqkDQjKkSmdSKj59P/3GHNEiXDPGqqLvfX/U4q98QU4LirTifqumUkhAbDa1D86U+j4r
+ +NLjx520OH6rlbptsVVV71ewt8kNbPmmBQ9Z65T9tojMFW06GH4b7+iE0IP/5ETWpY+KgBFZY/4Xs
+ gAbP86uC4mRjad8TGVs7Fdjd;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jcSyz-0007qV-NR; Sat, 23 May 2020 12:10:29 +0000
-Subject: Re: BUG 14352: follow up on that bug. Still issues.
-To: Rouven WEILER <Rouven_Weiler@gmx.net>
-References: <0A3C18BE-42EE-4394-B2B4-CD183F0431A3@gmx.net>
- <2f3f9bfa-ab22-4ab8-6205-11f967a98c0b@samba.org>
- <1DC20ABA-03D5-42A5-ABE1-944A5ACBFE0E@gmx.net>
-Message-ID: <4ba5717e-312d-c118-1ee7-caaf568d3c72@samba.org>
-Date: Sat, 23 May 2020 14:10:28 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
-MIME-Version: 1.0
-In-Reply-To: <1DC20ABA-03D5-42A5-ABE1-944A5ACBFE0E@gmx.net>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="YdgYBHevsNGCTs4rAWevp2pHWkRLsjBig"
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jd7OV-0005iu-F5
+ for samba-technical@lists.samba.org; Mon, 25 May 2020 07:19:32 +0000
+Message-ID: <cc3d7f878e51732e8a4ffa2e6384236fc432cfe2.camel@samba.org>
+Subject: Marking fixed in bugzilla automatically (was: [Fwd: [Bug 12296]
+ 79029 warnings attribute "format" is unknown, ignored])
+To: samba-technical@lists.samba.org
+Date: Mon, 25 May 2020 19:19:27 +1200
+References: <bug-12296-1043-hyH6ysgYiT@https.bugzilla.samba.org/>
+Content-Type: multipart/mixed; boundary="=-x6QQqUN/9PliMJiySenb"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+Mime-Version: 1.0
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,81 +55,118 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Anoop C S <anoopcs@cryptolab.net>,
- samba-technical <samba-technical@lists.samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---YdgYBHevsNGCTs4rAWevp2pHWkRLsjBig
-Content-Type: multipart/mixed; boundary="msUQ84ZGL7YVM1EfYPzEGJifM7aGR0fs7"
 
---msUQ84ZGL7YVM1EfYPzEGJifM7aGR0fs7
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+--=-x6QQqUN/9PliMJiySenb
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+
+One of the things I've always wanted in Samba is closer integration
+between our tools.  At the moment we record some metadata between our
+tools, but we never don't automatically link it.
+
+As an example of what we can't do right now, in my ideal world we would
+do merge requests in GitLab, which would at automatically close the
+merge request and include all the right status info etc.
+
+So much for what we can't easily do, but what if an update to git
+master caused a message to be put in bugzilla on the mentioned bugs?
+
+I'm not entirely sure, but I think we could do it with a cron-job (much
+like we use to push to GitHub) pushing to a repo running Gitzilla:
+
+https://github.com/gera/gitzilla
+
+I'm thinking we might be able to have a script look for BUG: and
+just record a message like Björn has written, possibly with a full URL
+to our GitLab or GitWeb?
+
+Anyway, I'm just blowing hot air - I don't have the time (or minions)
+to do this, but it would be really cool if we could have tools like
+this.
+
+If someone wants to take this further then please feel free to be in
+touch!
+
+Andrew Bartlett
+-- 
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
+
+
+--=-x6QQqUN/9PliMJiySenb
+Content-Disposition: inline
+Content-Description: Forwarded message =?UTF-8?Q?=E2=80=94?= [Bug 12296]
+ 79029 warnings attribute "format" is unknown, ignored
+Content-Type: message/rfc822
+
+Return-path: <bugzilla-maintenance@samba.org>
+Envelope-to: samba-qa@samba.org
+Delivery-date: Mon, 25 May 2020 06:51:29 +0000
+Received: from [2a01:4f8:192:486::6:0] (port=27220 helo=hr6.samba.org) 
+	by hr2.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+	(Exim)
+	id 1jd6xL-0005aK-N1
+	for samba-qa@samba.org; Mon, 25 May 2020 06:51:27 +0000
+Received: from [::1] (port=58424 helo=bugzilla.samba.org)
+	by hr6.samba.org with esmtp (Exim 4.93)
+	(envelope-from <samba-bugs@samba.org>)
+	id 1jd6xG-001Im9-0n
+	for samba-qa@samba.org; Mon, 25 May 2020 06:51:24 +0000
+From: samba-bugs@samba.org
+To: samba-qa@samba.org
+Subject: [Bug 12296] 79029 warnings attribute "format" is unknown, ignored
+Precedence: bulk
+Date: Mon, 25 May 2020 06:51:21 +0000
+X-Bugzilla-Reason: QAcontact
+X-Bugzilla-Type: changed
+X-Bugzilla-Watch-Reason: None
+X-Bugzilla-Product: Samba 4.1 and newer
+X-Bugzilla-Component: Build
+X-Bugzilla-Version: 4.9.4
+X-Bugzilla-Keywords: 
+X-Bugzilla-Severity: minor
+X-Bugzilla-Who: bjacke@samba.org
+X-Bugzilla-Status: RESOLVED
+X-Bugzilla-Resolution: FIXED
+X-Bugzilla-Priority: P5
+X-Bugzilla-Assigned-To: bjacke@samba.org
+X-Bugzilla-Target-Milestone: 4.13
+X-Bugzilla-Flags: 
+X-Bugzilla-Changed-Fields: bug_status resolution target_milestone
+Message-ID: <bug-12296-1043-hyH6ysgYiT@https.bugzilla.samba.org/>
+In-Reply-To: <bug-12296-1043@https.bugzilla.samba.org/>
+References: <bug-12296-1043@https.bugzilla.samba.org/>
+Content-Type: text/plain; charset="UTF-8"
+X-Bugzilla-URL: https://bugzilla.samba.org/
+Auto-Submitted: auto-generated
+MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 
-Am 5/23/20 um 2:06 PM schrieb Rouven WEILER:
-> Okay thanks.
-> Bug is filed (Bug=C2=A014392 <https://bugzilla.samba.org/show_bug.cgi?i=
-d=3D14392>).
+https://bugzilla.samba.org/show_bug.cgi?id=3D12296
 
-Thanks!
+Bj=C3=B6rn Jacke <bjacke@samba.org> changed:
 
-> And yes: fruit:locking=3Dnetatalk is on.
-> And another yes: removing it solvved the issue. (Wow)
->=20
-> Is there anything bad using this option (outdated or so=E2=80=A6)?
+           What    |Removed                     |Added
+----------------------------------------------------------------------------
+             Status|NEW                         |RESOLVED
+         Resolution|---                         |FIXED
+   Target Milestone|---                         |4.13
 
-man vfs_fruit
-
-> BTW: The is another small bug in the code propagating mac os support vi=
-a
-> mdns correctly.
-> It is related to the port for the services announced by the avahi daemo=
-n
-> which must not be =E2=80=9E0=E2=80=9C, but =E2=80=9E9=E2=80=9C.
-> =E2=80=9E0=E2=80=9C is not defined as an ip port and =E2=80=9E9=E2=80=9C=
- is network dev null which would
-> be perfectly okay for the purposes needed.
-
-hm. The reference would be what a macOS TM server sends there. Iirc
-somewhen someone (maybe me? :) ) checked this and the Samba code
-*should* be doing what macOS does. But otoh maybe not. :)
-
--slow
+--- Comment #1 from Bj=C3=B6rn Jacke <bjacke@samba.org> ---
+fixed in master with a4041ee6ca942a0117e5454888af5987f19671e6
 
 --=20
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+You are receiving this mail because:
+You are the QA Contact for the bug.=
 
+--=-x6QQqUN/9PliMJiySenb--
 
---msUQ84ZGL7YVM1EfYPzEGJifM7aGR0fs7--
-
---YdgYBHevsNGCTs4rAWevp2pHWkRLsjBig
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAl7JErQACgkQqh6bcSY5
-nkZzDg/+LjizZceFjWE0SXm+pDUuRH7lqLH+ciRtYYJ8ukI/oDCQovMUyQH/Ai7E
-wGJ7BgxvkFKq+/JJdZVih6EBgg1NlL2WoK8Pb57x5ykOAjAtAQRoBm3XiIkqjyhh
-3X13ujOtKKdaDWS02cRIwK6vkHPrf+ocZwjyi3/rw1n8pBQO0qEiXbQW4rd2luVZ
-LA/Ta3i6/lJeNPiOK+xttnajGeEvpL2jBrxr17TOAPL406LOjQEtxb+UMsaV+sVK
-t3mdeUYyppGOhO3AFuVuvPwjS9BD6StLCPLKlZjYHnzoW1WPmmIVlzy6xWxfal2a
-p629zEQYM3j4IF+SDSzG8Jcm2tvpf8bny/m/JA/5doAuUskemvDkkj715VDPMKzO
-ULaRz9KRWOZOkhPtG6xq3T+gGWpUYTLXB2ITUXsi1o+bZAlQTOUIEckFA860AozG
-Ai9sRxJU0WThk5xQqbtOX7QRt0u4GOmelItAV0FcPY0AZWuj2BQggKK41A3xLOT2
-uU8w/2uR+hpWq9JTrqAL+XqA5FJIOr8W9i/D7IY9bVjFA1o+9jNjXRjHOaWoIOLM
-AhFLcFvhhylu/Z9RmpxQGpOpti276JubbsIwugy3d42yWIjUWVAuQ6CmCupH76pj
-JSWB4CxpvDodx7ONtc+Rwg4Ubd7Tmoay2zwUTaxMwXkkcJYoMKM=
-=iYEA
------END PGP SIGNATURE-----
-
---YdgYBHevsNGCTs4rAWevp2pHWkRLsjBig--
 
