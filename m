@@ -2,48 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6A7C1E1AFC
-	for <lists+samba-technical@lfdr.de>; Tue, 26 May 2020 08:09:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC14D1E1D76
+	for <lists+samba-technical@lfdr.de>; Tue, 26 May 2020 10:38:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=xzDlVcrQ2W5/hoU13R1dR04gZQx022PU0RsQTbUKWJk=; b=SBl8C9kw8yI/Emp80DaZkBE3XU
-	XPbqBi1HuWDp2plGuNd7OxICYIvImN0z4CzuDK3h7ZAXptDBwcXdY7nrmBhz3ENY0CirRYu04chkW
-	SSUob/pHttkzr6zT2meYO41h/6CpyD2ahbZIq9ekT+cNkTLbskGFqUQmYQN79I2UljVNLxcZERErc
-	3sljIcTfaxlL/KuiQIUCB/V7CnQ9AUTEnpQ8Cwj+KHgCrx4LXW+at16eAx9oTZlxf+9G2T3Lr4CYp
-	Leko7VldU4PCTVnEqfM5pAcswaBd0IJUb9uSJRAQ5HBqntxVXaMm2zW7BMPW+JkxuzHlON6UWimfB
-	dUXvtqgw==;
-Received: from localhost ([::1]:44814 helo=hr1.samba.org) 
+	bh=JXW37Cc0jlrRD9Zt93Y3zIIt5TpBdVPRJf8vtytxyjA=; b=DCIjKF09xtPKcu4Oy3cBeEmLsJ
+	ngsdcVaFIVcOGqyBdxKf2fg6B03fHrbVDb/ZhJ7OGIOOAwhlptBt8nC/U/fFi8Go1JUSQbR4HZllN
+	P4VUC0SIla+fx1NCxawxRMjhqVGsU6BzBevyCytJC2GowEyIqjqbsXKONr1sCkYQs5XanQWyFaqE4
+	xTvRvO2uYO/ATj6chg0Ejhr6H1U2xKxFdWjsOoIj12kuZ/WjD61L7TBnZsgnLJhf34d14AqZ8VpmI
+	MZZnevm5kPCcC3Z24E8rZlXKzqzloUyTz56j7os3AwJ3v72ixOX3I+DAleQ45G3WA95dC3yqkOnu1
+	03VxvG1w==;
+Received: from localhost ([::1]:50564 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jdSlO-005u5E-U2; Tue, 26 May 2020 06:08:34 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14888) 
+	id 1jdV5v-005v7V-8a; Tue, 26 May 2020 08:37:55 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13426) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jdSlK-005u57-0b
- for samba-technical@lists.samba.org; Tue, 26 May 2020 06:08:32 +0000
+ (Exim) id 1jdV5k-005v7O-P0
+ for samba-technical@lists.samba.org; Tue, 26 May 2020 08:37:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=xzDlVcrQ2W5/hoU13R1dR04gZQx022PU0RsQTbUKWJk=; b=JoNlYm9HmH/tSNbJ2sxDqHnYgH
- XEK3Vk3K5jhW56u3/qQ7hFBpQ9MBFcNlWfzac9rp+TUFqiPg4iF60ZjL0QE6/PL9Yykc6hzbTd5i0
- +OefCEqZDxOft51H/qdlzea2GvCWLnDrc0Epb1gshpaQFR2efZM4v9/808HtwY4cnPavpG2qGZxTj
- tflHy2ngdqGDui+NtJjwTnUeScDS1j5D+upcUvpzw0t9htAd79cgi0dC1aw/OV/+7ALEqgyF/BQGF
- 9kgWwIMxedmeoiSTxjhXkRZy7tWMrx6Ib5M3cnL55mvVVuNkk25coYR1YWxEuqR9ngJd9nRKO4L/a
- +/5kEOT3+1JsGUbRj2M63DvxpdmM7AkFbi888tosyzy3BwS3/FzxtH432poI5OQ3IKFcwlMHOSMmW
- pxZ05FRHFzaUsHnmcqkGaVUdN4iyqj0nAx3immljMmmayLW16fsmlFrhVXlWgN9t1F0t+GwoO0ORl
- ebsDAUb6YJPU+rwp/6l/JsLb;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=JXW37Cc0jlrRD9Zt93Y3zIIt5TpBdVPRJf8vtytxyjA=; b=mKSX0f4sQa+KfGOrejTEMtdibD
+ NL+iL7R5ixlagdBVEM8uPsvfhvTT704HHow94RbtMpi0HwSHk66wJx7VEFyK87Vu80j83AlySue3x
+ zsGwee6RMFIsY6fptMEThS2ZNEGH51jf0FtOuEI617e1bppWPfsgALlq3UEbHhCTgfCVZmwmu7WOd
+ A7bGINHhblm+8Ir7UgfqWbN3f/rpY6rxE7sb+zAX5KWVW7bz2pQ2wLXwG9E9TZPzgJry+5hOMdbEd
+ vvr851dJMt+xPBcLzAveL+teJQO4Cr9FcWNeZWxyrsgO532WUqzwdizNCjhSyqyupPKvlfFeaGWUL
+ bZpD78D9GPjy2jJEt/cik0BsCZw7HXMRvakXoAcdHQDYDISE2Mnd6aFFDSWysBjJPueYrZvxG3D1H
+ bIYbyO+TQCEx7l1uFPgdD1T2nIPY/SfyNuo4LtZRqYiGz9oEfvU0wNX+prqkWE/mxaCLnc37WQNFa
+ zXn+cVBGKbuds5qCnRS/t7N7;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jdSlJ-0006kY-Bf; Tue, 26 May 2020 06:08:29 +0000
-Subject: Re: [Announce] Samba 4.10.16 Available for Download
-To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
-References: <20200525091428.GA11978@carrie2> <15299219.PEbobQMlR1@magrathea>
-Organization: Samba Team
-Message-ID: <7144bd0a-2ece-d293-d469-946575181fb6@samba.org>
-Date: Tue, 26 May 2020 08:08:29 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
-MIME-Version: 1.0
-In-Reply-To: <15299219.PEbobQMlR1@magrathea>
-Content-Type: text/plain; charset=utf-8
-Content-Language: de-DE
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jdV5j-00017J-GL; Tue, 26 May 2020 08:37:44 +0000
+Message-ID: <6519f23f61695e09cc6c9aa9336f69bcd8010da6.camel@samba.org>
+Subject: Schema updates and modern Samba AD
+To: Stefan Metzmacher <metze@samba.org>, Upstream Samba Technical Mailing
+ list <samba-technical@lists.samba.org>
+Date: Tue, 26 May 2020 20:37:39 +1200
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+Mime-Version: 1.0
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -58,27 +54,46 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Karolin Seeger <kseeger@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Andreas,
+(resend from samba.org address)
 
-Am 25.05.20 um 16:43 schrieb Andreas Schneider:
-> On Monday, 25 May 2020 11:14:29 CEST Karolin Seeger via samba-technical wrote:
->> Release Announcements
->> ---------------------
->>
->> This is an additional bugfix release of the Samba 4.10 release series to
->> address the following issues:
-> 
-> Thank you very much for your work Karolin!
+G'Day Metze!
 
-Thanks for your work!
+A long time ago I remember asking if we could change the default for
+"dsdb:schema updates allowed" to true, so that this is no longer
+guarded in Samba.
 
+At the time you said, from memory, that while schema loading was much
+better than it has been in the past, there are still ways to break your
+directory with new schema, so we can't change it quite yet.
+
+What I can't remember (or find in the list archive) is what those
+issues are!
+
+Can you remind me?
+
+I ask because I'm updating 
+https://wiki.samba.org/index.php/Samba_AD_schema_extensions and I want
+to include a practical guide to adding new schema, and make specific,
+rather than generic 'here be dragons' warnings.
+
+My hope is that this way we can encourage the use of appropriate schema
+extensions, rather than ad-hoc re-use of other arbitrary attributes by
+our administrators. 
+
+Thanks!
+
+Andrew Bartlett
 -- 
-Karolin Seeger			https://samba.org/~kseeger/
-Release Manager Samba Team	https://samba.org
-Team Lead Samba SerNet		https://sernet.de
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
+
+
 
