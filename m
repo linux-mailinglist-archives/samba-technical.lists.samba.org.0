@@ -2,47 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 372131E377A
-	for <lists+samba-technical@lfdr.de>; Wed, 27 May 2020 06:42:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DA5E1E4DDC
+	for <lists+samba-technical@lfdr.de>; Wed, 27 May 2020 21:07:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=4zvPP+0hbAfj0TUZdnx6IovUSVOVPY/jia0S1P+yG0g=; b=ufq4cvcWAlXe7b3ycCEw7ra6k2
-	BN74p3/4uqD/nSMWfBGG8s3KwEGfeawPlieNiX40mmWlWqLBg34g/d8UOytgwTDAK7KVoKnOXb1B8
-	Vg/kdiSp4FVRsIdC6YsGxhjORaItK6PR9oV/AdbhVHA/sodctO+UN2HcPiDTWQSAZKjFaNkuuilUa
-	PrInyojNL1LA9jzb5Erp47gCSeAgKgPBT0WIjUye3JU4wo3urBMk8B3L92TRHiDK6eXGVb5WLNc53
-	vExCCYTQSt6Ehvn0n0VNGFm3SHPLy9v1k+C9SQMA2gmprdZWP+/AYBdJSpGPifwQhCqMC5F8fOZRe
-	FDYf3qeQ==;
-Received: from localhost ([::1]:46480 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=JRQGL613UJjOY8ZLF2qYuYRM497uTKxKi2h1IUEWodg=; b=s0BR0R2n7q40Dts3yIB3P0Nkni
+	WooeepdKMXne1qCM9CGiRRn/wTY1q6/yySfVpsXDDRi1X5GgPyIvF4v+1Ln3eaRIZJB7p9UBJsB2M
+	gpRhTjRxZGBgVFgCM2y9xRsypl4fmLjZR3GYSHlEdnIUQnljXupyILOOyxZ4Hnq4IBZku9OLX04Gb
+	1rSc7RvHym2L+3zrj7HTwZzEOJIRFBu94HFk/LySuaNzXtjtW1M71aHMda72FBs9Iu5JgYt3IPvZ+
+	scYxvtSSGE2kbDf2aGPV6ojS/1cbTrRj5DYZmcVbtSOKfHnyNXdCQhRl1y9OGzdGTEe4aCt3PIjeC
+	+nyHi9NQ==;
+Received: from localhost ([::1]:63474 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jdnt3-0061ow-8S; Wed, 27 May 2020 04:41:53 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14268) 
+	id 1je1NV-00654j-6q; Wed, 27 May 2020 19:06:13 +0000
+Received: from mail-lj1-x236.google.com ([2a00:1450:4864:20::236]:36146) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jdnsy-0061op-78
- for samba-technical@lists.samba.org; Wed, 27 May 2020 04:41:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=4zvPP+0hbAfj0TUZdnx6IovUSVOVPY/jia0S1P+yG0g=; b=cMtGU+xbgXd699sccMPGR20Mve
- qMhIvVvN36sFpAl7wASXNfNb46PFQmjG0yG/w0qY2igf3c8qKXdOvwt9RTDnkkDvFOcLuvfb9oaP2
- 7j9mVv4u5dFuNtG87szZS28t0hy22P0yklJwq+64frOfQUulHejlmNrIfp3Om6a2vWHNFwEoKdpl4
- qA0yYaj5yvjFZLwqRSDHKZlKGnJFNgh0+NBxxIDutbFnnA75SyQFwgu8/Ao+LswKJ9+HK6XXgiQp4
- KUEWEc+odBuw3LgpdkxvPCB5IbXKoKEKeXuq5MMHsERjSXot3Ve0uBlCVofzJLYsKihUsgV6R/V6s
- V6QC4Q7khOT5w6in1hJR26bYDUaHCQaYOVA4WZdoTbpInvfpmg/20sRjxA3gYyb4cxPxzGuBAnSNn
- HNyfoo95cI/vBpl0XwdeLj/LplgWmqPs0Eq1qfd7Q+avjpuo0yu4Fn7IJk2p1sBLwMuEV+vyvei47
- sKBlMdbUnIKha28Gtz76Ibnf;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jdnsu-0001oO-Nv; Wed, 27 May 2020 04:41:45 +0000
-Message-ID: <01157baedc07f140b5a253a1813137a4f16196e2.camel@samba.org>
-Subject: Re: Schema updates and modern Samba AD
-To: William Brown <wbrown@suse.de>
-Date: Wed, 27 May 2020 16:41:40 +1200
-In-Reply-To: <E89015B7-BFCD-4731-82F9-AE09FE73C52A@suse.de>
-References: <6519f23f61695e09cc6c9aa9336f69bcd8010da6.camel@samba.org>
- <E89015B7-BFCD-4731-82F9-AE09FE73C52A@suse.de>
+ (Exim) id 1je1NP-00654a-Qk
+ for samba-technical@lists.samba.org; Wed, 27 May 2020 19:06:09 +0000
+Received: by mail-lj1-x236.google.com with SMTP id a25so18672496ljp.3
+ for <samba-technical@lists.samba.org>; Wed, 27 May 2020 12:06:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=JRQGL613UJjOY8ZLF2qYuYRM497uTKxKi2h1IUEWodg=;
+ b=Vr+rz+Sb/EF/rE+chuakcm8epbtczaRjSPUxqHpxWKjvGPnozJmMaOBRYt+WjUXQFO
+ 6GEc4V+WWSuiTR3mcHySqKBQ+xLUD0cQ1K83XaaABkJRBPvDjPFrctud8w1emPxOLQfD
+ kK67kPXpcezL/4TqV+rEy2eN5/GcrIGkqQRBtYAz0a5XC5vdIdonaQHmhtdUDFPW0EEV
+ 1bXE0XBHHpYv3PUA91Bj2QPL9XFvzP6oA6sQE5UEQELNPKxGP6oz397gdkIdBr89IT39
+ pdlCB9xx3bkBdm9F3/xncwPKtdJ4OVsuLTmRk+B5PFFbgWbBqDJ1boqfIXyCO+UWTvaN
+ RoBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=JRQGL613UJjOY8ZLF2qYuYRM497uTKxKi2h1IUEWodg=;
+ b=C0cp4NbH5ryTCXg2GjltJfbQ6ggBJERpOYA+dKBpqFffbaO6n7veGf48ykckg6MhrQ
+ sLVB8ped/AYueJC8e9QcSSn2piIDJb7g8UVbtFsjy61hB1wXnGnzdyjhiWAbaoesZweX
+ BWtuuEoEUPEnz5j0RAzWRusFWynQhIP5jrJwnNHJjIY8miZOHgSxiHlCbRW+IaQoKmI7
+ hVy1NJI2bjB/x51M+43mU/kcet8XPod7XOuQxAGyPavyL51wE+3yC5kBIqXaSmqEqjRt
+ oibAUAhn4ZHbamihZ1Vr3VdbYmEYkIbFImByXAf3aLHqpxe0rwknMV/rSQ3nSUS5ZHhB
+ IEiQ==
+X-Gm-Message-State: AOAM532KOYkmaz4odeOHt9a+hcHhP4Gajr3queAWgZbOrFoSswLQgIn2
+ DpQ17x3LRmZQWpabB8kge3+iDNM+HyK72v/0DUrxXA==
+X-Google-Smtp-Source: ABdhPJwYZ/cm3x31nPbyIcH8m4vdmMqzQsOLTrFLG32bx9Tiwyam3Qo2zH0NySJIsfnR1CU6aSbEedQ/0LxOGaMmT8Q=
+X-Received: by 2002:a2e:9a19:: with SMTP id o25mr3931422lji.40.1590606366904; 
+ Wed, 27 May 2020 12:06:06 -0700 (PDT)
+MIME-Version: 1.0
+Date: Wed, 27 May 2020 21:05:56 +0200
+Message-ID: <CAC-fF8QyT0aYEyDAKMyVdSq8R0NDbsw+5JPFmQ3pS_pa730ybQ@mail.gmail.com>
+Subject: Kerberos features talk at sambaxp
+To: Stefan Metzmacher <metze@samba.org>, 
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,48 +65,17 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Isaac Boukris <iboukris@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2020-05-27 at 13:53 +1000, William Brown via samba-technical
-wrote:
-> > 
-> 
-> 
-https://docs.microsoft.com/en-us/windows/win32/ad/extending-the-schema
-> 
-> Generally, I'd say the biggest thing is that it's a one way street -
-> you can add, but never remove, so that means your changes have to be
-> very carefully considered, because a mistake can't easily be undone.
-> 
-> For example, if the ssh public key schema shipped in AD, the fact is
-> has a "must" not "may" on the ldapPublicKey attribute makes it
-> extremely hard to use in a self management scenario.
-> 
-> So my input (for what it's worth) is that schema changes should be
-> considered carefully, and the consequences understood, as well as the
-> ergonomics of how those changes will interface with access controls
-> and that human interaction. 
-> 
-> Hope that helps,
+Hi metze,
 
-G'Day William,
+Thanks for the talk was great, can't wait for the slides :)
 
-It is a wiki, feel free to craft some suitable guidance and add it!
+I don't recall a problem with the enterprise principals in old
+S4U2Self padata, but I mostly test MIT client, I'll give it a try.
 
-Thanks,
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
-
-
-
+Isaac
 
