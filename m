@@ -2,48 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 735171E4EAF
-	for <lists+samba-technical@lfdr.de>; Wed, 27 May 2020 21:56:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 599AD1E4FEE
+	for <lists+samba-technical@lfdr.de>; Wed, 27 May 2020 23:17:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=KZgkGq5YccywiEg6l8OAMK6h81v654KTdTBsmEOJ6EM=; b=Y4lkksi5oXUqpNQwKIh58GGtE/
-	dr4UnL7tIPIgrfW2vd/8xr/ttDDI9r+E6Jwz+smrettvPyJlD1fBA6+j4N18UzK7ODfPpAcUQlaUf
-	NCqWvdpV5y+FXGETKAQd2kxeUHIV68APp8AYh6kqe1t9RCsjXL22Hn9SYpeQgDWE5vT14UPgonrxR
-	IH7zU6G4FdDYVY7oexXeMkbv9KLDZgHWrnBsfJmmXOB5m+u0amN6BeB6haGDNyI1CySlppzOZULg6
-	NrxLlEDliiyYC1MgPqeHr46NUyJcORA1yBn3LkH+9Va5dDIlkq0rmLMUdI4iazUOb572pOrRg4JAb
-	FhchXKWQ==;
-Received: from localhost ([::1]:20366 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=UNL1o8Moo5ryTVNHtP/npPsjLifhJ9OkCP0n/RPE6tU=; b=TWXPvSgnWrBUZIia7fuIMmzSD7
+	FchIeJ/q9YN5Cmb0sNbgX08+IDswDNFhjZDOx7gm8YH+smyxMlKzfpx0V1jbCwYjvOmmCQiAtFqPq
+	sdfqEkoY4PpLgrPssM4HGuv+DmGa1yjyQPiW2GBYtdnXOiXsTDfl95DogG0SOcinvnUT2bxHempTa
+	sKS/p1AZCoRbbeP+29CReBW5gBkaz7PLCSpMeOTHJwoZjKIRJ7Q0DM6AWfCm91h3fyJDtChjF2xbr
+	y05kuary1Iq6gfyzJF1Q5sUd7x9dK67PUgGylfTR7sDH/ow2tXeeEXI55DN4NlgRsWliFvxkAgsim
+	+97fglAA==;
+Received: from localhost ([::1]:23488 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1je2AK-0065gx-4l; Wed, 27 May 2020 19:56:40 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51696) 
+	id 1je3PV-0066A5-Ju; Wed, 27 May 2020 21:16:25 +0000
+Received: from mail-lj1-x244.google.com ([2a00:1450:4864:20::244]:33128) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1je2AF-0065gq-C8
- for samba-technical@lists.samba.org; Wed, 27 May 2020 19:56:37 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=KZgkGq5YccywiEg6l8OAMK6h81v654KTdTBsmEOJ6EM=; b=AXh1L6cmmNhwS9TQ0XwTTfLrEn
- 6bu7iR+Iux/CFmhOQtZy2CbVjorYvsM8BMt+xnOGlRNnP77zTOKIwdOmRAOMZdHiGt74IjgUmEhP6
- 3neSu8kSbdu2IEo2mWf4nWoqbczM4GgDC1exHZvJTPvpc3/CikzOMd6ySPHrvxSAjBnczP7hXfPa/
- YbUAwDaWcff0gd5Twu+GKG1udFKrcXBfQh+S14WklInQ1Ok3Mi1bHOJ8d1vfDdqpodb0g11jgY+0k
- MFV4odJm0gBmHgxBUBotQRWG/oPobMFfFNlrXYj6KAm5kTM/BzFvJK57/Kb1nK8zFCgg5OpEivAvZ
- U51hMVIRA4icuMsEPjrTSWgl7VBQmssChiQ4O9jXWQchozWVOD2Poa/lZ6oYgGM6XM60MJFvq9OJh
- bpq5AGteifol0aa5ckv+MfeNS3yLToMfTqlDv5O3SbT3oWD8TXY9abx/e7OirhDElziDDSiH9ab2k
- jKZvB+zmuZ52ZUAk0+/agaQd;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1je2AC-0002KQ-Up; Wed, 27 May 2020 19:56:33 +0000
-Date: Wed, 27 May 2020 22:56:31 +0300
-To: Stefan Metzmacher <metze@samba.org>
-Subject: Re: Kerberos features talk at sambaxp
-Message-ID: <20200527195631.GM5779@onega.vda.li>
+ (Exim) id 1je3PQ-00669y-Ta
+ for samba-technical@lists.samba.org; Wed, 27 May 2020 21:16:23 +0000
+Received: by mail-lj1-x244.google.com with SMTP id w10so30793677ljo.0
+ for <samba-technical@lists.samba.org>; Wed, 27 May 2020 14:16:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=UNL1o8Moo5ryTVNHtP/npPsjLifhJ9OkCP0n/RPE6tU=;
+ b=mOStgycQBsnm4yxQLFyfY8wKSiaGOhFPJZijgcNmP164rARokHEmubi8+TTnY+SsDi
+ /4n82tLnh2hA0CavRTCXlKtQJLMvinsNzMDCir6cghdZcJU2BRNQFN2LkwQzuysEw9gA
+ ZTCZPKnWWisUvUTYQRDLX4rOt8CWxQzaYmb2xCDpsenGekEq+FLxu3T7tWLEXdYHDANI
+ w6R3iPRD7PoSOmiBHh0hDBChee7/W4OYDSSjtNwKiWDZueQxoz/3mXsmUAWQrIIeIhDX
+ ylGPgB4M0/0qa8XKTbf0BnBGADE5d8LSBHTvRd249bYRo6oPy0E7rC7rt7M/xJvMl61C
+ yBQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=UNL1o8Moo5ryTVNHtP/npPsjLifhJ9OkCP0n/RPE6tU=;
+ b=tEo1aA6SXVm+Z/yosF8rF6OPlPwytbgOPQ3ISAQn/F8CZ1AXmtQp6/HBnB6U7U2EvF
+ HRd6bescV25ZHhTA9Q8E8rRzyPPMLNNPInayHL6utgsujqc1G+bGVbXvjuIm48MfVEz1
+ 74BwVC9nInIMu+BONxjmVQHNWb7VuzbGlu7HO0ELKOMc22okeJ6u/S4SIURmHL8CDZ6F
+ p/ppHN/F6DTTqht0bAyPdo8YLRO+ZzR1ednla/k/XDyqVV3hd4jQtIPoDHY6WTbK9IWO
+ Mw+K84pYKv6QZQ6FVEO5J7c+oR7f8JVV1S/uQwq36wKULGNn3TFGVSjU0g/oTayuX2Sp
+ wc2w==
+X-Gm-Message-State: AOAM532FY/+A2SqsvFwJw03XstGKoP7yhddu4j0oJRLt06xP6ziFTezG
+ MkVJEFJidBLpdXVFEGGd+3PXmcS3RQoBIbgdXxQ=
+X-Google-Smtp-Source: ABdhPJwi2kHaqezXrSgNDjTDZV6x5wKh+AL3nsvmh2Ak1Bd2sSF87hhwI4MeOd3VmrepME5bz7iLrecSwgTDHOy4s7M=
+X-Received: by 2002:a2e:9a19:: with SMTP id o25mr4138572lji.40.1590614179573; 
+ Wed, 27 May 2020 14:16:19 -0700 (PDT)
+MIME-Version: 1.0
 References: <CAC-fF8QyT0aYEyDAKMyVdSq8R0NDbsw+5JPFmQ3pS_pa730ybQ@mail.gmail.com>
  <8a7eda93-25fa-7dcb-1501-c3e4870501c4@samba.org>
- <20200527194425.GL5779@onega.vda.li>
- <72637587-49b0-76b4-ab2e-81437fd03e1e@samba.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <72637587-49b0-76b4-ab2e-81437fd03e1e@samba.org>
+In-Reply-To: <8a7eda93-25fa-7dcb-1501-c3e4870501c4@samba.org>
+Date: Wed, 27 May 2020 23:16:08 +0200
+Message-ID: <CAC-fF8S+Qwba9CTRBo_OB2YGRCWHWJ8W7NkB7=i6ucOf9Ygszw@mail.gmail.com>
+Subject: Re: Kerberos features talk at sambaxp
+To: Stefan Metzmacher <metze@samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,65 +68,39 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexander Bokovoy <ab@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Isaac Boukris <iboukris@gmail.com>
+From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Isaac Boukris <iboukris@gmail.com>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On ke, 27 touko 2020, Stefan Metzmacher wrote:
-> Am 27.05.20 um 21:44 schrieb Alexander Bokovoy:
-> > On ke, 27 touko 2020, Stefan Metzmacher via samba-technical wrote:
-> >> Hi Isaac,
-> >>
-> >>> Thanks for the talk was great, can't wait for the slides :)
-> >>
-> >> Thanks! I'm sorry not to finish in time:-(
-> >>
-> >> I may be able to complete the recording to the end for the archives.
-> >>
-> >> StefanMetzmacher_sambaxp2020_Modern_Kerberos-rev0-compact.pdf
-> >> can be found under:
-> >>> https://www.samba.org/~metze/presentations/2020/SambaXP/
-> >>
-> >> Also checkout the latest wireshark!
-> >>> I don't recall a problem with the enterprise principals in old
-> >>> S4U2Self padata, but I mostly test MIT client, I'll give it a try.
-> >>
-> >> I'm also not 100% sure, but I thought you told me about it:-)
-> >>
-> >> I think the difference is also the client principal in the referral
-> >> tickets on the way back.
-> > 
-> > As part of our work on server referrals in FreeIPA, Isaac and I made a
-> > tool that might be useful for these investigations:
-> > 
-> > https://pagure.io/freeipa/raw/master/f/daemons/ipa-kdb/ipa-print-pac.c
-> > 
-> > It uses GSSAPI and Samba's libndr to obtain tickets and print content of
-> > a PAC. Obviously, it can be extended to print more ticket details if
-> > needed.
-> > 
-> > It is able to acquire normal service tickets and S4U2Self ones, with
-> > enterprise principals or not. We use it in FreeIPA tests in-realm and
-> > for cross-realm operations.
-> > 
-> > To compile it on something like Fedora you can use the following line:
-> > 
-> > gcc -g -Wall -Werror -o print-pac -I/usr/include/samba-4.0 print-pac.c  -lgssapi_krb5 -lkrb5 -L/usr/lib64/samba -Wl,-rpath=/usr/lib64/samba -lndr-samba4 -lndr-krb5pac -lndr  -ltalloc -lsamba-util -lpopt
-> > 
-> > It is basically Samba libraries + Kerberos/GSSAPI + popt.
-> > 
-> > If people are interested, I can submit it to Samba upstream as well.
-> 
+On Wed, May 27, 2020 at 9:20 PM Stefan Metzmacher <metze@samba.org> wrote:
+>
+> StefanMetzmacher_sambaxp2020_Modern_Kerberos-rev0-compact.pdf
+> can be found under:
+> > https://www.samba.org/~metze/presentations/2020/SambaXP/
+
+Excellent, thanks!
+
+As a feature, I think RBCD will also be quite useful in samba deployments.
+
+> Also checkout the latest wireshark!
+> > I don't recall a problem with the enterprise principals in old
+> > S4U2Self padata, but I mostly test MIT client, I'll give it a try.
+>
+> I'm also not 100% sure, but I thought you told me about it:-)
+
+Maybe it was something else, I'll make a python test and try it
+against windows :)
+
+> I think the difference is also the client principal in the referral
+> tickets on the way back.
+
+Hmm, the PAC in the referral will be signed with user@dom@REALM, but
+that doesn't depend on the padata type that was used.
+
 > Isn't that what 'net ads kerberos pac dump' already does?
 
-Partially. This does not require working Samba configuration on the
-system which is useful if you want to test unrelated issues in a
-Kerberos implementation.
-
-
--- 
-/ Alexander Bokovoy
+We should have an enterprise flag for net-ads-kerberos-pac-dump, I
+think I have a patch for it somewhere.
 
