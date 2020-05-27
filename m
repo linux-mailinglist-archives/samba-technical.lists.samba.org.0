@@ -2,49 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A988A1E4E95
-	for <lists+samba-technical@lfdr.de>; Wed, 27 May 2020 21:53:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 735171E4EAF
+	for <lists+samba-technical@lfdr.de>; Wed, 27 May 2020 21:56:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=/JLUlAa4srJyBp+nLiKpO+0+eKw/FHH4xxYzVMq/Evw=; b=kOnqAT0Nl1ZhsWS8LW5G5+8PyU
-	lXvAHaAOjDkoFb9ajW/QhXgenNNM9bsStf5/UtFcMEXUCQ45MNgr5RJ7Pbnf9D7WGs1+iACIEqYlA
-	BKNjsNpwDQc3jun4Rv9t2bEo4+Nx7N14vaNzhpTwr/a7s4xU1FGn0kPBvS63rpurGarwST35J/SEI
-	uUDLIwCRX9Zm6aSfexsm2+4JpsQFfEczr2bC+kIy8E1dbhREmiOL2ThwCEXL7dQr8PkmlLvx2o6jQ
-	FMYLvAxCfo5gBbZJsFIWxXgJgEYcJM8KG8oYKZHmP9Jz+brIn6gzKFGlPT9wg4oSM8kiqaOQgLZAk
-	d5J+x2Jg==;
-Received: from localhost ([::1]:19634 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=KZgkGq5YccywiEg6l8OAMK6h81v654KTdTBsmEOJ6EM=; b=Y4lkksi5oXUqpNQwKIh58GGtE/
+	dr4UnL7tIPIgrfW2vd/8xr/ttDDI9r+E6Jwz+smrettvPyJlD1fBA6+j4N18UzK7ODfPpAcUQlaUf
+	NCqWvdpV5y+FXGETKAQd2kxeUHIV68APp8AYh6kqe1t9RCsjXL22Hn9SYpeQgDWE5vT14UPgonrxR
+	IH7zU6G4FdDYVY7oexXeMkbv9KLDZgHWrnBsfJmmXOB5m+u0amN6BeB6haGDNyI1CySlppzOZULg6
+	NrxLlEDliiyYC1MgPqeHr46NUyJcORA1yBn3LkH+9Va5dDIlkq0rmLMUdI4iazUOb572pOrRg4JAb
+	FhchXKWQ==;
+Received: from localhost ([::1]:20366 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1je279-0065au-FN; Wed, 27 May 2020 19:53:23 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50358) 
+	id 1je2AK-0065gx-4l; Wed, 27 May 2020 19:56:40 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51696) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1je273-0065an-GB
- for samba-technical@lists.samba.org; Wed, 27 May 2020 19:53:20 +0000
+ (Exim) id 1je2AF-0065gq-C8
+ for samba-technical@lists.samba.org; Wed, 27 May 2020 19:56:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=/JLUlAa4srJyBp+nLiKpO+0+eKw/FHH4xxYzVMq/Evw=; b=tqCZZZPcjyt+UklcRK3dQfzsPq
- O6Sma/Tkrcgb/cDNpX26YdyW/79m18WEpUnEWTev81N3K+q3Mj60/QPRIoPkRBwMz+eRCbIjafnL8
- +cPWAgBtjruTHJ9I7F8uLrI/Gaz3oYGwOyrV7t7bNEp0KxB8RUXCuQGkqP47ODLDiru5TiSMpbL0w
- AyvVLpPTYkwVT8YSPN8h/yIAWK4k9r+z9axQkr8gPLEdbaqH/po1WvMRe690aaWdyGULE0DMO8f6B
- 7+iZ+8/DNLwlNG1RY47Sjqb+jwimhTFEApwrnYL/K6eInw0DTlDtEdWNPKWtcO6t0Cljks52mQ9Ak
- N4k0sRgVJ6kzhK+0j8ChLZJz4vKSrtpdonQ6ddB6wTTF3FVzriRDBjAMgUNxosjraUU3PKeE7D29R
- p3xd4SRJPoRpGaQxMDjmnCRQPet2gkIg/nFirOS+xUv40brgZ/vtzgqBMmDkWWUnPWkxuqRLT1wOU
- L5hTOSbHlZcRQrSBzBvC3Rd+;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=KZgkGq5YccywiEg6l8OAMK6h81v654KTdTBsmEOJ6EM=; b=AXh1L6cmmNhwS9TQ0XwTTfLrEn
+ 6bu7iR+Iux/CFmhOQtZy2CbVjorYvsM8BMt+xnOGlRNnP77zTOKIwdOmRAOMZdHiGt74IjgUmEhP6
+ 3neSu8kSbdu2IEo2mWf4nWoqbczM4GgDC1exHZvJTPvpc3/CikzOMd6ySPHrvxSAjBnczP7hXfPa/
+ YbUAwDaWcff0gd5Twu+GKG1udFKrcXBfQh+S14WklInQ1Ok3Mi1bHOJ8d1vfDdqpodb0g11jgY+0k
+ MFV4odJm0gBmHgxBUBotQRWG/oPobMFfFNlrXYj6KAm5kTM/BzFvJK57/Kb1nK8zFCgg5OpEivAvZ
+ U51hMVIRA4icuMsEPjrTSWgl7VBQmssChiQ4O9jXWQchozWVOD2Poa/lZ6oYgGM6XM60MJFvq9OJh
+ bpq5AGteifol0aa5ckv+MfeNS3yLToMfTqlDv5O3SbT3oWD8TXY9abx/e7OirhDElziDDSiH9ab2k
+ jKZvB+zmuZ52ZUAk0+/agaQd;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1je272-0002HR-GS
- for samba-technical@lists.samba.org; Wed, 27 May 2020 19:53:17 +0000
-Subject: Re: Samba user quota implementation question
-To: samba-technical@lists.samba.org
-References: <4D14BB46-74F3-4EB7-A3F4-0C290A464D16@contoso.com>
-Message-ID: <beb6a045-722d-fe0d-e41d-ab7a25fbc5fb@samba.org>
-Date: Wed, 27 May 2020 20:53:14 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ (Exim) id 1je2AC-0002KQ-Up; Wed, 27 May 2020 19:56:33 +0000
+Date: Wed, 27 May 2020 22:56:31 +0300
+To: Stefan Metzmacher <metze@samba.org>
+Subject: Re: Kerberos features talk at sambaxp
+Message-ID: <20200527195631.GM5779@onega.vda.li>
+References: <CAC-fF8QyT0aYEyDAKMyVdSq8R0NDbsw+5JPFmQ3pS_pa730ybQ@mail.gmail.com>
+ <8a7eda93-25fa-7dcb-1501-c3e4870501c4@samba.org>
+ <20200527194425.GL5779@onega.vda.li>
+ <72637587-49b0-76b4-ab2e-81437fd03e1e@samba.org>
 MIME-Version: 1.0
-In-Reply-To: <4D14BB46-74F3-4EB7-A3F4-0C290A464D16@contoso.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <72637587-49b0-76b4-ab2e-81437fd03e1e@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,37 +57,65 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Alexander Bokovoy <ab@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Isaac Boukris <iboukris@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 27/05/2020 20:42, Krishna Harathi via samba-technical wrote:
-> Our OneXafe FS  supports share/fs level quota using smb.conf “set quota command” and “get quota command”.
->
-> We are currently extending support to user-level quotas using the same interface, when Samba smbd is an AD DC member.
->
-> Setting user quota from a windows client is working as expected. But once quota is set, none of the users are listed in the quota’s pop-up window, so cannot delete or modify quota properties. Moreover, creating a new quota entry for the same user is generating a “quota entry already exists for this user” error.
->
-> By tracing get/set requests to our file server, I see that our FS server is receiving a get request for Samba for every user entry in the local password file, but none for the UID of the DC member user. But I do see a default quota get request for the group GID.
->
-> The problem seems to be that the get/set command interface does not obviously support a “list” user quota api to the hosting FS.
->
-> Questions on this –  We can post and manage user entry (host-local uid/gid) corresponding to the DC user sid/gid whenever a “set user quota” is received. I did verify that when an entry is made manually, windows user quota workflow behaves as expected. Is the problem assumption correct and is this a way to implement? Is there a better way, given the constraints?
->
-> We are using Samba 4.7.11 patched with https://bugzilla.samba.org/show_bug.cgi?id=13553#c17 fix for 4.7.
->
-> Any help is this issue is much appreciated in advance.
->
-> Regards.
-> Krishna Harathi
+On ke, 27 touko 2020, Stefan Metzmacher wrote:
+> Am 27.05.20 um 21:44 schrieb Alexander Bokovoy:
+> > On ke, 27 touko 2020, Stefan Metzmacher via samba-technical wrote:
+> >> Hi Isaac,
+> >>
+> >>> Thanks for the talk was great, can't wait for the slides :)
+> >>
+> >> Thanks! I'm sorry not to finish in time:-(
+> >>
+> >> I may be able to complete the recording to the end for the archives.
+> >>
+> >> StefanMetzmacher_sambaxp2020_Modern_Kerberos-rev0-compact.pdf
+> >> can be found under:
+> >>> https://www.samba.org/~metze/presentations/2020/SambaXP/
+> >>
+> >> Also checkout the latest wireshark!
+> >>> I don't recall a problem with the enterprise principals in old
+> >>> S4U2Self padata, but I mostly test MIT client, I'll give it a try.
+> >>
+> >> I'm also not 100% sure, but I thought you told me about it:-)
+> >>
+> >> I think the difference is also the client principal in the referral
+> >> tickets on the way back.
+> > 
+> > As part of our work on server referrals in FreeIPA, Isaac and I made a
+> > tool that might be useful for these investigations:
+> > 
+> > https://pagure.io/freeipa/raw/master/f/daemons/ipa-kdb/ipa-print-pac.c
+> > 
+> > It uses GSSAPI and Samba's libndr to obtain tickets and print content of
+> > a PAC. Obviously, it can be extended to print more ticket details if
+> > needed.
+> > 
+> > It is able to acquire normal service tickets and S4U2Self ones, with
+> > enterprise principals or not. We use it in FreeIPA tests in-realm and
+> > for cross-realm operations.
+> > 
+> > To compile it on something like Fedora you can use the following line:
+> > 
+> > gcc -g -Wall -Werror -o print-pac -I/usr/include/samba-4.0 print-pac.c  -lgssapi_krb5 -lkrb5 -L/usr/lib64/samba -Wl,-rpath=/usr/lib64/samba -lndr-samba4 -lndr-krb5pac -lndr  -ltalloc -lsamba-util -lpopt
+> > 
+> > It is basically Samba libraries + Kerberos/GSSAPI + popt.
+> > 
+> > If people are interested, I can submit it to Samba upstream as well.
+> 
+> Isn't that what 'net ads kerberos pac dump' already does?
 
- From reading the above, it looks like you are saying that you have the 
-same users in /etc/passwd and AD, is this correct ?
-
-Can you also please post the entire smb.conf you are using on the OneXafe.
-
-Rowland
+Partially. This does not require working Samba configuration on the
+system which is useful if you want to test unrelated issues in a
+Kerberos implementation.
 
 
+-- 
+/ Alexander Bokovoy
 
