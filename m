@@ -2,46 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D74371E6C55
-	for <lists+samba-technical@lfdr.de>; Thu, 28 May 2020 22:17:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C92BC1E6C56
+	for <lists+samba-technical@lfdr.de>; Thu, 28 May 2020 22:18:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=oi7AWB0I0YVBzoLCXoR/XrQhH5Vmr9uzykeiYYKiZ2o=; b=lIKqDJBQR/KsrazQox30AexaW4
-	Nz46eVMGgnzZm8Xbh5QNAplq5XR1oMRDPVqm44osc/ei5ljn6QI3X8/VnAe/rir1AiMAIzGe3GRzB
-	R1lojse7m/4lTYLw3ZtHRze8+hRRm7v8HRKaKwuF1wy08EVplruhQegbo2P9K+TztJ1zzpgHT71qT
-	/wYvCfkfDH1JCBwu6tu8ECq6aDEZXFrDJbNb1qeuI9lBVbOW8wMpLLDx6qTBARcBrac96HW3OYKne
-	bYzf/JsteLbLKucKtOQOawswLkR7hlEnza1RRcsbghmgFWAEGAfPG2riCufikuFr+tL9dHMN5+bGk
-	XHLVd3cg==;
-Received: from localhost ([::1]:28634 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=bKPYp+myRNJKroEEvGMenHCfeGN3vO0zT6i4uYGCVlU=; b=GyOOKXdcso1hOPmhN3aXHzqGE5
+	IlRYBP/YlPxodKYO/sGhcPALKXwKuEaNCjy+IVI18/zRP6OjgRdv5vlv3qBhreHQYMUvWk5T44lJO
+	RQeINpMzao2i71aNz9lYYjUnWgAQx6qLdxKBpeL2JnHL+0YDpEPE96GiNDHUW6frTbp4ExrEuTUFu
+	0A9qLRjaWDpKi7bvMVvPObST6/ImSPzUMEd4AI3O6FMWGqh4BoAXDb3VMTjzAWm3tzLekxqoHPbKX
+	RgZFNoGFhdJcD7FFbURsH7GV5SUBXV3FBAS9+nOASCqm9uKoSibS9p4NUVfCE3uGLKSZNt0qx+RiH
+	oCBYXozQ==;
+Received: from localhost ([::1]:29366 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jeOy3-006Epy-Kx; Thu, 28 May 2020 20:17:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:46292) 
+	id 1jeOyc-006Ew4-5m; Thu, 28 May 2020 20:18:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:46694) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jeOxx-006Epq-SP
- for samba-technical@lists.samba.org; Thu, 28 May 2020 20:17:28 +0000
+ (Exim) id 1jeOyW-006Evw-DN
+ for samba-technical@lists.samba.org; Thu, 28 May 2020 20:18:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=oi7AWB0I0YVBzoLCXoR/XrQhH5Vmr9uzykeiYYKiZ2o=; b=yks7/q+5B2/UE964g9RebGjiyM
- hvlxzMPMaCXpI6HjiHVv+kAcSSzGe+9JgvRd2JAajue701sMS2I/gHIP3agzRUXWcJMzle6j0qhOh
- jeZ3RCRaPwmcEa0Es3s42tHuaEaRYPc+2K2xL3kGZVlLYZtTtwsl1xXRm2gsAiXvLJS+7AmoeqoI3
- yLMD57WeTvDQwQYNmflVMiCuRrMoP6yAfjbvwHKHOvglXIOsYVBIF1Ajz7MWqFQfcN1ywqvPkJuDJ
- eam35CPFKsVp67THNUk83GFxhHv67TPN3VkiMeuT72pElF5dPRgRzXxgAWF5WI/pgcBVdPZm2URg3
- Q6noPWQIMgXa51WDaKYOfbe4kECfIbjPNI2tsi9DrYY56d4saULuu2kp1Iggw7Mj7z2iwV1j5qLh3
- qMWCJA8zxDNd7VCrXRMczBCGvRbd6vZU9HRkBoki7vcZqlSr6RY+gAvZqIQHIElaDY1J5qy7zEX6W
- SfXIpIJLM2zaRk7ELY+QCvKx;
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=bKPYp+myRNJKroEEvGMenHCfeGN3vO0zT6i4uYGCVlU=; b=hcRSHjVwlwNwM4uiMdpjwTQ7xL
+ sT0bCIWG45UUCYQ/rjy03SdNmxQFWxHdfQbfQM+9oAH7imPVWUB4cMORidCv7SWklc145t8g/QncZ
+ L56YCO077qTiRinrSwINu9i/gSThLFHDP1fWFJDO0ELIBqStC4JFrtbpbbskF2WNLYoJnh0YP/Y61
+ bp2qncRtgdVgffRSxqJyHH2XS8S/Ymwxv5Bn02I2kGyFpvtk3WuI28fZLL/jN5fVjqRSOpXWoMu1S
+ 2mDdkrvDGtJSFz9jKwYG905rTkxle4k7pyBd5Sm+0lSbFfcih8z8dAwP/CbL8xIxGVyfbw12fzt0u
+ 9TxANhy0iO02P46sAB548CCZxCGCBwScF3larGTaUV3Gve7syibLLXU+NJdmEyjKGWolob8ACT72R
+ z71DWm/gU4EZqeiIG1c5TbZNwkPqDYkGfCDxisnl7N1E+3VegCO/YTgqPFVgapn6T080O4k9EsvGr
+ Ye/SZhNiP9rKDeBHAceTb5Ny;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jeOxx-0006OO-AB; Thu, 28 May 2020 20:17:25 +0000
-Date: Thu, 28 May 2020 13:17:19 -0700
-To: hezekiah maina <hezekiahmaina3@gmail.com>
+ (Exim) id 1jeOyW-0006QC-4w
+ for samba-technical@lists.samba.org; Thu, 28 May 2020 20:18:00 +0000
 Subject: Re: Checking if Samba is running as an AD DC
-Message-ID: <20200528201719.GI14337@jeremy-acer>
+To: samba-technical@lists.samba.org
 References: <CAH72RCXPNq2R6p7G61OCztSrdZrqXO6G5L4azhUSgQxqT50K1A@mail.gmail.com>
+Message-ID: <748f3665-cfe0-4b79-b0f0-936eea8d7b47@samba.org>
+Date: Thu, 28 May 2020 21:17:59 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 In-Reply-To: <CAH72RCXPNq2R6p7G61OCztSrdZrqXO6G5L4azhUSgQxqT50K1A@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,24 +58,37 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, May 28, 2020 at 11:00:33PM +0300, hezekiah maina via samba-technical wrote:
+On 28/05/2020 21:00, hezekiah maina via samba-technical wrote:
 > Hello everyone,
-> 
+>
 > I want to first express my gratitude to the entire Samba community.
 > You have been kind and very responsive whenever I ask for help or advice.
 > Thank you.
-> 
+>
 > How else should I check that Samba is running as an AD DC apart from
 > looking at the smb.conf file?
 > Is there a process that gives me this kind of information?
 
-You can always try to see if anything is listening
-on CLDAP port 389 (udp). If there's a cldap server
-listening it's a good chance you're running an AD-DC !
+This is Linux, there are several ways ;-)
+
+Two that spring to mind are (both run on what you think is a DC):
+
+ps ax | grep '[s]amba'
+
+host -t SRV _ldap._tcp.dc._msdcs.$(hostname -d) | grep $(hostname -s)
+
+If you get any output from the first, it is a DC. Same goes for the 
+second, but it will also work on any Unix domain machine if you remove 
+the pipe '|' and anything after it.
+
+Rowland
+
+
+
+
 
