@@ -2,62 +2,129 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D20091E51F6
-	for <lists+samba-technical@lfdr.de>; Thu, 28 May 2020 01:45:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 343CE1E5394
+	for <lists+samba-technical@lfdr.de>; Thu, 28 May 2020 04:00:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=+ZzoniwVqDZIcF5R0Ju2Vi535qFzsZpFnN/dHboBL+Q=; b=pOFlo7nOBP6Zuc9xxdK+78uAI6
-	aIb46yuYU9Uh7PG7+vn4AR14DRBa4mOCB7CizpAwEtf1D7heHhKwOFMLmvpepqf7PtC6gqlfFbf1+
-	Ul2pVhKGacwXOmZJDr1WnGw0YTG5UGUjXMxOd1hWefNpxerME8RNUTYW5OMPJ0B20ALVwopuSA9iS
-	RtxNNAa+98IFdubLxjqfhmOnZ13SdCcLiRnohZOkvOtZTihlvAY4FgK3w2gtLUKvZ3rWjpJH2U4yX
-	bxnvRUDUdtK3bbmvICBf7upmtYVrgP3vKdpWEpTvvLkhi6kLY+aVHfwTumKs2WaMefIWBNHa05iqs
-	9+RMOfsQ==;
-Received: from localhost ([::1]:28176 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=56YAqmc8qrn1EW/41vb01QmP6RzucszwKeFW9DYfnHY=; b=ZjJ4AyjtC1fsIWQrVjNAiUQD1y
+	xXryl6exY0ed4BcP5yfBds1rjKRbLoKsALbu9jLhJ9WA0/Zs7gtlogl8g8I5aF/y2Nr035syb6BmJ
+	x3efLCsPvxBU7oOsUA6zAqAhLjVeTBzdDEOFvneqjyRZbTzByhB4obGdwy4SWY8Yfa+UBi8pydXpf
+	uc6CgH6J5BT8CN9G12vxJD4XZydYCwxMyBpLKPgCOKPCBB5cvsj+04nhA1XazSgM9RJ6HW8dlg/o5
+	yIg/4Tqm6OkMUaF7CjwuFUzFoSuiDz9jR/b4KdWnXp1d7KGI3n6BXMPmaM3CNq4MU9rkoA3k/2Tr5
+	xQlSfBYg==;
+Received: from localhost ([::1]:28974 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1je5ji-0066sx-8y; Wed, 27 May 2020 23:45:26 +0000
-Received: from mail-ot1-x333.google.com ([2607:f8b0:4864:20::333]:32855) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1je5ja-0066sq-MA
- for samba-technical@lists.samba.org; Wed, 27 May 2020 23:45:23 +0000
-Received: by mail-ot1-x333.google.com with SMTP id v17so1050052ote.0
- for <samba-technical@lists.samba.org>; Wed, 27 May 2020 16:45:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ixsystems.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=eDXbowTTCxhzY2qRnCO0f14IDXtSYBV195lXar7YMB0=;
- b=USNHnCKcwLRet4W7gzVTrfDwUN41/wQODLUnfgK13BX6vOMZ2TO705SKKFo7FPUdHr
- Bn5iDPC2Ah1K5UJD5KHiXvhCTTCyb7u39vXVNSX3zre9JRibRho2thJA/vc7GYEFYdzX
- 7i67vPzRyhWyua7/FAs1fBDrH8bfYTdTs9gk0ZIzSwUg545xnuFar23KI5I8q6+VehwZ
- XzdIkg8NXqnpq8k8TLnb1RHGIh75wpDDBxViMvUCW6wHpuJNt/hFwztTvmlN/q8eiMlT
- Pre1h8iZBrZBwLwenZVatFaY9ly/CAPyHEqvqUjrDwvJLz81I7PB46eD2xYK+Kefwick
- KeRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=eDXbowTTCxhzY2qRnCO0f14IDXtSYBV195lXar7YMB0=;
- b=IGTrchkyD8UsP7vv5M+o8V4j05mRxfc24ALtwsohQcWhDtMCI1qMUQfm2xKECklsNo
- Ww0BY60GOtbQ/0InqDgXBqtaLb9j7usYN3V6RCD0o7/hKaM4x+NcNewqPCJng2sKkgVP
- TQyB1NLByRf3xfoJpMViOF86eYNAJepvg4yu//xOddUP7zIwOGT9NyJ9UbrLtmhvRZ8J
- FAUWX0vR07h1sifEjpUSUL38av1iUZPfEZ+cOC/SgeZnPBMozYUtnUnitXkYB5ATvAe5
- DLnD9oV4+AsW92W8vY0BzmfTGsuanqWSjRofuJsqBvyBHKCtnWDM+FI3flUhgo6CuSUI
- gSFA==
-X-Gm-Message-State: AOAM5315Iquj1K8AVRrkeqfj0lkiW0wq/SUk9R4cn2ABfNThsExAVZhq
- rWLxx7XknTmzs1jw0FBEdxFsm4PrCrxoWSV+JCkEmA==
-X-Google-Smtp-Source: ABdhPJywvKCDx9Q+BND25lYadUKY/cTtHCiHdYHQTmapACc+l46aQUkkCAmAUbrid+RVBwUTsxr+cgVBzoWw4/JBStE=
-X-Received: by 2002:a9d:3608:: with SMTP id w8mr427856otb.318.1590623115834;
- Wed, 27 May 2020 16:45:15 -0700 (PDT)
-MIME-Version: 1.0
+	id 1je7pU-00678U-K5; Thu, 28 May 2020 01:59:32 +0000
+Received: from mail-bn7nam10on2041.outbound.protection.outlook.com
+ ([40.107.92.41]:33606 helo=NAM10-BN7-obe.outbound.protection.outlook.com) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1je7pO-00678M-Mh
+ for samba-technical@lists.samba.org; Thu, 28 May 2020 01:59:29 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=storagecraft.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hJlHDcC4Bn4oqa7AP3vp5l7Nbvls6LAUyt1zZErmo0s=;
+ b=RqHMHStVZu+ieYqFJlTpJNB0Xofn55FYfN4JTOHuY4GVY1A1F/qD1IYYyyU82pRxPFq7LFY/Nud+hrnt31lcfAtXxZL7NWWFKRe9ix/5KcS3IHQVl7lL2HvDk7sw4qjvq5o0V7gKdg9H5s6l1w0pZ2dVCZs+4ymYfIimR+SZykw=
+Received: from DM6PR08CA0019.namprd08.prod.outlook.com (2603:10b6:5:80::32) by
+ BYAPR11MB3480.namprd11.prod.outlook.com (2603:10b6:a03:79::27) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3021.27; Thu, 28 May 2020 01:27:19 +0000
+Received: from DM3NAM03FT062.eop-NAM03.prod.protection.outlook.com
+ (2603:10b6:5:80:cafe::ce) by DM6PR08CA0019.outlook.office365.com
+ (2603:10b6:5:80::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3045.17 via Frontend
+ Transport; Thu, 28 May 2020 01:27:19 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is
+ 23.96.254.246) smtp.mailfrom=storagecraft.com; ixsystems.com; dkim=pass
+ (signature was verified) header.d=storagecraft.com;ixsystems.com; dmarc=pass
+ action=none header.from=storagecraft.com;
+Received: from us1-emailsignatures-cloud.codetwo.com (23.96.254.246) by
+ DM3NAM03FT062.mail.protection.outlook.com (10.152.83.142) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3045.17 via Frontend Transport; Thu, 28 May 2020 01:27:18 +0000
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (104.47.56.177)
+ by us1-emailsignatures-cloud.codetwo.com with CodeTwo SMTP Server (TLS12) via
+ SMTP; Thu, 28 May 2020 01:27:17 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=C/QwQ5JJvBtZfqsjUuZ4HKEZ7xxM+qyjFY+La8jUVeJVsXqHISrp7loHJbJ0/m0e3vLxIsnRZv1LSy0vl/7tre7t8xvGRHRmvI6BEel4IirvwzJMdeVW8eXcqlbDa2CR0RMqmWu05HLRqT8koYJ8wd4jk2kvoyu+jFOqcO+JSPQIzh6cOljf0XfvWgg79v/czfycCNlpBZjFG0vMCulqGoKTJ4TGSbN89lM1lYMGVIfR6KHhEhpf7a1Cv0FIbQM9k2JCTOpoTJKJcxseYfQFMJkr2IV8Sn2qiii5vwWIvwF5EKjfoiYvCKZVz50O0mjWwR2SBKXPY1CHPBM5e1wu/w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hJlHDcC4Bn4oqa7AP3vp5l7Nbvls6LAUyt1zZErmo0s=;
+ b=O581V/N6wdN9U1nRl1S7wV2OoQ3+kQhUQSQltm7QKY9oEIz/Sif1BwOJxGMPMBpJdY6inB4jnzxm2g5kcTFzxAhAIOXcUJvEJwLn8b5FktbQW0pgynsFpcoA/d9u+T1VLaa2gasehHZaIKi3Czv/fWACczngq4h7Ip+2xOq1Y29dq2WH+dYelSp75ctlF9h+wLAmRdOBp8aY6DefpieJY07hqyHkVbaSbK9tpMNJ9Z6/YNCUWCwG5ylAgsdbXZQGN0TNKWoDzR2Rh4oerrMt5AMTYS5v4ZwDz4SLxseaW20po1JsZauAuMHLsHrBBWpjZgBD+37L9bGpCvQ/rZRXfQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=storagecraft.com; dmarc=pass action=none
+ header.from=storagecraft.com; dkim=pass header.d=storagecraft.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=storagecraft.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hJlHDcC4Bn4oqa7AP3vp5l7Nbvls6LAUyt1zZErmo0s=;
+ b=RqHMHStVZu+ieYqFJlTpJNB0Xofn55FYfN4JTOHuY4GVY1A1F/qD1IYYyyU82pRxPFq7LFY/Nud+hrnt31lcfAtXxZL7NWWFKRe9ix/5KcS3IHQVl7lL2HvDk7sw4qjvq5o0V7gKdg9H5s6l1w0pZ2dVCZs+4ymYfIimR+SZykw=
+Received: from DM6PR11MB4532.namprd11.prod.outlook.com (2603:10b6:5:2aa::21)
+ by DM6PR11MB4073.namprd11.prod.outlook.com (2603:10b6:5:19f::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3045.19; Thu, 28 May
+ 2020 01:27:15 +0000
+Received: from DM6PR11MB4532.namprd11.prod.outlook.com
+ ([fe80::6d63:5f8a:f1aa:d51a]) by DM6PR11MB4532.namprd11.prod.outlook.com
+ ([fe80::6d63:5f8a:f1aa:d51a%8]) with mapi id 15.20.3045.018; Thu, 28 May 2020
+ 01:27:15 +0000
+To: Andrew Walker <awalker@ixsystems.com>
+Subject: Re: Samba user quota implementation question
+Thread-Topic: Samba user quota implementation question
+Thread-Index: AQHWNF7zbmQ9XIiNp0+V9JbVx3GYtqi8WCwA//+yn4CAAI6TgP//psWA
+Date: Thu, 28 May 2020 01:27:14 +0000
+Message-ID: <E40C01D9-9EC6-4C85-A535-03B220BDB12F@storagecraft.com>
 References: <4D14BB46-74F3-4EB7-A3F4-0C290A464D16@contoso.com>
  <beb6a045-722d-fe0d-e41d-ab7a25fbc5fb@samba.org>
  <CD19BF6F-5055-4697-A1BD-C8FF6948FD51@storagecraft.com>
-In-Reply-To: <CD19BF6F-5055-4697-A1BD-C8FF6948FD51@storagecraft.com>
-Date: Wed, 27 May 2020 19:46:35 -0400
-Message-ID: <CAB5c7xquGEb=k_d5uJ5zvQKOfVA7QC4eHNDkgUiCzfG91YQ8ug@mail.gmail.com>
-Subject: Re: Samba user quota implementation question
-To: Krishna Harathi <krishna.harathi@storagecraft.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAB5c7xquGEb=k_d5uJ5zvQKOfVA7QC4eHNDkgUiCzfG91YQ8ug@mail.gmail.com>
+In-Reply-To: <CAB5c7xquGEb=k_d5uJ5zvQKOfVA7QC4eHNDkgUiCzfG91YQ8ug@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+user-agent: Microsoft-MacOutlook/16.37.20051002
+Authentication-Results-Original: ixsystems.com; dkim=none (message not signed)
+ header.d=none; ixsystems.com;
+ dmarc=none action=none
+ header.from=storagecraft.com;
+x-originating-ip: [73.157.137.233]
+x-ms-publictraffictype: Email
+X-MS-Office365-Filtering-Correlation-Id: 0e3eb65e-3f1e-4ec3-fe99-08d802a642ec
+x-ms-traffictypediagnostic: DM6PR11MB4073:|BYAPR11MB3480:
+x-ms-oob-tlc-oobclassifiers: OLM:10000;OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: oVh90ofyXQbkQA1/J8NNxC2m+gRui+qHybqyeSJyBTgFmpfInQUPJPJbWAZ1nS5uW6l+pfbcRWCSXc+cp5kWnmeM/DC37ItSDVXx1wAQXLtQmicptkdxJZQm66tiMw28aoNPkVugLd9vZYUm+6oBdOXuks/8Q1FXlf12VIu+AUF9joa1UrZnFvUAkAPtPvHWIr74maFO6A+mptQu9vWlBYbKxjLa+rNwOFkD7wPa9vV/BOk99zhZkfD7jkUXKdV88elzdh+iiWRBV/UXUE05NWgaMnczR70qbPPWDzIj/BZDqgJNO3KICsB/iuRuxqXwE0a+8UBh6oYvguxPNavgbcSurRfahpD+b45oDBFudL0Gt9nb6etLgLhYw1iYVtRFv1+c6z6yiyHrA+jGCYXWZw==
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:DM6PR11MB4532.namprd11.prod.outlook.com;
+ PTR:; CAT:NONE; SFTY:;
+ SFS:(4636009)(396003)(346002)(376002)(366004)(136003)(39860400002)(44832011)(99936003)(2616005)(5660300002)(478600001)(15650500001)(2906002)(36756003)(45080400002)(966005)(6916009)(54906003)(316002)(186003)(4326008)(53546011)(6506007)(26005)(6512007)(166002)(6486002)(83380400001)(8936002)(8676002)(71200400001)(66476007)(66556008)(66946007)(66616009)(64756008)(86362001)(33656002)(91956017)(76116006)(66446008);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata: YXLxtxOe8ObE2/zRLZdL/x1e5SJ570vofrTpsHPHESvtegbGmFd+jWX0KR5JGUalsindX6nvOe1LU9HELql3jzlw00WyEbOA2YxA+WIW21OZaGF1mA22IkIk9R7PRUkrXHvy595R1AmRgfpqsOrl4tmZzrIXxgSfHcfXOqzOBmr3j4pMiAEqwvv5va6YWutwKWNAhZliR7FM3wbVz8yaiAl3qqgrSgeggLa1+OuHeThPy+S44s4VfdelS5FDg0AYoLW0qqynr2DX+NF9nUw4wT+ef3Wp/hV73cqkF86DTMlIDvTvP225WyMdbcuJc5Do7u2O/f62MxKBhMpJVboGVokQHJfPdhPE1dqh44LcOrIwQxufD6OvrmtSlcTDEX+57vq3W66hnkoST+8GTqbFXrTTOaULU9RqfXJqmAebD6TIDugzS8mLlZAPW8DjCQdckIKjSmt6n8P3SsjTv69tmUUMys9Sz2Z5tGc/3COi3oOsN8k4Qk0+Kea0cc4N6cib
+x-ms-exchange-transport-forked: True
+Content-Type: multipart/mixed;
+ boundary="_004_E40C01D99EC64C85A53503B220BDB12Fstoragecraftcom_"
+MIME-Version: 1.0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4073
+X-CodeTwo-MessageID: 86b9abed-af0a-4cde-a252-83c2dd6c5c93.20200528012717@us1-emailsignatures-cloud.codetwo.com
+X-CodeTwoProcessed: true
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: DM3NAM03FT062.eop-NAM03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 6711888b-2c29-4bb6-ee4a-08d802a640ec
+X-Microsoft-Antispam-Message-Info: CWBGMUpV7vmU/9CioUADB7FVZfEKEIMVPKIRkgnYuZ38mfqD3g8agS8rvzR+303VhqRZ9n2eOlJ0JPV6XOhSYmUk1wvQD8bQC5lngq8xf4YCsRgZ25SXRo1M8DNE4qPbrPPwVEET6hjASkroTjLYS26CP2GdXoXWXTu7f4Cp6D0Lw+zrBVynoqvJVxTLzujLh/udPYlSYMcgxPiqAgUpZeDqZ2FFs+Li85IhAEwLWHZm6AOC1G2sf641kb5bPUhoJI8B/MDu7PpYNFag4XL/UkMntzkPXhSXt2m2iJGzwUuOt2ANE1elSy+SgljOEFY50UlXDDffdvK/iFA1KqNlOFgQ4f5HegInTVI1mAnnx9bXKaD9ab1IiUYUGqdPZ9JXtHir6S9OWmZmMKVmhDY2/4f23hnfJu04Ecu7J4hFICx3hg5VDig5zqO81JRHp6dafH8mUfV7o53on5Wxhw3JwNnp8EByDlgQyawE+S5FhiY=
+X-OriginatorOrg: storagecraft.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0e3eb65e-3f1e-4ec3-fe99-08d802a642ec
+X-MS-Exchange-CrossTenant-Id: 99f4e3c9-bed5-443d-bd53-2b3f22d4eddf
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=99f4e3c9-bed5-443d-bd53-2b3f22d4eddf; Ip=[23.96.254.246];
+ Helo=[us1-emailsignatures-cloud.codetwo.com]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3480
+X-Warn: EHLO/HELO not verified: Remote host 40.107.92.41
+ (mail-bn7nam10on2041.outbound.protection.outlook.com) incorrectly presented
+ itself as NAM10-BN7-obe.outbound.protection.outlook.com
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -72,118 +139,158 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Walker <awalker@ixsystems.com>
+From: Krishna Harathi via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Krishna Harathi <krishna.harathi@storagecraft.com>
 Cc: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Depending on the situation, you may need "winbind enum users =3D yes" and
-"winbind enum groups =3D yes" in your smb.conf for AD user quotas to be
-enumerated. It might be nice to have some mechanism to override the default
-user quota enumeration method in Samba. For example "zfs userspace
-<dataset>" and "zfs groupspace <dataset>" will enumerate user / group
-quotas on a given dataset (and the equivalent can be obtained (though not
-trivially easily) through libzfs.
+--_004_E40C01D99EC64C85A53503B220BDB12Fstoragecraftcom_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Andrew
+QW5kcmV3IOKAkyBUcmllZCB3aXRoICJ3aW5iaW5kIGVudW0gdXNlcnMgPSB5ZXMiIGFuZCAid2lu
+YmluZCBlbnVtIGdyb3VwcyA9IHllcyIgY29uZmlndXJhdGlvbiwgbm8gY2hhbmdlIG9yIGltcHJv
+dmVtZW50Lg0KDQpSb3dsYW5kIOKAkyBzbWIuY29uZiBhdHRhY2hlZC4NCg0KUmVnYXJkcy4NCkty
+aXNobmEgSGFyYXRoaQ0KDQoNCkZyb206IEFuZHJldyBXYWxrZXIgPGF3YWxrZXJAaXhzeXN0ZW1z
+LmNvbT4NCkRhdGU6IFdlZG5lc2RheSwgTWF5IDI3LCAyMDIwIGF0IDQ6NDUgUE0NClRvOiBLcmlz
+aG5hIEhhcmF0aGkgPGtyaXNobmEuaGFyYXRoaUBzdG9yYWdlY3JhZnQuY29tPg0KQ2M6IFJvd2xh
+bmQgcGVubnkgPHJwZW5ueUBzYW1iYS5vcmc+LCBJc2FhYyBCb3VrcmlzIHZpYSBzYW1iYS10ZWNo
+bmljYWwgPHNhbWJhLXRlY2huaWNhbEBsaXN0cy5zYW1iYS5vcmc+DQpTdWJqZWN0OiBSZTogU2Ft
+YmEgdXNlciBxdW90YSBpbXBsZW1lbnRhdGlvbiBxdWVzdGlvbg0KDQoNCioqKkVYVEVSTkFMIFNF
+TkRFUi4gT25seSBvcGVuIGxpbmtzIGFuZCBhdHRhY2htZW50cyBmcm9tIGtub3duIHNlbmRlcnMu
+IERPIE5PVCBwcm92aWRlIHlvdXIgdXNlcm5hbWUgb3IgcGFzc3dvcmQuKioqDQpEZXBlbmRpbmcg
+b24gdGhlIHNpdHVhdGlvbiwgeW91IG1heSBuZWVkICJ3aW5iaW5kIGVudW0gdXNlcnMgPSB5ZXMi
+IGFuZCAid2luYmluZCBlbnVtIGdyb3VwcyA9IHllcyIgaW4geW91ciBzbWIuY29uZiBmb3IgQUQg
+dXNlciBxdW90YXMgdG8gYmUgZW51bWVyYXRlZC4gSXQgbWlnaHQgYmUgbmljZSB0byBoYXZlIHNv
+bWUgbWVjaGFuaXNtIHRvIG92ZXJyaWRlIHRoZSBkZWZhdWx0IHVzZXIgcXVvdGEgZW51bWVyYXRp
+b24gbWV0aG9kIGluIFNhbWJhLiBGb3IgZXhhbXBsZSAiemZzIHVzZXJzcGFjZSA8ZGF0YXNldD4i
+IGFuZCAiemZzIGdyb3Vwc3BhY2UgPGRhdGFzZXQ+IiB3aWxsIGVudW1lcmF0ZSB1c2VyIC8gZ3Jv
+dXAgcXVvdGFzIG9uIGEgZ2l2ZW4gZGF0YXNldCAoYW5kIHRoZSBlcXVpdmFsZW50IGNhbiBiZSBv
+YnRhaW5lZCAodGhvdWdoIG5vdCB0cml2aWFsbHkgZWFzaWx5KSB0aHJvdWdoIGxpYnpmcy4NCg0K
+QW5kcmV3DQoNCk9uIFdlZCwgTWF5IDI3LCAyMDIwIGF0IDY6MTcgUE0gS3Jpc2huYSBIYXJhdGhp
+IHZpYSBzYW1iYS10ZWNobmljYWwgPHNhbWJhLXRlY2huaWNhbEBsaXN0cy5zYW1iYS5vcmc8bWFp
+bHRvOnNhbWJhLXRlY2huaWNhbEBsaXN0cy5zYW1iYS5vcmc+PiB3cm90ZToNCk9uIHRoZSBjb250
+cmFyeTsgbm9ybWFsbHksIHRoZXJlIGlzIG5vIHBhc3N3ZCBlbnRyeSBtYWRlIGZvciBhIEFEIHVz
+ZXIgaW4gdGhlIGxvY2FsIHBhc3N3b3JkIGZpbGUuDQoNClRoZSBzZXQgdXNlci1xdW90YSAoZm9y
+IGEgdXNlciB1c2VyLXF1b3RhIHdhcyBub3Qgc2V0IGJlZm9yZSkgaXMgd29ya2luZyBmaW5lIGFz
+IGludGVuZGVkIHdpdGhvdXQgYW55IG1hbnVhbCBhZGRpdGlvbiB0byBsb2NhbCBwYXNzd29yZCBm
+aWxlLg0KDQpJIGhhdmUgdG8gbWFudWFsbHkgYWRkIHRoZSB1aWQvZ2lkIGVudHJ5IG9mIHRoZSBT
+SUQvR0lEIG9mIHRoZSB1c2VyIGF1dGhlbnRpY2F0ZWQvYXV0aG9yaXplZCBieSBBRCwgIGluIG9y
+ZGVyIGZvciB0aGUgd2luZG93cyBjbGllbnQgdG8gbGlzdC9zaG93IHRoZSB1c2VyIHRoYXQgaGFz
+IHVzZXItcXVvdGEgYWxyZWFkeSBzZXQuDQoNCk15IHF1ZXN0aW9uIGlzIC0gaXMgaXQgZXhwZWN0
+ZWQgdG8gZmluZCB0aGUgc3Vic2V0IG9mIEFEIHVzZXJzIHdpdGggdXNlci1xdW90YSBzZXQgaW4g
+dGhlIGxvY2FsIHBhc3N3b3JkIGZpbGUgPw0KSSBhbSB0cnlpbmcgdG8gZmlndXJlIG91dCBpZiB0
+aGVyZSBpcyBhbnkgb3RoZXIgd2F5IHRvIGFjY29tcGxpc2ggd2luZG93cyBjbGllbnQgbGlzdGlu
+ZyBleGlzdGluZyBxdW90YSB3aXRob3V0IHRoaXMgbWFudWFsIGludGVydmVudGlvbi4NCkJ1dCBp
+ZiB0aGlzIGlzIGV4cGVjdGVkLCBJIHdpbGwgZmluZCBhIHdheSB0byBtYWtlIHRob3NlIGVudHJp
+ZXMgaW4gdGhlIGxvY2FsIHBhc3N3b3JkIGZpbGUgd2hlbiBhIHF1b3RhIGZvciBhIG5ldyB1c2Vy
+IGlzIHNldC4NCg0KSG9wZSB0aGlzIGV4cGxhbmF0aW9uIGhlbHBzIHRvIGRlc2NyaWJlIHRoZSBw
+cm9ibGVtIG1vcmUuIEkgd2lsbCBwb3N0IHRoZSBhY3R1YWwgc21iLmNvbmYgZmlsZSBhc2FwIChu
+b3QgYXZhaWxhYmxlIGF0IHRoaXMgbW9tZW50KS4gV2UgaGF2ZSB0aGUgImdldCBxdW90YSBjb21t
+YW5kIiBhbmQgInNldCBxdW90YSBjb21tYW5kIiB2YWx1ZXMgYW5kIEFEIHNlcnZlciB3aXRoIGlk
+bWFwICJiYWNrZW5kID0gYXV0b3JpZCIgYW5kIHJhbmdlIGNvbmZpZ3VyZWQuDQoNClJlZ2FyZHMu
+DQpLcmlzaG5hIEhhcmF0aGkNCg0KDQpPbiA1LzI3LzIwLCAxMjo1MyBQTSwgInNhbWJhLXRlY2hu
+aWNhbCBvbiBiZWhhbGYgb2YgUm93bGFuZCBwZW5ueSB2aWEgc2FtYmEtdGVjaG5pY2FsIiA8c2Ft
+YmEtdGVjaG5pY2FsLWJvdW5jZXNAbGlzdHMuc2FtYmEub3JnPG1haWx0bzpzYW1iYS10ZWNobmlj
+YWwtYm91bmNlc0BsaXN0cy5zYW1iYS5vcmc+IG9uIGJlaGFsZiBvZiBzYW1iYS10ZWNobmljYWxA
+bGlzdHMuc2FtYmEub3JnPG1haWx0bzpzYW1iYS10ZWNobmljYWxAbGlzdHMuc2FtYmEub3JnPj4g
+d3JvdGU6DQoNCiAgICAqKipFWFRFUk5BTCBTRU5ERVIuIE9ubHkgb3BlbiBsaW5rcyBhbmQgYXR0
+YWNobWVudHMgZnJvbSBrbm93biBzZW5kZXJzLiBETyBOT1QgcHJvdmlkZSB5b3VyIHVzZXJuYW1l
+IG9yIHBhc3N3b3JkLioqKg0KDQogICAgT24gMjcvMDUvMjAyMCAyMDo0MiwgS3Jpc2huYSBIYXJh
+dGhpIHZpYSBzYW1iYS10ZWNobmljYWwgd3JvdGU6DQogICAgPiBPdXIgT25lWGFmZSBGUyAgc3Vw
+cG9ydHMgc2hhcmUvZnMgbGV2ZWwgcXVvdGEgdXNpbmcgc21iLmNvbmYg4oCcc2V0IHF1b3RhIGNv
+bW1hbmTigJ0gYW5kIOKAnGdldCBxdW90YSBjb21tYW5k4oCdLg0KICAgID4NCiAgICA+IFdlIGFy
+ZSBjdXJyZW50bHkgZXh0ZW5kaW5nIHN1cHBvcnQgdG8gdXNlci1sZXZlbCBxdW90YXMgdXNpbmcg
+dGhlIHNhbWUgaW50ZXJmYWNlLCB3aGVuIFNhbWJhIHNtYmQgaXMgYW4gQUQgREMgbWVtYmVyLg0K
+ICAgID4NCiAgICA+IFNldHRpbmcgdXNlciBxdW90YSBmcm9tIGEgd2luZG93cyBjbGllbnQgaXMg
+d29ya2luZyBhcyBleHBlY3RlZC4gQnV0IG9uY2UgcXVvdGEgaXMgc2V0LCBub25lIG9mIHRoZSB1
+c2VycyBhcmUgbGlzdGVkIGluIHRoZSBxdW90YeKAmXMgcG9wLXVwIHdpbmRvdywgc28gY2Fubm90
+IGRlbGV0ZSBvciBtb2RpZnkgcXVvdGEgcHJvcGVydGllcy4gTW9yZW92ZXIsIGNyZWF0aW5nIGEg
+bmV3IHF1b3RhIGVudHJ5IGZvciB0aGUgc2FtZSB1c2VyIGlzIGdlbmVyYXRpbmcgYSDigJxxdW90
+YSBlbnRyeSBhbHJlYWR5IGV4aXN0cyBmb3IgdGhpcyB1c2Vy4oCdIGVycm9yLg0KICAgID4NCiAg
+ICA+IEJ5IHRyYWNpbmcgZ2V0L3NldCByZXF1ZXN0cyB0byBvdXIgZmlsZSBzZXJ2ZXIsIEkgc2Vl
+IHRoYXQgb3VyIEZTIHNlcnZlciBpcyByZWNlaXZpbmcgYSBnZXQgcmVxdWVzdCBmb3IgU2FtYmEg
+Zm9yIGV2ZXJ5IHVzZXIgZW50cnkgaW4gdGhlIGxvY2FsIHBhc3N3b3JkIGZpbGUsIGJ1dCBub25l
+IGZvciB0aGUgVUlEIG9mIHRoZSBEQyBtZW1iZXIgdXNlci4gQnV0IEkgZG8gc2VlIGEgZGVmYXVs
+dCBxdW90YSBnZXQgcmVxdWVzdCBmb3IgdGhlIGdyb3VwIEdJRC4NCiAgICA+DQogICAgPiBUaGUg
+cHJvYmxlbSBzZWVtcyB0byBiZSB0aGF0IHRoZSBnZXQvc2V0IGNvbW1hbmQgaW50ZXJmYWNlIGRv
+ZXMgbm90IG9idmlvdXNseSBzdXBwb3J0IGEg4oCcbGlzdOKAnSB1c2VyIHF1b3RhIGFwaSB0byB0
+aGUgaG9zdGluZyBGUy4NCiAgICA+DQogICAgPiBRdWVzdGlvbnMgb24gdGhpcyDigJMgIFdlIGNh
+biBwb3N0IGFuZCBtYW5hZ2UgdXNlciBlbnRyeSAoaG9zdC1sb2NhbCB1aWQvZ2lkKSBjb3JyZXNw
+b25kaW5nIHRvIHRoZSBEQyB1c2VyIHNpZC9naWQgd2hlbmV2ZXIgYSDigJxzZXQgdXNlciBxdW90
+YeKAnSBpcyByZWNlaXZlZC4gSSBkaWQgdmVyaWZ5IHRoYXQgd2hlbiBhbiBlbnRyeSBpcyBtYWRl
+IG1hbnVhbGx5LCB3aW5kb3dzIHVzZXIgcXVvdGEgd29ya2Zsb3cgYmVoYXZlcyBhcyBleHBlY3Rl
+ZC4gSXMgdGhlIHByb2JsZW0gYXNzdW1wdGlvbiBjb3JyZWN0IGFuZCBpcyB0aGlzIGEgd2F5IHRv
+IGltcGxlbWVudD8gSXMgdGhlcmUgYSBiZXR0ZXIgd2F5LCBnaXZlbiB0aGUgY29uc3RyYWludHM/
+DQogICAgPg0KICAgID4gV2UgYXJlIHVzaW5nIFNhbWJhIDQuNy4xMSBwYXRjaGVkIHdpdGggaHR0
+cHM6Ly9uYW0wMy5zYWZlbGlua3MucHJvdGVjdGlvbi5vdXRsb29rLmNvbS8/dXJsPWh0dHBzJTNB
+JTJGJTJGYnVnemlsbGEuc2FtYmEub3JnJTJGc2hvd19idWcuY2dpJTNGaWQlM0QxMzU1MyUyM2Mx
+NyZhbXA7ZGF0YT0wMSU3QzAxJTdDa3Jpc2huYS5oYXJhdGhpJTQwc3RvcmFnZWNyYWZ0LmNvbSU3
+Q2IwMGY2OGMwMjgzMjRlYTVlY2UzMDhkODAyNzdhN2MzJTdDOTlmNGUzYzliZWQ1NDQzZGJkNTMy
+YjNmMjJkNGVkZGYlN0MwJmFtcDtzZGF0YT1UNkZiQnkwNFRxU3hKJTJGRnglMkJaM25WRjI5aCUy
+Qm9IZE5FcXFJd3VaWHptMGhZJTNEJmFtcDtyZXNlcnZlZD0wPGh0dHBzOi8vbmFtMDMuc2FmZWxp
+bmtzLnByb3RlY3Rpb24ub3V0bG9vay5jb20vP3VybD1odHRwcyUzQSUyRiUyRmJ1Z3ppbGxhLnNh
+bWJhLm9yZyUyRnNob3dfYnVnLmNnaSUzRmlkJTNEMTM1NTMlMjNjMTcmZGF0YT0wMSU3QzAxJTdD
+a3Jpc2huYS5oYXJhdGhpJTQwc3RvcmFnZWNyYWZ0LmNvbSU3Q2ViYWEzODBhZmE0YjQyZWMwMjkx
+MDhkODAyOTgwMjgwJTdDOTlmNGUzYzliZWQ1NDQzZGJkNTMyYjNmMjJkNGVkZGYlN0MwJnNkYXRh
+PUpNamxISXdJM0laYjNTNkpXOE9OMCUyRmRUcFJnN0xCRndpNklOTWpMQXZZUSUzRCZyZXNlcnZl
+ZD0wPiBmaXggZm9yIDQuNy4NCiAgICA+DQogICAgPiBBbnkgaGVscCBpcyB0aGlzIGlzc3VlIGlz
+IG11Y2ggYXBwcmVjaWF0ZWQgaW4gYWR2YW5jZS4NCiAgICA+DQogICAgPiBSZWdhcmRzLg0KICAg
+ID4gS3Jpc2huYSBIYXJhdGhpDQoNCiAgICAgRnJvbSByZWFkaW5nIHRoZSBhYm92ZSwgaXQgbG9v
+a3MgbGlrZSB5b3UgYXJlIHNheWluZyB0aGF0IHlvdSBoYXZlIHRoZQ0KICAgIHNhbWUgdXNlcnMg
+aW4gL2V0Yy9wYXNzd2QgYW5kIEFELCBpcyB0aGlzIGNvcnJlY3QgPw0KDQogICAgQ2FuIHlvdSBh
+bHNvIHBsZWFzZSBwb3N0IHRoZSBlbnRpcmUgc21iLmNvbmYgeW91IGFyZSB1c2luZyBvbiB0aGUg
+T25lWGFmZS4NCg0KICAgIFJvd2xhbmQNCg0KDQoNCg==
 
-On Wed, May 27, 2020 at 6:17 PM Krishna Harathi via samba-technical <
-samba-technical@lists.samba.org> wrote:
+--_004_E40C01D99EC64C85A53503B220BDB12Fstoragecraftcom_
+Content-Type: application/octet-stream; name="smb.conf"
+Content-Description: smb.conf
+Content-Disposition: attachment; filename="smb.conf"; size=2187;
+	creation-date="Thu, 28 May 2020 01:27:14 GMT";
+	modification-date="Thu, 28 May 2020 01:27:14 GMT"
+Content-ID: <CD1F67ABB23B704B96F0DEB06476AA7F@namprd11.prod.outlook.com>
+Content-Transfer-Encoding: base64
 
-> On the contrary; normally, there is no passwd entry made for a AD user in
-> the local password file.
->
-> The set user-quota (for a user user-quota was not set before) is working
-> fine as intended without any manual addition to local password file.
->
-> I have to manually add the uid/gid entry of the SID/GID of the user
-> authenticated/authorized by AD,  in order for the windows client to
-> list/show the user that has user-quota already set.
->
-> My question is - is it expected to find the subset of AD users with
-> user-quota set in the local password file ?
-> I am trying to figure out if there is any other way to accomplish windows
-> client listing existing quota without this manual intervention.
-> But if this is expected, I will find a way to make those entries in the
-> local password file when a quota for a new user is set.
->
-> Hope this explanation helps to describe the problem more. I will post the
-> actual smb.conf file asap (not available at this moment). We have the "ge=
-t
-> quota command" and "set quota command" values and AD server with idmap
-> "backend =3D autorid" and range configured.
->
-> Regards.
-> Krishna Harathi
->
->
-> =EF=BB=BFOn 5/27/20, 12:53 PM, "samba-technical on behalf of Rowland penn=
-y via
-> samba-technical" <samba-technical-bounces@lists.samba.org on behalf of
-> samba-technical@lists.samba.org> wrote:
->
->     ***EXTERNAL SENDER. Only open links and attachments from known
-> senders. DO NOT provide your username or password.***
->
->     On 27/05/2020 20:42, Krishna Harathi via samba-technical wrote:
->     > Our OneXafe FS  supports share/fs level quota using smb.conf =E2=80=
-=9Cset
-> quota command=E2=80=9D and =E2=80=9Cget quota command=E2=80=9D.
->     >
->     > We are currently extending support to user-level quotas using the
-> same interface, when Samba smbd is an AD DC member.
->     >
->     > Setting user quota from a windows client is working as expected. Bu=
-t
-> once quota is set, none of the users are listed in the quota=E2=80=99s po=
-p-up
-> window, so cannot delete or modify quota properties. Moreover, creating a
-> new quota entry for the same user is generating a =E2=80=9Cquota entry al=
-ready
-> exists for this user=E2=80=9D error.
->     >
->     > By tracing get/set requests to our file server, I see that our FS
-> server is receiving a get request for Samba for every user entry in the
-> local password file, but none for the UID of the DC member user. But I do
-> see a default quota get request for the group GID.
->     >
->     > The problem seems to be that the get/set command interface does not
-> obviously support a =E2=80=9Clist=E2=80=9D user quota api to the hosting =
-FS.
->     >
->     > Questions on this =E2=80=93  We can post and manage user entry (hos=
-t-local
-> uid/gid) corresponding to the DC user sid/gid whenever a =E2=80=9Cset use=
-r quota=E2=80=9D
-> is received. I did verify that when an entry is made manually, windows us=
-er
-> quota workflow behaves as expected. Is the problem assumption correct and
-> is this a way to implement? Is there a better way, given the constraints?
->     >
->     > We are using Samba 4.7.11 patched with
-> https://nam03.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fbugzi=
-lla.samba.org%2Fshow_bug.cgi%3Fid%3D13553%23c17&amp;data=3D01%7C01%7Ckrishn=
-a.harathi%40storagecraft.com%7Cb00f68c028324ea5ece308d80277a7c3%7C99f4e3c9b=
-ed5443dbd532b3f22d4eddf%7C0&amp;sdata=3DT6FbBy04TqSxJ%2FFx%2BZ3nVF29h%2BoHd=
-NEqqIwuZXzm0hY%3D&amp;reserved=3D0
-> fix for 4.7.
->     >
->     > Any help is this issue is much appreciated in advance.
->     >
->     > Regards.
->     > Krishna Harathi
->
->      From reading the above, it looks like you are saying that you have t=
-he
->     same users in /etc/passwd and AD, is this correct ?
->
->     Can you also please post the entire smb.conf you are using on the
-> OneXafe.
->
->     Rowland
->
->
->
->
->
+W2dsb2JhbF0KbWFuZ2xlZCBuYW1lcyA9IG5vCmNsdXN0ZXJpbmcgPSB5ZXMKaWRtYXAgY29uZmln
+ICogOiBiYWNrZW5kID0gdGRiCndvcmtncm91cCA9IEZPUkVTVDEKZG9zIGZpbGVtb2RlID0geWVz
+CndpbmJpbmQgdXNlIGRlZmF1bHQgZG9tYWluID0geWVzCnN0b3JlIGRvcyBhdHRyaWJ1dGVzID0g
+eWVzCndpbmJpbmQgZW51bSB1c2VycyA9IG5vCndpbmJpbmQgZW51bSBncm91cHMgPSBubwp0ZW1w
+bGF0ZSBob21lZGlyID0gTm9uZQptYXggY29ubmVjdGlvbnMgPSAyMDAwCnBvc2l4IGxvY2tpbmcg
+PSBubwpzZXJ2ZXIgcm9sZSA9IG1lbWJlciBzZXJ2ZXIKZGVhZHRpbWUgPSA1CmVuYWJsZSBjb3Jl
+IGZpbGVzID0gbm8KdW5peCBwYXNzd29yZCBzeW5jID0gbm8KZGVidWcgcGlkID0geWVzCnByZWZl
+cnJlZCBtYXN0ZXIgPSBubwpsb2FkIHByaW50ZXJzID0gbm8KbmV0YmlvcyBuYW1lID0gS3Jpc2hu
+YS01MDAwNApzZXJ2ZXIgbWluIHByb3RvY29sID0gU01CMgpkb21haW4gbWFzdGVyID0gbm8KcmVh
+bG0gPSBGT1JFU1QxLkxPQ0FMCm1heCBzbWJkIHByb2Nlc3NlcyA9IDIwMDAKaWRtYXAgY29uZmln
+ICogOiByYW5nZSA9IDIwMDAwMDAtMjk5OTk5OQptYXggdHRsID0gMzAKY2FjaGUgZGlyZWN0b3J5
+ID0gL3Zhci90bXAvc2FtYmEvY2FjaGUKc2VydmVyIHN0cmluZyA9ICVoIHNlcnZlcgpzaGFyZTpm
+YWtlX2ZzY2FwcyA9IDE5MgpwYXNzd29yZCBzZXJ2ZXIgPSAqCmRpc2FibGUgc3Bvb2xzcyA9IHll
+cwpzdGF0ZSBkaXJlY3RvcnkgPSAvdmFyL3RtcC9zYW1iYS92YXIvbG9ja3MKdGVtcGxhdGUgc2hl
+bGwgPSBOb25lCmRucyBwcm94eSA9IG5vCnVuaXggZXh0ZW5zaW9ucyA9IHllcwppbmhlcml0IHBl
+cm1pc3Npb25zID0geWVzCmFsbG93IHRydXN0ZWQgZG9tYWlucyA9IHllcwpsb2cgbGV2ZWwgPSAy
+IHdpbmJpbmQ6MgpwcmludGNhcCBuYW1lID0gL2Rldi9udWxsCnNlY3VyaXR5ID0gYWRzCnByaXZh
+dGUgZGlyID0gL2V4YWJsb3gvY3RkYi9wZXJzaXN0ZW50CmlkbWFwIGNvbmZpZyAqOiBiYWNrZW5k
+ID0gYXV0b3JpZAppZG1hcCBjb25maWcgKjogcmFuZ2UgPSAxMDAwMDAwMC0yMDIwMDAwMDAwCmlk
+bWFwIGNvbmZpZyAqOiByYW5nZXNpemUgPSAxMDAwMDAwMDAKbWF4IGxvZyBzaXplID0gMjA0OApn
+ZXQgcXVvdGEgY29tbWFuZCA9IC9vcHQvZXhhYmxveC9iaW4vZXhhX2dldHF1b3RhCnNldCBxdW90
+YSBjb21tYW5kID0gL29wdC9leGFibG94L2Jpbi9leGFfc2V0cXVvdGEKW1B1YmxpY10Kc2hhZG93
+OiBmb3JtYXQgPSAlWS0lbS0lZC0lSC4lTS4lUwpzaGFkb3c6IHNuYXBkaXIgPSBTbmFwc2hvdApz
+aGFkb3c6IHNvcnQgPSBkZXNjCmRpcmVjdG9yeSBtYXNrID0gMjc3NwphZG1pbiB1c2VycyA9ICIr
+Rk9SRVNUMVxEb21haW4gQWRtaW5zIgpmb3JjZSBjcmVhdGUgbW9kZSA9IDI3NzcKaGlkZSB1bnJl
+YWRhYmxlID0gbm8Kc2hhZG93OiBsb2NhbHRpbWUgPSB5ZXMKZm9yY2UgZGlyZWN0b3J5IG1vZGUg
+PSAyNzc3CmFpbyByZWFkIHNpemUgPSAxMDI0Cmd1ZXN0IG9rID0geWVzCmFpb19wdGhyZWFkOmFp
+byBudW0gdGhyZWFkcyA9IDE2CmNhc2Ugc2Vuc2l0aXZlID0geWVzCnBhdGggPSAvZXhwb3J0cy9Q
+dWJsaWMKcmVhZCBvbmx5ID0gbm8KdmZzIG9iamVjdHMgPSBhY2xfeGF0dHIgc2hhZG93X2NvcHky
+IGh5cGVydiBhaW9fcHRocmVhZAphaW8gd3JpdGUgc2l6ZSA9IDEwMjQKY3JlYXRlIG1hc2sgPSAy
+Nzc3CltUZXN0UV0Kc2hhZG93OiBmb3JtYXQgPSAlWS0lbS0lZC0lSC4lTS4lUwpzaGFkb3c6IHNu
+YXBkaXIgPSBTbmFwc2hvdApzaGFkb3c6IHNvcnQgPSBkZXNjCmRpcmVjdG9yeSBtYXNrID0gMjc3
+NwphZG1pbiB1c2VycyA9ICIrRk9SRVNUMVxEb21haW4gQWRtaW5zIiAKZm9yY2UgY3JlYXRlIG1v
+ZGUgPSAyNzc3CmhpZGUgdW5yZWFkYWJsZSA9IG5vCnNoYWRvdzogbG9jYWx0aW1lID0geWVzCmZv
+cmNlIGRpcmVjdG9yeSBtb2RlID0gMjc3NwphaW8gcmVhZCBzaXplID0gMTAyNApndWVzdCBvayA9
+IG5vCmFpb19wdGhyZWFkOmFpbyBudW0gdGhyZWFkcyA9IDE2CmNhc2Ugc2Vuc2l0aXZlID0geWVz
+CnBhdGggPSAvZXhwb3J0cy9UZXN0UQpyZWFkIG9ubHkgPSBubwp2ZnMgb2JqZWN0cyA9IGFjbF94
+YXR0ciBzaGFkb3dfY29weTIgaHlwZXJ2IGFpb19wdGhyZWFkCmFpbyB3cml0ZSBzaXplID0gMTAy
+NApjcmVhdGUgbWFzayA9IDI3NzcK
+
+--_004_E40C01D99EC64C85A53503B220BDB12Fstoragecraftcom_--
+
