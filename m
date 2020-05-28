@@ -2,38 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CDFD1E53D2
-	for <lists+samba-technical@lfdr.de>; Thu, 28 May 2020 04:20:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD82F1E53EB
+	for <lists+samba-technical@lfdr.de>; Thu, 28 May 2020 04:30:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Date:Subject;
-	bh=rRGDFA7Ebbty31yxR1LJTaCiMH44Ed0HOaQCvRb/TcM=; b=3FWCPE2bYj3/2iYCbnfsE+gPL8
-	nGyabUcbPPJ8U5qOcX2XoOHp9uRNpk3tZXyxkh4o3EEgzGA+xE7nMtadsjWgyP1qTNHHkl8X9Y+LY
-	QLZ/59PfpvYDxl0upA83TnVjeKwGIzv/s96Y1wNmBIjpXZH92bZmlLbDAXK/Ha/4ppSPrhY/Niwgd
-	2fxh/wHRViPkLCeWieFySpgpQ9SSB2P3fEWG/f8kUPsvj5vECD3fB5E41Pyxsz7rY7FEOPM/86oKP
-	z8vLfezCaFuMNNCXNhxXmiuD/qDix4oF+mtApYfBE/o3raN+uFEk5rV8S15RuiGrVpDIL4sQwDRiA
-	Fa+tSKRw==;
-Received: from localhost ([::1]:29714 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=dsA5DQtjVtuvoSu4Yc+ScuXXNB1gkA9aksQGwRsSSVw=; b=Dw+N0AlzmJkvXpWBD/uy6yU2yI
+	J4cRBQ2kMUPLXKyZRQwbXYZg7RRCCahO/xp7AKpWUXV2iMNExHCDs+f4KRd4K/GNcZb3uu6jn8hvl
+	PSgmmZ7TnwSqvWLnu4eRfSVeMQNnFKguW4aRm84Hm64wmS+K9dRvXwoxfzaFitKXBTSBTbKW9M/3w
+	qUxYOBdAbzkqq2J1fCZRBKUeyfZAHocRMuAgyG8PBWF4VWgq/npEP8jGduN48TNcSONHaY0EKdc/i
+	4IUm/KYRw1k6HcelO7GLSymXbYLzcR+nyQexjCNPlunO7FLgAkQlpJDpUkO25u98OoC+WradfyP5D
+	Ju0+5rcA==;
+Received: from localhost ([::1]:30446 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1je89e-0067FX-0D; Thu, 28 May 2020 02:20:22 +0000
-Received: from mx2.suse.de ([195.135.220.15]:42570) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1je89P-0067FQ-Nh
- for samba-technical@lists.samba.org; Thu, 28 May 2020 02:20:12 +0000
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 9AE64B24D;
- Thu, 28 May 2020 02:20:06 +0000 (UTC)
-Message-Id: <0326D940-8BDC-4FE2-A7D4-00276A982979@suse.de>
-Content-Type: multipart/mixed;
- boundary="Apple-Mail=_4BB9A484-59C1-48E9-9504-59948FD64305"
-Mime-Version: 1.0 (Mac OS X Mail 13.4 \(3608.80.23.2.2\))
+	id 1je8Ir-0067Ln-6i; Thu, 28 May 2020 02:29:53 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64056) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1je8Im-0067Lg-13
+ for samba-technical@lists.samba.org; Thu, 28 May 2020 02:29:50 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=dsA5DQtjVtuvoSu4Yc+ScuXXNB1gkA9aksQGwRsSSVw=; b=KQPo6D+meckUyP+tIgA1x+s8sq
+ GDBdxiTAbnmKVbiCxWg0vaKYOvBEinRodXXfLXuCnS7PTuRjQw00RBRdDsJYAksM5BwFxEV6yVhgh
+ ztwnPrBr1MPomfC1stjK3FPYGKev89l7Ze7mhESTD4z7d72oppoYpFhFHkO944UnVHnXWQVei83xl
+ RkerS+QgOgXTz5G+gikdV3mE5XwOjUSywsOcfe1W2XTr7Wv7P1aqAcdjaT8qksSyDLl60UjWWiH5b
+ DVfVeMpVuoTFZD+RSwd3QYYVe3OVmYb6agWA9h9srr56t4QcGzOnMyQUJfXD0NLTCB8KXiUV0RW4e
+ mbcr5ITuYD1nPIJwJ1tmFhefzbrucWPzCUyu0tttdKMKL1o5okUnHP9gPRk/Nnbc5V+To2OXHXxWo
+ YQTEWtAOH3eRGBZP3N5iONqrg06lfZ3vLc1xCbXUK1rWYam+PhDJA0sgJ/vVUWnCM2Etbhj8PqyZb
+ wtcGq2Hzl27rHkJSFMzmGsOg;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1je8Ij-00054v-EC; Thu, 28 May 2020 02:29:46 +0000
+Message-ID: <7df7865c02e756254dfc9af87ad5873707fc82aa.camel@samba.org>
 Subject: Re: Schema updates and modern Samba AD
-Date: Thu, 28 May 2020 12:19:58 +1000
-In-Reply-To: <01157baedc07f140b5a253a1813137a4f16196e2.camel@samba.org>
-To: Andrew Bartlett <abartlet@samba.org>
+To: William Brown <wbrown@suse.de>
+Date: Thu, 28 May 2020 14:29:41 +1200
+In-Reply-To: <0326D940-8BDC-4FE2-A7D4-00276A982979@suse.de>
 References: <6519f23f61695e09cc6c9aa9336f69bcd8010da6.camel@samba.org>
  <E89015B7-BFCD-4731-82F9-AE09FE73C52A@suse.de>
  <01157baedc07f140b5a253a1813137a4f16196e2.camel@samba.org>
-X-Mailer: Apple Mail (2.3608.80.23.2.2)
+ <0326D940-8BDC-4FE2-A7D4-00276A982979@suse.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,182 +58,64 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: William Brown via samba-technical <samba-technical@lists.samba.org>
-Reply-To: William Brown <wbrown@suse.de>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+On Thu, 2020-05-28 at 12:19 +1000, William Brown wrote:
+> > On 27 May 2020, at 14:41, Andrew Bartlett <abartlet@samba.org>
+> > wrote:
+> > 
+> > On Wed, 2020-05-27 at 13:53 +1000, William Brown via samba-
+> > technical
+> > wrote:
+> > > > 
+> > > 
+> > > 
+> > 
+> > 
+https://docs.microsoft.com/en-us/windows/win32/ad/extending-the-schema
+> > > 
+> > > Generally, I'd say the biggest thing is that it's a one way
+> > > street -
+> > > you can add, but never remove, so that means your changes have to
+> > > be
+> > > very carefully considered, because a mistake can't easily be
+> > > undone.
+> > > 
+> > > For example, if the ssh public key schema shipped in AD, the fact
+> > > is
+> > > has a "must" not "may" on the ldapPublicKey attribute makes it
+> > > extremely hard to use in a self management scenario.
+> > > 
+> > > So my input (for what it's worth) is that schema changes should
+> > > be
+> > > considered carefully, and the consequences understood, as well as
+> > > the
+> > > ergonomics of how those changes will interface with access
+> > > controls
+> > > and that human interaction. 
+> > > 
+> > > Hope that helps,
+> > 
+> > G'Day William,
+> > 
+> > It is a wiki, feel free to craft some suitable guidance and add it!
+> 
+> Done, but I'm not able to upload files. Can you add the following for
+> me? Then I can fix up some links in the page.
 
---Apple-Mail=_4BB9A484-59C1-48E9-9504-59948FD64305
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+You are now approved, and can upload files!
 
-
-
-> On 27 May 2020, at 14:41, Andrew Bartlett <abartlet@samba.org> wrote:
->=20
-> On Wed, 2020-05-27 at 13:53 +1000, William Brown via samba-technical
-> wrote:
->>>=20
->>=20
->>=20
-> https://docs.microsoft.com/en-us/windows/win32/ad/extending-the-schema
->>=20
->> Generally, I'd say the biggest thing is that it's a one way street -
->> you can add, but never remove, so that means your changes have to be
->> very carefully considered, because a mistake can't easily be undone.
->>=20
->> For example, if the ssh public key schema shipped in AD, the fact is
->> has a "must" not "may" on the ldapPublicKey attribute makes it
->> extremely hard to use in a self management scenario.
->>=20
->> So my input (for what it's worth) is that schema changes should be
->> considered carefully, and the consequences understood, as well as the
->> ergonomics of how those changes will interface with access controls
->> and that human interaction.=20
->>=20
->> Hope that helps,
->=20
-> G'Day William,
->=20
-> It is a wiki, feel free to craft some suitable guidance and add it!
-
-Done, but I'm not able to upload files. Can you add the following for =
-me? Then I can fix up some links in the page.
-
-Thanks!=20
-
-
---Apple-Mail=_4BB9A484-59C1-48E9-9504-59948FD64305
-Content-Disposition: attachment;
-	filename=ldapcompat.ldif.txt
-Content-Type: text/plain;
-	x-unix-mode=0644;
-	name="ldapcompat.ldif.txt"
-Content-Transfer-Encoding: 7bit
-
-
-dn: CN=nsUniqueId,${SCHEMADN}
-changetype: add
-objectClass: top
-objectClass: attributeSchema
-attributeID: 2.16.840.1.113730.3.1.542
-cn: nsUniqueId
-name: nsUniqueId
-lDAPDisplayName: nsUniqueId
-description: MANDATORY: nsUniqueId compatability
-attributeSyntax: 2.5.5.10
-oMSyntax: 4
-isSingleValued: TRUE
-searchFlags: 9
-objectCategory: CN=Attribute-Schema,${SCHEMADN}
-schemaIDGUID:: PTIIe1afdUKi0To2hxU1zg==
-
-dn: CN=entryUUID,${SCHEMADN}
-changetype: add
-objectClass: top
-objectClass: attributeSchema
-attributeID: 1.3.6.1.1.16.4
-cn: entryUUID
-name: entryUUID
-lDAPDisplayName: entryUUID
-description: MANDATORY: entryUUID compatability
-attributeSyntax: 2.5.5.10
-oMSyntax: 4
-isSingleValued: TRUE
-searchFlags: 9
-objectCategory: CN=Attribute-Schema,${SCHEMADN}
-schemaIDGUID:: mqcwg4e++kmQIA2VphN1oQ==
-
-dn: CN=ldapCompatPerson,${SCHEMADN}
-changetype: add
-objectClass: top
-objectClass: classSchema
-governsID: 1.3.6.1.4.1.7165.4.2.3
-cn: ldapCompatPerson
-name: ldapCompatPerson
-description: MANDATORY: Unix LDAP compat person
-lDAPDisplayName: ldapCompatPerson
-subClassOf: top
-objectClassCategory: 3
-objectCategory: CN=Class-Schema,${SCHEMADN}
-defaultObjectCategory: CN=ldapCompatPerson,${SCHEMADN}
-mayContain: nsUniqueId
-mayContain: entryUUID
-schemaIDGUID:: 86ZQNhW9JE6cXG/Mb03K4Q==
+Andrew Bartlett
+-- 
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
 
 
---Apple-Mail=_4BB9A484-59C1-48E9-9504-59948FD64305
-Content-Disposition: attachment;
-	filename=sshpubkey.ldif.txt
-Content-Type: text/plain;
-	x-unix-mode=0644;
-	name="sshpubkey.ldif.txt"
-Content-Transfer-Encoding: 7bit
 
-dn: CN=sshPublicKey,${SCHEMADN}
-changetype: add
-objectClass: top
-objectClass: attributeSchema
-attributeID: 1.3.6.1.4.1.24552.500.1.1.1.13
-cn: sshPublicKey
-name: sshPublicKey
-lDAPDisplayName: sshPublicKey
-description: MANDATORY: OpenSSH Public key
-attributeSyntax: 2.5.5.10
-oMSyntax: 4
-isSingleValued: FALSE
-objectCategory: CN=Attribute-Schema,${SCHEMADN}
-searchFlags: 8
-schemaIDGUID:: cjDAZyEXzU+/akI0EGDW+g==
-
-dn: CN=ldapPublicKey,${SCHEMADN}
-changetype: add
-objectClass: top
-objectClass: classSchema
-governsID: 1.3.6.1.4.1.24552.500.1.1.2.0
-cn: ldapPublicKey
-name: ldapPublicKey
-description: MANDATORY: OpenSSH LPK objectclass
-lDAPDisplayName: ldapPublicKey
-subClassOf: top
-objectClassCategory: 3
-objectCategory: CN=Class-Schema,${SCHEMADN}
-defaultObjectCategory: CN=ldapPublicKey,${SCHEMADN}
-mayContain: sshPublicKey
-schemaIDGUID:: +8nFQ43rpkWTOgbCCcSkqA==
-
-
---Apple-Mail=_4BB9A484-59C1-48E9-9504-59948FD64305
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
-
-
->=20
-> Thanks,
->=20
-> Andrew Bartlett
->=20
-> --=20
-> Andrew Bartlett                       https://samba.org/~abartlet/
-> Authentication Developer, Samba Team  https://samba.org
-> Samba Developer, Catalyst IT         =20
-> https://catalyst.net.nz/services/samba
->=20
->=20
->=20
-
-=E2=80=94
-Sincerely,
-
-William Brown
-
-Senior Software Engineer, 389 Directory Server
-SUSE Labs
-
-
---Apple-Mail=_4BB9A484-59C1-48E9-9504-59948FD64305--
 
