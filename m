@@ -2,52 +2,38 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 331491E8518
-	for <lists+samba-technical@lfdr.de>; Fri, 29 May 2020 19:37:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 192351E9018
+	for <lists+samba-technical@lfdr.de>; Sat, 30 May 2020 11:34:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=J6Ytw2OORQJFHLRFThAmFyUtjF1Z1ZiUbemPp3x8XNY=; b=gtsrqpbSpJp57xnu16ORf+YwRQ
-	cNlkTjPZY1Bz85rgC0gFFUqL7v/y/Jts7QzofNYrM393oo4mrqn/Ty4O9lk7+mdFL4SCzYjeRZaU2
-	r9wKaoDv42/eNFMZL4vzN2qnlmaVa7qF1U7g/ZzloNEfAfpfiu3BWurkyGsYcgH1jsTIQ0p7Pdk/4
-	Uba2+6wTKgR0brIAOmmpZ/mCigzHkFnft7J3mL0Njxsd8C5x62YiTeQAZ5SaomqazmnR0/Y+rR45Q
-	8kvKpjFU2hjLja00V4KoMAkQBinrFZYGOclQUzkyKiZNcFjuIj8F66n5VAWBejQu2qR++xHo3q9VE
-	t8sk2Xvg==;
-Received: from localhost ([::1]:20498 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Date:Subject;
+	bh=Qm6btDygrW6tromitrt29HcnPPULE1hRIywhpsNIaAI=; b=T6FX22sdVG8oNPzxizUYt+Yobz
+	feKzKcT84DIcIySYI45vp0s8B1cWKXl3AIdsBqLne9LQCFF8UuJesZYZSlyOgDshOnrK26GKrEfNB
+	vw0bt0bttYpYNGXZ3XkGUcuAtTVTAoj1+SRRwF/Fade/KBthmULRXYNUftPveY/3wyMvrnd8UpQyi
+	6RXcCRoF6aArg414ClcNBcGXmkH2GDCho03+vRoTrWu9kV3SoHQU6g/UtCVueycMTwGoHMM1JvWp8
+	DQXbfC8VKodRzst1YhtawHyfQiJ/1JLjANH/tBa5Q8ZZuKTBHKKhSJfNeP1KzAnDLtscD1P/W8LAc
+	xgBZDPtw==;
+Received: from localhost ([::1]:43298 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jeiwQ-006LiV-E5; Fri, 29 May 2020 17:37:10 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:22636) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jeiwK-006LiN-Ow
- for samba-technical@lists.samba.org; Fri, 29 May 2020 17:37:07 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=J6Ytw2OORQJFHLRFThAmFyUtjF1Z1ZiUbemPp3x8XNY=; b=f6paxzs8KCsbTgR+3XrE5RuYbD
- uG22JBoDl4+CFs5bx23dHV4nLRwiCiTbp0UPIde0vBOemKgDmZJrUyUQnU4sOWyJMnLX0XbJ0vIrh
- IP2YwENRuUVEj8MztnkjWMGN+7eZuyjN/1oBeQrQwiXpJE9OYDzMA05IbJU6Gm4XIJw03LVVjLeqc
- Crl8ekJSW24dm4xWg90TzUTpV2CDbVYAacNz3LonKTPQ4vAAwapHMw+eT5Mx3F7Z/RG3a/sBWU+Ue
- xVT30cE/tzbJjRtAJUlueJfHoioRAgFt4ZcPG6QfG5j+mrB8zXet5893mkzNyfT7orA5YDKznftsy
- 9vSr8RpOJw2YUdBdUJUUllRzYR1lEPj0ytkWM9wHgwTFVIhD+Gm/m1skx40V/hIkQtFivcH0gwfhP
- W98s61yt9Nnsp1nYd4J0nu4S0Wp8sxfML8VtjAmUT8nT8E4CoqLxkxb89Yj1qgnSw72YbOHjNhzYn
- 10tcyiLqPbtf9vRHVA7l0r7H;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jeiwJ-00006w-Uf
- for samba-technical@lists.samba.org; Fri, 29 May 2020 17:37:04 +0000
-Subject: Re: Checking if Samba is running as an AD DC
-To: samba-technical@lists.samba.org
-References: <CAH72RCXPNq2R6p7G61OCztSrdZrqXO6G5L4azhUSgQxqT50K1A@mail.gmail.com>
- <20200529062444.GP5779@onega.vda.li>
- <277f0fe0c0f811497189aa279380702cc1228838.camel@samba.org>
- <CAH72RCV1gDMqnKS6zw1XpR9v47hLGyrTVcxL+XDhVSKQLTfgPQ@mail.gmail.com>
-Message-ID: <f2bef0b1-762e-40dc-0168-dd50776a2b85@samba.org>
-Date: Fri, 29 May 2020 18:37:01 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
-MIME-Version: 1.0
-In-Reply-To: <CAH72RCV1gDMqnKS6zw1XpR9v47hLGyrTVcxL+XDhVSKQLTfgPQ@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
+	id 1jexrn-006PxP-EG; Sat, 30 May 2020 09:33:23 +0000
+Received: from mx2.suse.de ([195.135.220.15]:58638) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1jexrh-006PxH-2S
+ for samba-technical@lists.samba.org; Sat, 30 May 2020 09:33:21 +0000
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 64538AEC2;
+ Sat, 30 May 2020 09:33:14 +0000 (UTC)
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 13.4 \(3608.80.23.2.2\))
+Subject: Re: Following Steve's Question - Re Tokens in SPNEGO
+In-Reply-To: <20200529104042.GQ5779@onega.vda.li>
+Date: Sat, 30 May 2020 19:33:07 +1000
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <CB9B11C8-E184-40F6-A035-1ED5B707E9B8@suse.de>
+References: <04593936-C78E-43E9-81EE-0311A84D21EB@suse.de>
+ <20200529104042.GQ5779@onega.vda.li>
+To: Alexander Bokovoy <ab@samba.org>
+X-Mailer: Apple Mail (2.3608.80.23.2.2)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,72 +47,87 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: William Brown via samba-technical <samba-technical@lists.samba.org>
+Reply-To: William Brown <wbrown@suse.de>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 29/05/2020 18:26, hezekiah maina via samba-technical wrote:
-> Thanks. I tried out the different ways you gave.
-> I also tried this:
-> samba-tool testparm --parameter-name=serverrole
-> which seems a little better as you don't have to provide the path to
-> smb.conf which could vary with different installations.
-> Well you can omit the samba-tool and get the same result with testparm but
-> would have to press Enter to get the desired output.
->
-> On Fri, May 29, 2020 at 9:33 AM Andrew Bartlett <abartlet@samba.org> wrote:
->
->> On Fri, 2020-05-29 at 09:24 +0300, Alexander Bokovoy via samba-
->> technical wrote:
->>> On to, 28 touko 2020, hezekiah maina via samba-technical wrote:
->>>> Hello everyone,
->>>> How else should I check that Samba is running as an AD DC apart
->>>> from
->>>> looking at the smb.conf file?
->>>> Is there a process that gives me this kind of information?
->>> For Cockpit integration you need to use systemd services to check
->>> whether a service is configured and enabled/started since that
->>> environment will anyway have systemd configured.
->>>
->>> systemctl is-enabled samba
->>> systemctl is-active samba
->>>
->>> For the config file checks, you can use 'testparm' utility:
->>>
->>> $ testparm --show-all-parameters -s|grep 'server role'
->>> server role=P_ENUM,auto|standalone server|standalone|member
->>> server|member|classic primary domain controller|classic backup domain
->>> controller|active directory domain controller|domain controller|dc,
->>>
->>> On non-DC system:
->>> $ testparm --section-name global --parameter-name 'server role' -s
->>> 2>/dev/null
->>> auto
->>>
->>> Checking configuration is needed anyway because you get information
->>> about the actual server role, not just that a service is running.
->> G'Day hezekia,
->>
->> Welcome to the design session for your first bike shed!  ;-)
->>
->> Try (eg):
->> testparm st/ad_dc/etc/smb.conf -s| grep "Server Role"
->>
->> Andrew Bartlett
->> --
->> Andrew Bartlett                       https://samba.org/~abartlet/
->> Authentication Developer, Samba Team  https://samba.org
->> Samba Developer, Catalyst IT
->> https://catalyst.net.nz/services/samba
->>
->>
->>
->>
-If you must use testparm (and that will not tell you if 'samba' is 
-running), try this 'echo | testparm -s', instant output :D
 
-Rowland
 
+> On 29 May 2020, at 20:40, Alexander Bokovoy via samba-technical =
+<samba-technical@lists.samba.org> wrote:
+>=20
+> Hi William,
+>=20
+> On pe, 29 touko 2020, William Brown via samba-technical wrote:
+>> Hi there,
+>>=20
+>> Thinking to Steve's question yesterday, it would be interesting to
+>> know from the experts on this mailing list an answer. How what would
+>> opaque token authentication look like in Samba? How would a passdb
+>> support this style of authentication? How would a client get the =
+token
+>> to pass through?
+>>=20
+>> It would be great to know more about this and explore some of these =
+thoughts.=20
+>=20
+> My current thinking is around reusing existing infrastructure in the
+> protocol. SMB3 authenticates with SPNEGO[1]. SPNEGO allows to have =
+multiple
+> authentication mechanisms advertised, with most common ones being krb5
+> and NTLM. These are not the only ones, a common extension mechanism
+> called NEGOEX can be used as well[2].
+>=20
+> NEGOEX is basically a way to tunnel some method of authentication =
+known
+> to both client and server through SPNEGO. It doesn't need need to
+> require a third party (like KDC) to broker an authenticity of the
+> parties. MIT Kerberos supports NEGOEX since version 1.18, there are =
+also
+> patches for Heimdal.
+
+How would the currest tdb passdb or ldapsam work with this? A hook where =
+the content of the negoex is sent to that module?
+
+IE think bearer tokens from oauth being passed in that can be validate, =
+or a saml assertion where you can check as the passdb has a registered =
+handler.
+
+It would be interesting to know how a windows server + windows desktop, =
+both joined to azure AD conduct their authentication in this case, since =
+there should be no ntlm or krb involved .... =20
+
+...
+
+>  gss_inquire_name(..., &attrs);
+>=20
+>  find an attribute with the right name
+>=20
+>  gss_get_name_attribute(..., name, attribute, ..., &value, ...);
+>=20
+>  extract NT security token or something that can be used to construct
+>  it from the value with the right name
+>=20
+>=20
+> [1] =
+https://docs.microsoft.com/en-us/openspecs/windows_protocols/MS-SPNG/d2ccb=
+21f-be95-426e-88b3-020bd39158f1
+> [2] =
+https://docs.microsoft.com/en-us/openspecs/windows_protocols/MS-SPNG/fe1b1=
+adc-07f6-40c0-a36b-b4f75be2695e
+>=20
+> --=20
+> / Alexander Bokovoy
+>=20
+
+=E2=80=94
+Sincerely,
+
+William Brown
+
+Senior Software Engineer, 389 Directory Server
+SUSE Labs
 
 
