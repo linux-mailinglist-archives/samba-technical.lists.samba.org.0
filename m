@@ -2,56 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A93891E945E
-	for <lists+samba-technical@lfdr.de>; Sun, 31 May 2020 01:04:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABBD21E968C
+	for <lists+samba-technical@lfdr.de>; Sun, 31 May 2020 11:23:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=w50qEa13vUloOZC3BoqoktatJ6h2xmJIyk0twZtAbxs=; b=tN+1lxQUjePEqtTsWWwGe+2PwT
-	H0wzP3LudREV5Jw9/se1jQjHIgZjlBUzcedaFXoRpWCNYwpkK4Dpmi1MYSD3Kj6SNwnf5qZa8K1dB
-	5qSYwqcZ6MgqQETdOODiEe6fx/U+BjjGS/dSM322fBwmFQZB2/YZr0AqHjqOOLYnk7PHCUQc40Svt
-	JBUx9C4IXJDOZwIKNym2a7cL083VmKkgLOTmsJ3JwWLammtaltFaf0vqbQ62vnYu8lyTfMWwTw6oi
-	g9zNFed4x19cd34hv/sdnaQy2d4tprQyfYJ4B9cliuBDYAfMWFUL3JP3JkFnXRL1KLFQuuloiE6E2
-	AyVi5EkA==;
-Received: from localhost ([::1]:51612 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=2T093uOvWpyWP4QA3ihuv9GG9RrLOlQKH2KiBilOi4Q=; b=MjirNLc2uWq7k0Hw2gKHewAWHD
+	JFbzaQFIKmPzVl7Q7It3NaWWH3upMBXH/F4CDmXIFHKerezH3Sa26i7YA+cDffDk0GnsXDhHOHDiR
+	AbHl7rtZYluZQRV5iEXZ4feP02MR0kV39hi2Nixdc1YLT6Km40ZgrDS9chk3k8nFlM6uHLdstUrQZ
+	sfNCxj47uDqzI5oJVRPWI52ocUabGynxLgL63mNjoVWe6NWxbs5AbBaMmeKnU+p6CbFhDbu+oWBE7
+	6MV8gOI2Menz+IN4ubLsqbFniLxmpWT1oP64ys0uROqJKtOLFgc1TUwpXkiaNGBFPRXPureD/NExt
+	RssvSaVA==;
+Received: from localhost ([::1]:52482 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jfAW2-006Rmj-Ef; Sat, 30 May 2020 23:03:46 +0000
-Received: from mail-yb1-xb2c.google.com ([2607:f8b0:4864:20::b2c]:39151) 
+	id 1jfKAM-006Sgo-Pc; Sun, 31 May 2020 09:22:02 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26126) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jfAVu-006Rmc-NY
- for samba-technical@lists.samba.org; Sat, 30 May 2020 23:03:43 +0000
-Received: by mail-yb1-xb2c.google.com with SMTP id p123so3153629yba.6
- for <samba-technical@lists.samba.org>; Sat, 30 May 2020 16:03:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=w50qEa13vUloOZC3BoqoktatJ6h2xmJIyk0twZtAbxs=;
- b=Gzcwn9kaG+5CI1ixYQ0vDz38fVpWnZhILeINeZn1TJDlzgXCFSr8st5NQJxdSCEvIL
- VbQ10DUBcSWrlHkbi689NgMdEGmWoYDCtsVGpMmhbuFoteF/8DFAOUCpboYOnit+kjxz
- CXgs6U7PHVAMo2BPrCjt57lt1Q4aXtlw4XZbMi1va3pwO4eNwJu61f7DwmE5OQtm/59c
- 0frsikuGwuPHg4IXD+S9uUugGy1R97rGmj0imEk4qZx7KtPC8iuO2Ew4IPQi+M+p+e9c
- b89pizippDbjo7ol9K7C2JrNjORzzUhVqLkw8MDl+IoimnkUhTrw5KpRAUqSOG1XBxKA
- YVDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=w50qEa13vUloOZC3BoqoktatJ6h2xmJIyk0twZtAbxs=;
- b=VzYTqdolC04vhkuBi1LTdcD0pzhfz5iO3VuY4yTnZStJbip7Pbor7NNUBbyvSsGkG0
- bCUl4HFzMsYamM3BmeHVO9uSVpMFkuw9rpqfcrKfMxSOVDXMSoXRW4r5V1yGJ078IVin
- BBnNWQjkboB3qtdfJQVJ5CY1eUvSF9q5pFoQ614SzKAQCclilC3lgwvbWu7tZwjMncHG
- MIMXikLmTHE6lChxwhTbBKCpRLDk7Y8543kh84V8Iykmmbde4DVnaQYuxbYxdrmRsy/o
- XTRmBGIXa1FmpM1TKRj5ZE7ILY4kK8BkcQS3VCGyxapclKzBkyVI0fg0TrBHJlysBd5C
- w0eg==
-X-Gm-Message-State: AOAM533uOWV/QY8GbNXOuJj9Eq04CG/TvGf9ViVMB+YsqAXd12ve3Dm3
- 32KMG3TFmrkFwk+GH54VZ1W8gbtOszVnTtH3ucCv0LVZZ80=
-X-Google-Smtp-Source: ABdhPJwI+A0RUlzBfmkegGN6PxBvYGrcsud8u4sfgI7BV9LBt/WF4psEzK+xxD/0AGy2J2O7iOD+oFzcgoQsE0DFphA=
-X-Received: by 2002:a25:3bd8:: with SMTP id i207mr3999811yba.167.1590879817014; 
- Sat, 30 May 2020 16:03:37 -0700 (PDT)
+ (Exim) id 1jfKAA-006Sgh-Cx
+ for samba-technical@lists.samba.org; Sun, 31 May 2020 09:22:00 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=2T093uOvWpyWP4QA3ihuv9GG9RrLOlQKH2KiBilOi4Q=; b=wZSQ+pktn8Ku1z1n6+XlvpMJHi
+ npR1snX2NqTeAeGqcODQoeUC+imgTKaRjeaMoTyMVq8vPV2gmMNIDZ5jOkysnKxouxm/kHYG5UyoY
+ OkhnFSRIxuduMhj8irIOCcL/stifoKG7pS3hTNmgwxsZbCWzoJ8f5D/35eC2ZpR3r4LmbvMv4livw
+ l5F7RlRB1MyD2y1JuWDU64M26GiT+zF6HRiMhy3C1iDQFCZPcP1FSWoNB0E+UjEBVsC4QPAaeUYzj
+ edg8OV8bLO0oeF3z9AQthtBnWAz3mWA6I66eECdTQlT8ggXIh3ycQNgend+Nyo0A6pBPYO1ccJrDc
+ e4s21wZgascxCMOocJ02xHwnYIrIalTxcowhzMuDrSQt+ciScr6+XyR13WcEjACwPE/xdFeNjCn7+
+ 9nt6Iuv6ECc1TwJusyhde3p/oi0Q7PfsewDuVqACjAZbuiO/Wup0QQFoYPdsgua+KDXAdsmMx24m4
+ Hs0wJo2Tr1XnJK2SRwbktZOR;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jfKA9-0002IV-Be; Sun, 31 May 2020 09:21:49 +0000
+Date: Sun, 31 May 2020 12:21:47 +0300
+To: William Brown <wbrown@suse.de>
+Subject: Re: Following Steve's Question - Re Tokens in SPNEGO
+Message-ID: <20200531092147.GT5779@onega.vda.li>
+References: <04593936-C78E-43E9-81EE-0311A84D21EB@suse.de>
+ <20200529104042.GQ5779@onega.vda.li>
+ <CB9B11C8-E184-40F6-A035-1ED5B707E9B8@suse.de>
+ <20200530121450.GR5779@onega.vda.li>
+ <8795B020-51D1-40B4-98B0-A60A77B39808@suse.de>
 MIME-Version: 1.0
-Date: Sat, 30 May 2020 18:03:26 -0500
-Message-ID: <CAH2r5muqPLibwgguZ+gJBD6HumSDHJYO-wFBxExV_5jYNe6=8w@mail.gmail.com>
-Subject: [PATCH][SMB3] multichannel: move channel selection in function
-To: CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="0000000000005fc81805a6e59214"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <8795B020-51D1-40B4-98B0-A60A77B39808@suse.de>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,82 +58,93 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Alexander Bokovoy <ab@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---0000000000005fc81805a6e59214
-Content-Type: text/plain; charset="UTF-8"
+On la, 30 touko 2020, William Brown wrote:
+> > 
+> > 
+> >> IE think bearer tokens from oauth being passed in that can be
+> >> validate, or a saml assertion where you can check as the passdb has a
+> >> registered handler.
+> > 
+> > Right. You wouldn't push SAML assertion or bearer token to PASSDB.
+> > Instead, in negoex plugin you would perform mechanism-specific lookup of
+> > the details and associate that with the security context in a way
+> > expected by higher level GENSEC code in Samba. This is similar to how
+> > Kerberos part of GENSEC expects to pull PAC record and parse it further.
+> > Or GENSEC's NTLM code extracts security token and parses it further.
+> 
+> <snip>
+> 
+> > 
+> >> It would be interesting to know how a windows server + windows
+> >> desktop, both joined to azure AD conduct their authentication in this
+> >> case, since there should be no ntlm or krb involved ....  
+> > 
+> > They still involve Kerberos, with PKINIT-based authentication using
+> > certificates bound to machine TPMs. These certificates are issued and
+> > tied into information about those machines in Azure AD. There is a
+> > reason why Microsoft Windows logo certification requires TPM from a
+> > hardware platform.
+> > 
+> > See details here for machine enrollment:
+> > https://docs.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/hello-how-it-works-device-registration
+> > 
+> > and for user provisioning of a two-factor credential:
+> > https://docs.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/hello-how-it-works-provisioning
+> > 
+> > and for user authentication:
+> > https://docs.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/hello-how-it-works-authentication
+> 
+> That's only the hybrid AD + Azure AD case isn't it?
 
-Wasn't sure if these had been sent to the list again.
+My understanding it is not only for that but this is the only place I
+found it described in detail for all types of scenarios.
 
-This commit moves channel picking code in separate function.
+For non-enrolled clients two use cases of binding external identity to a
+local one: authenticating with a cloud auth provider and trusting a user
+from a different host are covered with PKU2U which uses NEGOEX:
+https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd560634(v=ws.10)
 
-    Signed-off-by: Aurelien Aptel <aaptel@suse.com>
-    Signed-off-by: Steve French <stfrench@microsoft.com>
+> > Windows does everything in terms of NT security token that needs to
+> > be created for the session setup on Windows side. For Kerberos and NTLM
+> > the token's content is based on the content of PAC in Kerberos
+> > ticket and security token from NTLM exchange correspondingly. It is
+> > then amended with whatever local details are needed in the local security
+> > authority (add local groups, for example).
+> > 
+> > In the user authentication link above you might think there is no
+> > Kerberos involved in the first case (Azure AD join authentication to
+> > Azure AD) but there an encrypted session key is returned by Azure AD
+> > through the cloud AP provider which is then decoded by the cloud
+> > authentication security support provider (SSPI module) using the
+> > device's transport key.
+> 
+> <snip>
+> 
+> > Essentially that online identity is bound to a local account you have
+> > and then reuses details from LSA after successful authentication has
+> > been done via interactive logon with the help of SSPI extension. In
+> > practice then means triggering use of that extension via SPNEGO NEGOEX
+> > offer.
+> 
+> Do you have any documents on the cloud SSP functionality? What details does it reuse?
+> 
+> It seems like being able to support this extension would be the answer to Steve's question ...
 
+This is just standard Windows SSPI stuff. It is built around using
+NEGOEX internally to call out to other providers but in general there is
+nothing different to standard SSPI API.
+
+https://docs.microsoft.com/en-us/windows/win32/secauthn/custom-security-packages
+https://docs.microsoft.com/en-us/windows/win32/secauthn/creating-custom-security-packages
+https://docs.microsoft.com/en-us/windows-server/security/windows-authentication/security-support-provider-interface-architecture#BKMK_NegoExtsSSP
 
 
 -- 
-Thanks,
-
-Steve
-
---0000000000005fc81805a6e59214
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-cifs-multichannel-move-channel-selection-in-function.patch"
-Content-Disposition: attachment; 
-	filename="0001-cifs-multichannel-move-channel-selection-in-function.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_kau8qt2u0>
-X-Attachment-Id: f_kau8qt2u0
-
-RnJvbSBhN2NkY2EyZGJkMmJhNzJkYjU5ZmZjYjFjMzk2MTViODAyMDYyMDIyIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBBdXJlbGllbiBBcHRlbCA8YWFwdGVsQHN1c2UuY29tPgpEYXRl
-OiBXZWQsIDIyIEFwciAyMDIwIDE1OjU4OjU3ICswMjAwClN1YmplY3Q6IFtQQVRDSCAxLzRdIGNp
-ZnM6IG11bHRpY2hhbm5lbDogbW92ZSBjaGFubmVsIHNlbGVjdGlvbiBpbiBmdW5jdGlvbgoKVGhp
-cyBjb21taXQgbW92ZXMgY2hhbm5lbCBwaWNraW5nIGNvZGUgaW4gc2VwYXJhdGUgZnVuY3Rpb24u
-CgpTaWduZWQtb2ZmLWJ5OiBBdXJlbGllbiBBcHRlbCA8YWFwdGVsQHN1c2UuY29tPgpTaWduZWQt
-b2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+Ci0tLQogZnMvY2lm
-cy9jaWZzcHJvdG8uaCB8ICAxICsKIGZzL2NpZnMvdHJhbnNwb3J0LmMgfCAzOCArKysrKysrKysr
-KysrKysrKysrKysrKysrKystLS0tLS0tLS0tLQogMiBmaWxlcyBjaGFuZ2VkLCAyOCBpbnNlcnRp
-b25zKCspLCAxMSBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9mcy9jaWZzL2NpZnNwcm90by5o
-IGIvZnMvY2lmcy9jaWZzcHJvdG8uaAppbmRleCAxMmE4OTVlMDJkYjQuLjY5MjgyMmQ0NTIzYSAx
-MDA2NDQKLS0tIGEvZnMvY2lmcy9jaWZzcHJvdG8uaAorKysgYi9mcy9jaWZzL2NpZnNwcm90by5o
-CkBAIC05NSw2ICs5NSw3IEBAIGV4dGVybiBpbnQgY2lmc19jYWxsX2FzeW5jKHN0cnVjdCBUQ1Bf
-U2VydmVyX0luZm8gKnNlcnZlciwKIAkJCW1pZF9yZWNlaXZlX3QgKnJlY2VpdmUsIG1pZF9jYWxs
-YmFja190ICpjYWxsYmFjaywKIAkJCW1pZF9oYW5kbGVfdCAqaGFuZGxlLCB2b2lkICpjYmRhdGEs
-IGNvbnN0IGludCBmbGFncywKIAkJCWNvbnN0IHN0cnVjdCBjaWZzX2NyZWRpdHMgKmV4aXN0X2Ny
-ZWRpdHMpOworZXh0ZXJuIHN0cnVjdCBUQ1BfU2VydmVyX0luZm8gKmNpZnNfcGlja19jaGFubmVs
-KHN0cnVjdCBjaWZzX3NlcyAqc2VzKTsKIGV4dGVybiBpbnQgY2lmc19zZW5kX3JlY3YoY29uc3Qg
-dW5zaWduZWQgaW50IHhpZCwgc3RydWN0IGNpZnNfc2VzICpzZXMsCiAJCQkgIHN0cnVjdCBzbWJf
-cnFzdCAqcnFzdCwgaW50ICpyZXNwX2J1Zl90eXBlLAogCQkJICBjb25zdCBpbnQgZmxhZ3MsIHN0
-cnVjdCBrdmVjICpyZXNwX2lvdik7CmRpZmYgLS1naXQgYS9mcy9jaWZzL3RyYW5zcG9ydC5jIGIv
-ZnMvY2lmcy90cmFuc3BvcnQuYwppbmRleCBjOTc1NzBlYjJjMTguLjZiZTI5M2RkYmE3MiAxMDA2
-NDQKLS0tIGEvZnMvY2lmcy90cmFuc3BvcnQuYworKysgYi9mcy9jaWZzL3RyYW5zcG9ydC5jCkBA
-IC05OTMsNiArOTkzLDMyIEBAIGNpZnNfY2FuY2VsbGVkX2NhbGxiYWNrKHN0cnVjdCBtaWRfcV9l
-bnRyeSAqbWlkKQogCURlbGV0ZU1pZFFFbnRyeShtaWQpOwogfQogCisvKgorICogUmV0dXJuIGEg
-Y2hhbm5lbCAobWFzdGVyIGlmIG5vbmUpIG9mIEBzZXMgdGhhdCBjYW4gYmUgdXNlZCB0byBzZW5k
-CisgKiByZWd1bGFyIHJlcXVlc3RzLgorICoKKyAqIElmIHdlIGFyZSBjdXJyZW50bHkgYmluZGlu
-ZyBhIG5ldyBjaGFubmVsIChuZWdwcm90L3Nlc3Muc2V0dXApLAorICogcmV0dXJuIHRoZSBuZXcg
-aW5jb21wbGV0ZSBjaGFubmVsLgorICovCitzdHJ1Y3QgVENQX1NlcnZlcl9JbmZvICpjaWZzX3Bp
-Y2tfY2hhbm5lbChzdHJ1Y3QgY2lmc19zZXMgKnNlcykKK3sKKwl1aW50IGluZGV4ID0gMDsKKwor
-CWlmICghc2VzKQorCQlyZXR1cm4gTlVMTDsKKworCWlmICghc2VzLT5iaW5kaW5nKSB7CisJCS8q
-IHJvdW5kIHJvYmluICovCisJCWlmIChzZXMtPmNoYW5fY291bnQgPiAxKSB7CisJCQlpbmRleCA9
-ICh1aW50KWF0b21pY19pbmNfcmV0dXJuKCZzZXMtPmNoYW5fc2VxKTsKKwkJCWluZGV4ICU9IHNl
-cy0+Y2hhbl9jb3VudDsKKwkJfQorCQlyZXR1cm4gc2VzLT5jaGFuc1tpbmRleF0uc2VydmVyOwor
-CX0gZWxzZSB7CisJCXJldHVybiBjaWZzX3Nlc19zZXJ2ZXIoc2VzKTsKKwl9Cit9CisKIGludAog
-Y29tcG91bmRfc2VuZF9yZWN2KGNvbnN0IHVuc2lnbmVkIGludCB4aWQsIHN0cnVjdCBjaWZzX3Nl
-cyAqc2VzLAogCQkgICBjb25zdCBpbnQgZmxhZ3MsIGNvbnN0IGludCBudW1fcnFzdCwgc3RydWN0
-IHNtYl9ycXN0ICpycXN0LApAQCAtMTAxOCwxNyArMTA0NCw3IEBAIGNvbXBvdW5kX3NlbmRfcmVj
-dihjb25zdCB1bnNpZ25lZCBpbnQgeGlkLCBzdHJ1Y3QgY2lmc19zZXMgKnNlcywKIAkJcmV0dXJu
-IC1FSU87CiAJfQogCi0JaWYgKCFzZXMtPmJpbmRpbmcpIHsKLQkJdWludCBpbmRleCA9IDA7Ci0K
-LQkJaWYgKHNlcy0+Y2hhbl9jb3VudCA+IDEpIHsKLQkJCWluZGV4ID0gKHVpbnQpYXRvbWljX2lu
-Y19yZXR1cm4oJnNlcy0+Y2hhbl9zZXEpOwotCQkJaW5kZXggJT0gc2VzLT5jaGFuX2NvdW50Owot
-CQl9Ci0JCXNlcnZlciA9IHNlcy0+Y2hhbnNbaW5kZXhdLnNlcnZlcjsKLQl9IGVsc2UgewotCQlz
-ZXJ2ZXIgPSBjaWZzX3Nlc19zZXJ2ZXIoc2VzKTsKLQl9CisJc2VydmVyID0gY2lmc19waWNrX2No
-YW5uZWwoc2VzKTsKIAogCWlmIChzZXJ2ZXItPnRjcFN0YXR1cyA9PSBDaWZzRXhpdGluZykKIAkJ
-cmV0dXJuIC1FTk9FTlQ7Ci0tIAoyLjIwLjEKCg==
---0000000000005fc81805a6e59214--
+/ Alexander Bokovoy
 
