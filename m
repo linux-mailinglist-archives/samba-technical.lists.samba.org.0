@@ -2,54 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04D971EC4C8
-	for <lists+samba-technical@lfdr.de>; Wed,  3 Jun 2020 00:09:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 897891EC583
+	for <lists+samba-technical@lfdr.de>; Wed,  3 Jun 2020 01:13:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=c2ZbBUdPV+w4koW52Hg2S4953wBkx7P7xq6+9WmXPfw=; b=krwuteI9VrLIQNe7F8AAt5LhQR
-	do3awk1CfHKP1xsBrs5IYG7BJQKLZs0dZV5AzjyyJa4GroEjx/gOjMue9OIMaGZhlE1w5pWd1Qv/e
-	yvn33XcGsOPyeL2FrhVSR+KHagOOkXwbP6RQu4aeaHv1l+sXIh5SWAKXsNN+iVe2ucb8ikTD8RiHh
-	DxRjsYiRJjyF17P1kABSXdRugTCTXeURBbQbsL+NBHhDkwbTdVS+bnQQ/Rkfd4E5K6tQLtw+lw+vn
-	Dafi2uDHatc13B6EXbK/sm+WvSvoLRDzQRXg4SwwbyZUXnlZYJfc4TOnU1qX2ETUhlJanvBPdXREx
-	7aDtXYVA==;
-Received: from localhost ([::1]:38482 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=CsW0jPeTHAlZ7dvk+vwZEFwFKkIxlmftTAPAvSse8Tc=; b=UVCUP5fNdvINL0MEb923tO2tbw
+	VjA4e3ty1hJHG/+6sVWm3jucCRbFCP9TKAKOteQrOfoYPN5hFJbwlhDOJTjzoq2rXObiMewBlPWmH
+	al6p8IXHL9Tta+S9DLa+HstxKn2T5BaS8iowPMWqhKGYSX8ZqOm6FcGNGYy7ghWmH8BPyh8Frn2dX
+	i0x5R4LULu7LgOVwAU5k7evZIsmIOR7zVkd6yCQi+JaoN1l6g/gK1EWPrNoEI8iIPeAhYdZYKkYQh
+	vM9KG5ByvNKKLnA1xINajrVYwxxvWEfpuJ4du8xbu97IjB3IBgGwYKlG3IybCHYIfcYJ3fCAZj9lg
+	9qR3YKQA==;
+Received: from localhost ([::1]:39216 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jgF4i-008XOy-GZ; Tue, 02 Jun 2020 22:08:00 +0000
-Received: from youngberry.canonical.com ([91.189.89.112]:43434) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jgF4d-008XOA-8C
- for samba-technical@lists.samba.org; Tue, 02 Jun 2020 22:07:57 +0000
-Received: from mail-ot1-f70.google.com ([209.85.210.70])
- by youngberry.canonical.com with esmtps
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
- (envelope-from <andreas.hasenack@canonical.com>) id 1jgF4Z-0006D5-3W
- for samba-technical@lists.samba.org; Tue, 02 Jun 2020 22:07:51 +0000
-Received: by mail-ot1-f70.google.com with SMTP id b15so146409oti.23
- for <samba-technical@lists.samba.org>; Tue, 02 Jun 2020 15:07:51 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=c2ZbBUdPV+w4koW52Hg2S4953wBkx7P7xq6+9WmXPfw=;
- b=Y+Rnbgp/lYG8siGHpZTdu+yElfBzx34kZGjNA36bIzMpVbFrlfZMKJe0ZPFPGpNpj1
- MOnuY95H3bvCw2XMjegmN+1cgY+dXpgR1RCWy9bItQH6WijRZbLrLQoGIGtuw540K9kd
- sONUtJIU4tTzfC5otaqIhE3khcUENQJAlc+aCP+OHaSHfPsLuzmi63CbJMjtcXdXXbG2
- TJ3/+bnZT4Yhg0yoFZoNcKBD0X/2iQ2D0nnv2lg+HdEITxBeqVuuzneehEZqlKx1gB4b
- PhujcnbgDLAKNq+Qlqf91bwvl0SY1EpG0lAIN+0zdeP/rTr6vZqjcHdnwCIZuHMRZNmV
- s4Bg==
-X-Gm-Message-State: AOAM532PoPXZ3WcR//freioAsTGwofIQRBltd/8JwOErMX58IIp3Pidt
- uRQRnToCDAI7L773+m7CXo8OXCQ7DUK8moDS4tghYeXzf3x6fi1RinPDQmHGts0SAZ1MXUvwadh
- taNICuSlJpteoePWr9zqbdsRgO2icDeWBDPUkNO5sOM32AWaUD2DcInjTnqpirA==
-X-Received: by 2002:a4a:a20b:: with SMTP id m11mr4835251ool.20.1591135669689; 
- Tue, 02 Jun 2020 15:07:49 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJx8heH+56tEVx2uZ+/c0b6j7AediFE8eNEBvXJoWhrClVqSoFc5bm2yzda5oc2+uhPVaHIEAuDRTZG1GQLzx60=
-X-Received: by 2002:a4a:a20b:: with SMTP id m11mr4835228ool.20.1591135669154; 
- Tue, 02 Jun 2020 15:07:49 -0700 (PDT)
-MIME-Version: 1.0
-Date: Tue, 2 Jun 2020 19:07:38 -0300
-Message-ID: <CANYNYEHAJmBDFuoZJFdWn_DBwihN_WzJp27Mr+WWmvTcquauTQ@mail.gmail.com>
-Subject: ldb 2.1.3 ppc64el test failures; 2.1.2 passes
-To: samba-technical@lists.samba.org
+	id 1jgG5l-008XYn-Gv; Tue, 02 Jun 2020 23:13:09 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63612) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jgG5f-008XYg-4z
+ for samba-technical@lists.samba.org; Tue, 02 Jun 2020 23:13:07 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=CsW0jPeTHAlZ7dvk+vwZEFwFKkIxlmftTAPAvSse8Tc=; b=FP0/TLUc7jYDNGRVyNdO3YTEyk
+ kWZvoFLEduAUEouscnSpuVrzHYud1ks90uN8VfoRJzXsdqtG46cQXPng7PFxpKPlj8hKOgynMFUAD
+ B6SPOLuwWLwxnHYmUShAy4bUxPtMU/785EvlpJ7+o3mOfM9iJTo3Jaj3h/eGNmmFb31sWxqNlG2CW
+ kPkpye0mkmiuqGX6OnB+IC+O6L+9QIR1SzhvSn7nto0tQkMBjr3vCtY0fWuW/lJB//3RF5gaQJYBN
+ ATmlbYOnSe2ipph8nTVcb1lryjURIfmC62tpJzdocheNvsr/LrY9l38x9V65EX4MBV9POqbrrHt0E
+ q+ku25GnR1FkZQZSg49SRTb35/s3PIiwLqWWO0abrux3xlY8BOIzE4rmgpJuudmd84Mhby0CDxwJY
+ eJoDVlokVeIKhpmgQgJZPMEMmOBPmgdAIq8SrZSuDIAs6XKiKzDqoIcB437CpPo8utyaKxNrl7ouL
+ TgAUtLeeI/h1ExTWwI9eR01l;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jgG5c-0004Rf-8o; Tue, 02 Jun 2020 23:13:00 +0000
+Message-ID: <2d72acc4c3d842bfd37894d048f134b7ef67d5bb.camel@samba.org>
+Subject: Re: Gitlab and Sign-Off trailers
+To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+Date: Wed, 03 Jun 2020 11:12:54 +1200
+In-Reply-To: <612d83f8d6a2bc0f725cc3a61d22f6b49eb4b01d.camel@samba.org>
+References: <2494384.Zab67dHBYY@magrathea>
+ <612d83f8d6a2bc0f725cc3a61d22f6b49eb4b01d.camel@samba.org>
 Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,49 +56,79 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Hasenack via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Hasenack <andreas@canonical.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+On Fri, 2020-05-08 at 23:46 +1200, Andrew Bartlett via samba-technical
+wrote:
+> On Tue, 2020-05-05 at 17:41 +0200, Andreas Schneider via samba-
+> technical wrote:
+> > Hi,
+> > 
+> > I've looked into different solutions for checking sign-off
+> > trailers:
+> > 
+> > 
+https://gitlab.com/libssh/libssh-mirror/-/merge_requests/104/commits
+> > 
+> > I've found one working solution so far.
+> 
+> Thanks for looking into this.
 
-I'm trying to update ldb from 2.1.2 to 2.1.3 but am seeing these test
-failures that only happen on ppc64el:
+Again, thank-you.  It is annoying to chase up contributors for a
+Signed-off-by long after they have lost interest, when we could
+otherwise accept their patch.
 
-[==========] Running 3 test(s).
-[ RUN      ] test_free_list_no_read_lock
-Failed to connect to 'mdb://lmdb_free_list_test.ldb' with backend
-'mdb': Unable to load ltdb cache records for backend 'ldb_mdb backend'
-Could not run test: 0x1 != 0
-[   LINE   ] --- ../../tests/ldb_lmdb_free_list_test.c:165: error:
-Failure!Test setup failed
-[  ERROR   ] test_free_list_no_read_lock
-[ RUN      ] test_free_list_read_lock
-Failed to connect to 'mdb://lmdb_free_list_test.ldb' with backend
-'mdb': Unable to load ltdb cache records for backend 'ldb_mdb backend'
-Could not run test: 0x1 != 0
-[   LINE   ] --- ../../tests/ldb_lmdb_free_list_test.c:165: error:
-Failure!Test setup failed
-[  ERROR   ] test_free_list_read_lock
-[ RUN      ] test_free_list_stale_reader
-Failed to connect to 'mdb://lmdb_free_list_test.ldb' with backend
-'mdb': Unable to load ltdb cache records for backend 'ldb_mdb backend'
-Could not run test: 0x1 != 0
-[   LINE   ] --- ../../tests/ldb_lmdb_free_list_test.c:165: error:
-Failure!Test setup failed
-[  ERROR   ] test_free_list_stale_reader
-[==========] 3 test(s) run.
-[  PASSED  ] 0 test(s).
-testsuite returned 0
-Running Python test with /usr/bin/python3: tests/python/api.py
-Running Python test with /usr/bin/python3: tests/python/index.py
-Running Python test with /usr/bin/python3: tests/python/repack.py
-Python testsuite returned 0
-make[2]: *** [Makefile:17: test] Error 3
+> We should also use the merge request checklist feature (as seen on
+> GnuTLS), in particular to make new contributors consider that they
+> need
+> to up the 1h timeout on their private forks.
 
-On the same machine and environment, 2.1.2 passes. lmdb is 0.9.24-1,
-talloc is 2.3.1, tevent is 0.10.2, tdb is 1.4.3
+I looked into this.  
 
-Any idea what is going on?
+That feature is on GitLab.com, but not in their Open Source community
+edition.  If we are happy to use (as we frankly do by accident
+regardless, like the approval thing) that feature, we could add such a
+checklist.
+
+> But while I don't want to block this, we really need to pair it with
+> a
+> single, really good "Contribute" page on the wiki, with a single set
+> of
+> clear top-to-bottom instructions on how to make a great merge
+> request,
+> including Signed-off-by, DCO, patch style (mostly the clean, no
+> reverts) and pointers to our other stuff like coding style.
+
+I said I didn't want to block this, but clearly this was needed, so we
+now have a much better Contibute page in the wiki:
+
+https://wiki.samba.org/index.php/Contribute
+
+How can we progress this?
+
+On the actual tool, my only thought is that currently some developers
+don't sign their commits until they are finished, but still use the CI
+extensively.  
+
+We might want to clarify what Signed-off-by means for Samba, separating
+the 'this patch is finished' from 'this patch is legit to submit or
+base a better patch on' so those work in progress trees don't just
+instantly fail CI (without manual pipeline runs).
+
+(We could encourage a prefix of WIP/TODO for the legitimately my code
+but not ready yet status).
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
+
+
 
