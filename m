@@ -2,48 +2,85 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6353A1ED70A
-	for <lists+samba-technical@lfdr.de>; Wed,  3 Jun 2020 21:47:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89B9B1ED8CD
+	for <lists+samba-technical@lfdr.de>; Thu,  4 Jun 2020 00:52:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=/iXa+dpaVvoTfUuFWKT8PTxF473uFzKoc4e8MDznKag=; b=bNqrTYYqiPR2z/G9H0V0VNBufm
-	0PHZ5hna/e/SQ0UfQzmwalwtzgHcQoOzbEeuELMkaM9l8SiJ86+Be26RanU3gZEVnIhkjg7ziN4Os
-	FbYNp4iW+GCe8W8HebXwOp56DazngGi6NwZSN9r9Bp0Uy7Yipwl3kOd5DtBD4lIS2EjwH7h7QfWDV
-	0OEusXUNWlESWTrrT3qrBi30iWJvukCctsN5uqdU72RVrwuuuF8LTp51YN6/86XPzRX+SnI+4QwC7
-	TcGR8vg5c2tv+hAiOL75nWhX2eiYhu4PbMJ+647+0m+QQ4G+dQMl8CkMc4IqXAaZIJ0yakN65UozF
-	gzlokRgg==;
-Received: from localhost ([::1]:47054 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=NK2x4tgD4v+4dg41qhS4t2GnJFMB3BodNCbLYd7bCG0=; b=gWgoK84mqQLsivJRCr1eHz+rrO
+	uCCxv78mMdyKV2z3wwOnJ4nCI6UsDsqi1dzq5PTWC1XIHic5yQjiUV5A7DmbttCqcQAmka5O1ni1q
+	s5J/yrb9nsCyVAseO03xcX+iN6doxfm/LhqDm2PXdPQbW5PCFlg+A+bYRefwdmWFh8wl+VVBsALba
+	CAHG9thPszBzXfwmRmXkMu+4u4d9Q3MEzvq1YZrPah+tKzCROfGQj0KL886X9PyUzN3/XJ1LAyW+n
+	uMFYjWy37UlikL5l2Ou46QEhnCz0Km5Iq/kLPOyAfuW/SREG1TzlFT8IHO0YeBtsHEk+ioy/AmbN5
+	JafUTNTw==;
+Received: from localhost ([::1]:54976 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jgZKy-008h5s-6Y; Wed, 03 Jun 2020 19:46:08 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43142) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jgZKs-008h5l-U2
- for samba-technical@lists.samba.org; Wed, 03 Jun 2020 19:46:05 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=/iXa+dpaVvoTfUuFWKT8PTxF473uFzKoc4e8MDznKag=; b=Lg+esGjEe1s0EjBlOoSnIFNYld
- XbS8VU6UX6/WJYw5EJ9CoGYXBQcHAub67rcUX9xcWPNY0kBl2EIzKNmyJZIfCYqKQp09mDgE9BeSE
- TJOA3l3OON3HO8/5yZYI5XQZU3VqclhvdKG0KPRTK0CorzFGNki1Drm/tBDJRk4I1nCh//hm48bHP
- ISyu0ZFgBgHaoXqjmsDDKtR5x038NYyMcPmq2FUUPLtDEz+WQuSMiq1Wj6ZlEf0Bfi4ss5Iw8pXWE
- HV6KX5PMchiwDRiALm/+WCIE9nPsdDru/4jkvCSKbcZ6cZK0Z4xl8lm0YNOZCVC98skVGEgr2QpR5
- PgOfVMaBvW6BAu6ip0Ri0Ou72wgOkzZj8JKjLCCRzPDQ7p4/kUU8ZfOdUES1JxXsZ8VDeVAcKCmQf
- drySxCAh5HwinPHSq3hsKTvglO/pe2ZeLYU6eY2pufoW/ftgueFqeeilfab/0rDHk1We0E3U85E8G
- dAPj6DjZU3y5Jy6TS1q+kBoj;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jgZKq-0007lH-TG; Wed, 03 Jun 2020 19:46:01 +0000
-Message-ID: <8329a7d20be2c97a1c44ef37fbdb8cdc53938726.camel@samba.org>
-Subject: Re: Samba Developers Guide
-To: =?ISO-8859-1?Q?Bj=F6rn?= Jacke <bj@sernet.de>, 
- =?ISO-8859-1?Q?Aur=E9lien?= Aptel <aaptel@suse.com>
-Date: Thu, 04 Jun 2020 07:45:55 +1200
-In-Reply-To: <20200603111840.GA714675@sernet.de>
-References: <c5c46e71b5093b5ba3450d089541a8d431792247.camel@samba.org>
- <87y2p4ikw5.fsf@suse.com> <20200603111840.GA714675@sernet.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
+	id 1jgcEU-008jB1-AT; Wed, 03 Jun 2020 22:51:38 +0000
+Received: from m4a0073g.houston.softwaregrp.com ([15.124.2.131]:39951) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1jgcEO-008jAs-Uj
+ for samba-technical@lists.samba.org; Wed, 03 Jun 2020 22:51:35 +0000
+Received: FROM m4a0073g.houston.softwaregrp.com (15.120.17.146) BY
+ m4a0073g.houston.softwaregrp.com WITH ESMTP
+ FOR samba-technical@lists.samba.org; Wed,  3 Jun 2020 22:49:19 +0000
+Received: from M9W0068.microfocus.com (2002:f79:bf::f79:bf) by
+ M4W0334.microfocus.com (2002:f78:1192::f78:1192) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10; Wed, 3 Jun 2020 22:51:06 +0000
+Received: from NAM02-CY1-obe.outbound.protection.outlook.com (15.124.72.11) by
+ M9W0068.microfocus.com (15.121.0.191) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10 via Frontend Transport; Wed, 3 Jun 2020 22:51:06 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=G7IfMFXxauV8sbetqbkRPeMyqQpme/83r4wH28Z6UOTRFTDoxn6jzYERlNiE1jzoUXGyhWXPokdOI1Qcubfa9lZ+R5ilwvHvzFZkCEPYzFU68kSG2Vs2jVy5WshusvhbIODi0Y0a2qCgPV8dO1ClfADQFmz7eKotyNGS1UI2RBYsWqv2NywI6jFmDITBespiW+pQKrS8NbU56y5y44lrzsLOD0NkKCI+eX0ka30gAFZxUGxaQYptPpvrQAjvaGtxeFRhy8R6gV2QzqXuj71G+eb+/D+yoMsKl+vDO78aYi2EQzZZr6nMSfLsk1xv1zKeOSmeHVIou/GY1iswNhsv9w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NK2x4tgD4v+4dg41qhS4t2GnJFMB3BodNCbLYd7bCG0=;
+ b=gZV6chsfklW03m1Ovt1LugYQgpRdYJ5X4QGvsToVoym8gruriUW1VO8MXtxxcjG1yfEy/merKkKMsydhTQz4h34vMRIQ7PByInkQg6SlZ4+zKwieA/9G/Va63p46f3zdjXp/t9AwNjlRSb9/WH8footBEWj2bnaek66c2HQRD6O4CCtobxEJaENmaNHHmgorYNg8FzgyZ6WEVyrXznd8ocVN/5M3v+vnGmaijxm65euPY/okp02xcK6DRxHWNv2Ymwm4OoGM3JelAt0vg7hbkdHiyTi/xG7zlJjnkmoWGe3AUuROX0yf6GTa3X7qR/UpQXkg7YGU6anFpYNfa0MEBw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: lists.samba.org; dkim=none (message not signed)
+ header.d=none;lists.samba.org; dmarc=none action=none header.from=suse.com;
+Received: from MN2PR18MB3199.namprd18.prod.outlook.com (2603:10b6:208:163::32)
+ by MN2PR18MB3608.namprd18.prod.outlook.com (2603:10b6:208:26f::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3045.19; Wed, 3 Jun
+ 2020 22:51:04 +0000
+Received: from MN2PR18MB3199.namprd18.prod.outlook.com
+ ([fe80::bcf7:4209:3ebf:79cb]) by MN2PR18MB3199.namprd18.prod.outlook.com
+ ([fe80::bcf7:4209:3ebf:79cb%6]) with mapi id 15.20.3066.018; Wed, 3 Jun 2020
+ 22:51:04 +0000
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: Release tar ball scripts
+Message-ID: <7e3f689e-1170-8824-340b-b6af3a7ddcbb@suse.com>
+Date: Wed, 3 Jun 2020 16:50:55 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.1.9] (74.122.77.94) by
+ LNXP265CA0043.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:5c::31) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3066.19 via Frontend Transport; Wed, 3 Jun 2020 22:51:03 +0000
+X-Originating-IP: [74.122.77.94]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 2ff956fb-f4ca-41ba-adf6-08d80810981b
+X-MS-TrafficTypeDiagnostic: MN2PR18MB3608:
+X-MS-Oob-TLC-OOBClassifiers: OLM:3826;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Message-Info: JKu5d2ir99spvGgo8UUK15cXlGqGTJlKWZy9gTwVq1e5lArmduR2qTAWxNbITb3OCPzV8yhEos5Q0/8ta/c3XbkkMjh5dmX7ZXDrRRcJXU4XLg7215uc7xJIjhlg0rcyRSdGhIJjtQy+5uyOeRMwFEyNfC4MlCT/dU4p6P16LzpqOFqw5HgUNYaX4QBXEUqX2w21FptP5LuGJGfxWdCvVuYCQc7V5VvFIKWSZ9cKVXQGJfMOp5cusXRBrKgJs2fcOI3AnU6Pl/q3HfwJjmc0xvYcxpZHSRCP6Sjkn5m4SNDTUDofNmo7lS4ZPCHxfSyM6Zf08TiNCAH1N8sg0BXbDDnMAlNV1z8X+pFWj+Sdh3xbI39rlG6iK95mUj9xgqXZYXW575BXBz8g/+SE0JNX1Cv0BVA1lnipa7l47k03pIQO+SwVeI201wlPyfJUZXsa2NHgYVHQWR0pH0fshNZLVw==
+X-MS-Exchange-AntiSpam-MessageData: BYpJze9llxL+auVpTyUzH6DHWM8Z2WEclIyTdqmHkmoUtOYs5F7qqrcelHsdlv1ZAxdB+YOzyRA3Odyn3sfBHi18kNaz7PZb03fxeQmFZOBwyyOq+BfIp5fhAFc9PPqoCWWUJn1INS0YqesGh72EirZVh92Nv4GW7E9v+mTXEBMORVqRHHoIaswANoyD2qxj/IDvma/2dmtA67tS3NkjhnFuA2L4R8QARzX+G4WRoCdmcHNJAQ7W6JAoW7hlpTlR8r4Tu0ib/cQeDq9Wakq4sS8Fa1Xc5JLmJxWVavWTpmZuwYLnw0VdTtvd/3CvUwjh1L0LtQZ1UjDcTfWDpg50ibh5ZwsjiMrjJMVnVgQO4H+eFywDCkwOXrz4nc72igHc+sPFVet5hPAx/ymtZBp+379X7K64zpVmadzLGru80LkQhPbgszPUUE9mCAjsQVWE05AbICX4BCUlQCvlCbmA5EeXkQ/1cfEHMEq9zwJoW1o=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2ff956fb-f4ca-41ba-adf6-08d80810981b
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 856b813c-16e5-49a5-85ec-6f081e13b527
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Ig4QL0adkrthErb2jFneWwrq2oeiOnoiRv8nDDCbdXXWl955YH1qp3ug0A4dJ7Y9UZYSD9x4hLJoUJ+L/hfo0Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR18MB3608
+X-OriginatorOrg: suse.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,51 +94,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Jeremy Allison <jra@samba.org>
+From: David Mulder via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Mulder <dmulder@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2020-06-03 at 13:18 +0200, Björn Jacke wrote:
-> On 2020-06-03 at 11:00 +0200 Aurélien Aptel via samba-technical sent
-> off:
-> > Andrew Bartlett via samba-technical <
-> > samba-technical@lists.samba.org>
-> > writes:
-> > > Can anybody say some words in support of this, or should this now
-> > > also
-> > > be removed?
-> > 
-> > As samba grows more and more complex I think a document like this
-> > is
-> > desperatly needed. Perhaps it could be updated with the content
-> > from
-> > Ralph's sambaxp talk?
-> 
-> given that the mentioned document is so outdated, I think updating it
-> would be
-> like more or less like rewriting it from scratch. Of course a good
-> devel
-> starting point docu is required but for this old one I would not
-> object to drop
-> it. On the web there can still stay that old one archived with the
-> "outdated"
-> disclaimer in the background.
-
-That sounds like a plan.  Step one for any update would be a vicious
-triage of the current content into a wiki page, clearly linked from our
-new 'Contribute' page.
-
-Andrew Bartlett
+Where do the scripts live that generate the release tar balls for
+talloc/tdb/ldb/tevent? The ones on samba ftp?
+I'm trying to generate the latest ldb tar ball off of master (master
+requires ldb 2.2.0), to simplify some build testing, and it seems like
+I've seen these scripts somewhere before.
+I could figure this out on my own, but it would be easier if someone
+could point me in the right direction.
 
 -- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
-
-
+*David Mulder*
+Labs Software Engineer, Samba
+SUSE
+1800 Novell Place
+Provo, UT 84606
+(P)+1 801.861.6571
+dmulder@suse.com
+ <http://www.suse.com/>
 
 
