@@ -2,45 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E34E51ED22C
-	for <lists+samba-technical@lfdr.de>; Wed,  3 Jun 2020 16:35:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6353A1ED70A
+	for <lists+samba-technical@lfdr.de>; Wed,  3 Jun 2020 21:47:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=NHUDMvA68asC5DNsEalsPNAY2HUu/IjyicXtrRou/6E=; b=HvBtcAbvL08nUj/AZK17tuxJnf
-	kzVl9fh2W4IkqB6auToXkWVGg6Lao/2mEp5RP6A1HRxXw5PwFGjVLLpQUEeqTV83zlL5EDmgYM5gf
-	hlxcvB5LuBXYOH0U+C4QjXx0jAsCxqCFKXsMdFZUBS6+z2vrmZs8SnWDGT+nWDAQe520EToC7ufl7
-	Cggq8wG8PhANu83oC4tKWiydIbg1sCmjHNr+lyOpvoGSSQFfKT6P4pW9TjUr3q42+/ZYT537uguYY
-	CtOzWNBuu5atDc2DX0KhSTGsiivzVnmmotsbiAUrI1jJnkM52o0wgtVs5mewYUvLAFBGiOG2QkbFd
-	kA87Mkpw==;
-Received: from localhost ([::1]:31862 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=/iXa+dpaVvoTfUuFWKT8PTxF473uFzKoc4e8MDznKag=; b=bNqrTYYqiPR2z/G9H0V0VNBufm
+	0PHZ5hna/e/SQ0UfQzmwalwtzgHcQoOzbEeuELMkaM9l8SiJ86+Be26RanU3gZEVnIhkjg7ziN4Os
+	FbYNp4iW+GCe8W8HebXwOp56DazngGi6NwZSN9r9Bp0Uy7Yipwl3kOd5DtBD4lIS2EjwH7h7QfWDV
+	0OEusXUNWlESWTrrT3qrBi30iWJvukCctsN5uqdU72RVrwuuuF8LTp51YN6/86XPzRX+SnI+4QwC7
+	TcGR8vg5c2tv+hAiOL75nWhX2eiYhu4PbMJ+647+0m+QQ4G+dQMl8CkMc4IqXAaZIJ0yakN65UozF
+	gzlokRgg==;
+Received: from localhost ([::1]:47054 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jgUUL-008eat-9M; Wed, 03 Jun 2020 14:35:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41820) 
+	id 1jgZKy-008h5s-6Y; Wed, 03 Jun 2020 19:46:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43142) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jgUUG-008eam-6Q
- for samba-technical@lists.samba.org; Wed, 03 Jun 2020 14:35:26 +0000
+ (Exim) id 1jgZKs-008h5l-U2
+ for samba-technical@lists.samba.org; Wed, 03 Jun 2020 19:46:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=NHUDMvA68asC5DNsEalsPNAY2HUu/IjyicXtrRou/6E=; b=H+IJRGf+Fmrdxp7KGKmDyDbk01
- 9jQPjsqp+qKdJWiIgLg270QuYTDsTn9Vf+vEZkvHodeRpPqMANkinaR8Z63AlwZGBX5rJ6QsNPG2D
- +ae93bFihXoq5N0uId0f4jBLE50xMn7u00wnDj+lHzGJMIswv+6ELIH6gC559pGbSEHydAhy0excW
- sfBeAGnYi1cXXWjI1H9cgP2tXQ6+IweHvIbRiz/Ej/NPAAa0ifonHIvwLkRrisLPxzmrNWrQl8q+C
- 6W25dykt46JXPk7W+LlmlQKjnDGCIVqNZlKZtYSnwChGtgNfFcbtDa1s9Sy2e2OmX3PHohP1IkN+Q
- 0D+CFsnbDqPBuFxZTOVMjmPG0n3LeRtVUkpgN1nAHfiQHGRa9B65Rwp6/5epdk4pJIlWUyqgrsAc8
- NdRuw5kNCM1dCYVmpjApD2wGsPV2TIrc1AHrNV0GAVnJlvtVKczAmeHBjptSThTGebAR2VD5ygjy9
- 9PU6/vi47o9cO94ktqZXRdtW;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=/iXa+dpaVvoTfUuFWKT8PTxF473uFzKoc4e8MDznKag=; b=Lg+esGjEe1s0EjBlOoSnIFNYld
+ XbS8VU6UX6/WJYw5EJ9CoGYXBQcHAub67rcUX9xcWPNY0kBl2EIzKNmyJZIfCYqKQp09mDgE9BeSE
+ TJOA3l3OON3HO8/5yZYI5XQZU3VqclhvdKG0KPRTK0CorzFGNki1Drm/tBDJRk4I1nCh//hm48bHP
+ ISyu0ZFgBgHaoXqjmsDDKtR5x038NYyMcPmq2FUUPLtDEz+WQuSMiq1Wj6ZlEf0Bfi4ss5Iw8pXWE
+ HV6KX5PMchiwDRiALm/+WCIE9nPsdDru/4jkvCSKbcZ6cZK0Z4xl8lm0YNOZCVC98skVGEgr2QpR5
+ PgOfVMaBvW6BAu6ip0Ri0Ou72wgOkzZj8JKjLCCRzPDQ7p4/kUU8ZfOdUES1JxXsZ8VDeVAcKCmQf
+ drySxCAh5HwinPHSq3hsKTvglO/pe2ZeLYU6eY2pufoW/ftgueFqeeilfab/0rDHk1We0E3U85E8G
+ dAPj6DjZU3y5Jy6TS1q+kBoj;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jgUUE-0004dj-Nd; Wed, 03 Jun 2020 14:35:23 +0000
-To: samba-technical@lists.samba.org
-Subject: Re: git signoff+ and review+
-Date: Wed, 03 Jun 2020 16:35:21 +0200
-Message-ID: <2877725.qJPT1UHR8W@magrathea>
-In-Reply-To: <2070261.IvKQ8U6GgO@magrathea>
-References: <2070261.IvKQ8U6GgO@magrathea>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jgZKq-0007lH-TG; Wed, 03 Jun 2020 19:46:01 +0000
+Message-ID: <8329a7d20be2c97a1c44ef37fbdb8cdc53938726.camel@samba.org>
+Subject: Re: Samba Developers Guide
+To: =?ISO-8859-1?Q?Bj=F6rn?= Jacke <bj@sernet.de>, 
+ =?ISO-8859-1?Q?Aur=E9lien?= Aptel <aaptel@suse.com>
+Date: Thu, 04 Jun 2020 07:45:55 +1200
+In-Reply-To: <20200603111840.GA714675@sernet.de>
+References: <c5c46e71b5093b5ba3450d089541a8d431792247.camel@samba.org>
+ <87y2p4ikw5.fsf@suse.com> <20200603111840.GA714675@sernet.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,69 +57,51 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Andreas Schneider <asn@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I've pushed some improvements to the tools ...
+On Wed, 2020-06-03 at 13:18 +0200, Björn Jacke wrote:
+> On 2020-06-03 at 11:00 +0200 Aurélien Aptel via samba-technical sent
+> off:
+> > Andrew Bartlett via samba-technical <
+> > samba-technical@lists.samba.org>
+> > writes:
+> > > Can anybody say some words in support of this, or should this now
+> > > also
+> > > be removed?
+> > 
+> > As samba grows more and more complex I think a document like this
+> > is
+> > desperatly needed. Perhaps it could be updated with the content
+> > from
+> > Ralph's sambaxp talk?
+> 
+> given that the mentioned document is so outdated, I think updating it
+> would be
+> like more or less like rewriting it from scratch. Of course a good
+> devel
+> starting point docu is required but for this old one I would not
+> object to drop
+> it. On the web there can still stay that old one archived with the
+> "outdated"
+> disclaimer in the background.
 
+That sounds like a plan.  Step one for any update would be a vicious
+triage of the current content into a wiki page, clearly linked from our
+new 'Contribute' page.
 
-
-On Tuesday, 24 March 2020 11:00:11 CEST Andreas Schneider via samba-technical 
-wrote:
-> Hello,
-> 
-> as a daily task I have to sign commits and also add my review tag after
-> inspection.
-> 
-> As git-filter-branch has been deprecated and the replacement is git-filter-
-> repo [1], I've written some really nice python tools to make my life easier.
-> 
-> In a git repository I and do:
-> 
-> git signoff+            # Add my signoff to commits I authored.
-> git signoff+ --by metze # Sign commits authored by metze,
->                         # because he forgot :-)
-> git review+             # Add my RB tag to commits I'm not the
->                         # author of or which has my sign tag
-> git review+ --by metze  # Add review by metze
-> 
-> 
-> metze is a shortcut, the name you specify is actually a file name placed in
-> 
-> ~/.review
-> 
-> so metze is actually the file ~/.review/metze and the content is his name
-> and mail address.
-> 
-> You can find 'git signoff+' at [2] and 'git review+' at [2]. Just put them
-> in
-> 
-> ~/bin/
-> 
-> and git will find them.
-> 
-> 
-> I hope they will be useful to others.
-> 
-> 
-> 
-> 	Andreas
-> 
-> 
-> [1] https://github.com/newren/git-filter-repo/
-> [2]
-> https://git.cryptomilk.org/users/asn/dotfiles.git/tree/git/bin/git-signoff+
-> [3]
-> https://git.cryptomilk.org/users/asn/dotfiles.git/tree/git/bin/git-review+
-
+Andrew Bartlett
 
 -- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
 
 
 
