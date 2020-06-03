@@ -2,42 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5F621EC6E8
-	for <lists+samba-technical@lfdr.de>; Wed,  3 Jun 2020 03:44:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 78D0B1EC874
+	for <lists+samba-technical@lfdr.de>; Wed,  3 Jun 2020 06:34:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=60chrlrF1pjXRb0Cxszx3vj+Itlb0orHl5xaBZol+o4=; b=hcJpgoMS7ZoIKJoxU5q7zth5ga
-	WVS8ZGF4yeinOIJS1fJkl2VtSUTT1iiejtqZaPAmD6E4P4lWC94aV3r1aeTDbLYkIWBJV6s/SsVv7
-	EB8kqervHiGV9Px0BDqgzTvyJZdZFE/TmKq4YMMbCKeDhZ1htRqSi3STSljCILDYB+47tFaqE1BUD
-	ZgtFwiht+YGUB9zXX0WIeYaTWRxym6quTS+IjyzgLAOMl99c6hzcHhmcU5Od4nMd1i7fhJDNHccz3
-	HTq87PgtrXGo5VxLYn1qzE9VHpK46gSb7hPXCKqXnzjRawHwi0M3G6rnSfLWmb6M4CaKZ68DBoY4m
-	OCCEGt1Q==;
-Received: from localhost ([::1]:40242 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=fAb/i7rvDh8Tgy3JWkNerbF2lxIy7DpYTqBctKc6itQ=; b=ncVdVyyQ747qnXjTvYmX5V2CNB
+	UzqKys8PFoiVA2WbHete1yvTBYHp/5hToPhdjBgo7M2OavHuORzd/22kup2u73rSRqRvlrmC3cksi
+	H3Cv923sCHqRjGuLMQqGduueOKz/gAlfT/87LCybX+Uwg5Ig+6scr9Ocy5PrULs6T56G2TtElO9ON
+	znMMPr7MUN0m/DKNcmQCDZsC1op8b7AtUIVif71VKFRu5eDE1uctJq0i+nDlnUdFo1GZnFK4aEYww
+	jC2bQPg/FhBoyG4twnnlHcnRzygyERjoX0PQm9awTdTuhbAQ0Q6KKePrYHbM/3PhKW8zULGSfoTvB
+	8tUmK8wA==;
+Received: from localhost ([::1]:41124 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jgIRe-008Xwe-Nt; Wed, 03 Jun 2020 01:43:54 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50176) 
+	id 1jgL5k-008YHf-TF; Wed, 03 Jun 2020 04:33:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43124) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jgIRa-008XwX-3t
- for samba-technical@lists.samba.org; Wed, 03 Jun 2020 01:43:52 +0000
+ (Exim) id 1jgL5f-008YHY-LI
+ for samba-technical@lists.samba.org; Wed, 03 Jun 2020 04:33:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=60chrlrF1pjXRb0Cxszx3vj+Itlb0orHl5xaBZol+o4=; b=xeptJ/tpzT9kPDNP3w9xhBeih7
- Gq7cdG8uaSYY3xXhnZWK8DYwvkTTNfO7U6tpX9m6x3N7IIPwxlXJgRl9tC1ph57VTqqe1JfmvLLsr
- 7y2NN8S157nBCeUgtm8jjQiKjOck4b9+dTby415sNDG90xsyeddEP+mrq7tDOW1ZHaEplyGxvRoji
- b+Gic14P4No0NvwlGR6KH1CVy/Sfn+O5H/za+bdJp2LULQzUgNrAfk2+RUiEiC7WebM2d887xAxt4
- /i6HO7wM3smbDYrgfig2lvawdtAnsbUuawKeOyZBfgQHviofyju9O7+8KjBBYaLL62Ff375OXLROc
- XyZLyjdcau4ngYNYHn+c+F2bc3Pt00zkWYT4gXwNe518dAFm7RL7G7FBWhsbKuSPbdrQ6gHN4vHJK
- vdkfOnEAJCbhKDPEdauwLrsXo/9/iZbARd2Oih0YgQAWji3O1FV8w6Yk82YqwsgmyBvX6Ourxu9p4
- loPb20F9rjbq7WbsCO+KK8/n;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=fAb/i7rvDh8Tgy3JWkNerbF2lxIy7DpYTqBctKc6itQ=; b=fvRaC+zuARplWZeoYXQtjdvwJU
+ sLZnufKI84tNVlla/VTx3R/HpXfT2AtNdqYk/bfdRgUyWb3wT6WoPgw2Hcg2rNfCOjbYkCDDxfnKl
+ e9AGrl8zhHqA99RwYeplPNofwSnfZRKIet4PKMoLhpTv0dsFNNJ5YCP98vIOYZFGAzrYDc48Qjfkc
+ pqvRs20rVTzWdcIWSoY+AyTI0NrDapj0J14y/HhiZUm9MDmmxq3HHLiVnxhZOlqz5OQR+jGjfWoAC
+ 2lrnueo/l3mAM6YFWa5qhXrsF9vyKYcblvBQx3HNk7/b1YR+sikkdIQpVhlOFhE22WoF91+l8fqpb
+ TNXlqAnRjEPhLkiTXRSFSbJVZpSDjQrLxk5W74IgLEFIHx7RvBu5o4y6saZf3p0O3t7HvTgI+nQ0f
+ b/xVmt67pbSih+xLjFaHc4L3wt8qHb+rjZ9TkE+6+Wc2tr9EsniPpOPT1dK8cODbYhVtJlvUDCuvz
+ AbjVCb5bb6E2VA5nd6F+rg2/;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jgIRY-0005b2-3o; Wed, 03 Jun 2020 01:43:48 +0000
-Message-ID: <c5c46e71b5093b5ba3450d089541a8d431792247.camel@samba.org>
-Subject: Samba Developers Guide
-To: Karolin Seeger <kseeger@samba.org>, Jeremy Allison <jra@samba.org>, 
- Richard Sharpe <realrichardsharpe@gmail.com>, =?ISO-8859-1?Q?Bj=F6rn?=
- Jacke <bj@sernet.de>
-Date: Wed, 03 Jun 2020 13:43:40 +1200
+ (Exim) id 1jgL5e-0006gk-H6
+ for samba-technical@lists.samba.org; Wed, 03 Jun 2020 04:33:23 +0000
+Message-ID: <c1d1f0b3ddeaecefce07c39961c5ca992f408bf2.camel@samba.org>
+Subject: Remove the "Using Git for Samba Development" wiki page?
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Wed, 03 Jun 2020 16:33:18 +1200
 Content-Type: text/plain; charset="UTF-8"
 X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
 Mime-Version: 1.0
@@ -57,32 +56,23 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-G'Day,
+With the new "Contribute" page mostly covering the same ground, I
+wondered about removing the "Using Git for Samba Development" and
+replacing it with a redirect to "Contribute".
 
-I recently had the misfortune of cleaning up the docs-xml build system
-and removed some old cruft.
+Written at a time when Git was new to Samba developers and the
+industry, it is showing it's age and I think the 'basic git' elements
+are now superseded by better documentation elsewhere.
 
-https://gitlab.com/samba-team/samba/-/merge_requests/1377
+Similarly, I would now like to slim down the "Samba CI on GitLab" page
+to only have details not duplicated elsewhere on the wiki.
 
-Once I got it going, I looked at the Table of Contents, which is
-similar to this old online version:
+In short, I'm trying to reduce some of the conflicting instructions.
 
-https://www.samba.org/samba/docs/old/Samba3-Developers-Guide/
-
-I know I was the one who tried to save the Samba HOWTO and Samba By
-Example books, but that irony aside: almost everything listed in in
-this page there feels outdated, old or misleading.  We now have better
-macros to replace CIVAL, for example.
-
-However, it was decided to keep it and those of you in the To for this
-mail have contributed to it in the past few years.
-
-Can anybody say some words in support of this, or should this now also
-be removed?
+Does anybody have any thoughts or objections?
 
 Thanks,
 
