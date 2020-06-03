@@ -2,45 +2,37 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78D0B1EC874
-	for <lists+samba-technical@lfdr.de>; Wed,  3 Jun 2020 06:34:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E85A61ECC18
+	for <lists+samba-technical@lfdr.de>; Wed,  3 Jun 2020 11:01:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=fAb/i7rvDh8Tgy3JWkNerbF2lxIy7DpYTqBctKc6itQ=; b=ncVdVyyQ747qnXjTvYmX5V2CNB
-	UzqKys8PFoiVA2WbHete1yvTBYHp/5hToPhdjBgo7M2OavHuORzd/22kup2u73rSRqRvlrmC3cksi
-	H3Cv923sCHqRjGuLMQqGduueOKz/gAlfT/87LCybX+Uwg5Ig+6scr9Ocy5PrULs6T56G2TtElO9ON
-	znMMPr7MUN0m/DKNcmQCDZsC1op8b7AtUIVif71VKFRu5eDE1uctJq0i+nDlnUdFo1GZnFK4aEYww
-	jC2bQPg/FhBoyG4twnnlHcnRzygyERjoX0PQm9awTdTuhbAQ0Q6KKePrYHbM/3PhKW8zULGSfoTvB
-	8tUmK8wA==;
-Received: from localhost ([::1]:41124 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=jzHeTgi94GiNuKjuWGQP7CFG6E32jMx9u2S/K9DL3hA=; b=2IA/jPs6mTO3QDN1hUPknn+5FK
+	ybLI77f89GIQHsNCFVViSlpOwphNCOYWw4L6XeqS50ZziuixxIXmS1/XwQ2YHdvU5n9CoXCK2X6uw
+	7unoPWMw7yy/qquvw3l088YzGdo4cWQt+TUUlgXiy6/k+QJV9O7VdavoutWgvWpzHcPeFC9qNE065
+	scvLXSDRoIR8ZkYAemx954hfNIkMk5cnaYjI2MFAYq+osfg4WUh/iqPvprctJMDGNTXpI+vJpxu+F
+	kO77M0RGv1UPXIpjklI7Waw9yM2NVr5hqrFsBC7RB9pRN7SkTobTmmFKqrd1Od9OAfzBv9RgzWxwA
+	6vMq6Htw==;
+Received: from localhost ([::1]:52222 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jgL5k-008YHf-TF; Wed, 03 Jun 2020 04:33:28 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43124) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jgL5f-008YHY-LI
- for samba-technical@lists.samba.org; Wed, 03 Jun 2020 04:33:26 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=fAb/i7rvDh8Tgy3JWkNerbF2lxIy7DpYTqBctKc6itQ=; b=fvRaC+zuARplWZeoYXQtjdvwJU
- sLZnufKI84tNVlla/VTx3R/HpXfT2AtNdqYk/bfdRgUyWb3wT6WoPgw2Hcg2rNfCOjbYkCDDxfnKl
- e9AGrl8zhHqA99RwYeplPNofwSnfZRKIet4PKMoLhpTv0dsFNNJ5YCP98vIOYZFGAzrYDc48Qjfkc
- pqvRs20rVTzWdcIWSoY+AyTI0NrDapj0J14y/HhiZUm9MDmmxq3HHLiVnxhZOlqz5OQR+jGjfWoAC
- 2lrnueo/l3mAM6YFWa5qhXrsF9vyKYcblvBQx3HNk7/b1YR+sikkdIQpVhlOFhE22WoF91+l8fqpb
- TNXlqAnRjEPhLkiTXRSFSbJVZpSDjQrLxk5W74IgLEFIHx7RvBu5o4y6saZf3p0O3t7HvTgI+nQ0f
- b/xVmt67pbSih+xLjFaHc4L3wt8qHb+rjZ9TkE+6+Wc2tr9EsniPpOPT1dK8cODbYhVtJlvUDCuvz
- AbjVCb5bb6E2VA5nd6F+rg2/;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jgL5e-0006gk-H6
- for samba-technical@lists.samba.org; Wed, 03 Jun 2020 04:33:23 +0000
-Message-ID: <c1d1f0b3ddeaecefce07c39961c5ca992f408bf2.camel@samba.org>
-Subject: Remove the "Using Git for Samba Development" wiki page?
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Wed, 03 Jun 2020 16:33:18 +1200
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+	id 1jgPGX-008aMj-E8; Wed, 03 Jun 2020 09:00:53 +0000
+Received: from mx2.suse.de ([195.135.220.15]:35640) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1jgPGR-008aMb-5k
+ for samba-technical@lists.samba.org; Wed, 03 Jun 2020 09:00:49 +0000
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 1BBEFAC24;
+ Wed,  3 Jun 2020 09:00:47 +0000 (UTC)
+To: Andrew Bartlett <abartlet@samba.org>, Karolin Seeger
+ <kseeger@samba.org>, Jeremy Allison <jra@samba.org>, Richard Sharpe
+ <realrichardsharpe@gmail.com>, =?utf-8?Q?Bj=C3=B6rn?= Jacke <bj@sernet.de>
+Subject: Re: Samba Developers Guide
+In-Reply-To: <c5c46e71b5093b5ba3450d089541a8d431792247.camel@samba.org>
+References: <c5c46e71b5093b5ba3450d089541a8d431792247.camel@samba.org>
+Date: Wed, 03 Jun 2020 11:00:42 +0200
+Message-ID: <87y2p4ikw5.fsf@suse.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,35 +46,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-With the new "Contribute" page mostly covering the same ground, I
-wondered about removing the "Using Git for Samba Development" and
-replacing it with a redirect to "Contribute".
 
-Written at a time when Git was new to Samba developers and the
-industry, it is showing it's age and I think the 'basic git' elements
-are now superseded by better documentation elsewhere.
+(re-sending from my subscribed addresse, sorry for duplicates)
 
-Similarly, I would now like to slim down the "Samba CI on GitLab" page
-to only have details not duplicated elsewhere on the wiki.
+Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+writes:
+> Can anybody say some words in support of this, or should this now also
+> be removed?
 
-In short, I'm trying to reduce some of the conflicting instructions.
+As samba grows more and more complex I think a document like this is
+desperatly needed. Perhaps it could be updated with the content from
+Ralph's sambaxp talk?
 
-Does anybody have any thoughts or objections?
-
-Thanks,
-
-Andrew Bartlett
--- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
-
-
-
+Cheers,
+--=20
+Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, DE
+GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
+nchen)
 
