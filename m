@@ -2,49 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C6851ECE21
-	for <lists+samba-technical@lfdr.de>; Wed,  3 Jun 2020 13:19:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E34E51ED22C
+	for <lists+samba-technical@lfdr.de>; Wed,  3 Jun 2020 16:35:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=+KRzgqrfE8mP4hxV6uyiw5xrvxLwU7KXWcT2Rm/mA1w=; b=hkyI2+kjHHUDmxthh7fOIEz3uW
-	pG7WWz2nVm+iARN4ElxGB3Kzvlg3CJeCWwEFvL74CpLHa1E+SnfuY16jksKU+g6dAAKA372uy3EIj
-	Rc91o9TzXe4MFGyYiwEZW+pQA7yEdfNG+4eFCznYygr3WKxvS6vnUmH6tPpG21xIYjLLv+uIxMvOs
-	Kx7R43avB4PkZtH97U+ry0wblDa0KTy7xRoe/+FmUc6vIDW7NsLnulPZqgjqjQ1gV3zi9A5xbrgwl
-	VpWoe8TMFoylYEidOpQWcmFFwctlJO+LI76s0cvkUyA5lj/O0k09Y2xM9EP7HHl5nKxX4qXsFoTWy
-	g/R0P1yg==;
-Received: from localhost ([::1]:65434 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=NHUDMvA68asC5DNsEalsPNAY2HUu/IjyicXtrRou/6E=; b=HvBtcAbvL08nUj/AZK17tuxJnf
+	kzVl9fh2W4IkqB6auToXkWVGg6Lao/2mEp5RP6A1HRxXw5PwFGjVLLpQUEeqTV83zlL5EDmgYM5gf
+	hlxcvB5LuBXYOH0U+C4QjXx0jAsCxqCFKXsMdFZUBS6+z2vrmZs8SnWDGT+nWDAQe520EToC7ufl7
+	Cggq8wG8PhANu83oC4tKWiydIbg1sCmjHNr+lyOpvoGSSQFfKT6P4pW9TjUr3q42+/ZYT537uguYY
+	CtOzWNBuu5atDc2DX0KhSTGsiivzVnmmotsbiAUrI1jJnkM52o0wgtVs5mewYUvLAFBGiOG2QkbFd
+	kA87Mkpw==;
+Received: from localhost ([::1]:31862 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jgRPz-008cKN-Ey; Wed, 03 Jun 2020 11:18:47 +0000
-Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:50157) 
+	id 1jgUUL-008eat-9M; Wed, 03 Jun 2020 14:35:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41820) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jgRPu-008cKG-6z
- for samba-technical@lists.samba.org; Wed, 03 Jun 2020 11:18:44 +0000
-Received: from intern.sernet.de by mail.sernet.de with esmtps (Exim 4.92 #3)
- id 1jgRPs-00038V-R0; Wed, 03 Jun 2020 13:18:40 +0200
-Received: by intern.sernet.de
- id 1jgRPs-0005Sm-MU; Wed, 03 Jun 2020 13:18:40 +0200
-Received: from bjacke by pell.sernet.de with local (Exim 4.93)
- (envelope-from <bjacke@sernet.de>)
- id 1jgRPs-002zyZ-FX; Wed, 03 Jun 2020 13:18:40 +0200
-Date: Wed, 3 Jun 2020 13:18:40 +0200
-To: =?iso-8859-1?Q?Aur=E9lien?= Aptel <aaptel@suse.com>
-Subject: Re: Samba Developers Guide
-Message-ID: <20200603111840.GA714675@sernet.de>
-Mail-Followup-To: =?iso-8859-1?Q?Aur=E9lien?= Aptel <aaptel@suse.com>,
- Andrew Bartlett <abartlet@samba.org>,
- Karolin Seeger <kseeger@samba.org>, Jeremy Allison <jra@samba.org>,
- Richard Sharpe <realrichardsharpe@gmail.com>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-References: <c5c46e71b5093b5ba3450d089541a8d431792247.camel@samba.org>
- <87y2p4ikw5.fsf@suse.com>
+ (Exim) id 1jgUUG-008eam-6Q
+ for samba-technical@lists.samba.org; Wed, 03 Jun 2020 14:35:26 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=NHUDMvA68asC5DNsEalsPNAY2HUu/IjyicXtrRou/6E=; b=H+IJRGf+Fmrdxp7KGKmDyDbk01
+ 9jQPjsqp+qKdJWiIgLg270QuYTDsTn9Vf+vEZkvHodeRpPqMANkinaR8Z63AlwZGBX5rJ6QsNPG2D
+ +ae93bFihXoq5N0uId0f4jBLE50xMn7u00wnDj+lHzGJMIswv+6ELIH6gC559pGbSEHydAhy0excW
+ sfBeAGnYi1cXXWjI1H9cgP2tXQ6+IweHvIbRiz/Ej/NPAAa0ifonHIvwLkRrisLPxzmrNWrQl8q+C
+ 6W25dykt46JXPk7W+LlmlQKjnDGCIVqNZlKZtYSnwChGtgNfFcbtDa1s9Sy2e2OmX3PHohP1IkN+Q
+ 0D+CFsnbDqPBuFxZTOVMjmPG0n3LeRtVUkpgN1nAHfiQHGRa9B65Rwp6/5epdk4pJIlWUyqgrsAc8
+ NdRuw5kNCM1dCYVmpjApD2wGsPV2TIrc1AHrNV0GAVnJlvtVKczAmeHBjptSThTGebAR2VD5ygjy9
+ 9PU6/vi47o9cO94ktqZXRdtW;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jgUUE-0004dj-Nd; Wed, 03 Jun 2020 14:35:23 +0000
+To: samba-technical@lists.samba.org
+Subject: Re: git signoff+ and review+
+Date: Wed, 03 Jun 2020 16:35:21 +0200
+Message-ID: <2877725.qJPT1UHR8W@magrathea>
+In-Reply-To: <2070261.IvKQ8U6GgO@magrathea>
+References: <2070261.IvKQ8U6GgO@magrathea>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <87y2p4ikw5.fsf@suse.com>
-X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
- Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
-X-S2-White: [185.199.216.40] (port=34833 helo=emil.sernet.de)
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,30 +54,69 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Bj=C3=B6rn_Jacke_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?iso-8859-1?Q?Bj=F6rn?= Jacke <bj@sernet.de>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Jeremy Allison <jra@samba.org>, Andrew Bartlett <abartlet@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 2020-06-03 at 11:00 +0200 Aurélien Aptel via samba-technical sent off:
-> Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-> writes:
-> > Can anybody say some words in support of this, or should this now also
-> > be removed?
+I've pushed some improvements to the tools ...
+
+
+
+On Tuesday, 24 March 2020 11:00:11 CEST Andreas Schneider via samba-technical 
+wrote:
+> Hello,
 > 
-> As samba grows more and more complex I think a document like this is
-> desperatly needed. Perhaps it could be updated with the content from
-> Ralph's sambaxp talk?
+> as a daily task I have to sign commits and also add my review tag after
+> inspection.
+> 
+> As git-filter-branch has been deprecated and the replacement is git-filter-
+> repo [1], I've written some really nice python tools to make my life easier.
+> 
+> In a git repository I and do:
+> 
+> git signoff+            # Add my signoff to commits I authored.
+> git signoff+ --by metze # Sign commits authored by metze,
+>                         # because he forgot :-)
+> git review+             # Add my RB tag to commits I'm not the
+>                         # author of or which has my sign tag
+> git review+ --by metze  # Add review by metze
+> 
+> 
+> metze is a shortcut, the name you specify is actually a file name placed in
+> 
+> ~/.review
+> 
+> so metze is actually the file ~/.review/metze and the content is his name
+> and mail address.
+> 
+> You can find 'git signoff+' at [2] and 'git review+' at [2]. Just put them
+> in
+> 
+> ~/bin/
+> 
+> and git will find them.
+> 
+> 
+> I hope they will be useful to others.
+> 
+> 
+> 
+> 	Andreas
+> 
+> 
+> [1] https://github.com/newren/git-filter-repo/
+> [2]
+> https://git.cryptomilk.org/users/asn/dotfiles.git/tree/git/bin/git-signoff+
+> [3]
+> https://git.cryptomilk.org/users/asn/dotfiles.git/tree/git/bin/git-review+
 
-given that the mentioned document is so outdated, I think updating it would be
-like more or less like rewriting it from scratch. Of course a good devel
-starting point docu is required but for this old one I would not object to drop
-it. On the web there can still stay that old one archived with the "outdated"
-disclaimer in the background.
 
-my 2¢
-Björn
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
+
 
