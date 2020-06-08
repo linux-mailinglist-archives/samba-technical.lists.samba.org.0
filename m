@@ -2,47 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 991461F0A12
-	for <lists+samba-technical@lfdr.de>; Sun,  7 Jun 2020 06:53:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4417F1F2402
+	for <lists+samba-technical@lfdr.de>; Tue,  9 Jun 2020 01:19:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=ZSYCXEwcdW9POhDAtKi6Q3BJCiAmXXNICysxUlGluZE=; b=oc3oBsQnEu+s8EXO3KmSv5EpYN
-	tPuRDkuejvfZ9UQodF9yiJlpPqd7DvjWh2GMrzC6tOspZyLdHh45NhI3aAB+m6tydFS3+Z3kuWr6+
-	jQ+rmDwVzTjBRFdJyt4K5NZJbZ5d9Bnkyjy8KRXNviHT81v41wm7jJ2FiFJi+Wo2IJdUKJ4G24nU+
-	1g3vEh3lw4bA4ZwkvF/DrSMd935heUMDvEx0lINja5lXLYZuxL2yiIPSRvk2gSpHwt15TL5pJ0XQM
-	J9TIgDVbx/ZXskMh0+thCtXAKk31qv9L9xdMNYgr3l4XSV4cE0ikdgOujd4P0FT5MIZCPn03xlW1D
-	jWOE5sXA==;
-Received: from localhost ([::1]:61400 helo=hr1.samba.org) 
+	bh=WvTul3rVF5twKtHtdLUnO/8y2WHQMz3HxT7eZk5CUYQ=; b=0HWE1aFsRuPVhAtcpAdLi2Dgbu
+	ZijbBSrh+PRGTLVaLsVuDNNiZRkUW5edFDHkYZtM5MdrPViN/AEltw+gIsjxqzzWzIDM1VLrm/G2h
+	2+hcoJY4RlxCnLXEI9Xdo9IUtVKSe91taCs7ORCjimRGAFBMw5Ch/4z1qv1yLlPIcfXgR1zgioHb1
+	3ijDtHJHfECyL3A3mzRmLP7QME0b03JQzMqB8fxyE/7DxA/+XMsMMJr6W8uf6xt6eElejWsuUxrVm
+	p2iuzf7jVwC7N7dJWj4S5f1BKn4L8RaS+YdPizw0mv1R8QR2VOxGrIBMjoV4K7TD7FhX28viarP1X
+	CHFo0nmA==;
+Received: from localhost ([::1]:65244 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jhnHm-009KsW-E3; Sun, 07 Jun 2020 04:51:54 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58336) 
+	id 1jiR1X-009XfH-Bo; Mon, 08 Jun 2020 23:17:47 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:32744) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jhnHg-009KsP-Sg
- for samba-technical@lists.samba.org; Sun, 07 Jun 2020 04:51:51 +0000
+ (Exim) id 1jiR1Q-009XfA-49
+ for samba-technical@lists.samba.org; Mon, 08 Jun 2020 23:17:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=ZSYCXEwcdW9POhDAtKi6Q3BJCiAmXXNICysxUlGluZE=; b=qL468X8P2rF3S4OiU05dXbFR0j
- ZUfcEunrM1uS9HxWzx6gnqvmS7OR3QI0cQjxaxdlOj0EpKcEW8wPbheczigETZoCCOIyKCOpgHH0v
- JPAKzbGYHSSEgtFKoy8N/gKF4teuy81Dy8sg3o3vfPd2k+2ZlMH5tlMw6LxBTiWkXpY5xP8y10ldb
- XYWnwp7SUto7RLDOqqkqzq5NVGRL85i/QBGTTaWtvKx/Vd8r0UwgjGZQsy+47DU7Yq5B9Ph+O7RLq
- nw0r0jmYT0TT5mD9XcP5hES2Kj0Gg19SnNW68gmrXG5KlzergmxVWTjozvMKGY3XLk2gctmUEwWWO
- RVgVSwKp8M1K16SkiXr3OCLVMVuiAaqeMw+KuiUxYbYTYp35Sv5h/f2Wh1t9+xmTK+daMUrCLmgdh
- w6yTX3JcaeLpChOih5c1bR8CLwT6aStOue4pLS6AJLdYihnffoR7KZigm/XCML7j0JPUABZjUYxp9
- 1cgZAiJ8RGznW8fES/lOREHg;
+ bh=WvTul3rVF5twKtHtdLUnO/8y2WHQMz3HxT7eZk5CUYQ=; b=34o3QSGqm7aBEWQKRZh9H6Apdt
+ ay9UB8OdknlINmjT6GBK6RQ0iOHnDEyu13bhXi//KHVWKfibdhD2z+hyy10+U8CALUKis5MO41teb
+ V+JZr6SYXXv8OQywnXV1r4nBtiohSEUDCwXB5MT50yTYrxJeqLzMpkyQfGGagNqHELGNWrSWXsceO
+ PDVDimIP7PzDkCRZAY92HJP3aCw67lK8TEWrgMsRr25tmAARJYleQP4GMqGBUTvrfxPwJ9PpDtgCO
+ wOhNdAowqri4543v1uenfyDlrQ3wrgYf2Qj9lnNNIy37Aspm7M53QT2jw4OyLTy8q8Uv9QgBx1j6y
+ 2P45UDhkgEo/jcYWkNAZ6pcneIpiPhMPZHPMg5lbCEAZu8bcEGZik/ooIxAMXEJSIJSWh3BZkvlg2
+ LNEZAZfN8UP3TnhFqTxtP7WowKq+GmIFcUP6co6mwkBPMbEzrZsxKrY2o8suIbHcVD31QTXAmHNdv
+ AYSgwclwqI65duVlZfQiAjp+;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jhnHd-0002TD-KO; Sun, 07 Jun 2020 04:51:45 +0000
-Date: Sun, 7 Jun 2020 07:51:42 +0300
-To: Dario Lesca <d.lesca@solinos.it>
-Subject: Re: Fedora 32 MIT Kerberos and samba 4.12.2: Remote Desktop
- application cannot login from win to another win with domain users
-Message-ID: <20200607045142.GA2885535@onega.vda.li>
-References: <86d98975b6cc2de9fee96921efbb08a93ed59a8b.camel@solinos.it>
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1jiR1O-0003yk-5X; Mon, 08 Jun 2020 23:17:38 +0000
+Date: Mon, 8 Jun 2020 16:17:34 -0700
+To: Andrew Bartlett <abartlet@samba.org>
+Subject: Re: Avoiding further (LDAP) stack proliferation in Samba
+Message-ID: <20200608231733.GA839@samba.org>
+References: <7f08ecb52a4a94d95e39af436e94ab852cf0da55.camel@samba.org>
+ <20200521012158.GB10353@jeremy-acer>
+ <4ce022a6c65422e40e1a583f95cefbbc7585393c.camel@samba.org>
+ <20200521021959.GB12847@jeremy-acer>
+ <20200521214312.GA12586@samba.org>
+ <854ac3b5d75279a13ebf3c5a6e9f4fd5b9eb8943.camel@samba.org>
+ <437a7ad7-5158-9124-9ba3-939a3bfcee53@samba.org>
+ <b20bcf09b119aa0d0585d27b24076bdd17157caa.camel@samba.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <86d98975b6cc2de9fee96921efbb08a93ed59a8b.camel@solinos.it>
+In-Reply-To: <b20bcf09b119aa0d0585d27b24076bdd17157caa.camel@samba.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,118 +62,150 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexander Bokovoy <ab@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>
+From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christof Schmitt <cs@samba.org>
+Cc: Stefan Metzmacher <metze@samba.org>, swen@linux.ibm.com,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On to, 04 kesä 2020, Dario Lesca via samba-technical wrote:
-> I work on a test environment to test samba AD with MIT kerberos out of
-> the box.
-> 
-> I have a AD-DC samba on Fedora 32 (addc1), a Centos 8 member server
-> (centos8) and two PC windows 10 (win10a and win10b), fedora.loc is the
-> AD REALM test domain name
-> 
-> All work fine, except to access from windows to windows with remote
-> desktop. 
-> 
-> I work on win10b with user administrator@fedora.loc and if I try to
-> access to win10a with remote desktop, not work.
-> I get a password request and I cannot access with domain users, I can
-> access only with win10a local user enabled.
-> 
-> This is what I get into /var/log/samba/mit_kdc.log:
-> 
-> mag 15 16:58:49 addc1.fedora.loc krb5kdc[821](info): AS_REQ (6 etypes {aes256-cts-hmac-sha1-96(18), aes128-cts-hmac-sha1-96(17), DEPRECATED:arcfour-hmac(23), DEPRECATED:arcfour-hmac-exp(24), UNSUPPORTED:(-135), UNSUPPORTED:des-cbc-md5(3)}) 192.168.122.102: NEEDED_PREAUTH: Administrator@FEDORA for krbtgt/FEDORA@FEDORA, Additional pre-authentication required
-> mag 15 16:58:49 addc1.fedora.loc krb5kdc[821](info): closing down fd 19
-> mag 15 16:58:49 addc1.fedora.loc krb5kdc[821](info): AS_REQ (6 etypes {aes256-cts-hmac-sha1-96(18), aes128-cts-hmac-sha1-96(17), DEPRECATED:arcfour-hmac(23), DEPRECATED:arcfour-hmac-exp(24), UNSUPPORTED:(-135), UNSUPPORTED:des-cbc-md5(3)}) 192.168.122.102: ISSUE: authtime 1589554729, etypes {rep=aes256-cts-hmac-sha1-96(18), tkt=aes256-cts-hmac-sha1-96(18), ses=aes256-cts-hmac-sha1-96(18)}, Administrator@FEDORA for krbtgt/FEDORA@FEDORA
-> mag 15 16:58:49 addc1.fedora.loc krb5kdc[821](info): closing down fd 19
-> mag 15 16:58:49 addc1.fedora.loc krb5kdc[821](info): TGS_REQ (5 etypes {aes256-cts-hmac-sha1-96(18), aes128-cts-hmac-sha1-96(17), DEPRECATED:arcfour-hmac(23), DEPRECATED:arcfour-hmac-exp(24), UNSUPPORTED:(-135)}) 192.168.122.102: ISSUE: authtime 1589554729, etypes {rep=aes256-cts-hmac-sha1-96(18), tkt=aes256-cts-hmac-sha1-96(18), ses=aes256-cts-hmac-sha1-96(18)}, Administrator@FEDORA.LOC for TERMSRV/win10a@FEDORA.LOC
-> mag 15 16:58:49 addc1.fedora.loc krb5kdc[821](info): closing down fd 19
-> mag 15 16:58:49 addc1.fedora.loc krb5kdc[821](info): TGS_REQ 192.168.122.102: 2ND_TKT_MISMATCH: authtime 1589554729, Administrator@FEDORA.LOC for TERMSRV/win10a@FEDORA.LOC, 2nd tkt client WIN10A$@FEDORA.LOC
-> mag 15 16:58:49 addc1.fedora.loc krb5kdc[821](info): closing down fd 19
-> 
-> If I try to access via file manager to some shared folder on win10a
-> (\\win10a\share\) all work fine.
-> 
-> Also if I try to access to win10a from Linux Fedora addc1 server with
-> xfreerdp utility ( via ssh -XY addc1) all work fine and I can access
-> without problem, this is the log session:
-> 
-> [lesca@addc1 ~]$ xfreerdp  /u:administrator@fedora.loc /v:win10a.fedora.loc
-> [18:01:32:549] [2340:2341] [INFO][com.freerdp.core] - freerdp_connect:freerdp_set_last_error_ex resetting error state
-> [18:01:32:549] [2340:2341] [INFO][com.freerdp.client.common.cmdline] - loading channelEx rdpdr
-> [18:01:32:549] [2340:2341] [INFO][com.freerdp.client.common.cmdline] - loading channelEx rdpsnd
-> [18:01:32:549] [2340:2341] [INFO][com.freerdp.client.common.cmdline] - loading channelEx cliprdr
-> [18:01:35:857] [2340:2341] [INFO][com.freerdp.primitives] - primitives autodetect, using optimized
-> [18:01:35:864] [2340:2341] [INFO][com.freerdp.core] - freerdp_tcp_is_hostname_resolvable:freerdp_set_last_error_ex resetting error state
-> [18:01:35:867] [2340:2341] [INFO][com.freerdp.core] - freerdp_tcp_connect:freerdp_set_last_error_ex resetting error state
-> [18:01:35:886] [2340:2341] [WARN][com.freerdp.crypto] - Certificate verification failure 'unable to get local issuer certificate (20)' at stack position 0
-> [18:01:35:886] [2340:2341] [WARN][com.freerdp.crypto] - CN = win10a.fedora.loc
-> Password: 
-> [18:01:39:264] [2340:2341] [INFO][com.freerdp.gdi] - Local framebuffer format  PIXEL_FORMAT_BGRX32
-> [18:01:39:265] [2340:2341] [INFO][com.freerdp.gdi] - Remote framebuffer format PIXEL_FORMAT_RGB16
-> [18:01:40:343] [2340:2341] [INFO][com.winpr.clipboard] - initialized POSIX local file subsystem
-> [18:01:41:829] [2340:2341] [INFO][com.freerdp.channels.rdpsnd.client] - Loaded fake backend for rdpsnd
-> [18:02:12:906] [2340:2341] [INFO][com.freerdp.core] - rdp_set_error_info:freerdp_set_last_error_ex resetting error state
-> [18:02:12:906] [2340:2347] [WARN][com.freerdp.channels.cliprdr.common] - [cliprdr_packet_format_list_new] called with invalid type 00000000
-> 
-> I have fill this RedHat bug:
-> https://bugzilla.redhat.com/show_bug.cgi?id=1836630
-> 
-> I must fill also a bug on samba bugzilla?
+Hi Andrew,
 
-As I said, it is a bug in MIT Kerberos, not Samba.
-We discussed this with Isaac and we need to fix it MIT upstream. Sorry,
-last two weeks were too busy for me.
+as Metze wrote, there is still work to be done across tldap and ldb, and
+probably more questions will come up, which libraries to re-use, how to
+handle dependencies to those, etc.
 
+For winbindd, the long-tem goal is to improve failover to different
+domain controllers, in case of network problems or DC outages. The
+current problem today is that winbindd uses libads, which encapsulates
+DC selection, LDAP queries and retries in a way that is completely
+outside of the control of winbindd. So the idea is to move winbindd to
+tldap first, and then later on move winbindd to be fully async, avoid
+the child processes and keep the connection state in one place.
+
+The goals to unify the LDAP stacks are worthwhile, but i do not see
+those as necessary for the winbindd changes. I suspect that would also
+trigger a wider discussion, e.g. which ASN.1 library to use, how to
+reprent common data structures, where to put these to handle
+dependencies.
+
+Christof
+
+On Mon, May 25, 2020 at 09:44:07PM +1200, Andrew Bartlett via samba-technical wrote:
+> Thanks metze for your reply,
 > 
-> Here some comment get on Fedora ML
+> There is much we agree on, and other things that we have different
+> perspectives on here.  
 > 
-> > From Alexander Bokovoy
-> > This is one of user-to-user authentication cases that aren't
-> > implemented 
-> > properly in MIT Kerberos and Samba AD for aliases (SPNs) of the
-> > machine
-> > account:
+> My opening thought is that in this, I recognise that I need to be
+> careful what I wish for.  Broad scale lift-and-shift operations have
+> been popular in Samba of late, and this is another of them in a way.
+> 
+> At the start, they appear very simple, but as noted here there is much
+> complexity in the end result, and a very risky transition that needs to
+> be done by experienced developers and reviewed incredibly carefully.
+> 
+> Even if we didn't have my concerns about the API and implementation of
+> tldap, as you note in (3) below the "ldap ssl ads" parameter (which is
+> used enough that we have a WIP patch set to fix it for channel
+> bindings) and "client ldap sasl wrapping" parameter are not
+> implemented.
+> 
+> And I do have concerns about tldap.  My view since the inception, which
+> I think I expressed - I've not checked the archives - is that tldap
+> should:
+>  * Use the struct ldb_request, struct ldb_parse_tree, struct ldb_dn,
+> struct ldb_message and the related structures.  Not because they are
+> divinely inspired but because they enable a suite of utility functions
+> that will, as the library becomes mature, be duplicated (like dumping
+> to LDIF, parsing extended DNs, extracting a GUID etc).
+> 
+> I've re-checked the code more recently, and I'm sorry to see so much
+> inline ASN.1 parsing.  It really should re-use ldap_message.c for the
+> ASN.1 parsing, so the ASN.1 encode and decode can be tested (see the
+> recent tests added in test_ldap_message) and fuzzed (fuzz_ldap_decode).
+> 
+> Why do I raise this again?  Because as noted, lift and shift is risky. 
+> So if it is ever to be done, it should be done while tldap supports
+> only one small, optional winbind module.
+> 
+> That is why I appreciate but don't accept the "but this is not
+> something new" (i.e. it is already in use) argument.  This is is a
+> significant new use that makes it harder and much less likely that
+> tldap will ever be overhauled and suggests that tldap is already the
+> "future ideal" API and implementation.
+> 
+> Of course I now wish I had raised these objections again in 2015, but
+> we both know that would not have been a good idea. 
+> 
+> But here in 2020 I would be much less opposed to winbindd using tldap
+> directly if these matters were addressed, which is why I tried to leave
+> this as a possible way forward in my original mail.  It would mean that
+> tldap would just be a different API to a common LDAP client lib, not an
+> standalone creature itself. 
+> 
+> But whatever we do, it must not become an independent, fully featured,
+> LDAP client stack, it must complement and integrate with what we have. 
+> 
+> Swen and Christof,
+> 
+> All this does however really bring into question if for the nominal
+> purpose, there is some way to get the timeout handling we need out of
+> the OpenLDAP libraries under libads in the meantime.
+> 
+> I'm sorry this has become a can of worms.  That happens in Samba
+> sometimes.  Perhaps start by proposing just your tests, and someone can
+> look at them in isolation?
+> 
+> Andrew Bartlett
+> 
+> On Fri, 2020-05-22 at 15:02 +0200, Stefan Metzmacher wrote:
+> 
+> > As you know I like the idea of having things implemented just once!
+> > But as found out in the past this is a lot of work and
+> > replacing everything at once is often not possible.
+> > We learnt that we sometimes have to do small steps with intermediate
+> > states, which we sometimes not like, but at the same time require
+> > in order to make progress at all.
 > > 
-> >   19 mag 15 16:58:49 addc1.fedora.loc krb5kdc[821](info): TGS_REQ
-> >   192.168.122.102: 2ND_TKT_MISMATCH: authtime 1589554729,
-> >   Administrator@FEDORA.LOC for TERMSRV/win10a@FEDORA.LOC, 2nd tkt
-> >   client WIN10A$@FEDORA.LOC
-> >   mag 15 16:58:49 addc1.fedora.loc krb5kdc[821](info): closing down
-> > fd
+> > There're a lot of things I'd like to see:
+> > 1. The ldb api should not be used for pure LDAP users,
+> >    it's bad enough that the strange async model exists at all!
+> >    We should hope that it's only used for LDAP for command line
+> >    tools in a sync fashion.
+> > 2. source3/lib/tldap_gensec_bind.c should use gensec_update_send/recv
+> > 3. tldap makes use of the "client ldap sasl wrapping" and other
+> >    options, which are use by source4/libcli/ldap/ and
+> >    source3/libads/
+> > 4. We can add some helpers to get/pass 'struct ldb_message' from/to
+> >    tldap c.
+> > 5. users of source4/libcli/ldap/ should move to the tldap api
+> >    - lib/ldb-samba/ldb_ildap.c can become lib/ldb-samba/ldb_tldap.c
+> > 6. libads should go away it, at least it's low level internals
+> >    maybe it can be build on top of tldap as a first step in
+> >    order to avoid a rewrite of all non-winbind users.
+> > 7. winbindd should avoid libads and only use tldap.
 > > 
-> > From Windows point of view TERMSRV/win10a is a service principal
-> > name of
-> > the WIN10A$ machine account, so they share the same key and are seen
-> > at
-> > the same principal for the check that is being done here. For MIT
-> > Kerberos, it doesn't see them as aliases as it does explicit compare
-> > of
-> > the principals and requested service principal does not match the
-> > principal in the evidence (2nd) ticket.
-> 
-> 
-> > From Isaac Boukris:
-> > From the code context of the '2ND_TKT_MISMATCH' error, it looks like
-> > it is doing user-to-user authentication (KDC_OPT_ENC_TKT_IN_SKEY).
+> > But the goal of
+> > https://gitlab.com/samba-team/samba/-/merge_requests/1351
+> > is moving along with 7.
 > > 
-> > Sounds like we might need to invoke krb5_db_check_alias() from PR
+> > And I'm not seeing why we would require 4, 5, 6 before doing 7.
+> > They would be nice to have, but they tasks for another day.
 > > 
-> > #1014 here as well.
-> 
-> 
-> Many thanks
-> 
+> > BTW: I'm not saying that I'm happy with the current patchset of merge
+> > request 1351. But that's a different discussion.
+> > 
+> > metze
+> > 
 > -- 
-> Dario Lesca
-> (inviato dal mio Linux Fedora 32 Workstation)
+> Andrew Bartlett                       https://samba.org/~abartlet/
+> Authentication Developer, Samba Team  https://samba.org
+> Samba Developer, Catalyst IT          
+> https://catalyst.net.nz/services/samba
 > 
 > 
-
--- 
-/ Alexander Bokovoy
+> 
+> 
 
