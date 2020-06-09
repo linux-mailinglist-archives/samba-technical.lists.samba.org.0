@@ -2,56 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89C2B1F4361
-	for <lists+samba-technical@lfdr.de>; Tue,  9 Jun 2020 19:53:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF7DA1F4598
+	for <lists+samba-technical@lfdr.de>; Tue,  9 Jun 2020 20:18:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=HN/oJG/FyUCORlc8SkJqt6wFKbOgIsge0neGfTr+zR8=; b=Jm4UzMwVnqkQUw9DCcfHJSM3Gw
-	zmQvG6Mj++Qpg9zJZTXbALwo2rANAuhjZBml6Izn/TMCEvYebyWUP/aNI7Kt9kRmdTcLZ1h2YljQd
-	yQZpvFIueNRtq8Ha2uln8NiFVdB+l5nxVcW38INAFEL12C8/7CUiLbvq7hkQ9PD+yXySQPaXRDBiq
-	Kt9MMYBWdZrHxjZxhgXbI1LYAT2Gp8sUp7ut37f6h2f5AcRikTUeWXPru3QTs2KRBXWS6wu2tt3n0
-	7qB2ujF9c2OzxQymLtZTrScEx+zjb4NtTb5F/ZUBbxHClH46gV0YA+CeATPsuHEhG9L6CzT/x78IO
-	QBd1uC+w==;
-Received: from localhost ([::1]:51858 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=PGNk/vbz2vIM+NO4RJuYb16I92TyuMdjx3ofAfKQvio=; b=eZaKgavQnBEqVNxog3gE0YXlbX
+	1IcNvKtYbsRUYVWIUeHIod/CQEYlN4etc4Xp1zIWZeYJikeUpaJPeXTta57nwdApE6KtSAu3rJ+n4
+	79rsH4gMb9K0IWV3O9XHSQyn8pTP0slcmte52n/CiKGMprjqAjEViMtpXcBntqAVIIroGV8i/5yhy
+	zdrN6DKA33iqad8D8iV/V/igk0pRkDiOb9kbFkAe1CVqgzXLozQV7pLBhzp+HuwiciZtRdtkwB8mK
+	TvoYzb7PRLSx9xuQzd7rdUk5OI/A73JAs5K8LOfljGrd0RF3JLKHODM7RfBCLaLk8Xw1GfEeeJ7PZ
+	bDt73r1A==;
+Received: from localhost ([::1]:52600 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jiiQU-009djL-I7; Tue, 09 Jun 2020 17:52:42 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54406) 
+	id 1jiioy-009dr1-Ky; Tue, 09 Jun 2020 18:18:00 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64668) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jiiQQ-009djC-PK
- for samba-technical@lists.samba.org; Tue, 09 Jun 2020 17:52:40 +0000
+ (Exim) id 1jiiot-009dqu-Nt
+ for samba-technical@lists.samba.org; Tue, 09 Jun 2020 18:17:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=HN/oJG/FyUCORlc8SkJqt6wFKbOgIsge0neGfTr+zR8=; b=x7mf7vnVFW2ABeGuqTdKSxgyNF
- YVg/zwX6TP9E8NQnQf0zDb8sbPbuAssPBmK5wADYPxGG7oZagtwxMJ07/aYCZqX9btXANo3NAnZuv
- vffg/4bvQhhEqaRcH4/9uMMTgpw2D44vEGclB1GFRcMPTUdXrEJ7YgrMbn1wYB/OIEJXw6VyFlwYY
- eIqZPugfF8mH/FVcQxPaOag4Ub+cs8bNwBCgUpXGcYvFmWJrF3yghYOfz2WlxhMTYkoiq31AigK2t
- AkZN8sYwXg5Rj+t2Ov1dbhQJZcyx6KLWWiJBMrUddx1zIhJVrp12kunfmz9s0H6zR1qSOkc4g6Azp
- UnbH11gxh7Kl75uDsfdcmFDVkG0tYqI4pmw6msx4IF4wEKlzy74EBfOZkTDgXIidgSrdkGsCzzQc8
- Se2qaqu14NkTm8v6XWnqQxeOXFO2mfXEtDeAB2mV8/TMLp167iqVpQwIlZOeP9udApFKNZCta1EjP
- 0/WKxkNPLcYrQ+YQTXwaHwfx;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=PGNk/vbz2vIM+NO4RJuYb16I92TyuMdjx3ofAfKQvio=; b=duZ9KrgaxYT4IpBDBKQCi7I21A
+ l4fA1B+qe1hKXV567SvbDeWFAdb42aqSNH6FAzqCJ1lvbhohM2LdcryOGithq9gwHfYrYy+jASpCa
+ V/xmQg1/5oQbWsDGg1r/r160B677JJVThOQ9rqfrOHAQX89P6Red5+0qm88wMyZNZeQ8wnb8QETOO
+ ku9qOYbIbSVFVserJiHBdjyuRQmDF1c2pNstRz54+IPJznEPTDHhGXBqJIJ2/CFOyT7J+R4HivqpC
+ EjZbT14/Z0R8mdEUyRkK8jYi61kx+zpesiWPIWF7GuH4B8OXA3jUEjPGRhlvEYV/wmqmETO+SzBrj
+ HMz0Kwk3itzpgkHla9bDEXUzzVwBg/SAMyS55jgGZ3oYfAqkfVVKmBrNL1k7iR7EiAIGeAzZOMNQm
+ YxSuLO8tdVKesMzYSAcnEdaWGCSrulpSADIndwLIxqKD34BoyuOJgEtPnUwY+0W2gJaVcsNT5JXfs
+ hygzVW49Yxj8ZVWDOmzoMM5X;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jiiQP-0005sy-0s; Tue, 09 Jun 2020 17:52:37 +0000
-Date: Tue, 9 Jun 2020 10:52:30 -0700
-To: Rowland penny <rpenny@samba.org>
-Subject: Re: Avoiding further (LDAP) stack proliferation in Samba
-Message-ID: <20200609175230.GA8351@jeremy-acer>
-References: <20200521021959.GB12847@jeremy-acer>
- <20200521214312.GA12586@samba.org>
- <854ac3b5d75279a13ebf3c5a6e9f4fd5b9eb8943.camel@samba.org>
- <437a7ad7-5158-9124-9ba3-939a3bfcee53@samba.org>
- <b20bcf09b119aa0d0585d27b24076bdd17157caa.camel@samba.org>
- <20200608231733.GA839@samba.org>
- <6caef0c2-7b6f-4665-8ae4-6ba9c2f565da@samba.org>
- <2096111bb99eef34a4dccb059ed6eac23ac4ef87.camel@samba.org>
- <6ec67eb9-96ab-3eac-faba-b50bff8656a8@samba.org>
- <6a8d2885-9db6-9187-6321-a3fdb554871b@samba.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <6a8d2885-9db6-9187-6321-a3fdb554871b@samba.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jiior-00066g-CR; Tue, 09 Jun 2020 18:17:54 +0000
+Message-ID: <1d67896e205c71300bc0e6acaf405380ec0182a1.camel@samba.org>
+Subject: Re: Schema updates and modern Samba AD
+To: Stefan Metzmacher <metze@samba.org>, Upstream Samba Technical Mailing
+ list <samba-technical@lists.samba.org>
+Date: Wed, 10 Jun 2020 06:17:48 +1200
+In-Reply-To: <e70dc906-1bbc-858e-ece8-80bcd6f60769@samba.org>
+References: <6519f23f61695e09cc6c9aa9336f69bcd8010da6.camel@samba.org>
+ <e70dc906-1bbc-858e-ece8-80bcd6f60769@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,58 +57,62 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Jun 09, 2020 at 11:03:18AM +0100, Rowland penny via samba-technical wrote:
-> On 09/06/2020 10:53, Ralph Boehme via samba-technical wrote:
-> > Am 6/9/20 um 11:15 AM schrieb Andrew Bartlett via samba-technical:
-> > > I'm sorry, I still hold to my disagreement.
-> > > 
-> > > It is really important to understand that while this will fix bugs, I
-> > > don't see this as a bug fix.  This is a lift-and-shift.  These
-> > > operations are both delicate and risky.  They also often fix bugs and
-> > > introduce important new features.
-> > > 
-> > > But this change needs to be evaluated at that, fully aware of the
-> > > implications, not just passed in as a bug fix.
-> > > 
-> > > I've been involved in implementing and in particular reviewing a large
-> > > number of lift-and-shift operations in Samba.  Rarely are they as
-> > > simple as they appear, and this one has the added complexity in what
-> > > I've raised about the target.
-> > > 
-> > > Therefore this cannot be simple regarded as a 'bug fix'.  I'm very
-> > > sorry.
-> > > 
-> > > Furthermore I've been told that this is actually the culmination of a
-> > > significant amount of work over a period of months or even a year.  I'm
-> > > incredibly sad that this work got to this late stage before public
-> > > discussions allowed these issues became apparent.
-> > > 
-> > > That is awful for everyone, and for that I'm sorry.
-> > I'm sorry, but to me this looks like the better is the enemy of the
-> > good. Replacing libads with the existing and already used tldap library
-> > is a step in the right direction.
+On Tue, 2020-06-09 at 16:54 +0200, Stefan Metzmacher wrote:
+> Hi Andrew,
+> 
+> > A long time ago I remember asking if we could change the default
+> > for
+> > "dsdb:schema updates allowed" to true, so that this is no longer
+> > guarded in Samba.
+
+> > What I can't remember (or find in the list archive) is what those
+> > issues are!
 > > 
-> > -slow
+> > Can you remind me?
+> 
+> The last time I looked at it I had this wip branch (ignore the
+> smbdirect
+> stuff)
+> 
 > > 
-> Hi, can I ask a few questions here ? What, if anything,  will change from
-> the users point of view if libads is changed for the tldap library ? Will a
-> user notice, will everything work as before, will the user experience be
-> better or worse ?
+https://git.samba.org/?p=metze/samba/wip.git;a=shortlog;h=refs/heads/master4-schema
+> 
+> Before we can enable this, we need to be 100% sure that an administrator
+> (or even SYSTEM via ldbedit or incoming replication) is not able to
+> break the local schema.
+> 
+> The first thing is to verify we can load it again before we store it,
+> I think we have parts of this, but I don't believe it complete.
+> 
+> We need to reject any change to ldapDisplayName attributes (Windows
+> allows them, but we'll just break as we use them in our database).
+> 
+> We need to implement all known constraints regarding schema changes
+> we
+> can find anywhere in MS-ADTS (there are a lot of places...) in
+> the schema_data.c I added some of this in that branch.
+> 
+> It also turns out that we don't have good schema tests, I tried
+> some of them against Windows, but they just fail. They seem to be
+> more like fantasy, than anything useful.
 
-That's a *really* good question IMHO, and should be the driver
-of everything we do (just my 2cents).
+Thank you so much for this.  I've added a link to this mail and a
+hopefully fair summary of a 'safe-ish path' for administrators to:
 
-I *think* (this not being directly my area) that moving internally
-to tldap allows winbindd to become much more async internally,
-thus allowing improved responsiveness when under heavy load,
-and preventing the "winbindd is hanging" reports from users.
+https://wiki.samba.org/index.php/Samba_AD_schema_extensions#Disabled_by_default
 
-Now how we get there from here is the $64000 (or should that
-be £50,243.20 in your case :-) question..
+Andrew Bartlett
+-- 
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
+
+
 
