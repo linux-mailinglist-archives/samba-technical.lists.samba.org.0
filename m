@@ -2,44 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF7DA1F4598
-	for <lists+samba-technical@lfdr.de>; Tue,  9 Jun 2020 20:18:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36E041F465F
+	for <lists+samba-technical@lfdr.de>; Tue,  9 Jun 2020 20:35:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=PGNk/vbz2vIM+NO4RJuYb16I92TyuMdjx3ofAfKQvio=; b=eZaKgavQnBEqVNxog3gE0YXlbX
-	1IcNvKtYbsRUYVWIUeHIod/CQEYlN4etc4Xp1zIWZeYJikeUpaJPeXTta57nwdApE6KtSAu3rJ+n4
-	79rsH4gMb9K0IWV3O9XHSQyn8pTP0slcmte52n/CiKGMprjqAjEViMtpXcBntqAVIIroGV8i/5yhy
-	zdrN6DKA33iqad8D8iV/V/igk0pRkDiOb9kbFkAe1CVqgzXLozQV7pLBhzp+HuwiciZtRdtkwB8mK
-	TvoYzb7PRLSx9xuQzd7rdUk5OI/A73JAs5K8LOfljGrd0RF3JLKHODM7RfBCLaLk8Xw1GfEeeJ7PZ
-	bDt73r1A==;
-Received: from localhost ([::1]:52600 helo=hr1.samba.org) 
+	bh=Zl+I7oFNn3j2p7o0M0q1D06H5SNU935V6Cmyy4mFO98=; b=d11cuUolbmaEqT6iJSybJ9nmX+
+	mcem5Vjosbq0RwfYGhEIlcDQjrNFjCO/0VZBNyXLhg0yHsaro2LH6MN+CvWq9e+8vZjaMQs7xBbNA
+	/aX6zq0NgGlTmnv2Afpoypu1/uExYfjaXdP8gMoVRVxrdlgY00WiocNcvj2zwrWdgdyCpTQRCDYxi
+	3a2dWjID4nsxYFWYuIojF5K8wcp0yQIhKnia1nBF4aF9RfcQLs5PREzkp/rc8THyEXwHWTwFNLDyp
+	zUZUdaYhYgEnt6XgxyXhjpgi3wod3DdV8O+gnWxP16qIWI21OCLROPWjIJsUv/j7iiVwDRWoAMDIL
+	TXCb1Adw==;
+Received: from localhost ([::1]:53332 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jiioy-009dr1-Ky; Tue, 09 Jun 2020 18:18:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64668) 
+	id 1jij5c-009dyE-3z; Tue, 09 Jun 2020 18:35:12 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15106) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jiiot-009dqu-Nt
- for samba-technical@lists.samba.org; Tue, 09 Jun 2020 18:17:58 +0000
+ (Exim) id 1jij5W-009dy7-CT
+ for samba-technical@lists.samba.org; Tue, 09 Jun 2020 18:35:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:To:From:Message-ID:CC;
- bh=PGNk/vbz2vIM+NO4RJuYb16I92TyuMdjx3ofAfKQvio=; b=duZ9KrgaxYT4IpBDBKQCi7I21A
- l4fA1B+qe1hKXV567SvbDeWFAdb42aqSNH6FAzqCJ1lvbhohM2LdcryOGithq9gwHfYrYy+jASpCa
- V/xmQg1/5oQbWsDGg1r/r160B677JJVThOQ9rqfrOHAQX89P6Red5+0qm88wMyZNZeQ8wnb8QETOO
- ku9qOYbIbSVFVserJiHBdjyuRQmDF1c2pNstRz54+IPJznEPTDHhGXBqJIJ2/CFOyT7J+R4HivqpC
- EjZbT14/Z0R8mdEUyRkK8jYi61kx+zpesiWPIWF7GuH4B8OXA3jUEjPGRhlvEYV/wmqmETO+SzBrj
- HMz0Kwk3itzpgkHla9bDEXUzzVwBg/SAMyS55jgGZ3oYfAqkfVVKmBrNL1k7iR7EiAIGeAzZOMNQm
- YxSuLO8tdVKesMzYSAcnEdaWGCSrulpSADIndwLIxqKD34BoyuOJgEtPnUwY+0W2gJaVcsNT5JXfs
- hygzVW49Yxj8ZVWDOmzoMM5X;
+ bh=Zl+I7oFNn3j2p7o0M0q1D06H5SNU935V6Cmyy4mFO98=; b=NQuAzIyKALxn3yFWEhThC4+lEG
+ 1yPzV9X/saUjKJB4LItk7HElG4sFIlfNckJxqGZ8F1mfTukEayTQn/6GT4O+EDwYtKSVta3j5dU37
+ 5VFfk1KmI9jeRMp9GKnHVtHLtrZxZyreDFQbqneUDDhyRtNE6S84GBihX+nPHZWYMHnVmazyOlcsX
+ KkP0hpeU9QsZwKwfp5/4wWFiUSOxH+G0AvIh1QFORfooqpsUR0pymyMCeoKdistqyLUim5L7jBakd
+ 6vnr2t85oJa89ELN5W6tLSWU9Gz1qqJY9grN//wMv/WdSvyDsCmWo+PnSeQxQFxhQwuH3LN9FexWy
+ D+DE0QrFNLrL66TwJ4k4u6ak+hZCiIKY4oahMMFDcnTeIvi5f5+9FNNLSVAQpcxe+sD7hqOn+liZN
+ 2eOMhEuzJU2oGJUnyuiRIuGh8t3z7lZj7DzqbMDqQKnEBfRf55yJIzG645h4pwRM/Rgsy/xkmT8cv
+ 3/1MaNuVaYr7PPfOVE4OFfMA;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jiior-00066g-CR; Tue, 09 Jun 2020 18:17:54 +0000
-Message-ID: <1d67896e205c71300bc0e6acaf405380ec0182a1.camel@samba.org>
-Subject: Re: Schema updates and modern Samba AD
-To: Stefan Metzmacher <metze@samba.org>, Upstream Samba Technical Mailing
- list <samba-technical@lists.samba.org>
-Date: Wed, 10 Jun 2020 06:17:48 +1200
-In-Reply-To: <e70dc906-1bbc-858e-ece8-80bcd6f60769@samba.org>
-References: <6519f23f61695e09cc6c9aa9336f69bcd8010da6.camel@samba.org>
- <e70dc906-1bbc-858e-ece8-80bcd6f60769@samba.org>
+ (Exim) id 1jij5U-0006Fq-VJ; Tue, 09 Jun 2020 18:35:05 +0000
+Message-ID: <573f3e2b88f8051073ada03ecb2658d8f1a8a58d.camel@samba.org>
+Subject: Re: Merge Request Template for Gitlab
+To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+Date: Wed, 10 Jun 2020 06:35:01 +1200
+In-Reply-To: <3443591.AXIHuhjjAK@magrathea>
+References: <3443591.AXIHuhjjAK@magrathea>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
 Mime-Version: 1.0
@@ -62,51 +60,85 @@ Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2020-06-09 at 16:54 +0200, Stefan Metzmacher wrote:
-> Hi Andrew,
+On Tue, 2020-06-09 at 19:19 +0200, Andreas Schneider via samba-
+technical wrote:
+> Hi,
 > 
-> > A long time ago I remember asking if we could change the default
-> > for
-> > "dsdb:schema updates allowed" to true, so that this is no longer
-> > guarded in Samba.
+> as I don't have any rights on gitlab repositories, could someone
+> please setup 
+> the following Merge Request Template:
 
-> > What I can't remember (or find in the list archive) is what those
-> > issues are!
-> > 
-> > Can you remind me?
-> 
-> The last time I looked at it I had this wip branch (ignore the
-> smbdirect
-> stuff)
-> 
-> > 
-https://git.samba.org/?p=metze/samba/wip.git;a=shortlog;h=refs/heads/master4-schema
-> 
-> Before we can enable this, we need to be 100% sure that an administrator
-> (or even SYSTEM via ldbedit or incoming replication) is not able to
-> break the local schema.
-> 
-> The first thing is to verify we can load it again before we store it,
-> I think we have parts of this, but I don't believe it complete.
-> 
-> We need to reject any change to ldapDisplayName attributes (Windows
-> allows them, but we'll just break as we use them in our database).
-> 
-> We need to implement all known constraints regarding schema changes
-> we
-> can find anywhere in MS-ADTS (there are a lot of places...) in
-> the schema_data.c I added some of this in that branch.
-> 
-> It also turns out that we don't have good schema tests, I tried
-> some of them against Windows, but they just fail. They seem to be
-> more like fantasy, than anything useful.
+Thanks for suggesting this.  I've made that change so others can give
+feedback based on how this works in the real world.
 
-Thank you so much for this.  I've added a link to this mail and a
-hopefully fair summary of a 'safe-ish path' for administrators to:
+The only change I've made is to reference README.Coding not
+CONTRIBUTION.md.
 
-https://wiki.samba.org/index.php/Samba_AD_schema_extensions#Disabled_by_default
+I've got some of my own comments below, and if we come up with a better
+text I'll update it:
+
+> ====== template ======
+> Add a description of the new feature/bug fix. Reference any relevant
+> bugs.
+> 
+> ## Checklist
+>  * [ ] Commits have `Signed-off-by:` with name/author being identical
+> to the 
+> commit author
+
+We should find a succinct way to reference clearly what this means
+(and/or revise our policies so it is possible to understand simply!)
+
+>  * [ ] Code modified for feature
+
+I'm not sure exactly what you mean by this checkbox.
+
+>  * [ ] Test suite updated with functionality tests
+>  * [ ] Test suite updated with negative tests
+>  * [ ] Documentation updated
+>  * [ ] CI timeout is 3h or higher (see Settings/CICD/General
+> pipelines/
+> Timeout)
+
+This is not needed for the shared development repo, but saying so in a
+succinct way will be a challenge.
+
+Some wording pointing at the Contributing page on the wiki might be a
+good idea also.
+
+> ## Reviewer's checklist:
+>  * [ ] Any issues marked for closing are addressed
+>  * [ ] There is a test suite reasonably covering new functionality
+> or 
+> modifications
+>  * [ ] Function naming, parameters, return values, types, etc., are
+> consistent 
+> and according to `CONTRIBUTION.md`
+>  * [ ] This feature/change has adequate documentation added
+>  * [ ] No obvious mistakes in the code
+> ====== /template ======
+> 
+> 
+> Settings -> General -> Merge Requests -> Default description template
+> for 
+> merge requests
+
+Finally, we should just be aware that this feature is not in GitLab CE,
+so we would loose it (just as we would loose the Approve button) if we
+moved off gitlab.com.
+
+(That said, it is entirely possible GitLab will open source it if we
+ask, so we should do that)
+
+Thank you *so* much for proposing this.
+
+Everyone else:
+
+Please have a go with the templates over the next few days and help us
+get one that helps us all!
 
 Andrew Bartlett
+
 -- 
 Andrew Bartlett                       https://samba.org/~abartlet/
 Authentication Developer, Samba Team  https://samba.org
