@@ -2,46 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36E041F465F
-	for <lists+samba-technical@lfdr.de>; Tue,  9 Jun 2020 20:35:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 970191F466E
+	for <lists+samba-technical@lfdr.de>; Tue,  9 Jun 2020 20:40:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=Zl+I7oFNn3j2p7o0M0q1D06H5SNU935V6Cmyy4mFO98=; b=d11cuUolbmaEqT6iJSybJ9nmX+
-	mcem5Vjosbq0RwfYGhEIlcDQjrNFjCO/0VZBNyXLhg0yHsaro2LH6MN+CvWq9e+8vZjaMQs7xBbNA
-	/aX6zq0NgGlTmnv2Afpoypu1/uExYfjaXdP8gMoVRVxrdlgY00WiocNcvj2zwrWdgdyCpTQRCDYxi
-	3a2dWjID4nsxYFWYuIojF5K8wcp0yQIhKnia1nBF4aF9RfcQLs5PREzkp/rc8THyEXwHWTwFNLDyp
-	zUZUdaYhYgEnt6XgxyXhjpgi3wod3DdV8O+gnWxP16qIWI21OCLROPWjIJsUv/j7iiVwDRWoAMDIL
-	TXCb1Adw==;
-Received: from localhost ([::1]:53332 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=9T97slGNHmoeGgx0PLuCMubhpqWxEMZcs857jnwwYBM=; b=bGUYOFn8hjq1z0zGeZm4u3iZQy
+	OrJ6lBcaqsl8IzS/zM0OyioC6ybW1hqAL5wkhBSljvFuA4nN2U0XBq6PcicY5tlJkFgxvM/0+HS0H
+	xSMGfc93wdMz8fBJ6669luE0crKmE45SSDhge8BbLnoQ3kLIwi+CmH8iIKkYKVDMLypeogn1sSWnV
+	4c0n+wg15xbEdxOoR/9vkx7mibot7ceS8AtweKPspPwMiMZVaQ+jMQxz36UcuEeLV9kiqqSfl4KP2
+	AkqbUHJTXxX3r8KTYYq5E75dLQPRtQSOl38LcInYOjvgpIvDolORX1PW7Xvi5M7xup2a2iriU9Y4J
+	t1GxokiA==;
+Received: from localhost ([::1]:54060 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jij5c-009dyE-3z; Tue, 09 Jun 2020 18:35:12 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15106) 
+	id 1jijAn-009e4R-SA; Tue, 09 Jun 2020 18:40:33 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17218) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jij5W-009dy7-CT
- for samba-technical@lists.samba.org; Tue, 09 Jun 2020 18:35:08 +0000
+ (Exim) id 1jijAi-009e4K-A3
+ for samba-technical@lists.samba.org; Tue, 09 Jun 2020 18:40:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=Zl+I7oFNn3j2p7o0M0q1D06H5SNU935V6Cmyy4mFO98=; b=NQuAzIyKALxn3yFWEhThC4+lEG
- 1yPzV9X/saUjKJB4LItk7HElG4sFIlfNckJxqGZ8F1mfTukEayTQn/6GT4O+EDwYtKSVta3j5dU37
- 5VFfk1KmI9jeRMp9GKnHVtHLtrZxZyreDFQbqneUDDhyRtNE6S84GBihX+nPHZWYMHnVmazyOlcsX
- KkP0hpeU9QsZwKwfp5/4wWFiUSOxH+G0AvIh1QFORfooqpsUR0pymyMCeoKdistqyLUim5L7jBakd
- 6vnr2t85oJa89ELN5W6tLSWU9Gz1qqJY9grN//wMv/WdSvyDsCmWo+PnSeQxQFxhQwuH3LN9FexWy
- D+DE0QrFNLrL66TwJ4k4u6ak+hZCiIKY4oahMMFDcnTeIvi5f5+9FNNLSVAQpcxe+sD7hqOn+liZN
- 2eOMhEuzJU2oGJUnyuiRIuGh8t3z7lZj7DzqbMDqQKnEBfRf55yJIzG645h4pwRM/Rgsy/xkmT8cv
- 3/1MaNuVaYr7PPfOVE4OFfMA;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=9T97slGNHmoeGgx0PLuCMubhpqWxEMZcs857jnwwYBM=; b=zMMP5r2Iam65di/iI5rIq9H7oS
+ GdOeczQRpJ+VYIoOdqUItS9iSwwn3cLJD2LTJw7QCvXIaW3EXUKOsm3EqsLPNyKktjjI+uzVH3WKq
+ MI5IK6sfby5uloG30Rl4ClkbjOSmfnyYVpLfBX6IxnaXM9FwSJzRWBOlmfFNPNMY+1PTcGaLO14ta
+ TqePLRNMMEvK514KjQnfa/UdlE6RPD+yJ14kNBETnhksCYt4hSuJbBkSYcx+LBoKM+BJ+T3y+INI9
+ f16ioVnxM/Ld72CLCLcTC3hZ2+3Vqa8m+ptTqULOBmq+uhhrhR8D5Qj2v8iDboNZHCsig08oa+DgR
+ GhRKD0/lUkYntInwqfGGdcF34AaDyODTLDtYZVp0EWw/8+dc0Hzy2ilanxOJDMjI/n1y13eFQ42Qa
+ 7h7fKQQ4hDIxmLir91WaXz93POronnqw23FWBxOk+j835y9mLXXZQw8e4zBnB1GUyZJasf6cOXWgK
+ tQiOXJBO+3CAtRcTXo82AJIy;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jij5U-0006Fq-VJ; Tue, 09 Jun 2020 18:35:05 +0000
-Message-ID: <573f3e2b88f8051073ada03ecb2658d8f1a8a58d.camel@samba.org>
-Subject: Re: Merge Request Template for Gitlab
-To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
-Date: Wed, 10 Jun 2020 06:35:01 +1200
-In-Reply-To: <3443591.AXIHuhjjAK@magrathea>
-References: <3443591.AXIHuhjjAK@magrathea>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jijAg-0006Kg-ID; Tue, 09 Jun 2020 18:40:27 +0000
+Date: Tue, 9 Jun 2020 11:40:19 -0700
+To: Stefan Metzmacher <metze@samba.org>
+Subject: Re: Avoiding further (LDAP) stack proliferation in Samba
+Message-ID: <20200609184019.GB8351@jeremy-acer>
+References: <7f08ecb52a4a94d95e39af436e94ab852cf0da55.camel@samba.org>
+ <20200521012158.GB10353@jeremy-acer>
+ <4ce022a6c65422e40e1a583f95cefbbc7585393c.camel@samba.org>
+ <20200521021959.GB12847@jeremy-acer>
+ <20200521214312.GA12586@samba.org>
+ <854ac3b5d75279a13ebf3c5a6e9f4fd5b9eb8943.camel@samba.org>
+ <437a7ad7-5158-9124-9ba3-939a3bfcee53@samba.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <437a7ad7-5158-9124-9ba3-939a3bfcee53@samba.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,96 +61,110 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ swen@linux.ibm.com, Christof Schmitt <cs@samba.org>, jra@samba.org,
+ Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2020-06-09 at 19:19 +0200, Andreas Schneider via samba-
-technical wrote:
-> Hi,
+On Fri, May 22, 2020 at 03:02:29PM +0200, Stefan Metzmacher wrote:
 > 
-> as I don't have any rights on gitlab repositories, could someone
-> please setup 
-> the following Merge Request Template:
-
-Thanks for suggesting this.  I've made that change so others can give
-feedback based on how this works in the real world.
-
-The only change I've made is to reference README.Coding not
-CONTRIBUTION.md.
-
-I've got some of my own comments below, and if we come up with a better
-text I'll update it:
-
-> ====== template ======
-> Add a description of the new feature/bug fix. Reference any relevant
-> bugs.
+> As you know I like the idea of having things implemented just once!
+> But as found out in the past this is a lot of work and
+> replacing everything at once is often not possible.
+> We learnt that we sometimes have to do small steps with intermediate
+> states, which we sometimes not like, but at the same time require
+> in order to make progress at all.
 > 
-> ## Checklist
->  * [ ] Commits have `Signed-off-by:` with name/author being identical
-> to the 
-> commit author
-
-We should find a succinct way to reference clearly what this means
-(and/or revise our policies so it is possible to understand simply!)
-
->  * [ ] Code modified for feature
-
-I'm not sure exactly what you mean by this checkbox.
-
->  * [ ] Test suite updated with functionality tests
->  * [ ] Test suite updated with negative tests
->  * [ ] Documentation updated
->  * [ ] CI timeout is 3h or higher (see Settings/CICD/General
-> pipelines/
-> Timeout)
-
-This is not needed for the shared development repo, but saying so in a
-succinct way will be a challenge.
-
-Some wording pointing at the Contributing page on the wiki might be a
-good idea also.
-
-> ## Reviewer's checklist:
->  * [ ] Any issues marked for closing are addressed
->  * [ ] There is a test suite reasonably covering new functionality
-> or 
-> modifications
->  * [ ] Function naming, parameters, return values, types, etc., are
-> consistent 
-> and according to `CONTRIBUTION.md`
->  * [ ] This feature/change has adequate documentation added
->  * [ ] No obvious mistakes in the code
-> ====== /template ======
+> There're a lot of things I'd like to see:
+> 1. The ldb api should not be used for pure LDAP users,
+>    it's bad enough that the strange async model exists at all!
+>    We should hope that it's only used for LDAP for command line
+>    tools in a sync fashion.
+> 2. source3/lib/tldap_gensec_bind.c should use gensec_update_send/recv
+> 3. tldap makes use of the "client ldap sasl wrapping" and other
+>    options, which are use by source4/libcli/ldap/ and
+>    source3/libads/
+> 4. We can add some helpers to get/pass 'struct ldb_message' from/to
+>    tldap c.
+> 5. users of source4/libcli/ldap/ should move to the tldap api
+>    - lib/ldb-samba/ldb_ildap.c can become lib/ldb-samba/ldb_tldap.c
+> 6. libads should go away it, at least it's low level internals
+>    maybe it can be build on top of tldap as a first step in
+>    order to avoid a rewrite of all non-winbind users.
+> 7. winbindd should avoid libads and only use tldap.
 > 
+> But the goal of
+> https://gitlab.com/samba-team/samba/-/merge_requests/1351
+> is moving along with 7.
 > 
-> Settings -> General -> Merge Requests -> Default description template
-> for 
-> merge requests
+> And I'm not seeing why we would require 4, 5, 6 before doing 7.
+> They would be nice to have, but they tasks for another day.
+> 
+> BTW: I'm not saying that I'm happy with the current patchset of merge
+> request 1351. But that's a different discussion.
 
-Finally, we should just be aware that this feature is not in GitLab CE,
-so we would loose it (just as we would loose the Approve button) if we
-moved off gitlab.com.
+OK, trying to help square this circle by moving the technical
+discussion along a bit :-).
 
-(That said, it is entirely possible GitLab will open source it if we
-ask, so we should do that)
+Looks to me like the core of the technical dispute is that
+source3/lib/tldap.c is duplicating some of the existing
+data structures and marshalling/unmarshalling code that
+is already being tested with the fuzzing code that already
+exists inside ldb.
 
-Thank you *so* much for proposing this.
+Here's a good example:
 
-Everyone else:
+In tldap:
 
-Please have a go with the templates over the next few days and help us
-get one that helps us all!
+struct tldap_control {
+        const char *oid;
+        DATA_BLOB value;
+        bool critical;
+};
 
-Andrew Bartlett
+marshalled with tldap_push_controls().
 
--- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
+In ldb:
 
+struct ldb_control {
+        const char *oid;
+        int critical;
+        void *data;
+};
 
+marshalled with ldap_encode_control().
 
+Both of them are doing the same thing (admittedly it's
+better to have a ranged pointer via a DATA_BLOB than
+an unbounded pointer void *), but call into different
+encoding/decoding libraries which are both based on top
+of our struct asn1_data library.
+
+We really should be using common marshalling/unmarshalling
+calls for things like this so they can be fuzzed and
+tested once.
+
+This is (4) part of Metze's comment above.
+
+I agree that (7) is orthoganal to merging the ldap
+client libraries, but not quite. The more code that
+gets added to winbindd using the tldap structures and
+client definitions, the harder the move to common
+marshalling will become.
+
+Is there someone on the Team with an iron in this
+fire who has the time and motivation to reduce this
+duplication so that eventually moving to common
+client libraries is less pain ? It's not going to
+be able to be me I'm afraid as I have other commitments,
+so feel free to tell me to bugger off :-).
+
+Just guessing that would go a long way towards
+reducing the conflict in this area. Swen, Christof,
+does that seem reasonable to you ?
+
+Jeremy.
 
