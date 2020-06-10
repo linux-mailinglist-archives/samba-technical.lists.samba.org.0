@@ -2,43 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 923F51F4CDD
-	for <lists+samba-technical@lfdr.de>; Wed, 10 Jun 2020 07:26:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C22551F4CE2
+	for <lists+samba-technical@lfdr.de>; Wed, 10 Jun 2020 07:27:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Ik3FoVq4J2xa1o+blMpgG54TAjHItCCk9CLa6jPp994=; b=t4Vh1JvS0p2ngkBoI0qS6IO87N
-	aBIDUjPvCR3IrzWdRhoYnPbpVbkgAGQ6bDg3hP7/EQqemkg7jK2l39BWWS+1stxX6NKLjfA87mPQi
-	wlZaLB/KfdPTiXZV9QTxjSPEfNqwrIr6a672MUSuMcLM1mHsK9YeEXRfWjlu77UU9+LWDhGwoEPvs
-	1gbZkM4rH7gkPyoV63QJfAo3sfUNCskBR5b8Pnz/0e6rCFfoekrl3bPncIrRNKFNfkh5zbHtpy0zF
-	U9FFlUTm/JJZoRsj451ftX/PfYj7gs4tbCd/XkvPEDO5CqRJ1cGGuqB82RbKi286iTh0al93p9MQ3
-	OI9szeYQ==;
-Received: from localhost ([::1]:64868 helo=hr1.samba.org) 
+	bh=v6imHwNDlEXeMgZugI29NEvAVytikE+2jonT4GYYv8s=; b=vbXyxc49rQS/E+msDk0cReixMt
+	kd/BSAypVpqmP1cSUdjoyuWlRbD7oUut20CHL+bsDgP7hQRB9ySBc33TTPJz1z5AEEaZTy9lLL93Y
+	fADBOMBZ+qrt+s4jDN/mzn0BTZo+Mb26FAHc1GyQ93fgG8IauX/Ge/IMCny/F1xDtqFXm4vhc/TLU
+	xpibJXv9SHsc45zCirR1PpBgmwgtbUVf3uANJuMJh/QS0Pa9VVP1uiKkdC83UL2xsAFrn49ugtO1Q
+	MDfXIsVspx2tITQSiwiDFiEcw5a66zepDvkRmw53pBdFPylPYaYJFNDcyymHjtaCyVf81kig0mq+k
+	nsN6lWkQ==;
+Received: from localhost ([::1]:18064 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jitFf-009hKe-RR; Wed, 10 Jun 2020 05:26:15 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54056) 
+	id 1jitGk-009hQd-F9; Wed, 10 Jun 2020 05:27:22 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54422) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jitFb-009hKW-UL
- for samba-technical@lists.samba.org; Wed, 10 Jun 2020 05:26:14 +0000
+ (Exim) id 1jitGf-009hQW-KI
+ for samba-technical@lists.samba.org; Wed, 10 Jun 2020 05:27:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=Ik3FoVq4J2xa1o+blMpgG54TAjHItCCk9CLa6jPp994=; b=zViwqGhEwDtc9yj/K7hDUveCwA
- fZ5SNlXBKZba7+UYrlE4MexgEDVQ8h1xga1o3CcteN67MDQAhbE7s6BBXof0eSp4vU//5EE2HiL8z
- X8fDT753h/sNaacdB15iMtgoRSVSi9QVfGhi+/8UHCLrqNFSiV01NbxQkfcxPneU3TSvQDi5zQEuC
- KK6dKybRLd+fu90sDAX+grw+b2ILWBEtdxA99z3F22/iY2gGh3ZybUxKT0YchdT5j7MaFbSKh02cx
- Lq+IymZrN0ughNH9dYjc0kf24ToamNhD1Qq5ZGeNQ9CUotZRc/cXInowABtC+PMmUGjW4SHkOJDH5
- VLu3CPdTxn4Hn94yU8JzKaV1IckSCSC7VqLcjeU5emwB9dor0EYbbwX2IX2QH9ZuYlo3Ffz5/GDVw
- s4dscRy/rcadhxmSE82ZEqo+zqw29IgkUKq6F9VpFXsULMn7xm1GflfUGfv7jDzgrYr0u72w8TCTQ
- OoDWwefvj34hIE+Ct31OuwI7;
+ bh=v6imHwNDlEXeMgZugI29NEvAVytikE+2jonT4GYYv8s=; b=Ei+pWAh7o5nlKv7y4VpyZOSj3D
+ ou6bJKuox5TlhU6+/MnhoZsYq+Xoak9aLvmF2m/VtkIb/deYdqih57OGLC/2lrZqXti3qlKstzUMM
+ 1r4OVoDtBi7TitYqrWz7lInHzcdR0YsHMI6Szla12TAcobmf0aKUFYMbqb/fQnWmf7HbM7cNcOy9+
+ 7BjugB7DmGm/K7VCTczGUtM5kJ2WnzzRp7h2YQ8OaO0J5kfb72o4ZdJaidGQ0icxVTHjdE7+2vHcC
+ 5YvMTJJLZ93kfmgxbeB9WrTToQISTQRlTLJ+jYLtzzcOvNDV3UwP9UVbPQtfALcnkega6af5zXaGZ
+ KsRU6c4dIjvc+A3uYA2EJQkr/CZZf+PO1nQoiR2cfPCuSx2sfpsH1y0pW2kho+CDpYLLkTFjaebgB
+ 7tennztcEL15X18LHcYJp0lLjC5DJQVKSjJi1v4PwXCh2Z6KnoZ/slwTgll2YJNVo1QRMuw7lQQGa
+ xX1PxAsA+pOhP6Gbs2lEmhGb;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jitFb-00039m-9G; Wed, 10 Jun 2020 05:26:11 +0000
-To: metze@samba.org
-Subject: Accidential push of patch was: [SCM] Samba Shared Repository - branch
- master updated
-Date: Wed, 10 Jun 2020 07:26:10 +0200
-Message-ID: <12540524.HQrcsopkBd@magrathea>
-In-Reply-To: <20200609172503.C9CF014037C@sn.samba.org>
-References: <20200609172503.C9CF014037C@sn.samba.org>
+ (Exim) id 1jitGf-0003Bc-0C; Wed, 10 Jun 2020 05:27:17 +0000
+To: samba-technical@lists.samba.org
+Subject: Re: git signoff+ and review+
+Date: Wed, 10 Jun 2020 07:27:16 +0200
+Message-ID: <2202468.ZbZBhtArCh@magrathea>
+In-Reply-To: <d964391f79cd21db4b1c4118ab62909b6ff9717d.camel@samba.org>
+References: <2070261.IvKQ8U6GgO@magrathea> <3376401.t2CYSfcsgO@magrathea>
+ <d964391f79cd21db4b1c4118ab62909b6ff9717d.camel@samba.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
@@ -57,28 +57,32 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Andreas Schneider <asn@samba.org>
-Cc: samba-technical@lists.samba.org
+Cc: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tuesday, 9 June 2020 19:25:03 CEST Andreas Schneider wrote:
-
-> commit b458f8fbb7febf3584fa648128b4e1dc764059f7
-> Author: Stefan Metzmacher <metze@samba.org>
-> Date:   Wed Aug 7 12:11:58 2019 +0200
+On Friday, 5 June 2020 11:15:22 CEST Andrew Bartlett via samba-technical 
+wrote:
+> On Fri, 2020-06-05 at 09:56 +0200, Andreas Schneider wrote:
+> > On Friday, 5 June 2020 02:06:56 CEST Andrew Bartlett wrote:
+> > > G'Day Andreas,
+> > 
+> > Hi Andrew,
+> > 
+> > > I wondered if we could have an agreed set of aliases included in
+> > > Samba?
+> > 
+> > You cannot include those in the Samba repository. Those are all
+> > individual.
+> > All you can do, is provide a script which could set them up running
+> > 'git
+> > config'.
 > 
->     s3:libsmb: add a cache for cli_session_creds_prepare_krb5()
-> 
->     Signed-off-by: Stefan Metzmacher <metze@samba.org>
->     Reviewed-by: Andreas Schneider <asn@samba.org>
->     Reviewed-by: Volker Lendecke <vl@samba.org>
+> Do you mean we can't do it technically, or we shouldn't do it because
+> we are all individual developers with our own way of doing things?
 
-Ups, this was pushed by accident. Should I revert this or do we deal with this 
-later?
-
-
-	Andreas
-
+I'm not sure how you exactly want to achieve that. Please educate me and then 
+I can help you :-)
 
 -- 
 Andreas Schneider                      asn@samba.org
