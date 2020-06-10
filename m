@@ -2,46 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C22551F4CE2
-	for <lists+samba-technical@lfdr.de>; Wed, 10 Jun 2020 07:27:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC9AC1F4D58
+	for <lists+samba-technical@lfdr.de>; Wed, 10 Jun 2020 07:55:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=v6imHwNDlEXeMgZugI29NEvAVytikE+2jonT4GYYv8s=; b=vbXyxc49rQS/E+msDk0cReixMt
-	kd/BSAypVpqmP1cSUdjoyuWlRbD7oUut20CHL+bsDgP7hQRB9ySBc33TTPJz1z5AEEaZTy9lLL93Y
-	fADBOMBZ+qrt+s4jDN/mzn0BTZo+Mb26FAHc1GyQ93fgG8IauX/Ge/IMCny/F1xDtqFXm4vhc/TLU
-	xpibJXv9SHsc45zCirR1PpBgmwgtbUVf3uANJuMJh/QS0Pa9VVP1uiKkdC83UL2xsAFrn49ugtO1Q
-	MDfXIsVspx2tITQSiwiDFiEcw5a66zepDvkRmw53pBdFPylPYaYJFNDcyymHjtaCyVf81kig0mq+k
-	nsN6lWkQ==;
-Received: from localhost ([::1]:18064 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=88bOK1k+zDBqrbeMYsLaJt0+seRzXQf4Lj4CE/r//qA=; b=MzCzKWmfAnfNvQKoEsOi6PUHWo
+	qEgZ/5doqAT8IuTDV5XXC2PNQGtomdYMnHvB5Z76aGQfeOiqmzuZX43c7Vh/f3RMyEYDspJP/3gbD
+	uL5HohE8eExMLy5ok4Jgv01cIqOX2OLxseQWKr/ZVDWX3BHtuknMvI7GIy2WChwXfx+FBGjWY1tE+
+	BARb//kX8isYIiRkJ7zePS+KxE5NCC4L3YLvuiaCZ0ZRyMSIArqglotlXjuUIJyZ3NmcnqlcDGPc0
+	4rMMO2P0O7UZOoyxlnNI9JEZS5UALIV1AdWMpFJHyj6IN040hMPPeIugF/Eh3SX50myP5p1AxOoIZ
+	xin3e3Jw==;
+Received: from localhost ([::1]:18802 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jitGk-009hQd-F9; Wed, 10 Jun 2020 05:27:22 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54422) 
+	id 1jith9-009hYP-UL; Wed, 10 Jun 2020 05:54:39 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62036) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jitGf-009hQW-KI
- for samba-technical@lists.samba.org; Wed, 10 Jun 2020 05:27:19 +0000
+ (Exim) id 1jith5-009hYI-Eg
+ for samba-technical@lists.samba.org; Wed, 10 Jun 2020 05:54:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=v6imHwNDlEXeMgZugI29NEvAVytikE+2jonT4GYYv8s=; b=Ei+pWAh7o5nlKv7y4VpyZOSj3D
- ou6bJKuox5TlhU6+/MnhoZsYq+Xoak9aLvmF2m/VtkIb/deYdqih57OGLC/2lrZqXti3qlKstzUMM
- 1r4OVoDtBi7TitYqrWz7lInHzcdR0YsHMI6Szla12TAcobmf0aKUFYMbqb/fQnWmf7HbM7cNcOy9+
- 7BjugB7DmGm/K7VCTczGUtM5kJ2WnzzRp7h2YQ8OaO0J5kfb72o4ZdJaidGQ0icxVTHjdE7+2vHcC
- 5YvMTJJLZ93kfmgxbeB9WrTToQISTQRlTLJ+jYLtzzcOvNDV3UwP9UVbPQtfALcnkega6af5zXaGZ
- KsRU6c4dIjvc+A3uYA2EJQkr/CZZf+PO1nQoiR2cfPCuSx2sfpsH1y0pW2kho+CDpYLLkTFjaebgB
- 7tennztcEL15X18LHcYJp0lLjC5DJQVKSjJi1v4PwXCh2Z6KnoZ/slwTgll2YJNVo1QRMuw7lQQGa
- xX1PxAsA+pOhP6Gbs2lEmhGb;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=88bOK1k+zDBqrbeMYsLaJt0+seRzXQf4Lj4CE/r//qA=; b=H/fmPS6kbzPHdK9dB+ULPm1pFX
+ c3OnJOB+mtOCVaYErV6Q0sE59uLNs/5a90a1THLWMkz4GS5V7hlmy52MOHOS4crkpxIU+9jVXiYji
+ wDjdTeVLXHgDNKXzV95ZKIt6nlhF6NnVmu/wKoVydIgCreaMR8Sf5Ew6JCZIdCnFAGH2AHX8cJps4
+ tfLvP9CjjqXBjm1r3vxsj67PpPBHH80Xp+uy1nXDlFsOBhm9fslw5eyii9I/uzqT0QSA9iChJ9j9T
+ at22PjOq7nnOp2LJUBcXSYkRUYC38QPJpfL/n4WY1seEpZHSjIYhTTwysbjDzelfb5UX7RJnkTJRI
+ q/uBnUCJidy3sIS9PtIu8ymXjrVbdy1pIFw6Vx0YyD549glDh3IY2g3YOS1Up2IXh8MpYv3fpLdvj
+ GUdflIujWaDGNGL5xnXNd8EJFi1P+BUiGBYOEUqR9qoL101sG9JDgTaia+2nqy3swm1AX2I/X6HJc
+ 4wDMuAe/CK/eJ+MBnpPiEWs7;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jitGf-0003Bc-0C; Wed, 10 Jun 2020 05:27:17 +0000
-To: samba-technical@lists.samba.org
-Subject: Re: git signoff+ and review+
-Date: Wed, 10 Jun 2020 07:27:16 +0200
-Message-ID: <2202468.ZbZBhtArCh@magrathea>
-In-Reply-To: <d964391f79cd21db4b1c4118ab62909b6ff9717d.camel@samba.org>
-References: <2070261.IvKQ8U6GgO@magrathea> <3376401.t2CYSfcsgO@magrathea>
- <d964391f79cd21db4b1c4118ab62909b6ff9717d.camel@samba.org>
+ (Exim) id 1jith4-0003Sv-AD; Wed, 10 Jun 2020 05:54:34 +0000
+Date: Tue, 9 Jun 2020 22:54:28 -0700
+To: Andreas Schneider <asn@samba.org>
+Subject: Re: Accidential push of patch was: [SCM] Samba Shared Repository -
+ branch master updated
+Message-ID: <20200610055428.GA24503@jeremy-acer>
+References: <20200609172503.C9CF014037C@sn.samba.org>
+ <12540524.HQrcsopkBd@magrathea>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <12540524.HQrcsopkBd@magrathea>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,39 +57,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Andrew Bartlett <abartlet@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: metze@samba.org, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Friday, 5 June 2020 11:15:22 CEST Andrew Bartlett via samba-technical 
-wrote:
-> On Fri, 2020-06-05 at 09:56 +0200, Andreas Schneider wrote:
-> > On Friday, 5 June 2020 02:06:56 CEST Andrew Bartlett wrote:
-> > > G'Day Andreas,
-> > 
-> > Hi Andrew,
-> > 
-> > > I wondered if we could have an agreed set of aliases included in
-> > > Samba?
-> > 
-> > You cannot include those in the Samba repository. Those are all
-> > individual.
-> > All you can do, is provide a script which could set them up running
-> > 'git
-> > config'.
+On Wed, Jun 10, 2020 at 07:26:10AM +0200, Andreas Schneider via samba-technical wrote:
+> On Tuesday, 9 June 2020 19:25:03 CEST Andreas Schneider wrote:
 > 
-> Do you mean we can't do it technically, or we shouldn't do it because
-> we are all individual developers with our own way of doing things?
+> > commit b458f8fbb7febf3584fa648128b4e1dc764059f7
+> > Author: Stefan Metzmacher <metze@samba.org>
+> > Date:   Wed Aug 7 12:11:58 2019 +0200
+> > 
+> >     s3:libsmb: add a cache for cli_session_creds_prepare_krb5()
+> > 
+> >     Signed-off-by: Stefan Metzmacher <metze@samba.org>
+> >     Reviewed-by: Andreas Schneider <asn@samba.org>
+> >     Reviewed-by: Volker Lendecke <vl@samba.org>
+> 
+> Ups, this was pushed by accident. Should I revert this or do we deal with this 
+> later?
 
-I'm not sure how you exactly want to achieve that. Please educate me and then 
-I can help you :-)
-
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
+What effect does it have ?
 
