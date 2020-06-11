@@ -2,46 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 718DF1F4FAA
-	for <lists+samba-technical@lfdr.de>; Wed, 10 Jun 2020 09:53:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6BF11F605C
+	for <lists+samba-technical@lfdr.de>; Thu, 11 Jun 2020 05:12:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=iWvya/ypjHU+xzmV82KqYCAYdHaP00iLHvB/IYkSpnk=; b=BDtdOlV4qUnAs2EiBdlAvS7Key
-	Z/1hLBcA9lC4YVnaGWGXarHWbzycPxVH6kqDPaeWqa7Lzf7e3cC1xBroPBp8KyegoAV20Uuraog0i
-	KvC0PkwODDb5k0WkUuYCW0TDq8WGvhllzSDkF4TIrrqWmzvqbOCloyK9YnKZakYGZWQel0KjjEtNu
-	7GQUH7AaVjITT7q08qT2l8Wc6qE/ejnXFy1X2kl6Aw6Khq5MZQnTRkDI7TGX4qsD3ftS2uClybh40
-	OnjUnp7m2sfw8KkWyboC81qWAHZ2eBP3duNBk0jZ4adMY4JcEkWiiCCvlwfLrcRF0qQfiBtpebZpi
-	n9oFwbsw==;
-Received: from localhost ([::1]:23474 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=7haNYj9kzYE65aWxqIl7v2F84RPyGh0B1D4dNdvETyU=; b=pkPaNFGhaEEpC4SrIcD8BNEh7Q
+	Ni6AmbzFP9pswn3Ocl3f76jT+7WLt+EjiXIFyLTi7kUYPOc77XGhJ8FzkH5gLgApEfxJ7FKw0KGIg
+	jwGTPLpCHRAgH/wCApzeNv0PrbdYDqyf040mRQNHxYYCrhCaCdS+Rol68/SvMarlYctaEs+iPVNz5
+	7JeR9l2RxVC1+jGI6bfEoqlz8ZaBupmItmjeQcJp/AvOE/+ZxhQOBdSopo5AY61EIBEr2ukzOmbD1
+	FvFtTm0Ksj137elKtM8h3J1KCHeRM+mjF8I5SYh78MRgQ6D5a0YD7DJxH3zpO1z6urDuhC1KumfAf
+	2lTrTk1g==;
+Received: from localhost ([::1]:27102 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jivY7-009iQO-JT; Wed, 10 Jun 2020 07:53:27 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48146) 
+	id 1jjDdB-0000lV-Oh; Thu, 11 Jun 2020 03:11:53 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25008) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jivY1-009iQH-T5
- for samba-technical@lists.samba.org; Wed, 10 Jun 2020 07:53:24 +0000
+ (Exim) id 1jjDd6-0000lO-2t
+ for samba-technical@lists.samba.org; Thu, 11 Jun 2020 03:11:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=iWvya/ypjHU+xzmV82KqYCAYdHaP00iLHvB/IYkSpnk=; b=HkftfI5MGOdkxACpU/CPaqEESp
- WoKgiKo8/7R1LguEC8tnK7DkwPekA0PKtddg44Jl3fjpWQAoXtV6jNZpvGQGMEtLOnjEdN5ENhM/P
- LjvNzhAJdIN7ovlrnAPTIIZtSrgQ1UZyL9jJViJ/QptFYmDtGLSiEw4hVOkMtwsookpH1ob8pR5v7
- 9k/zKsp3ibp0y+I9NnkQstL6AEpmpC3oW4Gjsb0O/YccXGB1d+vFvz72zZH8J3Yr9GGi2Gkvesbet
- r5uN4Xx5EfSFzF3126mRd436UwcaH6ViilfAU9ZM9+4YrrOoSXEN28usUKr7vBwK8wQynEYCan+Hg
- MdNx3EhwEZcXYIzyaebxwXgnifmHcKcf43MnB5iz/4hKpivW37Zfy1r+U8SmKU8j1VBwqjUWkSJYd
- tJpsSRo0gQZe68jdak4BqTM1yvw/S/5BYKqtgrp0ikiDb7FXcKAIFkH0lUr3ePOu7MRR91AM0fbI4
- +tw2LgUADQdIjANHlvVnx0WB;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=7haNYj9kzYE65aWxqIl7v2F84RPyGh0B1D4dNdvETyU=; b=r8E8liRDwEnRCuAbGKYXC8pn+r
+ jQ2EfZLdW9zUd41bf4fOOL3F+o0wMD4zMl/+KzTlFckQ5mdZoILuzoF5xUAp46Dfr1R3BBmooYsM8
+ ASXHuUrOeTbebxNRmfmyn1i8OSfae3cAJTZc8Do1O53OPxMGcOXE7DWUgSpm1NOD5FU9I4sTDqyIe
+ FtfDUkoBhwpl0OcFV2zIP+9XKR2Schteq/2q1/RkoMF+TBxvc1gZYFrbQ6UvUKbihCDnBjHdfQ/Cn
+ ISsMKUSP5LF4C+ePSG/T76I7qVqSyEMvMdh1L3LowSrQek9clYpfrjw2NdU7O/FP4vZ97FyOXmlap
+ klyfh0GrCZMIdUYz/2aan/8+u18yd1Ihnx97M6eHPQhnKg1wVHvCWysPNW0k4VZnS09M2Io87pJvX
+ Rndy8G7zOflLoea+dxcO4NtUjBqHxTAwleFlfFkgciBu9A4eix1eDLXe9jfRtbPx1T+hMdg11sqEk
+ NjtnxRf+0qqLN/fISWE9z0IL;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jivY0-0005iA-Vd; Wed, 10 Jun 2020 07:53:21 +0000
-To: samba-technical@lists.samba.org
-Subject: Re: Merge Request Template for Gitlab
-Date: Wed, 10 Jun 2020 09:53:20 +0200
-Message-ID: <1771645.yoCd8TQoOe@magrathea>
-In-Reply-To: <e530f93b80c095696fe588a51615bb3bfce106cc.camel@samba.org>
-References: <3443591.AXIHuhjjAK@magrathea> <4274398.2CJHkuDXdR@magrathea>
- <e530f93b80c095696fe588a51615bb3bfce106cc.camel@samba.org>
+ (Exim) id 1jjDd4-0001Js-On; Thu, 11 Jun 2020 03:11:47 +0000
+Date: Wed, 10 Jun 2020 20:11:40 -0700
+To: Rowland penny <rpenny@samba.org>
+Subject: Re: [PATCH] samba-tool dns query --help
+Message-ID: <20200611031140.GB9258@jeremy-acer>
+References: <4ec26631-e80f-4507-e7c2-8dd7a130aae5@samba.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <4ec26631-e80f-4507-e7c2-8dd7a130aae5@samba.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,56 +55,47 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Andrew Bartlett <abartlet@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wednesday, 10 June 2020 09:08:02 CEST Andrew Bartlett via samba-technical 
-wrote:
-> > > >  * [ ] Code modified for feature
-> > > 
-> > > I'm not sure exactly what you mean by this checkbox.
-> > 
-> > Maybe name it: Preparation for a feature
-> > 
-> > There will be follow up merge requests ...
-> > 
-> > Better ideas?
+On Fri, Jun 05, 2020 at 08:19:45AM +0100, Rowland penny via samba-technical wrote:
+> Hi, whilst running 'samba-tool dns query --help' I noticed something, 'PTR'
+> wasn't in the list of available record types, this patch just adds it.
 > 
-> * [ ] (optional) This MR is just one part towards a larger feature.
 
-:+1:
+LGTM. RB+ and pushed. Thanks !
 
-> > > >  * [ ] CI timeout is 3h or higher (see Settings/CICD/General
-> > > > 
-> > > > pipelines/
-> > > > Timeout)
-> > > 
-> > > This is not needed for the shared development repo, but saying so
-> > > in a
-> > > succinct way will be a challenge.
-> > > 
-> > > Some wording pointing at the Contributing page on the wiki might be
-> > > a
-> > > good idea also.
-> > 
-> > We could make it a link to the contribution page where it is
-> > described in
-> > detail.
+
+> From 00190a7281c7540481ea2e12279fd7da9885faa6 Mon Sep 17 00:00:00 2001
+> From: Rowland Penny <rpenny@samba.org>
+> Date: Fri, 5 Jun 2020 07:56:21 +0100
+> Subject: [PATCH] samba-tool dns query --help: Someone forgot 'PTR'
+>  from the list of record types
 > 
-> Sounds good.  Remind me what the syntax for that would be?  To many
-> wiki/markdown syntaxes muddle my brain...
-
-[link text](https://url)
- 
-
-
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
+> Signed-off-by: Rowland Penny <rpenny@samba.org>
+> ---
+>  python/samba/netcmd/dns.py | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/python/samba/netcmd/dns.py b/python/samba/netcmd/dns.py
+> index 6faa54d1a8e..d4b06929aa3 100644
+> --- a/python/samba/netcmd/dns.py
+> +++ b/python/samba/netcmd/dns.py
+> @@ -790,7 +790,8 @@ class cmd_zonedelete(Command):
+>  class cmd_query(Command):
+>      """Query a name."""
+>  
+> -    synopsis = '%prog <server> <zone> <name> <A|AAAA|CNAME|MX|NS|SOA|SRV|TXT|ALL> [options]'
+> +    synopsis = ('%prog <server> <zone> <name> '
+> +                '<A|AAAA|PTR|CNAME|MX|NS|SOA|SRV|TXT|ALL> [options]')
+>  
+>      takes_args = ['server', 'zone', 'name', 'rtype']
+>  
+> -- 
+> 2.20.1
+> 
 
 
