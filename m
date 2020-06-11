@@ -2,54 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B2BB1F62B8
-	for <lists+samba-technical@lfdr.de>; Thu, 11 Jun 2020 09:38:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F5E01F62CA
+	for <lists+samba-technical@lfdr.de>; Thu, 11 Jun 2020 09:40:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=nVphka4i76MliRgC+taxvY+tViGFS6o8o+8Ln2xOfMA=; b=YllIHUwsTVcyXXThWt1cSC3xiC
-	sEtJ9dOzToaOypCddgaDZZGxEV31LMgyu5oIZFaq9p2qr2AXmZDSnnvQr7kW5P3I+7CJT7l/MNtfj
-	kc5xXpuX0QesE/GdEsyZyGqIXsa6kovQfBw60cvP3N3dMnuImRv+P8eo4/R8Xc4u0cANHjhHFSgLh
-	wn09xxL0o6+9jFRoOVLFb+vY5bKcUPcYukPxdTECMwvWlivp4UvRoEU/cxl622G9j/snNQHN1akYo
-	iU0IifO6YPak3ivwdFfeTxBji9J4+9kLSTikWR6PIeARDDc0OKOMrCaoxIX1Bc17CeYfEgpX8gzjN
-	jbQJ9sZg==;
-Received: from localhost ([::1]:31112 helo=hr1.samba.org) 
+	bh=iSSX7smqnfbySPNFE2ekjRHcmWxCWQmZu7M5YVkRJdw=; b=qz0LBz3REl445K8wrahaT9WmOO
+	MGD5tOOKKKTosJy7p7BKtY7xOpQffOJ2GWjdLFKKICmAb8ysTNClMSpTPbL4yXkuPNMeJqOpsPKL7
+	HQRtRIEOpOFGXVG1Y1uPPfwFNTh2wzOkDKCrLo7ouuBWyyr682VNFPQjVNy9ZIFM7GcgWmdeAFQCE
+	pIyQCCRDGIv+M9EveMY0ULQ2EPxU++0+GF/6+Q7RL5f2bFhBx7dernh+kiA3yIatv24nFAoyh0C4f
+	IWf60mJvJiZfO6r91ABXPFZ62g3RqK+h8TAEizHXGuTlQAFzoeOuCc9Sp7jo+MD9GqF0oPhMZHPuo
+	/W040SLw==;
+Received: from localhost ([::1]:31850 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jjHlj-0001pK-LF; Thu, 11 Jun 2020 07:36:59 +0000
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531]:39049) 
+	id 1jjHok-0001vb-CO; Thu, 11 Jun 2020 07:40:06 +0000
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:37763) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jjHlY-0001pC-M5
- for samba-technical@lists.samba.org; Thu, 11 Jun 2020 07:36:52 +0000
-Received: by mail-ed1-x531.google.com with SMTP id g1so3215357edv.6
- for <samba-technical@lists.samba.org>; Thu, 11 Jun 2020 00:36:48 -0700 (PDT)
+ (Exim) id 1jjHob-0001vT-Fv
+ for samba-technical@lists.samba.org; Thu, 11 Jun 2020 07:40:01 +0000
+Received: by mail-ed1-x52f.google.com with SMTP id k8so3231821edq.4
+ for <samba-technical@lists.samba.org>; Thu, 11 Jun 2020 00:39:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=mFCPuUOog6sMDzHYZ6s85EUS8tJePLCFS4kNySRVVH4=;
- b=qNS1M7tnPNbca7RJrEo2eJvDLR2FhFb1W60azQl8tdFE9MQ5LjVCIv3a2yccvwerxE
- 91iGuRRKQgdPFIetUNEgHiaKtXOReg8DCARaDXIyUYbcWiZ6Xo9fOu2ZPFJYFfb2SmGc
- rsR0wa7P/6wEQvQHMEiZhzOBEK0EJ409WI8LAE19e76LmhXiqDMk34VcJyNEqmNZJTXI
- eeKThNlV7AZ78f5+/FJmnzHP/x5YN0MvnoQb0zJtOqEyTmXYbwRKjegLiMXnRKsgU17B
- NL2kNtp6bFubMglKRYueX7TJG5sAEPn81j6alGLfTBNvoaaaEugQhCTf896PpiObZJ9y
- FgxQ==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+ bh=+uoc6dMR5LPc48sAxFU7UIkfn6EDJ9gxnFL4R2HS6ME=;
+ b=hpqPNHiUiZEXFS8FGmxoPhle2P61IIdxyS6kMC88js5849IpnwsoysCsuWn8z6jasX
+ XtCmXEQYy+SW5HejRbRPowB+RUJo/sWFwsbfOIEebgQoV+DZCd3Luq4qI32C/8Vjqpdn
+ YUNv1uyL7FSSN8TecL/ZkOWt1sdBSuqVLl2jZda0iqajx8s/wt8rC2BIFYuzINfxrM5g
+ XoUfrinOH1KjCid/HpqrhK+p6tvCJF54m77tfi2PSoaTSUWuzCh6sgjdDSpbwVjUt4st
+ Exy7c/eA4Dn7gjxlAlaKzhXPo9z6jfirWn1IV+nxfKX3cXPfC1dlTGANMD0p8u/Dyr4q
+ GW2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=mFCPuUOog6sMDzHYZ6s85EUS8tJePLCFS4kNySRVVH4=;
- b=gACNuSve5ROMq95LNx1vOmFmW14AxjdG/1rCJg9GkA4f0tgXCxoMFF7V8YxHWPp/4K
- xjELmCCSa2nHWhqwj2hrJaiXF/C2IO/IrPVNVEJFwZ6lrA0xXp9QC273OqLPeS0P/sl8
- wGS/irSV3Q8GKQb6wSEEAacqUf28ipkJ28UH5ZpESBmvzbqjTTzfR0WA4DULv/gh7gdf
- H0cT8t0cYahblcAxCaRUyf1a7vnDlQXykgIPq5ZK3FRXqcALWaPW6azlO8+hJ/h6h9SM
- exEamdsHCYGMMUoE25eUfRThzB4tq65K6a9w8PFz7fqI/oDBHbajzlnYn3d+6YdZKpL5
- +KAA==
-X-Gm-Message-State: AOAM531FTC4o9zD+CnQokc34gl4Q9glWGVbg5MxlYd+C+EFgGrq24ogG
- ezHskLVwZLLdTVh94bGzxZHOOnXT+qnqiLol5rzZTn9Z
-X-Google-Smtp-Source: ABdhPJwHWI+NwGtE+P5OuHyvRqLLUQrwGIY6yM/LgEX6Hjug4r4IfW5odaICjKn0CzlDT8p6bsQxx7ucElfauev0XG0=
-X-Received: by 2002:a05:6402:1216:: with SMTP id
- c22mr6020709edw.208.1591861007750; 
- Thu, 11 Jun 2020 00:36:47 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to;
+ bh=+uoc6dMR5LPc48sAxFU7UIkfn6EDJ9gxnFL4R2HS6ME=;
+ b=lfyDc5CeiJisWI6U7i82pDR40BPRF1Kn3BWSYHcJHbQXZy7ecg0kFjSgBiUsphDhCx
+ 1UkUakmjT2YT2J09zzyAiCs3ehCKRPSkvVuHJXhsL54RnGF3cwpen++BQIBIlp4FkaFe
+ d81tRquZF5RMFQ+bhzxfK3yqY1vMPXWyNyzcT91NGi9KEEKPw68PYS87SZ6oWmnvwet9
+ aHlUh5b1khXTmE3oRhCUYjI3Sh5XTT9gp4xsXM9ELXBAZXDBCF/Wla2XYybTmn8aWHSs
+ rFCPP6d+6JWHP070hfVxMq8KrUG+fcm519NBnYWOLBckVP/Fgl8GiQHklg+CBMxLw2+I
+ 6KEA==
+X-Gm-Message-State: AOAM533CDhPL8rC3PhvosGLtXCPM5fL/dE/vqkl8xLxcx6q8TsjD8xzA
+ 5uyQW+8AF/9MkoHqGZhUzuMzkrxA00TEbf36ZBxSYWao2Jw=
+X-Google-Smtp-Source: ABdhPJz2iaKnbbGF8iT8RvgbD9MtFlRDw5K2TAs8nq1zo9e1B+yKIeijRK2Kjsgt/QKPx/zWjCynprx1D/rWJHt2Dvk=
+X-Received: by 2002:a50:da83:: with SMTP id q3mr5972630edj.325.1591861193152; 
+ Thu, 11 Jun 2020 00:39:53 -0700 (PDT)
 MIME-Version: 1.0
-Date: Thu, 11 Jun 2020 10:31:39 +0300
-Message-ID: <CAH72RCVhmE3Gn1uiC2iRV2_-EbC7bWW_WJeX+n8xs42me6bgVQ@mail.gmail.com>
-Subject: GSoC 2020: Week 1 and Week 2 Progress
+References: <CAH72RCVhmE3Gn1uiC2iRV2_-EbC7bWW_WJeX+n8xs42me6bgVQ@mail.gmail.com>
+In-Reply-To: <CAH72RCVhmE3Gn1uiC2iRV2_-EbC7bWW_WJeX+n8xs42me6bgVQ@mail.gmail.com>
+Date: Thu, 11 Jun 2020 10:34:44 +0300
+Message-ID: <CAH72RCWeHHJRftd+gm+yX5jdQW2fqvoxMVJPRWr-cq9iKi3R4A@mail.gmail.com>
+Subject: Re: GSoC 2020: Week 1 and Week 2 Progress
 To: samba-technical@lists.samba.org
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
@@ -71,19 +73,27 @@ Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Members,
+Sorry I didn't to give the link to the repo:
+Here it is: https://gitlab.com/HezekiahM/samba-ad-dc
 
-I wanted to give you an update on my progress for the work I'm doing during
-the GSoC 2020.
-Week 1:
- I worked on some bits of the following:
-  Computer Management - List, Create, Delete and Showing the AD Object
-  Time - Showing the current time on the Server
-   Domain Management - Provisioning and Domain Information.
-   Sites Management - Creating and Deleting
-   Contact Management - List, Create, Show and Delete Contact
-Week 2:
- I have been working on the following:
- User Management - Creating and Listing Users
-I will continue working on the same and hopefully write tests for the app
-before the end of the week.
+On Thu, Jun 11, 2020 at 10:31 AM hezekiah maina <hezekiahmaina3@gmail.com>
+wrote:
+
+> Hi Members,
+>
+> I wanted to give you an update on my progress for the work I'm doing during
+> the GSoC 2020.
+> Week 1:
+>  I worked on some bits of the following:
+>   Computer Management - List, Create, Delete and Showing the AD Object
+>   Time - Showing the current time on the Server
+>    Domain Management - Provisioning and Domain Information.
+>    Sites Management - Creating and Deleting
+>    Contact Management - List, Create, Show and Delete Contact
+> Week 2:
+>  I have been working on the following:
+>  User Management - Creating and Listing Users
+> I will continue working on the same and hopefully write tests for the app
+> before the end of the week.
+>
+>
