@@ -2,51 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1D5E1FBCEB
-	for <lists+samba-technical@lfdr.de>; Tue, 16 Jun 2020 19:30:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71F471FBE55
+	for <lists+samba-technical@lfdr.de>; Tue, 16 Jun 2020 20:43:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=jaauv7TmuRSWTSEIi4dld+RzESYwVFwrTkEUrwMjX70=; b=x2aKYlbBQOVH3Akg5v+qZL2Xzt
-	BYdVowdQpJMQefSIFpTZFXK510JfRM3/79H3EEK1vZYVdk3N6IXKTQo5YPCi4xMQZ/CXvnXGnPDpF
-	gaNs+013ysm/MPbZJo4PZ4Tu31DSPackz4vs/1ESxubZ4NvS9NTjjo3uBOHd3K4xoBXNBlVmGD0GY
-	WjGpK+gl/uDVAcUfy0JMBiw6Bxmo3yz+GIJxFezX9MCUUw0r4nSf2qqVbJlnXfF7YvkIEGeJxW6oa
-	7lJ6jt6kg9yVPS+L/1Ci1K9+GjiEnrSJ+2ZBTbTjYznJw3rcVxVkbcO+sBcZXYedaEh+o/loxvJyz
-	3MeDlxqw==;
-Received: from localhost ([::1]:60278 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=dOT2eHtbsnMWjPPo0yEigcFhtYMKjBjbHkOTcHo8Tts=; b=bARKz4hsL9XA+tSSFMA07Ztuyn
+	2GcvWKKHa36wZaxpouJiCqduCpMhCjenQZ+T3uPIW7GiKLz+8B50XrZjg6DYD9ygxIHfaL50gmZaa
+	5KYi6FDHa7d58iQxGcSpAQOIwfFQe2RARRnhZQVfejJ6uoX612l1ioudxJNLppQGQIjTIqJfujW4V
+	Lck5DV+3Sumh/+AE6+PgfeKV2A5AL8TPYP5bj+kppSjIqCuCUuej1vJO7uebOm0cLJ6MklWs1xqTJ
+	cywWD5Uvw2RF7HRCTXw5Vn9IUmwJ2VU7OySe8FE36Ae8WtEavSHy4kWG8k4DLQ3fCJN08OI+YcwFi
+	T5guWmWQ==;
+Received: from localhost ([::1]:18732 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jlFP6-000jJL-EH; Tue, 16 Jun 2020 17:29:44 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14702) 
+	id 1jlGXx-000kQU-PI; Tue, 16 Jun 2020 18:42:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43438) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jlFP0-000jJE-0T
- for samba-technical@lists.samba.org; Tue, 16 Jun 2020 17:29:40 +0000
+ (Exim) id 1jlGXr-000kQN-GO
+ for samba-technical@lists.samba.org; Tue, 16 Jun 2020 18:42:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=jaauv7TmuRSWTSEIi4dld+RzESYwVFwrTkEUrwMjX70=; b=h0TmqAhdXS8L8/2LbhWj08EcRa
- qQNVjNMTEwK8S0oOcHgSS6TLQ+at/+B8nWIjfrqJnLdJDqB4UOWmiPQHkym5pqUZy2aawZfnrT959
- JNtlCYVDNnailDKeptbqBk0uR7Ykxcl/DzOZ/hl11HbtA6iDPuLJlirb6Zrszh88flm4Wp8tJgAGK
- RCyQNexUdPaIok+q/veDfASVF2C3HbykbHdTCEs56FF9xSja9sSQ/OLkoIN3Q1t8lo+JmRu/iVU/3
- HetC9BgKgkepC9d5aqLF/jHzLcyvf5kNR+7cdf2angcRjWt8xLaS8UvWJHwIbh4jeX4p6DM/9S0gt
- VHfi4IvdBFYZ2AfTvCYoAX1hONsrkHF+5nW+Epg85EJ/Pvr03GfuaTYq6sO9yZms5KZSsfioax9F1
- QHPbCwXJ6UQxysVYfdpQ4pb2WyDayJuvtkpR9Ayn+0ojeWf5GuVyx0MdSQfC7ICDDqbygbyOnZnnq
- j3fkOfHaKXS4DieOebjhmTki;
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=dOT2eHtbsnMWjPPo0yEigcFhtYMKjBjbHkOTcHo8Tts=; b=ufFRl1DhBv1pj2IObsOuByr/Kv
+ Cm1nFIElGpNUodU18kNH2nyD6diHAdJec7dlKrTbztUG0WIpP1/2PSnxhcfOS0seo1KF+12JUmyzB
+ ozhac5B/I4/zJIYUKQtZo5C+opvvFWM/jHYIBB9ws+M1Oxpf8yhycinJ0RYKJ8IGnAEIZ90VQohQS
+ PTv5BDLlgUaRRHFlV+w6BjwEDb3Cwj1hOTxVWROcQ4lu+f/CbJ8qm0oe1X9UME8h9yLS6uFeYDtxd
+ 1qI9Lw6vtRFaNHTea82Y4Hb/xsxB1OWwC+tRkYWAvu82wvSU//YIagc3eXkUvzTHIspPDaubNG6S4
+ 7GfAOjb0Oc5Nuaa8smGTmHQNQqSIdPLshx+GUadt3UOKmCNyA7o7XTXC1UN7mFuB1B6SaT58B1jbT
+ JmjXRFP0MqGC5OivnzBwwXCNlf++bVtbsRc68EXR5IyFPv+0xyCuNIpddc+VX4KZDy55/JJVTDQoL
+ uuiiGlr9hqNQ0rMLmYWm2Ycs;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jlFOy-0000cS-8p; Tue, 16 Jun 2020 17:29:36 +0000
-Date: Tue, 16 Jun 2020 10:29:29 -0700
-To: Alexander Bokovoy <ab@samba.org>
+ (Exim) id 1jlGXp-0001Ak-Pw; Tue, 16 Jun 2020 18:42:49 +0000
 Subject: Re: deprecate pdb_ldap and "NT4-like" domains in Samba 4.13 to allow
  removal for Samba 4.14 in March 2021?
-Message-ID: <20200616172929.GD11432@jeremy-acer>
+To: Jeremy Allison <jra@samba.org>
 References: <d48e22dab11b2cc72cd1e402730814a506e7c363.camel@samba.org>
  <20200616082636.GD3036357@onega.vda.li>
  <bac9c345a806ece858c12211b176fd6bb6d49996.camel@samba.org>
- <20200616095350.GE3036357@onega.vda.li>
+ <20200616095350.GE3036357@onega.vda.li> <20200616172929.GD11432@jeremy-acer>
+Message-ID: <44df6f8d-fb66-4bba-3722-860c61946918@samba.org>
+Date: Tue, 16 Jun 2020 21:42:47 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+In-Reply-To: <20200616172929.GD11432@jeremy-acer>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20200616095350.GE3036357@onega.vda.li>
-User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,69 +61,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- jra@samba.org, Andrew Bartlett <abartlet@samba.org>
+From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Uri Simchoni <uri@samba.org>
+Cc: Alexander Bokovoy <ab@samba.org>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Jun 16, 2020 at 12:53:50PM +0300, Alexander Bokovoy via samba-technical wrote:
-> On ti, 16 kesä 2020, Andrew Bartlett wrote:
-> > On Tue, 2020-06-16 at 11:26 +0300, Alexander Bokovoy wrote:
-> > > What is required from FreeIPA side is a set of operations to provide
-> > > implementation of PASSDB interfaces that deal with searches:
-> > >  - search users
-> > >  - search groups
-> > >  - search aliases
-> > 
-> > Can you do that on the FreeIPA side?  pdb_ipa isn't in the Samba tree,
-> > could you handle the maintenance of the code it depends on?
-> > 
-> > Presumably you have plenty of other ldap client stuff on the FreeIPA
-> > side of the fence you could plug into?
+On 6/16/20 8:29 PM, Jeremy Allison via samba-technical wrote:
+
+> Well that's good to know. But if Synology and QNAP need
+> this also, then if would be good to hear from them directly
+> on what their usage requirements are.
 > 
-> So basically you are saying that you don't care how FreeIPA would handle
-> integration to Samba PASSDB, neither you care about PASSDB being
-> testable and used. Is that right?
-
-No, I don't think anyone wants that :-). Alexander,
-why don't you clarify exactly what you need, and
-what you're using in Samba passdb ? That way we
-won't accidentally break anything.
-
-> My concern is that you are looking to deprecate interfaces without
-> providing sufficient functionality to handle those needs, neither
-> acknowledging existing proposed replacements need to be improved before
-> even considering them.
-
-Not really. I didn't know you were using them :-).
-Let's communicate better.
-
-> Outside of FreeIPA, most of home storage devices built on top of
-> Synology, for example, rely on pdb_ldap. There is support and
-> integration for Samba AD DC to be run on Synology but there is a
-> separate LDAP Server component and an integration with that one for
-> Samba requires use of pdb_ldap.
+> Cheers,
 > 
-> As far as I understand, same feature and support is available in QNAP
-> devices.
+> 	Jeremy.
 > 
-> I personally don't think it makes sense to deprecate pdb_ldap now.
 
-Fair enough. But also as I said I didn't know you needed it :-).
-It is *very* old and crufty code though - maybe you could
-put some resources into helping maintain/update/refactor
-it to modern coding practices so it doesn't look so abandoned :-).
+Maybe there are file-server installations hooked to LDAP directories (in
+non-Windows orgs - universities and such or Windows-dislking enterprises
+ - one name comes to mind).
 
-> Instead, I hope to look into improving its test coverage now that we
-> have a good way to create test environments and use them in CI.
+Kind of reminds me of our attempt to remove the "list all users"
+functionality from winbindd because it's fundamentally, ah, imperfect,
+in more than one respect - turned out it was perfect for some users who
+depended on it. Deprecation is nicer than immediate removal but at the
+end of the day, if there's no alternative, the user ends up in the same
+place.
 
-Well that's good to know. But if Synology and QNAP need
-this also, then if would be good to hear from them directly
-on what their usage requirements are.
-
-Cheers,
-
-	Jeremy.
+Thanks,
+Uri.
 
