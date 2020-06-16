@@ -2,52 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71F471FBE55
-	for <lists+samba-technical@lfdr.de>; Tue, 16 Jun 2020 20:43:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25E9B1FBF15
+	for <lists+samba-technical@lfdr.de>; Tue, 16 Jun 2020 21:36:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=dOT2eHtbsnMWjPPo0yEigcFhtYMKjBjbHkOTcHo8Tts=; b=bARKz4hsL9XA+tSSFMA07Ztuyn
-	2GcvWKKHa36wZaxpouJiCqduCpMhCjenQZ+T3uPIW7GiKLz+8B50XrZjg6DYD9ygxIHfaL50gmZaa
-	5KYi6FDHa7d58iQxGcSpAQOIwfFQe2RARRnhZQVfejJ6uoX612l1ioudxJNLppQGQIjTIqJfujW4V
-	Lck5DV+3Sumh/+AE6+PgfeKV2A5AL8TPYP5bj+kppSjIqCuCUuej1vJO7uebOm0cLJ6MklWs1xqTJ
-	cywWD5Uvw2RF7HRCTXw5Vn9IUmwJ2VU7OySe8FE36Ae8WtEavSHy4kWG8k4DLQ3fCJN08OI+YcwFi
-	T5guWmWQ==;
-Received: from localhost ([::1]:18732 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=Cwin4rM90xx7A90ILpx9q05b/HkXQADpjPRgjfWeDlU=; b=qDtrKylaKyBlZv3DGrYsdJI0xB
+	VR6BespWQfn+2ZHtrMmLNzrzMvWd0ofQq8aLoIhSBDVhkWI1lz7RsOtWtfXRywZIYRXG0Bub17xMw
+	ItB030NX9zul/WNoTcP8F9OCWRW16Ms+uFJaSbP0AYt1Sk+TA8ZIkJj+6YMpAih3oh03eBaUVf3Yp
+	9b9G4C4F/K8rgZK+MCkT2cuXugqP5P16KqI9fM01Fs+l+9McA7lr/Lz+Nx6FdXwcNcrrwCT0ycnUY
+	b3XhODPtee19bmcJGcnuN6oUmkZKpJD0evA/WLmj16zuLzwiwueyTL1VlIDTQz1mbydNG8fsejA0r
+	qQ6Ere1w==;
+Received: from localhost ([::1]:22084 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jlGXx-000kQU-PI; Tue, 16 Jun 2020 18:42:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43438) 
+	id 1jlHNX-000l6y-Hh; Tue, 16 Jun 2020 19:36:15 +0000
+Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:33060) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jlGXr-000kQN-GO
- for samba-technical@lists.samba.org; Tue, 16 Jun 2020 18:42:53 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=dOT2eHtbsnMWjPPo0yEigcFhtYMKjBjbHkOTcHo8Tts=; b=ufFRl1DhBv1pj2IObsOuByr/Kv
- Cm1nFIElGpNUodU18kNH2nyD6diHAdJec7dlKrTbztUG0WIpP1/2PSnxhcfOS0seo1KF+12JUmyzB
- ozhac5B/I4/zJIYUKQtZo5C+opvvFWM/jHYIBB9ws+M1Oxpf8yhycinJ0RYKJ8IGnAEIZ90VQohQS
- PTv5BDLlgUaRRHFlV+w6BjwEDb3Cwj1hOTxVWROcQ4lu+f/CbJ8qm0oe1X9UME8h9yLS6uFeYDtxd
- 1qI9Lw6vtRFaNHTea82Y4Hb/xsxB1OWwC+tRkYWAvu82wvSU//YIagc3eXkUvzTHIspPDaubNG6S4
- 7GfAOjb0Oc5Nuaa8smGTmHQNQqSIdPLshx+GUadt3UOKmCNyA7o7XTXC1UN7mFuB1B6SaT58B1jbT
- JmjXRFP0MqGC5OivnzBwwXCNlf++bVtbsRc68EXR5IyFPv+0xyCuNIpddc+VX4KZDy55/JJVTDQoL
- uuiiGlr9hqNQ0rMLmYWm2Ycs;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jlGXp-0001Ak-Pw; Tue, 16 Jun 2020 18:42:49 +0000
-Subject: Re: deprecate pdb_ldap and "NT4-like" domains in Samba 4.13 to allow
- removal for Samba 4.14 in March 2021?
-To: Jeremy Allison <jra@samba.org>
-References: <d48e22dab11b2cc72cd1e402730814a506e7c363.camel@samba.org>
- <20200616082636.GD3036357@onega.vda.li>
- <bac9c345a806ece858c12211b176fd6bb6d49996.camel@samba.org>
- <20200616095350.GE3036357@onega.vda.li> <20200616172929.GD11432@jeremy-acer>
-Message-ID: <44df6f8d-fb66-4bba-3722-860c61946918@samba.org>
-Date: Tue, 16 Jun 2020 21:42:47 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
+ (Exim) id 1jlHNQ-000l6r-8K
+ for samba-technical@lists.samba.org; Tue, 16 Jun 2020 19:36:10 +0000
+Received: by mail-yb1-xb44.google.com with SMTP id o4so39348ybp.0
+ for <samba-technical@lists.samba.org>; Tue, 16 Jun 2020 12:36:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=Cwin4rM90xx7A90ILpx9q05b/HkXQADpjPRgjfWeDlU=;
+ b=XaZNJMpllLj9SgsmtZ+lqJUHo0KXy6kSs0NyKpsgQhW+hObxXQQUda1CGW+ukeBVGk
+ pIaSQEz9nrZ9vqpJDHOEwB5alQ0foiAVpjoqjYt0eubQ7Kr2hH6HxHEpnlgr3o+lAFl3
+ gQt0ZrAjAccGGrwhv51mg7bi2B8a8HdyqI8zl4V7FxNcZWy79rErOatULjQHFLChSbN7
+ wJ7eFFY3DJPYE8knqr39kovYupgdSF5nBjWbM4AXC8LrH7pzhG3Lj5QXkfnYQ2dD2GQr
+ Gp2MsNkNABLpCD3a6kCe+gO4TzoONLKukdJlCkWzsI+Mw0cih3CvpOyI3C2Ye04aTGef
+ h4HQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=Cwin4rM90xx7A90ILpx9q05b/HkXQADpjPRgjfWeDlU=;
+ b=B74hgQ4ihRQMPtZ7Kmph++g5ccI8TR64Wx3BW88zLqM1Fyf90cz0sta0pTH6dN8okV
+ Oh7FcvLAH6TV2wHIi8kwisBYWD7DBnlnw/30EZ8JvtejY044BeAPp5Ex7ncMy7DRQKV4
+ nZQJjyP4iUTjNs+GNilOheMT9yDoI00JepbwQJVGcXP/EbtVd+z2L4SQ9WnDlL1E0s/u
+ y7QPDqZwZfbJbx1Z8q8eBtXVK6mCcx/ldv1MQYOGJ6qbUz9V5NVI35efXiMn7be3llkU
+ fMg1SlXMqGyFII1BBbWY9t7M7WcDU3eAJwvfavNvUdsnikgkzZchaVVUWo927+KCbgPM
+ M6mQ==
+X-Gm-Message-State: AOAM531XibNsFL8vCx6asFfn9oAJbP2SVZQvSyj/VRqTFl7nHAGJ5cmL
+ cyI0W3usJFKwswBrSG/9veNem+p/RhIs2UCNfi0=
+X-Google-Smtp-Source: ABdhPJzy8V0OHeGIv8WGHsfj6rOnMpwaHYCmQPuFrMNmYNU7wJrsNguRNRgcXkXB0pGgipkGkrGWa/W/Ab0RhmC9Cb0=
+X-Received: by 2002:a25:bc81:: with SMTP id e1mr6573459ybk.375.1592336165086; 
+ Tue, 16 Jun 2020 12:36:05 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200616172929.GD11432@jeremy-acer>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+References: <20200615224112.GA12307@embeddedor> <875zbri7k8.fsf@suse.com>
+In-Reply-To: <875zbri7k8.fsf@suse.com>
+Date: Tue, 16 Jun 2020 14:35:54 -0500
+Message-ID: <CAH2r5mt-SYkFcq=73ES8eNi0LYKNctPFPe28x0SmBdf3gEwt5A@mail.gmail.com>
+Subject: Re: [PATCH] cifs: misc: Use array_size() in if-statement controlling
+ expression
+To: =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,36 +70,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Uri Simchoni <uri@samba.org>
-Cc: Alexander Bokovoy <ab@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>, Kees Cook <keescook@chromium.org>,
+ "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
+ samba-technical <samba-technical@lists.samba.org>,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+ LKML <linux-kernel@vger.kernel.org>, Steve French <sfrench@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 6/16/20 8:29 PM, Jeremy Allison via samba-technical wrote:
+Added the two reviewed-bys and merged into cifs-2.6.git for-next
 
-> Well that's good to know. But if Synology and QNAP need
-> this also, then if would be good to hear from them directly
-> on what their usage requirements are.
-> 
+On Tue, Jun 16, 2020 at 6:17 AM Aur=C3=A9lien Aptel via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> Reviewed-by: Aurelien Aptel <aaptel@suse.com>
+>
 > Cheers,
-> 
-> 	Jeremy.
-> 
+> --
+> Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+> GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+> SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg,=
+ DE
+> GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=
+=BCnchen)
+>
 
-Maybe there are file-server installations hooked to LDAP directories (in
-non-Windows orgs - universities and such or Windows-dislking enterprises
- - one name comes to mind).
 
-Kind of reminds me of our attempt to remove the "list all users"
-functionality from winbindd because it's fundamentally, ah, imperfect,
-in more than one respect - turned out it was perfect for some users who
-depended on it. Deprecation is nicer than immediate removal but at the
-end of the day, if there's no alternative, the user ends up in the same
-place.
-
+--=20
 Thanks,
-Uri.
+
+Steve
 
