@@ -2,49 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 490071FEB35
-	for <lists+samba-technical@lfdr.de>; Thu, 18 Jun 2020 07:59:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60A151FFDDF
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Jun 2020 00:20:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Tb4oiOFHZoE4xFr6bpVX+XyVh3LD98usNwU5whVfl+E=; b=RAP9aBOv8bbfhCpuP+P+GqQorI
-	rFuj7HYybFRpZX58WyQc8k3D86GshZUk85TKAgCVvd4G5zgGPyAYR3hz0rGx9xL+wJdhsofShZF43
-	o6ozpW+7uLRhsBSr52skttNE0Q7EgXPEUP4HWw/i6LxZixv/uwKQwvjeFrc4hJ8UXCpnmdX8evrHB
-	Z5OygYcrOxvcydMT9KgMR4pHDV38uNu4YP8swOlnK2i4Wg3UbCpu++m1oBeP66dXBcrF1FBlpyJYt
-	A9ta0XN+pTGqLw71fRskLHI0f5Asru4UI9/NL2MGX7tb2B1H1nOcPaDMpHy89R8z9ITqKXe3j1ov5
-	OrUPKe+w==;
-Received: from localhost ([::1]:36620 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=EZgLmQP4w5Ik94k8LpD2Y/FUE1dM5eFHai1fE3PQxZE=; b=TDNIVk9i0R+mPJdSF6wY9jN41e
+	/pJ8xFC585W5Ivm7Xe7tVS220JPVnzvaI4Au6WdrsMft86RgUI/nXBX8s1fRLSsbiAbYzkEBNaIvX
+	S7g4WRWEUZ94Sj5lsZjzqFFvwS7/5ekouOa5Mah3ViPltPsb5Aeiolr5LpZD+YZOXH94MV+RcgRYC
+	GRvtanNmOYMt+7uf9haMxuNBp27iKh8JyoWFnA0Div7YMHnOu+97Jg/f51kcWWEEj7Ng9DOIXAwEJ
+	RLYxccvIBFgU9KCKbFkvCI0oXo1VmGWzGjoi6CijvzgDjeqnEb+PssDqIquYYAs52JMR9lC51kEjB
+	L9nfNYQQ==;
+Received: from localhost ([::1]:40282 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jlnZq-00197h-V1; Thu, 18 Jun 2020 05:59:07 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61688) 
+	id 1jm2t0-001JAZ-1T; Thu, 18 Jun 2020 22:19:54 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57374) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jlnZd-00197I-Fm; Thu, 18 Jun 2020 05:58:56 +0000
+ (Exim) id 1jm2ss-001JAS-VT
+ for samba-technical@lists.samba.org; Thu, 18 Jun 2020 22:19:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=Tb4oiOFHZoE4xFr6bpVX+XyVh3LD98usNwU5whVfl+E=; b=R4naE/ySpLZCQbtdGh3132fgM9
- njTH1wu9vS7z8ublQFa9LO+GlNHbyfWDR3JW+SJvLiH1U5QcmNiYPPdWzQJOrf++KgxIiPcxWOX2q
- Bl8mF7gPxHGv3HlbdRYeLdJhSG7kO3LhMg2FQYP/KviW11NOncopVx3f3ZrZbbZMkXl2KohLYm5Y0
- FV7edVn4gdu561pGebckZtPrEo6L6bl8IZQg86eWWTreVBtKJ6FG2jIDdZwLkt2cG5ZGfqE0aorCx
- n8mEKAy6AVq2QTWBUI7pBrUMvfSYpR1oPcarRS3ksVLchGDTYG55r5IUyHOMbRKruhxgqI3OiQvXU
- C+XG4pTyYDR2PpMlkLMgjYfji+PH+tB/glaB6Z4Em6A+BR+njqXgXEI9zj0XXa1SUAtujqSEegz8B
- lM6cDtnC4j8p2k8irPOMtJVGyYcb9gMd3/oRrS20G+pAlPBcnHzmFoysUhpVwwfcnT0IwNcXv2o+u
- AXIzBHRTNIooZ/W9OCTMGBtg;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=EZgLmQP4w5Ik94k8LpD2Y/FUE1dM5eFHai1fE3PQxZE=; b=ZMcBeb64pruVjk4BYo+49fCler
+ ZdE+81c4rG2Xw9k96avFLiYaB5MOoaIv4scB+8mOApLmsnECiNGn3XJ8FH8tP0NB9d4tOig7Sbcvv
+ D1Z+LgL/+QoXnxy8+WhNkaIb+IG/J7rLdY6CgEdvh94y8lZJOweRLUUKaSOkVLMo+qy3ynRNfqib0
+ oRELDaeCaE+0w4AXYKGFyqFK3aNct19uZ4w8Vu9TynaMA402rK27G7TVWs/OuVBzLkfBTWs+xiZQR
+ hN5iyD3ciEsIHTko8y+zSCnNkdXldXfYYYvi0TAd5FzLEC9CbnY74VQLxR0HVkhcxaXN7Sb+uesUi
+ EhcNV8oaCycDOGnqecNBIFn/nUP7U8MFE9QoplVnt64b6s2EEDVkGttNUbN087fCV4DZ8HYYhi/J+
+ 54EOD/gFcGkZgQqFv/yUI+9j3XFuIGEwxKDrvugSrNhlL54Ls/v8z27v0zE7JNatAIdPUlgyrrGHn
+ ZB6ULCwrsNIjI6pBPF40BS3b;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jlnZY-000327-0w; Thu, 18 Jun 2020 05:58:48 +0000
-To: =?ISO-8859-1?Q?S=E9rgio?= Basto <sergio@serjux.com>,
- Rommel Rodriguez Toirac <rommelrt@nauta.cu>,
- Lista samba4 <samba@lists.samba.org>, samba-technical@lists.samba.org
-Subject: Re: GnuTLS for samba-4.12.x on RHEL7 / CentOS 7: encourage or
- discourage?
-Date: Thu, 18 Jun 2020 07:58:47 +0200
-Message-ID: <2567074.7DuDXevEiv@magrathea>
-In-Reply-To: <247468aa185782ba94b0751c82b912426517c5dd.camel@samba.org>
-References: <655709E5-BFC6-45A4-BE0A-4A885F74377B@nauta.cu>
- <aa4be4c0b8e46decc96097e93d24dc8a935b0476.camel@serjux.com>
- <247468aa185782ba94b0751c82b912426517c5dd.camel@samba.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jm2sr-0005Ee-4j; Thu, 18 Jun 2020 22:19:46 +0000
+Message-ID: <9f00da33e7c31f8f6304af90280bdef8f917c7c3.camel@samba.org>
+Subject: Re: New Contribute page on the wiki
+To: Jeremy Allison <jra@samba.org>, David Mulder <dmulder@suse.com>
+Date: Fri, 19 Jun 2020 10:19:41 +1200
+In-Reply-To: <20200526172611.GG18267@jeremy-acer>
+References: <8b444948-cef4-74d8-a455-958446832aaa@suse.com>
+ <20200526172611.GG18267@jeremy-acer>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,59 +56,43 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thursday, 18 June 2020 06:11:18 CEST Andrew Bartlett via samba-technical=
-=20
+On Tue, 2020-05-26 at 10:26 -0700, Jeremy Allison via samba-technical
 wrote:
-> On Thu, 2020-06-18 at 04:46 +0100, S=E9rgio Basto via samba wrote:
-> > On Thu, 2020-06-18 at 14:43 +1200, Andrew Bartlett via samba wrote:
-> > > If we could get an even more modern version then we can consider
-> > > removing even more duplicate in-house cryptography.
-> >=20
-> > Thank you , glad to help .
-> >=20
-> > You mean do compat-gnutls36 packages ? IIRC, already when I tried to
-> > build gnutls-3.5, I found that we need to update and build many more
-> > package dependencies ...
->=20
-> Thanks for that extra information.  I wondered what the issue was.
->=20
-> Now, the big question I wanted to ask you is this:
->=20
-> It is one thing to give us a really big helping hand for development,
-> but I wondered how comfortable are you with being the repository for a
-> security-sensitive package being used significant number of production
-> Samba sites?
->=20
-> Do you have the resources to ensure that if GnuTLS issues a security
-> advisory impacting GnuTLS 3.4 that you backport the patches?  I notice
-> a number of issues here:  https://www.gnutls.org/security-new.html
->=20
-> Or should we instead strongly discourage the use of Samba 4.12,
-> particularly as an AD DC (because the LDAP server exposes TLS, which
-> seems to be a more likely target), on RHEL7 / CentOS 7?
->=20
-> (We would instead suggest that an upgrade to RHEL8 / CentOS 8 instead).
+> On Tue, May 26, 2020 at 08:13:09AM -0600, David Mulder via samba-
+> technical wrote:
+> > We've started hashing out a new Contribute page for the samba wiki.
+> > You can view it here: 
+> > https://wiki.samba.org/index.php/Contribute_New
+> > 
+> > The old Contribute page doesn't match the current process, so it
+> > seemed
+> > writing a new page from scratch was in order.
+> > 
+> > I want to start a discussion here so we can hopefully improve the
+> > page.
+> > Please comment and also contribute to the Contribute page!
+> 
+> David, this is really good ! Thanks a lot for this one.
 
-You should upgrade to RHEL8 or CentOS8 which offers a modern GnuTLS library.
+David and I have also been working on 
+https://wiki.samba.org/index.php/Creating_a_Samba_patch_series
 
-Especially because GnuTLS in RHEL8 will either be rebased to newer versions=
- or=20
-patches will be backported required by Samba.
+We hope this describes many of the to-date unwritten rules of Samba
+development.  We would encourage more of these to be written down.
 
+Andrew Bartlett
+-- 
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
 
-	Andreas
-
-=2D-=20
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
 
 
