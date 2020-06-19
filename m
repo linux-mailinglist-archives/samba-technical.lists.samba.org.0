@@ -2,46 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 674971FFFE9
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Jun 2020 03:53:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CBCEB200024
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Jun 2020 04:20:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=SXvzxW+YOSFsGjJ56VA2TANHwsUpzF8QqxFvh6ICJms=; b=m16rog0/RwlM/tbcFwUvbA47dl
-	GlhmAels67Me2+qoUjQixJ1C5G92XUD77Z/zr12imuy1wQezhOB1LGj11KonYGte3HC2Wbxvzv0bp
-	AmJj4QByp7me2mGU5KBkuzxySKfSzcV0y/Y5KmjBRhOhdyZ/Uhsnj1MOz92AY5VAC7iBTYMHLa2R/
-	dTw4u3uf5wCNGW0040gLxUwILZCIfIncxz9F3HbHn15r9EtQdjF7fn0pAQ9uGuR5ADFUTGpt4V0j/
-	FBLxvyizi7LFNS7oRbvj/KkjXPSdZKCVycLGu9ougT9naY3/DsuNLVJHjgK+badXqqH62yeP124Z3
-	aeRiQomg==;
-Received: from localhost ([::1]:43006 helo=hr1.samba.org) 
+	bh=Etc/h/g+TKQAMmrlOwoWidYj8qQJHVxGpIbfFEZHVO4=; b=i0f+0UcS6SBY+vp00uy/rW5MOl
+	SINxJjTCNuTyYyAaNRCbkvVZtrpJEEp/RE9nRCfcTowWopzcr0fVreNKjHg1V60uCHzqDEHeryIJ3
+	i8x3+HiitudpqA58QA3XOXbuWCzjncFU3Xu6UgNTAOgNYUj/A/c3fsYYssY7MRWqKqGjPpaJRp0Sg
+	VNTca5lw9rCl9Vrz+Th5TEdt2/ENLhEPE36jhXBWne2LJ/FH7vk5fyfVw4kjqRFHwEr3MusMuVFe+
+	iJG4nIZeDUvPajP9Y6Ca5DvdJzxhD7Mr1yMWNq++0K+Ns+0Yw5VMvtIg6ACmyVN3CSngtCnpSDZYR
+	YqOj2u7w==;
+Received: from localhost ([::1]:44036 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jm6DS-001KBo-GG; Fri, 19 Jun 2020 01:53:14 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13882) 
+	id 1jm6dV-001KPv-3I; Fri, 19 Jun 2020 02:20:09 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:22422) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jm6DL-001KBh-63
- for samba-technical@lists.samba.org; Fri, 19 Jun 2020 01:53:10 +0000
+ (Exim) id 1jm6dA-001KPn-NX
+ for samba-technical@lists.samba.org; Fri, 19 Jun 2020 02:20:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:Cc:To:From:Message-ID;
- bh=SXvzxW+YOSFsGjJ56VA2TANHwsUpzF8QqxFvh6ICJms=; b=naPfJL8rDD5zyoFp0kekqTToqk
- jBcFNxfz814AcmGBXKWipGDANCR8/JrjCiu+RVBwQ5vbRqh2uR8BA3QZ0MiXdMI03xySJZJBf7NPx
- DN6c2f+LvpyREEdOqmQxSskwhmfLa2DSmgEjT6SOl+V/7G0DYcZkiE7w3y+8XAPIs4O1bigerNI5A
- A63NVCd1JpbF0b7wAvxCja7VbHBkvR/gANybV5T3pWUf+56a+EFrmxWeBb23FdFFqiLCnThpve9xI
- rQrfKxg9ESMT5R2i5kZIXohZ3RrprpWykkZkZ/rFvSROp0wK4BSrX3xN2glhN3thraTaTMvLkXP9n
- xoY1aO1PSoKGUn9S20OWiMnKGsH6BcpMhFnAzfsRkoteaXjXvErwRK4bR9XVIGHj+myWJXrLn5MZp
- I913PmDf9YeQMWOJt07AQ5Kfn6RDvHmRNZZ8VJNLn63LnHltxj4Me10W+5rDXEA/65NdlRZq2xKRB
- 5is2BfmDncb4liwuJuS/k5fs;
+ bh=Etc/h/g+TKQAMmrlOwoWidYj8qQJHVxGpIbfFEZHVO4=; b=jLSULmR2GHiuJk5a1q9/MX31/p
+ q1MBMVp4MkFKNAxGS8w+q6+Ww8+D+2oiY25AKFgJ+oGpwCCylSq93nWar7OqOlZi3VJjIj/XqT1XK
+ qRXg9gkGO3sfGXOEy89AVRKVk++w/t2AXXbJmFRcjJlyJRyJ6N5IdX1Rx0HxEJQaL8Bsu8A13akyX
+ KRgegOok1E/bzVKy7Zwx6IWsImiEFxQhls1yjXZR6CNVNE7VkwV0sPpGQOe7qGlh1IMf9ijGMWjTL
+ xbRDa3W6EjA+1AGmKDAuj52Lsw1FaHVtrkGYGWxgV2VOP0AnRjnZiwl2hHGpFcvMyahVZWh1fuUNQ
+ JwlTYN5RBvNOG7PXN7MWs0GnE9OEGDdrdWwRjESGziqp8n7KfaxeRW+/xWVuDsSgVcY5kRrK6Vd9M
+ /7eIVUwRjwSY3v28fcD7mVnIWUwVwFCrY9FkUKoBrzYEKpjaS0+R+0Ww95m2pAsSoPsrinSnwgIN8
+ AYyFzBtmSbt2EZoRu05cANlK;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jm6DD-0006eN-Fw; Fri, 19 Jun 2020 01:53:00 +0000
-Message-ID: <bd697f519c3b34b941b7ba06cb2c9ae024de7472.camel@samba.org>
-Subject: Re: New Contribute page on the wiki
-To: William Brown <wbrown@suse.de>, Martin Schwenke <martin@meltin.net>
-Date: Fri, 19 Jun 2020 13:52:54 +1200
-In-Reply-To: <FECF7A7A-D9CE-4D60-AE6D-53E58120C37D@suse.de>
+ (Exim) id 1jm6d9-0006sk-5y; Fri, 19 Jun 2020 02:19:47 +0000
+Message-ID: <4fbaeb2cd3880cb2f9d66e1b49a0c9c2d62a79dc.camel@samba.org>
+Subject: bisect-ability
+To: Martin Schwenke <martin@meltin.net>
+Date: Fri, 19 Jun 2020 14:19:43 +1200
+In-Reply-To: <20200619111338.2e5deb21@martins.ozlabs.org>
 References: <8b444948-cef4-74d8-a455-958446832aaa@suse.com>
  <20200526172611.GG18267@jeremy-acer>
  <9f00da33e7c31f8f6304af90280bdef8f917c7c3.camel@samba.org>
  <20200619111338.2e5deb21@martins.ozlabs.org>
- <FECF7A7A-D9CE-4D60-AE6D-53E58120C37D@suse.de>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
 Mime-Version: 1.0
@@ -65,52 +64,57 @@ Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2020-06-19 at 11:38 +1000, William Brown wrote:
-> > On 19 Jun 2020, at 11:13, Martin Schwenke via samba-technical <
-> > samba-technical@lists.samba.org> wrote:
-> > 
-> > Also, although the page goes close, I feel it is missing the beauty
-> > of
-> > this statement:
-> > 
-> >  Finally remember that Samba is Git patches as performance
-> > art.  Each
-> >  is to be carefully prepared, polished and presented with love, as
-> > a hand-
-> >  crafted gift to the future.  The beauty is in the stream of
-> > individual
-> >  gems.  It often feels overkill, but here today we see why we have
-> > the
-> >  emphasis, because it means that anybody - even someone outside
-> > CTDB
-> >  expertise, can say 'sure, that makes sense', and review it. 
-> > 
-> >  
-> > https://lists.samba.org/archive/samba-technical/2018-July/129353.html
-> > 
-> > I feel that the author of this statement really captured something
-> > that
-> > day and it would be a shame if it were lost to only the mailing
-> > list
-> > archive...  ;-)
+On Fri, 2020-06-19 at 11:13 +1000, Martin Schwenke wrote:
+> On Fri, 19 Jun 2020 10:19:41 +1200, Andrew Bartlett via samba-
+> technical
+> <samba-technical@lists.samba.org> wrote:
 > 
-> As poetic and beautiful as this statement is, the message it conveys
-> is "Samba is hard" rather than "Anyone can be in this community".
-> This could turn people away from wanting to start or contribute. So
-> it's probably better to avoid things like this, as glorious and
-> elegantly written as it is. 
+> > We hope this describes many of the to-date unwritten rules of Samba
+> > development.  We would encourage more of these to be written down.
+> 
+> This is very nice!
 
-William,
+Thanks!
 
-I'm to sorry to have to say, but this really killed the mood.
+> Just a couple of things...
+> 
+> I wasn't aware of bisect-ability as a hard and fast rule.  I think
+> this
+> is an excellent goal.  However, sometimes, very rarely, you end up
+> with
+> a choice between 10 bizarre commits that maintain bisect-ability
+> versus
+> one really obvious one that breaks it for a single commit.  I wonder
+> if
+> we can allow occasional build breaks that are clearly documented in
+> their commit messages.  
 
-Martin,
+I'm happy with that.
 
-Thanks.  I really enjoy that you found the time to locate that, it
-really made my day.  At the very least I'll include it as a link.
+> That might upset someone who's all-night
+> bisection just fell over on my broken commit but when they look at
+> the
+> commit message they will know it was intended and will know how to
+> restart their bisection.  
+
+Our scripts even restart for that! :-)
+
+> I just feel as though sometimes there might
+> be a tension between clarity and bisect-ability.  Not sure...
+
+I think all our rules should be +/- a degree of engineering pragmatism.
+
+This is hard to encode in rules (because then it isn't judgement any
+more) but is critical because otherwise we gridlock like you suggest.
+
+So tweaks most welcome - what I find hardest is to describe that in a
+way that won't just bamboozle the new contributor who just needs a
+clear set of rules to make their first patch fly in.
+
+Thanks so much for reading and commenting.  Nothing would be worse than
+having a contribution HOWTO that Samba developers hadn't even read.
 
 Andrew Bartlett
-
 
 -- 
 Andrew Bartlett                       https://samba.org/~abartlet/
