@@ -2,47 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71392201108
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Jun 2020 17:38:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C392D2019AD
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Jun 2020 19:46:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=H6KdPddEFEOG/dvOcvhjgMvCXFvE7cD0KiK5mg2ifb0=; b=UeeB3hBqJft3+0uEeMw3JKYJF1
-	lz4HxAvSwRHH3OBBrmpF8h3SU4va0cKZuQM6KFGg35NdimqnnWao3b5qw9PrAVY+CXG7jQ4i776rY
-	PsGkA/ZiidknjXhupC922Ux71q6WcAExQg+pZDI5qYDQTiafilBN6E+U5EXNadJ9Gx+Lhg6ci3F/g
-	Sp2LxSMMp+huIDuDhxiI0m0UBxM5huG3Koz4Xm/08kBQjnNa29k712lsOVJyRDAi9U6Mn7uJfBA00
-	p9S8qGjngna+0a7ScZliSqHoVqino7orKwf6v2gf04tslAryGaFqdY0KCnCfdfI6uPXm+gI97Z5yx
-	YKHY/9Kw==;
-Received: from localhost ([::1]:28882 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=4zchYO7toLml5/b0xvh1HtIrUPHyuP7pHMMHTe+5Lq0=; b=BrOQaEjxzoECwkHAGoJTjJGpPC
+	8Pv5wTeQnNs5ZGRwaefRdhvp46dCBTTMlA27Madh2eyG8VIFSzXQiOruiMTLSivMsNSU8sFh6rV/h
+	x+IPTu41TmkvZdyJ3dcw3oD6OpeGEGIqA5c8M703wVfeYH6bxAES3jXz/IhX6epEbxA10ilimgnMA
+	S4Vw/UcblYSbhny0PzGQHh7kJgcMCtfAp1fp4HscW8xhNTbjs1k3E/F+ILZU5iSdclo9wU9grUf9r
+	YurpuTVgj9Vua0WpIhgk6IavZKtH44Bg7Buz/8kujzBhxBU8JT6IlOm47xIPl2PGGNrRA1pUhMcDM
+	0htaCrqg==;
+Received: from localhost ([::1]:34752 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jmJ5z-001Qx2-0S; Fri, 19 Jun 2020 15:38:23 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45204) 
+	id 1jmL5H-001Rty-Sa; Fri, 19 Jun 2020 17:45:47 +0000
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134]:38651) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jmJ5t-001Qwv-2i
- for samba-technical@lists.samba.org; Fri, 19 Jun 2020 15:38:19 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=H6KdPddEFEOG/dvOcvhjgMvCXFvE7cD0KiK5mg2ifb0=; b=k41QnRxC4COriWZowOPFPn5fqU
- cUEi+svJTP/1tdWKUdzYqIgZ+AksjxArCdaJCQVidh3wQhusNHPYG0/Xk8JAmH6U6Ix7mol2MoSUH
- uevPEnxtzpnvVsltTWLZfOWmF7IbAuqxlK46t4PPU0gofu2BzV/iXcQQH8XYJRdJxk8On34CCv7U5
- HCjTgy+DvnKaIduGl+ynq1CDd9G2OgzTdACi1EGQLinQV1paZ4Hm+Bug3b8yhih5/mG4Osj3k4BB0
- buH4OiADnoDfxi6Yk0rRtK1/c9EsrPTRbxbObGmWWrycuHCwd7PWqiHYZbW5mNSRIbBX0ADontBwY
- 6weSha+mYsB8UyKFdkM7jCl5tJCkGAaGDmW+5o/bSCjVVsttwiohheAyDYhMrmn33XUZLtvkWmccj
- 7S0XGlJiHILWki3rGFzWRlGJ7oDWo6PMacUm1uIhzVq5k93HvnpmX/JyoUfMvlRrw/NEjcc9z2cF6
- WP0s6bDbBXDvPJrZDHdlAbsF;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jmJ5s-0006C0-H6; Fri, 19 Jun 2020 15:38:16 +0000
-To: samba-technical@lists.samba.org, jim <jim.brown@rsmas.miami.edu>
-Subject: Re: samba.tests.docs max worker count was: [SCM] Samba Shared
- Repository - branch master updated
-Date: Fri, 19 Jun 2020 17:38:14 +0200
-Message-ID: <1780362.zTFG4TRhrx@magrathea>
-In-Reply-To: <ac6f6687-dd7b-2b1c-3bdf-9a182222740a@rsmas.miami.edu>
-References: <20200619110010.02B25140341@sn.samba.org>
- <ac6f6687-dd7b-2b1c-3bdf-9a182222740a@rsmas.miami.edu>
+ (Exim) id 1jmL5B-001Rtr-U4
+ for samba-technical@lists.samba.org; Fri, 19 Jun 2020 17:45:44 +0000
+Received: by mail-lf1-x134.google.com with SMTP id d27so6034773lfq.5
+ for <samba-technical@lists.samba.org>; Fri, 19 Jun 2020 10:45:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=4zchYO7toLml5/b0xvh1HtIrUPHyuP7pHMMHTe+5Lq0=;
+ b=eZEXfUGq5IVdITncqNuplX8zPS9YcWPYqhIekIcCKzrlweOGs7yZC6UExyELZ4DSBG
+ zV0TgnZlkKEqK5FV8H2R2oO2FdRUBxTMty3sUKOofFAQrqOVajSYgDLBkSb0VCzVhwTl
+ XwKd9MEyFArjrYrcHtg3o9jUKq+zcpylTME6VaYpaPrca3FNbgpBmAuWooJW325ZvvMG
+ BKebowwqnlHV5DFQYdujdqTZAGmIWf8otwEbLvHufI3ZB5WW2Py2fi+tTieBrWlPmgPg
+ 33Gp5DnHuuZtnWCLOq4rO6/3NfbOoZ+6mjJ1sLC3MlBl45TfLV6XxuNiOykVTnz6mrjN
+ O1aQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=4zchYO7toLml5/b0xvh1HtIrUPHyuP7pHMMHTe+5Lq0=;
+ b=lYiMwCWbWj+ELMp+3q2ttAouHHwa/99AUchP4cINAX6vaR1yudD84QnJgOYSMBxBa+
+ 1nZm/hNG5kDadhZkKzoE4USa01SG3jWBC7MqgxlTwV6XpljGzuJjhYsV+UL4E6Q2T3Hq
+ kQDJApDdQVWxz5ha4oTjT1YvU49R9vK8+K9WVP98QWbWzNfUnkF2w4gGZUKlR2qMC8L1
+ bsnuGbe7j6Y3pgQHN/36s8ZeqivZu/CvA/2gY4CJaF+QG4KMzJqVH/Fj0iEbvq8nhqBp
+ hrvbovtHeOGoT7p+hzfXM6W4jKTys3PC+GFnbpHJPY9SmfTEf+C98mO0B+U2iY7MfJj6
+ WRaw==
+X-Gm-Message-State: AOAM533OQ8wPOuz8QwY8I85X6VpOmHe6mu1sHTVthLcrG8dRzBrREH4+
+ 12qUlyjfevz2hy7aKeInZrFIZ71tgs+HTFXFdvjKMv2F
+X-Google-Smtp-Source: ABdhPJxc73EP7a+yFw8+1Bsn7wG5dGbAJqmXHSnBGm8H4VWKW9292wauzny93uM3GRsl3Y6lPvJ/l54u1s04zl6Bn3Y=
+X-Received: by 2002:ac2:5a5e:: with SMTP id r30mr2589510lfn.30.1592588738940; 
+ Fri, 19 Jun 2020 10:45:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Date: Fri, 19 Jun 2020 19:45:28 +0200
+Message-ID: <CAC-fF8TH5sf6ekjfG5QqnEwG41fopV1bWOMxBH_UnodfjDo_qA@mail.gmail.com>
+Subject: gitlab: testing of ldap-ssl-ads option
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,28 +64,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: jim.brown@rsmas.miami.edu
+From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Isaac Boukris <iboukris@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Friday, 19 June 2020 16:07:53 CEST jim wrote:
-> If you want a minimum of 2 workers then why do you allow a result of 1
-> worker?
-> The second test should be '< 2' and 'return 2' to match the limit of the
-> first test.
+Hi,
 
-Hi Jim,
+I'm trying to add some tests for the ldap-ssl-ads option in
+ad_dc_ntvfs and fl2008r2dc environments (as ad_dc doesn't allow SASL
+over TLS):
+https://gitlab.com/samba-team/samba/-/merge_requests/1402
 
-thanks for the suggestion, I've opened:
+The tests work locally but in gitlab I get this error:
 
-https://gitlab.com/samba-team/samba/-/merge_requests/1407
+ UNEXPECTED(failure): samba4.blackbox.net_ads_tls.join(ad_dc_ntvfs:client)
+7111 REASON: Exception: Exception: Failed to issue the StartTLS
+instruction: Connect error
+7112 Failed to join domain: failed to connect to AD: Connect error
+...
+ TLS ../../source4/lib/tls/tls_tstream.c:554 - An unexpected TLS
+packet was received.
 
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+Does anyone have any idea on this error and why I only get it on gitlab?
 
-
+Thanks!
 
