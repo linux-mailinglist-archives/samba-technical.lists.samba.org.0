@@ -2,49 +2,87 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBCEB200024
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Jun 2020 04:20:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F2351200AFE
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Jun 2020 16:09:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=Etc/h/g+TKQAMmrlOwoWidYj8qQJHVxGpIbfFEZHVO4=; b=i0f+0UcS6SBY+vp00uy/rW5MOl
-	SINxJjTCNuTyYyAaNRCbkvVZtrpJEEp/RE9nRCfcTowWopzcr0fVreNKjHg1V60uCHzqDEHeryIJ3
-	i8x3+HiitudpqA58QA3XOXbuWCzjncFU3Xu6UgNTAOgNYUj/A/c3fsYYssY7MRWqKqGjPpaJRp0Sg
-	VNTca5lw9rCl9Vrz+Th5TEdt2/ENLhEPE36jhXBWne2LJ/FH7vk5fyfVw4kjqRFHwEr3MusMuVFe+
-	iJG4nIZeDUvPajP9Y6Ca5DvdJzxhD7Mr1yMWNq++0K+Ns+0Yw5VMvtIg6ACmyVN3CSngtCnpSDZYR
-	YqOj2u7w==;
-Received: from localhost ([::1]:44036 helo=hr1.samba.org) 
+	bh=yHRsn7TYianoWqXxyxY9DpNRBR6Xr7lfIMV4r1Vg3gQ=; b=4IV5EMYf6lBYyfujNzuJd+qvo5
+	kvbXd9bCk9UiAma6jmQJAyD41byq7NUU4mZuxLODLetP1wZdFpFrqW5Vq9fv8j382A8DzsDEAvYxR
+	54AdTrrQyp97hgrdRoolg/YNJzXNS3aRuKo6FF7H9CN305pE/pPXH+z6ZBYj3Z+r4Pdyn7PbhH1O7
+	JzaCMT2ckS99y5D3un9mXqN6jAjgYKdNJZayN1sZL5trppNBYlYd+Plbz6lN6rlA6WFOUK0EBAzM5
+	k0uzs8o4pSsBIyjHMmrqa9qvA/SMVUidQACvwQF9g1EGabXzyG0OnVbRxw+14XqcZdcn9oifQjNYE
+	hJXat/iw==;
+Received: from localhost ([::1]:59010 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jm6dV-001KPv-3I; Fri, 19 Jun 2020 02:20:09 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:22422) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jm6dA-001KPn-NX
- for samba-technical@lists.samba.org; Fri, 19 Jun 2020 02:20:05 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=Etc/h/g+TKQAMmrlOwoWidYj8qQJHVxGpIbfFEZHVO4=; b=jLSULmR2GHiuJk5a1q9/MX31/p
- q1MBMVp4MkFKNAxGS8w+q6+Ww8+D+2oiY25AKFgJ+oGpwCCylSq93nWar7OqOlZi3VJjIj/XqT1XK
- qRXg9gkGO3sfGXOEy89AVRKVk++w/t2AXXbJmFRcjJlyJRyJ6N5IdX1Rx0HxEJQaL8Bsu8A13akyX
- KRgegOok1E/bzVKy7Zwx6IWsImiEFxQhls1yjXZR6CNVNE7VkwV0sPpGQOe7qGlh1IMf9ijGMWjTL
- xbRDa3W6EjA+1AGmKDAuj52Lsw1FaHVtrkGYGWxgV2VOP0AnRjnZiwl2hHGpFcvMyahVZWh1fuUNQ
- JwlTYN5RBvNOG7PXN7MWs0GnE9OEGDdrdWwRjESGziqp8n7KfaxeRW+/xWVuDsSgVcY5kRrK6Vd9M
- /7eIVUwRjwSY3v28fcD7mVnIWUwVwFCrY9FkUKoBrzYEKpjaS0+R+0Ww95m2pAsSoPsrinSnwgIN8
- AYyFzBtmSbt2EZoRu05cANlK;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jm6d9-0006sk-5y; Fri, 19 Jun 2020 02:19:47 +0000
-Message-ID: <4fbaeb2cd3880cb2f9d66e1b49a0c9c2d62a79dc.camel@samba.org>
-Subject: bisect-ability
-To: Martin Schwenke <martin@meltin.net>
-Date: Fri, 19 Jun 2020 14:19:43 +1200
-In-Reply-To: <20200619111338.2e5deb21@martins.ozlabs.org>
-References: <8b444948-cef4-74d8-a455-958446832aaa@suse.com>
- <20200526172611.GG18267@jeremy-acer>
- <9f00da33e7c31f8f6304af90280bdef8f917c7c3.camel@samba.org>
- <20200619111338.2e5deb21@martins.ozlabs.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-Mime-Version: 1.0
+	id 1jmHh0-001OWp-Rd; Fri, 19 Jun 2020 14:08:30 +0000
+Received: from mail-dm6nam10on20717.outbound.protection.outlook.com
+ ([2a01:111:f400:7e88::717]:6272
+ helo=NAM10-DM6-obe.outbound.protection.outlook.com) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1jmHgr-001OV3-BG
+ for samba-technical@lists.samba.org; Fri, 19 Jun 2020 14:08:25 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=SDn0ULpBSoQN4FW+Pjz6L0gK4p244JaFlgRsFEZjBIvqTPeoxE1wfjIv722HOBQhoG16UzmN8kGZlhiaXQUdNC/DSn6r28TMg8mXfMVTUDy1wwoY/MGaz7rtjE9NutLenLBxF4jwpeDnIt6ZDBHYBcFD404Kz36cUr/+aDSblV9DbhkBNrTbjHtFY907AGYdlOhtRPNadcaUAyH8EG937s+A9CIElPjo1/YPNdbsGNPQbF6YU8VGlEu9ccNCuZjH0wXj89vvD+qaNs2fGi9jArr6kuAosaWCjovZSzNMhkYAtVtiKW6Nzaauihk1zdPf5MFWaC2CGMLRM6wu46okIA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yHRsn7TYianoWqXxyxY9DpNRBR6Xr7lfIMV4r1Vg3gQ=;
+ b=ZC0aBdVGJyQMmNwamYGXL6gbxaOW1ffV6MTTWsjV6dxC2EHhgArAPXLzgLSjOZtzV4iXUOqN9Yo3XuKBsjBBNwOMDD8/g2D1bBihsl6K0djh8f4Jk/Gr89FSn5cCkv2wquYeIQ3ZD61ohl/cIS2Xs3fVHkZeEBce+GdTdR2DatKebw7fUOkmAqW2eqFT8JNwB+JMXUUE+YoRTDaR2MieUdh4vjpIlMFR9hZJSJiVJqOV8EgU+s7cYkbNxY1hOFoggqf6g/4qJ8AzWBhXYRnBIQgAFf687jZGbggIbZFJbl5xVCyfHUGCdOb78RwahMpka8SBrIcoEahGQmqYGEeUQw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=miami.edu; dmarc=pass action=none header.from=rsmas.miami.edu;
+ dkim=pass header.d=rsmas.miami.edu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rsmas.miami.edu;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yHRsn7TYianoWqXxyxY9DpNRBR6Xr7lfIMV4r1Vg3gQ=;
+ b=k13GCyiNUtlM7zLRd/8iUIdgvFowTMx0qtrPpk2anytHscnvQ8eUDmzCV3evQiuJAeAmIwkdmnPWQ64BT+Flo8XlhBiUe4qKPQoZZI/QF3Wcx5NbEPSzZBvID7/LqYh+wVrp2ibt9b6+sFk8Zj6yflFFddLSmKrAjS7xSJmDLC8=
+Authentication-Results: samba.org; dkim=none (message not signed)
+ header.d=none;samba.org; dmarc=none action=none header.from=rsmas.miami.edu;
+Received: from DM6PR07MB5388.namprd07.prod.outlook.com (2603:10b6:5:50::19) by
+ DM6PR07MB7164.namprd07.prod.outlook.com (2603:10b6:5:1ea::8) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3109.22; Fri, 19 Jun 2020 14:08:02 +0000
+Received: from DM6PR07MB5388.namprd07.prod.outlook.com
+ ([fe80::e5e8:cf2d:e2e8:70ad]) by DM6PR07MB5388.namprd07.prod.outlook.com
+ ([fe80::e5e8:cf2d:e2e8:70ad%2]) with mapi id 15.20.3109.021; Fri, 19 Jun 2020
+ 14:08:02 +0000
+Subject: Re: [SCM] Samba Shared Repository - branch master updated
+To: samba-technical@lists.samba.org
+References: <20200619110010.02B25140341@sn.samba.org>
+Message-ID: <ac6f6687-dd7b-2b1c-3bdf-9a182222740a@rsmas.miami.edu>
+Date: Fri, 19 Jun 2020 10:07:53 -0400
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
+In-Reply-To: <20200619110010.02B25140341@sn.samba.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.1.68] (104.4.177.11) by
+ BN6PR10CA0014.namprd10.prod.outlook.com (2603:10b6:405:1::24) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3109.22 via Frontend Transport; Fri, 19 Jun 2020 14:08:01 +0000
+X-Originating-IP: [104.4.177.11]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 7e076a8e-0356-4b15-0823-08d8145a2da2
+X-MS-TrafficTypeDiagnostic: DM6PR07MB7164:
+X-MS-Exchange-Transport-Forked: True
+X-MS-Oob-TLC-OOBClassifiers: OLM:2201;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Message-Info: crQm6jJBSxcjpgm/BoTIPmdoSIOitHB6o6iLJ28oX6C6y4JleJ5sGZbLymS4GHF0na8LAiwoSlBN7Cw4aZ0sHsCPYS9qCrqu4sV46rqTbUCBhtghW9x3+4P0h4LGcCTy4IZoRA8W3U/cvw5y3AFafIM0/eYvHFCWGkn4GCb4ZXiEywIA9q2j5WxhZqyaeT04ljBwBJfGr+2tZnYJri2VXLue/bnoIVpi1gpsv4f+ts5aDJN/rAJVtdIu3nHFv2lMVEJrDWu9J/BHl44cjQB6iTEv47hWZoBaBLCyHG4FopYb54m1pKka6f0CWP/OatBthbOGZvpCuNBQGq7M3/ob2tA/d3eP5kVeDcFt9rdGsqgbtCn8EdjvW0a9rA9XQK50
+X-MS-Exchange-AntiSpam-MessageData: psGbysc1ke/yoovYHUDS3Is+pSHXZto9AxZsQhqq9Z84+3/UE+YlnBUewgBdGpTiwvKAD5hnY8bJIG6KHxQgwGlw+w9JrAwz66v54EaXdw2K7xXYTzpfJkVXtU9hSDmT0yFZ3y6ii2OO526RcAzQJLDyVbxT4inwHGjKh11YJJaQ7bs0i9pteEx+cOPZIs6A4DNGog5gPiWeYAYI8+oSmD/B14X2lVrAknCUfk7C82WfcDnqJDKW4H/IP3PgVejk6DoA/NKSic7iWxTXc1Ik7UaEnzUYs0VvUFHmkjz3SCfaUeukFkNvJUkUabyihJE7udAH5tlhEvx5FLs55+OiPi4Ns25kEtuZnQ6TynljhNp8WPIx816erHjrwdyk1KEQyBmDFDMDU1CPk5DSeEDqoZgalGk+mhZmj7dUI2zB8uJD54ZnkINNkwMQnoF8QCEoHrKOn/axzuClSz5DNpI0cp2q+sT4PA/bmkFIrW3bALc=
+X-OriginatorOrg: rsmas.miami.edu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7e076a8e-0356-4b15-0823-08d8145a2da2
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 2a144b72-f239-42d4-8c0e-6f0f17c48e33
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ViErJuBR6WwX5zqNEQGdExsNOqOPKt3taG8voyB6xMlHQt2Kee4VNlNbecSiYF5/JGyqgn4gHOE/xIpA7Rt1aw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR07MB7164
+X-Warn: EHLO/HELO not verified: Remote host 2a01:111:f400:7e88::717
+ (mail-dm6nam10on20717.outbound.protection.outlook.com) incorrectly presented
+ itself as NAM10-DM6-obe.outbound.protection.outlook.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,70 +96,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba-technical@lists.samba.org
+From: jim via samba-technical <samba-technical@lists.samba.org>
+Reply-To: jim <jim.brown@rsmas.miami.edu>
+Cc: jim.brown@rsmas.miami.edu, Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2020-06-19 at 11:13 +1000, Martin Schwenke wrote:
-> On Fri, 19 Jun 2020 10:19:41 +1200, Andrew Bartlett via samba-
-> technical
-> <samba-technical@lists.samba.org> wrote:
-> 
-> > We hope this describes many of the to-date unwritten rules of Samba
-> > development.  We would encourage more of these to be written down.
-> 
-> This is very nice!
+If you want a minimum of 2 workers then why do you allow a result of 1 
+worker?
+The second test should be '< 2' and 'return 2' to match the limit of the 
+first test.
 
-Thanks!
-
-> Just a couple of things...
-> 
-> I wasn't aware of bisect-ability as a hard and fast rule.  I think
-> this
-> is an excellent goal.  However, sometimes, very rarely, you end up
-> with
-> a choice between 10 bizarre commits that maintain bisect-ability
-> versus
-> one really obvious one that breaks it for a single commit.  I wonder
-> if
-> we can allow occasional build breaks that are clearly documented in
-> their commit messages.  
-
-I'm happy with that.
-
-> That might upset someone who's all-night
-> bisection just fell over on my broken commit but when they look at
-> the
-> commit message they will know it was intended and will know how to
-> restart their bisection.  
-
-Our scripts even restart for that! :-)
-
-> I just feel as though sometimes there might
-> be a tension between clarity and bisect-ability.  Not sure...
-
-I think all our rules should be +/- a degree of engineering pragmatism.
-
-This is hard to encode in rules (because then it isn't judgement any
-more) but is critical because otherwise we gridlock like you suggest.
-
-So tweaks most welcome - what I find hardest is to describe that in a
-way that won't just bamboozle the new contributor who just needs a
-clear set of rules to make their first patch fly in.
-
-Thanks so much for reading and commenting.  Nothing would be worse than
-having a contribution HOWTO that Samba developers hadn't even read.
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
-
-
+On 6/19/2020 7:00 AM, Andreas Schneider wrote:
+> +    # Always run two processes in parallel
+> +    if cpu_count <= 2:
+> +        return 2
+> +
+> +    max_workers = int(cpu_count / 2)
+> +    if max_workers < 1:
+> +        return 1
 
 
