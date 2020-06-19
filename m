@@ -2,56 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9004A201AD6
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Jun 2020 21:02:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D583201D93
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Jun 2020 23:58:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=0PmLg6zJKo1N8hwdbH3T2d9y1W0Je4dOc+y14T4xu1E=; b=u9B2meym4PDL95Yunf5JQa3WJD
-	5pvbAGyxLFpZT0Dzk2BI3RROex4mvGPkqhsHhJeiRvaAk8aQAahiLJQyV3NpBiyA1jiYKlFqQTKO4
-	PNY/v3fhed7SvDRI0Us5pTlCAshBYpQ/BaubecwYZYhXBEHy+9ZxKfbVhuOTP4SZszerLmkj54GON
-	ykHwqIHxh9Bm7/CfqDOe+emfq0njo/3Vp4gCQJdX1oTA9frs1CruJoo3V7DtFPJdMqB+QjNoS1d3L
-	ZMX12TpU/37jMxAnEQR2FqaOiF4uipa0l1pvw68R4q1e7CKY0c67dxDCXxksNDQNCAjSz8DH6Ncdh
-	G3QDCd6g==;
-Received: from localhost ([::1]:52892 helo=hr1.samba.org) 
+	bh=5YvJCKLYjpPBLktwqrcRl1UGe/Gs4nT/5sF76kLscAw=; b=ltbvY7yAfzZds6jh0X0ziyh+n2
+	u0x0SMbq4njahrpDnlrqYwBtCGUXbOczDV2CNi93U9E5K4K5q/T6ceIJZHKbLCeZeZ7FV5jek1gTS
+	jrDRvXYGgyYWTcPFTUf6OpRVtRhd8Wosyr4LD7WNLkWa0Ld3fDR22UI1z678KF+5p/chXiiRAzPcK
+	jHKiCj5Jget3j1cbhOo9btEaS/rxi6STzPI09GaWxSXMv0P7ATwXMYEYckiZCqrG9XwvqPsli1EMF
+	tZznOE92KS/m7n1OqPtmzkBaCqnNnOry9ZIHP9WEPKGdIoa8N5axnz1zf9cDBgGmb/D+2MIuDVAZs
+	sXj6CpQg==;
+Received: from localhost ([::1]:27926 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jmMHI-001UNz-Qp; Fri, 19 Jun 2020 19:02:16 +0000
-Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f]:41712) 
+	id 1jmP19-001XZt-0c; Fri, 19 Jun 2020 21:57:47 +0000
+Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c]:38606) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jmMHC-001UNs-F0
- for samba-technical@lists.samba.org; Fri, 19 Jun 2020 19:02:12 +0000
-Received: by mail-lj1-x22f.google.com with SMTP id 9so12700775ljc.8
- for <samba-technical@lists.samba.org>; Fri, 19 Jun 2020 12:02:10 -0700 (PDT)
+ (Exim) id 1jmP13-001XZm-1u
+ for samba-technical@lists.samba.org; Fri, 19 Jun 2020 21:57:43 +0000
+Received: by mail-lf1-x12c.google.com with SMTP id d27so6393338lfq.5
+ for <samba-technical@lists.samba.org>; Fri, 19 Jun 2020 14:57:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=0PmLg6zJKo1N8hwdbH3T2d9y1W0Je4dOc+y14T4xu1E=;
- b=PmGI5cenvu5dzzfVCj3hx5Cillwue/7fbBbEK6k496KS/8I/ZeV/vKSTM1jApxiLUx
- Udji+Y/yXu/MJgR18HGyQ5hoKk4G/xJBUZt2ycbu7GoxOikXF1OvEJKTZTQZ8LcCo9xx
- uzt3lbzumQt++fnETHTWGSQq2yqWZP6vZXNNUgiSPaJ/bY+vcFRlDihDAh2WHeh3mEIr
- RSQqZI+x7xYrc0FVKDZpuhuuWf6ko1I9L7+FdXDRQ9d6FW1MwbMHV+PMncv/U4Ltr32e
- Qpv0YppF0hrdplfP7UkGrV65iwfb1raMTbVdTk2f29YvMr8SCqnr5YPHvn81rVydd9n/
- 5mQQ==
+ :cc; bh=5YvJCKLYjpPBLktwqrcRl1UGe/Gs4nT/5sF76kLscAw=;
+ b=ok0ZABXJQGJMzO7CuVAWH5hilbVeGuRbvuT3cKBpENgsMZSu+USaWQg10mrwKzbBJs
+ /OH5jONhW05N+vP+Nh1zA7gsIdUAEYSnnCe154eBeLp9yLouMrVlfyjDAFgSmdCbEZ57
+ nLp1sXyY2ARC6+7VHMN1oexG6NR5xpM752S6w2NH3Oo5vSno89bjFr7vumFYJv33jas8
+ MJDP9omoO8v0X25h0MRnJ2X3HpSMxOPyF+CIdVFM1VVmWXBJ6x1HPVNhUDbBmUHbSnO5
+ aFxRVcnbylJM9kQzs+9CCLAI5s0uot3Y60z++dbSvJPGBomDbKXXeq8bQhVW0DVj4ZVi
+ p6qA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=0PmLg6zJKo1N8hwdbH3T2d9y1W0Je4dOc+y14T4xu1E=;
- b=boNbIqpIuL+rbjysiAjA8pkQjTcx23u+9gjjOMlTBZKrevgkgNtxaKWk+8mXE2Vt8E
- sqseeLKmFL15P7jtH25Zt9iyoQnnSl//zyNNkp/SZylMvD6NxBAf5z/6UnU4+8Wqi3U+
- 0Z65qr4xUcaXfFqbYmfaubH1NxldUbS2c4qZVRVIE3lCPvI62Sqz6vHLDlBiDXnRwpX4
- mbdinV5Q4D/IPOuUbATy7nWYE6Wx+n6aS17IdR9VMPxqRhSHMXUo2DiQYvLLvCFEEeU3
- +OovL9hjjr7xLJWodMKNPMhPPYI3H31rGV4uekWYeKihniPXI4qKdFNJYH9WYYZy+4SJ
- PgtQ==
-X-Gm-Message-State: AOAM531dqd2zGHrPSD84tq47oKkZpFywZXWTl0uqTxrxVaFPhqXy4qwg
- Sy0iK87PWaNU5pb5A+wsLHLjkBzySPhiTIXGSB8O6g==
-X-Google-Smtp-Source: ABdhPJyea81ZJKSnkS0tzDUvU4JRoLjIC5Qn+UemWLUI/qI3MwfWnhdnAMZlgSQQMyvf9V6FK3e3ocRWW90RseyJsR0=
-X-Received: by 2002:a2e:8953:: with SMTP id b19mr2671497ljk.187.1592593328848; 
- Fri, 19 Jun 2020 12:02:08 -0700 (PDT)
+ bh=5YvJCKLYjpPBLktwqrcRl1UGe/Gs4nT/5sF76kLscAw=;
+ b=gB0I1UP2fO/rQMU3xBePLoY7fsa5AEP13OHyMJvUfYvwBVp0uWooEJin3rJkGlptmv
+ 1Mzytk2WyZaud+iJoAw+NLRinFT/iJuTqySxVR4XJnEDVBBNW4aeiRQqPDl7xQM/1n/e
+ m4atOHnAL9ixsP5j1eaNp5tnAV72CUneuBsGAB4mPrTIwaHO1YEHeejt4cLJuHSAf+gd
+ /sMKczAS5yIXHGrRqcXkgVyduEbV/8eavu7Sx8lh32raaveHBM+wtJ2roJbXPK668Y0K
+ BxWnG53h/HgKTmaq3Rbyc/eTPq7tmNTjcQOIhzjScSoKUZKj504JoNSnXwCKIfEdWxuY
+ QWTw==
+X-Gm-Message-State: AOAM532Se9hP1DIj815CuyW3XVXNIJOtpJf9EZgaYFF7AHrdNeXJpVlN
+ AM5Zr3RvPTSHQQaOFajRGwncet3RcQyikdZ14fNbgc6t
+X-Google-Smtp-Source: ABdhPJyGz6+9wjOHqs6krcLrigQp7B8jE7lt5CLoUn9XhTw3Ed81ZQhRV0SQYBcQ59XE4qyIsO3JpTZ5LF6ZVW0a1Bg=
+X-Received: by 2002:ac2:5a5e:: with SMTP id r30mr3065665lfn.30.1592603860089; 
+ Fri, 19 Jun 2020 14:57:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAC-fF8TH5sf6ekjfG5QqnEwG41fopV1bWOMxBH_UnodfjDo_qA@mail.gmail.com>
  <20200619181956.GF10191@jeremy-acer>
-In-Reply-To: <20200619181956.GF10191@jeremy-acer>
-Date: Fri, 19 Jun 2020 21:01:57 +0200
-Message-ID: <CAC-fF8SYbXaz33yJ_QaZzeYh2uBt3iKxHzbQNtMPm5qqwvAciQ@mail.gmail.com>
+ <CAC-fF8SYbXaz33yJ_QaZzeYh2uBt3iKxHzbQNtMPm5qqwvAciQ@mail.gmail.com>
+In-Reply-To: <CAC-fF8SYbXaz33yJ_QaZzeYh2uBt3iKxHzbQNtMPm5qqwvAciQ@mail.gmail.com>
+Date: Fri, 19 Jun 2020 23:57:28 +0200
+Message-ID: <CAC-fF8Stst7BnrEKVQLP7og-HLp=T+NNoiSpUmRD3mwxXtK67Q@mail.gmail.com>
 Subject: Re: gitlab: testing of ldap-ssl-ads option
 To: Jeremy Allison <jra@samba.org>
 Content-Type: text/plain; charset="UTF-8"
@@ -74,15 +75,20 @@ Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Jun 19, 2020 at 8:20 PM Jeremy Allison <jra@samba.org> wrote:
+On Fri, Jun 19, 2020 at 9:01 PM Isaac Boukris <iboukris@gmail.com> wrote:
 >
-> On Fri, Jun 19, 2020 at 07:45:28PM +0200, Isaac Boukris via samba-technical wrote:
+> On Fri, Jun 19, 2020 at 8:20 PM Jeremy Allison <jra@samba.org> wrote:
+> >
+> > On Fri, Jun 19, 2020 at 07:45:28PM +0200, Isaac Boukris via samba-technical wrote:
+> >
+> > > Does anyone have any idea on this error and why I only get it on gitlab?
+> >
+> > My guess would be differing gnutls library
+> > versions. Not sure how to determine what
+> > gnutls library version is on gitlab.
 >
-> > Does anyone have any idea on this error and why I only get it on gitlab?
->
-> My guess would be differing gnutls library
-> versions. Not sure how to determine what
-> gnutls library version is on gitlab.
+> In the raw log I now see the host was "Ubuntu 18.04.4", i'll try that.
 
-In the raw log I now see the host was "Ubuntu 18.04.4", i'll try that.
+My bad, it was rather easy to reproduce, it only worked in my lab
+because I have 'TLS_REQCERT=allow' in ldap.conf.
 
