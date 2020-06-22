@@ -2,61 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 829CA203E45
-	for <lists+samba-technical@lfdr.de>; Mon, 22 Jun 2020 19:47:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 916E4204089
+	for <lists+samba-technical@lfdr.de>; Mon, 22 Jun 2020 21:33:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=qtVrBo9zCm9WHKS+1UqbrkmxlJgEwTlf3D0xpFuHfTg=; b=bfdKrWBMRKzSW7lotV2XtZ+vqh
-	xHb6k8y/qK0ePbnJTi3QYr197F6LVhEp3C3paVUZr8Vb3ivkJkyqYBLRnfvqj3ABQEOXWI8NUFYgR
-	yOddwd4Sfoa8O8eYMCHS205T6fuyEVmuV/JCb4Y/THjglCNgRikoP1sLnjzW8IKXZ0kTR4OirEcxv
-	vJGzsXlDQWFYvru1jdlR7pAjLO8Ll9KmB9lJBBoTEL1SUuzLmAaG9uVEuXQv0sf/jdtY+OgbOiPvi
-	SoLRNqBzu2vOy/afrBXyHfQN5es1EHKlmdnxrJWZgvYLAvEwUAzX4Vof7ojHI4XjPvmVi7DgdgeoG
-	p2mMe7yw==;
-Received: from localhost ([::1]:18146 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=VBq6o6tDY5zalsVeVUx5w01CbytSHe44gB5XLXJ5WRw=; b=StRH/D6Fk4z95IsOyIGq1arG/L
+	ovw1/vwTxOk+0DzvDJpgAvIHTYHX7xMkr36qwxW6GbqQgtdQZDpUmq9/g0hDFQWwiBQn1y0uG5wkZ
+	7ARYqRATsRi4AlEH6PhvhU0K5ZlDHXmAicpvaEuSKJHR5LXK14q1XhuVT4YrCA2ehh9xb1idpe1Zo
+	k3hV+unKLThhAb6LVNrzjAQBIHPlYQs7TLiXZEdSVEd6v2mH/r96Ln/crZw8sYuiTl+xH6o78zMPq
+	MwDpl1IHiLLwYVOlFki/gvKHpM80oySKq2l0ZwHWI5c9icNHtq6Yp2QTmNDBNOpf/VQozzYg11Tvc
+	1jMsE2wA==;
+Received: from localhost ([::1]:22060 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jnQWk-001rZu-Pp; Mon, 22 Jun 2020 17:46:38 +0000
-Received: from mail-ej1-x642.google.com ([2a00:1450:4864:20::642]:33489) 
+	id 1jnSBF-001sOe-Co; Mon, 22 Jun 2020 19:32:33 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44864) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jnQWe-001rZn-9y
- for samba-technical@lists.samba.org; Mon, 22 Jun 2020 17:46:35 +0000
-Received: by mail-ej1-x642.google.com with SMTP id n24so18909386ejd.0
- for <samba-technical@lists.samba.org>; Mon, 22 Jun 2020 10:46:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=qtVrBo9zCm9WHKS+1UqbrkmxlJgEwTlf3D0xpFuHfTg=;
- b=Jngs8FdxtsELlqIPLhjsN4rsqQmYRHKs9CwwOTyqM4k/U7SrkP2pCbtJSYgBjlZ9Fr
- 9goTLZ7HtFFIOvm/1KkZ9Bp7UqtPNewMhWJzwSHibEd6Vt0rgyxnoWph2HX910PBXG+p
- R0mEV7gN5uKYxXuhNFbXCPERN5dq742MJxBe9JIAj21Kqovwcor++ytCR/mD2jMdrSG7
- Xw5oomaPgqijdeBDRXe9R4CmE7nvFQBXhtNXuLCYXX6tSSoBox3eNyBFvbQmsqa0edcr
- kjJi4NauBLdFmBgQGwH7vj0ymIhyWj0svhr5pTaadajcrLhyhcrzeXzA5x4aC4wlx0fc
- LUXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=qtVrBo9zCm9WHKS+1UqbrkmxlJgEwTlf3D0xpFuHfTg=;
- b=rvW9rfSxqhV20nADkJeD+rOo6uu38t65jIv1lhoE9l8SKcoDVBXAeiOhOJhkKvQxvR
- vGeXpU7AP2PIzitOnmOqGaANG0id6jaR7xlCmtoXXCx1B8caNEQgWYEosmHoq9L3fZFO
- 2uGfeJA1aHReCmn9jXTEmZiXkFOgvctyA1QHw6kLWU/6jUAFxSOgjhjkmjFXa9y4Lyjo
- IslIwSzcRPU8pBfVZH1JDyJs+qc8r3UM+Dely9hF/Y4R5gszw4Myw6p3JLsMzkN1HH/y
- XlDJ4AEXZIDyoiGZQTsiHOMtPMg3SAUcKoZ2brVh1BAjPOJgHJc7Y0b+vuQ+NriYroW2
- cp7Q==
-X-Gm-Message-State: AOAM533tL5uM/jxH5zgImU4eciDSX2/a+n+nYDis138sHcZyOSokEkPu
- nC+MlWrdg0odQb+tR//Q/zeeJLc5GB1mePugEQ==
-X-Google-Smtp-Source: ABdhPJzjNTTW/txt6qijBg4LwFKBAt9v9qwg7uLYVef1/LerVEws6433kX3BRsqFhAW0UUcvdTdoSBwtTW6/yq6lDy0=
-X-Received: by 2002:a17:906:6a1b:: with SMTP id
- o27mr17307614ejr.271.1592847990718; 
- Mon, 22 Jun 2020 10:46:30 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200620025033.4180077-1-zhangxiaoxu5@huawei.com>
-In-Reply-To: <20200620025033.4180077-1-zhangxiaoxu5@huawei.com>
-Date: Mon, 22 Jun 2020 10:46:19 -0700
-Message-ID: <CAKywueQD0aM3uJYmC0GbAj_F5RwcKNX1PS1_q+3dn6gyUR_+Xw@mail.gmail.com>
-Subject: Re: [PATCH] cifs/smb3: Fix data inconsistent when zero file range
-To: Zhang Xiaoxu <zhangxiaoxu5@huawei.com>
+ (Exim) id 1jnSB8-001sOW-Qy
+ for samba-technical@lists.samba.org; Mon, 22 Jun 2020 19:32:29 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=VBq6o6tDY5zalsVeVUx5w01CbytSHe44gB5XLXJ5WRw=; b=tCnm2NmnOArknaxzpm+7flJUvE
+ ayONLPk1iPcmbUm8kc3OjlnoHpcGae4vCZfgDUrQmOnSBiIDJsE514cvWDNBPRGd6ys9A+QLlyE7J
+ fzI32r6ldrp+QpKBwdhsuNYweoUahFP2r0Zh2SfxpxsxJvZ9kc7Y8/0+K9LR9IwzPtYSGrDpzT4nm
+ r+mSRT1ezdddR0VZXublNxBKRv8PEI1dtREu6OC1RF5XHUUy8qC83TsX7ypza3KsfXWStjy1LgAyQ
+ 4OfBlQKucH1iOFrB2akxFL9dKKGv/cdpEBQSwUh1ajNcHyXaCSCkG9h/hCsdM15T3ZuqRX97CiPuj
+ go4OYBYUD5eRnvF+IyAigxUDq0coQocVzUZgFQ37izPax6ZwJVol6ono05KhFTX6PyBBxEgGZ5wzb
+ oTroNl3Z8iy2VUvLT5HafIw4zkpF6vpmkTnP0PsVNnzA2xuUQ9FsVI0l4X2bqP/nxjLC4o5E1WeZx
+ XyqcYI+716mrHpcWne3Y+oF1;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jnSB7-0003pI-DY; Mon, 22 Jun 2020 19:32:26 +0000
+Message-ID: <a2cbe7499956d3d2318326c935954b3636ad8d8a.camel@samba.org>
+Subject: Re: gitlab: testing of ldap-ssl-ads option
+To: Isaac Boukris <iboukris@gmail.com>, =?ISO-8859-1?Q?Bj=F6rn?= Baumbach
+ <bb@sernet.de>
+Date: Tue, 23 Jun 2020 07:32:21 +1200
+In-Reply-To: <CAC-fF8SPmfGbokEzBjZW9zBqbDYeTUg8YN8i_cWY-UN3th1QPA@mail.gmail.com>
+References: <CAC-fF8TH5sf6ekjfG5QqnEwG41fopV1bWOMxBH_UnodfjDo_qA@mail.gmail.com>
+ <20200619181956.GF10191@jeremy-acer>
+ <CAC-fF8SYbXaz33yJ_QaZzeYh2uBt3iKxHzbQNtMPm5qqwvAciQ@mail.gmail.com>
+ <CAC-fF8Stst7BnrEKVQLP7og-HLp=T+NNoiSpUmRD3mwxXtK67Q@mail.gmail.com>
+ <20f59230-59fa-9946-3b4f-937cd1bf619a@sernet.de>
+ <CAC-fF8SPmfGbokEzBjZW9zBqbDYeTUg8YN8i_cWY-UN3th1QPA@mail.gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.36.2 (3.36.2-1.fc32) 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,61 +61,81 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Pavel Shilovsky <piastryyy@gmail.com>
-Cc: Steve French <sfrench@samba.org>, linux-cifs <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-=D0=BF=D1=82, 19 =D0=B8=D1=8E=D0=BD. 2020 =D0=B3. =D0=B2 22:04, Zhang Xiaox=
-u <zhangxiaoxu5@huawei.com>:
->
-> CIFS implements the fallocate(FALLOC_FL_ZERO_RANGE) with send SMB
-> ioctl(FSCTL_SET_ZERO_DATA) to server. It just set the range of the
-> remote file to zero, but local page cache not update, then the data
-> inconsistent with server, which leads the xfstest generic/008 failed.
->
-> So we need to remove the local page caches before send SMB
-> ioctl(FSCTL_SET_ZERO_DATA) to server. After next read, it will
-> re-cache it.
->
-> Reported-by: Hulk Robot <hulkci@huawei.com>
-> Signed-off-by: Zhang Xiaoxu <zhangxiaoxu5@huawei.com>
-> ---
->  fs/cifs/smb2ops.c | 5 +++++
->  1 file changed, 5 insertions(+)
->
-> diff --git a/fs/cifs/smb2ops.c b/fs/cifs/smb2ops.c
-> index 736d86b8a910..250b51aca514 100644
-> --- a/fs/cifs/smb2ops.c
-> +++ b/fs/cifs/smb2ops.c
-> @@ -3187,6 +3187,11 @@ static long smb3_zero_range(struct file *file, str=
-uct cifs_tcon *tcon,
->         trace_smb3_zero_enter(xid, cfile->fid.persistent_fid, tcon->tid,
->                               ses->Suid, offset, len);
->
-> +       /*
-> +        * We zero the range through ioctl, so we need remove the page ca=
-ches
-> +        * first, otherwise the data may be inconsistent with the server.
-> +        */
-> +       truncate_pagecache_range(inode, offset, offset + len - 1);
->
->         /* if file not oplocked can't be sure whether asking to extend si=
-ze */
->         if (!CIFS_CACHE_READ(cifsi))
-> --
-> 2.25.4
->
+On Mon, 2020-06-22 at 10:42 +0200, Isaac Boukris via samba-technical
+wrote:
+> Hi Björn
+> 
+> On Mon, Jun 22, 2020 at 10:30 AM Björn Baumbach <bb@sernet.de> wrote:
+> > On 6/19/20 11:57 PM, Isaac Boukris via samba-technical wrote:
+> > > 
+> > > My bad, it was rather easy to reproduce, it only worked in my lab
+> > > because I have 'TLS_REQCERT=allow' in ldap.conf.
+> > 
+> > For testing purposes I typically specify the ca cert the following way:
+> > 
+> > LDAPTLS_CACERT=/var/lib/samba/private/tls/ca.crt ldapsearch -H ...
+> 
+> Yeah, that was my last attempt in MR 1402 for the ad_dc_ntvfs env (per
+> some comment, fl2008r2dc uses a self-signed cert), that looks like
+> working in my lab by not on gitlab yet.
+> 
+> btw, my assumption was that the smb.conf would be taken into effect
+> for the openldap calls, but it seems not - i need to test more
+> however.
+> 
+> $ cat st/client/client.conf |grep tls
+> tls cafile = /home/admin/git/samba/selftest/manage-ca/CA-samba.example.com/Public/CA-samba.example.com-cert.pem
+> tls crlfile = /home/admin/git/samba/selftest/manage-ca/CA-samba.example.com/Public/CA-samba.example.com-crl.pem
+> tls verify peer = no_check
 
-Looks good!
+One of the critical tasks that we must address (in one way or another)
+with the multiple LDAP stacks in Samba is the lack of consistency in
+the handling of LDAP over TLS.
 
-Reviewed-by: Pavel Shilovsky <pshilov@microsoft.com>
+This, from "tls priority" perhaps best sums up documentation that
+follows the Futurama line: "You are technically correct - the best kind
+of correct"
 
-Don't we need to do the same for smb3_punch_hole()?
+   <para>This option can be set to a string describing the TLS
+protocols
+   to be supported in the parts of Samba that use GnuTLS, specifically
+   the AD DC.
+   </para>
 
---
-Best regards,
-Pavel Shilovsky
+This isn't very much use to our administrators as they don't really
+know for sure what parts of our codebase use GnuTLS and how to
+configure the other parts.  
+
+Furthermore, our other options like tls verify don't even say this
+much.  Even if we can't merge the stacks or options soon, we should at
+least have those options point at what (eg ldap.conf) configuration to
+use instead.
+
+Likewise, ldap ssl ads should explain more which operations it applies
+to (additionally note it doesn't apply to tldap and so idmap_ad as TLS
+isn't implemented there yet).
+
+This is particularly important with the renewed interest in LDAP over
+SSL (often legitimate, but also often misplaced due to
+misunderstandings from the pending Microsoft change).
+
+Finally, and yes I'm a broken record, but this is why I'm passionate to
+avoid us having multiple significant stacks here.  We need unification
+not just for avoiding internal redundancy, but so our security-
+sensitive configuration options work consistently.
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+
+
 
