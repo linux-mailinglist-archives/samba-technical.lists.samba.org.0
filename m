@@ -2,58 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF9A2202BED
-	for <lists+samba-technical@lfdr.de>; Sun, 21 Jun 2020 20:05:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CF1820321B
+	for <lists+samba-technical@lfdr.de>; Mon, 22 Jun 2020 10:31:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=za7Auh/c13e7hoasWuLrUOgN1L4FevRE7XbLeCWxAnA=; b=o9PQmU2pKzs4hMB8GiBle/nZqp
-	/4+yuZMJrQ0mVGjrqlynh40qZFHHZaZy80jF1JF96N27Skz7ZuA9HayDnI6GquRY2ogaPBNYFbnXZ
-	Yf61yo6l7Kw45X5EmN8lXDuvjFEZCF8WaqmZXVtItVgdrhjKqMG7KYDKfT8S+laVhsSCuiz3jJL2x
-	MkHhBmQgoQO26+YdD1T+Ku+JUVyVn41qi8SrUSrrBMHsdgTkvSFR4xMgm0checPqSRsfnc5gc2RBo
-	Bil9kfESRtq2QR4wONl+5swQpM7WXFWXlN4gAH2KT+UYvhAMIZkyYhtaSClKSc1Z/3uqUvE5e1wMl
-	PV15uvRg==;
-Received: from localhost ([::1]:48354 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=Wd5Mj4ze699zmbZKkp1VugV6mN3v4xdv5MI2gacAZGA=; b=Nt6M0jqOnk/XZKYGnnxwHshTlk
+	bvwa4s43LMu1bkrOLDijqb93yTIP3sViccXR/99cKyHdFQBcJPxG0cR1+Zr43gB6Jd4Cr5/wBV6N8
+	uVMBsXnCnVEBWMhLzjbFieZrDmwC12NcSIwCWTZgNtg+4C7VX4PldyFakRHdUY9n7XA+VNBCcI9TZ
+	YPqFlEknJgzjZN487Fp0GZMCERvykG0+wkHLMNc5wUoStBVXsmAwWBBDxgQA+lSGzZi3tjWVaIAiM
+	vy6f5oVzllhIOpGtNkEzpJTpGYc4Rxy74I1EAWNa1HTKWV0WYqy5SBFxeQsRQ+L7JvdQ4faVVtjLK
+	FRg00Xxg==;
+Received: from localhost ([::1]:59918 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jn4KP-001feL-9B; Sun, 21 Jun 2020 18:04:25 +0000
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630]:38205) 
+	id 1jnHr2-001jAW-3S; Mon, 22 Jun 2020 08:31:00 +0000
+Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:39271) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jn4KJ-001feE-77
- for samba-technical@lists.samba.org; Sun, 21 Jun 2020 18:04:21 +0000
-Received: by mail-ej1-x630.google.com with SMTP id w16so15607417ejj.5
- for <samba-technical@lists.samba.org>; Sun, 21 Jun 2020 11:04:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=CftEQ5so77m6d4JsuYjJ+ERchUSrytS8eDiaJyLebKw=;
- b=EBjbiM43LK01emXUzXvpLKjk3RXYlwVbRN0FLJSPirpA2F2NEe+lqaT0dAkCgiw0JW
- ElkO+aWAqLM9JfRxUyzMXMoJtOwxhZvuLID4VkVDaXgx56250TTtjwvt7g6dJR80YnbR
- lO1hjevvnUTv+jRVpfTro6uFW2daW90X4tLoaXjdlyvopdnjW30Ypx7qN7weNMH2Dwi8
- RqMnmNsJ0fR7ihRg21ktplyxqqT9hCp8znr3leug4lvc/BGR37rFJV7hAL4L0h8C71+5
- 4op3VZ1W+do3xesOapsYdEQh+QZf+lzST+pHKatMfOCd6q1+ZaI0NX2KFn7PPcgXNWtL
- ex3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=CftEQ5so77m6d4JsuYjJ+ERchUSrytS8eDiaJyLebKw=;
- b=pk8xU16qwMxH/xjwHPXgaynTL679BUpSu6wECttks+BNPG8fmbyZdo2xfwqIr3QawR
- bMxupCoaO8qAvXvkQBaPkccudG6milO1NsWttOupQE4vVZlBVCxyOSfQUrBToa6Bsc7L
- 0Z+oQzm0ko+KiNzqXgAn75Ibx1dUpjE6f/peF0xszoff2U+oqdiOj0HmbVyTKoicoWZ1
- XuYNm//XfCO9gE06Y/w9zwMlBm8gDf4+x2MgkdgYuwxea05ncBeYf8PD36GPdNU8M+AO
- A6Wdk5DF5yRCrWjBcOr5olIrcXUZyo32xfetya8GSkNOP2UEM6k1TSTS6j2xtcWCFJ88
- F1Yw==
-X-Gm-Message-State: AOAM531wD4oILXzlv98biM7p7zhpQBgjf9dpBhTkpKtkgehVQ4++GfR0
- Gn+8VVqJ3I1QiHFMQVKZzPPCkLM/1YmUfd6Helk=
-X-Google-Smtp-Source: ABdhPJx8rWiAybg74d+dLqFb6+DcTVT7DCezTfKHhFcpEkqDhtP9m19aNzFBSkCZmWfNp8o9VnxJRfL6uomybAf2cS0=
-X-Received: by 2002:a17:906:5fc4:: with SMTP id
- k4mr3091810ejv.94.1592762657176; 
- Sun, 21 Jun 2020 11:04:17 -0700 (PDT)
+ (Exim) id 1jnHqv-001jAP-B3
+ for samba-technical@lists.samba.org; Mon, 22 Jun 2020 08:30:55 +0000
+Received: from intern.sernet.de by mail.sernet.de with esmtps (Exim 4.92 #3)
+ id 1jnHqu-0000GO-TZ; Mon, 22 Jun 2020 10:30:52 +0200
+Received: by intern.sernet.de
+ id 1jnHqu-0007kE-PB; Mon, 22 Jun 2020 10:30:52 +0200
+To: Isaac Boukris <iboukris@gmail.com>
+References: <CAC-fF8TH5sf6ekjfG5QqnEwG41fopV1bWOMxBH_UnodfjDo_qA@mail.gmail.com>
+ <20200619181956.GF10191@jeremy-acer>
+ <CAC-fF8SYbXaz33yJ_QaZzeYh2uBt3iKxHzbQNtMPm5qqwvAciQ@mail.gmail.com>
+ <CAC-fF8Stst7BnrEKVQLP7og-HLp=T+NNoiSpUmRD3mwxXtK67Q@mail.gmail.com>
+Organization: SerNet GmbH
+Subject: Re: gitlab: testing of ldap-ssl-ads option
+Message-ID: <20f59230-59fa-9946-3b4f-937cd1bf619a@sernet.de>
+Date: Mon, 22 Jun 2020 10:30:31 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-Date: Sun, 21 Jun 2020 20:59:01 +0300
-Message-ID: <CAH72RCU=2HPWJHjgtMFx7wM061n-Jjo7aYRinxLPDtq8fo-OrA@mail.gmail.com>
-Subject: GSoC: Week 3 Progress Update
-To: Alexander Bokovoy <ab@samba.org>, "abartlet@samba.org" <abartlet@samba.org>,
- samba-technical@lists.samba.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+In-Reply-To: <CAC-fF8Stst7BnrEKVQLP7og-HLp=T+NNoiSpUmRD3mwxXtK67Q@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,23 +52,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
-Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
+From: =?utf-8?q?Bj=C3=B6rn_Baumbach_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?UTF-8?Q?Bj=c3=b6rn_Baumbach?= <bb@sernet.de>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-During the week I worked on the following:
+On 6/19/20 11:57 PM, Isaac Boukris via samba-technical wrote:
+> On Fri, Jun 19, 2020 at 9:01 PM Isaac Boukris <iboukris@gmail.com> wrote:
+>>
+>> On Fri, Jun 19, 2020 at 8:20 PM Jeremy Allison <jra@samba.org> wrote:
+>>>
+>>> On Fri, Jun 19, 2020 at 07:45:28PM +0200, Isaac Boukris via samba-technical wrote:
+>>>
+>>>> Does anyone have any idea on this error and why I only get it on gitlab?
+>>>
+>>> My guess would be differing gnutls library
+>>> versions. Not sure how to determine what
+>>> gnutls library version is on gitlab.
+>>
+>> In the raw log I now see the host was "Ubuntu 18.04.4", i'll try that.
+> 
+> My bad, it was rather easy to reproduce, it only worked in my lab
+> because I have 'TLS_REQCERT=allow' in ldap.conf.
 
-   -  User Management
-   - Organization Units Management
-   - Added the patches Alexander recommended
-   - Changed the UI of components written in Week 1 & 2
+For testing purposes I typically specify the ca cert the following way:
 
-Next week I will be on working on the following:
+LDAPTLS_CACERT=/var/lib/samba/private/tls/ca.crt ldapsearch -H ...
 
-   - DNS Management
-   - Forest Management
-   - Group Management
+Best regards,
+Björn
 
-Last Week's changes are in the develop branch of this repo:
-https://gitlab.com/HezekiahM/samba-ad-dc
+-- 
+SerNet GmbH, Bahnhofsallee 1b, 37081 Göttingen
+phone: 0551-370000-0, mailto:kontakt@sernet.de
+Gesch.F.: Dr. Johannes Loxen und Reinhild Jung
+AG Göttingen: HR-B 2816 - http://www.sernet.de
+
