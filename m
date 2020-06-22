@@ -2,64 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 628C6203755
-	for <lists+samba-technical@lfdr.de>; Mon, 22 Jun 2020 14:55:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 829CA203E45
+	for <lists+samba-technical@lfdr.de>; Mon, 22 Jun 2020 19:47:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=b8c5bEUV+tJttKydiD7ivRUhwSnSHXb910zQSrjNnVA=; b=4I7soEin9aXG2SGW+5m3S5jUZZ
-	xm0fFFleTLKQu3loe/bnOpfmf6XTEOeDgUJvNuGPwEU9dRrTUw5NpRlAW7wB6JHgV7NE/gVoLXsmR
-	RSVLrfOkNHfcngctjn8/9H54R81DZ8j6fvxdytdMP75aNHduAGz9IzXGyVq8fL4vBdnttDmGmf8ae
-	r+wXnq/c6evEweHCUuhFbu3bxa5X7olprq/sj8GF7miyufemfmaNCCfM3yqciOb6o1Nvxn9Om6Mil
-	3Sc46YIA5SyWy0cSRcxskFQqSlGVLcBYUrepKXaPOStVy3WYRwBYUvh2UJPGN7vjrCHZb0Jqwvqx5
-	dN3b1QKQ==;
-Received: from localhost ([::1]:44016 helo=hr1.samba.org) 
+	bh=qtVrBo9zCm9WHKS+1UqbrkmxlJgEwTlf3D0xpFuHfTg=; b=bfdKrWBMRKzSW7lotV2XtZ+vqh
+	xHb6k8y/qK0ePbnJTi3QYr197F6LVhEp3C3paVUZr8Vb3ivkJkyqYBLRnfvqj3ABQEOXWI8NUFYgR
+	yOddwd4Sfoa8O8eYMCHS205T6fuyEVmuV/JCb4Y/THjglCNgRikoP1sLnjzW8IKXZ0kTR4OirEcxv
+	vJGzsXlDQWFYvru1jdlR7pAjLO8Ll9KmB9lJBBoTEL1SUuzLmAaG9uVEuXQv0sf/jdtY+OgbOiPvi
+	SoLRNqBzu2vOy/afrBXyHfQN5es1EHKlmdnxrJWZgvYLAvEwUAzX4Vof7ojHI4XjPvmVi7DgdgeoG
+	p2mMe7yw==;
+Received: from localhost ([::1]:18146 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jnLyv-001o0B-D3; Mon, 22 Jun 2020 12:55:25 +0000
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b]:46587) 
+	id 1jnQWk-001rZu-Pp; Mon, 22 Jun 2020 17:46:38 +0000
+Received: from mail-ej1-x642.google.com ([2a00:1450:4864:20::642]:33489) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jnLyn-001nzL-Fd
- for samba-technical@lists.samba.org; Mon, 22 Jun 2020 12:55:20 +0000
-Received: by mail-ej1-x62b.google.com with SMTP id p20so17833627ejd.13
- for <samba-technical@lists.samba.org>; Mon, 22 Jun 2020 05:55:17 -0700 (PDT)
+ (Exim) id 1jnQWe-001rZn-9y
+ for samba-technical@lists.samba.org; Mon, 22 Jun 2020 17:46:35 +0000
+Received: by mail-ej1-x642.google.com with SMTP id n24so18909386ejd.0
+ for <samba-technical@lists.samba.org>; Mon, 22 Jun 2020 10:46:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+YunT9EGpyiKb/ZPi8hl6hgj2Hf7ZIppV2I8fsEiVvc=;
- b=AiaDiEX0eGMyWf6hlb96ADiZOrNNGv8ccLRujvXk3WnCVRdhYCREPSppCQu4otJjwQ
- cv8CGXQbJACgg+T6MTne+gtWPneqpgYVki6L40gbuqJTA5DXTyltePACgESQU9zKOVjx
- Uxnlvuq5aSlLrcV0NaTj1HI/J7HpyxrDPSk84tQa0jCPgK+mPbz2iIZQDoKOW1nqY+lQ
- Au5+zagBfNfmi1HY2y79DDn1z8Jl9uXmEW+z8sA8k9IuqkjKYyQYj96y/z5mn0uoXpiq
- lsyQ5jOd33EsyDRJlj5qpcKwY2VGKm00HL9YseUmFIZO/B6r6x7tGP53GcNxRJYobElm
- 1kQg==
+ :cc:content-transfer-encoding;
+ bh=qtVrBo9zCm9WHKS+1UqbrkmxlJgEwTlf3D0xpFuHfTg=;
+ b=Jngs8FdxtsELlqIPLhjsN4rsqQmYRHKs9CwwOTyqM4k/U7SrkP2pCbtJSYgBjlZ9Fr
+ 9goTLZ7HtFFIOvm/1KkZ9Bp7UqtPNewMhWJzwSHibEd6Vt0rgyxnoWph2HX910PBXG+p
+ R0mEV7gN5uKYxXuhNFbXCPERN5dq742MJxBe9JIAj21Kqovwcor++ytCR/mD2jMdrSG7
+ Xw5oomaPgqijdeBDRXe9R4CmE7nvFQBXhtNXuLCYXX6tSSoBox3eNyBFvbQmsqa0edcr
+ kjJi4NauBLdFmBgQGwH7vj0ymIhyWj0svhr5pTaadajcrLhyhcrzeXzA5x4aC4wlx0fc
+ LUXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=+YunT9EGpyiKb/ZPi8hl6hgj2Hf7ZIppV2I8fsEiVvc=;
- b=ePn/UfTkpR+DWmNlwN5oyIrvToGrk8kXG7+KzeAbuclAF24d28b0J94GDLPgd78QY+
- oloQHdBz4nVOnhWN1uX9vv+bhHfgGewKTSFHJ+LHqp7bE7Sbk7WDVTLx2TMO1kLt/xXo
- TfYwiK5n73xuHAyfHiAt8qJUMQKjSaSFFEGXLs5iAlFZcKK2M+irNnL5RoT/IfSbZfLx
- IAVGUyB3pBQmL+7MzBZvopwtjUn8wdKUGLlbXVUwuPDwhw6zHSQIGpoaghJ638Qnk+a2
- ZsqhETp/PT1tWmGGSdginch0s+gju0r1vm6dI45qhILSIQ2p5fMdQ2AMk7Ayebv4NBrs
- 00Pw==
-X-Gm-Message-State: AOAM5324LJc2fFCmmEQe6p289t95jY+p7twZiThBZfvpmnKu6l7mJBcW
- I0C/77HppkYpy5gA6L3ScPnn0YJVaD4Je1WCypKkt0RPTdI=
-X-Google-Smtp-Source: ABdhPJxRH9yIc7wLGKBS0eKAw/s5TBfob0Ir2EQ6m2xg2NnzHdNCucOv5hK/FS71wZIfo2dj2xpEb0iseRHMLGUc2X8=
-X-Received: by 2002:a17:906:198d:: with SMTP id
- g13mr15379970ejd.281.1592830516838; 
- Mon, 22 Jun 2020 05:55:16 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=qtVrBo9zCm9WHKS+1UqbrkmxlJgEwTlf3D0xpFuHfTg=;
+ b=rvW9rfSxqhV20nADkJeD+rOo6uu38t65jIv1lhoE9l8SKcoDVBXAeiOhOJhkKvQxvR
+ vGeXpU7AP2PIzitOnmOqGaANG0id6jaR7xlCmtoXXCx1B8caNEQgWYEosmHoq9L3fZFO
+ 2uGfeJA1aHReCmn9jXTEmZiXkFOgvctyA1QHw6kLWU/6jUAFxSOgjhjkmjFXa9y4Lyjo
+ IslIwSzcRPU8pBfVZH1JDyJs+qc8r3UM+Dely9hF/Y4R5gszw4Myw6p3JLsMzkN1HH/y
+ XlDJ4AEXZIDyoiGZQTsiHOMtPMg3SAUcKoZ2brVh1BAjPOJgHJc7Y0b+vuQ+NriYroW2
+ cp7Q==
+X-Gm-Message-State: AOAM533tL5uM/jxH5zgImU4eciDSX2/a+n+nYDis138sHcZyOSokEkPu
+ nC+MlWrdg0odQb+tR//Q/zeeJLc5GB1mePugEQ==
+X-Google-Smtp-Source: ABdhPJzjNTTW/txt6qijBg4LwFKBAt9v9qwg7uLYVef1/LerVEws6433kX3BRsqFhAW0UUcvdTdoSBwtTW6/yq6lDy0=
+X-Received: by 2002:a17:906:6a1b:: with SMTP id
+ o27mr17307614ejr.271.1592847990718; 
+ Mon, 22 Jun 2020 10:46:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAH72RCU=2HPWJHjgtMFx7wM061n-Jjo7aYRinxLPDtq8fo-OrA@mail.gmail.com>
- <20200622100601.GK3036357@onega.vda.li>
- <CAH72RCVF2NCzTgZim1V7D8MfmZed00+ujKydLw4eyxrLEsrC4w@mail.gmail.com>
- <20200622123813.GL3036357@onega.vda.li>
-In-Reply-To: <20200622123813.GL3036357@onega.vda.li>
-Date: Mon, 22 Jun 2020 15:49:59 +0300
-Message-ID: <CAH72RCVv3ZSCxDOtJLeR+kBmNVYRR5NaC2nyN3r8jJQWq+kL9A@mail.gmail.com>
-Subject: Re: GSoC: Week 3 Progress Update
-To: Alexander Bokovoy <ab@samba.org>
+References: <20200620025033.4180077-1-zhangxiaoxu5@huawei.com>
+In-Reply-To: <20200620025033.4180077-1-zhangxiaoxu5@huawei.com>
+Date: Mon, 22 Jun 2020 10:46:19 -0700
+Message-ID: <CAKywueQD0aM3uJYmC0GbAj_F5RwcKNX1PS1_q+3dn6gyUR_+Xw@mail.gmail.com>
+Subject: Re: [PATCH] cifs/smb3: Fix data inconsistent when zero file range
+To: Zhang Xiaoxu <zhangxiaoxu5@huawei.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,62 +70,61 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
-Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
-Cc: samba-technical@lists.samba.org, "abartlet@samba.org" <abartlet@samba.org>
+From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Shilovsky <piastryyy@gmail.com>
+Cc: Steve French <sfrench@samba.org>, linux-cifs <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Sorry, I hadn't seen it. Thanks
-
-On Mon, Jun 22, 2020 at 3:38 PM Alexander Bokovoy <ab@samba.org> wrote:
-
-> On ma, 22 kes=C3=A4 2020, hezekiah maina wrote:
-> > Thank you, Alexander.
-> >
-> > In the first image, Sites Management and Time aren't present, was there
-> an
-> > issue with them?
+=D0=BF=D1=82, 19 =D0=B8=D1=8E=D0=BD. 2020 =D0=B3. =D0=B2 22:04, Zhang Xiaox=
+u <zhangxiaoxu5@huawei.com>:
 >
-> I can see them fine in the screenshot -- maybe you need to scroll to the
-> right side? I took almost full screen 1080p screenshots so they aren't
-> fitting into the screen on that improvised page.
+> CIFS implements the fallocate(FALLOC_FL_ZERO_RANGE) with send SMB
+> ioctl(FSCTL_SET_ZERO_DATA) to server. It just set the range of the
+> remote file to zero, but local page cache not update, then the data
+> inconsistent with server, which leads the xfstest generic/008 failed.
 >
-> >
-> > On Mon, Jun 22, 2020 at 1:06 PM Alexander Bokovoy <ab@samba.org> wrote:
-> >
-> > > On su, 21 kes=C3=A4 2020, hezekiah maina wrote:
-> > > > During the week I worked on the following:
-> > > >
-> > > >    -  User Management
-> > > >    - Organization Units Management
-> > > >    - Added the patches Alexander recommended
-> > > >    - Changed the UI of components written in Week 1 & 2
-> > > >
-> > > > Next week I will be on working on the following:
-> > > >
-> > > >    - DNS Management
-> > > >    - Forest Management
-> > > >    - Group Management
-> > > >
-> > > > Last Week's changes are in the develop branch of this repo:
-> > > > https://gitlab.com/HezekiahM/samba-ad-dc
-> > >
-> > > Thank you, Hezekiah!
-> > >
-> > > I made a short gallery of screenshots here:
-> > > https://www.samba.org/~ab/samba-ad-dc-cockpit/
-> > >
-> > > The code now builds and works mostly fine on Fedora 32 without any
-> > > additional changes. I had to disable SELinux on the system but this c=
-an
-> > > be looked at later.
-> > >
-> > > --
-> > > / Alexander Bokovoy
-> > >
+> So we need to remove the local page caches before send SMB
+> ioctl(FSCTL_SET_ZERO_DATA) to server. After next read, it will
+> re-cache it.
 >
+> Reported-by: Hulk Robot <hulkci@huawei.com>
+> Signed-off-by: Zhang Xiaoxu <zhangxiaoxu5@huawei.com>
+> ---
+>  fs/cifs/smb2ops.c | 5 +++++
+>  1 file changed, 5 insertions(+)
 >
+> diff --git a/fs/cifs/smb2ops.c b/fs/cifs/smb2ops.c
+> index 736d86b8a910..250b51aca514 100644
+> --- a/fs/cifs/smb2ops.c
+> +++ b/fs/cifs/smb2ops.c
+> @@ -3187,6 +3187,11 @@ static long smb3_zero_range(struct file *file, str=
+uct cifs_tcon *tcon,
+>         trace_smb3_zero_enter(xid, cfile->fid.persistent_fid, tcon->tid,
+>                               ses->Suid, offset, len);
+>
+> +       /*
+> +        * We zero the range through ioctl, so we need remove the page ca=
+ches
+> +        * first, otherwise the data may be inconsistent with the server.
+> +        */
+> +       truncate_pagecache_range(inode, offset, offset + len - 1);
+>
+>         /* if file not oplocked can't be sure whether asking to extend si=
+ze */
+>         if (!CIFS_CACHE_READ(cifsi))
 > --
-> / Alexander Bokovoy
+> 2.25.4
 >
+
+Looks good!
+
+Reviewed-by: Pavel Shilovsky <pshilov@microsoft.com>
+
+Don't we need to do the same for smb3_punch_hole()?
+
+--
+Best regards,
+Pavel Shilovsky
+
