@@ -2,48 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EAB12036F2
-	for <lists+samba-technical@lfdr.de>; Mon, 22 Jun 2020 14:39:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CE0720374F
+	for <lists+samba-technical@lfdr.de>; Mon, 22 Jun 2020 14:54:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=Cr1UDdna8c32TVmWeZDufuqfxHupMCOiJnShOyvUy78=; b=YMcWAP0+ki4hRW8/niCw8JMsBY
-	lmbEXglZtELGsfCI8Ee4ok1L3GD3jEz3+ZYtxT7Eb/5XnqPbf7lUWE8inWWrRoVGVwDqTIPRWfF9t
-	+/3ZD4GVkyxap/ExDZSf2Gh081TMW+n5nhH+2aIJGS0892J30JjSZMny63YZDIDcQxHmQ7Rk7fNV9
-	52M9dkn49VD5lmlLT5eFyCgnmcHqC+HfANH5bJuRQF8Om1WyaT1tPpbiLgns5nDv7BIVhLow9lx4C
-	Xn7OvX1CGvA0NuEATOuvmtYPuPmVqsRNPA8C7hTKfV1fJM9DrwBvuDkNNU3zXYvT3caCYjQaenHF0
-	yuTifFHA==;
-Received: from localhost ([::1]:38292 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=uBd0uzsh66a+BcFKMiO9kvntXCtTJFZo5xcKGyCSpes=; b=dzox6aOCXw41UcLpjRitKPXvZJ
+	1zY388h5fcayGdGtiuS1OL8/A5SUsnnczFSUH888pFRZRwqA10Kg6ve3z8olhNj059uIto66GihDb
+	UaOD4v7NiCOGAVJI2/8ugoxIdXCRWUFPPY2u+Lj0C6451mTDHKPFZcXr4dQZxix763QXO3Ln3keqp
+	kzXIFXpWy58UC1whqA8ao9nhZx5pOooEEs5EgnHDiTE7EfmiVsvgfkqR+SoNXNp17bEitfy9IEBg4
+	1O9jMbjrw2t0mQc+m5flQhAQx+c8hBlLH9NWaiJXG0wATZq7SCG1luUuzMUjxxrPpAhII4WjWJmhN
+	qvxWOtFw==;
+Received: from localhost ([::1]:41410 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jnLiR-001nFM-5a; Mon, 22 Jun 2020 12:38:23 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58670) 
+	id 1jnLxl-001nf6-VN; Mon, 22 Jun 2020 12:54:14 +0000
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530]:46604) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jnLiK-001nFF-7Y
- for samba-technical@lists.samba.org; Mon, 22 Jun 2020 12:38:18 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=Cr1UDdna8c32TVmWeZDufuqfxHupMCOiJnShOyvUy78=; b=z7b6AZv4czAXgr3/ngdtLvK2Z3
- a2BlPZOP4N/wQlACv6PDm/+HBhjNF44J2yvzwfahEN7OdsLr0uBf1iDCvoqQLfbseEeoSU2lCifdp
- pbjyhwouvx4bN04s7hGPGqFf3ed0gs4PQZS6uoE2z5GzYQl11ct/+UgPi9zdoRYCJfN75QR0mgCHu
- 2vSrls9fZFkNwLB+f0ToJ44oxuWEYNtwLJPWbTshFeuarix7jeM+uPvj924LdURBZSywUzqAgzflX
- A6x5WG1l/fd7XXy9a3XnrbZ+k9+VEJMV4jOWULfsDVu767tYBSkESfJV45TH2Q6E9xY9RgHKIi92j
- bJJ8u4+hqe766KwDzw63iFE2zLoAN6MGq87Zg0LTPs1C+zUZ0xm2k9iLE3zSBtryjwcvfNW9fs+w/
- oRckVzdJB8XIgudonvryfnNNCEWtn/WSf1NDLedFXSaBNA1HO7f26vekxZgqTm27HZ1zrgaIE9AfC
- zoHB36CwGaFg1GiKc+EenKoA;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jnLiJ-0000QU-5Y; Mon, 22 Jun 2020 12:38:15 +0000
-Date: Mon, 22 Jun 2020 15:38:13 +0300
-To: hezekiah maina <hezekiahmaina3@gmail.com>
-Subject: Re: GSoC: Week 3 Progress Update
-Message-ID: <20200622123813.GL3036357@onega.vda.li>
-References: <CAH72RCU=2HPWJHjgtMFx7wM061n-Jjo7aYRinxLPDtq8fo-OrA@mail.gmail.com>
- <20200622100601.GK3036357@onega.vda.li>
- <CAH72RCVF2NCzTgZim1V7D8MfmZed00+ujKydLw4eyxrLEsrC4w@mail.gmail.com>
+ (Exim) id 1jnLxf-001ney-46
+ for samba-technical@lists.samba.org; Mon, 22 Jun 2020 12:54:10 +0000
+Received: by mail-ed1-x530.google.com with SMTP id m21so13508080eds.13
+ for <samba-technical@lists.samba.org>; Mon, 22 Jun 2020 05:54:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ISjUUZoN+VQO4IXBKzAVFC6DfqIiLDkPTCvZlF2e4o4=;
+ b=NZG6sn9V6AOnx0gk7BEUghThK2uDigmIq7Sh8rlXueT6DSqvp1ewTDTXklWFC4IhVE
+ ksvd6mt9nwmXKKWSLx9apNVNFxU1uEXieX5kAeroBdMCI0EkzsQ0VIKfl3LCHyRYvOwf
+ 5NM1ksCEckM+i5isfZihL8Eq5nxnmcGHy1OgTRLMBa/6ZIKEnHr3i+hCLyZSG48iu0ly
+ eBagyeaSjDBGYTEHoy11Ph1Hm1ZFKA3n/sTVuRvswQ3S+ELN0XwDhGp9+Gsrk4DM1pqH
+ HRUPdCq2lKhWaDB/JClTui+woJwdyw3ThBdO5NasSX0jKGofP6JQTnljWD7N3AVdWyIZ
+ rGoQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ISjUUZoN+VQO4IXBKzAVFC6DfqIiLDkPTCvZlF2e4o4=;
+ b=BllUUe4xsJgG4w9SvJvHb76AbtA1OLPdHpVG4PAKikUWpVmPqdKDeFaB6jJdZaaki2
+ 76CzytDMpApTjozXllJvSHcnIShb0lT9rI4rLuBd0ibSETnlLHM89MvhHI6ocCi4chp9
+ DKjIbcsPxQ0i1tXVVRZqQLg/YIh1aUYbvsasQeH7+2nSSuCmF1PlhsgMEPw9Ey/jmdT5
+ KWdfPSSm2kjiFT2OgXz04j10g3/n39pp/ZxUvg1KNA4rrCaz6SnxG7imraDTJJd1xUbW
+ gdX+m1BEAakYdxEW/lFLF27sgdtvC7P6SQJtY3MRQ5E+GLUryxUEly2UhgiJ6+oehpjm
+ KTgA==
+X-Gm-Message-State: AOAM5312QsnuZatrmrRmxa4/7q6tvdxB1L5s6hr/JT4sxuanRfncSwR4
+ PMM4KitncF8Q2oIS+3oT8fqYDZF36BhUwuQIH8r7FMPfJKI=
+X-Google-Smtp-Source: ABdhPJxRyBmn/W9amUFM+tK1iC+/r/trCLsYENzGOPxiyW4OmGjngmoxB9L4RCtS3/BaIWYCUs9X5FuotEIgyJmugls=
+X-Received: by 2002:aa7:dd8e:: with SMTP id g14mr6484811edv.208.1592830446191; 
+ Mon, 22 Jun 2020 05:54:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAH72RCVF2NCzTgZim1V7D8MfmZed00+ujKydLw4eyxrLEsrC4w@mail.gmail.com>
+References: <CAH72RCU=2HPWJHjgtMFx7wM061n-Jjo7aYRinxLPDtq8fo-OrA@mail.gmail.com>
+ <20200622100601.GK3036357@onega.vda.li> <20200622134921.1e7347ab@samba.org>
+In-Reply-To: <20200622134921.1e7347ab@samba.org>
+Date: Mon, 22 Jun 2020 15:48:48 +0300
+Message-ID: <CAH72RCWO8r=Sn3spEiESUcBiy+GT7DtKVFPEMLAPeBK_T5LXMw@mail.gmail.com>
+Subject: Re: GSoC: Week 3 Progress Update
+To: David Disseldorp <ddiss@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,39 +69,21 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexander Bokovoy <ab@samba.org>
-Cc: samba-technical@lists.samba.org, "abartlet@samba.org" <abartlet@samba.org>
+From: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
+Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
+Cc: Alexander Bokovoy <ab@samba.org>,
+ Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>,
+ "abartlet@samba.org" <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On ma, 22 kesä 2020, hezekiah maina wrote:
-> Thank you, Alexander.
-> 
-> In the first image, Sites Management and Time aren't present, was there an
-> issue with them?
+Thank you, David.
 
-I can see them fine in the screenshot -- maybe you need to scroll to the
-right side? I took almost full screen 1080p screenshots so they aren't
-fitting into the screen on that improvised page.
+On Mon, Jun 22, 2020 at 2:49 PM David Disseldorp <ddiss@samba.org> wrote:
 
-> 
-> On Mon, Jun 22, 2020 at 1:06 PM Alexander Bokovoy <ab@samba.org> wrote:
-> 
-> > On su, 21 kesä 2020, hezekiah maina wrote:
-> > > During the week I worked on the following:
-> > >
-> > >    -  User Management
-> > >    - Organization Units Management
-> > >    - Added the patches Alexander recommended
-> > >    - Changed the UI of components written in Week 1 & 2
-> > >
-> > > Next week I will be on working on the following:
-> > >
-> > >    - DNS Management
-> > >    - Forest Management
-> > >    - Group Management
-> > >
+> On Mon, 22 Jun 2020 13:06:01 +0300, Alexander Bokovoy via samba-technical
+> wrote:
+>
 > > > Last Week's changes are in the develop branch of this repo:
 > > > https://gitlab.com/HezekiahM/samba-ad-dc
 > >
@@ -97,16 +91,8 @@ fitting into the screen on that improvised page.
 > >
 > > I made a short gallery of screenshots here:
 > > https://www.samba.org/~ab/samba-ad-dc-cockpit/
-> >
-> > The code now builds and works mostly fine on Fedora 32 without any
-> > additional changes. I had to disable SELinux on the system but this can
-> > be looked at later.
-> >
-> > --
-> > / Alexander Bokovoy
-> >
-
-
--- 
-/ Alexander Bokovoy
-
+>
+> This looks like really nice progress - well done Hezekiah and mentors :)
+>
+> Cheers, David
+>
