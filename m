@@ -2,40 +2,40 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FCA32043D2
-	for <lists+samba-technical@lfdr.de>; Tue, 23 Jun 2020 00:43:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E82162046CE
+	for <lists+samba-technical@lfdr.de>; Tue, 23 Jun 2020 03:38:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=wC748OuFuVo3SLRDKliVth/eAqE32z9bGZcTEWPsBHM=; b=OU9b9Nu7hZOj1gJEvRkw4E28Pe
-	7Tn6+P8g3z+eammzpPrYhh1RBoMXpspwrpQ2StNp3KYBBibVGFbjfUQZicekm+Rs+PmOVqge0wEBL
-	dfolgMtxLMWardnKnJmNAHOgay9M0qpMPNuNQEnbbZK3PolmlR5ZiH9oOuNKf+kwfZxlsWvui0+Hz
-	uWkqnVre9ybr+ZSj9vv0jjdRsZXfNa2FoOdf9HLsT+haN2n7ga36/aYnLwwLHVY267Q2xkS4sShsq
-	aUDXic51cK2BYr0T7fsKfxsvSGATGILiAmPihTQlP7v5peyjC0dDEb18t9JFLwwEDvGQ/ns6Qj6z4
-	7aIcX4rg==;
-Received: from localhost ([::1]:33624 helo=hr1.samba.org) 
+	bh=ZhV2W9a+GVxn1Y9fF2A5tjblQyl0+d1BdsHYINL/ntI=; b=zMNR+r91oMmh6PRq3Fh+Ql7t+z
+	kuHPJMRFy1PPu+Ct8E5x1l8zP50+1a65mBzg+vbzxhpbCIUG02praqVWLKNd+eZZcapzcp/ztsN+l
+	4aVwCICHw4wj1e4fQLxUGtqU+htJA/4BKT3OaWQzVG+11a0zWDnV4TIbjCD8HIveentiu5vs6dm91
+	tQveC8NhofgM5R6jtixp30yEIbOOjkYzHmo2oP59Hh+rJui0XdJnQ3wNwPsLeoUtCkg0uo/IQgvsZ
+	YWbB6em7SZpTWs9/1Q5V9WR61A1MSze3fwQ8a41bvwMAUu6ExZqrjaWkhRxvDbUBMLLbmRFV1Srxx
+	W7uWbm0g==;
+Received: from localhost ([::1]:34566 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jnV9O-001uQv-Sd; Mon, 22 Jun 2020 22:42:50 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53824) 
+	id 1jnXsq-001v83-GP; Tue, 23 Jun 2020 01:37:56 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59074) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jnV9I-001uQn-Fn
- for samba-technical@lists.samba.org; Mon, 22 Jun 2020 22:42:46 +0000
+ (Exim) id 1jnXsi-001v7w-S2
+ for samba-technical@lists.samba.org; Tue, 23 Jun 2020 01:37:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:Cc:To:From:Message-ID;
- bh=wC748OuFuVo3SLRDKliVth/eAqE32z9bGZcTEWPsBHM=; b=w7CM/RHTFO2NtzrYIpMAsgNegX
- c4iYyWLxCMcn1cWGzWIDoCIYk+4RMeQVMJRN7a9eFrLkY6uiWA49DqKDjmjuOPeZKYQJfeLNuuD0p
- KDIzKWcWd832ZQDMvKRmDUZxng8/QK9o33qEHss9C7pCrpMid+Aervug6yuCX1I6uYPO8FWSz61iw
- MAW3DcW0lsXCLG618HS21jEWc2iYYMpmHWqDBvhhmIpwEutCg5iEMFjjmCttvubQKr/Dkgst3etUA
- ysBGhDkb4Cs9Kie+FB3/esMVSyU7ZkKVB/yndoZ8mp9PhByUm/i/MEKrGxnTZz0hW4RCQLCVMERmV
- oeyEzms41sfdrxex6cUiNoXi3TEhYzoRvaKXkXLE6FWX9VQoJWM5bE61f13UyWtL319uJ9BcOLre/
- PM8M/ZmaNvrQ7YpsrYk31AsiIvRK4z+NHGDZN5kpnLYahobFUUGksyMCmzd5Z0HoXv5mkcxp4rurY
- h5sza9CAg3UXkA3aX+q4/8YZ;
+ bh=ZhV2W9a+GVxn1Y9fF2A5tjblQyl0+d1BdsHYINL/ntI=; b=A4Hbsr3GpQCH0LdE/Gv/6TaARi
+ xQsSVEXCJKvwTgo3rsHh8Y03Mn3UELlCYT0/PpOIPTfgASfPxNZPRvUnhDipIyLRz2jRpB14BGbHL
+ dd/Cs7C5b5fMpvPn8drtVSg5A6yHTITn5ReU2/8WHbDoJ7Je6erCVvz8Dj65sdR3JysvTYX8KB7zB
+ ZuW2XU14m2uXkVyCUy2s6uT9nLXJ2Aka/vvTVpN5DpmMd0kVJIeWzxtGNHeV6496AEBbHYiHpOxkt
+ HZyyflfdIUesYSXmzi13OKvnguJDL2/mexVE5omYpNlbk4TLvE0BpKkbgMHh2Pa7Bcky76z4aNqN/
+ KHOfPRnNiCfCYTyiCc2uwLaUjmvZ9sr0sCNuSPcu5EBeakhjdK8WFeqE5lCbVmyynr/o5VQebvmY8
+ AjrLStSEkpZ2iqb4/XU7aEMtxQnPFxUhcQxecS1BfazYR155tSRZHAGFtg2RDiw79I+4ReGPiaa7l
+ BiWXLQpgrzT3S7z7aooHLie3;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jnV9G-0004w8-2o; Mon, 22 Jun 2020 22:42:42 +0000
-Message-ID: <c91687fad82115c447845c3cc406a5143adf4bbe.camel@samba.org>
+ (Exim) id 1jnXsh-0005oz-DE; Tue, 23 Jun 2020 01:37:48 +0000
+Message-ID: <e444558549bb3dede91b551e1c13c3bbdae74847.camel@samba.org>
 Subject: Re: gitlab: testing of ldap-ssl-ads option
 To: Isaac Boukris <iboukris@gmail.com>
-Date: Tue, 23 Jun 2020 10:42:36 +1200
+Date: Tue, 23 Jun 2020 13:37:43 +1200
 In-Reply-To: <CAC-fF8RQztBgiFTCS6AxVWLsjV3UWyWNUK2Cz7qKpE6hWCy7uQ@mail.gmail.com>
 References: <CAC-fF8TH5sf6ekjfG5QqnEwG41fopV1bWOMxBH_UnodfjDo_qA@mail.gmail.com>
  <20200619181956.GF10191@jeremy-acer>
@@ -80,19 +80,20 @@ On Mon, 2020-06-22 at 23:02 +0200, Isaac Boukris wrote:
 > 
 > Yeah, I'm still unclear how it relates to and differs from "ldap
 > ssl".
-> 
-> Another idea I've discussed with Andreas, we could implicitly set
-> "client ldap sasl wrapping" to "plain" when we *know* we are over
-> TLS,
-> to avoid having the admin set to "plain" globally, but this can wait
-> I
-> guess.
 
-Yes, we should do that, anything else just makes pain for the
-administrator.
+"ldap ssl" is about if we should use TLS to protect the LDAP connection
+between Samba's pdb_ldap passdb module and the (typically) OpenLDAP
+server.  
+
+Sometimes this is over ldapi:// and doesn't matter, but often this will
+be a remote (eg organisational central) LDAP server.  Even with local
+servers this matters when chasing a referral from the local slave to
+the master server to write a password change.
+
+As the AD domain member case is quite different, even if using similar
+code, a new option was added.
 
 Andrew Bartlett
-
 -- 
 Andrew Bartlett                       https://samba.org/~abartlet/
 Authentication Developer, Samba Team  https://samba.org
