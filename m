@@ -2,54 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53B282098E5
-	for <lists+samba-technical@lfdr.de>; Thu, 25 Jun 2020 06:10:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AD202099B0
+	for <lists+samba-technical@lfdr.de>; Thu, 25 Jun 2020 08:06:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=5hex4nzUB6bDXnlaQY0L6zVmNtSU2D3pgMbQVc26aZk=; b=UfXYcC3hUnC/BrVLvHw+M5cjVJ
-	GfXUfHIZf3X7lFuQOvC8dcBt/d//RyFnPdB2vL+ns6TSTCrj9MZlRcZmQANHLV+7qVdm0L/+/5ngw
-	X+swFFpOKFs0ELrjFYLU693pg3G2vqRvszbMOQDo+LeDSbGjqbFcytYMvthyyGYDIVpYZbcQn8/S0
-	xF06YPvZSz4WVl4Pkd9hv7O0knSrK76770S2DxDLk+W48fFX0NGM7uA+aXozCmGdb9VAD9M0gtbeZ
-	O2a97YIjurri+1Jv6LYv8Wi9NzVaRZ8SNwp5Mdq2/kSZw4plDAUD8XaU85gbR70I3mLDDOM+ldXD/
-	c6XyQ8Xw==;
-Received: from localhost ([::1]:61820 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=ZdZwXxlwctaXjk5/jSN+CCLS2GiXQmtDgRSTyGu0Pac=; b=xF2UBkYDJHDYgqOrWTxcroWLKt
+	f+N2+arKk2ayi2VQybXARXbj4bItROfDqeCz0KLXkI55nRWhK/6pQhCNUoFns3flEyUJ1JzS9GcDs
+	hEAalKHIKT/G4sq4EXpRREew2/N99pkzxB1AlOhDcNA82VZ6z/ROet18uhW/355JTZXKoPhmhY5pB
+	r+Dpb5HsNbyRq6AXlGQnNH8lpnfoIxmmwT6r3Fxq2U7WG9ZdfuQBEeTzNHBEn0D+wenpbGPWzlzGS
+	3saP4VykzJIsl9sohmiR9USE+dqxLUsVcFkUVdojdFu0SVjGLYq6aOvGklYiLCY8P3SuIq+fDHHR4
+	XbURKpDw==;
+Received: from localhost ([::1]:62664 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1joJCd-002Eud-PP; Thu, 25 Jun 2020 04:09:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62354) 
+	id 1joL0g-002FFO-TN; Thu, 25 Jun 2020 06:05:18 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:32162) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1joJCX-002EuW-4B
- for samba-technical@lists.samba.org; Thu, 25 Jun 2020 04:09:27 +0000
+ (Exim) id 1joL0a-002FF9-Ag
+ for samba-technical@lists.samba.org; Thu, 25 Jun 2020 06:05:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=5hex4nzUB6bDXnlaQY0L6zVmNtSU2D3pgMbQVc26aZk=; b=fTE7SCQ2YkKZGZHRKwWG667fHx
- w6p8yqv/XifoSMoZfFWLFuWWOp8nPqJKmIEtOiaZhcwD5pc2XMzzOaut6CpYhYNcrBqZKCqA1gkL4
- VEjY/TrgS1FJqd1t79zNyljzbRxupXSLORuKNb909EgEh9N7tRyjpVOjImKkrmPMTwh9w/NgTo0De
- NJXrP/mBoPx3QhUuic9tUDYIMe8XGTbIDKjsfKNWdwT02mVJb0EfuRqPzO5ATTdiikLraf2sXUUvT
- 9AcYIs2GqfvzIVInXokUWctHXwZTMX1jB2vgdn+ItYndb+VqcnL45lyJYuv/nayQuxUjaR+1I4X8w
- CGmjC5Y1UOekaQvuu1VjI0zTw7Kz4cHtrzoiC6vT0hv72DrdcT8GBVHm5ZAG3/qP6h5jw8lXuB9zA
- TqYGJi+FQ4il49R536s6PIWSvYGjCk2nSDdiNMCy5w8PMVAsqCpycOC2ifDhLzQDDm3fosfGa2MTx
- CPzki1h/zxOrKl7UkZ9ziUAb;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=ZdZwXxlwctaXjk5/jSN+CCLS2GiXQmtDgRSTyGu0Pac=; b=Zq3mCJYhPjwshEa2W/3dGJHsXy
+ uFu2n1sIAlHcAZD5pJgdmvSMbnGbyX8XNT+Dc1ZHU4oJsmJPErxlSNAAi9uwglRVhrr5bREN6L6L5
+ iKCDLS/aU2sYgjMScXHodoCKZkfJW8R4v+Qh76UiuocsZYt4V+sdY050pMwiwLG9aUVhiS8HFJMBs
+ rr2ugSYbBQbzQCicoNc5welJhdg32k8gNUQf3ElMCzB2fnEiGhHLSFZcIagZ1TzAkNd5kLFVP3OSP
+ wDX6al6MJk11ltMEW/MgGY4bJT6Iu3zIyvuSKicRAnhCv/9y335j4gokVq+FoLS+kTmvMIItsKrI8
+ FU3H9wlKavqXWMhuvqIvJu2t8pFIVjlYNbBJRxPYi4rclSegImOmdtQ33m4MzQuTb0aMeRvNNKlOr
+ kGNAC/fgmjV+CPsAVMLyOI2JEAjo4n1F2e7s1ofTpBmJTRnkJx0206VwnJgNEvLGcSh/e3GnBx661
+ 3N6xe4//GugWUAJqwsHg+Wer;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1joJCU-0005Sy-TR; Thu, 25 Jun 2020 04:09:23 +0000
-Message-ID: <bf7a22a52831fae6829e8b408ce21e05fdc9f722.camel@samba.org>
-Subject: Re: Avoiding further (LDAP) stack proliferation in Samba
-To: Stefan Metzmacher <metze@samba.org>, Christof Schmitt <cs@samba.org>, 
- Jeremy Allison <jra@samba.org>
-Date: Thu, 25 Jun 2020 16:09:17 +1200
-In-Reply-To: <9d28a25c-0e2a-3e69-d305-4c886aef84a1@samba.org>
-References: <7f08ecb52a4a94d95e39af436e94ab852cf0da55.camel@samba.org>
- <20200521012158.GB10353@jeremy-acer>
- <4ce022a6c65422e40e1a583f95cefbbc7585393c.camel@samba.org>
- <20200521021959.GB12847@jeremy-acer> <20200521214312.GA12586@samba.org>
- <854ac3b5d75279a13ebf3c5a6e9f4fd5b9eb8943.camel@samba.org>
- <437a7ad7-5158-9124-9ba3-939a3bfcee53@samba.org>
- <b20bcf09b119aa0d0585d27b24076bdd17157caa.camel@samba.org>
- <9d28a25c-0e2a-3e69-d305-4c886aef84a1@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1joL0V-0006Fr-I1; Thu, 25 Jun 2020 06:05:07 +0000
+To: Stefan Metzmacher <metze@samba.org>, Anoop C S <anoopcs@redhat.com>,
+ samba-technical@lists.samba.org
+Subject: Re: network namespace support in selftest (was: Re: socket-wrapper
+ fd-passing)
+Date: Thu, 25 Jun 2020 08:05:07 +0200
+Message-ID: <6063074.KqS85teMZm@magrathea>
+In-Reply-To: <47a88e529f7a94c1b8a2c6c510bf4a21884f9f48.camel@samba.org>
+References: <35bfe7ee-5c75-c785-8648-4c8191a9974a@samba.org>
+ <47a88e529f7a94c1b8a2c6c510bf4a21884f9f48.camel@samba.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,54 +57,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: swen@linux.ibm.com,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Samba Technical <samba-technical@lists.samba.org>,
+ Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2020-06-24 at 12:22 +0200, Stefan Metzmacher wrote:
+On Wednesday, 24 June 2020 23:26:55 CEST Andrew Bartlett via samba-technical 
+wrote:
+> On Wed, 2020-06-24 at 23:14 +0200, Stefan Metzmacher via samba-
 > 
-> Can you agree on that plan?
+> technical wrote:
+> > Hi Anoop,
+> > 
+> > I rebased your fd-passing patches on top of socket_wrapper master.
+> > 
+> > See https://gitlab.com/metze/socket_wrapper/-/commits/fd-passing/
+> > 
+> > Please also notice my commit on top where I added some more hints
 > 
-> If so we can start working on this without running into a deadlock
-> again.
+> > on a better design:
+> I've not looked into this in any detail at all, and I'm sure you are
+> aware that with the network namespace mode for selftest we can avoid
+> socket_wrapper and so base ourselves directly on kernel sockets.
+> 
+> This of course requires privileges so has other implications, but I
+> wanted to mention this more broadly in case this helps us get out of a
+> tight spot here.
+> 
+> This is the work Tim Beale did a year or so ago.
 
-Sounds like a plan.
-
-I also agree that touching smbldap itself is quite risky, I had hoped a
-way out of smbldap would be via deprecation and removal of the callers,
-but it seems we will have these for a while yet.
-
-Splitting ldap_message.c into client and server would be useful for
-many good reasons (we decode client messages on the server right now,
-before rejecting them). 
-
-I just hope that we can agree to allow (dare I say encourage) AD client
-code to use the LDB and LDB-adjacent utility functions for the above-
-LDAP parsing (DN, Extended DN, GUID, SID, etc).  This stuff looks so
-simple until you read ads_parent_dn() and cry...
-
-Finally, I wanted to say a big thank you to you and everyone else for
-taking the time to understand my concerns, I think we are in much more
-agreement now.
-
-Thanks,
-
-Andrew Bartlett
+And namespaces work inside of containers (namespaces)? Just asking because 
+gitlab-ci is a container ...
 
 -- 
-Andrew Bartlett
-https://samba.org/~abartlet/
-Authentication Developer, Samba Team         https://samba.org
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-https://catalyst.net.nz/services/samba
-
-
-
-
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
 
 
