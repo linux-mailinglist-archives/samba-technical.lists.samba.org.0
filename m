@@ -2,56 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D257220975C
-	for <lists+samba-technical@lfdr.de>; Thu, 25 Jun 2020 02:09:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 53B282098E5
+	for <lists+samba-technical@lfdr.de>; Thu, 25 Jun 2020 06:10:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=K5CPuO7Y4bbfnusCVtMTkoMSkfTs+ukFd5Dc0fdfS1c=; b=4W66TcmsFihkihNCXvVtysPkpg
-	s1MIvU3uUdBHtLNfoZF6V7dxDie3DHffaSRQQBburfhf+syZkAvEoW2c4OaQuq2hWNiA3olq7bbA1
-	FIi2QV/NcgwmW6jMa0XpbZDGO2zrWytR6XIdxYcUXr1xDg6d56kP4mP6w9Qdx0pujhUtaHHQjWe/F
-	i3RXFf/XthKqfYAvosov4XD7AqBFtR/N9PWWRmSe6KbludQPFgEn9Pcr2lKSVVdhjDqtEUxnMHbfK
-	r7j3xjJFtfRggkO2JexiHR5LW2O9cQUTveVEHFFdUJxT3PGIGUrL4y+lodIuoXUnIPk6UWDS+LZLg
-	hkjuyzkA==;
-Received: from localhost ([::1]:53300 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=5hex4nzUB6bDXnlaQY0L6zVmNtSU2D3pgMbQVc26aZk=; b=UfXYcC3hUnC/BrVLvHw+M5cjVJ
+	GfXUfHIZf3X7lFuQOvC8dcBt/d//RyFnPdB2vL+ns6TSTCrj9MZlRcZmQANHLV+7qVdm0L/+/5ngw
+	X+swFFpOKFs0ELrjFYLU693pg3G2vqRvszbMOQDo+LeDSbGjqbFcytYMvthyyGYDIVpYZbcQn8/S0
+	xF06YPvZSz4WVl4Pkd9hv7O0knSrK76770S2DxDLk+W48fFX0NGM7uA+aXozCmGdb9VAD9M0gtbeZ
+	O2a97YIjurri+1Jv6LYv8Wi9NzVaRZ8SNwp5Mdq2/kSZw4plDAUD8XaU85gbR70I3mLDDOM+ldXD/
+	c6XyQ8Xw==;
+Received: from localhost ([::1]:61820 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1joFRj-002DJE-Cb; Thu, 25 Jun 2020 00:08:51 +0000
-Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:46565) 
+	id 1joJCd-002Eud-PP; Thu, 25 Jun 2020 04:09:31 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62354) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1joFRd-002DJ6-2v
- for samba-technical@lists.samba.org; Thu, 25 Jun 2020 00:08:47 +0000
-Received: by mail-io1-xd32.google.com with SMTP id a12so4161719ion.13
- for <samba-technical@lists.samba.org>; Wed, 24 Jun 2020 17:08:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=fnIJ37PdO9eRm5kwOiEmBqAR2VZEFqMizW2lPw7xd58=;
- b=GcdPVkSJ04PCXE+gFr/gTraO1Kha4ByScBNJqY2uA8KeOpcd4va8ZcuBY44lRxPieX
- VvUwAYHC+LZd1Tyy66Knx4Z0PsCwOOe56b5rMyWpPDRsonRoAIk2wpWqzBj6OZpGJ59P
- CUfvoh8FhYmeWQh+2ZDteEroMPcNV0s/sg+Z7bGgTaru9d3VfIBbtyhDdJ/pqnKt5AQE
- DGMJEciLRiuvUZ6g9gf8xaLwfPcwMcF69QBqbgNbZW+X+BSrUeOwITQW9i+Zp1h3wjvZ
- Wa4rlC4YDMTK5ItrVttgLy2vCJDaCrrIOtuY5/udYjSq+U2RTEF1CEHg5EG7H2qdqxGS
- ehTA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=fnIJ37PdO9eRm5kwOiEmBqAR2VZEFqMizW2lPw7xd58=;
- b=aeoHsP3xtO6eYyvsAVGKopqmds3Z4Uqr7I+NBw7Vk7cmZn8CwzcFCS0geF42GII3V3
- Vl1eOmWdDtcNQ9lPfkm5vaVlswzDOqokJfAB12Yy270gT3kurY05NIB6eIuNtjCN6RIS
- apgeSZRqUQwFQQ47O2jILxrZO3N60ng9eL7WUWk3g5olpr+JeytILVsQBpSI658D0uow
- c8xFJ/jjJukxTXwgn4dkdWFsVXQVRL6Gll68kt6HzSW5/7F7GH7N4F6FgO+gOjklmf6J
- W2qx70AJ1N67fLhYnnH/6ooUgCvyOsgtaB4UZzYD4xjYsmHJu0WbYcNpv614EvDX5W9e
- /Cyw==
-X-Gm-Message-State: AOAM530N9PZixWvc+VCgJ83DII1UazZUvucijktO4CV+2nx1tj1auFtv
- pYcB2BxKmvyXUFAQjD4/XsVTtxcI+DkrNN56WrQEJ7k5
-X-Google-Smtp-Source: ABdhPJy7nIqOz2bmETSwCYWrQvtolxDqf6/HDCaTHcmXSbTyJCjV6gy+YYOXQJShcAfHAPNxUkkTShFB2Fm/NYLOz9U=
-X-Received: by 2002:a5e:d507:: with SMTP id e7mr34036770iom.132.1593043722695; 
- Wed, 24 Jun 2020 17:08:42 -0700 (PDT)
-MIME-Version: 1.0
-Date: Thu, 25 Jun 2020 01:08:31 +0100
-Message-ID: <CAGYhc9=M=u+5aWJHvDZ_H9ZqD0ZuE8+1vyo0iGSMKSjSvFPcfw@mail.gmail.com>
-Subject: ntlmv2 via ntlm_auth
-To: samba-technical@lists.samba.org
+ (Exim) id 1joJCX-002EuW-4B
+ for samba-technical@lists.samba.org; Thu, 25 Jun 2020 04:09:27 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=5hex4nzUB6bDXnlaQY0L6zVmNtSU2D3pgMbQVc26aZk=; b=fTE7SCQ2YkKZGZHRKwWG667fHx
+ w6p8yqv/XifoSMoZfFWLFuWWOp8nPqJKmIEtOiaZhcwD5pc2XMzzOaut6CpYhYNcrBqZKCqA1gkL4
+ VEjY/TrgS1FJqd1t79zNyljzbRxupXSLORuKNb909EgEh9N7tRyjpVOjImKkrmPMTwh9w/NgTo0De
+ NJXrP/mBoPx3QhUuic9tUDYIMe8XGTbIDKjsfKNWdwT02mVJb0EfuRqPzO5ATTdiikLraf2sXUUvT
+ 9AcYIs2GqfvzIVInXokUWctHXwZTMX1jB2vgdn+ItYndb+VqcnL45lyJYuv/nayQuxUjaR+1I4X8w
+ CGmjC5Y1UOekaQvuu1VjI0zTw7Kz4cHtrzoiC6vT0hv72DrdcT8GBVHm5ZAG3/qP6h5jw8lXuB9zA
+ TqYGJi+FQ4il49R536s6PIWSvYGjCk2nSDdiNMCy5w8PMVAsqCpycOC2ifDhLzQDDm3fosfGa2MTx
+ CPzki1h/zxOrKl7UkZ9ziUAb;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1joJCU-0005Sy-TR; Thu, 25 Jun 2020 04:09:23 +0000
+Message-ID: <bf7a22a52831fae6829e8b408ce21e05fdc9f722.camel@samba.org>
+Subject: Re: Avoiding further (LDAP) stack proliferation in Samba
+To: Stefan Metzmacher <metze@samba.org>, Christof Schmitt <cs@samba.org>, 
+ Jeremy Allison <jra@samba.org>
+Date: Thu, 25 Jun 2020 16:09:17 +1200
+In-Reply-To: <9d28a25c-0e2a-3e69-d305-4c886aef84a1@samba.org>
+References: <7f08ecb52a4a94d95e39af436e94ab852cf0da55.camel@samba.org>
+ <20200521012158.GB10353@jeremy-acer>
+ <4ce022a6c65422e40e1a583f95cefbbc7585393c.camel@samba.org>
+ <20200521021959.GB12847@jeremy-acer> <20200521214312.GA12586@samba.org>
+ <854ac3b5d75279a13ebf3c5a6e9f4fd5b9eb8943.camel@samba.org>
+ <437a7ad7-5158-9124-9ba3-939a3bfcee53@samba.org>
+ <b20bcf09b119aa0d0585d27b24076bdd17157caa.camel@samba.org>
+ <9d28a25c-0e2a-3e69-d305-4c886aef84a1@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,34 +63,54 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: moore chestnut via samba-technical <samba-technical@lists.samba.org>
-Reply-To: moore chestnut <moore.43132@gmail.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: swen@linux.ibm.com,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello,
+On Wed, 2020-06-24 at 12:22 +0200, Stefan Metzmacher wrote:
+> 
+> Can you agree on that plan?
+> 
+> If so we can start working on this without running into a deadlock
+> again.
 
-I have been testing with ntlm auth and winbind and would like to confirm if
-NTLMv2 responses which are extended in nature are expected to work via
-ntlm_auth or via the NetrLogonSamLogonEx method in general.
+Sounds like a plan.
 
-By extended I mean, including a long list of attributes such as domain
-name, computer name, dns details for DC and then probably some of the more
-interesting ones in relation to timestamp, flags, restrictions, channel
-bindings, target name - which are negotiated based on the flags during the
-NTLM handshake.
+I also agree that touching smbldap itself is quite risky, I had hoped a
+way out of smbldap would be via deprecation and removal of the callers,
+but it seems we will have these for a while yet.
 
-I have cases passing that are NTLMv2 responses but only the domain name
-attribute would be included along with the blob.
+Splitting ldap_message.c into client and server would be useful for
+many good reasons (we decode client messages on the server right now,
+before rejecting them). 
 
-I am simply using:
-/usr/local/samba/bin/ntlm_auth --username=user1 --challenge=HEXSTRING
---lm-response=HEXSTRING --nt-response=HEXSTRING
+I just hope that we can agree to allow (dare I say encourage) AD client
+code to use the LDB and LDB-adjacent utility functions for the above-
+LDAP parsing (DN, Extended DN, GUID, SID, etc).  This stuff looks so
+simple until you read ads_parent_dn() and cry...
 
-I'm not sure what the restrictions attribute is, but what about channel
-bindings for example. Is that enforced or ignored on the AD DC when the
-method used is NetrLogonSamLogonEx? Or is it likely to be something else?
+Finally, I wanted to say a big thank you to you and everyone else for
+taking the time to understand my concerns, I think we are in much more
+agreement now.
 
-Happy to share more details if required and would appreciate any advice.
+Thanks,
 
-Thank you.
+Andrew Bartlett
+
+-- 
+Andrew Bartlett
+https://samba.org/~abartlet/
+Authentication Developer, Samba Team         https://samba.org
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+https://catalyst.net.nz/services/samba
+
+
+
+
+
+
+
