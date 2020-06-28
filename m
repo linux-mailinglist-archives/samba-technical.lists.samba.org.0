@@ -2,46 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 375A920C90C
-	for <lists+samba-technical@lfdr.de>; Sun, 28 Jun 2020 18:53:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 685C720C961
+	for <lists+samba-technical@lfdr.de>; Sun, 28 Jun 2020 19:48:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=3st9TUIvKdT+/cCjYCDS4K4cC6u6A/EP3Bb+ofK9wKY=; b=5PXoUCqoD5MmWzGPkVRrqr3OVH
-	ZTIG9n1kij6wAdXjSabmVFVYsMk2VOAN49krUwHzikjqPmdZs4f0O1/7hcG7HW2v2joclf/1MCGWr
-	12seftQ6dgGGqnH30HTBtKBZ5X8JeB4Dw501GUgUnuWntsBWLznR7gGqdvkPccFuYm18TgsuRFL7s
-	PC83U7Sj7Ac6OjxnyRDhSWK/ptjOQfozTZosoeAljSYggXe4cHOPiGMUddvFjzUMq0pkCFf6R2k0m
-	SwVR1nCiZSQL6pyJ4KNuXqQhPPfqP4FkIFA8BwtB6X0xn+lZe/rnnjMYVa4xM7yv96c4ila+Apkt1
-	JPTrSDsw==;
-Received: from localhost ([::1]:39256 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=R1uMnQr4BrOzbuylmh9e63QhJQs1GFnnmkkHGB+v91M=; b=X79rwPcsF4+36scufgWpYNdyXm
+	yJhHW946nx3jX7tW9cetOMrBEKaFo/1x5jXbauxkXpWvNUvRLMoR5yjVeueky2zkkcGSaKpikS6h1
+	PK/F5jkXHQmYVi6uoKwIMoySpJhXyi88cr8RJj/FPH5mXsCfmRSJTBlTqYxKff2cai5RQpAHUojhy
+	UH/eWf3+X9/NM3RBqRTMiP+GHTWkdNB2U5N3q7CMm/1hmMLh+5r5P/R0QxG8zn8AhAn4BWq5wzWC6
+	1UqMzU0N/m9rJs/MgCYDcUlwtaDMvY+cxHQui0cp7NrI52fZ1dhohTCJiIYTvDkei2jJxxLz5q35a
+	WHi9ps9g==;
+Received: from localhost ([::1]:40032 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jpaY9-002Ukh-Nk; Sun, 28 Jun 2020 16:53:01 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33022) 
+	id 1jpbOs-002UuL-3s; Sun, 28 Jun 2020 17:47:30 +0000
+Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636]:37369) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jpaY4-002UkZ-1R
- for samba-technical@lists.samba.org; Sun, 28 Jun 2020 16:52:58 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=3st9TUIvKdT+/cCjYCDS4K4cC6u6A/EP3Bb+ofK9wKY=; b=0b/YsV5gIXjJQem/ZAO8Q03L2K
- jyRSnfxFhRNX79FtflF7K906Pxhz7voBg/oNtwHmdngi14WMq1jzj0sD8nsvL9sIax5ddwaT3scgz
- cGQdUaJ0RbfTrPrQoKGiwKuLlN2KEYZdGhFMTgZa5WNjGVwpCwTrTck0pWF/xRaj1388EgC/EnZpy
- sRWYWF3XFAL4T91ZavwiI19BVeE7VT3Xi+29UeMWP995m24+5KdmW8R05TJ6V9iQXwkW5G6mcLEWG
- CwXLRT6Si4NMdLfAgMbnXMm3wJFsr+U5FLrmnSM2RFxShIhR2YVVwoL2NzWXvPLuMWhPoqJYhTdWe
- siPR4zFSLwmzm5JHvzao4KSlCCJ2uaNrigsu1t8bv51fdYM7Zdh+tTpGmGx/jRSXRTQfX1bEwnKPo
- 0oBDlX4wWxzpdjHLhI0O7g223WhdXOdf10sappu5P973M73uYE06ZXXD34u3TSJY4LJi4OsUbxEZM
- UUuynnBywneNZb86teAygisj;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jpaY3-0005Nr-0N; Sun, 28 Jun 2020 16:52:55 +0000
-Date: Sun, 28 Jun 2020 19:52:52 +0300
-To: hezekiah maina <hezekiahmaina3@gmail.com>
-Subject: Re: GSoC Week 4 Progress
-Message-ID: <20200628165252.GA25598@pinega.vda.li>
-References: <CAH72RCXajQj9ZgOuLphOmY8MseOZuXdUCTtNTKWWKg=XGRXAsA@mail.gmail.com>
+ (Exim) id 1jpbOk-002UuC-Md
+ for samba-technical@lists.samba.org; Sun, 28 Jun 2020 17:47:25 +0000
+Received: by mail-ej1-x636.google.com with SMTP id mb16so14361172ejb.4
+ for <samba-technical@lists.samba.org>; Sun, 28 Jun 2020 10:47:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=plkPnB7Q+UMcEF/BnkYAzmRUwBykDHfg6brtELh3UQo=;
+ b=V9tuN/c9P2NrXuZ5mRB7bxZlGzmnVFk3RaZbmcTB9UwcGTHm/rdLyFBnmM8CyJ3Yi5
+ +817jlRKCMS4rG+RDvG+t7WPhvqDMpzcFfS8eyNgCaMvGCjf9petnT1LlxoGrqLO4T2B
+ tQr55TS+31TCQv+xD0dO1Zl0YkD8yARbpqsOeZ9dsmLOSnanHXf++BqhbOGLsQ5tg/0y
+ SdTJh234clEgp+aEZn+UJ+PQ+2IkfDQB5ym24pgJZKjJOrF6Rm0HejfgYjGkifkfGj7m
+ Co57Gl+4K36LfWHSTfGTXDd3L4+OY0CtfdG0JrhRo87/pX5lFNmK2WXvOKOPWD/z5gej
+ MwPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=plkPnB7Q+UMcEF/BnkYAzmRUwBykDHfg6brtELh3UQo=;
+ b=k8kfofTL60KNdvEYw0blRrzh2OmwbbA3uTEKUOVWr2NiCwbBaTxcFM0ARd+qSeP+PT
+ rRAjrqAv9xFT63VoAeJTza8+lb4jNl8x/rNiyu0iPQjWzui5jGT53ahEcwQ6Go4snGFW
+ jYx1M2IHqKqfMk5QcpoktrKXJARR7YByn2PMo2BEq3EXNwUaya3H8PJzXO2Mvd9QeEkD
+ 09Hf/j/Wyfqq+mY35GKHUt1iXfmJVzChhU0487V1c/gszHtS8HRmq1O3JYEPEgDbQwqd
+ JIRJnQmbm/IhKzc+HoadSrtkj2HSFKucAqrkRJ8i++BMUqaV19BetnN+KlQxq9Qtvhug
+ 7BGg==
+X-Gm-Message-State: AOAM531usX/okGe35E8vRufX+3ooaBmVCQ+rZ5JClOhiGKnrzW4vQNDm
+ kdkOCImGV8UEA3slwZrpHf0YXB+6g+rvMFv2zwcj2mZoP84=
+X-Google-Smtp-Source: ABdhPJwhKP0KDqaSqmiYdm92DdODPChUY6vjrcQza+Oe8qYoZxYgnX7fhvUjU0pRo8lwkVnoBdt5Il/gZo3ITf3Htdg=
+X-Received: by 2002:a17:906:270d:: with SMTP id
+ z13mr4177773ejc.281.1593366441866; 
+ Sun, 28 Jun 2020 10:47:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAH72RCXajQj9ZgOuLphOmY8MseOZuXdUCTtNTKWWKg=XGRXAsA@mail.gmail.com>
+References: <CAH72RCXajQj9ZgOuLphOmY8MseOZuXdUCTtNTKWWKg=XGRXAsA@mail.gmail.com>
+ <20200628165252.GA25598@pinega.vda.li>
+In-Reply-To: <20200628165252.GA25598@pinega.vda.li>
+Date: Sun, 28 Jun 2020 20:41:58 +0300
+Message-ID: <CAH72RCX8ttcU+bp6iU8CpVKNkjdnrdBdYPZ0SofEeoRXbAPFAA@mail.gmail.com>
+Subject: Re: GSoC Week 4 Progress
+To: Alexander Bokovoy <ab@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,31 +71,38 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexander Bokovoy <ab@samba.org>
+From: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
+Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
 Cc: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>,
  "abartlet@samba.org" <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On su, 28 kesä 2020, hezekiah maina wrote:
-> During the week I worked on the following:
->    Forest Management
->    DNS Management
->    Group Management
-> Repo: https://gitlab.com/HezekiahM/samba-ad-dc/-/tree/develop
+I hadn't seen the issue. Thank you for pointing that out.
+Let me try out what Martin recommended and will let you know how it goes.
 
+Are automated package builds the same as Cockpituous Release Automation?
 
-Thanks, Hezekiah.
+On Sun, Jun 28, 2020 at 7:52 PM Alexander Bokovoy <ab@samba.org> wrote:
 
-Please note an issue filed by Cockpit maintainers:
-https://gitlab.com/HezekiahM/samba-ad-dc/-/issues/1
-
-Do you have any problems, questions?
-
-I think we should start to provide automated package builds so that
-people could try the package. Let's look at it next week.
-
--- 
-/ Alexander Bokovoy
-
+> On su, 28 kes=C3=A4 2020, hezekiah maina wrote:
+> > During the week I worked on the following:
+> >    Forest Management
+> >    DNS Management
+> >    Group Management
+> > Repo: https://gitlab.com/HezekiahM/samba-ad-dc/-/tree/develop
+>
+>
+> Thanks, Hezekiah.
+>
+> Please note an issue filed by Cockpit maintainers:
+> https://gitlab.com/HezekiahM/samba-ad-dc/-/issues/1
+>
+> Do you have any problems, questions?
+>
+> I think we should start to provide automated package builds so that
+> people could try the package. Let's look at it next week.
+>
+> --
+> / Alexander Bokovoy
+>
