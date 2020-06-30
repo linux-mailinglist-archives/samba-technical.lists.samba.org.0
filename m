@@ -2,52 +2,37 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1018720F96E
-	for <lists+samba-technical@lfdr.de>; Tue, 30 Jun 2020 18:29:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 505EB21003D
+	for <lists+samba-technical@lfdr.de>; Wed,  1 Jul 2020 00:54:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=SXCRfKl6xVLKLMjcM/07fo8fpguvBJ0YwZQ7iYaLquQ=; b=uy5sm4mprZ1tdPasVtGVzRi6Pw
-	7/gySsAVr/POZvusS2+b3bb+tmfAphuMmYu1atZHn3hGOmYtehgJRd1oVeE63AuB4Vg9gcWx9JW3N
-	OjSXmEZwx8dqb4uRJ44Nk7X1ORmFGBfdrSr0R6hOczLY5iL8BDpemD/cDvLQg8AIicIoKPXyz6j/8
-	xYW/mPkgcZFF3N/aeo/oluVvdxA+mtYvALLGo4TVQNDhd0i8ka8X5fLMKyy/o2Vdp31KCmG7n/bXP
-	gVIW4Qr06qUUBmPoCWjMSqwEHHFoZirM7OrXidHwi3ca81NN5b+ySIcDcTgRrSzmgZ1vrwZavothB
-	lfD5fxXg==;
-Received: from localhost ([::1]:58568 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:Date:To;
+	bh=Sve4dlQ9vTs07MqbfRNrJl6+PiVwH7p0lf0kupQP+ls=; b=C8+wa7c+2CcBrlbANR3BGwlhZ2
+	4T6ISY4ruv5PTRIfVzBVOlz+zQT5mXecrwiUO2MOARbwlKk0XuplqCMi3VHmEgM5hPIlEKpWDYHlQ
+	08CeFpyOydMnll7swFyb4llg0BteqRqQm2n8XGrGvmBx7CSFSQnmoxm5A2o0QXffND3BsKi6bR5u8
+	9UiauGeNNE8JwSF7KpA7GVhJZe7zAiakrY1DKPlzancNvMJ1FOFPuGB37RizdsGNOGuMNXV8Kgthm
+	23ICIm1hkPX0WrsMsjnBQh/5IDUQ2uWjvUjcCpJ+wJAtdXHH1I/2S7ClO99wjTEmTbA3nhvQ2HJDm
+	zBcLJYyQ==;
+Received: from localhost ([::1]:37966 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jqJ7l-002nrg-NB; Tue, 30 Jun 2020 16:28:45 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41204) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jqJ7e-002nrZ-JW
- for samba-technical@lists.samba.org; Tue, 30 Jun 2020 16:28:41 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=SXCRfKl6xVLKLMjcM/07fo8fpguvBJ0YwZQ7iYaLquQ=; b=V0FCAhClP3uqX3kJHgDbSSqWx+
- Q+juzF12Emvs7LQ+UJN/jrxUpZa/CzXVnUSuX+AvZmJaghOKZlXKP8szvr08RT4+hyMTr6+6FxO/O
- uHfmhBUDlJgbEm8oj7JLcLLVAwOMdoGwmDFSlm5v903KqqxHvm8n8ojUHmNBBScFYtCSOZTG6qSxJ
- W72Wp/R3XrxIMr8E5xISQGR6met5R3lE090JIvLdmvu1nSv4JMlagDarFSv1+NK+4CCmlq48uL3SJ
- C+uKF0IXwoo/a6uVpmYIOKW1BpVFMLaxdJmxWvir4pYwY9bKLDIH8dOgf80wTcVXkkdQs+yUvzxC7
- dx6zAacS6fLkTz357CuhSKA2BodyPX4lhkjTKs2nGTRokJaC2Z3SbxVwoEOgi2qhm+rS0LmZYmH2s
- /RKSvydacLYSb6FQ8ow2K8Me9LzXh+bgX5nL1UNesPgNxEvhRqEYuBOYHH1aorGouYxXdfx2L4kpk
- sdD+e5gs006smYZ+caOMQtgn;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jqJ7d-0001v6-Nx; Tue, 30 Jun 2020 16:28:37 +0000
-To: Anoop C S <anoopcs@samba.org>
-References: <35bfe7ee-5c75-c785-8648-4c8191a9974a@samba.org>
- <86481a324b2b5068dfa438bedd6b7205fbe0ccf5.camel@samba.org>
- <56f956ce-98f4-6f51-960b-91ba7af19da3@samba.org>
- <a5d29d28-c692-e9bc-f7a7-b3a0d2070849@samba.org>
- <e0441676a67f6a10c1e5d4fdbd8fa0463c668c89.camel@samba.org>
-Subject: Re: socket-wrapper fd-passing
-Message-ID: <f5c3e252-2783-d96c-8e89-1fd51bc6fa38@samba.org>
-Date: Tue, 30 Jun 2020 18:28:26 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+	id 1jqP8R-002rsl-Hy; Tue, 30 Jun 2020 22:53:51 +0000
+Received: from mx2.suse.de ([195.135.220.15]:34940) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1jqP8L-002rsH-QV
+ for samba-technical@lists.samba.org; Tue, 30 Jun 2020 22:53:48 +0000
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 3A0D9ADCC;
+ Tue, 30 Jun 2020 22:34:37 +0000 (UTC)
+To: yangerkun <yangerkun@huawei.com>, sfrench@samba.org, jlayton@kernel.org,
+ neilb@suse.com
+Date: Wed, 01 Jul 2020 08:34:26 +1000
+Subject: Re: [PATCH] cifs: remove the retry in cifs_poxis_lock_set
+In-Reply-To: <62b291ab-291c-339f-e8e8-ba7b0c4f6670@huawei.com>
+References: <20200624071053.993784-1-yangerkun@huawei.com>
+ <62b291ab-291c-339f-e8e8-ba7b0c4f6670@huawei.com>
+Message-ID: <878sg42nf1.fsf@notabene.neil.brown.name>
 MIME-Version: 1.0
-In-Reply-To: <e0441676a67f6a10c1e5d4fdbd8fa0463c668c89.camel@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="OcaWbeaJAsbETISIKVQOqzOb2WvWuUI84"
+Content-Type: multipart/signed; boundary="=-=-=";
+ micalg=pgp-sha256; protocol="application/pgp-signature"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,94 +46,100 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>
+From: NeilBrown via samba-technical <samba-technical@lists.samba.org>
+Reply-To: NeilBrown <neilb@suse.de>
+Cc: linux-fsdevel@vger.kernel.org, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---OcaWbeaJAsbETISIKVQOqzOb2WvWuUI84
-Content-Type: multipart/mixed; boundary="Lfr5MrfTllUtlomiXXlSmTh1XVvd0GWda";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Anoop C S <anoopcs@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>
-Message-ID: <f5c3e252-2783-d96c-8e89-1fd51bc6fa38@samba.org>
-Subject: Re: socket-wrapper fd-passing
-References: <35bfe7ee-5c75-c785-8648-4c8191a9974a@samba.org>
- <86481a324b2b5068dfa438bedd6b7205fbe0ccf5.camel@samba.org>
- <56f956ce-98f4-6f51-960b-91ba7af19da3@samba.org>
- <a5d29d28-c692-e9bc-f7a7-b3a0d2070849@samba.org>
- <e0441676a67f6a10c1e5d4fdbd8fa0463c668c89.camel@samba.org>
-In-Reply-To: <e0441676a67f6a10c1e5d4fdbd8fa0463c668c89.camel@samba.org>
-
---Lfr5MrfTllUtlomiXXlSmTh1XVvd0GWda
+--=-=-=
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-Hi Anoop,
+On Tue, Jun 30 2020, yangerkun wrote:
 
->>> I guess it means we would need to undo some of the changes we made
->>> to one array of socket_info structures.
->>>
->>> I'll let you know if I get the basic passing of information via the
->>> tmp
->>> pipe working...
->>
->> As Samba does not require that the socket is usable from two
->> processes
->> at the same time, I guess we can take a short cut and just pass
->> the socket_info structure (an array of them) through the pipe.
->> That would allow us to have multichannel tested in gitlab/autobuild.
->=20
-> I am looking through your changes and will let you know in case I need
-> more clarifications.
->=20
->> I'll see if I can get this to work. Once we have these basics,
->> we can try to improve the design to be more generic with shared
->> structures, when we really need it.
+> Ping...
+>
+> =E5=9C=A8 2020/6/24 15:10, yangerkun =E5=86=99=E9=81=93:
+>> The caller of cifs_posix_lock_set will do retry(like
+>> fcntl_setlk64->do_lock_file_wait) if we will wait for any file_lock.
+>> So the retry in cifs_poxis_lock_set seems duplicated, remove it to
+>> make a cleanup.
 
-I made good progress, see
-https://gitlab.com/metze/socket_wrapper/-/commits/fd-passing-unix
-https://gitlab.com/metze/socket_wrapper/-/pipelines/161689331
+If cifs_posix_try_lock() returns FILE_LOCK_DEFERRED (which it might
+after your patch), then cifs_setlk() will check the return value:
 
-And for Samba:
-https://git.samba.org/?p=3Dmetze/samba/wip.git;a=3Dshortlog;h=3Drefs/head=
-s/master-multichannelhttps://gitlab.com/samba-team/devel/samba/-/pipeline=
-s/161691424
-https://gitlab.com/samba-team/devel/samba/-/pipelines/161691541
+		if (!rc || rc < 0)
+			return rc;
 
-I'll add some more tests tomorrow and debug why some samba tests are
-failing...
+These tests will fail (as FILE_LOCK_DEFERRED is 1) and so it will
+continue on as though the lock was granted.
 
-metze
+So I think your patch is wrong.
+However I think your goal is correct.  cifs shouldn't be waiting.
+No other filesystem waits when it gets FILE_LOCK_DEFERRED.
+
+So maybe try to fix up your patch.
+
+Thanks,
+NeilBrown
 
 
---Lfr5MrfTllUtlomiXXlSmTh1XVvd0GWda--
+>>=20
+>> Signed-off-by: yangerkun <yangerkun@huawei.com>
+>> ---
+>>   fs/cifs/file.c | 8 --------
+>>   1 file changed, 8 deletions(-)
+>>=20
+>> diff --git a/fs/cifs/file.c b/fs/cifs/file.c
+>> index 9b0f8f33f832..2c9c24b1805d 100644
+>> --- a/fs/cifs/file.c
+>> +++ b/fs/cifs/file.c
+>> @@ -1162,7 +1162,6 @@ cifs_posix_lock_set(struct file *file, struct file=
+_lock *flock)
+>>   	if ((flock->fl_flags & FL_POSIX) =3D=3D 0)
+>>   		return rc;
+>>=20=20=20
+>> -try_again:
+>>   	cifs_down_write(&cinode->lock_sem);
+>>   	if (!cinode->can_cache_brlcks) {
+>>   		up_write(&cinode->lock_sem);
+>> @@ -1171,13 +1170,6 @@ cifs_posix_lock_set(struct file *file, struct fil=
+e_lock *flock)
+>>=20=20=20
+>>   	rc =3D posix_lock_file(file, flock, NULL);
+>>   	up_write(&cinode->lock_sem);
+>> -	if (rc =3D=3D FILE_LOCK_DEFERRED) {
+>> -		rc =3D wait_event_interruptible(flock->fl_wait,
+>> -					list_empty(&flock->fl_blocked_member));
+>> -		if (!rc)
+>> -			goto try_again;
+>> -		locks_delete_block(flock);
+>> -	}
+>>   	return rc;
+>>   }
+>>=20=20=20
+>>=20
 
---OcaWbeaJAsbETISIKVQOqzOb2WvWuUI84
+--=-=-=
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl77aC0ACgkQDbX1YShp
-vVbdNw//XqnV+PoaHOAfBo5qZ2WOzaRaUdRZw46ZalhrZJ0aAKN+bysvGWsbnWFx
-OByAuorz8MOBAyYb0Qx48R/WKCsFMj46d9Zx2OMBCQ4mpmuAM1gRCH24rFWNFWkX
-b1zaGdXXY276u2llrVEZZL2p6JtSgUkqCBnkRByrV+fC87/P0xYU3ziDCvB0goUQ
-wkhe+s4PV/w1Rg06N/Xk+uTSJO/SaiECc5t78gzqH7Byg2genf5r4lRZhHOKAqWh
-DHnXKQTvMzi0uNtjVX5Zy07agJBU/+rhI35mqrPYnhmN3BcQUCtzmfU3o1S55nG5
-3qo00AHodnOqJ0lmAHIFb8IHPW+mZvROZ58ZAvi77F4IDeoGLoIjJcpybU53LY0i
-a1PcI8txv3FYQfHBzPGN8Y9bR7E2uvBpTvrdYIvAOlbqCgYOZUGZt1984/cPQAQx
-AsVB87vOJGTJ4awi3TU+9ItX6+8ciHpUbnYfhPJtthI2U3NCP8YeuCRSKUwVzrOu
-SAEboLtmU9ge3RC2pqhVqIW+NGwwV82IlmX/t2kPVlwgfjRhCqOk77T3BCLYCakq
-wzaO9x9V92EMeXPBC3lVKvGP9WSkJf1aSsYt9xINPy9y1wqrntaMLol46ZcU7op2
-ujls6xFgSJ2CutAVT3JeyVJSBZqm3GUafj5fGnjaWLy5piIibgM=
-=wbg6
+iQIzBAEBCAAdFiEEG8Yp69OQ2HB7X0l6Oeye3VZigbkFAl77vfQACgkQOeye3VZi
+gbmW6BAAinormSTgvP6Zq9Oi/lClg/VGdOBbdsnmyqFgfkx35BKsa0lpdohWdpNB
+e9u5TXSgohn1xEvZkYtCa5/bEx/LF4cJYoRnu1zQXS/CHAk22FsynyrbY1o3rAIm
+i/9FtbtF02HCSI5j85rqFmDR+6iju9oOZUPMAcb+w3IsxpNXd+HSa8zCXSLUi9aJ
+s1orhwmadyFulnDc/hkoD9YS9scZ00W6KKUDi2efXvbmRznH+z4mDVDjevQ9GRJG
+7eUBX/GlThAUpFlp1yI8/Pya+5gVpLox3Ttp484FT9M+V/e5LhPB62T+5L5ZbH5y
+NIpWWJAFmq9q/OWV9b6UiWyeMQ9S8/ZI5Ll4D6XtGjkYB3MdkOxXUOOg3qxheHQa
+pQEmJNOEATiF7zLOC7eSxpKl2aajZAQf1XVkNyJLCePppk655T4enJhKjyR6BoYQ
+xNnyUm7SKYx85Lkb19GqQBabJjzkzTdSUui+1VjwqlUYBYsaDOAm8IPu76J+r5qn
+FZ0Y6INOhbInI+GH6nOWMAPIK6yZG8/nnJNaFKNR95EnTnmZzWY4zg9pZ4IifQ1J
+qrn5SrRfd98TUIN8Xquua8FVCUqUSVUXyJRSA91IJbmrdOw5wnajlOJJ9q8Dl9dk
+BgfmAl/EWz40uNaMFkO7Z/BZqVxWDC0rHYEAl8zAi7Oqm0Ci7Xk=
+=wuds
 -----END PGP SIGNATURE-----
-
---OcaWbeaJAsbETISIKVQOqzOb2WvWuUI84--
+--=-=-=--
 
