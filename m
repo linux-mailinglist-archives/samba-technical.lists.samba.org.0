@@ -2,49 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4249220F30D
-	for <lists+samba-technical@lfdr.de>; Tue, 30 Jun 2020 12:48:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1018720F96E
+	for <lists+samba-technical@lfdr.de>; Tue, 30 Jun 2020 18:29:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=wdFgy1bxmDaBuJn5SRpIPSql1/LuWQt7fjOBFnQ8YGE=; b=CsBX5RYa19gEU63rhKJWEKkx6T
-	F4AZcIsRkml5b7kVmO1fSpfBFZajZGgQkbSVcirzSMEwZruLR/jwe43/NhNsTwP5TwRMRAK+U5lfl
-	Du8gr2Z9HR+W3BuuoBmDVV3wf9e5SmemAQi4CTdUYhYEgezpMkcenq9Bs08dfJfrtWTQLaRKaSqdU
-	zpPB/iWQvvKzZombz5FBHPyha6S2kgby2JJ8xpt8cK9FtT8nXeJnSH9I/pAG0UqJ7dSH4gPlbLjBL
-	l5FQTISuQe1U93a4YjG+oSw1BTX4M2dwkigHrdpGeBuBr5umLjACyp4OOX43xOker8F2WRxQ0TvWj
-	rAS2D5/Q==;
-Received: from localhost ([::1]:55330 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=SXCRfKl6xVLKLMjcM/07fo8fpguvBJ0YwZQ7iYaLquQ=; b=uy5sm4mprZ1tdPasVtGVzRi6Pw
+	7/gySsAVr/POZvusS2+b3bb+tmfAphuMmYu1atZHn3hGOmYtehgJRd1oVeE63AuB4Vg9gcWx9JW3N
+	OjSXmEZwx8dqb4uRJ44Nk7X1ORmFGBfdrSr0R6hOczLY5iL8BDpemD/cDvLQg8AIicIoKPXyz6j/8
+	xYW/mPkgcZFF3N/aeo/oluVvdxA+mtYvALLGo4TVQNDhd0i8ka8X5fLMKyy/o2Vdp31KCmG7n/bXP
+	gVIW4Qr06qUUBmPoCWjMSqwEHHFoZirM7OrXidHwi3ca81NN5b+ySIcDcTgRrSzmgZ1vrwZavothB
+	lfD5fxXg==;
+Received: from localhost ([::1]:58568 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jqDo2-002gfv-Hh; Tue, 30 Jun 2020 10:48:02 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:27106) 
+	id 1jqJ7l-002nrg-NB; Tue, 30 Jun 2020 16:28:45 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41204) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jqDnw-002gfo-FZ
- for samba-technical@lists.samba.org; Tue, 30 Jun 2020 10:47:59 +0000
+ (Exim) id 1jqJ7e-002nrZ-JW
+ for samba-technical@lists.samba.org; Tue, 30 Jun 2020 16:28:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=wdFgy1bxmDaBuJn5SRpIPSql1/LuWQt7fjOBFnQ8YGE=; b=xtM68wv00p/AH0r8FrgsSqQccV
- AQwei5wkDXUluEGXeKnG0MeLyCAbu85RWz2KytCJBeqplmhLeguRQgq+q0pjAL3lMDjZHqXQWssdN
- f+xsYfxxhejkX2ijRBF/dqjQACrh/b0ropUmhKhbhL1HfAp1pobFXPLD+w8NK/vGvoRDcAXATaR5u
- 5Mubd5QXqF5vLuz3Hxk4SOxZqNDrx1DRs30SNXVLOB0+kqVzEus56lWPzUJUDrYGC/ryMqxAmNMRn
- qLjsQ9yA6pJIX2y9BsJkedlTJex3/8I499wGZKBeBZrqsQ769xVw4Z3Gsc3ZyvsC5NXOmX4C0vUBM
- IfM2Y1pQ1gwqjqdW745/Fs2S84DHLOFfk6rzUfRLiOWZgeY+pnKzeiL/OX0MXI4kxBIs0Ve8u+tUr
- 3vkYF97huNspsGE3cnLLSPlpen0KmGGC8gS+XYzS0wx3U1u/o/PA+Er/IBFaV6LGhOiZsKCsOXTj4
- eMmIdGNz1DpLFir2YCJlnnqu;
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=SXCRfKl6xVLKLMjcM/07fo8fpguvBJ0YwZQ7iYaLquQ=; b=V0FCAhClP3uqX3kJHgDbSSqWx+
+ Q+juzF12Emvs7LQ+UJN/jrxUpZa/CzXVnUSuX+AvZmJaghOKZlXKP8szvr08RT4+hyMTr6+6FxO/O
+ uHfmhBUDlJgbEm8oj7JLcLLVAwOMdoGwmDFSlm5v903KqqxHvm8n8ojUHmNBBScFYtCSOZTG6qSxJ
+ W72Wp/R3XrxIMr8E5xISQGR6met5R3lE090JIvLdmvu1nSv4JMlagDarFSv1+NK+4CCmlq48uL3SJ
+ C+uKF0IXwoo/a6uVpmYIOKW1BpVFMLaxdJmxWvir4pYwY9bKLDIH8dOgf80wTcVXkkdQs+yUvzxC7
+ dx6zAacS6fLkTz357CuhSKA2BodyPX4lhkjTKs2nGTRokJaC2Z3SbxVwoEOgi2qhm+rS0LmZYmH2s
+ /RKSvydacLYSb6FQ8ow2K8Me9LzXh+bgX5nL1UNesPgNxEvhRqEYuBOYHH1aorGouYxXdfx2L4kpk
+ sdD+e5gs006smYZ+caOMQtgn;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jqDnu-0007Q9-PW; Tue, 30 Jun 2020 10:47:55 +0000
-Message-ID: <e0441676a67f6a10c1e5d4fdbd8fa0463c668c89.camel@samba.org>
-Subject: Re: socket-wrapper fd-passing
-To: Stefan Metzmacher <metze@samba.org>
-Date: Tue, 30 Jun 2020 16:17:46 +0530
-In-Reply-To: <a5d29d28-c692-e9bc-f7a7-b3a0d2070849@samba.org>
+ (Exim) id 1jqJ7d-0001v6-Nx; Tue, 30 Jun 2020 16:28:37 +0000
+To: Anoop C S <anoopcs@samba.org>
 References: <35bfe7ee-5c75-c785-8648-4c8191a9974a@samba.org>
  <86481a324b2b5068dfa438bedd6b7205fbe0ccf5.camel@samba.org>
  <56f956ce-98f4-6f51-960b-91ba7af19da3@samba.org>
  <a5d29d28-c692-e9bc-f7a7-b3a0d2070849@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.3 (3.36.3-1.fc32) 
+ <e0441676a67f6a10c1e5d4fdbd8fa0463c668c89.camel@samba.org>
+Subject: Re: socket-wrapper fd-passing
+Message-ID: <f5c3e252-2783-d96c-8e89-1fd51bc6fa38@samba.org>
+Date: Tue, 30 Jun 2020 18:28:26 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <e0441676a67f6a10c1e5d4fdbd8fa0463c668c89.camel@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="OcaWbeaJAsbETISIKVQOqzOb2WvWuUI84"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,93 +61,94 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Anoop C S via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Anoop C S <anoopcs@samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2020-06-30 at 07:33 +0200, Stefan Metzmacher via samba-
-technical wrote:
-> Hi Anoop,
-> 
-> > > In short, I could successfully run `make test` with changes to
-> > > work out
-> > > of a common shared file. Still there is one
-> > > test(test_thread_echo_tcp_sendmsg_recvmsg, which I added) failing
-> > > almost consistently on my local system and not on GitLab CI. I
-> > > have
-> > > been trying to root cause this failure for quite sometime now(as
-> > > and
-> > > when time allows me) without any luck in fixing it. I would love
-> > > to see
-> > > another pair of eyes reviewing the changes.
-> > 
-> > I guess the problem I described above and the code that tries to
-> > construct the updated SCM_RIGHTS fd array, seems wrong, as far as I
-> > can
-> > see it only tries to pass the tmp pipe read end, but not the actual
-> > fd
-> > array passed from the caller.
-> > 
-> > I tried to get the SCM_RIGHTS passing working here:
-> > https://gitlab.com/metze/socket_wrapper/-/tree/fd-passing-unix
-> > 
-> > Once I got this working I'll try to integrate this with the rest of
-> > your
-> > patches.
-> 
-> I got the basics working. I took your shared space patches on top,
-> but
-> that just fails immediately in Samba's make test.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--OcaWbeaJAsbETISIKVQOqzOb2WvWuUI84
+Content-Type: multipart/mixed; boundary="Lfr5MrfTllUtlomiXXlSmTh1XVvd0GWda";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Anoop C S <anoopcs@samba.org>
+Cc: Samba Technical <samba-technical@lists.samba.org>
+Message-ID: <f5c3e252-2783-d96c-8e89-1fd51bc6fa38@samba.org>
+Subject: Re: socket-wrapper fd-passing
+References: <35bfe7ee-5c75-c785-8648-4c8191a9974a@samba.org>
+ <86481a324b2b5068dfa438bedd6b7205fbe0ccf5.camel@samba.org>
+ <56f956ce-98f4-6f51-960b-91ba7af19da3@samba.org>
+ <a5d29d28-c692-e9bc-f7a7-b3a0d2070849@samba.org>
+ <e0441676a67f6a10c1e5d4fdbd8fa0463c668c89.camel@samba.org>
+In-Reply-To: <e0441676a67f6a10c1e5d4fdbd8fa0463c668c89.camel@samba.org>
 
-Ok. I think I haven't tried it yet. I will check locally on my system.
+--Lfr5MrfTllUtlomiXXlSmTh1XVvd0GWda
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-> > > > An additional idea would be using temporary anonymous files
-> > > > (maybe
-> > > > memfd_create() or an similation for it) for shared structures
-> > > > for
-> > > > passed
-> > > > sockets. In sendmsg() the sender would move the
-> > > > socket_info[_container]
-> > > > structures from malloc'ed memory to an temporary memory file.
-> > > > This will replace the pipe fd of the original design.
-> > > > If multiple fd's are passed, the memory file contains an array
-> > > > of
-> > > > socket_info[_container] structures.
-> > > > int *socket_fds_idx would be changed to an array of structures
-> > > > or we have an additional array to store possible fd for the
-> > > > temporary
-> > > > files and have the destructing code lock at it and select
-> > > > between
-> > > > free() and munmap()/close().
-> > > > This design would not require a named file, like the one
-> > > > specified
-> > > > by SOCKET_WRAPPER_FD_PASSING_DB.
-> > > 
-> > > Hm.. this is new to me. I will think about it.
-> > 
-> > I guess it means we would need to undo some of the changes we made
-> > to one array of socket_info structures.
-> > 
-> > I'll let you know if I get the basic passing of information via the
-> > tmp
-> > pipe working...
-> 
-> As Samba does not require that the socket is usable from two
-> processes
-> at the same time, I guess we can take a short cut and just pass
-> the socket_info structure (an array of them) through the pipe.
-> That would allow us to have multichannel tested in gitlab/autobuild.
+Hi Anoop,
 
-I am looking through your changes and will let you know in case I need
-more clarifications.
+>>> I guess it means we would need to undo some of the changes we made
+>>> to one array of socket_info structures.
+>>>
+>>> I'll let you know if I get the basic passing of information via the
+>>> tmp
+>>> pipe working...
+>>
+>> As Samba does not require that the socket is usable from two
+>> processes
+>> at the same time, I guess we can take a short cut and just pass
+>> the socket_info structure (an array of them) through the pipe.
+>> That would allow us to have multichannel tested in gitlab/autobuild.
+>=20
+> I am looking through your changes and will let you know in case I need
+> more clarifications.
+>=20
+>> I'll see if I can get this to work. Once we have these basics,
+>> we can try to improve the design to be more generic with shared
+>> structures, when we really need it.
 
-> I'll see if I can get this to work. Once we have these basics,
-> we can try to improve the design to be more generic with shared
-> structures, when we really need it.
+I made good progress, see
+https://gitlab.com/metze/socket_wrapper/-/commits/fd-passing-unix
+https://gitlab.com/metze/socket_wrapper/-/pipelines/161689331
 
-Fine.
+And for Samba:
+https://git.samba.org/?p=3Dmetze/samba/wip.git;a=3Dshortlog;h=3Drefs/head=
+s/master-multichannelhttps://gitlab.com/samba-team/devel/samba/-/pipeline=
+s/161691424
+https://gitlab.com/samba-team/devel/samba/-/pipelines/161691541
+
+I'll add some more tests tomorrow and debug why some samba tests are
+failing...
+
+metze
 
 
+--Lfr5MrfTllUtlomiXXlSmTh1XVvd0GWda--
+
+--OcaWbeaJAsbETISIKVQOqzOb2WvWuUI84
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl77aC0ACgkQDbX1YShp
+vVbdNw//XqnV+PoaHOAfBo5qZ2WOzaRaUdRZw46ZalhrZJ0aAKN+bysvGWsbnWFx
+OByAuorz8MOBAyYb0Qx48R/WKCsFMj46d9Zx2OMBCQ4mpmuAM1gRCH24rFWNFWkX
+b1zaGdXXY276u2llrVEZZL2p6JtSgUkqCBnkRByrV+fC87/P0xYU3ziDCvB0goUQ
+wkhe+s4PV/w1Rg06N/Xk+uTSJO/SaiECc5t78gzqH7Byg2genf5r4lRZhHOKAqWh
+DHnXKQTvMzi0uNtjVX5Zy07agJBU/+rhI35mqrPYnhmN3BcQUCtzmfU3o1S55nG5
+3qo00AHodnOqJ0lmAHIFb8IHPW+mZvROZ58ZAvi77F4IDeoGLoIjJcpybU53LY0i
+a1PcI8txv3FYQfHBzPGN8Y9bR7E2uvBpTvrdYIvAOlbqCgYOZUGZt1984/cPQAQx
+AsVB87vOJGTJ4awi3TU+9ItX6+8ciHpUbnYfhPJtthI2U3NCP8YeuCRSKUwVzrOu
+SAEboLtmU9ge3RC2pqhVqIW+NGwwV82IlmX/t2kPVlwgfjRhCqOk77T3BCLYCakq
+wzaO9x9V92EMeXPBC3lVKvGP9WSkJf1aSsYt9xINPy9y1wqrntaMLol46ZcU7op2
+ujls6xFgSJ2CutAVT3JeyVJSBZqm3GUafj5fGnjaWLy5piIibgM=
+=wbg6
+-----END PGP SIGNATURE-----
+
+--OcaWbeaJAsbETISIKVQOqzOb2WvWuUI84--
 
