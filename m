@@ -2,33 +2,35 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10590210BE3
-	for <lists+samba-technical@lfdr.de>; Wed,  1 Jul 2020 15:15:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CD54210C37
+	for <lists+samba-technical@lfdr.de>; Wed,  1 Jul 2020 15:30:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=jk8RJSdeZ3iRiKwg9nwb9NeAVxdIn8q059ESchgsshQ=; b=CAECS8cokWvlNeA9pQQmApgjyb
-	y8KmkLHLgf+SgYyE8/qtrGgKQ/HhapjgZ67ostEORExBLLAiB6Uabp8Cx4OCEHTApLEm3uZZbfJNh
-	hUqhQZEXRxCa4G4+MUWFvfy8z9DHXpmk/6vKkH3qhnL+lG++3lL7RapS504zzO0deLGv3v5DVEQ+n
-	ZuZc+IqTOMAhwqUgSreGgDZSGoHqspoTSn53y5Xp08fgrC4pSvMSuWYvcZHP/+RgaMSWBNj0JWwLi
-	3Sl/G6nedVYE0YGIjO8oAbd+adbiQG70AB0s9dsErDvjiYaRCphH7t1BwRjkvtSlOj3DS43VFnh2L
-	rdh8ljJg==;
-Received: from localhost ([::1]:35324 helo=hr1.samba.org) 
+	bh=jk8RJSdeZ3iRiKwg9nwb9NeAVxdIn8q059ESchgsshQ=; b=nstY/cSnO3mxwdlQOPddTsEixp
+	jRP1XzGz9MBSH5DSgN7/Tkqno1FxNv0wMDbH3X6ob2Ke3HFSMtA47zq8Phy7zSzkujIr1G690SJ21
+	xwvRE0rg8W6bzzogCz+/cc/2DGLPqGFrBwryQEAWTES+GLiS+YjHdVjYjy/FGgo6igGzBBmxL7NNa
+	ln4RYoZIpovFgjmWr9ibuTf1Sf3DBXVXyc0HsHko5/nLvyGAAeK95hJZEsU2n61Dt4rpaTYWEOzaw
+	6LxpHA44ssJj74TpR09gsyh+mOMLGitKvDPm+lryRnmRgySgLgguyHLx3W2BHOWOaGyDJJKID41wm
+	CcfryDgQ==;
+Received: from localhost ([::1]:36064 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jqcZi-004p53-WB; Wed, 01 Jul 2020 13:14:55 +0000
-Received: from mx2.suse.de ([195.135.220.15]:57504) 
+	id 1jqcoE-004pCH-Re; Wed, 01 Jul 2020 13:29:54 +0000
+Received: from mx2.suse.de ([195.135.220.15]:40986) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jqcZc-004p4u-V2
- for samba-technical@lists.samba.org; Wed, 01 Jul 2020 13:14:51 +0000
+ (Exim) id 1jqco7-004pC5-UK
+ for samba-technical@lists.samba.org; Wed, 01 Jul 2020 13:29:50 +0000
 Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 8711AAE17;
- Wed,  1 Jul 2020 13:14:46 +0000 (UTC)
-To: Zhang Xiaoxu <zhangxiaoxu5@huawei.com>, zhangxiaoxu5@huawei.com,
- sfrench@samba.org, piastryyy@gmail.com
-Subject: Re: [PATCH] cifs: Fix the target file was deleted when rename failed.
-In-Reply-To: <20200629010638.3418176-1-zhangxiaoxu5@huawei.com>
-References: <20200629010638.3418176-1-zhangxiaoxu5@huawei.com>
-Date: Wed, 01 Jul 2020 15:14:45 +0200
-Message-ID: <87wo3nxtq2.fsf@suse.com>
+ by mx2.suse.de (Postfix) with ESMTP id 634C8AE17;
+ Wed,  1 Jul 2020 13:29:45 +0000 (UTC)
+To: "Alexander A. Klimov" <grandmaster@al2klimov.de>, sfrench@samba.org,
+ corbet@lwn.net, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-doc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Replace HTTP links with HTTPS ones: CIFS
+In-Reply-To: <20200627103125.71828-1-grandmaster@al2klimov.de>
+References: <20200627103125.71828-1-grandmaster@al2klimov.de>
+Date: Wed, 01 Jul 2020 15:29:44 +0200
+Message-ID: <87tuyrxt13.fsf@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -48,7 +50,7 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
 From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
  <samba-technical@lists.samba.org>
 Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
-Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org
+Cc: "Alexander A. Klimov" <grandmaster@al2klimov.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
