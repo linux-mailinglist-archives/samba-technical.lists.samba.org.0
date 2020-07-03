@@ -2,47 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3946212F96
-	for <lists+samba-technical@lfdr.de>; Fri,  3 Jul 2020 00:38:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D393F2133D3
+	for <lists+samba-technical@lfdr.de>; Fri,  3 Jul 2020 08:03:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=+uqm7yFRSuDHbdu4fhhCVoVb/GblzT6ogcfUKoSa38g=; b=vFRkEo2RB6Mnatf3TwUWSR7Yx1
-	KDWCqjrkVKmVhwfW7ucW3U5Cq9RfBq7Pe1IByFg9hqPO915crWXAEtj+G+k15L1d3zJw2VflxIwis
-	4a+SruGJFLCicYalpdUU3u0NbrnikpgMp3VbWvUb2K3ja5KFtnyhsL4k3VsSEx81BtSilSKN4ZSTw
-	TA7s4eYZQJK1ihzrVDTIHMIvNanKppo/0qlJd8C3s/FfErZesvSN9LS+d5M6/fZCBZYijt1WCF9qk
-	eMSjbBV/RbCw4jHvfcmWpUKFm1bx46f8eM10iUjBH3nwWUygn5qiLEApYhWJ8YhSXWj37/9PRGSnc
-	2HzqRaLQ==;
-Received: from localhost ([::1]:45060 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=2oxRQSnl+qV36G/coXaAyvSO+p+mkWoqyW4lEUSLcxs=; b=qdmZK3s0JHyKrKjeyzgNgiWmwi
+	ftCtydyo2qPEHSqCAEvBvHsNXFWDsrHkOoGtn5KWWH5ndvkvMqFnvMK6PyHb3hwCSjKZbDEekRDZt
+	SgN6eMrdaOLq6TEEul//doTn9GISpxCjxYglx/5OgfbiK45RLCCLbjeUvjj4mkkIUjZfzPplk1ZHC
+	VwUjI8rdX+kGhWebyp7nHsSQnfVRjx5GIa/jxQHHWP3S02P+6G7UHbsribnnyeP+amp8sAf6Wbbws
+	zPVCRxfmJ3wEZtOXLI3R3WoqGkCO/cMITPDE3tFfvaniLSj122Z3Fi12n3H8w38UXaG737goafLaG
+	KZOY5wYA==;
+Received: from localhost ([::1]:48432 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jr7qJ-005CLE-QI; Thu, 02 Jul 2020 22:38:07 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz
- ([2404:130:4080::4]:32986) 
+	id 1jrEmB-005DMm-2J; Fri, 03 Jul 2020 06:02:19 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24192) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jr7qB-005CL7-DQ
- for samba-technical@lists.samba.org; Thu, 02 Jul 2020 22:38:03 +0000
-Received: from [10.22.32.23] (wlgwil-nat-wlan.catalyst.net.nz [202.78.240.10])
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 3AE6481413; 
- Fri,  3 Jul 2020 10:18:52 +1200 (NZST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1593728332;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:autocrypt:autocrypt;
- bh=+uqm7yFRSuDHbdu4fhhCVoVb/GblzT6ogcfUKoSa38g=;
- b=MeBQsf0fjTsExSlqtAxh/I+VjXlQRrAHRbgcFwul3oiOB+/OcCiyNkn1JqXUIYOU+9ws/5
- s96IgrL0w7jRdEpVIh2yu8fTQorrLA+LfTKOW8Ly4FF7uIExCn8r9kY3xl6tjoRczh8GHC
- U6cRpeB+7G5P2YlKILyv+dM8IPxORr4VphtxV8otL+16MJccI+ksSSGhBNRCHOiZ74i2fH
- fScDIo8rMIEYGa8THsvUbgAE3GRvWbjb1RxX/uGEsD1cTO1JlKBXTwFYTxr+HioRaFbz4r
- n7N2JTlcbHBYwuSNj4PAU4UY1/uhL6T+XldPrIkDRv2P+gx584NyoaveCfRzHQ==
-To: samba-technical <samba-technical@lists.samba.org>
-Subject: [PATCH nsswrapper] nwrap_files_getaddrinfo: avoid crash on empty name
-Message-ID: <abd3c805-c26b-972c-e721-eb3d373d3682@catalyst.net.nz>
-Date: Fri, 3 Jul 2020 10:18:51 +1200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ (Exim) id 1jrEm5-005DMf-C9
+ for samba-technical@lists.samba.org; Fri, 03 Jul 2020 06:02:15 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=2oxRQSnl+qV36G/coXaAyvSO+p+mkWoqyW4lEUSLcxs=; b=YCnTSMGEqXD3L4a6erUnhGH1GS
+ mcAVcSKHDGuhJgA6/8rWqmY6TInZJvIJg4ZSaKNqjgIyE4l7cVa/IaBSzCkP0te1U1nhrmqSmHv+z
+ u3H9hdPEpK86uqVuvnwkqBRjRYZ5UY/mV3UupHoCdON6jjdwj883OZQObtRTKa4PJ+CN/wXNN/4ix
+ Xa7d54ZyptVstzll0/UoPBVQdIT38D6do0hXd1e9V7WVLGQ/697l0bT51Mjzkzc0YdP0ttvYgbl2H
+ 3IMQlE28QcqCB2schJ4IJL5vR57Aa/fMkd/ETh1TBEevns5UX/EzMHhJO4ftaBuw//1RAnlB2wPtT
+ M4FxJWs+bHS5o2g+/sRPTKvm+tmiiJR+tv905yFFULLlTWq5APQc/qPOvxZp764BqW+Le+liGLrMM
+ +mK+GS8UOMhlWQ+i68mSPkAz29sEGH8VE9uf+R4HTg1aMRmT5vRUX9NSjYGgGxSzyY7p09heYGnMP
+ c2zFxu7v6JBVHZn+2nB9TSm5;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jrEly-0005tE-Ce; Fri, 03 Jul 2020 06:02:06 +0000
+To: samba-technical <samba-technical@lists.samba.org>,
+ Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+Subject: Re: [PATCH nsswrapper] nwrap_files_getaddrinfo: avoid crash on empty
+ name
+Date: Fri, 03 Jul 2020 08:02:05 +0200
+Message-ID: <2140785.WgoT3CsFaA@magrathea>
+In-Reply-To: <abd3c805-c26b-972c-e721-eb3d373d3682@catalyst.net.nz>
+References: <abd3c805-c26b-972c-e721-eb3d373d3682@catalyst.net.nz>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------E2C6BCF84C711E37ED114ABE"
-Content-Language: en-NZ
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,63 +56,26 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-Cc: Andreas Schneider <asn@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a multi-part message in MIME format.
---------------E2C6BCF84C711E37ED114ABE
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+On Friday, 3 July 2020 00:18:51 CEST Douglas Bagnall wrote:
+> This patch helps the test environment stay up when you are looking at
+> bad DNS packets.
 
-This patch helps the test environment stay up when you are looking at
-bad DNS packets.
+Thank you very much Douglas! Could you please create a merge request at:
 
-Douglas
+https://gitlab.com/cwrap/nss_wrapper/
 
---------------E2C6BCF84C711E37ED114ABE
-Content-Type: text/x-patch; charset=UTF-8;
- name="0001-nwrap_files_getaddrinfo-avoid-crash-on-empty-name.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename*0="0001-nwrap_files_getaddrinfo-avoid-crash-on-empty-name.patch"
 
-From 0d217bdfe19535093405206c4fcc43978918153e Mon Sep 17 00:00:00 2001
-From: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-Date: Sun, 17 May 2020 13:14:08 +1200
-Subject: [PATCH] nwrap_files_getaddrinfo: avoid crash on empty name
+	Andreas
 
-When name is "", we would deref name[-1]. If by chance name[-1] was
-'.', we also tried to copy all of memory from one place to another.
-
-Rather than just guard the immediate next branch, let's assume the
-empty name is never found.
-
-Signed-off-by: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
----
- src/nss_wrapper.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/src/nss_wrapper.c b/src/nss_wrapper.c
-index 17c8732..4f4dc93 100644
---- a/src/nss_wrapper.c
-+++ b/src/nss_wrapper.c
-@@ -4070,6 +4070,10 @@ static int nwrap_files_getaddrinfo(const char *name,
- 	}
- 
- 	name_len = strlen(name);
-+	if (name_len == 0) {
-+		return EAI_NONAME;
-+	}
-+
- 	if (name_len < sizeof(canon_name) && name[name_len - 1] == '.') {
- 		memcpy(canon_name, name, name_len - 1);
- 		canon_name[name_len] = '\0';
 -- 
-2.17.1
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
 
---------------E2C6BCF84C711E37ED114ABE--
 
