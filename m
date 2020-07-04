@@ -2,54 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C240621392A
-	for <lists+samba-technical@lfdr.de>; Fri,  3 Jul 2020 13:12:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 476E42144EF
+	for <lists+samba-technical@lfdr.de>; Sat,  4 Jul 2020 13:12:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=NNKk5MmP3xOBWpsQTz/tQTXT88RovXD3Bon16NB/ov0=; b=TCvjhBgeJag7NH3X9tOiFfkJv0
-	knqNzazIPod2Mqlk/tXVXG9+Z80CWHNhbI0BhdHDs5Lp/onBQFzkYEK6/uE1ql0/f7k6E9POqaYFr
-	yT+YgD+6rsfluWPvgmpDZ7D2zbfsz3+LfL5qUkmbcyYPAjfA6k8ShV/P3Af1O30PCMc7PVAPZ9yTa
-	7pMzYKjXJXUSRS0r5XlVkbNZo59bChgYgCQ6PVVF1YYEo7vp4magAs6Ipk4Zbxq/iBs/WnPNq0n7G
-	DtUOEGKJzfWllaxf+LNaB+xs6F6X680BZn4WcFF6YRZUtVMNhwMZOUt625i56Ec6EZHgqiArYOvmd
-	WT4btFjw==;
-Received: from localhost ([::1]:19094 helo=hr1.samba.org) 
+	bh=EWPF0OW/mbJe1hAWm2Yc6pizAktVri9cmqSld7jn7jo=; b=O6v8BfLnpY8Sbf0MIxDyM+V/W9
+	X9NjIw3gJTbcur6AryCHsQwe6JHuoNRcUtP9pUR9oO9HgOwWN5XD7v/CIDVaO3u5Z764hafVAQpIT
+	jndnBOtmsKGxqxNt18u0opRnZzcgr1p4TUuZvJdNVu/IoQXvwMu4E99BCUlvOcyGkUWEEcPvbpFAs
+	YAmRcN/brkr5tlcXljBjziZ1WmovLNdbImg185e5mNWVnxQK0VW/M4Z3qJpbgXFsXXRPsxv1GwdAU
+	Rp7VU5p8hs3ozD4lenstXkIL5jhD6gVv38VTs6NvFsY2HKa1yiWmu4Nfgu4NXH8sl9qrqaFwmkkwv
+	9SzNbMJg==;
+Received: from localhost ([::1]:39722 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jrJby-005GGD-0N; Fri, 03 Jul 2020 11:12:06 +0000
-Received: from mail-io1-xd29.google.com ([2607:f8b0:4864:20::d29]:40230) 
+	id 1jrg4U-005S4x-Ud; Sat, 04 Jul 2020 11:11:03 +0000
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d]:33768) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jrJbs-005GG6-2E
- for samba-technical@lists.samba.org; Fri, 03 Jul 2020 11:12:02 +0000
-Received: by mail-io1-xd29.google.com with SMTP id q8so32082254iow.7
- for <samba-technical@lists.samba.org>; Fri, 03 Jul 2020 04:11:59 -0700 (PDT)
+ (Exim) id 1jrg4M-005S4o-AT
+ for samba-technical@lists.samba.org; Sat, 04 Jul 2020 11:10:57 +0000
+Received: by mail-ej1-x62d.google.com with SMTP id n26so23118210ejx.0
+ for <samba-technical@lists.samba.org>; Sat, 04 Jul 2020 04:10:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:from:date:message-id:subject:to;
- bh=6mip/vg9JB3BvNBgXO1ILogfEbM8O3tw3MI68DWP00U=;
- b=SoHytS2E4hH/o7dizYWgdzvGvNdpkyuo4A2CsJgm+mSpOp5wmJq3TTZ7oyIFX4wUz1
- kggkPJa9i9SE5zb3qxXIBmVBtBvn3cExYVhkD5efa6dCgEg1dYkyalP2JfSfqyV7tZ7i
- CQd5zlwYs2ro8Mx29VylqxqLymaW531tzQeZxMU7uuQ/L7PePPbs4j7KoIycP95c+0aw
- 90Gp/L5aU/rbh1T+k+Cht7kdhcEAFFgQktRpMs1GxpyTud1jVlgmYxXncPiXdZYjOF9a
- WKwNr4ISajouUSL5J/Ojk3UINtJ3O6IJCquvgpUnzO+UQXr1Mx3J+xQJlYIY4K26q842
- qMPw==
+ bh=2+xPdS6ffG8rq801TGe6Agc+sUFD7CGS0tNX+sVbnaI=;
+ b=BqQ3NAR4Xc4fMJVhct1AE/x4q0KBe70Dvw5yWB2FXxP7nUDuiI5vSSmDLJ6ZPXBC28
+ /IdceWhPLehxrF5hb6iy293yqljkrcC0QG2Oz1oo5j5OTlj/f8hDFQla9dEZtI+Xu5dN
+ 4GYEc3RMD2bvmLVb1QOWjmJRoDSpxFpJxb3oigeJs7lNd4tCE1X2WmseJA2E2WgqvAYG
+ 5R1bpt6wMWQt8r6CTeyiDs9TwKInxPljU1SuXS0pS7FwUSTE8ji59h5tW5ujbvweY9RZ
+ JJgJ/YnI6GJmz9QKgCHlSNoQEeYgP2FvzodT7QtBb6xXs3pGy6bc2iS88V7/+c29ynWD
+ Xb4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=6mip/vg9JB3BvNBgXO1ILogfEbM8O3tw3MI68DWP00U=;
- b=Qj46XQGIXzQAYGcwkCG0DlSv9IFlksBvLpw9VLRZbRq4TBcYSMfn9962GUj4oLkMv6
- QTUBUAslI2FG7HIyJ1ryUm2kjbvxVLntwZfQGwj2lH7BtXbxHurSnd+lBIwHxwVwmaoh
- M03uesBPRdwFgxn3HQYuYqw4Werz0quGIaQemJYWdwfs5dpmFmHTbfW1rd6cHjrIHn+P
- ElJpJ7N1ezY7/g1mWedugJhbLkMvoYgtV//oxjUSxDgLyFy5DjQNzFtQYrvwIKggEOzo
- t6Tq3W8rHuTUZl1cIoU+dG2G5RZxhchOH2UZJ+8QZbiFy59RFiaRuZF+wGyG/2jeQXJ2
- mYkw==
-X-Gm-Message-State: AOAM533rOlcSb3TFrMU/LWnps8tGRkhuhW2ElZXVn0lyPvMHkYkezvr8
- FmwkEeSPSaFLpDbbJgtOZR4uivHducSeBXYrxqRolw3i
-X-Google-Smtp-Source: ABdhPJxeJRVV8Qf89hOQoN7tWSBI8GKf1hCncc4FHyhcCV/pxA15AbvoJzkVUbW0F77AFchN6FbnTWDKYZrFcsPSyI8=
-X-Received: by 2002:a02:6d25:: with SMTP id m37mr15474515jac.10.1593774717733; 
- Fri, 03 Jul 2020 04:11:57 -0700 (PDT)
+ bh=2+xPdS6ffG8rq801TGe6Agc+sUFD7CGS0tNX+sVbnaI=;
+ b=lunf2IMGMx4tmMLU6TiWRNG9NAYPa07fitOel6xn5b4RoBGdF5ZRk2zMPHE9WNBbrh
+ tld7AeEs8nNDBZxAKQwdBi/J1T5SVTJm/dUOW6+sJ/7itXXzkFFIeRI48cNfWV6V/zgx
+ KYQLq8LuaIMEShAUdhp5i1k+lqEKaNqNEiFRHIyENgYPCxn8CVDkwzAEscFfUGY18Fkw
+ TB0xWNz0WZyY+slI18kGsxB0X5Yv8n89pZqQx9HG8E0LmXpmJ0csXgMJU5lzsvll/ciJ
+ CAhqkW4GmwN9RxJsmZnrwfOGalHAk0HI2VaD0+DOfKMjfDoPwxu3kKk9MMuMFv38khXT
+ 92SA==
+X-Gm-Message-State: AOAM532Awoa1h7FWhsQRXfEbp/prO3tVuUevqkP3QbchBIgLa/C9qOMg
+ eJGxAy55/WPIZE6uingvVM+1N1BfgUfOpIUzzcDkjOei
+X-Google-Smtp-Source: ABdhPJyi5K5ajxbNND91VUXGZF1rwoTzxvKfB+hI4h8kmWQZ9liOu6eW6vRDMpBOlr5h/ytb6nUTRCZunn2TXlBnzb8=
+X-Received: by 2002:a17:906:5fc4:: with SMTP id
+ k4mr35734724ejv.94.1593861051689; 
+ Sat, 04 Jul 2020 04:10:51 -0700 (PDT)
 MIME-Version: 1.0
-Date: Fri, 3 Jul 2020 16:41:46 +0530
-Message-ID: <CALmqtCV6cAiLua+kmfCdCoTKp0fTe2s1=_gVk6JEHz2B8JRx=A@mail.gmail.com>
-Subject: Query about second connection request with same tcp tuple
-To: samba-technical@lists.samba.org
+Date: Sat, 4 Jul 2020 14:05:24 +0300
+Message-ID: <CAH72RCUABcQkZ3yyWzATYi0ZeUTsLGGi90Kbk7ySAY6Z-BZSJg@mail.gmail.com>
+Subject: GSoC Update and Phase One Feedback
+To: Alexander Bokovoy <ab@samba.org>, "abartlet@samba.org" <abartlet@samba.org>,
+ Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>,
+ David Disseldorp <ddiss@samba.org>
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
@@ -65,28 +68,56 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Abhidnya Joshi via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Abhidnya Joshi <abhidnyachirmule@gmail.com>
+From: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
+Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Hi mentors,
 
-I have a query regarding smb connection request. How smb server should
-behave if second connection request comes with the same tuple as the
-existing one?
+I'm glad to have successfully completed phase one of the GSoC. I'm really
+grateful for the support and help you have provided during that time.
 
-By same tuple i mean, same client port as rest 3 things are anyways same
-for other connections.
+I wanted to give you feedback regarding the concerns raised in the just
+concluded phase one review and an update on building the packages for
+various distributions.
 
-The existing connection request is also just received and on the verge of
-getting responded by server and this new connection request comes with
-client's port same. ( response time is well within 45 sec)
+On writing a blog post on the work already done, I was thinking about
+writing it at the end of phase two as the project would be more mature than
+it's current state with some tests and build packages for the different
+distributions.
 
-I believe,  the new connection should be straightaway rejected as it can be
-regarded as duplicate?
+About my experience working with samba-tool, I hadn't had many problems
+working with it but to create a new user you have two options: create and
+add. There were some discussions on the mailing list about this and I think
+the verdict was to proceed with one and depreciate the other.
 
-I did not find any specifics in MS-SMB2
+Another issue I encountered was using samba-tool dns in which you have to
+pass in your administrator password for the realm interactively on the
+console or as a flag. With other commands this was not a requirement and
+i'm not sure why it is required with dns management.
 
-Thanks and regards
-Abhidnya Joshi
+Other than those two things the documentation for the sub-commands is
+wonderful and has really good examples.
+
+I have decided to work with the Open Build Service, from the recommendation
+made by Alexander, to build the packages for various distributions. I was
+making the assumption that the most popular distributions used with Samba
+AD DC are RPM and Debian based. I'm seeking the community's feedback so as
+not to make the wrong assumptions on this.
+I created an account with the build.opensuse.org and have been exploring
+the UI and going through the documentation for OBS. I also created a
+Webhook in Gitlab to push the code to build.opensuse.org when there is a
+commit in the master branch. Is this the right way to do it or is there
+another option?
+
+I also wanted to work on a better UI with some of the commands e.g showing
+the computer AD object. The current way for listing the results uses an
+alert group which isn't scrollable and can be a limitation when working
+with small screen sizes. I feel a better way to do it is to use a modal in
+which they appear on a list as they would on the console and make it
+scrollable if they don't fit on the current screen. There was also a
+suggestion from David on having to submit form input using the enter key
+and I will also work on it.
+
+Thank you.
