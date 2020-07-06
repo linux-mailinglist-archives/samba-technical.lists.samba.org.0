@@ -2,55 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D1C921523D
-	for <lists+samba-technical@lfdr.de>; Mon,  6 Jul 2020 07:37:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2591F2152AD
+	for <lists+samba-technical@lfdr.de>; Mon,  6 Jul 2020 08:25:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=cPv4/wExMc//UG7VjX1Mj8DNETQqCXcQNsG+qMgzGx8=; b=QSFMEHDfEsaTNx0wQLw7PMDRvX
-	mLzinztp0Y+krzUxu7QzeaFgvOSeUK4Kmnv9Syw4KwE99mFRDv7eu/GBiZ8tb/fJD7Klyd+3JVAyO
-	iNNsYEQQ0Fs2VhkFxK9gTr6NiFaENcoSMuvcaO1Xc3o6x1w7jhAUjUDjsIICfEVF5SI2aiu1hJPek
-	XEL6zYcMDHy2u5Y9jX7c6f5iF+ywY/zel9HTBh5NxLYwtSD2mv+7EtyuPxUcyRAHaoG+9uYscckqK
-	vW5/0ziLq02844a/utnc+tYOEKNZux1pGvXaeFQApwLqQ7z9EBiCdAKY31+dLknrFYmhhXc15OlFm
-	4sTw4u5Q==;
-Received: from localhost ([::1]:52314 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=dcPyzQpX8JdI/+2aktq+rYwh1NzCkqb2Xf6wEYG8Xog=; b=3kvZDTT21lJBiNslzVLnouI0XG
+	jcNKPBSEmKj2xLSc7o/RTEhzfWcFjZk2aA7CvlBIM9PbugeqdnRmDbycBsz0jGZx4Vm9fcEL/icQ0
+	0uptqg9dOWM3rsdELlj+jqoM7CnGazIeCjpjlXN7BBPt3ofON/sdSvPgnYOcujK5Dfcj2mVuPeu2o
+	uSGLAQu0F+iKIblz+ffnAqfinx/YajVT7K0xatUWS//hyoQ15tvYaxpm6ymGNd9+Tk6qhyCCmILwA
+	ehbzmLjhisNEQ00NgHXvXh13Oxo+bKw5O4RzWXMuaBHx3JQ30IPZbOlIcyh8mHabnwHnuFp3OjVL0
+	eAfEcEsw==;
+Received: from localhost ([::1]:54212 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jsJo0-005eaT-41; Mon, 06 Jul 2020 05:36:40 +0000
-Received: from mail-oi1-x231.google.com ([2607:f8b0:4864:20::231]:44819) 
+	id 1jsKYv-005ew4-Hn; Mon, 06 Jul 2020 06:25:09 +0000
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635]:38579) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jsJnt-005eaM-SE
- for samba-technical@lists.samba.org; Mon, 06 Jul 2020 05:36:36 +0000
-Received: by mail-oi1-x231.google.com with SMTP id k6so27242124oij.11
- for <samba-technical@lists.samba.org>; Sun, 05 Jul 2020 22:36:32 -0700 (PDT)
+ (Exim) id 1jsKYl-005eut-Jn
+ for samba-technical@lists.samba.org; Mon, 06 Jul 2020 06:25:02 +0000
+Received: by mail-ej1-x635.google.com with SMTP id w16so41219242ejj.5
+ for <samba-technical@lists.samba.org>; Sun, 05 Jul 2020 23:24:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=wmgW57FX7VTREx2TmFtkQICvNwWB+14zF59vN1GM4tQ=;
- b=Q1ySEwDfnLuAnKWS8Z2S9N8/d8/j6Y0sFiSgXn6tp8YZdIXqM2kxm4fuP+cpc5wTEl
- lrOX0eDDMfd++zojass0qPCtOtzcqYkgHCM0iRuKABI2/moXKq2rOyRDqdNQ88T6zy1g
- jEeEfTY3Ab1QT2HeIg47wrt9R6nYdWy7x+on1jNt5b7uYlWZT5/F3Sz/4myttSNBAy6p
- rj0XjWyUeSdA++bWhxSQ75UlPtkWBA3xrgakIpCyuWzrmAm4k6wi6hwS7iY+o14/58hg
- cLFpvDJCp7KAItt6pH9GQLEGdE/fF7ityAPrHHJW9KQH9Ho6EQ4ZF93yntISy9dD4yZA
- wwhA==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Q0codh+ZMSul9SfIBKV18szKQPW79x6WrciXT9Z1Seg=;
+ b=gCxL+pDVMaJbyYE5FdXM3V5tmTzX3TlDE+NCrMzWR/Q5GXK/ktlvKRW6azQQh5Pq90
+ vAgMzt3hshsimZM2pnzrK667kxCF8GnREZlR/b5HvFXah1uioQTBzhoXdRRbDU/6YzJx
+ wsAbP3+JnKCFsnBUZTm72lR3tdLvm62WJ3uo58vofE5sjeWMZnA9Ie0UucRJm64N69Z4
+ eNu6Au1E3hIndRZFjSSmB+92P3fXhjBlepS58JUCXN7bFvCdSQm+qQYQa2OtMQ5eHZIx
+ H7in/nYwzJO0i23wVKo+isRwx1HAZmhXUGr+jf+JwvCbFCrHMTFQSSfXYLhpKjOJCf0y
+ Ex9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=wmgW57FX7VTREx2TmFtkQICvNwWB+14zF59vN1GM4tQ=;
- b=lAEBD52QWOEn8+E36EjEuN6E2pT2GfxHXAqOROSgbjaGfiNIf1+oDFKXgu2mXk1JFL
- KsdFEuaFYtEravPJcQp985IK/FG0288EVCN4pkMesQlloWjFO6VF7n7UjHG79qEtybUr
- sZ62WEd/Sdp5c8a6aUPR+PQUpyGpTAHt2+CgSf9OiAYOYTmx2hb2FJP7q/r2m8T65Dbw
- Ab+HrT4qQIXqCXEmchXwCMzYt4VkmatfIAXgz8A91qkb2wZtTRTa5gablvXzFH3sCtYF
- gMIMAUCbAieK76rN393QvyPZZ+FxcsjIjnRLF0esXe/tdTWhkyqa94B/PgeqZjRrR50B
- RNhQ==
-X-Gm-Message-State: AOAM533AQ/Wmvwpyq/OefXkySLTg/sAwPC0H0885mn4mpxpQuTA0iBBa
- UONztpEnZmUhvR2IcnHUsDidiTW2oztwjgQsMaD92Q==
-X-Google-Smtp-Source: ABdhPJyuA8BGa+1sobS1YTSs12xXCIQz4PAitun5W+6j1rYSjv2hvjqB8S/jFV2I1DVFV8lwIvJZUzYaQEtK6lVcrO4=
-X-Received: by 2002:aca:c70f:: with SMTP id x15mr35702700oif.163.1594013790220; 
- Sun, 05 Jul 2020 22:36:30 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Q0codh+ZMSul9SfIBKV18szKQPW79x6WrciXT9Z1Seg=;
+ b=IPwmIP9GTbCRX1cv+lFTv8DbSJACkbqrD9VujXEGICOqDIKUCIjHYktGT3Wjs1CxX1
+ LBTiVB2ay8e7O76ZvWNA4gSveFwoEgXvfPuRw7x3W6MsKrwqLO5MFtRGE0Jvzx12/CcV
+ 1JREq+txzJldpJdNehvkRQpW9ZfSZE3vA7cN0TCErBHX4uRaaQ9p5Lhyz6YhFYCuPhZN
+ klQN9fwDdfHb0KuzqpMmnSRuZMdgYx7mn8JJ5CD7N+ZyfuBA+MLEO35P3K1au6oJDw6M
+ DddriCt6z7ety3Xz4IrJu7coSDnJ0wsu5sTpzvYp+rOemPVL5UZwDBM0Nj/9XBgEE4un
+ sShA==
+X-Gm-Message-State: AOAM5304zr2K3/LKmz32jWLBN7ykKWDw9tTZ74IfUmtYhAAl40n0a2AN
+ GUAP9lSdX3HSfp6ALsQlPQnZSSraZmrQyVJ9ZaYm0LeX
+X-Google-Smtp-Source: ABdhPJx86oO+jS9uOQGgx7NfA2l0Gv6GeprNr1ZZaQ/Ps4SbYKCPClW8WiGvHT8h2CRI+TkmwnmQRU7kgxyW46zCm6k=
+X-Received: by 2002:a17:906:5fc4:: with SMTP id
+ k4mr41749270ejv.94.1594016698620; 
+ Sun, 05 Jul 2020 23:24:58 -0700 (PDT)
 MIME-Version: 1.0
-Date: Mon, 6 Jul 2020 14:36:19 +0900
-Message-ID: <CAJDKJ9XnX6Ni8SEEfHXzW8zVa1PBkaJjbt8=N1F1qN+Ec=Kxmw@mail.gmail.com>
-Subject: How can I run server services?
-To: samba-technical@lists.samba.org
+References: <CAH72RCUABcQkZ3yyWzATYi0ZeUTsLGGi90Kbk7ySAY6Z-BZSJg@mail.gmail.com>
+ <20200704170227.GA866108@pinega.vda.li> <20200706061945.GC25598@pinega.vda.li>
+In-Reply-To: <20200706061945.GC25598@pinega.vda.li>
+Date: Mon, 6 Jul 2020 09:19:30 +0300
+Message-ID: <CAH72RCU=5yTWZ3hSf-_r-cHW2F_knbHW0eZRQ4ngXBkaucWM0Q@mail.gmail.com>
+Subject: Re: GSoC Update and Phase One Feedback
+To: Alexander Bokovoy <ab@samba.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -65,25 +71,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeygon Kim via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeygon Kim <xeros0320@gmail.com>
+From: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
+Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
+Cc: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>,
+ David Disseldorp <ddiss@samba.org>, "abartlet@samba.org" <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello.
+Thank you.
 
-I've been recently looking into samba source code for studying purposes.
+On Mon, Jul 6, 2020 at 9:19 AM Alexander Bokovoy <ab@samba.org> wrote:
 
-When I run samba binary in the default model, I can see that several
-different prefork worker processes are created.
-
-How can I run other tasks such as smbsrv or ldapsrv that are not created by
-default?
-
-In source4/smb_server/service_smb.c:96 it says that server_service_smb_init
-is called at smbd startup but when I manually add breakpoint to the
-function it doesn't stop.
-
-I would appreciate any help.
-
-Thanks.
+> On la, 04 hein=C3=A4 2020, Alexander Bokovoy via samba-technical wrote:
+> > > I have decided to work with the Open Build Service, from the
+> recommendation
+> > > made by Alexander, to build the packages for various distributions. I
+> was
+> > > making the assumption that the most popular distributions used with
+> Samba
+> > > AD DC are RPM and Debian based. I'm seeking the community's feedback
+> so as
+> > > not to make the wrong assumptions on this.
+> > > I created an account with the build.opensuse.org and have been
+> exploring
+> > > the UI and going through the documentation for OBS. I also created a
+> > > Webhook in Gitlab to push the code to build.opensuse.org when there
+> is a
+> > > commit in the master branch. Is this the right way to do it or is the=
+re
+> > > another option?
+> >
+> > This sounds great -- we can start with RPMs as the spec file is already
+> > there from the Cockpit starter kit and it works, so it should be
+> > possible to instruct OBS to build RPM packages already. For Debian
+> > packages, I'll look tomorrow for an example (Cockpit is available for
+> > Debian, so we shouldn't have a problem to find an example for external
+> > plugin package build).
+>
+> For Debian packaging, I found this very simple tutorial:
+> https://tribaal.io/very-simple-debian-package.html
+>
+> And then there is a special helper that allows to add Debian packaging
+> to a nodejs app: https://github.com/heartsucker/node-deb
+>
+> The latter is not exactly what is needed because it is tilted towards
+> actual applications, not plugins like we have, but it should help
+> started with a boiler plate.
+>
+> Cockpit itself builds a tarball for javascript-related stuff
+> and then simply installs its content into the expected locations.
+>
+> Andrew, can you please help with the Debian packaging?
+>
+> --
+> / Alexander Bokovoy
+>
