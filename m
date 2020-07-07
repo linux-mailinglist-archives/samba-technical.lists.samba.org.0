@@ -2,50 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A437216B13
-	for <lists+samba-technical@lfdr.de>; Tue,  7 Jul 2020 13:08:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37E212172DB
+	for <lists+samba-technical@lfdr.de>; Tue,  7 Jul 2020 17:56:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=iKdaO6CEUDG6IlkJxvmHDRV/GglQUt9ttwh1Iyt2hBA=; b=wYHsSM1P7tst05aRXe369hxZZJ
-	dgXouakp7DxRZvx2xPdvgsuPNxJdtDus0mE81BqVxGh3t5hWRlJKgdW2sITfoUPfeI2KFYaBKiFMo
-	kmsK4JLB6+OQmS7yYE5t8iHq4eFwIhdip+V0xhUVBBvwK51dtWRxIqqTIQ3KdSdHZmJFtDaqOg77/
-	UIqaWrq86/CdAFWI9sNtE4dzFGUxYnTA7c8qsoJEguQRyjXQxbm9BIBRqE6dUVE0PJDrkbdiipCon
-	koOl7HSTrrmDK4gu6XPIrzGIluS/pjGKBfFTsHWamAGLMphhyjkN/DEI+ZBk2qnaiq8Q7WYicJtPC
-	WsZjE0sQ==;
-Received: from localhost ([::1]:52748 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=Su2RIR4wh3PJ9TyjYoCsRlXXBWLS0DtOl7sJTm+sltA=; b=W66KbfA9c7D42SnmnIynCTpLci
+	eJNPAvr29FK8SMjR7PLZ6YxXbB5hGTJiBdhrR7LjZOJZLNz7JLr//txbSfsWQnGgVrODAny/HHbW7
+	bYvV7bqHXX1iOcYR8Isa75CNcIgN7D7mxVXPO+aEm99agaeAGjUREr1/H1zCYuCswx8jEdcYAEwYh
+	rphyfGzH+amBH3de48iszQVrdIwTX66t8g7GmKfSrIsFS7qjv5ty4wH+arl1dNhhH9O7Dup+JSw/C
+	8bkTa49t2vr8QrXvpaw01l/tdy/+7964aq6DdbaWg+sHOUw1ysrj8UwXWkCyx3h6LMutEyVXSPW+O
+	nP6tyvVA==;
+Received: from localhost ([::1]:24740 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jslSo-005u5d-I1; Tue, 07 Jul 2020 11:08:38 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55912) 
+	id 1jspwV-005xGh-VM; Tue, 07 Jul 2020 15:55:36 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:52168) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jslSi-005u5W-Hv
- for samba-technical@lists.samba.org; Tue, 07 Jul 2020 11:08:35 +0000
+ (Exim) id 1jspwO-005xGU-OG
+ for samba-technical@lists.samba.org; Tue, 07 Jul 2020 15:55:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=iKdaO6CEUDG6IlkJxvmHDRV/GglQUt9ttwh1Iyt2hBA=; b=m28B1bwJCPVRz348LoYF4SOibb
- GeQ1KAcs7u67bO1aRNUVbLt3ib6iBnXs5w6M7taHg5iRUpASA3DSkJytRNKbWc51pmNMWAWJ1VMQ/
- TXJ+chJBzRjbes2/iUaBIP8vS/apwhRM6f5V5AhnZMOWHAQ4zNridJdmPMFtA05vuYfCm0iyOgxLB
- Oi4ZFyGf6XNOObYw/ujjSPr8gPj6AmqF79WwIjm2z4i3GJQ0NQvnEO8tcVe38dG4abbdS363ZOe6x
- tv+ZimH8t9oAnxeVRtSKq9SSh1Y/M64XXm6cm7juvB0ZMG99l1BbGDULuailVilqLGblbL6r4Ypem
- OJ6jGUvMQL67uMtjepOQUTKUcKyDwXq3B8v5riWEO1snweNVvSL0NYfzZsF2xMW+yBS9RzFNpHkMI
- sLEsdwdxInLQmr8X8ZT38u6NKrBgnucWVeGumviY0VyHnh5sGx9ZbveTC4UAW7uDHfHY3MoaJNK5/
- Xe1E73Q4ntSOwKlLRrXUB4Hx;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=Su2RIR4wh3PJ9TyjYoCsRlXXBWLS0DtOl7sJTm+sltA=; b=sjf4JA8o8yT511A4mt07bQErN/
+ Mksc3vzuAvjzj+dtaMhoM5MvCmpg5HZp/4deKbmt1swW0DiCrIo6ZhDuNNe4WCLDjhUktTrw+h38q
+ QA6wjNsiBnLL3oJ1GWs0ccV7pNY3Q43YhU6HKzpJWIOX99jFTo944NpG/+aWPnqNkQ1L47AMT0eDy
+ JK/p6nxZkpkGXNMYG0bH6OSRFOb16uq8wddG7zqDfvB7xJNbWuwMx3LhjA3FMEbZNQ3aLjODymETb
+ zRX7BkEGqZzmU/mTWtEd2mTBoZz9Qs3S8yNN5a0eDLBk0RrZ/E3Fb3ghWbHRFkfN4g7KSRi5l0Ymv
+ ojN1gZL618iCRX3zPdP1Arujq0lcPbZQ3LgBu1w0mnQ9AOJbGfxTiy0yHXheLotes0eCJ1JLo8gn/
+ wIVL9xo7fZogq7JsbWDYgta7yb/5zvdxBzQ+woesXlpNTriH2ECh2OLzBTdmC0gt+x6ezn/FI0AHQ
+ Ybe+R4lLDwbHSgyJ5KJZhjiZ;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jslSh-00031X-28; Tue, 07 Jul 2020 11:08:31 +0000
+ (Exim) id 1jspwM-0005NH-WD; Tue, 07 Jul 2020 15:55:27 +0000
 To: Isaac Boukris <iboukris@gmail.com>,
  Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Andreas Schneider <asn@samba.org>, Andrew Bartlett <abartlet@samba.org>
-References: <CAC-fF8S_WZuALxjhjFKhYeaKjhrccjq2XG6k=db18o3RYFpWrA@mail.gmail.com>
+ Andrew Bartlett <abartlet@samba.org>
 Subject: Re: Deprecate net -k?
-Message-ID: <7201cbce-7e3c-0fdf-6334-43443d3582e2@samba.org>
-Date: Tue, 7 Jul 2020 13:08:26 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+Date: Tue, 07 Jul 2020 17:55:26 +0200
+Message-ID: <7561779.ngQVxjjk1q@magrathea>
+In-Reply-To: <7201cbce-7e3c-0fdf-6334-43443d3582e2@samba.org>
+References: <CAC-fF8S_WZuALxjhjFKhYeaKjhrccjq2XG6k=db18o3RYFpWrA@mail.gmail.com>
+ <7201cbce-7e3c-0fdf-6334-43443d3582e2@samba.org>
 MIME-Version: 1.0
-In-Reply-To: <CAC-fF8S_WZuALxjhjFKhYeaKjhrccjq2XG6k=db18o3RYFpWrA@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="gfxphCcKXTRyM3hrSZ9nlKflz8njklDQP"
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,109 +57,129 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---gfxphCcKXTRyM3hrSZ9nlKflz8njklDQP
-Content-Type: multipart/mixed; boundary="NN8Di3xtXpWuHGUO8sSBlnJC6vb4HfvZQ";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Isaac Boukris <iboukris@gmail.com>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Andreas Schneider <asn@samba.org>, Andrew Bartlett <abartlet@samba.org>
-Message-ID: <7201cbce-7e3c-0fdf-6334-43443d3582e2@samba.org>
-Subject: Re: Deprecate net -k?
-References: <CAC-fF8S_WZuALxjhjFKhYeaKjhrccjq2XG6k=db18o3RYFpWrA@mail.gmail.com>
-In-Reply-To: <CAC-fF8S_WZuALxjhjFKhYeaKjhrccjq2XG6k=db18o3RYFpWrA@mail.gmail.com>
+On Tuesday, 7 July 2020 13:08:26 CEST Stefan Metzmacher via samba-technical 
+wrote:
+> Hi Issac,
 
---NN8Di3xtXpWuHGUO8sSBlnJC6vb4HfvZQ
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Hi Isaac :-)
 
-Hi Issac,
+> Andreas and I were working on a plan to unify the cmdline arguments
+> for client authentication across all our commands (including python
+> scripts). We should always get a cli_crendential structure out of
+> the cmdline parsing and base all other code just on that.
+> 
+> Andreas, can you post our current plan?
 
-> I think it has been discussed, but I just want to share some tests I
-> did in the context of MR 1402 work.
-
-I also hit this in my preparations for S4U2Self (I'll post more about
-that later).
-
-> The man page of the net command says:
-> -k|--kerberos
-> Try to authenticate with kerberos. Only useful in an Active Directory
-> environment.
->=20
-> In practice it means that some net-ads commands use ntlm by default,
-> e.g. net-ads-join force the use of ntlm for the CIFS connection if -k
-> is not specified, even though it uses krb5 for the LDAP connection.
->=20
-> Fails due to the CIFS failure:
-> net ads join -UAdministrator@ACME.COM%pwd --option=3Dgensec:ntlmssp=3Dn=
-o
-> Succeeds both krb5:
-> net ads join -k  -UAdministrator@ACME.COM%pwd --option=3Dgensec:ntlmssp=
-=3Dno
->=20
-> Succeeds both NTLM (although AS-REQs are still being performed):
-> net ads join -UAdministrator@ACME.COM%pwd --option=3Dgensec:gse_krb5=3D=
-no
-> net ads join -k -UAdministrator@ACME.COM%pwd --option=3Dgensec:gse_krb5=
-=3Dno
->=20
-> Other commands such as net-ads-search on the other hand don't seem to
-> care about the -k flag and only use krb5 (thus fail with
-> gensec:gse_krb5=3Dno).
->=20
-> I think perhaps we can deprecate the -k option and just do it by defaul=
-t.
-
-The bad thing is that -k is implemented different than in smbclient.
-The key part is the behavior without -U.
-
-smbclient only uses the users global ccache if -k is given,
-but (at least some) net commands ignore -k completely.
-
-Andreas and I were working on a plan to unify the cmdline arguments
-for client authentication across all our commands (including python
-scripts). We should always get a cli_crendential structure out of
-the cmdline parsing and base all other code just on that.
-
-Andreas, can you post our current plan?
-
-I guess the only thing is to try to break as less as possible,
-but at the some point just make sure we have a sane behavior for the
-future and announce that in WHATSNEW.
-
-metze
+Below is my current TODO list, it is a bit cryptic but should work for now.
 
 
---NN8Di3xtXpWuHGUO8sSBlnJC6vb4HfvZQ--
+WIP branch:
+https://gitlab.com/samba-team/devel/samba/-/commits/asn/master-cli-creds
 
---gfxphCcKXTRyM3hrSZ9nlKflz8njklDQP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+TODO
+====
 
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl8EV6oACgkQDbX1YShp
-vVbPvRAAnBQ2eMVzazBBUQw+0rJQe0sovfSIVXzqLHdqeczQDeUQNgjmU2vob/OU
-tzTVJm54PvakMO3bqdHfumCYtpvFklsTs60evJLVUpt7jzKwKPBVi+3Ubm0OVCZ7
-ke691a0PjBvQdZI++iU2powtUZAKTkzR0N6nufDDpvtBFzJomU/rF/ErZB8OScdP
-1hxf8qCtQpM8of/9ddbSKnskpc2MMoQk7mn6PL2p12961YNntfGEWn7r/1EZeTNe
-L8O+e6S4w87iSq1W9ly4QRobftKZK76Je5cwbHYpdCtbwldaQqrtqM6IQV9gMRBW
-D5lYP4MVuAooKm+V4rP5loD8iYfF2kqSyqiqe+8DurOMOcp1xVlBknCSaiGdDMI8
-yw4bPhJF5hLKhFvSmVmW8ucE1sfXwPdor/vov6N2dSQInlUkvSiRY2jwo/s/6/SR
-FZgL/wgb221HJ7HNtc0DzeWCqp/NXzKwdNUrqFKA8VGNiFJ+YVJqB5jRxwGrfowh
-i6EZjwpSfXz4EG6dmVnQxaC3hdVNxHz7RkQMJf1o+srRfGkUAliIwtU9G38/Id0E
-AyeVMaYrZtMMRpHlVCrGz9TN5dYjQfdmIu3PVT8HxJxRsCoEe/uuMggsjQoJH1JL
-9GX7kbX6Q6491Ay0I8vFNM79JG9NtZe02RBUW0AtNHzPbfyJHPA=
-=4BA0
------END PGP SIGNATURE-----
+TEST:
+-----
 
---gfxphCcKXTRyM3hrSZ9nlKflz8njklDQP--
+Add
+echo locDCpass1 | bin/rpcclient ncacn_np:$SERVER -UAdministrator -c 
+getusername 
+
+echo locDCpass1 | USER=administrator bin/rpcclient ncacn_np:$SERVER -c 
+getusername
+-> DONE https://gitlab.com/samba-team/samba/-/merge_requests/1271
+
+Migrate s3 client code to cli_credentials
+-> DONE https://gitlab.com/samba-team/samba/-/merge_requests/1362
+
+
+SMB.CONF:
+---------
+
+SMB_SIGNING_VALS="default|off|if_required|desired|required"
+Create one function translating signing state string to enum
+see set_cmdline_auth_info_signing_state and enum_smb_signing_vals
+
+Add 'server smb encrypt' (done)
+  -> smb encrypt as alias
+Add 'client smb encrypt' (done)
+
+Add cli_credentials_set_smb_singing(),
+cli_credentials_set_smb_ipc_signing(),
+cli_credentials_set_smb_encryption(). - DONE
+
+Use cli_creds smb encryption:
+tig -7 b06e7ea5cbc0e46c0c42d6cdeb3a14f3cf21f1c6 - DONE
+
+Add smb encrytpion for source4/libcli - WIP
+
+
+Check do_connect() in client.c
+
+
+CMDLINE CLI:
+------------
+
+-> parse popts
+
+-> set password callback, if not --use-krb5-ccache and not
+   --use-ccache and not --no-pass and not auth-file
+
+--use-kerberos=yes|auto|no|default
+   default only if we add 'client use kerberos' as smb.conf option
+
+--use-krb5-ccache
+  imply --use-kerberos=yes
+--krb5-cache=$PATH
+
+'-U... -k' =>
+   --use-kerberos=yes
+'-k' without -U =>
+   --use-krb5-cache
+
+--use-krb5-ccache and --use-ccache
+=> not supported,
+   TODO: --use-winbind-ccache that provides
+         generic support for krb5 and ntlm
+Rename --use-ccache to --use-winbind-ccache (removes --use-ccache?)
+
+Add --smb-signing=$SMB_SIGNING_VALS
+ also set GENSEC_FEATURE_SIGN for desired/required
+ --signing=$SMB_SIGNING_VALS (as legacy)
+ '-S $SMB_SIGNING_VALS' ??? (only smbclient?)
+ '-S' check what smbtorture is actually using
+Remove -S for signing and use only long option
+
+Add --smb-encryption=$SMB_SIGNING_VALS
+-e => --smb-encryption=required
+      also set GENSEC_FEATURE_SEAL??? => defer to --gensec-protection
+Remove -e and use only long option
+
+TODO: what about 'net'...
+break it and use options as above?
+
+
+Add the following???
+--gensec-client-protection=[default,seal,sign,plain]
+=> see also "ldap client sasl wrapping"
+=> default from "gensec client protection"
+
+
+
+
+
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
+
 
