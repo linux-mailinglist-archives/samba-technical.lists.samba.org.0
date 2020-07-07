@@ -2,57 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC31F216AAF
-	for <lists+samba-technical@lfdr.de>; Tue,  7 Jul 2020 12:48:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A437216B13
+	for <lists+samba-technical@lfdr.de>; Tue,  7 Jul 2020 13:08:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=n7mpwWtyi/GtPn0VfwnPh9kymMtXitnAn158V07Y+oA=; b=DJviMO8tm3avTEsm0ebg+BI43w
-	lvIUq2eA1Gse7wicKUPLXqHAy0PA44zsf3RpHjb0/nWK77Cs3e2QJ7pmEAC58yndJ18zmTz73ROKc
-	MurSgxOXf9MRtnLndRL0LM3QtNYK7JDOn3wAieMgYZfokbreRe2IEXk1a4z3TcKTk0ccfmskIcscc
-	lZskhYM3t4zaxpFJmWEyia1k7sIK45zUer43fGAKoMcBUt8zOLrEt+wKF4afsxnuwa7vN5Srl0PfX
-	VOD1357Rbs3xU/ou/la1cFtNHNy9OpRSqnS5XmEphJSDRYBwO6mqAFi8R2q64XbzsoD0qXnlmrVaC
-	zZtJ1igw==;
-Received: from localhost ([::1]:44976 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=iKdaO6CEUDG6IlkJxvmHDRV/GglQUt9ttwh1Iyt2hBA=; b=wYHsSM1P7tst05aRXe369hxZZJ
+	dgXouakp7DxRZvx2xPdvgsuPNxJdtDus0mE81BqVxGh3t5hWRlJKgdW2sITfoUPfeI2KFYaBKiFMo
+	kmsK4JLB6+OQmS7yYE5t8iHq4eFwIhdip+V0xhUVBBvwK51dtWRxIqqTIQ3KdSdHZmJFtDaqOg77/
+	UIqaWrq86/CdAFWI9sNtE4dzFGUxYnTA7c8qsoJEguQRyjXQxbm9BIBRqE6dUVE0PJDrkbdiipCon
+	koOl7HSTrrmDK4gu6XPIrzGIluS/pjGKBfFTsHWamAGLMphhyjkN/DEI+ZBk2qnaiq8Q7WYicJtPC
+	WsZjE0sQ==;
+Received: from localhost ([::1]:52748 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jsl8f-005t2X-4V; Tue, 07 Jul 2020 10:47:49 +0000
-Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:39547) 
+	id 1jslSo-005u5d-I1; Tue, 07 Jul 2020 11:08:38 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55912) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jsl8Z-005t2Q-Jh
- for samba-technical@lists.samba.org; Tue, 07 Jul 2020 10:47:45 +0000
-Received: by mail-lf1-x12b.google.com with SMTP id d21so24434386lfb.6
- for <samba-technical@lists.samba.org>; Tue, 07 Jul 2020 03:47:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=n7mpwWtyi/GtPn0VfwnPh9kymMtXitnAn158V07Y+oA=;
- b=fKtL6ylDFwJiGvQHokzkeh+DlMPptM7tmzR/8aueYPtiwV3FO4Y9swt7ksxZu3lnZj
- +Kl4x44qBI2IAE+Yq3WxiXk6F3x1OWPT0ipkaGSU0n5RZVZrckgUD4sKKGNaeY9lUn39
- r5L0xqmXtyi5aFFOI/3bOAYGniSWyavgKgZMZqMhc/aDq/eL41Qwd7M/Wt5K/M9uaDcp
- fMsFlCw1g8FAXquRKXiJaov42SDvJZSylqvtpj/LVcRC/6Lv3IS3Y5rcbQF/CybNNM6v
- 3PXYXAhNxrl+Er8qPhU/HNeDstLtF2+FGBPAFDVvaHq0La9ekEG7xcOmGWbmBn9PCVVO
- IA2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=n7mpwWtyi/GtPn0VfwnPh9kymMtXitnAn158V07Y+oA=;
- b=tWMYDPmnGuvXmET0RhpeHvBEVPYCM7DYYJlQBQt++lqy1U0f7brBRNSknRoK92Prkz
- z3h3zSD56NZ+OQddh7hPyNzdeUkuItRbWmgN63ZG//ds0rnzAw9MLN1tJ1QTWcg3RIuy
- lwlHiYrjssDBQ2qrhX1Z/4FlnQQyQ/ZZgsk8ZfzkkSozssmgRnSG+IxF+/yzikPnog36
- ofgnCJn/Nz6H+30jduv85w+NHOTfuSJER/9KhOLSzIZkKbPfOEWifahdjAA+u2+kTRhw
- nJbrRhFxUdV4wWG2Ogc3VRu4MsOjitqCMQ3FLygu2p0//au2PxLrPLKj3y0Ex3h3p6We
- X87g==
-X-Gm-Message-State: AOAM533LGxkKk02qpcg7rTni0yFx6+fggeqsv1NE3L/t01UgvV+Ogn9/
- V/fMJyTxgrPWOo8lr11eOr3ioXM9Uexnm7JplhdqaVfr
-X-Google-Smtp-Source: ABdhPJyQEZJOBlSjhp9fSFoPv7HM6mzJwDDdCO5r4Tsd8gkVgUzAryLUfsQ9L6kunta34RCQrvRk/biKNWhnT80rUTw=
-X-Received: by 2002:a19:385a:: with SMTP id d26mr33255101lfj.211.1594118860795; 
- Tue, 07 Jul 2020 03:47:40 -0700 (PDT)
+ (Exim) id 1jslSi-005u5W-Hv
+ for samba-technical@lists.samba.org; Tue, 07 Jul 2020 11:08:35 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=iKdaO6CEUDG6IlkJxvmHDRV/GglQUt9ttwh1Iyt2hBA=; b=m28B1bwJCPVRz348LoYF4SOibb
+ GeQ1KAcs7u67bO1aRNUVbLt3ib6iBnXs5w6M7taHg5iRUpASA3DSkJytRNKbWc51pmNMWAWJ1VMQ/
+ TXJ+chJBzRjbes2/iUaBIP8vS/apwhRM6f5V5AhnZMOWHAQ4zNridJdmPMFtA05vuYfCm0iyOgxLB
+ Oi4ZFyGf6XNOObYw/ujjSPr8gPj6AmqF79WwIjm2z4i3GJQ0NQvnEO8tcVe38dG4abbdS363ZOe6x
+ tv+ZimH8t9oAnxeVRtSKq9SSh1Y/M64XXm6cm7juvB0ZMG99l1BbGDULuailVilqLGblbL6r4Ypem
+ OJ6jGUvMQL67uMtjepOQUTKUcKyDwXq3B8v5riWEO1snweNVvSL0NYfzZsF2xMW+yBS9RzFNpHkMI
+ sLEsdwdxInLQmr8X8ZT38u6NKrBgnucWVeGumviY0VyHnh5sGx9ZbveTC4UAW7uDHfHY3MoaJNK5/
+ Xe1E73Q4ntSOwKlLRrXUB4Hx;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jslSh-00031X-28; Tue, 07 Jul 2020 11:08:31 +0000
+To: Isaac Boukris <iboukris@gmail.com>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Andreas Schneider <asn@samba.org>, Andrew Bartlett <abartlet@samba.org>
+References: <CAC-fF8S_WZuALxjhjFKhYeaKjhrccjq2XG6k=db18o3RYFpWrA@mail.gmail.com>
+Subject: Re: Deprecate net -k?
+Message-ID: <7201cbce-7e3c-0fdf-6334-43443d3582e2@samba.org>
+Date: Tue, 7 Jul 2020 13:08:26 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-Date: Tue, 7 Jul 2020 12:47:30 +0200
-Message-ID: <CAC-fF8S_WZuALxjhjFKhYeaKjhrccjq2XG6k=db18o3RYFpWrA@mail.gmail.com>
-Subject: Deprecate net -k?
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Andreas Schneider <asn@samba.org>, 
- Andrew Bartlett <abartlet@samba.org>, Stefan Metzmacher <metze@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <CAC-fF8S_WZuALxjhjFKhYeaKjhrccjq2XG6k=db18o3RYFpWrA@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="gfxphCcKXTRyM3hrSZ9nlKflz8njklDQP"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,37 +59,109 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@gmail.com>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--gfxphCcKXTRyM3hrSZ9nlKflz8njklDQP
+Content-Type: multipart/mixed; boundary="NN8Di3xtXpWuHGUO8sSBlnJC6vb4HfvZQ";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Isaac Boukris <iboukris@gmail.com>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Andreas Schneider <asn@samba.org>, Andrew Bartlett <abartlet@samba.org>
+Message-ID: <7201cbce-7e3c-0fdf-6334-43443d3582e2@samba.org>
+Subject: Re: Deprecate net -k?
+References: <CAC-fF8S_WZuALxjhjFKhYeaKjhrccjq2XG6k=db18o3RYFpWrA@mail.gmail.com>
+In-Reply-To: <CAC-fF8S_WZuALxjhjFKhYeaKjhrccjq2XG6k=db18o3RYFpWrA@mail.gmail.com>
 
-I think it has been discussed, but I just want to share some tests I
-did in the context of MR 1402 work.
+--NN8Di3xtXpWuHGUO8sSBlnJC6vb4HfvZQ
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-The man page of the net command says:
--k|--kerberos
-Try to authenticate with kerberos. Only useful in an Active Directory
-environment.
+Hi Issac,
 
-In practice it means that some net-ads commands use ntlm by default,
-e.g. net-ads-join force the use of ntlm for the CIFS connection if -k
-is not specified, even though it uses krb5 for the LDAP connection.
+> I think it has been discussed, but I just want to share some tests I
+> did in the context of MR 1402 work.
 
-Fails due to the CIFS failure:
-net ads join -UAdministrator@ACME.COM%pwd --option=gensec:ntlmssp=no
-Succeeds both krb5:
-net ads join -k  -UAdministrator@ACME.COM%pwd --option=gensec:ntlmssp=no
+I also hit this in my preparations for S4U2Self (I'll post more about
+that later).
 
-Succeeds both NTLM (although AS-REQs are still being performed):
-net ads join -UAdministrator@ACME.COM%pwd --option=gensec:gse_krb5=no
-net ads join -k -UAdministrator@ACME.COM%pwd --option=gensec:gse_krb5=no
+> The man page of the net command says:
+> -k|--kerberos
+> Try to authenticate with kerberos. Only useful in an Active Directory
+> environment.
+>=20
+> In practice it means that some net-ads commands use ntlm by default,
+> e.g. net-ads-join force the use of ntlm for the CIFS connection if -k
+> is not specified, even though it uses krb5 for the LDAP connection.
+>=20
+> Fails due to the CIFS failure:
+> net ads join -UAdministrator@ACME.COM%pwd --option=3Dgensec:ntlmssp=3Dn=
+o
+> Succeeds both krb5:
+> net ads join -k  -UAdministrator@ACME.COM%pwd --option=3Dgensec:ntlmssp=
+=3Dno
+>=20
+> Succeeds both NTLM (although AS-REQs are still being performed):
+> net ads join -UAdministrator@ACME.COM%pwd --option=3Dgensec:gse_krb5=3D=
+no
+> net ads join -k -UAdministrator@ACME.COM%pwd --option=3Dgensec:gse_krb5=
+=3Dno
+>=20
+> Other commands such as net-ads-search on the other hand don't seem to
+> care about the -k flag and only use krb5 (thus fail with
+> gensec:gse_krb5=3Dno).
+>=20
+> I think perhaps we can deprecate the -k option and just do it by defaul=
+t.
 
-Other commands such as net-ads-search on the other hand don't seem to
-care about the -k flag and only use krb5 (thus fail with
-gensec:gse_krb5=no).
+The bad thing is that -k is implemented different than in smbclient.
+The key part is the behavior without -U.
 
-I think perhaps we can deprecate the -k option and just do it by default.
+smbclient only uses the users global ccache if -k is given,
+but (at least some) net commands ignore -k completely.
+
+Andreas and I were working on a plan to unify the cmdline arguments
+for client authentication across all our commands (including python
+scripts). We should always get a cli_crendential structure out of
+the cmdline parsing and base all other code just on that.
+
+Andreas, can you post our current plan?
+
+I guess the only thing is to try to break as less as possible,
+but at the some point just make sure we have a sane behavior for the
+future and announce that in WHATSNEW.
+
+metze
+
+
+--NN8Di3xtXpWuHGUO8sSBlnJC6vb4HfvZQ--
+
+--gfxphCcKXTRyM3hrSZ9nlKflz8njklDQP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl8EV6oACgkQDbX1YShp
+vVbPvRAAnBQ2eMVzazBBUQw+0rJQe0sovfSIVXzqLHdqeczQDeUQNgjmU2vob/OU
+tzTVJm54PvakMO3bqdHfumCYtpvFklsTs60evJLVUpt7jzKwKPBVi+3Ubm0OVCZ7
+ke691a0PjBvQdZI++iU2powtUZAKTkzR0N6nufDDpvtBFzJomU/rF/ErZB8OScdP
+1hxf8qCtQpM8of/9ddbSKnskpc2MMoQk7mn6PL2p12961YNntfGEWn7r/1EZeTNe
+L8O+e6S4w87iSq1W9ly4QRobftKZK76Je5cwbHYpdCtbwldaQqrtqM6IQV9gMRBW
+D5lYP4MVuAooKm+V4rP5loD8iYfF2kqSyqiqe+8DurOMOcp1xVlBknCSaiGdDMI8
+yw4bPhJF5hLKhFvSmVmW8ucE1sfXwPdor/vov6N2dSQInlUkvSiRY2jwo/s/6/SR
+FZgL/wgb221HJ7HNtc0DzeWCqp/NXzKwdNUrqFKA8VGNiFJ+YVJqB5jRxwGrfowh
+i6EZjwpSfXz4EG6dmVnQxaC3hdVNxHz7RkQMJf1o+srRfGkUAliIwtU9G38/Id0E
+AyeVMaYrZtMMRpHlVCrGz9TN5dYjQfdmIu3PVT8HxJxRsCoEe/uuMggsjQoJH1JL
+9GX7kbX6Q6491Ay0I8vFNM79JG9NtZe02RBUW0AtNHzPbfyJHPA=
+=4BA0
+-----END PGP SIGNATURE-----
+
+--gfxphCcKXTRyM3hrSZ9nlKflz8njklDQP--
 
