@@ -2,49 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46DB6215299
-	for <lists+samba-technical@lfdr.de>; Mon,  6 Jul 2020 08:20:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC31F216AAF
+	for <lists+samba-technical@lfdr.de>; Tue,  7 Jul 2020 12:48:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=XFHLYzu+YY3KTeH6QhfttueaKhoCvRNiI+eU5BSXQ3s=; b=eMfWqT9GkBc1+J+HxZvzE+NgKV
-	GDRcxbXO/+32lkDXhHQTz9FS3Pd1TcA6ukV/CKDaNM7+eaByrGQIRfgwTv855E49gOCq3wfIb63ul
-	bayK4Mu613Yzz5gxJHqwzg6t088ex9PsWaiTbHc0ayJDGURbeFXtM7v73zihOG2FK/+rF7ficZvH5
-	M+bZC2Swp/Kx2yKLrAWCA/fVA5e72PSg4KfsFWXsgoEKQM8LlNcfzg/n0rfGWBtEEymJL9b3mnuid
-	p7sFoCskeMTU+Wip2YMGdPlwQZkcGXLidcCfdzSKjvAl1sHRC3CEBYdSEed3v4QKluqNOTF5sE1AE
-	EfkFYKjA==;
-Received: from localhost ([::1]:53462 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=n7mpwWtyi/GtPn0VfwnPh9kymMtXitnAn158V07Y+oA=; b=DJviMO8tm3avTEsm0ebg+BI43w
+	lvIUq2eA1Gse7wicKUPLXqHAy0PA44zsf3RpHjb0/nWK77Cs3e2QJ7pmEAC58yndJ18zmTz73ROKc
+	MurSgxOXf9MRtnLndRL0LM3QtNYK7JDOn3wAieMgYZfokbreRe2IEXk1a4z3TcKTk0ccfmskIcscc
+	lZskhYM3t4zaxpFJmWEyia1k7sIK45zUer43fGAKoMcBUt8zOLrEt+wKF4afsxnuwa7vN5Srl0PfX
+	VOD1357Rbs3xU/ou/la1cFtNHNy9OpRSqnS5XmEphJSDRYBwO6mqAFi8R2q64XbzsoD0qXnlmrVaC
+	zZtJ1igw==;
+Received: from localhost ([::1]:44976 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jsKTr-005eoK-CU; Mon, 06 Jul 2020 06:19:55 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12006) 
+	id 1jsl8f-005t2X-4V; Tue, 07 Jul 2020 10:47:49 +0000
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:39547) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jsKTk-005eoD-W0
- for samba-technical@lists.samba.org; Mon, 06 Jul 2020 06:19:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=XFHLYzu+YY3KTeH6QhfttueaKhoCvRNiI+eU5BSXQ3s=; b=qZXaQIF8Wq9NtMxAo55sWCbAMQ
- QGkQkgOpm08AXzGNsuuOM9mwJ9dx5YflpdADYLE8tVKj0QfEYbxWgL8K6+HLim+CFqvI1KS2Dds1Q
- RfJu98c8GaZgTK1LzMTF/U+ahsoV5QyxdgESFR2BKSp1QtF1qNTe+Qo197uMzP7xeaU3PfyXkn3K9
- 5ERtJi1e6Gj2WCBDE/z8BtDu73nYWIdQVCOKfiK1OnKbAPPXXJFa4FheiLotgbgNsGL1lxlYD8vF9
- B8Q4LMRQrDLCeF7B6IESbkl2fSEwoZN9XjtF25FatvtZpfmMV4w8xCXKFhTexj9dCUIMOdpNz85HT
- yVbDRKm8c9XT0m2C3tSgsoSoQVw5lDeS8T45K668b1XymvKLsi0GXiL4TgYZUlhe+sHb1h/z8KbFV
- p3PRcpC8YuPuYBgKHRRq2pOgwSszNcjGioQZ+o676s3nqvYa1+edrbN5SkA3GerPbgbLd9/6l1YEP
- Ep6NX7Dlsg8bW5pey3Lb9sNb;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jsKTj-0006XA-M0; Mon, 06 Jul 2020 06:19:47 +0000
-Date: Mon, 6 Jul 2020 09:19:45 +0300
-To: hezekiah maina <hezekiahmaina3@gmail.com>,
- samba-technical@lists.samba.org, David Disseldorp <ddiss@samba.org>,
- "abartlet@samba.org" <abartlet@samba.org>
-Subject: Re: GSoC Update and Phase One Feedback
-Message-ID: <20200706061945.GC25598@pinega.vda.li>
-References: <CAH72RCUABcQkZ3yyWzATYi0ZeUTsLGGi90Kbk7ySAY6Z-BZSJg@mail.gmail.com>
- <20200704170227.GA866108@pinega.vda.li>
+ (Exim) id 1jsl8Z-005t2Q-Jh
+ for samba-technical@lists.samba.org; Tue, 07 Jul 2020 10:47:45 +0000
+Received: by mail-lf1-x12b.google.com with SMTP id d21so24434386lfb.6
+ for <samba-technical@lists.samba.org>; Tue, 07 Jul 2020 03:47:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=n7mpwWtyi/GtPn0VfwnPh9kymMtXitnAn158V07Y+oA=;
+ b=fKtL6ylDFwJiGvQHokzkeh+DlMPptM7tmzR/8aueYPtiwV3FO4Y9swt7ksxZu3lnZj
+ +Kl4x44qBI2IAE+Yq3WxiXk6F3x1OWPT0ipkaGSU0n5RZVZrckgUD4sKKGNaeY9lUn39
+ r5L0xqmXtyi5aFFOI/3bOAYGniSWyavgKgZMZqMhc/aDq/eL41Qwd7M/Wt5K/M9uaDcp
+ fMsFlCw1g8FAXquRKXiJaov42SDvJZSylqvtpj/LVcRC/6Lv3IS3Y5rcbQF/CybNNM6v
+ 3PXYXAhNxrl+Er8qPhU/HNeDstLtF2+FGBPAFDVvaHq0La9ekEG7xcOmGWbmBn9PCVVO
+ IA2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=n7mpwWtyi/GtPn0VfwnPh9kymMtXitnAn158V07Y+oA=;
+ b=tWMYDPmnGuvXmET0RhpeHvBEVPYCM7DYYJlQBQt++lqy1U0f7brBRNSknRoK92Prkz
+ z3h3zSD56NZ+OQddh7hPyNzdeUkuItRbWmgN63ZG//ds0rnzAw9MLN1tJ1QTWcg3RIuy
+ lwlHiYrjssDBQ2qrhX1Z/4FlnQQyQ/ZZgsk8ZfzkkSozssmgRnSG+IxF+/yzikPnog36
+ ofgnCJn/Nz6H+30jduv85w+NHOTfuSJER/9KhOLSzIZkKbPfOEWifahdjAA+u2+kTRhw
+ nJbrRhFxUdV4wWG2Ogc3VRu4MsOjitqCMQ3FLygu2p0//au2PxLrPLKj3y0Ex3h3p6We
+ X87g==
+X-Gm-Message-State: AOAM533LGxkKk02qpcg7rTni0yFx6+fggeqsv1NE3L/t01UgvV+Ogn9/
+ V/fMJyTxgrPWOo8lr11eOr3ioXM9Uexnm7JplhdqaVfr
+X-Google-Smtp-Source: ABdhPJyQEZJOBlSjhp9fSFoPv7HM6mzJwDDdCO5r4Tsd8gkVgUzAryLUfsQ9L6kunta34RCQrvRk/biKNWhnT80rUTw=
+X-Received: by 2002:a19:385a:: with SMTP id d26mr33255101lfj.211.1594118860795; 
+ Tue, 07 Jul 2020 03:47:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20200704170227.GA866108@pinega.vda.li>
+Date: Tue, 7 Jul 2020 12:47:30 +0200
+Message-ID: <CAC-fF8S_WZuALxjhjFKhYeaKjhrccjq2XG6k=db18o3RYFpWrA@mail.gmail.com>
+Subject: Deprecate net -k?
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Andreas Schneider <asn@samba.org>, 
+ Andrew Bartlett <abartlet@samba.org>, Stefan Metzmacher <metze@samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,45 +66,37 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexander Bokovoy <ab@samba.org>
+From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Isaac Boukris <iboukris@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On la, 04 heinä 2020, Alexander Bokovoy via samba-technical wrote:
-> > I have decided to work with the Open Build Service, from the recommendation
-> > made by Alexander, to build the packages for various distributions. I was
-> > making the assumption that the most popular distributions used with Samba
-> > AD DC are RPM and Debian based. I'm seeking the community's feedback so as
-> > not to make the wrong assumptions on this.
-> > I created an account with the build.opensuse.org and have been exploring
-> > the UI and going through the documentation for OBS. I also created a
-> > Webhook in Gitlab to push the code to build.opensuse.org when there is a
-> > commit in the master branch. Is this the right way to do it or is there
-> > another option?
-> 
-> This sounds great -- we can start with RPMs as the spec file is already
-> there from the Cockpit starter kit and it works, so it should be
-> possible to instruct OBS to build RPM packages already. For Debian
-> packages, I'll look tomorrow for an example (Cockpit is available for
-> Debian, so we shouldn't have a problem to find an example for external
-> plugin package build).
+Hi,
 
-For Debian packaging, I found this very simple tutorial:
-https://tribaal.io/very-simple-debian-package.html
+I think it has been discussed, but I just want to share some tests I
+did in the context of MR 1402 work.
 
-And then there is a special helper that allows to add Debian packaging
-to a nodejs app: https://github.com/heartsucker/node-deb
+The man page of the net command says:
+-k|--kerberos
+Try to authenticate with kerberos. Only useful in an Active Directory
+environment.
 
-The latter is not exactly what is needed because it is tilted towards
-actual applications, not plugins like we have, but it should help
-started with a boiler plate. 
+In practice it means that some net-ads commands use ntlm by default,
+e.g. net-ads-join force the use of ntlm for the CIFS connection if -k
+is not specified, even though it uses krb5 for the LDAP connection.
 
-Cockpit itself builds a tarball for javascript-related stuff 
-and then simply installs its content into the expected locations.
+Fails due to the CIFS failure:
+net ads join -UAdministrator@ACME.COM%pwd --option=gensec:ntlmssp=no
+Succeeds both krb5:
+net ads join -k  -UAdministrator@ACME.COM%pwd --option=gensec:ntlmssp=no
 
-Andrew, can you please help with the Debian packaging?
+Succeeds both NTLM (although AS-REQs are still being performed):
+net ads join -UAdministrator@ACME.COM%pwd --option=gensec:gse_krb5=no
+net ads join -k -UAdministrator@ACME.COM%pwd --option=gensec:gse_krb5=no
 
--- 
-/ Alexander Bokovoy
+Other commands such as net-ads-search on the other hand don't seem to
+care about the -k flag and only use krb5 (thus fail with
+gensec:gse_krb5=no).
+
+I think perhaps we can deprecate the -k option and just do it by default.
 
