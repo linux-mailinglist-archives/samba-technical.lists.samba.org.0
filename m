@@ -2,43 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0685C21B3AA
-	for <lists+samba-technical@lfdr.de>; Fri, 10 Jul 2020 13:08:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C8FE721B3E4
+	for <lists+samba-technical@lfdr.de>; Fri, 10 Jul 2020 13:22:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=fMszE1TWLhwhESrbNtN4CoClUi3KCaDHWQ56qB3+le4=; b=tQpURGBkMDV3VZC4mbNE5CQAX6
-	fZVZkhId5esurICo2pY+KOjYofB/SdIRJOWi08czMzm5DxcaG+UyRDgVX7gwRos3O64QOwaGIH7YL
-	FcDwASdVum4vE6BwF7JWuVZW/XWDRGhxWqwlD8N64TwqWwMBfMIrr7tFQucqnDHINZrvaUjDo3ZR8
-	5xBkyEDT4Tf7OVB/Uj9uBK0oJF6R9somPk8my3bNrVC9kZAsIc4SBoXA5oMpThRTsustZaPMZAQ5f
-	4sJ9LwQKqRPnxBVYu95AXeUc2BjoXm6ZuRT6fyccn8RxZxx2RU9Qg4Z9cHFIU98JoQceN11ZAS/qM
-	RWIsn8Dw==;
-Received: from localhost ([::1]:23334 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=P4414qbgtoLz/9Q0EQW/V7k5cG3aZo1mOjipawWQWx8=; b=zbPLonz/nOCUwVgTqcgycQllY/
+	K0vo6pjK0QB1zBbSe27Ji3JdGU6rkUBsfcm3+Lx3iz779/MB/092RXpRTnrI5PB8KQnsPAVkOCLxP
+	7etfIgyD37mS9L6ID8KGGkEcGJ1J+HECip2prxhgmfX2gepQ92K1atHx2AnmJol+A1DSRHGZFuVug
+	EDI+WeG0Bx5cMZrp7KGjknzeQ/3mFnzpcfHp05O94fqQCU2vatmkkduq0RHuSBnL60dG5ThsqO9M0
+	4RHHJXE/ooB+8qQLd1gR09pGTWU3QJVdSZffJTd78QljMNnDulY++NG00YMxgoZWMeulSQVp2K1K0
+	ySUCdxsQ==;
+Received: from localhost ([::1]:28736 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jtqsb-006cnj-GI; Fri, 10 Jul 2020 11:07:45 +0000
-Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:34907) 
+	id 1jtr72-006dW7-8B; Fri, 10 Jul 2020 11:22:40 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62020) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jtqsU-006cnc-F5
- for samba-technical@lists.samba.org; Fri, 10 Jul 2020 11:07:41 +0000
-Received: from intern.sernet.de by mail.sernet.de with esmtps (Exim 4.92 #3)
- for samba-technical@lists.samba.org
- id 1jtqsT-0004le-Ue; Fri, 10 Jul 2020 13:07:37 +0200
-Received: by intern.sernet.de
- id 1jtqsT-00086p-R1; Fri, 10 Jul 2020 13:07:37 +0200
-Received: from bjacke by pell.sernet.de with local (Exim 4.93)
- (envelope-from <bjacke@sernet.de>) id 1jtqsT-006eW4-OT
- for samba-technical@lists.samba.org; Fri, 10 Jul 2020 13:07:37 +0200
-Date: Fri, 10 Jul 2020 13:07:37 +0200
-To: samba-technical@lists.samba.org
-Subject: PATCH: make disabling of vfs_snapper consistent with our
+ (Exim) id 1jtr6u-006dW0-II
+ for samba-technical@lists.samba.org; Fri, 10 Jul 2020 11:22:36 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=P4414qbgtoLz/9Q0EQW/V7k5cG3aZo1mOjipawWQWx8=; b=igOktZwSfPrhIqvXwCr7h4BRTk
+ sYVnTlEu6J5K7oeELufSkwAeY401nA5NKAGBI1gnUy/eFhqJvpMEo0mL26wlbTk36pKWT7zNvuj0B
+ j9qSzXUlKIZHXFxcAE2/dkjZ8w+enfdwmnlHmwZhpjFbFuR9RKyYqqzB575wructcKDEJ+dE2pYox
+ uYMnZDJBOLoFWVrymXIngfk/FdDxu+2YHrAsVhsg2KWPD+WOmrMt0x3rUfDt9M4kkYt1rXMrCNch8
+ Qf2qVzzis5lg06Pe8oE/+CuBinJjnYoJIbYTwt6NhZ4lrbCuU+O6nCQq0DYVFUWitNu2g/ZuyuehI
+ A7wJFkvC2Fp63GvZtcffD3a5IRQfdBaaN4ksMR+R1UXnWG6CwaGoSqSWlU2YBUv2lZb5gNKTg166T
+ 0Vjab7JEDc+SiwJxMn5N58kF7dA46h17k152m3kZmgkunPl4+DprBNJQEDx220bwuWU9C/pJayoqF
+ 6YIwPN0aTtMJwHmT39ZoLPlx;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jtr6t-0002mA-Ic; Fri, 10 Jul 2020 11:22:31 +0000
+Subject: Re: PATCH: make disabling of vfs_snapper consistent with our
  configure/build system
-Message-ID: <20200710110737.GA1585556@sernet.de>
-Mail-Followup-To: samba-technical@lists.samba.org
+To: samba-technical@lists.samba.org
+References: <20200710110737.GA1585556@sernet.de>
+Message-ID: <b4ea37e5-398d-c8d2-15e2-1a27f7655598@samba.org>
+Date: Fri, 10 Jul 2020 13:22:30 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="6c2NcOVqGQ03X4Wi"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
- Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
+In-Reply-To: <20200710110737.GA1585556@sernet.de>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="PVaNZhulvxx4bDyiCeOuBheUf4r8bgmD0"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,91 +58,63 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bj@SerNet.DE>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--PVaNZhulvxx4bDyiCeOuBheUf4r8bgmD0
+Content-Type: multipart/mixed; boundary="wf31UMFLddbWUoSjxWcKhDjE4pVq6B5aW"
 
---6c2NcOVqGQ03X4Wi
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-
-Hi,
-
-can someone pleae review and push eventually?
-
-Thanks
-Björn
-
---6c2NcOVqGQ03X4Wi
-Content-Type: text/x-diff; charset=us-ascii
-Content-Disposition: attachment;
-	filename="0001-Revert-build-add-configure-option-to-control-vfs_sna.patch"
+--wf31UMFLddbWUoSjxWcKhDjE4pVq6B5aW
+Content-Type: text/plain; charset=windows-1252
+Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-=46rom 4bdbf5581656a0a288af24677ebde7fc51c7974e Mon Sep 17 00:00:00 2001
-=46rom: =3D?UTF-8?q?Bj=3DC3=3DB6rn=3D20Jacke?=3D <bjacke@samba.org>
-Date: Fri, 10 Jul 2020 12:52:04 +0200
-Subject: [PATCH] Revert "build: add configure option to control vfs_snapper
- build"
+Hi Bj=F6rn!
 
-This reverts commit 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a.
+Am 7/10/20 um 1:07 PM schrieb Bj=F6rn JACKE via samba-technical:
+> can someone pleae review and push eventually?
 
-We have a working way to disable shared modules and this commits breaks tha=
-t.
+How does this relate to the discussion in
 
-BUG: https://bugzilla.samba.org/show_bug.cgi?id=3D14437
+https://lists.samba.org/archive/samba-technical/2020-May/135241.html
 
-Signed-off-by: Bjoern Jacke <bjacke@samba.org>
----
- source3/wscript | 12 +++---------
- 1 file changed, 3 insertions(+), 9 deletions(-)
+that resulted in commit 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a ?
 
-diff --git a/source3/wscript b/source3/wscript
-index 587708159740..219d1b3448e1 100644
---- a/source3/wscript
-+++ b/source3/wscript
-@@ -95,7 +95,6 @@ def options(opt):
-=20
-     opt.samba_add_onoff_option('glusterfs', with_name=3D"enable", without_=
-name=3D"disable", default=3DTrue)
-     opt.samba_add_onoff_option('cephfs', with_name=3D"enable", without_nam=
-e=3D"disable", default=3DTrue)
--    opt.samba_add_onoff_option('snapper', with_name=3D"enable", without_na=
-me=3D"disable", default=3DTrue)
-=20
-     opt.add_option('--enable-vxfs',
-                   help=3D("enable support for VxFS (default=3Dno)"),
-@@ -1770,16 +1769,11 @@ main() {
-     if Options.options.enable_vxfs:
-         conf.DEFINE('HAVE_VXFS', '1')
-=20
--    if Options.options.with_snapper:
--        if conf.CHECK_CFG(package=3D'dbus-1', args=3D'--cflags --libs',
-+    if conf.CHECK_CFG(package=3D'dbus-1', args=3D'--cflags --libs',
-                       msg=3D'Checking for dbus', uselib_store=3D"DBUS-1"):
--            if (conf.CHECK_HEADERS('dbus/dbus.h', lib=3D'dbus-1')
-+        if (conf.CHECK_HEADERS('dbus/dbus.h', lib=3D'dbus-1')
-                                       and conf.CHECK_LIB('dbus-1', shlib=
-=3DTrue)):
--                conf.DEFINE('HAVE_DBUS', '1')
--        else:
--            conf.fatal("vfs_snapper is enabled but prerequisite DBUS libra=
-ries "
--                       "or headers not found. Use --disable-snapper to dis=
-able "
--                       "vfs_snapper support.");
-+            conf.DEFINE('HAVE_DBUS', '1')
-=20
-     if conf.CHECK_CFG(package=3D'liburing', args=3D'--cflags --libs',
-                       msg=3D'Checking for liburing package', uselib_store=
-=3D"URING"):
+Thanks!
+-slow
+
 --=20
-2.25.1
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
 
---6c2NcOVqGQ03X4Wi--
+--wf31UMFLddbWUoSjxWcKhDjE4pVq6B5aW--
+
+--PVaNZhulvxx4bDyiCeOuBheUf4r8bgmD0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAl8IT3YACgkQqh6bcSY5
+nka1cA//V9zmqDnJLV/c12ectOEQpDXltM8XZl8cYSYbLcX7Sbw28kiYQp2GC4R2
+LuBwWtQNpGvPyGO0GS/j8IyLRjl4p6sWhf74dfsNrBkEj5sEHjFwOcBnLxZRD6vs
+Ey68jeLBY+pgbpRLLBp3rQ689vJlth/bXkaYZ6mbP+vUayAuGA25FT8T0N9MX3F8
+r3GKCyJ6YiCZm9BDwNPtgDvjdEXYMcedAR38ujvR8yW0URnH2pXsVw5UaHOlxkfW
+s4SuQneXBjSU1pJldiHPAzDIuNYdbVl2WCJkR2sNUSS+I68N0XDbolpq7rxufLDo
+MUUbgn25HArLAEYagzMSRTvdQJ57zvpHIp3a+Kx81aqnkgoVBfasu7oDtryOuLMB
+xFMNLbWAyJ0bezAojAVgp2HQNjuEbteUIhR0S1RJ+bxYKcsCEg4ikAj/+pV0i/73
+BMhosuhqzQOu7IZ3DgIfe/MURDvAQuFblKygMoCBqFtR0CRkFnQG9uZGshTll+z6
+OFgldlMH37m6zGAa2D4lTU4gJkd6wncWQG/D2UU4YeC2vwdPSmn5iv6o6dgu0Iwc
+PDZN/bNuWmwYFkYCJvAzWcZHBgbvATcKVWba31xdPvf1a156Kr3BzDBuMCFLhcys
+I5PlvaNj5jWjgZAjA3i8ixVAFOMY/7wlU4N3PtuSFp6O7lLY7Oo=
+=iPk4
+-----END PGP SIGNATURE-----
+
+--PVaNZhulvxx4bDyiCeOuBheUf4r8bgmD0--
 
