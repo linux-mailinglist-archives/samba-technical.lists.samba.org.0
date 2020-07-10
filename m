@@ -2,49 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8FE721B3E4
-	for <lists+samba-technical@lfdr.de>; Fri, 10 Jul 2020 13:22:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CEC121B43A
+	for <lists+samba-technical@lfdr.de>; Fri, 10 Jul 2020 13:45:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=P4414qbgtoLz/9Q0EQW/V7k5cG3aZo1mOjipawWQWx8=; b=zbPLonz/nOCUwVgTqcgycQllY/
-	K0vo6pjK0QB1zBbSe27Ji3JdGU6rkUBsfcm3+Lx3iz779/MB/092RXpRTnrI5PB8KQnsPAVkOCLxP
-	7etfIgyD37mS9L6ID8KGGkEcGJ1J+HECip2prxhgmfX2gepQ92K1atHx2AnmJol+A1DSRHGZFuVug
-	EDI+WeG0Bx5cMZrp7KGjknzeQ/3mFnzpcfHp05O94fqQCU2vatmkkduq0RHuSBnL60dG5ThsqO9M0
-	4RHHJXE/ooB+8qQLd1gR09pGTWU3QJVdSZffJTd78QljMNnDulY++NG00YMxgoZWMeulSQVp2K1K0
-	ySUCdxsQ==;
-Received: from localhost ([::1]:28736 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=pL2+PIklyIXpTtZZxDk6m1HVo1RRpjI1eK6hU+JrSeg=; b=tr/n2kAnDJvzVxX9frKn6Nk7fJ
+	iHbSe4KDjsE5+pBuyHZqQiOLDjvLEpxTdX9ovuZHe3g40uyhavYNOaMTvT6Y6i0fxymqNQP1TJxuz
+	sihYdx75Ac+i5ed2WcZXLayZnK/+SCcOp+m6GknfcM2JzlyREAkrvyEcohVjTl6cUgwEutd9MJXzu
+	T3Oew7ahMaX7pAjvQ8cTspAxqKGcOIxY5Hs5EU7fzsxTxtCpJAo4Y/4NlO7mE3BfReT+d0ZBdM7w4
+	L1uxMVXccyx6LW/bVExxwFQ6roj2yw/cLdQaj/sHhsEzctsVdpfIIx6N8+R1m5WKH1GwT39TM9Hs0
+	AgbLHvmA==;
+Received: from localhost ([::1]:29516 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jtr72-006dW7-8B; Fri, 10 Jul 2020 11:22:40 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62020) 
+	id 1jtrSd-006djL-TW; Fri, 10 Jul 2020 11:45:00 +0000
+Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:50749) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jtr6u-006dW0-II
- for samba-technical@lists.samba.org; Fri, 10 Jul 2020 11:22:36 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=P4414qbgtoLz/9Q0EQW/V7k5cG3aZo1mOjipawWQWx8=; b=igOktZwSfPrhIqvXwCr7h4BRTk
- sYVnTlEu6J5K7oeELufSkwAeY401nA5NKAGBI1gnUy/eFhqJvpMEo0mL26wlbTk36pKWT7zNvuj0B
- j9qSzXUlKIZHXFxcAE2/dkjZ8w+enfdwmnlHmwZhpjFbFuR9RKyYqqzB575wructcKDEJ+dE2pYox
- uYMnZDJBOLoFWVrymXIngfk/FdDxu+2YHrAsVhsg2KWPD+WOmrMt0x3rUfDt9M4kkYt1rXMrCNch8
- Qf2qVzzis5lg06Pe8oE/+CuBinJjnYoJIbYTwt6NhZ4lrbCuU+O6nCQq0DYVFUWitNu2g/ZuyuehI
- A7wJFkvC2Fp63GvZtcffD3a5IRQfdBaaN4ksMR+R1UXnWG6CwaGoSqSWlU2YBUv2lZb5gNKTg166T
- 0Vjab7JEDc+SiwJxMn5N58kF7dA46h17k152m3kZmgkunPl4+DprBNJQEDx220bwuWU9C/pJayoqF
- 6YIwPN0aTtMJwHmT39ZoLPlx;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jtr6t-0002mA-Ic; Fri, 10 Jul 2020 11:22:31 +0000
+ (Exim) id 1jtrSX-006djE-IU
+ for samba-technical@lists.samba.org; Fri, 10 Jul 2020 11:44:56 +0000
+Received: from intern.sernet.de by mail.sernet.de with esmtps (Exim 4.92 #3)
+ id 1jtrSX-00079f-4U; Fri, 10 Jul 2020 13:44:53 +0200
+Received: by intern.sernet.de
+ id 1jtrSW-0000K0-Ub; Fri, 10 Jul 2020 13:44:53 +0200
+Received: from bjacke by pell.sernet.de with local (Exim 4.93)
+ (envelope-from <bjacke@sernet.de>)
+ id 1jtrSW-006epI-Rx; Fri, 10 Jul 2020 13:44:52 +0200
+Date: Fri, 10 Jul 2020 13:44:52 +0200
+To: Ralph Boehme <slow@samba.org>
 Subject: Re: PATCH: make disabling of vfs_snapper consistent with our
  configure/build system
-To: samba-technical@lists.samba.org
+Message-ID: <20200710114452.GB1572444@sernet.de>
+Mail-Followup-To: Ralph Boehme <slow@samba.org>,
+ samba-technical@lists.samba.org
 References: <20200710110737.GA1585556@sernet.de>
-Message-ID: <b4ea37e5-398d-c8d2-15e2-1a27f7655598@samba.org>
-Date: Fri, 10 Jul 2020 13:22:30 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
+ <b4ea37e5-398d-c8d2-15e2-1a27f7655598@samba.org>
 MIME-Version: 1.0
-In-Reply-To: <20200710110737.GA1585556@sernet.de>
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="PVaNZhulvxx4bDyiCeOuBheUf4r8bgmD0"
+ protocol="application/pgp-signature"; boundary="bg08WKrSYDhXBjb5"
+Content-Disposition: inline
+In-Reply-To: <b4ea37e5-398d-c8d2-15e2-1a27f7655598@samba.org>
+X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
+ Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,63 +55,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bj@SerNet.DE>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---PVaNZhulvxx4bDyiCeOuBheUf4r8bgmD0
-Content-Type: multipart/mixed; boundary="wf31UMFLddbWUoSjxWcKhDjE4pVq6B5aW"
 
---wf31UMFLddbWUoSjxWcKhDjE4pVq6B5aW
-Content-Type: text/plain; charset=windows-1252
-Content-Language: en-US
+--bg08WKrSYDhXBjb5
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Bj=F6rn!
+Hi Ralph,
 
-Am 7/10/20 um 1:07 PM schrieb Bj=F6rn JACKE via samba-technical:
-> can someone pleae review and push eventually?
+On 2020-07-10 at 13:22 +0200 Ralph Boehme via samba-technical sent off:
+> Am 7/10/20 um 1:07 PM schrieb Bj=F6rn JACKE via samba-technical:
+> > can someone pleae review and push eventually?
+>=20
+> How does this relate to the discussion in
+>=20
+> https://lists.samba.org/archive/samba-technical/2020-May/135241.html
+>=20
+> that resulted in commit 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a ?
 
-How does this relate to the discussion in
+configure --help says (among lots og other things):
 
-https://lists.samba.org/archive/samba-technical/2020-May/135241.html
-
-that resulted in commit 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a ?
-
-Thanks!
--slow
-
---=20
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+  --with-shared-modules=3DSHARED_MODULES
+            Comma-separated list of names of modules to build shared. May i=
+nclude !module to disable 'module'. Can be '!FORCED' to disable all non-req=
+uired
+            shared only modules. Can be '!DEFAULT' to disable all modules d=
+efaulting to a shared build. Can be 'ALL' to build all default static modul=
+es
+            shared. The most specific one wins, while the order is ignored =
+and --with-static-modules is evaluated before --with-shared-modules
 
 
---wf31UMFLddbWUoSjxWcKhDjE4pVq6B5aW--
+That information was obviously missed in that discussion above.
 
---PVaNZhulvxx4bDyiCeOuBheUf4r8bgmD0
+Bj=F6rn
+
+--bg08WKrSYDhXBjb5
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAl8IT3YACgkQqh6bcSY5
-nka1cA//V9zmqDnJLV/c12ectOEQpDXltM8XZl8cYSYbLcX7Sbw28kiYQp2GC4R2
-LuBwWtQNpGvPyGO0GS/j8IyLRjl4p6sWhf74dfsNrBkEj5sEHjFwOcBnLxZRD6vs
-Ey68jeLBY+pgbpRLLBp3rQ689vJlth/bXkaYZ6mbP+vUayAuGA25FT8T0N9MX3F8
-r3GKCyJ6YiCZm9BDwNPtgDvjdEXYMcedAR38ujvR8yW0URnH2pXsVw5UaHOlxkfW
-s4SuQneXBjSU1pJldiHPAzDIuNYdbVl2WCJkR2sNUSS+I68N0XDbolpq7rxufLDo
-MUUbgn25HArLAEYagzMSRTvdQJ57zvpHIp3a+Kx81aqnkgoVBfasu7oDtryOuLMB
-xFMNLbWAyJ0bezAojAVgp2HQNjuEbteUIhR0S1RJ+bxYKcsCEg4ikAj/+pV0i/73
-BMhosuhqzQOu7IZ3DgIfe/MURDvAQuFblKygMoCBqFtR0CRkFnQG9uZGshTll+z6
-OFgldlMH37m6zGAa2D4lTU4gJkd6wncWQG/D2UU4YeC2vwdPSmn5iv6o6dgu0Iwc
-PDZN/bNuWmwYFkYCJvAzWcZHBgbvATcKVWba31xdPvf1a156Kr3BzDBuMCFLhcys
-I5PlvaNj5jWjgZAjA3i8ixVAFOMY/7wlU4N3PtuSFp6O7lLY7Oo=
-=iPk4
+iHUEABYIAB0WIQRTh3WYB8ykhrzLAI8xQwafzsNCPwUCXwhUsQAKCRAxQwafzsNC
+P7jtAQDf2f7Kgy3zMgvWeoo9ftQzmNWS5mYYAWk5RWY7UIf31wD+IosTNK8BRORG
+nF76L2AX+Vtz8zVyKz46tcKOmEy05wA=
+=lFOj
 -----END PGP SIGNATURE-----
 
---PVaNZhulvxx4bDyiCeOuBheUf4r8bgmD0--
+--bg08WKrSYDhXBjb5--
 
