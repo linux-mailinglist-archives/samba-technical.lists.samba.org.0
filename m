@@ -2,44 +2,40 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CEC121B43A
-	for <lists+samba-technical@lfdr.de>; Fri, 10 Jul 2020 13:45:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C07B921B45C
+	for <lists+samba-technical@lfdr.de>; Fri, 10 Jul 2020 13:58:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=pL2+PIklyIXpTtZZxDk6m1HVo1RRpjI1eK6hU+JrSeg=; b=tr/n2kAnDJvzVxX9frKn6Nk7fJ
-	iHbSe4KDjsE5+pBuyHZqQiOLDjvLEpxTdX9ovuZHe3g40uyhavYNOaMTvT6Y6i0fxymqNQP1TJxuz
-	sihYdx75Ac+i5ed2WcZXLayZnK/+SCcOp+m6GknfcM2JzlyREAkrvyEcohVjTl6cUgwEutd9MJXzu
-	T3Oew7ahMaX7pAjvQ8cTspAxqKGcOIxY5Hs5EU7fzsxTxtCpJAo4Y/4NlO7mE3BfReT+d0ZBdM7w4
-	L1uxMVXccyx6LW/bVExxwFQ6roj2yw/cLdQaj/sHhsEzctsVdpfIIx6N8+R1m5WKH1GwT39TM9Hs0
-	AgbLHvmA==;
-Received: from localhost ([::1]:29516 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=Tjm3/zlL+I+V1ZwnziLcsY1YznZ/1A+bxl+HrRXH8so=; b=VezjW/YrlpRZV5OXTCULeulOZ1
+	ujJk0GSngqKOEme+mDTUxDZNPgmRfxAaNjL/g2aCdXLnYrbX6JWXUAKk03GKWDeP4K9DD8mgl4PjD
+	xD1Ycra2poziq+yoKSQgaw5a7plkRGQN+fWKH1HW/TtPczDS1rgSK60/F4q3+DmYZIPUkrSl9xr8+
+	J2FMJKNWhGLwUf2i2kHXcd6grOFDMXMrhObVknEWGEUvhkdSVprbgjXjNcJZXXx79SRQpbUyLoV0/
+	PM117qObVCgjpcJMOabEwnofG5JwFuHvxv44Q+GEb+8Uw9xvMaI9ZA/1seJ4SQ+jpOX32mUx6doL+
+	gSfJgHSQ==;
+Received: from localhost ([::1]:30264 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jtrSd-006djL-TW; Fri, 10 Jul 2020 11:45:00 +0000
-Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:50749) 
+	id 1jtrfx-006dvQ-BO; Fri, 10 Jul 2020 11:58:45 +0000
+Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:42667) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jtrSX-006djE-IU
- for samba-technical@lists.samba.org; Fri, 10 Jul 2020 11:44:56 +0000
+ (Exim) id 1jtrfr-006dvJ-CH
+ for samba-technical@lists.samba.org; Fri, 10 Jul 2020 11:58:41 +0000
 Received: from intern.sernet.de by mail.sernet.de with esmtps (Exim 4.92 #3)
- id 1jtrSX-00079f-4U; Fri, 10 Jul 2020 13:44:53 +0200
+ for samba-technical@lists.samba.org
+ id 1jtrfq-000845-SY; Fri, 10 Jul 2020 13:58:38 +0200
 Received: by intern.sernet.de
- id 1jtrSW-0000K0-Ub; Fri, 10 Jul 2020 13:44:53 +0200
+ id 1jtrfq-0000aq-PX; Fri, 10 Jul 2020 13:58:38 +0200
 Received: from bjacke by pell.sernet.de with local (Exim 4.93)
- (envelope-from <bjacke@sernet.de>)
- id 1jtrSW-006epI-Rx; Fri, 10 Jul 2020 13:44:52 +0200
-Date: Fri, 10 Jul 2020 13:44:52 +0200
-To: Ralph Boehme <slow@samba.org>
-Subject: Re: PATCH: make disabling of vfs_snapper consistent with our
- configure/build system
-Message-ID: <20200710114452.GB1572444@sernet.de>
-Mail-Followup-To: Ralph Boehme <slow@samba.org>,
- samba-technical@lists.samba.org
-References: <20200710110737.GA1585556@sernet.de>
- <b4ea37e5-398d-c8d2-15e2-1a27f7655598@samba.org>
+ (envelope-from <bjacke@sernet.de>) id 1jtrfq-006f04-ND
+ for samba-technical@lists.samba.org; Fri, 10 Jul 2020 13:58:38 +0200
+Date: Fri, 10 Jul 2020 13:58:38 +0200
+To: samba-technical@lists.samba.org
+Subject: PATCH: fix compile error with xlc on AIX
+Message-ID: <20200710115838.GA1587460@sernet.de>
+Mail-Followup-To: samba-technical@lists.samba.org
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="bg08WKrSYDhXBjb5"
+Content-Type: multipart/mixed; boundary="Nq2Wo0NMKNjxTN9z"
 Content-Disposition: inline
-In-Reply-To: <b4ea37e5-398d-c8d2-15e2-1a27f7655598@samba.org>
+Content-Transfer-Encoding: 8bit
 X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
  Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
 X-BeenThere: samba-technical@lists.samba.org
@@ -58,55 +54,83 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
 From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
  <samba-technical@lists.samba.org>
 Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bj@SerNet.DE>
-Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 
---bg08WKrSYDhXBjb5
+--Nq2Wo0NMKNjxTN9z
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+
+Hi,
+
+please review and push eventually...
+
+Thanks
+Björn
+
+--Nq2Wo0NMKNjxTN9z
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment;
+	filename="0001-libsmb-fix-build-with-xlc-on-AIX.patch"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Ralph,
+=46rom cf0994c69bc89cc73009541bf087d264478501f4 Mon Sep 17 00:00:00 2001
+=46rom: Bjoern Jacke <bj@sernet.de>
+Date: Fri, 10 Jul 2020 11:48:51 +0000
+Subject: [PATCH] libsmb: fix build with xlc on AIX
 
-On 2020-07-10 at 13:22 +0200 Ralph Boehme via samba-technical sent off:
-> Am 7/10/20 um 1:07 PM schrieb Bj=F6rn JACKE via samba-technical:
-> > can someone pleae review and push eventually?
->=20
-> How does this relate to the discussion in
->=20
-> https://lists.samba.org/archive/samba-technical/2020-May/135241.html
->=20
-> that resulted in commit 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a ?
+xlc complains:
 
-configure --help says (among lots og other things):
+1506-067 (S) A struct or union can only be assigned to a compatible type.
 
-  --with-shared-modules=3DSHARED_MODULES
-            Comma-separated list of names of modules to build shared. May i=
-nclude !module to disable 'module'. Can be '!FORCED' to disable all non-req=
-uired
-            shared only modules. Can be '!DEFAULT' to disable all modules d=
-efaulting to a shared build. Can be 'ALL' to build all default static modul=
-es
-            shared. The most specific one wins, while the order is ignored =
-and --with-static-modules is evaluated before --with-shared-modules
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=3D14438
+
+Signed-off-by: Bjoern Jacke <bjacke@samba.org>
+
+---
+ source3/libsmb/libsmb_stat.c | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
+
+diff --git a/source3/libsmb/libsmb_stat.c b/source3/libsmb/libsmb_stat.c
+index 790934bd565..8abc6043030 100644
+--- a/source3/libsmb/libsmb_stat.c
++++ b/source3/libsmb/libsmb_stat.c
+@@ -102,18 +102,24 @@ void setup_stat(struct stat *st,
+ 	}
+=20
+ 	st->st_dev =3D dev;
+-	st->st_atim =3D access_time_ts;
+-	st->st_ctim =3D change_time_ts;
+-	st->st_mtim =3D write_time_ts;
++	st->st_atim.tv_sec =3D access_time_ts.tv_sec;
++	st->st_atim.tv_nsec =3D access_time_ts.tv_nsec;
++	st->st_ctim.tv_sec =3D change_time_ts.tv_sec;
++	st->st_ctim.tv_nsec =3D change_time_ts.tv_nsec;
++	st->st_mtim.tv_sec =3D write_time_ts.tv_sec;
++	st->st_mtim.tv_nsec =3D write_time_ts.tv_nsec;
+ }
+=20
+ void setup_stat_from_stat_ex(const struct stat_ex *stex,
+ 			     const char *fname,
+ 			     struct stat *st)
+ {
+-	st->st_atim =3D stex->st_ex_atime;
+-	st->st_ctim =3D stex->st_ex_ctime;
+-	st->st_mtim =3D stex->st_ex_mtime;
++	st->st_atim.tv_sec =3D stex->st_ex_atime.tv_sec;
++	st->st_atim.tv_nsec =3D stex->st_ex_atime.tv_nsec;
++	st->st_ctim.tv_sec =3D stex->st_ex_ctime.tv_sec;
++	st->st_ctim.tv_nsec =3D stex->st_ex_ctime.tv_nsec;
++	st->st_mtim.tv_sec =3D stex->st_ex_mtime.tv_sec;
++	st->st_mtim.tv_nsec =3D stex->st_ex_mtime.tv_nsec;
+=20
+ 	st->st_mode =3D stex->st_ex_mode;
+ 	st->st_size =3D stex->st_ex_size;
+--=20
+2.20.2
 
 
-That information was obviously missed in that discussion above.
-
-Bj=F6rn
-
---bg08WKrSYDhXBjb5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRTh3WYB8ykhrzLAI8xQwafzsNCPwUCXwhUsQAKCRAxQwafzsNC
-P7jtAQDf2f7Kgy3zMgvWeoo9ftQzmNWS5mYYAWk5RWY7UIf31wD+IosTNK8BRORG
-nF76L2AX+Vtz8zVyKz46tcKOmEy05wA=
-=lFOj
------END PGP SIGNATURE-----
-
---bg08WKrSYDhXBjb5--
+--Nq2Wo0NMKNjxTN9z--
 
