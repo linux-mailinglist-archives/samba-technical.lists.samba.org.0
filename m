@@ -2,91 +2,129 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4E3721F80E
-	for <lists+samba-technical@lfdr.de>; Tue, 14 Jul 2020 19:20:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 735E021F960
+	for <lists+samba-technical@lfdr.de>; Tue, 14 Jul 2020 20:27:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=yehPjOOroWj/IkpeNxhLvlPRE5wygVm0TuK0mOGUVEc=; b=IpiE+Q90DLNvM8sZ3Xv/hyfM5I
-	kIu8kxdzmcG6PStmQlBjxNBBFiod4tDcWsQ7hc81VMwG0fVw76YHcR6e241voPG7Txb32BXVLdckk
-	mr6BGcdeXKrQzDMwSvv/Y0vgZdVxbZ+9cV/7BcfuWidchNGITmRcbODz61R5jig1MOMuLu1S3+zPD
-	F7bQhqX66eXn8N5WCqDZ96CqlxDIQ+8r4MPwCfCyrGzQ4toaN7QWK4Z1kx/J5N88yllchgMC+p97H
-	vutNROzxdPlfwI9ZzEGxX5aKWkd4MrNkYLRyblQsxxtqG3t4FLgIbn7ga/hKiHrmPzgiTU4wAxpUI
-	QbEVnKyQ==;
-Received: from localhost ([::1]:55954 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=639JG5P/zlQ7rf8OEJtvpD/wBnI8Lg/HaRCPRG052Cg=; b=wqkAobkWRLzQuxmXG2B9KnsNq7
+	UdWFqkLuXYQIBP0TV/gFwmFPEUQv1aKASCvH4XaVdKsHob1wX25iF6JYkG90VF6GJIWVuBu0Slz6L
+	ZdRVMvZTD6KPZ4mwIHU1olX9aqoXGx5zeN5SDBaoAdml7LRqSLC7rCdaGiscGNJ1INS+8GhH25JKf
+	SP6RRZy1iIlLhHRFFO+fZov14HXXyB/9hdghjav2n16czDEPEHixhDh9Dn69l86BeRda1eGFMzRUx
+	GHdyd7eCmt5opDOjA6qvAkSZAgv5cbACdgZ+ayG44NrorvHBOfJsO6S3d7jlqj8fQIQxZqtjr8ol5
+	ox6TvTiw==;
+Received: from localhost ([::1]:23324 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jvOaR-007Sms-EY; Tue, 14 Jul 2020 17:19:23 +0000
-Received: from mail-bn7nam10on2052.outbound.protection.outlook.com
- ([40.107.92.52]:33185 helo=NAM10-BN7-obe.outbound.protection.outlook.com) 
+	id 1jvPdv-007V1r-Uf; Tue, 14 Jul 2020 18:27:04 +0000
+Received: from mail-dm6nam12on20624.outbound.protection.outlook.com
+ ([2a01:111:f400:fe59::624]:18934
+ helo=NAM12-DM6-obe.outbound.protection.outlook.com) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jvOaJ-007Smk-Gm
- for samba-technical@lists.samba.org; Tue, 14 Jul 2020 17:19:19 +0000
+ (Exim) id 1jvPdo-007V1k-I8
+ for samba-technical@lists.samba.org; Tue, 14 Jul 2020 18:27:00 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=storagecraft.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hzde4ZfJk5ZpWoRrwaXpMTm9QmLLHrqqumAKWUXTeSE=;
+ b=YILoXs+doBlfGqUmNnSNsFajY3Jf0DbpbIIMIhVoMLcXNnV73QptCE+IY/Ttsih9AQntEFTgIalVfBhOS6Ex3d7kLAoiLPcQSPiAnAqTIT3yGkLGTSdb8/ZvVOWoAsmu+Q4effkWabuYm5c2W4eF4undd4XJVblbUi1Loa457xI=
+Received: from MWHPR20CA0032.namprd20.prod.outlook.com (2603:10b6:300:ed::18)
+ by CY4PR11MB1879.namprd11.prod.outlook.com (2603:10b6:903:11d::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.23; Tue, 14 Jul
+ 2020 18:26:39 +0000
+Received: from CO1NAM03FT007.eop-NAM03.prod.protection.outlook.com
+ (2603:10b6:300:ed:cafe::63) by MWHPR20CA0032.outlook.office365.com
+ (2603:10b6:300:ed::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.22 via Frontend
+ Transport; Tue, 14 Jul 2020 18:26:39 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 65.52.56.186)
+ smtp.mailfrom=storagecraft.com;
+ lists.samba.org; dkim=pass (signature was
+ verified) header.d=storagecraft.com;lists.samba.org; dmarc=pass action=none
+ header.from=storagecraft.com;
+Received: from us2-emailsignatures-cloud.codetwo.com (65.52.56.186) by
+ CO1NAM03FT007.mail.protection.outlook.com (10.152.80.117) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3174.21 via Frontend Transport; Tue, 14 Jul 2020 18:26:39 +0000
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com (104.47.36.59) by
+ us2-emailsignatures-cloud.codetwo.com with CodeTwo SMTP Server (TLS12) via
+ SMTP; Tue, 14 Jul 2020 18:26:37 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=E2qLptSRI1hiFvhd3jMGKQnpj8jeR2TVm8njBJrVELeEC8oFoApjsfyyXykszAcaklIY0nt/1KR36TkjKH+TLi04uaZBT17NOo7ZgU6V5W6APLEtqpH7T3h4+6cHqJKSWEK5ljhLL3/O3DOjQt+rqb3n64cH2InSv4vT3O21KcjYCBC+lpmozeTY6kQl0qxZqxBwD5h5m5pLnQ56uQuB+KIFC1kJbgn6kqfMjPA5x/SE8b0ZNpjZCKaokdW7ecMSkNuXwxxjKw4cvFGffs2EdPYp6JYSOlpBOpQBRH748ytBLOLTQqMkWnAAMcx8kIjki3cYTCatJ5GOlCAKByGuwA==
+ b=bp1l27nYQbURa1J/ZunTeSSFzPYkYDLZBfyGPn97o7o1Yj4l5SkEDtDQm1FXp9ZTpwB84aP7agKBC3elP2YOKOlMA0mPzaVx49hIldxLzMZ3F/YyFDWTiI1jyrnxK0Md/Q+8ZiiQ7Q80OVZ8rHzb5lUp8wv2z+sH7JPG/bLa7NszJy4eiahHom2rU4WJbz8JzajUYvnCkGP/uVeY/TrbIfXXsd9W136AyrJkzD8UlfyS1a2wDwjHGU8gK7lxdFe1PcTQTH++OuGGprqB5Izb3sOkQ1zJ7GfkkAyiV02u2cdk99BKRKECc7IuLFFBgmwyC79ji0d2bYk0NGdag1Sp5w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kArnw7NsQvYRgUklHd4wPFGl+5MzrkIFUgOkZWnSoSE=;
- b=oOhxenXGVUnoE3vMDSzef6UW7RnMavktbBo1Mc+J5Ji4BXmgG3qX1/yWu90vtJOom9t1VXh7LIf0+0kmfOABLJN1uI621abPspt8+Ux131OYqE2ISF3wEzez6AdGI/2iftGLFFTmjQPdWt2rtDB6giCYboXNlYFiT/j8UiyeIxgaSXRCXnizZzid7YmN4qqwlQF0vBFyaSDaYj8icEo7Nh/ktXcotoXb0JLq9Z5vxC4DwP7xhJkfwa9Ojl64WCFVuH9ftEBF5CaFS5qOD9yVV/o/m7vjJaozetT/REjkoHMFcZ0BQRPz/3TVdwATaXNJdb9r8kaTNqnVfCfCgU8Qew==
+ bh=hzde4ZfJk5ZpWoRrwaXpMTm9QmLLHrqqumAKWUXTeSE=;
+ b=QoHivn1F3hqVmzMpjCUEe6Bw+LCDhJ1IuxsiBMIHRfEdfN4ZRezmmScTpZTucJhllsinu6EW6kPuVqfa7OduURQNUdJ3Y+4ryT/OtRZiNUNvKdOqx8HmgIEl6So8SV/wDHNLWXPAoJ2IZLJU1i5sMFVq01X0e+RxvwdIIMz6FY6nz6eYqoaVR/8qWyzY/bPtnTXqOgzYKbuEkY+PzvPM8XQVEpSp5WQMtN0cKuA+Y4JNgfy4QpKUf1BTsw5Kfjr6Zn9yJWDUhwJRgR4NfFmVpGF2rfP+zuNNNalCKZ1x7QEi99aF1ojZCaeVDRFS2mKiCdyY4n02VXdLq8vULTDlSg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=komprise.com; dmarc=pass action=none header.from=komprise.com;
- dkim=pass header.d=komprise.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=komprise.com;
+ smtp.mailfrom=storagecraft.com; dmarc=pass action=none
+ header.from=storagecraft.com; dkim=pass header.d=storagecraft.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=storagecraft.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kArnw7NsQvYRgUklHd4wPFGl+5MzrkIFUgOkZWnSoSE=;
- b=NRfMS6euie0quxU0SMwYMzvlJvr2+rdaB7TKzhKHZL5E15m1R85YHOCZj8eEtWbAEr5fDrvpccocyoCw1tazJy4pju14YCJa5D52sgVlCx6wu6COMKxL8r43bokDSffXsLaQMX1yzKHauGUQJWovVHXIyhZWfXylJeVW7gWNGNc=
-Received: from BYAPR16MB2615.namprd16.prod.outlook.com (2603:10b6:a03:8f::17)
- by BYAPR16MB2581.namprd16.prod.outlook.com (2603:10b6:a03:85::29)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.24; Tue, 14 Jul
- 2020 17:19:00 +0000
-Received: from BYAPR16MB2615.namprd16.prod.outlook.com
- ([fe80::99d9:a6f:4f4a:4993]) by BYAPR16MB2615.namprd16.prod.outlook.com
- ([fe80::99d9:a6f:4f4a:4993%3]) with mapi id 15.20.3174.025; Tue, 14 Jul 2020
- 17:19:00 +0000
-To: Steve French <sfrench@samba.org>, "linux-cifs@vger.kernel.org"
- <linux-cifs@vger.kernel.org>, "samba-technical@lists.samba.org"
- <samba-technical@lists.samba.org>
-Subject: Re: Oops in cifs_match_super() - linux kernel
- 4.16.2-1.el7.elrepo.x86_64
-Thread-Topic: Oops in cifs_match_super() - linux kernel
- 4.16.2-1.el7.elrepo.x86_64
-Thread-Index: AQHWSq9edtCo81aaX06K8scfXoPZ86jz61slgBOCXOQ=
-Date: Tue, 14 Jul 2020 17:18:59 +0000
-Message-ID: <BYAPR16MB261513751DCF34B035660665E2610@BYAPR16MB2615.namprd16.prod.outlook.com>
-References: <MW3PR16MB37063A82C9A57CC67EB5BE1F87920@MW3PR16MB3706.namprd16.prod.outlook.com>,
- <BYAPR16MB26152FB66647DB8FCAED346CE26D0@BYAPR16MB2615.namprd16.prod.outlook.com>
-In-Reply-To: <BYAPR16MB26152FB66647DB8FCAED346CE26D0@BYAPR16MB2615.namprd16.prod.outlook.com>
+ bh=hzde4ZfJk5ZpWoRrwaXpMTm9QmLLHrqqumAKWUXTeSE=;
+ b=YILoXs+doBlfGqUmNnSNsFajY3Jf0DbpbIIMIhVoMLcXNnV73QptCE+IY/Ttsih9AQntEFTgIalVfBhOS6Ex3d7kLAoiLPcQSPiAnAqTIT3yGkLGTSdb8/ZvVOWoAsmu+Q4effkWabuYm5c2W4eF4undd4XJVblbUi1Loa457xI=
+Received: from DM6PR11MB4532.namprd11.prod.outlook.com (2603:10b6:5:2aa::21)
+ by DM5PR11MB1817.namprd11.prod.outlook.com (2603:10b6:3:10e::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.20; Tue, 14 Jul
+ 2020 18:26:36 +0000
+Received: from DM6PR11MB4532.namprd11.prod.outlook.com
+ ([fe80::6d63:5f8a:f1aa:d51a]) by DM6PR11MB4532.namprd11.prod.outlook.com
+ ([fe80::6d63:5f8a:f1aa:d51a%9]) with mapi id 15.20.3195.017; Tue, 14 Jul 2020
+ 18:26:36 +0000
+To: Vidhesh Ramesh via samba-technical <samba-technical@lists.samba.org>
+Subject: Re: Windows 2019 Server getting Invalid signature with Samba 4.7.11
+Thread-Topic: Windows 2019 Server getting Invalid signature with Samba 4.7.11
+Thread-Index: AQHWNUdA+kJKRM4BfUKiWqZicZITNqkHOLSA
+Date: Tue, 14 Jul 2020 18:26:36 +0000
+Message-ID: <32C63F09-210A-4BCA-B603-1DFADDDC6F70@storagecraft.com>
+References: <C16AF00C-262A-4A19-90B7-836DA392E620@storagecraft.com>
+In-Reply-To: <C16AF00C-262A-4A19-90B7-836DA392E620@storagecraft.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-authentication-results: samba.org; dkim=none (message not signed)
- header.d=none;samba.org; dmarc=none action=none header.from=komprise.com;
-x-originating-ip: [24.5.193.179]
+user-agent: Microsoft-MacOutlook/16.38.20061401
+Authentication-Results-Original: lists.samba.org; dkim=none (message not
+ signed) header.d=none;lists.samba.org; dmarc=none action=none
+ header.from=storagecraft.com;
+x-originating-ip: [73.157.137.233]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 1e15937b-6678-4597-815a-08d82819ffaa
-x-ms-traffictypediagnostic: BYAPR16MB2581:
+X-MS-Office365-Filtering-Correlation-Id: 6f52fc38-beae-4233-38f8-08d828237322
+x-ms-traffictypediagnostic: DM5PR11MB1817:|CY4PR11MB1879:
+x-ms-oob-tlc-oobclassifiers: OLM:10000;OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: kQRuFbPpDa9KCsqyCQh1mVOaUcproXfR2Qisw1u1EjyE5yAN9LDnvuXsRjI43UMymLrl+5VLp+5AM78SWrBNO0QVpovxurf6lromIdQXF2U94LVz5All1cbs3pitlBRaZTk4X5lMjzpZxindCwwG1lv5d0RPfXNVleTYmj01bcWMflgYWcUrl93eL5oMCrHEs5AWJTFv0OPgMrl6wb+TbmlQztVQp5BA63aUiB5kWCTJDUM/xcCvMC8lX/0xzCWE0qcsXLCczFzJIQVyszKIYQOaeW6dSdI9tx+YKlkFSsHzu/BNS5Qqd48O4ZCW4rGz2MWm0zjIE8h5annDH9XM5IvhJgZzJwq6I037s9sbc0OXmXCBUtyDSpUfnnkVyut6thN2MXmsGc/4R2tvq/reHw==
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:DM6PR11MB4532.namprd11.prod.outlook.com;
+ PTR:; CAT:NONE; SFTY:;
+ SFS:(4636009)(396003)(376002)(366004)(346002)(39840400004)(136003)(86362001)(36756003)(44832011)(6916009)(478600001)(5660300002)(6512007)(2616005)(8936002)(966005)(316002)(71200400001)(6486002)(8676002)(33656002)(2906002)(83380400001)(64756008)(53546011)(186003)(91956017)(76116006)(66446008)(26005)(66556008)(166002)(66476007)(66946007)(6506007);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata: y/x60mP8gQjxMvcBNSM/n35Ntqjnel/XlVnzX75u07axrmGE5QxfTAWpC32FKSMMpVFWuE1KR8roKWVGSlhScEmaax8uc9bq4Xha+zkzDX68uHDU2sBWKScQwSyo3BKyjg0LtKbK8hZURpejOEAU/cVqdl6U3EoslZr+4V7qGi7CDEXlviEqT+nfnRW5YJ4cP9nN435WzVKoVZn/pqhNqKEZjoNrssJz0zhhYfLfH+Azq/PtQ89TNtC6wMFDsJxJwYewxJMnwXQk0Og0QyU2zgvnumaVBe66WACiaqeNaMSTpJdKkmlN/e6EEyNyiXVlJP6TNp5v5Od6OFh/H0aDkLLUPLSZu1Ih+VIDX5HF6YZGZhp5mOQWwz5ADezSKGd6meI338zlt2w/mF3NRJbHYJ1BkjSevgwk+HmK3DmUBgG5ZQXjRJKMfvwyU/eC7/EFRLLt5OvPAgxEn0KCJr2EZx+4AEw35a6vFxjQtikWi4Jkm2OzpdgRAx1vbQkdWsV6
 x-ms-exchange-transport-forked: True
-x-ms-oob-tlc-oobclassifiers: OLM:8273;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: ciqUnXBet6EVpT0Dso3yob1+iQWgh3gUVgQ4qlL2nAYTxYudImQPwmTYlFS2QPcz94sOqUvrVgyfSMYL4oeJ0IoM62AgWISCh+0zIaxXTKKiSpz46wdwkdaqFlBGtADudeyF1GvoNOIVbzt9QfS4glEjoC+jTGVc/HrGuFWzQVtLFtqZ1ifd1a6sL+WZ4l2DBjX6eGFkzVahTqyrlS6qhf2/Li/SrWESSNazYiAV/vLMdjgQCeR/pB3QpbQVv+57B9sx/SmRUUnsbJrAi8ehczhjPhSseLdz8a1ehaH50c/QBvZAWIsCt+HcOS16GaQNY5cqJPyfETMG9jICTmqHndzKiDfmQDs4S2Ao44PfgKOq1CsmS5Jej6iN4eBgJXy0QML3qviMplB8N7lt2ZJWXQ==
-x-ms-exchange-antispam-messagedata: jQcxW3UelKMGiuk85RLa9xF3vIv+SUw/3pklOna2nM3w/qMmvJpCZNPp24Vm78a1c1eyZi8nwK0tJ8CIXq5wJPlpBGX1shqgZkGHOB+oC76xDR+BG2PoqknJYN4fOHvGsjm11ll/U2aBDlM6L6m1+S7zbSChr+NExQmG7P7KFJnmP4DFxZjisG9adTCZtLd+oML949n2rMeC632m0xBkuoKTfRFqsLvzUEUZNuXaZKezLOHz/KRUjcsyHWswZUgTzoLkjU2TcWY6ckdyp7mlMF80D0bZGbdlTNFzB6uRV7GaOOj8s8IKd/2ZC4sKlUvuRxtUl52RbWHR7X2YipO5rMOgUa4Do7HrHNqUQ0xL17mpNQZOmL0sHWWlCOgGsh7R8oNP7dq3wLK1m0xCl0nIbmI8jh8CKCi0FmJhLAUV28FNwT0m2/38+GWu4vU3FBR/r6BbIU9bAna6aj9TitCyki2TGRleVJx9YnXBbLaAnDo=
 MIME-Version: 1.0
-X-OriginatorOrg: komprise.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR16MB2615.namprd16.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1e15937b-6678-4597-815a-08d82819ffaa
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 7a5a9d78-0afb-4c20-b729-756d332680db
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: zC0Dlo+G7kyyVBZG++vDVU6wNtB3mWLgok6uSxPvUJRtoOwWmvBCGShQMnAo5khp7oBaz2sYpEFRzb98GUX/bQ9BGj20g0QMQOS8e/mNJg8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR16MB2581
-X-Warn: EHLO/HELO not verified: Remote host 40.107.92.52
- (mail-bn7nam10on2052.outbound.protection.outlook.com) incorrectly presented
- itself as NAM10-BN7-obe.outbound.protection.outlook.com
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1817
+X-CodeTwo-MessageID: 1a318080-1608-4ec3-9d78-5029242aa5c2.20200714182637@us2-emailsignatures-cloud.codetwo.com
+X-CodeTwoProcessed: true
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: CO1NAM03FT007.eop-NAM03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs: e3a46033-4141-4aa6-2a12-08d828237149
+X-Microsoft-Antispam-Message-Info: Jr9lFdPbP6w+L9DfBg5B82B1n6MhsOZTcoZ6ODEkQUlskI0jGGhXPosGpZOJSW6mJMOvmP1E9eZ+tbh09uuLLaHs10iHoRfOeLGdW73wO+YlBI+vDPwh0ZE0yUzFi8CBgODZt4b5JoYQYrRRHx/PM/b3ChY8nBTHbUhRtobkydRz1kXqEAwSLSZvLWnvRdDU4Ftz3cwhJXcfJi8fwUT4PV3LzcgnFdAZbCTkGbRaom+Cr9vjBMYQy9L1raMz3jYNOlI+o2QRQ4lZOV40jCrgKywvU4hddkEF/3RJRjCcyp9SQqBrP1Emkx9bC5iLY2w+b/HPtejIgCJG1e2UeZOUGOVfkcEuaUJxGLolKj36Y/kgC0Uusiv5yaIIesBZP0W7Btc4Rr3iwHX8zZOrpBwb+G/GKYjERn9u0bTFDhfTkczPgcicq0yGG0D6f+Nm4m60NtaJWubMmnXggesQQCG5jeuYAZJrBqAVfKSngfGao2I=
+X-OriginatorOrg: storagecraft.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6f52fc38-beae-4233-38f8-08d828237322
+X-MS-Exchange-CrossTenant-Id: 99f4e3c9-bed5-443d-bd53-2b3f22d4eddf
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=99f4e3c9-bed5-443d-bd53-2b3f22d4eddf; Ip=[65.52.56.186];
+ Helo=[us2-emailsignatures-cloud.codetwo.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1NAM03FT007.eop-NAM03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR11MB1879
+X-Warn: EHLO/HELO not verified: Remote host 2a01:111:f400:fe59::624
+ (mail-dm6nam12on20624.outbound.protection.outlook.com) incorrectly presented
+ itself as NAM12-DM6-obe.outbound.protection.outlook.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -101,222 +139,111 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Vidhesh Ramesh via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Vidhesh Ramesh <vidhesh.ramesh@komprise.com>
-Cc: Ameya Usgaonkar <ameya.usgaonkar@komprise.com>
+From: Krishna Harathi via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Krishna Harathi <krishna.harathi@storagecraft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Steve et all,
-
-Resending this as a gentle reminder if anyone got a chance to look at the b=
-elow mentioned oops kernel panic.
-
-
-
-Vidhesh Ramesh
-
-________________________________
-From: Vidhesh Ramesh <vidhesh.ramesh@komprise.com>
-Sent: Thursday, July 2, 2020 12:21 AM
-To: Steve French <sfrench@samba.org>; linux-cifs@vger.kernel.org <linux-cif=
-s@vger.kernel.org>; samba-technical@lists.samba.org <samba-technical@lists.=
-samba.org>
-Cc: Ameya Usgaonkar <ameya.usgaonkar@komprise.com>
-Subject: Re: Oops in cifs_match_super() - linux kernel 4.16.2-1.el7.elrepo.=
-x86_64
-
-Hi Steve et all,
-
-Resending this as a gentle reminder if anyone got a chance to look at the b=
-elow mentioned oops kernel panic.
-
-
-Vidhesh Ramesh
-
-
-[cid:08c25178-b723-4637-800b-a0be40947864]
-
-[cid:d31a1a2b-2af8-41ba-920f-050e0455b246]
-
-
-________________________________
-From: Ameya Usgaonkar <ameya.usgaonkar@komprise.com>
-Sent: Wednesday, June 24, 2020 10:26 PM
-To: Steve French <sfrench@samba.org>; linux-cifs@vger.kernel.org <linux-cif=
-s@vger.kernel.org>; samba-technical@lists.samba.org <samba-technical@lists.=
-samba.org>
-Cc: Vidhesh Ramesh <vidhesh.ramesh@komprise.com>
-Subject: Oops in cifs_match_super() - linux kernel 4.16.2-1.el7.elrepo.x86_=
-64
-
-Hi Steve et al,
-   My name is Ameya and I work for www.komprise.com<http://www.komprise.com=
->.  The linux kernel with above mentioned version has been panicing, though=
- randomly, but the stack trace appears is consistent.  You can find more de=
-tails in the attachments.  Below is the brief description of the problem -
-
-
-[1.] One line summary of the problem:
-
-oops kernel panic
-
-[2.] Full description of the problem/report:
-
-ESX VM hangs with a kernel panic when cifs shares are mounted. Unable to ss=
-h to the VM and the console of the VM is also not responding. With kdump se=
-rvice running and core collected the VM restarts successfully.
-
-[3.] Keywords (i.e., modules, networking, kernel):
-
-cifs, kernel, panic, strcmp, mount
-
-[4.] Kernel information
-
-[4.1.] Kernel version (from /proc/version):
-
-Linux version 4.16.2-1.el7.elrepo.x86_64 (mockbuild@Build64R7) (gcc version=
- 4.8.5 20150623 (Red Hat 4.8.5-28) (GCC)) #1 SMP Thu Apr 12 09:08:05 EDT 20=
-18
-
-[4.2.] Kernel .config file:
-
-Please check the file uploaded
-
-[5.] Most recent kernel version which did not have the bug:
-
-[6.] Output of Oops.. message (if applicable) with symbolic information
-
-     resolved (see Documentation/admin-guide/oops-tracing.rst)
-
-[442282.069937] BUG: unable to handle kernel NULL pointer dereference at 00=
-00000000000000
-
-[442282.071474] IP: strcmp+0xe/0x30
-
-[442282.072892] PGD 0 P4D 0
-
-[442282.074196] Oops: 0000 [#1] SMP PTI
-
-[442282.075561] Modules linked in: binfmt_misc fuse cmac rpcsec_gss_krb5 nf=
-sv4 arc4 md4 nls_utf8 cifs ccm dns_resolver nfsv3 nfs fscache nf_conntrack_=
-netbios_ns nf_conntrack_broadcast xt_CT ip6t_rpfilter ipt_REJECT nf_reject_=
-ipv4 ip6t_REJECT nf_reject_ipv6 xt_conntrack ip_set nfnetlink ebtable_nat e=
-btable_broute ip6table_nat nf_conntrack_ipv6 nf_defrag_ipv6 nf_nat_ipv6 ip6=
-table_mangle ip6table_security ip6table_raw iptable_nat nf_conntrack_ipv4 n=
-f_defrag_ipv4 nf_nat_ipv4 nf_nat nf_conntrack iptable_mangle iptable_securi=
-ty iptable_raw ebtable_filter ebtables ip6table_filter ip6_tables iptable_f=
-ilter vmw_vsock_vmci_transport vsock sb_edac crct10dif_pclmul crc32_pclmul =
-ghash_clmulni_intel pcbc ppdev aesni_intel vmw_balloon crypto_simd glue_hel=
-per cryptd sg intel_rapl_perf input_leds pcspkr joydev shpchp
-
-[442282.090386]  parport_pc parport i2c_piix4 vmw_vmci nfsd nfs_acl lockd a=
-uth_rpcgss grace sunrpc ip_tables xfs libcrc32c sr_mod cdrom ata_generic sd=
-_mod pata_acpi crc32c_intel serio_raw vmwgfx drm_kms_helper syscopyarea sys=
-fillrect sysimgblt fb_sys_fops ttm mptspi scsi_transport_spi ata_piix mptsc=
-sih vmxnet3 drm mptbase libata floppy dm_mirror dm_region_hash dm_log dm_mo=
-d dax
-
-[442282.095332] CPU: 4 PID: 9273 Comm: mount.cifs Tainted: G        W      =
-  4.16.2-1.el7.elrepo.x86_64 #1
-
-[442282.097802] Hardware name: VMware, Inc. VMware Virtual Platform/440BX D=
-esktop Reference Platform, BIOS 6.00 04/05/2016
-
-[442282.100363] RIP: 0010:strcmp+0xe/0x30
-
-[442282.101645] RSP: 0018:ffffc9001bff7c88 EFLAGS: 00010202
-
-[442282.102919] RAX: 0000000000000001 RBX: ffff8802ad7c2400 RCX: 0000000001=
-240404
-
-[442282.104207] RDX: 0000000000000001 RSI: 0000000000000000 RDI: 0000000000=
-000001
-
-[442282.105497] RBP: ffffc9001bff7c88 R08: 0000000001240404 R09: 0000000000=
-000001
-
-[442282.106765] R10: ffff88017d2c2b40 R11: ffff8801744c0e50 R12: ffff88011f=
-793000
-
-[442282.108038] R13: ffff88042b105800 R14: ffffc9001bff7d98 R15: ffff8801b6=
-3c0f00
-
-[442282.109318] FS:  00007f3e90ee6780(0000) GS:ffff88043fd00000(0000) knlGS=
-:0000000000000000
-
-[442282.110630] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-
-[442282.111970] CR2: 0000000000000000 CR3: 000000011b2ea000 CR4: 0000000000=
-0406e0
-
-[442282.113405] Call Trace:
-
-[442282.114849]  cifs_match_super+0x123/0x210 [cifs]
-
-[442282.116211]  ? cifs_prune_tlinks+0xe0/0xe0 [cifs]
-
-[442282.117541]  sget_userns+0x88/0x4a0
-
-[442282.118877]  ? cifs_kill_sb+0x30/0x30 [cifs]
-
-[442282.120203]  ? cifs_prune_tlinks+0xe0/0xe0 [cifs]
-
-[442282.121502]  sget+0x7d/0xa0
-
-[442282.122781]  ? cifs_kill_sb+0x30/0x30 [cifs]
-
-[442282.124072]  cifs_do_mount+0x168/0x5a0 [cifs]
-
-[442282.125364]  mount_fs+0x3e/0x150
-
-[442282.126627]  vfs_kern_mount+0x67/0x130
-
-[442282.127850]  do_mount+0x1f5/0xca0
-
-[442282.129047]  SyS_mount+0x83/0xd0
-
-[442282.130257]  do_syscall_64+0x79/0x1b0
-
-[442282.131583]  entry_SYSCALL_64_after_hwframe+0x3d/0xa2
-
-[442282.132687] RIP: 0033:0x7f3e907fdfea
-
-[442282.133754] RSP: 002b:00007ffee9139868 EFLAGS: 00000202 ORIG_RAX: 00000=
-000000000a5
-
-[442282.134842] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f3e90=
-7fdfea
-
-[442282.135909] RDX: 000055d13f5953b2 RSI: 000055d13f5953f9 RDI: 00007ffee9=
-13bb51
-
-[442282.136944] RBP: 00007ffee913bb46 R08: 000055d1415e80d0 R09: 0000000000=
-001000
-
-[442282.137962] R10: 0000000000000000 R11: 0000000000000202 R12: 00007f3e90=
-ef0000
-
-[442282.138957] R13: 000055d1415e80d0 R14: 00007f3e90ef290f R15: 0000000000=
-000000
-
-[442282.139918] Code: 80 3a 00 75 f7 48 83 c6 01 0f b6 4e ff 48 83 c2 01 84=
- c9 88 4a ff 75 ed 5d c3 0f 1f 00 55 48 89 e5 eb 04 84 c0 74 18 48 83 c7 01=
- <0f> b6 47 ff 48 83 c6 01 3a 46 ff 74 eb 19 c0 83 c8 01 5d c3 31
-
-[442282.142829] RIP: strcmp+0xe/0x30 RSP: ffffc9001bff7c88
-
-[442282.143759] CR2: 0000000000000000
-
-[7.] A small shell script or example program which triggers the
-
-     problem (if possible)
-
-My colleague Vidhesh (CC'ed) will be glad to share further details on the t=
-est scenario and/or in-house reproduction.  Please let us know of workaroun=
-ds, if any.
-
-Thanks and Regards,
-=3D Ameya
-
-
+SSBhbSBjb250aW51aW5nIHRvIGludmVzdGlnYXRlIHdoeSBhIGNsaWVudCBpcyBnZXR0aW5nIGFu
+IOKAnGludmFsaWQgc2lnbmF0dXJl4oCdIGVycm9yLg0KDQpTZXF1ZW5jZSBvZiBldmVudHMNCg0K
+ICAqICAgU21iZCBnZW5lcmF0ZWQgYSBTVEFUVVNfTkVUV09SS19TRVNTSU9OX0VYUElSRUQgZm9y
+IGEgcmVhZCByZXF1ZXN0DQogICogICBDbGllbnQgcmVxdWVzdGVkIGZvciBhIHNlc3Npb24gKHJl
+KXNldHVwIG9mIHRoZSBjdXJyZW50L2V4aXN0aW5nIHNlY3Rpb24gKHNob3duIGJlbG93KQ0KICAq
+ICAgU21iZCByZXNwb25kZWQgd2l0aCBTVEFUVVNfU1VDQ0VTUyBidXQgcmVzcG9uc2Ugbm90IHNp
+Z25lZCAoc2lnbmF0dXJlIHdpdGggemVyb3MpIChzaG93biBiZWxvdykNCiAgKiAgIFdpbmRvd3Mg
+U01CQ2xpZW50IG5vdGVkIHRoZSDigJxpbnZhbGlkIHNpZ25hdHVyZeKAnSBldmVudCAoZGlzcnVw
+dGl2ZSB0byBjbGllbnQgYXBwbGljYXRpb24pDQogICogICBOZXh0LCB0aGVyZSB3YXMgYSBuZXcg
+c2Vzc2lvbiBzZXR1cCByZXF1ZXN0DQogICogICBGb2xsb3dlZCBieSBzbWJkIHJlc3BvbnNlIHdp
+dGggU1RBVFVTX1NVQ0NFU1Mgd2l0aCBzaWduYXR1cmUNCg0KRnJvbSB0aGUgV2luZG93cyBjbGll
+bnQgZXZlbnQgbG9nLCBJIHNlZSB0aGF0IHRoZXJlIGlzIGEgU01CQ2xpZW50L3NlY3VyaXR5IGV2
+ZW50IElEIDMxMDEzICDigJx0aGUgc2lnbmluZyB2YWxpZGF0aW9uIGZhaWxlZOKAnSBjb3JyZXNw
+b25kaW5nIHRvIHRoZSB0aW1lIHdoZW4gc21iZCBzZW50IHRoZSBzZXNzaW9uIHJlLXNldHVwIHJl
+cXVlc3QuIFRoaXMgY2F1c2VkIHRoZSBkaXNjb25uZWN0IGFuZCBkaXNydXB0aW9uIHRvIGFwcGxp
+Y2F0aW9uLg0KDQpGcm9tIHRoZSB0Y3BkdW1wLCBJIHNlZSB0aGF0IHRoaXMgZGlzY29ubmVjdCBp
+cyBmb2xsb3dlZCBieSBhIG5ldyBzZXNzaW9uIHNldHVwIHJlcXVlc3QgYW5kIGEgc21iZCBzZXR1
+cCByZXNwb25zZSB0aGF0IGhhZCB0aGUgcmVzcG9uc2Ugc2lnbmVkIGFzIGV4cGVjdGVkLiBBcyBm
+YXIgYXMgSSBjYW4gdGVsbCB0aGUgcmUtc2V0dXAgYW5kIHRoZSBuZXctc2V0dXAgcmVxdWVzdCBo
+YXMgdGhlIHNhbWUgc2Vzc2lvbiBhbmQgc2VjdXJpdHkgcGFyYW1ldGVycyBhbmQgZmxhZ3MgKGV4
+Y2VwdCBmb3IgdGhlIG5vbi16ZXJvIHNlc3Npb25JRCBpbiB0aGUgcmUtc2V0dXAgcmVxdWVzdCku
+DQoNCk15IHF1ZXN0aW9uIGF0IHRoaXMgdGltZSBpcyAoSSBhbSBub3QgYW4gZXhwZXJ0IGluIHRo
+aXMgYXJlYSksIGlzIHRoZSBzaWduYXR1cmUgZXhwZWN0ZWQgaW4gdGhlIHJlLXNldHVwIG9mIGV4
+aXN0aW5nIHNlY3Rpb24/IElzIHRoZXJlIGEgaXNzdWUvZml4IGluIHNtYmQgaW4gdGhpcyBhcmVh
+Pw0KDQpBbnkgaGVscCBpbiB0aGlzIGlzc3VlIGlzIGFwcHJlY2lhdGVkLiBJIGFtIHdvcmtpbmcg
+b24gcmUtY3JlYXRpbmcgdGhpcyBpc3N1ZSBpbi1ob3VzZSwgc28gd2lsbCBoYXZlIG1vcmUgZGV0
+YWlscy4gUGxlYXNlIGxldCBtZSBrbm93IHdoYXQgZWxzZSB0byBwcm92aWRlIHRoYXQgd2lsbCBo
+ZWxwLg0KDQpSZS1zZXR1cCByZXF1ZXN0DQoNClRyYW5zbWlzc2lvbiBDb250cm9sIFByb3RvY29s
+LCBTcmMgUG9ydDogMjc2NzcsIERzdCBQb3J0OiA0NDUsIFNlcTogMTY1MDA2NjYwLCBBY2s6IDI3
+NzQzNzU3MywgTGVuOiAxODkzDQpOZXRCSU9TIFNlc3Npb24gU2VydmljZQ0KICAgIE1lc3NhZ2Ug
+VHlwZTogU2Vzc2lvbiBtZXNzYWdlICgweDAwKQ0KICAgIExlbmd0aDogMTg4OQ0KU01CMiAoU2Vy
+dmVyIE1lc3NhZ2UgQmxvY2sgUHJvdG9jb2wgdmVyc2lvbiAyKQ0KICAgIFNNQjIgSGVhZGVyDQog
+ICAgICAgIFByb3RvY29sSWQ6IDB4ZmU1MzRkNDINCiAgICAgICAgSGVhZGVyIExlbmd0aDogNjQN
+CiAgICAgICAgQ3JlZGl0IENoYXJnZTogMQ0KICAgICAgICBDaGFubmVsIFNlcXVlbmNlOiAwDQog
+ICAgICAgIFJlc2VydmVkOiAwMDAwDQogICAgICAgIENvbW1hbmQ6IFNlc3Npb24gU2V0dXAgKDEp
+DQogICAgICAgIENyZWRpdHMgcmVxdWVzdGVkOiAwDQogICAgICAgIEZsYWdzOiAweDAwMDAwMDEw
+LCBQcmlvcml0eQ0KICAgICAgICBDaGFpbiBPZmZzZXQ6IDB4MDAwMDAwMDANCiAgICAgICAgTWVz
+c2FnZSBJRDogVW5rbm93biAoNzkzNDkzNCkNCiAgICAgICAgUHJvY2VzcyBJZDogMHgwMDAwZmVm
+Zg0KICAgICAgICBUcmVlIElkOiAweDAwMDAwMDAwDQogICAgICAgIFNlc3Npb24gSWQ6IDB4MDAw
+MDAwMDBkYTNmY2RkOA0KICAgICAgICAgICAgW0F1dGhlbnRpY2F0ZWQgaW4gRnJhbWU6IDMwOTE0
+NF0NCiAgICAgICAgU2lnbmF0dXJlOiAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA0K
+ICAgICAgICBbUmVzcG9uc2UgaW46IDMwOTE0NF0NCiAgICBTZXNzaW9uIFNldHVwIFJlcXVlc3Qg
+KDB4MDEpDQogICAgICAgIFtQcmVhdXRoIEhhc2g6IDlhODE1YmNjODc2Y2E0NmY3NzI3ZTE3ZTQy
+MzgxYTQzZTgyMjlmZGU0NDRjNTVhMeKApl0NCiAgICAgICAgU3RydWN0dXJlU2l6ZTogMHgwMDE5
+DQogICAgICAgICAgICAwMDAwIDAwMDAgMDAwMSAxMDAuID0gRml4ZWQgUGFydCBMZW5ndGg6IDEy
+DQogICAgICAgICAgICAuLi4uIC4uLi4gLi4uLiAuLi4xID0gRHluYW1pYyBQYXJ0OiBUcnVlDQog
+ICAgICAgIEZsYWdzOiAwDQogICAgICAgICAgICAuLi4uIC4uLjAgPSBTZXNzaW9uIEJpbmRpbmcg
+UmVxdWVzdDogRmFsc2UNCiAgICAgICAgU2VjdXJpdHkgbW9kZTogMHgwMSwgU2lnbmluZyBlbmFi
+bGVkDQogICAgICAgICAgICAuLi4uIC4uLjEgPSBTaWduaW5nIGVuYWJsZWQ6IFRydWUNCiAgICAg
+ICAgICAgIC4uLi4gLi4wLiA9IFNpZ25pbmcgcmVxdWlyZWQ6IEZhbHNlDQogICAgICAgIENhcGFi
+aWxpdGllczogMHgwMDAwMDAwMSwgREZTDQogICAgICAgIENoYW5uZWw6IE5vbmUgKDB4MDAwMDAw
+MDApDQogICAgICAgIFByZXZpb3VzIFNlc3Npb24gSWQ6IDB4MDAwMDAwMDAwMDAwMDAwMA0KW1Bh
+Y2tldCBzaXplIGxpbWl0ZWQgZHVyaW5nIGNhcHR1cmU6IFNNQjIgdHJ1bmNhdGVkXQ0KDQoNClJl
+LXNldHVwIHJlc3BvbnNlIOKAkw0KDQpUcmFuc21pc3Npb24gQ29udHJvbCBQcm90b2NvbCwgU3Jj
+IFBvcnQ6IDQ0NSwgRHN0IFBvcnQ6IDI3Njc3LCBTZXE6IDI3NzQzNzU3MywgQWNrOiAxNjUwMDg1
+NTMsIExlbjogMjM5DQpOZXRCSU9TIFNlc3Npb24gU2VydmljZQ0KICAgIE1lc3NhZ2UgVHlwZTog
+U2Vzc2lvbiBtZXNzYWdlICgweDAwKQ0KICAgIExlbmd0aDogMjM1DQpTTUIyIChTZXJ2ZXIgTWVz
+c2FnZSBCbG9jayBQcm90b2NvbCB2ZXJzaW9uIDIpDQogICAgU01CMiBIZWFkZXINCiAgICAgICAg
+UHJvdG9jb2xJZDogMHhmZTUzNGQ0Mg0KICAgICAgICBIZWFkZXIgTGVuZ3RoOiA2NA0KICAgICAg
+ICBDcmVkaXQgQ2hhcmdlOiAxDQogICAgICAgIE5UIFN0YXR1czogU1RBVFVTX1NVQ0NFU1MgKDB4
+MDAwMDAwMDApDQogICAgICAgIENvbW1hbmQ6IFNlc3Npb24gU2V0dXAgKDEpDQogICAgICAgIENy
+ZWRpdHMgZ3JhbnRlZDogMQ0KICAgICAgICBGbGFnczogMHgwMDAwMDAxMSwgUmVzcG9uc2UsIFBy
+aW9yaXR5DQogICAgICAgIENoYWluIE9mZnNldDogMHgwMDAwMDAwMA0KICAgICAgICBNZXNzYWdl
+IElEOiBVbmtub3duICg3OTM0OTM0KQ0KICAgICAgICBQcm9jZXNzIElkOiAweDAwMDBmZWZmDQog
+ICAgICAgIFRyZWUgSWQ6IDB4MDAwMDAwMDANCiAgICAgICAgU2Vzc2lvbiBJZDogMHgwMDAwMDAw
+MGRhM2ZjZGQ4DQogICAgICAgICAgICBbQXV0aGVudGljYXRlZCBpbiBGcmFtZTogMzA5MTQ0XQ0K
+ICAgICAgICBTaWduYXR1cmU6IDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwDQogICAg
+ICAgIFtSZXNwb25zZSB0bzogMzA5MTQyXQ0KICAgICAgICBbVGltZSBmcm9tIHJlcXVlc3Q6IDAu
+MDAzMTUwMDAwIHNlY29uZHNdDQogICAgU2Vzc2lvbiBTZXR1cCBSZXNwb25zZSAoMHgwMSkNCiAg
+ICAgICAgW1ByZWF1dGggSGFzaDogOWE4MTViY2M4NzZjYTQ2Zjc3MjdlMTdlNDIzODFhNDNlODIy
+OWZkZTQ0NGM1NWEx4oCmXQ0KICAgICAgICBTdHJ1Y3R1cmVTaXplOiAweDAwMDkNCiAgICAgICAg
+ICAgIDAwMDAgMDAwMCAwMDAwIDEwMC4gPSBGaXhlZCBQYXJ0IExlbmd0aDogNA0KICAgICAgICAg
+ICAgLi4uLiAuLi4uIC4uLi4gLi4uMSA9IER5bmFtaWMgUGFydDogVHJ1ZQ0KICAgICAgICBTZXNz
+aW9uIEZsYWdzOiAweDAwMDANCiAgICAgICAgICAgIC4uLi4gLi4uLiAuLi4uIC4uLjAgPSBHdWVz
+dDogRmFsc2UNCiAgICAgICAgICAgIC4uLi4gLi4uLiAuLi4uIC4uMC4gPSBOdWxsOiBGYWxzZQ0K
+ICAgICAgICAgICAgLi4uLiAuLi4uIC4uLi4gLjAuLiA9IEVuY3J5cHQ6IEZhbHNlDQogICAgICAg
+IEJsb2IgT2Zmc2V0OiAweDAwMDAwMDQ4DQogICAgICAgIEJsb2IgTGVuZ3RoOiAxNjMNCiAgICAg
+ICAgU2VjdXJpdHkgQmxvYjogYTE4MWEwMzA4MTlkYTAwMzBhMDEwMGExMGIwNjA5MmE4NjQ4ODJm
+NzEyMDEwMjAy4oCmDQogICAgICAgICAgICBHU1MtQVBJIEdlbmVyaWMgU2VjdXJpdHkgU2Vydmlj
+ZSBBcHBsaWNhdGlvbiBQcm9ncmFtIEludGVyZmFjZQ0KICAgICAgICAgICAgICAgIFVua25vd24g
+aGVhZGVyIChjbGFzcz0yLCBwYz0xLCB0YWc9MSkNCiAgICAgICAgICAgICAgICAgICAgW0V4cGVy
+dCBJbmZvIChXYXJuaW5nL1Byb3RvY29sKTogVW5rbm93biBoZWFkZXIgKGNsYXNzPTIsIHBjPTEs
+IHRhZz0xKV0NCiAgICAgICAgICAgICAgICAgICAgICAgIFtVbmtub3duIGhlYWRlciAoY2xhc3M9
+MiwgcGM9MSwgdGFnPTEpXQ0KICAgICAgICAgICAgICAgICAgICAgICAgW1NldmVyaXR5IGxldmVs
+OiBXYXJuaW5nXQ0KICAgICAgICAgICAgICAgICAgICAgICAgW0dyb3VwOiBQcm90b2NvbF0NCg0K
+UmVnYXJkcy4NCktyaXNobmEgSGFyYXRoaQ0KDQoNCkZyb206IEtyaXNobmEgSGFyYXRoaSA8a3Jp
+c2huYS5oYXJhdGhpQHN0b3JhZ2VjcmFmdC5jb20+DQpEYXRlOiBUaHVyc2RheSwgTWF5IDI4LCAy
+MDIwIGF0IDQ6MjUgUE0NClRvOiBBbmRyZXcgQmFydGxldHQgdmlhIHNhbWJhLXRlY2huaWNhbCA8
+c2FtYmEtdGVjaG5pY2FsQGxpc3RzLnNhbWJhLm9yZz4NClN1YmplY3Q6IFdpbmRvd3MgMjAxOSBT
+ZXJ2ZXIgZ2V0dGluZyBJbnZhbGlkIHNpZ25hdHVyZSB3aXRoIFNhbWJhIDQuNy4xMQ0KDQpXZSBh
+cmUgdXNpbmcgU2FtYmEgNC43LjExLg0KDQpXaW5kb3dzIDIwMTkgIFNlcnZlciBTUUwgQmFja3Vw
+ICB3b3JrbG9hZCBpcyBmYWlsaW5nIChyYW5kb21seSkgYWZ0ZXIgcnVubmluZyA1IHRvIDYgaG91
+cnMgd2l0aCDigJxpbnZhbGlkIHNpZ25hdHVyZeKAnSwgYW4gaW5zdGFuY2Ugb2YgZmFpbHVyZSBz
+aG93biBiZWxvdy4NCg0KV3JpdGUgb24gIlhYWFguYmFr4oCdIGZhaWxlZDogMHg4MDA5MDAwNihJ
+bnZhbGlkIFNpZ25hdHVyZS4pICBNc2cgMzAxMywgTGV2ZWwgMTYsIFN0YXRlIDEsIFNlcnZlciBZ
+WVlZLCBMaW5lIDEgIEJBQ0tVUCBEQVRBQkFTRSBpcyB0ZXJtaW5hdGluZyBhYm5vcm1hbGx5LiAg
+T3V0Y29tZTogRmFpbGVkICBEdXJhdGlvbjogMDg6MDY6MjAgIERhdGUgYW5kIHRpbWU6IDIwMjAt
+MDUtMjUgMDE6MDY6MjEgICAgIERhdGUgYW5kIHRpbWU6IDIwMjAtMDUtMjUgMDE6MDY6MjEuICBQ
+cm9jZXNzIEV4aXQgQ29kZSAxLiAgVGhlIHN0ZXAgZmFpbGVkLg0KDQpJIHNlYXJjaGVkIFNhbWJh
+IGJ1emlsbGEgYW5kIGZvdW5kIGh0dHBzOi8vYnVnemlsbGEuc2FtYmEub3JnL3Nob3dfYnVnLmNn
+aT9pZD0xMzQyNyBidXQgdGhlIGZpeCBpcyBhbHJlYWR5IGluIDQuNy4xMS4NCg0KSXMgdGhpcyBh
+IGtub3duIGlzc3VlIG9yIGZpeD8gQW55IGhlbHAgdG8gcmVzb2x2ZSB0aGlzIGlzIGFwcHJlY2lh
+dGVkLg0KDQpUaGFua3MuDQoNClJlZ2FyZHMuDQpLcmlzaG5hIEhhcmF0aGkNCg0K
