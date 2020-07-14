@@ -2,54 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25DC421DE37
-	for <lists+samba-technical@lfdr.de>; Mon, 13 Jul 2020 19:07:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 30F2421EB56
+	for <lists+samba-technical@lfdr.de>; Tue, 14 Jul 2020 10:28:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=APJaVNYUk0jeN3cCdfV98ap4YbvNzfOTAVMMA/TITNo=; b=SRyAYe9B5ZxxHydwmaylZUPs0+
-	HWmltofutBoj+rZcL6MN3ioeLOMDwrAdjlgsF2dG44Alw+vcTaIM9+tS77notTxRzypTUm9tJxmkw
-	RNEFeAo+PAdxMj+6jZjucxJFjqQgxH8CYk0gc5cyCNYcw6Y7FYMi2V9sfBZYkf28cJ/h6lhbc+hUO
-	1ReCGMylxOS0fH0ckn522RPngAQaxtCHFAetFiz7K6MY7LcnTVOmCZfbkrr1Wk/wk1wLGfFEVoVDz
-	7zXMq86+KRv/280+wiewFaYiTD6swc71vEOG4AQRk1leCYXjxkF2p7JPLekYieIABzp2KaT9hhzI2
-	Gf5R/dUw==;
-Received: from localhost ([::1]:42220 helo=hr1.samba.org) 
+	bh=+ZTlw3g1Oi3aGX53opw7/VuCfgzBy3+AD6Rq2NBllMU=; b=XFV6Pk7bYC0Vum2GHAvIGGcFO3
+	9KgxrGAq+cfv+/uEyI+v21WqTPanpUdaEKKaP9pFt1G0Wwu35u027nFBL2C0Xs5j9S9xa1/uyXTld
+	SrTCPwIHbvzErWNavB/odLu6V4/rzsAbRgyZR/FdvbR9OBIF39icdZl41W/qKJAQZgjkPmJUdso1U
+	O2AMI811YXnEAv/fsEIL4eByW0hlOktdhMYzujOrnoBV6UNTAjv1bmwHE8z/OAxBd1b8u4VlnHeQq
+	lmGfQCCcVL8+wt3fZRgvgjdtC7kuDhoVvs49HABrptjGI//3RndsVG99lGbHax+SebHfQG9grGrsg
+	XPUCP3+g==;
+Received: from localhost ([::1]:58500 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jv1ut-007B8s-E0; Mon, 13 Jul 2020 17:06:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58002) 
+	id 1jvGIC-007LTs-Cn; Tue, 14 Jul 2020 08:28:00 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13444) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jv1un-007B8l-NH
- for samba-technical@lists.samba.org; Mon, 13 Jul 2020 17:06:56 +0000
+ (Exim) id 1jvGI6-007LTl-0F
+ for samba-technical@lists.samba.org; Tue, 14 Jul 2020 08:27:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:Message-ID:From:Cc:To;
- bh=APJaVNYUk0jeN3cCdfV98ap4YbvNzfOTAVMMA/TITNo=; b=2nLp0UuqfEbugHdWdWeOUYx4c2
- 5DO+ZzBVp8ZHG595oTBfR5dNDVHudD/fCmlNC5TWdzwAAs3e/2KnxtbI6ph7higcOFABNiX55azEv
- HYUVmC4nalofOrH9/BMaOgoOfudR1e5ALuAQMWUYkncNGZfs9BDsD0sJNWJYGYiZ6tz7nV1wGbh2q
- ElbadTeChUD1Hb8xsvmy7jXNX2r4ZPsLB8FojN1jCK9I2Hnrh9N7pE1EzSFcc1QuXNs/fNxCO81Y9
- 21xCGSX9MYIz18uP2C4d5vwOpHQWNX5fquDbVkaE/oMbklqeNe3VyPls8BS36xFn1x8/SsbDEWVLG
- zSzQ8ipFuJdUwHg9Y0NfCzi88q6tOQnaHBlUL+5NHZMNRaUbfddg3I90Nilu/xpEvnXjZs5pe5kCu
- FOSNUQiLI80CCb1T0arih6Im7Giz4tptVk8JKqtHbgFzcyqKl7GIabu6fx01R0+6NZoY+oOjKfnjA
- j+qfvl8MkHDEoO8pSdRXseRJ;
+ bh=+ZTlw3g1Oi3aGX53opw7/VuCfgzBy3+AD6Rq2NBllMU=; b=347DI8SH8I8ZMHC8IEV/Tm7PU9
+ U6Cyww+n+w4tvoUqwAiybdxqAdByCKrVWVs4h63o+d3eWMIrMqdywrMC2pEhicRibvXKGjju8yTso
+ sJLzl1nxuMuqQ1/r7UrudIr492HayJY0bFFG7N/VArkU9aO9e63nK6ZrnxUZ2F2DsCj7OqaWhy8PV
+ YnzUcvWgG1WNwwbKjWZr2w/LWvxAZBumgRXN5kzmFJ1MvgNPz6xnWYv7BS77NL7J5urmEkQiTZRR6
+ YW70w5a/ON727nBdwoblCoFJpk7iCSO0ePaUnKv1eH6bkQOz9lDshqNUZN9J6zoX2HwEu8K2Hbv0y
+ KARwG7etNlKwNNwcDGJ73UtA01alD+1+0ayuhvOrB5ER3lsSjeYkxnhecriTqBrD5v19oSsBjYsh+
+ pIWQcJjrYdQOrqgTufGhltKUxC4zfoNQ6biE9eyptOMtUiymEussm+pgRsF8KkmFbsgfVI4UouYYw
+ XmWl33kfM/YzStnVn7F41tZ3;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jv1um-0002c6-BM; Mon, 13 Jul 2020 17:06:52 +0000
+ (Exim) id 1jvGI3-0001FA-8j; Tue, 14 Jul 2020 08:27:51 +0000
 Subject: Re: PATCH: make disabling of vfs_snapper consistent with our
  configure/build system
-To: Ralph Boehme <slow@samba.org>, samba-technical@lists.samba.org
+To: =?UTF-8?Q?Bj=c3=b6rn_Jacke?= <bjacke@samba.org>,
+ samba-technical@lists.samba.org
 References: <20200710110737.GA1585556@sernet.de>
  <b4ea37e5-398d-c8d2-15e2-1a27f7655598@samba.org>
  <20200710114452.GB1572444@sernet.de>
  <54f90e98-9d7a-337e-defb-27fb756130fd@samba.org>
  <20200710194428.GA1596727@sernet.de>
  <63044415-9473-1572-2cd5-fa1fa5e012e1@samba.org>
-Message-ID: <3b2342e4-6e0b-24c1-44c6-d11e1a4b0d80@samba.org>
-Date: Mon, 13 Jul 2020 19:06:46 +0200
+ <3b2342e4-6e0b-24c1-44c6-d11e1a4b0d80@samba.org>
+Message-ID: <d15e0fca-98be-ac10-9902-aea3234d136b@samba.org>
+Date: Tue, 14 Jul 2020 10:27:48 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ Thunderbird/68.9.0
 MIME-Version: 1.0
-In-Reply-To: <63044415-9473-1572-2cd5-fa1fa5e012e1@samba.org>
+In-Reply-To: <3b2342e4-6e0b-24c1-44c6-d11e1a4b0d80@samba.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="aIY3tqgvGcRSUY2rtm0Mz2LiPf8ecdNuk"
+ boundary="dmbXXd7KFrKX9YTdUxWNyw23fvnX4uwzl"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,78 +65,61 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Bj=C3=B6rn_Jacke_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?Bj=c3=b6rn_Jacke?= <bjacke@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Cc: David Disseldorp <ddiss@samba.org>, Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---aIY3tqgvGcRSUY2rtm0Mz2LiPf8ecdNuk
-Content-Type: multipart/mixed; boundary="CYstmYIIwZ2d2vzO3Bt47fAiLNClcANpS"
+--dmbXXd7KFrKX9YTdUxWNyw23fvnX4uwzl
+Content-Type: multipart/mixed; boundary="D3d9fnwuWlzwlqPQGRGZSwhE1S45FVuDW"
 
---CYstmYIIwZ2d2vzO3Bt47fAiLNClcANpS
+--D3d9fnwuWlzwlqPQGRGZSwhE1S45FVuDW
 Content-Type: text/plain; charset=windows-1252
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-On 13.07.20 18:48, Ralph Boehme wrote:
-> of, what a mess! :)
->=20
-> Currently the snapper configure check is the only one of the three
-> (snapper, cephfs, glusterfs) VFS module configure options that implemen=
-t
-> --enable-NAME=3Dyes "correctly" (as per --enable-XXX configure semantic=
-s).
->=20
-> The other ones (ceph, glusterfs) will just silently pass if a dependenc=
-y
-> is missing, effectively implementing default=3D"auto" behaviour.
->=20
-> I don't think we want all of those modules to fail with a
-> default=3D"true", that would result in too much configure churn while
-> user's configure runs fail one after the other, forcing them to add
-> --disable-XXX to the configure invocation.
->=20
-> I guess we should just default to "auto" for all three modules.
+Am 7/13/20 um 7:06 PM schrieb Bj=F6rn Jacke:
+> this looks good, thanks you!
 
-I agree, that should be the default. This will enable users to build
-Samba easily with all available options that are possible on their
-platform. Package maintainers (same like autobuild) are advised to
-explicitly use the --enable-foo options to make sure that the desired
-feature really enabled.
+thanks!
+
+I guess at least Andrew is currently on vacation so lets give this some
+more time until folks come back from beaches and mountains or wherever
+they may idle along. :)
+
+-slow
+
+--=20
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
 
-> Here's a MR that implements this:
->=20
-> https://gitlab.com/samba-team/samba/-/merge_requests/1461
->=20
-> If we decide that we really want all three modules to use and enforce a=
+--D3d9fnwuWlzwlqPQGRGZSwhE1S45FVuDW--
 
-> default value of "true", this can be achieved by merely switching the
-> defaults in the above MR.
-
-this looks good, thanks you!
-
-
-Bj=F6rn
-
-
---CYstmYIIwZ2d2vzO3Bt47fAiLNClcANpS--
-
---aIY3tqgvGcRSUY2rtm0Mz2LiPf8ecdNuk
+--dmbXXd7KFrKX9YTdUxWNyw23fvnX4uwzl
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEARYIAB0WIQRTh3WYB8ykhrzLAI8xQwafzsNCPwUCXwyUqgAKCRAxQwafzsNC
-P1ukAPsGb33HBDSB1qt8q2yGkTRyVu6Gv0AilB/z87L9eI7HcwD9EYkhVJ4GLJOM
-6e7MTjiga7UwULVQDFL921w1MTDCDAg=
-=d4Bs
+iQIzBAEBCAAdFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAl8NbIQACgkQqh6bcSY5
+nkbEXRAAhcLYL0WVVwg7gd/v7tFuQWAGQyJEUVUtZKKauK/GK7N2PTT7MgyRa2Uj
+gWx811bKizn0IYwik0FwJvqTJXCw3wLLfazTgtnFSeJnetFgVMv/wGWWC1DC0562
+nZjCRrFFjeazRt30L8vzLN7/WqWzZKrNshJ5otz2J9jHs8K9A4nGqtX2Md/VbO8y
+8AfQd/pI6h0UahK2lDUXV71UbAQ8qqP5yIArrreiUQenPGSNRPzrgXuB2t/tHzdW
+0S1MMcnzYieAl9HBtieuLrVgw6CeUH2hk+x6SgvGDhHjBF3q8cm+3c0/VXGjtDJZ
+dDBeRhELv3RUXdU85izhyNwNK1tu4kCTY32+wxK1ic0Ir5rz8k9vRJ/0pzp10z5Y
+I16DXKx6DykWfSwQ7FzjTS8GzGbKtzno5LghlyZjXMCflBY/sCk3n5W0goKj0pgC
+1JyzxIDJGQqN+SNsbeQ+FCS8Jr0pv7VuYsus6jU5tt+BcL0J/bTzfLXjHWBj4oJX
+FOdgfWEdP6lI4KiNvcYCZpKgpWqUjYi0KadtTkTRRCIyLAKw0LmZ2oXvxtDsE95B
+nYtxO/CAtzBBMfmo4l3wmmCZa9HrWqe7mV0tzmrOfRoV8jex/ECZvY7JNm/onlnq
+xLAUuKTioHBr1Fl4ISIo44Uh3GL8TJlN36DS3zofJ4Jgq5x7IhU=
+=uXWP
 -----END PGP SIGNATURE-----
 
---aIY3tqgvGcRSUY2rtm0Mz2LiPf8ecdNuk--
+--dmbXXd7KFrKX9YTdUxWNyw23fvnX4uwzl--
 
