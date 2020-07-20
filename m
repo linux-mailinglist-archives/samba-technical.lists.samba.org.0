@@ -2,61 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49992225E09
-	for <lists+samba-technical@lfdr.de>; Mon, 20 Jul 2020 14:00:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B37A62262B4
+	for <lists+samba-technical@lfdr.de>; Mon, 20 Jul 2020 17:02:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=cmbF2LBdN+oAC1k+KwhYx6Chc7/7mwDzvEI9OsWtLLI=; b=lU/orsGuDy288xQUdnOd+A7DgQ
-	d9+0VL2DWJg3tAN4NWRF022pjLYkV2CKozH8b01JJn1Mmd5tWdGCF4KZ20lYoXgwdMtVlwsifXzNr
-	h2xSfjZrnEKR7N+zEngRs32CgpRXkfrQsB+DV//CQ6SFxOmvDSIBskK1u9iN84EiBFP4JIj1Nog8F
-	2Fs1hAQ++R1pMlbSH5wsKhpnXSMhLHN37ABf7BJk5lcvtpOlkvFW7DDyY9CJct4DZYofFvJQvmmFm
-	Qg2wax61fnDSTmof980Rgotw/jS4JRavaJSDacEK7nfSeOLOMRLNhPQrouP8tvuqYhanTDaqubvQ8
-	xMTkMgNA==;
-Received: from localhost ([::1]:45312 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=hfcYUjCX1BqhQa+IaAv567umt7uEuzhFGT6EG32uRSg=; b=VaeneQHfOR08EDWS8Lws6xyI2V
+	062CSKi1BJWqov5S8RRg8JvEcwijUkQVDV6SHnTHeeiPtsQo/ah3q/iapeNOLIiqEJxQI3XkMuZJ/
+	MBnbM57LSbTK2dyQoJwzz8Aot6u/Fd21YKrK9XoXEqVjXROTsn9PrBpmpFu31qTb1A+IDIDxC4Xl1
+	rleK1EiPF1nDnaJhZFOR1l1DwhyZWGXa29bv6dCrsaPjrN60liZm7zMsWkI8IT0A1q6P674eXWzFA
+	26xCWQ7h/Z/J/Vb9zrtq43yk6Wf/PrM7koUU+S7fNnoYZSwp20GuFNxmclIyqTWoVHaDTg2eJX+oG
+	k6fmnbJQ==;
+Received: from localhost ([::1]:30084 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jxUSZ-008owY-SC; Mon, 20 Jul 2020 11:59:55 +0000
-Received: from mail-ed1-x542.google.com ([2a00:1450:4864:20::542]:34004) 
+	id 1jxXIf-008tk1-2H; Mon, 20 Jul 2020 15:01:53 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35384) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jxUSR-008owQ-Ll
- for samba-technical@lists.samba.org; Mon, 20 Jul 2020 11:59:51 +0000
-Received: by mail-ed1-x542.google.com with SMTP id a8so12580015edy.1
- for <samba-technical@lists.samba.org>; Mon, 20 Jul 2020 04:59:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=GMeIzTYyd478aXpKSOHkxHlasxqf59hifCDMRUSUhrM=;
- b=FKRUKKo9cLj2j6JLSXiDUsjKFYWXG79YSfgpRP8vMOOC8G+Qu7jXdSFZfb63VfMpnd
- FG6P+7fM7UpvPZfuEidvnGRRlo8BpigfHAZxt7MOSGdEUUAnH5ouA952NdWYKqCOeA9E
- PCD2i3vDxlCJL/49Bwcb2jog89lsC0KkYw9/+eKZTSU86GIV54ITezFza0Mn476CR5qg
- //hNORkVFHWamcTxScM6q3wC3kLEgg3PhdxJqGju0o34sdJrFtVrA2z0sJDgBPB1Sbtr
- x5iSwZDZ4Hh7Ut/VKmL3RfinWCwqwTwgRY0JFUWYXF2GilWmkrnzqXXiFRHRFcM5hCKD
- CWlg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=GMeIzTYyd478aXpKSOHkxHlasxqf59hifCDMRUSUhrM=;
- b=q1uWMCAj4jtAOrc7KKZSH9OgawhqKKxX7/HNUHqgW2cm69EJPQozRkeh077dUTrrJ2
- 8GKRVxKMYovUZorY6zB30gytqymM+uiXz92W6rwcikWwDlGSgsBck5FBNfK2Pq1ARAsk
- hmaxROUfFmIUe8lVzkduZ6J79Rem70onSYBquzl3Ve5f8bkueLQOWqx6HsbizY09tFbE
- YiDaGeo4yTvjT0RvfkZuWgREan5l82w2t+sU147YTxbVaH1BSsVg45r2SFwBV49Gq1Ks
- vxdONr2S3UkjB8bY2zhhC062EvWxfb6ynMGE/5GVN3NkmQ8sV8pkzmmCpC/MyR/ymaFc
- BrxA==
-X-Gm-Message-State: AOAM532XAz2MnC7A1ofTgVVQ++pX4hYiCErVe43lSglsnpim3ou8M4eB
- USW/QzKzKpm3mYmVkE+yJtuFdZFHd/LUH5fgCqLceEKqMgg=
-X-Google-Smtp-Source: ABdhPJzp9SEmI17vVRflmL+kGMeUXL022lZqIz8y+RqLcElgKNLMMXN114XdAZ9I+WbWuEjFGR/x07AWKSvC9GhGKtg=
-X-Received: by 2002:aa7:c4d1:: with SMTP id p17mr20443100edr.268.1595246382622; 
- Mon, 20 Jul 2020 04:59:42 -0700 (PDT)
+ (Exim) id 1jxXIY-008tju-KS
+ for samba-technical@lists.samba.org; Mon, 20 Jul 2020 15:01:49 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=hfcYUjCX1BqhQa+IaAv567umt7uEuzhFGT6EG32uRSg=; b=tAK296wtD7hd25ik8jnYrL4S/y
+ k/vRmd9VrIqfryxPFhZl7ezzfQklXIjDa4oGgd452eLQKUcSYmVIMzkX0IEE4wPLv08/ePud/DAyt
+ 5OFMdYYQoeJ+eDq2AAHXQyYkj2xkQ+HyHVotvhvNQ+7trrkIybO2s0it5ujlMaOaTiIQvuTm+YiRQ
+ BILp4AW/rx5fa0XeUE4TRczHBjZjBqdJ/gINEztUIl/1o6tJDs+8W1CCoDBivTUalCRum2EuBAuqn
+ /J5x31DCuMafarOwEo1TwVL16urDYnsFEfJaOdyYFO41lKTQfEOxcVlk3inrEWiO8FG7Am/hS4AX1
+ yJeAXGwbJdj4yZAf31uaCKYpSXg67PHR5PEB1vz/A7tocAHgNaCiBmhcXtsRcyNmbmH7YNG/jsecc
+ 8UOGc4BoNRKKiSZWTKjZ2YkTm97KcMnIrCWBNHoPJelReLl9deka3ccf9asAjs77dww8pH8Dn7MIY
+ X+JZLZYKWel00Af/IK+plNwY;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jxXIW-0003Sl-4i; Mon, 20 Jul 2020 15:01:44 +0000
+Date: Mon, 20 Jul 2020 17:01:42 +0200
+To: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Subject: Re: PATCH: make disabling of vfs_snapper consistent with our
+ configure/build system
+Message-ID: <20200720170142.1583649f@samba.org>
+In-Reply-To: <63044415-9473-1572-2cd5-fa1fa5e012e1@samba.org>
+References: <20200710110737.GA1585556@sernet.de>
+ <b4ea37e5-398d-c8d2-15e2-1a27f7655598@samba.org>
+ <20200710114452.GB1572444@sernet.de>
+ <54f90e98-9d7a-337e-defb-27fb756130fd@samba.org>
+ <20200710194428.GA1596727@sernet.de>
+ <63044415-9473-1572-2cd5-fa1fa5e012e1@samba.org>
 MIME-Version: 1.0
-References: <CAH72RCWDx2Qsn3jo8_hAMC0m_8VwDHxxvg6JL8mwdEGR5TxN8w@mail.gmail.com>
- <20200720101347.GE25598@pinega.vda.li>
-In-Reply-To: <20200720101347.GE25598@pinega.vda.li>
-Date: Mon, 20 Jul 2020 14:54:03 +0300
-Message-ID: <CAH72RCVORM_48QvCEKy4U=9BhwDrMTJDUjT+MA5vN0GDUfUbyA@mail.gmail.com>
-Subject: Re: GSoC 2020 Progress Update
-To: Alexander Bokovoy <ab@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,58 +60,94 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
-Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
-Cc: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>,
- "abartlet@samba.org" <abartlet@samba.org>
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
+Cc: =?UTF-8?B?QmrDtnJu?= Jacke <bjacke@samba.org>,
+ Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I did try the workaround given by openSUSE
-https://en.opensuse.org/openSUSE:Packaging_nodejs#
-but it seems I'm having a problem with the directory naming as
-the po2json is actually included in the tarball and does not need to be
-downloaded
-through npm :
-https://gitlab.com/HezekiahM/samba-ad-dc/-/blob/master/po/po2json
-I removed the dependencies and devDependencies in this patch
-https://build.opensuse.org/package/view_file/home:Hezekiah/samba-ad-dc/remo=
-ve-node-dependency-tag.patch?expand=3D1
-I will try to rename the directories and will let you know how it goes.
+[sorry about the late response. I just returned from vacation]
 
-Thank you.
+Hi Ralph and Bj=C3=B6rn,
 
-On Mon, Jul 20, 2020 at 1:13 PM Alexander Bokovoy <ab@samba.org> wrote:
+On Mon, 13 Jul 2020 18:48:50 +0200, Ralph Boehme via samba-technical wrote:
 
-> On su, 19 hein=C3=A4 2020, hezekiah maina wrote:
-> > Over the past two weeks I have been working on the following:
-> > Packaging for Debian and RPM-based distributions
-> > Domain Management components
-> > Delegation Management components
-> > Service Principal Name management
-> > UI improvements for the application
->
-> Thank you, Hezekiah.
->
-> I haven't tried to run the plugin yet but the changes look promising.
->
-> I am still on vacation this week, only looked briefly into your OBS
-> Fedora build failures. It looks like the failures happen because OBS
-> tries to build the app by fetching all node.js from online sources and
-> failing to do so, thus not finding required modules (po2json, for
-> example).
->
-> When I prebuilt source with 'make srpm' and tried to build that manually
-> in COPR[1], it succeeded:
-> https://copr.fedorainfracloud.org/coprs/abbra/cockpit-samba-ad-dc/build/1=
-565160/
->
-> So we need to find a way to pre-build sources and then build the
-> packages. I'll look into that.
->
-> [1] https://copr.fedorainfracloud.org/coprs/abbra/cockpit-samba-ad-dc/
->
->
-> --
-> / Alexander Bokovoy
->
+> Hi all!
+>=20
+> Am 7/10/20 um 9:44 PM schrieb Bj=C3=B6rn JACKE:
+> > On 2020-07-10 at 20:31 +0200 Stefan Metzmacher via samba-technical sent=
+ off: =20
+> >> I don't see why your change would be needed, I actually think it makes
+> >> the situation worse, as --disable-snapper is no longer available =20
+> >=20
+> > I tried to descibe that in the bug report. Our correct way to disable s=
+hared
+> > modules is to use --with-shared-modules=3D'!module_name'.  That mechani=
+sm gets
+> > broken by 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a. So the new option
+> > introduced by 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a is not needed an=
+d it
+> > makes our generic mechanism to disable the shared module stop working.
+> >  =20
+> >> and configure would just fail if dbus-1 is not available. =20
+> >=20
+> > that's what it currently also does. This is because in the discussion i=
+t was
+> > desired that this should be a forced enabled feature by default. Person=
+ally I
+> > would prefer forced-enabled features for developer builds if this is me=
+ant to
+> > detect failrures in autobuild. But that's another discussion. In any ca=
+se
+> > configure fails (intentionally) with 7ae03a19b3ca895ba5f97a6bd4f9539d8d=
+aa6e0a
+> > and without 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a by default if dbus=
+-1 is
+> > unavailable. =20
+>=20
+> of, what a mess! :)
+>=20
+> Currently the snapper configure check is the only one of the three
+> (snapper, cephfs, glusterfs) VFS module configure options that implement
+> --enable-NAME=3Dyes "correctly" (as per --enable-XXX configure semantics).
+>=20
+> The other ones (ceph, glusterfs) will just silently pass if a dependency
+> is missing, effectively implementing default=3D"auto" behaviour.
+>=20
+> I don't think we want all of those modules to fail with a
+> default=3D"true", that would result in too much configure churn while
+> user's configure runs fail one after the other, forcing them to add
+> --disable-XXX to the configure invocation.
+>=20
+> I guess we should just default to "auto" for all three modules.
+>=20
+> Here's a MR that implements this:
+>=20
+> https://gitlab.com/samba-team/samba/-/merge_requests/1461
+>=20
+> If we decide that we really want all three modules to use and enforce a
+> default value of "true", this can be achieved by merely switching the
+> defaults in the above MR.
+>=20
+> Thoughts?
+
+When discussing 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a, Andrew and I
+both agreed that "auto" behaviour is undesirable, as it leads to the
+kinds of inconsistent build results carried in Matt's initial report
+at https://bugs.gentoo.org/721320 .
+
+I don't feel strongly as to whether or not vfs_snapper should be built
+by default. https://gitlab.com/samba-team/samba/-/merge_requests/1335
+eventually saw it enabled by default, with clear documentation on how
+it can be disabled at configured time.
+
+Given that Bj=C3=B6rn's initial complaint was with the inconsistent / broken
+--with-shared-modules=3D'!module_name' behaviour, would it be okay if we
+just fix --with-shared-modules=3D'!vfs_snapper' and drop
+--enable/disable-snapper?
+
+Either way, it'd be nice to wait for Andrew's input here too.
+
+Cheers, David
+
