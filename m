@@ -2,59 +2,88 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC3F5225660
-	for <lists+samba-technical@lfdr.de>; Mon, 20 Jul 2020 06:02:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 107AC225999
+	for <lists+samba-technical@lfdr.de>; Mon, 20 Jul 2020 10:03:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=06FB5woN06uiD3GvLoqoO/p4B+0/TRLVi1n7WwNJWW4=; b=0EwS9tgbbhN8glVdLBF00jMtE8
-	wqz92rK1aS++Jlz3YiydqdmBKg04eLNvQA8CwF8BwJX3f91qyMKzAPsqqRAlRC3aOYJ49ZOXRJnHj
-	S/ZDQtbCPgvWfXdAWAQH//dXAtqnsdoQNGf1eRITsV8zYoSto6R3QBtpvSc/apA81eD0ntpelijkR
-	1zKl8rgVL79s9nE0aqbfUwSoWUmDK9iI5TrwRxUjPVi+TdLrF3AKPkl0vDza3EuZT3Pw0hQGu2oHT
-	KCArxXCkflEK3q6gIWEtmtzsPlIKKG/pr4Y3phwr6tekF6Yu/l9XlrX7r0W7aEXW0/3WMWfKP0grn
-	btDwbKBQ==;
-Received: from localhost ([::1]:63284 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=AQCEKSOJwkR496P4H0W9LCvpLYko5lfZEFqiyTm7WPc=; b=k5ldGx02zbKFcV05AHlw21UBtG
+	xFUITsfBgUTID1bTd0cvRM/fDbuRR8bR0YdjKrcWZGhL+QcW3BF4cP3vsInJnbH6SlJbx3TQ9oaq7
+	Vrvn/qmiiBbYOYmN6vpP0Q0Jy6M8DbifRetsHyIGwP4ShfDfOarbie/8ME6Yj0//V6OZbjWCfIRx1
+	8QsfKvVEdXV7rHvPxhjpgwD5QuLAC+2Fh8+k0YO0yR/0zw1ZD71fD5q3LC8jZSXxONNQ4hVjjCnii
+	jYmpIpOs+l8q91PQ4tFmL+uzRa/5s7e733EBKRqhPqksoDLuWQAq+BlekS/RDuAAiOrEo2xe+08E2
+	hlD+LgiA==;
+Received: from localhost ([::1]:23736 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jxMzc-008jyU-3b; Mon, 20 Jul 2020 04:01:32 +0000
-Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:47061) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jxMzU-008jyN-7u
- for samba-technical@lists.samba.org; Mon, 20 Jul 2020 04:01:27 +0000
-Received: by mail-io1-xd44.google.com with SMTP id a12so16127272ion.13
- for <samba-technical@lists.samba.org>; Sun, 19 Jul 2020 21:01:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=06FB5woN06uiD3GvLoqoO/p4B+0/TRLVi1n7WwNJWW4=;
- b=on1+bAOdCGMblOPS50ks9XVUNV/Pv71/nJg7UHPlRQlJ7zuDhAgO7rCEVd3USaY3Mt
- IgRp2NqdUc1Wj6R15cpQvh1XfiKAY7z6hN2GtCy1Y1bRtAzG0E3cWRAVJeEUuxqRwsML
- 9sIww+QZdyIwZKeRBu07fLXx00Rc5Mew8zrCta+ElkHnG2jDkeqyd8Q2AOrIBQeAbpSi
- O7uvX8SD1YJVM3FnYumZDNcZmUcLjkPC86VRexGDux8PO6f053qJnc6IWzdZmNHxeSWU
- sK0/Xt9+oXdDXdH6npB3/vxC1h0ccmI2u+WSHf8qGPDwUp+TWQUfRFn+9zs5BmYJF7jq
- acHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=06FB5woN06uiD3GvLoqoO/p4B+0/TRLVi1n7WwNJWW4=;
- b=alfTZhYVcrqKdg7M0SRY7wbGKEBuB81uvQV8yKBXaJseePchTN4gROa1Gk37bEPZLC
- 7OX6HeeaPMTIOHuDYjVN4L9AFLE/I0rWxEYuHXasa/+SiTgSTiJ5BL+tgkMkV2qhyXIH
- k03uN2cWTHbVNtHjG0eUrdyH3mvU7JLFtXq5oc6OkMn9A0lsiEWoYjCdiihJr93u3gJr
- WLHNu7bRNAfj6uuu6O/+MadQccXGox6IEMu+Xo5EFJ2b3NPBDEHlBCDPC9oxZj38i9C6
- oxADg8EQ6V7/aExr0IfbTKjSm5WrZ01T41q217o5EHxjANUYpvmyO6amFMiLth6RRG+r
- LDTQ==
-X-Gm-Message-State: AOAM530OLpHig9O6HyiilKFeCgVUQhB1984H0sm5A0E0KMZ+XrRp8Bb4
- X81J+JWn3sd0C/NLNDj/ZTKtsGf4omJXLWP8mWo=
-X-Google-Smtp-Source: ABdhPJyDXRT3U/LawJJ68RJgwLHdTTjyNzrLuB+TjtT4/3mDARYFNZ5G3AYZa83I8wYKg6g4GnxCpLIllnnREJHmOm8=
-X-Received: by 2002:a05:6638:1414:: with SMTP id
- k20mr15068626jad.76.1595217681967; 
- Sun, 19 Jul 2020 21:01:21 -0700 (PDT)
+	id 1jxQlX-008lfT-9C; Mon, 20 Jul 2020 08:03:15 +0000
+Received: from mail-dm6nam10on2127.outbound.protection.outlook.com
+ ([40.107.93.127]:1697 helo=NAM10-DM6-obe.outbound.protection.outlook.com) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1jxQlN-008lcr-7l
+ for samba-technical@lists.samba.org; Mon, 20 Jul 2020 08:03:09 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=oEl5VQNXEKqghI7mOlSBPP7HE6RDsLzQSQKzliMEpX3NRpN+9jOPHdKW7o20zflHzZQTixCSDfoR1IdbFZYxWmmM5HRGoVQbCdIcGIFqy2Wd2wf97TNssj/34a+JHX6NMPBnlv+z0jO982KJ3TdwsYrnaFfCUohqUrmJ/lCqFaohGRwJN2p1uLwX4Pd5id0FI+gDtFlZFtMSJRT2GKCMlY452ZWvxqRp79yZwqtbz/tm9cah1Ax5dDZAr9ouhIm7wz9u9/Lil2kBa+/WxofP4UDk0ejLXxM1yXmPlL/6vOKL+weD7POOXci97ooPPgbPlSo7qGnJY5YHomkqFlVECA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kthHBdjID3DVNR6FBMbX41XVDmEA/kH8cWI9y+mceDk=;
+ b=PtBBWhshx30XcfMRgOMKfAq33hRGqt6nciWxIGQPtShyhRie6caeezLrb0Oq21naAnpdHfLz1wx1s9YfYuM07cc7rH3HZxe0TeokMhZxuXefzTvsP+ZZkESlaccB2G4HYW8h8NodKuP8ilJKo7dou3viC4RmFRAOrGwmo1s7kwGXzZuPKGBstRA/nX91ZwMGf14Xd1LQ7PASsxJJ0vgiujAB/qj/SBb48tGqjv5gU+hOKWrUE8mXisFNHJ0LhlBR/Bhr7ycqeycwJ8fkIcRijeoEPr9MUHB1njuqaXspdw0kCmestZh7UC67z8Hy8JXahnpmn35iYvYrf+FeMXbw1Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=commvault.com; dmarc=pass action=none
+ header.from=commvault.com; dkim=pass header.d=commvault.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=commvault.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kthHBdjID3DVNR6FBMbX41XVDmEA/kH8cWI9y+mceDk=;
+ b=EADJd2kQPpDJ/+JW699kAoV25l+85N3Ak4CxyvmGlRPbsMz3HajOkGRaG3Vlz60IYzEleJu3+z/RXqZAnXq8WLOL4LGplsJBQ5y3afZ1pJpj8Vf3/1mlNYL3Giw7fKJH/800RsznL5tdONlARzJQZjO4i9ZxZCvhm8OBtTohmtY=
+Received: from BY5PR19MB3096.namprd19.prod.outlook.com (2603:10b6:a03:182::29)
+ by BY5PR19MB3349.namprd19.prod.outlook.com (2603:10b6:a03:18b::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3195.23; Mon, 20 Jul
+ 2020 08:02:48 +0000
+Received: from BY5PR19MB3096.namprd19.prod.outlook.com
+ ([fe80::a468:d4c3:9485:837]) by BY5PR19MB3096.namprd19.prod.outlook.com
+ ([fe80::a468:d4c3:9485:837%7]) with mapi id 15.20.3195.025; Mon, 20 Jul 2020
+ 08:02:48 +0000
+To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Subject: Samba 4.10.4 - Error loading module nfs4acl_xattr due to dependent
+ libraries
+Thread-Topic: Samba 4.10.4 - Error loading module nfs4acl_xattr due to
+ dependent libraries
+Thread-Index: AdZeZWKV0/pBpYqlScGFyi/z1rB3JA==
+Date: Mon, 20 Jul 2020 08:02:48 +0000
+Message-ID: <BY5PR19MB3096D158005BDD10D2A4CF17DE7B0@BY5PR19MB3096.namprd19.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: lists.samba.org; dkim=none (message not signed)
+ header.d=none;lists.samba.org; dmarc=none action=none
+ header.from=commvault.com;
+x-originating-ip: [103.226.169.199]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 2139a98e-6d3f-461f-560e-08d82c834afc
+x-ms-traffictypediagnostic: BY5PR19MB3349:
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: EjyDscLscsuScfIdg+S9U7wMQhwGb939EKi09KTxg5TWeNFpseHuKoxDVUvhlEZBPGGKrB1lxBiucAx79T7cBqZO0nklPh1na8Kw2Ex8n8zTkOS4d81D8YYlFbLKkptDzs32C5I7NRiiU9HhiNJvNHYGB7ifD0Q3rm0FkkyEnbSgYCLhnsr+0u6GE5eN28WtoF/CIl+IvpIdMETHHoOvPMax3MgFP3SUUyqyKd6DdAymbhg1Auwz1myUyy10ze3M+e5OP4Ho19WZGiCbIt7Suwn+vpNea4qCr38mkRtLjPZkvgb2gyJJm9tc+qSHyAQlIxY6Fp9VjmYWtIBl3rI5eg==
+x-ms-exchange-antispam-messagedata: j2AIBEgJ1BC36tl6EBHVnjMMDoPs1vKTiWFV0aJSwrwVifxrdFjERqA4G1ZeUv3y1nImGv85yu8YMML0UfUmOVE6TzcWdbDfmY/VkQELMscaPbRoSpnOA+8wF7D0+FjB9lUkv6pltdUHcUhCWI06RtRg6IaoglXHQMGvLANTT1rRAvpZCq08/F/308olCkblY4iyNw7YANjFXwsIbo03cx9NmyNq3Bd7aH8m6YfQbv0VUB/Wg4v2L7G52MVuOSCk2SWn/BeBzdyJz8K4nkpWeys5TWu/v7TPrMFSkhBVYrqPZfgpVsYfSZ2Qlq0MvTpQti+ejvT/xuB/OnTFRQh2ybtNs6WbZQXme980X3k3uM4+hjzL3PUoOuKrTJy13CFpGkRJ/OXR2MPVbBY0orJTkuqPa36pu/Tho47SRvy/juyuy4UJlO/T08WLDuG5FGZG/Xhq6A6u8JEc6UxsHeBOKD+DbKldqBbIuZRiHTlrU56rTqTA4FPj6AYs4o/7+wdR
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-References: <20200720001316.22854-1-rdunlap@infradead.org>
-In-Reply-To: <20200720001316.22854-1-rdunlap@infradead.org>
-Date: Sun, 19 Jul 2020 23:01:11 -0500
-Message-ID: <CAH2r5mtaN8kOJ7WRZFxs3W7AUVO=N58G_ai5r6UVqpMhX4j2CA@mail.gmail.com>
-Subject: Re: [PATCH] cifs: delete duplicated words in header files
-To: Randy Dunlap <rdunlap@infradead.org>
-Content-Type: text/plain; charset="UTF-8"
+X-OriginatorOrg: commvault.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR19MB3096.namprd19.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2139a98e-6d3f-461f-560e-08d82c834afc
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 40ed1e38-a16e-4622-9d7c-45161b6969d5
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 4is4U4n1WpO2m4061T+HOYbm91wx9IeVSe6JmvbAAy8jJ0qTYa/oymkYKF3nP7bIln9Njo4mITQXy/8hNhhlD0RzrW+mtiyM5kwD8MY84kg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR19MB3349
+X-Warn: EHLO/HELO not verified: Remote host 40.107.93.127
+ (mail-dm6nam10on2127.outbound.protection.outlook.com) incorrectly presented
+ itself as NAM10-DM6-obe.outbound.protection.outlook.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,78 +97,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>
+From: Sandeep Nashikkar via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Sandeep Nashikkar <snashikkar@commvault.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Merged into cifs-2.6.git for-next
+Hello
 
-On Sun, Jul 19, 2020 at 7:14 PM Randy Dunlap <rdunlap@infradead.org> wrote:
->
-> Drop repeated words in multiple comments.
-> (be, use, the, See)
->
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Steve French <sfrench@samba.org>
-> Cc: linux-cifs@vger.kernel.org
-> Cc: samba-technical@lists.samba.org
-> ---
->  fs/cifs/cifsacl.h  |    4 ++--
->  fs/cifs/cifsglob.h |    2 +-
->  fs/cifs/smb2pdu.h  |    2 +-
->  3 files changed, 4 insertions(+), 4 deletions(-)
->
-> --- linux-next-20200717.orig/fs/cifs/cifsacl.h
-> +++ linux-next-20200717/fs/cifs/cifsacl.h
-> @@ -132,7 +132,7 @@ struct cifs_ace {
->  /*
->   * The current SMB3 form of security descriptor is similar to what was used for
->   * cifs (see above) but some fields are split, and fields in the struct below
-> - * matches names of fields to the the spec, MS-DTYP (see sections 2.4.5 and
-> + * matches names of fields to the spec, MS-DTYP (see sections 2.4.5 and
->   * 2.4.6). Note that "CamelCase" fields are used in this struct in order to
->   * match the MS-DTYP and MS-SMB2 specs which define the wire format.
->   */
-> @@ -178,7 +178,7 @@ struct smb3_acl {
->
->  /*
->   * Used to store the special 'NFS SIDs' used to persist the POSIX uid and gid
-> - * See See http://technet.microsoft.com/en-us/library/hh509017(v=ws.10).aspx
-> + * See http://technet.microsoft.com/en-us/library/hh509017(v=ws.10).aspx
->   */
->  struct owner_sid {
->         u8 Revision;
-> --- linux-next-20200717.orig/fs/cifs/cifsglob.h
-> +++ linux-next-20200717/fs/cifs/cifsglob.h
-> @@ -1466,7 +1466,7 @@ struct cifsInodeInfo {
->         struct list_head llist; /* locks helb by this inode */
->         /*
->          * NOTE: Some code paths call down_read(lock_sem) twice, so
-> -        * we must always use use cifs_down_write() instead of down_write()
-> +        * we must always use cifs_down_write() instead of down_write()
->          * for this semaphore to avoid deadlocks.
->          */
->         struct rw_semaphore lock_sem;   /* protect the fields above */
-> --- linux-next-20200717.orig/fs/cifs/smb2pdu.h
-> +++ linux-next-20200717/fs/cifs/smb2pdu.h
-> @@ -31,7 +31,7 @@
->   * Note that, due to trying to use names similar to the protocol specifications,
->   * there are many mixed case field names in the structures below.  Although
->   * this does not match typical Linux kernel style, it is necessary to be
-> - * be able to match against the protocol specfication.
-> + * able to match against the protocol specfication.
->   *
->   * SMB2 commands
->   * Some commands have minimal (wct=0,bcc=0), or uninteresting, responses
+I am trying to load VFS module nfs4acl_xattr which is compiled and linked o=
+n Samba 4.10.4 as shared module.
+It fails to load with following error:
 
+  Error loading module '/usr/lib64/samba/vfs/nfs4acl_xattr.so': libgssapi-s=
+amba4.so.2: cannot open shared object file: No such file or directory
 
+I have been using the module compiled with source with samba installed from=
+ yum repo till Samba 4.8.3. I did not face this issue before.
+Can someone guide me why does it depend on this library and how can I tackl=
+e this? Do we need to install another package to fulfill the deps?
 
--- 
-Thanks,
+The libgssapi-samba4 library is not present in standard locations on a setu=
+p where we upgrade/install the samba-4.10.4 through yum repository.
+Its present in the ./bin/default/source4/heimdal_build/libgssapi-samba4.so =
+when we build the samba for the module itself.
+If we provide the LD_LIBRARY_PATH and use LD_DEBUG=3Dlibs, we see it loads =
+many libraries with -samba4 suffix from that directory.
 
-Steve
+Do I need to build samba module with a particular configure flag so that th=
+ese dependencies are not required?
+Appreciate any help in advance.
 
+Thanks
+Sandeep
