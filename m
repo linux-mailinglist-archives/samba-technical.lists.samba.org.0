@@ -2,50 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EB0F2259CA
-	for <lists+samba-technical@lfdr.de>; Mon, 20 Jul 2020 10:15:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0EBE225C79
+	for <lists+samba-technical@lfdr.de>; Mon, 20 Jul 2020 12:14:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=xc6I6X9cfz6zWbGmMCA6O+JlpBvGpnPqnkSjJmM5OxQ=; b=3ll6IeO5zwPXUNgYlwIF/73m4/
-	DmwHRh9mbxwWyHrTtjURZs8XRfPevetzJkJSGH9aO3z+dR5x4fKOJ7bJBEAHao6457CzUJLyI57TQ
-	17Ai8MNcQ8yjBKjEGhR7NBziRzX/xySgu5eTzDzy2W/zUWhDc2SD+eHunRFMsh5apDQ6PPX9gTVng
-	ECVLKpjE4Zv6Cec9zJVOVqhBnzrNdqA5UT5fbszRCAhAsg5GO23TOFqxgFwTYUj/aUtf0ZwR3znT1
-	JGpEYzPeUfImR2JQ58UezxGh1OkEBSvTfDfeBIHS9DP4hoF7/R/Z/onSuh3Ec57XbKtLJUa4nK1gt
-	O6uYTl6Q==;
-Received: from localhost ([::1]:24960 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=pCscTJifz2UNpOwrOvusfs3PPiGVizOpFmA+hTBMz34=; b=jkf88CZmLTyQBdUYCpCiCkcf3x
+	oSUZdJdNBI5VkK60JuaFudoZY2kDrRlucZwTFu9z1jwOfo+kJW448x8g50xti7CaJzJxAtkqdrlCU
+	+TQrNzjGmm1hfmusGgJm7U9tMdVsZFWCrTuL6+210ZC+scLNr2VDggC7+xmruUx2PdMhq0bL67MI2
+	HzIBJF29YR0E5jV5uNDrm/3cvv3wUiwj/kIS8BxD3b0+lk8OsHjdb54hb1TpGCWV7LfXV5pWMeS4N
+	+5crsf2JbAJCXcRvdt8IUENoMxmuKAiYn9NxsROTLKT68DE9kBjyG6ic099KIukVR57fpjXcu7qbw
+	EjOHr8rA==;
+Received: from localhost ([::1]:32874 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jxQxH-008lq6-20; Mon, 20 Jul 2020 08:15:24 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45124) 
+	id 1jxSo2-008n6Q-0G; Mon, 20 Jul 2020 10:13:58 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31332) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jxQx5-008lpz-Le
- for samba-technical@lists.samba.org; Mon, 20 Jul 2020 08:15:14 +0000
+ (Exim) id 1jxSnv-008n6J-Dt
+ for samba-technical@lists.samba.org; Mon, 20 Jul 2020 10:13:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=xc6I6X9cfz6zWbGmMCA6O+JlpBvGpnPqnkSjJmM5OxQ=; b=KhFgxXveltCfMhjKJwBMlaXxgD
- SkIC4G6vYq3M7yx4owyn0G+X6RnUNtN71x3cjOxmwnxL+Du1YgR8k3dSMmq6TpfVOqLgSGM6+13To
- 6dZ/qTqtDoO0E3xsKsltfycuewM3b08gnnaPbMsqp2NjyT82nsa2o2+El8I7JKQhWyyRqpEGG/Pvb
- EjOVgW794P2utQgcukLAFqZRYPWnKx3btakCwpyh5dOAXrK2ihFasTmjBKJ4GLrwYQCKNpfGDksnj
- EEVWGjxO2teoUfeO+qimusE74eFcT914/P7vph1+cL55sxsnWezVpdOjJsQB71RWO27ViseQhzBme
- erb7GURwXpGzKI7/sDfRdH6UW74IYYy6xrpcynOIiuPd/MMisyp5SYPInUS4hjr2/DVjgcaB9TzmY
- Mym0ppFBx0EWR8wOdv6zhYyOzqr6EA8WUZT6MAUon/aYsnKK9VV3LVA+v0JzUz2yi9w4H9qZZqrZY
- hVI/BxfZry4vBem8IHbJpX5p;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=pCscTJifz2UNpOwrOvusfs3PPiGVizOpFmA+hTBMz34=; b=yFOhqs+DO/dYGk0N/h1iRHwEXw
+ BScz4yCJ38SuSpkg5QLSBT44t0O2Y0J5bfNWoSguzeundJBN1x7uNmq3wO8OoPMaFtux1nyI21BZJ
+ c7sg18JJiDo9p3yqO3E+y65uz8O6gnpzGVfk36hefvbIFzKRkBuRfHHLit/Lm19TueSrqvQMSlL2Y
+ 0g9HB9/ngZJ31ltaLAN2lKBdVNJmS6rI1ft2dGDuArq2pOrKvn0XrTwAHC3ykR87V1/mtwa382Ecg
+ atyiDKKV3V9x5XdhUu2XK0HvYZ/xYBpFIGp0ObfIubGhF5QsQy1Q2rByZwhFF8da1Xki3Q61ljIIs
+ ylK/KJLHr60CHBQgaZBNGsC28sQEzby0rvzig4kn+V7d9Dh38qckjusnZUHv3FuympLZZijamBiUm
+ WOS7up8W2G31M6GCPacizosc6aY/b7L9kj4lX3GhUefvCebinW23OoPI6j+0R3C4vPh1v1rTPdcsA
+ XGUJ09JOHq8pSVR2Yitx0RQU;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jxQx5-0000Ui-3q; Mon, 20 Jul 2020 08:15:11 +0000
-Subject: Re: Samba 4.10.4 - Error loading module nfs4acl_xattr due to
- dependent libraries
-To: Sandeep Nashikkar <snashikkar@commvault.com>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-References: <BY5PR19MB3096D158005BDD10D2A4CF17DE7B0@BY5PR19MB3096.namprd19.prod.outlook.com>
-Message-ID: <39d17620-cef7-7f45-a372-2a3a6d900591@samba.org>
-Date: Mon, 20 Jul 2020 10:15:10 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ (Exim) id 1jxSnu-0001EM-4B; Mon, 20 Jul 2020 10:13:50 +0000
+Date: Mon, 20 Jul 2020 13:13:47 +0300
+To: hezekiah maina <hezekiahmaina3@gmail.com>
+Subject: Re: GSoC 2020 Progress Update
+Message-ID: <20200720101347.GE25598@pinega.vda.li>
+References: <CAH72RCWDx2Qsn3jo8_hAMC0m_8VwDHxxvg6JL8mwdEGR5TxN8w@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <BY5PR19MB3096D158005BDD10D2A4CF17DE7B0@BY5PR19MB3096.namprd19.prod.outlook.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="KR0C5X8T7Spu3QkaCy38hTKUmYQSsCD6O"
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAH72RCWDx2Qsn3jo8_hAMC0m_8VwDHxxvg6JL8mwdEGR5TxN8w@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,82 +55,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Alexander Bokovoy <ab@samba.org>
+Cc: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>,
+ "abartlet@samba.org" <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---KR0C5X8T7Spu3QkaCy38hTKUmYQSsCD6O
-Content-Type: multipart/mixed; boundary="CNzkdcOGboKaPRn4AGmKM934YOHXXpsXd"
+On su, 19 heinä 2020, hezekiah maina wrote:
+> Over the past two weeks I have been working on the following:
+> Packaging for Debian and RPM-based distributions
+> Domain Management components
+> Delegation Management components
+> Service Principal Name management
+> UI improvements for the application
 
---CNzkdcOGboKaPRn4AGmKM934YOHXXpsXd
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Thank you, Hezekiah.
 
-Am 7/20/20 um 10:02 AM schrieb Sandeep Nashikkar via samba-technical:
-> Hello
->=20
-> I am trying to load VFS module nfs4acl_xattr which is compiled and link=
-ed on Samba 4.10.4 as shared module.
-> It fails to load with following error:
->=20
->   Error loading module '/usr/lib64/samba/vfs/nfs4acl_xattr.so': libgssa=
-pi-samba4.so.2: cannot open shared object file: No such file or directory=
+I haven't tried to run the plugin yet but the changes look promising.
 
->=20
-> I have been using the module compiled with source with samba installed =
-from yum repo till Samba 4.8.3. I did not face this issue before.
-> Can someone guide me why does it depend on this library and how can I t=
-ackle this? Do we need to install another package to fulfill the deps?
->=20
-> The libgssapi-samba4 library is not present in standard locations on a =
-setup where we upgrade/install the samba-4.10.4 through yum repository.
-> Its present in the ./bin/default/source4/heimdal_build/libgssapi-samba4=
-=2Eso when we build the samba for the module itself.
-> If we provide the LD_LIBRARY_PATH and use LD_DEBUG=3Dlibs, we see it lo=
-ads many libraries with -samba4 suffix from that directory.
->=20
-> Do I need to build samba module with a particular configure flag so tha=
-t these dependencies are not required?
-> Appreciate any help in advance.
+I am still on vacation this week, only looked briefly into your OBS
+Fedora build failures. It looks like the failures happen because OBS
+tries to build the app by fetching all node.js from online sources and
+failing to do so, thus not finding required modules (po2json, for
+example).
 
-whatever pulls in the depedency for libgssapi-samba4.so to
-nfs4acl_xattr.so... why don't you just package them so they're available
-at runtime?
+When I prebuilt source with 'make srpm' and tried to build that manually
+in COPR[1], it succeeded: https://copr.fedorainfracloud.org/coprs/abbra/cockpit-samba-ad-dc/build/1565160/
 
--slow
+So we need to find a way to pre-build sources and then build the
+packages. I'll look into that.
 
---=20
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+[1] https://copr.fedorainfracloud.org/coprs/abbra/cockpit-samba-ad-dc/
 
 
---CNzkdcOGboKaPRn4AGmKM934YOHXXpsXd--
-
---KR0C5X8T7Spu3QkaCy38hTKUmYQSsCD6O
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAl8VUo4ACgkQqh6bcSY5
-nkYapA/9FyiEI7RMoLO2O00axANvm4accazRQneHRUe5817caBPmTrf/izuve8pH
-6hgaauNQBoj40Fk4EmMRAfeSxVzG2p+ze8I3hPWd1PZxm0JoDndSa7vXqx5HlPwP
-ZJdsavm7uBQh1zCBxJqz527E5k8tj0AC/OlhPQRxlk6cbXnM+S2cVdw7O8GkeZZu
-amCvkX6Q4qhDsfz1iGeUYq/iD1Pj7PsJhyBX06Dlhr9KhvZyuXcU3jDUIWimB9BL
-VIsU8cU5K2jIra9R2OaBkZmjArUbIRUlyJoHIwbrnds1fY+i0mW4zulPeagIUNsU
-EifSn/rgvKOxKs4b4b+724EbJyW1wsMayuhMjvbv6/gT62CJ18vWGXow8ATsf8An
-0dSfCDmuRtl8Im2eihp0mkrbjn5kT1aE8+WQdMYPBNCuNNRYhgtEOuRRFfY2QNOK
-1ICTWtgGQ6CG081/RTn5mzX7kRdtuk8+FjplkMiefGO68Wr76VAnnI4tT1ufwaaW
-cr8fkugwtZ9cWDtpwvS2ee5T2diMLeN5bsjvAtU7lMVPV621jsY7OqiNF8CoY+Eq
-qXjC/DRtj3HATxuCwtgqV4Zh+NaedWpL8qonKMiG62sFw+1yBWeJQzAZUL9/dGK3
-zUJjKpSc0IuxWj0w3F+SDwFeE/DBWHonGvrQ8oXBMc2AWfxi4vI=
-=NG00
------END PGP SIGNATURE-----
-
---KR0C5X8T7Spu3QkaCy38hTKUmYQSsCD6O--
+-- 
+/ Alexander Bokovoy
 
