@@ -2,90 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD7622262F8
-	for <lists+samba-technical@lfdr.de>; Mon, 20 Jul 2020 17:08:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6E482272CC
+	for <lists+samba-technical@lfdr.de>; Tue, 21 Jul 2020 01:25:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=ReBGB6i1XnC2QJcaeU070ORhGYeOXiKTRaPoaIxugDM=; b=mg5VhXRaRxlH95QQvWuuPmAD+w
-	5dybKFgou19wIgi0haEoNaWlJvdbTcP5u0dmPwFAJ6GtkfH2CYOkWm4IAdka4FlpOWo6w2GzysQtw
-	pb7YhnHP2q7llK3DnbQPFApLubY6tSTHDwLT/Zqq69KiFbr5yAoolA8Ie8QjjTUVXJYBhkywW6bTs
-	xe3pAmhpo5Igstv1MyZIgESk1XnTaekBsKxyG3p2YDQk+9JLyHHfhB/Nwz8ju7AbuzVgvGcQxxJ2K
-	in59p4KfFvwkjxNW/qv4/77AIh04fxwUNuTVPDlZRqpUZavzP7Hwd8noyVRxVb7M+CgADcYWItZ9b
-	letNvsdw==;
-Received: from localhost ([::1]:30838 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=Lh28VeauogY1ma7Wkk6dJvvTx0TOC9moAgXwQu9lqP4=; b=qMA2m+1amSf8jR1qMuGbjlXReb
+	+cqX1IZkdw/E4JgQ0b7ES2xLKaXN46B6KIJINYb7kSzf9nHwfz4IZAJjMR1gDacsu0kNjC6nr1jth
+	L1njStvg09fsTiev5RR1MI1EjnNjCbAXWUgp4sNH7jSgxZFAZ2/6jeoxTqTDrBsltNvzyilQcxvmg
+	z64swuJXSMGl8oRnpp1yqTGhNF8rhqlwglA/JcFjqO5n49Y/3sclvYgT0FtmkHnJd3b7IT7maf9tk
+	3ubSWW+6fUCzLcQW8ULqAIvTKZcTaLIb0yK/YxQ7/DHrk4p3sIHjuz8Q0TNHH0Z1MPLnKudEm+A1Q
+	8F9Yrtlg==;
+Received: from localhost ([::1]:43788 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jxXOR-008tqN-T7; Mon, 20 Jul 2020 15:07:51 +0000
-Received: from mail-eopbgr770119.outbound.protection.outlook.com
- ([40.107.77.119]:64533 helo=NAM02-SN1-obe.outbound.protection.outlook.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1jxXOJ-008tqG-Fe
- for samba-technical@lists.samba.org; Mon, 20 Jul 2020 15:07:46 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kc91+ypr1ys/RxXw4A8KfuEe+S52+DLgKAfbG34e9lklr1RqCPaZ3oQz+VLFQNTvKxrCgYNzhjDoWLgQn98bjD7GnAZVS0RxjVOcv7URJF1Rg2VaTYMp31mZ25tNPbS/pFIdOEs7pd1tU8FjA8mni0cQnhwsopie0tqdivpQjFqS2Rp8/a13K/QSIAyCFT40rEQQYh/BaEHH+swAcLTv6K4iUSow34+ZCgdJWRyjd6WwWQv2Z1a8mPDGSf6EGlt+ZbnUepkKn5wXu/tvzu/SsIBbAtByWG/NUg8MvbU1DNFFx5htF4GBZW/0tDAff1g1jOo+8z1Cdyrpoa3cZVCBvw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ReBGB6i1XnC2QJcaeU070ORhGYeOXiKTRaPoaIxugDM=;
- b=UF4RQsqWm1uppdofsk0sts1wTHUoWv3O7Tk7TvFbMrHQHFazh6NMUvACRd4wLMV10Phxx5n1yvA15RWemNB4mb8B8i0TkQuRwFleYApWyjY/Xk/5KODWZC7NGN+giGQZB1+jWeKkXf2px5RiBl012NlcPf+xiWKSAU57HE/ZEzc7NKFORpcyrDy9tl1R7jhJVoQJJhNmlDK1dzCei5x2sixayugfsqFHF3IRtl3axMuoIQ5KJ/mBIZ3ELe0bLUbcoUccCm7Utnj0RbbeMWvzxPLJmdl1ZFEQ00fsKcISL7wxrXmg2XTrNnQtlm0WEDdfMFsiT5+66i7m9EbD9IJ8/Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=commvault.com; dmarc=pass action=none
- header.from=commvault.com; dkim=pass header.d=commvault.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=commvault.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ReBGB6i1XnC2QJcaeU070ORhGYeOXiKTRaPoaIxugDM=;
- b=hcPfvpy72eLJGg6OcP8uaQnRu4UTFMjBrzj6Aq5cKXECKKF08RamJs0rnEyExG7YLp5CuUccOnvKU/75nFroBaGZGASAUTao0+gIZz8DV6xq+OqN0+dvf0GK8bLhqF6siVYaLoGVZPknh1wYYhITnL+39A561r2k1KTH3knQfYc=
-Received: from BY5PR19MB3096.namprd19.prod.outlook.com (2603:10b6:a03:182::29)
- by BYAPR19MB2423.namprd19.prod.outlook.com (2603:10b6:a03:12d::28)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3174.22; Mon, 20 Jul
- 2020 15:07:27 +0000
-Received: from BY5PR19MB3096.namprd19.prod.outlook.com
- ([fe80::a468:d4c3:9485:837]) by BY5PR19MB3096.namprd19.prod.outlook.com
- ([fe80::a468:d4c3:9485:837%7]) with mapi id 15.20.3195.025; Mon, 20 Jul 2020
- 15:07:27 +0000
-To: Ralph Boehme <slow@samba.org>, "samba-technical@lists.samba.org"
+	id 1jxf8w-008wcs-Bn; Mon, 20 Jul 2020 23:24:22 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38240) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jxf8o-008wcl-Ke
+ for samba-technical@lists.samba.org; Mon, 20 Jul 2020 23:24:18 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=Lh28VeauogY1ma7Wkk6dJvvTx0TOC9moAgXwQu9lqP4=; b=RnTbCP5kwlt96/pXpcipGC/nn8
+ rzJIWQOkwV2jGIfAprML53sRPvRBulmmb6CN2TFaoFO00Ondo7ZUJ70Ki4tcpfYRiUM6Yw0A/NLRB
+ oxr+7VoaZAOSnEUlBZBon/BsG5wDDUZ5Tn3EUF89LUVxFrP9ynXk2WsM4SK9vqqOw3HwhCVeljYpQ
+ NbBOHPm/FilYqzr/uzKlBo013Ib/pqTDvK5q5//DP8fHDR1qG1WfwL2cXN+TLPmPMnOUARhYkMPXU
+ 8oO5Cip95gRrkD4Fa2Skov2Si1IaoMLshhIPSnpsas7DbS4aqBtv+mTlpNFpRcLUQ1GOljdCshyPz
+ OpPqI+WI6aNJpaXuMVt7M59nDGo5A88mBKKw8MvCikP7Ar1RGiNFizCxYH/gAIms2UeiIC0KMy4To
+ B2DYAafIH/tODpAFhbtJ1Wa7LBHtMYUIiC4xPlRV6B7Xjzc06zeiHDRAY8MiRICPDzMM57Wz9Gbop
+ UA/IhcL4pHfLv9HTx9OFhyLB;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1jxf8m-0006b1-1w; Mon, 20 Jul 2020 23:24:12 +0000
+Message-ID: <15eadeabe4d9fc23e9a311a51a007fa020781ccc.camel@samba.org>
+Subject: Re: PATCH: make disabling of vfs_snapper consistent with our
+ configure/build system
+To: David Disseldorp <ddiss@samba.org>, Ralph Boehme via samba-technical
  <samba-technical@lists.samba.org>
-Subject: RE: Samba 4.10.4 - Error loading module nfs4acl_xattr due to
- dependent libraries
-Thread-Topic: Samba 4.10.4 - Error loading module nfs4acl_xattr due to
- dependent libraries
-Thread-Index: AdZeZWKV0/pBpYqlScGFyi/z1rB3JAACIAAAAAk8DNA=
-Date: Mon, 20 Jul 2020 15:07:27 +0000
-Message-ID: <BY5PR19MB3096FAF614DA77FC3FB5F9C4DE7B0@BY5PR19MB3096.namprd19.prod.outlook.com>
-References: <BY5PR19MB3096D158005BDD10D2A4CF17DE7B0@BY5PR19MB3096.namprd19.prod.outlook.com>
- <39d17620-cef7-7f45-a372-2a3a6d900591@samba.org>
-In-Reply-To: <39d17620-cef7-7f45-a372-2a3a6d900591@samba.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: samba.org; dkim=none (message not signed)
- header.d=none;samba.org; dmarc=none action=none header.from=commvault.com;
-x-originating-ip: [103.226.169.199]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: aea1ddad-c473-4fd3-6d59-08d82cbe9da4
-x-ms-traffictypediagnostic: BYAPR19MB2423:
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: h9EzZeENAik/2GhiCrpAKDgm/3Wne02hgEA7ZKgrBpAPn+Am9TMx6VkK2I1Fsxsr/dk9oEAgA8axt+0AJvQY6mceFqX8dm5RPIFygy9BaU9yrHUj3v9EjGH4I3HGn8L7rf4R7oqFaM6JoiayWaBV/U3FVUIjg7I5SnLChUZXZQDo5TBlgDI7X24FH5sijUkbDntwjiCjYYCV5cYfEtgnDICCPgE+SWtrZNg1tlMBiY0wlB2kxWPXrLFCyaPl6Chlf2WMIBBGTNVxKkoVSCBn6DoVJAL0/aPAmZr/39kN/rxGIRgeO4Ujc7ivLDOfXQyyzDmYiyLYgd64bfIxz0F2mBqlrjJrTHZdBfWrxDzZzzvn81ySjyzPQsjGUt012B2oIs6kMEOA0O3KLnUn7y9Cxg==
-x-ms-exchange-antispam-messagedata: tvQGwj/pPDWAkyxIDPBkg592OIHkj/WthsVFE5HCsVAZZRjtIX3uNwmI1wL9FNubhKz8TchkAIL4zFurob1hUcau8bi09DNMkn4ZEO5Fus/X6Y4AElJmo923KdYEPTD5bN0WPYOw51NYWgXDZLP5o4GVufb5zMvhqiPLbCSiWEnBs5zUYy6fCPMYEs6GHwbwT1RKGDB//nMjuDduUrN+9VLati0uaSayCNFqAESd94yyBfyzEUsKK6NsxP/zO5266XZYtE47fUn1CrCBzlIkE95/5BmgxGG87yTMfl95WxFbm3wZafKOtv1oz18VWqO4MsxiwanKC5YXU7eFLgvTDfDNA8AeHztx6e3eQVyx4SppDLleLOnVNASt52ClbjlP3LevNHZSJHFlgfBjOiM8TWp/bbzGwdtef88JgNvFeF4Bipwsht6Zo4nEIB6bjGjGWy5wgOlC4TAFW5ffF63J1QJRWlEOAEGOjE9I4M0cXBFDh7XXRAJ8Tlk9oLHIvKXP
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-X-OriginatorOrg: commvault.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR19MB3096.namprd19.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: aea1ddad-c473-4fd3-6d59-08d82cbe9da4
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 40ed1e38-a16e-4622-9d7c-45161b6969d5
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: YMnacCvH7euyS5m2PA8fGcLYi05ZPCylYLaTJJKCQ4uTuBwJvB1WkOl+M0eOG6APMmSnMLzneZfXf4cff5DnB03Y2kallkB2oW173OHhTM0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR19MB2423
-X-Warn: EHLO/HELO not verified: Remote host 40.107.77.119
- (mail-eopbgr770119.outbound.protection.outlook.com) incorrectly presented
- itself as NAM02-SN1-obe.outbound.protection.outlook.com
+Date: Tue, 21 Jul 2020 11:24:03 +1200
+In-Reply-To: <20200720170142.1583649f@samba.org>
+References: <20200710110737.GA1585556@sernet.de>
+ <b4ea37e5-398d-c8d2-15e2-1a27f7655598@samba.org>
+ <20200710114452.GB1572444@sernet.de>
+ <54f90e98-9d7a-337e-defb-27fb756130fd@samba.org>
+ <20200710194428.GA1596727@sernet.de>
+ <63044415-9473-1572-2cd5-fa1fa5e012e1@samba.org>
+ <20200720170142.1583649f@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,60 +63,167 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Sandeep Nashikkar via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Sandeep Nashikkar <snashikkar@commvault.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: =?ISO-8859-1?Q?Bj=F6rn?= Jacke <bjacke@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBSYWxwaCBCb2VobWUgPHNsb3dA
-c2FtYmEub3JnPiANCj4gU2VudDogTW9uZGF5LCBKdWx5IDIwLCAyMDIwIDE6NDUgUE0NCj4gVG86
-IFNhbmRlZXAgTmFzaGlra2FyIDxzbmFzaGlra2FyQGNvbW12YXVsdC5jb20+OyBzYW1iYS10ZWNo
-bmljYWxAbGlzdHMuc2FtYmEub3JnDQo+IFN1YmplY3Q6IFJlOiBTYW1iYSA0LjEwLjQgLSBFcnJv
-ciBsb2FkaW5nIG1vZHVsZSBuZnM0YWNsX3hhdHRyIGR1ZSB0byBkZXBlbmRlbnQgbGlicmFyaWVz
-DQoNCj4gQW0gNy8yMC8yMCB1bSAxMDowMiBBTSBzY2hyaWViIFNhbmRlZXAgTmFzaGlra2FyIHZp
-YSBzYW1iYS10ZWNobmljYWw6DQo+ID4gSGVsbG8NCj4gPiANCj4gPiBJIGFtIHRyeWluZyB0byBs
-b2FkIFZGUyBtb2R1bGUgbmZzNGFjbF94YXR0ciB3aGljaCBpcyBjb21waWxlZCBhbmQgbGlua2Vk
-IG9uIFNhbWJhIDQuMTAuNCBhcyBzaGFyZWQgbW9kdWxlLg0KPiA+IEl0IGZhaWxzIHRvIGxvYWQg
-d2l0aCBmb2xsb3dpbmcgZXJyb3I6DQo+ID4gDQo+ID4gICBFcnJvciBsb2FkaW5nIG1vZHVsZSAn
-L3Vzci9saWI2NC9zYW1iYS92ZnMvbmZzNGFjbF94YXR0ci5zbyc6IA0KPiA+IGxpYmdzc2FwaS1z
-YW1iYTQuc28uMjogY2Fubm90IG9wZW4gc2hhcmVkIG9iamVjdCBmaWxlOiBObyBzdWNoIGZpbGUg
-b3IgDQo+ID4gZGlyZWN0b3J5DQo+ID4gDQo+ID4gSSBoYXZlIGJlZW4gdXNpbmcgdGhlIG1vZHVs
-ZSBjb21waWxlZCB3aXRoIHNvdXJjZSB3aXRoIHNhbWJhIGluc3RhbGxlZCBmcm9tIHl1bSByZXBv
-IHRpbGwgU2FtYmEgNC44LjMuIEkgZGlkIG5vdCBmYWNlIHRoaXMgaXNzdWUgYmVmb3JlLg0KPiA+
-IENhbiBzb21lb25lIGd1aWRlIG1lIHdoeSBkb2VzIGl0IGRlcGVuZCBvbiB0aGlzIGxpYnJhcnkg
-YW5kIGhvdyBjYW4gSSB0YWNrbGUgdGhpcz8gRG8gd2UgbmVlZCB0byBpbnN0YWxsIGFub3RoZXIg
-cGFja2FnZSB0byBmdWxmaWxsIHRoZSBkZXBzPw0KPiA+IA0KPiA+IFRoZSBsaWJnc3NhcGktc2Ft
-YmE0IGxpYnJhcnkgaXMgbm90IHByZXNlbnQgaW4gc3RhbmRhcmQgbG9jYXRpb25zIG9uIGEgc2V0
-dXAgd2hlcmUgd2UgdXBncmFkZS9pbnN0YWxsIHRoZSBzYW1iYS00LjEwLjQgdGhyb3VnaCB5dW0g
-cmVwb3NpdG9yeS4NCj4gPiBJdHMgcHJlc2VudCBpbiB0aGUgLi9iaW4vZGVmYXVsdC9zb3VyY2U0
-L2hlaW1kYWxfYnVpbGQvbGliZ3NzYXBpLXNhbWJhNC5zbyB3aGVuIHdlIGJ1aWxkIHRoZSBzYW1i
-YSBmb3IgdGhlIG1vZHVsZSBpdHNlbGYuDQo+ID4gSWYgd2UgcHJvdmlkZSB0aGUgTERfTElCUkFS
-WV9QQVRIIGFuZCB1c2UgTERfREVCVUc9bGlicywgd2Ugc2VlIGl0IGxvYWRzIG1hbnkgbGlicmFy
-aWVzIHdpdGggLXNhbWJhNCBzdWZmaXggZnJvbSB0aGF0IGRpcmVjdG9yeS4NCj4gPiANCj4gPiBE
-byBJIG5lZWQgdG8gYnVpbGQgc2FtYmEgbW9kdWxlIHdpdGggYSBwYXJ0aWN1bGFyIGNvbmZpZ3Vy
-ZSBmbGFnIHNvIHRoYXQgdGhlc2UgZGVwZW5kZW5jaWVzIGFyZSBub3QgcmVxdWlyZWQ/DQo+ID4g
-QXBwcmVjaWF0ZSBhbnkgaGVscCBpbiBhZHZhbmNlLg0KDQo+IHdoYXRldmVyIHB1bGxzIGluIHRo
-ZSBkZXBlZGVuY3kgZm9yIGxpYmdzc2FwaS1zYW1iYTQuc28gdG8gbmZzNGFjbF94YXR0ci5zby4u
-LiB3aHkgZG9uJ3QgeW91IGp1c3QgcGFja2FnZSB0aGVtIHNvIHRoZXkncmUgYXZhaWxhYmxlIGF0
-IHJ1bnRpbWU/DQo+DQo+IC1zbG93DQo+DQo+IC0tIA0KPiBSYWxwaCBCb2VobWUsIFNhbWJhIFRl
-YW0gICAgICAgICAgICAgICAgaHR0cHM6Ly9zYW1iYS5vcmcvDQo+IFNhbWJhIERldmVsb3Blciwg
-U2VyTmV0IEdtYkggICBodHRwczovL3Nlcm5ldC5kZS9lbi9zYW1iYS8NCj4gR1BHLUZpbmdlcnBy
-aW50ICAgRkFFMkM2MDg4QTI0MjUyMDUxQzU1OUU0QUExRTlCNzEyNjM5OUU0Ng0KDQpSYWxwaCwg
-DQoNCkkgY291bGQgbm90IGZpbmQgd2hlcmUgbGliZ3Nzc2FwaS1zYW1iYTQgaXMgYWRkZWQgaW4g
-YXMgYSBkZXBlbmRlbmN5LiANCkl0cyBidWlsdCBhcyBwYXJ0IG9mIGhlaW1kYWwgd2l0aCBiZWxv
-dyB3c2NyaXB0Og0KDQpzb3VyY2U0L2hlaW1kYWxfYnVpbGQvd3NjcmlwdF9idWlsZDogICAgICAg
-IGJ1bmRsZWRfbmFtZSA9IGxpYm5hbWUgKyAnLXNhbWJhNCcNCg0Kd2hlcmUgbGlibmFtZSBjb21l
-cyBmcm9tOg0KDQogICAgSEVJTURBTF9MSUJSQVJZKCdnc3NhcGknLA0KICAgICAgICAgICAgICAg
-ICAgICBIRUlNREFMX0dTU0FQSV9TUE5FR09fU09VUkNFICsgSEVJTURBTF9HU1NBUElfS1JCNV9T
-T1VSQ0UgKyAnJycNCg0KSXQgaXMgbm90IGxpbmtlZCBleHBsaWNpdGx5IGFueXdoZXJlIGVsc2Ug
-YXMgZmFyIGFzIEkgY291bGQgZ3JlcC4gDQoNCkkgc2VlIGZvbGxvd2luZyBsaWJzIHdoaWNoIGFy
-ZSByZXF1aXJlZCBieSBuZnM0YWNsX3hhdHRyIG1vZHVsZS4gDQoNCmxpYmdzc2FwaS1zYW1iYTQu
-c28uMg0KbGlicm9rZW4tc2FtYmE0LnNvLjE5DQpsaWJjb21fZXJyLXNhbWJhNC5zby4wDQpsaWJh
-c24xLXNhbWJhNC5zby44DQpsaWJrcmI1LXNhbWJhNC5zby4yNg0KbGliei1zYW1iYTQuc28NCmxp
-YndpbmQtc2FtYmE0LnNvLjANCmxpYmhjcnlwdG8tc2FtYmE0LnNvLjUNCmxpYmh4NTA5LXNhbWJh
-NC5zby41DQpsaWJoZWltYmFzZS1zYW1iYTQuc28uMQ0KbGlic21ibGRhcGhlbHBlci1zYW1iYTQu
-c28NCg0KUGxlYXNlIGNvcnJlY3QgbWUgaWYgSSBhbSB3cm9uZywgYnV0IGFyZSB5b3UgYXNraW5n
-IHRvIGJ1bmRsZSBhbmQgc2hpcCBhbGwgdGhvc2UgbGlicyB3aGljaCBhcmUgcmVmZXJyZWQgYnkg
-bmZzNGFjbF94YXR0ci5zbyBtb2R1bGUganVzdCBsaWtlIGxpYmdzc2FwaS1zYW1iYTQ/DQoNClRo
-YW5rcywNClNhbmRlZXANCg==
+On Mon, 2020-07-20 at 17:01 +0200, David Disseldorp wrote:
+> [sorry about the late response. I just returned from vacation]
+> 
+> Hi Ralph and Björn,
+
+(reply below, much context retained because it is actually really
+important context to this issue)
+
+> On Mon, 13 Jul 2020 18:48:50 +0200, Ralph Boehme via samba-technical
+> wrote:
+> 
+> > Hi all!
+> > 
+> > Am 7/10/20 um 9:44 PM schrieb Björn JACKE:
+> > > 
+> > > I tried to descibe that in the bug report. Our correct way to
+> > > disable shared
+> > > modules is to use --with-shared-modules='!module_name'.  That
+> > > mechanism gets
+> > > broken by 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a. So the new
+> > > option
+> > > introduced by 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a is not
+> > > needed and it
+> > > makes our generic mechanism to disable the shared module stop
+> > > working.
+> > >   
+> > > > and configure would just fail if dbus-1 is not available.  
+> > > 
+> > > that's what it currently also does. This is because in the
+> > > discussion it was
+> > > desired that this should be a forced enabled feature by default.
+> > > Personally I
+> > > would prefer forced-enabled features for developer builds if this
+> > > is meant to
+> > > detect failrures in autobuild. But that's another discussion. In
+> > > any case
+> > > configure fails (intentionally) with
+> > > 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a
+> > > and without 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a by default
+> > > if dbus-1 is
+> > > unavailable.  
+> > 
+> > of, what a mess! :)
+> > 
+> > Currently the snapper configure check is the only one of the three
+> > (snapper, cephfs, glusterfs) VFS module configure options that
+> > implement
+> > --enable-NAME=yes "correctly" (as per --enable-XXX configure
+> > semantics).
+> > 
+> > The other ones (ceph, glusterfs) will just silently pass if a
+> > dependency
+> > is missing, effectively implementing default="auto" behaviour.
+> > 
+> > I don't think we want all of those modules to fail with a
+> > default="true", that would result in too much configure churn while
+> > user's configure runs fail one after the other, forcing them to add
+> > --disable-XXX to the configure invocation.
+> > 
+> > I guess we should just default to "auto" for all three modules.
+> > 
+> > Here's a MR that implements this:
+> > 
+> > https://gitlab.com/samba-team/samba/-/merge_requests/1461
+> > 
+> > If we decide that we really want all three modules to use and
+> > enforce a
+> > default value of "true", this can be achieved by merely switching
+> > the
+> > defaults in the above MR.
+> > 
+> > Thoughts?
+> 
+> When discussing 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a, Andrew and
+> I
+> both agreed that "auto" behaviour is undesirable, as it leads to the
+> kinds of inconsistent build results carried in Matt's initial report
+> at https://bugs.gentoo.org/721320 .
+> 
+> I don't feel strongly as to whether or not vfs_snapper should be
+> built
+> by default. https://gitlab.com/samba-team/samba/-/merge_requests/1335
+> eventually saw it enabled by default, with clear documentation on how
+> it can be disabled at configured time.
+> 
+> Given that Björn's initial complaint was with the inconsistent /
+> broken
+> --with-shared-modules='!module_name' behaviour, would it be okay if
+> we
+> just fix --with-shared-modules='!vfs_snapper' and drop
+> --enable/disable-snapper?
+> 
+> Either way, it'd be nice to wait for Andrew's input here too.
+
+Thanks David. 
+
+**
+I totally agree we should have consistent behaviour.  I also agree with
+this approach.
+**
+
+As to 'auto' options, my position, and one that I thought we had agreed
+(it was written into BUILD_SYSTEMS.txt before that was removed, now in
+the wscript and source3/wscript) is that Samba should require all
+'optional' libraries by default.
+
+The reason, as seen here, is that auto behaviour creates a difficult
+issue for packagers.  Because packaging is a particular skill set, and
+there are a lot of small distributions most of our packagers (with
+exceptions of course) are not Samba experts.  The lack of a build
+output (eg a .so) may be the only indication they get that a feature
+has vanished when they package a new version of Samba.  
+
+This is why auto-magic dependencies are a problem, even for non-
+developer builds.
+
+This appears to be a broad concern, these reasons apply beyond just
+Gentoo:
+https://wiki.gentoo.org/wiki/Project:Quality_Assurance/Automagic_dependencies
+
+Furthermore, in the real world my recollection is that it has really
+happened that the first this is noticed is when an end user finds their
+package is using a workaround (eg lp* based printing vs CUPS) or is
+missing a feature altogether.
+
+I realise that it is annoying for a individual systems administrator
+who is building Samba, particularly on a non-linux platform, to have to
+turn off many of our optional features first.  
+
+This is the reason we agreed that we would spit out an error as early
+in the build, not just a late compile failure.  
+
+Thankfully the person in this situation is likely to understand what
+they are disabling and know if it matters for their particular install.
+Also, we know the vast bulk of Samba users get Samba via a distributor,
+so anything to make this more fail-safe is, in my view, worth the
+trade-off against the inconvenience of our manual builders.
+
+So, in this case, we certainly should make the behaviour consistent.  I
+don't mind if it is --enable/--disable or otherwise, as long as it is
+never 'auto', and the correct option to disable is listed in the error
+text.
+
+We should also work harder to get our options code in common - we have
+subtly different code in wscript vs source3/wscript!
+
+Thanks,
+
+Andrew Bartlett
+-- 
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
+
+
 
