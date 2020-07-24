@@ -2,47 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF20E22B75A
-	for <lists+samba-technical@lfdr.de>; Thu, 23 Jul 2020 22:15:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D65C22CF46
+	for <lists+samba-technical@lfdr.de>; Fri, 24 Jul 2020 22:14:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=iDrGYH7RahRJTCi5jKl5xxz6RlZxIohCf62fhN75OgM=; b=DUYx88AadGRU3y+oY1VXyAb3Tx
-	jpPTc1BxaWR+0IPkrBALiVppn8nyjqrRbWMzuoKFmcNFOdtxxZd1Y3wz2JAwj/ie1B+0KE0TG+v+K
-	K+Kh9ILKbeC33ef/idQHyX/7zz30aPfy3CHaVzoiIZt36tqyeqfhT/YwIFlbv+yD7DlHntYnMbu9W
-	czPmWWXr4yfeCDowTz8yWAGJCR/AeReTcBF8Da93+ET0ZeI4x51zIuWdAiYahs1rWMMQT6kmoA7uD
-	LOFLQE6/a0olqlhu0bMB3Mc5iBQcgByZlMBz8SzW+VIJdPIPQeqp0SiHWPl8lcOI9hdf56QXMLiXM
-	tYF1Q6Pg==;
-Received: from localhost ([::1]:53318 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=v+nL2eJjB0bvP6ELQFVmYNwhpKgWia56DXl0o+nNvEo=; b=Pyiv/5eUdbVk6PklIoErizp6bW
+	OOF0Si4qxlDXKPPBDx4WL2d/B4A2tqB7wudYhxnr3VQaFl7AtRYoZNKHVWpajRq1AC9yog/uwbntb
+	Z4Snpc+VYzCGL/9YIfeCmvRbg/pDktZtIBYsV7gXpOCnoqCbRYHK+idr3G7K2tRgtT9XDLxZTGIXe
+	eO/LubW7C4+NQWO0xXsV3BrpeeOePKWnguv6k3um9BCyFhxIK3HHZzejLUpMDqVNAk1tZiiAgUt/y
+	SyR8HzNCivoOnSl/Tn0t2fwL/a6i6N2/wY0BlLrJLbgzjNNIAeMGwet7XgeCqN9hvdrr6OXGhYPnB
+	4+cc4T/A==;
+Received: from localhost ([::1]:50956 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1jyhcw-009ZXh-Lu; Thu, 23 Jul 2020 20:15:38 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63828) 
+	id 1jz44R-009nao-Ko; Fri, 24 Jul 2020 20:13:31 +0000
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d]:34945) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1jyhcq-009ZXa-9K
- for samba-technical@lists.samba.org; Thu, 23 Jul 2020 20:15:34 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=iDrGYH7RahRJTCi5jKl5xxz6RlZxIohCf62fhN75OgM=; b=YECBU8cZhQet1ENrBYA+UsJNwt
- XvSh/gSkGFmg9wPipSNyGcZ3RXH1KVmDPBBL6SeN37Yun85AORj/a0xC8Jc4rjfcuSmNuSaunh/jR
- sWxDkS3ujL4fn8I2SBNv6oNq/2uTX7R6OouuDcQSx9yguUlI381AjwaWLtk16+HV+TN2AeW2Samns
- h/lIjFuiYEkeQDjxbZHzaoN1+1ED+8ymdKbccLkH+HZoZBZzZ6zX9+j5nxL31Fwt4eNjJX1/5Jegy
- FdkwwtDOq3cORQm9pWtVig1JcxdZU9/WF3n0UAuV+02EWgzAQr4ll7d4JEj6UG+QOoPsYONSw71ND
- Kk5qPMeHInpY1qsffzf7+5v6mygG7Ei1WdortHQw8fHc8pLOuZVSPWwqRx5wWZAvoquYHRE0/1dnx
- c/jm5Sxs4RvICNwxLW8MPzMnknDn5dpp0K0/tMNM3OpUyKE/vTztd6EnpREkV1S24j3nq2e7dtmUb
- HD8bRb+fVK779sPULwGcsiiM;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1jyhcp-0000Pt-4V; Thu, 23 Jul 2020 20:15:31 +0000
-Message-ID: <6f85bf165b32005113ebb1b59f7f253031187f78.camel@samba.org>
-Subject: Re: Samba 4.12.5 Windows AD 2012R2 integration
-To: Izzet =?UTF-8?Q?Ayd=C4=B1n?= <izzet.aydin@pardus.org.tr>, 
- samba-technical@lists.samba.org
-Date: Fri, 24 Jul 2020 08:15:27 +1200
-In-Reply-To: <94a49801-479f-6693-b6c5-603697c798a5@pardus.org.tr>
-References: <94a49801-479f-6693-b6c5-603697c798a5@pardus.org.tr>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ (Exim) id 1jz44J-009nah-QW
+ for samba-technical@lists.samba.org; Fri, 24 Jul 2020 20:13:27 +0000
+Received: by mail-ed1-x52d.google.com with SMTP id bm28so7889651edb.2
+ for <samba-technical@lists.samba.org>; Fri, 24 Jul 2020 13:13:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=Hf4i4vUDLiFvySusv5HN7yGt0kyx9L5HrBenSCxN6Ck=;
+ b=LK8R6aUVhwnZV0LqIT8hUgWylIxXUQbvlowc9GCuq/VjEoBSoRtr46+xM2eF/VvMYn
+ BCw08SNpMBRl33S0VSopvEhLcPl/QDFZqh5miqVqjO9gwGr9eiWHcKDYKX6MqVUxILEM
+ 75L0msBVwGZ/TWW0R3KydxLUdNYKkG87G22l6RxRtluRYxgcAfQAI1L1+zdCBmuUFTVZ
+ 8Ic/9STCcu2qzzD8BM7V7qdBGT5ghIy63+VTY5sYYwy6yokZkrxGExSuyoF4KDJNpV0d
+ GEw8htLgMkAj9Y/VcSX3OxgSNMZU7tPDNfN4bwWyWBEZP+Q+zRXLaXYx0fG8JJiBag/A
+ s1Ew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=Hf4i4vUDLiFvySusv5HN7yGt0kyx9L5HrBenSCxN6Ck=;
+ b=dkZ9/HK2lm/4nQGQjmYnQzccrLsbLQkm8Vz4o0HncSlxN16QFPlMxOKwl59P7EghZN
+ sv8RGqHZ1JoTm0CpKGQQTAyKBoRaB0kNZj+FInsXgL9a5wQY3GJz4KlgtMLPyj3nhAd6
+ 9Fahx41/dhkZyMUzZ5BaE/mKlmH8OpqNGkugruN0wzHkkyuhzdH49zgMUOJtLJwQO++q
+ ywx7xe0NdLLWkWw5r8vcaI+94AmjGQqCeOdyoOGXAYC12zAsWiRekrvTX2y6yhgTnVIx
+ 4msXUCaFHaySpRSjmEx45OmJwFKCgGN/N4V296K4CZ7oMmkZjjOoe5oKgPO27DxqRje6
+ Yo7w==
+X-Gm-Message-State: AOAM531Pot3Kyg1ibrF0FBZMzNzRL0cLBS7Bkxx6giQN41sMxO5anZcO
+ zurkmGXjQ2kujvR/KQBbkWxBTd8fg8cXJQDh/aCR24+l
+X-Google-Smtp-Source: ABdhPJwTBuJ8QYPVIuNNxyn8Mpu1I6e+pd+zwkUaapnSYQ6GGCLSpU4f7YHXX+tgj/HSHnUXk32nXDklrOrUQhhR2qI=
+X-Received: by 2002:aa7:dbd9:: with SMTP id v25mr8875811edt.137.1595621602713; 
+ Fri, 24 Jul 2020 13:13:22 -0700 (PDT)
+MIME-Version: 1.0
+Date: Fri, 24 Jul 2020 13:13:10 -0700
+Message-ID: <CAMYxiYw4E5qX7KPMY2gsnd9+y2BkusL1Ef=gZ1i017TWGCmQwQ@mail.gmail.com>
+Subject: PANIC internal error: samba 12.4.5 CTDB cluster
+To: samba-technical@lists.samba.org
+Content-Type: multipart/mixed; boundary="000000000000d4ddce05ab359a30"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,35 +65,410 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: David Rivera via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Rivera <rivera.david87@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 2020-07-23 at 22:49 +0300, Izzet Aydın via samba-technical
-wrote:
-> We want to show to a customer possibility of using Samba instead of 
-> Windows AD, therefore first we need to add a samba dc beside windows 
-> 2012 dc.
-> 
+--000000000000d4ddce05ab359a30
+Content-Type: text/plain; charset="UTF-8"
 
-I think a better approach would be to create a Samba LAB domain
-https://wiki.samba.org/index.php/Create_a_samba_lab-domain
+Hi,
 
-This will allow you to demonstrate that without changing the production
-domain.  Hopefully this will bypass that check, as we won't be creating
-domain controller objects in the target domain.
+We've recently moved to using samba as our file server (about 2 weeks ago).
+Today we experienced a panic on all 3 CTDB cluster members that made all
+shares unavailable (samba-ctdb-node0-panic-backtrace-internal-error.log
+attached). I've included two additional panics I've found in the smbd log.
 
-If it fails, it will then be on the Samba side and we can patch around
-that.
+We are using samba 12.4.5 built from source and have a 3 node CTDB cluster
+with ceph as the storage backend mounted using the ceph kernel client
+(Linux kernel 5.7.7). Our SMB clients are Windows XP, Windows 7 & Windows
+10 connecting through Microsoft DFS (Windows DCs) and storing a number of
+file types including Microsoft Office documents and shared Microsoft Access
+databases. We have been running into issues with Windows XP client sessions
+hanging and making the locked files inaccessible but we've been able to get
+around this issue for the meantime by killing the associated smbd process.
 
-Andrew Bartlett
--- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
+We've compiled samba on CentOS 8 [CentOS Linux release 8.2.2004 (Core)]
+using the following commands on all 3 nodes:
 
+# PKG_CONFIG_PATH="/usr/lib/pkgconfig/:${PKG_CONFIG_PATH}" ./configure
+--with-cluster-support --enable-ceph-reclock
+--with-shared-modules=idmap_rid,idmap_tdb2,idmap_ad --without-ad-dc
+# make -j 4
+# make install
 
+Our configuration is as follows.
 
+[global]
+        client min protocol = NT1
+        clustering = Yes
+        dedicated keytab file = /etc/krb5.keytab
+        kerberos method = secrets and keytab
+        netbios name = CTDB
+        realm = DOMAIN1.COM <http://domain1.com/>
+        reset on zero vc = Yes
+        security = ADS
+        server min protocol = NT1
+        template shell = /bin/bash
+        username map = /usr/local/samba/etc/user.map
+        winbind nss info = rfc2307
+        winbind refresh tickets = Yes
+        workgroup = DOMAIN1
+        idmap config domain5:unix_primary_group = yes
+        idmap config domain5:unix_nss_info = no
+        idmap config domain5:range = 50000-59999
+        idmap config domain5:schema_mode = rfc2307
+        idmap config domain5:backend = ad
+        idmap config domain4:unix_primary_group = yes
+        idmap config domain4:unix_nss_info = no
+        idmap config domain4:range = 40000-49999
+        idmap config domain4:schema_mode = rfc2307
+        idmap config domain4:backend = ad
+        idmap config domain3:unix_primary_group = yes
+        idmap config domain3:unix_nss_info = no
+        idmap config domain3:range = 30000-39999
+        idmap config domain3:schema_mode = rfc2307
+        idmap config domain3:backend = ad
+        idmap config domain2:unix_primary_group = yes
+        idmap config domain2:unix_nss_info = no
+        idmap config domain2:range = 20000-29999
+        idmap config domain2:schema_mode = rfc2307
+        idmap config domain2:backend = ad
+        idmap config domain1:unix_primary_group = yes
+        idmap config domain1:unix_nss_info = no
+        idmap config domain1:range = 10000-99999
+        idmap config domain1:schema_mode = rfc2307
+        idmap config domain1:backend = ad
+        idmap config * : range = 3000-7999
+        idmap config * : backend = tdb
+        kernel share modes = No
+        map acl inherit = Yes
+        posix locking = No
+        vfs objects = acl_xattr
+        ## Used during testing, turned off for production
+        #server multi channel support = yes
+        #interfaces = "10.20.10.224;capability=RSS"
+"10.20.10.225;capability=RSS" "10.20.10.226;capability=RSS"
+
+# Multiple shares defined this way
+[share1]
+        allocation roundup size = 4096
+        comment = Share1
+        # CephFS mount on /srv/samba
+        path = /srv/samba/shares/share1
+        read only = No
+        vfs objects = acl_xattr ceph_snapshots io_uring
+
+# Test share
+[test]
+        allocation roundup size = 4096
+        comment = Test Share
+        path = /srv/samba/shares/test
+        smb encrypt = desired
+        vfs objects = acl_xattr recycle ceph_snapshots io_uring
+        recycle:exclude = thumbs.db,*.ldb,~$*
+        recycle:touch = Yes
+        recycle:versions = Yes
+        recycle:keeptree = Yes
+        recycle:repository = ../recycle/test
+
+Here is our CTDB configuration file:
+
+[logging]
+        location = syslog
+        log level = NOTICE
+
+[cluster]
+        recovery lock =
+!/usr/local/samba/libexec/ctdb/ctdb_mutex_ceph_rados_helper ceph
+client.samba rados.samba.conf ctdb.lock
+
+Please let me know how I could help figure out the cause of this panic(s).
+
+Thank you,
+David
+
+--000000000000d4ddce05ab359a30
+Content-Type: application/octet-stream; 
+	name="samba-ctdb-node0-panic-backtrace-internal-error.log"
+Content-Disposition: attachment; 
+	filename="samba-ctdb-node0-panic-backtrace-internal-error.log"
+Content-Transfer-Encoding: base64
+Content-ID: <f_kd0noyyl0>
+X-Attachment-Id: f_kd0noyyl0
+
+WzIwMjAvMDcvMjQgMDk6MDk6NTIuMDY5NTE5LCAgMF0gLi4vLi4vbGliL3V0aWwvZmF1bHQuYzo3
+OShmYXVsdF9yZXBvcnQpDQogID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PQ0KWzIwMjAvMDcvMjQgMDk6MDk6NTIuMDY5NTkxLCAg
+MF0gLi4vLi4vbGliL3V0aWwvZmF1bHQuYzo4MChmYXVsdF9yZXBvcnQpDQogIElOVEVSTkFMIEVS
+Uk9SOiBTaWduYWwgMTEgaW4gcGlkIDIxMzc1MTIgKDQuMTIuNSkNCiAgSWYgeW91IGFyZSBydW5u
+aW5nIGEgcmVjZW50IFNhbWJhIHZlcnNpb24sIGFuZCBpZiB5b3UgdGhpbmsgdGhpcyBwcm9ibGVt
+IGlzIG5vdCB5ZXQgZml4ZWQgaW4gdGhlIGxhdGVzdCB2ZXJzaW9ucywgcGxlYXNlIGNvbnNpZGVy
+IHJlcG9ydGluZyB0aGlzIGJ1Zywgc2VlIGh0dHBzOi8vd2lraS5zYW1iYS5vcmcvaW5kZXgucGhw
+L0J1Z19SZXBvcnRpbmcNClsyMDIwLzA3LzI0IDA5OjA5OjUyLjA2OTYyMCwgIDBdIC4uLy4uL2xp
+Yi91dGlsL2ZhdWx0LmM6ODYoZmF1bHRfcmVwb3J0KQ0KICA9PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NClsyMDIwLzA3LzI0IDA5
+OjA5OjUyLjA2OTYzMywgIDBdIC4uLy4uL3NvdXJjZTMvbGliL3V0aWwuYzo4MzAoc21iX3Bhbmlj
+X3MzKQ0KICBQQU5JQyAocGlkIDIxMzc1MTIpOiBpbnRlcm5hbCBlcnJvcg0KWzIwMjAvMDcvMjQg
+MDk6MDk6NTIuMDcwMTgyLCAgMF0gLi4vLi4vbGliL3V0aWwvZmF1bHQuYzoyNjUobG9nX3N0YWNr
+X3RyYWNlKQ0KICBCQUNLVFJBQ0U6IDQ0IHN0YWNrIGZyYW1lczoNCiAgICMwIC91c3IvbG9jYWwv
+c2FtYmEvbGliL2xpYnNhbWJhLXV0aWwuc28uMChsb2dfc3RhY2tfdHJhY2UrMHgxZikgWzB4N2Zh
+MDc5YmY4ZjQ4XQ0KICAgIzEgL3Vzci9sb2NhbC9zYW1iYS9saWIvbGlic21iY29uZi5zby4wKHNt
+Yl9wYW5pY19zMysweDc0KSBbMHg3ZmEwNzgxNTk1NzFdDQogICAjMiAvdXNyL2xvY2FsL3NhbWJh
+L2xpYi9saWJzYW1iYS11dGlsLnNvLjAoc21iX3BhbmljKzB4MjgpIFsweDdmYTA3OWJmOGYxM10N
+CiAgICMzIC91c3IvbG9jYWwvc2FtYmEvbGliL2xpYnNhbWJhLXV0aWwuc28uMCgrMHgxYWMwMSkg
+WzB4N2ZhMDc5YmY4YzAxXQ0KICAgIzQgL3Vzci9sb2NhbC9zYW1iYS9saWIvbGlic2FtYmEtdXRp
+bC5zby4wKCsweDFhYzE2KSBbMHg3ZmEwNzliZjhjMTZdDQogICAjNSAvbGliNjQvbGlicHRocmVh
+ZC5zby4wKCsweDEyZGQwKSBbMHg3ZmEwNzVhYjdkZDBdDQogICAjNiAvdXNyL2xvY2FsL3NhbWJh
+L2xpYi9wcml2YXRlL2xpYnNtYmQtYmFzZS1zYW1iYTQuc28oKzB4MjFiMTFkKSBbMHg3ZmEwNzk3
+ZmQxMWRdDQogICAjNyAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnNtYmQtYmFzZS1z
+YW1iYTQuc28oKzB4MjFjM2IxKSBbMHg3ZmEwNzk3ZmUzYjFdDQogICAjOCAvdXNyL2xvY2FsL3Nh
+bWJhL2xpYi9wcml2YXRlL2xpYnNtYmQtYmFzZS1zYW1iYTQuc28oY2xvc2VfZmlsZSsweDQ3KSBb
+MHg3ZmEwNzk3ZmU5ZThdDQogICAjOSAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnNt
+YmQtYmFzZS1zYW1iYTQuc28oZmlsZV9jbG9zZV91c2VyKzB4NGQpIFsweDdmYTA3OTc3YjZkNV0N
+CiAgICMxMCAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnNtYmQtYmFzZS1zYW1iYTQu
+c28oc21iWHNydl9zZXNzaW9uX2xvZ29mZisweDlhKSBbMHg3ZmEwNzk4Njg2OGJdDQogICAjMTEg
+L3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJzbWJkLWJhc2Utc2FtYmE0LnNvKCsweDI4
+NTIwOCkgWzB4N2ZhMDc5ODY3MjA4XQ0KICAgIzEyIC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZh
+dGUvbGlic21iZC1iYXNlLXNhbWJhNC5zbygrMHgyODZjNjIpIFsweDdmYTA3OTg2OGM2Ml0NCiAg
+ICMxMyAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYmRid3JhcC1zYW1iYTQuc28oKzB4
+NmQ1MSkgWzB4N2ZhMDc0NGUyZDUxXQ0KICAgIzE0IC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZh
+dGUvbGliZGJ3cmFwLXNhbWJhNC5zbygrMHg2ZWY5KSBbMHg3ZmEwNzQ0ZTJlZjldDQogICAjMTUg
+L3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJkYndyYXAtc2FtYmE0LnNvKGRid3JhcF90
+cmF2ZXJzZSsweDMxKSBbMHg3ZmEwNzQ0ZGZkMzVdDQogICAjMTYgL3Vzci9sb2NhbC9zYW1iYS9s
+aWIvcHJpdmF0ZS9saWJzbWJkLWJhc2Utc2FtYmE0LnNvKHNtYlhzcnZfc2Vzc2lvbl9sb2dvZmZf
+YWxsKzB4YjYpIFsweDdmYTA3OTg2OGFhM10NCiAgICMxNyAvdXNyL2xvY2FsL3NhbWJhL2xpYi9w
+cml2YXRlL2xpYnNtYmQtYmFzZS1zYW1iYTQuc28oKzB4MjhlMTM1KSBbMHg3ZmEwNzk4NzAxMzVd
+DQogICAjMTggL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJzbWJkLWJhc2Utc2FtYmE0
+LnNvKHNtYmRfcmVpbml0X2FmdGVyX2ZvcmsrMCkgWzB4N2ZhMDc5ODcwNThkXQ0KICAgIzE5IC91
+c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlic21iZC1zaGltLXNhbWJhNC5zbyhleGl0X3Nl
+cnZlcl9jbGVhbmx5KzB4MjgpIFsweDdmYTA3NjExNWExY10NCiAgICMyMCAvdXNyL2xvY2FsL3Nh
+bWJhL2xpYi9wcml2YXRlL2xpYnNtYmQtYmFzZS1zYW1iYTQuc28oc21iZF9zZXJ2ZXJfY29ubmVj
+dGlvbl90ZXJtaW5hdGVfZXgrMHgxYzQpIFsweDdmYTA3OTgzNjczYV0NCiAgICMyMSAvdXNyL2xv
+Y2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnNtYmQtYmFzZS1zYW1iYTQuc28oKzB4MjVkMzY4KSBb
+MHg3ZmEwNzk4M2YzNjhdDQogICAjMjIgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0
+ZXZlbnQuc28uMCh0ZXZlbnRfY29tbW9uX2ludm9rZV9mZF9oYW5kbGVyKzB4MTAxKSBbMHg3ZmEw
+NzhkYzhmYWZdDQogICAjMjMgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQu
+c28uMCgrMHgxMTYwZSkgWzB4N2ZhMDc4ZGQzNjBlXQ0KICAgIzI0IC91c3IvbG9jYWwvc2FtYmEv
+bGliL3ByaXZhdGUvbGlidGV2ZW50LnNvLjAoKzB4MTFjNTUpIFsweDdmYTA3OGRkM2M1NV0NCiAg
+ICMyNSAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnRldmVudC5zby4wKCsweGU1YzAp
+IFsweDdmYTA3OGRkMDVjMF0NCiAgICMyNiAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xp
+YnRldmVudC5zby4wKF90ZXZlbnRfbG9vcF9vbmNlKzB4MTBmKSBbMHg3ZmEwNzhkYzgyNzRdDQog
+ICAjMjcgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQuc28uMCh0ZXZlbnRf
+Y29tbW9uX2xvb3Bfd2FpdCsweDI1KSBbMHg3ZmEwNzhkYzg1OGZdDQogICAjMjggL3Vzci9sb2Nh
+bC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQuc28uMCgrMHhlNjYyKSBbMHg3ZmEwNzhkZDA2
+NjJdDQogICAjMjkgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQuc28uMChf
+dGV2ZW50X2xvb3Bfd2FpdCsweDJiKSBbMHg3ZmEwNzhkYzg2MzJdDQogICAjMzAgL3Vzci9sb2Nh
+bC9zYW1iYS9saWIvcHJpdmF0ZS9saWJzbWJkLWJhc2Utc2FtYmE0LnNvKHNtYmRfcHJvY2Vzcysw
+eGJkMSkgWzB4N2ZhMDc5ODIzNWNhXQ0KICAgIzMxIC91c3IvbG9jYWwvc2FtYmEvc2Jpbi9zbWJk
+KCsweGQzODEpIFsweDU1YTcxOTY1ODM4MV0NCiAgICMzMiAvdXNyL2xvY2FsL3NhbWJhL2xpYi9w
+cml2YXRlL2xpYnRldmVudC5zby4wKHRldmVudF9jb21tb25faW52b2tlX2ZkX2hhbmRsZXIrMHgx
+MDEpIFsweDdmYTA3OGRjOGZhZl0NCiAgICMzMyAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRl
+L2xpYnRldmVudC5zby4wKCsweDExNjBlKSBbMHg3ZmEwNzhkZDM2MGVdDQogICAjMzQgL3Vzci9s
+b2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQuc28uMCgrMHgxMWM1NSkgWzB4N2ZhMDc4
+ZGQzYzU1XQ0KICAgIzM1IC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2ZW50LnNv
+LjAoKzB4ZTVjMCkgWzB4N2ZhMDc4ZGQwNWMwXQ0KICAgIzM2IC91c3IvbG9jYWwvc2FtYmEvbGli
+L3ByaXZhdGUvbGlidGV2ZW50LnNvLjAoX3RldmVudF9sb29wX29uY2UrMHgxMGYpIFsweDdmYTA3
+OGRjODI3NF0NCiAgICMzNyAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnRldmVudC5z
+by4wKHRldmVudF9jb21tb25fbG9vcF93YWl0KzB4MjUpIFsweDdmYTA3OGRjODU4Zl0NCiAgICMz
+OCAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnRldmVudC5zby4wKCsweGU2NjIpIFsw
+eDdmYTA3OGRkMDY2Ml0NCiAgICMzOSAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnRl
+dmVudC5zby4wKF90ZXZlbnRfbG9vcF93YWl0KzB4MmIpIFsweDdmYTA3OGRjODYzMl0NCiAgICM0
+MCAvdXNyL2xvY2FsL3NhbWJhL3NiaW4vc21iZCgrMHhkZjg0KSBbMHg1NWE3MTk2NThmODRdDQog
+ICAjNDEgL3Vzci9sb2NhbC9zYW1iYS9zYmluL3NtYmQobWFpbisweDE4MmEpIFsweDU1YTcxOTY1
+YjBjZV0NCiAgICM0MiAvbGliNjQvbGliYy5zby42KF9fbGliY19zdGFydF9tYWluKzB4ZjMpIFsw
+eDdmYTA3NTcwNjZhM10NCiAgICM0MyAvdXNyL2xvY2FsL3NhbWJhL3NiaW4vc21iZChfc3RhcnQr
+MHgyZSkgWzB4NTVhNzE5NjUxNTJlXQ0KWzIwMjAvMDcvMjQgMDk6MDk6NTIuMDcwNDA2LCAgMF0g
+Li4vLi4vc291cmNlMy9saWIvZHVtcGNvcmUuYzozMTgoZHVtcF9jb3JlKQ0KICBjb3JlZHVtcCBp
+cyBoYW5kbGVkIGJ5IGhlbHBlciBiaW5hcnkgc3BlY2lmaWVkIGF0IC9wcm9jL3N5cy9rZXJuZWwv
+Y29yZV9wYXR0ZXJu
+--000000000000d4ddce05ab359a30
+Content-Type: application/octet-stream; 
+	name="samba-ctdb-node0-panic-backtrace-Bad-talloc-magic-value.log"
+Content-Disposition: attachment; 
+	filename="samba-ctdb-node0-panic-backtrace-Bad-talloc-magic-value.log"
+Content-Transfer-Encoding: base64
+Content-ID: <f_kd0np7341>
+X-Attachment-Id: f_kd0np7341
+
+WzIwMjAvMDcvMTUgMTE6MzA6MzkuMDE1NDY4LCAgMF0gLi4vLi4vc291cmNlMy9saWIvcG9wdF9j
+b21tb24uYzo2OChwb3B0X3MzX3RhbGxvY19sb2dfZm4pDQogIEJhZCB0YWxsb2MgbWFnaWMgdmFs
+dWUgLSB1bmtub3duIHZhbHVlDQpbMjAyMC8wNy8xNSAxMTozMDozOS4wMTU1MTIsICAwXSAuLi8u
+Li9zb3VyY2UzL2xpYi91dGlsLmM6ODMwKHNtYl9wYW5pY19zMykNCiAgUEFOSUMgKHBpZCAxMDcw
+MzA0KTogQmFkIHRhbGxvYyBtYWdpYyB2YWx1ZSAtIHVua25vd24gdmFsdWUNClsyMDIwLzA3LzE1
+IDExOjMwOjM5LjAxNTk2MiwgIDBdIC4uLy4uL2xpYi91dGlsL2ZhdWx0LmM6MjY1KGxvZ19zdGFj
+a190cmFjZSkNCiAgQkFDS1RSQUNFOiAzNCBzdGFjayBmcmFtZXM6DQogICAjMCAvdXNyL2xvY2Fs
+L3NhbWJhL2xpYi9saWJzYW1iYS11dGlsLnNvLjAobG9nX3N0YWNrX3RyYWNlKzB4MWYpIFsweDdm
+YTA3OWJmOGY0OF0NCiAgICMxIC91c3IvbG9jYWwvc2FtYmEvbGliL2xpYnNtYmNvbmYuc28uMChz
+bWJfcGFuaWNfczMrMHg3NCkgWzB4N2ZhMDc4MTU5NTcxXQ0KICAgIzIgL3Vzci9sb2NhbC9zYW1i
+YS9saWIvbGlic2FtYmEtdXRpbC5zby4wKHNtYl9wYW5pYysweDI4KSBbMHg3ZmEwNzliZjhmMTNd
+DQogICAjMyAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnRhbGxvYy5zby4yKCsweDI5
+ZDIpIFsweDdmYTA3ODdhZDlkMl0NCiAgICM0IC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUv
+bGlidGFsbG9jLnNvLjIoKzB4MjlmOCkgWzB4N2ZhMDc4N2FkOWY4XQ0KICAgIzUgL3Vzci9sb2Nh
+bC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0YWxsb2Muc28uMigrMHgyYTc2KSBbMHg3ZmEwNzg3YWRh
+NzZdDQogICAjNiAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnRhbGxvYy5zby4yKCsw
+eDNlMWYpIFsweDdmYTA3ODdhZWUxZl0NCiAgICM3IC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZh
+dGUvbGlidGFsbG9jLnNvLjIodGFsbG9jX3JlcGFyZW50KzB4NTMpIFsweDdmYTA3ODdhZjFkNV0N
+CiAgICM4IC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlic21iZC1iYXNlLXNhbWJhNC5z
+bygrMHgyNTE1NTMpIFsweDdmYTA3OTgzMzU1M10NCiAgICM5IC91c3IvbG9jYWwvc2FtYmEvbGli
+L3ByaXZhdGUvbGlic21iZC1iYXNlLXNhbWJhNC5zbygrMHgyNWMxYWEpIFsweDdmYTA3OTgzZTFh
+YV0NCiAgICMxMCAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnNtYmQtYmFzZS1zYW1i
+YTQuc28oKzB4MjVkMmM1KSBbMHg3ZmEwNzk4M2YyYzVdDQogICAjMTEgL3Vzci9sb2NhbC9zYW1i
+YS9saWIvcHJpdmF0ZS9saWJzbWJkLWJhc2Utc2FtYmE0LnNvKCsweDI1ZDMzMikgWzB4N2ZhMDc5
+ODNmMzMyXQ0KICAgIzEyIC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2ZW50LnNv
+LjAodGV2ZW50X2NvbW1vbl9pbnZva2VfZmRfaGFuZGxlcisweDEwMSkgWzB4N2ZhMDc4ZGM4ZmFm
+XQ0KICAgIzEzIC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2ZW50LnNvLjAoKzB4
+MTE2MGUpIFsweDdmYTA3OGRkMzYwZV0NCiAgICMxNCAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2
+YXRlL2xpYnRldmVudC5zby4wKCsweDExYzU1KSBbMHg3ZmEwNzhkZDNjNTVdDQogICAjMTUgL3Vz
+ci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQuc28uMCgrMHhlNWMwKSBbMHg3ZmEw
+NzhkZDA1YzBdDQogICAjMTYgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQu
+c28uMChfdGV2ZW50X2xvb3Bfb25jZSsweDEwZikgWzB4N2ZhMDc4ZGM4Mjc0XQ0KICAgIzE3IC91
+c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2ZW50LnNvLjAodGV2ZW50X2NvbW1vbl9s
+b29wX3dhaXQrMHgyNSkgWzB4N2ZhMDc4ZGM4NThmXQ0KICAgIzE4IC91c3IvbG9jYWwvc2FtYmEv
+bGliL3ByaXZhdGUvbGlidGV2ZW50LnNvLjAoKzB4ZTY2MikgWzB4N2ZhMDc4ZGQwNjYyXQ0KICAg
+IzE5IC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2ZW50LnNvLjAoX3RldmVudF9s
+b29wX3dhaXQrMHgyYikgWzB4N2ZhMDc4ZGM4NjMyXQ0KICAgIzIwIC91c3IvbG9jYWwvc2FtYmEv
+bGliL3ByaXZhdGUvbGlic21iZC1iYXNlLXNhbWJhNC5zbyhzbWJkX3Byb2Nlc3MrMHhiZDEpIFsw
+eDdmYTA3OTgyMzVjYV0NCiAgICMyMSAvdXNyL2xvY2FsL3NhbWJhL3NiaW4vc21iZCgrMHhkMzgx
+KSBbMHg1NWE3MTk2NTgzODFdDQogICAjMjIgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9s
+aWJ0ZXZlbnQuc28uMCh0ZXZlbnRfY29tbW9uX2ludm9rZV9mZF9oYW5kbGVyKzB4MTAxKSBbMHg3
+ZmEwNzhkYzhmYWZdDQogICAjMjMgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZl
+bnQuc28uMCgrMHgxMTYwZSkgWzB4N2ZhMDc4ZGQzNjBlXQ0KICAgIzI0IC91c3IvbG9jYWwvc2Ft
+YmEvbGliL3ByaXZhdGUvbGlidGV2ZW50LnNvLjAoKzB4MTFjNTUpIFsweDdmYTA3OGRkM2M1NV0N
+CiAgICMyNSAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnRldmVudC5zby4wKCsweGU1
+YzApIFsweDdmYTA3OGRkMDVjMF0NCiAgICMyNiAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRl
+L2xpYnRldmVudC5zby4wKF90ZXZlbnRfbG9vcF9vbmNlKzB4MTBmKSBbMHg3ZmEwNzhkYzgyNzRd
+DQogICAjMjcgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQuc28uMCh0ZXZl
+bnRfY29tbW9uX2xvb3Bfd2FpdCsweDI1KSBbMHg3ZmEwNzhkYzg1OGZdDQogICAjMjggL3Vzci9s
+b2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQuc28uMCgrMHhlNjYyKSBbMHg3ZmEwNzhk
+ZDA2NjJdDQogICAjMjkgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQuc28u
+MChfdGV2ZW50X2xvb3Bfd2FpdCsweDJiKSBbMHg3ZmEwNzhkYzg2MzJdDQogICAjMzAgL3Vzci9s
+b2NhbC9zYW1iYS9zYmluL3NtYmQoKzB4ZGY4NCkgWzB4NTVhNzE5NjU4Zjg0XQ0KICAgIzMxIC91
+c3IvbG9jYWwvc2FtYmEvc2Jpbi9zbWJkKG1haW4rMHgxODJhKSBbMHg1NWE3MTk2NWIwY2VdDQog
+ICAjMzIgL2xpYjY0L2xpYmMuc28uNihfX2xpYmNfc3RhcnRfbWFpbisweGYzKSBbMHg3ZmEwNzU3
+MDY2YTNdDQogICAjMzMgL3Vzci9sb2NhbC9zYW1iYS9zYmluL3NtYmQoX3N0YXJ0KzB4MmUpIFsw
+eDU1YTcxOTY1MTUyZV0NClsyMDIwLzA3LzE1IDExOjMwOjM5LjAxNjI2OCwgIDBdIC4uLy4uL3Nv
+dXJjZTMvbGliL2R1bXBjb3JlLmM6MzE4KGR1bXBfY29yZSkNCiAgY29yZWR1bXAgaXMgaGFuZGxl
+ZCBieSBoZWxwZXIgYmluYXJ5IHNwZWNpZmllZCBhdCAvcHJvYy9zeXMva2VybmVsL2NvcmVfcGF0
+dGVybg==
+--000000000000d4ddce05ab359a30
+Content-Type: application/octet-stream; 
+	name="samba-ctdb-node0-panic-backtrace-lock-order-violation.log"
+Content-Disposition: attachment; 
+	filename="samba-ctdb-node0-panic-backtrace-lock-order-violation.log"
+Content-Transfer-Encoding: base64
+Content-ID: <f_kd0np7492>
+X-Attachment-Id: f_kd0np7492
+
+WzIwMjAvMDcvMjMgMTE6MzQ6NDEuODAyOTQ4LCAgMF0gLi4vLi4vc291cmNlMy9saWIvdXRpbC5j
+OjgzMChzbWJfcGFuaWNfczMpDQogIFBBTklDIChwaWQgMTU2MDMxNyk6IGxvY2sgb3JkZXIgdmlv
+bGF0aW9uDQpbMjAyMC8wNy8yMyAxMTozNDo0MS44MDgzMDQsICAwXSAuLi8uLi9saWIvdXRpbC9m
+YXVsdC5jOjI2NShsb2dfc3RhY2tfdHJhY2UpDQogIEJBQ0tUUkFDRTogNjQgc3RhY2sgZnJhbWVz
+Og0KICAgIzAgL3Vzci9sb2NhbC9zYW1iYS9saWIvbGlic2FtYmEtdXRpbC5zby4wKGxvZ19zdGFj
+a190cmFjZSsweDFmKSBbMHg3ZmEwNzliZjhmNDhdDQogICAjMSAvdXNyL2xvY2FsL3NhbWJhL2xp
+Yi9saWJzbWJjb25mLnNvLjAoc21iX3BhbmljX3MzKzB4NzQpIFsweDdmYTA3ODE1OTU3MV0NCiAg
+ICMyIC91c3IvbG9jYWwvc2FtYmEvbGliL2xpYnNhbWJhLXV0aWwuc28uMChzbWJfcGFuaWMrMHgy
+OCkgWzB4N2ZhMDc5YmY4ZjEzXQ0KICAgIzMgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9s
+aWJkYndyYXAtc2FtYmE0LnNvKCsweDM0ZmMpIFsweDdmYTA3NDRkZjRmY10NCiAgICM0IC91c3Iv
+bG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGliZGJ3cmFwLXNhbWJhNC5zbygrMHgzODUxKSBbMHg3
+ZmEwNzQ0ZGY4NTFdDQogICAjNSAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYmRid3Jh
+cC1zYW1iYTQuc28oKzB4MzhiYSkgWzB4N2ZhMDc0NGRmOGJhXQ0KICAgIzYgL3Vzci9sb2NhbC9z
+YW1iYS9saWIvcHJpdmF0ZS9saWJkYndyYXAtc2FtYmE0LnNvKGRid3JhcF9mZXRjaF9sb2NrZWQr
+MHgzZCkgWzB4N2ZhMDc0NGRmOTg5XQ0KICAgIzcgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0
+ZS9saWJzbWJkLWJhc2Utc2FtYmE0LnNvKGJybF9nZXRfbG9ja3MrMHg4YykgWzB4N2ZhMDc5NjZm
+MDFlXQ0KICAgIzggL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJzbWJkLWJhc2Utc2Ft
+YmE0LnNvKCsweDE3OTllNykgWzB4N2ZhMDc5NzViOWU3XQ0KICAgIzkgL3Vzci9sb2NhbC9zYW1i
+YS9saWIvcHJpdmF0ZS9saWJzbWJkLWJhc2Utc2FtYmE0LnNvKCsweDkzYWFkKSBbMHg3ZmEwNzk2
+NzVhYWRdDQogICAjMTAgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJzbWJkLWJhc2Ut
+c2FtYmE0LnNvKCsweDk1Njc5KSBbMHg3ZmEwNzk2Nzc2NzldDQogICAjMTEgL3Vzci9sb2NhbC9z
+YW1iYS9saWIvcHJpdmF0ZS9saWJzbWJkLWJhc2Utc2FtYmE0LnNvKCsweDk1YmRlKSBbMHg3ZmEw
+Nzk2NzdiZGVdDQogICAjMTIgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJkYndyYXAt
+c2FtYmE0LnNvKGRid3JhcF9kb19sb2NrZWQrMHhmYSkgWzB4N2ZhMDc0NGUwMmI5XQ0KICAgIzEz
+IC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlic21iZC1iYXNlLXNhbWJhNC5zbyhzaGFy
+ZV9tb2RlX2ZvcmFsbF9lbnRyaWVzKzB4OGMpIFsweDdmYTA3OTY3N2UxZF0NCiAgICMxNCAvdXNy
+L2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnNtYmQtYmFzZS1zYW1iYTQuc28oKzB4OTNiMjYp
+IFsweDdmYTA3OTY3NWIyNl0NCiAgICMxNSAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xp
+YnNtYmQtYmFzZS1zYW1iYTQuc28oKzB4OTM5YzUpIFsweDdmYTA3OTY3NTljNV0NCiAgICMxNiAv
+dXNyL2xvY2FsL3NhbWJhL2xpYi9saWJzbWJjb25mLnNvLjAoKzB4M2M0MGYpIFsweDdmYTA3ODEy
+YzQwZl0NCiAgICMxNyAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnNhbWJhLWNsdXN0
+ZXItc3VwcG9ydC1zYW1iYTQuc28oKzB4NzdmYykgWzB4N2ZhMDc2Y2E2N2ZjXQ0KICAgIzE4IC91
+c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlic2FtYmEtY2x1c3Rlci1zdXBwb3J0LXNhbWJh
+NC5zbyhjdGRiZF90cmF2ZXJzZSsweDRjYSkgWzB4N2ZhMDc2Y2FiNWVlXQ0KICAgIzE5IC91c3Iv
+bG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlic2FtYmEtY2x1c3Rlci1zdXBwb3J0LXNhbWJhNC5z
+bygrMHg3M2IwKSBbMHg3ZmEwNzZjYTYzYjBdDQogICAjMjAgL3Vzci9sb2NhbC9zYW1iYS9saWIv
+cHJpdmF0ZS9saWJzYW1iYS1jbHVzdGVyLXN1cHBvcnQtc2FtYmE0LnNvKCsweDdhMDEpIFsweDdm
+YTA3NmNhNmEwMV0NCiAgICMyMSAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYmRid3Jh
+cC1zYW1iYTQuc28oZGJ3cmFwX3RyYXZlcnNlX3JlYWQrMHgzMSkgWzB4N2ZhMDc0NGRmZDhkXQ0K
+ICAgIzIyIC91c3IvbG9jYWwvc2FtYmEvbGliL2xpYnNtYmNvbmYuc28uMCgrMHgzYzRmZSkgWzB4
+N2ZhMDc4MTJjNGZlXQ0KICAgIzIzIC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGliZGJ3
+cmFwLXNhbWJhNC5zbyhkYndyYXBfdHJhdmVyc2VfcmVhZCsweDMxKSBbMHg3ZmEwNzQ0ZGZkOGRd
+DQogICAjMjQgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJzbWJkLWJhc2Utc2FtYmE0
+LnNvKHNoYXJlX21vZGVfZm9yYWxsKzB4NTEpIFsweDdmYTA3OTY3NWE0NF0NCiAgICMyNSAvdXNy
+L2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnNtYmQtYmFzZS1zYW1iYTQuc28oc2hhcmVfZW50
+cnlfZm9yYWxsKzB4NmIpIFsweDdmYTA3OTY3NWMxOF0NCiAgICMyNiAvdXNyL2xvY2FsL3NhbWJh
+L2xpYi9wcml2YXRlL2xpYnNtYmQtYmFzZS1zYW1iYTQuc28oKzB4MTc5YzE4KSBbMHg3ZmEwNzk3
+NWJjMThdDQogICAjMjcgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJzbWJkLWJhc2Ut
+c2FtYmE0LnNvKF9zcnZzdmNfTmV0RmlsZUVudW0rMHgxMDApIFsweDdmYTA3OTc1ZTViZV0NCiAg
+ICMyOCAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnNtYmQtYmFzZS1zYW1iYTQuc28o
+KzB4MTgyNDk2KSBbMHg3ZmEwNzk3NjQ0OTZdDQogICAjMjkgL3Vzci9sb2NhbC9zYW1iYS9saWIv
+cHJpdmF0ZS9saWJzbWJkLWJhc2Utc2FtYmE0LnNvKCsweDJhYzFhMykgWzB4N2ZhMDc5ODhlMWEz
+XQ0KICAgIzMwIC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlic21iZC1iYXNlLXNhbWJh
+NC5zbygrMHgyYWJkNjUpIFsweDdmYTA3OTg4ZGQ2NV0NCiAgICMzMSAvdXNyL2xvY2FsL3NhbWJh
+L2xpYi9wcml2YXRlL2xpYnNtYmQtYmFzZS1zYW1iYTQuc28oKzB4MmFjYWJhKSBbMHg3ZmEwNzk4
+OGVhYmFdDQogICAjMzIgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJzbWJkLWJhc2Ut
+c2FtYmE0LnNvKHByb2Nlc3NfY29tcGxldGVfcGR1KzB4ZDcpIFsweDdmYTA3OTg4ZWI5M10NCiAg
+ICMzMyAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnNtYmQtYmFzZS1zYW1iYTQuc28o
+ZGNlcnBjX25jYWNuX3BhY2tldF9wcm9jZXNzKzB4MWJlKSBbMHg3ZmEwNzk3MDQ3NWFdDQogICAj
+MzQgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQuc28uMChfdGV2ZW50X3Jl
+cV9ub3RpZnlfY2FsbGJhY2srMHg2YSkgWzB4N2ZhMDc4ZGNhODAyXQ0KICAgIzM1IC91c3IvbG9j
+YWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2ZW50LnNvLjAoKzB4ODk2MykgWzB4N2ZhMDc4ZGNh
+OTYzXQ0KICAgIzM2IC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2ZW50LnNvLjAo
+X3RldmVudF9yZXFfZG9uZSsweDI1KSBbMHg3ZmEwNzhkY2E5OTBdDQogICAjMzcgL3Vzci9sb2Nh
+bC9zYW1iYS9saWIvbGliZGNlcnBjLWJpbmRpbmcuc28uMCgrMHhmODMxKSBbMHg3ZmEwNzBjZGQ4
+MzFdDQogICAjMzggL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQuc28uMChf
+dGV2ZW50X3JlcV9ub3RpZnlfY2FsbGJhY2srMHg2YSkgWzB4N2ZhMDc4ZGNhODAyXQ0KICAgIzM5
+IC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2ZW50LnNvLjAoKzB4ODk2MykgWzB4
+N2ZhMDc4ZGNhOTYzXQ0KICAgIzQwIC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2
+ZW50LnNvLjAoX3RldmVudF9yZXFfZG9uZSsweDI1KSBbMHg3ZmEwNzhkY2E5OTBdDQogICAjNDEg
+L3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJzYW1iYS1zb2NrZXRzLXNhbWJhNC5zbygr
+MHg2ZTM5KSBbMHg3ZmEwNzdlZGJlMzldDQogICAjNDIgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJp
+dmF0ZS9saWJzYW1iYS1zb2NrZXRzLXNhbWJhNC5zbygrMHg3MDY0KSBbMHg3ZmEwNzdlZGMwNjRd
+DQogICAjNDMgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQuc28uMChfdGV2
+ZW50X3JlcV9ub3RpZnlfY2FsbGJhY2srMHg2YSkgWzB4N2ZhMDc4ZGNhODAyXQ0KICAgIzQ0IC91
+c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2ZW50LnNvLjAoKzB4ODk2MykgWzB4N2Zh
+MDc4ZGNhOTYzXQ0KICAgIzQ1IC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2ZW50
+LnNvLjAoX3RldmVudF9yZXFfZG9uZSsweDI1KSBbMHg3ZmEwNzhkY2E5OTBdDQogICAjNDYgL3Vz
+ci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJzYW1iYS1zb2NrZXRzLXNhbWJhNC5zbygrMHg2
+MzhhKSBbMHg3ZmEwNzdlZGIzOGFdDQogICAjNDcgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0
+ZS9saWJ0ZXZlbnQuc28uMChfdGV2ZW50X3JlcV9ub3RpZnlfY2FsbGJhY2srMHg2YSkgWzB4N2Zh
+MDc4ZGNhODAyXQ0KICAgIzQ4IC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2ZW50
+LnNvLjAoKzB4ODk2MykgWzB4N2ZhMDc4ZGNhOTYzXQ0KICAgIzQ5IC91c3IvbG9jYWwvc2FtYmEv
+bGliL3ByaXZhdGUvbGlidGV2ZW50LnNvLjAoKzB4OGE5MCkgWzB4N2ZhMDc4ZGNhYTkwXQ0KICAg
+IzUwIC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2ZW50LnNvLjAodGV2ZW50X2Nv
+bW1vbl9pbnZva2VfaW1tZWRpYXRlX2hhbmRsZXIrMHgxODQpIFsweDdmYTA3OGRjOTczY10NCiAg
+ICM1MSAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnRldmVudC5zby4wKHRldmVudF9j
+b21tb25fbG9vcF9pbW1lZGlhdGUrMHgzNykgWzB4N2ZhMDc4ZGM5ODQyXQ0KICAgIzUyIC91c3Iv
+bG9jYWwvc2FtYmEvbGliL3ByaXZhdGUvbGlidGV2ZW50LnNvLjAoKzB4MTFiYmIpIFsweDdmYTA3
+OGRkM2JiYl0NCiAgICM1MyAvdXNyL2xvY2FsL3NhbWJhL2xpYi9wcml2YXRlL2xpYnRldmVudC5z
+by4wKCsweGU1YzApIFsweDdmYTA3OGRkMDVjMF0NCiAgICM1NCAvdXNyL2xvY2FsL3NhbWJhL2xp
+Yi9wcml2YXRlL2xpYnRldmVudC5zby4wKF90ZXZlbnRfbG9vcF9vbmNlKzB4MTBmKSBbMHg3ZmEw
+NzhkYzgyNzRdDQogICAjNTUgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQu
+c28uMCh0ZXZlbnRfY29tbW9uX2xvb3Bfd2FpdCsweDI1KSBbMHg3ZmEwNzhkYzg1OGZdDQogICAj
+NTYgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQuc28uMCgrMHhlNjYyKSBb
+MHg3ZmEwNzhkZDA2NjJdDQogICAjNTcgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0
+ZXZlbnQuc28uMChfdGV2ZW50X2xvb3Bfd2FpdCsweDJiKSBbMHg3ZmEwNzhkYzg2MzJdDQogICAj
+NTggL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJzbWJkLWJhc2Utc2FtYmE0LnNvKHNt
+YmRfcHJvY2VzcysweGJkMSkgWzB4N2ZhMDc5ODIzNWNhXQ0KICAgIzU5IC91c3IvbG9jYWwvc2Ft
+YmEvc2Jpbi9zbWJkKCsweGQzODEpIFsweDU1YTcxOTY1ODM4MV0NCiAgICM2MCAvdXNyL2xvY2Fs
+L3NhbWJhL2xpYi9wcml2YXRlL2xpYnRldmVudC5zby4wKHRldmVudF9jb21tb25faW52b2tlX2Zk
+X2hhbmRsZXIrMHgxMDEpIFsweDdmYTA3OGRjOGZhZl0NCiAgICM2MSAvdXNyL2xvY2FsL3NhbWJh
+L2xpYi9wcml2YXRlL2xpYnRldmVudC5zby4wKCsweDExNjBlKSBbMHg3ZmEwNzhkZDM2MGVdDQog
+ICAjNjIgL3Vzci9sb2NhbC9zYW1iYS9saWIvcHJpdmF0ZS9saWJ0ZXZlbnQuc28uMCgrMHgxMWM1
+NSkgWzB4N2ZhMDc4ZGQzYzU1XQ0KICAgIzYzIC91c3IvbG9jYWwvc2FtYmEvbGliL3ByaXZhdGUv
+bGlidGV2ZW50LnNvLjAoKzB4ZTVjMCkgWzB4N2ZhMDc4ZGQwNWMwXQ0KWzIwMjAvMDcvMjMgMTE6
+MzQ6NDEuODA4ODcyLCAgMF0gLi4vLi4vc291cmNlMy9saWIvZHVtcGNvcmUuYzozMTgoZHVtcF9j
+b3JlKQ0KICBjb3JlZHVtcCBpcyBoYW5kbGVkIGJ5IGhlbHBlciBiaW5hcnkgc3BlY2lmaWVkIGF0
+IC9wcm9jL3N5cy9rZXJuZWwvY29yZV9wYXR0ZXJu
+--000000000000d4ddce05ab359a30--
 
