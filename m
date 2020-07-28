@@ -2,58 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74BF62303FB
-	for <lists+samba-technical@lfdr.de>; Tue, 28 Jul 2020 09:22:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EEE86230418
+	for <lists+samba-technical@lfdr.de>; Tue, 28 Jul 2020 09:28:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=PQLBuDF9XhnoGEtiq3pwQDEhZD2OM8xWfRXMyd2hAsg=; b=2315DEis/2BAH4UCn++Ctzch67
-	MAZbSjQdBKRaEqUWe5MM0YONIL8B4LeT3JzZ+gpFIsvq9Ab/jKUoDT36w0NQlt9CF6hVIYDfsqePF
-	xshnJWmCrMA7Ctu1ThugakqxzCjTeYMPri8xvign2ZKX76ZXE4E3iSd/GYDeiiIKP2qVx2M4azbyi
-	t82fBcQF1QPqMnjOLnyV8SJkUnNMOWm6SlNiH7LgbZnJOYbI5LJFWr1m4nAygnPfReCWWioUotXku
-	QiuJQMTaRA8u9Np4DnWXr9soy4lueEXwvTEnEFPfSjUuZyFx78vf0ToRr0RDW5Q9nlsymEPKzC/ws
-	LPjbeDdA==;
-Received: from localhost ([::1]:54394 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=s5vMmTdcxPOz/WOYG6OiBxxMTsehrORn6Ek1kueiQyo=; b=brUS5qhWboBVkJLqlb/vNIKGUc
+	r4CNLNZiAmr2iQ4rykLW5L5jt/ZS2OuN71OZZ7Taos30iBoqPe3owMA2zImHDMEP9BoK6B0wOFeaR
+	TItdwf1zHTR0/I4hYSgUeA/cbkG5cJQM92OLVcMHuf+ub22FnrB8Wl95NSLhccsqobf2gUp2y5jQR
+	gO+B6p9owfeUYoKnGdVGENV5HYez8cpntDaYysFcj1mmuWsCalCnBNa3NukLvv2Qs9BP8te1ut5lc
+	nUBQMeUdl7sUv4rBjwziUbah9bqIYah4EBQBD0TUmUyh40+gL7qlqXWdvSI+HB5dzNcffji1L+7Vd
+	ntrJjnzQ==;
+Received: from localhost ([::1]:55170 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1k0JwM-00A7Dh-Nc; Tue, 28 Jul 2020 07:22:23 +0000
-Received: from mail-qk1-x743.google.com ([2607:f8b0:4864:20::743]:41245) 
+	id 1k0K28-00A7M0-Ci; Tue, 28 Jul 2020 07:28:20 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18504) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k0Jw9-00A7DZ-3G
- for samba-technical@lists.samba.org; Tue, 28 Jul 2020 07:22:11 +0000
-Received: by mail-qk1-x743.google.com with SMTP id l64so10974328qkb.8
- for <samba-technical@lists.samba.org>; Tue, 28 Jul 2020 00:22:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=PQLBuDF9XhnoGEtiq3pwQDEhZD2OM8xWfRXMyd2hAsg=;
- b=gh0DwqPsbk27yoq+oYzxOcSqa4x/l5uwvYCZvccs4Lrfu6WSTkUKPPLPPdFolaEQoK
- qKxRBcVEIWMuua6Jb0oW6voSmcW1+uESlH5dtzQD4x7/IpArfHO3e/5UK064YykrlKKp
- 2foG/qghwIa6simSjJHRIIt+Sx1KsxXfxlfNxZYxRwc8G/YeGUIolGm1a/KjL7/V04OH
- Wkl0MbdKzyIK5mDOIwwsx1jbvAE3qxcxEbo6gKjNDD3C9ooEiauBsFYjStCPQOPaTbAV
- cK2nx7QmC8TKnOP/seObqi9uO75KFHopcylPWJ6p97Z7GsP9Vew1Zymi011nBfJIg0/a
- cn1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=PQLBuDF9XhnoGEtiq3pwQDEhZD2OM8xWfRXMyd2hAsg=;
- b=roejRLKSQzaB5tnaQyrtIabZ1yRxKKb9UR0PydV/rauvGhOFbX+lI8JcPmgDhGIPTZ
- xHIGTxxuFor4IQMRaPiV0x+fkNAkhvyYM3yBR6LuAwWhuIi23ls5wKyjDDwf6g4Ojnho
- a9BGMVixj5obpgm/0ddx8GUGvKpDtfJ21o/a7AaNs6FcenHjhA5NAKxifhKxhZvRX2J+
- brT3q8X7+op37pXkQUAlhc6KdnSxs4GamfHzk/b241Vl9sX1Ms0OjrpXGy2ke4Z18JOD
- lPhSeWt75HpnzEk6cRVE/DX4AZtDkWmCwBvSrrkqqnTuzlkLyFXMpTf78Tfg46FWe+XC
- r0WA==
-X-Gm-Message-State: AOAM531x5h70EzKJagCkwCKlSdAaidEuIGyYwdg7MJae+UVnBypOLKoj
- Xcwb+eEBw6qNv7DpT6hLFa8v67QQ1TA4jFSTQWM=
-X-Google-Smtp-Source: ABdhPJwVRSGdhPJPVv6er+p13GbZYmRBjtRAAtkjFmR2njRD/LwCFgKZuCDKYw3HTtnzujM5gue2tAahEy9cKatL3mE=
-X-Received: by 2002:a37:6502:: with SMTP id z2mr26643654qkb.213.1595920927212; 
- Tue, 28 Jul 2020 00:22:07 -0700 (PDT)
-MIME-Version: 1.0
+ (Exim) id 1k0K1x-00A7Lt-1x
+ for samba-technical@lists.samba.org; Tue, 28 Jul 2020 07:28:14 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=s5vMmTdcxPOz/WOYG6OiBxxMTsehrORn6Ek1kueiQyo=; b=dlQe9vKmTX8HxbELVQtARpiPCX
+ 5cuM/8lV+36DJzDhkRpImm2/LDHfjlecz3pgpyOMzvzFYyp9k95qIXUcNNa0ULTjyukThuBGOX6rd
+ 7IAUdEetDJCQw8DPFdFE+2OtIUGqmV3ixDDiXJDcvnZ+HVUTXmtcRARdRw9WzRr98Zea6hhcEtlT6
+ OYVwAnld4cl1zQa6L4CGDSAo+WyXUCHsGlkknipjSPkAcmiKuHwSeJuBdOM6YVGft+iFJh2NzhzNF
+ hsUHihMtjrtL6gT+LoKkWUN9keY8nu66UEatuhorNgPwCvSIZYG4OHQg/uiNVeILX0wE0YmH6JSYt
+ IZ7Hou/0fL7Q+Lam6iFkkaCTuYaacc3MsXzFxLDmGLakTQnrYPu/DPLa7eWbrf5UyjAn2GVdkLOwf
+ OGQcPNVlQL06esCYdrCkML+P3E9S8YIu03LtVQPZoRITOpSygjFQlS3+jrqn8jC+8Wn9m1k6Twsru
+ BaHovYY0b8BUXLpU49UmvPEE;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1k0K1w-0003P2-8N; Tue, 28 Jul 2020 07:28:08 +0000
+To: Isaac Boukris <iboukris@gmail.com>, admin@prawda.net.pl
 References: <!&!AAAAAAAAAAAuAAAAAAAAANGsRTVhQVFCrPuEPBc7FtYBANlTnCJhprtFudq2LHCBs8EBACQA//8AABAAAAD+l0Co+DASSaajg/eQiKKrAQAAAAA=@prawda.net.pl>
-In-Reply-To: <!&!AAAAAAAAAAAuAAAAAAAAANGsRTVhQVFCrPuEPBc7FtYBANlTnCJhprtFudq2LHCBs8EBACQA//8AABAAAAD+l0Co+DASSaajg/eQiKKrAQAAAAA=@prawda.net.pl>
-Date: Tue, 28 Jul 2020 09:21:56 +0200
-Message-ID: <CAC-fF8STW7otKinVGG_w9Ut17qODzD0KaxK+P7VDDZbJz2G6ew@mail.gmail.com>
+ <CAC-fF8STW7otKinVGG_w9Ut17qODzD0KaxK+P7VDDZbJz2G6ew@mail.gmail.com>
 Subject: Re: Samba migrate from ver 4.11.11 to 4.12.5
-To: admin@prawda.net.pl
-Content-Type: text/plain; charset="UTF-8"
+Message-ID: <05853c98-f6a0-5f71-26a2-b4eee9f8dba4@samba.org>
+Date: Tue, 28 Jul 2020 09:28:01 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+MIME-Version: 1.0
+In-Reply-To: <CAC-fF8STW7otKinVGG_w9Ut17qODzD0KaxK+P7VDDZbJz2G6ew@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="cfSXwPy21OQISOo4cG7u7ATbs8VkSpBL0"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,29 +58,87 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@gmail.com>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Jul 28, 2020 at 8:57 AM admin--- via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
->
-> I thing I have problem with encryption, ver 4.12 not supported DES and I
-> see in log:
->
->   Kerberos: Server not found in database:
-> <mailto:ldap/debian.prawda.local/prawda.local@PRAWDA.LOCAL>
-> ldap/debian.prawda.local/prawda.local@PRAWDA.LOCAL: encryption type 3 not
-> supported
->
-> How migrate old database encryption to supportet in samba 4.12?
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--cfSXwPy21OQISOo4cG7u7ATbs8VkSpBL0
+Content-Type: multipart/mixed; boundary="g1qTCXulYaKHxLc7dl0b615zeZhmpmiEV";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Isaac Boukris <iboukris@gmail.com>, admin@prawda.net.pl
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Message-ID: <05853c98-f6a0-5f71-26a2-b4eee9f8dba4@samba.org>
+Subject: Re: Samba migrate from ver 4.11.11 to 4.12.5
+References: <!&!AAAAAAAAAAAuAAAAAAAAANGsRTVhQVFCrPuEPBc7FtYBANlTnCJhprtFudq2LHCBs8EBACQA//8AABAAAAD+l0Co+DASSaajg/eQiKKrAQAAAAA=@prawda.net.pl>
+ <CAC-fF8STW7otKinVGG_w9Ut17qODzD0KaxK+P7VDDZbJz2G6ew@mail.gmail.com>
+In-Reply-To: <CAC-fF8STW7otKinVGG_w9Ut17qODzD0KaxK+P7VDDZbJz2G6ew@mail.gmail.com>
 
-It's technically not possible to convert DES hashes to another encryption type.
+--g1qTCXulYaKHxLc7dl0b615zeZhmpmiEV
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-> Change user password not help.
+Am 28.07.20 um 09:21 schrieb Isaac Boukris via samba-technical:
+> On Tue, Jul 28, 2020 at 8:57 AM admin--- via samba-technical
+> <samba-technical@lists.samba.org> wrote:
+>>
+>>
+>> I thing I have problem with encryption, ver 4.12 not supported DES and=
+ I
+>> see in log:
+>>
+>>   Kerberos: Server not found in database:
+>> <mailto:ldap/debian.prawda.local/prawda.local@PRAWDA.LOCAL>
+>> ldap/debian.prawda.local/prawda.local@PRAWDA.LOCAL: encryption type 3 =
+not
+>> supported
+>>
+>> How migrate old database encryption to supportet in samba 4.12?
+>=20
+> It's technically not possible to convert DES hashes to another encrypti=
+on type.
+>=20
+>> Change user password not help.
+>=20
+> Try resetting the server secret and regenerate its keytab (ldap/debian)=
+=2E
 
-Try resetting the server secret and regenerate its keytab (ldap/debian).
+No, I don't think that's useful.
+Adjusting msDS-SupportedEncryptionTypes for debian.prawda.local from 31
+to 28 should help.
+
+@Isaac didn't we had a fix and a bug report for the problem already?
+
+metze
+
+
+--g1qTCXulYaKHxLc7dl0b615zeZhmpmiEV--
+
+--cfSXwPy21OQISOo4cG7u7ATbs8VkSpBL0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl8f04QACgkQDbX1YShp
+vVbolxAAt3VcZgwr3FoyTtZj9q6tV90uS01Krem+3oa9xXt5KSaI9q3d/t+VGPi/
+CskoXmPisBlngpgkO89u4NPXfix7RFqNii6dbBZIG0kGVOsG9miEvVQKhIsiicUQ
+DBrk2M1p5GC+RMYlU4mCOBXYJ9U9KEhdb8kHszxV8MKcS5/OvyirrebqHQH+A7U5
+x+sRyq1c8WOLp0ez3zeB9Js5rlofFPl4k85r7Ba9H9em3QSRBNZ24R+XX3/USJCb
+Q35K041eo9pZBgDti0WTVGFET8aR3X2Z+rshtBZNSIJ3Mr8MWhC8Wi89HxgOzZOI
+5sUCDrsQD0ty5tFMKrZkampoO0Sxz7PTc9FR6lnva0yMKdbNRo5fMvX9j3rrL7XC
+su9y5V1E9/BLsdS5kgxgoGDaVrr4nwporeCvSUEfm+6G4FYWHOvbFu5jXtQozGio
+GUCWgTcerZDjtZiZ5tsCuErMjowe5TOipiVx5lLWP/dDlqhOQZq3JiDfrx+mjf38
+YjghNf6/R8MeVoQ9gPoVSEbhe8HZ3cyBBDlunOsq+AfWqCi+XzJ+qytaVpDLqjHE
+hGmUhgcfgSk2w1V/uJLqsFA67p/1ZdJIxw0tRbXFvqwqSmWeugIOHKV//Y++Hdno
+Bc8+mveG+QBk1rOvttsDnEQrX3/3uc9OnoDu8Unundji3KOcVtQ=
+=YrSz
+-----END PGP SIGNATURE-----
+
+--cfSXwPy21OQISOo4cG7u7ATbs8VkSpBL0--
 
