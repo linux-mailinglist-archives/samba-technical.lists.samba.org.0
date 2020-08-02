@@ -2,57 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5520F23562D
-	for <lists+samba-technical@lfdr.de>; Sun,  2 Aug 2020 12:08:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 66B3723564A
+	for <lists+samba-technical@lfdr.de>; Sun,  2 Aug 2020 12:31:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=8B+sqvXhaqI02FIUoqzQZBOgWyqavzRSGjJu5dqGaRI=; b=BBClhFtNOpPlapNZTp2+FR87u/
-	eT4DI1w4Tiedon7DtH2v+ogbY7pimPrLWKGLgCd0mJGa680sazrJiegYlFwwAxO9PvUHz8lDGTnUe
-	wfJ3zs5YNbZRDomSYaQVzJMj8TkWx+VGVMQXJn6wD+BC2LMhYMH5sTynkjslbneJHVPmLsMpWV11l
-	Pg0psVL+dsYcuo5OpVN8gtlrKOMxYXkGZP0QyBVMx+46/wexOE1KZpoCgZ2ofXiSZyCugcr95N/ZQ
-	lqx64M2oKBdj6M7ErrESq+otS1I2rlccx3tNDVixag+lzp3Av29AM35K8TCVrYdYeK+yMLWg+drFn
-	WQ8s4eEg==;
-Received: from localhost ([::1]:35430 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=RbtP0Jzj3yYoeJOHHaiuJzrunoh018wulixPIDXDmIg=; b=j71TfCPUnKr5zqSz3F7n1fiaJV
+	0aX8P3Syojpft1qfX+c0R2LtkSLcAlx4S9pv2GEpr3h8kIzQpxTA0iBtt+YSvoS336sFP4kj9S5GI
+	BJ6YYCNC2GntVy4g0tK79NWaHf5D7DX6YUAMIsT1XPoNOGaT1B5KfoWUv7X5nHftsuyCEOV8eN8kO
+	phf2oKpqoEA4z1QkeGPv+xGt+gcxZqUrhlfiA3uVLr4DrjvS1Kcw/Xg2u2Jwzuh68Xf1Ts68NlycQ
+	ZJe3jFdxS1vVf9l2o1wuR7dM6NkvkqBSAE7lZep83fMCwBuZjtQJOhvQdJL74ORq8Bg+6T/lrAPoF
+	B7iZ05WA==;
+Received: from localhost ([::1]:36216 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1k2Atv-00CGD1-Ia; Sun, 02 Aug 2020 10:07:31 +0000
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629]:37017) 
+	id 1k2BGs-00CGKz-44; Sun, 02 Aug 2020 10:31:14 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60834) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k2Atm-00CGCu-KH
- for samba-technical@lists.samba.org; Sun, 02 Aug 2020 10:07:27 +0000
-Received: by mail-ej1-x629.google.com with SMTP id qc22so20872641ejb.4
- for <samba-technical@lists.samba.org>; Sun, 02 Aug 2020 03:07:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=Ux72emXM/rN1PKqX5V3eU7OQ4hMSdUnLdQvHdxZa0gg=;
- b=iLgxHvxyq3viqET9zf5eeSA61a6GKK04XEtb03tXolHthqvFQ+fQ5KjKhguPuh7PFH
- SfBHx9HLLQZrAV2s1VwhX+EXhOAe6MX3uogPsJXzoH1JxoYRENX8ECWkUjw8AmD309sy
- jiTuEpkntdCp4zY3qzaBda9lQ7DyhwSDXJiT+f5IAsq1FAnWvoytvjndXm9CgrAPBots
- RzNYJsdNexTdsMfUysVVhV5Is5L+SiOuh4LbJyTZ2/i89XX60u7uBR2m3w7nvFtdYBDq
- +OI9ZY6elFSmrrvsIb1PWd4EgRTh3PY55H2yq72QgliUwbiDUeO0yiMvCBGYi8koA4Zo
- dh1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=Ux72emXM/rN1PKqX5V3eU7OQ4hMSdUnLdQvHdxZa0gg=;
- b=Gu/QzC3UJmB5kwQiJ4HEcB+WM8+Vq69+8fU5RpxYr94/QDYTnqBI0kxr76AjnXuNXR
- sty+5IwGXqbicruIvd3PqsHTHsiL9gIo4tFun8WSqEQ2qzG9MepT1OLmqPjM9a/3i4Ew
- R1mNKiAtwGuP0uQfEgNG8ih14cTh2qjnd/Z9snIWoKcEN2UFjE8sl2GVPdGjwvoY2DpO
- gjHPg/qQPmjNYEfi3oEw5oTLi2Xx4G00bRusJWivp6z5V08ii0mhKyThpDA09ESKTUUr
- Bq5lOar+TcPAt4olvdsNXYg11fZonHNz2UADCY1ltFqBmSg1euftU3QcxbxI00rZ/71A
- YLLA==
-X-Gm-Message-State: AOAM531O0w117IKi3+0Ibe5vzmLD0VvAakEAVZsF60krG6ylxEcjCYzh
- SHAtNet3CemmNWP4e6dWyNkdOfrBcNCSKcUJZ+zZifn3GCg=
-X-Google-Smtp-Source: ABdhPJxlhTRap0JzRDEnttCjrj9clwTiPjlle2uTwjnG588D4os/zguuWiWOLweKcAHH8ojo8icXhiyBqUIH69RDFQ0=
-X-Received: by 2002:a17:906:c007:: with SMTP id
- e7mr11879170ejz.481.1596362841323; 
- Sun, 02 Aug 2020 03:07:21 -0700 (PDT)
+ (Exim) id 1k2BGm-00CGKs-AI
+ for samba-technical@lists.samba.org; Sun, 02 Aug 2020 10:31:10 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=RbtP0Jzj3yYoeJOHHaiuJzrunoh018wulixPIDXDmIg=; b=zQNO9U3lmXUrOAvuYbvCEjZdjB
+ EXTzNo4VchOv31fbhY0q9zlSziRNEDXpSxODz079SDu5Lmv+vB5q8h8bZDTZpxsS5wkjL+0jZf5He
+ yqDm+IGarXpeWZuTNHs1+gfvWdPBKeaaLjpL5D1rCEyCoKgbD5e02xLi4I3mzrc6UKIL8BV2DJtSv
+ UhX7wNe7y4OCxGbpjEnp8JXtu9LJEAEacnqAI7gtm48/RaH+ArlnbODE8yCeANDqAzZWkfpKtMGHc
+ uZpfB9hy5T7VdK3+hZHuAbpWjNiRMdyQaVfMyORxmLeaVPEapcB/X2V5Ir8oOuwvawNloOTDRKKbE
+ OR/H9J5DeHkK9WG2Sv9H+3D8hXTd67L+Qg08rKdKfNTuKMPPgSLkifycmUtmWy1Xab7ShUnTx95LP
+ /sDKFLrtkjbnEAy6SOpfmaGtkxZKpQKlPTvQYD9n7ceI6wjc74C0Kz2AIza5DQM/2TsZ3DKsYIVyM
+ I5PzIhqh+VB8PjBhj5/QHHgv;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1k2BGl-0006pe-HV
+ for samba-technical@lists.samba.org; Sun, 02 Aug 2020 10:31:07 +0000
+Subject: Re: GPO Get Inheritance Clarification
+To: samba-technical@lists.samba.org
+References: <CAH72RCXCJ1ETQNV7Ysxp89jTQtw_ZQg+2HW0x+ouWdwrfsAY_g@mail.gmail.com>
+Message-ID: <4104ab8f-0e82-59b4-9f95-b2dc759645dc@samba.org>
+Date: Sun, 2 Aug 2020 11:31:07 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Date: Sun, 2 Aug 2020 13:07:29 +0300
-Message-ID: <CAH72RCXCJ1ETQNV7Ysxp89jTQtw_ZQg+2HW0x+ouWdwrfsAY_g@mail.gmail.com>
-Subject: GPO Get Inheritance Clarification
-To: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+In-Reply-To: <CAH72RCXCJ1ETQNV7Ysxp89jTQtw_ZQg+2HW0x+ouWdwrfsAY_g@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,20 +58,37 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
-Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I'm working on Group Policy Object management as part of the GSoC project.
-One of the commands I have come across is the samba-tool gpo
-getinheritance <container_dn>.
+On 02/08/2020 11:07, hezekiah maina via samba-technical wrote:
+> I'm working on Group Policy Object management as part of the GSoC project.
+> One of the commands I have come across is the samba-tool gpo
+> getinheritance <container_dn>.
+>
+> I have obtained the containers using:
+> samba-tool gpo listcontainers {6AC1786C-016F-11D2-945F-00C04FB984F9}
+> (the last part being the gpo I'm obtaining containers for)
+> and the result was the following:
+> Container(s) using GPO 6AC1786C-016F-11D2-945F-00C04FB984F9
+>      DN: OU=Domain Controllers,DC=samdom,DC=example,DC=com
+>
+> What should I pass in as my container in the get inheritance command?
 
-I have obtained the containers using:
-samba-tool gpo listcontainers {6AC1786C-016F-11D2-945F-00C04FB984F9}
-(the last part being the gpo I'm obtaining containers for)
-and the result was the following:
-Container(s) using GPO 6AC1786C-016F-11D2-945F-00C04FB984F9
-    DN: OU=Domain Controllers,DC=samdom,DC=example,DC=com
+The output of this search:
 
-What should I pass in as my container in the get inheritance command?
+ldbsearch --cross-ncs -H ldap://dc01 -P -b "CN=Policies,CN=System,$(echo 
+"dc=$(hostname -d)" | sed 's/\./,dc=/g')" -s sub 
+'(&(objectClass=groupPolicyContainer)(name='{6AC1786C-016F-11D2-945F-00C04FB984F9}'))' 
+dn | grep 'dn:' | sed 's/dn: //'
+
+Replace 'dc01' with the short hostname of your DC.
+
+By the way, the policy GUID is for one of the default policies, you 
+shouldn't modify the default policies ;-)
+
+Rowland
+
+
