@@ -2,56 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B9CA23C7E9
-	for <lists+samba-technical@lfdr.de>; Wed,  5 Aug 2020 10:38:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 082D423C98F
+	for <lists+samba-technical@lfdr.de>; Wed,  5 Aug 2020 11:53:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=QkG1j8vWAW8YyAC+dLThOuch+ImkntHxAAlW+onoO1k=; b=vIr67h5kUGApRY9l80v20JwSJI
-	Hiwegl2BN6wpsq91f4uAt8nPS0cBHxrbgjJDq/cfqIvzNxSbg1jqyk2At1Sn7jdGHqSOhIai2hg3t
-	U9JVJJ42j1hkfuPKaHnyZDms3tZSJ8gkNTfZNohQnHOTVQ9wmQwNG3baUCUaz6dth3/7AG74BHfBU
-	fW8NdmELHVCA3VAx0AOMZVK28gOPWYiAdCikMXIRYCwC68J1NLq42klHcGc0thVR9FaNQXm+pw6ko
-	GWiVpbGkvFTZSBOYvctowrd5Yb21taMM2M0YIfdQZgCBUZXmet/1j3Ki74DC6sJlHvGVWBapoJSBG
-	LERqUS5w==;
-Received: from localhost ([::1]:18400 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=gP37RsrMGaMF6BzssPUZ8VhQW8vT8S6L5/66gaCLThs=; b=26A1zjsYFC9h1lP/7Fg27kva8i
+	OhwwNqQwYX8tmqYboCAxZNwIgCq2Wj540d/VDZUvY9f4CV2Gx77nLg6B7QS4AgNQOefYx2X4a0RwH
+	9dXtYS8r1+wRrCvo7jpBgX3VM6Fx7HUJiOvfaW+B9apVFlW8rb1UF5eMbQ90ajTomI5ceIFdlADlH
+	GHVtm0R/aAr3HGuVCAox3cyv4m8ahOVoko5Ykem9BnCI8rgJTwPgJL0x9DFt7TYu9T1nwkBAkepMb
+	6mmVjk2xsD2JGoTCNB+PONVglAiiXCiv6sBQmWuqtGi2VqG5R3UkcYf3a7WBIpXdGjP9UgQHNyLd/
+	AB1S4hdA==;
+Received: from localhost ([::1]:19222 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1k3Ev0-00CWBr-GC; Wed, 05 Aug 2020 08:37:02 +0000
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529]:42974) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k3Eus-00CWBk-OC
- for samba-technical@lists.samba.org; Wed, 05 Aug 2020 08:36:58 +0000
-Received: by mail-ed1-x529.google.com with SMTP id df16so15550479edb.9
- for <samba-technical@lists.samba.org>; Wed, 05 Aug 2020 01:36:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=VrulkVa2YDjl7k0cnf6b03sHLj4glVsGVgm6xLvFT24=;
- b=kRuxSSIWaZ0UZsnK8ty2yX49C7O+lbnLAhLS9Xm+K6XsalkBlYsQxMfquZRZYs86Jb
- GC5PZCj2kg14lEPnCWHXm53naJyEqMRT4BEt5Udom1Cm7cEZHaY8ZOFihO4SmVGskxSB
- kGyzpg1Q5AaZKATOOqka+YjPQuHwodkG72kHpttffeo3n1OqzwbrSUe/F6keVpZ1/ncW
- kowoTxXRPo7ClSDJduxQMYBf0gMvIeZQKGee5XV9nOgdb9CrCWEIIfMzl2y1VsJbKLL2
- goyrdB6PhuzKlhpIIfPkBSelFVA+Cwf46Y+Womq1CaYeZ4vAPEoHTup/R3l9IQq3lIBN
- Jdtg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=VrulkVa2YDjl7k0cnf6b03sHLj4glVsGVgm6xLvFT24=;
- b=NIY/d2nmTqlQYjzvoBhApmKrz2i0Df1UionjHUSnkWRFyQNHWIPvpG0WYvzSa/BUji
- z2Iaps0lLlw3UH3s9hhKzQiEFJQ0cT5MkxzwofPrkHoW+rZm4dvb6TwSi3XbDDihcgHE
- Vcr1u4hEGOLN21G0OHxfmJ6pUIuF11PsyiFYOw78R/jfJRIjMYFrVtaBO2O0WRlajOq9
- PT2/NW6CFFNOo6Sb1AtMoTsofc7zcAoUErKl/fRP0WsKVHUOQfGqZA90qqswq3Az9lne
- OOVYu1IkVbfRRhplj19f+trCk1SbMPLcHThUKECJ9VWpnvuTPhp4r68jUmsJMdOdYe0l
- TVXQ==
-X-Gm-Message-State: AOAM531W/UIqvUzzGg7u82AzDGiJZjemA/XepUxpWKb+d5r+X27FTrqY
- 6N7QNzVW4Wf/jHvSK8SkVMuEVYbYn5lzmqD3dIqkLA==
-X-Google-Smtp-Source: ABdhPJw4LZZNQdxhC1FrpwES8JEYrvYHY3py2O/QVI3PepD+epencOiPbHa87bjlY8dPy/Hxgjx8MOG2sX1a23U3OF0=
-X-Received: by 2002:a50:ec90:: with SMTP id e16mr1826004edr.234.1596616613312; 
- Wed, 05 Aug 2020 01:36:53 -0700 (PDT)
+	id 1k3G6O-00CWOD-7k; Wed, 05 Aug 2020 09:52:52 +0000
+Received: from aserp2120.oracle.com ([141.146.126.78]:35214) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1k3G6H-00CWO6-MP
+ for samba-technical@lists.samba.org; Wed, 05 Aug 2020 09:52:48 +0000
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+ by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0759qKUc058845;
+ Wed, 5 Aug 2020 09:52:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : mime-version : content-type; s=corp-2020-01-29;
+ bh=gP37RsrMGaMF6BzssPUZ8VhQW8vT8S6L5/66gaCLThs=;
+ b=cGr8Cb6VWuOPVIQ5y7FcEXR83vpJFUkHr/91b/E8gbZPo+/LvuXc6fsGM+PXPSB61fgh
+ MFZJPAiJQyx/27ZdKdiVUylq+/gP+4KIbS3x/CHAFG9G3e25Bn1g7l4YbKMsm9UG8+YV
+ If1FeSCNgRFRaFj7enuqwe1uJYRLZUpv8qinyaP1TchNrlWPMV25WvB4msXOX48e6F5z
+ DNXLy0fdcm56vQkMUmmjPHyCKyHm9rfF4mLXR0BEqvYyuNYb6BDn/MSSZcyPEfUyOOdx
+ s/AAGDIRSFMNWaDNGmpxG71e2M00cz27Rm/59DmQ1jwX4g5TXy8DISKLStQGFGqKgXYn LA== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by aserp2120.oracle.com with ESMTP id 32qnd41c9q-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 05 Aug 2020 09:52:20 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+ by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0759mtDI068676;
+ Wed, 5 Aug 2020 09:52:20 GMT
+Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
+ by aserp3020.oracle.com with ESMTP id 32pdnsv8uu-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 05 Aug 2020 09:52:20 +0000
+Received: from abhmp0014.oracle.com (abhmp0014.oracle.com [141.146.116.20])
+ by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 0759qFNj018545;
+ Wed, 5 Aug 2020 09:52:16 GMT
+Received: from mwanda (/41.57.98.10) by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Wed, 05 Aug 2020 02:52:14 -0700
+Date: Wed, 5 Aug 2020 12:52:07 +0300
+To: Steve French <sfrench@samba.org>, Paulo Alcantara <pc@cjr.nz>
+Subject: [PATCH] cifs: Fix an error pointer dereference in cifs_mount()
+Message-ID: <20200805095207.GC483832@mwanda>
 MIME-Version: 1.0
-Date: Wed, 5 Aug 2020 11:36:42 +0300
-Message-ID: <CAH72RCW7gZ9sntyTzp9AHSbZG8xzLPHL5R3m7Nk7eUrUk+-QCg@mail.gmail.com>
-Subject: GSoC Progress update
-To: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Mailer: git-send-email haha only kidding
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,24 +68,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
-Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
+From: Dan Carpenter via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Dan Carpenter <dan.carpenter@oracle.com>
+Cc: linux-cifs@vger.kernel.org, kernel-janitors@vger.kernel.org,
+ samba-technical@lists.samba.org, Aurelien Aptel <aaptel@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Over the past two weeks I have been working on the following:
-Packing for various based distributions.
-I have started by first targeting Fedora 32 with more to come later.
-Group Policy Object (GPO) management. Some of the features includes
-creating a GPO, deleting a GPO, listing GPOs, listing containers, deleting
-links to containers, downloading a GPO, backing up a GPO, Setting a GPO
-link, restoring a GPO, Setting inheritance, getting the inheritance and
-showing information for a GPO.
-Flexible Single Master Operations (FSMO) roles Management. Features
-includes seizing roles, transferring roles and listing the roles.
+The error handling calls kfree(full_path) so we can't let it be a NULL
+pointer.  There used to be a NULL assignment here but we accidentally
+deleted it.  Add it back.
 
-The link to the repo:
-https://gitlab.com/HezekiahM/samba-ad-dc
+Fixes: 7efd08158261 ("cifs: document and cleanup dfs mount")
+Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+---
+ fs/cifs/connect.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-The link to the Open Build Service:
-https://build.opensuse.org/package/show/home:Hezekiah/samba-ad-dc
+diff --git a/fs/cifs/connect.c b/fs/cifs/connect.c
+index 0ad1309e88d3..a275ee399dce 100644
+--- a/fs/cifs/connect.c
++++ b/fs/cifs/connect.c
+@@ -4886,6 +4886,7 @@ int cifs_mount(struct cifs_sb_info *cifs_sb, struct smb_vol *vol)
+ 		full_path = build_unc_path_to_root(vol, cifs_sb, !!count);
+ 		if (IS_ERR(full_path)) {
+ 			rc = PTR_ERR(full_path);
++			full_path = NULL;
+ 			break;
+ 		}
+ 		/* Chase referral */
+-- 
+2.27.0
+
+
