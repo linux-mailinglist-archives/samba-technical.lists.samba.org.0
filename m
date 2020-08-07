@@ -2,48 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CF5323F185
-	for <lists+samba-technical@lfdr.de>; Fri,  7 Aug 2020 18:51:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B42F23F18C
+	for <lists+samba-technical@lfdr.de>; Fri,  7 Aug 2020 18:52:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=AaxRU+x5JB/YobCMNde7UteNogJtpipzNBRC6zg9y3U=; b=yvYK4mRUALaEr3mz2thZkBkaof
-	rsXQ7gCjHvvqAR3zlPy3t9xifGANt4NTS2dOM5qQOmy4XW94uotuSLffqashaY3dkCjLaD93Y9yE9
-	HdEHBOZsRyZIvZhELDUMd7dq2Z+1vhWgOGofR3lPnH5pppNkwM1v7+dnIuNtekaubMpLtOjoGGVoC
-	W8sDiO9FOv9UXi5ysQiUrpt/FwCrzBxs5J7nmITjJuKcmVFrTBVAoNH5SoHomWmBn/gzZ4sNBLupA
-	XX4HJJoALehNgrStxIynaXjQ5wvXvA9MRUbG98TjqxqXGLuqmuk0XJaNWYwuxr31NL6qwRJ3UbCTB
-	YI/MKYTw==;
-Received: from localhost ([::1]:63584 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=6eq/mVjMCnAqjwIRMbb0rpYYc5AB1a7x1XLC+lRoqUY=; b=yR5dRoZ75XfwR7IaLxa3FAB/DI
+	xlPwo6pZ0Q0xttDAe2SXGe3aBgGt7EFrcPs/346R6y9wr7ItQfv1TBM6uP6NaO+fi7qfzGugNfE+m
+	pBl4ImWexWZzoOUqeH18h0VnDynFZE+fCMYOJnrbEVA5W+wbO35RbQyh4U7Ho6p9rumsnrXxt2BLx
+	gbRTPAfLjoFBccM6Mb6gMcbtrt+ZoYpvM6fvlFXgbiSxpCFRBObl2kJZiNNb51GXHI+B9aaqyajpq
+	FexS/1q4R6/n1v+jnHy8FdliPthYIUcTBO8hKjcVYvYTGoSrBAhgn3Qea8XOXZv+XSlTb6TMkTE8w
+	o1xsta1Q==;
+Received: from localhost ([::1]:64318 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1k45aV-00Cneh-LX; Fri, 07 Aug 2020 16:51:23 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40460) 
+	id 1k45bd-00Cnkf-9p; Fri, 07 Aug 2020 16:52:33 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40926) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k45aP-00Cnea-C5
- for samba-technical@lists.samba.org; Fri, 07 Aug 2020 16:51:19 +0000
+ (Exim) id 1k45bW-00CnkY-Jb
+ for samba-technical@lists.samba.org; Fri, 07 Aug 2020 16:52:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=AaxRU+x5JB/YobCMNde7UteNogJtpipzNBRC6zg9y3U=; b=btSe38yRQ8q88rN3+J+D6Jdng1
- fs6nAkYWaujb7qraG7Ov94I04DabYrmKvCRXsYrgkcKjey6yFFDnehKkPfC4sYQWdL3WnNBNIoo9C
- J3cDjnaVoFUsB67m1isloq+/Dq6YfOmrLnYya75lQIEIVujvlddHanakzBKfTwA9R1RmKFwPMMBlp
- wbFlG1RjAYNWKMbgo7MDoH6+VSNAa1Mib0ZBVoPCmaEDZb9Hh7PQgy66zrhyAzwiMSWks4+hszZdZ
- +68KTP7J533C5aV9R8L965ZTXCJsuCXyroe4XJjOhFxJZH81TEp7oLjQsiwpBpM7LY5f9r9aQludC
- q1ad7EMg6uIjbFcAXps98zjZcFxVqf+ia5fyHUJsJ9EeOqhPHWogW1Xo9pSkzrDjggwb+g8nEvvlG
- qZ+jDTar/0W3WS/wX2GpNtf09ls8umNJkuSEjAEyfflvH1BW5Ux4NawfSJR3GNv/Emdhbzk/kkHRv
- 1Eh7+W9pcsxWV6u4n5hHX6GB;
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=6eq/mVjMCnAqjwIRMbb0rpYYc5AB1a7x1XLC+lRoqUY=; b=QafouEQ+hMK1awkpUYW3qlj8bq
+ lA/ZjcinSC7s92l7DWz6qyHNMxx4qC/mfUPr0J5+vex0Z1bpn9q4d174GfGgZpXLwQS5SV3ERl3h+
+ 4VpuYqkm1VMZB5M3xcE4c2F5lqpO5ydcCOLHmOBg6/tlLCG5OyQf1X38FMKvIyXoKLdHScAwnvsj9
+ 4IiXMdUWAg//DLoYWc/vY2M7uggysMLlj9A8V7G7LLlEDbnSfr43Lyiaj15wbv8i8/2tq+Q9XG2a0
+ DiJ9ehizN1TG2AKZLRyQALjRZbVl2a091ngJEebjyUOZQiW/wmxadedSJBD2AzNejhpSlFb353swW
+ uCbdLYQEw7EfsqvHIj9qsRoMphv6wJppBkLI9v3f/Hxp/blSpIYXSLqcmnyIKV2D325CkOJX//kik
+ KQDxkdIfigVGOwEoNPwx5y1ksWB44TVAcNMPZGKDEgeBidg5rq6l2Cn2UEDaJdwL/xLRB0vlH+ouI
+ vdqp3mP6bxLuJCzZ8QhVFrvR;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k45aN-0006d0-VZ; Fri, 07 Aug 2020 16:51:16 +0000
-Date: Fri, 7 Aug 2020 09:51:10 -0700
-To: Ralph Boehme <slow@samba.org>, Stefan Metzmacher <metze@samba.org>,
- Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+ (Exim) id 1k45bV-0006ei-Od; Fri, 07 Aug 2020 16:52:25 +0000
 Subject: Re: S-1-5-21-Local-SAM-SID-513 -> LOCAL-SAM-NAME\None
-Message-ID: <20200807165110.GF6866@jeremy-acer>
+To: Jeremy Allison <jra@samba.org>
 References: <83e89636-75d4-547e-c93f-4184da64255b@samba.org>
  <20200807163743.GE6866@jeremy-acer>
+Message-ID: <be19ade3-451a-7565-4a1d-b9609648c490@samba.org>
+Date: Fri, 7 Aug 2020 18:52:24 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 In-Reply-To: <20200807163743.GE6866@jeremy-acer>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="IKVvb62wnYZFHFAcFmHcQ7D1XmSYEyL0F"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,28 +58,60 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: Stefan Metzmacher <metze@samba.org>,
+ Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Aug 07, 2020 at 09:37:43AM -0700, Jeremy Allison via samba-technical wrote:
-> On Fri, Aug 07, 2020 at 06:25:32PM +0200, Ralph Boehme wrote:
-> > Howdy!
-> > 
-> > Can anyone explain this little peace of insanity?
-> > 
-> > <https://git.samba.org/samba.git/?p=samba.git;a=blob;f=source3/passdb/pdb_interface.c;h=03aa4ff8472198a4600797073cbcc97b5ac93467;hb=HEAD#l1840>
-> > 
-> > Cheers!
-> 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--IKVvb62wnYZFHFAcFmHcQ7D1XmSYEyL0F
+Content-Type: multipart/mixed; boundary="kdxBM7VmGFhGeQwOSBzOG9Di0gO3JqM12"
+
+--kdxBM7VmGFhGeQwOSBzOG9Di0gO3JqM12
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Am 8/7/20 um 6:37 PM schrieb Jeremy Allison:
 > OK, what it looks like is a call that can *never* fail
 > on Windows - e.g. looking up S-1-5-[LOCAL-DOMAIN-PREFIX]-513
 > must *always* map to "Domain Users" group.
-> 
-> To make it not fail in the passb we map it to the name
-> "None", so there is a valid name to return.
 
-As in, "make it not fail in passdb if there was no
-actual UNIX group mapped to RID-513" for clarity.
+but why on earth do we return "None" instead of "Domain Users"?
+
+-slow
+
+--=20
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+
+
+--kdxBM7VmGFhGeQwOSBzOG9Di0gO3JqM12--
+
+--IKVvb62wnYZFHFAcFmHcQ7D1XmSYEyL0F
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAl8thsgACgkQqh6bcSY5
+nkYiSQ//YRxfzcDtXqAC7IlgTLQ8THsLRQdYo2MTLuXpPI7IwcnFVA8stSk4V8WW
+/2tIxbqjakPJCocf2nARAdpZGFLasBPOpMBiW4+6AB1uj6yOaViW+cY+lR0TzIFN
+Br96/xYzNT/YILymb4YmZg1a83x4uPbFaqQyV/W75Yt23NgFC+54Yq1WpN7ArjVD
+oBYDxBVs5WnKmjeXtApOg10ts4X0fpvCnsMkTKQbKg9MTRjFH9UyFSzeIkXYySBm
+AGCyQ4C87gqT6LBRb0l+86vgJpQXV0tjxsNsP+uAZZnWZEPwgBH6r38k2QQUwHKy
+ZG/X3tJEV9QH1sfxo70aL4T4STSL5tunC7pqkhyfxuege94sJqMffTyYszJ+X66N
+n/z0AN6/XG8/hJllYJTN7RnFsCN8/Zh91zzEoq67vZx/o9Hex/ProEstdVtrxis+
+jdLCu2hBT+5NZDh75cmAUYSCI3BRLuOMwoMk6hNGgCEFETk53cJvTKfI72OCYEnp
+TGYlib3HVUqJko9/nC40QqueJ99n1inIwPMrr7viDKXDox7pj62AsoDgkJuzPhvn
+baCuv3MVyulRzye3V3wuFcs7kG/bphMjEAtf/Gzg/bnGHPPvm2ViRZxBT0rV5iuP
+nvXz0Nu2X+BPv5LjVsJ1nDBMGPIJputyurZbCbsiPiTV02QTimI=
+=4CDd
+-----END PGP SIGNATURE-----
+
+--IKVvb62wnYZFHFAcFmHcQ7D1XmSYEyL0F--
 
