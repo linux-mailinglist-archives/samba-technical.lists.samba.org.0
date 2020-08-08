@@ -2,47 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DA8423F4F0
-	for <lists+samba-technical@lfdr.de>; Sat,  8 Aug 2020 00:42:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A40223F55D
+	for <lists+samba-technical@lfdr.de>; Sat,  8 Aug 2020 02:04:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=43KSO5R5nYEeks8P5HVQEIS5gdDhvwNE6UQ/jlcFVrc=; b=4gYV37PK0FugRusBKdeeUoEAqM
-	Z/7ohv5s4S/o3+/bvIQeDTOviNIo+dI35hMDQPyUh+G5Gy3YB1xnAjMlE5Apxe14MzwIUFV9gMbTM
-	xmPxVpsu0Pp2z2lNzDvFiriDvhhVwL9+wiJTSgINv2OC4FqOJd6srUanI8OBrVryiXX0fURQf5qMX
-	ebJBaPx5RqELUdbo3Gprw8MW7b+FRQrzMIo1OSv3IxDLWzQOSB+5zKhqwQCysZWzRvlLzqK1j8U+P
-	k2n1aLlXGYGcvBWW+RZmMq9UqnrvJpYFZLeIxzZUzL+1JYBsgMHqp7vwMsp7IM2vFI7Tduz08XsYk
-	4uG5KJVg==;
-Received: from localhost ([::1]:42520 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=R3vGFQH4AFYc6w8II2syrEUI67rntmuomRlLzF80LUM=; b=QuIcMzlr4Ta3l+D7Ai5tlta2sn
+	/4VnEONNiXs0BvnLZZ+qbkZekZXhOcpDPTyIOXh2Th9O9SgIO2XVFAPG67ak1JWT19Nf3mOsyLNk1
+	N0TC/WIO2rb4g0sBv6rkxogylV1AkAD7Ft/1nOTK+G7ubJoSitHlEFDH3jQ7jhieZpajkfm8MUBvs
+	l/z6Y2lJiWjq+ULWHIpJQL2NbCYdAFFXmJfWwi3zkQMJvJoc+LlUUtopNXL56n9kzYe88aDQrVZtw
+	jFRCECGwvyuJH8ayLHZmrhCUtBUtsFNbMOlAowYI4IpBvGuKdukghaahei3xaVPKDRArZx3+0V96V
+	bZlIDWTQ==;
+Received: from localhost ([::1]:43406 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1k4B4d-00CrqK-85; Fri, 07 Aug 2020 22:42:51 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36518) 
+	id 1k4CKd-00CsAh-98; Sat, 08 Aug 2020 00:03:27 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53510) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k4B4X-00CrqD-7V
- for samba-technical@lists.samba.org; Fri, 07 Aug 2020 22:42:47 +0000
+ (Exim) id 1k4CKW-00CsAa-64
+ for samba-technical@lists.samba.org; Sat, 08 Aug 2020 00:03:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=43KSO5R5nYEeks8P5HVQEIS5gdDhvwNE6UQ/jlcFVrc=; b=ztb+/JmlGnba7/5JABgQmRxo/s
- knDEAA8phNcp7/AIDHA/u2TV4MGnt5Ub5N2bXDzS7f38RMXL9ncSvSqOhkQk0zN8OqCRCbLu0/Hak
- vf/6h2lCGdWBsRL5MwCIECNp0+owohF1GSEqQLJM/CVVSIdAv1cQhnEX0iH7+Fi/SWSgTw20acHYY
- MfpfZpOiSsiSL5uqUqAK7TU3Ynmh5nQZRD24ukAqkmJjF2u+QD+UVuFbDrXZNOkC5Ax6c1+YjkyIl
- JL2+9ImbRPHMNBnbUZQJ0UrPxBTdImoiqmjys+d0AwjcJpK1VuvTdP8bzywDYL0sN0BsV9CyQGSCi
- ap8vrmkzNhLY4ZJzI/I8wHmlg0pA9aK1N2IC6GdMplcFjqSFvCv+aD0XPpc1W/ujBXH+ICZuCXjsb
- i1xDFTZirE7VCLCNZt33cXjuWT0B/SiBVy2z7KWnFN01X65x3htlwCxiRb1cdBvPMrXkP7Pm62fo6
- 1x9bVBD+tgFhOrin0YZ/wYyu;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=R3vGFQH4AFYc6w8II2syrEUI67rntmuomRlLzF80LUM=; b=ZOYdT/741EzHKPGGqqPjizkmzW
+ m63OeeNI5RbgSXSWLBSsjxqSJvcIRWj5Qp0z0H1chOBKGN+CsaF/0Z3ei9bE2ELVFAz652C7g8/0h
+ QTnN7XzuswJT6wREeXvAptI9nb03MosqTJpxig/mtEoC5lsyXnZrm3nEZEKxX1CF+gInnjLrRLmcS
+ 67SZ0kT1LqjAg0ZLczNpgccz4VrxmTMfSdDP3rRJoRrpecDh8+2XidbQ7LiX9mCrr78phMxB0ID6D
+ DIPyHICVGVP1YjIJaZcX3LGItbFwEdu0t9WTRHALpTDjam3modWrdj725O3xiNq3t6Asu66TnyaSa
+ YN345N3o9vyZ0SDKC15YUMRlu1SGs/xn8p8oA9/r+S71fSy45+8s4jef2gPgpusZl5O1xBlrduggq
+ ebqowb42mdqa6x0uu3UyA5pgrUAz3fckPb9ZoD8fehPEifXNVGNYHHc+UD/k7G7n01eiBcyb5hi7/
+ reGbVVYRORBV+JdrfxNZ6V64;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1k4B4V-0000Lp-TG; Fri, 07 Aug 2020 22:42:44 +0000
-Message-ID: <b9b6de10f01ad24305ade2a88f3581acec937f8b.camel@samba.org>
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1k4CKR-0000pL-5o; Sat, 08 Aug 2020 00:03:15 +0000
+Date: Fri, 7 Aug 2020 17:03:10 -0700
+To: Andrew Bartlett <abartlet@samba.org>
 Subject: Re: Deprecate SMBv1 options and NT4-like domains for Samba 4.13?
-To: Jeremy Allison <jra@samba.org>
-Date: Sat, 08 Aug 2020 10:42:38 +1200
-In-Reply-To: <20200729190254.GA10865@jeremy-acer>
+Message-ID: <20200808000310.GD6256@jeremy-acer>
 References: <efd53968d989fa5b909d5b23df58b171410970db.camel@samba.org>
  <20200729190254.GA10865@jeremy-acer>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
+ <b9b6de10f01ad24305ade2a88f3581acec937f8b.camel@samba.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <b9b6de10f01ad24305ade2a88f3581acec937f8b.camel@samba.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,58 +57,48 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
 Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2020-07-29 at 12:02 -0700, Jeremy Allison via samba-technical
-wrote:
-> On Wed, Jul 01, 2020 at 03:19:19PM +1200, Andrew Bartlett via samba-
-> technical wrote:
-
-> > So I present to you this MR:
+On Sat, Aug 08, 2020 at 10:42:38AM +1200, Andrew Bartlett wrote:
+> On Wed, 2020-07-29 at 12:02 -0700, Jeremy Allison via samba-technical
+> wrote:
+> > On Wed, Jul 01, 2020 at 03:19:19PM +1200, Andrew Bartlett via samba-
+> > technical wrote:
+> 
+> > > So I present to you this MR:
+> > > 
+> > > https://gitlab.com/samba-team/samba/-/merge_requests/1398
+> 
+> > > Parameter
+> > > Name                     Description                Default
+> > > --------------                     -----------                -----
+> > > -
+> > > domain logons                      Deprecated                 no
+> > > raw NTLMv2 auth                    Deprecated                 no
+> > > client plaintext auth              Deprecated                 no
+> > > client NTLMv2 auth                 Deprecated                 yes
+> > > client lanman auth                 Deprecated                 no
+> > > client use spnego                  Deprecated                 yes
+> > > 
+> > > If I get time I also hope to fold the only-used-by-attackers LMv2
+> > > into
+> > > "raw NTLMv2 auth", so we can remove both in 4.14.
 > > 
-> > https://gitlab.com/samba-team/samba/-/merge_requests/1398
-
-> > Parameter
-> > Name                     Description                Default
-> > --------------                     -----------                -----
-> > -
-> > domain logons                      Deprecated                 no
-> > raw NTLMv2 auth                    Deprecated                 no
-> > client plaintext auth              Deprecated                 no
-> > client NTLMv2 auth                 Deprecated                 yes
-> > client lanman auth                 Deprecated                 no
-> > client use spnego                  Deprecated                 yes
+> > Sorry for the delay, just catching up on old stuff
+> > in my inbox :-).
 > > 
-> > If I get time I also hope to fold the only-used-by-attackers LMv2
-> > into
-> > "raw NTLMv2 auth", so we can remove both in 4.14.
+> > That looks good to me ! It's really good to start
+> > marking obsolete stuff as, well, obsolete :-).
+> > 
+> > Anyone else got comments ?
 > 
-> Sorry for the delay, just catching up on old stuff
-> in my inbox :-).
-> 
-> That looks good to me ! It's really good to start
-> marking obsolete stuff as, well, obsolete :-).
-> 
-> Anyone else got comments ?
+> Can I get some further consensus here?  I would really like to merge my
+> branch once I add the last required test, but I don't want to blindside
+> anyone.
 
-Can I get some further consensus here?  I would really like to merge my
-branch once I add the last required test, but I don't want to blindside
-anyone.
-
-Thanks!
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
-
-
-
++1 from me, but hopefully others will comment here too !
 
