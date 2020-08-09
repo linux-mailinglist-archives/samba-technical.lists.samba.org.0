@@ -2,47 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A611B23F8B9
-	for <lists+samba-technical@lfdr.de>; Sat,  8 Aug 2020 22:10:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BAC223FF56
+	for <lists+samba-technical@lfdr.de>; Sun,  9 Aug 2020 18:48:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=bVjqCBo5oU5IfEIcWI6PZ69rPMOF/BYICA683DsKAw4=; b=CfF9YWp4bu8PgbpymGOWGEjS67
-	jBHmX4jTXR7Khn2DFuuLjJPquUDkSINfv5j/9yt2Z0DzoYGL33QEOMlN/emtT0P/+twCYkgeAQzMI
-	J/mqzJccBMz20XLbdMMP5rqPi2AcNo/XWI/koJpAq8VPb3wE1ofgGbsS7aEbhswZExNMcXqSCG4ox
-	VZg3NizMtHuueLqN4F5s7TNmSrMM6ygYjC+M/wiaoE/jFo48YQd9n6Nxp8exMhjKyaw+ENcT9mumg
-	KsFhijk86A4ABpZIJfLoW8DwYr0XGXFquaKxvUQIsYaUVabNDR2Mms/K16phJlE91hdPeS5CqgDcF
-	6SLotvfg==;
-Received: from localhost ([::1]:19416 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=UCHvINa6VosD8msvnuFOWiWxKgJoPHzS7PIxpE/jDKE=; b=wE9GAD6v3OlnuzQv8saeLhwuAq
+	jBlFYWU8lFFILDP7Eobk2Mz6QGPjpJGTLVbiO/ZacvadsuFsukHWHlBLurjE/pKxr4KImVOsjSaPE
+	6IIfTou7uQb5mbekohSU9Q953GzFfbgjghrfNtSbbfOzPkU8kUDEdr7fIh3WiyVdQHB2KixIxTUfA
+	4+t4AXosx9980NH7YxDVByMC/q/NAc7R7tJYQLKH5dfgp4wZZXUZGkFnIxbVdeeTeEOR11efHDylK
+	qB07n95Oy6Q4C4UJT2O6xKa3hXzvn7YCkti2dlPpTfc8F73vKWXKPe9kOwu81Ff2EHhSOfxdyA2tK
+	3ue0th5A==;
+Received: from localhost ([::1]:34378 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1k4V9v-00CxyY-Dk; Sat, 08 Aug 2020 20:09:39 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17178) 
+	id 1k4oTK-00D2q3-PP; Sun, 09 Aug 2020 16:46:58 +0000
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:35329) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k4V9n-00CxyR-Rq
- for samba-technical@lists.samba.org; Sat, 08 Aug 2020 20:09:35 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=bVjqCBo5oU5IfEIcWI6PZ69rPMOF/BYICA683DsKAw4=; b=0a5MnzQbUAa8nnOcYGl+YZ5G1Q
- PdJCGk+eMOTkZ5R1BSak1AtgnmxuP6Bkls/ala48v8f6oMqWjRjstMRfCWEOU6IbDnCk+Mnos6OxJ
- /2YantDgUQprRDLKO1GDd6e5H3EJIzF2lT/vMlJfRGR6uXkzove8u7DgBr3RzlhRCK7ofJwEwoYJn
- T1VdY/ZkITIGJz3rYNChGKEncdbJDqkVmkY8n8NBbICFFRe9cB/E9fxXJ2mXyhayz26P9J3gWl1Ck
- zQCEOSOo7hvSo4ODI6iNsODYIUx4nhw46ZL5DvXbppFcNiNbWMlcjesjxHMM5HFU+Zkdl4KS3ofs/
- w8nBuQAZv/QjwBkPAac3LiLkAWDepBJBaKJQFiPAa2thgvo/kHjzeVHrP2BTbD/RKR08Fspruz3LU
- pTWkvLzNmxtqzBxAzZU7n9j/W33P4VPu3wMFrmYDHJxkCsKQQ+NIGVLAgwDqw1IrtwZDdmgwTkZ3n
- dERih+3VSU7Jfc7r07j0JtvZ;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k4V9j-0008Su-TB; Sat, 08 Aug 2020 20:09:28 +0000
-Message-ID: <60c80bb6bf17678284e5b6b8603a226d8b4f2d83.camel@samba.org>
-Subject: Re: Deprecate SMBv1 options and NT4-like domains for Samba 4.13?
-To: Alexander Bokovoy <ab@samba.org>
-Date: Sun, 09 Aug 2020 08:09:23 +1200
-In-Reply-To: <20200808125700.GA1200244@pinega.vda.li>
-References: <efd53968d989fa5b909d5b23df58b171410970db.camel@samba.org>
- <20200808125700.GA1200244@pinega.vda.li>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.4 (3.36.4-1.fc32) 
+ (Exim) id 1k4oTD-00D2pw-5R
+ for samba-technical@lists.samba.org; Sun, 09 Aug 2020 16:46:54 +0000
+Received: by mail-io1-xd43.google.com with SMTP id s189so6642753iod.2
+ for <samba-technical@lists.samba.org>; Sun, 09 Aug 2020 09:46:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=UCHvINa6VosD8msvnuFOWiWxKgJoPHzS7PIxpE/jDKE=;
+ b=SUUlQ486bbodonuMFEkprugAhuuwL2vHbLCV1+2ijqzaObbJzRpgSGucKZ6F+5UQh9
+ vNQ/6Wp1o6OXrBW/ujPh9GzKi3skf1L3CWxuMSIsgzAtUBWnhsCMb/dYega9BNkcFm5h
+ zaEaSbVPN00rGpU0UWU/XDauI/L36qM13aUNnmWiEJLIgdCYkof1ip3ZO1N9ToqwH3ml
+ UhFH7V6cK4rdCblXegiI4p35SYmrGKVPGhUmbCN9aA6Dzn0XUCJHsq+3bShzqKeRtx1V
+ ckK3GO3ckXG2gSTC9CjqIO+bpEra0Xj5TTk+se3ZhfBBl1UMmN56N9kA+M+IaI5j9EH9
+ fGxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=UCHvINa6VosD8msvnuFOWiWxKgJoPHzS7PIxpE/jDKE=;
+ b=VhVYbEbeOt8AVlvoOpnNRubsXuGJkKB3XU7TAS8M+H+ZzRzScZ3jVriTPZdhoro5tT
+ VxkDdLLluLHe8VCel96u9HmAXRtsHiFWM+tcYytmEJDK9PxpuEIHkOiR5i0dl8/lasik
+ V/r19WBXBQMmsl6rYThnvC5+18tIuL28c9BBXt5VKB/3PFQLn3Nx2vDSG3uF2enNGqJ0
+ qOJa+iSMZwnpg1Pyt4YJR0aksFukeVeVdrl30KOUOIo92W4kq10a86kk14flSOQJOsdH
+ LK+6qsEjpDAFHYH+2xif+khoSnPaNTEehqO1iS6j9rOJR7I7HZnI/U8rWzRl4AGFsrve
+ vSvw==
+X-Gm-Message-State: AOAM531JR73/TVDU4tqY+9L56MIFsyG4Eh04MxkGxqVUo6gTsCfYOjiY
+ 2H9IKajiF8RGcd2Z2nESTjkaUyt220bUD2tGF6o=
+X-Google-Smtp-Source: ABdhPJxoK4IbE9i3/uwbgKBES4omB1Sn1yEUDgiKt1behl2IAnP9cuy6hGYY0MP9i6FNBs4RCSbb+ZuPMaYpszZy2ZU=
+X-Received: by 2002:a05:6638:635:: with SMTP id
+ h21mr16236867jar.27.1596991604178; 
+ Sun, 09 Aug 2020 09:46:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1596875797-22710-1-git-send-email-linmiaohe@huawei.com>
+In-Reply-To: <1596875797-22710-1-git-send-email-linmiaohe@huawei.com>
+Date: Sun, 9 Aug 2020 11:46:33 -0500
+Message-ID: <CAH2r5mvHLXtCAam9Wcw6PJUGg3bY8PvjYG8ijFh0km-CKNEUnA@mail.gmail.com>
+Subject: Re: [PATCH] cifs: Convert to use the fallthrough macro
+To: linmiaohe <linmiaohe@huawei.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,78 +68,72 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sat, 2020-08-08 at 15:57 +0300, Alexander Bokovoy wrote:
-> On ke, 01 heinä 2020, Andrew Bartlett via samba-technical wrote:
-> > Samba 4.13 freezes soon, so I wanted to again propose adding things to
-> > the deprecated list.
-> > 
-> > Yes, we add things to this list far faster then we remove the options,
-> > but the job for anyone wishing to remove features starts with this
-> > point, marking and announcing to our users that we are not going to
-> > keep every Samba option and feature forever.
-> > 
-> > So I present to you this MR:
-> > 
-> > https://gitlab.com/samba-team/samba/-/merge_requests/1398
-> > 
-> > No code is removed of course, and of course we are not going to remove
-> > code that FreeIPA needs, but even in between all that I think this is
-> > worth doing.
-> > 
-> > (pdb_ldap is not impacted, I've dropped those references compared to my
-> > earlier MR)
-> > 
-> > Parameter Name                     Description                Default
-> > --------------                     -----------                ------
-> > domain logons                      Deprecated                 no
-> 
-> Removing this setting affects FreeIPA. The logic for 'security = <user|auto>'
-> triggers PDC definition only in case 'domain logons = yes'. FreeIPA
-> depends on NT4 domains mode functionality to provide its hybrid AD
-> forest setup.
-> 
-> I guess, looking at lp_find_server_role() and
-> lp_is_security_and_server_role_valid(), I'd need to define 
-> 
->  server role = CLASSIC PRIMARY DOMAIN CONTROLLER
->  security = user
-> 
-> explicitly. Right now we have 
-> 
->  security = user
->  domain master = yes
->  domain logons = yes
-> 
-> and no 'server role', so it defaults to AUTO and will require an update
-> of the configuration to set server role explicitly.
+Is this conversion from "/* Fallthrough */"   to the preferred (?)
+"fallthrough;" documented anywhere?
 
-Thanks for mentioning how your use case works.  That workaround sounds
-fine for now.  Perhaps we should split out your use case into a
-distinct 'server role = freeipa' eventually.  
+All I see is a few fs changesets like:
 
-To be consistent 'server role = classic primary domain controller'
-should also be deprecated, but our tooling doesn't allow specific enum
-values to be deprecated trivially, so I'll just add a documentation
-note explaining that this is deprecated except where used by FreeIPA. 
+commit c730ae0c6bb3125ccb776fb2ab6abbdff500c02c
+Author: Marcos Paulo de Souza <mpdesouza@suse.com>
+Date:   Tue Jun 16 15:54:29 2020 -0300
 
-> Given we are deprecating not removing it altogether, it is more of a
-> task to me rather than a blocker. I filed
-> https://pagure.io/freeipa/issue/8452 to update FreeIPA configuration.
+    btrfs: convert comments to fallthrough annotations
 
-Thanks,
+    Convert fall through comments to the pseudo-keyword which is now the
+    preferred way.
 
-Andrew Bartlett
+And the vast majority of places (33 vs. 4) use "/* Fallthrough */ in
+the fs directory
+
+On Sat, Aug 8, 2020 at 3:34 AM linmiaohe <linmiaohe@huawei.com> wrote:
+>
+> From: Miaohe Lin <linmiaohe@huawei.com>
+>
+> Convert the uses of fallthrough comments to fallthrough macro.
+>
+> Signed-off-by: Hongxiang Lou <louhongxiang@huawei.com>
+> Signed-off-by: Miaohe Lin <linmiaohe@huawei.com>
+> ---
+>  fs/cifs/smb2pdu.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
+> index 24c2ac360591..667d70aa335f 100644
+> --- a/fs/cifs/smb2pdu.c
+> +++ b/fs/cifs/smb2pdu.c
+> @@ -3913,7 +3913,7 @@ smb2_readv_callback(struct mid_q_entry *mid)
+>         case MID_RESPONSE_MALFORMED:
+>                 credits.value = le16_to_cpu(shdr->CreditRequest);
+>                 credits.instance = server->reconnect_instance;
+> -               /* fall through */
+> +               fallthrough;
+>         default:
+>                 rdata->result = -EIO;
+>         }
+> @@ -4146,7 +4146,7 @@ smb2_writev_callback(struct mid_q_entry *mid)
+>         case MID_RESPONSE_MALFORMED:
+>                 credits.value = le16_to_cpu(rsp->sync_hdr.CreditRequest);
+>                 credits.instance = server->reconnect_instance;
+> -               /* fall through */
+> +               fallthrough;
+>         default:
+>                 wdata->result = -EIO;
+>                 break;
+> --
+> 2.19.1
+>
+
 
 -- 
-Andrew Bartlett                       http://samba.org/~abartlet/
-Authentication Developer, Samba Team  http://samba.org
-Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+Thanks,
 
-
+Steve
 
