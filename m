@@ -2,59 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E185240BA2
-	for <lists+samba-technical@lfdr.de>; Mon, 10 Aug 2020 19:09:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D4A5241516
+	for <lists+samba-technical@lfdr.de>; Tue, 11 Aug 2020 04:56:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=EV/Inn1yIq80k4xTWqNtB11Yxfxj2hvMoKBR9JcOwIo=; b=KKzxFP0QPulAD79hVyu8tmg0mV
-	Q/JbA/Pnhp/BqfB8BH0mzL62U7CvqDWj7QGSDJ4qIY6vIg6kf62uGVuiZEAPssEYf1lZtMQZBBy5v
-	XOSB5AYZQoVxXnOwfPzusKSAtGEt5QgAMWzOJnGIPIz2n4G0iy4vNZS/2uAwl6T1DtwRorqXEGmbq
-	kRddNSLA3gqzN0YV0dDE9KHHGe8Ho+FEGf+Qnz2x9U7uiS7XtmtjqjZjhc0/lvDLRex8HgrPFYbjx
-	fWE7G5m77jKMyNQf7CYeXwvP4frilzQABPuRnHP43+0iXZHQsYTJnAr2yoPk76sjKkR26JkEQkaSO
-	yIWTFXdQ==;
-Received: from localhost ([::1]:60904 helo=hr1.samba.org) 
+	bh=dZ+8XtWdADii4kBhHkwnxGWHLxSFZlJmOm1pFcvDFPc=; b=Om9PBayVehza3G85OelnR7F96e
+	yRQPmrsOpYWRl8brvXiUoT7dZEmAWyvZz0UcDT7XqHnCYORAHGOq3mD/7H0NXOCqAwDF444DOQckg
+	0rTwf2HMZIgC7fKsYot7nX9famkqQxsNpMSzq4GDG0SqaI3ajkKkGDQMhJIIOKGRjXtNkFst8TBwq
+	t1RhIO0CEKgbD/61AO7IGYYUHRn3+fY2RJ0h44jvPK9WTitt/LkqIBq5p8T7yvuPEGsog9vMCgcUG
+	O0vI0hsvNp3ZxCsMVu7AzOxiVCZfzO8g4te0lLVo/pRNeghCAh1H3RHm11dpkP6xi5otmb0CDYrnx
+	6knVVzFA==;
+Received: from localhost ([::1]:21282 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1k5BHp-00D8kd-MA; Mon, 10 Aug 2020 17:08:37 +0000
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:44864) 
+	id 1k5KRg-00DAUG-Py; Tue, 11 Aug 2020 02:55:26 +0000
+Received: from mail-io1-xd44.google.com ([2607:f8b0:4864:20::d44]:40771) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k5BHh-00D8kW-5d
- for samba-technical@lists.samba.org; Mon, 10 Aug 2020 17:08:33 +0000
-Received: by mail-io1-xd41.google.com with SMTP id v6so9661380iow.11
- for <samba-technical@lists.samba.org>; Mon, 10 Aug 2020 10:08:28 -0700 (PDT)
+ (Exim) id 1k5KRW-00DAU9-LO
+ for samba-technical@lists.samba.org; Tue, 11 Aug 2020 02:55:18 +0000
+Received: by mail-io1-xd44.google.com with SMTP id b17so3601772ion.7
+ for <samba-technical@lists.samba.org>; Mon, 10 Aug 2020 19:55:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=EV/Inn1yIq80k4xTWqNtB11Yxfxj2hvMoKBR9JcOwIo=;
- b=D4odPv7PmDBTv8Fr4bfErHYxqALMVwFsfFMmqsp82assrut3e69ZNXKmR+KDkxZRWG
- YHKA9IhaMldTiRLhsg500chNRM/ou501nJfjU3npvH1nZRX3900zmodkNGZi3mN8tIoC
- HG16jK4Jnd2ViNjtQv+rUQGWNzryHDcq8vAjZlzkA/BsTBqYxrVOPg6fwdiMCiUvEEre
- Oe23p+rdRhbdZd1C1OouJkp9juFnW93XUHKeSWiIVWd3wShY2JzsDi5U6LMui2hesChO
- FdLfAuwk/X5i0ZDdCJEU6MnAh5Emt7tb8nDx2Ia3X5f0BIpeXi+UQ5A/NvmrXqPKBFmF
- /5Hg==
+ :cc; bh=orrL3ZFabwF48/NHF5Ju4rXncnI8Pcwga8qiLBYQJLU=;
+ b=HIo6WzCwT25AjqRMznp+7EMjAc/gVLwPWlkuXIZRfR0rc1WXCT2wBRFmqqq3aMN0z8
+ hiPZnUyBsTFrrIXtsSYWRdGq7g7jfQ/t/bFrxPtMGl6yO0eITO9Qb7nojngdYsjqsy8R
+ vWry0t4lDkOpIQes0MuN6NVE7JGpJ/feuFFoKqIsSQZvQBGxBmQ3l2ULa68+riCM5rnw
+ P+JwX9qNLt0sgiB/JF3nR2qwAYQgL/dRUN5vCYdDgYltTEgUU3gUmYfvhDTHU9S1ZCOL
+ 1UJfoqtPiAffGZldzN9aPTW6PqckTvMVbd76TyTpduWagAPqClO2tu41QwGLczaOWQlR
+ BFiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=EV/Inn1yIq80k4xTWqNtB11Yxfxj2hvMoKBR9JcOwIo=;
- b=VQB5Ry+bagBA5c3HA8Ruj4jV1K9r5W/AcAM4NEIuiawZuFW2v/n/Ob0/dOWM+545yq
- 25fiOFeK+75rollqZ75ADb1h5enMbCW6GQqIWepbVH3+10n/hc8q8wbzFRNEoZRozabA
- KPH6ZKcRgdHd4kIIu7TQ55mK6f/SNiUR1BoPconGLryUS920Cu5NAWGW1TunWGZOuOhb
- n56XE8uyARAklefvHWIDVZd0uoOFjI4niDURFpc1V65MmLIaOi68tFpmLXza+F9vDHUu
- pnYN/KHhTc/uaJ5E19iZqp7wHWWqYv1etkpv2yYlRJoprw2oiGBoDm0CWqDkfojAkkic
- ZmKA==
-X-Gm-Message-State: AOAM531IWnZoFv2BeYhr4YwQfEZtreOyJ1yapN3XYKQwJ1gOuA+4bNW2
- LceOOi9GOCwGyEq7/Z3JXtz+9jtTc7UpkhF8BEo=
-X-Google-Smtp-Source: ABdhPJzz4KKqCWD8DewPuuMqNyLgFicLPDFscAPkzIrLXWdzhAtY0bnr7EccVxuIqigNWXrcGkoPoLjwlE3xYY1EmEg=
-X-Received: by 2002:a05:6638:2604:: with SMTP id
- m4mr21271201jat.76.1597079306859; 
- Mon, 10 Aug 2020 10:08:26 -0700 (PDT)
+ bh=orrL3ZFabwF48/NHF5Ju4rXncnI8Pcwga8qiLBYQJLU=;
+ b=X2iWDTJL79I9y/xC0PWRJ0sDyOvH+/L6I7+4kLdXeWZfuKneR5aNInbneBBu2xUJw8
+ jokUunWfx0G16RT8jTh6T3XE0eP0lKWRCjKVi0AaENpaUfbK3H56NWTuREzykr0ALvsL
+ 9ePPcoJfXmuOwHLv50pHCMhr/kachdopweXB7loETGwPsxtqOG93yx+yr73xfcs2iJSV
+ V8xs+0IdGtSty7rhIFFHXejv+kqrkiwfwUmgNYe5wZPTsG6gUXTlKi+2G9kGeqpZex6x
+ C/CKM3C4XSeSdpmZlwQS/NECWt6WWAbanx9GMr+gmhik3gQBUmL7K3jZNTs1STPVxVer
+ IsrA==
+X-Gm-Message-State: AOAM5315dPPP5trl3zXrhH3NQwsz0sTFJC6gu3WWnjlj79gOPaDd3lSa
+ fc3jWjKEF9byJYqBtMpaMEAjzK8AM9SkkZR7WZU=
+X-Google-Smtp-Source: ABdhPJw+tHsCvVh4Yx9iot7SWBeNhGuw2ns7KWzpETKyJ6ABpjmIsLOkwjz3twlvYpIZHR6bQsKUZL881E8FcZ8MGDo=
+X-Received: by 2002:a5e:a607:: with SMTP id q7mr20459514ioi.16.1597114512113; 
+ Mon, 10 Aug 2020 19:55:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <1596875797-22710-1-git-send-email-linmiaohe@huawei.com>
-In-Reply-To: <1596875797-22710-1-git-send-email-linmiaohe@huawei.com>
-Date: Mon, 10 Aug 2020 12:08:15 -0500
-Message-ID: <CAH2r5mstN6P_kU_Riobdv5NJPL-pF6=oZoAh6k9qj1+nz9Z8Cw@mail.gmail.com>
+References: <5c4a8c734508477082819724c6853337@huawei.com>
+In-Reply-To: <5c4a8c734508477082819724c6853337@huawei.com>
+Date: Mon, 10 Aug 2020 21:55:01 -0500
+Message-ID: <CAH2r5msNsWTMV2eghSmEeU98iUU3_x2rfu3QXeJQ6Ny7ZP27mQ@mail.gmail.com>
 Subject: Re: [PATCH] cifs: Convert to use the fallthrough macro
 To: linmiaohe <linmiaohe@huawei.com>
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,55 +76,32 @@ Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+I find the /* Fallthrough */ comment more intuitive but if it is a new
+kernel style requirement is to convert them all to a macro .... I guess
+follow the preferred style ... just seems little used
 
-(but note that most places in fs directory other than cifs and btrfs
-have not been updated), and I noticed another 8 places in fs/cifs that
-you didn't change in your patch (ie change from the older way of
-indicating fallthrough   /* Fallthrough */ as a comment to the newer
-fallthrough macro.
+On Mon, Aug 10, 2020, 21:11 linmiaohe <linmiaohe@huawei.com> wrote:
 
-On Sat, Aug 8, 2020 at 3:34 AM linmiaohe <linmiaohe@huawei.com> wrote:
+> Steve French <smfrench@gmail.com> wrote:
+> >
+> >merged into cifs-2.6.git for-next
+> >
 >
-> From: Miaohe Lin <linmiaohe@huawei.com>
+> Many thanks.
 >
-> Convert the uses of fallthrough comments to fallthrough macro.
+> > (but note that most places in fs directory other than cifs and btrfs
+> have not been updated), and I noticed another 8 places in fs/cifs that you
+> didn't change in your patch (ie change from the older way of
+> >indicating fallthrough   /* Fallthrough */ as a comment to the newer
+> >fallthrough macro.
+> >
 >
-> Signed-off-by: Hongxiang Lou <louhongxiang@huawei.com>
-> Signed-off-by: Miaohe Lin <linmiaohe@huawei.com>
-> ---
->  fs/cifs/smb2pdu.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> I'am sorry, I missed that. I would fix another 8 places in fs/cifs soon.
+> Thanks.
 >
-> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
-> index 24c2ac360591..667d70aa335f 100644
-> --- a/fs/cifs/smb2pdu.c
-> +++ b/fs/cifs/smb2pdu.c
-> @@ -3913,7 +3913,7 @@ smb2_readv_callback(struct mid_q_entry *mid)
->         case MID_RESPONSE_MALFORMED:
->                 credits.value = le16_to_cpu(shdr->CreditRequest);
->                 credits.instance = server->reconnect_instance;
-> -               /* fall through */
-> +               fallthrough;
->         default:
->                 rdata->result = -EIO;
->         }
-> @@ -4146,7 +4146,7 @@ smb2_writev_callback(struct mid_q_entry *mid)
->         case MID_RESPONSE_MALFORMED:
->                 credits.value = le16_to_cpu(rsp->sync_hdr.CreditRequest);
->                 credits.instance = server->reconnect_instance;
-> -               /* fall through */
-> +               fallthrough;
->         default:
->                 wdata->result = -EIO;
->                 break;
-> --
-> 2.19.1
+> >
+> >--
+> >Thanks,
+> >
+> >Steve
 >
-
-
--- 
-Thanks,
-
-Steve
-
