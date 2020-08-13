@@ -2,59 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38217243066
-	for <lists+samba-technical@lfdr.de>; Wed, 12 Aug 2020 23:11:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 69643243445
+	for <lists+samba-technical@lfdr.de>; Thu, 13 Aug 2020 08:57:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Ev3XQLbHUN8LdKiF5Z6bE4zZZrXXkwg5QyENYXM7QXI=; b=D/3k4jdMVLurjJAt7XjKW9g8tn
-	w7zUMurBcHTYPKyjA773hwlRb+YCgCMEzzEQgNrFi+tuPFgebZKyKS1aOWmg+ZqK2mv1gIMDIp68l
-	EYAxnPVPZ9bBEEXf053jMJ2hFuTNYw2Ku25VM/DbaCUUGTDZmx2oVPd1vxHGe0MV7AAQ6/yWUQWbg
-	qgGckNjmFHrnOETLC4CMdN0853/TQdGZCYhBvq8CxpZ3FUrPTjfhvj/1YUupzumuV4Jh/6ZdwYzZK
-	ViHoxrl4w9om32MjTynY81XT/92udrOus4LEDjAOIjA5TCEHWIt2Aox4fdqjhNwAtVhuQkLZWac1R
-	5AI392dg==;
-Received: from localhost ([::1]:35772 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=bHdk1MJo7aiXi9TiwwO49C+g3ArcfyLNsBuLb4JYVMg=; b=SYddytj2WOu3cspfBK4Ed56247
+	dSc8i3LkqOhy7M7ZChZJVg7XcjfvS7lf7mqNrQFvckCv54V5xTAfMFZX8QOutuAx1cQqzUfIYywd9
+	25XY0z3zkGoKIcZMl1NYoXFbFuskZhn+9pZzQUBagpkXnnO4LDZ3wXOxbozETzsVmmHRpS6HJrF5O
+	+2TAOjENVF2g6or7NN24rzXpMuuE/SchSj7r+H1PDb+GgeVMjyKC7dUZBZ90jWCrAuhvvdzCIDvfv
+	6DCDbkEpms9dhJiuE22eQKuPJ+RtLLzckc9uQ17jWhmdF8/INDxSJzrNEi8w56FmGlFNAUoY0nMSF
+	JccAnf+Q==;
+Received: from localhost ([::1]:40212 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1k5y1d-00DSLX-5X; Wed, 12 Aug 2020 21:11:09 +0000
-Received: from mail-il1-x132.google.com ([2607:f8b0:4864:20::132]:33585) 
+	id 1k67AI-00DTlJ-Jy; Thu, 13 Aug 2020 06:56:42 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16330) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k5y1V-00DSJs-52
- for samba-technical@lists.samba.org; Wed, 12 Aug 2020 21:11:03 +0000
-Received: by mail-il1-x132.google.com with SMTP id p16so3300797ile.0
- for <samba-technical@lists.samba.org>; Wed, 12 Aug 2020 14:11:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Ev3XQLbHUN8LdKiF5Z6bE4zZZrXXkwg5QyENYXM7QXI=;
- b=ZwG4etfWUXLv2zvGyswL6Ghl2A6OB9feVYetSDlCE2np5gBzjwBCf+a5Lm/zcqFWKP
- uq/MlsCOKohbz8AneS1dmuoc+jz2OsizPUr7PRBANFkwd5jyi3uQQ+Zy/3h4V2Ws4UWR
- 3eMPTomXkbPaEhQstWbUwCe2Do8sE3KvazgJ+36jWvoENbf6m3gJaeVE/JeHTVRBzNmX
- 3w2dKdEM2qqVeowV2GwaDGiZKbsbHrASRmposm9aNkxUrtgFpPqp5GeGl9G5QsT4g1N9
- BVzb49BmgihHpmHjB+4wlvLgIOH+mYA/vJo7riGDWPnZbhSNmrsock2qd7/Jqq5ibg6V
- CNQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Ev3XQLbHUN8LdKiF5Z6bE4zZZrXXkwg5QyENYXM7QXI=;
- b=ecPQKf3Rp/xbvm2H209LGaRI9y4qJAXWrIsjwVuQn4hKXkIhP9NoOeAFO5ojyCJai9
- RIYLDYDzvvZxAbFuJF5XOr7Bl9HCvctwTWzN1a7PRYuM6NFxw1YOvleVcCKNXQEjOdp4
- QHddxAvzwBIczfj3pbnrw3NOc0ygqgpf0j1ES9S21wkax+5OFhB1k4Bm3nprDPI07B4h
- N+PrNjse209vM0vbsyFrNbgQ1KwAYQcEMt12V2r1D9zCxvSI5emM6Y9BZ1FCr5Q+szb0
- VP5baiw1l6wmDe3QtDcWpiOyxt+evzjGG4lE3eRkVALgUiD23HCa8WMqA3YDpOLCZVUm
- dzFQ==
-X-Gm-Message-State: AOAM5335B2tSxfzTLlbMds3jEkba3CXavSksU65serGXdgLhkpsiM8Bs
- DQq4XSzF87DWjumR1iw7EScwFzvRY3pzASiwOMDCaHNTVw==
-X-Google-Smtp-Source: ABdhPJxBjh9LpDolFHR+QFSygO5aGWCiMykHIZ1CZLM7YvkV7CmLI+o8t9UgzpdvqXOQr/0WHBrK3ljDwuP4fQ4b9A4=
-X-Received: by 2002:a92:4989:: with SMTP id k9mr1608239ilg.177.1597266659056; 
- Wed, 12 Aug 2020 14:10:59 -0700 (PDT)
+ (Exim) id 1k679H-00DTit-LZ; Thu, 13 Aug 2020 06:55:45 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=bHdk1MJo7aiXi9TiwwO49C+g3ArcfyLNsBuLb4JYVMg=; b=WY7Rf4Jx5MUwHoiRcnG/IwMt/M
+ M+bP4Zhbh5yJAYBdK5VA5IPem6+sODoHJd+CWgTZICoAJ1m+IOpWQfKz0V0DnwtB5f4duGQ5B9JXA
+ kfXOtZGQilkG4BG7ssfFROp3kK7DMZybCPr3kYLDpcb7btkOaHsOYFThgArQu8PhvVjc5gLDRiIY5
+ Kv6aWRXTQp3+rHXNEoTdbFQlztq8phXURDcKts+11Z8L9AoqWHPBuovaFLM2yobBRRTkdm/D0RAJH
+ ZL2+UvtRgEVo4SbVzZ+NYtSHcp0q7WERsi5w+Py7/qB0jcoeh7bfQhmdSu3+lQTlE6nJgNlp8i01h
+ CeDsItIBUi1VNMLxBqUhjZEAvVkuKjhpVCMdp1jbVabrQm3oCBI14TSf9l8yhN5QLdDd6hd87THLU
+ Ug6JOKCrIcd1nlaFxKIoD/OK38urgGVwmbpXZ7xtUqwq9zIwtXhFU6oIBPpafpbfPYSjbki2klvCk
+ XGH6KsavV0ySqJ67PiKwflj8;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1k679G-0006Si-Cd; Thu, 13 Aug 2020 06:55:38 +0000
+Date: Thu, 13 Aug 2020 08:55:36 +0200
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.12.6 Available for Download
+Message-ID: <20200813065533.GA10644@carrie2>
 MIME-Version: 1.0
-References: <CAMfpvhKQKyvzEgsyEPChU1ectmsbPeGiGKEHF2v=5hR+jC1GCQ@mail.gmail.com>
- <0f42582a-eee8-5e05-a55a-1f1c80f11845@samba.org>
-In-Reply-To: <0f42582a-eee8-5e05-a55a-1f1c80f11845@samba.org>
-Date: Wed, 12 Aug 2020 14:10:47 -0700
-Message-ID: <CAMfpvh+VFgk6f2Gem0FetU+TfZ8wzVhzOaAo7bwPkNRNozT+FA@mail.gmail.com>
-Subject: Re: Creating a VFS backend
-To: Stefan Metzmacher <metze@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="7JfCtLOvnd9MIVvH"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,54 +54,125 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Matthew DeVore via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Matthew DeVore <matvore@google.com>
-Cc: samba-technical@lists.samba.org
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Aug 12, 2020 at 12:44 AM Stefan Metzmacher <metze@samba.org> wrote:
->
-> My guess should be hello_create_dfs_pathat or hello_get_dfs_referrals.
->
-> > Here is the output of smbd:
-> >
-> > $ sudo ~/samba_build/sbin/smbd  --foreground --port 8111 --debuglevel=1 -S
->
-> Add debug messages to all the calls, btw. you should use
-> DBG_{ERR,WARNING,DEBUG,...}() instead of the raw DEBUG() macro.
 
-Nice, thanks for the tip.
+--7JfCtLOvnd9MIVvH
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->
-> And let it run with log level 10, I'd also skip the -S option.
->
-> Also look take network captures on the server side
-> (because the timestamps of the capture and log files come from the same clock).
-> and check what requests are sent on the wire.
+Release Announcements
+---------------------
 
-Last time I tried using WireShark to capture SMB traffic, the data was
-correct since I could see unencrypted filenames in the hex dumps, but
-the binary data of the requests were not annotated with field names
-and such, though this worked for NFS automatically earlier. Maybe I'm
-missing some knob on WireShark...
 
->
-> With that you should be able to make progress.
+This is the latest stable release of the Samba 4.12 release series.
 
-Fortunately I was able to figure this out because of a private reply
-(which I only just now realized was private). The salient advise of
-that reply was to set the debuglevel to 10 and look for
-STATUS_NOT_IMPLEMENTED in the log output. After I did that, I manually
-traced some code path from the log message to see it was attempting to
-invoke createfile. I didn't instrument or log createfile calls at all,
-but had them return NOT_IMPLEMENTED, because I thought createfile only
-referred to making a file on disk. But that's actually used to open
-files as well. So after I replaced my createfile function pointer with
-NULL in my struct vfs_fn_pointers, my backend's get_dos_attributes fn
-got invoked, since the default implementation of createfile does that,
-apparently, when a file is being opened. So I'll proceed by
-implementing get_dos_attributes.
 
-- Matt
+Changes since 4.12.5
+--------------------
+
+o  Jeremy Allison <jra@samba.org>
+   * BUG 14403: s3: libsmb: Fix SMB2 client rename bug to a Windows server.
+
+o  Andrew Bartlett <abartlet@samba.org>
+   * BUG 14424: dsdb: Allow "password hash userPassword schemes =3D CryptSH=
+A256"
+     to work on RHEL7.
+   * BUG 14450: dbcheck: Allow a dangling forward link outside our known NC=
+s.
+
+o  Ralph Boehme <slow@samba.org>
+   * BUG 14426: lib/debug: Set the correct default backend loglevel to
+     MAX_DEBUG_LEVEL.
+   * BUG 14428: PANIC: Assert failed in get_lease_type().
+
+o  Bjoern Jacke <bjacke@samba.org>
+   * BUG 14422: util: Fix build on AIX by fixing the order of replace.h inc=
+lude.
+
+o  Volker Lendecke <vl@samba.org>
+   * BUG 14355: srvsvc_NetFileEnum asserts with open files.
+
+o  Stefan Metzmacher <metze@samba.org>
+   * BUG 14354: KDC breaks with DES keys still in the database and
+     msDS-SupportedEncryptionTypes 31 indicating support for it.
+   * BUG 14427: s3:smbd: Make sure vfs_ChDir() always sets
+     conn->cwd_fsp->fh->fd =3D AT_FDCWD.
+   * BUG 14428: PANIC: Assert failed in get_lease_type().
+
+o  Andreas Schneider <asn@samba.org>
+   * BUG 14358: docs: Fix documentation for require_membership_of of
+     pam_winbind.conf.
+
+o  Martin Schwenke <martin@meltin.net>
+   * BUG 14444: ctdb-scripts: Use nfsconf utility for variable values in CT=
+DB
+     NFS scripts.
+
+o  Andrew Walker <awalker@ixsystems.com>
+   * BUG 14425: s3:winbind:idmap_ad: Make failure to get attrnames for sche=
+ma
+     mode fatal.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+        https://www.samba.org/samba/history/samba-4.12.6.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--7JfCtLOvnd9MIVvH
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCXzTj4gAKCRAoaL1+KxeT
+UYcuAKC747VO1lis5ZKb/WXZkIFQzkGdcgCdELKDqKFMSNVRwVbKF3TSGCbRH/Q=
+=IClG
+-----END PGP SIGNATURE-----
+
+--7JfCtLOvnd9MIVvH--
 
