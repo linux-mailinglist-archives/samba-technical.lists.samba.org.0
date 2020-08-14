@@ -2,57 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 955C12444A0
-	for <lists+samba-technical@lfdr.de>; Fri, 14 Aug 2020 07:47:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA5D02446B0
+	for <lists+samba-technical@lfdr.de>; Fri, 14 Aug 2020 11:02:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=z5AKCMnNtioAb+2Kg6+90tdosEoKFTBWvxsCzGL32fY=; b=SH6LFx44LHv/DbFJov906yalBA
-	9VbpdT2WCefdcIXl49IMmUrsREEpcoCa1NTDEWKMhv6FeK8+UroWZGf0uF86iGCLM8VF7lVWmMowJ
-	/7xEjM8yMQBG9cz617me8erujQwC/SP4SBnfKMGJ3YQZ+flvUR4R5UWbasqYoK4+GHlKFqJtlhLgQ
-	V1pPchejxbLOEnMXeBh3dUFxW+CA/ayG6lg8B3ygpPoX8LtmS1Y+mkYghpzfpEdhuLw2yOw4x4GMY
-	SLsfRrjHs4KRMmedwqXR+rt+DijABKPqIYD+R4TK9Q0Kg4Qbei8Jwr71X5p86/v2c58SX3dhaypJO
-	EE/l17Rw==;
-Received: from localhost ([::1]:50732 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=VX9YIbITL8mBR3DgVLgSYI2r8DC9TlK/qqhjJ/fDYdk=; b=ZpB28rnUg0J9VqNK80Ktp1QSIW
+	9UtjuBC8kuDbdRG9EclRYUsUEUvcKpptQqNGBdRe7gszzEdGnzPz1Ji6NF6vXKR7kMFtERFT8bG6O
+	ntrzMtQm08hwANGXpxp8ppKTOgfhcmG8AsCDMtqlNlbsky7P0bojSgjYSQ9bSNAnaZCmL7IpnXIMA
+	fpPNjUiwFkvqfCc6Cgh5CCGBOaVkzm2WIDdA7bNJ0lGcL+YxNQV69QV7IQLlu4JdLjVzIsyd/HTb+
+	jFvIHxSJJYry2YYIOe8rc8G6YSGcnMzxEVP2bZQUIq6J8Y0Lf1FJnb4+Wr2r4NC/lK43vAuPcrQBq
+	ib8nU24w==;
+Received: from localhost ([::1]:61758 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1k6SXV-00Dd9s-6X; Fri, 14 Aug 2020 05:46:05 +0000
-Received: from mail-yb1-xb31.google.com ([2607:f8b0:4864:20::b31]:33510) 
+	id 1k6Vb8-00DezK-Ey; Fri, 14 Aug 2020 09:02:02 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50946) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k6SXL-00Dd9l-5O
- for samba-technical@lists.samba.org; Fri, 14 Aug 2020 05:46:00 +0000
-Received: by mail-yb1-xb31.google.com with SMTP id p191so4628084ybg.0
- for <samba-technical@lists.samba.org>; Thu, 13 Aug 2020 22:45:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=z5AKCMnNtioAb+2Kg6+90tdosEoKFTBWvxsCzGL32fY=;
- b=JicC+1qWBYRxtiji3c37l7reXrLHPrlwJLD+WevXruYky+WLx3yubuIQQ2zhLdpBgd
- 8y6syFFSe+pSUU1uVDPfGBuxTNz6M6W8iJq6PEheBa4LR11UB9J86cNWYjnQNQ2ih3+4
- lMBRiAqbcG1SXpK0AtM7YzvnH2xSSPXx9bW4UYW0Mb5hYz092V6sjvZHpEAkZV1uCZe7
- 5vXw4JRPZIRvdZngFjIVcGaSEpNb2V9ARP73JCneVuaRLUVwmV1wqxR/dPHmhmerkMJ9
- ocvXtQD9UtGkjw+cVEykD6o073i56MYhW2P8tsp1w/NAstC2os4r7Y9YOce57lBGOq7t
- aBSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=z5AKCMnNtioAb+2Kg6+90tdosEoKFTBWvxsCzGL32fY=;
- b=keuDXQUaV5J6QPR+OEAlBJ07sXbOnTgyCgntedm2fpsjGdWyoTx9mhumff1ngQgwg1
- Anz9DUgMMMv+nP+9OdVnP2yg0zCwDFDIvwVoGj/ehRqoGyTp3cWJ+gA7k+mEvMk+WAtL
- FhrjVJKBNJc3jN77QXv0q36PocM5rO61/x8yZGMc6EI+T0npxpfKPKWdZBdnwAKvkb84
- LqW3sbc2hdZCjt+FHWdPCq87KFP/QSdZpzrf3oOyUPAQRbkYEhhIXscPftAqa6BzZrdT
- 9D35CKHczirSnQmWKDhdIstq0XCnFNMSx+QZRD8uzeTUeSku543zust0k2gqd/GGC5lX
- 3jsA==
-X-Gm-Message-State: AOAM532xE1j9432AKbIXr5AIIsTJG5+Oc5biy21FEOx2hrpjx5Z+qJ0U
- 6DfXCPH3SfH1v/TlHe8YGvRBzbRo46qJFKizXbU=
-X-Google-Smtp-Source: ABdhPJzZWLX1fUL4CBcfruIJU+FqmgKoSLBHhtGG6/MzznGni6jwFJIhZRfcuUeAbibm2PRfx3IYhNAMfIQ38ymqzSE=
-X-Received: by 2002:a25:9887:: with SMTP id l7mr1502087ybo.3.1597383951442;
- Thu, 13 Aug 2020 22:45:51 -0700 (PDT)
+ (Exim) id 1k6Vaw-00Deyd-SS; Fri, 14 Aug 2020 09:01:53 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=VX9YIbITL8mBR3DgVLgSYI2r8DC9TlK/qqhjJ/fDYdk=; b=cb4OXo+7r+T8Po2wCblx8WDaRK
+ q0zkrE9MZzyDe+pDVuANXlkd7Cfmv41HzMxbct0b0uOTj9AFjah5DV4MAQaW4kdQ0cxKT/Jysrgtw
+ Qcoas5dz7wx0bmCTaKqdAHZoqqorgEcwWdaGycBExmwbvo6acrHVX9rwKnUGYmNTaXpFYVUghG6ch
+ lPOFERbuVXMCXp6HeKz/qgl9txG8cD8zjxJAW+OyhSlD0wX57yX4oCkRnFVzR9YAlKe8auodq98ES
+ c+tVaX0sWPPVSTrswypfwbSgQKFxo0y3mD7T7KRWw6EHVg7gXcmj7uxVp0hmRo2irbbG9wLomjUZ1
+ uAhple2x1pfeNP1OC+DhTrEa8W368BQskdbd31q7Wu4AFrPWUf2WQKq7FghP/k7OybcSg0thxyHOV
+ lKq5jfVJlZHjGN/ku7PyD4AFSAnpUo5Hkq3GfmdDtdnpOAatSeVeIjlRug06XSyc6zaO+mXLntM2E
+ g6MTG+Gyle4Qp4VWkK09oMI4;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1k6Vaw-0001CU-Fn; Fri, 14 Aug 2020 09:01:50 +0000
+Date: Fri, 14 Aug 2020 11:01:48 +0200
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.13.0rc2 Available for Download
+Message-ID: <20200814090146.GA16237@carrie2>
 MIME-Version: 1.0
-Date: Fri, 14 Aug 2020 11:15:40 +0530
-Message-ID: <CANT5p=pxPsBwAv3oJX6Ae9wjpZoEjLvyfGM1sM9DEhS11RNgog@mail.gmail.com>
-Subject: [PATCH][SMB3] mount.cifs integration with PAM
-To: CIFS <linux-cifs@vger.kernel.org>, samba-technical@lists.samba.org, 
- Pavel Shilovsky <piastryyy@gmail.com>, Steve French <smfrench@gmail.com>,
- sribhat.msa@outlook.com
-Content-Type: multipart/mixed; boundary="000000000000fefda205accfee25"
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="xHFwDpU9dbj6ez1V"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,246 +54,172 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000fefda205accfee25
-Content-Type: text/plain; charset="UTF-8"
 
-Hi,
+--xHFwDpU9dbj6ez1V
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Currently, for sec=krb5, mount.cifs assumes that the kerberos TGT is
-already downloaded and stored in krb5 cred cache file. If an AD user
-is logged in through ssh or su, those utilities authenticate with PAM
-(winbind or sssd), and winbind/sssd can be configured to perform
-krbtgt house-keeping (like refreshing the tickets). However, if the AD
-user is not logged in, and the local root user wants to mount the
-share using the credentials for an AD user, he/she will need to resort
-to manual kinit, and this does not go through winbind/sssd.
+Release Announcements
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Attached patch will introduce PAM authentication in mount.cifs. If
-sec=krb5 is specified, mount.cifs will attempt to authenticate with
-PAM as the username mentioned in mount options. If the authentication
-fails, we fall back to the old behavior and proceed with the mount
-nevertheless.
+This is the second release condidate of Samba 4.13.  This is *not*
+intended for production environments and is designed for testing
+purposes only.  Please report any defects via the Samba bug reporting
+system at https://bugzilla.samba.org/.
 
-@linux-cifs: Please review the overall flow, and let me know if there
-are any issues/suggestions. The feature is enabled by default in a
-configure parameter (krb5pam), and can be disabled. Do we also need a
-new mount option to trigger this new behavior? (try-pam-auth?)
+Samba 4.13 will be the next version of the Samba suite.
 
-@samba-technical: Please review the overall flow of PAM
-authentication. Currently, I'm mainly doing pam_authenticate and
-pam_setcreds. Is there any added benefit opening and closing session?
-Is it possible to call pam_open_session from mount.cifs, and then call
-pam_close_session in another binary (umount.cifs)?
 
-Also attached the output of my test runs.
+UPGRADING
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Thanks in advance.
--- 
--Shyam
 
---000000000000fefda205accfee25
-Content-Type: text/plain; charset="US-ASCII"; name="test-runs.txt"
-Content-Disposition: attachment; filename="test-runs.txt"
-Content-Transfer-Encoding: base64
-Content-ID: <f_kdtt288q0>
-X-Attachment-Id: f_kdtt288q0
+NEW FEATURES/CHANGES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-bG9jYWxhZG1pbkBsaW51eC12bTp+JCBzdWRvIG1vdW50IC10IGNpZnMgLy9teXN0b3JhZ2VhY2Nv
-dW50LmZpbGUuY29yZS53aW5kb3dzLm5ldC9zaGFyZTIgL21udC9hYmMvIC1vIHZlcnM9My4wLHNl
-Yz1rcmI1LHNlcnZlcmlubyxjaWZzYWNsLG1mc3ltbGlua3MsYWN0aW1lbz02MCxtdWx0aXVzZXIs
-Y3J1aWQ9YWR1c2VyLHVzZXJuYW1lPWFkdXNlcixkb21haW49bXlkb21haW4NCkF1dGhlbnRpY2F0
-aW5nIGFzIHVzZXI6IGFkdXNlcg0KUGFzc3dvcmQ6ICAobm8gZWNobykNCmxvY2FsYWRtaW5AbGlu
-dXgtdm06fiQgbW91bnQgLXQgY2lmcw0KLy9teXN0b3JhZ2VhY2NvdW50LmZpbGUuY29yZS53aW5k
-b3dzLm5ldC9zaGFyZTIgb24gL21udC9hYmMgdHlwZSBjaWZzIChydyxyZWxhdGltZSx2ZXJzPTMu
-MCxzZWM9a3JiNSxjcnVpZD0xMTE5NSxjYWNoZT1zdHJpY3QsbXVsdGl1c2VyLGRvbWFpbj1teWRv
-bWFpbix1aWQ9MCxub2ZvcmNldWlkLGdpZD0wLG5vZm9yY2VnaWQsZmlsZV9tb2RlPTA3NTUsZGly
-X21vZGU9MDc1NSxzb2Z0LHBlcnNpc3RlbnRoYW5kbGVzLG5vdW5peCxzZXJ2ZXJpbm8sbWFwcG9z
-aXgsY2lmc2FjbCxtZnN5bWxpbmtzLG5vcGVybSxyc2l6ZT0xMDQ4NTc2LHdzaXplPTEwNDg1NzYs
-YnNpemU9MTA0ODU3NixlY2hvX2ludGVydmFsPTYwLGFjdGltZW89NjApDQoNCmFkdXNlckBsaW51
-eC12bTp+JCBscyAvbW50L2FiYy8NCmEuc2ggIGFiYyAgYmFjICBkYXRlZmlsZSAgZGlyMSAgaGFo
-YWhhICB0ZXN0LnNoICB0ZXN0ZmlsZQ0KDQpsb2NhbGFkbWluQGxpbnV4LXZtOn4kIHN1ZG8gbW91
-bnQgLXQgY2lmcyAvL215c3RvcmFnZWFjY291bnQuZmlsZS5jb3JlLndpbmRvd3MubmV0L3NoYXJl
-MiAvbW50L2FiYy8gLW8gdmVycz0zLjAsc2VjPWtyYjUsc2VydmVyaW5vLGNpZnNhY2wsbWZzeW1s
-aW5rcyxhY3RpbWVvPTYwLG11bHRpdXNlcixjcnVpZD1hZHVzZXIsY3JlZGVudGlhbHM9L2hvbWUv
-bG9jYWxhZG1pbi8uc21iL2FkdXNlci5jcmVkcw0KQXV0aGVudGljYXRpbmcgYXMgdXNlcjogYWR1
-c2VyDQpsb2NhbGFkbWluQGxpbnV4LXZtOn4kIG1vdW50IC10IGNpZnMNCi8vbXlzdG9yYWdlYWNj
-b3VudC5maWxlLmNvcmUud2luZG93cy5uZXQvc2hhcmUyIG9uIC9tbnQvYWJjIHR5cGUgY2lmcyAo
-cncscmVsYXRpbWUsdmVycz0zLjAsc2VjPWtyYjUsY3J1aWQ9MTExOTUsY2FjaGU9c3RyaWN0LG11
-bHRpdXNlcixkb21haW49bXlkb21haW4sdWlkPTAsbm9mb3JjZXVpZCxnaWQ9MCxub2ZvcmNlZ2lk
-LGZpbGVfbW9kZT0wNzU1LGRpcl9tb2RlPTA3NTUsc29mdCxwZXJzaXN0ZW50aGFuZGxlcyxub3Vu
-aXgsc2VydmVyaW5vLG1hcHBvc2l4LGNpZnNhY2wsbWZzeW1saW5rcyxub3Blcm0scnNpemU9MTA0
-ODU3Nix3c2l6ZT0xMDQ4NTc2LGJzaXplPTEwNDg1NzYsZWNob19pbnRlcnZhbD02MCxhY3RpbWVv
-PTYwKQ0KbG9jYWxhZG1pbkBsaW51eC12bTp+JCBscyAtbCAvdG1wL2tyYjVjY18xMTE5NQ0KLXJ3
-LS0tLS0tLSAxIGFkdXNlciByb290IDYwNzcgQXVnIDE0IDA0OjE5IC90bXAva3JiNWNjXzExMTk1
-DQoNCg==
---000000000000fefda205accfee25
-Content-Type: application/octet-stream; 
-	name="0001-mount.cifs-Try-to-authenticate-the-krb5-user-against.patch"
-Content-Disposition: attachment; 
-	filename="0001-mount.cifs-Try-to-authenticate-the-krb5-user-against.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_kdtt4lwb1>
-X-Attachment-Id: f_kdtt4lwb1
+Python 3.6 Required
+-------------------
 
-RnJvbSBjZGM4OTdlZjViNWQ2ODI5MGNkNDU4YzU3MDRkYTJlM2QxMGQxYTYyIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTaHlhbSBQcmFzYWQgTiA8c3ByYXNhZEBtaWNyb3NvZnQuY29t
-PgpEYXRlOiBUaHUsIDEzIEF1ZyAyMDIwIDA4OjUzOjA4IC0wNzAwClN1YmplY3Q6IFtQQVRDSF0g
-bW91bnQuY2lmczogVHJ5IHRvIGF1dGhlbnRpY2F0ZSB0aGUga3JiNSB1c2VyIGFnYWluc3QgUEFN
-CiBiZWZvcmUgcHJvY2VlZGluZyB0byBjYWxsIHRoZSBtb3VudCBzeXN0ZW0gY2FsbC4gSWYgdGhl
-IGF1dGhlbnRpY2F0aW9uIGZhaWxzLAogcHJvY2VlZCB0byB0cnkgbW91bnQsIHNvIHRoYXQgaWYg
-dGhlIHVzZXIgaGFzIGF1dGhlbnRpY2F0ZWQgbWFudWFsbHkgd2l0aCB0aGUKIEtEQywgdGhlIHVz
-ZXIgd2lsbCBzdGlsbCBiZSBhYmxlIHRvIG1vdW50LgoKQXV0aGVudGljYXRpb24gYWdhaW5zdCBQ
-QU0gaGFzIHR3byBiZW5lZml0czoKLSBUaGUgUEFNIG1vZHVsZSAod2luYmluZCBvciBzc3NkKSB3
-aWxsIHBlcmZvcm0gdGhlIGhvdXNlLWtlZXBpbmcgb2YKdGhlIGtyYjUgdGlja2V0cyBhbmQgbWFr
-ZSBzdXJlIHRoZXkgYXJlbid0IGV4cGlyZWQuCi0gVGhlIG1vdW50LmNpZnMgdXRpbGl0eSBuZWVk
-IG5vdCByZWx5IG9uIHNzaGQgb3Igc3UgdG8gYXV0aGVudGljYXRlCmFnYWluc3QgUEFNIGFuZCBh
-cnJhbmdlIHRoZSBrcmI1IFRHVC4KClRoaXMgaW50cm9kdWNlcyBhIG5ldyBQQU0gYXBwbGljYXRp
-b24gbmFtZWQgImNpZnMiLgpBbHNvLCB0byBkaXNhYmxlIHRoaXMgZmVhdHVyZSBhdCB0aGUgdGlt
-ZSBvZiBidWlsZCwgb25lIGNhbiBydW4KY29uZmlndXJlIHdpdGggLS1lbmFibGUta3JiNXBhbT1u
-by4KLS0tCiBNYWtlZmlsZS5hbSAgfCAgIDIgKy0KIGNvbmZpZ3VyZS5hYyB8ICAyNyArKysrKysr
-KysrCiBtb3VudC5jaWZzLmMgfCAxNDYgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKystCiAzIGZpbGVzIGNoYW5nZWQsIDE3MiBpbnNlcnRpb25zKCspLCAz
-IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL01ha2VmaWxlLmFtIGIvTWFrZWZpbGUuYW0KaW5k
-ZXggZmU5Y2QzNC4uNTFjNWM0NyAxMDA2NDQKLS0tIGEvTWFrZWZpbGUuYW0KKysrIGIvTWFrZWZp
-bGUuYW0KQEAgLTQsNyArNCw3IEBAIEFDTE9DQUxfQU1GTEFHUyA9IC1JIGFjbG9jYWwKIHJvb3Rf
-c2JpbmRpciA9ICQoUk9PVFNCSU5ESVIpCiByb290X3NiaW5fUFJPR1JBTVMgPSBtb3VudC5jaWZz
-CiBtb3VudF9jaWZzX1NPVVJDRVMgPSBtb3VudC5jaWZzLmMgbXRhYi5jIHJlc29sdmVfaG9zdC5j
-IHV0aWwuYwotbW91bnRfY2lmc19MREFERCA9ICQoTElCQ0FQKSAkKENBUE5HX0xEQUREKSAkKFJU
-X0xEQUREKQorbW91bnRfY2lmc19MREFERCA9ICQoTElCQ0FQKSAkKExJQlBBTSkgJChDQVBOR19M
-REFERCkgJChSVF9MREFERCkKIGluY2x1ZGVfSEVBREVSUyA9IGNpZnNpZG1hcC5oCiByc3RfbWFu
-X3BhZ2VzID0gbW91bnQuY2lmcy44CiAKZGlmZiAtLWdpdCBhL2NvbmZpZ3VyZS5hYyBiL2NvbmZp
-Z3VyZS5hYwppbmRleCA2NzhiNTVkLi44MGVkNTkzIDEwMDY0NAotLS0gYS9jb25maWd1cmUuYWMK
-KysrIGIvY29uZmlndXJlLmFjCkBAIC01NSw2ICs1NSwxMSBAQCBBQ19BUkdfRU5BQkxFKHBhbSwK
-IAllbmFibGVfcGFtPSRlbmFibGV2YWwsCiAJZW5hYmxlX3BhbT0ibWF5YmUiKQogCitBQ19BUkdf
-RU5BQkxFKGtyYjVwYW0sCisgICAgW0FTX0hFTFBfU1RSSU5HKFstLWVuYWJsZS1rcmI1cGFtXSxb
-QWRkIFBBTSBhdXRoZW50aWNhdGlvbiBzdXBwb3J0IHdoZW4gdXNpbmcgc2VjPWtyYjUgQDw6QGRl
-ZmF1bHQ9eWVzQF0pXSwsCisgICAgZW5hYmxlX2tyYjVwYW09JGVuYWJsZXZhbAorICAgIGVuYWJs
-ZV9rcmI1cGFtPSJ5ZXMiKQorCiBBQ19BUkdfRU5BQkxFKHN5c3RlbWQsCiAJW0FTX0hFTFBfU1RS
-SU5HKFstLWVuYWJsZS1zeXN0ZW1kXSxbRW5hYmxlIHN5c3RlbWQgc3BlY2lmaWMgYmVoYXZpb3Ig
-Zm9yIG1vdW50LmNpZnMgQDw6QGRlZmF1bHQ9eWVzQDo+QF0pXSwKIAllbmFibGVfc3lzdGVtZD0k
-ZW5hYmxldmFsLApAQCAtMjQxLDYgKzI0NiwyNyBAQCBpZiB0ZXN0ICRlbmFibGVfcGFtICE9ICJu
-byI7IHRoZW4KIAkJCV0pCiBmaQogCitpZiB0ZXN0ICJ4JGVuYWJsZV9rcmI1cGFtIiA9ICJ4bm8i
-OyB0aGVuCisJZW5hYmxlX2tyYjVwYW09Im5vIgorZWxzZQorCUFDX0NIRUNLX0xJQihbcGFtXSwg
-W3BhbV9zdGFydF0sIGVuYWJsZV9rcmI1cGFtPSJ5ZXMiLCBlbmFibGVfa3JiNXBhbT0ibm8iLCAp
-CisJQUNfQ0hFQ0tfSEVBREVSUyhbc2VjdXJpdHkvcGFtX2FwcGwuaF0sICwKKwkJCSBbCisJCQkJ
-aWYgdGVzdCAkZW5hYmxlX2tyYjVwYW0gPSAieWVzIjsgdGhlbgorCQkJCQlBQ19NU0dfRVJST1Io
-W3NlY3VyaXR5L3BhbV9hcHBsLmggbm90IGZvdW5kLCBjb25zaWRlciBpbnN0YWxsaW5nIGtleXV0
-aWxzLWxpYnMtZGV2ZWwuXSkKKwkJCQllbHNlCisJCQkJCUFDX01TR19XQVJOKFtzZWN1cml0eS9w
-YW1fYXBwbC5oIG5vdCBmb3VuZCwgY29uc2lkZXIgaW5zdGFsbGluZyBwYW0tZGV2ZWwuIERpc2Fi
-bGluZyBjaWZzY3JlZHMgUEFNIG1vZHVsZS5dKQorCQkJCQllbmFibGVfa3JiNXBhbT0ibm8iCisJ
-CQkJZmkKKwkJCSBdKQorZmkKKworaWYgdGVzdCAiJGVuYWJsZV9rcmI1cGFtIiA9ICJ5ZXMiOyB0
-aGVuCisJQUNfREVGSU5FKFtIQVZFX0tSQjVQQU1dLFsxXSwgW0RlZmluZSBpZiBQQU0gYXV0aCBp
-cyBlbmFibGVkIGZvciBrcmI1XSkKKwlMSUJQQU09LWxwYW0KKwlBQ19TVUJTVChMSUJQQU0pCitm
-aQorCiAjIHVnbHksIGJ1dCBJJ20gbm90IHN1cmUgaG93IHRvIGNoZWNrIGZvciBmdW5jdGlvbnMg
-aW4gYSBsaWJyYXJ5IHRoYXQncyBub3QgaW4gJExJQlMKIGN1X3NhdmVkX2xpYnM9JExJQlMKIExJ
-QlM9IiRMSUJTICRLUkI1X0xEQUREIgpAQCAtMjg4LDYgKzMxNCw3IEBAIEFNX0NPTkRJVElPTkFM
-KENPTkZJR19DSUZTQUNMLCBbdGVzdCAiJGVuYWJsZV9jaWZzYWNsIiAhPSAibm8iXSkKIEFNX0NP
-TkRJVElPTkFMKENPTkZJR19TTUJJTkZPLCBbdGVzdCAiJGVuYWJsZV9zbWJpbmZvIiAhPSAibm8i
-XSkKIEFNX0NPTkRJVElPTkFMKENPTkZJR19QWVRIT05fVE9PTFMsIFt0ZXN0ICIkZW5hYmxlX3B5
-dGhvbnRvb2xzIiAhPSAibm8iXSkKIEFNX0NPTkRJVElPTkFMKENPTkZJR19QQU0sIFt0ZXN0ICIk
-ZW5hYmxlX3BhbSIgIT0gIm5vIl0pCitBTV9DT05ESVRJT05BTChDT05GSUdfS1JCNVBBTSwgW3Rl
-c3QgIiRlbmFibGVfa3JiNXBhbSIgIT0gIm5vIl0pCiBBTV9DT05ESVRJT05BTChDT05GSUdfUExV
-R0lOLCBbdGVzdCAiJGVuYWJsZV9jaWZzaWRtYXAiICE9ICJubyIgLW8gIiRlbmFibGVfY2lmc2Fj
-bCIgIT0gIm5vIl0pCiAKIExJQkNBUF9OR19QQVRICmRpZmYgLS1naXQgYS9tb3VudC5jaWZzLmMg
-Yi9tb3VudC5jaWZzLmMKaW5kZXggNDA5MThjMS4uZmU2N2UzZiAxMDA2NDQKLS0tIGEvbW91bnQu
-Y2lmcy5jCisrKyBiL21vdW50LmNpZnMuYwpAQCAtNDYsNiArNDYsOSBAQAogI2luY2x1ZGUgPHRp
-bWUuaD4KICNpbmNsdWRlIDxzeXMvbW1hbi5oPgogI2luY2x1ZGUgPHN5cy93YWl0Lmg+CisjaWZk
-ZWYgSEFWRV9LUkI1UEFNCisjaW5jbHVkZSA8c2VjdXJpdHkvcGFtX2FwcGwuaD4KKyNlbmRpZiAv
-KiBIQVZFX0tSQjVQQU0gKi8KICNpZmRlZiBIQVZFX1NZU19GU1VJRF9ICiAjaW5jbHVkZSA8c3lz
-L2ZzdWlkLmg+CiAjZW5kaWYgLyogSEFWRV9TWVNfRlNVSURfSCAqLwpAQCAtMTg5LDYgKzE5Miw3
-IEBAIHN0cnVjdCBwYXJzZWRfbW91bnRfaW5mbyB7CiAJdW5zaWduZWQgaW50IHZlcmJvc2VmbGFn
-OjE7CiAJdW5zaWduZWQgaW50IG5vZmFpbDoxOwogCXVuc2lnbmVkIGludCBnb3RfZG9tYWluOjE7
-CisJdW5zaWduZWQgaW50IGlzX2tyYjU6MTsKIH07CiAKIHN0YXRpYyBjb25zdCBjaGFyICp0aGlz
-cHJvZ3JhbTsKQEAgLTg5MSw5ICs4OTUsMTAgQEAgcGFyc2Vfb3B0aW9ucyhjb25zdCBjaGFyICpk
-YXRhLCBzdHJ1Y3QgcGFyc2VkX21vdW50X2luZm8gKnBhcnNlZF9pbmZvKQogCiAJCWNhc2UgT1BU
-X1NFQzoKIAkJCWlmICh2YWx1ZSkgewotCQkJCWlmICghc3RybmNtcCh2YWx1ZSwgIm5vbmUiLCA0
-KSB8fAotCQkJCSAgICAhc3RybmNtcCh2YWx1ZSwgImtyYjUiLCA0KSkKKwkJCQlpZiAoIXN0cm5j
-bXAodmFsdWUsICJub25lIiwgNCkpCiAJCQkJCXBhcnNlZF9pbmZvLT5nb3RfcGFzc3dvcmQgPSAx
-OworCQkJCWlmICghc3RybmNtcCh2YWx1ZSwgImtyYjUiLCA0KSkKKwkJCQkJcGFyc2VkX2luZm8t
-PmlzX2tyYjUgPSAxOwogCQkJfQogCQkJYnJlYWs7CiAKQEAgLTE3NTUsNiArMTc2MCwxMjEgQEAg
-Z2V0X3Bhc3N3b3JkKGNvbnN0IGNoYXIgKnByb21wdCwgY2hhciAqaW5wdXQsIGludCBjYXBhY2l0
-eSkKIAlyZXR1cm4gaW5wdXQ7CiB9CiAKKyNpZmRlZiBIQVZFX0tSQjVQQU0KKyNkZWZpbmUgUEFN
-X0NJRlNfU0VSVklDRSAiY2lmcyIKKworc3RhdGljIGludAorcGFtX2F1dGhfa3JiNV9jb252KGlu
-dCBuLCBjb25zdCBzdHJ1Y3QgcGFtX21lc3NhZ2UgKiptc2csCisgICAgc3RydWN0IHBhbV9yZXNw
-b25zZSAqKnJlc3AsIHZvaWQgKmRhdGEpCit7CisgICAgc3RydWN0IHBhcnNlZF9tb3VudF9pbmZv
-ICpwYXJzZWRfaW5mbzsKKwlzdHJ1Y3QgcGFtX3Jlc3BvbnNlICpyZXBseTsKKwlpbnQgaTsKKwor
-CSpyZXNwID0gTlVMTDsKKworICAgIHBhcnNlZF9pbmZvID0gZGF0YTsKKyAgICBpZiAocGFyc2Vk
-X2luZm8gPT0gTlVMTCkKKwkJcmV0dXJuIChQQU1fQ09OVl9FUlIpOworCisJaWYgKG4gPD0gMCB8
-fCBuID4gUEFNX01BWF9OVU1fTVNHKQorCQlyZXR1cm4gKFBBTV9DT05WX0VSUik7CisKKwlpZiAo
-KHJlcGx5ID0gY2FsbG9jKG4sIHNpemVvZigqcmVwbHkpKSkgPT0gTlVMTCkKKwkJcmV0dXJuIChQ
-QU1fQ09OVl9FUlIpOworCisJZm9yIChpID0gMDsgaSA8IG47ICsraSkgeworCQlzd2l0Y2ggKG1z
-Z1tpXS0+bXNnX3N0eWxlKSB7CisJCWNhc2UgUEFNX1BST01QVF9FQ0hPX09GRjoKKyAgICAgICAg
-ICAgIGlmICgocmVwbHlbaV0ucmVzcCA9IChjaGFyICopIG1hbGxvYyhNT1VOVF9QQVNTV0RfU0la
-RSArIDEpKSA9PSBOVUxMKQorICAgICAgICAgICAgICAgIGdvdG8gZmFpbDsKKworICAgICAgICAg
-ICAgaWYgKHBhcnNlZF9pbmZvLT5nb3RfcGFzc3dvcmQgJiYgcGFyc2VkX2luZm8tPnBhc3N3b3Jk
-ICE9IE5VTEwpIHsKKyAgICAgICAgICAgICAgICBzdHJuY3B5KHJlcGx5W2ldLnJlc3AsIHBhcnNl
-ZF9pbmZvLT5wYXNzd29yZCwgTU9VTlRfUEFTU1dEX1NJWkUgKyAxKTsKKyAgICAgICAgICAgIH0g
-ZWxzZSBpZiAoZ2V0X3Bhc3N3b3JkKG1zZ1tpXS0+bXNnLCByZXBseVtpXS5yZXNwLCBNT1VOVF9Q
-QVNTV0RfU0laRSArIDEpID09IE5VTEwpIHsKKyAgICAgICAgICAgICAgICBnb3RvIGZhaWw7Cisg
-ICAgICAgICAgICB9CisgICAgICAgICAgICByZXBseVtpXS5yZXNwW01PVU5UX1BBU1NXRF9TSVpF
-XSA9ICdcMCc7CisKKwkJCXJlcGx5W2ldLnJlc3BfcmV0Y29kZSA9IFBBTV9TVUNDRVNTOworCQkJ
-YnJlYWs7CisJCWNhc2UgUEFNX1BST01QVF9FQ0hPX09OOgorCQkJZnByaW50ZihzdGRlcnIsICIl
-czogIiwgbXNnW2ldLT5tc2cpOworICAgICAgICAgICAgaWYgKChyZXBseVtpXS5yZXNwID0gKGNo
-YXIgKikgbWFsbG9jKE1PVU5UX1BBU1NXRF9TSVpFICsgMSkpID09IE5VTEwpCisgICAgICAgICAg
-ICAgICAgZ290byBmYWlsOworCisgICAgICAgICAgICBpZiAocGFyc2VkX2luZm8tPmdvdF9wYXNz
-d29yZCAmJiBwYXJzZWRfaW5mby0+cGFzc3dvcmQgIT0gTlVMTCkgeworICAgICAgICAgICAgICAg
-IHN0cm5jcHkocmVwbHlbaV0ucmVzcCwgcGFyc2VkX2luZm8tPnBhc3N3b3JkLCBNT1VOVF9QQVNT
-V0RfU0laRSArIDEpOworICAgICAgICAgICAgfSBlbHNlIGlmIChmZ2V0cyhyZXBseVtpXS5yZXNw
-LCBNT1VOVF9QQVNTV0RfU0laRSArIDEsIHN0ZGluKSA9PSBOVUxMKSB7CisgICAgICAgICAgICAg
-ICAgZ290byBmYWlsOworICAgICAgICAgICAgfQorICAgICAgICAgICAgcmVwbHlbaV0ucmVzcFtN
-T1VOVF9QQVNTV0RfU0laRV0gPSAnXDAnOworCisJCQlyZXBseVtpXS5yZXNwX3JldGNvZGUgPSBQ
-QU1fU1VDQ0VTUzsKKwkJCWJyZWFrOworCQljYXNlIFBBTV9FUlJPUl9NU0c6CisJCWNhc2UgUEFN
-X1RFWFRfSU5GTzoKKwkJCWZwcmludGYoc3RkZXJyLCAiJXM6ICIsIG1zZ1tpXS0+bXNnKTsKKwor
-CQkJcmVwbHlbaV0ucmVzcF9yZXRjb2RlID0gUEFNX1NVQ0NFU1M7CisJCQlicmVhazsKKwkJZGVm
-YXVsdDoKKwkJCWdvdG8gZmFpbDsKKwkJfQorCX0KKwkqcmVzcCA9IHJlcGx5OworCXJldHVybiAo
-UEFNX1NVQ0NFU1MpOworCisgZmFpbDoKKwlmb3IoaSA9IDA7IGkgPCBuOyBpKyspIHsKKyAgICAg
-ICAgaWYgKHJlcGx5W2ldLnJlc3ApCisgICAgICAgICAgICBmcmVlKHJlcGx5W2ldLnJlc3ApOwor
-CX0KKwlmcmVlKHJlcGx5KTsKKwlyZXR1cm4gKFBBTV9DT05WX0VSUik7Cit9CisKK3N0YXRpYyBp
-bnQgCitwYW1fYXV0aF9rcmI1X3VzZXIoc3RydWN0IHBhcnNlZF9tb3VudF9pbmZvICpwYXJzZWRf
-aW5mbykKK3sKKyAgICBpbnQgcmMgPSAtMTsKKyAgICBwYW1faGFuZGxlX3QgKnBhbWggPSBOVUxM
-OworICAgIHN0cnVjdCBwYW1fY29udiBwYW1fY29udiA9IHsKKyAgICAgICAgLmNvbnYgPSBwYW1f
-YXV0aF9rcmI1X2NvbnYsCisgICAgICAgIC5hcHBkYXRhX3B0ciA9ICh2b2lkICopIHBhcnNlZF9p
-bmZvCisgICAgfTsKKyAgICAKKyAgICBmcHJpbnRmKHN0ZG91dCwgIkF1dGhlbnRpY2F0aW5nIGFz
-IHVzZXI6ICVzXG4iLCBwYXJzZWRfaW5mby0+dXNlcm5hbWUpOworICAgIHJjID0gcGFtX3N0YXJ0
-KFBBTV9DSUZTX1NFUlZJQ0UsIHBhcnNlZF9pbmZvLT51c2VybmFtZSwgJnBhbV9jb252LCAmcGFt
-aCk7CisgICAgaWYgKHJjICE9IFBBTV9TVUNDRVNTKSB7CisgICAgICAgIGZwcmludGYoc3RkZXJy
-LCAiRXJyb3Igc3RhcnRpbmcgUEFNIHRyYW5zYWN0aW9uOiAlc1xuIiwgcGFtX3N0cmVycm9yKHBh
-bWgsIHJjKSk7CisgICAgICAgIHJldHVybiByYzsKKyAgICB9CisKKyAgICByYyA9IHBhbV9hdXRo
-ZW50aWNhdGUocGFtaCwgMCk7CisgICAgaWYgKHJjICE9IFBBTV9TVUNDRVNTKSB7CisgICAgICAg
-IGZwcmludGYoc3RkZXJyLCAiRXJyb3IgaW4gYXV0aGVudGljYXRpbmcgdXNlciB3aXRoIFBBTTog
-JXNcbiIsIHBhbV9zdHJlcnJvcihwYW1oLCByYykpOworICAgICAgICBnb3RvIGVuZDsKKyAgICB9
-CisKKyAgICByYyA9IHBhbV9hY2N0X21nbXQocGFtaCwgMCk7CisgICAgaWYgKHJjICE9IFBBTV9T
-VUNDRVNTKSB7CisgICAgICAgIGZwcmludGYoc3RkZXJyLCAiVXNlciBhY2NvdW50IGludmFsaWQ6
-ICVzXG4iLCBwYW1fc3RyZXJyb3IocGFtaCwgcmMpKTsKKyAgICAgICAgZ290byBlbmQ7CisgICAg
-fQorCisgICAgcmMgPSBwYW1fc2V0Y3JlZChwYW1oLCBQQU1fRVNUQUJMSVNIX0NSRUQpOworICAg
-IGlmIChyYyAhPSBQQU1fU1VDQ0VTUykgeworICAgICAgICBmcHJpbnRmKHN0ZGVyciwgIkVycm9y
-IGluIHNldHRpbmcgUEFNIGNyZWRlbnRpYWxzOiAlc1xuIiwgcGFtX3N0cmVycm9yKHBhbWgsIHJj
-KSk7CisgICAgICAgIGdvdG8gZW5kOworICAgIH0KKworZW5kOgorICAgIHBhbV9lbmQocGFtaCwg
-cmMpOworICAgIHJldHVybiByYzsKK30KKyNlbmRpZiAvKiBIQVZFX0tSQjVQQU0gKi8KKwogc3Rh
-dGljIGludAogYXNzZW1ibGVfbW91bnRpbmZvKHN0cnVjdCBwYXJzZWRfbW91bnRfaW5mbyAqcGFy
-c2VkX2luZm8sCiAJCSAgIGNvbnN0IGNoYXIgKnRoaXNwcm9ncmFtLCBjb25zdCBjaGFyICptb3Vu
-dHBvaW50LApAQCAtMTgzNyw2ICsxOTU3LDI4IEBAIGFzc2VtYmxlX21vdW50aW5mbyhzdHJ1Y3Qg
-cGFyc2VkX21vdW50X2luZm8gKnBhcnNlZF9pbmZvLAogCQlwYXJzZWRfaW5mby0+Z290X3VzZXIg
-PSAxOwogCX0KIAorI2lmZGVmIEhBVkVfS1JCNVBBTQorCWlmIChwYXJzZWRfaW5mby0+aXNfa3Ji
-NSkgeworCQkvKiAKKwkJICogQXR0ZW1wdCB0byBhdXRoZW50aWNhdGUgd2l0aCBQQU0uIAorCQkg
-KiBJZiBQQU0gaXMgY29uZmlndXJlZCBwcm9wZXJseSwgbGV0IGl0IGdldCB0aGUga3JiNSB0aWNr
-ZXRzIG5lY2Vzc2FyeSBmb3IgdGhlIG1vdW50LgorCQkgKiBFdmVuIGlmIHRoaXMgZmFpbHMsIGl0
-IGNvdWxkIGJlIHRoZSBjYXNlIG9mIFBBTSBub3QgY29uZmlndXJlZCBwcm9wZXJseS4gCisJCSAq
-IEluIHRoYXQgY2FzZSwgcmV0YWluIHRoZSBjdXJyZW50IGJlaGF2aW9yLiBTbyB0aGlzIGlzIGp1
-c3QgYSBiZXN0LWVmZm9ydC4KKwkJICovCisJCXJjID0gcGFtX2F1dGhfa3JiNV91c2VyKHBhcnNl
-ZF9pbmZvKTsKKwkJaWYgKHJjKSB7CisJCQlmcHJpbnRmKHN0ZGVyciwgIkF0dGVtcHQgdG8gYXV0
-aGVudGljYXRlIHVzZXIgd2l0aCAiIFwKKwkJCQkJIlBBTSB1bnN1Y2Nlc3NmdWwuIFN0aWxsLCBw
-cm9jZWVkaW5nIHdpdGggbW91bnQuXG4iKTsKKyAgICAgICAgICAgIC8qCisgICAgICAgICAgICAg
-KiBFdmVuIGlmIHRoaXMgaXMgYSBmYWlsdXJlLCBmYWxsdGhyb3VnaCBhbmQgc2VlIGlmIGNpZnMu
-a28gY2FuIHN0aWxsIAorICAgICAgICAgICAgICogYXV0aGVudGljYXRlIHRoZSB1c2VyLgorICAg
-ICAgICAgICAgICovCisJCX0KKworCQlwYXJzZWRfaW5mby0+Z290X3Bhc3N3b3JkID0gMTsKKwl9
-CisjZW5kaWYgLyogSEFWRV9LUkI1UEFNICovCisKIAlpZiAoIXBhcnNlZF9pbmZvLT5nb3RfcGFz
-c3dvcmQpIHsKIAkJY2hhciB0bXBfcGFzc1tNT1VOVF9QQVNTV0RfU0laRSArIDFdOwogCQljaGFy
-ICpwcm9tcHQgPSBOVUxMOwotLSAKMi4yNS4xCgo=
---000000000000fefda205accfee25--
+Samba's minimum runtime requirement for python was raised to Python
+3.5 with samba 4.12.  Samba 4.13 raises this minimum version to Python
+3.6 both to access new features and because this is the oldest version
+we test with in our CI infrastructure.
+
+(Build time support for the file server with Python 2.6 has not
+changed)
+
+wide links functionality
+------------------------
+
+For this release, the code implementing the insecure "wide links =3D yes"
+functionality has been moved out of the core smbd code and into a separate
+VFS module, vfs_widelinks. Currently this vfs module is implicitly loaded
+by smbd as the last but one module before vfs_default if "wide links =3D ye=
+s"
+is enabled on the share (note, the existing restrictions on enabling wide
+links around the SMB1 "unix extensions" and the "allow insecure wide links"
+parameters are still in force). The implicit loading was done to allow
+existing users of "wide links =3D yes" to keep this functionality without
+having to make a change to existing working smb.conf files.
+
+Please note that the Samba developers recommend changing any Samba
+installations that currently use "wide links =3D yes" to use bind mounts
+as soon as possible, as "wide links =3D yes" is an inherently insecure
+configuration which we would like to remove from Samba. Moving the
+feature into a VFS module allows this to be done in a cleaner way
+in future.
+
+A future release to be determined will remove this implicit linkage,
+causing administrators who need this functionality to have to explicitly
+add the vfs_widelinks module into the "vfs objects =3D" parameter lists.
+The release notes will be updated to note this change when it occurs.
+
+REMOVED FEATURES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The deprecated "ldap ssl ads" smb.conf option has been removed.
+
+smb.conf changes
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+  Parameter Name                     Description                Default
+  --------------                     -----------                -------
+  ldap ssl ads                       removed
+  smb2 disable lock sequence checking				No
+
+
+CHANGES SINCE 4.13.0rc1
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+o  Andrew Bartlett <abartlet@samba.org>
+   * BUG 14450: dbcheck: Allow a dangling forward link outside our known NC=
+s.
+
+o  Isaac Boukris <iboukris@gmail.com>
+   * BUG 14462: Remove deprecated "ldap ssl ads" smb.conf option.
+
+o  Volker Lendecke <vl@samba.org>
+   * BUG 14435: winbind: Fix lookuprids cache problem.
+
+o  Stefan Metzmacher <metze@samba.org>
+   * BUG 14354: kdc:db-glue: Ignore KRB5_PROG_ETYPE_NOSUPP also for
+     Primary:Kerberos.
+
+o  Andreas Schneider <asn@samba.org>
+   * BUG 14358: docs: Fix documentation for require_membership_of of
+     pam_winbind.conf.
+
+o  Martin Schwenke <martin@meltin.net>
+   * BUG 14444: ctdb-scripts: Use nfsconf as a last resort get nfsd thread
+     count.
+
+
+KNOWN ISSUES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.13#Release_bl=
+ocking_bugs
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/rc/
+
+The release notes are available online at:
+
+        https://download.samba.org/pub/samba/rc/samba-4.13.0rc2.WHATSNEW.txt
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--xHFwDpU9dbj6ez1V
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCXzZS9AAKCRAoaL1+KxeT
+UTE/AJ4icYL49/fvwFeepkXT0C1goV545gCgnayAY3ofZrkW9RlxupP8nv8hy5o=
+=7FPE
+-----END PGP SIGNATURE-----
+
+--xHFwDpU9dbj6ez1V--
 
