@@ -2,58 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BCD1B24680A
-	for <lists+samba-technical@lfdr.de>; Mon, 17 Aug 2020 16:10:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AD0BA246DC3
+	for <lists+samba-technical@lfdr.de>; Mon, 17 Aug 2020 19:13:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=PfeG+YW+MwilzqSDm9jlVQh/pHElv94kwk40IZch1DQ=; b=GQdz1ArNt7QvRiqPx2deo5seRi
-	JBrjYEZcme3Ztvrbx8ZzUjyfW8xoOfH3Jo8qHpyfSGvOLgy2JruBFoEUE/bfY423I+b5Etp7Bx76N
-	8Rj+lbSuy02rZN3CA4fHZnQwj/Uy957JRuWwBrm9jmMhGhJLH1fFJ26t1wUZruJq2d4L2X/hIuLBj
-	oao53QZJdUEqQQ9G60uazF1b8Kp4Wku1rMHR21pAKuLetw9c2ulWxQstIDOYeMMHNejJ/Eh2y8EgQ
-	AbD6rtZ0YkHIQg6D/82VOp8X/5R1CBiDK7SY0nhAUV/o0elX0KVo9ZR36bRg5xGTDwINNbS+dceMw
-	qEgUvAWQ==;
-Received: from localhost ([::1]:21704 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=oAP7hYHbdXYpDT9l053NmAYwwsJ+zUP6K6Qg6CJSdbA=; b=XQn7Oeth2wiyxJO446v7XYqzPu
+	g/3tUChp05346vzukensYjDfEjKmuVfHZYf+Wg06Uy6VVL2zjotCh1tL7kS0DSLEzb4XyUoP0vHV5
+	QWldpBMgwNDSE0tIxXHEPYSaJc8Dwcw+7jmqdzooH+BZ0nOghVYvQ8+2SAYUtfkxWUDVQEsryKIyO
+	wPEs3qNHPSZFsp+eCAZ6uX3f95r9NruZobUOsp/K0XaqfMe4c2+y3qI2085zLjuSTpnQilqEqgTjv
+	O2xhHTTyJp3teqQXJw+s3lKsl6k0Q8P57llI1Jj+/dDZmRJAVZ8h2inDWu7ikzjQ3pXCmXAvEjyTU
+	txRzIGNA==;
+Received: from localhost ([::1]:29740 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1k7fpV-00E7dT-6u; Mon, 17 Aug 2020 14:09:41 +0000
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e]:33991) 
+	id 1k7igg-00E8vs-0z; Mon, 17 Aug 2020 17:12:46 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17918) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k7fpP-00E7dM-WB
- for samba-technical@lists.samba.org; Mon, 17 Aug 2020 14:09:38 +0000
-Received: by mail-ej1-x62e.google.com with SMTP id o23so17941105ejr.1
- for <samba-technical@lists.samba.org>; Mon, 17 Aug 2020 07:09:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=vliBerlUyg76N+Rl/94UKS1XCb/uMRpWJTogL8PilX8=;
- b=Q4uCb0djfN9lImrUGFL7sQLA7vFyqhYU0gpQpUSNirlC69jtuzxH/yXLyQxJ9YztKu
- t7yEiXoWpSqqZnvuCf5b/K8x9stu1OjuRJJIP+tNxwEgrC0IwO8hW5AJ1cWBJddV7SYo
- N6Oe4DjLwjKYA1lSkkTCEauEr9+5n5YFnrG35ip30XGUoN5rIaU4QZZblSAMwfiMD9L8
- CIVmKmgoeTzwtioy92tCp1eT5+HOz4NR52knOyCe69HCvvdj5eGZW+X7+nr3ZH3qQon1
- sJPzV1Hgu5Cyd6oQlqe1xd9rHjApafi/Eo8XHhTH16p/u+t8YBqjUBR+2UkzER+azi+6
- svJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=vliBerlUyg76N+Rl/94UKS1XCb/uMRpWJTogL8PilX8=;
- b=ZeH90d54m7kJSnKNcpvGN0z4PtyM6PGrcrGkUwlFDztRNygW9eLzFIW/hDh3hipDrh
- gsB0UxfRIkDjdJP/4+zUo0rDQVhMLF+pFqwCOqjrWbhj6FSBIsThcL3ylW6ZhGi9z4PF
- NM7v7Nyj+weFs/GNW7b5oxb1smTJEVHezpT0eb9UqkmeP+91teCFjJYCXNvUmyW4Swvm
- J6hGPKDHDHM1A9jvWM9a3QD5DWw/WwgTVfPp39PobEHuodkSxru2S6m/weXYyy59Ujqb
- Y+HyaaBq4r8IN1qICFgkDekRM6Ly1nVHYh4O6Fo9bXAtkbi0SGfvcdDd2bS0zsGJzZyR
- QSYA==
-X-Gm-Message-State: AOAM530Lc6JdWB5InewrLy9vW4mLSRD2ip9jY3ECSea7Fqfg9ClHIyq8
- +2jg3jnc0sDElPIOm8qNIJU0Veb6Kz4amwHhsm2UGOr2GMl7lw==
-X-Google-Smtp-Source: ABdhPJxsicllGaZ6oTlYK/zD4qg6X3JABd/hZ6qMKB2B8mIAz7u/aqCsFDEcF+6Mxspp/h2OhYKbXvZgj8G2sVz0qsY=
-X-Received: by 2002:a17:907:2712:: with SMTP id
- w18mr15137703ejk.473.1597673374284; 
- Mon, 17 Aug 2020 07:09:34 -0700 (PDT)
+ (Exim) id 1k7igb-00E8vl-Pr
+ for samba-technical@lists.samba.org; Mon, 17 Aug 2020 17:12:43 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=oAP7hYHbdXYpDT9l053NmAYwwsJ+zUP6K6Qg6CJSdbA=; b=G/i9Q5KwIop/awO8OyH7W8zMLh
+ RAAkiSx/wL59m3MG5qYSEutEYqD6BosP5vHcSGYBzJvPzbp2IWMCd1oQH90Qj92/03SarlNOwMom4
+ 0vbqLk7BT22/1su5osOvDpCPvAQrF8YzeqnFBKVdzX4VnHIbYWI+cuz7GxlAtE9GzMjjRbzVeuftK
+ LcB6t1hY+/RYf7syNKQc+v6Eitmsb2zOiUNXGh31VTfVZ3td2GEVn36fNfkqt7GHzCfMqFp2N5fcs
+ V4yug5gVb81d4uN+1BDtoq6CVDaifXp1pm225YHizlwxa5aH5x3n0fOn2CsrG63BMh2iEqLnCwdCR
+ eiYzRkQCgOY70TZb4JZIwFhIRFLKFu17hma19CGtZWObvHsNp++Dm+/IVfSkUe9daFNSub0+quvhU
+ I58PbY7YQdNl+3n0L7SS1dvSEjWcQfp/vI9Qoo/qBW5na3FbjhGOaRED8xaQRKc+g5zf3wno5K96G
+ K03gntB5r93qVtF6RlYIjWxr;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1k7igZ-0004po-PW; Mon, 17 Aug 2020 17:12:40 +0000
+Date: Mon, 17 Aug 2020 10:12:34 -0700
+To: Matthew DeVore <matvore@google.com>
+Subject: Re: Creating a VFS backend
+Message-ID: <20200817171234.GD10362@jeremy-acer>
+References: <CAMfpvhKQKyvzEgsyEPChU1ectmsbPeGiGKEHF2v=5hR+jC1GCQ@mail.gmail.com>
+ <0f42582a-eee8-5e05-a55a-1f1c80f11845@samba.org>
+ <CAMfpvh+VFgk6f2Gem0FetU+TfZ8wzVhzOaAo7bwPkNRNozT+FA@mail.gmail.com>
 MIME-Version: 1.0
-Date: Mon, 17 Aug 2020 05:09:23 -0900
-Message-ID: <CAH72RCX3G1ZLP8Gvm0ATgvnvJ+p2t2a8rtOtiZ4HRAWPggFXsQ@mail.gmail.com>
-Subject: GSoC Progress Update
-To: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>,
- Abacus <hello@abacus.co.ke>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAMfpvh+VFgk6f2Gem0FetU+TfZ8wzVhzOaAo7bwPkNRNozT+FA@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,15 +57,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
-Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Stefan Metzmacher <metze@samba.org>, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello everyone,
+On Wed, Aug 12, 2020 at 02:10:47PM -0700, Matthew DeVore via samba-technical wrote:
+> Fortunately I was able to figure this out because of a private reply
+> (which I only just now realized was private). The salient advise of
+> that reply was to set the debuglevel to 10 and look for
+> STATUS_NOT_IMPLEMENTED in the log output. After I did that, I manually
+> traced some code path from the log message to see it was attempting to
+> invoke createfile. I didn't instrument or log createfile calls at all,
+> but had them return NOT_IMPLEMENTED, because I thought createfile only
+> referred to making a file on disk. But that's actually used to open
+> files as well. So after I replaced my createfile function pointer with
+> NULL in my struct vfs_fn_pointers, my backend's get_dos_attributes fn
+> got invoked, since the default implementation of createfile does that,
+> apparently, when a file is being opened. So I'll proceed by
+> implementing get_dos_attributes.
 
-Over the past week I worked on the Debian distributions (Ubuntu 20.04 and
-Debian 10) packaging for the project.
-You can find the instructions for installing the latest plugin version in
-Fedora 32, Ubuntu 20.04 and Debian 10 here:
-https://gitlab.com/HezekiahM/samba-ad-dc/-/blob/master/README.md
+Yes, CreateFile is modelled after the Win32 CreateFile() API
+call, which is the generic call to open any object (IPC pipes
+as well as files and directories). Clients will be unhappy if
+SMB_VFS_CREATEFILE() returns NOT_IMPLEMENTED :-).
+
