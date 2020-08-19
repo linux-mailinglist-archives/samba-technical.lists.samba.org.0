@@ -2,78 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4260124A4F7
-	for <lists+samba-technical@lfdr.de>; Wed, 19 Aug 2020 19:33:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4C7D24A5AF
+	for <lists+samba-technical@lfdr.de>; Wed, 19 Aug 2020 20:13:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=h+DnQemBJIqMDQUFL4GRD8PCmYCbyE5qFlpG0/++/FI=; b=6J/+19+PzrbTx5AXhJJ6m08uGa
-	9xl4hkyEFMgTrYWKL+Ecqx+AmZp+RxSBcPuQciAzcQXBZbRmPZAVh4uW0CMnZzEOJWsnO+BaoaHlt
-	JTUu10ykgKvjnLcmYPoyOSA9UcF6J2ow545vBbivzH2mBxHzBL2ODYN/Ghv/53i0Rw40jUEspO04L
-	xzuFE5NkGirvHWpwm0Mgc9siItjysYGTgp/muDb6Lkq5gmA8aUTJVwG5gdOEH/eRYdBbZUOeULHQK
-	ArTMD3+r+Iile9gKTZRyqgGF2ZF8bqGdqPB0gIxsEpqCYcDBxPDdv5Y3eRb8jRrVlWjyO8qst1BmU
-	1WWAbM5Q==;
-Received: from localhost ([::1]:30676 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=ywL5nOzXlwt8EqE3rYZ0J3o5E6+He4eWSu52aBO51IY=; b=kPp97z18faeIWA/KCNU+sFxDAc
+	X5ABtWMudjvhflpUAv7NA3WTkQThpVtB3kLnVUHDz6bfY1DzfN9ZhnTOyeLZHHREZ7hSPQB/1Xur/
+	mc65WmmU8euRTpdZSQYnflMIngA1ne+2GH+14iHVZwq5o/gr7jJ+Q1BFyeQPYiAdnaoHSs40TMpRY
+	2QrppWr2FlB/PaeUpJ/W4R3DCHggW6QDfZ74+74a0hCw5X7On4BSSZx4csxpiCjMu09lhbaUHGLg/
+	7CSTIKQqTX3TTN51m1oHehtTWQQjZ92GHQKx52PEg5zHuanMoJeXtnOxkwpmi+3gmdXJjBxVt6E3k
+	JrfR+Gzw==;
+Received: from localhost ([::1]:31566 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1k8RwI-00EIhH-Vx; Wed, 19 Aug 2020 17:31:55 +0000
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:46469
- helo=us-smtp-1.mimecast.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1k8RwC-00EIh9-1j
- for samba-technical@lists.samba.org; Wed, 19 Aug 2020 17:31:50 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1597858298;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=h+DnQemBJIqMDQUFL4GRD8PCmYCbyE5qFlpG0/++/FI=;
- b=MQ4yCubDktATeRyAgikoN2mwNV+TmuL2hStdT2EF7Aox83Qges517NlVCStaJEvPsWY5Pu
- BnWY1PKwlkE7jR5Yhun9c/+/NW7rhZa8TcCHHcc/++Tbn7+zKIZ1Ma5io1uc99Wge8pBEW
- p7EReMFbXjWMA6e/tIRyPU4Uisj1b1g=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1597858299;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=h+DnQemBJIqMDQUFL4GRD8PCmYCbyE5qFlpG0/++/FI=;
- b=L6UZKM/WleLe3WK6Gd3gcJMEY8gNYXfMyiozYGe8JEkWPGYBuJ7TOWUArYlS7qPY9RHTJU
- u1yU+2R7LB9d2m/WI+06kCULiMeQPtsRnJB7r7HO1u2/2yt/zfC4TolZF8m0AWaNrB7eTt
- U3qL0PbcOH3VtQoDV0bYFRnflTltNGs=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-439-W5EI7cs9MOuGfJyrFO9Uzg-1; Wed, 19 Aug 2020 13:15:15 -0400
-X-MC-Unique: W5EI7cs9MOuGfJyrFO9Uzg-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D3EEC64081;
- Wed, 19 Aug 2020 17:15:14 +0000 (UTC)
-Received: from pbrezina.my (unknown [10.40.192.83])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2836F5F9C0;
- Wed, 19 Aug 2020 17:15:13 +0000 (UTC)
+	id 1k8Sa7-00EIqe-05; Wed, 19 Aug 2020 18:13:03 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59416) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1k8Sa1-00EIqX-E9
+ for samba-technical@lists.samba.org; Wed, 19 Aug 2020 18:12:59 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=ywL5nOzXlwt8EqE3rYZ0J3o5E6+He4eWSu52aBO51IY=; b=Nf2Jw15Ev+ylZmNm2IZ678LqpV
+ dCC+hq0gzGpWnzMyy35MrKxcziMdL4n4X/xf9ZjLK5YSm6fG++rCB7uIJFWEm3qAKfPI/IWdAsaF/
+ 6P0jqmV2Bas5kB/O531HaBnBm6hwpcc78+FHYB/IAtVc6aK/FB0aCAvjJhxLJkjU+H1opLqAXMrK4
+ bodff2EYTgSY7AUtvEK4m8tAwPfZ934mf4l47+Ec8kfPkFVR4h1tFjzi4HG6dv789E5sgQwvoThHR
+ Q+oWAsVCMDheFLbQGgwK8Q0EYm7acCYzlQjBCxM6+JbPrbqf/vagdsv12UgdxlCYfpgSgLLtLE5rr
+ CSoZ5Rd/Ur0KZ9wrhUlm5lYW3UDqu0+GzhMI5MUCTxLv2wT+PO4v1U0RarIrzkbQuKGUfjOkMie7J
+ N9BNjCVaKPk20QtoZhlUH8DmMHo3dyhVGXWVmfagcWIXge4MwtUmiJBvB6KdNsuI+5C7KszM4A3Vl
+ 2JgVudkIAJsBd6ci3lH+znI2;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1k8Sa0-0003eo-1b; Wed, 19 Aug 2020 18:12:56 +0000
+Date: Wed, 19 Aug 2020 11:12:50 -0700
+To: Pavel =?utf-8?Q?B=C5=99ezina?= <pbrezina@redhat.com>
 Subject: Re: tevent: fd events do not work correctly for UDP socket?
-To: Jeremy Allison <jra@samba.org>
+Message-ID: <20200819181250.GB23121@jeremy-acer>
 References: <6c7d3f9b-240b-c022-2672-7dd493922050@redhat.com>
  <20200818163118.GA8897@jeremy-acer>
-Message-ID: <84f904bf-0a67-4595-2ab0-de4fa021a7a5@redhat.com>
-Date: Wed, 19 Aug 2020 19:15:13 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
+ <84f904bf-0a67-4595-2ab0-de4fa021a7a5@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200818163118.GA8897@jeremy-acer>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pbrezina@redhat.com
-X-Mimecast-Spam-Score: 0.001
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Warn: EHLO/HELO not verified: Remote host 205.139.110.120
- (us-smtp-delivery-1.mimecast.com) incorrectly presented itself as
- us-smtp-1.mimecast.com
+In-Reply-To: <84f904bf-0a67-4595-2ab0-de4fa021a7a5@redhat.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,67 +58,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Pavel_B=C5=99ezina_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?Pavel_B=c5=99ezina?= <pbrezina@redhat.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
 Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 8/18/20 6:31 PM, Jeremy Allison wrote:
-> On Tue, Aug 18, 2020 at 01:46:09PM +0200, Pavel Březina via samba-technical wrote:
->> When I connect to a port over UDP and nobody listens on the port tevent
->> fires immediately read fd event even though there is no data available.
->>
->> Simple reproducer is attached. Just run 'make && ./client' and see that
->> read_handler is executed immediately. When there is a process listening (nc
->> -ul 3333) the handler is fired only when data is available.
->>
->> This probably boils down to epoll_wait but not being an epoll export, I'd
->> like to ask if there is something that can be done about it or if it is an
->> expected behavior.
+On Wed, Aug 19, 2020 at 07:15:13PM +0200, Pavel Březina via samba-technical wrote:
 > 
-> Do strace ./client to see why this is:
+> I see. If I understand it correctly epoll returns EPOLLERR and the code hits
+> this [1] line?
 > 
-> The key is here:
+> > I don't think this is tevent specific behavior.
 > 
-> write(1, "File descriptor is readable!\n", 29File descriptor is readable!
-> ) = 29
-> read(4, 0x7fffeee02750, 254)            = -1 ECONNREFUSED (Connection refused)
-> 
-> Your connect call succeeds, as it's setting up the local
-> binding to the remote address, but as it hasn't sent any
-> data yet the client hasn't noticed there's no one listening.
-> 
-> Once you do the:
-> 
->       const char *msg = "I AM CONNECTED\n";
->       write(fd, msg, strlen(msg));
-> 
-> call then the kernel tries to send the data, notices
-> there's nothing listening and so the read fd becomes
-> ready via EPOLL - it needs to return the error
-> ECONNREFUSED (we select for EPOLLIN|EPOLLERR|EPOLLHUP).
-> 
-> So when you call the read() in the tevent handler,
-> that's when you'd pick up the errno = ECONNREFUSED
-> error.
+> If the above is true then tevent should provide way for the handler to check
+> for errors or don't call a read handler on an error so read does not get
+> called.
 
-I see. If I understand it correctly epoll returns EPOLLERR and the code 
-hits this [1] line?
+Calling read() and getting an error *is* the way you detect
+an error here.
 
-> I don't think this is tevent specific behavior.
+Remember, doing the connect() on a UDP socket didn't
+send anything over the wire, it just set up the association.
 
-If the above is true then tevent should provide way for the handler to 
-check for errors or don't call a read handler on an error so read does 
-not get called.
-
-My use case is that I'm trying to implement a CLDAP ping over UDP in 
-SSSD and when a Domain Controller is unreachable the read handler is 
-fired, then ldap tries to receive a reply and blocks until network 
-timeout is reached which is undesirable.
-
-[1] 
-https://github.com/samba-team/samba/blob/master/lib/tevent/tevent_epoll.c#L707
-
+When you do the write(), then you're actually asking
+for something to go over the wire, and then tevent/epoll
+can actually know there was nothing listening on the
+other end.
 
