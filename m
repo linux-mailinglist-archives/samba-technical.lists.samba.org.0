@@ -2,49 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6810924B175
-	for <lists+samba-technical@lfdr.de>; Thu, 20 Aug 2020 10:53:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D571F24B20E
+	for <lists+samba-technical@lfdr.de>; Thu, 20 Aug 2020 11:20:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=5VjCv5XyQICZMRK0gS7kH7lAbDbh+5CcoWr3Ct36xbM=; b=n0jbMfL5HcRFnbZ5icx93HyD5I
-	NlMx2r8POyB070Uom0OyLRSxtJ42J/FqX2CkNrs30WED0VsKCk6NvItSe74+z8KGXoQTFPb3U6UlL
-	jnLczO8QEkParF5H181wMvwuHIMQylfF90qZ2RqxzT4sXzOW7oYBecXbKnN/NbKsMWNscfHqpYjbO
-	+hTEI76GArLPFllyPGJAE+825KtRSKcM3BCL3xeNHlIyrq70Pmkmc+hAzDuoHkGnWvPI+8SWETRpQ
-	Hc+DvNin45B1rem51QgTwT932C+bYz/CmSD7MQJLtlA/F3PB332D7QH4A9Vr+tCGziZ2IFFg/7vW7
-	L/xUr+rw==;
-Received: from localhost ([::1]:19884 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=xi1dTcVU4OZvPGsSrgyXHcL3ymDXWI8nIVYUyFFTwVA=; b=ToHYRhKJJlvEJdpxGiKDzh5yrA
+	e498mT57Z09W16PZlQCfNm+e4x1TOz44nWPpTS6kC2NWlFDyPYx8D3JVbYyUXfCk+VrmZvtK0JV0X
+	PhXUxvd7JS9fTFjfV9s4jqKmjO4DfXrwvMf4/f0jmW8Y7AFgZjBbAl5fjuUDX3k0ktU5XudEyNvPJ
+	AulTeLUSOt6rtxMYLig389cwAAt00H/X0WCst9ioWjgQUrSepJXKGOTDDnj4xA3ca1+wqNuw0Ofpd
+	I4a0PGwIx8Tq1P+o+FqY20t3UDmwgE/vKRqMd+RQyKkOclxPDvRg269T5Ny9uxotOvvQgy4H0jeTC
+	DJhRHIdw==;
+Received: from localhost ([::1]:20652 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1k8gJg-00EOfJ-J1; Thu, 20 Aug 2020 08:53:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48884) 
+	id 1k8gje-00EOnW-0r; Thu, 20 Aug 2020 09:19:50 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60358) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k8gJa-00EOfC-8e
- for samba-technical@lists.samba.org; Thu, 20 Aug 2020 08:52:56 +0000
+ (Exim) id 1k8gjZ-00EOnP-2Q
+ for samba-technical@lists.samba.org; Thu, 20 Aug 2020 09:19:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:Message-ID:From:To:CC;
- bh=5VjCv5XyQICZMRK0gS7kH7lAbDbh+5CcoWr3Ct36xbM=; b=dzC7XNhkKhEb9zbBw9CN/W6VsY
- vWNTaGsAIQRTclVcthImvgeH9xgLbHfLXHg4GzdBikCsZOkThRCq38rmZ8vOZQRjcDZtu+oin1JTY
- m0WYmYNe7itq4oUdzXhHyO0Q/KHMw/Kk/txNgsVLH6lz6ZT/wSgbhumbr1oiFOEOfVCQQX+A8VxGe
- K0dEuUe9jW5LJjsCRGb0UTnGoK/v0mnC9GDv0guNm6UVVpy05T0rEZN+msLIeU7JTuV0KMp36iTO3
- m6e0e3WkvhqyGj/roNdE5p3mnGy2hwDnnc5LFuecNbxkQzR3ApsKeob0eMQyXWdhuBsB7YLXO6mF1
- r2HX1bVhbywcyXb9LJ7LgRHvEkJE2egSDGA5twTG5UQ0kD96TTU39CqX/g6zhr/7HPDpHOiO/vV3w
- Xq7J2WNZDS8jqlUe7DkAAc0Lzq+nhIwwSo9A9z6qgyZYve8tZsECFmvGzm9lJWd59hW7iG4MQKQRe
- 19d3sEPl+XxvmeOzfxYSYkaK;
+ bh=xi1dTcVU4OZvPGsSrgyXHcL3ymDXWI8nIVYUyFFTwVA=; b=VIGCfSofOKPPNRz+deczywi6CP
+ +8OewnvJP2uClu3IYZR2cyiuoXGXCj2EroixPuRGQJxfFl/va6inH5KdMpc+4xSt36VYK2lwxS4wi
+ l+GsIpEsG0mHjeHSLaBT4EW+ZShp6WG44WznOKlebKhMvg3rn44Aw09DB5yx98BiFjVRwPipQSKhJ
+ wV/7NUTT3/H1iWZ0ODCo5auXvSex+0YqG2BT9fNA+73bcmF7jSv8IWx8TwJVT4edplHzHf7N6ejkB
+ PLssypJslT79vlJaQIHoaSvpE3I7K8Seon0XjNySbabJ/Rdg84VBGQTZJCfi4H8ELqV1vm+nbct7v
+ IDKnXRX0AQKyiNaLDnLsn6VTt8q9S/mc6Dt9njaXG1wgGmFqurPGvepRrSOJtO4j4fjzsFgHQuDLU
+ o8bSUUMUCpANPNG4qMpszk9CStzWGhb5jct/KQrWV5bbvtRlWq2ghAq5Wxz0tzUr1UBqY+XACMU7K
+ qcqfdczHnswfRCgJEJTsDSui;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k8gJZ-0002fk-Qv
- for samba-technical@lists.samba.org; Thu, 20 Aug 2020 08:52:53 +0000
-Subject: Re: Problem with login win10
-To: samba-technical@lists.samba.org
-References: <!&!AAAAAAAAAAAuAAAAAAAAANGsRTVhQVFCrPuEPBc7FtYBANlTnCJhprtFudq2LHCBs8EBACQA//8AABAAAAAP5o6qqs81QbZAef/IH8MpAQAAAAA=@prawda.net.pl>
-Message-ID: <4b881fe0-fc5a-bcb4-ba6f-279197933871@samba.org>
-Date: Thu, 20 Aug 2020 09:52:53 +0100
+ (Exim) id 1k8gjX-0002t2-50; Thu, 20 Aug 2020 09:19:43 +0000
+To: Andrew Bartlett <abartlet@samba.org>, Rowland penny <rpenny@samba.org>,
+ samba-technical@lists.samba.org
+References: <3749194.YmznvRLumo@magrathea>
+ <02a8997f-b8c0-617a-2744-c970de255dca@samba.org>
+ <88fea226ef46a6f2dc702c74e413860bd3425ab7.camel@samba.org>
+ <239bf247-b000-511c-cf12-d83a037e3c83@samba.org>
+ <775998ab-6432-2007-7849-19e4c5ced421@samba.org>
+ <e64290ecfa717e4c66b9b41e7bdb64d70d8cfeaa.camel@samba.org>
+ <4c9267080ddc3cc0ab3a20472db4c28135356a74.camel@samba.org>
+Subject: Re: "auto" for Kerberos, a history
+Message-ID: <77d759fc-c299-21d6-fe5f-3a673dd4f834@samba.org>
+Date: Thu, 20 Aug 2020 11:19:32 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <!&!AAAAAAAAAAAuAAAAAAAAANGsRTVhQVFCrPuEPBc7FtYBANlTnCJhprtFudq2LHCBs8EBACQA//8AABAAAAAP5o6qqs81QbZAef/IH8MpAQAAAAA=@prawda.net.pl>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
+In-Reply-To: <4c9267080ddc3cc0ab3a20472db4c28135356a74.camel@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="JFiU4CSV8E80xRAEbJqDVWoNuSl1dBdoh"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,44 +64,113 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 20/08/2020 09:41, GC via samba-technical wrote:
-> Hi
->
-> I have problem with login in computer with win10. Sometimes when I try login
-> I get communicate the password entered is incorrect, in samba logs no
-> errors. I must restart computer and then I can login.
->
-> Sometimes login to computer work and block comuter (win+l), when try
-> unblock computer i see communicat - the password entered is incorrect.
->
-> My samba AD is in version 4.12.6. Users and computer I add in samba ver. 4.8
-> and last I update it to 4.12.6 and then I see this problems.
->
-> Please help me
->
-> BR
->
-> GC
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--JFiU4CSV8E80xRAEbJqDVWoNuSl1dBdoh
+Content-Type: multipart/mixed; boundary="BvRtV8wBIIxGYbiwJPShEVfDprYVQW7T8";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Andrew Bartlett <abartlet@samba.org>, Rowland penny <rpenny@samba.org>,
+ samba-technical@lists.samba.org
+Message-ID: <77d759fc-c299-21d6-fe5f-3a673dd4f834@samba.org>
+Subject: Re: "auto" for Kerberos, a history
+References: <3749194.YmznvRLumo@magrathea>
+ <02a8997f-b8c0-617a-2744-c970de255dca@samba.org>
+ <88fea226ef46a6f2dc702c74e413860bd3425ab7.camel@samba.org>
+ <239bf247-b000-511c-cf12-d83a037e3c83@samba.org>
+ <775998ab-6432-2007-7849-19e4c5ced421@samba.org>
+ <e64290ecfa717e4c66b9b41e7bdb64d70d8cfeaa.camel@samba.org>
+ <4c9267080ddc3cc0ab3a20472db4c28135356a74.camel@samba.org>
+In-Reply-To: <4c9267080ddc3cc0ab3a20472db4c28135356a74.camel@samba.org>
 
-Hello, samba-technical is really meant for the discussion on the 
-internals of Samba, the code. Your problem possibly has something to do 
-with the code, but it is more likely to be a miss-configuration 
-somewhere. This means that you should ask this question on the Samba 
-mailing list instead.
+--BvRtV8wBIIxGYbiwJPShEVfDprYVQW7T8
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-If you are not registered for the Samba mailing list, can I suggest you 
-go here:
+Am 20.08.20 um 10:31 schrieb Andrew Bartlett via samba-technical:
+> On Thu, 2020-08-20 at 20:19 +1200, Andrew Bartlett via samba-technical
+> wrote:
+>> On Thu, 2020-08-20 at 08:53 +0200, Stefan Metzmacher wrote:
+>>>
+>>> yes means no fallback to NTLM,
+>>>
+>>> Should we use "disabled", "if_available", "required"
+>>> instead of "no", "auto", "yes"?
+>>
+>> I think this is a good idea, and consistent (shock!) with the
+>> smb.conf
+>> options.  As you know we already have the following synonum table,
+>> which covers the required backwards compatibility:
+>>
+>> /* SMB signing types. */
+>> static const struct enum_list enum_smb_signing_vals[] =3D {
+>>         {SMB_SIGNING_DEFAULT, "default"},
+>>         {SMB_SIGNING_OFF, "No"},
+>>         {SMB_SIGNING_OFF, "False"},
+>>         {SMB_SIGNING_OFF, "0"},
+>>         {SMB_SIGNING_OFF, "Off"},
+>>         {SMB_SIGNING_OFF, "disabled"},
+>>         {SMB_SIGNING_IF_REQUIRED, "if_required"},
+>>         {SMB_SIGNING_IF_REQUIRED, "Yes"},
+>>         {SMB_SIGNING_IF_REQUIRED, "True"},
+>>         {SMB_SIGNING_IF_REQUIRED, "1"},
+>>         {SMB_SIGNING_IF_REQUIRED, "On"},
+>>         {SMB_SIGNING_IF_REQUIRED, "enabled"},
+>>         {SMB_SIGNING_IF_REQUIRED, "auto"},
+>>         {SMB_SIGNING_DESIRED, "desired"},
+>>         {SMB_SIGNING_REQUIRED, "required"},
+>>         {SMB_SIGNING_REQUIRED, "mandatory"},
+>>         {SMB_SIGNING_REQUIRED, "force"},
+>>         {SMB_SIGNING_REQUIRED, "forced"},
+>>         {SMB_SIGNING_REQUIRED, "enforced"},
+>>         {-1, NULL}
+>> };
+>=20
+> Drat.  Yes means different things between this table and what we have
+> meant for Kerberos. :-(
 
-https://lists.samba.org/mailman/listinfo/samba
+We have a similar table for encryption now and some of the mappings
+are really strange and only justified as most people want performance
+instead of protection.
 
-and register, then repost to the samba list ;-)
+I don't think we need 100% compat here.
 
-Rowland
+But we could use "disabled", "desired", "required" for kerberos
+as the main values.
+
+metze
 
 
+
+
+--BvRtV8wBIIxGYbiwJPShEVfDprYVQW7T8--
+
+--JFiU4CSV8E80xRAEbJqDVWoNuSl1dBdoh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl8+QCQACgkQDbX1YShp
+vVYMtA/+OvepeXqmHmXzBf/Yegz4rLoJEGA2XUNHJVxDQq53NsD6PR+UTyR1d7oQ
+9V2PfYEVi1vDa/+1T3M6JbovQ2X2EmfhqEEa9U+XI4K9D/QFSd2+v6QWjZ1K1/XD
+VyT75KX/oZk2SAEoYfEFGwIvJW5mW/v6X5WRrE22EQ0dIy3dKqL6K87Y7LIzjid3
+AhWEihdI3lW1gUAYHl0lyyE72N5xnmyn67kwpfRa7/kh14/N+/R3vVWlVfLC62NN
+x8lQHYBLXy6K4fdupAZL3D+CKLiX4orQzc8lyt0GIWo8ITLgVFr3ZToJJRIwAjL4
+Sb1msf9XkSAlrdfdNc1wky1/9iIhwS0q/EsTCVb2g3NghMP1xh7E/Skf3bYFlUm2
+HHKmco00Q1tzH2SYEuCFQ/JDuREIFd340RwH+X1RXwGoFlZWBba9uXzsOpUXp9kO
+gnSPoYx19K7r9XsPOrzjTISrC4Vd8HFYk23FQXnAYslQpZwfT5lkgvgsej1h7434
+K0JhxgQKWvJSsqLEMwYQtmnNI5lspvLfAoWAQ4bQOqo5Kx20NZStTmS2JVlMP0ab
+LIBvDWne+AIpRi/49u50J2W2aAA7bOY8l2HNDyDbgabX4qODDWtCgN3eIdUge5VO
+2NxUlh5YYDxc7CufD0VvNnXcrBPT1zEllwMondONipKnLf79HbE=
+=JIiW
+-----END PGP SIGNATURE-----
+
+--JFiU4CSV8E80xRAEbJqDVWoNuSl1dBdoh--
 
