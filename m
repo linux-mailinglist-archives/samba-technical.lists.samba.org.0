@@ -2,48 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41B7624BF66
-	for <lists+samba-technical@lfdr.de>; Thu, 20 Aug 2020 15:48:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 31FFD24C8A8
+	for <lists+samba-technical@lfdr.de>; Fri, 21 Aug 2020 01:37:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Leb0tNzD1g5nJt/7VeqpkZ1rAlfc+szY4LJdEYjcCoQ=; b=Tf2oZemNWZiKVu8bqM3lmO1CBa
-	QVAcPM3SINmTraUUvL71nkJphbqcDtNkbIekul4xbOgyjESM0ff6FBjZVnUVhI4nWxN7He8rQICGp
-	a0o88PM87AoWepwG7hODyIa/KKEP0de+hzalGMLEGQ0/3AC+jjmGzSfOocba6OdygnNbQvVIBO4wD
-	hj8wTAkgWAE/Sd0Vbu2HT2K179B7AZbaxy8gbRIWXYGPSgWt3Xz8j08yyAC8cutlCLDK2GIuQq2nN
-	8hsD08j+tdhi7j3L1/2rGWuwvKQ51Srh9IuFl+Nh7v4LtrM2W0fF0vBPauvELWIvZtvfo5C8drnTd
-	jxCGNOAA==;
-Received: from localhost ([::1]:38258 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=u+sHvFioM86vRCESRgOd40yOjJmIfnWe2mBRJldmIIs=; b=Y9jwnRhOZusIe83kn8B54ovDun
+	P1mRdAO7lKdY2mmvBur96U+LOigPbp/7ZynTXKf7XUgf3ONRE3pCoo8jr3VClZNNWoVaa7txu2o3l
+	Uo+iG/yaUBQ3Eb038Ba188Icu/rbICwucQSJuB+Sggh+1px9a1upVdnB0DzvT6p4u1SmU2sqYvT1t
+	6oJkfqXzfyGhd1evpRbK6tedvsckLISQsEWTPiGrsblDvaQUpGdZD2G1trpiu8x8FaTJAwo60cczt
+	zoiun8DF+zViXv+1TxZkau5c9i77NeDXAKG45u71RrcV1Y0M17aGW9yEB6x5GYTy1t253V1eiQnwJ
+	ollbRJiw==;
+Received: from localhost ([::1]:58770 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1k8kvA-00ERbZ-Nh; Thu, 20 Aug 2020 13:48:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47836) 
+	id 1k8u6t-00EVEA-OJ; Thu, 20 Aug 2020 23:36:43 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz
+ ([2404:130:4080::4]:53692) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k8kuy-00ERbS-6Z
- for samba-technical@lists.samba.org; Thu, 20 Aug 2020 13:47:50 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=Leb0tNzD1g5nJt/7VeqpkZ1rAlfc+szY4LJdEYjcCoQ=; b=q5YUoZglq4GjUG0XwwFRNZhbIQ
- 0SuyoUqk0pVEDJ4FL/ldlf07La8X6Vgd4Wbza0Wi92fSEMFsv10BUzcdhPn1n9S3XWQ3PA7X1Sg/a
- 3d62DMUUiCjbTyOviGu0K69RiVFsX2sj0O8t5j0KOeahpLu1x8foUmHU8x8L2Lri3bTfQCDot3XYf
- Yvn5a839TrxZNyBz3HK69akRwAppLjTdErrp5eRimgQbczEpX4WGI5b3tW+fSR9s/P23EkEYr9CJi
- uQt5GHQWdY+gLynYDg43b4WZpEhj/fwR5diOzmksdwROvKQ1D8sH7jJetuWvnAFtFZkyWZXF60yDx
- LANzLqzAjPGqKb1DdEfyAPGpJ3rLIEDZpTDVRUxomJxSUvxDWZLt8jJRDOUhgFvt2MEq1M/n+0CqF
- oKh8ElyOLq3rnIVAGooTqfpYZCQ33a9NHVY11kkCE8n4NHfWIoUqsTJPFtzXqMxx3uO90tL6ByE9o
- hDlyqRu9/cX0tjSOfXDLg5j5;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1k8kuv-0004v8-GJ; Thu, 20 Aug 2020 13:47:45 +0000
-To: Andrew Bartlett <abartlet@samba.org>, Rowland penny <rpenny@samba.org>,
- samba-technical@lists.samba.org
+ (Exim) id 1k8u6m-00EVE3-IM
+ for samba-technical@lists.samba.org; Thu, 20 Aug 2020 23:36:40 +0000
+Received: from [192.168.1.110] (unknown [114.23.142.188])
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 065F181511; 
+ Fri, 21 Aug 2020 11:36:24 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1597966585;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=u+sHvFioM86vRCESRgOd40yOjJmIfnWe2mBRJldmIIs=;
+ b=Bl9KaTf8qUoYD6/d3cSQbJzDpgERPig98R0PK6tRdTMq4ET9g7kj3vrfCQMXa6BReAWmu3
+ yGmaM2NanZVrZjykM3FdX63nZih41IL+uRBEp6NxBXgI4wfDGB0Oh5jwJ3PZp8tQMOfRvE
+ YlDce/8wD5hHs1DPZ/PUWVd7SnSa1eH/p7zme3gfJ0scFXu+9ZHbRAhpwN6mpIzU4qogos
+ 4+tQ5rGY45/pbHKLdg7BwPC4oy2s6+lNODOMMYO/ieT1Ve7jzVd13RUX0TrkIISdiCxBoR
+ z+8ya9QQDeH2oFCi1SF/kUbgTLi+IsobLjhWfhWygVHmitt57JVFqU7j3T28RA==
 Subject: Re: "auto" for Kerberos, a history
-Date: Thu, 20 Aug 2020 15:47:43 +0200
-Message-ID: <3725639.4cj2GZs8Sr@magrathea>
-In-Reply-To: <77d759fc-c299-21d6-fe5f-3a673dd4f834@samba.org>
+To: Stefan Metzmacher <metze@samba.org>, Rowland penny <rpenny@samba.org>,
+ Andrew Bartlett <abartlet@samba.org>, samba-technical@lists.samba.org,
+ Andreas Schneider <asn@samba.org>
 References: <3749194.YmznvRLumo@magrathea>
- <4c9267080ddc3cc0ab3a20472db4c28135356a74.camel@samba.org>
- <77d759fc-c299-21d6-fe5f-3a673dd4f834@samba.org>
+ <02a8997f-b8c0-617a-2744-c970de255dca@samba.org>
+ <88fea226ef46a6f2dc702c74e413860bd3425ab7.camel@samba.org>
+ <239bf247-b000-511c-cf12-d83a037e3c83@samba.org>
+ <775998ab-6432-2007-7849-19e4c5ced421@samba.org>
+Message-ID: <90412921-9cbf-cde3-0e2d-539eddb0187b@catalyst.net.nz>
+Date: Fri, 21 Aug 2020 11:36:24 +1200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+In-Reply-To: <775998ab-6432-2007-7849-19e4c5ced421@samba.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=douglasb@catalyst.net.nz
+ smtp.mailfrom=douglas.bagnall@catalyst.net.nz
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,40 +70,67 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Stefan Metzmacher <metze@samba.org>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thursday, 20 August 2020 11:19:32 CEST Stefan Metzmacher via samba-
-technical wrote:
-> But we could use "disabled", "desired", "required" for kerberos
-> as the main values.
+On 20/08/20 6:53 pm, Stefan Metzmacher via samba-technical wrote:
+> 
+> yes means no fallback to NTLM,
+> 
+> Should we use "disabled", "if_available", "required"
+> instead of "no", "auto", "yes"?
+> 
 
-I've implemented that now.
+I am a fan of "auto", as telling the tool "you decide".
 
-I also think we should just have a:
+It is nice for the user because there is a convention, and it is nice for
+the toolmaker because there is no implicit guarantee about what decision
+it will make.
 
---client-protection=off|sign|encrypt
+There is considerable precedence for --foo=auto in command line culture.
+
+The biggest cluster is --color=WHEN, where WHEN is conventionally
+always|auto|never. This is shared by  ls, rustc, rpm, tc, grep, ip, git,
+and dozens or hundreds or thousands of other tools.
+
+While --color=WHEN's always/never is a different take than yes/no, yes/no
+are usually also accepted:
+
+  $ ls --color=maybe
+  ls: invalid argument ‘maybe’ for ‘--color’
+  Valid arguments are:
+    - ‘always’, ‘yes’, ‘force’
+    - ‘never’, ‘no’, ‘none’
+    - ‘auto’, ‘tty’, ‘if-tty’
+  Try 'ls --help' for more information.
 
 
-If you need a more fine grained way you can use:
+A very brief search for other --foo=auto options reveals:
 
---option=clientipcsinging=off
---option=clientsmbencrypt=required
-etc.
-
-We can document this in the manpages for the --client-protection option.
-
-
-	Andreas
-
-
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+cp --reflink=auto --sparse=auto
+xz --format=auto
+flake8 -j auto
+git log --decorate=auto
+git format-patch --cover-letter=auto --numbered=auto --base=auto
+etags --language=auto
+gpg --trust-model=auto --tofu-default-policy=auto
+valgrind --expensive-definedness-checks=auto
+crash --kaslr=auto
+grub-install --core-compress=auto
+mount -t auto
 
 
+Now, of course, I am not saying we want to follow gpg's human interface
+guidelines, just that this pattern will have some resonance with users. If
+the option is "if_available", people like me will be always forgetting the
+exact term and whether it uses an underscore or a hyphen.
+
+OK, so sorry for being late and somewhat bikesheddy. I don't object to new
+more precise terms, but please let's not remove "auto". It is alright to
+be vague, because it is SUPPOSED to be vague.
+
+cheers,
+Douglas
 
