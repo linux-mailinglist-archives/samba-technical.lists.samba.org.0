@@ -2,49 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF98A255084
-	for <lists+samba-technical@lfdr.de>; Thu, 27 Aug 2020 23:20:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D94F6255087
+	for <lists+samba-technical@lfdr.de>; Thu, 27 Aug 2020 23:23:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=VNarDLgMindr84ZMqjDpGdFvou8WlauxckV3fJM+Ah0=; b=nL6QdkwTrficPHXWdJ79RkdoB9
-	OWoqZvDj/l6t0PIAagVznRfnTUbrgitGAVCs2lu0sWzAISnS7rF7IcqoHzEEgtzie7I+rHbgbX/Z5
-	OU2y8WZLUqMoikG0BeuR1ljA/cBcRbVi26CiR9v7bnDy4cpTvHBnlwGIbbKtWgfrKp0SnZSyD2LdC
-	n/cX7Q1tqaT/8hlnHdCusvEZcpkNhaZIAqKjJJlMBg1Utgim4pQMUk1D6YCIk33njKeDIwxPoMmSC
-	NyEliQ1Bp+V1qfLscLgF4jNpKEkdOvk3/+5aQfgh6wQBaSkS2/aXNwm9cldKGPqsUht+FvNp+CSta
-	+W6NxVlA==;
-Received: from localhost ([::1]:59582 helo=hr1.samba.org) 
+	bh=67h03JMfDe8NeCk7XOsR9ptxMacWa8GCvmqrS0RlVrQ=; b=CM/owVMxiz9/Nv6ZqDLOh6VT9z
+	RT6RcTMJveaOg8OItZ5DySe6hqtTBEYVGhdeeseEoxP0Z/9YTqDuFVE4nmoMTZbPCP0EwXX2HYhJ+
+	4HeUK9uT/5Wa6oW5PgQEensVWhcJtVOt9mD+UFmwzaOz+bpFDOKbP3ZD02/i00jG9VMbgwP4WKD+I
+	GIC34iVDHof6A6Pz7zry4onW/xjZ3HFOAmKMWBuXd3nGnozTG1Ay9unt+rgc1Py7mZE7egXEsaOdd
+	QRa4xsLvBUQmuuOZwYYVT6ghVhW1yFjmPIYQ8ScGsI2LiY3imr0fKwfOS+V9GNPvhyLzZ3+a7KJG3
+	C9qfAA5g==;
+Received: from localhost ([::1]:62556 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kBPJr-0010FW-5Q; Thu, 27 Aug 2020 21:20:27 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31980) 
+	id 1kBPMt-0010db-3e; Thu, 27 Aug 2020 21:23:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33258) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kBPJl-0010EJ-4l
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:20:23 +0000
+ (Exim) id 1kBPMm-0010cq-WE
+ for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:23:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-Id:Date:From:To:CC;
- bh=BO2WL5K2oT3BzXGDs2zodVMkw5sTqoUc0OTdco2QkuE=; b=fgmWhTGGcwu7TMA1p8pMuKTMBf
- J58/m9LpRWgFSiWLDwhdpqZM+ShcBMoTUxlYjmVytqpColGY7QlX6/I8Gu6DPySRHzhn1+jJ2U7tC
- P3F2CULL3BNUXOTvd5WoxnEmtpCNZRNdiGSrdO2FLN2FiYoxbOWNy6GkWM1f4+rf+PgryTuDz8EOt
- mNwsLLOpF2i4VY89DYojrKbbZOrCfCxTdYBzWPCX7SOvWujwwRvQs5G3MYtfTz5C1WxI9Bk+MQIp2
- jLV+Tf4vs8lmdewo645ALX0C0jzekNCmHw9PQ2Ah3hRmpSkJznWR2PiK1EoF1TMuKzloIfafUe0Pg
- K1kLnIgJEq9cFtxxmVGQxz98JyQVQIkJwNunA12aL1aolbeacQphCUOj5F5e8sQ52MGG3qll7U5Ql
- 7Eeiong5HXMY5PxOFxv4VOXiovbHDV+cusqlkqS1fso+kDs6cGbe73UwNaxzy4rzVjeA3eGvyXlNQ
- vtFvt6l26EAlrVHpr9yzakep;
+ bh=pruKOZFyEMiXplCVedDBFkOSgoe6GMawmbiiz1sTqmo=; b=hiIhgRxIeZV1xrRf2ovwbQCSvX
+ NPV4A0JMposwAg8b9ugNdHVjDPZ1mi27tG/InBasdHSbjmGiRei5tS4BO1qe7gQbD1nuD/UWJgvW8
+ SA5QJmXgeLiaWVgVBt9vQPvwS7ykbLzDW0gHBB0f04PtEbo1ZVk/daGUY8jsZ+2kMdztC5iiECSxy
+ r9VMFCMlcrnAqUeoq4SBOrfQjuPCuMhgESCtRwf7uXkT0bi+jyS1jqRZ/FXyxplam0wx3eti3sf+6
+ JVluKzre/SXHACexs2pL8h1XZrXkcq/QNtfptQ7V8vMdpCIUShceFoDvq4Fv9YH7xeb9SIYjA3+xy
+ nyp52RetNyE5xtsuY+TYVSrocjFViU1KufEvO4qliF5H/Bx5PZDEjH6M/7t1+xykgB55WYJiIjqBZ
+ VMvxDDkSxHtgdqgXduRsCXG9QOcvw/iniWNvWJkmEhrnkaqnJEKrgWqUVLIlqUGAAVB6Buh0lwPqX
+ UKQX5uMh0kCwtd/sDvSqdl/a;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kBPJf-0004Ce-Do
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:20:15 +0000
+ (Exim) id 1kBPMm-0004KV-Nq
+ for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:23:28 +0000
 Received: from localhost ([::1] helo=hr3.samba.org)
  by hr3.samba.org with esmtp (Exim 4.92)
- (envelope-from <github@samba.org>) id 1kBPJe-006iXL-Jj
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:20:14 +0000
+ (envelope-from <github@samba.org>) id 1kBPMm-006ibl-JR
+ for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:23:28 +0000
 MIME-Version: 1.0
-Subject: Re: [PR PATCH] [Closed]: ctdb_mutex_ceph_rados_helper: fix deadlock
- via lock renewals
+Subject: Re: Add a lttng VFS module for samba.
 To: samba-technical@lists.samba.org
-In-Reply-To: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-216@samba.org>
-References: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-216@samba.org>
-Date: Thu, 27 Aug 2020 21:20:14 +0000
-Message-Id: <E1kBPJe-006iXL-Jj@hr3.samba.org>
+In-Reply-To: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-205@samba.org>
+References: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-205@samba.org>
+Date: Thu, 27 Aug 2020 21:23:28 +0000
+Message-Id: <E1kBPMm-006ibl-JR@hr3.samba.org>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
@@ -67,8 +66,9 @@ Cc: github@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-VGhlcmUncyBhIGNsb3NlZCBwdWxsIHJlcXVlc3Qgb24gdGhlIFNhbWJhIFNhbWJhIEdpdGh1YiBy
-ZXBvc2l0b3J5CgpjdGRiX211dGV4X2NlcGhfcmFkb3NfaGVscGVyOiBmaXggZGVhZGxvY2sgdmlh
-IGxvY2sgcmVuZXdhbHMKaHR0cHM6Ly9naXRodWIuY29tL3NhbWJhLXRlYW0vc2FtYmEvcHVsbC8y
-MTYKRGVzY3JpcHRpb246IGZpeCBkZWFkbG9jayB2aWEgbG9jayByZW5ld2Fscy4NCmh0dHBzOi8v
-YnVnemlsbGEuc2FtYmEub3JnL3Nob3dfYnVnLmNnaT9pZD0xMzU0MAo=
+TmV3IGNvbW1lbnQgYnkgZG91Z2xhc2JhZ25hbGwgb24gU2FtYmEgR2l0aHViIHJlcG9zaXRvcnkK
+Cmh0dHBzOi8vZ2l0aHViLmNvbS9zYW1iYS10ZWFtL3NhbWJhL3B1bGwvMjA1I2lzc3VlY29tbWVu
+dC02ODIxOTg0MzkKQ29tbWVudDoKU2FtYmEgZG9lcyBub3QgdXNlIGdpdGh1Yi4gSXQgbG9va2Vk
+IGxpa2Ugd2UgZGlkIGZvciBhIHNob3J0IHRpbWUgKHNvcnJ5KSwgYnV0IHdlIGRvbid0LiBUaGUg
+Y29ycmVjdCBwbGFjZSB0byBzdWJtaXQgdGhpcywgb25jZSB0aGUgbWVyZ2UgY29uZmxpY3RzIGFy
+ZSBmaXhlZCBpcyBodHRwczovL2dpdGxhYi5jb20vc2FtYmEtdGVhbS9zYW1iYS8NCg0KCg==
