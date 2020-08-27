@@ -2,48 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FA3A25508F
-	for <lists+samba-technical@lfdr.de>; Thu, 27 Aug 2020 23:28:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1F1925508E
+	for <lists+samba-technical@lfdr.de>; Thu, 27 Aug 2020 23:28:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=aLfRMDYaA06S85zYS8j9X7ZqbZR9lsSLJD7qSl7byhQ=; b=QSSAaSgVq8mMFnK6KmPT5d2FvA
-	ehLqjgOYUHpKuxCDmEavTu/ylkW3wYP/LMQ58Is4LOHLf5pwLU4hVyPIZUpZoyC0haFZNGX7M+hYd
-	B43/SRNb4m0KL+oygv7FNB69K42RgwXK4S8hnb/blB9mv2BNZGb/e2xMmEWCTa3BUi7QyETjVh+xm
-	/HWwrct+DJeWTSVD4+2kTMzI1kX24n17TFr4w4zNj+DEobqD+achx2+Bqq5xJvfBpHAbHHruVxNi1
-	9+xVe8/hnC4seQYkFw1qfiRWUHK3ifQ0Oclg3O72SrG+jEwbD36hKXc9rqBu43DUKXIpwVTpSRPoV
-	4J9ClgQg==;
-Received: from localhost ([::1]:64032 helo=hr1.samba.org) 
+	bh=r5tRqPy/ZH2Pu3HUGCuP2GWzw43vjQkTcX3DUWhcXto=; b=rW3hvFGmae4zCZNZaYQio7EL3i
+	pzFMygHhegctCmw47LLojJHA1WDaPPAFWBGI1HAQyi8/0JslaIKj4aI9h+24SujifNk+hyQrpgwwh
+	ebT1fUbSTz3RevkEXHtoetGuV44oAHB6dGOt+UOzvW+jmQslwQqVj6ZH5uL7Z5GeV6Tcg0p1IQtGN
+	y7c/TO9ApqERRxqh4Q9tA6SalXeA7+MA9XomU4oi8dlTcjYCQ9TO9gS/0QsI8TCalvsN8VEcTAGPe
+	gWdn2thUiIyosGfa5RmuW4foDKpcnFBkFKYa0OwixccAby5OQ3Q/Qc8KaRPtiTPare+aqFLdLyGcw
+	b2Oxx43Q==;
+Received: from localhost ([::1]:64098 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kBPRk-0010r8-US; Thu, 27 Aug 2020 21:28:36 +0000
+	id 1kBPRn-0010rt-L0; Thu, 27 Aug 2020 21:28:39 +0000
 Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34686) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kBPRg-0010qz-0J
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:28:34 +0000
+ (Exim) id 1kBPRi-0010qz-Cs
+ for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:28:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-Id:Date:From:To:CC;
- bh=RbLq9GD4VsKm4nNnPbg1MjybxC9Em2SoKk8fi4V/R9s=; b=3fo4L7PAJEHXM+iYbbk7NxHhm0
- H/4UPam2k+If6+RexhY/jeFo+CqDorqXDqRE/7H0IZ2luZb5EB/vfu1btPuAWXABimGGPNwNu7MJJ
- OeALf1ykMPCuIfZAj5q6wqhX354lmw9gkgrpD85QIytnkyvspERRZAG9t2sticnQll6rm3kKxgFYw
- RETQXOXybzkWSUa4cagIZBoBuqNS3KoTPoZklbT+ZypXXZGY8ZYq4mtxkY4Zp8EaH5A/y4voUj6hn
- ozIJDtbSR8+sxBC6HalFdY69/zeUWYcbUibW3+PwWuT+JbmkZBsanHDyFlI6sFi2LtTeWxYO03wr2
- fWC3P3QFXkQqY6mTDxXRGLIO0u2oOeKnK4I2TnKYNVJxSb+moHole0Dhdzszs3mW0bKKouq6CwqgV
- RibrCx3uwHEYvDF0KzVH4A+GhG8lWnG5+2iY9EnY3/HQJVIGI1kX7obc7qYHw+KjpdKDrZmanx7Fl
- qXvoI6wVcirixzgaM3I+ikw/;
+ bh=immw3sWvaoJy5nFeLFCfRjqFWPH3fMlK/Wb1jXQyD+0=; b=vO2fCRzn3BHx54CaWIWkNNexIP
+ v307A3dTIHyNDmOrnylMGeL8vKDXHG3hHijWJnzw8Pd9r5gBq8cn2BG9VdOhWCJB5TsMMzvdFHLeJ
+ khJu1ZuAK+Wkis5n+PowTLg3QAwh+BxBNvCmbW+lg0bUOWSKmfT8cJ6VHnwpBBvZ4HooAsm2MfoOh
+ jE8vQsA/XTFGQlmJyHqchFqGhHIYt7NwiZrQCgSm/pzdoTYSeP+M7o1xSPuscx8TGQtbEnqOBswiZ
+ LznwsO4Fv+SZStBLBjtqswT9InjHoWq06iCYBsGw2IrUKgsHOfMk9p4WTG8dJfEnBx1/ZScAevJFc
+ YKUnTNPP8FmsVkC0KPKwNbUdSGHBks/QZTCCFjLAG3JYtB48da1xa8xDU27h4XxSjD+mEvOE5xq0D
+ zY+gGsw2exVQJQ6wI04XbdvwfQP9EUV1XlHbI4h7BCtvAeDg40JyOH/DbxDNSybc0y86m2f8UseFI
+ nLyevuTXmRFWf2nILLiJrjaP;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kBPRf-0004QW-PC
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:28:31 +0000
+ (Exim) id 1kBPRg-0004Qa-1q
+ for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:28:32 +0000
 Received: from localhost ([::1] helo=hr3.samba.org)
  by hr3.samba.org with esmtp (Exim 4.92)
- (envelope-from <github@samba.org>) id 1kBPRf-006isB-Kr
+ (envelope-from <github@samba.org>) id 1kBPRf-006isE-Uo
  for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:28:31 +0000
 MIME-Version: 1.0
-Subject: Re: [RFE] smbstatus -L does not resolve UIDs to names
+Subject: Re: [PR PATCH] [Closed]: [RFE] smbstatus -L does not resolve UIDs to
+ names
 To: samba-technical@lists.samba.org
 In-Reply-To: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-202@samba.org>
 References: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-202@samba.org>
 Date: Thu, 27 Aug 2020 21:28:31 +0000
-Message-Id: <E1kBPRf-006isB-Kr@hr3.samba.org>
+Message-Id: <E1kBPRf-006isE-Uo@hr3.samba.org>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
@@ -66,9 +67,17 @@ Cc: github@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-TmV3IGNvbW1lbnQgYnkgZG91Z2xhc2JhZ25hbGwgb24gU2FtYmEgR2l0aHViIHJlcG9zaXRvcnkK
-Cmh0dHBzOi8vZ2l0aHViLmNvbS9zYW1iYS10ZWFtL3NhbWJhL3B1bGwvMjAyI2lzc3VlY29tbWVu
-dC02ODIyMDA0MDIKQ29tbWVudDoKQGFtaXRrdW1hcjUwLCBmb3IgdGhpcyBQUiB0byBnbyBhbnl3
-aGVyZSwgeW91IHdpbGwgbmVlZCB0byB0aGUgYC0tcmVzb2x2ZXVpZHNgIG9wdGlvbiBtZW50aW9u
-ZWQgYnkgQGNyeXB0b21pbGssIGFuZCBzdWJtaXQgaXQgdG8gaHR0cHM6Ly9naXRsYWIuY29tL3Nh
-bWJhLXRlYW0vc2FtYmEuIFdlIGRvIG5vdCB1c2UgZ2l0aHViLg0KCg==
+VGhlcmUncyBhIGNsb3NlZCBwdWxsIHJlcXVlc3Qgb24gdGhlIFNhbWJhIFNhbWJhIEdpdGh1YiBy
+ZXBvc2l0b3J5CgpbUkZFXSBzbWJzdGF0dXMgLUwgZG9lcyBub3QgcmVzb2x2ZSBVSURzIHRvIG5h
+bWVzCmh0dHBzOi8vZ2l0aHViLmNvbS9zYW1iYS10ZWFtL3NhbWJhL3B1bGwvMjAyCkRlc2NyaXB0
+aW9uOiBUaGlzIFBSIHNob3cgdXNlcm5hbWUgaW5zdGVhZCBvZiBVSURzIGluIHNtYnN0YXR1cyAt
+TCBvdXRwdXQuDQoNCiAvdXNyL2xvY2FsL3NhbWJhL2Jpbi9zbWJzdGF0dXMgLUwNCkxvY2tlZCBm
+aWxlczoNClBpZCAgICAgICAgICBVaWQgICAgICAgIERlbnlNb2RlICAgQWNjZXNzICAgICAgUi9X
+ICAgICAgICBPcGxvY2sgICAgICAgICAgIFNoYXJlUGF0aCAgIE5hbWUgICBUaW1lDQpgLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1gDQoxNTU3NyAgICAgICAgZnJlZCAg
+ICAgICBERU5ZX05PTkUgIDB4MTAwMDgxICAgIFJET05MWSAgICAgTk9ORSAgICAgICAgICAgICAv
+c2hhcmUgICAuICAgV2VkIEp1bCAgNCAxNzoyNzoxNyAyMDE4DQoxNTU3NyAgICAgICAgZnJlZCAg
+ICAgICBERU5ZX05PTkUgIDB4MTAwMDgxICAgIFJET05MWSAgICAgTk9ORSAgICAgICAgICAgICAv
+c2hhcmUgICAuICAgV2VkIEp1bCAgNCAxNzoyNzoxNyAyMDE4DQoNCg0KU2lnbmVkLW9mZi1ieTog
+QW1pdCBLdW1hciBhbWl0a3VtYUByZWRoYXQuY29tCg==
