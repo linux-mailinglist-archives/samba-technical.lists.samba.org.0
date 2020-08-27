@@ -2,49 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 065EA25505D
-	for <lists+samba-technical@lfdr.de>; Thu, 27 Aug 2020 23:11:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D6C725505E
+	for <lists+samba-technical@lfdr.de>; Thu, 27 Aug 2020 23:11:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=1ypO3zfSKxUvar/gya+XibAExz8Yl3+bBxpkn9ydZUg=; b=EBXx4YWfwlLONK36kP9UKTrH0h
-	iLMyiNeE6k5Sf+36VSMsGHur/b8Tm5vop3TXL2iDkWIxurunT+75x6PSKGxufotlBRKQ0QXMal0hw
-	CtpPiih7aNrmdM6CFO+4T8DgTaXeuk4ax2N2KeVxf9YKWt2gleWqCs6svBHKjwFI15zzQjMm8bjc4
-	y/lAEZfPZukYMMH30hilBoxm2764joCZ/jEkC09EZXKEn6nINCgvc7369H8zmdSkQK9UOjcdEMsJJ
-	cR74c4EU0m3yyg5UdiKZR4y8AST/NKTn93rmdFIQiDk8U4yF/I/eq1H9flRBgdVAWlsI7cEau3XhI
-	5mNOSP+w==;
-Received: from localhost ([::1]:56788 helo=hr1.samba.org) 
+	bh=DISJktCwDKYPmDKk+dAUsts/4shP/R8dZWb2wm4CVrg=; b=vbun/qW42HtQtZSwkdVO9gEmNM
+	byheddr51jh3j+FdABxEUKDYfAWrfgSggIur358misPK2B5daHrGqbWfPF4t+FJlzd/ZpWmNn4fZE
+	DXiKrxwqitve4yRdJgrZvsHGjhS25Q7vfvuzFTXApG14YU0ns6Tmift2w904bENAMcakfrl1Bdpd0
+	nrvBB5gh3UmXugKfDncmxU1dXc2kGjQ4B7HcMXkTyanKn5Ij5YJnoeCacuU3QSo8HQVlTQhs1IbOe
+	3TRoYB5kEFvafZvJ0bLkonfz2rZGC/Sgt1VMJomcrZCuxID2M9qfREpCss0hvdfPnQVxjEFrJudYe
+	4KXqsTfQ==;
+Received: from localhost ([::1]:57010 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kBPAu-000zsO-V5; Thu, 27 Aug 2020 21:11:13 +0000
+	id 1kBPAy-000zuM-7p; Thu, 27 Aug 2020 21:11:16 +0000
 Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29614) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kBPAo-000zr7-AL
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:11:09 +0000
+ (Exim) id 1kBPAr-000zr7-DE
+ for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:11:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-Id:Date:From:To:CC;
- bh=DPdXksPBAJ2aQtGevPnWqMnS3RX/Dc9lShclEyKdxvg=; b=UhLCZc96jxn+s0IZJ/thOIxdp8
- +/vloSjF6nIfh5/18xZv0NQss1mI0FnuyWUhu2BWK4Zukxgnxt1BcpP9defsc+w8mTClulp6CHBBG
- OJy6SmvXPusezAZ3R2Kpa6e7m2/P8eq1X2pSWbzJszfkpn+MxpODL3J+tkK0rrnvPfL6bBa7Dokfj
- 3Q0nPRd4I4Oo+5kifDPKnyruzWTQemKGbx9xpF0GXBj5qsw93uZfuPFqu6gGr+coNk4ezNPb7NIX7
- pt3wi7W4DSMFoI2AvsUIRdkDILPgcGKhGRwDdyQ6UNneYR1A9mpymW/Yprty1OyqxtbscEN4ukUmm
- 2L+TMya6es6dM9MrUToMzktdI/8DCNa3MLTkNBxRlvTXcqfbNOZo7zBn6ua+XSrtC1kq6TkXGVVSq
- LKRfd0pJ3ENFKwCcejX7eAOBYPx6jCDjuZwsTVIlbbA7dYsAQeOiVhQbYawwOsyn0OJy20r7MJZDX
- pH+u3u5aq8duPlO5+Q54Klip;
+ bh=nM9r66CEdB9/SXak3xAvHaS2XLJm2u+77CyKT5deOAI=; b=Yjv2aFRRKBE21WWeuUye3WeKs4
+ ykYjKqeMRxrdEDvA/sB6Q7GQW4Qq32J8Bg1/zdX64mnsSmCkyDZdYlM3lxhxhf33peUar0KWsJ8U1
+ KIJPrvjvJn+fLVTv0HfwNRzPtllcFdKmC+nMGe1FXOf9QNirwbZ/9kfyRTg7GnIJ+RHBHKvwI0tR1
+ liFFGmrZBxP7gOC4wSNkZF+A0lA1rWhcNPk4r3Ohgz4PT0Z4kGC+3bwrUmNkjYgs0+di5jeazKUIX
+ dPDkfvZWjQpTh175zKx6C0lW9NMTYtxHW21VLofkF6agkLDekNUsCKH8M7QzORrA3JXF7O6QH2SHw
+ NavfQOkak52hur3N9laqHC5DvWsIoC09h6oCTI8CHpu3irIwwcI2qD/duP9jOi2eMAIFd1bVSOnof
+ bpfEycPT1Rw0bZ4YDo81ZzFeb6phTza+6f3Wx/dAs0VpIJiQ8Iod8yoxCrLOCYeL4RZdxubXwuEEv
+ Sg0rqxzFOZO/jMskhJxhrx6O;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kBPAn-000431-JI
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:11:05 +0000
+ (Exim) id 1kBPAo-000436-9W
+ for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:11:06 +0000
 Received: from localhost ([::1] helo=hr3.samba.org)
  by hr3.samba.org with esmtp (Exim 4.92)
- (envelope-from <github@samba.org>) id 1kBPAn-006i10-FO
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:11:05 +0000
+ (envelope-from <github@samba.org>) id 1kBPAn-006i13-NU
+ for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:11:06 +0000
 MIME-Version: 1.0
-Subject: Re: vfs_retention: add this module to make a share read only with a
- special time period.
+Subject: Re: [PR PATCH] [Closed]: vfs_retention: add this module to make a
+ share read only with a special time period.
 To: samba-technical@lists.samba.org
 In-Reply-To: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-98@samba.org>
 References: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-98@samba.org>
 Date: Thu, 27 Aug 2020 21:11:05 +0000
-Message-Id: <E1kBPAn-006i10-FO@hr3.samba.org>
+Message-Id: <E1kBPAn-006i13-NU@hr3.samba.org>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
@@ -67,7 +67,10 @@ Cc: github@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-TmV3IGNvbW1lbnQgYnkgZG91Z2xhc2JhZ25hbGwgb24gU2FtYmEgR2l0aHViIHJlcG9zaXRvcnkK
-Cmh0dHBzOi8vZ2l0aHViLmNvbS9zYW1iYS10ZWFtL3NhbWJhL3B1bGwvOTgjaXNzdWVjb21tZW50
-LTY4MjE5Mjg1NApDb21tZW50OgpQbGVhc2UgdXNlIGh0dHBzOi8vZ2l0bGFiLmNvbS9zYW1iYS10
-ZWFtL3NhbWJhLyBvciB0aGUgc2FtYmEtdGVjaG5pY2FsIGxpc3QuCg==
+VGhlcmUncyBhIGNsb3NlZCBwdWxsIHJlcXVlc3Qgb24gdGhlIFNhbWJhIFNhbWJhIEdpdGh1YiBy
+ZXBvc2l0b3J5Cgp2ZnNfcmV0ZW50aW9uOiBhZGQgdGhpcyBtb2R1bGUgdG8gbWFrZSBhIHNoYXJl
+IHJlYWQgb25seSB3aXRoIGEgc3BlY2lhbCB0aW1lIHBlcmlvZC4KaHR0cHM6Ly9naXRodWIuY29t
+L3NhbWJhLXRlYW0vc2FtYmEvcHVsbC85OApEZXNjcmlwdGlvbjogQWRkIHZmc19yZXRlbnRpb24g
+bW9kdWxlIHRvIG1ha2UgYSBzaGFyZSByZWFkIG9ubHkgd2l0aCBhIHNwZWNpYWwgdGltZSBwZXJp
+b2QuDQpTaW5jZSB0aGUgc3VnZ2VzdGlvbiBvZiBtYWlsICJSZTogYWJvdXQgdGhlIHdvcm0gZmVh
+dHVyZSIuCg==
