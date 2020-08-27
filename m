@@ -2,49 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D6C725505E
-	for <lists+samba-technical@lfdr.de>; Thu, 27 Aug 2020 23:11:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0B1D255081
+	for <lists+samba-technical@lfdr.de>; Thu, 27 Aug 2020 23:19:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=DISJktCwDKYPmDKk+dAUsts/4shP/R8dZWb2wm4CVrg=; b=vbun/qW42HtQtZSwkdVO9gEmNM
-	byheddr51jh3j+FdABxEUKDYfAWrfgSggIur358misPK2B5daHrGqbWfPF4t+FJlzd/ZpWmNn4fZE
-	DXiKrxwqitve4yRdJgrZvsHGjhS25Q7vfvuzFTXApG14YU0ns6Tmift2w904bENAMcakfrl1Bdpd0
-	nrvBB5gh3UmXugKfDncmxU1dXc2kGjQ4B7HcMXkTyanKn5Ij5YJnoeCacuU3QSo8HQVlTQhs1IbOe
-	3TRoYB5kEFvafZvJ0bLkonfz2rZGC/Sgt1VMJomcrZCuxID2M9qfREpCss0hvdfPnQVxjEFrJudYe
-	4KXqsTfQ==;
-Received: from localhost ([::1]:57010 helo=hr1.samba.org) 
+	bh=OVuK+s+zygl4jI7KQlOMSo8uVQdSqwjZ+KQ4wyiwAKc=; b=Vchm0rq1i959AQX5hSUt0sXnCh
+	VZRw2pEmeJf/qC7LXUD5Edvxoqmz62eEpLMg9ThSffsFUpdoeySGhUy5DRRyCoawxxs7rDf7HM/rb
+	/qLzJ20KJBtV3ImHeu+EBnECENc8Yz97Nc9YbsbPnIyOYYvzznqgwjs7m/YnHiraHzUpcM1rfJxb2
+	VpL0T49H/66CtA2ZILLcVzS9/Kh0j8HQpKuoOoGSMEXj7+qf2iPlUfgQdXYr247GscejKuifyecOw
+	9FLQ4mDiAyIU9fcjwR1szNoxfc8sZPtl2fc6aHHkZdviv/Xe3qyt8As2hqYXTLONn/3qoP9PwTXNs
+	suXgxE6w==;
+Received: from localhost ([::1]:58736 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kBPAy-000zuM-7p; Thu, 27 Aug 2020 21:11:16 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29614) 
+	id 1kBPIl-00108O-9z; Thu, 27 Aug 2020 21:19:19 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31646) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kBPAr-000zr7-DE
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:11:12 +0000
+ (Exim) id 1kBPIg-00108H-Ga
+ for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:19:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-Id:Date:From:To:CC;
- bh=nM9r66CEdB9/SXak3xAvHaS2XLJm2u+77CyKT5deOAI=; b=Yjv2aFRRKBE21WWeuUye3WeKs4
- ykYjKqeMRxrdEDvA/sB6Q7GQW4Qq32J8Bg1/zdX64mnsSmCkyDZdYlM3lxhxhf33peUar0KWsJ8U1
- KIJPrvjvJn+fLVTv0HfwNRzPtllcFdKmC+nMGe1FXOf9QNirwbZ/9kfyRTg7GnIJ+RHBHKvwI0tR1
- liFFGmrZBxP7gOC4wSNkZF+A0lA1rWhcNPk4r3Ohgz4PT0Z4kGC+3bwrUmNkjYgs0+di5jeazKUIX
- dPDkfvZWjQpTh175zKx6C0lW9NMTYtxHW21VLofkF6agkLDekNUsCKH8M7QzORrA3JXF7O6QH2SHw
- NavfQOkak52hur3N9laqHC5DvWsIoC09h6oCTI8CHpu3irIwwcI2qD/duP9jOi2eMAIFd1bVSOnof
- bpfEycPT1Rw0bZ4YDo81ZzFeb6phTza+6f3Wx/dAs0VpIJiQ8Iod8yoxCrLOCYeL4RZdxubXwuEEv
- Sg0rqxzFOZO/jMskhJxhrx6O;
+ bh=kls4U7QtnQqcsa0CaMOpS+Z9+87rV/US/wLp6BZv3OE=; b=trqr5uEDEZWkYAVTLupnpVA+5I
+ X02uGIyJkziIFImxzu71qKAuHNnU4JmfBScRk166mAkqvEx2JTihu8lcnf1S4Nnu2MxSAPJq91tvk
+ KhdGiWP6hYEebjy2Bep0uLM6Dc9zhdE8oB9LivtWoBhX6Z+A1D/uBrONJ4PtU3oMBrS04CfUjV8Qu
+ suV1u9mJ+B7TAtyYWGfxJ8mOrmzJ66jdybixMI4d5JZCuti0QPGZHTvQ3Vu45sdUd8mzau9ONfUI6
+ pfmTELKW73no7jMqqTs+dGhcEuY/DRV8CUViKUEOhfE0Dd9zSVOx0tfLqgVnivihOWiEhqFeePnDT
+ aBekt8oT59181H2ZicN9Voh7g7z+Ch28VdPo5Oyt7vW+aSh5d7f0tYRk8QnECcSYTcC+r3gm/1F2K
+ a0OBjV5/KUH8wdnwFRWjiYNM2bwxWNDDizAeqKGeGxXhFma/0lwub44EOeaQrVxH1waKkytrR9FNQ
+ QQ6n+HJMAGkk5Bw00jFlEPul;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kBPAo-000436-9W
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:11:06 +0000
+ (Exim) id 1kBPIg-00049Y-2v
+ for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:19:14 +0000
 Received: from localhost ([::1] helo=hr3.samba.org)
  by hr3.samba.org with esmtp (Exim 4.92)
- (envelope-from <github@samba.org>) id 1kBPAn-006i13-NU
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:11:06 +0000
+ (envelope-from <github@samba.org>) id 1kBPIf-006iL9-Tz
+ for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:19:14 +0000
 MIME-Version: 1.0
-Subject: Re: [PR PATCH] [Closed]: vfs_retention: add this module to make a
- share read only with a special time period.
+Subject: Re: Fix compatibility issues with the timespec struct
 To: samba-technical@lists.samba.org
-In-Reply-To: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-98@samba.org>
-References: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-98@samba.org>
-Date: Thu, 27 Aug 2020 21:11:05 +0000
-Message-Id: <E1kBPAn-006i13-NU@hr3.samba.org>
+In-Reply-To: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-212@samba.org>
+References: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-212@samba.org>
+Date: Thu, 27 Aug 2020 21:19:13 +0000
+Message-Id: <E1kBPIf-006iL9-Tz@hr3.samba.org>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
@@ -67,10 +66,12 @@ Cc: github@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-VGhlcmUncyBhIGNsb3NlZCBwdWxsIHJlcXVlc3Qgb24gdGhlIFNhbWJhIFNhbWJhIEdpdGh1YiBy
-ZXBvc2l0b3J5Cgp2ZnNfcmV0ZW50aW9uOiBhZGQgdGhpcyBtb2R1bGUgdG8gbWFrZSBhIHNoYXJl
-IHJlYWQgb25seSB3aXRoIGEgc3BlY2lhbCB0aW1lIHBlcmlvZC4KaHR0cHM6Ly9naXRodWIuY29t
-L3NhbWJhLXRlYW0vc2FtYmEvcHVsbC85OApEZXNjcmlwdGlvbjogQWRkIHZmc19yZXRlbnRpb24g
-bW9kdWxlIHRvIG1ha2UgYSBzaGFyZSByZWFkIG9ubHkgd2l0aCBhIHNwZWNpYWwgdGltZSBwZXJp
-b2QuDQpTaW5jZSB0aGUgc3VnZ2VzdGlvbiBvZiBtYWlsICJSZTogYWJvdXQgdGhlIHdvcm0gZmVh
-dHVyZSIuCg==
+TmV3IGNvbW1lbnQgYnkgZG91Z2xhc2JhZ25hbGwgb24gU2FtYmEgR2l0aHViIHJlcG9zaXRvcnkK
+Cmh0dHBzOi8vZ2l0aHViLmNvbS9zYW1iYS10ZWFtL3NhbWJhL3B1bGwvMjEyI2lzc3VlY29tbWVu
+dC02ODIxOTY2MTUKQ29tbWVudDoKQGpvYW5rYXJhZGltb3YsIFNhbWJhIGRvZXMgbm90IGFjdHVh
+bGx5IHVzZSBnaXRodWIsIGFuZCBub3RoaW5nIHdpbGwgY29tZSBvZiB0aGlzIGlmIGl0IGlzIGxl
+ZnQgaGVyZS4NCg0KVGhlIHdheXMgdG8gZ2V0IHRoaXMgbm90aWNlZCBhcmUgdG8gdXNlIGh0dHBz
+Oi8vZ2l0bGFiLmNvbS9zYW1iYS10ZWFtL3NhbWJhLyBvciBzZW5kIHRoZSBwYXRjaCB0byB0aGUg
+c2FtYmEtdGVjaG5pY2FsIGxpc3QuDQoNCih5ZXMsIHdlIGRpZCB0cnkgZ2l0aHViIGZvciBhIHNo
+b3J0IHRpbWUgYW5kIHlvdSB3YWxrZWQgcmlnaHQgaW50byB0aGF0IHRyYXAgLS0gbm90IHlvdSBm
+YXVsdCwgc29ycnkpLgo=
