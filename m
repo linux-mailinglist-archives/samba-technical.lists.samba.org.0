@@ -2,52 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F1F1925508E
-	for <lists+samba-technical@lfdr.de>; Thu, 27 Aug 2020 23:28:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 92D06255139
+	for <lists+samba-technical@lfdr.de>; Fri, 28 Aug 2020 00:37:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=r5tRqPy/ZH2Pu3HUGCuP2GWzw43vjQkTcX3DUWhcXto=; b=rW3hvFGmae4zCZNZaYQio7EL3i
-	pzFMygHhegctCmw47LLojJHA1WDaPPAFWBGI1HAQyi8/0JslaIKj4aI9h+24SujifNk+hyQrpgwwh
-	ebT1fUbSTz3RevkEXHtoetGuV44oAHB6dGOt+UOzvW+jmQslwQqVj6ZH5uL7Z5GeV6Tcg0p1IQtGN
-	y7c/TO9ApqERRxqh4Q9tA6SalXeA7+MA9XomU4oi8dlTcjYCQ9TO9gS/0QsI8TCalvsN8VEcTAGPe
-	gWdn2thUiIyosGfa5RmuW4foDKpcnFBkFKYa0OwixccAby5OQ3Q/Qc8KaRPtiTPare+aqFLdLyGcw
-	b2Oxx43Q==;
-Received: from localhost ([::1]:64098 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=oRjmTuuwAWkwI52oBmLUh+y+tVroPnSUrIqkKuK07Ho=; b=CobBBh3Am7nSiimq6r5hnGMHra
+	3/w93GJfk3jR4KrRBNxHVYgmR2kL1ghFj/BlUgBQA2zigsAFPFt4mvkcT7WKdoSzAP3yNq0ot4AW+
+	Zo+DMkerzOiGKWvHdzkiNmhuPVBbz8djAoAqkiQ8fBI4WxusVzP+YIbmivuEvq+93beyQeK0af4dJ
+	pUkq90CFGqWLKzheRlF/0ZxPebnfwSIERthx6G0vii40Dvc9BeVZGPjRo8QIspScOYwj7v7K+9Hrm
+	YDJwk8B0ifCI7wVDp2IEnjEepW2r3c74YjByKcMjTxwSM4kSLQAYbtIGVCCfnh8HLToFde9o7a0GC
+	PR5kBcKw==;
+Received: from localhost ([::1]:18128 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kBPRn-0010rt-L0; Thu, 27 Aug 2020 21:28:39 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34686) 
+	id 1kBQVY-0011Bp-7v; Thu, 27 Aug 2020 22:36:36 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz
+ ([2404:130:4080::4]:44064) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kBPRi-0010qz-Cs
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:28:36 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-Id:Date:From:To:CC;
- bh=immw3sWvaoJy5nFeLFCfRjqFWPH3fMlK/Wb1jXQyD+0=; b=vO2fCRzn3BHx54CaWIWkNNexIP
- v307A3dTIHyNDmOrnylMGeL8vKDXHG3hHijWJnzw8Pd9r5gBq8cn2BG9VdOhWCJB5TsMMzvdFHLeJ
- khJu1ZuAK+Wkis5n+PowTLg3QAwh+BxBNvCmbW+lg0bUOWSKmfT8cJ6VHnwpBBvZ4HooAsm2MfoOh
- jE8vQsA/XTFGQlmJyHqchFqGhHIYt7NwiZrQCgSm/pzdoTYSeP+M7o1xSPuscx8TGQtbEnqOBswiZ
- LznwsO4Fv+SZStBLBjtqswT9InjHoWq06iCYBsGw2IrUKgsHOfMk9p4WTG8dJfEnBx1/ZScAevJFc
- YKUnTNPP8FmsVkC0KPKwNbUdSGHBks/QZTCCFjLAG3JYtB48da1xa8xDU27h4XxSjD+mEvOE5xq0D
- zY+gGsw2exVQJQ6wI04XbdvwfQP9EUV1XlHbI4h7BCtvAeDg40JyOH/DbxDNSybc0y86m2f8UseFI
- nLyevuTXmRFWf2nILLiJrjaP;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kBPRg-0004Qa-1q
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:28:32 +0000
-Received: from localhost ([::1] helo=hr3.samba.org)
- by hr3.samba.org with esmtp (Exim 4.92)
- (envelope-from <github@samba.org>) id 1kBPRf-006isE-Uo
- for samba-technical@lists.samba.org; Thu, 27 Aug 2020 21:28:31 +0000
+ (Exim) id 1kBQVR-0011Bi-7P
+ for samba-technical@lists.samba.org; Thu, 27 Aug 2020 22:36:33 +0000
+Received: from [192.168.1.110] (unknown [114.23.142.188])
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id DBAA880888
+ for <samba-technical@lists.samba.org>; Fri, 28 Aug 2020 10:36:08 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1598567769;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=oRjmTuuwAWkwI52oBmLUh+y+tVroPnSUrIqkKuK07Ho=;
+ b=j5pBNBsm6w550OEEKtOJkx6hHE/U+DVfZgZow6izJd6yJNVEtVOcYkexZBvAUiTs4WwVg+
+ z0EFGVdMFP2H0PurZcsKp6gImyIay6fGsiPKBF1tdesrwmQwi3N7+zhrRz9+Q2n4f5vf5U
+ a4LEukO87QiG+hM0K20zXEmB/ETPi1P3yAMaqnQpcO0251GOMP6L8r/Q0EybJ5/9ocxyfE
+ Sy4igEInihfb7sRA33r5bIoaCs36dbrgTiYwGaBv2379Sj1BZYUD670r5bGnpVorpUe25U
+ bBOday9oUhYWcEkfyC1nqJ/n1Mug0+jep07qaRuBH96I/E0qTVH4RD0a0BN+Xg==
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: Down to 5 open github pull requests.
+Message-ID: <75617102-d5aa-a052-a4ad-c8c56f433861@catalyst.net.nz>
+Date: Fri, 28 Aug 2020 10:36:07 +1200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Subject: Re: [PR PATCH] [Closed]: [RFE] smbstatus -L does not resolve UIDs to
- names
-To: samba-technical@lists.samba.org
-In-Reply-To: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-202@samba.org>
-References: <gh-mailinglist-notifications-7cbc67a5-3baa-45ba-be96-ccfa955fbabf-samba-202@samba.org>
-Date: Thu, 27 Aug 2020 21:28:31 +0000
-Message-Id: <E1kBPRf-006isE-Uo@hr3.samba.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=douglasb@catalyst.net.nz
+ smtp.mailfrom=douglas.bagnall@catalyst.net.nz
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,23 +61,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Github bot account via samba-technical <samba-technical@lists.samba.org>
-Reply-To: samba-technical@lists.samba.org
-Cc: github@samba.org
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-VGhlcmUncyBhIGNsb3NlZCBwdWxsIHJlcXVlc3Qgb24gdGhlIFNhbWJhIFNhbWJhIEdpdGh1YiBy
-ZXBvc2l0b3J5CgpbUkZFXSBzbWJzdGF0dXMgLUwgZG9lcyBub3QgcmVzb2x2ZSBVSURzIHRvIG5h
-bWVzCmh0dHBzOi8vZ2l0aHViLmNvbS9zYW1iYS10ZWFtL3NhbWJhL3B1bGwvMjAyCkRlc2NyaXB0
-aW9uOiBUaGlzIFBSIHNob3cgdXNlcm5hbWUgaW5zdGVhZCBvZiBVSURzIGluIHNtYnN0YXR1cyAt
-TCBvdXRwdXQuDQoNCiAvdXNyL2xvY2FsL3NhbWJhL2Jpbi9zbWJzdGF0dXMgLUwNCkxvY2tlZCBm
-aWxlczoNClBpZCAgICAgICAgICBVaWQgICAgICAgIERlbnlNb2RlICAgQWNjZXNzICAgICAgUi9X
-ICAgICAgICBPcGxvY2sgICAgICAgICAgIFNoYXJlUGF0aCAgIE5hbWUgICBUaW1lDQpgLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1gDQoxNTU3NyAgICAgICAgZnJlZCAg
-ICAgICBERU5ZX05PTkUgIDB4MTAwMDgxICAgIFJET05MWSAgICAgTk9ORSAgICAgICAgICAgICAv
-c2hhcmUgICAuICAgV2VkIEp1bCAgNCAxNzoyNzoxNyAyMDE4DQoxNTU3NyAgICAgICAgZnJlZCAg
-ICAgICBERU5ZX05PTkUgIDB4MTAwMDgxICAgIFJET05MWSAgICAgTk9ORSAgICAgICAgICAgICAv
-c2hhcmUgICAuICAgV2VkIEp1bCAgNCAxNzoyNzoxNyAyMDE4DQoNCg0KU2lnbmVkLW9mZi1ieTog
-QW1pdCBLdW1hciBhbWl0a3VtYUByZWRoYXQuY29tCg==
+It seems github-bot is still awake, so you already know that PRs are closing.
+
+There are 5 left.
+
+Those are ones I didn't completely understand or dare look at (due to
+mysterious phrases like "SunOS" and "wide links"), or which seemed to me
+to have specific non-crazy value to the contributors, notwithstanding
+implementation details (e.g. fix compilation of ffmpeg with libsmbclient).
+
+I am going to give those ones a week or so to show signs of life, before I
+close them too.
+
+If anyone thinks they have a github PR they want to rescue (that is, push
+over to gitlab or email as a patch here), now is a good time to do it.
+
+https://github.com/samba-team/samba/pulls
+
+Douglas
+
