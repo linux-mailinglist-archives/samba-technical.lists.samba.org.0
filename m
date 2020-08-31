@@ -2,36 +2,36 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8D40257753
-	for <lists+samba-technical@lfdr.de>; Mon, 31 Aug 2020 12:30:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 854142579C7
+	for <lists+samba-technical@lfdr.de>; Mon, 31 Aug 2020 14:54:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=1DJjRJsXNqPnF7wZ4Q3kpsT5zmhN/v2jDRIXmJovS8g=; b=PtJPzzSDa2stg6j6ekd+rNH7kV
-	v3vJ55zkXqZZkioCFDQJfSaj39vVzwz8OAF+/OJyWGL0APPnKuJP20fD+O3oRY1dqQed2TV0UTz+a
-	82mYG7YMY9lc9JsDP4eR2MY1ah6whLeyqzOjyVR0s+q2UV5LvgcdfKQ9bqJH4HyyfflZwF+Q3y6Sv
-	YS2X3tY9Wt5iVW71CuoWveQcrHR/vn8kKd8VOwJcOrzjoXaE2DC8TTeCM7sDpFoh7unFxNLcEKi2W
-	1qKGaA0LUoxbg3zGJ1OWI5astGB477tgE7em9q13BjifWzxZZqIqn8SKZJAf62o45aMSRVHb3FsOA
-	OS2Dl4aA==;
-Received: from localhost ([::1]:61546 helo=hr1.samba.org) 
+	bh=JSIgaW4lwYPz5FrVVBL7J4BssaFXDJI3kmZr7XCu+IU=; b=KgPELapTpptmF6t2zYtTFMCR9x
+	RANrmhi8bSSbYdijkveEbMmDtOm4Jm9bKTODdWdn3Xe7F5ObiCj+jpJMARJDlL+Lehv/KKVImHH8N
+	MGgLXMswQ0rMPN7X88H9nrRx3LivRwZrUMWfakfnBTfMLai0CVwSZTWhlEv/7tYyNDsSegLX1GhGo
+	rK9q3JE01T7rJpT6keW5E0SkhlbLdYc9JDSlwlcpPtRV+Pqwzjn1+tvqAlLkD15edqrHdFUDBPzDe
+	RBowzRTHooUJEgKiRVYc4QXZOxWjDu3s9Ww/5G1aN3ppaioH3U4HhD4zuYYhdC/VjU9h5c+VKILeL
+	gty9X8Mw==;
+Received: from localhost ([::1]:63562 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kCh4J-001Qc7-Iu; Mon, 31 Aug 2020 10:29:43 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34688) 
+	id 1kCjJP-001R83-J1; Mon, 31 Aug 2020 12:53:27 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:22670) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kCh4D-001Qc0-5I
- for samba-technical@lists.samba.org; Mon, 31 Aug 2020 10:29:41 +0000
+ (Exim) id 1kCjJK-001R7w-13
+ for samba-technical@lists.samba.org; Mon, 31 Aug 2020 12:53:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:Message-ID:From:To:CC;
- bh=1DJjRJsXNqPnF7wZ4Q3kpsT5zmhN/v2jDRIXmJovS8g=; b=uMgTC5xxINYy7v16cXW+EPJphd
- jFj8L2qtWoA0tqbKx1939pxN8ufQ3JAQ1yWRMSufslqPViOwIjoKyjz2eKy/JUvIxmHyt27iP7K/u
- BoYZ86tc/bxIC4MkkW+uYb+wZps/ZrlH4hsoUyC0eUEJIFaSHEUlYr+e8dLAmrmaRnfmDznZouc/Y
- E8/Rd7ZewJ97vfcpwNCRxiBOXI6Wgq/yYIpCe5dYI4rTF8+EJaPAVskk8zwW+ttwTOR+q98NMyaF9
- LEDzYdJ3b4bMIwH2DyvGciBd2xWt+x+JRtPoKzxKnp1Lb6BCb/RahBH/qxIxbRfe+rebOM3RkAB/R
- uEMWPHgMDgLLAcWVyI+diLuF1lflGx37NJSNF+IRFZ76zbyTQJc4R1MYKarBeovKNGkTkNXTFpkXp
- Ddb1EKiSXW1z0kQN/stT0k+wQa1pFiE/ebjiqTz/rlj8G5fbF0T4T9LEzktia97LAcAMNleNZvViw
- IWNY6rQ821bsVJE88s1SvvHO;
+ bh=JSIgaW4lwYPz5FrVVBL7J4BssaFXDJI3kmZr7XCu+IU=; b=NGji/kgU6nFrfUOmP9R0zH/q7r
+ 9kNODxifzHCswlOGMn6pF9mUJT5BxHL2NOyZS9boaIykXFjUZ0xT+cbRPJAm8bynFwssU9rQO23rx
+ bvdNe1mt3WtuKJrwjMXWhvPQV3LLYlUZMEIX2pFY0QxHCLDZtj+3y6zrCIMVK/K1tcZiT0Spknkb6
+ RDs8WCWP4w06x61cd5P95AmBbBs0lVJU28mn8xiQv11ZL8pwcC6P8nWvTcX0XyL8V7+uiDLEoVkGm
+ RmrcM+evqfZTO0n+8i/1N8VGc5yoRvFAuE/1WOy/nJXju0vowwASejXy4OELEkX77sWgqKK3a60oU
+ oPMriRPSSKFOZpnkx/ABSA/dpsCxuuSR3FddvVqK2DtxyJl0a9NORvWUdEyVGGzOxbCye3clI/EvV
+ LKF2iiUKAecV4ti19OY84QPLeUeD+t2mwicQe4qO/6Cavfg4oQ/wMZNnH++i6ojoGffhLcovLiFP9
+ N967yhz29goWO323R1x1zmv6;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kCh4B-0001Ku-O9; Mon, 31 Aug 2020 10:29:35 +0000
+ (Exim) id 1kCjJE-0002QF-2D; Mon, 31 Aug 2020 12:53:16 +0000
 Subject: Re: PATCH: make disabling of vfs_snapper consistent with our
  configure/build system
 To: Andrew Bartlett <abartlet@samba.org>, samba-technical@lists.samba.org
@@ -47,8 +47,8 @@ References: <20200710110737.GA1585556@sernet.de>
  <38124182-985f-8a79-aa9a-1cbb2241dc3f@samba.org>
  <951676ca1d57de76f0a5494140ebdc985b607731.camel@samba.org>
 Organization: Samba Team
-Message-ID: <55b355e4-b068-d80c-b302-e9a4a62c0648@samba.org>
-Date: Mon, 31 Aug 2020 12:29:35 +0200
+Message-ID: <aa86e306-0c2e-763c-bb4c-3ba9fc4a9d52@samba.org>
+Date: Mon, 31 Aug 2020 14:53:15 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
@@ -74,6 +74,8 @@ Reply-To: Karolin Seeger <kseeger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Hi,
+
 Am 31.08.20 um 11:52 schrieb Andrew Bartlett:
 > On Mon, 2020-08-31 at 11:36 +0200, Karolin Seeger via samba-technical
 > wrote:
@@ -97,8 +99,18 @@ Am 31.08.20 um 11:52 schrieb Andrew Bartlett:
 > But we did Waf, and much of this change, back in Samba 4.0 so why is
 > this blocking the release at 4.13?
 
-It's marked as a regression...
+The point with 4.13.0 is, that the !snapper in the vfs module list does
+not work any longer (and it does in 4.12). It has been broken by commit
+7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a.
 
+Additionally, Samba does not build by default on many non Linux
+plattforms any longer. The auto dection mode "build if possible" is very
+nice for vendors.
+
+Can we revert this patch for 4.13.0?
+
+Cheers,
+Karo
 
 -- 
 Karolin Seeger			https://samba.org/~kseeger/
