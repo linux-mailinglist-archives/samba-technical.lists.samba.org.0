@@ -2,41 +2,37 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7411025A8F2
-	for <lists+samba-technical@lfdr.de>; Wed,  2 Sep 2020 11:51:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07D4925A90B
+	for <lists+samba-technical@lfdr.de>; Wed,  2 Sep 2020 12:03:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=SY3YUGemPZxzsTHgwpscY34fjijW/PogMT3wKxIt0Js=; b=VuTRd9sCil+8S38/TXhLM7OT+3
-	gLPq202Fml9bribIDmdht70wdzHZPJAQvXytEO0bQ6W2KVnfyHx54SPJ18w5fu6KBBBnPWjCfr8FY
-	Z+K0iLiy5Ce5+gvQvqLDMSPAbt4LbXp1md5nS3l76yZmqLpPVCwfQ7C7LsFzaZVn57/Q9SHOQ/m6+
-	YRZePBY8RkzXBIM/dCtHIjacVQmCzIFMd66ihvZNeu1C7VLS2vyiVnJxVmmf9DqnI0/0mURV5WvP1
-	qrkQvrDNkgqwnufq4gPy3cggjg1EkOpoOQ8GhvI0SFC4eEZIeSVYl8aMG/kGMeA7gx4rT3gViJ751
-	+teWVbuA==;
-Received: from localhost ([::1]:42450 helo=hr1.samba.org) 
+	bh=UeVxug+9yBt0wtKWOUauvnDmM0Oeh8psjLkzc/9OrJc=; b=2cM9+VZPyKLQf8iJcrBaXe5rXX
+	TMXULv7h5HycCrI6hRxmi4LKaP6xPrrPyZrkhNCFI4mVfBtth3fb1Sj72biI8q/4wBnV2GZ+lNLGB
+	dvj/ceqmEACHgaJPH7OJEuXJA3y4sVQHoKLhn0n2k3ryePzqOvN1zcXCdVKDJNp/PffiS/1jj4Et5
+	FxkE5/Hxyhx+NJbSs637WXR0nIeW9hO6hKwFZ0gEn4a6dEsENxIDw2BOJi/2mQLY3jZ3JRD3xLEBy
+	1I8UnP2H2UGVmEnF9xOt0WwDRr3NOFmY+PEjfb6tSTBlqW4cab+n82fgvJh8zFT20PsdVDRluAOkI
+	SAOQ2vQg==;
+Received: from localhost ([::1]:44208 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kDPPo-003UPc-D1; Wed, 02 Sep 2020 09:50:52 +0000
-Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:38681) 
+	id 1kDPbG-003UfG-SD; Wed, 02 Sep 2020 10:02:42 +0000
+Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:59299) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kDPPf-003UPU-PY
- for samba-technical@lists.samba.org; Wed, 02 Sep 2020 09:50:50 +0000
+ (Exim) id 1kDPbB-003Uf9-F6
+ for samba-technical@lists.samba.org; Wed, 02 Sep 2020 10:02:39 +0000
 Received: from intern.sernet.de by mail.sernet.de with esmtps (Exim 4.92 #3)
- id 1kDPPe-000688-Cp; Wed, 02 Sep 2020 11:50:42 +0200
+ id 1kDPbA-0007Ww-PS; Wed, 02 Sep 2020 12:02:36 +0200
 Received: by intern.sernet.de
- id 1kDPPe-00054a-8h; Wed, 02 Sep 2020 11:50:42 +0200
+ id 1kDPbA-0005Dh-Kw; Wed, 02 Sep 2020 12:02:36 +0200
 Received: from bjacke by pell.sernet.de with local (Exim 4.93)
  (envelope-from <bjacke@sernet.de>)
- id 1kDPPe-003MrW-39; Wed, 02 Sep 2020 11:50:42 +0200
-Date: Wed, 2 Sep 2020 11:50:42 +0200
+ id 1kDPbA-003Mw2-FW; Wed, 02 Sep 2020 12:02:36 +0200
+Date: Wed, 2 Sep 2020 12:02:36 +0200
 To: David Disseldorp <ddiss@samba.org>
 Subject: Re: PATCH: make disabling of vfs_snapper consistent with our
  configure/build system
-Message-ID: <20200902095042.GA800820@sernet.de>
+Message-ID: <20200902100236.GB800820@sernet.de>
 Mail-Followup-To: David Disseldorp <ddiss@samba.org>,
- =?iso-8859-1?Q?Bj=F6rn?= JACKE via samba-technical
- <samba-technical@lists.samba.org>, 
- Karolin Seeger <kseeger@samba.org>,
- Andrew Bartlett <abartlet@samba.org>,
- Matt Taylor <liverbugg@rinux.org>
+ samba-technical@lists.samba.org
 References: <20200710194428.GA1596727@sernet.de>
  <63044415-9473-1572-2cd5-fa1fa5e012e1@samba.org>
  <20200720170142.1583649f@samba.org>
@@ -70,32 +66,30 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
 From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
  <samba-technical@lists.samba.org>
 Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bj@SerNet.DE>
-Cc: Matt Taylor <liverbugg@rinux.org>,
- =?iso-8859-1?Q?Bj=F6rn?= JACKE via samba-technical
- <samba-technical@lists.samba.org>, Andrew Bartlett <abartlet@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi David,
-
 On 2020-09-02 at 11:21 +0200 David Disseldorp sent off:
-> > reverting the mentioned patch is the most simple and straight forward solution
-> > as the newly introduced option is not required and the generic module
-> > activate/deactive mechanism can be used. Any other solution with redundant new
-> > options adds more complexity or and possibly conflicts.
-> > 
-> > RB+ from me for the revert of 7ae03a19b3ca895ba5f97a6bd4f9539d8daa6e0a
-> 
-> I've submitted https://gitlab.com/samba-team/samba/-/merge_requests/1547
-> It fixes --with-shared-modules=!vfs_snapper while keeping explicit
-> disable / enable (default) behaviour.
+> I respectfully disagree :-). In my opinion "build if possible" behaviour
+> leads to:
+> - inconsistent build results depending on host state
 
-the topic of enabled or disabled or auto by default should actually be a split
-off discussion, as this discussion cannot be finished before 4.13.
+see my previous mail from Aug 12 for a detailled answer on this.
 
-I mentioned before that I object that we introduce more enabled-by-default
-options, which need to be explicitly disabled on all other non-Linux platforms.
-See by mail from August 12 for more details on this.
+
+> - increased wscript complexity
+
+the auto mechanism is not making it more complex. What makes it more complex is
+putting in a redundant new configure options, which are not required because
+there is already the generic mechanism. See my previous mail for the
+inconsitencies also that this introduces.
+
+
+> - slower waf configure turnaround
+
+also enabled-by-default options need to be tested. The time consumed at
+configure time is the same. Only if explicitly disabled there is a time gain.
 
 Björn
 
