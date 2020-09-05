@@ -2,45 +2,73 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A89E25E584
-	for <lists+samba-technical@lfdr.de>; Sat,  5 Sep 2020 06:32:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B0DD925E6CC
+	for <lists+samba-technical@lfdr.de>; Sat,  5 Sep 2020 11:43:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=pwAJiv1sQXVBllKO3R5tXklAsmEFSHRTwqQLIQ2I9as=; b=nb+z7DmbGAd+klPPjlTi581oLt
-	PIe/iTeBo026kGzc9+PCLx2j9OCZH4BCEC6rd0B68wAeHXJxLdtizlfPOXMCg1RcbNd84sXlExYQQ
-	Aq4n8KLD5Nd3PaNcOdIzNDmc9I3yliKAzOXtHixZ8lk1zCPKuZ/SYMNf1fWh73//0pfOLifEOMb3W
-	YbQqdcF+PZkXnbrXowsn2oCjByI6Cem5y33mpxh1GvTzjltzEfiarCPd8QIvpOdYnN8JbbCPX0ZzC
-	/489sC23gH4q3lvIM4MU5X02a66umANBOhdIAZQ00iWIfX3eK5NtSl9lf2sEbrMQeGh2ATOOgf1Vb
-	InCrIumw==;
-Received: from localhost ([::1]:33646 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=NLkMct5gAWcNyXK5JjEOM2P4P0CGxVw6WsdZrQ1DlAU=; b=R4jFmXB7vvmULd5G5n7MzDDRAr
+	RZajTq7NFi0Trpjc7LHuILJ+q8PWX2do42fTpSXBqxOZeC4shk9UGkPun3uOEXO0pLA8rxFCCyGLa
+	+Hecn6S9t+dk1xcJZK80jw1ZAvwWaTW/ju8u70EJ3TX3qSpJv011sePRYEf+34HEvy30ha4YvFMgV
+	l1qmD+6l6xpZcnC/2J3aDIPuDAxzbwMHRI9VtMTjzj6Pzq6G42psmW40wFnVsxQPOoZNpyYuakA4q
+	foJxSvwG6eT3EajL6LobGI01yetgWXP7uupS9tmPfkXKGlQK4BY5Al3FgW2dadmMaKJZ5Bki6lQzk
+	eV/Lsl6w==;
+Received: from localhost ([::1]:50946 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kEPra-0045mE-5Z; Sat, 05 Sep 2020 04:31:42 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49582) 
+	id 1kEUij-0048rV-8S; Sat, 05 Sep 2020 09:42:53 +0000
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:51736) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kEPrT-0045ly-OF
- for samba-technical@lists.samba.org; Sat, 05 Sep 2020 04:31:39 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=pwAJiv1sQXVBllKO3R5tXklAsmEFSHRTwqQLIQ2I9as=; b=UVKzK6sTyIQ+GDHOmpLloUnzPb
- Gjm6gN1AXelRu+JPHJgwJCVvkW6U2fgR3bOYKECdG8g6vT4+6kSOlJUDbWS7zxQ83zPIRdbcXHdNp
- S0XIiilV9YCgrVMxicfKK6+W+i57m1DREo4LRczK+8/wYXk7BphYsBskvJ+mYuHdR7gK/MCI7o3I2
- 1oBUbqU9oAiMtR/O5nT3vvE8YJhafKL/s45sULzVGzndndpfwZG+qN4Y/epD2y1dr5lluZYsh2bjo
- QNy/uyBdUPpojqj3aK6/435N3Sn2HS4Eo/BZR9gH8h+yIjhfkKfbez9vdpB0FrdqSr4zFcJmKR32n
- X5BoO7pCfXOtG63VBpPWy7WcleN+nYlr17ITiDaTKX2KtvSUjLXQ4ELoZwJiQDNw6U9CxAKnEpNRG
- yola694ASaGxfvVUoY9h4UKOJmjsjKMATnN8ZLEuEFU8ulfHWtDGs+/ACsBt+7bNBTWChpPauETOY
- 8TAmPam8EIsG8fpe/bqiqHC2;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kEPrS-0001ob-9r; Sat, 05 Sep 2020 04:31:34 +0000
-Date: Fri, 4 Sep 2020 21:31:29 -0700
-To: Andrew Bartlett <abartlet@samba.org>
+ (Exim) id 1kEUid-0048rO-Kb
+ for samba-technical@lists.samba.org; Sat, 05 Sep 2020 09:42:50 +0000
+Received: by mail-pj1-x1029.google.com with SMTP id a9so1114388pjg.1
+ for <samba-technical@lists.samba.org>; Sat, 05 Sep 2020 02:42:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=smedley-id-au.20150623.gappssmtp.com; s=20150623;
+ h=subject:to:references:from:message-id:date:user-agent:mime-version
+ :in-reply-to:content-language:content-transfer-encoding;
+ bh=NLkMct5gAWcNyXK5JjEOM2P4P0CGxVw6WsdZrQ1DlAU=;
+ b=zZ3kSnMcL384FyRmiY8KDH73OKOLUCjewTqqb9//YMwN7P8AOAs78JVTpXaVxMG6/A
+ Zfs98VT8KfvwEQ6te23Xkl4JADvVIpv+JyeDtH8Pn90th0wDuhBBuRqGFmcDn4Bnbm+a
+ xLqILfIxV/nJJKfIsTyiq2zFuncX79m0XcYQKCn3D+gjNsVjyBA4rwST2O7tY6QIqu/K
+ qweeIT/tHH/+ozfX10LSNfWGJ34m1It+IbzLZCDYinMK13jJ2dOb7q/D0QkvBrbcy6S0
+ gYVwiNSNHngNSrGbr+OGYbbDDWD7lL0fhzcEqNUWZew1L7Pzz2j59oKtpZ7BDpginYF6
+ Sl4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=NLkMct5gAWcNyXK5JjEOM2P4P0CGxVw6WsdZrQ1DlAU=;
+ b=L7V/GJhB4FGWIjPvShKaqyRfzYqwdK0h8KmweVD5YBM4QoPFJptUZ0S27A3NuKOwVX
+ 6LONtWruO66f1sbOG3Ius/a3r9nMEueu/GgEN2bcTmhjZgwBZHCwC8MWuRT3hBVjbG8D
+ 7KeKlx9xQwjdCzqSzdKssQaACgzHMg7ZEsHHA0qMwfXTbho2hWX6J2hYemM6SSdjIsx1
+ FMOAXmZ57QEoAT7RrYYS86WWdPGOnqHu5mZA/I9Er9xZlPJNHvrviKT5Q6v9CGlx8t+E
+ 5ShK1bIJZmvf7GQ+gCFZkomnONleK7dK17al7NXaoZsNf2QQaKbAUMrSbfb8XRsOViv5
+ /E/g==
+X-Gm-Message-State: AOAM531hUsqG8vPIgD1bmdRiUtEgY7lwDqgYXrdAtLHEE5eeBsaG0eYd
+ sAOr9980WXJXDLQYAIJStA6BH1wtqhJpbZCp
+X-Google-Smtp-Source: ABdhPJzl6/hO24moepnnku3020UUGcjqbm++cl8Zu7IaeT3vgOPwR/fjoj4tmDX9BTvcy+Cikg4i5A==
+X-Received: by 2002:a17:90b:408b:: with SMTP id
+ jb11mr12447416pjb.164.1599298959415; 
+ Sat, 05 Sep 2020 02:42:39 -0700 (PDT)
+Received: from ?IPv6:2403:5800:5100:f00:2d9d:3a9d:96ea:7c7a?
+ (2403-5800-5100-f00-2d9d-3a9d-96ea-7c7a.ip6.aussiebb.net.
+ [2403:5800:5100:f00:2d9d:3a9d:96ea:7c7a])
+ by smtp.gmail.com with ESMTPSA id m188sm9025109pfm.220.2020.09.05.02.42.37
+ for <samba-technical@lists.samba.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 05 Sep 2020 02:42:38 -0700 (PDT)
 Subject: Re: Drop Python2 for the build?
-Message-ID: <20200905043129.GB289359@jeremy-acer>
+To: samba-technical@lists.samba.org
 References: <d3abac97b731ed0d37ea4dec28e2792128f527dd.camel@samba.org>
+Message-ID: <8d1bb56b-c7b9-ac4c-ee19-2d08749aa56c@smedley.id.au>
+Date: Sat, 5 Sep 2020 19:12:34 +0930
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 In-Reply-To: <d3abac97b731ed0d37ea4dec28e2792128f527dd.camel@samba.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,39 +82,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Paul Smedley via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Paul Smedley <paul@smedley.id.au>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sat, Sep 05, 2020 at 02:22:34PM +1200, Andrew Bartlett via samba-technical wrote:
-> Just wondering when might be the time to drop the python2 build?
-> 
-> This came to mind because David Disseldorp recently had to adjust build
-> system changes to cope with python2, so I figured it might be time to
-> revisit this.
-> 
-> March 2021 will be 12 months after the long-delayed EOL for Python2 and
-> since we made last made big decisions around this area Python3 has
-> become available in the default package set for more platforms,
-> particularly including CentOS 7.
-> 
-> We currently spend CI resources building and smoke testing Samba with a
-> python2, which we could save, as well as the (small) complexity of
-> targeting both python versions.
-> 
-> The simplest change would change the minimum python to build Samba to
-> 3.5, the same as we set the minimum to for fuzzing, or just 3.6 the
-> same as we already require otherwise (this would be better tested).
-> 
-> As background, the first Samba release with python3 support, 4.10, was
-> released in March 2019, so if we did this for 4.14 this would be a two-
-> year gap.
-> 
+Hi guys,
+
+On 5/9/20 11:52 am, Andrew Bartlett via samba-technical wrote:
 > What do folks think?
 > 
 > Importantly: beyond Linux, how is python3 platform support better now?
 
-A cautious +1 from me, but I don't build on FreeBSD or anything else :-).
+I saw this coming, and recently expended some effort to get python3 
+working on OS/2, so I have no issues with this - I'm already building 
+Samba with python3 on OS/2.
+
+Cheers,
+
+Paul
 
