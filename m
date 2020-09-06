@@ -2,58 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0D7C25ECF7
-	for <lists+samba-technical@lfdr.de>; Sun,  6 Sep 2020 07:10:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B36B625ED02
+	for <lists+samba-technical@lfdr.de>; Sun,  6 Sep 2020 08:14:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=VG/gMsM4N03EVI+K0CoZMFc9werZQ5UhoefrNIdmyns=; b=jxRAUoNT8y/ylbI77LKlotDDMm
-	hOPev1+OeWRzNm8KinQ/H+rjYRxftbvW8X8vI6KvrRPNaVDYDFPVkOX7Losj/M1J/CdJ88QYEf/mY
-	5VKWJJ6td7RTMc207PenxoLJkMbckOTBcZfepkLsQk5mnoa7bV5TL6dXQfbsT4XyuT7d2+lundFdz
-	IiTzepj+GZdKhJVathF5UvEun7QoPl08IuVETrfk8fZ+gU6wBi7C47OS8bLr/TGGdq5yGCokTaLU0
-	SQ9sjpsUqEosJdWHkbuMSHl32nFJMLnCnNeqSjd34EZCL19TTiRwjPDcXfUgocUh9l4W72uri4lu7
-	+lduX2VQ==;
-Received: from localhost ([::1]:58450 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=ZhH5R30HvdM3DeOJVNsx5BtBMl8cEdmKzTxxq6wj63k=; b=uOeFYCsC1PfY2o6cACvKlozy0B
+	uRDcTSBXPmsVgI4BTZJeefYH9uRX/uW5SY6vRsh3px+awSp6Bs5UG8zWrTqpbHzNQxUpRd4bYabVg
+	Qw6vgxZlEFRmfcXveaRR+KoJSiOTIepiantnimPF8GCbicvlkeNJIHBYl4HTf6CO3h2tK15AAIwaU
+	Y3Zo5RdQ6DH5d4uMsn+OZ8s5V/RxgFQn+A/xX1B6pHhzuQXd4PMJwUm+YPoljKLasrwGE0Cxa2LmT
+	bUHqot5aKL52Nh7uukSym3Z1jk8G9MvU0oZgUu8hlNA8iuQSJ6YMzdyjKcLhhRy+8F+nqv5hOBYus
+	hHP4b9Hg==;
+Received: from localhost ([::1]:63968 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kEmvg-004INV-MN; Sun, 06 Sep 2020 05:09:28 +0000
-Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35]:42931) 
+	id 1kEnwW-004JDA-RQ; Sun, 06 Sep 2020 06:14:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16304) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kEmvT-004INN-GL
- for samba-technical@lists.samba.org; Sun, 06 Sep 2020 05:09:26 +0000
-Received: by mail-vs1-xe35.google.com with SMTP id e14so5734860vsa.9
- for <samba-technical@lists.samba.org>; Sat, 05 Sep 2020 22:09:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=VG/gMsM4N03EVI+K0CoZMFc9werZQ5UhoefrNIdmyns=;
- b=KRPtHamv2BzeR1Q2G24eZRjCNTYNQT+wvKK7gsApuYsrwOGGZLvibufI7jkE2XqzhV
- lW5DWhLw6W5Og3TUAy0qKCAyEkVwb2c9qCTwoNKXTfc3ma295Uo7ULVYkruw/YpbQIOo
- WYFpPPimezAd59lsB3oc8C/QolvXrz6eNUtwiwGaOpcVEeyponF/JY5C74b6FGf0us/h
- S/TGiVM/XBB5uwBr2quN+yimPWO+Knc9Ou5MC0DB5CDIeSX2ilHhL+ZtctddEXoCt9em
- 8SNhUCYT+xIKTFQRx4FlPk0sXaY8MT9p/r7Blhd/ULFDXYDsvI/tDscBgxWSJ2hPSbuW
- orEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=VG/gMsM4N03EVI+K0CoZMFc9werZQ5UhoefrNIdmyns=;
- b=fjbVMUfkcQJOsW5henMXvVz6/ChuWX5X8NzU4ts9AkuBtgnG1uUJ7ecte2qv8ABKxd
- iXuDx3xjSc6503NUBaVgHVjPWu04hs5GoaR+fEUTimgb89c/BJSFfxuKQHFpWQLT83j5
- QUgMoEVXSVR1AKDGqzfKMsm2Rsrh9DD129zIm8S/7LAm397OSs5BKVAaAzMX1ETvVdbG
- GrIUmiOMEmjZZCPX2OkNCrppFK7xwiNxknsY7vVA7UR0zDiFGgb8J7Qf+3dq7Af5XF6/
- BCK9DYzg2YgoYT3WNv8c0shxYnt3U5my/k3ii3p9D+uNYHl/Wugj3IXUk02CjMDwntpb
- T8fg==
-X-Gm-Message-State: AOAM530h3IGEGa24GpdWRSHFdDnLZGrf/Wcg3Lsv2am1QFVuaordSiVY
- 1MC1BWT/yHXQyzfODhc7XLWWWiurd0fLlYvaUZs=
-X-Google-Smtp-Source: ABdhPJyx3CydjWYhMxT7pRLQfIpSn5UPO9e+VGXEOOmfumpZbr9TB5Krir0R6+dZEqC22IY7NcSNkoy2hA1wj2b0qQI=
-X-Received: by 2002:a67:d02:: with SMTP id 2mr108026vsn.6.1599368945199; Sat,
- 05 Sep 2020 22:09:05 -0700 (PDT)
-MIME-Version: 1.0
+ (Exim) id 1kEnwR-004JD3-Le
+ for samba-technical@lists.samba.org; Sun, 06 Sep 2020 06:14:22 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=ZhH5R30HvdM3DeOJVNsx5BtBMl8cEdmKzTxxq6wj63k=; b=MTfEZDjrSPFcgRqpIOd3CLZZtI
+ 6RyvULQxbNMv+SgkqpxHQGdcPyzYcV5FiixfnQuSohJHrBDaDY/ryIu1kwE6dfZDKMFlx3AFA9KkE
+ OLKoZ7EE1xQ25HyO1IxUs21H2LoeVLj9k7Zqpyo9dcEV2cac4xDK5VBvEDBrqd1hYBG+10KcKoOtB
+ YXeY144DOQLwgvW4OhpH9C7MD4lQN6eMQsGNYl+fD6QvoR4jpHL+oLFspwlm8VlpNhYogsI68FckJ
+ la9jnQvMTDbme3Si1m0O62IM7IlqrQp0eztLpVMD0aED/ouvz1F8V1zEN/OKksdq2lGpIQ8VjT+JY
+ Je5oip3c8v7RlT6QuOH9Rj9YWyoLBf1CFgxEiAJyhAMbxwCDLFvQ+T3Z0rSBFmEr1LsUoKiEoDsL+
+ S+x5QqEt5833LXBHE6TheZi+tBMAr8cojYLOVC7jCR5+gxLaGGaRTqoO+qdxFLBYqUCD933CsPrT/
+ zleujCzr1RU1WW43vDSFFszI;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kEnwP-00029o-RR; Sun, 06 Sep 2020 06:14:18 +0000
+Message-ID: <12ae82a7f574030f0911b51f397ece6de2c557b2.camel@samba.org>
+Subject: [PATCH] [WHATSNEW] Re: Drop Python2 for the build?
+To: Karolin Seeger <kseeger@samba.org>
+Date: Sun, 06 Sep 2020 18:14:11 +1200
+In-Reply-To: <CAOCN9rwV1JJEH04cuZUK9nBBOw83HaymwU7OYjXLiyahkfL55g@mail.gmail.com>
 References: <d3abac97b731ed0d37ea4dec28e2792128f527dd.camel@samba.org>
-In-Reply-To: <d3abac97b731ed0d37ea4dec28e2792128f527dd.camel@samba.org>
-Date: Sun, 6 Sep 2020 01:08:54 -0400
-Message-ID: <CAOCN9rwV1JJEH04cuZUK9nBBOw83HaymwU7OYjXLiyahkfL55g@mail.gmail.com>
-Subject: Re: Drop Python2 for the build?
-To: Andrew Bartlett <abartlet@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+ <CAOCN9rwV1JJEH04cuZUK9nBBOw83HaymwU7OYjXLiyahkfL55g@mail.gmail.com>
+Content-Type: multipart/mixed; boundary="=-bfxg+QroZF9AUVaSqj9I"
+User-Agent: Evolution 3.36.5 (3.36.5-1.fc32) 
+MIME-Version: 1.0
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,74 +55,80 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Sep 4, 2020 at 10:23 PM Andrew Bartlett via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> Just wondering when might be the time to drop the python2 build?
->
-> This came to mind because David Disseldorp recently had to adjust build
-> system changes to cope with python2, so I figured it might be time to
-> revisit this.
->
-> March 2021 will be 12 months after the long-delayed EOL for Python2 and
-> since we made last made big decisions around this area Python3 has
-> become available in the default package set for more platforms,
-> particularly including CentOS 7.
 
-I yanked python2 support out of my published RPM building tools quite
-some time ago. There are some weirdnesses in RHEL 7 and CentOS 7,
-because some packages from EPEL are named "python36-[module]" but
-don't provide "python3-[module]" unlike the current base OS packages
-for CentOS and RHEL, and they're due for an update in EPEL to resolve
-the discrepancy. Red Hat's selection to publish the python3 packages
-as "python3-" instead of following EPEL's "python36-[module]" naming
-convention has been a source of confusion, and it's even worse with
-Amazon Linux 2 where the "python3-[module]" packages are python 3.7,
-not python 3.6, and the incompatibility with EPEL is a real problem. I
-can't currently build my Samba packaging on Amazon Linux 2 without
-building up a dependency chain of those spare python3 modules.
+--=-bfxg+QroZF9AUVaSqj9I
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-The dependency chains and sometimes inconsistent availability of
-python modules and dependency chains for them among python2, python3,
-and different operating system releases is a serious pain in my
-keister and eats cycles I could burn better elsewhere.. "pip install"
-is not my friend when contemporary versions of modules are not
-compatible with each other, and when two modules have dependencies on
-incompatible versions of the same module. Simplifying this by
-discarding an obsolete build environment makes eminent sense.
+On Sun, 2020-09-06 at 01:08 -0400, Nico Kadel-Garcia via samba-
+technical wrote:
+> 
+> MacOS has working python3 according to my developer friends. Any
+> operating still based on python3 is so old that it should *not* be
+> running a contemporary Samba server, only perhaps cifs-utils for
+> mounting from Windows or Samba servers on a more contemporary and
+> securable operating system.
 
-> We currently spend CI resources building and smoke testing Samba with a
-> python2, which we could save, as well as the (small) complexity of
-> targeting both python versions.
+Thanks all for your positive feedback.
 
-Please, yes.
+Without pre-empting the remainder discussion attached is a proposed
+patch for the WHATSNEW for the pending 4.13.
 
-> The simplest change would change the minimum python to build Samba to
-> 3.5, the same as we set the minimum to for fuzzing, or just 3.6 the
-> same as we already require otherwise (this would be better tested).
+This gives our users fair warning.  We can then change the build system
+at our leisure (giving us a little more time for user feedback).
 
-3.6 is the python 3 base for both CentOS 7 and CentOS 8, so I'd be
-happy with that.
+To be clear, I'm not proposing changing the actual code in master yet,
+please do continue to send in your feedback.  
 
-> As background, the first Samba release with python3 support, 4.10, was
-> released in March 2019, so if we did this for 4.14 this would be a two-
-> year gap.
->
-> What do folks think?
->
-> Importantly: beyond Linux, how is python3 platform support better now?
->
-> Thanks,
+(Even after such a warning is given in 4.13 we can still change our
+minds, but our users will have been warned). 
 
-MacOS has working python3 according to my developer friends. Any
-operating still based on python3 is so old that it should *not* be
-running a contemporary Samba server, only perhaps cifs-utils for
-mounting from Windows or Samba servers on a more contemporary and
-securable operating system.
+Andrew Bartlett
+
+-- 
+Andrew Bartlett                       http://samba.org/~abartlet/
+Authentication Developer, Samba Team  http://samba.org
+Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+
+
+--=-bfxg+QroZF9AUVaSqj9I
+Content-Disposition: attachment;
+	filename*0=0001-WHATSNEW-Announce-the-end-of-Python-2.6-support-to-b.pat;
+	filename*1=ch
+Content-Transfer-Encoding: base64
+Content-Type: text/x-patch;
+	name="0001-WHATSNEW-Announce-the-end-of-Python-2.6-support-to-b.patch";
+	charset="UTF-8"
+
+RnJvbSA1YjFjYWQ4OWRkMWYwODQ1NjJiNDAxOGY5MmQ3YWQ1NTQ1OGFjOGRkIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBBbmRyZXcgQmFydGxldHQgPGFiYXJ0bGV0QHNhbWJhLm9yZz4K
+RGF0ZTogU3VuLCA2IFNlcCAyMDIwIDE4OjA3OjI5ICsxMjAwClN1YmplY3Q6IFtQQVRDSF0gV0hB
+VFNORVc6IEFubm91bmNlIHRoZSBlbmQgb2YgUHl0aG9uIDIuNiBzdXBwb3J0IHRvIGJ1aWxkCiBT
+YW1iYSAod2FybmluZyBmb3IgNC4xNCkKClNpZ25lZC1vZmYtYnk6IEFuZHJldyBCYXJ0bGV0dCA8
+YWJhcnRsZXRAc2FtYmEub3JnPgotLS0KIFdIQVRTTkVXLnR4dCB8IDEwICsrKysrKysrLS0KIDEg
+ZmlsZSBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0
+IGEvV0hBVFNORVcudHh0IGIvV0hBVFNORVcudHh0CmluZGV4IDgxZDkzMDBkZjk0Li4zNWE5ZDdj
+OTg4OSAxMDA2NDQKLS0tIGEvV0hBVFNORVcudHh0CisrKyBiL1dIQVRTTkVXLnR4dApAQCAtMjQs
+OCArMjQsMTQgQEAgU2FtYmEncyBtaW5pbXVtIHJ1bnRpbWUgcmVxdWlyZW1lbnQgZm9yIHB5dGhv
+biB3YXMgcmFpc2VkIHRvIFB5dGhvbgogMy42IGJvdGggdG8gYWNjZXNzIG5ldyBmZWF0dXJlcyBh
+bmQgYmVjYXVzZSB0aGlzIGlzIHRoZSBvbGRlc3QgdmVyc2lvbgogd2UgdGVzdCB3aXRoIGluIG91
+ciBDSSBpbmZyYXN0cnVjdHVyZS4KIAotKEJ1aWxkIHRpbWUgc3VwcG9ydCBmb3IgdGhlIGZpbGUg
+c2VydmVyIHdpdGggUHl0aG9uIDIuNiBoYXMgbm90Ci1jaGFuZ2VkKQorVGhpcyBpcyBhbHNvIHRo
+ZSBsYXN0IHJlbGVhc2Ugd2hlcmUgYnVpbGQgdGltZSBzdXBwb3J0IGZvciB0aGUgZmlsZQorc2Vy
+dmVyIHdpdGggUHl0aG9uIDIuNiB3aWxsIGJlIHByb3ZpZGVkLgorCitBcyBQeXRob24yIGhhcyBi
+ZWVuIEVuZCBPZiBMaWZlIHVwc3RyZWFtIHNpbmNlIEphbnVhcnkgMjAyMCwgU2FtYmEgaXMKK2Ry
+b3BwaW5nIFB5dGhvbjIgc3VwcG9ydCBmb3IgdGhlIE5FWFQgcmVsZWFzZS4KKworU2FtYmEgNC4x
+NCB0byBiZSByZWxlYXNlZCBpbiBNYXJjaCAyMDIxIHdpbGwgcmVxdWlyZSBQeXRob24gMy42IHRv
+CitidWlsZC4KIAogd2lkZSBsaW5rcyBmdW5jdGlvbmFsaXR5CiAtLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0KLS0gCjIuMjYuMgoK
+
+
+--=-bfxg+QroZF9AUVaSqj9I--
+
 
