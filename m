@@ -2,50 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C82325F475
-	for <lists+samba-technical@lfdr.de>; Mon,  7 Sep 2020 09:59:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 01DF825F8F7
+	for <lists+samba-technical@lfdr.de>; Mon,  7 Sep 2020 12:58:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=NTIFNJDDGOaaLbiLScgl/a4x/EQ7hQ8fkCHGG7XWe9c=; b=vMijU4EBP2AbGhgCehb227D7Xc
-	GSeyDSRS4EdG2Z8XPgQaJCla+0vmmGtzjNNojAv7znUb0wvQd4E4POcSlPjzsRj3aXJyAkIPyOH/2
-	BIyVj2DOHnZXkAv129l3uQmQcSpngpjnx7BjphagQhQyx18ohl3esYVQLzKLWqOakk0nL6bndfSbs
-	cwMCE9Lf65pYOcOLe1PVZypYMV4D9dWSoErdjcjNUopdoXVC7glkJKS4IcOzLjGcD/T1QiarqkzhN
-	HCisEKlssnGbLJ4TArqvkU4+3QVWFknCBrnWsuTUtT5Le0chcjp3QdsdhSfP9ujsnqG1imbq6wVJI
-	IExPrdvw==;
-Received: from localhost ([::1]:64598 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=DKEBQu5h6U1oca+WV9wYT8jlE0y+aTdDXrJbHsJWM9g=; b=5Ic8FaeU+IcmK78txIvX9s4qm0
+	9uzdBLaifzEjN+kuk1HmPa83GMe4bhqbcmE7jZCXPo6pCT7tPPP58wAgsItol/h0epUXfs7gRzS8H
+	ljUHnHk8ra9naj7upwforpwf35Gf6yO0WXtLY9dhzE61RA9ml/9ZkkC6c+WwiqUdqb7zIBkyg13TF
+	vf5NbgIDyOYe/00UJQBzNDgk7cKjo67V9hNI/FNXSH3sIQAAGOK2WVb27iiOGFNNDj13etMFamPPI
+	dk+Ous/nGl/tjxSECBSC9je3rgcWeDB8rLCnp1Dyeq1OKVlnTIA3FkGysPRK0TMsWBh79jGt+8jQN
+	xHACnD/Q==;
+Received: from localhost ([::1]:41922 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kFC2z-004SQG-HB; Mon, 07 Sep 2020 07:58:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21842) 
+	id 1kFEqS-004W59-LF; Mon, 07 Sep 2020 10:57:56 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35598) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kFC2s-004SQ9-42
- for samba-technical@lists.samba.org; Mon, 07 Sep 2020 07:58:36 +0000
+ (Exim) id 1kFEqH-004W4M-DP; Mon, 07 Sep 2020 10:57:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=NTIFNJDDGOaaLbiLScgl/a4x/EQ7hQ8fkCHGG7XWe9c=; b=Lwp52XgdJXbNB0fZAamB93xukg
- 6jOy6p5cjaBQZpfTK26GeatDJ98jJ5uz1PTv3C7Vw9W2KFU/1wH/4HielkWRthpwBp4wUHdNPnZdW
- tD/HxqvwVPi2t+tDMt8ksNpgTgTILXdRa4SIvpfEfPI+OU3+ssXR2cq+0UPS5q3gGQW095HLOjoLg
- q9uVV9R/VOaJ6sAfryx2losEu68aXh9OYr4cihpzpHXoejrQk0UzTPfaaV0NuskAVOrtE3qn6nEh6
- Ute8wVyI7r0KHIh/k8WwbhZ5pBn/zBtOYCWMClc6fnHDhrhuJ1TU6mGDfajUc0/31cE8KpYxsmmvj
- mbuNpFkytfyKH8RiSalOPiZ93qQgLDtW0YO6nUnY6fWP8YTkKI+VEECzK0Hq94QSBHnf3NvBmqZoH
- erSrtqXYb8XxbTFJD+rjYTwLhY1FRek9+4zfiUK0jXCV61HQiApmhH2fLavFjLRmovWb0DlKgqgZU
- zECqio4cDhn0me8p83WdcBku;
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=DKEBQu5h6U1oca+WV9wYT8jlE0y+aTdDXrJbHsJWM9g=; b=jOQDHbTmwkb7jzXUPirmWKXzY8
+ DpOpK6ec5eXJDruJZcj5DF14gqu2VKv9rW7xCLyy/jZwV25GcYfnrEL/xp8b3d414nksH4kXDM9mu
+ cwHEjUsfM3Ys33mp8eK/RWVD/7FT14tGWb8gpzQDY5dWFUVeLH9PrcaWitn+8s833zmz98I+evmhN
+ J/HUJeKTg2spIb/uhhhrRWRyLC/Yj8zFi+g3q7ocx2lhfnrmAqp2EHH0DdYmA+xa4/hRl3on8bYQR
+ ipR1Ag6wEZdwjbWldJ8a2QYoCVYwwPOHdnZvvNEYbOHyWF4Jwtd1f7E3QFPdwcv0yC1SvQGv3SAOn
+ Mduz6TMj5wQO5RHMPO+v7sgotQWJsNkiwF3qQSDlgXOuZpO6lEkkBpnTvT5Kow9lcLWU7O6pDYtvV
+ k76yHFy77sYorXtKd6Lx+ryvAQRqqJg7dVp5ODPXnsZH0wcKrkF9fbx5IpmIcXwGjG6Me8zILNgCh
+ e+ixkpTNhzsqAmsbKpEJb9Yk;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kFC2r-0003pc-3V; Mon, 07 Sep 2020 07:58:33 +0000
-Subject: Re: [PATCH] [WHATSNEW] Re: Drop Python2 for the build?
-To: Andrew Bartlett <abartlet@samba.org>, Karolin Seeger <kseeger@samba.org>
-References: <d3abac97b731ed0d37ea4dec28e2792128f527dd.camel@samba.org>
- <CAOCN9rwV1JJEH04cuZUK9nBBOw83HaymwU7OYjXLiyahkfL55g@mail.gmail.com>
- <12ae82a7f574030f0911b51f397ece6de2c557b2.camel@samba.org>
-Message-ID: <e279b12e-0b88-3f40-3733-ea575486db28@samba.org>
-Date: Mon, 7 Sep 2020 09:58:15 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kFEqH-0005Zs-2P; Mon, 07 Sep 2020 10:57:45 +0000
+Date: Mon, 7 Sep 2020 12:57:40 +0200
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.13.0rc4 Available for Download
+Message-ID: <20200907105735.GA18444@carrie2>
 MIME-Version: 1.0
-In-Reply-To: <12ae82a7f574030f0911b51f397ece6de2c557b2.camel@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="b1dhKBwbecxFxEuEq35uWyi5TOiWJ38FU"
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="pf9I7BMVVzbSWLtt"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,86 +54,225 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---b1dhKBwbecxFxEuEq35uWyi5TOiWJ38FU
-Content-Type: multipart/mixed; boundary="khXBPcH3zfAzivwcaOAmFmDmlJRpiQseW";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Andrew Bartlett <abartlet@samba.org>, Karolin Seeger <kseeger@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
-Message-ID: <e279b12e-0b88-3f40-3733-ea575486db28@samba.org>
-Subject: Re: [PATCH] [WHATSNEW] Re: Drop Python2 for the build?
-References: <d3abac97b731ed0d37ea4dec28e2792128f527dd.camel@samba.org>
- <CAOCN9rwV1JJEH04cuZUK9nBBOw83HaymwU7OYjXLiyahkfL55g@mail.gmail.com>
- <12ae82a7f574030f0911b51f397ece6de2c557b2.camel@samba.org>
-In-Reply-To: <12ae82a7f574030f0911b51f397ece6de2c557b2.camel@samba.org>
 
---khXBPcH3zfAzivwcaOAmFmDmlJRpiQseW
+--pf9I7BMVVzbSWLtt
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Am 06.09.20 um 08:14 schrieb Andrew Bartlett via samba-technical:
-> On Sun, 2020-09-06 at 01:08 -0400, Nico Kadel-Garcia via samba-
-> technical wrote:
->>
->> MacOS has working python3 according to my developer friends. Any
->> operating still based on python3 is so old that it should *not* be
->> running a contemporary Samba server, only perhaps cifs-utils for
->> mounting from Windows or Samba servers on a more contemporary and
->> securable operating system.
->=20
-> Thanks all for your positive feedback.
->=20
-> Without pre-empting the remainder discussion attached is a proposed
-> patch for the WHATSNEW for the pending 4.13.
->=20
-> This gives our users fair warning.  We can then change the build system=
+Release Announcements
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-> at our leisure (giving us a little more time for user feedback).
->=20
-> To be clear, I'm not proposing changing the actual code in master yet,
-> please do continue to send in your feedback. =20
->=20
-> (Even after such a warning is given in 4.13 we can still change our
-> minds, but our users will have been warned).=20
+This is the fourth release condidate of Samba 4.13.  This is *not*
+intended for production environments and is designed for testing
+purposes only.  Please report any defects via the Samba bug reporting
+system at https://bugzilla.samba.org/.
 
-I guess you mean: we'll remove support for Python 2.6 as well as 2.7?
-This is not really clear from the WHATSNEW entry.
-
-metze
+Samba 4.13 will be the next version of the Samba suite.
 
 
+UPGRADING
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
---khXBPcH3zfAzivwcaOAmFmDmlJRpiQseW--
 
---b1dhKBwbecxFxEuEq35uWyi5TOiWJ38FU
+NEW FEATURES/CHANGES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+Python 3.6 Required
+-------------------
+
+Samba's minimum runtime requirement for python was raised to Python
+3.5 with samba 4.12.  Samba 4.13 raises this minimum version to Python
+3.6 both to access new features and because this is the oldest version
+we test with in our CI infrastructure.
+
+(Build time support for the file server with Python 2.6 has not
+changed)
+
+wide links functionality
+------------------------
+
+For this release, the code implementing the insecure "wide links =3D yes"
+functionality has been moved out of the core smbd code and into a separate
+VFS module, vfs_widelinks. Currently this vfs module is implicitly loaded
+by smbd as the last but one module before vfs_default if "wide links =3D ye=
+s"
+is enabled on the share (note, the existing restrictions on enabling wide
+links around the SMB1 "unix extensions" and the "allow insecure wide links"
+parameters are still in force). The implicit loading was done to allow
+existing users of "wide links =3D yes" to keep this functionality without
+having to make a change to existing working smb.conf files.
+
+Please note that the Samba developers recommend changing any Samba
+installations that currently use "wide links =3D yes" to use bind mounts
+as soon as possible, as "wide links =3D yes" is an inherently insecure
+configuration which we would like to remove from Samba. Moving the
+feature into a VFS module allows this to be done in a cleaner way
+in future.
+
+A future release to be determined will remove this implicit linkage,
+causing administrators who need this functionality to have to explicitly
+add the vfs_widelinks module into the "vfs objects =3D" parameter lists.
+The release notes will be updated to note this change when it occurs.
+
+NT4-like 'classic' Samba domain controllers
+-------------------------------------------
+
+Samba 4.13 deprecates Samba's original domain controller mode.
+
+Sites using Samba as a Domain Controller should upgrade from the
+NT4-like 'classic' Domain Controller to a Samba Active Directory DC
+to ensure full operation with modern windows clients.
+
+SMBv1 only protocol options deprecated
+--------------------------------------
+
+A number of smb.conf parameters for less-secure authentication methods
+which are only possible over SMBv1 are deprecated in this release.
+
+REMOVED FEATURES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The deprecated "ldap ssl ads" smb.conf option has been removed.
+
+smb.conf changes
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+  Parameter Name                     Description                Default
+  --------------                     -----------                -------
+  ldap ssl ads                       removed
+  smb2 disable lock sequence checking				No
+  domain logons                      Deprecated                 no
+  raw NTLMv2 auth                    Deprecated                 no
+  client plaintext auth              Deprecated                 no
+  client NTLMv2 auth                 Deprecated                 yes
+  client lanman auth                 Deprecated                 no
+  client use spnego                  Deprecated                 yes
+
+
+CHANGES SINCE 4.13.0rc3
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+o  David Disseldorp <ddiss@samba.org>
+   * BUG 14437: build: Toggle vfs_snapper using "--with-shared-modules".
+
+o  Volker Lendecke <vl@samba.org>
+   * BUG 14465: idmap_ad does not deal properly with a RFC4511 section 4.4.1
+     response.
+
+o  Stefan Metzmacher <metze@samba.org>
+   * BUG 14428: PANIC: Assert failed in get_lease_type().
+   * BUG 14465: idmap_ad does not deal properly with a RFC4511 section 4.4.1
+     response.
+
+
+CHANGES SINCE 4.13.0rc2
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+o  Andrew Bartlett <abartlet@samba.org>
+   * BUG 14460: Deprecate domain logons, SMBv1 things.
+
+o  G=C3=BCnther Deschner <gd@samba.org>
+   * BUG 14318: docs: Add missing winexe manpage.
+
+o  Christof Schmitt <cs@samba.org>
+   * BUG 14166: util: Allow symlinks in directory_create_or_exist.
+
+o  Martin Schwenke <martin@meltin.net>
+   * BUG 14466: ctdb disable/enable can fail due to race condition.
+
+
+CHANGES SINCE 4.13.0rc1
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+o  Andrew Bartlett <abartlet@samba.org>
+   * BUG 14450: dbcheck: Allow a dangling forward link outside our known NC=
+s.
+
+o  Isaac Boukris <iboukris@gmail.com>
+   * BUG 14462: Remove deprecated "ldap ssl ads" smb.conf option.
+
+o  Volker Lendecke <vl@samba.org>
+   * BUG 14435: winbind: Fix lookuprids cache problem.
+
+o  Stefan Metzmacher <metze@samba.org>
+   * BUG 14354: kdc:db-glue: Ignore KRB5_PROG_ETYPE_NOSUPP also for
+     Primary:Kerberos.
+
+o  Andreas Schneider <asn@samba.org>
+   * BUG 14358: docs: Fix documentation for require_membership_of of
+     pam_winbind.conf.
+
+o  Martin Schwenke <martin@meltin.net>
+   * BUG 14444: ctdb-scripts: Use nfsconf as a last resort get nfsd thread
+     count.
+
+
+KNOWN ISSUES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.13#Release_bl=
+ocking_bugs
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/rc/
+
+The release notes are available online at:
+
+        https://download.samba.org/pub/samba/rc/samba-4.13.0rc4.WHATSNEW.txt
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--pf9I7BMVVzbSWLtt
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl9V6CQACgkQDbX1YShp
-vVZOww//X55zYcEihRu+UQ9ux0PZx6A15XqBVYVYmYljtWs/GNO3ATVfxQ+rqoKd
-QVpTxv0w+7+x0gHRtZAD55WP2y8t4jWcyhMioMq/PTMjnoPAVq+gPXBAu9JVjLD/
-SGdKK1wUDcJm1VFmVgJGimW67Z+QC/ADCAsbr4WxF0toK7V198XC7OEU4sy39X2F
-f6LJs2cF7mJhfRJwoCcQ8M+3R9QZplnPcs34EXT6w3pXBQxo1Tp22npMrVH+xA1n
-gUNFIxv4Aurivw86nz4zHLIGii/aaVUG8aQHAfd9raYHbnF0RHOLdNiFQbhc/H0o
-d0tDu6ZZoru9Lq2oddR/BlmiVmwRXcAyt93I0y8n3q7E8XlOMljFRmBkLGMGT86/
-6tNQQ8vEQj8w+//wBFyUPdzudz1THxaIsF3cGFVn72j2vWQxTFle5TPSBXnYxeHx
-VbpNaEa6nMEfUe4mx6kNrm2lgABmgezBqvshlcPqrYN9GWotoXxDOPTlKQyAA1Ug
-f1fkGHRro2ZhDDtd3aR11ciDvwzYSVs1Ss57bLVCwnozPPFIRwD6U5+3kysmSN4k
-rixvqx0B7s52DoanePFqOS5XxxwJ/qBhxE67wECo5h36QyaP9Php/Vovmtq3yW0w
-BarjW+FiLVbdt2bdxDK59p3pSTW4FqmgMlicpb4IhUD0xhWp4j4=
-=8Cgv
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCX1YSHAAKCRAoaL1+KxeT
+UTo0AKDDMqvwhjm5yK5pKArYvWUl9HhsjQCgmF8P2UICk8NnT6ymuKKsn6VFStk=
+=dbbf
 -----END PGP SIGNATURE-----
 
---b1dhKBwbecxFxEuEq35uWyi5TOiWJ38FU--
+--pf9I7BMVVzbSWLtt--
 
