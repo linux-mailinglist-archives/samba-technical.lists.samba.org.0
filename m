@@ -2,46 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B36B625ED02
-	for <lists+samba-technical@lfdr.de>; Sun,  6 Sep 2020 08:14:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C82325F475
+	for <lists+samba-technical@lfdr.de>; Mon,  7 Sep 2020 09:59:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=ZhH5R30HvdM3DeOJVNsx5BtBMl8cEdmKzTxxq6wj63k=; b=uOeFYCsC1PfY2o6cACvKlozy0B
-	uRDcTSBXPmsVgI4BTZJeefYH9uRX/uW5SY6vRsh3px+awSp6Bs5UG8zWrTqpbHzNQxUpRd4bYabVg
-	Qw6vgxZlEFRmfcXveaRR+KoJSiOTIepiantnimPF8GCbicvlkeNJIHBYl4HTf6CO3h2tK15AAIwaU
-	Y3Zo5RdQ6DH5d4uMsn+OZ8s5V/RxgFQn+A/xX1B6pHhzuQXd4PMJwUm+YPoljKLasrwGE0Cxa2LmT
-	bUHqot5aKL52Nh7uukSym3Z1jk8G9MvU0oZgUu8hlNA8iuQSJ6YMzdyjKcLhhRy+8F+nqv5hOBYus
-	hHP4b9Hg==;
-Received: from localhost ([::1]:63968 helo=hr1.samba.org) 
+	bh=NTIFNJDDGOaaLbiLScgl/a4x/EQ7hQ8fkCHGG7XWe9c=; b=vMijU4EBP2AbGhgCehb227D7Xc
+	GSeyDSRS4EdG2Z8XPgQaJCla+0vmmGtzjNNojAv7znUb0wvQd4E4POcSlPjzsRj3aXJyAkIPyOH/2
+	BIyVj2DOHnZXkAv129l3uQmQcSpngpjnx7BjphagQhQyx18ohl3esYVQLzKLWqOakk0nL6bndfSbs
+	cwMCE9Lf65pYOcOLe1PVZypYMV4D9dWSoErdjcjNUopdoXVC7glkJKS4IcOzLjGcD/T1QiarqkzhN
+	HCisEKlssnGbLJ4TArqvkU4+3QVWFknCBrnWsuTUtT5Le0chcjp3QdsdhSfP9ujsnqG1imbq6wVJI
+	IExPrdvw==;
+Received: from localhost ([::1]:64598 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kEnwW-004JDA-RQ; Sun, 06 Sep 2020 06:14:24 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16304) 
+	id 1kFC2z-004SQG-HB; Mon, 07 Sep 2020 07:58:41 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21842) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kEnwR-004JD3-Le
- for samba-technical@lists.samba.org; Sun, 06 Sep 2020 06:14:22 +0000
+ (Exim) id 1kFC2s-004SQ9-42
+ for samba-technical@lists.samba.org; Mon, 07 Sep 2020 07:58:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=ZhH5R30HvdM3DeOJVNsx5BtBMl8cEdmKzTxxq6wj63k=; b=MTfEZDjrSPFcgRqpIOd3CLZZtI
- 6RyvULQxbNMv+SgkqpxHQGdcPyzYcV5FiixfnQuSohJHrBDaDY/ryIu1kwE6dfZDKMFlx3AFA9KkE
- OLKoZ7EE1xQ25HyO1IxUs21H2LoeVLj9k7Zqpyo9dcEV2cac4xDK5VBvEDBrqd1hYBG+10KcKoOtB
- YXeY144DOQLwgvW4OhpH9C7MD4lQN6eMQsGNYl+fD6QvoR4jpHL+oLFspwlm8VlpNhYogsI68FckJ
- la9jnQvMTDbme3Si1m0O62IM7IlqrQp0eztLpVMD0aED/ouvz1F8V1zEN/OKksdq2lGpIQ8VjT+JY
- Je5oip3c8v7RlT6QuOH9Rj9YWyoLBf1CFgxEiAJyhAMbxwCDLFvQ+T3Z0rSBFmEr1LsUoKiEoDsL+
- S+x5QqEt5833LXBHE6TheZi+tBMAr8cojYLOVC7jCR5+gxLaGGaRTqoO+qdxFLBYqUCD933CsPrT/
- zleujCzr1RU1WW43vDSFFszI;
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=NTIFNJDDGOaaLbiLScgl/a4x/EQ7hQ8fkCHGG7XWe9c=; b=Lwp52XgdJXbNB0fZAamB93xukg
+ 6jOy6p5cjaBQZpfTK26GeatDJ98jJ5uz1PTv3C7Vw9W2KFU/1wH/4HielkWRthpwBp4wUHdNPnZdW
+ tD/HxqvwVPi2t+tDMt8ksNpgTgTILXdRa4SIvpfEfPI+OU3+ssXR2cq+0UPS5q3gGQW095HLOjoLg
+ q9uVV9R/VOaJ6sAfryx2losEu68aXh9OYr4cihpzpHXoejrQk0UzTPfaaV0NuskAVOrtE3qn6nEh6
+ Ute8wVyI7r0KHIh/k8WwbhZ5pBn/zBtOYCWMClc6fnHDhrhuJ1TU6mGDfajUc0/31cE8KpYxsmmvj
+ mbuNpFkytfyKH8RiSalOPiZ93qQgLDtW0YO6nUnY6fWP8YTkKI+VEECzK0Hq94QSBHnf3NvBmqZoH
+ erSrtqXYb8XxbTFJD+rjYTwLhY1FRek9+4zfiUK0jXCV61HQiApmhH2fLavFjLRmovWb0DlKgqgZU
+ zECqio4cDhn0me8p83WdcBku;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kEnwP-00029o-RR; Sun, 06 Sep 2020 06:14:18 +0000
-Message-ID: <12ae82a7f574030f0911b51f397ece6de2c557b2.camel@samba.org>
-Subject: [PATCH] [WHATSNEW] Re: Drop Python2 for the build?
-To: Karolin Seeger <kseeger@samba.org>
-Date: Sun, 06 Sep 2020 18:14:11 +1200
-In-Reply-To: <CAOCN9rwV1JJEH04cuZUK9nBBOw83HaymwU7OYjXLiyahkfL55g@mail.gmail.com>
+ (Exim) id 1kFC2r-0003pc-3V; Mon, 07 Sep 2020 07:58:33 +0000
+Subject: Re: [PATCH] [WHATSNEW] Re: Drop Python2 for the build?
+To: Andrew Bartlett <abartlet@samba.org>, Karolin Seeger <kseeger@samba.org>
 References: <d3abac97b731ed0d37ea4dec28e2792128f527dd.camel@samba.org>
  <CAOCN9rwV1JJEH04cuZUK9nBBOw83HaymwU7OYjXLiyahkfL55g@mail.gmail.com>
-Content-Type: multipart/mixed; boundary="=-bfxg+QroZF9AUVaSqj9I"
-User-Agent: Evolution 3.36.5 (3.36.5-1.fc32) 
+ <12ae82a7f574030f0911b51f397ece6de2c557b2.camel@samba.org>
+Message-ID: <e279b12e-0b88-3f40-3733-ea575486db28@samba.org>
+Date: Mon, 7 Sep 2020 09:58:15 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <12ae82a7f574030f0911b51f397ece6de2c557b2.camel@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="b1dhKBwbecxFxEuEq35uWyi5TOiWJ38FU"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,80 +59,86 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--b1dhKBwbecxFxEuEq35uWyi5TOiWJ38FU
+Content-Type: multipart/mixed; boundary="khXBPcH3zfAzivwcaOAmFmDmlJRpiQseW";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Andrew Bartlett <abartlet@samba.org>, Karolin Seeger <kseeger@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
+Message-ID: <e279b12e-0b88-3f40-3733-ea575486db28@samba.org>
+Subject: Re: [PATCH] [WHATSNEW] Re: Drop Python2 for the build?
+References: <d3abac97b731ed0d37ea4dec28e2792128f527dd.camel@samba.org>
+ <CAOCN9rwV1JJEH04cuZUK9nBBOw83HaymwU7OYjXLiyahkfL55g@mail.gmail.com>
+ <12ae82a7f574030f0911b51f397ece6de2c557b2.camel@samba.org>
+In-Reply-To: <12ae82a7f574030f0911b51f397ece6de2c557b2.camel@samba.org>
 
---=-bfxg+QroZF9AUVaSqj9I
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+--khXBPcH3zfAzivwcaOAmFmDmlJRpiQseW
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, 2020-09-06 at 01:08 -0400, Nico Kadel-Garcia via samba-
-technical wrote:
-> 
-> MacOS has working python3 according to my developer friends. Any
-> operating still based on python3 is so old that it should *not* be
-> running a contemporary Samba server, only perhaps cifs-utils for
-> mounting from Windows or Samba servers on a more contemporary and
-> securable operating system.
+Am 06.09.20 um 08:14 schrieb Andrew Bartlett via samba-technical:
+> On Sun, 2020-09-06 at 01:08 -0400, Nico Kadel-Garcia via samba-
+> technical wrote:
+>>
+>> MacOS has working python3 according to my developer friends. Any
+>> operating still based on python3 is so old that it should *not* be
+>> running a contemporary Samba server, only perhaps cifs-utils for
+>> mounting from Windows or Samba servers on a more contemporary and
+>> securable operating system.
+>=20
+> Thanks all for your positive feedback.
+>=20
+> Without pre-empting the remainder discussion attached is a proposed
+> patch for the WHATSNEW for the pending 4.13.
+>=20
+> This gives our users fair warning.  We can then change the build system=
 
-Thanks all for your positive feedback.
+> at our leisure (giving us a little more time for user feedback).
+>=20
+> To be clear, I'm not proposing changing the actual code in master yet,
+> please do continue to send in your feedback. =20
+>=20
+> (Even after such a warning is given in 4.13 we can still change our
+> minds, but our users will have been warned).=20
 
-Without pre-empting the remainder discussion attached is a proposed
-patch for the WHATSNEW for the pending 4.13.
+I guess you mean: we'll remove support for Python 2.6 as well as 2.7?
+This is not really clear from the WHATSNEW entry.
 
-This gives our users fair warning.  We can then change the build system
-at our leisure (giving us a little more time for user feedback).
-
-To be clear, I'm not proposing changing the actual code in master yet,
-please do continue to send in your feedback.  
-
-(Even after such a warning is given in 4.13 we can still change our
-minds, but our users will have been warned). 
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett                       http://samba.org/~abartlet/
-Authentication Developer, Samba Team  http://samba.org
-Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
-
-
---=-bfxg+QroZF9AUVaSqj9I
-Content-Disposition: attachment;
-	filename*0=0001-WHATSNEW-Announce-the-end-of-Python-2.6-support-to-b.pat;
-	filename*1=ch
-Content-Transfer-Encoding: base64
-Content-Type: text/x-patch;
-	name="0001-WHATSNEW-Announce-the-end-of-Python-2.6-support-to-b.patch";
-	charset="UTF-8"
-
-RnJvbSA1YjFjYWQ4OWRkMWYwODQ1NjJiNDAxOGY5MmQ3YWQ1NTQ1OGFjOGRkIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBBbmRyZXcgQmFydGxldHQgPGFiYXJ0bGV0QHNhbWJhLm9yZz4K
-RGF0ZTogU3VuLCA2IFNlcCAyMDIwIDE4OjA3OjI5ICsxMjAwClN1YmplY3Q6IFtQQVRDSF0gV0hB
-VFNORVc6IEFubm91bmNlIHRoZSBlbmQgb2YgUHl0aG9uIDIuNiBzdXBwb3J0IHRvIGJ1aWxkCiBT
-YW1iYSAod2FybmluZyBmb3IgNC4xNCkKClNpZ25lZC1vZmYtYnk6IEFuZHJldyBCYXJ0bGV0dCA8
-YWJhcnRsZXRAc2FtYmEub3JnPgotLS0KIFdIQVRTTkVXLnR4dCB8IDEwICsrKysrKysrLS0KIDEg
-ZmlsZSBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0
-IGEvV0hBVFNORVcudHh0IGIvV0hBVFNORVcudHh0CmluZGV4IDgxZDkzMDBkZjk0Li4zNWE5ZDdj
-OTg4OSAxMDA2NDQKLS0tIGEvV0hBVFNORVcudHh0CisrKyBiL1dIQVRTTkVXLnR4dApAQCAtMjQs
-OCArMjQsMTQgQEAgU2FtYmEncyBtaW5pbXVtIHJ1bnRpbWUgcmVxdWlyZW1lbnQgZm9yIHB5dGhv
-biB3YXMgcmFpc2VkIHRvIFB5dGhvbgogMy42IGJvdGggdG8gYWNjZXNzIG5ldyBmZWF0dXJlcyBh
-bmQgYmVjYXVzZSB0aGlzIGlzIHRoZSBvbGRlc3QgdmVyc2lvbgogd2UgdGVzdCB3aXRoIGluIG91
-ciBDSSBpbmZyYXN0cnVjdHVyZS4KIAotKEJ1aWxkIHRpbWUgc3VwcG9ydCBmb3IgdGhlIGZpbGUg
-c2VydmVyIHdpdGggUHl0aG9uIDIuNiBoYXMgbm90Ci1jaGFuZ2VkKQorVGhpcyBpcyBhbHNvIHRo
-ZSBsYXN0IHJlbGVhc2Ugd2hlcmUgYnVpbGQgdGltZSBzdXBwb3J0IGZvciB0aGUgZmlsZQorc2Vy
-dmVyIHdpdGggUHl0aG9uIDIuNiB3aWxsIGJlIHByb3ZpZGVkLgorCitBcyBQeXRob24yIGhhcyBi
-ZWVuIEVuZCBPZiBMaWZlIHVwc3RyZWFtIHNpbmNlIEphbnVhcnkgMjAyMCwgU2FtYmEgaXMKK2Ry
-b3BwaW5nIFB5dGhvbjIgc3VwcG9ydCBmb3IgdGhlIE5FWFQgcmVsZWFzZS4KKworU2FtYmEgNC4x
-NCB0byBiZSByZWxlYXNlZCBpbiBNYXJjaCAyMDIxIHdpbGwgcmVxdWlyZSBQeXRob24gMy42IHRv
-CitidWlsZC4KIAogd2lkZSBsaW5rcyBmdW5jdGlvbmFsaXR5CiAtLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0KLS0gCjIuMjYuMgoK
+metze
 
 
---=-bfxg+QroZF9AUVaSqj9I--
 
+--khXBPcH3zfAzivwcaOAmFmDmlJRpiQseW--
+
+--b1dhKBwbecxFxEuEq35uWyi5TOiWJ38FU
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl9V6CQACgkQDbX1YShp
+vVZOww//X55zYcEihRu+UQ9ux0PZx6A15XqBVYVYmYljtWs/GNO3ATVfxQ+rqoKd
+QVpTxv0w+7+x0gHRtZAD55WP2y8t4jWcyhMioMq/PTMjnoPAVq+gPXBAu9JVjLD/
+SGdKK1wUDcJm1VFmVgJGimW67Z+QC/ADCAsbr4WxF0toK7V198XC7OEU4sy39X2F
+f6LJs2cF7mJhfRJwoCcQ8M+3R9QZplnPcs34EXT6w3pXBQxo1Tp22npMrVH+xA1n
+gUNFIxv4Aurivw86nz4zHLIGii/aaVUG8aQHAfd9raYHbnF0RHOLdNiFQbhc/H0o
+d0tDu6ZZoru9Lq2oddR/BlmiVmwRXcAyt93I0y8n3q7E8XlOMljFRmBkLGMGT86/
+6tNQQ8vEQj8w+//wBFyUPdzudz1THxaIsF3cGFVn72j2vWQxTFle5TPSBXnYxeHx
+VbpNaEa6nMEfUe4mx6kNrm2lgABmgezBqvshlcPqrYN9GWotoXxDOPTlKQyAA1Ug
+f1fkGHRro2ZhDDtd3aR11ciDvwzYSVs1Ss57bLVCwnozPPFIRwD6U5+3kysmSN4k
+rixvqx0B7s52DoanePFqOS5XxxwJ/qBhxE67wECo5h36QyaP9Php/Vovmtq3yW0w
+BarjW+FiLVbdt2bdxDK59p3pSTW4FqmgMlicpb4IhUD0xhWp4j4=
+=8Cgv
+-----END PGP SIGNATURE-----
+
+--b1dhKBwbecxFxEuEq35uWyi5TOiWJ38FU--
 
