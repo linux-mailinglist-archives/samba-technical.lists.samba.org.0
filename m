@@ -2,51 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EE5D2621CC
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Sep 2020 23:17:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6EE9262241
+	for <lists+samba-technical@lfdr.de>; Wed,  9 Sep 2020 00:00:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=XCYOofH7yef9G6pCc55bqSvnK2SQ2V7R2W9BtQb3PPE=; b=idtka0Z5eJMdJTYBzXkiQ4s/b1
-	LxJ5vr6IaPZFbYXOrP9xJmj3yu8N3wnxXKvefIdobhRlw4VY77yQ1eV2bMIqSa+EB8C+y5nAD6wYh
-	zDuSdyS8Id41uz7Z7sJpJqU7hDPmUGONC0HIMzYecF99JDfnXRqRUeH2rtYbBFoFpz96SxsvgfCzD
-	9RYJt84gZZkS/lQGoihH7+sUKwMr+KDixER9Cj6W0+otHsIf5fKiFZOgbbpBiqVM6zxxy+Z/l+dIh
-	801BAc1B0X7sBRKbbA5BBzdMv3sGcY8zoNBl9D/arCnoNajC6T4nAEPpwK0Fb1yqMELdNFVrSBKK6
-	5JuZfjaQ==;
-Received: from localhost ([::1]:53670 helo=hr1.samba.org) 
+	bh=KOjdhyAHRKzdZQELo1DXoToXx2B7HgAGo+JcH/b3yDg=; b=Ci/HshGksxua5piB7F0SmLH9QR
+	ABmt5yvNFJ3Aka9olHEdjX8RvLAkzjq47UAci0ccljoJ/btpNhr0LvdIB9/Ejdgf5V5SYuOgbN/Y6
+	gf03hB2PTtrzPdmGo/4ljQI7OBiKt0kfJxhEqwqeiUiYt3/9fNhxJA+USr8tfmvpgDrUbIqTiWwvL
+	iBtc0x2RMMGt/q0WNuAw4sCdPFVMih5WCyABb0qiv1qUP+YwTusOvgRSJF3mwbN/kCRH7dWHW/EDn
+	/YKwNdFMobkHb1rt/b9bT5i4n/rAzWed7ER5/VAHOL6V/Cdw8Atm6VPqncZCx0RfmeLHHfSIIBCjB
+	TIuy40aA==;
+Received: from localhost ([::1]:54404 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kFkyi-004hft-J2; Tue, 08 Sep 2020 21:16:36 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54546) 
+	id 1kFleJ-004hpI-5D; Tue, 08 Sep 2020 21:59:35 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz
+ ([2404:130:4080::4]:42194) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kFkyY-004hfm-NK
- for samba-technical@lists.samba.org; Tue, 08 Sep 2020 21:16:34 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=XCYOofH7yef9G6pCc55bqSvnK2SQ2V7R2W9BtQb3PPE=; b=aUz8GSrsl9HxcXqqCqHYKe9uRl
- 5idcjKaSCLwVscqmwR/ggZfnS+tD1F9AqTBOt80JQ2miwK98qjF/qSi8TdJL9UgndZklbgzWl9HrK
- iNsP7c3QuoBlLgdw2gaiF2Am4sPKZoBDbYQhMFY7bJBfX6PLrlu25s8J+DTpXExpqGuQYspzUXQ/d
- NgLsiV4GYXlM3dH6WYbj4nknvswjRMgeF8z5EM4CZ0k5eG+Vx74eRHcf4U/URqBep493r9by639ZV
- jWEu0j+fZdAgBjsGxfWYn9mzxnvCrs45uBlMxC7eL+UxK/ewJD9hWTDq2zpHntCHlBzM+noxFHFSB
- nArpk+P+p3UYAsPb9O3Oo0fLdU+hFEyI8STqVLB5FtpMsmihO9PoYgfnv/kviW9wztQR6VLSZoOXK
- LnMxB8wEwNA5S6wvcOjzgQFUwWzkDuLqXnXbrdDSeWNVvhhV31RCHn7NWBOXF55yny0R02ZLXVrsd
- 5cigSAhMLPFRcu5RCL7+56aw;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kFkyW-0005NK-L0; Tue, 08 Sep 2020 21:16:25 +0000
-Message-ID: <d5a31f2fdfcfd03813cd3cc9ee862af2aad5d5ed.camel@samba.org>
+ (Exim) id 1kFleB-004hpB-PP
+ for samba-technical@lists.samba.org; Tue, 08 Sep 2020 21:59:32 +0000
+Received: from [IPv6:2404:130:0:1000:4199:3f10:497d:e5fb] (unknown
+ [IPv6:2404:130:0:1000:4199:3f10:497d:e5fb])
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 12ED7810CB; 
+ Wed,  9 Sep 2020 09:59:02 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1599602342;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=KOjdhyAHRKzdZQELo1DXoToXx2B7HgAGo+JcH/b3yDg=;
+ b=CqUMznQNxgi+fEDL9+XfSfF8jnejaBbPqqzGlxJJ5wvLQ7QtlrqmEQ38A+fuivFnBzLy6L
+ wLlJT0wWMgnJBmH0U1wsOI/41mAIgLBbcxZdesemkrqkz90MfkK4WSEJ5T4mJqLoJrnGom
+ /3UNRIReKhwj5wIPWHRWMtk0PAvgmIEjU/n4pfHE0Gx+iHLo1j7qDOKV3rweI2/Bd5WubT
+ DV8c20lQQt6b5MSRw4oH9raIuFVKplWEuHilP1dqsnPjph+J8yxl4v4wwRsB3Tm5G42XKJ
+ 5R6eRdePKoU+DZtea6+EDiLnkNRZdQX1X/QKnzQzpfd3di5y6bjiKP8YEsWSFA==
 Subject: Re: [PATCH] [WHATSNEW] Re: Drop Python2 for the build?
-To: Alexander Bokovoy <ab@samba.org>, Jeremy Allison <jra@samba.org>
-Date: Wed, 09 Sep 2020 09:16:04 +1200
-In-Reply-To: <20200908165820.GB23377@pinega.vda.li>
+To: Andrew Bartlett <abartlet@samba.org>, Alexander Bokovoy <ab@samba.org>,
+ Jeremy Allison <jra@samba.org>
 References: <d3abac97b731ed0d37ea4dec28e2792128f527dd.camel@samba.org>
  <CAOCN9rwV1JJEH04cuZUK9nBBOw83HaymwU7OYjXLiyahkfL55g@mail.gmail.com>
  <12ae82a7f574030f0911b51f397ece6de2c557b2.camel@samba.org>
  <e279b12e-0b88-3f40-3733-ea575486db28@samba.org>
  <7960be07410deb265299daf2e2af243b628f3d4d.camel@samba.org>
- <20200908161627.GB599978@jeremy-acer>
- <20200908165820.GB23377@pinega.vda.li>
-Content-Type: multipart/mixed; boundary="=-kOF3Xa7Br0dKTdh8PHSZ"
-User-Agent: Evolution 3.36.5 (3.36.5-1.fc32) 
+ <20200908161627.GB599978@jeremy-acer> <20200908165820.GB23377@pinega.vda.li>
+ <d5a31f2fdfcfd03813cd3cc9ee862af2aad5d5ed.camel@samba.org>
+Message-ID: <fece1ff9-f0c8-ab82-6aba-fa3810ca387f@catalyst.net.nz>
+Date: Wed, 9 Sep 2020 09:59:00 +1200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <d5a31f2fdfcfd03813cd3cc9ee862af2aad5d5ed.camel@samba.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-NZ
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-2.58 / 15.00]; ARC_NA(0.00)[];
+ FROM_HAS_DN(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ MIME_GOOD(-0.10)[text/plain]; RCPT_COUNT_FIVE(0.00)[5];
+ DKIM_SIGNED(0.00)[]; TO_DN_ALL(0.00)[];
+ NEURAL_HAM_SHORT(-0.48)[-0.479]; RCVD_COUNT_ZERO(0.00)[0];
+ FROM_EQ_ENVFROM(0.00)[]; MIME_TRACE(0.00)[0:+];
+ SUBJECT_ENDS_QUESTION(1.00)[]; MID_RHS_MATCH_FROM(0.00)[];
+ BAYES_HAM(-3.00)[99.99%]
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,85 +77,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Cc: Stefan Metzmacher <metze@samba.org>,
  samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+On 9/09/20 9:16 am, Andrew Bartlett via samba-technical wrote:
 
---=-kOF3Xa7Br0dKTdh8PHSZ
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+> Thanks!  I love bike sheds
 
-On Tue, 2020-09-08 at 19:58 +0300, Alexander Bokovoy wrote:
-> On ti, 08 syys 2020, Jeremy Allison via samba-technical wrote:
-> > On Tue, Sep 08, 2020 at 10:17:54AM +1200, Andrew Bartlett via samba-technical wrote:
-> > > I'm sorry it was not clear, yes I mean all Python 2.x support will be
-> > > gone so we can focus on Python 3.6 and above.
-> > > 
-> > > Let me know if this new patch is clearer.
-> > 
-> > How about "will require Python 3.6 or later to build" ?
-> > 
-> > Don't want to mandate a specific Python3 release.
-> 
-> +1 from me too. ;)
-> 
+Well in that case,
 
-Thanks!  I love bike sheds so please see attached a new patch with more
-context and the feedback incorporated. :-)
+the final release of Python 2 was on 2020-04-20, not 2020-01-01 as
+suggested in the patch.
 
-Andrew Bartlett
+https://www.python.org/downloads/release/python-2718/
 
--- 
-Andrew Bartlett                       http://samba.org/~abartlet/
-Authentication Developer, Samba Team  http://samba.org
-Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
-
-
---=-kOF3Xa7Br0dKTdh8PHSZ
-Content-Disposition: attachment;
-	filename*0=0001-WHATSNEW-Announce-the-end-of-Python-2.6-2.7-support-.pat;
-	filename*1=ch
-Content-Type: text/x-patch;
-	name="0001-WHATSNEW-Announce-the-end-of-Python-2.6-2.7-support-.patch";
-	charset="UTF-8"
-Content-Transfer-Encoding: base64
-
-RnJvbSBkNmY5MDA3ZmUwMDVhZTkyOTU4ODBmYjA1NDM4ZWQ5NWQ3YzAwMjIwIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBBbmRyZXcgQmFydGxldHQgPGFiYXJ0bGV0QHNhbWJhLm9yZz4K
-RGF0ZTogU3VuLCA2IFNlcCAyMDIwIDE4OjA3OjI5ICsxMjAwClN1YmplY3Q6IFtQQVRDSF0gV0hB
-VFNORVc6IEFubm91bmNlIHRoZSBlbmQgb2YgUHl0aG9uIDIuNi8yLjcgc3VwcG9ydCB0byBidWls
-ZAogU2FtYmEKClRoaXMgaXMgYSB3YXJuaW5nIGZvciA0LjE0LCB0byBnaXZlIHVzZXJzIHRoZSBu
-b3JtYWwgZGVwcmVjYXRpb24Kbm90aWNlLgoKU2lnbmVkLW9mZi1ieTogQW5kcmV3IEJhcnRsZXR0
-IDxhYmFydGxldEBzYW1iYS5vcmc+Ci0tLQogV0hBVFNORVcudHh0IHwgMTQgKysrKysrKysrKy0t
-LS0KIDEgZmlsZSBjaGFuZ2VkLCAxMCBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQoKZGlm
-ZiAtLWdpdCBhL1dIQVRTTkVXLnR4dCBiL1dIQVRTTkVXLnR4dAppbmRleCA4MWQ5MzAwZGY5NC4u
-YWNhNGQ2ODU5MGIgMTAwNjQ0Ci0tLSBhL1dIQVRTTkVXLnR4dAorKysgYi9XSEFUU05FVy50eHQK
-QEAgLTEzLDIyICsxMywyOCBAQCBVUEdSQURJTkcKID09PT09PT09PQogCiAKIE5FVyBGRUFUVVJF
-Uy9DSEFOR0VTCiA9PT09PT09PT09PT09PT09PT09PQogCi1QeXRob24gMy42IFJlcXVpcmVkCi0t
-LS0tLS0tLS0tLS0tLS0tLS0tCitQeXRob24gMy42IG9yIGxhdGVyIHJlcXVpcmVkCistLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tCiAKIFNhbWJhJ3MgbWluaW11bSBydW50aW1lIHJlcXVpcmVt
-ZW50IGZvciBweXRob24gd2FzIHJhaXNlZCB0byBQeXRob24KIDMuNSB3aXRoIHNhbWJhIDQuMTIu
-ICBTYW1iYSA0LjEzIHJhaXNlcyB0aGlzIG1pbmltdW0gdmVyc2lvbiB0byBQeXRob24KIDMuNiBi
-b3RoIHRvIGFjY2VzcyBuZXcgZmVhdHVyZXMgYW5kIGJlY2F1c2UgdGhpcyBpcyB0aGUgb2xkZXN0
-IHZlcnNpb24KIHdlIHRlc3Qgd2l0aCBpbiBvdXIgQ0kgaW5mcmFzdHJ1Y3R1cmUuCiAKLShCdWls
-ZCB0aW1lIHN1cHBvcnQgZm9yIHRoZSBmaWxlIHNlcnZlciB3aXRoIFB5dGhvbiAyLjYgaGFzIG5v
-dAotY2hhbmdlZCkKK1RoaXMgaXMgYWxzbyB0aGUgbGFzdCByZWxlYXNlIHdoZXJlIGl0IHdpbGwg
-YmUgcG9zc2libGUgdG8gYnVpbGQgU2FtYmEKKyhqdXN0IHRoZSBmaWxlIHNlcnZlcikgd2l0aCBQ
-eXRob24gdmVyc2lvbnMgMi42IGFuZCAyLjcuCisKK0FzIFB5dGhvbiAyLjcgaGFzIGJlZW4gRW5k
-IE9mIExpZmUgdXBzdHJlYW0gc2luY2UgSmFudWFyeSAyMDIwLCBTYW1iYQoraXMgZHJvcHBpbmcg
-QUxMIFB5dGhvbiAyLnggc3VwcG9ydCBpbiB0aGUgTkVYVCByZWxlYXNlLgorCitTYW1iYSA0LjE0
-IHRvIGJlIHJlbGVhc2VkIGluIE1hcmNoIDIwMjEgd2lsbCByZXF1aXJlIFB5dGhvbiAzLjYgb3IK
-K2xhdGVyIHRvIGJ1aWxkLgogCiB3aWRlIGxpbmtzIGZ1bmN0aW9uYWxpdHkKIC0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLQogCiBGb3IgdGhpcyByZWxlYXNlLCB0aGUgY29kZSBpbXBsZW1lbnRpbmcg
-dGhlIGluc2VjdXJlICJ3aWRlIGxpbmtzID0geWVzIgogZnVuY3Rpb25hbGl0eSBoYXMgYmVlbiBt
-b3ZlZCBvdXQgb2YgdGhlIGNvcmUgc21iZCBjb2RlIGFuZCBpbnRvIGEgc2VwYXJhdGUKLS0gCjIu
-MjYuMgoK
-
-
---=-kOF3Xa7Br0dKTdh8PHSZ--
+Douglas
 
 
