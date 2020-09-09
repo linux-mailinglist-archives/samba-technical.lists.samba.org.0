@@ -2,54 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3AAC226227A
-	for <lists+samba-technical@lfdr.de>; Wed,  9 Sep 2020 00:14:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB1A5262A61
+	for <lists+samba-technical@lfdr.de>; Wed,  9 Sep 2020 10:33:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=XijzxB7heZsRvFS1VvW7TqRKJR40uubfioZBxyb6hDk=; b=dq0QTTMlM0DzSd1PNhoesQxHTW
-	LSrKhlR0bAZnoVvUeWNXRykQUFWuhmZvg0xS2I4KArSpM0/g8XHfqoj5z8SxW/FLs0Vk3eyBDokPg
-	iYUrg0+FSNs1Ga/gHwtrnOf3FZDIdahvTq9lhMB/7jVdo8CYOeD/w9ssLNB/zYfosSO0bdKMzevSV
-	fhV2Qsl6xAmymD2ZwVCBmqd0e84BzM6ICRd+LiOQO8nnF0xyy4wjxWeXK5nOZoMqHpOfhJ9KOIuSn
-	f1bcFbTAb8NyD/YmUkuX1UNi3XvIcqcG/BSTn6994OjjQmFmjyuPFC42l/bqtQagWza0POeFHAD1V
-	iH69CPaQ==;
-Received: from localhost ([::1]:55144 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=yDm/B84Y5P8mWDnw38j5K3mdcHxB4rmu4edAT0pt2VM=; b=E7T6djmJm2FczWeL7ptnc1W4US
+	dqdIyDf+t7z8V0+N3VlDnIM3Z4YzNK4eAnlH9/KlMI2iPNzKjykSPNoyGwrUnQH4sZcYCFJ5K4GV+
+	WJNIg2LB+GFMEmija168jo3E2Mouj+X/xp9umd9I1gkZuopKJ0lG38lkHZxSngkvRmJbOrk121Or6
+	sWozfjXujDMgD+oxUN193HRkwWghePjg8XFpwJkcM3n+wTNM/XTbmBbr65emgw8SIwbqe0WNSvXLT
+	6NzvTKQmuTmhWix0qBF1XPh7aXPAswJXnM+BiGbUoOvbeBdKKxLASDAz72lKObjV161fR8N/dCAp7
+	D2630iJQ==;
+Received: from localhost ([::1]:20962 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kFlsU-004hwr-Fl; Tue, 08 Sep 2020 22:14:14 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15684) 
+	id 1kFvXJ-004kmE-2D; Wed, 09 Sep 2020 08:33:01 +0000
+Received: from mail-ej1-x643.google.com ([2a00:1450:4864:20::643]:39745) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kFlsO-004hwk-VX
- for samba-technical@lists.samba.org; Tue, 08 Sep 2020 22:14:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=XijzxB7heZsRvFS1VvW7TqRKJR40uubfioZBxyb6hDk=; b=llGy7o0U+I01bFaEeMY2ShLRml
- +n+4/azmfQATq+ow9B57+gcTP26Wb/OOF0NDfLY/a6LbAo6QJoPBnTKhoH1T2X72xZXXk1qQeNXCn
- 8jABW3iKM0DGJ4oVDtaPK3Ucxf8PwJaHf2GR5nScd7Bf198JIpAo4c+nuCDW+jWo/QIc7AcCnSVAg
- oaxKpuvAim/sTvVEoWN6kSsLBJqsoLk2Gwi1CkzTJ8fi3gE3v341NdqalZoxNu4yE97DFz7Cd5y1U
- hAXEjz2EPxLSe6JNqybaHNVyU93bz2MqftDSVWjtT41RLpl18cZKJu5HuFeDfMPMNhMmKSRylK4pC
- cPgR1BkQSKa9VfZYPnYXWvVuKBokBuGhGyZK0ldN9MnGGLjnk/KcUA+QPMlhl+70UzKAmSIguVBYs
- buk/DwVd25Jaj1KGTmi9wVOae/hU59tm8dWaNBFrzNNMBJ4sfaOqtevTai3DRRc7M4UJy3mnFGwtw
- GTXa/mViI4H+PXCPq/iEuVYd;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kFlsL-0005kC-DG; Tue, 08 Sep 2020 22:14:06 +0000
-Message-ID: <474e16eb49402c024b8b4f8f2f6183dae929f6d7.camel@samba.org>
-Subject: Re: [PATCH] [WHATSNEW] Re: Drop Python2 for the build?
-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>, Alexander Bokovoy
- <ab@samba.org>, Jeremy Allison <jra@samba.org>
-Date: Wed, 09 Sep 2020 10:14:00 +1200
-In-Reply-To: <fece1ff9-f0c8-ab82-6aba-fa3810ca387f@catalyst.net.nz>
-References: <d3abac97b731ed0d37ea4dec28e2792128f527dd.camel@samba.org>
- <CAOCN9rwV1JJEH04cuZUK9nBBOw83HaymwU7OYjXLiyahkfL55g@mail.gmail.com>
- <12ae82a7f574030f0911b51f397ece6de2c557b2.camel@samba.org>
- <e279b12e-0b88-3f40-3733-ea575486db28@samba.org>
- <7960be07410deb265299daf2e2af243b628f3d4d.camel@samba.org>
- <20200908161627.GB599978@jeremy-acer>
- <20200908165820.GB23377@pinega.vda.li>
- <d5a31f2fdfcfd03813cd3cc9ee862af2aad5d5ed.camel@samba.org>
- <fece1ff9-f0c8-ab82-6aba-fa3810ca387f@catalyst.net.nz>
-Content-Type: multipart/mixed; boundary="=-acPk0x8KxnIC/E1DkoWC"
-User-Agent: Evolution 3.36.5 (3.36.5-1.fc32) 
+ (Exim) id 1kFvXD-004km7-7x
+ for samba-technical@lists.samba.org; Wed, 09 Sep 2020 08:32:58 +0000
+Received: by mail-ej1-x643.google.com with SMTP id p9so2324003ejf.6
+ for <samba-technical@lists.samba.org>; Wed, 09 Sep 2020 01:32:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=zJMBLsYRez+iC2MEdPfwDP4b1bqezxNHeziFVePhK7E=;
+ b=j3xBTm53q4fPsedAFefMbybGhmcI+rjWlE+9DJYHLe5mZupKZnycJd08gMht6Us2uj
+ pGiY0gitvPik37nUTcHkDHx0fncZk/K9nPsWhSybCjQ/IkpxeWOrW83KS7btItVQBmLR
+ wRPzKB+5j6icXcSMyus0v8GITxqDZhxIwekIcevUIn4vpFq6H63XnZZODGK8fL9tZEK5
+ E5aFX9RyXiiyVoTm8VVMW1IBlT55PdkYdlaSPMd0H38SROH98Yfncd+WwatK/MedQzBp
+ V688GFbrESOJvreIOohE4nUmMA/AtnYOcEJWrMNOO2aO7quE3zrnumAzONMtURYYJDyH
+ z87A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=zJMBLsYRez+iC2MEdPfwDP4b1bqezxNHeziFVePhK7E=;
+ b=cJ3aZLAbdCKcapwlPNfJHRHegMEcO4z3BbsgbQpXcUZ2kevfhx+NYKGLFNVFwV4vsa
+ IzXTsI1H754JYYtEwMG5zB0CUstv2bUFpc2Reua2GjAi0uvUSW5tDQVQD35a9h0IenaJ
+ kXvKORPtXd2wxg6PO4Gw/PAzJiRZkb4RAuFEov9pE81J1e/mYNDp5pAZShxD59ps5016
+ RDeyNYS08ryuuH6tktgHuvctBq616cW6MTtZ7PKIePv1tPjMF1672THB1bI4rCSTKDQE
+ edS5bGgr8FsUj2tdqHhzUX6YFYaNGG57DYx6gcl7KWcT+j+qil8DZRjGMGWJmNU2FurZ
+ L/2w==
+X-Gm-Message-State: AOAM530PYRiOT8VDR2w9AsueBYb/xCbKebIYc4EUKfb0y8YCA0Z8fuA/
+ eNsm+zMbYfgqgIN3/m7fKItFXGve1zCRT9IJeMYyVm+CRJUe4Q==
+X-Google-Smtp-Source: ABdhPJwFdnzu1mpOg9o3YXNKLy/g1x1xkvAzhWeKeDBb8YA99V7bPGD4gfTF+4GBv66vuzV3GiWskWsjG99EUUGc5R8=
+X-Received: by 2002:a17:906:60d5:: with SMTP id
+ f21mr2548144ejk.94.1599640368425; 
+ Wed, 09 Sep 2020 01:32:48 -0700 (PDT)
 MIME-Version: 1.0
+Date: Wed, 9 Sep 2020 11:32:37 +0300
+Message-ID: <CAH72RCWUM8nqnOt=HeG1j4P-VEH4H+mF=2yo-yn3=uG6zxSx9A@mail.gmail.com>
+Subject: GSoC 2020 Samba Experience
+To: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>, 
+ "abartlet@samba.org" <abartlet@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,83 +67,95 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Stefan Metzmacher <metze@samba.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: hezekiah maina via samba-technical <samba-technical@lists.samba.org>
+Reply-To: hezekiah maina <hezekiahmaina3@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Hello everyone,
 
---=-acPk0x8KxnIC/E1DkoWC
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+I finally came to the end of Google Summer of Code 2020 program. I'm glad
+to have passed the program.
+I learned a lot of things which before the program I didn't have much
+knowledge about. I will outline some of those new things that I learned and
+give some feedback on areas I think could be improved to make Samba
+even better.
+One of the things that I learned in the program was using Samba Active
+Directory Domain Controller. I didn't know much about working with an AD
+DC. From having to set a server as an AD DC to having one that is
+functioning well was a great learning experience. Making mistakes is vital
+to learning how to work with something and I did a whole lot of them. DNS
+configuration and setting up Kerberos admin server was particularly hard
+for me but with time I have figured how to work with them. I'm glad to have
+had great mentors who led me through every step of the learning process.
 
-On Wed, 2020-09-09 at 09:59 +1200, Douglas Bagnall wrote:
-> On 9/09/20 9:16 am, Andrew Bartlett via samba-technical wrote:
-> 
-> > Thanks!  I love bike sheds
-> 
-> Well in that case,
-> 
-> the final release of Python 2 was on 2020-04-20, not 2020-01-01 as
-> suggested in the patch.
-> 
-> https://www.python.org/downloads/release/python-2718/
+Another thing I learned was to develop Cockpit plugins.Cockpit (
+https://cockpit-project.org/) gives linux server administrators a visual
+interface to interact with a server using a web browser. One of the most
+important features of Cockpit is that it provides an API for developing
+plugins to extend its capabilities. I was working on developing one of
+these plugins for samba-tool command line utility. Samba-tool helps
+administrators manage their Samba Active Directory Controller. So, which
+problem were we trying to solve? Using a command line tool is mostly prone
+to making spelling mistakes and a lot of repetitive typing to achieve some
+functionality. Having a visual interface reduces the mistakes users can
+make, improves the user's productivity and is a much more appealing way to
+onboard new users. You can find documentation about the plugin and how to
+install it for your operating system here:
+https://wiki.samba.org/index.php/GSOC_cockpit_samba_ad_dc.
 
-Fixed!
+I primarily used React and Javascript to develop the plugin. There are many
+other tools that are provided by the team at Cockpit for starting a new
+project including a starter kit with most of the files for the project
+already included. (https://github.com/cockpit-project/starter-kit)
 
-Any more?  I've got all day! ;-)
+Another Open Source tool that I learned to work with was Open Build Service
+(https://openbuildservice.org/). Through OBS I was able to write some
+config files which when pushed to build.opensuse.org builds packages for
+the different distributions and makes a package available for the end
+users. Leveraging the OBS, I was able to develop the plugin for users of
+Fedora 32, Debian 10 and Ubuntu 20.04 (
+https://build.opensuse.org/package/show/home:Hezekiah/samba-ad-dc)
 
-Andrew Bartlett
+One of the areas I found to be really hard was installing provisioning a
+Samba Active Directory Domain Controller. The Samba documentation for
+installing and working with an AD DC is pretty comprehensive but not really
+that straight forward for new users. Some of the concepts in the
+documentation require some prior knowledge of working in an AD DC
+environment and I think it is an area that could be improved to easily
+onboard new users coming to Samba. As outlined earlier some of these
+concepts include setting up Kerberos admin server and DNS configuration
+though the Samba documentation on troubleshooting DNS problems is truly
+priceless.
 
--- 
-Andrew Bartlett                       http://samba.org/~abartlet/
-Authentication Developer, Samba Team  http://samba.org
-Samba Developer, Catalyst IT          http://catalyst.net.nz/services/samba
+Another area that I also found to be really difficult was packaging for the
+various operating systems distributions. This might not be part of what
+Samba does but I hope it could be improved. There wasn't any comprehensive
+documentation I could find to help with the packaging of the plugin and had
+to depend on my mentors for guidance most of the time. Through trial and
+error I was able to understand how to package for the 3 linux distributions
+but I really hope this could be made easier for new developers.
 
+Lastly I found the Samba codebase on GitLab really scarely :). Having the
+entire codebase in one repository is really hard to figure out which part
+does what. I'm not sure if it could be subdivided into various projects but
+if this is not possible a little bit of code commenting and maybe readmes
+could be used to help new developers understand how the various pieces fit
+together.
 
---=-acPk0x8KxnIC/E1DkoWC
-Content-Disposition: attachment;
-	filename*0=0001-WHATSNEW-Announce-the-end-of-Python-2.6-2.7-support-.pat;
-	filename*1=ch
-Content-Transfer-Encoding: base64
-Content-Type: text/x-patch;
-	name="0001-WHATSNEW-Announce-the-end-of-Python-2.6-2.7-support-.patch";
-	charset="UTF-8"
+I'm really thankful to the entire Samba community for having me as part of
+the GSoC 2020 program. I'm particularly thankful to Alexander Bokovoy and
+Andrew Bartlet. They both were my mentors for the program and were glad to
+help me resolve problems I encountered along the way. I'm also thankful to
+members who used the plugin, discovered bugs and informed me and my mentors
+about them and to all those that answered and clarified my questions on
+samba-technical.
 
-RnJvbSAwODgyMzg3M2U4NmM4MDg1MDllMmQ5YTBmNWQ3MWNkZDBlOGZiOGUyIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBBbmRyZXcgQmFydGxldHQgPGFiYXJ0bGV0QHNhbWJhLm9yZz4K
-RGF0ZTogU3VuLCA2IFNlcCAyMDIwIDE4OjA3OjI5ICsxMjAwClN1YmplY3Q6IFtQQVRDSF0gV0hB
-VFNORVc6IEFubm91bmNlIHRoZSBlbmQgb2YgUHl0aG9uIDIuNi8yLjcgc3VwcG9ydCB0byBidWls
-ZAogU2FtYmEKClRoaXMgaXMgYSB3YXJuaW5nIGZvciA0LjE0LCB0byBnaXZlIHVzZXJzIHRoZSBu
-b3JtYWwgZGVwcmVjYXRpb24Kbm90aWNlLgoKU2lnbmVkLW9mZi1ieTogQW5kcmV3IEJhcnRsZXR0
-IDxhYmFydGxldEBzYW1iYS5vcmc+Ci0tLQogV0hBVFNORVcudHh0IHwgMTQgKysrKysrKysrKy0t
-LS0KIDEgZmlsZSBjaGFuZ2VkLCAxMCBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQoKZGlm
-ZiAtLWdpdCBhL1dIQVRTTkVXLnR4dCBiL1dIQVRTTkVXLnR4dAppbmRleCA4MWQ5MzAwZGY5NC4u
-Y2MzMjdiOGJkOTMgMTAwNjQ0Ci0tLSBhL1dIQVRTTkVXLnR4dAorKysgYi9XSEFUU05FVy50eHQK
-QEAgLTEzLDIyICsxMywyOCBAQCBVUEdSQURJTkcKID09PT09PT09PQogCiAKIE5FVyBGRUFUVVJF
-Uy9DSEFOR0VTCiA9PT09PT09PT09PT09PT09PT09PQogCi1QeXRob24gMy42IFJlcXVpcmVkCi0t
-LS0tLS0tLS0tLS0tLS0tLS0tCitQeXRob24gMy42IG9yIGxhdGVyIHJlcXVpcmVkCistLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tCiAKIFNhbWJhJ3MgbWluaW11bSBydW50aW1lIHJlcXVpcmVt
-ZW50IGZvciBweXRob24gd2FzIHJhaXNlZCB0byBQeXRob24KIDMuNSB3aXRoIHNhbWJhIDQuMTIu
-ICBTYW1iYSA0LjEzIHJhaXNlcyB0aGlzIG1pbmltdW0gdmVyc2lvbiB0byBQeXRob24KIDMuNiBi
-b3RoIHRvIGFjY2VzcyBuZXcgZmVhdHVyZXMgYW5kIGJlY2F1c2UgdGhpcyBpcyB0aGUgb2xkZXN0
-IHZlcnNpb24KIHdlIHRlc3Qgd2l0aCBpbiBvdXIgQ0kgaW5mcmFzdHJ1Y3R1cmUuCiAKLShCdWls
-ZCB0aW1lIHN1cHBvcnQgZm9yIHRoZSBmaWxlIHNlcnZlciB3aXRoIFB5dGhvbiAyLjYgaGFzIG5v
-dAotY2hhbmdlZCkKK1RoaXMgaXMgYWxzbyB0aGUgbGFzdCByZWxlYXNlIHdoZXJlIGl0IHdpbGwg
-YmUgcG9zc2libGUgdG8gYnVpbGQgU2FtYmEKKyhqdXN0IHRoZSBmaWxlIHNlcnZlcikgd2l0aCBQ
-eXRob24gdmVyc2lvbnMgMi42IGFuZCAyLjcuCisKK0FzIFB5dGhvbiAyLjcgaGFzIGJlZW4gRW5k
-IE9mIExpZmUgdXBzdHJlYW0gc2luY2UgQXByaWwgMjAyMCwgU2FtYmEKK2lzIGRyb3BwaW5nIEFM
-TCBQeXRob24gMi54IHN1cHBvcnQgaW4gdGhlIE5FWFQgcmVsZWFzZS4KKworU2FtYmEgNC4xNCB0
-byBiZSByZWxlYXNlZCBpbiBNYXJjaCAyMDIxIHdpbGwgcmVxdWlyZSBQeXRob24gMy42IG9yCits
-YXRlciB0byBidWlsZC4KIAogd2lkZSBsaW5rcyBmdW5jdGlvbmFsaXR5CiAtLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0KIAogRm9yIHRoaXMgcmVsZWFzZSwgdGhlIGNvZGUgaW1wbGVtZW50aW5nIHRo
-ZSBpbnNlY3VyZSAid2lkZSBsaW5rcyA9IHllcyIKIGZ1bmN0aW9uYWxpdHkgaGFzIGJlZW4gbW92
-ZWQgb3V0IG9mIHRoZSBjb3JlIHNtYmQgY29kZSBhbmQgaW50byBhIHNlcGFyYXRlCi0tIAoyLjI2
-LjIKCg==
+Samba has really been instrumental to my start of the journey of
+contributing to Open Source Software and will continue being part of this
+amazing community.
+I will continue contributing to the organization and improve the plugin. It
+has been a really good learning experience and will continue to learn more
+about Samba and the various OSS projects the community develops.
 
-
---=-acPk0x8KxnIC/E1DkoWC--
-
-
+Thank you all and have a great day!
