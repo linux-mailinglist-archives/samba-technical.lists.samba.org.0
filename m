@@ -2,72 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14BBD262B55
-	for <lists+samba-technical@lfdr.de>; Wed,  9 Sep 2020 11:09:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC8FE262DA2
+	for <lists+samba-technical@lfdr.de>; Wed,  9 Sep 2020 13:05:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=s0x7sVL/R0GPdzuCxZJ5+KW+bkUeA0jBNW7esTQW4SY=; b=GLNxEcx1Ooil9d04pzmZCHjOWS
-	8l8/XeQNHe0Sz0WEAq4hAKaB6yNuF40E3lfWh/lXnMMLe5Gcqz2LRr1wdxFuJ9/ZKc8fygD3nU7vM
-	XCpnfcN1iSILPcwSubzvZpVru4wr1XEiCpFofF4cWfDVGbmxOEdRzArxvM0GRv1GmWBgA/3wqA/c3
-	w3jlU2272jH0YNEN4Q1/bjKXcP8oJNWkvkKZSurtwyCYjZAsLp8gBqMft0uADj5HpxhjCqLQWJtEX
-	CxeRTKKQmeCQU3q2VJMnB4NupK0rg8I5HbBJ1S/7PbuTQXwDCIw/ALM0u5NTI6fc6CL2xktXwItHO
-	vJ/ESkLA==;
-Received: from localhost ([::1]:21754 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=cQTw9g13ZYnhlzkxBfbUx37jWAKBnjJMrA6Ks1b8Ks8=; b=llUmI1IM6icJH4OHU5jW4tlf12
+	rlEHJjiQnf1n3n3GlACaMgue72rT+3Vpta5d57RGNRlAHmhwzYxEWS5sGCcerP8DtQ61UMCRX6ElW
+	t45knyT6kB5DEF2rbjnTB6kRO1QHLmSHtlaNdA9sAeiDxvycpGnZw+ClNpBl49JUGlP66loQd8NY0
+	yr1h3Vz0qLp/yE7sz7Sehutjab/voDbuayW5ASqh41kC3E8QC+b3DRWSd8w+3X/IiB16HqI0QHw8x
+	DnxgWl3iiRGJh6yNv6g78MbDPIVMcZP9+Yzvk2vbicjSUo4WZWiu4FdqwqS5b7rXn13seOntlCpd5
+	OnUDUO+g==;
+Received: from localhost ([::1]:25080 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kFw5o-004kvL-8U; Wed, 09 Sep 2020 09:08:40 +0000
-Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:14730) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1kFw5j-004kvE-2H
- for samba-technical@lists.samba.org; Wed, 09 Sep 2020 09:08:37 +0000
-Received: from pps.filterd (m0098421.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0897WtcQ061476; Wed, 9 Sep 2020 04:31:08 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=message-id : subject :
- from : reply-to : to : cc : date : content-type : mime-version; s=pp1;
- bh=s0x7sVL/R0GPdzuCxZJ5+KW+bkUeA0jBNW7esTQW4SY=;
- b=P1+RK4Wh+KeL4ukCmhFEDFci8MmWdVEOdUie18QwKzd0VGEUGGg0P081z+C5wQ2CrCFy
- IxB5b3l9ROYKXE8MxwHDN2uoKOKiq9QW513SA3UcRe1LN+dW0V+yxnvscgkFjqtk/5+y
- 4Fy8dT4O2zHk4yGPbgXJd3WEcPasczqMb7aliRYzWlrDq9IXZE9zSm12KC/yS2LMaHyO
- MHicDOwubt6h6ltHTF7i4gMXmefIb0sxNTKMpQS1SWnSCFygc7gd6aEfSbbDpUfH/G8g
- ejhukA2LCmvk0H6uorwjfF08eUPKMj2gn0Ea3F+zLwCyJIP6F7TP+vrDfsZKTfMor8bh gw== 
-Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com
- [169.51.49.98])
- by mx0a-001b2d01.pphosted.com with ESMTP id 33es8svss4-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 09 Sep 2020 04:31:08 -0400
-Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
- by ppma03ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 0898RixG021015;
- Wed, 9 Sep 2020 08:31:06 GMT
-Received: from b06avi18878370.portsmouth.uk.ibm.com
- (b06avi18878370.portsmouth.uk.ibm.com [9.149.26.194])
- by ppma03ams.nl.ibm.com with ESMTP id 33c2a849gc-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 09 Sep 2020 08:31:06 +0000
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com
- [9.149.105.59])
- by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
- id 0898V4bD62325030
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 9 Sep 2020 08:31:04 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 37AE2A4053;
- Wed,  9 Sep 2020 08:31:04 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 12472A404D;
- Wed,  9 Sep 2020 08:31:04 +0000 (GMT)
-Received: from swen-L2 (unknown [9.171.92.223])
- by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Wed,  9 Sep 2020 08:31:04 +0000 (GMT)
-Message-ID: <743e565210335844200b618c1c2bad4c9c0c09a9.camel@linux.ibm.com>
-Subject: ... winbindd_ldap
-To: Jeremy Allison <jra@samba.org>
-Date: Wed, 09 Sep 2020 10:30:59 +0200
-Content-Type: multipart/signed; micalg="pgp-sha512";
- protocol="application/pgp-signature"; boundary="=-5yIqbw1Fsxr0tDG6mtjo"
-User-Agent: Evolution 3.34.4 (3.34.4-1.fc31) 
+	id 1kFxu9-004lVx-8Y; Wed, 09 Sep 2020 11:04:45 +0000
+Received: from mail-yb1-xb2b.google.com ([2607:f8b0:4864:20::b2b]:35545) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kFxu2-004lVq-C4
+ for samba-technical@lists.samba.org; Wed, 09 Sep 2020 11:04:42 +0000
+Received: by mail-yb1-xb2b.google.com with SMTP id s92so1512692ybi.2
+ for <samba-technical@lists.samba.org>; Wed, 09 Sep 2020 04:04:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=cQTw9g13ZYnhlzkxBfbUx37jWAKBnjJMrA6Ks1b8Ks8=;
+ b=qagrnJLSfTf/8PpVAANah4qIYkX1CQBks0+j3zR9MhDrFuLb+E+yaOS6GIN76Dho4t
+ YTfTfHH2y+WNUH0sBQD3Vfpyo/cjCfyjiaGDbpsvYwts4A2CcCvVwWjI+arxFahRUFp2
+ 2V3NdSXNwWEk4tVLFXFh4LH3129uhD+rPuruxhHRB2EpWSAymb7qFoZTGnIIXsoQDAHx
+ NuERFAknZ7Pr1aLq12r0wx1pjfL7MvbpB4k2FA9Hc1jjszdU1N6vD4woYR4GGDNgVZzp
+ aW2S1Xu6ihYwTMBwt+ZP75zegmYJHramDG7iIc6ugz/CWO00/qz8yofFlzcLQFB09Mtu
+ 6RcQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=cQTw9g13ZYnhlzkxBfbUx37jWAKBnjJMrA6Ks1b8Ks8=;
+ b=LftXjvum/6DlUhkZXyIQIrudQsbaYmAFaaQAo5qavWZUSsc+h5qpsGBAN3XWY4YgbI
+ KvPA06Vz9Ex8GAxbtSXjTybZhTflkM0MolZPiEj8gHEll+VS8T7gn1t7NB7R4e3jbJPD
+ zq5U7qrc47gHysledXUfCim/BLA9xJSlIMi28mWIFlhr3yTtnKccozJ7znYZBlE02SSe
+ k1lIeB4fNh5FXgCowrqz7jC0Jb46jdUgUGqxOZFehJpI1b497wr/OkdCaUUpVM2zfp9/
+ Ou3bLfnVah86nfB7/LV/7Kk7wb8lhuY1h/ZStw8Jr5ClVV7SsX3fbDq9a4wu2NzhZGwD
+ n+VA==
+X-Gm-Message-State: AOAM530WrXnwjeAMgi8wHC6wUo2P9VmjbNd+EOwI0Tt54GzQpCcPSWg/
+ Qeyf09jwOS9AmtF/KwX84YUJvrkMFmbbnNmjbv4=
+X-Google-Smtp-Source: ABdhPJyOBQsKtSkg3R7s3XBSzqEXwpu91xjJ7V9f7CfN3rMHxoiHN0ZqB6QflXiVlsizLHjvoEezgRbAz3XEY6RAWaw=
+X-Received: by 2002:a25:750a:: with SMTP id q10mr4714594ybc.185.1599649474723; 
+ Wed, 09 Sep 2020 04:04:34 -0700 (PDT)
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
+References: <CANT5p=pxPsBwAv3oJX6Ae9wjpZoEjLvyfGM1sM9DEhS11RNgog@mail.gmail.com>
+ <87pn7t4kr9.fsf@suse.com>
+ <CANT5p=oeY91u17DPe6WO75Eq_bjzrVC0kmAErrZ=h3S1qh-Wxw@mail.gmail.com>
+ <87eeo54q0i.fsf@suse.com>
+ <CANT5p=rxp3iQMgxaM_mn3RE3B+zezWr3o8zpkFyWUR27CpeVCA@mail.gmail.com>
+In-Reply-To: <CANT5p=rxp3iQMgxaM_mn3RE3B+zezWr3o8zpkFyWUR27CpeVCA@mail.gmail.com>
+Date: Wed, 9 Sep 2020 16:34:24 +0530
+Message-ID: <CANT5p=qMHxq_L5RpXAixzrQztjMr8-P_aO4aPg5uqfPSLNUiTA@mail.gmail.com>
+Subject: Re: [PATCH][SMB3] mount.cifs integration with PAM
+To: =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,48 +73,105 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: swen via samba-technical <samba-technical@lists.samba.org>
-Reply-To: swen@linux.ibm.com
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>, sribhat.msa@outlook.com,
+ samba-technical@lists.samba.org, Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+I did some code reading on samba-winbind (and sssd to some extent),
+and here are a few things I noticed.
+1. Both today have almost "no-op" handlers for open and close of PAM sessio=
+ns.
+2. However, the login and logoff do have some functionalities. PAM
+setcred is done both on log-on and log-off, so that the cred cache is
+deleted on the last logoff.
+3. Login and logoff have ref counts associated with a user. But I do
+notice that a kinit is done on every login (even if the user is
+already logged on).
 
---=-5yIqbw1Fsxr0tDG6mtjo
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+So it looks like (at least as of today) we don't break much by
+authenticating with PAM. One additional change needed would be to
+introduce umount.cifs, which deletes PAM credentials for the user.
 
-Hi Jeremy,
+Alternatively, another option is to not rely on winbind/sssd for
+authentication (or maintaining krb5 tgt up-to-date), but instead let
+cifs-utils deal with it separately. Today, cifs.upcall has a way to
+kinit if the cred cache file is missing. But that needs the keytab
+file to be populated with the key for the user in question. We could
+also try a kinit based on password in mount.cifs (if the cred cache is
+missing), and if that works, populate the keytab file with the key for
+this user (for cifs.upcall to use later, when necessary).
 
-seeing that you're back from vacation, I was wondering if you can still
-remember MR 1351. :-)
+Thoughts?
 
-Are there any news on that one ?
+Regards,
+Shyam
 
-Cheers Swen
+On Mon, Aug 17, 2020 at 2:42 PM Shyam Prasad N <nspmangalore@gmail.com> wro=
+te:
+>
+> Thanks Aur=C3=A9lien. Good points.
+> Let me take a closer look at this and see how to proceed.
+>
+> Regards,
+> Shyam
+>
+> On Mon, Aug 17, 2020, 14:18 Aur=C3=A9lien Aptel <aaptel@suse.com> wrote:
+>>
+>> Shyam Prasad N <nspmangalore@gmail.com> writes:
+>> > Agreed. But since we're not dealing with krb5cc file directly in
+>> > mount.cifs, I don't see it influencing this change. However, I will te=
+st it
+>> > out too.
+>>
+>> When reconnecting or accessing DFS links (cross-server symlinks) the
+>> client opens a new connection to the target server and has to auth
+>> again. Since there are no ways to ask for a password at that moment
+>> (we're in the middle of some syscall) cifs.ko does an upcall to
+>> cifs.upcall and passes the pid of the process who initiated the
+>> syscall. cifs.upcall then reads that proc env (via /proc/<pid>/environ)
+>> and looks for KRB5CCNAME, uses it and returns the required data for
+>> cifs.ko to proceed with the SMB Session Setup.
+>>
+>> So it is important to have this env var set if the location of the
+>> credential cache is not the default one. If you do PAM login from
+>> mount.cifs, the env var might be set for that process but it will only
+>> persist in children processes of mount.cifs i.e. most likely none.
+>>
+>> I still think this patch is a good idea but we should definitely print
+>> something to the user that things might fail later on, or give
+>> instructions to set the env var in the user shell or something like that=
+.
+>>
+>> > That does make sense. I was thinking of including a mount option to en=
+able
+>> > this path. But let me explore the retry-on-failure path as well.
+>>
+>> Mount option sounds good regardless.
+>>
+>> > Yeah. I didn't get the complete picture on session maintenance after
+>> > reading the pam application developer's guide.
+>> > Was hoping that somebody on samba-technical would have some idea about=
+ this.
+>>
+>> The keyring docs have some info on it too but it's still not clear to
+>> me.
+>>
+>> https://man7.org/linux/man-pages/man7/session-keyring.7.html
+>>
+>> Cheers,
+>> --
+>> Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+>> GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+>> SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg=
+, DE
+>> GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=
+=BCnchen)
 
---=-5yIqbw1Fsxr0tDG6mtjo
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNATURE-----
 
-iQIzBAABCgAdFiEErGbWt5PHCTgy2J0tug2knLYPYasFAl9YksMACgkQug2knLYP
-YauAYQ//Xq9/AF6PQAyIPFr67DcYxgs52cPX8tibW9HwN4tHJYfW+PGZ3K1HIN5N
-o/JTdJzV7PEJqJSJFMuudWjgGBplcw9A5IyT8G6PY4FY0jXxOJOjJwehaxZx8PKo
-V3wm23QMj6ye7FsQ5GOC84NP4IhMaciK/WktN00fHTFhafWRJvUuwkTI/K70h4ei
-L6f1sM/Y+LDf5kPz8kdKwZ5ofhhLONKCOxoQg4w2ktNsAdDyJ8W7leLz7l6VhHDI
-iD3I6c1za4SyFYxP3p032oHefk+BKOV9j31TqamMzM8sDsOlREdJp9PYuaqgdtzP
-2T6p6s4xpL8eOxs0yOHIlLFb6eyw+hKyTTd8oxfdlR50k65nM3KuQaVYDDBFS9IS
-jKMrlLfMggU8iEwvjWusaoPFG2auLg7huT9PA4nnv9lVV5CdDw7tMqWkD0hfa9Ld
-rs40oapWwKUaZYutP/JCc4Ae7qA8wYtI5wKJefGJR5r2Z5Eqd0QhjzQpcPo43aAd
-1sDbTAT3BjgWDbEWnLh69CUPbrPXfyKOw7D+RR34NrWRyktKKJ0/7skfde1CaJy/
-K4HHT9qLrYzZS8MRPDuo3XUXM0C3G4RAPAVmZ9cf912JPQaV1E2MFje7QgI/MYfT
-Ai3ri5hMWuhRK+oPmtJ2R5ME/SCPfvIv5IYKv15RtFqjAQlgnCw=
-=F2b7
------END PGP SIGNATURE-----
-
---=-5yIqbw1Fsxr0tDG6mtjo--
-
+--=20
+-Shyam
 
