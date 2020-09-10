@@ -2,45 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CC2726364E
-	for <lists+samba-technical@lfdr.de>; Wed,  9 Sep 2020 20:55:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A26862642A3
+	for <lists+samba-technical@lfdr.de>; Thu, 10 Sep 2020 11:44:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=WQbmReaYkpBAujYjFvfTW3Z3AFPf54sKId1925EQAXc=; b=DYP9KblHnTNf1+s/FWzlwg+CDJ
-	wBJdYQMXHdRYd4SUaiGavuF72sU28Hcw5AV7C9tL75PcWYnTAaw8qIOK7EV8hAiPU0RHIwvlux5jl
-	KjYnZhsoOLAIB0U8mWAp0r9ePJgkLiKJP5tPa/2snPk1g8pZGpVEytYr0oCN0KfRHlS5TFO8uT1eQ
-	u3An1f5CFY3YqQq2MyP4pcWeAK306UZ/cHNfza2HJKRzy5I5LFyUtujhPOecVZthgv8PWYM0efl6K
-	IZLYaHO5cZ7IUhKsnnZUQgDp+tnXpjXjQwW5EYl4ZJq6E7udpXY6Bx2qhBHh6hL2bMQAgqsyS2Q1S
-	gWNXStNg==;
-Received: from localhost ([::1]:34244 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=Khc1dB7vSm3HftX/4dMKsGLvGwrWBe0soTK19avCnzk=; b=yi1fm/6LkGZfIAG0uhvRecqR65
+	X+bxUVtAvVZRKAip0ULh9m8FqLdpeg8OmFvRBWDzMJYS6Q3S6o0oh+wDtWkpxC7p8VOIQSILYZjej
+	ZMiv9q0I19SnsGBYmOm/rMUCSDzjTE/6Ep2McdPdAsREQO9rM27Brr3CIfZOv2XKo7VBazQWVZADE
+	iR3Kpwqi0DvIXnDQMoZniwj9Ed6UBKUKlf8RdhzoZ3mYYvxnAmIInAZUdqMq8pDUm9mJuON7fhMHo
+	SzZf2qLx12Vf/aPzWOYiKs7/Lr6mp+lFUWR42C796fB6+w0dVA1gEeok+h9MfvtHFRHcQQA1tVT+z
+	7khUFCsw==;
+Received: from localhost ([::1]:55658 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kG5EH-004nO0-QF; Wed, 09 Sep 2020 18:54:01 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17802) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kG5ED-004nNt-4f
- for samba-technical@lists.samba.org; Wed, 09 Sep 2020 18:53:59 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=WQbmReaYkpBAujYjFvfTW3Z3AFPf54sKId1925EQAXc=; b=SWb+FnY0SjgTIDBZZc+QxiihOs
- ZUibvPKg5lx/HmUVBIjyHkUYZTuO/jpuDvEKFqK10ThI74bQtKieI1BFbu3fUY9DoDqC3l6upt41s
- m39T21R7xqTZ/or66FOGbAb+1QgVbUlYjnrWYcWQnylkXbgzC/B+/4FbXze5HQOL3A5TEjiZYf7is
- HbnIn+XwOC49D4QbOWyUMtdZZF0KwLZBGe9iANITrgMJW0LMzc01IsE0+IOAgG7Um8MbB2a6jO+cY
- Q19rm7LvpbXoF8aXIWJLToJ2wDY/0RphUylGiu0erOrPEFuT3+F6ceKYrq0WZdCd7/cjHNuhCeUhL
- uf3Xhd7yfn6V0kYpBXZdf3zNS2aMpClmGi/AdDhj4RVeRGDU/A8LL0WILKhtaYe/wS/XbRwP/zE/m
- v7iPrJQoNKzUj1eqaWLa8V2qlX4IpRDUZcESCJf0nfhS0wOpdBLy1DXVsaoqYc5J8KZIxjCN1rxPc
- tuXyX/hHttt5izaYtZ6sGqtR;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kG5EB-0007YS-CX; Wed, 09 Sep 2020 18:53:55 +0000
-Date: Wed, 9 Sep 2020 11:53:50 -0700
-To: hezekiah maina <hezekiahmaina3@gmail.com>
-Subject: Re: GSoC 2020 Samba Experience
-Message-ID: <20200909185350.GA790903@jeremy-acer>
-References: <CAH72RCWUM8nqnOt=HeG1j4P-VEH4H+mF=2yo-yn3=uG6zxSx9A@mail.gmail.com>
+	id 1kGJ79-004rhO-Um; Thu, 10 Sep 2020 09:43:36 +0000
+Received: from mx2.suse.de ([195.135.220.15]:59072) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kGJ75-004rhG-BF
+ for samba-technical@lists.samba.org; Thu, 10 Sep 2020 09:43:33 +0000
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 07929AD39;
+ Thu, 10 Sep 2020 09:43:44 +0000 (UTC)
+To: Shyam Prasad N <nspmangalore@gmail.com>
+Subject: Re: [PATCH][SMB3] mount.cifs integration with PAM
+In-Reply-To: <CANT5p=o07RqmMkcFoLeUVTeQHhzh5MmFYpfAdv0755iiGbp1ZA@mail.gmail.com>
+References: <CANT5p=pxPsBwAv3oJX6Ae9wjpZoEjLvyfGM1sM9DEhS11RNgog@mail.gmail.com>
+ <87pn7t4kr9.fsf@suse.com>
+ <CANT5p=oeY91u17DPe6WO75Eq_bjzrVC0kmAErrZ=h3S1qh-Wxw@mail.gmail.com>
+ <87eeo54q0i.fsf@suse.com>
+ <CANT5p=rxp3iQMgxaM_mn3RE3B+zezWr3o8zpkFyWUR27CpeVCA@mail.gmail.com>
+ <CANT5p=qMHxq_L5RpXAixzrQztjMr8-P_aO4aPg5uqfPSLNUiTA@mail.gmail.com>
+ <874ko7vy0z.fsf@suse.com>
+ <CANT5p=o07RqmMkcFoLeUVTeQHhzh5MmFYpfAdv0755iiGbp1ZA@mail.gmail.com>
+Date: Thu, 10 Sep 2020 11:43:27 +0200
+Message-ID: <87mu1yc6gw.fsf@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAH72RCWUM8nqnOt=HeG1j4P-VEH4H+mF=2yo-yn3=uG6zxSx9A@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,31 +51,28 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>,
- "abartlet@samba.org" <abartlet@samba.org>
+From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>, sribhat.msa@outlook.com,
+ samba-technical@lists.samba.org, Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Sep 09, 2020 at 11:32:37AM +0300, hezekiah maina via samba-technical wrote:
-> 
-> I'm really thankful to the entire Samba community for having me as part of
-> the GSoC 2020 program. I'm particularly thankful to Alexander Bokovoy and
-> Andrew Bartlet. They both were my mentors for the program and were glad to
-> help me resolve problems I encountered along the way. I'm also thankful to
-> members who used the plugin, discovered bugs and informed me and my mentors
-> about them and to all those that answered and clarified my questions on
-> samba-technical.
+Shyam Prasad N <nspmangalore@gmail.com> writes:
+> Your understanding is correct. We could also go for a hybrid approach,
+> where we fallback to option b when option a fails to authenticate.
+> But for now, I'll resubmit a patch with option a as a fallback when
+> regular mount fails, just like you had suggested.
 
-Congratulations Hezekiah, and a big thanks for Alexander
-and Andrew for being great mentors !
-
-Hezekiah, I hope you stick around and help us improve
-Samba in the future, but no matter what - good luck
-in your future endeavors !
+Please try DFS setups as well. On DFS links a sub-mount is made from the
+kernel and mount.cifs is not called.
 
 Cheers,
-
-Jeremy.
+--=20
+Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, DE
+GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
+nchen)
 
