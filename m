@@ -2,59 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E957626433E
-	for <lists+samba-technical@lfdr.de>; Thu, 10 Sep 2020 12:06:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 626712648AC
+	for <lists+samba-technical@lfdr.de>; Thu, 10 Sep 2020 17:25:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=RxLYXK0+Rc6cT92tXuoU0upY1/bR0h7OoD678pdytn0=; b=wOrC5nqKM0kyH572czumzJ1lEU
-	RAyN+8FeoWpmwCaTRDSxGD2TvuMmz7OhboanhHXGIb67M2D3Ig38Nzwlrl1n0duwahaivRu+4mVjV
-	yC1WtuQ59vO85ZFEAoHos/l5u73sFKbaHVjGoKsQrvebuKWHCih94p9LwECM/wECbBhirkMSjNbzI
-	vKUliU3EvIHyxnaXfTrKr4SH1myhCQ+jlBpe8Tu2rjnUiIfIqCpwHZy/uRpP3oNjAmk+HrI2r7EZy
-	s+tcTRyyuDBileCNshmggZru6SSEnOFU9B7gW++pgtNS6qVFjENkG/LeuHIpCPSHD+6H0GKrV5D1z
-	tZdqBdMg==;
-Received: from localhost ([::1]:57188 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=R0Dwz8+trpjeuT5JdZlPtQm7mi9N7Me1w5VXQutqmVM=; b=0MxzOA/2DnEtg1GqHVsV8uSKe9
+	jxu9jP/SpMN7VgGhOGd4HoWv4A+2rXIgyiW1NVJWxt2cRAc0Psj1f6IwEPn/H9kArFIF6iII6S6mc
+	GBz06Nflzx/VeE/Lvf5nl2Ron1byuuwQ+Nrk/oK4oMrbxwhchq+6YU2ybou0uyj0ANZwli5MitzjQ
+	rZUg2jnXwdljfY7jYLeYFEFqEl6NpNg11lC+BcdwYpwXlw/Am86JI33qaU6B/xNQE4zT+BhGr0n9+
+	ie08JjumrLiZblMYiLXO/W/4otfa8wQVYkScffJYxMo3VHOFj0mtSAeNiGue5FcWagbx39L+9LzfB
+	52s9yjaA==;
+Received: from localhost ([::1]:24430 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kGJTU-004rw8-RL; Thu, 10 Sep 2020 10:06:40 +0000
-Received: from mail-qk1-x730.google.com ([2607:f8b0:4864:20::730]:32849) 
+	id 1kGORL-004uK4-Lu; Thu, 10 Sep 2020 15:24:47 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41876) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kGJTQ-004rw1-MO
- for samba-technical@lists.samba.org; Thu, 10 Sep 2020 10:06:38 +0000
-Received: by mail-qk1-x730.google.com with SMTP id p4so5481078qkf.0
- for <samba-technical@lists.samba.org>; Thu, 10 Sep 2020 03:06:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
- bh=RxLYXK0+Rc6cT92tXuoU0upY1/bR0h7OoD678pdytn0=;
- b=OtTz5pzGyhC2/OciDEKvALBtWYVY9/KaaPEtn4/Pmvn3R5kgTSZ6OndyPJgfYiG1D5
- hEban/iqU2A/Elwkuhp6G12drhqx2g9ADg0VTsz2kM/tZVOtvTEofOLlfTwGwPfG4nTo
- 1sLrL78dvzkNSGTEB64qqeMGTpf3AUevOSVZ8xNzwWwmdnbAYTfkn132H4heiNclm3B+
- WVJ4V9hyWT+cJ1/NI/PWIqNf6gcSLAPgjn9BOuqPhLeFQ7/H3wSZlO9/a3cZsoJtNCGp
- kk+ZzOJHAHsREQPuhZ4FUr+JsmKEzmSL84yLSO9ad6NDP1ubG++ZRrBTsrDTQMOg9196
- G6bg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to;
- bh=RxLYXK0+Rc6cT92tXuoU0upY1/bR0h7OoD678pdytn0=;
- b=t7mqt1S/N0AcIRRel2J00c7jLlNyeSVViFJliiOhaHrDr3liJEZwnZtfQNGoVargCs
- SR0KZkUPotKhaH11Tt0/Or6aUzouu6ZFJe5Zt5Wh1e3oAhhzCZKF1EANPZj2QopGGzeS
- UiYI4nZtsyR84prKMx/b9OSb2KmkismZ+Yg3TKDy1r65GfP+B4mM+Y1Ky4Q0YP3vg97y
- G8kN/iy8ozyr5khvNvt6mUW0dP5h7+IpFJceGIcV3/zw9w4rQeFAoKvYCoUY7vpR41oj
- /4jqb6fnKP89sl7Y/hp8Nm866My4yG325vjRFOv/NIzHk7vqSkpmNtPllF1kI+/RgaJm
- PByA==
-X-Gm-Message-State: AOAM533iI+/C4wNnPFnD7KXKkwcwBJjd2G1P52CvXgfN+7wdw9cOSoSn
- L7nRpDgFySW/hoFdenUxJjgw2MJwjAz8jtL5AodPjU40HBg=
-X-Google-Smtp-Source: ABdhPJzJGqFi1AEasf/qDYNnm3xpmBl0uEokgVjPZ/7J5oVibYKK1+H/Rd9BnsDsfpxlKq9qX5a9OGSFTIYoxV50ny4=
-X-Received: by 2002:a37:ac09:: with SMTP id e9mr7076836qkm.213.1599732393440; 
- Thu, 10 Sep 2020 03:06:33 -0700 (PDT)
+ (Exim) id 1kGORH-004uJu-9A; Thu, 10 Sep 2020 15:24:45 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=R0Dwz8+trpjeuT5JdZlPtQm7mi9N7Me1w5VXQutqmVM=; b=3lA7hG/5acBWJkS2TGh3mZ3S34
+ qYTYdezki+y4++p+aBYyD2hCGmAxAwgk7j3uvrpKdwZmkaPwxTLaVmuS/LtdnMtcpHOFqF+gTJPPE
+ dMVRvh2LkGMfU/sxIbOurKabkCmLP4LyD0qs+NhODCK74aueSC73PjtJwToueCbO/mGeHiHZQeMWR
+ 3cAPw9fPJwdu4WRO7nwwLki4GXZ8ccww6jlDJrqhvSE9Y/z2OtTa9S/FiuhFrwi9OHWEHsUx0fcpw
+ dl5jx3AQWJz0PjKkWsSePs5UwlRN6jh5oNtkc0smeGjvRcBSXvfMptkxlMcEDapfJ9TG2UG3NVgfN
+ i3mDzzF4v+ynQQS6tBAp1JIHTGlZsbf1vQpGFiPS4gM8QC3OjkLyAkR00J5yC2nw86JROw9DXuLPQ
+ ChpAxgRcDWU4rFhSt2kZeMnJIEa0k9eV1BP1U702O9rR38IkZ3+xKSdByCD0jdPMQ/Nz6Qq2TFrPc
+ QPvce0taeSbGmSjLB2dWTRxo;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kGORG-0007pC-Md; Thu, 10 Sep 2020 15:24:43 +0000
+Date: Thu, 10 Sep 2020 08:24:37 -0700
+To: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Subject: Re: Where is Andreas?
+Message-ID: <20200910152437.GB896342@jeremy-acer>
+References: <3876475.E0Xr0IWvUN@magrathea>
 MIME-Version: 1.0
-References: <CAC-fF8TWw1_JZaY_i9_n5U7vc96_+8XwfwzGoXZYQoxQAZwNjQ@mail.gmail.com>
- <CAC-fF8R4+mJ1LG1xK2+3hEws7=Pj6TYd-+FgHf6=eXEPn5pwyg@mail.gmail.com>
-In-Reply-To: <CAC-fF8R4+mJ1LG1xK2+3hEws7=Pj6TYd-+FgHf6=eXEPn5pwyg@mail.gmail.com>
-Date: Thu, 10 Sep 2020 12:06:22 +0200
-Message-ID: <CAC-fF8RRAQbAgNA9R3kwKwt69DJY7fQwGvC3Yhz732Vmo_sh1w@mail.gmail.com>
-Subject: Re: winbindd main process hangs on samba-dc
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3876475.E0Xr0IWvUN@magrathea>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,13 +53,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@gmail.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-team@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I think there is no point trying to maintain domain->online per domain
-in the parent process, we should just ask the domain child (fork one
-if needed), and avoid ever trying to talk with a DC (sync) from the
-main process.
+On Thu, Sep 10, 2020 at 01:11:53PM +0200, Andreas Schneider via samba-technical via samba-team wrote:
+> Hi,
+> 
+> tomorrow is my last work day, after that I'm on parental leave till October 
+> 19th. We will go to the alps and the baltic sea to relax and take care of our 
+> daughter.
+> 
+> If there is something urgent and burning, let it burn. I will clean the ashes 
+> after I got back :-) ;-)
+
+Enjoy your well-earned parental leave ! If you want to clean
+up ashes, California has plenty for you to do :-).
+
+Jeremy.
 
