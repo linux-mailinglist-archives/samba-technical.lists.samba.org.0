@@ -2,44 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 626712648AC
-	for <lists+samba-technical@lfdr.de>; Thu, 10 Sep 2020 17:25:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54F38266236
+	for <lists+samba-technical@lfdr.de>; Fri, 11 Sep 2020 17:34:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=R0Dwz8+trpjeuT5JdZlPtQm7mi9N7Me1w5VXQutqmVM=; b=0MxzOA/2DnEtg1GqHVsV8uSKe9
-	jxu9jP/SpMN7VgGhOGd4HoWv4A+2rXIgyiW1NVJWxt2cRAc0Psj1f6IwEPn/H9kArFIF6iII6S6mc
-	GBz06Nflzx/VeE/Lvf5nl2Ron1byuuwQ+Nrk/oK4oMrbxwhchq+6YU2ybou0uyj0ANZwli5MitzjQ
-	rZUg2jnXwdljfY7jYLeYFEFqEl6NpNg11lC+BcdwYpwXlw/Am86JI33qaU6B/xNQE4zT+BhGr0n9+
-	ie08JjumrLiZblMYiLXO/W/4otfa8wQVYkScffJYxMo3VHOFj0mtSAeNiGue5FcWagbx39L+9LzfB
-	52s9yjaA==;
-Received: from localhost ([::1]:24430 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=VoyHiGo/0MtGpjw5Wl2CKiHxGEfMrrlhI7rQzx8AWuY=; b=lLYyfD0qn4cyjhi4IalRn4Zm9w
+	qpYP87lxM20aGRyom97NrOelbYLv9USfqWaJ3qlzbodFZOe6s+Eo3CzWX91nh06qV+GIPcJGo0Qdr
+	YWlFu9ijB5YddA/Bx5B88Hw8b9asiFF8XnNSQVEjFQ/t9b4i74MyPn5Tku3BOZ/LFGm/M8sl+7tUo
+	thlUQbzcsyr2b2sJXWcvsRFtojBsMm448CBSvAkG6Nv4+4qLB4xK3lydVGEXkOJ41xYFS73D3SV3M
+	3HTXLpUUFRbsXLoX7AcAybWu/etDBSG80pX7bwYTK89WI0pVO4RPQvJyPlX22nXc3UuFeXVNtNwDY
+	pBmxYCZg==;
+Received: from localhost ([::1]:65336 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kGORL-004uK4-Lu; Thu, 10 Sep 2020 15:24:47 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41876) 
+	id 1kGl2m-0058mg-07; Fri, 11 Sep 2020 15:32:56 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24598) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kGORH-004uJu-9A; Thu, 10 Sep 2020 15:24:45 +0000
+ (Exim) id 1kGl2g-0058mZ-TD
+ for samba-technical@lists.samba.org; Fri, 11 Sep 2020 15:32:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=R0Dwz8+trpjeuT5JdZlPtQm7mi9N7Me1w5VXQutqmVM=; b=3lA7hG/5acBWJkS2TGh3mZ3S34
- qYTYdezki+y4++p+aBYyD2hCGmAxAwgk7j3uvrpKdwZmkaPwxTLaVmuS/LtdnMtcpHOFqF+gTJPPE
- dMVRvh2LkGMfU/sxIbOurKabkCmLP4LyD0qs+NhODCK74aueSC73PjtJwToueCbO/mGeHiHZQeMWR
- 3cAPw9fPJwdu4WRO7nwwLki4GXZ8ccww6jlDJrqhvSE9Y/z2OtTa9S/FiuhFrwi9OHWEHsUx0fcpw
- dl5jx3AQWJz0PjKkWsSePs5UwlRN6jh5oNtkc0smeGjvRcBSXvfMptkxlMcEDapfJ9TG2UG3NVgfN
- i3mDzzF4v+ynQQS6tBAp1JIHTGlZsbf1vQpGFiPS4gM8QC3OjkLyAkR00J5yC2nw86JROw9DXuLPQ
- ChpAxgRcDWU4rFhSt2kZeMnJIEa0k9eV1BP1U702O9rR38IkZ3+xKSdByCD0jdPMQ/Nz6Qq2TFrPc
- QPvce0taeSbGmSjLB2dWTRxo;
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=VoyHiGo/0MtGpjw5Wl2CKiHxGEfMrrlhI7rQzx8AWuY=; b=GjhxhZDPtAcbE4Ad/bgyVVKSZx
+ g+PIVBpXsjr83Pe0+Neo3SWAYoYggfFUlrOCI8L5u1GAZPuBoMRlU/afRgKZxDyb+S/eKfQW04VPO
+ laCHcq4XdyKdrQLFY33PylxDOriPrk+fUJ2wWPVMHhIAkUCE/5/grBujhiMS1/4wwIb8KjmrPQtbL
+ iVwWtjeU6ljnYvv3oqk+jnGEnzbaYvCv21ILoJ/TV8FUbD1nvGfhHybxycAp+zAGl7JXI2o7SOhKK
+ wcNXaVLU9JEXiBRAxmTZAY3Cs/5+8pEX1clkLbsZujGpAFZ8mYyWW+mI26DQPL8abGUvHGYAkLSeU
+ RJVyEPRioNxoqVmvPUuOxD0ijq0Wg0ylWj4sssr6hVLJEI9KPBoHhFWzWQjqL4M3bGh1JX6wlYfXM
+ RvHl5u/uAmIEy8vIRkDYq56vUykpOTUXer7QmzjwBd2FXC98SBbwfjVKXzy3ur8TB7+3i2xoNV1mx
+ Z0XIxOCQ1C4iVSFK98ogvgP0;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kGORG-0007pC-Md; Thu, 10 Sep 2020 15:24:43 +0000
-Date: Thu, 10 Sep 2020 08:24:37 -0700
-To: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Subject: Re: Where is Andreas?
-Message-ID: <20200910152437.GB896342@jeremy-acer>
-References: <3876475.E0Xr0IWvUN@magrathea>
+ (Exim) id 1kGl2e-0003r5-4g; Fri, 11 Sep 2020 15:32:48 +0000
+To: Isaac Boukris <iboukris@gmail.com>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+References: <CAC-fF8TWw1_JZaY_i9_n5U7vc96_+8XwfwzGoXZYQoxQAZwNjQ@mail.gmail.com>
+ <CAC-fF8R4+mJ1LG1xK2+3hEws7=Pj6TYd-+FgHf6=eXEPn5pwyg@mail.gmail.com>
+ <CAC-fF8RRAQbAgNA9R3kwKwt69DJY7fQwGvC3Yhz732Vmo_sh1w@mail.gmail.com>
+Subject: Re: winbindd main process hangs on samba-dc
+Message-ID: <501d9ca8-a49c-532f-48a3-201eed82bb1c@samba.org>
+Date: Fri, 11 Sep 2020 17:32:40 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <3876475.E0Xr0IWvUN@magrathea>
+In-Reply-To: <CAC-fF8RRAQbAgNA9R3kwKwt69DJY7fQwGvC3Yhz732Vmo_sh1w@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="c0LQCntCnKCjzFpUWG8UZN2B0Qw1LC9Po"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,24 +60,64 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-team@lists.samba.org
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Sep 10, 2020 at 01:11:53PM +0200, Andreas Schneider via samba-technical via samba-team wrote:
-> Hi,
-> 
-> tomorrow is my last work day, after that I'm on parental leave till October 
-> 19th. We will go to the alps and the baltic sea to relax and take care of our 
-> daughter.
-> 
-> If there is something urgent and burning, let it burn. I will clean the ashes 
-> after I got back :-) ;-)
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--c0LQCntCnKCjzFpUWG8UZN2B0Qw1LC9Po
+Content-Type: multipart/mixed; boundary="3q1LLWIBRlVMEfJGZmCVhr2StdqnF6UEU";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Isaac Boukris <iboukris@gmail.com>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Message-ID: <501d9ca8-a49c-532f-48a3-201eed82bb1c@samba.org>
+Subject: Re: winbindd main process hangs on samba-dc
+References: <CAC-fF8TWw1_JZaY_i9_n5U7vc96_+8XwfwzGoXZYQoxQAZwNjQ@mail.gmail.com>
+ <CAC-fF8R4+mJ1LG1xK2+3hEws7=Pj6TYd-+FgHf6=eXEPn5pwyg@mail.gmail.com>
+ <CAC-fF8RRAQbAgNA9R3kwKwt69DJY7fQwGvC3Yhz732Vmo_sh1w@mail.gmail.com>
+In-Reply-To: <CAC-fF8RRAQbAgNA9R3kwKwt69DJY7fQwGvC3Yhz732Vmo_sh1w@mail.gmail.com>
 
-Enjoy your well-earned parental leave ! If you want to clean
-up ashes, California has plenty for you to do :-).
+--3q1LLWIBRlVMEfJGZmCVhr2StdqnF6UEU
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-Jeremy.
+Am 10.09.20 um 12:06 schrieb Isaac Boukris via samba-technical:
+> I think there is no point trying to maintain domain->online per domain
+> in the parent process, we should just ask the domain child (fork one
+> if needed), and avoid ever trying to talk with a DC (sync) from the
+> main process.
+
+Yes, the parent should only ever to talk to the children.
+
+metze
+
+
+--3q1LLWIBRlVMEfJGZmCVhr2StdqnF6UEU--
+
+--c0LQCntCnKCjzFpUWG8UZN2B0Qw1LC9Po
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl9bmJkACgkQDbX1YShp
+vVZSRQ//b7HZXmnATNU65R6ylz/C1yj2Md6NmJTK/ANnC7drMXWbTLNQnBg/HLWu
+UO+jSZCqnk/noanh0RLmut7pJXAF4wHHcqhcYR8zjJU2BjlK/14RMihOZh6K50UA
+XtYefdbilKQFjZv5kMgRN2QfWSF9QJOSl5a8Rsvun5LQ6iTaaNIv+Pe8DGrQFGhH
+OaGA/qJSdQUoGZUmlRRgXEz1+fraVgYIwvQiN0l95PQaWSVo0mkYgjdlbrSh+yij
+lCJysYrK2MQVArEqvaF8G8eUJedwXeJtFZP4QEfdfDqqOvW+wvU6tYun2FOQQ5wI
+rXxsWfvXlHk2NXWmzONoZH/oZKTCeOVmlDVkHfsUyhGmiFu8KAkmEu67fF3Wy/FS
+P7azY+Y2JrAP5PrBTlm45AgL7C9Q3qDeR3aEQ8gfVnXI8xFf0eTEhfFRyf/oAIcF
+d3ibrNblogpNAIoxpf3olLI3QQz/i/iRxq11mWLYqzfiLAuAzCmkPtNDyM6zLQew
+tlYTiSlxR0ocgK2tQ7ccahikBeslN4CHU09oquLQccvkPmNo0bw8qM2wbyDUMq2B
+Bx+Lgjqm5QWk3wyDoXsm08zKDvRDZGDSauBf0oCaqCjVjMfeczbhJqLje6k45cyE
+Sl1KIbFZEdAjlOIRqc3V8CxFKVeU/TVBpGLjtNuUPz2fJal9c3k=
+=S+6h
+-----END PGP SIGNATURE-----
+
+--c0LQCntCnKCjzFpUWG8UZN2B0Qw1LC9Po--
 
