@@ -2,48 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D214A266618
-	for <lists+samba-technical@lfdr.de>; Fri, 11 Sep 2020 19:21:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B014426763B
+	for <lists+samba-technical@lfdr.de>; Sat, 12 Sep 2020 00:55:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=fGHN/Pz8J5NSYqUgzv1tL3t+X6TSIqPAGFyqRRgwna8=; b=r1yh68K5LQyGBjkhGzMNvbxFS/
-	LJVOH3Qhzr0A4dGQwIoCt+f3wS+tFYxCGPEEBqKeciFa1gsksm2MNNxJMlWCjihw5ZyM75w8+ggt3
-	zuxQqMJ2Kcup9EvH85FKcjTeRQ0DPKJe8vgYkB6JUe+yqmO6KA/b2s7TVi0jEqakh4Z+vd4jR4T0D
-	A3mRwZ9fDY8hcyyi7kin1ltxtWY5c1ueIQhHaP33Z05eZ85hcf1nV7YGmb01Jmc1vZOy+wbeOdlT6
-	v7I7PiuGlNyAKwHT1prOh4VI+5ezqyfsFz91tySiATmLn9CaDs9+YscdRf9GlibbXAqpFMd4XMOHc
-	mHsFHTSA==;
-Received: from localhost ([::1]:20968 helo=hr1.samba.org) 
+	bh=usyLNWCtgQ+lPEdcdu/pwk3+jnjIkiduai03i7ZGS1A=; b=ks+Bsd8XmY7G21dmrcBYKazLan
+	qXUazkbqQ3psG4qk2pY5wfgbSKQxWFlAt05BxoIzDwcndzltpqRNxcuc3Kj3hx9OV0TrPUW2co1Vl
+	UbbqU5XQbVjXjXHvOVtnISt8c0pKFYCFC3ANYb5xi923XX3x2u6la17Awu451vCdZhRk7vTayzlj9
+	w5kUIkek2o2Yz86KF5Cts+lFbaSN1tTIp8anBs8XfWsDLFv2Rrv9Cr+UgN+uk+sVZjlmbLWUDGpLD
+	DaPjJ3XjllvXINfaTm02noXUG/j3jeCn02wADPHaeg9Ayhg2vFUvXzaTJbFfsF5aeOatRWGAo7GeQ
+	zR9iN3KQ==;
+Received: from localhost ([::1]:42946 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kGmiu-0059QZ-PF; Fri, 11 Sep 2020 17:20:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62808) 
+	id 1kGrvt-005Ct5-Gd; Fri, 11 Sep 2020 22:54:17 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10024) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kGmiq-0059QS-2d
- for samba-technical@lists.samba.org; Fri, 11 Sep 2020 17:20:30 +0000
+ (Exim) id 1kGrvo-005Csy-HK
+ for samba-technical@lists.samba.org; Fri, 11 Sep 2020 22:54:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=fGHN/Pz8J5NSYqUgzv1tL3t+X6TSIqPAGFyqRRgwna8=; b=SeAr7/jUeJ//qSP5fQHZl/9kdm
- CtQTc8uL6wQl15sRCY0I0kih9q15HAbFK+vZz7S7ebYvssh5gVwH1tqJJEUG+fUdWodVFAqZQDGDG
- W228PloXwM+oomh+PX3LJFVHnLHlccwiGaCyoXK20la9ulbmG5De+f6FHMj8bCMdbKnFDwD2W/kvC
- Nxx3f04ehh7vl4CxRWScpj+QxMU88sg2yQRi4s/v28xOMIjUN/8F38j64g1J88RLprFZWrXKGYHAf
- tYulKlt/vMq8YqLs+Cac2Eu6bcxvpyLvZq/GbcPYP/0wGYm754oHY+rIDozSTjVNG1b/NZQ9B7psL
- T3xqCopXwQP5BEqH9Gxb+XXBNbyxAAyvqC8Zakkp4Q/gE+z15i31OEM+0QPH7w3VQ3sSY6YyWEEtP
- 7YMqcfeAYt1vDUfFjKlUyK8/o0N4h4eigg1U1yKiF4QwNe+ZtsXrsaYVSe+j+4ytT0WEf+7HpHhWz
- vzB2PAfn9keYYDxCWW63XmwX;
+ bh=usyLNWCtgQ+lPEdcdu/pwk3+jnjIkiduai03i7ZGS1A=; b=kCpggMRrgvgw8sb8oG6B7yQFoT
+ kdLakdiCSmtV78nAXgqzELBLg/pw9w0P0BsFQdPJvgJOokKTgOfHUVcXjtPMKymsaOI3PzDmYFHvD
+ 7nGbY7HMMfWNRmxByWLXrkpJUqG48ZufoIISTYWRzX6NLFtg5/YO9u8oEhjuT8mOnvWe/Jpz5V+HG
+ mSpmw197ccLGlH/2xstVyfFnwoUjhQ4yjFopuvk56CSI1CgBaw2gohZIQ4mZfZFxreRUN1cZzyRO5
+ hppxyjQarkxihsxZoBze/wowvRfPx32P6WL72RKLYh0PGfVBKb5UUJqWRmresNiUczMcklFlGLAg1
+ PPAn9mLaHBZ/kQ4UqeZhVipTdiY+eCjG3ApsLHcx20vP5sDGNBOsfBjXMId9yKBTpNNO3s+bMYACZ
+ 97Yl/PfMxMtqgIr3YpMN02oWwOU1UvNdfeGQC6b+PNt2Nv0a0QstCAZEhfjqmV1AGlEVvXQphJGh0
+ jp/FQucWmDmrkYz61oBHDqpQ;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kGmio-0004fX-Jq; Fri, 11 Sep 2020 17:20:27 +0000
-Date: Fri, 11 Sep 2020 10:20:20 -0700
-To: Stefan Metzmacher <metze@samba.org>
+ (Exim) id 1kGrvm-0007MG-Km; Fri, 11 Sep 2020 22:54:11 +0000
+Date: Fri, 11 Sep 2020 15:54:05 -0700
+To: Isaac Boukris <iboukris@gmail.com>
 Subject: Re: winbindd main process hangs on samba-dc
-Message-ID: <20200911172020.GA1002893@jeremy-acer>
+Message-ID: <20200911225405.GA1035745@jeremy-acer>
 References: <CAC-fF8TWw1_JZaY_i9_n5U7vc96_+8XwfwzGoXZYQoxQAZwNjQ@mail.gmail.com>
  <CAC-fF8R4+mJ1LG1xK2+3hEws7=Pj6TYd-+FgHf6=eXEPn5pwyg@mail.gmail.com>
  <CAC-fF8RRAQbAgNA9R3kwKwt69DJY7fQwGvC3Yhz732Vmo_sh1w@mail.gmail.com>
- <501d9ca8-a49c-532f-48a3-201eed82bb1c@samba.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <501d9ca8-a49c-532f-48a3-201eed82bb1c@samba.org>
+In-Reply-To: <CAC-fF8RRAQbAgNA9R3kwKwt69DJY7fQwGvC3Yhz732Vmo_sh1w@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,27 +58,34 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Isaac Boukris <iboukris@gmail.com>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Sep 11, 2020 at 05:32:40PM +0200, Stefan Metzmacher via samba-technical wrote:
-> Am 10.09.20 um 12:06 schrieb Isaac Boukris via samba-technical:
-> > I think there is no point trying to maintain domain->online per domain
-> > in the parent process, we should just ask the domain child (fork one
-> > if needed), and avoid ever trying to talk with a DC (sync) from the
-> > main process.
-> 
-> Yes, the parent should only ever to talk to the children.
+On Thu, Sep 10, 2020 at 12:06:22PM +0200, Isaac Boukris via samba-technical wrote:
+> I think there is no point trying to maintain domain->online per domain
+> in the parent process, we should just ask the domain child (fork one
+> if needed), and avoid ever trying to talk with a DC (sync) from the
+> main process.
 
-Yep, this is the goal, although there still may be
-remnants (as you have found) of old code that still
-tries to talk directly.
+That certainly seems like the correct fix.
 
-Flag 'em, log bugs and let's fix 'em all !
+OK, I took a look at your change:
 
-Thanks,
+https://gitlab.com/samba-team/devel/samba/-/commit/5ee90438cc2aa26514f60c7d72a3e854adee0148
 
-Jeremy.
+and I see what you're doing here. I think
+there still may be some calls that can
+be initiated by wbinfo that cause the
+parent process to try and do domain
+activity and don't go through a child
+DC.
+
+Can we work together to track these down
+and make sure we invoke a child process
+for them ?
+
+Cheers,
+
+	Jeremy.
 
