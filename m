@@ -2,50 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF8B126A05F
-	for <lists+samba-technical@lfdr.de>; Tue, 15 Sep 2020 10:05:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B69A626A3E4
+	for <lists+samba-technical@lfdr.de>; Tue, 15 Sep 2020 13:10:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=7BHJ/PE52H5k8Z0k/p3Q/hxYkbsZjHUxD/HCvq9D2wE=; b=iqF64LtC1Kt20tgOpPh8UY0FvX
-	zsmKDZpe1ON0l4znaSmsVhT2aLTkbrEeo1aJ+vH3Guedkr/+zIn2ac8iUqEs0Zdpxygx+XAbDz9cb
-	IZq0gZU+8X/u6lwkY7jK3m1fRK2fyEpAD4qZOhNtjU7JcMJvYCX5LAbnqxi73ZJPBKcdUZrJWQlda
-	Vi2RMHGZKLSQzuhVkfC1FrEN6RsW+H6X5LIj++gCmPT7qUwPVBfuLF+pfa3vEiq/hl2jKtw09PPiE
-	JZcpBVWVpKdqJdfhzxXEr34k2ZXAV2tElFULI85scII3f1RyeBGxZH9IksufSD05TP0Y/58Xm/q++
-	Fcj0eZNQ==;
-Received: from localhost ([::1]:52362 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=Q2WPthXS7MrGWVdCY/Jg9kJGXBjJridZ5SvapxuBOI0=; b=ZVhxxfFxxWXk8NgvCI9Ecurt+H
+	mJbY4GuK1LdEx48InyvrVljfXvhf2+fLhhFqA5e+hzlthEX1CZr+YeQMw6N23cmtQ+NkPH7Q5fxEM
+	qziwWvJlOKk01t2GKrGQkfvIomcru0Lzhamdsd/ljMi+UXc59A9rXPMKvGjeiAPf5iM66VtOfb7w3
+	Pk4vQsqABQ8KSxV/Ts8p+ufrwQyJ1t1xhtOuPVamg+FGtIX3pcOL2rS8jCg02edbrCY5k3/o3PmWO
+	REUdSFmCjM9CPhpsKqLjHQQwHuhzVe4OfSrB5te5oE6touyf4bDgJ0YvQEWp23vawMQeHQicymfVB
+	PDWjvXGg==;
+Received: from localhost ([::1]:60290 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kI5x8-005RmU-1I; Tue, 15 Sep 2020 08:04:38 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62742) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kI5x1-005RmN-MY
- for samba-technical@lists.samba.org; Tue, 15 Sep 2020 08:04:34 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=7BHJ/PE52H5k8Z0k/p3Q/hxYkbsZjHUxD/HCvq9D2wE=; b=X2Vwu4NM0aK9Z5LtzvNN4TWK4d
- GACU9GktWPRNwe1x7JirEFIyg18IFo0RZI2kNkosbotKsXuUwvvKoVdinhL1IKjwESwaXr5JHW2CX
- V8S9GmgmAKi5l1c7Tbn2wiN1UMCnZC9yP7ZO64yzqVy89nsV19hKJbE8O+blPWffBbkbfAeSlWjwH
- +0Wu6flFmNT1W5d4UQdO2un45stb+kBL7G6s5n1rAifT4tN6verBRWormWzgUslBM1FDas+LKekBf
- ND9NEBVxivtXtiNf+LkhuhYAIJRGRoVGQrYvfifMHr4TLfjjFH26JupZezQam/LocQ+Jpv4y+sX0J
- TXRhDDxILV1su6CLGPSAP94EHuWXkxTGZ1UByDH7ERQWALsa2fXj2i15V3fGBc7pAzlL16aqfrwT+
- GO4x4/ysdLvWt0Odg81DV6b+BLjH/8v2c4CQB4fqcr8w95RTapyG94jsoA3YodOf4T/plVumINR1O
- jqmkXjw8w4euk9wh4HoJeG6F;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kI5x0-0006A0-Rg; Tue, 15 Sep 2020 08:04:30 +0000
-Subject: Re: SELinux attributes in Samba domain
-To: Andrew Bartlett <abartlet@samba.org>, samba-technical@lists.samba.org
+	id 1kI8pf-005T3X-Df; Tue, 15 Sep 2020 11:09:07 +0000
+Received: from mail.rosalinux.ru ([195.19.76.54]:35814) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kI8pa-005T3Q-DI
+ for samba-technical@lists.samba.org; Tue, 15 Sep 2020 11:09:04 +0000
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rosalinux.ru (Postfix) with ESMTP id BA17ED6E07A10;
+ Tue, 15 Sep 2020 14:08:58 +0300 (MSK)
+Received: from mail.rosalinux.ru ([127.0.0.1])
+ by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id 7H8Nex0EoPoq; Tue, 15 Sep 2020 14:08:58 +0300 (MSK)
+Received: from localhost (localhost [127.0.0.1])
+ by mail.rosalinux.ru (Postfix) with ESMTP id 3D08ED6E07A1A;
+ Tue, 15 Sep 2020 14:08:58 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.rosalinux.ru 3D08ED6E07A1A
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosalinux.ru;
+ s=A1AAD92A-9767-11E6-A27F-AC75C9F78EF4; t=1600168138;
+ bh=Q2WPthXS7MrGWVdCY/Jg9kJGXBjJridZ5SvapxuBOI0=;
+ h=Date:MIME-Version:To:From:Message-ID;
+ b=IplXVrIk4+nU9Zk2PDY3Bgx9jHkL5gWpuvZsauQP7XXzwBkasVgSOtggcQyq3PZEA
+ 0ozGFkE/EJejwcioMKqLZ21t3b2Hwbr5VaPrCR/OUrrj8uPrPM1Tux4XtWEBsMFMF4
+ AX5cYRcReN3QwRcc5Edv3/4N9co3qDzvZm+5Tdxci8FITkYMhYhkvXij0Gy74wnh2N
+ Nsyi/eDR6SufJWJ4Skwix+2n3BN6O3O60CCv5MmGB+MsUtXWHsvZgfevPL2hAt8m8y
+ Q8ftyMYxFFzY82pJUksT7rvqiOvOqY/cg62YgB7U8sN8JWbbI17GguwSSrtbN1GiTJ
+ NiXv6ewNPtONw==
+Received: from mail.rosalinux.ru ([127.0.0.1])
+ by localhost (mail.rosalinux.ru [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id vGrFr7hDm3Hz; Tue, 15 Sep 2020 14:08:58 +0300 (MSK)
+Received: from [10.68.14.64] (unknown [91.193.179.24])
+ by mail.rosalinux.ru (Postfix) with ESMTPSA id C9ED2D6E07A10;
+ Tue, 15 Sep 2020 14:08:57 +0300 (MSK)
+Date: Tue, 15 Sep 2020 14:08:53 +0300
+User-Agent: K-9 Mail for Android
+In-Reply-To: <adf4a272-cd82-213d-d630-93bac4127812@samba.org>
 References: <da8c5360-fe43-16e5-e149-657a22cbc61a@rosalinux.ru>
  <adf4a272-cd82-213d-d630-93bac4127812@samba.org>
- <c98e756ee61403d845c5cba384c756224d2fd5bd.camel@samba.org>
-Message-ID: <b9a78af7-1a42-b294-4cfa-dee7a743d84b@samba.org>
-Date: Tue, 15 Sep 2020 09:04:29 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <c98e756ee61403d845c5cba384c756224d2fd5bd.camel@samba.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: SELinux attributes in Samba domain
+To: Rowland penny <rpenny@samba.org>,
+ Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Message-ID: <29C547AD-181E-40E0-A423-C7CA551CE4BF@rosalinux.ru>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,91 +71,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: Mikhail Novosyolov via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Mikhail Novosyolov <m.novosyolov@rosalinux.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 15/09/2020 08:39, Andrew Bartlett wrote:
-> On Tue, 2020-09-15 at 08:10 +0100, Rowland penny via samba-technical
-> wrote:
->> On 15/09/2020 01:42, Mikhail Novosyolov via samba-technical wrote:
->>> Hello everyone!
->>>
->>> I am thinking about storing SELinux attributes of domain users in
->>> Samba AD domain.
->>>
->>> The problem is that Samba AD copies Windows domain, but there is no
->>> SELinux in Windows.
->>>
->>> Currently FreeIPA can store this as a server in LDAP and sssd can
->>> get and apply SELinux attributes from FreeIPA's LDAP:
->>>
->>> $ grep -inHr ipaSELinux
->>> src/providers/ipa/ipa_config.h:34:#define
->>> IPA_CONFIG_SELINUX_DEFAULT_USER_CTX "ipaSELinuxUserMapDefault"
->>> src/providers/ipa/ipa_config.h:35:#define
->>> IPA_CONFIG_SELINUX_MAP_ORDER "ipaSELinuxUserMapOrder"
->>> src/providers/ipa/ipa_opts.c:271:    {
->>> "ipa_selinux_usermap_object_class", "ipaselinuxusermap",
->>> SYSDB_SELINUX_USERMAP_CLASS, NULL},
->>> src/providers/ipa/ipa_opts.c:276:    {
->>> "ipa_selinux_usermap_selinux_user", "ipaSELinuxUser",
->>> SYSDB_SELINUX_USER, NULL},
->>>
->>> In general it just gets a string and processes it, this email is
->>> about storing that string inside the domain per user.
->>>
->>> My question is: how can SELinux attributes be stored inside Samba?
->>> I understand that it will not a standartized name (but maybe we can
->>> come up to upstreamizing something into sssd...?), but I am ready
->>> to keep with something not upstream for now and to try to make SSSD
->>> to the same for selinux in Samba as it does in FreeIPA.
->>>
->>> I think I should extend Samba's scheme with custom attributes like
->>> in the guide
->>> http://david-latham.blogspot.com/2012/12/extending-ad-schema-on-samba4.html
->>> And then try to make sssd read those values.
->>> Does it sound like a not very bad approach?
->>>
->>> Thanks!
->>>
->>>
->> We have a wikipage about extending  the AD schema:
->> https://wiki.samba.org/index.php/Samba_AD_schema_extensions
->>
->> Your problem will come with sssd, it isn't supported by Samba
->> (because
->> we do not produce it and no little about it) and even Red-Hat no
->> longer
->> supports it use with Samba.
-> For managing pure Linux clients it would be really awesome if we could
-> make this work well.  I've long dreamed that Samba be the ideal posix
-> directory server, because there is no good reason why it can't do that
-> as well as be an AD DC - why should sites have to run both FreeIPA and
-> Samba (and have the complexity of trusts) just to get really good
-> management of their Linux clients.
-Totally agree with this, it would be great if Samba could do for Linux 
-what AD did for Windows.
->
-> Rowland,
->
-> While the combination of Samba and sssd on the same host is a known
-> problem, outside this case we should work hard to have sssd be a great
-> domain member in Samba domains, just as much as we hope for good
-> outcomes for MacOS or Windows clients.
->
-> Andrew Bartlett
->
-Nope, we should make Samba work so well that nobody needs sssd. Lets be 
-honest, there is very little that sssd does that Samba doesn't, 
-especially when David's GPO tools come on line.
-
-It shouldn't be down to Samba to make sssd work in a Samba domain, it 
-should be down to Red-Hat to do this. There are more important things 
-that need fixing first, Sysvol for one.
-
-Rowland
 
 
+15 =D1=81=D0=B5=D0=BD=D1=82=D1=8F=D0=B1=D1=80=D1=8F 2020 =D0=B3=2E 10:10:3=
+2 GMT+03:00, Rowland penny via samba-technical <samba-technical@lists=2Esam=
+ba=2Eorg> =D0=BF=D0=B8=D1=88=D0=B5=D1=82:
+>
+>Your problem will come with sssd, it isn't supported by Samba (because=20
+>we do not produce it and no little about it) and even Red-Hat no longer
+>supports it use with Samba=2E
+>
+What is the problem to use sssd as a client to enroll into Samba AD domain=
+?
+
+
+--=20
+=D0=9F=D1=80=D0=BE=D1=81=D1=82=D0=B8=D1=82=D0=B5 =D0=B7=D0=B0 =D0=BA=D1=80=
+=D0=B0=D1=82=D0=BA=D0=BE=D1=81=D1=82=D1=8C, =D1=81=D0=BE=D0=B7=D0=B4=D0=B0=
+=D0=BD=D0=BE =D0=B2 K-9 Mail=2E
 
