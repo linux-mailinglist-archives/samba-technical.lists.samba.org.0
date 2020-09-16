@@ -2,50 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39F8626C21C
-	for <lists+samba-technical@lfdr.de>; Wed, 16 Sep 2020 13:30:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97D4326C302
+	for <lists+samba-technical@lfdr.de>; Wed, 16 Sep 2020 14:57:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=lLGO10SXS8+JiIERm1oGX4RebllCdKA6UBVEUBnffRk=; b=3Lg4Yfo2RZYWDYVh43nhG61BhE
-	IT2KmilTitJ8C/WzGxyfs1isbc6sBagO/pd9JKaLzRvkbogIyvBdZTY+H5wuqaA4MSUiprCALY4Ke
-	GpV7C54BQmNXVOh+0uylMWnf9mAAFhmQu//2y+TtpsAEp92j4wKn3mvuujVJYHZ1Day2KaYjraucL
-	3A1LjBPoIYrgrY1tXzhVUK2LsO+PHfJDcPnyI3xpcXhJ5vvOAA0wGoNLwsWpkkr8CgFXhRA09D41t
-	mCItRrr7Xjss/p/LYaL0Hm8gbXZ0osYR8XyfypxnQoasyyz1iIQwIaesrHGW130WkKsk3ZAnxZiDy
-	U985GfRg==;
-Received: from localhost ([::1]:34624 helo=hr1.samba.org) 
+	bh=OX5Y02kMDLPeWkstWZdF5HI9eArQ7GGxVXQiSx9vTK0=; b=O0yJ4AGkW73eZw64ROkcfvLR2C
+	Q3R2HyOrarK+BlibZUU5JJKkl/DpKB21ZEs5FICSfHHx/ecK8l79PfoGDMFUse8s8fo4bv5B2JXTk
+	fODAWt9K1d4mTjbQMV4nsF7RW5/qO4hib1+UtFnFmUr6y+a/1qqcGjWQ4MS+tRyq2XeWipPF7doag
+	00bi846IH2zMQncoQlmMZDGMPvq7trsjdHB0GWAudPO3GPibk6Onn76JE7VNmG5f2i9pM1/VEvm8d
+	7PZpoOSDIgpVWUw3fhZ091A55KFoiPxEJd98Bb2Sawax6THeowYtD5VuZ5dVio4vf9i+aC9K589Wu
+	HY+Lnkaw==;
+Received: from localhost ([::1]:41622 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kIVcx-005l78-Ti; Wed, 16 Sep 2020 11:29:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15144) 
+	id 1kIWzr-005mKB-0G; Wed, 16 Sep 2020 12:57:15 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56390) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kIVcs-005l71-Kp
- for samba-technical@lists.samba.org; Wed, 16 Sep 2020 11:29:29 +0000
+ (Exim) id 1kIWzi-005mJi-TG; Wed, 16 Sep 2020 12:57:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:Message-ID:From:To:CC;
- bh=lLGO10SXS8+JiIERm1oGX4RebllCdKA6UBVEUBnffRk=; b=poqiU5yNHv0dZi4/1Bp4dj6Peo
- wSNl6iSvCSxEZ0puzykbauiCbAuiB/GlenZyFIj1KVkTOAoS5v13BJmiyytBE1aXnhY0BoCvPkBno
- G8Feh2wxe0jpTkJfISW5uPA+Mz/Qg5gPpY2p1F72fBV8j3DHBxUs6hIXgNW1DJPQ3glAcm6MqUXoG
- llNHZZ28FAU63YZzeNP+Q/N8hBY0rCjBXqvC6PrADhB9LifbQs3Hqddqa4dVNtOshZdNBFT1Mk1Zr
- PHMg0S7dPALc9xaV12vlkMiQdnGqHkU/QzRBcIwkEJJmC9u3Zu2LImEv7Nwu420kcnHfx/K65eZQF
- qk+iKr2ai2HdtbJugH/jw2yWAoZB2tZmi3hOzEt956WD+ywPbrS0vr+ZitjOBFg+oQlNIHDRAjNmt
- +HcnaYAVkVlrtl+IANFpJqmzgUguMHMe08lj4R4jlFAtaK8P/dTAi9WS6qTQ6sqtM12Cvy0eLsa59
- VB+tke1mVRi364oNDBDLwYhy;
+ bh=OX5Y02kMDLPeWkstWZdF5HI9eArQ7GGxVXQiSx9vTK0=; b=ZNI9lH0C2aXlKB6JxG0vUtoR6I
+ BDduWpo83bQmz6AC96n5PpEZi/WXpGT1bHUnrlx4k9sh7igxqYBUrJesZXGEmoaoTLvcwz6eT3/pz
+ JAaJKyySJmp1lWH1ty5Ch9w+k08hP5xWLs6wuW7Ke0z21Fs7fzJEt6MgBmyS8K3d7R1WzYxJ0CtbR
+ N0f8kPoFid3Nt4UR3vlRd/P6uxKKoXopULLSaRlBTo/keQEh7At++re4lRfiCQ+LUwHknBr+JFnrl
+ GugnpjjGhBXc6TRwQralds0snijwOluzCq2XFB22bfK5Wy+nUCdKZleYVK+nIVp6KWYmqj40/VDlt
+ clU4Ultvm7UhRYokVUwzMdBfkqg/YWxtbfh6c5z7XQdssh1XykV9Jv2Y55GTVBLSpIzfcE6KStpCD
+ ORwF5HOchIeUSs5f6JcV4ZQeGDfa0NRXkCjxyplZoP/u595bivWnt48KKPlsQgJZH51avlJRKsyZ4
+ gx6vW7rpl/DejA+LyQASvy2x;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kIVcq-0003jN-Rq; Wed, 16 Sep 2020 11:29:24 +0000
-To: Andrew Bartlett <abartlet@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-References: <d415684468ce9d140f570791f6a4d560df9bb7da.camel@samba.org>
-Subject: Re: Ideas (other than just mandetory schannel) for ZeroLogin
- CVE-2020-1472
-Message-ID: <4caec4ad-16be-087b-9d35-a8e8855e2c1c@samba.org>
-Date: Wed, 16 Sep 2020 13:29:16 +0200
+ (Exim) id 1kIWzi-0004ps-Ij; Wed, 16 Sep 2020 12:57:06 +0000
+To: samba-announce@lists.samba.org, samba-technical@lists.samba.org,
+ samba@lists.samba.org
+Subject: Samba impact of "ZeroLogin" CVE-2020-1472
+Organization: Samba Team
+Message-ID: <b5e56294-14d4-7cf6-de63-c8a03157e34a@samba.org>
+Date: Wed, 16 Sep 2020 14:57:06 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <d415684468ce9d140f570791f6a4d560df9bb7da.camel@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="cbsocqUec5LldFMsmcO75I6jhYVUfkMLS"
+Content-Type: text/plain; charset=utf-8
+Content-Language: de-DE
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,80 +56,119 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Karolin Seeger <kseeger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---cbsocqUec5LldFMsmcO75I6jhYVUfkMLS
-Content-Type: multipart/mixed; boundary="NgvcB9VTcYHBZ7lqZjjGUVvDli73tk0j6";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Andrew Bartlett <abartlet@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Message-ID: <4caec4ad-16be-087b-9d35-a8e8855e2c1c@samba.org>
-Subject: Re: Ideas (other than just mandetory schannel) for ZeroLogin
- CVE-2020-1472
-References: <d415684468ce9d140f570791f6a4d560df9bb7da.camel@samba.org>
-In-Reply-To: <d415684468ce9d140f570791f6a4d560df9bb7da.camel@samba.org>
+The following applies to Samba used as domain controller only.
 
---NgvcB9VTcYHBZ7lqZjjGUVvDli73tk0j6
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Am 16.09.20 um 07:51 schrieb Andrew Bartlett via samba-technical:
-> This isn't on the bug
-> https://bugzilla.samba.org/show_bug.cgi?id=3D14497
-> because it isn't at that point yet, and isn't a MR as I've not even
-> compiled it, but ideas (done with Gary) for mitigation for those who
-> must run with schannel are:
->=20
-> Ensure that the password set via ServerSetPassword2 is of non-zero
-> length.
->=20
-> Check the password does not have zero bytes in it.
->=20
-> Check that the challenge in ServerAuthenticate3 does not have repeating=
-
-> patterns in the first 3 bytes and repeating 0s in the computed
-> response.
-
-MS-NRPC has added recently:
-
-7. If none of the first 5 bytes of the client challenge is unique, the se=
-rver MUST fail session-
-key negotiation without further processing of the following steps.<70>
-
-I'll add a similar check.
-
-metze
+(Both as classic/NT4-style and active direcory DC.)
 
 
---NgvcB9VTcYHBZ7lqZjjGUVvDli73tk0j6--
 
---cbsocqUec5LldFMsmcO75I6jhYVUfkMLS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+Samba users have reported that the exploit for "ZeroLogin" passes
 
------BEGIN PGP SIGNATURE-----
+against Samba.
 
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl9h9wwACgkQDbX1YShp
-vVY/LxAAkzEy/Tnok+GaJp8w3B6lhCh0k4bwPHpwdmMF9YK3Pi0vmuQKLSFijZLq
-vNaQg2E5qM8z5PzSSZKD4PP2cf/6ie3yBRnzcvFHAvR92/vA5s4MmytWW2VWfkAD
-EJZImsntGDhMH5tc+dOrWpo7vuNC2VAIOuKa5w6BdMIKz7nDuGUHg3yXiVUBhDLe
-Zrj7l0Bik9N2VKugXyw0f75UqM0wXnLr0JIxJZGl5jUTgErhdlpS/inmY89fAE8p
-dZdn2YDcwdIFYDKe++pwvGKYBnO/Z8RhaSuOwagOiV5yCWtmzXEks0pRU8gFJFe1
-F5I6j7R1YWU19TW+AjbQ31RnTiRyUMbYFBMdfS8hsOGtJYfnfGlBc3audF3lRYBh
-3KlA1YnTrYiPTnpbCN3PX14YwDfaz35hGpoHyj7ZKhxnpdmXp2nhwnFaQjnsnH5M
-Y/tJ/WM6euZPZ3r4rUf51ySb1n+ttwuWVhCuOJlAH9C563HC+xuAHURZiMmCvsRZ
-B07xbrn4It9z8IAnjlEywlzJwCmsohRbuyhetORC+vVjsecv3dJtBOW4WozBYGJa
-ocVq69dBKW2PCZN+RNeIEcMvPN5KN5ksz7h6+RuGd2wYCV27R8vuVrpLniSKargZ
-VzklePi1v6irkJMFJRcZpKqAnGPbU2Bi9wMZIR9o4ypVxIxibu8=
-=J/vI
------END PGP SIGNATURE-----
 
---cbsocqUec5LldFMsmcO75I6jhYVUfkMLS--
+
+Samba has some protection for this issue because since Samba 4.8 we have
+
+set a default of 'server schannel = yes'.
+
+
+
+Users who have changed this default are hereby warned that Samba
+
+implements the AES netlogon protocol faithfully and so falls to the same
+
+fault in the cryptosystem design.
+
+
+
+Vendors supporting Samba 4.7 and below should patch their installations
+
+and packages to change this default, as values of:
+
+
+
+ - server schannel = no
+
+ - server schannel = auto
+
+
+
+are NOT secure and we expect can result in full domain compromise,
+
+particularly for AD domains.
+
+
+
+Some public exploit tests, such as
+
+https://github.com/SecuraBV/CVE-2020-1472/blob/master/zerologon_tester.py
+
+only confirm that a ServerAuthenticate3 call operates, but not that the
+
+ServerPasswordSet2 call required to exploit the domain also operates.
+
+
+
+We are well aware of administrator concern and are looking to provide
+
+patches that provide mitigation here, to make the ServerAuthenticate3
+
+call also fail.
+
+
+
+We, like Microsoft, suggest that 'server schannel = yes' must be set for
+
+secure operation. This is our equivalent to Microsoft's
+
+FullSecureChannelProtection=1 registry key, with the difference
+
+that it's already enabled by default in all Samba major versions
+
+released in the last three years.
+
+
+Finally, we would note that Samba's audit logging will record
+
+ServerAuthenticate3 and ServerPasswordSet calls including the source IP,
+
+details will be provided later on the options to enable.
+
+
+
+There seem to be some legacy software, which still requires
+
+"server schannel = auto". See the following bugs:
+
+ - https://bugzilla.samba.org/show_bug.cgi?id=11892
+
+ - https://bugzilla.samba.org/show_bug.cgi?id=13464
+
+ - https://bugzilla.samba.org/show_bug.cgi?id=13949
+
+
+
+We'll add additional hardening that will allow
+
+administrators to use "server schannel = yes" globally
+
+and define exceptions only for specified computer accounts.
+
+
+
+Our progress can be monitored via this bug:
+
+ - https://bugzilla.samba.org/show_bug.cgi?id=14497
+
+
+-- 
+Karolin Seeger			https://samba.org/~kseeger/
+Release Manager Samba Team	https://samba.org
+Team Lead Samba SerNet		https://sernet.de
 
