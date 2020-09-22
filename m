@@ -2,48 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 562F027441C
-	for <lists+samba-technical@lfdr.de>; Tue, 22 Sep 2020 16:23:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 062FC27441D
+	for <lists+samba-technical@lfdr.de>; Tue, 22 Sep 2020 16:23:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=EjfNjrMnTgY2Kk4J04w3ahdv6OEDG7QKiLsUfSzlJjA=; b=J9K3J0TYMuTo9qf52rjOHuOn/x
-	ZBZbYltG25uQmwy2rQUNOF+seM3FAtzZcbWrgpvoVrXHjKBEIoTeJ5jsWiC316/fgD2ukYcaqvQkX
-	3giw5N9QdKxkjEgbZmabBEsrC27uPBmyh/SrbCEmrtqbDy+OBVt6r3mZp5bYsweIRgUkb0XhZIjUZ
-	JILOdE5RGvV+Ju+/3gx78Eor4Jxbad+urjsxM6xQ10rluvGNtrjFjMWZQ/1L+0vRP+gc3ckTJNCmo
-	5f4ApsJ/Yb3WAgmV6cNI/6RRR9mo3TlF+GnQo6Jj6q8nZGoHA+i93arA+qSSad+7dwA1yUCrfJCHG
-	OTjzaRZA==;
-Received: from localhost ([::1]:46878 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=xvhJ5zzEX/DEDER2TbLuPzbEnGMiA07/JMCDyN6PfHA=; b=FXvahoTVtRrryd/ywHtPsSJbq7
+	sYNJhBUmm0930mnWKAFXFgMVUfv9aX0wK5UcEFDwPjoDcMkfeT18yQoIdOFr4+Jg4nqPh2bJpgkCO
+	Kx4IL6zUniOPKng1gXBXCFmsDLE/G0Es74AMO2UwSFVPSU/od0CCjiemyeQwIqAC35yQBo+JEk8FO
+	Fk0pxreualq6gGgV+N7G5DdsNK+J3FiNml+HxUkOxU3uZ90D7FUFKKPAbHqkvRNEcwJahxJGfI4/D
+	05NA8TIbtRPT7hlkugxIC9zeoDCKQaccJWgTt3qVr/5V594O21bPR9RxkOv9D6GvbggrMrO58Op/F
+	IxvqfRIw==;
+Received: from localhost ([::1]:47562 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kKjBz-006hC4-FU; Tue, 22 Sep 2020 14:22:51 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55528) 
+	id 1kKjCY-006hHn-GM; Tue, 22 Sep 2020 14:23:26 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55752) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kKjBu-006hBx-0g
- for samba-technical@lists.samba.org; Tue, 22 Sep 2020 14:22:48 +0000
+ (Exim) id 1kKjCT-006hHA-CC; Tue, 22 Sep 2020 14:23:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:Message-ID:From:To:CC;
- bh=EjfNjrMnTgY2Kk4J04w3ahdv6OEDG7QKiLsUfSzlJjA=; b=bWzFvMIwP6V7gFDSHO1paJDxq2
- VPL29L/v4kt6a+95vlw8/iNrCq0eesy/yRYcGfd8uxo34WPCBky1caXV3o9rrSh/p84Q0/T00vR0L
- PgsHMDo9JJcbZ5vB0LLEzpYaFYHr8aYZP94e05KG5idgVI0rjzzUpX78E7uL970zvNhHsSEr3A5RZ
- tylqMCzH1Cv5uNRlSmcgLfmW34U3yO1TELQVFiqdRknxeLjcB8kmc9ZxizE8zvkLwFTqYsSR8qN8d
- JhEfYXNkI2q8IDQJ67nu6Nl6dmqGEzV6nujeHfNnwovJEV53ufZX3ZBFsa7GHIA6EuTkHIjdf/CpK
- bCbP7XPjgqa0V1KXTAmrNy61/xInTz6SJHVF6DwH4ZjG+ajg6FMXpRVTCqYGZveIftRHJuHtnhtqe
- l+b2pIAIc6m4omlnN6hBvbL2kN0uvofdruKq+KVi0u/mw8TrxcS/bYFvsBFW9qQmKM5ANQBszWQ+o
- D2NTEb3k4om0nqD+bKjwYY2L;
+ bh=xvhJ5zzEX/DEDER2TbLuPzbEnGMiA07/JMCDyN6PfHA=; b=PQvh7M+pYdfUfAwMG8dbN03Jw9
+ RZ+q2cC3vYdq80GUh59zfaifs6zmB94rEA0fVw49Ob6D5MA95FjK7RrMF4EqBvrUYv2g/XhQVDRAI
+ MiVNbDvR7+pUlqMMU1ap0hu0ZQU6qiv1FqZSonP2tE6gPMtyWoqN0ZQzDz9fmB7iCodmp5jFVhSka
+ hYykt+focaYKmhMGCikg+II5f6xT8ywzrMqzLa+WFvHjcOCFxHNt8IAJmtfdQxTVwPWVC8xi4CAGO
+ Nqbo7KRw7+AIS64zFQuHolHB+BXHaCmh7lhk8GcGevvoVkFVJPEPqDmKBJjtZxsS1lr/DC22KqIFW
+ KQxPYEz52QzjzQ2S3M++wLiFIaPupZBRI/sAGjUX4Ygkm6LgKiJuDM63OETxwgX6qLytVIsrKoMlt
+ 4n1085xyuRa42kh/0KjH2nieR3BpERBRIcSOQL62DDW1v8cA1x8VRDs52eGhF9imtFxlGp8C5mVm+
+ P9WtLDFdeXQo11yhul7YypZ8;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kKjBt-00006H-FQ
- for samba-technical@lists.samba.org; Tue, 22 Sep 2020 14:22:45 +0000
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.13] Samba 4.13.1, Samba 4.10 end of life
-Organization: Samba Team
-Message-ID: <dd87ca63-dd48-4206-dd7f-5c023dc3be43@samba.org>
-Date: Tue, 22 Sep 2020 16:22:44 +0200
+ (Exim) id 1kKjCS-00008F-Hh; Tue, 22 Sep 2020 14:23:20 +0000
+Subject: Re: [Announce] Samba 4.13.0 Available for Download
+To: kseeger@samba.org, samba-announce@lists.samba.org, samba@lists.samba.org, 
+ samba-technical@lists.samba.org
+References: <20200922140620.GA16336@carrie2>
+Message-ID: <f1973153-cde8-dfb0-89b8-de189c0cc5e9@samba.org>
+Date: Tue, 22 Sep 2020 15:23:20 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: de-DE
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200922140620.GA16336@carrie2>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,29 +57,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Karolin Seeger <kseeger@samba.org>
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+On 22/09/2020 15:06, Karolin Seeger via samba-technical wrote:
+> Release Announcements
+> ---------------------
+>
+> This is the first stable release of the Samba 4.13 release series.
+> Please read the release notes carefully before upgrading.
+>
+>
+> ZeroLogon
+> =========
+>
+> Please avoid to set "server schannel = no" and "server schannel= auto" on all
+> Samba domain controllers due to the wellknown ZeroLogon issue.
+>
+> For details please see
+> https://www.samba.org/samba/security/CVE-2020-1472.html.
+>
+>
+> REMOVED FEATURES
+> ================
+>
+>
+> The deprecated "server schannel" smb.conf option will very likely
+> removed in the final 4.13.0 release.
+>
+>
+> smb.conf changes
+> ================
+>
+>    Parameter Name                      Description                Default
+>    --------------                      -----------                -------
+>
+>    server schannel                     To be removed in 4.13.0
+>    server require schannel:COMPUTER    Added
 
-Samba 4.13.1 is scheduled for Tuesday, November 3rd, 2020.
+Is it possible to 'fix' the release notes ?
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.13
-has been updated accordingly.
+'server schannel' wasn't removed.
 
-Please note that with the release of Samba 4.13.0, the Samba 4.10
-release series has been marked end of life.
+I can see confused users here.
 
-For details on the supported release series, please see
-https://wiki.samba.org/index.php/Samba_Release_Planning.
+Rowland
 
-Cheers,
-Karolin
 
--- 
-Karolin Seeger			https://samba.org/~kseeger/
-Release Manager Samba Team	https://samba.org
-Team Lead Samba SerNet		https://sernet.de
 
