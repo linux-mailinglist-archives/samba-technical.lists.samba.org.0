@@ -2,48 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 062FC27441D
-	for <lists+samba-technical@lfdr.de>; Tue, 22 Sep 2020 16:23:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6316827501E
+	for <lists+samba-technical@lfdr.de>; Wed, 23 Sep 2020 06:58:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=xvhJ5zzEX/DEDER2TbLuPzbEnGMiA07/JMCDyN6PfHA=; b=FXvahoTVtRrryd/ywHtPsSJbq7
-	sYNJhBUmm0930mnWKAFXFgMVUfv9aX0wK5UcEFDwPjoDcMkfeT18yQoIdOFr4+Jg4nqPh2bJpgkCO
-	Kx4IL6zUniOPKng1gXBXCFmsDLE/G0Es74AMO2UwSFVPSU/od0CCjiemyeQwIqAC35yQBo+JEk8FO
-	Fk0pxreualq6gGgV+N7G5DdsNK+J3FiNml+HxUkOxU3uZ90D7FUFKKPAbHqkvRNEcwJahxJGfI4/D
-	05NA8TIbtRPT7hlkugxIC9zeoDCKQaccJWgTt3qVr/5V594O21bPR9RxkOv9D6GvbggrMrO58Op/F
-	IxvqfRIw==;
-Received: from localhost ([::1]:47562 helo=hr1.samba.org) 
+	bh=G+VK4bx4KvpqV3eujjSkIGSiJvltZ+JhHfN27fV+6tA=; b=QtFERcVdP8SJhdiPva9k/HIaiu
+	V7mbPszVebUzrJbAKPwlr+uwYdHzAmHt5M+AmdtP/6GkRIV1CV2vRvAVTq5/9qLDPYEIwaFYCaRyZ
+	62nlSAYKqDkoH6H5MTzrqZZ1hD1ZgO5LC3yvdMh8fst74Jmok1p7Ed5SXGv7dT5ri0+R1PvcTBoXE
+	haHLKbLqgjRd5HW6AJUZQKlTHXjxQ5OC0nWTXyXfAAFBUoE/9sJdAi1wsPnaNTggEJz7VmvUWH1VP
+	aF6+f7WsqpGhFpRqhrrsPsVfYV0Au1B/s73x/NjETK8y3e26nfvuO6O+cXa811/XSwAjVDkKNKEjS
+	nvuI8C/Q==;
+Received: from localhost ([::1]:47340 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kKjCY-006hHn-GM; Tue, 22 Sep 2020 14:23:26 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55752) 
+	id 1kKwpt-006p6T-00; Wed, 23 Sep 2020 04:56:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38784) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kKjCT-006hHA-CC; Tue, 22 Sep 2020 14:23:23 +0000
+ (Exim) id 1kKwpn-006p6M-Ei
+ for samba-technical@lists.samba.org; Wed, 23 Sep 2020 04:56:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=xvhJ5zzEX/DEDER2TbLuPzbEnGMiA07/JMCDyN6PfHA=; b=PQvh7M+pYdfUfAwMG8dbN03Jw9
- RZ+q2cC3vYdq80GUh59zfaifs6zmB94rEA0fVw49Ob6D5MA95FjK7RrMF4EqBvrUYv2g/XhQVDRAI
- MiVNbDvR7+pUlqMMU1ap0hu0ZQU6qiv1FqZSonP2tE6gPMtyWoqN0ZQzDz9fmB7iCodmp5jFVhSka
- hYykt+focaYKmhMGCikg+II5f6xT8ywzrMqzLa+WFvHjcOCFxHNt8IAJmtfdQxTVwPWVC8xi4CAGO
- Nqbo7KRw7+AIS64zFQuHolHB+BXHaCmh7lhk8GcGevvoVkFVJPEPqDmKBJjtZxsS1lr/DC22KqIFW
- KQxPYEz52QzjzQ2S3M++wLiFIaPupZBRI/sAGjUX4Ygkm6LgKiJuDM63OETxwgX6qLytVIsrKoMlt
- 4n1085xyuRa42kh/0KjH2nieR3BpERBRIcSOQL62DDW1v8cA1x8VRDs52eGhF9imtFxlGp8C5mVm+
- P9WtLDFdeXQo11yhul7YypZ8;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=G+VK4bx4KvpqV3eujjSkIGSiJvltZ+JhHfN27fV+6tA=; b=tAs3mSfY7YQadU3WdvKWQ7oq2A
+ SKqQf+TCGjYWrHv28y9sku/c7UmOon2YM3qREU3ydZaIy4GheMFCWLFrJQWRliOXVag1Hg4t05oZu
+ ZKb9QNP7CZ2LALzIA/C5D1731T16svPx5nIU0NXDahSnuTH4pqn3ErMZcpFXjqIu3hitgsv7YKGiG
+ ZCqep20CagtkjUbXSzVAOIJw4X9kMT4UXj0XOFa6VYDUiYdj++LbylrRSaEHkfj4Wc2HYcrdbSutY
+ cQzbyK6t7wr+hW+v/zcFaKVMuF+tfMPqfU7xc1LMjp4YW4qA+AFBMMwXY+Sa32gH6NZJZxcpartAk
+ QkbWqS7rmZ9rswWjgCZ/h3Sly8YB+aAhK/zgqqHZ6DqNKs/jOoPo/XN/5QkFNOF96g/gVzOrZZ/Kw
+ kH73h2b12JmYj1jseDo9V+mFhVoS22al+FHsvC3T0O3TsyI31ZCj0godLbbj2UN9gE3u5qc6nvhkU
+ YeNB1pTZIfbTAEfPQv57LWGx;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kKjCS-00008F-Hh; Tue, 22 Sep 2020 14:23:20 +0000
-Subject: Re: [Announce] Samba 4.13.0 Available for Download
-To: kseeger@samba.org, samba-announce@lists.samba.org, samba@lists.samba.org, 
- samba-technical@lists.samba.org
-References: <20200922140620.GA16336@carrie2>
-Message-ID: <f1973153-cde8-dfb0-89b8-de189c0cc5e9@samba.org>
-Date: Tue, 22 Sep 2020 15:23:20 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+ (Exim) id 1kKwpm-0005cm-2R
+ for samba-technical@lists.samba.org; Wed, 23 Sep 2020 04:56:50 +0000
+Message-ID: <bdf12b6b4f7f11047fb626930586bd9774dafb0b.camel@samba.org>
+Subject: Samba CI resources
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Wed, 23 Sep 2020 16:56:43 +1200
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
-In-Reply-To: <20200922140620.GA16336@carrie2>
-Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,53 +54,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 22/09/2020 15:06, Karolin Seeger via samba-technical wrote:
-> Release Announcements
-> ---------------------
->
-> This is the first stable release of the Samba 4.13 release series.
-> Please read the release notes carefully before upgrading.
->
->
-> ZeroLogon
-> =========
->
-> Please avoid to set "server schannel = no" and "server schannel= auto" on all
-> Samba domain controllers due to the wellknown ZeroLogon issue.
->
-> For details please see
-> https://www.samba.org/samba/security/CVE-2020-1472.html.
->
->
-> REMOVED FEATURES
-> ================
->
->
-> The deprecated "server schannel" smb.conf option will very likely
-> removed in the final 4.13.0 release.
->
->
-> smb.conf changes
-> ================
->
->    Parameter Name                      Description                Default
->    --------------                      -----------                -------
->
->    server schannel                     To be removed in 4.13.0
->    server require schannel:COMPUTER    Added
+Samba uses a lot of CI, and the number of CPU hours consumed has
+increased drastically over the past few years.
 
-Is it possible to 'fix' the release notes ?
+This has made an awesome positive change to Samba.  While time spent in
+CI has a real cost, so is engineer time wasted looking at patches that
+are not ready yet.
 
-'server schannel' wasn't removed.
+However, every CPU hour spent in CI is a real CPU - the cloud is just
+somebody else's computer after all.
 
-I can see confused users here.
+When we started with GitLab CI, we took about 4-5 CPU hours.  With all
+the parallel builds we get back an answer in 1 hour, but we now take 20
+CPU hours to do it.
 
-Rowland
+I would like the team to think of is ways to reduce our CI.
+
+Towards that I have two MRs pending review:
+ - https://gitlab.com/samba-team/samba/-/merge_requests/1281
+ - https://gitlab.com/samba-team/samba/-/merge_requests/1568
+
+I would also ask that we all think really carefully before adding one
+more build job or supported distribution (as those run a samba-o3
+task).  Each job really costs someone, be it the team, gitlab.com who
+provide much to us without charge, or the planet warmed by the waste
+heat and the energy input.
+
+I would also ask for other ideas to reduce duplicated testing.  I know
+David is trying to do that - removing duplicate smbtorture3 tests - but
+that got a bit stuck (it is really hard work).  I do wonder if we could
+reduce how much of our testsuite needs to be duplicated for the MIT
+build for example.
+
+I also think we should also reduce, or at least not increase, the
+number of supported build combinations.  We try hard to test Samba in
+all the build combinations we support, but each of these has a very
+real cost.  
+
+For example, while we can't unscramble the egg that leads us to having
+to support MIT krb5, lorikeet-Heimdal and system heimdal, but we should
+try hard not to do that again and take my MR 1568 to take out the py2
+builds.
+
+Finally, if you are just doing a 'push to save' on a WIP branch, add '-
+o ci.skip' to save a CI run.
+
+Thanks,
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
 
 
 
