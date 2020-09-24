@@ -2,68 +2,85 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33418276EE8
-	for <lists+samba-technical@lfdr.de>; Thu, 24 Sep 2020 12:40:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F28C277442
+	for <lists+samba-technical@lfdr.de>; Thu, 24 Sep 2020 16:46:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=LwOwxoEBOYJzRooQROQxUK43BDUaeMvR/ic7oTzdW0g=; b=XPrd2BtUVjUcrrPbWaSUxyQkCZ
-	RT4dx8gCPFLoRV/+oLvFJoMygy0+GzefytVzKvdleAnjbtkBMjwP5YTpRp43moJ95iLD+TNx36zH7
-	crt1pRbwm/5zcEZxuetTeuVSdZPcPsiPrPzSFlwNbBGFrvlwYcdcTi1O0sW9hvchk95JWZA8vbkQM
-	5ZM3NuOzmo4iKBPwlSpoOrs+O0OEKBwZ4du4bzinXAelfZmaSXMxfpKKIjRMBP8xpFrWZeiPsMKU8
-	sU2LFy7OfSn5cH/En8LBCXXyhj1PZqRMnHfMD2ZKpg6ITcQ1ljntupHOHOfYBeb6xNx3LmoC6ImAT
-	uq3trGHQ==;
-Received: from ip6-localhost ([::1]:56230 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=CHz/AtsjClWsIqbBKlFxE13Vqorlq8OVg9mmhYPdbEU=; b=DAVx18CwSyq3JHNTLzVG8/841J
+	LCc+BujQtqdSqAw2ubEsTYgOZSZp77jkhRm69LA6iIDxVTdBT+jPeYNtmQ4prV9hASbJ6C1Z4/ZWg
+	JJzVbCFPirS1h5p4mI3FwJAf+jahtprGDLKDC83LMKuFh76kjqZlHMu6LQjRGGLexXHaLUVV6PuGa
+	TmabS9W5PxMdfkH/K35crtDqe7pGX9SJ2PKgVIkONjqBNULkjPa5uHzPD7SLyPZiHrKe8poXaZmfW
+	f/SeP6vbkwT3uRpRbFyb7Z2inPnJw3IxQO2hPqS6pBPayHldfb4wmfBmpzrjDO1Os8pyZBrJId0gz
+	QUi+eQvg==;
+Received: from ip6-localhost ([::1]:45124 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kLOfB-0070iH-0e; Thu, 24 Sep 2020 10:39:45 +0000
-Received: from mail-yb1-xb44.google.com ([2607:f8b0:4864:20::b44]:33289) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kLOf5-0070iA-31
- for samba-technical@lists.samba.org; Thu, 24 Sep 2020 10:39:41 +0000
-Received: by mail-yb1-xb44.google.com with SMTP id c17so1983778ybe.0
- for <samba-technical@lists.samba.org>; Thu, 24 Sep 2020 03:39:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=LwOwxoEBOYJzRooQROQxUK43BDUaeMvR/ic7oTzdW0g=;
- b=khsm8/X35B3U9taPU84Xr34rjIq4/wXDDgyrJYcN8prKr/n/BrQVKkGNSGXvWPpjxy
- Xanx4rYPuPvc+t4oDYW/+NnMnwqrsC6QXW4XM/h/Fdal54IG5EI6rB3UN1aguyRXYsKR
- 8iI78keY1skVt+i7PgRDcrTmfg4BvsLXNq6AvorkwkhMmp/Ha1JTm4hbV/XdvsGnx3k+
- pVN/XwSsFEgi/ygHCbyERdg8pNs1lWtW8OoA2m/IrD9s1tV7DRDtyWtp34c30mRD82up
- NDYXWdR9vMB6V+GB62hG5BwSKc9xTNNCjekDMxAUKWCWXNXGauQ5lIYTBTdY4y1Ov+/s
- SucA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=LwOwxoEBOYJzRooQROQxUK43BDUaeMvR/ic7oTzdW0g=;
- b=d0oQFj/J2TxLDZTaKTWL7ZhGhRLAc34hv5YESSmwiar/HvBPjRdssLvR0s3v3AoZ32
- O0KDli1y2R3HpepJE2GOhwPS0L42Rh15MyUnINTkq8MRrmkl7eDK+PLYYIrZ6B9+aw0v
- R5wHUUuBrwXvczhsyUHt8CQ4sLPk2NBnKJkfLe2j5kVMQXycSYoAiksKOjSVLclVk1jN
- Ah96oS+5/WCIVlJXmb/IKiMoHffBm5iZe2JqLVQsNCNu9WZDqpE+LNl8UUsFxeZboBS/
- MD7DTSZ9s0rtVD8GFoPnBsCqT3VnRXnf3nBvraZr2mYhC0KCkJciK/3qC0zdbhbP7l86
- zsog==
-X-Gm-Message-State: AOAM5313W/InUGz8izKAMizBu6XCc/DoNgwgwWq8z41hVfvAEOsT5g6r
- 4Gfb1P5En7S/top1lnJtSBww7cyw1guWE1Y9WxE=
-X-Google-Smtp-Source: ABdhPJxbatW6D14v9Ip4PfmCNDHL5mswpXPieFlehRq+dFruVnBPKlJfRUQR272cxlZE1eOhCPsg1Z9+qfRSH/K+Zbo=
-X-Received: by 2002:a25:cbd1:: with SMTP id b200mr6484202ybg.293.1600943975713; 
- Thu, 24 Sep 2020 03:39:35 -0700 (PDT)
+	id 1kLSVL-0076JD-Pm; Thu, 24 Sep 2020 14:45:51 +0000
+Received: from mail-dm6nam12on2044.outbound.protection.outlook.com
+ ([40.107.243.44]:61307 helo=NAM12-DM6-obe.outbound.protection.outlook.com) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kLSVD-0076J6-OX
+ for samba-technical@lists.samba.org; Thu, 24 Sep 2020 14:45:48 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=VMhrIuhH9ywOyxdoVDRCJ8cfbp8SAB3sGQB7/0BqiLGtvgdivOqr4+mu5CftWPNMFucfBAMVQLtFQc0pZralpV3T06I8W/M6qXk20ygzFEU5/CCJ0w1a7mhVZMhIqEa59Z1SZEukTfG8qQXCUQMLuko5u7l7bwaKk9NILi7QZbdgGzt5T6UMhC/z4KItblM1b/GLmpRmHCbQ1Y6xG1ifY5Uixq4nQGLjAVizZvjWX/egnfWk7SlaviDq22D8EqvDZZDffRssKxNcsUN0nDyMDGkeo73ykfwrRYxVcuggRfffiNre87Wa+h6LLkpGCvbhtLQtzY6t37/Sq/s1V//zSw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sO5yTvQmb8j1GO+bTNLurfBDbdiIARO1KqBZrtuez3U=;
+ b=hRi46p4TS60Tx9EEH+ss4v4tzJBxy4K+pzO16IDK93t9oJX/mXMImo9nlNVVlsdh7k5Mwulj8o5HZi/IR4rcJZoEY8VBajcjh4Gu8F+snYrk5Db6kstYd/mvqaBW3zIVVvg6TAtisZmkjuRqch7uGJWnm+KSWjXCYpLOR2v90VjyFjHCn5JOuXlwCM8i8LxpvLB3ggK5AmUFo635cWxmdq5+BlW1bB+5shv8jUWNJx8g+dhKMtAdqeBP4jyS9BBYo+5OENJiLHjibL+gVrhyxH9DfUmpGlGrc5Az0w8vMoZIAOj1tDlvT4toJTbLfix/E8nIKcjFKaUOMGK0B33GOQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nasuni.com; dmarc=pass action=none header.from=nasuni.com;
+ dkim=pass header.d=nasuni.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nasuni.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sO5yTvQmb8j1GO+bTNLurfBDbdiIARO1KqBZrtuez3U=;
+ b=ODolV/DdHHjhbRPWvtPJ59xGK1lXhIGU2cOskW0uCt7kVUEivTiZePMuB+pMKh/i50K8TRPuwdL3uXl1SlBSWfDE1JCmL5RN88DawYENJ3WG+d2I0C7UY3OqefbrlTCyPhlPR2VnvCOW1X5WePkLU2syTthH6MDqfweJdoP2tNQLVxwsmMQK6xaIL55SmKQkxxOEnPBQfYhJZdn6OB1eL/lEZWjIPMpKo6WMeCNcq5uiouC0MTvRZ8DW4yvRBncVVbJUsZR+iOTM/ne3mm7S8Lx8kre9vYVNLek5crJAEk/4jlxOlB9vtBz+N/JyOdJVlvzXQrSEfMm/YNOP5DxgIg==
+Received: from BN7PR07MB4402.namprd07.prod.outlook.com (2603:10b6:406:b0::10)
+ by BN8PR07MB5922.namprd07.prod.outlook.com (2603:10b6:408:6d::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.23; Thu, 24 Sep
+ 2020 14:44:53 +0000
+Received: from BN7PR07MB4402.namprd07.prod.outlook.com
+ ([fe80::bdbc:1760:659e:4f1d]) by BN7PR07MB4402.namprd07.prod.outlook.com
+ ([fe80::bdbc:1760:659e:4f1d%6]) with mapi id 15.20.3412.020; Thu, 24 Sep 2020
+ 14:44:53 +0000
+To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Subject: Need tips on debugging assert_no_pending_aio() cores
+Thread-Topic: Need tips on debugging assert_no_pending_aio() cores
+Thread-Index: AdaSaJtzgtwusV9cS9a5sMXEkASw0Q==
+Date: Thu, 24 Sep 2020 14:44:53 +0000
+Message-ID: <BN7PR07MB4402C07BF8C5EB753481AD53CF390@BN7PR07MB4402.namprd07.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: lists.samba.org; dkim=none (message not signed)
+ header.d=none; lists.samba.org; dmarc=none action=none header.from=nasuni.com; 
+x-originating-ip: [2600:1700:723:8640:7542:b96f:1cdd:7a4c]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 52c79d9f-0305-448f-71ae-08d8609865f4
+x-ms-traffictypediagnostic: BN8PR07MB5922:
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: JsgWTJZMy7PKq/KSiUqiM3S0tS+2qq4nbwKCpLxg/CWPch65Tj94DW9BTcREQTyebGScOIb0q4hecRpvuyXhwN3g8iSQ1y5TbuC9z0c15hZfKvHJdMPbltaTWBq9K+KD1wZlZAEmgLGKES2MjdUOhKuICY58lR0xXi7J9hv9P0u0OWJHkp3ZjFCDXLzcdXOxlgYV2bwEZUhiDNsroJNahNQq238o24CJOVqmLaAqY3NL07YZyXDVN4LKiMhhzldtSejAJAsel+89pIcSUW/8eRXO0qBS7oK8lUNx1u3wSbnxqjX5KImu0apeyusjb4uvE4QWPhOaFDxE2q+AKSY/MprlMFa279F4qL68eGqQi4syuljc2Yc8UO/lnsFVUziSMtqcvouH00omxdiNMNrWwskWUmoMYxBdlZFeXYwh6kF+SLJpQsF0DO5fwaZjHHkHr9afNRm3vBlXcgg5vovTXQ==
+x-ms-exchange-antispam-messagedata: 584CJkhRgFIt+rKTnxtHnZUpmxUJuLEGJYVUsZ14TeNE8b4SpXbmGpOa+cLLE8iJXw/kAP3xRlntBTaMEtK+yfkS3CoErVUt4ON05TN/RRTOiGbGmGCIJ82nGHlKeFROAmEh69ertwqiKOAiDH/dkn82tmdRVJ/ONwkUdoFABpBTWUmD0FFNqgpggzoXVhyGJNzkntLxCm/IGyQexnbNvO/lI4jo2F1nFq6gy/eKwgqQAZaRUd6R7YzDPMxImQjEDjyiTAQ1WsQ1vHlzHatxLMMzwlRDf8YBQ4lZHKR0Y1a63H2ZjYkzM99SKMT8ImGaBUxl5U2DYQCCxcovk/j4hCCENaBwIT0IEp61gIJIdyo5bU6HcPqm25/KdBM+XCQMjQlDfZ0Yr2hVs/JaAmTiRjuexYzmBJqTeUmsoW6LVoK+N9bPJzKaRRB1ifjJU7a5ZL8Z9ZanzSQV9qj+bqt4V5pJ4pU5gGCxkrhjdKRdxTFi7SRq8pi2u7TqEfMmmhAZkb9dnk3AEp8mRyGMKF/Vd07IJS+DzYr62m2PgnnmCKYpEDZmMwkzsCufWlCZmw89TmB1U0GFF8rzJYdEsMp8RSETBtJklawvCB6l09zZDBdLuLBhVazan91TE/1DKdVymh8P63PhY1LhLxQfR2A9gWbUgbB/AOt8Zgfnx2RPy4HgMdQEKcdEUMgYkdBptAu9q211TLOf/JV9HwSmNlErSw==
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-References: <CANT5p=pxPsBwAv3oJX6Ae9wjpZoEjLvyfGM1sM9DEhS11RNgog@mail.gmail.com>
- <87pn7t4kr9.fsf@suse.com>
- <CANT5p=oeY91u17DPe6WO75Eq_bjzrVC0kmAErrZ=h3S1qh-Wxw@mail.gmail.com>
- <87eeo54q0i.fsf@suse.com>
- <CANT5p=rxp3iQMgxaM_mn3RE3B+zezWr3o8zpkFyWUR27CpeVCA@mail.gmail.com>
- <CANT5p=qMHxq_L5RpXAixzrQztjMr8-P_aO4aPg5uqfPSLNUiTA@mail.gmail.com>
- <874ko7vy0z.fsf@suse.com>
- <CANT5p=o07RqmMkcFoLeUVTeQHhzh5MmFYpfAdv0755iiGbp1ZA@mail.gmail.com>
- <87mu1yc6gw.fsf@suse.com>
- <CANT5p=r0Jix9EuuF8gJzQBGHLp0Y-Oogxzju7_2cJog_jF2fjg@mail.gmail.com>
- <874knolhpw.fsf@suse.com>
-In-Reply-To: <874knolhpw.fsf@suse.com>
-Date: Thu, 24 Sep 2020 16:09:25 +0530
-Message-ID: <CANT5p=oTTErJk240GKc+k6Cihqks+9Nnurh=MdrvgC7gqKu1ww@mail.gmail.com>
-Subject: Re: [PATCH][SMB3] mount.cifs integration with PAM
-To: =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>
-Content-Type: multipart/mixed; boundary="000000000000fa672805b00cd061"
+X-OriginatorOrg: nasuni.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BN7PR07MB4402.namprd07.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 52c79d9f-0305-448f-71ae-08d8609865f4
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 146173a2-cdda-476f-b6d5-a48c6e6dd0c0
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: LewyTOOp2FqG+NBsRUDG2YnWB1uyPdA5DBNLQ2ryKPNbGJ7z76/VMf3HIpBDjgP66iJp3IbO3y0JxntaxAlu76Um63dpoYrvxYeK68UJJ6g=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR07MB5922
+X-Warn: EHLO/HELO not verified: Remote host 40.107.243.44
+ (mail-dm6nam12on2044.outbound.protection.outlook.com) incorrectly presented
+ itself as NAM12-DM6-obe.outbound.protection.outlook.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,390 +94,221 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, sribhat.msa@outlook.com,
- samba-technical@lists.samba.org, Steve French <smfrench@gmail.com>
+From: Ashok Ramakrishnan via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ashok Ramakrishnan <aramakrishnan@nasuni.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000fa672805b00cd061
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi:
+We use Samba on top of our user space (fuse) file system. We just recently =
+updated to samba 4.12.6 (still in pre-release testing internally) and we ar=
+e running into these smbd cores after very heavy IO load. On looking at the=
+ core, I see that there seems to be a race (or a mismatch) between the num_=
+aio_requests accounting and the actual requests linked to the fsp structure=
+ (fsp->aio_requests)... Since we are on 4.12.6, we already have the fixes f=
+or https://bugzilla.samba.org/show_bug.cgi?id=3D14301. My question is, how =
+do I debug this issue further? Is it just code inspection, adding additiona=
+l debug logging? Or is there a better way?
 
-Hi Aur=C3=A9lien,
+Also, I could use some help understanding this code block in aio_del_req_fr=
+om_fsp()
+        if (i =3D=3D fsp->num_aio_requests) {
+                DEBUG(1, ("req %p not found in fsp %p\n", req, fsp));
+                return 0;
+        }
+Why is it OK to not find an aio request attached to the fsp while destructi=
+ng it? Is there a valid use case where this is expected to happen? I am not=
+ sure we are running into the above code block, plan to set log level 1 to =
+see if that is the case.. Just noticed this during code inspection and tryi=
+ng to understand the logic there.
 
-I've implemented most of your review comments. Also fixed the issue.
+Thanks in advance for any tips/pointers.
 
-On Wed, Sep 23, 2020 at 7:26 PM Aur=C3=A9lien Aptel <aaptel@suse.com> wrote=
-:
->
-> Shyam Prasad N <nspmangalore@gmail.com> writes:
-> > Also, I'll test this out with DFS once I figure out how to set it up. :=
+-Ashok
+
+
+
+(gdb) fr 8
+
+#8  0x00007f295ff32098 in assert_no_pending_aio (close_type=3Dclose_type@en=
+try=3DSHUTDOWN_CLOSE, fsp=3D<optimized out>, fsp=3D<optimized out>) at ../.=
+./source3/smbd/close.c:669
+
+669                             TALLOC_FREE(fsp->aio_requests[0]);
+
+(gdb) p fsp
+
+$1 =3D <optimized out>
+
+(gdb) p num_requests
+
+$2 =3D 1
+
+(gdb) fr 10
+
+#10 close_file (req=3Dreq@entry=3D0x0, fsp=3D0x55ab4c315610, close_type=3Dc=
+lose_type@entry=3DSHUTDOWN_CLOSE) at ../../source3/smbd/close.c:1277
+
+1277                    status =3D close_normal_file(req, fsp, close_type);
+
+(gdb) p fsp
+
+$3 =3D (files_struct *) 0x55ab4c315610
+
+(gdb) p fsp->aio_requests
+
+$4 =3D (struct tevent_req **) 0x0
+
+(gdb)
+
+
+#0  0x00007f295eb17337 in raise () from /lib64/libc.so.6
+#1  0x00007f295eb18a28 in abort () from /lib64/libc.so.6
+#2  0x00007f29602320d9 in dump_core () at ../../source3/lib/dumpcore.c:338
+#3  0x00007f2960241a08 in smb_panic_s3 (why=3D0x7f29602bfc5c "internal erro=
+r")
+    at ../../source3/lib/util.c:853
+#4  0x00007f29602b37bd in smb_panic (
+    why=3Dwhy@entry=3D0x7f29602bfc5c "internal error")
+    at ../../lib/util/fault.c:174
+#5  0x00007f29602b3a1e in fault_report (sig=3D<optimized out>)
+    at ../../lib/util/fault.c:88
+#6  sig_fault (sig=3D11) at ../../lib/util/fault.c:99
+#7  <signal handler called>
+#8  0x00007f295ff32098 in assert_no_pending_aio (
+    close_type=3Dclose_type@entry=3DSHUTDOWN_CLOSE, fsp=3D<optimized out>,
+    fsp=3D<optimized out>) at ../../source3/smbd/close.c:669
+#9  0x00007f295ff32cbf in close_normal_file (close_type=3DSHUTDOWN_CLOSE,
+    fsp=3D0x55ab4c315610, req=3D0x0) at ../../source3/smbd/close.c:695
+#10 close_file (req=3Dreq@entry=3D0x0, fsp=3D0x55ab4c315610,
+    close_type=3Dclose_type@entry=3DSHUTDOWN_CLOSE)
+    at ../../source3/smbd/close.c:1277
+#11 0x00007f295fecb9f5 in file_close_user (sconn=3Dsconn@entry=3D0x55ab4c2d=
+4440,
+    vuid=3D1512462701) at ../../source3/smbd/files.c:257
+#12 0x00007f295ff7eefd in smbXsrv_session_logoff (session=3D0x55ab4c322610)
+---Type <return> to continue, or q <return> to quit---
+    at ../../source3/smbd/smbXsrv_session.c:1671
+#13 0x00007f295ff7f1c6 in smbXsrv_session_clear_and_logoff (
+    session=3D<optimized out>) at ../../source3/smbd/smbXsrv_session.c:1192
+#14 0x00007f295ff7f2a2 in smbXsrv_session_logoff_all_callback (
+    local_rec=3Dlocal_rec@entry=3D0x7fff6a9379b0,
+    private_data=3Dprivate_data@entry=3D0x7fff6a937a90)
+    at ../../source3/smbd/smbXsrv_session.c:1820
+#15 0x00007f295e0ad241 in db_rbt_traverse_internal (
+    db=3Ddb@entry=3D0x55ab4c320550,
+    f=3Df@entry=3D0x7f295ff7f250 <smbXsrv_session_logoff_all_callback>,
+    private_data=3Dprivate_data@entry=3D0x7fff6a937a90,
+    count=3Dcount@entry=3D0x7fff6a937a44, rw=3Drw@entry=3Dtrue)
+    at ../../lib/dbwrap/dbwrap_rbt.c:456
+#16 0x00007f295e0ad3da in db_rbt_traverse (db=3D0x55ab4c320550,
+    f=3D0x7f295ff7f250 <smbXsrv_session_logoff_all_callback>,
+    private_data=3D0x7fff6a937a90) at ../../lib/dbwrap/dbwrap_rbt.c:514
+#17 0x00007f295e0ab8aa in dbwrap_traverse (db=3D<optimized out>,
+    f=3Df@entry=3D0x7f295ff7f250 <smbXsrv_session_logoff_all_callback>,
+    private_data=3Dprivate_data@entry=3D0x7fff6a937a90,
+    count=3Dcount@entry=3D0x7fff6a937a8c) at ../../lib/dbwrap/dbwrap.c:377
+#18 0x00007f295ff7f437 in smbXsrv_session_logoff_all (
+   client=3Dclient@entry=3D0x55ab4c310c30)
+    at ../../source3/smbd/smbXsrv_session.c:1774
+#19 0x00007f295ff84a9a in exit_server_common (
+    how=3Dhow@entry=3DSERVER_EXIT_NORMAL,
+    reason=3D0x7f295fb1b4c9 "NT_STATUS_CONNECTION_RESET")
+    at ../../source3/smbd/server_exit.c:159
+#20 0x00007f295ff84f50 in smbd_exit_server_cleanly (
+    explanation=3D<optimized out>) at ../../source3/smbd/server_exit.c:266
+#21 0x00007f2960121ac4 in exit_server_cleanly (
+    reason=3Dreason@entry=3D0x7f295fb1b4c9 "NT_STATUS_CONNECTION_RESET")
+    at ../../source3/lib/smbd_shim.c:121
+
+#22 0x00007f295ff5c630 in smbd_server_connection_terminate_ex (
+    xconn=3D0x55ab4c2fb3a0, reason=3D0x7f295fb1b4c9 "NT_STATUS_CONNECTION_R=
+ESET",
+    location=3Dlocation@entry=3D0x7f296004f380 "../../source3/smbd/smb2_set=
+info.c:161") at ../../source3/smbd/smb2_server.c:1143
+#23 0x00007f295ff781c0 in smbd_smb2_request_setinfo_done (
+    subreq=3D0x55ab4c3179d0) at ../../source3/smbd/smb2_setinfo.c:160
+#24 0x00007f295ff5d7a7 in smbd_smb2_request_pending_queue (
+    req=3Dreq@entry=3D0x55ab4c316340, subreq=3Dsubreq@entry=3D0x55ab4c3179d=
+0,
+    defer_time=3Ddefer_time@entry=3D500) at ../../source3/smbd/smb2_server.=
+c:1420
+#25 0x00007f295ff78d91 in smbd_smb2_request_process_setinfo (
+    req=3Dreq@entry=3D0x55ab4c316340) at ../../source3/smbd/smb2_setinfo.c:=
+122
+#26 0x00007f295ff5f3aa in smbd_smb2_request_dispatch (
+    req=3Dreq@entry=3D0x55ab4c316340) at ../../source3/smbd/smb2_server.c:2=
+792
+#27 0x00007f295ff60aac in smbd_smb2_request_dispatch_immediate (
+---Type <return> to continue, or q <return> to quit---
+    ctx=3Dctx@entry=3D0x55ab4c2e1e40, im=3Dim@entry=3D0x55ab4c3178f0,
+    private_data=3Dprivate_data@entry=3D0x55ab4c316340)
+    at ../../source3/smbd/smb2_server.c:3137
+#28 0x00007f295f0d3039 in tevent_common_invoke_immediate_handler (
+    im=3D0x55ab4c3178f0, removed=3Dremoved@entry=3D0x0)
+    at ../../tevent_immediate.c:166
+#29 0x00007f295f0d3060 in tevent_common_loop_immediate (
+    ev=3Dev@entry=3D0x55ab4c2e1e40) at ../../tevent_immediate.c:203
+#30 0x00007f295f0d8e9d in epoll_event_loop_once (ev=3D0x55ab4c2e1e40,
+    location=3D<optimized out>) at ../../tevent_epoll.c:918
+#31 0x00007f295f0d70d7 in std_event_loop_once (ev=3D0x55ab4c2e1e40,
+    location=3D0x7f296003d770 "../../source3/smbd/process.c:4170")
+    at ../../tevent_standard.c:110
+#32 0x00007f295f0d231d in _tevent_loop_once (ev=3Dev@entry=3D0x55ab4c2e1e40=
+,
+    location=3Dlocation@entry=3D0x7f296003d770 "../../source3/smbd/process.=
+c:4170")
+    at ../../tevent.c:772
+#33 0x00007f295f0d257b in tevent_common_loop_wait (ev=3D0x55ab4c2e1e40,
+    location=3D0x7f296003d770 "../../source3/smbd/process.c:4170")
+    at ../../tevent.c:895
+
+#34 0x00007f295f0d7077 in std_event_loop_wait (ev=3D0x55ab4c2e1e40,
+    location=3D0x7f296003d770 "../../source3/smbd/process.c:4170")
+    at ../../tevent_standard.c:141
+#35 0x00007f295ff4e844 in smbd_process (ev_ctx=3Dev_ctx@entry=3D0x55ab4c2e1=
+e40,
+---Type <return> to continue, or q <return> to quit---
+    msg_ctx=3Dmsg_ctx@entry=3D0x55ab4c2d45f0, sock_fd=3Dsock_fd@entry=3D38,
+    interactive=3Dinteractive@entry=3Dfalse) at ../../source3/smbd/process.=
+c:4170
+#36 0x000055ab4bb20ce8 in smbd_accept_connection (ev=3D0x55ab4c2e1e40,
+    fde=3D<optimized out>, flags=3D<optimized out>, private_data=3D<optimiz=
+ed out>)
+    at ../../source3/smbd/server.c:1012
+#37 0x00007f295f0d2bd3 in tevent_common_invoke_fd_handler (
+    fde=3Dfde@entry=3D0x55ab4c308090, flags=3D<optimized out>,
+    removed=3Dremoved@entry=3D0x0) at ../../tevent_fd.c:138
+#38 0x00007f295f0d90e7 in epoll_event_loop (tvalp=3D0x7fff6a938260,
+    epoll_ev=3D0x55ab4c2d4440) at ../../tevent_epoll.c:736
+#39 epoll_event_loop_once (ev=3D<optimized out>, location=3D<optimized out>=
 )
-> > Re-attaching the patch with some minor changes with just the
-> > "force_pam" mount option.
->
-> You will need 2 Windows VM. DFS is basically symlinks across
-> servers. The DFS root VM will host the links (standalone namespace) and
-> you have to make them point to shares on the 2nd VM. You don't need to
-> setup replication to test.
->
-> When you mount the root in cifs.ko and access a link, the server will
-> reply that the file is remote. cifs.ko then does an FSCTL on the link to
-> resolve the target it points to and then connects to the target and
-> mounts it under the link seemlessly.
->
->
-> Regarding the patch:
->
-> * need to update the man page with option and explanation
->
-> I have some comments with the style, I know it's annoying.. but it
-> would be best to keep the same across the code.
->
-> * use the existing indent style (tabs) and avoid adding trailing whitespa=
-ces.
-> * no () for return statements
-> * no casting for memory allocation
-> * if (X) free(X)  =3D> free(X)
->
-> Below some comments about pam_auth_krb5_conv():
->
-> > @@ -1809,6 +1824,119 @@ get_password(const char *prompt, char *input, i=
-nt capacity)
-> >       return input;
-> >  }
-> >
-> > +#ifdef HAVE_KRB5PAM
-> > +#define PAM_CIFS_SERVICE "cifs"
-> > +
-> > +static int
-> > +pam_auth_krb5_conv(int n, const struct pam_message **msg,
-> > +    struct pam_response **resp, void *data)
-> > +{
-> > +    struct parsed_mount_info *parsed_info;
-> > +     struct pam_response *reply;
-> > +     int i;
-> > +
-> > +     *resp =3D NULL;
-> > +
-> > +    parsed_info =3D data;
-> > +    if (parsed_info =3D=3D NULL)
-> > +             return (PAM_CONV_ERR);
-> > +     if (n <=3D 0 || n > PAM_MAX_NUM_MSG)
-> > +             return (PAM_CONV_ERR);
-> > +
-> > +     if ((reply =3D calloc(n, sizeof(*reply))) =3D=3D NULL)
-> > +             return (PAM_CONV_ERR);
-> > +
-> > +     for (i =3D 0; i < n; ++i) {
-> > +             switch (msg[i]->msg_style) {
-> > +             case PAM_PROMPT_ECHO_OFF:
-> > +            if ((reply[i].resp =3D (char *) malloc(MOUNT_PASSWD_SIZE +=
- 1)) =3D=3D NULL)
-> > +                goto fail;
-> > +
-> > +            if (parsed_info->got_password && parsed_info->password !=
-=3D NULL) {
-> > +                strncpy(reply[i].resp, parsed_info->password, MOUNT_PA=
-SSWD_SIZE + 1);
-> > +            } else if (get_password(msg[i]->msg, reply[i].resp, MOUNT_=
-PASSWD_SIZE + 1) =3D=3D NULL) {
-> > +                goto fail;
-> > +            }
-> > +            reply[i].resp[MOUNT_PASSWD_SIZE] =3D '\0';
-> > +
-> > +                     reply[i].resp_retcode =3D PAM_SUCCESS;
-> > +                     break;
-> > +             case PAM_PROMPT_ECHO_ON:
-> > +                     fprintf(stderr, "%s: ", msg[i]->msg);
-> > +            if ((reply[i].resp =3D (char *) malloc(MOUNT_PASSWD_SIZE +=
- 1)) =3D=3D NULL)
-> > +                goto fail;
-> > +
-> > +                     if (fgets(reply[i].resp, MOUNT_PASSWD_SIZE + 1, s=
-tdin) =3D=3D NULL)
->
-> Do we need to remove the trailing \n from the buffer?
->
-> > +                goto fail;
-> > +
-> > +            reply[i].resp[MOUNT_PASSWD_SIZE] =3D '\0';
-> > +
-> > +                     reply[i].resp_retcode =3D PAM_SUCCESS;
-> > +                     break;
-> > +             case PAM_ERROR_MSG:
->
-> Shouldn't this PAM_ERROR_MSG case goto fail?
->
-> > +             case PAM_TEXT_INFO:
-> > +                     fprintf(stderr, "%s: ", msg[i]->msg);
-> > +
-> > +                     reply[i].resp_retcode =3D PAM_SUCCESS;
-> > +                     break;
-> > +             default:
-> > +                     goto fail;
-> > +             }
-> > +     }
-> > +     *resp =3D reply;
-> > +     return (PAM_SUCCESS);
-> > +
-> > + fail:
-> > +     for(i =3D 0; i < n; i++) {
-> > +        if (reply[i].resp)
-> > +            free(reply[i].resp);
->
-> free(NULL) is a no-op, remove the checks.
->
-> > +     }
-> > +     free(reply);
-> > +     return (PAM_CONV_ERR);
-> > +}
->
-> I gave this a try with a properly configured system joined to AD from
-> local root account:
->
-> aaptel$ ./configure
-> ...
-> checking krb5.h usability... yes
-> checking krb5.h presence... yes
-> checking for krb5.h... yes
-> checking krb5/krb5.h usability... yes
-> checking krb5/krb5.h presence... yes
-> checking for krb5/krb5.h... yes
-> checking for keyvalue in krb5_keyblock... no
-> ...
-> checking keyutils.h usability... yes
-> checking keyutils.h presence... yes
-> checking for keyutils.h... yes
-> checking for krb5_init_context in -lkrb5... yes
-> ...
-> checking for WBCLIENT... yes
-> checking for wbcSidsToUnixIds in -lwbclient... yes
-> ...
-> checking for keyutils.h... (cached) yes
-> checking security/pam_appl.h usability... yes
-> checking security/pam_appl.h presence... yes
-> checking for security/pam_appl.h... yes
-> checking for pam_start in -lpam... yes
-> checking for security/pam_appl.h... (cached) yes
-> checking for krb5_auth_con_getsendsubkey... yes
-> checking for krb5_principal_get_realm... no
-> checking for krb5_free_unparsed_name... yes
-> checking for krb5_auth_con_setaddrs... yes
-> checking for krb5_auth_con_set_req_cksumtype... yes
-> ...
-> aaptel$ make
-> ....(ok)
->
-> Without force_pam:
->
-> root# ./mount.cifs -v //adnuc.nuc.test/data /x -o sec=3Dkrb5,username=3Da=
-dministrator,domain=3DNUC
-> mount.cifs kernel mount options: ip=3D192.168.2.111,unc=3D\\adnuc.nuc.tes=
-t\data,sec=3Dkrb5,user=3Dadministrator,domain=3DNUC
-> mount error(2): No such file or directory
-> Refer to the mount.cifs(8) manual page (e.g. man mount.cifs) and kernel l=
-og messages (dmesg)
->
-> With force_pam:
->
-> root# ./mount.cifs -v //adnuc.nuc.test/data /x -o sec=3Dkrb5,username=3Da=
-dministrator,domain=3DNUC,force_pam
-> Authenticating as user: administrator
-> Error in authenticating user with PAM: Authentication failure
-> Attempt to authenticate user with PAM unsuccessful. Still, proceeding wit=
-h mount.
->
-> =3D> no further message but mount failed and no msg in dmesg, it didn't
->    reach the mount() call
->
-> Not sure what is going on. Does the domain need to be passed to PAM?
->
-> Cheers,
-> --
-> Aur=C3=A9lien Aptel / SUSE Labs Samba Team
-> GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
-> SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg,=
- DE
-> GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=
-=BCnchen)
+    at ../../tevent_epoll.c:937
+#40 0x00007f295f0d70d7 in std_event_loop_once (ev=3D0x55ab4c2e1e40,
+    location=3D0x55ab4bb255f8 "../../source3/smbd/server.c:1359")
+    at ../../tevent_standard.c:110
+#41 0x00007f295f0d231d in _tevent_loop_once (ev=3Dev@entry=3D0x55ab4c2e1e40=
+,
+    location=3Dlocation@entry=3D0x55ab4bb255f8 "../../source3/smbd/server.c=
+:1359")
+    at ../../tevent.c:772
+#42 0x00007f295f0d257b in tevent_common_loop_wait (ev=3D0x55ab4c2e1e40,
+    location=3D0x55ab4bb255f8 "../../source3/smbd/server.c:1359")
+    at ../../tevent.c:895
+#43 0x00007f295f0d7077 in std_event_loop_wait (ev=3D0x55ab4c2e1e40,
+    location=3D0x55ab4bb255f8 "../../source3/smbd/server.c:1359")
+---Type <return> to continue, or q <return> to quit---
+    at ../../tevent_standard.c:141
+#44 0x000055ab4bb1b4d7 in smbd_parent_loop (parent=3D<optimized out>,
+    ev_ctx=3D0x55ab4c2e1e40) at ../../source3/smbd/server.c:1359
+#45 main (argc=3D<optimized out>, argv=3D<optimized out>)
+    at ../../source3/smbd/server.c:2197
 
-
-
---=20
--Shyam
-
---000000000000fa672805b00cd061
-Content-Type: application/octet-stream; 
-	name="0001-mount.cifs-Have-an-option-to-authenticate-against-PA.patch"
-Content-Disposition: attachment; 
-	filename="0001-mount.cifs-Have-an-option-to-authenticate-against-PA.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_kfgoou7u0>
-X-Attachment-Id: f_kfgoou7u0
-
-RnJvbSA2N2ZhNTkyODAwZDc0YTBkYzg1NzE3YzVlZGViMDZiYzI2YzZmNDc2IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTaHlhbSBQcmFzYWQgTiA8c3ByYXNhZEBtaWNyb3NvZnQuY29t
-PgpEYXRlOiBUaHUsIDEzIEF1ZyAyMDIwIDA4OjUzOjA4IC0wNzAwClN1YmplY3Q6IFtQQVRDSF0g
-bW91bnQuY2lmczogSGF2ZSBhbiBvcHRpb24gdG8gYXV0aGVudGljYXRlIGFnYWluc3QgUEFNLgoK
-QXV0aGVudGljYXRpb24gYWdhaW5zdCBQQU0gaGFzIHR3byBiZW5lZml0czoKLSBUaGUgUEFNIG1v
-ZHVsZSAod2luYmluZCBvciBzc3NkKSB3aWxsIHBlcmZvcm0gdGhlIGhvdXNlLWtlZXBpbmcgb2YK
-dGhlIGtyYjUgdGlja2V0cyBhbmQgbWFrZSBzdXJlIHRoZXkgYXJlbid0IGV4cGlyZWQuCi0gVGhl
-IG1vdW50LmNpZnMgdXRpbGl0eSBuZWVkIG5vdCByZWx5IG9uIHNzaGQgb3Igc3UgdG8gYXV0aGVu
-dGljYXRlCmFnYWluc3QgUEFNIGFuZCBhcnJhbmdlIHRoZSBrcmI1IFRHVC4gSW4gY2FzZSBvZiBz
-c2ggd2l0aCBwcml2YXRlIGtleXMsCnNzaCBkb2Vzbid0IGludm9sdmUgUEFNLiBTbyBrcmI1IFRH
-VCBtYXkgYmUgbWlzc2luZy4KClRoaXMgaW50cm9kdWNlcyBhIG5ldyBQQU0gYXBwbGljYXRpb24g
-bmFtZWQgImNpZnMiLgpUaGUgdXNlciBtYXkgdXNlIHRoaXMgdG8gY3VzdG9taXplIHRoZSBQQU0g
-c3RhY2sgZm9yIGp1c3QgdGhpcyBhcHBsaWNhdGlvbi4KT3RoZXJ3aXNlLCB0aGUgZGVmYXVsdCBQ
-QU0gY29uZmlndXJhdGlvbiBpcyB1c2VkLgpBbHNvLCB0byBkaXNhYmxlIHRoaXMgZmVhdHVyZSBh
-dCB0aGUgdGltZSBvZiBidWlsZCwgb25lIGNhbiBydW4KY29uZmlndXJlIHdpdGggLS1lbmFibGUt
-a3JiNXBhbT1uby4KLS0tCiBNYWtlZmlsZS5hbSAgfCAgIDIgKy0KIGNvbmZpZ3VyZS5hYyB8ICAy
-NyArKysrKysrKysKIG1vdW50LmNpZnMuYyB8IDE1OCArKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKy0KIDMgZmlsZXMgY2hhbmdlZCwgMTgzIGluc2VydGlv
-bnMoKyksIDQgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvTWFrZWZpbGUuYW0gYi9NYWtlZmls
-ZS5hbQppbmRleCBmZTljZDM0Li41MWM1YzQ3IDEwMDY0NAotLS0gYS9NYWtlZmlsZS5hbQorKysg
-Yi9NYWtlZmlsZS5hbQpAQCAtNCw3ICs0LDcgQEAgQUNMT0NBTF9BTUZMQUdTID0gLUkgYWNsb2Nh
-bAogcm9vdF9zYmluZGlyID0gJChST09UU0JJTkRJUikKIHJvb3Rfc2Jpbl9QUk9HUkFNUyA9IG1v
-dW50LmNpZnMKIG1vdW50X2NpZnNfU09VUkNFUyA9IG1vdW50LmNpZnMuYyBtdGFiLmMgcmVzb2x2
-ZV9ob3N0LmMgdXRpbC5jCi1tb3VudF9jaWZzX0xEQUREID0gJChMSUJDQVApICQoQ0FQTkdfTERB
-REQpICQoUlRfTERBREQpCittb3VudF9jaWZzX0xEQUREID0gJChMSUJDQVApICQoTElCUEFNKSAk
-KENBUE5HX0xEQUREKSAkKFJUX0xEQUREKQogaW5jbHVkZV9IRUFERVJTID0gY2lmc2lkbWFwLmgK
-IHJzdF9tYW5fcGFnZXMgPSBtb3VudC5jaWZzLjgKIApkaWZmIC0tZ2l0IGEvY29uZmlndXJlLmFj
-IGIvY29uZmlndXJlLmFjCmluZGV4IDIyZTc4ZWYuLmZhOGFmMGYgMTAwNjQ0Ci0tLSBhL2NvbmZp
-Z3VyZS5hYworKysgYi9jb25maWd1cmUuYWMKQEAgLTU1LDYgKzU1LDExIEBAIEFDX0FSR19FTkFC
-TEUocGFtLAogCWVuYWJsZV9wYW09JGVuYWJsZXZhbCwKIAllbmFibGVfcGFtPSJtYXliZSIpCiAK
-K0FDX0FSR19FTkFCTEUoa3JiNXBhbSwKKyAgICBbQVNfSEVMUF9TVFJJTkcoWy0tZW5hYmxlLWty
-YjVwYW1dLFtBZGQgUEFNIGF1dGhlbnRpY2F0aW9uIHN1cHBvcnQgd2hlbiB1c2luZyBzZWM9a3Ji
-NSBAPDpAZGVmYXVsdD15ZXNAXSldLCwKKyAgICBlbmFibGVfa3JiNXBhbT0kZW5hYmxldmFsCisg
-ICAgZW5hYmxlX2tyYjVwYW09InllcyIpCisKIEFDX0FSR19FTkFCTEUoc3lzdGVtZCwKIAlbQVNf
-SEVMUF9TVFJJTkcoWy0tZW5hYmxlLXN5c3RlbWRdLFtFbmFibGUgc3lzdGVtZCBzcGVjaWZpYyBi
-ZWhhdmlvciBmb3IgbW91bnQuY2lmcyBAPDpAZGVmYXVsdD15ZXNAOj5AXSldLAogCWVuYWJsZV9z
-eXN0ZW1kPSRlbmFibGV2YWwsCkBAIC0yNDEsNiArMjQ2LDI3IEBAIGlmIHRlc3QgJGVuYWJsZV9w
-YW0gIT0gIm5vIjsgdGhlbgogCQkJXSkKIGZpCiAKK2lmIHRlc3QgIngkZW5hYmxlX2tyYjVwYW0i
-ID0gInhubyI7IHRoZW4KKwllbmFibGVfa3JiNXBhbT0ibm8iCitlbHNlCisJQUNfQ0hFQ0tfTElC
-KFtwYW1dLCBbcGFtX3N0YXJ0XSwgZW5hYmxlX2tyYjVwYW09InllcyIsIGVuYWJsZV9rcmI1cGFt
-PSJubyIsICkKKwlBQ19DSEVDS19IRUFERVJTKFtzZWN1cml0eS9wYW1fYXBwbC5oXSwgLAorCQkJ
-IFsKKwkJCQlpZiB0ZXN0ICRlbmFibGVfa3JiNXBhbSA9ICJ5ZXMiOyB0aGVuCisJCQkJCUFDX01T
-R19FUlJPUihbc2VjdXJpdHkvcGFtX2FwcGwuaCBub3QgZm91bmQsIGNvbnNpZGVyIGluc3RhbGxp
-bmcga2V5dXRpbHMtbGlicy1kZXZlbC5dKQorCQkJCWVsc2UKKwkJCQkJQUNfTVNHX1dBUk4oW3Nl
-Y3VyaXR5L3BhbV9hcHBsLmggbm90IGZvdW5kLCBjb25zaWRlciBpbnN0YWxsaW5nIHBhbS1kZXZl
-bC4gRGlzYWJsaW5nIGNpZnNjcmVkcyBQQU0gbW9kdWxlLl0pCisJCQkJCWVuYWJsZV9rcmI1cGFt
-PSJubyIKKwkJCQlmaQorCQkJIF0pCitmaQorCitpZiB0ZXN0ICIkZW5hYmxlX2tyYjVwYW0iID0g
-InllcyI7IHRoZW4KKwlBQ19ERUZJTkUoW0hBVkVfS1JCNVBBTV0sWzFdLCBbRGVmaW5lIGlmIFBB
-TSBhdXRoIGlzIGVuYWJsZWQgZm9yIGtyYjVdKQorCUxJQlBBTT0tbHBhbQorCUFDX1NVQlNUKExJ
-QlBBTSkKK2ZpCisKICMgdWdseSwgYnV0IEknbSBub3Qgc3VyZSBob3cgdG8gY2hlY2sgZm9yIGZ1
-bmN0aW9ucyBpbiBhIGxpYnJhcnkgdGhhdCdzIG5vdCBpbiAkTElCUwogY3Vfc2F2ZWRfbGlicz0k
-TElCUwogTElCUz0iJExJQlMgJEtSQjVfTERBREQiCkBAIC0yODgsNiArMzE0LDcgQEAgQU1fQ09O
-RElUSU9OQUwoQ09ORklHX0NJRlNBQ0wsIFt0ZXN0ICIkZW5hYmxlX2NpZnNhY2wiICE9ICJubyJd
-KQogQU1fQ09ORElUSU9OQUwoQ09ORklHX1NNQklORk8sIFt0ZXN0ICIkZW5hYmxlX3NtYmluZm8i
-ICE9ICJubyJdKQogQU1fQ09ORElUSU9OQUwoQ09ORklHX1BZVEhPTl9UT09MUywgW3Rlc3QgIiRl
-bmFibGVfcHl0aG9udG9vbHMiICE9ICJubyJdKQogQU1fQ09ORElUSU9OQUwoQ09ORklHX1BBTSwg
-W3Rlc3QgIiRlbmFibGVfcGFtIiAhPSAibm8iXSkKK0FNX0NPTkRJVElPTkFMKENPTkZJR19LUkI1
-UEFNLCBbdGVzdCAiJGVuYWJsZV9rcmI1cGFtIiAhPSAibm8iXSkKIEFNX0NPTkRJVElPTkFMKENP
-TkZJR19QTFVHSU4sIFt0ZXN0ICIkZW5hYmxlX2NpZnNpZG1hcCIgIT0gIm5vIiAtbyAiJGVuYWJs
-ZV9jaWZzYWNsIiAhPSAibm8iXSkKIAogTElCQ0FQX05HX1BBVEgKZGlmZiAtLWdpdCBhL21vdW50
-LmNpZnMuYyBiL21vdW50LmNpZnMuYwppbmRleCA0ZmViMzk3Li4yNzE5NjZiIDEwMDY0NAotLS0g
-YS9tb3VudC5jaWZzLmMKKysrIGIvbW91bnQuY2lmcy5jCkBAIC00Niw2ICs0Niw5IEBACiAjaW5j
-bHVkZSA8dGltZS5oPgogI2luY2x1ZGUgPHN5cy9tbWFuLmg+CiAjaW5jbHVkZSA8c3lzL3dhaXQu
-aD4KKyNpZmRlZiBIQVZFX0tSQjVQQU0KKyNpbmNsdWRlIDxzZWN1cml0eS9wYW1fYXBwbC5oPgor
-I2VuZGlmIC8qIEhBVkVfS1JCNVBBTSAqLwogI2lmZGVmIEhBVkVfU1lTX0ZTVUlEX0gKICNpbmNs
-dWRlIDxzeXMvZnN1aWQuaD4KICNlbmRpZiAvKiBIQVZFX1NZU19GU1VJRF9IICovCkBAIC0xNjMs
-NiArMTY2LDcgQEAKICNkZWZpbmUgT1BUX0JLVVBHSUQgICAgMzEKICNkZWZpbmUgT1BUX05PRkFJ
-TCAgICAgMzIKICNkZWZpbmUgT1BUX1NOQVBTSE9UICAgMzMKKyNkZWZpbmUgT1BUX0ZPUkNFX1BB
-TSAgMzQKIAogI2RlZmluZSBNTlRfVE1QX0ZJTEUgIi8ubXRhYi5jaWZzLlhYWFhYWCIKIApAQCAt
-MTg5LDYgKzE5Myw4IEBAIHN0cnVjdCBwYXJzZWRfbW91bnRfaW5mbyB7CiAJdW5zaWduZWQgaW50
-IHZlcmJvc2VmbGFnOjE7CiAJdW5zaWduZWQgaW50IG5vZmFpbDoxOwogCXVuc2lnbmVkIGludCBn
-b3RfZG9tYWluOjE7CisJdW5zaWduZWQgaW50IGlzX2tyYjU6MTsKKwl1bnNpZ25lZCBpbnQgZm9y
-Y2VfcGFtOjE7CiB9OwogCiBzdGF0aWMgY29uc3QgY2hhciAqdGhpc3Byb2dyYW07CkBAIC03MTMs
-NiArNzE5LDggQEAgc3RhdGljIGludCBwYXJzZV9vcHRfdG9rZW4oY29uc3QgY2hhciAqdG9rZW4p
-CiAJCXJldHVybiBPUFRfUEFTUzsKIAlpZiAoc3RyY21wKHRva2VuLCAic2VjIikgPT0gMCkKIAkJ
-cmV0dXJuIE9QVF9TRUM7CisJaWYgKHN0cmNtcCh0b2tlbiwgImZvcmNlX3BhbSIpID09IDApCisJ
-CXJldHVybiBPUFRfRk9SQ0VfUEFNOwogCWlmIChzdHJjbXAodG9rZW4sICJpcCIpID09IDAgfHwK
-IAkJc3RyY21wKHRva2VuLCAiYWRkciIpID09IDApCiAJCXJldHVybiBPUFRfSVA7CkBAIC04OTEs
-MTIgKzg5OSwxOSBAQCBwYXJzZV9vcHRpb25zKGNvbnN0IGNoYXIgKmRhdGEsIHN0cnVjdCBwYXJz
-ZWRfbW91bnRfaW5mbyAqcGFyc2VkX2luZm8pCiAKIAkJY2FzZSBPUFRfU0VDOgogCQkJaWYgKHZh
-bHVlKSB7Ci0JCQkJaWYgKCFzdHJuY21wKHZhbHVlLCAibm9uZSIsIDQpIHx8Ci0JCQkJICAgICFz
-dHJuY21wKHZhbHVlLCAia3JiNSIsIDQpKQorCQkJCWlmICghc3RybmNtcCh2YWx1ZSwgIm5vbmUi
-LCA0KSkKIAkJCQkJcGFyc2VkX2luZm8tPmdvdF9wYXNzd29yZCA9IDE7CisJCQkJaWYgKCFzdHJu
-Y21wKHZhbHVlLCAia3JiNSIsIDQpKQorCQkJCQlwYXJzZWRfaW5mby0+aXNfa3JiNSA9IDE7CiAJ
-CQl9CiAJCQlicmVhazsKIAorI2lmZGVmIEhBVkVfS1JCNVBBTQorCQljYXNlIE9QVF9GT1JDRV9Q
-QU06CisJCQlwYXJzZWRfaW5mby0+Zm9yY2VfcGFtID0gMTsKKwkJCWdvdG8gbm9jb3B5OworI2Vu
-ZGlmIC8qIEhBVkVfS1JCNVBBTSAqLworCQkJCiAJCWNhc2UgT1BUX0lQOgogCQkJaWYgKCF2YWx1
-ZSB8fCAhKnZhbHVlKSB7CiAJCQkJZnByaW50ZihzdGRlcnIsCkBAIC0xODA5LDYgKzE4MjQsMTE5
-IEBAIGdldF9wYXNzd29yZChjb25zdCBjaGFyICpwcm9tcHQsIGNoYXIgKmlucHV0LCBpbnQgY2Fw
-YWNpdHkpCiAJcmV0dXJuIGlucHV0OwogfQogCisjaWZkZWYgSEFWRV9LUkI1UEFNCisjZGVmaW5l
-IFBBTV9DSUZTX1NFUlZJQ0UgImNpZnMiCisKK3N0YXRpYyBpbnQKK3BhbV9hdXRoX2tyYjVfY29u
-dihpbnQgbiwgY29uc3Qgc3RydWN0IHBhbV9tZXNzYWdlICoqbXNnLAorCQlzdHJ1Y3QgcGFtX3Jl
-c3BvbnNlICoqcmVzcCwgdm9pZCAqZGF0YSkKK3sKKwlzdHJ1Y3QgcGFyc2VkX21vdW50X2luZm8g
-KnBhcnNlZF9pbmZvOworCXN0cnVjdCBwYW1fcmVzcG9uc2UgKnJlcGx5OworCWludCBpOworCisJ
-KnJlc3AgPSBOVUxMOworCisJcGFyc2VkX2luZm8gPSBkYXRhOworCWlmIChwYXJzZWRfaW5mbyA9
-PSBOVUxMKQorCQlyZXR1cm4gUEFNX0NPTlZfRVJSOworCisJaWYgKG4gPD0gMCB8fCBuID4gUEFN
-X01BWF9OVU1fTVNHKQorCQlyZXR1cm4gUEFNX0NPTlZfRVJSOworCisJaWYgKChyZXBseSA9IGNh
-bGxvYyhuLCBzaXplb2YoKnJlcGx5KSkpID09IE5VTEwpCisJCXJldHVybiBQQU1fQ09OVl9FUlI7
-CisKKwlmb3IgKGkgPSAwOyBpIDwgbjsgKytpKSB7CisJCXN3aXRjaCAobXNnW2ldLT5tc2dfc3R5
-bGUpIHsKKwkJY2FzZSBQQU1fUFJPTVBUX0VDSE9fT0ZGOgorCQkJaWYgKChyZXBseVtpXS5yZXNw
-ID0gKGNoYXIgKikgbWFsbG9jKE1PVU5UX1BBU1NXRF9TSVpFICsgMSkpID09IE5VTEwpCisJCQkJ
-Z290byBmYWlsOworCisJCQlpZiAocGFyc2VkX2luZm8tPmdvdF9wYXNzd29yZCAmJiBwYXJzZWRf
-aW5mby0+cGFzc3dvcmQgIT0gTlVMTCkgeworCQkJCXN0cm5jcHkocmVwbHlbaV0ucmVzcCwgcGFy
-c2VkX2luZm8tPnBhc3N3b3JkLCBNT1VOVF9QQVNTV0RfU0laRSArIDEpOworCQkJfSBlbHNlIGlm
-IChnZXRfcGFzc3dvcmQobXNnW2ldLT5tc2csIHJlcGx5W2ldLnJlc3AsIE1PVU5UX1BBU1NXRF9T
-SVpFICsgMSkgPT0gTlVMTCkgeworCQkJCWdvdG8gZmFpbDsKKwkJCX0KKwkJCXJlcGx5W2ldLnJl
-c3BbTU9VTlRfUEFTU1dEX1NJWkVdID0gJ1wwJzsKKworCQkJcmVwbHlbaV0ucmVzcF9yZXRjb2Rl
-ID0gUEFNX1NVQ0NFU1M7CisJCQlicmVhazsKKwkJY2FzZSBQQU1fUFJPTVBUX0VDSE9fT046CisJ
-CQlmcHJpbnRmKHN0ZGVyciwgIiVzOiAiLCBtc2dbaV0tPm1zZyk7CisJCQlpZiAoKHJlcGx5W2ld
-LnJlc3AgPSAoY2hhciAqKSBtYWxsb2MoTU9VTlRfUEFTU1dEX1NJWkUgKyAxKSkgPT0gTlVMTCkK
-KwkJCQlnb3RvIGZhaWw7CisKKwkJCWlmIChmZ2V0cyhyZXBseVtpXS5yZXNwLCBNT1VOVF9QQVNT
-V0RfU0laRSArIDEsIHN0ZGluKSA9PSBOVUxMKQorCQkJCWdvdG8gZmFpbDsKKworCQkJcmVwbHlb
-aV0ucmVzcFtNT1VOVF9QQVNTV0RfU0laRV0gPSAnXDAnOworCQkJbnVsbF90ZXJtaW5hdGVfZW5k
-bChyZXBseVtpXS5yZXNwKTsKKworCQkJcmVwbHlbaV0ucmVzcF9yZXRjb2RlID0gUEFNX1NVQ0NF
-U1M7CisJCQlicmVhazsKKwkJY2FzZSBQQU1fRVJST1JfTVNHOgorCQljYXNlIFBBTV9URVhUX0lO
-Rk86CisJCQlmcHJpbnRmKHN0ZGVyciwgIiVzOiAiLCBtc2dbaV0tPm1zZyk7CisKKwkJCXJlcGx5
-W2ldLnJlc3BfcmV0Y29kZSA9IFBBTV9TVUNDRVNTOworCQkJYnJlYWs7CisJCWRlZmF1bHQ6CisJ
-CQlnb3RvIGZhaWw7CisJCX0KKwl9CisJKnJlc3AgPSByZXBseTsKKwlyZXR1cm4gUEFNX1NVQ0NF
-U1M7CisKK2ZhaWw6CisJZm9yKGkgPSAwOyBpIDwgbjsgaSsrKSB7CisJCWZyZWUocmVwbHlbaV0u
-cmVzcCk7CisJfQorCWZyZWUocmVwbHkpOworCXJldHVybiBQQU1fQ09OVl9FUlI7Cit9CisKKwlz
-dGF0aWMgaW50CitwYW1fYXV0aF9rcmI1X3VzZXIoc3RydWN0IHBhcnNlZF9tb3VudF9pbmZvICpw
-YXJzZWRfaW5mbykKK3sKKwlpbnQgcmMgPSAtMTsKKwlwYW1faGFuZGxlX3QgKnBhbWggPSBOVUxM
-OworCXN0cnVjdCBwYW1fY29udiBwYW1fY29udiA9IHsKKwkJLmNvbnYgPSBwYW1fYXV0aF9rcmI1
-X2NvbnYsCisJCS5hcHBkYXRhX3B0ciA9ICh2b2lkICopIHBhcnNlZF9pbmZvCisJfTsKKworCWZw
-cmludGYoc3Rkb3V0LCAiQXV0aGVudGljYXRpbmcgYXMgdXNlcjogJXNcbiIsIHBhcnNlZF9pbmZv
-LT51c2VybmFtZSk7CisJcmMgPSBwYW1fc3RhcnQoUEFNX0NJRlNfU0VSVklDRSwgcGFyc2VkX2lu
-Zm8tPnVzZXJuYW1lLCAmcGFtX2NvbnYsICZwYW1oKTsKKwlpZiAocmMgIT0gUEFNX1NVQ0NFU1Mp
-IHsKKwkJZnByaW50ZihzdGRlcnIsICJFcnJvciBzdGFydGluZyBQQU0gdHJhbnNhY3Rpb246ICVz
-XG4iLCBwYW1fc3RyZXJyb3IocGFtaCwgcmMpKTsKKwkJcmV0dXJuIHJjOworCX0KKworCXJjID0g
-cGFtX2F1dGhlbnRpY2F0ZShwYW1oLCAwKTsKKwlpZiAocmMgIT0gUEFNX1NVQ0NFU1MpIHsKKwkJ
-ZnByaW50ZihzdGRlcnIsICJFcnJvciBpbiBhdXRoZW50aWNhdGluZyB1c2VyIHdpdGggUEFNOiAl
-c1xuIiwgcGFtX3N0cmVycm9yKHBhbWgsIHJjKSk7CisJCWdvdG8gZW5kOworCX0KKworCXJjID0g
-cGFtX2FjY3RfbWdtdChwYW1oLCAwKTsKKwlpZiAocmMgIT0gUEFNX1NVQ0NFU1MpIHsKKwkJZnBy
-aW50ZihzdGRlcnIsICJVc2VyIGFjY291bnQgaW52YWxpZDogJXNcbiIsIHBhbV9zdHJlcnJvcihw
-YW1oLCByYykpOworCQlnb3RvIGVuZDsKKwl9CisKKwlyYyA9IHBhbV9zZXRjcmVkKHBhbWgsIFBB
-TV9FU1RBQkxJU0hfQ1JFRCk7CisJaWYgKHJjICE9IFBBTV9TVUNDRVNTKSB7CisJCWZwcmludGYo
-c3RkZXJyLCAiRXJyb3IgaW4gc2V0dGluZyBQQU0gY3JlZGVudGlhbHM6ICVzXG4iLCBwYW1fc3Ry
-ZXJyb3IocGFtaCwgcmMpKTsKKwkJZ290byBlbmQ7CisJfQorCitlbmQ6CisJcGFtX2VuZChwYW1o
-LCByYyk7CisJcmV0dXJuIHJjOworfQorI2VuZGlmIC8qIEhBVkVfS1JCNVBBTSAqLworCiBzdGF0
-aWMgaW50CiBhc3NlbWJsZV9tb3VudGluZm8oc3RydWN0IHBhcnNlZF9tb3VudF9pbmZvICpwYXJz
-ZWRfaW5mbywKIAkJICAgY29uc3QgY2hhciAqdGhpc3Byb2dyYW0sIGNvbnN0IGNoYXIgKm1vdW50
-cG9pbnQsCkBAIC0xODkxLDcgKzIwMTksMzEgQEAgYXNzZW1ibGVfbW91bnRpbmZvKHN0cnVjdCBw
-YXJzZWRfbW91bnRfaW5mbyAqcGFyc2VkX2luZm8sCiAJCXBhcnNlZF9pbmZvLT5nb3RfdXNlciA9
-IDE7CiAJfQogCi0JaWYgKCFwYXJzZWRfaW5mby0+Z290X3Bhc3N3b3JkKSB7CisjaWZkZWYgSEFW
-RV9LUkI1UEFNCisJaWYgKHBhcnNlZF9pbmZvLT5pc19rcmI1ICYmIHBhcnNlZF9pbmZvLT5mb3Jj
-ZV9wYW0pIHsKKwkJLyoKKwkJICogQXR0ZW1wdCB0byBhdXRoZW50aWNhdGUgd2l0aCBQQU0uCisJ
-CSAqIElmIFBBTSBpcyBjb25maWd1cmVkIHByb3Blcmx5LCBsZXQgaXQgZ2V0IHRoZSBrcmI1IHRp
-Y2tldHMgbmVjZXNzYXJ5IGZvciB0aGUgbW91bnQuCisJCSAqIEV2ZW4gaWYgdGhpcyBmYWlscywg
-aXQgY291bGQgYmUgdGhlIGNhc2Ugb2YgUEFNIG5vdCBjb25maWd1cmVkIHByb3Blcmx5LgorCQkg
-KiBJbiB0aGF0IGNhc2UsIHJldGFpbiB0aGUgY3VycmVudCBiZWhhdmlvci4gU28gdGhpcyBpcyBq
-dXN0IGEgYmVzdC1lZmZvcnQuCisJCSAqLworCQlyYyA9IHBhbV9hdXRoX2tyYjVfdXNlcihwYXJz
-ZWRfaW5mbyk7CisJCWlmIChyYykgeworCQkJZnByaW50ZihzdGRlcnIsICJBdHRlbXB0IHRvIGF1
-dGhlbnRpY2F0ZSB1c2VyIHdpdGggIiBcCisJCQkJCSJQQU0gdW5zdWNjZXNzZnVsLiBTdGlsbCwg
-cHJvY2VlZGluZyB3aXRoIG1vdW50LlxuIik7CisJCQkvKgorCQkJICogRXZlbiBpZiB0aGlzIGlz
-IGEgZmFpbHVyZSwgZmFsbHRocm91Z2ggYW5kIHNlZSBpZiBjaWZzLmtvIGNhbiBzdGlsbAorCQkJ
-ICogYXV0aGVudGljYXRlIHRoZSB1c2VyLgorCQkJICovCisJCQlyYyA9IDA7CisJCX0KKworCQlw
-YXJzZWRfaW5mby0+Z290X3Bhc3N3b3JkID0gMTsKKwl9CisjZW5kaWYgLyogSEFWRV9LUkI1UEFN
-ICovCisKKwkvKiBJZiBzZWM9a3JiNSwgdGhlbiBwYXNzd29yZCBpcyBjb2xsZWN0ZWQgYnkgb3Ro
-ZXIgbWVhbnMgKi8KKwlpZiAoIXBhcnNlZF9pbmZvLT5pc19rcmI1ICYmICFwYXJzZWRfaW5mby0+
-Z290X3Bhc3N3b3JkKSB7CiAJCWNoYXIgdG1wX3Bhc3NbTU9VTlRfUEFTU1dEX1NJWkUgKyAxXTsK
-IAkJY2hhciAqcHJvbXB0ID0gTlVMTDsKIAotLSAKMi4yNS4xCgo=
---000000000000fa672805b00cd061--
-
+This e-mail message and all attachments transmitted with it may contain pri=
+vileged and/or confidential information intended solely for the use of the =
+addressee(s). If the reader of this message is not the intended recipient, =
+you are hereby notified that any reading, dissemination, distribution, copy=
+ing, forwarding or other use of this message or its attachments is strictly=
+ prohibited. If you have received this message in error, please notify the =
+sender immediately and delete this message, all attachments and all copies =
+and backups thereof.
