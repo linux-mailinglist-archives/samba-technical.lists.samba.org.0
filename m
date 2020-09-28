@@ -2,49 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 311C627AA69
-	for <lists+samba-technical@lfdr.de>; Mon, 28 Sep 2020 11:12:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE94F27AA82
+	for <lists+samba-technical@lfdr.de>; Mon, 28 Sep 2020 11:17:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=PSO1xIF8y0bfGBHDADJ+4Nu6YT4ZDZfKOjC9Wca9FF8=; b=u5IXS+3/QGynrHctDy9rvjAC9K
-	GgptoNqy65EUUeVu9mJHlzB2KlOe+7lvI3B+tsu81ylB/YDnkNR3G1moIlG+vMsTTcU4a5fEkySZN
-	bkFn25aEsc9h1m4x3PQ5hPe6XMsUp6D4pcUK4yvcfAO7LW1QfcuWz855mMsYKHsL2O2v2GtBGHdaf
-	1EqXVzLUSRQvCZ6NJkqKYe3LA4J1pY8YrHqaMvxTGI1dwJgLHTpVz/t1j+9sn5kQtto1Hhz91dumm
-	8LmsDojP3PWdVXfUpG03+GxJ1rN7/EQ29diPBS4K9vPTj4DtqgjP0OQeqx+OnvGDmyBrw1PglbYXh
-	3rv4HO2w==;
-Received: from ip6-localhost ([::1]:63798 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=AdB7vVo+Elp+d0o6XZCeW5srPUOaOfUM5v5Ln4Bny4A=; b=04ntNPnrbAI9ZyndGvLNFjpebk
+	YTFaUr+CusLXzJx3eUwIVtIRGPLy4W+JW6pERivQaTdZD/6LWAW7bE9t0zyr0aUfyI/5ixLPpFhke
+	s/l6xgxLDv7bjaAK1lHCWtfQvIec5Bl+kRh0nhTJuax0zH7hBPGyB1Z8I62GvTP2F4G1VbjrPdzJS
+	GAUkZb4wkyKQHkU8DFL0aZYY0w0UfeEvd7hH8Tk/dNUKg/GxwiLnDA+/4Mmwax3ppjTkrLP9Hs9+b
+	1gIcKoWdzqaPUfhTG6bsfR+wbUrdqXvyy4DAe8xRBwmRPBJL4zLwr3WDGVYnWhKCRNi2BhJ3Jer6U
+	XRGeIw8w==;
+Received: from ip6-localhost ([::1]:64506 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kMpCp-007fHq-F3; Mon, 28 Sep 2020 09:12:23 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41734) 
+	id 1kMpHS-007fNu-U3; Mon, 28 Sep 2020 09:17:10 +0000
+Received: from mail-qv1-xf36.google.com ([2607:f8b0:4864:20::f36]:39052) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kMpCk-007fHj-Mx
- for samba-technical@lists.samba.org; Mon, 28 Sep 2020 09:12:20 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=PSO1xIF8y0bfGBHDADJ+4Nu6YT4ZDZfKOjC9Wca9FF8=; b=wgZeBBu2F9q5vv8vRAxPktdX8l
- JcY0xWTDyEao2k7fpfahkS0gbmYqXZ87geA6o3zu5bqPVSFgi2fd/QsGhpmZHlBbpN+Zgohkd4Qgl
- GXD5G4zMa5dgEIj3Q2kfPN7kx9jAvk3B+LWrVWChZj9glXvPAjn+TtIMMM59iWXQLphCXmtWAErFn
- //JmxmVltxoBusZmnw7O8Zmm2WhPsharRbW/HJapYCT+ZZj67zLnor8s/fth5MlH11QHL/D4aTbfk
- TrWPqH/F72FVQiiAcKtHxINqEVKNsLklbcQ6rpiWtJdbgU0UwIGqcSS2D55BBmhTMpWjiGzDTqXIC
- FmWPKECpJ5eH0VY7tqsVdHME6Q0wIabCDWTpPlM5OIOCp67AElwlwnWh+dTGxbEYm4+6fGy16Yo98
- x+i9nfob3ZQwLwyrZVBQmFFwf3U/Jtr6Oh4dZvSN3xPUoGDeqmDyx/1/QLhtohHdnZxL6S7QoH5Rz
- 6hISDxZ9hMJ7yp0Mk38tMBxS;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kMpCk-0004QP-8f
- for samba-technical@lists.samba.org; Mon, 28 Sep 2020 09:12:18 +0000
-Subject: Re: winbindd callbacks not triggered
-To: samba-technical@lists.samba.org
-References: <CAC-fF8S+4hyY+dsWLFPcfxjR0thU64SrCGX8u8n_3YEi-0RwVA@mail.gmail.com>
-Message-ID: <58ea03e2-f2ff-12b3-7369-aaa2288bf415@samba.org>
-Date: Mon, 28 Sep 2020 10:12:17 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ (Exim) id 1kMpHN-007fNn-Jy
+ for samba-technical@lists.samba.org; Mon, 28 Sep 2020 09:17:07 +0000
+Received: by mail-qv1-xf36.google.com with SMTP id z18so87226qvp.6
+ for <samba-technical@lists.samba.org>; Mon, 28 Sep 2020 02:17:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=AdB7vVo+Elp+d0o6XZCeW5srPUOaOfUM5v5Ln4Bny4A=;
+ b=QCqaPuhvdqLVKMregY2fn2IeYSj8Ov4oqeuRLdkfi7d8TQICV2880eUobql0PDfrBH
+ dA0K0I+nuHGm5iRRaJTbVvPgBNSLRyLbblsXYoj9wG6I8hDEUJkMVIy6/3I25JzP74IU
+ 7ggnnzdKdW+7JDRj7xMH+jqpIYYgo/r7xbvyAko0W425jAP3/WeRbEXGmlNb0plX/wWP
+ p6LPx/OIDIya8cy97hEBZyR+81OoFKOBn1l47NvPrD6Wy1Dp3o7rRSX6UxkXgW2YPKfj
+ Yzj6MeUY/PWwpdzxazDV3r08zMkPy1Ixi1A6zcqxQOFhf3LH8JSvPJXKy/zuCrTuTPUj
+ 2tIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=AdB7vVo+Elp+d0o6XZCeW5srPUOaOfUM5v5Ln4Bny4A=;
+ b=AltV+nY2YZkX8HtSseSsuyu0jlIBze/KgkBwdCSKjR8emn4faSYQEsmAlqj3iD168k
+ h8H1+6cmGAxk0c9Nm8U4QIwvfenTNFbVH4S7oOBXT0sFozeoJhQVmjoevB1HzhUfVTHC
+ CwL/Kjhud8X38oYvPzn+7Mpp9j9f2/rVTD0LSxxAtZnQ8wLWRzxFGFbW7ooJ4RDZR/Ls
+ 5ixw1jYO1NEMmf5/JnC6SJwc7UNHgImDQBtqxWohzJ0DwLrV3GXW9x/XG2aX2ZV/v8J6
+ UHzqGFkBmzDJQUbh00GdpZNkHpuEvugMXu4vWuX/ZROwil6PnhdNjTqa78oAd+fMDRND
+ Jrwg==
+X-Gm-Message-State: AOAM530fVJvAywQVjiJAb2rtyYckLhTV0YF3GUD2mf+Jdojlt/QN+yP0
+ bCOVTuQVYXYWjH3e2iZosPNI/6MwdP0PUEUqlUtG8SBy
+X-Google-Smtp-Source: ABdhPJwkJ2C4285SSre8c/YRs3s4G98iZueqRKr/YCbubaqUymBmfDEZzDkQBMnMtuioYhBMNwk/03HC8vT1WZvUe/k=
+X-Received: by 2002:ad4:4f24:: with SMTP id fc4mr10987249qvb.35.1601284623493; 
+ Mon, 28 Sep 2020 02:17:03 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAC-fF8S+4hyY+dsWLFPcfxjR0thU64SrCGX8u8n_3YEi-0RwVA@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
+References: <CAC-fF8S+4hyY+dsWLFPcfxjR0thU64SrCGX8u8n_3YEi-0RwVA@mail.gmail.com>
+ <58ea03e2-f2ff-12b3-7369-aaa2288bf415@samba.org>
+In-Reply-To: <58ea03e2-f2ff-12b3-7369-aaa2288bf415@samba.org>
+Date: Mon, 28 Sep 2020 11:16:52 +0200
+Message-ID: <CAC-fF8TXoZvoEvrEtSNVhZpOF+JBW4tqu8hEm810KrSr1p9FUQ@mail.gmail.com>
+Subject: Re: winbindd callbacks not triggered
+To: Rowland penny <rpenny@samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,109 +68,20 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Isaac Boukris <iboukris@gmail.com>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 28/09/2020 09:51, Isaac Boukris via samba-technical wrote:
-> Hi,
+On Mon, Sep 28, 2020 at 11:12 AM Rowland penny via samba-technical
+<samba-technical@lists.samba.org> wrote:
 >
-> I'm looking into a customer issue which i couldn't reproduce, they are
-> running v4.10.4 (i didn't find any recent related fixes), and report
-> that when winbindd runs for a while it becomes slow to respond and
-> commands like 'id root' may take more than a minute.
->
-> The first thing that caught my eyes is this one time error I see in
-> log.winbindd, of which looks quite strange:
->
-> [2020/09/02 07:04:35.886276,  0, pid=42540, effective(0, 0), real(0,
-> 0), class=winbind]
-> ../../source3/winbindd/wb_lookupsids.c:663(wb_lookupsids_recv)
->    res_names->count = 2, expected 3
-> [2020/09/02 07:04:35.886322,  5, pid=42540, effective(0, 0), real(0,
-> 0), class=winbind]
-> ../../source3/winbindd/wb_sids2xids.c:426(wb_sids2xids_recv)
->    wb_sids_to_xids failed: NT_STATUS_INTERNAL_ERROR
->
-> But the real issue is with requests that seem to get lost and for
-> which the callbacks do not seem to be triggered, for example:
->
-> [2020/09/01 20:12:01.603270,  6, pid=15783, effective(0, 0), real(0,
-> 0), class=winbind]
-> ../../source3/winbindd/winbindd.c:920(new_connection)
->    accepted socket 32
-> [2020/09/01 20:12:01.603329, 10, pid=15783, effective(0, 0), real(0,
-> 0), class=winbind]
-> ../../source3/winbindd/winbindd.c:768(process_request_send)
->    process_request_send: process_request: request fn INTERFACE_VERSION
-> [2020/09/01 20:12:01.603346,  3, pid=15783, effective(0, 0), real(0,
-> 0), class=winbind]
-> ../../source3/winbindd/winbindd_misc.c:432(winbindd_interface_version)
->    winbindd_interface_version: [nss_winbind (19519)]: request interface
-> version (version = 31)
-> [2020/09/01 20:12:01.603376, 10, pid=15783, effective(0, 0), real(0,
-> 0), class=winbind]
-> ../../source3/winbindd/winbindd.c:854(process_request_written)
->    process_request_written: [nss_winbind(19519):unknown request]:
-> delivered response to client
-> [2020/09/01 20:12:01.603441, 10, pid=15783, effective(0, 0), real(0,
-> 0), class=winbind]
-> ../../source3/winbindd/winbindd.c:744(process_request_send)
->    process_request_send: process_request: Handling async request
-> nss_winbind(19519):GETGROUPS
-> [2020/09/01 20:12:01.603460,  3, pid=15783, effective(0, 0), real(0,
-> 0), class=winbind]
-> ../../source3/winbindd/winbindd_getgroups.c:66(winbindd_getgroups_send)
->    winbindd_getgroups_send: [nss_winbind (19519)] getgroups root
-> [2020/09/01 20:12:01.603723, 10, pid=15783, effective(0, 0), real(0,
-> 0), class=winbind]
-> ../../source3/winbindd/wb_sids2xids.c:114(wb_sids2xids_send)
->    SID 0: S-1-22-1-0
-> [2020/09/01 20:12:01.603767, 10, pid=15783, effective(0, 0), real(0,
-> 0), class=winbind]
-> ../../source3/winbindd/winbindd_util.c:1462(find_lookup_domain_from_sid)
->    find_lookup_domain_from_sid: SID [S-1-22-1-0]
->
-> And that's it, after that winbindd goes back to the main loop and
-> handles another request, notice the pid (some times after several
-> seconds like here, which shows that winbind is rather idle, sometimes
-> immediately):
->
-> [2020/09/01 20:12:13.111935,  6, pid=15783, effective(0, 0), real(0,
-> 0), class=winbind]
-> ../../source3/winbindd/winbindd.c:920(new_connection)
->    accepted socket 29
->
-> Reviewing the code flow from wb_sids2xids_send() it is not clear why
-> it doesn't get it from cache, but mostly I could not make sense of
-> these logs (assuming level 10), that is I expect to see more printouts
-> before winbind goes back to the event loop...
->
-> Then after a minute we get this (lp_winbind_request_timeout):
->
-> [2020/09/01 20:13:02.700696,  5, pid=15783, effective(0, 0), real(0,
-> 0), class=winbind]
-> ../../source3/winbindd/winbindd.c:1212(remove_timed_out_clients)
->    Client request timed out, shutting down sock 32, pid 19519
->
-> Or sometimes the client gives up first, and we see some like this:
->
-> [2020/09/01 20:13:05.144441,  6, pid=15783, effective(0, 0), real(0,
-> 0), class=winbind]
-> ../../source3/winbindd/winbindd.c:1019(winbind_client_activity)
->    winbind_client_activity[19583:GETGROUPS]: client has closed
-> connection - removing client
->
-> Thoughts?
->
-> Thanks!
->
-Sounds to me like a misconfiguration in /etc/nsswitch.conf, running 'id 
-root' should check /etc/passwd and /etc/group first. winbind shouldn't 
-even be consulted.
+> > Thoughts?
+> >
+> Sounds to me like a misconfiguration in /etc/nsswitch.conf, running 'id
+> root' should check /etc/passwd and /etc/group first. winbind shouldn't
+> even be consulted.
 
-Rowland
-
-
+Could be, but some of the failed requests are for domain users and groups.
 
