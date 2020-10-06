@@ -2,59 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 668EA27FE81
-	for <lists+samba-technical@lfdr.de>; Thu,  1 Oct 2020 13:35:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9235C284773
+	for <lists+samba-technical@lfdr.de>; Tue,  6 Oct 2020 09:37:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=/FhZCRnorfntLK1kfvWwzZ5IWtH5hTk+2zSmGcGKnwU=; b=ZoTUdB0Joc4+HCoy7rsRuu9U+X
-	gNrvb32/nNTspvHDHyNQ+ngxJ8RvH5Fa+UWNOZlGzICUChMNsfQWE0c+0gPJc7F1AtW4Mk64jW3iK
-	Bd7T8idgcBudbaySCP+KyyxEi64xi3dQxcqxQu1MEHrrU/NFdp2WZIZHRd5ixnQNWtSHy0PBuAca0
-	FLqRm89HTSN+0YCfqS7KCEla1Iddhjg5SLky5Oewae/gcvrQdSS3ZRWEO4jNelPjVskllAp1JvY/l
-	Zn010KW/3xtMd4rxeePpvFdGtbaCzefW3un6qZSlmpzegPaoNExAUV/QkUHiYhD5akHnURmZrIefj
-	dQCMDwjw==;
-Received: from ip6-localhost ([::1]:61788 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=PtZCWWq1BiHoDW6NVtYdWReiAuSgDmQ/rE1HNbD6MnA=; b=JCSouCQuKNV+us7Y79qj7TFLwE
+	2o0U5Q/sE1y0+zm1JCKWVALdSvMqt+QVKgA2Dz+Y75SAiIjqnfrU+GLC5Bzaete1aPCuXNxBB8vSs
+	qnzwh0uefVKktrDiyrm1iJCHLnScxuCdU0Nmlm+Scz6eFizf5I18r4r9Bvs1oXlcUpT3+4hyU0VS/
+	2TGdt5rRJGzfnZfhjcfZ8UqcatkC6mx2La4+YThKjjZQMmfmz10Kw15gkmv6xdKNBkGdR2R5cUf2I
+	qcJhPVBSWsTekMhoHouzGiA8iZkUIKdooofivUaL8zxACRfXcctZctPulUvbIFCqTxCtXaucqLhSE
+	m2TGARTA==;
+Received: from ip6-localhost ([::1]:40022 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kNwrF-009z2F-N4; Thu, 01 Oct 2020 11:34:45 +0000
-Received: from mail-io1-xd41.google.com ([2607:f8b0:4864:20::d41]:44751) 
+	id 1kPhWX-00AvNi-CO; Tue, 06 Oct 2020 07:36:37 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18098) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kNwrA-009z28-TD
- for samba-technical@lists.samba.org; Thu, 01 Oct 2020 11:34:43 +0000
-Received: by mail-io1-xd41.google.com with SMTP id g128so6190034iof.11
- for <samba-technical@lists.samba.org>; Thu, 01 Oct 2020 04:34:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/FhZCRnorfntLK1kfvWwzZ5IWtH5hTk+2zSmGcGKnwU=;
- b=GO2FKvDW9RBo0iO4fSY0zKQIbYCBgTBsvylWVCJefxuPHYWkqHknlWtvCqze7MimET
- gDh7zZcL4t3SglWae8A7G27LKpobRKVRhYK4C+nVBQ979dZ183dFoJ2jtJofTQmHnLmD
- bRHXIab+Yhb9mnmxFKzYjPf9hxCdUQbZSd+NYrfwBc9VCI0BFbbPQyyHzIDzQo2nN7Ef
- BjqrFsBChJoXjpuWnfyuEkDQ/0Xk4SZAQnps6+xam3nooV1NlVHkOv6ERMLZLeBkivqh
- LGaTT2NG5teYhsgYwbScCR0yBKXepyBC2xlfP7EKXQKCqMc9i2smjuVcXcSuywtyIZ8W
- FT8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=/FhZCRnorfntLK1kfvWwzZ5IWtH5hTk+2zSmGcGKnwU=;
- b=S0WYJnu7pQR+CYB4ItK+hKRZFvyKWw0GoWuFu3uhFBb2Jqs5ADYsJvNA+uBhfQcNJu
- RIuMLTA/Ufd8kD5T/TABx6KsNMNsJXVy17Pv58ZvEMme1N+JZp9axHQZE7PrzkAIih7X
- yAFip3gpcc0BAmyhBPZ5MHz7aPKZ0UIrKbh5kezW/OWRixu39MAxgoVdu/cQZ4Qo5qBE
- RYIEEkvETfnKwj1oeHtil/EeQdydDw1Wl0TnpNrnzAIc2RcVpVz8x54Y25ejs8XPvlx/
- SVNDfMhfzmXYFOItyOM3B6fHJNsfyQ4FmFPZDXIrJeElAWp7aPeeZGwMmcPhYhMxQ+E+
- OX2w==
-X-Gm-Message-State: AOAM53232XSltanNbqxTmKOKqye0j9h4LHIfKhLCMc2uOT7PIydgZQeB
- +UEc15fB3voxEs4mL/92FZOnlhZ8VklPnMA0r0E=
-X-Google-Smtp-Source: ABdhPJxvHNbXjho1jt/H6IqPByxkftI1w+csup+4q8Qqi0djV8JXbvqoMAeNpy+RHc6+lRxNoo16WDaTwPoN8b5TCuc=
-X-Received: by 2002:a05:6638:d46:: with SMTP id
- d6mr5832134jak.20.1601552078625; 
- Thu, 01 Oct 2020 04:34:38 -0700 (PDT)
+ (Exim) id 1kPhVv-00AvN2-Aa; Tue, 06 Oct 2020 07:36:02 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=PtZCWWq1BiHoDW6NVtYdWReiAuSgDmQ/rE1HNbD6MnA=; b=tBTqEJ0XirTzPAdnw8XE2satfO
+ teeFmWuETm7aAwpE2M/C4I9bcOqjrSPoLhsrQQck3+gOFWLyEdhFAefgeP+zYgViM+IBEaOi8DLid
+ 69JPx6fyUAyK4XhxqjDJRvodT11JSVAkgoqpLy0YFUXmFvj+EpMU8zRgT8d+TX5jRflYdbA2470j1
+ dET09yZkXmfxBh1hRGaCgcupUWR4O4JA9/S1gOj2ARj+UgMmuKN7iAp76l91PAkEI5wD+br2fEHQq
+ yA4Sl3uN4m8MK3a9it8jMcOK+qsF1RZbpAgHLDJ+JDrwLK337NRpzBUHA886qHbz0t7nF2ZY5at89
+ flj2WV0uWumR0HNS/j7OyXt4nlEVvJB7umE3MzEJSpU6sxNWKFLmxk5IpZoi7V7+iByC53FOLchmi
+ J2Y69+zV6AZD9tkcnsKswXaOZHdr8AYmMWhB9cNgjhyIYbOD+KFVrAgcIIo+1wXdW/CY6q9B9fJyc
+ CAbjzRf+gpati2Evw6daj489;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kPhVu-0004ii-Mm; Tue, 06 Oct 2020 07:35:58 +0000
+Date: Tue, 6 Oct 2020 09:35:56 +0200
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.11.14 Available for Download
+Message-ID: <20201006073554.GA16692@carrie2>
 MIME-Version: 1.0
-References: <CANT5p=pvumVCNCLbSCaxgmfFLR-ifeQJrUETfG4ALxzfTRRxew@mail.gmail.com>
-In-Reply-To: <CANT5p=pvumVCNCLbSCaxgmfFLR-ifeQJrUETfG4ALxzfTRRxew@mail.gmail.com>
-Date: Thu, 1 Oct 2020 21:34:27 +1000
-Message-ID: <CAN05THTANbmogCk6pXx7RtbKfb_OpUzNbvg5JyJdee5osJVDCw@mail.gmail.com>
-Subject: Re: Error codes for VFS calls
-To: Shyam Prasad N <nspmangalore@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="LQksG6bCIzRHxTLp"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,50 +54,103 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>,
- David Howells <dhowells@redhat.com>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>,
- Steve French <smfrench@gmail.com>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Oct 1, 2020 at 8:59 PM Shyam Prasad N <nspmangalore@gmail.com> wrote:
->
-> Hi developers,
->
-> I seek your opinions about the error codes returned by the Linux
-> filesystem for the I/Os triggered by users. In general, each VFS
-> system call (open, read, write, close, stat) man page defines a
-> limited set of error codes returned by the call, and the meaning of
-> the error, in the context of that call.
->
-> But in many cases, especially in network based filesystems, this
-> limited set of error codes may not be sufficient to indicate the exact
-> problem to the user. For example, in case of SMB3, where things like
-> authentication or actual mount of the filesystem may be delayed to the
-> point of first I/O by the specific user on the mount point, having a
-> limited set of error codes could end up confusing the user, and not
-> indicate the actual error to the user.
->
-> So my questions here:
-> 1. Should the error codes be specific to the filesystem in question,
-> and not just specific to the VFS system call?
-> 2. Do we have any other mechanism of returning a custom error message
-> to the user (the one that tells the user about the exact problem in
-> more detail), other than to print this in the logs?
 
-In short.
-We are limited by what the manpage lists as valid errno values in the manpages.
-This is what applications and glibc is coded against.
+--LQksG6bCIzRHxTLp
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Other mechanisms/side-channels may be possible.
-dmesg or /var/log/messages comes to mind.
-But we cant break the userspace api.
+Release Announcements
+---------------------
 
->
-> --
-> -Shyam
+This is the latest stable release of the Samba 4.11 release series.
+Please note that there will be *security releases only* beyond this point.
+
+
+Changes since 4.11.13
+---------------------
+
+o  G=C3=BCnther Deschner <gd@samba.org>
+   * BUG 14166: lib/util: Do not install /usr/bin/test_util.
+
+o  Philipp Gesang <philipp.gesang@intra2net.com>
+   * BUG 14490: smbd: don't log success as error.
+
+o  Volker Lendecke <vl@samba.org>
+   * BUG 14465: idmap_ad does not deal properly with a RFC4511 section 4.4.1
+     response.
+
+o  Laurent Menase <laurent.menase@hpe.com>
+   * BUG 14388: winbind: Fix a memleak.
+
+o  Stefan Metzmacher <metze@samba.org>
+   * BUG 14465: idmap_ad: Pass tldap debug messages on to DEBUG().
+   * BUG 14482: lib/replace: Move lib/replace/closefrom.c from
+     ROKEN_HOSTCC_SOURCE to REPLACE_HOSTCC_SOURCE.
+
+o  Martin Schwenke <martin@meltin.net>
+   * BUG 14466: ctdb disable/enable can fail due to race condition.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+        https://www.samba.org/samba/history/samba-4.11.14.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--LQksG6bCIzRHxTLp
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCX3weWAAKCRAoaL1+KxeT
+UV/qAJ0eILbTipOSZJKgeqPIuBt9bDiScQCgwybowuTEDaeoKb9uxdBC8xB8yRw=
+=+vcl
+-----END PGP SIGNATURE-----
+
+--LQksG6bCIzRHxTLp--
 
