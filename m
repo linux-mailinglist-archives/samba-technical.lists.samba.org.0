@@ -2,45 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9235C284773
-	for <lists+samba-technical@lfdr.de>; Tue,  6 Oct 2020 09:37:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EDD92853B4
+	for <lists+samba-technical@lfdr.de>; Tue,  6 Oct 2020 23:12:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=PtZCWWq1BiHoDW6NVtYdWReiAuSgDmQ/rE1HNbD6MnA=; b=JCSouCQuKNV+us7Y79qj7TFLwE
-	2o0U5Q/sE1y0+zm1JCKWVALdSvMqt+QVKgA2Dz+Y75SAiIjqnfrU+GLC5Bzaete1aPCuXNxBB8vSs
-	qnzwh0uefVKktrDiyrm1iJCHLnScxuCdU0Nmlm+Scz6eFizf5I18r4r9Bvs1oXlcUpT3+4hyU0VS/
-	2TGdt5rRJGzfnZfhjcfZ8UqcatkC6mx2La4+YThKjjZQMmfmz10Kw15gkmv6xdKNBkGdR2R5cUf2I
-	qcJhPVBSWsTekMhoHouzGiA8iZkUIKdooofivUaL8zxACRfXcctZctPulUvbIFCqTxCtXaucqLhSE
-	m2TGARTA==;
-Received: from ip6-localhost ([::1]:40022 helo=hr1.samba.org) 
+	bh=SjETiQZxycjeDGl2j7XUBIO+TxC6akj5NxlT4+jjYHU=; b=U4Wb7JF0Xn1a1eem+UzqrQB4Nk
+	/1SduP5bCzPNwSYK4nZKIOD+bOH+y+ZY5fztZSixZ87YM/SJjD2ug9CfXikI+S5d2+7tddbiHPq6z
+	bDQNbb37+fq1qDyJ5lu8uKnIbONGJEL+R4gpJtB5XADUIvSVfMWkGBE7dHF868kc1Xe9u+jpUxk7n
+	NEFP2mWyhJaE6eBajoYwlEXAN7ok6c96y49x7D+Ngy2wVqJXBgXKvcTa6Hx7/kn+OxCj8sH8Dtq1s
+	gJQqLG/RJ+9dVAP+qSUF3/SZUZWQpXuqcsc7A7dE7PqO5nZYxom33eBmdtrZyWwHa7KPc+RRbf262
+	CTPmXl8w==;
+Received: from ip6-localhost ([::1]:24060 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kPhWX-00AvNi-CO; Tue, 06 Oct 2020 07:36:37 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18098) 
+	id 1kPuFd-00B2Ty-Et; Tue, 06 Oct 2020 21:12:01 +0000
+Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:37741) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kPhVv-00AvN2-Aa; Tue, 06 Oct 2020 07:36:02 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=PtZCWWq1BiHoDW6NVtYdWReiAuSgDmQ/rE1HNbD6MnA=; b=tBTqEJ0XirTzPAdnw8XE2satfO
- teeFmWuETm7aAwpE2M/C4I9bcOqjrSPoLhsrQQck3+gOFWLyEdhFAefgeP+zYgViM+IBEaOi8DLid
- 69JPx6fyUAyK4XhxqjDJRvodT11JSVAkgoqpLy0YFUXmFvj+EpMU8zRgT8d+TX5jRflYdbA2470j1
- dET09yZkXmfxBh1hRGaCgcupUWR4O4JA9/S1gOj2ARj+UgMmuKN7iAp76l91PAkEI5wD+br2fEHQq
- yA4Sl3uN4m8MK3a9it8jMcOK+qsF1RZbpAgHLDJ+JDrwLK337NRpzBUHA886qHbz0t7nF2ZY5at89
- flj2WV0uWumR0HNS/j7OyXt4nlEVvJB7umE3MzEJSpU6sxNWKFLmxk5IpZoi7V7+iByC53FOLchmi
- J2Y69+zV6AZD9tkcnsKswXaOZHdr8AYmMWhB9cNgjhyIYbOD+KFVrAgcIIo+1wXdW/CY6q9B9fJyc
- CAbjzRf+gpati2Evw6daj489;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1kPhVu-0004ii-Mm; Tue, 06 Oct 2020 07:35:58 +0000
-Date: Tue, 6 Oct 2020 09:35:56 +0200
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.11.14 Available for Download
-Message-ID: <20201006073554.GA16692@carrie2>
+ (Exim) id 1kPuFZ-00B2Tr-6t
+ for samba-technical@lists.samba.org; Tue, 06 Oct 2020 21:11:59 +0000
+Received: from intern.sernet.de by mail.sernet.de with esmtps (Exim 4.92 #3)
+ for samba-technical@lists.samba.org
+ id 1kPuFY-0005Ce-7v; Tue, 06 Oct 2020 23:11:56 +0200
+Received: by intern.sernet.de
+ id 1kPuFY-0001DU-2V; Tue, 06 Oct 2020 23:11:56 +0200
+Received: from bjacke by pell.sernet.de with local (Exim 4.93)
+ (envelope-from <bjacke@sernet.de>) id 1kPuFP-002v8G-5Y
+ for samba-technical@lists.samba.org; Tue, 06 Oct 2020 23:11:47 +0200
+Date: Tue, 6 Oct 2020 23:11:47 +0200
+To: samba-technical@lists.samba.org
+Subject: PATCH: fix doc of spoolss:architecture
+Message-ID: <20201006211147.GA696217@sernet.de>
+Mail-Followup-To: samba-technical@lists.samba.org
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="LQksG6bCIzRHxTLp"
+Content-Type: multipart/mixed; boundary="d6Gm4EdcadzBjdND"
 Content-Disposition: inline
-User-Agent: Mutt/1.9.4 (2018-02-28)
+Content-Transfer-Encoding: 8bit
+X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
+ Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,103 +51,63 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: kseeger@samba.org
+From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bj@SerNet.DE>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 
---LQksG6bCIzRHxTLp
-Content-Type: text/plain; charset=utf-8
+--d6Gm4EdcadzBjdND
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+
+Hi,
+
+can someone review and push, please?
+
+Thanks
+Björn
+
+--d6Gm4EdcadzBjdND
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment;
+	filename="0001-docs-fix-default-value-of-spoolss-architecture.patch"
 Content-Transfer-Encoding: quoted-printable
 
-Release Announcements
----------------------
+=46rom ef34f5270260549aeaa039d809fbc5e329faa0db Mon Sep 17 00:00:00 2001
+=46rom: =3D?UTF-8?q?Bj=3DC3=3DB6rn=3D20Jacke?=3D <bjacke@samba.org>
+Date: Tue, 6 Oct 2020 23:05:24 +0200
+Subject: [PATCH] docs: fix default value of spoolss:architecture
 
-This is the latest stable release of the Samba 4.11 release series.
-Please note that there will be *security releases only* beyond this point.
+"Windows x64" is the default here since a couple of years already.
 
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=3D14522
 
-Changes since 4.11.13
----------------------
+Signed-off-by: Bjoern Jacke <bjacke@samba.org>
+---
+ docs-xml/smbdotconf/printing/spoolssarchitecture.xml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-o  G=C3=BCnther Deschner <gd@samba.org>
-   * BUG 14166: lib/util: Do not install /usr/bin/test_util.
-
-o  Philipp Gesang <philipp.gesang@intra2net.com>
-   * BUG 14490: smbd: don't log success as error.
-
-o  Volker Lendecke <vl@samba.org>
-   * BUG 14465: idmap_ad does not deal properly with a RFC4511 section 4.4.1
-     response.
-
-o  Laurent Menase <laurent.menase@hpe.com>
-   * BUG 14388: winbind: Fix a memleak.
-
-o  Stefan Metzmacher <metze@samba.org>
-   * BUG 14465: idmap_ad: Pass tldap debug messages on to DEBUG().
-   * BUG 14482: lib/replace: Move lib/replace/closefrom.c from
-     ROKEN_HOSTCC_SOURCE to REPLACE_HOSTCC_SOURCE.
-
-o  Martin Schwenke <martin@meltin.net>
-   * BUG 14466: ctdb disable/enable can fail due to race condition.
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
+diff --git a/docs-xml/smbdotconf/printing/spoolssarchitecture.xml b/docs-xm=
+l/smbdotconf/printing/spoolssarchitecture.xml
+index 1eccf9f58cfd..dae739056638 100644
+--- a/docs-xml/smbdotconf/printing/spoolssarchitecture.xml
++++ b/docs-xml/smbdotconf/printing/spoolssarchitecture.xml
+@@ -8,6 +8,6 @@
+ 	architecture. Samba's spoolss print server architecture can be changed us=
+ing
+ 	this parameter.</para>
+ </description>
+-<value type=3D"default">Windows NT x86</value>
+-<value type=3D"example">Windows x64</value>
++<value type=3D"default">Windows x64</value>
++<value type=3D"example">Windows NT x86</value>
+ </samba:parameter>
+--=20
+2.25.1
 
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=3D=3D Our Code, Our Bugs, Our Responsibility.
-=3D=3D The Samba Team
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Download Details
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
-=66rom:
-
-        https://download.samba.org/pub/samba/stable/
-
-The release notes are available online at:
-
-        https://www.samba.org/samba/history/samba-4.11.14.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                        --Enjoy
-                        The Samba Team
-
---LQksG6bCIzRHxTLp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCX3weWAAKCRAoaL1+KxeT
-UV/qAJ0eILbTipOSZJKgeqPIuBt9bDiScQCgwybowuTEDaeoKb9uxdBC8xB8yRw=
-=+vcl
------END PGP SIGNATURE-----
-
---LQksG6bCIzRHxTLp--
+--d6Gm4EdcadzBjdND--
 
