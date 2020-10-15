@@ -2,49 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45FAC28F83C
-	for <lists+samba-technical@lfdr.de>; Thu, 15 Oct 2020 20:14:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1143B28F849
+	for <lists+samba-technical@lfdr.de>; Thu, 15 Oct 2020 20:18:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=JNswzbTzx9l/Bf57AbPrOvYHoLr5xmJiihjVThwJJ+Y=; b=P4T4I8KWAZ2Fthv7bzXObVr1f3
-	L3bEUILdMLsTIHofE90qKoB+G6JXj06W9xwEQFaqDZ6d7Gsdc9tPVEXVInAKzteU40oqSpTvDmZ0z
-	9E188A4A70M0l8KfX0dzmRrN5Ubx4tBa5My1CPM5gLPfQd+5W/JJfUIjkA+8o0yKwyNRTZAawJL3v
-	aQ9N6NWCmXrpFOglYlVk1gcdaZOd/lA11cJ5xdG3Kh+AH/wWUFUbJeUdMaBE6hMjQm3Gw9VV7Re2T
-	ZtXcLD9vmmvMKVTmcGxX5obmqkUJnN2lQLKDPuseTRhD1jAxeo/9RT3bW9E2pAg9T9qVW9q3HHMID
-	RDtF/nKw==;
-Received: from ip6-localhost ([::1]:55098 helo=hr1.samba.org) 
+	bh=xhgVD/E3cPtRpj7ZT0YXcSBZWOD5DiEjM0C4lcbUvI8=; b=fcamZf2t4mQOtVJ3tE1WEInmYG
+	0wiRpYqbNyMf/i33kDhjrn0YC5ikzDg+/5o/oGLMd/tC3DiczMNX/XzZ8R8A6IjYeLxu0Urowu5OF
+	mj3gptjYAO0dR6l57MRF75nP0VWvWcOLtECM1wUTOjOE8EpexFd7YTwdoi3QMn2/XvnhHSEj+pb5X
+	IG2tS1yOTzXNYTYNvdglnfZS850D1S90riujHbokeVJNfXCWvYSB0cxjYkpZ6yeLBB2lQbNzGWpGi
+	hfwBl/z3SfD3NSA0fKEjpw+5bz1Ubx4jtZV9OSKwV/UIJjsp89qQF70t0cNUQtuzXFFsLrs6troBm
+	+tfdF1KA==;
+Received: from ip6-localhost ([::1]:55820 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kT7lW-00CITm-Je; Thu, 15 Oct 2020 18:14:14 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:27264) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kT7lR-00CITf-4R
- for samba-technical@lists.samba.org; Thu, 15 Oct 2020 18:14:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=JNswzbTzx9l/Bf57AbPrOvYHoLr5xmJiihjVThwJJ+Y=; b=2ReUziZmsIfehKCPf12FzEg3j2
- 2ORNsNuw2f83g7xaXVez0YqieXZ7js2XxL6o0EKkBVkJp21BnzuIp4D+Z5SHwO+15v1B52rRUF8/z
- aL45H8UGb7hz5nk2ksDYHcNTDy/G9eoc7rOQ2HMaF3onoHg1j4pGfSp63hYml4Mq0XQ6uttoMI1gE
- Ev9kWCoveMIRujJtyqZ17qKjcfuQn0CUTWat7CmUv3BitKuDk4wxzpDNKfF3UJaPkSR5JjkUJYH3V
- Iv78PP9KN2Q+SXQgKso8iXfjHHYxYg6gHz/GeRC1NmnvSvUiL2cWKGcusy2rtPm4Se6QAlrMWITTT
- P2sClsM1RYMqsL/MUCRG1VRwHaw1BCqCLzDAe/dAeZiWUyF+gD0g57VzBEe/EpFQrW20xDLw4TSeB
- UPJ2WaLsHezTSIuDM/FXRrUUX3jCpowphvyGmaGO/PV61b4sgbDz3yAa/Rd26OVQAgGl616XB9R/S
- UlUi7bvGx2OyTqqRFnTCXRiq;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kT7lQ-0002UE-6f; Thu, 15 Oct 2020 18:14:08 +0000
-Subject: Re: [PATCH] Documentation: Rename Samba's DCO to Samba Contributor
- Representation
-To: Jeremy Allison <jra@samba.org>, "Bradley M. Kuhn" <bkuhn@sfconservancy.org>
-References: <87mu0nidll.fsf@ebb.org> <20201015180510.GE3769001@jeremy-acer>
-Message-ID: <2231b5de-fa06-db61-feb0-08ad0374673e@samba.org>
-Date: Thu, 15 Oct 2020 19:14:07 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+	id 1kT7p7-00CIa2-D9; Thu, 15 Oct 2020 18:17:57 +0000
+Received: from p3plsmtpa07-05.prod.phx3.secureserver.net
+ ([173.201.192.234]:52804) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kT7p2-00CIZv-Cc
+ for samba-technical@lists.samba.org; Thu, 15 Oct 2020 18:17:55 +0000
+Received: from [192.168.0.116] ([71.184.94.153]) by :SMTPAUTH: with ESMTPSA
+ id T7mlk50kils90T7mmkWp2O; Thu, 15 Oct 2020 11:15:32 -0700
+X-CMAE-Analysis: v=2.3 cv=QfEYQfTv c=1 sm=1 tr=0
+ a=vbvdVb1zh1xTTaY8rfQfKQ==:117 a=vbvdVb1zh1xTTaY8rfQfKQ==:17
+ a=IkcTkHD0fZMA:10 a=iox4zFpeAAAA:8 a=hGzw-44bAAAA:8 a=yMhMjlubAAAA:8
+ a=hNOTfydlAAAA:8 a=NA896NxhSAy2TpZPZw8A:9 a=QEXdDO2ut3YA:10
+ a=WzC6qhA0u3u7Ye7llzcV:22 a=HvKuF1_PTVFglORKqfwH:22 a=fZunMKNLB757I4m4HZ3M:22
+X-SECURESERVER-ACCT: tom@talpey.com
+Subject: Re: [PATCH][SMB3.1.1] Add defines for new signing context
+To: =?UTF-8?Q?Aur=c3=a9lien_Aptel?= <aaptel@suse.com>,
+ Stefan Metzmacher <metze@samba.org>, Steve French <smfrench@gmail.com>,
+ CIFS <linux-cifs@vger.kernel.org>
+References: <CAH2r5mtwBHTk-Xoeuo+RbgNwiNw-cWTAhdy1YG5y+vXnNDSv4w@mail.gmail.com>
+ <bd8f21ed-5fd4-0974-f15a-16d2f3ee607f@samba.org> <87r1q3hixr.fsf@suse.com>
+Message-ID: <827fd43f-40a9-9480-a6b9-aea1fa69090c@talpey.com>
+Date: Thu, 15 Oct 2020 14:15:32 -0400
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.1
 MIME-Version: 1.0
-In-Reply-To: <20201015180510.GE3769001@jeremy-acer>
+In-Reply-To: <87r1q3hixr.fsf@suse.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+X-CMAE-Envelope: MS4wfLmTpx9naniZReK859+SV7OpWXmKk90o0qW9Iu8lGA2lvvOTOIOQ+XwLwLRalM3IYh9oay3wogCYDv5OOZy7qcJSI7rd0lc//8EQNhRk5/gPvbJt6H7Y
+ iz0P9B3TRA6Yu6gIG/x17OL/9X4WaRVbzV2iOBjOWX3nKu7S9Im0sMEsn07BguCFXjUtwRU/1U03J4aWFxozvYCm9OG7/uyq738uDthRjCXIPrqd8cLCoa8o
+ kkusUjwzblO6ohdqFaOGc7ehIh30uFz/JZIbk0OB3NM+54siHMlRvoW/dbe4BkXn
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,116 +59,59 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Tom Talpey <tom@talpey.com>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 15/10/2020 19:05, Jeremy Allison via samba-technical wrote:
-> On Thu, Oct 15, 2020 at 10:49:26AM -0700, Bradley M. Kuhn via samba-technical wrote:
->> Samba Developers,
+On 10/12/2020 5:50 AM, Aurélien Aptel wrote:
+> Patch LGTM
+> 
+> Reviewed-by: Aurelien Aptel <aaptel@suse.com>
+> 
+> Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+>> This isn't in MS-SMB2 yet.
 >>
->> As you know, it's rare that Conservancy offers specific patches upstream to
->> our projects, but I've submitted a merge request here:
->>          https://gitlab.com/samba-team/samba/-/merge_requests/1609
->> and I've also attached the patch here.
->>
->> As many of you may know, Jeremy Allison originally requested that the
->> Samba's Contributor Representation be named DCO as a tribute to Linux and
->> its DCO.
->>
->> But, for a variety of reasons, I (with this patch) recommend to change the
->> name.  Also included is some cleanup work regarding the copyright and
->> license on the DCO text itself.
-> Sorry Bradley,
->
-> I guess I screwed up in calling our Samba contributor
-> agreement a "DCO" as that's what Linux uses, but ours
-> is different from theirs.
->
-> In my defense I just thought that's what such things
-> were supposed to be called.
->
-> Plus I didn't notice the original text was copyrighted
-> and under a CC-By-SA license, so we should certainly
-> fix that.
->
-> Sorry :-(.
->
-> RB+ from me.
->
-> Jeremy.
->
->>  From 2f011583294626e9919db7d8ddc7961a2f177f4a Mon Sep 17 00:00:00 2001
->> From: "Bradley M. Kuhn" <bkuhn@sfconservancy.org>
->> Date: Thu, 15 Oct 2020 07:52:21 -0700
->> Subject: [PATCH] Rename Samba's DCO to Samba Contributor Representation
->>
->> In an effort to reduce perceived confusion about the quite necessary
->> differences between the Samba DCO and the Linux DCO, and as a favor
->> to the Linux community, rename the Samba DCO to the Samba Contributor
->> Representation.
->>
->> Additionally, note that the text is copyrighted and add notice for
->> compliance with the text's license, CC-By-SA.
->>
->> Signed-off-by: Bradley M. Kuhn <bkuhn@sfconservancy.org>
->> ---
->>   README.contributing | 13 +++++++++++--
->>   1 file changed, 11 insertions(+), 2 deletions(-)
->>
->> diff --git a/README.contributing b/README.contributing
->> index 2a44e37f9e8..c4a0c7f4bc9 100644
->> --- a/README.contributing
->> +++ b/README.contributing
->> @@ -48,7 +48,7 @@ your employer, simply email a copy of the following text
->>   from your corporate email address to contributing@samba.org
->>   
->>   ------------------------------------------------------------
->> -Samba Developer's Certificate of Origin. Version 1.0
->> +Samba Contributor Representation, Version 1.0
->>   
->>   By making a contribution to this project, I certify that:
->>   
->> @@ -95,7 +95,7 @@ above, add a line that states:
->>   Signed-off-by: Random J Developer <random@developer.example.org>
->>   
->>   using your real name and the email address you sent the original email
->> -you used to send the Samba Developer's Certificate of Origin to us
->> +you used to send the Samba Contributor Representation to us
->>   (sorry, no pseudonyms or anonymous contributions.)
->>   
->>   That's it ! Such code can then quite happily contain changes that have
->> @@ -113,3 +113,12 @@ Have fun and happy Samba hacking !
->>   
->>   The Samba Team.
->>   
->> +
->> +The "Samba Contributor Representation, Version 1.0" is:
->> +  (C) 2013 Software Freedom Conservancy, Inc.
->> +  (C) 2005 Open Source Development Labs, Inc.
->> +
->> +licensed under Creative Commons Attribution-ShareAlike 4.0 License as found
->> +at https://creativecommons.org/licenses/by-sa/4.0/legalcode and based on
->> +"Developer's Certificate of Origin 1.1" as found at
->> +http://web.archive.org/web/20070306195036/http://osdlab.org/newsroom/press_releases/2004/2004_05_24_dco.html
->> -- 
->> 2.26.1
->>
->> -- 
->> Bradley M. Kuhn - he/him
->> Policy Fellow & Hacker-in-Residence at Software Freedom Conservancy
->> ========================================================================
->> Become a Conservancy Supporter today: https://sfconservancy.org/supporter
->
-Hang on, what is wrong with calling it a 'DCO' ?
+>> Is this AES_128?
+> 
+> This is returned in latest Windows Server Insider builds but it's not
+> documented yet.
+> 
+> https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewserver
+> 
+> I've asked dochelp about it during the SDC plugfest and they gave me
+> this:
+> 
+>      The new ContextType is:
+>      SMB2_SIGNING_CAPABILITIES 0x0008
+>      The Data field contains a list of signing algorithms.
+>      •    It adds a new negotiate context, which enables SMB to decouple signing algorithms from dialects. E.g. if both client and server supports it, a session may use HMAC-SHA256 with SMB 3.1.1.
+>      •    It adds the AES-GMAC algorithm.
+>       
+>      SigningAlgorithmCount (2 bytes): Count of signing algorithms
+>      SigningAlgorithms (variable): An array of SigningAlgorithmCount 16-bit integer IDs specifying the supported signing algorithms.
+>       
+>      The following IDs are assigned:
+>      0 = HMAC-SHA256
+>      1 = AES-CMAC
+>      2 = AES-GMAC
+> 
+> 
+> I've been CCed in a Microsoft email thread later on and it seems to be
+> unclear why this was missed/wasn't documented. Maybe this is subject to
+> change so take with a grain of salt.
 
-With 'DCO' (Developer's Certificate of Origin), even I (a total thicko) 
-can understand what it means, I have no idea what 'Contributor 
-Representation' means.
+Just curious if you've heard back on this. Insider builds will sometimes
+support things that don't make it to the release. Even Preview docs can
+change. However, AES_GMAC has been on the radar since 2015 (*) so
+perhaps the time has come!
 
-Rowland
+I'd suggest wrapping this context and the integrity algs in some kind of
+conditional, in case this is delayed...
 
+Tom.
 
+(*) slide 29+ 
+https://www.snia.org/sites/default/files/SDC15_presentations/smb/GregKramer_%20SMB_3-1-1_rev.pdf
 
