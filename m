@@ -2,71 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0B7928F675
-	for <lists+samba-technical@lfdr.de>; Thu, 15 Oct 2020 18:11:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BBED28F80B
+	for <lists+samba-technical@lfdr.de>; Thu, 15 Oct 2020 20:00:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=1S5KDbQ1p20CuPkNhd9MKTHki1OPIcARm5C3GR0zXlE=; b=GOd+j90I5tyV2cBVvdnqU3SW3B
-	OmoRqVs+8M0jK7sHhKmtz+BjVZlFu4FxKy3KQOz9jao7l1Fvqb1q5P8U0FJJvb17QPH2egcmANaxk
-	YkV+3xW49IXbkiWTehHFAm+7HymhJGezIfx8dLCMb+clWKGKkpT/sGr9/dMWnwTyIqbBLksZ3NKRM
-	fE3HYb7ROoDVRv8GZTcvX9S2KlDTx1ArTxzf1ipF2qKLpMdady1JEmGebXyPmcscAVU1ewaUWXZYx
-	vX3s18BGXyOVKKN9DgimektiH3WyP4dQ3NSXzlFmXQqEb0O/PaDBQ5XdS3MjC/0gnz5raAjjEcpAc
-	fCjvG5gA==;
-Received: from ip6-localhost ([::1]:47582 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=XVSl4OpxdnOSd2W8Tmno26A6Xuq0wrGoT4D6y0jqGbU=; b=R+Atn84KaWFb/BqdoTzzoVHvYG
+	NhhimXFVi70bkTcJ+a7o60OcSnYg1+Lf/Na1Q7XsYA/XjkIPQzqsGlBbZSKZtfeKz78TnleXvj03u
+	kovihdcaMUrh38JReV4m1AvlJjFncZ6d8P5YV4dyJtf+lZf4aVt0EQ0DcF7xKJFa+qndAed2svyfC
+	qgvfj8pQ7x4/VLya1nG5EO65R55VvyeRe3r8JFBm9frodlaiVA8vdwFvD/dhkfaQYVnrKK17EVvOg
+	txqpTjlnVI7ZtmKOxbowpxboJxemgVE4vaXtctKI+LmIuTmvimcIPoOUcdpesmzLg0l5KeoZTCGzR
+	woDpQOCw==;
+Received: from ip6-localhost ([::1]:52912 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kT5qV-00CHJg-4E; Thu, 15 Oct 2020 16:11:15 +0000
-Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:42526) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kT5qN-00CHJY-ES
- for samba-technical@lists.samba.org; Thu, 15 Oct 2020 16:11:11 +0000
-Received: by mail-il1-x136.google.com with SMTP id l16so4807193ilj.9
- for <samba-technical@lists.samba.org>; Thu, 15 Oct 2020 09:11:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel-dk.20150623.gappssmtp.com; s=20150623;
- h=subject:to:references:from:message-id:date:user-agent:mime-version
- :in-reply-to:content-language:content-transfer-encoding;
- bh=1S5KDbQ1p20CuPkNhd9MKTHki1OPIcARm5C3GR0zXlE=;
- b=Zq8zrijKaBjlJIqXOZzNPwiOQ9G/7La1BsbjF7IqpZPkWKIe97wo9qAFp03jKt1P28
- sqwc04YE5+eoJuV5xmUpB/yPvXd1kSg5kDcSELxUO7ilZEUxdUqTeCYER3QHOZwiLLGh
- 0WmxMcpxX3li3eg/SqayPvfCkMYRaiKFEOX7/ru/28Lg5ChVQoTZ8UXPz/KCUZ4xutzu
- +AQ04Xl9llpQeLxOP6ewOBAjyQDt8FnAsMXCKLs/wNwETneWCwYzHAmXFRBWXG6YCNQJ
- D/8eXoAd5OwNXTE4FFqPLAA0g6hzJs2cOgDgvRql2b9HL4d/VvMmBxiRVuRHgak8OlSW
- d68g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=1S5KDbQ1p20CuPkNhd9MKTHki1OPIcARm5C3GR0zXlE=;
- b=Sulv0Jhq6P44SUoIEHeTecq4SEkkSFHltsbFRZ8pmrmwIU3iL4AC6SVXg5y+EvyyCg
- yezcg/Bdnz5zchCJm0qwVnvUdVUUeewZqF1Yhl2u3sgWHNgK5TmOknpaKrlrLCjBb78K
- FvZ7Mau2c5Cdx9lRxFH+GBkqddmNAooFsQLjlWMmRSeVhAeLV0IjJPYtEGRBZgjUiuJa
- x1ACIsQ0FKf+fMypkycsPGN9MLwIlO+UqKR5hXhfpV7Dt+NT/QxYrJ15wgFce3VSS0a7
- 9Mxk2RDVlNi40cjv67Mvv39cAZdWk7CUxZwf3Lta0KTDBIwZQwNBc/3rzKHruyiuxe1n
- 7fMQ==
-X-Gm-Message-State: AOAM533XHR+DfTRMXqS/J5XXfVftl89WrSm/02ofNiAHAeYCaaFC1TJI
- wIHWpI5fdxg+S/huwUV7q0uydg==
-X-Google-Smtp-Source: ABdhPJywT1dPbYXSPNPCysISCZWsIoG0QWgcMNxp4OrxB4SlOsRK3TVM3NJj4VFya2zY21eKYe6CgA==
-X-Received: by 2002:a92:ca92:: with SMTP id t18mr3771565ilo.287.1602778264469; 
- Thu, 15 Oct 2020 09:11:04 -0700 (PDT)
-Received: from [192.168.1.30] ([65.144.74.34])
- by smtp.gmail.com with ESMTPSA id d6sm2880757iln.26.2020.10.15.09.11.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Oct 2020 09:11:03 -0700 (PDT)
-Subject: Re: Samba with multichannel and io_uring
-To: Stefan Metzmacher <metze@samba.org>,
- Samba Technical <samba-technical@lists.samba.org>,
- io-uring <io-uring@vger.kernel.org>
-References: <53d63041-5931-c5f2-2f31-50b5cbe09ec8@samba.org>
-Message-ID: <efb8b619-ca06-5c6b-e052-0c40b64b9904@kernel.dk>
-Date: Thu, 15 Oct 2020 10:11:02 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+	id 1kT7Y8-00CIAa-NG; Thu, 15 Oct 2020 18:00:24 +0000
+Received: from pine.sfconservancy.org
+ ([2001:4801:7822:103:be76:4eff:fe10:7c55]:50730) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kT7Xv-00CIAT-AP
+ for samba-technical@lists.samba.org; Thu, 15 Oct 2020 18:00:15 +0000
+Received: from localhost (unknown [216.161.86.19])
+ (Authenticated sender: bkuhn)
+ by pine.sfconservancy.org (Postfix) with ESMTPSA id EAC3FE9BE;
+ Thu, 15 Oct 2020 17:49:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=sfconservancy.org;
+ s=pine; t=1602784197;
+ bh=8AOoYYdNvlHxKddmf4Vcp7YfoJQPy14L3gySPsB7Pls=;
+ h=From:To:Subject:Date:From;
+ b=ogZGLwzUkGL0NWsRUWY5xGQdYyPZzPGc8ltq3MmkJyZAh6ez5DEqef3s5L9exvWc0
+ +5Gb5EIGlqrpSE3Ld8xjyp3h+GanEtV8As6h1OP2DOACe58CW251W3/y7oOOhhr75s
+ v7lynhQ8+j9Qz9U4urnbdV+auKJaebRl1W6ngGYTKY9Ej0LCEnHI8yc4zr9ejwSpC1
+ fviOQAh/uEbLN4kfwbEMlBk7kWshWe5ZJvN8pPm4iysdt2nUZ2PKHw3Cvp6SHG4ZY7
+ JScLl4yO66trIxcQ+xLmD3WJ1X30a95rcYk3Lx0RtkGXFh1WvqAJwF4M0Ts+Hrxn+o
+ YBlELBJyfgEQg==
+To: samba-technical@lists.samba.org
+Subject: [PATCH] Documentation: Rename Samba's DCO to Samba Contributor
+ Representation
+Organization: Software Freedom Conservancy
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
+Face: iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAABGdBTUEAALGPC/xhBQAAABVQ
+ TFRFAAAAWjotvpiH/PHt27Sj7sq8lXFeBchlBgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxMAAAsT
+ AQCanBgAAAAHdElNRQfiCx4VFw6omMmeAAACAklEQVQ4y43UPZPbIBAGYGdu0puzQ51bI+qMdXId
+ r0F1RoLrwfb+/5+QF307VVR4PDxiF14h7Xa7t3q8LJGjavj7a1euCYiZnaPnv9DF4FyMLKdXOPs4
+ XM7KKzzKaF83gem+hUuF8QYUg7Fb4LEQAK1OG3hu4bbC3LpUC87+B9AMfQOg0yv0owEOK4x1+gnu
+ M3yaV3jOMGxvKoXEKC9gAoabJtZYlXO8wJcb1hMHQClZgSj7cbzsY4a2vSqltIlz8nMpZnMkEmVw
+ N4DtcYJo3AMPXFIMRMax/BjhOxZi2CpKKpWSZCd4C8aZ4CpzjR+Cint9WEp5H12IbbySEpHdaYVh
+ OY9onf0Qq9//zDCFEW0MbFjUz7mHD1UdO4B3iErk9whdKdWVRuW5YLl5KnU2rjTBDyPmQImm5mec
+ WQx7X3fBNwAzQ9kvBTKR0BwR3Bewhisn2mpkhea3BZwBcdorRlQk9QKecyZukRPeHTmuEL1FdjlJ
+ tmTlvoAJPnRaMnKinNICn4QthNaKlNAlLae9sc5UODaelVh+l345u7ZMIY89GNdmWV8cIaTFlLGm
+ QKLrzQykh/Aw02WsdoE2l1g7JIPdyWGFL6Hy1uJZsEjavLUXkVyeIdrbpPoXQHxDG0l68wEoW8vG
+ BLI6qc2XoUEWCUI26aQfK1wypuwV7v6mtMhtgL8avOP/pBCiigAAAABJRU5ErkJggg==
+Date: Thu, 15 Oct 2020 10:49:26 -0700
+Message-ID: <87mu0nidll.fsf@ebb.org>
 MIME-Version: 1.0
-In-Reply-To: <53d63041-5931-c5f2-2f31-50b5cbe09ec8@samba.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="=-=-="
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,159 +68,101 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jens Axboe via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jens Axboe <axboe@kernel.dk>
+From: "Bradley M. Kuhn via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: "Bradley M. Kuhn" <bkuhn@sfconservancy.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 10/15/20 3:58 AM, Stefan Metzmacher wrote:
-> Hi,
-> 
-> related to my talk at the virtual storage developer conference
-> "multichannel / iouring Status Update within Samba"
-> (https://www.samba.org/~metze/presentations/2020/SDC/),
-> I have some additional updates.
-> 
-> DDN was so kind to sponsor about a week of research on real world
-> hardware with 100GBit/s interfaces and two NUMA nodes per server.
-> 
-> I was able to improve the performance drastically.
-> 
-> I concentrated on SMB2 read performance, but similar improvements would be expected for write too.
-> 
-> We used "server multi channel support = yes" and the network interface is RSS capable,
-> it means that a Windows client uses 4 connections by default.
-> 
-> I first tested a share using /dev/shm and the results where really slow,
-> it was not possible to reach more than ~30 GBits/s on the net and ~ 3.8 GBytes/s
-> from fio.exe.
-> 
-> smbd uses pread() from within a pthread based threadpool for file io
-> and sendmsg() to deliver the response to the socket. All multichannel
-> connections are served by the same smbd process (based on the client guid).
-> 
-> The main smbd is cpu bound and the helper threads also use quite some cpu
-> about ~ 600% in total!
-> 
-> https://www.samba.org/~metze/presentations/2020/SDC/future/read-32GBit-4M-2T-shm-sendmsg-top-02.png
-> 
-> It turns out that NUMA access caused a lot of slow down.
-> The network adapter was connected to numa node 1, so we pinned
-> the ramdisk and smbd to that node.
-> 
->   mount -t tmpfs -o size=60g,mpol=bind:1 tmpfs /dev/shm-numanode1
->   numactl --cpunodebind=netdev:ens3f0 --membind=netdev:ens3f0 smbd
-> 
-> With that it was possible to reach ~ 5 GBytes/s from fio.exe
-> 
-> But the main problem remains the kernel is busy copying data
-> and sendmsg() takes up to 0.5 msecs, which means that we don't process new requests
-> during these 0.5 msecs.
-> 
-> I created a prototype that uses IORING_OP_SENDMSG with IOSQE_ASYNC (I used a 5.8.12 kernel)
-> instead of the sync sendmsg() calls, which means that one kernel thread
-> (io_wqe_work ~50% cpu) per connection is doing the memory copy to the socket
-> and the main smbd only uses ~11% cpu, but we still use > 400% cpu in total.
-> 
-> https://www.samba.org/~metze/presentations/2020/SDC/future/read-57GBit-4M-2T-shm-io-uring-sendmsg-async-top-02.png
-> 
-> But it seems the numa binding for the io_wqe_work thread doesn't seem to work as expected,
-> so the results vary between 5.0 GBytes/s and 7.6 GBytes/s, depending on which numa node
-> io_wqe_work kernel threads are running. Also note that the threadpool with pread was
-> still faster than using IORING_OP_READV towards the filesystem, the reason might also
-> be numa dependent.
-> 
-> https://www.samba.org/~metze/presentations/2020/SDC/future/read-57GBit-4M-2T-shm-io-uring-sendmsg-async-numatop-02.png
-> https://www.samba.org/~metze/presentations/2020/SDC/future/read-57GBit-4M-2T-shm-io-uring-sendmsg-async-perf-top-02.png
-> 
-> The main problem is still copy_user_enhanced_fast_string, so I tried to use
-> IORING_IO_SPLICE (from the filesystem via a pipe to the socket) in order to avoid
-> copying memory around.
-> 
-> With that I was able to reduce the cpu usage of the main smbd to ~6% cpu with
-> io_wqe_work threads using between ~3-6% cpu (filesystem to pipe) and
-> 6-30% cpu (pipe to socket).
-> 
-> But the Windows client wasn't able to reach better numbers than 7.6 GBytes/s (65 GBits/s).
-> Only using "Set-SmbClientConfiguration -ConnectionCountPerRssNetworkInterface 16" helped to
-> get up to 8.9 GBytes/s (76 GBits/s).
-> 
-> With 8 MByte IOs smbd is quite idle at ~ 5% cpu with the io_wqe_work threads ~100% cpu in total.
-> https://www.samba.org/~metze/presentations/2020/SDC/future/read-75GBit-8M-20T-RSS16-shm-io-uring-splice-top-02.png
-> 
-> With 512 KByte IOs smbd uses ~56% cpu with the io_wqe_work threads ~130% cpu in total.
-> https://www.samba.org/~metze/presentations/2020/SDC/future/read-76GBit-512k-10T-RSS16-shm-io-uring-splice-02.png
-> 
-> With 256 KByte IOS smbd uses ~87% cpu with the io_wqe_work threads ~180% cpu in total.
-> https://www.samba.org/~metze/presentations/2020/SDC/future/read-76GBit-256k-10T-RSS16-shm-io-uring-splice-02.png
-> 
-> In order to get higher numbers I also tested with smbclient.
-> 
-> - With the default configuration (sendmsg and threadpool pread) I was able to get
->   4.2 GBytes/s over a single connection, while smbd with all threads uses ~150% cpu.
->   https://www.samba.org/~metze/presentations/2020/SDC/future/read-4.2G-smbclient-shm-sendmsg-pthread.png
-> 
-> - With IORING_IO_SPLICE I was able to get 5 GBytes/s over a single connection,
->   while smbd uses ~ 6% cpu, with 2 io_wqe_work threads (filesystem to pipe) at 5.3% cpu each +
->   1 io_wqe_work thread (pipe to socket) at ~29% cpu. This is only ~55% cpu in total on the server
->   and the client is the bottleneck here.
->   https://www.samba.org/~metze/presentations/2020/SDC/future/read-5G-smbclient-shm-io-uring-sendmsg-splice-async.png
-> 
-> - With a modified smbclient using a forced client guid I used 4 connections into
->   a single smbd on the server. With that I was able to reach ~ 11 GBytes/s (92 GBits/s)
->   (This is similar to what 4 iperf instances are able to reach).
->   The main smbd uses 8.6 % cpu with 4 io_wqe_work threads (pipe to socket) at ~20% cpu each.
->   https://www.samba.org/~metze/presentations/2020/SDC/future/read-11G-smbclient-same-client-guid-shm-io-uring-splice-async.png
-> 
-> - With 8 smbclient instances over loopback we are able to reach ~ 22 GBytes/s (180 GBits/s)
->   and smbd uses 22 % cpu.
->   https://www.samba.org/~metze/presentations/2020/SDC/future/read-22G-smbclient-8-same-client-guid-localhost-shm-io-uring-splice.png
-> 
-> So IORING_IO_SPLICE will bring us into a very good shape for streaming reads.
-> Also note that numa pinning is not really needed here as the memory is not really touched at all.
-> 
-> It's very likely that IORING_IO_RECVMSG in combination with IORING_IO_SPLICE would also improve the write path.
-> 
-> Using AF_KCM socket (Kernel Connection Multiplexor) as wrapper to the
-> (TCP) stream socket might be able to avoid wakeups for incoming packets and
-> should allow better buffer management for incoming packets within smbd.
-> 
-> The prototype/work in process patches are available here:
-> https://git.samba.org/?p=metze/samba/wip.git;a=shortlog;h=refs/heads/v4-13-multichannel
-> and
-> https://git.samba.org/?p=metze/samba/wip.git;a=shortlog;h=refs/heads/master-multichannel
-> 
-> Also notice the missing generic multichannel things via this meta bug:
-> https://bugzilla.samba.org/show_bug.cgi?id=14534
-> 
-> I'm not sure when all this will be production ready, but it's great to know
-> the potential we have on a modern Linux kernel!
-> 
-> Later SMB-Direct should be able to reduce the cpu load of the io_wqe_work threads (pipe to socket)...
+--=-=-=
+Content-Type: text/plain
 
-Thanks for sending this, very interesting! As per this email, I took a
-look at the NUMA bindings. If you can, please try this one-liner below.
-I'd be interested to know if that removes the fluctuations you're seeing
-due to bad locality.
+Samba Developers,
 
-Looks like kthread_create_on_node() doesn't actually do anything (at
-least in terms of binding).
+As you know, it's rare that Conservancy offers specific patches upstream to
+our projects, but I've submitted a merge request here:
+        https://gitlab.com/samba-team/samba/-/merge_requests/1609
+and I've also attached the patch here.
+
+As many of you may know, Jeremy Allison originally requested that the
+Samba's Contributor Representation be named DCO as a tribute to Linux and
+its DCO.
+
+But, for a variety of reasons, I (with this patch) recommend to change the
+name.  Also included is some cleanup work regarding the copyright and
+license on the DCO text itself.
 
 
-diff --git a/fs/io-wq.c b/fs/io-wq.c
-index 74b84e8562fb..7bebb198b3df 100644
---- a/fs/io-wq.c
-+++ b/fs/io-wq.c
-@@ -676,6 +676,7 @@ static bool create_io_worker(struct io_wq *wq, struct io_wqe *wqe, int index)
- 		kfree(worker);
- 		return false;
- 	}
-+	kthread_bind_mask(worker->task, cpumask_of_node(wqe->node));
+--=-=-=
+Content-Type: text/x-diff
+Content-Disposition: inline;
+ filename=0001-Rename-Samba-s-DCO-to-Samba-Contributor-Representati.patch
+
+From 2f011583294626e9919db7d8ddc7961a2f177f4a Mon Sep 17 00:00:00 2001
+From: "Bradley M. Kuhn" <bkuhn@sfconservancy.org>
+Date: Thu, 15 Oct 2020 07:52:21 -0700
+Subject: [PATCH] Rename Samba's DCO to Samba Contributor Representation
+
+In an effort to reduce perceived confusion about the quite necessary
+differences between the Samba DCO and the Linux DCO, and as a favor
+to the Linux community, rename the Samba DCO to the Samba Contributor
+Representation.
+
+Additionally, note that the text is copyrighted and add notice for
+compliance with the text's license, CC-By-SA.
+
+Signed-off-by: Bradley M. Kuhn <bkuhn@sfconservancy.org>
+---
+ README.contributing | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
+
+diff --git a/README.contributing b/README.contributing
+index 2a44e37f9e8..c4a0c7f4bc9 100644
+--- a/README.contributing
++++ b/README.contributing
+@@ -48,7 +48,7 @@ your employer, simply email a copy of the following text
+ from your corporate email address to contributing@samba.org
  
- 	raw_spin_lock_irq(&wqe->lock);
- 	hlist_nulls_add_head_rcu(&worker->nulls_node, &wqe->free_list);
+ ------------------------------------------------------------
+-Samba Developer's Certificate of Origin. Version 1.0
++Samba Contributor Representation, Version 1.0
+ 
+ By making a contribution to this project, I certify that:
+ 
+@@ -95,7 +95,7 @@ above, add a line that states:
+ Signed-off-by: Random J Developer <random@developer.example.org>
+ 
+ using your real name and the email address you sent the original email
+-you used to send the Samba Developer's Certificate of Origin to us
++you used to send the Samba Contributor Representation to us
+ (sorry, no pseudonyms or anonymous contributions.)
+ 
+ That's it ! Such code can then quite happily contain changes that have
+@@ -113,3 +113,12 @@ Have fun and happy Samba hacking !
+ 
+ The Samba Team.
+ 
++
++The "Samba Contributor Representation, Version 1.0" is:
++  (C) 2013 Software Freedom Conservancy, Inc.
++  (C) 2005 Open Source Development Labs, Inc.
++
++licensed under Creative Commons Attribution-ShareAlike 4.0 License as found
++at https://creativecommons.org/licenses/by-sa/4.0/legalcode and based on
++"Developer's Certificate of Origin 1.1" as found at
++http://web.archive.org/web/20070306195036/http://osdlab.org/newsroom/press_releases/2004/2004_05_24_dco.html
+-- 
+2.26.1
+
+
+--=-=-=
+Content-Type: text/plain
+
 
 -- 
-Jens Axboe
+Bradley M. Kuhn - he/him
+Policy Fellow & Hacker-in-Residence at Software Freedom Conservancy
+========================================================================
+Become a Conservancy Supporter today: https://sfconservancy.org/supporter
 
+--=-=-=--
 
