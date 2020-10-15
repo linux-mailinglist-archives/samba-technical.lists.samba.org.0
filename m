@@ -2,45 +2,71 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB31128F611
-	for <lists+samba-technical@lfdr.de>; Thu, 15 Oct 2020 17:46:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F0B7928F675
+	for <lists+samba-technical@lfdr.de>; Thu, 15 Oct 2020 18:11:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=ceAEBaTxUCtZN1qgp7gk4jzdWlaDdtYET229UZzIWmc=; b=uktA0I/mXtDMHUfrWkI1KZST3Q
-	oz/9fpuR1AAor02ycvizn2Jhvn8rAzehCUMU+EORi1/fsDGP/k0bxnVsqvFp0t/fxmf4Sp8wmbv6x
-	rU8kcW4N6liwwm9IXgzY3ldrfup9Ddz0O96TKl0bsKp8mLdVhfzPuPAlwpASjXKonqu4Sm4WQxhgb
-	lRJfRKMfgZ5Tc+EwH1riaCeBRRGHGwOasBkfIzSwzUjHYnh6y9UlfbHNsLNhPjA5UGWzSND0taBzU
-	Fvn+oK1lmbXOMAt2oT9q2k0WGOGrg3jHeCxku9vrj/3GJ2orF1gx7RSR2JlfugdFACQ5B5KgWGeza
-	GN8LKf1g==;
-Received: from ip6-localhost ([::1]:46842 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=1S5KDbQ1p20CuPkNhd9MKTHki1OPIcARm5C3GR0zXlE=; b=GOd+j90I5tyV2cBVvdnqU3SW3B
+	OmoRqVs+8M0jK7sHhKmtz+BjVZlFu4FxKy3KQOz9jao7l1Fvqb1q5P8U0FJJvb17QPH2egcmANaxk
+	YkV+3xW49IXbkiWTehHFAm+7HymhJGezIfx8dLCMb+clWKGKkpT/sGr9/dMWnwTyIqbBLksZ3NKRM
+	fE3HYb7ROoDVRv8GZTcvX9S2KlDTx1ArTxzf1ipF2qKLpMdady1JEmGebXyPmcscAVU1ewaUWXZYx
+	vX3s18BGXyOVKKN9DgimektiH3WyP4dQ3NSXzlFmXQqEb0O/PaDBQ5XdS3MjC/0gnz5raAjjEcpAc
+	fCjvG5gA==;
+Received: from ip6-localhost ([::1]:47582 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kT5Rd-00CHAM-HQ; Thu, 15 Oct 2020 15:45:33 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39070) 
+	id 1kT5qV-00CHJg-4E; Thu, 15 Oct 2020 16:11:15 +0000
+Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:42526) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kT5RQ-00CHAF-66
- for samba-technical@lists.samba.org; Thu, 15 Oct 2020 15:45:24 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=ceAEBaTxUCtZN1qgp7gk4jzdWlaDdtYET229UZzIWmc=; b=Wao0acLll1cpB8XzbCJurOns6/
- GWuA39o/1sbUO0Iqku46NuRPZUQnZsC1qshNBnTUFqSRuoPMnBNwYJ7zU77wYcaEXTrmINYlCOVhh
- zZJ9DD87iJ5OpqEnyxc0K57ww0/9WVW9rRUb/coCbckHAXWHzIIYjqy87cZ9S+VCLcKB0/7ChL6Y1
- ovUYQsiCA+HlnvKjQxFeGvTYOedP1qZykF8XnG7zqrbTG0SohcBR9WnixfdK2lfpDx/ghbIWe6k4+
- dPtihuPQ2vSJx4xHbF0U7Df9QHhti/CXnUNisPLwNBJT5LH+OdnKg9Vir686jnxHOmSl8BrxM6Whs
- quQI06MCouQwHHjbXdjJk7WMp3d4r8MVM3rMA8UpfhKd87s2bnQZsiAeXFoBotbLHJw7JO9R2/dRT
- MtBZavVsBLxajXjCnjJDdLxWWrSgfVUrd/YkDGRTtgHoNNCJ6N/E9lKA7bjHmCgBKgkm5lhmJmhHm
- HcS50vaUOZDLq4uC9vpmcP3q;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kT5RO-0001Dy-Ry; Thu, 15 Oct 2020 15:45:19 +0000
-Date: Thu, 15 Oct 2020 08:45:16 -0700
-To: Stefan Metzmacher <metze@samba.org>
+ (Exim) id 1kT5qN-00CHJY-ES
+ for samba-technical@lists.samba.org; Thu, 15 Oct 2020 16:11:11 +0000
+Received: by mail-il1-x136.google.com with SMTP id l16so4807193ilj.9
+ for <samba-technical@lists.samba.org>; Thu, 15 Oct 2020 09:11:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kernel-dk.20150623.gappssmtp.com; s=20150623;
+ h=subject:to:references:from:message-id:date:user-agent:mime-version
+ :in-reply-to:content-language:content-transfer-encoding;
+ bh=1S5KDbQ1p20CuPkNhd9MKTHki1OPIcARm5C3GR0zXlE=;
+ b=Zq8zrijKaBjlJIqXOZzNPwiOQ9G/7La1BsbjF7IqpZPkWKIe97wo9qAFp03jKt1P28
+ sqwc04YE5+eoJuV5xmUpB/yPvXd1kSg5kDcSELxUO7ilZEUxdUqTeCYER3QHOZwiLLGh
+ 0WmxMcpxX3li3eg/SqayPvfCkMYRaiKFEOX7/ru/28Lg5ChVQoTZ8UXPz/KCUZ4xutzu
+ +AQ04Xl9llpQeLxOP6ewOBAjyQDt8FnAsMXCKLs/wNwETneWCwYzHAmXFRBWXG6YCNQJ
+ D/8eXoAd5OwNXTE4FFqPLAA0g6hzJs2cOgDgvRql2b9HL4d/VvMmBxiRVuRHgak8OlSW
+ d68g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=1S5KDbQ1p20CuPkNhd9MKTHki1OPIcARm5C3GR0zXlE=;
+ b=Sulv0Jhq6P44SUoIEHeTecq4SEkkSFHltsbFRZ8pmrmwIU3iL4AC6SVXg5y+EvyyCg
+ yezcg/Bdnz5zchCJm0qwVnvUdVUUeewZqF1Yhl2u3sgWHNgK5TmOknpaKrlrLCjBb78K
+ FvZ7Mau2c5Cdx9lRxFH+GBkqddmNAooFsQLjlWMmRSeVhAeLV0IjJPYtEGRBZgjUiuJa
+ x1ACIsQ0FKf+fMypkycsPGN9MLwIlO+UqKR5hXhfpV7Dt+NT/QxYrJ15wgFce3VSS0a7
+ 9Mxk2RDVlNi40cjv67Mvv39cAZdWk7CUxZwf3Lta0KTDBIwZQwNBc/3rzKHruyiuxe1n
+ 7fMQ==
+X-Gm-Message-State: AOAM533XHR+DfTRMXqS/J5XXfVftl89WrSm/02ofNiAHAeYCaaFC1TJI
+ wIHWpI5fdxg+S/huwUV7q0uydg==
+X-Google-Smtp-Source: ABdhPJywT1dPbYXSPNPCysISCZWsIoG0QWgcMNxp4OrxB4SlOsRK3TVM3NJj4VFya2zY21eKYe6CgA==
+X-Received: by 2002:a92:ca92:: with SMTP id t18mr3771565ilo.287.1602778264469; 
+ Thu, 15 Oct 2020 09:11:04 -0700 (PDT)
+Received: from [192.168.1.30] ([65.144.74.34])
+ by smtp.gmail.com with ESMTPSA id d6sm2880757iln.26.2020.10.15.09.11.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 15 Oct 2020 09:11:03 -0700 (PDT)
 Subject: Re: Samba with multichannel and io_uring
-Message-ID: <20201015154516.GA3767349@jeremy-acer>
+To: Stefan Metzmacher <metze@samba.org>,
+ Samba Technical <samba-technical@lists.samba.org>,
+ io-uring <io-uring@vger.kernel.org>
 References: <53d63041-5931-c5f2-2f31-50b5cbe09ec8@samba.org>
+Message-ID: <efb8b619-ca06-5c6b-e052-0c40b64b9904@kernel.dk>
+Date: Thu, 15 Oct 2020 10:11:02 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 In-Reply-To: <53d63041-5931-c5f2-2f31-50b5cbe09ec8@samba.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,14 +80,12 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>,
- io-uring <io-uring@vger.kernel.org>
+From: Jens Axboe via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jens Axboe <axboe@kernel.dk>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Oct 15, 2020 at 11:58:00AM +0200, Stefan Metzmacher via samba-technical wrote:
+On 10/15/20 3:58 AM, Stefan Metzmacher wrote:
 > Hi,
 > 
 > related to my talk at the virtual storage developer conference
@@ -186,10 +210,29 @@ On Thu, Oct 15, 2020 at 11:58:00AM +0200, Stefan Metzmacher via samba-technical 
 > 
 > Later SMB-Direct should be able to reduce the cpu load of the io_wqe_work threads (pipe to socket)...
 
-Fantastic results Metze, thanks a *LOT* for sharing this data
-and also the patches you used to reproduce.
+Thanks for sending this, very interesting! As per this email, I took a
+look at the NUMA bindings. If you can, please try this one-liner below.
+I'd be interested to know if that removes the fluctuations you're seeing
+due to bad locality.
 
-Cheers,
+Looks like kthread_create_on_node() doesn't actually do anything (at
+least in terms of binding).
 
-Jeremy.
+
+diff --git a/fs/io-wq.c b/fs/io-wq.c
+index 74b84e8562fb..7bebb198b3df 100644
+--- a/fs/io-wq.c
++++ b/fs/io-wq.c
+@@ -676,6 +676,7 @@ static bool create_io_worker(struct io_wq *wq, struct io_wqe *wqe, int index)
+ 		kfree(worker);
+ 		return false;
+ 	}
++	kthread_bind_mask(worker->task, cpumask_of_node(wqe->node));
+ 
+ 	raw_spin_lock_irq(&wqe->lock);
+ 	hlist_nulls_add_head_rcu(&worker->nulls_node, &wqe->free_list);
+
+-- 
+Jens Axboe
+
 
