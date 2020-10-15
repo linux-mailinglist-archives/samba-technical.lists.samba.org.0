@@ -2,51 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC79928FAD8
-	for <lists+samba-technical@lfdr.de>; Thu, 15 Oct 2020 23:48:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6974E28FB05
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Oct 2020 00:05:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=jAKiY1hVrBP7TCgF5HUbKNjytcpI7wVZpx80jIjubgQ=; b=kwuEaoJQKt39NP7sRtrjhNlWWU
-	RG2MSaLWM5Nl0krCUMC7bRteF7NPbQ7sHORy5+PMMOMG0GR2zzls/pZWK3SS9hBItriwpOBa+vWN5
-	C90iZBmXA8Q/CRsme6CQAZQ7O1aAZcgECNmry+XK2qzwDxdC+A16L6EitL7DYuD0lBSdmkJnQ0n76
-	bcB89RccDnGWqc6XejnGt4bn6wrEHHIEXuE3OLt48Ju0+1hBCFgX5icKDX1AotW/1fvmwdcG4Hb2q
-	tFJ6W/mnep5UlWGuYPZMVFtm9Wt3BRbGiJNimPblb/oXgeYiUridrbNbPTIi5wrg8pKDjsgniAbSf
-	KFZENFMw==;
-Received: from ip6-localhost ([::1]:24932 helo=hr1.samba.org) 
+	bh=T7ahrXrYTtcdJwG9OI+d5cIqObNcG92msS+cw2XOzq4=; b=IF55TYXs4iQ5ZyO/a26BsTTvmv
+	50abwBbstJJLMZLsPzjaBUMOo5iplyz+pL/qFXwvFqfCfYY+z7ER+4oqdd0qI5R3UzKAZXzRgw3Ym
+	x3/ViHEWeiuZA2Wpptlzmy7jR1IgxEEXaq+iCttIasdrvVqvcEvbIHRaxResMGWQMjGcfZbNmBSLx
+	dBZrxcrOOeuD/Y1bisUghNlSk83r0wbIaYruVvmyymFALlaEMu+EKdqiElD3YbanpnklebX+54ioX
+	Dqdhe5Fr7A3Xg44Xn7FojyZme5r9eTSfMuXzqo5xatSuBKp0WSuhVh8ZPVnLDwV01bVrf6vPMQR/4
+	WS5jtX4Q==;
+Received: from ip6-localhost ([::1]:26014 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kTB6W-00CL6x-PY; Thu, 15 Oct 2020 21:48:08 +0000
-Received: from ozlabs.org ([203.11.71.1]:46925) 
+	id 1kTBNF-00CLHN-FK; Thu, 15 Oct 2020 22:05:25 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42788) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kTB6P-00CL5y-7J
- for samba-technical@lists.samba.org; Thu, 15 Oct 2020 21:48:03 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4CC2X83wFLz9sTD;
- Fri, 16 Oct 2020 08:31:04 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=202004;
- t=1602797464; bh=koa9bhn56Oc6c+RTpsY8swckkDa5SDAcMigSy47kSAg=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=UZIqyPz9nBbiOD4qzM7OS9QU00o0aOp6YE3uxJMoOP/3ZQLpL5Q7eJf+X/lOrm9Aq
- 4nYdvytJ/cZJdc06flqUR3qNcSQCC6cCHvxHpOdpl+a38tkF2vjfYkARJb77gMj0c/
- HEZmm2wc2QAS+i2utnE0Gy9WcjiJMy1qrVyIZkH/0c3BOSF3itw+hbzO1dtzqUc46I
- DeS/Bt/QsvbjwrcZILOTxR+KFhtOp3WN8L0zPWyy/58w6U5fXqsqiDiuAQnmECvKNo
- KO677dXqc8qB3kz8iMdg3/6KuLKgr0+zVrQ81zKHwEqIpLbccT2QpAVxjv6aG0I2lq
- WcrDlteeQfHnQ==
-Date: Fri, 16 Oct 2020 08:31:02 +1100
-To: samba-technical@lists.samba.org
+ (Exim) id 1kTBNA-00CLHG-Vq
+ for samba-technical@lists.samba.org; Thu, 15 Oct 2020 22:05:23 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=T7ahrXrYTtcdJwG9OI+d5cIqObNcG92msS+cw2XOzq4=; b=PzmVQIvRHZeF/2LeWlHug/47fQ
+ WNr75JjrsJ/7sMDwXughWNozSQ4APBKo/rDDbrCpOuNDdY8BUy9noWPUbYL2M4q96wNKLVdR6k/sv
+ zttnDQXIYJ/D7+IJWZkzKAtUMyHgljjECW3HvIt6cI1UJjXoj7j6//ynatc1+AaZBlKOEC3XICCsN
+ RN4xssfARTIjmnOAsMuK4U/ANGskccykSQC9WmwAjQgSopnr4il+H1fjIVxNQivc+p5EUdDuJlBSM
+ TqULyijJarhMuuSLGwNXW+KvvF/IgZM17xBwP5UBttORhX2NCpnfnluDUQm7E/7k7xnGIN61spfbK
+ xKfhVePATX5t05tLYfKKXldTqN4rTuwPD7JNYJUaaWu4XB97HcMG854Wo35ccbV3GHE3IYWSTekHh
+ mBUH7GMcxOsQgTS/oaxFLLGcHgzzHvIpH4VIcXShILwK5gqQZRB+rdDlZGmf5f/CMzKmiV/Borh+g
+ AjKjUM2/1RsjV7og0/uwR++G;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kTBN6-00051J-5x; Thu, 15 Oct 2020 22:05:17 +0000
+Date: Thu, 15 Oct 2020 15:05:13 -0700
+To: Rowland penny <rpenny@samba.org>
 Subject: Re: [PATCH] Documentation: Rename Samba's DCO to Samba Contributor
  Representation
-Message-ID: <20201016083102.5b421ff0@martins.ozlabs.org>
-In-Reply-To: <f70291dc95eb0eae98e23c2897cbcfa9376e90e9.camel@samba.org>
+Message-ID: <20201015220513.GC3852671@jeremy-acer>
 References: <87mu0nidll.fsf@ebb.org> <20201015180510.GE3769001@jeremy-acer>
  <2231b5de-fa06-db61-feb0-08ad0374673e@samba.org>
  <f70291dc95eb0eae98e23c2897cbcfa9376e90e9.camel@samba.org>
-X-Mailer: Claws Mail 3.17.7 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+ <20201015192330.GI3840862@jeremy-acer>
+ <09b466404b11983f992ac2f89c369b33d3a1a135.camel@samba.org>
+ <20201015193751.GJ3840862@jeremy-acer>
+ <d6681d5c508524dd97b093f332e8cea818cf1a3c.camel@samba.org>
+ <20201015195534.GM3840862@jeremy-acer>
+ <96555a46-20a8-48ba-652a-5bbbaad67f80@samba.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <96555a46-20a8-48ba-652a-5bbbaad67f80@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,33 +63,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: Simo Sorce <idra@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 15 Oct 2020 15:14:13 -0400, Simo Sorce via samba-technical
-<samba-technical@lists.samba.org> wrote:
+On Thu, Oct 15, 2020 at 09:07:26PM +0100, Rowland penny via samba-technical wrote:
+> On 15/10/2020 20:55, Jeremy Allison via samba-technical wrote:
+> > On Thu, Oct 15, 2020 at 03:45:22PM -0400, Simo Sorce via samba-technical wrote:
+> > > > Personally I think we should just add the CC-By-SA
+> > > > attribution and be done with it.
+> > > I'll let you argue with our counsel on that :-)
+> > Fair enough - we should always do "What The Lawyers Say" (tm) :-).
+> > 
+> > I don't want to change the text though, just the name
+> > if we have to.
+> > 
+> > How about:
+> > 
+> > Samba Developer's Declaration of Origin
+> > 
+> > "Declaration of Origin" is IMHO more descriptive
+> > of what the person is doing, as they're just
+> > providing a declaration here.
+> > 
+> > Thoughts ?
+> > 
+> If we must change, then that is as good as anything, but how about dropping
+> 'of Origin' from the end ? This will stop Simo from wondering about *I* ;-)
+> and it says what it is, A developers declaration.
 
-> On Thu, 2020-10-15 at 19:14 +0100, Rowland penny via samba-technical
+That a great idea I think !
 
-> > Hang on, what is wrong with calling it a 'DCO' ?  
-> 
-> The original license for DCO 1.0 did not permit it, this[1] is the only
-> reference I can still find.
-> 
->       If you modify you must use a name or title distinguishable from
->       "Developer's Certificate of Origin" or "DCO" or any confusingly
->       similar name. 
+Samba Developer's Declaration (SDD).
 
-I would argue that "Samba Developer's Certificate of Origin" is
-distinguishable from "Developer's Certificate of Origin" and is not
-confusingly similar.  Prefixing it with "Samba" distinguishes it and
-removes any confusion about who's DCO it is.
-
-Perhaps when we abbreviate we should just make sure to call it "SDCO"?
-
-peace & happiness,
-martin
+is short and very different from DCO.
 
