@@ -2,41 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8634D290C4F
-	for <lists+samba-technical@lfdr.de>; Fri, 16 Oct 2020 21:32:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 14885290C5B
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Oct 2020 21:37:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=HMTU5CAueOrV5TQmZfHv3qgyLgcHY+uR5rm7cESJdSE=; b=MI0tTdOIiA7RfhJvzVCfkm4U9D
-	cHTr255m2bEWRIzhV/dNtqZFFkxU9OvuV1CDsl2TETbFPkqKF26sx5Qv4WT7hFY5uFkjG3WnxN/KD
-	h3/o6vAn58sE49OEJRErc9LVYTgEsfSGKiua9loLipaKH6qnviH5DjZFGluFw1VUKiGTsKs5MLeey
-	bn2w3WRYUa7VB+egDn0dPuWOSPsGHp5E/kt7kmvsvE85Xmv7AoGQrmcekhFN31TySeJ97usqUmfJN
-	09++IK3yfbI4ZFp9rI/iaYt6U1idDN6g9Cqywy5pK9jmgU0yJlFsoi0iCseASngzhaIRglqxZTfu4
-	f+e+QMcQ==;
-Received: from ip6-localhost ([::1]:56316 helo=hr1.samba.org) 
+	bh=l8nxEwe694EUAGDzxXKPIFKyQ9HfRBUfOEbeaU8g4yE=; b=AfUpo/n0iO0UvRQy4QI4Mi6ELM
+	MWuyNb/U2bltNW+GiZX3Ciy4ztSsKEMPnS38Lg1uSN6ilhRPzuLaAYqYRQ9ZkJhH5Wtt34XD1WIgO
+	SfbLTQzpHEMMHi+bpBlDIU3kpKWp7uqBKjH6WB7DTB2m/GTXXs756MWhciY5VuSFXh54N8f+YkLwm
+	jN7xKjSdNHBao9mGSioeNgW23/mTL2oZd6EPOvLb+gL1/T0sDF8lCUIz5wBf4WKc6O9qdCCK9kWM0
+	p0M257GS8G2HmHqKyriMpjfAXUwS3eWZO6LB1YFcXfLDa14Vd0aVKS9IAayqhUWQuA029PqpuAsic
+	LVY7gLLA==;
+Received: from ip6-localhost ([::1]:57032 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kTVS6-00CRHG-09; Fri, 16 Oct 2020 19:31:46 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29118) 
+	id 1kTVXB-00CRNl-L2; Fri, 16 Oct 2020 19:37:01 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30732) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kTVS0-00CRH9-QP
- for samba-technical@lists.samba.org; Fri, 16 Oct 2020 19:31:42 +0000
+ (Exim) id 1kTVX7-00CRNe-0W
+ for samba-technical@lists.samba.org; Fri, 16 Oct 2020 19:36:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=HMTU5CAueOrV5TQmZfHv3qgyLgcHY+uR5rm7cESJdSE=; b=eTUxVgywMctBQom8LdXMNha1EX
- GXEfY0TXLC0xqkdoI8NGaQFap0pCQYCUuElCFX2D1z7zAOYduAKwdv+RqGKOeqPB9BpDIMhh9A1fx
- facwp69+FZNW/yqWX/fO1JrKaHEo3jsNsrfxZknlpjusDpLW9HXWUminlO52PXM6JhLMfj/QffsR7
- hZezZ3LhX55aAjl8G5P/19yqjCZvMC/kv9gIsIEKwoKf+seepRA9XwqvRgJGsehESKvQOE48Uh8/0
- j1bDONB8I89JbVV4BI9+Mq0gGmsuRo06TvQV+jcdGmK1XXMNrlmr2dM27kniFOXpZQeSD4XrSGTUX
- 6HXUM6FDe+geX8Bf2ItxJhMKGO82HzMbiK7Ddz4Q4P8SPgCu+f/bBrnL7Qn78C1UY2bR1HTy6nXtZ
- CknFCKQhRKv9IuAy9Q+BUi9n0f039hCLkfaWoZOPDw+cvaZ5sM9a1acLiZ0iYOUEP2vtcrHmB1PfT
- QM25uUkVdlmBgOHyQsYbknrL;
+ bh=l8nxEwe694EUAGDzxXKPIFKyQ9HfRBUfOEbeaU8g4yE=; b=IuD/NE9+qfjI/eteMd7Xqy7cqy
+ aMl6ZgoQp3QtBgYvlUA0a4/fLePNYijQhX2bCZZbh7muAAblvwgkAiHI99D2bLdyTF9pWd7R9ZxQH
+ fo8SzO42i78pLKYaW9ObShJnPmRCU+2CRw8eeBFBzzWAWpDTaVLmxfbZ2duh2dZhGL9hp3BBtlAOc
+ 7ACcmvhq98RRRJaPJll02helFPiy1uXYDfS3p7K+iNH4b5gHJ5057B6mN/KFw+jguuKCfoTE3fNdo
+ /cytjwNo92J8kIpNmgzbmbcHcdiEw+n3m0Xr8rHDR0B6+TZe4UP4ZDflwKT02L20ILQXddEs0PRb4
+ /covY+ewhu6LbI7m+e28BX+kxil8rhx/Um/IYOFjzDZP3OadkTvBPjQLP3/vvdM2k2NisxU0JDvMM
+ PrV8TUQ3hlmapaCtM+VGnKOgQUTI2wElQBuR8kbNbG4BKAdxs7QM28df43rBoWgeMe8bU9RH+f8sV
+ uw5VPneoLn74HF63/OqLzjVs;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kTVRz-0005xs-J4; Fri, 16 Oct 2020 19:31:40 +0000
-Date: Fri, 16 Oct 2020 12:31:36 -0700
+ (Exim) id 1kTVX6-00060s-B3; Fri, 16 Oct 2020 19:36:56 +0000
+Date: Fri, 16 Oct 2020 12:36:53 -0700
 To: Arran Cudbard-Bell <a.cudbardb@freeradius.org>
 Subject: Re: talloc: talloc_set_memlimit causes all reallocs to fail when
  used on pools.   talloc_set_memlimit not enforced correctly on pools.
-Message-ID: <20201016193136.GA67086@jeremy-acer>
+Message-ID: <20201016193653.GB67086@jeremy-acer>
 References: <DA0D6B87-BA18-41EA-8ACE-E431841902FE@freeradius.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
@@ -71,26 +71,40 @@ On Fri, Oct 16, 2020 at 01:59:11PM -0500, Arran Cudbard-Bell via samba-technical
 > Reviewing the talloc code shows provisions (and test cases) for applying memlimits to pools, unfortunately in practice, memlimit functionality on pools seems fairly broken.
 > 
 > 1. Calling talloc_set_memlimit on a pool results in a limit structure being created with limit->cur_size being set to the size of the pool + chunk header + pool header.  This seems to effectively mark the entire pool as already in use.
-> 
-> 2. Because of 1. calling talloc_realloc on a chunk allocated inside a pool always fails (unless the operation would be a noop).  Even if the chunk size is well within the pool limits.
-> 
-> 3. Chunks allocated within a pool are never checked against the memlimit set on the pool.  This is actually the only reason why allocations within a pool work at all.  If the code path included a call to talloc_memlimit_check, normal allocations would fail the same as calls to talloc_realloc.
-> 
-> I've tried modifying the code so that only the children of the pool ctx are included in the the cur_size calculation, but this causes a "logic error in talloc_memlimit_shrink" error.
-> 
-> Happy to keep poking, but I figured someone more familiar with the spirit of the code would probably be able to make more rapid progress.
-> 
-> I've included some simple test cases at  the bottom of this email.
 
-Thanks. Arghhh. I really hate the talloc_memlimit code :-).
+As suspected, this one is on me :-(.
 
-Not sure how popular/used it is.
+commit 4159a78ed7eda340758e22286f16186987a20f2f
+Author: Jeremy Allison <jra@samba.org>
+Date:   Tue Aug 27 12:46:09 2013 -0700
 
-I would love to just strip it out, but as it's part of the
-ABI that's too hard. Can you log a bug at bugzilla.samba.org
-so we can track this ?
+    Change _talloc_total_mem_internal() to ignore memory allocated from a pool when calculating limit size.
+    
+    We must only count normal tallocs, or a talloc pool itself.
+    
+    Signed-off-by: Jeremy Allison <jra@samba.org>
+    Reviewed-by: Simo Sorce <idra@samba.org>
 
-Thanks,
+diff --git a/lib/talloc/talloc.c b/lib/talloc/talloc.c
+index 7b827ca0c15..1e25dfde4e1 100644
+--- a/lib/talloc/talloc.c
++++ b/lib/talloc/talloc.c
+@@ -1817,7 +1817,14 @@ static size_t _talloc_total_mem_internal(const void *ptr,
+                break;
+        case TOTAL_MEM_LIMIT:
+                if (likely(tc->name != TALLOC_MAGIC_REFERENCE)) {
+-                       total = tc->size + TC_HDR_SIZE;
++                       /*
++                        * Don't count memory allocated from a pool
++                        * when calculating limits. Only count the
++                        * pool itself.
++                        */
++                       if (!(tc->flags & TALLOC_FLAG_POOLMEM)) {
++                               total = tc->size + TC_HDR_SIZE;
++                       }
+                }
 
-Jeremy.
+I'm not sure talloc_set_memlimit() should actually *work*
+when applied to a pool pointer. Maybe we should just
+return an error ?
 
