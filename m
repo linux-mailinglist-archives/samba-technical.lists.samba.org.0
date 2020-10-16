@@ -2,48 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11A45290CB1
-	for <lists+samba-technical@lfdr.de>; Fri, 16 Oct 2020 22:22:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A32AA290CB5
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Oct 2020 22:25:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=4YJA3UAN3euIA5Foz8RmfiS1IwplCH6WOG0Jh9B+J14=; b=xA/o1nbfUlrGnTwR9lNgwybxWK
-	OSj71QKKtL9QPUHoHFd9qtwkruJJ/WWYBo6MJE2YxHLfbpaKFANSHJWcejCvC1XzOGLUtP2tnnpiS
-	DbeSYfvliuKV78AiIWh53SRFgdHEwxci8V8fcvrTtuKVQ6Zxve73rBcCP5BoeKIYOF3uToMUoT/hM
-	ab7EqKxVcAZ6WRx8aWsZDIEccEMu1r0G9sNWbmbYlap2wZ5tjQv7glgXSujn8bWdi7lHRsgOq1Vfh
-	UCVPYPYpRWxSIk7/FGBhIOhnpNGKRFWcdatpuDhuIfGn4mBc3v14hQhlg+CNIO/ZPEaVSZ/IMvatB
-	26ExjcBA==;
-Received: from ip6-localhost ([::1]:63642 helo=hr1.samba.org) 
+	bh=3hdm7vAzJ0zR8kC6ye+KrGlAtXo+AhxRTyFvEGvw74s=; b=199pD8Om4FH7y15THDXM6ZTRBI
+	eqzEBLWA5Lk+IaO5ONiTJReGWxhh+hG9gqJYQ6cXHXsqNQds/RKARB7jkzTNsnxAZpg7wlLkKR+GD
+	kBUorjzDLYlFiPATFCf1jajItzi0dCbokE9yCWoFJH609PeAZgXCZxakTPRv6h+9p4wJNV6FC9OTP
+	g1BJ1qMcptzdQ2dDTkONEtL+3Zy49qiIUB9A0+4/VKFYvrHLRZLA/c6HC18Z35Ps3k80HQLhORFv6
+	FhysCvH1UeR+2Ixecijgo0sFkTWZ16lT6J8IumfgD3/048EO/1R3jT7zISR/qVOH3yF0hF8ZhG/vv
+	yU4paoPg==;
+Received: from ip6-localhost ([::1]:64368 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kTWEz-00CSLB-OM; Fri, 16 Oct 2020 20:22:17 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44168) 
+	id 1kTWIC-00CSRa-KJ; Fri, 16 Oct 2020 20:25:36 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45478) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kTWEu-00CSL4-Qu
- for samba-technical@lists.samba.org; Fri, 16 Oct 2020 20:22:14 +0000
+ (Exim) id 1kTWI8-00CSRT-Bb
+ for samba-technical@lists.samba.org; Fri, 16 Oct 2020 20:25:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=4YJA3UAN3euIA5Foz8RmfiS1IwplCH6WOG0Jh9B+J14=; b=YeKy3kRoConO3asGBnCSEHOR8Z
- vZydzJ7twZRAm55PNjwyBw3ZVohojPIiCCiWzab5V9mApiiEakqQS2dTwF/bD6DBnOgI0kFr3WjPU
- iEntRX0aAfYo1hgL8zIi3Mycr0NNim3gyc/1oV+kKAaUAsg6RA2zE6BEK5UqqNnaSHTfGzXeYjZcV
- BOA7OV+yV7islSr5mQFGzCXDVT7bMlKH+AF50OoANtlxje8IpJ5YQX1PdYXVGpOk6Ibg583/63S7K
- X+cVl4Jmsua2ZuhbJj6nVo9FEwwGLaz55zHhBOmUaBeGOZiuUyJBEh7y+ZdHJFUTGFW2IojIqBS3V
- mRdwGzbMrNkXEli1Yn3jaT0cD2HvbZAbklT05cLMYVZcM4mIqpzQmtIe2YGJn1DKdzBvh3n0uPkPD
- yY8aDKyJ6Rs8VboB8Klp5H6/5G+I6fW4VVknFnIjDOSwcEscmygHLty0T0CYcHJ5t8fjil+8XuJVM
- oo790rxvb4bQJ2Pv94RG0MYO;
+ bh=3hdm7vAzJ0zR8kC6ye+KrGlAtXo+AhxRTyFvEGvw74s=; b=FQ2Fi1BM+KHKqUK6ds/FtKwNd0
+ nLkknFIxzsAuK4NggghIMIsOPrMoZlypuSpimX/2ZRF4nVfJhZk6M87yHx9ACWAGVpwYeEZjiKlfO
+ 46QqoLEtkwQV8A7wRyQ6Zv0JnKAVYs2+AZwTJR613+dkdAio07CFBXgeM2qQzyJz5ksKFa6FcnsiB
+ U2wz1DBOhBs0SEiK/4l7pgSZO1cONc4Cv/IkXOKw6V4y8KYjshOsPeXz2birrZul6ggwNT8fmuxKa
+ RNu8H4m5rjIuu9KhzjUi0zp2lmGxhfOZMnWDWMTgGMgZoAE9ngptLeqc/UUMk6fGFY+aLitYlMdIN
+ Dnso6RBWH4CE4L4oqS9TSmxbZ5QeSqxRFG/1gZ4FCx7zrRGWhqPvR01NZ/FdQuqc4gfP85IHm+Ojd
+ ry/5KhT7zrQFTRF3aX+ffcOLAf7fod4MjKJMeLMwezPa95EDyiE2Hq6/Y6+6N1thMqXaUL+aNOgKa
+ M5d9n9noiP/FtLn5ijlqgCLf;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kTWEt-0006Lz-94; Fri, 16 Oct 2020 20:22:12 +0000
-Date: Fri, 16 Oct 2020 13:22:08 -0700
+ (Exim) id 1kTWI7-0006OG-Mw; Fri, 16 Oct 2020 20:25:32 +0000
+Date: Fri, 16 Oct 2020 13:25:28 -0700
 To: Arran Cudbard-Bell <a.cudbardb@freeradius.org>
 Subject: Re: talloc: talloc_set_memlimit causes all reallocs to fail when
  used on pools.   talloc_set_memlimit not enforced correctly on pools.
-Message-ID: <20201016202208.GE67086@jeremy-acer>
+Message-ID: <20201016202528.GF67086@jeremy-acer>
 References: <DA0D6B87-BA18-41EA-8ACE-E431841902FE@freeradius.org>
  <20201016194436.GD67086@jeremy-acer>
  <2B2DBDAF-26F4-4FF4-A2A6-A194F507A352@freeradius.org>
+ <E2A6FEEF-3C46-43A6-818C-D226924EB9F7@freeradius.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <2B2DBDAF-26F4-4FF4-A2A6-A194F507A352@freeradius.org>
+In-Reply-To: <E2A6FEEF-3C46-43A6-818C-D226924EB9F7@freeradius.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,42 +64,28 @@ Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Oct 16, 2020 at 02:51:39PM -0500, Arran Cudbard-Bell via samba-technical wrote:
-> > On Oct 16, 2020, at 2:44 PM, Jeremy Allison <jra@samba.org> wrote:
-> > 
-> > OK, looking at this more closely, I think this is
-> > a fundemental misunderstanding of what a talloc_pool
-> > is.
-> > 
-> > A talloc_pool() is pre-allocated memory, that can
-> > then be further divided without having to call
-> > into malloc.
+On Fri, Oct 16, 2020 at 03:04:36PM -0500, Arran Cudbard-Bell via samba-technical wrote:
 > 
-> Yes, we use them for slab allocation and for creating
-> read only regions of memory with mprotect.  We have a
-> special wrapper that ensures the first child allocated in the pool is page aligned.
-> 
-> When we do this, we don't want to allow allocations to
-> occur outside of the pool so set a memlimit on the pool.
-> I know this is a really weird use case, but it's ended up being quite a useful debugging tool.
+> As for what the semantics should be, I was thinking that, yes,
+> a pool in its entirety should be included in the memlimit calculation of
+> its parent chunk, but if a memlimit is set on a pool directly,
+> only the memory used by the children should be included in the
+> memlimit check.
+> I didn't get far enough into the code to see how many assumptions would be broken by this.
 
-To do that, allocate the pool as a child of
-a talloc pointer, then set the memlimit on
-the parent pointer to be the size of the
-allocated pool.
+All of them I'd guess :-).
 
-What you're asking for is a feature enhancement,
-not a bug-fix I think.
+> An alternative that'd still satisfy our immediate need would be to have talloc_set_memlimit simply fail when someone tried to apply it to a pool (as you suggested), and add an optional flag that'd prevent allocations from occurring outside of the pool.
 
-> > It's ALREADY allocated memory, so setting a memlimit size
-> > smaller than the pool size makes no sense - once you've
-> > done that all allocations should fail.
-> 
-> In addition to preventing allocations outside of the pool,
-> It would still be useful to be able to apply limits to pools
-> so that a pool passed into a function cannot be entirely
-> consumed by allocations by that function. i.e. if you want to reserve some space in the pool.
+Please wrap your responses to 80 columns :-). Makes
+quoting your replies really hard :-).
 
-Again, that's a feature enhancement - you want a
-sub-pool allocator limit.
+What you're asking for is more complexity in an
+already overly complex part of the code (which
+to be honest I wasn't even sure people were
+using :-).
+
+I think you can do what you need by allocating
+a pool as a talloc child of a context, and setting
+the memlimit on the that context.
 
