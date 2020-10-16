@@ -2,53 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FB0A290569
-	for <lists+samba-technical@lfdr.de>; Fri, 16 Oct 2020 14:41:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F8E1290734
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Oct 2020 16:31:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=Ua+qWKv05TVMUrzuP7cijJmDrlkomXq/PjGb5qZHpoA=; b=2DXZOptPDWte3hzCLXjzKe5o/N
-	Ax4IOZbAaWx1EQvBUtWM7qjUh3RmMfDLI/hzcavYUy7w7hKkiYXUCQ0wtgs6mPJ3s8SL6D8n/F2RP
-	aQl2DAUIvF2ru+UKzuj8fA33zqGKIyTCXMfdzq/Y1U//foF7inK2khS1CmpSdOIVWwso3KV+4tPFz
-	zjBvrf9PP3+wW1xnRcKIbw3JcWd3k3j1Gs0cxISn7+tWcYo1/QVmiIV+N4g4z79ul6U374BgVJBsN
-	5RnKt2TCNGbvUg4Hf5Raq0xf+5MImf9IZVWx6Cd/KzNF3Mds7qTzvyiHnS8XYg2jLa7FpW1P69jy6
-	k1gKzKnQ==;
-Received: from ip6-localhost ([::1]:45774 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=fUWm5BmDKhgBAVFrloOUMFmhEPAFwgFScqsLeW5Tofk=; b=FXFikCtlnN4PfPpNbpCgXWYCBx
+	UARzQdRWBEOKvseEWCvV5A5Kl36FjCiHGTVpeoRhAu3rhmmc0h+18GZEOtTyJGrfHSrpZ8ikRNjPu
+	V7rh6b2Njpx/WFATcNOyBV7mITlbN8B9reuOlKER5X26kgdNG2XZ7G/hSxk/+v41WlfzMK/jfZVPB
+	NIaamj9EfvMOtlRQgNPXkWNwEuPybhpWiPmbmJCeTjeXrCKfQNYydrSZjdtR7UTKN8QaXP+94dS6v
+	ZtgA0IF3L9U4+gt5CHhpesC/QwCsH0mh4bvm8kJ8mCL1fLKcTMpZ2nBmsxMgvXCyHlgI46Hw63E51
+	ZdB2umGQ==;
+Received: from ip6-localhost ([::1]:46530 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kTP2V-00CPHt-0a; Fri, 16 Oct 2020 12:40:55 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12248) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kTP2Q-00CPHm-Jt
- for samba-technical@lists.samba.org; Fri, 16 Oct 2020 12:40:52 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=Ua+qWKv05TVMUrzuP7cijJmDrlkomXq/PjGb5qZHpoA=; b=uAIkpO4rYIkUfR9WxTVDw9owlV
- c4YOG/+P8Cig6ppTbAjmG8hLVwL5FB+8K/plSqvczXolqp64CPlLFPjWl6XIvVObTHMJmIEcerb80
- SKaUHDM0OjOVUOAMpm+wUUudmdW9BbEZnBGoCkTsIDgo6z/HT/nrA+EHpHMZAUfaR91tYZ1gtM9EJ
- gKhy074tSZo8tmoV97cXglhKMkHnXFgDa3Yr5SQCsOHx2H6aT3WQEzo2vJxpFMkv8ILESHyyW0NA/
- hxb8Y1uA3Q3RwGHcPK2x+3zX/nqJFF+Wgq+OlG3xNLGm+hGsoeGt6FNHYP1caDbzntIUj+LulsNQZ
- FTNQdoqtvV/DjE7wSsM2k4CP08yt7CmnrLggM/4/nDGC/awPu/p7DM5zX5HSkbQ5srAT4t0U+6BXq
- bIoQIXGr/uBIaXMQbqfgSwkAK4TrGtVP+d7gGOn+HeJRbbUIAs7iBT6Szk7pILyB5Wh60WZi+17wJ
- ckkQ8jwgV7+WJa6tF7/HWSJh;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kTP2P-0003WY-RZ; Fri, 16 Oct 2020 12:40:49 +0000
-To: Jens Axboe <axboe@kernel.dk>,
- Samba Technical <samba-technical@lists.samba.org>,
- io-uring <io-uring@vger.kernel.org>
-References: <53d63041-5931-c5f2-2f31-50b5cbe09ec8@samba.org>
- <efb8b619-ca06-5c6b-e052-0c40b64b9904@kernel.dk>
- <6e7ea4e7-8ef7-9ad4-1377-08749f9bae0b@samba.org>
- <72a7edd7-3bc7-22ad-39be-fd2d4d567825@samba.org>
-Subject: Re: Samba with multichannel and io_uring
-Message-ID: <5e052fc2-a513-1f9b-d939-fc79ef41d96c@samba.org>
-Date: Fri, 16 Oct 2020 14:40:26 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+	id 1kTQkM-00CPdl-L5; Fri, 16 Oct 2020 14:30:19 +0000
+Received: from p3plsmtpa06-01.prod.phx3.secureserver.net
+ ([173.201.192.102]:57818) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kTQkC-00CPde-Jq
+ for samba-technical@lists.samba.org; Fri, 16 Oct 2020 14:30:11 +0000
+Received: from [192.168.0.116] ([71.184.94.153]) by :SMTPAUTH: with ESMTPSA
+ id TQhwkPvAWXReoTQhwkYFrS; Fri, 16 Oct 2020 07:27:49 -0700
+X-CMAE-Analysis: v=2.3 cv=DKHxHBFb c=1 sm=1 tr=0
+ a=vbvdVb1zh1xTTaY8rfQfKQ==:117 a=vbvdVb1zh1xTTaY8rfQfKQ==:17
+ a=IkcTkHD0fZMA:10 a=hGzw-44bAAAA:8 a=pGLkceISAAAA:8 a=SEc3moZ4AAAA:8
+ a=iox4zFpeAAAA:8 a=yMhMjlubAAAA:8 a=hNOTfydlAAAA:8 a=ySJjVz2esI22uv7vTAIA:9
+ a=QEXdDO2ut3YA:10 a=HvKuF1_PTVFglORKqfwH:22 a=5oRCH6oROnRZc2VpWJZ3:22
+ a=WzC6qhA0u3u7Ye7llzcV:22 a=fZunMKNLB757I4m4HZ3M:22
+X-SECURESERVER-ACCT: tom@talpey.com
+Subject: Re: [PATCH][SMB3.1.1] Add defines for new signing context
+To: ronnie sahlberg <ronniesahlberg@gmail.com>,
+ Steve French <smfrench@gmail.com>
+References: <CAH2r5mtwBHTk-Xoeuo+RbgNwiNw-cWTAhdy1YG5y+vXnNDSv4w@mail.gmail.com>
+ <bd8f21ed-5fd4-0974-f15a-16d2f3ee607f@samba.org> <87r1q3hixr.fsf@suse.com>
+ <827fd43f-40a9-9480-a6b9-aea1fa69090c@talpey.com>
+ <CAH2r5mt3t=FHVd8RtCyrzY6TUKb+rGENENXbKJBgUdq4T4Qe6Q@mail.gmail.com>
+ <CAH2r5mu72VSPFhiLjL3YUtStXc1=B5SBP86+A5vEWFhLFyOJBw@mail.gmail.com>
+ <CAN05THRAZnea1NUW7-h5jHsQ+yUpvxO-5KHGaFgKB87JxmWBqg@mail.gmail.com>
+Message-ID: <55b0a562-b6cc-b6d4-65c7-b642ce08cc4b@talpey.com>
+Date: Fri, 16 Oct 2020 10:27:49 -0400
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.1
 MIME-Version: 1.0
-In-Reply-To: <72a7edd7-3bc7-22ad-39be-fd2d4d567825@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="T6uFHJ7ROrSUajMXLX1GY4KU4IHRm5EFb"
+In-Reply-To: <CAN05THRAZnea1NUW7-h5jHsQ+yUpvxO-5KHGaFgKB87JxmWBqg@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+X-CMAE-Envelope: MS4wfIxjPAgA97wmOXrhr3HAbnhORhugIuEaA16Agw7hcROM4DjCbRAho1qq2TuemZBcabvIgUEW8dngv6lItCFwLTQstQB0nAwkOeR4UqMQ8MrdsH9SbDVt
+ 7lyt0bci0F25I91F1VlLPZC6OPYv0rhPhErkoX8+DUk6+R14zJ0pzrm+FePKw/CSshUie/qv9NtBjymjb6cvIjWWyM2cAaYE3rK7XqkXZzB40cdAX9t4k79d
+ v7n3Kilb2A6YZxgBl66lupHN2BuIhm/vTKlmg9bAA1VfBMeHQyh1IOm+sCNaitcM1FpR6V1kzl+x+adAkm2AO8wQ1MWCusJiMWxI/XuX+p4=
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,74 +63,135 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Tom Talpey <tom@talpey.com>
+Cc: Stefan Metzmacher <metze@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ =?UTF-8?Q?Aur=c3=a9lien_Aptel?= <aaptel@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---T6uFHJ7ROrSUajMXLX1GY4KU4IHRm5EFb
-Content-Type: multipart/mixed; boundary="sAtErHz8pQE3aEOD06ShSB9BYQ0ii6umG";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Jens Axboe <axboe@kernel.dk>,
- Samba Technical <samba-technical@lists.samba.org>,
- io-uring <io-uring@vger.kernel.org>
-Message-ID: <5e052fc2-a513-1f9b-d939-fc79ef41d96c@samba.org>
-Subject: Re: Samba with multichannel and io_uring
-References: <53d63041-5931-c5f2-2f31-50b5cbe09ec8@samba.org>
- <efb8b619-ca06-5c6b-e052-0c40b64b9904@kernel.dk>
- <6e7ea4e7-8ef7-9ad4-1377-08749f9bae0b@samba.org>
- <72a7edd7-3bc7-22ad-39be-fd2d4d567825@samba.org>
-In-Reply-To: <72a7edd7-3bc7-22ad-39be-fd2d4d567825@samba.org>
+Indeed yes, my point is that until/unless Microsoft indicates
+the new signing context is committed to the protocol, it's
+premature to bake it into Linux, or anywhere else. Speaking
+from experience, things have been changed or removed at some
+very late dates, in fact.
 
---sAtErHz8pQE3aEOD06ShSB9BYQ0ii6umG
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+While I have the floor, and just a personal opinion, I feel
+there is a huge and confusing proliferation of module options
+and mount flags creeping into cifs.ko over time here. Is this
+really a good idea?
 
-Am 16.10.20 um 14:28 schrieb Stefan Metzmacher via samba-technical:
->> I just found that proc_task_name() handles PF_WQ_WORKER special
->> and cat /proc/$pid/comm can expose something like:
->>   kworker/u17:2-btrfs-worker-high
+Tom.
+
+On 10/16/2020 2:11 AM, ronnie sahlberg wrote:
+> Looks good, but I think Tom's point is we should not put this in
+> upstream until the feature is officially launched.
+> In  wireshark, we can add these things immediately since any capture
+> files with these parameters will continue to exist forever.
+> See wireshark still supports pre-RFS versions of iSCSI.
+> But for cifs.ko we might want to wait sending to Linus until it is
+> officially released in a consumer version of windows.
+> 
+> Lets just look at SMB2.PDF and all the bitfields/flags that specify a
+> feature with description and then the comment that it is not used,
+> clients should set it to 0 and servers must ignore the flag. Things
+> can change until official release.
+> 
+> 
+> 
+> On Fri, Oct 16, 2020 at 3:50 PM Steve French via samba-technical
+> <samba-technical@lists.samba.org> wrote:
 >>
->> ps and top still truncate, but that can be fixed.
->=20
-> I commented on https://gitlab.com/procps-ng/procps/-/issues/51
-
-Ok, it's already fixed in newer versions:
-https://gitlab.com/procps-ng/procps/-/commit/2cfdbbe897f0d4e41460c7c2b92a=
-cfc5804652c8
-
-So it would be great to let proc_task_name() expose more verbose
-for io-wq tasks in order to avoid the limit of set_task_comm().
-
-metze
-
-
---sAtErHz8pQE3aEOD06ShSB9BYQ0ii6umG--
-
---T6uFHJ7ROrSUajMXLX1GY4KU4IHRm5EFb
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl+JlLoACgkQDbX1YShp
-vVaKwA//fZUJFqjR37P1imLMv4yojrX/GIVz0g/yszUIv9hRAKGUQTuuoGTIecil
-CWVk8cBteseTAeHD2O5pSSxavGe4HrPQk4a74DmHphqhJ0MeDDYnQvddf4UsFjUF
-tjDIil55Ki9CEx3C0shlIpE+wRXIe1YJIAss6/odmzzHALeJiVr9RzJCifRZu2Xr
-7iT2LyyGymLqyFKG/yk4XfHzvXFDPjZozHUMLVz6yTUhvoBraY0u9Tt6kNpuJds4
-u0aCdhOkfxGGPPiiWQXQJ1DNhJymEFdhJNcPSos2nQIfamf5/vb9Ze/91gyY2U7w
-NoCTIIKliwA8hY3vDQ6S4pUXvKnAh0/a1oVnKITHtRURsnjOQL/8U7Yiuuu3wCEj
-IdQYEcMn0Ztf9o/UigzS+PC+dViByc207wFwVtTun1RyEmvBVOTl/imWkNMvIqA/
-G73Tfy5EhCPdLY/ybeZysEyFqlk/j7IYst0COqnUqkCiw46rHl3kx4qaS/F8EMmr
-pHfAi2YJHEOD5PSrXPYxNUyUtOvxEdH7tawOtcp9k0ObM6u3RYBfV8BRLZrdm+Jc
-YrLdkrwtuwwZ5aoUOboo44j4PPxdH29roL1/FFMUJEFIWeJ5LFri54ix/eYhPu5c
-d4Gzdy4vUgPicjYadd4RT4R8OzPGycffgtIM7+dOcdDMkBzE2fA=
-=HgUE
------END PGP SIGNATURE-----
-
---T6uFHJ7ROrSUajMXLX1GY4KU4IHRm5EFb--
+>> Here is a patch to add a module load parm that is turned off by
+>> default to allow users to enable it for experimentation
+>>
+>> # ls /sys/module/cifs/parameters/
+>> CIFSMaxBufSize    cifs_min_small           enable_oplocks
+>> cifs_max_pending  disable_legacy_dialects  enable_signing_negcontext
+>> cifs_min_rcv      enable_gcm_256           require_gcm_256
+>>
+>> # cat /sys/module/cifs/parameters/enable_signing_negcontext
+>> N
+>>
+>> On Thu, Oct 15, 2020 at 11:50 PM Steve French <smfrench@gmail.com> wrote:
+>>>
+>>>> suggest wrapping this context and the integrity algs in some kind of conditional
+>>>
+>>> I have a couple patches to send the context (which I haven't merged
+>>> yet, because, similar to what you suggested, I wanted to make sure
+>>> they were disabled by default).
+>>>
+>>> Tentative plan was to have them disabled by default, and sending the
+>>> new context can be enabled for testing by a module parameter (e.g.
+>>> "echo 1 >  /sys/modules/cifs/parameters/enable_signing_context"  or
+>>> some similar config variable name)
+>>>
+>>> On Thu, Oct 15, 2020 at 1:15 PM Tom Talpey <tom@talpey.com> wrote:
+>>>>
+>>>> On 10/12/2020 5:50 AM, Aurélien Aptel wrote:
+>>>>> Patch LGTM
+>>>>>
+>>>>> Reviewed-by: Aurelien Aptel <aaptel@suse.com>
+>>>>>
+>>>>> Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+>>>>>> This isn't in MS-SMB2 yet.
+>>>>>>
+>>>>>> Is this AES_128?
+>>>>>
+>>>>> This is returned in latest Windows Server Insider builds but it's not
+>>>>> documented yet.
+>>>>>
+>>>>> https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewserver
+>>>>>
+>>>>> I've asked dochelp about it during the SDC plugfest and they gave me
+>>>>> this:
+>>>>>
+>>>>>       The new ContextType is:
+>>>>>       SMB2_SIGNING_CAPABILITIES 0x0008
+>>>>>       The Data field contains a list of signing algorithms.
+>>>>>       •    It adds a new negotiate context, which enables SMB to decouple signing algorithms from dialects. E.g. if both client and server supports it, a session may use HMAC-SHA256 with SMB 3.1.1.
+>>>>>       •    It adds the AES-GMAC algorithm.
+>>>>>
+>>>>>       SigningAlgorithmCount (2 bytes): Count of signing algorithms
+>>>>>       SigningAlgorithms (variable): An array of SigningAlgorithmCount 16-bit integer IDs specifying the supported signing algorithms.
+>>>>>
+>>>>>       The following IDs are assigned:
+>>>>>       0 = HMAC-SHA256
+>>>>>       1 = AES-CMAC
+>>>>>       2 = AES-GMAC
+>>>>>
+>>>>>
+>>>>> I've been CCed in a Microsoft email thread later on and it seems to be
+>>>>> unclear why this was missed/wasn't documented. Maybe this is subject to
+>>>>> change so take with a grain of salt.
+>>>>
+>>>> Just curious if you've heard back on this. Insider builds will sometimes
+>>>> support things that don't make it to the release. Even Preview docs can
+>>>> change. However, AES_GMAC has been on the radar since 2015 (*) so
+>>>> perhaps the time has come!
+>>>>
+>>>> I'd suggest wrapping this context and the integrity algs in some kind of
+>>>> conditional, in case this is delayed...
+>>>>
+>>>> Tom.
+>>>>
+>>>> (*) slide 29+
+>>>> https://www.snia.org/sites/default/files/SDC15_presentations/smb/GregKramer_%20SMB_3-1-1_rev.pdf
+>>>
+>>>
+>>>
+>>> --
+>>> Thanks,
+>>>
+>>> Steve
+>>
+>>
+>>
+>> --
+>> Thanks,
+>>
+>> Steve
+> 
+> 
 
