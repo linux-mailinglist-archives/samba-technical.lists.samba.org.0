@@ -2,49 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A32AA290CB5
-	for <lists+samba-technical@lfdr.de>; Fri, 16 Oct 2020 22:25:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DE7B290CCB
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Oct 2020 22:37:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=3hdm7vAzJ0zR8kC6ye+KrGlAtXo+AhxRTyFvEGvw74s=; b=199pD8Om4FH7y15THDXM6ZTRBI
-	eqzEBLWA5Lk+IaO5ONiTJReGWxhh+hG9gqJYQ6cXHXsqNQds/RKARB7jkzTNsnxAZpg7wlLkKR+GD
-	kBUorjzDLYlFiPATFCf1jajItzi0dCbokE9yCWoFJH609PeAZgXCZxakTPRv6h+9p4wJNV6FC9OTP
-	g1BJ1qMcptzdQ2dDTkONEtL+3Zy49qiIUB9A0+4/VKFYvrHLRZLA/c6HC18Z35Ps3k80HQLhORFv6
-	FhysCvH1UeR+2Ixecijgo0sFkTWZ16lT6J8IumfgD3/048EO/1R3jT7zISR/qVOH3yF0hF8ZhG/vv
-	yU4paoPg==;
-Received: from ip6-localhost ([::1]:64368 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=VXX0eZNgp+rW8hV361dvbb3zrSI79QUGKI/DD3PS6aU=; b=z9m44yflmojqM0DoXkBuvy/J0D
+	iFt2uEUabCdP/wnPFoIoC65lRDqyEZLevVWuWyTnxQC2bnHnCmcXKpovK2CtV50hMqLGyjuDSVejf
+	+kysoZA3nhOK3UcA8zEnQsjrRoRbJB8C6cgeyrdIJmNCDRIWVxSIjajVofXM5jnYOKaV/ahHV2MNg
+	mOGgya6mSb4bWnn7TDqWX7w++uE4YkEcfWFf56Ea/Vf1uTfvIEcLmqDLGa7PKWZDDOo9rLX8p224O
+	vkR8SuWwBCWbJB6LieHggUE5cgDCLKZwbHjAmB+7aaw/GINGHw5uGiCJjRNYjCOmpOX+AAMxVthaL
+	JIc7n5Vg==;
+Received: from ip6-localhost ([::1]:19822 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kTWIC-00CSRa-KJ; Fri, 16 Oct 2020 20:25:36 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45478) 
+	id 1kTWTX-00CSrj-2m; Fri, 16 Oct 2020 20:37:19 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49890) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kTWI8-00CSRT-Bb
- for samba-technical@lists.samba.org; Fri, 16 Oct 2020 20:25:34 +0000
+ (Exim) id 1kTWTR-00CSrb-F1
+ for samba-technical@lists.samba.org; Fri, 16 Oct 2020 20:37:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=3hdm7vAzJ0zR8kC6ye+KrGlAtXo+AhxRTyFvEGvw74s=; b=FQ2Fi1BM+KHKqUK6ds/FtKwNd0
- nLkknFIxzsAuK4NggghIMIsOPrMoZlypuSpimX/2ZRF4nVfJhZk6M87yHx9ACWAGVpwYeEZjiKlfO
- 46QqoLEtkwQV8A7wRyQ6Zv0JnKAVYs2+AZwTJR613+dkdAio07CFBXgeM2qQzyJz5ksKFa6FcnsiB
- U2wz1DBOhBs0SEiK/4l7pgSZO1cONc4Cv/IkXOKw6V4y8KYjshOsPeXz2birrZul6ggwNT8fmuxKa
- RNu8H4m5rjIuu9KhzjUi0zp2lmGxhfOZMnWDWMTgGMgZoAE9ngptLeqc/UUMk6fGFY+aLitYlMdIN
- Dnso6RBWH4CE4L4oqS9TSmxbZ5QeSqxRFG/1gZ4FCx7zrRGWhqPvR01NZ/FdQuqc4gfP85IHm+Ojd
- ry/5KhT7zrQFTRF3aX+ffcOLAf7fod4MjKJMeLMwezPa95EDyiE2Hq6/Y6+6N1thMqXaUL+aNOgKa
- M5d9n9noiP/FtLn5ijlqgCLf;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=VXX0eZNgp+rW8hV361dvbb3zrSI79QUGKI/DD3PS6aU=; b=N/OrAN+jb+VYzqIF4gL7VrJJDx
+ u9O8wrnntuavP3iJ/ZW7o3UpR3igDeAZyJVK2YvE0AuqnawY6Je5C6rrpW8DWw6S5hZ8L0UU2VOOP
+ k45lLBKcJDCd4YeDofOPfzKfRqSiiuAf27+MezjRKzqikvnnJrPZ+clMuFzg4O9Y6JMln61OCwfWt
+ enI7N6wqYmgUpp7LAtsty1oBjnYe1fWBAnGRkOMtJm1h1A1/8dqY3wgnleHalShvOIYlqJWaDqUHn
+ B9xeQf2kDvkD5v935FmLyTdjbWCVf2fwd9DR9xuLgYgNoW5p/Y+ONiR4YdPZFiI6ZMontEEF2zOw9
+ a2ojVcPg7BZpKgaoGkKWl2SlCdesWdxotPGJttJmE3XgBZuoD+qY7oMr3UhPCrQPRF8PIty+E4TCl
+ ixHx/ZkN6JCQUewS7YN+zOd1fHAF9eaFsXgsQjy/iusb2tw3iSHF31lse9S9/grik8BT57aB3e4TK
+ 84ieMV868irKB6x6fwrrxrYT;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kTWI7-0006OG-Mw; Fri, 16 Oct 2020 20:25:32 +0000
-Date: Fri, 16 Oct 2020 13:25:28 -0700
-To: Arran Cudbard-Bell <a.cudbardb@freeradius.org>
-Subject: Re: talloc: talloc_set_memlimit causes all reallocs to fail when
- used on pools.   talloc_set_memlimit not enforced correctly on pools.
-Message-ID: <20201016202528.GF67086@jeremy-acer>
-References: <DA0D6B87-BA18-41EA-8ACE-E431841902FE@freeradius.org>
- <20201016194436.GD67086@jeremy-acer>
- <2B2DBDAF-26F4-4FF4-A2A6-A194F507A352@freeradius.org>
- <E2A6FEEF-3C46-43A6-818C-D226924EB9F7@freeradius.org>
+ (Exim) id 1kTWTP-0006Sh-0Q; Fri, 16 Oct 2020 20:37:11 +0000
+Message-ID: <7330647068a853703f694614e3bdef55978d69cd.camel@samba.org>
+Subject: Re: dns.keytab file
+To: Stefan Kania <stefan@kania-online.de>, samba-technical@lists.samba.org
+Date: Sat, 17 Oct 2020 09:37:04 +1300
+In-Reply-To: <e459994f-01f1-afc6-eb21-7f639f96bf82@kania-online.de>
+References: <e459994f-01f1-afc6-eb21-7f639f96bf82@kania-online.de>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <E2A6FEEF-3C46-43A6-818C-D226924EB9F7@freeradius.org>
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,34 +55,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Oct 16, 2020 at 03:04:36PM -0500, Arran Cudbard-Bell via samba-technical wrote:
+On Fri, 2020-10-16 at 21:42 +0200, Stefan Kania via samba-technical
+wrote:
+> Hello,
 > 
-> As for what the semantics should be, I was thinking that, yes,
-> a pool in its entirety should be included in the memlimit calculation of
-> its parent chunk, but if a memlimit is set on a pool directly,
-> only the memory used by the children should be included in the
-> memlimit check.
-> I didn't get far enough into the code to see how many assumptions would be broken by this.
+> is there a reason why there is no /var/lib/samba/bind-dns/dns.keytab
+> on
+> any other then the first DC in a domain? The first DC has two
+> dns.keytab
+> files (/var/lib/samba/private/dns.keytab) and
+> (/var/lib/samba/bind-dns/dns.keytab). All the following DCs have only
+> the on in /var/lib/samba/private, also the file-permissions for the
+> bind9 are wrong on any other then the first DC. Up to this point I
+> copied the file and changed the permission manually, but now I try to
+> setup all DC via Ansible and I have to create more tasks depending if
+> it's the first or second ... DC.
+> 
+> So is it a bug or a feature
 
-All of them I'd guess :-).
+I just saw this with a customer yesterday.
 
-> An alternative that'd still satisfy our immediate need would be to have talloc_set_memlimit simply fail when someone tried to apply it to a pool (as you suggested), and add an optional flag that'd prevent allocations from occurring outside of the pool.
+Bug.  Clearly the first and subsequent DCs should be as similar as
+possible.  
 
-Please wrap your responses to 80 columns :-). Makes
-quoting your replies really hard :-).
+It seems the move to bind-dns was not complete.
 
-What you're asking for is more complexity in an
-already overly complex part of the code (which
-to be honest I wasn't even sure people were
-using :-).
+Andrew Bartlett
 
-I think you can do what you need by allocating
-a pool as a talloc child of a context, and setting
-the memlimit on the that context.
+-- 
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
+
+
 
