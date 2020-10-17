@@ -2,62 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC85E290E70
-	for <lists+samba-technical@lfdr.de>; Sat, 17 Oct 2020 03:20:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA0A6290E95
+	for <lists+samba-technical@lfdr.de>; Sat, 17 Oct 2020 04:54:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=JsULW323fD3lC6ysP92ve7AgTmVWyOAltD4KHVkWUNw=; b=hMu9ncPhke9MrLPKbHDDCp9Y7J
-	/LFFOPrQ5nYgGdGhRUEpcp3SYcpQmiJQ21D7EYg4VxSEAuwtJafbin+V0EMNABTFTz6iMiJuCEQ2x
-	RnSw1z1ji5050foGNM+t4gVuyXvtV/vw8aKgnc/m2EzyR9WYhNXMi4TUyiWk/ejCD2nsUDv6HAWMx
-	XW7g+MA66rwYVo8pReUGV1fI3kOuUBVh6KulL7V6MFhtoHQWR+5LxJssesWF84obZUMyth/k7UUwV
-	URNa5kka7CRs1vSjlGNPLD0aK+yL12TgvnAthVnOq2g+ZLDhNE5YbZCMFDRIxXthFGE7V1Un0OBK9
-	81hQzf2Q==;
-Received: from ip6-localhost ([::1]:26632 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=DkyiEIkar+e/EGQbuP9Wz2K+U3enDXkmeJpss4VV1AU=; b=vuEVjHU+lqiztKaiNK+ZifJSq6
+	ai/wIgl/q/pfvWiJMLGYHAenTBjuG/g22qAYR7WBZ9qnopt70981qya9UDj5LwwOmsp/g6vLhpUVt
+	rW9Hzko0kFrRJ2EMXj1d0NJSMmAkGJXy56DiF0eMKztYy4E0MfCyVzj9td3DbzBBipdhYf9po9Qcg
+	qybXaIAIGyht3ZPgXhug86DZ6GsjgYRl9xwVihCRVB6JHXQWUab4eqtl1fgLpAxyOhZuYAaURxStD
+	yJNDsphsva3Pt443B8Xskx4XZ6MEseYZOeAk+4ITHmuH6hFncxVZAii2+28VlMMBQL0VCJoHm02jT
+	lSRnGmmQ==;
+Received: from ip6-localhost ([::1]:27410 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kTatJ-00CUD6-VC; Sat, 17 Oct 2020 01:20:14 +0000
-Received: from bedivere.hansenpartnership.com ([96.44.175.130]:46838) 
+	id 1kTcM5-00CUQX-0u; Sat, 17 Oct 2020 02:54:01 +0000
+Received: from pine.sfconservancy.org
+ ([2001:4801:7822:103:be76:4eff:fe10:7c55]:38038) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kTatD-00CUCz-Th
- for samba-technical@lists.samba.org; Sat, 17 Oct 2020 01:20:10 +0000
-Received: from localhost (localhost [127.0.0.1])
- by bedivere.hansenpartnership.com (Postfix) with ESMTP id ACE1412800A4;
- Fri, 16 Oct 2020 18:20:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=hansenpartnership.com;
- s=20151216; t=1602897603;
- bh=Q9Skzg0MaFvgxNHLwEnXmme9gFK/1DugMgElP2BdHHk=;
- h=Subject:From:To:Date:In-Reply-To:References:From;
- b=u6skfCbPbT8KQIDqEiJivP/EnGiTaEIyqb46GlVVQRzffeh090blK/E2XlpMe3wam
- z3x/IR6Hz6XB+iXgv9lnsiHsKgCWkPB34NkM7nILE+jY6A7BsboSBm/RyITBCzfEhZ
- NUgFSYkhOwXAMPZTuZ5DqatGV80Y+/imclAuQhQg=
-Received: from bedivere.hansenpartnership.com ([127.0.0.1])
- by localhost (bedivere.hansenpartnership.com [127.0.0.1]) (amavisd-new,
- port 10024)
- with ESMTP id QBZDOTVyTg_y; Fri, 16 Oct 2020 18:20:03 -0700 (PDT)
-Received: from jarvis.int.hansenpartnership.com
- (c-73-35-198-56.hsd1.wa.comcast.net [73.35.198.56])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by bedivere.hansenpartnership.com (Postfix) with ESMTPSA id 4285512800A2;
- Fri, 16 Oct 2020 18:20:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=hansenpartnership.com;
- s=20151216; t=1602897603;
- bh=Q9Skzg0MaFvgxNHLwEnXmme9gFK/1DugMgElP2BdHHk=;
- h=Subject:From:To:Date:In-Reply-To:References:From;
- b=u6skfCbPbT8KQIDqEiJivP/EnGiTaEIyqb46GlVVQRzffeh090blK/E2XlpMe3wam
- z3x/IR6Hz6XB+iXgv9lnsiHsKgCWkPB34NkM7nILE+jY6A7BsboSBm/RyITBCzfEhZ
- NUgFSYkhOwXAMPZTuZ5DqatGV80Y+/imclAuQhQg=
-Message-ID: <2610e928f744fff79d500a5c964f42ffc9650cf3.camel@HansenPartnership.com>
+ (Exim) id 1kTcLu-00CUQN-Oh
+ for samba-technical@lists.samba.org; Sat, 17 Oct 2020 02:53:57 +0000
+Received: from localhost (unknown [216.161.86.19])
+ (Authenticated sender: bkuhn)
+ by pine.sfconservancy.org (Postfix) with ESMTPSA id 53691EA8C;
+ Sat, 17 Oct 2020 02:53:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=sfconservancy.org;
+ s=pine; t=1602903209;
+ bh=Fin7NYC94qEzw0nG3Un0Om1jEiE6uvrSjWYGrUVn2X8=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=V5fPrduuPnIirDTMfHzOc4T23ZPDmkKVzkO9qy6+NItj5rULgcnXB7SQ5AU2y9+57
+ vWUWiMnjYBNmItGBarB5viSFne8IDhV7AR1SI0tss328HnsOio8TSqQfilO10ess4S
+ LBrhzlDBS9v+DQknfNpjPsaYhP8oBUyLe13miLpFLdum7PiA60KPXSTjmSmpSIlt3C
+ ghK10jeXYagANeWHegsX/Y9tLDeybPs1lLjjK1MtCDZ9q3I6C03DcbyjVpX8+2FLwZ
+ lbHjZ5VayrTmwmuUbv9L7qMViTXz0/LniYRKQXvTtw6ZyEQTTzyOkEDS1F+9E1x58X
+ WiNg2TpJ5Uo2Q==
+Date: Fri, 16 Oct 2020 19:38:40 -0700
+To: samba-technical@lists.samba.org
 Subject: Re: Clarification around the DCO
-To: Jeremy Allison <jra@samba.org>, Greg Kroah-Hartman <greg@kroah.com>, 
- Mike Dolan <mike.dolan@gmail.com>, samba-technical@lists.samba.org
-Date: Fri, 16 Oct 2020 18:20:02 -0700
-In-Reply-To: <20201017005611.GB360279@jeremy-acer>
+Message-ID: <20201017023840.GA344206@ebb.org>
 References: <a4f34abf8b943b01e0f982e21fe1518009fcc556.camel@HansenPartnership.com>
- <20201017004357.GA360279@jeremy-acer> <20201017005611.GB360279@jeremy-acer>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.34.4 
+ <20201017004357.GA360279@jeremy-acer>
+ <20201017005611.GB360279@jeremy-acer>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201017005611.GB360279@jeremy-acer>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,103 +59,60 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: James Bottomley via samba-technical <samba-technical@lists.samba.org>
-Reply-To: James Bottomley <James.Bottomley@HansenPartnership.com>
+From: "Bradley M. Kuhn via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: "Bradley M. Kuhn" <bkuhn@sfconservancy.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2020-10-16 at 17:56 -0700, Jeremy Allison via samba-technical
-wrote:
-> On Fri, Oct 16, 2020 at 05:43:57PM -0700, Jeremy Allison via samba-
-> technical wrote:
-> > On Fri, Oct 16, 2020 at 04:59:20PM -0700, James Bottomley via
-> > samba-technical wrote:
-> > 
-> > > We'd also be very interested in bringing Samba back into the
-> > > fold of projects using unmodified DCOs.  We now have 17 years of
-> > > operating experience and for every other modification request
-> > > (and there have been many) we've always found a way to add the
-> > > needed clarity to the licence of the file instead of the DCO, so
-> > > we really think we could help you make this work for Samba as
-> > > well.  It would be really great if we could work together to do
-> > > this because Samba is the last outlier using a modified DCO and
-> > > with it brought inside the fold we'd have a unified front against
-> > > the various CA/CLA abuses corporations try from time to time.
-> > 
-> > I'm not averse to moving to your "standard" DCO, so
-> > long as it doesn't mean chasing down everyone to
-> > re-submit :-).
-> > 
-> > Otherwise, renaming ours to "Samba Developer's Declaration"
-> > might seem to work also (with proper (C) attribution
-> > added of course).
-> 
-> Ah, I've just remembered *why* we have a difference from
-> your "standard" DCO text.
-> 
-> In our text we have the clause:
-> 
-> "(e) I am granting this work to this project under the terms of both
-> the
->     GNU General Public License and the GNU Lesser General Public
-> License
->     as published by the Free Software Foundation; either version 3 of
->     these Licenses, or (at the option of the project) any later
-> version."
+Jeremy Allison via samba-technical wrote:
+> Ah, I've just remembered *why* we have a difference from your "standard"
+> DCO text.
 
-OK, so legally LGPLv3 and GPLv3 are the same licence: LGPLv3 is GPLv3
-with an additional permission.  Your clause (e) effectively requires
-GPLv3 with the additional permission on every contribution.
+Yes, a tremendous amount of time and effort went into figuring out the right
+policy for Samba with regard to contributor licensing.  Some of those
+details were reported publicly, and some were reported privately to the key
+folks in Samba.  I myself put in many hours of work on this, as
+did many other Conservancy staff, lawyers and Samba volunteers.  Nothing has
+changed with regard to the analysis.  We also had a private discussion at a
+developers' meeting at a Samba XP about the reasoning, IIRC.
 
-> The reason for this is that Samba as a whole is under
-> GPLv3, but there are many useful libraries within Samba
-> (talloc, tevent, tdb etc.) that started life as an integral
-> part of Samba - so GPLv3, but then external projects wanted
-> to use them without being bound by GPLv3 terms, so asked
-> us to re-license under LGPLv3.
+Obviously, if Samba wants to redo that analysis at this time, we'll do what
+needs to be done to help Samba as a member project.  But I don't see any
+reason given here to redo that work.
 
-Right so what you really want is some event to trigger the addition of
-the permission that changes the licence from GPL to LGPL.  This more or
-less is why the apache model is broad inbound grant coupled with
-licensing by the project board to the contributor, so the board
-decides.  Without this governance trigger effectively the whole of
-Samba is LGPL because every contribution was required to have the
-additional permission.
+I already made a merge request days ago about changing the name and there is
+a thread discussing that (but consensus hasn't been reached).  The name
+really doesn't matter, but the content of the terms certainly do.  What works
+for Linux as a project doesn't work for everyone.  One size doesn't fit all.
+James has every right to his stated agenda of getting the whole world to use
+the unmodified DCO, but the statement that Samba is "outside the fold" for
+failing to use the specific terms is just rhetoric.  Samba doesn't use
+Linux's license (GPLv2-only) either, and is unlikely to want to switch to
+GPLv2-only.  But changing your contributor licensing terms is as big a
+change as changing the license of the project itself.  It's not usually
+considered particularly friendly for folks outside a project to come by and
+ask for the project to change its license details.
 
-Obviously, a lot of open source projects don't like the apache inbound
-!= outbound model (and don't have a real governing board), so something
-else has to be the trigger.  The model I've always liked is all code in
-X (usually lib/) is under the LGPL, so the trigger is accepting a patch
-moving the code under X.  You can see this with the efitools project,
-which is under GPLv2 but shares its lib/ code with shim, which is under
-BSD-2-Clause.  This is how the licence of efitools copes:
+Finally, changing the *name* of your developer representation statement and
+its *contents* are very different discussions and should not be conflated.
+The former is an easy change and purely cosmetic.  The latter is hard and will
+change policy and legal outcomes for Samba.  IANAL and I'd want Samba to get
+confidential legal advice from a lawyer that represents Samba's interest (as
+it received back in 2013) before making the latter change.
 
-https://git.kernel.org/pub/scm/linux/kernel/git/jejb/efitools.git/tree/COPYING
+I suggest the community first consider the name change and execute it, and
+then only after that's done consider whether the contents need to change.
 
-The trigger is very rudimentary and hasn't really been changed for 8
-years, so perhaps we could craft something better for Samba.
-
-> We have done this for a number of our libraries, and will
-> probably do this for more in future (I'm expecting our
-> async LDAP library tldap will eventually be requested
-> to be moved to LGPLv3 once it's matured enough).
-> 
-> Doing it without clause (e) is a pain, as we have to
-> track down all contributors and check if this is OK.
-> 
-> With our clause (e) it allows us to re-license more
-> permissively as required without the burdon of tracking
-> down all contributors.
-> 
-> Hope this explains things better. I doubt you'd want
-> something like this inside the Linux DCO (but I'm
-> happy to be proven wrong :-).
-
-Well, I think the efitools model above shows it can be done within the
-DCO framework so I think we have a basis for exploration of whether
-this can work for Samba as well.
-
-James
-
-
+I'd be glad to update my merge request on the name change to a name
+that you all reach consensus on.  I haven't seen anything that indicates
+a name change is mandatory, but it would clearly be a nice thing to do.
+One of my life philosophies is to generally try to do almost anything
+someone requests if it's an easy thing to do and won't cause us trouble or
+substantial extra work.  It's that principle that makes me support the name
+change but oppose changing the contents of the developer representation.
+--
+Bradley M. Kuhn - he/him
+Policy Fellow & Hacker-in-Residence at Software Freedom Conservancy
+========================================================================
+Become a Conservancy Supporter today: https://sfconservancy.org/supporter
 
