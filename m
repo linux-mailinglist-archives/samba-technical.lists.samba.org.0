@@ -2,50 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 961492910A7
-	for <lists+samba-technical@lfdr.de>; Sat, 17 Oct 2020 10:04:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7583C291FE0
+	for <lists+samba-technical@lfdr.de>; Sun, 18 Oct 2020 22:40:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=LuJufiewqnpoaXcjhjerrq7daqNiSXz+wqF9bMcHG0E=; b=yG/ITv0szsD1r/hMdPtqfRM982
-	KGCeVsib9uuCX0VYqNA+gnnT6vzIGYM9hcMpc0ok+mq7XhsNq7VU0ZDskc2PAFj7O5PYDslCr2inc
-	VF/wQ70mUj7A73rXtALcV5VMOPpCp4DRrBHUU6ESplZujguZpBPpUKDnhoyz9V4eWPxIpJ1nofd8J
-	dES86zo0RO7yNAinh+FA8EWMqD+hKA645Z0jEnObxbaRHinilIJxh5FZr1BmJzHswg9V3sGeLr5F7
-	wODR778T8GD4yw9Wkq0TvV1D3Yp27ZbZCrc0DyJv61gaSQxelUUrXljJfx6XL5kYI/W4jPbOE8/fX
-	7IO7lwDw==;
-Received: from ip6-localhost ([::1]:33522 helo=hr1.samba.org) 
+	bh=lLusyL0Rqsb0Moh9tRoetpRfCzolrH2wQFiDbsqetjQ=; b=X0YEgllY561G5vqQmNQNl8tn3b
+	TyKPpQXJgkWEO+Pw9OaKfkv2p0G5QnNfAkPBYOlS/AA/4u00MOvy45jFJNYHWw8eFu2FCWs+/270f
+	2D4LJf8dFibLCK8HysMFBEjiP4yh1367wXo7/Om4yvs0CqWmExH26fAuKs06JpSrLhNnQVyioo+RD
+	bBP0HYBHqBuYSWmJHlyK8hL3F9BtuKlOaSchWKVwP+aIQKzUZhYpXzjAu7bWBRKKKX3ANc/SbpVzX
+	7M+kuH3fDYfl4NmPhNkp2AEdMs1SvkKqOu9f1f7FFy/m/lEAOiGAB3LULGzmf1u4wRBgNSTnipHWr
+	N5TJ41Xw==;
+Received: from ip6-localhost ([::1]:52324 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kThBf-00CVv0-SV; Sat, 17 Oct 2020 08:03:35 +0000
-Received: from plasma33.jpberlin.de ([80.241.58.43]:47693) 
+	id 1kUFSA-00Cbf7-3v; Sun, 18 Oct 2020 20:38:54 +0000
+Received: from bedivere.hansenpartnership.com ([96.44.175.130]:35932) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kThBU-00CVus-Cr
- for samba-technical@lists.samba.org; Sat, 17 Oct 2020 08:03:31 +0000
-Received: from gerste.heinlein-support.de (unknown [80.241.56.124])
- by plasma.jpberlin.de (Postfix) with ESMTP id BF90410170F;
- Sat, 17 Oct 2020 09:47:29 +0200 (CEST)
-Received: from plasma.jpberlin.de ([80.241.56.76])
- by gerste.heinlein-support.de (gerste.heinlein-support.de [91.198.250.173])
- (amavisd-new, port 10030)
- with ESMTP id mNw45YiIOQFe; Sat, 17 Oct 2020 09:47:28 +0200 (CEST)
-Received: from [192.168.123.249] (p5b240703.dip0.t-ipconnect.de [91.36.7.3])
+ (Exim) id 1kUFS3-00Cbf0-Nr
+ for samba-technical@lists.samba.org; Sun, 18 Oct 2020 20:38:52 +0000
+Received: from localhost (localhost [127.0.0.1])
+ by bedivere.hansenpartnership.com (Postfix) with ESMTP id 0BEF41280DE8;
+ Sun, 18 Oct 2020 13:38:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=hansenpartnership.com;
+ s=20151216; t=1603053510;
+ bh=0Cx0b5OzhMJt1ZbCqpYY4qw69qSXvot1y70gFOx1Wyc=;
+ h=Subject:From:To:Date:In-Reply-To:References:From;
+ b=XDN2IOEpyBYlH1oFeghfwUOfUKorSZqwLut/HLqTiVn1RIJT8YreJLj5H38TSlJsx
+ ZTdH+dWaRTghrR0f6jwI5iPfIGq8EGS8UmYHrYJHUSaWDxhhiZU+2AQ3YtkB5SAOY9
+ O1muYBwTkS++LqVYr+4jNq0tae8vRRzRb/3fk99Q=
+Received: from bedivere.hansenpartnership.com ([127.0.0.1])
+ by localhost (bedivere.hansenpartnership.com [127.0.0.1]) (amavisd-new,
+ port 10024)
+ with ESMTP id Lfn6ubCoyCXM; Sun, 18 Oct 2020 13:38:29 -0700 (PDT)
+Received: from jarvis.int.hansenpartnership.com (unknown
+ [IPv6:2601:600:8280:66d1::c447])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (Client did not present a certificate)
- (Authenticated sender: stefan@kania-online.de)
- by plasma.jpberlin.de (Postfix) with ESMTPSA id 172E2100A0E;
- Sat, 17 Oct 2020 09:47:27 +0200 (CEST)
-Subject: Re: dns.keytab file
-To: Andrew Bartlett <abartlet@samba.org>, samba-technical@lists.samba.org
-References: <e459994f-01f1-afc6-eb21-7f639f96bf82@kania-online.de>
- <7330647068a853703f694614e3bdef55978d69cd.camel@samba.org>
-Message-ID: <402fbc72-ea2d-53c0-d8f1-56512aed4f1d@kania-online.de>
-Date: Sat, 17 Oct 2020 09:47:27 +0200
+ (No client certificate requested)
+ by bedivere.hansenpartnership.com (Postfix) with ESMTPSA id A9CBE1280DDE;
+ Sun, 18 Oct 2020 13:38:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=hansenpartnership.com;
+ s=20151216; t=1603053509;
+ bh=0Cx0b5OzhMJt1ZbCqpYY4qw69qSXvot1y70gFOx1Wyc=;
+ h=Subject:From:To:Date:In-Reply-To:References:From;
+ b=QQNpNyySUbuMmPd4WzznU80hAuQK1mDD05N+iwtL5A00+ajbDaKlWmXAZW67jVMUL
+ mzRwzjtuqzNN6F+r3/TmWX4pNzn47xBEoDQ1SzIolqvQ6GCUkBt+uNj+8XwGLkWtqy
+ jO1lXZHeiNvhi+hh0K6zHC95yE7WBg+4M+lWJbv0=
+Message-ID: <5e8a6736aafa2e4a593af2ee79451cc62a283818.camel@HansenPartnership.com>
+Subject: Re: Clarification around the DCO
+To: "Bradley M. Kuhn" <bkuhn@sfconservancy.org>, 
+ samba-technical@lists.samba.org
+Date: Sun, 18 Oct 2020 13:38:28 -0700
+In-Reply-To: <20201017023840.GA344206@ebb.org>
+References: <a4f34abf8b943b01e0f982e21fe1518009fcc556.camel@HansenPartnership.com>
+ <20201017004357.GA360279@jeremy-acer> <20201017005611.GB360279@jeremy-acer>
+ <20201017023840.GA344206@ebb.org>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.34.4 
 MIME-Version: 1.0
-In-Reply-To: <7330647068a853703f694614e3bdef55978d69cd.camel@samba.org>
-Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="------------ms080306030008050202080404"
-X-MBO-SPAM-Probability: 
-X-Rspamd-Score: -2.28 / 15.00 / 15.00
-X-Rspamd-Queue-Id: BF90410170F
-X-Rspamd-UID: fcabc0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,112 +72,102 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Kania <stefan@kania-online.de>
+From: James Bottomley via samba-technical <samba-technical@lists.samba.org>
+Reply-To: James Bottomley <James.Bottomley@HansenPartnership.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a cryptographically signed message in MIME format.
+On Fri, 2020-10-16 at 19:38 -0700, Bradley M. Kuhn via samba-technical
+wrote:
+> Jeremy Allison via samba-technical wrote:
+> > Ah, I've just remembered *why* we have a difference from your
+> > "standard" DCO text.
+> 
+> Yes, a tremendous amount of time and effort went into figuring out
+> the right policy for Samba with regard to contributor
+> licensing.  Some of those details were reported publicly, and some
+> were reported privately to the key folks in Samba.  I myself put in
+> many hours of work on this, as did many other Conservancy staff,
+> lawyers and Samba volunteers.  Nothing has changed with regard to the
+> analysis.  We also had a private discussion at a developers' meeting
+> at a Samba XP about the reasoning, IIRC.
 
---------------ms080306030008050202080404
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Content-Language: en-US
+In legal terms you usually really, really don't want to be special
+because it causes all sorts of complications if there's any litigation.
+This reasoning lies at the heart of our desire to move the DCO beyond
+the kernel, because if we keep it to the kernel it becomes our legal
+specialness problem in the same way.
 
-Hi Andrew,
+> Obviously, if Samba wants to redo that analysis at this time, we'll
+> do what needs to be done to help Samba as a member project.  But I
+> don't see any reason given here to redo that work.
 
-Am 16.10.20 um 22:37 schrieb Andrew Bartlett:
-> I just saw this with a customer yesterday.
+In 2013 there was only one other of these LGPL/GPL migrating
+permissions under DCO solutions, but even then I don't think your
+analysis found it?  Now with the expansion of the DCO system there are
+several, all still using unmodified DCOs and seven years later also
+with a reasonable history of operation.  Since none of this was
+included in the original analysis, isn't it worth considering now?
 
-I see this every time I setup a new domain, I also wrote it into my
-Samba4 book. If it's a bug should I write bugreport?
+> I already made a merge request days ago about changing the name and
+> there is a thread discussing that (but consensus hasn't been
+> reached).  The name really doesn't matter, but the content of the
+> terms certainly do.  What works for Linux as a project doesn't work
+> for everyone.  One size doesn't fit all.
 
-Stefan
+In some ways the DCO is still an experiment that we're gathering data
+on, but the data do seem to say that apart from Samba it does actually
+work for everyone else.
 
---=20
-Stefan Kania
-Landweg 13
-25693 St. Michaelisdonn
+> James has every right to his stated agenda of getting the whole world
+> to use the unmodified DCO, but the statement that Samba is "outside
+> the fold" for failing to use the specific terms is just rhetoric.
+
+It's more a statement of the current facts.  However the logic
+underlying it is that by doing something different Samba places itself
+in some legal uncertainty and having a counter example to the standard
+DCO adds a scintilla of legal uncertainty to the rest of the DCO
+ecosystem.  Samba not calling it a DCO removes our side of the
+uncertainty.  Samba adopting the DCO, if the community chooses to do so
+, would remove all uncertainty.
+
+> Samba doesn't use Linux's license (GPLv2-only) either, and is
+> unlikely to want to switch to GPLv2-only.
+
+That's a bit of a red herring: the DCO was deliberately made licence
+agnostic.  It's currently used unmodified in projects using LGPLv2
+GPLv2 only, v2+, v3, Apache and a whole host of other licences.
+
+> But changing your contributor licensing terms is as big a change as
+> changing the license of the project itself.  It's not usually
+> considered particularly friendly for folks outside a project to come
+> by and ask for the project to change its license details.
+
+I can assure you there's no sinister motive.  It's purely what I said
+above: reduction of legal uncertainty for everyone.
+
+> Finally, changing the *name* of your developer representation
+> statement and its *contents* are very different discussions and
+> should not be conflated.  The former is an easy change and purely
+> cosmetic.  The latter is hard and will change policy and legal
+> outcomes for Samba.  IANAL and I'd want Samba to get confidential
+> legal advice from a lawyer that represents Samba's interest (as
+> it received back in 2013) before making the latter change.
+
+Our expectation is that Samba can update the licence in some files (so
+there would be some file patching to be done) and slide in a standard
+DCO without any change in effect on the current or prior project
+contributions, but obviously everyone needs to be comfortable that this
+is the net effect.
+
+> I suggest the community first consider the name change and execute
+> it, and then only after that's done consider whether the contents
+> need to change.
+
+As I said to Jeremy, mature consideration is definitely required and
+we're not trying to rush anybody into this.
+
+James
 
 
-Signieren jeder E-Mail hilft Spam zu reduzieren und sch=C3=BCtzt Ihre Pri=
-vatsph=C3=A4re. Ein kostenfreies Zertifikat erhalten Sie unter https://ww=
-w.dgn.de/dgncert/index.html
-
-
-
-
-
---------------ms080306030008050202080404
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
-CdEwggSUMIIDfKADAgECAggL+8ksx5aHiTANBgkqhkiG9w0BAQsFADBmMQswCQYDVQQGEwJE
-RTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJI
-MSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBOMB4XDTIwMTAxNTE2MDkzM1oX
-DTIxMTAxNTE2MDkzM1owbjELMAkGA1UEBhMCREUxITAfBgNVBAUTGDQwMDAwMDAwNWY4ODc2
-OWIwYTNhZjcxNDEVMBMGA1UEAwwMU3RlZmFuIEthbmlhMSUwIwYJKoZIhvcNAQkBFhZzdGVm
-YW5Aa2FuaWEtb25saW5lLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA42PN
-0u00/wwTf/+ER8qPo5xxrXXGf8cFzqPfgtyC037p3qW9EBI3NtoX4uehmKxwZczuad5N9liZ
-oG1JwRkgoxSLJ0OSRhnWtbZete1UAASxb1JxkBo7mgvmdTLBpSGv+szqxwmpehBj3jz4Ffyc
-lL6JL099HxdhQRU3/fhHR0yfaLhyddmLtApqs2GKaq7tn4ijLyuUdXCojFrd5hD+AQZQSSUt
-sZRNel9u8YyY4s6FN8vJpjpVpIBJJPSKpRSo8t9ZFuR4W2BxNEEhi3f8XVw297fP1eM3gSve
-99HXz6BNhEN1FMaYb02yEFfktm2TJU0QB2zSdB5PhzXhp9RfPwIDAQABo4IBPDCCATgwHQYD
-VR0OBBYEFPVK3SYo2pbp3ETML1E4uO+cyxDHMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAU
-6caT0dUPBmRy6mqWProQ8lRUsnkwVgYDVR0gBE8wTTBLBgwrBgEEAfsrAgEDAggwOzA5Bggr
-BgEFBQcCARYtaHR0cDovL3NlYzUuZGduc2VydmljZS5kZS9wb2xpY2llcy9pbmRleC5odG1s
-MD4GA1UdHwQ3MDUwM6AxoC+GLWh0dHA6Ly9zZWM1LmRnbnNlcnZpY2UuZGUvY3JsL2NybDIt
-dHlwZS1lLmNybDAOBgNVHQ8BAf8EBAMCBLAwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUF
-BwMEMCEGA1UdEQQaMBiBFnN0ZWZhbkBrYW5pYS1vbmxpbmUuZGUwDQYJKoZIhvcNAQELBQAD
-ggEBALA4QXXB+Cg9ekdIqZ+/dyvg72AwpZNjWg0eILKUIkOLq5eYdlAr29rV9KD2OmCHtmR9
-VXslKshzBcl59ZW23tifmgxAYlr7SQ5/TMWEwTPRAVidDL+KsWiCNsS1oGVbB598YhKQjNo2
-zMata6Xmhy3T67L9K+jpxK7TcBxHf7vRcLgoZIPH7E0EZ0eR8KIhTHid2HeNV8syDm7E35nS
-YtdtlXSFli8fU410lIRtgBsAD54fqIf9jN9c62mXURNkLRSgcNG1mYzqh0Oeqxy1hIFUiZOB
-RXcKSvGvAV5cNAjZtaVxmtAFxwC3oW1T91ZfzviTZHqRn/wdBydpghnnCZowggU1MIIEHaAD
-AgECAghVHErXZq0l9jANBgkqhkiG9w0BAQsFADBhMQswCQYDVQQGEwJERTEzMDEGA1UECgwq
-REdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJIMR0wGwYDVQQDDBRk
-Z25zZXJ2aWNlIFJvb3QgNzpQTjAeFw0xNjEwMjYwOTIyNDFaFw0yNDEwMjYwOTIyNDFaMGYx
-CzAJBgNVBAYTAkRFMTMwMQYDVQQKDCpER04gRGV1dHNjaGVzIEdlc3VuZGhlaXRzbmV0eiBT
-ZXJ2aWNlIEdtYkgxIjAgBgNVBAMMGWRnbnNlcnZpY2UgQ0EgMiBUeXBlIEU6UE4wggEiMA0G
-CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDcpfKUP3THo0fSl2bOa6PNbRcDYZaE4ZV3vLGr
-e/U445OsRahORPeP/9L4nycTK6fUawpDTqOaDxtXYxjoJNC9LnKRxVB/UkBf0h25vN0L1iV4
-KhCaY8TimV0z2yUSlb2NuZ4gdBU69qJkasqYj+AP8OcQOo0idj9Nr1eloHD32i0JDPkhBj8V
-f6c6b7mNyn8yfZYvZlzzV2iQ/cvo6iFLx2wgG7mCkOZ8BAHGDFw6T0UIA0Bk60YhRMRxI7GX
-jMxBQA2Y/XXoP4dvQDDtMNmK0r5DUXof87w2brXctuQ2b4xNwFIErVoAQu8ftnXTm9iOtaOs
-WyLMZX6v5szaQBqBAgMBAAGjggHqMIIB5jASBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQY
-MBaAFAEMFht0ctM8FO4md7dJFFPY+4sbMFsGCCsGAQUFBwEBBE8wTTBLBggrBgEFBQcwAYY/
-aHR0cDovL3JvY3NwLWRnbi5kZ25zZXJ2aWNlLmRlOjgwODAvZWpiY2EvcHVibGljd2ViL3N0
-YXR1cy9vY3NwMGoGA1UdIARjMGEwXwYMKwYBBAH7KwIBBAIBME8wTQYIKwYBBQUHAgEWQWh0
-dHA6Ly93d3cuZGduc2VydmljZS5kZS90cnVzdGNlbnRlci9wdWJsaWMvZGduc2VydmljZS9p
-bmRleC5odG1sMIGZBgNVHR8EgZEwgY4wgYuggYiggYWGgYJsZGFwOi8vbGRhcC5kZ25zZXJ2
-aWNlLmRlOjM4OS9DTj1DUkwtMSxPPURHTiUyMFNlcnZpY2UlMjBHbWJILEM9REU/Y2VydGlm
-aWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBv
-aW50MB0GA1UdDgQWBBTpxpPR1Q8GZHLqapY+uhDyVFSyeTAOBgNVHQ8BAf8EBAMCAQYwGwYJ
-KwYBBAHAbQMFBA4wDAYKKwYBBAHAbQMFATANBgkqhkiG9w0BAQsFAAOCAQEAq7w5+kXJ+/xT
-at0jiTX4GDX5HUeQohqAuLGfotHcqQqqjF8G6UUI0q4i0tnhHtldhZrNBOErgThGsToNZ1Y2
-Gn0FRrcrUU9LnhSMwd1XJ0Je6ERSdEh4vXf8YxJQGZJPCPJcrblhue0mmwO9nbhKewGglht5
-VWSHTS8vq5Da3zbxFG6lIdE62V4KqcMAiyY2BfL8guCPscTWl5txJrjb4ENo9nRqdzsXNEG3
-yyzgmyv6znQ4pGgTe5E6qXx5bO6XCDoUK4Kz1S82PzR6hvcxKZo7kKK2ut2B3buwU8xqfw73
-EMH8imv4LW/Sx59wKElKjijjHdNrFG/wMRobDYzMyTGCA4IwggN+AgEBMHIwZjELMAkGA1UE
-BhMCREUxMzAxBgNVBAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2Ug
-R21iSDEiMCAGA1UEAwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIC/vJLMeWh4kwDQYJ
-YIZIAWUDBAIBBQCgggHhMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkF
-MQ8XDTIwMTAxNzA3NDcyN1owLwYJKoZIhvcNAQkEMSIEIBcXv9XBFBSJNEOmhFBFbneFys+8
-ujTD2NnGOG3HudhdMGwGCSqGSIb3DQEJDzFfMF0wCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQB
-AjAKBggqhkiG9w0DBzAOBggqhkiG9w0DAgICAIAwDQYIKoZIhvcNAwICAUAwBwYFKw4DAgcw
-DQYIKoZIhvcNAwICASgwgYEGCSsGAQQBgjcQBDF0MHIwZjELMAkGA1UEBhMCREUxMzAxBgNV
-BAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2UgR21iSDEiMCAGA1UE
-AwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIC/vJLMeWh4kwgYMGCyqGSIb3DQEJEAIL
-MXSgcjBmMQswCQYDVQQGEwJERTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0
-c25ldHogU2VydmljZSBHbWJIMSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBO
-AggL+8ksx5aHiTANBgkqhkiG9w0BAQEFAASCAQBfTTttHcEb2DWMAU6itI3J+l2m5t058hJX
-p67OeI+jsnSWTXDBJervK4p7aVdC8gYNf9UlG/j69ypSthq7LMAX663pAeAd64gwgCVYxeIz
-g/9l2HrA/XRb9IEgL/DVJEmR5pSh7TWHaQR8LzwudK2oZe7efmWLnyA94+xn6fyEabf9Kj0i
-rVy+4sAJ10kpm2XQMInjYM3S22eUbpE3LDYeWNnjpnW2XimgrYPsPj8ZyzNtveaa8MbviioF
-S6lkxwVgI9/5K8bEbZuIpVyEWgGbOBQOAg3prZ5zVq2GjZRnbk0Q0e4PbIVGcnFDsLw0SpZW
-zgYT1vHOQYkSUlmjlo9SAAAAAAAA
---------------ms080306030008050202080404--
 
