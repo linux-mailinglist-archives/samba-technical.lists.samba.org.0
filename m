@@ -2,63 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECA99292097
-	for <lists+samba-technical@lfdr.de>; Mon, 19 Oct 2020 01:21:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D22E42920E3
+	for <lists+samba-technical@lfdr.de>; Mon, 19 Oct 2020 03:40:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=1P75ZhsMcACwsjB0Y05FXkBlNcTcFVCemAEKgDNO9PI=; b=1W0AVuTr40zx+9kokivbaILjRr
-	9KdNoVhFPglz7/uR9wLm9vNQVgF4cRpXRMOwl4mH4PazI6/nL1y7f9AhZQSjScrUtX7n+RD6ssYsq
-	SpcU2Lug7HWR5kV0edJcntadqMM8WW6pGIAXrlZhq8WeFIN67NVyiJFXGTOhi3AI+KBhCIzdUnT0j
-	KH3513VtAyWp3ApFdgTO77GO08fFp3wcKmMfzGw3jwWskdKKt8mqOwGSkhhBnp3rLdT3N0SH4KC/c
-	QVtRYhLebJkYDZWjEowLUrt/RyPFP8iPgJhtyNtCEaxQ9tKcyDwfYBSgwZoPOYNBypqvjdShX7EAj
-	dLA4CY1w==;
-Received: from ip6-localhost ([::1]:20060 helo=hr1.samba.org) 
+	bh=grl+z+4McrBvwh7nbkE6HsK22Ys0qvsAV8HnORt+IGA=; b=33WRl/HdZvCpujz5Zwfxw8ZZwY
+	1lJweiVc5Fay4Qw7IYY40ZUvvohHnV9qq66PMvKQMZEH7c7VefFSqb5K77OOoJhwbX5sEW1nlmNKQ
+	5zJLf+r4R6aCPzQjcgDayyVFice8mXrq1XNuhBQA97pWFGq39CJwS3pBTDCi++Ss8b79VTLS6X5zZ
+	pr50l2Iu+oamEX0rgfBWWrZFtWfSzi4HIdZrnPj5QEuUr4QiG6EummPnPt5E3m08McswLF2K53IOg
+	K/WmqBtjHFLgBwNaXluyCHamxWuwEmNvtpW9hgnPKhYwfZYvER0gR8VFvi9zTtJduJp0p6o/jKVHR
+	haTta+4g==;
+Received: from ip6-localhost ([::1]:20866 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kUHyQ-00Cdti-AE; Sun, 18 Oct 2020 23:20:22 +0000
-Received: from bedivere.hansenpartnership.com ([2607:fcd0:100:8a00::2]:48446) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kUHyB-00Cdtb-GV
- for samba-technical@lists.samba.org; Sun, 18 Oct 2020 23:20:11 +0000
-Received: from localhost (localhost [127.0.0.1])
- by bedivere.hansenpartnership.com (Postfix) with ESMTP id A0C3C128046E;
- Sun, 18 Oct 2020 16:19:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=hansenpartnership.com;
- s=20151216; t=1603063197;
- bh=d9XQH0qN6zXy7szn3zDvlot4T58H9RcPDuIU4ySvZSY=;
- h=Subject:From:To:Date:In-Reply-To:References:From;
- b=DWZd3dyjzWDe0mEAE1Sk8CCApgvWts1nQJ1bd3LFJ9OgTUnCBiuy8TuC8xoKJbdy1
- 2FI5NDkiA9iMWEGK0mRGzjT4IBGZwOMVvtHUIbI6ylJ+YZml3Rc5LCY0bLLGnKOc2s
- rk2CGHJSbi0Dei2Hn5jbFx3+ITKJxL8P0n7l5+H8=
-Received: from bedivere.hansenpartnership.com ([127.0.0.1])
- by localhost (bedivere.hansenpartnership.com [127.0.0.1]) (amavisd-new,
- port 10024)
- with ESMTP id CSUDdgUKLRkc; Sun, 18 Oct 2020 16:19:57 -0700 (PDT)
-Received: from jarvis.int.hansenpartnership.com (unknown
- [IPv6:2601:600:8280:66d1::c447])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by bedivere.hansenpartnership.com (Postfix) with ESMTPSA id 4681F1280456;
- Sun, 18 Oct 2020 16:19:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=hansenpartnership.com;
- s=20151216; t=1603063197;
- bh=d9XQH0qN6zXy7szn3zDvlot4T58H9RcPDuIU4ySvZSY=;
- h=Subject:From:To:Date:In-Reply-To:References:From;
- b=DWZd3dyjzWDe0mEAE1Sk8CCApgvWts1nQJ1bd3LFJ9OgTUnCBiuy8TuC8xoKJbdy1
- 2FI5NDkiA9iMWEGK0mRGzjT4IBGZwOMVvtHUIbI6ylJ+YZml3Rc5LCY0bLLGnKOc2s
- rk2CGHJSbi0Dei2Hn5jbFx3+ITKJxL8P0n7l5+H8=
-Message-ID: <daeb61f4f70d3e1a2c7f9b111e3ba3c2e247371a.camel@HansenPartnership.com>
-Subject: Re: Clarification around the DCO
-To: Andrew Bartlett <abartlet@samba.org>, "Bradley M. Kuhn"
- <bkuhn@sfconservancy.org>, samba-technical@lists.samba.org
-Date: Sun, 18 Oct 2020 16:19:56 -0700
-In-Reply-To: <2b13b0dee1ce4ef9b21825ee38feeca8855747dc.camel@samba.org>
-References: <a4f34abf8b943b01e0f982e21fe1518009fcc556.camel@HansenPartnership.com>
- <20201017004357.GA360279@jeremy-acer> <20201017005611.GB360279@jeremy-acer>
- <20201017023840.GA344206@ebb.org>
- <5e8a6736aafa2e4a593af2ee79451cc62a283818.camel@HansenPartnership.com>
- <2b13b0dee1ce4ef9b21825ee38feeca8855747dc.camel@samba.org>
+	id 1kUK8v-00CeCp-ST; Mon, 19 Oct 2020 01:39:21 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59828) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kUK8g-00CeCh-VU
+ for samba-technical@lists.samba.org; Mon, 19 Oct 2020 01:39:17 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=grl+z+4McrBvwh7nbkE6HsK22Ys0qvsAV8HnORt+IGA=; b=QnW0jUwK9u1P6Gq5i9aHSsuhPe
+ GkPtsvtncVZFv50dfEHhST1vBsjXn83qnaG3O9B6rEPVLRtIWTBtONDSdRnu+P1rPxtqafdoYE9/M
+ +r92EjHkPj68dFtstjgr8XmgQlDw4+bQM6ZUxlc5PKu6LCd/2IWdRAtyjy3UT/c/wWddU5JQWG59z
+ qRBjqfm8j+p0rCJOYam+UUVPhY2JHYpAsjE06lzZyjBd4TIF4k+IvY+herkb+kmzlszjJzpP7p9tn
+ 7At7+Zaobc0Ud/EAmpVFylD9XmEJ/SxctRnTtmJWJw4yTbVr9OUpvRYdygjbVVTbVT7kKK9Ajr1LU
+ 4REyrnOJpibtQfzFmO/vb0SXGJiNLH23+9UfbgKzxC2k5UiaMxGcloZhGNfhptV4dwguFpqxT6lJQ
+ 54cceqVtD4iMERf8aUafcRbHt5Zn/xl3NBvXVZGUJsQg7s2P47+oPPtdvb028hrlvHRIiQGOqLs3f
+ w9+4H+3okuQ+anjORUkevqpZ;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kUK8S-00064s-3c; Mon, 19 Oct 2020 01:38:52 +0000
+Message-ID: <ae44fa9c9693748b66725fda82d0dcfcb78f9484.camel@samba.org>
+Subject: Re: dns.keytab file
+To: Stefan Kania <stefan@kania-online.de>, samba-technical@lists.samba.org
+Date: Mon, 19 Oct 2020 14:38:43 +1300
+In-Reply-To: <402fbc72-ea2d-53c0-d8f1-56512aed4f1d@kania-online.de>
+References: <e459994f-01f1-afc6-eb21-7f639f96bf82@kania-online.de>
+ <7330647068a853703f694614e3bdef55978d69cd.camel@samba.org>
+ <402fbc72-ea2d-53c0-d8f1-56512aed4f1d@kania-online.de>
 Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.34.4 
+User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -74,85 +57,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: James Bottomley via samba-technical <samba-technical@lists.samba.org>
-Reply-To: James Bottomley <James.Bottomley@HansenPartnership.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2020-10-19 at 11:00 +1300, Andrew Bartlett via samba-technical
-wrote:
-> On Sun, 2020-10-18 at 13:38 -0700, James Bottomley via samba-
-> technical
-> wrote:
-> > On Fri, 2020-10-16 at 19:38 -0700, Bradley M. Kuhn via samba-
-> > technical
-> > 
-> > wrote:
-> > 
-> > > Jeremy Allison via samba-technical wrote:
-> > > > Ah, I've just remembered *why* we have a difference from your
-> > > > "standard" DCO text.
-> > >  
-> > > Yes, a tremendous amount of time and effort went into figuring
-> > > out the right policy for Samba with regard to contributor
-> > > licensing.  Some of those details were reported publicly, and
-> > > some were reported privately to the key folks in Samba.  I myself
-> > > put in many hours of work on this, as did many other Conservancy
-> > > staff, lawyers and Samba volunteers.  Nothing has changed with
-> > > regard to the analysis.  We also had a private discussion at a
-> > > developers' meeting at a Samba XP about the reasoning, IIRC.
-> > 
-> > In legal terms you usually really, really don't want to be special
-> > because it causes all sorts of complications if there's any
-> > litigation.
-> > 
-> > This reasoning lies at the heart of our desire to move the DCO
-> > beyond the kernel, because if we keep it to the kernel it becomes
-> > our legal specialness problem in the same way.
+On Sat, 2020-10-17 at 09:47 +0200, Stefan Kania wrote:
+> Hi Andrew,
 > 
-> That is all well and good, but the way this is playing out here is
-> really awful.
+> Am 16.10.20 um 22:37 schrieb Andrew Bartlett:
+> > I just saw this with a customer yesterday.
 > 
-> It would be one thing if somebody, perhaps you, came to our project
-> politely suggesting 'have you considered the benefits of'...
-> 
-> The process here is just rubbing everyone up the wrong way.
+> I see this every time I setup a new domain, I also wrote it into my
+> Samba4 book. If it's a bug should I write bugreport?
 
-I understand, so let me try to explain why this all blew up.  The
-origin is a row on another list which is populated by a load of
-lawyers, a lot of whom are also Corporate Counsels.  This other list is
-governed by Chatham House Rules
+Yes.
 
-https://www.chathamhouse.org/about-us/chatham-house-rule
+Andrew Bartlett
 
-Which forbids quoting what was said and who said it.  However, I'll try
-to describe what happened without violating this rule.
+-- 
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
 
-For background, a large number of corporations, through their counsels
-(who are mostly on this other list), have requested changes to the DCO
-over the years (a lot of which were trying to prevent patent capture). 
-All of which requests we've rejected on the grounds of not wanting to
-cause DCO fragmentation.  On this other lists, there was a discussion
-of the DCO which lead to the implication that we'd authorized Samba's
-change while refusing all of theirs'. We were forced to deny this
-implication robustly in case the other list members got the wrong idea.
-
-Our robust denial got back to the SFC who engaged us privately on this
-topic.   What we actually said to the SFC was we'd obviously done
-nothing about the Samba issue in the past and had no plans do do
-anything now; however, if the SFC could help us engage in discussions
-with Samba, it could potentially lead to a a win-win outcome we could
-report back to the other list.  The SFC told us that actually they
-preferred to let the matter drop.  Thus it was rather a surprise to us
-to find Bradley's patch on the Samba list, but we figured that now the
-situation had been broached we may as well try engaging.  All the rest
-you've seen on the samba-technical list.
-
-If there's no desire here to investigate DCO alignment at this time, we
-can let this aspect simply drop and you can resolve Bradley's patch in
-the way you see fit.
-
-James
 
 
 
