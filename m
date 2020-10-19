@@ -2,55 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DCEA292A89
-	for <lists+samba-technical@lfdr.de>; Mon, 19 Oct 2020 17:36:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35B67292A9B
+	for <lists+samba-technical@lfdr.de>; Mon, 19 Oct 2020 17:42:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=4WE5RfI7AAV+GgOr3UYUMXEckzSshC0y7WabcdHj85g=; b=4nKmDIevzWQERwPRhtf+nesQ1y
-	cl5gD5Q8/pxWj1HO2CNyyc+TL3l439xhgwTnjQbXf8AS8bIZnPnA+Sd6ecVfvZeIxJ4E80Lq6m72Y
-	aG7H0DQew5ZbzaerferiJOEe1/gr1YK7t4P9ieO0XY5xrnbKhpvI3L5+mzJZ+1SX1isu2UW3GcNuf
-	6jDERBywc5QHwKyL+4M6G2PQneHOQ71ppV3lH/r4CgnXJpOvmsSADnF9AzFSkPtg3mDnrAMOXdk65
-	du+H8n92nBXHBvK1jsRaiUGhfOvBqwuzWyfTVI48oFL3ydM9/hbTNnEl6Hz1UUBycAzB2dZBfGxCM
-	WN5HxDSw==;
-Received: from ip6-localhost ([::1]:55230 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=Zng3WFoYCheeBdBL9sLxNAmiySNWM+/vKqhwiIjYC4Q=; b=v78br4VlRe8ABGuNm9XM8FhdSW
+	ffdO2y3wpFZ057PsrdWk3Pp/08/+8Dz+0BMwvcDJm0uUwgTAC9fWmHHc0eq5IOHXTRRrR1F4idqnb
+	rz3snobDrZ1n1UCaGjhHX5hOxRvlFC0Xqf+TI/2h1y7sjFYGV/enoRQPLsqoCgU3+P62MyuioZD9W
+	veQkFtp2b2Piz8SL2RYS6F0fa3eaf2LwzH9QPWiFbCYX2RTvL9tvqORwa+bLv3Rmy66HIQkQThcnk
+	MGG05I1z4BFV/J2cRpZTaycKDxTEb2cj7VuqE4v+6oRagFIQyGvlmrlFJUeGSzW1BJnaCy1z8NMWA
+	b0kQDd7A==;
+Received: from ip6-localhost ([::1]:55942 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kUXCs-00CkBJ-VO; Mon, 19 Oct 2020 15:36:19 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38298) 
+	id 1kUXIa-00CkHk-R0; Mon, 19 Oct 2020 15:42:12 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40254) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kUXCo-00CkBC-0t
- for samba-technical@lists.samba.org; Mon, 19 Oct 2020 15:36:16 +0000
+ (Exim) id 1kUXIV-00CkHd-Ot
+ for samba-technical@lists.samba.org; Mon, 19 Oct 2020 15:42:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=4WE5RfI7AAV+GgOr3UYUMXEckzSshC0y7WabcdHj85g=; b=fGzmDRSnNX7NTut6Je+O+iESIP
- kkGW2FuUkEbcnNXX5A7NxeryFR+fYutsoSI+CZcoAw36I7O3ZUjxuNsBJhza4fHC8aEpY5I517s4i
- TnHrMPnE+pveA+bdusycoNK0JlKtkhlrzAACzfPIkK3MpsqW6g+QpfVBrO4fP+NnYyW6tpFsgsOCj
- EECpe0AltwaAOCH4P+uEIeoECnmlVsXxa1kL6IFz3B0HeJqG6xrGlvRzD+krCL4wgDyAMs+4MKJET
- EOtbSjYnULfffEkQrR17Nbjbig0yJ36Flxz0WcBnHL9/JqUTW8TmBQ/cPMtFxcnxEykWfCgvCcrDx
- ghhwb7gDYX5d/VxDwAFW8uFu1fn4WgfFVf8VBzRVb/YwRH4ZpGl8FGQA4odslGdbvnid6RmOIqH9g
- 0rtfpXXoFjpjxyF7Yg79FKdNWx4ca64g6re6g66c12abVH3l6+tQ7RSCD1fwshLwmK7Ag0UPJp5d/
- kG3AtrbR0aT+C5eHDnw+9uDr;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=Zng3WFoYCheeBdBL9sLxNAmiySNWM+/vKqhwiIjYC4Q=; b=Ma007CR7cElUKcUq+d6S56BExJ
+ Sq7ijyoAoPfDE54mN4WUrs0u8y1kV+EOIdelyhEN5QgXflIFnJdW4O4VvBhq81wmO/aswztojHyYL
+ wlZ/d74ynwg0LRznDNr8A3hDjk1EYAfeY148Hl83UbxOPxMkgo1KWbu5NwhK0ml5VKGDf8ezXH6s7
+ KEx+vNXGDwjBtNxdy7mNGef7YrDP23DCoc7nshJZxXSfBq2hC+o4g5d0wk81sCZhSE1j6Rhz5sgVH
+ fyloTH/0DJQ/+CGy24aNH40xx/eSjg0nVsh8lnwZUpP4Vb6I/9WxElL69fXD4cvIK9+rTUijLXybt
+ CDmPPIFyb+cAXeQ+lQJjjxZIPDLWIwNL3qGRMnpBrTi7IVsKPOWMsQQo2jsse++/RdvAGwrmEBgFl
+ uC92xrEJ4M63nltSXxXyDFVnzs3zxff3IIhBT+Xkn+GLwJWeTC8XsqCPfajFsfuxJmKsl6o1hwtED
+ 6rbruOM/+xqItUQjRKFTlvBy;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kUXCn-0005G4-3Z
- for samba-technical@lists.samba.org; Mon, 19 Oct 2020 15:36:13 +0000
-Subject: Re: dns.keytab file
-To: samba-technical@lists.samba.org
-References: <e459994f-01f1-afc6-eb21-7f639f96bf82@kania-online.de>
- <7330647068a853703f694614e3bdef55978d69cd.camel@samba.org>
- <402fbc72-ea2d-53c0-d8f1-56512aed4f1d@kania-online.de>
- <ae44fa9c9693748b66725fda82d0dcfcb78f9484.camel@samba.org>
- <7214e13f-009e-5022-cd93-b7f0468c87a7@kania-online.de>
- <37aabade-4f82-1783-7cd3-53fc12c48308@samba.org>
- <d13637c0-cfbe-c49e-6d1b-3e4c12d02843@kania-online.de>
-Message-ID: <bed333b4-1f36-bb10-5de9-4833a68ebe3b@samba.org>
-Date: Mon, 19 Oct 2020 16:36:12 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ (Exim) id 1kUXIV-0005Jr-0c; Mon, 19 Oct 2020 15:42:07 +0000
+Date: Mon, 19 Oct 2020 08:42:04 -0700
+To: Rowland penny <rpenny@samba.org>
+Subject: Re: Clarification around the DCO
+Message-ID: <20201019154204.GA504635@jeremy-acer>
+References: <a4f34abf8b943b01e0f982e21fe1518009fcc556.camel@HansenPartnership.com>
+ <20201017004357.GA360279@jeremy-acer>
+ <20201017005611.GB360279@jeremy-acer>
+ <20201017023840.GA344206@ebb.org>
+ <5e8a6736aafa2e4a593af2ee79451cc62a283818.camel@HansenPartnership.com>
+ <2b13b0dee1ce4ef9b21825ee38feeca8855747dc.camel@samba.org>
+ <daeb61f4f70d3e1a2c7f9b111e3ba3c2e247371a.camel@HansenPartnership.com>
+ <d1d94535-fd9f-e76c-0d5e-3ce454d12f73@samba.org>
+ <2207cfb3-b1c3-ac2f-289f-02340c755a47@samba.org>
+ <82b64ba2-b0bc-d30b-ce97-f2f916b0f10a@samba.org>
 MIME-Version: 1.0
-In-Reply-To: <d13637c0-cfbe-c49e-6d1b-3e4c12d02843@kania-online.de>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <82b64ba2-b0bc-d30b-ce97-f2f916b0f10a@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,27 +63,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 19/10/2020 16:30, Stefan Kania via samba-technical wrote:
->
-> Am 19.10.20 um 14:30 schrieb Rowland penny via samba-technical:
->> (does anything rely on the dns.keytab being in the private dir ?)
-> I think not, and setting the permission to disallow bind-user to access
-> privat-dir is ok. All files needed by bind9 are in bind-dns directory.
->
-> Don't forget the second part of the bug ;-) the wrong permission of the
-> bind-dns directory.
+On Mon, Oct 19, 2020 at 10:10:47AM +0100, Rowland penny via samba-technical wrote:
+> On 19/10/2020 10:01, Ralph Boehme wrote:
+> > Am 10/19/20 um 10:09 AM schrieb Rowland penny via samba-technical:
+> > > So, I bunch of Lawyers and the SFC are trying to dictate to Samba just
+> > > what is in the DCO and what it should be called. The lawyers are only
+> > > kicking up a fuss and dragging Samba into their argument because they
+> > > cannot get their way. Is this a much simpler version of what happened ?
+> > this seems really harsh and to me it seems James doesn't deserve such a
+> > response in any way. He has been carefully expressing why he's
+> > approaching us and he is not forcing us in any way.
+> > 
+> > Thanks!
+> > -slow
+> > 
+> It wasn't really aimed at James, it was just my understanding of what he
+> posted and If my understanding is correct, then it was aimed fairly and
+> squarely at the bunch of lawyers, sorry for any misunderstanding :-[
+> 
+> My feeling is that the bunch of lawyers have spat the dummy out AND thrown
+> the teddy out of the pram and are lashing out at everybody and anybody to
+> get their way, they need to be put back in their box.
+> 
+> BIG NOTE: All this is just my opinion and must not be taken as the opinion
+> of the Samba team.
+> 
+> a very blunt Lancastrian
 
-I created dns.keytab in the bind-dns dir, but it went pear shaped when I 
-tried to change ownership etc :'(
+FYI, James is also English :-). I'm sure he understands "very blunt Lancastrian"
+in the way it was meant.
 
-I think I am going to take a rest and then come back to this tomorrow, I 
-feel that I am on the right path, but it is fighting back at the moment :-D
+But IMHO this is now all a storm in a tea-cup.
 
-Rowland
+James asked nicely, I screwed up by not adding the (C) to
+our original text plus we've now got a decent enough name you
+came up with Rowland that (hopefully) everyone is happy with
+on the Samba side.
 
+Let's add the (C), change the name and continue the
+discussions on the team-list to see if we can get to
+using the "standard" text.
+
+No more "blunt" language needed :-).
 
