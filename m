@@ -2,54 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03EFC29236C
-	for <lists+samba-technical@lfdr.de>; Mon, 19 Oct 2020 10:10:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A762F292430
+	for <lists+samba-technical@lfdr.de>; Mon, 19 Oct 2020 11:02:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=/YYV4nE1Kd4cnmzvGWa1F18OW8p/3C7Igc7b7MgvtR0=; b=f2nN6BSU92RJCYl+VQr8HEoXnx
-	aK4Ts5maawS/awKA7M7eC2X3lFMpJFQcZhG6RZO3DXmsQxy7/3NBZsSrI6tLN8RmsctWG76U8+bwq
-	cvk22pBm4peEGHbFFq/MpHdKOrZGEDSsLZGGVET26ThhyYXywdBpT6UlquWX0ntww1Ftwr7dYM8bM
-	ERPCT4PJaUeVJFqqGM1b+W55NH19vOgsL4s0ndylTAZdJ9Yl7ofZtAvfqa48bNxgOIKttcshQjPZ8
-	UCynWLa++FWvyHeFAXl9pzXEJbmOioiQ3Kl0dPLaGPKFrLU/GuDKltO0pSs8ipXCcwz7z7rrvcVXq
-	dQJH5Cmw==;
-Received: from ip6-localhost ([::1]:31680 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=XvY7yhP8z3AlOrdMMr9YF4WvZmOVlDXlCTmjkTPt5nc=; b=KJ0MyJmqhoJig59mfTKDKJqxFX
+	8g4hdEmbhpXVWjfdVHxafSeYVF66txao4zpEKtXGFcRkAsoZe9f3dlGjiq+avRMPS7WIBLEAt7Ij+
+	qr0l0Ox2J0H6rFtaweCXwptXuTcZ5nuWLfXjQaUZFsjnDrJ0fn8BigCzMiFhXBx3/F4YHFn44wekp
+	YifGfe9SQm/3Sfnuu7aNxyzZIiHYx2nwxBHveTBmwN7FMUqKxTCq1VpdXyDDP71u6tXOnAjrzcRDc
+	5F1dLZKTH2Q/T+ltut5yKegGPVfd5GG1hHno7cUY0rtX0xUsBF9f2wbcb38yn3v7Y5/OD32laTMAo
+	mdCmfI4Q==;
+Received: from ip6-localhost ([::1]:32462 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kUQEy-00CgMa-GA; Mon, 19 Oct 2020 08:10:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56260) 
+	id 1kUR3M-00CgWR-BV; Mon, 19 Oct 2020 09:02:04 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17254) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kUQEs-00CgMT-H1
- for samba-technical@lists.samba.org; Mon, 19 Oct 2020 08:09:57 +0000
+ (Exim) id 1kUR3F-00CgWK-8W
+ for samba-technical@lists.samba.org; Mon, 19 Oct 2020 09:02:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=/YYV4nE1Kd4cnmzvGWa1F18OW8p/3C7Igc7b7MgvtR0=; b=BEdgo3BSSWtLdgsCxsNyAjC16H
- Tvagxqt8dwAxN5Yz5SnG6bIKt1L4FJYLIlGY8NwURMMtuQgUWYGmYlhx/tu4DtWFWp8YRfyD7qHhK
- dvrZFarhY8GYfGOTvnaNdeiuygGReGivdyFoxFhFOzA2Hzyhi0SzXJSB2WOTrBTPbg5qUgtXmC3Uk
- +UtrN4dM0AdoCRLpZY+fQFB6ECqrSVH4RnIAFup4wXOoIcF0/Xi2NMW5c5rAviSkMu4zM+ZG6EZtF
- 7ALCmTkfGjDhfu7aO4QKQyFKMDMtUPxym0+Xvd5nl8uNzOQkkp5mBhAdiC7I9x7lFx34XAoX1y/Dk
- l7bNgPTequTsSYIvkrKACICog7Hs3kLIUSqFgieOVFU87x/tfzX5Ugq13VzNuBlzL5LS8AbsFEzEt
- bEuD16SSDICkG6fS6iTGYcuunvgFglzO4id/I8YYXRAZbRmZxw5+JQgTGfvJ8nmOOXgjg76vWzTEK
- sBmqr5ymYYvZTQjreXuQl2zM;
+ s=42; h=Date:Message-ID:Cc:From:To;
+ bh=XvY7yhP8z3AlOrdMMr9YF4WvZmOVlDXlCTmjkTPt5nc=; b=rPnw/7oPqNd9JyCi6anDVFPOUj
+ +QUy8FU9G2mUZ26i1xeRvdUyFPDgaIMnRxe3DZRxC7KFI9H4ynpwO6EG8B0hCqeOjrXBQm6pqsxnZ
+ 8fUyOwIwRPq+Ht9rSzYduYfeNXB1yjxROxoFgmW4DUOb20S+iG8tscCWpeO7ivDPSKDz4R/tb8H9/
+ cX+uiNwzMNigd5AXrW7DNRQbHMWFiJ9HNt4P/977lN3p2kWipbW6SeJCBR2UpY5AS6Q4HMfcN8ZO7
+ kYqvAZP9WIjTYDr9J03IisUH/qD3Aq3rbvY8wk3AYmyBQ731F5ajWQ9AqDVl37gRX0f5xwg3xkriL
+ +Jmu1w7A1r/M+HBAJQNNCUO2IsL2myCloc16hZE4D5AMygKp9jjpkQwyyYBY3Ka4TEYBOaEBx6g8K
+ xn0ThCdBxkh/7GXRakmitfCEjzTwiBlFoFt8+rQb9xtu670OZK6HUSRlph4HRmp8iO3Gr2QcOIVKZ
+ rkI4HKvz4T4IxXJZHxfNVzD8;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kUQEr-0001Rx-Nm
- for samba-technical@lists.samba.org; Mon, 19 Oct 2020 08:09:54 +0000
+ (Exim) id 1kUR3E-0001t8-EI; Mon, 19 Oct 2020 09:01:56 +0000
 Subject: Re: Clarification around the DCO
-To: samba-technical@lists.samba.org
+To: Rowland penny <rpenny@samba.org>
 References: <a4f34abf8b943b01e0f982e21fe1518009fcc556.camel@HansenPartnership.com>
  <20201017004357.GA360279@jeremy-acer> <20201017005611.GB360279@jeremy-acer>
  <20201017023840.GA344206@ebb.org>
  <5e8a6736aafa2e4a593af2ee79451cc62a283818.camel@HansenPartnership.com>
  <2b13b0dee1ce4ef9b21825ee38feeca8855747dc.camel@samba.org>
  <daeb61f4f70d3e1a2c7f9b111e3ba3c2e247371a.camel@HansenPartnership.com>
-Message-ID: <d1d94535-fd9f-e76c-0d5e-3ce454d12f73@samba.org>
-Date: Mon, 19 Oct 2020 09:09:53 +0100
+ <d1d94535-fd9f-e76c-0d5e-3ce454d12f73@samba.org>
+Message-ID: <2207cfb3-b1c3-ac2f-289f-02340c755a47@samba.org>
+Date: Mon, 19 Oct 2020 11:01:54 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-In-Reply-To: <daeb61f4f70d3e1a2c7f9b111e3ba3c2e247371a.camel@HansenPartnership.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
+In-Reply-To: <d1d94535-fd9f-e76c-0d5e-3ce454d12f73@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="7W0pSgoN3pFoFkU2TOwYiaePuv4HsyAx5"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,99 +63,64 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 19/10/2020 00:19, James Bottomley via samba-technical wrote:
-> On Mon, 2020-10-19 at 11:00 +1300, Andrew Bartlett via samba-technical
-> wrote:
->> On Sun, 2020-10-18 at 13:38 -0700, James Bottomley via samba-
->> technical
->> wrote:
->>> On Fri, 2020-10-16 at 19:38 -0700, Bradley M. Kuhn via samba-
->>> technical
->>>
->>> wrote:
->>>
->>>> Jeremy Allison via samba-technical wrote:
->>>>> Ah, I've just remembered *why* we have a difference from your
->>>>> "standard" DCO text.
->>>>   
->>>> Yes, a tremendous amount of time and effort went into figuring
->>>> out the right policy for Samba with regard to contributor
->>>> licensing.  Some of those details were reported publicly, and
->>>> some were reported privately to the key folks in Samba.  I myself
->>>> put in many hours of work on this, as did many other Conservancy
->>>> staff, lawyers and Samba volunteers.  Nothing has changed with
->>>> regard to the analysis.  We also had a private discussion at a
->>>> developers' meeting at a Samba XP about the reasoning, IIRC.
->>> In legal terms you usually really, really don't want to be special
->>> because it causes all sorts of complications if there's any
->>> litigation.
->>>
->>> This reasoning lies at the heart of our desire to move the DCO
->>> beyond the kernel, because if we keep it to the kernel it becomes
->>> our legal specialness problem in the same way.
->> That is all well and good, but the way this is playing out here is
->> really awful.
->>
->> It would be one thing if somebody, perhaps you, came to our project
->> politely suggesting 'have you considered the benefits of'...
->>
->> The process here is just rubbing everyone up the wrong way.
-> I understand, so let me try to explain why this all blew up.  The
-> origin is a row on another list which is populated by a load of
-> lawyers, a lot of whom are also Corporate Counsels.  This other list is
-> governed by Chatham House Rules
->
-> https://www.chathamhouse.org/about-us/chatham-house-rule
->
-> Which forbids quoting what was said and who said it.  However, I'll try
-> to describe what happened without violating this rule.
->
-> For background, a large number of corporations, through their counsels
-> (who are mostly on this other list), have requested changes to the DCO
-> over the years (a lot of which were trying to prevent patent capture).
-> All of which requests we've rejected on the grounds of not wanting to
-> cause DCO fragmentation.  On this other lists, there was a discussion
-> of the DCO which lead to the implication that we'd authorized Samba's
-> change while refusing all of theirs'. We were forced to deny this
-> implication robustly in case the other list members got the wrong idea.
->
-> Our robust denial got back to the SFC who engaged us privately on this
-> topic.   What we actually said to the SFC was we'd obviously done
-> nothing about the Samba issue in the past and had no plans do do
-> anything now; however, if the SFC could help us engage in discussions
-> with Samba, it could potentially lead to a a win-win outcome we could
-> report back to the other list.  The SFC told us that actually they
-> preferred to let the matter drop.  Thus it was rather a surprise to us
-> to find Bradley's patch on the Samba list, but we figured that now the
-> situation had been broached we may as well try engaging.  All the rest
-> you've seen on the samba-technical list.
->
-> If there's no desire here to investigate DCO alignment at this time, we
-> can let this aspect simply drop and you can resolve Bradley's patch in
-> the way you see fit.
->
-> James
->
->
->
-So, I bunch of Lawyers and the SFC are trying to dictate to Samba just 
-what is in the DCO and what it should be called. The lawyers are only 
-kicking up a fuss and dragging Samba into their argument because they 
-cannot get their way. Is this a much simpler version of what happened ?
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--7W0pSgoN3pFoFkU2TOwYiaePuv4HsyAx5
+Content-Type: multipart/mixed; boundary="JwtJDomW0m1JFS5XK6coYP3adCedvawX9"
 
-If it is, then my reply to them would be unprintable and liable to get 
-me arrested.
+--JwtJDomW0m1JFS5XK6coYP3adCedvawX9
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-If it was left to myself, I would make any required changes (adding the 
-CC-by-SA) and change its name and leave it at that. In my opinion, it is 
-our DCO (or whatever you want to call it) and it has nothing to do with 
-any external body.
+Am 10/19/20 um 10:09 AM schrieb Rowland penny via samba-technical:
+> So, I bunch of Lawyers and the SFC are trying to dictate to Samba just
+> what is in the DCO and what it should be called. The lawyers are only
+> kicking up a fuss and dragging Samba into their argument because they
+> cannot get their way. Is this a much simpler version of what happened ?=
 
-Rowland
 
+this seems really harsh and to me it seems James doesn't deserve such a
+response in any way. He has been carefully expressing why he's
+approaching us and he is not forcing us in any way.
+
+Thanks!
+-slow
+
+--=20
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+
+
+--JwtJDomW0m1JFS5XK6coYP3adCedvawX9--
+
+--7W0pSgoN3pFoFkU2TOwYiaePuv4HsyAx5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAl+NVgMACgkQqh6bcSY5
+nkbliw//QFmpCVm1zIIfKNqRxAA8moptp54BK3pekiw5l/6OQluvGbrxr6wlNcsI
+sWNr/y41PzMJsyKDsWgJDjIZkMw54AMbIpmsfJF5/FMFqSfTw5/22rPJ5Z6dyLIZ
+4KV08KooE8eKf9JqqOP3obrW0qjLuH2XMihLUpmk0li+iOc2MSerkDr0qmriFv53
+ergTN2YNgrGUB1zw7dGRSBYRXj+szTzwVvmYaj8973ndA06l+n8GU147wM4p7SK4
+mWYDB4/A4lbSr6FQo8k9dvuMnuICLYEDzbuCuF9wOMOLEm6zG2rbWLhQKrSdiGDg
+ouXrrkg7PgpGCaVBCXLH/NSXNvRakEcpQ/m5qx3jSZdvX+rrd5HfgLfkjLrzIIgq
+rAY1brAdP4oSmbivGUNahASOO9cH2MzXrE3nKIDU8NOLgDn1FGGtLehynYUS4DlD
+Em7Rhn5ChKZgpZ5nlou5v5XTt/yhSj2Tutz2dluDrSGry9vrGP14t4KL9dVZK9pL
+B2faCJ+aIvo6NeFPm0pPGksLVGsaPikkRYbRINrvy3L5DergvMJZX5cphw8d9Ftj
+drhtZWU1wKTTJxBsWF8wRDrM+RAqmWv9sNV0XD1noC6k1yIE9DGe7X8w6dD4KDdo
+8mDKCDQkJo9WyuIggBjEJe5VH72zKGer2B29Q8536HBmMGLmOuE=
+=Kw4a
+-----END PGP SIGNATURE-----
+
+--7W0pSgoN3pFoFkU2TOwYiaePuv4HsyAx5--
 
