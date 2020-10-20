@@ -2,55 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1050D29422C
-	for <lists+samba-technical@lfdr.de>; Tue, 20 Oct 2020 20:33:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E73929423C
+	for <lists+samba-technical@lfdr.de>; Tue, 20 Oct 2020 20:38:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=zp8doHSB4sPn3EB1xFSCCJ2VQYy8brhJ8XYOo6wtqN4=; b=kNCId7nx/K/RXl342lGQQR+JMh
-	gRuotcBD6n+5+ynOueghw+URcgdYV92mAbTyacvMu4XVoSik02enYZWh1VBxxRHdtFsQu56x9F/7r
-	zTfJdrFgrD5kQQAqghBA0D61CeMRkAlLWXZjChmTAIqhwkiDF/AAakgYzDZGR1/R1Jf7vFWLR0q89
-	JHx+fvd+eiCpSeAmNmpy4khVf55SQX3XLhUuUyJ37ZmFn2goRErmS0auoaL98caltjGC0IGmZiAVl
-	f3BiaX/Ox/BMc2vVfe06qyfyQz1VqyCED9C5P3azuzTut0wUEmk7LGR39gOcVM6U/O7ifY+0DaznH
-	v6UKsKCg==;
-Received: from ip6-localhost ([::1]:18526 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=VoqU6CJ6YO09xfu/Zv1UblvBxzl147x/GcWPads5U+c=; b=NbrCLhxhQwx3w9CuwGPQBzvE/W
+	GKG0gE2HGChShcsS4/3j/JBBbsgyoT9l0ell9/3knDZlQ3+XmbyAi4tZs/nQzZbU4FBtosnkERqGg
+	H3yZBof5cAN4BWCOZYSGSbhEsrY2pkJux0sjt/QAtmfZIaMe6WNj/UViYMvhQ7C3AZbUFfx1mf7IS
+	bKSDAJcD7koSx34WE6Og1lZEMFVnTRm7wau7h1O7qvln61p3l2KuqnMusZDlsMlIhgfZMXxPFdQur
+	AyjFU+7G6eEgN/H+p6jOwuxSj7W1S3EYGIrDQJ53/Rs96Ay0GFtfyIKE+1KP2StRNbKTsG1WdH4R+
+	LcL2FZ2A==;
+Received: from ip6-localhost ([::1]:19240 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kUwS8-00Cvbm-Pm; Tue, 20 Oct 2020 18:33:44 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20472) 
+	id 1kUwWu-00Cvi2-6r; Tue, 20 Oct 2020 18:38:40 +0000
+Received: from mail-lj1-x241.google.com ([2a00:1450:4864:20::241]:40959) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kUwS3-00Cvbf-Po
- for samba-technical@lists.samba.org; Tue, 20 Oct 2020 18:33:41 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=zp8doHSB4sPn3EB1xFSCCJ2VQYy8brhJ8XYOo6wtqN4=; b=O5a1929MVQGdQ9QOwGvrUffzwI
- j3/LzcIkTP4p/5zJzYYFCDjSD6bwXQ27v00Pdf9nGXGK/yb0LnhbouDCk9IwfwJMrCEwX3udFZEgw
- de376oWkAQLYgpp+knjJnXUcXRAS3It2c89FKCZN3Gd/v0wMa5h02zjAFK2+1YebCwYaW1Ad0GeB6
- 9M5sGotdYzGat9Y7R/AORKdLkcfH0CjgdPBlWNNEEniDDf2rZFn8W91lB8g4HOAm/bBpiSRs0Qf6f
- v9dBlG5hdSpfVXnSFUyt6EF12BjRwa+qJ1lYdf0BMLpHiNyoJOmkPWI/QOx5kynxRBMIVghizIo87
- JxO6APzyFY7hobAZKTUNDECm7Mink/URa+AxnwlSvnoC+d2sQJmm7ll5IEUTTY0qYOMMQn3AhcG+n
- LFPJIbiuM6siLaXLyHaXD9sTxxQu2Odrm25GlXsC9R+bDXFFxw3Mu2P2yCcoT4FEv5iwASKy10Q0w
- t3KpJb4W+oun/NVlpNJtZfdi;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kUwS3-0003KL-52; Tue, 20 Oct 2020 18:33:39 +0000
-Date: Tue, 20 Oct 2020 11:33:36 -0700
-To: Arran Cudbard-Bell <a.cudbardb@freeradius.org>
-Subject: Re: talloc: talloc_set_memlimit causes all reallocs to fail when
- used on pools.   talloc_set_memlimit not enforced correctly on pools.
-Message-ID: <20201020183336.GB642265@jeremy-acer>
-References: <20201016194436.GD67086@jeremy-acer>
- <2B2DBDAF-26F4-4FF4-A2A6-A194F507A352@freeradius.org>
- <E2A6FEEF-3C46-43A6-818C-D226924EB9F7@freeradius.org>
- <20201016202528.GF67086@jeremy-acer>
- <E75C5FB4-2800-498A-868B-7F3A3CB4E802@freeradius.org>
- <20201020020246.GB564927@jeremy-acer>
- <20201020035308.GA601524@jeremy-acer>
- <2F0B2708-7AC6-4FF5-99FA-8D4B8F1BAB2E@freeradius.org>
- <20201020055023.GA606244@jeremy-acer>
- <D37CFB0F-61FE-43C4-A161-DB949FF9F175@freeradius.org>
+ (Exim) id 1kUwWo-00Cvhv-Bl
+ for samba-technical@lists.samba.org; Tue, 20 Oct 2020 18:38:37 +0000
+Received: by mail-lj1-x241.google.com with SMTP id 23so3107215ljv.7
+ for <samba-technical@lists.samba.org>; Tue, 20 Oct 2020 11:38:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=VoqU6CJ6YO09xfu/Zv1UblvBxzl147x/GcWPads5U+c=;
+ b=lieo7zRju2JNhvzuxKDTp3BLlKTIPUj3AbH95rFmaFlJQPh2Q+ysregqOb8k+mUd9K
+ cct8haulUznDk3cE+Q0eksIWKXL1LFLCs77Pm6ZPLNHC4cU82xFys5LYtbZokcDFAbqI
+ PFaVcRHX0pmMXXncFUxpbKtcJpriImd+1DULfrwIks+4Sotgqp1UVCqjuHzBbAycisxC
+ Ta2LywH6bz3Z7vWLtQXMq+U65dXIyl+BKI3NQNRoYueMn3i9cHiUBDDpqSAj9RwBQnr8
+ vNL+FnmDkvuEJ5nuVCNWsTKE9G3fTlbS3hFbOSKI/7JuCaMNpZC0R7y+UN/WvY3t9Cix
+ V4Iw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=VoqU6CJ6YO09xfu/Zv1UblvBxzl147x/GcWPads5U+c=;
+ b=hzfcOADpG6zDa1w6niLeFkSZDDPLT8NwxIb/eqZJYE0u2mJ1JmrbN4ytfu/T2jZ+iN
+ myRHTajhnzCOMvA+aldnj9VXMhgi+sMlcAw0r8/VgNHHCiYtRF0TaXo2UhgGSjZo+kjj
+ cGKzfzmapNWlMG5V9ybptOM6epjO/iP24SR0wcFKCXO+wnF7oFmMQeBMg13mbOsSnC8a
+ cVm4ISTJlBm8yoE5ohFPlXWaIz8/yRWgr5GA/LzPlHcG8s6gZOFSn4Oal0tz0bqQmVYd
+ 5BOV1oJSQwQzZNskVS6gOsT6t9wd5eerDAmutsOFe0temN+QJM4J6DkFbVd24MV7Fzsa
+ ctLg==
+X-Gm-Message-State: AOAM533QWhv82p4UkC0grkW39D94CQuPUD+w0QsL697HwH1wDX8f19RU
+ Fsk4MhFwNTOyxofPNHBthb+ievBAiMUwyq+fTq6ixxsNt1E=
+X-Google-Smtp-Source: ABdhPJwlSsq4swuGxZ08dJUJTvanWFH1/FTurTqh98L0LcFDLiVB6jPcqpe+Ph1jDKTxabUJS9xBdsuJkB5EnpwnYsM=
+X-Received: by 2002:a05:651c:505:: with SMTP id
+ o5mr1603319ljp.374.1603219113161; 
+ Tue, 20 Oct 2020 11:38:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <D37CFB0F-61FE-43C4-A161-DB949FF9F175@freeradius.org>
+References: <BYAPR16MB26151755ED24DE9F506736B8E21F0@BYAPR16MB2615.namprd16.prod.outlook.com>
+In-Reply-To: <BYAPR16MB26151755ED24DE9F506736B8E21F0@BYAPR16MB2615.namprd16.prod.outlook.com>
+Date: Tue, 20 Oct 2020 13:38:22 -0500
+Message-ID: <CAH2r5msFVeJMHR7RbRYKweo7FFdXW6Lk=4oQe57hfzrFu6KQGg@mail.gmail.com>
+Subject: Re: Oops in _raw_spin_lock_irqsave - linux kernel
+ 4.16.2-1.el7.elrepo.x86_64
+To: Vidhesh Ramesh <vidhesh.ramesh@komprise.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,37 +71,118 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Steve French <sfrench@samba.org>,
+ "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Oct 20, 2020 at 01:03:14PM -0500, Arran Cudbard-Bell wrote:
-> 
-> Then there's another issue with object_count ending
-> up off by one, which means talloc_free_children doesn't
-> actually return memory to the pool, and that messes up
-> some of the other tests I'm adding.  Just tracking down
-> when and why this happens now.... It might have been a
-> pre-existing issue and not related to this patch, I'm just
-> seeing it because of using talloc_free_children to reset
-> the pool between some tests.
+I don't have a kernel that old and I can't access the Redhat page -
+but I would expect that given the date it was posted the fix would be
+in the last two Redhat releases 8.1 and 8.2.  Have you tried those?
 
-Oh, I think that may be here:
+On Tue, Oct 20, 2020 at 12:49 AM Vidhesh Ramesh
+<vidhesh.ramesh@komprise.com> wrote:
+>
+> [1.] One line summary of the problem:
+> oops kernel panic
+> [2.] Full description of the problem/report:
+> ESX VM hangs with a kernel panic when cifs shares are mounted and accesse=
+d. Unable to ssh to the VM and the console of the VM is also not responding=
+. With kdump service running and core collected the VM restarts successfull=
+y.
+> [3.] Keywords (i.e., modules, networking, kernel):
+> cifs, kernel, panic, mount
+> [4.] Kernel information
+> [4.1.] Kernel version (from /proc/version):
+> Linux version 4.16.2-1.el7.elrepo.x86_64 (mockbuild@Build64R7) (gcc versi=
+on 4.8.5 20150623 (Red Hat 4.8.5-28) (GCC)) #1 SMP Thu Apr 12 09:08:05 EDT =
+2018
+> [4.2.] Kernel .config file:
+> Please check the file uploaded
+> [5.] Most recent kernel version which did not have the bug:
+> [6.] Output of Oops.. message (if applicable) with symbolic information
+>      resolved (see Documentation/admin-guide/oops-tracing.rst)
+> [1866796.225242] BUG: unable to handle kernel NULL pointer dereference at=
+ 0000000000000000
+> [1866796.225758] IP: _raw_spin_lock_irqsave+0x22/0x40
+> [1866796.226236] PGD 8000000428341067 P4D 8000000428341067 PUD 0
+> [1866796.226736] Oops: 0002 [#1] SMP PTI
+> [1866796.227202] Modules linked in: nfsv3 nfs fscache arc4 md4 nls_utf8 c=
+ifs ccm dns_resolver nf_conntrack_netbios_ns nf_conntrack_broadcast xt_CT i=
+p6t_rpfilter ipt_REJECT nf_reject_ipv4 ip6t_REJECT nf_reject_ipv6 xt_conntr=
+ack ip_set nfnetlink ebtable_nat ebtable_broute ip6table_nat nf_conntrack_i=
+pv6 nf_defrag_ipv6 nf_nat_ipv6 ip6table_mangle ip6table_security ip6table_r=
+aw iptable_nat nf_conntrack_ipv4 nf_defrag_ipv4 nf_nat_ipv4 nf_nat nf_connt=
+rack iptable_mangle iptable_security iptable_raw ebtable_filter ebtables ip=
+6table_filter ip6_tables iptable_filter vmw_vsock_vmci_transport vsock ppde=
+v sb_edac crct10dif_pclmul crc32_pclmul ghash_clmulni_intel pcbc vmw_balloo=
+n aesni_intel crypto_simd glue_helper cryptd intel_rapl_perf joydev input_l=
+eds pcspkr sg shpchp i2c_piix4 vmw_vmci parport_pc parport nfsd
+> [1866796.232074]  auth_rpcgss nfs_acl lockd grace sunrpc ip_tables xfs li=
+bcrc32c sr_mod cdrom ata_generic pata_acpi sd_mod crc32c_intel serio_raw vm=
+wgfx drm_kms_helper syscopyarea sysfillrect sysimgblt fb_sys_fops ttm ata_p=
+iix mptspi scsi_transport_spi vmxnet3 mptscsih drm mptbase libata floppy dm=
+_mirror dm_region_hash dm_log dm_mod dax
+> [1866796.234432] CPU: 3 PID: 11126 Comm: cifsd Tainted: G        W       =
+ 4.16.2-1.el7.elrepo.x86_64 #1
+> [1866796.235687] Hardware name: VMware, Inc. VMware Virtual Platform/440B=
+X Desktop Reference Platform, BIOS 6.00 12/12/2018
+> [1866796.237004] RIP: 0010:_raw_spin_lock_irqsave+0x22/0x40
+> [1866796.237683] RSP: 0018:ffffc90007a2bc00 EFLAGS: 00010046
+> [1866796.238361] RAX: 0000000000000000 RBX: 0000000000000246 RCX: 0000000=
+000000002
+> [1866796.239049] RDX: 0000000000000001 RSI: ffffc90007a2bc40 RDI: 0000000=
+000000000
+> [1866796.239757] RBP: ffffc90007a2bc08 R08: 0000000000000242 R09: 0000000=
+000000000
+> [1866796.240494] R10: 0000000000000000 R11: 00000000000003c9 R12: 0000000=
+000000000
+> [1866796.241194] R13: ffff88041b26f8c8 R14: ffffc90007a2bcf8 R15: 0000000=
+000000000
+> [1866796.241915] FS:  0000000000000000(0000) GS:ffff88043fcc0000(0000) kn=
+lGS:0000000000000000
+> [1866796.242670] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [1866796.243438] CR2: 0000000000000000 CR3: 000000042ab22000 CR4: 0000000=
+0000406e0
+> [1866796.244293] Call Trace:
+> [1866796.245069]  remove_wait_queue+0x19/0x60
+> [1866796.245877]  sk_wait_data+0xf6/0x140
+> [1866796.246691]  ? prepare_to_wait+0xb0/0xb0
+> [1866796.247504]  tcp_recvmsg+0x5f5/0xb40
+> [1866796.248560]  ? select_task_rq_fair+0x4d5/0xba0
+> [1866796.249420]  inet_recvmsg+0x56/0xd0
+> [1866796.250222]  sock_recvmsg+0x43/0x50
+> [1866796.251115]  cifs_readv_from_socket+0x76/0x200 [cifs]
+> [1866796.251953]  cifs_read_from_socket+0x52/0x70 [cifs]
+> [1866796.252969]  cifs_demultiplex_thread+0x11b/0xa90 [cifs]
+> [1866796.253740]  kthread+0x105/0x140
+> [1866796.254486]  ? cifs_handle_standard+0x190/0x190 [cifs]
+> [1866796.255198]  ? kthread_bind+0x20/0x20
+> [1866796.255907]  ? do_syscall_64+0x79/0x1b0
+> [1866796.256601]  ret_from_fork+0x35/0x40
+> [1866796.257251] Code: c3 0f 1f 84 00 00 00 00 00 0f 1f 44 00 00 55 48 89=
+ e5 53 9c 58 0f 1f 44 00 00 48 89 c3 fa 66 0f 1f 44 00 00 31 c0 ba 01 00 00=
+ 00 <f0> 0f b1 17 85 c0 75 06 48 89 d8 5b 5d c3 89 c6 e8 36 91 8b ff
+> [1866796.259312] RIP: _raw_spin_lock_irqsave+0x22/0x40 RSP: ffffc90007a2b=
+c00
+>
+> I see the solution posted in https://access.redhat.com/solutions/4354471 =
+but I am unable to access the solution.
+>
+> Vidhesh Ramesh
+> [1866796.260111] CR2: 0000000000000000
+> [7.] A small shell script or example program which triggers the
+>      problem (if possible)
+>
+> Vidhesh Ramesh
 
-1894 #if ALWAYS_REALLOC
-1895         if (pool_hdr) {
-1896                 new_ptr = tc_alloc_pool(tc, size + TC_HDR_SIZE, 0);
-1897                 pool_hdr->object_count--;
-1898 
 
-We don't reset pool_hdr->object_count on early return
-in this codepath.
 
-Are you setting ALWAYS_REALLOC==1 in your tests ?
+--=20
+Thanks,
 
-Not sure if this should be:
-
-1894 #if (ALWAYS_REALLOC != 0)
+Steve
 
