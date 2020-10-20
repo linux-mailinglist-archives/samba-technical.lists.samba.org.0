@@ -2,46 +2,101 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74264293679
-	for <lists+samba-technical@lfdr.de>; Tue, 20 Oct 2020 10:09:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17B31293EF3
+	for <lists+samba-technical@lfdr.de>; Tue, 20 Oct 2020 16:45:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=vWu0bJMoZYQAh1yn3JxYb7iiguBi3gGRjYbT/L55of4=; b=d0eR57tVZzyX5rWdwDngXUQV6U
-	XfyC8mFY+BhLkcX2/IDgFJkPJJQuieyK2mXMzKYRjBRNxeY5Ozoiz0vUAmvo0H0LpyjM2Me6K0K2F
-	K/rkJcemZ8RMo/hexIkzBiZAN0xaJ2YQDZNaAmXMU8mnXvz/rFvrKY18Lc9WqdtwPhgAV7oWr1I/W
-	wsocrZPkgrHQpJx4pJ4XXROY3Sdx+5x/JnQqUJgPsbb6Nsg3IGcY/3hScsBFHKLDibgix6ULNPYdR
-	Kps8nsRNXcfCWV3Dq4XPRcKZ0NZ4kfFlVnzZORVy7xtzQxzmD+ren8+BHpQM3MKVQWTR/E21x03j3
-	9T+JothA==;
-Received: from ip6-localhost ([::1]:26778 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=oYMchobsyO1/l5ZFtFet20yHjD5yny2xSfdM7kiI4OU=; b=IKkoxuRfYpfdEmSgz4r8V3LVc2
+	ZrOeqYNMUHwNOjyRwEs6zKgcoWzZQTLjNQ2kIaODENkYQSmC7GI1fE8sn1a7md2mQrc35dJzOIkA2
+	rkRwCBHN4v25+h4L7W0bzN8/uE4bkB69utPqFzC9aGjpYvMOVNU59oUNwH7TB347BeIBpyMeN+aIA
+	LdRR6ybdNbtLmRc0qbg5VPLhHTjQel2GzpRMQNccRfelnAkziiYfcmY0YCo1zQeuSFdCS0OU28cBF
+	NBUskJGsw579yb2bsRVZyuCziRlxyuVfuMLKbVGoMhRD3DTkHuIfHiNoQL4qj7HJpAO1a5gq5Xdky
+	/UU6NYiQ==;
+Received: from ip6-localhost ([::1]:42632 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kUmhG-00CpQ5-Po; Tue, 20 Oct 2020 08:08:42 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60934) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kUmh9-00CpPy-Ay
- for samba-technical@lists.samba.org; Tue, 20 Oct 2020 08:08:37 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=vWu0bJMoZYQAh1yn3JxYb7iiguBi3gGRjYbT/L55of4=; b=ivKl7UHhLt+Jg8F7pSQFoC4Eld
- QRhCrctVjNQILSZIRk3uY/qv0sKFSpR5+OoEZOrP4PLySM/zyKYfd4KvNA5PlmfBUA2kK0NxzA0tg
- 8o5o9gvX6z7Vhf9/N8VVqp3CE/AoHzYCc7B8mWh9Z9S+N+X0ZcgtHSKiI8BmayXK4J2xmXC3y/pzX
- qw9MgvZkC+4LjZDqQeCGW+S754MPW9C86F4rxK1OoTA1PY9J3fWjh99VMJp42Bab4RJfUzU+m9TtC
- 2N5mYTrjnvACh+tdpRDq3DA0HrZucue7E0uhlkmwJ6bvu2hZv/YWs8LTBG0YGbRunCTqx5hDNq7x9
- 57pFX+q8Iu8w/GP3oEVG5F6NyHj7ek4UJbwaDifpRudlQRr49sz9HBBmwxIWFPxfsaJhXqthPygzv
- tkdxIo+CjkzrexjXho5W1QbbRXLsfUPVwyR1Wmzm0b/IyhtDt2EssOHD3Z8WXnjt2yfAFQ+QIz4hN
- LNY5ylUB7/hyss5iAny+P8ha;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kUmh8-0006Jp-1I; Tue, 20 Oct 2020 08:08:34 +0000
-To: Samba Technical <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
-Subject: Re: libndr: Avoid assigning duplicate versions to symbols
-Date: Tue, 20 Oct 2020 10:08:32 +0200
-Message-ID: <51724103.WUapsaruIv@magrathea>
-In-Reply-To: <CAJ+X7mQPg0yGd19pRaXCPzDyr04YEsa=TDDnBj+Gmdt12VdhoQ@mail.gmail.com>
-References: <CAJ+X7mQPg0yGd19pRaXCPzDyr04YEsa=TDDnBj+Gmdt12VdhoQ@mail.gmail.com>
+	id 1kUstC-00Cs81-Qj; Tue, 20 Oct 2020 14:45:26 +0000
+Received: from de-smtp-delivery-102.mimecast.com ([62.140.7.102]:56376) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kUst7-00Cs7u-FJ
+ for samba-technical@lists.samba.org; Tue, 20 Oct 2020 14:45:23 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1603205118;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=oYMchobsyO1/l5ZFtFet20yHjD5yny2xSfdM7kiI4OU=;
+ b=YSmxpLLsWr9/941ZwBqVmMjdWGkzr3tXzzJhiX6SrStOYA03nwgvJgtbBwxP9efyN2Fsfo
+ M9WJbSq/bZxw9VsjeIatd1p1ODYrZ/BQN+H5yfEhVyTHqYGsrvWJOO7LMQoX9UH7bgwz8m
+ 4iZ1y5SHn1nqAiVpCS3HRCWlI7mMgkQ=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1603205118;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=oYMchobsyO1/l5ZFtFet20yHjD5yny2xSfdM7kiI4OU=;
+ b=YSmxpLLsWr9/941ZwBqVmMjdWGkzr3tXzzJhiX6SrStOYA03nwgvJgtbBwxP9efyN2Fsfo
+ M9WJbSq/bZxw9VsjeIatd1p1ODYrZ/BQN+H5yfEhVyTHqYGsrvWJOO7LMQoX9UH7bgwz8m
+ 4iZ1y5SHn1nqAiVpCS3HRCWlI7mMgkQ=
+Received: from EUR03-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur03lp2054.outbound.protection.outlook.com [104.47.10.54]) (Using
+ TLS) by relay.mimecast.com with ESMTP id de-mta-4-6tG5QrSoNOiLy7OtPdEK3w-1;
+ Tue, 20 Oct 2020 16:29:13 +0200
+X-MC-Unique: 6tG5QrSoNOiLy7OtPdEK3w-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=eobax0F25boipUMjA2cTrn0BSs4YDxXXlFnHweV0Kr5crj/EfnjrCRR0lodSTS7bu5GHh48ZB/bFvdzZqCZB9TcZtBCKG3+z/KPaK8fErqr5uu8fEPai3o6jmelcTq49hf0OE2YzNHtdAoKDZog3GD8EGGpRdfiCD/V8HmJ0MrHpn3Yb9OWDcIHTWWmn3O72zeFQTbu5nBe5j8HM5pz1geUSZ36UQ2gN72C1eTO/jwZqLftq0lMC5qwI4kuIbFQIiXOEyCTlS/nzDBpBCNU5iM409sXIjzqQb3G1di6xbZSGbsSfCOXphlrAQVOTVwLxZLng55QnCaNkOjfEim6yew==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oYMchobsyO1/l5ZFtFet20yHjD5yny2xSfdM7kiI4OU=;
+ b=cM4b5rWZGue2mNgMS7AMdcZNg/Sx4pgC9ZFM3SgKaUm4lbs+Ey4nq5UtcsTJhy7UhY2gZwYai9+MapUgffJ+EgnK7intCbd8vqRJZeK+BX4FbtAzw869OG/znOkfM5nKXWBB0TT9NzjMtCLlVsud+6VBJk0NCIluh5XfLJxdTy909qPCMHJTI37WmiyS8cGRuyAL2V+u9B6ISiDVAEObOenzYtjJATz6fTYFMz7YLABZ4UMfYxxBRLr9R91zZcEpkrQdu1cYr7qa13WxZKtreJ3Ea81kvfI9Zw39nZtWRA2sOlx5iJslWvf2t6aR+tC2XoQz5rHtaZrSHLUQLqd8nA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: canonical.com; dkim=none (message not signed)
+ header.d=none;canonical.com; dmarc=none action=none header.from=suse.com;
+Received: from AM0PR0402MB3348.eurprd04.prod.outlook.com
+ (2603:10a6:208:24::24) by AM0PR04MB6449.eurprd04.prod.outlook.com
+ (2603:10a6:208:16f::31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.28; Tue, 20 Oct
+ 2020 14:29:12 +0000
+Received: from AM0PR0402MB3348.eurprd04.prod.outlook.com
+ ([fe80::b504:9b42:67a6:7f5f]) by AM0PR0402MB3348.eurprd04.prod.outlook.com
+ ([fe80::b504:9b42:67a6:7f5f%7]) with mapi id 15.20.3477.028; Tue, 20 Oct 2020
+ 14:29:12 +0000
+To: Colin King <colin.king@canonical.com>, Steve French <sfrench@samba.org>,
+ linux-cifs@vger.kernel.org, samba-technical@lists.samba.org
+Subject: Re: [PATCH] cifs: make const array static, makes object smaller
+In-Reply-To: <20201020141936.52272-1-colin.king@canonical.com>
+References: <20201020141936.52272-1-colin.king@canonical.com>
+Date: Tue, 20 Oct 2020 16:29:10 +0200
+Message-ID: <87mu0hezt5.fsf@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [2003:fa:705:6851:cd9:265:d9e0:b6c2]
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from localhost (2003:fa:705:6851:cd9:265:d9e0:b6c2) by
+ AM0PR02CA0008.eurprd02.prod.outlook.com (2603:10a6:208:3e::21) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3499.18 via Frontend Transport; Tue, 20 Oct 2020 14:29:11 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 009b3f9a-3774-4780-6ece-08d875048389
+X-MS-TrafficTypeDiagnostic: AM0PR04MB6449:
+X-MS-Oob-TLC-OOBClassifiers: OLM:1728;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Message-Info: k1I1AUX9tvt86AK4qpPRUDXKum6iil4v6sFngdsWSKH+mbTNMgK9VP+sy0rcvHvfTwxFYg+KlNn2SPavWrtDIRKjy+jnkXtglGawe83ek1NuI59lrO9Hj/YC7b2tMlaAC0qeeykjYAXpcqAKU7h4OX7SUhpKNwN+JEW70vkKNyNNj6eEVyFMJ+OokN18WBIU6myjbaNWqetvD02BXY7SuuObf/bbIrLt61f3u26+D/dEReDoEwjt31NkXHbZdVTwIhSGQ7Kn21inUAZ5yFRffOnbSGp1mKEbDMUCRSExZeCmGGKW2ibTkVc+QHHLuMm0Rlb8SBkM7cXc3O4lLDc5yg==
+X-MS-Exchange-AntiSpam-MessageData: x6KFFhPPUWttASFkgaS3TSSoe8vE1IJI4A630TVl9EzhLgAURnXw2pjCSJp4enqyXxsEfynf2H9mvYwkO1MgypOz8nyjOvuSub5rpN9l6Jh+e54VSQc2tFpagc6oYzqyUVgdDYZzkmnVgHa9eoNJLFHbfrtY8O6o/ucRu8OOLfUoBLP4WxFVHvtp16IuyuqbPwyCnVbSHQ/7hw7D3YWH25lfql8FqakeTHEDw6Z0iPnePhYEDU7h5ecUsF5C7Dla8xA658vMybMx0Fhq4vhhnM9mC8ztL+yUIyzvoBssXAn3onUtBzYQxzf5vdJD0Kfs+jftdV3f2+ufs4sxtkHA6HbP3jMm2VT+mmgvxG7EyAuLE3SdqG7muURuXk+zoxoA4DXmuvYQoqwbzcgeN9a4rwxLBXcKc4Ilb6LVo5VWyNVb2wcS5KN7Y+Sa1VxecHq2Hlv7fpXGC2oRWswN2+0yLuSUC621sxuhwjGLq7baO3En9OSMKXfZuwK8zm4STvvrDhplRgjh/9ETRb4RC+Sw531mDP+bNayPi4pXLdhrjB+Q32Wx+nXjNtU6BovhMTxoei8WybP/zb0F61ziYmMYu4oYaAVyR7XeSB4N4erqf1HL/MDbGfuhdllYMD5OipMD6H5GrqWRZMbrcYTWNg28WWs1acqqb8crWwn/d1cwFECkdp2AP5v7j+4vTu6ibjkOueT0a4VY7OqMuLWPVKvCGg==
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 009b3f9a-3774-4780-6ece-08d875048389
+X-MS-Exchange-CrossTenant-AuthSource: AM0PR0402MB3348.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: WwpaqaN1qx7A0f1f7t31Lzp4h5KY39AiI/loHjIFg4UTr9SlPloZOMbDaXcDnucv
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB6449
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,76 +110,22 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
+Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tuesday, 20 October 2020 08:49:18 CEST Amitay Isaacs via samba-technical 
-wrote:
-> Hi,
-> 
-> On freebsd 12, the linking of libndr.so fails with following error:
-> 
-> [ 918/3912] Linking bin/default/librpc/libndr.so
-> ld: error: duplicate symbol '_ndr_pull_error' in version script
-> ld: error: duplicate symbol '_ndr_push_error' in version script
-> clang: error: linker command failed with exit code 1 (use -v to see
-> invocation)
-> 
-> This happened because symbols _ndr_push_error and _ndr_pull_error were
-> added to abi_match in commit 42ac80fb46cfb485e8c4a26d455fa784fdd1daed.
-> It generates the following snippet in ndr.vscript.
-> 
-> --------------------
-> NDR_1.0.0 {
->         global:
->                 _ndr_pull_error;
->                 _ndr_push_error;
->                 ndr_print_steal_switch_value;
->                 ndr_push_steal_switch_value;
-> } NDR_0.2.1;
-> 
-> NDR_1.0.1 {
->         global:
->                 ndr_*;
->                 GUID_*;
->                 _ndr_pull_error;
->                 _ndr_push_error;
->         local:
->                 ndr_table_*;
->                 _end;
->                 __bss_start;
->                 _edata;
->                 *;
-> };
-> --------------------
-> 
-> Symbols _ndr_push_error and _ndr_pull_error are added to both versions
-> NDR_1.0.0 and NDR_1.0.1. This does not seem to be a problem for linux
-> ld.  It seems to ignore the later version assignments to the same
-> symbol as seen from the objdump:
-> 
-> $ objdump -T bin/default/librpc/libndr.so.1.0.1  | grep _ndr_pu.._error
-> 0000000000012afe g    DF .text    0000000000000162  NDR_1.0.0  
-> _ndr_push_error 0000000000012973 g    DF .text    000000000000018b 
-> NDR_1.0.0   _ndr_pull_error
-> 
-> One solution is to avoid adding specific symbols to abi_match and only
-> use wildcards in abi_match.  This avoids the need to modify wafsamba
-> abi_write_vscript() function in samba_abi.py.  Patch is attached that
-> changes the symbols _ndr_push_error and _ndr_pull_error to wildcard
-> patterns as _ndr_push_error* and _ndr_pull_error*.
 
-This looks fine for me, but I think we need a bug for 4.13 for that?
+Reviewed-by: Aurelien Aptel <aaptel@suse.com>
 
-
-	Andreas
-
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
+--=20
+Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, D=
+E
+GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
+nchen)
 
 
