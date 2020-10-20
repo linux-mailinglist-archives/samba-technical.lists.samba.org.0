@@ -2,56 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8816929437F
-	for <lists+samba-technical@lfdr.de>; Tue, 20 Oct 2020 21:50:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D3453294382
+	for <lists+samba-technical@lfdr.de>; Tue, 20 Oct 2020 21:50:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=VR8HPLsr0aaltuQhvBFgphYmqNXhpZRc8kDVaHbdPEM=; b=oMLPSVezZ1TqcjNeB1MiY38T8q
-	db4ZfHzZk1Q+1yN06ZpFXEMS+MBWFOodQWoLJhU6pUbuqObblqit5wAqAMtv4vfaNCRxRCzo+6VOi
-	PQEv9LqkUCPtG88mJrue9yNaZxvKhguNlJBitFlj7/0y+yu/Og9iQLKaDrsCUycFStZKFqC5XFDjo
-	6QHOh3JOlCHf7RzQGiiRJw0w7HuoKX6hplWbA7OLlx1OfgPT8vLcIa4kvtdVWoMaRbroIBWlq3RzR
-	wpj8lQkKcVrvrTQCXCLBT2GTTRgOF2pOY6cZzvZM1BkPwH33m7KGunE97wPncx8EWII0RZOCmNgL/
-	ibqkrfOw==;
-Received: from ip6-localhost ([::1]:30296 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Date:Subject;
+	bh=rKU0/2CX9dKb6Gowi+0plbJ5NE4cmFN9JVdGzTzWiTw=; b=S+kQ1/dOvk0fWQxwFyzkETmcV1
+	4G9UpIJWm7/pjrGKuRyDlnz22v/k4v971ljUPZvUvNEXikLGqcf7tLl3M+IOpveeHV8OciIpNJYfS
+	t8D7Lb19CKUXrcL3FHY2ccT3L0NgtwUuH3mvtmGG9/7g8X9Kl+vH8v42mX4xuWVelKHs9TE6TNAtJ
+	3Yd9H5WNj6c8AXWnuiE7kzvJmrujoXA/esd3+sULCaFjoGWQW3IALw/hfof8G+UZNv0tU8U5gWVO1
+	/XTdlkuNIoI4Jlnt7x+lP9jnsabZRc2GiSPy1HiP68n+aRpQGp1fyELWdaODlJeRFYzuj+ntmjQYa
+	4C3Au+7w==;
+Received: from ip6-localhost ([::1]:30758 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kUxdQ-00CxHI-Jm; Tue, 20 Oct 2020 19:49:28 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44558) 
+	id 1kUxeN-00CxLJ-J3; Tue, 20 Oct 2020 19:50:27 +0000
+Received: from mail.networkradius.com ([62.210.147.122]:52449) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kUxdK-00CxHA-9Z
- for samba-technical@lists.samba.org; Tue, 20 Oct 2020 19:49:25 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=VR8HPLsr0aaltuQhvBFgphYmqNXhpZRc8kDVaHbdPEM=; b=aC/+386MVoaHuYoBwqcJXap3Q9
- jr3mxaawY5ZFONwNo70qI5RYd1n9Cb1Qm4QB88T3VjwnDPuSjETYYSkWgg7gK5bWRx1Mo9e1SkPnk
- hZ6CGutUuovd+y5fI80683geYNW8uPgo4ra21iUFXGLEB+Q7Ktav7V4loQnY3o81jdZ7Eqb3HG8ey
- iCkZT+UnmEfJXMxLz3MJ5LGgjwO289YlIqQlWd8H29/DXH0EvBu1r2g5+9Kp6P3gfca9wIc+aoh5B
- xwYsI4ZVjv68XW2NvGGz7L8ABwb7YAdhGSJ7ukQ+QuKzpLEnZj8JE7Ou23NI5vGaK6nTUbfJmkl9g
- SyUssKhlDYzycNu1MVPKUKdrxJnZ48iNTGb0qfChqye4G9THW+4S8Sxa/PqOtPNINF8GONnHOzndi
- xPVx514nrYTV67wzeYK7SlIX5dhjQFfMmLWlGI3VAZkAq5b/TzLfbKW/8g7jntsClh8GY2GgTu+Yc
- 780tn1eLykvrICRjDDcm+wtp;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kUxdI-00044y-OB; Tue, 20 Oct 2020 19:49:21 +0000
-Date: Tue, 20 Oct 2020 12:49:17 -0700
-To: Arran Cudbard-Bell <a.cudbardb@freeradius.org>,
- samba-technical@lists.samba.org
-Subject: Re: talloc: talloc_set_memlimit causes all reallocs to fail when
- used on pools.   talloc_set_memlimit not enforced correctly on pools.
-Message-ID: <20201020194917.GG642265@jeremy-acer>
-References: <20201016202528.GF67086@jeremy-acer>
+ (Exim) id 1kUxe7-00CxJ7-TN
+ for samba-technical@lists.samba.org; Tue, 20 Oct 2020 19:50:15 +0000
+Received: from shinyhead.rga.ip (unknown [187.142.130.164])
+ by mail.networkradius.com (Postfix) with ESMTPSA id E8C144FD;
+ Tue, 20 Oct 2020 19:50:07 +0000 (UTC)
+Authentication-Results: NetworkRADIUS; dmarc=none (p=none dis=none)
+ header.from=freeradius.org
+Message-Id: <1C33DF9F-997C-40B0-980F-0AE27C43E1DD@freeradius.org>
+Content-Type: multipart/mixed;
+ boundary="Apple-Mail=_AB390C2B-7A3A-4516-9C10-1531B903175D"
+Mime-Version: 1.0 (Mac OS X Mail 13.4 \(3608.120.23.2.4\))
+Subject: Re: talloc: talloc_set_memlimit causes all reallocs to fail when used
+ on pools.   talloc_set_memlimit not enforced correctly on pools.
+Date: Tue, 20 Oct 2020 14:50:05 -0500
+In-Reply-To: <20201020191654.GF642265@jeremy-acer>
+To: Jeremy Allison <jra@samba.org>
+References: <E2A6FEEF-3C46-43A6-818C-D226924EB9F7@freeradius.org>
+ <20201016202528.GF67086@jeremy-acer>
  <E75C5FB4-2800-498A-868B-7F3A3CB4E802@freeradius.org>
- <20201020020246.GB564927@jeremy-acer>
- <20201020035308.GA601524@jeremy-acer>
+ <20201020020246.GB564927@jeremy-acer> <20201020035308.GA601524@jeremy-acer>
  <2F0B2708-7AC6-4FF5-99FA-8D4B8F1BAB2E@freeradius.org>
  <20201020055023.GA606244@jeremy-acer>
  <D37CFB0F-61FE-43C4-A161-DB949FF9F175@freeradius.org>
  <20201020183336.GB642265@jeremy-acer>
  <69C11FCA-3EF2-4E1F-9835-5D3FFB80D883@freeradius.org>
  <20201020191654.GF642265@jeremy-acer>
-MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="VrqPEDrXMn8OVzN4"
-Content-Disposition: inline
-In-Reply-To: <20201020191654.GF642265@jeremy-acer>
+X-Mailer: Apple Mail (2.3608.120.23.2.4)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,258 +57,229 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: jra@samba.org
+From: Arran Cudbard-Bell via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Arran Cudbard-Bell <a.cudbardb@freeradius.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 
---VrqPEDrXMn8OVzN4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--Apple-Mail=_AB390C2B-7A3A-4516-9C10-1531B903175D
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset=us-ascii
 
-On Tue, Oct 20, 2020 at 12:16:54PM -0700, Jeremy Allison via samba-technical wrote:
+
+
+> On Oct 20, 2020, at 2:16 PM, Jeremy Allison <jra@samba.org> wrote:
+> 
 > On Tue, Oct 20, 2020 at 01:42:00PM -0500, Arran Cudbard-Bell wrote:
-> > 
-> > 
-> > > On Oct 20, 2020, at 1:33 PM, Jeremy Allison <jra@samba.org> wrote:
-> > > 
-> > > On Tue, Oct 20, 2020 at 01:03:14PM -0500, Arran Cudbard-Bell wrote:
-> > >> 
-> > >> Then there's another issue with object_count ending
-> > >> up off by one, which means talloc_free_children doesn't
-> > >> actually return memory to the pool, and that messes up
-> > >> some of the other tests I'm adding.  Just tracking down
-> > >> when and why this happens now.... It might have been a
-> > >> pre-existing issue and not related to this patch, I'm just
-> > >> seeing it because of using talloc_free_children to reset
-> > >> the pool between some tests.
-> > 
-> > Apologies, there was a steal I didn't spot in the tests.
-> > One of the chunks was moved out of the pool into the root ctx.
-> > 
-> > Explicitly freeing the chunk or stealing it back into the pool
-> > means talloc_free_children works as expected.
+>> 
+>> 
+>>> On Oct 20, 2020, at 1:33 PM, Jeremy Allison <jra@samba.org> wrote:
+>>> 
+>>> On Tue, Oct 20, 2020 at 01:03:14PM -0500, Arran Cudbard-Bell wrote:
+>>>> 
+>>>> Then there's another issue with object_count ending
+>>>> up off by one, which means talloc_free_children doesn't
+>>>> actually return memory to the pool, and that messes up
+>>>> some of the other tests I'm adding.  Just tracking down
+>>>> when and why this happens now.... It might have been a
+>>>> pre-existing issue and not related to this patch, I'm just
+>>>> seeing it because of using talloc_free_children to reset
+>>>> the pool between some tests.
+>> 
+>> Apologies, there was a steal I didn't spot in the tests.
+>> One of the chunks was moved out of the pool into the root ctx.
+>> 
+>> Explicitly freeing the chunk or stealing it back into the pool
+>> means talloc_free_children works as expected.
 > 
 > FYI, once you've gotten everything working can you
 > send your test cases to me so I can add them into
 > the regression test suite for talloc ?
-> 
+
+Attached.
+
 > Then we'll add a new bug in bugzilla, update the minor library
 > version number and create a gitlab MR.
 
-OK, here's what I've got so far in terms of bugfixes/cleanups.
+Sounds good, thanks!
 
-Let me know when you're happy with your tests.
+-Arran
 
-Jeremy.
 
---VrqPEDrXMn8OVzN4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: attachment; filename=look
+
+--Apple-Mail=_AB390C2B-7A3A-4516-9C10-1531B903175D
+Content-Disposition: attachment;
+	filename=0001-Add-more-debugging-text-for-existing-memlimit-pool-t.patch
+Content-Type: application/octet-stream;
+	x-unix-mode=0644;
+	name="0001-Add-more-debugging-text-for-existing-memlimit-pool-t.patch"
 Content-Transfer-Encoding: quoted-printable
 
-=46rom e192bf70a2492f5239b6ed0f4baeabb60f13e848 Mon Sep 17 00:00:00 2001
-=46rom: Jeremy Allison <jra@samba.org>
-Date: Tue, 20 Oct 2020 10:52:55 -0700
-Subject: [PATCH 1/3] WIP: Fix memlimit on pool realloc.
+=46rom=208ceab8aa93994274d6bed6d07894eb66535079e7=20Mon=20Sep=2017=20=
+00:00:00=202001=0AFrom:=20Arran=20Cudbard-Bell=20=
+<a.cudbardb@freeradius.org>=0ADate:=20Tue,=2020=20Oct=202020=2014:10:30=20=
+-0500=0ASubject:=20[PATCH]=20Add=20more=20debugging=20text=20for=20=
+existing=20memlimit=20+=20pool=20tests=0A=0ASigned-off-by:=20Arran=20=
+Cudbard-Bell=20<a.cudbardb@freeradius.org>=0A---=0A=20=
+lib/talloc/testsuite.c=20|=2014=20++++++++++++++=0A=201=20file=20=
+changed,=2014=20insertions(+)=0A=0Adiff=20--git=20=
+a/lib/talloc/testsuite.c=20b/lib/talloc/testsuite.c=0Aindex=20=
+6c9bf203b7c..571c32ca00f=20100644=0A---=20a/lib/talloc/testsuite.c=0A+++=20=
+b/lib/talloc/testsuite.c=0A@@=20-1767,24=20+1767,38=20@@=20static=20bool=20=
+test_memlimit(void)=0A=20=09talloc_free(root);=0A=20=0A=20=09/*=20Test=20=
+memlimits=20with=20pools.=20*/=0A+=09printf("=3D=3D=3D=3D=20=
+talloc_pool(NULL,=2010*1024)\n");=0A=20=09pool=20=3D=20talloc_pool(NULL,=20=
+10*1024);=0A=20=09torture_assert("memlimit",=20pool=20!=3D=20NULL,=0A=20=09=
+=09"failed:=20alloc=20should=20not=20fail=20due=20to=20memory=20=
+limit\n");=0A+=0A+=09printf("=3D=3D=3D=3D=20talloc_set_memlimit(pool,=20=
+10*1024)\n");=0A=20=09talloc_set_memlimit(pool,=2010*1024);=0A=20=09for=20=
+(i=20=3D=200;=20i=20<=209;=20i++)=20{=0A+=09=09printf("=3D=3D=3D=3D=20=
+talloc_size(pool,=201024)=20%i/10\n",=20i=20+=201);=0A=20=09=09l1=20=3D=20=
+talloc_size(pool,=201024);=0A=20=09=09torture_assert("memlimit",=20l1=20=
+!=3D=20NULL,=0A=20=09=09=09"failed:=20alloc=20should=20not=20fail=20due=20=
+to=20memory=20limit\n");=0A+=09=09talloc_report_full(pool,=20stdout);=0A=20=
+=09}=0A=20=09/*=20The=20next=20alloc=20should=20fail.=20*/=0A+=09=
+printf("=3D=3D=3D=3D=20talloc_size(pool,=201024)=2010/10\n");=0A=20=09l2=20=
+=3D=20talloc_size(pool,=201024);=0A=20=09torture_assert("memlimit",=20l2=20=
+=3D=3D=20NULL,=0A=20=09=09=09"failed:=20alloc=20should=20fail=20due=20to=20=
+memory=20limit\n");=0A=20=0A+=09talloc_report_full(pool,=20stdout);=0A+=0A=
+=20=09/*=20Moving=20one=20of=20the=20children=20shouldn't=20change=20the=20=
+limit,=0A=20=09=20=20=20as=20it's=20still=20inside=20the=20pool.=20*/=0A=
++=0A+=09printf("=3D=3D=3D=3D=20talloc_new(NULL)\n");=0A=20=09root=20=3D=20=
+talloc_new(NULL);=0A+=0A+=09printf("=3D=3D=3D=3D=20talloc_steal(root,=20=
+l1)\n");=0A=20=09talloc_steal(root,=20l1);=0A+=0A+=09printf("=3D=3D=3D=3D=20=
+talloc_size(pool,=201024)\n");=0A=20=09l2=20=3D=20talloc_size(pool,=20=
+1024);=0A=20=09torture_assert("memlimit",=20l2=20=3D=3D=20NULL,=0A=20=09=09=
+=09"failed:=20alloc=20should=20fail=20due=20to=20memory=20limit\n");=0A=
+--=20=0A2.28.0=0A=0A=
 
-Signed-off-by: Jeremy Allison <jra@samba.org>
-Signed-off-by: Arran Cudbard-Bell <a.cudbardb@freeradius.org>
----
- lib/talloc/talloc.c | 69 ++++++++++++++++++++++++++++++++++++++++-----
- 1 file changed, 62 insertions(+), 7 deletions(-)
+--Apple-Mail=_AB390C2B-7A3A-4516-9C10-1531B903175D
+Content-Disposition: attachment;
+	filename=0002-More-tests-for-realloc-when-used-with-memlimited-poo.patch
+Content-Type: application/octet-stream;
+	x-unix-mode=0644;
+	name="0002-More-tests-for-realloc-when-used-with-memlimited-poo.patch"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/lib/talloc/talloc.c b/lib/talloc/talloc.c
-index e476f3e2d05..accc859f77e 100644
---- a/lib/talloc/talloc.c
-+++ b/lib/talloc/talloc.c
-@@ -1833,13 +1833,6 @@ _PUBLIC_ void *_talloc_realloc(const void *context, =
-void *ptr, size_t size, cons
- 		return NULL;
- 	}
-=20
--	if (tc->limit && (size > tc->size)) {
--		if (!talloc_memlimit_check(tc->limit, (size - tc->size))) {
--			errno =3D ENOMEM;
--			return NULL;
--		}
--	}
--
- 	/* handle realloc inside a talloc_pool */
- 	if (unlikely(tc->flags & TALLOC_FLAG_POOLMEM)) {
- 		pool_hdr =3D tc->pool;
-@@ -1904,6 +1897,25 @@ _PUBLIC_ void *_talloc_realloc(const void *context, =
-void *ptr, size_t size, cons
- 		pool_hdr->object_count--;
-=20
- 		if (new_ptr =3D=3D NULL) {
-+			/*
-+			 * Couldn't allocate from pool (pool size
-+			 * counts as already allocated for memlimit
-+			 * purposes). We must check memory limit
-+			 * before any real malloc.
-+			 */
-+			if (tc->limit) {
-+				/*
-+				 * Note we're doing an extra malloc,
-+				 * on top of the pool size, so account
-+				 * for size only, not the difference
-+				 * between old and new size.
-+				 */
-+				if (!talloc_memlimit_check(tc->limit, size)) {
-+					_talloc_chunk_set_not_free(tc);
-+					errno =3D ENOMEM;
-+					return NULL;
-+				}
-+			}
- 			new_ptr =3D malloc(TC_HDR_SIZE+size);
- 			malloced =3D true;
- 			new_size =3D size;
-@@ -1917,6 +1929,18 @@ _PUBLIC_ void *_talloc_realloc(const void *context, =
-void *ptr, size_t size, cons
- 		/* We're doing malloc then free here, so record the difference. */
- 		old_size =3D tc->size;
- 		new_size =3D size;
-+		/*
-+		 * We must check memory limit
-+		 * before any real malloc.
-+		 */
-+		if (tc->limit && (size > old_size)) {
-+			if (!talloc_memlimit_check(tc->limit,
-+					(size - old_size))) {
-+				_talloc_chunk_set_not_free(tc);
-+				errno =3D ENOMEM;
-+				return NULL;
-+			}
-+		}
- 		new_ptr =3D malloc(size + TC_HDR_SIZE);
- 		if (new_ptr) {
- 			memcpy(new_ptr, tc, MIN(tc->size, size) + TC_HDR_SIZE);
-@@ -2020,6 +2044,25 @@ _PUBLIC_ void *_talloc_realloc(const void *context, =
-void *ptr, size_t size, cons
- 		new_ptr =3D tc_alloc_pool(tc, size + TC_HDR_SIZE, 0);
-=20
- 		if (new_ptr =3D=3D NULL) {
-+			/*
-+			 * Couldn't allocate from pool (pool size
-+			 * counts as already allocated for memlimit
-+			 * purposes). We must check memory limit
-+			 * before any real malloc.
-+			 */
-+			if (tc->limit) {
-+				/*
-+				 * Note we're doing an extra malloc,
-+				 * on top of the pool size, so account
-+				 * for size only, not the difference
-+				 * between old and new size.
-+				 */
-+				if (!talloc_memlimit_check(tc->limit, size)) {
-+					_talloc_chunk_set_not_free(tc);
-+					errno =3D ENOMEM;
-+					return NULL;
-+				}
-+			}
- 			new_ptr =3D malloc(TC_HDR_SIZE+size);
- 			malloced =3D true;
- 			new_size =3D size;
-@@ -2035,6 +2078,18 @@ _PUBLIC_ void *_talloc_realloc(const void *context, =
-void *ptr, size_t size, cons
- 		/* We're doing realloc here, so record the difference. */
- 		old_size =3D tc->size;
- 		new_size =3D size;
-+		/*
-+		 * We must check memory limit
-+		 * before any real realloc.
-+		 */
-+		if (tc->limit && (size > old_size)) {
-+			if (!talloc_memlimit_check(tc->limit,
-+					(size - old_size))) {
-+				_talloc_chunk_set_not_free(tc);
-+				errno =3D ENOMEM;
-+				return NULL;
-+			}
-+		}
- 		new_ptr =3D realloc(tc, size + TC_HDR_SIZE);
- 	}
- got_new_ptr:
---=20
-2.25.1
+=46rom=20a41b69c122bb416680a7db9f1cdb2cdb6f511af0=20Mon=20Sep=2017=20=
+00:00:00=202001=0AFrom:=20Arran=20Cudbard-Bell=20=
+<a.cudbardb@freeradius.org>=0ADate:=20Tue,=2020=20Oct=202020=2014:12:17=20=
+-0500=0ASubject:=20[PATCH]=20More=20tests=20for=20realloc=20when=20used=20=
+with=20memlimited=20pools=0A=0ASigned-off-by:=20Arran=20Cudbard-Bell=20=
+<a.cudbardb@freeradius.org>=0A---=0A=20lib/talloc/testsuite.c=20|=20103=20=
++++++++++++++++++++++++++++++++++++++++++=0A=201=20file=20changed,=20103=20=
+insertions(+)=0A=0Adiff=20--git=20a/lib/talloc/testsuite.c=20=
+b/lib/talloc/testsuite.c=0Aindex=20571c32ca00f..6f23ad4e18a=20100644=0A=
+---=20a/lib/talloc/testsuite.c=0A+++=20b/lib/talloc/testsuite.c=0A@@=20=
+-1803,6=20+1803,109=20@@=20static=20bool=20test_memlimit(void)=0A=20=09=
+torture_assert("memlimit",=20l2=20=3D=3D=20NULL,=0A=20=09=09=09"failed:=20=
+alloc=20should=20fail=20due=20to=20memory=20limit\n");=0A=20=0A+=09=
+printf("=3D=3D=3D=3D=20talloc_free_children(pool)\n");=0A+=09=
+talloc_free(l1);=0A+=09talloc_free_children(pool);=0A+=0A+=09=
+printf("=3D=3D=3D=3D=20talloc_size(pool,=201024)\n");=0A+=09l1=20=3D=20=
+talloc_size(pool,=201024);=0A+=0A+=09/*=20try=20reallocs=20of=20=
+increasing=20size=20*/=0A+=09for=20(i=20=3D=201;=20i=20<=209;=20i++)=20{=0A=
++=09=09printf("=3D=3D=3D=3D=20talloc_realloc_size(NULL,=20l1,=20%i*1024)=20=
+%i/10\n",=20i,=20i=20+=201);=0A+=09=09l1=20=3D=20=
+talloc_realloc_size(NULL,=20l1,=20i*1024);=0A+=09=09=
+torture_assert("memlimit",=20l1=20!=3D=20NULL,=0A+=09=09=09"failed:=20=
+realloc=20should=20not=20fail=20due=20to=20memory=20limit\n");=0A+=09=09=
+talloc_report_full(pool,=20stdout);=0A+=09}=0A+=09/*=20The=20next=20=
+alloc=20should=20fail.=20*/=0A+=09printf("=3D=3D=3D=3D=20=
+talloc_realloc_size(NULL,=20l1,=2010*1024)=2010/10\n");=0A+=09l2=20=3D=20=
+talloc_realloc_size(NULL,=20l1,=2010*1024);=0A+=09=
+torture_assert("memlimit",=20l2=20=3D=3D=20NULL,=0A+=09=09=09"failed:=20=
+realloc=20should=20fail=20due=20to=20memory=20limit\n");=0A+=0A+=09/*=20=
+Increase=20the=20memlimit=20*/=0A+=09printf("=3D=3D=3D=3D=20=
+talloc_set_memlimit(pool,=2011*1024)\n");=0A+=09=
+talloc_set_memlimit(pool,=2011*1024);=0A+=0A+=09/*=20The=20final=20=
+realloc=20should=20still=20fail=0A+=09=20=20=20as=20the=20entire=20=
+realloced=20chunk=20needs=20to=20be=20moved=20out=20of=20the=20pool=20*/=0A=
++=09printf("=3D=3D=3D=3D=20talloc_realloc_size(NULL,=20l1,=2010*1024)=20=
+10/10\n");=0A+=09l2=20=3D=20talloc_realloc_size(NULL,=20l1,=2010*1024);=0A=
++=09torture_assert("memlimit",=20l2=20=3D=3D=20NULL,=0A+=09=09=09=
+"failed:=20realloc=20should=20fail=20due=20to=20memory=20limit\n");=0A+=0A=
++=09talloc_report_full(pool,=20stdout);=0A+=0A+=09printf("=3D=3D=3D=3D=20=
+talloc_set_memlimit(pool,=2021*1024)\n");=0A+=09=
+talloc_set_memlimit(pool,=2021*1024);=0A+=0A+=09/*=20There's=20now=20=
+sufficient=20space=20to=20move=20the=20chunk=20out=20of=20the=20pool=20=
+*/=0A+=09printf("=3D=3D=3D=3D=20talloc_realloc_size(NULL,=20l1,=20=
+10*1024)=2010/10\n");=0A+=09l2=20=3D=20talloc_realloc_size(NULL,=20l1,=20=
+10*1024);=0A+=09torture_assert("memlimit",=20l2=20!=3D=20NULL,=0A+=09=09=09=
+"failed:=20realloc=20should=20not=20fail=20due=20to=20memory=20=
+limit\n");=0A+=0A+=09talloc_report_full(pool,=20stdout);=0A+=0A+=09/*=20=
+...which=20should=20mean=20smaller=20allocations=20can=20now=20occur=20=
+within=20the=20pool=20*/=0A+=09printf("=3D=3D=3D=3D=20talloc_size(pool,=20=
+9*1024)\n");=0A+=09l1=20=3D=20talloc_size(pool,=209*1024);=0A+=09=
+torture_assert("memlimit",=20l1=20!=3D=20NULL,=0A+=09=09=09"failed:=20=
+new=20allocations=20should=20be=20allowed=20in=20the=20pool\n");=0A+=0A+=09=
+talloc_report_full(pool,=20stdout);=0A+=0A+=09/*=20But=20reallocs=20=
+bigger=20than=20the=20pool=20will=20still=20fail=20*/=0A+=09printf("=3D=3D=
+=3D=3D=20talloc_realloc_size(NULL,=20l1,=2010*1024)\n");=0A+=09l2=20=3D=20=
+talloc_realloc_size(NULL,=20l1,=2010*1024);=0A+=09=
+torture_assert("memlimit",=20l2=20=3D=3D=20NULL,=0A+=09=09=09"failed:=20=
+realloc=20should=20fail=20due=20to=20memory=20limit\n");=0A+=0A+=09=
+talloc_report_full(pool,=20stdout);=0A+=0A+=09/*=20..as=20well=20as=20=
+allocs=20*/=0A+=09printf("=3D=3D=3D=3D=20talloc_size(pool,=201024)\n");=0A=
++=09l1=20=3D=20talloc_size(pool,=201024);=0A+=09=
+torture_assert("memlimit",=20l1=20=3D=3D=20NULL,=0A+=09=09=09"failed:=20=
+alloc=20should=20fail=20due=20to=20memory=20limit\n");=0A+=0A+=09=
+talloc_report_full(pool,=20stdout);=0A+=0A+=09printf("=3D=3D=3D=3D=20=
+talloc_free_children(pool)\n");=0A+=09talloc_free_children(pool);=0A+=0A=
++=09printf("=3D=3D=3D=3D=20talloc_set_memlimit(pool,=201024)\n");=0A+=09=
+talloc_set_memlimit(pool,=201024);=0A+=0A+=09/*=20We=20should=20still=20=
+be=20able=20to=20allocate=20up=20to=20the=20pool=20limit=0A+=09=20=20=20=
+because=20the=20memlimit=20only=20applies=20to=20new=20heap=20=
+allocations=20*/=0A+=09printf("=3D=3D=3D=3D=20talloc_size(pool,=20=
+9*1024)\n");=0A+=09l1=20=3D=20talloc_size(pool,=209*1024);=0A+=09=
+torture_assert("memlimit",=20l1=20!=3D=20NULL,=0A+=09=09=09"failed:=20=
+alloc=20should=20not=20fail=20due=20to=20memory=20limit\n");=0A+=0A+=09=
+talloc_report_full(pool,=20stdout);=0A+=0A+=09l1=20=3D=20=
+talloc_size(pool,=201024);=0A+=09torture_assert("memlimit",=20l1=20=3D=3D=20=
+NULL,=0A+=09=09=09"failed:=20alloc=20should=20fail=20due=20to=20memory=20=
+limit\n");=0A+=0A+=09talloc_report_full(pool,=20stdout);=0A+=0A+=09=
+printf("=3D=3D=3D=3D=20talloc_free_children(pool)\n");=0A+=09=
+talloc_free_children(pool);=0A+=0A+=09printf("=3D=3D=3D=3D=20=
+talloc_set_memlimit(pool,=2010*1024)\n");=0A+=09=
+talloc_set_memlimit(pool,=2010*1024);=0A+=0A+=09printf("=3D=3D=3D=3D=20=
+talloc_size(pool,=201024)\n");=0A+=09l1=20=3D=20talloc_size(pool,=20=
+1024);=0A+=09torture_assert("memlimit",=20l1=20!=3D=20NULL,=0A+=09=09=09=
+"failed:=20alloc=20should=20not=20fail=20due=20to=20memory=20limit\n");=0A=
++=0A+=09talloc_report_full(pool,=20stdout);=0A+=0A=20=09=
+talloc_free(pool);=0A=20=09talloc_free(root);=0A=20=09printf("success:=20=
+memlimit\n");=0A--=20=0A2.28.0=0A=0A=
 
+--Apple-Mail=_AB390C2B-7A3A-4516-9C10-1531B903175D
+Content-Disposition: attachment;
+	filename=0003-Add-note-on-memlimit-and-pools.patch
+Content-Type: application/octet-stream;
+	x-unix-mode=0644;
+	name="0003-Add-note-on-memlimit-and-pools.patch"
+Content-Transfer-Encoding: quoted-printable
 
-=46rom 1706bf30739f91bb8e1f529f2acfc45bdf342173 Mon Sep 17 00:00:00 2001
-=46rom: Jeremy Allison <jra@samba.org>
-Date: Tue, 20 Oct 2020 12:14:58 -0700
-Subject: [PATCH 2/3] WIP: Fix pool object accounting when doing
- talloc_realloc() in the ALWAYS_REALLOC compiled case.
+=46rom=200f5293f8777534d4048a370510ca5311889bc624=20Mon=20Sep=2017=20=
+00:00:00=202001=0AFrom:=20Arran=20Cudbard-Bell=20=
+<a.cudbardb@freeradius.org>=0ADate:=20Tue,=2020=20Oct=202020=2014:48:35=20=
+-0500=0ASubject:=20[PATCH]=20Add=20note=20on=20memlimit=20and=20pools=0A=0A=
+Signed-off-by:=20Arran=20Cudbard-Bell=20<a.cudbardb@freeradius.org>=0A=
+---=0A=20lib/talloc/talloc.h=20|=204=20++++=0A=201=20file=20changed,=204=20=
+insertions(+)=0A=0Adiff=20--git=20a/lib/talloc/talloc.h=20=
+b/lib/talloc/talloc.h=0Aindex=200154bf3bbf6..bd88c056e7a=20100644=0A---=20=
+a/lib/talloc/talloc.h=0A+++=20b/lib/talloc/talloc.h=0A@@=20-1920,6=20=
++1920,10=20@@=20void=20talloc_set_log_stderr(void);=0A=20=20*=09=20=20=
+move=20causes=20the=20new=20parent=20to=20exceed=20its=20limits.=20=
+However=0A=20=20*=09=20=20any=20further=20allocation=20on=20that=20=
+hierarchy=20will=20then=20fail.=0A=20=20*=0A+=20*=20@note=20When=20used=20=
+with=20pools=20talloc=20memlimit=20will=20apply=20only=20to=20memory=0A+=20=
+*=09=20allocated=20outside=20of=20the=20pool.=20All=20allocations=20up=20=
+to=20the=20size=0A+=20*=09=20of=20the=20pool=20will=20succeed=20=
+irrespective=20of=20any=20memlimit=20set.=0A+=20*=0A=20=20*=20@warning=20=
+talloc=20memlimit=20functionality=20is=20deprecated.=20Please=0A=20=20*=09=
+=20=20=20=20consider=20using=20cgroup=20memory=20limits=20instead.=0A=20=20=
+*=0A--=20=0A2.28.0=0A=0A=
 
-Signed-off-by: Jeremy Allison <jra@samba.org>
----
- lib/talloc/talloc.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
-
-diff --git a/lib/talloc/talloc.c b/lib/talloc/talloc.c
-index accc859f77e..f28a22b799c 100644
---- a/lib/talloc/talloc.c
-+++ b/lib/talloc/talloc.c
-@@ -1894,8 +1894,6 @@ _PUBLIC_ void *_talloc_realloc(const void *context, v=
-oid *ptr, size_t size, cons
- #if ALWAYS_REALLOC
- 	if (pool_hdr) {
- 		new_ptr =3D tc_alloc_pool(tc, size + TC_HDR_SIZE, 0);
--		pool_hdr->object_count--;
--
- 		if (new_ptr =3D=3D NULL) {
- 			/*
- 			 * Couldn't allocate from pool (pool size
-@@ -1924,6 +1922,11 @@ _PUBLIC_ void *_talloc_realloc(const void *context, =
-void *ptr, size_t size, cons
- 		if (new_ptr) {
- 			memcpy(new_ptr, tc, MIN(tc->size,size) + TC_HDR_SIZE);
- 			TC_INVALIDATE_FULL_CHUNK(tc);
-+			/*
-+			 * Only decrement the object count in the pool once
-+			 * we know we're returning a valid new_ptr.
-+			 */
-+			pool_hdr->object_count--;
- 		}
- 	} else {
- 		/* We're doing malloc then free here, so record the difference. */
---=20
-2.25.1
-
-
-=46rom 9f849ea792d3f7e32fd354b4218fff368bee1e10 Mon Sep 17 00:00:00 2001
-=46rom: Jeremy Allison <jra@samba.org>
-Date: Tue, 20 Oct 2020 12:18:10 -0700
-Subject: [PATCH 3/3] lib: talloc: Cleanup. Use consistent preprocessor logic
- macros.
-
-Match other use of ALWAYS_REALLOC.
-
-Signed-off-by: Jeremy Allison <jra@samba.org>
----
- lib/talloc/talloc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/lib/talloc/talloc.c b/lib/talloc/talloc.c
-index f28a22b799c..078e58ca352 100644
---- a/lib/talloc/talloc.c
-+++ b/lib/talloc/talloc.c
-@@ -1891,7 +1891,7 @@ _PUBLIC_ void *_talloc_realloc(const void *context, v=
-oid *ptr, size_t size, cons
- 	 */
- 	_talloc_chunk_set_free(tc, NULL);
-=20
--#if ALWAYS_REALLOC
-+#if (ALWAYS_REALLOC !=3D 0)
- 	if (pool_hdr) {
- 		new_ptr =3D tc_alloc_pool(tc, size + TC_HDR_SIZE, 0);
- 		if (new_ptr =3D=3D NULL) {
---=20
-2.25.1
-
-
---VrqPEDrXMn8OVzN4--
+--Apple-Mail=_AB390C2B-7A3A-4516-9C10-1531B903175D--
 
