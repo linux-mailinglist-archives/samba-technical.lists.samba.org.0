@@ -2,59 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA8632940EC
-	for <lists+samba-technical@lfdr.de>; Tue, 20 Oct 2020 18:56:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 78D742941D5
+	for <lists+samba-technical@lfdr.de>; Tue, 20 Oct 2020 20:04:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=qz4MjVNVxrecIcW8x1TcdGzeDcTlGL+33knVz17BQFk=; b=W0nFu69S9yi5+HCNLSCAP/Kk0F
-	f0030+jbRmkVelIhEru5wArJg7gF1YGlBrk5Sgs09ZQwdHxmBzkHVcm/YkfPvKAJpS9F+eN4I81QB
-	D2m4TJT5hfRUXLte19i9b/WeA/44B8heM31oA8K0svgNzAkVSZ5tsUZlIT6taT1Or5gzt0/Q41pkj
-	qo6+g5ppG6UXHk5nNWdhbAYuVMOU8fkZeSUfKsTuXwzq+wsQUtUsqBGCZOoQYn+liFZeYSxzHNabC
-	TZVdLPc+MRqDU21XEdWj+wiPu2Mnxt5mlrSfcnbiiJCC0CP5/+nDfZi93I96dnESX/8H86O3NSLpC
-	M0i3LCiA==;
-Received: from ip6-localhost ([::1]:61454 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Date:Subject;
+	bh=V7S3BYW3QgRzMtsUcur2cH7b7huptjFh3H90uVFsM3w=; b=UUd/nH35VVUBt9270YlSrBsPJ4
+	XHtxyt3ZVlFE5hsFaaM/9NsFEp6O4ODSXEuP6jW4XmPLi3hCDuMNm0vevwK4BKoaDxRxdROA7xSLU
+	JL2o0eMRAivokUupGKYw71Cb2dFR0y8OAUJYe5J92PAJ0gZ4WdLNDXmZv2O8qigpQvIB5U41hbHYJ
+	+r1Guhtp402IPmpwSRSOfqQIkW1SXW5pPkSVGkHKOCzCoAxV/HL2fOLsf2MqXMSMUfC66mM9ru3Xp
+	IHEDdP0dEp04c8cGKHtocjPnS6vWMaIu/AFwPyUyzR6ssvYjx9Tc8x5/obPGv/0Kfj4hifz9DU6Hz
+	Vr77Nt/g==;
+Received: from ip6-localhost ([::1]:64480 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kUuvU-00Cuq3-G6; Tue, 20 Oct 2020 16:55:56 +0000
-Received: from mail-lj1-x243.google.com ([2a00:1450:4864:20::243]:35382) 
+	id 1kUvyo-00CvM4-0O; Tue, 20 Oct 2020 18:03:26 +0000
+Received: from mail.networkradius.com ([62.210.147.122]:50889) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kUuvO-00Cupw-3D
- for samba-technical@lists.samba.org; Tue, 20 Oct 2020 16:55:52 +0000
-Received: by mail-lj1-x243.google.com with SMTP id x16so2799083ljh.2
- for <samba-technical@lists.samba.org>; Tue, 20 Oct 2020 09:55:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=qz4MjVNVxrecIcW8x1TcdGzeDcTlGL+33knVz17BQFk=;
- b=aG17Up5akVMalus/NeTKE6aGHRm8gjB8jK8Dg9CnkPsI4ut9T47Fv5EQIZGF9BPJ86
- ExjfCyIUMdOYnaAEz2khGxxEHm4XoyPVL6F9uaAZRqNQjJD4f5JQeQNQ0tYclIclsJJC
- WLiz5CWas+RPe8snAwhmVHuToZg47AYHMIaj8Hm2xfHgugHgd3ZyV3jKiin0ICJ++eQi
- Bwj0fxcN6+SUO90+CID7elktrVTAcoVf0b7CHvIcV+41h+gn+TNlrvZwQ42LKVbhHQfX
- Pv+eUoraYIt4K9nwfAXcVQhyLBYK7BDxxi99rqoMcJiusaFZFSORaeny07vbrz4g/yA2
- piqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=qz4MjVNVxrecIcW8x1TcdGzeDcTlGL+33knVz17BQFk=;
- b=Sx5LJXyIZQN5Vm0SKy2FHIdVCkLUvOmnG0BOtw3C6az5lo55HuWT3NbicF/fRw+hek
- lSMdEnIWa0YVNDQQuQjrmZ2eVun/cUKCnMq9GK9MtL9kWY9mqbsT8dzLcpQFXyNHzZal
- +AteaR6lCTblBPQdgcvwFYeEvRbBLfNXyoR7JD4OoD3hzoGt4DIRWYbtxv+km+jUWgWi
- BKa0x6Hv1k/6yoMwShsaqv7HWUu9pdYQYiToxUrZAxkU+wx6dKnBLgB9d8/jpIH8byjz
- F9WuhGuHykN3unOCm88ZL9DC7BtGN5+aLvPoPafmafUynOV539OnXnIA7vTvFnVHlcoM
- Rljg==
-X-Gm-Message-State: AOAM531TxiY4Z7zwFXNt5heq9rFS/3gJE8piCUppXHZLQnr8vdQ9RK2E
- 3BpDghnWdA/cDGB/Ip/kJiKzOXD/uMTiJ6tJnjo=
-X-Google-Smtp-Source: ABdhPJxmKwy1feIl6inzCUzl6utHPj8AV6tlP+rB48lrZaEGH3kifdhldf95yOCS+tz/ydf7Xnce7H5lree+fPvT0cY=
-X-Received: by 2002:a2e:b0e4:: with SMTP id h4mr1454870ljl.119.1603212948806; 
- Tue, 20 Oct 2020 09:55:48 -0700 (PDT)
-MIME-Version: 1.0
-References: <20201020141936.52272-1-colin.king@canonical.com>
-In-Reply-To: <20201020141936.52272-1-colin.king@canonical.com>
-Date: Tue, 20 Oct 2020 11:55:38 -0500
-Message-ID: <CAH2r5muM5K802hub3WYJYcC5Mqi8K2S2HJa1hgW_mo+oW0toMA@mail.gmail.com>
-Subject: Re: [PATCH] cifs: make const array static, makes object smaller
-To: Colin King <colin.king@canonical.com>,
- =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>
-Content-Type: text/plain; charset="UTF-8"
+ (Exim) id 1kUvyj-00CvLx-1I
+ for samba-technical@lists.samba.org; Tue, 20 Oct 2020 18:03:23 +0000
+Received: from shinyhead.rga.ip (unknown [187.142.130.164])
+ by mail.networkradius.com (Postfix) with ESMTPSA id 4C6924FD;
+ Tue, 20 Oct 2020 18:03:17 +0000 (UTC)
+Authentication-Results: NetworkRADIUS; dmarc=none (p=none dis=none)
+ header.from=freeradius.org
+Message-Id: <D37CFB0F-61FE-43C4-A161-DB949FF9F175@freeradius.org>
+Content-Type: multipart/mixed;
+ boundary="Apple-Mail=_C55BE5D6-3900-4A17-B300-98D689D643AA"
+Mime-Version: 1.0 (Mac OS X Mail 13.4 \(3608.120.23.2.4\))
+Subject: Re: talloc: talloc_set_memlimit causes all reallocs to fail when used
+ on pools.   talloc_set_memlimit not enforced correctly on pools.
+Date: Tue, 20 Oct 2020 13:03:14 -0500
+In-Reply-To: <20201020055023.GA606244@jeremy-acer>
+To: Jeremy Allison <jra@samba.org>
+References: <DA0D6B87-BA18-41EA-8ACE-E431841902FE@freeradius.org>
+ <20201016194436.GD67086@jeremy-acer>
+ <2B2DBDAF-26F4-4FF4-A2A6-A194F507A352@freeradius.org>
+ <E2A6FEEF-3C46-43A6-818C-D226924EB9F7@freeradius.org>
+ <20201016202528.GF67086@jeremy-acer>
+ <E75C5FB4-2800-498A-868B-7F3A3CB4E802@freeradius.org>
+ <20201020020246.GB564927@jeremy-acer> <20201020035308.GA601524@jeremy-acer>
+ <2F0B2708-7AC6-4FF5-99FA-8D4B8F1BAB2E@freeradius.org>
+ <20201020055023.GA606244@jeremy-acer>
+X-Mailer: Apple Mail (2.3608.120.23.2.4)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,65 +56,136 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- kernel-janitors <kernel-janitors@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>
+From: Arran Cudbard-Bell via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Arran Cudbard-Bell <a.cudbardb@freeradius.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-added Aurelien's Reviewed-by and merged into cifs-2.6.git for-next
 
-On Tue, Oct 20, 2020 at 9:22 AM Colin King <colin.king@canonical.com> wrote:
->
-> From: Colin Ian King <colin.king@canonical.com>
->
-> Don't populate const array smb3_create_tag_posix on the stack but
-> instead make it static. Makes the object code smaller by 50 bytes.
->
-> Before:
->    text    data     bss     dec     hex filename
->  150184   47167       0  197351   302e7 fs/cifs/smb2pdu.o
->
-> After:
->     text           data     bss     dec     hex filename
->  150070   47231       0  197301   302b5 fs/cifs/smb2pdu.o
->
-> (gcc version 10.2.0)
->
-> Signed-off-by: Colin Ian King <colin.king@canonical.com>
-> ---
->  fs/cifs/smb2pdu.c | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
->
-> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
-> index d504bc296349..be8696abd871 100644
-> --- a/fs/cifs/smb2pdu.c
-> +++ b/fs/cifs/smb2pdu.c
-> @@ -1971,9 +1971,11 @@ smb2_parse_contexts(struct TCP_Server_Info *server,
->         unsigned int next;
->         unsigned int remaining;
->         char *name;
-> -       const char smb3_create_tag_posix[] = {0x93, 0xAD, 0x25, 0x50, 0x9C,
-> -                                       0xB4, 0x11, 0xE7, 0xB4, 0x23, 0x83,
-> -                                       0xDE, 0x96, 0x8B, 0xCD, 0x7C};
-> +       static const char smb3_create_tag_posix[] = {
-> +               0x93, 0xAD, 0x25, 0x50, 0x9C,
-> +               0xB4, 0x11, 0xE7, 0xB4, 0x23, 0x83,
-> +               0xDE, 0x96, 0x8B, 0xCD, 0x7C
-> +       };
->
->         *oplock = 0;
->         data_offset = (char *)rsp + le32_to_cpu(rsp->CreateContextsOffset);
-> --
-> 2.27.0
->
+--Apple-Mail=_C55BE5D6-3900-4A17-B300-98D689D643AA
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
 
--- 
-Thanks,
 
-Steve
+> On Oct 20, 2020, at 12:50 AM, Jeremy Allison <jra@samba.org> wrote:
+>=20
+> On Mon, Oct 19, 2020 at 11:17:29PM -0500, Arran Cudbard-Bell via =
+samba-technical wrote:
+>> Much appreciated!  I'll try this out tomorrow.
+>>=20
+>> Just so I'm clear on the expected behaviour, could
+>> you verify that these assumptions are correct:
+>>=20
+>> 1. If there's a 1024 byte pool, with a 2048 byte memlimit,
+>> the amount of memory allocated outside of the pool would=20
+>> be limited to 1024 bytes.
+>=20
+> Yes. Pool =3D=3D 1024 bytes allocated, any extra must be
+> below total size (including pool, which is treated
+> as allocated).
+>=20
+>> 2. If there's a 1024 byte pool, with a 1024 byte memlimit,
+>> any alloc or realloc up to the pool size would succeed,
+>> but any alloc or realloc which'd result in a chunk being
+>> allocated outside of pool memory would fail.
+>=20
+> Yes. memlimit =3D=3D pool size, so any further mallocs/reallocs
+> adding memory should fail.
+>=20
+>> 3. If there's a 1024 byte pool, with a 512 byte memlimit,
+>> the memlimit would cause all reallocs and allocs to
+>> fail, because the pool size is already greater than the
+>> memlimit.
+>=20
+> No. Allocations inside the pool below 1024 bytes would
+> always succeed (until the pool is filled) as when allocating
+> from a pool the memlimit isn't checked if the allocation
+> can be filled from within the pool.
+>=20
+> memlimit is only checked in actual malloc/realloc calls.
+>=20
+> If a pool already exists, it's assumed that it must already
+> have fit within the memlimit. It makes no sense to
+> set the limit lower than the pool size.
+>=20
+>> Additionally, if the third assumption is correct, do you=20
+>> see any value in instead having talloc_set_memlimit=20
+>> fail if a caller specifies a memlimit smaller than the pool?
+>=20
+> Nope. See above.
+
+OK.  That patch seems to mostly work but there are a few
+issues.
+
+First is an easy one. After a realloc failure due to hitting the
+memlimit, the chunk remains marked as free, so when a
+report gets run later in the test suite, we get a use-after-free
+error.
+
+
+--Apple-Mail=_C55BE5D6-3900-4A17-B300-98D689D643AA
+Content-Disposition: attachment;
+	filename=0001-Mark-chunks-that-failed-realloc-as-not-free.patch
+Content-Type: application/octet-stream;
+	x-unix-mode=0644;
+	name="0001-Mark-chunks-that-failed-realloc-as-not-free.patch"
+Content-Transfer-Encoding: quoted-printable
+
+=46rom=202c46ea92dbcbf6f403d90b67370b63055d49ed36=20Mon=20Sep=2017=20=
+00:00:00=202001=0AFrom:=20Arran=20Cudbard-Bell=20=
+<a.cudbardb@freeradius.org>=0ADate:=20Tue,=2020=20Oct=202020=2012:45:05=20=
+-0500=0ASubject:=20[PATCH]=20Mark=20chunks=20that=20failed=20realloc=20=
+as=20"not=20free"=0A=0ASigned-off-by:=20Arran=20Cudbard-Bell=20=
+<a.cudbardb@freeradius.org>=0A---=0A=20lib/talloc/talloc.c=20|=204=20=
+++++=0A=201=20file=20changed,=204=20insertions(+)=0A=0Adiff=20--git=20=
+a/lib/talloc/talloc.c=20b/lib/talloc/talloc.c=0Aindex=20=
+2e7a803d995..7698f66bee7=20100644=0A---=20a/lib/talloc/talloc.c=0A+++=20=
+b/lib/talloc/talloc.c=0A@@=20-1912,6=20+1912,7=20@@=20_PUBLIC_=20void=20=
+*_talloc_realloc(const=20void=20*context,=20void=20*ptr,=20size_t=20=
+size,=20cons=0A=20=09=09=09=09=20*/=0A=20=09=09=09=09if=20=
+(!talloc_memlimit_check(tc->limit,=20size))=20{=0A=20=09=09=09=09=09=
+errno=20=3D=20ENOMEM;=0A+=09=09=09=09=09_talloc_chunk_set_not_free(tc);=0A=
+=20=09=09=09=09=09return=20NULL;=0A=20=09=09=09=09}=0A=20=09=09=09}=0A@@=20=
+-1936,6=20+1937,7=20@@=20_PUBLIC_=20void=20*_talloc_realloc(const=20void=20=
+*context,=20void=20*ptr,=20size_t=20size,=20cons=0A=20=09=09=09if=20=
+(!talloc_memlimit_check(tc->limit,=0A=20=09=09=09=09=09(size=20-=20=
+old_size)))=20{=0A=20=09=09=09=09errno=20=3D=20ENOMEM;=0A+=09=09=09=09=
+_talloc_chunk_set_not_free(tc);=0A=20=09=09=09=09return=20NULL;=0A=20=09=09=
+=09}=0A=20=09=09}=0A@@=20-2057,6=20+2059,7=20@@=20_PUBLIC_=20void=20=
+*_talloc_realloc(const=20void=20*context,=20void=20*ptr,=20size_t=20=
+size,=20cons=0A=20=09=09=09=09=20*/=0A=20=09=09=09=09if=20=
+(!talloc_memlimit_check(tc->limit,=20size))=20{=0A=20=09=09=09=09=09=
+errno=20=3D=20ENOMEM;=0A+=09=09=09=09=09_talloc_chunk_set_not_free(tc);=0A=
+=20=09=09=09=09=09return=20NULL;=0A=20=09=09=09=09}=0A=20=09=09=09}=0A@@=20=
+-2083,6=20+2086,7=20@@=20_PUBLIC_=20void=20*_talloc_realloc(const=20void=20=
+*context,=20void=20*ptr,=20size_t=20size,=20cons=0A=20=09=09=09if=20=
+(!talloc_memlimit_check(tc->limit,=0A=20=09=09=09=09=09(size=20-=20=
+old_size)))=20{=0A=20=09=09=09=09errno=20=3D=20ENOMEM;=0A+=09=09=09=09=
+_talloc_chunk_set_not_free(tc);=0A=20=09=09=09=09return=20NULL;=0A=20=09=09=
+=09}=0A=20=09=09}=0A--=20=0A2.28.0=0A=0A=
+
+--Apple-Mail=_C55BE5D6-3900-4A17-B300-98D689D643AA
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset=us-ascii
+
+
+
+Then there's another issue with object_count ending
+up off by one, which means talloc_free_children doesn't
+actually return memory to the pool, and that messes up
+some of the other tests I'm adding.  Just tracking down
+when and why this happens now.... It might have been a
+pre-existing issue and not related to this patch, I'm just
+seeing it because of using talloc_free_children to reset
+the pool between some tests.
+
+-Arran
+
+
+
+--Apple-Mail=_C55BE5D6-3900-4A17-B300-98D689D643AA--
 
