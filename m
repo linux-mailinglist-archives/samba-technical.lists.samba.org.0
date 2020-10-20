@@ -2,47 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78D742941D5
-	for <lists+samba-technical@lfdr.de>; Tue, 20 Oct 2020 20:04:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A618294214
+	for <lists+samba-technical@lfdr.de>; Tue, 20 Oct 2020 20:25:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Date:Subject;
-	bh=V7S3BYW3QgRzMtsUcur2cH7b7huptjFh3H90uVFsM3w=; b=UUd/nH35VVUBt9270YlSrBsPJ4
-	XHtxyt3ZVlFE5hsFaaM/9NsFEp6O4ODSXEuP6jW4XmPLi3hCDuMNm0vevwK4BKoaDxRxdROA7xSLU
-	JL2o0eMRAivokUupGKYw71Cb2dFR0y8OAUJYe5J92PAJ0gZ4WdLNDXmZv2O8qigpQvIB5U41hbHYJ
-	+r1Guhtp402IPmpwSRSOfqQIkW1SXW5pPkSVGkHKOCzCoAxV/HL2fOLsf2MqXMSMUfC66mM9ru3Xp
-	IHEDdP0dEp04c8cGKHtocjPnS6vWMaIu/AFwPyUyzR6ssvYjx9Tc8x5/obPGv/0Kfj4hifz9DU6Hz
-	Vr77Nt/g==;
-Received: from ip6-localhost ([::1]:64480 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=o3WD6lrADmxBgifs7lKVGgTMbaythwJ5d5TI0v7z1iU=; b=iMSI1l7178Ex59FKFk4smy/C4c
+	oSQeiLZd/zLK9SYwmjVcpCQL0Uf+zuhZWrOozQpzZsopaxK/a/W8MtbW1TE5u5a/4unlfRQMPxXPj
+	7la+PuMbNSnxcvxdr/W5FvJm1tOP4HhiODHOoscL0XV95P5l+0IWmzNIpDjNoCxRpSH0HxGkKIq3X
+	Zr98qB8NwUF9m2ht2hv6dt4h5CsY1misSq02aiucAaWVFoM6VagiipQa4kHem/tJiYaLfMdJ1tRo8
+	IWOtFgk+VZGpadYU4Tu9m6BCGjjGLcovUhNp3Osjw5Btz6IJpU2/Y39/OAcIs0OD4Wq3b4HLvpi9f
+	Hc8cc5HQ==;
+Received: from ip6-localhost ([::1]:65330 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kUvyo-00CvM4-0O; Tue, 20 Oct 2020 18:03:26 +0000
-Received: from mail.networkradius.com ([62.210.147.122]:50889) 
+	id 1kUwJX-00CvUc-LX; Tue, 20 Oct 2020 18:24:51 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16876) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kUvyj-00CvLx-1I
- for samba-technical@lists.samba.org; Tue, 20 Oct 2020 18:03:23 +0000
-Received: from shinyhead.rga.ip (unknown [187.142.130.164])
- by mail.networkradius.com (Postfix) with ESMTPSA id 4C6924FD;
- Tue, 20 Oct 2020 18:03:17 +0000 (UTC)
-Authentication-Results: NetworkRADIUS; dmarc=none (p=none dis=none)
- header.from=freeradius.org
-Message-Id: <D37CFB0F-61FE-43C4-A161-DB949FF9F175@freeradius.org>
-Content-Type: multipart/mixed;
- boundary="Apple-Mail=_C55BE5D6-3900-4A17-B300-98D689D643AA"
-Mime-Version: 1.0 (Mac OS X Mail 13.4 \(3608.120.23.2.4\))
-Subject: Re: talloc: talloc_set_memlimit causes all reallocs to fail when used
- on pools.   talloc_set_memlimit not enforced correctly on pools.
-Date: Tue, 20 Oct 2020 13:03:14 -0500
-In-Reply-To: <20201020055023.GA606244@jeremy-acer>
-To: Jeremy Allison <jra@samba.org>
-References: <DA0D6B87-BA18-41EA-8ACE-E431841902FE@freeradius.org>
- <20201016194436.GD67086@jeremy-acer>
+ (Exim) id 1kUwJS-00CvUV-2F
+ for samba-technical@lists.samba.org; Tue, 20 Oct 2020 18:24:48 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=o3WD6lrADmxBgifs7lKVGgTMbaythwJ5d5TI0v7z1iU=; b=j3Zmf50oKQLLdfagNL97fAgErx
+ VRSjrlSlrN9vAtZSoWzoKwLznBkPeDGUplXvK/er7TyMLUC1jpHnNK/ztQQyiCVMYAAH3Jgvbu+/U
+ WdY8Bob829BjkNvZ4kTKaVJ6mrevH25t2bAXZe+XuzFWzD/Q1idEV7wJJ6GM+nwt5KVLegK4y4oNq
+ glLydPO2PJoZdjQhaXvCanVWFOq/A257lM7bFgoVWW+5j1CShOpWyVl8IYZ/z1iAnCktPs5XuCMfK
+ kEgZhvdewPobGyfQo6tkzJ7IXN1lU9y0IPnPhfAqu3JzE0xQPr/I0q7WssRW7ZQHKSwQdMqVVwPzH
+ hTHuM1UA/tS3jBQbrL8Y+JpvaEfw8EZc/NuFRGvUNvN99fAjBYqOa21Ko1C3I0cXTDHO7FuEuaTi+
+ /fqQ6t9z9lVTchsIdvSRFylVJDYGIdTqosSwS7Md8JW6TVJnhG2Iwf0NhsApblMSijZWBfuQ8lGES
+ Cczl1+ITxxr/MhuGsFRrK25j;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kUwJR-0003FZ-0W; Tue, 20 Oct 2020 18:24:45 +0000
+Date: Tue, 20 Oct 2020 11:24:42 -0700
+To: Arran Cudbard-Bell <a.cudbardb@freeradius.org>
+Subject: Re: talloc: talloc_set_memlimit causes all reallocs to fail when
+ used on pools.   talloc_set_memlimit not enforced correctly on pools.
+Message-ID: <20201020182442.GA642265@jeremy-acer>
+References: <20201016194436.GD67086@jeremy-acer>
  <2B2DBDAF-26F4-4FF4-A2A6-A194F507A352@freeradius.org>
  <E2A6FEEF-3C46-43A6-818C-D226924EB9F7@freeradius.org>
  <20201016202528.GF67086@jeremy-acer>
  <E75C5FB4-2800-498A-868B-7F3A3CB4E802@freeradius.org>
- <20201020020246.GB564927@jeremy-acer> <20201020035308.GA601524@jeremy-acer>
+ <20201020020246.GB564927@jeremy-acer>
+ <20201020035308.GA601524@jeremy-acer>
  <2F0B2708-7AC6-4FF5-99FA-8D4B8F1BAB2E@freeradius.org>
  <20201020055023.GA606244@jeremy-acer>
-X-Mailer: Apple Mail (2.3608.120.23.2.4)
+ <D37CFB0F-61FE-43C4-A161-DB949FF9F175@freeradius.org>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="AqsLC8rIMeq19msA"
+Content-Disposition: inline
+In-Reply-To: <D37CFB0F-61FE-43C4-A161-DB949FF9F175@freeradius.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,136 +64,177 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Arran Cudbard-Bell via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Arran Cudbard-Bell <a.cudbardb@freeradius.org>
-Cc: samba-technical@lists.samba.org
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org, jra@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 
---Apple-Mail=_C55BE5D6-3900-4A17-B300-98D689D643AA
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+--AqsLC8rIMeq19msA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+On Tue, Oct 20, 2020 at 01:03:14PM -0500, Arran Cudbard-Bell wrote:
+> 
+> OK.  That patch seems to mostly work but there are a few
+> issues.
+> 
+> First is an easy one. After a realloc failure due to hitting the
+> memlimit, the chunk remains marked as free, so when a
+> report gets run later in the test suite, we get a use-after-free
+> error.
 
+Thanks for catching that. New version attached
+with your changes squashed (but moved to before
+we set errno, always do that last :-).
 
-> On Oct 20, 2020, at 12:50 AM, Jeremy Allison <jra@samba.org> wrote:
->=20
-> On Mon, Oct 19, 2020 at 11:17:29PM -0500, Arran Cudbard-Bell via =
-samba-technical wrote:
->> Much appreciated!  I'll try this out tomorrow.
->>=20
->> Just so I'm clear on the expected behaviour, could
->> you verify that these assumptions are correct:
->>=20
->> 1. If there's a 1024 byte pool, with a 2048 byte memlimit,
->> the amount of memory allocated outside of the pool would=20
->> be limited to 1024 bytes.
->=20
-> Yes. Pool =3D=3D 1024 bytes allocated, any extra must be
-> below total size (including pool, which is treated
-> as allocated).
->=20
->> 2. If there's a 1024 byte pool, with a 1024 byte memlimit,
->> any alloc or realloc up to the pool size would succeed,
->> but any alloc or realloc which'd result in a chunk being
->> allocated outside of pool memory would fail.
->=20
-> Yes. memlimit =3D=3D pool size, so any further mallocs/reallocs
-> adding memory should fail.
->=20
->> 3. If there's a 1024 byte pool, with a 512 byte memlimit,
->> the memlimit would cause all reallocs and allocs to
->> fail, because the pool size is already greater than the
->> memlimit.
->=20
-> No. Allocations inside the pool below 1024 bytes would
-> always succeed (until the pool is filled) as when allocating
-> from a pool the memlimit isn't checked if the allocation
-> can be filled from within the pool.
->=20
-> memlimit is only checked in actual malloc/realloc calls.
->=20
-> If a pool already exists, it's assumed that it must already
-> have fit within the memlimit. It makes no sense to
-> set the limit lower than the pool size.
->=20
->> Additionally, if the third assumption is correct, do you=20
->> see any value in instead having talloc_set_memlimit=20
->> fail if a caller specifies a memlimit smaller than the pool?
->=20
-> Nope. See above.
+> Then there's another issue with object_count ending
+> up off by one, which means talloc_free_children doesn't
+> actually return memory to the pool, and that messes up
+> some of the other tests I'm adding.  Just tracking down
+> when and why this happens now.... It might have been a
+> pre-existing issue and not related to this patch, I'm just
+> seeing it because of using talloc_free_children to reset
+> the pool between some tests.
 
-OK.  That patch seems to mostly work but there are a few
-issues.
+OK, that I don't understand. I'll wait for your analysis...
 
-First is an easy one. After a realloc failure due to hitting the
-memlimit, the chunk remains marked as free, so when a
-report gets run later in the test suite, we get a use-after-free
-error.
+Jeremy.
 
-
---Apple-Mail=_C55BE5D6-3900-4A17-B300-98D689D643AA
+--AqsLC8rIMeq19msA
+Content-Type: text/x-diff; charset=us-ascii
 Content-Disposition: attachment;
-	filename=0001-Mark-chunks-that-failed-realloc-as-not-free.patch
-Content-Type: application/octet-stream;
-	x-unix-mode=0644;
-	name="0001-Mark-chunks-that-failed-realloc-as-not-free.patch"
+	filename="0001-Fix-memlimit-on-pool-realloc.patch"
 Content-Transfer-Encoding: quoted-printable
 
-=46rom=202c46ea92dbcbf6f403d90b67370b63055d49ed36=20Mon=20Sep=2017=20=
-00:00:00=202001=0AFrom:=20Arran=20Cudbard-Bell=20=
-<a.cudbardb@freeradius.org>=0ADate:=20Tue,=2020=20Oct=202020=2012:45:05=20=
--0500=0ASubject:=20[PATCH]=20Mark=20chunks=20that=20failed=20realloc=20=
-as=20"not=20free"=0A=0ASigned-off-by:=20Arran=20Cudbard-Bell=20=
-<a.cudbardb@freeradius.org>=0A---=0A=20lib/talloc/talloc.c=20|=204=20=
-++++=0A=201=20file=20changed,=204=20insertions(+)=0A=0Adiff=20--git=20=
-a/lib/talloc/talloc.c=20b/lib/talloc/talloc.c=0Aindex=20=
-2e7a803d995..7698f66bee7=20100644=0A---=20a/lib/talloc/talloc.c=0A+++=20=
-b/lib/talloc/talloc.c=0A@@=20-1912,6=20+1912,7=20@@=20_PUBLIC_=20void=20=
-*_talloc_realloc(const=20void=20*context,=20void=20*ptr,=20size_t=20=
-size,=20cons=0A=20=09=09=09=09=20*/=0A=20=09=09=09=09if=20=
-(!talloc_memlimit_check(tc->limit,=20size))=20{=0A=20=09=09=09=09=09=
-errno=20=3D=20ENOMEM;=0A+=09=09=09=09=09_talloc_chunk_set_not_free(tc);=0A=
-=20=09=09=09=09=09return=20NULL;=0A=20=09=09=09=09}=0A=20=09=09=09}=0A@@=20=
--1936,6=20+1937,7=20@@=20_PUBLIC_=20void=20*_talloc_realloc(const=20void=20=
-*context,=20void=20*ptr,=20size_t=20size,=20cons=0A=20=09=09=09if=20=
-(!talloc_memlimit_check(tc->limit,=0A=20=09=09=09=09=09(size=20-=20=
-old_size)))=20{=0A=20=09=09=09=09errno=20=3D=20ENOMEM;=0A+=09=09=09=09=
-_talloc_chunk_set_not_free(tc);=0A=20=09=09=09=09return=20NULL;=0A=20=09=09=
-=09}=0A=20=09=09}=0A@@=20-2057,6=20+2059,7=20@@=20_PUBLIC_=20void=20=
-*_talloc_realloc(const=20void=20*context,=20void=20*ptr,=20size_t=20=
-size,=20cons=0A=20=09=09=09=09=20*/=0A=20=09=09=09=09if=20=
-(!talloc_memlimit_check(tc->limit,=20size))=20{=0A=20=09=09=09=09=09=
-errno=20=3D=20ENOMEM;=0A+=09=09=09=09=09_talloc_chunk_set_not_free(tc);=0A=
-=20=09=09=09=09=09return=20NULL;=0A=20=09=09=09=09}=0A=20=09=09=09}=0A@@=20=
--2083,6=20+2086,7=20@@=20_PUBLIC_=20void=20*_talloc_realloc(const=20void=20=
-*context,=20void=20*ptr,=20size_t=20size,=20cons=0A=20=09=09=09if=20=
-(!talloc_memlimit_check(tc->limit,=0A=20=09=09=09=09=09(size=20-=20=
-old_size)))=20{=0A=20=09=09=09=09errno=20=3D=20ENOMEM;=0A+=09=09=09=09=
-_talloc_chunk_set_not_free(tc);=0A=20=09=09=09=09return=20NULL;=0A=20=09=09=
-=09}=0A=20=09=09}=0A--=20=0A2.28.0=0A=0A=
+=46rom 92a4ef104c93942387914490f021f6634deda755 Mon Sep 17 00:00:00 2001
+=46rom: Jeremy Allison <jra@samba.org>
+Date: Tue, 20 Oct 2020 10:52:55 -0700
+Subject: [PATCH] Fix memlimit on pool realloc.
 
---Apple-Mail=_C55BE5D6-3900-4A17-B300-98D689D643AA
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain;
-	charset=us-ascii
+Signed-off-by: Jeremy Allison <jra@samba.org>
+Signed-off-by: Arran Cudbard-Bell <a.cudbardb@freeradius.org>
+---
+ lib/talloc/talloc.c | 69 ++++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 62 insertions(+), 7 deletions(-)
+
+diff --git a/lib/talloc/talloc.c b/lib/talloc/talloc.c
+index e476f3e2d05..accc859f77e 100644
+--- a/lib/talloc/talloc.c
++++ b/lib/talloc/talloc.c
+@@ -1833,13 +1833,6 @@ _PUBLIC_ void *_talloc_realloc(const void *context, =
+void *ptr, size_t size, cons
+ 		return NULL;
+ 	}
+=20
+-	if (tc->limit && (size > tc->size)) {
+-		if (!talloc_memlimit_check(tc->limit, (size - tc->size))) {
+-			errno =3D ENOMEM;
+-			return NULL;
+-		}
+-	}
+-
+ 	/* handle realloc inside a talloc_pool */
+ 	if (unlikely(tc->flags & TALLOC_FLAG_POOLMEM)) {
+ 		pool_hdr =3D tc->pool;
+@@ -1904,6 +1897,25 @@ _PUBLIC_ void *_talloc_realloc(const void *context, =
+void *ptr, size_t size, cons
+ 		pool_hdr->object_count--;
+=20
+ 		if (new_ptr =3D=3D NULL) {
++			/*
++			 * Couldn't allocate from pool (pool size
++			 * counts as already allocated for memlimit
++			 * purposes). We must check memory limit
++			 * before any real malloc.
++			 */
++			if (tc->limit) {
++				/*
++				 * Note we're doing an extra malloc,
++				 * on top of the pool size, so account
++				 * for size only, not the difference
++				 * between old and new size.
++				 */
++				if (!talloc_memlimit_check(tc->limit, size)) {
++					_talloc_chunk_set_not_free(tc);
++					errno =3D ENOMEM;
++					return NULL;
++				}
++			}
+ 			new_ptr =3D malloc(TC_HDR_SIZE+size);
+ 			malloced =3D true;
+ 			new_size =3D size;
+@@ -1917,6 +1929,18 @@ _PUBLIC_ void *_talloc_realloc(const void *context, =
+void *ptr, size_t size, cons
+ 		/* We're doing malloc then free here, so record the difference. */
+ 		old_size =3D tc->size;
+ 		new_size =3D size;
++		/*
++		 * We must check memory limit
++		 * before any real malloc.
++		 */
++		if (tc->limit && (size > old_size)) {
++			if (!talloc_memlimit_check(tc->limit,
++					(size - old_size))) {
++				_talloc_chunk_set_not_free(tc);
++				errno =3D ENOMEM;
++				return NULL;
++			}
++		}
+ 		new_ptr =3D malloc(size + TC_HDR_SIZE);
+ 		if (new_ptr) {
+ 			memcpy(new_ptr, tc, MIN(tc->size, size) + TC_HDR_SIZE);
+@@ -2020,6 +2044,25 @@ _PUBLIC_ void *_talloc_realloc(const void *context, =
+void *ptr, size_t size, cons
+ 		new_ptr =3D tc_alloc_pool(tc, size + TC_HDR_SIZE, 0);
+=20
+ 		if (new_ptr =3D=3D NULL) {
++			/*
++			 * Couldn't allocate from pool (pool size
++			 * counts as already allocated for memlimit
++			 * purposes). We must check memory limit
++			 * before any real malloc.
++			 */
++			if (tc->limit) {
++				/*
++				 * Note we're doing an extra malloc,
++				 * on top of the pool size, so account
++				 * for size only, not the difference
++				 * between old and new size.
++				 */
++				if (!talloc_memlimit_check(tc->limit, size)) {
++					_talloc_chunk_set_not_free(tc);
++					errno =3D ENOMEM;
++					return NULL;
++				}
++			}
+ 			new_ptr =3D malloc(TC_HDR_SIZE+size);
+ 			malloced =3D true;
+ 			new_size =3D size;
+@@ -2035,6 +2078,18 @@ _PUBLIC_ void *_talloc_realloc(const void *context, =
+void *ptr, size_t size, cons
+ 		/* We're doing realloc here, so record the difference. */
+ 		old_size =3D tc->size;
+ 		new_size =3D size;
++		/*
++		 * We must check memory limit
++		 * before any real realloc.
++		 */
++		if (tc->limit && (size > old_size)) {
++			if (!talloc_memlimit_check(tc->limit,
++					(size - old_size))) {
++				_talloc_chunk_set_not_free(tc);
++				errno =3D ENOMEM;
++				return NULL;
++			}
++		}
+ 		new_ptr =3D realloc(tc, size + TC_HDR_SIZE);
+ 	}
+ got_new_ptr:
+--=20
+2.25.1
 
 
-
-Then there's another issue with object_count ending
-up off by one, which means talloc_free_children doesn't
-actually return memory to the pool, and that messes up
-some of the other tests I'm adding.  Just tracking down
-when and why this happens now.... It might have been a
-pre-existing issue and not related to this patch, I'm just
-seeing it because of using talloc_free_children to reset
-the pool between some tests.
-
--Arran
-
-
-
---Apple-Mail=_C55BE5D6-3900-4A17-B300-98D689D643AA--
+--AqsLC8rIMeq19msA--
 
