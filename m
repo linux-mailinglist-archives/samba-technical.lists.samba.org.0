@@ -2,60 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B46B2947BF
-	for <lists+samba-technical@lfdr.de>; Wed, 21 Oct 2020 07:22:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9FAB2947D9
+	for <lists+samba-technical@lfdr.de>; Wed, 21 Oct 2020 07:26:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=R/RCjjhFdcbB6iZwnroNUnHaeGRk4718oXCX+bNL/cI=; b=egGZPs5oygtJe0HdYmeXuy+JYi
-	hRYtN6NElGLrhokFnNg7TPkIdaYGWmyPnq7frPpPBMm1Fgfc6ud+66JaWq3sNjwp6iHXKS1h7lnB5
-	1IGIxQM4X7eAbfv7RLM4OBgUd/iCHFAiLzwji2tltxAcYtnR+x4sDhfnNz9RE4uy6OgwF/9pm5DA0
-	C89x+lOwPSwJuPNaoPxnO5rnxN7789MSQ6YGpnI0Cr67/XnwvBlnuN1EiT3vTLhNSGPsqc9TapZsc
-	NrYnWeipxzF1/TITafyRma2AVEv5Dp4XgzPwZn9Buvczu1aOyFP/53VNQGrl4EuhtCn+b72G/R55e
-	OtpebuVQ==;
-Received: from ip6-localhost ([::1]:51628 helo=hr1.samba.org) 
+	bh=hptYP+sgbBe/kJvWIw/N36ee72twdhgshClkTUCB3Xc=; b=hyk75/uWlRplssOgm4bx+/rjzL
+	igEgVwsUTMCGvIRIFPZcoZyb/QxfOokZO1rklOplx7a198t9cAxBLqPP5Uy6YRWAMw18Sz55xsvs3
+	Cli3SKFR7egr1KRlGYiG7uEOMsTqi2VH8eUMx0pRWcCJ4NP5NaROcGZ8li9ook2gQb2x/ZEoYgb75
+	JirI0WUn2wbIaW7bCunyOrAH3jpXZroOY5oHjc7Xui4GTYfsHu2UWMwLmgGSwqnyeTBMYDEc3jjz7
+	oLAzuGbr+TBGMTbSwbwA0MWo1JUWk5VGYsxseIq2naitSohb9NEklPwVAXWZ6XBS5ma9v5djEcVvA
+	U5aCaa2Q==;
+Received: from ip6-localhost ([::1]:52358 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kV6Z1-00D12p-Ec; Wed, 21 Oct 2020 05:21:31 +0000
-Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b]:45247) 
+	id 1kV6db-00D19t-5o; Wed, 21 Oct 2020 05:26:15 +0000
+Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233]:34369) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kV6Yv-00D12h-G9
- for samba-technical@lists.samba.org; Wed, 21 Oct 2020 05:21:27 +0000
-Received: by mail-lj1-x22b.google.com with SMTP id a4so1068394lji.12
- for <samba-technical@lists.samba.org>; Tue, 20 Oct 2020 22:21:16 -0700 (PDT)
+ (Exim) id 1kV6dW-00D19m-DP
+ for samba-technical@lists.samba.org; Wed, 21 Oct 2020 05:26:12 +0000
+Received: by mail-lj1-x233.google.com with SMTP id y16so1178044ljk.1
+ for <samba-technical@lists.samba.org>; Tue, 20 Oct 2020 22:26:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=R/RCjjhFdcbB6iZwnroNUnHaeGRk4718oXCX+bNL/cI=;
- b=t36jz0XnuGO5n2iYFnSbqkxjtqc4sNGxqHujaFS/7ny0rSR5S3jJIskc3JlLRka48S
- kTbPaiZ23QH8Z6E9k3ccfbAYtsBy3C/7FYogg1oBpTU6MaOyrGTpUb7MFqTWTSurKdwI
- s/jlXKsv0X5WdLIEcLV1tG4suUkjfDbUb9kUIJH9WMK8vaY1SEuP/0we44HBu+GwtpTj
- Y33I6xfFq4OMxWtrq69hW3gn2NgZ8fllk9jj4YwvayWAAQDN56dK9KDIM6/5blj9qwTU
- PmB8O8CJ+CUVJ7LZPm1zepwcK1WstyLaugaDUykyZdZsZRV/u4+iAwLgw9C+atEHFeKu
- c7qw==
+ h=mime-version:from:date:message-id:subject:to:cc;
+ bh=hptYP+sgbBe/kJvWIw/N36ee72twdhgshClkTUCB3Xc=;
+ b=BhaHsBSiIX55IVo0pXbjkOKNFp+dCMxlE+qRmYIwVgY56Wvvmh3GgmhJD8rGJMnm7m
+ ooaPDhpAI3p4XfzudwIZ9AIuqYVVpjO0aUyB1EGoI2BNNN+Cx53XbI4zbMbxLmeu/f2p
+ tJEgKlW9yPzbiAZqIjHUxaBkrgEpnODQUrrdY7qdwcfj7UnSYs9nAjFB2asYmcOktX6L
+ mXbVvRL5jPEqL9ddWBQXKFYRZ28HgxPCroKOmJWgL5G3Sz791zkZP2HAIt/MYdfaRD2S
+ RBaIAWZRc76GyT+zoSR/sXmoovaxP07sQu8hQ8E+MHmDInIyhqr2d+Xhh0u8AT7GZQy0
+ njWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=R/RCjjhFdcbB6iZwnroNUnHaeGRk4718oXCX+bNL/cI=;
- b=DgQkWqZAvYGdt3t3i05N5+6ENyx9LnczohQ8ZX5xgmVW/AHynSVvyVnQ0I4nk6mC+B
- TW5xS+ov+ntZFYrF3IuhOQ8viR6gxTFC/GKH1i4+wSGDChL4dPopyRTsnAdgnGnj+nPM
- hT0cN5RdxMGSFfOsOlHepEjBvODObmn0PymYbMqZFTs+vPbk0v1xc2yMvgexb11Vw+5H
- bUxje3wAc2LQh1BwBJYxl8M77+4YnRVLxp+/QAL1v/dBHQq6kUlcTkr5GvNdwz1fY89K
- hxnekBPPHtG+R973+tDNJ2TfjaLE9gtRhjuS8NvcNqQY2+5GzJi+3OB+P9jRk60bu0mK
- 2BWQ==
-X-Gm-Message-State: AOAM533LHAkKuJ9RfArjDQK5+w381q5S3NOjTfil/66rYfJ6V4dN2eky
- wQwWcg6FMzVv+fRmpTrrmbGmMGGv0F6j4LLy3JE=
-X-Google-Smtp-Source: ABdhPJzbK0V7cF6PathH7Sarkc9Yuh5wIX2weOj8e66KGJej+nNY5MjlJDVd/XTfdlYIu/Lj3OrJYj2h5s1nhhEa5jA=
-X-Received: by 2002:a2e:b009:: with SMTP id y9mr549643ljk.372.1603257675835;
- Tue, 20 Oct 2020 22:21:15 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+ bh=hptYP+sgbBe/kJvWIw/N36ee72twdhgshClkTUCB3Xc=;
+ b=ShYIleSHijpydWtSkRov60DC/Qm48fyTaNY8V2NSojt5JjAIGtNtiQus+h9Nk+dlxz
+ ik6JZd5K9D8AoJtbHQFL9nzWhwNUJa6GuLbw2reB2OkjP5ZCC6i4+0PllWiwTCnk2mdm
+ S+qe4OIlHVp6Vmui98p3dMR67QbjpPl3PYDzESEx/aW2T8JGHrPctmZxFC6DZTA1Sbb4
+ 2db2MXbvoK4sQhPiuuPEp5Rd0VuI55kM9Va7GWMl8aSUdIcT2rt4jHw0SO/Z/uenfRXe
+ J6rECxepAC1kxtHUg1NRsy34/k59jDkCuRZlydHWSkbCrOZ6d3kGwOilbohSKbiK1M2x
+ V4nw==
+X-Gm-Message-State: AOAM531JC8TPZrY2ZxxIjpFt55+bBTvxt3/ed9VLrZfECdOdPfMh5Y0t
+ iRHqzlwTV4NWWoCSEY0XI/HEOJnSUJk1DTQEpEgpUy6sUGOBeg==
+X-Google-Smtp-Source: ABdhPJzOIo/1n4B501CEhPADxNRwE+tON6bO4ISYgGZSw90ufeefLXNEhJFYHJI0PDQoaCDHGDb8pq4KxUVUMEodE+w=
+X-Received: by 2002:a2e:b009:: with SMTP id y9mr556585ljk.372.1603257967552;
+ Tue, 20 Oct 2020 22:26:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAH2r5mu2s3Fu+_mWTiXFp+JYTAWZZrPCDyDNtWAhit2DjB890g@mail.gmail.com>
- <CAN05THT4zcQaB8HHEsYi_nA9=VQMuqd53h0=BTSi+FtxYMuiMA@mail.gmail.com>
-In-Reply-To: <CAN05THT4zcQaB8HHEsYi_nA9=VQMuqd53h0=BTSi+FtxYMuiMA@mail.gmail.com>
-Date: Wed, 21 Oct 2020 00:21:04 -0500
-Message-ID: <CAH2r5mvv4MKEL=mGMLBBjLrOapG60N6O2EjjhpCdEYDnnwbx0w@mail.gmail.com>
-Subject: Re: [PATCH][SMB3] fix stat when special device file and mounted with
- modefromsid
-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Date: Wed, 21 Oct 2020 00:25:56 -0500
+Message-ID: <CAH2r5mvY127tWa5mtGDkxKU4gB6SyW5a_jjuAeoWmyDB9vCGrw@mail.gmail.com>
+Subject: [PATCH][SMB3] do not try to cache root directory if dir leases not
+ supported
+To: CIFS <linux-cifs@vger.kernel.org>
+Content-Type: multipart/mixed; boundary="000000000000a3e74905b22795ec"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,42 +67,23 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-We probably should if we could create special files to Windows using
-reparse points (or just set them up manually).  I created these by
-doing mknod and mkfifo over NFS to Windows and then doing directory
-listings and stat over SM3 mounts
+--000000000000a3e74905b22795ec
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Oct 20, 2020 at 11:19 PM ronnie sahlberg
-<ronniesahlberg@gmail.com> wrote:
->
-> Receiver-by me.
->
-> Should we set up a test for this in the buildbot?
->
-> On Wed, Oct 21, 2020 at 2:05 PM Steve French via samba-technical
-> <samba-technical@lists.samba.org> wrote:
-> >
-> > When mounting with modefromsid mount option, it was possible to
-> > get the error on stat of a fifo or char or block device:
-> >         "cannot stat <filename>: Operation not supported"
-> >
-> > Special devices can be stored as reparse points by some servers
-> > (e.g. Windows NFS server and when using the SMB3.1.1 POSIX
-> > Extensions) but when the modefromsid mount option is used
-> > the client attempts to get the ACL for the file which requires
-> > opening with OPEN_REPARSE_POINT create option.
-> >
-> >
-> >
-> > --
-> > Thanks,
-> >
-> > Steve
+To servers which do not support directory leases (e.g. Samba)
+    it is wasteful to try to open_shroot (ie attempt to cache the
+    root directory handle).  Skip attempt to open_shroot when
+    server does not indicate support for directory leases.
+
+    Cuts the number of requests on mount from 17 to 15, and
+    cuts the number of requests on stat of the root directory
+    from 4 to 3.
+
+(also added cc: stable v5.1+)
 
 
 
@@ -114,4 +91,41 @@ On Tue, Oct 20, 2020 at 11:19 PM ronnie sahlberg
 Thanks,
 
 Steve
+
+--000000000000a3e74905b22795ec
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-smb3-do-not-try-to-cache-root-directory-if-dir-lease.patch"
+Content-Disposition: attachment; 
+	filename="0001-smb3-do-not-try-to-cache-root-directory-if-dir-lease.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_kgiye1s90>
+X-Attachment-Id: f_kgiye1s90
+
+RnJvbSBiNjQwZTM3N2NkODI3NmEyZjc0MDZhNmI0NzNiYTE5Zjk4YTMxZmVkIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+CkRhdGU6IFdlZCwgMjEgT2N0IDIwMjAgMDA6MTU6NDIgLTA1MDAKU3ViamVjdDogW1BBVENIXSBz
+bWIzOiBkbyBub3QgdHJ5IHRvIGNhY2hlIHJvb3QgZGlyZWN0b3J5IGlmIGRpciBsZWFzZXMgbm90
+CiBzdXBwb3J0ZWQKClRvIHNlcnZlcnMgd2hpY2ggZG8gbm90IHN1cHBvcnQgZGlyZWN0b3J5IGxl
+YXNlcyAoZS5nLiBTYW1iYSkKaXQgaXMgd2FzdGVmdWwgdG8gdHJ5IHRvIG9wZW5fc2hyb290IChp
+ZSBhdHRlbXB0IHRvIGNhY2hlIHRoZQpyb290IGRpcmVjdG9yeSBoYW5kbGUpLiAgU2tpcCBhdHRl
+bXB0IHRvIG9wZW5fc2hyb290IHdoZW4Kc2VydmVyIGRvZXMgbm90IGluZGljYXRlIHN1cHBvcnQg
+Zm9yIGRpcmVjdG9yeSBsZWFzZXMuCgpDdXRzIHRoZSBudW1iZXIgb2YgcmVxdWVzdHMgb24gbW91
+bnQgZnJvbSAxNyB0byAxNSwgYW5kCmN1dHMgdGhlIG51bWJlciBvZiByZXF1ZXN0cyBvbiBzdGF0
+IG9mIHRoZSByb290IGRpcmVjdG9yeQpmcm9tIDQgdG8gMy4KClNpZ25lZC1vZmYtYnk6IFN0ZXZl
+IEZyZW5jaCA8c3RmcmVuY2hAbWljcm9zb2Z0LmNvbT4KQ0M6IFN0YWJsZSA8c3RhYmxlQHZnZXIu
+a2VybmVsLm9yZz4gIyB2NS4xKwotLS0KIGZzL2NpZnMvY29ubmVjdC5jIHwgNSArKysrLQogMSBm
+aWxlIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBh
+L2ZzL2NpZnMvY29ubmVjdC5jIGIvZnMvY2lmcy9jb25uZWN0LmMKaW5kZXggYjQyODJhYmMzZDEy
+Li5iY2I1MzljMjJlMzkgMTAwNjQ0Ci0tLSBhL2ZzL2NpZnMvY29ubmVjdC5jCisrKyBiL2ZzL2Np
+ZnMvY29ubmVjdC5jCkBAIC0zNjA4LDcgKzM2MDgsMTAgQEAgY2lmc19nZXRfdGNvbihzdHJ1Y3Qg
+Y2lmc19zZXMgKnNlcywgc3RydWN0IHNtYl92b2wgKnZvbHVtZV9pbmZvKQogCSAqLwogCXRjb24t
+PnJldHJ5ID0gdm9sdW1lX2luZm8tPnJldHJ5OwogCXRjb24tPm5vY2FzZSA9IHZvbHVtZV9pbmZv
+LT5ub2Nhc2U7Ci0JdGNvbi0+bm9oYW5kbGVjYWNoZSA9IHZvbHVtZV9pbmZvLT5ub2hhbmRsZWNh
+Y2hlOworCWlmIChzZXMtPnNlcnZlci0+Y2FwYWJpbGl0aWVzICYgU01CMl9HTE9CQUxfQ0FQX0RJ
+UkVDVE9SWV9MRUFTSU5HKQorCQl0Y29uLT5ub2hhbmRsZWNhY2hlID0gdm9sdW1lX2luZm8tPm5v
+aGFuZGxlY2FjaGU7CisJZWxzZQorCQl0Y29uLT5ub2hhbmRsZWNhY2hlID0gMTsKIAl0Y29uLT5u
+b2RlbGV0ZSA9IHZvbHVtZV9pbmZvLT5ub2RlbGV0ZTsKIAl0Y29uLT5sb2NhbF9sZWFzZSA9IHZv
+bHVtZV9pbmZvLT5sb2NhbF9sZWFzZTsKIAlJTklUX0xJU1RfSEVBRCgmdGNvbi0+cGVuZGluZ19v
+cGVucyk7Ci0tIAoyLjI1LjEKCg==
+--000000000000a3e74905b22795ec--
 
