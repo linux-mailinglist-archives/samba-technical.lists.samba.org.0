@@ -2,59 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37A492946A6
-	for <lists+samba-technical@lfdr.de>; Wed, 21 Oct 2020 04:43:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A5D5F29471D
+	for <lists+samba-technical@lfdr.de>; Wed, 21 Oct 2020 06:04:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=RXLq9kJuOAHYa4thRHUhuycyrk61TxjyjL2QDv2oHII=; b=4CFrraNSDUUKyabjtqIUZ4LgBe
-	2LcU/T2oXHEXPepamt80t9igzanmyS8/YPaknUxc3LZV4f+XhaQqcYK+iNn7X5q4OsPe9dDu2Ck3Z
-	r/u155cFuNbJ6KSY1M27/+7t9gOgY1rUWAejDnIlnfJNBgAsevuDGwymydj/IFflTt+2i1gASGpp0
-	ifiu5qEs67jG3tjX9BauNZwej1f2Rv79u+nEEFAisBiPw3D+vPsNhjEgVegqCinChTL3gZzD4B6jg
-	jV/4WY/z4xeUEoYGhxFN/ZDUsi0fOdNzUUmYTsjakVSpiR9G8f2YhD5KwjQXD1G+2hIIyHIhMb8re
-	toDP97dA==;
-Received: from ip6-localhost ([::1]:49284 helo=hr1.samba.org) 
+	bh=NNk8LRssaqazn1wXk6uTM5muK8cWXjM1KrI2CzX5ITY=; b=ybg/V1dTZPSGOi982ECqwyTnHw
+	wSdq4qWdjn0dg7YTFwSJbiUUu0dU3NQqMNGK6yHRYE+4PmXa+Q/1lhfLvbROI6qtwC0cTU5m+szsq
+	UL0ZDZc5aLNAXTOq+JZtIZlQeYN1BSSR3ZpVO7haPMAFQn1l3HKO2KjoTnbSKPZTcjtS9uTJ9Ibm/
+	UloZunCVsJmI7Pcybd8YYIZoN2aFGOHeQeqsO4iVqI466mauq/LMN3GLlRoK77EgBrUbnim22MSre
+	o0l7+dxKE5xqNs9jXKW2RqwpTon+MZXmvLDOXzdKGly8A5zESXUho8yiyYq8cxGKKJWbtQld/oYCE
+	vQ5g4mMw==;
+Received: from ip6-localhost ([::1]:50152 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kV45K-00D0NP-Rd; Wed, 21 Oct 2020 02:42:42 +0000
-Received: from mail-io1-xd42.google.com ([2607:f8b0:4864:20::d42]:36771) 
+	id 1kV5Lp-00D0aX-1e; Wed, 21 Oct 2020 04:03:49 +0000
+Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a]:35695) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kV45D-00D0NI-Rp
- for samba-technical@lists.samba.org; Wed, 21 Oct 2020 02:42:38 +0000
-Received: by mail-io1-xd42.google.com with SMTP id u19so1146340ion.3
- for <samba-technical@lists.samba.org>; Tue, 20 Oct 2020 19:42:35 -0700 (PDT)
+ (Exim) id 1kV5Lj-00D0aQ-KN
+ for samba-technical@lists.samba.org; Wed, 21 Oct 2020 04:03:46 +0000
+Received: by mail-lf1-x12a.google.com with SMTP id 77so1149321lfl.2
+ for <samba-technical@lists.samba.org>; Tue, 20 Oct 2020 21:03:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=RXLq9kJuOAHYa4thRHUhuycyrk61TxjyjL2QDv2oHII=;
- b=UTcJM52TYiksHMb4tR7UYyZYRtYJj9Rl3fRAbpOud0jHvZ/3VYoySwdCrHS1NV7Mrg
- eIii8wHCIGNDlUABcFGsLV9eN11+kucsURzTEDjq80boVoIzrkesw6nOnm6CXc4yzeKx
- SBgej+txLLZJxS9bTgdXizykOzX8js0YIXYAt8REv8W9ob7ZLDjNtooBhA8IizKReQLx
- kRgbiHGOQ8mnJYQ4YUdOLGDNjUi3+c3BWdXeTuxpAIT/8WkL8MiYi6NdecIpMX7nZ8ND
- rccxuWD8xufA7U6LSQuwFb2LWcV8yP0yIAZAZ0SWSodAr4YFjDVnM2Xx/tzzSwDhYDV9
- e+cA==
+ h=mime-version:from:date:message-id:subject:to:cc;
+ bh=NNk8LRssaqazn1wXk6uTM5muK8cWXjM1KrI2CzX5ITY=;
+ b=SA4hdklVZTpZ13GcktHfxVVop4A/J/9h24QQNRz7dfss55GqxE3qYgFNAUxT6VHaya
+ 4Y6ueJiPS6uayhuiOLbcWIyEgVe6bT7TEgJ8awMaWKOYAnt3UKimAsjcLJVV05tpiNUu
+ JOUF5+xR6FU4qHsMZRJ/K+Pn+dWc/vo3klhqeiRnNNJEwrNwh4eWC9sBXR4NGS4OoDzq
+ rUtZuiGRl1K+oRHIxuMSd80trAHI3bnR3IDUd4Qh3OKIZzR0SEZNi24zzqt1hFIJQzA/
+ JbR7RCo5JShp8efWFefyJeurNfI6VyMjzWeambCeOYVYP05ZimHroWkVgz2kB3vCKkNa
+ WMwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=RXLq9kJuOAHYa4thRHUhuycyrk61TxjyjL2QDv2oHII=;
- b=HvjV2WvsUOJ7BAASflyx6ycLkvemmE2cLQRD2p4TMHuJPOn89YWOiDxO/nnq5AEKz/
- v8sQVyC3z+ZawvhjU9Sn8gRoFAp1RZJCIiR+wyQvWh5Wjt9IprljKFUZmSETiaDnqR2N
- 9AZQLCuTmrBC5wDj7Qz++XAxazuagzP8yZ6FhCAoMMPPD6288gDZB1KGfzR6DVvGmgqT
- 729cZe+uksHF6j66g5uos1QNS/a/XI96JVSuR7wN5XDYwqg1GVkEUCWAJ2N4pX1QZV/R
- NKFplK1opA+MCtdzlYh9bRkqHbeU0mQss5dPy1J6uJ7yM0JAJkeRhZwdJjseDcs0eIKG
- JSlQ==
-X-Gm-Message-State: AOAM533P5raVI2aLrKEpM0zJYW8zKfCOoNe/fRz/b7uUT+WdaVV9p7Ep
- zi3i9n87kXjlD5MuaOUHNHDApm1V+mT7/Yui+sM=
-X-Google-Smtp-Source: ABdhPJxTOGUQCbEy9MP6sEVrEkzBpUP0zkkD8OknB9275iUQFcWlLgEdwBHk2Aou8IMmv8OkwNWcLdT8c6D+EWG7gws=
-X-Received: by 2002:a6b:4e0a:: with SMTP id c10mr973134iob.120.1603248153267; 
- Tue, 20 Oct 2020 19:42:33 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+ bh=NNk8LRssaqazn1wXk6uTM5muK8cWXjM1KrI2CzX5ITY=;
+ b=RE4MGfEquSpFOyWhp9srcunnymYhMGs1b08DSJ+5u7CvvuMM4KIRemblv0krX8s0yq
+ CrRj7TCFfGKOyOhjb8gPaKkcTozKUh3RlVJuJRVydA5A1bfNIbFmA3n7RDrx+ruwpDqb
+ cCfUjrOYbGLkhrJxusZTW8/tKEsuepTN02o6g8PlCI1k0woqnp1LXyJozM2gMMbTuNRT
+ SStPapUUF+jgWMDhcci8g2r5h9AFiGxllfjhFpGJGYiU0erxom+yz+CF8eJ9LSFCDu5k
+ LlhH/dcnaO1M54ENQc1kwEnWt6XVdsIghEyUaPqDdfds3eAgotxzyKQ2z4oDWsierCdd
+ NTDw==
+X-Gm-Message-State: AOAM531QAV6/JZpspi+qsHHjRZGbFDHjLOw8rs+YkfZT6AxKXzl1bfkM
+ Sr/lS3XnzDb6K7nZc4WxNub0d02IKStQaXqQVtWDLXPgH3rlbA==
+X-Google-Smtp-Source: ABdhPJwnyzNztBeW809vxMgFmnm35Wkfcn55N99/KgenvjcmCbHeAPizsnekNxwMNfwvGMt5VJaxGEh6LxE2/X14azs=
+X-Received: by 2002:a19:83c1:: with SMTP id f184mr364549lfd.97.1603253022188; 
+ Tue, 20 Oct 2020 21:03:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAJ+X7mQPg0yGd19pRaXCPzDyr04YEsa=TDDnBj+Gmdt12VdhoQ@mail.gmail.com>
- <51724103.WUapsaruIv@magrathea>
-In-Reply-To: <51724103.WUapsaruIv@magrathea>
-Date: Wed, 21 Oct 2020 13:42:22 +1100
-Message-ID: <CAJ+X7mTW49t3PKRerL4giKDqr1bbu40aokqJEHBbudDWDebgHA@mail.gmail.com>
-Subject: Re: libndr: Avoid assigning duplicate versions to symbols
-To: Andreas Schneider <asn@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Date: Tue, 20 Oct 2020 23:03:31 -0500
+Message-ID: <CAH2r5mu2s3Fu+_mWTiXFp+JYTAWZZrPCDyDNtWAhit2DjB890g@mail.gmail.com>
+Subject: [PATCH][SMB3] fix stat when special device file and mounted with
+ modefromsid
+To: CIFS <linux-cifs@vger.kernel.org>
+Content-Type: multipart/mixed; boundary="000000000000df8dd105b2266e80"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,77 +65,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Amitay Isaacs via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Amitay Isaacs <amitay@gmail.com>
-Cc: Samba Technical <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Oct 20, 2020 at 7:08 PM Andreas Schneider <asn@samba.org> wrote:
->
-> On Tuesday, 20 October 2020 08:49:18 CEST Amitay Isaacs via samba-technical
-> wrote:
-> > Hi,
-> >
-> > On freebsd 12, the linking of libndr.so fails with following error:
-> >
-> > [ 918/3912] Linking bin/default/librpc/libndr.so
-> > ld: error: duplicate symbol '_ndr_pull_error' in version script
-> > ld: error: duplicate symbol '_ndr_push_error' in version script
-> > clang: error: linker command failed with exit code 1 (use -v to see
-> > invocation)
-> >
-> > This happened because symbols _ndr_push_error and _ndr_pull_error were
-> > added to abi_match in commit 42ac80fb46cfb485e8c4a26d455fa784fdd1daed.
-> > It generates the following snippet in ndr.vscript.
-> >
-> > --------------------
-> > NDR_1.0.0 {
-> >         global:
-> >                 _ndr_pull_error;
-> >                 _ndr_push_error;
-> >                 ndr_print_steal_switch_value;
-> >                 ndr_push_steal_switch_value;
-> > } NDR_0.2.1;
-> >
-> > NDR_1.0.1 {
-> >         global:
-> >                 ndr_*;
-> >                 GUID_*;
-> >                 _ndr_pull_error;
-> >                 _ndr_push_error;
-> >         local:
-> >                 ndr_table_*;
-> >                 _end;
-> >                 __bss_start;
-> >                 _edata;
-> >                 *;
-> > };
-> > --------------------
-> >
-> > Symbols _ndr_push_error and _ndr_pull_error are added to both versions
-> > NDR_1.0.0 and NDR_1.0.1. This does not seem to be a problem for linux
-> > ld.  It seems to ignore the later version assignments to the same
-> > symbol as seen from the objdump:
-> >
-> > $ objdump -T bin/default/librpc/libndr.so.1.0.1  | grep _ndr_pu.._error
-> > 0000000000012afe g    DF .text    0000000000000162  NDR_1.0.0
-> > _ndr_push_error 0000000000012973 g    DF .text    000000000000018b
-> > NDR_1.0.0   _ndr_pull_error
-> >
-> > One solution is to avoid adding specific symbols to abi_match and only
-> > use wildcards in abi_match.  This avoids the need to modify wafsamba
-> > abi_write_vscript() function in samba_abi.py.  Patch is attached that
-> > changes the symbols _ndr_push_error and _ndr_pull_error to wildcard
-> > patterns as _ndr_push_error* and _ndr_pull_error*.
->
-> This looks fine for me, but I think we need a bug for 4.13 for that?
->
+--000000000000df8dd105b2266e80
+Content-Type: text/plain; charset="UTF-8"
 
-https://bugzilla.samba.org/show_bug.cgi?id=14541
+When mounting with modefromsid mount option, it was possible to
+get the error on stat of a fifo or char or block device:
+        "cannot stat <filename>: Operation not supported"
 
-https://gitlab.com/samba-team/samba/-/merge_requests/1623
+Special devices can be stored as reparse points by some servers
+(e.g. Windows NFS server and when using the SMB3.1.1 POSIX
+Extensions) but when the modefromsid mount option is used
+the client attempts to get the ACL for the file which requires
+opening with OPEN_REPARSE_POINT create option.
 
-Amitay.
+
+
+--
+Thanks,
+
+Steve
+
+--000000000000df8dd105b2266e80
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-smb3-fix-stat-when-special-device-file-and-mounted-w.patch"
+Content-Disposition: attachment; 
+	filename="0001-smb3-fix-stat-when-special-device-file-and-mounted-w.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_kgivfgvb0>
+X-Attachment-Id: f_kgivfgvb0
+
+RnJvbSBkZTNmZTE4NjYzODAxZGRlZDY5ODc0NDE2NjRjZDU0YjMyNzY3MDNhIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+CkRhdGU6IFR1ZSwgMjAgT2N0IDIwMjAgMjI6NTM6NTcgLTA1MDAKU3ViamVjdDogW1BBVENIXSBz
+bWIzOiBmaXggc3RhdCB3aGVuIHNwZWNpYWwgZGV2aWNlIGZpbGUgYW5kIG1vdW50ZWQgd2l0aAog
+bW9kZWZyb21zaWQKCldoZW4gbW91bnRpbmcgd2l0aCBtb2RlZnJvbXNpZCBtb3VudCBvcHRpb24s
+IGl0IHdhcyBwb3NzaWJsZSB0bwpnZXQgdGhlIGVycm9yIG9uIHN0YXQgb2YgYSBmaWZvIG9yIGNo
+YXIgb3IgYmxvY2sgZGV2aWNlOgogICAgICAgICJjYW5ub3Qgc3RhdCA8ZmlsZW5hbWU+OiBPcGVy
+YXRpb24gbm90IHN1cHBvcnRlZCIKClNwZWNpYWwgZGV2aWNlcyBjYW4gYmUgc3RvcmVkIGFzIHJl
+cGFyc2UgcG9pbnRzIGJ5IHNvbWUgc2VydmVycwooZS5nLiBXaW5kb3dzIE5GUyBzZXJ2ZXIgYW5k
+IHdoZW4gdXNpbmcgdGhlIFNNQjMuMS4xIFBPU0lYCkV4dGVuc2lvbnMpIGJ1dCB3aGVuIHRoZSBt
+b2RlZnJvbXNpZCBtb3VudCBvcHRpb24gaXMgdXNlZAp0aGUgY2xpZW50IGF0dGVtcHRzIHRvIGdl
+dCB0aGUgQUNMIGZvciB0aGUgZmlsZSB3aGljaCByZXF1aXJlcwpvcGVuaW5nIHdpdGggT1BFTl9S
+RVBBUlNFX1BPSU5UIGNyZWF0ZSBvcHRpb24uCgpTaWduZWQtb2ZmLWJ5OiBTdGV2ZSBGcmVuY2gg
+PHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+Ci0tLQogZnMvY2lmcy9zbWIyb3BzLmMgfCA2ICsrKysr
+KwogMSBmaWxlIGNoYW5nZWQsIDYgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL2ZzL2NpZnMv
+c21iMm9wcy5jIGIvZnMvY2lmcy9zbWIyb3BzLmMKaW5kZXggMmMzY2ZiMmU4ZTcyLi43ZTNlZGNk
+YTA1NGUgMTAwNjQ0Ci0tLSBhL2ZzL2NpZnMvc21iMm9wcy5jCisrKyBiL2ZzL2NpZnMvc21iMm9w
+cy5jCkBAIC0zMDk5LDYgKzMwOTksMTIgQEAgZ2V0X3NtYjJfYWNsX2J5X3BhdGgoc3RydWN0IGNp
+ZnNfc2JfaW5mbyAqY2lmc19zYiwKIAogCXJjID0gU01CMl9vcGVuKHhpZCwgJm9wYXJtcywgdXRm
+MTZfcGF0aCwgJm9wbG9jaywgTlVMTCwgTlVMTCwgTlVMTCwKIAkJICAgICAgIE5VTEwpOworCWlm
+IChyYyA9PSAtRU9QTk9UU1VQUCkgeworCQlvcGFybXMuY3JlYXRlX29wdGlvbnMgfD0gT1BFTl9S
+RVBBUlNFX1BPSU5UOworCQlyYyA9IFNNQjJfb3Blbih4aWQsICZvcGFybXMsIHV0ZjE2X3BhdGgs
+ICZvcGxvY2ssIE5VTEwsIE5VTEwsCisJCQkJTlVMTCwgTlVMTCk7CisJCWNpZnNfZGJnKFZGUywg
+Im9wZW4gcmV0cnkgcmMgJWRcbiIsIHJjKTsgLyogQkIgcmVtb3ZlbWUgKi8KKwl9CiAJa2ZyZWUo
+dXRmMTZfcGF0aCk7CiAJaWYgKCFyYykgewogCQlyYyA9IFNNQjJfcXVlcnlfYWNsKHhpZCwgdGxp
+bmtfdGNvbih0bGluayksIGZpZC5wZXJzaXN0ZW50X2ZpZCwKLS0gCjIuMjUuMQoK
+--000000000000df8dd105b2266e80--
 
