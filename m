@@ -2,51 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5223A2961B7
-	for <lists+samba-technical@lfdr.de>; Thu, 22 Oct 2020 17:35:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3209F2961CE
+	for <lists+samba-technical@lfdr.de>; Thu, 22 Oct 2020 17:41:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=A8L6mlEwiov0GpRUQTjSh042Mw4Occ8KAooZ9V+o+yQ=; b=mUYyXxSbTMsQMQC0uPqa9RzVFp
-	Miuvs7mQGoOTrLCqPqVPaAOz4aXju/jfsEpydfF35yymCs8lhfpJFTgNhFB+tNrZkFhNRjxbUCabo
-	CEoPzCMCXow02z28mrjlAz5Rc1fgVEzOocnnkRdotbYhKsJRBUe8War9P2rfsuZCrTLqcipbPSck9
-	7D2qyKfk+FuydjfrHatcHyLMVKPb6MGsNUpFbIslGvB5W6zBSDF703Tu+IIB35Vgh5tNEbmh6n0h6
-	3OSvtOZBFLUAVm1vFwS4DzZLea8+agGzjNqMOiGRxRauESqm4gNxZdVBXviI7+fd2sQ6FDZb55Ttl
-	3czMZNuQ==;
-Received: from ip6-localhost ([::1]:61216 helo=hr1.samba.org) 
+	bh=1cLdxzxiyvsMnnipb2dcpEhNyufxMhzgYO+7XKg6xs0=; b=P5YZMcwhR5QdUhcrRj5HTI2x4A
+	3eOKEdJz7tNpawD2WPFiVEr9pTcvM3rLoJmK/61DmmIJbICoj4rVBtI9VTMp9tCw7OqPyrifVARu2
+	JJlpzSrvNs2N+bwPs1a8lcmVMFeOD7Z2RbiPRax0/wsDxbrxyvm9Id1hwwpjAaGVzyaQWDHmpZiWi
+	XAAdueHsWKjxCLjEslWd3PlBnBneQIe4PolkZ9GZSmIWUxRTwgtVzyZ3ICNAbal6EtX3LJY1QycUD
+	WEeGVA/IsYLj33GtwdQshOwl1NXRxnezjSF+UtcBIXAPvlyafOFDp9jdR9JjxQj5ixPvVZGm1NfhL
+	eNyF+MpQ==;
+Received: from ip6-localhost ([::1]:62158 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kVccE-00DItI-B7; Thu, 22 Oct 2020 15:34:58 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54698) 
+	id 1kVciO-00DJ2p-Sr; Thu, 22 Oct 2020 15:41:20 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57104) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kVcc9-00DItB-6J
- for samba-technical@lists.samba.org; Thu, 22 Oct 2020 15:34:55 +0000
+ (Exim) id 1kVciK-00DJ1M-6D; Thu, 22 Oct 2020 15:41:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=A8L6mlEwiov0GpRUQTjSh042Mw4Occ8KAooZ9V+o+yQ=; b=uywD7KK+G6T8yR7ZVuHG/pmGFO
- 9PyxGH8Spjh9kGMRmqFhWem9CJP2V/g8R3VHTzGZtSUPZJEgO+Jps7YyXekDX48DlU6KLrdZiSxiZ
- 8EnEq5gtdVOSbksjpoCjQEuIA2Tl8GLc54VhuV57aLOZqzuJb4+qYuYRGnJKEnaM2itAtz95OCgV1
- lMxrHFEBvV2Zqy2Yg83ipWfw//ERht1FvnhZ3jsFPDAT2yr3eJDycMcXIigOBVh0aAyn+wNvkQFYD
- lZgh8eDnjqGyjrkQSUT3jIu3651mC2OnFzi3gr9j47ZMClMuSnhbXxRgMsdyyapHuMWovkShugbwT
- mQ3mBlSB4huKXLDqJ06A/8B9oq3MeEmJ4l/Fy0OcURDiROWi5VfxesPFviRIdRBp+KPAegUO8waJY
- 7K8GyBhs3yPOIePZI+fNjW3YCAPUAqkxh5qirhLgHZrCvFBfiNpU4b2cWrERilPI4OjbHMDukOiyF
- e7fn0TOAH0vGPwPjBv9VDCG4;
+ bh=1cLdxzxiyvsMnnipb2dcpEhNyufxMhzgYO+7XKg6xs0=; b=IMmdoPq0l4zXH5fUa7FK/tXeHQ
+ G0BMqwt9oozTcHnTGMh91j95qpAaI2ekJs0WKt1mkewUyHdTKEEvaN1QJtl2Z9qLbO2MDn8QUm00z
+ fdBTcLxEW2bGKpGJ2ZDMmqX0R9Dc1fMyeQKmnNpqbk8mg0UM29Qc5Kqki2xRBF7rjy0IHJ3CEqUG9
+ YP5dPQo9gkB3zgVuNm7TiWfKz4ZTGENij2/RlD3FhYEd2DNImrmpdq/thL2pftD3UiCx72EagBU0q
+ 2JJd75Bupq8D+fC6jG/4lJyQq0fXfO80VxP+D+0adJfy2i6NNB8etU8cEncINnKwEXHdjxIht9qJ2
+ Eiyx5DMVt+yXKl1dCI1jjyd/9bFJfCkCFY2yikAPxv9AbD30H92JFjipDdyuMhPgBuRJ0YLFEkdCs
+ d0Gpz9RHVjgceVwGdkyFJ/9nv5P8UE4VrKDjJJXgX/2zbORK3ibZc7GZafNGl+tCaZjk0Fau+/cNg
+ CxGEjTmq9JllLXV6kJiKQS2b;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kVcc8-0003bV-2a; Thu, 22 Oct 2020 15:34:52 +0000
-Date: Thu, 22 Oct 2020 08:34:49 -0700
-To: Stefan Metzmacher <metze@samba.org>
-Subject: Re: talloc: Other minor issues/queries
-Message-ID: <20201022153449.GB941511@jeremy-acer>
-References: <3A50457D-74F6-4C7B-BC2E-8EA68EE64C61@freeradius.org>
- <20201021001113.GA754426@jeremy-acer>
- <264F0B23-F45D-49F3-A0B7-4E717B129898@freeradius.org>
- <20201021183701.GA809738@jeremy-acer>
- <8E5EC9FB-62C2-4BA7-B809-72F26FEF2CD1@freeradius.org>
- <20201022010855.GA853779@jeremy-acer>
- <dbf19314-7d9e-76d1-cdb7-116148e91c34@samba.org>
+ (Exim) id 1kVciJ-0003he-6E; Thu, 22 Oct 2020 15:41:15 +0000
+Date: Thu, 22 Oct 2020 08:41:12 -0700
+To: samba-technical@lists.samba.org, samba@lists.samba.org
+Subject: Samba clarification around GPL and VFS modules.
+Message-ID: <20201022154112.GC941511@jeremy-acer>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <dbf19314-7d9e-76d1-cdb7-116148e91c34@samba.org>
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,49 +54,65 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org,
- Arran Cudbard-Bell <a.cudbardb@freeradius.org>
+Cc: jra@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Oct 22, 2020 at 10:57:36AM +0200, Stefan Metzmacher wrote:
-> 
-> Maybe we could have a FLAG_FIXED_POOL, which avoids the fallback to head memory.
-> 
-> But I guess we'd need something implemented a bit differently,
-> 
-> Currently we're very bad at reusing free memory within pools, we don't maintain a free list.
-> But that's ok for our two main use cases talloc_stackframe_pool()
-> and talloc_pooled_object() for both our main goal is to avoid calling malloc/free more than needed.
-> But they don't really implement a SLAB allocator.
-> https://en.wikipedia.org/wiki/Slab_allocation
-> 
-> The Linux kernel has a separation of 'struct kmem_cache' and 'mempool_t', see:
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/slab.h
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/slab_def.h
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/mempool.h
-> 
-> So there's 'mempool_t *mempool_create_slab_pool(int min_nr, struct kmem_cache *kc)'
-> and 'mempool_t *mempool_create_kmalloc_pool(int min_nr, size_t size)', but that's all
-> for fixed size objects.
+People who follow Samba development may
+have noticed the following commit that
+just went into the Samba repo:
 
-I don't think we should mess with pools that much.
+https://git.samba.org/?p=3Dsamba.git;a=3Dblob;f=3DVFS-License-clarification=
+=2Etxt;h=3D6b67381cc20412456d7d01a0587c0d627254a2b8;hb=3D1262b13f4db9502c36=
+579b7dd740d8002e0baac9
 
-They're a specific optimization IMHO with restricted
-use.
+For people who don't read git (I'm assuming
+that's everyone :-) it's a clarification
+around GPL license boundaries and Samba
+VFS modules we've been discussing within
+the Team for a long while now.
 
-As I said in the previous email, my first goal is
-to get rid of the talloc_memlimit stuff - that's
-*horrible* added complexity for very little benefit.
+Here's the text of the new file so people
+can understand what we're doing here.
 
-Once that's gone adding FLAG_FIXED_POOL becomes
-somewhat easier as there are then only 2 points
-inside talloc we fall back to system malloc/realloc
-if allocating from POOLMEM fails.
+Hopefully this will make it much clearer
+to OEMs and vendors using Samba where their
+GPL requirements begin and end when extending
+Samba to work with their own unique filesystem
+technology.
 
-I don't think we should make pools a sub-allocator
-with their own freelist. That's not really what
-they are designed for.
+Cheers,
 
 Jeremy.
+
+----------------------------------------------------
+A clarification of the GNU GPL License boundary within the Samba
+Virtual File System (VFS) layer.
+
+Samba is licensed under the GNU GPL. All code committed to the Samba
+project or creating a derived work must be either licensed under the
+GNU GPL or a compatible license.
+
+Samba has several plug-in interfaces where external code may be called
+=66rom Samba GNU GPL licensed code. The most important of these is the
+Samba VFS layer.
+
+Samba VFS modules are intimately connected by header files and API
+definitions to the part of the Samba code that provides file services,
+and as such, code that implements a plug-in Samba VFS module must be
+licensed under the GNU GPL or a compatible license.
+
+However, Samba VFS modules may themselves call third-party external
+libraries that are not part of the Samba project and are externally
+developed and maintained.
+
+As long as these third-party external libraries do not use any of the
+Samba internal structure, APIs or interface definitions created by the
+Samba project that are licensed under the GNU GPL then it is the view
+of the Samba Team that such third-party external libraries called from
+Samba VFS modules are not part of the Samba code and cannot be
+considered a derived work of Samba for the purposes of GNU GPL
+licensing. Thus such libraries are not required to be under the GNU
+GPL or a GNU GPL compatible license.
+----------------------------------------------------
 
