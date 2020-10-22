@@ -2,40 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0747C295557
-	for <lists+samba-technical@lfdr.de>; Thu, 22 Oct 2020 01:52:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A5DCA295568
+	for <lists+samba-technical@lfdr.de>; Thu, 22 Oct 2020 02:12:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Date:Subject;
-	bh=L3Fr/gkbjOXdqAJZGaAvzufgXTYPgQLrBGfw5bxLbzU=; b=KqByfGolYqTc9jo+JAa0y7yHBC
-	8iG6+PHlVQ2qLS3iDHo4GfrSh+38BvunjvaeVmFVco02p/WaPWcaiTDGMfn1VCsucqjhiI/RU/GOQ
-	tj1K68pEUm/FOXgRdTnNWmMZMohs29roupp5ZnKuAvmO1kq8np1WZaA/+oV2LaEg15efyInnbDtws
-	sx4icZu391UB3exjlEblfr27b+yBllcc9crSE3pnGU4fSRHQWjT2/CWYEfHKogt+j1YA27F7Yarm5
-	ZU8RiNmEPihVEnO1WQEi3yGeW/npLxGqIqP774XhPopn+UbpYeCThxOTcqnIfHDd/JHD5TMhR+37Q
-	fZ7QPvKg==;
-Received: from ip6-localhost ([::1]:29494 helo=hr1.samba.org) 
+	bh=bZTJZoqdt1BLipx3sbwiWxUPoOGlxgN7lM63j0/JzO8=; b=XVqCWi6S+vm0LxWrPPKsI4JS5F
+	cFeiwfRNnvAkZenrJD8rsToCDM/1N9JMrfmHQVlJssY84mp/paQcwl4A0Cf1kvdUNZdAC9zq7Cg32
+	QMJ7dxzESk4uqghD8NFvVrct0M4ucaySKy0fTzhQkwHUJ6GO+xPbUPS3wEwQ4LBaBSI3MVN+qqP9n
+	1UDyUHcfBzKWXkGx4HByPCeL9pxfGnSCtpHAE1nuhynEF5D1nq1Rffd0OjF/H4S2byFvW0zVLvWEl
+	BHbhrQSpd7UNjfIsAF6Nhc8ThEf4W9OKoHjhdrgAxWcf4E6K62WfvGw3Wl37QKitcxH/MkkzwyYkA
+	nKbJP+sw==;
+Received: from ip6-localhost ([::1]:30238 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kVNt2-00DCtT-7e; Wed, 21 Oct 2020 23:51:20 +0000
-Received: from mail.networkradius.com ([62.210.147.122]:65450) 
+	id 1kVODd-00DD62-S6; Thu, 22 Oct 2020 00:12:37 +0000
+Received: from mail.networkradius.com ([62.210.147.122]:60770) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kVNst-00DCtM-Ld
- for samba-technical@lists.samba.org; Wed, 21 Oct 2020 23:51:15 +0000
+ (Exim) id 1kVODY-00DD5v-Rp
+ for samba-technical@lists.samba.org; Thu, 22 Oct 2020 00:12:35 +0000
 Received: from [192.168.0.5] (unknown [177.240.134.64])
- by mail.networkradius.com (Postfix) with ESMTPSA id 03AB54A0;
- Wed, 21 Oct 2020 23:51:06 +0000 (UTC)
+ by mail.networkradius.com (Postfix) with ESMTPSA id 4DBC94F3;
+ Thu, 22 Oct 2020 00:12:28 +0000 (UTC)
 Authentication-Results: NetworkRADIUS; dmarc=none (p=none dis=none)
  header.from=freeradius.org
 Content-Type: text/plain;
 	charset=us-ascii
 Mime-Version: 1.0 (Mac OS X Mail 13.4 \(3608.120.23.2.4\))
-Subject: Re: talloc: Other minor issues/queries
-In-Reply-To: <20201021183701.GA809738@jeremy-acer>
-Date: Wed, 21 Oct 2020 18:51:04 -0500
+Subject: Re: talloc: talloc_set_memlimit causes all reallocs to fail when used
+ on pools.   talloc_set_memlimit not enforced correctly on pools.
+In-Reply-To: <20201020213414.GB684621@jeremy-acer>
+Date: Wed, 21 Oct 2020 19:12:26 -0500
 Content-Transfer-Encoding: 7bit
-Message-Id: <8E5EC9FB-62C2-4BA7-B809-72F26FEF2CD1@freeradius.org>
-References: <3A50457D-74F6-4C7B-BC2E-8EA68EE64C61@freeradius.org>
- <20201021001113.GA754426@jeremy-acer>
- <264F0B23-F45D-49F3-A0B7-4E717B129898@freeradius.org>
- <20201021183701.GA809738@jeremy-acer>
+Message-Id: <D6DA2182-4015-4110-8646-69E0F0866EFE@freeradius.org>
+References: <E75C5FB4-2800-498A-868B-7F3A3CB4E802@freeradius.org>
+ <20201020020246.GB564927@jeremy-acer> <20201020035308.GA601524@jeremy-acer>
+ <2F0B2708-7AC6-4FF5-99FA-8D4B8F1BAB2E@freeradius.org>
+ <20201020055023.GA606244@jeremy-acer>
+ <D37CFB0F-61FE-43C4-A161-DB949FF9F175@freeradius.org>
+ <20201020183336.GB642265@jeremy-acer>
+ <69C11FCA-3EF2-4E1F-9835-5D3FFB80D883@freeradius.org>
+ <20201020191654.GF642265@jeremy-acer>
+ <1C33DF9F-997C-40B0-980F-0AE27C43E1DD@freeradius.org>
+ <20201020213414.GB684621@jeremy-acer>
 To: Jeremy Allison <jra@samba.org>
 X-Mailer: Apple Mail (2.3608.120.23.2.4)
 X-BeenThere: samba-technical@lists.samba.org
@@ -58,95 +65,54 @@ Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 
->> 
->> I'm happy to put together patches...  Recording const vs non-const
->> wouldn't seem to be that contentious.  Preserving explicitly set names/
->> types seems like it'd need more discussion.
+
+> On Oct 20, 2020, at 4:34 PM, Jeremy Allison <jra@samba.org> wrote:
 > 
-> That seems reasonable to me, but I'd rather Metze also
-> comment on this. It is a behavior change.
-
-OK.
-
->>> Second, I'd like to remove the memlimit code. Can you be
->>> *really* clear as to what you are using them for, and
->>> can we find some other way to do this ?
+> On Tue, Oct 20, 2020 at 02:50:05PM -0500, Arran Cudbard-Bell wrote:
 >> 
->> We want to ensure heap allocations can't occur when a pool is full.
 >> 
->> a. In cases where these pools are composed of mprotected pages,
->>    or pages that will be mprotected.
->> b. Where we want to trigger allocation of an additional "slab" of memory
->>    when an existing pool is used up.  This is used where we're performing
->>    configuration parsing on startup.
+>>> On Oct 20, 2020, at 2:16 PM, Jeremy Allison <jra@samba.org> wrote:
+>>> 
+>>> On Tue, Oct 20, 2020 at 01:42:00PM -0500, Arran Cudbard-Bell wrote:
+>>>> 
+>>>> 
+>>>>> On Oct 20, 2020, at 1:33 PM, Jeremy Allison <jra@samba.org> wrote:
+>>>>> 
+>>>>> On Tue, Oct 20, 2020 at 01:03:14PM -0500, Arran Cudbard-Bell wrote:
+>>>>>> 
+>>>>>> Then there's another issue with object_count ending
+>>>>>> up off by one, which means talloc_free_children doesn't
+>>>>>> actually return memory to the pool, and that messes up
+>>>>>> some of the other tests I'm adding.  Just tracking down
+>>>>>> when and why this happens now.... It might have been a
+>>>>>> pre-existing issue and not related to this patch, I'm just
+>>>>>> seeing it because of using talloc_free_children to reset
+>>>>>> the pool between some tests.
+>>>> 
+>>>> Apologies, there was a steal I didn't spot in the tests.
+>>>> One of the chunks was moved out of the pool into the root ctx.
+>>>> 
+>>>> Explicitly freeing the chunk or stealing it back into the pool
+>>>> means talloc_free_children works as expected.
+>>> 
+>>> FYI, once you've gotten everything working can you
+>>> send your test cases to me so I can add them into
+>>> the regression test suite for talloc ?
 >> 
->> That's it, that's really our only use cases for memlimit. We never use 
->> them on any other type of chunk.
+>> Attached.
 >> 
->> A flag saying "don't allow heap allocations" would be absolutely fine
->> for us in all cases, and much simpler to implement.
+>>> Then we'll add a new bug in bugzilla, update the minor library
+>>> version number and create a gitlab MR.
+>> 
+>> Sounds good, thanks!
 > 
-> OK - that sounds *much* easier. An additional 'uint32_t flags'
-> argument passed into talloc_pool() and talloc_pooled_object()
-> with a 'CONFINE_TO_POOL' flags being the only one defined
-> at present would be the way to go IMHO.
+> BUG: https://bugzilla.samba.org/show_bug.cgi?id=14540
+> 
+> is what we'll use to track this !
 
-Sure, or talloc_set_pool_confined(TALLOC_CTX *ctx, bool) would 
-maintain backwards compatibility/consistency, and allow the flag
-to be flipped.
+Posted regression tests there too.
 
-I guess it really depends on whether there's a desire to keep the 
-current API style or move to something new.
-
-> This would have to be a new major rev of the library
-> as we'd be removing the memlimit code as well in order
-> to make the internals of talloc understandable again :-).
-
-Indeed :)
-
-Would references would be on the chopping block for a new major
-release also? I have to say that's one of the features we also use
-but one we could easily replicate internally and wouldn't really mourn.
-
--
-
-Now we're discussing major revs, there are a couple of other issues 
-we've run into that it'd be good to get comment on.
-
-First, is that the lack of parent pointer for the majority of chunks makes
-any call that needs to access the parent ctx, very slow, when there 
-are a large number of chunks at the same level.
-
-I'm assuming it's a trade off between cheap reallocs and cheap
-talloc_steal/talloc_parent_*.  Is allocing a bunch of chunks off of a 
-context that gets realloced a common pattern for Samba? Am I 
-missing something else that makes recording the parent in each chunk
-painful?
-
-I mention this because we had to strip out almost all calls to
-talloc_steal and talloc_parent*, because they featured so heavily
-in code profiling.  If it really is just a tradeoff between realloc and
-talloc_parent* it might be good to revisit how parents are 
-recorded.
-
-Second, is expandable pools.
-
-In FreeRADIUS the instance data for modules is only protected 
-when a user sets a special environmental variable to specify the pool
-size for all instance data memory. The user has to guess at how 
-big this pool needs to be (which is pretty terrible) but it's the only way 
-to handle this with the current version of talloc.
-
-When we're building up the dictionaries we have a similar problem
-in that we need to guess at how big the pool needs to be because
-we can't expand it.  This leaves the pool massively oversized in the
-majority of cases.
-
-Having talloc automatically expand pools would be amazing 
-(imagining a linked list of fixed size malloced chunks).  I know there's
-additional complexity here, but it does seem to be limited to very
-specific areas of the code.
-Would this functionality ever be considered?
+Thanks!
 
 -Arran
 
