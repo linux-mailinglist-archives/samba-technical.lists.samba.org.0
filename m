@@ -2,55 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27FCA295BD4
-	for <lists+samba-technical@lfdr.de>; Thu, 22 Oct 2020 11:32:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7E67295C56
+	for <lists+samba-technical@lfdr.de>; Thu, 22 Oct 2020 12:00:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=lnNoNvx8GDF5Xr9NJClJpFN0zWzR0nc3PO3Lir39HcI=; b=5P4+1ljru753kkhaN8C3t9cVbC
-	mG8Kk8t/OCHJcONPKZpN9YZDBZD3MBgM5LJrfn6kV6AGmC8MeoODWvKGtZjHyvd/txN2Rn7Cg3fBj
-	iUZUS3uQhMIk93G/J+Ea70knKtkblqKzfH1MyQkHe94F0y42KFOV+wYJ9e64d8cidg4QjHTR7THFY
-	kOcw7RsFP8//e/Pek2qqEWqKB76+JvOPiKJ5/EXDys9yaZqHLyVeyhwglZ4axqcytSVCpHvAIBlsx
-	EGJQPRWZxG5+09FKVVYs9vN9gF0LyAUgS5ci3qWgw4NWbiVTVPSZXf2qI6aRAJFWlmLPgnZ2h0h29
-	kewiSgcg==;
-Received: from ip6-localhost ([::1]:39436 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=2BTAOUGTwQyDdOS5cc7wacfpJ7I+zpWdV39kEm0EBzI=; b=cDzvvm+gxkNcCodrDITW+c6vgZ
+	/NhenA6QHKtldBm30ENrj4PtMNTW6xns2XKFDF7IMyTc6tFXFAmFcoxl7saTlpIsW9AEkZTXBVpLZ
+	MQAKmT+L82u+yCwpuUoJo5LDFSQRTc1VXpTpYCtL5j+4mqIfOShz1tA9VURpUpA2MEE5o+90klXRF
+	8V5+yn72hrXEwpIeIJVh/OOOPStLPRvXDtGbqDy0jkywFRca123iwStbCug5vBoC+xI7iOL3NbwrX
+	+RDT0kxb0MVfJOsCi1JyZY8qr21zCiEld/c/HI0n9VDHYlJI/uWd74p2APvKXxnNW1x+TL0bDKrcl
+	WU0Sk/6g==;
+Received: from ip6-localhost ([::1]:40168 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kVWwi-00DFQP-1C; Thu, 22 Oct 2020 09:31:44 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16534) 
+	id 1kVXNi-00DFYJ-9s; Thu, 22 Oct 2020 09:59:38 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:27224) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kVWwc-00DFQI-6q
- for samba-technical@lists.samba.org; Thu, 22 Oct 2020 09:31:40 +0000
+ (Exim) id 1kVXNd-00DFYC-2C
+ for samba-technical@lists.samba.org; Thu, 22 Oct 2020 09:59:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=lnNoNvx8GDF5Xr9NJClJpFN0zWzR0nc3PO3Lir39HcI=; b=JBkB/AhB+zwrVqctOnfZmmMYS7
- S+QDWNkFjE7hOtDtMBSuTgy+KPnC/ghoSYGAGFzV1CocF6KlMXfKzHwHksvrv5rH78ahXq+xTnoKn
- LegslsouuAEU0RtsYIQjYfdXvRWYsIrY/GShBCZjgasN1Ie0+j5vJCnDS/OIDddHDdMbdJh4mhE2o
- CXuYzUUXy34iOj7pVsXf+g2i3/jIk4Yppfk2sg1omhBX6SFvcAxxqQC8kcJlJqMonL9hDOmZVq2GW
- n+ZYAXeZhKmVqm8aOZnFEQYFdoOZsR7MW4B0MWW7kuA5dsE8SG+N5OGR1FFIDz0eEX3ihQlaMAkWs
- i8ADkZImQCUC8iObyB/U5MmxUV/btGVyTQn5LGdEekoUBxhlj5Ubil7Kune7t9LBZARq9YZZmEG/i
- k37MGzyhjqQOHTiHLA8WEzWmImVpBcFQ+XkewEA9n6B40YVvbVOVhncFVUlTgKERzqnmKVt7B6E8t
- RwsB1NS4mM+54mn0UY0W05TA;
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=2BTAOUGTwQyDdOS5cc7wacfpJ7I+zpWdV39kEm0EBzI=; b=iMONAwJzc09lfr2DtMqHq6iqee
+ fBR877zwghMKjkdHt3FUPBXRvS3KAS8NKJIedx+4aNa1QNAIHUkV6F/6vgYw5RZ+Gl9R40xtauyM0
+ 73WeyXrTeKCELbPDTXXEGVlSxTAJiVAwGzNR8ZjlMhRpyuaTr2paXZViu830soUsOh38a6Y1hQhDR
+ nwpu8rZPzPeJCV/3JzvLIFouzDGVSA5gfiaESXWxQ39K6Kn9opwsjpN/EwEY092Ze2KMLOhIOOYVZ
+ jaHzMnPd+Cs562CdtMibwqI5oqPrhJB2VgAmav+8abEZuJbtfazfdOQEPEtW50sjx9SK59NHcnvUJ
+ N6eE5f88X8A4vNzDV3k3tc/hzo1Ku8OfRMeUinKAVRiv5pCUkyOUzGeoKBw5g6De66CebPYC8S9vm
+ 6zM3PIo71wq7+pS6t47QNBXkdX22Ygr+cxB8afm0n07n1yuf6lOK7ix1FktFEl4oBTMza5SOMHLsX
+ wxOysVWKoXGiCA+yQrJn0my1;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kVWwa-0008In-O8; Thu, 22 Oct 2020 09:31:36 +0000
-Subject: Re: talloc: Other minor issues/queries
-To: Stefan Metzmacher <metze@samba.org>, Jeremy Allison <jra@samba.org>,
- Arran Cudbard-Bell <a.cudbardb@freeradius.org>
-References: <3A50457D-74F6-4C7B-BC2E-8EA68EE64C61@freeradius.org>
- <20201021001113.GA754426@jeremy-acer>
- <264F0B23-F45D-49F3-A0B7-4E717B129898@freeradius.org>
- <20201021183701.GA809738@jeremy-acer>
- <8E5EC9FB-62C2-4BA7-B809-72F26FEF2CD1@freeradius.org>
- <20201022010855.GA853779@jeremy-acer>
- <dbf19314-7d9e-76d1-cdb7-116148e91c34@samba.org>
-Message-ID: <4134ee06-d420-bc29-fd88-78550fa5d23a@samba.org>
-Date: Thu, 22 Oct 2020 11:31:33 +0200
+ (Exim) id 1kVXNc-00005B-9t
+ for samba-technical@lists.samba.org; Thu, 22 Oct 2020 09:59:32 +0000
+Subject: Re: 4.12 -> 4.13 upgrade
+To: samba-technical@lists.samba.org
+References: <5E76D2F9CEBD40A2BAADFE3EAB53360F@rotterdam.bazuin.nl>
+Message-ID: <6013c870-8b8c-d3fa-cee4-1dd9fa9dec61@samba.org>
+Date: Thu, 22 Oct 2020 10:59:31 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <dbf19314-7d9e-76d1-cdb7-116148e91c34@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="Hcz9WcFRzV0zquY4knKkjMz7CaTIIPkIL"
+In-Reply-To: <5E76D2F9CEBD40A2BAADFE3EAB53360F@rotterdam.bazuin.nl>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,71 +58,65 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---Hcz9WcFRzV0zquY4knKkjMz7CaTIIPkIL
-Content-Type: multipart/mixed; boundary="wfq6dR6p3nxnQlDOVGhgP8IBaZkRmoutX"
+On 22/10/2020 10:06, L. van Belle via samba-technical wrote:
+> Hai,
+>
+> Small question, i cant find this.
+>
+> So after the 4.13.0 (on
+> release date) I upgrade a DC and that failed. so i reverted back to my VM
+> snapshot.
+>
+> I now see the following in the logs.
+>
+> [2020/10/22 10:48:36.514438,
+>   0] ../../lib/util/util_runcmd.c:352(samba_runcmd_io_handler)
+>
+>   /usr/sbin/samba_dnsupdate: /usr/sbin/samba_dnsupdate:274:
+> DeprecationWarning: please use dns.resolver.Resolver.resolve() instead
+>
+> [2020/10/22 10:48:36.521212,
+>   0] ../../lib/util/util_runcmd.c:352(samba_runcmd_io_handler)
+>
+>   /usr/sbin/samba_dnsupdate:
+>
+>   return resolver.query(name, name_type)
+>
+> Now, when i
+> look at DC2, which stayed at 4.12.8, that one is not showing any
+> DeprecationWarnings.
+>
+> And i recently added a 3th DC with 4.12.8 and same no DeprecationWarning.
+>
+> Im trying to find why only DC1 has this message even after the i reverted to
+> the VM backup.
+>
+> So i hoped today that after the fix for 4.13 for the start up, i did an
+> upgrade again on my production DC1, having the DeprecationWarning message
+>
+> Only that didnt solve it. Its all running fine thats not the problem.
+>
+> Strange thing here is, DC2
+> is a copy of DC1 and doesnt show this and same for the new DC setup.
+>
+> Anyone suggestions
+>   what this is, and maybe how to make the error disapear?
+>
+> Its a very constant message since i see it every 10 minuts.
 
---wfq6dR6p3nxnQlDOVGhgP8IBaZkRmoutX
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+You would, that is the frequency that samba_dnsupdate is run.
 
-Am 10/22/20 um 10:57 AM schrieb Stefan Metzmacher via samba-technical:
-> Maybe we could abstract the low level allocation (malloc,realloc,free) =
-in talloc and just
-> implement the other allocation schemes below the main talloc logic.
->=20
-> In order to be able to handle much higher IOPS in our SMB server, we ne=
-ed to find ways
-> to optimize our talloc/tevent_req handling.
->=20
-> These are some ideas, but it will be a long road to get there, so I gue=
-ss we need to
-> find incremental mini steps...
+Could you be running bullseye on that DC ?
 
-stuffin all this extra stuff into talloc() is going to make to add a lot
-of extra complexity that we'll have to maintain in the future as a team
-and ideally not just you, Jeremy and Volker. Therefor I'm asking to
-please carefully consider if this is worth it.
+Which would mean python3-dnspython V2.0.0 and in this version 
+resolver.query is deprecated.
 
-Thanks!
--slow
-
---=20
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+Rowland
 
 
---wfq6dR6p3nxnQlDOVGhgP8IBaZkRmoutX--
-
---Hcz9WcFRzV0zquY4knKkjMz7CaTIIPkIL
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAl+RUXUACgkQqh6bcSY5
-nkbtSRAAqbWBQw7MBHMk/c5424tKzzZRDiu8WazhQUkcq/Y2MgH5Cba9wlvQV/gl
-jaT1eX7xKrPv9kam2iDhT/UknDyOEHzAVHgJVekPsxd5MKTUJn9xO3kXrV+dHmiE
-d+exWckXB/eRkJQdufX5ye4GD/w3CvFGVjQH7TeUGvgHCSoCQO9Omk//LB3diNqs
-zEerxoNK+ls+8uxfG5FzVf74ua7dW6gP+Co5uCrmNyx2/XkZvbuAzY0qefKkusX5
-nL/pNO88jDAalqXMuWzH7BM7HAKX/IiTQgbJEEWVYFMBfQOfFxOC6gI3dZ4ZVzGe
-MIZnfGKbCRoPOzmKKfhFrfCJNMj+1XYLAdL9Xxhf9Kac1Ypo5RM80NyUrAuA0WfD
-SCAMum5Jrlc83zpRi7z7CYBYkO5+h6TrL3FrZZCen2BJmc6ja1BKj+iJje3O7tpf
-MneUYrvgyZPvGrSCpJ1BAi/6pNrew1+NGcCWUIng+snQKU1n5TQSWo3M/IVIyT+Q
-5K9SHc3gxU2HQpEJx4tKWFoU2AEAYyKO4//iZqKlVSy+RjrnVXBNyYi2HR3YzeQe
-sewcPj861lAZ7FmtpoyomPZV05vHKS2a4CPgAByY8EFJ7fjDIAzKtzOlDlCV66Nu
-DF6kwqOFbpOZ9rwART/pePwAdRyC2S0d3K6VoQOylm2p4ykJINQ=
-=euq1
------END PGP SIGNATURE-----
-
---Hcz9WcFRzV0zquY4knKkjMz7CaTIIPkIL--
 
