@@ -2,56 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80A2E295B9D
-	for <lists+samba-technical@lfdr.de>; Thu, 22 Oct 2020 11:20:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27FCA295BD4
+	for <lists+samba-technical@lfdr.de>; Thu, 22 Oct 2020 11:32:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=cW51ELFkmOfKkgqt00V48XzQV73NLjCLNzLHEvbdghk=; b=sLEld588/EVjqwu2zCzp7NxokY
-	46WTAGwm2NyCLi741ACX5yQCg7Y8EPTwlbF8uDwaq2IN/r27a9C/pKvjHxq8rTZJ0Cmp0B2NpQKkU
-	fAYr79yNX6P8pVHKXp04Fh2pmMw4vnZtKfzDS4/FD1uRiTSEPBxOtDsq32yqvI2ZPZZ5rKvKieuLY
-	JtY14okm68UJnn5AvoCrL9JnpaelI6v3W4eh2DetnSaT4UDQhbicSw0hj9eDM7p8jHTSpqocvbzsU
-	pRvdeK4M0fVah+s9O4HV4LKOb6Q4Lj4mX70tuaX8yfgURtonGKpBIkkom6lLXf8g0CccitQrBCkVy
-	hBVmQ6pA==;
-Received: from ip6-localhost ([::1]:38704 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=lnNoNvx8GDF5Xr9NJClJpFN0zWzR0nc3PO3Lir39HcI=; b=5P4+1ljru753kkhaN8C3t9cVbC
+	mG8Kk8t/OCHJcONPKZpN9YZDBZD3MBgM5LJrfn6kV6AGmC8MeoODWvKGtZjHyvd/txN2Rn7Cg3fBj
+	iUZUS3uQhMIk93G/J+Ea70knKtkblqKzfH1MyQkHe94F0y42KFOV+wYJ9e64d8cidg4QjHTR7THFY
+	kOcw7RsFP8//e/Pek2qqEWqKB76+JvOPiKJ5/EXDys9yaZqHLyVeyhwglZ4axqcytSVCpHvAIBlsx
+	EGJQPRWZxG5+09FKVVYs9vN9gF0LyAUgS5ci3qWgw4NWbiVTVPSZXf2qI6aRAJFWlmLPgnZ2h0h29
+	kewiSgcg==;
+Received: from ip6-localhost ([::1]:39436 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kVWlq-00DFJF-6O; Thu, 22 Oct 2020 09:20:30 +0000
-Received: from mail-lf1-x12d.google.com ([2a00:1450:4864:20::12d]:46852) 
+	id 1kVWwi-00DFQP-1C; Thu, 22 Oct 2020 09:31:44 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16534) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kVWlk-00DFJ7-Bn
- for samba-technical@lists.samba.org; Thu, 22 Oct 2020 09:20:26 +0000
-Received: by mail-lf1-x12d.google.com with SMTP id v6so1334118lfa.13
- for <samba-technical@lists.samba.org>; Thu, 22 Oct 2020 02:20:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=cW51ELFkmOfKkgqt00V48XzQV73NLjCLNzLHEvbdghk=;
- b=WuQsNI93SEU3jHHx9WqjmbyvMV3IpgwAK+A+h9T64T7uBz7LjGs0Jfz0xhzZkAfGMD
- rb2zGBXf+NAUCNgrFEYGgQZSdrHKdJ5oQraNgKX25WuereZfP1/4WVphflnyJThQxB2D
- q1iA9cG/Vw37aSGC9MmXwXRmh0vqd5Y9XYy53WNQ6rhv3pvBGV8ATDt4xqpibNDkU0wW
- ak7z4XzXQc/Gj5uOvLmX7nJyCUM3a3pmhAukUhKmnCT8dw+/sM+WfWvOKPtj4ydhwzBH
- 8dwIel9BQRuJSp4YY5fF95E4tprQohiHTzy1UYn8+2abNDCKzBLHi373HKG19vRk+1U6
- RSzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=cW51ELFkmOfKkgqt00V48XzQV73NLjCLNzLHEvbdghk=;
- b=R7PB5/V/u+f6EK7FO1SUP5Infxj27MmQGJVM53pPIbQiFBVC/aX3/E639f6PE9faRC
- 2CiqbrvjgBTHDAx1DQX0q+aQo7mhxHmqY6LlUR4v12v5CD3ib3QXVK1iE8IA7TQMpNnk
- 8M2CF60mk9KkT9xzSTjQj9V8Ki3ndo2xTdQGV+P2pxCKsesIjYqUa5iETSkT2YU8dxgD
- ilnDEC8ViKh85opZi6hh6U4elEoO3+ULc1APWW5FmjKaRbTmfnv840+cml+3Cj3E3XKR
- OpHeY5RXU9NtX8yDS7USY4jziP9axhYm4RZPpRpJqoUGgvbNTqLxmLaMbsSjHn8dITDI
- APKA==
-X-Gm-Message-State: AOAM533D3KjAze9mVChXgDle6VZOa8wP3LK8D1HP9uazQ0Vh6cBln9Kj
- woDHvr0Ij0VqqJm4San7eBjfuuRBkALWekKi2OE8v6In6unPLA==
-X-Google-Smtp-Source: ABdhPJwv5yFLwoFB4W1YGkS5xOjsNybmgTH4dHbNWAd3Z6mZgi05MAwOXxnvEZ4qXDuXfUcfyZcSijNy6sRWxw1WOb0=
-X-Received: by 2002:a19:c381:: with SMTP id t123mr463102lff.499.1603358422226; 
- Thu, 22 Oct 2020 02:20:22 -0700 (PDT)
+ (Exim) id 1kVWwc-00DFQI-6q
+ for samba-technical@lists.samba.org; Thu, 22 Oct 2020 09:31:40 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=lnNoNvx8GDF5Xr9NJClJpFN0zWzR0nc3PO3Lir39HcI=; b=JBkB/AhB+zwrVqctOnfZmmMYS7
+ S+QDWNkFjE7hOtDtMBSuTgy+KPnC/ghoSYGAGFzV1CocF6KlMXfKzHwHksvrv5rH78ahXq+xTnoKn
+ LegslsouuAEU0RtsYIQjYfdXvRWYsIrY/GShBCZjgasN1Ie0+j5vJCnDS/OIDddHDdMbdJh4mhE2o
+ CXuYzUUXy34iOj7pVsXf+g2i3/jIk4Yppfk2sg1omhBX6SFvcAxxqQC8kcJlJqMonL9hDOmZVq2GW
+ n+ZYAXeZhKmVqm8aOZnFEQYFdoOZsR7MW4B0MWW7kuA5dsE8SG+N5OGR1FFIDz0eEX3ihQlaMAkWs
+ i8ADkZImQCUC8iObyB/U5MmxUV/btGVyTQn5LGdEekoUBxhlj5Ubil7Kune7t9LBZARq9YZZmEG/i
+ k37MGzyhjqQOHTiHLA8WEzWmImVpBcFQ+XkewEA9n6B40YVvbVOVhncFVUlTgKERzqnmKVt7B6E8t
+ RwsB1NS4mM+54mn0UY0W05TA;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kVWwa-0008In-O8; Thu, 22 Oct 2020 09:31:36 +0000
+Subject: Re: talloc: Other minor issues/queries
+To: Stefan Metzmacher <metze@samba.org>, Jeremy Allison <jra@samba.org>,
+ Arran Cudbard-Bell <a.cudbardb@freeradius.org>
+References: <3A50457D-74F6-4C7B-BC2E-8EA68EE64C61@freeradius.org>
+ <20201021001113.GA754426@jeremy-acer>
+ <264F0B23-F45D-49F3-A0B7-4E717B129898@freeradius.org>
+ <20201021183701.GA809738@jeremy-acer>
+ <8E5EC9FB-62C2-4BA7-B809-72F26FEF2CD1@freeradius.org>
+ <20201022010855.GA853779@jeremy-acer>
+ <dbf19314-7d9e-76d1-cdb7-116148e91c34@samba.org>
+Message-ID: <4134ee06-d420-bc29-fd88-78550fa5d23a@samba.org>
+Date: Thu, 22 Oct 2020 11:31:33 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-Date: Thu, 22 Oct 2020 04:20:10 -0500
-Message-ID: <CAH2r5mtmPxUKYYK-PbouTFpt9T8AU-41pRZu1CEO=+XLZZ+vSA@mail.gmail.com>
-Subject: [PATCH][WIP] query smb3 reparse tags for special files
-To: CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="00000000000034908b05b23ef90b"
+In-Reply-To: <dbf19314-7d9e-76d1-cdb7-116148e91c34@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="Hcz9WcFRzV0zquY4knKkjMz7CaTIIPkIL"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,153 +64,71 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---00000000000034908b05b23ef90b
-Content-Type: text/plain; charset="UTF-8"
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--Hcz9WcFRzV0zquY4knKkjMz7CaTIIPkIL
+Content-Type: multipart/mixed; boundary="wfq6dR6p3nxnQlDOVGhgP8IBaZkRmoutX"
 
-WSL defines special files with various reparse tags
+--wfq6dR6p3nxnQlDOVGhgP8IBaZkRmoutX
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-smbfsctl.h:#define IO_REPARSE_TAG_LX_SYMLINK    0xA000001D
-smbfsctl.h:#define IO_REPARSE_TAG_LX_FIFO            0x80000024
-smbfsctl.h:#define IO_REPARSE_TAG_LX_CHR             0x80000025
-smbfsctl.h:#define IO_REPARSE_TAG_LX_BLK             0x80000026
+Am 10/22/20 um 10:57 AM schrieb Stefan Metzmacher via samba-technical:
+> Maybe we could abstract the low level allocation (malloc,realloc,free) =
+in talloc and just
+> implement the other allocation schemes below the main talloc logic.
+>=20
+> In order to be able to handle much higher IOPS in our SMB server, we ne=
+ed to find ways
+> to optimize our talloc/tevent_req handling.
+>=20
+> These are some ideas, but it will be a long road to get there, so I gue=
+ss we need to
+> find incremental mini steps...
 
-These also make sense for us to use more broadly because it simplifies readdir
+stuffin all this extra stuff into talloc() is going to make to add a lot
+of extra complexity that we'll have to maintain in the future as a team
+and ideally not just you, Jeremy and Volker. Therefor I'm asking to
+please carefully consider if this is worth it.
 
-but ... my first attempt at querying this using infolevel 33
-FileReparsePointInformation (see MS-FSCC section 2.4.35) failed ...
-with Windows 10 returning STATUS_NOT_SUPPORTED when querying various
-reparse points (created by WSL indirectly) including fifos, symlinks
-and char devices.
+Thanks!
+-slow
 
-I can switch approaches and try to do the smb3 fsctl to query reparse
-info instead but was hoping that query info would work.  Any idea if
-there is another info level that would allow me to query the tag?
-
-In any case, here is the WIP first stage of the patch - I have to add
-a second patch to add the fsctl query
+--=20
+Ralph Boehme, Samba Team                https://samba.org/
+Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
 
 
+--wfq6dR6p3nxnQlDOVGhgP8IBaZkRmoutX--
 
+--Hcz9WcFRzV0zquY4knKkjMz7CaTIIPkIL
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
--- 
-Thanks,
+-----BEGIN PGP SIGNATURE-----
 
-Steve
+iQIzBAEBCAAdFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAl+RUXUACgkQqh6bcSY5
+nkbtSRAAqbWBQw7MBHMk/c5424tKzzZRDiu8WazhQUkcq/Y2MgH5Cba9wlvQV/gl
+jaT1eX7xKrPv9kam2iDhT/UknDyOEHzAVHgJVekPsxd5MKTUJn9xO3kXrV+dHmiE
+d+exWckXB/eRkJQdufX5ye4GD/w3CvFGVjQH7TeUGvgHCSoCQO9Omk//LB3diNqs
+zEerxoNK+ls+8uxfG5FzVf74ua7dW6gP+Co5uCrmNyx2/XkZvbuAzY0qefKkusX5
+nL/pNO88jDAalqXMuWzH7BM7HAKX/IiTQgbJEEWVYFMBfQOfFxOC6gI3dZ4ZVzGe
+MIZnfGKbCRoPOzmKKfhFrfCJNMj+1XYLAdL9Xxhf9Kac1Ypo5RM80NyUrAuA0WfD
+SCAMum5Jrlc83zpRi7z7CYBYkO5+h6TrL3FrZZCen2BJmc6ja1BKj+iJje3O7tpf
+MneUYrvgyZPvGrSCpJ1BAi/6pNrew1+NGcCWUIng+snQKU1n5TQSWo3M/IVIyT+Q
+5K9SHc3gxU2HQpEJx4tKWFoU2AEAYyKO4//iZqKlVSy+RjrnVXBNyYi2HR3YzeQe
+sewcPj861lAZ7FmtpoyomPZV05vHKS2a4CPgAByY8EFJ7fjDIAzKtzOlDlCV66Nu
+DF6kwqOFbpOZ9rwART/pePwAdRyC2S0d3K6VoQOylm2p4ykJINQ=
+=euq1
+-----END PGP SIGNATURE-----
 
---00000000000034908b05b23ef90b
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="work-in-progress-query-wsl-reparse-tags.patch"
-Content-Disposition: attachment; 
-	filename="work-in-progress-query-wsl-reparse-tags.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_kgkm64gk0>
-X-Attachment-Id: f_kgkm64gk0
-
-ZGlmZiAtLWdpdCBhL2ZzL2NpZnMvY2lmc2dsb2IuaCBiL2ZzL2NpZnMvY2lmc2dsb2IuaAppbmRl
-eCBiNjkyNWFlZWI2MjEuLjQ4NGVjMmQ4YzVjOSAxMDA2NDQKLS0tIGEvZnMvY2lmcy9jaWZzZ2xv
-Yi5oCisrKyBiL2ZzL2NpZnMvY2lmc2dsb2IuaApAQCAtMjk4LDYgKzI5OCwxMCBAQCBzdHJ1Y3Qg
-c21iX3ZlcnNpb25fb3BlcmF0aW9ucyB7CiAJLyogcXVlcnkgZmlsZSBkYXRhIGZyb20gdGhlIHNl
-cnZlciAqLwogCWludCAoKnF1ZXJ5X2ZpbGVfaW5mbykoY29uc3QgdW5zaWduZWQgaW50LCBzdHJ1
-Y3QgY2lmc190Y29uICosCiAJCQkgICAgICAgc3RydWN0IGNpZnNfZmlkICosIEZJTEVfQUxMX0lO
-Rk8gKik7CisJLyogcXVlcnkgcmVwYXJzZSB0YWcgZnJvbSBzcnYgdG8gZGV0ZXJtaW5lIHdoaWNo
-IHR5cGUgb2Ygc3BlY2lhbCBmaWxlICovCisJaW50ICgqcXVlcnlfcmVwYXJzZV90YWcpKGNvbnN0
-IHVuc2lnbmVkIGludCB4aWQsIHN0cnVjdCBjaWZzX3Rjb24gKnRjb24sCisJCQkJc3RydWN0IGNp
-ZnNfc2JfaW5mbyAqY2lmc19zYiwgY29uc3QgY2hhciAqcGF0aCwKKwkJCQlfX3UzMiAqcmVwYXJz
-ZV90YWcpOwogCS8qIGdldCBzZXJ2ZXIgaW5kZXggbnVtYmVyICovCiAJaW50ICgqZ2V0X3Nydl9p
-bnVtKShjb25zdCB1bnNpZ25lZCBpbnQsIHN0cnVjdCBjaWZzX3Rjb24gKiwKIAkJCSAgICBzdHJ1
-Y3QgY2lmc19zYl9pbmZvICosIGNvbnN0IGNoYXIgKiwKZGlmZiAtLWdpdCBhL2ZzL2NpZnMvaW5v
-ZGUuYyBiL2ZzL2NpZnMvaW5vZGUuYwppbmRleCBkYWVjMzFiZTg1NzEuLmZlMjA2NDM0NTBhMSAx
-MDA2NDQKLS0tIGEvZnMvY2lmcy9pbm9kZS5jCisrKyBiL2ZzL2NpZnMvaW5vZGUuYwpAQCAtOTE2
-LDYgKzkxNiw3IEBAIGNpZnNfZ2V0X2lub2RlX2luZm8oc3RydWN0IGlub2RlICoqaW5vZGUsCiAJ
-dm9pZCAqc21iMV9iYWNrdXBfcnNwX2J1ZiA9IE5VTEw7CiAJaW50IHJjID0gMDsKIAlpbnQgdG1w
-cmMgPSAwOworCV9fdTMyIHJlcGFyc2VfdGFnID0gMDsKIAogCXRsaW5rID0gY2lmc19zYl90bGlu
-ayhjaWZzX3NiKTsKIAlpZiAoSVNfRVJSKHRsaW5rKSkKQEAgLTk0MSw2ICs5NDIsMTYgQEAgY2lm
-c19nZXRfaW5vZGVfaW5mbyhzdHJ1Y3QgaW5vZGUgKippbm9kZSwKIAkJCQkJCSAgZnVsbF9wYXRo
-LCB0bXBfZGF0YSwKIAkJCQkJCSAgJmFkanVzdF90eiwgJnN5bWxpbmspOwogCQlkYXRhID0gdG1w
-X2RhdGE7CisKKwkJLyoKKwkJICogSWYgdGhlIGZpbGUgaXMgYSByZXBhcnNlIHBvaW50LCBpdCBp
-cyBtb3JlIGNvbXBsaWNhdGVkCisJCSAqIHNpbmNlIHdlIGhhdmUgdG8gY2hlY2sgaWYgaXRzIHJl
-cGFyc2UgdGFnIG1hdGNoZXMgYSBrbm93bgorCQkgKiBzcGVjaWFsIGZpbGUgdHlwZSBlLmcuIHN5
-bWxpbmsgb3IgZmlmbyBvciBjaGFyIGV0Yy4KKwkJICovCisJCWlmICgobGUzMl90b19jcHUoZGF0
-YS0+QXR0cmlidXRlcykgJiBBVFRSX1JFUEFSU0UpICYmCisJCSAgICAoc2VydmVyLT5vcHMtPnF1
-ZXJ5X3JlcGFyc2VfdGFnKSkKKwkJCXJjID0gc2VydmVyLT5vcHMtPnF1ZXJ5X3JlcGFyc2VfdGFn
-KHhpZCwgdGNvbiwgY2lmc19zYiwKKwkJCQkJCWZ1bGxfcGF0aCwgJnJlcGFyc2VfdGFnKTsKIAl9
-CiAKIAkvKgpkaWZmIC0tZ2l0IGEvZnMvY2lmcy9zbWIyaW5vZGUuYyBiL2ZzL2NpZnMvc21iMmlu
-b2RlLmMKaW5kZXggZGY2MjEyZTU1ZTEwLi4xMDllYzE2NmFhNmEgMTAwNjQ0Ci0tLSBhL2ZzL2Np
-ZnMvc21iMmlub2RlLmMKKysrIGIvZnMvY2lmcy9zbWIyaW5vZGUuYwpAQCAtNTAzLDEwICs1MDMs
-MjYgQEAgbW92ZV9zbWIyX2luZm9fdG9fY2lmcyhGSUxFX0FMTF9JTkZPICpkc3QsIHN0cnVjdCBz
-bWIyX2ZpbGVfYWxsX2luZm8gKnNyYykKIAlkc3QtPkluZGV4TnVtYmVyMSA9IDA7IC8qIHdlIGRv
-bid0IHVzZSBpdCAqLwogfQogCisvKiBxdWVyeSByZXBhcnNlIHRhZyBmcm9tIHNydiB0byBkZXRl
-cm1pbmUgd2hpY2ggdHlwZSBvZiBzcGVjaWFsIGZpbGUgKi8KK2ludCBzbWIyX3F1ZXJ5X3JlcGFy
-c2VfdGFnKGNvbnN0IHVuc2lnbmVkIGludCB4aWQsIHN0cnVjdCBjaWZzX3Rjb24gKnRjb24sCisJ
-CXN0cnVjdCBjaWZzX3NiX2luZm8gKmNpZnNfc2IsIGNvbnN0IGNoYXIgKnBhdGgsIF9fdTMyICp0
-YWcpCit7CisJaW50IHJjID0gMDsKKwlfX3UzMiBjcmVhdGVfb3B0aW9ucyA9IE9QRU5fUkVQQVJT
-RV9QT0lOVDsKKwlzdHJ1Y3QgY2lmc0ZpbGVJbmZvICpjZmlsZTsKKworCWNpZnNfZ2V0X3JlYWRh
-YmxlX3BhdGgodGNvbiwgcGF0aCwgJmNmaWxlKTsKKworCQkvKiBUT0RPIHVwZGF0ZSBiZWxvdyAq
-LworCS8qIHJjID0gc21iMl9mc2N0bF9nZXRfdGFnKHhpZCwgdGNvbiwgY2lmc19zYiwgcGF0aCwu
-Li4gKi8KKworCXJldHVybiByYzsKK30KKwogaW50CiBzbWIyX3F1ZXJ5X3BhdGhfaW5mbyhjb25z
-dCB1bnNpZ25lZCBpbnQgeGlkLCBzdHJ1Y3QgY2lmc190Y29uICp0Y29uLAogCQkgICAgIHN0cnVj
-dCBjaWZzX3NiX2luZm8gKmNpZnNfc2IsIGNvbnN0IGNoYXIgKmZ1bGxfcGF0aCwKLQkJICAgICBG
-SUxFX0FMTF9JTkZPICpkYXRhLCBib29sICphZGp1c3RfdHosIGJvb2wgKnN5bWxpbmspCisJCSAg
-ICAgRklMRV9BTExfSU5GTyAqZGF0YSwgYm9vbCAqYWRqdXN0X3R6LCBib29sICpyZXBhcnNlKQog
-ewogCWludCByYzsKIAlzdHJ1Y3Qgc21iMl9maWxlX2FsbF9pbmZvICpzbWIyX2RhdGE7CkBAIC01
-MTYsNyArNTMyLDcgQEAgc21iMl9xdWVyeV9wYXRoX2luZm8oY29uc3QgdW5zaWduZWQgaW50IHhp
-ZCwgc3RydWN0IGNpZnNfdGNvbiAqdGNvbiwKIAlzdHJ1Y3QgY2FjaGVkX2ZpZCAqY2ZpZCA9IE5V
-TEw7CiAKIAkqYWRqdXN0X3R6ID0gZmFsc2U7Ci0JKnN5bWxpbmsgPSBmYWxzZTsKKwkqcmVwYXJz
-ZSA9IGZhbHNlOwogCiAJc21iMl9kYXRhID0ga3phbGxvYyhzaXplb2Yoc3RydWN0IHNtYjJfZmls
-ZV9hbGxfaW5mbykgKyBQQVRIX01BWCAqIDIsCiAJCQkgICAgR0ZQX0tFUk5FTCk7CkBAIC01NDgs
-NyArNTY0LDcgQEAgc21iMl9xdWVyeV9wYXRoX2luZm8oY29uc3QgdW5zaWduZWQgaW50IHhpZCwg
-c3RydWN0IGNpZnNfdGNvbiAqdGNvbiwKIAkJCSAgICAgIEZJTEVfUkVBRF9BVFRSSUJVVEVTLCBG
-SUxFX09QRU4sIGNyZWF0ZV9vcHRpb25zLAogCQkJICAgICAgQUNMX05PX01PREUsIHNtYjJfZGF0
-YSwgU01CMl9PUF9RVUVSWV9JTkZPLCBjZmlsZSk7CiAJaWYgKHJjID09IC1FT1BOT1RTVVBQKSB7
-Ci0JCSpzeW1saW5rID0gdHJ1ZTsKKwkJKnJlcGFyc2UgPSB0cnVlOwogCQljcmVhdGVfb3B0aW9u
-cyB8PSBPUEVOX1JFUEFSU0VfUE9JTlQ7CiAKIAkJLyogRmFpbGVkIG9uIGEgc3ltYm9saWMgbGlu
-ayAtIHF1ZXJ5IGEgcmVwYXJzZSBwb2ludCBpbmZvICovCkBAIC01NzAsNyArNTg2LDcgQEAgc21i
-Ml9xdWVyeV9wYXRoX2luZm8oY29uc3QgdW5zaWduZWQgaW50IHhpZCwgc3RydWN0IGNpZnNfdGNv
-biAqdGNvbiwKIGludAogc21iMzExX3Bvc2l4X3F1ZXJ5X3BhdGhfaW5mbyhjb25zdCB1bnNpZ25l
-ZCBpbnQgeGlkLCBzdHJ1Y3QgY2lmc190Y29uICp0Y29uLAogCQkgICAgIHN0cnVjdCBjaWZzX3Ni
-X2luZm8gKmNpZnNfc2IsIGNvbnN0IGNoYXIgKmZ1bGxfcGF0aCwKLQkJICAgICBzdHJ1Y3Qgc21i
-MzExX3Bvc2l4X3FpbmZvICpkYXRhLCBib29sICphZGp1c3RfdHosIGJvb2wgKnN5bWxpbmspCisJ
-CSAgICAgc3RydWN0IHNtYjMxMV9wb3NpeF9xaW5mbyAqZGF0YSwgYm9vbCAqYWRqdXN0X3R6LCBi
-b29sICpyZXBhcnNlKQogewogCWludCByYzsKIAlfX3UzMiBjcmVhdGVfb3B0aW9ucyA9IDA7CkBA
-IC01NzgsNyArNTk0LDcgQEAgc21iMzExX3Bvc2l4X3F1ZXJ5X3BhdGhfaW5mbyhjb25zdCB1bnNp
-Z25lZCBpbnQgeGlkLCBzdHJ1Y3QgY2lmc190Y29uICp0Y29uLAogCXN0cnVjdCBzbWIzMTFfcG9z
-aXhfcWluZm8gKnNtYjJfZGF0YTsKIAogCSphZGp1c3RfdHogPSBmYWxzZTsKLQkqc3ltbGluayA9
-IGZhbHNlOworCSpyZXBhcnNlID0gZmFsc2U7CiAKIAkvKiBCQiBUT0RPOiBNYWtlIHN0cnVjdCBs
-YXJnZXIgd2hlbiBhZGQgc3VwcG9ydCBmb3IgcGFyc2luZyBvd25lciBTSURzICovCiAJc21iMl9k
-YXRhID0ga3phbGxvYyhzaXplb2Yoc3RydWN0IHNtYjMxMV9wb3NpeF9xaW5mbyksCkBAIC01OTks
-NyArNjE1LDcgQEAgc21iMzExX3Bvc2l4X3F1ZXJ5X3BhdGhfaW5mbyhjb25zdCB1bnNpZ25lZCBp
-bnQgeGlkLCBzdHJ1Y3QgY2lmc190Y29uICp0Y29uLAogCQkJICAgICAgQUNMX05PX01PREUsIHNt
-YjJfZGF0YSwgU01CMl9PUF9QT1NJWF9RVUVSWV9JTkZPLCBjZmlsZSk7CiAJaWYgKHJjID09IC1F
-T1BOT1RTVVBQKSB7CiAJCS8qIEJCIFRPRE86IFdoZW4gc3VwcG9ydCBmb3Igc3BlY2lhbCBmaWxl
-cyBhZGRlZCB0byBTYW1iYSByZS12ZXJpZnkgdGhpcyBwYXRoICovCi0JCSpzeW1saW5rID0gdHJ1
-ZTsKKwkJKnJlcGFyc2UgPSB0cnVlOwogCQljcmVhdGVfb3B0aW9ucyB8PSBPUEVOX1JFUEFSU0Vf
-UE9JTlQ7CiAKIAkJLyogRmFpbGVkIG9uIGEgc3ltYm9saWMgbGluayAtIHF1ZXJ5IGEgcmVwYXJz
-ZSBwb2ludCBpbmZvICovCmRpZmYgLS1naXQgYS9mcy9jaWZzL3NtYjJwZHUuaCBiL2ZzL2NpZnMv
-c21iMnBkdS5oCmluZGV4IDE3MWY1NDk2NTcwMy4uMTQyNDRkMjg4YjgwIDEwMDY0NAotLS0gYS9m
-cy9jaWZzL3NtYjJwZHUuaAorKysgYi9mcy9jaWZzL3NtYjJwZHUuaApAQCAtMTY5MSw2ICsxNjkx
-LDExIEBAIHN0cnVjdCBzbWIyX2ZpbGVfZW9mX2luZm8geyAvKiBlbmNvZGluZyBvZiByZXF1ZXN0
-IGZvciBsZXZlbCAxMCAqLwogCV9fbGU2NCBFbmRPZkZpbGU7IC8qIG5ldyBlbmQgb2YgZmlsZSB2
-YWx1ZSAqLwogfSBfX3BhY2tlZDsgLyogbGV2ZWwgMjAgU2V0ICovCiAKK3N0cnVjdCBzbWIyX2Zp
-bGVfcmVwYXJzZV9wb2ludF9pbmZvIHsKKwlfX2xlNjQgSW5kZXhOdW1iZXI7CisJX19sZTMyIFRh
-ZzsKK30gX19wYWNrZWQ7CisKIHN0cnVjdCBzbWIyX2ZpbGVfbmV0d29ya19vcGVuX2luZm8gewog
-CV9fbGU2NCBDcmVhdGlvblRpbWU7CiAJX19sZTY0IExhc3RBY2Nlc3NUaW1lOwpkaWZmIC0tZ2l0
-IGEvZnMvY2lmcy9zbWIycHJvdG8uaCBiL2ZzL2NpZnMvc21iMnByb3RvLmgKaW5kZXggNjdjNTBk
-NzhjYWExLi5kNDExMDQ0N2VlM2EgMTAwNjQ0Ci0tLSBhL2ZzL2NpZnMvc21iMnByb3RvLmgKKysr
-IGIvZnMvY2lmcy9zbWIycHJvdG8uaApAQCAtNzcsNiArNzcsOSBAQCBleHRlcm4gdm9pZCBjbG9z
-ZV9zaHJvb3RfbGVhc2Uoc3RydWN0IGNhY2hlZF9maWQgKmNmaWQpOwogZXh0ZXJuIHZvaWQgY2xv
-c2Vfc2hyb290X2xlYXNlX2xvY2tlZChzdHJ1Y3QgY2FjaGVkX2ZpZCAqY2ZpZCk7CiBleHRlcm4g
-dm9pZCBtb3ZlX3NtYjJfaW5mb190b19jaWZzKEZJTEVfQUxMX0lORk8gKmRzdCwKIAkJCQkgICBz
-dHJ1Y3Qgc21iMl9maWxlX2FsbF9pbmZvICpzcmMpOworZXh0ZXJuIGludCBzbWIyX3F1ZXJ5X3Jl
-cGFyc2VfdGFnKGNvbnN0IHVuc2lnbmVkIGludCB4aWQsIHN0cnVjdCBjaWZzX3Rjb24gKnRjb24s
-CisJCQkJc3RydWN0IGNpZnNfc2JfaW5mbyAqY2lmc19zYiwgY29uc3QgY2hhciAqcGF0aCwKKwkJ
-CQlfX3UzMiAqcmVwYXJzZV90YWcpOwogZXh0ZXJuIGludCBzbWIyX3F1ZXJ5X3BhdGhfaW5mbyhj
-b25zdCB1bnNpZ25lZCBpbnQgeGlkLCBzdHJ1Y3QgY2lmc190Y29uICp0Y29uLAogCQkJCXN0cnVj
-dCBjaWZzX3NiX2luZm8gKmNpZnNfc2IsCiAJCQkJY29uc3QgY2hhciAqZnVsbF9wYXRoLCBGSUxF
-X0FMTF9JTkZPICpkYXRhLAo=
---00000000000034908b05b23ef90b--
+--Hcz9WcFRzV0zquY4knKkjMz7CaTIIPkIL--
 
