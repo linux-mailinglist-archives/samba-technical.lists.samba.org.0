@@ -2,58 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4052F29560A
-	for <lists+samba-technical@lfdr.de>; Thu, 22 Oct 2020 03:25:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4915629566C
+	for <lists+samba-technical@lfdr.de>; Thu, 22 Oct 2020 04:33:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=eV7tsz86RjTf0zxnD6V9sYTUrsIDD5I/IBKpywLt0qo=; b=Vg3nvAdcqTTlW8Q70mOJ89V8L3
-	YuSAvkk5SUqe95DuVixe94B4MqJvi5JunE49BT5dbhC+JpfcKnLYh/aI3Trzswg/q0N7KP25rKpV1
-	eVUDiMKaKyP2jiqeY6a+3XQtnH5PpPDMAAFgvL+8ZYa6YLANmf5URUd2hC7NWXYQGAr6XQTiauJVZ
-	1IaWmNXfhAqom3OpGhjL6LUtKozNObIhm4W7FgLs3cgPwl8vyuNzXHKS6yjJKhyCTXnNMaUXxG1J7
-	9ZBxRq0S4hjglQtHDs3YgyhYLzNF61X3euPdZXE/JvFUuo/lkEFzd/w4fKP/prYjhSXn9zkOigU5U
-	uDVH//rQ==;
-Received: from ip6-localhost ([::1]:32544 helo=hr1.samba.org) 
+	bh=Zh9Wud5DpbQvnsSSV/tI/bvdge3VQ5mwn/lxlO7tHB4=; b=mLRrg3MPApKeo/4F+XIIOtRqHJ
+	5It4ZWOgChbLClcg9RO9HzOtZsHTU3nttaTozqpwAY0tfvTneYiW92sZ9/zSAcVtpArYbTYmwmao/
+	Ge1Xa0JRybggcqUp/1Co+Aiv34FuV982FZonhR4DBHI+nRubqIygzCPie8RaUPUReIS9GXYVjdYoF
+	NISofrbYGHQJKQJdg6p3iro5dmzGpF0t1+02uJvxMwXUlqHOv5sJMZP6GhVQIGKJbDR2w0cpISWZk
+	1GMbIabcFhKX9bPX9g0RYPNSlb89hDLYtg6wmOrxTOcUhVxJGEYJFKcYg7KSZswtS/lHSW+0W+bY3
+	A4iXuXAQ==;
+Received: from ip6-localhost ([::1]:33290 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kVPLn-00DDW0-C8; Thu, 22 Oct 2020 01:25:07 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz
- ([2404:130:4080::4]:38518) 
+	id 1kVQOx-00DDkS-DO; Thu, 22 Oct 2020 02:32:27 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36196) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kVPLi-00DDVq-5g
- for samba-technical@lists.samba.org; Thu, 22 Oct 2020 01:25:05 +0000
-Received: from [IPv6:2404:130:0:1000:716d:eeb4:e0cd:40ea] (unknown
- [IPv6:2404:130:0:1000:716d:eeb4:e0cd:40ea])
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 3160280AF9; 
- Thu, 22 Oct 2020 14:24:42 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1603329882;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=eV7tsz86RjTf0zxnD6V9sYTUrsIDD5I/IBKpywLt0qo=;
- b=EywFprtit6zncDJFJodvpWbS7NPE0PTMfdvPZiXj6T7+n+UNIH8UHQCVnw7gBX6CNCfAbp
- gnRljqXUHYsuKVmpHySpJPzr7+mLXTZ/ID0DmMCdoch01t1UhlnVRLJvxjaA+cP2nE7swm
- zmLZb3r6B61A3Zb0jX02qcDG7UDd4t6Iig7Er53hLgjvnsvXv6zjBFW36qGE7G1NL3nKn6
- TJ5TRHXF7jVG7ECowPmTQpxWqFWBGVY7KPlFoXCRTxvAHRaoGKXnqmYrSpE6MSi6d6sU90
- 9z0zUVj6agLxMJr16bXahl7d+3gGka/tceyjtRIVvoWu84WRv7Dbltp/o1IB+g==
+ (Exim) id 1kVQOr-00DDkL-8R
+ for samba-technical@lists.samba.org; Thu, 22 Oct 2020 02:32:23 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=Zh9Wud5DpbQvnsSSV/tI/bvdge3VQ5mwn/lxlO7tHB4=; b=0Eh84X1xlktChI6Ge5+H1THGNv
+ f+5zeAnkzfkWRO5YAK4SJC0w6swYfZGG1OjXsd+ISg6FAasF0/hqkvpg5UuRgrXcBk79kbGSuvCYM
+ I0Xif2uSSSzXgln+9NlMFAXLt5/k+7FfpYyFK4t9ionaMBCAWn83MbcrCWm4cywwD2WnhKAPRqSng
+ eTE2rUNuADN6z1O/NmrVIJ/x5g2nBexD5Rq3kfCLQWC3TofeI1Vs3FUX034K4cFRqE9Jy6NHRs5Ib
+ gmIszDq3+VHOcnwk0RwtNjPhcIYSAnrc3x4OaNqhd+FhfHJzM1fjMLwAib3kAI69ozcsCFJs3KePT
+ 0s9KQbE06mvglONWD4jFGQKVvWXodECZ9QlBEuyGsn9jaCdrhlZj+5x2RNSrXdvrkAeGiIUCiPKml
+ BoTFnN6JmSCgDInoT0J6art5m68BugSUSkquRqdeI8I3kAeBFbzt146CoP1KqEoJa10DQJm5Bqvkw
+ SwbObgtHPHGj3+F0xF/CD7ZJ;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kVQOn-0003NL-FJ; Thu, 22 Oct 2020 02:32:18 +0000
+Message-ID: <b17eee9eaad9deabdb038a1d0c9b47dada2e85e5.camel@samba.org>
 Subject: Re: issues with oss-fuzz and missing libraries (avahi-common)
-To: Andrew Bartlett <abartlet@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>, Upstream Samba
+ Technical Mailing list <samba-technical@lists.samba.org>
+Date: Thu, 22 Oct 2020 15:32:13 +1300
+In-Reply-To: <0c27772a-fbb5-246f-a282-c22a92660482@catalyst.net.nz>
 References: <6e676db2323a9f96443ab3cfc65a586413bc37ea.camel@samba.org>
-Message-ID: <0c27772a-fbb5-246f-a282-c22a92660482@catalyst.net.nz>
-Date: Thu, 22 Oct 2020 14:24:42 +1300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ <0c27772a-fbb5-246f-a282-c22a92660482@catalyst.net.nz>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
-In-Reply-To: <6e676db2323a9f96443ab3cfc65a586413bc37ea.camel@samba.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-NZ
 Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-0.10 / 15.00]; ARC_NA(0.00)[];
- DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
- MIME_GOOD(-0.10)[text/plain]; MIME_TRACE(0.00)[0:+];
- MID_RHS_MATCH_FROM(0.00)[]
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,21 +57,47 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 22/10/20 1:41 pm, Andrew Bartlett via samba-technical wrote:
-
+On Thu, 2020-10-22 at 14:24 +1300, Douglas Bagnall wrote:
+> On 22/10/20 1:41 pm, Andrew Bartlett via samba-technical wrote:
 > 
-> This isn't just for the coverage stuff - I've checked, and the impacted fuzzers just never successfully run, which is a big problem.
+> > This isn't just for the coverage stuff - I've checked, and the
+> > impacted fuzzers just never successfully run, which is a big
+> > problem.
+> 
+> It seems they ran until 8 September, and haven't since 14 September.
+> These are the respective coverage logs:
+> 
+> https://oss-fuzz-build-logs.storage.googleapis.com/log-81c8b380-1ef8-427c-bcf7-7b4174f6e1b9.txt
+> https://oss-fuzz-build-logs.storage.googleapis.com/log-e44362c2-f168-4b6f-88ce-433b7f040937.txt
+> 
+> Douglas
 
-It seems they ran until 8 September, and haven't since 14 September.
-These are the respective coverage logs:
+Bother:
 
-https://oss-fuzz-build-logs.storage.googleapis.com/log-81c8b380-1ef8-427c-bcf7-7b4174f6e1b9.txt
-https://oss-fuzz-build-logs.storage.googleapis.com/log-e44362c2-f168-4b6f-88ce-433b7f040937.txt
+commit e60df214998afc145ca482cab184691b3ddc3bb2
+Author:     Andrew Bartlett <abartlet@samba.org>
+AuthorDate: Wed Aug 26 15:37:57 2020 +1200
+Commit:     Andrew Bartlett <abartlet@samba.org>
+CommitDate: Fri Sep 11 03:43:40 2020 +0000
 
-Douglas
+    oss-fuzz: standardise on RUNPATH for the static-ish binaries
+    
+I'll revert that and see if that helps.
+
+Thanks for doing the bisection!
+
+Andrew Bartlett
+-- 
+Andrew Bartlett                       https://samba.org/~abartlet/
+Authentication Developer, Samba Team  https://samba.org
+Samba Developer, Catalyst IT          
+https://catalyst.net.nz/services/samba
+
+
+
 
