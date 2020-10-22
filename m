@@ -2,59 +2,101 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B57D5295CA7
-	for <lists+samba-technical@lfdr.de>; Thu, 22 Oct 2020 12:27:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E695295CFF
+	for <lists+samba-technical@lfdr.de>; Thu, 22 Oct 2020 12:52:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=CDfW14vcL9DOMzbua0oMTEeA0Rjyinc6YAOWWcJWy10=; b=CdNo0Hdwid5E8AzF+XL0uLUupK
-	9LcRveAeEVgOgpzA7C36JDVdgIGkxFCxDuyavdLE6LYv84NaGxdUZCscQS/c/JmjRmSxY4culT1j5
-	+mR2vnvDMYv8h9Yroh1XfjTZTcHF6wHmtiMcH1xN+ohai54uHN8rSpBE8XsRaTPiRSu7aLZG8A7nG
-	aK1Q+A0vLbL3khtVAqmdhlT5WTnJt1hdVxaGcwxc49u42lUqQhc2n737Mzv5mbzkblv4YFN2Pw64K
-	SiO0yGsga0798xgsqRLAiTLRmrWJOxbBmq10sKTSMhXHjvq/Wynu7om+rBdD1CGvzILP5aIRALVdc
-	MKDyCQkA==;
-Received: from ip6-localhost ([::1]:40926 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=irPpszwIbVKex4o1GaVfw1Ex5iXYQwqHC80vKSPvuJI=; b=DbyFiENzUllle+mRDCzPrG8YTc
+	CseTA77rjDtmwfcSl+Gugl1SinYCNBpVFnvotg3hSMKG/xGeGdXHM3kkNH3pllXWsFwcePKl+UX6k
+	5x6/fUtjtWFtGnU3a1GjjBvDmzdb4by6FVYMVwu4WRs04OQRwbI8XZp6iZwSVfTsoXnVXWeCePZCF
+	z9/bQSWlh54AA7x6ICuvi3JsyQ+RlGLoZvvfpl8v6ZlZY/64AF9eQo61+FzOdv8UiZe+4paA3sSQ6
+	xD0oCpeoC1EyAma/cS/FEmvUZWIaRXP6IBqTf0GqcKWWADy3KPJiYGuVXdMdFMWhRhcwYhpN5NxPA
+	fc7GTUZQ==;
+Received: from ip6-localhost ([::1]:41646 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kVXoZ-00DFgT-U2; Thu, 22 Oct 2020 10:27:23 +0000
-Received: from mailhopper2.bazuin.nl ([195.134.173.123]:40056) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kVXoT-00DFg8-03
- for samba-technical@lists.samba.org; Thu, 22 Oct 2020 10:27:21 +0000
-X-Bazuin-en-Partners-MailScanner-Watermark: 1603966090.98766@wGqbLbXwl9/UosTq8gNP6g
-X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
-X-Bazuin-en-Partners-MailScanner: Found to be clean
-X-Bazuin-en-Partners-MailScanner-ID: DC38711F302.A59C4
-X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
- Partners for more information
-Received: from ms249-lin-003.rotterdam.bazuin.nl
- (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
- by mailhopper2.bazuin.nl (Postfix) with ESMTP id DC38711F302
- for <samba-technical@lists.samba.org>; Thu, 22 Oct 2020 12:08:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
- s=mail20180308; t=1603361287;
- bh=ZgSE8IE77aGZNsAJE7yUgI/3ZqB6K8rKDnGhi7BLD0I=;
- h=Subject:From:To:Date:In-Reply-To:References:From;
- b=R8Y8CKHhpu31M3AVa4N9PkWFjADOtzi+N/gHbnAanBAlnu8dJKYdqLCUyNWN8P3SX
- ycfG/a66pHFdCt23eKHs6XYPsYCkgbGd7fmIr+29DOi1erFaijq+8btrgAhe5HV47D
- nsCWic9X21pG9HB4qn4a4OiR89pi0Y+XPtOohL8zVivm0xMgszr16kBUa7HHfYOuc0
- 5/aayu88ENAGAqhdkiK7e/4jmx9HXsrnYEkoUVF2SqGyNhwAXHM9SN4QqnyXaMSl60
- yq3zGpsmy+2C9vdqqkgu50Mgiv/aEWBBdxgxWVimzmQ/T/2vuuzrh+EjAnC4//KrtP
- NlBFCIOdyQqFw==
-Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
- by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 7CBB33AF8C
- for <samba-technical@lists.samba.org>; Thu, 22 Oct 2020 12:08:06 +0200 (CEST)
-Subject: RE: 4.12 -> 4.13 upgrade
-To: =?windows-1252?Q?samba-technical=40lists.samba.org?=
- <samba-technical@lists.samba.org>
-Date: Thu, 22 Oct 2020 12:08:06 +0200
-Mime-Version: 1.0
-Content-Type: text/plain; charset=windows-1252
+	id 1kVYCf-00DFnY-6p; Thu, 22 Oct 2020 10:52:17 +0000
+Received: from de-smtp-delivery-102.mimecast.com ([51.163.158.102]:37074) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kVYCa-00DFnR-66
+ for samba-technical@lists.samba.org; Thu, 22 Oct 2020 10:52:14 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1603363929;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=irPpszwIbVKex4o1GaVfw1Ex5iXYQwqHC80vKSPvuJI=;
+ b=fvCuLWL2TGVHgxAspx68BrkRNSJBYASwZs9mAS4CL3Q1TwzIOjL4QJQL3eT/V0FFCQ6QeB
+ kSKsU6Zim43cG1mmUbR9zLtuC3+aJot3bQ26TAePDyQ+QdF52D2xS44lL1XYx94SAeqmj4
+ wGW0LmJlErV49ZBDFaXTaZ2UOpRFZQc=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1603363929;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=irPpszwIbVKex4o1GaVfw1Ex5iXYQwqHC80vKSPvuJI=;
+ b=fvCuLWL2TGVHgxAspx68BrkRNSJBYASwZs9mAS4CL3Q1TwzIOjL4QJQL3eT/V0FFCQ6QeB
+ kSKsU6Zim43cG1mmUbR9zLtuC3+aJot3bQ26TAePDyQ+QdF52D2xS44lL1XYx94SAeqmj4
+ wGW0LmJlErV49ZBDFaXTaZ2UOpRFZQc=
+Received: from EUR02-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur02lp2054.outbound.protection.outlook.com [104.47.5.54]) (Using
+ TLS) by relay.mimecast.com with ESMTP id de-mta-9-8viZV_8mML-khzSQGa8y_g-1;
+ Thu, 22 Oct 2020 12:35:28 +0200
+X-MC-Unique: 8viZV_8mML-khzSQGa8y_g-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=esOA2gTICiUuOOp8IBzAE3b9xUc1uh9StbcElFnb3I+UUkXwTpF5qne5CLshaRU3ErsBNFWyQQ4ynUnWt12WBRD1Rb7zZOeTTbAv8P9ZPozvSi7C3aBykj+LSMU33pgNWoPN43B6/zjRD6dBvJTKUAtwlAO3KBgjoCwWjh0Ykf9qx4007u+bno/x8I9M6r8SkT7QvmQ9Lyfm3lO3uA9RHxfQjkfV016h78Vqgw/QrlBTRBtqYTD+EewTHp/Vy9Eg+UsmDJ1MIvOljGWdoDYlTB0c2o2f1iy7LC6esVCIUGh+CHo0VFcZtJTv98L1DWtbgHiboH6Te+3jhiFSo5CWrw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=irPpszwIbVKex4o1GaVfw1Ex5iXYQwqHC80vKSPvuJI=;
+ b=FdExlh7ytSTAEd+1/w0y2/VRs+Qk324Kn2cOjFYm/GJ8FQ6l9FqwM49oE128T8Hd/6MCVAy85gzeXJbC2gYjUQU/QpHQV5CNC9uki6AYYlTd9uQBynuuE9w10Rugu2VJqQoMlFcX85vuJ68kgF2/o4wET5iEg03BQVisvqa2Erdicp4sB/Ig8muNTYBEffisMJdT4Tc7guzAqLgiHhaJ+s/IUyPfp5JvNOKOyIbKpwLqpoClhS9EJPRkN7fLmPD9zpr5eYPCLMjF+j2kXbqG1BWIfHMF+m4rubFZ81hPb+ASiUDDEkymoKF6xppLjLDxJu+vVjJpowQIJFreu+srtg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: gmail.com; dkim=none (message not signed)
+ header.d=none;gmail.com; dmarc=none action=none header.from=suse.com;
+Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com (2603:10a6:803:3::28)
+ by VI1PR0402MB3358.eurprd04.prod.outlook.com (2603:10a6:803:11::32)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3477.28; Thu, 22 Oct
+ 2020 10:35:27 +0000
+Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com
+ ([fe80::e01c:2732:554a:608e]) by VI1PR0402MB3359.eurprd04.prod.outlook.com
+ ([fe80::e01c:2732:554a:608e%6]) with mapi id 15.20.3499.018; Thu, 22 Oct 2020
+ 10:35:27 +0000
+To: Steve French <smfrench@gmail.com>, CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
+Subject: Re: [PATCH]SMB3] Add support for WSL reparse tags
+In-Reply-To: <CAH2r5mvWqz2bMX9ut0bT4ZQH8WQNAc8Cjg3bM1TKeXgzupOZMQ@mail.gmail.com>
+References: <CAH2r5mvWqz2bMX9ut0bT4ZQH8WQNAc8Cjg3bM1TKeXgzupOZMQ@mail.gmail.com>
+Date: Thu, 22 Oct 2020 12:35:24 +0200
+Message-ID: <873626wntf.fsf@suse.com>
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <6013c870-8b8c-d3fa-cee4-1dd9fa9dec61@samba.org>
-References: <5E76D2F9CEBD40A2BAADFE3EAB53360F@rotterdam.bazuin.nl>
-X-Priority: 3 (Normal)
-X-Mailer: Zarafa 6.30.19-25148
-Thread-Index: AdaoWzwIvAEW09ZlRJeIRleoxmPmAw==
-Message-Id: <vmime.5f915a06.1483.6a1ed22ad77c366@ms249-lin-003.rotterdam.bazuin.nl>
+X-Originating-IP: [2003:fa:705:6807:8347:7696:25d3:a22f]
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from localhost (2003:fa:705:6807:8347:7696:25d3:a22f) by
+ AM3PR07CA0116.eurprd07.prod.outlook.com (2603:10a6:207:7::26) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3499.7 via Frontend Transport; Thu, 22 Oct 2020 10:35:26 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: d5b05db0-f0fc-4cb1-d2f0-08d8767630ca
+X-MS-TrafficTypeDiagnostic: VI1PR0402MB3358:
+X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Message-Info: G6LtcqqLC1YKRWEyP4dYEsAn7wYguq/86ZLfa1FZVTKT6kvjZiFD2m8smVuxipeDty4SzxDKVT7ombbM1+PFaFCJuLDLE03/DmF62FaDxRvRNif0K/1st4WfI+EOzLOv20nMPH+YxR5UwQNflegZb5623Bhmt5Zt3cyvUSi7ida5kU5g8AHg5uzBr8a1EHmRl5uCdJoFdHhCU33SBaoy19nFuMFuFCVUH2sJe5C0pd42lh1P7xTO6zb1MoyC+KG2usN8w1dPkzJgR5Wk2Nz8VrER4iSYMMs0XKQxtYOHFSOU+cDKKmRGhqQ2Fd49uHpPhhGm+Xsk6Wh2noCirUdSPA==
+X-MS-Exchange-AntiSpam-MessageData: MUBktffjhDYxnSLm8cxa4adGLCs1J3BmOeqgjQzg7lS2l3uiKvgLviNZsOwwV9qAFWz32iJeZTvvNlLjh1x0Z+jICibteiwYF5vIlItORQnXs11MBWQjH0g8vSrbKxF3jpvogAjIbzYl8Ps5UgyXqa2Fn1pwMrZ9jnDIlSFSDdyET3m9fbscZtpynWaFFVai0phQaKRpNiz2AQRQk8xbI1U9DzL7xtMvigRPF6Vt0RDy0QgBvMmXrBQY7ovIGOQmNoQc9G+Z3R50dm3MJ/bKvQ3zabBqwx8FCjw6d0ZGR9bRNgb23dgmWrTu7UO2zw8QD6N6aMzadI3AfmHzsqXQwN9vu6Mz6kRCDkXj/N2gp+8mc9sNIu9Et+aBDPTTosFIa2FAsO4xt0iupBrcBy6aa8yn8bQk1hloIuAfEpPJpIhyGOqGoHPxWkjWqJONuRsM+g3x6SpczPVmqhWFTw4DbjKbdI4/L2YeqG5NenKYLxeBRLA1MW0rmZgGoMIRVsJ09kwNFe60rC/0n0YnhlDp5ictQKK8f/YBWtyUIUuOXSXhtK1ABwMV1tnw3yDK5CZ3bHLisFX0DYOfgdg8qacTE0U2Fzf0aH9QdXgNFoAtrl1P4hfo8iW2kSJFEp3FBT710/KIV7mkLmhG97wzHRFwb2fYknwRRdLIislOT/mk9FWPqh+fJy12heRtkTsAsT90HhvL6Jij11s4zyVv8gfDmA==
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d5b05db0-f0fc-4cb1-d2f0-08d8767630ca
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR0402MB3359.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: nLM6QwkB5HCVjJhYgeOjGleCayva15pNOL6f5MJyfgtLAqINBtAnK/9dnR/nS9MA
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0402MB3358
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,130 +110,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
+From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-=20
+Steve French <smfrench@gmail.com> writes:
+> Prior to this patch all of the special files would show up
+> as being of type 'file' but with this patch they can be seen
+> with the correct file type as can be seen below:
 
-> -----Oorspronkelijk bericht-----
-> Van: samba-technical=20
-> [mailto:samba-technical-bounces@lists.samba.org] Namens=20
-> Rowland penny via samba-technical
-> Verzonden: donderdag 22 oktober 2020 12:00
-> Aan: samba-technical@lists.samba.org
-> Onderwerp: Re: 4.12 -> 4.13 upgrade
->=20
-> On 22/10/2020 10:06, L. van Belle via samba-technical wrote:
-> > Hai,
-> >
-> > Small question, i cant find this.
-> >
-> > So after the 4.13.0 (on
-> > release date) I upgrade a DC and that failed. so i reverted=20
-> back to my VM
-> > snapshot.
-> >
-> > I now see the following in the logs.
-> >
-> > [2020/10/22 10:48:36.514438,
-> >   0] ../../lib/util/util_runcmd.c:352(samba_runcmd_io_handler)
-> >
-> >   /usr/sbin/samba_dnsupdate: /usr/sbin/samba_dnsupdate:274:
-> > DeprecationWarning: please use=20
-> dns.resolver.Resolver.resolve() instead
-> >
-> > [2020/10/22 10:48:36.521212,
-> >   0] ../../lib/util/util_runcmd.c:352(samba_runcmd_io_handler)
-> >
-> >   /usr/sbin/samba_dnsupdate:
-> >
-> >   return resolver.query(name, name_type)
-> >
-> > Now, when i
-> > look at DC2, which stayed at 4.12.8, that one is not showing any
-> > DeprecationWarnings.
-> >
-> > And i recently added a 3th DC with 4.12.8 and same no=20
-> DeprecationWarning.
-> >
-> > Im trying to find why only DC1 has this message even after=20
-> the i reverted to
-> > the VM backup.
-> >
-> > So i hoped today that after the fix for 4.13 for the start=20
-> up, i did an
-> > upgrade again on my production DC1, having the=20
-> DeprecationWarning message
-> >
-> > Only that didnt solve it. Its all running fine thats not=20
-> the problem.
-> >
-> > Strange thing here is, DC2
-> > is a copy of DC1 and doesnt show this and same for the new DC setup.
-> >
-> > Anyone suggestions
-> >   what this is, and maybe how to make the error disapear=3F
-> >
-> > Its a very constant message since i see it every 10 minuts.
->=20
-> You would, that is the frequency that samba_dnsupdate is run.
->=20
-> Could you be running bullseye on that DC =3F
-No, im sure this is buster ;-)=20
+TODO: Still cannot read the symlink target and the device major/minor numbe=
+rs.
 
->=20
-> Which would mean python3-dnspython V2.0.0 and in this version=20
-> resolver.query is deprecated.
->=20
+Reviewed-by: Aurelien Aptel <aaptel@suse.com>
 
-Good one, i checked this.=20
-
-DC1  :=20
-dpkg-query -s python3-dnspython
-Package: python3-dnspython
-Status: install ok installed
-Priority: optional
-Section: python
-Installed-Size: 618
-...=20
-
-Same on all DC's.=20
-
-
-All run the following setting with netbios name changed offcourse.=20
-[global]
-        netbios name =3D RTD-DC0
-        workgroup =3D ADDOM
-        realm =3D ADDOM.INTERNAL.TLD
-
-        server role =3D active directory domain controller
-        server services =3D -dns -spoolss
-        idmap_ldb:use rfc2307 =3D yes
-
-        # + A manual setup for TLS/SSL Certificates.
-        tls keyfile =3D /etc/ssl/local/private/xxxxxxxxxx.key.pem
-        tls certfile =3D /etc/ssl/local/certs/xxxxxxxxxx.cert.pem
-        tls cafile =3D /etc/ssl/local/certs/xxxxxxxxxx-ca.pem
-
-        template shell =3D /bin/bash
-        template homedir =3D /home/users/%U
-
-        load printers =3D no
-        printcap name =3D /dev/null
-
-        ntlm auth =3D mschapv2-and-ntlmv2-only
-
-And the shares offcourse..  So nothing fancy.=20
-
-Other options=3F=20
-
-And thanks for the reply :-)=20
-
-Greetz,=20
-
-Louis
-
+Cheers,
+--=20
+Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, D=
+E
+GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
+nchen)
 
 
