@@ -2,54 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 434E929658C
-	for <lists+samba-technical@lfdr.de>; Thu, 22 Oct 2020 21:55:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 630582968B0
+	for <lists+samba-technical@lfdr.de>; Fri, 23 Oct 2020 05:16:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=hCv9hbG1OJKhJKyrMvqYAEKt2IpbJWH99fa7cDsH52c=; b=LP1jEPUTIbQmiET4O40P/hRQAb
-	gm60jwom294ZJWKiDoFFryzNgxNXCOtPUg8hqrJAvGEEpkpJyM8CQRPrRy1yp+T1N2I2NBs98ps5n
-	6ejcujsrSMf1oem6mgGeVxsze0yzIvItLbjHcJ5j8srj7Y8WGmXTz9sgXVmQTcR7ADQbnxJT5C+NM
-	R+GMYym9gObkr7DbHwv2kfm3jMQSEFo6AnYraSdr36exSJNHKn6/U3AzhRwemRYlUKGwlq9EGa9P0
-	OmF4tfPNdhE/XMJlrLdkbHue1ddqytebTPmr9DUQCuE7v3KeFjIiAzfwQ7uUXa729kP0MXii6pdmU
-	Kxj1hJKw==;
-Received: from ip6-localhost ([::1]:42680 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=7PzakwHfQTWhtL06XjXf5GbEZM4bdpOgEHF4utsyP/Y=; b=1mPoCemcDMFv3kjUKtOlwIQiiW
+	6Ly7jwYPS6cvifPiDno7tSyLLqgu9g1+sHUYEKfMOnHtWjUbKj+GD6ldBVv1Ll/mQkcGRfQT+dcG/
+	ZGTyVhp6eCVLPDhu/dTq1a0HIXSBoYCpH+j6V8zB14FiMgwSt2zMnY3rkDOMVawJb4zxsKJyejkfA
+	S+376ITiWbZ96zJrFWCIxg/TjBYh5MSxpNDrcJFGusvULqLeGkPiE1UlgtohJSqfF9gQ3Br3P1jzO
+	/16I4SaP1TPEs+o6w6uhid+E/ale1iKq7ExaJkh4q8ccuB/AN0jcCtYS9KYJlTcW7HUt0xwWwZbfu
+	/oka55/Q==;
+Received: from ip6-localhost ([::1]:55176 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kVgff-00DN6r-An; Thu, 22 Oct 2020 19:54:47 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34864) 
+	id 1kVnXw-00DPN2-2Q; Fri, 23 Oct 2020 03:15:16 +0000
+Received: from mail-io1-xd43.google.com ([2607:f8b0:4864:20::d43]:41319) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kVgfZ-00DN6k-Nf
- for samba-technical@lists.samba.org; Thu, 22 Oct 2020 19:54:44 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=hCv9hbG1OJKhJKyrMvqYAEKt2IpbJWH99fa7cDsH52c=; b=DQ20AXrf1dG86XcEf24AyF2QHm
- g1fD6hcSJOq7Oii2zjN3BO2TwBzOzNRaSzuPq90AZ0SLoGQORlkmMy8Y1l1K4ME85gHl0iskfpeWp
- MX+tOisMe3L60X7qsOKcH7hyYKTC1hWOLZ9H6/hTy+WLHnq5vpW9ViuzIIdyT6m7UoycqpJjgPGeU
- C8zBsj3jm6oBNEieFRtqztAkkRnpzMIkTmVoFHiOkRHtOTo9HKdU6XLIY4owF0SDIjrTcP+bDyTgo
- Tj8yZ6s0O13+DQio6ZXnx6Lbhyp722ZEWNEo9yXysWm8nnk+pXkc765G7kr8jwAQVsFyvhQJSq1PU
- YkekVP9WooLC09xIjXvLHdrHQX+KlfEw0t0KAWEv9c55nRVNt1guInLe6OWfzQzkhfKobxcheDah7
- SDjSSA1Q+MgxhAwlJGVMWLRPEFdm/lssHcjHHgo6tFrcJ7Y2jlICOAPswCW4I+GY92pbU3UmrpjIr
- C5UcUS2xH6cFX0BiHx1nybrK;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kVgfY-0006M8-1q; Thu, 22 Oct 2020 19:54:40 +0000
-Message-ID: <7e07f0c5d6ad7eaf27474d434c4ecd51e1740c72.camel@samba.org>
-Subject: size requirements and keeping entropy in the talloc_magic
-To: Arran Cudbard-Bell <a.cudbardb@freeradius.org>, Stefan Metzmacher
- <metze@samba.org>
-Date: Fri, 23 Oct 2020 08:54:32 +1300
-In-Reply-To: <4E820532-3A76-4713-B3C1-0E010F3B354C@freeradius.org>
-References: <3A50457D-74F6-4C7B-BC2E-8EA68EE64C61@freeradius.org>
- <20201021001113.GA754426@jeremy-acer>
- <264F0B23-F45D-49F3-A0B7-4E717B129898@freeradius.org>
- <20201021183701.GA809738@jeremy-acer>
- <8E5EC9FB-62C2-4BA7-B809-72F26FEF2CD1@freeradius.org>
- <20201022010855.GA853779@jeremy-acer>
- <dbf19314-7d9e-76d1-cdb7-116148e91c34@samba.org>
- <4E820532-3A76-4713-B3C1-0E010F3B354C@freeradius.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.4-0ubuntu1 
+ (Exim) id 1kVnXo-00DPMv-VN
+ for samba-technical@lists.samba.org; Fri, 23 Oct 2020 03:15:11 +0000
+Received: by mail-io1-xd43.google.com with SMTP id u62so184212iod.8
+ for <samba-technical@lists.samba.org>; Thu, 22 Oct 2020 20:15:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=7PzakwHfQTWhtL06XjXf5GbEZM4bdpOgEHF4utsyP/Y=;
+ b=dfaSF0bP/teBvUOvcm3K6e8ZwRy5y2819A2zrUzxYHZhIFIEWTyrnoSM3bA0wZgbt8
+ fTJGfxlwibps9mBucgNXI/efmJXGnwLBwVJvaY3UyOU13MMwUpEvsWs15fI7Mi/rHMnB
+ RDcLnPoEP4szOGl3JuYbecPbcIksSzA8/DrBp7vaUBxl80MMEB30ymXhbB9FsVK8nYsL
+ Jy9VRUc+e/ZWebXDtjzrA/igdwhBjIBJOX3QXZJenxaU+UZe4LiqtaYbQkVEPror29dx
+ vwi+PS6O8uotWXCY9RyuK/+/SYGH3amTokVnIpEDNG/7bbZOBra/fq4yxKiBYCJH+eGL
+ zLLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=7PzakwHfQTWhtL06XjXf5GbEZM4bdpOgEHF4utsyP/Y=;
+ b=o+6pLSuPbqJXMRN8H33KvxviSRKPAMcHJz/7aeaj7hG6ZdJ3ZIhHzm0xRNN0afhNKu
+ HS1NjQZU/3bK51mb27K3vh39JJEfIoSVlk3CvUHndKF2W84cHAjCS7JsE4cJkar0bEuB
+ MIxR6RtBSiqzog4YSi3rXqJnbCac2253EmJ7BxKSeK7k5QpebMhaVpgXn5eeVDqIcN1M
+ ThlhyVrm/9XehbwKZKz863EwIrjc0tWStWqJqBgKPulwQBZIavoRZ1zJu7dViNmWGjP9
+ yooMTFNTuwHGo+tUpvmNeNBkagrczFj7WCGUxQwh5ymMo2uqgkac8LAPMCkpAq8dPDMY
+ W/aw==
+X-Gm-Message-State: AOAM533VDruSn/fgf7O+eaB8xeefVWxHAtaLCFT2gb053UYejes90n2b
+ pRnsGy+qQfulxtsm3ccBb3pBG/mhX00VdW1tCus=
+X-Google-Smtp-Source: ABdhPJwzx2gsPC2sSvxmnXvqWi53Ls9oHA9X+xyH6xFILPIFZK/WhH/Ip08a3xkGL+nvRg0CqwSG6kQJTCoj/Y0Tz0Q=
+X-Received: by 2002:a05:6638:20a:: with SMTP id
+ e10mr399276jaq.20.1603422906501; 
+ Thu, 22 Oct 2020 20:15:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+References: <CAH2r5mvWqz2bMX9ut0bT4ZQH8WQNAc8Cjg3bM1TKeXgzupOZMQ@mail.gmail.com>
+In-Reply-To: <CAH2r5mvWqz2bMX9ut0bT4ZQH8WQNAc8Cjg3bM1TKeXgzupOZMQ@mail.gmail.com>
+Date: Fri, 23 Oct 2020 13:14:54 +1000
+Message-ID: <CAN05THQyNC1N4Y6oZ84RgAfmBQ+2RE8+ppv4XaJxUQW_T-ZzNA@mail.gmail.com>
+Subject: Re: [PATCH]SMB3] Add support for WSL reparse tags
+To: Steve French <smfrench@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,40 +68,47 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba-technical@lists.samba.org, Jeremy Allison <jra@samba.org>
+From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
+Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 2020-10-22 at 12:02 -0500, Arran Cudbard-Bell via samba-
-technical wrote:
-> 
-> Is there any real issue with only having 24bits of magic if 32bit
-> 
-> size fields were implemented?
+Reviewed-by me
 
-Our talloc magic provides some important security properties, which are
-decreased by half for every bit lot.
+Very good.
 
-That is, we have in the past had attacks on our talloc
-destructor functionality by forging a talloc header.  I changed our
-talloc header to be a per-exec random number for this reason, to make
-it much harder to forge a talloc chunk.
-
-If we reduce that too much, we loose the protection. 
-
-Everything is a trade off naturally, I just want to be clear what the
-reasoning here is for keeping it as long as possible.
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett                       https://samba.org/~abartlet/
-Authentication Developer, Samba Team  https://samba.org
-Samba Developer, Catalyst IT          
-https://catalyst.net.nz/services/samba
-
-
-
+On Thu, Oct 22, 2020 at 3:02 PM Steve French via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> The IO_REPARSE_TAG_LX_ tags originally were used by WSL but they
+> are preferred by the Linux client in some cases since, unlike
+> the NFS reparse tag (or EAs), they don't require an extra query
+> to determine which type of special file they represent.
+>
+> Add support for readdir to recognize special file types of
+> FIFO, SOCKET, CHAR, BLOCK and SYMLINK.  This can be tested
+> by creating these special files in WSL Linux and then
+> sharing that location on the Windows server and mounting
+> to the Windows server to access them.
+>
+> Prior to this patch all of the special files would show up
+> as being of type 'file' but with this patch they can be seen
+> with the correct file type as can be seen below:
+>
+>   brwxr-xr-x 1 root root 0, 0 Oct 21 17:10 block
+>   crwxr-xr-x 1 root root 0, 0 Oct 21 17:46 char
+>   drwxr-xr-x 2 root root    0 Oct 21 18:27 dir
+>   prwxr-xr-x 1 root root    0 Oct 21 16:21 fifo
+>   -rwxr-xr-x 1 root root    0 Oct 21 15:48 file
+>   lrwxr-xr-x 1 root root    0 Oct 21 15:52 symlink-to-file
+>
+> TODO: go through all documented reparse tags to see if we can
+> reasonably map some of them to directories vs. files vs. symlinks
+>
+> --
+> Thanks,
+>
+> Steve
 
