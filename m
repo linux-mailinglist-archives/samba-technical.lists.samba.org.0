@@ -2,46 +2,72 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A360429E720
-	for <lists+samba-technical@lfdr.de>; Thu, 29 Oct 2020 10:21:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B14C29F0AE
+	for <lists+samba-technical@lfdr.de>; Thu, 29 Oct 2020 17:00:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=Xp+LZb4lf+//5wlZiiND/IYr0xesPswnwG3YliigFqA=; b=RBNH09Fdf5kfVs1TQNg9HHGX2Q
-	YTAUMCk6jCDxx9EnHauDDBXCXzQsepwuqHlEmjyN82w03OR1XnFgPSQrs1vmKuzgddZ0W9QyAVVAI
-	TEaY53CdjatNLwvJZLVL0D6ydFiMa9bJyxRB7HrxpJngFjrjzOda9wbtoBmPCmB6TAluAJn8AfmHL
-	VV/HTvrXmruEAMs/U/u/g4Ob2kmY5D+2c+g5OExHNakrHE6+qimOhy/N2zcN9ZdoCs2JgwuwmbjdB
-	c+83k0lnFbKhpC3Ex4ejpFs2c7J4CfB0g3jpDZEzpw3l1vn6IbfWHVnNlicvWXtR1fdaaRp61Pb8i
-	ApA1gzhg==;
-Received: from ip6-localhost ([::1]:35886 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=YaXyyA+3brfqc67uOQpcnXMgyyRvDxRCA0pUcywHw6k=; b=FG3uAcwNXzI5/Z3dL8aFBOo2ST
+	53uvzLnBy+N7tPM1Bw0BDi/nEOQSrNr4CDJptBfg0c3ixE7/ECc5AWZjbHTl1CQTrXI/db5neJ3+1
+	t/kJaJR7ISNegEPQt7+yKC7UFl0rKpKAvfsPo/nOieKXlyRRVTgDU7KAH/SBRfZOTdcTc2SJDkFSZ
+	upKkp7rzLm5ZUWSp7213TYe6L45IL7gtsgzhE81gProfDHN6yU68cXDYrWYLyDVb7pe8e5fJpko6B
+	QWZjF89W4OavL+I1sejz1Lp82y2rp+8t7rD1n5eVjstDzw1iNf2p9TF2ysVZBuuwET9lfr1PxHONQ
+	z8sg2Z3w==;
+Received: from ip6-localhost ([::1]:46708 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kY46l-00EGaD-5E; Thu, 29 Oct 2020 09:20:35 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35624) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kY46Z-00EGZW-0F; Thu, 29 Oct 2020 09:20:25 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=Xp+LZb4lf+//5wlZiiND/IYr0xesPswnwG3YliigFqA=; b=IKfmRUbBKkTMDZ+K0q13n456q/
- vpUYDVkggYHCeczM0g5WrjYMsS9/96im6V06NzvACmB3z1lbMK/NeUh2LGchhuOs2WJStPpF2YrWI
- Vz6GJkXid4n+9AQLyU+kcJxpGEd33GH2Bty+AlqKlf6Po8LxgjKaJVzk2kv22x64E5vJeZkNJhyqO
- 4Nb50D4ycTQyaZ2fTfEyXi7oT+AhD/BTHjQC2ojtzRezzFo64dgBkZT5kKDCUP3xiaJbhJN4fmOgU
- Z5mNWbR+Ob13oJXsvpU9ZtMZhpzW/S9GaMiUGhNWuLoJY2BOqUTaQEHwI1oB2r3rpOCBSXbbYugxr
- cmCIVtv+OjsRxr9wW8Ppxx8EWoLwxVzN48sCBeIPIgUZVIpqYwdMLodl9wg6TgwjB1jR4o0bp3s6b
- zysU//EeAH0+V3MP1oK9GzIi+tqHdEOXUVcdFYRZEVYbV9qDfKwEdiPc0oJ7tmLPGcnIm/5RSt83Q
- 9zyAURcuv0ZPFGbA3HUQBsa6;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1kY46X-0001Kx-Jz; Thu, 29 Oct 2020 09:20:22 +0000
-Date: Thu, 29 Oct 2020 10:20:18 +0100
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.13.1, 4.12.9 and 4.11.15 Security Releases
- Available
-Message-ID: <20201029092014.GA18893@carrie2.fritz.box>
+	id 1kYAKh-00EPb5-IG; Thu, 29 Oct 2020 15:59:23 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:36903) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kYAKb-00EPay-8m
+ for samba-technical@lists.samba.org; Thu, 29 Oct 2020 15:59:20 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1603987153;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:  in-reply-to:in-reply-to; 
+ bh=YaXyyA+3brfqc67uOQpcnXMgyyRvDxRCA0pUcywHw6k=;
+ b=D98cmzqVThLDoW+ktX4EhivpFA5ez+DFeC+PSRzRGo2W6/vlv5YXrgd1Qh1divpr6tQLEd
+ ByeglIuiQ7S04H0i8S7oWGQQRuUi/heC/C0eSTZOaldcrKUPaoviFsIYnMkqC0rBf8hk7j
+ Sf7kapjm9pBFxvc7h4HQK4IEDlk/Iho=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1603987153;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:  in-reply-to:in-reply-to; 
+ bh=YaXyyA+3brfqc67uOQpcnXMgyyRvDxRCA0pUcywHw6k=;
+ b=D98cmzqVThLDoW+ktX4EhivpFA5ez+DFeC+PSRzRGo2W6/vlv5YXrgd1Qh1divpr6tQLEd
+ ByeglIuiQ7S04H0i8S7oWGQQRuUi/heC/C0eSTZOaldcrKUPaoviFsIYnMkqC0rBf8hk7j
+ Sf7kapjm9pBFxvc7h4HQK4IEDlk/Iho=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-230-wH1PFSzwNku7SY1hQxDGYw-1; Thu, 29 Oct 2020 11:43:25 -0400
+X-MC-Unique: wH1PFSzwNku7SY1hQxDGYw-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B79C21009E47;
+ Thu, 29 Oct 2020 15:43:23 +0000 (UTC)
+Received: from colo-mx.corp.redhat.com
+ (colo-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.20])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id AF3035E9D0;
+ Thu, 29 Oct 2020 15:43:23 +0000 (UTC)
+Received: from zmail23.collab.prod.int.phx2.redhat.com
+ (zmail23.collab.prod.int.phx2.redhat.com [10.5.83.28])
+ by colo-mx.corp.redhat.com (Postfix) with ESMTP id 7F027181A86E;
+ Thu, 29 Oct 2020 15:43:23 +0000 (UTC)
+Date: Thu, 29 Oct 2020 11:43:23 -0400 (EDT)
+To: samba-technical <samba-technical@lists.samba.org>, 
+ CIFS <linux-cifs@vger.kernel.org>
+Message-ID: <1397349053.55438877.1603986203418.JavaMail.zimbra@redhat.com>
+In-Reply-To: <20262379.55437477.1603985286601.JavaMail.zimbra@redhat.com>
+Subject: can't start smbd after install samba posix branch
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="SUOF0GtieIMvvwua"
-Content-Disposition: inline
-User-Agent: Mutt/1.9.4 (2018-02-28)
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.68.5.20, 10.4.195.28]
+Thread-Topic: can't start smbd after install samba posix branch
+Thread-Index: 5T2Pn1PSLXHmz+QEHgU8A/mvgWMIMQ==
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,155 +81,84 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: kseeger@samba.org
+From: Xiaoli Feng via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Xiaoli Feng <xifeng@redhat.com>
+Cc: jra@samba.org, Ronnie Sahlberg <lsahlber@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Hello folks,
 
---SUOF0GtieIMvvwua
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I try to install samba posix branch in RHEL8. But failed to start smbd daemon.
+Does anyone know the reason? or what else do I miss?
 
-Release Announcements
----------------------
+#git clone git://git.samba.org/jra/samba
+#git check -b posix remotes/origin/master-smb2
+#./configure --prefix=/usr --enable-fhs
+#make -j6
+#make install
+#smbd -D
+# echo $?
+1
+# smbd -D -d 10
+INFO: Current debug levels:
+  all: 10
+  tdb: 10
+  printdrivers: 10
+  lanman: 10
+  smb: 10
+  rpc_parse: 10
+  rpc_srv: 10
+  rpc_cli: 10
+  passdb: 10
+  sam: 10
+  auth: 10
+  winbind: 10
+  vfs: 10
+  idmap: 10
+  quota: 10
+  acls: 10
+  locking: 10
+  msdfs: 10
+  dmapi: 10
+  registry: 10
+  scavenger: 10
+  dns: 10
+  ldb: 10
+  tevent: 10
+  auth_audit: 10
+  auth_json_audit: 10
+  kerberos: 10
+  drs_repl: 10
+  smb2: 10
+  smb2_credits: 10
+  dsdb_audit: 10
+  dsdb_json_audit: 10
+  dsdb_password_audit: 10
+  dsdb_password_json_audit: 10
+  dsdb_transaction_audit: 10
+  dsdb_transaction_json_audit: 10
+  dsdb_group_audit: 10
+  dsdb_group_json_audit: 10
+[root@hp-dl360g9-12 ~]# echo $?
+1
 
-These are a security releases in order to address the following defects:
-
-o CVE-2020-14318: Missing handle permissions check in SMB1/2/3 ChangeNotify.
-o CVE-2020-14323: Unprivileged user can crash winbind.
-o CVE-2020-14383: An authenticated user can crash the DCE/RPC DNS with easi=
-ly
-		  crafted records.
-
-
-=3D=3D=3D=3D=3D=3D=3D
-Details
-=3D=3D=3D=3D=3D=3D=3D
-
-o  CVE-2020-14318:
-   The SMB1/2/3 protocols have a concept of "ChangeNotify", where a client =
-can
-   request file name notification on a directory handle when a condition su=
-ch as
-   "new file creation" or "file size change" or "file timestamp update" occ=
-urs.
-
-   A missing permissions check on a directory handle requesting ChangeNotify
-   meant that a client with a directory handle open only for
-   FILE_READ_ATTRIBUTES (minimal access rights) could be used to obtain cha=
-nge
-   notify replies from the server. These replies contain information that s=
-hould
-   not be available to directory handles open for FILE_READ_ATTRIBUTE only.
-
-o  CVE-2020-14323:
-   winbind in version 3.6 and later implements a request to translate multi=
-ple
-   Windows SIDs into names in one request. This was done for performance
-   reasons: Active Directory domain controllers can do multiple SID to name
-   translations in one RPC call. It was an obvious extension to also offer =
-this
-   batch operation on the winbind unix domain stream socket that is availab=
-le to
-   local processes on the Samba server to reduce network round-trips to the
-   domain controller.
-
-   Due to improper input validation a hand-crafted packet can make winbind
-   perform a NULL pointer dereference and thus crash.
-
-o  CVE-2020-14383:
-   Some DNS records (such as MX and NS records) usually contain data in the
-   additional section. Samba's dnsserver RPC pipe (which is an administrati=
-ve
-   interface not used in the DNS server itself) made an error in handling t=
-he
-   case where there are no records present: instead of noticing the lack of
-   records, it dereferenced uninitialised memory, causing the RPC server to
-   crash. This RPC server, which also serves protocols other than dnsserver,
-   will be restarted after a short delay, but it is easy for an authenticat=
-ed
-   non-admin attacker to crash it again as soon as it returns. The Samba DNS
-   server itself will continue to operate, but many RPC services will not.
-
-For more details, please refer to the security advisories.
-
-
-Changes:
---------
-
-o  Jeremy Allison <jra@samba.org>
-   * BUG 14434: CVE-2020-14318: s3: smbd: Ensure change notifies can't get =
-set
-     unless the directory handle is open for SEC_DIR_LIST.
-
-o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-   * BUG 12795: CVE-2020-14383: Remote crash after adding NS or MX records =
-using
-     'samba-tool'.
-   * BUG 14472: CVE-2020-14383: Remote crash after adding MX records.
-
-o  Volker Lendecke <vl@samba.org>
-   * BUG 14436: CVE-2020-14323: winbind: Fix invalid lookupsids DoS.
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=3D=3D Our Code, Our Bugs, Our Responsibility.
-=3D=3D The Samba Team
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+I don't find any usefull log. Then I use systemd to start smbd services. Show this error:
+-- Unit smb.service has begun starting up.
+Oct 29 11:36:47 hp-dl360g9-12.rhts.eng.pek2.redhat.com systemd[1]: smb.service: Main process exited, code=exited, status=1/FAILURE
+Oct 29 11:36:47 hp-dl360g9-12.rhts.eng.pek2.redhat.com systemd[1]: smb.service: Failed with result 'exit-code'.
+-- Subject: Unit failed
+-- Defined-By: systemd
+-- Support: https://access.redhat.com/support
+-- 
+-- The unit smb.service has entered the 'failed' state with result 'exit-code'.
+Oct 29 11:36:47 hp-dl360g9-12.rhts.eng.pek2.redhat.com systemd[1]: Failed to start Samba SMB Daemon.
+-- Subject: Unit smb.service has failed
 
 
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Download Details
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Thanks.
 
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
-=66rom:
 
-        https://download.samba.org/pub/samba/stable/
 
-The release notes are available online at:
-
-        https://www.samba.org/samba/history/samba-4.13.1.html
-        https://www.samba.org/samba/history/samba-4.12.9.html
-        https://www.samba.org/samba/history/samba-4.11.15.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                        --Enjoy
-                        The Samba Team
-
---SUOF0GtieIMvvwua
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iFwEABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCX5qJSwAKCRAoaL1+KxeT
-UV3ZAJ9u1nyTlmTK0zb3QlfQ02temuJiFACYiV0uEvyOpqK1qIZuMlnB8c+5dw==
-=YC/c
------END PGP SIGNATURE-----
-
---SUOF0GtieIMvvwua--
 
