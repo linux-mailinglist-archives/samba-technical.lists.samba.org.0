@@ -2,41 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B8302A00D7
-	for <lists+samba-technical@lfdr.de>; Fri, 30 Oct 2020 10:09:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 999D52A016F
+	for <lists+samba-technical@lfdr.de>; Fri, 30 Oct 2020 10:32:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=eWeKx6arRj426oP99Vk6KF79y5vIUl80bsf0vV+dnaU=; b=AdSKh72IID027QE6uz10nwnkZ2
-	2C2BxTxayKjudYbzmnCsVvpXSU+ZryZW1BLgmbFhpdUbkUbysFSjPV/RLPibGWtggPCriG/Vbrru+
-	vO0basFzxJKqUJ0jPKFXGKhz/EaRW2NyxVp1UGlkkVhRWxGl6CdvqDucIyxjtxu/zkTUN+z0C2WW9
-	UOeSiERToTHisIFktKsFFRnBDhPFLZyXd4x8ZAafC7MXNZpFQnUyAT7vzQI5Ouxwf3Pj8G3j/1yoK
-	sCKHzGVHLaeEVr0Aidhy7fwlsWFg3MXdRDm9w1TyE8dRIgXccAPeKadTQew/cCALN3CKSbvABUM2E
-	w0WrnAjg==;
-Received: from ip6-localhost ([::1]:64974 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=BySc/OzV09EmLZyR8tdptbvlsShvKCqckJKtx68oUd8=; b=ZLJz/wgUZ6LI5oR9vpV8A7sSVR
+	Jtrp3bdBEMrFWH+y7+vEOkmvvnYyeyp+Rm4geUIWLzdixpl/0pR2l2LMd76jRuOt25gCk7pPHDcOH
+	q+kivlpPvQKZUrTRmXWNhFsBcabr/uwWqzq8VwRZ+rw1OeCpq33+cibo21jKg5F4FT/2CGvBrl4d/
+	t6ee0NKq11Z3zCu8dOpyKOc59FaM5lsL/dXxb2+P7M4JuCiMInrLsqCG7QriibCyueJFodRH+uOgO
+	0xN9qehVmczNHWnnt4xhID3hkA7nzSoBqPKLv6J7PdPWBHR0u9083HjKPg3Vu+QZyek1Vqoy6VFO2
+	IZjudP5A==;
+Received: from ip6-localhost ([::1]:18174 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kYQPw-00EdBb-Dm; Fri, 30 Oct 2020 09:09:52 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60262) 
+	id 1kYQlR-00EdM0-Jf; Fri, 30 Oct 2020 09:32:05 +0000
+Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:46628) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kYQPr-00EdBU-4U
- for samba-technical@lists.samba.org; Fri, 30 Oct 2020 09:09:49 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=eWeKx6arRj426oP99Vk6KF79y5vIUl80bsf0vV+dnaU=; b=kESiR3MN0uD0hwYIen3aZKmJbo
- WNNISp+5c4wE/SLGv0t+0eoLLe3wLWVIIaFuoe0QDB54sCV0B++h7b+D7/7757JNeCn9SIuKkpgQF
- s/UJmQsjzCKIKGD11rYPxR3zn06FsS6VUG3AjDB1VCLVTSdiXEBFKxbiI82mT0OabaVN1KnQ9Set8
- +lDqtSH+ZCBXxjja72/NDjjF47ba7Uf7aLLY+yMJKm7EgH5MpfkS6+5SyrWwtraPZflVgqmC3KpPJ
- hqZFsrZql1j5RwGLoXZAILRdFVvDhLP82dHjncEFYY7Hy5zNLOJK0jtwXB6vVJ7JWDyPsHHuRMLJ3
- OeZuwz5DT6acQFQI2F8Ti/3dJ+FjTNqrpIULfpl8v8F9UQuE9GYNvwF9G7VrUM3ubWIcy3mUnztKr
- UqbhMALolxLQmaN1W4FL5E9PcOnmbw2VzPVO3waAgU5Xx175m2TuLsSVvYiNvTGrmczYEtCLWKNX0
- vvw06xo7MiwSO3aldmG6yvn5;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kYQPq-0000Ch-JV; Fri, 30 Oct 2020 09:09:46 +0000
-Date: Fri, 30 Oct 2020 11:09:44 +0200
-To: Rowland penny <rpenny@samba.org>
-Subject: Re: can't start smbd after install samba posix branch
-Message-ID: <20201030090944.GC3718494@pinega.vda.li>
-References: <1397349053.55438877.1603986203418.JavaMail.zimbra@redhat.com>
+ (Exim) id 1kYQlL-00EdLQ-Vs
+ for samba-technical@lists.samba.org; Fri, 30 Oct 2020 09:32:02 +0000
+Received: by mail-il1-x136.google.com with SMTP id a20so5881185ilk.13
+ for <samba-technical@lists.samba.org>; Fri, 30 Oct 2020 02:31:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=kSt9B/EstRE+BM2srouxZnL1JwhGCwazS+aC17uAmRU=;
+ b=FFeX9bBgrK+1hbwGGb9eYNnnbrE1DnI2RmSKejpg/2raHseno46/GOcx5rsYulyWgE
+ 77QWx07W+KU8F9x1CaKbU9Tj6/v8SV2xz/NJsEVffCEEGwksVWp15CC48vJwuBuUyyFT
+ eDsFdrutC8qxmOe3VgtF0Ux2bTqlo50lxJni/c5xCYO8IZ9pNZHqza4YgqyW+z07IFTo
+ gQrWA6Xdk16eECAWGrOyN71v64FML+RZRgOa6O6Q7eH1Adrod1Qt5YRwKn8AOLzOVbVv
+ I74yz4z5daGwt5moCq7Moxe6okSbib/oSUm8ziQaFxkODh3VaZ+0aAnWiBRZL8PQlPR+
+ ApWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=kSt9B/EstRE+BM2srouxZnL1JwhGCwazS+aC17uAmRU=;
+ b=c9DNwcpu3DAE+0o/qkyZ4a7ODsQviX7RiSFcC0OdhdjE4FKGXYKXuVV68aFjghC9hP
+ 3hxtAxOWOtFvuKRkcJvAW1KCMMISFxgCLc50I4JaofMlDiCCmKOLHqJHgsSNTLewsOEo
+ j5mRZ33roP1IUVkWjK4cLa4EpgxXF7xfVwdVKfjr7NP67yMPPe2d23g0dTKFplax3zP8
+ eIgIPKwniJZj/pd6E1VjHifeQKlAgosbBCQFKHkSWsZNpkf/8befRsnkJqDfqa+rLJXg
+ 4Zy5kMIzYkm8pEDY5gFNcm73XIsDHaz7ejQOSsH34mloeFEBFLjxd3DDtzHvfxukWblF
+ oyGQ==
+X-Gm-Message-State: AOAM530kMJMy3Y2FBCGYqDomuY++4sbe2W8wSEbMXfSxGDYTpkr40u7e
+ GXasfdG2dVz/F88z1kFkSKcx1xzZmYKDU1+n3p0=
+X-Google-Smtp-Source: ABdhPJytqFcW4R/a1c9HhlhFfLxmZAU68cBSOWHIso/BUWi6Z1/7HS7DL+9qOL4CmEBPXlwSLeqGRvKTbO0/sL3VZEo=
+X-Received: by 2002:a05:6e02:14b:: with SMTP id
+ j11mr1155175ilr.109.1604050317563; 
+ Fri, 30 Oct 2020 02:31:57 -0700 (PDT)
+MIME-Version: 1.0
+References: <20262379.55437477.1603985286601.JavaMail.zimbra@redhat.com>
+ <1397349053.55438877.1603986203418.JavaMail.zimbra@redhat.com>
  <57860C29B41C41148C728C7F08BD12FC@rotterdam.bazuin.nl>
  <1282344879.55505050.1604024067212.JavaMail.zimbra@redhat.com>
  <CAN05THRxZ_=o0QnniT4-J365E34nUQxJube7mUQa17Lcj3YzuA@mail.gmail.com>
@@ -46,11 +59,14 @@ References: <1397349053.55438877.1603986203418.JavaMail.zimbra@redhat.com>
  <db176606-3dbd-b0d8-e249-9ab6cd693ba3@samba.org>
  <CAN05THR21TwQdcLUTDoa6bt13Zx5k+huT7Gg8m3TeGjBwPLqdw@mail.gmail.com>
  <fbc9e6a2-5934-c21b-cbc3-3d0dda0c4e32@samba.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 In-Reply-To: <fbc9e6a2-5934-c21b-cbc3-3d0dda0c4e32@samba.org>
+Date: Fri, 30 Oct 2020 19:31:46 +1000
+Message-ID: <CAN05THSZbzA7x0Zq=wKyLguDCBi0ZgHM7FG4ZSz3Sm7kYv=66Q@mail.gmail.com>
+Subject: Re: can't start smbd after install samba posix branch
+To: Rowland penny <rpenny@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,20 +80,21 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexander Bokovoy <ab@samba.org>
+From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
+Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
 Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On pe, 30 loka 2020, Rowland penny via samba-technical wrote:
+On Fri, Oct 30, 2020 at 6:52 PM Rowland penny <rpenny@samba.org> wrote:
+
 > On 30/10/2020 08:45, ronnie sahlberg wrote:
-> > 
-> > 
+> >
+> >
 > > On Fri, Oct 30, 2020 at 6:29 PM Rowland penny via samba-technical
 > > <samba-technical@lists.samba.org
 > > <mailto:samba-technical@lists.samba.org>> wrote:
-> > 
+> >
 > >     On 30/10/2020 07:56, Xiaoli Feng via samba-technical wrote:
 > >     > Hi,
 > >     >
@@ -107,7 +124,7 @@ On pe, 30 loka 2020, Rowland penny via samba-technical wrote:
 > >     unsupported.
 > >     >
 > >     > # mount //localhost/cifs ~/cifs -o
-> >     user=root,password=redhat,posix,vers=3.1.1
+> >     user=3Droot,password=3Dredhat,posix,vers=3D3.1.1
 > >     > mount error(95): Operation not supported
 > >     >
 > >     > [81490.590281] CIFS VFS: Server does not support mounting with
@@ -115,41 +132,41 @@ On pe, 30 loka 2020, Rowland penny via samba-technical wrote:
 > >     >
 > >     > smb.conf:
 > >     > [global]
-> >     > server max protocol = SMB3_11
-> >     > unix extensions = yes
+> >     > server max protocol =3D SMB3_11
+> >     > unix extensions =3D yes
 > >     > [cifs]
-> >     > path=/mnt/cifs
-> >     > writeable=yes
-> > 
-> >     There is a reason why it doesn't work, you appear to be using one of
+> >     > path=3D/mnt/cifs
+> >     > writeable=3Dyes
+> >
+> >     There is a reason why it doesn't work, you appear to be using one o=
+f
 > >     Jeremy's git branches where he is working on SMBv3 Unix
 > >     extensions. The
 > >     operative word is 'working', they do not work yet, so I wouldn't
 > >     use the
-> >     branch unless I wanted to test where he had got to 😁
-> > 
+> >     branch unless I wanted to test where he had got to =F0=9F=98=81
+> >
 > >     I suggest you wait until the required patches are finished and
 > >     have been
 > >     accepted into Samba master.
-> > 
+> >
 > >     Rowland
-> > 
-> > 
+> >
+> >
 > > Not true.
-> > 
+> >
 > > Me as well as Steve and the other cifs.ko kernel developers have used
 > > this branch for quite a while.
 > > We even have a cifs.ko buildbot we use to test this very branch.
-> > 
+> >
 > > ronnie s
-> > 
-> Sorry, but I treat anything outside of master as experimental and only to be
-> used for testing, you might use it, but would you use it in production ?
+> >
+> Sorry, but I treat anything outside of master as experimental and only
+> to be used for testing, you might use it, but would you use it in
+> production ?
+>
 
-I think Xiaoli does exactly that -- trying to test the code. So the
-questions asked are very much applied here.
+The guy wants to test the code.
+He knows it is not in the master branch.
 
-
--- 
-/ Alexander Bokovoy
-
+This is not helpful.
