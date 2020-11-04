@@ -2,45 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EBDC2A4554
-	for <lists+samba-technical@lfdr.de>; Tue,  3 Nov 2020 13:38:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 136202A6B47
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Nov 2020 18:01:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=PfsASs1Vr20hajfH7L3bv0oGM5OPmhsz5TuO7cSFhAI=; b=utgxcV8flpfONfyrx/3wSq83p0
-	VAdKe/RTel+WPbQzuODJkMWEjVzvxr7Ko2LKv32xQfBhcMfH50ROnxBIYkUT/oKi+zXsRYmyH/39s
-	DqYuInUNWQGaT9+kLOA8DzMCduaBKkPGUKVtC8lb1TcdmjZFAILUTn7/H0CpVrSG1dYRru824kJeG
-	X54ZugZH16mZV+yoVzJIUz6jjmpqHMrMYrz7lAAAIlqQBok3gIGnsMGezTeRTc8UIgob/Pp3ilYan
-	1uCvuBtG2yGUned3mmxvygmqeXj1c5Gof7MYZ0UZkMhpss9xZVsouqqLEa4B2T5mowbteYMT2ZTwJ
-	QzUYvzgg==;
-Received: from ip6-localhost ([::1]:60336 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=z7Ao3c9bUXO7+bf6c/CoCvVtknmW9s6KiYSOh4CgzHw=; b=xKYk69FqqYP+1NURZdLy3bFnqq
+	xmtCiz+cCe/lKDmuetQkg9Jsuw2LXTjKsfp4SpzY7Xg17yV3MBZyZ9VX4cAmiIoA4SaJyfv1hHMQW
+	v3VrSD8wj2yV+iJd0HfPmhpyYhz1Jl5rTqwsujatOQ7OJQBl9KvJwfU664LtKqeyLhcHGxLEQaIo+
+	0U+toFpueqkEqpaP4BIcnPfF368DEh+v6KvAznPeVG3KZam07ka58l119QQ1uMzOnvVMm8lOO52Jz
+	ZCF/S2SBdLScbezUk3MeRs1Xa/093SAeThT0NSYjABmExelal1HDF1jbzj29hRRoqcAWiplJAADBU
+	6TRdr8qg==;
+Received: from ip6-localhost ([::1]:49442 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kZvZF-00H8o0-6N; Tue, 03 Nov 2020 12:37:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39722) 
+	id 1kaM92-00HTKf-SD; Wed, 04 Nov 2020 17:00:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51376) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kZvYx-00H8nI-Kp; Tue, 03 Nov 2020 12:37:26 +0000
+ (Exim) id 1kaM8l-00HTKN-6r; Wed, 04 Nov 2020 17:00:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=PfsASs1Vr20hajfH7L3bv0oGM5OPmhsz5TuO7cSFhAI=; b=V8p6x7jcONl2pRmLxU+bxvsbBN
- VoHC7aHyW1pWcRVT+1apIjwjBfcVgCFChZbn5v74InR69ULddFEJ3AdACrpeXFuhBzMLx/pAkCvXT
- GWYMJvn92FNEbvwg9wt/GehHd2jMd3HFC7dIYKfZO+WtmMr9z7xkN5dPTxR9uMSEvJYUtGKIRUc1E
- ZESJ0iR/ZvaBdk/KCfrtlMEZcRZykurhEoaM7/2avC3pha22YXOZ8VCXi8tYX6jtU1qZw4s4fLI2J
- ewVxmw7RTuDK7aJimfFn4AqoVajHfk4JeMZFXE2Ualut4leRawFJR+k82n3wxtPGee4cY37OcVxpR
- y379YsV6eouKNsF0R0sdmUNODT0sNZffSFxqBEknFfIOF45NWpmL62Dpttr3k+wQEpZBwWSjQ8QLY
- D6ebSV8fIMufrA4AThSXkLuAnnhS6IC6ygKPTouakUBRcyzXIyjsOl+S601mCJ++Svz4/NXpjpBdz
- qFyURLX/XxgK6qSGrQ8iNIPp;
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=z7Ao3c9bUXO7+bf6c/CoCvVtknmW9s6KiYSOh4CgzHw=; b=rJIS4CbwLHTrZURyD9RVkdVPMQ
+ AURBHVDc07ZDKX4OpwOp7DBOZBVefSF/afSjtut+DHV3j8k1RxvRBtbR2Nh3XgPmtyoffzxzvwGq9
+ roC5COsUvj/rL+wmJ2pfdYTlpkmtpxnBwe+Y1i/JeEHELgzSXsVZnfSkLqIG37q8TIvBCw/OP2K/D
+ W+mJCQLgpnqNBxnbP25Xc3wVpgEY2uobNq0vfd4M9NRQXQUE4C0mbE6MucmGduRjA1e0gHCTULBjt
+ NNJQnOGPALTXHgCiA6XzoE7k6LwW//Kv0RKnAPVr7/2bqpcsaE4moFfJdOxk+NQ3Vr63Cxp5RVgCD
+ Yhxi1GIq9xYtCwAGKkquxrlm6JfI94TCvqiQr45PzrlDOqJVw1K+YfplvHhVoNmnDG/LjpWj1tE+L
+ 4/WnIt6ua0x3csW/T/BXKfZpvWNkr9sQ9TPZLeXvxku5mzVGrolE/MQZorO7lWbhqy/YOPzMg0xQf
+ bYBzxBEegkJblgP3bS7I6ux6;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1kZvYx-0001j0-2r; Tue, 03 Nov 2020 12:37:23 +0000
-Date: Tue, 3 Nov 2020 13:37:17 +0100
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.13.2 Available for Download
-Message-ID: <20201103123715.GA31728@carrie2.fritz.box>
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kaM8j-0000OC-AR; Wed, 04 Nov 2020 17:00:05 +0000
+To: samba-technical@lists.samba.org, samba-cvs@lists.samba.org,
+ Alexander Bokovoy <ab@samba.org>, Andreas Schneider <asn@samba.org>
+References: <20201104162403.E338C14012A@sn.samba.org>
+Subject: cli_credentials_parse_name... (Re: [SCM] Samba Shared Repository -
+ branch master updated)
+Message-ID: <4a335431-8128-36d8-5d6c-463cc7632c66@samba.org>
+Date: Wed, 4 Nov 2020 17:59:56 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="BOKacYhQ+x31HxR3"
-Content-Disposition: inline
-User-Agent: Mutt/1.9.4 (2018-02-28)
+In-Reply-To: <20201104162403.E338C14012A@sn.samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="mHDeICWF4Z6AJfDlOFY99E5nP6VTi6eOK"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,163 +58,145 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: kseeger@samba.org
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--mHDeICWF4Z6AJfDlOFY99E5nP6VTi6eOK
+Content-Type: multipart/mixed; boundary="ZoSj0i62psBXgN5bE5qemNADElehWhmbB";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: samba-technical@lists.samba.org, samba-cvs@lists.samba.org,
+ Alexander Bokovoy <ab@samba.org>, Andreas Schneider <asn@samba.org>
+Message-ID: <4a335431-8128-36d8-5d6c-463cc7632c66@samba.org>
+Subject: cli_credentials_parse_name... (Re: [SCM] Samba Shared Repository -
+ branch master updated)
+References: <20201104162403.E338C14012A@sn.samba.org>
+In-Reply-To: <20201104162403.E338C14012A@sn.samba.org>
 
---BOKacYhQ+x31HxR3
+--ZoSj0i62psBXgN5bE5qemNADElehWhmbB
 Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-Release Announcements
----------------------
+Am 04.11.20 um 17:24 schrieb Alexander Bokovoy:
+> The branch, master has been updated
+>        via  f9016912098 lookup_name: allow lookup for own realm
+>        via  00f4262ed0b cli_credentials: add a helper to parse user or =
+group names
+>        via  eb0474d27ba cli_credentials_parse_string: fix parsing of pr=
+incipals
+>       from  a1b021200e3 selftest: add test for new "samba-tool user unl=
+ock" command
+>=20
+> https://git.samba.org/?p=3Dsamba.git;a=3Dshortlog;h=3Dmaster
+>=20
+>=20
+> - Log -----------------------------------------------------------------=
 
-This is the latest stable release of the Samba 4.13 release series.
+> commit f901691209867b32c2d7c5c9274eee196f541654
+> Author: Alexander Bokovoy <ab@samba.org>
+> Date:   Wed Nov 4 14:21:33 2020 +0200
+>=20
+>     lookup_name: allow lookup for own realm
+>    =20
+>     When using a security tab in Windows Explorer, a lookup over a trus=
+ted
+>     forest might come as realm\name instead of NetBIOS domain name:
+>    =20
+>     -------------------------------------------------------------------=
+-
+>     [2020/01/13 11:12:39.859134,  1, pid=3D33253, effective(1732401004,=
+ 1732401004), real(1732401004, 0), class=3Drpc_parse] ../../librpc/ndr/nd=
+r.c:471(ndr_print_function_debug)
+>            lsa_LookupNames3: struct lsa_LookupNames3
+>               in: struct lsa_LookupNames3
+>                   handle                   : *
+>                       handle: struct policy_handle
+>                           handle_type              : 0x00000000 (0)
+>                           uuid                     : 0000000e-0000-0000=
+-1c5e-a750e5810000
+>                   num_names                : 0x00000001 (1)
+>                   names: ARRAY(1)
+>                       names: struct lsa_String
+>                           length                   : 0x001e (30)
+>                           size                     : 0x0020 (32)
+>                           string                   : *
+>                               string                   : 'ipa.test\admi=
+ns'
+>                   sids                     : *
+>                       sids: struct lsa_TransSidArray3
+>                           count                    : 0x00000000 (0)
+>                           sids                     : NULL
+>                   level                    : LSA_LOOKUP_NAMES_UPLEVEL_T=
+RUSTS_ONLY2 (6)
+>                   count                    : *
+>                       count                    : 0x00000000 (0)
+>                   lookup_options           : LSA_LOOKUP_OPTION_SEARCH_I=
+SOLATED_NAMES (0)
+>                   client_revision          : LSA_CLIENT_REVISION_2 (2)
+>
+> ...
+>
+> diff --git a/auth/credentials/tests/test_creds.c b/auth/credentials/tes=
+ts/test_creds.c
+> index d2d3d30d73d..38550d6ecf9 100644
+> --- a/auth/credentials/tests/test_creds.c
+> +++ b/auth/credentials/tests/test_creds.c
+> @@ -187,7 +187,7 @@ static void torture_creds_parse_string(void **state=
+)
+>  	assert_string_equal(creds->domain, "");
+>  	assert_int_equal(creds->domain_obtained, CRED_SPECIFIED);
+> =20
+> -	assert_string_equal(creds->username, "wurst@brot.realm");
+> +	assert_string_equal(creds->username, "wurst");
 
-Major enhancements include:
-  o BUG 14537: ctdb-common: Avoid aliasing errors during code optimization.
-  o BUG 14486: vfs_glusterfs: Avoid data corruption with the write-behind
-               translator.
+I'm sorry but this is wrong!
+I'm wondering why this wasn't covered by any high level test.
 
+This needs to result in domain=3D"" and username=3D"wurst@brot.realm"
+and that's exactly what we need to use for NTLMSSP.
+Also note that "brot.realm" may not be a realm and "wurst" may not
+be a sAMAccountName. A userPrincipalName can be anything@anydomain-of-msD=
+S-SPNSuffixes.
 
-=3D=3D=3D=3D=3D=3D=3D
-Details
-=3D=3D=3D=3D=3D=3D=3D
+I fear we need to revert these changes.
+=46rom the merge request (https://gitlab.com/samba-team/samba/-/merge_req=
+uests/1658)
+I didn't really look at the whole patchset (with behavior change)
+I only focused on CRED_NO_PASSWORD.
 
-The GlusterFS write-behind performance translator, when used with Samba, co=
-uld
-be a source of data corruption. The translator, while processing a write ca=
-ll,
-immediately returns success but continues writing the data to the server in=
- the
-background. This can cause data corruption when two clients relying on Samb=
-a to
-provide data consistency are operating on the same file.
+I think we need to logic we have in wb_irpc_lsa_LookupNames4_call() and/o=
+r parse_domain_user() here.
 
-The write-behind translator is enabled by default on GlusterFS.
-The vfs_glusterfs plugin will check for the presence of the translator and
-refuse to connect if detected. Please disable the write-behind translator f=
-or
-the GlusterFS volume to allow the plugin to connect to the volume.
-
-
-Changes since 4.13.1
---------------------
-
-o  Jeremy Allison <jra@samba.org>
-   * BUG 14486: s3: modules: vfs_glusterfs: Fix leak of char=20
-     **lines onto mem_ctx on return.
-
-o  Ralph Boehme <slow@samba.org>
-   * BUG 14471: RN: vfs_zfsacl: Only grant DELETE_CHILD if ACL tag is speci=
-al.
-
-o  Alexander Bokovoy <ab@samba.org>
-   * BUG 14538: smb.conf.5: Add clarification how configuration changes
-     reflected by Samba.
-   * BUG 14552: daemons: Report status to systemd even when running in
-     foreground.
-   * BUG 14553: DNS Resolver: Support both dnspython before and after 2.0.0.
-=20
-o  G=C3=BCnther Deschner <gd@samba.org>
-   * BUG 14486: s3-vfs_glusterfs: Refuse connection when write-behind xlato=
-r is
-     present.
-
-o  Amitay Isaacs <amitay@gmail.com>
-   * BUG 14487: provision: Add support for BIND 9.16.x.
-   * BUG 14537: ctdb-common: Avoid aliasing errors during code optimization.
-   * BUG 14541: libndr: Avoid assigning duplicate versions to symbols.
-
-o  Bj=C3=B6rn Jacke <bjacke@samba.org>
-   * BUG 14522: docs: Fix default value of spoolss:architecture.
-
-o  Laurent Menase <laurent.menase@hpe.com>
-   * BUG 14388: winbind: Fix a memleak.
-
-o  Stefan Metzmacher <metze@samba.org>
-   * BUG 14531: s4:dsdb:acl_read: Implement "List Object" mode feature.
-
-o  Sachin Prabhu <sprabhu@redhat.com>
-   * BUG 14486: docs-xml/manpages: Add warning about write-behind translato=
-r for
-     vfs_glusterfs.
-
-o  Khem Raj <raj.khem@gmail.com>
-   * nsswitch/nsstest.c: Avoid nss function conflicts with glibc nss.h.
-
-o  Anoop C S <anoopcs@samba.org>
-   * BUG 14530: vfs_shadow_copy2: Avoid closing snapsdir twice.
-
-o  Andreas Schneider <asn@samba.org>
-   * BUG 14547: third_party: Update resolv_wrapper to version 1.1.7.
-   * BUG 14550: examples:auth: Do not install example plugin.
-
-o  Martin Schwenke <martin@meltin.net>
-   * BUG 14513: ctdb-recoverd: Drop unnecessary and broken code.
-
-o  Andrew Walker <awalker@ixsystems.com>
-   * BUG 14471: RN: vfs_zfsacl: Only grant DELETE_CHILD if ACL tag is speci=
-al.
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
+metze
 
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=3D=3D Our Code, Our Bugs, Our Responsibility.
-=3D=3D The Samba Team
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+--ZoSj0i62psBXgN5bE5qemNADElehWhmbB--
 
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Download Details
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
-=66rom:
-
-        https://download.samba.org/pub/samba/stable/
-
-The release notes are available online at:
-
-        https://www.samba.org/samba/history/samba-4.13.2.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                        --Enjoy
-                        The Samba Team
-
---BOKacYhQ+x31HxR3
+--mHDeICWF4Z6AJfDlOFY99E5nP6VTi6eOK
 Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCX6FO+AAKCRAoaL1+KxeT
-UYKjAJsHlaHkZMLCd57WNBAlsU1jsg+78wCeOaGB+pHUoOXfEQWiUpO/g5o0vV4=
-=baMf
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAl+i3gwACgkQDbX1YShp
+vVZDBhAAoDkYjY9aTrbaHY/T80y5yS/ajGxSdZQ1e8eLIBGUByh+KJ0vND1azU8D
+JQQN9Bax2R+tGUJSiWRF0iotT4rs2ZLbsNb7PRbNgjNIBDT45hqEz//JrYWKIy1Z
+zOg4rXfNSmCvdgQMG0UEwXTfkkoHYpM2iYeq55QuyRFwsMVPDOkzJo6SUzEzr2up
+TImAQOYF1r0e9L5yGQZrHKEHbmlGRgwp4feC1rQB/UYHObZj7nAUoS7Ga1aiUBUp
+KrGbxRoksTUm8LJoqJYkizGnuWS1E2iu7KdoN3CrVJyCk7EQbBRR0Pv5NdZStB2e
+1ANvIzBAh4bsPCj1KuqoMfxJgu4KC5V7LOeaQ1Sx+nVN3KMuHQx0DFg1TPy8YOvH
+WCU1qWvldaYIYnTp/BYrJ8BHI2L+VJLccFOvscQ8yLNHP5my//2m3r/RlFHR/kvL
+GLVEB/zvj94HcKiEgPvrenZWlJavndiPZfYzebdnXUYsSt+9gNlh7Sguea3Xvhw2
+LKBhc7qMnfnfVmsE6G/X71r0x089Kx9cSfmdcvbIShktvlwzOf04awUdcs/63iGW
+XM3gwSYrRug1QfmEPPuz0F1FhtQvNIq/9P05AN6nIMIRhmjRnY3Sz4NLejZH7VjJ
+OQsJ2vS7h2vUKD+ODEZa0mab9kG69iw57eICzjBU1ePcsMsowSY=
+=agV+
 -----END PGP SIGNATURE-----
 
---BOKacYhQ+x31HxR3--
+--mHDeICWF4Z6AJfDlOFY99E5nP6VTi6eOK--
 
