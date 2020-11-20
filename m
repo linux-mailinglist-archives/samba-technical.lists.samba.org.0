@@ -2,58 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 964D62BB1ED
-	for <lists+samba-technical@lfdr.de>; Fri, 20 Nov 2020 19:06:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FFAF2BB8AC
+	for <lists+samba-technical@lfdr.de>; Fri, 20 Nov 2020 23:07:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=PyL41ejr67vbOuJYwzrPW+j+PrXu6b+/Da9PuuUPyFs=; b=BzMuAI5Cziz4XPqbbo41E6MzBu
-	D2b3+Pl4xN0hBunZDaj85u/rCAqL5hMUZQgTPMhT0pRzAtrRj9dYZVpOsoLzcrTIQDn5/YChfsEHK
-	10e3JNRunWwnpy8yEjlWaZhfTmt9SH0Nm2ev/4C+h65AuuzzBMblwHLAZLHr0EjsxycpZwZkBYSEj
-	RxsLzFy85gz2cICcj1mo+1+nGsENxQucwNrIwS/0AN9nWdhnXvudY7325/pjCz6ZPi0RUBaIYZ6ij
-	b4Peu2W6+1wxg7E9F5YhI3Nj5eSGSfq73LHLlxYi71Rlli0VYhASELJr9GGJWz4SRgwA1S6HpHHUH
-	83ichMfg==;
-Received: from ip6-localhost ([::1]:49598 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=TP4ZJ/ywrZTt8jDOPCc2nzdqdjMvVkw5+nst+9/Crf4=; b=UvQvFQv6Odr4L/Wn358N7PuR4A
+	n5jna5W7b1DkfJEzYWP1AQPBPmIrL6Kk3Iyg/56eupKefCjXSnskqu2ppDFX2iD+bmR//f1mSJzr/
+	TEiWOyYvLbIt8CxeeYBHK03FpddGTEj67rXy8WYA6Phj2X9CdxrPZbQZCKmcleEXmAkWEcNX7yZ7A
+	qo2iQ+yvMXL7OA3gz9q+n8hsF6HjWRGURtnbtAmGlw0KaLi0CNE/yCMk1gcFBt53bvgAAHYWMXPCN
+	ZG7oWLL5egzcu4o0Ty1duX7kPctEWX+ufrkZeSjZounb7Y9sP4Amw7mMgeXzjVNytUsiTP/bBzgbg
+	dj9HNQlA==;
+Received: from ip6-localhost ([::1]:50394 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kgAnJ-002AZE-WD; Fri, 20 Nov 2020 18:06:02 +0000
-Received: from mail-yb1-xb42.google.com ([2607:f8b0:4864:20::b42]:43563) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kgAnF-002AZ7-0l
- for samba-technical@lists.samba.org; Fri, 20 Nov 2020 18:05:59 +0000
-Received: by mail-yb1-xb42.google.com with SMTP id r127so5612424yba.10
- for <samba-technical@lists.samba.org>; Fri, 20 Nov 2020 10:05:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=PyL41ejr67vbOuJYwzrPW+j+PrXu6b+/Da9PuuUPyFs=;
- b=svkWBUvzvyWsWvU5kdY56kcEidutkAU6Z3CvnMwhsmd1+S3f/2flhyUFYeyO0qjbmj
- +fU9UP3O/KB6A6uBGvpk7oKtx8exWAJfYP2a4EYs2MrrKhao1LfS2UzL2eTpiHNS38y+
- f8UYFjAzzHv03uSAtOcJwKm4hkm1vVGZFyxQybwk1MVson1Eo9k4GUBSXHKT5x/6O+Ht
- Dhv9+vchGja52X8chMPLMKzV+kHvuFWrQROsGW5zz8Er/BB0HxsIh3AdcwpvdPEmwkHo
- H9/Hs/2W059V3vTLPD9nhzcMERQCIRn7APqSekL5ZcPlSsyrO+aGip0H3wkYIMlsalhF
- hg5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=PyL41ejr67vbOuJYwzrPW+j+PrXu6b+/Da9PuuUPyFs=;
- b=FGzzhY6uodTN2HEJU5rT/HrCFI2J1vaQnoRQcenXXB/bWfvj50I7I3NPsCZokVtkod
- XZxR4dZDuhhIlp73h/ji1+BkOPlU3Q11GCLmP2fVOWwiNFkbRPB8uok3D3P3Jzgo4ys9
- MmuVbT8mpVfaO/NbtXNLnx1lHhjY5Ad1hE+bEsws0Fr3Hi1jUI5Poz3Roe3+3qh7YYMA
- hJ3VeLrOEBB1NncLMcLiSYseQtA8Boh72etvTk3RL7D+j3L2fVpZG4AD4GVMHOM3N1fS
- baSal5hlmFBsp/fZdqzkUNZOFvppJ+zm7MFPiK4TD42hoBCPpdkNKoQV2gLIc5K/I4kN
- IPvg==
-X-Gm-Message-State: AOAM533tEB8rhlLcwUWrYxCijPf2BBV29LHkDvjRLyDXYAjCoXoiZQmF
- x2/LFFCyI4jpYvGlQv77CgsXxR89qQSZDLopPafiVRoBsCY=
-X-Google-Smtp-Source: ABdhPJw6WOhUxMwA1S+PqGmZv/0jsZLfkeDiIxo+iJ5Rw695x4kBHWz38CSYH8CtQbiDMyMD+iALj/iw3unmU3IAYuQ=
-X-Received: by 2002:a25:2e41:: with SMTP id b1mr19728512ybn.384.1605895554853; 
- Fri, 20 Nov 2020 10:05:54 -0800 (PST)
-MIME-Version: 1.0
-References: <20201119214042.6113-1-pboris@amazon.com>
+	id 1kgEXP-002B1e-Fc; Fri, 20 Nov 2020 22:05:51 +0000
+Received: from smtp-fw-33001.amazon.com ([207.171.190.10]:51444) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kgEXJ-002B1V-Cn
+ for samba-technical@lists.samba.org; Fri, 20 Nov 2020 22:05:47 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+ t=1605909946; x=1637445946;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version;
+ bh=TP4ZJ/ywrZTt8jDOPCc2nzdqdjMvVkw5+nst+9/Crf4=;
+ b=B9f+oFeC7opX7DwUGZyZA0/1S8Cs+iHvUP972ZSoE4DbsbsqUlbhE3MZ
+ g62ocm6lnnnXRKaLC1b7AMLxnq5e7EvGE8dKNg7H4y1SdMNxfX4GJcfwI
+ dvpFH929iAdP+l9qBIFE6lfjWOu+BndD4leecWP+ZLeTyg6iAkIyIhecp s=;
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
+ email-inbound-relay-1a-715bee71.us-east-1.amazon.com) ([10.47.23.38])
+ by smtp-border-fw-out-33001.sea14.amazon.com with ESMTP;
+ 20 Nov 2020 21:49:53 +0000
+Received: from EX13MTAUEE002.ant.amazon.com
+ (iad12-ws-svc-p26-lb9-vlan3.iad.amazon.com [10.40.163.38])
+ by email-inbound-relay-1a-715bee71.us-east-1.amazon.com (Postfix) with ESMTPS
+ id 2E45BA1872; Fri, 20 Nov 2020 21:49:51 +0000 (UTC)
+Received: from EX13D11UEE004.ant.amazon.com (10.43.62.104) by
+ EX13MTAUEE002.ant.amazon.com (10.43.62.24) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Fri, 20 Nov 2020 21:49:51 +0000
+Received: from EX13MTAUWC001.ant.amazon.com (10.43.162.135) by
+ EX13D11UEE004.ant.amazon.com (10.43.62.104) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Fri, 20 Nov 2020 21:49:51 +0000
+Received: from dev-dsk-pboris-1f-f9682a47.us-east-1.amazon.com (10.1.57.236)
+ by mail-relay.amazon.com (10.43.162.232) with Microsoft SMTP Server id
+ 15.0.1497.2 via Frontend Transport; Fri, 20 Nov 2020 21:49:49 +0000
+Received: by dev-dsk-pboris-1f-f9682a47.us-east-1.amazon.com (Postfix,
+ from userid 5360108)
+ id 0DD2EA8F50; Fri, 20 Nov 2020 21:49:50 +0000 (UTC)
+To: <pboris@amazon.com>
+Subject: [PATCH] Extend cifs acl utilities to handle SACLs
+Date: Fri, 20 Nov 2020 21:49:18 +0000
+Message-ID: <20201120214918.12517-1-pboris@amazon.com>
+X-Mailer: git-send-email 2.15.3.AMZN
 In-Reply-To: <20201119214042.6113-1-pboris@amazon.com>
-Date: Fri, 20 Nov 2020 13:05:44 -0500
-Message-ID: <CAHhKpQ6ZRwzjm6mfp-cw9+zfT7_YW5iW6swDJQ5XKkiTC8A4uw@mail.gmail.com>
-Subject: Re: [PATCH] Extend cifs acl utilities to handle SACLs
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
+References: <20201119214042.6113-1-pboris@amazon.com>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,15 +71,54 @@ List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Boris Protopopov via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Boris Protopopov <boris.v.protopopov@gmail.com>
-Cc: Steve French <sfrench@samba.org>
+Reply-To: Boris Protopopov <pboris@amazon.com>
+Cc: sfrench@samba.org, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I failed to mention that this patch is against
-https://github.com/piastry/cifs-utils.git/next, due to other relevant
-patches included there and not yet released to
-git://git.samba.org/cifs-utils.git/master.
+Fixed error cases for insufficient privileges, added
+attribute not supported error case for getcifsacl.
 
-Thanks!
+Signed-off-by: Boris Protopopov <pboris@amazon.com>
+---
+ getcifsacl.c | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
+
+diff --git a/getcifsacl.c b/getcifsacl.c
+index 1c72e7c..c1974d3 100644
+--- a/getcifsacl.c
++++ b/getcifsacl.c
+@@ -445,15 +445,26 @@ getxattr:
+ 			free(attrval);
+ 			bufsize += BUFSIZE;
+ 			goto cifsacl;
+-		} else if ((errno == EPERM || errno == EACCES) &&
+-			   !(strcmp(attrname, ATTRNAME_NTSD_FULL))) {
++		} else if (errno == EIO && !(strcmp(attrname, ATTRNAME_NTSD_FULL))) {
+ 			/*
+ 			 * attempt to fetch SACL in addition to owner and DACL via
+ 			 * ATTRNAME_NTSD_FULL, fall back to owner/DACL via
+ 			 * ATTRNAME_ACL if not allowed
++			 * CIFS client maps STATUS_PRIVILEGE_NOT_HELD to EIO
+ 			 */
+-			fprintf(stderr, "Insufficient permissions to fetch full descriptor for %s\n",
++			fprintf(stderr, "WARGNING: Insufficient priviledges to fetch SACL for %s\n",
+ 				filename);
++			fprintf(stderr, "          Fetching owner info and DACL only\n");
++			attrname = ATTRNAME_ACL;
++			goto getxattr;
++		} else if (errno == EOPNOTSUPP && !(strcmp(attrname, ATTRNAME_NTSD_FULL))) {
++			/*
++			 * no support for fetching SACL, fall back to owner/DACL via
++			 * ATTRNAME_ACL
++			 */
++			fprintf(stderr, "WARNING: CIFS client does not support fetching SACL for %s\n",
++				filename);
++			fprintf(stderr, "          Fetching owner info and DACL only\n");
+ 			attrname = ATTRNAME_ACL;
+ 			goto getxattr;
+ 		} else {
+-- 
+2.23.3
+
 
