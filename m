@@ -2,112 +2,74 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28A192C5EED
-	for <lists+samba-technical@lfdr.de>; Fri, 27 Nov 2020 04:20:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5945D2C635A
+	for <lists+samba-technical@lfdr.de>; Fri, 27 Nov 2020 11:44:56 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=zOzfd6t8OdzTWUFkPP5qwzny6x3cfraVb6f38QKM7Qw=; b=lJJ5nkO2AoFPbDnwsKgRr2O684
-	LDbXPUPAeBUyWleUmP6nJJOYboI48GeekOcJknrFvFeY7JJNgqB5SBXEmGf4lw+oozIIeYK9aVeut
-	oMjWYfWDPVgjk/5KKhon3PrEy5h/RfqJKLOLLiBUh+sUusc7AipNJPc/SPQFS2GL4WOEBKBfPb2XW
-	/b5wio6wVi+WloRMLofbPdxFGVjeptrB43mXw4IXy98fGpoRzkqplZXgLQCVKTraxZAxFSC1Qkstf
-	YjGyyPw8n0LAAn1D6IsxZgLqym026w1uZ6duiZ2xOJebCpw1ekjtChb1HpOF7Q+9sfMPn/+/sewPZ
-	hvohH+NA==;
-Received: from ip6-localhost ([::1]:50694 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=J4Bkv4WZ9ru+zqAfdV7nspd8GGQPILjudzNXOa3DB8o=; b=vAaCmJQ2xPzAZzO1ozzUsJAkhc
+	54GGG3zUqeCQP9AuvmgE1XBcX83Oq2q9ymvmhRk2nZltEAvsUUgmwAObnTBVzCazxwRya10yYvv9a
+	X1waV9W0OSJx54AV6b7PcWrAMNfB3OsuzlDU5M6jjBCflbmIhnffNx/CerIByCF9ACW9uTDlSp37H
+	fgky+mr5CkQ+GAex/wMGMLwirhee9gwvIq/+NuNSPGkz5DuYRSqQD9o+zp9RiTMagSJJVrnWtypIj
+	krEDtKGWS3f4QCsFPHFz0gN2ULQZ/Br2TdVpbt28vnens7wZNvwmWYC3OCw/chIvtpt4Efx+iUpTi
+	kZmEuSRA==;
+Received: from ip6-localhost ([::1]:54136 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kiUIi-002ss0-Aq; Fri, 27 Nov 2020 03:20:00 +0000
-Received: from mail-co1nam11on2053.outbound.protection.outlook.com
- ([40.107.220.53]:4064 helo=NAM11-CO1-obe.outbound.protection.outlook.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1kiUIY-002srt-Q0
- for samba-technical@lists.samba.org; Fri, 27 Nov 2020 03:19:54 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=idIXW8ZRhEQ4dvJexYFy3YVPWM09FqR4cpcyjiZOXUpgiwRewcFtraaZTmEkvoMghL9hlP1mfEJLbYgykmDWjg7RwKiFmN2dnN5WJWxWn1KuiqSvcKqdMkl36AUI6Sojuyab+JY3N5Hb8/HN48bJXAe0VCyOx5IFS0jgkKKittXhejQ+l5f7PStsuSYaGQL0n90uTYpWHLkGa70Xw2sWi5vYTd207x4l5MeBj81M/+Od2Rt1lGg2K/JwozCJyo3bEK3AjmdH75snB5ZeI238FrPtl6wvwgSqHv2j9eQst0RhaTfk+u/vPC9CqShN1G9hUmnCIGonHEpvGvZcp5NXaA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0V8YxqeLRr7ekS1LeXjLF9sFcYVtQ1ITpjjxxNQrZWA=;
- b=lQzV0Tm17FGOiOGd8lWg5L0p5pyDNiL0ItpVa1O8f+ykaUZXCx/uxwkjkIgIlUTYdcijIiGithqr/VM31ZMPJXocD8tNxB2JAIJmsTuKRGymkVfvDXPGh+eCi9VGmKBSHdWiUcBcuFg0Hh/kRVgeejP7h8reDBvhynbbGNdbZ9k/N5vVypD1d+fFGKmi50JePjZmFVod4U4rvCavoJkV9jL4rBbQabEXb6WU/4DRC42AfIPV1OTH5Q0gWtov+vN2u6YTdNXOtgiXF7ty7Mh1byB16c9t7SGPot+yMqwm/ty2yHOCIIctUSl5tgJWwl5jpCmrvt0IOwiw3Rvtwp81YQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vmware.com; dmarc=pass action=none header.from=vmware.com;
- dkim=pass header.d=vmware.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmware.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0V8YxqeLRr7ekS1LeXjLF9sFcYVtQ1ITpjjxxNQrZWA=;
- b=waeaDa23nc4MqbH1IGo5tjCb3iXbFyTFPOrgUqD21iqH+MKMyRJLE6sAYXLJyRRXBnsKUImnhmIjFbbb1PLNYuVp6aSRBwb2Q7fnOrB9AvijOHZri6x6u6l2Hflhk/S52SCYMO8qRKq6YqaNTYUCzzdvebFlRbLwOCbdw6ZG50Y=
-Received: from SN4PR0501MB3854.namprd05.prod.outlook.com
- (2603:10b6:803:4e::30) by SN6PR05MB5294.namprd05.prod.outlook.com
- (2603:10b6:805:c7::32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3611.14; Fri, 27 Nov
- 2020 03:19:31 +0000
-Received: from SN4PR0501MB3854.namprd05.prod.outlook.com
- ([fe80::a08f:a4ba:455e:fc91]) by SN4PR0501MB3854.namprd05.prod.outlook.com
- ([fe80::a08f:a4ba:455e:fc91%6]) with mapi id 15.20.3632.009; Fri, 27 Nov 2020
- 03:19:31 +0000
-To: Andrew Walker <awalker@ixsystems.com>, Ralph Boehme <slow@samba.org>
-Subject: Re: about "ea support" parameter
-Thread-Topic: about "ea support" parameter
-Thread-Index: AQHWw6zWZtIuZKIKjkWykUOFACJ9vqnas/8A//+CgQCAAPa0gIAAqcqA
-Date: Fri, 27 Nov 2020 03:19:30 +0000
-Message-ID: <BF5BBABB-8C12-4D9F-8530-4D12A72C5DA2@vmware.com>
-References: <5C9D413C-7EF4-47EF-975B-ACE19B40B2AB@vmware.com>
- <01389598-12D7-4F10-9490-99441D905D34@vmware.com>
- <7f4d9057-921b-a6e8-acb2-1df1e4d5a255@samba.org>
- <CAB5c7xrF9uSQ6PwyojwAUiCK_H7-p-Lvtsj88OZ4BQSRuCWS3g@mail.gmail.com>
-In-Reply-To: <CAB5c7xrF9uSQ6PwyojwAUiCK_H7-p-Lvtsj88OZ4BQSRuCWS3g@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: ixsystems.com; dkim=none (message not signed)
- header.d=none;ixsystems.com; dmarc=none action=none header.from=vmware.com;
-x-originating-ip: [101.87.214.48]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 6a43ec5a-3562-4416-b6f9-08d892834190
-x-ms-traffictypediagnostic: SN6PR05MB5294:
-x-ms-exchange-transport-forked: True
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: BQvC2m2mFTBVdpjJHUkh6sTFBDGvKkJMyD9kNeDHwN0Fm4YN4eFT9Rf1oGvyP+7fyqSsOZlz2Wgqk7WxxPID24p9UrHNbeM8MJxgw/oQG410/kPPM8Pet1s8lwH3lI9GlFQJvBQhOwmQMLstZGF12RakpaGFEGk+loS3mpGcSF7Soh8E/C730vpPiLfgK+yW1HXD/C67E3Z/okW5b2UAKJeRJH7PJzZrHwDQf2dqKQkjfEggf4TOnSiIVDQe1HaR7ej7S9rRXacX00hgnn1cEKjA3QrJ9hiNEMCLP6FNU1yOEWwkKII2blXYQmu9fCFsquqQpGAaovk3F6QpouZA++Mu8XlSBFF4e/RCRbqht0kgGV48lEIP66aYm8coBb9GAoIfe5BfGaTyStgtnJWlTQ==
-x-ms-exchange-antispam-messagedata: =?utf-8?B?emVXVDFOYVNsa1RzTytSR292S2dkdDVZVXdZQWRpQUZlZDlUQXBPWU95Tk1Z?=
- =?utf-8?B?R002bS9jbEh1TVFuQlFqVGNDSGpsRTByNnFzYWpvUm9OUUdlU0NyQWc4czkw?=
- =?utf-8?B?UjgvckVQUk0rbHY1LzZ0U3FidlFQRUJ6eDR6V0JISmpYWUJVNzh6SWVIdHFp?=
- =?utf-8?B?OFJRa3BDYlJKTTZnMjd4MStKa1JBK3l1VXFJekRSaHEwMkRzVW1wZTdXWlZl?=
- =?utf-8?B?T1dwQm1VUVIvK0w1dXlyT2dXdVVlV3grelEvb3Zzeno3OXJUZEh6SjNBK0Mz?=
- =?utf-8?B?UTVneTZVb1cydGliZU1CUHRtM2hRQ2tMRmtxQ3Y1Rks4eDhManNpWS9iMWJS?=
- =?utf-8?B?Sk5LNW9tc0tUakFMWjkrM3pmdUFWR3FtcHhQQkxlUnpiVlJVSVlBa2piYmZ1?=
- =?utf-8?B?NFdQMWl3eGFRUnBxamI3T2ZwYktxUFFDbzg5SVNLV2pYelJZbm1tMW5OZHB0?=
- =?utf-8?B?QU1SMHdvVGR0RFJKQ3p5T25HKzZqZExsUHZFS2E2RG9zeG9hajlZc05jbmdx?=
- =?utf-8?B?bzRKWS9ES0laVkJRU21NbGhMVURtNnR2dDhuWEpEMzRwL3J6dXpJZ2xOdmVS?=
- =?utf-8?B?TnVVL0JVRHZFb1k4YVBYRkxXVTdsQ2FJZURtOU8rRTJPWjdyREVMbDRDQkJE?=
- =?utf-8?B?d1E3OUNvUzFvVHhVa0RxU0RRWThpQ1NHOFJlaFJuWXh5dXhVQU1PWG13OTUv?=
- =?utf-8?B?eFF5Smpxc25mWTcvTFkwdDc1UUk2Wm9IcTRFS1pObnNoR3hzMG1KTXErQ29N?=
- =?utf-8?B?R1M3WFI2cWxsck5DQkRWUUNBN2VmWG8xZ2s3ZWlLbmMvVUxRQ1R2ZnRLUVRj?=
- =?utf-8?B?VVVaZGJsNWRGSCtIZGlsazZHaVhkM3hTTUgwTG8ycElSZ0h2dElxNkRJOG93?=
- =?utf-8?B?cWJCTTI1VmR0UDVvOFVZQ2R1WEt0KzNkNnZFMzZDTUdqYVQ2TDRXZjZyQVUx?=
- =?utf-8?B?cDYrUk8razdFdjFmWUdHVWZ6OFpHSEdSeXdodytQemRXN0JBS0dpSzA5OVZP?=
- =?utf-8?B?UDFjOENseW93ajRGakZ0ZStHRzh5dnlSRTAwRTNaNjBtMWUvUW1xK2RIQVFv?=
- =?utf-8?B?RzJUbWRMY3dGTWQ5eHQvcGxvWEozaVpLbEdVaEFMN1diTmhJUnVmaWJQampP?=
- =?utf-8?B?MkJlNWpLQjFCWTlWMmRSc2ErRzlQRVBsQUY2cGlRUXo3RGRZaWt3cEFtd2hB?=
- =?utf-8?B?b2p4ak8xUC84U2s5cVNSS3h4Tm9OdUkxVzJmbHZaa0xkR1JCTU5CQ3N0elBr?=
- =?utf-8?B?bjNTcURYZDJwdjRiS1lTblNjWWNvWDJDMkZERWt5b3laMmFaNGRVblZhTGdo?=
- =?utf-8?Q?rFFEyb2slj8I55YTxk1xLehEUc3xk8kLVD?=
+	id 1kibEX-002ugV-0V; Fri, 27 Nov 2020 10:44:09 +0000
+Received: from mail-yb1-xb35.google.com ([2607:f8b0:4864:20::b35]:37665) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kibER-002ugO-Mc
+ for samba-technical@lists.samba.org; Fri, 27 Nov 2020 10:44:06 +0000
+Received: by mail-yb1-xb35.google.com with SMTP id v92so4141411ybi.4
+ for <samba-technical@lists.samba.org>; Fri, 27 Nov 2020 02:44:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=J4Bkv4WZ9ru+zqAfdV7nspd8GGQPILjudzNXOa3DB8o=;
+ b=uHkwhIxcxtwL/TqQCZGRAysX4WqqAa1WJShnfLic5PEEk9a8PqfAYzaJdgR/v2AG98
+ TSPZibdNjK57AONITbAPybZODVsJZ1pmb0pI2wWl0b5/ZL+SgwUVERyJk15rA1loviuE
+ 6U0VRorSETamL7hLVtKNRDDJHE9W5h/LDqUnduV7OEHwju0d8oKrhgw65dKWkqaDl+bm
+ VYAXbKi8t/3fRkYb3f+Ziaz3XcJrOZi0eKW4m8eJ7D2IAeqS9YknnhNOqmTsCINMfGD8
+ OBGdufXSSBockC0RHZPXZQn0x5mQAWKV+LeBuOd5oFo3kVEbRRaKHju6GMJU9Qkn2XbN
+ H89A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=J4Bkv4WZ9ru+zqAfdV7nspd8GGQPILjudzNXOa3DB8o=;
+ b=dST/xodov7cRfE2/LH8E8lvnQq1FUR5vllJ4Up/nrFJNTi23fPbsNw5RbbQSOPO6ho
+ u3uaLET/AZecPlAETh5XFVHXEP6pQdm/lVOPmeI4l0GMGJEJNx0gUtdywtujqU+ftujs
+ vFwLIlmzk7QI8Oxnsha+J1EkRcw0HEqcaHKL2FgRtbODZuzv+O4V2fcomBxoc9U6nDxt
+ MzRUdU3cBuK/Is6b1oYmV1xJMGIL2ffM1zdt5KFo30v2AzK3OXdwS9c7hQm/jFQfnJI9
+ QimLjSaZ4m0nDSutLmDHC8eNZx3h/Njk2I3BkdygTuHsmiEv2qaZYm2kKVE1vcBNau4x
+ TJmg==
+X-Gm-Message-State: AOAM532ZJeWxGfwAT+tCh7XqHTNDLd1XFsY/MvEWf2ANZzYJR/l6/puQ
+ a/4xv79K18bsMe/MK893G9+jSP16wgsH3yi1/PU=
+X-Google-Smtp-Source: ABdhPJyXSdVNNkV1foPlxmmSN89/2IiYbxUo1g4ILGywAWuWYZ4+uEtlmpZGJh4eVjQnbX4sf/Rg5GeDfk4uunFQ7eg=
+X-Received: by 2002:a25:cad2:: with SMTP id a201mr9583480ybg.327.1606473839028; 
+ Fri, 27 Nov 2020 02:43:59 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: vmware.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SN4PR0501MB3854.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6a43ec5a-3562-4416-b6f9-08d892834190
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: iXqy1elao47rYbxfIyrHr96xq5Tf5gessiIadnvg/mumCpOaLHCzBreLPXQ6cxhM
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR05MB5294
-X-Warn: EHLO/HELO not verified: Remote host 40.107.220.53
- (mail-co1nam11on2053.outbound.protection.outlook.com) incorrectly presented
- itself as NAM11-CO1-obe.outbound.protection.outlook.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+References: <CANT5p=pxPsBwAv3oJX6Ae9wjpZoEjLvyfGM1sM9DEhS11RNgog@mail.gmail.com>
+ <87pn7t4kr9.fsf@suse.com>
+ <CANT5p=oeY91u17DPe6WO75Eq_bjzrVC0kmAErrZ=h3S1qh-Wxw@mail.gmail.com>
+ <87eeo54q0i.fsf@suse.com>
+ <CANT5p=rxp3iQMgxaM_mn3RE3B+zezWr3o8zpkFyWUR27CpeVCA@mail.gmail.com>
+ <CANT5p=qMHxq_L5RpXAixzrQztjMr8-P_aO4aPg5uqfPSLNUiTA@mail.gmail.com>
+ <874ko7vy0z.fsf@suse.com>
+ <CANT5p=o07RqmMkcFoLeUVTeQHhzh5MmFYpfAdv0755iiGbp1ZA@mail.gmail.com>
+ <87mu1yc6gw.fsf@suse.com>
+ <CANT5p=r0Jix9EuuF8gJzQBGHLp0Y-Oogxzju7_2cJog_jF2fjg@mail.gmail.com>
+ <874knolhpw.fsf@suse.com>
+ <CANT5p=oTTErJk240GKc+k6Cihqks+9Nnurh=MdrvgC7gqKu1ww@mail.gmail.com>
+ <CAKywueTr9GHbzg65s12BRKNB_L881wFLmHcb5boFxGX2AoN40g@mail.gmail.com>
+ <CANT5p=rECwTZgskdXUr3VAHWA-PkYHEXX=qwO8PpVZRc0=pOKA@mail.gmail.com>
+ <CAKywueTuGuqT8QN-8Jn1QNHT+HPKysLDhdp1gPsm6+Q0tQnbGA@mail.gmail.com>
+In-Reply-To: <CAKywueTuGuqT8QN-8Jn1QNHT+HPKysLDhdp1gPsm6+Q0tQnbGA@mail.gmail.com>
+Date: Fri, 27 Nov 2020 16:13:50 +0530
+Message-ID: <CANT5p=pUVucG6NhzfziAjsjDnimHCWDUiJP46DYoRqjpXHegsA@mail.gmail.com>
+Subject: Re: [PATCH][SMB3] mount.cifs integration with PAM
+To: Pavel Shilovsky <piastryyy@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -121,64 +83,296 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Leo Fan via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Leo Fan <xfan@vmware.com>
-Cc: Albert Guo <aguo@vmware.com>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>, sribhat.msa@outlook.com,
+ samba-technical <samba-technical@lists.samba.org>,
+ =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>,
+ Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-VGhhbmtzIEFuZHJldywgeW91ciBpbmZvcm1hdGlvbiBpcyBoZWxwZnVsIQ0KDQotTGVvDQoNCkZy
-b206IEFuZHJldyBXYWxrZXIgPGF3YWxrZXJAaXhzeXN0ZW1zLmNvbT4NCkRhdGU6IEZyaWRheSwg
-Tm92ZW1iZXIgMjcsIDIwMjAgYXQgOToxMiBBTQ0KVG86IFJhbHBoIEJvZWhtZSA8c2xvd0BzYW1i
-YS5vcmc+DQpDYzogTGVvIEZhbiA8eGZhbkB2bXdhcmUuY29tPiwgInNhbWJhLXRlY2huaWNhbEBs
-aXN0cy5zYW1iYS5vcmciIDxzYW1iYS10ZWNobmljYWxAbGlzdHMuc2FtYmEub3JnPiwgQWxiZXJ0
-IEd1byA8YWd1b0B2bXdhcmUuY29tPg0KU3ViamVjdDogUmU6IGFib3V0ICJlYSBzdXBwb3J0IiBw
-YXJhbWV0ZXINCg0KDQoNCk9uIFRodSwgTm92IDI2LCAyMDIwIGF0IDU6MzAgQU0gUmFscGggQm9l
-aG1lIHZpYSBzYW1iYS10ZWNobmljYWwgPHNhbWJhLXRlY2huaWNhbEBsaXN0cy5zYW1iYS5vcmc8
-bWFpbHRvOnNhbWJhLXRlY2huaWNhbEBsaXN0cy5zYW1iYS5vcmc+PiB3cm90ZToNCkFtIDExLzI2
-LzIwIHVtIDEwOjU3IEFNIHNjaHJpZWIgTGVvIEZhbiB2aWEgc2FtYmEtdGVjaG5pY2FsOg0KPiBI
-aSBzYW1iYSBleHBlcnRzLA0KPg0KPiBJIG5lZWQgeW91ciBoZWxwIHRvIHVuZGVyc3RhbmQgdGhl
-IHNtYi5jb25mIHBhcmFtZXRlciDigJhlYSBzdXBwb3J04oCZLg0KPiBXZSBhcmUgZGV2ZWxvcGlu
-ZyBhIGN1c3RvbWl6ZWQgc2FtYmEgc2VydmljZSB0byBzZXJ2ZSBXaW5kb3dzIDEwDQo+IGNsaWVu
-dHMgYW5kIE1BQyBPUyBjbGllbnRzLiBBbmQsIHdlIHdvdWxkIGxpa2UgdG8gc2V0IOKAmEVBIHN1
-cHBvcnQgPQ0KPiBub+KAmSB0byBnYWluIG1vcmUgcGVyZm9ybWFuY2Ugb2Yg4oCYZGly4oCZIGNv
-bW1hbmQgZXNwZWNpYWxseSBvbiB0aGUgbGFyZ2UNCj4gZGlyZWN0b3J5LCBidXQgYXMgc21iLmNv
-bmYgZG9jIHNheXMsIEVBIHN1cHBvcnQgZGlzYWJsZW1lbnQgd2lsbA0KPiBpbXBhY3QgV2luZG93
-cyBmaWxlIHNlcnZpY2UgY29tcGF0aWJpbGl0eS4NCj4NCj4gVGhlIGRlZmF1bHQgaGFzIGNoYW5n
-ZWQgdG8geWVzIGluIFNhbWJhIHJlbGVhc2UgNC45LjAgYW5kIGFib3ZlIHRvDQo+IGFsbG93IGJl
-dHRlciBXaW5kb3dzIGZpbGVzZXJ2ZXIgY29tcGF0aWJpbGl0eSBpbiBhIGRlZmF1bHQgaW5zdGFs
-bC4NCg0KVG8gZ2l2ZSB5b3Ugc29tZSBiYWNrZ3JvdW5kOiB0aGF0IGNoYW5nZSB1bnRhbmdsZWQg
-dGhlIHByZXZpb3VzIG1peHR1cmUNCm9mIGNvbmZpZ3VyaW5nIGJvdGggU01CIGxldmVsIGJlaGF2
-aW91ciAqYW5kKiBiYWNrZW5kIHN0b3JhZ2UgYmVoYXZpb3VyLg0KTm93YWRheXMgdGhpcyBwYXJh
-bWV0ZXIgb25seSBjb25maWd1cmVzIHRoZSBTTUIgbGV2ZWwgYmVoYXZpb3VyLCBpZSBpZg0Kd2Ug
-c3VwcG9ydCBFQXMgaW4gdGhlIHByb3RvY29sLiBUaGVyZSBhcmUgdmFyaW91cyB3YXlzIGEgY2xp
-ZW50IGdldA0KbGlzdCwgZ2V0IGFuZCBzZXQgRUFzIG92ZXIgU01CLCBieSBzZXR0aW5nICJlYSBz
-dXBwb3J0ID0gbm8iIGFsbCBvZg0KdGhvc2Ugd2lsbCBmYWlsIHdpdGggYW4gZXJyb3IsIHByb2Jh
-Ymx5IE5UX1NUQVRVU19OT1RfU1VQUE9SVEVELg0KDQpIb3dldmVyLCBpZiB3aGVuIHNldHRpbmcg
-ImVhIHN1cHBvcnQgPSBubyIgU2FtYmEgd2lsbCBzdGlsbCB1c2UgeGF0dHJzDQppbiB0aGUgYmFj
-a2VuZCBhcyBzdG9yYWdlIGZvciB2YXJpb3VzIGJpdHMgYW5kIHBpZWNlcyBsaWtlIERPUw0KYXR0
-cmlidXRlcywgY3JlYXRpb24gZGF0ZSwgQUNMcyBhbmQgc28gb24uDQoNCj4gSSBhbSBub3QgcXVp
-dGUgY2xlYXIgYWJvdXQgY29tcGF0aWJpbGl0eSBwcm9ibGVtIHdpdGggRUEgc3VwcG9ydA0KPiBk
-aXNhYmxlbWVudCwgYW5kIGhhdmUgc29tZSBxdWVzdGlvbnM6DQo+DQo+DQo+IDEuICBJbiB3aGlj
-aCBzY2VuYXJpb3Mgd2lsbCB0aGVyZSBiZSB3aW5kb3dzIGZpbGUgc2VydmljZQ0KPiBjb21wYXRp
-YmlsaXR5Pw0KDQpBcyBleHBsYWluZWQgYWJvdmUsIHlvdSBkaXNhYmxlIHNvbWV0aGluZyB3aGlj
-aCBhIFdpbmRvd3Mgc2VydmVyDQpzdXBwb3J0cy4gSGVsbCBtYXkgYnJha2UgbG9vc2Ugb3IgeW91
-IG1heSBuZXZlciBub3RpY2UgYSBkaWZmZXJlbmNlIGluDQpjbGllbnQgYmVoYXZpb3VyLCB5b3Ug
-bmV2ZXIga25vdy4NCg0KPiAyLiAgSG93IGRvIHdlIGNyZWF0ZSBhbmQgdXNlIEVBPw0KDQpUaGVy
-ZSBhcmUgdmFyaW91cyBTTUIgaW5mbyBsZXZlbCB0byBnZXQgYW5kIHNldCB0aGVtLCBjZiBNUy1G
-U0EvTVMtRlNDQy4NCg0KPiAzLiAgRG9lcyBhbnkgd2VsbC1rbm93biBXaW5kb3dzL01BQyBhcHBs
-aWNhdGlvbiB1c2UgRUE/DQoNCkknbSBub3QgYXdhcmUgb2YgYW55Lg0KV2luZG93cyBTdWJzeXN0
-ZW0gRm9yIExpbnV4IHVzZXMgdGhlbSwgYnV0IHVuc3VyZSBvZiBpbXBsaWNhdGlvbnMgb3ZlciBT
-TUIgcHJvdG9jb2wgKGhhdmVuJ3QgbG9va2VkIGludG8gaXQpLiBJSVJDLCBJbGx1bW9zIGRpc2Fi
-bGVzIEVBIHN1cHBvcnQgYnkgZGVmYXVsdCBpbiB0aGVpciBTTUIgc2VydmVyIGltcGxlbWVudGF0
-aW9uIGZvciBwZXJmb3JtYW5jZSByZWFzb25zIGZvciBkaXJlY3RvcnkgbGlzdGluZy4NCg0KaHR0
-cHM6Ly9kb2NzLm1pY3Jvc29mdC5jb20vZW4tdXMvd2luZG93cy93c2wvZmlsZS1wZXJtaXNzaW9u
-czxodHRwczovL25hbTA0LnNhZmVsaW5rcy5wcm90ZWN0aW9uLm91dGxvb2suY29tLz91cmw9aHR0
-cHMlM0ElMkYlMkZkb2NzLm1pY3Jvc29mdC5jb20lMkZlbi11cyUyRndpbmRvd3MlMkZ3c2wlMkZm
-aWxlLXBlcm1pc3Npb25zJmRhdGE9MDQlN0MwMSU3Q3hmYW4lNDB2bXdhcmUuY29tJTdDZTlhMTM5
-NjRmMzg5NGU2MTUxNWMwOGQ4OTI3MTcwYzclN0NiMzkxMzhjYTNjZWU0YjRhYTRkNmNkODNkOWRk
-NjJmMCU3QzAlN0MwJTdDNjM3NDIwMzYzMjE0ODU2MDYyJTdDVW5rbm93biU3Q1RXRnBiR1pzYjNk
-OGV5SldJam9pTUM0d0xqQXdNREFpTENKUUlqb2lWMmx1TXpJaUxDSkJUaUk2SWsxaGFXd2lMQ0pY
-VkNJNk1uMCUzRCU3QzEwMDAmc2RhdGE9UVZaSkoyOEIlMkJUMnRuciUyRmRGcnZZc1ZDQUNtNXB4
-QVR6MDFiOHlBNGoyUzQlM0QmcmVzZXJ2ZWQ9MD4NCg==
+Discussed this with Aurelien today.
+
+With the patch last sent, users are authenticated using the PAM stack.
+However, there's no call to cleanup the PAM credentials. Which could
+leave the kerberos tickets around, even after the umount.
+
+To complete this fix, we need a mechanism to tell the umount helper
+umount.cifs (a new executable to be created) that PAM authentication
+was used for the mount.
+
+There are two possible approaches which I could think of:
+1. Add a new mount option in cifs.ko. Inside cifs.ko, this option
+would be non-functional. But will be used by umount.cifs to call PAM
+for cleanup.
+2. In mount.cifs, keep this info in a temporary file (maybe
+/var/run/cifs/). umount.cifs will read this and call PAM for cleanup.
+
+I feel approach 1 is a cleaner approach to take. Aurelien seems to
+favour option 1 as well.
+Please feel free to comment if you feel otherwise.
+Once we agree on the right approach, I'll send a patch for the changes.
+
+Regards,
+Shyam
+
+On Wed, Nov 11, 2020 at 12:53 AM Pavel Shilovsky <piastryyy@gmail.com> wrot=
+e:
+>
+> Sure. Removed the patch and updated the next branch.
+> --
+> Best regards,
+> Pavel Shilovsky
+>
+> =D0=B2=D1=82, 10 =D0=BD=D0=BE=D1=8F=D0=B1. 2020 =D0=B3. =D0=B2 05:20, Shy=
+am Prasad N <nspmangalore@gmail.com>:
+> >
+> > Hi Pavel,
+> >
+> > There is more that needs to be done on this item. Otherwise, this will
+> > depend on user behaviour to cleanup unused krb5 tickets.
+> > The pending items on this is to propagate this mount option to cifs.ko
+> > and write an umount.cifs utility to read that mount option to do PAM
+> > logoff.
+> > So please rollback this patch for now.
+> >
+> > Regards,
+> > Shyam
+> >
+> > On Tue, Nov 10, 2020 at 5:12 AM Pavel Shilovsky <piastryyy@gmail.com> w=
+rote:
+> > >
+> > > Merged into next. Please let me know if something needs to be fixed. =
+Thanks!
+> > > --
+> > > Best regards,
+> > > Pavel Shilovsky
+> > >
+> > > =D1=87=D1=82, 24 =D1=81=D0=B5=D0=BD=D1=82. 2020 =D0=B3. =D0=B2 03:39,=
+ Shyam Prasad N <nspmangalore@gmail.com>:
+> > > >
+> > > > Hi Aur=C3=A9lien,
+> > > >
+> > > > I've implemented most of your review comments. Also fixed the issue=
+.
+> > > >
+> > > > On Wed, Sep 23, 2020 at 7:26 PM Aur=C3=A9lien Aptel <aaptel@suse.co=
+m> wrote:
+> > > > >
+> > > > > Shyam Prasad N <nspmangalore@gmail.com> writes:
+> > > > > > Also, I'll test this out with DFS once I figure out how to set =
+it up. :)
+> > > > > > Re-attaching the patch with some minor changes with just the
+> > > > > > "force_pam" mount option.
+> > > > >
+> > > > > You will need 2 Windows VM. DFS is basically symlinks across
+> > > > > servers. The DFS root VM will host the links (standalone namespac=
+e) and
+> > > > > you have to make them point to shares on the 2nd VM. You don't ne=
+ed to
+> > > > > setup replication to test.
+> > > > >
+> > > > > When you mount the root in cifs.ko and access a link, the server =
+will
+> > > > > reply that the file is remote. cifs.ko then does an FSCTL on the =
+link to
+> > > > > resolve the target it points to and then connects to the target a=
+nd
+> > > > > mounts it under the link seemlessly.
+> > > > >
+> > > > >
+> > > > > Regarding the patch:
+> > > > >
+> > > > > * need to update the man page with option and explanation
+> > > > >
+> > > > > I have some comments with the style, I know it's annoying.. but i=
+t
+> > > > > would be best to keep the same across the code.
+> > > > >
+> > > > > * use the existing indent style (tabs) and avoid adding trailing =
+whitespaces.
+> > > > > * no () for return statements
+> > > > > * no casting for memory allocation
+> > > > > * if (X) free(X)  =3D> free(X)
+> > > > >
+> > > > > Below some comments about pam_auth_krb5_conv():
+> > > > >
+> > > > > > @@ -1809,6 +1824,119 @@ get_password(const char *prompt, char *=
+input, int capacity)
+> > > > > >       return input;
+> > > > > >  }
+> > > > > >
+> > > > > > +#ifdef HAVE_KRB5PAM
+> > > > > > +#define PAM_CIFS_SERVICE "cifs"
+> > > > > > +
+> > > > > > +static int
+> > > > > > +pam_auth_krb5_conv(int n, const struct pam_message **msg,
+> > > > > > +    struct pam_response **resp, void *data)
+> > > > > > +{
+> > > > > > +    struct parsed_mount_info *parsed_info;
+> > > > > > +     struct pam_response *reply;
+> > > > > > +     int i;
+> > > > > > +
+> > > > > > +     *resp =3D NULL;
+> > > > > > +
+> > > > > > +    parsed_info =3D data;
+> > > > > > +    if (parsed_info =3D=3D NULL)
+> > > > > > +             return (PAM_CONV_ERR);
+> > > > > > +     if (n <=3D 0 || n > PAM_MAX_NUM_MSG)
+> > > > > > +             return (PAM_CONV_ERR);
+> > > > > > +
+> > > > > > +     if ((reply =3D calloc(n, sizeof(*reply))) =3D=3D NULL)
+> > > > > > +             return (PAM_CONV_ERR);
+> > > > > > +
+> > > > > > +     for (i =3D 0; i < n; ++i) {
+> > > > > > +             switch (msg[i]->msg_style) {
+> > > > > > +             case PAM_PROMPT_ECHO_OFF:
+> > > > > > +            if ((reply[i].resp =3D (char *) malloc(MOUNT_PASSW=
+D_SIZE + 1)) =3D=3D NULL)
+> > > > > > +                goto fail;
+> > > > > > +
+> > > > > > +            if (parsed_info->got_password && parsed_info->pass=
+word !=3D NULL) {
+> > > > > > +                strncpy(reply[i].resp, parsed_info->password, =
+MOUNT_PASSWD_SIZE + 1);
+> > > > > > +            } else if (get_password(msg[i]->msg, reply[i].resp=
+, MOUNT_PASSWD_SIZE + 1) =3D=3D NULL) {
+> > > > > > +                goto fail;
+> > > > > > +            }
+> > > > > > +            reply[i].resp[MOUNT_PASSWD_SIZE] =3D '\0';
+> > > > > > +
+> > > > > > +                     reply[i].resp_retcode =3D PAM_SUCCESS;
+> > > > > > +                     break;
+> > > > > > +             case PAM_PROMPT_ECHO_ON:
+> > > > > > +                     fprintf(stderr, "%s: ", msg[i]->msg);
+> > > > > > +            if ((reply[i].resp =3D (char *) malloc(MOUNT_PASSW=
+D_SIZE + 1)) =3D=3D NULL)
+> > > > > > +                goto fail;
+> > > > > > +
+> > > > > > +                     if (fgets(reply[i].resp, MOUNT_PASSWD_SIZ=
+E + 1, stdin) =3D=3D NULL)
+> > > > >
+> > > > > Do we need to remove the trailing \n from the buffer?
+> > > > >
+> > > > > > +                goto fail;
+> > > > > > +
+> > > > > > +            reply[i].resp[MOUNT_PASSWD_SIZE] =3D '\0';
+> > > > > > +
+> > > > > > +                     reply[i].resp_retcode =3D PAM_SUCCESS;
+> > > > > > +                     break;
+> > > > > > +             case PAM_ERROR_MSG:
+> > > > >
+> > > > > Shouldn't this PAM_ERROR_MSG case goto fail?
+> > > > >
+> > > > > > +             case PAM_TEXT_INFO:
+> > > > > > +                     fprintf(stderr, "%s: ", msg[i]->msg);
+> > > > > > +
+> > > > > > +                     reply[i].resp_retcode =3D PAM_SUCCESS;
+> > > > > > +                     break;
+> > > > > > +             default:
+> > > > > > +                     goto fail;
+> > > > > > +             }
+> > > > > > +     }
+> > > > > > +     *resp =3D reply;
+> > > > > > +     return (PAM_SUCCESS);
+> > > > > > +
+> > > > > > + fail:
+> > > > > > +     for(i =3D 0; i < n; i++) {
+> > > > > > +        if (reply[i].resp)
+> > > > > > +            free(reply[i].resp);
+> > > > >
+> > > > > free(NULL) is a no-op, remove the checks.
+> > > > >
+> > > > > > +     }
+> > > > > > +     free(reply);
+> > > > > > +     return (PAM_CONV_ERR);
+> > > > > > +}
+> > > > >
+> > > > > I gave this a try with a properly configured system joined to AD =
+from
+> > > > > local root account:
+> > > > >
+> > > > > aaptel$ ./configure
+> > > > > ...
+> > > > > checking krb5.h usability... yes
+> > > > > checking krb5.h presence... yes
+> > > > > checking for krb5.h... yes
+> > > > > checking krb5/krb5.h usability... yes
+> > > > > checking krb5/krb5.h presence... yes
+> > > > > checking for krb5/krb5.h... yes
+> > > > > checking for keyvalue in krb5_keyblock... no
+> > > > > ...
+> > > > > checking keyutils.h usability... yes
+> > > > > checking keyutils.h presence... yes
+> > > > > checking for keyutils.h... yes
+> > > > > checking for krb5_init_context in -lkrb5... yes
+> > > > > ...
+> > > > > checking for WBCLIENT... yes
+> > > > > checking for wbcSidsToUnixIds in -lwbclient... yes
+> > > > > ...
+> > > > > checking for keyutils.h... (cached) yes
+> > > > > checking security/pam_appl.h usability... yes
+> > > > > checking security/pam_appl.h presence... yes
+> > > > > checking for security/pam_appl.h... yes
+> > > > > checking for pam_start in -lpam... yes
+> > > > > checking for security/pam_appl.h... (cached) yes
+> > > > > checking for krb5_auth_con_getsendsubkey... yes
+> > > > > checking for krb5_principal_get_realm... no
+> > > > > checking for krb5_free_unparsed_name... yes
+> > > > > checking for krb5_auth_con_setaddrs... yes
+> > > > > checking for krb5_auth_con_set_req_cksumtype... yes
+> > > > > ...
+> > > > > aaptel$ make
+> > > > > ....(ok)
+> > > > >
+> > > > > Without force_pam:
+> > > > >
+> > > > > root# ./mount.cifs -v //adnuc.nuc.test/data /x -o sec=3Dkrb5,user=
+name=3Dadministrator,domain=3DNUC
+> > > > > mount.cifs kernel mount options: ip=3D192.168.2.111,unc=3D\\adnuc=
+.nuc.test\data,sec=3Dkrb5,user=3Dadministrator,domain=3DNUC
+> > > > > mount error(2): No such file or directory
+> > > > > Refer to the mount.cifs(8) manual page (e.g. man mount.cifs) and =
+kernel log messages (dmesg)
+> > > > >
+> > > > > With force_pam:
+> > > > >
+> > > > > root# ./mount.cifs -v //adnuc.nuc.test/data /x -o sec=3Dkrb5,user=
+name=3Dadministrator,domain=3DNUC,force_pam
+> > > > > Authenticating as user: administrator
+> > > > > Error in authenticating user with PAM: Authentication failure
+> > > > > Attempt to authenticate user with PAM unsuccessful. Still, procee=
+ding with mount.
+> > > > >
+> > > > > =3D> no further message but mount failed and no msg in dmesg, it =
+didn't
+> > > > >    reach the mount() call
+> > > > >
+> > > > > Not sure what is going on. Does the domain need to be passed to P=
+AM?
+> > > > >
+> > > > > Cheers,
+> > > > > --
+> > > > > Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+> > > > > GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+> > > > > SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=
+=BCrnberg, DE
+> > > > > GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (=
+AG M=C3=BCnchen)
+> > > >
+> > > >
+> > > >
+> > > > --
+> > > > -Shyam
+> >
+> >
+> >
+> > --
+> > -Shyam
+
+
+
+--=20
+-Shyam
+
