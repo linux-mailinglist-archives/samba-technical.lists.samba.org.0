@@ -2,105 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D9722CC792
-	for <lists+samba-technical@lfdr.de>; Wed,  2 Dec 2020 21:15:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC8772CD160
+	for <lists+samba-technical@lfdr.de>; Thu,  3 Dec 2020 09:39:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=fWgviIM/kh6A4olBYyIeaG8QUFnj1BTrZadN544BQ2o=; b=XBAiTmpR+ht/mKhnx1HHly2Kzp
-	4AQk0fqjaGmJHNzkL9LxAitBTp+Tlc6LqWGmx681C8uIDEMEgbrCeQzxHlpALft7CdKT6ku8Na4t4
-	0Dq4M3B+RedCaVgqw1MZ9SyPsDxS8IHj3/vA74vXrT4Du+DyPofJaZKf5ZIds/riX9dxnGniVWPZd
-	lu1D9lznCqKROsQHwpIfopNFLxlpqCq7JtrPXaWLYtMhkh/zoKNKRexgjNhxbYqFnGSoL9q8O7wuP
-	VuEuqCmech8IhA2WFDYOBv4DwSeUsi4YjpyOr3sL94XzGIDEuETh1N0t/JYtX6zS2xx9DRktrnLg+
-	NdJEttMA==;
-Received: from ip6-localhost ([::1]:50530 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=QOxFH7LY9aZUWphUxBN0j6euHZtL7S59VamXGysthfc=; b=inSdXqdK8Y+UzxHf25J+ySTgIO
+	jdKj5A9/W96IykZM39oymfLfCrm77sLk0z8gMnSfZLgwxFo4xV1EaMFhkKZA2NVNXinsQrmapdNAD
+	Yq4VrH/2a6+q5+S8cbSnJmp26/G/m+HPA8CFnsVIKPoMgR87ttXuljz6kwypeFnU13UBIoK3Shvet
+	7R7Wzg/5KT9qAWbYi7xvs3xtHpdu2dQ7vEpzhQqzUxrVrX8+G9EUzWjYrKmHAa2FPfU7t8349FO73
+	6WTZlC6w+zOi2i6iI9C/broTfO0WPtmsEr0UXtG3Hd/eynZspHqlPxkSch+tMP3OxDEqNVEbRyF5b
+	zM6TPZOw==;
+Received: from ip6-localhost ([::1]:57160 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kkYWQ-000DZH-Cw; Wed, 02 Dec 2020 20:14:42 +0000
-Received: from mail-eopbgr760071.outbound.protection.outlook.com
- ([40.107.76.71]:7822 helo=NAM02-CY1-obe.outbound.protection.outlook.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1kkYWJ-000DZ9-NN
- for samba-technical@lists.samba.org; Wed, 02 Dec 2020 20:14:39 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mQYpC5g16MON+xF/WEb9m9wjDPU+6NsecJ+X49lZSV5dpdz+hThBp5l2gGdM0ddCIY9zK4jrkSg6PstCmXNG5tqTxTxEwBNqtrR/mlC8E0lnMcfOEE/y/wLSYUDdewr0x/HK7YVc1uqfPgQ+aS+4VB5HWAXMgQ+ZMBOyiQONXSzGzuQa8Eys6PWRLVedRrxyaH3NA8xfunS80tD81f5HULlsVV5OnSUzlMpluDDPa3vz4RBbJ3I1wkd/PXFccMq4oSbgj5RAGUM7+7v6uutMtr5MB8etJjcdKz/QidJs2/oR7UOqMW6ABJWViTMXfxNffSh3C0i0RiBhcgmFPch2pQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fWgviIM/kh6A4olBYyIeaG8QUFnj1BTrZadN544BQ2o=;
- b=AbUP0cWKeaHB2h1W/9ux8GqBpQ49NH/S5n2mnFVYG9w6Du9ivlo+epckFKVF+3rDPdC0t37QwHPHYpdZNY/1cfvzfd4V4zTLcCI7OKVYGGRF8SWPjsMVUby3x6NEJou1BgUAYXWHRH9sMvygin7V1tm6yYnTtc0CBGGsFkZxHct3g8L8k6WjVhaTl4FXtrxfsIcBkZ2l6Pu2IKyFXIufG2tptxaWjLs1H87ScLxahD7PwM6HYc85QBnYBoR1bGAU2QryyKtcHOCj1J0osHY3mYnvQUs0lRZX7JqWnvRuyzAtey+C5mMRZlQ8UK9kCFseYUOItW76NlWBD9syYlj/HA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=komprise.com; dmarc=pass action=none header.from=komprise.com;
- dkim=pass header.d=komprise.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=komprise.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fWgviIM/kh6A4olBYyIeaG8QUFnj1BTrZadN544BQ2o=;
- b=N+0RBf0E0+B/Jb/DEy8m0HMzIUcjnmTkZDgCpIZXkAskd1QRK+xfVme3fhiW+3XrDF0AylR7IbioCWrOA/vcFi++n60GMl0rS9gZhuzqfx7GQP0EFM7JUvYyLgyvnzwYe93cjRYlemryyNP7lvbzqO5xB26qB1PF6vnwLIbx1AI=
-Received: from BYAPR16MB2615.namprd16.prod.outlook.com (2603:10b6:a03:8f::17)
- by BYAPR16MB2743.namprd16.prod.outlook.com (2603:10b6:a03:ea::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3611.25; Wed, 2 Dec
- 2020 20:14:11 +0000
-Received: from BYAPR16MB2615.namprd16.prod.outlook.com
- ([fe80::116d:161c:4a50:e9bc]) by BYAPR16MB2615.namprd16.prod.outlook.com
- ([fe80::116d:161c:4a50:e9bc%6]) with mapi id 15.20.3611.031; Wed, 2 Dec 2020
- 20:14:11 +0000
-To: Steve French <sfrench@samba.org>, Steve French <smfrench@gmail.com>,
- "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Subject: Merge commits to v4.19 from 4.20 & 5.6 for cifs backupid fixes
-Thread-Topic: Merge commits to v4.19 from 4.20 & 5.6 for cifs backupid fixes
-Thread-Index: AQHWyOXkpLlUzO54vUW55IcwP/u2Qw==
-Importance: high
-X-Priority: 1
-Date: Wed, 2 Dec 2020 20:14:11 +0000
-Message-ID: <BYAPR16MB26150D5743AEE86BA8D1B095E2F30@BYAPR16MB2615.namprd16.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: samba.org; dkim=none (message not signed)
- header.d=none;samba.org; dmarc=none action=none header.from=komprise.com;
-x-originating-ip: [24.5.2.128]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: f8215c75-3479-42f3-d5bb-08d896fed54e
-x-ms-traffictypediagnostic: BYAPR16MB2743:
-x-ms-exchange-transport-forked: True
-x-ms-oob-tlc-oobclassifiers: OLM:2582;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: MjeMEXYVMmxXLBRkhWcCEgON+boLzmaPGc11CJtUgiwzmAJyE4tcLDUeSqBhq+ohGU0KnmqdqLAIFtdQh6nD1hMi3q1VE3NISGVNAMYgEqueoB0z7pPoDunA18d7zS5MxaLAQgQdnCYskGKiqdTSvu+WatrEk0DIftS8BNLUyaYFhaGdI3ZjV6pdBdAs/rQKCs3k2AuuYvR98ORPe5/sXuqz6ccr3whC5xwS332KqoRQ8P3FFS5Y/Q/Non9zLY6h6OTdm6/KKhQfYVzWFEcOV7WgU9yrDlSlOJYGFWr4xP6WTvdqrwi8Kqlebjdaw4k4nRiXAs7CAOtuiUDWCBY/J9t5oxWh6433OA96xnlAY0XcoRHumcsWMHJK3abYVaK4KEmFgzF6gUCGmNTIV79FEA==
-x-ms-exchange-antispam-messagedata: =?iso-8859-1?Q?hv64pVN9bfBhDyvJHmBisr53l6mdSA265IRIddymSdFFPyyqGcR6GYkDtx?=
- =?iso-8859-1?Q?2YLyFWK2UT7wesLBi+r4aQ3JACrMR2Cn6T3eHbGDgJZw6L6d0n4eg7eQ12?=
- =?iso-8859-1?Q?SRFQQy4949aw/5pTIiDx/cyWQ6IPZV11C4VlvNjkXNIXRTP7ySr1zpRn+a?=
- =?iso-8859-1?Q?L7ep5jYpBEJB35IMtObIczD6SyD9ZAl2oH9zyFKOEOkn2cMvppAnTecl5g?=
- =?iso-8859-1?Q?TT2aMmt2/pRthdyZqGPyDUJO9dWRrVoMTNsbKGb+l21U4Rqq1W6HY1OUXe?=
- =?iso-8859-1?Q?L5XsbIPKGkpD8J1Pere88gmNSkNvwZ2+QXlxPjTS7r1MqAkmtaFcBPJxSh?=
- =?iso-8859-1?Q?J7WhGU1q4A2S94X9gSTzSvWBs2fIehnRlPyWdxZ1X0S+RQJNIli6nosAIE?=
- =?iso-8859-1?Q?IHy0qSU7nNk4UQZXo7qmesuzSvGhe6MSxU15vTvWkJjjj6UBZHhOIAIFll?=
- =?iso-8859-1?Q?0s1nINHRayS5apD/G7scsWIsUlI99U3saqFJdKf/fpBV8htA2MTcN6yaZC?=
- =?iso-8859-1?Q?WPfil64a+3h0h4S8VE/Efg7WAnwechkO2Lf/G2li/feAlAd9uNMVZKWyRx?=
- =?iso-8859-1?Q?PLavwrRiTv2iDZ1ksa9+lXjBMaHUwtj8EslyTI+8ZiNkWvgFotV3nqPKBs?=
- =?iso-8859-1?Q?cOsyz+6KFhW0VWNSGegWinPAtwo1DoMytMCfXTjUCrlKmZCZ28oQDsV/ti?=
- =?iso-8859-1?Q?mhZih0VlZK/VQD1JGMPQBLbMp+cDFfHayt8l/3fOIoLDQ5iEgok5+Mxp9g?=
- =?iso-8859-1?Q?DVMiUy60/+y3+R0UTp1sHNahoobbprOw2yXOUszNRBYSI8xSjX2zAvn1aB?=
- =?iso-8859-1?Q?xrzkbrCajq8wadNFB8zF4KXlmQFTTlaadnmeM4ZLA2Sromxe6+iGQLHhfC?=
- =?iso-8859-1?Q?RkFOsNxq/iGBKGrMMFYFhqufNj/YpfojB6SQhwC2tuSDJWy6Vo+CJT9V75?=
- =?iso-8859-1?Q?xQF1EH/v58Nh1FooL9X9W37eNkCJA9m60qauLI+iEwNZdPsi4KK1ZWvClQ?=
- =?iso-8859-1?Q?JjBlM6beJ8viKRV/c=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+	id 1kkk8H-000Gnn-7D; Thu, 03 Dec 2020 08:38:33 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12138) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kkk85-000Gn7-3l; Thu, 03 Dec 2020 08:38:23 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=QOxFH7LY9aZUWphUxBN0j6euHZtL7S59VamXGysthfc=; b=IBc+TOCY7r7HM3r5nQWb2bGO7h
+ ucjBuIr2glf6zlV7nljPPYbCjfY18bHbKhbX9hKmTkoKIZ+Hv/HWrOVvkSNpzJESS7xqG1/MocSzd
+ 5nByISm6UtS6bDJJ3z3FX3fS5vJ15yFbvVwMxfthmlomENfOQN6RoxMEXxErVErBM1YnHhEIIWSXf
+ HTAsk7PJ4lBvZYvVqrmZl16VjHvIOiCXRQDkZmJAdRi9SBW4/5D/2iBH0WCnBchBT47KcLjjiYWvt
+ WKoZNr5FK7Zr5paxNfeAlmsQZSt66gZNO4SNyIRPDtwOjf8PBtoQlAysAQr4dtx2boo279XMtMNqI
+ ofTodujflsQDhvxq6mthAaTcfjY8KikzQbTAbJzP0yVJEwLqqT/jFG+hk2p4YTJUpntVCUdXrd9HY
+ XkFm5+bqnzircBPZM23hdu5EcwUH4Pg9/gpSi1D+8F0nfxhycD64WZgBZW5ju9CmSjFyUFCbS/wsI
+ OkgAGruFseR91U6tozZX8hI+;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kkk84-0007Kp-EY; Thu, 03 Dec 2020 08:38:20 +0000
+Date: Thu, 3 Dec 2020 09:38:18 +0100
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.11.17 Available for Download
+Message-ID: <20201203083817.GA4828@carrie2.fritz.box>
 MIME-Version: 1.0
-X-OriginatorOrg: komprise.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR16MB2615.namprd16.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f8215c75-3479-42f3-d5bb-08d896fed54e
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 7a5a9d78-0afb-4c20-b729-756d332680db
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ZlheesKEntFmKUO/2wvHcMB+DdnV9YwHxq5v4PiXDGPT1gCtk3bA/q2gtgLHMDvOpFzsebc012349cGgI6yZVBt+xaNGeb9z2ZoMORUP8A4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR16MB2743
-X-Warn: EHLO/HELO not verified: Remote host 40.107.76.71
- (mail-eopbgr760071.outbound.protection.outlook.com) incorrectly presented
- itself as NAM02-CY1-obe.outbound.protection.outlook.com
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="LZvS9be/3tNcYl/X"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -114,40 +54,95 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Vidhesh Ramesh via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Vidhesh Ramesh <vidhesh.ramesh@komprise.com>
-Cc: Nahush Bhanage <nahush.bhanage@komprise.com>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Steve,=0A=
-=0A=
-We mount cifs shares on our centos machines running kernel v4.19 using back=
-upoperator privileges using backupid, however we do not see that the backup=
- intent is used for all calls. We did find fixes for them in 4.20 & 5.6 but=
- not in 4.19. Would it be able to merge these commits to 4.19 as well ?=0A=
-=0A=
-Here are the commits of interest.=0A=
-1. https://github.com/torvalds/linux/commit/5e19697b56a64004e2d0ff1bb952ea0=
-5493c088f - v4.19.rc1=0A=
-2. https://github.com/torvalds/linux/commit/61351d6d54e651ec4098445afa5ddc2=
-092c4741a - v4.20.rc1=0A=
-3. https://github.com/torvalds/linux/commit/4d5bdf28690a304e089ce750efc8b7d=
-d718945c7 - v4.20.rc1=0A=
-4. https://github.com/torvalds/linux/commit/0f060936e490c6279dfe773d75d526d=
-3d3d77111 - v5.6-rc1=0A=
-=0A=
-Vidhesh Ramesh=0A=
-=0A=
-=0A=
-=0A=
-=0A=
-=0A=
-=0A=
-=0A=
-=0A=
-=0A=
-=0A=
-=0A=
-=0A=
+
+--LZvS9be/3tNcYl/X
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Release Announcements
+---------------------
+
+This is an extraordinary release of the Samba 4.11 release series to fix a
+regression introduced with Samba 4.11.16.
+
+
+Changes since 4.11.16
+---------------------
+
+o  Jeremy Allison <jra@samba.org>
+   * BUG 14486: s3: vfs_glusterfs: Fix the error in preventing talloc leaks=
+ from
+     a function.
+
+o  G=C3=BCnther Deschner <gd@samba.org>
+   * BUG 14486: s3-vfs_glusterfs: Always disable write-behind translator.
+
+o  Anoop C S <anoopcs@samba.org>
+   * BUG 14486: manpages/vfs_glusterfs: Mention silent skipping of write-be=
+hind
+     translator.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+        https://www.samba.org/samba/history/samba-4.11.17.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--LZvS9be/3tNcYl/X
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCX8ij9gAKCRAoaL1+KxeT
+UWnrAKDBiT4OdN9mLHi3gYVsErSEyN5WiQCgg4wdvYlNz9QMh24lTJl27mkfYqA=
+=VPDw
+-----END PGP SIGNATURE-----
+
+--LZvS9be/3tNcYl/X--
 
