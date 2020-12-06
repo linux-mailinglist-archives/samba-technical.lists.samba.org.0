@@ -2,45 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC8772CD160
-	for <lists+samba-technical@lfdr.de>; Thu,  3 Dec 2020 09:39:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7BD32D07E0
+	for <lists+samba-technical@lfdr.de>; Mon,  7 Dec 2020 00:07:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=QOxFH7LY9aZUWphUxBN0j6euHZtL7S59VamXGysthfc=; b=inSdXqdK8Y+UzxHf25J+ySTgIO
-	jdKj5A9/W96IykZM39oymfLfCrm77sLk0z8gMnSfZLgwxFo4xV1EaMFhkKZA2NVNXinsQrmapdNAD
-	Yq4VrH/2a6+q5+S8cbSnJmp26/G/m+HPA8CFnsVIKPoMgR87ttXuljz6kwypeFnU13UBIoK3Shvet
-	7R7Wzg/5KT9qAWbYi7xvs3xtHpdu2dQ7vEpzhQqzUxrVrX8+G9EUzWjYrKmHAa2FPfU7t8349FO73
-	6WTZlC6w+zOi2i6iI9C/broTfO0WPtmsEr0UXtG3Hd/eynZspHqlPxkSch+tMP3OxDEqNVEbRyF5b
-	zM6TPZOw==;
-Received: from ip6-localhost ([::1]:57160 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=zIqo9FHjUj4lmr2VHnC3yrQ62wg1Qpxp4VKUGNqh0lw=; b=ZNUumkyjAMptJW5teiqcxfLSAd
+	RSUY6NIvXcJCzbQXpgLP1Wq4EJyxglkArkntrhuu4NfpEsrsGdbyG0I8NKmUW4JlvfxsplPxRcGdU
+	dDzrFlzeHLzoXHmz59Nj4uiksvN1TJJYnQNqIPTechYPLWbhbJGW3PtBIM8xhwmUy22NBGInKDfwG
+	EwD2QTcPDTWTpJpPMW/f3GE1O5qg2DfRJlRSGP6O6dRKpacuxRh4e8gnpqGI5QWqlOq0TFruSOjfd
+	TSLIod+wtUcirPpFLNfy3tbDK5GRco4TPg2wJVj/mf2GfkGW03P3Thi+Yffdm0AaQuOQW/Py3oyPz
+	44L+exjw==;
+Received: from ip6-localhost ([::1]:33378 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kkk8H-000Gnn-7D; Thu, 03 Dec 2020 08:38:33 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12138) 
+	id 1km36p-0002eM-Q9; Sun, 06 Dec 2020 23:06:27 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50430) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kkk85-000Gn7-3l; Thu, 03 Dec 2020 08:38:23 +0000
+ (Exim) id 1km36k-0002eF-Og
+ for samba-technical@lists.samba.org; Sun, 06 Dec 2020 23:06:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=QOxFH7LY9aZUWphUxBN0j6euHZtL7S59VamXGysthfc=; b=IBc+TOCY7r7HM3r5nQWb2bGO7h
- ucjBuIr2glf6zlV7nljPPYbCjfY18bHbKhbX9hKmTkoKIZ+Hv/HWrOVvkSNpzJESS7xqG1/MocSzd
- 5nByISm6UtS6bDJJ3z3FX3fS5vJ15yFbvVwMxfthmlomENfOQN6RoxMEXxErVErBM1YnHhEIIWSXf
- HTAsk7PJ4lBvZYvVqrmZl16VjHvIOiCXRQDkZmJAdRi9SBW4/5D/2iBH0WCnBchBT47KcLjjiYWvt
- WKoZNr5FK7Zr5paxNfeAlmsQZSt66gZNO4SNyIRPDtwOjf8PBtoQlAysAQr4dtx2boo279XMtMNqI
- ofTodujflsQDhvxq6mthAaTcfjY8KikzQbTAbJzP0yVJEwLqqT/jFG+hk2p4YTJUpntVCUdXrd9HY
- XkFm5+bqnzircBPZM23hdu5EcwUH4Pg9/gpSi1D+8F0nfxhycD64WZgBZW5ju9CmSjFyUFCbS/wsI
- OkgAGruFseR91U6tozZX8hI+;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=zIqo9FHjUj4lmr2VHnC3yrQ62wg1Qpxp4VKUGNqh0lw=; b=JaJaGjVOzEIfn3oGQpCsZ2HHbc
+ fkAaoexSGspWF9PrusFRsQrx0n1AzbrWofxUCMaRCFQTLzf+biuZkYOD87Z7v9G4WXgZt6crht/Tv
+ Cp2qc5kLp5uj3z5anSXaM/dPBLtiUA+S3jbwwezc6RhE+oeTeNipuHbN1iZ/12pQev6Hgbu2U2em9
+ O/V3ISwhu60+kg5Mj6XGOaQ68VsfM94vZxaJNNaNVF/yt4rEfZJ1bGwWSVA18F7Y2Iwiy2I5Jvc7s
+ J/p4cWYQfQyyiTf2K4ZR/+/qAdHHO5kB6qRh5S9UQidIR32PktzPKlSOQGvKbZUCFQiXIX5KozAX9
+ XgLrVpyIOzLAXE9un/rLYQX8J5YAodHEJNboxWrBXGT9rn/91U6UJOWofO499QTPsUCEFBkwtkFDE
+ pjUN3+GEzm9US0IjwuBhLF8pQO9kApqGLZ+lvAVzkeBlV9fADOZ881EY891VcAdzGz8CekJsJHw84
+ S0e8lmp14eV3EcZgMV7UEtur;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1kkk84-0007Kp-EY; Thu, 03 Dec 2020 08:38:20 +0000
-Date: Thu, 3 Dec 2020 09:38:18 +0100
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.11.17 Available for Download
-Message-ID: <20201203083817.GA4828@carrie2.fritz.box>
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1km36h-00076W-SD
+ for samba-technical@lists.samba.org; Sun, 06 Dec 2020 23:06:20 +0000
+Message-ID: <334b390ea3c64631b9da07c10a6f636aa3079f54.camel@samba.org>
+Subject: 20 years doing Samba
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Mon, 07 Dec 2020 12:06:14 +1300
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="LZvS9be/3tNcYl/X"
-Content-Disposition: inline
-User-Agent: Mutt/1.9.4 (2018-02-28)
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,95 +54,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: kseeger@samba.org
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+2020 has been a strange year for many, but one additional thing that
+has crept up on me is that I've now been around the Samba project for
+more than 20 years!
 
---LZvS9be/3tNcYl/X
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I wrote some thoughts here:
 
-Release Announcements
----------------------
+https://www.catalyst.net.nz/blog/andrew-bartlett-20-years-samba
 
-This is an extraordinary release of the Samba 4.11 release series to fix a
-regression introduced with Samba 4.11.16.
+The earliest patch I could find on the list is this one:
+https://lists.samba.org/archive/samba-technical/2000-September/009729.html
 
+It certainly has been an amazing journey!
 
-Changes since 4.11.16
----------------------
+Thanks!
 
-o  Jeremy Allison <jra@samba.org>
-   * BUG 14486: s3: vfs_glusterfs: Fix the error in preventing talloc leaks=
- from
-     a function.
-
-o  G=C3=BCnther Deschner <gd@samba.org>
-   * BUG 14486: s3-vfs_glusterfs: Always disable write-behind translator.
-
-o  Anoop C S <anoopcs@samba.org>
-   * BUG 14486: manpages/vfs_glusterfs: Mention silent skipping of write-be=
-hind
-     translator.
+Andrew Bartlett
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
 
 
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=3D=3D Our Code, Our Bugs, Our Responsibility.
-=3D=3D The Samba Team
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Download Details
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
-=66rom:
-
-        https://download.samba.org/pub/samba/stable/
-
-The release notes are available online at:
-
-        https://www.samba.org/samba/history/samba-4.11.17.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                        --Enjoy
-                        The Samba Team
-
---LZvS9be/3tNcYl/X
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCX8ij9gAKCRAoaL1+KxeT
-UWnrAKDBiT4OdN9mLHi3gYVsErSEyN5WiQCgg4wdvYlNz9QMh24lTJl27mkfYqA=
-=VPDw
------END PGP SIGNATURE-----
-
---LZvS9be/3tNcYl/X--
 
