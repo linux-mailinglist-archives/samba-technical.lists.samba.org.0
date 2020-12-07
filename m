@@ -2,65 +2,78 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED4B92D1BF1
-	for <lists+samba-technical@lfdr.de>; Mon,  7 Dec 2020 22:24:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 093B02D1C38
+	for <lists+samba-technical@lfdr.de>; Mon,  7 Dec 2020 22:37:09 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=EJOHc17zvEobDOFxwlnd1L4iMrQot9jcPwqhnGntr9I=; b=B2HdHLpMyFeQg21vQV6FZlU+4N
-	pCnQ/0PleI3m3i3wX1/ER9CrPc0Zb1r8r8aUT/zLCKPvfIOADqNjxlg/Xiz9CJHNtOOKTrGqc3RYd
-	ZrUeZtWYC81CqncDIPPm17UfzSf+gfzuoKN53+XAkmEIE2Ztq1qZWHCLJJEIPhqaHjFAerjhHywOY
-	Jn6ogWpIjuqD6cK4rUw4xojDd+ECPv8gAVfxnqHLsuTJUElDBsLe9zJQZpzeI+AwLOP7jPJ9Vcn1G
-	ZsIeQAzIh08i7Clqxs3m709T0HAgDn/6VNf8nsFQ3KX9GBhMp2jizGuj2ykL+xqFPUJN/yS9Y/lBV
-	fq8VltPg==;
-Received: from ip6-localhost ([::1]:54318 helo=hr1.samba.org) 
+	bh=857lhcLZLWenmI0aJWkQR0JKop+eAv1wQOl2qYT0B9k=; b=AMz1Tyjo3nIziWXAC5cDggksKg
+	F1OjnM6eQ6WMupAAiTH7ec942oeIP6wQqHCZdnuOUOqTQlmKiOIGE6KoY/ulbaADErYMB26P58VBS
+	SxiKivcOT2DORg9mnY8zivL6bjbOQTOHGk6z4TxfKgFE5bFvRyio4W+8EkwWcD7J7kDsqAxUyVh9k
+	9SZhQPFtCONHpZe/WWSgMs+VraZRKx7gAKr5IwdL/q2IakxUYP7AyC0zM7VqGAXhWQ/k/flxPWxjC
+	5+UMbPKk6dgdUrP2CesBKzml7wrG3wZhxbP8zHykcUIjfDeZvcOcEuXgBi6TwsnoM9hxfHFgoMCBq
+	Vxur8PEw==;
+Received: from ip6-localhost ([::1]:55036 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kmNzJ-0007LW-OH; Mon, 07 Dec 2020 21:24:05 +0000
-Received: from mail-yb1-xb43.google.com ([2607:f8b0:4864:20::b43]:45570) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kmNzD-0007LN-IG
- for samba-technical@lists.samba.org; Mon, 07 Dec 2020 21:24:02 +0000
-Received: by mail-yb1-xb43.google.com with SMTP id k78so5303972ybf.12
- for <samba-technical@lists.samba.org>; Mon, 07 Dec 2020 13:23:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=EJOHc17zvEobDOFxwlnd1L4iMrQot9jcPwqhnGntr9I=;
- b=PR89FjhyROMYrzNdU/CC1sy61GlJsq1xPP9zXtszWtlNZ1p9hqWSvP2SAeHJOYSl+r
- nrK2vOZakMjvi20D89GE3y+afmrxePMvpvVuVzav3DjsiGaClZ6l3yvxfuXm7SO3vq7m
- 9PYtA7ZXzMj4Kn2AyiQIdC/rHf3Fnot0r9Ao05CEhVJneTKf8OxQsc7AXdyXdlCEfgiJ
- utkc38Yit/vo2z7dOgwMtN8EuNG2hfZPE4G4i3EJXcicSD1P53NayKTisC8ahbsqrxzw
- DhZw5pZLZxEgcqC5CTvR38f/EGBvBTC28qk8a4ro4Ld+r4+WCFDFWQJberhAK2FTaabZ
- e+Uw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=EJOHc17zvEobDOFxwlnd1L4iMrQot9jcPwqhnGntr9I=;
- b=drJOxvjpk0VzxrUswOOlNklEJLqtTHEk7Txx5wVlDo9G9DmiOinKzRIQEsZ05dpc2G
- +7jv44SrWv7zAXlRzr2QB/IQVss6Gn71JQWf4yETt4kLksI6n8NFtAWT3oLhz0xlXj4g
- 1R7wMuFQAhlByYGUtu+fn9x7f5f+rXdHTY2vkI7/ULidoUdtu8fhdPCF6USSxWRZ8J0B
- EQJNdH2g3TSp0JwGHhvMKj2msEpME95NFdZOhmEaCGG+cEtlWGXEud32l3ctEFBTzy+D
- PlvCRsdyaLvqc7vWNTIgsh78WfzwhM7QoAvGyOt9N/a356YyJEOCZIMEKwha1QIfZdNO
- zaAg==
-X-Gm-Message-State: AOAM532bcfK3vHuRGgTy8v+gHWLLquI2iooRdnt96vvH+XYT/aB08/VW
- YDrulKSODpECvhhpLvak4B7SDlhIuyr9R/oEemU=
-X-Google-Smtp-Source: ABdhPJx5qZ+rLue5yDZ0J7fW53DlyRNWKSX802X7XAN4N0j77LPTesms57jetylejWawrq8UlQ0Y7Omr67EaQhDYMHk=
-X-Received: by 2002:a25:cad2:: with SMTP id
- a201mr25315070ybg.327.1607376232060; 
- Mon, 07 Dec 2020 13:23:52 -0800 (PST)
+	id 1kmOBZ-0007ST-W8; Mon, 07 Dec 2020 21:36:46 +0000
+Received: from mta213a-ord.mtasv.net ([104.245.209.213]:50165) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kmOBP-0007SL-7N
+ for samba-technical@lists.samba.org; Mon, 07 Dec 2020 21:36:43 +0000
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=20200311092113pm;
+ d=gget.it; 
+ h=From:Date:Subject:Message-Id:To:Cc:References:In-Reply-To:MIME-Version:Content-Type;
+ i=j@gget.it; bh=JFkK9lbwqsKtnfRYUo42D59sfDE=;
+ b=ahT/DYq3E9THVn/2j2BdbpkyxdZo0LdPR4w+lZOjMkhogYIvvqhsfGrks3zNnNLX+9pzaBHLXdPZ
+ 5kU6CZ66wJi4DkOta2mzLxMCxWeTSiMy40Hs/8327fIn1YAV80guysRZfjEho8jtOHN1D1U2U6VU
+ /Rq8idm0ZYtGJOwlAnE=
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=pm; d=pm.mtasv.net;
+ h=From:Date:Subject:Message-Id:To:Cc:References:In-Reply-To:MIME-Version:Content-Type;
+ bh=JFkK9lbwqsKtnfRYUo42D59sfDE=;
+ b=ZI574ethbsrgBH0/fzLeq1D41mWNBRmgMmvG0JQoXShjxzQ6M9Ty3mea/9MQnbi96lpWpyLw8zyC
+ Fq55CqCJVz6/EDmonFSK19m9UqJi9CvbQSAUHPgSH1BvP0G4/L6/xnhJ+ky2lDdFsxoqDT9dRkSe
+ 0QaVfDxlnWcke1loVZY=
+Received: by mta213a-ord.mtasv.net id hpqg6627tk4a for
+ <samba-technical@lists.samba.org>;
+ Mon, 7 Dec 2020 16:36:00 -0500 (envelope-from <pm_bounces@pm-bounces.gget.it>)
+X-PM-IP: 104.245.209.213
+X-IADB-IP: 104.245.209.213
+X-IADB-IP-REVERSE: 213.209.245.104
+DKIM-Signature: v=1; a=rsa-sha256; d=gget.it; s=20200311092113pm;
+ c=relaxed/relaxed; i=j@gget.it; t=1607376960;
+ h=cc:content-description:content-id:content-transfer-encoding:content-type:
+ date:from:in-reply-to:list-archive:list-help:list-id:list-owner:list-post:
+ list-subscribe:list-unsubscribe:mime-version:message-id:references:reply-to:
+ resent-cc:resent-date:resent-from:resent-message-id:resent-sender:resent-to:
+ sender:subject:to:feedback-id;
+ bh=YWwtUWO71wLanrhZYHfqg3kuKhguMd+DLAWrBD9/PgI=;
+ b=URIJHUNAIT99I0KPvG+ve6k/V2txcxXHMVUOqzHJWC4mNEx6+ZZyWZTDhQ+EuyyzAjkStc5C3Eo
+ 7FHfsuEasEhXBOMKasO3yYdjWfPe0s7AHhtid+dnNXvr8fyoNyTJpSMJ9V/+29T7JLhZ86m/2KHNB
+ 2ga8hTKFEiH2QvxWi9w=
+Date: Mon, 07 Dec 2020 16:36:00 -0500
+Subject: Re: Samba + exFAT : how to avoid pre-allocating when copying big
+ files?
+Message-Id: <9cda5594-7a12-45a8-a8c9-49daa308f3a6@mtasv.net>
+To: ronnie sahlberg <ronniesahlberg@gmail.com>
+X-Gm-Message-State: AOAM5313z5x18HNeyuNnUx/62UpQv5H5kZSl6sK3X/9kR5U3g5NZxNzLumlWCvAkIqwziBe0NV83haTo7mIE0q89GE/BcGg=
+X-Google-Smtp-Source: ABdhPJwTSig79w8v8XftA0x7jUfGZ4RllsIikKNLsMzwRdrzpKKgU7v25xTh0n3I18DNw2j//S3P+P6hwibTdTTj588=
+X-Received: by 2002:a17:90b:350a:: with SMTP id
+ ls10mr777619pjb.192.1607376959542; Mon, 07 Dec 2020 13:35:59 -0800 (PST)
+References: <81fae2f8-970f-44a4-bb46-fb5237715070@mtasv.net>
+ <20201207180509.GD1730617@jeremy-acer>
+ <d056cc18-3ef5-4cdd-b25d-bbf86d041787@mtasv.net>
+ <CAN05THQvhxFS57zggYz_67A6pzdtztZvuy2rhTRjg5mvj-sTMQ@mail.gmail.com>
+In-Reply-To: <CAN05THQvhxFS57zggYz_67A6pzdtztZvuy2rhTRjg5mvj-sTMQ@mail.gmail.com>
+X-Gmail-Original-Message-ID: <CA+BV=GWWmJLDyQ3hXXYvySVDdpreMX1mFAxBoKt5BP0GC0-tyQ@mail.gmail.com>
+Feedback-ID: s5244416-_:s5244416:a182037:postmark
+X-Complaints-To: abuse@postmarkapp.com
+X-PM-Message-Id: 9cda5594-7a12-45a8-a8c9-49daa308f3a6
+X-PM-RCPT: |bTB8MTgyMDM3fDUyNDQ0MTZ8c2FtYmEtdGVjaG5pY2FsQGxpc3RzLnNhbWJhLm9yZw==|
+X-PM-Message-Options: v1;
+ 9Hcc_PIAriBnYBOfaIwCcyIPcaJJ4QcTBG0Vjf0upsLgpqRZa9tU6RIlMq6j-Xrc
 MIME-Version: 1.0
-References: <20201027204226.26906-1-pboris@amazon.com>
- <CAHhKpQ7v_nPwBx2czk7rVXK3ZrmsZrAkcxDFOgq0ABTOVc7iSA@mail.gmail.com>
- <CANT5p=q2YvkEOEa4bS=-nbPOc9Xwa=4gnc09csCcszMmMjYSPg@mail.gmail.com>
- <CAHhKpQ7PwgDysS3nUAA0ALLdMZqnzG6q6wL1tmn3aqOPwZbyyg@mail.gmail.com>
- <CAKywueSZ5bfOxXVH6dkpjDjDawo-JdHjoSdQBYqrhrg7Zoi=Bw@mail.gmail.com>
-In-Reply-To: <CAKywueSZ5bfOxXVH6dkpjDjDawo-JdHjoSdQBYqrhrg7Zoi=Bw@mail.gmail.com>
-Date: Mon, 7 Dec 2020 16:23:41 -0500
-Message-ID: <CAHhKpQ7GJK8HMf31Lri8z4khqJtu=nm79Q_A5yUS_5iDFmVj7w@mail.gmail.com>
-Subject: Re: [PATCH] Add support for getting and setting SACLs
-To: Pavel Shilovsky <piastryyy@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,63 +87,72 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Boris Protopopov via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Boris Protopopov <boris.v.protopopov@gmail.com>
-Cc: Shyam Prasad N <nspmangalore@gmail.com>,
- linux-cifs <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Steve French <sfrench@samba.org>,
- Boris Protopopov <pboris@amazon.com>
+From: Joseph via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Joseph <j@gget.it>
+Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-HI, Pavel,
+Thanks Ronnie for your answer.
 
-yes, thanks for the pointer, will include in the future.
+I've used NTFS before (ntfs-3g which uses FUSE), but it's slow on
+RaspberryPi (20-30 MB/s) whereas exfat can reach 70 MB/s.
+One solution would be to wait for the new ParagonSoftware open-source =
+NTFS3
+driver which will (or not?) be merged in Linux kernel.
+But I think it won't be easily available on RaspberryPi soon.
 
-Boris.
+So I decided to try with kernel's exfat (non-fuse) which is very fast =
+...
+except this problem.
 
-On Mon, Dec 7, 2020 at 2:05 PM Pavel Shilovsky <piastryyy@gmail.com> wrote:
->
-> Hi Boris,
->
-> Are you talking about this patch "[PATCH] Extend cifs acl utilities to
-> handle SACLs"?
->
-> Just for the future, I am trying to monitor the samba-dev mailing list
-> but if you would like to get the fastest response to your patches then
-> please include me directly or at least the linux-cifs mailing list.
->
-> I stage pending patches in the "next" branch on my github tree, so,
-> will include the one above.
->
-> https://github.com/piastry/cifs-utils/commits/next
->
-> --
-> Best regards,
-> Pavel Shilovsky
->
-> =D0=BF=D0=BD, 7 =D0=B4=D0=B5=D0=BA. 2020 =D0=B3. =D0=B2 07:28, Boris Prot=
-opopov <boris.v.protopopov@gmail.com>:
-> >
-> > Hello, Shyam,
-> >
-> > sorry for the delayed reply and thanks for looking at this patch. Yes,
-> > the testing was done using the extended versions of
-> > getcifsacl/setcifsacl (added setting owner and SACL support), the
-> > patch for that posted recently via samba-technical (message ID
-> > <20201120214918.12517-1-pboris@amazon.com>). I have tested
-> > setting/getting the owner, DACL, and SACL, for all the DACL/SACL flags
-> > (-a, -D, -M, -S), SACL type SYSTEM_AUDIT. This testing was done
-> > against 5.10.0-rc1 and 4.14.203 (the latter required porting the
-> > user-space patch). I believe this testing has fully exercised the code
-> > changes in question.
-> >
-> > I will look at contributing to the fsxtesting-cifs code, but I think
-> > the setcifsacl/getcifsact patch that enables easy access to the
-> > descriptor components is a pre-requisite for such contributions.
-> >
-> > Thanks!
-> >
-> >
+> Try adding a f.truncate(...) to set the file size after you open the
+> file but before you f.seek()
 
+You're right Ronnie: a f.truncate(1000*1000*1000) here takes 16 second=
+s,
+i.e. writing 1 GB of null bytes at 60MB/s, that sounds correct.
+
+--
+
+This is confirmed by Jeremy's analysis (via email), here is a summary
+obtained after looking at my logs where it gets stuck for 30+ seconds:
+
+>  smbd_do_setfilepathinfo: test/a.rar (fnum 1649140843) info_level=3D=
+1020
+totdata=3D8
+
+-> that's an SMB2 SMB_FILE_END_OF_FILE_INFORMATION call.
+-> This is going into (ultimately) vfs_set_filelen().
+->  SMB_VFS_FTRUNCATE() call to set the length.
+-> static int vfswrap_ftruncate(vfs_handle_struct *handle, files_struc=
+t
+*fsp, off_t len)
+probably here?
+https://github.com/avati/samba/blob/master/source3/modules/vfs_default=
+.c#L1813
+
+So two possibilities:
+
+* is there a way to set an EOF on a file descriptor on exFAT that *doe=
+sn't*
+do the allocation? This would require a modification in the exfat driv=
+er?
+
+* would it be possible to have a mode in Samba in which it never
+"truncates"?
+
+    [global]
+    no_truncate =3D yes
+
+The file size would grow when new data is appended when a file is copi=
+ed
+(like my code in Python before, with only f.write(...)), but no trunca=
+te at
+all.
+
+Do you think this would be possible?
+
+Here is a linked report on the Github page of exfat-fuse:
+https://github.com/relan/exfat/issues/45
