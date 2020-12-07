@@ -2,50 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3E5E2D1C56
-	for <lists+samba-technical@lfdr.de>; Mon,  7 Dec 2020 22:52:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7683A2D1D8E
+	for <lists+samba-technical@lfdr.de>; Mon,  7 Dec 2020 23:43:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=T8IncArZJ4BaNMpr9JnvU2CA4i6gZY2nqlF7uqgLWxc=; b=XDOf7A4POx9LaNoMGKqW9etEC/
-	WU7gOBId/YOm8MJr9UjDVvqOQw7NbcT9JKwAMCMLQAkRwndMKug5CCPV0lBuF2oFIECfGNE7rqu5H
-	0CY7BqRO/qfYBxpjqvX76NnXE9f+cj24LX8wqySl+eO0BYo3oBmT8VOjMOojUUYYZJDRPyxb7ce7l
-	2KhBd0SBnXm8YNw0PdTH0mjyQbXl0zffe6ARpw6ymp0BMjitII1JKO+0vnOe29ZL3oa59xg8sx2Fo
-	o3Mdu3Pn2/7unkU0akR/+E7Fc9bHjtXGVm9xGb24xhNz5s64/GipQHoJP+ZCby9MR6duEG1bEhpW6
-	nIB7o3Mw==;
-Received: from ip6-localhost ([::1]:58018 helo=hr1.samba.org) 
+	bh=SpTOAVmMYaU/dBsmIbLOPa+PG0oG2pv8Iie/fxmRSBo=; b=eSDrg1haWFpE8WNyTthHPNqrcM
+	HGunKB6S8S2qcAj6t3Dww3kLvDTZtToMLOkebMBTZfSm5Ep5qrbxDnleYsDGTC06H7tHEgvOXXnE+
+	BUgPtKmfiwtqwyw62alPkY37sWqYix4L7TiS9wIDHvEJPxsuhp6hvbsFPSN5iL60z54iaDx2arj5u
+	QEyI7fGb6/oj2t5AljQnANSuZbyVK5+tjgFfAJngAI7uMbQYbGLjvnJt1uP1rKm6hx6A4iQ6G2bEX
+	71w9ugb/JN0KdaiJN2Ounpk2XfroBdlpzI/DChJO+nWsJK+gXg/IGLspxFyQclZZrn8h1SmB5dYYC
+	QNvKRiVw==;
+Received: from ip6-localhost ([::1]:58960 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kmOQs-0007sG-Je; Mon, 07 Dec 2020 21:52:34 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36528) 
+	id 1kmPDH-00083F-Ms; Mon, 07 Dec 2020 22:42:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55248) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kmOQn-0007s9-B8
- for samba-technical@lists.samba.org; Mon, 07 Dec 2020 21:52:31 +0000
+ (Exim) id 1kmPDB-000838-GO
+ for samba-technical@lists.samba.org; Mon, 07 Dec 2020 22:42:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=T8IncArZJ4BaNMpr9JnvU2CA4i6gZY2nqlF7uqgLWxc=; b=TrlEoerfjfqLVNA7H1iY9UmupE
- 3H2CuzwGSl5J5oIDkPKebAGCvLF4EakoSL28thyW3mqJMvnpcTFdof5xclmpvpBg7haLoid8omMXs
- to0F/muGTfp0jIcB4OL29OVtEAEvGoGQ15OiJNYvOOgQlTIX0XxJmYhyPDzluZAJiiIX25WSVWgih
- ecY/oxma4VApBgT4WwyHe5mjlEch0U1R4v2SD7Mi0vY+vKt/9kMKl/yZMefkxBshWrpd/+Vh00fkD
- rPsCXpiOO6smo/UWbmJIXpvNnHL4xmzIlK5fRLfyzIfYyjNK2UJOsYl5WMFLoJg8XRmJmSJ8DUpH4
- G4pH24yuWh4u6uwCJesV9NKtSNwyAn6FVucCKEtc0BbrB/qKphkvCid+LaOqrJFAZwlObVFq+gmzA
- VOydZuI+pH1Bo1AOAp7d0rB19pfcUQP4a6u46EmXItxvR0FECo+hR4o81gs7nmk6vHThb9GM9sCgy
- 7yVliNP0AvvVL6WyIMNQwYDj;
+ bh=SpTOAVmMYaU/dBsmIbLOPa+PG0oG2pv8Iie/fxmRSBo=; b=mEE+sHc4Rdf34Ld44PJ4kKkmnP
+ eZdVNjJ7+KvApnnjHXgX5sGi9XoFwgQ+J/hanYhr+R0GlcHmrlmd7cHet+0ykiLft82TLZE2wivL1
+ av2auPN5KEEuaWqxjYLon1cYz14gJrNBJRsG/i+72OhVfWkBn2WvV9Mnv82iNR0Dbjm86qyzMbzqY
+ ho6bbIav3MbHZv8Ut3DUevySY1JdOYYufc3p1EeGIUvte6sGaAxeEv0t1qYzxbhIRZgTHPrLcBEBK
+ LpzXml/o1i/Yz8K2Dmgqg1MFg0cDzdVdp3+s2biicQPJV9ojoGc10hlKnq9NpWLJhuabfswgxR76C
+ IFt3/ytC6ExEjnWKe6JzkfCN6BrLDGymH1HsEW7u5Q+ESF87uJD12HlUhQGewahddpAlXS43RPtXR
+ 9PetL8+A1yksTsNTgZfKf4SVEEV3Iit15wHTOYQrQkRZr1AnFpPa54ZJfzMdK3R4Gt9j+bRReW2jI
+ 7uIw+/Sijmilk9D8sAwYhqUs;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kmOQm-0001j3-Cr; Mon, 07 Dec 2020 21:52:28 +0000
-Date: Mon, 7 Dec 2020 13:52:25 -0800
-To: Joseph <j@gget.it>
-Subject: Re: Samba + exFAT : how to avoid pre-allocating when copying big
- files?
-Message-ID: <20201207215225.GG1800173@jeremy-acer>
-References: <81fae2f8-970f-44a4-bb46-fb5237715070@mtasv.net>
- <20201207180509.GD1730617@jeremy-acer>
- <d056cc18-3ef5-4cdd-b25d-bbf86d041787@mtasv.net>
- <CAN05THQvhxFS57zggYz_67A6pzdtztZvuy2rhTRjg5mvj-sTMQ@mail.gmail.com>
- <7870a7a7-72d1-4efe-b4f9-0e07aa670452@mtasv.net>
+ (Exim) id 1kmPD6-00026g-GU; Mon, 07 Dec 2020 22:42:24 +0000
+Date: Mon, 7 Dec 2020 14:42:22 -0800
+To: Andrew Bartlett <abartlet@samba.org>
+Subject: Re: 20 years doing Samba
+Message-ID: <20201207224222.GA1856514@jeremy-acer>
+References: <334b390ea3c64631b9da07c10a6f636aa3079f54.camel@samba.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-In-Reply-To: <7870a7a7-72d1-4efe-b4f9-0e07aa670452@mtasv.net>
+In-Reply-To: <334b390ea3c64631b9da07c10a6f636aa3079f54.camel@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,33 +56,30 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Jeremy Allison <jra@samba.org>
-Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Dec 07, 2020 at 04:36:00PM -0500, Joseph wrote:
+On Mon, Dec 07, 2020 at 12:06:14PM +1300, Andrew Bartlett via samba-technical wrote:
+>2020 has been a strange year for many, but one additional thing that
+>has crept up on me is that I've now been around the Samba project for
+>more than 20 years!
 >
->So two possibilities:
+>I wrote some thoughts here:
 >
->* is there a way to set an EOF on a file descriptor on exFAT that *doesn't*
->do the allocation? This would require a modification in the exfat driver?
+>https://www.catalyst.net.nz/blog/andrew-bartlett-20-years-samba
 >
->* would it be possible to have a mode in Samba in which it never
->"truncates"?
+>The earliest patch I could find on the list is this one:
+>https://lists.samba.org/archive/samba-technical/2000-September/009729.html
 >
->    [global]
->    no_truncate = yes
+>It certainly has been an amazing journey!
 >
->The file size would grow when new data is appended when a file is copied
->(like my code in Python before, with only f.write(...)), but no truncate at
->all.
->
->Do you think this would be possible?
+>Thanks!
 
-No. This will lead to file corruption. You could write a new VFS module
-(call if vfs_exfat if you want :-) that lies to upper layers about
-filesize an caches ftruncate, but this would have to catch every
-stat by name as well as fstat in order to maintain the fiction.
+Thanks for that Andrew ! Brings back many memories :-).
 
-Not a trivial bit of coding, that.
+I hope the next 20+ years of Samba are just as productive
+and fun !
+
+Jeremy.
 
