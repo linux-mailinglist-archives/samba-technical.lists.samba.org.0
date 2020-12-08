@@ -2,43 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7265C2D2DB5
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Dec 2020 16:02:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 42A1B2D340B
+	for <lists+samba-technical@lfdr.de>; Tue,  8 Dec 2020 21:43:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=KamtOIAt8DdH9wwZu69fQiBr0DdRHOnJSPLnhyW3ZDE=; b=lK3z+GSB5/gFKDzuGEtRCAI3G0
-	Ra9iUjwLUxiofarR/w6HkST40AMKT91JqTDafiOjUxjP0LrDuhazzW+kgTGviHB2nI4v8SVaj1A0o
-	sxZe2lqbwQb+0Q+GVjVAzgpYb7ey0+bybqIsTehJQgWH/p3HI084TK+h+UWjpaqJkrN13RcbiOym7
-	e4bC8nmOazbyCGOIOLdq7FjpfujzwqdyegCGwW20ga1MCxs1HdLA+zNVioDOWEh02pa4wa7AP8ZPF
-	ZOr9iyIFSVz3sB7l1NRC39TWhh112jhGn68RHOQuq+RKgaIhD0BW2stcfMgswsVvETsY2CLT+EoAx
-	/+x82OSA==;
-Received: from ip6-localhost ([::1]:33940 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=zPEezVzK5/kLNT18lfW/dfChG0nQyJZzaqQoMAH4Ojw=; b=dipVp0xWByIAo48eeDVimJRTWW
+	gqeehIaV4H0zHehGCoQRXPxMLPUS4DDiTVBYG03vixe8Rt0o3agwia4b3GF81/fCCVbg4rXYcBppu
+	25ORZWeCsRHCPFlRN/9CVJXHdbs4k/LkedQkxvcp/qeqeSm6nx+qtFP//vBISXA0ndYiPVJ9AIkg4
+	kH3ESUmMW2MhpNymnhKY/c7ZDzd0BxF/Y0Ka09FjX2oaOuhGJPZhEP7nzCp6UAhCUvfOvr0ZPdYnA
+	U1WA4JRvWL8QyJ6jYZr95Z0M8CVcHlRte5qzRh34HZ/6NWxAaSoGmpim0z4ZHfWz+O4n1hc/aY9y2
+	qDHvpIWg==;
+Received: from ip6-localhost ([::1]:35014 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kmeU5-000Cu4-3X; Tue, 08 Dec 2020 15:00:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59044) 
+	id 1kmjp4-000Dai-Qb; Tue, 08 Dec 2020 20:42:58 +0000
+Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:42457) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kmeTv-000Ctt-3r
- for samba-technical@lists.samba.org; Tue, 08 Dec 2020 15:00:54 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=KamtOIAt8DdH9wwZu69fQiBr0DdRHOnJSPLnhyW3ZDE=; b=eTiMGj3JhuKRzLAv5syFyxs9NG
- uMYZWugUNrGkwgU93/TOhqPJBa0Fx4GIkrGVr79s3tlju16/m8yCtg/Ka1j2SMBobbVdUVpj8lNaQ
- 3LA8M3CQo0WJe/AFPIbHa2Kq8mZQuBBW/fCPtxbhjNlT/2TKpCtgmgrgKlFQ7yXXxUXEeaiWIgNUQ
- 2V7QSHFsBx2uMivF9i97POEVjpjeKw4itq0QiTLuOaRTKF1tkonkilNZkMJd+JorTFJLiY7sl/6gS
- 2q6ywXJTIevlJoyGxqKeHqB/h7FYezfiHsn/2cJj8xcF673jItc/IFAmTFPYWbb1WV25xVngGnztG
- xIaP/Chy4aFm+olLHcWZUygrUrht+GskzAtMsE6qmcK/lN5QEjG5d41Gl2Mt7DGeKxwKidiePKTeo
- wPpEiE5ZnJn8TxKH0KmAVHm5jhU5gz6JXzziFoufZmpY7o4LBl8K9znmxQyoTLgwHv4Ahm32SzIDq
- uJ73BpDgUTq/0VbCFcnU3JUd;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kmeTX-00046H-6C; Tue, 08 Dec 2020 15:00:23 +0000
-Date: Tue, 8 Dec 2020 16:00:22 +0100
-To: Samba Technical <samba-technical@lists.samba.org>
-Subject: Fw: FOSDEM CfP Software Defined Storage devroom
-Message-ID: <20201208160022.72fb3d69@samba.org>
+ (Exim) id 1kmjp0-000Daa-95
+ for samba-technical@lists.samba.org; Tue, 08 Dec 2020 20:42:57 +0000
+Received: by mail-lf1-x143.google.com with SMTP id u18so54288lfd.9
+ for <samba-technical@lists.samba.org>; Tue, 08 Dec 2020 12:42:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=zPEezVzK5/kLNT18lfW/dfChG0nQyJZzaqQoMAH4Ojw=;
+ b=QQB6xX7ZMHg5p+Sz6Bt9MksNDS64p3I6yufe4wI9yXPB/gVrO3fXujcKeeSB9vuEWp
+ 3a23umzaJgQ7JDO9BB/hOohKVSl1sHLJFD7X2ep22r/iO4cjIag+ZzLnqcKcoJLlYM7P
+ PWQmJZRCIv4T4OkshRETA/Bfm6Wn9tRDmPwuSGgKVgxWzTb3G6hXpIkqKxAq/7LInnqj
+ 8FrUOY274w9bytUgQZYAXOIMIS8YfUivRINu6yrbLQ+czfZb83CQZsgLu6RP/C3o7fg4
+ 0Tp8z19OXY/ABUelr4Nx50muS+9ok8KuARMWdmXDpe5/TzKYoF7jsgS7p8XPBEGIfidC
+ b2pA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=zPEezVzK5/kLNT18lfW/dfChG0nQyJZzaqQoMAH4Ojw=;
+ b=sMiF/b/b4LpAii3MhJJZ+uiphf3TtHWpglbTia7DGbWNE+Mom30mGyM3vKBvI3Q5dE
+ 6KUH3yq+TSrXY2TT/evqnAsWG/YGBaaT2uyGU8Rrk4QDhfNSnasawTN0wyb/Z5RQc+rV
+ dHthcUCwpkvRTDEQQ/ppRHkUHOh08JGRi33r8sf38HbaNz+ky8Hi2HZEZZbDvftTno5J
+ RfYwYJyvliyu/VJggYGeaGO9WPal/SK+IBAetrAbAR+sgip/qVINw3hxwPahZJXfNISJ
+ d7yygDtmdKMvKYrZpSJj6ADnJY4g+r9CU0LR0beDXFHF4wN24ytt4byXcRwQWqQjxIIQ
+ +20Q==
+X-Gm-Message-State: AOAM530QUHnb5H0zAAZZ/JlCPiVZ0gUqzHs6jP8+MyOdP1U8dGikCoJ7
+ 0VCeNp3hzn+9LiWeEjG6DXqSaJoZlclit6pU6tQ=
+X-Google-Smtp-Source: ABdhPJxV3qjQHB6wUEKu9rWrbuLtX9hIHxwZYN45a2xlKjN3Iv09O/zEhJ+iIFYHbTAk33M7azJfMCbvOBT9Bh7Cz4k=
+X-Received: by 2002:a19:950:: with SMTP id 77mr6586265lfj.133.1607460172142;
+ Tue, 08 Dec 2020 12:42:52 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <cover.1605896059.git.gustavoars@kernel.org>
+ <8a35ff7132f95e24f6d9501e1bec644854fc5078.1605896059.git.gustavoars@kernel.org>
+In-Reply-To: <8a35ff7132f95e24f6d9501e1bec644854fc5078.1605896059.git.gustavoars@kernel.org>
+Date: Tue, 8 Dec 2020 14:42:40 -0600
+Message-ID: <CAH2r5mtS-A+0N1byiXT3GYHEAkvyZByBdr-G_+ZDGhcfs40qrQ@mail.gmail.com>
+Subject: Re: [PATCH 003/141] cifs: Fix fall-through warnings for Clang
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,117 +68,77 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Disseldorp <ddiss@samba.org>
-Cc: Jan Fajerski <jfajerski@suse.com>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>, linux-hardening@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi all,
+Merged into cifs-2.6.git for-next
 
-FOSDEM is on again next year. Like every year, the Software Defined
-Storage devroom welcomes Samba talk proposals. Please see below for
-details...
+Let me know if you see any other cleanup/misc cifs.ko patches that may
+have gotten missed ...
+
+On Fri, Nov 20, 2020 at 12:25 PM Gustavo A. R. Silva
+<gustavoars@kernel.org> wrote:
+>
+> In preparation to enable -Wimplicit-fallthrough for Clang, fix multiple
+> warnings by explicitly adding multiple break/goto statements instead of
+> just letting the code fall through to the next case.
+>
+> Link: https://github.com/KSPP/linux/issues/115
+> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+> ---
+>  fs/cifs/inode.c     | 1 +
+>  fs/cifs/sess.c      | 1 +
+>  fs/cifs/smbdirect.c | 1 +
+>  3 files changed, 3 insertions(+)
+>
+> diff --git a/fs/cifs/inode.c b/fs/cifs/inode.c
+> index 9ee5f304592f..ac01f9684b39 100644
+> --- a/fs/cifs/inode.c
+> +++ b/fs/cifs/inode.c
+> @@ -771,6 +771,7 @@ cifs_get_file_info(struct file *filp)
+>                  */
+>                 rc = 0;
+>                 CIFS_I(inode)->time = 0;
+> +               goto cgfi_exit;
+>         default:
+>                 goto cgfi_exit;
+>         }
+> diff --git a/fs/cifs/sess.c b/fs/cifs/sess.c
+> index de564368a887..6c2c42f8d893 100644
+> --- a/fs/cifs/sess.c
+> +++ b/fs/cifs/sess.c
+> @@ -812,6 +812,7 @@ cifs_select_sectype(struct TCP_Server_Info *server, enum securityEnum requested)
+>                                 return NTLMv2;
+>                         if (global_secflags & CIFSSEC_MAY_NTLM)
+>                                 return NTLM;
+> +                       break;
+>                 default:
+>                         break;
+>                 }
+> diff --git a/fs/cifs/smbdirect.c b/fs/cifs/smbdirect.c
+> index b029ed31ef91..10dfe5006792 100644
+> --- a/fs/cifs/smbdirect.c
+> +++ b/fs/cifs/smbdirect.c
+> @@ -246,6 +246,7 @@ smbd_qp_async_error_upcall(struct ib_event *event, void *context)
+>         case IB_EVENT_CQ_ERR:
+>         case IB_EVENT_QP_FATAL:
+>                 smbd_disconnect_rdma_connection(info);
+> +               break;
+>
+>         default:
+>                 break;
+> --
+> 2.27.0
+>
 
 
-Begin forwarded message:
+-- 
+Thanks,
 
-Date: Tue, 8 Dec 2020 09:36:38 +0100
-From: Jan Fajerski <jfajerski@suse.com>
-To: dev@ceph.io
-Subject: CfP Software Defined Storage devroom
-
-
-FOSDEM is a free software event that offers open source communities a place to 
-meet, share ideas and collaborate.  It is well known for being highly 
-developer-oriented and in the past brought together 8000+ participants from all 
-over the world.  It's home is in the city of Brussels (Belgium).
-
-FOSDEM 2021 will take place as an online event during the weekend of February 
-6./7. 2021. More details about the event can be found at http://fosdem.org/
-
-** Call For Participation
-
-The Software Defined Storage devroom will go into it's fifth round for talks 
-around Open Source Software Defined Storage projects, management tools
-and real world deployments.
-
-Presentation topics could include but are not limited too:
-
-- Your work on a SDS project like Ceph, Gluster, OpenEBS, CORTX or Longhorn
-
-- Your work on or with SDS related projects like OpenStack SWIFT or Container 
-   Storage Interface
-
-- Management tools for SDS deployments
-
-- Monitoring tools for SDS clusters
-
-** Important dates:
-
-- Dec 27th 2020:  submission deadline for talk proposals
-- Dec 31st 2020:  announcement of the final schedule
-- Feb  6th 2021:  Software Defined Storage dev room
-
-Talk proposals will be reviewed by a steering committee:
-- Niels de Vos (OpenShift Container Storage Developer - Red Hat)
-- Jan Fajerski (Ceph Developer - SUSE)
-- TBD
-
-Use the FOSDEM 'pentabarf' tool to submit your proposal:
-https://penta.fosdem.org/submission/FOSDEM21
-
-- If necessary, create a Pentabarf account and activate it.
-Please reuse your account from previous years if you have
-already created it.
-https://penta.fosdem.org/user/new_account/FOSDEM21
-
-- In the "Person" section, provide First name, Last name
-(in the "General" tab), Email (in the "Contact" tab)
-and Bio ("Abstract" field in the "Description" tab).
-
-- Submit a proposal by clicking on "Create event".
-
-- If you plan to register your proposal in several tracks to increase your chances, 
-don't! Register your talk once, in the most accurate track.
-
-- Presentations have to be pre-recorded before the event and will be streamed on 
-   the event weekend.
-
-- Important! Select the "Software Defined Storage devroom" track
-(on the "General" tab).
-
-- Provide the title of your talk ("Event title" in the "General" tab).
-
-- Provide a description of the subject of the talk and the
-intended audience (in the "Abstract" field of the "Description" tab)
-
-- Provide a rough outline of the talk or goals of the session (a short
-list of bullet points covering topics that will be discussed) in the
-"Full description" field in the "Description" tab
-
-- Provide an expected length of your talk in the "Duration" field.
-   We suggest a length between 15 and 45 minutes.
-
-** For accepted talks
-
-Once your proposal is accepted we will assign you a volunteer deputy who will 
-help you to produce the talk recording.  The volunteer will also try to ensure 
-the recording is of good quality, help with uploading it to the system, 
-broadcasting it during the event and moderate the Q&A session after the 
-broadcast.  Please note that as a presenter you're expected to be available 
-online during and especially after the broadcast of you talk.  The schedule will 
-be available under 
-https://fosdem.org/2021/schedule/track/software_defined_storage/
-
-Hope to hear from you soon! And please forward this announcement.
-
-If you have any further questions, please write to the mailing list at
-storage-devroom@lists.fosdem.org and we will try to answer as soon as
-possible.
-
-Thanks!
-_______________________________________________
-Dev mailing list -- dev@ceph.io
-To unsubscribe send an email to dev-leave@ceph.io
+Steve
 
