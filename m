@@ -2,50 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB55D2D21F6
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Dec 2020 05:22:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 31CDF2D2A92
+	for <lists+samba-technical@lfdr.de>; Tue,  8 Dec 2020 13:19:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=wKyEymWTPiNcGPpxEl3TQQ+IAGnap6ssTTsk24K+CCM=; b=hzMjUu1I299B6EGj9rWDXo5fYL
-	8djUkS7XD9E9Edfc8HXC+U+2ict86TwObPz/Xoimde4PC62+7Zkc8rhkiWbhbb5o0Z/ydx4vREJyp
-	RVf0t9fLjLrY4QUIjvEMEVa0XaQfxkA0FWCz9+3wp/ae4b4ncSyYDcxzt99zuOqqBRNVDDlbUNXqC
-	gXZYPooiS0G3usGunMGx3hnWQVRzkbI4/XwVWracfeNwKtrsQOiWpVQCcvoqTtIGfFPMgeGQiSnXd
-	bQvforq//U5zk+yC7133YabwAKq38csRlwJNNqHRx7eHxMPkNdfw32qGBqBESg6kmd496gDEJT6iP
-	ZSZ+ovYg==;
-Received: from ip6-localhost ([::1]:20370 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=dPuvNjRKiJJn0HBvpEfkbdYHLSguPT4lJjcpxmS13wA=; b=5fOUwmPMrsEs73+VHhCAV8HQ+Y
+	umtI8X+RMAQjhEIBy1Oe83l11m2M7UFBpfPdomrSxmXMrnnY6efyr98Dx2wXtd16gRnbE7oRkL3a3
+	k90gX4YqNSjmqV/o7Om71Bv0TX3ERdyS0sT3HrUr3ahBCReKBiXthpbZjYJKv3vnssa0sSGwi8cZ6
+	vFpVuvApQ36L7ADQT3nZx5ejlAVodC+SasNkPQc2Sr8bQBheUNAHwD3LKvEmPKl7mOO5O5ZJ4dYUj
+	DPexhSatkaiIVUmC1vy4sRbodgWisDg2fsDWOgMpa++55nJ9+4r8uRX6xdQOeKdg8AhOcSl1zfFz1
+	b6esE1yw==;
+Received: from ip6-localhost ([::1]:31736 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kmUVm-0009kL-VW; Tue, 08 Dec 2020 04:22:03 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56408) 
+	id 1kmbwm-000CEe-0L; Tue, 08 Dec 2020 12:18:24 +0000
+Received: from ozlabs.org ([203.11.71.1]:36045) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kmUVb-0009kD-MJ
- for samba-technical@lists.samba.org; Tue, 08 Dec 2020 04:22:00 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=wKyEymWTPiNcGPpxEl3TQQ+IAGnap6ssTTsk24K+CCM=; b=CTLL6gW504VSLdFjZXs9YF8AEx
- RdsSzW3kmk7ut3ikduibgxtRvlNE75z2rh9AGPWW+tLNz39pIPwdtjuKNNmu2Lqg56X4UYexXFD07
- iC4t0Q//7KCAE5aYfhKueZVbE2BwTDLCdlP/g6SSNuLXZKflmCSyXO3n70zBPD6i84K/1BilfdPZy
- tIR417mexSjxZQIWvmqzJ1uqkqR3Mlua9eXV7OccgyMKkLaJW1+SSA9t4GL8ROJAdf8f+O0U+aivK
- RCoGgfi4xBiQWQwhMKqXyj6f1uHpt4JiVl/jJTqsS+WWqTUrnTKdabr9zwkQn+vL7WAEQuuU8+fqZ
- ua76dPi/i7ILLDjpAuk7i97DarE1r+WddEkrCyLWXG8YWdZlFLgYVCaeVdxKUgdi38vV+CPZ6dEdM
- c5J9ftwSK0RtfjpUjkbf7UXkeCkrsz71VYtkke46Ovz6Ck2UHKP5O3F1ZLCny1pUwzVi0mvulxlm5
- /mk+qRmp/xTDfo/dlisdN26/;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kmUVL-0004Ph-Et; Tue, 08 Dec 2020 04:21:35 +0000
-Date: Mon, 7 Dec 2020 20:21:32 -0800
-To: Namjae Jeon <namjae.jeon@samsung.com>
-Subject: Re: Samba + exFAT : how to avoid pre-allocating when copying big
- files?
-Message-ID: <20201208042132.GB1875689@jeremy-acer>
-References: <CGME20201208011550epcas1p26cebc8a4d2812fca862990739a059d43@epcas1p2.samsung.com>
- <007f01d6ccff$aad6f7f0$0084e7d0$@samsung.com>
- <008101d6cd05$0faa5500$2efeff00$@samsung.com>
- <CACyXjPwvNSfw9PLtUBxQQF4ysedpOE_TriTuX-JajRmFAHhQMQ@mail.gmail.com>
- <008201d6cd10$d5187910$7f496b30$@samsung.com>
+ (Exim) id 1kmbwg-000CEW-7U
+ for samba-technical@lists.samba.org; Tue, 08 Dec 2020 12:18:21 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4Cqzhs3b9Zz9sWQ;
+ Tue,  8 Dec 2020 23:17:49 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=202004;
+ t=1607429869; bh=pc5M8ewbAmqQWcKJPrUx46tdOIYT1VsqoOUa5CFRqyk=;
+ h=Date:From:To:Subject:From;
+ b=R11GWegHxW0uDrVIXOoL90dpGbmYkKghYlz96nC87Hkuj5CqS4LQAOYRIvdQPiVDz
+ WxqLN2luAuStUf+gYPd2HsKRDm36Z/0WOmnLMwlIPR/QtCZ6TagT5CT2/lrkcMNIQ6
+ 3N/R9NiMRRBUoFv0KfWUw6PaR6TjjzyvNb6V1HY+J4pbN+bUWwoh152IqYIevFjmS/
+ /c75+M1sCkWmQckmAtFG1Ad6lj2Qbyj9nKzxFgmLpco8cJADdIw22pJxqXPpC5laOY
+ rxCnk0MpYMHPRXtefos6T0cChACVtqKpd8EvaQ7yIP3jFXjJKhXXsnsQW4xfBsecqh
+ zm7J4Kctke2wA==
+Date: Tue, 8 Dec 2020 23:17:46 +1100
+To: Samba Technical <samba-technical@lists.samba.org>
+Subject: Samba testing on CentOS 8
+Message-ID: <20201208231746.3c15f5b0@martins.ozlabs.org>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <008201d6cd10$d5187910$7f496b30$@samsung.com>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,31 +55,102 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: 'Joseph' <j@gget.it>, 'samba-technical' <samba-technical@lists.samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Dec 08, 2020 at 12:18:43PM +0900, Namjae Jeon via samba-technical wrote:
->I didn't want to remove ftruncate before writing in samba. I mean that there is
+We've been doing our CTDB and Samba testing using autocluster, based on
+the official CentOS-8.2 vagrant image.  This depends on using
+bootstrap/generated-dists/centos8/bootstrap.sh from the Samba source
+tree.
 
-Well the ftruncate call comes from the SetEndOfFile, not the write.
-We don't call ftruncate on write.
+Until recently this has worked just fine:
 
->an improvement if exfat fallocate is implemented. One misunderstanding is that
->the FileEndOfFileInformation request must change the size of the file.
++ yum -v repolist all
+...
+Repo-id            : PowerTools
+Repo-name          : CentOS-8 - PowerTools
+Repo-status        : enabled
+Repo-revision      : 8.2.2004
+Repo-distro-tags      : [cpe:/o:centos:centos:8]:  , 8, C, O, S, e, n, t
+Repo-updated       : Sat 31 Oct 2020 04:58:49 AEDT
+Repo-pkgs          : 2,010
+Repo-available-pkgs: 1,444
+Repo-size          : 1.0 G
+Repo-mirrors       : http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=PowerTools&infra=vag
+Repo-baseurl       : http://mirror.realcompute.io/centos/8.2.2004/PowerTools/x86_64/os/ (9 more)
+Repo-expire        : 172,800 second(s) (last: Thu 03 Dec 2020 22:30:57 AEDT)
+Repo-filename      : /etc/yum.repos.d/CentOS-PowerTools.repo
+...
+Repo-id            : Devel
+Repo-name          : CentOS-8 - Devel WARNING! FOR BUILDROOT USE ONLY!
+Repo-status        : disabled
+Repo-mirrors       : http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=Devel&infra=vag
+Repo-expire        : 172,800 second(s) (last: unknown)
+Repo-filename      : /etc/yum.repos.d/CentOS-Devel.repo
+...
++ yum config-manager --set-enabled PowerTools -y
++ yum config-manager --set-enabled Devel -y
++ yum update -y
+...
 
-Yes it must (unless it's setting EOF to the same value as current EOF of course).
-That's the purpose of the call.
+However, now:
 
->Because of that, We may not use keep size flags of fallocate(). BTW, Why do
->windows call FileEndOfFileInformation instead of FileAllocationInformation
->of smb2 setinfo before writing?
++ yum -v repolist all
+...
+Repo-id            : devel
+Repo-name          : CentOS Linux 8 - Devel WARNING! FOR BUILDROOT USE ONLY!
+Repo-status        : disabled
+Repo-mirrors       : http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=Devel&infra=vag
+Repo-expire        : 172,800 second(s) (last: unknown)
+Repo-filename      : /etc/yum.repos.d/CentOS-Linux-Devel.repo
+...
+Repo-id            : powertools
+Repo-name          : CentOS Linux 8 - PowerTools
+Repo-status        : disabled
+Repo-mirrors       : http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=PowerTools&infra=vag
+Repo-expire        : 172,800 second(s) (last: unknown)
+Repo-filename      : /etc/yum.repos.d/CentOS-Linux-PowerTools.repo
+Total packages: 14,251
++ yum config-manager --set-enabled PowerTools -y
+Error: No matching repo to modify: PowerTools.
 
-As Ronnie said,
+The whole thing falls in a heap because it appears that the Repo-id's
+are case-sensitive and that "PowerTools" and "Devel" have changed to
+lowercase in CentOS-8.3.
 
-FileEndOfFileInformation == ftruncate();
+I'm still using the CentOS-8.2 Vagrant image, so I'm a little confused
+about why the repos are now referring to 8.3 (not shown above for
+brevity, but definitely the case).  I'd certainly like to understand
+this... but I doubt that will solve the problem.  :-(
 
-FileAllocationInformation == fallocate(.., FALLOC_FL_KEEP_SIZE, offset, len)
+I'm wondering how we fix bootstrap/config.py to copy with this change.
+Does it have to be something horrible like the following patch?
+
+diff --git a/bootstrap/config.py b/bootstrap/config.py
+index 982ebae1cd1..8383aeb392d 100644
+--- a/bootstrap/config.py
++++ b/bootstrap/config.py
+@@ -235,8 +235,10 @@ yum install -y dnf-plugins-core
+ yum install -y epel-release
+ 
+ yum -v repolist all
+-yum config-manager --set-enabled PowerTools -y
+-yum config-manager --set-enabled Devel -y
++yum config-manager --set-enabled PowerTools -y || \
++    yum config-manager --set-enabled powertools -y
++yum config-manager --set-enabled Devel -y || \
++    yum config-manager --set-enabled devel -y
+ yum update -y
+ 
+ yum install -y \
+
+
+Or is there a better way?
+
+Thanks...
+
+peace & happiness,
+martin
 
