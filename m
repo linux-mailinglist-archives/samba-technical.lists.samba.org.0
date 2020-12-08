@@ -2,63 +2,83 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3FB542D1E0B
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Dec 2020 00:06:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E84752D2081
+	for <lists+samba-technical@lfdr.de>; Tue,  8 Dec 2020 03:12:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=APQnp6GEnaKBwif2rSK+EwoVChT1yncKa0mX3b1glC0=; b=BbbWHIgc1k1t25v3gmpLFEg6T2
-	3qsXwCFUG5ZKk6ZVYaeIDQleTZyo3qMi8CS+9mVjaiKu2FHMK5najGHN0dogD3C8EZLXxDkewgr9Q
-	wm0UbGj/ssvh1qIGDrYx3TnYR5nf5IaZY6tGeJqgjtFRd1vUGBcNYZFNRyDZLcy/E/mY1+fqHqvJ5
-	MLMrQ3V5XaNV6mZutGpPEVSomV0RAXDB5VGVVP0Yg8IQ4NTLFJAGN8CvZT/DFXiA2CXVsekUrjUpq
-	bBapPVUfrGBopBsDzNeRA/B9zmHhULFZ1guElfonrrk7qdTQ89+8bNc0gnQVjQ2AgswQnWZwDfQnk
-	ku0iU8dg==;
-Received: from ip6-localhost ([::1]:59692 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=tsW8EVtIfJEsVRay2ffReeyRIpwFCJkqFcVGHliTOCQ=; b=SqLqHFap0cm2CIn6JLIeKbuIDb
+	vbluaU9UyZBgXvhZ4xz0eDfnp/SKiIkys4SD5oBDTfWa0RIzvThpJe0wgGvsmeTErHEffdlY6S/yV
+	gzMPBDoo63KOtSIF0zDDTy6RZA4kNEy22K+wYc3tp+znRb7P6Kx9ne0cUZOdhsoQBUcaV3M9nKtXN
+	74gvenYsiZde7Q8Vl6vIljEkI53N9EWAXeM06m3R+LauQh1s/dKDe26H15S2QzHFXWrJAebQoVFe+
+	PUUGtDVXwqSdBw3ITyBI0z2oF7pkWRwjc1+rDygNLPs9+Pjaz3sxVZv0QuqA0DM9DkEPwSonxryBG
+	r6W0XMRQ==;
+Received: from ip6-localhost ([::1]:64994 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kmPaP-0008Al-SC; Mon, 07 Dec 2020 23:06:29 +0000
-Received: from mail-il1-x12f.google.com ([2607:f8b0:4864:20::12f]:36643) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kmPaK-0008Ae-Rg
- for samba-technical@lists.samba.org; Mon, 07 Dec 2020 23:06:27 +0000
-Received: by mail-il1-x12f.google.com with SMTP id j12so6682771ilk.3
- for <samba-technical@lists.samba.org>; Mon, 07 Dec 2020 15:06:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=APQnp6GEnaKBwif2rSK+EwoVChT1yncKa0mX3b1glC0=;
- b=Zy1LHhmUJzbJvM0xtAZJRGjViFlgmTAHC5HVtd40xq3bF+Lnq3ej7HpQOyAae0xbSg
- e1wpP6S2XRChU4GnmaRhibr5bKyiia3C+qh7uNH3hn2ndhgLhRtDfqIsx+pzubrP89pW
- 9YXFzBZ3gp2qclGXWIo9ggeu7FJkgPS7sYtpGOp+oJU//AKKLP/HUUGS+lxxGgRDjBVP
- xEN2BqwzFD7G4XAVv++n2aB4jZVu1/sczTRULmpWkXhUTcnHegFl7ngNnLqzL9aO3yll
- mtwJpSojBeElE12rVqSjGPFr9t7qlWLEzK5chp8P3gslPJzpb9sLckO/UBbPHR2mT4qU
- Hp+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=APQnp6GEnaKBwif2rSK+EwoVChT1yncKa0mX3b1glC0=;
- b=plDVNPZELBgssdQU2wUmLPrd0lWLlyuutNycpGYMq3xhsZsQeWi/shV+5diMDvDVZi
- 90q2AhHbZaa0eWK8BFLioFDLVv/4NTMyI/KTCvzC64K1Giy8NmIfe2AfqQku3iCeI5mr
- h13ORAUbsgADwW7BrNjUznMassW7CnXDWN25N+49Sas5EcyOG06SoRNyWVTmgzm8Zpi/
- CCfeMKcJFetgqeOf/o2+jAu3gVFIiMoNyMU1n0Yiu+XWKtAb17NtX6MJmCjvwO/mYFV+
- mHy1uBgjgEUaENXWLKDuVGMpBMtnAat8d/FZLiy8wOa5USqqBLMOEtRQzkuC2usuQ4sM
- WpQQ==
-X-Gm-Message-State: AOAM530/s0ZkL8T5ZISEW5R3w4EBRro2JT7qKn3eRSHwP8wsOHQT99c2
- 5njnFuAStnMgE1rf2Y39c0UWpgNgbp8LXs6OyAuMmo+j
-X-Google-Smtp-Source: ABdhPJy6FWXa5ZO+BE6Q9CHt8LuDPqlFXIe/HUay349hXWx6FKRDD8fBz/r9duYwjD6uCXE8UqqXWmJEXJ4z/Gb4/IY=
-X-Received: by 2002:a92:1a0d:: with SMTP id a13mr24384757ila.109.1607382382137; 
- Mon, 07 Dec 2020 15:06:22 -0800 (PST)
-MIME-Version: 1.0
-References: <81fae2f8-970f-44a4-bb46-fb5237715070@mtasv.net>
- <20201207180509.GD1730617@jeremy-acer>
- <d056cc18-3ef5-4cdd-b25d-bbf86d041787@mtasv.net>
- <CAN05THQvhxFS57zggYz_67A6pzdtztZvuy2rhTRjg5mvj-sTMQ@mail.gmail.com>
- <d01728c8-d346-4558-ab93-7eea164d60df@mtasv.net>
-In-Reply-To: <d01728c8-d346-4558-ab93-7eea164d60df@mtasv.net>
-Date: Tue, 8 Dec 2020 09:06:10 +1000
-Message-ID: <CAN05THTimtR6+1Mr5THoZkRiG6JcKFdfOJt0E88Uz7qb0F-2yQ@mail.gmail.com>
-Subject: Re: Samba + exFAT : how to avoid pre-allocating when copying big
+	id 1kmSTR-0009Da-Uw; Tue, 08 Dec 2020 02:11:30 +0000
+Received: from mailout3.samsung.com ([203.254.224.33]:19235) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kmSTJ-0009DR-GX
+ for samba-technical@lists.samba.org; Tue, 08 Dec 2020 02:11:27 +0000
+Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20201208015430epoutp03e9f2706d48f0c3f2e98d37e1e53342c6~Omu97ksTu1161811618epoutp03S
+ for <samba-technical@lists.samba.org>; Tue,  8 Dec 2020 01:54:30 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
+ 20201208015430epoutp03e9f2706d48f0c3f2e98d37e1e53342c6~Omu97ksTu1161811618epoutp03S
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1607392470;
+ bh=tsW8EVtIfJEsVRay2ffReeyRIpwFCJkqFcVGHliTOCQ=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=kF71QTmKyQ1i20yFVK1VPGNHydiKC7whNb66fWKRikIIXELy05ig0/Ve6jRXeJEYi
+ UOqJ0yIcgS7eiWIexSGyR10Z23WUiXbSSV2uY0omIZ6chQthO4DYnbi7MXDwkYYdO1
+ fsPxDYwAr4uo/DwvKeZskuMsDEDkX5XDHw04vt+s=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTP id
+ 20201208015430epcas1p4c2bce057c788df529a7ec880a68532f6~Omu9nn6cS1080010800epcas1p4b;
+ Tue,  8 Dec 2020 01:54:30 +0000 (GMT)
+Received: from epsmges1p4.samsung.com (unknown [182.195.40.160]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4Cqjsd11CfzMqYkn; Tue,  8 Dec
+ 2020 01:54:29 +0000 (GMT)
+Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
+ epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
+ D2.D2.10463.3DCDECF5; Tue,  8 Dec 2020 10:54:28 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20201208015427epcas1p302cb5e3f28f375df04d2e32a36609fc2~Omu7UPVUp2957829578epcas1p3b;
+ Tue,  8 Dec 2020 01:54:27 +0000 (GMT)
+Received: from epsmgms1p2.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20201208015427epsmtrp1c4693f9aca2f986f7c0bfeb8eddd87ad~Omu7TwMjr1472514725epsmtrp1T;
+ Tue,  8 Dec 2020 01:54:27 +0000 (GMT)
+X-AuditID: b6c32a38-f11ff700000028df-57-5fcedcd3edef
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgms1p2.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 5D.58.08745.3DCDECF5; Tue,  8 Dec 2020 10:54:27 +0900 (KST)
+Received: from namjaejeon01 (unknown [10.88.104.63]) by epsmtip2.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20201208015427epsmtip2bf9c06efe4e0b7947629d5225078fcf5~Omu7IAMCA2139421394epsmtip2V;
+ Tue,  8 Dec 2020 01:54:27 +0000 (GMT)
+To: "'Joseph'" <j@gget.it>
+In-Reply-To: <007f01d6ccff$aad6f7f0$0084e7d0$@samsung.com>
+Subject: RE: Samba + exFAT : how to avoid pre-allocating when copying big
  files?
-To: Joseph <j@gget.it>
-Content-Type: text/plain; charset="UTF-8"
+Date: Tue, 8 Dec 2020 10:54:27 +0900
+Message-ID: <008101d6cd05$0faa5500$2efeff00$@samsung.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQHu2cU0iZpo/P4bT7dFAuRD2Fuj0QLjvbKYqaUt6pA=
+Content-Language: ko
+X-CMS-MailID: 20201208015427epcas1p302cb5e3f28f375df04d2e32a36609fc2
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-Sendblock-Type: SVC_REQ_APPROVE
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20201208011550epcas1p26cebc8a4d2812fca862990739a059d43
+References: <CGME20201208011550epcas1p26cebc8a4d2812fca862990739a059d43@epcas1p2.samsung.com>
+ <007f01d6ccff$aad6f7f0$0084e7d0$@samsung.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,72 +92,46 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- Jeremy Allison <jra@samba.org>
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <namjae.jeon@samsung.com>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Dec 8, 2020 at 7:36 AM Joseph <j@gget.it> wrote:
->
-> Thanks Ronnie for your answer.
->
-> I've used NTFS before (ntfs-3g which uses FUSE), but it's slow on RaspberryPi (20-30 MB/s) whereas exfat can reach 70 MB/s.
-> One solution would be to wait for the new ParagonSoftware open-source NTFS3 driver which will (or not?) be merged in Linux kernel.
-> But I think it won't be easily available on RaspberryPi soon.
->
-> So I decided to try with kernel's exfat (non-fuse) which is very fast ... except this problem.
->
-> > Try adding a f.truncate(...) to set the file size after you open the
-> > file but before you f.seek()
->
-> You're right Ronnie: a f.truncate(1000*1000*1000) here takes 16 seconds, i.e. writing 1 GB of null bytes at 60MB/s, that sounds correct.
->
-> --
->
-> This is confirmed by Jeremy's analysis (via email), here is a summary obtained after looking at my logs where it gets stuck for 30+ seconds:
->
-> >  smbd_do_setfilepathinfo: test/a.rar (fnum 1649140843) info_level=1020 totdata=8
->
-> -> that's an SMB2 SMB_FILE_END_OF_FILE_INFORMATION call.
-> -> This is going into (ultimately) vfs_set_filelen().
-> ->  SMB_VFS_FTRUNCATE() call to set the length.
-> -> static int vfswrap_ftruncate(vfs_handle_struct *handle, files_struct *fsp, off_t len)
-> probably here? https://github.com/avati/samba/blob/master/source3/modules/vfs_default.c#L1813
->
-> So two possibilities:
->
-> * is there a way to set an EOF on a file descriptor on exFAT that *doesn't* do the allocation? This would require a modification in the exfat driver?
-
-No, I don't think this is possible. exFAT just does not support the
-concept of sparse files so it MUST allocate these blocks when you
-change the file size.
-And since it allocates blocks and makes their content visible to the
-user, it MUST clear these blocks or else there would be a huge
-security issue with leaking information.
-(Unless the kernel would have a-priori knowledge and knowing for a
-fact that these blocks are already zeroed out which would be very
-hard/impossible for the kernel to know for removable media.)
-
-Any changes for this would have to happen in exFAT since you would
-need to change exFAT semantics. So I doubt it is feasible to work
-around from userspace/samba.
-
-I think a better option would be to look for other filesystems to use.
-ext4?  xfs?
+> Hello,
+> When sending a big file (for example 2 GB) from a Windows computer to a Linux computer (with Samba
+> server), then:
+> * if the destination FS is ext4, NTFS, no problem
+> * if the destination FS is exfat, then there is a strange delay (~30
+> seconds) during which the Windows Explorer waits, before actually copying the file It seems that the
+> Samba server first "preallocates" the 2GB, before accepting to start the copy from Samba client.
+> Thus, 2GB (of probably null bytes?) are first written, and then, the actual file is written.
+> How to avoid this effect that doubles the number of gigabytes written and doubles the transfer time?
+> 
+> I have already tried:
+> 
+>     strict allocate = no
+> 
+> without any success in the exfat case.
+> 
+> Any idea?
+Windows seems to send SMB_FILE_END_OF_FILE_INFORMATION smb2 setinfo request to pre-allocate space
+as much as the file size before writing the file.
+samba fallback to call ftruncate if fallocate is not support in local filesystem.
+I personally think that it is possible to improve the problem if exFAT support
+keep size flags of fallocate(). It doesn't support yet in linux kernel exFAT,
+but I have a plan. exFAT can store the number of allocated cluster size and the current file
+size in metadata of file.
+Unlike FAT. so it seems that the fallocate can be implemented properly in exFAT.
+> 
+> PS:
+> * I've already tried exfat-fuse, but also exfat-nofuse, and also exfat (non
+> fuse) included in Kernel 5.7, and it's the same.
+> * There are many forums posts with the same problem, e.g.
+> https://www.raspberrypi.org/forums/viewtopic.php?t=206866
+> 
+> Thanks,
+> Jo
 
 
->
-> * would it be possible to have a mode in Samba in which it never "truncates"?
->
->     [global]
->     no_truncate = yes
->
-> The file size would grow when new data is appended when a file is copied (like my code in Python before, with only f.write(...)), but no truncate at all.
->
-> Do you think this would be possible?
->
-> Here is a linked report on the Github page of exfat-fuse: https://github.com/relan/exfat/issues/45
->
 
