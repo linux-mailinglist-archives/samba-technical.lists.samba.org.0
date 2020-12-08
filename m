@@ -2,46 +2,40 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72C922D2C0C
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Dec 2020 14:32:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7265C2D2DB5
+	for <lists+samba-technical@lfdr.de>; Tue,  8 Dec 2020 16:02:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=1Fr8Tp0M/7Ldeg5uSgmAzXVbBjwhIhu5Bj7N/kDvOVI=; b=VcvnUQG6ZnfUol7SFvGx6raevX
-	W5T8gHfCr3ONUs8ioR6Kq7kScjbLWytMa3mNEQteHMK2IPJZF6NfLtzEXeK1wYpuHVSfaiMe79aqJ
-	manaBWoo5VgyXga92T6imxxVpLsklRO3RQ3huUp4X4pzPNZjapMEYwjnpHr/9kFT48yaZuuFzqdvj
-	ndRHt2QGiMWuKIBhEQTmZXdGBqFlzbEFQkKCaO9mNT2xA1eK59zkcgLWV0xL8K2dWx5NEePoxLBkw
-	ffdlVHalt2/6I4MwqsPuphSUiZtB/TGU93yDp9Hom01nuLYxHEJ3BtmO1ZYxqFHmcLL1MmNDzQ7tt
-	JCp+RWoA==;
-Received: from ip6-localhost ([::1]:33200 helo=hr1.samba.org) 
+	bh=KamtOIAt8DdH9wwZu69fQiBr0DdRHOnJSPLnhyW3ZDE=; b=lK3z+GSB5/gFKDzuGEtRCAI3G0
+	Ra9iUjwLUxiofarR/w6HkST40AMKT91JqTDafiOjUxjP0LrDuhazzW+kgTGviHB2nI4v8SVaj1A0o
+	sxZe2lqbwQb+0Q+GVjVAzgpYb7ey0+bybqIsTehJQgWH/p3HI084TK+h+UWjpaqJkrN13RcbiOym7
+	e4bC8nmOazbyCGOIOLdq7FjpfujzwqdyegCGwW20ga1MCxs1HdLA+zNVioDOWEh02pa4wa7AP8ZPF
+	ZOr9iyIFSVz3sB7l1NRC39TWhh112jhGn68RHOQuq+RKgaIhD0BW2stcfMgswsVvETsY2CLT+EoAx
+	/+x82OSA==;
+Received: from ip6-localhost ([::1]:33940 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kmd6A-000CgC-7c; Tue, 08 Dec 2020 13:32:10 +0000
-Received: from ozlabs.org ([2401:3900:2:1::2]:48883) 
+	id 1kmeU5-000Cu4-3X; Tue, 08 Dec 2020 15:00:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59044) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kmd5x-000Cg4-Ui
- for samba-technical@lists.samba.org; Tue, 08 Dec 2020 13:32:07 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4Cr1Ky1n8Nz9sWL;
- Wed,  9 Dec 2020 00:31:34 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=202004;
- t=1607434294; bh=H2vVgCzJbYh8NFtS3/gurE/xq+RCP6SgesAVWpfmi44=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=WYpLw72wHz5o2Ytt0v+1Dmg3hrEdDOaYFmOTqPntMvZKwvkSTHF4e/UfumJodZ/oq
- IpNRrbH9STmCyirvFjujmN+5TIs48EghS3VezuhV+Pzdqrlak58SRODzwlaycKqpsd
- zp5HyC5lCHYPC+VyvYKuplErfXOANhI4O92657tVnSDF/6GuKau3aAEIpCQXq1aAEl
- wDjwx/a91U3nzi9Qnyxr30evLzobTMyudyHQpGxutvF0mIDiFByie/87u+RWAI0nDz
- +rgVatLSDJMHAf2/fK9FGLUT0nXFvv4JyeiRCv1HhKolha2IXX0UD7La1SZPBmbuQC
- ckLZfSdhm5qew==
-Date: Wed, 9 Dec 2020 00:31:32 +1100
-To: Alexander Bokovoy <ab@samba.org>
-Subject: Re: Samba testing on CentOS 8
-Message-ID: <20201209003132.328ca229@martins.ozlabs.org>
-In-Reply-To: <20201208124406.GF5029@pinega.vda.li>
-References: <20201208231746.3c15f5b0@martins.ozlabs.org>
- <20201208124406.GF5029@pinega.vda.li>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+ (Exim) id 1kmeTv-000Ctt-3r
+ for samba-technical@lists.samba.org; Tue, 08 Dec 2020 15:00:54 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=KamtOIAt8DdH9wwZu69fQiBr0DdRHOnJSPLnhyW3ZDE=; b=eTiMGj3JhuKRzLAv5syFyxs9NG
+ uMYZWugUNrGkwgU93/TOhqPJBa0Fx4GIkrGVr79s3tlju16/m8yCtg/Ka1j2SMBobbVdUVpj8lNaQ
+ 3LA8M3CQo0WJe/AFPIbHa2Kq8mZQuBBW/fCPtxbhjNlT/2TKpCtgmgrgKlFQ7yXXxUXEeaiWIgNUQ
+ 2V7QSHFsBx2uMivF9i97POEVjpjeKw4itq0QiTLuOaRTKF1tkonkilNZkMJd+JorTFJLiY7sl/6gS
+ 2q6ywXJTIevlJoyGxqKeHqB/h7FYezfiHsn/2cJj8xcF673jItc/IFAmTFPYWbb1WV25xVngGnztG
+ xIaP/Chy4aFm+olLHcWZUygrUrht+GskzAtMsE6qmcK/lN5QEjG5d41Gl2Mt7DGeKxwKidiePKTeo
+ wPpEiE5ZnJn8TxKH0KmAVHm5jhU5gz6JXzziFoufZmpY7o4LBl8K9znmxQyoTLgwHv4Ahm32SzIDq
+ uJ73BpDgUTq/0VbCFcnU3JUd;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kmeTX-00046H-6C; Tue, 08 Dec 2020 15:00:23 +0000
+Date: Tue, 8 Dec 2020 16:00:22 +0100
+To: Samba Technical <samba-technical@lists.samba.org>
+Subject: Fw: FOSDEM CfP Software Defined Storage devroom
+Message-ID: <20201208160022.72fb3d69@samba.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
@@ -58,161 +52,117 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: Samba Technical <samba-technical@lists.samba.org>
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
+Cc: Jan Fajerski <jfajerski@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Alexander,
+Hi all,
 
-Thanks for your reply!
+FOSDEM is on again next year. Like every year, the Software Defined
+Storage devroom welcomes Samba talk proposals. Please see below for
+details...
 
-On Tue, 8 Dec 2020 14:44:06 +0200, Alexander
-Bokovoy <ab@samba.org> wrote:
 
-> On ti, 08 joulu 2020, Martin Schwenke via samba-technical wrote:
-> > We've been doing our CTDB and Samba testing using autocluster, based on
-> > the official CentOS-8.2 vagrant image.  This depends on using
-> > bootstrap/generated-dists/centos8/bootstrap.sh from the Samba source
-> > tree.
-> > 
-> > Until recently this has worked just fine:
-> > 
-> > + yum -v repolist all
-> > ...
-> > Repo-id            : PowerTools
-> > Repo-name          : CentOS-8 - PowerTools
-> > Repo-status        : enabled
-> > Repo-revision      : 8.2.2004
-> > Repo-distro-tags      : [cpe:/o:centos:centos:8]:  , 8, C, O, S, e, n, t
-> > Repo-updated       : Sat 31 Oct 2020 04:58:49 AEDT
-> > Repo-pkgs          : 2,010
-> > Repo-available-pkgs: 1,444
-> > Repo-size          : 1.0 G
-> > Repo-mirrors       : http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=PowerTools&infra=vag
-> > Repo-baseurl       : http://mirror.realcompute.io/centos/8.2.2004/PowerTools/x86_64/os/ (9 more)
-> > Repo-expire        : 172,800 second(s) (last: Thu 03 Dec 2020 22:30:57 AEDT)
-> > Repo-filename      : /etc/yum.repos.d/CentOS-PowerTools.repo
-> > ...
-> > Repo-id            : Devel
-> > Repo-name          : CentOS-8 - Devel WARNING! FOR BUILDROOT USE ONLY!
-> > Repo-status        : disabled
-> > Repo-mirrors       : http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=Devel&infra=vag
-> > Repo-expire        : 172,800 second(s) (last: unknown)
-> > Repo-filename      : /etc/yum.repos.d/CentOS-Devel.repo
-> > ...
-> > + yum config-manager --set-enabled PowerTools -y
-> > + yum config-manager --set-enabled Devel -y
-> > + yum update -y
-> > ...
-> > 
-> > However, now:
-> > 
-> > + yum -v repolist all
-> > ...
-> > Repo-id            : devel
-> > Repo-name          : CentOS Linux 8 - Devel WARNING! FOR BUILDROOT USE ONLY!
-> > Repo-status        : disabled
-> > Repo-mirrors       : http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=Devel&infra=vag
-> > Repo-expire        : 172,800 second(s) (last: unknown)
-> > Repo-filename      : /etc/yum.repos.d/CentOS-Linux-Devel.repo
-> > ...
-> > Repo-id            : powertools
-> > Repo-name          : CentOS Linux 8 - PowerTools
-> > Repo-status        : disabled
-> > Repo-mirrors       : http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=PowerTools&infra=vag
-> > Repo-expire        : 172,800 second(s) (last: unknown)
-> > Repo-filename      : /etc/yum.repos.d/CentOS-Linux-PowerTools.repo
-> > Total packages: 14,251
-> > + yum config-manager --set-enabled PowerTools -y
-> > Error: No matching repo to modify: PowerTools.
-> > 
-> > The whole thing falls in a heap because it appears that the Repo-id's
-> > are case-sensitive and that "PowerTools" and "Devel" have changed to
-> > lowercase in CentOS-8.3.
-> > 
-> > I'm still using the CentOS-8.2 Vagrant image, so I'm a little confused
-> > about why the repos are now referring to 8.3 (not shown above for
-> > brevity, but definitely the case).  I'd certainly like to understand
-> > this... but I doubt that will solve the problem.  :-(
-> 
-> I think CentOS does not have separate supported minor releases anymore,
-> just the latest one. This, at least visible in your mirror list link --
-> it has one digit in the 'release=..' parameter, so you are on a rolling
-> release.
-> 
-> If you want to stick to the previous releases, I don't think mirrorlist
-> tool supports that, so you would need to use a specific mirror for the
-> URL and replace 8.3.2011 there with the specific release folder.
+Begin forwarded message:
 
-That makes sense.  However, I don't set up any of these repos myself.
-I just use the default repos from the Vagrant image.
+Date: Tue, 8 Dec 2020 09:36:38 +0100
+From: Jan Fajerski <jfajerski@suse.com>
+To: dev@ceph.io
+Subject: CfP Software Defined Storage devroom
 
-One possible part of this is a mirror problem.  In the runs that work I
-see the initial "yum update -y" actually update over 200 packages.  In
-the failures I see:
 
-+ yum update -y
-Last metadata expiration check: 0:02:54 ago on Tue 08 Dec 2020 16:55:53 AEDT.
-Dependencies resolved.
-Nothing to do.
-Complete!
+FOSDEM is a free software event that offers open source communities a place to 
+meet, share ideas and collaborate.  It is well known for being highly 
+developer-oriented and in the past brought together 8000+ participants from all 
+over the world.  It's home is in the city of Brussels (Belgium).
 
-So that's a strange difference... but see below...
+FOSDEM 2021 will take place as an online event during the weekend of February 
+6./7. 2021. More details about the event can be found at http://fosdem.org/
 
-> > I'm wondering how we fix bootstrap/config.py to copy with this change.
-> > Does it have to be something horrible like the following patch?
-> > 
-> > diff --git a/bootstrap/config.py b/bootstrap/config.py
-> > index 982ebae1cd1..8383aeb392d 100644
-> > --- a/bootstrap/config.py
-> > +++ b/bootstrap/config.py
-> > @@ -235,8 +235,10 @@ yum install -y dnf-plugins-core
-> >  yum install -y epel-release
-> >  
-> >  yum -v repolist all
-> > -yum config-manager --set-enabled PowerTools -y
-> > -yum config-manager --set-enabled Devel -y
-> > +yum config-manager --set-enabled PowerTools -y || \
-> > +    yum config-manager --set-enabled powertools -y
-> > +yum config-manager --set-enabled Devel -y || \
-> > +    yum config-manager --set-enabled devel -y
-> >  yum update -y
-> >  
-> >  yum install -y \
-> > 
-> > 
-> > Or is there a better way?
-> 
-> If these are the same in all previous versions, then that should be
-> enough. If not, may be we can make the repository names a part of
-> per-distribution configuration and run 'yum config-manager' for all of
-> them?
+** Call For Participation
 
-The above is just for CentOS 8, so should cover all versions of that.
-I'm trying the above ugly patch (including a run of
-bootstrap/template.py --render to regenerate
-bootstrap/generated-dists/centos8/bootstrap.sh) and it seems to get through running bootstrap.sh.  Although many packages are updated, I see:
+The Software Defined Storage devroom will go into it's fifth round for talks 
+around Open Source Software Defined Storage projects, management tools
+and real world deployments.
 
-...
-+ yum config-manager --set-enabled PowerTools -y
-Error: No matching repo to modify: PowerTools.
-+ yum config-manager --set-enabled powertools -y
-+ yum config-manager --set-enabled Devel -y
-Error: No matching repo to modify: Devel.
-+ yum config-manager --set-enabled devel -y
-+ yum update -y
-...
+Presentation topics could include but are not limited too:
 
-So the change is being exercised and it doesn't seem to be a mirror
-problem... although perhaps some mirrors are hopelessly out-of-date.
+- Your work on a SDS project like Ceph, Gluster, OpenEBS, CORTX or Longhorn
 
-If it works then I'll open a bug so the fix can be backported to 4.12
-and 4.13.
+- Your work on or with SDS related projects like OpenStack SWIFT or Container 
+   Storage Interface
 
-Thanks...
+- Management tools for SDS deployments
 
-peace & happiness,
-martin
+- Monitoring tools for SDS clusters
+
+** Important dates:
+
+- Dec 27th 2020:  submission deadline for talk proposals
+- Dec 31st 2020:  announcement of the final schedule
+- Feb  6th 2021:  Software Defined Storage dev room
+
+Talk proposals will be reviewed by a steering committee:
+- Niels de Vos (OpenShift Container Storage Developer - Red Hat)
+- Jan Fajerski (Ceph Developer - SUSE)
+- TBD
+
+Use the FOSDEM 'pentabarf' tool to submit your proposal:
+https://penta.fosdem.org/submission/FOSDEM21
+
+- If necessary, create a Pentabarf account and activate it.
+Please reuse your account from previous years if you have
+already created it.
+https://penta.fosdem.org/user/new_account/FOSDEM21
+
+- In the "Person" section, provide First name, Last name
+(in the "General" tab), Email (in the "Contact" tab)
+and Bio ("Abstract" field in the "Description" tab).
+
+- Submit a proposal by clicking on "Create event".
+
+- If you plan to register your proposal in several tracks to increase your chances, 
+don't! Register your talk once, in the most accurate track.
+
+- Presentations have to be pre-recorded before the event and will be streamed on 
+   the event weekend.
+
+- Important! Select the "Software Defined Storage devroom" track
+(on the "General" tab).
+
+- Provide the title of your talk ("Event title" in the "General" tab).
+
+- Provide a description of the subject of the talk and the
+intended audience (in the "Abstract" field of the "Description" tab)
+
+- Provide a rough outline of the talk or goals of the session (a short
+list of bullet points covering topics that will be discussed) in the
+"Full description" field in the "Description" tab
+
+- Provide an expected length of your talk in the "Duration" field.
+   We suggest a length between 15 and 45 minutes.
+
+** For accepted talks
+
+Once your proposal is accepted we will assign you a volunteer deputy who will 
+help you to produce the talk recording.  The volunteer will also try to ensure 
+the recording is of good quality, help with uploading it to the system, 
+broadcasting it during the event and moderate the Q&A session after the 
+broadcast.  Please note that as a presenter you're expected to be available 
+online during and especially after the broadcast of you talk.  The schedule will 
+be available under 
+https://fosdem.org/2021/schedule/track/software_defined_storage/
+
+Hope to hear from you soon! And please forward this announcement.
+
+If you have any further questions, please write to the mailing list at
+storage-devroom@lists.fosdem.org and we will try to answer as soon as
+possible.
+
+Thanks!
+_______________________________________________
+Dev mailing list -- dev@ceph.io
+To unsubscribe send an email to dev-leave@ceph.io
 
