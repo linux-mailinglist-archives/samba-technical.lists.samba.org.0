@@ -2,80 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25AE92D4E1D
-	for <lists+samba-technical@lfdr.de>; Wed,  9 Dec 2020 23:40:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6CAA92D4E59
+	for <lists+samba-technical@lfdr.de>; Wed,  9 Dec 2020 23:53:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=PFECXYm/Qc3WIGhLfVMNxkHEd5QDWasTzTJgumS37fQ=; b=kYpy9/LNI0bDP0vkQbAo2TRr3N
-	sH+w5rfelGl7DSmpmv3oorBdypk37zzxPC/juz9QvaphNye4NRWYsTO9Dhno9USUz3frfqpmNv6sH
-	9ogL2yLVlAB/km7+yGTbpZ3wcJeT4LzRHjyWAH4Wfk2rj9IAg/xVU14S8K0wA2FdPE1aaPnNhqmRu
-	1XA4JqDNMI6sBPRpiXKHA6FgfL1M50q9UyckawkkLHBfHimyjXfRf1P5ke5yT+0DS9XsKr0v4by5D
-	8wReUJIdg6B0v/s3XhoCTS9aO4ZU2P7WNI8TfAR7MxmEryXkF6/8xpzIb/I/EKyDDDg8CkD0TD1P3
-	LyRHtvOw==;
-Received: from ip6-localhost ([::1]:50256 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=m3IEBTEodfRO++Zljm/2G6DvMArMHQg7iMOxN61JRq0=; b=3A3mhLlacLwdmyvEyNqt0ECknu
+	2hffKpxbqAGce7OHy5OyyJwv8SvhyIGfU62FoO53XrgOT5wBT3pmhUAU7elwEHZLmZ0HjjkPzaAyu
+	sLOfktmulgylKK65v969tieWDGJ7uo7TK7jnJaVj90snChVrtQ/+ysiqVLr/IzANnsI+2byeR3HDw
+	hpWMnGbJR/FOlX5bhaJE1i+Kjlvcd2PRQvirfKMA8BurC90lCbOHOxotAjD8rjdW8Ykjlazrsnsyy
+	TWXrAWQmfHY2Bkl2AJT6PzUi5O0ghLrrD4F9mLZ7G7EGRIDfsufNCEp0+ijr54Vbsb+FCEqn1njBJ
+	Yft9sm9A==;
+Received: from ip6-localhost ([::1]:55394 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kn87Z-000Iv8-Or; Wed, 09 Dec 2020 22:39:41 +0000
-Received: from mta199a-ord.mtasv.net ([104.245.209.199]:38877) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1kn87S-000Iur-Qq
- for samba-technical@lists.samba.org; Wed, 09 Dec 2020 22:39:37 +0000
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=20200311092113pm;
- d=gget.it; 
- h=From:Date:Subject:Message-Id:To:Cc:References:In-Reply-To:MIME-Version:Content-Type;
- i=j@gget.it; bh=HwTlKWN96rDXPfJ3C9LAJzINDMI=;
- b=DPsYXtbneu2KWVdZmoW8e7zkurAQZvgV5dfTPN2LBhGlmAEEXN8THMDXfKlklaWfFXv0Nnmbz12I
- zuwN6PtmpvmPGe/xmv2fx/EH0Q3vjxztdwn7EGfbGpbYYTEgX5reubb89vgEvCG0emmqSabznVFG
- gazcTIct1ZWuj5E0/sk=
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=pm; d=pm.mtasv.net;
- h=From:Date:Subject:Message-Id:To:Cc:References:In-Reply-To:MIME-Version:Content-Type;
- bh=HwTlKWN96rDXPfJ3C9LAJzINDMI=;
- b=bugXCFxcZswDaZdTH+xNFSaFzfIzFMpqoMd2e+t3aNRo2RvO8v3Ao39QMO5oaLae79HtkW6syssf
- eMylmoPh4aEWuB0fecuOZPgflUoG0KJPGaTaDX/SUqWxRGdKzB25Ao/gZEYYN8PCR6+D1HfQrokK
- M1OzrpdLjYW/ghFNGF0=
-Received: by mta199a-ord.mtasv.net id hq592c27tk41 for
- <samba-technical@lists.samba.org>;
- Wed, 9 Dec 2020 08:50:49 -0500 (envelope-from <pm_bounces@pm-bounces.gget.it>)
-X-PM-IP: 104.245.209.199
-X-IADB-IP: 104.245.209.199
-X-IADB-IP-REVERSE: 199.209.245.104
-DKIM-Signature: v=1; a=rsa-sha256; d=gget.it; s=20200311092113pm;
- c=relaxed/relaxed; i=j@gget.it; t=1607521849;
- h=cc:content-description:content-id:content-transfer-encoding:content-type:
- date:from:in-reply-to:list-archive:list-help:list-id:list-owner:list-post:
- list-subscribe:list-unsubscribe:mime-version:message-id:references:reply-to:
- resent-cc:resent-date:resent-from:resent-message-id:resent-sender:resent-to:
- sender:subject:to:feedback-id;
- bh=EIyLJh6+bqXKAZhLBepiTaCTlxmppzSgng+cRDirsW4=;
- b=Pmd+9Be8V1sFwPwj1mSawwRZi3pR4bIbiVmebkXpZy7NQGYhMyESnSwHnpJJN4w1F1e9kVWegki
- Cix4zjrcVSks0/WEYJfhFiTPLKwXjgcp9QtxghWIv2t0lvQW31BW7B4u2djWcSYT5P/GTQjQvYPQd
- M00F9AG1+a9YBnq2iPo=
-Date: Wed, 09 Dec 2020 08:50:49 -0500
-Subject: Re: Samba + exFAT : how to avoid pre-allocating when copying big
- files?
-Message-Id: <fc04e216-71c8-4efa-b34e-f118ea12f67e@mtasv.net>
-To: samba-technical <samba-technical@lists.samba.org>
-X-Gm-Message-State: AOAM531GWDFGuIWOQUzOV/nwx04VyuSbXgkvel1MQDRN1rke+Jykb2BP2LYe3zAHYc5UhwU1cqk+3xxKF4U/9kn74e96Fwc=
-X-Google-Smtp-Source: ABdhPJwv8PQXVvHsT478jdJxTVFDlO1vvhXF5BH50Zi5YKAK4KRUHYawTuFx488Jo2/HEdrSrwpO6pht6gIeib3IMEs=
-X-Received: by 2002:a17:90a:7101:: with SMTP id
- h1mr2323323pjk.26.1607521848192; Wed, 09 Dec 2020 05:50:48 -0800 (PST)
-References: <CGME20201208011550epcas1p26cebc8a4d2812fca862990739a059d43@epcas1p2.samsung.com>
- <007f01d6ccff$aad6f7f0$0084e7d0$@samsung.com>
- <008101d6cd05$0faa5500$2efeff00$@samsung.com>
- <CACyXjPwvNSfw9PLtUBxQQF4ysedpOE_TriTuX-JajRmFAHhQMQ@mail.gmail.com>
- <008201d6cd10$d5187910$7f496b30$@samsung.com>
- <20201208042132.GB1875689@jeremy-acer>
-In-Reply-To: <20201208042132.GB1875689@jeremy-acer>
-X-Gmail-Original-Message-ID: <CA+BV=GWHXO2ZD04LUox2xHnG+o-RDP9QLTUpYexzGXsFN8nL2g@mail.gmail.com>
-Feedback-ID: s5244416-_:s5244416:a182037:postmark
-X-Complaints-To: abuse@postmarkapp.com
-X-PM-Message-Id: fc04e216-71c8-4efa-b34e-f118ea12f67e
-X-PM-RCPT: |bTB8MTgyMDM3fDUyNDQ0MTZ8c2FtYmEtdGVjaG5pY2FsQGxpc3RzLnNhbWJhLm9yZw==|
-X-PM-Message-Options: v1;
- 9Hcc_PIAriBnYBOfaIwCcyIPcaJJ4QcTBG0Vjf0upsLgpqRZa9tU6RIlMq6j-Xrc
+	id 1kn8L5-000JcV-Ng; Wed, 09 Dec 2020 22:53:40 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30656) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kn8Kx-000JZ2-0M
+ for samba-technical@lists.samba.org; Wed, 09 Dec 2020 22:53:33 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=m3IEBTEodfRO++Zljm/2G6DvMArMHQg7iMOxN61JRq0=; b=wPJMjkzbozmKi9qWvIo0ihSfbf
+ DJ4RtXeK5UYc880jmYZ7WrTMAyVhYfhV6I4F2xMZLodmn9B9twjZ+LQTyD7xBmtrcaLsYDWa5QND3
+ zpPjA04I7PBqyWybrj9ksW8NoTKtsTMA0DUjMLRDL4NI7Tw4MqY5BENV5Ln5rvrFGwi5GmBf0Wft0
+ ooU9VeSMXPicr8I/iivXCMPEsPGnHT4giW03uQjeKGmKWOLKKDk3FnUBtZyn2bouJAsXhgLSEgh6u
+ 7xSbUTNVUJ+JRRYmMM1ymo+3SaJ53yPgtR20RBpZlCbSK1Ih8AlZ/djBFOqIc7WAoVCBouOnxQ+8w
+ BI0Jq0OQETIPVlHoTV7CKx/gWfEuNvgGwLg0Up+pm20F+h8Qc0x/twJPLjrGv9Y74Ef2cdLPI43dS
+ mt039cvbrPeGBif3upzJStC0nmosdCMCchoE5ap2jjHA+ON0BtPk6Aq3G5CuTfvmkAhRHnYGIKN9t
+ /DVsu6L92dYbynBvS6nE14Oq;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kn1bn-0007HR-Ou
+ for samba-technical@lists.samba.org; Wed, 09 Dec 2020 15:42:27 +0000
+Subject: Re: Samba testing on CentOS 8
+To: samba-technical@lists.samba.org
+References: <20201208231746.3c15f5b0@martins.ozlabs.org>
+ <20201208124406.GF5029@pinega.vda.li>
+ <20201209003132.328ca229@martins.ozlabs.org>
+Message-ID: <df4952fb-87d9-6cc8-e55c-a08487ff34aa@samba.org>
+Date: Wed, 9 Dec 2020 15:42:27 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+In-Reply-To: <20201209003132.328ca229@martins.ozlabs.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,77 +60,167 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Joseph via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Joseph <j@gget.it>
-Cc: Namjae Jeon <namjae.jeon@samsung.com>, Jeremy Allison <jra@samba.org>
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-> FileEndOfFileInformation =3D=3D ftruncate();
-> FileAllocationInformation =3D=3D fallocate(.., FALLOC_FL_KEEP_SIZE, =
-offset,
-len)
+On 08/12/2020 13:31, Martin Schwenke via samba-technical wrote:
+> Hi Alexander,
+>
+> Thanks for your reply!
+>
+> On Tue, 8 Dec 2020 14:44:06 +0200, Alexander
+> Bokovoy <ab@samba.org> wrote:
+>
+>> On ti, 08 joulu 2020, Martin Schwenke via samba-technical wrote:
+>>> We've been doing our CTDB and Samba testing using autocluster, based on
+>>> the official CentOS-8.2 vagrant image.  This depends on using
+>>> bootstrap/generated-dists/centos8/bootstrap.sh from the Samba source
+>>> tree.
+>>>
+>>> Until recently this has worked just fine:
+>>>
+>>> + yum -v repolist all
+>>> ...
+>>> Repo-id            : PowerTools
+>>> Repo-name          : CentOS-8 - PowerTools
+>>> Repo-status        : enabled
+>>> Repo-revision      : 8.2.2004
+>>> Repo-distro-tags      : [cpe:/o:centos:centos:8]:  , 8, C, O, S, e, n, t
+>>> Repo-updated       : Sat 31 Oct 2020 04:58:49 AEDT
+>>> Repo-pkgs          : 2,010
+>>> Repo-available-pkgs: 1,444
+>>> Repo-size          : 1.0 G
+>>> Repo-mirrors       : http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=PowerTools&infra=vag
+>>> Repo-baseurl       : http://mirror.realcompute.io/centos/8.2.2004/PowerTools/x86_64/os/ (9 more)
+>>> Repo-expire        : 172,800 second(s) (last: Thu 03 Dec 2020 22:30:57 AEDT)
+>>> Repo-filename      : /etc/yum.repos.d/CentOS-PowerTools.repo
+>>> ...
+>>> Repo-id            : Devel
+>>> Repo-name          : CentOS-8 - Devel WARNING! FOR BUILDROOT USE ONLY!
+>>> Repo-status        : disabled
+>>> Repo-mirrors       : http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=Devel&infra=vag
+>>> Repo-expire        : 172,800 second(s) (last: unknown)
+>>> Repo-filename      : /etc/yum.repos.d/CentOS-Devel.repo
+>>> ...
+>>> + yum config-manager --set-enabled PowerTools -y
+>>> + yum config-manager --set-enabled Devel -y
+>>> + yum update -y
+>>> ...
+>>>
+>>> However, now:
+>>>
+>>> + yum -v repolist all
+>>> ...
+>>> Repo-id            : devel
+>>> Repo-name          : CentOS Linux 8 - Devel WARNING! FOR BUILDROOT USE ONLY!
+>>> Repo-status        : disabled
+>>> Repo-mirrors       : http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=Devel&infra=vag
+>>> Repo-expire        : 172,800 second(s) (last: unknown)
+>>> Repo-filename      : /etc/yum.repos.d/CentOS-Linux-Devel.repo
+>>> ...
+>>> Repo-id            : powertools
+>>> Repo-name          : CentOS Linux 8 - PowerTools
+>>> Repo-status        : disabled
+>>> Repo-mirrors       : http://mirrorlist.centos.org/?release=8&arch=x86_64&repo=PowerTools&infra=vag
+>>> Repo-expire        : 172,800 second(s) (last: unknown)
+>>> Repo-filename      : /etc/yum.repos.d/CentOS-Linux-PowerTools.repo
+>>> Total packages: 14,251
+>>> + yum config-manager --set-enabled PowerTools -y
+>>> Error: No matching repo to modify: PowerTools.
+>>>
+>>> The whole thing falls in a heap because it appears that the Repo-id's
+>>> are case-sensitive and that "PowerTools" and "Devel" have changed to
+>>> lowercase in CentOS-8.3.
+>>>
+>>> I'm still using the CentOS-8.2 Vagrant image, so I'm a little confused
+>>> about why the repos are now referring to 8.3 (not shown above for
+>>> brevity, but definitely the case).  I'd certainly like to understand
+>>> this... but I doubt that will solve the problem.  :-(
+>> I think CentOS does not have separate supported minor releases anymore,
+>> just the latest one. This, at least visible in your mirror list link --
+>> it has one digit in the 'release=..' parameter, so you are on a rolling
+>> release.
+>>
+>> If you want to stick to the previous releases, I don't think mirrorlist
+>> tool supports that, so you would need to use a specific mirror for the
+>> URL and replace 8.3.2011 there with the specific release folder.
+> That makes sense.  However, I don't set up any of these repos myself.
+> I just use the default repos from the Vagrant image.
+>
+> One possible part of this is a mirror problem.  In the runs that work I
+> see the initial "yum update -y" actually update over 200 packages.  In
+> the failures I see:
+>
+> + yum update -y
+> Last metadata expiration check: 0:02:54 ago on Tue 08 Dec 2020 16:55:53 AEDT.
+> Dependencies resolved.
+> Nothing to do.
+> Complete!
+>
+> So that's a strange difference... but see below...
+>
+>>> I'm wondering how we fix bootstrap/config.py to copy with this change.
+>>> Does it have to be something horrible like the following patch?
+>>>
+>>> diff --git a/bootstrap/config.py b/bootstrap/config.py
+>>> index 982ebae1cd1..8383aeb392d 100644
+>>> --- a/bootstrap/config.py
+>>> +++ b/bootstrap/config.py
+>>> @@ -235,8 +235,10 @@ yum install -y dnf-plugins-core
+>>>   yum install -y epel-release
+>>>   
+>>>   yum -v repolist all
+>>> -yum config-manager --set-enabled PowerTools -y
+>>> -yum config-manager --set-enabled Devel -y
+>>> +yum config-manager --set-enabled PowerTools -y || \
+>>> +    yum config-manager --set-enabled powertools -y
+>>> +yum config-manager --set-enabled Devel -y || \
+>>> +    yum config-manager --set-enabled devel -y
+>>>   yum update -y
+>>>   
+>>>   yum install -y \
+>>>
+>>>
+>>> Or is there a better way?
+>> If these are the same in all previous versions, then that should be
+>> enough. If not, may be we can make the repository names a part of
+>> per-distribution configuration and run 'yum config-manager' for all of
+>> them?
+> The above is just for CentOS 8, so should cover all versions of that.
+> I'm trying the above ugly patch (including a run of
+> bootstrap/template.py --render to regenerate
+> bootstrap/generated-dists/centos8/bootstrap.sh) and it seems to get through running bootstrap.sh.  Although many packages are updated, I see:
+>
+> ...
+> + yum config-manager --set-enabled PowerTools -y
+> Error: No matching repo to modify: PowerTools.
+> + yum config-manager --set-enabled powertools -y
+> + yum config-manager --set-enabled Devel -y
+> Error: No matching repo to modify: Devel.
+> + yum config-manager --set-enabled devel -y
+> + yum update -y
+> ...
+>
+> So the change is being exercised and it doesn't seem to be a mirror
+> problem... although perhaps some mirrors are hopelessly out-of-date.
+>
+> If it works then I'll open a bug so the fix can be backported to 4.12
+> and 4.13.
+>
+> Thanks...
+>
+> peace & happiness,
+> martin
+>
+Hi, based on what is all over the internet about the future of Centos, 
+should we continue to test anything on Centos 8 ? I mean, we may get to 
+a point where we do not know whether a fault is down to Samba code or 
+code that isn't in RHEL but is in Centos stream. Just a thought and I 
+could be talking out of my hat.
 
-Jeremy, by ftruncate() do you mean "immediate writing of null bytes"?
+Rowland
 
-I've analyzed syscall logs to see how some programs on Windows do, whi=
-ch
-1) create a file on exFAT partition
-2) immediately set 1 GB file size *without* any delay; it's instantane=
-ously
-reported as 1GB in the Explorer; also, there is no 1GB null-bytes writ=
-ing
-3) then write the actual file content
-It goes like this:
-t=3D0.000s: CreateFile
-t=3D0.000s: SetFileInformationByHandle with FILE_END_OF_FILE_INFO,
-EndOfFile=3D1073741824
-t=3D0.000s: SetFileInformationByHandle
-with FILE_ALLOCATION_INFO, AllocationSize=3D1073741824
-t=3D0.001s WriteFile     (here the real data writing begins)
-...
-t~44sec  WriteFile   (last block written)
 
-So this confirms that, with the Windows native exFAT driver, neither
-"FileEndOfFileInformation" nor "FileAllocationInformation" triggers an
-immediate truncate() or writing of null bytes for an opened file handl=
-e.
-This "writing of null bytes" only happens when the file is closed for =
-the
-"remaining unwritten blocks", that's the trick. Example:
-    CreateFile, SetEndOfFileInfo+SetAllocationInfo 1GB, Close  =3D> th=
-en 1GB
-of null bytes written
-    CreateFile, SetEndOfFileInfo+SetAllocationInfo 1GB, Write 100MB, C=
-lose
-=3D> then only 900 MB of null bytes written
-    CreateFile, SetEndOfFileInfo+SetAllocationInfo 1GB, Write 500MB, C=
-lose
-=3D> then only 500 MB of null bytes written
-    CreateFile, SetEndOfFileInfo+SetAllocationInfo 1GB, Write 1000MB,
-Close  =3D> then 0 MB of null bytes written ! <-----
 
-Namjae, do you think this should be done directly at the Linux exFAT d=
-river
-layer?
-
-I'm not sure if the modification should be at the Linux exFAT driver l=
-ayer,
-or in Samba?
-
-If the latter, in Samba, would it be possible to avoid that
-SetFileEndOfFileInformation =3D=3D ftruncate()  =3D=3D immediate writi=
-ng of null
-bytes?
-
-TL;DR: with Windows' native exFAT driver, SetAllocation+SetEndOfFileIn=
-fo
-does not write any null bytes now, if the file handle is still open. I=
-t
-will only write null bytes, on file close, on the *remaining* space th=
-at
-has not been written before. If all the preallocated blocks are alread=
-y
-written, there is no null-bytes writing.
-
-Jo
