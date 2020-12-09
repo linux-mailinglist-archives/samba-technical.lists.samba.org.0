@@ -2,59 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42A1B2D340B
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Dec 2020 21:43:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2006E2D4E65
+	for <lists+samba-technical@lfdr.de>; Wed,  9 Dec 2020 23:57:16 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=zPEezVzK5/kLNT18lfW/dfChG0nQyJZzaqQoMAH4Ojw=; b=dipVp0xWByIAo48eeDVimJRTWW
-	gqeehIaV4H0zHehGCoQRXPxMLPUS4DDiTVBYG03vixe8Rt0o3agwia4b3GF81/fCCVbg4rXYcBppu
-	25ORZWeCsRHCPFlRN/9CVJXHdbs4k/LkedQkxvcp/qeqeSm6nx+qtFP//vBISXA0ndYiPVJ9AIkg4
-	kH3ESUmMW2MhpNymnhKY/c7ZDzd0BxF/Y0Ka09FjX2oaOuhGJPZhEP7nzCp6UAhCUvfOvr0ZPdYnA
-	U1WA4JRvWL8QyJ6jYZr95Z0M8CVcHlRte5qzRh34HZ/6NWxAaSoGmpim0z4ZHfWz+O4n1hc/aY9y2
-	qDHvpIWg==;
-Received: from ip6-localhost ([::1]:35014 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=OARGU6Bu8PzoLPoT0tVzNvAZI6gkjtNmkj1rNBeElNg=; b=OEjR/J8oiyN9/gZA0gIyLC6IWz
+	BcLBCkANadTku0fniQuUWtnschA3ULDOeHvXjUGFglL6MBkeO7BjeUlT1s/OVa40SyJEOrQjQEQWg
+	14+CxjJKF4jF7xy//J4+7BNhSJMVizqxxIv1RQ4JMPE+k4ZhXly/DesNSICqikQNi2Bvucm0kbcTd
+	/MFmWWyaAOOl6OKpusmVfvzq05a3Nk62p60A2g0QROMaDXjJQBk0GRcuP50KE8fGMkgKiiNpoh7xO
+	hhKnLV49Tz4Ko26bBoYpRth6MNMor1bHtybepD9jDzdDJIMc1+jQiO5Ahhg7Epc1Bre3mzisPh0yY
+	iuLAPYWg==;
+Received: from ip6-localhost ([::1]:59700 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kmjp4-000Dai-Qb; Tue, 08 Dec 2020 20:42:58 +0000
-Received: from mail-lf1-x143.google.com ([2a00:1450:4864:20::143]:42457) 
+	id 1kn8OQ-000KCq-3Y; Wed, 09 Dec 2020 22:57:06 +0000
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436]:33351) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kmjp0-000Daa-95
- for samba-technical@lists.samba.org; Tue, 08 Dec 2020 20:42:57 +0000
-Received: by mail-lf1-x143.google.com with SMTP id u18so54288lfd.9
- for <samba-technical@lists.samba.org>; Tue, 08 Dec 2020 12:42:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=zPEezVzK5/kLNT18lfW/dfChG0nQyJZzaqQoMAH4Ojw=;
- b=QQB6xX7ZMHg5p+Sz6Bt9MksNDS64p3I6yufe4wI9yXPB/gVrO3fXujcKeeSB9vuEWp
- 3a23umzaJgQ7JDO9BB/hOohKVSl1sHLJFD7X2ep22r/iO4cjIag+ZzLnqcKcoJLlYM7P
- PWQmJZRCIv4T4OkshRETA/Bfm6Wn9tRDmPwuSGgKVgxWzTb3G6hXpIkqKxAq/7LInnqj
- 8FrUOY274w9bytUgQZYAXOIMIS8YfUivRINu6yrbLQ+czfZb83CQZsgLu6RP/C3o7fg4
- 0Tp8z19OXY/ABUelr4Nx50muS+9ok8KuARMWdmXDpe5/TzKYoF7jsgS7p8XPBEGIfidC
- b2pA==
+ (Exim) id 1kn8OK-000KCj-81
+ for samba-technical@lists.samba.org; Wed, 09 Dec 2020 22:57:02 +0000
+Received: by mail-pf1-x436.google.com with SMTP id p4so2193816pfg.0
+ for <samba-technical@lists.samba.org>; Wed, 09 Dec 2020 14:56:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=edu.singelland.nl; s=leerlingen;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+ bh=AP12z4l3LmYOB38XToAOkwN3anVtm/qAePpSH4/VMBw=;
+ b=dzmtlPBnkK6P4m1utYBE4OpwZ27RX8BUajDNfANXWgs7GuALf3dbgoJwTqtGxBqrH7
+ aWIavrfTi1FZk7V16/+tF+2touJnpsgRZpsKPBt40d1WtUwRJtipLpJblXKFpAWaak1G
+ B7Esf1m7Ql33tSjnx1poCFNNNAEfSwODD5K+Dg+Iuq2J6JxVvJyVbpwBoqZBgQ8uuaDy
+ DhPVShO/RwBdPyboo8aYxaEyVJ0ly6u1OhDuMiCcpblvyGhWcvWbXRCzHInV/PAhoCHJ
+ +lafDVzGFm7GoIFNCTKriKqfCUbgEwtebqAOX/1d8uJIep670LwDqXUO1+T1TEOef8ff
+ v0pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=zPEezVzK5/kLNT18lfW/dfChG0nQyJZzaqQoMAH4Ojw=;
- b=sMiF/b/b4LpAii3MhJJZ+uiphf3TtHWpglbTia7DGbWNE+Mom30mGyM3vKBvI3Q5dE
- 6KUH3yq+TSrXY2TT/evqnAsWG/YGBaaT2uyGU8Rrk4QDhfNSnasawTN0wyb/Z5RQc+rV
- dHthcUCwpkvRTDEQQ/ppRHkUHOh08JGRi33r8sf38HbaNz+ky8Hi2HZEZZbDvftTno5J
- RfYwYJyvliyu/VJggYGeaGO9WPal/SK+IBAetrAbAR+sgip/qVINw3hxwPahZJXfNISJ
- d7yygDtmdKMvKYrZpSJj6ADnJY4g+r9CU0LR0beDXFHF4wN24ytt4byXcRwQWqQjxIIQ
- +20Q==
-X-Gm-Message-State: AOAM530QUHnb5H0zAAZZ/JlCPiVZ0gUqzHs6jP8+MyOdP1U8dGikCoJ7
- 0VCeNp3hzn+9LiWeEjG6DXqSaJoZlclit6pU6tQ=
-X-Google-Smtp-Source: ABdhPJxV3qjQHB6wUEKu9rWrbuLtX9hIHxwZYN45a2xlKjN3Iv09O/zEhJ+iIFYHbTAk33M7azJfMCbvOBT9Bh7Cz4k=
-X-Received: by 2002:a19:950:: with SMTP id 77mr6586265lfj.133.1607460172142;
- Tue, 08 Dec 2020 12:42:52 -0800 (PST)
+ :message-id:subject:to;
+ bh=AP12z4l3LmYOB38XToAOkwN3anVtm/qAePpSH4/VMBw=;
+ b=VnqnvNjaXOM5L4HINg50YVhMbY0brGehEYdL68gwnw5cZ8TYTJJWmu97p95hJq7IPP
+ Saw3Jru/135WUhVmv85h5FJ38XMdtLGj0JqxoKk5vw244b6N2wrJZFy0PuPRA4MYN0n7
+ 93HKfrqIFJjHXTjNEUTS8Xm9/aMF2u8GrUI57CEot+PRtam1EBHuBX8VarBJ1w7aA3jH
+ dh9LPJWgqeR5SG/vRX81kpkQhpaKkqzeIs1kdY7vv2JiLRJDGR5wWWBaMFHOg8PHTsAt
+ 3oJYAAkSqglPO6s30i3ppS+4eBelDMQiq0f0H3lIF6xtcTHpxGiP5xfSjWd+CQSmAiFR
+ kh8w==
+X-Gm-Message-State: AOAM53037d+j1XZCMoXABCPHLUNEAVrdDra4gVUzoFvG0EOKcrFTIo3B
+ 48ED3XfNkhvjm2Qbv06MUgNXxAat1EOJOgUzmyt1AXXarzlI
+X-Google-Smtp-Source: ABdhPJy++5RPlq3SoMqlDZSGvMiPusufInbP5JXtKZ58bP+CNbFWwd/ehhdLk5hTI6ugmGlMmDCxyvQQWncriBZtkps=
+X-Received: by 2002:a62:d142:0:b029:19e:62a0:ca1a with SMTP id
+ t2-20020a62d1420000b029019e62a0ca1amr2347218pfl.80.1607521552274; Wed, 09 Dec
+ 2020 05:45:52 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1605896059.git.gustavoars@kernel.org>
- <8a35ff7132f95e24f6d9501e1bec644854fc5078.1605896059.git.gustavoars@kernel.org>
-In-Reply-To: <8a35ff7132f95e24f6d9501e1bec644854fc5078.1605896059.git.gustavoars@kernel.org>
-Date: Tue, 8 Dec 2020 14:42:40 -0600
-Message-ID: <CAH2r5mtS-A+0N1byiXT3GYHEAkvyZByBdr-G_+ZDGhcfs40qrQ@mail.gmail.com>
-Subject: Re: [PATCH 003/141] cifs: Fix fall-through warnings for Clang
-To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+References: <E1kma8A-0043no-2r@hrx0.samba.org>
+In-Reply-To: <E1kma8A-0043no-2r@hrx0.samba.org>
+Date: Wed, 9 Dec 2020 14:45:39 +0100
+Message-ID: <CAAr6HVWoL_9x92Y_YjomX9dwjbF_phS-oX+OAPMbVCJy7YAvNg@mail.gmail.com>
+Subject: Re: [SCM] Samba Shared Repository - branch v4-13-test updated
+To: samba-technical@lists.samba.org
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,77 +70,131 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, linux-hardening@vger.kernel.org
+From: Bo Bosma via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Bo Bosma <130273@edu.singelland.nl>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Merged into cifs-2.6.git for-next
+yo sambabal,
+dont mail me you ugly cow fatass mother fucker id dont LIKE YOU
+NOW FUCK OFF PLZ
+:)
+BYEEEEEE
 
-Let me know if you see any other cleanup/misc cifs.ko patches that may
-have gotten missed ...
+Op di 8 dec. 2020 om 11:22 schreef Karolin Seeger <kseeger@samba.org>:
 
-On Fri, Nov 20, 2020 at 12:25 PM Gustavo A. R. Silva
-<gustavoars@kernel.org> wrote:
+> The branch, v4-13-test has been updated
+>        via  54d3d3cbf49 s3: smbd: Quiet log messages from usershares for
+> an unknown share.
+>        via  f7490ec9d94 s3-libads: Pass timeout to open_socket_out in ms
+>       from  585c49f21f7 vfs_glusterfs: print exact cmdline for disabling
+> write-behind translator
 >
-> In preparation to enable -Wimplicit-fallthrough for Clang, fix multiple
-> warnings by explicitly adding multiple break/goto statements instead of
-> just letting the code fall through to the next case.
+> https://git.samba.org/?p=samba.git;a=shortlog;h=v4-13-test
 >
-> Link: https://github.com/KSPP/linux/issues/115
-> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
-> ---
->  fs/cifs/inode.c     | 1 +
->  fs/cifs/sess.c      | 1 +
->  fs/cifs/smbdirect.c | 1 +
->  3 files changed, 3 insertions(+)
 >
-> diff --git a/fs/cifs/inode.c b/fs/cifs/inode.c
-> index 9ee5f304592f..ac01f9684b39 100644
-> --- a/fs/cifs/inode.c
-> +++ b/fs/cifs/inode.c
-> @@ -771,6 +771,7 @@ cifs_get_file_info(struct file *filp)
->                  */
->                 rc = 0;
->                 CIFS_I(inode)->time = 0;
-> +               goto cgfi_exit;
->         default:
->                 goto cgfi_exit;
->         }
-> diff --git a/fs/cifs/sess.c b/fs/cifs/sess.c
-> index de564368a887..6c2c42f8d893 100644
-> --- a/fs/cifs/sess.c
-> +++ b/fs/cifs/sess.c
-> @@ -812,6 +812,7 @@ cifs_select_sectype(struct TCP_Server_Info *server, enum securityEnum requested)
->                                 return NTLMv2;
->                         if (global_secflags & CIFSSEC_MAY_NTLM)
->                                 return NTLM;
-> +                       break;
->                 default:
->                         break;
+> - Log -----------------------------------------------------------------
+> commit 54d3d3cbf49b660f7e93aa45caa94fa6821c0999
+> Author: Jeremy Allison <jra@samba.org>
+> Date:   Wed Dec 2 11:47:02 2020 -0800
+>
+>     s3: smbd: Quiet log messages from usershares for an unknown share.
+>
+>     No need to log missing shares/sharenames at debug level zero.
+>
+>     Keep the debug level zero for all other usershare problems.
+>
+>     BUG: https://bugzilla.samba.org/show_bug.cgi?id=14590
+>
+>     Signed-off-by: Jeremy Allison <jra@samba.org>
+>     Reviewed-by: Rowland penny <rpenny@samba.org>
+>     Reviewed-by: Andrew Bartlett <abartlet@samba.org>
+>
+>     Autobuild-User(master): Jeremy Allison <jra@samba.org>
+>     Autobuild-Date(master): Fri Dec  4 20:54:06 UTC 2020 on sn-devel-184
+>
+>     (cherry picked from commit 8a0a7359faba642baf55a8f98ff78c0d0884d0f0)
+>
+>     Autobuild-User(v4-13-test): Karolin Seeger <kseeger@samba.org>
+>     Autobuild-Date(v4-13-test): Tue Dec  8 10:21:11 UTC 2020 on
+> sn-devel-184
+>
+> commit f7490ec9d94edfc9cdc79e70580b3b226a2022d5
+> Author: Isaac Boukris <iboukris@gmail.com>
+> Date:   Tue Jul 14 22:38:06 2020 +0200
+>
+>     s3-libads: Pass timeout to open_socket_out in ms
+>
+>     BUG: https://bugzilla.samba.org/show_bug.cgi?id=13124
+>
+>     Signed-off-by: Isaac Boukris <iboukris@samba.org>
+>     Reviewed-by: Andreas Schneider <asn@samba.org>
+>
+>     Autobuild-User(master): Andreas Schneider <asn@cryptomilk.org>
+>     Autobuild-Date(master): Thu Jul 16 10:41:40 UTC 2020 on sn-devel-184
+>
+>     (cherry picked from commit d67e9149a612044e247e7a4d78913ecf396c69fc)
+>
+> -----------------------------------------------------------------------
+>
+> Summary of changes:
+>  source3/libads/ldap.c    |  4 +++-
+>  source3/param/loadparm.c | 10 ++++++++++
+>  2 files changed, 13 insertions(+), 1 deletion(-)
+>
+>
+> Changeset truncated at 500 lines:
+>
+> diff --git a/source3/libads/ldap.c b/source3/libads/ldap.c
+> index 10ab043f721..ee4628a09a2 100755
+> --- a/source3/libads/ldap.c
+> +++ b/source3/libads/ldap.c
+> @@ -96,9 +96,11 @@ static void gotalarm_sig(int signum)
+>         {
+>                 int fd = -1;
+>                 NTSTATUS status = NT_STATUS_UNSUCCESSFUL;
+> +               unsigned timeout_ms = 1000 * to;
+>
+> -               status = open_socket_out(ss, port, to, &fd);
+> +               status = open_socket_out(ss, port, timeout_ms, &fd);
+>                 if (!NT_STATUS_IS_OK(status)) {
+> +                       DEBUG(3, ("open_socket_out: failed to open
+> socket\n"));
+>                         return NULL;
 >                 }
-> diff --git a/fs/cifs/smbdirect.c b/fs/cifs/smbdirect.c
-> index b029ed31ef91..10dfe5006792 100644
-> --- a/fs/cifs/smbdirect.c
-> +++ b/fs/cifs/smbdirect.c
-> @@ -246,6 +246,7 @@ smbd_qp_async_error_upcall(struct ib_event *event, void *context)
->         case IB_EVENT_CQ_ERR:
->         case IB_EVENT_QP_FATAL:
->                 smbd_disconnect_rdma_connection(info);
-> +               break;
 >
->         default:
->                 break;
+> diff --git a/source3/param/loadparm.c b/source3/param/loadparm.c
+> index 6674485738a..a3abaa2ec67 100644
+> --- a/source3/param/loadparm.c
+> +++ b/source3/param/loadparm.c
+> @@ -3418,6 +3418,11 @@ static int process_usershare_file(const char
+> *dir_name, const char *file_name, i
+>            open and fstat. Ensure this isn't a symlink link. */
+>
+>         if (sys_lstat(fname, &lsbuf, false) != 0) {
+> +               if (errno == ENOENT) {
+> +                       /* Unknown share requested. Just ignore. */
+> +                       goto out;
+> +               }
+> +               /* Only log messages for meaningful problems. */
+>                 DEBUG(0,("process_usershare_file: stat of %s failed. %s\n",
+>                         fname, strerror(errno) ));
+>                 goto out;
+> @@ -3623,6 +3628,11 @@ int load_usershare_service(const char *servicename)
+>         int max_user_shares = Globals.usershare_max_shares;
+>         int snum_template = -1;
+>
+> +       if (servicename[0] == '\0') {
+> +               /* Invalid service name. */
+> +               return -1;
+> +       }
+> +
+>         if (*usersharepath == 0 ||  max_user_shares == 0) {
+>                 return -1;
+>         }
+>
+>
 > --
-> 2.27.0
+> Samba Shared Repository
 >
-
-
--- 
-Thanks,
-
-Steve
-
+>
