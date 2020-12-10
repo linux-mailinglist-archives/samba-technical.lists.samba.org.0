@@ -2,52 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 585A02D4F90
-	for <lists+samba-technical@lfdr.de>; Thu, 10 Dec 2020 01:38:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D88532D5156
+	for <lists+samba-technical@lfdr.de>; Thu, 10 Dec 2020 04:29:19 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=x32/kRrR97eqn1YknRNWgEKjWzRIHshXaYiLycAifN4=; b=WqA5XT+xSCnAYDKQAw/6cZrsJx
-	Xnk3Pi3gK8jTAWTEARs56fUFzcffmQgm0I+NMXyZzs7EnU+FNmPvtFjo2h+7so70mg0CD4E1cobbH
-	XcZfNDXMTjN6VLs0JgEyzl/g0WTJ2QLI3Pzm+RX3coU1SZRAXAdGVVL2mFWrFlb2zuIWvhWNWGIbC
-	iUs/PZMr2PwkkB81KHpIlKXfhafO0iK1FjH5L3hNB7G0YSK2+7VugdX7kEATcgnOL1MF70n4BgFiy
-	5ddWQF5ieDTjk6gPn24qh3Sb+NSYcJXPL+UIfiHJ2oYsbCcS2aHIfPrEWqmRb+UKhk1OCF9JFFqr7
-	qaqfmb7A==;
-Received: from ip6-localhost ([::1]:27370 helo=hr1.samba.org) 
+	bh=U4Qjfmq41zZSDtJQg0/qQ8WjbM+D2P1gaNWlnd2xKZQ=; b=0eB48mWEYx/r+nmuCp83+WDqHi
+	OEFsamOyfq+8BcUVQZIi/PYpV7ufNBEtrcVJiP69ubfLfFy1KJv4g4YNyp9XRyCB9XTM0wKArPO/e
+	25thfbgok8f3qERM0BRB54usWCHKX42HL7BLaQtT6c5mI+0zLBMrJXkg8qK84ow0l+treS+jypZdn
+	7s0dmlf7PyYvuKfdBdmxDahcwMfLdNJEtfELwQkwUMT3gvuYBeXY/Lry0tg6Em7D+CNPz0VlOU3mX
+	As1AMKLcaTPSvSupFZ0ZaExPYTiey3dQHhiZR4q1oRkL9Tbybv6fwcPueHybee8m0JX+5y9x4XYdR
+	1CdrRiGw==;
+Received: from ip6-localhost ([::1]:35662 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kn9yC-000MRx-Ke; Thu, 10 Dec 2020 00:38:08 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17222) 
+	id 1knCd0-000Nob-GP; Thu, 10 Dec 2020 03:28:26 +0000
+Received: from bilbo.ozlabs.org ([203.11.71.1]:41167 helo=ozlabs.org) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kn9y8-000MRq-I8
- for samba-technical@lists.samba.org; Thu, 10 Dec 2020 00:38:06 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=x32/kRrR97eqn1YknRNWgEKjWzRIHshXaYiLycAifN4=; b=FPxQxcLklsYAa2y9q4JUQow5st
- b3rRQIgL+VBxxkOpEQGWy292S/36OYJhlnBtQ/tFc3ir5K/EnTqWjukzHSReKKwJsKf10MdQrDVRd
- Rd3wXq/W0CcEwwck+kdI/F29V1ntjY9jLMMldsOH4otTBaiBn/DfRmHu8aZ1HmtccVBm4IUqsj3Jl
- B2g5XUuRq+aG1zXJnZG8Yd3iPNC6H9Z89AkP3E3xMXBzpTAINYqgQiWvoY5TFXMZbq5j508rBVP3y
- l4izPmCIk4YJh668ZX03YyEID9BajAZ0aiF+jeUDrFiZ8qO0ER5TpstarumeaxVIy2Qc/ObGGrsdw
- bUL33HjoEcrnZjcsPQz5Ja1LyB/JOG5e+PnMDtBu0aZyzgG4MblL2erWl6RcdhyW6u1DLZpeJDBQG
- vsYxyw3C+gBEmZ7TR61OeMNyTHE4Kw08U85GdRNel2gvGh4A9OSpPbstAR+hiNPVjR5Fi3z306a2U
- jP5+JcwfCW6dzMubukILy/Lz;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kn9y4-00054V-8D; Thu, 10 Dec 2020 00:38:00 +0000
-Date: Wed, 9 Dec 2020 16:37:57 -0800
-To: Joseph <j@gget.it>
-Subject: Re: Samba + exFAT : how to avoid pre-allocating when copying big
- files?
-Message-ID: <20201210003757.GA2150508@jeremy-acer>
-References: <CGME20201208011550epcas1p26cebc8a4d2812fca862990739a059d43@epcas1p2.samsung.com>
- <007f01d6ccff$aad6f7f0$0084e7d0$@samsung.com>
- <008101d6cd05$0faa5500$2efeff00$@samsung.com>
- <CACyXjPwvNSfw9PLtUBxQQF4ysedpOE_TriTuX-JajRmFAHhQMQ@mail.gmail.com>
- <008201d6cd10$d5187910$7f496b30$@samsung.com>
- <20201208042132.GB1875689@jeremy-acer>
- <fc04e216-71c8-4efa-b34e-f118ea12f67e@mtasv.net>
+ (Exim) id 1knCcs-000NoS-E6
+ for samba-technical@lists.samba.org; Thu, 10 Dec 2020 03:28:24 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4CrzrL4Qkzz9sWK;
+ Thu, 10 Dec 2020 14:27:46 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=202004;
+ t=1607570867; bh=dqXELS5IbaTjDOa0Szy8snpqdbZE3ayQhmJmLS/y7ZY=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=XKT5gdpAoz7d7qtGKqLU6ZvFfzSUDNv0XXCXvF8l/gYFXpAwvg//2WPC2LJJBWj5n
+ lOwr6Y9xMLLnk4GXDgg+zvaaUbG82ovvve8PZDdegVbZ5yBpLDjkCCuPgG3ug3pXGd
+ s5Qur2dtbYTN3S108YMJRM6+LicdKhZ484E8zbpmBlG38gtON9W2sQ1ibG81rFjOdM
+ YaTV+KMiDB2Q+7enMHs5rewiYks0Z+FTM28DCQZx+yHltq5AWZy3XD2nnn0fu8JG57
+ kjZiYU7ryJkTd6rk7knTqOPWsb39t9SrGj0bX4hRWeycEaY7b5b5OUBgzk1wI4OWkP
+ RZKq0LBh6DffA==
+Date: Thu, 10 Dec 2020 14:27:44 +1100
+To: Rowland penny <rpenny@samba.org>
+Subject: Re: Samba testing on CentOS 8
+Message-ID: <20201210142744.398a7e75@martins.ozlabs.org>
+In-Reply-To: <df4952fb-87d9-6cc8-e55c-a08487ff34aa@samba.org>
+References: <20201208231746.3c15f5b0@martins.ozlabs.org>
+ <20201208124406.GF5029@pinega.vda.li>
+ <20201209003132.328ca229@martins.ozlabs.org>
+ <df4952fb-87d9-6cc8-e55c-a08487ff34aa@samba.org>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <fc04e216-71c8-4efa-b34e-f118ea12f67e@mtasv.net>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,96 +60,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Namjae Jeon <namjae.jeon@samsung.com>,
- samba-technical <samba-technical@lists.samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Dec 09, 2020 at 08:50:49AM -0500, Joseph via samba-technical wrote:
->> FileEndOfFileInformation == ftruncate();
->> FileAllocationInformation == fallocate(.., FALLOC_FL_KEEP_SIZE, offset,
->len)
->
->Jeremy, by ftruncate() do you mean "immediate writing of null bytes"?
+Hi Rowland,
 
-No, ftruncate sets the length (EOF) of the file.
+On Wed, 9 Dec 2020 15:42:27 +0000, Rowland penny via samba-technical
+<samba-technical@lists.samba.org> wrote:
 
-Whether it fills the intermediate areas with zero
-bytes is a driver/filesystem dependent issue.
+> Hi, based on what is all over the internet about the future of Centos, 
+> should we continue to test anything on Centos 8 ? I mean, we may get to 
+> a point where we do not know whether a fault is down to Samba code or 
+> code that isn't in RHEL but is in Centos stream. Just a thought and I 
+> could be talking out of my hat.
 
-If it sets the length greater than the current file
-then the POSIX requirement is that when an application
-reads between the old EOF and the new (extended) EOF
-then zero bytes must be returned.
+You make sense and I agree.  When CentOS becomes a rolling testing
+stream then it will no longer be a stable platform for testing.  Amitay
+and I were discussing this yesterday and we didn't come up with a good
+answer. One reason why there is no good answer is that we want a stable
+testing environment but sometimes Samba moves faster than the stable
+distros (e.g. CentOS 7 and GNU TLS) and this might happen again,
+possibly with other distros (e.g. Debian stable).
 
-Whether they are stored on disk or the file is marked
-sparse and they are added on read is filesystem dependent.
+However, right now I have limited time available to make changes to our
+testing environment.  So my pre-Xmas goal is to open a bug, "fix" the
+CentOS 8 bootstrap script, backport the fix to 4.12/4.13 and have a
+working test environment again.
 
-Samba doesn't know or care about the filesystem layout
-(not strictly true for some advanced filesystems, but
-in general this is the case).
+Hopefully in the new year I'll find time to update autocluster to use
+something else as a test environment.  Part of this is probably to add
+support for the Debian family of distros.  At least then we will have
+flexibility if things change.
 
->I've analyzed syscall logs to see how some programs on Windows do, which
->1) create a file on exFAT partition
->2) immediately set 1 GB file size *without* any delay; it's instantaneously
->reported as 1GB in the Explorer; also, there is no 1GB null-bytes writing
-
-So the Windows driver is setting EOF without writing
-zeros.
-
->3) then write the actual file content
->It goes like this:
->t=0.000s: CreateFile
->t=0.000s: SetFileInformationByHandle with FILE_END_OF_FILE_INFO,
->EndOfFile=1073741824
->t=0.000s: SetFileInformationByHandle
->with FILE_ALLOCATION_INFO, AllocationSize=1073741824
->t=0.001s WriteFile     (here the real data writing begins)
->...
->t~44sec  WriteFile   (last block written)
->
->So this confirms that, with the Windows native exFAT driver, neither
->"FileEndOfFileInformation" nor "FileAllocationInformation" triggers an
->immediate truncate() or writing of null bytes for an opened file handle.
->This "writing of null bytes" only happens when the file is closed for the
->"remaining unwritten blocks", that's the trick. Example:
->    CreateFile, SetEndOfFileInfo+SetAllocationInfo 1GB, Close  => then 1GB
->of null bytes written
->    CreateFile, SetEndOfFileInfo+SetAllocationInfo 1GB, Write 100MB, Close
->=> then only 900 MB of null bytes written
->    CreateFile, SetEndOfFileInfo+SetAllocationInfo 1GB, Write 500MB, Close
->=> then only 500 MB of null bytes written
->    CreateFile, SetEndOfFileInfo+SetAllocationInfo 1GB, Write 1000MB,
->Close  => then 0 MB of null bytes written ! <-----
->
->Namjae, do you think this should be done directly at the Linux exFAT driver
->layer?
-
-This has to be done in the exFAT driver code. Samba as a userspace
-program can't know if setting EOF writes out zero bytes or merely
-sets an sparse extent. Reading just returns zero bytes for us
-whichever the filesystem driver choses.
-
->I'm not sure if the modification should be at the Linux exFAT driver layer,
->or in Samba?
->
->If the latter, in Samba, would it be possible to avoid that
->SetFileEndOfFileInformation == ftruncate()  == immediate writing of null
->bytes?
-
-The only way to do that is as I said to have a customer VFS
-module that lies to the upper layers about file length. This
-is a somewhat complex bit of code as it has to catch and lie
-to the smbd code for all possible accesses of the filename/handle
-for all stat() calls.
-
->TL;DR: with Windows' native exFAT driver, SetAllocation+SetEndOfFileInfo
->does not write any null bytes now, if the file handle is still open. It
->will only write null bytes, on file close, on the *remaining* space that
->has not been written before. If all the preallocated blocks are already
->written, there is no null-bytes writing.
-
-That's a driver decision.
+peace & happiness,
+martin
 
