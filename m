@@ -2,41 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2E2F2D82E8
-	for <lists+samba-technical@lfdr.de>; Sat, 12 Dec 2020 00:52:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AED752D8362
+	for <lists+samba-technical@lfdr.de>; Sat, 12 Dec 2020 01:26:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=FAb/EbVJI5ZfHGzubR/iAZRPbllsl+TuEsyvjaKRZHs=; b=adjtM+t3Hfqi2JcvJLx9bqAUIk
-	Sx5pJCUFRrVA0j7DY9qonoNxH25eAZsUQohPshEeWbwZb9AzeHCbI9VH5TVf+qk+Uib+7uzp06d/a
-	k4Q/O4fNfT+4VHl+ny1ylvqiPxg8JtRIZU43z7XWVlL25V3Ia3BPS4aff+BNWvS5+DoIVoAs7liHx
-	400EfyzM5d9JFZzzMfwXTFQjE+I2xbzoxuICsttAwuyOOADp+VPIznSMnCkJFzfKB7MMHc9emJSAQ
-	YC6H8GjGKvZ/AhtjT/8Rdc4so3rYp2mlJQmggxwz+MsyMIXevfxmbs+3HmIc8ktAueIR9oh3g+eE6
-	zkCLwx8w==;
-Received: from ip6-localhost ([::1]:38600 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=z3RrlziF+gGlpaiBrAYtdbSb50+c2ixRFTJHPIsYWSk=; b=R1vb0bTWi3K+JNz1eJFCNbNoeH
+	z9ZG3p/StlYb8Nq/on8QJ9bza2FGjiQSwMXDNx71+GcoTgDapII7fD1aWhsEQYuI5i5vShh9iowfM
+	lAvrtMfbIuxAJL0n7i7aHxNxifH7mSy19RiK1xIWHhW3GsPzN1u/Z5zgtO4cXgP4HnE63320eEVrY
+	J4mi93nGoqxAO9WFgI6Vlij96ftJmni78nLPy/2ezCO+uolG67r6t8css0+JtzLXZuVWvgzU8VQnc
+	yy7t5pHUwdTvJKE5eV8JhyU1VKRzlPxZmw2K9XtMAZxh7DVn8LDjkGkWxgyi9ZO9lmOehwpkyJ9Fx
+	KrsVinog==;
+Received: from ip6-localhost ([::1]:39358 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1knsCI-000gVh-Ng; Fri, 11 Dec 2020 23:51:38 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42774) 
+	id 1knsjm-000glw-3h; Sat, 12 Dec 2020 00:26:14 +0000
+Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:56677 helo=ozlabs.org) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1knsCD-000gVa-JZ
- for samba-technical@lists.samba.org; Fri, 11 Dec 2020 23:51:36 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=FAb/EbVJI5ZfHGzubR/iAZRPbllsl+TuEsyvjaKRZHs=; b=QCmTm/7/l6Vlgz3300MrhEW+Vd
- eSWnNDYWMYmUEM1O2UEeD8yy59pJG60UDgUDme0svjnOGJz+2Ou/MqFP+uSR0AHdDYeqz+4cotVmM
- e/MZJPX1EnI9LUrJCAsDOs/+/n023oM71LmNKu/0kUK5giBkHTH8pYujLjs9yc7b6M5oYp7+11kgx
- Zuv0VbKYzfQs2nXyp48cJMoeAp+NA0JBCw2sY++ct1VVcg/pFMyruAfppVk57xQygWTIqWhArbWhE
- NXNE7uWmKxCW0mXg8GMyIGLz0dOJ8Np/LdA3/UZuY3Z1cMEK/NCrpFDM8gvIv3NMo8dl1PApD+gks
- I4PD5mUcb5GAz407V9qENSfhTXF3VFpxxZRMrxBfgMyw2m1RP+PKOMJ9RNzs227umQBBll3OtKqgr
- 1HITxUEROVaRMBkWDHmp3Jug+wimSPb8a+ObtyQHewiUduOPaOG84GsA2pHWNziYkThVWK6NkKDFJ
- iXnnCM6qNa1HxDHvSk3sacrb;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1knsC8-0004Sd-KF
- for samba-technical@lists.samba.org; Fri, 11 Dec 2020 23:51:28 +0000
-Message-ID: <848ffb00f04a897090aa726692fcca7a8271d272.camel@samba.org>
+ (Exim) id 1knsjf-000glo-LS
+ for samba-technical@lists.samba.org; Sat, 12 Dec 2020 00:26:11 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4Ct7jF2tMGz9sSs;
+ Sat, 12 Dec 2020 11:25:37 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=202004;
+ t=1607732737; bh=81TazJAWzKc37/OrlzDGE/dBl6js1XIhB1jMjj9Hw8Y=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=X69C771NhIeC0zi4rNj5Rz0eBg6oT1D9a1HB0u78TVRaEQDEEsSHrgMm6yy0rKHnq
+ yCIcyZOANSoUsmL7NIhj8S8y+bMlbYwG9FD0G80omyLaVLUfsM2t5bR2PMu4P0x88Z
+ gymt1SkbNOYzI17mRS222/39vpGI0kZuyFPe/h2+TiXol+wxevkasxIdsTSK0HBRgh
+ 1iqrnfxzik9jXLeCMQ8EMjd5p2K1OH3UCgXsmkJMrcWgTJqcMlmyo2vvlKpqwR5fWC
+ P8GbK+/RLvUbN7qw6Ig6Kw+gVC3gdPu2k0m1FdlWuF9MHyAAeYFBSYyg56pE+uzwxB
+ HHhejEI3Bn0iQ==
+Date: Sat, 12 Dec 2020 11:25:35 +1100
+To: Andrew Bartlett <abartlet@samba.org>
 Subject: Re: Samba testing on CentOS 8
-To: samba-technical@lists.samba.org
-Date: Fri, 11 Dec 2020 18:51:24 -0500
+Message-ID: <20201212112535.48699809@martins.ozlabs.org>
 In-Reply-To: <380efeccd76b37a958da2a49656a5c1c959a0173.camel@samba.org>
 References: <20201208231746.3c15f5b0@martins.ozlabs.org>
  <20201208124406.GF5029@pinega.vda.li>
@@ -44,10 +45,10 @@ References: <20201208231746.3c15f5b0@martins.ozlabs.org>
  <df4952fb-87d9-6cc8-e55c-a08487ff34aa@samba.org>
  <20201210142744.398a7e75@martins.ozlabs.org>
  <380efeccd76b37a958da2a49656a5c1c959a0173.camel@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5 (3.36.5-1.fc32) 
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,101 +62,50 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Simo Sorce via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Simo Sorce <idra@samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sat, 2020-12-12 at 09:45 +1300, Andrew Bartlett via samba-technical
-wrote:
-> On Thu, 2020-12-10 at 14:27 +1100, Martin Schwenke via samba-
-> technical
-> wrote:
-> > Hi Rowland,
-> > 
-> > On Wed, 9 Dec 2020 15:42:27 +0000, Rowland penny via samba-
-> > technical
-> > <samba-technical@lists.samba.org> wrote:
-> > 
-> > > Hi, based on what is all over the internet about the future of
-> > > Centos, 
-> > > should we continue to test anything on Centos 8 ? I mean, we may
-> > > get to 
-> > > a point where we do not know whether a fault is down to Samba
-> > > code or 
-> > > code that isn't in RHEL but is in Centos stream. Just a thought
-> > > and I 
-> > > could be talking out of my hat.
-> > 
-> > You make sense and I agree.  When CentOS becomes a rolling testing
-> > stream then it will no longer be a stable platform for
-> > testing.  Amitay
-> > and I were discussing this yesterday and we didn't come up with a
-> > good
-> > answer. One reason why there is no good answer is that we want a
-> > stable
-> > testing environment but sometimes Samba moves faster than the
-> > stable
-> > distros (e.g. CentOS 7 and GNU TLS) and this might happen again,
-> > possibly with other distros (e.g. Debian stable).
-> > 
-> > However, right now I have limited time available to make changes to
-> > our
-> > testing environment.  So my pre-Xmas goal is to open a bug, "fix"
-> > the
-> > CentOS 8 bootstrap script, backport the fix to 4.12/4.13 and have a
-> > working test environment again.
-> > 
-> > Hopefully in the new year I'll find time to update autocluster to
-> > use
-> > something else as a test environment.  Part of this is probably to
-> > add
-> > support for the Debian family of distros.  At least then we will
-> > have
-> > flexibility if things change.
-> 
-> One advantage of the current bootstrap system is that as long as
-> nobody deletes the CI images that are built, the existing images
-> remain a stable snapshot.  It is 'just' the bootstrap scripts that
-> break for others, and of course building a new image now becomes more
-> difficult.
->  
+Hi Andrew,
+
+On Sat, 12 Dec 2020 09:45:44 +1300, Andrew Bartlett
+<abartlet@samba.org> wrote:
+
+> One advantage of the current bootstrap system is that as long as nobody
+> deletes the CI images that are built, the existing images remain a
+> stable snapshot.  It is 'just' the bootstrap scripts that break for
+> others, and of course building a new image now becomes more difficult.
+
+Thanks for hammering that observation home!  I found it slightly
+annoying when I had to build new images to test my branch on GitLab but
+I now realise that the stability is a core feature.
+
+I guess I could make autocluster create VM images for all cluster nodes
+by taking a snapshot of all cluster nodes after they have been built 
+(sans Samba/CTDB).  However, this is a change that requires significant
+work.  At the moment I lazily unpack a Samba binary tarball on all
+nodes and run the bootstrap script extracted from the tarball.  Hmmm...
+the sanest way would seem to be to build a base image containing
+everything except Samba/CTDB and the cluster filesystem.  However,
+that's what we've moved away from because building your own VM images
+eventually drives you crazy (yes, that's what happened).
+
+Requires more thought...
+
 > It is particularly sad that the end-user use of the bootstrap script
 > could become less reproducible, that was a really nice feature.
-> 
-> I'm assuming that, in the space of a few years another CentOS
-> replacement will grow up into this same space, rebuilding the SRPMS
-> of a specific RHEL release, but in the meantime this is going to be
-> awkward...
-> 
-> Of course I must say I greatly appreciate the efforts put in by Red
-> Hat and Red Hat's staff to building this ecosystem to which we have
-> enjoyed for so long.  
 
-I expect that RHEL will become free (as in gratis) for CI system at
-least for Open Source projects[1], so we should not have these problems
-either, nor a need for a rebuild, we should be able to use the "real
-thing", I hope.
+A small hack fixes it.
 
-Also note that for cloud images UBI[2] is already free, and can be used
-now (but there are still some problem, being worked on, wrt -devel
-packages afaik).
+If you're still removing Bugzilla review requests and are bored of that, please
+consider reviewing and pushing this:
 
-Quote from [1]: "In the first half of 2021, we plan to introduce low-
-or no-cost programs for a variety of use cases, including options for
-open source projects and communities and expansion of the Red Hat
-Enterprise Linux Developer subscription use cases to better serve the
-needs of systems administrators. We’ll share more details as these
-initiatives coalesce."
+  https://gitlab.com/samba-team/samba/-/merge_requests/1727
 
-[1] 
-https://www.redhat.com/en/blog/centos-stream-building-innovative-future-enterprise-linux
+:-)
 
-[2] https://developers.redhat.com/products/rhel/ubi
-
-HTH,
-Simo.
-
-
-
+peace & happiness,
+martin
 
