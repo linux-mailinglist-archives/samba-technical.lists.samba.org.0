@@ -2,53 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BB7E2DA7AF
-	for <lists+samba-technical@lfdr.de>; Tue, 15 Dec 2020 06:28:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 259A82DAB97
+	for <lists+samba-technical@lfdr.de>; Tue, 15 Dec 2020 12:03:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=cDFFy9deo570SAl4jJe5S1pRDW0bUjRsJki8AZWUUNo=; b=0af5WKRDpZeeA/J0y0DlVMs8OJ
-	IxM4GN8h2R/cccfO7ItqT8ViagRHJ8i37JzpTDTYW1Ul8zhSf9/tl3+9ySxGhrefC2Nme0EuYmJxm
-	RQw7ViU/y54rxE52gbSyK+PctVy52Y4dKyfhHhs1z2k0FkhoirH08cblkdcExT8kS6wE7XOegzVno
-	AHzgIVxYU+cCUbACc2aj/fYLcoi9llO9i3fISa4wEbAEQ9lXmrFrc6QAdam3yKE6qujViooT3hmc7
-	6YG4S/hJtvYeITiYfHZ/voaz1w2kuQDsjp5sBueuoKtEz2ruvGHokXUU92Cyy8OR0tlIqwpxixNOw
-	khaZqCUg==;
-Received: from ip6-localhost ([::1]:45018 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=TJX/5V6xKs0CFtcEp8SjELpy38tp2bd3r9KMjIN0tF8=; b=Pnbdy2xWn2LZJGptAtXPt6J+nO
+	wCD2t42+/ZlJOZi/vHd2gHPkueEgdRDfG8QqTiQP/N9/ntTfCaznc1abVnQ6pxdfZbMiITAdCCsbG
+	qXy/ta6FTxnhBJUCTyUuxOt29mj6wg//jE9aqtebqNglCn1ZsFrBtcQLmU+SflXeUvLojmdWdJoF1
+	FDW+k7PYbIDMjPthY/+FrlGFiUOC1u7nxQ7MF3lJsx6yiHjpsPb5zxgeAwlVtxDBB5yqRw+hbZr4g
+	IRj0ZOdG0u3jNNbtmnOGweHr6k3o2P72iW0RbeR4t+7xRlx+HdLM7FDv3PEsljH/KLjNeLZ/McbUA
+	Zxh3ycrQ==;
+Received: from ip6-localhost ([::1]:60704 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kp2s7-001Hus-IW; Tue, 15 Dec 2020 05:27:39 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56058) 
+	id 1kp86P-001L3W-4d; Tue, 15 Dec 2020 11:02:45 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64162) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kp2s1-001Hul-RB
- for samba-technical@lists.samba.org; Tue, 15 Dec 2020 05:27:37 +0000
+ (Exim) id 1kp86E-001L2q-Is; Tue, 15 Dec 2020 11:02:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=cDFFy9deo570SAl4jJe5S1pRDW0bUjRsJki8AZWUUNo=; b=EoI8b1ySlujoFCPcil+KeuP7l9
- xJ5JQbx+c4OmaKe7Lstwzr5H/MvJYg2/vflhIn/5qLoDwawuurbX61xNwkonU533ljc+QqMs/8jUI
- QBrvwVUoXKo8eQ2af3VO/6RzzcnxL4v01SYnPxeH10fhSM15Ul1z5BF7jQL7z/oT4scOAqKPoM8Li
- yPe5y1Dc/K4OKT1ZBSpFTSHEGWCmntpacEGfxKu2PBoe8RpHVfrTUop4JGBmnafdIrvslwHL9wHfM
- KUPeqUrKvaU+F2yuwunJjL54RtE4wjRly7abWo3Ib+l0wu55ht2Y6KM2YtKX9t5jJc9v75ZVRvIeV
- /PxMqbHUhltP9ARyZH0alRA2DjYF8fEKN3umt02AYKKcWds1ku4Rnd0MVkHMScJmiVHYWq+XCN7+e
- t8dmcDc6Duq1AFKNm45cbmpxeWHJBKWAN9fDLoyoCbKuEsIyLmmOUJlo5CFkgCiT48L43gq1z7uP4
- pm46WHC1zHghmUgngm/1qPNx;
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=TJX/5V6xKs0CFtcEp8SjELpy38tp2bd3r9KMjIN0tF8=; b=lM28x1M898vPcfONSbPhQ8rK8T
+ itlH8kOnka5RApls/yiV4vYaXXZYYBUiy63HAsnepu2stHZZjqUVjsaBO5AjmjvKlC+hNXsT6R08Z
+ wKhVbN3tr+N3hb6ZDNKx9I1FpjlmcfLomwIwaB6kodT1mI4jQzOsxQnYhhNuzCYu0WP+4ybVIf2kk
+ PCAg54bYHBoIbIs9qpATOaThxZmww1xVJmpgd+4LL5YlAMIqOL0xynAyTqE3/IaLfC2C8jyGMGQXW
+ 0MgrHv0Nl4NzQjgJcRlGRLQaPUnKH+DEyqYjtFQSSuQuGHy8P2Oraxbp8AdvMPPKcKKfkVZKo5LL+
+ UNqvKUT9JEZD3+i9aoQ0NT1tQHL67OhU+/3I96rsWOPrwUJBgHOE3LnkiWo4rXYr8Nx8p/QLH1u5u
+ GVg9gRTRxa2lwB8g4TSvP2TzAGm3WO/Np4j32K+fsbuTkpt4xHYB9CGzn+THWptFfLudlH/g8YiTQ
+ G97YbTmwj+j58972vIQ3MxqM;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kp2ro-0006Hy-JD; Tue, 15 Dec 2020 05:27:21 +0000
-Message-ID: <869254670a3cd07b8320d32c81beb6a4fdac39a7.camel@samba.org>
-Subject: Re: Samba testing on CentOS 8
-To: Martin Schwenke <martin@meltin.net>
-Date: Tue, 15 Dec 2020 18:27:13 +1300
-In-Reply-To: <20201215154043.3b1c5876@martins.ozlabs.org>
-References: <20201208231746.3c15f5b0@martins.ozlabs.org>
- <20201208124406.GF5029@pinega.vda.li>
- <20201209003132.328ca229@martins.ozlabs.org>
- <df4952fb-87d9-6cc8-e55c-a08487ff34aa@samba.org>
- <20201210142744.398a7e75@martins.ozlabs.org>
- <380efeccd76b37a958da2a49656a5c1c959a0173.camel@samba.org>
- <20201212112535.48699809@martins.ozlabs.org>
- <20201215154043.3b1c5876@martins.ozlabs.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.4-0ubuntu1 
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kp86D-0001AF-1v; Tue, 15 Dec 2020 11:02:33 +0000
+Date: Tue, 15 Dec 2020 12:02:30 +0100
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.13.3 Available for Download
+Message-ID: <20201215110228.GA17630@carrie2.fritz.box>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="VS++wcV0S1rZb1Fb"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,77 +54,120 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2020-12-15 at 15:40 +1100, Martin Schwenke wrote:
-> On Sat, 12 Dec 2020 11:25:35 +1100, Martin Schwenke via samba-
-> technical
-> <samba-technical@lists.samba.org> wrote:
-> 
-> > On Sat, 12 Dec 2020 09:45:44 +1300, Andrew Bartlett
-> > <abartlet@samba.org> wrote:
-> > > One advantage of the current bootstrap system is that as long as
-> > > nobody
-> > > deletes the CI images that are built, the existing images remain
-> > > a
-> > > stable snapshot.  It is 'just' the bootstrap scripts that break
-> > > for
-> > > others, and of course building a new image now becomes more
-> > > difficult.  
-> > 
-> > Thanks for hammering that observation home!  I found it slightly
-> > annoying when I had to build new images to test my branch on GitLab
-> > but
-> > I now realise that the stability is a core feature.
-> 
-> Of course this is also a bit dangerous.  The worst case is very
-> unlikely, but if a change accidentally depends on a 3rd party libray
-> bug and all of the test platforms later fix the bug then our test
-> framework won't notice the breakage because we're using "stable"
-> (i.e. out-of-date) images.
-> 
-> It makes sense to update our CI images every so often to make sure
-> our
-> tests still pass on current versions.  I'm not sure how we would do
-> that.  The technical part is quite clear
-> (SAMBA_CI_REBUILD_IMAGES=yes)
-> but the process part is more interesting.  For example, how do
-> we do out-of-band CI image builds to ensure that new images are OK
-> before the CI system defaults to using them.
 
-So we verify the images are OK with the same task that we deploy on
-them, being samba-o3.  So you can just rebuild them any time you want
-and if they pass (and so will pass the next master build) they will
-overwrite the existing images.
+--VS++wcV0S1rZb1Fb
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> I guess the easiest way would be to add a comment to
-> bootstrap/.gitlab-ci.yml like:
-> 
-> # Rebuild: 1
-> 
-> (or make it actual YAML data) and increment this for every rebuild.
-> That would change the sha1sum so that old images are not overwritten
-> and the new images can be confirmed OK before pushing the change with
-> the incremented rebuild number.
+Release Announcements
+---------------------
 
-This would indeed not trigger the overwrite.  But we do check.  
-
-At the time this was built I really did think the bootstrap system was
-over-engineered, but it has been really awesome to be able to rely on
-it so comprehensively.
-
-Thanks Joe and Metze!
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+This is the latest stable release of the Samba 4.13 release series.
 
 
+Changes since 4.13.2
+--------------------
+
+o  Jeremy Allison <jra@samba.org>
+   * BUG 14210: libcli: smb2: Never print length if smb2_signing_key_valid()
+     fails for crypto blob.
+   * BUG 14486: s3: modules: gluster. Fix the error I made in preventing ta=
+lloc
+     leaks from a function.=20
+   * BUG 14515: s3: smbd: Don't overwrite contents of fsp->aio_requests[0] =
+with
+     NULL via TALLOC_FREE().
+   * BUG 14568: s3: spoolss: Make parameters in call to user_ok_token() mat=
+ch
+     all other uses.
+   * BUG 14590: s3: smbd: Quiet log messages from usershares for an unknown
+     share.
+
+o  Ralph Boehme <slow@samba.org>
+   * BUG 14248: samba process does not honor max log size.
+   * BUG 14587: vfs_zfsacl: Add missing inherited flag on hidden "magic"
+     everyone@ ACE.
+
+o  Isaac Boukris <iboukris@gmail.com>
+   * BUG 13124: s3-libads: Pass timeout to open_socket_out in ms.
+
+o  G=C3=BCnther Deschner <gd@samba.org>
+   * BUG 14486: s3-vfs_glusterfs: Always disable write-behind translator.
+
+o  Volker Lendecke <vl@samba.org>
+   * BUG 14517: smbclient: Fix recursive mget.
+   * BUG 14581: clitar: Use do_list()'s recursion in clitar.c.
+
+o  Anoop C S <anoopcs@samba.org>
+   * BUG 14486: manpages/vfs_glusterfs: Mention silent skipping of write-be=
+hind
+     translator.
+   * BUG 14573: vfs_shadow_copy2: Preserve all open flags assuming ROFS.
+
+o  Jones Syue <jonessyue@qnap.com>
+   * BUG 14514: interface: Fix if_index is not parsed correctly.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+        https://www.samba.org/samba/history/samba-4.13.3.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--VS++wcV0S1rZb1Fb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCX9iXwQAKCRAoaL1+KxeT
+UdvxAKCf8/nCFLoQRaWaDOnXieI4OVZ/5QCfSptx7LWhUuDcq8iS+qeilqo9Qog=
+=406F
+-----END PGP SIGNATURE-----
+
+--VS++wcV0S1rZb1Fb--
 
