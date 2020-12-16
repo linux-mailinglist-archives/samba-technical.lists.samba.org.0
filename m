@@ -2,85 +2,69 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E22812DBCFF
-	for <lists+samba-technical@lfdr.de>; Wed, 16 Dec 2020 09:51:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB1E72DBE79
+	for <lists+samba-technical@lfdr.de>; Wed, 16 Dec 2020 11:19:41 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=ix+u816TBtZ4pK8xW8eb/4IvuGnGKJx94XI2ZmU0Wlk=; b=ceD5ip9qDJc1WQYRd7zgWfhzGJ
-	V2MDoDgGlEuTngI83opx+ExpZiRfT+scpOtcMKiBztHRgxsgFEojSOfKpvKF3xSMXvXD0qZv9Lvt/
-	08ps1dkX4riXZdyyMZ1aHuCO5UFpSyPDiCZzG36ETJuJ4SipFTSWUss/wzaxl6jHQNnX7Uh3mylBD
-	SdYzTx8166iozifWu4eT/baIaL8bBBk4g15TspfqvDkDZzfWTPUU+NeVqSClbxGVApnOb+/Vnz2Hu
-	5+1OFXO9HrAxRbw9LV5NkzApj9nzpJWzB+XNbQLt5tPf8DjJ9i/L9q8eHGIFH2JmOyDcEr3cWRSRr
-	uWYM2ccA==;
-Received: from ip6-localhost ([::1]:31322 helo=hr1.samba.org) 
+	bh=asXNBOibR7wMbBcy3fG4A2AtkRemXxNb/fkCI9Q+U0c=; b=iUtfM/4RQWYHUMffeuSPmPQDkb
+	tvrzCwXzFQSmdJ9mdI01s2QwxYTURZPwmD2pS7J8+PL1y4AE3zXL0Ek/k9O1MU+GcgTYrc+iyeI+b
+	6BwxSjgt++FahEQZfG9T6pu3IpXA2cmZT81Ng8z2CYv3oSgDKR7eeWDJXLCzzTc47qiP8lUZ/9YvR
+	o3Ze69AbBOpkci60EBds2a4jOrl3fSWSiOQJu109wARkN8ub+z6F0fweyh+WUsSMnuwP6C7Ki4Qm3
+	FmouoNUScFH5o7l4oQ1PnQGL9IYVHZrqBkSYMCJVdrnHe4/MIfyYOgNVg+gdR4yYdhIQsdpjyyExY
+	N10YlaHQ==;
+Received: from ip6-localhost ([::1]:34340 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kpSWW-001Y2x-BB; Wed, 16 Dec 2020 08:51:04 +0000
-Received: from mailout4.samsung.com ([203.254.224.34]:13164) 
+	id 1kpTto-001YgC-LF; Wed, 16 Dec 2020 10:19:12 +0000
+Received: from smtppost.atos.net ([193.56.114.176]:26005
+ helo=smarthost1.atos.net) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1kpSWO-001Y2j-Ro
- for samba-technical@lists.samba.org; Wed, 16 Dec 2020 08:51:02 +0000
-Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20201216085036epoutp04615e452c7a11a05c2e44da53bc0fef65~RJkjZpLp60886408864epoutp04n
- for <samba-technical@lists.samba.org>; Wed, 16 Dec 2020 08:50:36 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20201216085036epoutp04615e452c7a11a05c2e44da53bc0fef65~RJkjZpLp60886408864epoutp04n
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1608108636;
- bh=ix+u816TBtZ4pK8xW8eb/4IvuGnGKJx94XI2ZmU0Wlk=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=CAbq91lB2fIgs/40Xyd1MR68TB39+YoLlJEyxZIQwcVVqof9BAIcAjGRE7VUHe0wm
- jVvS7Bjz0S5J3TBmfPiIDRh++bB2LUgkwXSY+U9EZm5wxv9XVUXB14zJgpB4Xsn9DY
- 1c8NkZAk/W/ICQjhSykiH3iqHjMCJu7Lnhltc77M=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20201216085036epcas1p32486d512da04f82bcf577ec1f3314b39~RJkjMn3Eg2879528795epcas1p3y;
- Wed, 16 Dec 2020 08:50:36 +0000 (GMT)
-Received: from epsmges1p3.samsung.com (unknown [182.195.40.162]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4Cwpk25bN9zMqYkq; Wed, 16 Dec
- 2020 08:50:34 +0000 (GMT)
-Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
- B0.A8.09582.95AC9DF5; Wed, 16 Dec 2020 17:50:33 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20201216085032epcas1p395a2802e249c7a17b534af3753a3f37f~RJkgKNGrf0058900589epcas1p3S;
- Wed, 16 Dec 2020 08:50:32 +0000 (GMT)
-Received: from epsmgms1p2.samsung.com (unknown [182.195.42.42]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20201216085032epsmtrp160748a75cac5ea7d651d7f05e1cc46dd~RJkgJknKz0069400694epsmtrp1S;
- Wed, 16 Dec 2020 08:50:32 +0000 (GMT)
-X-AuditID: b6c32a37-899ff7000000256e-73-5fd9ca59be50
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p2.samsung.com (Symantec Messaging Gateway) with SMTP id
- F5.52.08745.85AC9DF5; Wed, 16 Dec 2020 17:50:32 +0900 (KST)
-Received: from namjaejeon01 (unknown [10.88.104.63]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20201216085032epsmtip29adf7410a4ae8440ed7ad94c6cd5a57f~RJkf_iZ5H2967629676epsmtip2P;
- Wed, 16 Dec 2020 08:50:32 +0000 (GMT)
-To: "'Stefan Metzmacher'" <metze@samba.org>
-In-Reply-To: <069556fc-cb6c-1e52-02ab-fa9b71f58cf6@samba.org>
-Subject: RE: updated ksmbd (cifsd)
-Date: Wed, 16 Dec 2020 17:50:32 +0900
-Message-ID: <003c01d6d388$83669740$8a33c5c0$@samsung.com>
+ (Exim) id 1kpTtb-001Yg4-RO
+ for samba-technical@lists.samba.org; Wed, 16 Dec 2020 10:19:09 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=atos.net; i=@atos.net; q=dns/txt; s=mail;
+ t=1608113939; x=1639649939;
+ h=from:to:cc:subject:date:message-id:
+ content-transfer-encoding:mime-version;
+ bh=asXNBOibR7wMbBcy3fG4A2AtkRemXxNb/fkCI9Q+U0c=;
+ b=H7EWgeQgdNwkmwI1Ta5aN8s0C8PqxapGbZJ9hO4lSdh5xGGxQfXOb+cr
+ y0XVVP+Ink449pBQKTfBZKZN6RCEILZDvXAtjdohGPm1KduepCdHNDhzz
+ CLdQrmZ0omuy9hF2y93jSRed2Wsg6wEMaBEb0pqlDVkQ4PZzPKourHWKu U=;
+IronPort-SDR: iiP4Ohx3fsFpWp/7hB0IDrV1sl5bqoDOWDYn+YoFSt6PHLXNd4/SAgXx+HqmJnfrubp8K1TSSv
+ WTaPjHr8YFETpAWyjXOWjqhPY4daW+0XA35LXmltvXOrru7viqHKAZD/7XnBq4neNp7UEwP/yi
+ IW+wPxADkTAflHv1wjFRiFc0kZYCkgwYDSWfblkRVEKmXTovD95XHpQU7RYjHpT7ikSpak+XzM
+ Omtkeawwuc2fZBzETLVlM/uYYScvWfLy6btEwTjSfm6F3YbQEgRsQN9j5QKzhnnG2ZD1Z0Uv8M
+ vLoZGlEyMmh+baItpLYVAemo
+X-MGA-submission: =?us-ascii?q?MDElAbH8poHKPY0mhKeYHyM4yklhUJLqB9ELqf?=
+ =?us-ascii?q?RqjS1UXk0XfHxQ3rGfvk7+tF90ln5icDNizqXGIUhqg98ja0wN18wXpI?=
+ =?us-ascii?q?S3IRP3UXthulApQ9FPZG9eEpsY8b/sQlk2rJ8MPwLu8IRjhyJ9E8Quhv?=
+ =?us-ascii?q?12?=
+Received: from unknown (HELO GITEXCPRDMB11.ww931.my-it-solutions.net)
+ ([10.89.28.141])
+ by smarthost1.atos.net with ESMTP/TLS/AES256-GCM-SHA384;
+ 16 Dec 2020 11:01:44 +0100
+Received: from GITEXCPRDMB14.ww931.my-it-solutions.net (10.89.28.144) by
+ GITEXCPRDMB11.ww931.my-it-solutions.net (10.89.28.141) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2044.4; Wed, 16 Dec 2020 11:01:43 +0100
+Received: from GITEXCPRDMB14.ww931.my-it-solutions.net ([10.89.28.144]) by
+ GITEXCPRDMB14.ww931.my-it-solutions.net ([10.89.28.144]) with mapi id
+ 15.01.2044.004; Wed, 16 Dec 2020 11:01:43 +0100
+To: "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>
+Subject: cifs-utils, Linux cifs kernel client and gssproxy
+Thread-Topic: cifs-utils, Linux cifs kernel client and gssproxy
+Thread-Index: AQHW0tgPe397r8v2v0y1SGaypM9pOQ==
+Date: Wed, 16 Dec 2020 10:01:43 +0000
+Message-ID: <2e241ceaece6485289b1cddb84ec77ca@atos.net>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [160.92.209.239]
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQDtjnMiCa1AcmvYMj1ELhOClJiQLwG3FqLJAxs+MEYCGETvfAJQSgxQq4Gl7zA=
-Content-Language: ko
-X-CMS-MailID: 20201216085032epcas1p395a2802e249c7a17b534af3753a3f37f
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: SVC_REQ_APPROVE
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20201214182517epcas1p1d710746f4dd56097f16ed08cfda0f6b2
-References: <CAH2r5muRCUzvKOv1xWRZL4t-7Pifz-nsL_Sn4qmbX0o127tnGA@mail.gmail.com>
- <CGME20201214182517epcas1p1d710746f4dd56097f16ed08cfda0f6b2@epcas1p1.samsung.com>
- <3bf45223-484a-e86a-279a-619a779ceabd@samba.org>
- <003a01d6d28a$00989dd0$01c9d970$@samsung.com>
- <069556fc-cb6c-1e52-02ab-fa9b71f58cf6@samba.org>
+X-Warn: EHLO/HELO not verified: Remote host 193.56.114.176 (smtppost.atos.net)
+ incorrectly presented itself as smarthost1.atos.net
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,83 +78,62 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <namjae.jeon@samsung.com>
-Cc: 'CIFS' <linux-cifs@vger.kernel.org>,
- 'Sergey Senozhatsky' <sergey.senozhatsky@gmail.com>,
- 'samba-technical' <samba-technical@lists.samba.org>,
- 'Hyunchul Lee' <hyc.lee@gmail.com>, 'Steve French' <smfrench@gmail.com>
+From: "Weiser, Michael via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: "Weiser, Michael" <michael.weiser@atos.net>
+Cc: "gss-proxy@lists.fedorahosted.org" <gss-proxy@lists.fedorahosted.org>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-> >> 2. Why does smb2_set_info_sec() have fp->saccess |= FILE_SHARE_DELETE_LE; ?
-> > Because of smb2.acls.GENERIC failure.
-> >
-> > TESTING FILE GENERIC BITS
-> > get the original sd
-> > Testing generic bits 0x00000000
-> > time: 2020-12-15 00:00:37.940992
-> > failure: GENERIC [
-> > (../../source4/torture/smb2/acls.c:439) Incorrect status
-> > NT_STATUS_SHARING_VIOLATION - should be NT_STATUS_OK
-> >
-> > I really don't understand this test. This testcase expect that
-> > FILE_DELETE is set in response if desired access of smb2 open is FILE_MAXIMAL_ACCESS.
-> > I don't know why smb2 open should be allowed although FILE_SHARE_DELETE is not set in previous open
-> in this test.
-> > Can you give me a hint ?
-> 
-> As far as I can see the test assumes the user has SeRestorePrivilege, with that
-> SEC_FLAG_MAXIMUM_ALLOWED will add FILE_DELETE, see https://protect2.fireeye.com/v1/url?k=3a9ae45d-
-> 6501dd47-3a9b6f12-000babff24ad-8398dba5a818cd4a&q=1&e=bdf5897b-3ecc-49dc-9105-
-> 2d6782854fcc&u=https%3A%2F%2Fdocs.microsoft.com%2Fen-us%2Fopenspecs%2Fwindows_protocols%2Fms-
-> fsa%2F8ada5fbe-db4e-49fd-aef6-20d54b748e40
-The question I'm asking is how it can be opened with FILE DELETE that adding
-by SEC_FLAG_MAXIMUM_ALLOWED without FILE_SHARE_DELETE in 1st open.
-NT_STATUS_SHARING_VIOLATION error should be returned? but this test should be allowed to open.
+Hello,
 
-It test in the following sequences.
-- 1st smb2 open with NTCREATEX_SHARE_ACCESS_READ | NTCREATEX_SHARE_ACCESS_WRITE
-- SMB2 set info security().
-- 2nd open with SEC_FLAG_MAXIMUM_ALLOWED(adding FILE DELETE) => NT_STATUS_SHARING_VIOLATION or NT_STATUS_OK ?
+I have a use-case for authentication of Linux cifs client mounts without th=
+e user being present (e.g. from batch jobs) using gssproxy's impersonation =
+feature with Kerberos Constrained Delegation similar to how it can be done =
+for NFS[1].
 
-> 
-> >> 3. Why does ksmbd_override_fsids() only reset cred->fs[g|u]id, but group_info
-> >>    is kept unchanged, I guess at least the groups array should be set to be empty.
-> > Yes, We need to handle the groups list. Will fix it.
-> >
-> >> 4. What is work->saved_cred_level used for in ksmbd_override_fsids()?
-> >>    It seems to be unused and adds a lot of complexity.
-> > ksmbd_override_fsids could be called recursively.
-> > work->saved_cred_level prevents ksmbd from overriding fs[g|u]id again.
-> 
-> But that will always be on the same session/share combination?
-Ah, ksmbd_override_fsids() has been recursively called to handle SMB1 requests.
-At present, SMB1 codes was removed in smb3_kernel tree, So we can remove work->saved_cred_level.
+My understanding is that currently neither the Linux cifs kernel client nor=
+ cifs-utils userland tools support acquiring credentials using gssproxy. Th=
+e former uses a custom upcall interface to talk to cifs.spnego from cifs-ut=
+ils. The latter then goes looking for Kerberos ticket caches using libkrb5 =
+functions, not GSSAPI, which prevents gssproxy from interacting with it.[2]
 
-Thanks for your review!
-> 
-> >> 5. Documentation/filesystems/cifsd.rst and fs/cifsd/Kconfig still references
-> https://protect2.fireeye.com/v1/url?k=6f3cad54-30a7944e-6f3d261b-000babff24ad-
-> 32002aad36f8cca9&q=1&e=bdf5897b-3ecc-49dc-9105-2d6782854fcc&u=https%3A%2F%2Fgithub.com%2Fcifsd-
-> team%2Fcifsd-tools
-> >>   instead of
-> >> https://protect2.fireeye.com/v1/url?k=cf0932a6-90920bbc-cf08b9e9-000b
-> >> abff24ad-ea69fcf05590fae2&q=1&e=bdf5897b-3ecc-49dc-9105-2d6782854fcc&
-> >> u=https%3A%2F%2Fgithub.com%2Fcifsd-team%2Fksmbd-tools
-> > Okay. Will update it.
-> 
-> Thanks!
-> 
-> >> 6. Why is SMB_SERVER_CHECK_CAP_NET_ADMIN an compile time option and why is it off by default?
-> >>    I think the behavior should be enforced without a switch.
-> > I can make it default yes. Can you explain more why it should be enforced ?
-> 
-> Why should an unprivileged user ever be able to start the server?
-> Wouldn't that be a massive security problem as that user would provide the share definitions and users
-> and controls what ksmbd_override_fsids() will use?
-> 
-> metze
+From what I understand, the preferred method would be to switch the Linux k=
+ernel client upcall to the RPC protocol defined by gssproxy[3] (as has been=
+ done for the Linux kernel NFS server already replacing rpc.svcgssd[4]). Th=
+e kernel could then, at least optionally, talk to gssproxy directly to try =
+and obtain credentials.
 
+Failing that, cifs-utils' cifs.spnego could be switched to GSSAPI so that g=
+ssproxy's interposer plugin could intercept GSSAPI calls and provide them w=
+ith the required credentials (similar to the NFS client rpc.gssd[5]).
 
+Assuming my understanding is correct so far:
+
+Is anyone doing any work on this and could use some help (testing, coding)?
+What would be expected complexity and possible roadblocks when trying to ma=
+ke a start at implementing this?
+Or is the idea moot due to some constraint or recent development I'm not aw=
+are of?
+
+I have found a recent discussion of the topic on linux-cifs[6] which provid=
+ed no definite answer though.
+
+As a crude attempt at an explicit userspace workaround I tried but failed t=
+o trick smbclient into initialising a ticket cache using gssproxy for cifs.=
+spnego to find later on.
+Is this something that could be implemented without too much redundant effo=
+rt (or should already work, perhaps using a different tool)?
+
+[1] https://github.com/gssapi/gssproxy/blob/main/docs/NFS.md#user-impersona=
+tion-via-constrained-delegation
+[2] https://pagure.io/gssproxy/issue/56
+[3] https://github.com/gssapi/gssproxy/blob/main/docs/ProtocolDocumentation=
+.md
+[4] https://github.com/gssapi/gssproxy/blob/main/docs/NFS.md#nfs-server
+[5] https://github.com/gssapi/gssproxy/blob/main/docs/NFS.md#nfs-client
+[6] https://www.spinics.net/lists/linux-cifs/msg20182.html
+--=20
+Thanks,
+Michael
 
