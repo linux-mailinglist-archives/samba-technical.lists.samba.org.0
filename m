@@ -2,60 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88ECD2DD001
-	for <lists+samba-technical@lfdr.de>; Thu, 17 Dec 2020 12:04:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE1FB2DD045
+	for <lists+samba-technical@lfdr.de>; Thu, 17 Dec 2020 12:24:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=kbJZufEf+37h3Q7xTd8U457y6fbtVdHtGav3N2x+XoM=; b=zyZkbLtzreYsT4xNLESgzl26f7
-	L5iL7EVehUjU7gYxfaZJ8UTdUuWKqjJQ6upgRYDmKsQvZQHXHiLMSFJpkxYUF54RsBhiw6CWFxc7N
-	/23yQQBiJGph3mfWobv3EIYQodeazJrDY7HBwGETwqOoJgG2YxLlyTAgFUainpRONvcPP5bJ6hhrl
-	4umOPpBVfKEGIPQ0koExc7nOcmY6+LU0gIRfxPtGXPWRdBtWxWUhT0duXl8VX86ny8jVk+s3RbtWx
-	ZtudCIZOsj/uL4RrwFeIAMGSp7aFQsUBXQLHhn/Z10bBjgrTyAv5OTRyrEb0RW7Cfg7xCxQjJdnDy
-	7rnTF0Wg==;
-Received: from ip6-localhost ([::1]:62034 helo=hr1.samba.org) 
+	bh=MJTliayy9sDn/JqFJGe5MiqVxFD+o19eOrpGajhUN9w=; b=iy8qJwIDuMyItwCpO0GwSuyaBD
+	ucZNVmn0n1RexTurl8/JQp93wrhapq940qA2fEWy8P0148nQ7SQZEeVStPX8/j4ZbQ1FXOu7TyT+2
+	vJnjft3t2tMFxfDyKFOVp02vFXc/i+xhtNzuRQeL78qKcHR8ZIsdrQoOtaFACUKhzwhyQoBXbTljt
+	DVmnglRxDm8oj0Ge3m1m4JLKFD/EytroRjwbV8JNStNFLcX55aF5CGdoAth9ClT6Uk7/j0fhMHT3f
+	YXxS+L29WPxhoiA+5WFIgsN3xC7yR/74bzyB2hLvPDRyDdeJca7PqL+tV2CuUuJokNQ17y8WK03Fp
+	kw39kmqw==;
+Received: from ip6-localhost ([::1]:63454 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kpr4l-001n52-3y; Thu, 17 Dec 2020 11:04:03 +0000
-Received: from aserp2130.oracle.com ([141.146.126.79]:56538) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1kpr4f-001n4u-Uc
- for samba-technical@lists.samba.org; Thu, 17 Dec 2020 11:04:00 +0000
-Received: from pps.filterd (aserp2130.oracle.com [127.0.0.1])
- by aserp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0BHAxxui141614;
- Thu, 17 Dec 2020 11:03:43 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : mime-version : content-type : in-reply-to;
- s=corp-2020-01-29; bh=kbJZufEf+37h3Q7xTd8U457y6fbtVdHtGav3N2x+XoM=;
- b=zYVWqJoFApz4h98yLTYLZk0w7RTBENLGrmj1Jard5MD1K0lL96rEpB1aUVuHVfywW1LH
- 78Cw07DS3m1p0+ysTkUJSPXxP35pAagTcl3Ped5Ts5sH970LUngfyR7VbuTak+dKbyeu
- VSnBSXQVt39oWK2PpM/xhrC6BIf/WsSePQWci2Oatq/H/92XSJJoCU7cJ1d9PvplbjjO
- n42H7lMLjNyU9OWK1jzRqxq7enX+fH7kfrBt/nGtgXHo/Q62n4J5o35K19KJnYlUlQLl
- PMAHv0DVP9AgAUl1blDJqItNq2JVgU1m+udHf8/PC01hXMCPTi6QYz9xM4/52OVretrb cw== 
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
- by aserp2130.oracle.com with ESMTP id 35ckcbn0fj-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 17 Dec 2020 11:03:43 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
- by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0BHB1DvF128849;
- Thu, 17 Dec 2020 11:03:43 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by aserp3020.oracle.com with ESMTP id 35e6et51m3-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 17 Dec 2020 11:03:43 +0000
-Received: from abhmp0018.oracle.com (abhmp0018.oracle.com [141.146.116.24])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 0BHB3g70012344;
- Thu, 17 Dec 2020 11:03:42 GMT
-Received: from mwanda (/102.36.221.92) by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Thu, 17 Dec 2020 03:03:41 -0800
-Date: Thu, 17 Dec 2020 14:03:35 +0300
-To: Steve French <sfrench@samba.org>, Samuel Cabrero <scabrero@suse.de>
-Subject: [PATCH 3/3] cifs: Re-indent cifs_swn_reconnect()
-Message-ID: <X9s7By4IDIcG4D+w@mwanda>
+	id 1kprO9-001nLF-Is; Thu, 17 Dec 2020 11:24:05 +0000
+Received: from bilbo.ozlabs.org ([203.11.71.1]:53717 helo=ozlabs.org) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1kprNw-001nL4-FL
+ for samba-technical@lists.samba.org; Thu, 17 Dec 2020 11:24:02 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4CxV3w0Frfz9sTK;
+ Thu, 17 Dec 2020 22:23:24 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=202004;
+ t=1608204204; bh=ZBHH5voMyocKJAlVpA2vv3iVTJJtkpeSs0YtqssDPqU=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=ehqJT3LSaC1zlOtY3H5eA/QM/2OKbEoEKcC/FKB6g0quvV73hVo4zP0pMEpU0FnPq
+ gTThXEYJPa2tBKGaClVF680mBmcyGGApD445IZwL5qqJi+PYTFBeQVJgh2JH1MzZlc
+ V0w7Yz/+3J/0SUCzIHJr2nQS7MGLSApfCpI+ZgzDfrz15kIdxIWTjLifTDvIM+5/vm
+ Mywtw8iMXcXgmN3sLMba9JTxkgmEC84rqVoLD7jzaYRNKUaeHu6KQ0YDHa8pn29TE5
+ EPXIINOwpwTAc34KJfOCOR4UOvPYdvbrD6d5J+i1m1ZRw/L5MecvEqchJO71uSvYqZ
+ gpV8v8mv9Fsng==
+Date: Thu, 17 Dec 2020 22:23:20 +1100
+To: Andrew Bartlett <abartlet@samba.org>
+Subject: Re: Help wanted: converting our GitLab CI scripts to modern Ansible
+Message-ID: <20201217222320.268c9f38@martins.ozlabs.org>
+In-Reply-To: <d7aa190742ae7838e501325b4a2e7c1fef6c71c4.camel@samba.org>
+References: <d7aa190742ae7838e501325b4a2e7c1fef6c71c4.camel@samba.org>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <X9s6nGDLt4xreaYN@mwanda>
-X-Mailer: git-send-email haha only kidding
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,101 +57,70 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Dan Carpenter via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Dan Carpenter <dan.carpenter@oracle.com>
-Cc: linux-cifs@vger.kernel.org, kernel-janitors@vger.kernel.org,
- samba-technical@lists.samba.org
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This code is slightly nicer if we flip the cifs_sockaddr_equal()
-around and pull all the code in one tab.
+On Thu, 17 Dec 2020 23:26:30 +1300, Andrew Bartlett via samba-technical
+<samba-technical@lists.samba.org> wrote:
 
-Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
----
- fs/cifs/cifs_swn.c | 64 ++++++++++++++++++++++++----------------------
- 1 file changed, 33 insertions(+), 31 deletions(-)
+> The Samba GitLab CI bastian system (where gitlab-runner runs, spawning
+> new VMs per job) is built with Ansible.
+> 
+> However the Openstack module we are using, which is compatible with the
+> Catalyst Cloud and Rackspace (where it runs in productions), is not
+> compatible with the Oregen State University Open Source Lab (OSU OSL)
+> cloud that we want to move to.  This is despite this also running
+> Openstack.
+> 
+> The current sticking point appears to be that we create a volume (to
+> back to root hard disk of the server) which is not marked bootable.
+> 
+> MSG:
+> 
+> BadRequestException: 400: Client Error for url: 
+> http://oprod-controller1.osuosl.org:8774/v2.1/4917f5faae154a619dddd437eeb053b8/os-volumes_boot
+> , Block Device b22d6488-9a5f-4c54-864d-e567ae5fda9d is not bootable.
+> 
+> We use
+> https://docs.ansible.com/ansible/2.4/os_volume_module.html
+> but we need to be using
+> https://docs.ansible.com/ansible/latest/collections/openstack/cloud/volume_module.html
+> 
+> If someone has the time and expertise to port our scripts over this
+> would be most helpful.
+> 
+> The scripts are at:
+> 
+> https://gitlab.com/catalyst-samba/samba-cloud-autobuild/-/tree/master/gitlab-ci
+> and the roles we pull in here:
+> https://gitlab.com/catalyst-samba/samba-cloud-autobuild/-/blob/master/ansible-roles-clone-or-update.yml
 
-diff --git a/fs/cifs/cifs_swn.c b/fs/cifs/cifs_swn.c
-index 91163d3cf8b7..d35f599aa00e 100644
---- a/fs/cifs/cifs_swn.c
-+++ b/fs/cifs/cifs_swn.c
-@@ -484,41 +484,43 @@ static int cifs_swn_reconnect(struct cifs_tcon *tcon, struct sockaddr_storage *a
- 
- 	/* Store the reconnect address */
- 	mutex_lock(&tcon->ses->server->srv_mutex);
--	if (!cifs_sockaddr_equal(&tcon->ses->server->dstaddr, addr)) {
--		ret = cifs_swn_store_swn_addr(addr, &tcon->ses->server->dstaddr,
--				&tcon->ses->server->swn_dstaddr);
--		if (ret < 0) {
--			cifs_dbg(VFS, "%s: failed to store address: %d\n", __func__, ret);
--			goto unlock;
--		}
--		tcon->ses->server->use_swn_dstaddr = true;
-+	if (cifs_sockaddr_equal(&tcon->ses->server->dstaddr, addr))
-+		goto unlock;
- 
--		/*
--		 * Unregister to stop receiving notifications for the old IP address.
--		 */
--		ret = cifs_swn_unregister(tcon);
--		if (ret < 0) {
--			cifs_dbg(VFS, "%s: Failed to unregister for witness notifications: %d\n",
--					__func__, ret);
--			goto unlock;
--		}
-+	ret = cifs_swn_store_swn_addr(addr, &tcon->ses->server->dstaddr,
-+				      &tcon->ses->server->swn_dstaddr);
-+	if (ret < 0) {
-+		cifs_dbg(VFS, "%s: failed to store address: %d\n", __func__, ret);
-+		goto unlock;
-+	}
-+	tcon->ses->server->use_swn_dstaddr = true;
- 
--		/*
--		 * And register to receive notifications for the new IP address now that we have
--		 * stored the new address.
--		 */
--		ret = cifs_swn_register(tcon);
--		if (ret < 0) {
--			cifs_dbg(VFS, "%s: Failed to register for witness notifications: %d\n",
--					__func__, ret);
--			goto unlock;
--		}
-+	/*
-+	 * Unregister to stop receiving notifications for the old IP address.
-+	 */
-+	ret = cifs_swn_unregister(tcon);
-+	if (ret < 0) {
-+		cifs_dbg(VFS, "%s: Failed to unregister for witness notifications: %d\n",
-+			 __func__, ret);
-+		goto unlock;
-+	}
- 
--		spin_lock(&GlobalMid_Lock);
--		if (tcon->ses->server->tcpStatus != CifsExiting)
--			tcon->ses->server->tcpStatus = CifsNeedReconnect;
--		spin_unlock(&GlobalMid_Lock);
-+	/*
-+	 * And register to receive notifications for the new IP address now that we have
-+	 * stored the new address.
-+	 */
-+	ret = cifs_swn_register(tcon);
-+	if (ret < 0) {
-+		cifs_dbg(VFS, "%s: Failed to register for witness notifications: %d\n",
-+			 __func__, ret);
-+		goto unlock;
- 	}
-+
-+	spin_lock(&GlobalMid_Lock);
-+	if (tcon->ses->server->tcpStatus != CifsExiting)
-+		tcon->ses->server->tcpStatus = CifsNeedReconnect;
-+	spin_unlock(&GlobalMid_Lock);
-+
- unlock:
- 	mutex_unlock(&tcon->ses->server->srv_mutex);
- 
--- 
-2.29.2
+As far as I can tell the following 2 modules are identical:
 
+  https://docs.ansible.com/ansible/latest/collections/openstack/cloud/os_volume_module.html#ansible-collections-openstack-cloud-os-volume-module
+
+  https://docs.ansible.com/ansible/latest/collections/openstack/cloud/volume_module.html#ansible-collections-openstack-cloud-volume-module
+
+However, the bootable parameter appears to be relatively new and
+defaults to "no".  So, this should fix it:
+
+diff --git a/tasks/servers_create.yml b/tasks/servers_create.yml
+index e4d0582..c2857a0 100644
+--- a/tasks/servers_create.yml
++++ b/tasks/servers_create.yml
+@@ -5,6 +5,7 @@
+     size: "{{ item.volume_size|int }}"
+     volume_type: "{{ item.volume_type }}"
+     image: "{{ item.image }}"
++    bootable: yes
+   when: 'item.volume_size|int > 0'
+   loop: "{{ _OS_SERVERS|default([]) }}"
+ 
+Have you tried that?
+
+peace & happiness,
+martin
 
