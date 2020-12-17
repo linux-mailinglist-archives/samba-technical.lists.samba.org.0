@@ -2,47 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BB702DD81D
-	for <lists+samba-technical@lfdr.de>; Thu, 17 Dec 2020 19:20:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33DE82DDAA8
+	for <lists+samba-technical@lfdr.de>; Thu, 17 Dec 2020 22:15:04 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=Nk7DG417wPa+HLdLFfKEwzr2w4h1SaNr27qcz4Ekgtk=; b=4XZFOA37JFScNuXzn93vyZMMEw
-	ffZrIxGkqi8cVzeFClAB4F4gCNBTdfIEurMxhARVYaWxb87NEXitkqdg2LD7JFvrjYbNB8TEYt9xT
-	rcZpan7Q2q5iZGN0w5eSSORtYxueno2b2tszrx5gmTyTJ9n+onuEInP7UuLqxWMHv4en0P2E0txw8
-	IkZB73sskpRBEVTo65kGfYv05URZxYPVdNQLPx0B7ke/OauFoitNtefjhk5+YqAmFgI30GBDdxjTo
-	H4y2PanFFi7r1qpTcT49TNP57dZl+ShY4L4yj+LfbHn/sC27wtVf6cKaZ2gk4Wwfyer4fL7jFaWWw
-	0HIefw7Q==;
-Received: from ip6-localhost ([::1]:45872 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=YmPKlh6Z7zQjy5YM3miO0QALbeMXWiJWpI/BK+viLiI=; b=I5K6/wRiE/7DrLVBmLIy4ttWai
+	BBkX27yKN4xFC1BcmAJ7xeLBW5NJK2Ffkupql4zFW3az11PVoD6yF7BH/rBUol+Tzaupr5DIlusev
+	s4e0hTaAYWYeZouNvcUtyobG4YqXx+9jX2EOCFE9qvsb62g3wGQD+4jCQ2wSR2P9QiuG+FgxzGMp+
+	6JU4oj7F0RecC0axmiU/akXrzEqMvc8Yjjynj6z0zHFjSl5a0w3SsW5Wdo0yt4fbMxhbf74u9bzO7
+	/lGM4rjkKCz5dEWgJQimzc49v7eIXMaQvawKey/++s7OJAujJqOqD2umlWXhdiMs24O6Zh6VfVQQ3
+	I3B0lEqA==;
+Received: from ip6-localhost ([::1]:58042 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kpxsd-001s9a-26; Thu, 17 Dec 2020 18:19:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40334) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kpxsX-001s9T-PO
- for samba-technical@lists.samba.org; Thu, 17 Dec 2020 18:19:56 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=Nk7DG417wPa+HLdLFfKEwzr2w4h1SaNr27qcz4Ekgtk=; b=NPFxENmDkDLg4CBditgWg0huHp
- sIo8S+P5C+pcilSXORNziigLgNkA4mVLANCFUpWPIgQND8SKrq7GBF1EUPAVUJv0iNcpp14emzI8f
- 3e2ApNcugLrhJfjvMsyYwPIg8oOgpJNbQtILRnkRdq9olIvIBM8nLdksQhOU3fMs0jkc8yGgwv04x
- QP5UIvFNL8C6ZvzutKuv+jDfQ49vs66xZs8gEl1JZFhMajwEfBxJ8NDTbCTBoQdZmUBral+EN8Q84
- +hfP63eLONVWVrxGxyHMlb/g9TklrFA2ww00RIG57A7OO9rtEHi4g78DxDYGfpGu8HUqpza7VLI3k
- bIvMgXICXaAz47XW8VtwadOetGhKmUiSFE0TXhMONbAXWJJndgaF+0AFm1benIcUUuwzvwfMoNdPS
- RiQzYfVPArwqr4RgSRq7xPa710GTfrk4YGfbAEn7JSiINoPEpQe7YK7ELp0c8h/HJFoMdmz+U++el
- wD5OHLiDVHOSEcys5wUUCCG7;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kpxsW-0004bl-4m; Thu, 17 Dec 2020 18:19:53 +0000
-Message-ID: <4211a7b2e7e356e79705f6e74d6041fce4846f8a.camel@samba.org>
-Subject: Re: Help wanted: converting our GitLab CI scripts to modern Ansible
-To: Martin Schwenke <martin@meltin.net>
-Date: Fri, 18 Dec 2020 07:19:45 +1300
-In-Reply-To: <20201217222320.268c9f38@martins.ozlabs.org>
-References: <d7aa190742ae7838e501325b4a2e7c1fef6c71c4.camel@samba.org>
- <20201217222320.268c9f38@martins.ozlabs.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.4-0ubuntu1 
+	id 1kq0bN-001tvP-Ej; Thu, 17 Dec 2020 21:14:21 +0000
+Received: from smtp-fw-33001.amazon.com ([207.171.190.10]:13220) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kq0bG-001tvH-PE
+ for samba-technical@lists.samba.org; Thu, 17 Dec 2020 21:14:17 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+ t=1608239656; x=1639775656;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version;
+ bh=YmPKlh6Z7zQjy5YM3miO0QALbeMXWiJWpI/BK+viLiI=;
+ b=D7VQpFvVdQWrCxwfpaUi6YcrasQ6gSG21qxpoPJj5KPSL/SemX8fmB2t
+ TDmMis2lEoEDs8RK1PNwPIexhugrpNQy3yM5NHu8RbwVwmpT/9csUUEoz
+ YUW1fje0UA/GepE9OmGefCXCcVshzKzZUqiAKbfcImlzi4Op8U7oSZ4gc c=;
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
+ email-inbound-relay-1a-e34f1ddc.us-east-1.amazon.com) ([10.47.23.38])
+ by smtp-border-fw-out-33001.sea14.amazon.com with ESMTP;
+ 17 Dec 2020 20:58:16 +0000
+Received: from EX13MTAUWB001.ant.amazon.com
+ (iad12-ws-svc-p26-lb9-vlan2.iad.amazon.com [10.40.163.34])
+ by email-inbound-relay-1a-e34f1ddc.us-east-1.amazon.com (Postfix) with ESMTPS
+ id 89702A1DA7; Thu, 17 Dec 2020 20:58:14 +0000 (UTC)
+Received: from EX13D01UWB004.ant.amazon.com (10.43.161.157) by
+ EX13MTAUWB001.ant.amazon.com (10.43.161.207) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 17 Dec 2020 20:58:13 +0000
+Received: from EX13MTAUWB001.ant.amazon.com (10.43.161.207) by
+ EX13d01UWB004.ant.amazon.com (10.43.161.157) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 17 Dec 2020 20:58:13 +0000
+Received: from dev-dsk-pboris-1f-f9682a47.us-east-1.amazon.com (10.1.57.236)
+ by mail-relay.amazon.com (10.43.161.249) with Microsoft SMTP Server id
+ 15.0.1497.2 via Frontend Transport; Thu, 17 Dec 2020 20:58:13 +0000
+Received: by dev-dsk-pboris-1f-f9682a47.us-east-1.amazon.com (Postfix,
+ from userid 5360108)
+ id 4C8C3A8C36; Thu, 17 Dec 2020 20:58:12 +0000 (UTC)
+To: <pboris@amazon.com>
+Subject: [PATCH 2/2] Add SMB 2 support for getting and setting SACLs
+Date: Thu, 17 Dec 2020 20:58:08 +0000
+Message-ID: <20201217205808.14756-1-pboris@amazon.com>
+X-Mailer: git-send-email 2.15.3.AMZN
+In-Reply-To: <20201027204226.26906-1-pboris@amazon.com>
+References: <20201027204226.26906-1-pboris@amazon.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,58 +70,139 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Boris Protopopov via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Boris Protopopov <pboris@amazon.com>
+Cc: sfrench@samba.org, linux-cifs@vger.kernel.org, samjonas@amazon.com,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 2020-12-17 at 22:23 +1100, Martin Schwenke via samba-technical
-wrote:
-> On Thu, 17 Dec 2020 23:26:30 +1300, Andrew Bartlett via samba-
-> technical
-> <samba-technical@lists.samba.org> wrote:
+Fix passing of the additional security info via version
+operations. Force new open when getting SACL and avoid
+reuse of files that were previously open without
+sufficient privileges to access SACLs.
 
-> As far as I can tell the following 2 modules are identical:
-> 
->   
-> https://docs.ansible.com/ansible/latest/collections/openstack/cloud/os_volume_module.html#ansible-collections-openstack-cloud-os-volume-module
-> 
->   
-> https://docs.ansible.com/ansible/latest/collections/openstack/cloud/volume_module.html#ansible-collections-openstack-cloud-volume-module
-> 
-> However, the bootable parameter appears to be relatively new and
-> defaults to "no".  So, this should fix it:
-> 
-> diff --git a/tasks/servers_create.yml b/tasks/servers_create.yml
-> index e4d0582..c2857a0 100644
-> --- a/tasks/servers_create.yml
-> +++ b/tasks/servers_create.yml
-> @@ -5,6 +5,7 @@
->      size: "{{ item.volume_size|int }}"
->      volume_type: "{{ item.volume_type }}"
->      image: "{{ item.image }}"
-> +    bootable: yes
->    when: 'item.volume_size|int > 0'
->    loop: "{{ _OS_SERVERS|default([]) }}"
->  
-> Have you tried that?
+Signed-off-by: Boris Protopopov <pboris@amazon.com>
+---
 
-I hadn't, and I really appreciate your looking at this for me because
-yes, that worked.  (I claimed this worked on Catalyst Cloud, but that
-was historically, I've not built it there recently).  
+After further testing, I found that the security info was not being
+passed correctly to opts->get_acl and opts->get_acl_by_fid(). Also,
+it turned out that files open for read were being used to fetch
+SACL without proper privileges. This patch fixes these issues, and
+is meant to be squashed (comments dropped) with the earlier patch.
 
-Late nights might be good for some un-interrupted time, but they come
-with downsides!
+fs/cifs/cifsacl.c | 10 +++++-----
+ fs/cifs/smb2ops.c |  4 ++--
+ fs/cifs/smb2pdu.c |  4 +++-
+ fs/cifs/xattr.c   | 10 ++++------
+ 4 files changed, 14 insertions(+), 14 deletions(-)
 
-Thank you so much!
-
-Andrew Bartlett
-
+diff --git a/fs/cifs/cifsacl.c b/fs/cifs/cifsacl.c
+index 353394d9ada8..6baa121952ce 100644
+--- a/fs/cifs/cifsacl.c
++++ b/fs/cifs/cifsacl.c
+@@ -1245,7 +1245,7 @@ cifs_acl_to_fattr(struct cifs_sb_info *cifs_sb, struct cifs_fattr *fattr,
+ 	int rc = 0;
+ 	struct tcon_link *tlink = cifs_sb_tlink(cifs_sb);
+ 	struct smb_version_operations *ops;
+-	const u32 unused = 0;
++	const u32 info = 0;
+ 
+ 	cifs_dbg(NOISY, "converting ACL to mode for %s\n", path);
+ 
+@@ -1255,9 +1255,9 @@ cifs_acl_to_fattr(struct cifs_sb_info *cifs_sb, struct cifs_fattr *fattr,
+ 	ops = tlink_tcon(tlink)->ses->server->ops;
+ 
+ 	if (pfid && (ops->get_acl_by_fid))
+-		pntsd = ops->get_acl_by_fid(cifs_sb, pfid, &acllen, unused);
++		pntsd = ops->get_acl_by_fid(cifs_sb, pfid, &acllen, info);
+ 	else if (ops->get_acl)
+-		pntsd = ops->get_acl(cifs_sb, inode, path, &acllen, unused);
++		pntsd = ops->get_acl(cifs_sb, inode, path, &acllen, info);
+ 	else {
+ 		cifs_put_tlink(tlink);
+ 		return -EOPNOTSUPP;
+@@ -1295,7 +1295,7 @@ id_mode_to_cifs_acl(struct inode *inode, const char *path, __u64 nmode,
+ 	struct tcon_link *tlink = cifs_sb_tlink(cifs_sb);
+ 	struct smb_version_operations *ops;
+ 	bool mode_from_sid, id_from_sid;
+-	const u32 unused = 0;
++	const u32 info = 0;
+ 
+ 	if (IS_ERR(tlink))
+ 		return PTR_ERR(tlink);
+@@ -1311,7 +1311,7 @@ id_mode_to_cifs_acl(struct inode *inode, const char *path, __u64 nmode,
+ 		return -EOPNOTSUPP;
+ 	}
+ 
+-	pntsd = ops->get_acl(cifs_sb, inode, path, &secdesclen, unused);
++	pntsd = ops->get_acl(cifs_sb, inode, path, &secdesclen, info);
+ 	if (IS_ERR(pntsd)) {
+ 		rc = PTR_ERR(pntsd);
+ 		cifs_dbg(VFS, "%s: error %d getting sec desc\n", __func__, rc);
+diff --git a/fs/cifs/smb2ops.c b/fs/cifs/smb2ops.c
+index d28a29728fb1..f5e198860c16 100644
+--- a/fs/cifs/smb2ops.c
++++ b/fs/cifs/smb2ops.c
+@@ -3315,9 +3315,9 @@ get_smb2_acl(struct cifs_sb_info *cifs_sb,
+ 	struct cifs_ntsd *pntsd = NULL;
+ 	struct cifsFileInfo *open_file = NULL;
+ 
+-	if (inode)
++	if (inode && !(info & SACL_SECINFO))
+ 		open_file = find_readable_file(CIFS_I(inode), true);
+-	if (!open_file)
++	if (!open_file || (info & SACL_SECINFO))
+ 		return get_smb2_acl_by_path(cifs_sb, path, pacllen, info);
+ 
+ 	pntsd = get_smb2_acl_by_fid(cifs_sb, &open_file->fid, pacllen, info);
+diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
+index 0aeb63694306..b207e1eb6803 100644
+--- a/fs/cifs/smb2pdu.c
++++ b/fs/cifs/smb2pdu.c
+@@ -3472,8 +3472,10 @@ SMB311_posix_query_info(const unsigned int xid, struct cifs_tcon *tcon,
+ int
+ SMB2_query_acl(const unsigned int xid, struct cifs_tcon *tcon,
+ 	       u64 persistent_fid, u64 volatile_fid,
+-	       void **data, u32 *plen, u32 additional_info)
++	       void **data, u32 *plen, u32 extra_info)
+ {
++	__u32 additional_info = OWNER_SECINFO | GROUP_SECINFO | DACL_SECINFO |
++				extra_info;
+ 	*plen = 0;
+ 
+ 	return query_info(xid, tcon, persistent_fid, volatile_fid,
+diff --git a/fs/cifs/xattr.c b/fs/cifs/xattr.c
+index 9318a2acf4ee..6b658a1172ef 100644
+--- a/fs/cifs/xattr.c
++++ b/fs/cifs/xattr.c
+@@ -340,21 +340,19 @@ static int cifs_xattr_get(const struct xattr_handler *handler,
+ 		 * fetch owner, DACL, and SACL if asked for full descriptor,
+ 		 * fetch owner and DACL otherwise
+ 		 */
+-		u32 acllen, additional_info = 0;
++		u32 acllen, extra_info;
+ 		struct cifs_ntsd *pacl;
+ 
+ 		if (pTcon->ses->server->ops->get_acl == NULL)
+ 			goto out; /* rc already EOPNOTSUPP */
+ 
+ 		if (handler->flags == XATTR_CIFS_NTSD_FULL) {
+-			additional_info = OWNER_SECINFO | GROUP_SECINFO |
+-				DACL_SECINFO | SACL_SECINFO;
++			extra_info = SACL_SECINFO;
+ 		} else {
+-			additional_info = OWNER_SECINFO | GROUP_SECINFO |
+-				DACL_SECINFO;
++			extra_info = 0;
+ 		}
+ 		pacl = pTcon->ses->server->ops->get_acl(cifs_sb,
+-				inode, full_path, &acllen, additional_info);
++				inode, full_path, &acllen, extra_info);
+ 		if (IS_ERR(pacl)) {
+ 			rc = PTR_ERR(pacl);
+ 			cifs_dbg(VFS, "%s: error %zd getting sec desc\n",
 -- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-
+2.18.4
 
 
