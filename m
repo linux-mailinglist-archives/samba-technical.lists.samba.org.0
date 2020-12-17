@@ -2,45 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA65B2DCF77
-	for <lists+samba-technical@lfdr.de>; Thu, 17 Dec 2020 11:27:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63BF02DCFFC
+	for <lists+samba-technical@lfdr.de>; Thu, 17 Dec 2020 12:03:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=HcstO0lmVbbEPaJ5lhJS6i8JYcQzp/weKTu9vN3hUH4=; b=B0Y9QfW3eahb++BT5sH0SGI5a5
-	ROWI/DJBzqFqu4NRDWMUkbz/36FhAvTNIBBYevuv2hn9j8DdLsMKG89aJkGKmWOhbMoM9jsPNNrqE
-	3yFl5cKwkuoKkX+Fb0J2qWUl1By1M4L3Ut3clBxw8EpVHjXF+oojlwagIAIOQENIrSwglxAq5cFTQ
-	QDKd2W4E/yuzFvWjYtLi3hENzPQoYuPmNQ8vg9O/ymjAk2UcYGQ31+X0N2IyVNlhyM05swIWznHNW
-	TrHhjXT5pNdU5JuZAfPOsemuZjv4itCsL2D/S6bH3WFHxC3ffsf4+rvLQwGaOfWkcTxcqGog76XZW
-	0QgCuujg==;
-Received: from ip6-localhost ([::1]:60610 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=L3aGYrlGeo3eT6PpjNqyTbmWD+46i7QX5RYLQI6tFXo=; b=E5DYTx/HJNowyccJ84yG724egB
+	y6eI1YtifXBfgeMxYBoShsZAc+zqUHAYAymGlh5aYs8uvBnBdiuRC7Ng+gnZRG7b4b1h/r9IOLZLL
+	y8gn+5wVXLQUvAo13X/gnwPGurabaOttun1oImnmydVTFXtxcdJ12Rwpi+iqq5vZI+SRRPA5j6Ovv
+	jSr4mfy2qRwgrgxnihsZirlHb6tmgVJeBCzcacZ2eDUukhjch+gejTsDph641tnWtutRSmx0D/9xk
+	4P0UiSx7DkheUbBiSSKLphYqKKZMKy18lr3Q9fG3unrQ0nkat+E+LDCeaNa7y4MVq0EJatGqRLiSF
+	C2F+HpQQ==;
+Received: from ip6-localhost ([::1]:61336 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kpqUg-001mnm-Tx; Thu, 17 Dec 2020 10:26:47 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23732) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kpqUb-001mnf-8Q
- for samba-technical@lists.samba.org; Thu, 17 Dec 2020 10:26:44 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=HcstO0lmVbbEPaJ5lhJS6i8JYcQzp/weKTu9vN3hUH4=; b=WGo0Hx/np2l0tixl8eLOENeMRv
- nHmOqbLXmLPshv344pGo1JtY6KLGlFXtLGe1PoENaiCrNyNk0j4d0dCebVW29zjUISxsZXw8+W3jl
- 9veOz6QPU87Bb3yl/EFSz/tj9VtHNGeiaQWmhVHH3k6UOmgQ0CMaBqU6in5XKU+I0ntc+Y6WWFsMX
- 5RF8JaGIoAmA4voe7eookqwpUU+jwy4zUEWha4C40nWPEf6V4HgGex1YeM5f/4wR8L3qVGyEVQ7Wo
- Uc/nfDRd/D+F4ctD58p4c9NWnffdqoLS06Mk8DZJMBltK9uAzsEcWFYg+G3krZW/mr8FZ9aDj45g+
- 1s3Jm6A9SAISSqozZwLA/TnCzI6TsayDNdbey150vBayfpa0Zna/kvZPCOgXfAId08J/5BhP/5DHj
- EXa+bdlHcHElvAzC3qUUpJzdyIxBhem9khKOTYL85UnbMihtB7SYtcCe7CqKImZQKQk63lLICPJMo
- TJU2BEgDE55UeBG2FLi9STjC;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kpqUV-0000xE-PZ
- for samba-technical@lists.samba.org; Thu, 17 Dec 2020 10:26:36 +0000
-Message-ID: <d7aa190742ae7838e501325b4a2e7c1fef6c71c4.camel@samba.org>
-Subject: Help wanted: converting our GitLab CI scripts to modern Ansible
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Thu, 17 Dec 2020 23:26:30 +1300
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.4-0ubuntu1 
+	id 1kpr3F-001mzD-CI; Thu, 17 Dec 2020 11:02:29 +0000
+Received: from aserp2120.oracle.com ([141.146.126.78]:38540) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kpr39-001mz6-EB
+ for samba-technical@lists.samba.org; Thu, 17 Dec 2020 11:02:25 +0000
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+ by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0BHAxrmr142184;
+ Thu, 17 Dec 2020 11:02:00 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : mime-version : content-type; s=corp-2020-01-29;
+ bh=L3aGYrlGeo3eT6PpjNqyTbmWD+46i7QX5RYLQI6tFXo=;
+ b=Mffd3LLUfyTaTJfrCowPMeqSxUXq0stihiQJYoclk7ZqpIFTVNwf4/UYAl+5wpbnyC7u
+ TV/+FeZ4X8gbGM/sXiFKuz5eNvexQNDcBXFY8xpOviKS3JwyEvXI6hsUXIkB/mabhA4E
+ 9v5a+Owowjo+8Q98j8SFzlcvQo4flWerwMoYZFewLA/bSBDJ4k4NW/nvrRpKOQfMxMtA
+ t+c/o4bucfGl9xCTjechnOjuiBYZJu1o8XFE7GuzGAUHe7iIwCgTbqmC19i71LCiRIE1
+ DgyiuGZMaQmj56PtP1h1lGr0xAudqP8ftgmpwxgImx4XSHRXvRTIZkwTSXJkli1UeEKy Fg== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by aserp2120.oracle.com with ESMTP id 35cntmcsw0-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 17 Dec 2020 11:02:00 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+ by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0BHB1D4i128891;
+ Thu, 17 Dec 2020 11:02:00 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by aserp3020.oracle.com with ESMTP id 35e6et4ynk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 17 Dec 2020 11:02:00 +0000
+Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 0BHB1u7I011570;
+ Thu, 17 Dec 2020 11:01:56 GMT
+Received: from mwanda (/102.36.221.92) by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Thu, 17 Dec 2020 03:01:55 -0800
+Date: Thu, 17 Dec 2020 14:01:48 +0300
+To: Steve French <sfrench@samba.org>
+Subject: [PATCH 1/3] cifs: Delete a stray unlock in cifs_swn_reconnect()
+Message-ID: <X9s6nGDLt4xreaYN@mwanda>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Mailer: git-send-email haha only kidding
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,50 +68,37 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Dan Carpenter via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Dan Carpenter <dan.carpenter@oracle.com>
+Cc: linux-cifs@vger.kernel.org, Samuel Cabrero <scabrero@suse.de>,
+ samba-technical@lists.samba.org, kernel-janitors@vger.kernel.org,
+ Aurelien Aptel <aaptel@suse.com>, linux-kernel@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-The Samba GitLab CI bastian system (where gitlab-runner runs, spawning
-new VMs per job) is built with Ansible.
+The unlock is done in the caller, this is a stray which leads to a
+double unlock bug.
 
-However the Openstack module we are using, which is compatible with the
-Catalyst Cloud and Rackspace (where it runs in productions), is not
-compatible with the Oregen State University Open Source Lab (OSU OSL)
-cloud that we want to move to.  This is despite this also running
-Openstack.
+Fixes: bf80e5d4259a ("cifs: Send witness register and unregister commands to userspace daemon")
+Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+---
+ fs/cifs/cifs_swn.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-The current sticking point appears to be that we create a volume (to
-back to root hard disk of the server) which is not marked bootable.
-
-MSG:
-
-BadRequestException: 400: Client Error for url: 
-http://oprod-controller1.osuosl.org:8774/v2.1/4917f5faae154a619dddd437eeb053b8/os-volumes_boot
-, Block Device b22d6488-9a5f-4c54-864d-e567ae5fda9d is not bootable.
-
-We use
-https://docs.ansible.com/ansible/2.4/os_volume_module.html
-but we need to be using
-https://docs.ansible.com/ansible/latest/collections/openstack/cloud/volume_module.html
-
-If someone has the time and expertise to port our scripts over this
-would be most helpful.
-
-The scripts are at:
-
-https://gitlab.com/catalyst-samba/samba-cloud-autobuild/-/tree/master/gitlab-ci
-and the roles we pull in here:
-https://gitlab.com/catalyst-samba/samba-cloud-autobuild/-/blob/master/ansible-roles-clone-or-update.yml
-
-Thanks for any assistance you can give.
-
-Andrew Bartlett
+diff --git a/fs/cifs/cifs_swn.c b/fs/cifs/cifs_swn.c
+index c594e588a8b5..b2ef082d6438 100644
+--- a/fs/cifs/cifs_swn.c
++++ b/fs/cifs/cifs_swn.c
+@@ -285,8 +285,6 @@ static struct cifs_swn_reg *cifs_find_swn_reg(struct cifs_tcon *tcon)
+ 			continue;
+ 		}
+ 
+-		mutex_unlock(&cifs_swnreg_idr_mutex);
+-
+ 		cifs_dbg(FYI, "Existing swn registration for %s:%s found\n", swnreg->net_name,
+ 				swnreg->share_name);
+ 
 -- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-
+2.29.2
 
 
