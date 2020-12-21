@@ -2,45 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 828192DECFC
-	for <lists+samba-technical@lfdr.de>; Sat, 19 Dec 2020 04:39:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B62FC2DF80D
+	for <lists+samba-technical@lfdr.de>; Mon, 21 Dec 2020 04:39:06 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=K4Tbd9kvJLV1z7Skt1ttNzDDgCMe96VbARE8hykF8Po=; b=v0DNl3PZBehCU/oKh9+ViilxUT
-	aH5sSg+X2n/ZAw73GTTxFwAWU0bBl4VWpfu+WxZiZeWq8zFq9c5x3oOR2Qix+B9bFCItBLdOT+hJR
-	6v9IkEWqpQK7tREKSQIJYGD4oIqe7RH2PeXHsSZok5g87sw0fgHZ0M6bOkU9v3B4YS35/Z6GFsiFv
-	MBvaMgVeiM17iqXlSTmoFavc5pOVCgio3HlvBVaSqJloG2Z6pqRuSu7atJvX4SdmIXHtbYg4avdSX
-	Wdo4FLoA1sG5R/2xv65BMz3y2lv9iwKmqADYjS+zZFXGCm2gnY/RaixIsoPWONyfcESQxho81sAgo
-	/rZashXA==;
-Received: from ip6-localhost ([::1]:44146 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=NtoVVcZXLVa/axZC4Otg8apzFZ2jyV4QjwB/5DnnxWw=; b=p6wxQXFglarHLyOsD3Qk8kon0E
+	04jqCokERCqPbmM0hI0AnKsFcq7VtWUvhP/ROTWopgMvdj15kPg8NLMSu4RuPrq+86QFWi8IMSlQZ
+	EYZnahTXV0VJWHIBdK0y8zOKhq4qmgrRk96ubfz3Pj/n6espgRyBw48De4NlM/x1jeB85x2uO93XD
+	cOW4hzGPCaHYhBIFsj7EFgiF6kEpvXLVp6Kk8oz6h5DCfc3MQo+PJmSKC80GD2/QP4fozWvAiQnFC
+	bY3XeG9X9sMl9QlIHU88NGOe5zHuWJx+b84GexpebgR84BOVbQcXoqrbdeDWgxkw4ZBgKjwY0doQa
+	m7EhSvAQ==;
+Received: from ip6-localhost ([::1]:61742 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kqT4r-00210l-18; Sat, 19 Dec 2020 03:38:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60580) 
+	id 1krC1E-0026qY-HQ; Mon, 21 Dec 2020 03:37:56 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33532) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kqT4g-00210d-6V
- for samba-technical@lists.samba.org; Sat, 19 Dec 2020 03:38:37 +0000
+ (Exim) id 1krC16-0026qQ-QK
+ for samba-technical@lists.samba.org; Mon, 21 Dec 2020 03:37:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=K4Tbd9kvJLV1z7Skt1ttNzDDgCMe96VbARE8hykF8Po=; b=cy6vzmEVNjkfkeSxfbC662LMLv
- ydkLPRlvIT8MniwNQ4glxU5uiBN4tUS/kBhASI7a5vd0Mxube28PWcBdSJJ3BG4TIETWDcOvc/1Vh
- GqWN9higH5apdgBieqmlG+cbITKIM7fPlFkTd5nULS0fEsXJoGd7Wjlsli/50oRLK8dop8W/rF+qe
- MR55Y4HSgIAZ/wweZrqakCyG55tbSeiSURiyuLRrYOB0H7iCnLXg+aYl5xPNDGbAw69tkwHhiqxGQ
- 9tnz6cYnaG216LN1VswkhboW3AIgPKyu2tB7leKgry7skvNbGV7jw2GIvZr7bGFCNwokiFjnH/Ra8
- EG3hpFFxEW5xdegnWC4Yo6QBzoZ5ySzdixqQkAKGShh9thme/tIPKcNzsZ+yUwsMwzXUVtqdKwJz/
- UZLJq7OamB1jPtTyqv1eLrVKZB/zGXqD/aWBeaDjzDKARkFiQVD+WYix4OWkydNC+Sc9izDnKs0z+
- Iq72UUU2rNIQyBn5tVHqO5FE;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=NtoVVcZXLVa/axZC4Otg8apzFZ2jyV4QjwB/5DnnxWw=; b=TgjhAe2TPQZBWy9VRbTVKZA3hz
+ xf5TQ5IsNhzvBRmVD0PCdUjgc5CGGYT5wRLLm65Cw4gM8MG+Ebwgutc0mLY0GuLxrpywB/FwFMWjB
+ 5PQXqcKo8DOvP2u915ZLgjXLiHWyrjlAFL6x75UOuULcwhgmh/2wZh3Y2ofGQLeyuKFFW4ohIMu8H
+ tkQHmCU+HwDl6UAF9sErbW6JTUCalz+Udl2hkMnbMEfq72rYueWIh8qmq8l9cYIhMGjunGf29hM6Z
+ mLaAeqdDvkpy14NH29j8YDOQ/UWRXdM/3LQN2HxPq8fyyH/80E8LG9eQ8wX4CuBmjIgCPoW3PixVQ
+ dKqp27ykBvFbEtmlwCWHDa7n913nSrZp9jDP4f0BvwRgMcqgNoZQunXf/ScG7M7a16drmsL7X5dFa
+ eGXuhKqUcbqT501Gqb4Crja4jXgnCrfEd9KYldI+xXAoghvYC912dP2t+Bvx74LeQ7RKZX7U9A0FN
+ uiRUNGEjYhBtwghR9ZmKWEgv;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kqT4I-00009M-Lj; Sat, 19 Dec 2020 03:38:07 +0000
-Date: Fri, 18 Dec 2020 19:38:03 -0800
-To: Ralph Boehme <slow@samba.org>
-Subject: Re: vfs_acl_[xattr|tdb] and timestamp in ACL hash
-Message-ID: <20201219033803.GE480071@jeremy-acer>
-References: <86aa9f39-3535-01ca-f96d-f22acc36778b@samba.org>
+ (Exim) id 1krC0s-0007h3-FE
+ for samba-technical@lists.samba.org; Mon, 21 Dec 2020 03:37:35 +0000
+Message-ID: <6bfb9cc51fcd259b4674587699e7345f57ac0608.camel@samba.org>
+Subject: GitLab CI runner rebuilt
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Mon, 21 Dec 2020 16:37:29 +1300
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <86aa9f39-3535-01ca-f96d-f22acc36778b@samba.org>
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,57 +54,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Dec 18, 2020 at 04:31:33PM +0100, Ralph Boehme wrote:
->Hi Jeremy,
->hi Andrew,
->
->here comes another question related to vfs_acl_xattr.
->
->This is triggered by a customer request who is storing xattrs in some 
->kind of database (external to Samba) and they're trying to leverage 
->xattr deduping.
->
->They have a xattr dedupe feature in their backend such then when to 
->files have the same xattr it's only stored once in the backend.
->
->But when using this with vfs_acl_xattr they stumbled upon the fact 
->that we skew the ACL blob bash with timestamp, so even if two files 
->have an identical ACL, they will have a different timestamp so the 
->overall xattr blob will be different.
->
->        typedef [public] struct {
->                security_descriptor *sd;
->                uint16 hash_type;
->                uint8 hash[64]; /* 64 bytes hash. */
->                utf8string description; /* description of what created
->                                         * this hash (to allow
->                                         * forensics later, if we have
->                                         * a bug in one codepath */
->                NTTIME time;
->                uint8 sys_acl_hash[64]; /* 64 bytes hash. */
->        } security_descriptor_hash_v4;
->
->They can hack around this by applying a vendor specific patch that 
->always sets time to 0.
->
->Afaict the hash should not include the time of the creation of the 
->ACL, the hash should just be over the ACL.
->
->So the question is if we want to change our behaviour?
->
->I wouldn't wanna go up to security_descriptor_hash_v5 that drops the 
->time field, maybe just stay at v4, but set time to 0?
->
->Thoughts?
+Just a heads up that I've rebuilt the GitLab runner in rackspace.
 
-Yes, along with what Andrew said - as we don't use it just setting
-to zero when setting the ACL would work. That would still be
-compatible with existing code reading existing ACLs.
+The runner has been simplified, the (unused) installation of Docker on
+the bastian host has been removed, and we have moved to the gitlab
+maintained fork of docker-machine.
+
+(I tried to move to rancher-machine, but it fails in the rackspace
+driver). 
+
+Finally, I removed password authentication from SSH (which is enabled
+by default in the rackspace images, ouch!) on the bastian host, which
+should reduce the load from the attackers. 
+
+I'm still hoping to move to OSU-OSL but I think I'm out of time before
+Christmas and some of the tools are not working properly for me there.
+
+If you notice anything odd, do let me know.
+
+Andrew Bartlett
+-- 
+Andrew Bartlett
+https://samba.org/~abartlet/
+Authentication Developer, Samba Team         https://samba.org
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+https://catalyst.net.nz/services/samba
+
+
+
+
+
+
 
