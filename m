@@ -2,49 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 259362E07B3
-	for <lists+samba-technical@lfdr.de>; Tue, 22 Dec 2020 10:06:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4326E2E2160
+	for <lists+samba-technical@lfdr.de>; Wed, 23 Dec 2020 21:34:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=LL8DmoTDgCl7oE/TLeR6SquHruzSMdbNNE7kRCcx4Vc=; b=jm1gq7B+HIrAV2mMRjiijjmX1E
-	VGDlL6rzO2teTRcu1jXe6HIST6BtMSyBfoNVDLtSWviVnLHdFb6KP9TYNawZoWe9x6feyVurY+2jN
-	/tBXh7HpRTTPKkm8QZ/QiV1OoqWdYMyMGlX5Pt1EwznxlGohlgwXMZNKv156mAivz1ewiDGSNZeYu
-	Xdol5YVOwrFk4iQ3FhmiqgmjilZjoB91mf5NaAEUMq1AiFgossFnkb6+1zlstdUBQGLTEhN7cEXo8
-	oeD0prkNBOn/xLOEX0OxONL8eoA77EyJlDlDTaRs8VHtYFY+Vqi6hYLuNOqGoETiVNdLB/zWaB3oE
-	bkXhmruw==;
-Received: from ip6-localhost ([::1]:32714 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=x1rzDJk5JMzygAm79mWCcduyiwNgPNc1qwQ76ZY8SKo=; b=ILF9BOcHyRgHWBUWhW+ITh9vLw
+	cP8MmXFmZVoc7vjjir6VpPYuDs7/qtP5kjDNMJM8aPXsVZ2drPCFI457+7BYrkm9qJwNI/XtZGolk
+	BLepMDt4MF9eluxDTTZkXDrLPd0P8xnWL5w6IzsybCSxFcd6QCspdYAKBD68UNYzMHvzoZzFeG4yL
+	YEkqy3hS0uHxL+X3g5anSdlDg5JeYLP82nNZ9QXjnqLCRdegbciyr5J8EDY9tWeP+EIvbfPdy3vVa
+	xLRc05vlsVxU+oXEzTtv0QQlqEN6JG56kNKalNixm1FQwiIUWre+2taIICgfRzdk6VT6tJ2tDhF8T
+	o9Pj6H8Q==;
+Received: from ip6-localhost ([::1]:48090 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1krdbm-002Bik-IM; Tue, 22 Dec 2020 09:05:30 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55644) 
+	id 1ksApI-002Gu0-JE; Wed, 23 Dec 2020 20:33:40 +0000
+Received: from thermi.consulting ([192.145.47.79]:37578) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1krdbh-002Bid-De
- for samba-technical@lists.samba.org; Tue, 22 Dec 2020 09:05:27 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=LL8DmoTDgCl7oE/TLeR6SquHruzSMdbNNE7kRCcx4Vc=; b=Pi8KbYbhKPx1BNPe1I6ZLNyLD2
- Dxgjz7AGvnKL+EDJH4nYsLrJXEYCneUX7QFT8rVHYDTB7B7OGfgU8DWhZL9r4ibVTaFjWMS1c4WgL
- OoRst6TD3c261gLyRQKASE3Q8kT+7CuGoBgonqF/EuefkPQP1auUCT+PhP2BRD8cCFO6JztKsKAOZ
- yqPJMuAployy94iiqf03eUj4LXXKPP9F5Ew/kR5KgvvtvmBUibWMxWzmMw3DBroeWe5O5skXRXFeI
- ta/eLF53lDPNhuz29daIEEhWxTnCj5QJGIBoQBcD/JZISK/sCqUR01pyNzZGbRMGPOlBbuTcGKbf8
- fy0K/oEaUSDgiC0tuI3sqEqzW6WwXOFdm6XFCofkCFRnbrAIIZga3zKUEqtKnYB2FCu4RgSVZG0zl
- AvkvoRnQ3nV3/Lcm2HmCVWgyFxX1av8JVUQJ4wQy63qhIgJmhdgtJThpduuDPmalcAaLTDgx5F4X8
- B8hmcuAj2jHvoIQEFiLmr4g5;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1krdbg-0004XW-8o; Tue, 22 Dec 2020 09:05:24 +0000
-Subject: Re: GitLab CI runner rebuilt
-To: Andrew Bartlett <abartlet@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-References: <6bfb9cc51fcd259b4674587699e7345f57ac0608.camel@samba.org>
-Message-ID: <4fa1274e-cb63-b59b-e21f-0656f44a10f8@samba.org>
-Date: Tue, 22 Dec 2020 10:05:23 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.4.0
+ (Exim) id 1ksAp6-002Gtt-PQ
+ for samba-technical@lists.samba.org; Wed, 23 Dec 2020 20:33:38 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=thermi.consulting;
+ s=201909; t=1608754492;
+ bh=x1rzDJk5JMzygAm79mWCcduyiwNgPNc1qwQ76ZY8SKo=;
+ h=To:From:Subject:Date:MIME-Version:Content-Type;
+ b=K4ZaWMi87uC3mKFeFyEwUNfl3m7lv1R0S0rsRvl2Pc+183zN931cBhyUS8pLbGmtF
+ zcSlebPdJFyBUMdUrMpA4wW8SI7thOstcCaPHJY6WYWVBvRZ9MmBIrdF4ZFqoTWQA4
+ jO1Jli2+GkHiDo6QGEZ4h46gp1UYxf3a6XkNVgSzikXaoH9/DLBxIkBTZdMSK1CjHD
+ 0ilTwX7ZHodgw5PA2lLexYWyAp5WTqeqgsNdoXeBTAntUeP4UX1xccyBNyR4wiGwMY
+ HcvMWXk4K749GrQOT3LKQ8mJ6KTWZpEPIY/FzKKztjwAQ2n0hjNzL3PPD1wYuCXZOh
+ bRCczuhv7Y+KA==
+To: samba-technical@lists.samba.org
+Organization: Noel Kuntze IT- und Unternehmenssicherheit
+Subject: TDB restrictions from 2015: Still the case?
+Message-ID: <a721c07f-9c68-bed8-29de-7ffe59b10b28@thermi.consulting>
+Date: Wed, 23 Dec 2020 21:14:51 +0100
 MIME-Version: 1.0
-In-Reply-To: <6bfb9cc51fcd259b4674587699e7345f57ac0608.camel@samba.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="h0pqdbwbEbj5g7WDW4ojmEH4n3JuhT7fd"
+ boundary="6IM9HRcpD7WDS1dMIUzE3d82R8szuc5Eq"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,322 +51,70 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Noel Kuntze via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Noel Kuntze <noel.kuntze@thermi.consulting>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---h0pqdbwbEbj5g7WDW4ojmEH4n3JuhT7fd
-Content-Type: multipart/mixed; boundary="HPPVu4qG96UkYjlWKfgknquxqFpt2ffjQ";
+--6IM9HRcpD7WDS1dMIUzE3d82R8szuc5Eq
+Content-Type: multipart/mixed; boundary="bmItLwrjvPnbJwBmN87djtP54OvZ0eWCX";
  protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Andrew Bartlett <abartlet@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Message-ID: <4fa1274e-cb63-b59b-e21f-0656f44a10f8@samba.org>
-Subject: Re: GitLab CI runner rebuilt
-References: <6bfb9cc51fcd259b4674587699e7345f57ac0608.camel@samba.org>
-In-Reply-To: <6bfb9cc51fcd259b4674587699e7345f57ac0608.camel@samba.org>
+From: Noel Kuntze <noel.kuntze@thermi.consulting>
+To: samba-technical@lists.samba.org
+Message-ID: <a721c07f-9c68-bed8-29de-7ffe59b10b28@thermi.consulting>
+Subject: TDB restrictions from 2015: Still the case?
 
---HPPVu4qG96UkYjlWKfgknquxqFpt2ffjQ
-Content-Type: multipart/mixed;
- boundary="------------A506A13605DBAD33185FFF63"
-Content-Language: en-US
-
-This is a multi-part message in MIME format.
---------------A506A13605DBAD33185FFF63
+--bmItLwrjvPnbJwBmN87djtP54OvZ0eWCX
 Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: de-DE
 Content-Transfer-Encoding: quoted-printable
 
-Am 12/21/20 um 4:37 AM schrieb Andrew Bartlett via samba-technical:
-> Just a heads up that I've rebuilt the GitLab runner in rackspace.
->=20
-> The runner has been simplified, the (unused) installation of Docker on
-> the bastian host has been removed, and we have moved to the gitlab
-> maintained fork of docker-machine.
->=20
-> (I tried to move to rancher-machine, but it fails in the rackspace
-> driver).
->=20
-> Finally, I removed password authentication from SSH (which is enabled
-> by default in the rackspace images, ouch!) on the bastian host, which
-> should reduce the load from the attackers.
->=20
-> I'm still hoping to move to OSU-OSL but I think I'm out of time before
-> Christmas and some of the tools are not working properly for me there.
->=20
-> If you notice anything odd, do let me know.
+Hello list,
 
-seems to work fine. Thanks a lot!
+I am looking for a replacement for Berkeley DB.
+At the moment, I am looking at TDB for that, and I found an email from 20=
+15 detailing issues if TDB was used in large scale projects.
+The Email from 2015 can be found in the archive[1].
 
--slow
+Please let me know if these restrictions are still true today.
 
+Kind regards
+
+Noel
+
+[1] https://lists.samba.org/archive/samba-technical/2015-August/109166.ht=
+ml
 --=20
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+Noel Kuntze
+IT security consultant
 
---------------A506A13605DBAD33185FFF63
-Content-Type: application/pgp-keys;
- name="OpenPGP_0xAA1E9B7126399E46.asc"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
- filename="OpenPGP_0xAA1E9B7126399E46.asc"
+GPG Key ID: 0x0739AD6C
+Fingerprint: 3524 93BE B5F7 8E63 1372 AF2D F54E E40B 0739 AD6C
 
------BEGIN PGP PUBLIC KEY BLOCK-----
 
-xsFNBFRbb/sBEADGFqSo7Ya3S00RsDWC7O4esYxuo+J5PapFMKvFNiYvpNEAoHnoJkzT6bCGe=
-ZWl
-ARe4Ihmry9XV67v/DUa3qXYihV62jmiTgCyEu1HFGhWGzkk99Vahq/2kVgN4vwz8zep1uvTAx=
-4sg
-ouL2Ri4HqeOdGveTQKQY4oOnWpEhXZ2qeCAc3fTHEB1FmRrZJp7A7y0C8/NEXnxTvfCZc7jsb=
-anZ
-AAUpQCGve+ilqn3px5Xo+1HZPnmfOrDODGo0qS/eJFnZ3aEy9y906I60fW27W+y++xX/8a1w7=
-6mi
-1nRGYQX7e8oAWshijPiM0X8hQNs91EW1TvUjvI7SiELEui0/OX/3cvR8kEEAmGlths99W+jig=
-K15
-KbeWOO3OJdyCfY/Rimse4rJfVe41BdEF3J0z6YzaFQoJORXm0M8yO5OxpAZFYuhywfx8eCf4C=
-gzi
-r7jFOKaDaRaFwlVRIOJwXlvidDuiKBfCcMzVafxn5wTyt/qygcmvaHH/2qerqhfMI09kus0Nf=
-udY
-nbSjtpNcskecwJNEpo8BG9HVgwF9H/hiI9oh2BGBng7fbcz9sx2tGtQJpxKoBN91zuH0fWj7H=
-YBX
-6FLnnD+m4ve2Avrg/H0Mk6pnvuTj5FxW5oqz9Dk11HDrco3/+4hFVaCJezv8THsyU7MLc8V2W=
-mZG
-YiaRanbEb2CoSQARAQABzR1SYWxwaCBCw7ZobWUgPHNsb3dAc2FtYmEub3JnPsLBlwQTAQgAQ=
-QIb
-AwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgAIZARYhBPrixgiKJCUgUcVZ5Koem3EmOZ5GBQJee=
-j64
-BQkN4TW9AAoJEKoem3EmOZ5GAQUQAL+4vG/awKNawHm2DCIzDBWbbjSoC+0/0ipEyRDC07Hky=
-kDk
-UPGsPjCVhYyPEYWrhHZTwJtbB4zIJDI+k0bpoisc8WXmhsiLupW2DE8wb/OBdY3IeB+bO23AC=
-mJ1
-2LEegamOw4t0nfNjAKaKWYBOh1+3sN3cAOxukpR3wZIhc46AduX2ZYct+cPeXw8hA/ungww2u=
-OcQ
-HxdVtAbuhpyFpg7sTmTvzaLUJWboS5rK0uhPyWJDl50eVwjmtSLhon5XgBM2sekFbYJ4OXoa8=
-lS9
-6nJogFT1OEqcyamDVVUptyjDvKS8oNK+jngp0peAFPjOblJ3kKOcJjiKccSkSkvjB316dt9vQ=
-/jl
-mTSHo6Vl7Cx5CKSBHQlCTwWolvjaBNBN745hyc+Li9lIrmj7TS8aTgwqXQROo8uU+R+jSvfUg=
-4Yg
-VCp/je6B/gdbnsD0AdaA9AiE0n0ftFt+0B6ghKjaEHKGs1lfcMyQop0I9g0p0Rk9yC+Y4X/lC=
-7gB
-ZdTPra9pZN2EpHJ7dRsuW3Q5butboumEEtuJRlirTnyN22jIecM1XkSxrnqJyHSm+6CbCj9HJ=
-d6m
-ZjvaZ3q5TbGLRA5i7UPAVvfSgkDJbc0K8qyvm0JkHsdz/rEe7A+QKCke1XAkAH53q1kS8w3Gv=
-a6v
-OP5vBBcqD656VRRs+gIgYPCJKpiGwkoEEBECAAoFAlb85y8DBQF4AAoJEMlPSTgYT5A0upMAn=
-0CE
-R5pPjRKX5j47cvZnW7tLcwmfAKCLzHVzMHdqf9aqgqKCbN0s3EgA5sLBXAQQAQoABgUCVnijH=
-QAK
-CRD+AB1EyAIYZdqVEADB7sdIVjs59GKbvrmzk96ZE+SfsaW1CxrDd0E+3NAUJzHimedpOlLoR=
-W4x
-Oeu3KujbXD1B8oXXpsD4cKiRGyl1NwNotzd86G8/838lORI1qQLm0NTXuAZAXytWkJ2AmDEyj=
-3mQ
-j6VponoTUBDJPqN2xbZ3Qjz0cTzyG+BjDdSxokPT648bO/BxkY5dFglKWuB7qOvb2jNwNLQNp=
-2MT
-iDVH96UPNWRd2rodoV7NIgbzQ7jsCbxbz8Cf7mkgPqy2zTvdOvgs2hU4yKY/Re4eMAa/zR/2L=
-891
-D8qU6f0TEPqNg9nE/oLcByUeydEU4AUmHkyj2cotykDTtEKlqc2JwV/GO1T/M2/ZMgjoio2pN=
-CEB
-NEAVEE/3qm86nUd48CVeTf5lPLMOtoaYoSbDnDgSl9zUwE8wYK6mvF0h45hCVht+5CR99CQvn=
-8eW
-24vLMek6EIuJANzUSi+jxtgxDCtMpKnCQZiRLexOAvQFuDAQ33TY1SWe9NmqJ0obVF8v/pnsJ=
-WPB
-WMbcaNdQD2hPgBGDW36jTAPGqXKjJQGj7kNjTTKJNolkbIH5V3iP0uu08WdBquO/3SEAd1iay=
-CXe
-DSJPZ2Tq4LFBxFjM22gcnbFjeXz9nq9mJZ2FsAgyUo38gBePxFGXpjWes0mIj8RcvH+BqQxFl=
-6X7
-fBYWoULp/rmHcKNCU8LBfQQTAQoAJwUCVFtv+wIbAwUJB4YfgAULCQgHAwUVCgkICwUWAgMBA=
-AIe
-AQIXgAAKCRCqHptxJjmeRstED/0R/7IzS+Yzw6ig0OQge6nkgGdbjXBNCPoRT7hJ8kFkSRhO1=
-BE2
-ek060TSsgK5dTdAHW54ghN0GdHR3KOJpJrbC5pN7dpTVzb3UMnQl3I0xXKwLn83teJbcmXi7z=
-eFY
-mL/ev35eBSig3lCdSvPdMVusj93dAzx1LWgL5N0AISkLDmQULA3BEDkzQTHZJ+dNWnH9GKXy6=
-bDA
-JSGfv6mKab9dypnfl8gayTlekSpmLPlfgS9vJRfiNOyK1zc7go/gFPq98IJTxuxzwXkND6buv=
-vSK
-WVFottRqIG01Qq+V0p4B7DbC4ceSwo9AqU9p/uKroGT6W6yDDYO6eq8s3LVbobrLRRewChU50=
-q3u
-hce4OYbxi0N1SbgX/WKwl2qOcOZcbZ7tPffAEtgh929ujGXQnqXpdsmdHy6uHR3BY+JfKpTqQ=
-ryu
-/rUF9mpWotqTaVJYt56SzHnF06DPoyThE7+OsriS9pFrxMqYMUsmEHYzeSak0OAo+WfRXyA+k=
-sRv
-ei3KvHvSjvowYhCb6DUaZOTewCSEu7az+jrIbIweB8u6nPfBJLhCR1gJUNneUN9b67LJ9+w7L=
-7Zg
-x3y5kqDyi0vi5T/jG9i8WI41zqsr1MdMHgRcU3rkSrIdIJKfaUOPqfTovwjefS42XoMMKb+bi=
-+p/
-tTPmq04KHjEaIBuZixLErRCUjcLBgAQTAQoAKgIbAwUJB4YfgAULCQgHAwUVCgkICwUWAgMBA=
-AIe
-AQIXgAUCWna6IQIZAQAKCRCqHptxJjmeRgyiD/97lbt5Zg0/C22LnZGSrd1wVfYBu9uUeV7Wh=
-VPl
-FKpfpqI20w1rrYr/0R3bKwX7UW6vyI2/eXnEsjAIc7Xb+OTjWfMkGG4IPGBv6mRFBgsToMCdm=
-iCi
-ZWPsdfPG49Iu7MmRhlfP39D6Tr4mw0s7apuq364D+2srVsV0kS6h8vMjL7KiWamJkOv1lUA8v=
-Tk3
-7bDkCtWL8l7VfwdrnusT2KtaKQb5KpiJ4Hfdtp5yofExRwA4Nd4kElFyuExnab9++bb9FtRVw=
-oA2
-Y/JSrGX/i6nyWKiS1roT7wfzkeYI2eASaU6KeLZ52cSFbAAIdSBZJt0Oh8hxgaYyh9GELw5wM=
-Hxn
-7ZPyhWfFysNWwxZNv2sojYRngG+Hyac6mz3fZ/P5yzyS/g178xsYn4PMV68gt+eYx4bXuKGwe=
-Dkh
-hP8a9B1cjT7TLPtGCPhdz1b/qs4aGD9YWLgs6RuvCff52GT/RTeR2Wujy3J0wbbXyxZAlquCW=
-AGo
-A9byI6xvsHApJiux5DCDUz5Ar9lgnZyFCWIWxrlPEUCVof6LfaENPTmuZFrE5SfNjE6tpdRZ9=
-vA6
-HVEfG/PqrwwDUEj/Jfr4LJ+lKK1qeVtZn/ZwOOTzhvjbb2mU6hs7aNrYwi6iS/5vgnnVkYsCy=
-c8r
-9amvXo+KETTLsDliSgLLkZnBHR7F+fT9/ereS8LBgAQTAQoAKgIbAwULCQgHAwUVCgkICwUWA=
-gMB
-AAIeAQIXgAIZAQUCWna8JQUJCd2zFAAKCRCqHptxJjmeRvB1EACBU4PJZqECeuYOBYvQMr7GO=
-cms
-0RfdEjHMWRCIyr6NKLOQSnfdnbw/XnAb7KxJa9Tkky+Gse81+bj6B8EgVQ9RZjMlQ6N8mi9D5=
-/TJ
-ITi5f8k88i3J+tUhpTZ3ihaD5/UVZqx5MFzWRSYQVn4D1RCay2q/VOeFn4VQLKSsg0AP3vqBv=
-xfQ
-GZo7S3U3HQjPGQj64Ox4rdOdMmMeoTnSx8DwSUve/mCIPHYXYPcb0IsqSIU+DABVvgNb6VoJ/=
-KBQ
-X3QKah5YOT1L6C06xaWqlYAKdhSAPiZF5oqV4Rzk9RRfo7A/nI3Xo0Z3hPlzLoP77aYwX/e2H=
-U96
-jyUFdWKeKO5ZeqgiX7dIAtC6LjDAgdASyfCmase/13xHMAx3O+IKPewkcoXFCRJ5TgtdL4lkm=
-iql
-NHJaDKKbzplMvqvjYPUcNnkvfE1+plti38AHWTV/+KWeFY7KytFCBAOv5qH7MSo6otbfKzGUV=
-SgV
-14FMAt9aPJCnQPmVETvCC7Lu4332sK+g1lpAe1t/C/dhMj3mpCQsEWZx3di2ri/pxSFzZSvip=
-m0t
-o/Mf31no33WmZN72SVsalwtY2QQzv7sTx8dMQdATHbndiCcLf2hpovU1NPS2VZp0j2WL23Wqv=
-+5h
-6g1U6ISIQBuxzFSpo9dwyLeW+Ki0A7/FDnM9//uUDmpGuTJxhc0bUmFscGggQsO2aG1lIDxyY=
-kBz
-ZXJuZXQuZGU+wsGVBBMBCAA/AhsDBgsJCAcDAgYVCAIJCgsEFgIDAQIeAQIXgBYhBPrixgiKJ=
-CUg
-UcVZ5Koem3EmOZ5GBQJeej64BQkN4TW9AAoJEKoem3EmOZ5G6koP/izLZvliWa8R15XIHkO/a=
-x3R
-J67k7uQv3Rp1wYgEhXChwqVVlA9NTar/xZrG+E4fBgsfs26KrCLmFRaSOrOrFOsM7lNv+FGuP=
-hAb
-hSrFNww/7driKxekrSPsoyGBIW0cV8jdbj77CV0YTrqgz5+6z14OiEL7xeYcNNKB3AR58crUI=
-ynr
-ifundZIrPgwFM/d+i5jZg//EIOBo8HmU5i4y4xAERUJvBS68WCeZnqrasVXowcuwAHD2E1oLP=
-Gcs
-VaUWIZGeT4SaznXDla//bx2mXD3PcXhlVYvq1wNwHzoY+xykQGSXx+bKryAVDkW2hY+5O39qc=
-h3+
-Xwo5yGEfZLtonfJpdeVFBMFVQSlAldnt06Viq2JtGyEI/9bBs1wg/VvNCrd2ghrUsscs5Ye83=
-yvR
-glF9Aww5AgOuiW8yVSm4zmkETtoyrqoSscSxJXucRtUKRb0FrglFh+KGO5BgCBgwnQyAWZ/Xb=
-u6I
-ED+PfJXbNEJ0qmJC8Rglezm8sI4pJpi8oL/9BXNLSTlylZXkEm21d/p4aw61ci1mXsaStcLe4=
-eF6
-oslaaNJwI6WGj6n75Ij7WPJQegyWqwqCPTW4zvp6Ei4Ny3llprGgwSqsTa8QT8OEzE3g+Ts1u=
-nJl
-5++E81jhc/vQ+6IjYW5ZcKULy+H60QLDpFE87H6B+fYAfUh5LaIywsF+BBMBAgAoBQJXKGGBA=
-hsD
-BQkHhh+ABgsJCAcDAgYVCAIJCgsEFgIDAQIeAQIXgAAKCRCqHptxJjmeRqiMEACkmKzN0hOZr=
-yMS
-jFLmWWs+SS9ndVTvAf1rAt2N+nF+9y/YZBnC3alo0KDYrnsIT8/N7WHXzZuDMAq6E1+lxxmj/=
-fti
-foxRgjdsYmNjRbizcH7RGcCapbaiXAQ8Gd5Myjc6U0T2VK+azp/outVAToF2lDy961rODY07F=
-929
-LsR9BjTEVd5PnILD5K1tYVsAb3LTZodvEE5MNpymArfeO7pS3pcBJdgE+zgaR/x/GdF0u12A4=
-66T
-md4swgMAhTgyT+9fKnrP1UrPuPz6CVknM8vozMz+FUe2zC2IkkHcpqjg+SVgTqeETKgA9Vi/h=
-ZHE
-IA+mR/Dzf2pEAKbtvEeuQ7gv4mNdvkWod/aoPOas3UlhH+rzEnHkglTNMqEpAy3pr18ZkZgkk=
-z7o
-ZA0Nzwi/h8HURIbrxVrawl86TsseqEIKHAn5Yn5kQLcocaFTjDSacXaXsQEzqygBsnybGF2K7=
-xVO
-iDj7dVBoAflGa/iidnBDFTa2P+SwO/7+3b/rtCZ0ruJldyQpi0MN2ScLq2fgCsl1IvrK5urFW=
-sF6
-t6i7hq+NKXoYDtWkFUKtCxJCTWIgn9nMKKNt3vih3vSG3BPDY8incrRkVK/wQhC3RCSUezWDE=
-t3E
-J4jJgvVacEKFYVqHKyiznewBVQb3u+mPQvhJ9nvQ2SESrInwE+MUcJ6i/NP5DMLBfgQTAQIAK=
-AIb
-AwYLCQgHAwIGFQgCCQoLBBYCAwECHgECF4AFAlp2vCoFCQndsxQACgkQqh6bcSY5nkaqHhAAi=
-HYi
-uwsbP7tpUINGkj8ctdxJov5wyldVZt1oHDtlA4UBFy3DoH7tYLuNLTmLqGKnQyofeHZBX/Hcs=
-VCc
-sY9MDoO0wCL3Eh6LtfzROAznLoLhXuU3gxCLTaDsElYBIQwBEgKZ1VoiCHYB9s0z/vccQtHXk=
-oMA
-Y9zqZi9yIYFlehCdJpqBEx/ZjgE/1n94ID158EDLP3Oq3R7tL9J1EJXFwW8tEKY+BEQwEWtBO=
-tOb
-4xPVgTwAp8yhwWnnLFKl+/xiIFhyYTstl3g9sdX7Bw3o2+c5bSMfmf54TMSRtN+AmWDWjQzBR=
-e6X
-M9gRvZWf6RzWJFyBuceENw7Pv4AcpxybcNp47B66hpBOXBNUrR3Ega/B1k8GzKViUbB6GbdLC=
-WV5
-18MskAETrPMRjawv55dhLrMqqPzYEuGgWuYLMyzwUWxkDFUqAUfSwy+PBe9YjAF9+mGtsHCT7=
-dcf
-UPq6VXGb2ZVI9J47RbxL01ANK72SXQsiLWRI2JievokGiIKXX8I8ELgzncMdLEgKz6zhUEiTs=
-qp0
-EoF2M3RhfsbhUDnLXlPlzPtJSmAt1HPf+qN415f3fCoq8m4ZMyk42frMwDUHJmG49iHta/GWy=
-1tG
-FCyqR1AKR0JH2Kc91e9tJ+u4FnNw2GJmJtrVernKXvsoxdtrKkPLfL+hDrzPwknLRMqpVWHOw=
-U0E
-VFtv+wEQAMJKdSxBKEE9wA8lAf0MxA2cI7e1RnfabHfZL9YPnKSJWl4jGkRrZf9ClLx3lzw5S=
-HkA
-sHi5NSCtCpzNeFZTAYc8BXY9bSz9Lg1RewKz8x2vLYA02T+Z9Iy1AyvqPam2D8xvv0VkCpJ41=
-tLz
-Upx+xY/CEAuB4iZhTDcmjJiDUpaBE6W0b4sLfa+cMNOi1xTzJ6SDhspneV6RU4PGTR2hmXyYW=
-8NM
-CIcUr07ljVrN4lpIwWQ0T8E0ewj914PMaSJX0eFHCB7v97iXi4kjR0+0ukY0Qs+rt+3L3s6+P=
-FRz
-11F9AND0JQHOi+Deumum7FU1GS1KkoB1pnNtM8uPwhzIqgUtD4yp1ojuhqTZavl1MJeV1sHIH=
-SLh
-TB4TIWzfZY82QmgZarY/zMf1oqZzbATsIfPtHJHuET2bs14atTKo0oDxCkISGhcdm9onqSjZp=
-pO7
-V6PwoKzJHnFWy9GT3RjMqLL5ABAoyDkm4l73avv+6hE//FPzIcOuBct3ZwON415HlEtiLX8iu=
-epe
-4OJQ8Kz38TuJM3KHc/TCHjeNvLykkRQLkjfDbTQOjlx1DhUZp3td5AFzekRSYVzoWDAXtJVqQ=
-llO
-/GR4vkVwTU6fzasmorp5I4iRXjmnFMy8S43JfyCzTUDgG5F4XTqhuDjSjk/tui+WyiDo2pmgP=
-4kM
-lYzSR1hlABEBAAHCwXwEGAEIACYCGwwWIQT64sYIiiQlIFHFWeSqHptxJjmeRgUCXno+uQUJD=
-eE1
-vgAKCRCqHptxJjmeRq4zD/4kgm1bQMGA9clpYmV3DvuKhC1Bkq6nb5DnhGzvSDCRXY7O5LjLJ=
-ah3
-hYmN4VK7IjM47dNb5lnbQoAb5D25DHhln2Iv7pcWJgvw5oC4hfkU+TipR2Less8oIX+H+yf1e=
-VZC
-PYpVS0MrbUfuwLIwisEeYPQpbb2ryI3qiP0GBtPwdCqq2d8nQodS7lmbzJ6c9For3ED0EsMtR=
-MLm
-54BZvyAQZZlZ58iMr2sJHzjnjiL8Rd55TnMkvMbLZm9l+mDTU7aGmSlTtZZVp/hvFL5KRugSd=
-iNZ
-ZMhuRnMmcJA7UZkVJMaYAsqwQMcti7LHCdJhq2oIVUPsYi0Cwob59ZWWU3UNZhLMhOh43o3St=
-pwI
-uBoqEtPyqe8BiMI6l4Ztnll5gybFqjk1FtvHXsILh7CxzQUD5QJjW5bqJqidzmAOwu9IN6rFy=
-+0+
-KIym/YxDNLBvGO/2dBLTH6zV2HX+v6k/wXt2lHLw13NIM06MCkCPBmy3hLeAYOvOumKXN6SUq=
-f7u
-fPtfDUY2UCe3rns5DH7F4mriSYgUh4CEj9FMYtfoVXqYsfvSjG9bz/ZBOZas1UrU5qCmsBgcq=
-fDz
-QeQ9P77Rp1TQyw31xsmJcG+SjeCgyYgv4Y3rxzJB9Dmf0sAZqOwjo12lQ1hY2F50dpSW3TDlt=
-UTc
-KmoMIvZL9PHGkxlyQepy6Q=3D=3D
-=3DDJz2
------END PGP PUBLIC KEY BLOCK-----
+--bmItLwrjvPnbJwBmN87djtP54OvZ0eWCX--
 
---------------A506A13605DBAD33185FFF63--
-
---HPPVu4qG96UkYjlWKfgknquxqFpt2ffjQ--
-
---h0pqdbwbEbj5g7WDW4ojmEH4n3JuhT7fd
+--6IM9HRcpD7WDS1dMIUzE3d82R8szuc5Eq
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAl/httMFAwAAAAAACgkQqh6bcSY5nkYz
-xA/8CE/2uU0Htcm1J2LuCyc8F/WcRQnIpGly/N2cNSM3yZMmHx6UinlcfpP8T910sL+t0lezXSPD
-yPzE4nIPXnjXRcnSF8lgL0P+sWvtcRT12uwuC42Buyz6NYNdAKeMEZK7Fz4yowfatOk5M2l7dOGR
-HLpoGqizLCNYaFsSvuza39hcFWkfo//+oWcbbkYvyXMAXIv0LI3ZgYCjLh1MR9jw8nRtxY2vLdpa
-kLSvBBkHRJxJUGdPsg2sh74704+aOzCI54twbYufthr8slqUyriKqhMglAWCWR8BmqlMLp1TNEJf
-tk1xx5ucy2d/KcjRA/heUAn1P0rq0VaVgvMSrguCbPenssKyIdaoNmbUfdofkhF/AZN/Qi3A7olf
-3rTkUyrrs3MN1mX0dGxWyNFuqAINR0+vKJOjZ3OYJ5TssRU/nxHrOYu/FtfSePjXAdYYaLb6Np42
-ElJemvY5Q7OWabnHrLNzWgVE6lfM+r2usWuPxpB1ptPoGIfP8/SNYzKSaLiRc0XyZY80BqcgxqBQ
-Uc84q0obMVJRjx5YNn01ivzoXMVQun+8XTatfh6lwjmeTCxh11LyTy0gru/mibLBXuA2gsOap1qk
-h6sHsVabBsn+65bHp+CruD/sWFbcKGBafLW5y5pOV8nwVXVZsEthfaLqpoK2RjORBthdZEjR4gs4
-pXA=
-=LXNH
+wsF5BAABCAAjFiEENSSTvrX3jmMTcq8t9U7kCwc5rWwFAl/jpTsFAwAAAAAACgkQ9U7kCwc5rWwc
+ARAAhD2owU9siHZ0gf8YK0BR6/PV+1RhtCf8inl0QCzvzVBgpH6up0bNGP+gKLHZc5XSDoReOhCS
+U5nkOoKPAtpGGxTlUXcJma7ZcYKB+YhqSuEO+GjS20LN2dP/IwiU85Re5i8keoJyowF5oncA/eAz
+6ypZbuK/wJnN3VAtX7NtSxesIETjBJrCcL+syltERwpDQFlRgL2YJBHSyWh2o+JxqeDaJmswecJ1
+o9dOB3fdM4j9sot65uiS1BTHUf40ZkjFLuX6wK/Rb4o4glvpcLxzaFirQU0L0i2NJAhtezcGcBh8
+uO3328jjHlYYjYxUWszfoyLFcdqxHYQMKB6Oo0WbeK2aVFDxlKkUkzX/i1JQLUXqXSaP0gTZKQXy
+a+XI8xN8jtLOLXQlplYgu0tE6HvR5/zRRNfakuKxQFOwwjIp1JYAPbR2NguyKd/yetmHo7NArEH1
+niAeeymYm5bEMpt6CeDEjGbLNf02ITW1BLf8CJxatSUYNMtiOJ2YjNpneesQMwrBmI0xpTOPCopH
+AdnN+l+8DOhyhFmud9tzOaGedKinnurqbPZek5sPBb2bTLImGiH7gpO736H+PrUwAWylMszw6bnU
+VomsoZhwPRRlVFZlPsNJ6uozD9wgimZFvpGXxHzwRocWnYq9MCryhA3eAju04uHhgHwTGR23ipah
+U1I=
+=I86+
 -----END PGP SIGNATURE-----
 
---h0pqdbwbEbj5g7WDW4ojmEH4n3JuhT7fd--
+--6IM9HRcpD7WDS1dMIUzE3d82R8szuc5Eq--
 
