@@ -2,42 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4326E2E2160
-	for <lists+samba-technical@lfdr.de>; Wed, 23 Dec 2020 21:34:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A98662E2245
+	for <lists+samba-technical@lfdr.de>; Wed, 23 Dec 2020 22:53:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=x1rzDJk5JMzygAm79mWCcduyiwNgPNc1qwQ76ZY8SKo=; b=ILF9BOcHyRgHWBUWhW+ITh9vLw
-	cP8MmXFmZVoc7vjjir6VpPYuDs7/qtP5kjDNMJM8aPXsVZ2drPCFI457+7BYrkm9qJwNI/XtZGolk
-	BLepMDt4MF9eluxDTTZkXDrLPd0P8xnWL5w6IzsybCSxFcd6QCspdYAKBD68UNYzMHvzoZzFeG4yL
-	YEkqy3hS0uHxL+X3g5anSdlDg5JeYLP82nNZ9QXjnqLCRdegbciyr5J8EDY9tWeP+EIvbfPdy3vVa
-	xLRc05vlsVxU+oXEzTtv0QQlqEN6JG56kNKalNixm1FQwiIUWre+2taIICgfRzdk6VT6tJ2tDhF8T
-	o9Pj6H8Q==;
-Received: from ip6-localhost ([::1]:48090 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=HbGX9UCEHAXsHNnByo930Nuc78QQd0MkAT/+/CDJALg=; b=Gcz88icEALFDDSVoujJKnWTF7Z
+	RFkpeyUjuXorC9H2EtQcCuPxx2ociJNG0ObAP7kSKqpHNfhOsBw9XzEVcqczMLLJQ12jVZ9k2wMBp
+	73/P2xCV1J6Erlb0+ADM+V87dAZGb3LlF1/Dgc7iXg5TR/K7t958hXp85r3vDucCOT6xsXkH4icSw
+	B7L8b2HtJLw3AJXi66csopWTKZyaJGiFYw+uXT5G7mOSRzCOlaP9usAsiXrJiJzOy38b5Ed2qAoJF
+	jAy+q6vEM8dFcDuYQzPgYTlhd3iGCkl8TdHVEVDGmEvSsv2N6Gm75mN7NwDlsK1AktfKclGkhJEp+
+	EGTFzOSw==;
+Received: from ip6-localhost ([::1]:48852 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ksApI-002Gu0-JE; Wed, 23 Dec 2020 20:33:40 +0000
-Received: from thermi.consulting ([192.145.47.79]:37578) 
+	id 1ksC3z-002H67-SC; Wed, 23 Dec 2020 21:52:55 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz
+ ([2404:130:4080::4]:42728) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ksAp6-002Gtt-PQ
- for samba-technical@lists.samba.org; Wed, 23 Dec 2020 20:33:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=thermi.consulting;
- s=201909; t=1608754492;
- bh=x1rzDJk5JMzygAm79mWCcduyiwNgPNc1qwQ76ZY8SKo=;
- h=To:From:Subject:Date:MIME-Version:Content-Type;
- b=K4ZaWMi87uC3mKFeFyEwUNfl3m7lv1R0S0rsRvl2Pc+183zN931cBhyUS8pLbGmtF
- zcSlebPdJFyBUMdUrMpA4wW8SI7thOstcCaPHJY6WYWVBvRZ9MmBIrdF4ZFqoTWQA4
- jO1Jli2+GkHiDo6QGEZ4h46gp1UYxf3a6XkNVgSzikXaoH9/DLBxIkBTZdMSK1CjHD
- 0ilTwX7ZHodgw5PA2lLexYWyAp5WTqeqgsNdoXeBTAntUeP4UX1xccyBNyR4wiGwMY
- HcvMWXk4K749GrQOT3LKQ8mJ6KTWZpEPIY/FzKKztjwAQ2n0hjNzL3PPD1wYuCXZOh
- bRCczuhv7Y+KA==
-To: samba-technical@lists.samba.org
-Organization: Noel Kuntze IT- und Unternehmenssicherheit
-Subject: TDB restrictions from 2015: Still the case?
-Message-ID: <a721c07f-9c68-bed8-29de-7ffe59b10b28@thermi.consulting>
-Date: Wed, 23 Dec 2020 21:14:51 +0100
+ (Exim) id 1ksC3t-002H60-H2
+ for samba-technical@lists.samba.org; Wed, 23 Dec 2020 21:52:53 +0000
+Received: from [192.168.1.157] (unknown [114.23.142.188])
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 436678166A; 
+ Thu, 24 Dec 2020 10:34:04 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1608759245;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=HbGX9UCEHAXsHNnByo930Nuc78QQd0MkAT/+/CDJALg=;
+ b=RdJfqJ9wjxZOYgcJhKHheUo60dZ487C2N88WrLnwsd8/0Qlv30ZNb4SoADADKGrTiuM4iw
+ twzGVR04bWrvT6hj86D6rFqrG15ZoaGcg4OXeZOAvi0gmBTMK3tMG5z8mLMtTrPfSXlXwD
+ yDfX5xoVV47HwomrWiWv4gcs1OB0/22bxnt7elMn8ie5Di/dhbz3K+QY1Kp8q8H+dLyN+I
+ 6Csk9n+INlXDileCs5SkuXOKBleE9X38sVWfQYFixYPF3HD+T34DHsleIQtcXnGtGKYkEU
+ 8+D1WiLyd8qOEFLd39poBaOy5el6PViuWZ4xAr9A7Xbn+GJpoeLPFlfAGGXq+g==
+Subject: Re: TDB restrictions from 2015: Still the case?
+To: Noel Kuntze <noel.kuntze@thermi.consulting>,
+ samba-technical@lists.samba.org
+References: <a721c07f-9c68-bed8-29de-7ffe59b10b28@thermi.consulting>
+Message-ID: <d0e890ea-3922-894a-8290-0abb86584027@catalyst.net.nz>
+Date: Thu, 24 Dec 2020 10:34:02 +1300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
+In-Reply-To: <a721c07f-9c68-bed8-29de-7ffe59b10b28@thermi.consulting>
+Content-Type: multipart/signed; micalg=pgp-sha512;
  protocol="application/pgp-signature";
- boundary="6IM9HRcpD7WDS1dMIUzE3d82R8szuc5Eq"
+ boundary="9S7JDrWS0xZM3W3G7v1zPmy2PaNfpgUVd"
+X-Spamd-Result: default: False [-2.20 / 15.00]; ARC_NA(0.00)[];
+ MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
+ HAS_ATTACHMENT(0.00)[];
+ DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
+ SIGNED_PGP(-2.00)[]; MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
+ ASN(0.00)[asn:56030, ipnet:114.23.0.0/16, country:NZ];
+ MID_RHS_MATCH_FROM(0.00)[]
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=douglasb@catalyst.net.nz
+ smtp.mailfrom=douglas.bagnall@catalyst.net.nz
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,70 +71,75 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Noel Kuntze via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Noel Kuntze <noel.kuntze@thermi.consulting>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---6IM9HRcpD7WDS1dMIUzE3d82R8szuc5Eq
-Content-Type: multipart/mixed; boundary="bmItLwrjvPnbJwBmN87djtP54OvZ0eWCX";
- protected-headers="v1"
-From: Noel Kuntze <noel.kuntze@thermi.consulting>
-To: samba-technical@lists.samba.org
-Message-ID: <a721c07f-9c68-bed8-29de-7ffe59b10b28@thermi.consulting>
-Subject: TDB restrictions from 2015: Still the case?
+--9S7JDrWS0xZM3W3G7v1zPmy2PaNfpgUVd
+Content-Type: multipart/mixed; boundary="zDZT1WNOGacnkDdPj25GVL62Thn3SdHpx"
 
---bmItLwrjvPnbJwBmN87djtP54OvZ0eWCX
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: de-DE
+--zDZT1WNOGacnkDdPj25GVL62Thn3SdHpx
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-NZ
 Content-Transfer-Encoding: quoted-printable
 
-Hello list,
+hi Noel,
+>=20
+> I am looking for a replacement for Berkeley DB.
+> At the moment, I am looking at TDB for that, and I found an email from =
+2015
+> detailing issues if TDB was used in large scale projects.
+> The Email from 2015 can be found in the archive[1].
+>=20
+> Please let me know if these restrictions are still true today.
+>=20
+> Kind regards
+>=20
+> Noel
+>=20
+> [1] https://lists.samba.org/archive/samba-technical/2015-August/109166.=
+html
 
-I am looking for a replacement for Berkeley DB.
-At the moment, I am looking at TDB for that, and I found an email from 20=
-15 detailing issues if TDB was used in large scale projects.
-The Email from 2015 can be found in the archive[1].
+The 32 bit limit has not changed.
 
-Please let me know if these restrictions are still true today.
+The "Extremly poor Performance of the LDB/TDB Database Stack" was due to =
+the LDB
+layer which has a lot of work to do and was then quite inefficient.
 
-Kind regards
-
-Noel
-
-[1] https://lists.samba.org/archive/samba-technical/2015-August/109166.ht=
-ml
---=20
-Noel Kuntze
-IT security consultant
-
-GPG Key ID: 0x0739AD6C
-Fingerprint: 3524 93BE B5F7 8E63 1372 AF2D F54E E40B 0739 AD6C
+I don't know about the threads. The CPU load mentioned would be LDB load.=
 
 
---bmItLwrjvPnbJwBmN87djtP54OvZ0eWCX--
+We have improved LDB performance a lot, and for >4GB installs we introduc=
+ed LMDB
+as a backend option. I can't remember exact numbers, but when comparing L=
+DB
+performance with TDB and LMDB, there is not much to distinguish the two (=
+with
+<4GB databases, obviously). The core database is not a bottleneck.
 
---6IM9HRcpD7WDS1dMIUzE3d82R8szuc5Eq
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Douglas
+
+
+--zDZT1WNOGacnkDdPj25GVL62Thn3SdHpx--
+
+--9S7JDrWS0xZM3W3G7v1zPmy2PaNfpgUVd
+Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsF5BAABCAAjFiEENSSTvrX3jmMTcq8t9U7kCwc5rWwFAl/jpTsFAwAAAAAACgkQ9U7kCwc5rWwc
-ARAAhD2owU9siHZ0gf8YK0BR6/PV+1RhtCf8inl0QCzvzVBgpH6up0bNGP+gKLHZc5XSDoReOhCS
-U5nkOoKPAtpGGxTlUXcJma7ZcYKB+YhqSuEO+GjS20LN2dP/IwiU85Re5i8keoJyowF5oncA/eAz
-6ypZbuK/wJnN3VAtX7NtSxesIETjBJrCcL+syltERwpDQFlRgL2YJBHSyWh2o+JxqeDaJmswecJ1
-o9dOB3fdM4j9sot65uiS1BTHUf40ZkjFLuX6wK/Rb4o4glvpcLxzaFirQU0L0i2NJAhtezcGcBh8
-uO3328jjHlYYjYxUWszfoyLFcdqxHYQMKB6Oo0WbeK2aVFDxlKkUkzX/i1JQLUXqXSaP0gTZKQXy
-a+XI8xN8jtLOLXQlplYgu0tE6HvR5/zRRNfakuKxQFOwwjIp1JYAPbR2NguyKd/yetmHo7NArEH1
-niAeeymYm5bEMpt6CeDEjGbLNf02ITW1BLf8CJxatSUYNMtiOJ2YjNpneesQMwrBmI0xpTOPCopH
-AdnN+l+8DOhyhFmud9tzOaGedKinnurqbPZek5sPBb2bTLImGiH7gpO736H+PrUwAWylMszw6bnU
-VomsoZhwPRRlVFZlPsNJ6uozD9wgimZFvpGXxHzwRocWnYq9MCryhA3eAju04uHhgHwTGR23ipah
-U1I=
-=I86+
+iQEzBAEBCgAdFiEEU5izEodn2f3xTzSydyozSbGxfm0FAl/jt8oACgkQdyozSbGx
+fm39IggAgzVNmlAbixQKsSeyiqtQc7XYYa69y6dpdvmMI12QGdqsoiZS10UbXtop
+/2IAlQzwzN5HsiUcwd9J7o6GlVfgUf95FSKBPHoEyClmyY3V30XTpgFKfxYka3SK
+xsHRFqHkKJDt+MNnN8mVTZAo3Q3k7R5SkD2mHlhKt+0vOrVZ563dIwrMXOcNg9xm
+lpV+bRSSmySRy4PwYp1phnR/4NtU+0JN+pblyCtwsMakyHzABdpEm7l2FXc5IOyv
+quko+JC57xlBxMDXKL4v1kmtr0N4tDgOsHYXhOHSBGOqUgWaAcndsTC1dYgZPMM9
+UC/7e5F/qS15jfRbhI4+ormwvJMAZg==
+=gkh2
 -----END PGP SIGNATURE-----
 
---6IM9HRcpD7WDS1dMIUzE3d82R8szuc5Eq--
+--9S7JDrWS0xZM3W3G7v1zPmy2PaNfpgUVd--
 
