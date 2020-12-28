@@ -2,62 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A98662E2245
-	for <lists+samba-technical@lfdr.de>; Wed, 23 Dec 2020 22:53:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1C332E6A98
+	for <lists+samba-technical@lfdr.de>; Mon, 28 Dec 2020 21:30:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=HbGX9UCEHAXsHNnByo930Nuc78QQd0MkAT/+/CDJALg=; b=Gcz88icEALFDDSVoujJKnWTF7Z
-	RFkpeyUjuXorC9H2EtQcCuPxx2ociJNG0ObAP7kSKqpHNfhOsBw9XzEVcqczMLLJQ12jVZ9k2wMBp
-	73/P2xCV1J6Erlb0+ADM+V87dAZGb3LlF1/Dgc7iXg5TR/K7t958hXp85r3vDucCOT6xsXkH4icSw
-	B7L8b2HtJLw3AJXi66csopWTKZyaJGiFYw+uXT5G7mOSRzCOlaP9usAsiXrJiJzOy38b5Ed2qAoJF
-	jAy+q6vEM8dFcDuYQzPgYTlhd3iGCkl8TdHVEVDGmEvSsv2N6Gm75mN7NwDlsK1AktfKclGkhJEp+
-	EGTFzOSw==;
-Received: from ip6-localhost ([::1]:48852 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=eTMVw5wQCsdXVXMJgOx13vzhYuuLgs95sogOFkQUKIE=; b=Mdp7fz+2up6PGXrm++AAKhy5WS
+	c/VOAgRmYM09vorQZoozxCi2rxUoiWhlqFH0V2XiNq+8cIen+C0AX+dw2g/B/B3tINdrG1h7ZApXD
+	RR3ugVGZHcsTYkfifcf5n2d0mfURewHc2D1LFtcfjo7tyZVgYLnhHjsAjwvlBPoIcMoVb/DvcWlLk
+	g1rV6lpeGS/bW9x25FExI3mPLnZlWYSUDLddIyrIW9OCBEUSQ7JQsA2BfJJhAuLZUiNmE/ZPaOjqC
+	VoBlL5wptTAmJ7STqlp8A6S635GhE5tyozHssDq3zXf5VtrNTAj8VuIGUGolaipExJK7ice1I3MIf
+	wurWOz7w==;
+Received: from ip6-localhost ([::1]:60232 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ksC3z-002H67-SC; Wed, 23 Dec 2020 21:52:55 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz
- ([2404:130:4080::4]:42728) 
+	id 1ktz9L-002YOC-GH; Mon, 28 Dec 2020 20:29:51 +0000
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:39544) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ksC3t-002H60-H2
- for samba-technical@lists.samba.org; Wed, 23 Dec 2020 21:52:53 +0000
-Received: from [192.168.1.157] (unknown [114.23.142.188])
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 436678166A; 
- Thu, 24 Dec 2020 10:34:04 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1608759245;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=HbGX9UCEHAXsHNnByo930Nuc78QQd0MkAT/+/CDJALg=;
- b=RdJfqJ9wjxZOYgcJhKHheUo60dZ487C2N88WrLnwsd8/0Qlv30ZNb4SoADADKGrTiuM4iw
- twzGVR04bWrvT6hj86D6rFqrG15ZoaGcg4OXeZOAvi0gmBTMK3tMG5z8mLMtTrPfSXlXwD
- yDfX5xoVV47HwomrWiWv4gcs1OB0/22bxnt7elMn8ie5Di/dhbz3K+QY1Kp8q8H+dLyN+I
- 6Csk9n+INlXDileCs5SkuXOKBleE9X38sVWfQYFixYPF3HD+T34DHsleIQtcXnGtGKYkEU
- 8+D1WiLyd8qOEFLd39poBaOy5el6PViuWZ4xAr9A7Xbn+GJpoeLPFlfAGGXq+g==
-Subject: Re: TDB restrictions from 2015: Still the case?
-To: Noel Kuntze <noel.kuntze@thermi.consulting>,
- samba-technical@lists.samba.org
-References: <a721c07f-9c68-bed8-29de-7ffe59b10b28@thermi.consulting>
-Message-ID: <d0e890ea-3922-894a-8290-0abb86584027@catalyst.net.nz>
-Date: Thu, 24 Dec 2020 10:34:02 +1300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ (Exim) id 1ktz97-002YO4-FD
+ for samba-technical@lists.samba.org; Mon, 28 Dec 2020 20:29:47 +0000
+Received: by mail-pf1-x42f.google.com with SMTP id m6so6827251pfm.6
+ for <samba-technical@lists.samba.org>; Mon, 28 Dec 2020 12:29:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=Eu4idPTZVnK+515WO9WPQXQ2elZT59LDbXbLB1D07Wk=;
+ b=mcvJ6t2UpsaU0e4KIdHmvR4R0tAYSKDuW60sS9mF5Hc6oq/SOdmHMAVk+wbGZvQhqh
+ uxCG/YUSLknxG+DVnrBZzEp7c71yBligQFIltlTKAU9Wfh4U60+nszc14P4k5Mo61xGr
+ 7p0gLApFxJDn5ntt69qtbOInvpPArVMNw3G0yvmtGJAnQGXkeNM2QnYcSy2WGb+7YU3N
+ BjY2gWns72IceQ6htRIk1XDPGdL3fzoLR0Sh3jiI7KqXLJgcIxzoFRQ4IyyUmh7YzGqw
+ e2CNGV1qvsA4u33Qr3fZe/e4sWK+y4I1/Pcp7ymT3tq/unXcdLkTj/TSPOhDL+lxJcCi
+ atKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=Eu4idPTZVnK+515WO9WPQXQ2elZT59LDbXbLB1D07Wk=;
+ b=SLGzbipI+DwIBSHvceIUqecWYB5mcO9FxCdE3dt9WY8+hNZwUhZZW1h6TicoXFAO1L
+ jHQUem0V9rnuRjWXkYNWlf2MBoEXe39t4rWWFciHGP9JWavmiZlCIfOzAOKkTQM3lzZK
+ VB4uJ1LKa8nPuzm2seNmWukQO7WrhTkTm/rcYi3OCI4OtJPz1pgCl5Y+MgCRnm7N76+7
+ fPzXymfJ/3dLiRPD+wYUi4tFPzItDaELb1+ZmrTPTgEpOn8kUwjOCliDf380Jmts9h1h
+ MRz77dyjyERhOBmKwnCPPyDtUvmb0+yQ2jYRijmvIjE97ONl0wB5V2Clxt9xPvo3+Fji
+ 3zwA==
+X-Gm-Message-State: AOAM533t8tx7WwJpQXUHtMfNGfsJFyjrtaLsd/jYl07SZtPqTCWZnc78
+ VKkikYMGW0frGCbqexqi3luJnGq2Uh8FZoe2/mPn6H4T+FM=
+X-Google-Smtp-Source: ABdhPJxOyVVYHit/vh76rt9SfL0i+2Buk70Z4gAeIe2LVczyYbqBAMw06B96dUnw5c+n8Yh4qdiFT+wTKLpaPDqt2e8=
+X-Received: by 2002:a63:745a:: with SMTP id e26mr44980614pgn.321.1609187355654; 
+ Mon, 28 Dec 2020 12:29:15 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <a721c07f-9c68-bed8-29de-7ffe59b10b28@thermi.consulting>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="9S7JDrWS0xZM3W3G7v1zPmy2PaNfpgUVd"
-X-Spamd-Result: default: False [-2.20 / 15.00]; ARC_NA(0.00)[];
- MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
- HAS_ATTACHMENT(0.00)[];
- DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
- SIGNED_PGP(-2.00)[]; MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
- ASN(0.00)[asn:56030, ipnet:114.23.0.0/16, country:NZ];
- MID_RHS_MATCH_FROM(0.00)[]
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=douglasb@catalyst.net.nz
- smtp.mailfrom=douglas.bagnall@catalyst.net.nz
+Date: Mon, 28 Dec 2020 12:29:05 -0800
+Message-ID: <CAOGdD2ouQJGJBgfC3QJVm5PEACdQy7W=GH_rN=9NHg3nKQi=Pw@mail.gmail.com>
+Subject: Samba and Adobe Illustrator locking issues.
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,75 +65,75 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Yogesh Kulkarni via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Yogesh Kulkarni <yoknfs@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---9S7JDrWS0xZM3W3G7v1zPmy2PaNfpgUVd
-Content-Type: multipart/mixed; boundary="zDZT1WNOGacnkDdPj25GVL62Thn3SdHpx"
+Hi,
 
---zDZT1WNOGacnkDdPj25GVL62Thn3SdHpx
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-NZ
-Content-Transfer-Encoding: quoted-printable
+ I have a strange case of lost updates with the Adobe Illustrator .ai files
+and
+ samba server. I am writing this to validate my findings and ask if there
+is a
+ known workaround to this issue.
+ The samba version is 4.9.5 running on debian 10.x and clients are multiple
+MacOS
+ versions.
 
-hi Noel,
->=20
-> I am looking for a replacement for Berkeley DB.
-> At the moment, I am looking at TDB for that, and I found an email from =
-2015
-> detailing issues if TDB was used in large scale projects.
-> The Email from 2015 can be found in the archive[1].
->=20
-> Please let me know if these restrictions are still true today.
->=20
-> Kind regards
->=20
-> Noel
->=20
-> [1] https://lists.samba.org/archive/samba-technical/2015-August/109166.=
-html
+ The customer reports an issue with multiple users working on .ai files.
+Here is
+ the use case -
+ User A - edits a file test.ai and saves the changes
+ User B - opens the file and expects the changes to be present in the file.
+ (almost immediately). So, they are not co-editing, but opening the files in
+ quick succession.
+ However, it turns out that User B cannot see the changes.
 
-The 32 bit limit has not changed.
+ Observations -
+ On the client side, finder shows that one or more '.tmp' files are getting
+ created when a user saves the .ai file. These .tmp files sometimes go away
+and
+ other times stay till the user disconnects the share.
+ Network caps indicate that the application does **not** use oplocks/leases.
 
-The "Extremly poor Performance of the LDB/TDB Database Stack" was due to =
-the LDB
-layer which has a lot of work to do and was then quite inefficient.
+ Hypothesis -
+ UserA writes to the test.ai file and the application writes the updates to
+.tmp file.
+ UserB has their finder open and obtains a lock on the .tmp file. Now, when
+UserA
+ tries to rename the file from xyz.tmp to the test.ai file, since UserB has
+a lock
+ this operation does not go through. In a way this is a deadlock as UserB
+will try
+ to open the file to see the updated content, but it cannot do so, since it
+locks
+ the resource and that prevents UserA from updating the content.
 
-I don't know about the threads. The CPU load mentioned would be LDB load.=
+ Experimentation and results
+ In order to verify this hypothesis and cater to the customer case, we
+experimented
+ renaming the locking.tdb without restarting the daemon. This addresses the
+issue.
+ Obviously, if we take out the locking component, there is always potential
+risk
+ of simultaneous users overwriting each others data.
+ I experimented with the locking = No, and checked with smbstatus, but with
+preview
+ enabled, I see that a .pdf file shows as locked in output of smbstatus
+command.
+ So I conclude that the samba process internally acquires the advisory lock
+on
+ the file.
+
+ Is there a more elegant way of turning off the locking than just renaming
+the
+ locking.tdb ? We do not use clustered mode and will probably never support
+that in
+ the product.
+ Are there any such cases seen in the field in your knowledge ?
+ Is there a tried and tested solution to this issue ?
 
 
-We have improved LDB performance a lot, and for >4GB installs we introduc=
-ed LMDB
-as a backend option. I can't remember exact numbers, but when comparing L=
-DB
-performance with TDB and LMDB, there is not much to distinguish the two (=
-with
-<4GB databases, obviously). The core database is not a bottleneck.
-
-Douglas
-
-
---zDZT1WNOGacnkDdPj25GVL62Thn3SdHpx--
-
---9S7JDrWS0xZM3W3G7v1zPmy2PaNfpgUVd
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEU5izEodn2f3xTzSydyozSbGxfm0FAl/jt8oACgkQdyozSbGx
-fm39IggAgzVNmlAbixQKsSeyiqtQc7XYYa69y6dpdvmMI12QGdqsoiZS10UbXtop
-/2IAlQzwzN5HsiUcwd9J7o6GlVfgUf95FSKBPHoEyClmyY3V30XTpgFKfxYka3SK
-xsHRFqHkKJDt+MNnN8mVTZAo3Q3k7R5SkD2mHlhKt+0vOrVZ563dIwrMXOcNg9xm
-lpV+bRSSmySRy4PwYp1phnR/4NtU+0JN+pblyCtwsMakyHzABdpEm7l2FXc5IOyv
-quko+JC57xlBxMDXKL4v1kmtr0N4tDgOsHYXhOHSBGOqUgWaAcndsTC1dYgZPMM9
-UC/7e5F/qS15jfRbhI4+ormwvJMAZg==
-=gkh2
------END PGP SIGNATURE-----
-
---9S7JDrWS0xZM3W3G7v1zPmy2PaNfpgUVd--
-
+ Thanks and regards,
+ Yogesh
