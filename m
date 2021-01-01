@@ -2,41 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB2482E8573
-	for <lists+samba-technical@lfdr.de>; Fri,  1 Jan 2021 21:00:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 121472E857A
+	for <lists+samba-technical@lfdr.de>; Fri,  1 Jan 2021 21:07:06 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=OR3PrxJuBkuYDp48Tu/wJCqazQjCTGlxeFR5kQiF6zQ=; b=MQjgqHU4Hr4z+XrQvjNVXFuFMF
-	GtMreYjRis/3p0DqFBqbP/+2a5vHtMA8DgQYXmZ61nVtErERPcq250I+9BRCLZauUBa9PJUiFjcV1
-	9ud7nXguAgorn97/Ln7m+Y+V6oBJcjmzKiGI9k+w5fDMQfTxuT4supJ5PEjLaeCfZ64p5I5RUAXgP
-	A414XQWgcbomzqMTvz8otePMF47vOJaTR1lo/ri27vnZsN3RVUzeYrQ9T6z2oSEf0hW9driBSWodA
-	UZlTGDp9avHs925Cs7kd/bZyc92flwTtHLRRDkAyRaS6tVCXCaunz9LyZFMV9ViEzMdY7A0gNrue6
-	C17Il37w==;
-Received: from ip6-localhost ([::1]:37172 helo=hr1.samba.org) 
+	bh=Xia1L87USBW5apqIGMF1dwRCIxOBi6OYUM3sTOiJ1ng=; b=5YfeRoR/sP78pAKGU2dP5QSelO
+	ABxBh5DQod2oOyCHrLyubvEAPPwQhFhivS28wub4033ZvR+TpfYMJ2r0Zy5bJh4dVMtNx+SZ/a0pg
+	uZH7uLGl60w7uhaekJHuuJhw6awrQHd8PLMkjchmQVqIZAzdJrslYUSqYEZo+rjAFbWogFXQYnru7
+	k1vtztl5jHqO7Wfwd2RXlZ6/EPwweWNGQYnAFPhffD/3DgP6fqwmVbn0ySrQLEjgJ2lA18lVTxpY3
+	HbYmy8CfZDd3FPOaE7yB0XluT3B4SOrYPYH7IRQ4coWC5iHTCaXUvggUyj8bNRxW8yxOlPMWKYHxA
+	xDQZg/zw==;
+Received: from ip6-localhost ([::1]:37878 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kvQZd-004UDB-JW; Fri, 01 Jan 2021 19:58:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36710) 
+	id 1kvQhQ-004UJU-M7; Fri, 01 Jan 2021 20:07:00 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38500) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kvQZS-004UD4-FA
- for samba-technical@lists.samba.org; Fri, 01 Jan 2021 19:58:54 +0000
+ (Exim) id 1kvQhL-004UJN-0l
+ for samba-technical@lists.samba.org; Fri, 01 Jan 2021 20:06:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=OR3PrxJuBkuYDp48Tu/wJCqazQjCTGlxeFR5kQiF6zQ=; b=jWaNIcZCApm0f31B5ORRMOby6c
- u7Qt/4Q1BizZBiywHkBXJAjhlzmHrmxtP1YYNF7rmf4kKt0DMs6IEfpwfdjMrWVsd41kLzirYfbei
- rYmzhUVyLnvPCBR2PWoSZOzSXiU2Ugmw7CyDOZkfRfFQ3t/n+3rwGeaNGOBzEcE+JORIIendjZQbA
- DBNEKbvL1HHgKhHyOOHAEpfKsNDOxSd8fAea4RMOqEUya2dspaTyKgWdD5fKfiurqmjzO5s6PW3+8
- aZdwjWriWa5hfW+j1XDEJHtl+7+z449E3eVCBOUsg+AIWxVF1Huj/zjoPwsaRU5xSfUH5EsCcuCSz
- I5z7yrLOTf8Kwuz0d8sF0vATry8KTgsKAy3Pi3TvlcSUWtSbjKuc/gpZEfbGoalMbC7Od6c8ts0kM
- GJbD5fYWvJOtwatMniOl4y9Tzp2PME3jZ3KFJNZzyjR+c+mb9BhhFk7ce+vpDfdUPleVhyWNA/l7r
- hUKpyzupXkF+c2jCRLoEuPI4;
+ bh=Xia1L87USBW5apqIGMF1dwRCIxOBi6OYUM3sTOiJ1ng=; b=CJLYzXxEF86RmQx7sX8zM9jlLz
+ EApF3+3LWaSm62KuodmVObVxc/WlWoIqeQyAal+rbmxeiCc+xwIvOm5Z6YFUP6id6u7GERV2CHTqn
+ 9NUKQiCBnKSCobd+O1DehGNDIHCFArkAlBn3T4GUX46LcdXBSL+vLcEWoFLbMmrKgcmwUXAb1jpcz
+ eunBD2G4GT9jwMgu38Jo4tStdVDXeZkIRvhN/oOjLOO9MAbUaV5SxXVmSfn3W17TcTRXqOJxgTlIG
+ X6V7YNSppp85Xin/tntg+FkSW3l0i7OFqoy7RyHNPNK4LFKwp9E6iswTHPlk1brlJiwtRQl7IgXP1
+ r0qQqxCaCjDLtZ/bvrmDyqeZW60ClgLpqGSkFIp9GrJ6dxRARnBXfAx39dwnCqrgW69B7SejzBYYs
+ iz2yelD8MeMiFgteVEjmgAKCPR8tcezP4L4uhMI0tTgCMzLSWDpwKbP+ZP5g8F4TqY2S60R5UlHOp
+ jRcNJ9bJLaujWuSkoSCEns5v;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kvQZ7-0005ah-Ju; Fri, 01 Jan 2021 19:58:26 +0000
-Date: Fri, 1 Jan 2021 11:58:21 -0800
+ (Exim) id 1kvQhJ-0005dv-GS; Fri, 01 Jan 2021 20:06:53 +0000
+Date: Fri, 1 Jan 2021 12:06:50 -0800
 To: Steve French <smfrench@gmail.com>
 Subject: Re: [PATCH][SMB3] allow files to be created with backslash in file
  name
-Message-ID: <20210101195821.GA41555@jeremy-acer>
+Message-ID: <20210101200650.GA42108@jeremy-acer>
 References: <CAH2r5msH3LZuF69UFcfgtG7XXurMDc=-Ab7Ct4XwfARR8d+wRA@mail.gmail.com>
  <20210101060050.GA1892237@jeremy-acer>
  <CAH2r5mt+5LQB59w0SPEp2Q-9ZZ2PV=XDMtGpy2pedhF8eKif0A@mail.gmail.com>
@@ -99,15 +99,37 @@ On Fri, Jan 01, 2021 at 09:12:14AM -0600, Steve French wrote:
 >  autounlock.txt                      A      200  Fri Dec 18 12:28:18 2020
 >is_bad_finfo_name: bad finfo->name
 >NT_STATUS_INVALID_NETWORK_RESPONSE listing \*
->smb: \> SMBecho failed (NT_STATUS_CONNECTION_DISCONNECTED). The
->connection is disconnected now
 
-Can you log a bug please and give full setup instructions
-to reproduce. This isn't enough to show me what the bug is.
-I need a directory listing from the Server side to show
-me what files are in the root of the share.
+This is coming from the following code which is designed to
+protect the client from a malicious server returning a '\' or '/'
+character in an filename component.
 
-Also, you neglect to tell me what Samba version you are
-using (which is a pre-requisite for a bug report Steve,
-you know this :-).
+/****************************************************************************
+  Check if a returned directory name is safe.
+****************************************************************************/
+
+static NTSTATUS is_bad_name(bool windows_names, const char *name)
+{
+         const char *bad_name_p = NULL;
+
+         bad_name_p = strchr(name, '/');
+         if (bad_name_p != NULL) {
+                 /*
+                  * Windows and POSIX names can't have '/'.
+                  * Server is attacking us.
+                  */
+                 return NT_STATUS_INVALID_NETWORK_RESPONSE;
+         }
+         if (windows_names) {
+                 bad_name_p = strchr(name, '\\');
+                 if (bad_name_p != NULL) {
+                         /*
+                          * Windows names can't have '\\'.
+                          * Server is attacking us.
+                          */
+                         return NT_STATUS_INVALID_NETWORK_RESPONSE;
+                 }
+         }
+         return NT_STATUS_OK;
+}
 
