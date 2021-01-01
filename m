@@ -2,46 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DFB02E8335
-	for <lists+samba-technical@lfdr.de>; Fri,  1 Jan 2021 07:02:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB2482E8573
+	for <lists+samba-technical@lfdr.de>; Fri,  1 Jan 2021 21:00:11 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=olcpllrnDpJpxDNEbWl///p/trRno4ECZCntLhEm/mo=; b=IU+La3i+V89Tb/OyqXqw0Ym/KJ
-	qSqnZPztPsmAGWXpfYYSFTBD8O3h2cWAwiHS6GeH/9vBCwZuGVXPOHJ5bob1lpCXq9iNYETNp6+M9
-	UUMVk6mrZdtc8wTCWRbRBlKs8o8B5Waiky57dXRdZCLNtUgYXJZn9p9eze7fY1RHAKg7qC/DJ40HC
-	DkctcCDUFvYRf88u7gQJtjVNPAsxxWixgwGr35SXBICZhUzhdBAJtvBrxDNFm4hrSkE4PI/TPoWEp
-	OYZbMsTL1OW4DfI+bXu8u9/bjNJNPPKexV3mvhGO9zzT2xn1md7RHK2yESIsRmuw+8K8EkXgaOdWW
-	xOQrefPw==;
-Received: from ip6-localhost ([::1]:33320 helo=hr1.samba.org) 
+	bh=OR3PrxJuBkuYDp48Tu/wJCqazQjCTGlxeFR5kQiF6zQ=; b=MQjgqHU4Hr4z+XrQvjNVXFuFMF
+	GtMreYjRis/3p0DqFBqbP/+2a5vHtMA8DgQYXmZ61nVtErERPcq250I+9BRCLZauUBa9PJUiFjcV1
+	9ud7nXguAgorn97/Ln7m+Y+V6oBJcjmzKiGI9k+w5fDMQfTxuT4supJ5PEjLaeCfZ64p5I5RUAXgP
+	A414XQWgcbomzqMTvz8otePMF47vOJaTR1lo/ri27vnZsN3RVUzeYrQ9T6z2oSEf0hW9driBSWodA
+	UZlTGDp9avHs925Cs7kd/bZyc92flwTtHLRRDkAyRaS6tVCXCaunz9LyZFMV9ViEzMdY7A0gNrue6
+	C17Il37w==;
+Received: from ip6-localhost ([::1]:37172 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kvDV7-004SaX-9T; Fri, 01 Jan 2021 06:01:25 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42158) 
+	id 1kvQZd-004UDB-JW; Fri, 01 Jan 2021 19:58:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36710) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kvDUt-004SaP-En
- for samba-technical@lists.samba.org; Fri, 01 Jan 2021 06:01:20 +0000
+ (Exim) id 1kvQZS-004UD4-FA
+ for samba-technical@lists.samba.org; Fri, 01 Jan 2021 19:58:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=olcpllrnDpJpxDNEbWl///p/trRno4ECZCntLhEm/mo=; b=RgsCtALdN7VoRey/j/TCf4xcUe
- +ZJ2NzaOnck75bobdrpScDFHGttmBV+O/hfizGDFpUz0xgD8iAP6gitPyyyOve1+QzjOyNO0RivB+
- h4FOwHIglm2LTK/Y08XkM23vi3SCDJ0++5QFzIEsgpY8da4XSbeErsO/GBvS2IlAKGF4A8wdkZcAc
- oXKW129KLq0bHWXIc3sBLcnz7970Cx+G0FHKCYGTekaWiQO9iGfp3dd0lENgm6m+0jgVsoib27eR9
- 0S6+uSTH3buCsoTrTJx3c5fiaeP70S0qeMksM8a6FWIN5TwLkQb5UsjG28lvtI1QwMAuMnpvQ4uw8
- xYLDLZ79zblETmc1WV3TXUQFB+szKyO4MuyG2LFIF71Fk20y7NYBCb2+eqnraZDTgzJcJRdv6YdiW
- PU/rOn0leh8tz60C1wrLYwbTNZYY+9erd7MhQARy2XuYpj5HKqKWsJ8nBneP+jodMC0MhT58azrb4
- cDnvPIyIR/utoxaUGvtvjUp1;
+ bh=OR3PrxJuBkuYDp48Tu/wJCqazQjCTGlxeFR5kQiF6zQ=; b=jWaNIcZCApm0f31B5ORRMOby6c
+ u7Qt/4Q1BizZBiywHkBXJAjhlzmHrmxtP1YYNF7rmf4kKt0DMs6IEfpwfdjMrWVsd41kLzirYfbei
+ rYmzhUVyLnvPCBR2PWoSZOzSXiU2Ugmw7CyDOZkfRfFQ3t/n+3rwGeaNGOBzEcE+JORIIendjZQbA
+ DBNEKbvL1HHgKhHyOOHAEpfKsNDOxSd8fAea4RMOqEUya2dspaTyKgWdD5fKfiurqmjzO5s6PW3+8
+ aZdwjWriWa5hfW+j1XDEJHtl+7+z449E3eVCBOUsg+AIWxVF1Huj/zjoPwsaRU5xSfUH5EsCcuCSz
+ I5z7yrLOTf8Kwuz0d8sF0vATry8KTgsKAy3Pi3TvlcSUWtSbjKuc/gpZEfbGoalMbC7Od6c8ts0kM
+ GJbD5fYWvJOtwatMniOl4y9Tzp2PME3jZ3KFJNZzyjR+c+mb9BhhFk7ce+vpDfdUPleVhyWNA/l7r
+ hUKpyzupXkF+c2jCRLoEuPI4;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kvDUb-0001k6-3w; Fri, 01 Jan 2021 06:00:53 +0000
-Date: Thu, 31 Dec 2020 22:00:50 -0800
+ (Exim) id 1kvQZ7-0005ah-Ju; Fri, 01 Jan 2021 19:58:26 +0000
+Date: Fri, 1 Jan 2021 11:58:21 -0800
 To: Steve French <smfrench@gmail.com>
 Subject: Re: [PATCH][SMB3] allow files to be created with backslash in file
  name
-Message-ID: <20210101060050.GA1892237@jeremy-acer>
+Message-ID: <20210101195821.GA41555@jeremy-acer>
 References: <CAH2r5msH3LZuF69UFcfgtG7XXurMDc=-Ab7Ct4XwfARR8d+wRA@mail.gmail.com>
+ <20210101060050.GA1892237@jeremy-acer>
+ <CAH2r5mt+5LQB59w0SPEp2Q-9ZZ2PV=XDMtGpy2pedhF8eKif0A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-In-Reply-To: <CAH2r5msH3LZuF69UFcfgtG7XXurMDc=-Ab7Ct4XwfARR8d+wRA@mail.gmail.com>
+In-Reply-To: <CAH2r5mt+5LQB59w0SPEp2Q-9ZZ2PV=XDMtGpy2pedhF8eKif0A@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,29 +65,49 @@ Cc: Xiaoli Feng <xifeng@redhat.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Dec 31, 2020 at 09:35:23PM -0600, Steve French via samba-technical wrote:
+On Fri, Jan 01, 2021 at 09:12:14AM -0600, Steve French wrote:
+>On Fri, Jan 1, 2021 at 12:00 AM Jeremy Allison <jra@samba.org> wrote:
+>>
+>> On Thu, Dec 31, 2020 at 09:35:23PM -0600, Steve French via samba-technical wrote:
+>> >
+>> >This patch may be even more important to Samba, as alternative ways of
+>> >storing these files can create more problems. Interestingly Samba
+>> >server reports local files with backslashes in them over the wire
+>> >without remapping, even though these are illegal in SMB3 which would
+>> >cause confusion on the client(s).  Has anyone tried Windows mounting
+>>
+>> Samba should mangle names containing '\' to 8.3 names.
 >
->This patch may be even more important to Samba, as alternative ways of
->storing these files can create more problems. Interestingly Samba
->server reports local files with backslashes in them over the wire
->without remapping, even though these are illegal in SMB3 which would
->cause confusion on the client(s).  Has anyone tried Windows mounting
+>You were right mangled names was enabled.  But that is also
+>interesting - it does expose a bug in smbclient.
+>
+>When you connect smbclient - doing a ls of a subdirectory with
+>reserved characters worked, but doing an ls of the parent (root
+>directory of share) caused smbclient to disconnect.  See below
+>
+>smb: \> ls rsvd-chars
+>  rsvd-chars                          D        0  Fri Jan  1 08:55:49 2021
+>
+>556368460 blocks of size 1024. 296010296 blocks available
+>smb: \> ls
+>  .                                   D        0  Fri Jan  1 08:54:28 2021
+>  ..                                  D        0  Thu Dec 31 21:42:28 2020
+>  topdir                              D        0  Mon Dec 14 16:01:25 2020
+>  lock1.txt                           A      200  Fri Dec 18 12:28:18 2020
+>  lock_rw_shared.dat                  A      200  Fri Dec 18 12:28:18 2020
+>  lock_rw_exclusive.dat               A      200  Fri Dec 18 12:28:18 2020
+>  autounlock.txt                      A      200  Fri Dec 18 12:28:18 2020
+>is_bad_finfo_name: bad finfo->name
+>NT_STATUS_INVALID_NETWORK_RESPONSE listing \*
+>smb: \> SMBecho failed (NT_STATUS_CONNECTION_DISCONNECTED). The
+>connection is disconnected now
 
-Samba should mangle names containing '\' to 8.3 names.
+Can you log a bug please and give full setup instructions
+to reproduce. This isn't enough to show me what the bug is.
+I need a directory listing from the Server side to show
+me what files are in the root of the share.
 
-The code in is_legal_name() should catch names containing
-'\' and report them as needing mapping to 8.3.
-
-Indeed if I check this locally with smbclient I get
-(for a share containing a file created with:
-
-$ touch 'file with \ in it'
-
-I see the file:
-
-FI32YH~P
-
-listed from smbclient -mSMB3
-
-Check how you have Samba configured Steve.
+Also, you neglect to tell me what Samba version you are
+using (which is a pre-requisite for a bug report Steve,
+you know this :-).
 
