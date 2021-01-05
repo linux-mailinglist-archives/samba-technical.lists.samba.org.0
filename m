@@ -2,56 +2,54 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D5632EA61F
-	for <lists+samba-technical@lfdr.de>; Tue,  5 Jan 2021 08:46:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 109932EA98D
+	for <lists+samba-technical@lfdr.de>; Tue,  5 Jan 2021 12:10:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=eTMVw5wQCsdXVXMJgOx13vzhYuuLgs95sogOFkQUKIE=; b=VuyVjbqrX08A5pVGvoVjZtyndp
-	Lnf7+ZjOJhq9ivmsBqzN4+ec14z8SvMw2YyfbuaQJMLMNV7oTBy9/dg4pEAoQAyeG6Py2yvgF1GE0
-	3Vp+ea3YWWSyPn0zJBxLloYbPVjAEKwV8AYDEP/gPEryQexOfNLUOgQKfHA2p2idJdxzrUH2i7arS
-	V4n7XuICDbBeTP5BErp51QCCHTjxM1yNWwL6ObBFUcpWKDmXd+6HTGstbFZmPfgV/yz+KSqVKmk4R
-	SUSn3t9sqkOFkS+pR9f2v7YURkhPy39qnauF1EhFExgLScqTD5H95kWLsMKCev6WLU31QCGh5ievh
-	TQxoMX0g==;
-Received: from ip6-localhost ([::1]:49114 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=rLf/aiTnKK5hzbqCNs6v/oYv9p52d8FylOzMynn5rFY=; b=paP7y3NpnIZN33fLflR/nuGZ6C
+	e4gipoDw8GOY9ddZ/7UEyXDMlkEyteaArYuohnNGI9t1t44IxIgpR4TtL5U1aHpeeqG1Mta7ZtFSN
+	ZP9oZOwjolm6xUlhtIjDP22t9N/J3ZmRSdDwPh5e4x8QUv23+UDQ149Wj+I8znX92y/eI5wij0sPh
+	b3q/XfOXsMWD+yrIv6J3c1nBqJr2QqMKDlXTmv81aNPbbDeD5yDx5dMG2rqxufrmW/BvL1mA394TT
+	8yjDVEAv5VvO/TRznq8eivDvFRr787JK3oIHy/iaKB4d0142KalL2LrmVjvRSpXSZiF70fsYfU2D0
+	YoCJTvVw==;
+Received: from ip6-localhost ([::1]:54566 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kwh1g-004rTJ-Em; Tue, 05 Jan 2021 07:45:08 +0000
-Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529]:41127) 
+	id 1kwkE5-004sSk-H3; Tue, 05 Jan 2021 11:10:09 +0000
+Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:48881) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kwh1W-004rT7-IR; Tue, 05 Jan 2021 07:45:02 +0000
-Received: by mail-pg1-x529.google.com with SMTP id i7so20753198pgc.8;
- Mon, 04 Jan 2021 23:44:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=Yn8yEvVhwXWBUDoxV53Gr6DylSWXCEsGft69v8NJHBo=;
- b=Y6nCOzb7r2y8L6+79As5nEWBaF24f/HuBDrjl1ofUvKmwk+gsEJiddgy4e/xNv5uLa
- 7EwLtRHBhl1NWnLeeaYsJW8C0M0nwrpyqipvtDJSdtx1jqbVUaPuTeB/R+NVkwxhrNgJ
- 4cZwEyvSpKjX5wF4fqmapVS+agKoBjcYRKmtgcMn3sj/IG7jqprdLfNUImarGKptv8H2
- re/yH59zhSgrRAn/lyM7p31iZAZ3oZs/OOLnRRr2zTKhV7DYlRmi0tSLeyf9KsJCeIHt
- zE/Gj0a+iC1pnN3+AW00IEGNpXKK9aoYKm6y8nWx5ZFeq/2fAbWyjA7JWhFdAgYnvYxG
- xeeA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=Yn8yEvVhwXWBUDoxV53Gr6DylSWXCEsGft69v8NJHBo=;
- b=nEKlSRZGK2KohVWvs/1ZuOqAycpyMkep6RIJHA9huy0UJPOX/0kD5N8eswJfHqpyf/
- GuI9dGfuzsXi3RMOAcBm12WxkC2C73Xicty16czb5hwuXsJ3tV4mcAHllDPZfB+qzLFO
- qXNp4eydQ6pKlWaibeM5nQWi8uO5QlGlb0rV1EMfomKhTcSPnl62taaFvQmp4INfTXlA
- 339HFWMBfcHz4js8IBh947hXS0GN0WITqZVDsZ/T7m2AyHrhBMAqq45byKpnNXMoMIlT
- ziBRDmCsPxMR4wmRccS1uFPB8UgoTpbfsAR98JGnqCvmgZEATxGkrN6wrcIQB1nGuZQp
- tJBQ==
-X-Gm-Message-State: AOAM532y+gskmWRgah06qNMFnWFF97UcKBm0ndHkNjm7jnUtlV+vYMr7
- hqdbbURE25E4j9Fy+iOrZ+ADpwU5iRKD67/7zjU2hdU+tns=
-X-Google-Smtp-Source: ABdhPJxUlA2m9CBm9SrvHCVKuzBHw2NFp23jPp+ZURMIQ2iP44h/hsvRZ0XeTpBAJNNxmnHlWm42IXFwgYMIQ7Yu0VY=
-X-Received: by 2002:a63:745a:: with SMTP id e26mr74673703pgn.321.1609832684535; 
- Mon, 04 Jan 2021 23:44:44 -0800 (PST)
+ (Exim) id 1kwkDy-004sSc-GT
+ for samba-technical@lists.samba.org; Tue, 05 Jan 2021 11:10:05 +0000
+Received: from intern.sernet.de by mail.sernet.de with esmtps (Exim 4.92 #3)
+ id 1kwkDk-00065j-9S; Tue, 05 Jan 2021 12:09:48 +0100
+Received: by intern.sernet.de
+ id 1kwkDk-0002eY-5t; Tue, 05 Jan 2021 12:09:48 +0100
+Received: from bjacke by pell.sernet.de with local (Exim 4.93)
+ (envelope-from <bjacke@sernet.de>)
+ id 1kwkDj-000A6v-Tv; Tue, 05 Jan 2021 12:09:47 +0100
+Date: Tue, 5 Jan 2021 12:09:47 +0100
+To: Nicolas Pinault <nicolasp@aaton.com>
+Subject: Re: PATCH: make disabling of vfs_snapper consistent with our
+ configure/build system
+Message-ID: <20210105110947.GA36762@sernet.de>
+Mail-Followup-To: Nicolas Pinault <nicolasp@aaton.com>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+References: <15eadeabe4d9fc23e9a311a51a007fa020781ccc.camel@samba.org>
+ <20200812115841.GD272474@sernet.de>
+ <38124182-985f-8a79-aa9a-1cbb2241dc3f@samba.org>
+ <951676ca1d57de76f0a5494140ebdc985b607731.camel@samba.org>
+ <aa86e306-0c2e-763c-bb4c-3ba9fc4a9d52@samba.org>
+ <20200901104311.GB760902@sernet.de>
+ <20200902112132.1f7f4c79@samba.org>
+ <20200902095042.GA800820@sernet.de>
+ <ca9ace0a-c543-afa8-76a1-6c8d09324b95@aaton.com>
+ <0102017564f2bdba-e1f4056f-3d82-4a19-80a1-821e5820b7c4-000000@eu-west-1.amazonses.com>
 MIME-Version: 1.0
-Date: Mon, 4 Jan 2021 23:44:34 -0800
-Message-ID: <CAOGdD2oUwmRRCC5JQ7d+0=187ruhoL0N15suf67GtWrav2qhrA@mail.gmail.com>
-Subject: Samba and Adobe Illustrator locking issues.
-To: samba-technical <samba-technical@lists.samba.org>,
- Samba Listing <samba@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <0102017564f2bdba-e1f4056f-3d82-4a19-80a1-821e5820b7c4-000000@eu-west-1.amazonses.com>
+X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
+ Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,75 +63,19 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Yogesh Kulkarni via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Yogesh Kulkarni <yoknfs@gmail.com>
+From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bj@SerNet.DE>
+Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+On 2020-10-26 at 12:47 +0000 Nicolas Pinault via samba-technical sent off:
+> Using --with-shared-modules=!vfs_snapper I get "bash: !vfs_snapper: 
+> event not found"
 
- I have a strange case of lost updates with the Adobe Illustrator .ai files
-and
- samba server. I am writing this to validate my findings and ask if there
-is a
- known workaround to this issue.
- The samba version is 4.9.5 running on debian 10.x and clients are multiple
-MacOS
- versions.
+this is becuase your shell interprets the "!", you need to quote it via \
+there.
 
- The customer reports an issue with multiple users working on .ai files.
-Here is
- the use case -
- User A - edits a file test.ai and saves the changes
- User B - opens the file and expects the changes to be present in the file.
- (almost immediately). So, they are not co-editing, but opening the files in
- quick succession.
- However, it turns out that User B cannot see the changes.
+Björn
 
- Observations -
- On the client side, finder shows that one or more '.tmp' files are getting
- created when a user saves the .ai file. These .tmp files sometimes go away
-and
- other times stay till the user disconnects the share.
- Network caps indicate that the application does **not** use oplocks/leases.
-
- Hypothesis -
- UserA writes to the test.ai file and the application writes the updates to
-.tmp file.
- UserB has their finder open and obtains a lock on the .tmp file. Now, when
-UserA
- tries to rename the file from xyz.tmp to the test.ai file, since UserB has
-a lock
- this operation does not go through. In a way this is a deadlock as UserB
-will try
- to open the file to see the updated content, but it cannot do so, since it
-locks
- the resource and that prevents UserA from updating the content.
-
- Experimentation and results
- In order to verify this hypothesis and cater to the customer case, we
-experimented
- renaming the locking.tdb without restarting the daemon. This addresses the
-issue.
- Obviously, if we take out the locking component, there is always potential
-risk
- of simultaneous users overwriting each others data.
- I experimented with the locking = No, and checked with smbstatus, but with
-preview
- enabled, I see that a .pdf file shows as locked in output of smbstatus
-command.
- So I conclude that the samba process internally acquires the advisory lock
-on
- the file.
-
- Is there a more elegant way of turning off the locking than just renaming
-the
- locking.tdb ? We do not use clustered mode and will probably never support
-that in
- the product.
- Are there any such cases seen in the field in your knowledge ?
- Is there a tried and tested solution to this issue ?
-
-
- Thanks and regards,
- Yogesh
