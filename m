@@ -2,57 +2,123 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 712CA2EF048
-	for <lists+samba-technical@lfdr.de>; Fri,  8 Jan 2021 10:59:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91B9A2F2FC1
+	for <lists+samba-technical@lfdr.de>; Tue, 12 Jan 2021 14:04:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=0Ds7Njz5/XCIcf0AMC454SF9b/HBKMbqlkN1lJ8g4Qg=; b=Y/8Hp2xWYzuHadivP2oFchJQRz
-	FQxTqcaFphwbZhRU6XkuvRqJEIu3NG5o5VaWGG5Q/awaElO9m3BXen/VjkNhVmDGnfCQaFEmn6bSR
-	COn8HwJuTAxHAnsx4JUJSKYWBnoEHx+cnUpZkspsOuQdmIvD3GCsCpZiTLfFJtmfVVWbW6vMaz3A4
-	W9mX9Bdk/E/axxlijV1E6wMJdIKJ46KH3hnUjV7/W1DLhtI8R2NEe3Bu2HUwdk6XQiCqOQLhRIOt9
-	OhZ56qzWgwfpgDDULaiio41u9U9UHQoy5MECB/SOG32iumuo1V5Ztd5JjWmnVmfvBOb9aRRgPf4Gm
-	NHJbfQiw==;
-Received: from ip6-localhost ([::1]:47924 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=fK5r7uxJp7khU8wYpOUbsek3+XXxkbrtxPAHFXoYrKc=; b=es0gHYm4Xrq2IltuSiH8Fobz0O
+	cxzfpfdU1mCTXhf+IbbkenVYJ3U25WfLFUip+7pqI3JoI4u5LsnQn8IY1JntvBsj971s66mpzuvqt
+	QmrdBLp0MSqywRSyH+mE9Ki+YDrPI4rLiK+VabVyZTHQXNIF2MjT/zciFpM1Yx0s6yrKNoeCPNuZy
+	RLL3Hk5Nphdy+51aGyDSX2tnJXlGknMT51cEofiwu14GNmDKc1rZMiH3W2cKD+G1IOLbWu54Wr1hr
+	Y6SQ+jkIzVSQKY++B+8DjOs+9VTazla5kLZ4gNPRQ2jiTeXNB4Brvu8RdZPCQOtILqz9AFOAVSnTX
+	MnjRcOGQ==;
+Received: from ip6-localhost ([::1]:21610 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kxoWy-0055TS-IQ; Fri, 08 Jan 2021 09:58:04 +0000
-Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935]:37864) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kxoWp-0055TL-9F
- for samba-technical@lists.samba.org; Fri, 08 Jan 2021 09:58:00 +0000
-Received: by mail-ua1-x935.google.com with SMTP id 17so3260138uaq.4
- for <samba-technical@lists.samba.org>; Fri, 08 Jan 2021 01:57:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=uIUmOQ6N+w9xi+SQYwDGxfEclSdm+sPOBxEHUk9ap70=;
- b=Utp42TB8v2N7Bc1FcQU/eXe3FOUXkB+/PuuUCe6Wq5aq6nyCyuKPKlcxcbFqCTWuN5
- AtASoKjaS7cu+3m7Qj/bkEnrkwKK38KijS7mDRhGK5nbwp+xrurXpgEXniiPJB2Si+hf
- ZaQjyvjtncCCHztDiYpsKlikju+6D2wA12tVWZt1BbHjEAsbHYPDMlm7Ox2icjuvAHde
- PDGz8D1Sq7u2Kh6CtIs3QWKaMj7BoMk96oZLTYGCwz39TCfc9z3BILTpgsH7P+zn+Sn/
- 8MegqFREnsilS5h5fAjzZrCAondQ/6+1KllKhqQTuaXAsr5TUnHkgkMVnfKr1LUTLogh
- fZZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=uIUmOQ6N+w9xi+SQYwDGxfEclSdm+sPOBxEHUk9ap70=;
- b=Dmss9hgjCNFWBR2/wh2C1JXzFzwmgcfj4Zaf6IIKbYujybXJqLKvKrEvhMj3+jQKRK
- LPr6RZOgZqP6Af7C+7ZPGUjhq0usu17yio/ugtdeszxJeRaakrKtOOUCUvDrSE6Xjn+t
- EtQdCNafZiU97DLO5vHODLXSymw4s8Isvk4oDYn38FYtjLM4fyWiL4sMsZPysPxRh03o
- CDsl9BNNn4wgNhE7NU6YQ2mZV6AE9Ab4fzic9HSPuHsYBKqPCxpJ0DSntYUYAxNeJJuY
- 5qituPapMxUzx4Ld3dmhCESbuecZWy7XJ3yAUPl4vyHTDRjl6EDHSU2oGtpBa+1rI2Ck
- anog==
-X-Gm-Message-State: AOAM531Qmyg4MtWGBkd24W16ovNiRtp5lu16MkM0DCLeGKCI3a5qPgV9
- UxVADiehha8JbhuSV8ZYleg8AQ+9sogchcS0g8Hm5J1WX8RruQ==
-X-Google-Smtp-Source: ABdhPJy/HJTQFZ10WGEB4wg41hrgOW9qC3XzISIIwUNIJtvcM0NwgvdKVPxVAlq79Ns6LxQp1ASSeP8+lfmXlEOR2dM=
-X-Received: by 2002:ab0:4363:: with SMTP id k90mr2211013uak.31.1610099857204; 
- Fri, 08 Jan 2021 01:57:37 -0800 (PST)
+	id 1kzJKP-005Pbg-6W; Tue, 12 Jan 2021 13:03:17 +0000
+Received: from de-smtp-delivery-102.mimecast.com ([62.140.7.102]:40309) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kzJKB-005PbV-Rj
+ for samba-technical@lists.samba.org; Tue, 12 Jan 2021 13:03:13 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1610456562;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=fK5r7uxJp7khU8wYpOUbsek3+XXxkbrtxPAHFXoYrKc=;
+ b=gXZARi3ihos9Cg2bs41ZRz2Frg3KUXeTpRSWH4kJDtUFIHtq+KVjOMeEFlUxT+xRcHaeC3
+ VrqCrPgd50W6GhihVe0SDCaTEuxVFgqxNQfpPN64wleAuKyOBlxwvuZJKlHuBMCwSabzSK
+ lq01OEkbt7SE9j0L1nSzL1wJRFcn26k=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1610456562;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=fK5r7uxJp7khU8wYpOUbsek3+XXxkbrtxPAHFXoYrKc=;
+ b=gXZARi3ihos9Cg2bs41ZRz2Frg3KUXeTpRSWH4kJDtUFIHtq+KVjOMeEFlUxT+xRcHaeC3
+ VrqCrPgd50W6GhihVe0SDCaTEuxVFgqxNQfpPN64wleAuKyOBlxwvuZJKlHuBMCwSabzSK
+ lq01OEkbt7SE9j0L1nSzL1wJRFcn26k=
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05lp2105.outbound.protection.outlook.com [104.47.18.105])
+ (Using TLS) by relay.mimecast.com with ESMTP id
+ de-mta-36-8Nhw74rSPHCL8NQxWhSP5w-1; Tue, 12 Jan 2021 14:02:41 +0100
+X-MC-Unique: 8Nhw74rSPHCL8NQxWhSP5w-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=HzYBLBH9MDtX/aMkAPjNJJ4iAY0Rtaz4lxTQrG8a2Jimj9SLrgg0rZPYrfa3/5Nn2KICVc8PBHHZTps6JqW4wgFJnNThaPbFkuoV1fuWgmxommTgym8rU5rX4cB+2HPRr+g1aPi1mNNt8gDGKUivjlwXmZ0fTsK7spkwG4jGJszXMgAYDKR34jZlRqd2CWgqNGdObYcvr2pCmrYJSSpp71l2SSCZrsQd3rzbxqJoYemqRQTXxzWK6J5uIqKmOqw0Kg+NzvKFDmHyR2NiP75qayrViZg3wY632Q41+1TB4auWkEr/iQxA/3LOURAPUcuwXQMKjtec22SbzYgMV9rOwQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fK5r7uxJp7khU8wYpOUbsek3+XXxkbrtxPAHFXoYrKc=;
+ b=mN3zaZQUFnqHspL+Sh2l53ZA8WhHDa9hQAP8G6jQEuLUxxBKM6AlZStWdsAsZ8CGSWk/s6OygTU4NmO9nDJalU62BNvhfv5DZmkHrqowGScBx0lCSw0k6nHwmTxUpo3LdGFIXMui6OhQmrHIGfvZaBQ5KjSV4s38qmly10smh8UFMbVhGdoH7v/oOYAJPE/Ta54OtUZaOkl7AjKJQJyJuXJsy/NTvB/CLStiJyCYcJDGEPyRAtenDLztATwrUwbB/fe0tqLCGs8LiOr5lQqxFOKTQZinrquPJVog/bZrh1w+dTtx7SYTYGSQNH3EFCBcIJsd8SxK5bjsPljgIZ24ig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: gmail.com; dkim=none (message not signed)
+ header.d=none;gmail.com; dmarc=none action=none header.from=suse.com;
+Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com (2603:10a6:803:3::28)
+ by VI1PR04MB3278.eurprd04.prod.outlook.com (2603:10a6:802:4::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3742.12; Tue, 12 Jan
+ 2021 13:02:39 +0000
+Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com
+ ([fe80::9c1d:89de:a08e:ccc9]) by VI1PR0402MB3359.eurprd04.prod.outlook.com
+ ([fe80::9c1d:89de:a08e:ccc9%3]) with mapi id 15.20.3742.012; Tue, 12 Jan 2021
+ 13:02:39 +0000
+To: menglong8.dong@gmail.com, sfrench@samba.org
+Subject: Re: [PATCH] fs: cifs: remove unneeded variable in smb3_fs_context_dup
+In-Reply-To: <20210112091340.7500-1-dong.menglong@zte.com.cn>
+References: <20210112091340.7500-1-dong.menglong@zte.com.cn>
+Date: Tue, 12 Jan 2021 14:02:37 +0100
+Message-ID: <87im82l34i.fsf@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [2003:fa:705:9f85:a5b8:801b:5f46:ca87]
 MIME-Version: 1.0
-Date: Fri, 8 Jan 2021 15:27:20 +0530
-Message-ID: <CAHbM3qgJv3he3LSokE-V1yPUttueT1esXF0vNQqHSnRPDtqz9A@mail.gmail.com>
-Subject: Initializing case based parameters during share switch in
- create_conn_struct_tos_cwd()
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from localhost (2003:fa:705:9f85:a5b8:801b:5f46:ca87) by
+ GVAP278CA0009.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:20::19) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3763.9 via Frontend Transport; Tue, 12 Jan 2021 13:02:39 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: d2ef6382-5570-46c5-2519-08d8b6fa5742
+X-MS-TrafficTypeDiagnostic: VI1PR04MB3278:
+X-MS-Oob-TLC-OOBClassifiers: OLM:2803;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Message-Info: //FoZCXlHXIAsxC/cX2sOYKFmDSnFQbkLZ2QiS6+Lwt7A4Ire37D0oTSBAB5cGgi6qLVsXj7yaRXg/FpYp1lATtDhls2IIkQ3rOLnyhGSvi3o3Ek1RYvFeUhCOh3y3EpEmE93joHgh89I7vjxwMGDQOnR1YsHuPSx9+BXxsWe3Z7aw36D/vwrNVR2ZV/WEfBZbA1f0yp83uC6JlPp3QQjwVUKW/FMU+DwxNKW3zWT7SfUeUGyW3cx11ScvNO0+ytfBQW/UOTrcJT51c3f33QxHbm+7oOASo2I+pEQcDGt3tjXkFFMk4OoTOu7C7sz1x3Km70Z4yNqEclpj4u5pfxhB8M69wGm/itBmn6vwQK/XVltZioQF/cVYOz3TvuqPZTbRdZFtiogCzWW2PEX6/TiQ==
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?V00vRXdlOGhXR0xZUjBjOGlDS3AzTFRINERLZnprSUVHL2dZR2ltay9VMFZw?=
+ =?utf-8?B?SEIrU2cxWnYxMTkranZBd0ZQcXBIeUREbzYrUllPRnFYOTRPM09EaC9DWFFv?=
+ =?utf-8?B?ZEluU2VXcGlFakNCSkRUWW4xSzFvZFZoL29DY3Vsa2lxdFRLUXY2SFZSQnUr?=
+ =?utf-8?B?a2VWd2htakRMUCtPZCtxb09pcjVjMjdNMVdFVVRXK0V6VVdxM000ZFBrcHZX?=
+ =?utf-8?B?YmhJTFdkWDU0NDAyOVZ4WHB6OVZRVmQ4ZHd5QVNlWjdwanF4RTRSOUViZ2JH?=
+ =?utf-8?B?TUNHa015QVNoOVErTmwrSEJPLzVhWm9uL08weVN0M3hnWGYwNC92c0hKaEdS?=
+ =?utf-8?B?U2M4bTdqVmlUeW1OSEViaGZ1b3hyWEcxNUkvRlNvT0tjSmZITnpJdmdibVN4?=
+ =?utf-8?B?TmlmbVNTUTlvTm9wMkpISDd1SFN4WG1tSUhBWGxQT0VpUW8wMVlhRTJ6VFRr?=
+ =?utf-8?B?eWt0Um9GYmphZndYZWhlNzhRaDJ3YlZwRUZ1OU5qeDE2QmxWdXdZRzNHZ1cv?=
+ =?utf-8?B?bXo4VEZuT1lrSUJmTVdoOFF4WUt3ejF0cmEydHNsMXVQV1RoelQ5dWozREhU?=
+ =?utf-8?B?bUlmQjh5dmEybG8vRUs4NndEWnlpaDF6NStzYTN0R3Q0Z2FpQURpTVdGdU1l?=
+ =?utf-8?B?UFkzdTZ2cWRVbzRwdkk2T05mYU42dXAwNUFEbWM2cjBTcjVEZTdYRVV0Q216?=
+ =?utf-8?B?Qk1zVURDY2J6VUpWU3BOM3BjZHB4MUF6MXZXQ292amhUTU53U3pUeEVOOVcy?=
+ =?utf-8?B?U0dObFllTnBNa2VMUlBnMTdFZ0d2Ujdwd01IcU05RWltNmNZS3dLQVI5d2c0?=
+ =?utf-8?B?MFp6VUUrNWhzVjFxL0pFT2hlMVpTQTZVS1ZLUmNXdXRiMlZDSkdvMy9SYTVh?=
+ =?utf-8?B?Wm1XaWRaMGxDWGQ1STJmTVk2TEEweGdEcWpmbXUrVTBUMDJpQnRhYmhLMGxO?=
+ =?utf-8?B?N3o3Y2hPR2tZbXNPYy96ampCYjVJVnNpQ0VBV0dpbGJPQ0FPMFpoNC9ZOE1S?=
+ =?utf-8?B?WEp2T25kcFMxY20zUGsrTDF6cDFoSFpWWGZXMkYwcmlTUDZzRWV6STdHM2Vs?=
+ =?utf-8?B?Z3EvTk9lMEJXeHRhRjZIZFhtQTJDLzR6WHMrTGIvMndhUCtRendNS1ExRTlY?=
+ =?utf-8?B?M1J0TTZ3Tk9Nd0xHSXJvTGFpeHRvbFk1SnR6Vm50STV0VHdML1hZWHl6RWJx?=
+ =?utf-8?B?TlVRVURSdXRwSVFqc2lRbEZ4dFM2M05Rblk5TXUyUWpPRllXU2pmK1ZrMUdF?=
+ =?utf-8?B?NTJjNHRvL2g3WjJNSGI5NzVjWGZVaWliaE1ONkg4emRaU0J6WDlCVldoeGRj?=
+ =?utf-8?B?ZE91NThkcXphMDg0WWl5RFNOcEdVd1EvaEpHUVJhZHJGSVA3djRQRkpHWTRs?=
+ =?utf-8?Q?KlltFTZjOqGV336q+HgwA9UcDmNFAtOs=3D?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR0402MB3359.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-Network-Message-Id: d2ef6382-5570-46c5-2519-08d8b6fa5742
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: rMk5M5+CKCldEGeGhDnsddcBDnHMYbgMCzFGnuBbQgUKU3MltHcVBCT/8Xh/KSUu
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB3278
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,64 +132,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shilpa K via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shilpa K <shilpa.krishnareddy@gmail.com>
+From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
+Cc: Menglong Dong <dong.menglong@zte.com.cn>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello,
 
-We are creating DFS referrals when a folder is created under the share
-root. In one instance, an user was trying to create a folder with the name
-"FOLDER~1" (with exactly 8 chars in the folder name) from Windows. So, we
-created the DFS referral with the name ending "FOLDER~1" and returned the
-error STATUS_PATH_NOT_COVERED to the client. Then,the client had sent
-DFS_GET_REFERRALS request. While  processing this request, when
-unix_convert() is called as part of returning the referral, it was
-normalizing the name to lowercase because the name is a mangled name and
-the below parameters were null:
-
-conn->case sensitive = 0
-conn->share_case_preserve = 0
-and default case is lower
-
-The case_sensitive and short_case_preserve were null because we were not
-initializing these values in conn struct to the share configuration that we
-were switching to. We are using below settings for the share:
-
-case sensitive = no
-preserve case = yes
-short preserve case = yes
-default case = lower
-
-I used the code changes that are in the below patch and now we return the
-folder name in the referral as is. Could you please review this patch and
-let me know if it is fine?
+Reviewed-by: Aurelien Aptel <aaptel@suse.com>
 
 Thanks,
-Shilpa
+--=20
+Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, D=
+E
+GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
+nchen)
 
-  diff --git a/source3/smbd/msdfs.c b/source3/smbd/msdfs.c
-index 50014e1832..d39d7ee859 100644
---- a/source3/smbd/msdfs.c
-+++ b/source3/smbd/msdfs.c
-@@ -427,6 +427,17 @@ static NTSTATUS create_conn_struct_as_root(TALLOC_CTX
-*ctx,
-        }
 
-        conn->fs_capabilities = SMB_VFS_FS_CAPABILITIES(conn,
-&conn->ts_res);
-+
-+  /* Case options for the share. */
-+  if (lp_case_sensitive(snum) == Auto) {
-+    conn->case_sensitive = False;
-+  } else {
-+    conn->case_sensitive = lp_case_sensitive(snum) == 1;
-+  }
-+
-+  conn->case_preserve = lp_preserve_case(snum);
-+  conn->short_case_preserve = lp_short_preserve_case(snum);
-+
-        *pconn = conn;
-
-        return NT_STATUS_OK;
