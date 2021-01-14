@@ -2,45 +2,124 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 880422F5CE0
-	for <lists+samba-technical@lfdr.de>; Thu, 14 Jan 2021 10:08:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C9FE2F5D42
+	for <lists+samba-technical@lfdr.de>; Thu, 14 Jan 2021 10:25:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=F9CjM1epHCkQ7wRrMKBimzJ6ixEDVhJvD1roJn7xmOU=; b=Q8q8b3luymlj4jclslcwusq2hW
-	l9kOTk5Y1h05bq6UM16xQ5tuMa7fW19S67u9c5vLq19sUQhjTA9m779sQy4PewaGOuVyuzMK0mmch
-	kY9aAuAtwOq6vLEsIC5NGDsQyVnWOWph6O2Ysn4lktKToZGr2kUJxk3SH2cl0dKzwQfN2HBsp4Ssm
-	ozeMkpW6NNIWBc1C/p+m43vcj1+TLZHSRmzvEa27/1Km6Vc3tBjp2STrLSe2N9Pxv1MC19WtJozty
-	APdJXsfEBfKZA15wSm97NUJlCDXTcVPmAQ3bvvY0si5M+Y8Nqk3z/IibilPJgNL/w9c0LVkHYAH+s
-	VTpPGS4A==;
-Received: from ip6-localhost ([::1]:41960 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=zCPfuXy5Bii+wf/SqTz1JCjyXiojJoo0V1h2IG7/dvA=; b=owM6dp8i6aVDnZ1xaMiqJA+iC8
+	555USlyAy3AlotqsOVAL0jixERjd370qGwu+XtCHG9BLf+yZFDRdkZf3NlHNV8qrJMUAnGZoSxze+
+	a898eAtZVmg4HILp3vByCOXCJeN3ZB0JQnDU39ufA7248CheUUaNNOaXNiBtBd7zNyGD+ZrQzWVyS
+	u3xwKFZfgLhDOLvekbFRhRRbvXP0T/RrFkGX/bhDq68kohAV6mXMIxVVmKINpVcZnhnt8vjN1AOB2
+	1zVUgbFdyzydqwfp5uiVDtUXs+u5cJeDULPDsq6LWX+H2/3HIvOzv/5aXe323u6qpCf4+HXL656tA
+	A8xWXRTg==;
+Received: from ip6-localhost ([::1]:47842 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1kzybF-005cC6-Op; Thu, 14 Jan 2021 09:07:25 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48860) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1kzyb4-005cBJ-H4; Thu, 14 Jan 2021 09:07:17 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=F9CjM1epHCkQ7wRrMKBimzJ6ixEDVhJvD1roJn7xmOU=; b=exJx2d+PI38+QWbMaVfZt9pz1l
- es0JTlsm5OA3o4IUwiqUvFzpzSbxCkR8JJDvP3Ch4yRUxlclOpGrNxj94j7qODhuDH6xvW5OgXD7t
- iUZk87BcKtG1bOYOFTsDL6E65zvi/WaiPNmfRv0nyMpZAMncnTEGQ61E6Ua94CGpWW1f3uFq/kx0b
- xxOD5mdUonfxqul4Jn/S292soYMzPNdQDLNVrFjN4t3uWTR7rbUEGgm11+1d/RnaNBOOcB7N3CG7z
- mfyCmxFDCoy5y4MQ3VMDF1PTEw7WF5PAnZLWnNT8UlI6PVrP99wFkU2JY4npwEEJak8032M853LNc
- suWnLWd9EG9MsOIsNoUoVcnMqQ8diCC6IYS1hg8DwxtwAasdCZsxQ/U2UY4jmqz3EoUieGJLj5wmA
- 4+xP+utuTznFZCA0oln8xl8oHub2CcQBnAqleV3yf9bBEV6UXJQHxH0XjEeT4NI5HjFulNRBkzQkV
- FqKEFdWGiDGrSiPyFAqZNcu9;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1kzyau-0006LA-1A; Thu, 14 Jan 2021 09:07:04 +0000
-Date: Thu, 14 Jan 2021 10:06:56 +0100
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.12.11 Available for Download
-Message-ID: <20210114090655.GA12949@carrie2.fritz.box>
+	id 1kzyst-005czA-5k; Thu, 14 Jan 2021 09:25:39 +0000
+Received: from de-smtp-delivery-102.mimecast.com ([62.140.7.102]:36999) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1kzyso-005cz1-5l
+ for samba-technical@lists.samba.org; Thu, 14 Jan 2021 09:25:36 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1610616330;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zCPfuXy5Bii+wf/SqTz1JCjyXiojJoo0V1h2IG7/dvA=;
+ b=ZPXXridQqCZ/Ku68lx+yIMagY3Z4yW5nBS/couOSbDxnkXvmbF5HKKHDD2sdG8XbVOLzoq
+ VATWb72f6Q2fiHRB87OfcGBjNi8ay8nTC3s9wDEz8A1Fn+De/9DKApKV1E/RZruRoGLLyc
+ uOaTPfxEpPTVNh8pTnPt1muI6hGWz0g=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1610616330;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zCPfuXy5Bii+wf/SqTz1JCjyXiojJoo0V1h2IG7/dvA=;
+ b=ZPXXridQqCZ/Ku68lx+yIMagY3Z4yW5nBS/couOSbDxnkXvmbF5HKKHDD2sdG8XbVOLzoq
+ VATWb72f6Q2fiHRB87OfcGBjNi8ay8nTC3s9wDEz8A1Fn+De/9DKApKV1E/RZruRoGLLyc
+ uOaTPfxEpPTVNh8pTnPt1muI6hGWz0g=
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04lp2050.outbound.protection.outlook.com [104.47.13.50]) (Using
+ TLS) by relay.mimecast.com with ESMTP id
+ de-mta-22-VyfuKy2YOJKnN-xHhcLqIw-1; Thu, 14 Jan 2021 10:25:28 +0100
+X-MC-Unique: VyfuKy2YOJKnN-xHhcLqIw-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=EjFpuvw3odOeGI7WB2u9+QSqPIIcX0bxAymRbRT8qhb4O3znC65dZcKIeQ+Tp1vaXESz9fIR92NAtnFvWFVn2KPFyXw719dmq++kTLCKCYlZmkoEGPips3wquxRfBcJGnFtr229idujfFAMz0tENLqEIMjhSJ/XrPEROVr+H9HQM/Ft2Fk/pyICO8MZznX7zeoltLA8j3febzHxAdH0tFcGPk/rOALh2itheQmWc9lwBwC1UY2HcJDL9tktj9YbAlgQLl6ksy0/zOtV7OkQrGe/mb3oPa4Uctheq6tBHNxc8In7uTeHBfMNT9qvyZuUMt8NyaMFp07ZgtyEM+yPPdA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zCPfuXy5Bii+wf/SqTz1JCjyXiojJoo0V1h2IG7/dvA=;
+ b=aERdl4fjPjjX1IojS9pbNYqjjbuYB3S4RrbJUa/jDoSPuEBhZl2FrN6xv+sb4fj5ucXpGxFctWGrvcHtnQB/QBt4p9Oa4RdyHkp6oGa5rSvMrInehqP/tCEnhKqxnhDqZBsVqsu9PHh6sKrb2Vi2449FSvMjxyYM6tgf5UhS2orWHOlBUHcE7KUpNLKKXNg8P1HezS4jHI3f14CHXcoqz2I7TpLGucg4c1jfXt5BP2la1jk46s0pcfz5U1S/k3CN3FgVNb/s+hFqMKdRwjRkZM0uiOkxbnBgAuet15LmSw2Sw38ZauLtYm8JnFGtqxcuVJrGM0MH76GyKXHir5PP8Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: linux.alibaba.com; dkim=none (message not signed)
+ header.d=none; linux.alibaba.com; dmarc=none action=none header.from=suse.com; 
+Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com (2603:10a6:803:3::28)
+ by VI1PR04MB5055.eurprd04.prod.outlook.com (2603:10a6:803:53::29)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3763.11; Thu, 14 Jan
+ 2021 09:25:26 +0000
+Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com
+ ([fe80::9c1d:89de:a08e:ccc9]) by VI1PR0402MB3359.eurprd04.prod.outlook.com
+ ([fe80::9c1d:89de:a08e:ccc9%3]) with mapi id 15.20.3742.012; Thu, 14 Jan 2021
+ 09:25:26 +0000
+To: Jiapeng Zhong <abaci-bugfix@linux.alibaba.com>, sfrench@samba.org
+Subject: Re: [PATCH] fs/cifs: Replace one-element array with flexible-array
+ member.
+In-Reply-To: <1610615171-68296-1-git-send-email-abaci-bugfix@linux.alibaba.com>
+References: <1610615171-68296-1-git-send-email-abaci-bugfix@linux.alibaba.com>
+Date: Thu, 14 Jan 2021 10:25:21 +0100
+Message-ID: <87czy7lvjy.fsf@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [2003:fa:705:9f69:1ef8:3a2c:dccb:e3f5]
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="pf9I7BMVVzbSWLtt"
-Content-Disposition: inline
-User-Agent: Mutt/1.9.4 (2018-02-28)
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from localhost (2003:fa:705:9f69:1ef8:3a2c:dccb:e3f5) by
+ ZRAP278CA0015.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:10::25) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3763.10 via Frontend Transport; Thu, 14 Jan 2021 09:25:25 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: c8acf310-2237-4ade-40d4-08d8b86e53d1
+X-MS-TrafficTypeDiagnostic: VI1PR04MB5055:
+X-MS-Oob-TLC-OOBClassifiers: OLM:2803;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Message-Info: fe0RpK9fp3t9nspM2vLOKN/e5SlRrcq5+IVf1o9WFJgR9SEtP/gWXqLgIoF1GpHKLKk4KCWotQ83fHSjVNfCCIIMzs2lrIIdpGGzV08nSpS0jaRnqRlw6To4q7tSVI9XUUG9fp1DM1oqj1bT6Ncc9wj1O7pLIthtBHG2SYT8tiJQLasWRCqwQ6i+JW3LJBTM/Yl6CsMY8mSus1ZXA9CmqfKELZV5EO4QfKk+vJ1/RQ4e6cQBtZncDNDt4w39NQpvUD55go/P9e0hvkFeUKmhfUYJkmBnxpbMWR/5sJ6rJBWUV8APIT+GAh6//1LQJ7agoOZCMTAts+qh+pOqqlBOal5F3oAheHJb7KFGTdZGbS6a8RVwR+hWUyChVnnxjzP5HUk4HQ6Tf9yv7TURJkf0bw==
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?a0dVOEF5L2ZZVTdCRHdrZVAwZzBOMXF0bEpRMGZ0NlA1eUFYcmxUM25zN1Jr?=
+ =?utf-8?B?OEE1eW1RSDZaZlZiQ1RyQWN0alplb3cyNkJvY0NYTWw4QndqK0hoSm1hdGNM?=
+ =?utf-8?B?di9qQklvNW1DOXNSUERhV3RnMnlGRVBNU3Z6K0V5VFNFT0lhQ0V4bGVzazlE?=
+ =?utf-8?B?anRmTmZIWnpaS3NSWkZGZ3VrQzJLbWRJZXZXWSt5M3l6Sng4S080RFpuanB1?=
+ =?utf-8?B?Q1ZLVDFmeXorUFJBV2psM0pOZ3RLWkxYNjFSY2JxV1lqZ0JkY3pPRlNTT1J0?=
+ =?utf-8?B?RUtSekYzTG51WTR6dTc0dWhyS3ZRVE1FaFBFVkYyUUpPVXd4U2ZmaDNDa3F0?=
+ =?utf-8?B?ekIzS01QODVyRU1kSk9BNmVkcmZKWU5TQmZDSnlvUStDSHU0TmVYMy90eThw?=
+ =?utf-8?B?bk4vZk5IRzJtVlFaY0FmdWpQdFcvT3ZUOUh6R1JiVWxFalM1TVIxTTg0WWt5?=
+ =?utf-8?B?bmhmb3ZDK1JzcVExcEtJVEp0WWRyTWJVU2RvclorZzBkN3FmUERIR2N4YzZ2?=
+ =?utf-8?B?MjhBS21zR0xCRWdJcEVQaWNYQW9nNW9xblMyLzFOMVZCb09NT0hBZkIwWjRs?=
+ =?utf-8?B?Y0svU25zRy9nMlJOOWllaTBkUWg4SjlHNzYzOU1tc2o5WlV6cC9WVnBaOVQx?=
+ =?utf-8?B?Nm0rdkxRd2xQYkd4QTRSRjl2L0M5cEZ0UUVEamZpTjJhL25ZUnR6eHF4ZXVj?=
+ =?utf-8?B?VTYyQ3oxOVN2Tkk3U2ZheUpacFJ5Qzg0a3VtTU9UWkpJRFdqNDVQSitMcHdo?=
+ =?utf-8?B?ZUE5NmNmbWZQOEcyVEVpN0JqT2Uyc3RpYlFGQ2J5Vi9kQ3hEaHlUdTh1Q04r?=
+ =?utf-8?B?VlBRQ2ZFa05lYXRwRTJWRnV0NkxnQUJ4dy8zakNGdXJmaXc1ZEF4YWp2NGtj?=
+ =?utf-8?B?WjVmVitxTklFcSsyRllVUkgzYzFmQXpUZ1VMblZ4S1BWUFI4SkQ0Q01yQnVs?=
+ =?utf-8?B?WGRwSHNxOGROcTlEb0w3QlhXcExvb1YzZFZBazFDV3RVd2M2WjkyQ09HK0dJ?=
+ =?utf-8?B?M3BMenhDVDlJYnEzUDVIUVh1ejEvczZ6UUwrOXZpcHNocmd5emFETHpva1ds?=
+ =?utf-8?B?ckVkMFAyZm9SVGprMURBMVIxei9CRHZrVFVpeUVHeHNoQkFuVUhPWXpGbGtE?=
+ =?utf-8?B?UG50L29yaVMxRklDSlRrc0xmVlZUeWF0cXlUTmdMOGZmV2dTaEFQa1hrdzl0?=
+ =?utf-8?B?RXFTWXNISTB1ZFFYSHJFYUZKaXoyaDFMclFVUDcwM3RTdjJhWXpKMG1rY2Zi?=
+ =?utf-8?B?S3ZXekFJUkJBaGlBS0xlRS9jUzBuUG1rdkJ1S0o2K21PYVFVRE1MUEFQVk9m?=
+ =?utf-8?B?QnpmcmNoR2FOWlIwWFNIbk1NeHVDcWpvaU05Y2hDQnMxNk9ZaEVxZk5GN2to?=
+ =?utf-8?Q?SXBOdVN95e1xvPJ1zh2YRq2ADULHYyFQ=3D?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR0402MB3359.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-Network-Message-Id: c8acf310-2237-4ade-40d4-08d8b86e53d1
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8UFvgW5TQlzZxp8btpFgLsbnSGika6jjQGtpFNXhZrIF3ofdAed9Q2o4upYmuFMY
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB5055
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,135 +133,26 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: kseeger@samba.org
+From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
+Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, Jiapeng Zhong <abaci-bugfix@linux.alibaba.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Hi Jiapeng,
 
---pf9I7BMVVzbSWLtt
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This will change the size returned by sizeof(). Have you checked that
+this doesn't introduce off-by-one errors in all the sizeof() usage?
 
-Release Announcements
----------------------
+Cheers,
+--=20
+Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, D=
+E
+GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
+nchen)
 
-This is the latest stable release of the Samba 4.12 release series.
-
-
-Changes since 4.12.10
----------------------
-
-o  Jeremy Allison <jra@samba.org>
-   * BUG 14210: libcli: smb2: Never print length if smb2_signing_key_valid()
-     fails for crypto blob.
-   * BUG 14486: s3: modules: gluster. Fix the error I made in preventing ta=
-lloc
-     leaks from a function.
-   * BUG 14515: s3: smbd: Don't overwrite contents of fsp->aio_requests[0] =
-with
-     NULL via TALLOC_FREE().
-   * BUG 14568: s3: spoolss: Make parameters in call to user_ok_token() mat=
-ch
-     all other uses.
-   * BUG 14590: s3: smbd: Quiet log messages from usershares for an unknown
-     share.
-
-o  Dimitry Andric <dimitry@andric.com>
-   * BUG 14605: lib: Avoid declaring zero-length VLAs in various messaging
-     functions.
-
-o  Andrew Bartlett <abartlet@samba.org>
-   * BUG 14579: Do not create an empty DB when accessing a sam.ldb.
-
-o  Ralph Boehme <slow@samba.org>
-   * BUG 14248: samba process does not honor "max log size".
-   * BUG 14587: vfs_zfsacl: add missing inherited flag on hidden "magic"
-     everyone@ ACE.
-   * BUG 14596: vfs_fruit may close wrong backend fd.
-   * BUG 14596: TODO
-
-o  G=C3=BCnther Deschner <gd@samba.org>
-   * BUG 14486: s3-vfs_glusterfs: always disable write-behind translator.
-
-o  Arne Kreddig <arne@kreddig.net>
-   * BUG 14606: vfs_virusfilter: Allocate separate memory for config char*.
-
-o  Stefan Metzmacher <metze@samba.org>
-   * BUG 14596: vfs_fruit may close wrong backend fd.
-
-o  Anoop C S <anoopcs@samba.org>
-   * BUG 14486: manpages/vfs_glusterfs: Mention silent skipping of write-be=
-hind
-     translator.
-   * BUG 14573: vfs_shadow_copy2: Preserve all open flags assuming ROFS.
-
-o  Andreas Schneider <asn@samba.org>
-   * BUG 14601: s3:lib: Create the cache path of user gencache recursively.
-
-o  Martin Schwenke <martin@meltin.net>
-   * BUG 14594: Be more flexible with repository names in CentOS 8 test
-     environments.
-
-o  Jones Syue <jonessyue@qnap.com>
-   * BUG 14514: interface: Fix if_index is not parsed correctly.
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=3D=3D Our Code, Our Bugs, Our Responsibility.
-=3D=3D The Samba Team
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Download Details
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID 6F33915B6568B7EA).  The source code can be downloaded
-=66rom:
-
-        https://download.samba.org/pub/samba/stable/
-
-The release notes are available online at:
-
-        https://www.samba.org/samba/history/samba-4.12.11.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                        --Enjoy
-                        The Samba Team
-
---pf9I7BMVVzbSWLtt
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCYAAJrAAKCRAoaL1+KxeT
-UWmvAKDCz1z0RAcfgC+BGUjuKGqPPlqvFwCdEAqvQwTk8yryHAJtgKN1BdsVjZk=
-=iErd
------END PGP SIGNATURE-----
-
---pf9I7BMVVzbSWLtt--
 
