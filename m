@@ -2,61 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D4432F9C4E
-	for <lists+samba-technical@lfdr.de>; Mon, 18 Jan 2021 11:27:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E05052FA4F0
+	for <lists+samba-technical@lfdr.de>; Mon, 18 Jan 2021 16:39:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=GXuH7xY624JQKeXXsXSMA5iOuDFi+Z2xx4SdJGVofIk=; b=CG65kPj516vrw7X7GHs/X27JIw
-	1Kaz4eWA4LrsoUescitv5T+E8hOB1RxmJuKlZhMFAJ8XT849DfZotz1ZH6pKRui0RAsd5hYlK+tF6
-	k8kmp+GlY/fqSJcjfZiVLnmbbprinP9ydwPDq53jg68XWvYLeMQu2nHDM1tvJ88uWfKos3eAwrOXT
-	WGylBUbioGAFvpTxyNxVlx2lBu3rsYSRZLq9CjklrWlyhmtkKlqf8q/J30A6n6KCwJ5K0CIPhehdV
-	QeF3ejOuoXrrBhV784isGoXY0l/Y9Jtq6p3fw4eRApIF81shGL4Q6j7+VNx8eljX5jc+pCuAuFkBN
-	CjY6NHMw==;
-Received: from ip6-localhost ([::1]:34304 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Ujc+6SG+7JmBiC93BYSC9oPYvfIL1e5bwLxiU0uaHZg=; b=4ys/pms5qSaFx5GGKlv1D+QYeI
+	Aed0v2lghqAwqR/xfVttxWfB4BMI4bTC+6SHV89J1eghLBSxcxNoI8j6l1vpv4Ze9IJt4jW6G6Ho8
+	2dO9rC5QDx5Rsv1PgfxouxDbq4hwOdKf9RWqTGRaGzvN3/g2BglAKaA/G2k+xkjJ2dm98T2hY2Lw7
+	w1pTQDLsN5Ikr5Xc9EO488/8SqfvyqAlXGcuhD+jSpXzQLyk/Ui1EkOUo0rRf1Pz8h+TV8kOXRlc0
+	HQbd4JMF/p9NPudev/wbOF4kz2JqzLT/stIuqq3HOUBDxC4CE2x0gi7OyJF/WRhtRssMUI/OyEf9t
+	jshPY3fw==;
+Received: from ip6-localhost ([::1]:52122 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l1RjU-0061eQ-PE; Mon, 18 Jan 2021 10:26:00 +0000
-Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c]:35391) 
+	id 1l1Wbk-0064Y0-UA; Mon, 18 Jan 2021 15:38:21 +0000
+Received: from plasma4.jpberlin.de ([80.241.57.33]:49815) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l1RjL-0061eC-MJ
- for samba-technical@lists.samba.org; Mon, 18 Jan 2021 10:25:58 +0000
-Received: by mail-vk1-xa2c.google.com with SMTP id e27so3849486vkn.2
- for <samba-technical@lists.samba.org>; Mon, 18 Jan 2021 02:25:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=U9I102dy1atoo+zrXfEE5X01wqboXWFqPsVJtnAMgoU=;
- b=M9Kyi29wr52qD9lP0YWybJW79W/0KSaU1lRiTfhHcoqHscntEG3l4MLo1edLI2kNdM
- ltXCMPSwRer+9KZybLWBH7FkV/jsowLJiAYS0x55w3tJXj6GtJ/2csPiz2AX+NDmDGT1
- C251gc/T0f2D9z8TkKsg+QF9JMUHMC6FBA5Ggy4uZuJVSAmWL2f3i+Jx8HGeus8mo7Jf
- tPzv3fyVNm3bCj9ZuYEWk78YL2EcMSvTNRpCbV/Kg01eUP8Ta5QA+UpGFz+QmfBTaEs+
- hYWu3OXvNY7m8mgaMxhmABKKkxz0TefnihGv8LtvMFlkeJtUxcG7gKZshP09gj3Qve3O
- E3JA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=U9I102dy1atoo+zrXfEE5X01wqboXWFqPsVJtnAMgoU=;
- b=izfVYzh2RrP5fSBCd2oM8htY6Vm8Oaj3/E0/skBcnv8A/uLv95oEqc8s4xQiVCE1CS
- kYHJ3wtfunSKYMe7nrKLur/8xInQ+k7dq29S9mDG/z6JnHKrEDCjOKL2qa1sPCszmfPI
- Qo+6qhpJ4ShnC9jn+JkcOOQF2vviXFHhMl8v3fqV5XQNT+Le5PI37hgOS58M1dz0PrSB
- 5hGOQqHape+eBWJIDl7GoAdpPk73usEisU6CWc785/LIin07tXfUeQOGprcfdfz61A+2
- l668TyB+QolmfbgOpLLJMccGhY8a4aAohjUVipBD4za7eg8072wA8+DrVmM/9AV6/aQe
- diBA==
-X-Gm-Message-State: AOAM531zUp00/sv/TXuhbUJuAWuEJA9YiZv83adOCBrIcMSQqOcVAQ0S
- URF5T4ta2gO08OI5rBm5etLw3UPyReg3M+ZwH04kKIuA
-X-Google-Smtp-Source: ABdhPJwBywnkZl5QZgEch87y+R3Xa3fY9GOK5Cav0BgUYkL7h/BOR3EQ8AoCvIIr4fVjSypqVqnh85aAohA7kFgSURI=
-X-Received: by 2002:a1f:1ccf:: with SMTP id c198mr17827289vkc.24.1610965528619; 
- Mon, 18 Jan 2021 02:25:28 -0800 (PST)
+ (Exim) id 1l1Wbf-0064Xs-9B
+ for samba-technical@lists.samba.org; Mon, 18 Jan 2021 15:38:18 +0000
+Received: from spamfilter06.heinlein-hosting.de
+ (spamfilter06.heinlein-hosting.de [80.241.56.125])
+ by plasma.jpberlin.de (Postfix) with ESMTP id CD509AAC41;
+ Mon, 18 Jan 2021 16:15:12 +0100 (CET)
+Received: from plasma.jpberlin.de ([80.241.56.68])
+ by spamfilter06.heinlein-hosting.de (spamfilter06.heinlein-hosting.de
+ [80.241.56.125]) (amavisd-new, port 10030)
+ with ESMTP id OMn3ZNVAlyJo; Mon, 18 Jan 2021 16:15:08 +0100 (CET)
+Received: from [192.168.123.203] (p5dfc8625.dip0.t-ipconnect.de
+ [93.252.134.37])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (Client did not present a certificate)
+ (Authenticated sender: stefan@kania-online.de)
+ by plasma.jpberlin.de (Postfix) with ESMTPSA id A587EAAC0C
+ for <samba-technical@lists.samba.org>; Mon, 18 Jan 2021 16:15:08 +0100 (CET)
+To: samba-technical@lists.samba.org
+Subject: printer driver type 4
+Message-ID: <7781e141-42b9-17c6-278e-9094edf39ee0@kania-online.de>
+Date: Mon, 18 Jan 2021 16:15:07 +0100
 MIME-Version: 1.0
-References: <CAHbM3qgJv3he3LSokE-V1yPUttueT1esXF0vNQqHSnRPDtqz9A@mail.gmail.com>
- <20210112191328.GC1316956@jeremy-acer> <20210112194843.GE1316956@jeremy-acer>
-In-Reply-To: <20210112194843.GE1316956@jeremy-acer>
-Date: Mon, 18 Jan 2021 15:55:15 +0530
-Message-ID: <CAHbM3qhTd=t+w58ZaVSf+zWwqNgAmQqXbOvk-zGZjeB9XALhMw@mail.gmail.com>
-Subject: Re: Initializing case based parameters during share switch in
- create_conn_struct_tos_cwd()
-To: Jeremy Allison <jra@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: multipart/signed; protocol="application/pkcs7-signature";
+ micalg=sha-256; boundary="------------ms040700030002060108080207"
+X-MBO-SPAM-Probability: 
+X-Rspamd-Score: -10.01 / 15.00 / 15.00
+X-Rspamd-Queue-Id: CD509AAC41
+X-Rspamd-UID: d511c3
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,51 +59,107 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shilpa K via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shilpa K <shilpa.krishnareddy@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Stefan Kania via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Kania <stefan@kania-online.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Jeremy,
+This is a cryptographically signed message in MIME format.
 
-Thanks for the patch. I have verified that it fixes the problem.
+--------------ms040700030002060108080207
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-Regards,
-Shilpa
+Hello,
 
-On Wed, Jan 13, 2021 at 1:18 AM Jeremy Allison <jra@samba.org> wrote:
+I'm wondering when will Samba support printer driver type 4? For many
+printers it's not possible any more to get older drivers.
+Is there some development going on?
 
-> On Tue, Jan 12, 2021 at 11:13:28AM -0800, Jeremy Allison via
-> samba-technical wrote:
-> >>
-> >>The case_sensitive and short_case_preserve were null because we were not
-> >>initializing these values in conn struct to the share configuration that
-> we
-> >>were switching to. We are using below settings for the share:
-> >>
-> >>case sensitive = no
-> >>preserve case = yes
-> >>short preserve case = yes
-> >>default case = lower
-> >>
-> >>I used the code changes that are in the below patch and now we return the
-> >>folder name in the referral as is. Could you please review this patch and
-> >>let me know if it is fine?
-> >>
-> >>Thanks,
-> >>Shilpa
-> >
-> >Thanks Shilpa, this does look correct. It sets up the
-> >dfs share in the same way as the case options are created
-> >in source3/smbd/service.c:make_connection_snum().
-> >
-> >I think the best fix here would be to factor this code
-> >out into a function called by both make_connection_snum()
-> >and create_conn_struct_as_root() so we know they are
-> >setting things up identically.
->
-> Here's what I ended up with if you want to test.
->
-> Thanks !
->
+Stefan
+--=20
+Stefan Kania
+Landweg 13
+25693 St. Michaelisdonn
+
+
+Signieren jeder E-Mail hilft Spam zu reduzieren und sch=C3=BCtzt Ihre
+Privatsph=C3=A4re. Ein kostenfreies Zertifikat erhalten Sie unter
+https://www.dgn.de/dgncert/index.html
+
+
+
+--------------ms040700030002060108080207
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
+CdEwggSUMIIDfKADAgECAggL+8ksx5aHiTANBgkqhkiG9w0BAQsFADBmMQswCQYDVQQGEwJE
+RTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJI
+MSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBOMB4XDTIwMTAxNTE2MDkzM1oX
+DTIxMTAxNTE2MDkzM1owbjELMAkGA1UEBhMCREUxITAfBgNVBAUTGDQwMDAwMDAwNWY4ODc2
+OWIwYTNhZjcxNDEVMBMGA1UEAwwMU3RlZmFuIEthbmlhMSUwIwYJKoZIhvcNAQkBFhZzdGVm
+YW5Aa2FuaWEtb25saW5lLmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA42PN
+0u00/wwTf/+ER8qPo5xxrXXGf8cFzqPfgtyC037p3qW9EBI3NtoX4uehmKxwZczuad5N9liZ
+oG1JwRkgoxSLJ0OSRhnWtbZete1UAASxb1JxkBo7mgvmdTLBpSGv+szqxwmpehBj3jz4Ffyc
+lL6JL099HxdhQRU3/fhHR0yfaLhyddmLtApqs2GKaq7tn4ijLyuUdXCojFrd5hD+AQZQSSUt
+sZRNel9u8YyY4s6FN8vJpjpVpIBJJPSKpRSo8t9ZFuR4W2BxNEEhi3f8XVw297fP1eM3gSve
+99HXz6BNhEN1FMaYb02yEFfktm2TJU0QB2zSdB5PhzXhp9RfPwIDAQABo4IBPDCCATgwHQYD
+VR0OBBYEFPVK3SYo2pbp3ETML1E4uO+cyxDHMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAU
+6caT0dUPBmRy6mqWProQ8lRUsnkwVgYDVR0gBE8wTTBLBgwrBgEEAfsrAgEDAggwOzA5Bggr
+BgEFBQcCARYtaHR0cDovL3NlYzUuZGduc2VydmljZS5kZS9wb2xpY2llcy9pbmRleC5odG1s
+MD4GA1UdHwQ3MDUwM6AxoC+GLWh0dHA6Ly9zZWM1LmRnbnNlcnZpY2UuZGUvY3JsL2NybDIt
+dHlwZS1lLmNybDAOBgNVHQ8BAf8EBAMCBLAwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUF
+BwMEMCEGA1UdEQQaMBiBFnN0ZWZhbkBrYW5pYS1vbmxpbmUuZGUwDQYJKoZIhvcNAQELBQAD
+ggEBALA4QXXB+Cg9ekdIqZ+/dyvg72AwpZNjWg0eILKUIkOLq5eYdlAr29rV9KD2OmCHtmR9
+VXslKshzBcl59ZW23tifmgxAYlr7SQ5/TMWEwTPRAVidDL+KsWiCNsS1oGVbB598YhKQjNo2
+zMata6Xmhy3T67L9K+jpxK7TcBxHf7vRcLgoZIPH7E0EZ0eR8KIhTHid2HeNV8syDm7E35nS
+YtdtlXSFli8fU410lIRtgBsAD54fqIf9jN9c62mXURNkLRSgcNG1mYzqh0Oeqxy1hIFUiZOB
+RXcKSvGvAV5cNAjZtaVxmtAFxwC3oW1T91ZfzviTZHqRn/wdBydpghnnCZowggU1MIIEHaAD
+AgECAghVHErXZq0l9jANBgkqhkiG9w0BAQsFADBhMQswCQYDVQQGEwJERTEzMDEGA1UECgwq
+REdOIERldXRzY2hlcyBHZXN1bmRoZWl0c25ldHogU2VydmljZSBHbWJIMR0wGwYDVQQDDBRk
+Z25zZXJ2aWNlIFJvb3QgNzpQTjAeFw0xNjEwMjYwOTIyNDFaFw0yNDEwMjYwOTIyNDFaMGYx
+CzAJBgNVBAYTAkRFMTMwMQYDVQQKDCpER04gRGV1dHNjaGVzIEdlc3VuZGhlaXRzbmV0eiBT
+ZXJ2aWNlIEdtYkgxIjAgBgNVBAMMGWRnbnNlcnZpY2UgQ0EgMiBUeXBlIEU6UE4wggEiMA0G
+CSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDcpfKUP3THo0fSl2bOa6PNbRcDYZaE4ZV3vLGr
+e/U445OsRahORPeP/9L4nycTK6fUawpDTqOaDxtXYxjoJNC9LnKRxVB/UkBf0h25vN0L1iV4
+KhCaY8TimV0z2yUSlb2NuZ4gdBU69qJkasqYj+AP8OcQOo0idj9Nr1eloHD32i0JDPkhBj8V
+f6c6b7mNyn8yfZYvZlzzV2iQ/cvo6iFLx2wgG7mCkOZ8BAHGDFw6T0UIA0Bk60YhRMRxI7GX
+jMxBQA2Y/XXoP4dvQDDtMNmK0r5DUXof87w2brXctuQ2b4xNwFIErVoAQu8ftnXTm9iOtaOs
+WyLMZX6v5szaQBqBAgMBAAGjggHqMIIB5jASBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQY
+MBaAFAEMFht0ctM8FO4md7dJFFPY+4sbMFsGCCsGAQUFBwEBBE8wTTBLBggrBgEFBQcwAYY/
+aHR0cDovL3JvY3NwLWRnbi5kZ25zZXJ2aWNlLmRlOjgwODAvZWpiY2EvcHVibGljd2ViL3N0
+YXR1cy9vY3NwMGoGA1UdIARjMGEwXwYMKwYBBAH7KwIBBAIBME8wTQYIKwYBBQUHAgEWQWh0
+dHA6Ly93d3cuZGduc2VydmljZS5kZS90cnVzdGNlbnRlci9wdWJsaWMvZGduc2VydmljZS9p
+bmRleC5odG1sMIGZBgNVHR8EgZEwgY4wgYuggYiggYWGgYJsZGFwOi8vbGRhcC5kZ25zZXJ2
+aWNlLmRlOjM4OS9DTj1DUkwtMSxPPURHTiUyMFNlcnZpY2UlMjBHbWJILEM9REU/Y2VydGlm
+aWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBv
+aW50MB0GA1UdDgQWBBTpxpPR1Q8GZHLqapY+uhDyVFSyeTAOBgNVHQ8BAf8EBAMCAQYwGwYJ
+KwYBBAHAbQMFBA4wDAYKKwYBBAHAbQMFATANBgkqhkiG9w0BAQsFAAOCAQEAq7w5+kXJ+/xT
+at0jiTX4GDX5HUeQohqAuLGfotHcqQqqjF8G6UUI0q4i0tnhHtldhZrNBOErgThGsToNZ1Y2
+Gn0FRrcrUU9LnhSMwd1XJ0Je6ERSdEh4vXf8YxJQGZJPCPJcrblhue0mmwO9nbhKewGglht5
+VWSHTS8vq5Da3zbxFG6lIdE62V4KqcMAiyY2BfL8guCPscTWl5txJrjb4ENo9nRqdzsXNEG3
+yyzgmyv6znQ4pGgTe5E6qXx5bO6XCDoUK4Kz1S82PzR6hvcxKZo7kKK2ut2B3buwU8xqfw73
+EMH8imv4LW/Sx59wKElKjijjHdNrFG/wMRobDYzMyTGCA4IwggN+AgEBMHIwZjELMAkGA1UE
+BhMCREUxMzAxBgNVBAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2Ug
+R21iSDEiMCAGA1UEAwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIC/vJLMeWh4kwDQYJ
+YIZIAWUDBAIBBQCgggHhMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkF
+MQ8XDTIxMDExODE1MTUwN1owLwYJKoZIhvcNAQkEMSIEIDz+ze5d4s3BYD6Z6sSBZk7vTBgu
+QQR6Juc4iMt9fnKhMGwGCSqGSIb3DQEJDzFfMF0wCwYJYIZIAWUDBAEqMAsGCWCGSAFlAwQB
+AjAKBggqhkiG9w0DBzAOBggqhkiG9w0DAgICAIAwDQYIKoZIhvcNAwICAUAwBwYFKw4DAgcw
+DQYIKoZIhvcNAwICASgwgYEGCSsGAQQBgjcQBDF0MHIwZjELMAkGA1UEBhMCREUxMzAxBgNV
+BAoMKkRHTiBEZXV0c2NoZXMgR2VzdW5kaGVpdHNuZXR6IFNlcnZpY2UgR21iSDEiMCAGA1UE
+AwwZZGduc2VydmljZSBDQSAyIFR5cGUgRTpQTgIIC/vJLMeWh4kwgYMGCyqGSIb3DQEJEAIL
+MXSgcjBmMQswCQYDVQQGEwJERTEzMDEGA1UECgwqREdOIERldXRzY2hlcyBHZXN1bmRoZWl0
+c25ldHogU2VydmljZSBHbWJIMSIwIAYDVQQDDBlkZ25zZXJ2aWNlIENBIDIgVHlwZSBFOlBO
+AggL+8ksx5aHiTANBgkqhkiG9w0BAQEFAASCAQBhL7+OUp687CRwfiigo5Ft14J1L7sod7KP
+rD41i1NcFspOA2pJNcgitE1zuoUGs/Chn86/gyU8x7yo5CiOPHhLcS4nYxrsPVpKiuexK/qV
+oLVaf9+bIqoR3cJut17gw+KSh65pdeifKCI0D9JbkXVpqxJuPqS9OS97DAG0KWYcSwx2LkRy
+XF9X9NPbD0Xdk/tDaZv4Vn8KTqK8ukCXc+cPgKyjraUkHs9bi/oBB/1I85JhjPtZ7Tv1DAWB
+ZpYXIijCcdpnqOVBY5c2IO+7sLBtuPqXvlbmB2tD8Hv9TKf3MI74C9aoARRyZ7QGvwZftYpM
+HlsB5jjCYPxiSr+TiWEkAAAAAAAA
+--------------ms040700030002060108080207--
+
