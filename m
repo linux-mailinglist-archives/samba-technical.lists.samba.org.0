@@ -2,62 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 166A22F979D
-	for <lists+samba-technical@lfdr.de>; Mon, 18 Jan 2021 03:09:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D4432F9C4E
+	for <lists+samba-technical@lfdr.de>; Mon, 18 Jan 2021 11:27:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=UCNr++Ssi+GCJXfceKYWtjuCgckAsDZ7Hj+PCOxiPFI=; b=pLx2foSEqCFG3W+9DxonM0tEI8
-	JOV+RUQUxPpJBwh448UTdeZsLBss2+FdhQ5UkibQ3X6zfhYxuoVHSwnvRh3kLWOk1vsJx6tjlpWkX
-	VQngnJnvyHZZq4Ng8i3dsoOFHIiT2UUs5x99tmqd0++bdFDYoPiVbrGv6XVOCbjmXNF/lLhFHyHir
-	ofnJiqB4umSDtl6byVsTcViyRACocJ++S6w/fAD9P4tFjnhjsvawFA9Yaczq9BaMkRAi/LQfZ3glI
-	579CBql2ASf8cpe9TPbBw/pLznqPY0XcytAQ0nFLS+FWSoJ6flqsMQwkdHjLcITJ46my9xjjmNJbk
-	94lQFdNw==;
-Received: from ip6-localhost ([::1]:32586 helo=hr1.samba.org) 
+	bh=GXuH7xY624JQKeXXsXSMA5iOuDFi+Z2xx4SdJGVofIk=; b=CG65kPj516vrw7X7GHs/X27JIw
+	1Kaz4eWA4LrsoUescitv5T+E8hOB1RxmJuKlZhMFAJ8XT849DfZotz1ZH6pKRui0RAsd5hYlK+tF6
+	k8kmp+GlY/fqSJcjfZiVLnmbbprinP9ydwPDq53jg68XWvYLeMQu2nHDM1tvJ88uWfKos3eAwrOXT
+	WGylBUbioGAFvpTxyNxVlx2lBu3rsYSRZLq9CjklrWlyhmtkKlqf8q/J30A6n6KCwJ5K0CIPhehdV
+	QeF3ejOuoXrrBhV784isGoXY0l/Y9Jtq6p3fw4eRApIF81shGL4Q6j7+VNx8eljX5jc+pCuAuFkBN
+	CjY6NHMw==;
+Received: from ip6-localhost ([::1]:34304 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l1JyB-0060a2-VQ; Mon, 18 Jan 2021 02:08:40 +0000
-Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136]:38703) 
+	id 1l1RjU-0061eQ-PE; Mon, 18 Jan 2021 10:26:00 +0000
+Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c]:35391) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l1Jy6-0060Zv-Mo
- for samba-technical@lists.samba.org; Mon, 18 Jan 2021 02:08:36 +0000
-Received: by mail-lf1-x136.google.com with SMTP id h205so21773667lfd.5
- for <samba-technical@lists.samba.org>; Sun, 17 Jan 2021 18:08:33 -0800 (PST)
+ (Exim) id 1l1RjL-0061eC-MJ
+ for samba-technical@lists.samba.org; Mon, 18 Jan 2021 10:25:58 +0000
+Received: by mail-vk1-xa2c.google.com with SMTP id e27so3849486vkn.2
+ for <samba-technical@lists.samba.org>; Mon, 18 Jan 2021 02:25:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=UCNr++Ssi+GCJXfceKYWtjuCgckAsDZ7Hj+PCOxiPFI=;
- b=Wk1tFUMhMF6+naycYPO5gIKoQs44ym7L+cXKP2iv6fsgQkelky9y5Y9OVGM1P4yfTl
- /RoxHrZ/ZrPlYJ3wP+lUMsmPfwbDCLvoeS26f0b+6SAdG2TwIkmWho2Zb/PwAWx5jY9S
- 0oOFpc05VzN4dyPOFoyBZDZVXfCgUok/9CqiOfZdWwIjrYFyVlhtwk+J30tzVrUxND32
- rfnZ0DX1GVMyi5fnD/ePq+8Njwh68TqQKt1YmwTF5D2ra4kyhR8vwlZKDQX4Ou4s2HtR
- bNgl1gDjrcgsSh4DG1BY7r6/4jlUmCi3lbROe8f3U77auAMgRLLXzjsvG1zPxVyLxSYh
- RhGQ==
+ :cc; bh=U9I102dy1atoo+zrXfEE5X01wqboXWFqPsVJtnAMgoU=;
+ b=M9Kyi29wr52qD9lP0YWybJW79W/0KSaU1lRiTfhHcoqHscntEG3l4MLo1edLI2kNdM
+ ltXCMPSwRer+9KZybLWBH7FkV/jsowLJiAYS0x55w3tJXj6GtJ/2csPiz2AX+NDmDGT1
+ C251gc/T0f2D9z8TkKsg+QF9JMUHMC6FBA5Ggy4uZuJVSAmWL2f3i+Jx8HGeus8mo7Jf
+ tPzv3fyVNm3bCj9ZuYEWk78YL2EcMSvTNRpCbV/Kg01eUP8Ta5QA+UpGFz+QmfBTaEs+
+ hYWu3OXvNY7m8mgaMxhmABKKkxz0TefnihGv8LtvMFlkeJtUxcG7gKZshP09gj3Qve3O
+ E3JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=UCNr++Ssi+GCJXfceKYWtjuCgckAsDZ7Hj+PCOxiPFI=;
- b=E/FcH94bqLDzV2oD1TgwX3qv9fWPYeylllbGDseU30Gx4hglT0uxgBVOFxoIYX1U0r
- dxJJOyE18GvJ+9gfJIizaPPxzmRa8FUTAYWYsWHHjkrjFW8O/mXnFUXcf91ltO+Cs3CK
- W5Y7uPwUVEWO8IYn0gfw21YBMDYma2tTby6U1K1Ym8sIUJTUovVugOvu84HtvzcnPSNC
- WOlCpw85zQETzS7am+RXMNw2JpBUXpagkUz+aN0KEhbMUEt7nBsgFS4cAVRagc5lpABK
- v7dQNEVrGjHSrLWOt1kzpnHAhhvwm2ilk8+de1yKJQGiz9zt0oPccm1H9Fao2VvGLrDE
- YO8g==
-X-Gm-Message-State: AOAM533zely9tRtkvfQldg4aPGvqQ0J2RC46VR5UzPX7LnMIvo7GvPs4
- Jx3DYAR2dsvWAiECauxnksUs3SjMymoYMeirsAY=
-X-Google-Smtp-Source: ABdhPJy1F7PzMeYmUBqKJFwc+OMyBL9Qjt2TMLg2k5TKElN6wCIQIQXXiSfFrAe/V1nyxKQqvyrpCeqNeJ3jhJIIhmE=
-X-Received: by 2002:ac2:5689:: with SMTP id 9mr10870086lfr.175.1610935712208; 
- Sun, 17 Jan 2021 18:08:32 -0800 (PST)
+ bh=U9I102dy1atoo+zrXfEE5X01wqboXWFqPsVJtnAMgoU=;
+ b=izfVYzh2RrP5fSBCd2oM8htY6Vm8Oaj3/E0/skBcnv8A/uLv95oEqc8s4xQiVCE1CS
+ kYHJ3wtfunSKYMe7nrKLur/8xInQ+k7dq29S9mDG/z6JnHKrEDCjOKL2qa1sPCszmfPI
+ Qo+6qhpJ4ShnC9jn+JkcOOQF2vviXFHhMl8v3fqV5XQNT+Le5PI37hgOS58M1dz0PrSB
+ 5hGOQqHape+eBWJIDl7GoAdpPk73usEisU6CWc785/LIin07tXfUeQOGprcfdfz61A+2
+ l668TyB+QolmfbgOpLLJMccGhY8a4aAohjUVipBD4za7eg8072wA8+DrVmM/9AV6/aQe
+ diBA==
+X-Gm-Message-State: AOAM531zUp00/sv/TXuhbUJuAWuEJA9YiZv83adOCBrIcMSQqOcVAQ0S
+ URF5T4ta2gO08OI5rBm5etLw3UPyReg3M+ZwH04kKIuA
+X-Google-Smtp-Source: ABdhPJwBywnkZl5QZgEch87y+R3Xa3fY9GOK5Cav0BgUYkL7h/BOR3EQ8AoCvIIr4fVjSypqVqnh85aAohA7kFgSURI=
+X-Received: by 2002:a1f:1ccf:: with SMTP id c198mr17827289vkc.24.1610965528619; 
+ Mon, 18 Jan 2021 02:25:28 -0800 (PST)
 MIME-Version: 1.0
-References: <1610615171-68296-1-git-send-email-abaci-bugfix@linux.alibaba.com>
- <87czy7lvjy.fsf@suse.com>
- <CAH2r5mvjDAgB6-kE=AOAwrETVk+R79z6Gd8gMnOTWqG-6Mnybw@mail.gmail.com>
- <20210118000152.GH3579531@ZenIV.linux.org.uk>
-In-Reply-To: <20210118000152.GH3579531@ZenIV.linux.org.uk>
-Date: Sun, 17 Jan 2021 20:08:21 -0600
-Message-ID: <CAH2r5mtaf6Kmg2RAxawsV9o=VHyu9hosqa4fZw5QDHLH-tacfg@mail.gmail.com>
-Subject: Re: [PATCH] fs/cifs: Replace one-element array with flexible-array
- member.
-To: Al Viro <viro@zeniv.linux.org.uk>
+References: <CAHbM3qgJv3he3LSokE-V1yPUttueT1esXF0vNQqHSnRPDtqz9A@mail.gmail.com>
+ <20210112191328.GC1316956@jeremy-acer> <20210112194843.GE1316956@jeremy-acer>
+In-Reply-To: <20210112194843.GE1316956@jeremy-acer>
+Date: Mon, 18 Jan 2021 15:55:15 +0530
+Message-ID: <CAHbM3qhTd=t+w58ZaVSf+zWwqNgAmQqXbOvk-zGZjeB9XALhMw@mail.gmail.com>
+Subject: Re: Initializing case based parameters during share switch in
+ create_conn_struct_tos_cwd()
+To: Jeremy Allison <jra@samba.org>
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,44 +70,51 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>,
- LKML <linux-kernel@vger.kernel.org>, Steve French <sfrench@samba.org>,
- Jiapeng Zhong <abaci-bugfix@linux.alibaba.com>
+From: Shilpa K via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Shilpa K <shilpa.krishnareddy@gmail.com>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sun, Jan 17, 2021 at 6:02 PM Al Viro <viro@zeniv.linux.org.uk> wrote:
+Hi Jeremy,
+
+Thanks for the patch. I have verified that it fixes the problem.
+
+Regards,
+Shilpa
+
+On Wed, Jan 13, 2021 at 1:18 AM Jeremy Allison <jra@samba.org> wrote:
+
+> On Tue, Jan 12, 2021 at 11:13:28AM -0800, Jeremy Allison via
+> samba-technical wrote:
+> >>
+> >>The case_sensitive and short_case_preserve were null because we were not
+> >>initializing these values in conn struct to the share configuration that
+> we
+> >>were switching to. We are using below settings for the share:
+> >>
+> >>case sensitive = no
+> >>preserve case = yes
+> >>short preserve case = yes
+> >>default case = lower
+> >>
+> >>I used the code changes that are in the below patch and now we return the
+> >>folder name in the referral as is. Could you please review this patch and
+> >>let me know if it is fine?
+> >>
+> >>Thanks,
+> >>Shilpa
+> >
+> >Thanks Shilpa, this does look correct. It sets up the
+> >dfs share in the same way as the case options are created
+> >in source3/smbd/service.c:make_connection_snum().
+> >
+> >I think the best fix here would be to factor this code
+> >out into a function called by both make_connection_snum()
+> >and create_conn_struct_as_root() so we know they are
+> >setting things up identically.
 >
-> On Sun, Jan 17, 2021 at 03:58:23PM -0600, Steve French wrote:
-> > Jiapeng,
-> > Aurelien is correct, you should respin this patch and correct for
-> > where it breaks the sizeof calculation.  For example your change:
-> >
-> > struct smb2_lock_rsp {
-> > @@ -1434,7 +1434,7 @@ struct smb2_query_directory_req {
-> >         __le16 FileNameOffset;
-> >         __le16 FileNameLength;
-> >         __le32 OutputBufferLength;
-> > -       __u8   Buffer[1];
-> > +       __u8   Buffer[];
-> >  } __packed;
-> >
-> > would have the side effect of making the file name off by one:
-> >
-> > smb2pdu.c-4654- req->FileNameOffset =
-> > smb2pdu.c:4655:         cpu_to_le16(sizeof(struct
-> > smb2_query_directory_req) - 1);
+> Here's what I ended up with if you want to test.
 >
-> FWIW, that sizeof() - 1 should've been offsetof()...
-
-agreed
-
--- 
-Thanks,
-
-Steve
-
+> Thanks !
+>
