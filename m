@@ -2,50 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 740712FD78E
-	for <lists+samba-technical@lfdr.de>; Wed, 20 Jan 2021 18:56:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 220EF2FD826
+	for <lists+samba-technical@lfdr.de>; Wed, 20 Jan 2021 19:21:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=9zRWOK5Kc2R7Sx2XGB4yefp33zDSt+o/LCJA+Dk7uwY=; b=gjeT5QEnnM0kODba5Ycj18a3dO
-	k4WLS6vf+rOi7eBW2+bhyavzWpDvo/TzEfD4eay7/nNqlgrBbfKD7eCn9qHB7784ZVH413okl9o5M
-	dG6uCPNIIwDCQpVcfuyNaB/Fg7wIxmUO3M9B4PEQ8toPpc6PyViB4XvG+R5/nBSQgtkp1CHptpIfg
-	+ADqopLifHnnYyHxm1voAGpBEKpVzFQ0f6izPnwmMWwNclN1EmptGYOlWBQuBzjY1pleq7NGXXX2/
-	KxjsBGHINg/tC2IGisL2amS3m9hymThCKfYAXt3cumJBPyAcIQ7SNBIJmcPrYB8eDEJrr2DKzwizZ
-	/C3GaDLA==;
-Received: from ip6-localhost ([::1]:65104 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=FV7MwtDxxTkceOL6iq8xT8VvmXwowezxKyauAClUrIs=; b=qsYELva3dBglRjBXQqtW52vcZV
+	R0DSXvSURXKyXW4ZTFvAqHn0lBlFTZoAEjFZBKgppYHu2FIMKAQFhWrXL6r6O0dlV058mm0NpKsoh
+	YtXiOQnpTwzHo2JQOzczA3r7r0dgZ+i7ixFLWhaWrXHVacs+Bjvsq27M1/IYlUZKipe3DAMFvliLT
+	7dwNVZuU5+lvR3/vWv8rq/mFykMzMk/5B95eZ+fnh5atbe+H/TuIn1cvMabzNMiE2Dfi5v9jOKc3q
+	1szfMzac7DEpGQSBaKJm+sN1RA82Gojvxekjx7J6SLXyMJO4fAaJpppO4HVXq+95mQEsvDmIuSoYy
+	QchuJOFg==;
+Received: from ip6-localhost ([::1]:19226 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l2HiN-006NE5-VJ; Wed, 20 Jan 2021 17:56:20 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23700) 
+	id 1l2I6O-006NTL-Ah; Wed, 20 Jan 2021 18:21:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30918) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l2HiE-006NDy-Qp
- for samba-technical@lists.samba.org; Wed, 20 Jan 2021 17:56:17 +0000
+ (Exim) id 1l2I6G-006NOj-5l
+ for samba-technical@lists.samba.org; Wed, 20 Jan 2021 18:21:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=9zRWOK5Kc2R7Sx2XGB4yefp33zDSt+o/LCJA+Dk7uwY=; b=pJGUn4AfxqfDzMRJ5uci68jw+7
- hjU7SmUCJ3lxJNeVIj7J27j21RmgninvqKM59HzEMA2o3dKtw+OQfgKnR1ODNMEdlz7K4Y+zMkb2e
- BKau9nIdcaC19RXz9qRw+L+cuEgFT0/068cUbtDIOboL5gWaq62RHaZVGE5n6cA9KCbN/BvDovK0r
- 8BJjP29n1KmCX5+nWlwZF1GgY3liVju98wtWln99Y3rvzBnuzgNEHEhMQ3ROS7rvR4WcdJfX1/lrU
- 5Z2QEDxBIPbUJIpsKaeYDwA8EnCNd6ZMuiGySb15p460lH5n/f/lgXWZakfrVhsjOXhmxmJjUi78L
- X/qOq7moMhlztFVBFwzDRHgLFTMVNlbF+8jZmMgm9rEfG5aKpDxH4zJXGAYIPMpoPCBieZUc9NiYk
- UmW13UhwSbv5NbR3acZmoiMvcnXRUwxe0Rn3eJEofSsMv9mieJPnOf59KnwcCR/iMA2wWq1pdikq7
- /obtmBrkpXRDvFEQDLzsuxsz;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=FV7MwtDxxTkceOL6iq8xT8VvmXwowezxKyauAClUrIs=; b=dA1TW2FlbLn5eeqCYqdBna2Qqo
+ sQ1eY9nNZjIN1kzOcHPJu5quLqfc+o2pq9hwYLvgCj8mwDGspP2D/HHtKriMgLfVxeOtVPVzxhf2Z
+ NtwbKEdjs0Q0OVlTpt6EwOtuY86naQs0430+gf7R8kJcIjYgBxlTnXF0WIKOTJJm0LWqn7Uprt4By
+ fqZC5Pr9PBmF8ayEiiDG461jX022tKuC9QGa2QPW53a5VyqyHRvq6NSxHl8bjPDKKmz3Cb+L7GZ0A
+ WWZvi58p6XWYeVAu1HwDBsfAAI4CboUPlpTvtD2u/qF2/znVVnN9FI7kejmiUS45n3gIa6foOO2G9
+ MRGnGZKfHo8rxYH/NzUmZv1lTa6ZMPbQvRIzJpN46KTiZAN6UCM4xfVfCf+WtPnBD+dt+L9e/3WtO
+ spU+XPEvahDvbD/mNyuQdNRtDfzhwPMMJor421UWm0JxtJfmjq1wPFbe3RUWTCk5PQ6k/pliOrrvN
+ xznZyhkIBFjgqc8kINtKqpQ7;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l2Hhw-0006c5-1Z
- for samba-technical@lists.samba.org; Wed, 20 Jan 2021 17:55:52 +0000
+ (Exim) id 1l2I6E-0006p6-9z; Wed, 20 Jan 2021 18:20:58 +0000
+Date: Wed, 20 Jan 2021 10:20:55 -0800
+To: =?iso-8859-1?Q?J=F4natas?= Hudler <jonatashudler@gmail.com>
 Subject: Re: Fwd: Help Needed: Samba share slow to query not existing files
-To: samba-technical@lists.samba.org
+Message-ID: <20210120182055.GD29063@jeremy-acer>
 References: <CAGha7mH29snpcpmK14800yWynZVgJDEVTvQBTi31u5-9HBP3JA@mail.gmail.com>
  <CAGha7mEdy-B29PMUzkxtiznNZJvwdo21fiwnh2kq7hf7tYKBAg@mail.gmail.com>
-Message-ID: <e0255d9a-9b29-ce56-91c7-35f93c0ffb35@samba.org>
-Date: Wed, 20 Jan 2021 17:55:51 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
 MIME-Version: 1.0
-In-Reply-To: <CAGha7mEdy-B29PMUzkxtiznNZJvwdo21fiwnh2kq7hf7tYKBAg@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
+In-Reply-To: <CAGha7mEdy-B29PMUzkxtiznNZJvwdo21fiwnh2kq7hf7tYKBAg@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,98 +56,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 20/01/2021 17:37, Jônatas Hudler via samba-technical wrote:
-> Hello everyone,
+On Wed, Jan 20, 2021 at 02:37:45PM -0300, J�natas Hudler via samba-technical wrote:
+>Hello everyone,
 >
-> *(First mail in this mailing list, so take it easy if I'm infringing any
-> good manners here)*
-
-Welcome to the list 😁
-
-Unfortunately it is really the wrong list, you should have posted to the 
-samba mailing list, not samba technical.
-
-Having said, lets try to help you.
-
+>*(First mail in this mailing list, so take it easy if I'm infringing any
+>good manners here)*
 >
-> In a samba share we have a directory with lots of files - binaries and
-> resources to run our ERP application (around 20K entries).
+>In a samba share we have a directory with lots of files - binaries and
+>resources to run our ERP application (around 20K entries).
 >
-> The application is taking too long to load. The found reason is that the
-> application tries to load several files in a trial/error fashion, looking
-> for extensions in a particular order (e.g: file.dll, file.lbr, file.gnt,
-> file.int). Many of these files are not required and doesn't even exist.
+>The application is taking too long to load. The found reason is that the
+>application tries to load several files in a trial/error fashion, looking
+>for extensions in a particular order (e.g: file.dll, file.lbr, file.gnt,
+>file.int). Many of these files are not required and doesn't even exist.
 >
-> Every "not found" hit take ~0.2 seconds. And there are lots of these events.
+>Every "not found" hit take ~0.2 seconds. And there are lots of these events.
 >
-> The thing is that apparently samba is not caching this result. My guess is
-> that every new not existing file open request causes a full directory's
-> entries lookup.
+>The thing is that apparently samba is not caching this result. My guess is
+>that every new not existing file open request causes a full directory's
+>entries lookup.
 >
-> If I run this code (in a Windows Command Prompt) in this samba share, it
-> takes considerable time, whereas in a native Windows share it is
-> instantaneous.
+>If I run this code (in a Windows Command Prompt) in this samba share, it
+>takes considerable time, whereas in a native Windows share it is
+>instantaneous.
 >
->    for /L %i in (1,1,50) do @dir \\server\share\not_existing.txt >nul
+>  for /L %i in (1,1,50) do @dir \\server\share\not_existing.txt >nul
 >
-> Anything that can be done?
+>Anything that can be done?
 
+You are running into the classic "large directory performance"
+issue, caused by Samba having to run on top of a POSIX case-sensitive
+filesystem.
 
-Two things might help, stop using a Samba AD DC as a fileserver
+Here's the brute force fix:
 
-> ------------------------------
->
-> Current smb.conf content:
->
-> # Global parameters
-> [global]
->      netbios name = ***omitted***
->      realm = ***omitted***
->      server role = active directory domain controller
->      workgroup = ***omitted***
->      idmap_ldb:use rfc2307  = yes
->      dns forwarder = ***omitted***
+https://wiki.samba.org/index.php/Performance_Tuning#Directories_with_a_Large_Number_of_Files
 
+NOTE!!! from the text:
 
-The other is to remove everything (that you appear to have added) from 
-here onward from your DC's smb.conf
+"All files on the share must be converted to lowercase when using the example.
+Files using uppercase or both uppercase and lowercase are no longer listed on the share."
 
->      vfs objects = acl_xattr
->      map acl inherit = yes
->      store dos attributes = yes
->      #
->      aio read size = 1
->      aio write size = 1
->      aio write behind = true
->      socket options = TCP_NODELAY SO_RCVBUF=65535 SO_SNDBUF=65535
->      read raw = yes
->      write raw = yes
->      max xmit = 65535
->      dead time = 0
->      getwd cache = no
->      max connections = 5000
->      time server = yes
->
-> ------------------------------
->
-> Environment Details:
->
->     - CentOS Linux release 7.6.1810 (Core)
->     - Samba version 4.8.3
->     - Application Runtime: Microfocus NetExpress (Cobol) v3.1
-
-
-Where did you get the Samba packages from ? You normally cannot 
-provision the Centos Samba packages as a DC, also Samba 4.8.3 is a bit 
-old (the latest version is 4.13.3).
-
-Rowland
-
-
-
+Or switch to a filesystem the supports case insensitive
+lookups (I think xfs or zfs can do this).
 
