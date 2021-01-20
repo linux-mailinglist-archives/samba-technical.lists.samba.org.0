@@ -2,59 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62E902FD72A
-	for <lists+samba-technical@lfdr.de>; Wed, 20 Jan 2021 18:39:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 740712FD78E
+	for <lists+samba-technical@lfdr.de>; Wed, 20 Jan 2021 18:56:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=N1nXgJki9MgcCRScY1iR1Z/5q+TIzYPnjNVff5v9KpM=; b=VWH9+0H+NauACI7L28687H15UI
-	ObCf1QlQHSh6rs/od9DTmwOySvmCkgR+kGMI/QmHThWtMG4CtXpNUYylv6E1CWsQ+GvoNVYsrg5/n
-	CL68ut4CPRbsxw9oy6s7p7LowIarbKcAIpDuLURf8xfitNPgEp/4RUgwL+lpiUDSiDehwh5tEMiyr
-	CMQZPqVmBP5exbUgmks/EF7f2R7XUSf/L+YZGDaj+HslqC87hkSZEmtT4nBLE+M7nTseIWgQHf9KX
-	2U57QYBEdS283+xH9WGQ59L/xImtr5JQfqB/VKbTUSkfjtCIerQ6dI/gsTFGsIF18Z4cOnk15usSe
-	EGyTG+Tg==;
-Received: from ip6-localhost ([::1]:64408 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=9zRWOK5Kc2R7Sx2XGB4yefp33zDSt+o/LCJA+Dk7uwY=; b=gjeT5QEnnM0kODba5Ycj18a3dO
+	k4WLS6vf+rOi7eBW2+bhyavzWpDvo/TzEfD4eay7/nNqlgrBbfKD7eCn9qHB7784ZVH413okl9o5M
+	dG6uCPNIIwDCQpVcfuyNaB/Fg7wIxmUO3M9B4PEQ8toPpc6PyViB4XvG+R5/nBSQgtkp1CHptpIfg
+	+ADqopLifHnnYyHxm1voAGpBEKpVzFQ0f6izPnwmMWwNclN1EmptGYOlWBQuBzjY1pleq7NGXXX2/
+	KxjsBGHINg/tC2IGisL2amS3m9hymThCKfYAXt3cumJBPyAcIQ7SNBIJmcPrYB8eDEJrr2DKzwizZ
+	/C3GaDLA==;
+Received: from ip6-localhost ([::1]:65104 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l2HRB-006N6v-80; Wed, 20 Jan 2021 17:38:33 +0000
-Received: from mail-yb1-xb33.google.com ([2607:f8b0:4864:20::b33]:40879) 
+	id 1l2HiN-006NE5-VJ; Wed, 20 Jan 2021 17:56:20 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23700) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l2HR5-006N6n-2l
- for samba-technical@lists.samba.org; Wed, 20 Jan 2021 17:38:29 +0000
-Received: by mail-yb1-xb33.google.com with SMTP id w24so17973410ybi.7
- for <samba-technical@lists.samba.org>; Wed, 20 Jan 2021 09:38:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
- bh=+BpsNzZAUNjS2cTxY0d55zZguRuHvUf0vDlfX5yWBAc=;
- b=QqFdy+h3XH3VWUcbdLBVJc5qwcYnZfUzNnKkd9IAORuuzJrK9Tbx5pUyZdybY8iWek
- 0AJOILIzn0aTgT3Q3SNQkbitfb5B3Mvask3Kp/uHiBqealY0FNFhlwYq3NgWeGci+Rg8
- VyyPXkrjxgjwKYqBgEbcVEAiMhx6Qjspn0iGKl7phpZM0XChbv9fTvlnKL5zFdWYplOE
- RsDVoL0gwI7s3v6VFPf+lgSLLkcH59AqgtLsonGz3HFbib8KP/9SjWvdqHNhIy3GIsaJ
- 9JsWu7/+dKXrCBWRnLYNWngFOt68CcR/thHPCuk7E3V4pb90wwHL8ZZKb0tj/WlXMpv1
- gvpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to;
- bh=+BpsNzZAUNjS2cTxY0d55zZguRuHvUf0vDlfX5yWBAc=;
- b=kZEVsnFJh6HH8+vh8gVEl7r+wTZQHTeKKLbIKpU6+SUAnbWYuC2+gPjHsvppyBGxDb
- wipskeqj1neEZVbYjTnYpyAEeSxL3uwerpotK0H+VyNqZZlotFsO5CyL+8CBOmbnFYgT
- 1xgXucNfMdNa4mP0rS9EaIM2c8BtqOBVMOcx2EBJdwD46w9q8GXV2CsuUq0cMFwu0kva
- 4obqaJfZINUMkexz8DZlaeKulEFuCe5aR/qzQUJT1Q+vLN8e9mzm88bswByNckTOFwWz
- FGch4jfVi5poVIhsMJxBLB0rJPZOIQpj9VG46Ggbja0Q4kEPGK8KtEHa3b9q7PTIbrti
- 9vng==
-X-Gm-Message-State: AOAM531SZd8R8xVmRQRSFNuD1ZtjjtTxRS18QqnA0y5sqaU/U6lOd36B
- MwY5XG5gZWD9f+Yuf23ozhjVS8VmcGhEdQ9lCqp2TeRf86Fu4w==
-X-Google-Smtp-Source: ABdhPJzE5HA+sF7ymiw3oq9bOD1TDkihEiwGJoHHNd8ckIDg6TgeR+kINgikKO3ZICjdGn37zTz1cG87vn+9s2aQLS4=
-X-Received: by 2002:a25:cb0b:: with SMTP id b11mr14501040ybg.323.1611164301797; 
- Wed, 20 Jan 2021 09:38:21 -0800 (PST)
-MIME-Version: 1.0
-References: <CAGha7mH29snpcpmK14800yWynZVgJDEVTvQBTi31u5-9HBP3JA@mail.gmail.com>
-In-Reply-To: <CAGha7mH29snpcpmK14800yWynZVgJDEVTvQBTi31u5-9HBP3JA@mail.gmail.com>
-Date: Wed, 20 Jan 2021 14:37:45 -0300
-Message-ID: <CAGha7mEdy-B29PMUzkxtiznNZJvwdo21fiwnh2kq7hf7tYKBAg@mail.gmail.com>
-Subject: Fwd: Help Needed: Samba share slow to query not existing files
+ (Exim) id 1l2HiE-006NDy-Qp
+ for samba-technical@lists.samba.org; Wed, 20 Jan 2021 17:56:17 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=9zRWOK5Kc2R7Sx2XGB4yefp33zDSt+o/LCJA+Dk7uwY=; b=pJGUn4AfxqfDzMRJ5uci68jw+7
+ hjU7SmUCJ3lxJNeVIj7J27j21RmgninvqKM59HzEMA2o3dKtw+OQfgKnR1ODNMEdlz7K4Y+zMkb2e
+ BKau9nIdcaC19RXz9qRw+L+cuEgFT0/068cUbtDIOboL5gWaq62RHaZVGE5n6cA9KCbN/BvDovK0r
+ 8BJjP29n1KmCX5+nWlwZF1GgY3liVju98wtWln99Y3rvzBnuzgNEHEhMQ3ROS7rvR4WcdJfX1/lrU
+ 5Z2QEDxBIPbUJIpsKaeYDwA8EnCNd6ZMuiGySb15p460lH5n/f/lgXWZakfrVhsjOXhmxmJjUi78L
+ X/qOq7moMhlztFVBFwzDRHgLFTMVNlbF+8jZmMgm9rEfG5aKpDxH4zJXGAYIPMpoPCBieZUc9NiYk
+ UmW13UhwSbv5NbR3acZmoiMvcnXRUwxe0Rn3eJEofSsMv9mieJPnOf59KnwcCR/iMA2wWq1pdikq7
+ /obtmBrkpXRDvFEQDLzsuxsz;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1l2Hhw-0006c5-1Z
+ for samba-technical@lists.samba.org; Wed, 20 Jan 2021 17:55:52 +0000
+Subject: Re: Fwd: Help Needed: Samba share slow to query not existing files
 To: samba-technical@lists.samba.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+References: <CAGha7mH29snpcpmK14800yWynZVgJDEVTvQBTi31u5-9HBP3JA@mail.gmail.com>
+ <CAGha7mEdy-B29PMUzkxtiznNZJvwdo21fiwnh2kq7hf7tYKBAg@mail.gmail.com>
+Message-ID: <e0255d9a-9b29-ce56-91c7-35f93c0ffb35@samba.org>
+Date: Wed, 20 Jan 2021 17:55:51 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
+MIME-Version: 1.0
+In-Reply-To: <CAGha7mEdy-B29PMUzkxtiznNZJvwdo21fiwnh2kq7hf7tYKBAg@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,80 +59,98 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?J=C3=B4natas_Hudler_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?J=C3=B4natas_Hudler?= <jonatashudler@gmail.com>
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello everyone,
+On 20/01/2021 17:37, Jônatas Hudler via samba-technical wrote:
+> Hello everyone,
+>
+> *(First mail in this mailing list, so take it easy if I'm infringing any
+> good manners here)*
 
-*(First mail in this mailing list, so take it easy if I'm infringing any
-good manners here)*
+Welcome to the list 😁
 
-In a samba share we have a directory with lots of files - binaries and
-resources to run our ERP application (around 20K entries).
+Unfortunately it is really the wrong list, you should have posted to the 
+samba mailing list, not samba technical.
 
-The application is taking too long to load. The found reason is that the
-application tries to load several files in a trial/error fashion, looking
-for extensions in a particular order (e.g: file.dll, file.lbr, file.gnt,
-file.int). Many of these files are not required and doesn't even exist.
+Having said, lets try to help you.
 
-Every "not found" hit take ~0.2 seconds. And there are lots of these events.
-
-The thing is that apparently samba is not caching this result. My guess is
-that every new not existing file open request causes a full directory's
-entries lookup.
-
-If I run this code (in a Windows Command Prompt) in this samba share, it
-takes considerable time, whereas in a native Windows share it is
-instantaneous.
-
-  for /L %i in (1,1,50) do @dir \\server\share\not_existing.txt >nul
-
-Anything that can be done?
-------------------------------
-
-Current smb.conf content:
-
-# Global parameters
-[global]
-    netbios name = ***omitted***
-    realm = ***omitted***
-    server role = active directory domain controller
-    workgroup = ***omitted***
-    idmap_ldb:use rfc2307  = yes
-    dns forwarder = ***omitted***
-    vfs objects = acl_xattr
-    map acl inherit = yes
-    store dos attributes = yes
-    #
-    aio read size = 1
-    aio write size = 1
-    aio write behind = true
-    socket options = TCP_NODELAY SO_RCVBUF=65535 SO_SNDBUF=65535
-    read raw = yes
-    write raw = yes
-    max xmit = 65535
-    dead time = 0
-    getwd cache = no
-    max connections = 5000
-    time server = yes
-
-------------------------------
-
-Environment Details:
-
-   - CentOS Linux release 7.6.1810 (Core)
-   - Samba version 4.8.3
-   - Application Runtime: Microfocus NetExpress (Cobol) v3.1
+>
+> In a samba share we have a directory with lots of files - binaries and
+> resources to run our ERP application (around 20K entries).
+>
+> The application is taking too long to load. The found reason is that the
+> application tries to load several files in a trial/error fashion, looking
+> for extensions in a particular order (e.g: file.dll, file.lbr, file.gnt,
+> file.int). Many of these files are not required and doesn't even exist.
+>
+> Every "not found" hit take ~0.2 seconds. And there are lots of these events.
+>
+> The thing is that apparently samba is not caching this result. My guess is
+> that every new not existing file open request causes a full directory's
+> entries lookup.
+>
+> If I run this code (in a Windows Command Prompt) in this samba share, it
+> takes considerable time, whereas in a native Windows share it is
+> instantaneous.
+>
+>    for /L %i in (1,1,50) do @dir \\server\share\not_existing.txt >nul
+>
+> Anything that can be done?
 
 
-PS: This question was originally posted in the Server Fault website and can
-be reached thru this link: Samba: Slow to query not existing files - Server
-Fault
-<https://serverfault.com/questions/1050543/samba-slow-to-query-not-existing-files>
+Two things might help, stop using a Samba AD DC as a fileserver
 
-Thank you in advance for all the support!
+> ------------------------------
+>
+> Current smb.conf content:
+>
+> # Global parameters
+> [global]
+>      netbios name = ***omitted***
+>      realm = ***omitted***
+>      server role = active directory domain controller
+>      workgroup = ***omitted***
+>      idmap_ldb:use rfc2307  = yes
+>      dns forwarder = ***omitted***
 
-Jonatas Hudler
+
+The other is to remove everything (that you appear to have added) from 
+here onward from your DC's smb.conf
+
+>      vfs objects = acl_xattr
+>      map acl inherit = yes
+>      store dos attributes = yes
+>      #
+>      aio read size = 1
+>      aio write size = 1
+>      aio write behind = true
+>      socket options = TCP_NODELAY SO_RCVBUF=65535 SO_SNDBUF=65535
+>      read raw = yes
+>      write raw = yes
+>      max xmit = 65535
+>      dead time = 0
+>      getwd cache = no
+>      max connections = 5000
+>      time server = yes
+>
+> ------------------------------
+>
+> Environment Details:
+>
+>     - CentOS Linux release 7.6.1810 (Core)
+>     - Samba version 4.8.3
+>     - Application Runtime: Microfocus NetExpress (Cobol) v3.1
+
+
+Where did you get the Samba packages from ? You normally cannot 
+provision the Centos Samba packages as a DC, also Samba 4.8.3 is a bit 
+old (the latest version is 4.13.3).
+
+Rowland
+
+
+
+
