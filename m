@@ -2,47 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 379CC2FFF83
-	for <lists+samba-technical@lfdr.de>; Fri, 22 Jan 2021 10:51:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE5FE300F97
+	for <lists+samba-technical@lfdr.de>; Fri, 22 Jan 2021 23:07:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=kbKls9LGJDRovA6R4V1P3vdjaH5KOP0v6JrbWZNoy4g=; b=cXclmKYuYV1xaWTunISyzmyHkb
-	JvYUE2OWU+7MphwyMZZBfzXsQ9s/QCU/aCp60Nv3xt4y8zN0jU4rW5SxnWVE8zWtg+IQgxziIIXUf
-	OVyENyltDb1F1lNYwAqp+6/P14gGZQ9ryul9j5a3ZfbZBldq+V854N66O5G+r1NwHHHN5Edx2NJFV
-	JZqzCp+65etMd1pX0HV+NG8fBa6Kuovet3GioYtSSHKK6UsL++qf9Cugg3jRwbAowRro6rY1zovvg
-	EQRlubbsg4YB0Ty7XlZcPk0kFWHYnNO5LRnPW7sW6A8M/xbR6hzNePUBvXOf9jDgYgkFB2V1QfkNQ
-	U/7JkSmA==;
-Received: from ip6-localhost ([::1]:63942 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=Y07QB+SNFSVe1qkcWADx26sBGZb2pOeMt9Wt9niBAbM=; b=nr0raJWalH8kcdWoGp3WpSOFrZ
+	Bo4ydVhFaviuHeTveAFVvFbyqrUzzb+I+6YXyIXrBr93IbfB6bWBrh0q4ADwmHN1SwQXVkyQ7yUq6
+	GudvyOyRGur7OZiHC3MzJUSczaVMGjQnObGrslvBhxlWeh9Vdsj+FzjnzuGhUkVg0zD4qy1eceVag
+	7H65x+B0t5fUYAXW/ehbCYCs4QKPCcTajbbP8HUDaGIlOWp8B+YoOrUk2RsalOXKOfB/FdUb4PT0m
+	8YXDtw0LZx/ce7y0Bhbir81vUIYzOX4AORxZMrHVtNJeGqhmxKrnlW1mHANo/Yea8xqowzOm/MzCW
+	3KW0y8Nw==;
+Received: from ip6-localhost ([::1]:27708 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l2t5K-006dMC-Kr; Fri, 22 Jan 2021 09:50:30 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39884) 
+	id 1l34Yr-006mlq-Mt; Fri, 22 Jan 2021 22:05:45 +0000
+Received: from ozlabs.org ([2401:3900:2:1::2]:50357) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l2t51-006dM5-IY
- for samba-technical@lists.samba.org; Fri, 22 Jan 2021 09:50:16 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=kbKls9LGJDRovA6R4V1P3vdjaH5KOP0v6JrbWZNoy4g=; b=4BwxkwDf2bLFupp52HvNmpGbXO
- BJ06E+24nW/FfxRAqS69Tyh2M2Qr5oCbJVBVPDdH7hbjQKZyIox3NS9LFhjGdj6lYQ0nGQRtf+prL
- 0BG0NwCZCGGC6iEDKvmC71HM7A1BphlMqqUUAmNAwd4sa6IMOaMWDU/FA9qAWnMALkJU286brh7DG
- cwiHVKCiFO7JHuKXSe93abn+HcNSenzc7t2yhUzI7aRe7NyGZT6yncBqzdIVn0bNtOi9ahqSnJn9I
- 0F/UcR6zg90U87xfws1TikGWttP/QZi3v1ZYqnQywR0KrbUchjIqyJjDbIu3Z5yISXO/716UJ43nM
- X2Yoc71vIz6m/+ILwqbKCTvuoKjANzNScCdRInsn9UXtmknvimhxajVVnKJOFckGK35PlT++UbWlN
- lf0b8929Xgdu+l5C51N03a9Htibndf3HY5z4uN7NLhZUtJCa91K2++m1MBI9KUTNOo3zOQXYqKAgw
- npwndvq/fx39vI3reQpB1/QS;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l2t4u-0000R0-LT
- for samba-technical@lists.samba.org; Fri, 22 Jan 2021 09:50:04 +0000
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.14] Samba 4.14.0rc2
-Organization: Samba Team
-Message-ID: <a34d500e-e976-9cbf-08ce-83f1a32623da@samba.org>
-Date: Fri, 22 Jan 2021 10:50:04 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ (Exim) id 1l34Yh-006mlj-4M
+ for samba-technical@lists.samba.org; Fri, 22 Jan 2021 22:05:42 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4DMtbf4gPqz9sCD;
+ Sat, 23 Jan 2021 09:05:02 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=202004;
+ t=1611353102; bh=JuwSr27vvl+LJF7aR/YlKPLhz1x+E0bmnsVNe6K1ulo=;
+ h=Date:From:To:Subject:From;
+ b=d9oj3ukh0IaVn4AjyWX4gXyQgvAg7qteVAu0/hzNOZc1grdKpjMC9g65OcsBvLGHO
+ maSsfAdF/wa08k3Z4eoN1BJs030uK89HQqIyo/zXOoDqe/sIyrpQDFuTgFoZuBfUiW
+ PuCVkdawxwaHes0IUOzvtRtir85fwvy5N0dbyY9W2jtDVS1+ozr/cU9aZ0oID5vdBA
+ Zx3IwYQAtELHq85C51nZb5i9QU59pDSCneLQG1ehHXFHGb9jp6+s05I+jsJ0PUS+dH
+ g4T4ctgKPli8QsCcXHarq2gAWee+s+CaCe8yTS0L31iq7ahvj5qlZoFdcovHiJbkpq
+ g5u8qmQ9VQdHQ==
+Date: Sat, 23 Jan 2021 09:05:01 +1100
+To: Samba Technical <samba-technical@lists.samba.org>
+Subject: Unexpected winbind messages  in Samba >= 4.13
+Message-ID: <20210123090501.51867342@martins.ozlabs.org>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: de-DE
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -57,23 +55,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Karolin Seeger <kseeger@samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+While debugging an unrelated issue in clustered Samba testing, I noticed
+the following log messages each time winbindd is started:
 
-Samba 4.14.0rc2 is scheduled for Thursday, February 18 2021.
+  2021-01-21T01:53:33.077729+11:00 testn2 winbindd[218660]: [2021/01/21 01:53:33.076054,  1] ../../lib/ldb-samba/ldb_wrap.c:79(ldb_wrap_debug)
+  2021-01-21T01:53:33.078165+11:00 testn2 winbindd[218660]:  ldb: Unable to open tdb '/usr/local/samba/private/secrets.ldb': No such file or directory
+  2021-01-21T01:53:33.078242+11:00 testn2 winbindd[218660]: [2021/01/21 01:53:33.076162,  1] ../../lib/ldb-samba/ldb_wrap.c:79(ldb_wrap_debug)
+  2021-01-21T01:53:33.078312+11:00 testn2 winbindd[218660]:  ldb: Failed to connect to '/usr/local/samba/private/secrets.ldb' with backend 'tdb': Unable to open tdb '/usr/local/samba/private/secrets.ldb': No such file or directory
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.14
-has been updated accordingly.
+Data points:
 
-Cheers,
-Karolin
+* smb.conf contains clustering=yes
 
--- 
-Karolin Seeger			https://samba.org/~kseeger/
-Release Manager Samba Team	https://samba.org
-Team Lead Samba SerNet		https://sernet.de
+* I don't see this is 4.12
+
+Is this unexpected?
+
+Thanks...
+
+peace & happiness,
+martin
 
