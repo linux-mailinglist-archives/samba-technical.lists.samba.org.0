@@ -2,45 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 994B4304736
-	for <lists+samba-technical@lfdr.de>; Tue, 26 Jan 2021 19:56:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74FBB3047A1
+	for <lists+samba-technical@lfdr.de>; Tue, 26 Jan 2021 20:10:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=ShEthM8EBWVIu536C/SLcbHwm5hTe9rmESRlRFgY4eE=; b=eHTvkRN/ewcffBzfFYe++iNeav
-	hnys/C1ZbKitBkHOL57IYh3InkXJzzElrlysAg0MTy5dODxPXPaND1Pph5KD/F8ppQPbKfKi/hGY9
-	tvsmTaAN0DL3/tZQSclq7f8Uyh7hT/FiUWj5IdM/3ixDCJ7b0TDSLqTKPrPHS18nQwcrjZAU8ei67
-	QEBsIPJwYgmgBqLU0bEVT5OQyaj3RjgYwoOPTqchJ1SkCC0wFhgERMf0gN29240y+Wa5a5oUv34AB
-	2eu+H3r0lSDSPQK2QRNuSBldzmaqtPoxSSwyaLM+ZauHquZXxwacd+gg7Aunm5+TS2puoFOBijMAz
-	gxUSQ5pg==;
-Received: from ip6-localhost ([::1]:46364 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=nI/bKmaMfBIWmEl1Msqfc/VhPJSVNOogLVUR/YyR9Jc=; b=vyTAk1mHt5bVdEWVrfvB3xMoYj
+	rcdS2rs5rKHajtLfr5DhkLC5XsVSGmtDI2MEnimzpBL1DyMYtH+EkQ1zerV7xVOzd1P7Ow8Sotexi
+	hdWCh9wJv9R3a+lvEbFLVPNkuceeWa5TwWR+pm0+nPyrmQSL/vtCutQXPXBtgJq+1RMwDm6l+O0zM
+	sJlI+yt62rfMAr+9S/KrhQCCfMZxlRfVrFHkJjofJHgCYcN4Tu85VDNb9UiSX/F7mx7KLBAefmmPc
+	ihWNXUrGffDiJbmuwvo1slm2pcvFeoDVLhnCcgbYYvZNKIFbb7uT0pAF/6ZH7s7eYW7kI4+VhXLxP
+	00HBb8Jw==;
+Received: from ip6-localhost ([::1]:49564 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l4TVU-007HTQ-2O; Tue, 26 Jan 2021 18:56:04 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42166) 
+	id 1l4Tib-007Huh-Qo; Tue, 26 Jan 2021 19:09:37 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:46648) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l4TVO-007HRr-R1
- for samba-technical@lists.samba.org; Tue, 26 Jan 2021 18:56:00 +0000
+ (Exim) id 1l4TiW-007HuZ-PO
+ for samba-technical@lists.samba.org; Tue, 26 Jan 2021 19:09:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=ShEthM8EBWVIu536C/SLcbHwm5hTe9rmESRlRFgY4eE=; b=ko0bQJmhL7qWnLbcS2xOOjU+Qc
- kJUeUcWwI2U2lZX9wTV8pnP4oPKQaSblv38poC0gc3zp7wL73InXY13nQ1SUCjva6F8AztRZ06NxV
- daXOzf0Xg9CMr5isivr94lAqQCd+cZGYEQoSYkHC+8yEhgz46sLNKCe/16UmNnhHZqA+62kYKM5rX
- eR74v5x1gPHkkftpezTINIHVPlDAJBw+aE/NWs3MYtj3oRGnEFPLonYB4zK8Ma80TBOYTj+lkl25p
- q6Pfi4in4rWiYKS+VwCNKgey9QfCNvE/VfkHyleOVgHpUWUTyd5sHCyeTMwHcjrzlh6O+lIsWJo+i
- gsTu7+CtCoqWXuhYF6ksCJqkbC48F4aCh0UoGkCLIEznjR+paroH+5HhBtY5peZtLqwthHICAzjH7
- W5+l8eEeoQzifwBUJoU4ULDAmz7ZS/1gght8+iGupxLqA+4fNPTefZaVBfSL4BmStXXLPadk8d+Wq
- 1FVSEHlFOTMuV61lWAq9vP8c;
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=nI/bKmaMfBIWmEl1Msqfc/VhPJSVNOogLVUR/YyR9Jc=; b=je4eeN9hvyqL8IlLhwkQ8YHlt/
+ GZ4+ooWplHDIM9l4/L+RpW4KhUqn6DoDGOsfWCH24x10Hs0buMITZ6mzM6zeXyCxxY+8LtTGXv44z
+ 9HSKLPwH2Dta4Tsv+BbYj536fE246oF1sHVOy2T2ao9uAoAdgJnUET8RmvFZgXdNaY5+d4C8QY27i
+ yoRjAUjWQmKpe0U6Ze53XGyVrjwEyTbil7MUjMBPFFE6Pi2Ano3qFuJNms09iwz0N8iuIgPsRxPs3
+ JBGZyY2crcKaCxhdXtGfBBQPp5PmoKdnlIZ8kKw46ZCp2VlcVKGID5sDpfu+sLUOuwC3GLuv/y+wU
+ vgJ430k2VG+KJ8EFQN0GC1OA1X7u1tHobmn7ro7mp3XxHZPBqlUb+wgowGREFjdQapoNs/ltlTaJN
+ KTlojRTLku3U+9l/pauDn7jAwLCF4Y88afd/5KudVZ1M/D/Ypssp+lk1K0K7+Pw5RXaAiUKF4uqcQ
+ nMuQIc9GmG0CreTuQzWnyjH/;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l4TVO-0006Vf-0d; Tue, 26 Jan 2021 18:55:58 +0000
-Date: Tue, 26 Jan 2021 19:55:56 +0100
-To: "Christopher O Cowan - Christopher.O.Cowan--- via samba-technical"
- <samba-technical@lists.samba.org>
+ (Exim) id 1l4TiV-0006cx-Py; Tue, 26 Jan 2021 19:09:32 +0000
 Subject: Re: Not sure how this slipped through
-Message-ID: <20210126195556.2def02cb@samba.org>
-In-Reply-To: <B93A6FFE-2D85-4503-BB15-D2AFC270028C@ibm.com>
+To: David Disseldorp <ddiss@samba.org>,
+ "Christopher O Cowan - Christopher.O.Cowan--- via samba-technical"
+ <samba-technical@lists.samba.org>, =?UTF-8?Q?Ralph_B=c3=b6hme?=
+ <slow@samba.org>
 References: <B93A6FFE-2D85-4503-BB15-D2AFC270028C@ibm.com>
+ <20210126195556.2def02cb@samba.org>
+Message-ID: <ad420766-af66-b6ea-a3da-5a24f1cb3517@samba.org>
+Date: Tue, 26 Jan 2021 14:09:30 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+In-Reply-To: <20210126195556.2def02cb@samba.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -55,27 +61,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Disseldorp <ddiss@samba.org>
+From: Jim McDonough via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jim McDonough <jmcd@samba.org>
 Cc: "Christopher O Cowan - Christopher.O.Cowan@ibm.com"
- <Christopher.O.Cowan@ibm.com>, Jim McDonough <jmcd@samba.org>
+ <Christopher.O.Cowan@ibm.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 26 Jan 2021 18:15:48 +0000, Christopher O Cowan - Christopher.O.Cowan--- via samba-technical wrote:
-
-> My builds on AIX have been failing because of this obvious error.  Can someone please apply it?
-
-Looks good, thanks for the patch.
-Reviewed-by: David Disseldorp <ddiss@samba.org>
-
-@Jim: looks like you wrote this module ~15 years ago :). Can you review
-and push?
-
+On 1/26/21 1:55 PM, David Disseldorp via samba-technical wrote:
+> On Tue, 26 Jan 2021 18:15:48 +0000, Christopher O Cowan - Christopher.O.Cowan--- via samba-technical wrote:
 > 
-> Just wondering, are AIX builds still part of the CI/CD system?
+>> My builds on AIX have been failing because of this obvious error.  Can someone please apply it?
+> 
+> Looks good, thanks for the patch.
+> Reviewed-by: David Disseldorp <ddiss@samba.org>
+> 
+> @Jim: looks like you wrote this module ~15 years ago :). Can you review
+> and push?
+Reviewed-by: Jim McDonough <jmcd@samba.org>
 
-I'm not aware of any AIX CI jobs.
+I'll let Ralph push it, though, since he's already doing another AIX issue.
+> 
+>>
+>> Just wondering, are AIX builds still part of the CI/CD system?
+> 
+> I'm not aware of any AIX CI jobs.
+> 
+> Cheers, David
+> 
 
-Cheers, David
 
