@@ -2,50 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 464F23024AD
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Jan 2021 13:11:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65D78303781
+	for <lists+samba-technical@lfdr.de>; Tue, 26 Jan 2021 08:52:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=f8g8uoomFMendcrQcwaPmGPao3aOaTfCSVyE2tD4kGY=; b=YMr8CgvdrIkP76XzQtudZvmwza
-	tLweHx0pDRqbyO5Rdlavlye9HcKSqT+tBjslWFD56uM/WhMUgSx/A0ZOA9ldSdxoAYIeMtNgr3w5l
-	ND0e10FBPgzLqu0JeB7XbGdn/BGrpypRSoAcvfA/PO7tCKJrarfH79wLDQpQYsYGbBkccDJvsZQKa
-	OeO30Iw/vvU2PSS2oJ1+fbaRKHlYIO+MnINCLHN3CL+cgfBiKr1Ngzw3ffyxMqPoV0M61cisL82C8
-	WGJVAooluyey5b8H7Rc90orr5zb/Cvw52h9OotywLjOBpp3d7WUWF5T9hRRVCU99mxqw4SiFCtlQK
-	4Fn43KGw==;
-Received: from ip6-localhost ([::1]:54686 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=jed7JKhbR82jKJn0cm5VISRB6G06vwsji2H8h/qXhWg=; b=JO0aVXUeejMBaTCLs0fi8XYUtb
+	VNTezRfvR0qUswP1VGqQ+U+g2lV0Pg2zgwvn+zweKWrekVpsUPBlTYHqDY1BpzBKVDYkyJ4tP4Dlc
+	eOElrejJqm4Lt/rd4zrrP/juxxbn0FAB0XZd8ZsicgM4Uw5/KPYN5aUmoULHBnlJuFweGdXZNqxgp
+	XteuEzlGijuoUEpxsFAsodsqCR/leUQm6uFMi2utm4NjzDF8qv6b49ITZv61Kmw9ulTsrMpb0e9CH
+	Nf111nXOwn01/8j6NwgefkqBKMtFNNAvIIfkSIenDxI7JvEJcS3n8fhQ6AOEmb21upu0YZog+OVnq
+	aQudhgpQ==;
+Received: from ip6-localhost ([::1]:39240 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l40gV-00727I-KS; Mon, 25 Jan 2021 12:09:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10000) 
+	id 1l4J8g-0078ft-Ql; Tue, 26 Jan 2021 07:51:50 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33426) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l40gQ-00727B-0w
- for samba-technical@lists.samba.org; Mon, 25 Jan 2021 12:09:28 +0000
+ (Exim) id 1l4J8J-0078fC-UC; Tue, 26 Jan 2021 07:51:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=f8g8uoomFMendcrQcwaPmGPao3aOaTfCSVyE2tD4kGY=; b=eDwKOVg2zu2AfHNWsoBsbL5Jjg
- ljkgNNZmzi1sJWmWlePdTQKfNan7n/UZ5S9vKCNDQYoODRPlF2poAsZgOOPjwt84z7EZY7A5DIa1P
- 12vUkmBZZ8/gI+WmdJ1SJANaGbS7Ufnf2bmNn5uoQbYJDXUp6cQIm5LsKLdHiobsQNp34/wkk6id/
- TX2Nz3YkMhi1VLFWAsiERS2GDUNclfxfCs07nytWxa41NMUUgWqqv0oqwkg3TyMHRvVWh4ScxNqu2
- 0Mm69cccewqWYiXXnLrDxjRYDhHSYAXR/9a6CAmPlEWltEnE5cKLnxZz+gmq1mfcJA3qNjtfc7Bf1
- 4ji6z15zV8LdJOsZQIiaJ+jk/fzM1xUGFcYwikOF1zP/7ISpitEjYZz4iIzcwDkUQxudEYV1lIyWj
- l9zeLeg0YJS9BRfHy3FwKVbCxva3gBQAqCQSccAL4vF+yBG4gGsw3SQLm0ercBTYlLEOGXQJ1Ao4y
- d+B/2TzH7Judw4LzYyoLowHg;
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=jed7JKhbR82jKJn0cm5VISRB6G06vwsji2H8h/qXhWg=; b=BmIszR5gUXtC7QelEyFCn5G/LY
+ fN4xlT9OhdZGfH5vD04/e7h0GgxKrnRc9GF2sWZFLnMoZZhotikxCec6IEXUsAFWcTK/LdBVNed6t
+ 8RSFpD3fj1hn9KZbj2ItB/INIMjnlUeptNi+L9aHAgwwUbfEJZvEu/rh6MWNq+AkeqSDK9CIzByeK
+ 7GIq5JuNlzMZgKmcHM0xPOzxDNE/v3TqHysM0twbQ0Y4QSvAtCvYv/UGfbb+/H/Nls6SpQ3W1/04J
+ VZuO3ArDoeFt9Eck6n+FyorKns1JR7Vr/xwUJXxnMSxdLIlPvRY0oLr0EmmcSnBBb7KAGoWfk6PyO
+ nTa+k7C/bMsednmbKPYflwGSsj6EE4+w/7VZh6wDHQ/xtAQQS3F9vxBgNrqZuL82+mfhlQB8slHrx
+ enCs0P0onXsUmhkGn0ZX6soEesXgM+c5vfzes2SoBnDJh+/jkm/nQwV1MUoe2zFs6TLJ4QQZVeA0n
+ Tr0L1NhS+ls26w6oeMQmRAdj;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l40gP-00054W-3I; Mon, 25 Jan 2021 12:09:25 +0000
-Subject: Re: [Release Planning 4.14] Samba 4.14.0rc2
-To: Nico Kadel-Garcia <nkadel@gmail.com>
-References: <a34d500e-e976-9cbf-08ce-83f1a32623da@samba.org>
- <CAOCN9rwAE2wsEkgkMmxvi6i2QxBvvaGNNcWh5E4=az3HwsA=ng@mail.gmail.com>
-Organization: Samba Team
-Message-ID: <f3f76bc2-6dcc-fbb6-21b3-b2c47803ce74@samba.org>
-Date: Mon, 25 Jan 2021 13:09:24 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1l4J8I-0006ZU-Sb; Tue, 26 Jan 2021 07:51:26 +0000
+Date: Tue, 26 Jan 2021 08:51:24 +0100
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.13.4 Available for Download
+Message-ID: <20210126075122.GA9182@carrie2.fritz.box>
 MIME-Version: 1.0
-In-Reply-To: <CAOCN9rwAE2wsEkgkMmxvi6i2QxBvvaGNNcWh5E4=az3HwsA=ng@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: de-DE
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="UlVJffcvxoiEqYs2"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,34 +55,116 @@ List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Karolin Seeger <kseeger@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Nico,
 
-Am 24.01.21 um 20:21 schrieb Nico Kadel-Garcia:
-> On Fri, Jan 22, 2021 at 4:51 AM Karolin Seeger via samba-technical
-> <samba-technical@lists.samba.org> wrote:
->>
->> Hi,
->>
->> Samba 4.14.0rc2 is scheduled for Thursday, February 18 2021.
-> 
-> Sadly, samba-4.14.0rc1 has a dependency on tallo-2.3.2. Any idea when
-> that will make it to https://ftp.samba.org/pub/talloc/ ?
+--UlVJffcvxoiEqYs2
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-talloc-2.3.2.tar.gz is meanwhile available on
-https://www.samba.org/ftp/talloc/.
+Release Announcements
+---------------------
 
-Thanks for the hint! :-)
+This is the latest stable release of the Samba 4.13 release series.
 
-Cheers,
-Karolin
 
--- 
-Karolin Seeger			https://samba.org/~kseeger/
-Release Manager Samba Team	https://samba.org
-Team Lead Samba SerNet		https://sernet.de
+Changes since 4.13.3
+--------------------
+
+o  Jeremy Allison <jra@samba.org>
+   * BUG 14607: Work around special SMB2 IOCTL response behavior of NetApp =
+Ontap
+     7.3.7.
+   * BUG 14612: Temporary DFS share setup doesn't set case parameters in the
+     same way as a regular share definition does.
+
+o  Dimitry Andric <dimitry@andric.com>
+   * BUG 14605: lib: Avoid declaring zero-length VLAs in various messaging
+     functions.
+
+o  Andrew Bartlett <abartlet@samba.org>
+   * BUG 14579: Do not create an empty DB when accessing a sam.ldb.
+
+o  Ralph Boehme <slow@samba.org>
+   * BUG 14596: vfs_fruit may close wrong backend fd.
+   * BUG 14612: Temporary DFS share setup doesn't set case parameters in the
+     same way as a regular share definition does.
+
+o  Arne Kreddig <arne@kreddig.net>
+   * BUG 14606: vfs_virusfilter: Allocate separate memory for config char*.
+
+o  Stefan Metzmacher <metze@samba.org>
+   * BUG 14596: vfs_fruit may close wrong backend fd.
+   * BUG 14607: Work around special SMB2 IOCTL response behavior of NetApp =
+Ontap
+     7.3.7.
+
+o  Andreas Schneider <asn@samba.org>
+   * BUG 14601: The cache directory for the user gencache should be created
+     recursively.
+
+o  Martin Schwenke <martin@meltin.net>
+   * BUG 14594: Be more flexible with repository names in CentOS 8 test
+     environments.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+        https://www.samba.org/samba/history/samba-4.13.4.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--UlVJffcvxoiEqYs2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCYA/J+AAKCRAoaL1+KxeT
+UQDAAKCES+zmy2cbo4JH30WWcO/N5LsX8QCfUoZ/9PipvCl30rSWJglgRoVTmew=
+=N/cX
+-----END PGP SIGNATURE-----
+
+--UlVJffcvxoiEqYs2--
 
