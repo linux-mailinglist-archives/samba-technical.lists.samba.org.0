@@ -2,51 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5BC9304087
-	for <lists+samba-technical@lfdr.de>; Tue, 26 Jan 2021 15:37:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EC8630454E
+	for <lists+samba-technical@lfdr.de>; Tue, 26 Jan 2021 18:29:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=2eyiPXfIzj+cxJk2rndiVQSAIgp8NWshiww9386kY2I=; b=EHQqoy6I7OwjFyvk9HgvZVZ33Y
-	A5v1qfEUrWCxUV3yO17ItPHTXAEWaUheiy1GLOUKStXlEX+Zxt9RbTlpxTtwXLcs7HVyyruQALU0L
-	MdMqvdTbm+cufHLCiR0/FMb5XgnpEn6sz6QLAyWTJYDMgW4R/Olq5XG9S06Z5mv87ieDe9gBX0PHo
-	cikmzrqdNBMkqw9QWDr6RBbpA6eDenjL6Gcx8+g+NlZ7LfArJbJjCC/yGoabwaFhHuLqqo9sGerbe
-	oQ+wnU6PHA7XNf/M/qp2nILGPsNaZPyATZCLY7RBnnaEBPAn53/hDfKillcENLbjF37r6k8ncLWWh
-	lFq/zzbA==;
-Received: from ip6-localhost ([::1]:28002 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=hTM0NuHHHR/M2bebc/zmAf5vsbPcSrrHw4HEYdLtLIo=; b=JRDPwFh7XguazA/8Op4jbLYuP9
+	91xQPGxHyYF/yJ2+uqrRGiQfTD+vOR8ew/nrhFSqc38qOt6lLlodBoNgWmk1ciebbxKf5vRZ3BuJ9
+	UG4mPJE2CjDSHgaMFbmREkAGEMW6GfQ7kMEx7iuRiup1kXUIl7hUoYPR/2EcgAFEg2wCsfZ7zJfbp
+	zHzCCanP99XiAios0pnw5TjIz94D3E6/KQnqCT8PZoVhDANGdTwa1Ol3+Acxo+xfVvx4AiutQyOes
+	SDXwm7+fYt3cfzmXQFf9OYEJ5XWnHnqjKAwefVsxAAq4uVSwWNRGYeyabC0/xWXYss9YrAWWzcS8a
+	5Rsnk5Xg==;
+Received: from ip6-localhost ([::1]:40014 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l4PS9-007ERi-5T; Tue, 26 Jan 2021 14:36:21 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59512) 
+	id 1l4S8x-007GQ0-48; Tue, 26 Jan 2021 17:28:43 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13154) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l4PS4-007ERb-8o
- for samba-technical@lists.samba.org; Tue, 26 Jan 2021 14:36:18 +0000
+ (Exim) id 1l4S8s-007GPt-M8
+ for samba-technical@lists.samba.org; Tue, 26 Jan 2021 17:28:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=2eyiPXfIzj+cxJk2rndiVQSAIgp8NWshiww9386kY2I=; b=kK5sRvr3FpfGdWVdjBpl6fcrh3
- 7w3G/+dqGLdr0qLhzVvY86U8CWp3qlBkQcBCsl+QlVl+njbzPriFMyqVB62Kvq0fUonv1JHQmkrxe
- A3K1aqP3NwDOL5X2UAKFYKhGAVIotQm01/0u7lX77ZPwxNgge5MLiIgBSRSdWJjRr6hM/mycp0Z1I
- mOYpXyB2es8ZfFRDJlcp0/YRMErWXgo96Qr6Pz5KXf8OpLHZtPttlayeKSoMef3ri/XjYEg3mEbN1
- kG+xZMgwlCRg7l90U6qZxSaJlaRDecYMJ99P8fCAuSUw/YkiT5gg+KwhppbZQbOFgXTnQmgy2y+Bz
- VIFZV13t6I2ClvFYGrQWSMAyHt4/+Hs7lDkvr+IHI1Y3RV4i7la4aK7HB3czGbIdhAbbHvtrB67HG
- k7y0XS8046KvOMtQyc1uCgU4HCITSXlPKk/Luu3cc1OwXRd6jVT2wRI/aggb/h3H5brvw8t7HcfaS
- QQQKasHbfNlu+ave/t9EAJxW;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=hTM0NuHHHR/M2bebc/zmAf5vsbPcSrrHw4HEYdLtLIo=; b=OyDkAvAyA1Vjn705aLAHjab/JV
+ IH4+7chrLjA/fNdmx0eSkScyM7wOj1cZ5vLuSInG36dTS3AO7VKXHWmQ4doJYHFcnwneKMzr03QLl
+ zEM/Z/B1PAC+20YfqFPdVtUJiRvfFcoTwH05kIeT0vHJiWVmTx1X7CPNTFhC6mBcryE1WoTdZfDhO
+ q3k29NW9ePGlg1cTHTbzffSSKTBBbnuP3sJ1fr34yqSpEoCTlNa/HoLQJCFL2ujVRFROyRlvnI5LG
+ bthpJ/XyNoiOAZ79N+i60IYWlFSxJ7dXoSbswv/Sk12wi9czdr7qG6ccwT9y31k+kTvVahyBBhOaX
+ JsgqrawgthMLKrDnq7CdsvW1426QdTUcobKmyaMBsOFe+lw5MKEjo93CEFFdNwZ2UNV984QO0Zq7t
+ ObqyU/uO38JfveybvHfMa6f824t92PkEkyXgUWUyUZ29fYprT/IIh2GdDDkY1hmmLSNCIEFBaSWoB
+ 4X1DWiqUyXQ9jsHiVXKcBvdS;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l4PRy-0004NJ-G3; Tue, 26 Jan 2021 14:36:10 +0000
-To: Namjae Jeon <namjae.jeon@samsung.com>,
- linux-cifsd-devel@lists.sourceforge.net
-References: <CGME20210126023109epcas1p257c4128a9d8673cb44f81dca636da39a@epcas1p2.samsung.com>
- <20210126022335.27311-1-namjae.jeon@samsung.com>
-Subject: Re: [Linux-cifsd-devel] [PATCH] cifsd: make xattr format of ksmbd
- compatible with samba's one
-Message-ID: <09887b1a-3303-9ac6-1d29-c53951be5324@samba.org>
-Date: Tue, 26 Jan 2021 15:36:04 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ (Exim) id 1l4S8q-0005nO-03; Tue, 26 Jan 2021 17:28:37 +0000
+Date: Tue, 26 Jan 2021 09:28:31 -0800
+To: =?iso-8859-1?Q?J=F4natas?= Hudler <jonatashudler@gmail.com>
+Subject: Re: Fwd: Help Needed: Samba share slow to query not existing files
+Message-ID: <20210126172831.GA966050@jeremy-acer>
+References: <CAGha7mH29snpcpmK14800yWynZVgJDEVTvQBTi31u5-9HBP3JA@mail.gmail.com>
+ <CAGha7mEdy-B29PMUzkxtiznNZJvwdo21fiwnh2kq7hf7tYKBAg@mail.gmail.com>
+ <20210120182055.GD29063@jeremy-acer>
+ <CAB5c7xpvSsM5oaPtQpJ-D92AFV6oHf-h37WAAZedsWckTtGRKg@mail.gmail.com>
+ <CAGha7mE2YTnwKhERFU5z4zvsYJoExLaNamzNfMA59MUxEo8RGQ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20210126022335.27311-1-namjae.jeon@samsung.com>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="C0dGR74xL4613Z5p7CjMYQYWAx1Y4Swbz"
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAGha7mE2YTnwKhERFU5z4zvsYJoExLaNamzNfMA59MUxEo8RGQ@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,83 +59,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Andrew Walker <awalker@ixsystems.com>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---C0dGR74xL4613Z5p7CjMYQYWAx1Y4Swbz
-Content-Type: multipart/mixed; boundary="wO5UQttwQyX0BdTJzVL9O059gdDym7VRt";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Namjae Jeon <namjae.jeon@samsung.com>,
- linux-cifsd-devel@lists.sourceforge.net
-Cc: Samba Technical <samba-technical@lists.samba.org>
-Message-ID: <09887b1a-3303-9ac6-1d29-c53951be5324@samba.org>
-Subject: Re: [Linux-cifsd-devel] [PATCH] cifsd: make xattr format of ksmbd
- compatible with samba's one
-References: <CGME20210126023109epcas1p257c4128a9d8673cb44f81dca636da39a@epcas1p2.samsung.com>
- <20210126022335.27311-1-namjae.jeon@samsung.com>
-In-Reply-To: <20210126022335.27311-1-namjae.jeon@samsung.com>
+On Tue, Jan 26, 2021 at 09:23:36AM -0300, Jônatas Hudler wrote:
+>Thanks everyone for all the suggestions and sorry for taking so long to
+>feedback.
+>
+>Jeremy's diagnosis was spot on - we applied the automatic case conversion
+>feature, following the parameters suggested (thanks!), dropped the
+>directory lookup lag drastically.
+>From my measure, performance is now more than an order of magnitude better
+>(for a given operation, dropped 30s to 2s).
+>
+>PS: There are some other questions that were raised back to me (Samba
+>version, why the others settings applied, ...) that are managed by my
+>client's IT support.
+>Since the issue is now solved, I'm not gonna bother you further with the
+>details, but I'll suggest my client to review/upgrade versions when
+>possible.
+>
+>Thank you all again for the prompt support!
 
---wO5UQttwQyX0BdTJzVL9O059gdDym7VRt
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi Namjae,
-
-> Samba team request that ksmbd should make xattr format of ksmbd compati=
-ble
-> with samba's one. When user replace samba with ksmbd or replace ksmbd
-> with samba, The written attribute and ACLs of xattr in file should be u=
-sed
-> on both server. This patch work the following ones.
->  1. make xattr prefix compaible.
->     - rename creation.time and file.attribute to DOSATTRIB.
->     - rename stream. to DosStream.
->     - rename sd. to NTACL.
->  2. use same dos attribute and ntacl structure compaible with samba.
->  3. create read/write encoding of ndr functions in ndr.c to store ndr
->     encoded metadata to xattr.
-
-Thanks a lot!
-
-Do you also have this a git commit in some repository?
-
-I played with ksmbd a bit in the last days.
-
-I can also test this commit and check if the resulting
-data is compatible with samba.
-
-metze
-
-
---wO5UQttwQyX0BdTJzVL9O059gdDym7VRt--
-
---C0dGR74xL4613Z5p7CjMYQYWAx1Y4Swbz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAmAQKNQACgkQDbX1YShp
-vVaLPw//S+x1nTYVUV4dbn1pWiZnT9bNHjLTHEgdBb/WuSzSAuTO8k12lNTTcx9V
-zFCKpoM7w2OJtZnetrck2EKBBF/EkDJCP5dsNi4AuLKoIEcoxzwQj/gduok44sxD
-tVTrm//yg2nJrMse4qhTeXFZN3PojUX/yLbZM2mH0wksBS1AbutKfXidnGGGBA1u
-Gm6muDamnNcg9mPOrvjpyLJdoMra14wUhkQvlOMrJXAtC3FZw0cqBTpBXOTBawQL
-+heWy80LRGLe32OJIEXCWFTWTvp+kfisw52tB/EnoQWaBafs7rFTCL000F3PqGSB
-BzncNu1sVtEdaYtYDjDLyZloGetsrnYrjKs+LK7EFF37nmU4AchXW2A6wzATKMku
-x0EliDmiW6WM4t/huqzQ0M6gFP5wb/Y8JyV3tKyMLzo6UvI1oSfwhL5u1iIpNYd7
-zEFyyzSDJBzzCPdt17p5RNL3uTNzJPh4tsu1LNrQ7BDswTkdhHIx7oiFTdneaO1y
-I5d5+VMK/H7fX6yioqzAGTOPVa7gm+gZ5sSuAZVIe1Tb67rEodBN2qU9y3cLnBg1
-zHs4DIeQeQUG63t13w/Yh37tKLgW4fi4vDTZsC+ITZG4+QqTZuY/5pjpo/Ca586q
-i06GLwLPogaLXnEdFgilPcOQxsl45zKdt+NYsU/N82Fd3qzSvlQ=
-=ZLL8
------END PGP SIGNATURE-----
-
---C0dGR74xL4613Z5p7CjMYQYWAx1Y4Swbz--
+No worries, I'm glad we were able to help you solve the problem !
 
