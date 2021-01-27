@@ -2,49 +2,126 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8BE5D305748
-	for <lists+samba-technical@lfdr.de>; Wed, 27 Jan 2021 10:47:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ADDF63058F4
+	for <lists+samba-technical@lfdr.de>; Wed, 27 Jan 2021 11:57:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=JwgwhXisXQYYVYYgvWKbU61rnUE/MAXLOXyjkOpcHcU=; b=T5AEiTOq1h+2lAc6d4FSIGXMbZ
-	3iCNWd9iGvDBYTBoaTPCNNMhMbp+uHzuw/w3YSS7m9icrnw45f/Og6QmDeDX4SkFKShSuGhVy6Kuy
-	9S4l2ACKyeiU/M8DKKAlkLqPdLaoFWNuHzO3QSsxiXywvwFuPx9rHdG26VfcGuR9MjXYNmCeC59Ux
-	Cowllx4PY8Dy2Th+vNIIK26RfLFYDQKQrdLX9/dmE1jWdSBQNjcJec3rhgD+OkIwwsm8qr42gpU+V
-	N1xfLcloz5H5le7bMN6NJqjQcSUx/DSd5O+C9nAYJWOMK6VJPQH17/JVZSYZGPbI1ZoRMLgABbx0O
-	7FA36HTg==;
-Received: from ip6-localhost ([::1]:24590 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=D5jrgJs5i4JMSBKbOnZT6tVEu1z13v3hiXLkLCZNLLo=; b=vdDXPQyzEXM4A4P7z7VECi7eVC
+	uGACJr+nz0fu5sJFlY3yGE4L/7enWUBwTFw9oUm5yilZn5YfCwDOp5pce3j3kbHSOMC55h6h+5NSN
+	W0Pb5y7JyPHhkI9EMPDBBzzjcvxS5r9T0d4lWTy+PFE/fDi7TzB78/C+G80LluWoaUDLqFloUZ/eh
+	RnqZ4yAuOLKokPD7YMbl4o8nZ4FdpvLL8gTSFMwRdsJ2ckSYQcei77iGMBdlvi8BxAb8Uu4qc1nqS
+	E5VqoKMQGi68EKeyhZOCBU4ufE9iPAgMnX+Upt+07euqlayqted8zRl2j9eFP5wwnkkQCl0hIQDwv
+	9CRffGvw==;
+Received: from ip6-localhost ([::1]:28306 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l4hPY-007MOx-2H; Wed, 27 Jan 2021 09:46:52 +0000
-Received: from ozlabs.org ([203.11.71.1]:42339) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l4hPO-007MOp-9j
- for samba-technical@lists.samba.org; Wed, 27 Jan 2021 09:46:48 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4DQdyv12HVz9sVX;
- Wed, 27 Jan 2021 20:46:15 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=202004;
- t=1611740775; bh=uV7FdODCoe0DXRH0cWXj+2vHYAxUUwuXyMFuBpP4SUc=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=YjqkauNsERD2iSVepWv6eNwaFseQc3KfiGeYBUFZVVzB2Cweebn97KmJdPW6uebtC
- JyjJpcHdkTKh6zf4wFlX+HyqIHRSsn5jPoPzdNBcP1XYKpnphawA8wHdFcidgrqPoC
- KV8qrKdgHDE3Xyuqd0W+oD4AY0OjmqZG/+30OHvJEfVyX4ouH8BgDwKHs2Qx0hhx9T
- +OzMmIqRQTAU51Xo65KyJExXykiPsF4fvajFlnhWdP5x7Wlfz7vlRUH5TBLiAuoeut
- mr4N50oLY+8uomNkZwOPsPaGN0ddaYPXul22euaSavYIFOhS2u8J9dVlbz6A0j0jEY
- ahSdKiZvtR1Hw==
-Date: Wed, 27 Jan 2021 20:46:13 +1100
-To: =?UTF-8?B?6aOO5peg5ZCN?= via samba-technical
- <samba-technical@lists.samba.org>
-Subject: Re: about active/active clustered nfs with ctdb
-Message-ID: <20210127204613.5735addd@martins.ozlabs.org>
-In-Reply-To: <387bc94a.4501.1772917b1cf.Coremail.wuming_81@163.com>
-References: <387bc94a.4501.1772917b1cf.Coremail.wuming_81@163.com>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+	id 1l4iVJ-007N3G-Cf; Wed, 27 Jan 2021 10:56:53 +0000
+Received: from de-smtp-delivery-102.mimecast.com ([62.140.7.102]:41216) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1l4iV8-007N39-Sg
+ for samba-technical@lists.samba.org; Wed, 27 Jan 2021 10:56:50 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1611744982;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=D5jrgJs5i4JMSBKbOnZT6tVEu1z13v3hiXLkLCZNLLo=;
+ b=D7108Y3mWxHrkZVI387DG6N2XB1n0xrVgJ6PtFOVtGY4tfVxbdEgOzIgLOgUh7Ac2gYeQP
+ 7Em7Q5uG+iWnHvCC5D8ksfyq7lOx9ZVBF10yH+KuQqGMAyyWNy8Y6kLiq1E08DrO/F2Nt0
+ rx5B2BQpiNQk3xF5CudYwM2ZESmA2eE=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1611744982;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=D5jrgJs5i4JMSBKbOnZT6tVEu1z13v3hiXLkLCZNLLo=;
+ b=D7108Y3mWxHrkZVI387DG6N2XB1n0xrVgJ6PtFOVtGY4tfVxbdEgOzIgLOgUh7Ac2gYeQP
+ 7Em7Q5uG+iWnHvCC5D8ksfyq7lOx9ZVBF10yH+KuQqGMAyyWNy8Y6kLiq1E08DrO/F2Nt0
+ rx5B2BQpiNQk3xF5CudYwM2ZESmA2eE=
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur01lp2051.outbound.protection.outlook.com [104.47.2.51]) (Using
+ TLS) by relay.mimecast.com with ESMTP id
+ de-mta-22-R2Zaq3JQNxiI3z-5_jlW7w-1; Wed, 27 Jan 2021 11:56:20 +0100
+X-MC-Unique: R2Zaq3JQNxiI3z-5_jlW7w-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jL+qaBagm08Rc8V8U5OVazJ7ke7kA6od7Au9Cd6oOe7eZbKj5V6wnODHrAO6CG8pUy/7uZNu1AeW13gepV8+X4BQ/32IMHsAwy6eLWUVt3H39y60lCK69PkD+nGAIBY0rIbDVgEXp5laRC6SXsqVQyaipLqHU3cin+M36nxWXuv20Upug+UHq3omLpFNQwZJt7MteG32KlS0GW3lA5BaLujWAhq03rAJ7XzuVkXFXyUR31wuJh47JAJfC+Bu9zLFH54aorZP71UDQh8VJcu83pAqcw6N7R6iHSRLpD6TK3KhPd8YDVWgf4qwYeMgLekqZ1VXUZrOSYalNKmW/DbABg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=D5jrgJs5i4JMSBKbOnZT6tVEu1z13v3hiXLkLCZNLLo=;
+ b=ETHq2GBPUx9kaezLDE1HsQpGzByCEyGK24zQhLzku039CSsc2P1L5SU5dq/Iex0vfzF6BFAa7pjd4Kbqx/k8SrRtUUADT6xIFt03jMe1pK+WMx8QtULGkkW0xvn7PlHOo6rC2WjKwvAWnKrWuZpE6fLOc2LUw3L3Nu6aO+JnMxmx5UBOvl/SEibu6trpNRDLPoTKN+3hWE35VpcqfakQXGzj1BTBXMB99z3SzeJ2f//xRbju/M6cL7BkJxVzAg20Vfx+UCXf0qQlr+HbXvASLNqeOb/Hw3YIY9YmX1DImMkzy8vJ6DAWjbrfr2wvLxNovHL/XiqtSZ5JpfE1vo6Idw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: adamharvey.name; dkim=none (message not signed)
+ header.d=none;adamharvey.name; dmarc=none action=none header.from=suse.com;
+Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com (2603:10a6:803:3::28)
+ by VE1PR04MB6655.eurprd04.prod.outlook.com (2603:10a6:803:119::26)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.13; Wed, 27 Jan
+ 2021 10:56:18 +0000
+Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com
+ ([fe80::9c1d:89de:a08e:ccc9]) by VI1PR0402MB3359.eurprd04.prod.outlook.com
+ ([fe80::9c1d:89de:a08e:ccc9%4]) with mapi id 15.20.3805.016; Wed, 27 Jan 2021
+ 10:56:18 +0000
+To: Adam Harvey <adam@adamharvey.name>, sfrench@samba.org,
+ linux-cifs@vger.kernel.org
+Subject: Re: [PATCH] cifs: ignore the noauto option if it is provided
+In-Reply-To: <20210127071020.18052-1-adam@adamharvey.name>
+References: <20210127071020.18052-1-adam@adamharvey.name>
+Date: Wed, 27 Jan 2021 11:56:15 +0100
+Message-ID: <87lfceabsg.fsf@suse.com>
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [2003:fa:705:9f70:a57b:e953:1c67:f634]
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from localhost (2003:fa:705:9f70:a57b:e953:1c67:f634) by
+ ZR0P278CA0029.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:1c::16) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3805.16 via Frontend Transport; Wed, 27 Jan 2021 10:56:18 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 74031fb1-833a-43ea-6e57-08d8c2b22cbd
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6655:
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Message-Info: T2ay9jKAWVMuqqT7etsa6XdO5crS6fynI7O9PYfOpTId239R0w01pOpFdXlsM4msJbaSq2sWoF2HLEoM1cgHAuaMae8GMLohv1dQ3ZmXVpP7t4FMG8YUxcWN4iq2lOSoPdQbO0uVN/ic49/LJ9A4jBRX5araMnddoedr9rpNBGykTFC/4q48n1Wv5diBmyLd7erLWloO/sur/BZzLY2ENYAGiFMeTqsfprUuBCdQDmYs90qD9wBJjaYLM8Ia91r72QIHi1hIgmDKCU7bCqCNM4jiWACDcNVYehPZ7hOtxsc5RSJ3QXxxrQjFvzYqR9TxySngBUd1MxztPYbzTEDIsMTiHrOInNQRAtR5lnik4PdzfJLESCxjnR8d6dvcfco3WkL2ex+hhBapy3fOZ3XaHifeXDIslsM8yBktodYje7Yepo4B8ICR9eWahIzQAhadK9MpA5QhUmph/lssn+lM+lkrUtFOGeRr40yzaiThlZTiyZ8Np9d534WUxJcTt4HWDE2bgA2PN4tXB1bSqloeyQ==
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?cWFBd3FGMnkvQStBV095dWNtUXFWNE5tSVJiVndlODFlMFI2K1pPRmtKUktS?=
+ =?utf-8?B?a0Vyd3VRTkRERjVzcDh0cFd5eWk5WVJRWUExK051RUlEbktURU5SaTY1Yzhr?=
+ =?utf-8?B?SlVXanZXTlBwbi93alJkVlJwNmxYL04zK0RleUsrSlUyMVhmbzRkeWZIeVgv?=
+ =?utf-8?B?VG5aZ01LYXlTSEVBVlJkNy80cCs3UXR6eklFTVlnQnU1LzFLNGJ1d3ZDa0o4?=
+ =?utf-8?B?b2pUYVc0eS9hWWtZK1FjMXV6VDgvVVo3NXFrQThrR2JHVHFGVDF3TXk3bllk?=
+ =?utf-8?B?U3liQzlIVXpLWUJPb3VVb1dkM1JhdldqTXBNVnJrWTdUZEdud2NMT0NtbENl?=
+ =?utf-8?B?dlFHSFRxL2Zza2xCRkxFTjFPN3dkdVRBY3oyWmVBR1lJNis3NXZhZjduc0cz?=
+ =?utf-8?B?b3RjM0FkK0hZZmorVlBuV0QvU3hxcGdBZTZzSmpMcGdQcHZaajdjdklNTGQ1?=
+ =?utf-8?B?MWJzUERxNGpsOWFVSkJFRzl6S1UrdXFSRFIwM1Q5MkdHL2hGNWhKRFMxWVN1?=
+ =?utf-8?B?eW9zdGFnZlE5MVYxajVLcGg4OUhISUx6aUpuK2dRY2RkRkZUbmhLTjRoMEND?=
+ =?utf-8?B?c2VZeGxVVUNUN0N5M2ZoK25PaTlrMnJ3RzYxT01iSk16SEljREVnWVhTUDl4?=
+ =?utf-8?B?c08yZkVyMTBWWThRUVVia2Ivc3BqWEhnWmZwWmJxQzVRQ2kyekJ2MEs4Qlhx?=
+ =?utf-8?B?S1ArK05RMVpaTWdKSUY1dm43c0pIZ21RVzZaaHVpRDdkZWJYQjA0STNGOVNJ?=
+ =?utf-8?B?OUkvV1dtN01NNENjU3dFUXZvUk1sRWI3Qm1yZWJCangySSt6QlZ1WFAwb0du?=
+ =?utf-8?B?aXRROUdtek5BdldIU0Q2M1V1MUliNTFIMjdFV29HWlFsdGNSQ0JSeWNZRGxh?=
+ =?utf-8?B?dUVOTU1abUM4RklYeU9HalVJUVJWelA3RFp0U0NXaDBZZnB4dFN5WnF0ZzR2?=
+ =?utf-8?B?Vm5mM1U1MWNONy9NbTd0M0dYcmZTd3JocHN0Y1dnUEJpUDU1NnAzUDMyMUJD?=
+ =?utf-8?B?UEx2dFNFU1podXhESU8reXFsVnYzT3RQWUpLdGdUc052eGJqR3RabHl5MnNy?=
+ =?utf-8?B?TmlVbDRsemMydTVsR0pJNG5qalk3cEZPYXc2aGp3VU5DUGZiZ2R6ZnJPRnRB?=
+ =?utf-8?B?NURXVVdJdTJtdWdMTXE4VDF0My8zaVpNYlZMWUk0S2RWRGFEU1FOUFVDa0dl?=
+ =?utf-8?B?ZlhKN1RvdjhDTHJzVUxzbjMwOGdIT3hFc1pPNnBzbTFheWUzUW5iWFBsS1ZE?=
+ =?utf-8?B?eUJKNFRoZjJCSTBoaUVjb0RqRW9uZHBQa3hWRmJBakhNYzFGK0VCVFJ4Yk9V?=
+ =?utf-8?B?NUpTb0t6M1EyR2pJTm45RVNUZ2FtRlJQcUUzbXZEdG1MWTAzemIwNzIwTVAw?=
+ =?utf-8?B?RzZOcXZZOE80TE1QdGRManpqekRKdkxTZXVlNFNJQ3luZThXVTgwblptNmlU?=
+ =?utf-8?B?R3FJcHY0eml6QzdxS3ZjOWR2UEQ3Y25XNDFDcW55TlVKMXVOUWxWbUFyTUFV?=
+ =?utf-8?Q?h4DFq14zvO9gZE8DxpdbOZfHWAf?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 74031fb1-833a-43ea-6e57-08d8c2b22cbd
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR0402MB3359.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: NNJsW4jRgLpH73Q9B6KrCRyPiL70/xh9FPXumrBZJNA2LvhI549+nI3Dk34Zg5Zc
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB6655
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,97 +135,37 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: =?UTF-8?B?6aOO5peg5ZCN?= <wuming_81@163.com>
+From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
+Cc: Adam Harvey <adam@adamharvey.name>, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Hi Adam,
 
-On Fri, 22 Jan 2021 15:55:54 +0800 (CST), =E9=A3=8E=E6=97=A0=E5=90=8D via s=
-amba-technical
-<samba-technical@lists.samba.org> wrote:
+Adam Harvey <adam@adamharvey.name> writes:
+> In 24e0a1eff9e2, the noauto option was missed when migrating to the new
+> mount API. As a result, users with noauto in their fstab mount options
+> are now unable to mount cifs filesystems, as they'll receive an "Unknown
+> parameter" error.
+>
+> This restores the old behaviour of ignoring noauto if it's given.
 
-> I want to build a nfs cluster:
->=20
-> 1) the nfs cluster  consists of three nodes(linux servers)
->=20
-> 2) each node has  logined an iscsi lun, i.e.
->=20
-> node_1 -> lun_1
->=20
-> node_2 -> lun_2
->=20
-> node_3 -> lun_3
->=20
-> 3) make xfs file system on each lun
->=20
-> 4) export each xfs file system via NFS
->=20
-> node_1 -> lun_1-> /share-1
->=20
-> node_2 -> lun_2-> /share-2
->=20
-> node_3 -> lun_3-> /share-3
->=20
-> 5) ctdb distributes public ips to the nodes
->=20
->=20
->=20
->=20
-> if one node is failed, ctdb redistributes its public ip to another living=
- node.
->=20
-> and the shell scripts executed by ctdb on the node, will mount the file s=
-ystem, restart nfs service etc.
->=20
-> if the failed node restarts, similar steps execute.
->=20
->=20
->=20
->=20
-> I have written some shell scripts to implement the above process.
->=20
-> I hope that during the lun/service moving process,=20
->=20
-> the file io on the mount points of the corresponding lun is blocked for o=
-ne or two minutes and succeeds after the moving process completed.=20
->=20
->=20
->=20
->=20
-> My test result is:
->=20
-> scenario 1: one node failed, another takes over its service
->=20
-> the file io on the mount point will be blocked almost everytime
->=20
->=20
->=20
->=20
-> scenario 2: failed node restarts
->=20
-> the file io on the mount point sometimes is blocked, sometimes the io(ope=
-n, write)  will encounter some error.
->=20
->=20
->=20
->=20
-> could I achieve my goal just through modifying/rewriting the shell script=
-?=20
->=20
-> or must I modify the kernel nfs or ctdb?=20
+I was looking at other fs code and it seems no one explicitely parses
+auto/noauto. Any idea why? This looks like it could be handled somewhere
+else.
 
-Are you using CTDB's 70.iscsi event script for this and adding the
-extra scripts that it suggests?
+Also I would have expected fsparam_flag_no("auto", Opt_ignore) to allow
+for both auto and noauto.
 
-Unfortunately, although I am one of the CTDB developers, I don't think
-I have ever tested this script so I am not sure how reliable it is.  :-(
+Cheers,
+--=20
+Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, D=
+E
+GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
+nchen)
 
-I'm CC:ing Ronnie, who originally wrote this event script, to see if he
-has any advice for you... if he can remember this at all...  :-)
-
-peace & happiness,
-martin
 
