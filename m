@@ -2,59 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D464E306A51
-	for <lists+samba-technical@lfdr.de>; Thu, 28 Jan 2021 02:26:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65051306ACA
+	for <lists+samba-technical@lfdr.de>; Thu, 28 Jan 2021 02:56:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=WLd3m2anYlo17qAtsO8VgbCYDsIU6XiczphB8GO6huw=; b=hhbAfXrNKd8E/IgpUNOfHlTwyB
-	xr++NoisluOhOOp9wUgqMDDhrsp0MX7mq5agBf595gyHxarkT4GiZ7rMq6MuXzSQAv3paFE5KBt1S
-	zEPZhsqd/zhr+zUUL+5fhBv0Kpm7Aakv2kUtSGJBledS5mebRUUMA2vDyLM5pSZidNSQC18Z1yORK
-	loW2qoKOpuyJWVsZV/rXxLw8ObgSmTWtjqTrOTaFxiVy4XfDpYl1xCKxzTRmsEyyAp4EwTmuy0Uqs
-	oZ7y7i2vT4QZaUopC2X15z3Omnky9c0Moc1M0suoqpZNFr6ojXCHh2KDYV6FmokTEtDOLIjZu6qMe
-	z80zhkwA==;
-Received: from ip6-localhost ([::1]:62444 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=5xCfCS58NjF3zH4riLTWGdq9+lYGtbCw4ScNeQZsZIc=; b=0mEi5iqvQNtOtfpq/WtXodcXOR
+	sC8RwOaxsuNJ6P3WBbK4vSRv0XsWsct7SK8V1p+tXENC2IK+aEN8GS07T8Jv1XHM9fSr/SHKkr+H9
+	8AzqomMIAojGQl6W5TosDTwW/kM2g2zB9IWksebBf6E6c4dhqvfq/XZVU4wjzHYY8dNyEdd+1zKBE
+	6Nzt8cbX63pRbE/QoWGkjEForD66hqth2JvwD88aS4v3TkUW4jFwSsTRDR7GBj7H6xOdERsgo9Dx3
+	2vDFrIrdKGFsI8ilvtwGJOdSZ8beyG/KmCElajwyqw7EuUuNbUJmNnw/FKzdYhTYYfkPurL6fmkf2
+	zXNp6TWA==;
+Received: from ip6-localhost ([::1]:63156 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l4w40-007TMF-2E; Thu, 28 Jan 2021 01:25:36 +0000
-Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229]:38649) 
+	id 1l4wXd-007TUp-Ky; Thu, 28 Jan 2021 01:56:13 +0000
+Received: from m13128.mail.163.com ([220.181.13.128]:59415) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l4w3u-007TM8-Ec
- for samba-technical@lists.samba.org; Thu, 28 Jan 2021 01:25:33 +0000
-Received: by mail-lj1-x229.google.com with SMTP id f19so4401623ljn.5
- for <samba-technical@lists.samba.org>; Wed, 27 Jan 2021 17:25:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=WLd3m2anYlo17qAtsO8VgbCYDsIU6XiczphB8GO6huw=;
- b=SoKadgDRoNoj6UGC70fPujkcwFTJbTZfdsCRUZ7zFqhFFp9pN/Vfepmhlr+k6H8BdN
- YCfzmtJlJOvlwg4zd2SEGF+Q/MLsexpz89EyBqjVpiWMszoNWHYD7cZmOl7tHdLcQrN2
- TwYn6jMVIAnJRn+H2gHlW8G9kbdSJuq2CcJeofCMiQja+n4vMXBdR6XjYK0x8TWbieUg
- C8bCJDZPtBIG8vrFgYyQyq//qeeKqTDDPhEVOmseAzuoh8Wx8Hs4HrTmYxtwvhUFjZQZ
- SHMUrHc4vk8pjq6Gqka2r7r0v3/ELIF2eIh1Uv7rWTQgM0n7xDyeHwPG3NgAKS4ILkdV
- AecQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=WLd3m2anYlo17qAtsO8VgbCYDsIU6XiczphB8GO6huw=;
- b=ryS2NsbHtUiUf5gtIe/XWNqA480CchSRbmKruILHTmgrI9kTbi8eXQFkuswXsKxPr/
- o/jVAFbnLgWVuL/YfWj0r+hZNWfmocsXYyc0Rl7Gbt73UU1YWWlx6SQ2yQyemEnhWW2h
- 635aC9UK0Erny56CAmCd8453hjTiIq/h//R7IdFPIK3b3xlrPSfQhg0tLc+0epd0+syD
- XfAOJBEoNGGozw2ScIOkoEDI8lkNLUv0BVKd88mj5PUbt2/iNHtVqovD+O5lR9UvIRv6
- MiS7x9JKdBI4+ksTB32ZgkEgxJJO9Jfu1VXeT4PXbpBzTKqnU8DSTRWdTnY9O+yyVNHx
- 43WQ==
-X-Gm-Message-State: AOAM532C8Pi1Bbc5TWLIIR+JmaMlabJhEkQQtFhM/bZhu8OsPpExiBqg
- 1/Ur3N9eII1/w0PVYT8vMctOaBHhG5av3Tv1WFw=
-X-Google-Smtp-Source: ABdhPJxWx9kEFeFSk0sDQudKK0YOVgZ5UA6BjqHXogEnSCpCA4PfEhO0jaEzg5vJiwYvrIo13R0FVIpivr56+A03XGQ=
-X-Received: by 2002:a2e:86c1:: with SMTP id n1mr138735ljj.148.1611797116842;
- Wed, 27 Jan 2021 17:25:16 -0800 (PST)
+ (Exim) id 1l4wXR-007TTh-4H
+ for samba-technical@lists.samba.org; Thu, 28 Jan 2021 01:56:11 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=MsPq8
+ ZSwwnW4YDHNfuhg67GLdl/2S3t2SIbAeE3e47g=; b=NNn00wGmsK6SC4M/2DIRX
+ /Nv/Sgc0hh1TB5qzwpSY/pLIcA6f4xTzT9H9GUtc/cxVEuZSgG6xBmY74/1iBG9I
+ WQyN+aaqONeLcXMFofgp1unwAAvdAeQi5kwYANGkI9ilDZmUo+mIUcG16OaQJ36V
+ dYrMQk/v5pTRB1zRDN8J+s=
+Received: from wuming_81$163.com ( [123.116.97.153] ) by
+ ajax-webmail-wmsvr128 (Coremail) ; Thu, 28 Jan 2021 09:55:29 +0800 (CST)
+X-Originating-IP: [123.116.97.153]
+Date: Thu, 28 Jan 2021 09:55:29 +0800 (CST)
+To: "Martin Schwenke" <martin@meltin.net>
+Subject: Re:Re: about active/active clustered nfs with ctdb
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.13 build 20201118(ab4b390f)
+ Copyright (c) 2002-2021 www.mailtech.cn 163com
+In-Reply-To: <20210127204613.5735addd@martins.ozlabs.org>
+References: <387bc94a.4501.1772917b1cf.Coremail.wuming_81@163.com>
+ <20210127204613.5735addd@martins.ozlabs.org>
+X-CM-CTRLDATA: tgNUXmZvb3Rlcl9odG09MzkyMzo1Ng==
 MIME-Version: 1.0
-References: <CADajX4DzoNehHZGqpd+3Bh0yM2U=B6AwL6bJ2EM6t6hkvr7L4Q@mail.gmail.com>
- <20210127214434.3882-1-adam@adamharvey.name>
-In-Reply-To: <20210127214434.3882-1-adam@adamharvey.name>
-Date: Wed, 27 Jan 2021 19:25:05 -0600
-Message-ID: <CAH2r5muXg8-8vQGXXq_4JO_HgnUkvzkPcOpU3FsBJC9YsbJvxA@mail.gmail.com>
-Subject: Re: [PATCH] cifs: ignore auto and noauto options if given
-To: Adam Harvey <adam@adamharvey.name>
-Content-Type: text/plain; charset="UTF-8"
+Message-ID: <545e1ab2.ef9.17746b3e063.Coremail.wuming_81@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: gMGowAD3_0ORGRJgVoS3AA--.39305W
+X-CM-SenderInfo: pzxpx0ljbyiqqrwthudrp/1tbiHhEocFSIsi8tMgAAsJ
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Type: text/plain; charset=GBK
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,56 +60,61 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>
+From: =?utf-8?b?6aOO5peg5ZCNIHZpYSBzYW1iYS10ZWNobmljYWw=?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?GBK?B?t+fO3sP7?= <wuming_81@163.com>
+Cc: =?GBK?Q?=B7=E7=CE=DE=C3=FB_via_samba-technical?=
+ <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Merged into cifs-2.6.git (seems harmless, and probably slightly safer
-to include this - even though currently I can't reproduce the reported
-problem).
-
-Let me know if anyone else has been able to reproduce it - even with
-Adam's suggested /etc/fstab line, I wasn't able to repro it.
-
-On Wed, Jan 27, 2021 at 3:44 PM Adam Harvey <adam@adamharvey.name> wrote:
->
-> In 24e0a1eff9e2, the noauto and auto options were missed when migrating
-> to the new mount API. As a result, users with noauto in their fstab
-> mount options are now unable to mount cifs filesystems, as they'll
-> receive an "Unknown parameter" error.
->
-> This restores the old behaviour of ignoring noauto and auto if they're
-> given.
->
-> Fixes: 24e0a1eff9e2 ("cifs: switch to new mount api")
-> Signed-off-by: Adam Harvey <adam@adamharvey.name>
-> ---
->  fs/cifs/fs_context.c | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/fs/cifs/fs_context.c b/fs/cifs/fs_context.c
-> index 076bcadc756a..62818b142e2e 100644
-> --- a/fs/cifs/fs_context.c
-> +++ b/fs/cifs/fs_context.c
-> @@ -175,6 +175,7 @@ const struct fs_parameter_spec smb3_fs_parameters[] = {
->         fsparam_flag_no("exec", Opt_ignore),
->         fsparam_flag_no("dev", Opt_ignore),
->         fsparam_flag_no("mand", Opt_ignore),
-> +       fsparam_flag_no("auto", Opt_ignore),
->         fsparam_string("cred", Opt_ignore),
->         fsparam_string("credentials", Opt_ignore),
->         {}
-> --
-> 2.30.0
->
-
-
--- 
-Thanks,
-
-Steve
-
+bWFydGluLCB0aGFua3MgZm9yIHlvdXIgcmVwbHkuCk5vLCBJIGRpZCBub3QgbW9kaWZ5IDcwLmlz
+Y3NpLiBNYXliZSBJIG5lZWQgdG8gbWFrZSBmdWxsIHVuZGVyc3RhbmRpbmcgb2YgaXQuCgoKYWZ0
+ZXIgbWFueSBkYXlzIHJlYWRpbmcvZGVidWdpbmcgdGhlIHNvdXJjZSBjb2RlIG9mIGN0ZGIgYW5k
+IGl0cyBzaGVsbCBzY3JpcHRzLCBJIGZvdW5kIHRoZSBrZXkgcG9pbnQgaW4gdGhlIHNjcmlwdCAx
+MC5pbnRlcmZhY2UuIApteSBtb2RpZmljYXRpb24gIGlzOgoxIGNyZWF0ZSBuZnMgc2hhcmUobW91
+bnQgZnMsIG1vZGlmeSAvZXRjL2V4cG9ydHMsIHJlc3RhcnQgbmZzIHNlcnZpY2UgLi4pIGJlZm9y
+ZSBhbnkgcHVibGljIGlwIGlzIGFkZGVkIHRvIHNvbWUgaW50ZXJmYWNlCjIgZGVsZXRlIHRoZSBj
+b3JyZXNwb25kaW5nIG5mcyBzaGFyZSBhZnRlciBhbnkgcHVibGljIGlwIGlzIHJlbW92ZWQgZnJv
+bSBzb21lIGludGVyZmFjZQoKCkkgdGVzdGVkIG1hbnkgc2h1dGRvd24tcmVib290IGN5Y2xlcyAo
+b2Ygbm9kZSBpbiBhIGN0ZGIgY2x1c3RlciksIGFuZCB0aGUgcmVzdWx0cyBhcmUgdGhlIHNhbWUg
+YXMgbXkgZXhwZWN0YXRpb24uCkkgdGhpbmsgSSBuZWVkIG1vcmUgdGVzdHMgYW5kIG1vcmUgc2Nl
+bmFyaW8gdGVzdHMuCgpUaGFua3MgZm9yIGFueW9uZSdzIGFkdmljZS4KCgoKCgoKCgpBdCAyMDIx
+LTAxLTI3IDE3OjQ2OjEzLCAiTWFydGluIFNjaHdlbmtlIiA8bWFydGluQG1lbHRpbi5uZXQ+IHdy
+b3RlOgo+SGksCj4KPk9uIEZyaSwgMjIgSmFuIDIwMjEgMTU6NTU6NTQgKzA4MDAgKENTVCksILfn
+zt7D+yB2aWEgc2FtYmEtdGVjaG5pY2FsCj48c2FtYmEtdGVjaG5pY2FsQGxpc3RzLnNhbWJhLm9y
+Zz4gd3JvdGU6Cj4KPj4gSSB3YW50IHRvIGJ1aWxkIGEgbmZzIGNsdXN0ZXI6Cj4+IAo+PiAxKSB0
+aGUgbmZzIGNsdXN0ZXIgIGNvbnNpc3RzIG9mIHRocmVlIG5vZGVzKGxpbnV4IHNlcnZlcnMpCj4+
+IAo+PiAyKSBlYWNoIG5vZGUgaGFzICBsb2dpbmVkIGFuIGlzY3NpIGx1biwgaS5lLgo+PiAKPj4g
+bm9kZV8xIC0+IGx1bl8xCj4+IAo+PiBub2RlXzIgLT4gbHVuXzIKPj4gCj4+IG5vZGVfMyAtPiBs
+dW5fMwo+PiAKPj4gMykgbWFrZSB4ZnMgZmlsZSBzeXN0ZW0gb24gZWFjaCBsdW4KPj4gCj4+IDQp
+IGV4cG9ydCBlYWNoIHhmcyBmaWxlIHN5c3RlbSB2aWEgTkZTCj4+IAo+PiBub2RlXzEgLT4gbHVu
+XzEtPiAvc2hhcmUtMQo+PiAKPj4gbm9kZV8yIC0+IGx1bl8yLT4gL3NoYXJlLTIKPj4gCj4+IG5v
+ZGVfMyAtPiBsdW5fMy0+IC9zaGFyZS0zCj4+IAo+PiA1KSBjdGRiIGRpc3RyaWJ1dGVzIHB1Ymxp
+YyBpcHMgdG8gdGhlIG5vZGVzCj4+IAo+PiAKPj4gCj4+IAo+PiBpZiBvbmUgbm9kZSBpcyBmYWls
+ZWQsIGN0ZGIgcmVkaXN0cmlidXRlcyBpdHMgcHVibGljIGlwIHRvIGFub3RoZXIgbGl2aW5nIG5v
+ZGUuCj4+IAo+PiBhbmQgdGhlIHNoZWxsIHNjcmlwdHMgZXhlY3V0ZWQgYnkgY3RkYiBvbiB0aGUg
+bm9kZSwgd2lsbCBtb3VudCB0aGUgZmlsZSBzeXN0ZW0sIHJlc3RhcnQgbmZzIHNlcnZpY2UgZXRj
+Lgo+PiAKPj4gaWYgdGhlIGZhaWxlZCBub2RlIHJlc3RhcnRzLCBzaW1pbGFyIHN0ZXBzIGV4ZWN1
+dGUuCj4+IAo+PiAKPj4gCj4+IAo+PiBJIGhhdmUgd3JpdHRlbiBzb21lIHNoZWxsIHNjcmlwdHMg
+dG8gaW1wbGVtZW50IHRoZSBhYm92ZSBwcm9jZXNzLgo+PiAKPj4gSSBob3BlIHRoYXQgZHVyaW5n
+IHRoZSBsdW4vc2VydmljZSBtb3ZpbmcgcHJvY2VzcywgCj4+IAo+PiB0aGUgZmlsZSBpbyBvbiB0
+aGUgbW91bnQgcG9pbnRzIG9mIHRoZSBjb3JyZXNwb25kaW5nIGx1biBpcyBibG9ja2VkIGZvciBv
+bmUgb3IgdHdvIG1pbnV0ZXMgYW5kIHN1Y2NlZWRzIGFmdGVyIHRoZSBtb3ZpbmcgcHJvY2VzcyBj
+b21wbGV0ZWQuIAo+PiAKPj4gCj4+IAo+PiAKPj4gTXkgdGVzdCByZXN1bHQgaXM6Cj4+IAo+PiBz
+Y2VuYXJpbyAxOiBvbmUgbm9kZSBmYWlsZWQsIGFub3RoZXIgdGFrZXMgb3ZlciBpdHMgc2Vydmlj
+ZQo+PiAKPj4gdGhlIGZpbGUgaW8gb24gdGhlIG1vdW50IHBvaW50IHdpbGwgYmUgYmxvY2tlZCBh
+bG1vc3QgZXZlcnl0aW1lCj4+IAo+PiAKPj4gCj4+IAo+PiBzY2VuYXJpbyAyOiBmYWlsZWQgbm9k
+ZSByZXN0YXJ0cwo+PiAKPj4gdGhlIGZpbGUgaW8gb24gdGhlIG1vdW50IHBvaW50IHNvbWV0aW1l
+cyBpcyBibG9ja2VkLCBzb21ldGltZXMgdGhlIGlvKG9wZW4sIHdyaXRlKSAgd2lsbCBlbmNvdW50
+ZXIgc29tZSBlcnJvci4KPj4gCj4+IAo+PiAKPj4gCj4+IGNvdWxkIEkgYWNoaWV2ZSBteSBnb2Fs
+IGp1c3QgdGhyb3VnaCBtb2RpZnlpbmcvcmV3cml0aW5nIHRoZSBzaGVsbCBzY3JpcHQ/IAo+PiAK
+Pj4gb3IgbXVzdCBJIG1vZGlmeSB0aGUga2VybmVsIG5mcyBvciBjdGRiPyAKPgo+QXJlIHlvdSB1
+c2luZyBDVERCJ3MgNzAuaXNjc2kgZXZlbnQgc2NyaXB0IGZvciB0aGlzIGFuZCBhZGRpbmcgdGhl
+Cj5leHRyYSBzY3JpcHRzIHRoYXQgaXQgc3VnZ2VzdHM/Cj4KPlVuZm9ydHVuYXRlbHksIGFsdGhv
+dWdoIEkgYW0gb25lIG9mIHRoZSBDVERCIGRldmVsb3BlcnMsIEkgZG9uJ3QgdGhpbmsKPkkgaGF2
+ZSBldmVyIHRlc3RlZCB0aGlzIHNjcmlwdCBzbyBJIGFtIG5vdCBzdXJlIGhvdyByZWxpYWJsZSBp
+dCBpcy4gIDotKAo+Cj5JJ20gQ0M6aW5nIFJvbm5pZSwgd2hvIG9yaWdpbmFsbHkgd3JvdGUgdGhp
+cyBldmVudCBzY3JpcHQsIHRvIHNlZSBpZiBoZQo+aGFzIGFueSBhZHZpY2UgZm9yIHlvdS4uLiBp
+ZiBoZSBjYW4gcmVtZW1iZXIgdGhpcyBhdCBhbGwuLi4gIDotKQo+Cj5wZWFjZSAmIGhhcHBpbmVz
+cywKPm1hcnRpbgo=
