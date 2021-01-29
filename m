@@ -2,83 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0DC2F3085FE
-	for <lists+samba-technical@lfdr.de>; Fri, 29 Jan 2021 07:47:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABFDC3086EB
+	for <lists+samba-technical@lfdr.de>; Fri, 29 Jan 2021 09:16:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=RXd25SRWfoY2nTbt+u1KDBqLf/DWCOJY1dsYxRcd2qo=; b=PljqhLLbR7Xq9X7MGIvr+Tvy8U
-	z3+WC4zPMZVaoGKNrorBIWPD4ZbM8jVJf2XLYEMoKRNbxdveSy4ejp6W6LMMA63INJmuvsCAjZLRL
-	l4FVMNHqA7kOCHisV+RDRfaVByp2fqtfP+cKrYGoATXU3VHjD+Lqe9cnn2iBnQS6/7rPjjwCaz3wS
-	V8T6kpUGW8KCCNNJgQE0O41V0+dLcG3lpmIJeAR5mGxSNxleYKueQljRjjctyH/fquMUxEmDKdFq4
-	jBTTM/LxLQlsY/85cOvTXE1Mo5fDp+cnJ/quQAwI7uLrUhH2zpv6nzVWDn+WPLwJoXPX2UWPsqRzm
-	OJIiX98w==;
-Received: from ip6-localhost ([::1]:43676 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=v0lSLfNQ55103g2LeaghaktwLEdR1N4xp/2fM7gyuCU=; b=1rWVraQV1SPUt3vUK9dboTGHAE
+	kPxcv3UiyQZ8zJ6HAKo52I0EC2vByqj5xpmLKR0jTt9aeUYsKrIRS4PEG5RDy8EQ28bGzFQOP2i0e
+	PJvkw52X3Og9yNUSONDNOQvAW34emcDb8KV8UVS27ZBuh9JiZFMuzBDbW6tSI3KpmwV32OvUqQQyO
+	bCkXtIORz9o8l3S5sKkmHRG60emINPptARq9P2f5ra53A3y/UTkToOSip4r8mxU/2ALf4gbe5JWsg
+	Nahe11GX2p0fmgLQwniTh9C9cJfnkzIb5+vB9DoO8Is8vnrGhFZdzH5zAuS59hEQEKYFgS2iDmApY
+	k0MoDVjw==;
+Received: from ip6-localhost ([::1]:46842 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l5NYT-007gnU-JH; Fri, 29 Jan 2021 06:46:53 +0000
-Received: from mailout4.samsung.com ([203.254.224.34]:30018) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1l5NY9-007gnL-Oj
- for samba-technical@lists.samba.org; Fri, 29 Jan 2021 06:46:41 +0000
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20210129064624epoutp0440d286b25f5b9f1658cc7acc8fcc2005~eoQrGs28u0536905369epoutp04b
- for <samba-technical@lists.samba.org>; Fri, 29 Jan 2021 06:46:24 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20210129064624epoutp0440d286b25f5b9f1658cc7acc8fcc2005~eoQrGs28u0536905369epoutp04b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1611902784;
- bh=RXd25SRWfoY2nTbt+u1KDBqLf/DWCOJY1dsYxRcd2qo=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=Z9psCGxOOX8SGYB8PgWUF/7sATRKeWblDBF/3S44o4Td7txn7BNYOtr9ByYKaynji
- eUphrB7zxDVDZzpXFLdkRgOIFn86Qa1ji4THH8E9oJLys1NIULdKttZxCcmZISF8mP
- zMPdlSlkj2KMsGGqgDyu5oU1aIR0ASZaK/bDlfn8=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20210129064623epcas1p381ded6577598a37b9b6eef076ac82ceb~eoQqoIyKm1789917899epcas1p3N;
- Fri, 29 Jan 2021 06:46:23 +0000 (GMT)
-Received: from epsmges1p4.samsung.com (unknown [182.195.40.166]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4DRntQ5C3mz4x9Q0; Fri, 29 Jan
- 2021 06:46:22 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
- epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- 65.CF.10463.D3FA3106; Fri, 29 Jan 2021 15:46:21 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20210129064621epcas1p4cdd0c443d35f6769eb27896c4023c68b~eoQoYgIQg0860108601epcas1p4F;
- Fri, 29 Jan 2021 06:46:21 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20210129064621epsmtrp296c4537205e526252337eb05c4fef409~eoQoX2yZ11898818988epsmtrp2g;
- Fri, 29 Jan 2021 06:46:21 +0000 (GMT)
-X-AuditID: b6c32a38-f11ff700000028df-d6-6013af3d630e
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 7F.BE.13470.D3FA3106; Fri, 29 Jan 2021 15:46:21 +0900 (KST)
-Received: from namjaejeon01 (unknown [10.88.104.63]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20210129064621epsmtip26e7ef18149891bea2f4ccd3e0fd8ec41~eoQoJpBvc2371123711epsmtip2T;
- Fri, 29 Jan 2021 06:46:21 +0000 (GMT)
-To: "'Steve French'" <smfrench@gmail.com>
-In-Reply-To: <CAH2r5mtUEYDyFGesXGsK_rP2007EP3X58i9-NFUY=ZMZR-hU1g@mail.gmail.com>
-Subject: RE: [smfrench/smb3-kernel] Cifsd fixes (#21)
-Date: Fri, 29 Jan 2021 15:46:21 +0900
-Message-ID: <065901d6f60a$74250f60$5c6f2e20$@samsung.com>
+	id 1l5OwL-007hLO-Hp; Fri, 29 Jan 2021 08:15:37 +0000
+Received: from m138.mail.163.com ([220.181.13.8]:14089) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1l5OwF-007hLH-Nw
+ for samba-technical@lists.samba.org; Fri, 29 Jan 2021 08:15:35 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=Gub0b
+ IDPwe0Ze46Zy7pEKE9adoC3qb4xTK1EgoyD3eI=; b=c92ITlbxrQP9bHo5nZlrs
+ pMPejAXmLYY2HK9lUfNXbeTDCCOMFP/zXaCdqh2HSZJebJz9nROSbbASKuQPhn85
+ SbCM5C6q1/ErxH6Fr7OkcRpeyQOlyc7KTMDs7w7mQmEvaPQBPcSVAlmpcdZ611A9
+ jH72kWwjzTlffKIlm9r86U=
+Received: from wuming_81$163.com ( [123.116.97.153] ) by ajax-webmail-wmsvr8
+ (Coremail) ; Fri, 29 Jan 2021 16:15:18 +0800 (CST)
+X-Originating-IP: [123.116.97.153]
+Date: Fri, 29 Jan 2021 16:15:18 +0800 (CST)
+To: "ronnie sahlberg" <ronniesahlberg@gmail.com>
+Subject: Re:Re: Re: about active/active clustered nfs with ctdb
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.13 build 20201118(ab4b390f)
+ Copyright (c) 2002-2021 www.mailtech.cn 163com
+In-Reply-To: <CAN05THR4WtBJoPt9FRMs3zYmargQ0Y8VFQiL-LvW+1g5RVDcQA@mail.gmail.com>
+References: <387bc94a.4501.1772917b1cf.Coremail.wuming_81@163.com>
+ <20210127204613.5735addd@martins.ozlabs.org>
+ <545e1ab2.ef9.17746b3e063.Coremail.wuming_81@163.com>
+ <20210128202516.40677c83@martins.ozlabs.org>
+ <3cabb185.5677.177486f8025.Coremail.wuming_81@163.com>
+ <CAN05THR4WtBJoPt9FRMs3zYmargQ0Y8VFQiL-LvW+1g5RVDcQA@mail.gmail.com>
+X-CM-CTRLDATA: xi123WZvb3Rlcl9odG09NjY4Nzo1Ng==
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQKO2sTUpITPh+sHKLzlg7jsYYbg1AIhnnAyAet98GaorfYJMA==
-Content-Language: ko
-X-CMS-MailID: 20210129064621epcas1p4cdd0c443d35f6769eb27896c4023c68b
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: SVC_REQ_APPROVE
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20210129062124epcas1p206df70947094d8b785d03038414a8fbf
-References: <smfrench/smb3-kernel/pull/21@github.com>
- <CGME20210129062124epcas1p206df70947094d8b785d03038414a8fbf@epcas1p2.samsung.com>
- <CAH2r5mtUEYDyFGesXGsK_rP2007EP3X58i9-NFUY=ZMZR-hU1g@mail.gmail.com>
+Message-ID: <61f3edb3.3440.1774d35f928.Coremail.wuming_81@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: CMGowABnukEWxBNgnUmKAA--.45221W
+X-CM-SenderInfo: pzxpx0ljbyiqqrwthudrp/xtbBRQ0pcFPAJ0u84gACsy
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Type: text/plain; charset=GBK
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,147 +64,105 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <namjae.jeon@samsung.com>
-Cc: 'CIFS' <linux-cifs@vger.kernel.org>,
- 'samba-technical' <samba-technical@lists.samba.org>
+From: =?utf-8?b?6aOO5peg5ZCNIHZpYSBzYW1iYS10ZWNobmljYWw=?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?GBK?B?t+fO3sP7?= <wuming_81@163.com>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Steve,
-
-> Merged into smb3-kernel github tree, and rebased on 5.11-rc5 pending more=
- testing (will try to kick off more testing this weekend).
-Okay=21 Let me know if there is any issue.
-
-Thanks=21
----------- Forwarded message ---------
-From: Namjae Jeon <mailto:notifications=40github.com>
-Date: Wed, Jan 27, 2021 at 11:25 PM
-Subject: =5Bsmfrench/smb3-kernel=5D Cifsd fixes (=2321)
-To: smfrench/smb3-kernel <mailto:smb3-kernel=40noreply.github.com>
-Cc: Subscribed <mailto:subscribed=40noreply.github.com>
-
-Description for this pull request:
-=E2=80=A2=20Avoid=20calling=20ksmbd_override_fsids=20recursively.=0D=0A=E2=
-=80=A2=20Make=20xattr=20format=20of=20ksmbd=20compatible=20with=20samba's=
-=20one.=0D=0A=E2=80=A2=20Use=20netdevice_notifier=20to=20configure=20TCP=20=
-listeners.=0D=0A=E2=80=A2=20Fix=20a=20build=20break=20with=20linux-5.11=20k=
-ernel.=0D=0A________________________________________=0D=0AYou=20can=20view,=
-=20comment=20on,=20or=20merge=20this=20pull=20request=20online=20at:=0D=0A=
-=20=20https://protect2.fireeye.com/v1/url?k=3D18f3920f-4768ab42-18f21940-0c=
-c47aa8f5ba-ab8c74262ebe1a56&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&=
-u=3Dhttps%3A%2F%2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21=0D=0AComm=
-it=20Summary=0D=0A=E2=80=A2=20cifsd:=20set=20supplementary=20groups=20when=
-=20overriding=20credentials=0D=0A=E2=80=A2=20cifsd:=20avoid=20calling=20ksm=
-bd_override_fsids=20recursively=0D=0A=E2=80=A2=20cifsd:=20Change=20alloc_if=
-ace()=20return=20type=20in=20transport_tcp.c=0D=0A=E2=80=A2=20cifsd:=20Use=
-=20netdevice_notifier=20to=20configure=20TCP=20listeners=0D=0A=E2=80=A2=20c=
-ifsd:=20fix=20a=20memleak=20from=20netdevice_notifier=0D=0A=E2=80=A2=20cifs=
-d:=20make=20xattr=20format=20of=20ksmbd=20compatible=20with=20samba's=20one=
-=0D=0A=E2=80=A2=20cifsd:=20macros=20with=20complex=20values=20should=20be=
-=20enclosed=20in=20parentheses=0D=0A=E2=80=A2=20cifsd:=20fix=20build=20brea=
-k=20with=20linux-5.11=20kernel=0D=0AFile=20Changes=0D=0A=E2=80=A2=20M=20htt=
-ps://protect2.fireeye.com/v1/url?k=3Dbf9741e7-e00c78aa-bf96caa8-0cc47aa8f5b=
-a-9454fbda87bb8569&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps=
-%3A%2F%2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21%2Ffiles%23diff-13a=
-1445bc5afcf91b3135cfc53c83b546ff6741cd17902937b4030162990820e=20(2)=20=0D=
-=0A=E2=80=A2=20M=20https://protect2.fireeye.com/v1/url?k=3D0c02a494-53999dd=
-9-0c032fdb-0cc47aa8f5ba-d9e8ed4b3ee97c82&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-=
-89b1f0f8bc1a&u=3Dhttps%3A%2F%2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2=
-F21%2Ffiles%23diff-381fb3a09da3451eeea4ae3029730c1c92bbed381327f311fd1e153a=
-d96590aa=20(34)=20=0D=0A=E2=80=A2=20M=20https://protect2.fireeye.com/v1/url=
-?k=3D43e265ba-1c795cf7-43e3eef5-0cc47aa8f5ba-4b5da940e32670cf&q=3D1&e=3D881=
-cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%2Fgithub.com%2Fsmfrench%2=
-Fsmb3-kernel%2Fpull%2F21%2Ffiles%23diff-9ee6f94aa7c97acc87330571f4974c284e3=
-638682d8662419067ac7049bca740=20(2)=20=0D=0A=E2=80=A2=20M=20https://protect=
-2.fireeye.com/v1/url?k=3D21bbebe9-7e20d2a4-21ba60a6-0cc47aa8f5ba-c4f159256e=
-410848&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%2Fgit=
-hub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21%2Ffiles%23diff-731c968a66f944d=
-f8c362587d30f683400c61aa40b827b15837afcf329c27c32=20(8)=20=0D=0A=E2=80=A2=
-=20M=20https://protect2.fireeye.com/v1/url?k=3Da3393309-fca20a44-a338b846-0=
-cc47aa8f5ba-4608bd15a0e40d60&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a=
-&u=3Dhttps%3A%2F%2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21%2Ffiles%=
-23diff-44f4e94b5520200e7003e947b70571dec5d1f91b0fefe60cc24b84a56d192a5a=20(=
-4)=20=0D=0A=E2=80=A2=20M=20https://protect2.fireeye.com/v1/url?k=3D015efcd7=
--5ec5c59a-015f7798-0cc47aa8f5ba-bd28bc3df7ba5881&q=3D1&e=3D881cbf7d-2565-4c=
-41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%=
-2Fpull%2F21%2Ffiles%23diff-d7a6189bb902920845f1b16b60b23dc6e5b79619426ce81f=
-ec051cd575b2321b=20(2)=20=0D=0A=E2=80=A2=20M=20https://protect2.fireeye.com=
-/v1/url?k=3D2b95d7fa-740eeeb7-2b945cb5-0cc47aa8f5ba-6b35b3097a525ba6&q=3D1&=
-e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%2Fgithub.com%2Fsmf=
-rench%2Fsmb3-kernel%2Fpull%2F21%2Ffiles%23diff-45cdbce20e00968980ab5b673840=
-997b7db3ef1ceb01959136146eed28efd756=20(2)=20=0D=0A=E2=80=A2=20M=20https://=
-protect2.fireeye.com/v1/url?k=3Da0fd3c65-ff660528-a0fcb72a-0cc47aa8f5ba-134=
-6696391247558&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2=
-F%2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21%2Ffiles%23diff-28da00cf=
-886c7c49441c784bace3139cdacc95987b46216d81c512f676fcf54d=20(5)=20=0D=0A=E2=
-=80=A2=20A=20https://protect2.fireeye.com/v1/url?k=3D5bc42f98-045f16d5-5bc5=
-a4d7-0cc47aa8f5ba-c7331ba7875dd512&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0=
-f8bc1a&u=3Dhttps%3A%2F%2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21%2F=
-files%23diff-fef259d09b45f87954b831ea54e078f4518f5c4417515873344c0de23921de=
-ea=20(337)=20=0D=0A=E2=80=A2=20A=20https://protect2.fireeye.com/v1/url?k=3D=
-430dbace-1c968383-430c3181-0cc47aa8f5ba-a123a0a6aa5af5d8&q=3D1&e=3D881cbf7d=
--2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%2Fgithub.com%2Fsmfrench%2Fsmb3=
--kernel%2Fpull%2F21%2Ffiles%23diff-a96203b39f53284684579596723fe5b0035eb91c=
-f9856de440a84d55bdea5f17=20(21)=20=0D=0A=E2=80=A2=20M=20https://protect2.fi=
-reeye.com/v1/url?k=3D61d519f6-3e4e20bb-61d492b9-0cc47aa8f5ba-394558376d6247=
-1b&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%2Fgithub.=
-com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21%2Ffiles%23diff-f7433629c8584faf417=
-2019089efd7cde0f325939807b2b0a6120b2258f74715=20(294)=20=0D=0A=E2=80=A2=20M=
-=20https://protect2.fireeye.com/v1/url?k=3D99cf53ee-c6546aa3-99ced8a1-0cc47=
-aa8f5ba-e8999629106265e8&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=
-=3Dhttps%3A%2F%2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21%2Ffiles%23=
-diff-441aeb0c7e6999addc85a93c33c950ea637323e8d3eb79f19919033308dbb05b=20(36=
-)=20=0D=0A=E2=80=A2=20M=20https://protect2.fireeye.com/v1/url?k=3Db55ddc83-=
-eac6e5ce-b55c57cc-0cc47aa8f5ba-a9d96673636133a5&q=3D1&e=3D881cbf7d-2565-4c4=
-1-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2=
-Fpull%2F21%2Ffiles%23diff-3d348fb0b8bd1408076e13cf84a5160305faa8af1d6a69d74=
-0fd36036b5b914c=20(545)=20=0D=0A=E2=80=A2=20M=20https://protect2.fireeye.co=
-m/v1/url?k=3D0f56e0bf-50cdd9f2-0f576bf0-0cc47aa8f5ba-53320ca4f3bc6123&q=3D1=
-&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%2Fgithub.com%2Fsm=
-french%2Fsmb3-kernel%2Fpull%2F21%2Ffiles%23diff-a1e66e03b569d8088f2c4266607=
-a2b6c2589ab8813741e3c36210d6e4cd6bcb4=20(35)=20=0D=0A=E2=80=A2=20M=20https:=
-//protect2.fireeye.com/v1/url?k=3Dc15889e8-9ec3b0a5-c15902a7-0cc47aa8f5ba-8=
-5f00cc25e680ffd&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A=
-%2F%2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21%2Ffiles%23diff-70b141=
-042a80072dba68db2b1456a183505658908438038fffdc0266c64413cf=20(4)=20=0D=0A=
-=E2=80=A2=20M=20https://protect2.fireeye.com/v1/url?k=3D0bd71e7a-544c2737-0=
-bd69535-0cc47aa8f5ba-a4841969ab90e53f&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b=
-1f0f8bc1a&u=3Dhttps%3A%2F%2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21=
-%2Ffiles%23diff-db0aa3a6adeabfd54633c447b9beaf27fbb46f6b1ecd8c72aef4fb72581=
-a04b1=20(126)=20=0D=0A=E2=80=A2=20M=20https://protect2.fireeye.com/v1/url?k=
-=3D7e8ab03d-21118970-7e8b3b72-0cc47aa8f5ba-277d3188b8f549ae&q=3D1&e=3D881cb=
-f7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%2Fgithub.com%2Fsmfrench%2Fs=
-mb3-kernel%2Fpull%2F21%2Ffiles%23diff-2bd5af44e29b547dd9fda5b3d24352adacbb8=
-b8080e33241d6641a4f3df69ef0=20(2)=20=0D=0A=E2=80=A2=20M=20https://protect2.=
-fireeye.com/v1/url?k=3Dc3701dd7-9ceb249a-c3719698-0cc47aa8f5ba-8a94e0c7b2dc=
-bb14&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%2Fgithu=
-b.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21%2Ffiles%23diff-249654a638ec41b36=
-4ee6977b6a0d3ad3f06e5a711f7f53d1d8e743acc276b8b=20(462)=20=0D=0A=E2=80=A2=
-=20M=20https://protect2.fireeye.com/v1/url?k=3D56ce1c31-0955257c-56cf977e-0=
-cc47aa8f5ba-985a80c4a4f48bf3&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a=
-&u=3Dhttps%3A%2F%2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21%2Ffiles%=
-23diff-ba6b2ac156d80a0d1650305ffe6147b0ab677fa20a5083df7bae9fc299822d35=20(=
-100)=20=0D=0A=E2=80=A2=20M=20https://protect2.fireeye.com/v1/url?k=3Ddb5fb8=
-9c-84c481d1-db5e33d3-0cc47aa8f5ba-1071fc074a7ad555&q=3D1&e=3D881cbf7d-2565-=
-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%2Fgithub.com%2Fsmfrench%2Fsmb3-kerne=
-l%2Fpull%2F21%2Ffiles%23diff-004686895854dcd4630e0991bb4eea14bf87d8056b6351=
-516840ed6435112956=20(2)=20=0D=0APatch=20Links:=0D=0A=E2=80=A2=20https://pr=
-otect2.fireeye.com/v1/url?k=3D4093e9b4-1f08d0f9-409262fb-0cc47aa8f5ba-d96b6=
-f47d700bc08&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%=
-2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21.patch=0D=0A=E2=80=A2=20ht=
-tps://protect2.fireeye.com/v1/url?k=3Deb50f6a2-b4cbcfef-eb517ded-0cc47aa8f5=
-ba-c7bf722bf139c09c&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttp=
-s%3A%2F%2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21.diff=0D=0A=E2=80=
-=94=0D=0AYou=20are=20receiving=20this=20because=20you=20are=20subscribed=20=
-to=20this=20thread.=0D=0AReply=20to=20this=20email=20directly,=20https://pr=
-otect2.fireeye.com/v1/url?k=3D64cd01ff-3b5638b2-64cc8ab0-0cc47aa8f5ba-53ea2=
-4818e736d7c&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%=
-2Fgithub.com%2Fsmfrench%2Fsmb3-kernel%2Fpull%2F21,=20or=20https://protect2.=
-fireeye.com/v1/url?k=3D1f9e06a2-40053fef-1f9f8ded-0cc47aa8f5ba-2adf7ca05ae5=
-6371&q=3D1&e=3D881cbf7d-2565-4c41-bb9f-89b1f0f8bc1a&u=3Dhttps%3A%2F%2Fgithu=
-b.com%2Fnotifications%2Funsubscribe-auth%2FADSTN5QP7UMTO6WHMMIMZ5TS4DYMNANC=
-NFSM4WWNZCFQ.=0D=0A=0D=0A=0D=0A=0D=0A--=20=0D=0AThanks,=0D=0A=0D=0ASteve=0D=
-=0A=0D=0A
-
+cm9ubmllLAogICAgIFRoYW5rcyBmb3IgeW91ciByZXBseS4KICAgICBJIGFtIHNvcnJ5IHRvIGJv
+dGhlciB5b3UuCiAgICAgdGhlcmUgaXMgIGEgc3RpbGwgcHJvYmxlbToKICAgICAxKSB0aGUgdXNl
+ciBvZiBuZnMgbW91bnRzIGFuIG5mcyBzaGFyZSB1c2luZyBUQ1AKb3BlbmVkIGEgZmQsICAKCgog
+ICAgICAKCiAgICAgSXMgdGhlcmUgc29tZSBkb2Mvc2xpZGUgYWJvdXQgdGhlIGludGVybmFscyBv
+ZiBjdGRiID8gY3VycmVudGx5IEkgaGF2ZSAKCgoKCgoKCgoKCgoKCgpBdCAyMDIxLTAxLTI4IDE5
+OjEzOjAyLCAicm9ubmllIHNhaGxiZXJnIHZpYSBzYW1iYS10ZWNobmljYWwiIDxzYW1iYS10ZWNo
+bmljYWxAbGlzdHMuc2FtYmEub3JnPiB3cm90ZToKPkhpLAo+Cj5JIGhhdmVudCB3b3JrZWQgb24g
+Y3RkYiBpbiBhZ2VzLCBidXQgdGhlIGlzY3NpIHNjcmlwdHMgaW4gY3RkYiBpcwo+cHJvYmFibHkg
+bm90IHN1aXRhYmxlIGZvciB5b3VyIHVzZSBjYXNlLgo+SXQgaXMgYWltZWQgYXQgd2hlbiB5b3Ug
+d2FudCB0byBleHBvcnQgYW4gTFVOIHZpYSBhIHNwZWNpZmljCj50YXJnZXRuYW1lIGZyb20gdGhl
+IGN0ZGIgY2x1c3RlciB0byBleHRlcm5hbCBpc2NzaSBjbGllbnRzCj5hbmQgYmFzaWNhbGx5IGhh
+dmUgYSBhY3RpdmUvcGFzc2l2ZSBmYWlsb3ZlciBtb2RlIGZvciB0aGUgdGFyZ2V0L2x1bgo+cGFp
+cnMgYWNyb3NzIG5vZGVzLgo+Cj5XaGF0IHlvdSB0cnkgdG8gZG8gaXMgaGF2ZSBpc2NzaSB1c2Vk
+IGludGVybmFsbHkgZm9yIHN0b3JhZ2UgYW5kIHRoZW4KPmhhdmUgYSBmaWxlIHN5c3RlbSBvbnRv
+cCB0aGVzZSBsdW5zIGFuZCBleHBvcnQgdGhlbiBhcyBORlMgc2hhcmVzIHRvCj50byBuZnMgY2xp
+ZW50cy4KPlRoYXQgY291bGQgYmUgZG9uZSwgSSBndWVzcywgYnV0IGlzIG5vdCB3aGF0IEkgdGhp
+bmsgdGhlIGN1cnJlbnQKPnNjcmlwdHMgZG8gc28geW91IG1pZ2h0IGhhdmUgdG8gd3JpdGUgYSBi
+dW5jaCBvZiBuZXcgZXZlbnRzY3JpcHRzIHRvCj5kbyB3aGF0IHlvdSB3YW50Lgo+Cj5UaGUgbmZz
+IHN1cHBvcnQgaW4gdGhlIGV2ZW50c2NyaXB0cyBhbHNvIG1pZ2h0IGJlIHByb2JsZW1hdGljLiBX
+aGVuIEkKPndvcmtlZCBvbiB0aGVtIHRoZXkgd2VyZSBvbmx5IGFpbWVkIGF0IG5mc3YzLgo+QXMg
+bmZzdjQgaXMgZGlzcGxhY2luZyB2MyBxdWl0ZSByYXBpZGx5LCB0aGVzZSBzY3JpcHRzIG1heSBv
+ciBtYXkgbm90Cj53b3JrIGZvciB5b3UuCj5CdXQgdGhleSBhbHNvIHdlcmUgYWltZWQgYXQgYW4g
+YWN0aXZlL2FjdGl2ZSBjb25maWd1cmF0aW9uIHdoZXJlIGFsbAo+dGhlIGRhdGEgaXMgc2hhcmVk
+IGZyb20gYSBjb21tb24gY2x1c3RlciBiYWNrZW5kIGFuZCBpcyBhdmFpbGFibGUKPmFjdGl2ZS9h
+Y3RpdmUgdGhyb3VnaCBlYWNoIG5vZGUuCj5JIGFtIG5vdCBzdXJlIGhvdyB3ZWxsIHRoZSBjdXJy
+ZW50IHNjcmlwdHMgd2lsbCB3b3JrIHdpdGggbmZzdjQgc2luY2UKPnRoZXJlIGFyZSBzbyBtdWNo
+IG1vcmUgc3RhdGUgaW52b2x2ZWQuCj4KPgo+U2luY2UgeW91IGJhc2ljYWxseSB3YW50IGVhY2gg
+c2hhcmUgdG8gYmUgaGFuZGxlZCBpbiBhIGFjdGl2ZS9wYXNzaXZlCj5mYWlsb3ZlciBtb2RlIEkg
+dGhpbmsgcGFjZW1ha2VyIHdpbGwgYmUgYSBtdWNoIGJldHRlcgo+Zml0IGFuIGVhc2llciBzb2x1
+dGlvbiB0aGFuIHRyeWluZyB0byBwdXNoIGEgYWNyaXZlL3Bhc3NpdmUgZmFpbG92ZXIKPm1vZGVs
+IGludG8gY3RkYi4KPgo+UGFjZW1ha2VyIGFzIHlvdSBzYWlkIGRvZXMgbmVlZCBhIHNoYXJlZCBy
+ZXNvdXJjZSB0byBoYW5kbGUgc2FmZQo+ZmFpbG92ZXIuIEluIGN0ZGIgdGhpcyBpcyBtb3N0bHkg
+aGFuZGxlZCBieSB0aGUgc2hhcmVkIGJhY2tlbmQgY2x1c3Rlcgo+ZmlsZXN5c3RlbSB0aGF0IGN0
+ZGIgaXMgZGVzaWduZWQgdG8gc2l0IG9udG9wIG9mLgo+SW4gYSBwYWNlbWFrZXIgc29sdXRpb24s
+IGFzIHlvdSBkb24gbm90IGhhdmUgYSBiYWNrZW5kIGZpbGVzeXN0ZW0gd2l0aAo+Y29oZXJlbnQg
+bG9ja2luZywgeW91IHdpbGwgbmVlZCBhIGRpZmZlcmVudCBzb2x1dGlvbiB0byBhdm9pZAo+c3Bs
+aXQtYnJhaW4uCj5JIGFtIG5vIGxvbmdlciBmYW1pbGlhciBhdCBhbGwgd2l0aCBjdXJyZW50IGJl
+c3QgcHJhY3RpY2UgZm9yCj5wYWNlbWFrZXIgYnV0IEkgdGhpbmsgaGF2aW5nIGEgc2hhcmVkLCBo
+aWdoLWF2YWlsYWJsZSBTQ1NJIHJlc291cmNlCj50aGF0IHN1cHBvcnRzIFBlcnNpc3RlbnRSZXNl
+cnZhdGlvbiBjb3VsZCBiZSBhIHNvbHV0aW9uLgo+VXNpbmcgUFIgdG8gZW5zdXJlIHRoYXQgb25s
+eSBvbmUgbm9kZSBhdCBhIHRpbWUgaXMgYWN0aXZlLgo+QnV0LCB0aGlzIGlzIGFsbCB2ZXJ5IG9s
+ZCBhbmQgcG9zc2libHkgb2Jzb2xldGUgdW5kZXJzdGFuZGluZyBvZiBwYWNlbWFrZXIuCj4KPgo+
+VEw7RFIKPlN0aWxsLCBJIHRoaW5rIGFzIHlvdSB3YW50IGFjdGl2ZS9wYXNzaXZlIGZhaWxvdmVy
+IGZvciB5b3VyIHNoYXJlcwo+cGFjZW1ha2VyIGlzIGxpa2VseSB3aGF0IHlvdSB3YW50IGFuZCBu
+b3QgY3RkYi4KPlRoZSBwYWNlbWFrZXIgZm9sa3Mgd2lsbCBrbm93IG11Y2ggYmV0dGVyIGhvdyB5
+b3Ugd291bGQgc2V0IHRoZXNlCj5zeXN0ZW1zIHVwIHRoYW4gSSBkby4KPgo+cmVnYXJkcwo+cm9u
+bmllIHMKPgo+Cj5PbiBUaHUsIEphbiAyOCwgMjAyMSBhdCA4OjAxIHZpYSBhIHNwUE0gt+fO3sP7
+IDx3dW1pbmdfODFAMTYzLmNvbT4gd3JvdGU6Cj4+Cj4+ICJJbiB5b3VyIHNjZW5hcmlvLCBpcyB0
+aGUgZmlsZXN5c3RlbSBvbiBlYWNoIExVTiBhc3NvY2lhdGVkIHdpdGggYSBwYXJ0aWN1bGFyIHB1
+YmxpYyBJUCBhZGRyZXNzPyIKPj4geWVzCj4+Cj4+ICJJdCB3b3VsZCBiZSBnb29kIGlmIHlvdSBj
+b3VsZCBkbyB0aGlzIHdpdGhvdXQgbW9kaWZ5aW5nIDEwLmludGVyZmFjZS4gSXQgd291bGQgYmUg
+YmV0dGVyIGlmIHlvdSBjb3VsZCBkbyBpdCBieSBhZGRpbmcgYSBuZXcgZXZlbnQgc2NyaXB0LiIK
+Pj4gdGhhbmtzLgo+PiBJIGFtIHNvcnJ5IHRoYXQgSSBoYXZlIGFub3RoZXIgcXVlc3Rpb24uCj4+
+IHJlZGhhdCBwcm92aWRlcyBhbm90aGVyIHNvbHV0aW9uOgo+PiBodHRwczovL3d3dy5saW51eHRl
+Y2hpLmNvbS9jb25maWd1cmUtbmZzLXNlcnZlci1jbHVzdGVyaW5nLXBhY2VtYWtlci1jZW50b3Mt
+Ny1yaGVsLTcvCj4+IHRoZXkgdXNlIHBhY2VtYWtlciB0byBtYWtlIGFuIGFjdGl2ZS9wYXNzaXZl
+ICBuZnMgY2x1c3Rlci4gaXRzIGdvYWwgaXMgdmVyeSBzaW1pbGFyIHRvIG1pbmUuCj4+Cj4+IGlm
+IHRoZSBjbHVzdGVyIGNvbnNpc3RzIG9mIGp1c3QgdHdvIG5vZGVzLCB3ZSBrbm93IHRoYXQgdGhl
+cmUgZG9lcyBub3QgZXhpc3QgYSBjb3JyZWN0IGFsZ29yaXRobSBmb3IgdGhlIGNvbnNlbnN1cyBw
+cm9ibGVtLiBUaGUgcGFjZW1ha2VyIHNvbHV0aW9uIG9mIHJlZGhhdCB1c2VzIGEgZmVuY2UgZGV2
+aWNlICh3ZSBjYW4gdXNlIGEgc2hhcmVkIGRpc2suIGZvciBleGFtcGxlIGlzY3NpIGx1biwgYXMg
+YSBmZW5jaW5nIGRldmljZSksICBzbyBpdCBtYXkgYmUgY29ycmVjdC4KPj4gQnV0IEkgaGF2ZSBu
+b3QgZm91bmQgYW55IGRvYyBhYm91dCBmZW5jZSBkZXZpY2UgYW5kIGN0ZGIsIHNvIGluIHRoZW9y
+eSBteSBzb2x1dGlvbiBtYXkgYmUgbm90IGNvcnJlY3QgZm9yIHR3by1ub2RlcyBjbHVzdGVyLgo+
+PiBJIGFtIHZlcnkgY3VyaW91cyBob3cgZG9lcyBjdGRiIHRhY2tsZSB0aGUgcHJvYmxlbSBvciB0
+aGUgcHJvYmxlbSBpcyBub3QgdGFja2xlZC4KPj4KPj4gaWYgYW55IGhvdy10b3Mgb3IgaW1wbGVt
+ZW50YXRpb24vcHJpbmNpcGxlIG9mIGN0ZGIgaXMgcHJvdmlkZWQgSSB3aWxsIGJlIGdsYWQuCj4+
+IHNvcnJ5IHRvIGJvdGhlci4KPj4gdGhhbmtzIGZvciB5b3VyIHJlcGx5Lgo+Pgo+PiBBdCAyMDIx
+LTAxLTI4IDE3OjI1OjE2LCAiTWFydGluIFNjaHdlbmtlIiA8bWFydGluQG1lbHRpbi5uZXQ+IHdy
+b3RlOgo+PiA+SG1tbS4gIFNvcnJ5LCBJIG1pZ2h0IGhhdmUgcmVhZCB0b28gcXVpY2tseSBhbmQg
+bWlzdW5kZXJzdG9vZC4gIDcwLmlzY3NpCj4+ID5pcyBvbmx5IGRlc2lnbmVkIHRvIHJ1biB0Z3Rk
+IG9uIG5vZGVzIGFuZCBleHBvcnQgTFVOcyBmcm9tIHB1YmxpYyBJUAo+PiA+YWRkcmVzc2VzLiBJ
+biB5b3VyIGV4YW1wbGUgdGhlIG5vZGVzIGFyZSBpU0NTSSBjbGllbnRzLCBtb3VudGluZyBhCj4+
+ID5maWxlc3lzdGVtIG9uIHRoZSBMVU4gYW5kIGV4cG9ydGluZyBpdCB2aWEgTkZTLiAgVGhhdCBp
+cyB2ZXJ5IGRpZmZlcmVudC4KPj4gPgo+PiA+U29ycnkgZm9yIHRoZSBjb25mdXNpb24uCj4+ID4K
+Pj4gPkluIHlvdXIgc2NlbmFyaW8sIGlzIHRoZSBmaWxlc3lzdGVtIG9uIGVhY2ggTFVOIGFzc29j
+aWF0ZWQgd2l0aCBhCj4+ID5wYXJ0aWN1bGFyIHB1YmxpYyBJUCBhZGRyZXNzPwo+PiA+Cj4+ID5J
+dCB3b3VsZCBiZSBnb29kIGlmIHlvdSBjb3VsZCBkbyB0aGlzIHdpdGhvdXQgbW9kaWZ5aW5nIDEw
+LmludGVyZmFjZS4KPj4gPkl0IHdvdWxkIGJlIGJldHRlciBpZiB5b3UgY291bGQgZG8gaXQgYnkg
+YWRkaW5nIGEgbmV3IGV2ZW50IHNjcmlwdC4KPj4gPgo+PiA+cGVhY2UgJiBoYXBwaW5lc3MsCj4+
+ID5tYXJ0aW4KPj4gPgo+PiA+T24gVGh1LCAyOCBKYW4gMjAyMSAwOTo1NToyOSArMDgwMCAoQ1NU
+KSwgt+fO3sP7IDx3dW1pbmdfODFAMTYzLmNvbT4KPj4gPndyb3RlOgo+PiA+Cj4+ID4+IG1hcnRp
+biwgdGhhbmtzIGZvciB5b3VyIHJlcGx5Lgo+PiA+PiBObywgSSBkaWQgbm90IG1vZGlmeSA3MC5p
+c2NzaS4gTWF5YmUgSSBuZWVkIHRvIG1ha2UgZnVsbCB1bmRlcnN0YW5kaW5nIG9mIGl0Lgo+PiA+
+Pgo+PiA+Pgo+PiA+PiBhZnRlciBtYW55IGRheXMgcmVhZGluZy9kZWJ1Z2luZyB0aGUgc291cmNl
+IGNvZGUgb2YgY3RkYiBhbmQgaXRzIHNoZWxsIHNjcmlwdHMsIEkgZm91bmQgdGhlIGtleSBwb2lu
+dCBpbiB0aGUgc2NyaXB0IDEwLmludGVyZmFjZS4KPj4gPj4gbXkgbW9kaWZpY2F0aW9uICBpczoK
+Pj4gPj4gMSBjcmVhdGUgbmZzIHNoYXJlKG1vdW50IGZzLCBtb2RpZnkgL2V0Yy9leHBvcnRzLCBy
+ZXN0YXJ0IG5mcyBzZXJ2aWNlIC4uKSBiZWZvcmUgYW55IHB1YmxpYyBpcCBpcyBhZGRlZCB0byBz
+b21lIGludGVyZmFjZQo+PiA+PiAyIGRlbGV0ZSB0aGUgY29ycmVzcG9uZGluZyBuZnMgc2hhcmUg
+YWZ0ZXIgYW55IHB1YmxpYyBpcCBpcyByZW1vdmVkIGZyb20gc29tZSBpbnRlcmZhY2UKPj4gPj4K
+Pj4gPj4KPj4gPj4gSSB0ZXN0ZWQgbWFueSBzaHV0ZG93bi1yZWJvb3QgY3ljbGVzIChvZiBub2Rl
+IGluIGEgY3RkYiBjbHVzdGVyKSwgYW5kIHRoZSByZXN1bHRzIGFyZSB0aGUgc2FtZSBhcyBteSBl
+eHBlY3RhdGlvbi4KPj4gPj4gSSB0aGluayBJIG5lZWQgbW9yZSB0ZXN0cyBhbmQgbW9yZSBzY2Vu
+YXJpbyB0ZXN0cy4KPj4KPj4KPj4KPj4K
