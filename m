@@ -2,64 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D00FE30747A
-	for <lists+samba-technical@lfdr.de>; Thu, 28 Jan 2021 12:14:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C785F30859A
+	for <lists+samba-technical@lfdr.de>; Fri, 29 Jan 2021 07:22:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=khhQXpDZevJq4MNXlLasO2TR6L4IfAXjGA8EZtUS4Rg=; b=PTB6Br1WR87pRdjHxjnWXzD8K1
-	pOmciitlpqTogI68sLOUgBvNR5oDFGqtbqL5/UXdNMWl1s6LZS1SFY0et7eGedQZjyYP7ZCEH2gYa
-	NkhGO3VutgjQ5VhZA9BwAaTJzqHmCqoZSXNzhIOD6uu9QRt3CxWe1tNxhDNfSV+XOxDqDaeE/amdS
-	UHlIr57QFXrE8GHVP1jbnzcvFAbGzeWoHZXIwcind5PLIfnXUmsAEuD3Fe+QaRKW8+lVqlY2lGRO+
-	RY1KoXBqs3ogSsJ8JZ+ugb3DEYNwxETlixHCO2rQgPjPtuFqz23bQM9gDnTA2vdQpKsRPwEkntvru
-	LAmLuQzQ==;
-Received: from ip6-localhost ([::1]:31686 helo=hr1.samba.org) 
+	bh=yzWO+5nzEqk+QreMpsNSddsSW+ctODNRAMzf13KFv0g=; b=UttI8XC2KUxp4L0ehyNNJFY6YC
+	zAWpUQXHoBAWAaTjwltVaj3T2DgNo21Q5SJx7nl4uETbnK11IvrR7msqEGFVUY2Zx/ORo4Je8oJJo
+	XkTFp5d8xPGlgTxStfVBMJx5yjGWNVKjK/8Z/8ssi4USZunRg29+G8pP0UFPL9ToqjOJHU/72P76q
+	5KxdOFN0BBCkCOPC+QrTtqqb+Se5vCw7oSmnVIU/MPFrvNB8XO5+wXoA303XX03Bul06xOep2p6a4
+	QU8bv7yIxKBvVDDNg8loZ9Qh1D0mHu27iXgypoCDCDgWvmMcCjopDHN+mxB/FkJecIA+JhTft26BD
+	b3bM1o0A==;
+Received: from ip6-localhost ([::1]:42928 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l55Ev-007WXC-OM; Thu, 28 Jan 2021 11:13:29 +0000
-Received: from mail-io1-xd31.google.com ([2607:f8b0:4864:20::d31]:39362) 
+	id 1l5NAD-007gVB-1G; Fri, 29 Jan 2021 06:21:49 +0000
+Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a]:32905) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l55Eo-007WX5-2d
- for samba-technical@lists.samba.org; Thu, 28 Jan 2021 11:13:26 +0000
-Received: by mail-io1-xd31.google.com with SMTP id e22so5129743iog.6
- for <samba-technical@lists.samba.org>; Thu, 28 Jan 2021 03:13:16 -0800 (PST)
+ (Exim) id 1l5NA4-007gV3-JC
+ for samba-technical@lists.samba.org; Fri, 29 Jan 2021 06:21:45 +0000
+Received: by mail-lf1-x12a.google.com with SMTP id b2so10995265lfq.0
+ for <samba-technical@lists.samba.org>; Thu, 28 Jan 2021 22:21:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=khhQXpDZevJq4MNXlLasO2TR6L4IfAXjGA8EZtUS4Rg=;
- b=ZPGUIwBCehajzCUMQTCmZhKTWgWLtpDs6copCZBdLaZUa/8QFWnTBhU6c9oZOfqLcv
- 203Rzig67qagtnpNQgSoFCUJSlFXWQ7abw3FQawkgEtt/RLSNyoZ/KduUN2Hy1RyY1/h
- z5jgNBASXyi9+1/FJ2p2tmuRuddSSS3wt4dJ/+LxonXS8K3LPvhCpW9sxrm2QIgngyxH
- mKHo83xFlVtDXrLM0OYN0CcLyPRACaVaUJikUl7EGUbMUKw/y+QdUFFyj+98C1w5Z9eA
- GLKCIqbBOi+Z6r/Hj4P/ducBNxOshZYYQJSOZp/AhGCelu8NQ2jjDDNdz3PUQ9DDhJip
- QXKg==
+ :cc; bh=Ev8uJHlu4Y/XW8AO1G10tio69sdWAKBd84vumipXTgQ=;
+ b=dxzVZWwlwDR2yDIhrlOSdFzHPxpmFaIzsIixgcCwjJvpOB+aOpUX0Or6IGfTkwF2SX
+ OWxEPSlx+8WFQhK9rMBwcME0/nBYfXrR869LzxW3j5Iz46wio9jj+mzksQrklT9qmvbu
+ RAyXD+Yi4rgRCT3QUBioJCUKsw6bPFiEW01SarkTxGthIcv5BNTYYgPQ+XBdA+pY+93s
+ zT35ZGDmW8JJeR8xnxwJWmh2FqVx8tQW1RUjWVw96PSNm4ynR4NI5jW/XVYq6o44bWrf
+ qk446WdLLFOHymdI0eB5Sn9P8sMNWHaXiuYb1qNH0XW6GHZ2GSuD/kikhPZYKpAwTddU
+ USzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=khhQXpDZevJq4MNXlLasO2TR6L4IfAXjGA8EZtUS4Rg=;
- b=ujDaTgE7m59e/R+X+Df+umKCDogFaLU5E98y8PKkEvsjGxFhAhxEHxOz58/uHGYzsl
- ei1zujLRzoJdypoGxLXVI6qGE9KGrWau/zV3lHLlhkie6GBMH00zZPADal5j50vcNPyv
- b5WcOcm2Y2lLNqZJEs69UQSGJWdW+yb8QMemLnfCks94UdBu9csd07u1lQyaqHAp4VGD
- 73wUi0j7zBZJbm/oaAg2SBJOED5SglXGSKtCBKsPKa6vjXmMRoDOjQi4q7NnJelJa+rr
- XW5ETpu9+GRi3Wygl1x+bTle4lbAHL2ZSfrhx0L1iVpcZLOmtBW/w4M20PA/ya7OFyLP
- ajCA==
-X-Gm-Message-State: AOAM532oybHZT3PmBmUwDgyjljovhYlVrHO01NlbgDWLNf4wkspELnz8
- y38k6Mko52zvcShuC4fKLeGLWsvwkVGZRnMvk6M=
-X-Google-Smtp-Source: ABdhPJxzVWjy/5wuKb1NsLZESZgJDD9348uqr7XnfQ/QSjnsbZrhwxS4+7UTUmj4lTKf9A3O1tzbRguBgtnQ8tPd8AM=
-X-Received: by 2002:a6b:f107:: with SMTP id e7mr10991826iog.191.1611832394111; 
- Thu, 28 Jan 2021 03:13:14 -0800 (PST)
+ :message-id:subject:to:cc;
+ bh=Ev8uJHlu4Y/XW8AO1G10tio69sdWAKBd84vumipXTgQ=;
+ b=U5ZhX4v3eYRjz5+DKVo7722fDkOBCr1PheYNlCPw0VE89KTwUz0LO3gAJw2kXw6xVW
+ Zu9DeSkVjtBRo4uddUkxm6zMQPY4o7IwL6qDjVf28s48m0n8Lng+whXePGLrAWmviPcg
+ fvyL4RU/48bu0dyb7vXwSWndjry6t9TwBkZWjFPqU/qx0xuvyH0DJGiu2KMAp9LLMUg+
+ tXh9UTmkCbyGyjEQK4NZS7CqPQAUuhf2hn4qV1LsQ5PTXwjrCvQbU1UXAtoGOyr6fJsy
+ m65/ER1TEMMKbEt4LuDViZ2/ow73vmwAkCBTFHFqN44+Vdb58pYprlrgz1ywKMzoGCFv
+ vRmA==
+X-Gm-Message-State: AOAM533WjSiuhSk+Y+Ff7fKaICSaPVZvffenxtJoK7qitE7wY69ZyBQt
+ RwkGLtmCIo/CYXnpgKo9gGHItAA145nt8aG1n7c=
+X-Google-Smtp-Source: ABdhPJz4RtYp7TT+IJ2d7eb02Dv/elNHlaWYXwviVuFsoCnxaKIfm/4TwzqCpz2OWOr88bXY2FI1ai7oLA9Fkcu1img=
+X-Received: by 2002:a05:6512:1311:: with SMTP id
+ x17mr1364591lfu.307.1611901278407; 
+ Thu, 28 Jan 2021 22:21:18 -0800 (PST)
 MIME-Version: 1.0
-References: <387bc94a.4501.1772917b1cf.Coremail.wuming_81@163.com>
- <20210127204613.5735addd@martins.ozlabs.org>
- <545e1ab2.ef9.17746b3e063.Coremail.wuming_81@163.com>
- <20210128202516.40677c83@martins.ozlabs.org>
- <3cabb185.5677.177486f8025.Coremail.wuming_81@163.com>
-In-Reply-To: <3cabb185.5677.177486f8025.Coremail.wuming_81@163.com>
-Date: Thu, 28 Jan 2021 21:13:02 +1000
-Message-ID: <CAN05THR4WtBJoPt9FRMs3zYmargQ0Y8VFQiL-LvW+1g5RVDcQA@mail.gmail.com>
-Subject: Re: Re: about active/active clustered nfs with ctdb
-To: =?UTF-8?B?6aOO5peg5ZCN?= <wuming_81@163.com>
+References: <smfrench/smb3-kernel/pull/21@github.com>
+In-Reply-To: <smfrench/smb3-kernel/pull/21@github.com>
+Date: Fri, 29 Jan 2021 00:21:06 -0600
+Message-ID: <CAH2r5mtUEYDyFGesXGsK_rP2007EP3X58i9-NFUY=ZMZR-hU1g@mail.gmail.com>
+Subject: Fwd: [smfrench/smb3-kernel] Cifsd fixes (#21)
+To: Namjae Jeon <namjae.jeon@samsung.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,138 +70,144 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Merged into smb3-kernel github tree, and rebased on 5.11-rc5 pending more
+testing (will try to kick off more testing this weekend).
 
-I havent worked on ctdb in ages, but the iscsi scripts in ctdb is
-probably not suitable for your use case.
-It is aimed at when you want to export an LUN via a specific
-targetname from the ctdb cluster to external iscsi clients
-and basically have a active/passive failover mode for the target/lun
-pairs across nodes.
-
-What you try to do is have iscsi used internally for storage and then
-have a file system ontop these luns and export then as NFS shares to
-to nfs clients.
-That could be done, I guess, but is not what I think the current
-scripts do so you might have to write a bunch of new eventscripts to
-do what you want.
-
-The nfs support in the eventscripts also might be problematic. When I
-worked on them they were only aimed at nfsv3.
-As nfsv4 is displacing v3 quite rapidly, these scripts may or may not
-work for you.
-But they also were aimed at an active/active configuration where all
-the data is shared from a common cluster backend and is available
-active/active through each node.
-I am not sure how well the current scripts will work with nfsv4 since
-there are so much more state involved.
+---------- Forwarded message ---------
+From: Namjae Jeon <notifications@github.com>
+Date: Wed, Jan 27, 2021 at 11:25 PM
+Subject: [smfrench/smb3-kernel] Cifsd fixes (#21)
+To: smfrench/smb3-kernel <smb3-kernel@noreply.github.com>
+Cc: Subscribed <subscribed@noreply.github.com>
 
 
-Since you basically want each share to be handled in a active/passive
-failover mode I think pacemaker will be a much better
-fit an easier solution than trying to push a acrive/passive failover
-model into ctdb.
+Description for this pull request:
 
-Pacemaker as you said does need a shared resource to handle safe
-failover. In ctdb this is mostly handled by the shared backend cluster
-filesystem that ctdb is designed to sit ontop of.
-In a pacemaker solution, as you don not have a backend filesystem with
-coherent locking, you will need a different solution to avoid
-split-brain.
-I am no longer familiar at all with current best practice for
-pacemaker but I think having a shared, high-available SCSI resource
-that supports PersistentReservation could be a solution.
-Using PR to ensure that only one node at a time is active.
-But, this is all very old and possibly obsolete understanding of pacemaker.
+   - Avoid calling ksmbd_override_fsids recursively.
+   - Make xattr format of ksmbd compatible with samba's one.
+   - Use netdevice_notifier to configure TCP listeners.
+   - Fix a build break with linux-5.11 kernel.
+
+------------------------------
+You can view, comment on, or merge this pull request online at:
+
+  https://github.com/smfrench/smb3-kernel/pull/21
+Commit Summary
+
+   - cifsd: set supplementary groups when overriding credentials
+   - cifsd: avoid calling ksmbd_override_fsids recursively
+   - cifsd: Change alloc_iface() return type in transport_tcp.c
+   - cifsd: Use netdevice_notifier to configure TCP listeners
+   - cifsd: fix a memleak from netdevice_notifier
+   - cifsd: make xattr format of ksmbd compatible with samba's one
+   - cifsd: macros with complex values should be enclosed in parentheses
+   - cifsd: fix build break with linux-5.11 kernel
+
+File Changes
+
+   - *M* fs/cifsd/Makefile
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-13a1445bc5af=
+cf91b3135cfc53c83b546ff6741cd17902937b4030162990820e>
+   (2)
+   - *M* fs/cifsd/auth.c
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-381fb3a09da3=
+451eeea4ae3029730c1c92bbed381327f311fd1e153ad96590aa>
+   (34)
+   - *M* fs/cifsd/auth.h
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-9ee6f94aa7c9=
+7acc87330571f4974c284e3638682d8662419067ac7049bca740>
+   (2)
+   - *M* fs/cifsd/crypto_ctx.c
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-731c968a66f9=
+44df8c362587d30f683400c61aa40b827b15837afcf329c27c32>
+   (8)
+   - *M* fs/cifsd/crypto_ctx.h
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-44f4e94b5520=
+200e7003e947b70571dec5d1f91b0fefe60cc24b84a56d192a5a>
+   (4)
+   - *M* fs/cifsd/ksmbd_server.h
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-d7a6189bb902=
+920845f1b16b60b23dc6e5b79619426ce81fec051cd575b2321b>
+   (2)
+   - *M* fs/cifsd/ksmbd_work.c
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-45cdbce20e00=
+968980ab5b673840997b7db3ef1ceb01959136146eed28efd756>
+   (2)
+   - *M* fs/cifsd/ksmbd_work.h
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-28da00cf886c=
+7c49441c784bace3139cdacc95987b46216d81c512f676fcf54d>
+   (5)
+   - *A* fs/cifsd/ndr.c
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-fef259d09b45=
+f87954b831ea54e078f4518f5c4417515873344c0de23921deea>
+   (337)
+   - *A* fs/cifsd/ndr.h
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-a96203b39f53=
+284684579596723fe5b0035eb91cf9856de440a84d55bdea5f17>
+   (21)
+   - *M* fs/cifsd/smb2pdu.c
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-f7433629c858=
+4faf4172019089efd7cde0f325939807b2b0a6120b2258f74715>
+   (294)
+   - *M* fs/cifsd/smb_common.c
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-441aeb0c7e69=
+99addc85a93c33c950ea637323e8d3eb79f19919033308dbb05b>
+   (36)
+   - *M* fs/cifsd/smbacl.c
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-3d348fb0b8bd=
+1408076e13cf84a5160305faa8af1d6a69d740fd36036b5b914c>
+   (545)
+   - *M* fs/cifsd/smbacl.h
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-a1e66e03b569=
+d8088f2c4266607a2b6c2589ab8813741e3c36210d6e4cd6bcb4>
+   (35)
+   - *M* fs/cifsd/transport_ipc.c
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-70b141042a80=
+072dba68db2b1456a183505658908438038fffdc0266c64413cf>
+   (4)
+   - *M* fs/cifsd/transport_tcp.c
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-db0aa3a6adea=
+bfd54633c447b9beaf27fbb46f6b1ecd8c72aef4fb72581a04b1>
+   (126)
+   - *M* fs/cifsd/unicode.c
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-2bd5af44e29b=
+547dd9fda5b3d24352adacbb8b8080e33241d6641a4f3df69ef0>
+   (2)
+   - *M* fs/cifsd/vfs.c
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-249654a638ec=
+41b364ee6977b6a0d3ad3f06e5a711f7f53d1d8e743acc276b8b>
+   (462)
+   - *M* fs/cifsd/vfs.h
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-ba6b2ac156d8=
+0a0d1650305ffe6147b0ab677fa20a5083df7bae9fc299822d35>
+   (100)
+   - *M* fs/cifsd/vfs_cache.h
+   <https://github.com/smfrench/smb3-kernel/pull/21/files#diff-004686895854=
+dcd4630e0991bb4eea14bf87d8056b6351516840ed6435112956>
+   (2)
+
+Patch Links:
+
+   - https://github.com/smfrench/smb3-kernel/pull/21.patch
+   - https://github.com/smfrench/smb3-kernel/pull/21.diff
+
+=E2=80=94
+You are receiving this because you are subscribed to this thread.
+Reply to this email directly, view it on GitHub
+<https://github.com/smfrench/smb3-kernel/pull/21>, or unsubscribe
+<https://github.com/notifications/unsubscribe-auth/ADSTN5QP7UMTO6WHMMIMZ5TS=
+4DYMNANCNFSM4WWNZCFQ>
+.
 
 
-TL;DR
-Still, I think as you want active/passive failover for your shares
-pacemaker is likely what you want and not ctdb.
-The pacemaker folks will know much better how you would set these
-systems up than I do.
+--=20
+Thanks,
 
-regards
-ronnie s
-
-
-On Thu, Jan 28, 2021 at 8:01 via a spPM =E9=A3=8E=E6=97=A0=E5=90=8D <wuming=
-_81@163.com> wrote:
->
-> "In your scenario, is the filesystem on each LUN associated with a partic=
-ular public IP address?"
-> yes
->
-> "It would be good if you could do this without modifying 10.interface. It=
- would be better if you could do it by adding a new event script."
-> thanks.
-> I am sorry that I have another question.
-> redhat provides another solution:
-> https://www.linuxtechi.com/configure-nfs-server-clustering-pacemaker-cent=
-os-7-rhel-7/
-> they use pacemaker to make an active/passive  nfs cluster. its goal is ve=
-ry similar to mine.
->
-> if the cluster consists of just two nodes, we know that there does not ex=
-ist a correct algorithm for the consensus problem. The pacemaker solution o=
-f redhat uses a fence device (we can use a shared disk. for example iscsi l=
-un, as a fencing device),  so it may be correct.
-> But I have not found any doc about fence device and ctdb, so in theory my=
- solution may be not correct for two-nodes cluster.
-> I am very curious how does ctdb tackle the problem or the problem is not =
-tackled.
->
-> if any how-tos or implementation/principle of ctdb is provided I will be =
-glad.
-> sorry to bother.
-> thanks for your reply.
->
-> At 2021-01-28 17:25:16, "Martin Schwenke" <martin@meltin.net> wrote:
-> >Hmmm.  Sorry, I might have read too quickly and misunderstood.  70.iscsi
-> >is only designed to run tgtd on nodes and export LUNs from public IP
-> >addresses. In your example the nodes are iSCSI clients, mounting a
-> >filesystem on the LUN and exporting it via NFS.  That is very different.
-> >
-> >Sorry for the confusion.
-> >
-> >In your scenario, is the filesystem on each LUN associated with a
-> >particular public IP address?
-> >
-> >It would be good if you could do this without modifying 10.interface.
-> >It would be better if you could do it by adding a new event script.
-> >
-> >peace & happiness,
-> >martin
-> >
-> >On Thu, 28 Jan 2021 09:55:29 +0800 (CST), =E9=A3=8E=E6=97=A0=E5=90=8D <w=
-uming_81@163.com>
-> >wrote:
-> >
-> >> martin, thanks for your reply.
-> >> No, I did not modify 70.iscsi. Maybe I need to make full understanding=
- of it.
-> >>
-> >>
-> >> after many days reading/debuging the source code of ctdb and its shell=
- scripts, I found the key point in the script 10.interface.
-> >> my modification  is:
-> >> 1 create nfs share(mount fs, modify /etc/exports, restart nfs service =
-..) before any public ip is added to some interface
-> >> 2 delete the corresponding nfs share after any public ip is removed fr=
-om some interface
-> >>
-> >>
-> >> I tested many shutdown-reboot cycles (of node in a ctdb cluster), and =
-the results are the same as my expectation.
-> >> I think I need more tests and more scenario tests.
->
->
->
->
-
+Steve
