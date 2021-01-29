@@ -2,55 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D23E308708
-	for <lists+samba-technical@lfdr.de>; Fri, 29 Jan 2021 09:30:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C5407308721
+	for <lists+samba-technical@lfdr.de>; Fri, 29 Jan 2021 09:49:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=iGJ+cDPZbUYpOxvY3TJ66P4trd7DQ86DYojdAfVnIzA=; b=aQZcCnm4AWu541z3LcO0Tq/HNt
-	EDPlzDa5FMY9BbLDpe1myhc9nb/KemFJsW5DWOsmjR/xNd3wzPDy3ILcReSWSECADBGAIUAC+flCo
-	kuDTbNFML7vhujYGNuosAWBPVeYIqkjSh/wR/o1YB8dhKVskGdiymJYoOFSJ4ChvYzHkna+MzpMAs
-	LguAgCvXgyHwPTzf5F/yurKZc60gLdE5mZ7WIeRMOGg83kdLb/gOUDw2VM4vIDEJO0qmViR9k/twM
-	6233Z10IwuuFDqXBkouoP+Zv9w8yJzi+ZjtYWwjiWIvJNNo1En2FjpZ5uyM5uyhxUNCJ3W2QjHcnc
-	9/VzWYXQ==;
-Received: from ip6-localhost ([::1]:47556 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=yLNTqvKHgV1LBoM/koCwPdormpFVjV4lEG/zjIMDggE=; b=5OTt7UkzY6s+pLKhSUb9whmsvY
+	vRIh/au2fQa+Vf2kIHY0l0jOHEUzg0QM7G6DEOGdiwx+Jcdz6lk+wDAAFjYcs/tYnwxM6daTy0lXB
+	qyYkK7E8kCZ53jqRkdVEZCzA97m9hd0CGzgD2xVrobw7ew+T4GecG4PcxjdkzxOFRO3Wv5Yy2Aql1
+	NOgUU6Ec6g0jfzmRmO/bXVh7VIWeVUF9M3hcGKF+t/CyvirVpV3aijWo6PHiXLZa5tYC3JE7cgf9m
+	0I9UTHRtYQhdN+1eJbunbbJ6NGyR19EkW0MPLgtu+ggp2a8H0MFKASb2sqOBd+G+XH/ZJR7/HyaqS
+	gYCLYYYA==;
+Received: from ip6-localhost ([::1]:50492 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l5PA3-007hT6-UL; Fri, 29 Jan 2021 08:29:48 +0000
-Received: from m138.mail.163.com ([220.181.13.8]:18534) 
+	id 1l5PSd-007hse-Qw; Fri, 29 Jan 2021 08:48:59 +0000
+Received: from mail-il1-x133.google.com ([2607:f8b0:4864:20::133]:43219) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l5P9x-007hSz-Fl
- for samba-technical@lists.samba.org; Fri, 29 Jan 2021 08:29:45 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=uNgt7
- 9UgMQoprhcssTHyKORVm7onmEErO9SU7UhGaIA=; b=HkmDITj3dluUsSpn/Qo0Q
- wY+RcPoGDxtf75Qtp1JKHV05jbMf/DVGfwBQjki2CfTtAbxDtIr8l5UyyzdhZXno
- 5+XdTHL7cbz6PyKUrkszm5vRRULLvoEDkM3cIsKdQcQd+tAUaT7LR0rtbTBMRN57
- uFKoSS89xQrT+Mkr4X+vBg=
-Received: from wuming_81$163.com ( [123.116.97.153] ) by ajax-webmail-wmsvr8
- (Coremail) ; Fri, 29 Jan 2021 16:29:30 +0800 (CST)
-X-Originating-IP: [123.116.97.153]
-Date: Fri, 29 Jan 2021 16:29:30 +0800 (CST)
-To: "ronnie sahlberg" <ronniesahlberg@gmail.com>
-Subject: Re:Re: Re: about active/active clustered nfs with ctdb
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.13 build 20201118(ab4b390f)
- Copyright (c) 2002-2021 www.mailtech.cn 163com
-In-Reply-To: <CAN05THR4WtBJoPt9FRMs3zYmargQ0Y8VFQiL-LvW+1g5RVDcQA@mail.gmail.com>
+ (Exim) id 1l5PSY-007hsX-05
+ for samba-technical@lists.samba.org; Fri, 29 Jan 2021 08:48:56 +0000
+Received: by mail-il1-x133.google.com with SMTP id q5so7857803ilc.10
+ for <samba-technical@lists.samba.org>; Fri, 29 Jan 2021 00:48:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=yLNTqvKHgV1LBoM/koCwPdormpFVjV4lEG/zjIMDggE=;
+ b=MDqNp4/KDqig40FuXyBL3STdtxhCEcupNa/+RC++CLHumjOngBtGgHo5YVrwTWUiyD
+ 4bHJ7dCKy5iLIlsp8sxNX7Yae242qxM5NQAszMkC26lGw+bql0y6OwSsDO653lj9Ccp8
+ D1Ivbhji77YDFlNCTS88Qoy3M4F+xi8FwpDg876T/BMx/Chejee0NTL0Q+secozHR+Nn
+ GhuQWIZ0TXLoCDUVYv4XnqDwbAaHbrWt0A0km3uX7Ogog4BVp/EmGGCWwSQ6BdTYHYrI
+ uYv9anHC0EA8AEFCxWOeY2bLSRMUk+IBxj4UmgiBMjH/fdpBfx1Yycyg0vBpj4G8EwOV
+ 4U4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=yLNTqvKHgV1LBoM/koCwPdormpFVjV4lEG/zjIMDggE=;
+ b=kTmxWXoRuT27DHBdInm8xTBrwshULUH1L94jpCxYctlKg4HUevHi0ukVaa3v0HGMm5
+ zcv0aTwNf7PcSH51wN5Cod4hT8W/WyESc8H1er+KUXDRBq22IY/du87RXZhZyk1t+Mbb
+ EiRe+LnPSp7GsOmR8sX3ydstyMn4wOxLVHGYZkKjolthg3BFz2UDI3/8y4UM+Qt8bK9I
+ U7Q6go5GkD4Je4zTLqmtkuENb9VlmvWoPSsvkvjQV7YatCYZHw+c6MCglaPcnWn/Ya2Z
+ qQkyS219bFLw/bwXzeW18ji5p5cpLb0SAj0UvPo/i8swhIUrVTGGEC8awyTfXNdkvnw7
+ MGDA==
+X-Gm-Message-State: AOAM530Jh2OouOsHMEp1fdOhcw2pQA6b5t01yFoy/CwdawK8Nutvkrrq
+ rtcCcKdKck5PE+R97aTop8fXqPmKgNRO9VeaEn8=
+X-Google-Smtp-Source: ABdhPJx3Bx++9IBNZK93BvU67vjjGMTQF1eIEvxAcQbGa6lL7yrP0pjvMx9vAHysue6m48QH+EGj/IWFejRcpyuYhvo=
+X-Received: by 2002:a92:d785:: with SMTP id d5mr2807814iln.219.1611910127183; 
+ Fri, 29 Jan 2021 00:48:47 -0800 (PST)
+MIME-Version: 1.0
 References: <387bc94a.4501.1772917b1cf.Coremail.wuming_81@163.com>
  <20210127204613.5735addd@martins.ozlabs.org>
  <545e1ab2.ef9.17746b3e063.Coremail.wuming_81@163.com>
  <20210128202516.40677c83@martins.ozlabs.org>
  <3cabb185.5677.177486f8025.Coremail.wuming_81@163.com>
  <CAN05THR4WtBJoPt9FRMs3zYmargQ0Y8VFQiL-LvW+1g5RVDcQA@mail.gmail.com>
-X-CM-CTRLDATA: aWyK/WZvb3Rlcl9odG09NzI4ODo1Ng==
-MIME-Version: 1.0
-Message-ID: <102c2bdd.3624.1774d42f980.Coremail.wuming_81@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: CMGowADn79tqxxNgLUyKAA--.14256W
-X-CM-SenderInfo: pzxpx0ljbyiqqrwthudrp/1tbiThIpcFUDHgtCwQABsE
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
-Content-Type: text/plain; charset=GBK
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+ <102c2bdd.3624.1774d42f980.Coremail.wuming_81@163.com>
+In-Reply-To: <102c2bdd.3624.1774d42f980.Coremail.wuming_81@163.com>
+Date: Fri, 29 Jan 2021 18:48:35 +1000
+Message-ID: <CAN05THT7OJJxFKRiQJHHHh3Gv15VCfn+bU=LN8eO9x4+n1eu5g@mail.gmail.com>
+Subject: Re: Re: Re: about active/active clustered nfs with ctdb
+To: =?UTF-8?B?6aOO5peg5ZCN?= <wuming_81@163.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,113 +75,213 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?b?6aOO5peg5ZCNIHZpYSBzYW1iYS10ZWNobmljYWw=?=
- <samba-technical@lists.samba.org>
-Reply-To: =?GBK?B?t+fO3sP7?= <wuming_81@163.com>
+From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
+Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
 Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-ZXZlcnlvbmUsSSBhbSBzb3JyeSB0aGF0IHdoZW4gd3JpdGluZyB0aGUgZW1haWwgSSBtaXN0YWtl
-bmx5IHByZXNzZWQgc29tZSBrZXkgYW5kIHRoZSBlbWFpbCBjbGllbnQgc2VuZGVkIGEgcmVwbHkg
-ZW1haWwuCgogCgp0aGVyZSBpcyAgYSBzdGlsbCBwcm9ibGVtOgoKMSkgdGhlIHVzZXIgb2YgbmZz
-IG1vdW50cyBhbiBuZnMgc2hhcmUgdXNpbmcgVENQCgoyKSB0aGUgdXNlciBjcCBhIGxhcmdlIGZp
-bGUgZm9yIGV4YW1wbGUgMjBHQiBmaWxlCgo0KSAodGhlIGNwIGRvZXMgbm90IGNvbXBsZXRlKSB0
-aGUgY29ycmVzcG9uZGluZyBzZXJ2ZXIgbm9kZSBmYWlscyAKCgoKCnRoZW4gSSBmaW5kIHRoYXQg
-dGhlIGNwIGlzIGJsb2NrZWQgYXMgbXkgZXhwZWN0YXRpb24uCgpidXQgYWZ0ZXIgaXNjc2kgbHVu
-L3NlcnZlci9zaGFyZS9wdWJsaWMgaXAgdHJhbnNmZXIgdG8gb3RoZXIgc2VydmVyIG5vZGUsCgp0
-aGUgY3AgaXMgc3RpbGwgYmxvY2tlZCBhbmQgc3RvcHMgd3JpdGluZy4KCgoKCmlzIGl0IGJlY2F1
-c2UgdGhhdCB0aGUgc21ub3RpZnkgdG9vbCB1c2VzIFVEUCB0byBub3RpZnkgbmZzID8KCnJlZjog
-Y3RkYi91dGlscy9zbW5vdGlmeS9zbW5vdGlmeS5jCgoKCgpieSB0aGUgd2F5LCBpcyB0aGVyZSBh
-bnkgZG9jIGFib3V0IHRoZSBpbnRlcm5hbCBvZiBjdGRiID8KCgoKCnRoYW5rcyBmb3IgYW55IGFk
-dmljZS4KCgoKCgoKCgoKCgoKCgoKCgoKCgpBdCAyMDIxLTAxLTI4IDE5OjEzOjAyLCAicm9ubmll
-IHNhaGxiZXJnIHZpYSBzYW1iYS10ZWNobmljYWwiIDxzYW1iYS10ZWNobmljYWxAbGlzdHMuc2Ft
-YmEub3JnPiB3cm90ZToKPkhpLAo+Cj5JIGhhdmVudCB3b3JrZWQgb24gY3RkYiBpbiBhZ2VzLCBi
-dXQgdGhlIGlzY3NpIHNjcmlwdHMgaW4gY3RkYiBpcwo+cHJvYmFibHkgbm90IHN1aXRhYmxlIGZv
-ciB5b3VyIHVzZSBjYXNlLgo+SXQgaXMgYWltZWQgYXQgd2hlbiB5b3Ugd2FudCB0byBleHBvcnQg
-YW4gTFVOIHZpYSBhIHNwZWNpZmljCj50YXJnZXRuYW1lIGZyb20gdGhlIGN0ZGIgY2x1c3RlciB0
-byBleHRlcm5hbCBpc2NzaSBjbGllbnRzCj5hbmQgYmFzaWNhbGx5IGhhdmUgYSBhY3RpdmUvcGFz
-c2l2ZSBmYWlsb3ZlciBtb2RlIGZvciB0aGUgdGFyZ2V0L2x1bgo+cGFpcnMgYWNyb3NzIG5vZGVz
-Lgo+Cj5XaGF0IHlvdSB0cnkgdG8gZG8gaXMgaGF2ZSBpc2NzaSB1c2VkIGludGVybmFsbHkgZm9y
-IHN0b3JhZ2UgYW5kIHRoZW4KPmhhdmUgYSBmaWxlIHN5c3RlbSBvbnRvcCB0aGVzZSBsdW5zIGFu
-ZCBleHBvcnQgdGhlbiBhcyBORlMgc2hhcmVzIHRvCj50byBuZnMgY2xpZW50cy4KPlRoYXQgY291
-bGQgYmUgZG9uZSwgSSBndWVzcywgYnV0IGlzIG5vdCB3aGF0IEkgdGhpbmsgdGhlIGN1cnJlbnQK
-PnNjcmlwdHMgZG8gc28geW91IG1pZ2h0IGhhdmUgdG8gd3JpdGUgYSBidW5jaCBvZiBuZXcgZXZl
-bnRzY3JpcHRzIHRvCj5kbyB3aGF0IHlvdSB3YW50Lgo+Cj5UaGUgbmZzIHN1cHBvcnQgaW4gdGhl
-IGV2ZW50c2NyaXB0cyBhbHNvIG1pZ2h0IGJlIHByb2JsZW1hdGljLiBXaGVuIEkKPndvcmtlZCBv
-biB0aGVtIHRoZXkgd2VyZSBvbmx5IGFpbWVkIGF0IG5mc3YzLgo+QXMgbmZzdjQgaXMgZGlzcGxh
-Y2luZyB2MyBxdWl0ZSByYXBpZGx5LCB0aGVzZSBzY3JpcHRzIG1heSBvciBtYXkgbm90Cj53b3Jr
-IGZvciB5b3UuCj5CdXQgdGhleSBhbHNvIHdlcmUgYWltZWQgYXQgYW4gYWN0aXZlL2FjdGl2ZSBj
-b25maWd1cmF0aW9uIHdoZXJlIGFsbAo+dGhlIGRhdGEgaXMgc2hhcmVkIGZyb20gYSBjb21tb24g
-Y2x1c3RlciBiYWNrZW5kIGFuZCBpcyBhdmFpbGFibGUKPmFjdGl2ZS9hY3RpdmUgdGhyb3VnaCBl
-YWNoIG5vZGUuCj5JIGFtIG5vdCBzdXJlIGhvdyB3ZWxsIHRoZSBjdXJyZW50IHNjcmlwdHMgd2ls
-bCB3b3JrIHdpdGggbmZzdjQgc2luY2UKPnRoZXJlIGFyZSBzbyBtdWNoIG1vcmUgc3RhdGUgaW52
-b2x2ZWQuCj4KPgo+U2luY2UgeW91IGJhc2ljYWxseSB3YW50IGVhY2ggc2hhcmUgdG8gYmUgaGFu
-ZGxlZCBpbiBhIGFjdGl2ZS9wYXNzaXZlCj5mYWlsb3ZlciBtb2RlIEkgdGhpbmsgcGFjZW1ha2Vy
-IHdpbGwgYmUgYSBtdWNoIGJldHRlcgo+Zml0IGFuIGVhc2llciBzb2x1dGlvbiB0aGFuIHRyeWlu
-ZyB0byBwdXNoIGEgYWNyaXZlL3Bhc3NpdmUgZmFpbG92ZXIKPm1vZGVsIGludG8gY3RkYi4KPgo+
-UGFjZW1ha2VyIGFzIHlvdSBzYWlkIGRvZXMgbmVlZCBhIHNoYXJlZCByZXNvdXJjZSB0byBoYW5k
-bGUgc2FmZQo+ZmFpbG92ZXIuIEluIGN0ZGIgdGhpcyBpcyBtb3N0bHkgaGFuZGxlZCBieSB0aGUg
-c2hhcmVkIGJhY2tlbmQgY2x1c3Rlcgo+ZmlsZXN5c3RlbSB0aGF0IGN0ZGIgaXMgZGVzaWduZWQg
-dG8gc2l0IG9udG9wIG9mLgo+SW4gYSBwYWNlbWFrZXIgc29sdXRpb24sIGFzIHlvdSBkb24gbm90
-IGhhdmUgYSBiYWNrZW5kIGZpbGVzeXN0ZW0gd2l0aAo+Y29oZXJlbnQgbG9ja2luZywgeW91IHdp
-bGwgbmVlZCBhIGRpZmZlcmVudCBzb2x1dGlvbiB0byBhdm9pZAo+c3BsaXQtYnJhaW4uCj5JIGFt
-IG5vIGxvbmdlciBmYW1pbGlhciBhdCBhbGwgd2l0aCBjdXJyZW50IGJlc3QgcHJhY3RpY2UgZm9y
-Cj5wYWNlbWFrZXIgYnV0IEkgdGhpbmsgaGF2aW5nIGEgc2hhcmVkLCBoaWdoLWF2YWlsYWJsZSBT
-Q1NJIHJlc291cmNlCj50aGF0IHN1cHBvcnRzIFBlcnNpc3RlbnRSZXNlcnZhdGlvbiBjb3VsZCBi
-ZSBhIHNvbHV0aW9uLgo+VXNpbmcgUFIgdG8gZW5zdXJlIHRoYXQgb25seSBvbmUgbm9kZSBhdCBh
-IHRpbWUgaXMgYWN0aXZlLgo+QnV0LCB0aGlzIGlzIGFsbCB2ZXJ5IG9sZCBhbmQgcG9zc2libHkg
-b2Jzb2xldGUgdW5kZXJzdGFuZGluZyBvZiBwYWNlbWFrZXIuCj4KPgo+VEw7RFIKPlN0aWxsLCBJ
-IHRoaW5rIGFzIHlvdSB3YW50IGFjdGl2ZS9wYXNzaXZlIGZhaWxvdmVyIGZvciB5b3VyIHNoYXJl
-cwo+cGFjZW1ha2VyIGlzIGxpa2VseSB3aGF0IHlvdSB3YW50IGFuZCBub3QgY3RkYi4KPlRoZSBw
-YWNlbWFrZXIgZm9sa3Mgd2lsbCBrbm93IG11Y2ggYmV0dGVyIGhvdyB5b3Ugd291bGQgc2V0IHRo
-ZXNlCj5zeXN0ZW1zIHVwIHRoYW4gSSBkby4KPgo+cmVnYXJkcwo+cm9ubmllIHMKPgo+Cj5PbiBU
-aHUsIEphbiAyOCwgMjAyMSBhdCA4OjAxIHZpYSBhIHNwUE0gt+fO3sP7IDx3dW1pbmdfODFAMTYz
-LmNvbT4gd3JvdGU6Cj4+Cj4+ICJJbiB5b3VyIHNjZW5hcmlvLCBpcyB0aGUgZmlsZXN5c3RlbSBv
-biBlYWNoIExVTiBhc3NvY2lhdGVkIHdpdGggYSBwYXJ0aWN1bGFyIHB1YmxpYyBJUCBhZGRyZXNz
-PyIKPj4geWVzCj4+Cj4+ICJJdCB3b3VsZCBiZSBnb29kIGlmIHlvdSBjb3VsZCBkbyB0aGlzIHdp
-dGhvdXQgbW9kaWZ5aW5nIDEwLmludGVyZmFjZS4gSXQgd291bGQgYmUgYmV0dGVyIGlmIHlvdSBj
-b3VsZCBkbyBpdCBieSBhZGRpbmcgYSBuZXcgZXZlbnQgc2NyaXB0LiIKPj4gdGhhbmtzLgo+PiBJ
-IGFtIHNvcnJ5IHRoYXQgSSBoYXZlIGFub3RoZXIgcXVlc3Rpb24uCj4+IHJlZGhhdCBwcm92aWRl
-cyBhbm90aGVyIHNvbHV0aW9uOgo+PiBodHRwczovL3d3dy5saW51eHRlY2hpLmNvbS9jb25maWd1
-cmUtbmZzLXNlcnZlci1jbHVzdGVyaW5nLXBhY2VtYWtlci1jZW50b3MtNy1yaGVsLTcvCj4+IHRo
-ZXkgdXNlIHBhY2VtYWtlciB0byBtYWtlIGFuIGFjdGl2ZS9wYXNzaXZlICBuZnMgY2x1c3Rlci4g
-aXRzIGdvYWwgaXMgdmVyeSBzaW1pbGFyIHRvIG1pbmUuCj4+Cj4+IGlmIHRoZSBjbHVzdGVyIGNv
-bnNpc3RzIG9mIGp1c3QgdHdvIG5vZGVzLCB3ZSBrbm93IHRoYXQgdGhlcmUgZG9lcyBub3QgZXhp
-c3QgYSBjb3JyZWN0IGFsZ29yaXRobSBmb3IgdGhlIGNvbnNlbnN1cyBwcm9ibGVtLiBUaGUgcGFj
-ZW1ha2VyIHNvbHV0aW9uIG9mIHJlZGhhdCB1c2VzIGEgZmVuY2UgZGV2aWNlICh3ZSBjYW4gdXNl
-IGEgc2hhcmVkIGRpc2suIGZvciBleGFtcGxlIGlzY3NpIGx1biwgYXMgYSBmZW5jaW5nIGRldmlj
-ZSksICBzbyBpdCBtYXkgYmUgY29ycmVjdC4KPj4gQnV0IEkgaGF2ZSBub3QgZm91bmQgYW55IGRv
-YyBhYm91dCBmZW5jZSBkZXZpY2UgYW5kIGN0ZGIsIHNvIGluIHRoZW9yeSBteSBzb2x1dGlvbiBt
-YXkgYmUgbm90IGNvcnJlY3QgZm9yIHR3by1ub2RlcyBjbHVzdGVyLgo+PiBJIGFtIHZlcnkgY3Vy
-aW91cyBob3cgZG9lcyBjdGRiIHRhY2tsZSB0aGUgcHJvYmxlbSBvciB0aGUgcHJvYmxlbSBpcyBu
-b3QgdGFja2xlZC4KPj4KPj4gaWYgYW55IGhvdy10b3Mgb3IgaW1wbGVtZW50YXRpb24vcHJpbmNp
-cGxlIG9mIGN0ZGIgaXMgcHJvdmlkZWQgSSB3aWxsIGJlIGdsYWQuCj4+IHNvcnJ5IHRvIGJvdGhl
-ci4KPj4gdGhhbmtzIGZvciB5b3VyIHJlcGx5Lgo+Pgo+PiBBdCAyMDIxLTAxLTI4IDE3OjI1OjE2
-LCAiTWFydGluIFNjaHdlbmtlIiA8bWFydGluQG1lbHRpbi5uZXQ+IHdyb3RlOgo+PiA+SG1tbS4g
-IFNvcnJ5LCBJIG1pZ2h0IGhhdmUgcmVhZCB0b28gcXVpY2tseSBhbmQgbWlzdW5kZXJzdG9vZC4g
-IDcwLmlzY3NpCj4+ID5pcyBvbmx5IGRlc2lnbmVkIHRvIHJ1biB0Z3RkIG9uIG5vZGVzIGFuZCBl
-eHBvcnQgTFVOcyBmcm9tIHB1YmxpYyBJUAo+PiA+YWRkcmVzc2VzLiBJbiB5b3VyIGV4YW1wbGUg
-dGhlIG5vZGVzIGFyZSBpU0NTSSBjbGllbnRzLCBtb3VudGluZyBhCj4+ID5maWxlc3lzdGVtIG9u
-IHRoZSBMVU4gYW5kIGV4cG9ydGluZyBpdCB2aWEgTkZTLiAgVGhhdCBpcyB2ZXJ5IGRpZmZlcmVu
-dC4KPj4gPgo+PiA+U29ycnkgZm9yIHRoZSBjb25mdXNpb24uCj4+ID4KPj4gPkluIHlvdXIgc2Nl
-bmFyaW8sIGlzIHRoZSBmaWxlc3lzdGVtIG9uIGVhY2ggTFVOIGFzc29jaWF0ZWQgd2l0aCBhCj4+
-ID5wYXJ0aWN1bGFyIHB1YmxpYyBJUCBhZGRyZXNzPwo+PiA+Cj4+ID5JdCB3b3VsZCBiZSBnb29k
-IGlmIHlvdSBjb3VsZCBkbyB0aGlzIHdpdGhvdXQgbW9kaWZ5aW5nIDEwLmludGVyZmFjZS4KPj4g
-Pkl0IHdvdWxkIGJlIGJldHRlciBpZiB5b3UgY291bGQgZG8gaXQgYnkgYWRkaW5nIGEgbmV3IGV2
-ZW50IHNjcmlwdC4KPj4gPgo+PiA+cGVhY2UgJiBoYXBwaW5lc3MsCj4+ID5tYXJ0aW4KPj4gPgo+
-PiA+T24gVGh1LCAyOCBKYW4gMjAyMSAwOTo1NToyOSArMDgwMCAoQ1NUKSwgt+fO3sP7IDx3dW1p
-bmdfODFAMTYzLmNvbT4KPj4gPndyb3RlOgo+PiA+Cj4+ID4+IG1hcnRpbiwgdGhhbmtzIGZvciB5
-b3VyIHJlcGx5Lgo+PiA+PiBObywgSSBkaWQgbm90IG1vZGlmeSA3MC5pc2NzaS4gTWF5YmUgSSBu
-ZWVkIHRvIG1ha2UgZnVsbCB1bmRlcnN0YW5kaW5nIG9mIGl0Lgo+PiA+Pgo+PiA+Pgo+PiA+PiBh
-ZnRlciBtYW55IGRheXMgcmVhZGluZy9kZWJ1Z2luZyB0aGUgc291cmNlIGNvZGUgb2YgY3RkYiBh
-bmQgaXRzIHNoZWxsIHNjcmlwdHMsIEkgZm91bmQgdGhlIGtleSBwb2ludCBpbiB0aGUgc2NyaXB0
-IDEwLmludGVyZmFjZS4KPj4gPj4gbXkgbW9kaWZpY2F0aW9uICBpczoKPj4gPj4gMSBjcmVhdGUg
-bmZzIHNoYXJlKG1vdW50IGZzLCBtb2RpZnkgL2V0Yy9leHBvcnRzLCByZXN0YXJ0IG5mcyBzZXJ2
-aWNlIC4uKSBiZWZvcmUgYW55IHB1YmxpYyBpcCBpcyBhZGRlZCB0byBzb21lIGludGVyZmFjZQo+
-PiA+PiAyIGRlbGV0ZSB0aGUgY29ycmVzcG9uZGluZyBuZnMgc2hhcmUgYWZ0ZXIgYW55IHB1Ymxp
-YyBpcCBpcyByZW1vdmVkIGZyb20gc29tZSBpbnRlcmZhY2UKPj4gPj4KPj4gPj4KPj4gPj4gSSB0
-ZXN0ZWQgbWFueSBzaHV0ZG93bi1yZWJvb3QgY3ljbGVzIChvZiBub2RlIGluIGEgY3RkYiBjbHVz
-dGVyKSwgYW5kIHRoZSByZXN1bHRzIGFyZSB0aGUgc2FtZSBhcyBteSBleHBlY3RhdGlvbi4KPj4g
-Pj4gSSB0aGluayBJIG5lZWQgbW9yZSB0ZXN0cyBhbmQgbW9yZSBzY2VuYXJpbyB0ZXN0cy4KPj4K
-Pj4KPj4KPj4K
+On Fri, Jan 29, 2021 at 6:30 PM =E9=A3=8E=E6=97=A0=E5=90=8D <wuming_81@163.=
+com> wrote:
+>
+> everyone,I am sorry that when writing the email I mistakenly pressed some=
+ key and the email client sended a reply email.
+>
+>
+>
+> there is  a still problem:
+>
+> 1) the user of nfs mounts an nfs share using TCP
+>
+> 2) the user cp a large file for example 20GB file
+>
+> 4) (the cp does not complete) the corresponding server node fails
+>
+>
+> then I find that the cp is blocked as my expectation.
+>
+> but after iscsi lun/server/share/public ip transfer to other server node,
+>
+> the cp is still blocked and stops writing.
+>
+>
+> is it because that the smnotify tool uses UDP to notify nfs ?
+>
+> ref: ctdb/utils/smnotify/smnotify.c
+
+No it has nothing to do with smnotify. That tool is ONLY used to
+trigger re-negotiate of byte range locks for nfsv3.
+Byte range locks are rare in unix/linux applications and they are not
+used at all with the 'cp' command.
+What is likely happening is imho (without any data to go on) that a
+failover does happen but state needed by knfsd for fs is either
+missing
+or something is wrong with your scripts and the failover does not
+happen properly.
+
+
+Have you tried to force the client to use nfsv3?  I have strong
+suspicions that nfsv4 will absolutely not work with the ctdb
+eventscripts
+unless Martin have rewritten them to be be nfsv4 capable.
+If nfsv3 also does not works, well, then I am out of ideas. Maybe your
+eventscripts are not working?
+
+Still, since you are working to build a active/passive failover
+solution. ctdb is the wrong tool to do this.
+You really should look at pacemaker or similar for active/passive.
+
+
+
+>
+>
+> by the way, is there any doc about the internal of ctdb ?
+>
+>
+> thanks for any advice.
+>
+>
+>
+>
+>
+>
+>
+>
+> At 2021-01-28 19:13:02, "ronnie sahlberg via samba-technical" <samba-tech=
+nical@lists.samba.org> wrote:
+> >Hi,
+> >
+> >I havent worked on ctdb in ages, but the iscsi scripts in ctdb is
+> >probably not suitable for your use case.
+> >It is aimed at when you want to export an LUN via a specific
+> >targetname from the ctdb cluster to external iscsi clients
+> >and basically have a active/passive failover mode for the target/lun
+> >pairs across nodes.
+> >
+> >What you try to do is have iscsi used internally for storage and then
+> >have a file system ontop these luns and export then as NFS shares to
+> >to nfs clients.
+> >That could be done, I guess, but is not what I think the current
+> >scripts do so you might have to write a bunch of new eventscripts to
+> >do what you want.
+> >
+> >The nfs support in the eventscripts also might be problematic. When I
+> >worked on them they were only aimed at nfsv3.
+> >As nfsv4 is displacing v3 quite rapidly, these scripts may or may not
+> >work for you.
+> >But they also were aimed at an active/active configuration where all
+> >the data is shared from a common cluster backend and is available
+> >active/active through each node.
+> >I am not sure how well the current scripts will work with nfsv4 since
+> >there are so much more state involved.
+> >
+> >
+> >Since you basically want each share to be handled in a active/passive
+> >failover mode I think pacemaker will be a much better
+> >fit an easier solution than trying to push a acrive/passive failover
+> >model into ctdb.
+> >
+> >Pacemaker as you said does need a shared resource to handle safe
+> >failover. In ctdb this is mostly handled by the shared backend cluster
+> >filesystem that ctdb is designed to sit ontop of.
+> >In a pacemaker solution, as you don not have a backend filesystem with
+> >coherent locking, you will need a different solution to avoid
+> >split-brain.
+> >I am no longer familiar at all with current best practice for
+> >pacemaker but I think having a shared, high-available SCSI resource
+> >that supports PersistentReservation could be a solution.
+> >Using PR to ensure that only one node at a time is active.
+> >But, this is all very old and possibly obsolete understanding of pacemak=
+er.
+> >
+> >
+> >TL;DR
+> >Still, I think as you want active/passive failover for your shares
+> >pacemaker is likely what you want and not ctdb.
+> >The pacemaker folks will know much better how you would set these
+> >systems up than I do.
+> >
+> >regards
+> >ronnie s
+> >
+> >
+> >On Thu, Jan 28, 2021 at 8:01 via a spPM =E9=A3=8E=E6=97=A0=E5=90=8D <wum=
+ing_81@163.com> wrote:
+> >>
+> >> "In your scenario, is the filesystem on each LUN associated with a par=
+ticular public IP address?"
+> >> yes
+> >>
+> >> "It would be good if you could do this without modifying 10.interface.=
+ It would be better if you could do it by adding a new event script."
+> >> thanks.
+> >> I am sorry that I have another question.
+> >> redhat provides another solution:
+> >> https://www.linuxtechi.com/configure-nfs-server-clustering-pacemaker-c=
+entos-7-rhel-7/
+> >> they use pacemaker to make an active/passive  nfs cluster. its goal is=
+ very similar to mine.
+> >>
+> >> if the cluster consists of just two nodes, we know that there does not=
+ exist a correct algorithm for the consensus problem. The pacemaker solutio=
+n of redhat uses a fence device (we can use a shared disk. for example iscs=
+i lun, as a fencing device),  so it may be correct.
+> >> But I have not found any doc about fence device and ctdb, so in theory=
+ my solution may be not correct for two-nodes cluster.
+> >> I am very curious how does ctdb tackle the problem or the problem is n=
+ot tackled.
+> >>
+> >> if any how-tos or implementation/principle of ctdb is provided I will =
+be glad.
+> >> sorry to bother.
+> >> thanks for your reply.
+> >>
+> >> At 2021-01-28 17:25:16, "Martin Schwenke" <martin@meltin.net> wrote:
+> >> >Hmmm.  Sorry, I might have read too quickly and misunderstood.  70.is=
+csi
+> >> >is only designed to run tgtd on nodes and export LUNs from public IP
+> >> >addresses. In your example the nodes are iSCSI clients, mounting a
+> >> >filesystem on the LUN and exporting it via NFS.  That is very differe=
+nt.
+> >> >
+> >> >Sorry for the confusion.
+> >> >
+> >> >In your scenario, is the filesystem on each LUN associated with a
+> >> >particular public IP address?
+> >> >
+> >> >It would be good if you could do this without modifying 10.interface.
+> >> >It would be better if you could do it by adding a new event script.
+> >> >
+> >> >peace & happiness,
+> >> >martin
+> >> >
+> >> >On Thu, 28 Jan 2021 09:55:29 +0800 (CST), =E9=A3=8E=E6=97=A0=E5=90=8D=
+ <wuming_81@163.com>
+> >> >wrote:
+> >> >
+> >> >> martin, thanks for your reply.
+> >> >> No, I did not modify 70.iscsi. Maybe I need to make full understand=
+ing of it.
+> >> >>
+> >> >>
+> >> >> after many days reading/debuging the source code of ctdb and its sh=
+ell scripts, I found the key point in the script 10.interface.
+> >> >> my modification  is:
+> >> >> 1 create nfs share(mount fs, modify /etc/exports, restart nfs servi=
+ce ..) before any public ip is added to some interface
+> >> >> 2 delete the corresponding nfs share after any public ip is removed=
+ from some interface
+> >> >>
+> >> >>
+> >> >> I tested many shutdown-reboot cycles (of node in a ctdb cluster), a=
+nd the results are the same as my expectation.
+> >> >> I think I need more tests and more scenario tests.
+> >>
+> >>
+> >>
+> >>
+>
+>
+>
+>
+
