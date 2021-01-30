@@ -2,77 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABAAC3095E2
-	for <lists+samba-technical@lfdr.de>; Sat, 30 Jan 2021 15:25:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35C64309819
+	for <lists+samba-technical@lfdr.de>; Sat, 30 Jan 2021 20:50:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=YVGj1atcQ2lFmm0G3SW2PxiRNTg/LPhkrSx0fsR5u/A=; b=QTQ4Y3oW18xodwc7oECcS3/lmD
-	IMEMdcZIuVEXt3SC8S08YvvUcRGsGzGumTX02PX2pCDHmgXBDu8KfiDWXRwm+GZCwtO0kmKxgXwP8
-	vB6U5BiUy1N90krVPneVyGmN2xSBgZLCqK5eKrFokQdNrDW0jf0B55tYxG17JBwxDCMyQYQoyRieu
-	ZEztkoFgIc9AQS1AM6ORLceEPeCF6zlq9IyjfMZTQ+HLEj7vhiXiqnjG/Y/q7n13+djr0r6mgN0OF
-	ATnPp9uWHEqpJObaM5/GIH/NyWZp1gu2jxeTQsPmB5zTmRGT5t5yMuJoaTvth9kP36wd6KPI6eJI9
-	rt9C5PAQ==;
-Received: from ip6-localhost ([::1]:32272 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=NuZKzUtnn+g0sq5i1UkPI6Ic2K0UbdWke3soqbBgLGg=; b=0UsHMAQIzByLb6Dgexvppw0+uY
+	szymv5fRvBHVQenQn53T9yl45f3bJTIqyzPVK+i316wOjQyzlQUj3w49Ix+/etlRcWCLjvNzupicv
+	6txR3ifnaUJ79FTcC28QB2utd4+uSNPOUFwQYANVjy/vXDHi8aKJrN7i0lZHKXqddgO07R+OyJSKt
+	rdoW+FKqToLhRRlhMYePv7lkQtcFmiuuI/8nCy/6MlRKoNB8M/1B4jzNHHhCckqoIcHmg5c90FDVO
+	pvNHGlp45aHFQ2DZutI0m8wQ1r2IgLqZjXTNOhmIC6QJuqfxhvisVeqaCjNl71OnRMDjKUAWe/RH+
+	1tCAw9Yw==;
+Received: from ip6-localhost ([::1]:53142 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l5rAs-007wVl-Fw; Sat, 30 Jan 2021 14:24:30 +0000
-Received: from mail-yb1-xb30.google.com ([2607:f8b0:4864:20::b30]:42464) 
+	id 1l5wEz-00802K-BU; Sat, 30 Jan 2021 19:49:05 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60632) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l5rAm-007wVe-Ud
- for samba-technical@lists.samba.org; Sat, 30 Jan 2021 14:24:27 +0000
-Received: by mail-yb1-xb30.google.com with SMTP id b11so11950225ybj.9
- for <samba-technical@lists.samba.org>; Sat, 30 Jan 2021 06:24:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=YVGj1atcQ2lFmm0G3SW2PxiRNTg/LPhkrSx0fsR5u/A=;
- b=tb282TAQcw85mpoH6RY/HTdoDXJ3BfIY15xtRD+qam90nuEWsVIXucJY4CIAbhvCvw
- lkFZJi1EseQQavyEjVaw7irz85SVkEK90LfisoqBVvB0lIZkQ3FnxprQVtsuJrJ/lXlO
- RcU8OwdU3h8vZO8ioavV8cpEuzllKhiEB9qTiKRMAaEnEXfCyzSjjxnVG7b522Fjb4D9
- Qys2/MWowtkPLJNHnnPkQt4oPHLAJEialag1kmjz5IDhUbCxJgAuwCrZsDhOXKcDfkdV
- 6kuMdEfcaYykBtF8PdbgjOQIYWf50feKob1LN6JtKD+Q3qpimtjdM7M/wKVPoyinr7Fy
- o2Jg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=YVGj1atcQ2lFmm0G3SW2PxiRNTg/LPhkrSx0fsR5u/A=;
- b=cgY0UoWjKgS3qaiT/YZ4cH+PrlPmgyxDdTCTepBZYBzDiXAYEIVNt6PV/dOjoZtRru
- 6rRD1ozxYcMD/5amnJCIJK8EoDY1Njb0Im14MhfTrZ5IRrbBNu/pXgVl6fYkIzHHSD5k
- Anp9RJZcog4NpZR0w1hestLBmNq8bAVH6GuW2w0fCLP3JpEW/KHkryXa5lx9QevzRXTP
- U+vab6ulssx3p2nv89YDJhDFgh08L1nW55hMw5qK+39EUMrSMOGqMTdlyMas893vwXlV
- Aa5k/UL/IphUoIjS46+dIMtt5PlZn8oMjFu018YNf2om4rwWRSJdWtK8IhWJZXAZUSqW
- bZwA==
-X-Gm-Message-State: AOAM532P1UQf33741rfG0TyG41HD72g5YAcf/4tWAlrIVGblys+ZqQJ0
- zlhTTW79a+5W4+lcv3lHLievepthwsRFuJc2EXvtBsG4yIDGiA==
-X-Google-Smtp-Source: ABdhPJxXNO1ZKaFIBb6QCgP+nRzeEl2iS3CO5NLftAKPJHoAXtA87/GndD2dnhHo/fvctSpRRkONG1JSsA0djO/lw4M=
-X-Received: by 2002:a25:4091:: with SMTP id n139mr9970251yba.331.1612016662196; 
- Sat, 30 Jan 2021 06:24:22 -0800 (PST)
+ (Exim) id 1l5wEt-00802D-G4
+ for samba-technical@lists.samba.org; Sat, 30 Jan 2021 19:49:02 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=NuZKzUtnn+g0sq5i1UkPI6Ic2K0UbdWke3soqbBgLGg=; b=fbXD1hC3TGuDsQdwxWClOPZUU3
+ 7uXmZz+lhgd+IGVPo1EcLCqApVvDm9s9t28rwt7hRaacMpTWDHA7W1zl49RobS0R+5LRx/zdVm0wI
+ 4ziyt1lQNCnatbe+YzbZ4dsaU1e2zSJx7KhG3kMz/HorrgPXkPcvp3XMLKiNIwxD5chWHiGxviGyJ
+ XaBHHDEOinBYkEXlGRF2+WXiYtcmUJ60ftQRvOs4KHwdL9ByWhcSU+hjI8VMMxVQ7gdlegQOEngNk
+ BztlstwtWBnGli9TRnndaNrWWOacNFFg5KyH8BPKZirIkOJ/020F2lBrlyE8LJTGLMSJaU1Q3U8GP
+ 5ryv/xGI70mK310l9HIb7aB9qubTNYLawrbdncRrO7baNdko4FLQVfCOMxcO0i6ZXB92Y+YaRpLMh
+ 197nQ4DLF577wajyfWKwMh72Wr6iLZxL61G/RIO8zkKXfseGCoIdtdCQx3vbw2PpzMfxBWnMqDEFX
+ uj+zv7qx8yG4tu+Sr2XyAn0N;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1l5wEq-0007yJ-D9; Sat, 30 Jan 2021 19:48:56 +0000
+To: Shilpa K <shilpa.krishnareddy@gmail.com>, samba-technical@lists.samba.org
+Subject: Re: winbind cache issue for NDR entries
+Date: Sat, 30 Jan 2021 20:48:53 +0100
+Message-ID: <1852905.PYKUYFuaPT@krikkit>
+In-Reply-To: <20210129210511.GA50742@jeremy-acer>
+References: <CAHbM3qh3pAXzSzSRNjE77jL1tmsREuRu9BQOCaPnWBY9dVdNdg@mail.gmail.com>
+ <20210129210511.GA50742@jeremy-acer>
 MIME-Version: 1.0
-References: <CANT5p=pxPsBwAv3oJX6Ae9wjpZoEjLvyfGM1sM9DEhS11RNgog@mail.gmail.com>
- <87pn7t4kr9.fsf@suse.com>
- <CANT5p=oeY91u17DPe6WO75Eq_bjzrVC0kmAErrZ=h3S1qh-Wxw@mail.gmail.com>
- <87eeo54q0i.fsf@suse.com>
- <CANT5p=rxp3iQMgxaM_mn3RE3B+zezWr3o8zpkFyWUR27CpeVCA@mail.gmail.com>
- <CANT5p=qMHxq_L5RpXAixzrQztjMr8-P_aO4aPg5uqfPSLNUiTA@mail.gmail.com>
- <874ko7vy0z.fsf@suse.com>
- <CANT5p=o07RqmMkcFoLeUVTeQHhzh5MmFYpfAdv0755iiGbp1ZA@mail.gmail.com>
- <87mu1yc6gw.fsf@suse.com>
- <CANT5p=r0Jix9EuuF8gJzQBGHLp0Y-Oogxzju7_2cJog_jF2fjg@mail.gmail.com>
- <874knolhpw.fsf@suse.com>
- <CANT5p=oTTErJk240GKc+k6Cihqks+9Nnurh=MdrvgC7gqKu1ww@mail.gmail.com>
- <CAKywueTr9GHbzg65s12BRKNB_L881wFLmHcb5boFxGX2AoN40g@mail.gmail.com>
- <CANT5p=rECwTZgskdXUr3VAHWA-PkYHEXX=qwO8PpVZRc0=pOKA@mail.gmail.com>
- <CAKywueTuGuqT8QN-8Jn1QNHT+HPKysLDhdp1gPsm6+Q0tQnbGA@mail.gmail.com>
- <CANT5p=pUVucG6NhzfziAjsjDnimHCWDUiJP46DYoRqjpXHegsA@mail.gmail.com>
- <0b80c61e-3953-e627-9818-8a8c6c50499e@samba.org>
- <CANT5p=rYiY0xE-35swsFKVitZD2yTchRiReyA0wVvY+mU_qKEw@mail.gmail.com>
-In-Reply-To: <CANT5p=rYiY0xE-35swsFKVitZD2yTchRiReyA0wVvY+mU_qKEw@mail.gmail.com>
-Date: Sat, 30 Jan 2021 06:24:11 -0800
-Message-ID: <CANT5p=rV-KhHtahaF-9YcM5X8jDMLbCx-szwLiZvACRt1oCyow@mail.gmail.com>
-Subject: Re: [PATCH][SMB3] mount.cifs integration with PAM
-To: Stefan Metzmacher <metze@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,382 +55,76 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>,
- Steve French <smfrench@gmail.com>, sribhat.msa@outlook.com
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>,
+ Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-It just occurred to me that integrating with mount.cifs will not
-suffice for a multiuser scenario.
-It sounds like we need to modify cifscreds command to have a switch
-for cifscreds command; if used in krb5 context, instead of dealing
-with kernel keyring, we authenticate with PAM (for add) and call PAM
-logoff (for clear).
-If users are then missing krb5 tickets (logged in to ssh using private
-keys), they can call cifscreds to get the tickets.
+On Friday, 29 January 2021 22:05:11 CET Jeremy Allison via samba-technical 
+wrote:
+> On Fri, Jan 29, 2021 at 07:39:40PM +0530, Shilpa K via samba-technical 
+wrote:
+> >Hello,
+> >
+> >We had a customer report that the users were not able to login for about
+> >30minutes and the problem cleared itself in almost about 30minutes. They
+> >are using Samba as a member server in a domain which has 2 way trust with
+> >another domain (say ABC.COM). Upon investigation, we found that there was a
+> >problem with trusted domain DCs for a very short duration as per the event
+> >log on the DC of the primary domain. This problem seems to have been
+> >cleared away after a short duration. Around the same time, a user belonging
+> >to a trusted domain mapped Samba share and encountered a problem. At this
+> >time, looks like NDR cache entry for trusted domain group "Domain Users"
+> >was added in winbindd_cache.tdb to indicate that there was a lookup problem
+> >and the status NT_STATUS_TRUSTED_DOMAIN_FAILURE was stored as part of this
+> >entry. Once the issue with trusted domain DC was cleared and the domain was
+> >back online, when users tried to login, PAM_AUTH was successful for the
+> >users but getpwnam failed while looking up SID for "Domain Users". This
+> >failure was returned from the entry in the winbindd_cache.tdb as
+> >wcache_fetch_ndr() succeeded for this entry. Due to this, users belonging
+> >to the trusted domain were not able to login. Once the cache was expired,
+> >getpwnam succeeded for trusted domain users and the shares could be mapped.
+> >In order to resolve this issue, should we not refresh the sequence number
+> >when the domain goes online? Btw, we are using "winbind cache time = 1800".
+> 
+> Yep, looks like we should add a call to force a refresh of the
+> sequence number in the cache here:
+> 
+> source3/winbindd/winbindd_cm.c:set_domain_online()
+> 
+>   538
+>   539         domain->online = True;
+>   540
+> 
+> Add a force_refresh_domain_sequence_number(domain) call above.
+> 
+> Here is a (raw, untested) patch that implements this.
+> 
+> Any chance you can test this for me ?
+> 
+> Jeremy.
 
-@Pavel Shilovsky @Aur=C3=A9lien Aptel Please let me know what you think
-about this approach.
-If you agree, I'll start working on the patch.
+I wonder if this is the dc-connect issue with trusted domains.
 
-Regards,
-Shyam
+A fix for this we are currently using is:
 
-On Wed, Dec 16, 2020 at 5:05 PM Shyam Prasad N <nspmangalore@gmail.com> wro=
-te:
->
-> Hi Stefan,
->
-> Thanks for the review. My replies inline...
->
-> On Mon, 14 Dec, 2020, 23:33 Stefan Metzmacher, <metze@samba.org> wrote:
->>
->> Hi Shyam,
->>
->> in what way is this specific to kerberos?
->
-> Cifs.ko expects Kerberos TGT to be present in cred cache before the user =
-mounts the share. If winbind or sssd is configured, this would happen on mo=
-st types of user login, by authentication against PAM, except for ssh priva=
-te key auth (which is quite common). Hence trying to provide the user an op=
-tion to authenticate during the mount.
->
-> Do you see use cases outside of krb5, which can make use of this?
->
->> Would it make sense to call the configure option just --enable-pam?
->> And also remove the 'krb5' from other variables?
->
-> There's already enable-pam which applies to ntlm multiuser scenario. Let =
-me recheck if I can integrate with it somehow.
->>
->>
->> PAM_CIFS_SERVICE "cifs" seems to be unspecific,
->> "mount.cifs" or "cifs.mount". Maybe even "mount.smb3"?
->
-> There could be cases where we need to do PAM auth even in cifs.upcall. Fo=
-r example, when another user tries to access a multiuser mount. I haven't c=
-oded it here though. So kept the name generic.
->>
->>
->> Can you fix the indentation of the patch? There seems to be
->> a strange mix of leading tabs and whitespaces, which make it hard to
->> read the patch.
->
-> Will fix this in my follow up patch.
->>
->>
->> With force_pam I would not expect a failure to be ignored.
->
-> Initially, I was thinking this could be a fallback option, in case mount =
-fails with ENOKEY. But later changed it to a seperate option. Will fix this=
- in my next patch.
->>
->>
->> Why can this only be used with sec=3Dkrb5? Wouldn't it be possible
->> to fetch the password from the pam stack in order to pass it to
->> the kernel?
->
-> I don't know of any PAM API to do that. You could use a password without =
-prompting the user, which I'm doing for cases where password has been passe=
-d as a mount option.
->>
->>
->> metze
->>
->> Am 27.11.20 um 11:43 schrieb Shyam Prasad N via samba-technical:
->> > Discussed this with Aurelien today.
->> >
->> > With the patch last sent, users are authenticated using the PAM stack.
->> > However, there's no call to cleanup the PAM credentials. Which could
->> > leave the kerberos tickets around, even after the umount.
->> >
->> > To complete this fix, we need a mechanism to tell the umount helper
->> > umount.cifs (a new executable to be created) that PAM authentication
->> > was used for the mount.
->> >
->> > There are two possible approaches which I could think of:
->> > 1. Add a new mount option in cifs.ko. Inside cifs.ko, this option
->> > would be non-functional. But will be used by umount.cifs to call PAM
->> > for cleanup.
->> > 2. In mount.cifs, keep this info in a temporary file (maybe
->> > /var/run/cifs/). umount.cifs will read this and call PAM for cleanup.
->> >
->> > I feel approach 1 is a cleaner approach to take. Aurelien seems to
->> > favour option 1 as well.
->> > Please feel free to comment if you feel otherwise.
->> > Once we agree on the right approach, I'll send a patch for the changes=
-.
->> >
->> > Regards,
->> > Shyam
->> >
->> > On Wed, Nov 11, 2020 at 12:53 AM Pavel Shilovsky <piastryyy@gmail.com>=
- wrote:
->> >>
->> >> Sure. Removed the patch and updated the next branch.
->> >> --
->> >> Best regards,
->> >> Pavel Shilovsky
->> >>
->> >> =D0=B2=D1=82, 10 =D0=BD=D0=BE=D1=8F=D0=B1. 2020 =D0=B3. =D0=B2 05:20,=
- Shyam Prasad N <nspmangalore@gmail.com>:
->> >>>
->> >>> Hi Pavel,
->> >>>
->> >>> There is more that needs to be done on this item. Otherwise, this wi=
-ll
->> >>> depend on user behaviour to cleanup unused krb5 tickets.
->> >>> The pending items on this is to propagate this mount option to cifs.=
-ko
->> >>> and write an umount.cifs utility to read that mount option to do PAM
->> >>> logoff.
->> >>> So please rollback this patch for now.
->> >>>
->> >>> Regards,
->> >>> Shyam
->> >>>
->> >>> On Tue, Nov 10, 2020 at 5:12 AM Pavel Shilovsky <piastryyy@gmail.com=
-> wrote:
->> >>>>
->> >>>> Merged into next. Please let me know if something needs to be fixed=
-. Thanks!
->> >>>> --
->> >>>> Best regards,
->> >>>> Pavel Shilovsky
->> >>>>
->> >>>> =D1=87=D1=82, 24 =D1=81=D0=B5=D0=BD=D1=82. 2020 =D0=B3. =D0=B2 03:3=
-9, Shyam Prasad N <nspmangalore@gmail.com>:
->> >>>>>
->> >>>>> Hi Aur=C3=A9lien,
->> >>>>>
->> >>>>> I've implemented most of your review comments. Also fixed the issu=
-e.
->> >>>>>
->> >>>>> On Wed, Sep 23, 2020 at 7:26 PM Aur=C3=A9lien Aptel <aaptel@suse.c=
-om> wrote:
->> >>>>>>
->> >>>>>> Shyam Prasad N <nspmangalore@gmail.com> writes:
->> >>>>>>> Also, I'll test this out with DFS once I figure out how to set i=
-t up. :)
->> >>>>>>> Re-attaching the patch with some minor changes with just the
->> >>>>>>> "force_pam" mount option.
->> >>>>>>
->> >>>>>> You will need 2 Windows VM. DFS is basically symlinks across
->> >>>>>> servers. The DFS root VM will host the links (standalone namespac=
-e) and
->> >>>>>> you have to make them point to shares on the 2nd VM. You don't ne=
-ed to
->> >>>>>> setup replication to test.
->> >>>>>>
->> >>>>>> When you mount the root in cifs.ko and access a link, the server =
-will
->> >>>>>> reply that the file is remote. cifs.ko then does an FSCTL on the =
-link to
->> >>>>>> resolve the target it points to and then connects to the target a=
-nd
->> >>>>>> mounts it under the link seemlessly.
->> >>>>>>
->> >>>>>>
->> >>>>>> Regarding the patch:
->> >>>>>>
->> >>>>>> * need to update the man page with option and explanation
->> >>>>>>
->> >>>>>> I have some comments with the style, I know it's annoying.. but i=
-t
->> >>>>>> would be best to keep the same across the code.
->> >>>>>>
->> >>>>>> * use the existing indent style (tabs) and avoid adding trailing =
-whitespaces.
->> >>>>>> * no () for return statements
->> >>>>>> * no casting for memory allocation
->> >>>>>> * if (X) free(X)  =3D> free(X)
->> >>>>>>
->> >>>>>> Below some comments about pam_auth_krb5_conv():
->> >>>>>>
->> >>>>>>> @@ -1809,6 +1824,119 @@ get_password(const char *prompt, char *i=
-nput, int capacity)
->> >>>>>>>       return input;
->> >>>>>>>  }
->> >>>>>>>
->> >>>>>>> +#ifdef HAVE_KRB5PAM
->> >>>>>>> +#define PAM_CIFS_SERVICE "cifs"
->> >>>>>>> +
->> >>>>>>> +static int
->> >>>>>>> +pam_auth_krb5_conv(int n, const struct pam_message **msg,
->> >>>>>>> +    struct pam_response **resp, void *data)
->> >>>>>>> +{
->> >>>>>>> +    struct parsed_mount_info *parsed_info;
->> >>>>>>> +     struct pam_response *reply;
->> >>>>>>> +     int i;
->> >>>>>>> +
->> >>>>>>> +     *resp =3D NULL;
->> >>>>>>> +
->> >>>>>>> +    parsed_info =3D data;
->> >>>>>>> +    if (parsed_info =3D=3D NULL)
->> >>>>>>> +             return (PAM_CONV_ERR);
->> >>>>>>> +     if (n <=3D 0 || n > PAM_MAX_NUM_MSG)
->> >>>>>>> +             return (PAM_CONV_ERR);
->> >>>>>>> +
->> >>>>>>> +     if ((reply =3D calloc(n, sizeof(*reply))) =3D=3D NULL)
->> >>>>>>> +             return (PAM_CONV_ERR);
->> >>>>>>> +
->> >>>>>>> +     for (i =3D 0; i < n; ++i) {
->> >>>>>>> +             switch (msg[i]->msg_style) {
->> >>>>>>> +             case PAM_PROMPT_ECHO_OFF:
->> >>>>>>> +            if ((reply[i].resp =3D (char *) malloc(MOUNT_PASSWD=
-_SIZE + 1)) =3D=3D NULL)
->> >>>>>>> +                goto fail;
->> >>>>>>> +
->> >>>>>>> +            if (parsed_info->got_password && parsed_info->passw=
-ord !=3D NULL) {
->> >>>>>>> +                strncpy(reply[i].resp, parsed_info->password, M=
-OUNT_PASSWD_SIZE + 1);
->> >>>>>>> +            } else if (get_password(msg[i]->msg, reply[i].resp,=
- MOUNT_PASSWD_SIZE + 1) =3D=3D NULL) {
->> >>>>>>> +                goto fail;
->> >>>>>>> +            }
->> >>>>>>> +            reply[i].resp[MOUNT_PASSWD_SIZE] =3D '\0';
->> >>>>>>> +
->> >>>>>>> +                     reply[i].resp_retcode =3D PAM_SUCCESS;
->> >>>>>>> +                     break;
->> >>>>>>> +             case PAM_PROMPT_ECHO_ON:
->> >>>>>>> +                     fprintf(stderr, "%s: ", msg[i]->msg);
->> >>>>>>> +            if ((reply[i].resp =3D (char *) malloc(MOUNT_PASSWD=
-_SIZE + 1)) =3D=3D NULL)
->> >>>>>>> +                goto fail;
->> >>>>>>> +
->> >>>>>>> +                     if (fgets(reply[i].resp, MOUNT_PASSWD_SIZE=
- + 1, stdin) =3D=3D NULL)
->> >>>>>>
->> >>>>>> Do we need to remove the trailing \n from the buffer?
->> >>>>>>
->> >>>>>>> +                goto fail;
->> >>>>>>> +
->> >>>>>>> +            reply[i].resp[MOUNT_PASSWD_SIZE] =3D '\0';
->> >>>>>>> +
->> >>>>>>> +                     reply[i].resp_retcode =3D PAM_SUCCESS;
->> >>>>>>> +                     break;
->> >>>>>>> +             case PAM_ERROR_MSG:
->> >>>>>>
->> >>>>>> Shouldn't this PAM_ERROR_MSG case goto fail?
->> >>>>>>
->> >>>>>>> +             case PAM_TEXT_INFO:
->> >>>>>>> +                     fprintf(stderr, "%s: ", msg[i]->msg);
->> >>>>>>> +
->> >>>>>>> +                     reply[i].resp_retcode =3D PAM_SUCCESS;
->> >>>>>>> +                     break;
->> >>>>>>> +             default:
->> >>>>>>> +                     goto fail;
->> >>>>>>> +             }
->> >>>>>>> +     }
->> >>>>>>> +     *resp =3D reply;
->> >>>>>>> +     return (PAM_SUCCESS);
->> >>>>>>> +
->> >>>>>>> + fail:
->> >>>>>>> +     for(i =3D 0; i < n; i++) {
->> >>>>>>> +        if (reply[i].resp)
->> >>>>>>> +            free(reply[i].resp);
->> >>>>>>
->> >>>>>> free(NULL) is a no-op, remove the checks.
->> >>>>>>
->> >>>>>>> +     }
->> >>>>>>> +     free(reply);
->> >>>>>>> +     return (PAM_CONV_ERR);
->> >>>>>>> +}
->> >>>>>>
->> >>>>>> I gave this a try with a properly configured system joined to AD =
-from
->> >>>>>> local root account:
->> >>>>>>
->> >>>>>> aaptel$ ./configure
->> >>>>>> ...
->> >>>>>> checking krb5.h usability... yes
->> >>>>>> checking krb5.h presence... yes
->> >>>>>> checking for krb5.h... yes
->> >>>>>> checking krb5/krb5.h usability... yes
->> >>>>>> checking krb5/krb5.h presence... yes
->> >>>>>> checking for krb5/krb5.h... yes
->> >>>>>> checking for keyvalue in krb5_keyblock... no
->> >>>>>> ...
->> >>>>>> checking keyutils.h usability... yes
->> >>>>>> checking keyutils.h presence... yes
->> >>>>>> checking for keyutils.h... yes
->> >>>>>> checking for krb5_init_context in -lkrb5... yes
->> >>>>>> ...
->> >>>>>> checking for WBCLIENT... yes
->> >>>>>> checking for wbcSidsToUnixIds in -lwbclient... yes
->> >>>>>> ...
->> >>>>>> checking for keyutils.h... (cached) yes
->> >>>>>> checking security/pam_appl.h usability... yes
->> >>>>>> checking security/pam_appl.h presence... yes
->> >>>>>> checking for security/pam_appl.h... yes
->> >>>>>> checking for pam_start in -lpam... yes
->> >>>>>> checking for security/pam_appl.h... (cached) yes
->> >>>>>> checking for krb5_auth_con_getsendsubkey... yes
->> >>>>>> checking for krb5_principal_get_realm... no
->> >>>>>> checking for krb5_free_unparsed_name... yes
->> >>>>>> checking for krb5_auth_con_setaddrs... yes
->> >>>>>> checking for krb5_auth_con_set_req_cksumtype... yes
->> >>>>>> ...
->> >>>>>> aaptel$ make
->> >>>>>> ....(ok)
->> >>>>>>
->> >>>>>> Without force_pam:
->> >>>>>>
->> >>>>>> root# ./mount.cifs -v //adnuc.nuc.test/data /x -o sec=3Dkrb5,user=
-name=3Dadministrator,domain=3DNUC
->> >>>>>> mount.cifs kernel mount options: ip=3D192.168.2.111,unc=3D\\adnuc=
-.nuc.test\data,sec=3Dkrb5,user=3Dadministrator,domain=3DNUC
->> >>>>>> mount error(2): No such file or directory
->> >>>>>> Refer to the mount.cifs(8) manual page (e.g. man mount.cifs) and =
-kernel log messages (dmesg)
->> >>>>>>
->> >>>>>> With force_pam:
->> >>>>>>
->> >>>>>> root# ./mount.cifs -v //adnuc.nuc.test/data /x -o sec=3Dkrb5,user=
-name=3Dadministrator,domain=3DNUC,force_pam
->> >>>>>> Authenticating as user: administrator
->> >>>>>> Error in authenticating user with PAM: Authentication failure
->> >>>>>> Attempt to authenticate user with PAM unsuccessful. Still, procee=
-ding with mount.
->> >>>>>>
->> >>>>>> =3D> no further message but mount failed and no msg in dmesg, it =
-didn't
->> >>>>>>    reach the mount() call
->> >>>>>>
->> >>>>>> Not sure what is going on. Does the domain need to be passed to P=
-AM?
->> >>>>>>
->> >>>>>> Cheers,
->> >>>>>> --
->> >>>>>> Aur=C3=A9lien Aptel / SUSE Labs Samba Team
->> >>>>>> GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
->> >>>>>> SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=
-=BCrnberg, DE
->> >>>>>> GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (=
-AG M=C3=BCnchen)
->> >>>>>
->> >>>>>
->> >>>>>
->> >>>>> --
->> >>>>> -Shyam
->> >>>
->> >>>
->> >>>
->> >>> --
->> >>> -Shyam
->> >
->> >
->> >
->>
->>
+https://gitlab.com/samba-redhat/samba/-/commit/
+87bdffab6eae644d468f0fdc4489667fc21ac3a6
+
+This is just a hack as the right fix would be to completely get rid of the dc-
+connect child. However the winbind parent needs the dc-connect just to refresh 
+the secquence number.
+
+Isaac started to investigate this further and just had a draft for this which 
+was never finished. We really need to fix this correctly.
+
+https://gitlab.com/samba-team/samba/-/merge_requests/1573
 
 
---=20
-Regards,
-Shyam
+
+	Andreas
+
+
 
