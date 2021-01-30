@@ -2,46 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35C64309819
-	for <lists+samba-technical@lfdr.de>; Sat, 30 Jan 2021 20:50:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B97D309886
+	for <lists+samba-technical@lfdr.de>; Sat, 30 Jan 2021 22:44:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=NuZKzUtnn+g0sq5i1UkPI6Ic2K0UbdWke3soqbBgLGg=; b=0UsHMAQIzByLb6Dgexvppw0+uY
-	szymv5fRvBHVQenQn53T9yl45f3bJTIqyzPVK+i316wOjQyzlQUj3w49Ix+/etlRcWCLjvNzupicv
-	6txR3ifnaUJ79FTcC28QB2utd4+uSNPOUFwQYANVjy/vXDHi8aKJrN7i0lZHKXqddgO07R+OyJSKt
-	rdoW+FKqToLhRRlhMYePv7lkQtcFmiuuI/8nCy/6MlRKoNB8M/1B4jzNHHhCckqoIcHmg5c90FDVO
-	pvNHGlp45aHFQ2DZutI0m8wQ1r2IgLqZjXTNOhmIC6QJuqfxhvisVeqaCjNl71OnRMDjKUAWe/RH+
-	1tCAw9Yw==;
-Received: from ip6-localhost ([::1]:53142 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Wzelok3Kz7iVjRiDHvWgR6YEpoSbBEqEl6TILK0jHek=; b=SGefHAQS2awl30J37NU5LRTZUV
+	Sk8R4TRGHuCffE36GymEGXtnjAzJEg7cACmsyWEt8vZ/lO6V184qCSoxJMxQ1IbO20CSoR/aEH5pz
+	Ds5/Fb+HdfASts/ak0OpEJyeoRtqhNLSG0+QO32JZRWxyglrLv5iS/Wt2NKGcSi8v/L/Kc+ZMf3wR
+	Q2MAYsIMJofnk/pCWJYgaCo6L6AqjDq7evC2ZUgYuopQkuDIQPJIqsg3t0XqQjdGpBVVacdc6pTYl
+	jQVNT33s+0dQa8IVLzMWy4iMLZKi0MB12DbE8/llGcixH2U+GmrpodfGo4L/JOtx+w92CS0JGboK8
+	GQAji0KQ==;
+Received: from ip6-localhost ([::1]:53864 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l5wEz-00802K-BU; Sat, 30 Jan 2021 19:49:05 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60632) 
+	id 1l5y1Q-0080P6-7U; Sat, 30 Jan 2021 21:43:12 +0000
+Received: from highcountry.snowyriver.sapphiresunday.org
+ ([65.103.240.56]:41366 helo=prancingpony.middleearth.sapphiresunday.org) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l5wEt-00802D-G4
- for samba-technical@lists.samba.org; Sat, 30 Jan 2021 19:49:02 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=NuZKzUtnn+g0sq5i1UkPI6Ic2K0UbdWke3soqbBgLGg=; b=fbXD1hC3TGuDsQdwxWClOPZUU3
- 7uXmZz+lhgd+IGVPo1EcLCqApVvDm9s9t28rwt7hRaacMpTWDHA7W1zl49RobS0R+5LRx/zdVm0wI
- 4ziyt1lQNCnatbe+YzbZ4dsaU1e2zSJx7KhG3kMz/HorrgPXkPcvp3XMLKiNIwxD5chWHiGxviGyJ
- XaBHHDEOinBYkEXlGRF2+WXiYtcmUJ60ftQRvOs4KHwdL9ByWhcSU+hjI8VMMxVQ7gdlegQOEngNk
- BztlstwtWBnGli9TRnndaNrWWOacNFFg5KyH8BPKZirIkOJ/020F2lBrlyE8LJTGLMSJaU1Q3U8GP
- 5ryv/xGI70mK310l9HIb7aB9qubTNYLawrbdncRrO7baNdko4FLQVfCOMxcO0i6ZXB92Y+YaRpLMh
- 197nQ4DLF577wajyfWKwMh72Wr6iLZxL61G/RIO8zkKXfseGCoIdtdCQx3vbw2PpzMfxBWnMqDEFX
- uj+zv7qx8yG4tu+Sr2XyAn0N;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l5wEq-0007yJ-D9; Sat, 30 Jan 2021 19:48:56 +0000
-To: Shilpa K <shilpa.krishnareddy@gmail.com>, samba-technical@lists.samba.org
-Subject: Re: winbind cache issue for NDR entries
-Date: Sat, 30 Jan 2021 20:48:53 +0100
-Message-ID: <1852905.PYKUYFuaPT@krikkit>
-In-Reply-To: <20210129210511.GA50742@jeremy-acer>
-References: <CAHbM3qh3pAXzSzSRNjE77jL1tmsREuRu9BQOCaPnWBY9dVdNdg@mail.gmail.com>
- <20210129210511.GA50742@jeremy-acer>
+ (Exim) id 1l5y1J-0080Oz-L9
+ for samba-technical@lists.samba.org; Sat, 30 Jan 2021 21:43:08 +0000
+Received: from localhost (unknown [127.0.0.1])
+ by prancingpony.middleearth.sapphiresunday.org (Postfix) with ESMTP id
+ 11C0B140E45
+ for <samba-technical@lists.samba.org>; Sat, 30 Jan 2021 21:25:00 +0000 (UTC)
+Received: from prancingpony.middleearth.sapphiresunday.org ([127.0.0.1])
+ by localhost (prancingpony.middleearth.sapphiresunday.org [127.0.0.1])
+ (amavisd-new, port 10024)
+ with ESMTP id vKQ3xHCZvzeI for <samba-technical@lists.samba.org>;
+ Sat, 30 Jan 2021 14:24:58 -0700 (MST)
+Received: from Mithrandir.MiddleEarth.SapphireSunday.org (unknown
+ [IPv6:2001:470:c062:1:663e:e441:a799:ff37])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by prancingpony.middleearth.sapphiresunday.org (Postfix) with ESMTPSA id
+ 362E2140E16
+ for <samba-technical@lists.samba.org>; Sat, 30 Jan 2021 14:24:58 -0700 (MST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=middleearth.sapphiresunday.org; s=default; t=1612041898;
+ x=1612646698; bh=Wzelok3Kz7iVjRiDHvWgR6YEpoSbBEqEl6TILK0jHek=;
+ h=To:From:Subject:Message-ID:Date:User-Agent:MIME-Version:
+ Content-Type;
+ b=mVRxmfEubzivAfUyzqC1KqqyTvyGm0j1RXiBdQPI3Z4wdcTRoYwqrDsEV/mIEQUoj
+ NDB/nLjJaG7tsQS5JnJKXSKRI/0B6Dk4SOdmjQyavDrpJ2ThnnUSD++qaKkXwNEz+b
+ qbCn6Wdm0LrLjvSJhr1OamexhQfyh3CmvLyFzDkI=
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: [PATCH] [virusfilter-vfs] update for talloc changes
+Message-ID: <18d7764e-06c0-9d1a-999d-98396681a69c@middleearth.sapphiresunday.org>
+Date: Sat, 30 Jan 2021 14:24:54 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/mixed; boundary="------------B7D986E618ACB51D0CDB87B7"
+Content-Language: en-US
+X-Warn: EHLO/HELO not verified: Remote host 65.103.240.56
+ (highcountry.snowyriver.sapphiresunday.org) incorrectly presented itself as
+ prancingpony.middleearth.sapphiresunday.org
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,76 +70,122 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>,
- Jeremy Allison <jra@samba.org>
+From: "Trever L. Adams via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: "Trever L. Adams" <trever@middleearth.sapphiresunday.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Friday, 29 January 2021 22:05:11 CET Jeremy Allison via samba-technical 
-wrote:
-> On Fri, Jan 29, 2021 at 07:39:40PM +0530, Shilpa K via samba-technical 
-wrote:
-> >Hello,
-> >
-> >We had a customer report that the users were not able to login for about
-> >30minutes and the problem cleared itself in almost about 30minutes. They
-> >are using Samba as a member server in a domain which has 2 way trust with
-> >another domain (say ABC.COM). Upon investigation, we found that there was a
-> >problem with trusted domain DCs for a very short duration as per the event
-> >log on the DC of the primary domain. This problem seems to have been
-> >cleared away after a short duration. Around the same time, a user belonging
-> >to a trusted domain mapped Samba share and encountered a problem. At this
-> >time, looks like NDR cache entry for trusted domain group "Domain Users"
-> >was added in winbindd_cache.tdb to indicate that there was a lookup problem
-> >and the status NT_STATUS_TRUSTED_DOMAIN_FAILURE was stored as part of this
-> >entry. Once the issue with trusted domain DC was cleared and the domain was
-> >back online, when users tried to login, PAM_AUTH was successful for the
-> >users but getpwnam failed while looking up SID for "Domain Users". This
-> >failure was returned from the entry in the winbindd_cache.tdb as
-> >wcache_fetch_ndr() succeeded for this entry. Due to this, users belonging
-> >to the trusted domain were not able to login. Once the cache was expired,
-> >getpwnam succeeded for trusted domain users and the shares could be mapped.
-> >In order to resolve this issue, should we not refresh the sequence number
-> >when the domain goes online? Btw, we are using "winbind cache time = 1800".
-> 
-> Yep, looks like we should add a call to force a refresh of the
-> sequence number in the cache here:
-> 
-> source3/winbindd/winbindd_cm.c:set_domain_online()
-> 
->   538
->   539         domain->online = True;
->   540
-> 
-> Add a force_refresh_domain_sequence_number(domain) call above.
-> 
-> Here is a (raw, untested) patch that implements this.
-> 
-> Any chance you can test this for me ?
-> 
-> Jeremy.
+This is a multi-part message in MIME format.
+--------------B7D986E618ACB51D0CDB87B7
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-I wonder if this is the dc-connect issue with trusted domains.
+I believe I saw a warning about this posted a bit back. Recent talloc
+changes break this module. Attached is a patch that resolves the issue
+for me.
 
-A fix for this we are currently using is:
+Thank you.
 
-https://gitlab.com/samba-redhat/samba/-/commit/
-87bdffab6eae644d468f0fdc4489667fc21ac3a6
-
-This is just a hack as the right fix would be to completely get rid of the dc-
-connect child. However the winbind parent needs the dc-connect just to refresh 
-the secquence number.
-
-Isaac started to investigate this further and just had a draft for this which 
-was never finished. We really need to fix this correctly.
-
-https://gitlab.com/samba-team/samba/-/merge_requests/1573
+Trever
 
 
+--------------B7D986E618ACB51D0CDB87B7
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0001-virusfilter-vfs-update-for-talloc-changes.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="0001-virusfilter-vfs-update-for-talloc-changes.patch"
 
-	Andreas
+From 6a6c123247cbeed2fd83ef0b61fcadbd07f2ed79 Mon Sep 17 00:00:00 2001
+From: Trever L. Adams <trever.adams@gmail.com>
+Date: Sat, 30 Jan 2021 14:17:03 -0700
+Subject: [PATCH] [virusfilter-vfs] update for talloc changes
+
+---
+ source3/modules/vfs_virusfilter.c | 18 ++++++++++--------
+ 1 file changed, 10 insertions(+), 8 deletions(-)
+
+diff --git a/source3/modules/vfs_virusfilter.c b/source3/modules/vfs_virusfilter.c
+index dc3f040363d..d0255daccf9 100644
+--- a/source3/modules/vfs_virusfilter.c
++++ b/source3/modules/vfs_virusfilter.c
+@@ -268,7 +268,8 @@ static int virusfilter_vfs_connect(
+ 	infected_file_command = lp_parm_const_string(
+ 		snum, "virusfilter", "infected file command", NULL);
+ 	config->infected_file_command = talloc_strdup(config, infected_file_command);
+-	if (config->infected_file_command == NULL) {
++	if (config->infected_file_command == NULL
++	    && infected_file_command != NULL) {
+ 		DBG_ERR("virusfilter-vfs: out of memory!\n");
+ 		return -1;
+ 	}
+@@ -276,7 +277,8 @@ static int virusfilter_vfs_connect(
+ 	scan_error_command = lp_parm_const_string(
+ 		snum, "virusfilter", "scan error command", NULL);
+ 	config->scan_error_command = talloc_strdup(config, scan_error_command);
+-	if (config->scan_error_command == NULL) {
++	if (config->scan_error_command == NULL
++	    && scan_error_command != NULL) {
+ 		DBG_ERR("virusfilter-vfs: out of memory!\n");
+ 		return -1;
+ 	}
+@@ -291,7 +293,7 @@ static int virusfilter_vfs_connect(
+ 		snum, "virusfilter", "quarantine directory",
+ 		tmp ? tmp : "/tmp/.quarantine");
+ 	config->quarantine_dir = talloc_strdup(config, quarantine_dir);
+-	if (config->quarantine_dir == NULL) {
++	if (config->quarantine_dir == NULL && quarantine_dir != NULL) {
+ 		DBG_ERR("virusfilter-vfs: out of memory!\n");
+ 		return -1;
+ 	}
+@@ -312,7 +314,7 @@ static int virusfilter_vfs_connect(
+ 		snum, "virusfilter", "quarantine prefix",
+ 		VIRUSFILTER_DEFAULT_QUARANTINE_PREFIX);
+ 	config->quarantine_prefix = talloc_strdup(config, quarantine_prefix);
+-	if (config->quarantine_prefix == NULL) {
++	if (config->quarantine_prefix == NULL && quarantine_prefix != NULL) {
+ 		DBG_ERR("virusfilter-vfs: out of memory!\n");
+ 		return -1;
+ 	}
+@@ -321,7 +323,7 @@ static int virusfilter_vfs_connect(
+ 		snum, "virusfilter", "quarantine suffix",
+ 		VIRUSFILTER_DEFAULT_QUARANTINE_SUFFIX);
+ 	config->quarantine_suffix = talloc_strdup(config, quarantine_suffix);
+-	if (config->quarantine_suffix == NULL) {
++	if (config->quarantine_suffix == NULL && quarantine_suffix != NULL) {
+ 		DBG_ERR("virusfilter-vfs: out of memory!\n");
+ 		return -1;
+ 	}
+@@ -359,7 +361,7 @@ static int virusfilter_vfs_connect(
+ 		snum, "virusfilter", "rename prefix",
+ 		VIRUSFILTER_DEFAULT_RENAME_PREFIX);
+ 	config->rename_prefix = talloc_strdup(config, rename_prefix);
+-	if (config->rename_prefix == NULL) {
++	if (config->rename_prefix == NULL && rename_prefix != NULL) {
+ 		DBG_ERR("virusfilter-vfs: out of memory!\n");
+ 		return -1;
+ 	}
+@@ -368,7 +370,7 @@ static int virusfilter_vfs_connect(
+ 		snum, "virusfilter", "rename suffix",
+ 		VIRUSFILTER_DEFAULT_RENAME_SUFFIX);
+ 	config->rename_suffix = talloc_strdup(config, rename_suffix);
+-	if (config->rename_suffix == NULL) {
++	if (config->rename_suffix == NULL && rename_suffix != NULL) {
+ 		DBG_ERR("virusfilter-vfs: out of memory!\n");
+ 		return -1;
+ 	}
+@@ -411,7 +413,7 @@ static int virusfilter_vfs_connect(
+ 	socket_path = lp_parm_const_string(
+ 		snum, "virusfilter", "socket path", NULL);
+ 	config->socket_path = talloc_strdup(config, socket_path);
+-	if (config->socket_path == NULL) {
++	if (config->socket_path == NULL && socket_path != NULL) {
+ 		DBG_ERR("virusfilter-vfs: out of memory!\n");
+ 		return -1;
+ 	}
+-- 
+2.29.2
 
 
+--------------B7D986E618ACB51D0CDB87B7--
 
