@@ -2,60 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7A4F30918A
-	for <lists+samba-technical@lfdr.de>; Sat, 30 Jan 2021 03:40:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7764430951C
+	for <lists+samba-technical@lfdr.de>; Sat, 30 Jan 2021 13:35:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=nDUxA/6PHxEFlmFa9amRKsxOMGyGZNQSc7GZpZpshog=; b=qiJdIYvEHSkxS2Vl3/psuOPPlL
-	ufpxIgupvYhp7LffyWWHYivisEvezMa919BNcaSVsqt7mcchGYKfb9ltb8DY0KpoE1pVagaOSmNQH
-	oOtyLEEXs1e6sTDTMaF6F4+jleEo3JK+2vCCRlTV70MKoRhqsp3CDYA0hTbmsaS2tEokjLKiK2RnQ
-	PRTIUullPQbfeYOFQoX/gGs3F/7V9LqGI89TbqronR93q1tGnIzGmEnY2SCSsul1m/v8Y6wmjoX5M
-	asnsEz8CBJ79fxkG3bKtLHapyn4kIOH5vVtuX4lP8ss1yjhv6nYN+AOPJ3xo7cHy71V7G0y6uNXQa
-	oNU+Yayw==;
-Received: from ip6-localhost ([::1]:24202 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=tim4KKqaLg3wKV/MfS5LZBYM3gYAt9Xxteyn1La5/zI=; b=0NMl6I2KAeELSND+m7OjM6dR88
+	msNOQ2PUe/1IvWx7aWT8pe50x3mrb+f2+8xcY02AO9/lv3d+rTTnzSE/siBdraA+D/4xjRUGhWd7Z
+	t+UdkyoZQaRe6nu5Xz++qOHR+dSGaug0gmkXbn6U5/TmatWFn1DC8A1+33shtxVWS1zKBoT2ds2sQ
+	XE6I7Ema2O+pU4csyv3UjzmnD7vhqRE4LeyYTT5CBSkCta75ZWJ39BCIhNX/7N7RePRiM2gv1PNBZ
+	NRjvQ7BZ923uBZz0lNsHFnCgYcm0VMeGQnblt2PWDC7eYKbM7nn6LOFV1OzR89keovyHecsOS+rXg
+	WtNd3gog==;
+Received: from ip6-localhost ([::1]:26292 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l5gAL-007tYB-Ev; Sat, 30 Jan 2021 02:39:13 +0000
-Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f]:40631) 
+	id 1l5pSY-007vN6-Ny; Sat, 30 Jan 2021 12:34:38 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:65266) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l5gAF-007tY4-LL
- for samba-technical@lists.samba.org; Sat, 30 Jan 2021 02:39:10 +0000
-Received: by mail-ua1-x92f.google.com with SMTP id t43so3856487uad.7
- for <samba-technical@lists.samba.org>; Fri, 29 Jan 2021 18:39:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=yXpkqWIs41JasXfcaOwiVFZMr366cLNXr6cV/LsL46M=;
- b=r8cJBf4UlfloH1G+73/ZJ8gbb8hbHTauysBpUwXebGg33m+p0ng6wv59917FiaOn81
- 6PCYCaELsatVk/ywxiC01aAjxifN+UDIZNGI/50IefuIC0waefnb/lpTud8xCketES5j
- +97JDH3ZqQ0Ezdb9co/ATEgrZq4PLMGJKp0UmjARAcR9Uf8UrMd6XYWKFaImyVy/HwCg
- RGyo+q886f4vAgVRLVvIOkp/J5rqbNN7BL3cFE19WZYNcxo3aFY6h8W58bVIXNvVamB0
- O9EHlgNTIUxd7/RIBHrvrY1nFg8OIivMZ1sToQDFGvUzaZD/OJ7ikYahsfuxBh32D4TI
- SxVg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=yXpkqWIs41JasXfcaOwiVFZMr366cLNXr6cV/LsL46M=;
- b=TdF6GHflL/FmT0hbRAM7FuyjEO/YW/HYKejregLrcIx+vvOwWWRQBx3xIlK8BkcqP+
- ux3JqBzCnUdPtON83MliPXCLgpa4i72oIyNO9hp1XTiwDyxo4oGvK7rF0qVUr5jhXNrZ
- VhkQersWswv7eaFRW1/WlOXaMY8jCm9FY3L//5HdEBejoC/8Q8fmq41scQiwIaviye8D
- scUayasrOba0Y/XzpyjZE/mAsFpqlrup0zAbq8Bm/ARdLShnkxX9u/5soU9FQjwJKf33
- dJUTngKbnSmZwkoJUpVr6wyp7j79UMDa23wihm4uJ0xiAFQuFMIN9cjRQTJGkAI4Ao0n
- zECw==
-X-Gm-Message-State: AOAM5332TYRcLtIaE1pv0IPReVQxsSlylO6m/hgJhvRAJAjf22qJw8bM
- o2LO3AxA7W7qPClTcTzauV/mcCCP6BoBJvEpbwudMIj11yqjmA==
-X-Google-Smtp-Source: ABdhPJxCMRcn9nIE2zchDfZDSD+a4eRVnMJo4UbPWDuW8hhNQEDnwEC/gVc1TxCAFzB5vYet2MJAu8NTzqK40KQVtC8=
-X-Received: by 2002:a9f:3102:: with SMTP id m2mr4619617uab.10.1611974342646;
- Fri, 29 Jan 2021 18:39:02 -0800 (PST)
+ (Exim) id 1l5pSS-007vMz-Nk
+ for samba-technical@lists.samba.org; Sat, 30 Jan 2021 12:34:35 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=tim4KKqaLg3wKV/MfS5LZBYM3gYAt9Xxteyn1La5/zI=; b=xLvxlUaUmnUhwTcu2CQGKYMZG9
+ OjrO4bYsNgV92wofn1HZD4Mv3IR/+ezYEWxz0z1jWLgru76lio9uVnMjB6N1kDcadtV9soSuAmtUd
+ 7AGO/6SrIvBOMXB0km0K7wG1eCAvNK7t2kIn1Yek+QMHJ552GKP5YW2X3wcqF6jhqKMFMGZIC+ldJ
+ MdyP1Vu6aQjM3RY6PZWySQA2rrsg/UC1pfJ5pgkwjODtt5mvDSx4MrtOEkZabOgNJQErxLBq4YjW6
+ MzEAlC86/NKh/qXt/f/2RMHB9lnKbT5ou9vTEJgTQLycXiY49DBsmovFdThKy7fdpmFSxMtqo9/MJ
+ ZMYbvbLkZs7HOLCqo73bxXHoguwyVssTlb3dxlC9+Ec9q6EOflqPnedJnGeU37mW56vVxvconyMNE
+ GWRqCXFhHZQR8vgpfE9IBYRXqRIF22rXcMxDqG6G2tbOdMJcTOymK3DJYsVjOK+04yHBX9X9/zXI9
+ Ll2RF92x73QUpYMxC/lkEBfM;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1l5pSQ-0005mS-Uy; Sat, 30 Jan 2021 12:34:31 +0000
+To: Anoop C S <anoopcs@samba.org>
+References: <35bfe7ee-5c75-c785-8648-4c8191a9974a@samba.org>
+ <86481a324b2b5068dfa438bedd6b7205fbe0ccf5.camel@samba.org>
+ <56f956ce-98f4-6f51-960b-91ba7af19da3@samba.org>
+ <a5d29d28-c692-e9bc-f7a7-b3a0d2070849@samba.org>
+ <e0441676a67f6a10c1e5d4fdbd8fa0463c668c89.camel@samba.org>
+ <f5c3e252-2783-d96c-8e89-1fd51bc6fa38@samba.org>
+ <9208357e5cb0d33ef1a4e6e021341edb41ce6c80.camel@samba.org>
+ <779c563c-19d6-4299-cf03-29fb655699ff@samba.org>
+Subject: Re: socket-wrapper fd-passing
+Message-ID: <95ec1707-a638-0d26-da5f-1bd48ba900c6@samba.org>
+Date: Sat, 30 Jan 2021 13:34:25 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <CAHbM3qh3pAXzSzSRNjE77jL1tmsREuRu9BQOCaPnWBY9dVdNdg@mail.gmail.com>
- <20210129210511.GA50742@jeremy-acer>
-In-Reply-To: <20210129210511.GA50742@jeremy-acer>
-Date: Sat, 30 Jan 2021 08:08:53 +0530
-Message-ID: <CAHbM3qgFvQvU1BSWq90-OWQaqG-mkh+j-_9aSJALnFELU7WByw@mail.gmail.com>
-Subject: Re: winbind cache issue for NDR entries
-To: Jeremy Allison <jra@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+In-Reply-To: <779c563c-19d6-4299-cf03-29fb655699ff@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature";
+ boundary="nh8etRNuEkSzbXEiLl7TnV1QE7i7YBNIh"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,207 +64,82 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shilpa K via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shilpa K <shilpa.krishnareddy@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: Andreas Schneider <asn@samba.org>,
+ Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Thanks Jeremy. The patch you provided works and I only had to do a slight
-modification to it. Below is the updated patch.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--nh8etRNuEkSzbXEiLl7TnV1QE7i7YBNIh
+Content-Type: multipart/mixed; boundary="CuSUdfcpfau4Yr3HcW9CnX9PHhUPmB5Sq";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Anoop C S <anoopcs@samba.org>
+Cc: Samba Technical <samba-technical@lists.samba.org>,
+ Andreas Schneider <asn@samba.org>
+Message-ID: <95ec1707-a638-0d26-da5f-1bd48ba900c6@samba.org>
+Subject: Re: socket-wrapper fd-passing
+References: <35bfe7ee-5c75-c785-8648-4c8191a9974a@samba.org>
+ <86481a324b2b5068dfa438bedd6b7205fbe0ccf5.camel@samba.org>
+ <56f956ce-98f4-6f51-960b-91ba7af19da3@samba.org>
+ <a5d29d28-c692-e9bc-f7a7-b3a0d2070849@samba.org>
+ <e0441676a67f6a10c1e5d4fdbd8fa0463c668c89.camel@samba.org>
+ <f5c3e252-2783-d96c-8e89-1fd51bc6fa38@samba.org>
+ <9208357e5cb0d33ef1a4e6e021341edb41ce6c80.camel@samba.org>
+ <779c563c-19d6-4299-cf03-29fb655699ff@samba.org>
+In-Reply-To: <779c563c-19d6-4299-cf03-29fb655699ff@samba.org>
 
-Thanks,
-Shilpa
+--CuSUdfcpfau4Yr3HcW9CnX9PHhUPmB5Sq
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/source3/winbindd/winbindd_cache.c
-b/source3/winbindd/winbindd_cache.c
-index 0e51ae5..6ee733a 100644
---- a/source3/winbindd/winbindd_cache.c
-+++ b/source3/winbindd/winbindd_cache.c
-@@ -132,7 +132,7 @@ static struct winbind_cache *get_cache(struct
-winbindd_domain *domain)
-                domain->backend = &sam_passdb_methods;
-        }
+Hi Anoop,
 
--       if ( !domain->initialized ) {
-+       if ( !domain->initialized && !domain->online ) {
-                /* We do not need a connection to an RW DC for cache
-operation */
-                init_dc_connection(domain, false);
-        }
-@@ -509,6 +509,40 @@ static bool store_cache_seqnum( struct winbindd_domain
-*domain )
-                                   domain->last_seq_check);
- }
+> There are two main items left to do:
+> 1. cleanup the socket_wrapper.c:
+>   - struct swrap_unix_scm_rights =3D> adding a uint64 magic
+>     (if possible the magic should be derived from the
+>     definition of swrap_unix_scm_rights_payload,
+>     see profile_setup() in source3/profile/profile.c
+>     where we do something similar.
+>   - we need to remove some #if 0 code
 
-+void force_refresh_domain_sequence_number(struct winbindd_domain *domain)
-+{
-+       NTSTATUS status;
-+
-+       /* domain->backend to could be NULL when this function is called
-+        * from set_domain_online. make sure to reinitialize the backend */
-+        get_cache(domain);
-+
-+       if (winbindd_can_contact_domain(domain)) {
-+               status = domain->backend->sequence_number(domain,
-+                                                 &domain->sequence_number);
-+       } else {
-+               /* just use the current time */
-+               status = NT_STATUS_OK;
-+               domain->sequence_number = time(NULL);
-+       }
-+
-+       if (!NT_STATUS_IS_OK(status)) {
-+               DEBUG(10, ("failed with %s\n", nt_errstr(status)));
-+               domain->sequence_number = DOM_SEQUENCE_NONE;
-+       }
-+
-+       domain->last_status = status;
-+       domain->last_seq_check = time(NULL);
-+
-+       /* save the new sequence number in the cache */
-+       store_cache_seqnum(domain);
-+
-+       DEBUG(10, ("%s seq number is now %"PRIu32"\n",
-+                  domain->name, domain->sequence_number));
-+
-+       return;
-+}
-+
- /*
-   refresh the domain sequence number. If force is true
-   then always refresh it, no matter how recently we fetched it
-@@ -554,34 +588,7 @@ static void refresh_sequence_number(struct
-winbindd_domain *domain, bool force)
-                goto done;
-        }
+I changed it a bit differently and have merge request ready for review he=
+re:
+https://gitlab.com/cwrap/socket_wrapper/-/merge_requests/14
 
--       /* important! make sure that we know if this is a native
--          mode domain or not.  And that we can contact it. */
--
--       if ( winbindd_can_contact_domain( domain ) ) {
--               status = domain->backend->sequence_number(domain,
--
-&domain->sequence_number);
--       } else {
--               /* just use the current time */
--               status = NT_STATUS_OK;
--               domain->sequence_number = time(NULL);
--       }
--
--
--       /* the above call could have set our domain->backend to NULL when
--        * coming from offline to online mode, make sure to reinitialize the
--        * backend - Guenther */
--       get_cache( domain );
--
--       if (!NT_STATUS_IS_OK(status)) {
--               DEBUG(10,("refresh_sequence_number: failed with %s\n",
-nt_errstr(status)));
--               domain->sequence_number = DOM_SEQUENCE_NONE;
--       }
--
--       domain->last_status = status;
--       domain->last_seq_check = time(NULL);
--
--       /* save the new sequence number in the cache */
--       store_cache_seqnum( domain );
-+       force_refresh_domain_sequence_number(domain);
+I improved your test a bit in order to let recvmsg() block reliable
+until the incoming message arrived (on FreeBSD).
 
- done:
-        DEBUG(10, ("refresh_sequence_number: %s seq number is now %d\n",
-@@ -5084,7 +5091,8 @@ bool wcache_fetch_ndr(TALLOC_CTX *mem_ctx, struct
-winbindd_domain *domain,
-                        goto fail;
-                }
-                entry_seqnum = IVAL(data.dptr, 0);
--               if (entry_seqnum != dom_seqnum) {
-+
-+               if (wcache_server_down(domain) || (entry_seqnum !=
-dom_seqnum)) {
-                        DEBUG(10, ("Entry has wrong sequence number: %d\n",
-                                   (int)entry_seqnum));
-                        goto fail;
+metze
 
 
-diff --git a/source3/winbindd/winbindd_cm.c b/source3/winbindd/winbindd_cm.c
-index e0466da..faf1a62 100644
---- a/source3/winbindd/winbindd_cm.c
-+++ b/source3/winbindd/winbindd_cm.c
-@@ -552,6 +552,7 @@ static void set_domain_online(struct winbindd_domain
-*domain)
-                             MSG_WINBIND_FAILED_TO_GO_ONLINE, NULL);
+--CuSUdfcpfau4Yr3HcW9CnX9PHhUPmB5Sq--
 
-        domain->online = True;
-+       force_refresh_domain_sequence_number(domain);
+--nh8etRNuEkSzbXEiLl7TnV1QE7i7YBNIh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
-        /* Send a message to the parent that the domain is online. */
-        if (parent_pid > 1 && !domain->internal) {
+-----BEGIN PGP SIGNATURE-----
 
-diff --git a/source3/winbindd/winbindd_proto.h
-b/source3/winbindd/winbindd_proto.h
-index 55d5337..cc61ac0 100644
---- a/source3/winbindd/winbindd_proto.h
-+++ b/source3/winbindd/winbindd_proto.h
-@@ -56,7 +56,7 @@ NTSTATUS rpc_lookup_sids(TALLOC_CTX *mem_ctx,
-                         struct lsa_TransNameArray **pnames);
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAmAVUlEACgkQDbX1YShp
+vVaOEw//SoY3UhrXewHP513+yd62aFOERdHLvjtuRC4c6pxvYcPwIQu4xMLgi650
+XCSCvqtg5koAZkVLaWeDEj+GfagaXOkL2memPvEQ9BUdHxPoYoexZzBZolpnhYod
+LMmup0a81MEdlogXGt1PXpVzf27F2E+hfQbJRB/uJO3GHFkeVt1CKcICJO0VjzMZ
+up1fEItpx2xnAIFU++eAdwyZE1pn7reJe6ybtrTWPdVS1HjtJZhQva39+VeQW027
+g6LJ2GdBzzFqqCDPAXRQbi1P68XvixYCPIvQ7fB+Ed7UHxpNkDYk7BCrQEIOVPD9
+5AZReXlAq0+m2UPQ1MyGyM7QKojRErGTuozj1neLbSFDpghoA/PtkXmzagyF/Yez
+JGzP+DcFsPmgv7THQyTK09ZBOwzEkhIYmRbjyHB0jK2kJf0iVKCMNVg7mjAMwWtb
+rMuPrqWszL+Yf5y6Uj3tcmx/fkgJGN1gqfiUkEc9hE651mHbu0DX9mSrUbpLOvqy
+Jvp4J3Kt2gdIBteHmg9eg22QJTtExedFDpLMbMgmPf6Y7g6YAvItqtaZM7FOH/ko
+XyjIKFYS+BPPAHShnyFYj3DOGaUYa+GShuc6kFv26zXnYfM4nR1VYFlP4Idlf0kV
+Wx5m4Sg1oAEhaa8P/cuf+kF5PSKOoqtKo20jdj7YBdshlI0mMoA=
+=Vaje
+-----END PGP SIGNATURE-----
 
- /* The following definitions come from winbindd/winbindd_cache.c  */
--
-+void force_refresh_domain_sequence_number(struct winbindd_domain *domain);
- NTSTATUS wcache_cached_creds_exist(struct winbindd_domain *domain, const
-struct dom_sid *sid);
- NTSTATUS wcache_get_creds(struct winbindd_domain *domain,
-                          TALLOC_CTX *mem_ctx,
+--nh8etRNuEkSzbXEiLl7TnV1QE7i7YBNIh--
 
-
-On Sat, Jan 30, 2021 at 2:35 AM Jeremy Allison <jra@samba.org> wrote:
-
-> On Fri, Jan 29, 2021 at 07:39:40PM +0530, Shilpa K via samba-technical
-> wrote:
-> >Hello,
-> >
-> >We had a customer report that the users were not able to login for about
-> >30minutes and the problem cleared itself in almost about 30minutes. They
-> >are using Samba as a member server in a domain which has 2 way trust with
-> >another domain (say ABC.COM). Upon investigation, we found that there
-> was a
-> >problem with trusted domain DCs for a very short duration as per the event
-> >log on the DC of the primary domain. This problem seems to have been
-> >cleared away after a short duration. Around the same time, a user
-> belonging
-> >to a trusted domain mapped Samba share and encountered a problem. At this
-> >time, looks like NDR cache entry for trusted domain group "Domain Users"
-> >was added in winbindd_cache.tdb to indicate that there was a lookup
-> problem
-> >and the status NT_STATUS_TRUSTED_DOMAIN_FAILURE was stored as part of this
-> >entry. Once the issue with trusted domain DC was cleared and the domain
-> was
-> >back online, when users tried to login, PAM_AUTH was successful for the
-> >users but getpwnam failed while looking up SID for "Domain Users". This
-> >failure was returned from the entry in the winbindd_cache.tdb as
-> >wcache_fetch_ndr() succeeded for this entry. Due to this, users belonging
-> >to the trusted domain were not able to login. Once the cache was expired,
-> >getpwnam succeeded for trusted domain users and the shares could be
-> mapped.
-> >In order to resolve this issue, should we not refresh the sequence number
-> >when the domain goes online? Btw, we are using "winbind cache time =
-> 1800".
->
-> Yep, looks like we should add a call to force a refresh of the
-> sequence number in the cache here:
->
-> source3/winbindd/winbindd_cm.c:set_domain_online()
->
->   538
->   539         domain->online = True;
->   540
->
-> Add a force_refresh_domain_sequence_number(domain) call above.
->
-> Here is a (raw, untested) patch that implements this.
->
-> Any chance you can test this for me ?
->
-> Jeremy.
->
