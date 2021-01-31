@@ -2,61 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B97D309886
-	for <lists+samba-technical@lfdr.de>; Sat, 30 Jan 2021 22:44:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E377309F39
+	for <lists+samba-technical@lfdr.de>; Sun, 31 Jan 2021 23:29:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=Wzelok3Kz7iVjRiDHvWgR6YEpoSbBEqEl6TILK0jHek=; b=SGefHAQS2awl30J37NU5LRTZUV
-	Sk8R4TRGHuCffE36GymEGXtnjAzJEg7cACmsyWEt8vZ/lO6V184qCSoxJMxQ1IbO20CSoR/aEH5pz
-	Ds5/Fb+HdfASts/ak0OpEJyeoRtqhNLSG0+QO32JZRWxyglrLv5iS/Wt2NKGcSi8v/L/Kc+ZMf3wR
-	Q2MAYsIMJofnk/pCWJYgaCo6L6AqjDq7evC2ZUgYuopQkuDIQPJIqsg3t0XqQjdGpBVVacdc6pTYl
-	jQVNT33s+0dQa8IVLzMWy4iMLZKi0MB12DbE8/llGcixH2U+GmrpodfGo4L/JOtx+w92CS0JGboK8
-	GQAji0KQ==;
-Received: from ip6-localhost ([::1]:53864 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=9+gBl09TWOX1lR25lFtvCv4DRrfNQbsribgJAoYyOxY=; b=DkCRzAQ64DyC/Yx/k7aY6IJO4R
+	F1eSDNVCyuGHGHaB/VeD/RsgmH6UB4Cb6Ow3UnRPOOBWe0MuQEpHwHlHsWH02ZFpQpSaaOEIUFT56
+	Bb2PPbQIsf9Qb3zsitvIgSSC9d2Crw5kYYMOAxy5G7JA8itme1ZkAaHglrUUyXrOs+OSj+G7NxHNZ
+	vLc+mhKqxAzgtQc9LIm+nl7JtI9AtqJvfO0V1WpXBg7LA299HpnYO05stKtAggrWyWN2HInZXmB+h
+	Yq88XB83IFeA9oaBJmpOPPZ7VQRqXo95/4s2xRrCovdTa5fitXG2e2k4lFjyAjJVBzLsYdjHV+KOp
+	YG3rzgvw==;
+Received: from ip6-localhost ([::1]:59818 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l5y1Q-0080P6-7U; Sat, 30 Jan 2021 21:43:12 +0000
-Received: from highcountry.snowyriver.sapphiresunday.org
- ([65.103.240.56]:41366 helo=prancingpony.middleearth.sapphiresunday.org) 
+	id 1l6LCd-008AV2-FQ; Sun, 31 Jan 2021 22:28:19 +0000
+Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136]:46465) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l5y1J-0080Oz-L9
- for samba-technical@lists.samba.org; Sat, 30 Jan 2021 21:43:08 +0000
-Received: from localhost (unknown [127.0.0.1])
- by prancingpony.middleearth.sapphiresunday.org (Postfix) with ESMTP id
- 11C0B140E45
- for <samba-technical@lists.samba.org>; Sat, 30 Jan 2021 21:25:00 +0000 (UTC)
-Received: from prancingpony.middleearth.sapphiresunday.org ([127.0.0.1])
- by localhost (prancingpony.middleearth.sapphiresunday.org [127.0.0.1])
- (amavisd-new, port 10024)
- with ESMTP id vKQ3xHCZvzeI for <samba-technical@lists.samba.org>;
- Sat, 30 Jan 2021 14:24:58 -0700 (MST)
-Received: from Mithrandir.MiddleEarth.SapphireSunday.org (unknown
- [IPv6:2001:470:c062:1:663e:e441:a799:ff37])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by prancingpony.middleearth.sapphiresunday.org (Postfix) with ESMTPSA id
- 362E2140E16
- for <samba-technical@lists.samba.org>; Sat, 30 Jan 2021 14:24:58 -0700 (MST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=middleearth.sapphiresunday.org; s=default; t=1612041898;
- x=1612646698; bh=Wzelok3Kz7iVjRiDHvWgR6YEpoSbBEqEl6TILK0jHek=;
- h=To:From:Subject:Message-ID:Date:User-Agent:MIME-Version:
- Content-Type;
- b=mVRxmfEubzivAfUyzqC1KqqyTvyGm0j1RXiBdQPI3Z4wdcTRoYwqrDsEV/mIEQUoj
- NDB/nLjJaG7tsQS5JnJKXSKRI/0B6Dk4SOdmjQyavDrpJ2ThnnUSD++qaKkXwNEz+b
- qbCn6Wdm0LrLjvSJhr1OamexhQfyh3CmvLyFzDkI=
-To: samba-technical <samba-technical@lists.samba.org>
-Subject: [PATCH] [virusfilter-vfs] update for talloc changes
-Message-ID: <18d7764e-06c0-9d1a-999d-98396681a69c@middleearth.sapphiresunday.org>
-Date: Sat, 30 Jan 2021 14:24:54 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
+ (Exim) id 1l6LCW-008AUv-6F
+ for samba-technical@lists.samba.org; Sun, 31 Jan 2021 22:28:14 +0000
+Received: by mail-lf1-x136.google.com with SMTP id e15so16269lft.13
+ for <samba-technical@lists.samba.org>; Sun, 31 Jan 2021 14:28:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=9+gBl09TWOX1lR25lFtvCv4DRrfNQbsribgJAoYyOxY=;
+ b=VSyDPOP+5RmFeAIcpbQVZF1A4zAWoyP42Ojxix5L68KFXI/Bj/srcPYLZGGTd+9kH1
+ xMVBj4+JOudiaqwSv4DtoQ0mDV4Eto/zfeXQhCdY/WamrsYkzbCjegDVZxQ0wfVFMJgK
+ tHcu/1bWtTJ6M5fJTNOxP1AzkSNQjkU1v5RsFZxmpBtkJZC98UpUWLI+uEO6woFU3EWn
+ 8cflfGGC/UY9AGmsnz6rd/Dl5Vy78QITRuhH1MqQ5Vl8877F7dldkQKlvKPrj6qy0PBk
+ vTxMBNqlmHEd9Rf0EWUJ1OqRmRs2rYYoN4qKaOL6Gr5xqLzWred0X5fmnV+OXQ8eaJOV
+ F6sA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=9+gBl09TWOX1lR25lFtvCv4DRrfNQbsribgJAoYyOxY=;
+ b=MLdmCKOelF6LEyTc3oaXqW9bZJILJyHVWX74Z7E/qDw3dpia5HGDApcOOnuqTMmJNO
+ bDbQYFpEFcAQqixMTbBaSCWxdxaZy8UTXuHGXev5jUYYEsC4C42rCm4uqVY7R23Kaijn
+ sqmlWIaqpzX23iqPnQ5iBHX3smMKlzgMwuvMECBwc94xpZ8zIw5CtKZ4ravixgJ/e9m7
+ ZHMWFeNtcri8huJeqEdSGggHxdNqHDCBUgdnSm9TXQbE27ILULwgHaZoJqpX9I5GuQAB
+ 2ctfGwwTjfX3Qv80S0DRYlK3LU1MkdvRFDpExSLfhSVUxjrnZr31/X7p6Q39XGZuXKon
+ QkIA==
+X-Gm-Message-State: AOAM533UFOVuBdLlK/5FLJMSuoy4D8EAcJn1ZbcpLUdOMUyggdrjG6Aw
+ 00FVKs51tWmZcEGv6/YU85RPjyu8pt71ZxTZXg4=
+X-Google-Smtp-Source: ABdhPJxyafNPKuaxO26KbyodAHdHYBIwzdTHfcqZGFuBs8L6hTZBCNSyBbeLlUNIZkqgrso7fL7x0T+EbjX1NF6vyEU=
+X-Received: by 2002:a05:6512:31c1:: with SMTP id
+ j1mr7402493lfe.313.1612132089767; 
+ Sun, 31 Jan 2021 14:28:09 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------B7D986E618ACB51D0CDB87B7"
-Content-Language: en-US
-X-Warn: EHLO/HELO not verified: Remote host 65.103.240.56
- (highcountry.snowyriver.sapphiresunday.org) incorrectly presented itself as
- prancingpony.middleearth.sapphiresunday.org
+References: <CGME20210126023109epcas1p257c4128a9d8673cb44f81dca636da39a@epcas1p2.samsung.com>
+ <20210126022335.27311-1-namjae.jeon@samsung.com>
+ <09887b1a-3303-9ac6-1d29-c53951be5324@samba.org>
+ <CAKYAXd-rfk26A4SOeqvhMkBV2FcvpE0goj415HX7T4fBim1zQA@mail.gmail.com>
+In-Reply-To: <CAKYAXd-rfk26A4SOeqvhMkBV2FcvpE0goj415HX7T4fBim1zQA@mail.gmail.com>
+Date: Sun, 31 Jan 2021 16:27:58 -0600
+Message-ID: <CAH2r5mutwPP570YbwxDWikwM6e+gdD7m2iwMJ5xNEcvqpkVrNg@mail.gmail.com>
+Subject: Re: [Linux-cifsd-devel] [PATCH] cifsd: make xattr format of ksmbd
+ compatible with samba's one
+To: Namjae Jeon <linkinjeon@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,122 +72,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "Trever L. Adams via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: "Trever L. Adams" <trever@middleearth.sapphiresunday.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Stefan Metzmacher <metze@samba.org>, Namjae Jeon <namjae.jeon@samsung.com>,
+ Samba Technical <samba-technical@lists.samba.org>,
+ linux-cifsd-devel@lists.sourceforge.net
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a multi-part message in MIME format.
---------------B7D986E618ACB51D0CDB87B7
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+FYI - I have rebased the cifsd-for-next branch onto 5.11-rc6
 
-I believe I saw a warning about this posted a bit back. Recent talloc
-changes break this module. Attached is a patch that resolves the issue
-for me.
+https://github.com/smfrench/smb3-kernel.git
 
-Thank you.
+On Tue, Jan 26, 2021 at 4:46 PM Namjae Jeon via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> 2021-01-26 23:36 GMT+09:00, Stefan Metzmacher via samba-technical
+> <samba-technical@lists.samba.org>:
+> > Hi Namjae,
+> Hi Metze,
+> >
+> >> Samba team request that ksmbd should make xattr format of ksmbd
+> >> compatible
+> >> with samba's one. When user replace samba with ksmbd or replace ksmbd
+> >> with samba, The written attribute and ACLs of xattr in file should be
+> >> used
+> >> on both server. This patch work the following ones.
+> >>  1. make xattr prefix compaible.
+> >>     - rename creation.time and file.attribute to DOSATTRIB.
+> >>     - rename stream. to DosStream.
+> >>     - rename sd. to NTACL.
+> >>  2. use same dos attribute and ntacl structure compaible with samba.
+> >>  3. create read/write encoding of ndr functions in ndr.c to store ndr
+> >>     encoded metadata to xattr.
+> >
+> > Thanks a lot!
+> >
+> > Do you also have this a git commit in some repository?
+> Yes, You can check github.com/cifsd-team/cifsd
+> tree(https://github.com/cifsd-team/cifsd/commit/0dc106786d40457e276f50412ecc67f11422dd1e).
+> And there is a cifsd-for-next branch in
+> github.com/smfrench/smb3-kernel for upstream.
+> I have made a patch for that git tree, but I haven't fully tested it yet...
+> I'm planning to send a pull request to Steve this week after doing it.
+> >
+> > I played with ksmbd a bit in the last days.
+> Cool.
+> >
+> > I can also test this commit and check if the resulting
+> > data is compatible with samba.
+> Great!  Let me know your opinion if there is something wrong:)
+> Thank you so much for your help!
+> >
+> > metze
+> >
+> >
+>
 
-Trever
 
-
---------------B7D986E618ACB51D0CDB87B7
-Content-Type: text/x-patch; charset=UTF-8;
- name="0001-virusfilter-vfs-update-for-talloc-changes.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="0001-virusfilter-vfs-update-for-talloc-changes.patch"
-
-From 6a6c123247cbeed2fd83ef0b61fcadbd07f2ed79 Mon Sep 17 00:00:00 2001
-From: Trever L. Adams <trever.adams@gmail.com>
-Date: Sat, 30 Jan 2021 14:17:03 -0700
-Subject: [PATCH] [virusfilter-vfs] update for talloc changes
-
----
- source3/modules/vfs_virusfilter.c | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
-
-diff --git a/source3/modules/vfs_virusfilter.c b/source3/modules/vfs_virusfilter.c
-index dc3f040363d..d0255daccf9 100644
---- a/source3/modules/vfs_virusfilter.c
-+++ b/source3/modules/vfs_virusfilter.c
-@@ -268,7 +268,8 @@ static int virusfilter_vfs_connect(
- 	infected_file_command = lp_parm_const_string(
- 		snum, "virusfilter", "infected file command", NULL);
- 	config->infected_file_command = talloc_strdup(config, infected_file_command);
--	if (config->infected_file_command == NULL) {
-+	if (config->infected_file_command == NULL
-+	    && infected_file_command != NULL) {
- 		DBG_ERR("virusfilter-vfs: out of memory!\n");
- 		return -1;
- 	}
-@@ -276,7 +277,8 @@ static int virusfilter_vfs_connect(
- 	scan_error_command = lp_parm_const_string(
- 		snum, "virusfilter", "scan error command", NULL);
- 	config->scan_error_command = talloc_strdup(config, scan_error_command);
--	if (config->scan_error_command == NULL) {
-+	if (config->scan_error_command == NULL
-+	    && scan_error_command != NULL) {
- 		DBG_ERR("virusfilter-vfs: out of memory!\n");
- 		return -1;
- 	}
-@@ -291,7 +293,7 @@ static int virusfilter_vfs_connect(
- 		snum, "virusfilter", "quarantine directory",
- 		tmp ? tmp : "/tmp/.quarantine");
- 	config->quarantine_dir = talloc_strdup(config, quarantine_dir);
--	if (config->quarantine_dir == NULL) {
-+	if (config->quarantine_dir == NULL && quarantine_dir != NULL) {
- 		DBG_ERR("virusfilter-vfs: out of memory!\n");
- 		return -1;
- 	}
-@@ -312,7 +314,7 @@ static int virusfilter_vfs_connect(
- 		snum, "virusfilter", "quarantine prefix",
- 		VIRUSFILTER_DEFAULT_QUARANTINE_PREFIX);
- 	config->quarantine_prefix = talloc_strdup(config, quarantine_prefix);
--	if (config->quarantine_prefix == NULL) {
-+	if (config->quarantine_prefix == NULL && quarantine_prefix != NULL) {
- 		DBG_ERR("virusfilter-vfs: out of memory!\n");
- 		return -1;
- 	}
-@@ -321,7 +323,7 @@ static int virusfilter_vfs_connect(
- 		snum, "virusfilter", "quarantine suffix",
- 		VIRUSFILTER_DEFAULT_QUARANTINE_SUFFIX);
- 	config->quarantine_suffix = talloc_strdup(config, quarantine_suffix);
--	if (config->quarantine_suffix == NULL) {
-+	if (config->quarantine_suffix == NULL && quarantine_suffix != NULL) {
- 		DBG_ERR("virusfilter-vfs: out of memory!\n");
- 		return -1;
- 	}
-@@ -359,7 +361,7 @@ static int virusfilter_vfs_connect(
- 		snum, "virusfilter", "rename prefix",
- 		VIRUSFILTER_DEFAULT_RENAME_PREFIX);
- 	config->rename_prefix = talloc_strdup(config, rename_prefix);
--	if (config->rename_prefix == NULL) {
-+	if (config->rename_prefix == NULL && rename_prefix != NULL) {
- 		DBG_ERR("virusfilter-vfs: out of memory!\n");
- 		return -1;
- 	}
-@@ -368,7 +370,7 @@ static int virusfilter_vfs_connect(
- 		snum, "virusfilter", "rename suffix",
- 		VIRUSFILTER_DEFAULT_RENAME_SUFFIX);
- 	config->rename_suffix = talloc_strdup(config, rename_suffix);
--	if (config->rename_suffix == NULL) {
-+	if (config->rename_suffix == NULL && rename_suffix != NULL) {
- 		DBG_ERR("virusfilter-vfs: out of memory!\n");
- 		return -1;
- 	}
-@@ -411,7 +413,7 @@ static int virusfilter_vfs_connect(
- 	socket_path = lp_parm_const_string(
- 		snum, "virusfilter", "socket path", NULL);
- 	config->socket_path = talloc_strdup(config, socket_path);
--	if (config->socket_path == NULL) {
-+	if (config->socket_path == NULL && socket_path != NULL) {
- 		DBG_ERR("virusfilter-vfs: out of memory!\n");
- 		return -1;
- 	}
 -- 
-2.29.2
+Thanks,
 
-
---------------B7D986E618ACB51D0CDB87B7--
+Steve
 
