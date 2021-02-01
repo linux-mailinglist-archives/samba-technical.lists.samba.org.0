@@ -2,59 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C617630A17C
-	for <lists+samba-technical@lfdr.de>; Mon,  1 Feb 2021 06:37:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3656830A1CD
+	for <lists+samba-technical@lfdr.de>; Mon,  1 Feb 2021 07:03:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=6Oy2DSIsrQZj+IR/w83aW9G7j3uNsuYNWReRr3oxTgg=; b=jyj1z8TA5d1qPg3pXoZDjFaLb6
-	r01u76gGTI/TEMI3y3eY5bb/e5Fxmp+K5z4ZyylUqWNhiQebA/NGQoGwF/2rDEM+qjKD4TJ5Jj5dn
-	gvav+pXEpoLNiMkrBr1XOldlc/bYrulc8PmhPk2hXoOIVVKjHqKZIYptJCO0N8zKQ7vmWRycKUIf9
-	dNiBhL+UMdBMbmmGMKqLOJ31aUmDJRp3HlPJCvXOqW1SxF4q16u1EgOZ9Z9ObiNPAbDyKJY6e9GyF
-	h16Pii+NVT7xj6FW0ekHlR+AO3wbY2OoUvxQSg6+OYAyd4zuqeT3cSAVQWuRiRHW6mVt6dMaxvSPr
-	32GKvq/A==;
-Received: from ip6-localhost ([::1]:62200 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=58I0DDxwwWnzFfZywKZ3ta+r7vxR/SELvvFFL51x460=; b=eSuuWejr3x8G6HM6yfMSSFRCtN
+	HsuxFoIlqqHscEwi0ppp34hxEL4i+husmZwZcVnHy1vgGF0DdOmUqOkivL5jMi9ymKzCtdXHiTvWS
+	s7xieIV55u+Nvgo/Kn/dZbpQTmMEidTKpQ9RMjbh4VjB66wlZ870Ue2mHTnnKdisXC1963qbBYQ47
+	TEjySuHe6qHEi7cA54IY8fm7sdMVsUqb8DsT7GE82n2CzH5v0Y0YOkZjceoLLQniwMrlz3jMquILZ
+	K6O/vCmqSyj41DKToj7H5kccT/jRa7CSFPhyL5MprRqDASuhyb2RIlXUQ9FNyWGEcDOHr+zliE7KQ
+	pI9XhtCA==;
+Received: from ip6-localhost ([::1]:62910 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l6RtC-009vwx-Ea; Mon, 01 Feb 2021 05:36:42 +0000
-Received: from mail-vk1-xa36.google.com ([2607:f8b0:4864:20::a36]:46460) 
+	id 1l6SJM-009w50-13; Mon, 01 Feb 2021 06:03:44 +0000
+Received: from m1321.mail.163.com ([220.181.13.21]:59650) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l6Rt5-009vwq-3h
- for samba-technical@lists.samba.org; Mon, 01 Feb 2021 05:36:38 +0000
-Received: by mail-vk1-xa36.google.com with SMTP id d6so3664175vkb.13
- for <samba-technical@lists.samba.org>; Sun, 31 Jan 2021 21:36:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=pmIEBeCyWOVVLXITZygi4DTPeoWYpf0cWLWeiWybua8=;
- b=ibHDWilASWh1uX6Yf/YP/HYGdnc9HR586RLqENwjLmqT2ta+VPoD+bpznQ9paMPcDo
- X1x7FiLPzZfrRXLLhLCNEEUR3qu4msBP8O4e12NYIiEhlFXlAPwT27LmFymS2IV03lYT
- dF93nXfcOjPw290xuSOlF4JoKG56DgReuR54n2qy/WhNTxlU4enjzAwNcIiLE4HmrMtf
- xSp4HNuuma5LRrMKBrR9UZZ/etae3qyXcr3W60uc/kZJgTQbcQCMX0EaEB6V5P1Tb8UB
- qOOj45MM2+cWeAF8Ohg8ZPvCYVJ/sowU/hoEoeIE187u/2nn87MAcMqRwEp+Jqt9awon
- //OQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=pmIEBeCyWOVVLXITZygi4DTPeoWYpf0cWLWeiWybua8=;
- b=HyEjawvbUNSRHZTq5s/1Wz+tkJcIrTUEolVFuG+ygW0sR65TT0aV7kwSejhkKmPFGA
- I36op9zsMqKNOTzNUr/VdFxWheY05T/QZN15rNkpkPoZI8pnxqmE620ux4oABuYwM4lz
- iEQvkr+nf2W/9ZdX63l+v1FgKJQR7/fNZWXVpo93wBrQ9LLUxM+gjww+Cl7HsYLYajbk
- ILbaSpvKKy6cWsOjZ7ZJOqEaTqQFiDV2B9nYx0ocMNxAqWT8vkUfIcVuJU50BSVXMnSc
- lO7zL3Xr8TRX1YkI0ddLw0Ss97dPdQlMnDAViTggLah/TIxeFswgP3FX76hJVZrvNDzH
- 2YbA==
-X-Gm-Message-State: AOAM531MGzM4C8DPD6QalsQ9Agz8JtskBJ5wkcdan6Hkh5NTtrzA934V
- W4bRqPlW+4z/RanqoShYI500MOdOuUUVykU/qXo=
-X-Google-Smtp-Source: ABdhPJy6eDuQZtZ7F4npsryzqTlBG6Lyc7n7KDtR2df6tLBOiDNxo845qsn9L63ZXffsKuIoijAKfyTCXFYmcvOY5Uk=
-X-Received: by 2002:a1f:d403:: with SMTP id l3mr2928690vkg.4.1612157791904;
- Sun, 31 Jan 2021 21:36:31 -0800 (PST)
+ (Exim) id 1l6SJD-009w4s-Me
+ for samba-technical@lists.samba.org; Mon, 01 Feb 2021 06:03:40 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=3+2w3
+ qdMbPJFWA2Hkhpb0ZuJKOOV0hqeIW+uRUJgvl8=; b=cPCWLfP6axDkYm3owWTua
+ cEyE+m06ksk6WGoYJ2sp4T/m+I9a7Oh9zti5OK0FgLUqqftQa0Uu0MUdHGa4FlGQ
+ I579KfNJdU03Z8cYwYZOobA6ruF3UFCFNNTu04bUyp+mC7VDugBiih3ICLQ+6+E2
+ G7TmcMQdu87qThKw8G5h3Q=
+Received: from wuming_81$163.com ( [123.116.97.153] ) by
+ ajax-webmail-wmsvr21 (Coremail) ; Mon, 1 Feb 2021 14:03:20 +0800 (CST)
+X-Originating-IP: [123.116.97.153]
+Date: Mon, 1 Feb 2021 14:03:20 +0800 (CST)
+To: "ronnie sahlberg" <ronniesahlberg@gmail.com>
+Subject: Re:Re: Re: Re: about active/active clustered nfs with ctdb
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.13 build 20210104(ab8c30b6)
+ Copyright (c) 2002-2021 www.mailtech.cn 163com
+In-Reply-To: <CAN05THT7OJJxFKRiQJHHHh3Gv15VCfn+bU=LN8eO9x4+n1eu5g@mail.gmail.com>
+References: <387bc94a.4501.1772917b1cf.Coremail.wuming_81@163.com>
+ <20210127204613.5735addd@martins.ozlabs.org>
+ <545e1ab2.ef9.17746b3e063.Coremail.wuming_81@163.com>
+ <20210128202516.40677c83@martins.ozlabs.org>
+ <3cabb185.5677.177486f8025.Coremail.wuming_81@163.com>
+ <CAN05THR4WtBJoPt9FRMs3zYmargQ0Y8VFQiL-LvW+1g5RVDcQA@mail.gmail.com>
+ <102c2bdd.3624.1774d42f980.Coremail.wuming_81@163.com>
+ <CAN05THT7OJJxFKRiQJHHHh3Gv15VCfn+bU=LN8eO9x4+n1eu5g@mail.gmail.com>
+X-CM-CTRLDATA: a9oS4GZvb3Rlcl9odG09OTc2MTo1Ng==
 MIME-Version: 1.0
-References: <CAHbM3qh3pAXzSzSRNjE77jL1tmsREuRu9BQOCaPnWBY9dVdNdg@mail.gmail.com>
- <20210129210511.GA50742@jeremy-acer> <1852905.PYKUYFuaPT@krikkit>
-In-Reply-To: <1852905.PYKUYFuaPT@krikkit>
-Date: Mon, 1 Feb 2021 11:06:21 +0530
-Message-ID: <CAHbM3qhcs6f6g2vWO8Oif7dpxPkhOO6z90FcQZc89xp9_fSXng@mail.gmail.com>
-Subject: Re: winbind cache issue for NDR entries
-To: Andreas Schneider <asn@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Message-ID: <6bfcac4c.3277.1775c30395a.Coremail.wuming_81@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: FcGowACnkQiomRdgUSu5AA--.50143W
+X-CM-SenderInfo: pzxpx0ljbyiqqrwthudrp/1tbipQQscFUMcKxqhgADsX
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Type: text/plain; charset=GBK
+Content-Transfer-Encoding: base64
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -69,136 +66,143 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shilpa K via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shilpa K <shilpa.krishnareddy@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>,
- Jeremy Allison <jra@samba.org>
+From: =?utf-8?b?6aOO5peg5ZCNIHZpYSBzYW1iYS10ZWNobmljYWw=?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?GBK?B?t+fO3sP7?= <wuming_81@163.com>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-  Hi Andreas,
-
-Thanks for the response. If it helps, I used below sequence of events to
-verify the fix
-
-1. block trusted domain DC IP
-2. kill winbindd
-3. Try mapping share using trusted domain user credentials. At this point,
-it appears like the domain sequence number became -1 and the NDR sequence
-value for the trusted domain DC user was -1
-4. unblock trusted domain DC IP
- 5. Try mapping share using trusted domain user credentials and this
-continuously fails for 30minutes because of below code:
-
-        if (!is_domain_offline(domain)) {
-                uint32_t entry_seqnum, dom_seqnum, last_check;
-                uint64_t entry_timeout;
-
-                if (!wcache_fetch_seqnum(domain->name, &dom_seqnum,
-                                         &last_check)) {
-                        goto fail;
-                }
-                entry_seqnum = IVAL(data.dptr, 0);
-                if (entry_seqnum != dom_seqnum) {
-                        DEBUG(10, ("Entry has wrong sequence number: %d\n",
-                                   (int)entry_seqnum));
-                        goto fail;
-                }
-                entry_timeout = BVAL(data.dptr, 4);
-                if (time(NULL) > entry_timeout) {
-                        DEBUG(10, ("Entry has timed out\n"));
-                        goto fail;
-                }
-        }
-
-The entry_seqnum and dom_seqnum were both -1 (DOM_SEQUENCE_NONE) and so the
-data was returned from cache and the NDR call to child processes was not
-made.
-
-Thanks,
-Shilpa
-
-On Sun, Jan 31, 2021 at 1:18 AM Andreas Schneider <asn@samba.org> wrote:
-
-> On Friday, 29 January 2021 22:05:11 CET Jeremy Allison via samba-technical
-> wrote:
-> > On Fri, Jan 29, 2021 at 07:39:40PM +0530, Shilpa K via samba-technical
-> wrote:
-> > >Hello,
-> > >
-> > >We had a customer report that the users were not able to login for about
-> > >30minutes and the problem cleared itself in almost about 30minutes. They
-> > >are using Samba as a member server in a domain which has 2 way trust
-> with
-> > >another domain (say ABC.COM). Upon investigation, we found that there
-> was a
-> > >problem with trusted domain DCs for a very short duration as per the
-> event
-> > >log on the DC of the primary domain. This problem seems to have been
-> > >cleared away after a short duration. Around the same time, a user
-> belonging
-> > >to a trusted domain mapped Samba share and encountered a problem. At
-> this
-> > >time, looks like NDR cache entry for trusted domain group "Domain Users"
-> > >was added in winbindd_cache.tdb to indicate that there was a lookup
-> problem
-> > >and the status NT_STATUS_TRUSTED_DOMAIN_FAILURE was stored as part of
-> this
-> > >entry. Once the issue with trusted domain DC was cleared and the domain
-> was
-> > >back online, when users tried to login, PAM_AUTH was successful for the
-> > >users but getpwnam failed while looking up SID for "Domain Users". This
-> > >failure was returned from the entry in the winbindd_cache.tdb as
-> > >wcache_fetch_ndr() succeeded for this entry. Due to this, users
-> belonging
-> > >to the trusted domain were not able to login. Once the cache was
-> expired,
-> > >getpwnam succeeded for trusted domain users and the shares could be
-> mapped.
-> > >In order to resolve this issue, should we not refresh the sequence
-> number
-> > >when the domain goes online? Btw, we are using "winbind cache time =
-> 1800".
-> >
-> > Yep, looks like we should add a call to force a refresh of the
-> > sequence number in the cache here:
-> >
-> > source3/winbindd/winbindd_cm.c:set_domain_online()
-> >
-> >   538
-> >   539         domain->online = True;
-> >   540
-> >
-> > Add a force_refresh_domain_sequence_number(domain) call above.
-> >
-> > Here is a (raw, untested) patch that implements this.
-> >
-> > Any chance you can test this for me ?
-> >
-> > Jeremy.
->
-> I wonder if this is the dc-connect issue with trusted domains.
->
-> A fix for this we are currently using is:
->
-> https://gitlab.com/samba-redhat/samba/-/commit/
-> 87bdffab6eae644d468f0fdc4489667fc21ac3a6
->
-> This is just a hack as the right fix would be to completely get rid of the
-> dc-
-> connect child. However the winbind parent needs the dc-connect just to
-> refresh
-> the secquence number.
->
-> Isaac started to investigate this further and just had a draft for this
-> which
-> was never finished. We really need to fix this correctly.
->
-> https://gitlab.com/samba-team/samba/-/merge_requests/1573
->
->
->
->         Andreas
->
->
->
+Um9ubmllLAogICAgICB0aGFua3MgZm9yIHlvdXIgcmVwbHkuCiAgICAgIEkgaGF2ZSBzb2x2ZWQg
+dGhlIHByb2JsZW06IAogICAgICBpbiB0aGUgZXZlbnQgc2NyaXB0LCBjYWxsIHRoZSBmdW5jdGlv
+biB0aWNrbGVfdGNwX2Nvbm5lY3Rpb25zIGltcGxlbWVudGVkIGluIHRoZSBmaWxlIC9ldGMvY3Rk
+Yi9mdW5jdGlvbnMKICAgICAgCgoKCgoKCgoKCgoKCgoKCgoKQXQgMjAyMS0wMS0yOSAxNjo0ODoz
+NSwgInJvbm5pZSBzYWhsYmVyZyB2aWEgc2FtYmEtdGVjaG5pY2FsIiA8c2FtYmEtdGVjaG5pY2Fs
+QGxpc3RzLnNhbWJhLm9yZz4gd3JvdGU6Cj5PbiBGcmksIEphbiAyOSwgMjAyMSBhdCA2OjMwIFBN
+ILfnzt7D+yA8d3VtaW5nXzgxQDE2My5jb20+IHdyb3RlOgo+Pgo+PiBldmVyeW9uZSxJIGFtIHNv
+cnJ5IHRoYXQgd2hlbiB3cml0aW5nIHRoZSBlbWFpbCBJIG1pc3Rha2VubHkgcHJlc3NlZCBzb21l
+IGtleSBhbmQgdGhlIGVtYWlsIGNsaWVudCBzZW5kZWQgYSByZXBseSBlbWFpbC4KPj4KPj4KPj4K
+Pj4gdGhlcmUgaXMgIGEgc3RpbGwgcHJvYmxlbToKPj4KPj4gMSkgdGhlIHVzZXIgb2YgbmZzIG1v
+dW50cyBhbiBuZnMgc2hhcmUgdXNpbmcgVENQCj4+Cj4+IDIpIHRoZSB1c2VyIGNwIGEgbGFyZ2Ug
+ZmlsZSBmb3IgZXhhbXBsZSAyMEdCIGZpbGUKPj4KPj4gNCkgKHRoZSBjcCBkb2VzIG5vdCBjb21w
+bGV0ZSkgdGhlIGNvcnJlc3BvbmRpbmcgc2VydmVyIG5vZGUgZmFpbHMKPj4KPj4KPj4gdGhlbiBJ
+IGZpbmQgdGhhdCB0aGUgY3AgaXMgYmxvY2tlZCBhcyBteSBleHBlY3RhdGlvbi4KPj4KPj4gYnV0
+IGFmdGVyIGlzY3NpIGx1bi9zZXJ2ZXIvc2hhcmUvcHVibGljIGlwIHRyYW5zZmVyIHRvIG90aGVy
+IHNlcnZlciBub2RlLAo+Pgo+PiB0aGUgY3AgaXMgc3RpbGwgYmxvY2tlZCBhbmQgc3RvcHMgd3Jp
+dGluZy4KPj4KPj4KPj4gaXMgaXQgYmVjYXVzZSB0aGF0IHRoZSBzbW5vdGlmeSB0b29sIHVzZXMg
+VURQIHRvIG5vdGlmeSBuZnMgPwo+Pgo+PiByZWY6IGN0ZGIvdXRpbHMvc21ub3RpZnkvc21ub3Rp
+ZnkuYwo+Cj5ObyBpdCBoYXMgbm90aGluZyB0byBkbyB3aXRoIHNtbm90aWZ5LiBUaGF0IHRvb2wg
+aXMgT05MWSB1c2VkIHRvCj50cmlnZ2VyIHJlLW5lZ290aWF0ZSBvZiBieXRlIHJhbmdlIGxvY2tz
+IGZvciBuZnN2My4KPkJ5dGUgcmFuZ2UgbG9ja3MgYXJlIHJhcmUgaW4gdW5peC9saW51eCBhcHBs
+aWNhdGlvbnMgYW5kIHRoZXkgYXJlIG5vdAo+dXNlZCBhdCBhbGwgd2l0aCB0aGUgJ2NwJyBjb21t
+YW5kLgo+V2hhdCBpcyBsaWtlbHkgaGFwcGVuaW5nIGlzIGltaG8gKHdpdGhvdXQgYW55IGRhdGEg
+dG8gZ28gb24pIHRoYXQgYQo+ZmFpbG92ZXIgZG9lcyBoYXBwZW4gYnV0IHN0YXRlIG5lZWRlZCBi
+eSBrbmZzZCBmb3IgZnMgaXMgZWl0aGVyCj5taXNzaW5nCj5vciBzb21ldGhpbmcgaXMgd3Jvbmcg
+d2l0aCB5b3VyIHNjcmlwdHMgYW5kIHRoZSBmYWlsb3ZlciBkb2VzIG5vdAo+aGFwcGVuIHByb3Bl
+cmx5Lgo+Cj4KPkhhdmUgeW91IHRyaWVkIHRvIGZvcmNlIHRoZSBjbGllbnQgdG8gdXNlIG5mc3Yz
+PyAgSSBoYXZlIHN0cm9uZwo+c3VzcGljaW9ucyB0aGF0IG5mc3Y0IHdpbGwgYWJzb2x1dGVseSBu
+b3Qgd29yayB3aXRoIHRoZSBjdGRiCj5ldmVudHNjcmlwdHMKPnVubGVzcyBNYXJ0aW4gaGF2ZSBy
+ZXdyaXR0ZW4gdGhlbSB0byBiZSBiZSBuZnN2NCBjYXBhYmxlLgo+SWYgbmZzdjMgYWxzbyBkb2Vz
+IG5vdCB3b3Jrcywgd2VsbCwgdGhlbiBJIGFtIG91dCBvZiBpZGVhcy4gTWF5YmUgeW91cgo+ZXZl
+bnRzY3JpcHRzIGFyZSBub3Qgd29ya2luZz8KPgo+U3RpbGwsIHNpbmNlIHlvdSBhcmUgd29ya2lu
+ZyB0byBidWlsZCBhIGFjdGl2ZS9wYXNzaXZlIGZhaWxvdmVyCj5zb2x1dGlvbi4gY3RkYiBpcyB0
+aGUgd3JvbmcgdG9vbCB0byBkbyB0aGlzLgo+WW91IHJlYWxseSBzaG91bGQgbG9vayBhdCBwYWNl
+bWFrZXIgb3Igc2ltaWxhciBmb3IgYWN0aXZlL3Bhc3NpdmUuCj4KPgo+Cj4+Cj4+Cj4+IGJ5IHRo
+ZSB3YXksIGlzIHRoZXJlIGFueSBkb2MgYWJvdXQgdGhlIGludGVybmFsIG9mIGN0ZGIgPwo+Pgo+
+Pgo+PiB0aGFua3MgZm9yIGFueSBhZHZpY2UuCj4+Cj4+Cj4+Cj4+Cj4+Cj4+Cj4+Cj4+Cj4+IEF0
+IDIwMjEtMDEtMjggMTk6MTM6MDIsICJyb25uaWUgc2FobGJlcmcgdmlhIHNhbWJhLXRlY2huaWNh
+bCIgPHNhbWJhLXRlY2huaWNhbEBsaXN0cy5zYW1iYS5vcmc+IHdyb3RlOgo+PiA+SGksCj4+ID4K
+Pj4gPkkgaGF2ZW50IHdvcmtlZCBvbiBjdGRiIGluIGFnZXMsIGJ1dCB0aGUgaXNjc2kgc2NyaXB0
+cyBpbiBjdGRiIGlzCj4+ID5wcm9iYWJseSBub3Qgc3VpdGFibGUgZm9yIHlvdXIgdXNlIGNhc2Uu
+Cj4+ID5JdCBpcyBhaW1lZCBhdCB3aGVuIHlvdSB3YW50IHRvIGV4cG9ydCBhbiBMVU4gdmlhIGEg
+c3BlY2lmaWMKPj4gPnRhcmdldG5hbWUgZnJvbSB0aGUgY3RkYiBjbHVzdGVyIHRvIGV4dGVybmFs
+IGlzY3NpIGNsaWVudHMKPj4gPmFuZCBiYXNpY2FsbHkgaGF2ZSBhIGFjdGl2ZS9wYXNzaXZlIGZh
+aWxvdmVyIG1vZGUgZm9yIHRoZSB0YXJnZXQvbHVuCj4+ID5wYWlycyBhY3Jvc3Mgbm9kZXMuCj4+
+ID4KPj4gPldoYXQgeW91IHRyeSB0byBkbyBpcyBoYXZlIGlzY3NpIHVzZWQgaW50ZXJuYWxseSBm
+b3Igc3RvcmFnZSBhbmQgdGhlbgo+PiA+aGF2ZSBhIGZpbGUgc3lzdGVtIG9udG9wIHRoZXNlIGx1
+bnMgYW5kIGV4cG9ydCB0aGVuIGFzIE5GUyBzaGFyZXMgdG8KPj4gPnRvIG5mcyBjbGllbnRzLgo+
+PiA+VGhhdCBjb3VsZCBiZSBkb25lLCBJIGd1ZXNzLCBidXQgaXMgbm90IHdoYXQgSSB0aGluayB0
+aGUgY3VycmVudAo+PiA+c2NyaXB0cyBkbyBzbyB5b3UgbWlnaHQgaGF2ZSB0byB3cml0ZSBhIGJ1
+bmNoIG9mIG5ldyBldmVudHNjcmlwdHMgdG8KPj4gPmRvIHdoYXQgeW91IHdhbnQuCj4+ID4KPj4g
+PlRoZSBuZnMgc3VwcG9ydCBpbiB0aGUgZXZlbnRzY3JpcHRzIGFsc28gbWlnaHQgYmUgcHJvYmxl
+bWF0aWMuIFdoZW4gSQo+PiA+d29ya2VkIG9uIHRoZW0gdGhleSB3ZXJlIG9ubHkgYWltZWQgYXQg
+bmZzdjMuCj4+ID5BcyBuZnN2NCBpcyBkaXNwbGFjaW5nIHYzIHF1aXRlIHJhcGlkbHksIHRoZXNl
+IHNjcmlwdHMgbWF5IG9yIG1heSBub3QKPj4gPndvcmsgZm9yIHlvdS4KPj4gPkJ1dCB0aGV5IGFs
+c28gd2VyZSBhaW1lZCBhdCBhbiBhY3RpdmUvYWN0aXZlIGNvbmZpZ3VyYXRpb24gd2hlcmUgYWxs
+Cj4+ID50aGUgZGF0YSBpcyBzaGFyZWQgZnJvbSBhIGNvbW1vbiBjbHVzdGVyIGJhY2tlbmQgYW5k
+IGlzIGF2YWlsYWJsZQo+PiA+YWN0aXZlL2FjdGl2ZSB0aHJvdWdoIGVhY2ggbm9kZS4KPj4gPkkg
+YW0gbm90IHN1cmUgaG93IHdlbGwgdGhlIGN1cnJlbnQgc2NyaXB0cyB3aWxsIHdvcmsgd2l0aCBu
+ZnN2NCBzaW5jZQo+PiA+dGhlcmUgYXJlIHNvIG11Y2ggbW9yZSBzdGF0ZSBpbnZvbHZlZC4KPj4g
+Pgo+PiA+Cj4+ID5TaW5jZSB5b3UgYmFzaWNhbGx5IHdhbnQgZWFjaCBzaGFyZSB0byBiZSBoYW5k
+bGVkIGluIGEgYWN0aXZlL3Bhc3NpdmUKPj4gPmZhaWxvdmVyIG1vZGUgSSB0aGluayBwYWNlbWFr
+ZXIgd2lsbCBiZSBhIG11Y2ggYmV0dGVyCj4+ID5maXQgYW4gZWFzaWVyIHNvbHV0aW9uIHRoYW4g
+dHJ5aW5nIHRvIHB1c2ggYSBhY3JpdmUvcGFzc2l2ZSBmYWlsb3Zlcgo+PiA+bW9kZWwgaW50byBj
+dGRiLgo+PiA+Cj4+ID5QYWNlbWFrZXIgYXMgeW91IHNhaWQgZG9lcyBuZWVkIGEgc2hhcmVkIHJl
+c291cmNlIHRvIGhhbmRsZSBzYWZlCj4+ID5mYWlsb3Zlci4gSW4gY3RkYiB0aGlzIGlzIG1vc3Rs
+eSBoYW5kbGVkIGJ5IHRoZSBzaGFyZWQgYmFja2VuZCBjbHVzdGVyCj4+ID5maWxlc3lzdGVtIHRo
+YXQgY3RkYiBpcyBkZXNpZ25lZCB0byBzaXQgb250b3Agb2YuCj4+ID5JbiBhIHBhY2VtYWtlciBz
+b2x1dGlvbiwgYXMgeW91IGRvbiBub3QgaGF2ZSBhIGJhY2tlbmQgZmlsZXN5c3RlbSB3aXRoCj4+
+ID5jb2hlcmVudCBsb2NraW5nLCB5b3Ugd2lsbCBuZWVkIGEgZGlmZmVyZW50IHNvbHV0aW9uIHRv
+IGF2b2lkCj4+ID5zcGxpdC1icmFpbi4KPj4gPkkgYW0gbm8gbG9uZ2VyIGZhbWlsaWFyIGF0IGFs
+bCB3aXRoIGN1cnJlbnQgYmVzdCBwcmFjdGljZSBmb3IKPj4gPnBhY2VtYWtlciBidXQgSSB0aGlu
+ayBoYXZpbmcgYSBzaGFyZWQsIGhpZ2gtYXZhaWxhYmxlIFNDU0kgcmVzb3VyY2UKPj4gPnRoYXQg
+c3VwcG9ydHMgUGVyc2lzdGVudFJlc2VydmF0aW9uIGNvdWxkIGJlIGEgc29sdXRpb24uCj4+ID5V
+c2luZyBQUiB0byBlbnN1cmUgdGhhdCBvbmx5IG9uZSBub2RlIGF0IGEgdGltZSBpcyBhY3RpdmUu
+Cj4+ID5CdXQsIHRoaXMgaXMgYWxsIHZlcnkgb2xkIGFuZCBwb3NzaWJseSBvYnNvbGV0ZSB1bmRl
+cnN0YW5kaW5nIG9mIHBhY2VtYWtlci4KPj4gPgo+PiA+Cj4+ID5UTDtEUgo+PiA+U3RpbGwsIEkg
+dGhpbmsgYXMgeW91IHdhbnQgYWN0aXZlL3Bhc3NpdmUgZmFpbG92ZXIgZm9yIHlvdXIgc2hhcmVz
+Cj4+ID5wYWNlbWFrZXIgaXMgbGlrZWx5IHdoYXQgeW91IHdhbnQgYW5kIG5vdCBjdGRiLgo+PiA+
+VGhlIHBhY2VtYWtlciBmb2xrcyB3aWxsIGtub3cgbXVjaCBiZXR0ZXIgaG93IHlvdSB3b3VsZCBz
+ZXQgdGhlc2UKPj4gPnN5c3RlbXMgdXAgdGhhbiBJIGRvLgo+PiA+Cj4+ID5yZWdhcmRzCj4+ID5y
+b25uaWUgcwo+PiA+Cj4+ID4KPj4gPk9uIFRodSwgSmFuIDI4LCAyMDIxIGF0IDg6MDEgdmlhIGEg
+c3BQTSC3587ew/sgPHd1bWluZ184MUAxNjMuY29tPiB3cm90ZToKPj4gPj4KPj4gPj4gIkluIHlv
+dXIgc2NlbmFyaW8sIGlzIHRoZSBmaWxlc3lzdGVtIG9uIGVhY2ggTFVOIGFzc29jaWF0ZWQgd2l0
+aCBhIHBhcnRpY3VsYXIgcHVibGljIElQIGFkZHJlc3M/Igo+PiA+PiB5ZXMKPj4gPj4KPj4gPj4g
+Ikl0IHdvdWxkIGJlIGdvb2QgaWYgeW91IGNvdWxkIGRvIHRoaXMgd2l0aG91dCBtb2RpZnlpbmcg
+MTAuaW50ZXJmYWNlLiBJdCB3b3VsZCBiZSBiZXR0ZXIgaWYgeW91IGNvdWxkIGRvIGl0IGJ5IGFk
+ZGluZyBhIG5ldyBldmVudCBzY3JpcHQuIgo+PiA+PiB0aGFua3MuCj4+ID4+IEkgYW0gc29ycnkg
+dGhhdCBJIGhhdmUgYW5vdGhlciBxdWVzdGlvbi4KPj4gPj4gcmVkaGF0IHByb3ZpZGVzIGFub3Ro
+ZXIgc29sdXRpb246Cj4+ID4+IGh0dHBzOi8vd3d3LmxpbnV4dGVjaGkuY29tL2NvbmZpZ3VyZS1u
+ZnMtc2VydmVyLWNsdXN0ZXJpbmctcGFjZW1ha2VyLWNlbnRvcy03LXJoZWwtNy8KPj4gPj4gdGhl
+eSB1c2UgcGFjZW1ha2VyIHRvIG1ha2UgYW4gYWN0aXZlL3Bhc3NpdmUgIG5mcyBjbHVzdGVyLiBp
+dHMgZ29hbCBpcyB2ZXJ5IHNpbWlsYXIgdG8gbWluZS4KPj4gPj4KPj4gPj4gaWYgdGhlIGNsdXN0
+ZXIgY29uc2lzdHMgb2YganVzdCB0d28gbm9kZXMsIHdlIGtub3cgdGhhdCB0aGVyZSBkb2VzIG5v
+dCBleGlzdCBhIGNvcnJlY3QgYWxnb3JpdGhtIGZvciB0aGUgY29uc2Vuc3VzIHByb2JsZW0uIFRo
+ZSBwYWNlbWFrZXIgc29sdXRpb24gb2YgcmVkaGF0IHVzZXMgYSBmZW5jZSBkZXZpY2UgKHdlIGNh
+biB1c2UgYSBzaGFyZWQgZGlzay4gZm9yIGV4YW1wbGUgaXNjc2kgbHVuLCBhcyBhIGZlbmNpbmcg
+ZGV2aWNlKSwgIHNvIGl0IG1heSBiZSBjb3JyZWN0Lgo+PiA+PiBCdXQgSSBoYXZlIG5vdCBmb3Vu
+ZCBhbnkgZG9jIGFib3V0IGZlbmNlIGRldmljZSBhbmQgY3RkYiwgc28gaW4gdGhlb3J5IG15IHNv
+bHV0aW9uIG1heSBiZSBub3QgY29ycmVjdCBmb3IgdHdvLW5vZGVzIGNsdXN0ZXIuCj4+ID4+IEkg
+YW0gdmVyeSBjdXJpb3VzIGhvdyBkb2VzIGN0ZGIgdGFja2xlIHRoZSBwcm9ibGVtIG9yIHRoZSBw
+cm9ibGVtIGlzIG5vdCB0YWNrbGVkLgo+PiA+Pgo+PiA+PiBpZiBhbnkgaG93LXRvcyBvciBpbXBs
+ZW1lbnRhdGlvbi9wcmluY2lwbGUgb2YgY3RkYiBpcyBwcm92aWRlZCBJIHdpbGwgYmUgZ2xhZC4K
+Pj4gPj4gc29ycnkgdG8gYm90aGVyLgo+PiA+PiB0aGFua3MgZm9yIHlvdXIgcmVwbHkuCj4+ID4+
+Cj4+ID4+IEF0IDIwMjEtMDEtMjggMTc6MjU6MTYsICJNYXJ0aW4gU2Nod2Vua2UiIDxtYXJ0aW5A
+bWVsdGluLm5ldD4gd3JvdGU6Cj4+ID4+ID5IbW1tLiAgU29ycnksIEkgbWlnaHQgaGF2ZSByZWFk
+IHRvbyBxdWlja2x5IGFuZCBtaXN1bmRlcnN0b29kLiAgNzAuaXNjc2kKPj4gPj4gPmlzIG9ubHkg
+ZGVzaWduZWQgdG8gcnVuIHRndGQgb24gbm9kZXMgYW5kIGV4cG9ydCBMVU5zIGZyb20gcHVibGlj
+IElQCj4+ID4+ID5hZGRyZXNzZXMuIEluIHlvdXIgZXhhbXBsZSB0aGUgbm9kZXMgYXJlIGlTQ1NJ
+IGNsaWVudHMsIG1vdW50aW5nIGEKPj4gPj4gPmZpbGVzeXN0ZW0gb24gdGhlIExVTiBhbmQgZXhw
+b3J0aW5nIGl0IHZpYSBORlMuICBUaGF0IGlzIHZlcnkgZGlmZmVyZW50Lgo+PiA+PiA+Cj4+ID4+
+ID5Tb3JyeSBmb3IgdGhlIGNvbmZ1c2lvbi4KPj4gPj4gPgo+PiA+PiA+SW4geW91ciBzY2VuYXJp
+bywgaXMgdGhlIGZpbGVzeXN0ZW0gb24gZWFjaCBMVU4gYXNzb2NpYXRlZCB3aXRoIGEKPj4gPj4g
+PnBhcnRpY3VsYXIgcHVibGljIElQIGFkZHJlc3M/Cj4+ID4+ID4KPj4gPj4gPkl0IHdvdWxkIGJl
+IGdvb2QgaWYgeW91IGNvdWxkIGRvIHRoaXMgd2l0aG91dCBtb2RpZnlpbmcgMTAuaW50ZXJmYWNl
+Lgo+PiA+PiA+SXQgd291bGQgYmUgYmV0dGVyIGlmIHlvdSBjb3VsZCBkbyBpdCBieSBhZGRpbmcg
+YSBuZXcgZXZlbnQgc2NyaXB0Lgo+PiA+PiA+Cj4+ID4+ID5wZWFjZSAmIGhhcHBpbmVzcywKPj4g
+Pj4gPm1hcnRpbgo+PiA+PiA+Cj4+ID4+ID5PbiBUaHUsIDI4IEphbiAyMDIxIDA5OjU1OjI5ICsw
+ODAwIChDU1QpLCC3587ew/sgPHd1bWluZ184MUAxNjMuY29tPgo+PiA+PiA+d3JvdGU6Cj4+ID4+
+ID4KPj4gPj4gPj4gbWFydGluLCB0aGFua3MgZm9yIHlvdXIgcmVwbHkuCj4+ID4+ID4+IE5vLCBJ
+IGRpZCBub3QgbW9kaWZ5IDcwLmlzY3NpLiBNYXliZSBJIG5lZWQgdG8gbWFrZSBmdWxsIHVuZGVy
+c3RhbmRpbmcgb2YgaXQuCj4+ID4+ID4+Cj4+ID4+ID4+Cj4+ID4+ID4+IGFmdGVyIG1hbnkgZGF5
+cyByZWFkaW5nL2RlYnVnaW5nIHRoZSBzb3VyY2UgY29kZSBvZiBjdGRiIGFuZCBpdHMgc2hlbGwg
+c2NyaXB0cywgSSBmb3VuZCB0aGUga2V5IHBvaW50IGluIHRoZSBzY3JpcHQgMTAuaW50ZXJmYWNl
+Lgo+PiA+PiA+PiBteSBtb2RpZmljYXRpb24gIGlzOgo+PiA+PiA+PiAxIGNyZWF0ZSBuZnMgc2hh
+cmUobW91bnQgZnMsIG1vZGlmeSAvZXRjL2V4cG9ydHMsIHJlc3RhcnQgbmZzIHNlcnZpY2UgLi4p
+IGJlZm9yZSBhbnkgcHVibGljIGlwIGlzIGFkZGVkIHRvIHNvbWUgaW50ZXJmYWNlCj4+ID4+ID4+
+IDIgZGVsZXRlIHRoZSBjb3JyZXNwb25kaW5nIG5mcyBzaGFyZSBhZnRlciBhbnkgcHVibGljIGlw
+IGlzIHJlbW92ZWQgZnJvbSBzb21lIGludGVyZmFjZQo+PiA+PiA+Pgo+PiA+PiA+Pgo+PiA+PiA+
+PiBJIHRlc3RlZCBtYW55IHNodXRkb3duLXJlYm9vdCBjeWNsZXMgKG9mIG5vZGUgaW4gYSBjdGRi
+IGNsdXN0ZXIpLCBhbmQgdGhlIHJlc3VsdHMgYXJlIHRoZSBzYW1lIGFzIG15IGV4cGVjdGF0aW9u
+Lgo+PiA+PiA+PiBJIHRoaW5rIEkgbmVlZCBtb3JlIHRlc3RzIGFuZCBtb3JlIHNjZW5hcmlvIHRl
+c3RzLgo+PiA+Pgo+PiA+Pgo+PiA+Pgo+PiA+Pgo+Pgo+Pgo+Pgo+Pgo=
