@@ -2,144 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF07230A60B
-	for <lists+samba-technical@lfdr.de>; Mon,  1 Feb 2021 12:00:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C339430B6B0
+	for <lists+samba-technical@lfdr.de>; Tue,  2 Feb 2021 05:49:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Shw8rJX7mjuDOREb4EQiHtiZX49ZIEF13zjd5rtpGQE=; b=3ohDxFtpZ6EXrlymQ0DUTHqajb
-	oCb+UIIitXEI144dvRzto+zDMfuLBUeErXJcr6vKJDlxA/Sa1pBmADQJ3cYFfiyNil+XDZYjioLMB
-	YWGUfVZPfFXjGqN2A3Gq+VEZ/r1dpBOwNtQux1c36T2SSB3sJxwoY1VtQRdLPr8h0mmMG7Me6fF69
-	ji984OqR6TPgGFWk7a+7EdGXTdcSey1SExzo217zZBAtV36V7y/GNvsdfabI/2aJjlnE/s+aC/+1S
-	T6pLVZ//tj3qnLLavaK1G7GGljpu5BIWFZJy4mdal9HCPcLnUdbi6GcQV/Hm4FXjAK7NfaXRyNIES
-	2xgEpJ8A==;
-Received: from ip6-localhost ([::1]:23158 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=5qo3Y6a156Muu9ZuNI0M6zIN06kI/WyI3S1KWgKiOfc=; b=gEHmikSHwyLBUtezUheiH7WXtS
+	xogN13WJwWgeMU0Zan453v0Ef941Z7PtfolV2/jhI0Fr6EA7Z+AqXnUnDsIs/hhXZafAA8TfHxZFj
+	OIpmBeWgdYEbXrYygT0kVbR+/8XSv7gyAsHxSD5StZ6D7I0WKgmxoDOhc7n0X1AdR+C6GgDT/OVcb
+	mkuR/pQCOecP5ThF/UEvtODvMxAbegnLHAxiW7YDsJe+tEKzVsb5wcvYRDk/8SbIr4InnufcC7S0T
+	p2SKq/bolaBJjmxdAJV2K/Pux4hLDUpagqK6IV84cCgppkYEqJnfsmEz54ZclxeGfFu52s95Qi1yA
+	Bu2K/uag==;
+Received: from ip6-localhost ([::1]:21370 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l6WvF-009xok-RD; Mon, 01 Feb 2021 10:59:09 +0000
-Received: from de-smtp-delivery-102.mimecast.com ([194.104.109.102]:26317) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1l6Wv9-009xoc-MV
- for samba-technical@lists.samba.org; Mon, 01 Feb 2021 10:59:06 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
- s=mimecast20200619; t=1612177140;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Shw8rJX7mjuDOREb4EQiHtiZX49ZIEF13zjd5rtpGQE=;
- b=SdGqpn5mz1GPb0tKoyqxyudT6WA0tXB99EPe4/16coP9ocpO1/4uc9oy8Bn1t3jQyWnJc9
- /xWRGRdOjnMyMbi166P89bnxeVNe0BEIZwUtpCc54DyG8/s+5hspZ8ZbMUmZ0I+HjgEVeb
- Qcg77hj0b9Xj1IJiONex8cB4AA1kKCA=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
- s=mimecast20200619; t=1612177140;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Shw8rJX7mjuDOREb4EQiHtiZX49ZIEF13zjd5rtpGQE=;
- b=SdGqpn5mz1GPb0tKoyqxyudT6WA0tXB99EPe4/16coP9ocpO1/4uc9oy8Bn1t3jQyWnJc9
- /xWRGRdOjnMyMbi166P89bnxeVNe0BEIZwUtpCc54DyG8/s+5hspZ8ZbMUmZ0I+HjgEVeb
- Qcg77hj0b9Xj1IJiONex8cB4AA1kKCA=
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05lp2174.outbound.protection.outlook.com [104.47.17.174])
- (Using TLS) by relay.mimecast.com with ESMTP id
- de-mta-37-7BJo_QXGNVyxrkLqMLDSGw-1; Mon, 01 Feb 2021 11:51:36 +0100
-X-MC-Unique: 7BJo_QXGNVyxrkLqMLDSGw-1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=aVTC5JMNS1hO9TS+76M1rqrJ/wpldkqakHKnUvWnK5Tw9o92hgUiKPA2Pl0H4nnY0mxo7xaQQPtN/i18YXhUT9+0eqvTYhoB4lsx+F+cmjwXd9vAw4QspfuFlhb1ucIrBYHx/iNgCXYzLVENLtHdYViQY7JejQb/mTW71MM9KYMHQqBeoI/IRqQnszb5TkHe/YHTMp/prPl96tMgs6ZrR1BSbKAvYXU5J8SL0xSOqPTsStwpOTytnaiKgZUNUGPs/lpX5dzmBE0FrEPVtWYSOWoVF8YOWniSJcXfw+tpArA8z1cuNQtTcxChA53IYYr1hoJ+W1z8b1U1XcmQCi2gVg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Shw8rJX7mjuDOREb4EQiHtiZX49ZIEF13zjd5rtpGQE=;
- b=iD9TxYJwh116mCrWmYilm3K4ZtzeBzdOZLk+JkS/RdfCKnjXbLO/2w9bjgFxnlPp3bKyiiZa3gwhPtZzSfqyWxQha/JE9DxScBsgg5Ay9++3D6huF3HxTx+OCboOb40LSK82b9gpUKUlTGQdh3WIttkyhv6mA2Hz/BRUHoURn9r06Tq7COCwn6Lbl7B17uY11nEkXwlvV1VYpEqAfqxPDTWF0TkFnbNIwbom0tF/JIJRNPA0z9b519DJodiIDHca0BT66jBrPMGdi6QHtsVikAlsAgUSAPfP1PZo80hqOBpO/j2JGS+UOyOFycH9wp9T/Bc37tCI6jVto3TUdeTJGA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Authentication-Results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=suse.com;
-Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com (2603:10a6:803:3::28)
- by VI1PR0401MB2576.eurprd04.prod.outlook.com (2603:10a6:800:56::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.17; Mon, 1 Feb
- 2021 10:51:34 +0000
-Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com
- ([fe80::9c1d:89de:a08e:ccc9]) by VI1PR0402MB3359.eurprd04.prod.outlook.com
- ([fe80::9c1d:89de:a08e:ccc9%4]) with mapi id 15.20.3805.022; Mon, 1 Feb 2021
- 10:51:34 +0000
-To: Shyam Prasad N <nspmangalore@gmail.com>, Stefan Metzmacher
- <metze@samba.org>
-Subject: Re: [PATCH][SMB3] mount.cifs integration with PAM
-In-Reply-To: <CANT5p=rV-KhHtahaF-9YcM5X8jDMLbCx-szwLiZvACRt1oCyow@mail.gmail.com>
-References: <CANT5p=pxPsBwAv3oJX6Ae9wjpZoEjLvyfGM1sM9DEhS11RNgog@mail.gmail.com>
- <87pn7t4kr9.fsf@suse.com>
- <CANT5p=oeY91u17DPe6WO75Eq_bjzrVC0kmAErrZ=h3S1qh-Wxw@mail.gmail.com>
- <87eeo54q0i.fsf@suse.com>
- <CANT5p=rxp3iQMgxaM_mn3RE3B+zezWr3o8zpkFyWUR27CpeVCA@mail.gmail.com>
- <CANT5p=qMHxq_L5RpXAixzrQztjMr8-P_aO4aPg5uqfPSLNUiTA@mail.gmail.com>
- <874ko7vy0z.fsf@suse.com>
- <CANT5p=o07RqmMkcFoLeUVTeQHhzh5MmFYpfAdv0755iiGbp1ZA@mail.gmail.com>
- <87mu1yc6gw.fsf@suse.com>
- <CANT5p=r0Jix9EuuF8gJzQBGHLp0Y-Oogxzju7_2cJog_jF2fjg@mail.gmail.com>
- <874knolhpw.fsf@suse.com>
- <CANT5p=oTTErJk240GKc+k6Cihqks+9Nnurh=MdrvgC7gqKu1ww@mail.gmail.com>
- <CAKywueTr9GHbzg65s12BRKNB_L881wFLmHcb5boFxGX2AoN40g@mail.gmail.com>
- <CANT5p=rECwTZgskdXUr3VAHWA-PkYHEXX=qwO8PpVZRc0=pOKA@mail.gmail.com>
- <CAKywueTuGuqT8QN-8Jn1QNHT+HPKysLDhdp1gPsm6+Q0tQnbGA@mail.gmail.com>
- <CANT5p=pUVucG6NhzfziAjsjDnimHCWDUiJP46DYoRqjpXHegsA@mail.gmail.com>
- <0b80c61e-3953-e627-9818-8a8c6c50499e@samba.org>
- <CANT5p=rYiY0xE-35swsFKVitZD2yTchRiReyA0wVvY+mU_qKEw@mail.gmail.com>
- <CANT5p=rV-KhHtahaF-9YcM5X8jDMLbCx-szwLiZvACRt1oCyow@mail.gmail.com>
-Date: Mon, 01 Feb 2021 11:51:32 +0100
-Message-ID: <871re09i2z.fsf@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Originating-IP: [2003:fa:705:9f12:fb7a:e8aa:e796:34d1]
+	id 1l6ncD-00A7no-Ft; Tue, 02 Feb 2021 04:48:37 +0000
+Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c]:40617) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1l6nc5-00A7nh-JK
+ for samba-technical@lists.samba.org; Tue, 02 Feb 2021 04:48:33 +0000
+Received: by mail-lj1-x22c.google.com with SMTP id s18so22441851ljg.7
+ for <samba-technical@lists.samba.org>; Mon, 01 Feb 2021 20:48:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=5qo3Y6a156Muu9ZuNI0M6zIN06kI/WyI3S1KWgKiOfc=;
+ b=EimTH8opxE4otirrlt/TSvxUhZRa9z9/aUtylCHNFHzGsi4ZAowvODdzP2F2LMdtir
+ jDD70fiSqWj/+614G3Yn5VIG42mEoS7NYpdZ5ArGJrHQTsQFBGJ4n4ntIrcX0J8EHJ8g
+ DAecWboHmOgsxLx7zBYQI1hovNOKCvQ7Z8y4ll1oQyZWP5Jk68BSWRPMQ/RTbarV0Usr
+ ItU5DhNJsY+S4MVkk19Mb0/Q7RkegjrP5VGciyVnaFuGprXCiVgeMF0/Zw2ORet7jglm
+ 7mgl0HaJO6JsEqBO5US8WFlm+Q686TgonfLuR11WNWOglV2F1FD9YZ1vhABuGCUXo3xR
+ 9HGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=5qo3Y6a156Muu9ZuNI0M6zIN06kI/WyI3S1KWgKiOfc=;
+ b=fUzMkLQJyTuuRqcf6wJx6CMi/Zy259GckIdPVOTIwbM0m2F3bIXSAWoId3Wz3n5FT7
+ otdBpVpy1HjOSIBKmsXKuBwmbTHFbieFPPAx+GeOPvbSDPoP6xF22QPixI4e+CurahGg
+ Vlmkmi0E9YrG2syVza9ViTBflSYjUDgKmS8ByKPM4Y+EiWQns7kYkkEHMDFSGAA4TttZ
+ vtUgtYps+tT9a5eXNR3gPoVo2xqa7RZ0qC4IEyhrdrRVkYpCrp35l6pK/l95UiTUjgkq
+ JPU2HUsMSuvPJX6UlXip7OWa6kvUq+ZxUzbZrJyMk7BeYRlM4a8GZSky+sZiym+T1qnq
+ VzMQ==
+X-Gm-Message-State: AOAM533csMOU2SAAr5JoSd6GE6+w+xxWvohLBS24dloVwfdH3nS5sDgj
+ o0eTnOAyLoa2YvGznZ1wUAtjOER4Ek/ERxDH9j8=
+X-Google-Smtp-Source: ABdhPJyEI9a1hvqxYDAV9f3YF2bnd3NL5TOuX7qvSr9dcZDJgJ5nrN43iJXiZf9+wcfNLe9C15MWAJCrkCBZS5nIams=
+X-Received: by 2002:a2e:9d8c:: with SMTP id c12mr11881596ljj.6.1612241307146; 
+ Mon, 01 Feb 2021 20:48:27 -0800 (PST)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from localhost (2003:fa:705:9f12:fb7a:e8aa:e796:34d1) by
- GV0P278CA0033.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:28::20) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3805.17 via Frontend Transport; Mon, 1 Feb 2021 10:51:33 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 49dbf935-8c71-4bfc-278f-08d8c69f5762
-X-MS-TrafficTypeDiagnostic: VI1PR0401MB2576:
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Message-Info: zTGZd2+e4AvH3bcg5fF54lEB85JQvYigYfQdcZazjdAS4qFfeJYubqZQ8rrveGhPZ6B89Lp+7QWEE/CANJN5xM92ZKP5p4WaCY2T3OVLTJnbnbrOWizi5EMpXB6xPXsge06LCv7D1MVpxDIfOC+AE+Mo6ObuaMrhlkDufFu8YL2QdpbpOTNg0BZ17lnY3WFKYC96vUTHOSOec5tjebe6sdTDERBjEbrEsFUj7MQLgbPi90jpTjP1sxlbqHqCq+tfe7+/ovsoB8icc4EJtvdNFUPlJ28nco6uVT38MY353sJO2GX+fBHV0tj7x2IqtxbBsJF8rN1G0RJipdhew891uPAGIlgiwy/XaZm0V32XcE2wcJrzIpPUBCZchxRxkFIWIZJ6baVxL6fJpX1a2Z8qpoY2pH7Eri9ZNObnVsbtHKNxu6o6rFx/1SWJo2bXbjiIibMFF78OY1+J2qywTTJLEq1GH2E2QqOhdE1dtSCcF4oFCJ7i3SkITZVgHEwFln2BF211CMqoasXQSLZbtnt7BQ==
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?R0xWczVQQW9sbTNnZDd0bjl5UDd4TTRrWm4xNDNabE1qTWJ5Z3lJRWVHNXFj?=
- =?utf-8?B?YW13R1FWUFRKTXBJQ2IzOVdnTU9YbjZSU2lzNkVXN1h6K3VLMzJoNTArLzJj?=
- =?utf-8?B?dU5uZURuMFlOanBzREhCeCtGaTBNKzc5Mjgyd2E2ZlkxYnlhTGF1amdwRXQz?=
- =?utf-8?B?RGhkdFFZRnNFM3FhblFFcFBET2ZFRTlBMkhsYWR3aEtCOGtCblhuR2JBSUor?=
- =?utf-8?B?a1ZiSHQ0dERwOEF6bS9TTVVkcytQNWFUSldUb05kOE54VHNNbWhBaTRRNjhC?=
- =?utf-8?B?bkVKWEFWMnRYZm1zWVdrdEN2Y0QzUkhpbWoyeWdWNjdtY05nSGwzTWRuQnBK?=
- =?utf-8?B?UldObC83VWVzTnpMZm9vK29YbFgzbmFpck5CK3lQRmVjcjNCb2l4NEd4dVE0?=
- =?utf-8?B?ZE5mRUNTcVlINjhlZVJQOTBWZFcvSkJnRklkSUE1SGVTendIbzJkK1Vick1q?=
- =?utf-8?B?cXVabjEyVkw3Q3doTGV6dC9KL1JKNUVwcTEwaW12RWx5ZVkzdWFVa2YzT01s?=
- =?utf-8?B?M0xES0VGVkgxUGpZRWpmZEFGWHVMcVlnOEJUZm1yM3hTUmJuQ21HRmpDTTla?=
- =?utf-8?B?QVNMQmhyRmJPQWc4NjExbU83V3h2YVRwWWRqUkFzRFY2ZVJYcjVVc0s0NEEy?=
- =?utf-8?B?L2pIZzg0U25tTHhMNFJyWURtNU83V1FlZndaaklyQWZNVGpoSVEybEw2aC95?=
- =?utf-8?B?dXhjWk5KTHZweWJ6R0plWjRPdzlMeE1vRllicnRoaTNZaEJ1S1BjZGpUaE5C?=
- =?utf-8?B?RXBwUk1mSkg3alpyMG1HQTNCcHRkUlorZ3RmTlpRY0xQTnhaNDd3bDBENWxl?=
- =?utf-8?B?T0FudGsxc2trUHNDK2RpUmxDdUNndnV1alVyU2d0V0FvbmNLc2c4UUFoSkwv?=
- =?utf-8?B?c0lmZ3NUeEw3OWwyOU84OHVLcnQ3b1lXYW5WbVJFT2k4UVhlTENPdzlmaXpi?=
- =?utf-8?B?bkcrdjMrTGVrcGNsUEMydXpPMzk4TnM0Wm81ampGczRmUlB4R3pwaXhhY252?=
- =?utf-8?B?Y2R1N1J5aURoY3lLbjRraFNGaTZraStuSXJzNEJsclprOGFhd2pmb29xY0JF?=
- =?utf-8?B?L0QvWkVzV1Z3Y0JqMFZ0VzhvUWI3ZkRjUFdOUFI4Z3VsdnlZUkNvYWJyRUVk?=
- =?utf-8?B?MjdzWFlPYnJnLzArUEhqYkZIaGp3V0JsNnBlaUlGekxaYzYzeDlsNVZkaGhk?=
- =?utf-8?B?VzJXWVdoZjVYck55VkNwNE56UU5ZVkZlVDI0U3l6RzFEeFM2UHRQS3dEMW1M?=
- =?utf-8?B?RjllWURBK0ROZTVSRjE4MSs5K0NYUVNFQnBSWVBMdDI2dno5RHdKcWhpWFBP?=
- =?utf-8?B?M29iK1JvNVh6MjNrV0lSUmhOYVd1TVBtVFZSeW9aZFRZaFFzK0ovUytWWVZE?=
- =?utf-8?B?Q3NiejlNcGs2blJyOFBodElmNmpCTm1NNUN0M1BMdzEvTjRyMi9RQnFOSG1k?=
- =?utf-8?B?enQrUFh2L1NNcWpBcjIwS2tHajFYOG80RUVTYVJWY0FyN29yd2txdU9nb3hI?=
- =?utf-8?Q?Of842rLsI+sgH8mZQBd/+nEPRtV?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 49dbf935-8c71-4bfc-278f-08d8c69f5762
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR0402MB3359.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sNfdyquP3tqHpZjKChp+kaKicatmpprZL2eIaWp+WKxHJ9k4cyp6gJruJiFILQ7N
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0401MB2576
+References: <20210202023654.GA265921@embeddedor>
+In-Reply-To: <20210202023654.GA265921@embeddedor>
+Date: Mon, 1 Feb 2021 22:48:16 -0600
+Message-ID: <CAH2r5msYsp4JxCcCRR1HY3y-Czh2UKJfV=DoKccG=Fcunc8hNQ@mail.gmail.com>
+Subject: Re: [PATCH] smb3: Fix out-of-bounds bug in SMB2_negotiate()
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -153,44 +69,91 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Cc: CIFS <linux-cifs@vger.kernel.org>,
  samba-technical <samba-technical@lists.samba.org>,
- Steve French <smfrench@gmail.com>, sribhat.msa@outlook.com
+ LKML <linux-kernel@vger.kernel.org>, Ronnie Sahlberg <lsahlber@redhat.com>,
+ Steve French <sfrench@samba.org>, linux-hardening@vger.kernel.org,
+ Pavel Shilovsky <pshilov@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Shyam Prasad N <nspmangalore@gmail.com> writes:
-> It just occurred to me that integrating with mount.cifs will not
-> suffice for a multiuser scenario.
-> It sounds like we need to modify cifscreds command to have a switch
-> for cifscreds command; if used in krb5 context, instead of dealing
-> with kernel keyring, we authenticate with PAM (for add) and call PAM
-> logoff (for clear).
-> If users are then missing krb5 tickets (logged in to ssh using private
-> keys), they can call cifscreds to get the tickets.
+merged into cifs-2.6.git for-next
+
+On Mon, Feb 1, 2021 at 8:38 PM Gustavo A. R. Silva
+<gustavoars@kernel.org> wrote:
 >
-> @Pavel Shilovsky @Aur=C3=A9lien Aptel Please let me know what you think
-> about this approach.
-> If you agree, I'll start working on the patch.
+> While addressing some warnings generated by -Warray-bounds, I found this
+> bug that was introduced back in 2017:
+>
+>   CC [M]  fs/cifs/smb2pdu.o
+> fs/cifs/smb2pdu.c: In function =E2=80=98SMB2_negotiate=E2=80=99:
+> fs/cifs/smb2pdu.c:822:16: warning: array subscript 1 is above array bound=
+s
+> of =E2=80=98__le16[1]=E2=80=99 {aka =E2=80=98short unsigned int[1]=E2=80=
+=99} [-Warray-bounds]
+>   822 |   req->Dialects[1] =3D cpu_to_le16(SMB30_PROT_ID);
+>       |   ~~~~~~~~~~~~~^~~
+> fs/cifs/smb2pdu.c:823:16: warning: array subscript 2 is above array bound=
+s
+> of =E2=80=98__le16[1]=E2=80=99 {aka =E2=80=98short unsigned int[1]=E2=80=
+=99} [-Warray-bounds]
+>   823 |   req->Dialects[2] =3D cpu_to_le16(SMB302_PROT_ID);
+>       |   ~~~~~~~~~~~~~^~~
+> fs/cifs/smb2pdu.c:824:16: warning: array subscript 3 is above array bound=
+s
+> of =E2=80=98__le16[1]=E2=80=99 {aka =E2=80=98short unsigned int[1]=E2=80=
+=99} [-Warray-bounds]
+>   824 |   req->Dialects[3] =3D cpu_to_le16(SMB311_PROT_ID);
+>       |   ~~~~~~~~~~~~~^~~
+> fs/cifs/smb2pdu.c:816:16: warning: array subscript 1 is above array bound=
+s
+> of =E2=80=98__le16[1]=E2=80=99 {aka =E2=80=98short unsigned int[1]=E2=80=
+=99} [-Warray-bounds]
+>   816 |   req->Dialects[1] =3D cpu_to_le16(SMB302_PROT_ID);
+>       |   ~~~~~~~~~~~~~^~~
+>
+> At the time, the size of array _Dialects_ was changed from 1 to 3 in stru=
+ct
+> validate_negotiate_info_req, and then in 2019 it was changed from 3 to 4,
+> but those changes were never made in struct smb2_negotiate_req, which has
+> led to a 3 and a half years old out-of-bounds bug in function
+> SMB2_negotiate() (fs/cifs/smb2pdu.c).
+>
+> Fix this by increasing the size of array _Dialects_ in struct
+> smb2_negotiate_req to 4.
+>
+> Fixes: 9764c02fcbad ("SMB3: Add support for multidialect negotiate (SMB2.=
+1 and later)")
+> Fixes: d5c7076b772a ("smb3: add smb3.1.1 to default dialect list")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+> ---
+>  fs/cifs/smb2pdu.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/fs/cifs/smb2pdu.h b/fs/cifs/smb2pdu.h
+> index d85edf5d1429..a5a9e33c0d73 100644
+> --- a/fs/cifs/smb2pdu.h
+> +++ b/fs/cifs/smb2pdu.h
+> @@ -286,7 +286,7 @@ struct smb2_negotiate_req {
+>         __le32 NegotiateContextOffset; /* SMB3.1.1 only. MBZ earlier */
+>         __le16 NegotiateContextCount;  /* SMB3.1.1 only. MBZ earlier */
+>         __le16 Reserved2;
+> -       __le16 Dialects[1]; /* One dialect (vers=3D) at a time for now */
+> +       __le16 Dialects[4]; /* BB expand this if autonegotiate > 4 dialec=
+ts */
+>  } __packed;
+>
+>  /* Dialects */
+> --
+> 2.27.0
+>
 
-Hm what happens where there are multiple mounts with different auth type
-on the same machine. e.g.
 
-//host/share1 as userA in /mnt/1 via ntlmssp
-//host/share2 as userA in /mnt/2 via krb
-
-cifscreds should change both no?
-
-Cheers,
 --=20
-Aur=C3=A9lien Aptel / SUSE Labs Samba Team
-GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
-SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, D=
-E
-GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
-nchen)
+Thanks,
 
+Steve
 
