@@ -2,45 +2,134 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AF0F30EE73
-	for <lists+samba-technical@lfdr.de>; Thu,  4 Feb 2021 09:33:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 298F9310F52
+	for <lists+samba-technical@lfdr.de>; Fri,  5 Feb 2021 19:01:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=6i7/4PUCg8nBys0Q88gfL6oD2vbb4A3/9+ogVGdSw9c=; b=dWl3PPuhwlx1yBgQZFz11rMTXC
-	pVwxm6eEb8lueoackpf9bT5teChamYXmHKjSwWbjnk+W3ABVRql9Lhj+XPbKt0QIR7R0TwuEvBWVl
-	RW/xCLZjcXK+2F2dS3/8L2ws99VfLmyNcdO2p/kseZETpFVC+q/ah6kLUBvdLu3MVo4mnKoVEfqOc
-	zxRhIFjSvo9VCN3ch+PyuuiAORqEWRBNDzTA9A30/3T+KxwUFBTjg33xO461j6WuDIOSl6KFbVBBD
-	NyrsVMRGh2NWdZFJVQ5b59Ldf2dIzFBsXtymcBV/9MMiZt8+RL2u3Mpihjb+7dtpWR4N0MMKkJpqW
-	tteqYIUQ==;
-Received: from ip6-localhost ([::1]:63990 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=BBbkwFaadncbMBFMV7pzrkj2mqL+BgH65k0ibyjLDnk=; b=yWQLFUv8NtYJMSIgSD3o1yLAhW
+	0j4oPaUBp36mAjdeuqoiBz49AQ5VJQ3dPfGVxsE18wchOhJNct4gGLIE1rU6GL2/QqN9OEDePpXRg
+	qzJ0a2H24pVicGFnqb5sVKFRw9u+bS0AiG25zCfKcU4ZrDHdzmQ02LT5FHP934WPxIREGK13AJk6x
+	s/+G9LKEAOUys0pEUm8TcI1DvvdxbODEUaj1Tp+Hw9zGA1hE4D3Acb5nfwmPTuaxJ8XLZ9bmf/A+7
+	CZh6nPrwogMm/DFQd8SL/YYMpyLJoR/XOqLbU7oMRDNE9kZMH7OGZupxJu8bpXkbp8ButtZxbkhDf
+	AuQys0VQ==;
+Received: from ip6-localhost ([::1]:51954 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l7a4P-00AlFT-Jo; Thu, 04 Feb 2021 08:32:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60856) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l7a48-00AlEn-Mj; Thu, 04 Feb 2021 08:32:48 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=6i7/4PUCg8nBys0Q88gfL6oD2vbb4A3/9+ogVGdSw9c=; b=h9VOqEMHa7bLbHH6PKlcMKuhbA
- IBpwt+l4JxwA+SryWYyIFkQc810R/ZtL0PvZIWVqQbIOfOH3kBIE9SszR8HHbc14y/A8QE52DP1HB
- lBYVdg36oLv9WIvPPWaElMZPR6eBcW5SkkfGjHUPmOBNGOTDXL32OwYqYoMctF3GKN4sBKH9OQEgy
- cGIbhVDkNTWbbicVQ4IEZDlde6RLG/ci9xOfYin7QrLHSLpvEdUmhW/DBTTqdnYpczkqkSREIaWTz
- pRpEhLFKIwcAheGPiC+D9vtWS3oUjWiqb7SWq0m2OCcklWqGam7pbq0lgtDoIpSFqDXB6Na/PofLl
- DZN+GJUX0mctwgV7M8R9WAKiCxlybcVKqPnQZGAnnGQhsfIydWWRZ9JNPxc5kW7u9eWsNM1ReY7te
- CxCR+wWojV0/i6trqAUFeuIPPIzuLUobSV4AG1wMvqDAyZntqeeVCZG3X1oc5wx8wtjzTp5cLMPHH
- 1iqPpNmlPSvvqtLrqccCDgQN;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1l7a41-0007RB-HK; Thu, 04 Feb 2021 08:32:33 +0000
-Date: Thu, 4 Feb 2021 09:32:26 +0100
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.14.0rc2 Available for Download
-Message-ID: <20210204083224.GA9500@carrie2.fritz.box>
+	id 1l85P5-00B8rd-Gn; Fri, 05 Feb 2021 18:00:23 +0000
+Received: from mga05.intel.com ([192.55.52.43]:35325) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1l85Oz-00B8rW-MU
+ for samba-technical@lists.samba.org; Fri, 05 Feb 2021 18:00:21 +0000
+IronPort-SDR: Z5DarWzpP3LOCCgJ41vjT5Ioa0ydNzgbTWxxe4FWSbJlp+15zxx5sDx8CA8hjgRyZPyrOAmRb9
+ +4v1pnCDJ+Eg==
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 05 Feb 2021 09:44:28 -0800
+IronPort-SDR: 6sIaDpKyOcprUtTx5nOnJgSE4KUcbOkpHUQAVHczr66vPPVNikLL8dL+MSSF7hxOiLtnKT/qOG
+ rhcjWn5YLpNA==
+X-ExtLoop1: 1
+Received: from fmsmsx601.amr.corp.intel.com ([10.18.126.81])
+ by fmsmga007.fm.intel.com with ESMTP; 05 Feb 2021 09:44:28 -0800
+Received: from fmsmsx603.amr.corp.intel.com (10.18.126.83) by
+ fmsmsx601.amr.corp.intel.com (10.18.126.81) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2106.2; Fri, 5 Feb 2021 09:44:27 -0800
+Received: from FMSEDG603.ED.cps.intel.com (10.1.192.133) by
+ fmsmsx603.amr.corp.intel.com (10.18.126.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2106.2
+ via Frontend Transport; Fri, 5 Feb 2021 09:44:27 -0800
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (104.47.58.170)
+ by edgegateway.intel.com (192.55.55.68) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.1713.5; Fri, 5 Feb 2021 09:44:27 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Iz2iXurSST9GplN/yod8Oof1SYmSADvS4WEg58rO19ny4YWgItQrnuHBUhZThd5x5kNMFZs3N077Qd4WVyvVlLoUVqGgqG+vbpMhXST22kvK16ExDfOOBNtTcnLvklRyObx5itMIv74S1TI+pdc8rjQ4FmL8zIr6d/hDfk6lQe8qgPdCku3bxX1Bs2q07eR6RknR2B1dIPL7XKEoxTWpEvngqPA9RxgLgMr1bMPpPzc+oiPE+zzmYJmqe8ZVDE9jxHNJuYwQwLNa7Ae/iEBv7CUDcje3hfBTr/SJk8ApuOw/P/7cptB3Gn4roHvWapicmSpskeE0kplkG6aZGgXO0w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BBbkwFaadncbMBFMV7pzrkj2mqL+BgH65k0ibyjLDnk=;
+ b=ItRwe9Te9rzUpdjdY90C2RD3UQjmvdEQtMa2g54J+ODgWSXw5rrjMFcklYWSjBd0XrOc8M3eSSBKqqkylUSrP+rzXh+Q7qlJLpaXMI5f0ihPpqPJQFxq/z7E4bIWTBD3wJZeyCSaUoWdFipmz2pR154ikO4XeTl9sHl0F1FyicDr/YA/EM/EAiqGU4DFS1MpuAOdhao2OhtNaSiKJsUqSqQYPDPXUgdKj5SLx5NnvfF5W5Am6vcgOCzgD4MJrf1miCsKpu4GOtkPoQ+YVhVL0HA/bGU09nCdjhF+a4hLz/bCnBaKHt/2ajLzSGQ254f6sBHRUJuxn3qC+YlpPnRzRg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=intel.onmicrosoft.com; 
+ s=selector2-intel-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BBbkwFaadncbMBFMV7pzrkj2mqL+BgH65k0ibyjLDnk=;
+ b=FOXwdbimXhPOYRKx3pPHBMlVE/QsmNrEYNdrO5ZMtMDItr4pe/ulav2BHx+y0NRvFeqMlk6/o3uOX2c/sZIR6xd3+UEmPwP4+Pg+v7YIdgFBntvUSynf8ziRoHCeRJ/Fr6hyR4Xcz0JwmI0aNIzPQ4r8lq2SGwCWh2qZx6BVy3g=
+Received: from BYAPR11MB2888.namprd11.prod.outlook.com (2603:10b6:a03:8c::19)
+ by BYAPR11MB2965.namprd11.prod.outlook.com (2603:10b6:a03:82::28)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3784.17; Fri, 5 Feb
+ 2021 17:44:26 +0000
+Received: from BYAPR11MB2888.namprd11.prod.outlook.com
+ ([fe80::3177:568e:e8b5:371f]) by BYAPR11MB2888.namprd11.prod.outlook.com
+ ([fe80::3177:568e:e8b5:371f%7]) with mapi id 15.20.3805.027; Fri, 5 Feb 2021
+ 17:44:26 +0000
+To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Subject: should lack of secrets.tdb prevent smbd from starting?
+Thread-Topic: should lack of secrets.tdb prevent smbd from starting?
+Thread-Index: AQHW++aLka8wspPjRkCI1+F6OlS80Q==
+Date: Fri, 5 Feb 2021 17:44:26 +0000
+Message-ID: <0caea8c7c56110ebe0f6be13531b1c03805c45b8.camel@intel.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.36.5 (3.36.5-2.fc32) 
+authentication-results: lists.samba.org; dkim=none (message not signed)
+ header.d=none;lists.samba.org; dmarc=none action=none header.from=intel.com;
+x-originating-ip: [134.134.136.219]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 01053231-4660-4264-e090-08d8c9fdae6c
+x-ms-traffictypediagnostic: BYAPR11MB2965:
+x-ms-oob-tlc-oobclassifiers: OLM:8273;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: gGcl7dZby3ztksmzgYUq22ontKw2iLFMRYUP8Oo3kflzIE9BMw8PRX8tNOOC4Cq2dt2g6T82KMqXmXEHI6IRk0urQRg+Ht5Q+CvjBPuAimmuiWRFGpmfQPzgV2Iei9zaCZhK5YVocjexPpETQKK9aZjvjDHyJeAoas3Cw7lBryGz6AnvakQlHocByUPMIMqeULoMiU3DZ/FUJSeyt9iq02nl/LJT5hH8mRboYWAiRaFbKHgutaCHKt5m32FqrVrUNk0bUDLtsmcXW4tZPz4nx5Y/8/NMAcUnivE++hEHDH0c5+0Aw8iz4lRxDt5DQhPszwruihYiHEw3YXfE/cZ5/W5OLAN1Pg+RXzJ1xKh9aRtOyGsocvywgzhJEPHUoREJz1Rl7EHg25vRd43VzPoP/NgxmuzLgOVapWAHlZQKOAPjU4ZSneMqFXKCNh8MY14zdW/WXNkBzqTKvCGYTLuphn9I4ZK7MhXt496AmR2UOHE4bZB+U84bje4m/mtmOVtr3T2KQdDHhqviD5jgXxoIGg==
+x-ms-exchange-antispam-messagedata: =?utf-8?B?WDhDM2xuV2pyUXRrODFTQmdHdlh2MUtTc2xoZ3ZwYi9CdWlqVmVQS013QWsr?=
+ =?utf-8?B?MGszODRXTXpPRWx4QStZNVV2bjRNckFsSlFWbUpGTXBnOVpOMXowcWpxZG40?=
+ =?utf-8?B?M0owZ09KUTBObUxhcmtMaC9rM3UxYXpobkJSR3ZZcmJzTjNoTXk1R29tSzV2?=
+ =?utf-8?B?bG53UzdYaUtBanlYRUhmYVpuN1d6bkt0QzNHMVc1dUZ5N21ZakYvSUpmZU4z?=
+ =?utf-8?B?akRtQzFSVzlsZGdmTDdQSXpybzRHNFB2bUI0MlcxLzUwRVV2bkRVd005WG5w?=
+ =?utf-8?B?UVBXa0g2WnVjU2JrUG4zK0NkMTRUWHVodnRyYjdBSEtYVTk3NSsyeW0vQld1?=
+ =?utf-8?B?ZEpJY1Z1bzl3NUJ6ajlvSnVsS1dnVWxuSEVnN2F3QUYyV2E4WkkyeldXcjhs?=
+ =?utf-8?B?Sjl0NE1JYi9WNXVPQWlvZnRnNmNMZU1GdjlPSUdaanZrdXhvckFoUURRSVdH?=
+ =?utf-8?B?WXh3bTNSemVTKzVOSWJJUHhSS1JTdjdLNlpzQmNZWWpPVTNMeDJ1VGs4bWtt?=
+ =?utf-8?B?ZEo2bHlsaTZ1UnpFL2JETEdNR3gvalJoUmx3Q2tCVGQ1SnBVYktKOXRSbDlx?=
+ =?utf-8?B?SDVQL29rWTlFZ2VkaWI3OWZDdXZzUjV5eFdJWFpaWVJuTDZCWG16MnR1K2wv?=
+ =?utf-8?B?SlZwL081VUlUd2JpMXBJT2dVU2ZJN0dsemJkV2l2Yy9LcXVnYVVSdXhRcXRS?=
+ =?utf-8?B?bUtxWDFteVd2UzAyOGlLOG1uWUlBUmNiUnRERkkrNGVrMmM5T0JuU0NLbkJt?=
+ =?utf-8?B?MTdlUmdwTVdYNUNmcmZLcUhEeGNHMVF4elY5VDMzbUw0UE50WlJ3aCtWZU00?=
+ =?utf-8?B?KzJ4MWVGL1VUbEE1RTRKMUg5RVZrTEFHeGVXS3JPODdNNThpY2Z6NnZlNTFy?=
+ =?utf-8?B?NGNrWGJYWk00TkFZS3RWdHR0V0psMEh3TDl6NTVKOUZZS3VmWithVHlBbXdB?=
+ =?utf-8?B?L0ZkNWRrT1BpUjZSMGJCMC8xbHBWUjFTT1JXS3FDNitWMExqOEMxdDdrY3R4?=
+ =?utf-8?B?NGUyekM2ZUZaWnk4Q2FGbXFRR0JlS0NXSUtPTUFic0U3YldLZlMxeTBia2E2?=
+ =?utf-8?B?a1pHRUtOQUMrTXFTcGVnYmtXNDNNek9RZ3hLU2dnSzdYY0pubUNqc2piYUhC?=
+ =?utf-8?B?YTBtTXM2aFUvK1NiS1ZkSGZhcTVFbVJuTVkvL0p1Tkd2Tm4zaGFBRHdGRmMw?=
+ =?utf-8?B?Ym1ZcEVMcHF0c2Z4a2swcVNxSDJrdGR1S0M5K1ptZHhOQVVpZlE2WWNGczNZ?=
+ =?utf-8?B?UWJkTDNHd0s2MWhjWEFjcjZHdnFCRmpQb3lRUmh4b3IvZldHUnRmVW5CN2ox?=
+ =?utf-8?B?RTh6RGxzRi9BWU0rZTc0L3gyTGxPVmJKenZJYjZhZHFJM3JwU1p2NUlaVVpF?=
+ =?utf-8?B?TUh4L1JyQzVXaFRBVzBqamVNUXprZFRwRW83Um90bHZVKzRRSFpnVEcza1Rn?=
+ =?utf-8?B?UmFaVW5uTWd0WVhWdkExa0ZnODFucFNEczhwN0oyajJaQVR0YWF2cWs2K1B5?=
+ =?utf-8?B?dFF0M0pZaUh3M0tiWGQyUFdYRWEycWsreFFGTlkyUUtqb1AvUUFCUm5TRGNu?=
+ =?utf-8?B?R1g4L243b3o0dWhaMzFNanUyTGVwc0dJTUwwUXRFL2xsQmRjZmFRMTBnb3gx?=
+ =?utf-8?B?YURia3BIUy9ucmtLQUw3UVBEZFBWZVJyYWh0Q2haVDNnblZwdDlvMnNBeHJy?=
+ =?utf-8?B?SG50VHd3MEZoZ0c1cWpPUGphcmZGVWkwanNwdnR3MnZKV0MxMXBpaStHM3pT?=
+ =?utf-8?B?TmdneUVWQ01oWDlvU1ZQc1FiWW4zSGkyamMxTUx2U00ySVBVNW9heDZGZ2o5?=
+ =?utf-8?B?MDlrRFlnZnBwRkx5eWhudz09?=
+x-ms-exchange-transport-forked: True
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <76D5106E36CBED4D9A1D3CC4E3B71117@namprd11.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="ReaqsoxgOBHFXBhH"
-Content-Disposition: inline
-User-Agent: Mutt/1.9.4 (2018-02-28)
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR11MB2888.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 01053231-4660-4264-e090-08d8c9fdae6c
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: kBDlQUr14nAmxbjbqdD1LwWm28qMFF1LctGKxrFjXFTzPmo7yWHWzF8OL9vi4HU+ZfwGS3EZ0XFv1rmTIPHPlDruKaeLR6k6YdsFqPTB5jc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB2965
+X-OriginatorOrg: intel.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,314 +143,21 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: kseeger@samba.org
+From: "Christian, Mark via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: "Christian, Mark" <mark.christian@intel.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-
---ReaqsoxgOBHFXBhH
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Release Announcements
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-This is the second release candidate of Samba 4.14.  This is *not*
-intended for production environments and is designed for testing
-purposes only.  Please report any defects via the Samba bug reporting
-system at https://bugzilla.samba.org/.
-
-Samba 4.14 will be the next version of the Samba suite.
-
-
-UPGRADING
-=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-New GPG key
------------
-
-The GPG release key for Samba releases changed from:
-
-pub   dsa1024/6F33915B6568B7EA 2007-02-04 [SC] [expires: 2021-02-05]
-      Key fingerprint =3D 52FB C0B8 6D95 4B08 4332  4CDC 6F33 915B 6568 B7EA
-uid                 [  full  ] Samba Distribution Verification Key <samba-b=
-ugs@samba.org>
-sub   elg2048/9C6ED163DA6DFB44 2007-02-04 [E] [expires: 2021-02-05]
-
-to the following new key:
-
-pub   rsa4096/AA99442FB680B620 2020-12-21 [SC] [expires: 2022-12-21]
-      Key fingerprint =3D 81F5 E283 2BD2 545A 1897  B713 AA99 442F B680 B620
-uid                 [ultimate] Samba Distribution Verification Key <samba-b=
-ugs@samba.org>
-sub   rsa4096/97EF9386FBFD4002 2020-12-21 [E] [expires: 2022-12-21]
-
-Starting from Jan 21th 2021, all Samba releases will be signed with the new=
- key.
-
-See also GPG_AA99442FB680B620_replaces_6F33915B6568B7EA.txt
-
-
-NEW FEATURES/CHANGES
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-Here is a copy of a clarification note added to the Samba code
-in the file: VFS-License-clarification.txt.
---------------------------------------------------------------
-
-A clarification of our GNU GPL License enforcement boundary within the Samba
-Virtual File System (VFS) layer.
-
-Samba is licensed under the GNU GPL. All code committed to the Samba
-project or that creates a "modified version" or software "based on" Samba m=
-ust
-be either licensed under the GNU GPL or a compatible license.
-
-Samba has several plug-in interfaces where external code may be called
-=66rom Samba GNU GPL licensed code. The most important of these is the
-Samba VFS layer.
-
-Samba VFS modules are intimately connected by header files and API
-definitions to the part of the Samba code that provides file services,
-and as such, code that implements a plug-in Samba VFS module must be
-licensed under the GNU GPL or a compatible license.
-
-However, Samba VFS modules may themselves call third-party external
-libraries that are not part of the Samba project and are externally
-developed and maintained.
-
-As long as these third-party external libraries do not use any of the
-Samba internal structure, APIs or interface definitions created by the
-Samba project (to the extent that they would be considered subject to the G=
-NU
-GPL), then the Samba Team will not consider such third-party external
-libraries called from Samba VFS modules as "based on" and/or creating a
-"modified version" of the Samba code for the purposes of GNU GPL.
-Accordingly, we do not require such libraries be licensed under the GNU GPL
-or a GNU GPL compatible license.
-
-VFS
----
-
-The effort to modernize Samba's VFS interface has reached a major milestone=
- with
-the next release Samba 4.14.
-
-For details please refer to the documentation at source3/modules/The_New_VF=
-S.txt or
-visit the <https://wiki.samba.org/index.php/The_New_VFS>.
-
-Printing
---------
-
-Publishing printers in AD is more reliable and more printer features are
-added to the published information in AD. Samba now also supports Windows
-drivers for the ARM64 architecture.
-
-
-Client Group Policy
--------------------
-This release extends Samba to support Group Policy functionality for Winbind
-clients. Active Directory Administrators can set policies that apply Sudoers
-configuration, and cron jobs to run hourly, daily, weekly or monthly.
-
-To enable the application of Group Policies on a client, set the global
-smb.conf option 'apply group policies' to 'yes'. Policies are applied on an
-interval of every 90 minutes, plus a random offset between 0 and 30 minutes.
-
-Policies applied by Samba are 'non-tattooing', meaning that changes can be
-reverted by executing the `samba-gpupdate --unapply` command. Policies can =
-be
-re-applied using the `samba-gpupdate --force` command.
-To view what policies have been or will be applied to a system, use the
-`samba-gpupdate --rsop` command.
-
-Administration of Samba policy requires that a Samba ADMX template be uploa=
-ded
-to the SYSVOL share. The samba-tool command `samba-tool gpo admxload` is
-provided as a convenient method for adding this policy. Once uploaded, poli=
-cies
-can be modified in the Group Policy Management Editor under Computer
-Configuration/Policies/Administrative Templates. Alternatively, Samba policy
-may be managed using the `samba-tool gpo manage` command. This tool does not
-require the admx templates to be installed.
-
-
-Python 3.6 or later required
-----------------------------
-
-Samba's minimum runtime requirement for python was raised to Python
-3.6 with samba 4.13.  Samba 4.14 raises this minimum version to Python
-3.6 also to build Samba. It is no longer possible to build Samba
-(even just the file server) with Python versions 2.6 and 2.7.
-
-As Python 2.7 has been End Of Life upstream since April 2020, Samba
-is dropping ALL Python 2.x support in this release.
-
-
-NT4-like 'classic' Samba domain controllers
--------------------------------------------
-
-Samba 4.13 deprecates Samba's original domain controller mode.
-
-Sites using Samba as a Domain Controller should upgrade from the
-NT4-like 'classic' Domain Controller to a Samba Active Directory DC
-to ensure full operation with modern windows clients.
-
-
-SMBv1 only protocol options deprecated
---------------------------------------
-
-A number of smb.conf parameters for less-secure authentication methods
-which are only possible over SMBv1 are deprecated in this release.
-
-
-Miscellaneous samba-tool changes
---------------------------------
-
-The samba-tool commands to manage AD objects (e.g. users, computers and
-groups) now consistently use the "add" command when adding a new object to
-the AD. The previous deprecation warnings when using the "add" commands
-have been removed. For compatibility reasons, both the "add" and "create"
-commands can be used now.
-
-Users, groups and contacts can now be renamed with the respective rename
-commands.
-
-Locked users can be unlocked with the new "samba-tool user unlock" command.
-
-The "samba-tool user list" and "samba-tool group listmembers" commands
-provide additional options to hide expired and disabled user accounts
-(--hide-expired and --hide-disabled).
-
-
-CTDB CHANGES
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-* The NAT gateway and LVS features now uses the term "leader" to refer
-  to the main node in a group through which traffic is routed and
-  "follower" for other members of a group.  The command for
-  determining the leader has changed to "ctdb natgw leader" (from
-  "ctdb natgw master").  The configuration keyword for indicating that
-  a node can not be the leader of a group has changed to
-  "follower-only" (from "slave-only").  Identical changes were made
-  for LVS.
-
-* Remove "ctdb isnotrecmaster" command.  It isn't used by CTDB's
-  scripts and can be checked by users with "ctdb pnn" and "ctdb
-  recmaster".
-
-
-REMOVED FEATURES
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-The deprecated "ldap ssl ads" smb.conf option has been removed.
-
-
-smb.conf changes
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-  Parameter Name                     Description                Default
-  --------------                     -----------                -------
-  smb encrypt                        Removed
-  ldap ssl ads                       Removed
-  client plaintext auth              Deprecated                 no
-  client NTLMv2 auth                 Deprecated                 yes
-  client lanman auth                 Deprecated                 no
-  client use spnego                  Deprecated                 yes
-  domain logons                      Deprecated                 no
-  raw NTLMv2 auth                    Deprecated                 no
-  async dns timeout                  New                        10
-  client smb encrypt                 New                        default
-  honor change notify privilege      New                        No
-  smbd force process locks           New                        No
-  server smb encrypt                 New                        default
-
-
-CHANGES SINCE 4.14.0rc1
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-o  Jeremy Allison <jra@samba.org>
-   * BUG 13992: Fix SAMBA RPC share error.
-
-o  Ralph Boehme <slow@samba.org>
-   * BUG 14602: "winbind:ignore domains" doesn't prevent user login from tr=
-usted
-     domain.
-   * BUG 14617: smbd tries to delete files with wrong permissions (uses gue=
-st
-     instead of user from force user =3D).
-
-o  Stefan Metzmacher <metze@samba.org>
-   * BUG 14539: s3:idmap_hash: Reliably return ID_TYPE_BOTH.
-
-o  Andreas Schneider <asn@samba.org>
-   * BUG 14627: s3:smbd: Fix invalid memory access in
-     posix_sys_acl_blob_get_fd().
-
-
-KNOWN ISSUES
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.14#Release_bl=
-ocking_bugs
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=3D=3D Our Code, Our Bugs, Our Responsibility.
-=3D=3D The Samba Team
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Download Details
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-=66rom:
-
-        https://download.samba.org/pub/samba/rc/
-
-The release notes are available online at:
-
-        https://download.samba.org/pub/samba/rc/samba-4.14.0rc2.WHATSNEW.txt
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                        --Enjoy
-                        The Samba Team
-
---ReaqsoxgOBHFXBhH
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCYBuxFAAKCRAoaL1+KxeT
-UciwAJ9y33qga25YzbdFeU+qf1wZbmh4vQCeNXijaqIi0cEzsXiynnK7ZO73w7E=
-=bNnY
------END PGP SIGNATURE-----
-
---ReaqsoxgOBHFXBhH--
+SSB1c2Ugc2FtYmEgdG8gcHJvdmlkZSBhY2Nlc3MgdG8gZmlsZSBzaGFyZXMgb3ZlciBjaWZzL3Nt
+Yi4gSSBoYXZlIG5vbi0NCnNhbWJhIHByb2Nlc3NlcyB0byBtYW5hZ2UgaG9zdCBrZXl0YWJzIGFu
+ZCB1c2VyL2dyb3VwIG1hcHBpbmdzLiBNeQ0Kc21iLmNvbmYgInNlY3VyaXR5ID0gYWRzIiBjb25m
+aWd1cmF0aW9uIHNlZW1zIHRvIHdvcmsgYXMgaW50ZW5kZWQsIGJ1dA0Kb25seSBpZiBJIGVuc3Vy
+ZSBhICJnZW5lcmljIiBzZWNyZXRzLnRkYiBmaWxlIGV4aXN0cywgb3RoZXJ3aXNlIHNtYmQNCndp
+bGwgcmVmdXNlIHRvIHN0YXJ0LiBNeSBhc3N1bXB0aW9uIGlzIHRoYXQgYXMgbG9uZyBhcyB0aGUg
+QUQgY29tcHV0ZXINCm9iamVjdCBhc3NvY2lhdGVkIHdpdGggdGhlIHNhbWJhIGNpZnMgU1BOcyBk
+b2Vzbid0IGhhdmUgaXQncyBwYXNzd29yZA0KY2hhbmdlZCwgbXkgc2FtYmEgc2VydmljZSB3aWxs
+IGNvbnRpbnVlIHRvIHdvcmsuIEFtIEkgbWlzdGFrZW4/IFNpbmNlIEkNCm1hbmFnZSB0aGUgc2Ft
+YmEgY29tcHV0ZXIgb2JqZWN0IGFuZCBrZXl0YWIgb3V0c2lkZSBvZiBuZXQgYWRzLCB3aHkgZG8N
+CkkgbmVlZCBzZWNyZXRzLnRkYiwgYW5kIG11c3QgbGFjayBvZiB0aGlzIGZpbGUgcHJldmVudCBz
+bWJkIGZyb20NCnJ1bm5pbmc/DQoNCk1hcmsNCg==
 
