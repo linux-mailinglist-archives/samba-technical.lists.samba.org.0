@@ -2,51 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45DDE3173A1
-	for <lists+samba-technical@lfdr.de>; Wed, 10 Feb 2021 23:47:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60FEF3173DD
+	for <lists+samba-technical@lfdr.de>; Thu, 11 Feb 2021 00:03:35 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=EOXELKtUQF4NYVNNk8KvJkz8CMlKR27U6unsCkuvXpE=; b=iETO3sxVSf8PooyDNtbnykDeq1
-	ISn/+sMaecDj+spY7EfbKgR8gbtAfYgyy0zWGe3uNOM/c7xgFBFG4OfTZDQV87Kooiq5oy0+N1LS0
-	3GOFXW1mNz2yu9vKUQIyKmKIph3fhzzTeelAFXJh49oJ5OyuZouGd5GdkaxAfcPZZaNkbKKWq6Lx9
-	96x2OgBx/s5CRZtY/mQvWgNtR9O/ZcP3noaRsUqk5FAURLxwBZh5G4eqqHAZaBPsOFoNbIV2+usl/
-	oJE/ZMebHDu3az2ebtOJfNcpQWO+iuWgB3e3lFqoIzaf8Uuj2Fr4MTyrbouVUbI8+J+MLwSjwlx0d
-	DPNrFdEw==;
-Received: from ip6-localhost ([::1]:43402 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=7uY2TbLZxRT7Qi4K4uJv2MuPTjMyncV/c4hRSVCH9pc=; b=s20vb2vom2pVEX/D6YwE3zEl5b
+	izXmjueduHJX16XXVEwJPwR+q0pr4B8RsZ7KyTS9FaS7VJ032F01fmWFY4MO1BlqZD0fVsdWXR0cE
+	64hM3eAP6S/fedT9DUX94ZxbA+DZP6yGpopyAeU3EloZb6Oyuve+e2LgfUdEyy7Fgf+So0769HCOU
+	TSXNEkV7sKiRJv6K0QJLfzZsmDYwSKNjjH1Wpe4HYSabt2bzSOqI1kEQLax74vS4OtFPwAI0H5sqx
+	7EYFfkjeQOeUzrascuCji0nbJAWBZfCWGZnDruuWwngHtS13x2GFSSsxGE8YjE9uX9dam1jeUue4a
+	Z4b8ilaA==;
+Received: from ip6-localhost ([::1]:44152 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1l9yFa-00C80c-Hf; Wed, 10 Feb 2021 22:46:22 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28858) 
+	id 1l9yVo-00C89q-9R; Wed, 10 Feb 2021 23:03:08 +0000
+Received: from mail-ot1-x329.google.com ([2607:f8b0:4864:20::329]:35554) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l9yFW-00C80V-5Z
- for samba-technical@lists.samba.org; Wed, 10 Feb 2021 22:46:20 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=EOXELKtUQF4NYVNNk8KvJkz8CMlKR27U6unsCkuvXpE=; b=jK871qp9XMilfp5g4z3lWm4w76
- rjNpKGvy+gx3DdoX/ablFnvG6Kd4EjQRViqiyc1wf/e2LchBKMxL+elaf24Hwj1js2a0hvI6AoRFY
- snU+YObs/f9jzYTFJMJU0lx2ZovzzoY+z26ArKnxxJEkqNwJ9kEmYKhML5+L2TIeCuL2eTci/IP+Q
- ZP9OHh01jz9sebChMloMBykl9iJ5QFkuiDaLdacIL3qe6Os1aQ5oR9lz1OeLVKhEr9tDfnMgLmJ0P
- vRdroN73CElboLFmtnpFbHG7bjRWaWZHBFgVZl7k8ckVC1naf+u1izAYBaq+1OoMB/LyBmStuFHTT
- Duczrciv7b9YXXLq/BDpsl2QYKCAufiHazTcxvwm8/sWfvS7bh6puWNco3ZaKhbnWvVxL+AooWF2q
- /fFdYJCKBqftkTGgL0fEOm7CL+W7ZBx9aundCsJbKVlo9kWmdhRtAqJmlYrhL3zhT4tu1x9KytWuO
- 4plr6Uy5H631q7x5Kzpu9kFJ;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1l9yFU-0006qB-UB; Wed, 10 Feb 2021 22:46:17 +0000
-To: Jeremy Allison <jra@samba.org>, samba-technical@lists.samba.org
-References: <E1l9wbe-005h28-1I@hrx0.samba.org>
- <ce529d61-561e-aecb-86cb-5f51aabf38bd@samba.org>
- <20210210215859.GG328304@jeremy-acer>
-Subject: Re: Conflicting public symbols... (Re: [SCM] Samba Shared Repository
- - branch master updated)
-Message-ID: <5364e8cf-f322-2dcf-3f88-8078bc54b3a1@samba.org>
-Date: Wed, 10 Feb 2021 23:46:11 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ (Exim) id 1l9yVj-00C89j-El
+ for samba-technical@lists.samba.org; Wed, 10 Feb 2021 23:03:05 +0000
+Received: by mail-ot1-x329.google.com with SMTP id k10so3500385otl.2
+ for <samba-technical@lists.samba.org>; Wed, 10 Feb 2021 15:03:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=7uY2TbLZxRT7Qi4K4uJv2MuPTjMyncV/c4hRSVCH9pc=;
+ b=YAbBppk67OPR9E9mANibK22BtQyW2xnt9B2wWQGn1ohzi2mFiu+34YUdCG3D7ZG2wR
+ MpGkCot4zkYadgbtOA12PPkJXjmoS79LDcfWSZVBncFEwBiJjvwFTd4jpQR0P4sAW9f9
+ yU2nk9NQSJ6NCAUSb9YIPG90jMS8+FG0AyElv5tMJrJREssFvVbWVhb/bu36WuLV5irh
+ XFCGoEjV5ooPStg+wCzmPh/6b/1yCHOxi0s6VQGg+wbXWfzRjuVejWN4U5Fic2nPEXmM
+ P25pVoegCi2j9UFvCVwtUOvMhVcsPYDmUlNPvisnpFceyTzGL0I7IW+UwpaDMUF0dHtc
+ 0OzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=7uY2TbLZxRT7Qi4K4uJv2MuPTjMyncV/c4hRSVCH9pc=;
+ b=q90Jso5/QMiTy3NwzKmzCgqtCmbw1s+itYi2lyVQDYaTfS7D3kxzpVyTTG80RbPjPl
+ m++7CsAIixM6WqtSCDOcGWn2ibLAbDt7BF21jTQN5J76b9Gt99auLe8q6EPFNlCS1ZN4
+ uRDWkKxCe6RFSrvptL/iPsXlpX1PER8VZVPLztE/sR/E90uf90e7JmrcGPW+ZOe15hWW
+ 1J7RKLKMrOt2P2yTNso+7/AsM2b6KWsfUXRDGCf0hsRJlHGzwAB+kVl33c2Yd8Igo/uN
+ /ObWHe4xsKw22zKnN3NWXsiTEc38OLVg0URtL0gSmf56Mgxhq2ldXDeasA2fcRrtlXqZ
+ qUBQ==
+X-Gm-Message-State: AOAM533C4KpyaPnLz+ZEZcPrIggde46514liOYGaxCxmLBqObMAlFpO9
+ Xg5YraQraK5bP1QTJy6Xb26/n4rznyWhCKA/Lv0=
+X-Google-Smtp-Source: ABdhPJx8PF0qlcqbuBnbPS00U/VcIFwFsDSQOY2xvCfYia6ydvGa3cKfrvZblfF0Pk/WBhIlyY4JtGgXVr9S5pwxEzY=
+X-Received: by 2002:a9d:7d10:: with SMTP id v16mr3810864otn.54.1612998181398; 
+ Wed, 10 Feb 2021 15:03:01 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20210210215859.GG328304@jeremy-acer>
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="7FsnWNLYC4Wu4DLgq4uMJ2GZ0myhFx4zk"
+References: <8FA63D2B-626F-4717-858D-8DA81F2AB80E@ei.tohoku.ac.jp>
+ <1bd546368a2e6567f3a43c238cb513f495bb61a7.camel@samba.org>
+In-Reply-To: <1bd546368a2e6567f3a43c238cb513f495bb61a7.camel@samba.org>
+Date: Wed, 10 Feb 2021 18:02:50 -0500
+Message-ID: <CAOCN9rxH71Auaxc6yEJCRTGCrvRqp2Dc0ikq=d344y8aJupd+w@mail.gmail.com>
+Subject: Re: Build error with C locale 4.14rc2
+To: Andrew Bartlett <abartlet@samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,115 +68,19 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Alexander Bokovoy <ab@samba.org>
+From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
+Cc: samba-technical <samba-technical@lists.samba.org>,
+ OHKAWA Yuichi <kuri@ei.tohoku.ac.jp>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---7FsnWNLYC4Wu4DLgq4uMJ2GZ0myhFx4zk
-Content-Type: multipart/mixed; boundary="lMrErdeUYdPcWgfjfsEaefTYiIm2dAlhY";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Jeremy Allison <jra@samba.org>, samba-technical@lists.samba.org
-Cc: Alexander Bokovoy <ab@samba.org>
-Message-ID: <5364e8cf-f322-2dcf-3f88-8078bc54b3a1@samba.org>
-Subject: Re: Conflicting public symbols... (Re: [SCM] Samba Shared Repository
- - branch master updated)
-References: <E1l9wbe-005h28-1I@hrx0.samba.org>
- <ce529d61-561e-aecb-86cb-5f51aabf38bd@samba.org>
- <20210210215859.GG328304@jeremy-acer>
-In-Reply-To: <20210210215859.GG328304@jeremy-acer>
+On Wed, Feb 10, 2021 at 1:37 AM Andrew Bartlett via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> Yeah, we have so far enforced a UTF8 locale in our build environments.
 
---lMrErdeUYdPcWgfjfsEaefTYiIm2dAlhY
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Am 10.02.21 um 22:58 schrieb Jeremy Allison via samba-technical:
-> On Wed, Feb 10, 2021 at 10:36:18PM +0100, Stefan Metzmacher wrote:
->> Hi,
->>
->>> - Log ---------------------------------------------------------------=
---
->>> commit 551532d007970ab11dca71b532754728a6a78496
->>> Author: xzhao9 <i@xuzhao.net>
->>> Date:=C2=A0=C2=A0 Sun Jan 3 13:02:18 2021 -0500
->>>
->>> =C2=A0=C2=A0=C2=A0 s3:registry Renaming get_charset() to smbreg_get_c=
-harset()
->>>
->>> =C2=A0=C2=A0=C2=A0 Rename to smbreg_get_charset() function to avoid n=
-aming conflict
->>> =C2=A0=C2=A0=C2=A0 with MariaDB.
->>>
->>> =C2=A0=C2=A0=C2=A0 Signed-off-by: xzhao9 <i@xuzhao.net>
->>> =C2=A0=C2=A0=C2=A0 Reviewed-by: Jeremy Allison <jra@samba.org>
->>> =C2=A0=C2=A0=C2=A0 Reviewed-by: David Mulder <dmulder@suse.com>
->>>
->>> =C2=A0=C2=A0=C2=A0 Autobuild-User(master): Jeremy Allison <jra@samba.=
-org>
->>> =C2=A0=C2=A0=C2=A0 Autobuild-Date(master): Wed Feb 10 21:00:28 UTC 20=
-21 on sn-devel-184
->>
->> Do we need a bug report to backport this?
->=20
-> I'll create one.
->=20
->> There's a similar problem reported here:
->> https://www.downtowndougbrown.com/2021/01/tracking-down-a-segfault-tha=
-t-suddenly-started-happening/
->>
->> Does anyone have time to have a deeper look?
->=20
-> Looks like "-fvisibility=3Dhidden" is the way
-> to go here.
-
-readelf -a bin/shared/private/libsamba-sockets-samba4.so |grep socket_sen=
-d |grep GLOBAL
-   119: 0000000000013386   186 FUNC    GLOBAL DEFAULT   13 socket_sendto@=
-@SAMBA_4.15.0PRE1_DEVELOPERBUILD
-   126: 00000000000131f5   401 FUNC    GLOBAL DEFAULT   13 socket_send@@S=
-AMBA_4.15.0PRE1_DEVELOPERBUILD
-   257: 00000000000131f5   401 FUNC    GLOBAL DEFAULT   13 socket_send
-   258: 0000000000013386   186 FUNC    GLOBAL DEFAULT   13 socket_sendto
-
-I think we need to find a way to drop all unversioned symbols from privat=
-e libraries (at least the once
-we install with 'make install'. So that ld will never pick up symbols fro=
-m private libraries if applications
-link against out public libraries.
-
-Does anyone now how to do that?
-
-metze
-
-
-
---lMrErdeUYdPcWgfjfsEaefTYiIm2dAlhY--
-
---7FsnWNLYC4Wu4DLgq4uMJ2GZ0myhFx4zk
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAmAkYjMACgkQDbX1YShp
-vVb6rg/+M1Elhht2FtviefxtSOyr8qrv2an83WFWmN1CPtdSDJjLx5Ou6tWVWZh+
-YEDuvqQt8RFAvDq0054q19Ib85gYV1ZrLAnCtg3R+toGgtwhD+lpGJHeO6DizxH/
-a1FWMpheEdB6Aew9J4l76Q4J4x/pkyAiyuKO2PCmEVEKxTZsIgQM/4JdDBX0SV8K
-egGWqZER3Y0OCyGnZEQOu4gQ01jj+c71QyDtZ9Q8mRryhNz0q2Mnj1jhpumcIHlf
-jZmj/F4J0A3r0BBZaI2SU2+xGAcEvUrM4pKlZ6UpQw2TzrqKPtmwwmbJmx51jgWE
-3h/92qx8Vo338Zg66+1guzSxMfpCTGYN0Pl5lZjz7ZZgPtYxqb+SR4NcNFOUqBGK
-3YuKq1lkYb8XzVit5Od24KfrhqPaLZrVG1QU3ca48DriuG1skIiYesBjdeg9tSO+
-L0IEo4DPqFg7boGW7nBauAOFXX0B4zfJfapKPxWTNcDNfB1IhPuzm3sDNUtkrU65
-m6n0SjdBIZEvGq6+QtLpuqfsEGSfDxqIuNbc8nvDQ/pUvelI2pCo2ttdJG6SkElp
-zzC6mjRlzfRoJYTwFeHSSyDa5wSJUGWo0V4ViSdKqiPolNhI4Emue3RJiO3Xo8xG
-3luR5pi229Xz3QHQSWvfttwlwPcwTm9plH0dINU5KNGuLNobU1M=
-=oLL9
------END PGP SIGNATURE-----
-
---7FsnWNLYC4Wu4DLgq4uMJ2GZ0myhFx4zk--
+It was an issue building RPMs under CentOs 7. I had to set
+LANG=en_us.UTF8 in the '%build' stanza of my .spec files. I anticipate
+the same issue for anyone who tries to build it in Amazon Linux 2.
 
