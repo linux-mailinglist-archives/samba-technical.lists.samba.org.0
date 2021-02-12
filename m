@@ -2,52 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CAEE31A019
-	for <lists+samba-technical@lfdr.de>; Fri, 12 Feb 2021 14:54:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4069D31A0BC
+	for <lists+samba-technical@lfdr.de>; Fri, 12 Feb 2021 15:38:46 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Rkzr/kgln701u7wGER55k7ysEelQgdQhkpTD+UXiINk=; b=W0WCchqVxiEax/OayuJMWRoHPV
-	OJLJibSqwFpuLhTMtHbWYgaRaoxwBYlHuhSLjFA+AmB3SnULOmyWPvYNjOczc8ybWOvpaAjYwGU5F
-	WBe/UN3BNz2ttlseWnyZhJgqjK22swgHF0CmJA1gqdVi+u3EO89S9LnGS34p6IM1Vx40RYXSeYGzk
-	PNocsceBAsjs+kI6SGToxPGNhzzZ41M+tKJRkaa5i608mRXgBzYl0RrYt7yUQQSH4rhbIvfJ+3oXC
-	yveM31+dp3ii3OnVCf0RBumf6d5j7PyJ7dCcjaUGXaCPDFUYje1adlYfNsQmqSzS3v5O5m9Lku7w9
-	Ib7RrdJg==;
-Received: from ip6-localhost ([::1]:33678 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=fTM1Yvb8ccqrqz5QfZJbZPP5XM+teZsKH95YiPmHvIY=; b=5jeLbFgDsyvLZwCFrABG7wPhTK
+	r39p6dQ1mCRfxyQd8nq0KQ8ijq1yV+gwQ2xZKEAFCuL9JuwQg5xnxY48AsNv+po8uehZ8fK4opBlZ
+	wOqSi2td+V1YgUjg0xIDR6KPLAIQzxgNG6o9X4pE7eoxWfjGF5Peq/C7THQELu56gIXsfaCBewSKU
+	yn0ANIsfmhJD2RE/Un+65BhhmbR8Q8L1eOTM/OG56uq7ZMFsBW17tsseKurBeFnejuujJCGVeqRWV
+	BquJFNzNGo1SbXa+GqusoMy3xzajj+NQl9Thp3cfHgtY8W3r8H4+/3V4aIOaP74+nWQ96/BoXaYTr
+	TTpNh2PA==;
+Received: from ip6-localhost ([::1]:34388 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lAYtO-00CPKU-Jd; Fri, 12 Feb 2021 13:53:54 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14272) 
+	id 1lAZaJ-00CPVY-C3; Fri, 12 Feb 2021 14:38:15 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31158) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lAYtH-00CPKN-CR
- for samba-technical@lists.samba.org; Fri, 12 Feb 2021 13:53:49 +0000
+ (Exim) id 1lAZaE-00CPVR-1j
+ for samba-technical@lists.samba.org; Fri, 12 Feb 2021 14:38:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=Rkzr/kgln701u7wGER55k7ysEelQgdQhkpTD+UXiINk=; b=Rd/+KCs9ylq22XpgD1symSRMkn
- G8jtsOG7pScdnch0Vvyq14ZhOrZGyKtkJugefs+SjuJ9EbNmGlswdff/4CkMP9+6qnxvuVmexCnAS
- y4Ipdu3Lxuz6yX2tg7+y+6Gpx+wpLQZyV1DGUdojnJkatB075b06fL/DoFKjjBLJPM6BzdVGwe1DV
- t7PVnmm8t92+ardlatbAyxp4zuRC1jBTkBY0+Gd5ftWQTHa4B25HY8LK8mTHibjxMllp9wWxcuZcm
- iBw+z4LwZcIsZLf3tUF5WtBT21AZqAUYPAMa1QtKOpnzlmHNX4UtBEOQpCPnGQJ8ZWhp6XbmCVFbe
- S1m2aOoAme+igmasvRx8FoFdnEgSpx/A2QJWlwjYCZCRv0+sirE++CSERulonvqTSy9eG4oZpj4pg
- 8dmxIrBsd6L50Uw7xA4aKCsSjQ24+LrhskY0npu/T7/R9VoWiazlHGTMaYiB4l4WkiAPcEYa3nf3u
- wXRkVN6ykAWB6nY1kSysnOFp;
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=fTM1Yvb8ccqrqz5QfZJbZPP5XM+teZsKH95YiPmHvIY=; b=pkm751Qs/SsAbVZuxK7M/crjTv
+ 81Ym68GJmYjH+eLrxtj/7e+g7wke42KS5UhRliY97CBAkaHPzlvChAZXYInYiQi9eCwil7R0KSVp8
+ /XM8WveCp89QFM3cJlh6YuHtjud37Vx4adoELzi+Z01/RnoWUnb/m04AV7SAWTSr01XcIBcfls6ch
+ GRbtbJ3NB2bit6nIC3Fi1KKpLGcvp+wuRfcEVpdVhDR2mQgEF0N6BSVQfo/bBPvNkb4wInwjfuUGE
+ ECARXBnqJQ45frq9w7qiWGsOEOBBxopn3OsC0Ouk/ZoCYPqBfRJMHYy18y4ik2iz331lKaHR1Nnbk
+ T7oWsbrztiFupxR1SuUworOrCeCMqm3MWDoKFemQX1fXfqHSTDfnG/Mp2QWFeZ8ZNzxJ7j9mLLH9C
+ 8bM9YqvDmDR7yNZBYjEDgC7wG7ziBU8hsG37pAsfSCZgbxIL/ax1+25reYYKKCz0FvujW8AqXI9E4
+ TBklTV9qosAlppzUn7FQGSce;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lAYtD-0001E4-Ve; Fri, 12 Feb 2021 13:53:44 +0000
-To: Namjae Jeon <linkinjeon@kernel.org>
-References: <CGME20210126023109epcas1p257c4128a9d8673cb44f81dca636da39a@epcas1p2.samsung.com>
- <20210126022335.27311-1-namjae.jeon@samsung.com>
- <09887b1a-3303-9ac6-1d29-c53951be5324@samba.org>
- <CAKYAXd-rfk26A4SOeqvhMkBV2FcvpE0goj415HX7T4fBim1zQA@mail.gmail.com>
-Subject: Re: [Linux-cifsd-devel] [PATCH] cifsd: make xattr format of ksmbd
- compatible with samba's one
-Message-ID: <d776f655-f58d-6541-e30a-f10e5b9f0660@samba.org>
-Date: Fri, 12 Feb 2021 14:53:33 +0100
+ (Exim) id 1lAZaC-0001W9-5a; Fri, 12 Feb 2021 14:38:08 +0000
+To: Namjae Jeon <linkinjeon@kernel.org>, Namjae Jeon
+ <namjae.jeon@samsung.com>, linux-cifsd-devel@lists.sourceforge.net,
+ Samba Technical <samba-technical@lists.samba.org>,
+ Linux API Mailing List <linux-api@vger.kernel.org>,
+ "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>
+Subject: RFC: ksmbd ABI for ksmbd-tools...
+Message-ID: <adf41e69-5915-06aa-6f8b-8ffc073fc8a7@samba.org>
+Date: Fri, 12 Feb 2021 15:38:00 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <CAKYAXd-rfk26A4SOeqvhMkBV2FcvpE0goj415HX7T4fBim1zQA@mail.gmail.com>
 Content-Type: multipart/signed; micalg=pgp-sha512;
  protocol="application/pgp-signature";
- boundary="GztYEeugHRhVtFsKa4YxN1hhOex0bPsAh"
+ boundary="FeP9e8KaBxtJxEsZr2idMziV53Ac65aQ6"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,113 +61,135 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Namjae Jeon <namjae.jeon@samsung.com>,
- Samba Technical <samba-technical@lists.samba.org>,
- linux-cifsd-devel@lists.sourceforge.net
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---GztYEeugHRhVtFsKa4YxN1hhOex0bPsAh
-Content-Type: multipart/mixed; boundary="8J4LdEJj7LCzGCELBHLCzAAhXR916sLQg";
+--FeP9e8KaBxtJxEsZr2idMziV53Ac65aQ6
+Content-Type: multipart/mixed; boundary="wVOrAfdOXbKc7vYfpYHEAlgTFTeRydQYk";
  protected-headers="v1"
 From: Stefan Metzmacher <metze@samba.org>
-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: Namjae Jeon <namjae.jeon@samsung.com>,
+To: Namjae Jeon <linkinjeon@kernel.org>, Namjae Jeon
+ <namjae.jeon@samsung.com>, linux-cifsd-devel@lists.sourceforge.net,
  Samba Technical <samba-technical@lists.samba.org>,
- linux-cifsd-devel@lists.sourceforge.net
-Message-ID: <d776f655-f58d-6541-e30a-f10e5b9f0660@samba.org>
-Subject: Re: [Linux-cifsd-devel] [PATCH] cifsd: make xattr format of ksmbd
- compatible with samba's one
-References: <CGME20210126023109epcas1p257c4128a9d8673cb44f81dca636da39a@epcas1p2.samsung.com>
- <20210126022335.27311-1-namjae.jeon@samsung.com>
- <09887b1a-3303-9ac6-1d29-c53951be5324@samba.org>
- <CAKYAXd-rfk26A4SOeqvhMkBV2FcvpE0goj415HX7T4fBim1zQA@mail.gmail.com>
-In-Reply-To: <CAKYAXd-rfk26A4SOeqvhMkBV2FcvpE0goj415HX7T4fBim1zQA@mail.gmail.com>
+ Linux API Mailing List <linux-api@vger.kernel.org>,
+ "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>
+Message-ID: <adf41e69-5915-06aa-6f8b-8ffc073fc8a7@samba.org>
+Subject: RFC: ksmbd ABI for ksmbd-tools...
 
---8J4LdEJj7LCzGCELBHLCzAAhXR916sLQg
+--wVOrAfdOXbKc7vYfpYHEAlgTFTeRydQYk
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
 Hi Namjae,
 
-I played with this today and found a few things.
+I looked through the interfaces used between userspace (ksmbd.mountd and =
+ksmbd.control)
+and the kernel module.
 
->>> Samba team request that ksmbd should make xattr format of ksmbd
->>> compatible
->>> with samba's one. When user replace samba with ksmbd or replace ksmbd=
+After loading the ksmbd.ko module and calling 'ksmbd.mountd', I see
+the following related proceses/kernel-threads:
 
->>> with samba, The written attribute and ACLs of xattr in file should be=
+  12200 ?        I      0:00 [kworker/0:0-ksmbd-io]
+  12247 ?        Ss     0:00 ksmbd.mountd
+  12248 ?        S      0:00 ksmbd.mountd
+  12249 ?        S      0:00 [ksmbd-lo]
+  12250 ?        S      0:00 [ksmbd-enp0s3]
+  12251 ?        S      0:00 [ksmbd-enp0s8]
+  12252 ?        S      0:00 [ksmbd-enp0s9]
+  12253 ?        S      0:00 [ksmbd-enp0s10]
+  12254 ?        I<     0:00 [ksmbd-smb_direc]
+  12255 ?        S      0:00 [ksmbd:38794]
+  12257 ?        S      0:00 [ksmbd:51579]
 
->>> used
->>> on both server. This patch work the following ones.
->>>  1. make xattr prefix compaible.
->>>     - rename creation.time and file.attribute to DOSATTRIB.
+I haven't found the exact place, but ksmbd.mountd starts the kernel-part.=
 
-I just noticed that you use xattr_DosInfo3 instead of xattr_DosInfo4,
-Samba uses xattr_DosInfo4, starting from samba-4.11.0, so all supported
-Samba releases write xattr_DosInfo4. All versions from 3.5-4.10 wrote
-xattr_DosInfo3. Versions before 3.5 only stored the hex-string.
 
-So it would be good to read hex-string-only, xattr_DosInfo3 and xattr_Dos=
-Info4 and write
-xattr_DosInfo4.
+ksmbd.mountd also acts as some kind of upcall, for the server part,
+that takes care of authentication and some basic DCERPC calls.
 
->>>     - rename stream. to DosStream.
+I'm wondering why there are two separate ways to kill the running server,=
 
-I noticed that "vfs objects =3D acl_xattr" is allowed,
+'killall ksmbd.mountd' for the userspace part and
+'ksmbd.control -s' (which is just a wrapper for
+'echo -n "hard" > /sys/class/ksmbd-control/kill_server') to shutdown the =
+server part.
 
-"vfs objects =3D streams_xattr acl_xattr" is not handled at all,
-even acl_xattr isn't detected in that case.
+As it's not useful to run any of these two components on its own,
+so I'm wondering why there's no stronger relationship.
 
->>>     - rename sd. to NTACL.
+As naive admin I'd assume that the kernel part would detect the exit of k=
+smbd.mountd
+and shutdown itself.
 
-There seems to be a problem, when a new file inherits acls from the paren=
-t
-directory. There I see a strange owner sid:
+It would also be great to bind to specific ip addresses instead of device=
+s
+and allow to run more than one instance of ksmbd.mountd (with different c=
+onfig files
+and or within containers). That's why I think single global hardcoded pat=
+h like
+'/sys/class/ksmbd-control/kill_server' should be avoided, something like:=
 
-                        owner_sid                : *
-                            owner_sid                : S-21-2276714256
-and
+'/sys/class/ksmbd-control/<pid-of-ksmbd.mountd>/kill_server' would be bet=
+ter
+(if it's needed at all).
 
-WARNING! 20 unread bytes
-[0000] 00 00 00 00 00 00 00 00   00 00 00 00 00 00 00 00   ........ .....=
-=2E..
-[0010] 00 00 00 00
+I also have ideas how ksmbd{.ok,.mountd} could make use of Samba's winbin=
+dd (or authentication)
+and Samba's rpc services, but this would require a few changes in the net=
+link protocol
+between ksmbd.ko and ksmbd.mountd. It would be great if a Samba smb.conf =
+option could
+cause smbd to start ksmbd.mountd in the background and delegate all raw S=
+MB handling
+to the kernel.
 
-I used this command to analyze this:
+So my main big question is how stable would the userspace interface to ks=
+mbd.ko be
+treated?
 
-getfattr -n security.NTACL WHATSNEW.txt | grep security.NTACL| sed -e 's!=
-security.NTACL=3D0s!!' | ndrdump --base64-input xattr xattr_NTACL struct =
-2>&1 |less
+Would it be possible to change the netlink protocol or /sys/class/* behav=
+ior in future
+in order to improve things?
+
+Can we require that the userspace tool matches the kernel version for a w=
+hile?
+
+I think iproute2 creates a version for each stable kernel tree and tools =
+like
+bpftool, perf even come with each single kernel release.
+
+While others like 'cifs.upcall' try to work with any kernel version.
+
+What do others think?
 
 metze
 
 
---8J4LdEJj7LCzGCELBHLCzAAhXR916sLQg--
+--wVOrAfdOXbKc7vYfpYHEAlgTFTeRydQYk--
 
---GztYEeugHRhVtFsKa4YxN1hhOex0bPsAh
+--FeP9e8KaBxtJxEsZr2idMziV53Ac65aQ6
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAmAmiF0ACgkQDbX1YShp
-vVb6DA//ekho9ECK03e9JRJkDXcF36BNTEcfTi6aEWMQe+FUT+vNARIa3yazmG4B
-pVh+9dBVNG7FKxbo7y14P4BEBWDph2njIr219njanhphWTU4WJmJoDOCW4kdd3ud
-5I6Q/XAP3TOEPZhsCOQtRZghS71OuO/GJgWACauYJ8aMRs6Mx2NeWe/FPZkJKXn4
-dmU+AtDoP7wKRVVOiPeMSJ8UUyFRMcF6w4crDADBGaBEXE87raVTAuAzsH8i0/sS
-VMMhn/kN3bmevI+FbgdKLA3FD3nGXAqTZeNjq+MZNP5ilkXFp5uVzo74/dEIuwPw
-XlkN8vmHUsR0WgSH2y7loLaALOpwN833gDJVj+5QSOHIxkTflch2YZcbE2ZdU8ON
-Mrum/Zd1RlFVBeZqcSkWNq6wsRvWVGGokdeh/SBt9f8y2Xbg/QNlFrc3riTsrV+3
-v30lpTcFjLLdo/JmgQCc4X2PvHPNJYwb7Hf5FYDJKJJU19bdNQ4OSVUL6ixMs+7i
-j1/TYJgdzkxzUnkehl1V5Y2WUVlvwQ9yi0zZ3NhNr6qimCLp9JcD7Wh6UP2xS82e
-WzmowsIprCXjXIIvxrBSf2h8JJ1rcs3N0T07rs1DmCjR4YXYNYTfimhmSa/v8+gv
-8zVfmHGnrdnJaZxTDb8YrCkBO2ZEjjdQek8KANc6v9w6Bn2NKTs=
-=3tLT
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAmAmksgACgkQDbX1YShp
+vVaIHRAAserhJWOmXPNIZtsk4PGY7POA3fnXr861G7Uv0Dk7dgmpuu9CiN2wlwtQ
+Y9Swc1FsMeoYNnSnKZk/ShZ/s/taOJejqmq2ItDR5Ev+A7r5yVP3ThFa+hcQkWks
+V1XI+/RO2RYQ34zqV/xceLbeRrMCKAxNs5uQY6shjt3n9tamh6bV8TP0tB6sH7CF
+jFLiQ8y6VZvbtoeA6S3WXMwCrcXc/soUqiGEMxThw7t1XFZ1oK101dvy+cMcGZT1
+WHHQJFOwsFh0KQNXEb1odBI87jNnBQFQ7rj/xIVkd123T7ga7ywSIFw6ZLZxAsr2
+HqCjAl5TjweBb6L0381S1THh+nqAO/1XEEFiJIJV+35dp4Zom3zkS8mKm6X0C3gZ
+3zqOy3oLBdgNrZrj1LB/NfZT0pqMuvLad/HDEj6b8p8mUbGn5gmLXdtgAc0HEK2e
+5Ps+GF1YaiGdAWdih0crhMBXpO6KdMo/pwmw7Bt8j1J81b/gBkEMQ5yc+rTYTkPC
+txlwZjznt0oF9XXILFr3iQYa/8BvirKfhjb+k5Q3TRaI9d6acKL8CzJzDpiVq+lE
+xUVKm4IyVm1PxeZTgeyqdkrWy4c6dz9DhNuxpr79vo5BWGpWi/Dm0Ym4Grkmq6zl
+5aTC+psPuDu8a5TLmD3JjpGUtNyy3V7qHQUcgBeP1hHDBilTDRA=
+=sHBM
 -----END PGP SIGNATURE-----
 
---GztYEeugHRhVtFsKa4YxN1hhOex0bPsAh--
+--FeP9e8KaBxtJxEsZr2idMziV53Ac65aQ6--
 
