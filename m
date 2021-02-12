@@ -2,45 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B08A4319AB0
-	for <lists+samba-technical@lfdr.de>; Fri, 12 Feb 2021 08:44:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D10F319CC3
+	for <lists+samba-technical@lfdr.de>; Fri, 12 Feb 2021 11:42:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=+Oa3YSQ2JuojquAUjAGDaM+vvbYcaUPfkyIDDiC2Clo=; b=rUfa5Pa/jkaNXuEEe2Bvofr3et
-	66d0G23IpCwAwC1h4nxt1f8vpJaG8sqZMxhOAMYUlJ5YnENIt2DqvlRMxBBI2euKzok08Afs0IScl
-	XH0bo0xs1I9frQQWBsQ+QYrTig/9PUG98cSJmMT/AyUFKv/guDgXwE+alHxm/foemc4F9KNsic1NV
-	OGCocdlpB29IXraWKfxPgVcHTaZv/wq0a4AUQ/YHFSds8lUt1mz/HjrGKis4huVXPK/jWoV9VwrQs
-	9xpmLY7GK2O2JLPRq/hAyDKmVYSbYkBUh3GYwJwrdNeX+l5q8jXNezCxj1P6OkUV0EijDkZ4Bb4CJ
-	Vw+O+4AA==;
-Received: from ip6-localhost ([::1]:21338 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=BD1wIF4DXA7UFOAGSN1stM0wbdVETKd9rewRFTSOdZk=; b=Ip3ergTztRvFrkmriuHTE8CeKx
+	1fEY2ZINbaKTke3YKmJFcDJVIE6s4o+8gStRhGHqSYhfuBMSNwBXF0LnfR03bNP79250umTFHQHAC
+	rqTUIFtWulzDR3rMPCRDaFYH3/6tsjQl/YlzAFU+8nyL2qm0b8hpL5eAQlO4AFD5E8SD2dxFupGdB
+	jx+md+NaqM5slLrhT/8Ki/zslkgEYQYSOEEuf9zSq1SqyECt4geT/tKSDxAjFd3Y4xYnIqFj0JZPY
+	C3uXERTZ+qYrPvs1W2bToSHu8R0xKZ1UhLxxtGVAaSRqEQdbOhSXq7kDvmTugDCnL1OnR9SRsLtpX
+	hq9l8meQ==;
+Received: from ip6-localhost ([::1]:28836 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lAT7e-00CMUQ-BG; Fri, 12 Feb 2021 07:44:14 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:46586) 
+	id 1lAVt7-00CO4m-1I; Fri, 12 Feb 2021 10:41:25 +0000
+Received: from mail-oo1-xc34.google.com ([2607:f8b0:4864:20::c34]:38238) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lAT7Y-00CMUJ-SO
- for samba-technical@lists.samba.org; Fri, 12 Feb 2021 07:44:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=+Oa3YSQ2JuojquAUjAGDaM+vvbYcaUPfkyIDDiC2Clo=; b=bfa1UAFs44zFPe/bzMVa8pT6k9
- GvS0rzSdn3AHwQFN+W2lzt5U1YOYI1qV5ULuw8FFgeqybJm8gvhOXtj5z3SKtyA8ZZItw+XV4TUo3
- Lqzk9U4puKRzkx/zP4IE0G5IF7k/5qbLyluuJYELeBvU8Ig1Tt3tl7BkscYpq7wB8aSTvxBDUuJVQ
- 8epaPWPcvhg17bjtJtuoD1w1Fjc7LBdNKZkdxHNna8xxkJqj0DWPJZshI8XLJNh7YNHJOCtnFFEWA
- s+va9z87CU4XzHi1MK2fD4K3xffjrKXH50NeVZGpNGZwC0IMGCKlPN0biSz3y/ue93T7Sw3dOR4zm
- ipsRh5mc+NZHKhsJp4y3vfqh5EvfiW2bPS37mhHugNKbswQoWdny7FMgQ+FyDZIvYGFOiRZpftCnA
- Wu2l6gfyDonU+ZQtwlA/2pYp2erjBWm4LoLAHBvbpFreEKj3el0EfbkqaZahW27PnBYfPazkEW8Uu
- QOcsqyCA1F/s5A4PnjMnrFeV;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lAT7X-0007UN-IK; Fri, 12 Feb 2021 07:44:07 +0000
-Date: Fri, 12 Feb 2021 09:44:05 +0200
-To: Richard Sharpe <realrichardsharpe@gmail.com>
-Subject: Re: Building Samba 4.14 on CentOS 8.0 and gnutls
-Message-ID: <20210212074405.GV5029@pinega.vda.li>
-References: <CACyXjPzHUBDqMsnGgdenSQJ4xd5c41gzq2+7vv9qkXRe_HZsaw@mail.gmail.com>
+ (Exim) id 1lAVt0-00CO4e-JO
+ for samba-technical@lists.samba.org; Fri, 12 Feb 2021 10:41:21 +0000
+Received: by mail-oo1-xc34.google.com with SMTP id f26so1975321oog.5
+ for <samba-technical@lists.samba.org>; Fri, 12 Feb 2021 02:41:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=BD1wIF4DXA7UFOAGSN1stM0wbdVETKd9rewRFTSOdZk=;
+ b=YvPgzS5eH6wrs4rAhIqrs2RTu4ukFhgTwi6RUFUgqe6/6V/dLxL/x752X+8K42BK6M
+ KFo9nY87xoI7W7zZjpYeeDHWkCsEC0k36xWWUyQd8Lu+qGkCIP3oW2emkNUSyk+pp0Z0
+ HCRkTOG+CdSVCzsCQNifCg1xw4+gdCVacUws/AaDhCAk4PJgwgdv0nchfAMRSjwN05tz
+ 1R2WfENdIkBTKXCQDg6CRCAMSCqGC03rrk2x3x1XZ2/40DVlEqMrn0y52tKmrf4D4Xlm
+ LyN8TTaMveKkLoWMSzwBCr/u3SG/XMHRXSKdz8cm/gKgeXQE3l0oEIkJNCkdUYg7VR9D
+ FL5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=BD1wIF4DXA7UFOAGSN1stM0wbdVETKd9rewRFTSOdZk=;
+ b=c+fZNdrxP8m2uHzBRF1FdFCQfqhOIIa9eCexTgwlepST8wAKVBsBJdaN8s1E45fpFb
+ PfMvHeCVPcSpgIRplJQt0WMu/FMrbrVLDyM7OTnvrPiwtzYaUS2vbwVUWvxR2by7y6eq
+ KmGs1t1fGTqZT0nM+9M0OoA2VsNAR87QH/FM30lgDKEtOlL+qOgcIHf9AljYZFapsDl1
+ iCIkpqr6GVLtiRnMR6Ki8TotYaLwwxLoOMTvorSW3Cxi+EGEz/ccsbFQeE/k+HB72FT/
+ z4LhG9kOOU3rYiKi1EJ7ORB9b5+9Wx4KhDQqk3IndhQfqKfR+JvkMra4tZzcbYeopm7u
+ I1Jw==
+X-Gm-Message-State: AOAM530VvEtixmgZZdlHC0SNGBIFgmiEAETeBqKYq1gwdv9oiC+Nq4Sa
+ 42EQXO8R7H0XPqYgEfFu2qtFYMwn6LoYPNEDzUfRuHjjPVw=
+X-Google-Smtp-Source: ABdhPJy8sH/k/jP9pCvFB1y6297eA8OBWBwi9CoULPC62mvsIXO1YlSNMF0g9tKpgfWRM0LGWFy+wfnyvBYEvR10z+k=
+X-Received: by 2002:a4a:55c8:: with SMTP id e191mr1435890oob.13.1613126476017; 
+ Fri, 12 Feb 2021 02:41:16 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+References: <CACyXjPzHUBDqMsnGgdenSQJ4xd5c41gzq2+7vv9qkXRe_HZsaw@mail.gmail.com>
 In-Reply-To: <CACyXjPzHUBDqMsnGgdenSQJ4xd5c41gzq2+7vv9qkXRe_HZsaw@mail.gmail.com>
+Date: Fri, 12 Feb 2021 05:41:06 -0500
+Message-ID: <CAOCN9ryq_P0j6brW+UW7v_4d0hX12MP293e5TwkieTNNh7z9ZQ@mail.gmail.com>
+Subject: Re: Building Samba 4.14 on CentOS 8.0 and gnutls
+To: Richard Sharpe <realrichardsharpe@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,46 +69,48 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexander Bokovoy <ab@samba.org>
+From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
 Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On to, 11 helmi 2021, Richard Sharpe via samba-technical wrote:
+On Thu, Feb 11, 2021 at 10:03 PM Richard Sharpe via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
 > Hi folks,
-> 
+>
 > I am slowly getting Samba to build.
-> 
+
+Take a look at the branches for samba-4.14 in my repos at
+https://github.com/nkadel/samba4rrepo.
+
+The RPM's that RHEL 8 published did not include the python3 "devel"
+RPM's for various dependencies, so the Fedora style .spec file is not
+compatible with it. It's really frustrating and demanded rebuilds of
+other Samba related libraries.
+
+
 > The latest problem I hit is this:
-> 
+>
 > -------------------
-> Checking compiler accepts ['-Wno-error=unused-result']
+> Checking compiler accepts ['-Wno-error=3Dunused-result']
 >                          : yes
 > Using in-tree heimdal kerberos defines
-> Checking for GnuTLS >= 3.4.7
+> Checking for GnuTLS >=3D 3.4.7
 >                          : not found
 > ---------------------
-> 
+>
 > However, what was required was not gnutls (which was already
 > installed) but gnutls-devel.
-> 
+>
 > How can this be fixed?
-
-By installing corresponding development packages. Almost all checks in
-that configure check do check for a presence of development parts of the
-packages, not just binary libraries. Please follow instructions as
-provided in the other response.
-
-Perhaps an easier way would be to install 'yum-utils' if they are
-missing and do
-
-# yum-builddep samba
-
-That implies you have source repositories available (they'll be
-automatically enabled for this specific operation) and it would pull
-a list of packages required by the source package.
-
--- 
-/ Alexander Bokovoy
+>
+> --
+> Regards,
+> Richard Sharpe
+> (=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
+=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
+=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
+>
 
