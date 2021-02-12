@@ -2,60 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EFCC31A104
-	for <lists+samba-technical@lfdr.de>; Fri, 12 Feb 2021 16:00:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3EDC331A65D
+	for <lists+samba-technical@lfdr.de>; Fri, 12 Feb 2021 22:00:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=htU0zjpCEzn/Uq10KLpo487cmC1bvAxeSS2Wqr5wFJ8=; b=yvtRI10HtZ/RpbWaNZQOXB1O4V
-	OgGtd6D0YF/FPI3Cdtw5+uBYjPJLv8mqaSz5CrtmA0GCoAavvbMqt+xEQ/V0hhOP4AT2F3E7LCCbw
-	Ya34uZ6d0VqECpSZo6EshJuvVbFRJQQ1fqaQF9qeZepKRJ+/OJQYmV35JcAs2WIbvfek9ZONnOJY4
-	JnCsFNhkIDVQH5bvnaphf+7zju0B8lb1p45HdXqYChT7GwG5WLSNDHh0cMO/HbkmF3S+/6Dhbd8vF
-	zfp1Dzvwla/EccazQGnS1FxJVxtwXMCUN5HN3pC6WfK7MgeyuPkAT+5kag8NjIVIl9dZv1678JwOP
-	20pFrIPA==;
-Received: from ip6-localhost ([::1]:35132 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=DtgY7E8LKIyUfIK5qpNlXvVVtBCgiyJCK26CFxun3RY=; b=cliWN7PnHXuDMdeu2MS180mY5A
+	w1ccJkEWgBXnxEasUI7HLHvVEM6iBiWmQ4naJenkxarus3kA+hNNeeK06GAfY0Wrdv6fd5lDCeW9/
+	WhkILnNlip3dJJ2P0FJL+46tRNJQK8EQmvY426wpRqQpmYSieLS4ncb+T3UR380WxDQO7r65IsCQE
+	Wc9Qvg1pb135WcumRzQxvjy5YEWSvJTEOdjAvsqofYrdPvtj800hGVvEbXUI0wdZHbaG04ItHzxXf
+	vs3HPOztneAHpkeW52thKOrR/BKoq2u9G40rI9WC7yKPJOwntnExfSSDK5gnntdjexOOe0msoWf93
+	tZcihrQQ==;
+Received: from ip6-localhost ([::1]:47182 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lAZvK-00CPfZ-EJ; Fri, 12 Feb 2021 14:59:58 +0000
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630]:42048) 
+	id 1lAfWx-00CS1b-K6; Fri, 12 Feb 2021 20:59:11 +0000
+Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136]:43540) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lAZvE-00CPfS-D4
- for samba-technical@lists.samba.org; Fri, 12 Feb 2021 14:59:54 +0000
-Received: by mail-ej1-x630.google.com with SMTP id z19so2895575eju.9
- for <samba-technical@lists.samba.org>; Fri, 12 Feb 2021 06:59:51 -0800 (PST)
+ (Exim) id 1lAfWq-00CS1N-M0
+ for samba-technical@lists.samba.org; Fri, 12 Feb 2021 20:59:07 +0000
+Received: by mail-lf1-x136.google.com with SMTP id d3so1335699lfg.10
+ for <samba-technical@lists.samba.org>; Fri, 12 Feb 2021 12:59:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=htU0zjpCEzn/Uq10KLpo487cmC1bvAxeSS2Wqr5wFJ8=;
- b=FpA2CiMSu5BbIujvy7SCEKr/sk0Qt0U14VD9KPYT+QArRYzYNRSXqQsmOHe3OfXuS4
- hlegiCXnfn8bg0XA0wKs3r8fP3hWFU9Iwh3VdUPGgQJqSCgZ9tq/tz7IyhRu/Ec1pvWJ
- zgIjIsxouUWBGrjnYtJK6VFW1GawEFMxrQMjrSlQ08Ie8BX2DJzC1KXvsoHbw+tS2hC7
- OanLneXAkBkLst/SWuMCDEzkGGM/9QrHT/ZfmJB3Q8rMKjyajiJB6cvFRl1Jxk/DLvve
- 2MuRs1zKS8T6/iRbxiAegl6DMp68L4LexMdeMPAG/UZsKinrPzDt9Rj7xjiCu/TKKg8p
- MlaQ==
+ :content-transfer-encoding;
+ bh=DtgY7E8LKIyUfIK5qpNlXvVVtBCgiyJCK26CFxun3RY=;
+ b=a8LtrewE+8QMX2wV6psa+ThDQCOWjx2BGDlbNFCqzhGms3HpqKq0YrYQk2A8eVyR1V
+ 9ozowSEl++hWe0+yjPNBFR8fLQvmTX8BUZEbBMZCm/Koigp8tOJcmQxrpstFJ/hRILmr
+ d46ri2PmP5kxPqgZIF8cncMuYiPFhmjy5ey5om32NL9QSLUL1SOEVjFE4Ava8AsAzPfz
+ hsmEMgVKqjP8mrnUGdSKzaq74NJWULl5AuaeJgHDCoS2L7OlnBdzb3jqrpYGnB5w5YVA
+ vyE6o7n2XSpYorVj0IBvMHvHHpJhE5c9U+zCHcyYzIKEpK0H36Imzv/dticE/XZ1qTPh
+ fCWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=htU0zjpCEzn/Uq10KLpo487cmC1bvAxeSS2Wqr5wFJ8=;
- b=ExKAoGHKXtc5OY0kZ/N+JreTf7mw/WauubYp9/gk9iRUfm9veDGRalNjy2vqN15rmf
- JawmdIv/m3TmefTRWadbOfMgU3EEU+WKhYTr+6k0V/7Lc58+3jYrNxaQxwnQQ9gsLhrU
- ssodOYUaOXcSbESNJdo37000RoP0QQ0uyxwGtc3aZxDXlazUOQSJV4lujTxBV9oT+uOI
- CXCJaK0KGC4tfUgF5Rtk8SeSDNm/xVa7Pzvg+IaoAHG+ozAz23afkiFgUG7c9krYTPWw
- 0jmMmGsrEtZUB572qDRmyjSCoQtPsuY8rbi9Wzc6mJWS3iS0EUKQXWhivcwJpHhPXsVu
- pQLQ==
-X-Gm-Message-State: AOAM530rkjrc00u2wvtM/5wClsfQ+J/kMbpa6dEjJWDt1Ol8SnWlESEw
- IP2gc3//O6KKgxhFE7zqR4tNdRbPuOO/VSfmk/Y=
-X-Google-Smtp-Source: ABdhPJwmEE/6Yq4hhgXRnAO9lTntwol3vd8vKBspU1QqdLZI43tKzm/Fbvch1jVZOJQ9wUKxxVo8wc9uGsAfqGBx0JA=
-X-Received: by 2002:a17:907:28c9:: with SMTP id
- en9mr3427782ejc.314.1613141991047; 
- Fri, 12 Feb 2021 06:59:51 -0800 (PST)
+ :message-id:subject:to:content-transfer-encoding;
+ bh=DtgY7E8LKIyUfIK5qpNlXvVVtBCgiyJCK26CFxun3RY=;
+ b=Kz7h2C/aBwkdua9/CYGm2DmfAaz+3+5crbHiLo/CEXfJLiI0WEBIeQBWjRrbWwom+y
+ 0zMZVPJsjMRHA37diuUUerpauYfzjku+IHd7nN2v/NaOAgiQcfmk4SPhMzLipPVJRMk+
+ gaSMjIRHDBoi+1ibY3G/Mf2JVPOhi7EpwCKEBch13sFfq9AaYibOFknwztoINHxWqETJ
+ 8DWWrGBiclWH2Qlf2Gbm1GiBdkLRZ2e/kPspqUsRmj/YAso6toHN6EfrrSvgqDnqBDod
+ hzEvDg/cAi3wsicMau4zZahGqbidtBK1FD+w9lp0ZKlJh1wNGVba69husdnwFC+T4WeM
+ XjUg==
+X-Gm-Message-State: AOAM5306BW5ZAsrBF+n1NK/cTYqN58F/YTbcpJ7O6bCxHxpcVOARH7jH
+ pfQXRqRGYMGZpe1uubmMFJOUIJ0Z2zkFUk2o8viq6G0/UYs+Fw==
+X-Google-Smtp-Source: ABdhPJzQEd4H+BmNaS/kwmAEzur60a4b0W9ruhsTdiTFaiLe0TY8VXzZR2m+7kMD6N9xD8a3Cw/vpA/i6aL9KhYozvw=
+X-Received: by 2002:a05:6512:31c1:: with SMTP id
+ j1mr2538588lfe.313.1613163543312; 
+ Fri, 12 Feb 2021 12:59:03 -0800 (PST)
 MIME-Version: 1.0
-References: <CACyXjPzHUBDqMsnGgdenSQJ4xd5c41gzq2+7vv9qkXRe_HZsaw@mail.gmail.com>
- <20210212074405.GV5029@pinega.vda.li>
-In-Reply-To: <20210212074405.GV5029@pinega.vda.li>
-Date: Fri, 12 Feb 2021 06:56:44 -0800
-Message-ID: <CACyXjPynprRQMhfFSAOcn96Xmzn=_LwTA7-Y==OR9aKAHYKB=Q@mail.gmail.com>
-Subject: Re: Building Samba 4.14 on CentOS 8.0 and gnutls
-To: Alexander Bokovoy <ab@samba.org>
+References: <CAH2r5mtYEj+WLy+oPSXEwS5sZ8+TNk_dU3PVx3ieBz2DFS94Sg@mail.gmail.com>
+ <CAHk-=wja1Y8r5UKrmXcMFrS=VPkTPbkyK-vt8B9MBkEU4+-WLw@mail.gmail.com>
+ <CAH2r5mtj+-xGDy-YN0JwSJAsgvB+HpQFCBi-zdTNXTRBY_Mteg@mail.gmail.com>
+In-Reply-To: <CAH2r5mtj+-xGDy-YN0JwSJAsgvB+HpQFCBi-zdTNXTRBY_Mteg@mail.gmail.com>
+Date: Fri, 12 Feb 2021 14:58:50 -0600
+Message-ID: <CAH2r5msA8Odi04kV7tMd3bXzB5gapyNKn7HFUKC8Q1O=CgjD6A@mail.gmail.com>
+Subject: Fwd: [GIT PULL] cifs fixes
+To: samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -71,57 +72,54 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Feb 11, 2021 at 11:44 PM Alexander Bokovoy <ab@samba.org> wrote:
+FYI - Looks like samba.org is still down ...
+
+fatal: unable to connect to git.samba.org:
+git.samba.org[0: 46.4.18.183]: errno=3DConnection timed out
+git.samba.org[1: 2a01:4f8:221:39d2::18:183]: errno=3DNetwork is unreachable
+
+---------- Forwarded message ---------
+From: Steve French <smfrench@gmail.com>
+Date: Fri, Feb 12, 2021 at 2:39 PM
+Subject: Re: [GIT PULL] cifs fixes
+To: Linus Torvalds <torvalds@linux-foundation.org>, Stefan (metze)
+Metzmacher <metze@samba.org>, Bj=C3=B6rn JACKE <bjacke@samba.org>
+Cc: CIFS <linux-cifs@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>
+
+
+Metze/Bjorn,
+Linus is right - samba.org is down for me (I also verified with JRA).
+Any ETA on when it gets back up?
+
+On Fri, Feb 12, 2021 at 2:05 PM Linus Torvalds
+<torvalds@linux-foundation.org> wrote:
 >
-> On to, 11 helmi 2021, Richard Sharpe via samba-technical wrote:
-> > Hi folks,
+> On Fri, Feb 12, 2021 at 10:16 AM Steve French <smfrench@gmail.com> wrote:
 > >
-> > I am slowly getting Samba to build.
-> >
-> > The latest problem I hit is this:
-> >
-> > -------------------
-> > Checking compiler accepts ['-Wno-error=3Dunused-result']
-> >                          : yes
-> > Using in-tree heimdal kerberos defines
-> > Checking for GnuTLS >=3D 3.4.7
-> >                          : not found
-> > ---------------------
-> >
-> > However, what was required was not gnutls (which was already
-> > installed) but gnutls-devel.
-> >
-> > How can this be fixed?
+> >   git://git.samba.org/sfrench/cifs-2.6.git tags/5.11-rc7-smb3
 >
-> By installing corresponding development packages. Almost all checks in
-> that configure check do check for a presence of development parts of the
-> packages, not just binary libraries. Please follow instructions as
-> provided in the other response.
-
-Sure. I eventually got it to build, but my complaint is that the error
-message was misleading ...
-
-> Perhaps an easier way would be to install 'yum-utils' if they are
-> missing and do
+> It looks like git.samba.org is feeling very sick and is not answering.
+> Not git, not ping (but maybe icmp ping is blocked).
 >
-> # yum-builddep samba
+> Please give it a kick, or provide some other hosting mirror?
+>
+>            Linus
 
-Hmmm, learn something new everyday.
 
-> That implies you have source repositories available (they'll be
-> automatically enabled for this specific operation) and it would pull
-> a list of packages required by the source package.
+
+--
+Thanks,
+
+Steve
+
 
 --=20
-Regards,
-Richard Sharpe
-(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
-=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
-=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
+Thanks,
+
+Steve
 
