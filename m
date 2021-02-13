@@ -2,63 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3EDC331A65D
-	for <lists+samba-technical@lfdr.de>; Fri, 12 Feb 2021 22:00:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C43D331AC73
+	for <lists+samba-technical@lfdr.de>; Sat, 13 Feb 2021 15:58:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=DtgY7E8LKIyUfIK5qpNlXvVVtBCgiyJCK26CFxun3RY=; b=cliWN7PnHXuDMdeu2MS180mY5A
-	w1ccJkEWgBXnxEasUI7HLHvVEM6iBiWmQ4naJenkxarus3kA+hNNeeK06GAfY0Wrdv6fd5lDCeW9/
-	WhkILnNlip3dJJ2P0FJL+46tRNJQK8EQmvY426wpRqQpmYSieLS4ncb+T3UR380WxDQO7r65IsCQE
-	Wc9Qvg1pb135WcumRzQxvjy5YEWSvJTEOdjAvsqofYrdPvtj800hGVvEbXUI0wdZHbaG04ItHzxXf
-	vs3HPOztneAHpkeW52thKOrR/BKoq2u9G40rI9WC7yKPJOwntnExfSSDK5gnntdjexOOe0msoWf93
-	tZcihrQQ==;
-Received: from ip6-localhost ([::1]:47182 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=1n/WBmFL7wH3aJ/A1XDR5Xb9QWxQCovm+4tMpoqpz4A=; b=zldFCyj5EUMwKqYrXCQTfeTEU9
+	rg5PjzZtMRQJyeJY1hcXI4Q3iqhQKYAM9pBsLLO+F374p/R1Ho1d0sPAJreT/Cf9hm1V1EWuit4tb
+	Mf+A99jwjoEQMNj/8iF7f8zcf/nL/af4MHgICxpfmLKPkLcRNr4EJ35ntbrTBBcvVcPKbxk76o5Mo
+	Ap1UkZKY3Nb9QpAwT96Jr488dorIvPha0fle8sSNxthVNhOlZ+xRJEk55hSDxlKs9qKXOGkbf+a+a
+	etOgonh6Qq1A03FeklMWYkvciXTRfTt2diSwXWUYHBt8LhijS1V5nD94ctdXJI3LOrZg2z5CkbK29
+	jl9PA2kg==;
+Received: from ip6-localhost ([::1]:54058 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lAfWx-00CS1b-K6; Fri, 12 Feb 2021 20:59:11 +0000
-Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136]:43540) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lAfWq-00CS1N-M0
- for samba-technical@lists.samba.org; Fri, 12 Feb 2021 20:59:07 +0000
-Received: by mail-lf1-x136.google.com with SMTP id d3so1335699lfg.10
- for <samba-technical@lists.samba.org>; Fri, 12 Feb 2021 12:59:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :content-transfer-encoding;
- bh=DtgY7E8LKIyUfIK5qpNlXvVVtBCgiyJCK26CFxun3RY=;
- b=a8LtrewE+8QMX2wV6psa+ThDQCOWjx2BGDlbNFCqzhGms3HpqKq0YrYQk2A8eVyR1V
- 9ozowSEl++hWe0+yjPNBFR8fLQvmTX8BUZEbBMZCm/Koigp8tOJcmQxrpstFJ/hRILmr
- d46ri2PmP5kxPqgZIF8cncMuYiPFhmjy5ey5om32NL9QSLUL1SOEVjFE4Ava8AsAzPfz
- hsmEMgVKqjP8mrnUGdSKzaq74NJWULl5AuaeJgHDCoS2L7OlnBdzb3jqrpYGnB5w5YVA
- vyE6o7n2XSpYorVj0IBvMHvHHpJhE5c9U+zCHcyYzIKEpK0H36Imzv/dticE/XZ1qTPh
- fCWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:content-transfer-encoding;
- bh=DtgY7E8LKIyUfIK5qpNlXvVVtBCgiyJCK26CFxun3RY=;
- b=Kz7h2C/aBwkdua9/CYGm2DmfAaz+3+5crbHiLo/CEXfJLiI0WEBIeQBWjRrbWwom+y
- 0zMZVPJsjMRHA37diuUUerpauYfzjku+IHd7nN2v/NaOAgiQcfmk4SPhMzLipPVJRMk+
- gaSMjIRHDBoi+1ibY3G/Mf2JVPOhi7EpwCKEBch13sFfq9AaYibOFknwztoINHxWqETJ
- 8DWWrGBiclWH2Qlf2Gbm1GiBdkLRZ2e/kPspqUsRmj/YAso6toHN6EfrrSvgqDnqBDod
- hzEvDg/cAi3wsicMau4zZahGqbidtBK1FD+w9lp0ZKlJh1wNGVba69husdnwFC+T4WeM
- XjUg==
-X-Gm-Message-State: AOAM5306BW5ZAsrBF+n1NK/cTYqN58F/YTbcpJ7O6bCxHxpcVOARH7jH
- pfQXRqRGYMGZpe1uubmMFJOUIJ0Z2zkFUk2o8viq6G0/UYs+Fw==
-X-Google-Smtp-Source: ABdhPJzQEd4H+BmNaS/kwmAEzur60a4b0W9ruhsTdiTFaiLe0TY8VXzZR2m+7kMD6N9xD8a3Cw/vpA/i6aL9KhYozvw=
-X-Received: by 2002:a05:6512:31c1:: with SMTP id
- j1mr2538588lfe.313.1613163543312; 
- Fri, 12 Feb 2021 12:59:03 -0800 (PST)
+	id 1lAwLq-00CUyb-Rx; Sat, 13 Feb 2021 14:56:50 +0000
+Received: from mail.kernel.org ([198.145.29.99]:48304) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1lAwLk-00CUyU-0d
+ for samba-technical@lists.samba.org; Sat, 13 Feb 2021 14:56:46 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A418064DE7
+ for <samba-technical@lists.samba.org>; Sat, 13 Feb 2021 14:56:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1613228198;
+ bh=0xdqdRFzbGrmy03gWLBiCqObAxiTvwlnCu2eKegsZy8=;
+ h=In-Reply-To:References:From:Date:Subject:To:Cc:From;
+ b=oOH/ZdJxhAuIPDMvOs7vZCcYDjzgAW1O4W6CoWMcgmKJHfmtVq2/1jyPGhf6iiBuH
+ icnyHhTcQ1BkwzdqvZBRKEUhU/g+3PchuPi74Zi9xswLxaGDZRk46q1OOUF2gMplzR
+ yL3Wr0EhspHCFl8UukeeCslCOfdk+89mB/9rzWHT0Kuku70FxIfuDoIShIyS/owztH
+ zjr2AwxC2tqLPFS/tUJHfcAJJWG0FouM8GV+9HooyJUbm3qxvPCKCakUYfDY/guko9
+ xrPOhoEvAK1oZUuD9Yhq/pjolqvb7++VhTNuZaRs6/1wL3AkAV/NJLeuWmlIA90nRa
+ NKf7hM2DZzTyw==
+Received: by mail-ot1-f46.google.com with SMTP id i20so2053355otl.7
+ for <samba-technical@lists.samba.org>; Sat, 13 Feb 2021 06:56:38 -0800 (PST)
+X-Gm-Message-State: AOAM532zCQmFu0NzIPb1I74chh7JOoGVp6DFdPVroR9AXpKaJeSgAK9u
+ W+k89jtLwk/+Z5um+QtwE19lHkwdSz3SEgYVRDo=
+X-Google-Smtp-Source: ABdhPJyWqY76r47SmKodt8q7v0eyULKAf5jzfPkeR73dmuaK4wvWzSgqi61MN8gUvCsRlQoKBSyObQqgk8Wa99DvjeI=
+X-Received: by 2002:a9d:5f12:: with SMTP id f18mr5733756oti.282.1613228197946; 
+ Sat, 13 Feb 2021 06:56:37 -0800 (PST)
 MIME-Version: 1.0
-References: <CAH2r5mtYEj+WLy+oPSXEwS5sZ8+TNk_dU3PVx3ieBz2DFS94Sg@mail.gmail.com>
- <CAHk-=wja1Y8r5UKrmXcMFrS=VPkTPbkyK-vt8B9MBkEU4+-WLw@mail.gmail.com>
- <CAH2r5mtj+-xGDy-YN0JwSJAsgvB+HpQFCBi-zdTNXTRBY_Mteg@mail.gmail.com>
-In-Reply-To: <CAH2r5mtj+-xGDy-YN0JwSJAsgvB+HpQFCBi-zdTNXTRBY_Mteg@mail.gmail.com>
-Date: Fri, 12 Feb 2021 14:58:50 -0600
-Message-ID: <CAH2r5msA8Odi04kV7tMd3bXzB5gapyNKn7HFUKC8Q1O=CgjD6A@mail.gmail.com>
-Subject: Fwd: [GIT PULL] cifs fixes
-To: samba-technical <samba-technical@lists.samba.org>
+Received: by 2002:ac9:13e5:0:0:0:0:0 with HTTP; Sat, 13 Feb 2021 06:56:37
+ -0800 (PST)
+In-Reply-To: <d776f655-f58d-6541-e30a-f10e5b9f0660@samba.org>
+References: <CGME20210126023109epcas1p257c4128a9d8673cb44f81dca636da39a@epcas1p2.samsung.com>
+ <20210126022335.27311-1-namjae.jeon@samsung.com>
+ <09887b1a-3303-9ac6-1d29-c53951be5324@samba.org>
+ <CAKYAXd-rfk26A4SOeqvhMkBV2FcvpE0goj415HX7T4fBim1zQA@mail.gmail.com>
+ <d776f655-f58d-6541-e30a-f10e5b9f0660@samba.org>
+Date: Sat, 13 Feb 2021 23:56:37 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd8ngEqRFfeQ9zmR5h4QWhg5=OoG=FM7QcuZiFP5wdn+xw@mail.gmail.com>
+Message-ID: <CAKYAXd8ngEqRFfeQ9zmR5h4QWhg5=OoG=FM7QcuZiFP5wdn+xw@mail.gmail.com>
+Subject: Re: [Linux-cifsd-devel] [PATCH] cifsd: make xattr format of ksmbd
+ compatible with samba's one
+To: Stefan Metzmacher <metze@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,54 +67,72 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Samba Technical <samba-technical@lists.samba.org>,
+ linux-cifsd-devel@lists.sourceforge.net
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-FYI - Looks like samba.org is still down ...
-
-fatal: unable to connect to git.samba.org:
-git.samba.org[0: 46.4.18.183]: errno=3DConnection timed out
-git.samba.org[1: 2a01:4f8:221:39d2::18:183]: errno=3DNetwork is unreachable
-
----------- Forwarded message ---------
-From: Steve French <smfrench@gmail.com>
-Date: Fri, Feb 12, 2021 at 2:39 PM
-Subject: Re: [GIT PULL] cifs fixes
-To: Linus Torvalds <torvalds@linux-foundation.org>, Stefan (metze)
-Metzmacher <metze@samba.org>, Bj=C3=B6rn JACKE <bjacke@samba.org>
-Cc: CIFS <linux-cifs@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>
-
-
-Metze/Bjorn,
-Linus is right - samba.org is down for me (I also verified with JRA).
-Any ETA on when it gets back up?
-
-On Fri, Feb 12, 2021 at 2:05 PM Linus Torvalds
-<torvalds@linux-foundation.org> wrote:
+> Hi Namjae,
+Hi Metze,
 >
-> On Fri, Feb 12, 2021 at 10:16 AM Steve French <smfrench@gmail.com> wrote:
-> >
-> >   git://git.samba.org/sfrench/cifs-2.6.git tags/5.11-rc7-smb3
+> I played with this today and found a few things.
+Great. Thanks for your check!
 >
-> It looks like git.samba.org is feeling very sick and is not answering.
-> Not git, not ping (but maybe icmp ping is blocked).
+>>>> Samba team request that ksmbd should make xattr format of ksmbd
+>>>> compatible
+>>>> with samba's one. When user replace samba with ksmbd or replace ksmbd
+>>>> with samba, The written attribute and ACLs of xattr in file should be
+>>>> used
+>>>> on both server. This patch work the following ones.
+>>>>  1. make xattr prefix compaible.
+>>>>     - rename creation.time and file.attribute to DOSATTRIB.
 >
-> Please give it a kick, or provide some other hosting mirror?
+> I just noticed that you use xattr_DosInfo3 instead of xattr_DosInfo4,
+> Samba uses xattr_DosInfo4, starting from samba-4.11.0, so all supported
+> Samba releases write xattr_DosInfo4. All versions from 3.5-4.10 wrote
+> xattr_DosInfo3. Versions before 3.5 only stored the hex-string.
 >
->            Linus
+> So it would be good to read hex-string-only, xattr_DosInfo3 and
+> xattr_DosInfo4 and write
+> xattr_DosInfo4.
+Okay, I will add xattr_DosInfo4 support. but I don't think that ksmbd
+support the structure of too old samba version.
+>
+>>>>     - rename stream. to DosStream.
+>
+> I noticed that "vfs objects = acl_xattr" is allowed,
+>
+> "vfs objects = streams_xattr acl_xattr" is not handled at all,
+> even acl_xattr isn't detected in that case.
+ksmbd supports it under a different name. It would be better to change
+it to the name used by samba.
+>
+>>>>     - rename sd. to NTACL.
+>
+> There seems to be a problem, when a new file inherits acls from the parent
+> directory. There I see a strange owner sid:
+Hm... I'll try to reproduce it when I go to office.
 
-
-
---
-Thanks,
-
-Steve
-
-
---=20
-Thanks,
-
-Steve
+Thanks!
+>
+>                         owner_sid                : *
+>                             owner_sid                : S-21-2276714256
+> and
+>
+> WARNING! 20 unread bytes
+> [0000] 00 00 00 00 00 00 00 00   00 00 00 00 00 00 00 00   ........
+> ........
+> [0010] 00 00 00 00
+>
+> I used this command to analyze this:
+>
+> getfattr -n security.NTACL WHATSNEW.txt | grep security.NTACL| sed -e
+> 's!security.NTACL=0s!!' | ndrdump --base64-input xattr xattr_NTACL struct
+> 2>&1 |less
+>
+> metze
+>
+>
 
