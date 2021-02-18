@@ -2,60 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAC9431E0C2
-	for <lists+samba-technical@lfdr.de>; Wed, 17 Feb 2021 21:48:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E5F231E823
+	for <lists+samba-technical@lfdr.de>; Thu, 18 Feb 2021 10:54:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=36J8v8GcH0x9Wqo2pW5kCC6+tAea+frYUujmEbPD8JY=; b=5GQyw3kq5bjBQ+PLw7r/f8ptYc
-	A7G53dHo6HudXBYhJInLsDIkvUepFuFwEQeCmn3qR0UrQ2GgyoMEi7t0RX6HTXW6BnIuKnpZ8XsZa
-	sWqTbOAdvxf/zPCfn9zIREUxSjruKDShb6ve5iON4piD+LjAkpSOsMA7xOYYjGQijFJ4pMyrOziVx
-	WdcTgpeZkmDoKo/75+FMxMBPY21eqxRiEqwt4Xj+8+dfAV9awibl0BkrNvybBPcjG28AL6XZKvcYA
-	4i40Jd5wajrNF7TYLIeoKL4UMId328QSyQCke/Q9mru+e5YS41QbDeaLzKzuayKkKm9P9NAFH6xKk
-	bJbXLkzg==;
-Received: from ip6-localhost ([::1]:18222 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=Cau/t9hQlTv4bqzrQ8aDbP8sz8es9Hiemsx07K+c55Y=; b=SUGSPuVO3NVMLA+DhV03GkquqC
+	Z1GcLzjjUqQNsU3sNbOdSG+chqNKmOq/WthhE1Q+dxRygMIpJsvEKILBOWxVFnb3/yNj+Df/1/Bw4
+	s+5a8J6MHyqsCWnZI0zUBCtkRDkuJKbL+OUOD0tZATz3pvQPI8zmX+fVgOc9m7ZEUnkukBc2OMJJV
+	65W8n5ps8FehkeS/lPzb2I5N0F/Q1aJXIzkB8P5NMhOW9cqeca4JRadwP4bD/Fo9CM/UFAl1J3emc
+	IXfCUsPC+f6dfuuy2kdKhucItWHcMZSnWz4RE0PfhQISrUPnpmqDBvLPuzcFI8MNssdp8AYzAMSy2
+	ittv8Wng==;
+Received: from ip6-localhost ([::1]:37674 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lCTjj-000U8o-4J; Wed, 17 Feb 2021 20:47:51 +0000
-Received: from mail-il1-x12b.google.com ([2607:f8b0:4864:20::12b]:39942) 
+	id 1lCg05-000YAg-6k; Thu, 18 Feb 2021 09:53:33 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56680) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lCTjd-000U8h-6Q
- for samba-technical@lists.samba.org; Wed, 17 Feb 2021 20:47:48 +0000
-Received: by mail-il1-x12b.google.com with SMTP id e7so12548824ile.7
- for <samba-technical@lists.samba.org>; Wed, 17 Feb 2021 12:47:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=36J8v8GcH0x9Wqo2pW5kCC6+tAea+frYUujmEbPD8JY=;
- b=EHG39DHe2zUwLnGbzMrWPQMvmSl8upXvtYlyQ9u9dlyfiiSuT2JC8ELoKzr6WpptkN
- 3JIsTo8q+IfvY4bHSOuyHNyxDfACJR4+sIpfwHk5JHgzBaQcSfJcBNqbR71A53xRIodv
- 3WFEbgruXKD1y2sQNNn6PYSwrU/Ldp5LpXuzKCJq1phqteLj/YC7dKiE/TMPteB3+dPI
- IYDH74sfRZpmCLblx01Ucss9/e2GFqDTHfqRURp0G04p3WEWBivyB8qWVvM92mhEdxIy
- yVKwYgIkehVQ7N/vVIcck0Yw/Vr4k+9SPgnJ+iXtfLOby+yEQrvMet2VzWRW470LuOjd
- WOIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=36J8v8GcH0x9Wqo2pW5kCC6+tAea+frYUujmEbPD8JY=;
- b=shqOlu7FVYabaWQ7PjndhoH342mCkbOjcxFlAro+cJgZJfZSQzWUwXVUKDABMUG35k
- GSsPM4odUJjbGPnm7cx7lVJcF9+yBSuNkxw/TJdWhky8r39Rw3IXEJkuKmJSf66HTQOY
- JlRHNLEasmXVsRQ0yzBjAVSghU9FDloQu7IGorUaFcIKfFAKWCCoKdceDajZoZi8z3fL
- 5FezD2Rae//MH3qvWlhuutkwmHcJKOVlD+lIeCvR8aD87e0S59RkzdxF3W1fQhVA6qHd
- JWEatrlrAT7jq92G7Mr5BKN0ZlXuLAzdNSytIRpzFWRyP1Vip0NP/63LebQyKV3meovT
- D5iQ==
-X-Gm-Message-State: AOAM532dqo6CGNprNoyN144BrsME6R5JjxdMY0/G9+trCD9+7Um9KZ7k
- dnCNQ51m21qqACXqBXqXPFynZA/ekehGRNoP4cw=
-X-Google-Smtp-Source: ABdhPJzYkAHI/b+3jQMEdQXB+iRBVamaK5rWR+tLyf4FlWaxVbdV7OF2k1+Ohh+hilknNdvyyqFx0zNjCFgMTzTsKE4=
-X-Received: by 2002:a05:6e02:8ab:: with SMTP id
- a11mr736193ilt.137.1613594863093; 
- Wed, 17 Feb 2021 12:47:43 -0800 (PST)
+ (Exim) id 1lCfzr-000YA0-7E; Thu, 18 Feb 2021 09:53:22 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=Cau/t9hQlTv4bqzrQ8aDbP8sz8es9Hiemsx07K+c55Y=; b=dSnS3mmC4vy8HtVpEk6YRYjCNU
+ 2m8CKpzKPdFjjWw2ryZnUJrrZ8oFd0zcX11IPIV8wonZ8TYLICMLn4XJyTNAAi8yp4A+wVZOHHy4M
+ fYjm/QJxO69zIlbpjj/FoytYUt2lzLcc+H0yNOxXLZJOzjqyVcBze932kYbDr2G1cGIOLZzuWS6jU
+ 0ASPzU2vKbud96ZUUAMo0wwzKwz+a2yGhrSVAs4LaamA0lZIL6t0SlV5qfvc5mTZ20MSBZa1UYEO2
+ UDte6TrxmbN1kOhiF3d3qiHTwvLFe6LfIpECopbUTtn+sBVr8o7m0CyS62sPWiUjYw3BIhXCVGUMl
+ MCgw/3i2XOqQkONAOu2thvuuNlHHNOyZWNp262vDpkVELg8R4wTpu7oHFCkwv9hM66zU0RiXkyqza
+ 824KA1kG5pOKJRioGVhpHsFs8W9/2vmMTDQN/s1I5Y/2Zvi4FKGGrkbkehZ942gJPUyV43PEVH3Yf
+ r1d7Sr2WLnovuQjhKk0Mmjek;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lCfzq-0007O8-K1; Thu, 18 Feb 2021 09:53:18 +0000
+Date: Thu, 18 Feb 2021 10:53:12 +0100
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.14.0rc3 Available for Download
+Message-ID: <20210218095309.GA11675@carrie2.fritz.box>
 MIME-Version: 1.0
-References: <CAOQ4uxii=7KUKv1w32VbjkwS+Z1a0ge0gezNzpn_BiY6MFWkpA@mail.gmail.com>
- <20210217172654.22519-1-lhenriques@suse.de>
-In-Reply-To: <20210217172654.22519-1-lhenriques@suse.de>
-Date: Wed, 17 Feb 2021 22:47:31 +0200
-Message-ID: <CAOQ4uxisQicRLso-i=5jWfAQX1kxSc=Bb9BaU5Wezs=QKbuciA@mail.gmail.com>
-Subject: Re: [PATCH v3] vfs: fix copy_file_range regression in cross-fs copies
-To: Luis Henriques <lhenriques@suse.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="6c2NcOVqGQ03X4Wi"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,171 +54,330 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Amir Goldstein via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Amir Goldstein <amir73il@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- Linux NFS Mailing List <linux-nfs@vger.kernel.org>,
- Nicolas Boichat <drinkcat@chromium.org>, Miklos Szeredi <miklos@szeredi.hu>,
- Greg KH <gregkh@linuxfoundation.org>,
- "Darrick J. Wong" <darrick.wong@oracle.com>, Jeff Layton <jlayton@kernel.org>,
- Ian Lance Taylor <iant@google.com>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Steve French <sfrench@samba.org>, Alexander Viro <viro@zeniv.linux.org.uk>,
- Dave Chinner <dchinner@redhat.com>,
- linux-fsdevel <linux-fsdevel@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- ceph-devel <ceph-devel@vger.kernel.org>, Luis Lozano <llozano@chromium.org>,
- Anna Schumaker <anna.schumaker@netapp.com>,
- linux-kernel <linux-kernel@vger.kernel.org>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Feb 17, 2021 at 7:25 PM Luis Henriques <lhenriques@suse.de> wrote:
->
-> A regression has been reported by Nicolas Boichat, found while using the
-> copy_file_range syscall to copy a tracefs file.  Before commit
-> 5dae222a5ff0 ("vfs: allow copy_file_range to copy across devices") the
-> kernel would return -EXDEV to userspace when trying to copy a file across
-> different filesystems.  After this commit, the syscall doesn't fail anymore
-> and instead returns zero (zero bytes copied), as this file's content is
-> generated on-the-fly and thus reports a size of zero.
->
-> This patch restores some cross-filesystems copy restrictions that existed
-> prior to commit 5dae222a5ff0 ("vfs: allow copy_file_range to copy across
-> devices").  It also introduces a flag (COPY_FILE_SPLICE) that can be used
-> by filesystems calling directly into the vfs copy_file_range to override
-> these restrictions.  Right now, only NFS needs to set this flag.
->
-> Fixes: 5dae222a5ff0 ("vfs: allow copy_file_range to copy across devices")
-> Link: https://lore.kernel.org/linux-fsdevel/20210212044405.4120619-1-drinkcat@chromium.org/
-> Link: https://lore.kernel.org/linux-fsdevel/CANMq1KDZuxir2LM5jOTm0xx+BnvW=ZmpsG47CyHFJwnw7zSX6Q@mail.gmail.com/
-> Link: https://lore.kernel.org/linux-fsdevel/20210126135012.1.If45b7cdc3ff707bc1efa17f5366057d60603c45f@changeid/
-> Reported-by: Nicolas Boichat <drinkcat@chromium.org>
-> Signed-off-by: Luis Henriques <lhenriques@suse.de>
-> ---
-> Ok, I've tried to address all the issues and comments.  Hopefully this v3
-> is a bit closer to the final fix.
->
-> Changes since v2
-> - do all the required checks earlier, in generic_copy_file_checks(),
->   adding new checks for ->remap_file_range
-> - new COPY_FILE_SPLICE flag
-> - don't remove filesystem's fallback to generic_copy_file_range()
-> - updated commit changelog (and subject)
-> Changes since v1 (after Amir review)
-> - restored do_copy_file_range() helper
-> - return -EOPNOTSUPP if fs doesn't implement CFR
-> - updated commit description
->
->  fs/nfsd/vfs.c      |  3 ++-
->  fs/read_write.c    | 44 +++++++++++++++++++++++++++++++++++++++++---
->  include/linux/fs.h |  7 +++++++
->  3 files changed, 50 insertions(+), 4 deletions(-)
->
-> diff --git a/fs/nfsd/vfs.c b/fs/nfsd/vfs.c
-> index 04937e51de56..14e55822c223 100644
-> --- a/fs/nfsd/vfs.c
-> +++ b/fs/nfsd/vfs.c
-> @@ -578,7 +578,8 @@ ssize_t nfsd_copy_file_range(struct file *src, u64 src_pos, struct file *dst,
->          * limit like this and pipeline multiple COPY requests.
->          */
->         count = min_t(u64, count, 1 << 22);
-> -       return vfs_copy_file_range(src, src_pos, dst, dst_pos, count, 0);
-> +       return vfs_copy_file_range(src, src_pos, dst, dst_pos, count,
-> +                                  COPY_FILE_SPLICE);
->  }
->
->  __be32 nfsd4_vfs_fallocate(struct svc_rqst *rqstp, struct svc_fh *fhp,
-> diff --git a/fs/read_write.c b/fs/read_write.c
-> index 75f764b43418..40a16003fb05 100644
-> --- a/fs/read_write.c
-> +++ b/fs/read_write.c
-> @@ -1410,6 +1410,33 @@ static ssize_t do_copy_file_range(struct file *file_in, loff_t pos_in,
->                                        flags);
->  }
->
-> +/*
-> + * This helper function checks whether copy_file_range can actually be used,
-> + * depending on the source and destination filesystems being the same.
-> + *
-> + * In-kernel callers may set COPY_FILE_SPLICE to override these checks.
-> + */
-> +static int fops_copy_file_checks(struct file *file_in, struct file *file_out,
-> +                                unsigned int flags)
-> +{
-> +       if (WARN_ON_ONCE(flags & ~COPY_FILE_SPLICE))
-> +               return -EINVAL;
-> +
-> +       if (flags & COPY_FILE_SPLICE)
-> +               return 0;
-> +       /*
-> +        * We got here from userspace, so forbid copies if copy_file_range isn't
-> +        * implemented or if we're doing a cross-fs copy.
-> +        */
 
-Suggest:
+--6c2NcOVqGQ03X4Wi
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-       if (!file_in->f_op->copy_file_range) {
-               if (file_in->f_op->copy_file_range !=
-                   file_out->f_op->copy_file_range)
-                   return -EXDEV;
-       } else if (file_in->f_op->remap_file_range) {
-               if (file_inode(file_in)->i_sb != file_inode(file_out)->i_sb)
-                    return -EXDEV;
-       } else {
-                return -EOPNOTSUPP;
-       }
+Release Announcements
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-       return 0;
-}
+This is the third release candidate of Samba 4.14.  This is *not*
+intended for production environments and is designed for testing
+purposes only.  Please report any defects via the Samba bug reporting
+system at https://bugzilla.samba.org/.
 
-> +
->  /*
->   * Performs necessary checks before doing a file copy
->   *
-> @@ -1427,6 +1454,14 @@ static int generic_copy_file_checks(struct file *file_in, loff_t pos_in,
->         loff_t size_in;
->         int ret;
->
-> +       /* Only check f_ops if we're not trying to clone */
-> +       if (!file_in->f_op->remap_file_range ||
-> +           (file_inode(file_in)->i_sb == file_inode(file_out)->i_sb)) {
-> +               ret = fops_copy_file_checks(file_in, file_out, flags);
-> +               if (ret)
-> +                       return ret;
-> +       }
-> +
+Samba 4.14 will be the next version of the Samba suite.
 
-and then you don't need this special casing of clone here.
 
->         ret = generic_file_rw_checks(file_in, file_out);
->         if (ret)
->                 return ret;
-> @@ -1474,9 +1509,6 @@ ssize_t vfs_copy_file_range(struct file *file_in, loff_t pos_in,
->  {
->         ssize_t ret;
->
-> -       if (flags != 0)
-> -               return -EINVAL;
-> -
->         ret = generic_copy_file_checks(file_in, pos_in, file_out, pos_out, &len,
->                                        flags);
->         if (unlikely(ret))
-> @@ -1511,6 +1543,9 @@ ssize_t vfs_copy_file_range(struct file *file_in, loff_t pos_in,
->                         ret = cloned;
->                         goto done;
->                 }
-> +               ret = fops_copy_file_checks(file_in, file_out, flags);
-> +               if (ret)
-> +                       return ret;
+UPGRADING
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-and you don't need this here (right?)
+New GPG key
+-----------
 
-and you can remove the checks for same i_sb and same copy_file_range
-op that were already tested from vfs_copy_file_range().
+The GPG release key for Samba releases changed from:
 
-Hope I am not missing anything.
+pub   dsa1024/6F33915B6568B7EA 2007-02-04 [SC] [expires: 2021-02-05]
+      Key fingerprint =3D 52FB C0B8 6D95 4B08 4332  4CDC 6F33 915B 6568 B7EA
+uid                 [  full  ] Samba Distribution Verification Key <samba-b=
+ugs@samba.org>
+sub   elg2048/9C6ED163DA6DFB44 2007-02-04 [E] [expires: 2021-02-05]
 
-Thanks,
-Amir.
+to the following new key:
+
+pub   rsa4096/AA99442FB680B620 2020-12-21 [SC] [expires: 2022-12-21]
+      Key fingerprint =3D 81F5 E283 2BD2 545A 1897  B713 AA99 442F B680 B620
+uid                 [ultimate] Samba Distribution Verification Key <samba-b=
+ugs@samba.org>
+sub   rsa4096/97EF9386FBFD4002 2020-12-21 [E] [expires: 2022-12-21]
+
+Starting from Jan 21th 2021, all Samba releases will be signed with the new=
+ key.
+
+See also GPG_AA99442FB680B620_replaces_6F33915B6568B7EA.txt
+
+
+NEW FEATURES/CHANGES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+Here is a copy of a clarification note added to the Samba code
+in the file: VFS-License-clarification.txt.
+--------------------------------------------------------------
+
+A clarification of our GNU GPL License enforcement boundary within the Samba
+Virtual File System (VFS) layer.
+
+Samba is licensed under the GNU GPL. All code committed to the Samba
+project or that creates a "modified version" or software "based on" Samba m=
+ust
+be either licensed under the GNU GPL or a compatible license.
+
+Samba has several plug-in interfaces where external code may be called
+=66rom Samba GNU GPL licensed code. The most important of these is the
+Samba VFS layer.
+
+Samba VFS modules are intimately connected by header files and API
+definitions to the part of the Samba code that provides file services,
+and as such, code that implements a plug-in Samba VFS module must be
+licensed under the GNU GPL or a compatible license.
+
+However, Samba VFS modules may themselves call third-party external
+libraries that are not part of the Samba project and are externally
+developed and maintained.
+
+As long as these third-party external libraries do not use any of the
+Samba internal structure, APIs or interface definitions created by the
+Samba project (to the extent that they would be considered subject to the G=
+NU
+GPL), then the Samba Team will not consider such third-party external
+libraries called from Samba VFS modules as "based on" and/or creating a
+"modified version" of the Samba code for the purposes of GNU GPL.
+Accordingly, we do not require such libraries be licensed under the GNU GPL
+or a GNU GPL compatible license.
+
+VFS
+---
+
+The effort to modernize Samba's VFS interface has reached a major milestone=
+ with
+the next release Samba 4.14.
+
+For details please refer to the documentation at source3/modules/The_New_VF=
+S.txt or
+visit the <https://wiki.samba.org/index.php/The_New_VFS>.
+
+Printing
+--------
+
+Publishing printers in AD is more reliable and more printer features are
+added to the published information in AD. Samba now also supports Windows
+drivers for the ARM64 architecture.
+
+
+Client Group Policy
+-------------------
+This release extends Samba to support Group Policy functionality for Winbind
+clients. Active Directory Administrators can set policies that apply Sudoers
+configuration, and cron jobs to run hourly, daily, weekly or monthly.
+
+To enable the application of Group Policies on a client, set the global
+smb.conf option 'apply group policies' to 'yes'. Policies are applied on an
+interval of every 90 minutes, plus a random offset between 0 and 30 minutes.
+
+Policies applied by Samba are 'non-tattooing', meaning that changes can be
+reverted by executing the `samba-gpupdate --unapply` command. Policies can =
+be
+re-applied using the `samba-gpupdate --force` command.
+To view what policies have been or will be applied to a system, use the
+`samba-gpupdate --rsop` command.
+
+Administration of Samba policy requires that a Samba ADMX template be uploa=
+ded
+to the SYSVOL share. The samba-tool command `samba-tool gpo admxload` is
+provided as a convenient method for adding this policy. Once uploaded, poli=
+cies
+can be modified in the Group Policy Management Editor under Computer
+Configuration/Policies/Administrative Templates. Alternatively, Samba policy
+may be managed using the `samba-tool gpo manage` command. This tool does not
+require the admx templates to be installed.
+
+
+Python 3.6 or later required
+----------------------------
+
+Samba's minimum runtime requirement for python was raised to Python
+3.6 with samba 4.13.  Samba 4.14 raises this minimum version to Python
+3.6 also to build Samba. It is no longer possible to build Samba
+(even just the file server) with Python versions 2.6 and 2.7.
+
+As Python 2.7 has been End Of Life upstream since April 2020, Samba
+is dropping ALL Python 2.x support in this release.
+
+
+NT4-like 'classic' Samba domain controllers
+-------------------------------------------
+
+Samba 4.13 deprecates Samba's original domain controller mode.
+
+Sites using Samba as a Domain Controller should upgrade from the
+NT4-like 'classic' Domain Controller to a Samba Active Directory DC
+to ensure full operation with modern windows clients.
+
+
+SMBv1 only protocol options deprecated
+--------------------------------------
+
+A number of smb.conf parameters for less-secure authentication methods
+which are only possible over SMBv1 are deprecated in this release.
+
+
+Miscellaneous samba-tool changes
+--------------------------------
+
+The samba-tool commands to manage AD objects (e.g. users, computers and
+groups) now consistently use the "add" command when adding a new object to
+the AD. The previous deprecation warnings when using the "add" commands
+have been removed. For compatibility reasons, both the "add" and "create"
+commands can be used now.
+
+Users, groups and contacts can now be renamed with the respective rename
+commands.
+
+Locked users can be unlocked with the new "samba-tool user unlock" command.
+
+The "samba-tool user list" and "samba-tool group listmembers" commands
+provide additional options to hide expired and disabled user accounts
+(--hide-expired and --hide-disabled).
+
+
+CTDB CHANGES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+* The NAT gateway and LVS features now uses the term "leader" to refer
+  to the main node in a group through which traffic is routed and
+  "follower" for other members of a group.  The command for
+  determining the leader has changed to "ctdb natgw leader" (from
+  "ctdb natgw master").  The configuration keyword for indicating that
+  a node can not be the leader of a group has changed to
+  "follower-only" (from "slave-only").  Identical changes were made
+  for LVS.
+
+* Remove "ctdb isnotrecmaster" command.  It isn't used by CTDB's
+  scripts and can be checked by users with "ctdb pnn" and "ctdb
+  recmaster".
+
+
+REMOVED FEATURES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The deprecated "ldap ssl ads" smb.conf option has been removed.
+
+
+smb.conf changes
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+  Parameter Name                     Description                Default
+  --------------                     -----------                -------
+  smb encrypt                        Removed
+  ldap ssl ads                       Removed
+  client plaintext auth              Deprecated                 no
+  client NTLMv2 auth                 Deprecated                 yes
+  client lanman auth                 Deprecated                 no
+  client use spnego                  Deprecated                 yes
+  domain logons                      Deprecated                 no
+  raw NTLMv2 auth                    Deprecated                 no
+  async dns timeout                  New                        10
+  client smb encrypt                 New                        default
+  honor change notify privilege      New                        No
+  smbd force process locks           New                        No
+  server smb encrypt                 New                        default
+
+
+CHANGES SINCE 4.14.0rc2
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+o  Bj=C3=B6rn Jacke <bj@sernet.de>
+   * BUG 14624: classicupgrade: Treat old never expires value right.
+
+o  Stefan Metzmacher <metze@samba.org>
+   * BUG 13898: s3:pysmbd: fix fd leak in py_smbd_create_file().
+
+o  Andreas Schneider <asn@samba.org>
+   * BUG 14625: Fix smbd share mode double free crash.
+
+o  Paul Wise <pabs3@bonedaddy.net>
+   * BUG 12505: HEIMDAL: krb5_storage_free(NULL) should work.
+
+
+CHANGES SINCE 4.14.0rc1
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+o  Jeremy Allison <jra@samba.org>
+   * BUG 13992: Fix SAMBA RPC share error.
+
+o  Ralph Boehme <slow@samba.org>
+   * BUG 14602: "winbind:ignore domains" doesn't prevent user login from tr=
+usted
+     domain.
+   * BUG 14617: smbd tries to delete files with wrong permissions (uses gue=
+st
+     instead of user from force user =3D).
+
+o  Stefan Metzmacher <metze@samba.org>
+   * BUG 14539: s3:idmap_hash: Reliably return ID_TYPE_BOTH.
+
+o  Andreas Schneider <asn@samba.org>
+   * BUG 14627: s3:smbd: Fix invalid memory access in
+     posix_sys_acl_blob_get_fd().
+
+
+KNOWN ISSUES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.14#Release_bl=
+ocking_bugs
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/rc/
+
+The release notes are available online at:
+
+        https://download.samba.org/pub/samba/rc/samba-4.14.0rc3.WHATSNEW.txt
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--6c2NcOVqGQ03X4Wi
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCYC45AwAKCRAoaL1+KxeT
+UeOeAJ9krwP7eoXh/YqhQ2uy8JMqBXzjjQCfXK/YCvbfChoBJ49KrWbofa2F3bE=
+=jueQ
+-----END PGP SIGNATURE-----
+
+--6c2NcOVqGQ03X4Wi--
 
