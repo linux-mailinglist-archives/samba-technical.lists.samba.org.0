@@ -2,45 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E5F231E823
-	for <lists+samba-technical@lfdr.de>; Thu, 18 Feb 2021 10:54:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A7C431F866
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Feb 2021 12:28:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=Cau/t9hQlTv4bqzrQ8aDbP8sz8es9Hiemsx07K+c55Y=; b=SUGSPuVO3NVMLA+DhV03GkquqC
-	Z1GcLzjjUqQNsU3sNbOdSG+chqNKmOq/WthhE1Q+dxRygMIpJsvEKILBOWxVFnb3/yNj+Df/1/Bw4
-	s+5a8J6MHyqsCWnZI0zUBCtkRDkuJKbL+OUOD0tZATz3pvQPI8zmX+fVgOc9m7ZEUnkukBc2OMJJV
-	65W8n5ps8FehkeS/lPzb2I5N0F/Q1aJXIzkB8P5NMhOW9cqeca4JRadwP4bD/Fo9CM/UFAl1J3emc
-	IXfCUsPC+f6dfuuy2kdKhucItWHcMZSnWz4RE0PfhQISrUPnpmqDBvLPuzcFI8MNssdp8AYzAMSy2
-	ittv8Wng==;
-Received: from ip6-localhost ([::1]:37674 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=E0PTur+wLehSfA+x2DPI0/q8bPKlsNFaLCcyfsrYS1Q=; b=v4EEbFOXWX+vMpc5N8zs+uo/W2
+	QcdsdSS8gTRgnNQP4ccYRET/1hkw9jIhNruxrp1tqjeqz6srTgPpJVtU22OiX/nGwX7uv97eO2SJW
+	pIIWX3imOsTuc85q96/FUnZpDxa7ILyYLkiYO9noHiz90UUym6+TQ7M8naoPlsbf/uMdsFso2/+h0
+	Z6MD6x+DX65WhtpA85nD5SG+sMzClGU0VsKyro2wkn1CgAF8NOvtm82BKdDNSx2oY++8CjJLesAdK
+	vO10Z8R6hUxBFmXBKzu+EJgAQzG13Ot9rcDFWZTXPiqhWaDDytilRHg105nM/2GD3vvbmw7nET+rr
+	hCyywLAg==;
+Received: from ip6-localhost ([::1]:34054 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lCg05-000YAg-6k; Thu, 18 Feb 2021 09:53:33 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56680) 
+	id 1lD3wH-000heW-IG; Fri, 19 Feb 2021 11:27:13 +0000
+Received: from mail-yb1-xb2e.google.com ([2607:f8b0:4864:20::b2e]:46107) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lCfzr-000YA0-7E; Thu, 18 Feb 2021 09:53:22 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=Cau/t9hQlTv4bqzrQ8aDbP8sz8es9Hiemsx07K+c55Y=; b=dSnS3mmC4vy8HtVpEk6YRYjCNU
- 2m8CKpzKPdFjjWw2ryZnUJrrZ8oFd0zcX11IPIV8wonZ8TYLICMLn4XJyTNAAi8yp4A+wVZOHHy4M
- fYjm/QJxO69zIlbpjj/FoytYUt2lzLcc+H0yNOxXLZJOzjqyVcBze932kYbDr2G1cGIOLZzuWS6jU
- 0ASPzU2vKbud96ZUUAMo0wwzKwz+a2yGhrSVAs4LaamA0lZIL6t0SlV5qfvc5mTZ20MSBZa1UYEO2
- UDte6TrxmbN1kOhiF3d3qiHTwvLFe6LfIpECopbUTtn+sBVr8o7m0CyS62sPWiUjYw3BIhXCVGUMl
- MCgw/3i2XOqQkONAOu2thvuuNlHHNOyZWNp262vDpkVELg8R4wTpu7oHFCkwv9hM66zU0RiXkyqza
- 824KA1kG5pOKJRioGVhpHsFs8W9/2vmMTDQN/s1I5Y/2Zvi4FKGGrkbkehZ942gJPUyV43PEVH3Yf
- r1d7Sr2WLnovuQjhKk0Mmjek;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1lCfzq-0007O8-K1; Thu, 18 Feb 2021 09:53:18 +0000
-Date: Thu, 18 Feb 2021 10:53:12 +0100
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.14.0rc3 Available for Download
-Message-ID: <20210218095309.GA11675@carrie2.fritz.box>
+ (Exim) id 1lD3wB-000heP-GV
+ for samba-technical@lists.samba.org; Fri, 19 Feb 2021 11:27:10 +0000
+Received: by mail-yb1-xb2e.google.com with SMTP id m188so5171706yba.13
+ for <samba-technical@lists.samba.org>; Fri, 19 Feb 2021 03:27:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=E0PTur+wLehSfA+x2DPI0/q8bPKlsNFaLCcyfsrYS1Q=;
+ b=Mx6bDkFSf7g3vdCwXtVCEfOBeTVZin8ohEPRWi0dL9yiRJQStENwwmbIIUFCoQdiAQ
+ UPVbd3DvxSfR7q7P9nn970zkJodrpaTrbqRo2gAEn2wKTnBg2nbHsekQqP8efaYUy144
+ u/+w9draj+VdihDTE4U+46sA1W7jopWPLlEo60AJBTRmBDghU1y4pNRD9fijrJWM1Wh/
+ SgvX0mXP6X8yeaWwu3KGPULhmFLZKXLCGjZ1cMfP4D4WsCpdsYgjs9abcbajQenrUWV0
+ s9QX9EiDv0dkIQk5pdzK+0omi8bKnXCIsodsv6ygFa/zbmgfWyFYFXvveUo2OHZdxXYB
+ Bm8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=E0PTur+wLehSfA+x2DPI0/q8bPKlsNFaLCcyfsrYS1Q=;
+ b=pDxS0PIZjcYUZLvSnVHktia+GPtn50U8htCIsa/KvhuabQsLrhAfkZqqv97Gv72j7X
+ mB3ddatSNG15skQT59SGHXTkDpO3PMjP5ZXks7cDULCn8G5EWYWMhZPagrjynVQnTEvP
+ al7Q2Zy4t9clGZffOoTHnSYV6JdnbiVF2RF2LMoCBC4RwdGoyA/Iv8ICoywVZdEhC+Rs
+ pCmKA+I0grCdqaB7/c4cIiLLhC+FLHntY+LiBC5AWQSMbTDi4/IVAg1ZyRVyQ5Hnh5Oj
+ Lw+LuCjIXy8lMMTCn5G7w07ekGt7tW5jMI7Y6qJEADgXD/uQ40WR6FKIkef/WER0u8EW
+ +fdg==
+X-Gm-Message-State: AOAM533PDlsyHSD5G4/x8azuM8hT8oySsLQXv5ySMrnpRgDbT62kBwkg
+ Aqi+09ZJV48y+adwuKFuEA69gAdQVIfUcHaEV6c=
+X-Google-Smtp-Source: ABdhPJz8P36n/lbEgI2emUzmyS4ynCGqPvrwfVL3ptXJJ3MYdUWY9JTo9XkLN8WJP4KIJev8T2hvpNjeIQRdTPTXfUc=
+X-Received: by 2002:a25:83cc:: with SMTP id v12mr13390634ybm.293.1613734024845; 
+ Fri, 19 Feb 2021 03:27:04 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="6c2NcOVqGQ03X4Wi"
-Content-Disposition: inline
-User-Agent: Mutt/1.9.4 (2018-02-28)
+References: <2e241ceaece6485289b1cddb84ec77ca@atos.net>
+ <04d24a21a7a462b3dc316959c3a3b1c8be8caac3.camel@redhat.com>
+ <e562d3fb430e4c87b0700a70267ef930@atos.net>
+In-Reply-To: <e562d3fb430e4c87b0700a70267ef930@atos.net>
+Date: Fri, 19 Feb 2021 03:26:53 -0800
+Message-ID: <CANT5p=rOJO6s7Ro9bQG4DN70m-=Eb4Ax9A+jJe7oBdj9Xm_EYQ@mail.gmail.com>
+Subject: Re: [gssproxy] Re: cifs-utils, Linux cifs kernel client and gssproxy
+To: "Weiser, Michael" <michael.weiser@atos.net>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,330 +71,343 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: kseeger@samba.org
+From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
+Cc: Steve French <smfrench@gmail.com>,
+ The GSS-Proxy developers and users mailing list
+ <gss-proxy@lists.fedorahosted.org>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ Simo Sorce <simo@redhat.com>,
+ "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-
---6c2NcOVqGQ03X4Wi
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Release Announcements
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-This is the third release candidate of Samba 4.14.  This is *not*
-intended for production environments and is designed for testing
-purposes only.  Please report any defects via the Samba bug reporting
-system at https://bugzilla.samba.org/.
-
-Samba 4.14 will be the next version of the Samba suite.
-
-
-UPGRADING
-=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-New GPG key
------------
-
-The GPG release key for Samba releases changed from:
-
-pub   dsa1024/6F33915B6568B7EA 2007-02-04 [SC] [expires: 2021-02-05]
-      Key fingerprint =3D 52FB C0B8 6D95 4B08 4332  4CDC 6F33 915B 6568 B7EA
-uid                 [  full  ] Samba Distribution Verification Key <samba-b=
-ugs@samba.org>
-sub   elg2048/9C6ED163DA6DFB44 2007-02-04 [E] [expires: 2021-02-05]
-
-to the following new key:
-
-pub   rsa4096/AA99442FB680B620 2020-12-21 [SC] [expires: 2022-12-21]
-      Key fingerprint =3D 81F5 E283 2BD2 545A 1897  B713 AA99 442F B680 B620
-uid                 [ultimate] Samba Distribution Verification Key <samba-b=
-ugs@samba.org>
-sub   rsa4096/97EF9386FBFD4002 2020-12-21 [E] [expires: 2022-12-21]
-
-Starting from Jan 21th 2021, all Samba releases will be signed with the new=
- key.
-
-See also GPG_AA99442FB680B620_replaces_6F33915B6568B7EA.txt
-
-
-NEW FEATURES/CHANGES
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-Here is a copy of a clarification note added to the Samba code
-in the file: VFS-License-clarification.txt.
---------------------------------------------------------------
-
-A clarification of our GNU GPL License enforcement boundary within the Samba
-Virtual File System (VFS) layer.
-
-Samba is licensed under the GNU GPL. All code committed to the Samba
-project or that creates a "modified version" or software "based on" Samba m=
-ust
-be either licensed under the GNU GPL or a compatible license.
-
-Samba has several plug-in interfaces where external code may be called
-=66rom Samba GNU GPL licensed code. The most important of these is the
-Samba VFS layer.
-
-Samba VFS modules are intimately connected by header files and API
-definitions to the part of the Samba code that provides file services,
-and as such, code that implements a plug-in Samba VFS module must be
-licensed under the GNU GPL or a compatible license.
-
-However, Samba VFS modules may themselves call third-party external
-libraries that are not part of the Samba project and are externally
-developed and maintained.
-
-As long as these third-party external libraries do not use any of the
-Samba internal structure, APIs or interface definitions created by the
-Samba project (to the extent that they would be considered subject to the G=
-NU
-GPL), then the Samba Team will not consider such third-party external
-libraries called from Samba VFS modules as "based on" and/or creating a
-"modified version" of the Samba code for the purposes of GNU GPL.
-Accordingly, we do not require such libraries be licensed under the GNU GPL
-or a GNU GPL compatible license.
-
-VFS
----
-
-The effort to modernize Samba's VFS interface has reached a major milestone=
- with
-the next release Samba 4.14.
-
-For details please refer to the documentation at source3/modules/The_New_VF=
-S.txt or
-visit the <https://wiki.samba.org/index.php/The_New_VFS>.
-
-Printing
---------
-
-Publishing printers in AD is more reliable and more printer features are
-added to the published information in AD. Samba now also supports Windows
-drivers for the ARM64 architecture.
-
-
-Client Group Policy
--------------------
-This release extends Samba to support Group Policy functionality for Winbind
-clients. Active Directory Administrators can set policies that apply Sudoers
-configuration, and cron jobs to run hourly, daily, weekly or monthly.
-
-To enable the application of Group Policies on a client, set the global
-smb.conf option 'apply group policies' to 'yes'. Policies are applied on an
-interval of every 90 minutes, plus a random offset between 0 and 30 minutes.
-
-Policies applied by Samba are 'non-tattooing', meaning that changes can be
-reverted by executing the `samba-gpupdate --unapply` command. Policies can =
-be
-re-applied using the `samba-gpupdate --force` command.
-To view what policies have been or will be applied to a system, use the
-`samba-gpupdate --rsop` command.
-
-Administration of Samba policy requires that a Samba ADMX template be uploa=
-ded
-to the SYSVOL share. The samba-tool command `samba-tool gpo admxload` is
-provided as a convenient method for adding this policy. Once uploaded, poli=
-cies
-can be modified in the Group Policy Management Editor under Computer
-Configuration/Policies/Administrative Templates. Alternatively, Samba policy
-may be managed using the `samba-tool gpo manage` command. This tool does not
-require the admx templates to be installed.
-
-
-Python 3.6 or later required
-----------------------------
-
-Samba's minimum runtime requirement for python was raised to Python
-3.6 with samba 4.13.  Samba 4.14 raises this minimum version to Python
-3.6 also to build Samba. It is no longer possible to build Samba
-(even just the file server) with Python versions 2.6 and 2.7.
-
-As Python 2.7 has been End Of Life upstream since April 2020, Samba
-is dropping ALL Python 2.x support in this release.
-
-
-NT4-like 'classic' Samba domain controllers
--------------------------------------------
-
-Samba 4.13 deprecates Samba's original domain controller mode.
-
-Sites using Samba as a Domain Controller should upgrade from the
-NT4-like 'classic' Domain Controller to a Samba Active Directory DC
-to ensure full operation with modern windows clients.
-
-
-SMBv1 only protocol options deprecated
---------------------------------------
-
-A number of smb.conf parameters for less-secure authentication methods
-which are only possible over SMBv1 are deprecated in this release.
-
-
-Miscellaneous samba-tool changes
---------------------------------
-
-The samba-tool commands to manage AD objects (e.g. users, computers and
-groups) now consistently use the "add" command when adding a new object to
-the AD. The previous deprecation warnings when using the "add" commands
-have been removed. For compatibility reasons, both the "add" and "create"
-commands can be used now.
-
-Users, groups and contacts can now be renamed with the respective rename
-commands.
-
-Locked users can be unlocked with the new "samba-tool user unlock" command.
-
-The "samba-tool user list" and "samba-tool group listmembers" commands
-provide additional options to hide expired and disabled user accounts
-(--hide-expired and --hide-disabled).
-
-
-CTDB CHANGES
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-* The NAT gateway and LVS features now uses the term "leader" to refer
-  to the main node in a group through which traffic is routed and
-  "follower" for other members of a group.  The command for
-  determining the leader has changed to "ctdb natgw leader" (from
-  "ctdb natgw master").  The configuration keyword for indicating that
-  a node can not be the leader of a group has changed to
-  "follower-only" (from "slave-only").  Identical changes were made
-  for LVS.
-
-* Remove "ctdb isnotrecmaster" command.  It isn't used by CTDB's
-  scripts and can be checked by users with "ctdb pnn" and "ctdb
-  recmaster".
-
-
-REMOVED FEATURES
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-The deprecated "ldap ssl ads" smb.conf option has been removed.
-
-
-smb.conf changes
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-  Parameter Name                     Description                Default
-  --------------                     -----------                -------
-  smb encrypt                        Removed
-  ldap ssl ads                       Removed
-  client plaintext auth              Deprecated                 no
-  client NTLMv2 auth                 Deprecated                 yes
-  client lanman auth                 Deprecated                 no
-  client use spnego                  Deprecated                 yes
-  domain logons                      Deprecated                 no
-  raw NTLMv2 auth                    Deprecated                 no
-  async dns timeout                  New                        10
-  client smb encrypt                 New                        default
-  honor change notify privilege      New                        No
-  smbd force process locks           New                        No
-  server smb encrypt                 New                        default
-
-
-CHANGES SINCE 4.14.0rc2
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-o  Bj=C3=B6rn Jacke <bj@sernet.de>
-   * BUG 14624: classicupgrade: Treat old never expires value right.
-
-o  Stefan Metzmacher <metze@samba.org>
-   * BUG 13898: s3:pysmbd: fix fd leak in py_smbd_create_file().
-
-o  Andreas Schneider <asn@samba.org>
-   * BUG 14625: Fix smbd share mode double free crash.
-
-o  Paul Wise <pabs3@bonedaddy.net>
-   * BUG 12505: HEIMDAL: krb5_storage_free(NULL) should work.
-
-
-CHANGES SINCE 4.14.0rc1
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-o  Jeremy Allison <jra@samba.org>
-   * BUG 13992: Fix SAMBA RPC share error.
-
-o  Ralph Boehme <slow@samba.org>
-   * BUG 14602: "winbind:ignore domains" doesn't prevent user login from tr=
-usted
-     domain.
-   * BUG 14617: smbd tries to delete files with wrong permissions (uses gue=
-st
-     instead of user from force user =3D).
-
-o  Stefan Metzmacher <metze@samba.org>
-   * BUG 14539: s3:idmap_hash: Reliably return ID_TYPE_BOTH.
-
-o  Andreas Schneider <asn@samba.org>
-   * BUG 14627: s3:smbd: Fix invalid memory access in
-     posix_sys_acl_blob_get_fd().
-
-
-KNOWN ISSUES
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.14#Release_bl=
-ocking_bugs
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=3D=3D Our Code, Our Bugs, Our Responsibility.
-=3D=3D The Samba Team
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Download Details
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-=66rom:
-
-        https://download.samba.org/pub/samba/rc/
-
-The release notes are available online at:
-
-        https://download.samba.org/pub/samba/rc/samba-4.14.0rc3.WHATSNEW.txt
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                        --Enjoy
-                        The Samba Team
-
---6c2NcOVqGQ03X4Wi
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCYC45AwAKCRAoaL1+KxeT
-UeOeAJ9krwP7eoXh/YqhQ2uy8JMqBXzjjQCfXK/YCvbfChoBJ49KrWbofa2F3bE=
-=jueQ
------END PGP SIGNATURE-----
-
---6c2NcOVqGQ03X4Wi--
+Hi Michael,
+
+What happens when credentials are not supplied in keytab files? Is
+there a way to supply the credentials from other sources in that case?
+The reason why I'm asking this is that this same code can be used by
+cifscreds (or a new executable) to perform the authentication, and
+collect the krb5 tickets.
+
+Also, in the cifs.upcall changes, you could check for the
+GSS_USE_PROXY env variable. In the absence of which, fallback to the
+older code. If that is done, it gives the user an option to go for one
+option or the other.
+Other than that, the changes look fine to me.
+
+Regards,
+Shyam
+
+On Thu, Jan 7, 2021 at 3:08 AM Weiser, Michael <michael.weiser@atos.net> wr=
+ote:
+>
+> Hello Simo,
+> Hello Steve,
+>
+> > If something is needed in the short term, I thjink the quickest course
+> > of action is indeed to change the userspace helper to use gssapi
+> > function calls, so that they can be intercepted like we do for rpc.gssd
+> > (nfs client's userspace helper).
+>
+> To get the ball rolling and give people (including myself and client) som=
+ething to play with I went that route and extended cifs.upcall to fall back=
+ to GSS-API if no ticket cache nor keytab can be found for the user. An unp=
+olished PoC patch is attached. (Sorry, for not putting it inline, have to r=
+ock the groupware at work. I will try to sort that once we've agreed this i=
+s the/a way to go.)
+>
+> With that patch applied,  I can do a multiuser cifs mount using the syste=
+m keytab and machine identity as usual and then have users access the mount=
+ using impersonated credentials from gssproxy. Quick demo:
+>
+> [root@fedora33 ~]# umount /mnt
+> [root@fedora33 ~]# mount -o sec=3Dkrb5,multiuser,user=3DFEDORA33\$ //dc/s=
+hare /mnt
+> [root@fedora33 ~]# ls -la /mnt
+> total 0
+> drwxr-xr-x.  2 root root   0 Jan  7 10:20 .
+> dr-xr-xr-x. 18 root root 238 Jan  6 13:59 ..
+> -rwxr-xr-x.  1 root root   0 Jan  5 17:02 bar
+> [root@fedora33 ~]# klist
+> klist: Credentials cache keyring 'persistent:0:krb_ccache_WZh7W8n' not fo=
+und
+> [root@fedora33 ~]#
+>
+> [adsuser@fedora33 ~]$ kdestroy
+> [adsuser@fedora33 ~]$ echo test > /mnt/test
+> [adsuser@fedora33 ~]$ cat /mnt/test
+> test
+> [adsuser@fedora33 ~]$ klist
+> klist: Credentials cache keyring 'persistent:1618201110:krb_ccache_SrGqT3=
+F' not found
+> [adsuser@fedora33 ~]$
+>
+> Server-side permissions are enforced:
+>
+> [m@fedora33 ~]$ cat /mnt/test
+> test
+> [m@fedora33 ~]$ echo mytest > /mnt/test
+> -bash: /mnt/test: Permission denied
+> [m@fedora33 ~]$ klist
+> klist: Credentials cache keyring 'persistent:1000:1000' not found
+> [m@fedora33 ~]$
+>
+> The gssproxy config for this configures a cifs-specific socket and enable=
+s impersonation for any user id:
+>
+> [root@fedora33 ~]# cat /etc/gssproxy/99-cifs.conf
+> [service/cifs]
+> mechs =3D krb5
+> socket =3D /var/lib/gssproxy/cifs.sock
+> cred_store =3D keytab:/etc/krb5.keytab
+> cred_usage =3D initiate
+> euid =3D 0
+> impersonate =3D yes
+> allow_any_uid =3D yes
+>
+> And request-key config for cifs.spnego enables use of gssproxy and the se=
+rvice-specific socket through environment variables:
+>
+> [root@fedora33 ~]# cat /etc/request-key.d/cifs.spnego.conf
+> create  cifs.spnego    * *  /usr/bin/env GSS_USE_PROXY=3Dyes GSSPROXY_SOC=
+KET=3D/var/lib/gssproxy/cifs.sock /usr/sbin/cifs.upcall %k
+>
+> (I see that nfs-utils' gssd does the same by setting the variables itself=
+ based on command line options. That could easily be done here as well.)
+>
+> User FEDORA33$ (the computer object) needs to be enabled for delegation t=
+o service cifs. I've tested with a Fedora 33 client and Windows 2016 Active=
+ Directory server.
+>
+> The patch is against current cifs-utils HEAD. It is lacking all the autoc=
+onf trimmings and intentionally forgoes reindents of existing code for clar=
+ity of what's being touched.
+>
+> What do you think?
+>
+> > Unfortunately I do not have the cycles to work on that myself at this
+> > time :-(
+>
+> I have a client in very tangible need of this functionality who is a RedH=
+at customer. Would it be helpful if they were to open a case with Redhat on=
+ this?
+>
+> As an extension the above (but not to distract from the focus of getting =
+something to work at all first):
+>
+> I rather accidentally also played around with delegating retrieval of the=
+ mount credentials into gssproxy as well (due to not realising that usernam=
+e=3DFEDORA33$ would just activate the keytab codepath in cifs.upcall).
+>
+> This can be done by leaving out the username from the mount command, mark=
+ing euid 0 as trusted for access to the keytab in gssproxy and adding a fal=
+lback principal to the gssproxy config (because cifs.upcall in this case do=
+es not submit a desired name for the credential):
+>
+> [root@fedora33 ~]# mount -o sec=3Dkrb5,multiuser //dc/share /mnt
+> [root@fedora33 ~]# cat /etc/gssproxy/99-cifs.conf
+> [service/cifs]
+> mechs =3D krb5
+> socket =3D /var/lib/gssproxy/cifs.sock
+> cred_store =3D keytab:/etc/krb5.keytab
+> cred_usage =3D initiate
+> euid =3D 0
+> trusted =3D yes
+> impersonate =3D yes
+> krb5_principal =3D cifs-mount
+> allow_any_uid =3D yes
+>
+> While this works, it requires a separate user who would then carefully ne=
+ed to be kept out of any sensitive file access groups.
+>
+> When trying to use the machine identity FEDORA33$ instead, I ran into a p=
+eculiar error from the AD KDC:
+>
+> [root@fedora33 ~]# cat /etc/gssproxy/99-cifs.conf
+> [service/cifs]
+> mechs =3D krb5
+> socket =3D /var/lib/gssproxy/cifs.sock
+> cred_store =3D keytab:/etc/krb5.keytab
+> cred_usage =3D initiate
+> euid =3D 0
+> trusted =3D yes
+> impersonate =3D yes
+> krb5_principal =3D FEDORA33$
+> allow_any_uid =3D yes
+> [root@fedora33 ~]# gssproxy -i -d &
+> [2] 3814
+> [root@fedora33 ~]# [2021/01/07 10:01:10]: Debug Enabled (level: 1)
+> [2021/01/07 10:01:10]: Service: nfs-server, Keytab: /etc/krb5.keytab, Enc=
+type: 17
+> [2021/01/07 10:01:10]: Service: cifs, Keytab: /etc/krb5.keytab, Enctype: =
+17
+> [2021/01/07 10:01:10]: Service: nfs-client, Keytab: /etc/krb5.keytab, Enc=
+type: 17
+> [2021/01/07 10:01:10]: Client [2021/01/07 10:01:10]: (/usr/sbin/gssproxy)=
+ [2021/01/07 10:01:10]:  connected (fd =3D 11)[2021/01/07 10:01:10]:  (pid =
+=3D 3814) (uid =3D 0) (gid =3D 0)[2021/01/07 10:01:10]:  (context =3D syste=
+m_u:system_r:kernel_t:s0)[2021/01/07 10:01:10]:
+>
+> [root@fedora33 ~]# mount -o sec=3Dkrb5,multiuser //dc/share /mnt
+> [2021/01/07 10:01:13]: Client [2021/01/07 10:01:13]: (/usr/sbin/cifs.upca=
+ll) [2021/01/07 10:01:13]:  connected (fd =3D 12)[2021/01/07 10:01:13]:  (p=
+id =3D 3824) (uid =3D 0) (gid =3D 0)[2021/01/07 10:01:13]:  (context =3D sy=
+stem_u:system_r:kernel_t:s0)[2021/01/07 10:01:13]:
+> [CID 12][2021/01/07 10:01:13]: gp_rpc_execute: executing 6 (GSSX_ACQUIRE_=
+CRED) for service "cifs", euid: 0,socket: /var/lib/gssproxy/cifs.sock
+> gssproxy[3814]: (OID: { 1 2 840 113554 1 2 2 }) Unspecified GSS failure. =
+ Minor code may provide more information, KDC has no support for padata typ=
+e
+> [CID 12][2021/01/07 10:01:13]: gp_rpc_execute: executing 8 (GSSX_INIT_SEC=
+_CONTEXT) for service "cifs", euid: 0,socket: /var/lib/gssproxy/cifs.sock
+> gssproxy[3814]: (OID: { 1 2 840 113554 1 2 2 }) Unspecified GSS failure. =
+ Minor code may provide more information, KDC has no support for padata typ=
+e
+> [CID 12][2021/01/07 10:01:13]: gp_rpc_execute: executing 6 (GSSX_ACQUIRE_=
+CRED) for service "cifs", euid: 0,socket: /var/lib/gssproxy/cifs.sock
+> gssproxy[3814]: (OID: { 1 2 840 113554 1 2 2 }) Unspecified GSS failure. =
+ Minor code may provide more information, KDC has no support for padata typ=
+e
+> [CID 12][2021/01/07 10:01:13]: gp_rpc_execute: executing 8 (GSSX_INIT_SEC=
+_CONTEXT) for service "cifs", euid: 0,socket: /var/lib/gssproxy/cifs.sock
+> gssproxy[3814]: (OID: { 1 2 840 113554 1 2 2 }) Unspecified GSS failure. =
+ Minor code may provide more information, KDC has no support for padata typ=
+e
+> mount error(126): Required key not available
+> Refer to the mount.cifs(8) manual page (e.g. man mount.cifs) and kernel l=
+og messages (dmesg)
+>
+> With more debugging it appears that gssproxy tries to impersonate user FE=
+DORA33$ with a credential which is also for FEDORA33$. After further testin=
+g it seems this is generally not allowed or just not working due to never b=
+eing tested because it is unnecessary: If we can acquire a impersonation cr=
+edential for that identity we should also be able to get the actual access =
+credential as well.
+>
+> From looking at the nfs-utils gssd code it appears the only reason it has=
+n't run into this case yet is because it handles the machine credentials it=
+self using krb5 functions.
+>
+> The second attached patch against current gssproxy HEAD adds that distinc=
+tion and makes this case work as an optional extension with fallback into t=
+he default codepath on error.
+>
+> Does that make sense?
+> Is it sane, security wise, do you think?
+> --
+> Thanks,
+> Michael
+> ________________________________________
+> From: Simo Sorce <simo@redhat.com>
+> Sent: 16 December 2020 15:31:40
+> To: The GSS-Proxy developers and users mailing list; linux-cifs@vger.kern=
+el.org
+> Cc: samba-technical@lists.samba.org
+> Subject: [gssproxy] Re: cifs-utils, Linux cifs kernel client and gssproxy
+>
+> Caution! External email. Do not open attachments or click links, unless t=
+his email comes from a known sender and you know the content is safe.
+>
+> Hi Michael,
+> as you say the best course of action would be for cifs.ko to move to
+> use the RPC interface we defined for knfsd (with any extensions that
+> may  be needed), and we had discussions in the past with cifs upstream
+> developers about it. But nothing really materialized.
+>
+> If something is needed in the short term, I thjink the quickest course
+> of action is indeed to change the userspace helper to use gssapi
+> function calls, so that they can be intercepted like we do for rpc.gssd
+> (nfs client's userspace helper).
+>
+> Unfortunately I do not have the cycles to work on that myself at this
+> time :-(
+>
+> HTH,
+> Simo.
+>
+> On Wed, 2020-12-16 at 10:01 +0000, Weiser, Michael wrote:
+> > Hello,
+> >
+> > I have a use-case for authentication of Linux cifs client mounts withou=
+t the user being present (e.g. from batch jobs) using gssproxy's impersonat=
+ion feature with Kerberos Constrained Delegation similar to how it can be d=
+one for NFS[1].
+> >
+> > My understanding is that currently neither the Linux cifs kernel client=
+ nor cifs-utils userland tools support acquiring credentials using gssproxy=
+. The former uses a custom upcall interface to talk to cifs.spnego from cif=
+s-utils. The latter then goes looking for Kerberos ticket caches using libk=
+rb5 functions, not GSSAPI, which prevents gssproxy from interacting with it=
+.[2]
+> >
+> > From what I understand, the preferred method would be to switch the Lin=
+ux kernel client upcall to the RPC protocol defined by gssproxy[3] (as has =
+been done for the Linux kernel NFS server already replacing rpc.svcgssd[4])=
+. The kernel could then, at least optionally, talk to gssproxy directly to =
+try and obtain credentials.
+> >
+> > Failing that, cifs-utils' cifs.spnego could be switched to GSSAPI so th=
+at gssproxy's interposer plugin could intercept GSSAPI calls and provide th=
+em with the required credentials (similar to the NFS client rpc.gssd[5]).
+> >
+> > Assuming my understanding is correct so far:
+> >
+> > Is anyone doing any work on this and could use some help (testing, codi=
+ng)?
+> > What would be expected complexity and possible roadblocks when trying t=
+o make a start at implementing this?
+> > Or is the idea moot due to some constraint or recent development I'm no=
+t aware of?
+> >
+> > I have found a recent discussion of the topic on linux-cifs[6] which pr=
+ovided no definite answer though.
+> >
+> > As a crude attempt at an explicit userspace workaround I tried but fail=
+ed to trick smbclient into initialising a ticket cache using gssproxy for c=
+ifs.spnego to find later on.
+> > Is this something that could be implemented without too much redundant =
+effort (or should already work, perhaps using a different tool)?
+> >
+> > [1] https://github.com/gssapi/gssproxy/blob/main/docs/NFS.md#user-imper=
+sonation-via-constrained-delegation
+> > [2] https://pagure.io/gssproxy/issue/56
+> > [3] https://github.com/gssapi/gssproxy/blob/main/docs/ProtocolDocumenta=
+tion.md
+> > [4] https://github.com/gssapi/gssproxy/blob/main/docs/NFS.md#nfs-server
+> > [5] https://github.com/gssapi/gssproxy/blob/main/docs/NFS.md#nfs-client
+> > [6] https://www.spinics.net/lists/linux-cifs/msg20182.html
+> > --
+> > Thanks,
+> > Michael
+> > _______________________________________________
+> > gss-proxy mailing list -- gss-proxy@lists.fedorahosted.org
+> > To unsubscribe send an email to gss-proxy-leave@lists.fedorahosted.org
+> > Fedora Code of Conduct: https://docs.fedoraproject.org/en-US/project/co=
+de-of-conduct/
+> > List Guidelines: https://fedoraproject.org/wiki/Mailing_list_guidelines
+> > List Archives: https://lists.fedorahosted.org/archives/list/gss-proxy@l=
+ists.fedorahosted.org
+>
+> --
+> Simo Sorce
+> RHEL Crypto Team
+> Red Hat, Inc
+>
+>
+>
+> _______________________________________________
+> gss-proxy mailing list -- gss-proxy@lists.fedorahosted.org
+> To unsubscribe send an email to gss-proxy-leave@lists.fedorahosted.org
+> Fedora Code of Conduct: https://docs.fedoraproject.org/en-US/project/code=
+-of-conduct/
+> List Guidelines: https://fedoraproject.org/wiki/Mailing_list_guidelines
+> List Archives: https://lists.fedorahosted.org/archives/list/gss-proxy@lis=
+ts.fedorahosted.org
+
+
+
+--=20
+Regards,
+Shyam
 
