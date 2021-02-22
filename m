@@ -2,49 +2,117 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E75C132167D
-	for <lists+samba-technical@lfdr.de>; Mon, 22 Feb 2021 13:24:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8024D321A83
+	for <lists+samba-technical@lfdr.de>; Mon, 22 Feb 2021 15:47:50 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=lYiFjxwR39IDE/QgDw8s7AA6CMyGnpfP1RaAcaCxFso=; b=W8D3GTghA+2SeTrtbXZlPq8x+W
-	p/60VTb96E7Osz39GdoXVSVgKkoDJW2/a2EppXO3BeynF6RWt4F4iGCuA8yC8TpP9qY3aVh0EuhY0
-	cs+wx0r6iQStwrP+P6lrxYJSV9SQK7EihoTh1vsxYOhunbKnbx3E2wdmByCCSebRxwlT02Mz5gVcs
-	U9U3gSPdYN6qVq5EE+NkXk93/aUEEZEg5AdEuRgQtlVACYHbblP0q4z2Hxyjnn73OSD2VUP7kJOlw
-	V/LMgL+GwyV6L5Ox+EOZpCqF6ZRummwXAeS5VQiwR0Kps/KVZWP9tOBJgBWDidLsW3XliRRRqVOa2
-	j1aYM0Mw==;
-Received: from ip6-localhost ([::1]:29152 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Eb0O8ez8J7CNL9OOFJNiImBs+4moKeiulaforjr/zuk=; b=ZPDdhkFlrxNwtXQTMVJqB2xYp3
+	cxVm3whJyRXziWj0eyfs5QZWo2VARMnTtE4hYbd01Len3sxdRCgoFhgrgABD2Cy5Taty6JljvSmtL
+	oFFjJuO1tsFiEtRrXB/mgmQp8kuCiBBAgZ8V3e88iI/pzS/tEOrSb2bztsZoQIWJe7WuDONuKDEZT
+	i05NColmf6aghXsO+ZYQe9fVS74fGl8v/bbwbBrFPJtLGa5LJgzHFO22B81iF9IiAcAS7g22bMPb3
+	lxEECT1WBHSXZcMgLHDDzWu9LivN4PgvlFuMMJXVyXGOxhuTWcLzBML9Ji2lkThY9m080CsDR/D+l
+	9KRuuJkg==;
+Received: from ip6-localhost ([::1]:41120 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lEAFm-000tQk-6Q; Mon, 22 Feb 2021 12:23:54 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37872) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lEAFg-000tQd-2V
- for samba-technical@lists.samba.org; Mon, 22 Feb 2021 12:23:50 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=lYiFjxwR39IDE/QgDw8s7AA6CMyGnpfP1RaAcaCxFso=; b=sSRjcJEgps/xKe7UVnGqqueh95
- PKcRaSzuVxRXBcVhkftFYPBKVtYKdloyLKFObOP6EDYjGYWnZ1RZEfT/DkW2KE9j04J6RilHUXO7L
- nDzuVKFZCqcPr7hTs14Fky9hqrhtF0cffRYVtSLUyXYrPyyOEv58BhU2sfAVJ/bS5x2PpoCvkbXr9
- P6dOyvsuB5ldh4D9UWcZJc7JKo4eOR0WtnEVttPAzLKrneG/YWn0RgTlV/7/uLA2ZxIEgkxkXyTUz
- hBw7p3K24uQ3VdS2+MKCA7qWpuCVvlBMhBy5MnIZvJfFVGOBXfTX05+vy1CHIXf4cqmo8ISluqP5A
- rr9PJ3CBpXOfa7+ZMAdM/44szHnSvCoy6TaMIRiOitbQ359dXB5pOVQHCTplbLbWPt4BvJDgjYUh+
- w+QLgS/hAQQpF3P4ufN5sO4OthDcqmKaIriUOxNh1UlhiVYrawxMm1LYRB6UYQfR9Z6cbsPDLeDVM
- CoHgmCVEObyswHxhXKW4Mb6q;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lEAFf-00011I-CL; Mon, 22 Feb 2021 12:23:47 +0000
-Subject: Re: Provisioning an ADDC with vfs_nfs4acl_xattr
-To: Thomas <tgeppert@digitx.de>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+	id 1lECU7-000vFC-CJ; Mon, 22 Feb 2021 14:46:51 +0000
+Received: from mail-eopbgr150073.outbound.protection.outlook.com
+ ([40.107.15.73]:58020 helo=EUR01-DB5-obe.outbound.protection.outlook.com) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1lECU1-000vF5-Ti
+ for samba-technical@lists.samba.org; Mon, 22 Feb 2021 14:46:48 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=BNIQ4PxN3c1RJIf1JsaCKENvT6u9W8tDh1uKlxIde9Y7uWdEyOUb5XIF2lg2YymCKT2UTwSRjCVRZC8AVE4YpkSibAjUEcoBVArO0d4p+Z0beY4kifwwrDcxyD41t1Du+MpKwk3zL9l5g3DN1JwePBdp8DTrq1hEDQpTws1Jd3+Sul3WGhPAlv6hd1R3mEeFmx+EhdPXLKklB+fc3+MaEiK3WPb4QdB0x/sftBhNlMqf4lcRWZegm/hwuBpG9Jh7t/qGBMkV6CL3Nnxg+1ULFQqwCKZ0S/n8s0fXdnwUcNgcVjtvAtbXgHHrJvOHBj7zpZg1SWgT1MVdm7c4i2tPsg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Eb0O8ez8J7CNL9OOFJNiImBs+4moKeiulaforjr/zuk=;
+ b=E6BNa9xkV4+n+YZw56rdb5ipf8RdNttCvDAOOZMil9EsC3SrViRkuVjxF4vGOe4pBrh7dJoF33TyNKpJIoXkiLmxdDtSVZhp5WBhfEiRO/lWu5eWby/L78ARQmJWrhlXqXqt015yRL31o7mH+laOf7bV40+XWR5jehJC5gqZFC6u18vnD3vdglBA+b7QS7tTN1/B9jRMKU3rCorRr3rISIP4BEgwlHjqTu/cqDw9P0i5aUlBT5nOCeM7qmpIPN1JKUYUl3E+IZFiYX0CrrK5EKmsjy6MKtG/eyvcu7UveKT3fukwcEWu99bOwzGBgbiVMpk0RX9rYCjCFJr7+IzRNA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=digitx.de; dmarc=pass action=none header.from=digitx.de;
+ dkim=pass header.d=digitx.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=digitxgbr.onmicrosoft.com; s=selector2-digitxgbr-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Eb0O8ez8J7CNL9OOFJNiImBs+4moKeiulaforjr/zuk=;
+ b=gST88yn+/iriqHW38sUI4A0goTG4KzbHWmxHDvvwgf8OUf0LvnmkWhgO/WarjEKAxlefSjwEmEo6VTE3i+NYJqXq/7mJL722X3ilWKDOagdc7CFRm12Ow4ZiWeBLRkwY8c3qVKBBBbxhHuKzDPTUniDyLgWNzbYvRMX34Tsxkec=
+Received: from AM9PR05MB7636.eurprd05.prod.outlook.com (2603:10a6:20b:2c8::19)
+ by AM0PR05MB4659.eurprd05.prod.outlook.com (2603:10a6:208:b9::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3868.27; Mon, 22 Feb
+ 2021 14:46:32 +0000
+Received: from AM9PR05MB7636.eurprd05.prod.outlook.com
+ ([fe80::d00d:53da:6d2d:d23b]) by AM9PR05MB7636.eurprd05.prod.outlook.com
+ ([fe80::d00d:53da:6d2d:d23b%6]) with mapi id 15.20.3868.033; Mon, 22 Feb 2021
+ 14:46:32 +0000
+To: Ralph Boehme <slow@samba.org>, "samba-technical@lists.samba.org"
+ <samba-technical@lists.samba.org>
+Subject: AW: Provisioning an ADDC with vfs_nfs4acl_xattr
+Thread-Topic: Provisioning an ADDC with vfs_nfs4acl_xattr
+Thread-Index: AdcHun2iwMTUQqs8RQKkd3jDlP7KGwBWxM4AAAOOZXA=
+Date: Mon, 22 Feb 2021 14:46:32 +0000
+Message-ID: <AM9PR05MB7636145E0BC84892C3DBF11BCF819@AM9PR05MB7636.eurprd05.prod.outlook.com>
 References: <AM9PR05MB76360A339F47095CA02FA87DCF839@AM9PR05MB7636.eurprd05.prod.outlook.com>
-Message-ID: <82963790-7a08-9e22-1baf-2a5d2bf4e712@samba.org>
-Date: Mon, 22 Feb 2021 13:23:46 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
+ <82963790-7a08-9e22-1baf-2a5d2bf4e712@samba.org>
+In-Reply-To: <82963790-7a08-9e22-1baf-2a5d2bf4e712@samba.org>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: samba.org; dkim=none (message not signed)
+ header.d=none;samba.org; dmarc=none action=none header.from=digitx.de;
+x-originating-ip: [93.217.247.182]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 454bcca7-660a-4483-5453-08d8d740a53b
+x-ms-traffictypediagnostic: AM0PR05MB4659:
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: kF78IWnxsKoQhgHjtHPZ8iFb/mnDR+ZxRHsVL34PaBtskRuVCQM6MNY2BZAFMowwrBDyDFw3eopu3YaClf0PZB6Xl7ULNb51shlSK+NtpU2iYl/hAYaj+FUL3G4O72pWQvbwkJkxYETetji/9PM5HQg46TszikCLcjA1dCpR4Akc9+nS2hKdat4HthVQRKLpOfK7PkHSrLPeX/KOSauNHVrG/LwjuzhqwiSZq3jv86LN/R7CBjWD7PuXYj7VHaTlYgCzyffrzLwKXxaIhBNFka92eGe+Ix00eYCpJ0eqe/VsnYEZcMRLHZ8Z5LN1T7DaAhsJlKAb5VKluoBzQgsOVx6KlPFLm1lGH1zcvxAWFyQ1jBqUD5r1dgCtb69r9DV9Na3gbabR5DUj55KCgg7UepwC/v67R1tJu2MiQzCvN93RAVVRpW6aWPG9E2rQXTO3/0x8oWBFxl3m8n3sOns5wIsCPgMFXc1h7kHqFCHSq3PBkKFAjwGMdf5K9j8vmayxqX/Gqo5o64Q+kIKyOtv2W5Dbhyysolv+K4WWu0AYumRFPJE08P4ROev9LIxT41TaHDJw6WMCKEbANVmbjE82ug==
+x-ms-exchange-antispam-messagedata: =?utf-8?B?dElTZ2xBMHZ0bXhDaDRscHRpNVY1b05DRys4YjF1NVRmeHFISG9QZEJIbVJX?=
+ =?utf-8?B?aDBMakQyRnRFcVFRSWlpKzR2ZWcvdzl3RGpBUnhnTFNXOExnSlI2SFFyajQx?=
+ =?utf-8?B?UFRPejVzMU5lVWlIRHd0bS91MWZ0cDl5T0RpemRBN3hvY0pWam02dXpKYUg5?=
+ =?utf-8?B?U1kzaHUxRGdwZjBBU0dzZUhIenhsT3ZIWGRMdTlmcDlqMnZIck8wOHZGdllV?=
+ =?utf-8?B?ZUp1M29BZjUvZnR0cE8vdFp1RklQVVl1R0hrN0tDL3drb2daNkVCcFdPekpa?=
+ =?utf-8?B?RGQySjBiT095SHhlVmVqa0duOTFKSitlV3JnSXB1UUthRCtMUVcvS3R0dU5B?=
+ =?utf-8?B?REN0bWtkWVdZTzh6bG9nS0VZYk82OWluSDNCTDg5aS90anhxRGZjUXRnYXJ5?=
+ =?utf-8?B?cEczUllSVDkzQnNFVjMyUzRqM1o3QVEvWHZoMjMzcVdUMmpqK2c1UHArNUI5?=
+ =?utf-8?B?LzR2bWdWOStXWCtaS1lsVVNYSzdzUXU0MVpadkVQZ2J1ZGhHTVZUV2JSQms4?=
+ =?utf-8?B?L20vNjNrR0N3Ymk2dThZV0lNOHNqN3M2eW5WYlBxbUpicnI2UFJ3VzN0ZG1Y?=
+ =?utf-8?B?MCtsQXhTbDI4TmVsWHVmSmp4cTk1MzFRb1NCdzZTL211d2F2NUozQ1c3Yldn?=
+ =?utf-8?B?ejBCb0dKQ0RIcjFJUzVwKzIxSy9RWUg2L3hua20xbkNqZTBOemw4VkxXRngx?=
+ =?utf-8?B?MVpnL0grZ1NxQkozRTFNVWVrTEgxL2ZXNEpuQ21CN0oxSFVxMU0yRjNkMjY3?=
+ =?utf-8?B?a25WSzlYMDdLR0F3VmNLVG9YQjg4QVU4MjJRUDdJdXNKVERHanBzdWYyWE9m?=
+ =?utf-8?B?UGxTK1VKSE5XQnBaREFjWjZiUVFUY1JtNTJvUS9pTFVLK2RJYWYwNDNsVUxU?=
+ =?utf-8?B?bGdCdTFXTkROdi84N0NaajRWRDZpbzlQMjRZRVJKUUVCcG1pOGdFeitWUjd1?=
+ =?utf-8?B?bCtlY0VQVGprSmMyTGVFdTdaemRMbFAwaHE5c1pla2JpTFdNaE1Sc1BENEds?=
+ =?utf-8?B?MjRIQ1V0SW41YXNwcmlDZVNidmd0NlhIblZaSzhxek9qSCtTSVU3bGR0WUY0?=
+ =?utf-8?B?ZW12MFdkOFZDWDkwTkdKUWdsbmpvK09wUVpmcGViRmdjaFpQTVhOcWJYaGwx?=
+ =?utf-8?B?NFlveFYybyt6OStRbDRRM0VuUFNzWXNGdzI4aFV5dXozb1VwMSs2SEp1cDBT?=
+ =?utf-8?B?c3R5ME1vcHBXODlFcFR4YjluYThJWldycDg1VGZJemllMVZOei9LbEk5bFl1?=
+ =?utf-8?B?S2pTcjN4Z0VCT2NQY0prUFJpUzdjVHNrL09iakl0d2pBeHhGamNKd1pSNVd1?=
+ =?utf-8?B?bm43WkxPbTRXd25jejVzUjVyWkxLVUN5Nk1zOHQ3Skk5bTVGTnQ4d3lyKzBm?=
+ =?utf-8?B?UFJDVVdkNXlVM3BVaW91V0dkN1lwdk8rbGhjSmMwSjR3SkN2MExpV09LS2pi?=
+ =?utf-8?B?SzFLd3ZXeU9xVmc0WDA0c3BaaHBtU1FuUkxUMUJMamtaZnA5QTFqS0RmMHla?=
+ =?utf-8?B?clNraGgvYlJadTZ5L3FFWFBNSldrenN1VnJGdmVaRiszRHhhQUJNRUtYL1Yv?=
+ =?utf-8?B?MW5EMkt4alk4QXJmVm9obzdsUnZzS3JmVStuRndUODBsaHR1SlAwQ2p2SzNo?=
+ =?utf-8?B?Wkxyait1M2kwdmpENHQ4WnFrRXF0K013ZDY5dDJYVmxJclloT1BXSHMyMUlx?=
+ =?utf-8?B?WUlncVJBRnNrRWJpWDJSamtPTVdmV0YzamVFUmxIN05zN2c0VFYyWWZsdFVV?=
+ =?utf-8?Q?VxjrwM1MLgiSPaukOEIUXJapfw5nch5PDxPYUoA?=
+x-ms-exchange-transport-forked: True
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-In-Reply-To: <AM9PR05MB76360A339F47095CA02FA87DCF839@AM9PR05MB7636.eurprd05.prod.outlook.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="lhI1NmRaxBHL77ASghSObuOV0Tk5C1DtR"
+X-OriginatorOrg: digitx.de
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR05MB7636.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 454bcca7-660a-4483-5453-08d8d740a53b
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 545eefb3-8b20-4e2a-bcdb-884c876d0f6c
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: RXzxSqpUJty+0K7JnWtmwctQ0X/Cxs7RDe1I08JnqM9Fvjz9PHYNUPFjAaNjBFO+ZHU0TB4J3doJUQz+Ng5ayg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR05MB4659
+X-Warn: EHLO/HELO not verified: Remote host 40.107.15.73
+ (mail-eopbgr150073.outbound.protection.outlook.com) incorrectly presented
+ itself as EUR01-DB5-obe.outbound.protection.outlook.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,116 +126,50 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Thomas via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Thomas <tgeppert@digitx.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---lhI1NmRaxBHL77ASghSObuOV0Tk5C1DtR
-Content-Type: multipart/mixed; boundary="1lqYwMj1ciEE5rXKS6uG1EK2nbpIvpj5h";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Thomas <tgeppert@digitx.de>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Message-ID: <82963790-7a08-9e22-1baf-2a5d2bf4e712@samba.org>
-Subject: Re: Provisioning an ADDC with vfs_nfs4acl_xattr
-References: <AM9PR05MB76360A339F47095CA02FA87DCF839@AM9PR05MB7636.eurprd05.prod.outlook.com>
-In-Reply-To: <AM9PR05MB76360A339F47095CA02FA87DCF839@AM9PR05MB7636.eurprd05.prod.outlook.com>
-
---1lqYwMj1ciEE5rXKS6uG1EK2nbpIvpj5h
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Am 2/20/21 um 9:44 PM schrieb Thomas via samba-technical:
-The ACL retrieved from the filesystem is compared against the above ACL=20
-and if it doesn't match an exception is thrown by the sysvolcheck.
->=20
-> The first issue is related to the fact that the first and fourth ACE in=
- the above ACL are identical.
-> The nfs4acl_xattr vfs module does merge these ACEs into one ACE in its =
-code path (smbacl4_MergeIgnoreReject() in nfs4_acls.c) when setting the A=
-CL and would also remove a duplicate ACE when reading the ACL (check_for_=
-duplicate_sec_ace() in nfs4_acls.c). Therefore the ACL returned for a dir=
-ectory in the sysvol Policy branch by vfs_nfs4acl_xattr has one ACE less =
-than the target ACL. It looks like the acl_xattr vfs module is not doing =
-this.
-
-I guess nfs4:acedup =3D dontcare should fix this.
-
-> For files in the sysvol Policy branch there are additional issues. The =
-nfs4acl_xattr vfs module removes all inheritance flags from the ACL on a =
-file (nfs4_acl_add_sec_ace() in nfs4_acls.c).
-
-I guess this could be bug 14631.
-
-<https://bugzilla.samba.org/show_bug.cgi?id=3D14631>
-
-> It also removes the Creator/Owner ACE from the file ACL in the same fun=
-ction. Code comment: /* A non inheriting creator owner entry has no effec=
-t. */
->=20
-> In the context of the sysvol Policy folders and files I now have the fo=
-llowing questions.
->=20
-> Is my understanding correct that for directories the following ACL is e=
-quivalent to the above ACL ?
-> O:DA G:DA D:P
-> (A;OICI;0x001f01ff;;;DA)
-> (A;OICI;0x001f01ff;;;EA)
-> (A;OICIIO;0x001f01ff;;;CO)
-> (A;OICI;0x001f01ff;;;SY)
-> (A;OICI;0x001200a9;;;AU)
-> (A;OICI;0x001200a9;;;ED)
->=20
-> And for files the following ACL is equivalent ?
-> O:DA G:DA D:P
-> (A;;0x001f01ff;;;DA)
-> (A;;0x001f01ff;;;EA)
-> (A;;0x001f01ff;;;SY)
-> (A;;0x001200a9;;;AU)
-> (A;;0x001200a9;;;ED)
->=20
-> After changing the samba-tool code to expect the above ACLs for Policy =
-folders and files the sysvolcheck does complete without errors.
->=20
-> What tests can I run to check if this vfs_nfs4acl_xattr based ADDC inst=
-allation is sane and working properly ?
-
-Maybe it's easier to use vfs_acl_xattr instead and just patch it to use=20
-a different xattr name.
-
--slow
-
---=20
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
-
-
---1lqYwMj1ciEE5rXKS6uG1EK2nbpIvpj5h--
-
---lhI1NmRaxBHL77ASghSObuOV0Tk5C1DtR
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmAzolIFAwAAAAAACgkQqh6bcSY5nkaa
-7g//T+9oamNWvd0ZSwxCUOVSkUzd6jX9F7BDgmTwxRlvlt98fHYPzky/nfQNh8kTZVwgeIkFGx9q
-hBdWKm5NL+t93DtK4niWBYrf6dhmkjZC6F4wkrr2GUkeLzMzhwHR6ZNNzkWqYA34xQGr/brkEZf0
-oGu9ByDm/wmybPeCccZFGpXKXe/dSf+5Iy6DuT+D9BoTJRx4UOQ7isTfIxyA2HEBL1QUPOW7gplV
-6cZDXZDMHbvlY5pXQ1oF+2AdlSD1gZS0ohi6b+psF0M9Q25IRzYaniX63KAC0DewvEKUQs/HPPnQ
-W/RCAj9MaCW5u0qAfTyAzfUepfNiTkKnqoj07vVY9Qk6U3VCsV0dkuYD2b/kWsrPTFfrWl9FX5UY
-ywYrovXMseY4R0Op5BqNJshfvMp9KrLWlTBIT4x7BtpTWt8HDJNY1i7tFWNLriUB15gAPcUMYFRe
-SQrK0QhLsEWiPnymdxX4n+2uJkwJdA3HjFqvrlOmSHAqSc09wjiPKl4SrhPZN8n6K+SoXFUuMfEZ
-OOOAfgeZ/5JYKy1PXxM7lcfH/UETYemukjNosqBD0skggP0Y+UznLV/zOcvQZd8LAfzOsTJkvMDm
-b0WSKIR5sJWVxcxbJsD+qpljLs9AtPABXGs/4TWabFBSSunN865EE99Qwb342tbkzMjZttSrTotn
-NJ0=
-=IKKv
------END PGP SIGNATURE-----
-
---lhI1NmRaxBHL77ASghSObuOV0Tk5C1DtR--
+LS0tLS1VcnNwcsO8bmdsaWNoZSBOYWNocmljaHQtLS0tLQ0KVm9uOiBSYWxwaCBCb2VobWUgPHNs
+b3dAc2FtYmEub3JnPiANCkdlc2VuZGV0OiBNb250YWcsIDIyLiBGZWJydWFyIDIwMjEgMTM6MjQN
+Cg0KPiBJIGd1ZXNzIG5mczQ6YWNlZHVwID0gZG9udGNhcmUgc2hvdWxkIGZpeCB0aGlzLg0KDQpJ
+IGRpc2NvdmVyZWQgdGhpcyBwYXJhbWV0ZXIgd2hlbiBza2ltbWluZyB0aHJvdWdoIHRoZSBjb2Rl
+LiBNYXliZSBpdCB3b3VsZCBoZWxwIHRvIGluY2x1ZGUgdGhlIG5mczQgcGFyYW1ldGVycyBpbiB0
+aGUgZG9jdW1lbnRhdGlvbiBvZiB0aGUgdmZzX25mczRhY2xfeGF0dHIgbW9kdWxlLg0KSXQgbG9v
+a3MgbGlrZSB0aGV5J3JlIGFsbCBhcHBsaWNhYmxlIGJlY2F1c2UgdmZzX25mczRhY2xfeGF0dHIg
+aXMgdXNpbmcgdGhlIG5mczQgZnVuY3Rpb25zIGluIHRoZSBiYWNrZW5kIHdoaWNoIHdlcmUgb3Jp
+Z2luYWxseSBjcmVhdGVkIGZvciBhbm90aGVyIHZmcyBtb2R1bGUuDQpOZXZlcnRoZWxlc3MgSSBv
+bmx5IGZvdW5kIHRoZXNlIHBhcmFtZXRlcnMgZG9jdW1lbnRlZCBmb3IgdGhlIHZmc196ZnNhY2wg
+bW9kdWxlLg0KDQpIb3dldmVyLCBzZXR0aW5nIG5mczQ6YWNlZHVwID0gZG9udGNhcmUgZGlkIG9u
+bHkgaGVscCBmb3IgdGhlIEFDTCBvbiB0aGUgc3ViZGlyZWN0b3JpZXMuIEl0IG1hZGUgdGhlIGRp
+c2NyZXBhbmN5IGZvciB0aGUgQUNMcyBvbiBmaWxlcyBldmVuIHdvcnNlLg0KDQo+IEkgZ3Vlc3Mg
+dGhpcyBjb3VsZCBiZSBidWcgMTQ2MzEuDQo+IDxodHRwczovL2J1Z3ppbGxhLnNhbWJhLm9yZy9z
+aG93X2J1Zy5jZ2k/aWQ9MTQ2MzE+DQoNCkhtbSwgbm90IHN1cmUuIEFzIGZhciBhcyBJIHVuZGVy
+c3Rvb2QgdGhpcyBpc3N1ZSBmcm9tIHNraW1taW5nIG92ZXIgdGhlIGJ1ZyBkZXNjcmlwdGlvbiBp
+dCdzIHJlbGF0ZWQgdG8gdGhlIGZsYWcgdGhhdCBzaWduYWxzIHRoYXQgYW4gQUNMIHdhcyBpbmhl
+cml0ZWQgZnJvbSBhIHBhcmVudCBkaXJlY3RvcnksIHJpZ2h0ID8NClRoZSBpc3N1ZSB3aXRoIHRo
+ZSBBQ0wgb24gZmlsZXMgaW4gdGhlIEdyb3VwIFBvbGljeSBmb2xkZXJzIGlzIHRoYXQgaXQgY2Fy
+cmllcyB0aGUgaW5oZXJpdGFuY2UgZmxhZ3MgYWx0aG91Z2ggYSBmaWxlIGNhbm5vdCBpbmhlcml0
+IGFueXRoaW5nIHRvIHNvbWV0aGluZyBlbHNlLiBPciBkbyBJIGNvbXBsZXRlbHkgbWlzdW5kZXJz
+dGFuZCB0aGlzID8NClRoZSBuZnM0IGNvZGUgcmVtb3ZlcyB0aGUgaW5oZXJpdGFuY2UgZmxhZ3M6
+DQpTTUJfQUNFNF9GSUxFX0lOSEVSSVRfQUNFDQpTTUJfQUNFNF9ESVJFQ1RPUllfSU5IRVJJVF9B
+Q0UNClNNQl9BQ0U0X05PX1BST1BBR0FURV9JTkhFUklUX0FDRQ0KU01CX0FDRTRfSU5IRVJJVF9P
+TkxZX0FDRQ0KZnJvbSB0aGUgQUNFcyBvbiBhIGZpbGUgd2hpbGUgdGhlIHZmc19hY2xfeGF0dHIg
+bW9kdWxlIGRvZXNuJ3QgZG8gaXQuDQoNCj4gTWF5YmUgaXQncyBlYXNpZXIgdG8gdXNlIHZmc19h
+Y2xfeGF0dHIgaW5zdGVhZCBhbmQganVzdCBwYXRjaCBpdCB0byB1c2UgYSBkaWZmZXJlbnQgeGF0
+dHIgbmFtZS4NCg0KTWF5YmUsIGJ1dCBJJ20gbm90IHN1cmUgaWYgaXQgd291bGQgYmUgc3VmZmlj
+aWVudCB0byBqdXN0IHBhdGNoIGl0IGluIHRoZSBvbmUgcGxhY2Ugd2hlcmUgdGhlIFhBVFRSX05U
+QUNMX05BTUUgaXMgZGVmaW5lZC4NCkFsc28gcmVnYXJkaW5nIHByb3Zpc2lvbmluZyBhbiBBRERD
+IG9uIHZmc19uZnM0YWNsX3hhdHRyOg0KQW0gMi85LzIxIHVtIDk6MTUgQU0gc2NocmllYiBBbmRy
+ZXcgQmFydGxldHQ6DQo+IFllcywgaXQgd291bGQgYmUgYXdlc29tZSBpZiB0aGlzIGNvdWxkIGJl
+IG1hZGUgdG8gd29yaywgcGFydGljdWxhcmx5IGlmIHN1ZmZpY2llbnQgZW11bGF0aW9uIHdhcyBh
+dmFpbGFibGUgc28gaXQgY2FuIGFsc28gd29yayBpbiBvdXIgc2VsZnRlc3QuDQoNCkkgZ290IGl0
+IHdvcmtpbmcsIHdpdGggc29tZSBtaW5vciBjb2RlIGNoYW5nZXMgZXhjbHVzaXZlbHkgaW4gdGhl
+IHByb3Zpc2lvbmluZyBQeXRob24gc2NyaXB0LCB1cCB0byB0aGUgcG9pbnQgdGhhdCBJIHdvdWxk
+IGxpa2UgdG8gcnVuIHNvbWUgdGVzdHMgdGhhdCBjb3VsZCBnaXZlIGFuIGluZGljYXRpb24gaWYg
+dGhlcmUgYXJlIG1vcmUgaGlkZGVuIHByb2JsZW1zLg0KSSB3b3VsZCBiZSB2ZXJ5IGdyYXRlZnVs
+IGZvciBzb21lIGhpbnRzIGlmIHRoZXJlIGFyZSB0ZXN0cyBhdmFpbGFibGUgdGhhdCBJIGNvdWxk
+IHJ1biB0byBjaGVjayB0aGUgQUREQyBmdW5jdGlvbmFsaXR5Lg0KDQogIC0tLS0tLS0NClRoYW5r
+cw0KVGhvbWFzDQoNCg0K
 
