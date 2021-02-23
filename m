@@ -2,117 +2,86 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8024D321A83
-	for <lists+samba-technical@lfdr.de>; Mon, 22 Feb 2021 15:47:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A798B32301B
+	for <lists+samba-technical@lfdr.de>; Tue, 23 Feb 2021 18:59:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=Eb0O8ez8J7CNL9OOFJNiImBs+4moKeiulaforjr/zuk=; b=ZPDdhkFlrxNwtXQTMVJqB2xYp3
-	cxVm3whJyRXziWj0eyfs5QZWo2VARMnTtE4hYbd01Len3sxdRCgoFhgrgABD2Cy5Taty6JljvSmtL
-	oFFjJuO1tsFiEtRrXB/mgmQp8kuCiBBAgZ8V3e88iI/pzS/tEOrSb2bztsZoQIWJe7WuDONuKDEZT
-	i05NColmf6aghXsO+ZYQe9fVS74fGl8v/bbwbBrFPJtLGa5LJgzHFO22B81iF9IiAcAS7g22bMPb3
-	lxEECT1WBHSXZcMgLHDDzWu9LivN4PgvlFuMMJXVyXGOxhuTWcLzBML9Ji2lkThY9m080CsDR/D+l
-	9KRuuJkg==;
-Received: from ip6-localhost ([::1]:41120 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=FzI/w8a26baedSOpbicQAeEWOxMw6GktZEewPgyeiGM=; b=WpvtPg60XsPOLDgr9n51yn1ac/
+	ysOdbPUb8LfeFJocIKzfiT9xsH5YsJGAWEmMTy6PuXllxN8V6+5dFs3mXzBfTJONkTUzHEQsw1hc0
+	nOi1oRMPeVykiHSvXQtTMeki3lyHd/sE7YgrYfG+94Eq4qKZiTB6nchoqGdzpFlEFv7hFVH1X5oUZ
+	hPIMy5ZGhoPpIz7erT1QfZ92F4E0umjWIL6tG/NRlM7pQsEVCvYAOuHuU1EaIHkBj4F1NmRVadoJs
+	xpbsy6v6tKZ7L+q67krz0rGh76ZWgYXJuoBei48gFeiLqVAOxV64iwh6blwZqBqFX8DTII/JFBzdB
+	EYEE0oXA==;
+Received: from ip6-localhost ([::1]:21288 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lECU7-000vFC-CJ; Mon, 22 Feb 2021 14:46:51 +0000
-Received: from mail-eopbgr150073.outbound.protection.outlook.com
- ([40.107.15.73]:58020 helo=EUR01-DB5-obe.outbound.protection.outlook.com) 
+	id 1lEbxV-00116p-Id; Tue, 23 Feb 2021 17:58:53 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:38353) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1lECU1-000vF5-Ti
- for samba-technical@lists.samba.org; Mon, 22 Feb 2021 14:46:48 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BNIQ4PxN3c1RJIf1JsaCKENvT6u9W8tDh1uKlxIde9Y7uWdEyOUb5XIF2lg2YymCKT2UTwSRjCVRZC8AVE4YpkSibAjUEcoBVArO0d4p+Z0beY4kifwwrDcxyD41t1Du+MpKwk3zL9l5g3DN1JwePBdp8DTrq1hEDQpTws1Jd3+Sul3WGhPAlv6hd1R3mEeFmx+EhdPXLKklB+fc3+MaEiK3WPb4QdB0x/sftBhNlMqf4lcRWZegm/hwuBpG9Jh7t/qGBMkV6CL3Nnxg+1ULFQqwCKZ0S/n8s0fXdnwUcNgcVjtvAtbXgHHrJvOHBj7zpZg1SWgT1MVdm7c4i2tPsg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Eb0O8ez8J7CNL9OOFJNiImBs+4moKeiulaforjr/zuk=;
- b=E6BNa9xkV4+n+YZw56rdb5ipf8RdNttCvDAOOZMil9EsC3SrViRkuVjxF4vGOe4pBrh7dJoF33TyNKpJIoXkiLmxdDtSVZhp5WBhfEiRO/lWu5eWby/L78ARQmJWrhlXqXqt015yRL31o7mH+laOf7bV40+XWR5jehJC5gqZFC6u18vnD3vdglBA+b7QS7tTN1/B9jRMKU3rCorRr3rISIP4BEgwlHjqTu/cqDw9P0i5aUlBT5nOCeM7qmpIPN1JKUYUl3E+IZFiYX0CrrK5EKmsjy6MKtG/eyvcu7UveKT3fukwcEWu99bOwzGBgbiVMpk0RX9rYCjCFJr7+IzRNA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=digitx.de; dmarc=pass action=none header.from=digitx.de;
- dkim=pass header.d=digitx.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=digitxgbr.onmicrosoft.com; s=selector2-digitxgbr-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Eb0O8ez8J7CNL9OOFJNiImBs+4moKeiulaforjr/zuk=;
- b=gST88yn+/iriqHW38sUI4A0goTG4KzbHWmxHDvvwgf8OUf0LvnmkWhgO/WarjEKAxlefSjwEmEo6VTE3i+NYJqXq/7mJL722X3ilWKDOagdc7CFRm12Ow4ZiWeBLRkwY8c3qVKBBBbxhHuKzDPTUniDyLgWNzbYvRMX34Tsxkec=
-Received: from AM9PR05MB7636.eurprd05.prod.outlook.com (2603:10a6:20b:2c8::19)
- by AM0PR05MB4659.eurprd05.prod.outlook.com (2603:10a6:208:b9::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3868.27; Mon, 22 Feb
- 2021 14:46:32 +0000
-Received: from AM9PR05MB7636.eurprd05.prod.outlook.com
- ([fe80::d00d:53da:6d2d:d23b]) by AM9PR05MB7636.eurprd05.prod.outlook.com
- ([fe80::d00d:53da:6d2d:d23b%6]) with mapi id 15.20.3868.033; Mon, 22 Feb 2021
- 14:46:32 +0000
-To: Ralph Boehme <slow@samba.org>, "samba-technical@lists.samba.org"
- <samba-technical@lists.samba.org>
-Subject: AW: Provisioning an ADDC with vfs_nfs4acl_xattr
-Thread-Topic: Provisioning an ADDC with vfs_nfs4acl_xattr
-Thread-Index: AdcHun2iwMTUQqs8RQKkd3jDlP7KGwBWxM4AAAOOZXA=
-Date: Mon, 22 Feb 2021 14:46:32 +0000
-Message-ID: <AM9PR05MB7636145E0BC84892C3DBF11BCF819@AM9PR05MB7636.eurprd05.prod.outlook.com>
-References: <AM9PR05MB76360A339F47095CA02FA87DCF839@AM9PR05MB7636.eurprd05.prod.outlook.com>
- <82963790-7a08-9e22-1baf-2a5d2bf4e712@samba.org>
-In-Reply-To: <82963790-7a08-9e22-1baf-2a5d2bf4e712@samba.org>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: samba.org; dkim=none (message not signed)
- header.d=none;samba.org; dmarc=none action=none header.from=digitx.de;
-x-originating-ip: [93.217.247.182]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 454bcca7-660a-4483-5453-08d8d740a53b
-x-ms-traffictypediagnostic: AM0PR05MB4659:
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: kF78IWnxsKoQhgHjtHPZ8iFb/mnDR+ZxRHsVL34PaBtskRuVCQM6MNY2BZAFMowwrBDyDFw3eopu3YaClf0PZB6Xl7ULNb51shlSK+NtpU2iYl/hAYaj+FUL3G4O72pWQvbwkJkxYETetji/9PM5HQg46TszikCLcjA1dCpR4Akc9+nS2hKdat4HthVQRKLpOfK7PkHSrLPeX/KOSauNHVrG/LwjuzhqwiSZq3jv86LN/R7CBjWD7PuXYj7VHaTlYgCzyffrzLwKXxaIhBNFka92eGe+Ix00eYCpJ0eqe/VsnYEZcMRLHZ8Z5LN1T7DaAhsJlKAb5VKluoBzQgsOVx6KlPFLm1lGH1zcvxAWFyQ1jBqUD5r1dgCtb69r9DV9Na3gbabR5DUj55KCgg7UepwC/v67R1tJu2MiQzCvN93RAVVRpW6aWPG9E2rQXTO3/0x8oWBFxl3m8n3sOns5wIsCPgMFXc1h7kHqFCHSq3PBkKFAjwGMdf5K9j8vmayxqX/Gqo5o64Q+kIKyOtv2W5Dbhyysolv+K4WWu0AYumRFPJE08P4ROev9LIxT41TaHDJw6WMCKEbANVmbjE82ug==
-x-ms-exchange-antispam-messagedata: =?utf-8?B?dElTZ2xBMHZ0bXhDaDRscHRpNVY1b05DRys4YjF1NVRmeHFISG9QZEJIbVJX?=
- =?utf-8?B?aDBMakQyRnRFcVFRSWlpKzR2ZWcvdzl3RGpBUnhnTFNXOExnSlI2SFFyajQx?=
- =?utf-8?B?UFRPejVzMU5lVWlIRHd0bS91MWZ0cDl5T0RpemRBN3hvY0pWam02dXpKYUg5?=
- =?utf-8?B?U1kzaHUxRGdwZjBBU0dzZUhIenhsT3ZIWGRMdTlmcDlqMnZIck8wOHZGdllV?=
- =?utf-8?B?ZUp1M29BZjUvZnR0cE8vdFp1RklQVVl1R0hrN0tDL3drb2daNkVCcFdPekpa?=
- =?utf-8?B?RGQySjBiT095SHhlVmVqa0duOTFKSitlV3JnSXB1UUthRCtMUVcvS3R0dU5B?=
- =?utf-8?B?REN0bWtkWVdZTzh6bG9nS0VZYk82OWluSDNCTDg5aS90anhxRGZjUXRnYXJ5?=
- =?utf-8?B?cEczUllSVDkzQnNFVjMyUzRqM1o3QVEvWHZoMjMzcVdUMmpqK2c1UHArNUI5?=
- =?utf-8?B?LzR2bWdWOStXWCtaS1lsVVNYSzdzUXU0MVpadkVQZ2J1ZGhHTVZUV2JSQms4?=
- =?utf-8?B?L20vNjNrR0N3Ymk2dThZV0lNOHNqN3M2eW5WYlBxbUpicnI2UFJ3VzN0ZG1Y?=
- =?utf-8?B?MCtsQXhTbDI4TmVsWHVmSmp4cTk1MzFRb1NCdzZTL211d2F2NUozQ1c3Yldn?=
- =?utf-8?B?ejBCb0dKQ0RIcjFJUzVwKzIxSy9RWUg2L3hua20xbkNqZTBOemw4VkxXRngx?=
- =?utf-8?B?MVpnL0grZ1NxQkozRTFNVWVrTEgxL2ZXNEpuQ21CN0oxSFVxMU0yRjNkMjY3?=
- =?utf-8?B?a25WSzlYMDdLR0F3VmNLVG9YQjg4QVU4MjJRUDdJdXNKVERHanBzdWYyWE9m?=
- =?utf-8?B?UGxTK1VKSE5XQnBaREFjWjZiUVFUY1JtNTJvUS9pTFVLK2RJYWYwNDNsVUxU?=
- =?utf-8?B?bGdCdTFXTkROdi84N0NaajRWRDZpbzlQMjRZRVJKUUVCcG1pOGdFeitWUjd1?=
- =?utf-8?B?bCtlY0VQVGprSmMyTGVFdTdaemRMbFAwaHE5c1pla2JpTFdNaE1Sc1BENEds?=
- =?utf-8?B?MjRIQ1V0SW41YXNwcmlDZVNidmd0NlhIblZaSzhxek9qSCtTSVU3bGR0WUY0?=
- =?utf-8?B?ZW12MFdkOFZDWDkwTkdKUWdsbmpvK09wUVpmcGViRmdjaFpQTVhOcWJYaGwx?=
- =?utf-8?B?NFlveFYybyt6OStRbDRRM0VuUFNzWXNGdzI4aFV5dXozb1VwMSs2SEp1cDBT?=
- =?utf-8?B?c3R5ME1vcHBXODlFcFR4YjluYThJWldycDg1VGZJemllMVZOei9LbEk5bFl1?=
- =?utf-8?B?S2pTcjN4Z0VCT2NQY0prUFJpUzdjVHNrL09iakl0d2pBeHhGamNKd1pSNVd1?=
- =?utf-8?B?bm43WkxPbTRXd25jejVzUjVyWkxLVUN5Nk1zOHQ3Skk5bTVGTnQ4d3lyKzBm?=
- =?utf-8?B?UFJDVVdkNXlVM3BVaW91V0dkN1lwdk8rbGhjSmMwSjR3SkN2MExpV09LS2pi?=
- =?utf-8?B?SzFLd3ZXeU9xVmc0WDA0c3BaaHBtU1FuUkxUMUJMamtaZnA5QTFqS0RmMHla?=
- =?utf-8?B?clNraGgvYlJadTZ5L3FFWFBNSldrenN1VnJGdmVaRiszRHhhQUJNRUtYL1Yv?=
- =?utf-8?B?MW5EMkt4alk4QXJmVm9obzdsUnZzS3JmVStuRndUODBsaHR1SlAwQ2p2SzNo?=
- =?utf-8?B?Wkxyait1M2kwdmpENHQ4WnFrRXF0K013ZDY5dDJYVmxJclloT1BXSHMyMUlx?=
- =?utf-8?B?WUlncVJBRnNrRWJpWDJSamtPTVdmV0YzamVFUmxIN05zN2c0VFYyWWZsdFVV?=
- =?utf-8?Q?VxjrwM1MLgiSPaukOEIUXJapfw5nch5PDxPYUoA?=
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ (Exim) id 1lEbxP-00116h-BZ
+ for samba-technical@lists.samba.org; Tue, 23 Feb 2021 17:58:50 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1614103123;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=FzI/w8a26baedSOpbicQAeEWOxMw6GktZEewPgyeiGM=;
+ b=Cz7tVLCQD/c4woU5cWRivK26Ylz2t+siKnS/PJu8DKYHcNWLYWja3IJwh+e8L/sgAlndkh
+ RJRyDl8Bx3rFjHBwHD8kxaC4kCsc8dDo+co9YSvIaI/XIB90uOW+6EMys0Z9mIEEgkCEko
+ FRC9ida9BiCJU4PXTbFqEoWCAYJqNmY=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1614103123;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=FzI/w8a26baedSOpbicQAeEWOxMw6GktZEewPgyeiGM=;
+ b=Cz7tVLCQD/c4woU5cWRivK26Ylz2t+siKnS/PJu8DKYHcNWLYWja3IJwh+e8L/sgAlndkh
+ RJRyDl8Bx3rFjHBwHD8kxaC4kCsc8dDo+co9YSvIaI/XIB90uOW+6EMys0Z9mIEEgkCEko
+ FRC9ida9BiCJU4PXTbFqEoWCAYJqNmY=
+Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
+ [209.85.208.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-189-CbD5Ucj9NKil9341u3oLug-1; Tue, 23 Feb 2021 12:43:04 -0500
+X-MC-Unique: CbD5Ucj9NKil9341u3oLug-1
+Received: by mail-lj1-f199.google.com with SMTP id a19so11678901ljn.0
+ for <samba-technical@lists.samba.org>; Tue, 23 Feb 2021 09:43:04 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=FzI/w8a26baedSOpbicQAeEWOxMw6GktZEewPgyeiGM=;
+ b=A7JUYSxGQRP1YAh9ruMsURDW/SY3yh4ma5v7gWtdrxOGBAkluSsXQonZ6k/PaL0pKL
+ LunnDrA9ZOXw43rST3+9rYPjaESuKhdDkl0Asfdbq62cqSv+bXp50Ci7YQvtbx6Jcger
+ GdYybZBHA4NOO1/KoA/wtPqL7xFvvEb5SJ8Z53BtpnIj2ksfoXbsPgYxBnRPXJOGVvq7
+ Plo6Ux8FbKFNoES5lOnaG6rB9PtvyS5gMUGQPej8A4+2MxbBfe8p+GhkI/PPLFq+VE8s
+ ETe3NgXPF+zQXw1VTDvpdCVJAecAPM8WfvJ/NIY686V7q87qn2EdmHMw9WyeDvGqPOwN
+ 3i9A==
+X-Gm-Message-State: AOAM53344v6TKppNMrnfTy1we1n6yqpurzq5tE2fbTAUxwODrCEE900j
+ s5g75L1S7VvF5ir0VK/ZfdlZ3N/yzqtlyVAj0LWlBdbWK97GB08qLyrtgTytwuST904lazt4zXw
+ Grf7NAi3vBjytWt4tqFyaYMFN+0NDtq2YdsAJOOYxSefQ
+X-Received: by 2002:a19:7f0c:: with SMTP id a12mr16686905lfd.122.1614102182614; 
+ Tue, 23 Feb 2021 09:43:02 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJzAR2m+ttLwiO4U6GSqsWpO2SuP4IGWPUJx1AT16TQnJQlgkG6PINkjh2gvsAUnMTzCsdwt+CVHg5DawBO9gz0=
+X-Received: by 2002:a19:7f0c:: with SMTP id a12mr16686890lfd.122.1614102182189; 
+ Tue, 23 Feb 2021 09:43:02 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: digitx.de
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR05MB7636.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 454bcca7-660a-4483-5453-08d8d740a53b
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 545eefb3-8b20-4e2a-bcdb-884c876d0f6c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: RXzxSqpUJty+0K7JnWtmwctQ0X/Cxs7RDe1I08JnqM9Fvjz9PHYNUPFjAaNjBFO+ZHU0TB4J3doJUQz+Ng5ayg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR05MB4659
-X-Warn: EHLO/HELO not verified: Remote host 40.107.15.73
- (mail-eopbgr150073.outbound.protection.outlook.com) incorrectly presented
- itself as EUR01-DB5-obe.outbound.protection.outlook.com
+References: <2e241ceaece6485289b1cddb84ec77ca@atos.net>
+ <04d24a21a7a462b3dc316959c3a3b1c8be8caac3.camel@redhat.com>
+ <CAH2r5mt9r6nWop_ekbe1CsinztUiGhP2-bxWFkRqHXOP=MXcVQ@mail.gmail.com>
+ <c49c0a18c228e6aa43dbb2cbab7e0a266d1c0371.camel@redhat.com>
+ <CANT5p=p_G+jMMVMkYDL=fXZi_OO7eY2Foz8VkyQuT+1h5Xgifw@mail.gmail.com>
+ <facbd0542074a5b8ef2f6f3d5649010503d8d84d.camel@redhat.com>
+In-Reply-To: <facbd0542074a5b8ef2f6f3d5649010503d8d84d.camel@redhat.com>
+Date: Tue, 23 Feb 2021 12:42:24 -0500
+Message-ID: <CALe0_75RLR=gcwitnxvACh1mt3jnOGHFx7baO0YRhwEfKwFoGg@mail.gmail.com>
+Subject: Re: [gssproxy] cifs-utils, Linux cifs kernel client and gssproxy
+To: Simo Sorce <simo@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jshivers@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -126,50 +95,468 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Thomas via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Thomas <tgeppert@digitx.de>
+From: Jacob Shivers via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jacob Shivers <jshivers@redhat.com>
+Cc: Shyam Prasad N <nspmangalore@gmail.com>,
+ "linux-cifs@vger.kernel.org" <linux-cifs@vger.kernel.org>,
+ The GSS-Proxy developers and users mailing list
+ <gss-proxy@lists.fedorahosted.org>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-LS0tLS1VcnNwcsO8bmdsaWNoZSBOYWNocmljaHQtLS0tLQ0KVm9uOiBSYWxwaCBCb2VobWUgPHNs
-b3dAc2FtYmEub3JnPiANCkdlc2VuZGV0OiBNb250YWcsIDIyLiBGZWJydWFyIDIwMjEgMTM6MjQN
-Cg0KPiBJIGd1ZXNzIG5mczQ6YWNlZHVwID0gZG9udGNhcmUgc2hvdWxkIGZpeCB0aGlzLg0KDQpJ
-IGRpc2NvdmVyZWQgdGhpcyBwYXJhbWV0ZXIgd2hlbiBza2ltbWluZyB0aHJvdWdoIHRoZSBjb2Rl
-LiBNYXliZSBpdCB3b3VsZCBoZWxwIHRvIGluY2x1ZGUgdGhlIG5mczQgcGFyYW1ldGVycyBpbiB0
-aGUgZG9jdW1lbnRhdGlvbiBvZiB0aGUgdmZzX25mczRhY2xfeGF0dHIgbW9kdWxlLg0KSXQgbG9v
-a3MgbGlrZSB0aGV5J3JlIGFsbCBhcHBsaWNhYmxlIGJlY2F1c2UgdmZzX25mczRhY2xfeGF0dHIg
-aXMgdXNpbmcgdGhlIG5mczQgZnVuY3Rpb25zIGluIHRoZSBiYWNrZW5kIHdoaWNoIHdlcmUgb3Jp
-Z2luYWxseSBjcmVhdGVkIGZvciBhbm90aGVyIHZmcyBtb2R1bGUuDQpOZXZlcnRoZWxlc3MgSSBv
-bmx5IGZvdW5kIHRoZXNlIHBhcmFtZXRlcnMgZG9jdW1lbnRlZCBmb3IgdGhlIHZmc196ZnNhY2wg
-bW9kdWxlLg0KDQpIb3dldmVyLCBzZXR0aW5nIG5mczQ6YWNlZHVwID0gZG9udGNhcmUgZGlkIG9u
-bHkgaGVscCBmb3IgdGhlIEFDTCBvbiB0aGUgc3ViZGlyZWN0b3JpZXMuIEl0IG1hZGUgdGhlIGRp
-c2NyZXBhbmN5IGZvciB0aGUgQUNMcyBvbiBmaWxlcyBldmVuIHdvcnNlLg0KDQo+IEkgZ3Vlc3Mg
-dGhpcyBjb3VsZCBiZSBidWcgMTQ2MzEuDQo+IDxodHRwczovL2J1Z3ppbGxhLnNhbWJhLm9yZy9z
-aG93X2J1Zy5jZ2k/aWQ9MTQ2MzE+DQoNCkhtbSwgbm90IHN1cmUuIEFzIGZhciBhcyBJIHVuZGVy
-c3Rvb2QgdGhpcyBpc3N1ZSBmcm9tIHNraW1taW5nIG92ZXIgdGhlIGJ1ZyBkZXNjcmlwdGlvbiBp
-dCdzIHJlbGF0ZWQgdG8gdGhlIGZsYWcgdGhhdCBzaWduYWxzIHRoYXQgYW4gQUNMIHdhcyBpbmhl
-cml0ZWQgZnJvbSBhIHBhcmVudCBkaXJlY3RvcnksIHJpZ2h0ID8NClRoZSBpc3N1ZSB3aXRoIHRo
-ZSBBQ0wgb24gZmlsZXMgaW4gdGhlIEdyb3VwIFBvbGljeSBmb2xkZXJzIGlzIHRoYXQgaXQgY2Fy
-cmllcyB0aGUgaW5oZXJpdGFuY2UgZmxhZ3MgYWx0aG91Z2ggYSBmaWxlIGNhbm5vdCBpbmhlcml0
-IGFueXRoaW5nIHRvIHNvbWV0aGluZyBlbHNlLiBPciBkbyBJIGNvbXBsZXRlbHkgbWlzdW5kZXJz
-dGFuZCB0aGlzID8NClRoZSBuZnM0IGNvZGUgcmVtb3ZlcyB0aGUgaW5oZXJpdGFuY2UgZmxhZ3M6
-DQpTTUJfQUNFNF9GSUxFX0lOSEVSSVRfQUNFDQpTTUJfQUNFNF9ESVJFQ1RPUllfSU5IRVJJVF9B
-Q0UNClNNQl9BQ0U0X05PX1BST1BBR0FURV9JTkhFUklUX0FDRQ0KU01CX0FDRTRfSU5IRVJJVF9P
-TkxZX0FDRQ0KZnJvbSB0aGUgQUNFcyBvbiBhIGZpbGUgd2hpbGUgdGhlIHZmc19hY2xfeGF0dHIg
-bW9kdWxlIGRvZXNuJ3QgZG8gaXQuDQoNCj4gTWF5YmUgaXQncyBlYXNpZXIgdG8gdXNlIHZmc19h
-Y2xfeGF0dHIgaW5zdGVhZCBhbmQganVzdCBwYXRjaCBpdCB0byB1c2UgYSBkaWZmZXJlbnQgeGF0
-dHIgbmFtZS4NCg0KTWF5YmUsIGJ1dCBJJ20gbm90IHN1cmUgaWYgaXQgd291bGQgYmUgc3VmZmlj
-aWVudCB0byBqdXN0IHBhdGNoIGl0IGluIHRoZSBvbmUgcGxhY2Ugd2hlcmUgdGhlIFhBVFRSX05U
-QUNMX05BTUUgaXMgZGVmaW5lZC4NCkFsc28gcmVnYXJkaW5nIHByb3Zpc2lvbmluZyBhbiBBRERD
-IG9uIHZmc19uZnM0YWNsX3hhdHRyOg0KQW0gMi85LzIxIHVtIDk6MTUgQU0gc2NocmllYiBBbmRy
-ZXcgQmFydGxldHQ6DQo+IFllcywgaXQgd291bGQgYmUgYXdlc29tZSBpZiB0aGlzIGNvdWxkIGJl
-IG1hZGUgdG8gd29yaywgcGFydGljdWxhcmx5IGlmIHN1ZmZpY2llbnQgZW11bGF0aW9uIHdhcyBh
-dmFpbGFibGUgc28gaXQgY2FuIGFsc28gd29yayBpbiBvdXIgc2VsZnRlc3QuDQoNCkkgZ290IGl0
-IHdvcmtpbmcsIHdpdGggc29tZSBtaW5vciBjb2RlIGNoYW5nZXMgZXhjbHVzaXZlbHkgaW4gdGhl
-IHByb3Zpc2lvbmluZyBQeXRob24gc2NyaXB0LCB1cCB0byB0aGUgcG9pbnQgdGhhdCBJIHdvdWxk
-IGxpa2UgdG8gcnVuIHNvbWUgdGVzdHMgdGhhdCBjb3VsZCBnaXZlIGFuIGluZGljYXRpb24gaWYg
-dGhlcmUgYXJlIG1vcmUgaGlkZGVuIHByb2JsZW1zLg0KSSB3b3VsZCBiZSB2ZXJ5IGdyYXRlZnVs
-IGZvciBzb21lIGhpbnRzIGlmIHRoZXJlIGFyZSB0ZXN0cyBhdmFpbGFibGUgdGhhdCBJIGNvdWxk
-IHJ1biB0byBjaGVjayB0aGUgQUREQyBmdW5jdGlvbmFsaXR5Lg0KDQogIC0tLS0tLS0NClRoYW5r
-cw0KVGhvbWFzDQoNCg0K
+I have tested the patches for cifs.upcall and can say that with some
+additional modifications to gssproxy the end setup brings a degree of
+feature parity to SMB clients that had been previously exclusive to
+NFS clients.
+Deployment does require some additional configuration, including the
+creation of a drop-in file for gssproxy under /etc/gssproxy and for
+the gssproxy service managed by systemd
+
+
+### KDC configuration
+
+ *** delegation ***
+
+Constrained Delegation (CD) for the SMB host to the Kerberized SMB server
+Resource Based Constrained Delegation (RBCD) on the Kerberized SMB
+server to determine which SMB clients can delegate
+
+
+### SMB client configuration
+
+ *** sssd ***
+
+ Configuration file modification.
+
+Disable using fully qualified domain names as impersonation does not
+correctly handle fully qualified names at time of ticket acquisition.
+
+use_fully_qualified_names =3D False
+
+ *** gssproxy ***
+
+ Drop file creation
+
+Add a drop file for gssproxy to create the necessary socket and
+corresponding settings.
+
+# cat /etc/gssproxy/99-cifs-client.conf with contents
+[service/cifs]
+mechs =3D krb5
+socket =3D /var/lib/gssproxy/cifs.sock
+cred_store =3D keytab:/etc/krb5.keytab
+cred_usage =3D initiate
+euid =3D 0
+impersonate =3D yes
+allow_any_uid =3D yes
+
+ Service drop-in file.
+
+Create a drop-in file to limit socket access for an unattended user, if des=
+ired.
+
+# cat /etc/systemd/system/gssproxy.service.d/90-cifs.conf
+[Service]
+# Limit cifs.sock socket file accessiblility to just the unattended user.
+ExecStartPost=3D/bin/bash -c 'chmod 660 /var/lib/gssproxy/cifs.sock &&
+setfacl -m u:chang:rw /var/lib/gssproxy/cifs.sock'
+
+
+ *** cifs.upcall ***
+
+ cifs.spnego.conf modification
+
+Allow for gssprxy to be used and specify socket file
+
+# cat /etc/request-key.d/cifs.spnego.conf
+create  cifs.spnego    * *  /usr/bin/env GSS_USE_PROXY=3Dyes
+GSSPROXY_SOCKET=3D/var/lib/gssproxy/cifs.sock /usr/sbin/cifs.upcall %k
+
+   include the '-t' flag to allow for accessing a Kerberized DFS
+namespace using a domain based mount, i.e //example.net/dfs/share
+
+create  cifs.spnego    * *  /usr/bin/env GSS_USE_PROXY=3Dyes
+GSSPROXY_SOCKET=3D/var/lib/gssproxy/cifs.sock /usr/sbin/cifs.upcall -t
+%k
+
+
+The above does allow for unattended users to access a Kerberized SMB
+share while limiting access to only a specific user:
+
+# mount //win2k16-dfs1.example.net/greendale/ /mnt -o
+sec=3Dkrb5,username=3D'TEST-BOX$@EXAMPLE.NET',multiuser
+
+# su - jeff
+Last login: Fri Feb  5 12:14:42 EST 2021 on pts/0
+[jeff@test-box ~]$ ll /mnt
+ls: cannot access '/mnt': Permission denied
+[jeff@test-box ~]$ logout
+
+# su - chang
+Last login: Fri Feb  5 12:14:46 EST 2021 on pts/0
+[chang@test-box ~]$ klist
+klist: No credentials cache found (filename: /tmp/krb5cc_602001123)
+[chang@test-box ~]$ ls -l /mnt
+total 143
+
+drwxr-xr-x. 2 chang domain users      0 Oct  4  2018  DfsrPrivate
+-rwxr-xr-x. 1 chang domain users      0 Sep 22 10:07  test_file
+-rwxr-xr-x. 1 chang domain users      0 Dec 14 15:22  whoami
+drwxr-xr-x. 2 chang domain users      0 Dec  7 12:54  winhome
+
+[chang@test-box ~]$ klist
+klist: No credentials cache found (filename: /tmp/krb5cc_602001123)
+
+
+Feb 23 12:22:44.857956 test-box.example.net su[1672]: (to jeff) root on pts=
+/1
+Feb 23 12:22:44.866263 test-box.example.net su[1672]:
+pam_systemd(su-l:session): Cannot create session: Already running in a
+session or user slice
+Feb 23 12:22:44.867158 test-box.example.net su[1672]:
+pam_unix(su-l:session): session opened for user jeff by root(uid=3D0)
+Feb 23 12:22:46.253310 test-box.example.net cifs.upcall[1700]: key
+description: cifs.spnego;0;0;39010000;ver=3D0x2;host=3Dwin2k16-dfs1.example=
+.net;ip4=3D192.168.124.132;sec=3Dkrb5;uid=3D0x23e1cedc;creduid=3D0x23e1cedc=
+;pid=3D0x6a3
+Feb 23 12:22:46.253335 test-box.example.net cifs.upcall[1700]: ver=3D2
+Feb 23 12:22:46.253338 test-box.example.net cifs.upcall[1700]:
+host=3Dwin2k16-dfs1.example.net
+Feb 23 12:22:46.253342 test-box.example.net cifs.upcall[1700]:
+ip=3D192.168.124.132
+Feb 23 12:22:46.253344 test-box.example.net cifs.upcall[1700]: sec=3D1
+Feb 23 12:22:46.253348 test-box.example.net cifs.upcall[1700]: uid=3D602001=
+116
+Feb 23 12:22:46.253352 test-box.example.net cifs.upcall[1700]: creduid=3D60=
+2001116
+Feb 23 12:22:46.253365 test-box.example.net cifs.upcall[1700]: pid=3D1699
+Feb 23 12:22:46.253978 test-box.example.net cifs.upcall[1700]:
+get_cachename_from_process_env: pathname=3D/proc/1699/environ
+Feb 23 12:22:46.254995 test-box.example.net cifs.upcall[1700]:
+get_existing_cc: default ccache is FILE:/tmp/krb5cc_602001116
+Feb 23 12:22:46.255015 test-box.example.net cifs.upcall[1700]:
+get_tgt_time: unable to get principal
+Feb 23 12:22:46.255021 test-box.example.net cifs.upcall[1700]:
+handle_krb5_mech: getting service ticket for win2k16-dfs1.example.net
+Feb 23 12:22:46.255024 test-box.example.net cifs.upcall[1700]:
+handle_krb5_mech: using GSS-API
+Feb 23 12:22:46.259295 test-box.example.net cifs.upcall[1700]: GSS-API
+error init_sec_context: Unspecified GSS failure.  Minor code may
+provide more information
+Feb 23 12:22:46.259306 test-box.example.net cifs.upcall[1700]: GSS-API
+error init_sec_context: No Kerberos credentials available (default
+cache: FILE:/tmp/krb5cc_602001116)
+Feb 23 12:22:46.259311 test-box.example.net cifs.upcall[1700]:
+handle_krb5_mech: failed to obtain service ticket via GSS (851968)
+Feb 23 12:22:46.259314 test-box.example.net cifs.upcall[1700]: Unable
+to obtain service ticket
+Feb 23 12:22:46.259323 test-box.example.net cifs.upcall[1700]: Exit
+status 851968
+Feb 23 12:22:46.262827 test-box.example.net kernel: CIFS VFS:
+\\win2k16-dfs1.example.net Send error in SessSetup =3D -126
+Feb 23 12:22:47.398266 test-box.example.net su[1672]:
+pam_unix(su-l:session): session closed for user jeff
+Feb 23 12:22:49.159640 test-box.example.net su[1702]: (to chang) root on pt=
+s/1
+Feb 23 12:22:49.173264 test-box.example.net su[1702]:
+pam_systemd(su-l:session): Cannot create session: Already running in a
+session or user slice
+Feb 23 12:22:49.173967 test-box.example.net su[1702]:
+pam_unix(su-l:session): session opened for user chang by root(uid=3D0)
+Feb 23 12:22:51.878743 test-box.example.net cifs.upcall[1729]: key
+description: cifs.spnego;0;0;39010000;ver=3D0x2;host=3Dwin2k16-dfs1.example=
+.net;ip4=3D192.168.124.132;sec=3Dkrb5;uid=3D0x23e1cee3;creduid=3D0x23e1cee3=
+;pid=3D0x6c0
+Feb 23 12:22:51.878765 test-box.example.net cifs.upcall[1729]: ver=3D2
+Feb 23 12:22:51.878769 test-box.example.net cifs.upcall[1729]:
+host=3Dwin2k16-dfs1.example.net
+Feb 23 12:22:51.878773 test-box.example.net cifs.upcall[1729]:
+ip=3D192.168.124.132
+Feb 23 12:22:51.878776 test-box.example.net cifs.upcall[1729]: sec=3D1
+Feb 23 12:22:51.878780 test-box.example.net cifs.upcall[1729]: uid=3D602001=
+123
+Feb 23 12:22:51.878783 test-box.example.net cifs.upcall[1729]: creduid=3D60=
+2001123
+Feb 23 12:22:51.878786 test-box.example.net cifs.upcall[1729]: pid=3D1728
+Feb 23 12:22:51.879060 test-box.example.net cifs.upcall[1729]:
+get_cachename_from_process_env: pathname=3D/proc/1728/environ
+Feb 23 12:22:51.879799 test-box.example.net cifs.upcall[1729]:
+get_existing_cc: default ccache is FILE:/tmp/krb5cc_602001123
+Feb 23 12:22:51.879819 test-box.example.net cifs.upcall[1729]:
+get_tgt_time: unable to get principal
+Feb 23 12:22:51.879824 test-box.example.net cifs.upcall[1729]:
+handle_krb5_mech: getting service ticket for win2k16-dfs1.example.net
+Feb 23 12:22:51.879827 test-box.example.net cifs.upcall[1729]:
+handle_krb5_mech: using GSS-API
+Feb 23 12:22:51.886573 test-box.example.net gssproxy[1000]:
+[2021/02/23 17:22:51]: Client [2021/02/23 17:22:51]:
+(/usr/sbin/cifs.upcall) [2021/02/23 17:22:51]:  connected (fd =3D
+14)[2021/02/23 17:22:51]:  (pid =3D 1729) (uid =3D 602001123) (gid =3D
+602000513)[2021/02/23 17:22:51]:  (context =3D
+system_u:system_r:kernel_t:s0)[>
+Feb 23 12:22:51.886573 test-box.example.net gssproxy[1000]: [CID
+14][2021/02/23 17:22:51]: Connection matched service cifs
+Feb 23 12:22:51.886573 test-box.example.net gssproxy[1000]: [CID
+14][2021/02/23 17:22:51]: gp_rpc_execute: executing 6
+(GSSX_ACQUIRE_CRED) for service "cifs", euid: 602001123,socket:
+/var/lib/gssproxy/cifs.sock
+Feb 23 12:22:51.886573 test-box.example.net gssproxy[1000]:
+GSSX_ARG_ACQUIRE_CRED( call_ctx: { "" [  ] } input_cred_handle: <Null>
+add_cred: 0 desired_name: <Null> time_req: 0 desired_mechs: { }
+cred_usage: INITIATE initiator_time_req: 0 acceptor_time_req: 0 )
+Feb 23 12:22:52.346639 test-box.example.net gssproxy[1000]:
+GSSX_RES_ACQUIRE_CRED( status: { 0 { 1 2 840 113554 1 2 2 } 0 "" "" [
+] } output_cred_handle: { "chang@EXAMPLE.NET" [ { "chang@EXAMPLE.NET"
+{ 1 2 840 113554 1 2 2 } INITIATE 36000 0 } ] [ K.....T.....pJv.... ]
+0 } )
+Feb 23 12:22:52.348086 test-box.example.net gssproxy[1000]: [CID
+14][2021/02/23 17:22:52]: Connection matched service cifs
+Feb 23 12:22:52.348086 test-box.example.net gssproxy[1000]: [CID
+14][2021/02/23 17:22:52]: gp_rpc_execute: executing 8
+(GSSX_INIT_SEC_CONTEXT) for service "cifs", euid: 602001123,socket:
+/var/lib/gssproxy/cifs.sock
+Feb 23 12:22:52.348086 test-box.example.net gssproxy[1000]:
+GSSX_ARG_INIT_SEC_CONTEXT( call_ctx: { "" [  ] } context_handle:
+<Null> cred_handle: { "chang@EXAMPLE.NET" [ { "chang@EXAMPLE.NET" { 1
+2 840 113554 1 2 2 } INITIATE 36000 0 } ] [ K.....T.....pJv.... ] 0 }
+target_name: "cifs@win2k16-dfs1.example.net" mech>
+Feb 23 12:22:52.348086 test-box.example.net gssproxy[1000]: [CID
+14][2021/02/23 17:22:52]: Credentials allowed by configuration
+Feb 23 12:22:52.357103 test-box.example.net gssproxy[1000]:
+GSSX_RES_INIT_SEC_CONTEXT( status: { 0 { 1 2 840 113554 1 2 2 } 0 ""
+"" [  ] } context_handle: { [ ......H............ ] [  ] 0 { 1 2 840
+113554 1 2 2 } "chang@EXAMPLE.NET"
+"cifs/win2k16-dfs1.example.net@EXAMPLE.NET" 36000 432 1 1 }
+output_token: [ .....>
+Feb 23 12:22:52.357419 test-box.example.net cifs.upcall[1729]: Exit status =
+0
+
+
+Ultimately a helper-script packaged with cifs-utils or a separate
+package entirely could be responsible for adding the file under
+/etc/gssproxy and the drop-in file for systemd. The helper script
+could take a series of users/groups as arguments that would limit
+access to the socket file or there could be a separate config file
+that is read from to determine if access to the cifs.sock socket
+should be limited.
+
+
+On Fri, Feb 19, 2021 at 12:38 PM Simo Sorce <simo@redhat.com> wrote:
+>
+> On Fri, 2021-02-19 at 03:30 -0800, Shyam Prasad N wrote:
+> > Hi Simo,
+> >
+> > > Finally the GSS-Proxy mechanism is namespace compatible, so you also
+> > > get the ability to define different auth daemons per different
+> > > containers, no need to invent new mechanisms for that or change yet
+> > > again protocols/userspace to obtain container capabilities.
+> >
+> > Could you please point me to the documentation for doing this?
+>
+> I do not know if the kernel documents this, but the way gssproxy works
+> is that when you start the daemon it pokes at the kernel to let it know
+> the socket is available. So then the kernel opens the socket in the
+> namespace the proxy is running into (detected from the poking
+> operation, which is a write in a proc file).
+>
+> HTH,
+> Simo.
+>
+> >
+> > Regards,
+> > Shyam
+> >
+> > On Thu, Dec 17, 2020 at 5:41 AM Simo Sorce <simo@redhat.com> wrote:
+> > > Hi Steve,
+> > >
+> > > GSSAPI and krb5 as implemented in system krb5 libraries exists from
+> > > longer than Samba has implemented those capabilities, I do not think =
+it
+> > > make sense to reason along those lines.
+> > >
+> > > GSS-Proxy has been built with a protocol to talk from the kernel that
+> > > resolved a number of issues for knfsd (eg big packet sizes when a MS-
+> > > PAC is present).
+> > >
+> > > And Samba uses internally exactly the same krb5 mechanism as it defer=
+s
+> > > to the kerberos libraries as well.
+> > >
+> > > Additionally GSS-Proxy can be very easily extended to also do NTLMSSP
+> > > using the same interface as I have built the gssntlmssp long ago from
+> > > the MS spec, and is probably the most correct NTLMSSP implementation
+> > > you can find around.
+> > >
+> > > Gssntlmssp also has a Winbind backend so you get automaticaly access =
+to
+> > > whatever cached credentials Winbindd has for users as a bonus (althou=
+gh
+> > > the integration can be improved there), yet you *can* use it w/o
+> > > Winbindd just fine providing a credential file (smbpasswd format
+> > > compatible).
+> > >
+> > > GSS-Proxy is already integrated in distributions because it is used b=
+y
+> > > knfsd, and can be as easily used by cifsd, and you *should* really us=
+e
+> > > it there, so we can have a single, consistent, maintained, mechanism
+> > > for server side GSS authentication, and not have to repeat and reinve=
+nt
+> > > kernel to userspace mechanisms.
+> > >
+> > > And if you add it for cifsd you have yet another reason to do it for
+> > > cifs.ko as well.
+> > >
+> > > Finally the GSS-Proxy mechanism is namespace compatible, so you also
+> > > get the ability to define different auth daemons per different
+> > > containers, no need to invent new mechanisms for that or change yet
+> > > again protocols/userspace to obtain container capabilities.
+> > >
+> > > For the client we'll need to add some XDR parsing functions in kernel=
+,
+> > > they were omitted from my original patches because there was no clien=
+t
+> > > side kernel consumer back then, but it i an easy, mechanical change.
+> > >
+> > > HTH,
+> > > Simo.
+> > >
+> > > On Wed, 2020-12-16 at 16:43 -0600, Steve French wrote:
+> > > > generally I would feel more comfortable using something (library or
+> > > > utility) in Samba (if needed) for additional SPNEGO support if
+> > > > something is missing (in what the kernel drivers are doing to
+> > > > encapsulate Active Directory or Samba AD krb5 tickets in SPNEGO) as
+> > > > Samba is better maintained/tested etc. than most components.  Is th=
+ere
+> > > > something in Samba that could be used here instead of having a
+> > > > dependency on another project - Samba has been doing Kerberos/SPNEG=
+O
+> > > > longer than most ...?   There are probably others (jra, Metze etc.)
+> > > > that have would know more about gssproxy vs. Samba equivalents thou=
+gh
+> > > > and would defer to them ...
+> > > >
+> > > > On Wed, Dec 16, 2020 at 8:33 AM Simo Sorce <simo@redhat.com> wrote:
+> > > > > Hi Michael,
+> > > > > as you say the best course of action would be for cifs.ko to move=
+ to
+> > > > > use the RPC interface we defined for knfsd (with any extensions t=
+hat
+> > > > > may  be needed), and we had discussions in the past with cifs ups=
+tream
+> > > > > developers about it. But nothing really materialized.
+> > > > >
+> > > > > If something is needed in the short term, I thjink the quickest c=
+ourse
+> > > > > of action is indeed to change the userspace helper to use gssapi
+> > > > > function calls, so that they can be intercepted like we do for rp=
+c.gssd
+> > > > > (nfs client's userspace helper).
+> > > > >
+> > > > > Unfortunately I do not have the cycles to work on that myself at =
+this
+> > > > > time :-(
+> > > > >
+> > > > > HTH,
+> > > > > Simo.
+> > > > >
+> > > > > On Wed, 2020-12-16 at 10:01 +0000, Weiser, Michael wrote:
+> > > > > > Hello,
+> > > > > >
+> > > > > > I have a use-case for authentication of Linux cifs client mount=
+s without the user being present (e.g. from batch jobs) using gssproxy's im=
+personation feature with Kerberos Constrained Delegation similar to how it =
+can be done for NFS[1].
+> > > > > >
+> > > > > > My understanding is that currently neither the Linux cifs kerne=
+l client nor cifs-utils userland tools support acquiring credentials using =
+gssproxy. The former uses a custom upcall interface to talk to cifs.spnego =
+from cifs-utils. The latter then goes looking for Kerberos ticket caches us=
+ing libkrb5 functions, not GSSAPI, which prevents gssproxy from interacting=
+ with it.[2]
+> > > > > >
+> > > > > > From what I understand, the preferred method would be to switch=
+ the Linux kernel client upcall to the RPC protocol defined by gssproxy[3] =
+(as has been done for the Linux kernel NFS server already replacing rpc.svc=
+gssd[4]). The kernel could then, at least optionally, talk to gssproxy dire=
+ctly to try and obtain credentials.
+> > > > > >
+> > > > > > Failing that, cifs-utils' cifs.spnego could be switched to GSSA=
+PI so that gssproxy's interposer plugin could intercept GSSAPI calls and pr=
+ovide them with the required credentials (similar to the NFS client rpc.gss=
+d[5]).
+> > > > > >
+> > > > > > Assuming my understanding is correct so far:
+> > > > > >
+> > > > > > Is anyone doing any work on this and could use some help (testi=
+ng, coding)?
+> > > > > > What would be expected complexity and possible roadblocks when =
+trying to make a start at implementing this?
+> > > > > > Or is the idea moot due to some constraint or recent developmen=
+t I'm not aware of?
+> > > > > >
+> > > > > > I have found a recent discussion of the topic on linux-cifs[6] =
+which provided no definite answer though.
+> > > > > >
+> > > > > > As a crude attempt at an explicit userspace workaround I tried =
+but failed to trick smbclient into initialising a ticket cache using gsspro=
+xy for cifs.spnego to find later on.
+> > > > > > Is this something that could be implemented without too much re=
+dundant effort (or should already work, perhaps using a different tool)?
+> > > > > >
+> > > > > > [1] https://github.com/gssapi/gssproxy/blob/main/docs/NFS.md#us=
+er-impersonation-via-constrained-delegation
+> > > > > > [2] https://pagure.io/gssproxy/issue/56
+> > > > > > [3] https://github.com/gssapi/gssproxy/blob/main/docs/ProtocolD=
+ocumentation.md
+> > > > > > [4] https://github.com/gssapi/gssproxy/blob/main/docs/NFS.md#nf=
+s-server
+> > > > > > [5] https://github.com/gssapi/gssproxy/blob/main/docs/NFS.md#nf=
+s-client
+> > > > > > [6] https://www.spinics.net/lists/linux-cifs/msg20182.html
+> > > > > > --
+> > > > > > Thanks,
+> > > > > > Michael
+> > > > > > _______________________________________________
+> > > > > > gss-proxy mailing list -- gss-proxy@lists.fedorahosted.org
+> > > > > > To unsubscribe send an email to gss-proxy-leave@lists.fedorahos=
+ted.org
+> > > > > > Fedora Code of Conduct: https://docs.fedoraproject.org/en-US/pr=
+oject/code-of-conduct/
+> > > > > > List Guidelines: https://fedoraproject.org/wiki/Mailing_list_gu=
+idelines
+> > > > > > List Archives: https://lists.fedorahosted.org/archives/list/gss=
+-proxy@lists.fedorahosted.org
+> > > > >
+> > > > > --
+> > > > > Simo Sorce
+> > > > > RHEL Crypto Team
+> > > > > Red Hat, Inc
+> > > > >
+> > > > >
+> > > > >
+> > > > >
+> > >
+> > > --
+> > > Simo Sorce
+> > > RHEL Crypto Team
+> > > Red Hat, Inc
+> > >
+> > >
+> > >
+> > >
+> >
+> >
+>
+> --
+> Simo Sorce
+> RHEL Crypto Team
+> Red Hat, Inc
+>
+>
+>
+>
+
 
