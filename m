@@ -2,60 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE6B6324CE5
-	for <lists+samba-technical@lfdr.de>; Thu, 25 Feb 2021 10:34:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B0CC9324F95
+	for <lists+samba-technical@lfdr.de>; Thu, 25 Feb 2021 12:59:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=atS+6z0q77U4wFZOsjvxrTzG8Hq0xK3sBns9gBoqHJ8=; b=5L8YxnxLsan+dotZyouk3Z2/UT
-	hv0+EOuyMEjdEvFw1/kRxrBVMXQ0zuhWLzpw+6ZZprTxw9B9BnYQeNaRGJ6XWbjzPUtS4QtKArPo0
-	yyDJDqrGjZ1IreZRJltsEQLAJjaJ6TIkIf9DxQ/cJGIF9DTeg7F3csmi2YNizLMdBA2IAm2nU4Siu
-	Eu35Wn306ezF7km4k+tTsP7m6eKFgSU3qZXxCm6y3d2tzhKqlTKE1x9FBcN3kMWSwlcKYKBgkY+2L
-	vT/THdcGqFLe5a8OIi/iTwu8fvMdQKt1e1yp1U8whSH2MluzWK3/lX6h0W8cUrEVTQW3EGNBz0ASu
-	WckVPD7g==;
-Received: from ip6-localhost ([::1]:44286 helo=hr1.samba.org) 
+	bh=MtvRLKn+emqQaGBf7p74HfjCGYNUUpTGS91Ouk4K+Uw=; b=LmEI6ZODP35cbCJPHF7hVflZC8
+	WtLPuzGl9Qi6TI2Xzst1TzItRqp2XoQNG+a4J7q5YMBIteSncEDH7RjZZRa+hoANrV4i8iQbPDNkX
+	WoZIvoZa0ALT8zBRBkfAWfUSAmmU97XGuizeEPh648KNWkS3kab7gSLdKNGi+cMhMLzjzQqNQys+n
+	WQzWmr1HNxaGpXc7AvSyiM/1JJeGq4Th86thvMdawjRGrjVQrTQAZkMY6XDfD3/InAiGdnJLaizhc
+	O8L8Xx/CPAe7J/wiuwzKWIPdR4yuRFWzoQcvG8Gs9F7rwEvzteRIAXMe+7XAJ5woALQVDbY+ge2fI
+	+Zh5xakg==;
+Received: from ip6-localhost ([::1]:20826 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lFD24-001KWp-NS; Thu, 25 Feb 2021 09:34:04 +0000
-Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134]:33912) 
+	id 1lFFHy-001O1N-Ha; Thu, 25 Feb 2021 11:58:38 +0000
+Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229]:37935) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lFD1z-001KWD-G2
- for samba-technical@lists.samba.org; Thu, 25 Feb 2021 09:34:01 +0000
-Received: by mail-il1-x134.google.com with SMTP id q9so4361636ilo.1
- for <samba-technical@lists.samba.org>; Thu, 25 Feb 2021 01:33:58 -0800 (PST)
+ (Exim) id 1lFFHt-001O1G-KT
+ for samba-technical@lists.samba.org; Thu, 25 Feb 2021 11:58:36 +0000
+Received: by mail-lj1-x229.google.com with SMTP id 2so1592100ljr.5
+ for <samba-technical@lists.samba.org>; Thu, 25 Feb 2021 03:58:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=atS+6z0q77U4wFZOsjvxrTzG8Hq0xK3sBns9gBoqHJ8=;
- b=htHqj3ogDOj0J40UoKhF30pP7xNSk76Gl5/e+YsUXY2m9phxqUoOPFaG/OR8FGM532
- kOPA0mB2QO4gQ/DK04R3QwT+g2r2uJ5pQ2PNLmoC6jnlb7kxTT5jTr4wqRyqTZuWfc9O
- e8V2k+LzSd0vaX3C2QB6GtZGp65Zvq8Ghryt21Y54c5aXgipT6GMrSvC9KbKu4/aJTXC
- YFSGEgtgPnChuQU1CXBHjIwWM3wJ5y4dm/sOolAv3wzQutOBCgU3qamgrMHrGB186FPr
- 4rwDbJkQDrJ1SsbkL08prvpw1rg2+vTnyMrKPqXAguGjF7NKhJrw0P+EyY2JpF81EpHD
- DLug==
+ :cc; bh=cHnH5anQ7O0K1yCw8Tgxh3VL4beIR5/YdTjUt4B93S8=;
+ b=tv5SgSy7fywlEeRpKB4g9x+caYgjzePZ4PTMrOkMzPimXbJrC9fBqPe+iuk3piaI3m
+ cc+yyugO7hMQvyw2ME/CJKoNZUeLpGUzkkH0p95Sdpz7n76tOQKMv0XZqn2CrWbVC081
+ InI9D64KOIBj5TeCMt4WKLcWByM7zFEG1YFKbcE/NdBKMyr6tD1HcTdwC1EPMQMifmuv
+ 1XpsvwkQG1ZOtVQiy9D1AFK6CIRCwiLn+alX48SMhTvptZ1Rp7b+ixTVhrOcxYdaZfkR
+ yf1667AbrlD+CEGqWglgDyBkTjhG+X48Y/ne6wcoIFJ820L19PL9AvRbqL7IBUcIO+Ea
+ tNYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=atS+6z0q77U4wFZOsjvxrTzG8Hq0xK3sBns9gBoqHJ8=;
- b=VCo+gvpZ6DeH4+0LscUYIYrzWJicgrcz96Ie6PFnb49yBX//2Owss9rt7BCBGWLZEY
- TA9NbCN+TfYTRpj21ZURl1eHRhREQuVdjdwnksEnkpW843mUXb3MJya3Llg81NXCwyIV
- CmUqpGPMuNW5vEu6QSE7k6CTJGXiibmEoJxtF4jhcZKSP2s5wuljpwzYQeu/9F0xfX7+
- 1CjbLyyJKK1vA9b4pBK6DGsrUvdzYS8jJHJv6MDSLr9sqVBFN6K3ucIWjCzSXQx8ILCA
- SJf1qqr9JutqMA9WHQYJGsmlopkCRWNwKyBK45jx6Obfm4BMKaoJ99WtzjOueII+jpv9
- w9jg==
-X-Gm-Message-State: AOAM532VhVRDKQ14RTl81nbiXA45GuME7ShK5QhVccTChNXZVHMIRZs0
- kFhKOmMJKIwYEhnMWdB3X79SvS8xPrpLV/YbooMSAbKF
-X-Google-Smtp-Source: ABdhPJzeCEBkthoWemBVuSOWqc0tOfZ41rQIiHIvEbgdj7leFbTDTUAwQ+y6HBSk638JVu3tfdGqzft+L3ZV2ghrmng=
-X-Received: by 2002:a92:ce4e:: with SMTP id a14mr1779857ilr.219.1614245637600; 
- Thu, 25 Feb 2021 01:33:57 -0800 (PST)
+ bh=cHnH5anQ7O0K1yCw8Tgxh3VL4beIR5/YdTjUt4B93S8=;
+ b=sV8CBA/7M1aXYLzQfr3jSeMlmr897FoOqNSLBt3LGg2vesv9sFYwjx9FtKBYr4Jd/b
+ Urw483oUZvcxgCQJZhilMr5sOSA773573DqO8wK/6HDHhAyIL7iz451NFyG8wqzmG6jC
+ xujhpdx53/1zX/zAmIRl9qCDi+H0EYfvzLJzuu6GnU1phMu2Zmo1k77c4Rq4/q37rRsC
+ oTP6RHjSjqlBAJ0202ousp0qf3NkFjZWs2F1npvOb6jNqdz+FJLdPqr0ICC8/7S/OSGG
+ XRhuR/wOfiu34Z9d+wFiiFUuyX9AKk+t70Ezn66110/4nS/EzGD/OqEeoQLsAcTdwoSR
+ JSFg==
+X-Gm-Message-State: AOAM531L7Lf5ApXYbjOh1n78mtKjb7ioR9VCuLwqJI6c7rquAk9sU+z0
+ cY3uOtod+qEPxSIwWZIzc5eDnOLmZGHNZQm6ZlI=
+X-Google-Smtp-Source: ABdhPJz+oUmR45xkf2my+c9I1qmnya2E2v4ShjNmbxGb1ELt4CA1sKqrgUYxtXafO2ngfYPnwORg4hPeSwvaEmSvGtc=
+X-Received: by 2002:a2e:8141:: with SMTP id t1mr1445814ljg.385.1614254309611; 
+ Thu, 25 Feb 2021 03:58:29 -0800 (PST)
 MIME-Version: 1.0
-References: <0736dea6-ab54-454d-a40b-adaa372a1f53@www.fastmail.com>
- <CAN05THRTEXjZ+TQB+X2kA_i8CgKctBDB1UhbifAu0WzqHOuNmw@mail.gmail.com>
- <cd9f90aa-53f0-43a2-9683-b5730d01ca90@www.fastmail.com>
-In-Reply-To: <cd9f90aa-53f0-43a2-9683-b5730d01ca90@www.fastmail.com>
-Date: Thu, 25 Feb 2021 19:33:46 +1000
-Message-ID: <CAN05THQfXstKOvVMN-KGBk6bdkUaQCa_4CY9o5oXn_qDhdW9-w@mail.gmail.com>
-Subject: Re: Using a password containing a comma fails with 5.11.1 kernel
-To: Simon Taylor <simon@simon-taylor.me.uk>
+References: <CAH_vq2Hx+RzJoudmxcECe0PXG7uGvydzJceWm2nMEX0C5naV6w@mail.gmail.com>
+ <20210224182956.GC1333267@jeremy-acer>
+In-Reply-To: <20210224182956.GC1333267@jeremy-acer>
+Date: Thu, 25 Feb 2021 17:28:17 +0530
+Message-ID: <CAH_vq2HzC9T8FNc7khndkPa_uOTxOh9B94sU7TiN5zn0G3Ssmw@mail.gmail.com>
+Subject: Re: Kerberos Constrained Delegation in libsmbclient
+To: Jeremy Allison <jra@samba.org>
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,37 +69,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: Steve French <sfrench@samba.org>, linux-cifs <linux-cifs@vger.kernel.org>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+From: Vikram Bharti via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Vikram Bharti <vikrambharti33@gmail.com>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Feb 25, 2021 at 7:18 PM Simon Taylor <simon@simon-taylor.me.uk> wrote:
->
-> On Thu, 25 Feb 2021, at 7:37 AM, ronnie sahlberg wrote:
-> > Hi Simon,
+IMO KCD can take service user, password/keytab-file, UPN of impersonation
+user, and SPN of service as inputs  (probably in auth_callback)
+or it can take final service ticket (TGS-REP) as input in auth_callback.
+Not so sure what should be right the way but I leave it up to you decide if
+these 2 are feasible or if there is a better way.
+
+
+
+On Thu, Feb 25, 2021 at 12:00 AM Jeremy Allison <jra@samba.org> wrote:
+
+> On Wed, Feb 24, 2021 at 05:29:37PM +0530, Vikram Bharti via
+> samba-technical wrote:
+> >Hi ,
 > >
-> > Looks like the special handling of escaped ',' characters in the
-> > password mount argument was lost when we
-> > switched to the new mount api.
-> >
-> > I just sent a patch for this to the list,  can you try that patch?
-> >
-> > Thanks for the report.
+> >I was exploring a way to get KCD work with libsmbclient APIs and i see
+> >libsmbclient supports Kerberos auth but can't find any API for
+> >impersonation and delegation.
+> >Pls let me know if there is a way to get it done.
 >
-> Hi Ronnie,
+> No, this is not currently available in the libsmbclient API's.
 >
-> Thanks. Your patch resolved the issue.
+> Can you give an example of what you'd like this to look like,
+> so we can assess how hard it would be to implement ?
 >
-
-That is good to hear.
-
-Steve,  can you add a Tested-by for Simon and maybe we should have cc
-stable so it gets into 5.11 ?
-
-
-> Regards,
-> Simon
-
