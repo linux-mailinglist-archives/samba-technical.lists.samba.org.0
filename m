@@ -2,48 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FD9F325C3E
-	for <lists+samba-technical@lfdr.de>; Fri, 26 Feb 2021 04:59:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2085325D7A
+	for <lists+samba-technical@lfdr.de>; Fri, 26 Feb 2021 07:24:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=5OOSheTsmDvajvnzVf2OuZkhdqPcwZLI0c92ZbmYUrU=; b=t9cM+bZeIfDwlNHpvDOU6+JkaM
-	BKVqB3uvPtWEVD/I61KZgfPiAQ+4Mck1STT9Jd1Rfu15Qmc02YswaNFnLfEj/ejiKfd91U395OxoQ
-	v8UvrJmjB7wl2YCA+boc10aJsylrHFTdHoMZe9vOC8z9E6OKkcBb/FxGJB1e9UN0v5p+tU+aq5mjM
-	Hgln2fiJeM186CXqoGjwD5HARUOEo/HUPOodDDVoJLHfmuol9igQpFK1c97j+GHLs98nC35HIv0R8
-	pUGe+hG9QC48lRATz0qgq2JeI/6mNd/0EE0O2aTH0C5KHwftogRfkuKIujwYNwE5Sasz3CvUIDh+a
-	LH6/7NYA==;
-Received: from ip6-localhost ([::1]:62222 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=UpdXbp4xVrHxFuPBRsFNXrxm0Jh5B6nTZfp0xYAHVc0=; b=PuE+XBO8uAQ6I30YTJPwEY/gkK
+	FnFBGVfbV4N1c+Tz1XVVhtzarjabi5PVLuNO8lZHbDessQR/nQPvjNHrNR0VjH6bydR/rHKt30acP
+	Gvki9+BdpwQn513axUvuPulQMXCkAtO3T0uuDME+qlGRnKujDzO/GHAFeA6RcUB42Va40BtRwFDUy
+	HKKZZ8KzLYknkmkrvlyh+ALTyuD+LeM4rNCf/BubQ/TxIedRQsP3hTTYCuxW+xAJqVfjj86g8b8pT
+	D8fs8S1jq3aVbCDk8UaPHv1NFQQJI/pg/lsYyJOvXyQBsuyPfQjcPSCSL4pKaUp06sryejoyMjnnt
+	QSgFnFFw==;
+Received: from ip6-localhost ([::1]:18510 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lFUGZ-001VHb-3v; Fri, 26 Feb 2021 03:58:11 +0000
-Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:47655 helo=ozlabs.org) 
+	id 1lFWX4-001W4b-D9; Fri, 26 Feb 2021 06:23:22 +0000
+Received: from mail-il1-x135.google.com ([2607:f8b0:4864:20::135]:34171) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lFUGS-001VHR-3o
- for samba-technical@lists.samba.org; Fri, 26 Feb 2021 03:58:07 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4Dmwpy2CWRz9rx6;
- Fri, 26 Feb 2021 14:57:45 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=202004;
- t=1614311868; bh=NmCTmM3LTuvU9yeW9636xIGd2WGwjXSNyBx9Bjf0V6c=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=H3ey8r+l2kBnFvda1WH61l9cuhWVg1N1hvzTZ0w5cvhE29Z7NQeZ9o7Q21Npd9/a4
- I3AOyTXKHZ/5PxSVbgrAs8R9XXz1sKq+zQmnJmr//JwmMt0y07Bd3qsSo5yYfxsWs2
- 242uwxNAM4H5ZzwiwEJC94HxXyb/5keGbyIgm2BK2q88y9ZMLzksVmas3oqRYFl+dD
- 4WzEvcNCKT74sEU3iBf8I3Buo9pIxfK06cwBZpOKrRWBQkI4DJciB3ol+211+DZvJw
- XrzBl/OAsuhaZSp2o7wnnOXOjeStAMfeaieUU2eM7g6rScOcUPDjdCdAQIe2/5/um/
- RbWJ683OGgA3g==
-Date: Fri, 26 Feb 2021 14:57:36 +1100
-To: Ralph Boehme <slow@samba.org>
-Subject: Re: Possible bug in ctdb
-Message-ID: <20210226145736.316f50b7@martins.ozlabs.org>
-In-Reply-To: <4ff83f49-9c37-4067-7ce4-c21ac2a34b0a@samba.org>
-References: <4ff83f49-9c37-4067-7ce4-c21ac2a34b0a@samba.org>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ (Exim) id 1lFWWv-001W48-Gy
+ for samba-technical@lists.samba.org; Fri, 26 Feb 2021 06:23:17 +0000
+Received: by mail-il1-x135.google.com with SMTP id q9so7171688ilo.1
+ for <samba-technical@lists.samba.org>; Thu, 25 Feb 2021 22:23:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=UpdXbp4xVrHxFuPBRsFNXrxm0Jh5B6nTZfp0xYAHVc0=;
+ b=GuRJyoyFjOufz2qnlOHJax4LE1PXQnzj3hkQ693b/aZTkjFAB8D7WWpYTDw/dzMtr3
+ 7vvgyskhalh4gdAGaBnLwY5oXTs/LsFsthx7zR87pfaaLH70Cgrfgtec3gUgNmCohLSS
+ 3KfP+5syTv7QZhyEw83BEv0rKtXCXP0eIJzvqfaEN4b4Aco9DN2J9CL2GUCCN6IoUf8n
+ L6eGAVDjfDHdH3mg6m0lpiMmwLgRO1nAV3Mi88mv6ezNDjgMB0r/edCiMWoVY6dzb8z6
+ PdccU49XdAY2qYC1Yl+W9uC2gc6XK8hEPqBD+2SdJw5PP5HCBj4AZsrVWeFB+StX6X28
+ os9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=UpdXbp4xVrHxFuPBRsFNXrxm0Jh5B6nTZfp0xYAHVc0=;
+ b=i9Tdi43tjaTaCEPfSOoQhQ2sEgAwRUQDlw0mHxDbB4zvAGbKJd5AbfwSnn7tOqKyjY
+ jr9E+w9+v70APCkwTREEkYlzgz5QCPiZKLZATyW3ig0CnlzQPKZXZT9gxPNjKr5OuOgV
+ 5MLJ5Scz2BekprWVwT9mV9CKrcVO1gru0k0f9K3xEaMg4qYqJwam86cEx1+U+MT3PLCN
+ SmEvl+G0RpP0sN2tNTPoKH/tdxsGEjt10gJO9mkSkArwaceXgBVXzzck7e3pczS9NlKK
+ oXRFvBfkbcdRDNzYuCn/pOYBQVsJwqWnk5+MfYGNtK8syg9Lec8TQNt2GNHogYazKp/t
+ wEYg==
+X-Gm-Message-State: AOAM533yrWbrh4aGj6hPWNNsWvVPvBYUeY8c2d1Yxi14tck7fmbdODK3
+ UbJ4XzEc/qiGh1D/i4Wpoo8AcBwkGdEfwanRRvTFsq0I
+X-Google-Smtp-Source: ABdhPJwaOscToLpz0wP9OVfU2FLkDNmX7dkB3eBn6h5+vRBakbuYr44Ozs5/AMd+4Ti1lYinLZtNYLobY51M8v8Oy3A=
+X-Received: by 2002:a92:c04b:: with SMTP id o11mr1183443ilf.42.1614320587768; 
+ Thu, 25 Feb 2021 22:23:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/dgMEC24+MBrWx/jgL88PchH";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+References: <4ff83f49-9c37-4067-7ce4-c21ac2a34b0a@samba.org>
+ <20210226145736.316f50b7@martins.ozlabs.org>
+In-Reply-To: <20210226145736.316f50b7@martins.ozlabs.org>
+Date: Fri, 26 Feb 2021 17:22:56 +1100
+Message-ID: <CAJ+X7mTqfRixnRWn96oZ9VdQ4k7e3v+GzKazUB+0WWiwvuA=Hw@mail.gmail.com>
+Subject: Re: Possible bug in ctdb
+To: Martin Schwenke <martin@meltin.net>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,116 +68,96 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
+From: Amitay Isaacs via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Amitay Isaacs <amitay@gmail.com>
 Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---Sig_/dgMEC24+MBrWx/jgL88PchH
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+On Fri, Feb 26, 2021 at 2:57 PM Martin Schwenke <martin@meltin.net> wrote:
+>
+> Hi Ralph,
+>
+> On Thu, 25 Feb 2021 13:05:52 +0100, Ralph Boehme <slow@samba.org> wrote:
+>
+> > I noticed the following if condition in check_static_boolean_change()
+> > (defined twice):
+> >
+> >      if (mode == CONF_MODE_RELOAD || CONF_MODE_API)
+> >
+> > This will always evaluate to true, I guess that is not intended and the
+> > fix would be
+> >
+> >      if (mode == CONF_MODE_RELOAD || mode == CONF_MODE_API)
+> >
+> > (WIP attached, lacking bugnumber).
+>
+> Yes, obviously a bug.  My bug.  Fix looks sane.
+>
+> Note that this code is actually a no-op and it just logs a warning.
+> CTDB doesn't currently support reloading the configuration at run
+> time... but the config system does. When reloading is implemented it
+> will flag that after a config reload we don't look at the new value of
+> the variable that points to that config value, so there is no change the
+> daemon's behaviour even if that config setting is changed.  There are
+> just some things that you can't (or don't want to ;-) change at
+> run-time.
+>
+> For consistency I'd almost like to see that condition coded as:
+>
+>   if (conf_maybe_updating(mode)) {
+>
+> although perhaps we should just write it as:
+>
+>   if (mode != CONF_MODE_LOAD) {
+>
+> since that catches the other cases consistently.
+>
+> Let's see what Amitay says.  :-)
+>
 
-Hi Ralph,
+Let's do mode != CONF_MODE_LOAD...
 
-On Thu, 25 Feb 2021 13:05:52 +0100, Ralph Boehme <slow@samba.org> wrote:
+> > I'm currently debugging a ctdb issue where I wondered whether tdb
+> > mutexes are actually enabled (I was seeing "tdb_chain*un*lock() took
+> > +-10 ms" many times in the logs).
+> >
+> > "tdb mutexes" defaults to true, so I wonder whether this bug can cause
+> > the default to not become effective, still wrapping my hear around the
+> > ctdb config code...
+>
+> Since it is just a warning, that can't happen.  2 simple
+> checks to do.
+>
+> * Check the logs for the attach:
+>
+>   2021/01/30 17:40:32.096676 ctdbd[1440545]: Attached to database
+>   'yip/node.0/db/volatile/foo.tdb.0' with flags 0x1c41
+>
+>   That's logged at NOTICE level.
+>
+>   #define TDB_MUTEX_LOCKING 4096 /** ... */  so that's the leading 1.
+>
+>   I see this consistently for volatile databases.
+>
+> * Check the logs for the warning "Ignoring update of ..."
+>
+>   This is just to see if the warning is triggered.
+>
+>   I don't see it when I try it out, so I started looking at the conf
+>   code to try to figure out why we don't see this logged when the
+>   config is initially loaded.
+>
+>   However, the config is initially loaded before logging is setup
+>   (standard chicken/egg situation), so warnings/errors from initial
+>   configuration load probably go to stderr?  Perhaps systemd has caught
+>   them and put them in the journal?  We should do something about
+>   that... not sure what.
+>
+> How's that?
+>
+> peace & happiness,
+> martin
 
-> I noticed the following if condition in check_static_boolean_change()=20
-> (defined twice):
->=20
->      if (mode =3D=3D CONF_MODE_RELOAD || CONF_MODE_API)
->=20
-> This will always evaluate to true, I guess that is not intended and the=20
-> fix would be
->=20
->      if (mode =3D=3D CONF_MODE_RELOAD || mode =3D=3D CONF_MODE_API)
->=20
-> (WIP attached, lacking bugnumber).
-
-Yes, obviously a bug.  My bug.  Fix looks sane.
-
-Note that this code is actually a no-op and it just logs a warning.
-CTDB doesn't currently support reloading the configuration at run
-time... but the config system does. When reloading is implemented it
-will flag that after a config reload we don't look at the new value of
-the variable that points to that config value, so there is no change the
-daemon's behaviour even if that config setting is changed.  There are
-just some things that you can't (or don't want to ;-) change at
-run-time.
-
-For consistency I'd almost like to see that condition coded as:
-
-  if (conf_maybe_updating(mode)) {
-
-although perhaps we should just write it as:
-
-  if (mode !=3D CONF_MODE_LOAD) {
-
-since that catches the other cases consistently.
-
-Let's see what Amitay says.  :-)
-
-> I'm currently debugging a ctdb issue where I wondered whether tdb=20
-> mutexes are actually enabled (I was seeing "tdb_chain*un*lock() took=20
-> +-10 ms" many times in the logs).
->=20
-> "tdb mutexes" defaults to true, so I wonder whether this bug can cause=20
-> the default to not become effective, still wrapping my hear around the=20
-> ctdb config code...
-
-Since it is just a warning, that can't happen.  2 simple
-checks to do.
-
-* Check the logs for the attach:
-
-  2021/01/30 17:40:32.096676 ctdbd[1440545]: Attached to database
-  'yip/node.0/db/volatile/foo.tdb.0' with flags 0x1c41
-
-  That's logged at NOTICE level.
-
-  #define TDB_MUTEX_LOCKING 4096 /** ... */  so that's the leading 1.
-
-  I see this consistently for volatile databases.
-
-* Check the logs for the warning "Ignoring update of ..."
-
-  This is just to see if the warning is triggered.
-
-  I don't see it when I try it out, so I started looking at the conf
-  code to try to figure out why we don't see this logged when the
-  config is initially loaded.
-
-  However, the config is initially loaded before logging is setup
-  (standard chicken/egg situation), so warnings/errors from initial
-  configuration load probably go to stderr?  Perhaps systemd has caught
-  them and put them in the journal?  We should do something about
-  that... not sure what.
-
-How's that?
-
-peace & happiness,
-martin
-
---Sig_/dgMEC24+MBrWx/jgL88PchH
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEpl+9WVt0RsCS8yPD7qs4B6MivQgFAmA4cbAACgkQ7qs4B6Mi
-vQgNaw/9EMiyFwwkmyDSI5iBl4UnNJC1tqayIsyCyQGRxOr9EBPjhU7szwM8/Qav
-w7oyDS2sEn5So/g0oAOPdLm+yqERsqQxoEBM7Rgi5It4jhPN7zeKYauKwzB3iA0V
-c5xtbqcxk0hk9RwEQ2I+Sb/YKZVuW+e80WjmzXlYTgGflDKzo2zEHDwwgLm/BvbN
-7XnmAH+xG6QC9QXC20aAsqsTwlfHYaH+YyrV2YLiMAbVtedGSE5HgH3u5/LuBbak
-myJXOkEvw8WarkZjfgSLHHqqI6hnDZW4wNKx/2cLjji0gpQq9j8Bd6WXLZIVwVEw
-qO/3SQMALXW05ggJvZRl+MvK1npDhNYZvMA+yX8ZPGMRKEEDd1C/c2NyQ841SG1d
-cbKMxEIs5pkPeUQzBDht+YcufWDdH7s0MHt0b1kK2w2T46CDB46RGoJ8tp3asQFT
-r/GTCdVGszVMctPmFUOiRKT4M35LnJ0dmdw6Ee5rKLqvBlznun9Ck8CZtoj4tNSf
-dEBjDT6dqtv3djMVjJBKG7Kpj1G9E3zGwWpTnI9W/MgKblswElSvHRBasB3Z3yQx
-bspCXuJLME+sTjx3o99xgwRgqY7kphPS41DmAFo0SKyRQlSntBz2MJV34EojG0WN
-0qyAMJoEpOHcXg16bYQXZUP5TAhFbRl0pEMjgG36z9Yu+Hs35fA=
-=v4Cn
------END PGP SIGNATURE-----
-
---Sig_/dgMEC24+MBrWx/jgL88PchH--
+Amitay.
 
