@@ -2,61 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5ADF9325482
-	for <lists+samba-technical@lfdr.de>; Thu, 25 Feb 2021 18:25:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1FD9F325C3E
+	for <lists+samba-technical@lfdr.de>; Fri, 26 Feb 2021 04:59:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=EK02vbDhS3wbLOl6TYczf2PM3ezTw7wQjxU6JZk2d0k=; b=XldNlUQvbjOl7klmZmxhJ2+pnb
-	MlYu91Yy0f2q2SItDMgjIGqG6uFWoeIjti9iaC224bBGfbLASsq74yN9DMQerYoj+7jKXvfOE/YWW
-	xSp9XGecpBMsAtCYK+RpLsTl6ibbbljDxhnxXeTOai7y6NkTMJi29OSL9TIijebECWueE/F16wHI6
-	WSVvbFDCbapb03SlikRF7ONjk4OxzRiBPL2elr9qnUWxtnKcuUNJ4s7jnSCSE8H7PmNzRBtoXOqSc
-	pNKPiEwU9/FF0i7KepDzSI6R52Zw1K1PQSaTR/Yf84j0aHSkmS5b5BnSV7nuchxyHCE08bGSpx0tI
-	eSJXSCJQ==;
-Received: from ip6-localhost ([::1]:50030 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=5OOSheTsmDvajvnzVf2OuZkhdqPcwZLI0c92ZbmYUrU=; b=t9cM+bZeIfDwlNHpvDOU6+JkaM
+	BKVqB3uvPtWEVD/I61KZgfPiAQ+4Mck1STT9Jd1Rfu15Qmc02YswaNFnLfEj/ejiKfd91U395OxoQ
+	v8UvrJmjB7wl2YCA+boc10aJsylrHFTdHoMZe9vOC8z9E6OKkcBb/FxGJB1e9UN0v5p+tU+aq5mjM
+	Hgln2fiJeM186CXqoGjwD5HARUOEo/HUPOodDDVoJLHfmuol9igQpFK1c97j+GHLs98nC35HIv0R8
+	pUGe+hG9QC48lRATz0qgq2JeI/6mNd/0EE0O2aTH0C5KHwftogRfkuKIujwYNwE5Sasz3CvUIDh+a
+	LH6/7NYA==;
+Received: from ip6-localhost ([::1]:62222 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lFKNV-001SnO-Rm; Thu, 25 Feb 2021 17:24:41 +0000
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334]:54055) 
+	id 1lFUGZ-001VHb-3v; Fri, 26 Feb 2021 03:58:11 +0000
+Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:47655 helo=ozlabs.org) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lFKNP-001SnH-Ar
- for samba-technical@lists.samba.org; Thu, 25 Feb 2021 17:24:37 +0000
-Received: by mail-wm1-x334.google.com with SMTP id x16so5276844wmk.3
- for <samba-technical@lists.samba.org>; Thu, 25 Feb 2021 09:24:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=EK02vbDhS3wbLOl6TYczf2PM3ezTw7wQjxU6JZk2d0k=;
- b=SAevHF6hhs7FjUAOc9IrLTm5nvkmoTyjLrOAFH47mlAv/nASmwLYW0xYjzCOpfHCJf
- VlxnKgSpNrXn6v6IsEXXbZ4ulhrDlH5znaGwXIHXuKhy5chse6FM82D6HK0FrQiJVGfl
- f7breI+//LALSEC99fmG+SIzr1wJA9gli7DGqlfA9yBA7oE6ZodHKr0U+msdvKJgUQ7X
- sBU0W6bHaZHO/hdgoe3FeUP3Jdn+0lMkmkdV9W0yClq826SL8pFRk3HZpbQlTD7oRTRH
- VzCBVmpAO1raQmvuMPjKhRv9zwCVn6Z6q5V0a1nm1KCewRUnu9x1l3Bk09oi8hxWADPQ
- x3ig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=EK02vbDhS3wbLOl6TYczf2PM3ezTw7wQjxU6JZk2d0k=;
- b=JraIyRIfMdEJORY2+GzzA2taCt84jdkHsLB7H6pX98/lnfqesbQbwu3jcIR6ahx5WA
- twHcCQ9JipUjxUt0YOLyq5KBNLI6BDEba2kziQIwsCzvPlVDdfxAk1hny/FNxdOrcIlN
- AAtJKzOgOqewt6O4/hxH/kpnGK6uH1BqPbEHWDA89X1J2UKwSmOgoo+4mZUJZh06srUp
- ZERYohYxdQtbT845+xEgi29IB8VRnHWDHbb9+/vR3EeoL89dGruIn7KANPy0jWRhwKmS
- 3nYWFoBxxZNQO8nlEGZRoqWDQNAI0B/HwliNHi2yrMjrys7lbsKZxyqCwEv1ZDjgP/E9
- jYpg==
-X-Gm-Message-State: AOAM533ONOEqsaE8V9FvjhEfj7o92cThmYjWPmmQbc8qnt+koE/E4t/p
- 02Cid2CRyzZFb3E6cPXzirVRqG1/Nro+xkr7HT0=
-X-Google-Smtp-Source: ABdhPJxOcCtzSPwg7yP3l3wsDoxAiIo+4zlc8JoAElQd+4Nya2+hYUrm5ATBMy2MZWqkcEpTBAoHraQSVdUR+fSp2fI=
-X-Received: by 2002:a1c:7e4e:: with SMTP id z75mr4269599wmc.168.1614273873949; 
- Thu, 25 Feb 2021 09:24:33 -0800 (PST)
+ (Exim) id 1lFUGS-001VHR-3o
+ for samba-technical@lists.samba.org; Fri, 26 Feb 2021 03:58:07 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4Dmwpy2CWRz9rx6;
+ Fri, 26 Feb 2021 14:57:45 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=202004;
+ t=1614311868; bh=NmCTmM3LTuvU9yeW9636xIGd2WGwjXSNyBx9Bjf0V6c=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=H3ey8r+l2kBnFvda1WH61l9cuhWVg1N1hvzTZ0w5cvhE29Z7NQeZ9o7Q21Npd9/a4
+ I3AOyTXKHZ/5PxSVbgrAs8R9XXz1sKq+zQmnJmr//JwmMt0y07Bd3qsSo5yYfxsWs2
+ 242uwxNAM4H5ZzwiwEJC94HxXyb/5keGbyIgm2BK2q88y9ZMLzksVmas3oqRYFl+dD
+ 4WzEvcNCKT74sEU3iBf8I3Buo9pIxfK06cwBZpOKrRWBQkI4DJciB3ol+211+DZvJw
+ XrzBl/OAsuhaZSp2o7wnnOXOjeStAMfeaieUU2eM7g6rScOcUPDjdCdAQIe2/5/um/
+ RbWJ683OGgA3g==
+Date: Fri, 26 Feb 2021 14:57:36 +1100
+To: Ralph Boehme <slow@samba.org>
+Subject: Re: Possible bug in ctdb
+Message-ID: <20210226145736.316f50b7@martins.ozlabs.org>
+In-Reply-To: <4ff83f49-9c37-4067-7ce4-c21ac2a34b0a@samba.org>
+References: <4ff83f49-9c37-4067-7ce4-c21ac2a34b0a@samba.org>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <0736dea6-ab54-454d-a40b-adaa372a1f53@www.fastmail.com>
- <CAN05THRTEXjZ+TQB+X2kA_i8CgKctBDB1UhbifAu0WzqHOuNmw@mail.gmail.com>
- <cd9f90aa-53f0-43a2-9683-b5730d01ca90@www.fastmail.com>
- <CAN05THQfXstKOvVMN-KGBk6bdkUaQCa_4CY9o5oXn_qDhdW9-w@mail.gmail.com>
-In-Reply-To: <CAN05THQfXstKOvVMN-KGBk6bdkUaQCa_4CY9o5oXn_qDhdW9-w@mail.gmail.com>
-Date: Thu, 25 Feb 2021 11:24:23 -0600
-Message-ID: <CAH2r5muZ0Dc=1dR9oO5+N0wZ5KM1KjePk_yD-f5SpodS9eZmXw@mail.gmail.com>
-Subject: Re: Using a password containing a comma fails with 5.11.1 kernel
-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; boundary="Sig_/dgMEC24+MBrWx/jgL88PchH";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,45 +57,116 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, linux-cifs <linux-cifs@vger.kernel.org>,
- Simon Taylor <simon@simon-taylor.me.uk>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Feb 25, 2021 at 3:34 AM ronnie sahlberg via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> On Thu, Feb 25, 2021 at 7:18 PM Simon Taylor <simon@simon-taylor.me.uk> wrote:
-> >
-> > On Thu, 25 Feb 2021, at 7:37 AM, ronnie sahlberg wrote:
-> > > Hi Simon,
-> > >
-> > > Looks like the special handling of escaped ',' characters in the
-> > > password mount argument was lost when we
-> > > switched to the new mount api.
-> > >
-> > > I just sent a patch for this to the list,  can you try that patch?
-> > >
-> > > Thanks for the report.
-> >
-> > Hi Ronnie,
-> >
-> > Thanks. Your patch resolved the issue.
-> >
->
-> That is good to hear.
->
-> Steve,  can you add a Tested-by for Simon and maybe we should have cc
-> stable so it gets into 5.11 ?
+--Sig_/dgMEC24+MBrWx/jgL88PchH
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-Yes - agreed
+Hi Ralph,
 
+On Thu, 25 Feb 2021 13:05:52 +0100, Ralph Boehme <slow@samba.org> wrote:
 
--- 
-Thanks,
+> I noticed the following if condition in check_static_boolean_change()=20
+> (defined twice):
+>=20
+>      if (mode =3D=3D CONF_MODE_RELOAD || CONF_MODE_API)
+>=20
+> This will always evaluate to true, I guess that is not intended and the=20
+> fix would be
+>=20
+>      if (mode =3D=3D CONF_MODE_RELOAD || mode =3D=3D CONF_MODE_API)
+>=20
+> (WIP attached, lacking bugnumber).
 
-Steve
+Yes, obviously a bug.  My bug.  Fix looks sane.
+
+Note that this code is actually a no-op and it just logs a warning.
+CTDB doesn't currently support reloading the configuration at run
+time... but the config system does. When reloading is implemented it
+will flag that after a config reload we don't look at the new value of
+the variable that points to that config value, so there is no change the
+daemon's behaviour even if that config setting is changed.  There are
+just some things that you can't (or don't want to ;-) change at
+run-time.
+
+For consistency I'd almost like to see that condition coded as:
+
+  if (conf_maybe_updating(mode)) {
+
+although perhaps we should just write it as:
+
+  if (mode !=3D CONF_MODE_LOAD) {
+
+since that catches the other cases consistently.
+
+Let's see what Amitay says.  :-)
+
+> I'm currently debugging a ctdb issue where I wondered whether tdb=20
+> mutexes are actually enabled (I was seeing "tdb_chain*un*lock() took=20
+> +-10 ms" many times in the logs).
+>=20
+> "tdb mutexes" defaults to true, so I wonder whether this bug can cause=20
+> the default to not become effective, still wrapping my hear around the=20
+> ctdb config code...
+
+Since it is just a warning, that can't happen.  2 simple
+checks to do.
+
+* Check the logs for the attach:
+
+  2021/01/30 17:40:32.096676 ctdbd[1440545]: Attached to database
+  'yip/node.0/db/volatile/foo.tdb.0' with flags 0x1c41
+
+  That's logged at NOTICE level.
+
+  #define TDB_MUTEX_LOCKING 4096 /** ... */  so that's the leading 1.
+
+  I see this consistently for volatile databases.
+
+* Check the logs for the warning "Ignoring update of ..."
+
+  This is just to see if the warning is triggered.
+
+  I don't see it when I try it out, so I started looking at the conf
+  code to try to figure out why we don't see this logged when the
+  config is initially loaded.
+
+  However, the config is initially loaded before logging is setup
+  (standard chicken/egg situation), so warnings/errors from initial
+  configuration load probably go to stderr?  Perhaps systemd has caught
+  them and put them in the journal?  We should do something about
+  that... not sure what.
+
+How's that?
+
+peace & happiness,
+martin
+
+--Sig_/dgMEC24+MBrWx/jgL88PchH
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEpl+9WVt0RsCS8yPD7qs4B6MivQgFAmA4cbAACgkQ7qs4B6Mi
+vQgNaw/9EMiyFwwkmyDSI5iBl4UnNJC1tqayIsyCyQGRxOr9EBPjhU7szwM8/Qav
+w7oyDS2sEn5So/g0oAOPdLm+yqERsqQxoEBM7Rgi5It4jhPN7zeKYauKwzB3iA0V
+c5xtbqcxk0hk9RwEQ2I+Sb/YKZVuW+e80WjmzXlYTgGflDKzo2zEHDwwgLm/BvbN
+7XnmAH+xG6QC9QXC20aAsqsTwlfHYaH+YyrV2YLiMAbVtedGSE5HgH3u5/LuBbak
+myJXOkEvw8WarkZjfgSLHHqqI6hnDZW4wNKx/2cLjji0gpQq9j8Bd6WXLZIVwVEw
+qO/3SQMALXW05ggJvZRl+MvK1npDhNYZvMA+yX8ZPGMRKEEDd1C/c2NyQ841SG1d
+cbKMxEIs5pkPeUQzBDht+YcufWDdH7s0MHt0b1kK2w2T46CDB46RGoJ8tp3asQFT
+r/GTCdVGszVMctPmFUOiRKT4M35LnJ0dmdw6Ee5rKLqvBlznun9Ck8CZtoj4tNSf
+dEBjDT6dqtv3djMVjJBKG7Kpj1G9E3zGwWpTnI9W/MgKblswElSvHRBasB3Z3yQx
+bspCXuJLME+sTjx3o99xgwRgqY7kphPS41DmAFo0SKyRQlSntBz2MJV34EojG0WN
+0qyAMJoEpOHcXg16bYQXZUP5TAhFbRl0pEMjgG36z9Yu+Hs35fA=
+=v4Cn
+-----END PGP SIGNATURE-----
+
+--Sig_/dgMEC24+MBrWx/jgL88PchH--
 
