@@ -2,48 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B9E432968E
-	for <lists+samba-technical@lfdr.de>; Tue,  2 Mar 2021 07:57:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B9033296A8
+	for <lists+samba-technical@lfdr.de>; Tue,  2 Mar 2021 08:40:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=1T6NuhTShTMAP1CH1KsCIDo2Yp+M3qUYYsv3bupa0VI=; b=voRdx7UofR1f+rVKcFCP6tiZQA
-	JPdFoJ/wkTwjNEtpaTN+NcxE66RH8C27iZzlvpO0u3FCXtTv+b54tnNyXoO6ougCYk66/rw/UninE
-	dWvCQTKy/+Wo9GEsfA6P3eQJGA7VPKL1WgufTeuCVCkngXHgrS/3TiTrTpihxbQJE0/uzgSVOe27S
-	W+L62etk0K71pitLqY3lOMigAfrTMdPc44WfwDzVjdYgKPpTN7i5tHv/a6IyEgLdejfsaeQSHHyyz
-	BVpUyJgoz1n/YGfQ/nJCXmqo4KY6z9/79jtZ19dqQMS6yCAUJ44jaxtQ13zD+sxObvbhZhoRw85dm
-	qzTwoO2w==;
-Received: from ip6-localhost ([::1]:19912 helo=hr1.samba.org) 
+	bh=qJVT67X8a71wmnQJLE5ffZSwJ6qEsRDFkoI31AN6YtQ=; b=MobdRwPjz30lg/H9CbrDQld+0J
+	NZp4bBW6dq3I2BHObrJyhGU4f/b2fXyNOivb22W+zvVh1YrbC4ps42fAmiIFck/ERQL2YmT6AmtsI
+	/usy3egcRcD8+Dc/xCegf9vi+pENP0jeY9oXMAwcUL3bkzLAa/oMlzfaQ5IwpyUKVLYRYRP4QrZnH
+	64y0kMTcxgYrOEEPl2JZadO+kMLLGJ+DEm5MGCKVBqu+DTj/Psl8eSNga7NZpzuk4RBmF2Z0ardJk
+	XPC1x9tc1QM6mU86eo0BckaJd6wFYFc6XjFXkfb9FBcUnMl/E8g8mknRYufZ5uVlgH1CVwrQyjcXX
+	iAxlsekA==;
+Received: from ip6-localhost ([::1]:20636 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lGyxg-003pGc-Qi; Tue, 02 Mar 2021 06:56:52 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34542) 
+	id 1lGzdS-003pS6-Gu; Tue, 02 Mar 2021 07:40:02 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48804) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lGyxU-003pGU-91
- for samba-technical@lists.samba.org; Tue, 02 Mar 2021 06:56:43 +0000
+ (Exim) id 1lGzdC-003pRh-DX; Tue, 02 Mar 2021 07:39:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=1T6NuhTShTMAP1CH1KsCIDo2Yp+M3qUYYsv3bupa0VI=; b=Fz/YvNwAlETFJnOqROpYI1pKN/
- EOqqB3aNPHuAcEJI2T9d5q8wtiWaqPig0kiVfqMpfCQVgQK/82GQ5m6efy+LrvKxgIWPWp6+SBlkx
- akwHOM5NK+UWQmW3vKwa3ldX9AxiGzmDnsfZ7ISb8q/KJK0A478AAqgMucl7fuBF2uxorOagnnPJo
- ZwGT/kpOVL/AEGegU3HZ4dVjxDO6W1Ii0xN0nN8Y4sAbgxqK5w5bZE+n+OARsGF/YQbLQSfsUMuYx
- vwYmXzwysjwL9yGjy9Gx+gmufFYGsVSRfl9u8RdWnRF5hSF6+7D/NfaprrEC05DyJwpIMeLAF7/1B
- /Bp3Q/YCvRrM1ZgR8lCFA2M+i+rGEIEqnTGb88RLoaXqUZi0fRcf566mjlPFeTOYONGs3qMg0/bH9
- gaVnRCvdsQhjgiiUZzDDoY7rPFKQQ+0LlyuHhDOqljGWh8Hwu8tr2pYqUPFjH02BLScX0gphZhi4c
- jGSjhwZocAPqTnxPPbZLeaBr;
+ s=42; h=Date:Message-ID:To:From:CC;
+ bh=qJVT67X8a71wmnQJLE5ffZSwJ6qEsRDFkoI31AN6YtQ=; b=feUr4v2/60OBiajplexq9iusC7
+ csrl01RsC2E9uFWVhCDbWhjNv341GReCxhgG7Rk7iZSFLPJ2p+9dhtZm0JkgPDq+7ryYyGnlEIQli
+ flCgfVVYiHKxImpiR2Nl3UX+ipQl05AJVY4bindbkyRieJy2pcoXANi8Jq0r/sEvca26h2iZWxQ0I
+ K/FY8VU4pEVElxOT8XbA458ep3olEeriWccdNgsvuv3WCf7kp6bzkNquJcOZ8ss3VmpgzXEOFypj5
+ 0mrYSvd7VUeqGsrpbCX2IcQQ5TPmiRBBDLJnqBF5LJOAEthGLc4qnjcdN5LR1j4lFyp+0vxPXDu3e
+ fENFkcu6FTIfl07IQAzKzlvMuU6lDEAzKOb6gxj54RgbsgtZsYqEUtDJTqWwoa3VTJNfZ0uj6Tci/
+ GcVOJkhMg264KeUUVd7CvvgXi23eWLCgbGzrbIk7Uaqtpasgew+SrNeGRfuchatcOSWmtxqxv6GaE
+ smnyCp7epID8KdVMu6RZw5w+;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lGyxQ-0003Wc-9I; Tue, 02 Mar 2021 06:56:36 +0000
-Subject: Re: TimeMachine support for Big Sur - missing F_FULLFSYNC?
-To: Tom Talpey <tom@talpey.com>, samba-technical@lists.samba.org
-References: <65d1ab99-7c0b-1fa0-b42e-bce947d9295a@talpey.com>
-Message-ID: <3868fb70-aba6-bb75-f831-7bff958d0ebc@samba.org>
-Date: Tue, 2 Mar 2021 07:56:35 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
+ (Exim) id 1lGzd6-0003oi-Sj; Tue, 02 Mar 2021 07:39:40 +0000
+Subject: SambaXP 2021 / Call for Paper / SMB IO Lab
+To: samba-technical@lists.samba.org, samba@lists.samba.org
+Organization: Samba Team
+Message-ID: <975dd347-70f2-7390-b811-b5afd745c2e7@samba.org>
+Date: Tue, 2 Mar 2021 08:39:40 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <65d1ab99-7c0b-1fa0-b42e-bce947d9295a@talpey.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="w6WptpZCTZzwymOtAiA15mE5CXi47FngK"
+Content-Type: text/plain; charset=utf-8
+Content-Language: de-DE
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,72 +55,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Karolin Seeger <kseeger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---w6WptpZCTZzwymOtAiA15mE5CXi47FngK
-Content-Type: multipart/mixed; boundary="CEKmjugqf2rcD7sF3sT3HXbWmMa5n3ASu";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Tom Talpey <tom@talpey.com>, samba-technical@lists.samba.org
-Message-ID: <3868fb70-aba6-bb75-f831-7bff958d0ebc@samba.org>
-Subject: Re: TimeMachine support for Big Sur - missing F_FULLFSYNC?
-References: <65d1ab99-7c0b-1fa0-b42e-bce947d9295a@talpey.com>
-In-Reply-To: <65d1ab99-7c0b-1fa0-b42e-bce947d9295a@talpey.com>
+Hi,
 
---CEKmjugqf2rcD7sF3sT3HXbWmMa5n3ASu
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+the *International Samba User and Developer Conference
+SambaXP 2021* (https://sambaxp.org/) will be a virtual event again.
+It will take place from 4th - 7th of May 2021.
 
-Hi Tom!
+There will be a workshop on *Setting up Samba as printserver*, and a
+free two-hour workshop on *Integrating SAMBA+ AIX in an existing AD
+domain* on Tuesday.
 
-Am 3/2/21 um 4:51 AM schrieb Tom Talpey via samba-technical:
-> Does the 4.7.6 version of vfs_fruit support F_FULLFSYNC advertisement?
-> I find some mentions of earlier versions supporting F_FULLSYNC (no extr=
-a
-> "F"!), but zero mention of either fullsync or fullfsync in release note=
-s
-> for any Samba/vfs_fruit version. Is that just a typo, in which case, wh=
-y
-> is Big Sur complaining?
+The main conference event will take place from Wednesday to Thursday and
+is free of charge again.
 
-You need at least 4.8 for this.
+The *Call for Paper* will end on March 19th, 2021, so please submit your
+talks now! :-)
 
-Cheers!
--Ralph
+We are further pleased to announce that a free *SMB Interoperability Lab
+(IO Lab)* will take place online from Wednesday to Friday (May 5th 3:00
+pm to 7th 9:00 pm) as part of sambaXP. During the lab participants work
+together and test, identify and fix bugs in a collaborative setting.
 
---=20
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+We are looking forward to meet you!
+
+Karolin
+
+-- 
+Karolin Seeger			https://samba.org/~kseeger/
+Release Manager Samba Team	https://samba.org
+Team Lead Samba SerNet		https://sernet.de
 
 
---CEKmjugqf2rcD7sF3sT3HXbWmMa5n3ASu--
-
---w6WptpZCTZzwymOtAiA15mE5CXi47FngK
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmA94aMFAwAAAAAACgkQqh6bcSY5nkb/
-DBAApoSBHJt25I4w6I4jERfnHBvYDnQvQvIcvjqX4QQVrBpGBwwEj0FIrr+VdUw6F3tOcZCOmQ2+
-m8D8BuJwWKguTcsyUnKg1I/fUXX0iKtLtAZKRxuV4WJVGK4ONtpV2hjddFNrMk527UiS2R98xTVh
-QsTkwJQglhRQDtuhljLWYTuivxXszvtoj0T2AUKCZAZxH1hWt5+i9aaF1JnFhT7Y3fUAejV/9Yj9
-rTuZpZEtQUNtVKdIL1uQEehfh1bdLlsjDNx4BkwvxSS/QwmJUdV4OJf3LppDv71IQwxuGL0/2bII
-HQfupYA39fBRDevzJpvyEatVskHEDChkZVfjTNFx+kk5dXn1Icw2vW2LN6YmY/NveutKG+nu7YuU
-EeTZjh/wBRkBelXRB718XTfmr984Ikk7QY3mmUDkOTG8Mt9tPvjfxMPzylIyvcHq1rmqayl484+O
-E6OmXm7FvUAo6Tva+3Xpkq6JYfZpqPk/O3UxNc3qeCb7+p8V2WhxmBcj6xvXa4NZyLZ1LH0bC+kp
-2sh0OC1ZyEN3IBGjCcH46OJ0ob9CBBhHmCLAM+DJj9Dt1oEuOr3lNTRM2vhCqCzlwcPJYX1Eaxuz
-oXYW47eIqaZuO4+lX6+S/ygLftTBr/jksIGwn+D1yfJAcrP8BwH2UvhueYxYtw1DXwyMRbAOa6wF
-Vn0=
-=Wt7l
------END PGP SIGNATURE-----
-
---w6WptpZCTZzwymOtAiA15mE5CXi47FngK--
 
