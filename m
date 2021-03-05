@@ -2,57 +2,133 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8F8E32DFA7
-	for <lists+samba-technical@lfdr.de>; Fri,  5 Mar 2021 03:25:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C98FE32F105
+	for <lists+samba-technical@lfdr.de>; Fri,  5 Mar 2021 18:21:04 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=/ouMQw4hn703IxWCPfTjylcVrdS2a1+6n0XA7xhMYuc=; b=ng33mAdbd+rCzkKep4CzxZKXLQ
-	6r6UKnXEQeEAVxc/aMUYI5c8VTVem75Vpni/SgsKxFhVHzBU8DeOil09D0Olvkw1sZNcCRhURw0++
-	OY2PRuh4nxHADvvjcXZ+IrJR6cDHxex9Cd3LZzyyMOZvzlaQ95IuMWnYuOvU2XNKqsW7/z0g2Pmyj
-	6gz55dfOC1gT1YdOUCgfXiiD8+6ny6rpLamdLDAAP3z/5vNJxidLLwb7E11cb0k9xwl7R8brv7bWO
-	Oinvp5k/8jpDMwKeVP6Fa7iJ3NRLg/7bAY63wOdc9ntRzZFow+2le/Lq/B0rj1rn9C8uifbFR3YDj
-	67xp8uNA==;
-Received: from ip6-localhost ([::1]:59464 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=cXNIFNjcFEa/Y6/7kepGaaySnJpBVdrUZGWTyqF+n1M=; b=0CLehH+29Bm5X/lieKatrPcjDQ
+	ukbdXluPEJvvr5UcVSIPw9ZkQq/RB4gsYSOCfR/44xIwdBl29jL7yCOxRFMcTks2cMJsR86MgxQ8/
+	JcJo10kdR6au3vTYn0sqMalyumpww5sp1kFspfCpD43/0aK8o1xmUS3jBOHutVHro0Z0UT8OvUkm3
+	MCPRNxN4Zirx2C6eb5tFedXl083Nv5wEsRqTAZymyqRO3cxK4FQRyQLmC6ChF0RMKxa4/U0fD6yDS
+	91xAWuSXPoW7ZL/aaNMj/nn0Zcu/bHnY1/xRpk9OHuzy6+YCnaE+QqNmfmpJA87aDTwmL8eOXy7av
+	Sc+rAzDA==;
+Received: from ip6-localhost ([::1]:41110 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lI0A2-004Ep1-RN; Fri, 05 Mar 2021 02:25:50 +0000
-Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233]:38357) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lI09x-004Eou-Tf
- for samba-technical@lists.samba.org; Fri, 05 Mar 2021 02:25:48 +0000
-Received: by mail-lj1-x233.google.com with SMTP id 2so847747ljr.5
- for <samba-technical@lists.samba.org>; Thu, 04 Mar 2021 18:25:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=/ouMQw4hn703IxWCPfTjylcVrdS2a1+6n0XA7xhMYuc=;
- b=KdQxBQSMPmUcmNTnnDnmfbX1ocHOgytNfsdmy91iCPcmUFbiG161PTr+eZ6UhaIx7v
- 07N+tiNmL4u5lJt7905Gyo8/yQ5qRZc4uW+JMZZttWNV/mYPOMa3u1vUUISpmqouTGLW
- HZk/Fn2vOHAQfSw+AM5VwteNYcfDZeSY+uXs9COc8/fJZU0zLLiEn9EVyfKCubplyrTo
- AtzZKj8RRo+fAIhPUHrCads7vRS3dz1BZM802CXEVeLsEs8Qx7Q284kxEFtphfaEyfXy
- BuesNwLgS9Vum7sFopzOPWDQR/LcqkSozppT2JCanxiLj9XJh6rx+F7UTQAe0Hgjacxb
- kptQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=/ouMQw4hn703IxWCPfTjylcVrdS2a1+6n0XA7xhMYuc=;
- b=SQF4iUxw0HIrRdP8rWhPryvTzhxqXC2IOfTvcv+2qDD/KN9ItW144rEryUje2yKYRF
- AiODw5E9crfxDHwPA7TdA2DuXNEFU6PB3XnsGyG2mHoskIPl9O1s5zIADct6LLBkrmRj
- hxDXgObrMHxymy+JILvkDoMNhfKYu0bIdivF+gWTz5wk+tVC+GBA62c3a8rO75UQoYee
- KXio57Df8EiMKJuHcFc50BTn3RB7h6mgXRE4vlGCHWtZxh4fxh2Ir30d7lhBtJhC5SFI
- rwiQLOwdf298s6Rpd6FGEv6fBq6HFvx2GxpK4dTO5JikvgDcANMVIVIuFrxRR9B3KD1b
- PPow==
-X-Gm-Message-State: AOAM530q6MmDeepRgbYV3pABpucYOkAHRxTF47TYKWhqyGL495JKSPPR
- Jx8s9fqduTKfRfr0lohvQmOQpryo7eII7rO1ag8=
-X-Google-Smtp-Source: ABdhPJzBbvLmXDO97L+21Wp4opmFuSwKK5iBNZ+Ci8gVoNR+tE86i5W+Du+VZnqLWCdiQE9gxD5duzU3a/sDdQ5Oaok=
-X-Received: by 2002:a05:651c:548:: with SMTP id
- q8mr3822433ljp.256.1614911144743; 
- Thu, 04 Mar 2021 18:25:44 -0800 (PST)
+	id 1lIE7o-004K1H-W3; Fri, 05 Mar 2021 17:20:29 +0000
+Received: from de-smtp-delivery-102.mimecast.com ([194.104.109.102]:24177) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1lIE7d-004K19-SG
+ for samba-technical@lists.samba.org; Fri, 05 Mar 2021 17:20:21 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1614964814;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=cXNIFNjcFEa/Y6/7kepGaaySnJpBVdrUZGWTyqF+n1M=;
+ b=Mqrnyh6CF0ra0pGYEtmB0KPYbZD9pqX4qq73zGpnX4CAV3oEhb5kUi7YMbG585iNu6iE/u
+ 2D8qASSm9YHghTDITQ82i/P7NtVWhwnOZVcEd22hKN36lGb7+uhJXCPo5osanQGRD8xXQh
+ njVONXeE5zTz3WphwSCqbZPujywWDus=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1614964814;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=cXNIFNjcFEa/Y6/7kepGaaySnJpBVdrUZGWTyqF+n1M=;
+ b=Mqrnyh6CF0ra0pGYEtmB0KPYbZD9pqX4qq73zGpnX4CAV3oEhb5kUi7YMbG585iNu6iE/u
+ 2D8qASSm9YHghTDITQ82i/P7NtVWhwnOZVcEd22hKN36lGb7+uhJXCPo5osanQGRD8xXQh
+ njVONXeE5zTz3WphwSCqbZPujywWDus=
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05lp2171.outbound.protection.outlook.com [104.47.17.171])
+ (Using TLS) by relay.mimecast.com with ESMTP id
+ de-mta-29-fTD7NEzVOIG7Cxum0KcBPQ-1; Fri, 05 Mar 2021 18:20:13 +0100
+X-MC-Unique: fTD7NEzVOIG7Cxum0KcBPQ-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ferP/psz7Ge/VnecHYUNsKAjSR4rANtSB6ZbVt8+dFYAod2F+LHuTwWAn5zcbPYQh0A7ttHfGAUN8Zwf80TP0UziD2E6FQBFwegrwURO2z4fhyzmYjT5eJ8VDv8gpJqko5mKzCARh772gZ6XCxmPCkAeSrYSaVVgPqnFm73tcsECYSWoeGHhMDGT0v0TbUB85epp/Zob7TI2/QgM+WyiFSJtV9jjE5d7JwV1N97NVNgi3GWTzjs9vXiDJEcsmTdOOJ/s26QWsO7jhk8iPWZkISJfAbOJc/jn36Rzj76lz90QZinz7oLLIjHCq5PzoZfCAVJuDyfBJFoXW43chcHi2g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cXNIFNjcFEa/Y6/7kepGaaySnJpBVdrUZGWTyqF+n1M=;
+ b=CDljFuF6A1P/Df1RU+srMmnsEr4xQDDJcvODd/Q+4UpwDFQJ7Npwy4yb1Tym+AMKPR2YtGeE81OXigKysYEdqZR80H6gyo504rM/iS0nI1JQ5yMbVZMeoazqquk3YCy4pvE5lanJyx2tV2ucse94sC00Sg1vDIr6LTHJ1SfzUH7TV4jLrlFQOc+QVWStbC8l3ifG0bwz5lX8AaXE+E8zQMhmk177+akoUNdMitTFiefTESrQWbQpkr1NXGajmuYNBB3oHHETRExpvSsMCTtBrjS6L/TlGhFRQyOPvMH+FrlvkBo4dTdpDfOsTXitxl6nVbsyWmEwXR1QO7Ek5UtENA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: samba.org; dkim=none (message not signed)
+ header.d=none;samba.org; dmarc=none action=none header.from=suse.com;
+Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com (2603:10a6:803:3::28)
+ by VE1PR04MB7280.eurprd04.prod.outlook.com (2603:10a6:800:1af::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.17; Fri, 5 Mar
+ 2021 17:20:12 +0000
+Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com
+ ([fe80::9c1d:89de:a08e:ccc9]) by VI1PR0402MB3359.eurprd04.prod.outlook.com
+ ([fe80::9c1d:89de:a08e:ccc9%4]) with mapi id 15.20.3890.028; Fri, 5 Mar 2021
+ 17:20:12 +0000
+To: Jeremy Allison <jra@samba.org>, Steve French <smfrench@gmail.com>,
+ samba-technical@lists.samba.org
+Subject: Re: flock possibly missing in SMB3 POSIX extensions?
+In-Reply-To: <20210226184037.GB94004@jeremy-acer>
+References: <878s7aztu8.fsf@suse.com> <20210226181702.GA94004@jeremy-acer>
+ <20210226184037.GB94004@jeremy-acer>
+Date: Fri, 05 Mar 2021 18:20:11 +0100
+Message-ID: <87czwdwm9g.fsf@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [2003:fa:70b:4a89:f10d:233d:fc9f:58b]
 MIME-Version: 1.0
-Date: Thu, 4 Mar 2021 20:25:33 -0600
-Message-ID: <CAH2r5muP7MU3QciheN9sbdJtOFwojfhq1yoradMzbunG7dsCQw@mail.gmail.com>
-Subject: [PATCH] cifs: fix credit accounting for extra channel
-To: CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="000000000000206bfe05bcc0cdb1"
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from localhost (2003:fa:70b:4a89:f10d:233d:fc9f:58b) by
+ ZR0P278CA0124.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:20::21) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3912.18 via Frontend Transport; Fri, 5 Mar 2021 17:20:11 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 40fa555c-bccc-43e5-faf1-08d8dffaef29
+X-MS-TrafficTypeDiagnostic: VE1PR04MB7280:
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Message-Info: i5tk+mmhRc3eLNBPRxibIBw9DQaC6HX9IiBlMVAsOx3AiqpRpWe72F5qXtoSf7W4hPmUzBN7gZ6vNCgGzqY/oSwjLLNAZ9Dc9vo+ZteckE8ciZwzQFjkPEFGUmTuMH8IpFruZ+AF4YWENvf3n3B3BBff+gV0b/c2EfmYVHhPOnU9bKpiMVtCo1d6OdBtSVDFd0HW8mbb60eMEVZvoy5yEivic7btUy69SxVAL7CZ2sao8JiE6HYwFKpHWNq7z0dejkZ73apZg+XUrHEakpqycO3mP0OyzOjcZ2ufY3xFW3xgg69Q9mkxql+eMJ+8w5Gq8QWmwAfzTRhbjXw4F39Dgqf4ON2l1Cd+dk/G1o7hu91Hiory2MlZQz+OklXGvDoB894AygKua04NphbePQUOQ2larhLFl3mSO05m6KYvWvcE2/vE8hDJAK5WqZMug1iNtTJQk8WDwl1uhb3YZVZQ1MZS6aFufuwKCfaM49NQBLnUfJAD5bILH7bNxZks/w2DQ015psmoMFeDWeq8aD9fCg==
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?WXJ3QldwYWVxcmJtZG9LdkxFREVkVVc1b216eEZ3alh1VzdQQWdIcGU0cXNQ?=
+ =?utf-8?B?bENJQXM4SCs2ZktzY2p6ZWJxZGY2REZzdXVod2pDelZxRWpJb3NVYjRWNXM4?=
+ =?utf-8?B?a3I0ZnhqNENpNVdtZzY2T2lOcjNJVGpWMmYzdlBMbS9GVWErcm9HZGtudFA5?=
+ =?utf-8?B?ZVZYNUJCRVc4ZVpuNkhTQUM1V2JQRGhyTVUyd095WEQ5VHYrZ0dLV3g0S09O?=
+ =?utf-8?B?Y0hZeTNrRlF4bjBsK28xYkZsdFgwNHRaWGFQQzBsZE9vVHVreTAwNWJsRFJX?=
+ =?utf-8?B?YlR4TVhON0N6enAzcVZldzJwUy9qMnk3ci9mTFlVV1ZhZWlQblZFbE9IU1ZS?=
+ =?utf-8?B?dW9FYlQ3YzUxV21ONWJVbmFaNEtxRitMTzMrU1hZaXptTmdkMnlYOXRMVlZP?=
+ =?utf-8?B?YVZsQXV3anhBem5GVzhQRVZFOGU2c3NWbTBSdmlnVmFQTEZrTXpzQ1BuWERP?=
+ =?utf-8?B?UHhuVWxPbnhZOUV3aDBhQVpELzJ5SFNwU0tiaVEvczNsVGdPYzF1TjRGSTZt?=
+ =?utf-8?B?WkxEWVp0TEtKZ0pPSnc0a1A2NUZmVTF2Rm1JVkVyb2p5aGxDVmNBSTJ4anln?=
+ =?utf-8?B?b29BUVRYbmZkNUdVTFQyRjNEK05GN2tIUGlUZk1zTzViQ1lzZ3hPdlRKK1RG?=
+ =?utf-8?B?L2Vyc0puaUovdkt5ZHNoSldqMC8zcHpWREsyNDFHa1A0cXp2bndnRU9ZYXBN?=
+ =?utf-8?B?Vk9KSGllTytoODRkb0tZcDJ5Wkg3Q0FSZnBQVWJrTEVxcDdCMnZxc3dmUTFU?=
+ =?utf-8?B?VERWb0Q2M3dyZ1ErcENSalVUZXFTNHVDTzV0dDgrdS9Dc2E0UTJlQVp5Y1hq?=
+ =?utf-8?B?RERmTXhWUEQyb0NuckJRWmNGUTBPYWM4aWxVUlBuRVhUWlNaVVk0L1hIbmlt?=
+ =?utf-8?B?NUZMWjRMVzNDb0J6MGhnM1pSRUgvK09tb3c2djZMQUFIblYzQnVrZnVLYWMy?=
+ =?utf-8?B?R2xVbkQ1WXpDRnBnbzNZblJyM1BsTG1US2FRUnQ1MUt2eHFZM1NmL3k0MDJ3?=
+ =?utf-8?B?NzJkZDdpV3RiR25MU3lLak44YVQ5YmpjT253YmphUXRLTG5RclpkdDkvdzk5?=
+ =?utf-8?B?bEdLbktLMEdkTklEVVJHb1JWZmk5b0hKRTg5YmNsajhETmx6RUZ5N2NwRG9v?=
+ =?utf-8?B?enJMWVpHOWZJVnFiQjZISUdoZmVublRYQUFqelZUb0tDZXlRMmZDd0E0L1dK?=
+ =?utf-8?B?dHBGazlzYjRmTndENUdKM0drK2l2U3hVUnhvTnk0MTZPVkJLdVJudEZ3TzNq?=
+ =?utf-8?B?VTduOEFqSjgxNGEvbzRjQlVodHNYQ3I3bU9QL3JEOVRBeWRYdFRpc3dMOFRV?=
+ =?utf-8?B?NVRKdWQ5VDFlWjA5NDRwZW9yQWZBWVlwQjJWVU91eTJIaTh6ekZqTEJ0VXhP?=
+ =?utf-8?B?M1h4N1A4Q3ROOTZ5U3oyckFFYlA1amx2b3FtMjBnM0lrV29PeE92aTBDNVM1?=
+ =?utf-8?B?cEF1czhhTGdyOTRjZ1BlZlVURjlFcGk4Q0NxUmNKeXBiaW9HY2Y1MVYzVW1T?=
+ =?utf-8?B?a2pwaVdoVnhEK2dISHM1NHlzR0paTUE5d0ZGVlB1ekVIbHJwUm41K3NRZUxP?=
+ =?utf-8?B?Z01RZmxkVUFRZTEwR2NVcmtXN1YrQVgxeU96TjhYK2lnZXNYSWQwcmo0TTNz?=
+ =?utf-8?B?QW1iN3BJazRxbUxQdWZwMGxIcjBBbGpCc3NxaE9vWUVSVFM2QjhFQ25OVjY1?=
+ =?utf-8?B?Sy9Xb3BXdU1ZVHRCSzF2bHErVlFtRTFOK1Vicmx1WThNeEYzY2NUQjlFd0l4?=
+ =?utf-8?B?VWNJVWw2WHg3dkg5RlBya1BNVlEvazdSMmlaWHdHMTd4L3FlZGRoU2hnd3lQ?=
+ =?utf-8?B?VkZXWnpLZ0h2VkZNWGVsTmsrNGFITk1QVFl2VVdLU3V0WGpMcWNLRUVQbWRF?=
+ =?utf-8?Q?e7UEHfF23tQS+?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 40fa555c-bccc-43e5-faf1-08d8dffaef29
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR0402MB3359.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: qtvgDWFxphvTdAZIOs2tG/5jCDTvxRcBzR2bljiA1t7fAgXnDLS88O3MQaQgesbF
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB7280
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,130 +142,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000206bfe05bcc0cdb1
-Content-Type: text/plain; charset="UTF-8"
+Thanks for taking a look Jeremy.
 
-With multichannel, operations like the queries
-from "ls -lR" can cause all credits to be used and
-errors to be returned since max_credits was not
-being set correctly on the secondary channels and
-thus the client was requesting 0 credits incorrectly
-in some cases (which can lead to not having
-enough credits to perform any operation on that
-channel).
+Jeremy Allison <jra@samba.org> writes:
+>>Indeed, from man 2 flock:
 
-Signed-off-by: Aurelien Aptel <aaptel@suse.com>
-CC: <stable@vger.kernel.org> # v5.8+
-Reviewed-by: Shyam Prasad N <sprasad@microsoft.com>
-Signed-off-by: Steve French <stfrench@microsoft.com>
----
- fs/cifs/connect.c | 10 +++++-----
- fs/cifs/sess.c    |  1 +
- 2 files changed, 6 insertions(+), 5 deletions(-)
+Side node: I've sent a patch to the flock(2) man page to include current
+behaviour of CIFS.
 
-diff --git a/fs/cifs/connect.c b/fs/cifs/connect.c
-index 112692300fb6..68642e3d4270 100644
---- a/fs/cifs/connect.c
-+++ b/fs/cifs/connect.c
-@@ -1429,6 +1429,11 @@ cifs_get_tcp_session(struct smb3_fs_context *ctx)
-  tcp_ses->min_offload = ctx->min_offload;
-  tcp_ses->tcpStatus = CifsNeedNegotiate;
+> So the plan would be once a file is opened with a POSIX
+> context, emulate flock(2) by getting a byte-range lock
+> on the whole file. For a POSIX context this is an
+> advisory lock.
 
-+ if ((ctx->max_credits < 20) || (ctx->max_credits > 60000))
-+ tcp_ses->max_credits = SMB2_MAX_CREDITS_AVAILABLE;
-+ else
-+ tcp_ses->max_credits = ctx->max_credits;
-+
-  tcp_ses->nr_targets = 1;
-  tcp_ses->ignore_signature = ctx->ignore_signature;
-  /* thread spawned, put it on the list */
-@@ -2832,11 +2837,6 @@ static int mount_get_conns(struct
-smb3_fs_context *ctx, struct cifs_sb_info *cif
+Ok. I will update the wiki.
 
-  *nserver = server;
+> This matches what NFS does, and applications using
+> flock are usually not also using fcntl locks.
 
-- if ((ctx->max_credits < 20) || (ctx->max_credits > 60000))
-- server->max_credits = SMB2_MAX_CREDITS_AVAILABLE;
-- else
-- server->max_credits = ctx->max_credits;
--
-  /* get a reference to a SMB session */
-  ses = cifs_get_smb_ses(server, ctx);
-  if (IS_ERR(ses)) {
-diff --git a/fs/cifs/sess.c b/fs/cifs/sess.c
-index 183a3a868d7b..63d517b9f2ff 100644
---- a/fs/cifs/sess.c
-+++ b/fs/cifs/sess.c
-@@ -230,6 +230,7 @@ cifs_ses_add_channel(struct cifs_sb_info *cifs_sb,
-struct cifs_ses *ses,
-  ctx.noautotune = ses->server->noautotune;
-  ctx.sockopt_tcp_nodelay = ses->server->tcp_nodelay;
-  ctx.echo_interval = ses->server->echo_interval / HZ;
-+ ctx.max_credits = ses->server->max_credits;
+Matching NFS is sounds good, less cases to think about for users.
 
-  /*
-  * This will be used for encoding/decoding user/domain/pw
+> I'd rather not add "special" extra flags to the
+> protocol that need extra logic to implement. The
+> locking part is complex enough in SMB1/2/3, and
+> as NFS shows it's possible to emulate using advisory
+> byte-range locks anyway.
 
--- 
-Thanks,
+Ok
 
-Steve
+> Of course this doesn't help SMB2+ without UNIX
+> extensions, but there are many POSIX things that
+> won't work there anyway :-).
 
---000000000000206bfe05bcc0cdb1
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-cifs-fix-credit-accounting-for-extra-channel.patch"
-Content-Disposition: attachment; 
-	filename="0001-cifs-fix-credit-accounting-for-extra-channel.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_klvoe2yx0>
-X-Attachment-Id: f_klvoe2yx0
+If we can make SMB2+UNIX work as well as NFS that will already be nice :)
 
-RnJvbSBhYjY0ZDU1NjVkMzAzZWYwMWQxNmRhZDI5ZWNjNjAwMTcxNWQyN2QyIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBBdXJlbGllbiBBcHRlbCA8YWFwdGVsQHN1c2UuY29tPgpEYXRl
-OiBUaHUsIDQgTWFyIDIwMjEgMTc6NDI6MjEgKzAwMDAKU3ViamVjdDogW1BBVENIXSBjaWZzOiBm
-aXggY3JlZGl0IGFjY291bnRpbmcgZm9yIGV4dHJhIGNoYW5uZWwKCldpdGggbXVsdGljaGFubmVs
-LCBvcGVyYXRpb25zIGxpa2UgdGhlIHF1ZXJpZXMKZnJvbSAibHMgLWxSIiBjYW4gY2F1c2UgYWxs
-IGNyZWRpdHMgdG8gYmUgdXNlZCBhbmQKZXJyb3JzIHRvIGJlIHJldHVybmVkIHNpbmNlIG1heF9j
-cmVkaXRzIHdhcyBub3QKYmVpbmcgc2V0IGNvcnJlY3RseSBvbiB0aGUgc2Vjb25kYXJ5IGNoYW5u
-ZWxzIGFuZAp0aHVzIHRoZSBjbGllbnQgd2FzIHJlcXVlc3RpbmcgMCBjcmVkaXRzIGluY29ycmVj
-dGx5CmluIHNvbWUgY2FzZXMgKHdoaWNoIGNhbiBsZWFkIHRvIG5vdCBoYXZpbmcKZW5vdWdoIGNy
-ZWRpdHMgdG8gcGVyZm9ybSBhbnkgb3BlcmF0aW9uIG9uIHRoYXQKY2hhbm5lbCkuCgpTaWduZWQt
-b2ZmLWJ5OiBBdXJlbGllbiBBcHRlbCA8YWFwdGVsQHN1c2UuY29tPgpDQzogPHN0YWJsZUB2Z2Vy
-Lmtlcm5lbC5vcmc+ICMgdjUuOCsKUmV2aWV3ZWQtYnk6IFNoeWFtIFByYXNhZCBOIDxzcHJhc2Fk
-QG1pY3Jvc29mdC5jb20+ClNpZ25lZC1vZmYtYnk6IFN0ZXZlIEZyZW5jaCA8c3RmcmVuY2hAbWlj
-cm9zb2Z0LmNvbT4KLS0tCiBmcy9jaWZzL2Nvbm5lY3QuYyB8IDEwICsrKysrLS0tLS0KIGZzL2Np
-ZnMvc2Vzcy5jICAgIHwgIDEgKwogMiBmaWxlcyBjaGFuZ2VkLCA2IGluc2VydGlvbnMoKyksIDUg
-ZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZnMvY2lmcy9jb25uZWN0LmMgYi9mcy9jaWZzL2Nv
-bm5lY3QuYwppbmRleCAxMTI2OTIzMDBmYjYuLjY4NjQyZTNkNDI3MCAxMDA2NDQKLS0tIGEvZnMv
-Y2lmcy9jb25uZWN0LmMKKysrIGIvZnMvY2lmcy9jb25uZWN0LmMKQEAgLTE0MjksNiArMTQyOSwx
-MSBAQCBjaWZzX2dldF90Y3Bfc2Vzc2lvbihzdHJ1Y3Qgc21iM19mc19jb250ZXh0ICpjdHgpCiAJ
-dGNwX3Nlcy0+bWluX29mZmxvYWQgPSBjdHgtPm1pbl9vZmZsb2FkOwogCXRjcF9zZXMtPnRjcFN0
-YXR1cyA9IENpZnNOZWVkTmVnb3RpYXRlOwogCisJaWYgKChjdHgtPm1heF9jcmVkaXRzIDwgMjAp
-IHx8IChjdHgtPm1heF9jcmVkaXRzID4gNjAwMDApKQorCQl0Y3Bfc2VzLT5tYXhfY3JlZGl0cyA9
-IFNNQjJfTUFYX0NSRURJVFNfQVZBSUxBQkxFOworCWVsc2UKKwkJdGNwX3Nlcy0+bWF4X2NyZWRp
-dHMgPSBjdHgtPm1heF9jcmVkaXRzOworCiAJdGNwX3Nlcy0+bnJfdGFyZ2V0cyA9IDE7CiAJdGNw
-X3Nlcy0+aWdub3JlX3NpZ25hdHVyZSA9IGN0eC0+aWdub3JlX3NpZ25hdHVyZTsKIAkvKiB0aHJl
-YWQgc3Bhd25lZCwgcHV0IGl0IG9uIHRoZSBsaXN0ICovCkBAIC0yODMyLDExICsyODM3LDYgQEAg
-c3RhdGljIGludCBtb3VudF9nZXRfY29ubnMoc3RydWN0IHNtYjNfZnNfY29udGV4dCAqY3R4LCBz
-dHJ1Y3QgY2lmc19zYl9pbmZvICpjaWYKIAogCSpuc2VydmVyID0gc2VydmVyOwogCi0JaWYgKChj
-dHgtPm1heF9jcmVkaXRzIDwgMjApIHx8IChjdHgtPm1heF9jcmVkaXRzID4gNjAwMDApKQotCQlz
-ZXJ2ZXItPm1heF9jcmVkaXRzID0gU01CMl9NQVhfQ1JFRElUU19BVkFJTEFCTEU7Ci0JZWxzZQot
-CQlzZXJ2ZXItPm1heF9jcmVkaXRzID0gY3R4LT5tYXhfY3JlZGl0czsKLQogCS8qIGdldCBhIHJl
-ZmVyZW5jZSB0byBhIFNNQiBzZXNzaW9uICovCiAJc2VzID0gY2lmc19nZXRfc21iX3NlcyhzZXJ2
-ZXIsIGN0eCk7CiAJaWYgKElTX0VSUihzZXMpKSB7CmRpZmYgLS1naXQgYS9mcy9jaWZzL3Nlc3Mu
-YyBiL2ZzL2NpZnMvc2Vzcy5jCmluZGV4IDE4M2EzYTg2OGQ3Yi4uNjNkNTE3YjlmMmZmIDEwMDY0
-NAotLS0gYS9mcy9jaWZzL3Nlc3MuYworKysgYi9mcy9jaWZzL3Nlc3MuYwpAQCAtMjMwLDYgKzIz
-MCw3IEBAIGNpZnNfc2VzX2FkZF9jaGFubmVsKHN0cnVjdCBjaWZzX3NiX2luZm8gKmNpZnNfc2Is
-IHN0cnVjdCBjaWZzX3NlcyAqc2VzLAogCWN0eC5ub2F1dG90dW5lID0gc2VzLT5zZXJ2ZXItPm5v
-YXV0b3R1bmU7CiAJY3R4LnNvY2tvcHRfdGNwX25vZGVsYXkgPSBzZXMtPnNlcnZlci0+dGNwX25v
-ZGVsYXk7CiAJY3R4LmVjaG9faW50ZXJ2YWwgPSBzZXMtPnNlcnZlci0+ZWNob19pbnRlcnZhbCAv
-IEhaOworCWN0eC5tYXhfY3JlZGl0cyA9IHNlcy0+c2VydmVyLT5tYXhfY3JlZGl0czsKIAogCS8q
-CiAJICogVGhpcyB3aWxsIGJlIHVzZWQgZm9yIGVuY29kaW5nL2RlY29kaW5nIHVzZXIvZG9tYWlu
-L3B3Ci0tIAoyLjI3LjAKCg==
---000000000000206bfe05bcc0cdb1--
+Cheers,
+--=20
+Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, D=
+E
+GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
+nchen)
+
 
