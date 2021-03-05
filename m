@@ -2,55 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 403C732DFA3
-	for <lists+samba-technical@lfdr.de>; Fri,  5 Mar 2021 03:25:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A8F8E32DFA7
+	for <lists+samba-technical@lfdr.de>; Fri,  5 Mar 2021 03:25:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=izqGTB5AQoglP4QvVy6KVIwtE++VulsPi9zMDQrAZXc=; b=m7Jtyx+uv03PLj2WfrX1i7In/H
-	DQ52wymBj7mDUbfZgJm7UXGiL4238SVu0G+W2nC4K1rj2j3Ueni+vxotfyeJ5XnQfB3fDlZckdEHp
-	M7PcD649aAVVfg8nx89znHY7ksCgUQF83aw7yhELOxJjIAbiDM8wFQqlPbpYIxpNSakbfY86AqjZe
-	e+IHPH6SuZ/qG5A78BE/BJYJtCy53DO/5Izh40AVsLprZf8c4k6B61s20qxO+bfMCnr6pV0ofDLzI
-	b3+UKdiu2juJfHgRXCBXfjYLUx7NB+nHeyjkB7OTQin20XhlzXADAJ7pwGCRVuRfKHtWHIvgvBh2X
-	//ZGDKtg==;
-Received: from ip6-localhost ([::1]:58766 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=/ouMQw4hn703IxWCPfTjylcVrdS2a1+6n0XA7xhMYuc=; b=ng33mAdbd+rCzkKep4CzxZKXLQ
+	6r6UKnXEQeEAVxc/aMUYI5c8VTVem75Vpni/SgsKxFhVHzBU8DeOil09D0Olvkw1sZNcCRhURw0++
+	OY2PRuh4nxHADvvjcXZ+IrJR6cDHxex9Cd3LZzyyMOZvzlaQ95IuMWnYuOvU2XNKqsW7/z0g2Pmyj
+	6gz55dfOC1gT1YdOUCgfXiiD8+6ny6rpLamdLDAAP3z/5vNJxidLLwb7E11cb0k9xwl7R8brv7bWO
+	Oinvp5k/8jpDMwKeVP6Fa7iJ3NRLg/7bAY63wOdc9ntRzZFow+2le/Lq/B0rj1rn9C8uifbFR3YDj
+	67xp8uNA==;
+Received: from ip6-localhost ([::1]:59464 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lI098-004EjA-VU; Fri, 05 Mar 2021 02:24:55 +0000
-Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b]:40280) 
+	id 1lI0A2-004Ep1-RN; Fri, 05 Mar 2021 02:25:50 +0000
+Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233]:38357) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lI094-004Ej3-GG
- for samba-technical@lists.samba.org; Fri, 05 Mar 2021 02:24:52 +0000
-Received: by mail-lj1-x22b.google.com with SMTP id e2so833043ljo.7
- for <samba-technical@lists.samba.org>; Thu, 04 Mar 2021 18:24:49 -0800 (PST)
+ (Exim) id 1lI09x-004Eou-Tf
+ for samba-technical@lists.samba.org; Fri, 05 Mar 2021 02:25:48 +0000
+Received: by mail-lj1-x233.google.com with SMTP id 2so847747ljr.5
+ for <samba-technical@lists.samba.org>; Thu, 04 Mar 2021 18:25:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to:cc;
- bh=izqGTB5AQoglP4QvVy6KVIwtE++VulsPi9zMDQrAZXc=;
- b=DwdUfk6C978mzNJQSynA/LTfTsZC8WJFz72mL8nVsU3S1Mp48/Vkg6DphxWvrkgRxb
- sbB/qQU+139Xvgaw02vVFMrVyPoPbTr2pO53ZhItzHHOt3IHmd47ksgH70j42HF1x6zE
- /2blqPEJOSUNzJbtH+mlAWOhUMFEV97TccJTnVx+9zKUIKlMFQiKWN+QtO4pXBD+jZsq
- DdLMDgHsm4xiNIVfN7NbwRVIFKwUhty+5jBPv+38+Jy//MW2dwqKUEgjpLrKMHjHE98/
- /AsFHU0E8QARe+9yPWl5esMPPMjw/SxLzEJw/f5majykwjjiyEEFWeikSR6QK209GbAA
- pyFQ==
+ h=mime-version:from:date:message-id:subject:to;
+ bh=/ouMQw4hn703IxWCPfTjylcVrdS2a1+6n0XA7xhMYuc=;
+ b=KdQxBQSMPmUcmNTnnDnmfbX1ocHOgytNfsdmy91iCPcmUFbiG161PTr+eZ6UhaIx7v
+ 07N+tiNmL4u5lJt7905Gyo8/yQ5qRZc4uW+JMZZttWNV/mYPOMa3u1vUUISpmqouTGLW
+ HZk/Fn2vOHAQfSw+AM5VwteNYcfDZeSY+uXs9COc8/fJZU0zLLiEn9EVyfKCubplyrTo
+ AtzZKj8RRo+fAIhPUHrCads7vRS3dz1BZM802CXEVeLsEs8Qx7Q284kxEFtphfaEyfXy
+ BuesNwLgS9Vum7sFopzOPWDQR/LcqkSozppT2JCanxiLj9XJh6rx+F7UTQAe0Hgjacxb
+ kptQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
- bh=izqGTB5AQoglP4QvVy6KVIwtE++VulsPi9zMDQrAZXc=;
- b=bNKcaGVpuTwTeUWTwgVWj4VbGi5hJP1N+bAZgwcC79Uc7h4QsdNjiNBjjOk9UGLHzJ
- dWnRfQu6gJFXBT38tcjtlwPZUEhv145k+XouacPwpVvgKoPp8myOp2gPoMszx6uJN+gh
- YW219aoDmG6NyW6vdxF/6j9LCskAKnGAcMKFD/6CLZti315tXMBykmmLhW5HEJ9cQjp4
- 054xfE14W4L3z+hW+pgN7alJnr0Yxb7SPYVprrdH8QhDKLYNh7Dhr93uJz/DjlJyL9oU
- z7NSvoqkm4szjfExMgYvl1nv35drwESEPGeUf2WYk7QDrqeyNekDqhnI4xXPDTXGvDLt
- Q7aQ==
-X-Gm-Message-State: AOAM531Y6ICpO01GbjNXeVf6nOYUQ0xMdD4tE46CKQPBJBnX+B+Uzl70
- S/+9f+QXZpe3BP9/fsKCnEQuwXMY8WdV7tAu3Eg=
-X-Google-Smtp-Source: ABdhPJzWREoQY3UDh4QIIBj0YizdU9pTF8v4rZaYUl9l665cKp1soQK0vdF/CYPn8h2+FxAlPkwBn3LwexDQiUe+Cx8=
-X-Received: by 2002:a19:3f04:: with SMTP id m4mr3898973lfa.395.1614911089227; 
- Thu, 04 Mar 2021 18:24:49 -0800 (PST)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=/ouMQw4hn703IxWCPfTjylcVrdS2a1+6n0XA7xhMYuc=;
+ b=SQF4iUxw0HIrRdP8rWhPryvTzhxqXC2IOfTvcv+2qDD/KN9ItW144rEryUje2yKYRF
+ AiODw5E9crfxDHwPA7TdA2DuXNEFU6PB3XnsGyG2mHoskIPl9O1s5zIADct6LLBkrmRj
+ hxDXgObrMHxymy+JILvkDoMNhfKYu0bIdivF+gWTz5wk+tVC+GBA62c3a8rO75UQoYee
+ KXio57Df8EiMKJuHcFc50BTn3RB7h6mgXRE4vlGCHWtZxh4fxh2Ir30d7lhBtJhC5SFI
+ rwiQLOwdf298s6Rpd6FGEv6fBq6HFvx2GxpK4dTO5JikvgDcANMVIVIuFrxRR9B3KD1b
+ PPow==
+X-Gm-Message-State: AOAM530q6MmDeepRgbYV3pABpucYOkAHRxTF47TYKWhqyGL495JKSPPR
+ Jx8s9fqduTKfRfr0lohvQmOQpryo7eII7rO1ag8=
+X-Google-Smtp-Source: ABdhPJzBbvLmXDO97L+21Wp4opmFuSwKK5iBNZ+Ci8gVoNR+tE86i5W+Du+VZnqLWCdiQE9gxD5duzU3a/sDdQ5Oaok=
+X-Received: by 2002:a05:651c:548:: with SMTP id
+ q8mr3822433ljp.256.1614911144743; 
+ Thu, 04 Mar 2021 18:25:44 -0800 (PST)
 MIME-Version: 1.0
-Date: Thu, 4 Mar 2021 20:24:38 -0600
-Message-ID: <CAH2r5ms1F5SVh72rKYiSr5TKgG4yv1Bmj6Azdki5BQohcJmhSw@mail.gmail.com>
-Subject: [PATCH] cifs: ask for more credit on async read/write code paths
-To: CIFS <linux-cifs@vger.kernel.org>
-Content-Type: multipart/mixed; boundary="000000000000d150cd05bcc0c9b7"
+Date: Thu, 4 Mar 2021 20:25:33 -0600
+Message-ID: <CAH2r5muP7MU3QciheN9sbdJtOFwojfhq1yoradMzbunG7dsCQw@mail.gmail.com>
+Subject: [PATCH] cifs: fix credit accounting for extra channel
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
+Content-Type: multipart/mixed; boundary="000000000000206bfe05bcc0cdb1"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,102 +68,128 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000d150cd05bcc0c9b7
+--000000000000206bfe05bcc0cdb1
 Content-Type: text/plain; charset="UTF-8"
 
-When doing a large read or write workload we only
-very gradually increase the number of credits
-which can cause problems with parallelizing large i/o
-(I/O ramps up more slowly than it should for large
-read/write workloads) especially with multichannel
-when the number of credits on the secondary channels
-starts out low (e.g. less than about 130) or when
-recovering after server throttled back the number
-of credit.
+With multichannel, operations like the queries
+from "ls -lR" can cause all credits to be used and
+errors to be returned since max_credits was not
+being set correctly on the secondary channels and
+thus the client was requesting 0 credits incorrectly
+in some cases (which can lead to not having
+enough credits to perform any operation on that
+channel).
 
 Signed-off-by: Aurelien Aptel <aaptel@suse.com>
+CC: <stable@vger.kernel.org> # v5.8+
 Reviewed-by: Shyam Prasad N <sprasad@microsoft.com>
 Signed-off-by: Steve French <stfrench@microsoft.com>
 ---
- fs/cifs/smb2pdu.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ fs/cifs/connect.c | 10 +++++-----
+ fs/cifs/sess.c    |  1 +
+ 2 files changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
-index 4bbb6126b14d..2199a9bfae8f 100644
---- a/fs/cifs/smb2pdu.c
-+++ b/fs/cifs/smb2pdu.c
-@@ -4041,8 +4041,7 @@ smb2_async_readv(struct cifs_readdata *rdata)
-  if (rdata->credits.value > 0) {
-  shdr->CreditCharge = cpu_to_le16(DIV_ROUND_UP(rdata->bytes,
-  SMB2_MAX_BUFFER_SIZE));
-- shdr->CreditRequest =
-- cpu_to_le16(le16_to_cpu(shdr->CreditCharge) + 1);
-+ shdr->CreditRequest = cpu_to_le16(le16_to_cpu(shdr->CreditCharge) + 8);
+diff --git a/fs/cifs/connect.c b/fs/cifs/connect.c
+index 112692300fb6..68642e3d4270 100644
+--- a/fs/cifs/connect.c
++++ b/fs/cifs/connect.c
+@@ -1429,6 +1429,11 @@ cifs_get_tcp_session(struct smb3_fs_context *ctx)
+  tcp_ses->min_offload = ctx->min_offload;
+  tcp_ses->tcpStatus = CifsNeedNegotiate;
 
-  rc = adjust_credits(server, &rdata->credits, rdata->bytes);
-  if (rc)
-@@ -4348,8 +4347,7 @@ smb2_async_writev(struct cifs_writedata *wdata,
-  if (wdata->credits.value > 0) {
-  shdr->CreditCharge = cpu_to_le16(DIV_ROUND_UP(wdata->bytes,
-      SMB2_MAX_BUFFER_SIZE));
-- shdr->CreditRequest =
-- cpu_to_le16(le16_to_cpu(shdr->CreditCharge) + 1);
-+ shdr->CreditRequest = cpu_to_le16(le16_to_cpu(shdr->CreditCharge) + 8);
++ if ((ctx->max_credits < 20) || (ctx->max_credits > 60000))
++ tcp_ses->max_credits = SMB2_MAX_CREDITS_AVAILABLE;
++ else
++ tcp_ses->max_credits = ctx->max_credits;
++
+  tcp_ses->nr_targets = 1;
+  tcp_ses->ignore_signature = ctx->ignore_signature;
+  /* thread spawned, put it on the list */
+@@ -2832,11 +2837,6 @@ static int mount_get_conns(struct
+smb3_fs_context *ctx, struct cifs_sb_info *cif
 
-  rc = adjust_credits(server, &wdata->credits, wdata->bytes);
-  if (rc)
+  *nserver = server;
+
+- if ((ctx->max_credits < 20) || (ctx->max_credits > 60000))
+- server->max_credits = SMB2_MAX_CREDITS_AVAILABLE;
+- else
+- server->max_credits = ctx->max_credits;
+-
+  /* get a reference to a SMB session */
+  ses = cifs_get_smb_ses(server, ctx);
+  if (IS_ERR(ses)) {
+diff --git a/fs/cifs/sess.c b/fs/cifs/sess.c
+index 183a3a868d7b..63d517b9f2ff 100644
+--- a/fs/cifs/sess.c
++++ b/fs/cifs/sess.c
+@@ -230,6 +230,7 @@ cifs_ses_add_channel(struct cifs_sb_info *cifs_sb,
+struct cifs_ses *ses,
+  ctx.noautotune = ses->server->noautotune;
+  ctx.sockopt_tcp_nodelay = ses->server->tcp_nodelay;
+  ctx.echo_interval = ses->server->echo_interval / HZ;
++ ctx.max_credits = ses->server->max_credits;
+
+  /*
+  * This will be used for encoding/decoding user/domain/pw
 
 -- 
 Thanks,
 
 Steve
 
---000000000000d150cd05bcc0c9b7
+--000000000000206bfe05bcc0cdb1
 Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-cifs-ask-for-more-credit-on-async-read-write-code-pa.patch"
+	name="0001-cifs-fix-credit-accounting-for-extra-channel.patch"
 Content-Disposition: attachment; 
-	filename="0001-cifs-ask-for-more-credit-on-async-read-write-code-pa.patch"
+	filename="0001-cifs-fix-credit-accounting-for-extra-channel.patch"
 Content-Transfer-Encoding: base64
-Content-ID: <f_klvoctzi0>
-X-Attachment-Id: f_klvoctzi0
+Content-ID: <f_klvoe2yx0>
+X-Attachment-Id: f_klvoe2yx0
 
-RnJvbSA5MDg0ZWY4ZmY5ZmEyNDAyOWY0OGE5NDlmZjE3M2ZmMGI3NDc5MTEwIE1vbiBTZXAgMTcg
+RnJvbSBhYjY0ZDU1NjVkMzAzZWYwMWQxNmRhZDI5ZWNjNjAwMTcxNWQyN2QyIE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBBdXJlbGllbiBBcHRlbCA8YWFwdGVsQHN1c2UuY29tPgpEYXRl
-OiBUaHUsIDQgTWFyIDIwMjEgMTc6NTE6NDggKzAwMDAKU3ViamVjdDogW1BBVENIXSBjaWZzOiBh
-c2sgZm9yIG1vcmUgY3JlZGl0IG9uIGFzeW5jIHJlYWQvd3JpdGUgY29kZSBwYXRocwoKV2hlbiBk
-b2luZyBhIGxhcmdlIHJlYWQgb3Igd3JpdGUgd29ya2xvYWQgd2Ugb25seQp2ZXJ5IGdyYWR1YWxs
-eSBpbmNyZWFzZSB0aGUgbnVtYmVyIG9mIGNyZWRpdHMKd2hpY2ggY2FuIGNhdXNlIHByb2JsZW1z
-IHdpdGggcGFyYWxsZWxpemluZyBsYXJnZSBpL28KKEkvTyByYW1wcyB1cCBtb3JlIHNsb3dseSB0
-aGFuIGl0IHNob3VsZCBmb3IgbGFyZ2UKcmVhZC93cml0ZSB3b3JrbG9hZHMpIGVzcGVjaWFsbHkg
-d2l0aCBtdWx0aWNoYW5uZWwKd2hlbiB0aGUgbnVtYmVyIG9mIGNyZWRpdHMgb24gdGhlIHNlY29u
-ZGFyeSBjaGFubmVscwpzdGFydHMgb3V0IGxvdyAoZS5nLiBsZXNzIHRoYW4gYWJvdXQgMTMwKSBv
-ciB3aGVuCnJlY292ZXJpbmcgYWZ0ZXIgc2VydmVyIHRocm90dGxlZCBiYWNrIHRoZSBudW1iZXIK
-b2YgY3JlZGl0LgoKU2lnbmVkLW9mZi1ieTogQXVyZWxpZW4gQXB0ZWwgPGFhcHRlbEBzdXNlLmNv
-bT4KUmV2aWV3ZWQtYnk6IFNoeWFtIFByYXNhZCBOIDxzcHJhc2FkQG1pY3Jvc29mdC5jb20+ClNp
-Z25lZC1vZmYtYnk6IFN0ZXZlIEZyZW5jaCA8c3RmcmVuY2hAbWljcm9zb2Z0LmNvbT4KLS0tCiBm
-cy9jaWZzL3NtYjJwZHUuYyB8IDYgKystLS0tCiAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25z
-KCspLCA0IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2ZzL2NpZnMvc21iMnBkdS5jIGIvZnMv
-Y2lmcy9zbWIycGR1LmMKaW5kZXggNGJiYjYxMjZiMTRkLi4yMTk5YTliZmFlOGYgMTAwNjQ0Ci0t
-LSBhL2ZzL2NpZnMvc21iMnBkdS5jCisrKyBiL2ZzL2NpZnMvc21iMnBkdS5jCkBAIC00MDQxLDgg
-KzQwNDEsNyBAQCBzbWIyX2FzeW5jX3JlYWR2KHN0cnVjdCBjaWZzX3JlYWRkYXRhICpyZGF0YSkK
-IAlpZiAocmRhdGEtPmNyZWRpdHMudmFsdWUgPiAwKSB7CiAJCXNoZHItPkNyZWRpdENoYXJnZSA9
-IGNwdV90b19sZTE2KERJVl9ST1VORF9VUChyZGF0YS0+Ynl0ZXMsCiAJCQkJCQlTTUIyX01BWF9C
-VUZGRVJfU0laRSkpOwotCQlzaGRyLT5DcmVkaXRSZXF1ZXN0ID0KLQkJCWNwdV90b19sZTE2KGxl
-MTZfdG9fY3B1KHNoZHItPkNyZWRpdENoYXJnZSkgKyAxKTsKKwkJc2hkci0+Q3JlZGl0UmVxdWVz
-dCA9IGNwdV90b19sZTE2KGxlMTZfdG9fY3B1KHNoZHItPkNyZWRpdENoYXJnZSkgKyA4KTsKIAog
-CQlyYyA9IGFkanVzdF9jcmVkaXRzKHNlcnZlciwgJnJkYXRhLT5jcmVkaXRzLCByZGF0YS0+Ynl0
-ZXMpOwogCQlpZiAocmMpCkBAIC00MzQ4LDggKzQzNDcsNyBAQCBzbWIyX2FzeW5jX3dyaXRldihz
-dHJ1Y3QgY2lmc193cml0ZWRhdGEgKndkYXRhLAogCWlmICh3ZGF0YS0+Y3JlZGl0cy52YWx1ZSA+
-IDApIHsKIAkJc2hkci0+Q3JlZGl0Q2hhcmdlID0gY3B1X3RvX2xlMTYoRElWX1JPVU5EX1VQKHdk
-YXRhLT5ieXRlcywKIAkJCQkJCSAgICBTTUIyX01BWF9CVUZGRVJfU0laRSkpOwotCQlzaGRyLT5D
-cmVkaXRSZXF1ZXN0ID0KLQkJCWNwdV90b19sZTE2KGxlMTZfdG9fY3B1KHNoZHItPkNyZWRpdENo
-YXJnZSkgKyAxKTsKKwkJc2hkci0+Q3JlZGl0UmVxdWVzdCA9IGNwdV90b19sZTE2KGxlMTZfdG9f
-Y3B1KHNoZHItPkNyZWRpdENoYXJnZSkgKyA4KTsKIAogCQlyYyA9IGFkanVzdF9jcmVkaXRzKHNl
-cnZlciwgJndkYXRhLT5jcmVkaXRzLCB3ZGF0YS0+Ynl0ZXMpOwogCQlpZiAocmMpCi0tIAoyLjI3
-LjAKCg==
---000000000000d150cd05bcc0c9b7--
+OiBUaHUsIDQgTWFyIDIwMjEgMTc6NDI6MjEgKzAwMDAKU3ViamVjdDogW1BBVENIXSBjaWZzOiBm
+aXggY3JlZGl0IGFjY291bnRpbmcgZm9yIGV4dHJhIGNoYW5uZWwKCldpdGggbXVsdGljaGFubmVs
+LCBvcGVyYXRpb25zIGxpa2UgdGhlIHF1ZXJpZXMKZnJvbSAibHMgLWxSIiBjYW4gY2F1c2UgYWxs
+IGNyZWRpdHMgdG8gYmUgdXNlZCBhbmQKZXJyb3JzIHRvIGJlIHJldHVybmVkIHNpbmNlIG1heF9j
+cmVkaXRzIHdhcyBub3QKYmVpbmcgc2V0IGNvcnJlY3RseSBvbiB0aGUgc2Vjb25kYXJ5IGNoYW5u
+ZWxzIGFuZAp0aHVzIHRoZSBjbGllbnQgd2FzIHJlcXVlc3RpbmcgMCBjcmVkaXRzIGluY29ycmVj
+dGx5CmluIHNvbWUgY2FzZXMgKHdoaWNoIGNhbiBsZWFkIHRvIG5vdCBoYXZpbmcKZW5vdWdoIGNy
+ZWRpdHMgdG8gcGVyZm9ybSBhbnkgb3BlcmF0aW9uIG9uIHRoYXQKY2hhbm5lbCkuCgpTaWduZWQt
+b2ZmLWJ5OiBBdXJlbGllbiBBcHRlbCA8YWFwdGVsQHN1c2UuY29tPgpDQzogPHN0YWJsZUB2Z2Vy
+Lmtlcm5lbC5vcmc+ICMgdjUuOCsKUmV2aWV3ZWQtYnk6IFNoeWFtIFByYXNhZCBOIDxzcHJhc2Fk
+QG1pY3Jvc29mdC5jb20+ClNpZ25lZC1vZmYtYnk6IFN0ZXZlIEZyZW5jaCA8c3RmcmVuY2hAbWlj
+cm9zb2Z0LmNvbT4KLS0tCiBmcy9jaWZzL2Nvbm5lY3QuYyB8IDEwICsrKysrLS0tLS0KIGZzL2Np
+ZnMvc2Vzcy5jICAgIHwgIDEgKwogMiBmaWxlcyBjaGFuZ2VkLCA2IGluc2VydGlvbnMoKyksIDUg
+ZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZnMvY2lmcy9jb25uZWN0LmMgYi9mcy9jaWZzL2Nv
+bm5lY3QuYwppbmRleCAxMTI2OTIzMDBmYjYuLjY4NjQyZTNkNDI3MCAxMDA2NDQKLS0tIGEvZnMv
+Y2lmcy9jb25uZWN0LmMKKysrIGIvZnMvY2lmcy9jb25uZWN0LmMKQEAgLTE0MjksNiArMTQyOSwx
+MSBAQCBjaWZzX2dldF90Y3Bfc2Vzc2lvbihzdHJ1Y3Qgc21iM19mc19jb250ZXh0ICpjdHgpCiAJ
+dGNwX3Nlcy0+bWluX29mZmxvYWQgPSBjdHgtPm1pbl9vZmZsb2FkOwogCXRjcF9zZXMtPnRjcFN0
+YXR1cyA9IENpZnNOZWVkTmVnb3RpYXRlOwogCisJaWYgKChjdHgtPm1heF9jcmVkaXRzIDwgMjAp
+IHx8IChjdHgtPm1heF9jcmVkaXRzID4gNjAwMDApKQorCQl0Y3Bfc2VzLT5tYXhfY3JlZGl0cyA9
+IFNNQjJfTUFYX0NSRURJVFNfQVZBSUxBQkxFOworCWVsc2UKKwkJdGNwX3Nlcy0+bWF4X2NyZWRp
+dHMgPSBjdHgtPm1heF9jcmVkaXRzOworCiAJdGNwX3Nlcy0+bnJfdGFyZ2V0cyA9IDE7CiAJdGNw
+X3Nlcy0+aWdub3JlX3NpZ25hdHVyZSA9IGN0eC0+aWdub3JlX3NpZ25hdHVyZTsKIAkvKiB0aHJl
+YWQgc3Bhd25lZCwgcHV0IGl0IG9uIHRoZSBsaXN0ICovCkBAIC0yODMyLDExICsyODM3LDYgQEAg
+c3RhdGljIGludCBtb3VudF9nZXRfY29ubnMoc3RydWN0IHNtYjNfZnNfY29udGV4dCAqY3R4LCBz
+dHJ1Y3QgY2lmc19zYl9pbmZvICpjaWYKIAogCSpuc2VydmVyID0gc2VydmVyOwogCi0JaWYgKChj
+dHgtPm1heF9jcmVkaXRzIDwgMjApIHx8IChjdHgtPm1heF9jcmVkaXRzID4gNjAwMDApKQotCQlz
+ZXJ2ZXItPm1heF9jcmVkaXRzID0gU01CMl9NQVhfQ1JFRElUU19BVkFJTEFCTEU7Ci0JZWxzZQot
+CQlzZXJ2ZXItPm1heF9jcmVkaXRzID0gY3R4LT5tYXhfY3JlZGl0czsKLQogCS8qIGdldCBhIHJl
+ZmVyZW5jZSB0byBhIFNNQiBzZXNzaW9uICovCiAJc2VzID0gY2lmc19nZXRfc21iX3NlcyhzZXJ2
+ZXIsIGN0eCk7CiAJaWYgKElTX0VSUihzZXMpKSB7CmRpZmYgLS1naXQgYS9mcy9jaWZzL3Nlc3Mu
+YyBiL2ZzL2NpZnMvc2Vzcy5jCmluZGV4IDE4M2EzYTg2OGQ3Yi4uNjNkNTE3YjlmMmZmIDEwMDY0
+NAotLS0gYS9mcy9jaWZzL3Nlc3MuYworKysgYi9mcy9jaWZzL3Nlc3MuYwpAQCAtMjMwLDYgKzIz
+MCw3IEBAIGNpZnNfc2VzX2FkZF9jaGFubmVsKHN0cnVjdCBjaWZzX3NiX2luZm8gKmNpZnNfc2Is
+IHN0cnVjdCBjaWZzX3NlcyAqc2VzLAogCWN0eC5ub2F1dG90dW5lID0gc2VzLT5zZXJ2ZXItPm5v
+YXV0b3R1bmU7CiAJY3R4LnNvY2tvcHRfdGNwX25vZGVsYXkgPSBzZXMtPnNlcnZlci0+dGNwX25v
+ZGVsYXk7CiAJY3R4LmVjaG9faW50ZXJ2YWwgPSBzZXMtPnNlcnZlci0+ZWNob19pbnRlcnZhbCAv
+IEhaOworCWN0eC5tYXhfY3JlZGl0cyA9IHNlcy0+c2VydmVyLT5tYXhfY3JlZGl0czsKIAogCS8q
+CiAJICogVGhpcyB3aWxsIGJlIHVzZWQgZm9yIGVuY29kaW5nL2RlY29kaW5nIHVzZXIvZG9tYWlu
+L3B3Ci0tIAoyLjI3LjAKCg==
+--000000000000206bfe05bcc0cdb1--
 
