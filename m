@@ -2,58 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6BFC333002B
-	for <lists+samba-technical@lfdr.de>; Sun,  7 Mar 2021 11:52:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BF883305A8
+	for <lists+samba-technical@lfdr.de>; Mon,  8 Mar 2021 02:41:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=VuSNp8ohCEDTVNqOLRIMNo7zaXhyGLF+pvmM+1TvWQg=; b=M1VVVESNHbPTzZbdnMkDopyizD
-	bO9l6rNmCyn3RRTABxDxRwbDUNvhPT+6dslfadwNCKxul+QcchLixBBR5rFYPXwXwFqoBusIf7ATV
-	x1cLM7iNpwbPrkEEmZxYWUw+C1B4fkPZjy0RzodFLiVoRIyjpR/VjtLP7BaRBvnwq6LBrwPTOKvj9
-	RQtzK31XY1UjjYWiFIMq6P0khGKSLSVAO74+daI4vyLorT2TKyv3cSP/AzRbLMONqCSK2odY5MZBk
-	S2ry0vaIJpTeI5yLEQp+fsvzSdW33tMLgLRC82BgKksqooqnwFe9YRj9AUvsyKnY3tCIhJ5Pn2dvx
-	oCibkcuQ==;
-Received: from ip6-localhost ([::1]:24572 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=Zin+tkzgH4hR9q587F08HE/7cRSMcxxn0tydT44MInM=; b=2BMfyMDOQHetDblwaLyjhNij5A
+	+xt9m9JSREeAr3OmLCinTj4jFrUl75hNOTN3/aN85844x/ZntKk9yLPjAMeDveiNJD2/MDlUnc8Ik
+	RftbzvNwY/L9IXZTuk+JF6qguy6ghPDuMGxXfQIiPXphFP8YmX6ddg7NeeztRCmAmS4MDFTkXwo6R
+	uiHPc0b4uLBdZmkj01FCIl/am2EnKBVJSJ3EJPKyd6/zu2wkncZyl1ECPGdJLp+1K+CZptY7FWi7t
+	jAyCIuk/h+pTFytsnZxm+1kItj4sepK+LF+2wJh4LqfmxIMwir/2wR4htJQhGZc80I9RX49VpwAtR
+	PF0tdDFA==;
+Received: from ip6-localhost ([::1]:26496 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lIqzl-004RDk-IM; Sun, 07 Mar 2021 10:50:45 +0000
-Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32]:33354) 
+	id 1lJ4sZ-004SLN-FF; Mon, 08 Mar 2021 01:40:15 +0000
+Received: from bilbo.ozlabs.org ([203.11.71.1]:44679 helo=ozlabs.org) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lIqzX-004RDd-NM
- for samba-technical@lists.samba.org; Sun, 07 Mar 2021 10:50:37 +0000
-Received: by mail-yb1-xb32.google.com with SMTP id x19so7067339ybe.0
- for <samba-technical@lists.samba.org>; Sun, 07 Mar 2021 02:50:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=VuSNp8ohCEDTVNqOLRIMNo7zaXhyGLF+pvmM+1TvWQg=;
- b=g2GpQyn+lSSG941waxTRsJNyYVrlP+w4Z1byHE6B11GbHqF1ij4Bg+3I5KpB4EDgnJ
- B1tgnEyQS9XTafRwNoYit2OUoYikss0E8qxrfxoHpQn1gFLoPve9mA1vQG7k4sIXfIrg
- P61/iE60aSupZHVQvUlJI9Ur+a0QKCnV15iGyjV1Jha5drAiZCIpkdli9fNG26Fb94Xa
- QXHsELSumBNe2xMCPUo+8P8WiR3q3pLFbzeEGiFA81GG3iYBYHQ+1ba7iqWZxCvIT1FL
- Q3590rHIW6CDAtURAlGI2zF9VoDzbk0mSxIwoR5Yj+/qZkvE1CdBeKlLz31zLzom+1Fq
- vE1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=VuSNp8ohCEDTVNqOLRIMNo7zaXhyGLF+pvmM+1TvWQg=;
- b=NBQZ7N3+Lblj358F6BJrUKixY0PJJ4OtimcbyQMqVC/1WuB9X1pNUhjODhBcSPqwh8
- V6Bmp/V6ErBtUgs1bNvlA0N5mm+ALVUrfaXSufUjAgfzMEOhgHsxNrhT/3tIbsJJi3Df
- 8B0zdKyZFyrGzmJKQWRF2ZaCz7NDNaejqGAbdx+jaPYvQzQ/Op7R6HLSeic3KmHIOdzP
- 1rmq5RPb6GV4rzRPi9jpYnJ7vLMHjD2gxAuKGpHX4nJPvH5E+TV5wr04Yo84uxZrtHiN
- K7wcnGvQHY3jRiutusJeAGeT5Czs8kT8pbJqtoKca8ls+nVKgQZ/Kc9Kfua8SjTsmu1g
- phAg==
-X-Gm-Message-State: AOAM5303JZoua3q642XzY1jGePbCLzEFbldFFte9+0pWp//3DZ94Yane
- hZ5Gx7AX1KtN4khPhLRuekAdd4FDe+Xq5w0FKno=
-X-Google-Smtp-Source: ABdhPJxMe+8aOlcrc2X9rehsYaYuitly26CDn6yA8BqexdDs5ZwoiRRL4LwO3ovwBuua1q6WRcnqBSheWy4yYWrWaK0=
-X-Received: by 2002:a25:ab82:: with SMTP id v2mr26092512ybi.97.1615114229379; 
- Sun, 07 Mar 2021 02:50:29 -0800 (PST)
+ (Exim) id 1lJ4sK-004SLG-0b
+ for samba-technical@lists.samba.org; Mon, 08 Mar 2021 01:40:04 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4Dv1H10rYkz9sWF;
+ Mon,  8 Mar 2021 12:39:41 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=202004;
+ t=1615167586; bh=cF9YHHCVysr72vN4K2DoCO/3m32hN9WX8/mN/4u/pcM=;
+ h=Date:From:To:Cc:Subject:From;
+ b=OUUEbnUOSvjXi57qbJ0CqhfkMA72khlp2me3up5h3gPNPHXBIZwuD2Un40gwFelUG
+ gqOnvMvBk1CZ7OQ7QiJ4GZ8kY64JfMgV7b+Vt3Hw/FPf7f61LuEBpwbgrZpRu0hxqV
+ vwVahMo7xSzq7OOL6A33PHzC6vx076XIo1CC8SgfVPpEhLJtAd1+T6P49x+3L8TQ27
+ mxYEgRct5KPOFQnlL9r2rCuiXAJnhA5Rvm3XQ5GnFa53yjIGciLwn/D+f/KR5bnty3
+ HyeeOZWChLW3vKyNtut06IbV9dKQKkg4Tn3BSlc9c6alKQyHhCdviSoJ05N7veKJkx
+ C67czmQNkWPtA==
+Date: Mon, 8 Mar 2021 12:39:39 +1100
+To: =?UTF-8?B?QmrDtnJu?= Jacke <bj@sernet.de>, Karolin Seeger
+ <kseeger@samba.org>
+Subject: Commit 996560191ac6bd603901dcd6c0de5d239e019ef4 causes strange
+ regression
+Message-ID: <20210308123939.56c5db74@martins.ozlabs.org>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <20210305094107.13743-1-vincent.whitchurch@axis.com>
-In-Reply-To: <20210305094107.13743-1-vincent.whitchurch@axis.com>
-Date: Sun, 7 Mar 2021 16:20:18 +0530
-Message-ID: <CANT5p=rB2=DvjtpmVy803emWpuzsy-C2+d4wqQ5g_9fJ8+a5Cw@mail.gmail.com>
-Subject: Re: [PATCH] CIFS: Prevent error log on spurious oplock break
-To: Vincent Whitchurch <vincent.whitchurch@axis.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,90 +57,145 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Steve French <sfrench@samba.org>,
- kernel@axis.com, Pavel Shilovsky <pshilov@microsoft.com>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Vincent,
+I want to flag this regression as soon as possible (before I really
+understand it) because 4.12.12 is due for release on Thursday and this
+may be the last 4.12.x release, due to the imminent release of 4.14.0.
 
-The reason for rejecting the request maybe a number of things like:
-corrupted request, stale request (for some old session), or for a
-wrong handle.
-I don't think we should treat any of these cases as a success.
+This is the commit in question:
 
-Also, from the MS-SMB2 documentation:
-https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/4f35576a-6f3b-40f0-a832-1c30b0afccb3
+commit 996560191ac6bd603901dcd6c0de5d239e019ef4
+Author: Bj=C3=B6rn Jacke <bj@sernet.de>
+Date:   Tue Mar 2 22:47:35 2021 +0100
 
-"The client MUST locate the file in the GlobalFileTable using the
-LeaseKey in the Lease Break Notification. If a file is not found, no
-further processing is required."
+    wscript: use --as-needed only if tested successfully
+   =20
+    Some OSes like Solaris based OmiOS don't support this.
+   =20
+    BUG: https://bugzilla.samba.org/show_bug.cgi?id=3D14288
+   =20
+    Signed-off-by: Bjoern Jacke <bjacke@samba.org>
+    Reviewed-by: Andrew Bartlett <abartlet@samba.org>
 
-So I don't think we should be changing the logic here.
-If SMB v1 had a different behaviour, we should check if that is as per
-the protocol documentation. If not, change it.
+* This currently affecting a CTDB test binary but might also be silently
+  affecting other binaries that aren't tested after  install.
 
-Regards,
-Shyam
+* It may also be a bug in ctdb/wscript that has been activated by this
+  change but I haven't been able to find it.
 
-On Fri, Mar 5, 2021 at 3:12 PM Vincent Whitchurch
-<vincent.whitchurch@axis.com> wrote:
->
-> The SMB1 version of ->is_oplock_break() returns true even if the FileId
-> is not found, as long as the oplock break notification message structure
-> itself appears to be valid.  A true return value makes
-> cifs_demultiplex_thread() to not print an error message for such
-> packets.
->
-> However, the SMB2 version returns false in such cases, leading to an
-> error "No task to wake, unknown frame received!" followed by a hexdump
-> of the packet header being printed by cifs_demultiplex_thread().
->
-> Note that before commit fa9c2362497fbd64788063288d ("CIFS: Fix SMB2
-> oplock break processing"), SMB2 also returned true for the case where a
-> connection was found but the FileId was not, but it's not clear to me if
-> that commit really intended to change the behaviour of the error prints.
->
-> Change the behaviour of SMB2 to be the same as SMB1 and avoid the error
-> messages for these packets which we ignore as per the spec.
->
-> Signed-off-by: Vincent Whitchurch <vincent.whitchurch@axis.com>
-> ---
->  fs/cifs/smb2misc.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/fs/cifs/smb2misc.c b/fs/cifs/smb2misc.c
-> index 60d4bd1eae2b..3ea3bda64083 100644
-> --- a/fs/cifs/smb2misc.c
-> +++ b/fs/cifs/smb2misc.c
-> @@ -679,7 +679,7 @@ smb2_is_valid_lease_break(char *buffer)
->         }
->         spin_unlock(&cifs_tcp_ses_lock);
->         cifs_dbg(FYI, "Can not process lease break - no lease matched\n");
-> -       return false;
-> +       return true;
->  }
->
->  bool
-> @@ -755,7 +755,7 @@ smb2_is_valid_oplock_break(char *buffer, struct TCP_Server_Info *server)
->         }
->         spin_unlock(&cifs_tcp_ses_lock);
->         cifs_dbg(FYI, "Can not process oplock break for non-existent connection\n");
-> -       return false;
-> +       return true;
->  }
->
->  void
-> --
-> 2.28.0
->
+* So far I only see it on a CentOS 7 test node but it happens in all
+  branches where it has been applied.
 
+  I assumed it was a generic installation/linking problem but I can't
+  recreate it on Debian testing.
 
--- 
-Regards,
-Shyam
+* Reverting the above commit fixes the problem.
+
+It causes a very strange test failure:
+
+--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=
+=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--
+Running test /usr/local/samba/share/ctdb/tests/UNIT/cunit/reqid_test_001.sh=
+ (05:37:56)
+--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=
+=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--=3D=3D--
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Running "reqid_test"
+--------------------------------------------------
+Output (Exit status: 127):
+--------------------------------------------------
+reqid_test: error while loading shared libraries: libgenrand-samba4.so: can=
+not open shared object file: No such file or directory
+--------------------------------------------------
+Required output (Exit status: 0):
+--------------------------------------------------
+WARNING: attempt to remove unset id 0 in idtree
+WARNING: attempt to remove unset id 1 in idtree
+WARNING: attempt to remove unset id 2 in idtree
+...
+WARNING: attempt to remove unset id 1023 in idtree
+
+FAILED
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+TEST FAILED: /usr/local/samba/share/ctdb/tests/UNIT/cunit/reqid_test_001.sh=
+ (status 1) (duration: 1s)
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+This is really an installation failure:
+
+[root@testtest1 ~]# ldd /usr/local/samba/libexec/ctdb/tests/reqid_test
+        linux-vdso.so.1 (0x00007fff261f6000)
+        libsamba-util.so.0 =3D> /usr/local/samba/lib/libsamba-util.so.0 (0x=
+00007fc9d9970000)
+        libgenrand-samba4.so =3D> not found
+        libsocket-blocking-samba4.so =3D> not found
+        libutil-setid-samba4.so =3D> not found
+        libtevent.so.0 =3D> /lib64/libtevent.so.0 (0x00007fc9d975c000)
+        libsamba-debug-samba4.so =3D> not found
+        libtime-basic-samba4.so =3D> not found
+        libsys-rw-samba4.so =3D> not found
+        libtalloc.so.2 =3D> /lib64/libtalloc.so.2 (0x00007fc9d9547000)
+        libreplace-samba4.so =3D> not found
+        libiov-buf-samba4.so =3D> not found
+        libicui18n.so.60 =3D> /lib64/libicui18n.so.60 (0x00007fc9d9086000)
+        libgnutls.so.30 =3D> /lib64/libgnutls.so.30 (0x00007fc9d8c95000)
+        ...
+
+Other test binaries that also depend on some of the above "not found"
+things have no problem:
+
+[root@testtest1 ~]# ldd /usr/local/samba/libexec/ctdb/tests/sock_daemon_test
+        linux-vdso.so.1 (0x00007ffe1c6b8000)
+        libsocket-blocking-samba4.so =3D> /usr/local/samba/lib/private/libs=
+ocket-blocking-samba4.so (0x00007fa8c1f3c000)
+        libtevent.so.0 =3D> /usr/local/samba/lib/private/libtevent.so.0 (0x=
+00007fa8c1d24000)
+        libtevent-util.so.0 =3D> /usr/local/samba/lib/libtevent-util.so.0 (=
+0x00007fa8c1b1f000)
+        libsys-rw-samba4.so =3D> /usr/local/samba/lib/private/libsys-rw-sam=
+ba4.so (0x00007fa8c191c000)
+        libtdb.so.1 =3D> /usr/local/samba/lib/private/libtdb.so.1 (0x00007f=
+a8c1701000)
+        libreplace-samba4.so =3D> /usr/local/samba/lib/private/libreplace-s=
+amba4.so (0x00007fa8c14ff000)
+        libtalloc.so.2 =3D> /usr/local/samba/lib/private/libtalloc.so.2 (0x=
+00007fa8c12f5000)
+        libsamba-util.so.0 =3D> /usr/local/samba/lib/libsamba-util.so.0 (0x=
+00007fa8c107b000)
+        libiov-buf-samba4.so =3D> /usr/local/samba/lib/private/libiov-buf-s=
+amba4.so (0x00007fa8c0e79000)
+        libsamba-errors.so.1 =3D> /usr/local/samba/lib/libsamba-errors.so.1=
+ (0x00007fa8c0b23000)
+        libgenrand-samba4.so =3D> /usr/local/samba/lib/private/libgenrand-s=
+amba4.so (0x00007fa8c0921000)
+        libutil-setid-samba4.so =3D> /usr/local/samba/lib/private/libutil-s=
+etid-samba4.so (0x00007fa8c071f000)
+        libsamba-debug-samba4.so =3D> /usr/local/samba/lib/private/libsamba=
+-debug-samba4.so (0x00007fa8c0515000)
+        libtime-basic-samba4.so =3D> /usr/local/samba/lib/private/libtime-b=
+asic-samba4.so (0x00007fa8c0313000)
+        libicui18n.so.60 =3D> /lib64/libicui18n.so.60 (0x00007fa8bfe52000)
+        libicudata.so.60 =3D> /lib64/libicudata.so.60 (0x00007fa8be2a8000)
+        ...
+
+For the affected binary, it appears to be unable to find anything
+/usr/local/samba/lib/private/.
+
+I'll spend more time on this later... but I'm hoping that someone else
+has a clue and is able to understand what is happening.
+
+Thanks...
+
+peace & happiness,
+martin
 
