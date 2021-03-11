@@ -2,49 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DF9F333DD9
-	for <lists+samba-technical@lfdr.de>; Wed, 10 Mar 2021 14:26:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6B3733721F
+	for <lists+samba-technical@lfdr.de>; Thu, 11 Mar 2021 13:11:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=oozxfJUMifJJrkamj6TibjZST9b9ASZ4p9FBpuGyzA4=; b=Fcdv+gzeeTpgWhLo93re1c6DZX
-	qUd1utpgemMJECB+3zcY8yXB4oB6ghGAaat9YGSgBJlo0Tgwl/i92aOFC3t8pyU0hx702cdnkiuFO
-	8KQerA0p9A+Q2gZ/EPlFRDU2xkAz7DuP0yrAx24YuBo7BsJfvMBc4UYrguB1fpyXt7f4IhQZBxicf
-	fHcHI07IB4Pdizgfn952dZpSAvyUsTyCKGoKde8x5dSzmNig1+RWJZxI3FsQwCLr7Uxtqa1F1g8sS
-	zaSnLcudps7pnFRKuk9zgxf45bstkutCnZoqjhGVYwyxnU6x3iN9M0Sz7GqlYDa/8kSGCtfOpKSw0
-	CCYUgW2w==;
-Received: from ip6-localhost ([::1]:36666 helo=hr1.samba.org) 
+	bh=I30GCCkQj7v7vreDVR7uS2XL3QPl9IsObojVhz9dhvI=; b=4hRPOHHYZ2VWnGwOChqe6mrajd
+	sP6bXcFDqAsWm+B8elDvkF57gqS6jgKdvLRI9vkdFoZi5Rler+UC8ej46/OA+D+4XD48OmYrWZ9zu
+	1DNvZs7DyCtoO2SbHq6Jx4cNM+LeCw3pZhFMENyTKnZrBjaMtL+ppWEXgV5LWZ1+q9S/E3B5kBsLG
+	8UteVszXkAdZ7QLZBNPRPz47/ybGdzkuHC/xC52DltlvTdB3v4s9varPtzbctAbMCKwN5J9oQlffb
+	R0QOVFzNO/2KGhVdv9kZSPZfWxsjzlvmjTwXpH8Hj1l22mytYYj88Ys1rLl2IrR6Y0HsE9fxQzd0c
+	OD0kJLuA==;
+Received: from ip6-localhost ([::1]:39694 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lJypl-004lG9-Lh; Wed, 10 Mar 2021 13:25:05 +0000
-Received: from m13101.mail.163.com ([220.181.13.101]:35325) 
+	id 1lKK9m-004ue5-3A; Thu, 11 Mar 2021 12:11:10 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15436) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lJypg-004lFz-GP
- for samba-technical@lists.samba.org; Wed, 10 Mar 2021 13:25:03 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:MIME-Version:Message-ID; bh=IHAwZ
- UPLh9d9jpjKAq6yT7z6ZyCLu0ZbTI8+k8cZGSg=; b=bXGz1fipRdy9QkRufoMj8
- xtJB5sdFkw1vU+Q9ABmZNHTnUYAavLGAveV9xcw1YohBUhdm3sehcbZmwDeLJLuf
- eck7gm7t6LUpg0lrFkvhlYPHNWwH/ftivTWR12pSnANKHxygQUDfjDVIItzxzwXP
- 1u8mVGhRLjlyUSHTrsPtjE=
-Received: from ssdl.566$163.com ( [113.200.44.63] ) by ajax-webmail-wmsvr101
- (Coremail) ; Wed, 10 Mar 2021 21:09:22 +0800 (CST)
-X-Originating-IP: [113.200.44.63]
-Date: Wed, 10 Mar 2021 21:09:22 +0800 (CST)
-To: "Jeremy Allison" <jra@samba.org>, 
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Subject: current status about reparse point support?
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.13 build 20210104(ab8c30b6)
- Copyright (c) 2002-2021 www.mailtech.cn 163com
-X-CM-CTRLDATA: 6eKuDGZvb3Rlcl9odG09MTczMjo1Ng==
+ (Exim) id 1lKK9W-004udM-7V; Thu, 11 Mar 2021 12:11:01 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=I30GCCkQj7v7vreDVR7uS2XL3QPl9IsObojVhz9dhvI=; b=qXBo6doT5g0WXA0h4oy4UKGFQD
+ 2iBEmO9n9gBvtIhDHMfjt1ZqQkazZQetUh8fru/nDin/acRizIQKFSzTqFaX5GqYa1DTCdALBt6zB
+ NOv8MO+2L8e8iDBskGPWBwPL/n4bdnOPdcJhhhQOBo7Ah5c0Cob1r/q5zP4PusjrAMt1uZfWC0+A1
+ APdGtjsLdkPIoZLEZGyej7bkZ9kiHso+SmgNEVuQ16gw0BYRsaDqsAVcDWLrCyUqGoCRYiMS83M5O
+ oMmFPdBK4CnlYLrweI9LDuwRNhazv/pm6YPUpH8KI6TP/5Rg8TxwzGI9od7ErTeM+WasIXbY4hK8D
+ b7unm7OSB64z1WZhOLVKJTU7eC3DxJvdd0vrXd/AzKOmRfR75XFRWNWJpkYqspGtWCzNmnOJuRaiU
+ etgKmaLht+mFB8h0vkeUjLxjJMRyyFLbWqrRCk/dwHYpqDTKTO3uJW4ylwqNfAXS7tje8IS5rGY4/
+ QvRuYeP2FirhQwKoTDy+ji3V;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lKK9L-0002j3-J2; Thu, 11 Mar 2021 12:10:43 +0000
+Date: Thu, 11 Mar 2021 13:10:36 +0100
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.12.12 Available for Download
+Message-ID: <20210311121029.GA17347@carrie2.fritz.box>
 MIME-Version: 1.0
-Message-ID: <4da09823.98d7.1781c41931d.Coremail.ssdl.566@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: ZcGowAC3IjUDxUhgSlIhAQ--.12190W
-X-CM-SenderInfo: hvvgzhqvwwqiywtou0bp/1tbiJQNRh2AJkJ-tlQAAsu
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
-Content-Type: text/plain; charset=GBK
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature"; boundary="xHFwDpU9dbj6ez1V"
+Content-Disposition: inline
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,15 +54,160 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: dongleilei via samba-technical <samba-technical@lists.samba.org>
-Reply-To: dongleilei <ssdl.566@163.com>
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: kseeger@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-SGkgSmVyZW15OgoKCiAgICAgICAgICAgICAgICBJIG5vdGljZWQgeW91IGhhdmUgYSBicmFuY2gg
-bmFtZWQgbWFzdGVyLXNtYjIgb24gIGdpdDovL2dpdC5zYW1iYS5vcmcvanJhL3NhbWJhLy5naXQs
-IHdoaWNoIGltcGxlbWVudHMgcmVwYXJzZSBwb2ludCBpbiBzbWJkLgpJIGZvdW5kIHRoYXQgb25s
-eSBJT19SRVBBUlNFX1RBR19ORlMgdHlwZSB3YXMgc3VwcG9ydGVkLCBteSBxdWVzdGlvbiBpczog
-d2hhdCBhYm91dCBvdGhlciB0eXBlcywgZm9yIGV4YW1wbGUgSU9fUkVQQVJTRV9UQUdfU1lNTElO
-Sz8gd2lsbCBJT19SRVBBUlNFX1RBR19TWU1MSU5LIGRhdGEgYWxzbyBzdG9yZWQgaW4gRUE/ICAK
-d2hhdCBpcyB5b3UgcGxhbj8gCgoKcGVhY2UgYW5kIGhhcHBpbmVzcwoKCgoKCgog
+
+--xHFwDpU9dbj6ez1V
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Release Announcements
+---------------------
+
+This is the latest stable release of the Samba 4.12 release series.
+Please note that this will be the last bugfix release of the Samba 4.12 rel=
+ease
+series. There will be Security Releases only beyond this point.
+
+
+New GPG key                                                                =
+    =20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D                                          =
+                          =20
+                                                                           =
+    =20
+The GPG release key for Samba releases changed from:                       =
+    =20
+                                                                           =
+    =20
+pub   dsa1024/6F33915B6568B7EA 2007-02-04 [SC] [expires: 2021-02-05]       =
+    =20
+      Key fingerprint =3D 52FB C0B8 6D95 4B08 4332  4CDC 6F33 915B 6568 B7E=
+A     =20
+uid                 [  full  ] Samba Distribution Verification Key <samba-b=
+ugs@samba.org>
+sub   elg2048/9C6ED163DA6DFB44 2007-02-04 [E] [expires: 2021-02-05]        =
+    =20
+                                                                           =
+    =20
+to the following new key:                                                  =
+    =20
+                                                                           =
+    =20
+pub   rsa4096/AA99442FB680B620 2020-12-21 [SC] [expires: 2022-12-21]       =
+    =20
+      Key fingerprint =3D 81F5 E283 2BD2 545A 1897  B713 AA99 442F B680 B62=
+0     =20
+uid                 [ultimate] Samba Distribution Verification Key <samba-b=
+ugs@samba.org>
+sub   rsa4096/97EF9386FBFD4002 2020-12-21 [E] [expires: 2022-12-21]        =
+    =20
+                                                                           =
+    =20
+Starting from Jan 21th 2021, all Samba releases will be signed with the new=
+ key.
+                                                                           =
+    =20
+See also GPG_AA99442FB680B620_replaces_6F33915B6568B7EA.txt
+
+
+Changes since 4.12.11
+---------------------
+
+o  Trever L. Adams <trever.adams@gmail.com>
+   * BUG 14634: s3:modules:vfs_virusfilter: Recent talloc changes cause inf=
+inite
+     start-up failure.
+
+o  Jeremy Allison <jra@samba.org>
+   * BUG 13992: SAMBA RPC share error.
+   * BUG 14612: s3: smbd: Add call to conn_setup_case_options() to
+     create_conn_struct_as_root().
+
+o  Ralph Boehme <slow@samba.org>
+   * BUG 14602: s3/auth: Implement "winbind:ignore domains".
+   * BUG 14612: build: Remove smbd_conn private library.
+
+o  Peter Eriksson <pen@lysator.liu.se>
+   * BUG 14648: s3: VFS: nfs4_acls. Add missing TALLOC_FREE(frame) in error
+     path.
+
+o  Bj=C3=B6rn Jacke <bj@sernet.de>
+   * BUG 14624: classicupgrade: Treat old never expires value right.
+
+o  Volker Lendecke <vl@samba.org>
+   * BUG 1463: g_lock: Fix uninitalized variable reads.
+
+o  Stefan Metzmacher <metze@samba.org>
+   * BUG 13898: s3:pysmbd: Fix fd leak in py_smbd_create_file().
+   * BUG 14607: Work around special SMB2 IOCTL response behavior of NetApp
+     Ontap 7.3.7.
+
+o  Andreas Schneider <asn@samba.org>
+   * BUG 14625: Fix smbd share mode double free crash.
+
+o  Paul Wise <pabs3@bonedaddy.net>
+   * BUG 12505: HEIMDAL: krb5_storage_free(NULL) should work.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+        https://www.samba.org/samba/history/samba-4.12.12.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--xHFwDpU9dbj6ez1V
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCYEoIsgAKCRAoaL1+KxeT
+UUzmAJ9qUrzH5lIhXj3JT7ft0xk1Paj3GgCeJCH12hwdrAbDMbnHHk85GTpu/s8=
+=7CJK
+-----END PGP SIGNATURE-----
+
+--xHFwDpU9dbj6ez1V--
+
