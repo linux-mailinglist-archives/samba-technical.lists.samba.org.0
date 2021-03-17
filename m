@@ -2,49 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB7CA33DD96
-	for <lists+samba-technical@lfdr.de>; Tue, 16 Mar 2021 20:33:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A031933EEED
+	for <lists+samba-technical@lfdr.de>; Wed, 17 Mar 2021 11:58:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=7OiCi80y2WuBz4nxLbRfr9nUjiMz4B+568j2Ymu5SHg=; b=eBOb70N3Avr9WM6N/hheC8Pj/k
-	peSJTLgdOuiZReOPiPWKzjAVYWTfKPe7sXk4hxO5br1YdRP05r6Gvh/rR2T1Doj7q2DTfea1lrjzs
-	QjWXLAr9RJeeq/Md2ZZHAydF3lF2ZF1JeDsP0BZGM8yRJb4xMYimQxqlOoCVYRMo0wN9ZEoOrvJ4k
-	DYgeQ3sRIe+Azdw0lMWaIAloMVIeJVHveYpS02v7KHaVKqhj0XRDxeqRhrRfBXcq33FKH4LcChYBI
-	ovWKgzz/fFjfrNKkTaAtpVEVQnEu+KrAHqVSJ8/GmGhZHsHDhuuWvH5b1PPHDYk9reBGp8pikuahp
-	Q96p6DGg==;
-Received: from ip6-localhost ([::1]:37288 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=uDy3FOZyNHNKAsq6+pL6FwwcOUQ/SVdflXB09JVlgHM=; b=qYMl4bVZpmXq7H4CcK4+pnGwW0
+	6mR0ZfPoza2PsMRkE7rHjbg3pqcGoZny78qhKguN5KGEHioPskqlaefvcxr6WhnI7v678+pDthSuZ
+	IB2FKkUNzwG8Spj/0xgajeqUKoBFfQdHGEMeZoF/DyubQaXpre/RCKmkXzremcfHArIqdYLLPOwts
+	1sU9ZQ8SRzpwbnFYCld9ekT9Qu2swlP/gJ8D5MYzFktEP0EiN2wAHOqf5y5qp+jAqws5c94z5aQVi
+	zG8UwBqo7n0nSZi/0QvfAL8LmTUmt3kAQKuElQzIWUGz1SJzg2yjnV7Ohl4Rd1/ic1pfy46k2oC7+
+	QbI1oK3Q==;
+Received: from ip6-localhost ([::1]:41518 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lMFQC-005k8m-NT; Tue, 16 Mar 2021 19:32:04 +0000
-Received: from p3plsmtpa06-02.prod.phx3.secureserver.net
- ([173.201.192.103]:54717) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1lMFQ6-005k8f-9v
- for samba-technical@lists.samba.org; Tue, 16 Mar 2021 19:32:01 +0000
-Received: from [192.168.0.116] ([71.184.94.153]) by :SMTPAUTH: with ESMTPSA
- id MFNplOVBiBt9YMFNqlPnBL; Tue, 16 Mar 2021 12:29:38 -0700
-X-CMAE-Analysis: v=2.4 cv=C/0sdSD+ c=1 sm=1 tr=0 ts=60510723
- a=vbvdVb1zh1xTTaY8rfQfKQ==:117 a=vbvdVb1zh1xTTaY8rfQfKQ==:17
- a=IkcTkHD0fZMA:10 a=SEc3moZ4AAAA:8 a=3-RhneuVAAAA:8 a=ihd_uDuFnh7xnqKYafAA:9
- a=QEXdDO2ut3YA:10 a=5oRCH6oROnRZc2VpWJZ3:22 a=VLVLkjT_5ZicWzSuYqSo:22
-X-SECURESERVER-ACCT: tom@talpey.com
-Subject: Re: [PATCH v2] cifs: Silently ignore unknown oplock break handle
-To: Rohith Surabattula <rohiths.msft@gmail.com>
-References: <20210316124808.11984-1-vincent.whitchurch@axis.com>
- <93d506a6-5832-5006-3bab-6e8e7203da0e@talpey.com>
- <CACdtm0ac+oE1+KNbOGWhy-j9XHmUn4AXG6zAaX-nL0W=NJxQMA@mail.gmail.com>
-Message-ID: <4836330b-3d2f-9d35-4d03-3a457b0068a4@talpey.com>
-Date: Tue, 16 Mar 2021 15:29:38 -0400
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.1
+	id 1lMTrl-005m3t-Q9; Wed, 17 Mar 2021 10:57:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23110) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lMTra-005m3D-Er; Wed, 17 Mar 2021 10:57:20 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=uDy3FOZyNHNKAsq6+pL6FwwcOUQ/SVdflXB09JVlgHM=; b=mP53rPWNPkLDV8arhozIUJZCY9
+ 2zibudzcqgczZAKhSeUsqcp10HM2jAmkOUX9Y1HuJZVO8NJsUJBJ7mmTPL5kiJLrmSIpNFj4X7UZK
+ sJSvlsmeWjP8oe9o8IdiKGT9Y0D6GEILKQzYU5nu7l/LS6pJOrWvisO1chEBW9cikNVs2GwRSTWVg
+ uSTG870WeNsbTh2euVExJno5y/KYiit3VIyZGB7FFtmfZXDEfADyusBkqjYxniW/fq5Ardw6rmREV
+ P6anEEl5Wd1BimBxynrFJ1rsJmYDT4Gk22ORIt7ZhbHhrOGSM7+U3RUtAdhWZYNVX0NY8B/BHJpmL
+ tYjrIeMLsJHknjHC5IAzR3YaC7KLZ8cHwYb6leGNUT0TbcPpBT5j8OGuukwRYwHqejjBgzCcYeiUb
+ rOfJGcWtFzHVd6TV5Fz3nHIVCN8Jx6LUtkDgoQZ6NLcIloZ5S6a6wGMrMcxM6YSuY2akQ4rBE3R+z
+ Uqb7F2xsfCPkNRifFRRBqBPR;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lMTrZ-0003rF-Fd; Wed, 17 Mar 2021 10:57:17 +0000
+To: samba-technical@lists.samba.org, samba@lists.samba.org,
+ samba-announce@lists.samba.org
+Subject: Heads-up: Security Releases ahead!
+Organization: Samba Team
+Message-ID: <5b349e1c-b2b3-fe03-0698-bf4291f1aea1@samba.org>
+Date: Wed, 17 Mar 2021 11:57:17 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <CACdtm0ac+oE1+KNbOGWhy-j9XHmUn4AXG6zAaX-nL0W=NJxQMA@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-CMAE-Envelope: MS4xfH6b3PF8QhOqJznv110kIMK+CLaMTn7+5O8zIx0dZa9FNVemvhe0/KfPSyC510OhKOT9JghaMrb3qjtoVCjYAbpoOKhULCOq4cAsrLRbuKdXuHRyeyuA
- rWj1QAdjnkSU1QN18U2+Insf4dP+C0yHalejORzzgacQEAKJgsg1VI0+mS9mUCnM81Gv6Eb2Zz0cf318OBRDEOlKClrzutpWnHcjZQCtjcwAsifRoSld21to
- CBxGGxyfajqvxaB6jK2FcXl9Unqc9fmvODToXzyEt70KolifOWp5ynQ6jSFY5mky0cUf5XJiM0fpCa5k9PfzsIl5WxpLRnTpGt675sBCTomtbmMrPJaBCBZp
- /aismpvUmDzumrOQkNOU09rvy0ea6/apTwWrKclr9yEbmsU5RSFs5nWWZ1J4oHDwQUNbcSoG
+Content-Type: text/plain; charset=utf-8
+Content-Language: de-DE
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,87 +56,26 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Tom Talpey <tom@talpey.com>
-Cc: linux-cifs <linux-cifs@vger.kernel.org>,
- Vincent Whitchurch <vincent.whitchurch@axis.com>,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- Steve French <sfrench@samba.org>, kernel@axis.com
+From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Karolin Seeger <kseeger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 3/16/2021 1:36 PM, Rohith Surabattula wrote:
-> This issue will not be seen once changes related to deferred close for
-> files is committed.
+Hi,
 
-That may be, but it's irrelevant to this.
+this is a heads-up that there will be Samba security updates
+on Wednesday, May 24th. Please make sure that your Samba AD DCs
+will be updated immediately after the release!
 
-> Currently, changes are in review. I will address review comments by this week.
+Impacted components:
 
-What do you mean by "in review"? Both threads are active on the
-mailing list. If you or others have something to discuss, please
-post it and don't leave us out of the discussion.
+o AD DC LDAP Server (CVSS 7.5, high)
 
-Tom.
+Cheers,
+Karolin
 
-
-> Regards,
-> Rohith
-> 
-> On Tue, Mar 16, 2021 at 9:33 PM Tom Talpey <tom@talpey.com> wrote:
->>
->> On 3/16/2021 8:48 AM, Vincent Whitchurch via samba-technical wrote:
->>> Make SMB2 not print out an error when an oplock break is received for an
->>> unknown handle, similar to SMB1.  The SMB2 lease break path is not
->>> affected by this patch.
->>>
->>> Without this, a program which writes to a file from one thread, and
->>> opens, reads, and writes the same file from another thread triggers the
->>> below errors several times a minute when run against a Samba server
->>> configured with "smb2 leases = no".
->>>
->>>    CIFS: VFS: \\192.168.0.1 No task to wake, unknown frame received! NumMids 2
->>>    00000000: 424d53fe 00000040 00000000 00000012  .SMB@...........
->>>    00000010: 00000001 00000000 ffffffff ffffffff  ................
->>>    00000020: 00000000 00000000 00000000 00000000  ................
->>>    00000030: 00000000 00000000 00000000 00000000  ................
->>>
->>> Signed-off-by: Vincent Whitchurch <vincent.whitchurch@axis.com>
->>> ---
->>>
->>> Notes:
->>>       v2:
->>>       - Drop change to lease break
->>>       - Rewrite commit message
->>>
->>>    fs/cifs/smb2misc.c | 2 +-
->>>    1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/fs/cifs/smb2misc.c b/fs/cifs/smb2misc.c
->>> index 60d4bd1eae2b..4d8576e202e3 100644
->>> --- a/fs/cifs/smb2misc.c
->>> +++ b/fs/cifs/smb2misc.c
->>> @@ -755,7 +755,7 @@ smb2_is_valid_oplock_break(char *buffer, struct TCP_Server_Info *server)
->>>        }
->>>        spin_unlock(&cifs_tcp_ses_lock);
->>>        cifs_dbg(FYI, "Can not process oplock break for non-existent connection\n");
->>> -     return false;
->>> +     return true;
->>>    }
->>>
->>>    void
->>>
->>
->> As an oplock-only approach, it looks good. But the old cifs_dbg message
->> "non-existent connection" is possibly misleading, since the connection
->> may be perfectly fine.
->>
->> When breaking the loop successfully, the code emits
->>          cifs_dbg(FYI, "file id match, oplock break\n");
->> so perhaps
->>          cifs_dbg(FYI, "No file id matched, oplock break ignored\n");
->> ?
->>
->> Tom.
-> 
+-- 
+Karolin Seeger			https://samba.org/~kseeger/
+Release Manager Samba Team	https://samba.org
+Team Lead Samba SerNet		https://sernet.de
 
