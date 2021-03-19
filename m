@@ -2,42 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAB603423CA
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Mar 2021 18:55:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C76434248F
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Mar 2021 19:24:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=0Hu/sFTU07BSPfslUR3noYn7pP1Ta+WCFBZfNTBzMrU=; b=HRT2g4cpkoe8msBAbZtUAkYKy+
-	yhroP407+V39UdelvwcJ6O/G1GVeKmUZvieeFa/6iY98xImQzQ4kg49hjahDlB5EI6uR0DQTeKezy
-	URjIDTsZqqcaoVfDYRn6KkcOl2IbPg6Fex5QqO1/pARSPpOXbVeIZdsGdGvV6AbfyAR7YwiUczyrp
-	FKMftNwLzj9iVzwO/4OKh1desrmO5c/0cNezclS8prDAFPbcO0viNXsBGIkU7vy5NE6v8G1W12QPF
-	/eyc7k8A/oaW3skjFgTm/Ja7Bf5x2ftDJ9BURBdZ94w89I8Fy6LJ12rSqBpAtoJM5NBTUoc8kAMbE
-	1xQ7vE6A==;
-Received: from ip6-localhost ([::1]:35508 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=/JowdfmmKpJB2UBSTcR6azLdFzLXy9ucnNQoBlcRC/E=; b=B+eXcbrWK5nkSd73o0YKAGY6li
+	l3ahJs/nJPx1Cbj+bb2GpbsdcRMU8q4tYvT5lbHBaBh68chttwJUI49dm5wXLmsczpKjmIQwC/8df
+	U5SlJtc7D7vhcGiE63fvqK232kv81yJqWUtXpjVyjq//JpGuJwfFxzf8TPNQt+PjufPEGDjH2JkVb
+	1+rxhY8OTW72sgTKRAZONQsIfGTRYQN3HAfKYkZr5XcP1enVDltSegjndOC+tFlYLuu7PJZwBo4TW
+	IjcERQ5om6Fc+dVbhtG8M92u5Oacazqxm1jK7KLN2oE+3d+GMCvX0A5W8ul9iLgtuYwQlmgGNUPd0
+	VgQWePIA==;
+Received: from ip6-localhost ([::1]:47260 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lNJKZ-0063Kv-G7; Fri, 19 Mar 2021 17:54:39 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30946) 
+	id 1lNJnU-0064vw-B3; Fri, 19 Mar 2021 18:24:32 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39534) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lNJKO-0063KS-7T; Fri, 19 Mar 2021 17:54:30 +0000
+ (Exim) id 1lNJnJ-0064v6-B5; Fri, 19 Mar 2021 18:24:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=0Hu/sFTU07BSPfslUR3noYn7pP1Ta+WCFBZfNTBzMrU=; b=Yqqm0Nk9PE2PES1z80+xxM1fDH
- 7xVOoYdQcf2xE5lI1Ywxh9+Q/DV22WzG5s6jZORIlduwK+OP5T922tBLBqtldtLe+xi5yozK6RsBD
- nXRNoLW+E9p2lSPVLM4nmr4hVK8heX1kIq3Ac3Epq47H6mceMdw0fud78X6hOu7VVM+w1DeE2gYJ+
- pqh0z1g5DG1eyXdeE5liBFW97ZCVxJ/54IdxIL0OXtBNU6UenpZcHqQp+IfwtVA7tjtMd1a//Vfuq
- 8yMvepZWHF/rmFYykM2pa1q3nGOpIvh9XW0H1sN4YS0ivu/DEDl+NKVN+K93DRpqXifhZtsw0GTej
- 8gwgDi1QQ84V0ryh/1uIXfGt5BC3t+W5/gZdOAVObOHRoAMqXV3GGHiPxLqCEF/O4R9FHXSRxdY/I
- TNY/p/oInFeTx4fmzC/ygk5DNeICix62RVHbTQ8hYUzQvjYxYC+2T1W/eQFBOzsnLUZZZaX4HnuKn
- 5s5LecGBps6btTtMJ2Fvgi5c;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=/JowdfmmKpJB2UBSTcR6azLdFzLXy9ucnNQoBlcRC/E=; b=Zbya7M2pufasWggle44EBhHIhZ
+ arXLSRGM23ZNxOYJQzR5mfGbAz2hV+0LlJEaOjsg5MYgPTpKbUgsOuC8pNxDidChmSjq370ZBpWfo
+ WRVctCVWPuFN1kQeQkYGWMAn5rgYbb6MKzbiE+bJUlhxdNKYtqlsvLm07vAXIVPmkokY5BJdeUJAe
+ 4ykkgXxvAyjaRmXY5l8FtldkWoAUK8sJSqvx+cwQrghjxtnyu9SL9eXlmM+o+CKHR/oOELvg591A5
+ 2FWajqaLAyVqK6Sa2YYh7PKQWnB4E5DtUg10bq8frez/rgWrSWVLcjfWc9mKwofittqcgQqJ4Ufz2
+ //QedM53kZI85UR9z+MaqP39GkZZIUroA/wV2RSNuA1yEO4n1XPFEcI8kKSnJEjZHYr61dP/XvVwK
+ 9KB3hA2mkvy7kNWxSCjuvEy0mA73XH6/k6ekGpfUivn3/DNoR+WSgL3II4O9VJ3L5QeaKuJd/y3VZ
+ DYK7edbIQ/a0iKjRGn4953up;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lNJKM-0004zu-Nb; Fri, 19 Mar 2021 17:54:27 +0000
-Date: Fri, 19 Mar 2021 10:54:22 -0700
-To: samba@lists.samba.org, samba-technical@lists.samba.org
-Subject: Ask not for whom the bell tolls HPUX. It tolls for thee..
-Message-ID: <20210319175422.GC310511@jeremy-acer>
+ (Exim) id 1lNJnI-0005Hk-B3; Fri, 19 Mar 2021 18:24:20 +0000
+Date: Fri, 19 Mar 2021 11:24:16 -0700
+To: David Mulder <dmulder@samba.org>
+Subject: Re: Ask not for whom the bell tolls HPUX. It tolls for thee..
+Message-ID: <20210319182416.GD310511@jeremy-acer>
+References: <20210319175422.GC310511@jeremy-acer>
+ <K2A8QQ.ZR62NCP7NX2F2@samba.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
+In-Reply-To: <K2A8QQ.ZR62NCP7NX2F2@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,30 +56,27 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba@lists.samba.org, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-OK, I've gotten approval and removed the code
-for Tru64 UNIX in Samba (last supported release
-2012).
+On Fri, Mar 19, 2021 at 12:01:32PM -0600, David Mulder wrote:
+>Wikipedia (on the side panel) says the latest release was 11i v3 in 
+>May 2020. Not that I'm arguing in favor of keeping support for it 
+>around (last I used HPUX was 5 years ago).
 
-Now I'd like to ask about a harder topic.
+Oh, good catch, that's an inconsistency.
 
-HPUX :-).
+The two end-of-life dates for 11i v3 I
+can see are:
 
-Wikipedia says:
+2021-03-31	HP 9000 only
+2025-12-31	Integrity only
 
-https://en.wikipedia.org/wiki/HP-UX#Versions
+so the end is certainly coming soon.
 
-"the latest revision being B.11.31.1805,[16] released in May 2018."
+I'm going to wait and see if anyone from
+HP(E) posts here and actually cares.
 
-so it's still in support. Just. But it looks moribund
-to me :-).
-
-Is anyone still using it with Samba ? Does anyone
-still care ?
-
-Speak now or...
-
-Jeremy.
+If not, off to the glue-factory it goes... :-).
 
