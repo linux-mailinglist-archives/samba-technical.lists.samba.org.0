@@ -2,45 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C76434248F
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Mar 2021 19:24:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E9EC345F9B
+	for <lists+samba-technical@lfdr.de>; Tue, 23 Mar 2021 14:27:44 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=/JowdfmmKpJB2UBSTcR6azLdFzLXy9ucnNQoBlcRC/E=; b=B+eXcbrWK5nkSd73o0YKAGY6li
-	l3ahJs/nJPx1Cbj+bb2GpbsdcRMU8q4tYvT5lbHBaBh68chttwJUI49dm5wXLmsczpKjmIQwC/8df
-	U5SlJtc7D7vhcGiE63fvqK232kv81yJqWUtXpjVyjq//JpGuJwfFxzf8TPNQt+PjufPEGDjH2JkVb
-	1+rxhY8OTW72sgTKRAZONQsIfGTRYQN3HAfKYkZr5XcP1enVDltSegjndOC+tFlYLuu7PJZwBo4TW
-	IjcERQ5om6Fc+dVbhtG8M92u5Oacazqxm1jK7KLN2oE+3d+GMCvX0A5W8ul9iLgtuYwQlmgGNUPd0
-	VgQWePIA==;
-Received: from ip6-localhost ([::1]:47260 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=5L9+Fb7ZhtNIr9R4BP0JPl0Bu0Air2XgRbmbDPrhyJg=; b=Ch/vR6XFc+WGJuBXlCIlgiqjeQ
+	8GR9E7pa+EVnwiKpdivmC3tNd0yai+MrmJgVMaPXuYObXpQCpQFAg070SDiuh52rwVCWnRU1xxpBe
+	BuBado0mFjIeS/atT6pw6HZFtisIK40mtpLrueWJen1bLoo8ItT8crTCX70M89NCCl3799hX4IS7o
+	LSkWOoZFn2iIfVUotx89wZlAx8jLAng/LM9yszxHPGJD0BHB9P28CRZ+xEFgqhGvUH0Jf1xEOoqpr
+	QJIoi4g1YfxxBiyfpNSdTSEjg88hkeAYr5C6NFVG+d1VTp9/GhcRZbVcyxWNVLtIhmvUGAG9PDI3o
+	KrFrZtzA==;
+Received: from ip6-localhost ([::1]:37486 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lNJnU-0064vw-B3; Fri, 19 Mar 2021 18:24:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39534) 
+	id 1lOh3F-006NDQ-SP; Tue, 23 Mar 2021 13:26:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47028) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lNJnJ-0064v6-B5; Fri, 19 Mar 2021 18:24:23 +0000
+ (Exim) id 1lOh35-006NDJ-MO
+ for samba-technical@lists.samba.org; Tue, 23 Mar 2021 13:26:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=/JowdfmmKpJB2UBSTcR6azLdFzLXy9ucnNQoBlcRC/E=; b=Zbya7M2pufasWggle44EBhHIhZ
- arXLSRGM23ZNxOYJQzR5mfGbAz2hV+0LlJEaOjsg5MYgPTpKbUgsOuC8pNxDidChmSjq370ZBpWfo
- WRVctCVWPuFN1kQeQkYGWMAn5rgYbb6MKzbiE+bJUlhxdNKYtqlsvLm07vAXIVPmkokY5BJdeUJAe
- 4ykkgXxvAyjaRmXY5l8FtldkWoAUK8sJSqvx+cwQrghjxtnyu9SL9eXlmM+o+CKHR/oOELvg591A5
- 2FWajqaLAyVqK6Sa2YYh7PKQWnB4E5DtUg10bq8frez/rgWrSWVLcjfWc9mKwofittqcgQqJ4Ufz2
- //QedM53kZI85UR9z+MaqP39GkZZIUroA/wV2RSNuA1yEO4n1XPFEcI8kKSnJEjZHYr61dP/XvVwK
- 9KB3hA2mkvy7kNWxSCjuvEy0mA73XH6/k6ekGpfUivn3/DNoR+WSgL3II4O9VJ3L5QeaKuJd/y3VZ
- DYK7edbIQ/a0iKjRGn4953up;
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=5L9+Fb7ZhtNIr9R4BP0JPl0Bu0Air2XgRbmbDPrhyJg=; b=XEaHQICffMGihImBj+g7t+XgnJ
+ WMUqo4NgYB2qyRD6CXRgb+OcoC/FQ8GRbU384ceYTORrxKh2Nkt63v2+eDRqnvIx8S3PYwAG9cyzr
+ wYA1zwhcySiQxmeZXZ5XcnhCdBNN7R2U+n4uqWEXF9GAdOrJzHDrWvg1SWG+wWioBAWw4+b+wBJwX
+ f8MVXFFUWB5WE7Jhy6IaZVMQtVcRyS9z5JVgZVTmBSrdLx1PyOQhXwe9wot5Fkzwo2CruJ0yJtCwy
+ 6hlz2KT8Wim8UP+4GoWvLcXyxuExC9+5GKkeNVhvEenKT1oOzqAImbM8R2NCZ2GzgbX+/yJC20sEb
+ V3oBRb0nIu3hdSoi/EO7j9/ehjEPT+R+1+Clh/AzG6419jWJkiK4vKwoZBFt0g+kUnq5twjI8i4JW
+ IKguO+su4fCo0QNY4jB1JEdAVEb+J43sjs+eyNUHEpzFvfOZnerbBO+NSEhyHBaAz4v+GznoniyKx
+ wIfuv6/SYGb2FYFamhmlnuOu;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lNJnI-0005Hk-B3; Fri, 19 Mar 2021 18:24:20 +0000
-Date: Fri, 19 Mar 2021 11:24:16 -0700
-To: David Mulder <dmulder@samba.org>
-Subject: Re: Ask not for whom the bell tolls HPUX. It tolls for thee..
-Message-ID: <20210319182416.GD310511@jeremy-acer>
-References: <20210319175422.GC310511@jeremy-acer>
- <K2A8QQ.ZR62NCP7NX2F2@samba.org>
+ (Exim) id 1lOh2q-0006h5-Gv
+ for samba-technical@lists.samba.org; Tue, 23 Mar 2021 13:26:04 +0000
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: [PATCH] man winbind
+Message-ID: <64a50e84-f92f-bcbd-e3cf-3e5ae55b5b7f@samba.org>
+Date: Tue, 23 Mar 2021 13:26:04 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <K2A8QQ.ZR62NCP7NX2F2@samba.org>
+Content-Type: multipart/mixed; boundary="------------5762392154D287A5C1184019"
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,29 +55,61 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba@lists.samba.org, samba-technical@lists.samba.org
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Mar 19, 2021 at 12:01:32PM -0600, David Mulder wrote:
->Wikipedia (on the side panel) says the latest release was 11i v3 in 
->May 2020. Not that I'm arguing in favor of keeping support for it 
->around (last I used HPUX was 5 years ago).
+This is a multi-part message in MIME format.
+--------------5762392154D287A5C1184019
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Oh, good catch, that's an inconsistency.
+Seeing as I cannot seem to do this through Git-Lab, lets try the old way 😁
 
-The two end-of-life dates for 11i v3 I
-can see are:
+This patch just removes an untrue statement from the winbind manpage, 
+you can run winbind without running nmbd.
 
-2021-03-31	HP 9000 only
-2025-12-31	Integrity only
+Rowland
 
-so the end is certainly coming soon.
 
-I'm going to wait and see if anyone from
-HP(E) posts here and actually cares.
 
-If not, off to the glue-factory it goes... :-).
+--------------5762392154D287A5C1184019
+Content-Type: text/x-patch; charset=UTF-8;
+ name="man-winbind-Remove-untrue-statement-you-can-.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="man-winbind-Remove-untrue-statement-you-can-.patch"
+
+From dc83f87ac51fec0346e74677ed5b7a7a6da6dd44 Mon Sep 17 00:00:00 2001
+From: Rowland Penny <rpenny@samba.org>
+Date: Tue, 23 Mar 2021 13:16:02 +0000
+Subject: [PATCH] man winbind: Remove untrue statement, you can run
+ winbind without running nmbd.
+
+Signed-off-by: Rowland Penny <rpenny@samba.org>
+---
+ docs-xml/manpages/winbindd.8.xml | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/docs-xml/manpages/winbindd.8.xml b/docs-xml/manpages/winbindd.8.xml
+index 99c00388c20..d5acc072a00 100644
+--- a/docs-xml/manpages/winbindd.8.xml
++++ b/docs-xml/manpages/winbindd.8.xml
+@@ -358,10 +358,6 @@ auth  required    /lib/security/pam_unix.so \
+ 	<para>The following notes are useful when configuring and
+ 	running <command>winbindd</command>: </para>
+ 
+-	<para><citerefentry><refentrytitle>nmbd</refentrytitle>
+-	<manvolnum>8</manvolnum></citerefentry> must be running on the local machine
+-	for <command>winbindd</command> to work. </para>
+-
+ 	<para>PAM is really easy to misconfigure.  Make sure you know what
+ 	you are doing when modifying PAM configuration files.  It is possible
+ 	to set up PAM such that you can no longer log into your system. </para>
+-- 
+2.20.1
+
+
+--------------5762392154D287A5C1184019--
 
