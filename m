@@ -2,51 +2,80 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5D7A347FE3
-	for <lists+samba-technical@lfdr.de>; Wed, 24 Mar 2021 18:57:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 818963481F8
+	for <lists+samba-technical@lfdr.de>; Wed, 24 Mar 2021 20:31:16 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=2sIyj/UhYNF7rMABjc4klcPpsKIDn/f20OC1fWLCc38=; b=DZEaEjjy3NieE0hhjlTvvHieTL
-	YulvdKbYMzUVu0xE/V5m+wkOZL37MrkB5W8j8krMaR/gTsjsI9dLFqt7DvtOldvP1R3QFWllnfJjy
-	7a3uLYDpt4Tgx11kEc3qFVISURS88qbW8gBBCSsQ6fC2oL4I/KHW24TxZ5dz4JucylPO1jxIMUeP8
-	R2AcE2ePJHDpMVQ39wOO+UzQCg+ZzWlWK8BofFQcTUiCAtudViY8Wh8t/hfreRzekX4QZSBrWXtDH
-	5tJceCtDn1NUBgIVdxpWtgZeqKLU7NNgRBKC72Il+EtOWyUJXsqEjPJv8fo3f++11ehvVrwszByVl
-	W5aSQjJw==;
-Received: from ip6-localhost ([::1]:45330 helo=hr1.samba.org) 
+	bh=Mh4xDcbesen/uD6NwLUhFFa0XbiK1Htntj04ryVNK3Y=; b=KP0KDu8G9PZSPKIoiP/O6DOEWf
+	s4QZ6eGfSM/TJGsCM86JBYtnZTtGk/a9fLYAM44hcJCrG3LlB/gTIL6e0qeoSfYtQbORsN2TsuM5w
+	M3C9HET0Y3GdeJN9wkCWDJH3c54YNwaJw+6LXS9mEARVxSYZBzzC7wVa2gJgDC6mC/Mb3SF3dxhh6
+	S1K6LMgIsQrYRe8XoiKdGqHuCsWyqcEOQ5ftBVw91/jVWiCaOsL+H5BgaOEw1eHSFidV8RZ5y86np
+	ZOw3C3dUnZY9OLwE1yQyPLX/wbi29FXpD9sJqPiyR6y3ov6NcYnbKPWjoYXysSzPpE1xobkBbBYnW
+	sNOn6y6A==;
+Received: from ip6-localhost ([::1]:46064 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lP7lF-006dLy-4f; Wed, 24 Mar 2021 17:57:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39630) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lP7lA-006dLr-Rm
- for samba-technical@lists.samba.org; Wed, 24 Mar 2021 17:57:39 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=2sIyj/UhYNF7rMABjc4klcPpsKIDn/f20OC1fWLCc38=; b=I0C4tbXMCOf2BS1dglVys5woWC
- gpt8Ui6U7Fy6kRzQ7uJge+fCF8yge1IM/3cARzykjvVERu+OdCAerNQd/sOEzi/bIOnAPU2AwvI17
- HfSUgJQIaL4pNz/xoyKPfvbP7aqiwvduN8B8h2yYpc4V8sgx7jLQbJZMVJMDzbcrERrTkUt31oOEn
- Ucr79+WjkOZNVzyK+sEdFXe5lzvqnBh/C+AVXGBSNsgAUuijailSF7hs7zrTC3TF1dzhkhuRAgR0A
- kv1EAT9xad8UxI2qIU+APBq1uBVH2R2tcM5GevOdi8jY5DyHZloO+SV8bsBRx6cLDlcTSRLF7Q/aU
- C8Lsx6qLzuNZ3EIKb+CaT9zP2kRS/2Vg2/5p1b6SpJKI3BuJ5dxtLJf0zEbUbr5jW4ANUwRu8JZB3
- 72AyuApk/WJyBFmz+i92znMGIeLcypKGKac9VugN4saJuukGwhQS0XNw7Dd5kTZX+24HK3WSLa3dr
- PLZSrhq2+ZK/PVyJ3Jn5FLDg;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lP7lA-00071Z-AW
- for samba-technical@lists.samba.org; Wed, 24 Mar 2021 17:57:36 +0000
-Subject: Re: Drop NIS support
-To: samba-technical@lists.samba.org
-References: <4045140.l1vqqZ3lm0@magrathea>
- <20210324161244.GB818616@jeremy-acer>
- <3742e07eba544478383ae1a7e9e56197beb12616.camel@samba.org>
-Message-ID: <359f492d-7dbd-2e95-1c8c-3178d9e51344@samba.org>
-Date: Wed, 24 Mar 2021 17:57:36 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.0
+	id 1lP9Ci-006dYL-Ff; Wed, 24 Mar 2021 19:30:08 +0000
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:55726
+ helo=mx0a-001b2d01.pphosted.com) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1lP9Cc-006dYE-MR
+ for samba-technical@lists.samba.org; Wed, 24 Mar 2021 19:30:05 +0000
+Received: from pps.filterd (m0098416.ppops.net [127.0.0.1])
+ by mx0b-001b2d01.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 12OJ2b7F037110
+ for <samba-technical@lists.samba.org>; Wed, 24 Mar 2021 15:03:28 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
+ h=mime-version : subject :
+ to : from : date : content-type : message-id; s=pp1;
+ bh=s4eYYJATERDcm78eMMNmo7rhgBwMjIt9i4etP4eNtSY=;
+ b=LnSKmRAaBZyukuPq/vXD4hVA7CJ+Sfx7DnP7XnCrzG5F/xFnDn6gLzo2yEucgVnmWmLi
+ 5b/i7OlTm3LSL0pwv1RA3ajegbGnaQ1BC7rjFW/prYP1TBUPbK5S42ASeXYUIVHUv5Tl
+ pkH2/1g6bZWXBI+RuaYrf6OsKjFhD1YjZ1guTl66WhXyDXIwmGdbpfqyrv0cgl3b4fYF
+ lsavYB2gEjinVkQeUuxc0Hy8o5YW0dRuINzK8bjKlsytCphWr8PFwdParFbE6XQ+l1j9
+ mfckmGcii29wrOdua+0Wrr++GVEREmHHrhmCCuren6FcVOlcmm8hzoXDg9rzbnWRMB71 GA== 
+Received: from smtp.notes.na.collabserv.com (smtp.notes.na.collabserv.com
+ [192.155.248.66])
+ by mx0b-001b2d01.pphosted.com with ESMTP id 37g8t0m5r1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <samba-technical@lists.samba.org>; Wed, 24 Mar 2021 15:03:27 -0400
+Received: from localhost
+ by smtp.notes.na.collabserv.com with smtp.notes.na.collabserv.com ESMTP
+ for <samba-technical@lists.samba.org> from <jpjanosi@us.ibm.com>;
+ Wed, 24 Mar 2021 19:03:27 -0000
+Received: from us1a3-smtp01.a3.dal06.isc4sb.com (10.106.154.95)
+ by smtp.notes.na.collabserv.com (10.106.227.127) with
+ smtp.notes.na.collabserv.com ESMTP; Wed, 24 Mar 2021 19:03:26 -0000
+Received: from us1a3-mail245.a3.dal06.isc4sb.com ([10.146.127.231])
+ by us1a3-smtp01.a3.dal06.isc4sb.com
+ with ESMTP id 2021032419032597-688411 ;
+ Wed, 24 Mar 2021 19:03:25 +0000 
 MIME-Version: 1.0
-In-Reply-To: <3742e07eba544478383ae1a7e9e56197beb12616.camel@samba.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
+Subject: Samba AFS Integration Support
+To: samba-technical@lists.samba.org
+Date: Wed, 24 Mar 2021 13:03:23 -0600
+X-KeepSent: 02C457C2:057824D7-002586A2:00688BB0;
+ type=4; name=$KeepSent
+X-Mailer: IBM Notes Release 9.0.1FP7 Octobe4, 2013
+X-LLNOutbound: False
+X-Disclaimed: 63051
+X-TNEFEvaluated: 1
+x-cbid: 21032419-4409-0000-0000-000004D78328
+X-IBM-SpamModules-Scores: BY=0; FL=0; FP=0; FZ=0; HX=0; KW=0; PH=0; SC=0;
+ ST=0; TS=0; UL=0; ISC=; MB=0.000018
+X-IBM-SpamModules-Versions: BY=3.00014888; HX=3.00000242; KW=3.00000007;
+ PH=3.00000004; SC=3.00000296; SDB=6.01521490; UDB=6.00822281; IPR=6.01304004; 
+ MB=3.00036428; MTD=3.00000008; XFM=3.00000015; UTC=2021-03-24 19:03:26
+X-IBM-AV-DETECTION: SAVI=unsuspicious REMOTE=unsuspicious XFE=unused
+X-IBM-AV-VERSION: SAVI=2021-03-12 19:12:50 - 6.00012368
+x-cbparentid: 21032419-4410-0000-0000-0000A776853A
+Message-Id: <OF02C457C2.057824D7-ON002586A2.00688BB0-862586A2.0068AE6E@notes.na.collabserv.com>
+X-Proofpoint-Spam-Reason: orgsafe
+X-Warn: EHLO/HELO not verified: Remote host 148.163.158.5
+ (mx0b-001b2d01.pphosted.com) incorrectly presented itself as
+ mx0a-001b2d01.pphosted.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,42 +89,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: John P Janosik via samba-technical <samba-technical@lists.samba.org>
+Reply-To: John P Janosik <jpjanosi@us.ibm.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 24/03/2021 17:52, Andrew Bartlett via samba-technical wrote:
-> On Wed, 2021-03-24 at 09:12 -0700, Jeremy Allison via samba-technical
-> wrote:
->> On Wed, Mar 24, 2021 at 05:10:15PM +0100, Andreas Schneider via
->> samba-technical wrote:
->>> Hi,
->>>
->>> could we drop NIS support for Samba 4.15?
->>>
->>> This means getting rid of lib/replace/system/nis.h and yp_*() ...
->> +1 from me. Let's see if anyone else is still
->> using it.
->>
->> So the current list for 4.15 will be Tru64, HPUX, NIS.
->>
->> Any more for any more ?
-> Just to be clear to others, this is not the so-called NIS support in
-> the AD DC which at one point helped Active Directory Users and
-> Computers managed the rfc2307 user attributes.
->
-> I'm happy for the real NIS support to go.
->
-> In terms of other things to trim, what about some of the printing
-> modes?
->
-> Andrew Bartlett
->
-How about idmap_hash ? The one that says 'DO NOT USE THIS BACKEND' at 
-the top of its manpage.
-
-Rowland
 
 
+Hello,
 
+I saw the discussions about dropping some code in Samba 4.15 and the old
+AFS support included by --with-fake-kaserver came to mind.  That code
+requires AFS to be configured to use single DES Kerberos service principal
+keys so we stopped using it a while back in IBM run AFS cells that I know
+of.  I have thought about updating Samba to support modern encryption types
+for AFS service principal keys but haven't found time in the last few years
+so probably will never get to it.
+
+Regards,
+
+John Janosik
+jpjanosi@us.ibm.com
