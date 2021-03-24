@@ -2,45 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EA26347D5E
-	for <lists+samba-technical@lfdr.de>; Wed, 24 Mar 2021 17:12:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07567347E17
+	for <lists+samba-technical@lfdr.de>; Wed, 24 Mar 2021 17:45:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=Q+o3dE7AjyqHiXDn/6FSX2oOVDgFxK4EjXcq0XEyfSg=; b=RVFTvWx3kpS8vIgLcTOOJaEZEP
-	HiItWgx1gEIVFqPB3G1Y5L+USqu9zEeXh6CHRZ2KlUtLOojXuYg7zotfK3MOJP8tkJwvHWYutVfuO
-	lbh7mZ/9A3c6kivoKGaTySpgfZx0bvrjc8K4usd3WKpSWNZETsOQpGUVsRnEAE6tZGuhvY+GBAA6d
-	4g004iZmc3m4NE4VMZwboo13DU7tSuaFxoBx8orbBbxxM/bBl3Wjh2oN4MpQBz5BnoQslLG0CyEdj
-	XlQwaBrh/WCEk9Z0PQ1tVFESpfeGGZ6eK8O9Qrh09cfMho0RqsueGSJlxg4bjrrIlaTR4Mv42jdi1
-	dOJE0Izg==;
-Received: from ip6-localhost ([::1]:36476 helo=hr1.samba.org) 
+	bh=Ju0FMLg5TrkWPQ6IKJytQgY1Q9afpLbhFHYmBWgJXuw=; b=pY3wWlNcWAInBsZRg2znJUXGpv
+	3SuslpCEjR+2YCV0toC60N+MxebDItGLizQQR2fnZdQVYryCBkGegjs35TBSMNiuqhsGXlFSTcWd1
+	XTm8EEVtNCV4ZKY9SNT27t7OscfYtSVOHOaqPZBeVcv3uuE3ppVJN6Lwwc72CIv5w6lai7HopwUPz
+	EABnMWxS6dCzVw/QO8kfdkVv0+zjmOgleGYPTqvB6owVYR8Gv/YH6Hx4TUph1VWZ48/jT8993Xph3
+	VZPlIq9ezH20bCiHduyyOwm004Eo0qXIoXUMtJJDdLKOJroCnlt9ryDIonri1Cdr7PwuV3I7WQ0Ox
+	92nl4tzg==;
+Received: from ip6-localhost ([::1]:37190 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lP67q-006c4V-2i; Wed, 24 Mar 2021 16:12:54 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60494) 
+	id 1lP6dG-006cCC-Vt; Wed, 24 Mar 2021 16:45:23 +0000
+Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:39541) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lP67k-006c4N-Gn
- for samba-technical@lists.samba.org; Wed, 24 Mar 2021 16:12:50 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=Q+o3dE7AjyqHiXDn/6FSX2oOVDgFxK4EjXcq0XEyfSg=; b=MJZrq/m6vfpXvnWyZCHVS//fRI
- /7WtN1bd1R/xBObHTUQmoOp/N9vYUlVwu6BM8BkROCKNQyfbAWgXyZBsfCNgeyw/pzIJqriNYzh4y
- TI1Ad7PQiiEXjMW8bK+iiGxGncoVz48ofVRuvpaQghKKZFdj54nV3QA8UFqkEPLCsVOiSA7qpnKBR
- 5sk2xkBo1GaRJaHSINOAEfGOCBH3dDrFdjAq+hLclYeOvbnIx7WwU3tek++Zxe8mwvLssisRF37wS
- 6fKc9Afdaln54DCEKHottFndYBXG8YTV5o4U5jHMtX9ETUOFa9WUt0i5fCmnXD6aICA88Cankpw9j
- DH190neHRaquN/A1ASleTQ7kw7nvwzc55dAbNfmMsAELRKC+BJpd2Hn12+uk7zXb2QBMrIHWI6HL7
- zy//wecefw/uGbLWg8KBie+xLZGKbFJaNnPdv8aT2udSQkY6yvzTYEhO9Ib5b8SNmTiag2nnZKQgu
- v+GSeNOLeUf/GtaVDJynKUK3;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lP67j-00069h-Dq; Wed, 24 Mar 2021 16:12:47 +0000
-Date: Wed, 24 Mar 2021 09:12:44 -0700
-To: Andreas Schneider <asn@samba.org>
-Subject: Re: Drop NIS support
-Message-ID: <20210324161244.GB818616@jeremy-acer>
-References: <4045140.l1vqqZ3lm0@magrathea>
+ (Exim) id 1lP6d9-006cC4-L9; Wed, 24 Mar 2021 16:45:20 +0000
+Received: from intern.sernet.de by mail.sernet.de
+ with esmtps (Exim Mail Transfer Agent)
+ id 1lP6d8-0007vx-Hw; Wed, 24 Mar 2021 17:45:14 +0100
+Received: by intern.sernet.de
+ id 1lP6d8-0005t8-Ex; Wed, 24 Mar 2021 17:45:14 +0100
+Received: from bjacke by pell.sernet.de with local (Exim 4.93)
+ (envelope-from <bjacke@sernet.de>)
+ id 1lP6d8-004UpC-8P; Wed, 24 Mar 2021 17:45:14 +0100
+Date: Wed, 24 Mar 2021 17:45:14 +0100
+To: Jeremy Allison <jra@samba.org>
+Subject: Re: [Samba] Ask not for whom the bell tolls HPUX. It tolls for thee..
+Message-ID: <20210324164514.GA954802@sernet.de>
+Mail-Followup-To: Jeremy Allison <jra@samba.org>, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+References: <20210319175422.GC310511@jeremy-acer>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <4045140.l1vqqZ3lm0@magrathea>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20210319175422.GC310511@jeremy-acer>
+X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
+ Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,23 +53,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bj@SerNet.DE>
+Cc: samba@lists.samba.org, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Mar 24, 2021 at 05:10:15PM +0100, Andreas Schneider via samba-technical wrote:
->Hi,
->
->could we drop NIS support for Samba 4.15?
->
->This means getting rid of lib/replace/system/nis.h and yp_*() ...
+On 2021-03-19 at 10:54 -0700 Jeremy Allison via samba sent off:
+> Is anyone still using it with Samba ? Does anyone
+> still care ?
 
-+1 from me. Let's see if anyone else is still
-using it.
+HPE still builds more or less recent versions of Samba, currently 4.12:
 
-So the current list for 4.15 will be Tru64, HPUX, NIS.
+https://myenterpriselicense.hpe.com/cwp-ui/free-software/B8725AA
 
-Any more for any more ?
+so I think we should not remove HP-UX support yet. And FWIW, I also have
+customers who still run HP-UX.
+
+Björn
 
