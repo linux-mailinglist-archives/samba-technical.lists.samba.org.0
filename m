@@ -2,59 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E244349548
-	for <lists+samba-technical@lfdr.de>; Thu, 25 Mar 2021 16:22:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6291A349619
+	for <lists+samba-technical@lfdr.de>; Thu, 25 Mar 2021 16:52:46 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=DWdXrxswFdWMzj92Kr/qs8gPd/Sy1C2PZmeLqGsaT0g=; b=btGP+YfUueSQ6m3kWQiEJpZzlo
-	CNE2WchJUVkxrpvdOcsGWwPq64JObNgzfN/gdOtD334BrK6ModGqeTKaCQnrootoqaIQ9R0ho8ST4
-	IN2KBnMQIjeFserNlLokuwhCFtGj1TFUtXLV+0Fst55cepBRK+KZaJUTHADBIaEwR7H5w/6Gzt6TI
-	GUW/KKLBdHAn2rtfLDHAKkpQT+dZFYPXNfpu6aLYa6AOJwSfWg0nl7xs/QCLrHvUnJByUpqWdRQvy
-	zKnbjVbC1pmq3A4x9IY0Tf0WnVtQuUBjIx5+VBvA8BaZ8hThz2wLpguI6p5P3pUlB6KP6mtbTj0H8
-	NGIaV5Fg==;
-Received: from ip6-localhost ([::1]:36692 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=IqJlqjXqEOA/qrS5l6MiCSUm2Cp6jbH9IweDnJWlXcE=; b=dlMUJpmuDJvjNgHKoJqZwWHO5b
+	S340BFLCx7CbqDrEg9tEC4va2+yTTS9DfnUfRJL1RhZ9L8uA+dLaULbe01J/LWIP3Gkvmin0SVBFj
+	zkSSikzFLtu2Upnv4kpP4Ovss7tEKkopsHDRXDuM6q8X3jx286Dc2j6zerRQhNDUUZuU5yks1QF6V
+	DsLEfa/SSix7CjXcewJqJ/tf4s0bIW+RWSbaEnhgrxnFTNl9p+kIq9VBOB+bZUen8BoVuAAdZAdaH
+	tu4uMcWuvUCsKGm6P8pURVYIaJg7sqQtgxk1HIRQARAt120hSl4RgX14pN4J0ulVMXGGcfrmWUXMM
+	3SZVg3yw==;
+Received: from ip6-localhost ([::1]:39636 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lPRno-006kNC-Gh; Thu, 25 Mar 2021 15:21:40 +0000
-Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:33519) 
+	id 1lPSHP-006kow-MU; Thu, 25 Mar 2021 15:52:15 +0000
+Received: from mx.cjr.nz ([51.158.111.142]:45686) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lPRnc-006kN4-5r
- for samba-technical@lists.samba.org; Thu, 25 Mar 2021 15:21:36 +0000
-Received: by mail-lf1-x12b.google.com with SMTP id o126so3146182lfa.0
- for <samba-technical@lists.samba.org>; Thu, 25 Mar 2021 08:21:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=DWdXrxswFdWMzj92Kr/qs8gPd/Sy1C2PZmeLqGsaT0g=;
- b=JD88zvybm4xyFniHi1xZGqHj46f2jKSKyv3nO53GvqYvOJhjmA2Lj9kAXYVrbN2Pv/
- n8IB5e9GtuizoQu3vYcWhMfdlZ2ssXfi4NbO4/ERozh8EJIsRMq7L0TMDs0URckQAsNZ
- 5+zZxvVSMMMn8JXoc3r6a32aIxQt23zlelsqJh3dD9caCez3mdeMAxirZYZ7E3IfWlC1
- KUZHhvCrRvlSaqp65U5N+IdXIsP0NdShEwX2ek6t0d7I/PgBhvl6ei989QxI5YfQTG74
- JaA/QrKYvfdX4ipXKDcLa+6FBqhUrilien0HIOOk6JaHBy8zfq887j100E/f2VFFLoMQ
- zDxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=DWdXrxswFdWMzj92Kr/qs8gPd/Sy1C2PZmeLqGsaT0g=;
- b=ppCLX4UaqG8co2M8zzjTTJgsM9e5wxjRjk/rIJ0tuDPGo5bRpGDWILIMWcuyQ4EwGJ
- 1zR1QiI2xvtzqGxgpQdEKY3Wki52X3Odlof01h7C4HSMWh0YijJp+mFS0ZDeAJiZkPZC
- QWxwiQvTCIiGOfg4b/+ldJX5hF2e4zbzonkLkGcSnsEhc/YHSmieSscoRKvophR0HnPx
- uqPCwDuAodoGIEBJ6fIPc2cz7ZWxFNN1SnubwXWXZtLHhb9cx7QbMLpXphSfv6dCVAZp
- X/i0ZQ4q3BKfbF3Q3bHPHnGSXdeHvnZ1ifClLBqiE2kX4DMWzTLXHv2j5S+3rv8VPPg/
- EN6A==
-X-Gm-Message-State: AOAM5307QghctSI2PHyTsr38oRqLNsPn0WFe65bNwY2FJcC70W2VbgTp
- A2lDU0HMiMBHpV4nF+xYI669+/JYPg3msmDqaOs=
-X-Google-Smtp-Source: ABdhPJz8Jk01Oa9yQeykNwQUixDOSgogUkQOfoY+YTQEVaXTvbSeJRS3xejE5ZUVCAaKKtMrNQGRfvZWiMi1Ru5d3z0=
-X-Received: by 2002:a19:8c0a:: with SMTP id o10mr5538032lfd.175.1616685686587; 
- Thu, 25 Mar 2021 08:21:26 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210319135711.11802-1-vincent.whitchurch@axis.com>
- <4ebdf34a-bd01-68ad-6d27-b1c02d21aebe@talpey.com>
-In-Reply-To: <4ebdf34a-bd01-68ad-6d27-b1c02d21aebe@talpey.com>
-Date: Thu, 25 Mar 2021 10:21:15 -0500
-Message-ID: <CAH2r5msWO8s9zfYOAnRhMj0uP+_phZu8=M3SKQYYi=j-KT5dxA@mail.gmail.com>
+ (Exim) id 1lPSHI-006kop-En
+ for samba-technical@lists.samba.org; Thu, 25 Mar 2021 15:52:10 +0000
+Received: from authenticated-user (mx.cjr.nz [51.158.111.142])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested) (Authenticated sender: pc)
+ by mx.cjr.nz (Postfix) with ESMTPSA id E48237FD53;
+ Thu, 25 Mar 2021 15:32:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz; s=dkim;
+ t=1616686380;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=IqJlqjXqEOA/qrS5l6MiCSUm2Cp6jbH9IweDnJWlXcE=;
+ b=aLxrB/YSQGLjh9Vfz/LHIwd4SvH+ek1d7mB7nDoVvPIHOQ5BHd8Fl/f3zC+sDcC4ANMpet
+ 0Unfpb2F2Qf4PN2Os0xMMiZbJv4sNWniTGn4wSTUajdjgV3R6cF5vTyybmp0bc/7tuv97z
+ p8F5BKI9IPkb6vF9oH8P0czICd4ZuT5a0vgdxalavNRU3vtri7zcsN7BBn4n5ToS7yViDo
+ zjmfXy3t10jIZcRx7T078y++dsnvjn3aX4mDWzGk9G4BJYbEWPUdD0OdQvUb/ONmD0gW/f
+ HoeZ+NaCF7nEfTzEjS6HHFS4Pij1Vd7uMPVYdS/5escH8fFqMGkt2AHzBXr1yQ==
+To: Vincent Whitchurch <vincent.whitchurch@axis.com>, Steve French
+ <sfrench@samba.org>
 Subject: Re: [PATCH v3] cifs: Silently ignore unknown oplock break handle
-To: Tom Talpey <tom@talpey.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20210319135711.11802-1-vincent.whitchurch@axis.com>
+References: <20210319135711.11802-1-vincent.whitchurch@axis.com>
+Date: Thu, 25 Mar 2021 12:32:55 -0300
+Message-ID: <871rc3fdug.fsf@cjr.nz>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,78 +58,47 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
+From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Paulo Alcantara <pc@cjr.nz>
+Cc: linux-cifs@vger.kernel.org,
  Vincent Whitchurch <vincent.whitchurch@axis.com>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Steve French <sfrench@samba.org>,
- kernel <kernel@axis.com>
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org, tom@talpey.com,
+ kernel@axis.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+Vincent Whitchurch <vincent.whitchurch@axis.com> writes:
 
-On Fri, Mar 19, 2021 at 9:06 AM Tom Talpey via samba-technical
-<samba-technical@lists.samba.org> wrote:
+> Make SMB2 not print out an error when an oplock break is received for an
+> unknown handle, similar to SMB1.  The debug message which is printed for
+> these unknown handles may also be misleading, so fix that too.
 >
-> LGTM feel free to add
+> The SMB2 lease break path is not affected by this patch.
 >
-> Reviewed-By: Tom Talpey <tom@talpey.com>
+> Without this, a program which writes to a file from one thread, and
+> opens, reads, and writes the same file from another thread triggers the
+> below errors several times a minute when run against a Samba server
+> configured with "smb2 leases = no".
 >
-> On 3/19/2021 9:57 AM, Vincent Whitchurch wrote:
-> > Make SMB2 not print out an error when an oplock break is received for an
-> > unknown handle, similar to SMB1.  The debug message which is printed for
-> > these unknown handles may also be misleading, so fix that too.
-> >
-> > The SMB2 lease break path is not affected by this patch.
-> >
-> > Without this, a program which writes to a file from one thread, and
-> > opens, reads, and writes the same file from another thread triggers the
-> > below errors several times a minute when run against a Samba server
-> > configured with "smb2 leases = no".
-> >
-> >   CIFS: VFS: \\192.168.0.1 No task to wake, unknown frame received! NumMids 2
-> >   00000000: 424d53fe 00000040 00000000 00000012  .SMB@...........
-> >   00000010: 00000001 00000000 ffffffff ffffffff  ................
-> >   00000020: 00000000 00000000 00000000 00000000  ................
-> >   00000030: 00000000 00000000 00000000 00000000  ................
-> >
-> > Signed-off-by: Vincent Whitchurch <vincent.whitchurch@axis.com>
-> > ---
-> >
-> > Notes:
-> >      v3:
-> >      - Change debug print to Tom Talpey's suggestion
-> >
-> >      v2:
-> >      - Drop change to lease break
-> >      - Rewrite commit message
-> >
-> >   fs/cifs/smb2misc.c | 4 ++--
-> >   1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/fs/cifs/smb2misc.c b/fs/cifs/smb2misc.c
-> > index 60d4bd1eae2b..76cd05b8d53b 100644
-> > --- a/fs/cifs/smb2misc.c
-> > +++ b/fs/cifs/smb2misc.c
-> > @@ -754,8 +754,8 @@ smb2_is_valid_oplock_break(char *buffer, struct TCP_Server_Info *server)
-> >               }
-> >       }
-> >       spin_unlock(&cifs_tcp_ses_lock);
-> > -     cifs_dbg(FYI, "Can not process oplock break for non-existent connection\n");
-> > -     return false;
-> > +     cifs_dbg(FYI, "No file id matched, oplock break ignored\n");
-> > +     return true;
-> >   }
-> >
-> >   void
-> >
+>  CIFS: VFS: \\192.168.0.1 No task to wake, unknown frame received! NumMids 2
+>  00000000: 424d53fe 00000040 00000000 00000012  .SMB@...........
+>  00000010: 00000001 00000000 ffffffff ffffffff  ................
+>  00000020: 00000000 00000000 00000000 00000000  ................
+>  00000030: 00000000 00000000 00000000 00000000  ................
 >
+> Signed-off-by: Vincent Whitchurch <vincent.whitchurch@axis.com>
+> ---
+>
+> Notes:
+>     v3:
+>     - Change debug print to Tom Talpey's suggestion
+>     
+>     v2:
+>     - Drop change to lease break
+>     - Rewrite commit message
+>
+>  fs/cifs/smb2misc.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-
--- 
-Thanks,
-
-Steve
+Reviewed-by: Paulo Alcantara (SUSE) <pc@cjr.nz>
 
