@@ -2,48 +2,133 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CE3934ABBB
-	for <lists+samba-technical@lfdr.de>; Fri, 26 Mar 2021 16:44:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C40434AC07
+	for <lists+samba-technical@lfdr.de>; Fri, 26 Mar 2021 16:55:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=lCPQuZU5PpP9GNulHG/sMrpfQZDPTx/9DjN7H8sp13k=; b=p2oEWNV3nQR5ssILiwsqJ7l/nk
-	78Xy4y5LukVQaJHyYZv7q9GnDHQwLqamUVgIyrgzDP+afXbfikU4faG5jg/Y8BNKq046SKfr386pc
-	sdKrp0eow2+jN1LbvavFq5Puqbsx1w1OUj50eT4HoKJN5Kg+ukFAzDcK+64zIA7+l1gC8MdO8H3Nc
-	Ukv2sQQLqFzUVwLgJbvhUhxZeMmjyPqGd5JSznEyAP9cqbagVIlWo0Fu+yD9lZxsyS5nu+mmHFI8Q
-	waZ2Gg2imuMrKs49IsAa9rsfawXsxpndYVc3EoDvuYrMX8rqMJsY8cWWsMKsSDMzczYtO7lQQgIqF
-	3nDjXLlQ==;
-Received: from ip6-localhost ([::1]:27816 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=ivF5YgG7880hz0Eacci/ByEsR1AG7Q4byz8HPr67HYA=; b=KdHGlZGK/vaBibunmZaPzCOgdi
+	oQfPfUcHCpxxPtTTFAYjmYczU89WwXcwrNaTH3gOlRS+qCXl1Zt+kPHqivrORRKFjiFZELHgrggkZ
+	pssR2mnnXk4YaKuA+8vqSMSCsTUXiR4qMEZ4gJ7uFxSMJUpcJ0WSrSDm3/6s2SkGXdqvUuKFpS+J1
+	4+bWfm4pLrEso+MJLMUL9pcBCEZgFEc0yICxahqT49J/D/AMH8srnRQKBEI9068h2bh4nb+Hd/NZn
+	lVIPKtoCJgH8DbJLQKrKgcYeeBy18VWuvGKHyTsWjk5jhLqGXFf1kfw090HLc8TaHhCF+kxbQlf3B
+	bTe4sU8g==;
+Received: from ip6-localhost ([::1]:28546 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lPocH-006rxG-VH; Fri, 26 Mar 2021 15:43:18 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43174) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lPoc8-006rx9-VY
- for samba-technical@lists.samba.org; Fri, 26 Mar 2021 15:43:14 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=lCPQuZU5PpP9GNulHG/sMrpfQZDPTx/9DjN7H8sp13k=; b=0OEsMQ3It2bOdW01gO6YB0pOT6
- KF+H4+c8JZoMDfWuS99vbKGjkJZDi0eFoOWUepO594wtaYAwuCv6kUUY759VKraHJNJd33sSNDo89
- xkjPbSe16F0vgKrql0EnGeQod1uIOI69LZfH7K7QN2dAlhsUwC7y9gisWXyG8LL+1O8Cgsx+xiNhb
- ttuKXsWvd7EN5CL0qovKvyScwMZ9wO8D8ZW6WfeIQbqlXgrtQSugLyB6NibDfmSmc0QXdZ6rpVXrq
- /bxWpoofKAd2FdfyS11RO0hzogM+C8Jozxhn5SE1Iq+ug8pYwkxvkl7mMW5zaQuABHXLiHgI2icd+
- YyjJH23PoGWoeB5YA83vpGxXbdTe2duuZ+MURfKmxPoqWrHVbXxOk4FyWg/qAFh8TZOxfCI2096/7
- h2U73GiZDN0CyVZ38Ob/vEmlNKVww1s8xg6nYA6X37sD0HqjXCjyLcqzLE8mPJjPwrEhVVQRcfok2
- MOaQxJ4vSZP393+wj8SfY8U5;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lPoc6-0003h3-B2; Fri, 26 Mar 2021 15:43:06 +0000
-Message-ID: <303ff972bd89688d3d71ef4cf49cc6dbb3995b2c.camel@samba.org>
-Subject: Re: vfs_full_audit annoyances on major version upgrades
-To: Anders =?ISO-8859-1?Q?=D6stling?= <anders.ostling@gmail.com>, 
- samba-technical@lists.samba.org, Andrew Walker <walker.aj325@gmail.com>
-Date: Sat, 27 Mar 2021 04:41:31 +1300
-In-Reply-To: <a4eca426-b03b-49e3-9292-6dfd76b883e9@Spark>
-References: <c34eafed-8d23-43f8-b282-6c98800fefe5@Spark>
- <a4eca426-b03b-49e3-9292-6dfd76b883e9@Spark>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.38.4 (3.38.4-1.fc33) 
+	id 1lPond-006s3h-Aq; Fri, 26 Mar 2021 15:55:01 +0000
+Received: from de-smtp-delivery-102.mimecast.com ([194.104.109.102]:38001) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1lPonY-006s3a-V2
+ for samba-technical@lists.samba.org; Fri, 26 Mar 2021 15:54:59 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1616774093;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ivF5YgG7880hz0Eacci/ByEsR1AG7Q4byz8HPr67HYA=;
+ b=kYVu34r09Asj7/BDG9ONgwYpEyTOy7dYKl3z1ptl7VC2HQ1C1TqsIHvdbWIU2csRvLuZv5
+ pMdJSioCiTRfk7j7EyWf5X5OHWVxKtguRH292AOh4lPOlIbx2GCURgVEt19Ed7CL5QhoVc
+ kzYK0w+wP1VrOBhCQwQgMCfSaAOD9YY=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
+ s=mimecast20200619; t=1616774093;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ivF5YgG7880hz0Eacci/ByEsR1AG7Q4byz8HPr67HYA=;
+ b=kYVu34r09Asj7/BDG9ONgwYpEyTOy7dYKl3z1ptl7VC2HQ1C1TqsIHvdbWIU2csRvLuZv5
+ pMdJSioCiTRfk7j7EyWf5X5OHWVxKtguRH292AOh4lPOlIbx2GCURgVEt19Ed7CL5QhoVc
+ kzYK0w+wP1VrOBhCQwQgMCfSaAOD9YY=
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04lp2057.outbound.protection.outlook.com [104.47.14.57]) (Using
+ TLS) by relay.mimecast.com with ESMTP id
+ de-mta-25-PoFaig4GNfqRMYscCIfnYQ-1; Fri, 26 Mar 2021 16:54:52 +0100
+X-MC-Unique: PoFaig4GNfqRMYscCIfnYQ-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RNjNp0b9ibfi0/8zdZl1BtGbvxtUa85rKsbBxudN48WVnBHQHDXp3OwUbOPamlzWhY7nbKGHVIzx6Vqaddm/I0tZxDD1Dof5qiLUAyhVP3Oq41cuWOmesMQysfhg/7jYcC2xwLwBRdSEOaAolzLZNgy2nUijitMPruE4JHb8W7ANC1B5bHA9racI8+0qUpGIm1K5mmfYiptNA9mYTiSeBObQC+Sx4MbJebDfpO4yhSUZYYzsGU8Cx8TZcPGZsGjygGvnAoAFyS+d6wWszFsqhyED4YES7YP/obqtaY6ChtFZ3D0TB0v4OldYm/lf3Ko+QKeAWmJDLRqQa73nzGE0pQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ivF5YgG7880hz0Eacci/ByEsR1AG7Q4byz8HPr67HYA=;
+ b=NGXmQ1AB31Ufg91CtlSdSm4W/yLgtKYJC/vx7PDdgsjrxfzmxi3WoZUppRMNmI2yOc6ulQUC36lFjXYQJ/SbeZvgNXcrd7A3IT/S2zhNmmOyX7r0cu1JezenI2W9BlgiLswmN3gsNF3v6d9aSMh4vXxPPJPRCaeWcwejrLvv+WHixaOw+QEtkZrSNAv2rXX49fvCSNMkqCEJiWJcG73SzFYqv8lfoqiOwcDc4cswRn2p+6ttEQDQTbYfZKfQnuPz4Emnpf/1nFdcNn3W2sdIC3MP8XL5XZjwt8e3Byi6kztenz4bnM8XSddx1CQGJAIMCQ1jpaFatHGuAXnAgHPy0A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: kernel.org; dkim=none (message not signed)
+ header.d=none;kernel.org; dmarc=none action=none header.from=suse.com;
+Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com (2603:10a6:803:3::28)
+ by VI1PR04MB4589.eurprd04.prod.outlook.com (2603:10a6:803:6f::31)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.18; Fri, 26 Mar
+ 2021 15:54:51 +0000
+Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com
+ ([fe80::3c87:7c9e:2597:4d94]) by VI1PR0402MB3359.eurprd04.prod.outlook.com
+ ([fe80::3c87:7c9e:2597:4d94%5]) with mapi id 15.20.3933.038; Fri, 26 Mar 2021
+ 15:54:51 +0000
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>, Steve French
+ <sfrench@samba.org>
+Subject: Re: [PATCH][next] cifs: cifspdu.h: Replace one-element array with
+ flexible-array member
+In-Reply-To: <20210326011117.GA46303@embeddedor>
+References: <20210326011117.GA46303@embeddedor>
+Date: Fri, 26 Mar 2021 16:54:49 +0100
+Message-ID: <877dltrjue.fsf@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [2003:fa:700:2818:473b:a8cc:f6e0:2633]
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from localhost (2003:fa:700:2818:473b:a8cc:f6e0:2633) by
+ ZR0P278CA0034.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:1c::21) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3977.25 via Frontend Transport; Fri, 26 Mar 2021 15:54:51 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 1919e964-d2e9-434d-bfb0-08d8f06f7d8b
+X-MS-TrafficTypeDiagnostic: VI1PR04MB4589:
+X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Message-Info: h/+194/9wLjtmS3dLOLN01PstpHintQocRtB3jHENbjTB07F9KnwklGYYzEvrLrQCScFU2Q6FvIuOxxE8rKNIIzWkO9iqyyiLEuvY87PvU3CCUKZF95krtzfp4wU8unMVKYYkeKEHgu12QiL2XHWfNY8N2f9xMTpngqmskHIL43l5JhHZMutGUZlQpu9U3mPHXQs28+vX5yaXlo4n5lk5wa/ndx32EFWtlyjio2vldkHF/I4DQ8sJyBEl/8JhVDuKZc7lptKo8AK5eJQexaIX5le+gQ/r7+8bE5lDYXvJbIg8eXaw0PF55xe3TZxKml6+BqqDrkIebB0Xxa07peoZDISFgcjc8erwatNui9QLVF/K4kGclADzpKovuG7Y/WuvbX+l6wS8mFLpczKZpWEajrXNoR9D3dINiUOgO48iuNOHmMmmdrlQdYPkLLYMJLKjfVPEBomekgCpyXr1glFay1DpL93OOdyx7XWaPYOw/4T3U/O7xeq6NohGqhju+GOOaBVcnRaKsHTBhMl80XCar13RHOs3XxGrkEdDBAX+GwaRoNkElNHPY01XIHoBNSRDHeEgA8rR+IghjgbTf/cHgQ7ldY7nbHNdPLCijBaEhuNjJkX7lZJPrwyfuQBa/03GgtJE4cyy1j8WPbg9Zm6hA==
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?NHZ2MFlIanlIc2o3S3dZcFluRXk3OE9WcFNlR1M4YU9jWmo0YU9Ma3BWSG5l?=
+ =?utf-8?B?Y05NQ2xEVUxxQ3NxRGY1R1JtQ0p6T21pdkkvWW13dGZUVTl6N2w4T1ZBb21x?=
+ =?utf-8?B?Q01xaXNtRVk5ODYwYXdXNnFpZ3dRcHdSTHh0ZTRuNUtLNWRPN3lKS3NlSUJJ?=
+ =?utf-8?B?RmkzaEZhZStXbFNyRm1NSm0rV0pTMjY5NG04WVJ2THZkK1JlVWZ6U3JuZVps?=
+ =?utf-8?B?cDYxTlRYYXQ1eWZ2MEVBbCtucEdEeWRLOGREZ1ltYTZyRzhTS3hObmFnekhL?=
+ =?utf-8?B?U0cyUVg1SEFLV1pRQVdlQ0RFNDNxYkRoeWMxMGNiV081bnhUaUdsK1oyOHhz?=
+ =?utf-8?B?ZzFIQ3FEek1icFVQWDlsUGxJbm1PNWwwdjMrMXRSRERVWkFFSUd1alFFOGNH?=
+ =?utf-8?B?M0d3bCttRWdGOHJSTVNNZkh2NG1HTlhKM0ZhUkxKWEcyckJnL210RkJoaDdz?=
+ =?utf-8?B?U1QwK2FGTHQrckZCVmpRZ3ZwMHFPaUIwTWQ0ZEo4NFBzL2lSSk9GU3p5aVRJ?=
+ =?utf-8?B?Snc5cFFvTzRDdE1XamhIaHA5blUwQmhpcE53QlZkTnFiclozamI5SHpHMkdV?=
+ =?utf-8?B?ekdtb05TazhIekQ3MXZIa0NhbE8yOXN6UWw0bndweGY3RFoybUI2MkwzWG1V?=
+ =?utf-8?B?OGRTb21rejVQM1U0UXlWc2tHdzFBK1RCdFdFY0pWbzBjWmUxOUs0aXJwd0dV?=
+ =?utf-8?B?dnpOSGcvRjNRS2JNcFhJTENKaFBrdHZZM0RNa2dRWjMzYnVFQVlNUXR1MHEw?=
+ =?utf-8?B?aFF4L3FTc3JodzhNN0lEWjRBV29ZQlpQR1RVdHV2OXNSZEZWcW5VMmdYTU10?=
+ =?utf-8?B?dXM1eWFHb05tbFBmU1JpOG53UFB3MW9lTCt1VDdOTFRzY0c1ei9kbnd3S0tq?=
+ =?utf-8?B?a3VRRVlHa3dvTmE2dTJ4NFlUUzlCa2xwRGpjNFhycTJrVjBQRmMvQ1R1aWtE?=
+ =?utf-8?B?OGxBdjJtbzBZaTRNbnorbFIzeEhHK0l6TG5SR1MwU0VmWkxyTmNqdFZsRVA2?=
+ =?utf-8?B?SUw2Z2pEa25YSnd1YmhOb1JFYmY2UlRGWnIwS3hHNHNSUGtVdWRqa2hSbTJF?=
+ =?utf-8?B?QmtuNTlRTkE3NS8vS1VqTVVBOTZPVkpqcEZpR0x2WWR0OHZaMTJ2SUxNcG5r?=
+ =?utf-8?B?amllV01hNDdZSjZvTzdtZ3hkTUVRTzFCODhrdXMyc1ZiNXBldm14ajNzekF0?=
+ =?utf-8?B?a3UrZndmZ0t0SmxSWktpTDQ5WVhyR09PZy9yTFoxYThwb0Z4d3J4V21TUFZj?=
+ =?utf-8?B?ZnorOGl6czNTVGlBYm1xYVQyUkZJYlpWNEx5cERjUHBNNGJXYk5IS2hwVFJT?=
+ =?utf-8?B?UzBQNTRwd0RhTUJkK0R6c05ockRTOStFb2dxcjlnbXdVUUdwZXJWYXF4WEx6?=
+ =?utf-8?B?Y2RlZWFjaTRHanErb3kwNFpVdEJZSjV2ODhqdU54dTF3bmxtUjAyZHN4QURH?=
+ =?utf-8?B?Yi95bm5FcWxPYjA4OVpSdEorWEo4b3ljbndmYTJWMEFxNFBsMkJxLzBXZHU0?=
+ =?utf-8?B?RGlIcnMzeDdablF5WnRpOGlRejhTWGg2M05BZ3p2ckZzV3N5VFB5RjltMUlB?=
+ =?utf-8?B?endVcGJZbzZUdExPektaZitLMkR6L0xjcUcxcFdCUDBTMS93bUdzWmJNWGFL?=
+ =?utf-8?B?a2QyOHZjeEl4NnFmb0UxcllJSDFOTVhVL1ZzSldVRXdRd2Zwa2IxeTg1U0U3?=
+ =?utf-8?B?RTcrQUJEZElWWnZzQSsrUGZEdmN0NHZkWHBYbktFaUFqQW9ndzhkanFXZGhG?=
+ =?utf-8?B?WEZyb2txazRKaHBlbFV5ZkZ6aHZ1d2lDRi9NV3BkZDFuR0FQV3lCVTU4NWli?=
+ =?utf-8?B?eFdULy9aSG1tMGhPei9IM2t4N2w4K0prbzQxTXJwWmxuZDR2SHN1YXByNUxi?=
+ =?utf-8?Q?OjV9lNPtCUYAZ?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1919e964-d2e9-434d-bfb0-08d8f06f7d8b
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR0402MB3359.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: WwNVwM17SqBb9CeECdc/7TQRZDhKKXwGKHBbsJa8VucYwo+ppOWtRa+moLyIAJL/
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB4589
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,84 +142,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
+Cc: linux-hardening@vger.kernel.org, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2021-03-26 at 16:28 +0100, Anders Östling via samba-technical
-wrote:
-> Hi
-> 
-> Newbie here, but I would like to comment todays post by Andrew Walker’s  regarding audit logging.
-> 
-> C systems programming is not new to me, although it is about 15 years since I wrote anything serious. The proposed patch looks fine to me, but I believe that a better way is to burp and inform the user about the change in keywords/syntax, at least when there are behind-the-scene changes like this one describes. Or maybe “testparm” should look at the config lines a little more in detail. Maybe both proposed solutions could be combined.
-> 
-> Another point is that the logging format from the AD-DC modules seems to be completely different from what SMBD uses. A common format would IMO make it much much easier to consolidate, parse and analyse logs in an automated way. Maybe that’s a pipers dream, but still … here is an example of what I mean
-> 
-> AD-DC (Global config for formatting  full_audit:prefix = IP=%I | USER=%u | MACHINE=%m | VOLUME=%S - (seems to be ignored))
-> 
-> [2021/03/26 16:09:27.394208,  3] ../../auth/auth_log.c:653(log_authentication_event_human_readable)
->   Auth: [Kerberos KDC,ENC-TS Pre-authentication] user [(null)]\[anders@HOGANAS-PLATSLAGAREN.SE] at [Fri, 26 Mar 2021 16:09:27.394194 CET] with [aes256-cts-hmac-sha1-96] status [NT_STATUS_OK] workstation [(null)] remote host [ipv4:10.0.100.14:39820] became [HPAB]\[anders] [S-1-5-21-1399469354-1941875790-2784827883-1601]. local host [NULL]
+"Gustavo A. R. Silva" <gustavoars@kernel.org> writes:
+> There is a regular need in the kernel to provide a way to declare having
+> a dynamically sized set of trailing elements in a structure. Kernel code
+> should always use =E2=80=9Cflexible array members=E2=80=9D[1] for these c=
+ases. The older
+> style of one-element or zero-length arrays should no longer be used[2].
 
-Yes, we regret adding this logging format.  We added JSON formatted
-logs at the same time and they were enthusiastically received, compared
-to the work it took to write and test both, we should have just done
-the JSON.
+I've checked the usages of the struct, looks OK (we don't allocate it
+directly, we use memory from the small/big buff pools).
 
-> SMBD (Global config for formatting full_audit:prefix = IP=%I | USER=%u | MACHINE=%m | VOLUME=%S (used as specified)
-> 
-> Mar 26 16:10:45 fs1a smbd_audit[62673]: IP=10.0.100.14 | USER=HPAB\anders | MACHINE=10.0.100.14 | VOLUME=Dokument|get_nt_acl_at|ok|/share/documents
-> Mar 26 16:10:45 fs1a smbd_audit[62673]: IP=10.0.100.14 | USER=HPAB\anders | MACHINE=10.0.100.14 | VOLUME=Dokument|close|ok|/share/documents
-> 
-> I have a few more thoughts, but I will save them for later. I will download the sources myself and see if I can understand hos logging is structured. Who knows, maybe this old fart can contribute with something later on!
+Reviewed-by: Aurelien Aptel <aaptel@suse.com>
 
-I think the general mood is that we should move to JSON for structured
-logging, as that is what modern log ingestion tools prefer.  
-
-I wrote the following to another developer who was at the time
-interested in reworking the vfs_full_audit to output JSON:
-
-
-Most important hint is to remember to tie the entries to each other -
-so include:
-
-      rc = json_add_guid(
-            &authorization, "sessionId", &session_info->
-unique_session_token);
-
-        if (rc != 0) {
-                goto failure;
-        }
-
-This helps the administrator map the audit entry back to the
-authorization in a deterministic manner. 
-
-For inspiration the other place to look is the audit code in the DSDB
-module stack. 
-
-source4/dsdb/samdb/ldb_modules/audit_log.c
-
-This logs things quite similar to what you will be targeting, so should
-be good inspiration.
-
-Testing is best using python or cmocka (for unit tests).  The python
-tests listen on a messaging socket and get a stream of JSON audit
-entries over this connection.
-
-git ls-files| grep audit| grep dsdb
-
-Back on the design question, just note how Gary added a major and minor
-version to the JSON output, so that any consumer can know that the JSON
-formatting has changed.  
-
-I hope this is of assistance.
-
-Andrew Bartlett
--- 
-Andrew Bartlett (he/him)        https://samba.org/~abartlet/
-Samba Team Member (since 2001)  https://samba.org
-Samba Developer, Catalyst IT    https://catalyst.net.nz/services/samba
-
+Cheers,
+--=20
+Aur=C3=A9lien Aptel / SUSE Labs Samba Team
+GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
+SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, D=
+E
+GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
+nchen)
 
 
