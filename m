@@ -2,63 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A626E3524E9
-	for <lists+samba-technical@lfdr.de>; Fri,  2 Apr 2021 03:07:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9CEF352BD5
+	for <lists+samba-technical@lfdr.de>; Fri,  2 Apr 2021 17:43:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=MJNn00HnH79Pubg/wyxjJvUfkn+6c5mfTwAV4ijmVrs=; b=GTj5+g6apWsqO0avEj/G4MESKH
-	faO5ggyqrSeR7PUR1E5NtLQVLnGOtRIH+NOxABrFB/jTiY9ldY+9DqxZFakpUrlQbQKfu77IpYmPm
-	oO6RXh5z2UugdZ6Hmh1YnwYFXdwDbQJNIhyLB2azfs3CTzc7uT3theZ5QpVgUNs5EZ70kwpUmDRlx
-	gDZZvjZ6fSnJ/EHJcSHso+TLRESCkT+Z74dPU9o9zxyEH2tKhQfscTHdq+VbWrBCr+Yr9vwT31WPv
-	EQVt4/EmDgvncGwlN1DsjkAPDSdt35jh4MmDWoFTtxocfPXrzdVx07V01ate55RxJtSAsPYzp+JDx
-	Jcg+9U7g==;
-Received: from ip6-localhost ([::1]:59668 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=ggySz5ziFujBJxLBrs7YHDp8OTC2HkWK1c+xKFsqIgE=; b=E2XFZ+hwSFU85AXrbTqdt6Xwy3
+	F4cnwnY0xbm9Rl0WRHLBylcD1OGDg264nQYmpziO+aQTzlBiliyN+XLQ87Ta7WKhsCzWocEpTIyXK
+	rXcww8IeOMteesmN8GiE9gqk4a4aLlCylIxmSz6bGpooDuO1MRTshfpl4beI+rc4BZxaEXTQc52M9
+	nvR/DqG9nEqnlyst3hxF3TiYI61NYAQCLpSy/Isg46irxN19KkIv0lxRTXdTh/4ivkzieWJTLE9EE
+	IwYKVAFlWjOQUhO78dvXgMANX7ZtZ9rEXclmFkDjd4r6GD6FY+m0i8ntuJ0Z9hIQJwxkCmnsH2+SI
+	VpgAP6dA==;
+Received: from ip6-localhost ([::1]:34612 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lS8H3-009b2h-Lt; Fri, 02 Apr 2021 01:06:57 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz
- ([2404:130:4080::4]:55426) 
+	id 1lSLwK-009gAT-NW; Fri, 02 Apr 2021 15:42:28 +0000
+Received: from mail-lj1-x231.google.com ([2a00:1450:4864:20::231]:36573) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lS8Gw-009b2a-Es
- for samba-technical@lists.samba.org; Fri, 02 Apr 2021 01:06:54 +0000
-Received: from [192.168.1.110] (unknown [114.23.142.188])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (Client did not present a certificate)
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id B1DFD80911; 
- Fri,  2 Apr 2021 14:06:33 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1617325594;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=MJNn00HnH79Pubg/wyxjJvUfkn+6c5mfTwAV4ijmVrs=;
- b=a+9xIwsmW4EBrGSlWtwY684jDDOUhntI/SjtcJydis6Dhd2jNLKMBOBu7T52FypddDHl4K
- jIaLX7REuBakaNJr0e93ijxztJ42pMiBGJih/a88MzZnknG5izbOoWWccSG6zQUvyLWU0r
- Sn4BlZuS0H8ZwDya8Unuh73pvGLu8fP4MaPG2hIqXD/ZZnR2yqBflKMM3eowJfUSYd6gvT
- 8/BnM2MX9/KlWznLcg7ec8wBEvZKGdsToO2T4VEEpcdQ6HTU6asOTm5jQSh1ADEU7Jd/O3
- Ow8ixm3tXKOlJa9rf2dygBLnYYREn3/3yYLc6qLRqfFWOPRARI3iBnrWXIHMjA==
-Subject: Re: Improving LZXpress decompression/compression algorithms
-To: Matt Suiche <msuiche@comae.com>, samba-technical@lists.samba.org
-References: <CA+NQ6=xa2itZO0oYTPp784jfHqg6uAVYhEGkCuLynhgkd6eKzQ@mail.gmail.com>
-Message-ID: <ac17e7d0-6f6f-ae92-8ac2-7aec24c578ab@catalyst.net.nz>
-Date: Fri, 2 Apr 2021 14:06:31 +1300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.9.0
+ (Exim) id 1lSLwD-009gAM-RK
+ for samba-technical@lists.samba.org; Fri, 02 Apr 2021 15:42:24 +0000
+Received: by mail-lj1-x231.google.com with SMTP id o16so5999946ljp.3
+ for <samba-technical@lists.samba.org>; Fri, 02 Apr 2021 08:42:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ggySz5ziFujBJxLBrs7YHDp8OTC2HkWK1c+xKFsqIgE=;
+ b=Nz7dQjym5qVZsccPilJbfmOGjEgHU6MXQXCryAUdG0ybN3lGI6mBsl1Gwi5F340fnw
+ gmubvWwqdURU3W9hFdxCyhNPvu1p+4RJX6Z+wIYQmnMyPANbC8Xs0K1Qc1mBQ4YuFzby
+ LIk5wcLuGcoVsX2RibIRZAEVSk9K5Myr8Pu3yiY25+9FTJyRA+BNBXYdxVM+qtHqn6q5
+ r6Ln0yccRTPax8JfcUYyH/YPdCi92DgtkFyZCk6Gb9xxfAgbk8NduhwlqnfZYcKYyRC6
+ Hh7y+8VlmQf64Rn56rNL1Ct6jnZK3poF7hWlU6CSVLBX9DSCIwnIUSgqL4/+gQqObfPn
+ neEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ggySz5ziFujBJxLBrs7YHDp8OTC2HkWK1c+xKFsqIgE=;
+ b=cmU90bf3mvyKSZMnqbJaWBBAKqqcs/mjIZr3UEUToVcb9c8hw0kxPLqts40sva8j0v
+ f5XgZPScosqP2uhgTe9CDo9nY86NJ3wotsT6CoxQJ/YyjkLyVionmK8wQU0jqgb00zzt
+ COV2VtB5vwQDf3t9Lu7cjFaDTjTn+IbijVuA5ysZVS8574vCqeDWB4kq+03xE/gCDjOd
+ W4q6TP+loyYQdMvSB0D1ZgCoi3ros+Glj9dvOC00gRQs/sR/fcPiZpKYADdb7rezYWVj
+ 1RjEZPvrUmHsqvaRgbuI2Ni7FBQsFZa6TDLO7dm3L2nLfc18ZSKj/UeJyAVFTRFi4dpG
+ Gwng==
+X-Gm-Message-State: AOAM533KXopscXPrSQBvjXrvB0n2XRdmxN0i+rUDnPBELnj14udJ7ml4
+ qsZJscOy8RPpi7634nunQX8Ecu9LEVImQ8EBWTA=
+X-Google-Smtp-Source: ABdhPJyV8JUgqosPubOwp84IVUCKDKLhg6YVBOoZt9qxKxatixf45J3IS0QozRVb6PrEBUw8/o36RQRXg8sJYO1+fUA=
+X-Received: by 2002:a2e:8503:: with SMTP id j3mr8627596lji.272.1617378140014; 
+ Fri, 02 Apr 2021 08:42:20 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CA+NQ6=xa2itZO0oYTPp784jfHqg6uAVYhEGkCuLynhgkd6eKzQ@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=douglasb@catalyst.net.nz
- smtp.mailfrom=douglas.bagnall@catalyst.net.nz
-X-Spamd-Result: default: False [-0.10 / 15.00]; ARC_NA(0.00)[];
- MIME_GOOD(-0.10)[text/plain];
- DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
- MIME_TRACE(0.00)[0:+];
- ASN(0.00)[asn:56030, ipnet:114.23.0.0/16, country:NZ];
- MID_RHS_MATCH_FROM(0.00)[]
+References: <20210401075117.998330-1-wanjiabing@vivo.com>
+In-Reply-To: <20210401075117.998330-1-wanjiabing@vivo.com>
+Date: Fri, 2 Apr 2021 10:42:09 -0500
+Message-ID: <CAH2r5ms-rZPZi9TLE6f4Xoc33B51YKbuT+pVy8xaeNFzg9jLVg@mail.gmail.com>
+Subject: Re: [PATCH] fs: cifs: Remove unnecessary struct declaration
+To: Wan Jiabing <wanjiabing@vivo.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,44 +67,48 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
+ kael_w@yeah.net, samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 1/04/21 9:13 pm, Matt Suiche via samba-technical wrote:
-> First of all, thanks a lot to Douglas Bagnall for the assistance.
-> 
-> While I was revisiting the LZXpress implementation, I discovered that the 2
-> official documented cases from MS-XCA were not supported:
-> https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-xca/72da4f8d-2ba3-437d-b772-2e4173713a0b?redirectedfrom=MSDN
-> 
-> The attached implementation includes bug fixes in the decompression
-> algorithm, a rewrite of the compression function and additional tests as it
-> only had a single test.
-> 
+merged into cifs-2.6.git for-next
 
-I have created a merge request from these patches:
+On Thu, Apr 1, 2021 at 2:52 AM Wan Jiabing <wanjiabing@vivo.com> wrote:
+>
+> struct cifs_readdata is declared twice. One is declared
+> at 208th line.
+> And struct cifs_readdata is defined blew.
+> The declaration here is not needed. Remove the duplicate.
+>
+> Signed-off-by: Wan Jiabing <wanjiabing@vivo.com>
+> ---
+>  fs/cifs/cifsglob.h | 2 --
+>  1 file changed, 2 deletions(-)
+>
+> diff --git a/fs/cifs/cifsglob.h b/fs/cifs/cifsglob.h
+> index 67c056a9a519..ec824ab8c5ca 100644
+> --- a/fs/cifs/cifsglob.h
+> +++ b/fs/cifs/cifsglob.h
+> @@ -1283,8 +1283,6 @@ struct cifs_aio_ctx {
+>         bool                    direct_io;
+>  };
+>
+> -struct cifs_readdata;
+> -
+>  /* asynchronous read support */
+>  struct cifs_readdata {
+>         struct kref                     refcount;
+> --
+> 2.25.1
+>
 
-https://gitlab.com/samba-team/samba/-/merge_requests/1882
 
-Two things:
+-- 
+Thanks,
 
-1. Patch 1/2 lacks the Signed-off-by.
-
-2. The build fails on this line:
-
- ../../lib/compression/lzxpress.c:356:4: error: for loop initial
-declarations are only allowed in C99 mode
-     for (int i = 0; i < length; i++) {
-     ^
-Our style is to declare `int i;` (or likely better, `size_t i;`) at the
-top of the function.
-
-(Interestingly it is only the Centos 7 compile that failed on this).
-
-I will attempt a full review after easter.
-
-cheers,
-Douglas
+Steve
 
