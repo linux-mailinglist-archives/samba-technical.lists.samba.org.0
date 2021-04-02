@@ -2,55 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1043C351C09
-	for <lists+samba-technical@lfdr.de>; Thu,  1 Apr 2021 20:31:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A626E3524E9
+	for <lists+samba-technical@lfdr.de>; Fri,  2 Apr 2021 03:07:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=40avOPfC1Fu2kiJ4DKn5f2Yq5VnQaYcTK2JOpGiRFtI=; b=LS62RM+xR3WsEfehRpMyx16Ym4
-	pvgYTblGthaEn8zworYe7j4gv7m9O37ea5jhTBOLY8izDEkOGHDxAXobm0rB6BF+5rWgsJKRjkOzH
-	c9358nTaH0dGvwURkPm8BLS2UdTtWBWNJHcliPFUKT5viBoehgndul92tH2mtyygZ0h/eliSQ7eJL
-	qGD6bGaxGipem+SDymTGTPhxqNvUHFB2lsTT71iFy80HOLcQbBXwwtT3NVYiMPiDLOOrq02poE7g7
-	txuYhv5h4flb3S1cu53wCTFO8b2efzYxhZRaqEpYN0BZyFeIQRNa5/Rs7yBTGCp15yo7jjtEIbYdB
-	+xNPkYSw==;
-Received: from ip6-localhost ([::1]:54138 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=MJNn00HnH79Pubg/wyxjJvUfkn+6c5mfTwAV4ijmVrs=; b=GTj5+g6apWsqO0avEj/G4MESKH
+	faO5ggyqrSeR7PUR1E5NtLQVLnGOtRIH+NOxABrFB/jTiY9ldY+9DqxZFakpUrlQbQKfu77IpYmPm
+	oO6RXh5z2UugdZ6Hmh1YnwYFXdwDbQJNIhyLB2azfs3CTzc7uT3theZ5QpVgUNs5EZ70kwpUmDRlx
+	gDZZvjZ6fSnJ/EHJcSHso+TLRESCkT+Z74dPU9o9zxyEH2tKhQfscTHdq+VbWrBCr+Yr9vwT31WPv
+	EQVt4/EmDgvncGwlN1DsjkAPDSdt35jh4MmDWoFTtxocfPXrzdVx07V01ate55RxJtSAsPYzp+JDx
+	Jcg+9U7g==;
+Received: from ip6-localhost ([::1]:59668 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lS25e-009ZSp-37; Thu, 01 Apr 2021 18:30:46 +0000
-Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:42785) 
+	id 1lS8H3-009b2h-Lt; Fri, 02 Apr 2021 01:06:57 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz
+ ([2404:130:4080::4]:55426) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lS25Y-009ZSi-UV
- for samba-technical@lists.samba.org; Thu, 01 Apr 2021 18:30:43 +0000
-Received: by mail-lf1-x12b.google.com with SMTP id o10so4217472lfb.9
- for <samba-technical@lists.samba.org>; Thu, 01 Apr 2021 11:30:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to:cc;
- bh=40avOPfC1Fu2kiJ4DKn5f2Yq5VnQaYcTK2JOpGiRFtI=;
- b=CxJI/5fa6dOmTAGwQhm2K+hBDvY3NnHTHr65MjMPquJLssl0Uw/BqrsxMUVWrj3rmw
- zBtd9hzk+MQy1i286P2RUycp7wrHxjerTbBB/SVO9FGukZHUNUGxwpOmALWgSapTT4DP
- eMHVuXgm9+TLRE0jMS1hu+GxiQwMZBiIlpUg2eoDFflTP9Eul2DZt9iRcF748O2yRmkQ
- PFZ4iK6SmZre7ucUsSap5ZvMWoqwRX0HwRVh0+3B3ARsOdPgJaQLr46jfPJWYzfHtODp
- u6Ke8/9TizWScvYnWTUsH9ciIQNISpMZY4SyvOZ9dwof+ILehsnpf8R+LGsnomapqMr5
- 49zw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
- bh=40avOPfC1Fu2kiJ4DKn5f2Yq5VnQaYcTK2JOpGiRFtI=;
- b=lCc60U3PoW/l415M8Cx89omIUjlpe/OERrFbAP/fxnV7EZtDHLPdl4H2DboinDUSFE
- gglTbhgMQRCIveQ11Y4IHZ4ubZX0SJdWpJwHad1d4b2RzG39uFTyYs1RIRXmKL8shu+q
- JhHg640YQeFjLMFuYQWCWXbqwIPRpICI5S/B15MCK0ExSpoxtltoE5jXlgyuN/tSbEa7
- 2Bpja3RKxnAzcFFupB83djBdt1qCIWdQF95Wz0vujwXYrGFNgHQS1TA1CrkfLVsORWPR
- Y9SvHDcD13uHePCU4NwbkjFbXtUWNRORRJx0ZMQ1LW6jPGZkpJbUuyVQSFRalUEj7CCu
- m/3g==
-X-Gm-Message-State: AOAM530RXrNpLWLi4WeEjXj4+IhvLjS/dRQW+zT/L7S4fN2haW7jihTS
- w6NznOitus5Q2OtsU4mA57RXwKnIY+6gsazcyZE=
-X-Google-Smtp-Source: ABdhPJwiPjSm+JOHwZBBmbAemlk6I7J45C87EFMTPGzCqw3S2jslS3d23j4ZeFqYGiJaC4Pao8Bifj5DBOPCoVLZemY=
-X-Received: by 2002:ac2:5f07:: with SMTP id 7mr6394916lfq.313.1617301839771;
- Thu, 01 Apr 2021 11:30:39 -0700 (PDT)
+ (Exim) id 1lS8Gw-009b2a-Es
+ for samba-technical@lists.samba.org; Fri, 02 Apr 2021 01:06:54 +0000
+Received: from [192.168.1.110] (unknown [114.23.142.188])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id B1DFD80911; 
+ Fri,  2 Apr 2021 14:06:33 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1617325594;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=MJNn00HnH79Pubg/wyxjJvUfkn+6c5mfTwAV4ijmVrs=;
+ b=a+9xIwsmW4EBrGSlWtwY684jDDOUhntI/SjtcJydis6Dhd2jNLKMBOBu7T52FypddDHl4K
+ jIaLX7REuBakaNJr0e93ijxztJ42pMiBGJih/a88MzZnknG5izbOoWWccSG6zQUvyLWU0r
+ Sn4BlZuS0H8ZwDya8Unuh73pvGLu8fP4MaPG2hIqXD/ZZnR2yqBflKMM3eowJfUSYd6gvT
+ 8/BnM2MX9/KlWznLcg7ec8wBEvZKGdsToO2T4VEEpcdQ6HTU6asOTm5jQSh1ADEU7Jd/O3
+ Ow8ixm3tXKOlJa9rf2dygBLnYYREn3/3yYLc6qLRqfFWOPRARI3iBnrWXIHMjA==
+Subject: Re: Improving LZXpress decompression/compression algorithms
+To: Matt Suiche <msuiche@comae.com>, samba-technical@lists.samba.org
+References: <CA+NQ6=xa2itZO0oYTPp784jfHqg6uAVYhEGkCuLynhgkd6eKzQ@mail.gmail.com>
+Message-ID: <ac17e7d0-6f6f-ae92-8ac2-7aec24c578ab@catalyst.net.nz>
+Date: Fri, 2 Apr 2021 14:06:31 +1300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.9.0
 MIME-Version: 1.0
-Date: Thu, 1 Apr 2021 13:30:28 -0500
-Message-ID: <CAH2r5mvhUQEqXQmrz5KKbTCFaeS5ejZBGysaeQVC_ESSc-snuw@mail.gmail.com>
-Subject: [PATCH][CIFS] Insert and Collapse range
-To: CIFS <linux-cifs@vger.kernel.org>
-Content-Type: multipart/mixed; boundary="000000000000a7920905beed6dba"
+In-Reply-To: <CA+NQ6=xa2itZO0oYTPp784jfHqg6uAVYhEGkCuLynhgkd6eKzQ@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=douglasb@catalyst.net.nz
+ smtp.mailfrom=douglas.bagnall@catalyst.net.nz
+X-Spamd-Result: default: False [-0.10 / 15.00]; ARC_NA(0.00)[];
+ MIME_GOOD(-0.10)[text/plain];
+ DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
+ MIME_TRACE(0.00)[0:+];
+ ASN(0.00)[asn:56030, ipnet:114.23.0.0/16, country:NZ];
+ MID_RHS_MATCH_FROM(0.00)[]
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,142 +72,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000a7920905beed6dba
-Content-Type: text/plain; charset="UTF-8"
+On 1/04/21 9:13 pm, Matt Suiche via samba-technical wrote:
+> First of all, thanks a lot to Douglas Bagnall for the assistance.
+> 
+> While I was revisiting the LZXpress implementation, I discovered that the 2
+> official documented cases from MS-XCA were not supported:
+> https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-xca/72da4f8d-2ba3-437d-b772-2e4173713a0b?redirectedfrom=MSDN
+> 
+> The attached implementation includes bug fixes in the decompression
+> algorithm, a rewrite of the compression function and additional tests as it
+> only had a single test.
+> 
 
-Updated version of Ronnie's patch for FALLOC_FL_INSERT_RANGE and
-FALLOC_FL_COLLAPSE_RANGE attached (cleaned up the two redundant length
-checks noticed out by Aurelien, and fixed the endian check warnings
-pointed out by sparse).
+I have created a merge request from these patches:
 
-They fix at least six xfstests (but still more xfstests to work
-through that seem to have other new feature dependencies beyond
-fcollapse)
+https://gitlab.com/samba-team/samba/-/merge_requests/1882
 
-# ./check -cifs generic/072 generic/145 generic/147 generic/153
-generic/351 generic/458
-FSTYP         -- cifs
-PLATFORM      -- Linux/x86_64 smfrench-Virtual-Machine
-5.12.0-051200rc4-generic #202103212230 SMP Sun Mar 21 22:33:27 UTC
-2021
+Two things:
 
-generic/072 7s ...  6s
-generic/145 0s ...  1s
-generic/147 1s ...  0s
-generic/153 0s ...  1s
-generic/351 5s ...  3s
-generic/458 1s ...  1s
-Ran: generic/072 generic/145 generic/147 generic/153 generic/351 generic/458
-Passed all 6 tests
--- 
-Thanks,
+1. Patch 1/2 lacks the Signed-off-by.
 
-Steve
+2. The build fails on this line:
 
---000000000000a7920905beed6dba
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-cifs-add-support-for-FALLOC_FL_COLLAPSE_RANGE.patch"
-Content-Disposition: attachment; 
-	filename="0001-cifs-add-support-for-FALLOC_FL_COLLAPSE_RANGE.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_kmz7a68x0>
-X-Attachment-Id: f_kmz7a68x0
+ ../../lib/compression/lzxpress.c:356:4: error: for loop initial
+declarations are only allowed in C99 mode
+     for (int i = 0; i < length; i++) {
+     ^
+Our style is to declare `int i;` (or likely better, `size_t i;`) at the
+top of the function.
 
-RnJvbSA2NDA4NjIyODQ4MGY4ZDNiYTgwZWI5MzBiNDBmNTAxYWZiYjFlODNiIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBSb25uaWUgU2FobGJlcmcgPGxzYWhsYmVyQHJlZGhhdC5jb20+
-CkRhdGU6IFNhdCwgMjcgTWFyIDIwMjEgMDU6NTI6MjkgKzEwMDAKU3ViamVjdDogW1BBVENIIDEv
-Ml0gY2lmczogYWRkIHN1cHBvcnQgZm9yIEZBTExPQ19GTF9DT0xMQVBTRV9SQU5HRQoKRW11bGF0
-ZWQgZm9yIFNNQjMgYW5kIGxhdGVyIHZpYSBzZXJ2ZXIgc2lkZSBjb3B5CmFuZCBzZXRzaXplLiBF
-dmVudHVhbGx5IHRoaXMgY291bGQgYmUgY29tcG91bmRlZC4KClJlcG9ydGVkLWJ5OiBrZXJuZWwg
-dGVzdCByb2JvdCA8bGtwQGludGVsLmNvbT4KUmVwb3J0ZWQtYnk6IERhbiBDYXJwZW50ZXIgPGRh
-bi5jYXJwZW50ZXJAb3JhY2xlLmNvbT4KU2lnbmVkLW9mZi1ieTogUm9ubmllIFNhaGxiZXJnIDxs
-c2FobGJlckByZWRoYXQuY29tPgpTaWduZWQtb2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNo
-QG1pY3Jvc29mdC5jb20+Ci0tLQogZnMvY2lmcy9zbWIyb3BzLmMgfCAzNSArKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKwogMSBmaWxlIGNoYW5nZWQsIDM1IGluc2VydGlvbnMoKykK
-CmRpZmYgLS1naXQgYS9mcy9jaWZzL3NtYjJvcHMuYyBiL2ZzL2NpZnMvc21iMm9wcy5jCmluZGV4
-IGY3MDMyMDRmYjE4NS4uYzZhNDljMzFkYzBlIDEwMDY0NAotLS0gYS9mcy9jaWZzL3NtYjJvcHMu
-YworKysgYi9mcy9jaWZzL3NtYjJvcHMuYwpAQCAtMzY1Miw2ICszNjUyLDM5IEBAIHN0YXRpYyBs
-b25nIHNtYjNfc2ltcGxlX2ZhbGxvYyhzdHJ1Y3QgZmlsZSAqZmlsZSwgc3RydWN0IGNpZnNfdGNv
-biAqdGNvbiwKIAlyZXR1cm4gcmM7CiB9CiAKK3N0YXRpYyBsb25nIHNtYjNfY29sbGFwc2VfcmFu
-Z2Uoc3RydWN0IGZpbGUgKmZpbGUsIHN0cnVjdCBjaWZzX3Rjb24gKnRjb24sCisJCQkgICAgbG9m
-Zl90IG9mZiwgbG9mZl90IGxlbikKK3sKKwlpbnQgcmM7CisJdW5zaWduZWQgaW50IHhpZDsKKwlz
-dHJ1Y3QgY2lmc0ZpbGVJbmZvICpjZmlsZSA9IGZpbGUtPnByaXZhdGVfZGF0YTsKKwlfX2xlNjQg
-ZW9mOworCisJeGlkID0gZ2V0X3hpZCgpOworCisJaWYgKG9mZiA+PSBpX3NpemVfcmVhZChmaWxl
-LT5mX2lub2RlKSB8fAorCSAgICBvZmYgKyBsZW4gPj0gaV9zaXplX3JlYWQoZmlsZS0+Zl9pbm9k
-ZSkpIHsKKwkJcmMgPSAtRUlOVkFMOworCQlnb3RvIG91dDsKKwl9CisKKwlyYyA9IHNtYjJfY29w
-eWNodW5rX3JhbmdlKHhpZCwgY2ZpbGUsIGNmaWxlLCBvZmYgKyBsZW4sCisJCQkJICBpX3NpemVf
-cmVhZChmaWxlLT5mX2lub2RlKSAtIG9mZiAtIGxlbiwgb2ZmKTsKKwlpZiAocmMgPCAwKQorCQln
-b3RvIG91dDsKKworCWVvZiA9IGNwdV90b19sZTY0KGlfc2l6ZV9yZWFkKGZpbGUtPmZfaW5vZGUp
-IC0gbGVuKTsKKwlyYyA9IFNNQjJfc2V0X2VvZih4aWQsIHRjb24sIGNmaWxlLT5maWQucGVyc2lz
-dGVudF9maWQsCisJCQkgIGNmaWxlLT5maWQudm9sYXRpbGVfZmlkLCBjZmlsZS0+cGlkLCAmZW9m
-KTsKKwlpZiAocmMgPCAwKQorCQlnb3RvIG91dDsKKworCXJjID0gMDsKKyBvdXQ6CisJZnJlZV94
-aWQoeGlkKTsKKwlyZXR1cm4gcmM7Cit9CisKIHN0YXRpYyBsb2ZmX3Qgc21iM19sbHNlZWsoc3Ry
-dWN0IGZpbGUgKmZpbGUsIHN0cnVjdCBjaWZzX3Rjb24gKnRjb24sIGxvZmZfdCBvZmZzZXQsIGlu
-dCB3aGVuY2UpCiB7CiAJc3RydWN0IGNpZnNGaWxlSW5mbyAqd3JjZmlsZSwgKmNmaWxlID0gZmls
-ZS0+cHJpdmF0ZV9kYXRhOwpAQCAtMzgyMyw2ICszODU2LDggQEAgc3RhdGljIGxvbmcgc21iM19m
-YWxsb2NhdGUoc3RydWN0IGZpbGUgKmZpbGUsIHN0cnVjdCBjaWZzX3Rjb24gKnRjb24sIGludCBt
-b2RlLAogCQlyZXR1cm4gc21iM196ZXJvX3JhbmdlKGZpbGUsIHRjb24sIG9mZiwgbGVuLCBmYWxz
-ZSk7CiAJfSBlbHNlIGlmIChtb2RlID09IEZBTExPQ19GTF9LRUVQX1NJWkUpCiAJCXJldHVybiBz
-bWIzX3NpbXBsZV9mYWxsb2MoZmlsZSwgdGNvbiwgb2ZmLCBsZW4sIHRydWUpOworCWVsc2UgaWYg
-KG1vZGUgPT0gRkFMTE9DX0ZMX0NPTExBUFNFX1JBTkdFKQorCQlyZXR1cm4gc21iM19jb2xsYXBz
-ZV9yYW5nZShmaWxlLCB0Y29uLCBvZmYsIGxlbik7CiAJZWxzZSBpZiAobW9kZSA9PSAwKQogCQly
-ZXR1cm4gc21iM19zaW1wbGVfZmFsbG9jKGZpbGUsIHRjb24sIG9mZiwgbGVuLCBmYWxzZSk7CiAK
-LS0gCjIuMjcuMAoK
---000000000000a7920905beed6dba
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0002-cifs-add-FALLOC_FL_INSERT_RANGE-support.patch"
-Content-Disposition: attachment; 
-	filename="0002-cifs-add-FALLOC_FL_INSERT_RANGE-support.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_kmz7a69n1>
-X-Attachment-Id: f_kmz7a69n1
+(Interestingly it is only the Centos 7 compile that failed on this).
 
-RnJvbSBlM2NkZDFjOTQzZTY1YzM5MWFmMzZmNTczNTk5YjY5ZGRlODBmY2IwIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBSb25uaWUgU2FobGJlcmcgPGxzYWhsYmVyQHJlZGhhdC5jb20+
-CkRhdGU6IFNhdCwgMjcgTWFyIDIwMjEgMDY6MzE6MzAgKzEwMDAKU3ViamVjdDogW1BBVENIIDIv
-Ml0gY2lmczogYWRkIEZBTExPQ19GTF9JTlNFUlRfUkFOR0Ugc3VwcG9ydAoKRW11bGF0ZWQgdmlh
-IHNlcnZlciBzaWRlIGNvcHkgYW5kIHNldHNpemUgZm9yClNNQjMgYW5kIGxhdGVyLiBJbiB0aGUg
-ZnV0dXJlIHdlIGNvdWxkIGNvbXBvdW5kCnRoaXMgKGFuZC9vciBvcHRpb25hbGx5IHVzZSBEVVBM
-SUNBVEVfRVhURU5UUwppZiBzdXBwb3J0ZWQgYnkgdGhlIHNlcnZlcikuCgpTaWduZWQtb2ZmLWJ5
-OiBSb25uaWUgU2FobGJlcmcgPGxzYWhsYmVyQHJlZGhhdC5jb20+ClNpZ25lZC1vZmYtYnk6IFN0
-ZXZlIEZyZW5jaCA8c3RmcmVuY2hAbWljcm9zb2Z0LmNvbT4KLS0tCiBmcy9jaWZzL3NtYjJvcHMu
-YyB8IDQwICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKIDEgZmlsZSBj
-aGFuZ2VkLCA0MCBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvZnMvY2lmcy9zbWIyb3BzLmMg
-Yi9mcy9jaWZzL3NtYjJvcHMuYwppbmRleCBjNmE0OWMzMWRjMGUuLjQ4MzdhYzliNDgzNyAxMDA2
-NDQKLS0tIGEvZnMvY2lmcy9zbWIyb3BzLmMKKysrIGIvZnMvY2lmcy9zbWIyb3BzLmMKQEAgLTM2
-ODUsNiArMzY4NSw0NCBAQCBzdGF0aWMgbG9uZyBzbWIzX2NvbGxhcHNlX3JhbmdlKHN0cnVjdCBm
-aWxlICpmaWxlLCBzdHJ1Y3QgY2lmc190Y29uICp0Y29uLAogCXJldHVybiByYzsKIH0KIAorc3Rh
-dGljIGxvbmcgc21iM19pbnNlcnRfcmFuZ2Uoc3RydWN0IGZpbGUgKmZpbGUsIHN0cnVjdCBjaWZz
-X3Rjb24gKnRjb24sCisJCQkgICAgICBsb2ZmX3Qgb2ZmLCBsb2ZmX3QgbGVuKQoreworCWludCBy
-YzsKKwl1bnNpZ25lZCBpbnQgeGlkOworCXN0cnVjdCBjaWZzRmlsZUluZm8gKmNmaWxlID0gZmls
-ZS0+cHJpdmF0ZV9kYXRhOworCV9fbGU2NCBlb2Y7CisJX191NjQgIGNvdW50OworCisJeGlkID0g
-Z2V0X3hpZCgpOworCisJaWYgKG9mZiA+PSBpX3NpemVfcmVhZChmaWxlLT5mX2lub2RlKSkgewor
-CQlyYyA9IC1FSU5WQUw7CisJCWdvdG8gb3V0OworCX0KKworCWNvdW50ID0gaV9zaXplX3JlYWQo
-ZmlsZS0+Zl9pbm9kZSkgLSBvZmY7CisJZW9mID0gY3B1X3RvX2xlNjQoaV9zaXplX3JlYWQoZmls
-ZS0+Zl9pbm9kZSkgKyBsZW4pOworCisJcmMgPSBTTUIyX3NldF9lb2YoeGlkLCB0Y29uLCBjZmls
-ZS0+ZmlkLnBlcnNpc3RlbnRfZmlkLAorCQkJICBjZmlsZS0+ZmlkLnZvbGF0aWxlX2ZpZCwgY2Zp
-bGUtPnBpZCwgJmVvZik7CisJaWYgKHJjIDwgMCkKKwkJZ290byBvdXQ7CisKKwlyYyA9IHNtYjJf
-Y29weWNodW5rX3JhbmdlKHhpZCwgY2ZpbGUsIGNmaWxlLCBvZmYsIGNvdW50LCBvZmYgKyBsZW4p
-OworCWlmIChyYyA8IDApCisJCWdvdG8gb3V0OworCisJcmMgPSBzbWIzX3plcm9fcmFuZ2UoZmls
-ZSwgdGNvbiwgb2ZmLCBsZW4sIDEpOworCWlmIChyYyA8IDApCisJCWdvdG8gb3V0OworCisJcmMg
-PSAwOworIG91dDoKKwlmcmVlX3hpZCh4aWQpOworCXJldHVybiByYzsKK30KKwogc3RhdGljIGxv
-ZmZfdCBzbWIzX2xsc2VlayhzdHJ1Y3QgZmlsZSAqZmlsZSwgc3RydWN0IGNpZnNfdGNvbiAqdGNv
-biwgbG9mZl90IG9mZnNldCwgaW50IHdoZW5jZSkKIHsKIAlzdHJ1Y3QgY2lmc0ZpbGVJbmZvICp3
-cmNmaWxlLCAqY2ZpbGUgPSBmaWxlLT5wcml2YXRlX2RhdGE7CkBAIC0zODU4LDYgKzM4OTYsOCBA
-QCBzdGF0aWMgbG9uZyBzbWIzX2ZhbGxvY2F0ZShzdHJ1Y3QgZmlsZSAqZmlsZSwgc3RydWN0IGNp
-ZnNfdGNvbiAqdGNvbiwgaW50IG1vZGUsCiAJCXJldHVybiBzbWIzX3NpbXBsZV9mYWxsb2MoZmls
-ZSwgdGNvbiwgb2ZmLCBsZW4sIHRydWUpOwogCWVsc2UgaWYgKG1vZGUgPT0gRkFMTE9DX0ZMX0NP
-TExBUFNFX1JBTkdFKQogCQlyZXR1cm4gc21iM19jb2xsYXBzZV9yYW5nZShmaWxlLCB0Y29uLCBv
-ZmYsIGxlbik7CisJZWxzZSBpZiAobW9kZSA9PSBGQUxMT0NfRkxfSU5TRVJUX1JBTkdFKQorCQly
-ZXR1cm4gc21iM19pbnNlcnRfcmFuZ2UoZmlsZSwgdGNvbiwgb2ZmLCBsZW4pOwogCWVsc2UgaWYg
-KG1vZGUgPT0gMCkKIAkJcmV0dXJuIHNtYjNfc2ltcGxlX2ZhbGxvYyhmaWxlLCB0Y29uLCBvZmYs
-IGxlbiwgZmFsc2UpOwogCi0tIAoyLjI3LjAKCg==
---000000000000a7920905beed6dba--
+I will attempt a full review after easter.
+
+cheers,
+Douglas
 
