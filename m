@@ -2,43 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4CAA355FC5
-	for <lists+samba-technical@lfdr.de>; Wed,  7 Apr 2021 01:52:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 054343561C6
+	for <lists+samba-technical@lfdr.de>; Wed,  7 Apr 2021 05:12:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=eCAtJrT0bckkhlNg/f4/ykivU1MKm7aC8EavZBZvzkI=; b=2CWFasmtK0DlNFGX35HeFUcGNU
-	Qf5b7KTOlkI50K/DVVthrIJ5QS6fDVfv5YzUGEwvmxZ64tFKPKlXKgzFN1prqPg8ZgAIpbRw8AdQd
-	SuYCM6EBAYhap0w+hbburM5rpIoZxLSvD72ZCKUmms6q7oKO5noLK9N1AdqA1SBnwV7NBl6Li/NgR
-	c4TzurePjPJp6WSP/zl8ALho5vYqU+203zVgNf8Clgx1dd/fs9dfgTCTcmlTWGzUlL1HCA0P1VF2v
-	V0MlGLMEwatEmn+gRExNp9pB1Ho65EIdZuzk5JTjt09A8sJfqJJXDENagZsjlft/7nyH7dUP5Wehl
-	/LLrOu3A==;
-Received: from ip6-localhost ([::1]:25098 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=xrBmuu7qDYHP5iflQ1toy6uYqwgpVlrKH1IMR2giP3o=; b=GQ89hINVraMXtgTmKt2SoGqGD8
+	v/YJaoqZtTKUnrHw225aUmLDwSX/7NUWZZFbsuCkFz0owHr+U0kSr3zv7+oMTwcvtzgGDR2bgdn7y
+	rgpyk2N9jM3trtfOQaXXlbTBlpfDLIiSe29fZVLzbgo5vkCFlBumMvrIdqKKiKj0y6biCqIUTRFfU
+	jJyuSqlQbfUN7EnL5XHCGPz7UBZmynJN8TqaddrpS2oQHTc767TuNwguG36jPX7tTvmKtQ9HE+n3/
+	uUJoFz5+EN2E5sf4rxxZ7jjt4KCpRquqmji68aB5nzeOb5pf9G2xc2qjY9tBvKqZFIuiAPff4BKgK
+	2wYmQVxg==;
+Received: from ip6-localhost ([::1]:28144 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lTvU3-00AGqY-Qz; Tue, 06 Apr 2021 23:51:47 +0000
-Received: from [211.29.132.59] (port=37594 helo=mail108.syd.optusnet.com.au) 
- by hr1.samba.org with esmtp (Exim) id 1lTvTx-00AGqR-R4
- for samba-technical@lists.samba.org; Tue, 06 Apr 2021 23:51:45 +0000
-Received: from dread.disaster.area (pa49-181-239-12.pa.nsw.optusnet.com.au
- [49.181.239.12])
- by mail108.syd.optusnet.com.au (Postfix) with ESMTPS id D446C1AEB59;
- Wed,  7 Apr 2021 09:19:25 +1000 (AEST)
-Received: from dave by dread.disaster.area with local (Exim 4.92.3)
- (envelope-from <david@fromorbit.com>)
- id 1lTuyj-00DXI3-4m; Wed, 07 Apr 2021 09:19:25 +1000
-Date: Wed, 7 Apr 2021 09:19:25 +1000
-To: Steve French <smfrench@gmail.com>
-Subject: Re: [PATCH][CIFS] Insert and Collapse range
-Message-ID: <20210406231925.GE1990290@dread.disaster.area>
-References: <CAH2r5mvhUQEqXQmrz5KKbTCFaeS5ejZBGysaeQVC_ESSc-snuw@mail.gmail.com>
+	id 1lTybo-00AHYx-VS; Wed, 07 Apr 2021 03:12:01 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61722) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lTybi-00AHYo-0J
+ for samba-technical@lists.samba.org; Wed, 07 Apr 2021 03:11:58 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=xrBmuu7qDYHP5iflQ1toy6uYqwgpVlrKH1IMR2giP3o=; b=LMK+5tmSpPQBfCmphJf1RWNkD8
+ ikxXOsr+go7viUih66pGOP92ymDI92RLbjmGT7R71B0wsS4ZIy3fZ+scihWvE5DZp6m8bDsy6/WBk
+ rc3S1A1K8xvZkJZGvA4b/x4yu/cBRSSlClheqtPVaV3ktXlDjIAKJdRDqPG7bMvR+PFMHvU8jezSI
+ hYg+NNRa5BaPHjAV8OIj0w9tbl8YcGwTlHH7rUDMd0x5RHpvXr8xyPEi6duHUSKVHJ+ICWr5wz+B1
+ f9QfrAePpemD2cSIiv7T3Naot+I6yBzRoyaFP96JA3icVD8KvavoJNSDPp95G3mQBaE4A7G9lYVtH
+ KiprBwQEhfrLchUDmdz8b5KQ/2von6R42C5pzlMG2WOBUatz3Xza6re45GgexGRAtljRy3X/7FoR9
+ X6tZsiw2Usxvp6tj7MerepC5LC8KPE2mvTfbFBAgT3FN/Iv94u+RezUp+0jt+LYMdYBV4mJxg0vv9
+ wdW02vymPuGHMj/ZalZRBheu;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lTybf-0007Rq-VO; Wed, 07 Apr 2021 03:11:52 +0000
+Message-ID: <54514b4fbafd8eeab3a96af4f6a76fea92db988f.camel@samba.org>
+Subject: Re: Improving LZXpress decompression/compression algorithms
+To: Matt Suiche <msuiche@comae.com>, samba-technical@lists.samba.org
+Date: Wed, 07 Apr 2021 15:11:49 +1200
+In-Reply-To: <CA+NQ6=xa2itZO0oYTPp784jfHqg6uAVYhEGkCuLynhgkd6eKzQ@mail.gmail.com>
+References: <CA+NQ6=xa2itZO0oYTPp784jfHqg6uAVYhEGkCuLynhgkd6eKzQ@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAH2r5mvhUQEqXQmrz5KKbTCFaeS5ejZBGysaeQVC_ESSc-snuw@mail.gmail.com>
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.3 cv=YKPhNiOx c=1 sm=1 tr=0 cx=a_idp_x
- a=gO82wUwQTSpaJfP49aMSow==:117 a=gO82wUwQTSpaJfP49aMSow==:17
- a=kj9zAlcOel0A:10 a=3YhXtTcJ-WEA:10 a=7-415B0cAAAA:8
- a=mhv_l09cUW-47tK0WSYA:9 a=CjuIK1q_8ugA:10 a=biEYGPWJfzWAr4FL6Ov7:22
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,51 +55,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Dave Chinner via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Dave Chinner <david@fromorbit.com>
-Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>,
- CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Apr 01, 2021 at 01:30:28PM -0500, Steve French wrote:
-> Updated version of Ronnie's patch for FALLOC_FL_INSERT_RANGE and
-> FALLOC_FL_COLLAPSE_RANGE attached (cleaned up the two redundant length
-> checks noticed out by Aurelien, and fixed the endian check warnings
-> pointed out by sparse).
+On Thu, 2021-04-01 at 12:13 +0400, Matt Suiche via samba-technical
+wrote:
+> First of all, thanks a lot to Douglas Bagnall for the assistance.
 > 
-> They fix at least six xfstests (but still more xfstests to work
-> through that seem to have other new feature dependencies beyond
-> fcollapse)
+> While I was revisiting the LZXpress implementation, I discovered that
+> the 2
+> official documented cases from MS-XCA were not supported:
+> https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-xca/72da4f8d-2ba3-437d-b772-2e4173713a0b?redirectedfrom=MSDN
 > 
-> # ./check -cifs generic/072 generic/145 generic/147 generic/153
-> generic/351 generic/458
-> FSTYP         -- cifs
-> PLATFORM      -- Linux/x86_64 smfrench-Virtual-Machine
-> 5.12.0-051200rc4-generic #202103212230 SMP Sun Mar 21 22:33:27 UTC
-> 2021
-> 
-> generic/072 7s ...  6s
-> generic/145 0s ...  1s
-> generic/147 1s ...  0s
-> generic/153 0s ...  1s
-> generic/351 5s ...  3s
-> generic/458 1s ...  1s
-> Ran: generic/072 generic/145 generic/147 generic/153 generic/351 generic/458
-> Passed all 6 tests
+> The attached implementation includes bug fixes in the decompression
+> algorithm, a rewrite of the compression function and additional tests
+> as it
+> only had a single test.
 
-FWIW, I think you need to also run all the fsstress and fsx tests as
-well. fsx, especially, as that will do data integrity checking on
-insert/collapse operations.
+Thanks Matt for taking care of this, it is really appriciated having
+someone look back over this code, and adding tests in particular.
 
-`git grep -iwl fsx tests/` will give you an idea of the extra fsx
-based tests to run....
+Andrew Bartlett
 
-Cheers,
-
-Dave.
 -- 
-Dave Chinner
-david@fromorbit.com
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+
+
+
+
+
 
