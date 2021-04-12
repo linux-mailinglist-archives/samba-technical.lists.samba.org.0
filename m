@@ -2,59 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2F1235AA70
-	for <lists+samba-technical@lfdr.de>; Sat, 10 Apr 2021 05:04:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22AAE35C478
+	for <lists+samba-technical@lfdr.de>; Mon, 12 Apr 2021 12:55:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=I/wRxX1R9oNjkGChxLuwTfeQJQhzEhqKDOWET2I+Z38=; b=cQF8bpQv5rOlJ67nv7LpJH8p6m
-	CR4WfHYHbu3onywSc+S2om4vfWBAEUOtagt6J2nJalwIjhQS2uGU6J4bXJKc9cskJNcgAv1wI8FgM
-	r084mBNn3E7BqVCi520BS4Wd1hBRXQWgOLK4bo6FAVfOg1Dz4QHUYtpNvx0WrHQ2bCZJ8RNaJ5Qhz
-	OldQzG840wihdeHT0R3TmnzBwXjSRX9FZ6cb0Is+npMYosfU7/PUSUQ2NcxllrDoj97LPnKzIZ+Rf
-	cl0LJw9LwS31j0TGs9hwXIfC1SZ+crbCim86bFpYxWYjJfePGbv7fSEu5Nf5Ixd4S/hjsKrdhgVQ+
-	k7W1mdoQ==;
-Received: from ip6-localhost ([::1]:52828 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=XuFbcs72s0c3ne8Qh55VYWAtfWqZQhBGGIwoH4LE6M4=; b=B5dS08VtwBKZyAub1ZPio6YJJJ
+	C2nWZkicV1YssaxYn1VQeWyLjPOoeIE6IytOF107meUNpHNGoh1FL/fPktgF5gnIYnBvZgiCKya/1
+	NGFBn77urN17CQ/iNnDVyNRD4hTVMUM486zeJt7APQGtVVKNpmVO2MP674ll9Bg09Puuymo/TkmzB
+	v1RBFjSQFHf0GBaG/JWaGE5ap8W2Mkw2yiRtvNE3wiQDvf+cn1NsoWTn69cyRM3a/1lynUkNnuQ3R
+	KUUcq0GRMeR94EO7AdNO7JdZXuf+Ik7P/6S6M131vaUVYJqE8oJoJK0H3d6/ueuChxA7HfuMtbJXq
+	TPZcw/bg==;
+Received: from ip6-localhost ([::1]:30278 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lV3uF-00AkHO-65; Sat, 10 Apr 2021 03:03:31 +0000
-Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233]:40470) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lV3uA-00AkHH-2U
- for samba-technical@lists.samba.org; Sat, 10 Apr 2021 03:03:28 +0000
-Received: by mail-lj1-x233.google.com with SMTP id c1so414585ljd.7
- for <samba-technical@lists.samba.org>; Fri, 09 Apr 2021 20:03:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=I/wRxX1R9oNjkGChxLuwTfeQJQhzEhqKDOWET2I+Z38=;
- b=Inm5K8AjwQqChONCOH2iIzctpL24AM9K15FYc7zoX4EmBpBFDlscB28ar6tATAXdiQ
- i8moRrgkrIne0xlJPE9Xktry0vkMTrDxy+qq1EX5DsoB4XP8VBLCsTCLOdzQAUvj6A0V
- LMrFVk+Q5fk0yEop1v78k232vs0BlWgOuMerKG4NudZllZR39DW8ZlD5tMaPpYsVDz5f
- 8Z6NDmdz6CBq+hIcOGmuqJBql6rlJURdK5Af8iIGVUoDXgLYmQC8KYWkbN33ulCr4jcD
- Y7lkdk83bSb9guzF5idArczgsySr9sftB97Vcu2oC4z3rd9q7qIhkUmebhVHsJweXpY9
- pqyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=I/wRxX1R9oNjkGChxLuwTfeQJQhzEhqKDOWET2I+Z38=;
- b=L2O5Mvu42YEgH8c4rFh1LgJWylAX3htqqi0+KyO82hngWjh8gJJPlokoPzSQUDVykK
- 1/7BhTlgiWD7KOcgmVPeBmtqonNVRzZMYkcy1UFHloqWZnpyjGNq70rrYS0drnSvdLQB
- Plq17UC+MGC3RzeuotTE69mCKX7VZhMl8Q0F8isW4e8b5R6hSVvSV6iXePCOo674Kerc
- US5BnY5Yi2jPhYBtOvq23URVx8tx/1W7txcn1Yw5ntM4PM4rH/IFo8djZpjEC8Llyewv
- El0OaWMZQYIcQArJ9E1lV0OGv68lUl3szIZmLMqdXOWPaL1LuQDkAFcI69u7xpHALctw
- 2/mQ==
-X-Gm-Message-State: AOAM533JvzvjNUEEF+mneokix/pGQywzeL+G+HhXGYjwuDRgHR+VKSzz
- 6q31st9DGk6CU1iSXug2UiGzGtZC+mct3egymFs=
-X-Google-Smtp-Source: ABdhPJy0Xm/gsEDLh86mOz6oX3ooDgaOPzxzCaUH9nFk0p40AUJcPhgInDJ4vmIP9xN3+2agu03CTlIEtMRvagckUIE=
-X-Received: by 2002:a05:651c:339:: with SMTP id
- b25mr10967483ljp.406.1618023796589; 
- Fri, 09 Apr 2021 20:03:16 -0700 (PDT)
+	id 1lVuDh-00Az31-6Z; Mon, 12 Apr 2021 10:55:05 +0000
+Received: from air.basealt.ru ([194.107.17.39]:43076) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1lVuDb-00Az2r-AV
+ for samba-technical@lists.samba.org; Mon, 12 Apr 2021 10:55:02 +0000
+Received: by air.basealt.ru (Postfix, from userid 490)
+ id B8DC7589882; Mon, 12 Apr 2021 10:54:55 +0000 (UTC)
+Received: from [10.64.129.4] (unknown [193.43.9.4])
+ by air.basealt.ru (Postfix) with ESMTPSA id 73AF4589438;
+ Mon, 12 Apr 2021 10:54:51 +0000 (UTC)
+Subject: Re: Setting up QtCreator for Samba development
+To: Andrew Bartlett <abartlet@samba.org>, Ralph Boehme <slow@samba.org>,
+ =?UTF-8?Q?Aur=c3=a9lien_Aptel?= <aaptel@suse.com>,
+ samba-technical@lists.samba.org
+References: <502aedfa-7290-7e9b-11fe-06d2cfe59bb5@basealt.ru>
+ <bc0db8d3-f6c5-103d-3193-9f687f94c434@samba.org> <874kgf4xku.fsf@suse.com>
+ <732d6001-c29e-5df8-77a3-df8d8b46b4d2@samba.org>
+ <16c88278e8ce9e8dd43eab767e633f5f4b0a221c.camel@samba.org>
+Organization: BaseALT
+Message-ID: <9ee40c71-dbf5-47b0-7220-c9a69ec8e07e@basealt.ru>
+Date: Mon, 12 Apr 2021 14:54:50 +0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-References: <20210407022655.21124-1-liliu_096@163.com>
-In-Reply-To: <20210407022655.21124-1-liliu_096@163.com>
-Date: Fri, 9 Apr 2021 22:03:05 -0500
-Message-ID: <CAH2r5msQd88mgu_AOFRckzxmqA19NLcKyNggR253HawA2dM+og@mail.gmail.com>
-Subject: Re: [PATCH] fs: cifs: Fix spelling of 'security'
-To: liliu_096@163.com
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <16c88278e8ce9e8dd43eab767e633f5f4b0a221c.camel@samba.org>
+Content-Type: multipart/mixed; boundary="------------5197998931DC5AC99197C957"
+Content-Language: en-US
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,51 +54,87 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, "jack1.li_cp" <liliu1@yulong.com>
+From: Igor Chudov via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Igor Chudov <nir@basealt.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Merged into cifs-2.6.git for-next
+This is a multi-part message in MIME format.
+--------------5197998931DC5AC99197C957
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-(strangely ... this patch was sent to my spam folder in gmail so
-didn't notice it until today, and by accident).
+Hi,
 
-On Wed, Apr 7, 2021 at 9:03 AM <liliu_096@163.com> wrote:
->
-> From: "jack1.li_cp" <liliu1@yulong.com>
->
-> secuirty -> security
->
-> Signed-off-by: jack1.li_cp <liliu1@yulong.com>
-> ---
->  fs/cifs/cifsacl.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/fs/cifs/cifsacl.c b/fs/cifs/cifsacl.c
-> index 562913e..d2d8e26 100644
-> --- a/fs/cifs/cifsacl.c
-> +++ b/fs/cifs/cifsacl.c
-> @@ -1418,7 +1418,7 @@ int set_cifs_acl(struct cifs_ntsd *pnntsd, __u32 acllen,
->          * Add three ACEs for owner, group, everyone getting rid of other ACEs
->          * as chmod disables ACEs and set the security descriptor. Allocate
->          * memory for the smb header, set security descriptor request security
-> -        * descriptor parameters, and secuirty descriptor itself
-> +        * descriptor parameters, and security descriptor itself
->          */
->         secdesclen = max_t(u32, secdesclen, DEFAULT_SEC_DESC_LEN);
->         pnntsd = kmalloc(secdesclen, GFP_KERNEL);
-> --
-> 1.9.1
->
->
+Here is my .pro file for QtCreator (in attachment). I can share it via 
+Merge Request on GitLab.
 
+On 09.04.2021 22:54, Andrew Bartlett wrote:
+> On Fri, 2021-04-09 at 11:54 +0200, Ralph Boehme via samba-technical
+> wrote:
+>> Am 4/9/21 um 11:27 AM schrieb Aurélien Aptel:
+>>> Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+>>> writes:
+>>>> if you're open for other IDEs, I've recently looked at Visual
+>>>> Studio
+>>>> Code on Linux and that looked amazing. I was just about to dump
+>>>> my Emacs
+>>>> setup and switch but then mehhhh! :)
+>>>
+>>> You have to resist the lure of the dark side ralph :)
+>>
+>> it was tempting, especially after installing
+>>
+>> <
+>> https://marketplace.visualstudio.com/items?itemName=tuttieee.emacs-mcx
+>>>
+>>
+>>> But seriously, what did you find particularly amazing? Does it come
+>>> builtin with good C parsing/analysis/xref?
+>>
+>> YES, YES, YES! Out-of-the-box usable code completion in the Samba
+>> code
+>> base. Functions, structs, macros, everything just worked what in my
+>> Emacs setup works for a few weeks and then breaks again for some
+>> reason
+>> after updating one component or another.
+>>
+>> The biggest showstopper was: it's just BIG and offers A LOT, so
+>> getting
+>> to know it would take me too much time. But this is really the first
+>> IDE
+>> that looks capabable of rivaling Emacs.
+> 
+> Is there anything that would be useful for us to put in-tree to make
+> this work better?
+> 
+> I know some of our other IDEs have worked better with a little
+> integration from the build system, and sometimes we have included the
+> hooks to help get folks going with Samba development faster.
+> 
+> Andrew Bartlett
+> 
 
 -- 
-Thanks,
+With best regards, Igor Chudov
+Lead engineer
+BaseALT, Saratov engineering department, UTC+4
+tel. +7 495 1234-7-99 ext. 549
+mobile +7 937 266-51-34
 
-Steve
+--------------5197998931DC5AC99197C957
+Content-Type: application/x-kicad-project;
+ name="samba.pro"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="samba.pro"
+
+U09VUkNFUyArPSAkJGZpbGVzKCouYywgdHJ1ZSkKCklOQ0xVREVQQVRIICs9IC91c3IvaW5j
+bHVkZQpJTkNMVURFUEFUSCArPSAvdXNyL2luY2x1ZGUvcHl0aG9uMy43bQpJTkNMVURFUEFU
+SCArPSAkJFBXRApJTkNMVURFUEFUSCArPSAkJFBXRC9zb3VyY2UzL2luY2x1ZGUKSU5DTFVE
+RVBBVEggKz0gJCRQV0Qvc291cmNlNApJTkNMVURFUEFUSCArPSAkJFBXRC9zb3VyY2U0L2lu
+Y2x1ZGUKSU5DTFVERVBBVEggKz0gJCRQV0QvbGliL3RhbGxvYwpJTkNMVURFUEFUSCArPSAk
+JFBXRC9iaW4vZGVmYXVsdApJTkNMVURFUEFUSCArPSAkJFBXRC9iaW4vZGVmYXVsdC9pbmN1
+ZGUvcHVibGljL3NhbWJhCgo=
+--------------5197998931DC5AC99197C957--
 
