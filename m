@@ -2,48 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E97D3690BD
-	for <lists+samba-technical@lfdr.de>; Fri, 23 Apr 2021 13:01:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A072336922D
+	for <lists+samba-technical@lfdr.de>; Fri, 23 Apr 2021 14:33:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=LjJDnDbeoEtQ6XVyoKzhlNkPBqU01PirZhOmL4E4fms=; b=r1iQ1aWuhzeFtE0R4+HwPDly2t
-	869/Ds+wEat8Pkqqlp+mr5F0q9JfVZ7b44ptRcr9Rsn87CcjoiRJ6+sSQ/s8uOOaqmRqCp33S1XBB
-	4JnzzJtsc5P665A55nkhrg1gMhH0yLcNdNXyB/lOqRE5NaLJJVWNatpBNhQiR6b52YnAwN7reIRyx
-	3uQ4wpsEAQ+tYucZF2gBffsMGVuHOQ3CNTiuvIfIk8wXc0KvkJJsxMQXP3iUdxrk17p8h1CnKRLoB
-	kxggKT7j4VcdbkLR5NnfGBIjBbEh0jpGNn8aI1CJZgQzB4yFl4teYC5r2QgUFl6+VwL6aD7zwp7dd
-	ooQfhFFQ==;
-Received: from ip6-localhost ([::1]:51346 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=tsHOIY/sCwtngUu5ppOc+ua9SKBJZX3wgX6EBzdL7l4=; b=j/OJCmVFTWSdfexb8ES/gzxS6I
+	EK4tbHo+sUKTfGn80k32RCFkaQAs++KKxG3HBuF053bcz/P88C/5FyD2ObVz6yPSdSmZxLonSdiDz
+	Re1d6gAUmsuK5fqEzbFpNHTv5Ru2xSpyrhgBuDUjn3zHkPSTUh3Xn0bCWP2uYy8+JZBRAnip5EfPs
+	TzI9r46IT9jwIc+luIWjSajBfb4TfTDmU+/X8vGn79OkEfLtSw66On8q4kt+lVi1vW3rdiTXpOGSl
+	R6MkRODVF/xB8pRHKYBpag2xdysizCPf0iGUoqeXzLdXciLfRxXoXVSE5N4ncCYAlLsRbffQfs0v+
+	6WYRacTw==;
+Received: from ip6-localhost ([::1]:55394 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lZtY6-00CCko-01; Fri, 23 Apr 2021 11:00:38 +0000
-Received: from ozlabs.org ([2401:3900:2:1::2]:55871) 
+	id 1lZuz1-00CDgG-VS; Fri, 23 Apr 2021 12:32:32 +0000
+Received: from mailhopper2.bazuin.nl ([195.134.173.123]:41218) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lZtXx-00CCkb-Ud
- for samba-technical@lists.samba.org; Fri, 23 Apr 2021 11:00:34 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4FRWXK5PYcz9sVq;
- Fri, 23 Apr 2021 21:00:01 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=202004;
- t=1619175603; bh=Bqld7bebvvHiUUe+pleAthR2chR/JFJAsjZsUrW26Nc=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=gddnZw0h4Z2ycFFXa0qIo5CfXIvFMnEa8J+Jkn11/kE0RyQPJKt/hMkON7G+adGVD
- 4gCu1PLkv+6RWQ6/V5v4AejZVjq5jpG3fZOWqhEnbFuI+hxkayKvqc4Sl0eGPFT1lx
- XBcoGdT2nWe8/es0lRSqnb8M+k4rDA6gHSB9PUjf+SRbN3vbF+QSRCefP3nx11z7mN
- wHFY74q7f1/qW4HCnrEDOfB2hXG6pQ0mEda/zLNvSsAXLnqrqoem0tY2ysF3WxA3tQ
- S7CgBsTOy5jMmOxoMjdR6hMxkH9DalC48cXDzb36Fo4hWC/W4qOUnanQMinCYvcvh0
- 2HYWw9oTDbVRQ==
-Date: Fri, 23 Apr 2021 20:59:58 +1000
-To: "L.P.H. van Belle" <belle@bazuin.nl>
-Subject: Re: ctdb/utils/etcd/ctdb_etcd_lock python => python3
-Message-ID: <20210423205958.369ab466@martins.ozlabs.org>
-In-Reply-To: <vmime.60816792.20dc.4140e8fec807bb2@ms249-lin-003.rotterdam.bazuin.nl>
+ (Exim) id 1lZuyt-00CDg9-4F
+ for samba-technical@lists.samba.org; Fri, 23 Apr 2021 12:32:29 +0000
+X-Bazuin-en-Partners-MailScanner-Watermark: 1619785928.73835@jGO+ojwd0NRFXMIh4mO0DA
+X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
+X-Bazuin-en-Partners-MailScanner: Found to be clean
+X-Bazuin-en-Partners-MailScanner-ID: 089F511F36E.A4E23
+X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
+ Partners for more information
+Received: from ms249-lin-003.rotterdam.bazuin.nl
+ (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
+ by mailhopper2.bazuin.nl (Postfix) with ESMTP id 089F511F36E;
+ Fri, 23 Apr 2021 14:32:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
+ s=mail20180308; t=1619181128;
+ bh=aPq6Za8fNPZXZE2w3FJLg3X90eNI20djw9PdvqmnPmE=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=bZ1MMslP7tYhzXrvfIM9NFCfArGaGJq+/DL1wIGVLXJgZPfW686d1N87SltDe1iPl
+ 7vK1667gXRvhN6W2vyUv2DtyBwg5r82JaP8odma+txgG6yF3WRBEsCoToXmNPd5THA
+ Oo13BKxRRBtGQmVYSeb2faOLyEffbNdNEZVBUcUVKxMBb79ZCFEPt54rKyTtC77wlP
+ XqLmPN5SuOJeCNzpjnBwBb87WNN3LbRzAE+XCQmaQpsq3JkXBrPZ0lp0aqj8DHLzN0
+ SoDKpj+pGst6SUXlFIzXmwnEGdtDKvx4pqfTF+5uuMpJ+2yl6zZ86T3X0K/LwFY9VI
+ 6FhUOWF53PvZA==
+Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
+ by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 2C89118C247A;
+ Fri, 23 Apr 2021 14:32:12 +0200 (CEST)
+Subject: RE: ctdb/utils/etcd/ctdb_etcd_lock python => python3
+To: =?windows-1252?Q?samba-technical=40lists.samba.org?=
+ <samba-technical@lists.samba.org>
+Date: Fri, 23 Apr 2021 14:32:12 +0200
+Mime-Version: 1.0
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20210423205958.369ab466@martins.ozlabs.org>
 References: <vmime.60816792.20dc.4140e8fec807bb2@ms249-lin-003.rotterdam.bazuin.nl>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-Priority: 3 (Normal)
+X-Mailer: Zarafa 6.30.19-25148
+Thread-Index: Adc4PK7lTlFWNEQMQ7eoSQtioQmF0A==
+Message-Id: <vmime.6082be4c.4114.8306c142307950c@ms249-lin-003.rotterdam.bazuin.nl>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,48 +68,64 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: samba-technical@lists.samba.org
+From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+=20
+Hai Martin,=20
 
-On Thu, 22 Apr 2021 14:09:54 +0200, "L.P.H. van Belle via
-samba-technical" <samba-technical@lists.samba.org> wrote:
 
-> Latest samba build failed on ctdb. 
+> How exactly does the build fail=3F
+Well, i use cowbuild/pbuilder in Debian 10 and in the end lintian checks the packages and errors with.
 
-How exactly does the build fail?
+E: ctdb: python-script-but-no-python-dep usr/lib/x86_64-linux-gnu/ctdb/ctdb_etcd_lock #!python3=20
+Even after i added in debian/control
+${python3:Depends} for CTDB package
 
-> I dont know if its really needed but all python references are used
-> with /usr/bin/env python3. 
-> 
-> Just to besure im not breaking something in ctdb here. 
-> Can someone confirm this? 
-> 
-> My fix.
-> 
-> --- a/ctdb/utils/etcd/ctdb_etcd_lock
-> +++ b/ctdb/utils/etcd/ctdb_etcd_lock
-> @@ -1,4 +1,4 @@
-> -#!/usr/bin/python
-> +#!/usr/bin/env python3
 
-I'd like to be able to give a better answer but I'm not entirely sure
-that the script works with python3 without any other changes.  It looks
-like it should but I don't have a trivial way of testing it (or time to
-setup a test environment).
+>=20
+> > I dont know if its really needed but all python references are used
+> > with /usr/bin/env python3.=20
+> >=20
+> > Just to besure im not breaking something in ctdb here.=20
+> > Can someone confirm this=3F=20
+> >=20
+> > My fix.
+> >=20
+> > --- a/ctdb/utils/etcd/ctdb_etcd_lock
+> > +++ b/ctdb/utils/etcd/ctdb_etcd_lock
+> > @@ -1,4 +1,4 @@
+> > -#!/usr/bin/python
+> > +#!/usr/bin/env python3
+>=20
+> I'd like to be able to give a better answer but I'm not entirely sure
+> that the script works with python3 without any other changes.=20
+>  It looks
+> like it should but I don't have a trivial way of testing it=20
+> (or time to setup a test environment).
+>=20
+> Given that /usr/bin/python isn't supported anymore, we might as well
+> change it as above see what bug reports get generated.
+>=20
+> If you're keen to improve the script then you could try to clean it up
+> and get rid of warnings from pylint and flake8.  getting rid of the
+> obvious whitespace issues might make any python3 issues more obvious.
+> Perhaps yapf3 would be useful=3F
 
-Given that /usr/bin/python isn't supported anymore, we might as well
-change it as above see what bug reports get generated.
+I really wished i had these skills todo that, i would then..=20
+:-(=20
 
-If you're keen to improve the script then you could try to clean it up
-and get rid of warnings from pylint and flake8.  getting rid of the
-obvious whitespace issues might make any python3 issues more obvious.
-Perhaps yapf3 would be useful?
+>=20
+> peace & happiness,
+> martin
+>=20
 
-peace & happiness,
-martin
+Thanks for the reply so far.=20
+
+Greetz,=20
+
+Louis
+
 
