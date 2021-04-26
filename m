@@ -2,81 +2,75 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24F1736B37C
-	for <lists+samba-technical@lfdr.de>; Mon, 26 Apr 2021 14:50:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABF2636B629
+	for <lists+samba-technical@lfdr.de>; Mon, 26 Apr 2021 17:53:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=OP34VLfTJZ8E/SjPun7drTJcYRwiFQLPEU5R7/DiXmw=; b=bRSGirp9QlH0eopvInu5Dt2/O6
-	fEbZGhQByt3sBANIaa/ezvIJ7czb/076345afOrsRsV20qRJdmwhEQxOcZl+KTxjs0EOOqMqA81kY
-	8PhbWwuX3uxdo7hy5KlRDeCF7nkj4LbnSYGXRJceTx8PiOSz08vMzX5IwG6J4Mkv1TpCjHFZpUEiF
-	0YKxuaIISN6Zabn5Nn5DCmJiNYbACHKiAaFy/5bv5xuDBFK5xgd7KzZc+tfDZVkfFIAGAOom53RAZ
-	8cNWBDJ5TIAhGlGY3omw8cutAXOsPP1E/C91pg8J/e76ZaEzgf3ubd5CiEn1O7jc+nvG0GMHv4ip6
-	44BPqetQ==;
-Received: from ip6-localhost ([::1]:55284 helo=hr1.samba.org) 
+	bh=xX/fZDcqVYcEs17jqnitQr1PIKKNDRHO50Ga+chLlMo=; b=so6hBfeqd7kZYlHiMnhdMM41Xk
+	FwG5LxWtMVO8kVNuR10tyqKHd1nxgJbac0btPGaaypQhpCFXnUata2H+wCzDrDNarjkxlul8CmTLU
+	4mtRL/yPDy/rlhYDCY4Eaiq4tyffE9VlvIrAPRnsK5MufhUu2h3vL02rHWehjdooNI+/2sqP/t/Vb
+	2hAPsXipHyanNAtnytrdgS0PxUtjbZ8ZTyqb1jp8AhYuhgEfDmHvvsIFsnCPpGsHdlM/l+Z4F4wPh
+	r655U6893pem/kXeW+FK0gPapVpsEBt90tgJBMRGj24t0UY+ktn30bVgslsr2VOAYArKet7uNY0aw
+	mFChgp2g==;
+Received: from ip6-localhost ([::1]:62818 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lb0gO-00CUFn-9k; Mon, 26 Apr 2021 12:49:48 +0000
-Received: from sonic310-13.consmr.mail.bf2.yahoo.com ([74.6.135.123]:35651) 
+	id 1lb3Xr-00CVVo-O6; Mon, 26 Apr 2021 15:53:11 +0000
+Received: from sonic314-13.consmr.mail.bf2.yahoo.com ([74.6.132.123]:46052) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1lb0gG-00CUFf-AX
- for samba-technical@lists.samba.org; Mon, 26 Apr 2021 12:49:44 +0000
+ (Exim) id 1lb3Xf-00CVVg-A1
+ for samba-technical@lists.samba.org; Mon, 26 Apr 2021 15:53:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1619441359; bh=OP34VLfTJZ8E/SjPun7drTJcYRwiFQLPEU5R7/DiXmw=;
- h=Date:From:To:In-Reply-To:References:Subject:From:Subject:Reply-To;
- b=itLBjHHDEQo3DynX0QAZdAZg1oQ5MY7JvhCetC4AivwPcB0ge3jaAMHXNdUNnOW5C4KKvlgAIR6703e4FSIXx3xVbC4x44Pto+No8zh1ef0KAji14a/fk003fs6ziawMAPBSY2OphhdP0BoGg/gQ7z9qO8hvk3M+3rf82nzUJO2ZhPYpLlNPx/XcRkrRppNTsKV73dxllh3PV/QQSJznVH+mDHmcE5uk/jhaRpk4a98ZOyI+6cBk7+H5hWqJFYPUR5PD24CagcGjuSi2PlFRkt+bzoyI1rv2mSnLadIbHXW+W4BK8rglVig371pPSQsXo7wBt4jqat+AgfENyM+Jiw==
+ t=1619452358; bh=xX/fZDcqVYcEs17jqnitQr1PIKKNDRHO50Ga+chLlMo=;
+ h=Date:From:To:Subject:References:From:Subject:Reply-To;
+ b=e3uOL3dEbfxdsXAJjuzUOMzxXFu3fJbv656RcYLcAP1xo4Zhf9mhNJDcA/RxNLz5VxfiEqKJREvZ3pthL/FRUTR0ssDyfTzLv+6V3Fskx8XhzX08Jwub7UDUs1y3A4F5BXQPxDi7FkUVQ4LH+XGMVqXQit/qH63QhcSKd+5ceSnV6hg+QVI5O+FHSjJ1m07PJR94CWgrw/aP0BLJkuxpqy08vFVHXa+3prUB5YRSvSEsfzGOdLY/C9EAESjQl8NBrHiPNOjSts7BmoDQiLkgntaRNOttjWTaX5W//5hb0sL37pIj443r9fDnsth3A9RB9sGPU3rsPDQ1vkALA+DHMw==
 X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
- t=1619441359; bh=ytoxuaNMdn1YZOb1QjD338YasIzSqfqLaNCM7OVh+AU=;
+ t=1619452358; bh=afcp6SEX+VuYhB1ymQ/5wr8j+Xt7cACMhF1U9bYFsar=;
  h=X-Sonic-MF:Date:From:To:Subject:From:Subject;
- b=Jbs/hCEuSMFXCuwsFL4dmrtTRV+yMPSnMXo0op9dnnZ/DpxMCO1Ahm2mo3P2ncwSHyGNyNk9QPLYhiugtzwbEGN2YokoS//bI6Nay/vsJZ551j1KhjqwU+sQZ5nsPqQPROu2AIXr8wJsKc2fHSH82lRDLKMXO7F6GCEDuWTLUrtM77BVc9uPdKFpj18xumX+bcMuPzGgTWg1SplfMBgiLEQajBqxuBz9zzpe9EGGpTzUfzsqCKbG8Sbvxu0zv8DNtWZYMJp+JrbsjDTsJehbMcNRshCratDZ0h/4vhHjp3SOY9VIcxOxVKvpX4PwI3+kdFLi0CZH5YtJhcGuXnb8hg==
-X-YMail-OSG: x6MnqKcVM1lYmlcpkakYMB93jcV.g9LcfMg1AMxCnj8XTGuJz8PuK27tTDmHpLn
- QeUZSr25RWBE9aZHhYwYW47jSM3CAhs_f9wy08HOTRVK4JiH9wBvo2ASITCbaf0rvqBQn4yJITC.
- vgO2vHPbRpZWRTvW5mRgRYNXvF4M62EaDTMj6UwYhbs7fAnfCH.5fQ.KwAIWBBy.qa7.fktJ_QHq
- nm6TbhQMwBQIWwrE_6mJ_uwZDl042.Sp8S2qjHF5KljyJdPQ.67EUpUt8CCZQN0T1aidblzlvTsl
- l6.OdD_uXEbkwgrYoUzqB6taf.wL1z6ywb0Q1rEApU3i6opBBL6ES4MaZNiL06gcXhzF8lPh9VjF
- bokByKi0zhBPFPKnotaPZ9rQ1fZLui0iPRvSLsNMeBwmtDpVhIk.WFTY0VDJvtj2FqATOFi4J3mM
- D9RqdP8xX5TtFh_18bJsTzZLsBMHPVp0H5DsFC8_5y5MyElyqgaqUGqUDQ7q5nHfI8mg7JUCzQtZ
- HaddRjEtn.1kbodTreVt6KRCeEraN0eNvVN1dE_tyGOq0oW_NzxulY8Jrth_AwoHvUfKW3JVAozF
- xsOMWYE19J1.QSx_gUjJlgfJgjuwV9UgzVHB_Z5TQxdYVhCUpWK1TsM2gZ923dC6DlWAeDLZV_C0
- Jz94be_NDcLUmAaMOX_EjPZsBAz8Hx.f0z55KXM3RziLR9l6dvp6ssbPpzsAzwY.1o.ZisNoeZ6z
- opbp0bDNs2W71WTdAJk1d5Zw4zH.O3_oLIq00hC4PF2zAFKW_NxYfLw669dE6kVQ.U5lYvO3O29N
- 4PUZbUyGtMppR_obK.3BIQ.IIeeybMuGV4o5d8W6ggsvWs_N6torvrqr7nem0odCn_RVfs8VQFeY
- Sk9qrXOreGaBQLRpSSYmfxnF5.YL2VXv5e_RBkLmgyO.TOoC8y9oi2UpD9emIfDcBNEQzXAP_VCc
- mzBBE5LxLoyxy_NGP2kHjc5NxamgaOu7I4l6KQ1v41femtg84E2z2ay3MS9qmLARw0.KF2Cr0PN7
- GhHHSrU93RaTlIbrkEjwwKFAxmcC0R_4OAsyKmpGdOLHm65zYb6zsY5Uscdsju0_S9g93mHec93M
- OJmYLUW1Qty.FYb.5Lf_gQCIEEP22AAFYjpUkUYjNUKOL_hPJclomlrh0M.XOInHXD3GaU.24EJ2
- tARV_sqJqFG5Q2yHYahIhXrlfpTBNyupBqMowRWIQoqFke1aEBATH3a.3tGajYKqMSA2ER7e8luI
- AsgucF47dTfVajp4AjiZILf0cmSFZP.xeswU28foygevtlr.sLGFAQ8G.8pirWpSxy7QYI8AhdqN
- HzkMFB2pTVAddz_jqyzctGU9Fn4joySCZw6pX_2qeVmwrZDbkP9t7MIIBDXasXSVynX50viqEj9j
- BqnKAYyAcRZBwGBm3r38kObGsQA6pMnrQyjbodkW5GFHEH8Rt1rlrLi8q_QdugRgIUDsCA0.vPG4
- EZCc2Y3rFQHP7_ZhJxnq2ieMcRyP5lsjup8eY3X00G_QFpGsJ1yHz.YlR.HwhSbuiPzalUBk9xBp
- kiEyhh8DTMAfOM7riL3wyitqc7U7XKqzYkrakDZWb_rJ4K51tq5j0xMihBf.C4YHcPoL7mvYjVT5
- hp3Ney6q0fdjgDW3PATfmdV6jaUx5al2TnaKcC9BhBXhZDQv9cNuiEYEtpA6QYxbSPCIsjxxFMx.
- g5VtSktWMmxWOikRKoNnHIwiEuLrqGp1OOEITGVrTeSBbmu_are4k0Lg62CsiE9UdI80Y6y9n2BY
- XPQuY9OL0XVBglmV3x8LfF0QxV0jr4GSWQndfSLn9L01fkDsmdWB6Ci8AA6QVd41oNfDaHW5qJxu
- 62F6L1pejI5F5QF7mhJsnMqEO9wkutuEtMCNYe0iDzp29MQm1XkFfnPL3IirDJh9DqK5l1lfve44
- fQSzzDjMSF4vYIAL.DW1zpAh90qO6nIMySZIqTgXGx8WK64Pnk8NqgRVteLfHpRLrR8dCxp_pPOB
- jouaUXBhnkL8y.Kj4eRpmHeNdaAk6N_AHIfM2MJjtEtlo1t2TkSEJhU3yAlREPFczCdDzdGyaKxx
- 2nUPWmWMiLUm7HksMyYmOLRNp2g73CFunhq4Th3qJQsVaPzJwTU6bhrseG7Ew0W5kvwED8nf7IaD
- w69I.3zsn6GswQtVU80pnaKHdKBz0qVHGeoq6_C9U5p4wW1HhGMgSD_KPQjhe4LeDLMumQmSABFK
- 9ssJbMgZ3DDWEa8sYx0aCPaAY5zJCKomNpU6GtzCRqC4U37.K3PDwdhUnp3LCQyTfRqPjrNI3L.O
- 7uQK8qKjBjGgfDpfm_AVwg.tmd1yw.Tbp2gESfXinplPpkKTT1GnM_I2v5KAE_nxCm7YeDAISNvQ
- QUN.q_8S9M1BsE3GxuN03zr6eAzH9ZLM2NDllJiuP5ANaTeJATsRRy_s6GVOx8C5ewQZPX4cFkuu
- Tot6CGMkmvmc1BzCHdjrryD4q_loASjnqBgXi_Ygt1DHjgBLVD1f2TuHXu4Q8H_vuHFL3hieX3fA
- D1Xk1PcZLIRvxIYaSqQ--
+ b=sAj4dpHKTSYyY4qEMuhCsdK3AEG+pIV+Piccqk/5iR/6xmWnfgQ61379V11PmSWwRz67zokFAefC7alpEsyBc18R2KRCVG4v1mptposoVjvHE9Zmy/JQYlDmJ8r70EPaYNIrGV3Q3d5CRp6rVtqZgNXyxJF+1NgN7wdb7FxggzlVcDpxjyDP+EZjSyypT8WyPlG3RyfwgYHRVouxvcBcEZw6EaYM+3mJbMxEM0YK8tpqPx+9UMurNwTK5uf4sJQxVNQk2K+6NJJXWzkNbV6lB2OgS0BZRzXJn7dZDwkxfOV5mwe+eLj+siPtOkcOS/U/jFGDzS6BDcEwDAJKQsJQBQ==
+X-YMail-OSG: 7CmJUAUVM1l4pnaVkZxropZSvKm5olNgXHxGCake4XLlPucV010JJKqzNfX37Jb
+ o__YZ9bU0oY09f0w9szIAxg1K.uD_1ULnlTeiXOrnoIVt4UlIZHyqFqTZ5rmlY9Yju2fJopHKGKE
+ GVAGr_OQeNieG.5dVdhjiJxCqWkINRsjI2ecf7XS4geV3uxkwZzCmWwlchWsF9tDOpH4bvYXumxc
+ T2kOM0jyepMeOGG8usb2DLvG5dvO5KwYohhFhUJqIScJimsdrS0bY1ryE2kptLOTCDlv6dQLZEKn
+ mum9XtzQWC4rwFAFOf7OtR1BlUNA3b8CQqMpTsNZ0WrZoBnLNO948FqB5FDeRc3RYbvAJHJ9vNdR
+ hGFOScX848CGnIfTL_.9FmeabzDobvmES5rTOzUXVPmhsIab9Pg4waTWYDs30nQjyaRiVVy3Bz_r
+ vwwOwS2sNJf7N8kjKvKyYEMFpPfGilAG3z64WfinemD9Rnrcvjh2EAs8tzaEiA7AtqRT2JZBAiHO
+ jklR_esIkk_Z3w0TfYl3e33wVc81qo_A_zfOTWNVMbmpTatjcAUREhJOztR_b0kCu4t49OZ80MPz
+ MIRP9XQ7ymu6j28c96Ha7Hx5x9j9AwBWwYBHP_9rLZPugpf3nXKWPrS0KU_1ti.y_ys7fBxjth2G
+ j5gNdtI1EOI0NXkF1goCdMxpLksIUX_MR_YvYGDTWND1XD25RHkl583oecTaRUx6Q_zROztowQ6I
+ 23D2ByXJ09ej4RLjW563YQCGYU3VIcdObLkUXfxoyCTua_yyAM2Ws1mfW_8_xQHLKCJZhncMDp0Y
+ UsoJyRdVlPdy156kFnSTcYdZg7sF8F8dJvwa8v_BmQcK0EUbavdqDOcUq9aULqWf3lbuffAz.mjU
+ fYybnOe44F4bHST31Ertx_mzs1UZKRKxltl.4QYH04OZnkmDx37X4dumWz8BOQoMSQZ6Wqtdcz3v
+ SIMLfmYvho4LsvBoUrTyTZhiq0G73JR5A0kIFgIBRv1bUOxbXaItBYJpix.7OK_8Z73b3_jPtzH2
+ l76tdBJ.fJmoPUQK8tphdrzJ86qcDH8FAMaG3jfuvzJUF4BuFymw76MIhYgMZglKWRthb8.JJcvr
+ C1Dn70Ft523jYos0HDMOhBGWcdMdxZtil6lJu3NQVRGKqvTrTsiwZ4ZiJEORTVgRpyEEz.Ulz6u6
+ tGVklUTqXMWe92BS_BnWigZ6xqWEBM2yJI9z7ZaZqZ6IFcy1FlmCfGvfn7c6HFS6sRBB2a7MTeA5
+ ttd64KpQuZCuk3ua78rS7wlXz14adDO.PcgwVJuVND1vGvgjo0zVosPCzxmfp4XpKvcscEcgl8II
+ 8QBK07JZub_uv6tEqvfKm6BSA0Rll8g_2RS3st0W69SkBQdtMlxb1In3PdSqmrSvWdIOVXmwLjxd
+ lwk0IaOE1vILfZ3G7V920FxW5cJeroRJk8lCs_N3yg.wadF8iJm1I2NdM68xPZNDgAXMdLtE9ICZ
+ We2KZ37wfUB_x2I9yo1jypZwKOLtXPaAyo4DgoQXd9E4ygacmgJT3rMrx0iA8.W8p2DdAGUotoWv
+ M4MHRWceitTzMDLQpr_rzYhxREK1Jb4u0Dw3N9p9_7PBFv3q0ezmOqMi3B9AVnZqeRxgiNKHdUlC
+ azzD7k6MjjLdLqg29JbQxVtlPfDBgM10yQAWYYIOfrGxvhO74MQCklFv.1gcXZtOGrtsVpeTloY_
+ OV04h6WJIbpkPGeTd6MOIaeVC6dCAQt8PEnvVEad3dkTBJRYJ4CWfWcwnT5oJtPSBXHFLJk14IAo
+ 1MM.NKg30lDjCwbaEgIDMmseX178tIFsT3d4VnJFzFT_mMppOWQdx_clI4wx9GQHOqri1N8pcnRA
+ CuVQsI3vA6RPjNcMD47kZ3rynxDX_ydTS_AHHXmV0I7OgORwkG6mU96aCfAF.pCVtUSXhXlO2Nd2
+ bsSHBN2hEzrXIOe9vVmf9LBqTG8t9PWmqT8oOV439Fhf7TunpS8Nh9U8dYovAF5VDXdUNjK4rsOx
+ YKdXHNl4CkIVNXJkrP6ue9luw4KwgPzmnMvqSBNzWpu.bd8BTuj1btlJ1HWRAsbb9yn4f.W19TQT
+ oUlFNZt_H0zDgQhcH3Kq81WPZp2CxIrwmQyJh_uqFHbpmHT.m9RqmZprsu_wn8g3WvNH77k75iDJ
+ GqP.SsUxlhZSS2E_SwPQwm9kBiOBKbFuhL0wgYX0VoME8USmXKwGL.Sdr6LCQLPBzKL4uYaXGOu_
+ akg_2T7Bj31mKALvlxw5ng8..zfOx.bgAZnFbwaAsfOSnruXH45kFc0fEn6a9JW8qgx4zXHSTstc
+ gl7NLlpd29PUP3tcjYqtMocry8f.7FdKm7Dq8I3FtploShom_igaUehkGszAVSF6Z1dUdB5X5MXm
+ CV.khqaeTUExUhkeMfwjunCRHxMslQOZUDIgq8XTdSiBxx0m788fnMA--
 X-Sonic-MF: <hack3rcon@yahoo.com>
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic310.consmr.mail.bf2.yahoo.com with HTTP; Mon, 26 Apr 2021 12:49:19 +0000
-Date: Mon, 26 Apr 2021 12:49:18 +0000 (UTC)
-To: Jason Long via samba-technical <samba-technical@lists.samba.org>, 
- David Disseldorp <ddiss@samba.org>
-Message-ID: <366648288.356507.1619441358566@mail.yahoo.com>
-In-Reply-To: <20210426140050.26e7bcfd@samba.org>
-References: <1398593433.332041.1619436765261.ref@mail.yahoo.com>
- <1398593433.332041.1619436765261@mail.yahoo.com>
- <20210426140050.26e7bcfd@samba.org>
-Subject: Re: vfs_snapper is enabled but prerequisite dbus-1 package not found.
+ sonic314.consmr.mail.bf2.yahoo.com with HTTP; Mon, 26 Apr 2021 15:52:38 +0000
+Date: Mon, 26 Apr 2021 15:52:37 +0000 (UTC)
+To: Samba-technical <samba-technical@lists.samba.org>
+Message-ID: <568442653.399407.1619452357983@mail.yahoo.com>
+Subject: init script or systemd?
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
+References: <568442653.399407.1619452357983.ref@mail.yahoo.com>
 X-Mailer: WebService/1.1.18138 YMailNorrin Mozilla/5.0 (X11;
  Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
  Chrome/90.0.4430.85 Safari/537.36
@@ -98,47 +92,17 @@ Reply-To: Jason Long <hack3rcon@yahoo.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Hello,
+I installed the last version of Samba on the Fedora Server from the Source =
+Code. In=C2=A0https://wiki.samba.org/index.php/Build_Samba_from_Source addr=
+ess, two sections existed:
+
+1-=C2=A0Using an init script to manage the Samba AD DC Service
+
+2-=C2=A0Using systemd to manage the Samba AD DC Service
+
+I must do both of them or just one of them is needed?=C2=A0It depends on my=
+ preference?
+
 Thank you.
-
-
-
-
-
-
-On Monday, April 26, 2021, 04:31:35 PM GMT+4:30, David Disseldorp via samba=
--technical <samba-technical@lists.samba.org> wrote:=20
-
-
-
-
-
-Hi Jason,
-
-On Mon, 26 Apr 2021 11:32:45 +0000 (UTC), Jason Long via samba-technical wr=
-ote:
-
-> Hello,
-> I want to install the last version of Samba as a DC on Fedora Server. I d=
-id "./configure" and got below error:
->=20
-> vfs_snapper is enabled but prerequisite dbus-1 package not found. Use --w=
-ith-shared-modules=3D'!vfs_snapper' to disable vfs_snapper support.
->=20
-> I checked the=C2=A0dbus package and it installed already:
->=20
-> # yum install dbus
-> Last metadata expiration check: 0:12:35 ago on Mon 26 Apr 2021 03:43:20 P=
-M +0430.
-> Package dbus-1:1.12.20-2.fc33.x86_64 is already installed.
-> Dependencies resolved.
-> Nothing to do.
-
-
-When building with vfs_snapper enabled, Samba requires the development
-header files. They should be present on Fedora in a dbus-1-devel or
-dbus-devel package.
-
-Cheers, David
-
-
 
