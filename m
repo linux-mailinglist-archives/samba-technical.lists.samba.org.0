@@ -2,50 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B2FD36B296
-	for <lists+samba-technical@lfdr.de>; Mon, 26 Apr 2021 13:56:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 094FD36B2A9
+	for <lists+samba-technical@lfdr.de>; Mon, 26 Apr 2021 14:01:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=HoW1vAFf9WVKXJiJk9J/HxhMTvyV1SLjv6P5N37M8Zg=; b=dR2agYQRGPUQ2V4Ox7qBituTD1
-	hwSE63cpyJjKP/YztcS0R9SIagiVQSO5cn/SpOhUghnZyA22/P+yn0Rkh0N5mAdwLHoPS30Ck0OSP
-	DHBAiWsXjSatAMOMBtUBLA6qxb6OCnKBslVaH8bim4reBV9fGrh/tQDBgVwrebPMZAUE8FiOpAyWO
-	a4Is0VvvO05gSruubyF8IL6cpRnwVFUjJpQlQKLBcN4nF8Dt5CnnF4dqiBhteYNfFmz/h9x8i+wvm
-	d7dAMQbnmCMXCd69U5et9gsEBVpMJ3cr3eoCVvyiKCWLgIRMrTBPaX9o5UCNaAIeL9f2U35OmhYBI
-	fytWv6cg==;
-Received: from ip6-localhost ([::1]:52574 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=2xfUBeY98HfnlZkS+3lVnJNCTrLd0p5QahTmq0k6Mig=; b=NIbcxKwPkiVjTgWZ/NWT2J1NQb
+	kbMz65I4OFr+e95U+gJ6v5VtTj08HwZ3AeUNP1DhOi0yrxCeQh4Dtabv7XC/ICToUfly5wigud1AS
+	TLwR70JXZ4bjuBH7x7qMYqNBucH0Jt/R3cY8QwIqjabe75J9WGbFtfV65SZlJ1Osxv5ymv2Tv72vo
+	c8F1nSWyjwiXBR3a66tnb3tDgPGw4MzgDY74AWdmU0JmFo9QuM9TP7GUqG+Qi07tejau8uufUEjb6
+	Y6LWz6gOCBAl4RzRQoFLLfQMNuTI5DncGPDy9+NNCrMgXai7xxVN1miZLHUMsYiiXH6cy1YZJLLNx
+	4JIn0CdQ==;
+Received: from ip6-localhost ([::1]:54436 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lazqh-00CTcj-36; Mon, 26 Apr 2021 11:56:23 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23244) 
+	id 1lazvQ-00CTui-3m; Mon, 26 Apr 2021 12:01:16 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24708) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lazqY-00CTcb-TL
- for samba-technical@lists.samba.org; Mon, 26 Apr 2021 11:56:21 +0000
+ (Exim) id 1lazvF-00CTt3-TZ
+ for samba-technical@lists.samba.org; Mon, 26 Apr 2021 12:01:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=HoW1vAFf9WVKXJiJk9J/HxhMTvyV1SLjv6P5N37M8Zg=; b=Ne4Am56V0blMVwLNHQxfGFh0Si
- Wej1tZgC2xhZozMJRj/oQ+LLVCSlUlKZKrjbhUeMz/tej17divV2k1PGC+Im5iTqf6pZkLHk8q8Ao
- UbZ4tR0KeLlfS3/RnR/Hxr0NNvDtobNuSf8RzRSNi1iG47jqIekxaAs2ttXJ8B9b4zFUT8uHnGEA2
- KxpsKOcapD5723vA6mRJU8ixEjzppplUmD4Ajmw7DkmVpjdV8ELEUHk91OfqoLg9NYNJJJlBQhYjB
- njMf9B9LCpxr6xWY8sRL9YXe7CnnathuY7BBVXNZrWaK7yg3d84YCBVzsNeQs+zWcchz9giA1f+VI
- eD2VLbtj6ZuVAFs0utE5U+aeGdni7X2p3Ono4N4FrjCrhmQ5hdwr/HC1F4R7jdpu58Bw3nlOB3f/p
- 6qri5rdBvNuKE43Ap+ayXciLPzgNSUDj1lcOHoBDK7YFelTQtgX61XnnGTHw83CZljjyE1u7vghO6
- vGpPceGzQ3qxINcAQk7D8mmz;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=2xfUBeY98HfnlZkS+3lVnJNCTrLd0p5QahTmq0k6Mig=; b=rBSpNjRUfxHHwMtY+B4A4h0AuC
+ hXfQ2X+roM/jykvyp1HCU259JtxTeGFbBs5q5UwNjY366FgeGGSuA4oT6DrYLJjTT/8OuXkNfsJPA
+ bLe9jGcPtonvkyIgffxi2Kr/mYBIJVd95hy7Yc7w9hxiTmhz/2S8T4fHIUvnhYx4xdtft61FSGy/g
+ HPkn2+bl/ME4oW6Y08SS17rhLaOYqPR+c8r/QlU6qvJHO7OAHS9LkCln4mTn3NeqELIGELxpbZQzk
+ RnM6Tf2Xv/G7jRm/ilqevdmeHl39QELGy8hZZEiuW9YSSCfyAl4wH5fwMgPANUaQAUndqgdRzrpYA
+ RDdzT4RBmEqFRCcGn+LcauRZcvdQnFvPXcQD6N5gMmFa3bCVZdt/mH5k+pO34tFD7U23+BDjrPoza
+ bf0EWAfLfw1eX+3SFEzs0eyWVRXsoIdCp6XqSPrlIoEfFgqwLQOeo6OHzjbc7ayBrvY0i8MMJ4Lay
+ skjmz6TEgj6WbRzSLMZO+QwX;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lazqL-0006le-IH
- for samba-technical@lists.samba.org; Mon, 26 Apr 2021 11:56:01 +0000
+ (Exim) id 1lazvF-0006oh-4H; Mon, 26 Apr 2021 12:01:05 +0000
+Date: Mon, 26 Apr 2021 14:00:50 +0200
+To: Jason Long via samba-technical <samba-technical@lists.samba.org>
 Subject: Re: vfs_snapper is enabled but prerequisite dbus-1 package not found.
-To: samba-technical@lists.samba.org
+Message-ID: <20210426140050.26e7bcfd@samba.org>
+In-Reply-To: <1398593433.332041.1619436765261@mail.yahoo.com>
 References: <1398593433.332041.1619436765261.ref@mail.yahoo.com>
  <1398593433.332041.1619436765261@mail.yahoo.com>
-Message-ID: <6b1fcffd-ea8a-7ffe-62eb-46e493adcfd4@samba.org>
-Date: Mon, 26 Apr 2021 12:56:01 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.0
 MIME-Version: 1.0
-In-Reply-To: <1398593433.332041.1619436765261@mail.yahoo.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,37 +55,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
+Cc: Jason Long <hack3rcon@yahoo.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 26/04/2021 12:32, Jason Long via samba-technical wrote:
+Hi Jason,
+
+On Mon, 26 Apr 2021 11:32:45 +0000 (UTC), Jason Long via samba-technical wr=
+ote:
+
 > Hello,
-> I want to install the last version of Samba as a DC on Fedora Server. I did "./configure" and got below error:
->
-> vfs_snapper is enabled but prerequisite dbus-1 package not found. Use --with-shared-modules='!vfs_snapper' to disable vfs_snapper support.
->
-> I checked the dbus package and it installed already:
->
+> I want to install the last version of Samba as a DC on Fedora Server. I d=
+id "./configure" and got below error:
+>=20
+> vfs_snapper is enabled but prerequisite dbus-1 package not found. Use --w=
+ith-shared-modules=3D'!vfs_snapper' to disable vfs_snapper support.
+>=20
+> I checked the=C2=A0dbus package and it installed already:
+>=20
 > # yum install dbus
-> Last metadata expiration check: 0:12:35 ago on Mon 26 Apr 2021 03:43:20 PM +0430.
+> Last metadata expiration check: 0:12:35 ago on Mon 26 Apr 2021 03:43:20 P=
+M +0430.
 > Package dbus-1:1.12.20-2.fc33.x86_64 is already installed.
 > Dependencies resolved.
 > Nothing to do.
-> Complete!
->
-> How to solve this error?
->
-> Thank you.
->
 
-You need to install the devel package: dbus-devel
+When building with vfs_snapper enabled, Samba requires the development
+header files. They should be present on Fedora in a dbus-1-devel or
+dbus-devel package.
 
-See here for a full list of required packages: 
-https://wiki.samba.org/index.php/Package_Dependencies_Required_to_Build_Samba
-
-Rowland
-
-
+Cheers, David
 
