@@ -2,47 +2,37 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66BFE36C3EF
-	for <lists+samba-technical@lfdr.de>; Tue, 27 Apr 2021 12:31:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D58836C69F
+	for <lists+samba-technical@lfdr.de>; Tue, 27 Apr 2021 15:01:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=vRo/Vz9GQ4NBBk/9Th4+Y02zmfDl56VsFFyNNuKnvTo=; b=ULIwR3piLnfPKTNbbqy8OQGTax
-	h/S2FNCQThc3g+d3+Q84/lNgroK+FCGPmw19KhUDstyAoWw0yTe6tGWhbmOOJvnyA52DEhhrLevXt
-	xuV8iZ9fTGuXhukjgRO4LRiD3JBCv6KM62p2cSOqEaKlnrb7WJdQS9i6gkjFAIxLy6cLD4B24CXoM
-	Yxn3xEAd52ewklYm8HPCb131OO8ZfHi63uaSF8nFTt8y2u50pxH1usWPvf96/Pxs4iE6habur/qsr
-	3wlBCJxm6VkAlmxx8I4KuiKu/ShAtAZ7K2hyxoHS5gXwWf2kqLT+V60wQ3fBeTzpc7A5AudVryOpR
-	P9MEhuyg==;
-Received: from ip6-localhost ([::1]:44512 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=0W3Y9xRQwzRXkJmDZLo1t/AE4O42O96GTu4u27QU5uw=; b=3v+1ymZ4Mq/OL33rNfIhRaTuq/
+	HSQItX7b9w/RzlWqmVqbFl4cSl6Ta+bStZRv0gjuzT0al5FMSZCzXtO8HPeEzmHioC8hjj4nwsaWC
+	zzgUmPmgdTovZTBUc20CStkRFIXmtlQhpXBE55ReUaEwsBK5P9TGGOZFVuKkFD4f1zp4M36poHBAv
+	y4ntJVu0txP1oNNzV29OeOLA1gZoMq81VHzdgV1MNa/d+N6X60uT26EsX6dH4NmZGVJCWhBQrL9fj
+	ZDY7BK2pwm4sWZv0aqD0yq17CIIktvOqSrZPRlnOy41sVQ+7R/MLolWLxCMOJZHB+DLTZPjb8PaA/
+	dxms8+8w==;
+Received: from ip6-localhost ([::1]:21250 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lbL0I-00CbnD-O0; Tue, 27 Apr 2021 10:31:42 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39570) 
+	id 1lbNL3-00CfUn-Ro; Tue, 27 Apr 2021 13:01:17 +0000
+Received: from milliways.cryptomilk.org ([2a01:4f8:201:2294::2]:55132) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lbL07-00Cbcu-2m
- for samba-technical@lists.samba.org; Tue, 27 Apr 2021 10:31:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=vRo/Vz9GQ4NBBk/9Th4+Y02zmfDl56VsFFyNNuKnvTo=; b=RBGVwWkeHLiluNImGLUMGMnaWi
- 8mJ//mN1MssqI3YEgaQE2/4OU4uch5JBVC/zIdvuOCFaoTQE7SyMK2okLuG3WGroEO0k1yYTn51f4
- /EO/Kxl795jMKsSw1ToRCSLnrs+l0aslvnp9eQ4DQreE/9BuYtEkZaTdBeGSnNF+fKmN/3vxZj379
- mWKi4bmNxGk5VQVKlQYqhnP2SNm9wb9bS3btHB5U7Cpad0hJwru2kSAnOH+U14ZEW4QVbjGovOm8z
- fu7q6Z0C1j93TmxdAl1Bji/77HJHvzsA0nbLEFbPBemZ7S5nDC9GDoXxSaLsTWDANpKq7I/qNYYVR
- xmSdba5Nw3NnOaPsSylto460pPlZUku5bmgVDBSHjdopaj/jAsNJh0biotHoJDC9NtZsU95B2jgV2
- gaQy/hdvVjT4boaW/rdJ2LiCF+ohCoJTf0j+mEOBvO5BbVFG8yZe6MPM/yMobucKZl3GX+FQ0fybW
- YA+9PM0gMKYF6NB1d+DkdQvq;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lbKzr-0001kH-Kl; Tue, 27 Apr 2021 10:31:16 +0000
-Message-ID: <30ab21963ccb18678de20e7814e97e8e4b13f3f3.camel@samba.org>
-Subject: Kerberos raw prototol testing
-To: Stefan Metzmacher <metze@samba.org>
-Date: Tue, 27 Apr 2021 22:31:11 +1200
-In-Reply-To: <a377c5a5-225e-9fc4-a70a-c52145732121@samba.org>
-References: <3663e2d45ad7855b807286d4d45bba7ef450d9a3.camel@samba.org>
- <a377c5a5-225e-9fc4-a70a-c52145732121@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.4-0ubuntu1 
+ (Exim) id 1lbNKz-00CfSz-Ab
+ for samba-technical@lists.samba.org; Tue, 27 Apr 2021 13:01:15 +0000
+Received: from milliways.cryptomilk.org (localhost [127.0.0.1])
+ by milliways.cryptomilk.org (Postfix) with ESMTPS id 549344621A82;
+ Tue, 27 Apr 2021 15:00:42 +0200 (CEST)
+Received: from magrathea.localnet (unknown
+ [IPv6:2001:a62:1487:3d01:5f13:bf6c:2942:bf8f])
+ by milliways.cryptomilk.org (Postfix) with ESMTPSA id 187B04621A81;
+ Tue, 27 Apr 2021 15:00:42 +0200 (CEST)
+To: kseeger@samba.org
+Subject: WHATSNEW: Document removal of NIS support
+Date: Tue, 27 Apr 2021 15:00:41 +0200
+Message-ID: <1909015.IJMpmFZxnm@magrathea>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="nextPart2863314.xGLI9C2SW2"
+Content-Transfer-Encoding: 7Bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,70 +46,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- gary@samba.org
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@cryptomilk.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2021-04-27 at 08:31 +0200, Stefan Metzmacher wrote:
-> Hi Andrew,
+This is a multi-part message in MIME format.
 
-(brining this bit back to samba-technical)
+--nextPart2863314.xGLI9C2SW2
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-> Please be aware of the WIP merge request:
-> https://gitlab.com/samba-team/samba/-/merge_requests/1896
-> 
-> python/samba/tests/krb5/as_req_tests.py is the relevant part
-> as well as the get_*_creds() helpers in
-> python/samba/tests/krb5/raw_testcase.py,
-> there _generic_kdc_exchange() and the _test_as_exchange() helpers
-> make it easy to also check the encrypted parts of the exchange.
-> 
-> _test_as_req_enc_timestamp() demonstrates a simple password based
-> authentication and checks almost every field in the response (also
-> in the encrypted parts and cross checks encrypted and plain fields)
-> checking the PAC including the signatures shouldn't be that complex.
-> Also extending it to do FAST and regenerate the same packets as
-> seen in the windows to windows captures.
+Hi Karolin,
 
-Thanks so much for the pointers and the code.  
+attached is a WHATSNEW.txt change to document the removal of NIS support.
 
-Thanks for keeping this tree recently rebased, but how do we go from
-here?  
 
-Should we just learn from the concepts and implement the narrow case at
-hand (FAST testing) and you will integrate it later, or is there a
-better way?  How can I/we use your code?
+Cheers
 
-I'm sorry to say that despite having worked with you for something like
-two decades, I still don't know how to practically and respectfully
-work with your WIP branches.
 
-To date I've generally focussed on picking out and merging the few
-patches with a full signed-off-by on them and (say with the Heimdal
-trees) trying to keep some of the rebasing current, but otherwise I'm
-very lost.
-
-There is clearly a lot of effort and value in between all the 'sq',
-'fixup' and reverts, but I don't know how to sift that gold out
-properly and refine it into an 'upstream' state.
-
-So, rather than wonder another decade, can I get the quick 'working
-with a metze WIP branch' HOWTO?  (I need this for the Heimdal upgrade
-branch as well).
-
-Thanks!
-
-Andrew Bartlett
+	Andreas
 
 -- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+Andreas Schneider                 asn@cryptomilk.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+--nextPart2863314.xGLI9C2SW2
+Content-Disposition: attachment; filename="0001-WHATSNEW-Document-removal-of-NIS-support.patch"
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/x-patch; charset="UTF-8"; name="0001-WHATSNEW-Document-removal-of-NIS-support.patch"
 
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
+From 8a0e412d7ca85f2d18b567e46595a27db03d65f2 Mon Sep 17 00:00:00 2001
+From: Andreas Schneider <asn@samba.org>
+Date: Tue, 27 Apr 2021 14:58:20 +0200
+Subject: [PATCH] WHATSNEW: Document removal of NIS support
+
+Signed-off-by: Andreas Schneider <asn@samba.org>
+---
+ WHATSNEW.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/WHATSNEW.txt b/WHATSNEW.txt
+index 4154e0849f2..013f5b6eb35 100644
+--- a/WHATSNEW.txt
++++ b/WHATSNEW.txt
+@@ -46,6 +46,9 @@ REMOVED FEATURES
+ Tru64 ACL support has been removed from this release. The last
+ supported release of Tru64 UNIX was in 2012.
+ 
++NIS support has been removed from this release. This is not
++available in Linux distributions anymore.
++
+ 
+ smb.conf changes
+ ================
+-- 
+2.31.1
+
+
+--nextPart2863314.xGLI9C2SW2--
+
+
 
 
