@@ -2,132 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 401F236C1CA
-	for <lists+samba-technical@lfdr.de>; Tue, 27 Apr 2021 11:34:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 66BFE36C3EF
+	for <lists+samba-technical@lfdr.de>; Tue, 27 Apr 2021 12:31:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=M4UnmWeqs6LPHo5pugfPEktB2o2ztGSuOLXzS/loqWo=; b=HS0HbkQ7YJq/uSdOQWPde2Iqgs
-	mJV8i6ELtIZza8sN51AOJdIU87BUiLDm/ntEjh+EuIK79vJajXclQrJds/ZQ+Y8idb3QYMhGXznWQ
-	Kkf9lYnY3oPeFhXTq7bHHpDmzf0Bd1dXlk3OIaz6TKxlyTJRP0Sbpy855r187vqbN2iB4khfnni3Q
-	kWHFiBZmCOF5fzb3qxAfsW6/TAue9GZglDBbSOE5ZeiyZFgeo/EWsl7LYtZnyI9ERxmq2XNxoN1rI
-	s5R2J/Db+1PCFWoHX+xk+j+VwGxl0iJtoV0R6ZAvUKb70isb6kdoKEmAZc5dfAPsuXczBntxHbY+u
-	5707cC8Q==;
-Received: from ip6-localhost ([::1]:37954 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=vRo/Vz9GQ4NBBk/9Th4+Y02zmfDl56VsFFyNNuKnvTo=; b=ULIwR3piLnfPKTNbbqy8OQGTax
+	h/S2FNCQThc3g+d3+Q84/lNgroK+FCGPmw19KhUDstyAoWw0yTe6tGWhbmOOJvnyA52DEhhrLevXt
+	xuV8iZ9fTGuXhukjgRO4LRiD3JBCv6KM62p2cSOqEaKlnrb7WJdQS9i6gkjFAIxLy6cLD4B24CXoM
+	Yxn3xEAd52ewklYm8HPCb131OO8ZfHi63uaSF8nFTt8y2u50pxH1usWPvf96/Pxs4iE6habur/qsr
+	3wlBCJxm6VkAlmxx8I4KuiKu/ShAtAZ7K2hyxoHS5gXwWf2kqLT+V60wQ3fBeTzpc7A5AudVryOpR
+	P9MEhuyg==;
+Received: from ip6-localhost ([::1]:44512 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lbK5Q-00Caop-Pm; Tue, 27 Apr 2021 09:32:56 +0000
-Received: from de-smtp-delivery-102.mimecast.com ([62.140.7.102]:21636) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1lbK5F-00Caoi-Ev
- for samba-technical@lists.samba.org; Tue, 27 Apr 2021 09:32:53 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
- s=mimecast20200619; t=1619515950;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=M4UnmWeqs6LPHo5pugfPEktB2o2ztGSuOLXzS/loqWo=;
- b=PMz/rO+ulTahGSNpVj55z8GzCJwPWOXPROVwPVJrLuprdjqpc5D+wDW4sHXiIOeY3aBmnL
- 5L+fLxF/9R/TgnvsbqZNtb6vCnnxTso7LFNIDJUd3S9TkgROQrCqXmkyQ3yN+j4K9UHaUk
- fLRH1DBNUcTNg6gXz+y3U57giijZVig=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
- s=mimecast20200619; t=1619515950;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=M4UnmWeqs6LPHo5pugfPEktB2o2ztGSuOLXzS/loqWo=;
- b=PMz/rO+ulTahGSNpVj55z8GzCJwPWOXPROVwPVJrLuprdjqpc5D+wDW4sHXiIOeY3aBmnL
- 5L+fLxF/9R/TgnvsbqZNtb6vCnnxTso7LFNIDJUd3S9TkgROQrCqXmkyQ3yN+j4K9UHaUk
- fLRH1DBNUcTNg6gXz+y3U57giijZVig=
-Received: from EUR03-AM5-obe.outbound.protection.outlook.com
- (mail-am5eur03lp2053.outbound.protection.outlook.com [104.47.8.53]) (Using
- TLS) by relay.mimecast.com with ESMTP id
- de-mta-38-NuqGPDf6MMiNcGa3Qk4v9Q-1; Tue, 27 Apr 2021 11:32:28 +0200
-X-MC-Unique: NuqGPDf6MMiNcGa3Qk4v9Q-1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=QyQP1VABB60ke0+RRPRkh2yRQY/posbEOJlJfG6U7SVQpf2Gbv7pz+B4GSpnH7Xi2z4jlDmOBb3JzIiKVE1YKQRN1xgN8dpM9dj4PA/jJO1yEjCVCylY/v3pdF2RGkCfJB3FZtw1FkoLSwRXWnNnF2AGvpy2I5HUwPupbACPL/bp7TehtYNFp7J1bH5ZbU+q063osaG+kir8nHVFS8EHdAyayZf+Lwnik/FESnC8qWlc+KMzkIo9E362Mg4djuooW3CkS3mxo/2m3l3N50CPSxi7ZJhuRdAujO65Xe1BYl5TrrfEoHhn2HYHyc8vYT5uQ5dSF71q+89UHVUdleL3TA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=M4UnmWeqs6LPHo5pugfPEktB2o2ztGSuOLXzS/loqWo=;
- b=j/8MzH1bHLKnSAVTuh2spblB/BGDJ79IM8EBrNjFE3R45IQ/Tp4cAUop70gGMHY6yVfoCfeifdBn7m2JqtwaGf+LcCbFR0lXFjFKwFqoceakkcU2TvAhruc+xsCMoei6Raa8Bzh5geI5KYetcQ5TYRmC13F6PE6/R80hhkjVTebbPDvpfFVuI7CN+57g24u6XddaKWTm+vh7U2C3Cxee1IW5pMPrCGtX8app6dVkXmaohZQNueSK8PEyYkXqXMPFsd1BpxFjbnXPzNl2oIvJgMygJRCi1V7IB/LwuDlLGowlseYB93FRUgjAW2VnwWISFZ9uG9JRmDN1lCN+gdWhlQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Authentication-Results: gmail.com; dkim=none (message not signed)
- header.d=none;gmail.com; dmarc=none action=none header.from=suse.com;
-Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com (2603:10a6:803:3::28)
- by VI1PR04MB6927.eurprd04.prod.outlook.com (2603:10a6:803:139::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4042.24; Tue, 27 Apr
- 2021 09:32:28 +0000
-Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com
- ([fe80::3c87:7c9e:2597:4d94]) by VI1PR0402MB3359.eurprd04.prod.outlook.com
- ([fe80::3c87:7c9e:2597:4d94%5]) with mapi id 15.20.4065.025; Tue, 27 Apr 2021
- 09:32:27 +0000
-To: Dmitry Martyanov <dmitry.martyanov008@gmail.com>,
- samba-technical@lists.samba.org
-Subject: Re: SMB Multichannel for linux clients
-In-Reply-To: <CAG9bPH2WFAD8UWkF0YzjgjO3xhbQH57MWFxmSwkLxQ+kSM0vpA@mail.gmail.com>
-References: <CAG9bPH2WFAD8UWkF0YzjgjO3xhbQH57MWFxmSwkLxQ+kSM0vpA@mail.gmail.com>
-Date: Tue, 27 Apr 2021 11:32:25 +0200
-Message-ID: <87r1iwvzrq.fsf@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Originating-IP: [2003:fa:705:3855:41c0:bae2:e87d:86bf]
+	id 1lbL0I-00CbnD-O0; Tue, 27 Apr 2021 10:31:42 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39570) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lbL07-00Cbcu-2m
+ for samba-technical@lists.samba.org; Tue, 27 Apr 2021 10:31:38 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=vRo/Vz9GQ4NBBk/9Th4+Y02zmfDl56VsFFyNNuKnvTo=; b=RBGVwWkeHLiluNImGLUMGMnaWi
+ 8mJ//mN1MssqI3YEgaQE2/4OU4uch5JBVC/zIdvuOCFaoTQE7SyMK2okLuG3WGroEO0k1yYTn51f4
+ /EO/Kxl795jMKsSw1ToRCSLnrs+l0aslvnp9eQ4DQreE/9BuYtEkZaTdBeGSnNF+fKmN/3vxZj379
+ mWKi4bmNxGk5VQVKlQYqhnP2SNm9wb9bS3btHB5U7Cpad0hJwru2kSAnOH+U14ZEW4QVbjGovOm8z
+ fu7q6Z0C1j93TmxdAl1Bji/77HJHvzsA0nbLEFbPBemZ7S5nDC9GDoXxSaLsTWDANpKq7I/qNYYVR
+ xmSdba5Nw3NnOaPsSylto460pPlZUku5bmgVDBSHjdopaj/jAsNJh0biotHoJDC9NtZsU95B2jgV2
+ gaQy/hdvVjT4boaW/rdJ2LiCF+ohCoJTf0j+mEOBvO5BbVFG8yZe6MPM/yMobucKZl3GX+FQ0fybW
+ YA+9PM0gMKYF6NB1d+DkdQvq;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lbKzr-0001kH-Kl; Tue, 27 Apr 2021 10:31:16 +0000
+Message-ID: <30ab21963ccb18678de20e7814e97e8e4b13f3f3.camel@samba.org>
+Subject: Kerberos raw prototol testing
+To: Stefan Metzmacher <metze@samba.org>
+Date: Tue, 27 Apr 2021 22:31:11 +1200
+In-Reply-To: <a377c5a5-225e-9fc4-a70a-c52145732121@samba.org>
+References: <3663e2d45ad7855b807286d4d45bba7ef450d9a3.camel@samba.org>
+ <a377c5a5-225e-9fc4-a70a-c52145732121@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from localhost (2003:fa:705:3855:41c0:bae2:e87d:86bf) by
- ZR0P278CA0133.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:40::12) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4087.25 via Frontend Transport; Tue, 27 Apr 2021 09:32:27 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: c6995172-2d12-467d-630f-08d9095f5f70
-X-MS-TrafficTypeDiagnostic: VI1PR04MB6927:
-X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Message-Info: QI6BgODZxYZfUhc/4/m8lr3lknhvhqXZajvqUz28EGrrJPuraKFwy8zsKII0am5VJnk8QbQBbR6MLPLJ3XcF9eH1kIMnWJnLwnFLXbLAgY9vTZAZuuK/iVh/KtYjXQ/yg2iJLxaoy9I/FvBqVt2qUQjyJMwPPCzaGLAzE8BOzj+wVlhfMjR+vxOW5tjhedLP6b9IWezUzoo96bmIXiT+7iTcCQqkKK2AFxh8cgXl5K0OeZsGTYWpUBnFxJUlP9fhPwh4hFJkViD+J6Lr1wGfv5MDKLmRHuycmeO3FZlUiYQhsELM5YaljVujf2A0GpNJlMm/ARmqI359C7Fbwcw28ivQ0zeICkXA/uh/UU4HQeY9s6+70bB8Ha3SDYsdxFhDILM+5LYN/FJn3JuqXqqOupna+VC0ZmPQvewvkJna2sPkHlyVY7UdtqBpd53dH59ZH8UP5LvbG8EJP8Z3ZfCRWVjPveGEb1Ce/T41UnzF0uXBMH10iNb7HwiX1aZ+hn3bwvr4EYEcBVHeAuxuZMq5Uk+B3MuAY6mS3903rJp7CsEJNNfLb3T/kn+XXppLzLkKLD7R3r8RkgGacrxcrfGT5w==
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?Ui9HZERCc0lYTitCd1Z4Ym03em5iV2dLN3hWYkNKTTV5UWF2QURoNjhkRmZX?=
- =?utf-8?B?OEgxbUIxRnZxY3VmQTg5bzlIWjJGSlJVNi95bmNWUm5FQWVXTXVqSFJieXZB?=
- =?utf-8?B?bVY5b3ZKNENzSExMVzU5MGlUSUd6aHBhRjhDZnhsRnlUUWV3R1d3dDA2VkhZ?=
- =?utf-8?B?aEFyZWtDd1RTdzZEckdaMGF5MFFnK0xOTW9XZnI5cHh6WVNqdlMxN2xneHFQ?=
- =?utf-8?B?RWI1ckw2T2Njd0hEK05XRVloN3ZWbTNBUUJzSTNUVFFqNnlkenZIMUZCcVNj?=
- =?utf-8?B?M0s0bkdHOW1RL0FjVDR1OUVVNzZWUVhYcWcvK3gyWGNpZmJvc0I5eFNyZ0Q1?=
- =?utf-8?B?VGJUZTF6SHZVNDJuSVlLbGFHOFhpemoxTG9TaVhqUGF0N1MrUWc5L1hzV3Rj?=
- =?utf-8?B?c2lCM0gxMERJajlEdHV5RlRhVGE2M1lWNEVFaXoxUnZEYmM5K2dla0IzUk43?=
- =?utf-8?B?eko2dHgwejlmUGloTzlvREozRmpQRWtTcmlvY0M2NVZ3b010UzZ4cDBkajJw?=
- =?utf-8?B?N0lvc095OStjTlhyWkVQV1k2ZUVoY0lGN2trN1h3azhVUDZvc3FTR3JTVkVZ?=
- =?utf-8?B?emovY1VlSlJKTC9oTERsUTQrMkZQYzBobVRGWk1TWEtOZ09oQnRQWGhOcXdG?=
- =?utf-8?B?ZlVOQzZneWNIdEEvbXB2ZVRtK210U0lkR1o2YTJSbjFXcWo3bUp6eVhxU3I0?=
- =?utf-8?B?YnFpb1lzRWxnTS92TmE5c3crVzVHOWVrUWFjdm5Gb0NtOVo5Q0VKTTJuaXRa?=
- =?utf-8?B?N3N5TDk1L3pIZTRoeE0yMUlmOWlzcWxGb0plcC84Z0RoZUlERGZhTU9BSjZT?=
- =?utf-8?B?V0txWkh6Vi9LK1c3aG40UytSZlV5Q2g4bWwrS2haWUZ4ZXV4NjdYaVBua2lT?=
- =?utf-8?B?QzJQS2tFV2FyYnlhLzd3YU0yamdPMi81dkdTa2lzVXRwaEgrKzBpaHVjdm5D?=
- =?utf-8?B?S2tqUXFQL2dQbXBKNEpZL0tFcHVYZTFuY0NNSjRvMytGR2pYK0ZaOGs5RFNS?=
- =?utf-8?B?bk84MGZOamZ1K2ZqWXFiS2RoYzlVWU5xazJGNytaTlhUcGlDOFl2T21iTTNH?=
- =?utf-8?B?cWVPakRLQ2ErN3pZc3VRWjRXR0tiV0M1VlZHSGcranlmYjRNSTFYZE8yV3Fr?=
- =?utf-8?B?bS9mbVJ4d1ZIemx5eXAvYU9nSFpQdGc0Zmk0ZjVHL3FUZllKdDRnaUZGZ21v?=
- =?utf-8?B?WS9iajZVaXFnL0pzT3lYUUtwSXJCZ3l0QnFTOFJmdDM0cWJKekNOUUtieGhE?=
- =?utf-8?B?T1RPb1FPOFYrOWdkK2U4aTZDbXMxd3VqNUdzZk1nakoxQXliV004MzZKK0xi?=
- =?utf-8?B?eFVZc0l3RFJMWm9SSHB5cDhteEtpVGxBcTNWMVNWVEw3RzBMM1p1c3VTakFk?=
- =?utf-8?B?UVEzTnAwREZGWStNdXhVOFdLaDB4TUVibCtyeDNiNnlPNTFqcDNRcTdIZ0Rz?=
- =?utf-8?B?QldQNFNzVHVKQUtBMFZQYkVTNU5ZbTg3MTVHcjRWN2FaQTB4QStGY2I4b2Ft?=
- =?utf-8?B?SkRIYlYzc1N5U0NCcit0UnNnWWZDOGlld1o3M0d3U1luZ0Q0elpPOEg5UFBE?=
- =?utf-8?B?U241TmFLK0ZHd2dsUkdTVE1mMVFQcmJiK0svRFFFbWVhYS94OVFMeWJRU21s?=
- =?utf-8?B?QTVQd24rOFczZVZTSmJpOFY2KytLMjNNRVp6TWM1Mi81MW91Y0ZhdlRQNEli?=
- =?utf-8?B?M1Qwa1FzMUhkWStKdVNtZkhWRVBoMGJaWWpuQ1cwN2Q0TDRjMVgyWXNxbnQy?=
- =?utf-8?B?TDA1RzJHT3FTUVNROGpVbzkrRnlpV01valVTQUQ3bTd0WTR1MHRUWnRGdHNq?=
- =?utf-8?B?TDN2MjY1SFRvL0V1UEdnYVF1dkRWbkVaM1ZvYUhSVzNlZnR6UnIrWTdzVDEz?=
- =?utf-8?Q?e4rE7bw/R4hCp?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c6995172-2d12-467d-630f-08d9095f5f70
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR0402MB3359.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: n4IuPwOxcGuPHW6/SIchvsuqi8QCrJrnTOitfKwNHNANh3v02A9KHZoEkk7xCMvu
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB6927
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -141,31 +56,70 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ gary@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Dmitry Martyanov via samba-technical <samba-technical@lists.samba.org>
-writes:
-> But for linux clients smb multichannel doesn't work at all, the traffic
-> goes through only one NIC...
+On Tue, 2021-04-27 at 08:31 +0200, Stefan Metzmacher wrote:
+> Hi Andrew,
 
-If you are talking about the kernel client (share mounted with cifs.ko):
-for now you need to explicitely mount the share with -o
-multichannel,max_channels=3DN where N will be the number of channels you
-want to use. It is getting more stable but still somewhat experimental
-so you need a very recent kernel to test this. The main remaining issue
-is properly handling reconnection in cases of network problems.
+(brining this bit back to samba-technical)
 
-Cheers,
---=20
-Aur=C3=A9lien Aptel / SUSE Labs Samba Team
-GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
-SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, D=
-E
-GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
-nchen)
+> Please be aware of the WIP merge request:
+> https://gitlab.com/samba-team/samba/-/merge_requests/1896
+> 
+> python/samba/tests/krb5/as_req_tests.py is the relevant part
+> as well as the get_*_creds() helpers in
+> python/samba/tests/krb5/raw_testcase.py,
+> there _generic_kdc_exchange() and the _test_as_exchange() helpers
+> make it easy to also check the encrypted parts of the exchange.
+> 
+> _test_as_req_enc_timestamp() demonstrates a simple password based
+> authentication and checks almost every field in the response (also
+> in the encrypted parts and cross checks encrypted and plain fields)
+> checking the PAC including the signatures shouldn't be that complex.
+> Also extending it to do FAST and regenerate the same packets as
+> seen in the windows to windows captures.
+
+Thanks so much for the pointers and the code.  
+
+Thanks for keeping this tree recently rebased, but how do we go from
+here?  
+
+Should we just learn from the concepts and implement the narrow case at
+hand (FAST testing) and you will integrate it later, or is there a
+better way?  How can I/we use your code?
+
+I'm sorry to say that despite having worked with you for something like
+two decades, I still don't know how to practically and respectfully
+work with your WIP branches.
+
+To date I've generally focussed on picking out and merging the few
+patches with a full signed-off-by on them and (say with the Heimdal
+trees) trying to keep some of the rebasing current, but otherwise I'm
+very lost.
+
+There is clearly a lot of effort and value in between all the 'sq',
+'fixup' and reverts, but I don't know how to sift that gold out
+properly and refine it into an 'upstream' state.
+
+So, rather than wonder another decade, can I get the quick 'working
+with a metze WIP branch' HOWTO?  (I need this for the Heimdal upgrade
+branch as well).
+
+Thanks!
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
 
 
