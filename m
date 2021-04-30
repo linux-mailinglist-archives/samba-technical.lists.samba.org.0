@@ -2,47 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B81636FC79
-	for <lists+samba-technical@lfdr.de>; Fri, 30 Apr 2021 16:31:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE4CD36FEBA
+	for <lists+samba-technical@lfdr.de>; Fri, 30 Apr 2021 18:38:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=hvuhAM/bdYZS6GNZq6fLTadEZ7Lmr6CplT/DTB3ifgQ=; b=OSKEjL6MBIB+nXrinbCYwH4k/C
-	xjytx0WQUn7pR9gheIZmwxQwL764RFRb3Fwd8zUIY6JHkBZTz2T5T3k/KdvoaRHH5gj2wCmQpC0Hv
-	sgrc8C9zKQ3Zg1t3qvQgAEP/8zhkPjIJeh7sYQnqslmf9hU142y9HulpllE0yKI9+J6iVM71wlzty
-	w3yJoQZuIcfyOPMjm/a66wQFCkX+9iMA8qv5V5EGv4FUr13fnIUmV9o1nbKE88S0HX0RMnQm5A3Tv
-	YQoozmW1HusG/jVBMx37Lbi5es98Y11HanxVccz+tmj1rgZY1hPecF7QnpcmD/xA1NzruOuJH4FOI
-	2hFksmZw==;
-Received: from ip6-localhost ([::1]:45990 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=fie1xUZXyefMfkYQAB185M0Vvvjsdd/DCpvDtmX0Skk=; b=INVm4qTeT7F/RIEztxjLCb9S0n
+	t1Pt33cFBz68jnTRUswMd1Mr7iVIyOw/1UpX6sePA0cBIov2VCRoixl4TOG8H0T6f2Tc6YEGh4Jmw
+	KV+Hk/nk1a1z2Mp3k1uQ0lFoNwGLicoXmiLFOSGvQejo17aE0yu6LExa53CLBJAnDQ+ruwwSgmx3L
+	o1imtsDIibWTEhBuhSU/OV4DT4/aF5tJY/G8Zc4C2B7uLrSNkk+d8d+rqQJKIPgpdeVfbu82BwQ/w
+	Zh4mpo76NoWRZicQgCRd4JPEdNHka28PqcRSXRrem7Ex5BvMQTWPFtkf3nzBmyiuYEPXAhStPI4JS
+	9rIdBHrQ==;
+Received: from ip6-localhost ([::1]:46790 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lcUAl-00DJRC-9v; Fri, 30 Apr 2021 14:31:15 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58698) 
+	id 1lcW8f-00DJiP-2N; Fri, 30 Apr 2021 16:37:13 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49898) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lcUAg-00DJR5-L7
- for samba-technical@lists.samba.org; Fri, 30 Apr 2021 14:31:12 +0000
+ (Exim) id 1lcW8Z-00DJiI-TS
+ for samba-technical@lists.samba.org; Fri, 30 Apr 2021 16:37:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=hvuhAM/bdYZS6GNZq6fLTadEZ7Lmr6CplT/DTB3ifgQ=; b=F9LBZcu7o/qIokbnd3p7Ziwhzb
- 6HAlSqKgRhdCf6LJCNkYI0ADRXIGqkbP4zPp0ocnBow2DTobfJkRRSA95Ci94Aal7WMk8T7AyyE4Q
- pv62GNJYfaWWJBcDysh+xqjUsX+CcDLOO/7y40BK0IXBmuW3WxnfBBcwGO/iEV6C39blmTlizbJ0z
- sTFrlhsJiNmKEI2QTunsG3ae+KK2rYY2UUlm9hSeHl5kqiElEDEojwRues1rYbK2Yh2N46UnrU3VH
- 7lXpTI8Y/RDP+i9/4bWQIuEj5zA0VO6yeYVRyr5kRIPTaBJayf7fuGBMS+GndhrgO4aOSm3+opEcQ
- Oc1+YwB086xncA5ywUYC/IfV0/3+aqRZMCB+pf7epyfdP5PkZV3wynpeoCQOiKGohqIMEZwrU5AWk
- h5KJsjaYnKqxeZYNpMPvlGFfQWDpNhDhg3VZ4FWkgmxu6VE7Bi5hWjHMJmJYu86yEE/jkQI19LUR6
- A4sOqEZCJd+AE0BHKrxnF/hk;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=fie1xUZXyefMfkYQAB185M0Vvvjsdd/DCpvDtmX0Skk=; b=FdKoLj4C4gkgcsthDNi6MZa4iG
+ kfB3oUnrOoXrDDf2Wy/km16bH5EMFyp+7krVFASqjgOOx1nhCu9LCVeSJBxx0P89SbQMTYb/G3mw+
+ 05gqc2Hufv2PHHwEmg6cRjfxa1tUkIhWtlPRYeghNwbsrDY5M1yEm6mNy/sQfCrT3Xge6yyAon7nA
+ cpgDWcvIxh+59RGoPniWsjAk/yW/kZDGZxm/vAnvKBBM7mxXYCIuJJbbVI9/Fkrhb2dseaoPDZH4k
+ 0haxMk4z/vtQRN0JvjiRWXzwqvffS+F1fqCWxozSxYH6FVF12sO01xhdVjLp0ZNt8FcV3iuRfR0FV
+ sB2tGfhcyVXwdzLuu34Me3YH+wS0YQDFRSnnySWU659DVHACwlXIox1dVSPIUM4RSuIJCLlhvfOiP
+ GqIQwV2UtXpA21h7h5MRuaarh0VFabzTyvQFhVJ6h+1tM7okBrnon+WKFQgaFynkBQYdStjcBqR6c
+ CAGeZSRfwMEBZ2PXoYjkrZ67;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lcUAd-0002Fz-UW; Fri, 30 Apr 2021 14:31:07 +0000
-To: samba-technical@lists.samba.org
-Subject: Re: Fallback to NTLMSSP allowed if KDC is not reachable?
-Date: Fri, 30 Apr 2021 16:31:06 +0200
-Message-ID: <7127506.Ry5G1WW9Aa@magrathea>
-In-Reply-To: <CAHbM3qgUBhz0_UqVVHkAU3Q7RnmktCMK1WhW-qJo0fahoL40dg@mail.gmail.com>
-References: <CAHbM3qj_N3XKNC0q3nfmkqjDsGis+rRd8eSRUjs2LWYrUNZZyg@mail.gmail.com>
- <17822891.NNXsROtQf7@magrathea>
- <CAHbM3qgUBhz0_UqVVHkAU3Q7RnmktCMK1WhW-qJo0fahoL40dg@mail.gmail.com>
+ (Exim) id 1lcW8Y-0003Xa-Es; Fri, 30 Apr 2021 16:37:07 +0000
+Date: Fri, 30 Apr 2021 09:37:02 -0700
+To: Igor Chudov <nir@basealt.ru>
+Subject: Re: Ubuntu's ADSys
+Message-ID: <20210430163702.GA977373@jeremy-acer>
+References: <YIaZmO3WleOfenUn@pinega.vda.li>
+ <vmime.608ab327.345.7841bc1123a20017@ms249-lin-003.rotterdam.bazuin.nl>
+ <1d705810-cb2b-4012-6431-bf92cd5b213d@samba.org>
+ <RCZBSQ.RP64LWX1DB4B@suse.com> <YIrXaNVMOKnOCt+3@pinega.vda.li>
+ <aef2178b-28a4-baa0-1b54-8f4c7560fd4f@samba.org>
+ <6112d37d-e7f8-e3fa-0c86-15800aa64cee@basealt.ru>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <6112d37d-e7f8-e3fa-0c86-15800aa64cee@basealt.ru>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,41 +59,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Shilpa K <shilpa.krishnareddy@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Friday, 30 April 2021 12:42:31 CEST Shilpa K via samba-technical wrote:
-> Hi Andreas,
-> 
-> Thanks for the response. I was using --user along with -k and provided the
-> password at the prompt. libnet_join_connect_dc_ipc() has fallback after
-> kerberos, but not ads_sasl_spnego_bind(). In the
-> routine ads_sasl_spnego_bind() which is called as part of domain join,
-> there is this check:
-> 
->                 /* only fallback to NTLMSSP if allowed */
->                 if (ADS_ERR_OK(status) ||
->                     !(ads->auth.flags & ADS_AUTH_ALLOW_NTLMSSP)) {
->                         goto done;
->                 }
-> 
-> It is checking only for the flag and not the password to fallback to
-> NTLMSSP. Is this expected?
+On Fri, Apr 30, 2021 at 01:07:55PM +0400, Igor Chudov via samba-technical wrote:
+>Hi!
+>
+>Our team is also working on client-side GUI tools for Samba domain: 
+>https://github.com/altlinux/admc . I'm working under David's 
+>supervision to implement source3 registry (Python) bindings for Samba 
+>( https://gitlab.com/NIR-Ginko/samba/-/merge_requests/1/diffs ) in 
+>order to merge https://github.com/altlinux/gpupdate/ with Samba.
+>
+>Any help is appreciated because I'm new to Samba codebase.
 
-I would suggest to open a bug report. We could look into a fix, once the 
-cmdline improvements are merged.
-
-
-	Andreas
-
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
+We will help as much as we can ! Just ask the questions you
+have and we'll see if we can answer them. Thanks for working
+on this, it is much appreciated.
 
