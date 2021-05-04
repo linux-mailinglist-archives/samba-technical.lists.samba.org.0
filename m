@@ -2,43 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F422E372D38
-	for <lists+samba-technical@lfdr.de>; Tue,  4 May 2021 17:44:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DAAA372D55
+	for <lists+samba-technical@lfdr.de>; Tue,  4 May 2021 17:53:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=uU/esxZREzwAkzTj/2SdFqTccJTvO4Zx7+OIkYLS5KA=; b=UnF3GnvhkCjYlzO3fpH71d1YLh
-	ZWEweJvFs2IFcTWvB4060CiOyL6kpyC/zKhR+8ot3SXMI0PO1f4ZD/LJhCD5uPODB1hxVnsHrmZYu
-	fSTatE7qsrnuC8wE5+g9V/fC7kAKiAh639SHVDYpeKLGe5BjV2rz2/wvlyJDumCbE0M+HFDk9FhVf
-	wZy4546kvy9AcJK4pk1tvs7P/4TgbJYvywU/OTDCcFrS/xvU0CGCmPNYzQpH9WQ8Yu4mX+V58hWSt
-	tk04MHmb5XvrzxbeYuFUEFYoApcgXHQ5xHnIpGtb74d6R9sObsUZvy2p3JCqEtnT+Y0Wx0iFt90EL
-	sZFU5lkw==;
-Received: from ip6-localhost ([::1]:57898 helo=hr1.samba.org) 
+	bh=ewBstqw6NLlcTGYUT49m9Da5k6scm8U8AZZ4CR6qjiY=; b=kk/uKQurjAsrfmXeojLQ3hk+hR
+	c+raoH3wdk8s4WVint3RLMGWEwl8NKYo8v1epF9FKog6Vdg7yBEaqbj61scoGkeg3kC4RLI7YfDpJ
+	X8wq2KhfgwMw/oyY4bNXrfhMYhAbcgasOf3nVnQoJPJpo06C3KLdT3Gie30UFed6w5udK0+e5IeBM
+	37F++EEBUls/C47GCmhNt7e3v3sli5W6fjBkW6/CfMVAfOmofPP7gFn64hbQ0p1XwiwWXmMkJ7uZ+
+	4yN5gXMChpxfZVwjUDsxfYnmomp1PTtgCeunF8OLM01wCWL9rKYvixvbAepBJKvgOls8umTbKpJtM
+	RlM9ZLRw==;
+Received: from ip6-localhost ([::1]:58584 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ldxDr-00FRVM-QA; Tue, 04 May 2021 15:44:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20778) 
+	id 1ldxM5-00FRbV-Qg; Tue, 04 May 2021 15:53:01 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24082) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ldxDm-00FRVF-A3
- for samba-technical@lists.samba.org; Tue, 04 May 2021 15:44:28 +0000
+ (Exim) id 1ldxM1-00FRbO-Fl
+ for samba-technical@lists.samba.org; Tue, 04 May 2021 15:52:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:To:From:Message-ID:CC;
- bh=uU/esxZREzwAkzTj/2SdFqTccJTvO4Zx7+OIkYLS5KA=; b=roEScRufxU3f9OT5gktlpJnluy
- 79Fk1Q9Ve+JHHD+XRgrCCoN09yf16JtMJjsg3ecSeOxV+iD68/s5ThjQGHvHOmSi+bho0Bp7ipmv6
- vgDJICET1tZBbCdDTY5JsAeJ8jyVqXU+7V8XLVbTgGYv1WQqAg1Hhpn7ZoUbYyjYLr70sWudFISqo
- D1GhVe9oQVnCqLbDp6NjZdrJCRvlCUL9mbTvfDLeeyp44lZRAPPkCv51LeSVKw10uh4ljGQp7mMvL
- PVCR129ifCMNo3q5ZT0dTiRLSytIZdt2TIcHORwnJDZZhTnlnD29atz+3/dJjTvWMpBXdDrGcZrmo
- GT2S1TLAiFvvWlSMKUacNXkYmN5eh94uDBdTk7IveASlTsuKZkfWigXyUVuTDj3A3nxsGhZS9axPD
- gmncRJmsoV13gdpXlWlKn6m8ke3MNMJb5WejeYCv+W5Uf97XhWG6kQKcfKRtAsG64rxQRWNRFFruj
- 171q82D0Z+ejJ+eG3cS6L8mU;
+ bh=ewBstqw6NLlcTGYUT49m9Da5k6scm8U8AZZ4CR6qjiY=; b=PKM+RKy2ruDR9uLAz/X3t9ehcb
+ YX/4Sa1jdEVwZSJIdhZXhyeKrYjqrp/Jm6Q8bjkJbaS1/ZhaUDb2XLoz7unf34kfH/eB0hAqnp2tH
+ qeX92U4XQgE3+6Ey8WuBGDYVoyTHQ/SJJdzbmwYVwsfy0IZFL5XaQuSVm4py1AGN+4QKGM3V/yDod
+ 0RdI8SEu492sVTH6q0Fc3x2gOsZfNmUw6T0BIpuI+oF3MGvo0nBQa3SJjoz3SUnpWaKtKhj9Aoo+l
+ jVvQu/N/YZgji4ELLXBza/30cDSxIGKyWwsnNhEcMeqWz6TAmA2moHehrD+0hc6MEgGHLQcKUJksd
+ OpLt+vbgG7OA35l1US7uay9tI0xcmMpojw0UINAhxkJTdGRtE70nEYSwl6FQIqcCeRdlrEQ0iPMa6
+ CEvTLqfvfH+rug118W1QRzKG7/+eKX25m6A4OFEAePb6JaDbMsJff8fIC0YnVzbbd/SQ05MfGzqkb
+ U3RH5nWzrn3N/E9UG67Ujliq;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ldxDk-0007Ed-9T; Tue, 04 May 2021 15:44:25 +0000
-Message-ID: <ab76b10f3f63cdf970843fb407cae78c8b88eeb3.camel@samba.org>
-Subject: Re: simple password sync method
+ (Exim) id 1ldxLz-0007Jf-Lc; Tue, 04 May 2021 15:52:56 +0000
+Message-ID: <975bee8d29597024b638826961aba1c1fd5a3500.camel@samba.org>
+Subject: domain\username requirements and 'map untrusted to domain'
 To: d tbsky <tbskyd@gmail.com>, Upstream Samba Technical Mailing list
  <samba-technical@lists.samba.org>
-Date: Wed, 05 May 2021 03:44:18 +1200
-In-Reply-To: <CAC6SzHJXOrFWYas9TT7EkE3AuiwXHEZtQaVsCHVg7DbhpeAbJQ@mail.gmail.com>
-References: <CAC6SzHJXOrFWYas9TT7EkE3AuiwXHEZtQaVsCHVg7DbhpeAbJQ@mail.gmail.com>
+Date: Wed, 05 May 2021 03:52:51 +1200
+In-Reply-To: <CAC6SzHKr+x2-1EZq_zXQDsrPpRaqwKmBLrsv6nMobSY2aa6kQA@mail.gmail.com>
+References: <aaf1bedfbba1dde583281c86eaff5f73d8008318.camel@samba.org>
+ <CAC6SzHKr+x2-1EZq_zXQDsrPpRaqwKmBLrsv6nMobSY2aa6kQA@mail.gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
@@ -61,34 +62,47 @@ Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2021-05-04 at 15:39 +0800, d tbsky via samba-technical wrote:
+On Tue, 2021-05-04 at 16:43 +0800, d tbsky via samba-technical wrote:
+> I am sorry but today a user ask me again why our samba service need
 > 
->     I wonder if the old simple method can co-exist with the current
+> "samdom\account" to access.
 > 
-> one. maybe just a config like "password sync script = xxxx" and let
+> that's issue https://bugzilla.samba.org/show_bug.cgi?id=13543. but of
 > 
-> samba trigger it when password change? although with clear password
+> course I told him that's Microsoft's fault.
 > 
-> you can sync it to new service at any time, but old simple method
+> it's interesting that many of our services are using ldap to
 > 
-> doesn't need any infrastructure change and doesn't need to store the
+> authenticate against samba DC, and all of them can use
 > 
-> private encryption key.
+> "account/password" to login.
+> 
+> only samba file server need "samdom\account" to login.
+> 
+> maybe new developer has some new magic thought which would solve it
+> in
+> 
+> a blink of an eye/finger...
 
-If you know the target password type (eg crypt()) then we can store
-some such passwords without the need for the GPG key, and run the sync
-from there.
+I don't think you understand the purpose of introducing a new
+developer, but regardless I would note that you are welcome to try the
+suggested change on the bug and report your success or otherwise there.
 
-eg set "password hash userPassword schemes = CryptSHA512"
+This may influence us in changing the behaviour here, but note that any
+such change would also need tests (to ensure it works and keeps
+working).  Your Samba commercial support provider may be able to assist
+if you are not confident writing those.
 
-We won't be adding the 'samba3' style password sync to the AD DC, due
-to locking requirements.  At the point where we can process a password
-sync, we have to lock the DB against all other changes, and it would
-risk service to all other users to start making calls at this point.
+The primary blocker is the cryptographic behaviour of NTLMv2, which
+means we can't change the domain on the domain member server, because
+the domain is part of the password hash calculation.
 
-Of course Samba remains Free Software and you may make whatever changes
-you desire for your private use, but this is our feeling regarding what
-we will allow upstream.
+Direct LDAP users do not suffer in this way because the plaintext
+password is communicated to the DC and most LDAP applications make
+assumptions about the username and convert into a DN (otherwise
+domain\user or user@REALM is required).
+
+I hope this assists,
 
 Andrew Bartlett
 
