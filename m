@@ -2,59 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F18D737277B
-	for <lists+samba-technical@lfdr.de>; Tue,  4 May 2021 10:44:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7D633727A6
+	for <lists+samba-technical@lfdr.de>; Tue,  4 May 2021 10:56:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Jq2eA7cGYisZq8JR2y6fDV/8apC4ujUQpYMtjQrRZIU=; b=ZVACkG1OC52DoQHaJsmRzIuRAz
-	f94KxPSwoPbJrjPqt+p88apAqHKOSSL4ZoLYIZ1aO3Nh4OjIAV7Qc2z8ZI2osrNAb8zGVVNT1dRsC
-	sskSW+uZm/mZ5qxqGe/7t60XJ/iRnb6cb8d3oXBH5gE3JQgq578o77xqJL0GwsPMyjphXT2bZSGQL
-	BjgwnT/BWZVTaB/mJiKNYPuWpp3xRx7EL3toU7V50IPlo3/SPDVqlnxEHSGOx02xkSvxyBPyGe6TF
-	XIUqGPOdWz4n8n7+z5G/an1PUpXCjQylczdJynpy77vFznUmwdeGaAdIo/oVR148uJAOL/z7XjjiG
-	vVKUOOYA==;
-Received: from ip6-localhost ([::1]:48632 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=QJ3EfiKo5XnubjB+By5tE34pJNes2TLgo1jEWfLlZFA=; b=qOxk/M+4UcvhJsEABTO0sIWm8I
+	J8CUyFXIxu2AgEgVOLSiKMHKv7tSquZvzZL7GcsNQCHe54ZRRnbvEa4je1ojCPJWWnOX7SxAhiguq
+	EsGu8BHnlOP9EPBS3mnkdNR5qoz8BD8EyQ0sKq0nBq4299rXKo74ZwztdTZe62Df+Vgfuka+F70sw
+	HPDntjyE6Js2H1mD3wc3lDIGyyoNc84N/awY+mmrn6QUAUXCnGu3mhZJxcM6xVREgLUbzzplTX4/c
+	ojltAco3ZV4LkL3ddyaHwSmwvBxQEjLnw2SqKjjy86GwvakkV5ZIhRsw4eaIfgI7KkpHCOhody/0G
+	ZxmLvviA==;
+Received: from ip6-localhost ([::1]:49338 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ldqek-00FPfW-IJ; Tue, 04 May 2021 08:43:50 +0000
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630]:41536) 
+	id 1ldqqD-00FPmC-Pl; Tue, 04 May 2021 08:55:41 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49674) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ldqef-00FPfP-Uq
- for samba-technical@lists.samba.org; Tue, 04 May 2021 08:43:48 +0000
-Received: by mail-ej1-x630.google.com with SMTP id zg3so11909029ejb.8
- for <samba-technical@lists.samba.org>; Tue, 04 May 2021 01:43:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Jq2eA7cGYisZq8JR2y6fDV/8apC4ujUQpYMtjQrRZIU=;
- b=YiQI901oe/8e4D8iZaVaVi/ZXU7gHbuZxf7jpu2O2kS7g4vogr4JkqQoG9+NVl4TKE
- izJfJX/OgaUOgI5s47EpE3s5IXFouThtg4vCVcZg67HBa2wr1qro3PZ8tOvXJenQ3pKa
- ReGvupGsrl7+OCschrW3pGCiNWKRv6H1RSi98sF9UDY4xvEt2f64hyNx/kyvTczn2OaH
- LL0AtNWIjOaq5QlTQHPxDhqXxMO1DKuR+r3Q6T1ycdLTnQSHUa6kaHoA7b1yQ+QYiJM6
- OpFYUJ07nObrL+WvxNMf2AN+4DIseCreWd98wi7jS9ztIApqyqXUCL3L1A9ZEmX4iRfc
- gGSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Jq2eA7cGYisZq8JR2y6fDV/8apC4ujUQpYMtjQrRZIU=;
- b=DWB91r5feSd9xZG9GIZjRcc+GI4mV+ntjw1nqb3WMothKx3H+EtFEBD4zdIFqn2ivS
- EQ2CuRUNOSh0FEQ1OYW7BwXq8gUIgMGHRW13rhTVTq541n6quRgg+yQFJyZWUD6KW9mk
- lzAIs/xlMz1Fuz/NmfDwqSHzJSALATXDuvPqT4xRipKdrXzB1eewJsi7+lQOszZsTlSu
- eemR4V4VnXifPEWrVpdXBuegzuPgHcM0nzzIaX5o4tWYcePYNAo54k5x8eGwdEOPVcS7
- a9Vwpt3PtN2mHfUWnA8pMlE9cIZ+gILgOuMzr5yuW5fdXUU0Pbpv8v/ACt/kdrAVWmnd
- uUgw==
-X-Gm-Message-State: AOAM532eCSXJMz53wGYd7KbOvdbNusa54x5XKl/ij/sK9/UYepFgGPe2
- Z3kO4Sot9aF4oxD7+XRKKO9CRclJGW0xSB3h3fR4Ic+cAZk9UQ==
-X-Google-Smtp-Source: ABdhPJwxDPcaJaRLRP2V//bME3uy4ae7GdkFGA5FDowpP/UXpapqerI0SEOWZ8KS9x5q1hhBWGEiibeXkj1s0tLpy8Y=
-X-Received: by 2002:a17:906:32d1:: with SMTP id
- k17mr20610014ejk.94.1620117825000; 
- Tue, 04 May 2021 01:43:45 -0700 (PDT)
+ (Exim) id 1ldqq8-00FPm5-7l
+ for samba-technical@lists.samba.org; Tue, 04 May 2021 08:55:38 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=QJ3EfiKo5XnubjB+By5tE34pJNes2TLgo1jEWfLlZFA=; b=v6YjGVzSmJQCgrsmzb9ZEQJqUK
+ qcECnKOMwaFe2v49Q79cf8NXNHiWkFxeEwVb1vDpbSDFwOMIolz9qHqcyiIaGAde27/P958WtzHs7
+ vy+dWbqhf06qe4Ukt4+wPQ4Pa0GSKLJ1hAB0SE6rQFr0ZRNzdTTEZX5FytHEsDB8ZrOitBCU01bjO
+ BJc4i7na5ufJ+UsdklyWtr36f3+fRL2RaMQZmaxhIBLaL1o4OTJCoaY77xO1j5NpG/dahG1UaXpct
+ 657up2a7QQDAreicsooEuQBxejI73vcv/JamzlNpzKTAdPUmCSpWodwmfUqGnngBne9UdUg2YSZ5W
+ CD74aW/crf542eajZ6uXpU5PUhV0ynIg1598YTv1+tVBZgdFzzmnaevo/y2J2OqeMXiKgHCnxVksO
+ T5O+Dfj6fiDqG35/ZRZGQGVRfWCio/TgLI29y775Pk3yrNoVFNwEZSbFyzNb/K/s0792RZzGkwP4L
+ 9kVe6OWJhhAX/KWZ0DEb8ZVJ;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ldqq6-0003oj-G5; Tue, 04 May 2021 08:55:34 +0000
+Subject: Re: entry in winbindd_cache.tdb gets overwritten if child domain
+ names in 2 different forests are same
+To: Shilpa K <shilpa.krishnareddy@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>
+References: <CAHbM3qgLd2RuVMo+nfnhCOB8Ocrf_9KzMyyzcHmvOU1fO1xKhw@mail.gmail.com>
+Message-ID: <69cb73e9-0423-4655-f2ca-d1b5eea87c86@samba.org>
+Date: Tue, 4 May 2021 10:55:29 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
 MIME-Version: 1.0
-References: <aaf1bedfbba1dde583281c86eaff5f73d8008318.camel@samba.org>
-In-Reply-To: <aaf1bedfbba1dde583281c86eaff5f73d8008318.camel@samba.org>
-Date: Tue, 4 May 2021 16:43:35 +0800
-Message-ID: <CAC6SzHKr+x2-1EZq_zXQDsrPpRaqwKmBLrsv6nMobSY2aa6kQA@mail.gmail.com>
-Subject: Re: New Samba Developer: Joseph Sutton
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <CAHbM3qgLd2RuVMo+nfnhCOB8Ocrf_9KzMyyzcHmvOU1fO1xKhw@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="fBcM8fCQJCjuOqhxRpOrltWvoMTxCYUHe"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,28 +59,74 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: d tbsky via samba-technical <samba-technical@lists.samba.org>
-Reply-To: d tbsky <tbskyd@gmail.com>
-Cc: Joseph Sutton <josephsutton@catalyst.net.nz>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-> I wanted to introduce Joseph Sutton, who a number of you will have
-> already noticed has been working in some Samba bugs around the AD DC so
-> far.
-> I'm not promising anything, but if you have a long-standing but small
-> issue you think would be a good introduction to Samba development
-> please let us know.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--fBcM8fCQJCjuOqhxRpOrltWvoMTxCYUHe
+Content-Type: multipart/mixed; boundary="mPU9qvlcEfc8TZRndPw9VmdujjV5el0AO";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Shilpa K <shilpa.krishnareddy@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>
+Message-ID: <69cb73e9-0423-4655-f2ca-d1b5eea87c86@samba.org>
+Subject: Re: entry in winbindd_cache.tdb gets overwritten if child domain
+ names in 2 different forests are same
+References: <CAHbM3qgLd2RuVMo+nfnhCOB8Ocrf_9KzMyyzcHmvOU1fO1xKhw@mail.gmail.com>
+In-Reply-To: <CAHbM3qgLd2RuVMo+nfnhCOB8Ocrf_9KzMyyzcHmvOU1fO1xKhw@mail.gmail.com>
 
-I am sorry but today a user ask me again why our samba service need
-"samdom\account" to access.
-that's issue https://bugzilla.samba.org/show_bug.cgi?id=13543. but of
-course I told him that's Microsoft's fault.
-it's interesting that many of our services are using ldap to
-authenticate against samba DC, and all of them can use
-"account/password" to login.
-only samba file server need "samdom\account" to login.
-maybe new developer has some new magic thought which would solve it in
-a blink of an eye/finger...
+--mPU9qvlcEfc8TZRndPw9VmdujjV5el0AO
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Hi Shilpa,
+
+> We had a setup where child domains in 2 different forests had the same
+> names. In this case, we noticed that the child domain name of one fores=
+t in
+> trusted domain cache  (TRUSTDOMCACHE/<domainname>) gets overwritten wit=
+h
+> the child domain name of another forest.
+>=20
+> Attached patch helped us. Could you please let me know if it is applica=
+ble
+> to master as well?
+
+Can you use "winbind scan trusted domains =3D no", that should avoid the =
+problem,
+it's planed to make that the default for 4.15.
+
+metze
+
+
+
+
+--mPU9qvlcEfc8TZRndPw9VmdujjV5el0AO--
+
+--fBcM8fCQJCjuOqhxRpOrltWvoMTxCYUHe
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAmCRDAEACgkQDbX1YShp
+vVZ7Rg//RSrsFiFgpxORcQd6+JeQLHN9ZzMZTsItXbIwoYWgj43VwVayqCFbg3Wx
+YOnygVzPIN3IU83Nk4mcpR4hr4o6OFh7pemhkePKoGe4BDfWkw5rXNHlXvAwkBU4
+XzSjxkSEsCfC03aCCi0Bx6wNgyRtUx6VhaH+4V/vj00dLu/3PGgruKlZJ0dB9OsV
+nuGlh+risJlIbgqBqer/tSx4jRAWYNpNkOBeNyDfbfyxrpZ9qWRTUcynnoPyfRVQ
+rmkKwma5hH5Ah/O2ovWGtoasH+mFDngxb1p76kxGK2SD/bY6zCDSfZg03kHMRI1B
+i6SZYIy1PWulBj7se/PNmwtbxFe+ts1nKFOzVGfXvjmkVuSsKbcukb2S13tvK4EF
+7xx6J645nCxIdzv2vjiSzg17XiabMqDark+XG5QEpTATJ3CDW+4qir2SbioHnWEt
+/uQ9YjZ25jxoMkic1bNxJ728MjRtxpckP35q/w+zzUyoJb48l4f8nBIw3xFEi0iW
+qSl+fi8VGhpQGwKSzmHdCoNzwAczdwsPV59YpB8m2Z7trut3rbaOU8rFyQk9v4MO
+SakIFhCSrOsowNXno29HiDF30hVIJPKEY5AtR+HqYsGQT/mpp0VjrEHivuiA09Ve
+OhUW6mjehFUdC2X/79DRkRrlU0Dwscyd9HV5plWUy2wcKD4y8ak=
+=z/bp
+-----END PGP SIGNATURE-----
+
+--fBcM8fCQJCjuOqhxRpOrltWvoMTxCYUHe--
 
