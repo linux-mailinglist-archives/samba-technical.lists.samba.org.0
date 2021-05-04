@@ -2,57 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75576372569
-	for <lists+samba-technical@lfdr.de>; Tue,  4 May 2021 07:20:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 206053726AF
+	for <lists+samba-technical@lfdr.de>; Tue,  4 May 2021 09:41:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=fvSjHBzDejWU7lHToNuemq4nNCt2YddMWt9HCBCioYA=; b=o4WbXzC3awlPwevbCKDpkDL6ik
-	RioLZLU5j0xXDPjv0dZMFSzpkT+45GuW0dJsPjnn0aYBnBBbChMr0FjXe7hbhM0LPCIk149sRCykp
-	ADGKdGj7kwKta036/9MBCV8Jyj0weXq4kIjz8pBAcEC3Vd3YGEaVr8xArn+Sv+Twlvm4b07jeAC3O
-	nBjtYQXARnmryTXat6yOYr/wkUAs4Q7O25aK2yNN9CaE41BngNhOW749wRgpXSt1LLc2LmPDUGU2f
-	/Qr8n/BcVd/ZsB08y+vkQEzKUBezBCBXVrYhud5miOeCOpVh3/oTjQV9AM+SDeyMn1Mr1ASsGCcJm
-	p1TQ8CEQ==;
-Received: from ip6-localhost ([::1]:42320 helo=hr1.samba.org) 
+	bh=XmCkwx2ecOOCtuq6u5FG6/kmgc1njgEdPDkq3uuy6kE=; b=Qdok2zF5NYOdpiDq3SCkKlrsHJ
+	zP3VGbC6JKd20dZLVwTN8KDYqtNvjlCrbtvb+BO5xl0OHmO3EcZY4KI2EKYQo/UCmClKjvyTwwP4L
+	Cn1Qov8yQ/3d3qOzxufDYmK27mhGPECDRRemcdZcqhy5uL6tXOcCKRkstt7Rr5x5w04Y6IcpFITOI
+	PEnER0oj1RZ114V1MGoH1BtZkvtr6OEvZHMueq5duq/5bjh47nfHhUyXuDofs0Ul0A5UI3XM5XOmb
+	AGqzo8Zje3YVcHKFPHLWKbvVJkZ8ahQbSsmkDf2cQcdxmzjkgDsjq3uF7JQ5QQoCT8pt+/gQG63Es
+	XC+CPMBw==;
+Received: from ip6-localhost ([::1]:43530 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ldnT2-00FORu-Io; Tue, 04 May 2021 05:19:32 +0000
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429]:34728) 
+	id 1ldpf8-00FOvB-HJ; Tue, 04 May 2021 07:40:10 +0000
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b]:33354) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ldnSw-00FORn-C9
- for samba-technical@lists.samba.org; Tue, 04 May 2021 05:19:28 +0000
-Received: by mail-wr1-x429.google.com with SMTP id t18so7887914wry.1
- for <samba-technical@lists.samba.org>; Mon, 03 May 2021 22:19:25 -0700 (PDT)
+ (Exim) id 1ldpev-00FOv3-Gr
+ for samba-technical@lists.samba.org; Tue, 04 May 2021 07:40:00 +0000
+Received: by mail-ed1-x52b.google.com with SMTP id b17so6283307ede.0
+ for <samba-technical@lists.samba.org>; Tue, 04 May 2021 00:39:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:from:date:message-id:subject:to;
- bh=JvkCY/aF/ZjZkz34HkrC0D3BAFwzlyXQCV08ULnZb5w=;
- b=uTmRb3ds2GB4/+mhj0KFZ2O19qYYY1byzQTXHuVyCmvxuvbuS9aa9EvizJ0FIv6Ha5
- m5WygnQFZMtK1rvmTwsayI/vbmo5OnbadZzCkCk9v4JcaNuCErqz/ul+gtMGn7pgs+jN
- AY+FfdzUh2Hd17cE6PCAvV9ycms7hG8uSzEWHlO0wO5AiATJO8DSeYfadmGod+3xqbqk
- yXZ1A6Bag+P9X1jpblo4okHhIVDtWus189yP7yqUM6YVNxTxlplVj1+RwzLmla7xFxaY
- T9H3Zdb0CY9cyp8xZ/a60KIVr8dM/LcEvVaxJ0SoR6b+kLUvi/zoUvUfutb2578opTIB
- CXWA==
+ bh=XmCkwx2ecOOCtuq6u5FG6/kmgc1njgEdPDkq3uuy6kE=;
+ b=N5/0UYVQgLhxRH5CSmBM23Fmau1S1W40bB6iG5izbhva8v3aBfq8J8Zr+2i9E7UqtB
+ uLHlBMQ90oYcYK0N6OZsXvxPJQwc4RCyJDx4xAve6hdsHq/TJRJjNbXzNtauzDojLUIv
+ Os9kHEzTNgBjGGTjb3pX6bk/rM9/mLcV4NlMth05odiM6QaCelcJnndMpGhQrToLD9dx
+ Qan9PGkH3NlrJALd7kfVkDe6Jdbh7DeNaBIFWlMmHmiMlzdoSOF+DFjY4d3SzF/tvkKb
+ NiTVX99WBN8aATzeJoxDKqnARDQrZZqjt1F7zhbv6C9WEYmnQA+B2Fmdzi866SSLJQo0
+ aRIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=JvkCY/aF/ZjZkz34HkrC0D3BAFwzlyXQCV08ULnZb5w=;
- b=alZ9AQi4b+ImxCbqJbb6d8RaXla6fF5BhGiSxfhGMy7Q6boglJhCNclM9+FlnGQzee
- CsbNdWk75nWylTcuRnUEdlZXHtN/FOlrWimOt3ihkDK9QSJtyjDCPULQpxscZNc5vVzL
- l5mU6dOqGlWRIFAW7K31fOQJfG8wZOSNNfJTwhe/jMTsdxOio0bz5nqM/cjtwbktYRx/
- JlAaGMpO6aF2AJtUDFMSe568B56aQRlQbm8NlH/zbz6mqXRetPMQmFXQ2ZvPhPIeNTjS
- dab5T/Wpb1wYMTpYmz6uUOsuH/RoZGekmQjeK8EZTNAmQ/KSNJ6HuqRTe8ZAFuI0uxBE
- l6OQ==
-X-Gm-Message-State: AOAM533jw0grAX72HXqxYJNjHKtGbBEBtq4Lw8F68ocOik/MFFljveAZ
- SsHZnPw/6wGC5EaPMAptoV47uSLyDc1ViYKj+ilqZsveVdpUcg==
-X-Google-Smtp-Source: ABdhPJyen7FUaynuVCVRfP5/BSJlTcyILvDy3YlSTp4teWZuColI+hZPPbUSiHAvXxKF9fnmuMqOt6cU3kWmAYK0Jdc=
-X-Received: by 2002:a5d:498c:: with SMTP id r12mr29905116wrq.31.1620105564975; 
- Mon, 03 May 2021 22:19:24 -0700 (PDT)
+ bh=XmCkwx2ecOOCtuq6u5FG6/kmgc1njgEdPDkq3uuy6kE=;
+ b=lyIR6mQmoghH8WLI8GKYiAypQVhrv9J6OLnMWF5NbylUYN0yg1hm9udpFknfW5o9SB
+ XpchS9acMwliNTv9s0eLZ7hfPABIF58+jgxma94lKIy4WBzZSJ6DSrMeALAFk7Vn8mAz
+ bVT/SKG5QuMiHujNAABXB575nkdArcKMkWcMX7CyIq3mNF59udfOOFi8VO21RtVC8BdN
+ gPfHYbBdvcH0LmWk7/8fybcefJAZjnOkgOtts6jhPHSjEnaV8l4i4XIqP4jVHckkqB63
+ EV+fH+9/l+aDWtgELH8LEAU55RvY5FmmA0FargVCOmBJ9z9lpI719vGU11bGu88JGS/U
+ eCzA==
+X-Gm-Message-State: AOAM532+9AT4Bs8t3Ip6tkzzdbTa+ZBvdZCHHMzOa5jCMwDCMcYHnTqX
+ 2ShgbjRiEaRrgMwD+ZPoNTi8qWgqGdhmx/jct0qWw8CYHXR5MA==
+X-Google-Smtp-Source: ABdhPJx6hVYUJxliGBrTMGP8Plxqr7M88qcawsgO+xmSPo5W/P2RwA4JglDGeHMlBPkkygG/sBf6Pa4SxpJV2zTuPpY=
+X-Received: by 2002:aa7:dad1:: with SMTP id x17mr13675754eds.47.1620113996354; 
+ Tue, 04 May 2021 00:39:56 -0700 (PDT)
 MIME-Version: 1.0
-Date: Tue, 4 May 2021 10:49:14 +0530
-Message-ID: <CAHbM3qgLd2RuVMo+nfnhCOB8Ocrf_9KzMyyzcHmvOU1fO1xKhw@mail.gmail.com>
-Subject: entry in winbindd_cache.tdb gets overwritten if child domain names in
- 2 different forests are same
-To: samba-technical <samba-technical@lists.samba.org>
+Date: Tue, 4 May 2021 15:39:46 +0800
+Message-ID: <CAC6SzHJXOrFWYas9TT7EkE3AuiwXHEZtQaVsCHVg7DbhpeAbJQ@mail.gmail.com>
+Subject: simple password sync method
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,36 +64,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Shilpa K via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Shilpa K <shilpa.krishnareddy@gmail.com>
+From: d tbsky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: d tbsky <tbskyd@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hello,
+Hi:
+    in old days when we are still using 2003/2008R2 as domain
+controller, Microsoft provide a password sync service "Identity
+Management for Unix". we just need to install the unix side tool
+"ssod" then AD will give our script the "account/pass" when password
+change. with a script we can do any kind of password sync.
 
-We had a setup where child domains in 2 different forests had the same
-names. In this case, we noticed that the child domain name of one forest in
-trusted domain cache  (TRUSTDOMCACHE/<domainname>) gets overwritten with
-the child domain name of another forest.
+    when we change our domain controller to samba, I assume that "unix
+password sync = yes " would do the trick. but I waste my time to test
+it and man page didn't say it won't work with domain controller at
+that time.
 
-Attached patch helped us. Could you please let me know if it is applicable
-to master as well?
+    to solve the problem, I could only do ugly hack to samba source so
+it will trigger a script when password change.
 
-Thanks,
-Shilpa
+    now I understand if I save samba password as encrypted clear
+password, then I can use some samba-tool command to get/sync the
+password.
 
-index 4a366ee6ff8..c074ea80862 100644
---- a/source3/winbindd/winbindd_cache.c
-+++ b/source3/winbindd/winbindd_cache.c
-@@ -4199,7 +4199,8 @@ static bool add_wbdomain_to_tdc_array( struct
-winbindd_domain *new_dom,
-        list = *domains;
+    I wonder if the old simple method can co-exist with the current
+one. maybe just a config like "password sync script = xxxx" and let
+samba trigger it when password change? although with clear password
+you can sync it to new service at any time, but old simple method
+doesn't need any infrastructure change and doesn't need to store the
+private encryption key.
 
-        for ( i=0; i< (*num_domains); i++ ) {
--               if ( strequal( new_dom->name, list[i].domain_name ) ) {
-+               if ( strequal( new_dom->name, list[i].domain_name ) &&
-+                    strequal( new_dom->alt_name, list[i].dns_name) ) {
-                        DEBUG(10,("add_wbdomain_to_tdc_array: Found
-existing record for %s\n",
-                                  new_dom->name));
-                        idx = i;
