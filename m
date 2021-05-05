@@ -2,58 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03B993732EB
-	for <lists+samba-technical@lfdr.de>; Wed,  5 May 2021 01:54:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FE903733BB
+	for <lists+samba-technical@lfdr.de>; Wed,  5 May 2021 04:20:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=t75tWXbBgByRZFTkhAR9/oUxzRmr0oZo8LZvBN0cUtA=; b=wFcE+yj41ZdLANskwZmPCzofRr
-	rxqaCu9jXhrYVHlZflwZLgYGtTVhvF1ba+yIcK9wjjoTGHlVgkCWuO0wTsw5vubkwZsHxcGpkASgw
-	vZdl4sLhp+Ki91VZmxOpier/T0in162+OWr7b/mGY/iy8A2/LXksSlM2Ftsyj2ESFt0+fhlkX7hzG
-	vDHZsJmvyEGDKf/FCm04n1udRmdWnPJ+UZP19CUxkIFuICnK87oE5QiBxPHEtxaNpBmox0oTY1Lyr
-	caspWG9lPoKqjA4pPNkP7wnvYbKAa3cwVbVgxMaL46rpg4lK/401Sx23sOjsLA3TS4ANAoRBm97UR
-	eNsYtqfQ==;
-Received: from ip6-localhost ([::1]:19226 helo=hr1.samba.org) 
+	bh=EXBeo2pF9hLZO77Ferk309SqLDTEklFVDz+rwWAh33g=; b=gKIxacFnsfGmLTKK/sKfiWYkJq
+	1ECBwyFXKdFjCncC9HlHWpMkSKbJbt10UF7U3KdrhCIic2NbpHiGI5gwqQ88oLktaIQOSxfkqAkx9
+	Ehs0rGrMG/iMDkIz/CGgJTqxekTUp8Pbj8LRJnOFGyaj/P/IqKuePdhf6SbJH6RxjXjLxYshFsGVK
+	VnHxTZjU2uMaPKDF+cOpZhzSUkaAn2xfV46WX2dqV1wpKVLyct9BY+dU1/VIlgwh80qIzAnEB8MrC
+	Xzct90k05z62dw6y44Gg18jYuOeJtmRtnOry0+2fbe10uSrFuMqMJW1TpRZaynOFSiLEPvCzcRP2c
+	5mC2mQ3Q==;
+Received: from ip6-localhost ([::1]:19952 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1le4qP-00FTZ7-3y; Tue, 04 May 2021 23:52:49 +0000
-Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b]:38638) 
+	id 1le78H-00FU3G-JG; Wed, 05 May 2021 02:19:25 +0000
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530]:36388) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1le4qI-00FTYy-6t
- for samba-technical@lists.samba.org; Tue, 04 May 2021 23:52:44 +0000
-Received: by mail-ed1-x52b.google.com with SMTP id n25so12455666edr.5
- for <samba-technical@lists.samba.org>; Tue, 04 May 2021 16:52:41 -0700 (PDT)
+ (Exim) id 1le78C-00FU37-DD
+ for samba-technical@lists.samba.org; Wed, 05 May 2021 02:19:22 +0000
+Received: by mail-ed1-x530.google.com with SMTP id u13so104625edd.3
+ for <samba-technical@lists.samba.org>; Tue, 04 May 2021 19:19:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=t75tWXbBgByRZFTkhAR9/oUxzRmr0oZo8LZvBN0cUtA=;
- b=HAGWlcDcJbckYVcOSDvbBR7PearmDEARbBUyf7VdDy2o453GyFU7NkIE4KMN1C7T1b
- PnqNvTtyflXsCajoJcXZ1iXsrDFu2W7aZoCpSuXi9y4KYKGeZQRjsHTItyLE7syfJEX9
- qyW9wBzH5S7NOT7hiNBnYOlhv7wBC65nTfNl3YVeAfN7kf+4a7dSouF014TUBP9M1Gp9
- V/4V5XhYBjAuAOxUxJIP9EzoB5IAmCneyBL1ZdA44r2US4zL3TMUTWSpaz5b6dqEHU6h
- VeYKbkT09xWBNIDgTDDQDvSD4HeGVkt3LK54QGLBQfxDJdBuUbuQMP8rC7F5G/IuPmXm
- TWMQ==
+ :cc; bh=EXBeo2pF9hLZO77Ferk309SqLDTEklFVDz+rwWAh33g=;
+ b=YphN7sAWyHOEyu4uNlcWF6fi8zwibuP3UJvNIHI8QtsGskYpbfxIB/z+doDarYGoPx
+ yHMSedUvr/f1w0+4U7E8CrJ0lJVMI+n8ETJY4RoyOgIdsvZ2NxGKFrh2E3JemzAC3ZqK
+ +CUvgalO23TnV3QgxzOPLM3ILFwTePYZREvMNxQ7pw4CfilwUG8CC98E+EsxyJNU1Ja5
+ P873K4EzviYsx0hqbDLoKfyYtodLjDeHqhZvUoZb4JkGcyLxqbCVse+JOZ7pihyE+sI3
+ K1Fn/4elAHjLv3PZI/vuqWLYURjVr/aHRHCVDYY84FcOgaoRxut0LuQ2+XDggQA0SG/5
+ 5O6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=t75tWXbBgByRZFTkhAR9/oUxzRmr0oZo8LZvBN0cUtA=;
- b=r8uebAu3iAnsNDVYLDb4SlpnEOiVF2sdbM0ijSCfN2h055LpVwbuiLYjlJKU83BuQt
- k8isp9kNSAFfqUP074mh0NisPyi3590PnY+9OgxBBTfdj2uc3pqpshnFCX/iQCP2kbJI
- 9OtqfN4bnm58XtCjT4Grwa0saU/49LnnIJdUfCt63Y4uAu9ORulpIPHjwfOawFgMDpmB
- /Iy6D4ENM1mbRNPP6Z76nxiMpRV9iNvsknPKFkpkX4Zz1TdRo4r5CUZuUyBahosYEQJ7
- l5ilcClH7ok+T7KVnVIl7umEMGFQyp2IwUF9BloJRGfSHND6G9txpLrcEMEegHKg7OyK
- xRUg==
-X-Gm-Message-State: AOAM531LrumT3wq/oVamd5VhLORkdQCa3bcN6obU6XOt3DMSNMTVyn5g
- hxUJFYJx/zrzCBlheUUki4oPCWnT67tlKtg6YLo=
-X-Google-Smtp-Source: ABdhPJyvbH50lMvnBqimGhuTMkE/vCQMFzw6IKIywOhJvTsjdET41lWgSkGgHdchpCOgYrdjgNvcfN/ulEzeh4e52kA=
-X-Received: by 2002:a05:6402:12c6:: with SMTP id
- k6mr28356528edx.372.1620172361427; 
- Tue, 04 May 2021 16:52:41 -0700 (PDT)
+ bh=EXBeo2pF9hLZO77Ferk309SqLDTEklFVDz+rwWAh33g=;
+ b=dQqJ22e4xYBmb5vHQ3gYmfMjZJbTTzn8QHQeyYpp49SYT4jDoJZcSYSyQLGvjC/SXO
+ jBd5f+hPHkNV1dHF7yovtxMQo1yRwMmuoUyT7+HmyCypvh+1ohquLrPJkZ3xwB1kmsvC
+ yPG5NB7mf0fADWaiam0GGBrTpOXiP03Kn/XYuiA81pRcZP3e0mze4WIoAO7zw3ulxsKg
+ TBkIP0WYxTEXtWsKvuYAil/dXTgi+CBgvFpYg6LlUuSop0Dl14JnnHaWNJ+Zgnq0+LRT
+ aMTEb3F7VtxkYQxsfJ86Yzf9AQBtH4hTbmYijZ0GB8XkJotLhJcaowGW9gjiT6TmbLcn
+ cm/g==
+X-Gm-Message-State: AOAM531A4o04/aT5+xNx2nMLX8FFwi6+gPfBJEnmlV24rXV98ud08HbA
+ TYHjGXocLhLqgEnLGSrHoXK7eu+UPf6uQJZIioU=
+X-Google-Smtp-Source: ABdhPJwHNf/b/EGPIrkm0RF06680mGTBHrJnuRaZSUFuFBpAyxW+3DO0c6CqESc+v2ut1ucVIv9SkmpnHx7XvTfrAH0=
+X-Received: by 2002:aa7:c7c5:: with SMTP id o5mr29260241eds.31.1620181158570; 
+ Tue, 04 May 2021 19:19:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAC6SzHJXOrFWYas9TT7EkE3AuiwXHEZtQaVsCHVg7DbhpeAbJQ@mail.gmail.com>
- <ab76b10f3f63cdf970843fb407cae78c8b88eeb3.camel@samba.org>
-In-Reply-To: <ab76b10f3f63cdf970843fb407cae78c8b88eeb3.camel@samba.org>
-Date: Wed, 5 May 2021 07:52:32 +0800
-Message-ID: <CAC6SzHJiuxD4YnJ59wtMXPxgFYR0oje-TX9MEpQ9rt=jyE4GEg@mail.gmail.com>
-Subject: Re: simple password sync method
+References: <aaf1bedfbba1dde583281c86eaff5f73d8008318.camel@samba.org>
+ <CAC6SzHKr+x2-1EZq_zXQDsrPpRaqwKmBLrsv6nMobSY2aa6kQA@mail.gmail.com>
+ <975bee8d29597024b638826961aba1c1fd5a3500.camel@samba.org>
+In-Reply-To: <975bee8d29597024b638826961aba1c1fd5a3500.camel@samba.org>
+Date: Wed, 5 May 2021 10:19:08 +0800
+Message-ID: <CAC6SzHJ9Khf3FfjazAiKmNEnLxbQcNogOAcGoXVnwkvjjHN3wQ@mail.gmail.com>
+Subject: Re: domain\username requirements and 'map untrusted to domain'
 To: Andrew Bartlett <abartlet@samba.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
@@ -76,44 +76,19 @@ Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 Andrew Bartlett <abartlet@samba.org>
-> On Tue, 2021-05-04 at 15:39 +0800, d tbsky via samba-technical wrote:
-> If you know the target password type (eg crypt()) then we can store
-> some such passwords without the need for the GPG key, and run the sync
-> from there.
->
-> eg set "password hash userPassword schemes = CryptSHA512"
->
-> We won't be adding the 'samba3' style password sync to the AD DC, due
-> to locking requirements.  At the point where we can process a password
-> sync, we have to lock the DB against all other changes, and it would
-> risk service to all other users to start making calls at this point.
+> I don't think you understand the purpose of introducing a new
+> developer, but regardless I would note that you are welcome to try the
+> suggested change on the bug and report your success or otherwise there.
 
-  I can not predict the password type of the service may need sync.
-but thanks a lot for the explanation so I can understand why it won't
-be implemented.
-I assume you mean system will lock the DB when password change so it
-can not process other request at the same time.
-if that's true, then a correct ugly hack to trigger a script would
-just cause system slow down instead of horrible race condition?
+  Indeed I don't understand. hope I didn't offend anyone for replying
+the message.
 
+> The primary blocker is the cryptographic behaviour of NTLMv2, which
+> means we can't change the domain on the domain member server, because
+> the domain is part of the password hash calculation.
 
-
-
-
-
-
-> Of course Samba remains Free Software and you may make whatever changes
-> you desire for your private use, but this is our feeling regarding what
-> we will allow upstream.
->
-> Andrew Bartlett
->
-> --
-> Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-> Samba Team Member (since 2001) https://samba.org
-> Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
->
-> Samba Development and Support, Catalyst IT - Expert Open Source
-> Solutions
->
+  thanks for the explanation. samba's behavior is more
+solid/consistent without these old designs/features.
+although it feels good when samba can do something which normal
+Micorsoft would not do.
 
