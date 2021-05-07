@@ -2,136 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A9A71376828
-	for <lists+samba-technical@lfdr.de>; Fri,  7 May 2021 17:37:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C21AA37698F
+	for <lists+samba-technical@lfdr.de>; Fri,  7 May 2021 19:38:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=USIqsEtRGEg2I52Iqz6AYpY6fLg3+x5Lz+rFMC1MfrA=; b=dZKesfi3fXfRtRoxc37sZcl/gQ
-	gjmfKzagnnLzcIEmhq/prCBJNwpxs5FZfbrEyTDP4qVHdiRpgOuw0gYhYmIXlyRKgrX4r5VY5Q0JT
-	j0DkynQ9EKt86V9yvgtdDbGj9H6x+0OCXC10AiqQqszUhQ6Aijh6JGxPqlE1qhFwKfm+4M1NUoPkc
-	Xso9kRgPR6qy3znQoJ4wnfoGfHvSfWKVsSO8/O/wwFqOu/adxbVj1joPmx6ZhoAwP6uR6aNgh7dN+
-	moXznoDHmkH+ysmTswbDCqTqfXe1FYiMFu5mM8V7JhtLXU1bHgj1IiiMXJtukjxmFI9LL/MaBbx4w
-	kDQGkrJA==;
-Received: from ip6-localhost ([::1]:48696 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Date:Subject:cc;
+	bh=4DORgXW4xoB9BWWUmJ5qP1zTVwriOinHnBMdS2CLrek=; b=6Er8NzY3p2ZUwo9ER0mB2iapB4
+	d/bQ1SV4ipE5hGVR6wcVOX5+QS4zKx3O/sxtWfrAZg3lzaf0r8sxqRbY9ONdHlUM5b8s7QioEa1gD
+	JPnJdjND0lw5Z7y7nti+hTCdtPJxDrDlNT9QboMORSLWH/3MHNZODel9LRSQrW+hCa68FyBG6VZD1
+	Zpsmxs6bGXaDbCvxPxqI9giYDb+c1NRyo8NgGTGTwPMG3da2obIyrdhPMqVO9x9+z2fjAsSeUYNjH
+	ERjLioK+YNwvGdBRVKESkRwDB9IcRUkC7AhJzWRehD9xUMmsHDppEwrMPTM4pCQqvueI7c04p2yaW
+	5yeLpLJw==;
+Received: from ip6-localhost ([::1]:49408 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lf2XV-00GNam-Rv; Fri, 07 May 2021 15:37:17 +0000
-Received: from de-smtp-delivery-102.mimecast.com ([194.104.109.102]:50160) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1lf2XP-00GNad-4O
- for samba-technical@lists.samba.org; Fri, 07 May 2021 15:37:13 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
- s=mimecast20200619; t=1620401828;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=USIqsEtRGEg2I52Iqz6AYpY6fLg3+x5Lz+rFMC1MfrA=;
- b=UyfS+LGkDpVzb5fcSKBaRi6urZu/piz8HynAQJQxGumQv7/eisnDINUzhPE0QUdImPt6+9
- lmmkszegMc0Opf5chyrE8eKhcznU/vNzcffAnfDUQidQm9A/MVTM0WYZxXk3x0OqCz7QF/
- 4eSXUKIfMyYOOL3ijTqHK1O7QIVjnMY=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
- s=mimecast20200619; t=1620401828;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=USIqsEtRGEg2I52Iqz6AYpY6fLg3+x5Lz+rFMC1MfrA=;
- b=UyfS+LGkDpVzb5fcSKBaRi6urZu/piz8HynAQJQxGumQv7/eisnDINUzhPE0QUdImPt6+9
- lmmkszegMc0Opf5chyrE8eKhcznU/vNzcffAnfDUQidQm9A/MVTM0WYZxXk3x0OqCz7QF/
- 4eSXUKIfMyYOOL3ijTqHK1O7QIVjnMY=
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur02lp2059.outbound.protection.outlook.com [104.47.5.59]) (Using
- TLS) by relay.mimecast.com with ESMTP id
- de-mta-17-cKw5MSx3OEGqvki7TFz9QA-1; Fri, 07 May 2021 17:37:06 +0200
-X-MC-Unique: cKw5MSx3OEGqvki7TFz9QA-1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=V7E+j+1S3/aksy0V0Hs/WxH4t0lsd1CL24lbCszMG3Ggo+Vel8dLAIqkoadx1htka9Va1+Pj+dpZ2DpvLmhonRY3+Dhw3Adt/tdSMzve38ToUFk8o9on20fR0jqaX4nLfaU3d133RY6v9sJAxauqIQA9TJ3ZnFJtXS/53R+GTAoNL4f6rEghh8WHd3k65qGM5pG3RrHltpu/MMmH+agt6qJCH0d2yzduuAV4P0yyCkNZkvPOw9o3ORqbV3lPQstGBUdKBFTn/x6F04UvZOztcIygXonZgQEpIrTlMhdfEr7PkZ4jrRRZ6dmMy0PfQNpXgjNBJ+n5mC0ZqNhXh0MxvA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=USIqsEtRGEg2I52Iqz6AYpY6fLg3+x5Lz+rFMC1MfrA=;
- b=CkuBEQ8+6sw/dYlYY515Fo8vi8ZS2Z9EOILZfjpQPcpxUrMfz40DS+bOw7IQEQloCVcNCGnr/Ve+jYSrhXKWPS+ufQyXobk8J3He4k9oZgCQeMjs1qNl1KiGAtcC6IB2xve6eGfys2oSTBxcIN/r3xIhtQnGgP3mKBOO17mSHhVHd2MqSxT9M6W6aIBOE2cYpkDs9GIcxvQEUT7CnYzWXAlwF2BF14JxgyOBkMLcJVRJd3MXIGemzgNUzrgKFmLN7O3OORb3vXOJvl5Io7CvdNeycu0TBE9Xvv2A67i1hD/wcyMJQdA+obdfxwTnwkjSu0RLpkt68i8mUibk5Ba+pA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Authentication-Results: samba.org; dkim=none (message not signed)
- header.d=none;samba.org; dmarc=none action=none header.from=suse.com;
-Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com (2603:10a6:803:3::28)
- by VI1PR0402MB3757.eurprd04.prod.outlook.com (2603:10a6:803:18::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4065.21; Fri, 7 May
- 2021 15:37:04 +0000
-Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com
- ([fe80::3c87:7c9e:2597:4d94]) by VI1PR0402MB3359.eurprd04.prod.outlook.com
- ([fe80::3c87:7c9e:2597:4d94%5]) with mapi id 15.20.4108.028; Fri, 7 May 2021
- 15:37:04 +0000
-To: Stefan Metzmacher <metze@samba.org>, Steve French <smfrench@gmail.com>,
- CIFS <linux-cifs@vger.kernel.org>
-Subject: Re: [PATCH] smb3.1.1: allow dumping GCM256 keys to improve
- debugging of encrypted shares
-In-Reply-To: <1780584e-d602-00c4-6f4b-c112f158148c@samba.org>
-References: <CAH2r5muN3rpUur8jSav=fJfnt_vuJhgOXxMeGmXvT3KvxbBU5w@mail.gmail.com>
- <c2b84e56-87c6-469d-c272-02731cb0937c@samba.org> <87y2cqu9as.fsf@suse.com>
- <2e20d5e9-148b-dbb2-9fda-50521be46fa5@samba.org> <87sg2yu18q.fsf@suse.com>
- <1780584e-d602-00c4-6f4b-c112f158148c@samba.org>
-Date: Fri, 07 May 2021 17:37:02 +0200
-Message-ID: <87im3utv1d.fsf@suse.com>
-Content-Type: text/plain; charset=utf-8
+	id 1lf4PQ-00GO1m-0j; Fri, 07 May 2021 17:37:04 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23006) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lf4PJ-00GO1d-S1
+ for samba-technical@lists.samba.org; Fri, 07 May 2021 17:37:00 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-Id:To:Date:From:CC;
+ bh=ESNofvIzKAwNPrGkOA8l4oWFMZk74/e+b5J44uyCZHc=; b=dp9Ac//BEpO8sOCEa0f1n1tZKX
+ GzUNIRCtMwR/LsP0IFmxYDIIUqhtTXDPJzjjlD5zndXMA3ViJDAphNx1mnj/pGH/7D1UVIrBy3G0u
+ PRQFqrZKIBFcYWn69X9v/JM3r+G9m6RFXo8yRb4jG9FCXqzhpe5kjAwEm+im5XTjA1EL0wQmSRIzn
+ FkgVvtLZqSvLypeuM/C1vqIlfICzFtexmFjxzz2tpLvPi1KZt+FgSGH2iPQSZqnXpD13tvafVOtvC
+ EGvMBhjBUZct2X9Zd2xQq9frwQbJhw3WcurUBbNmd1bBlCQUj1aJCu93YJd+dm7q6WI1S34qBLtzC
+ lNra/0HiBPqNPt1T15BuRe+4cjHKpm7v4VPVibaeCf49pM5NX3XXRm7NRN5QGBmS3xwzF+1D4jPTD
+ UxHQf/3uNOdO0uEa0grkgfKnFnptzr1KYDTD8m/J2+we466aOSVNfFR86Aavigm4/0k8Egbdz4u+n
+ WKupZx+QNP2QGRd0fUYcOC8j;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1lf4PJ-0006Ld-07
+ for samba-technical@lists.samba.org; Fri, 07 May 2021 17:36:57 +0000
+Mime-Version: 1.0 (Mac OS X Mail 14.0 \(3654.60.0.2.21\))
+Subject: Re: Introducing the samba-in-kubernetes project (SINK)
+Date: Fri, 7 May 2021 19:36:56 +0200
+References: <29083327-12B7-4BB3-B1F9-273DB79C789A@samba.org>
+To: samba-technical@lists.samba.org
+In-Reply-To: <29083327-12B7-4BB3-B1F9-273DB79C789A@samba.org>
+Message-Id: <5E18C0F5-C1BC-45DC-8D40-B1958F304435@samba.org>
+X-Mailer: Apple Mail (2.3654.60.0.2.21)
+Content-Type: text/plain;
+	charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Originating-IP: [2003:fa:713:a617:3026:1c10:d670:5fc7]
-MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from localhost (2003:fa:713:a617:3026:1c10:d670:5fc7) by
- ZR0P278CA0078.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:22::11) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4108.24 via Frontend Transport; Fri, 7 May 2021 15:37:04 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a8e8e6eb-99c4-477f-2780-08d9116df729
-X-MS-TrafficTypeDiagnostic: VI1PR0402MB3757:
-X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Message-Info: 7qddcAqThmEj5hGONkP1+dBwHnEwx2lsgA9h4TMnrTjsiJGibPULPDBaOFgertTuLhAIp2Q6n49tm8lVl+cw5yFG5H8rk5sXlUZzd0LA4YtpHYbK0Ci+2Am6HThG4INTtVGxpLGFnLJJrB76K1HVmfBpCkcSGLHXQe3rwmvI9zhTCl6NfmsL60vF6xl+JDAZB5dU6XkRwSIpJdDIrLYecmYc0zZDFFknku21ESyPLzmrWyoByfKcKEcQB1A3EixuQToD+wcQLYPPk7XNpIj/P38Xm9xYcVzPRvr9zH1MREWASMLPnrtebQ1anwS6KCr1RtyDwMVx/vNyjYaeLQKVOir0V9ZwyJjwQPmj+b7zceY7QmnQY1wouMyCKoqBCznNNvjpC1tz1gXGnDjad2STc5Vq3hyTRPwXAMwvTgOxh+nr/CPyOgoWMzvDJmkP/Jv3tmYo8dopKQeOU5N748u7A3XSj27ArAG2h6KlxABvccYsAbC9sPajkyOjQwQsTkc6E08TLMIy1GjFC1Tfr+evmyIfvIKaYkVPD7e04VXTbr5stpwnwJ1v0upRZD6EkQ/GRWo+SOL82HfUaZIC2laPUw==
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?ZGFWYnZ5ek9xVHRjRDIrS01oMHdFOVpuYzI4SEh1WFpsSk1pc3ZVRTVsakhk?=
- =?utf-8?B?Q2FsTHlDZGhxbjRuaHMyVUxqYzB2UU45SjdJY3R2dlhhekVzNDlCUjl1Vlhn?=
- =?utf-8?B?V1AycWFMdU00b01kVmoyVGw2MEZoRFRlVnlrc29kV3VKWlc0ZGJuU1BIT2JQ?=
- =?utf-8?B?RWIvSXViN1oyTTl0MVpCUHVOTXYyNUI3aTdiOENHWnRIdklYeVhCVklvRCsw?=
- =?utf-8?B?VHQ0cmkwRWg4bGExY0oyeGJpeVprRUk4dCt0cHVDaHl4MGwwM2c4d3hkcG14?=
- =?utf-8?B?M0xrUFhXdHYwUnF6UERtR1BaRkJVTytORStVWVNhSXl2VTRXajRNYjdrNnZR?=
- =?utf-8?B?VFNZM3hCa0ZMaEZMSGhreWpDQ0VBbUNGa1RlOTFOZ2ZuaTAreVhYQ0lzSE9K?=
- =?utf-8?B?M1UwbXZoNmd4N2EwK1ZZRXZSM0hqUDJrWTU0QmpTS1Q5WGwvNVpVRG41TzAw?=
- =?utf-8?B?cU8rWit3N0YvcS9FY2xRS3hkT2QzbmRyUWFtYjN2TEpTTDN6SnE0S3R2am9L?=
- =?utf-8?B?YXU0cmgvSTU5emtxSGlvVllzZXdFbVRSbzhMd3lSSW5Fam1scXhGVUpZcEoz?=
- =?utf-8?B?YjJKVWhJUXEzM1V1V3BYNGQzbXpzUGhrWWZkdUhUcERzSXBFa1VyVXptTC9k?=
- =?utf-8?B?L1NEemVSaUxZQ0NqM2NtSG1KaEg2czdDTlZwMTRGc0RNQlV0aUx4cFJsNFFh?=
- =?utf-8?B?TWQ5eXgvWS9QTEM1ckQ0NTNZYUNKNGU3OUxCQTExZEd2NGhpendGTGdtaDRj?=
- =?utf-8?B?aVdRVjJNQ29GVXQ1WWtkTnpwMVBJSmlEU1JwNWJ1MWd4QVlyVEUwZ01PTTNM?=
- =?utf-8?B?bDQ5aXRqc2JuR1VxS3poa2h2cTk3MmF2eWFTWkQ1ZWducVdGWnpURmcvb0xN?=
- =?utf-8?B?UkJJK0EzdUV3THVQaThLMjVUT3hNT0JIRGkrdFV2L1JqWlRZTk9oS1hUQ0xF?=
- =?utf-8?B?c3lKaksvTjVjVzRQSGFyNFJWRzlUdWsvb2ZDSm42emZJUzdyZGphUDFVWE5F?=
- =?utf-8?B?T0g3VnBIYjJZcE1scEZUL1NMMFBQcFkvU1ErSE16SVJDSEsydWRIczE3blN5?=
- =?utf-8?B?ZnA0cFBvckg5aStNemFkRW16aU13V1ZFcnNZSDhkaWpVR3VSclAwK05LZlBB?=
- =?utf-8?B?OGJ6RnZydmxEUFJnUnIxek5uWk9rRHFpUEFMMU5TSGI3Tm5MS0JoTDY1UDNp?=
- =?utf-8?B?V3NJUjA1QjVMYUdpYStsQlZJTWtYMkRiSVBFL3pNbFJPOS9xQTUzOHc2WU90?=
- =?utf-8?B?cThUQlAwdWxPb2JHUDdiTE5SbUxXckRXaGdVK3QxYTg3YjVlUmdOM2k3YjN6?=
- =?utf-8?B?am5xM1hLVGdJZ1ZGanNRUWxXSWtCM05vYVRjN21mQ0FaYkRBck13UU52bk52?=
- =?utf-8?B?WnpvNDF4MDAvbFo3eFNPT29JUU9mZ2x2QmN3cyt5VXhvSUlGQ0YyczNNWFRK?=
- =?utf-8?B?K0xTZDFQcVl5aXovL3FHNHdoak5vWDM0ZnJuNnppWEs4RTcxQXk1NGxDZHQz?=
- =?utf-8?B?NmR0YUZ0YkFKRzE1YnZhTG5NdHhyMXRUZHhnMzdWdVlhSGhRcjZ2bUU4elFM?=
- =?utf-8?B?Wnk1OEs4NGRVM1BMUllYM2ZTSVZRRUU5VVEvdndYblpQMSsxNFh6clJvWko2?=
- =?utf-8?B?Q1pudWh3Y05GL1l3aU9yYUphUHRJVlplOFE5RVludjFhNXJtWGdxV2I2aWdi?=
- =?utf-8?B?L2hSZjVSNzRoZUJhcGw0aUwyYUNyKzdlZ3YrM25MYjBhTXU4d2xxRUpKNVY0?=
- =?utf-8?B?bDBnWjQvRlMvL2VVZ0pLVkhWcEZaSG9Wdk9qakFINVphMFdDNTVSRFZ0ajgz?=
- =?utf-8?B?cGFVZDlNc1BYZ0h0NDFTNnNVa3RQb3pIRi9YRjBTR1E1eUtCcDhRQkxQcTQz?=
- =?utf-8?Q?pa7PsNkEKXxbq?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a8e8e6eb-99c4-477f-2780-08d9116df729
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR0402MB3359.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ETIz/Gq6m21EipuIW0N1XjAHKpUbFhEEMZO7WeczISIfAmhlqsFQsduDLJQpwCrF
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0402MB3757
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -145,42 +58,84 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
-Cc: samba-technical <samba-technical@lists.samba.org>,
- linux-cifsd-devel@lists.sourceforge.net
+From: Michael Adam via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Michael Adam <obnox@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Stefan Metzmacher <metze@samba.org> writes:
-> If you ever change it just use another struct and another ioctl opcode.
-> also the ioctl macros encode the struct size into the id, the the ioctl o=
-pcode would
-> change anyway.
+Update:
 
-Ah I didn't realize the sizeof() was used to generate the code, good catch.
+The slides for the presentation can already be obtained here:
 
-If we have a different code per struct size then the code name should
-have the key size in it and there's no need to encode the key length in
-the struct itself.
+=
+https://github.com/samba-in-kubernetes/samba-operator/blob/master/docs/pre=
+sentations/samba%20in%20kubernetes%20-%20sambaXP%202021.pdf =
+<https://github.com/samba-in-kubernetes/samba-operator/blob/master/docs/pr=
+esentations/samba%20in%20kubernetes%20-%20sambaXP%202021.pdf>
 
-So something like:
+This newly created page contains the old presentation slides and video =
+link too:
 
-// rename current one
-#define CIFS_DUMP_KEY_128 _IOWR(CIFS_IOCTL_MAGIC, 8, struct smb3_key_debug_=
-info_128)
-// add 256 one
-#define CIFS_DUMP_KEY_256 _IOWR(CIFS_IOCTL_MAGIC, 10, struct smb3_key_debug=
-_info_256)
+=
+https://github.com/samba-in-kubernetes/samba-operator/blob/master/docs/pre=
+sentations/README.md =
+<https://github.com/samba-in-kubernetes/samba-operator/blob/master/docs/pr=
+esentations/README.md>
 
-Cheers,
---=20
-Aur=C3=A9lien Aptel / SUSE Labs Samba Team
-GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
-SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg, D=
-E
-GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=BC=
-nchen)
+Cheers - Michael
 
+
+
+> On 6. May 2021, at 22:28, Michael Adam via samba-technical =
+<samba-technical@lists.samba.org> wrote:
+>=20
+> Hi all,
+>=20
+> At last year=E2=80=99s sambaXP conference, I introduced kubernetes =
+concepts and possible use cases for samba in the era of the container =
+platform and demoed the prototype of a samba-operator. Slides and =
+recordings can be retrieved from the sambaXP archives [1], and the video =
+is also available on youtube [2].
+>=20
+> In the meantime, the prototype has grown a real ecosystem:
+>=20
+> We have created an organization samba-on-kubernetes (SINK) on github =
+[3], containing a few initial repositories:
+>=20
+> - samba-operator [4] - the operator code
+> - samba-container [5] - samba container (file and ad containers)
+> - sambacc [6] - configuration tool for samba in the container
+>=20
+> We have also created a public =E2=80=9Csamba.org=E2=80=9D organization =
+on the quay.io container registry [7]. Pull requests on the code repos =
+are tested in kubernetes and container images of the operator and the =
+samba container are automatically built and published to quay after =
+merging. The quay.io space can of course be used to host other, =
+community-facing samba containers!=20
+>=20
+> Today, at the sambaXP conference, John Mulligan and I gave a =
+presentation of the current state of the project, including a demo, and =
+an overview of the work that is currently being done as well as an =
+outlook of things on the roadmap. The sambaXP website [8] will be =
+updated with slides and recordings (will also be available on youtube =
+with an ETA next week as I heard :-) .
+>=20
+> Contributions to this extension of the samba ecosystem are of course =
+highly welcome! - Issues, pull requests, and also the github discussion =
+board work in addition to discussions on the samba-technical mailing =
+list.
+>=20
+> Cheers - Michael
+>=20
+>=20
+> [1] https://sambaxp.org/archive-data-samba/sxp20/sxp20-d2/=20
+> [2] https://www.youtube.com/watch?v=3D8u74SDHxD6A=20
+> [3] https://github.com/samba-in-kubernetes=20
+> [4] https://github.com/samba-in-kubernetes/samba-operator=20
+> [5] https://github.com/samba-in-kubernetes/samba-container=20
+> [6] https://github.com/samba-in-kubernetes/sambacc=20
+> [7] https://quay.io/organization/samba.org=20
+> [8] https://sambaxp.org/=20
+>=20
+>=20
 
