@@ -2,131 +2,133 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35D6937ABFD
-	for <lists+samba-technical@lfdr.de>; Tue, 11 May 2021 18:33:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EC2D37ADD5
+	for <lists+samba-technical@lfdr.de>; Tue, 11 May 2021 20:07:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=BkcsnhlbiEwihx1Y/MkTscxX9yrG72E49r/oLeR6HjQ=; b=qzaUCUrAWbKt21SFQCz//Whwsd
-	9fkt0+5zWzwatLwHhV5dACa9nkKsT8tRdXhwa9SbyEAB9UPNC/5XOIgG1hckrxSaXPOJHjfanbjPD
-	6zhm/VNVLvRaunIpk2Isyuefsws13ZruZSHGqsyAn6e/FhdmBUOdZZCESw4wlSYxyaU8Vf6rjhzeW
-	F1uaue2xx9p6cmGN0mJtYX+t6r2Q3vGIN1QIrr/FyguFwZL1lK3VhWz5Zs53RCtMP0S7auGeTjQN2
-	8vv0Zx/ixxqLnryEZw37UJxO6ziBezB1OALJZ6BXxw6Az0sDXTHjYcRL9eG02venG4X8S3N7+1Irw
-	IZc7NNpA==;
-Received: from ip6-localhost ([::1]:25508 helo=hr1.samba.org) 
+	bh=173L8vf718O/bPdbE5QQQSIeLcFB1JS87qzy9IasVv4=; b=ndsxJsppZmVxDjth4mbRIbJXWZ
+	7igFuf1uRg9j79rDlvhAuemlO4pAaFSpiFKxXV/b6VdDvXmgaed5WERoXPsn/CbwPM6lvV9R9ncgx
+	5aYL0/3f4wshiZMzNiU0Jhn9LhlwjbxHOzCks4RvmJSUXGH9H46gfyXgSIVOdeYzwiHm+xifyAJIa
+	t583rp/7TIOjbX8B4No2UwE3EFF358oId44lQn9TkD9RYBu3m+JDMqLCZLoUWotTIsvVc7PDxf+i1
+	vwM1vvyUChPEF6t7W9xoEQr6OAYuSBQGp7TMJ1vM/CnUlDymd6qfCXgVdRNEW7x2lGHuFxVf1c0/R
+	QEDABorA==;
+Received: from ip6-localhost ([::1]:30774 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lgVJ1-00H0af-Sf; Tue, 11 May 2021 16:32:23 +0000
-Received: from de-smtp-delivery-102.mimecast.com ([62.140.7.102]:29317) 
+	id 1lgWmK-00H2tM-R7; Tue, 11 May 2021 18:06:44 +0000
+Received: from de-smtp-delivery-102.mimecast.com ([62.140.7.102]:25122) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1lgVIw-00H0aW-H3
- for samba-technical@lists.samba.org; Tue, 11 May 2021 16:32:20 +0000
+ (Exim) id 1lgWmF-00H2tD-Hi
+ for samba-technical@lists.samba.org; Tue, 11 May 2021 18:06:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
- s=mimecast20200619; t=1620750735;
+ s=mimecast20200619; t=1620756396;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=BkcsnhlbiEwihx1Y/MkTscxX9yrG72E49r/oLeR6HjQ=;
- b=hAdVAsi/N6N8mvsPs8JGUA6sE9KHApB4WLy2rJEj0oUiFMHi5OK1aGbIqmg005MJ0kmrd6
- MdwYg+IKlLK8nH70z4da9cps33gjVPgR790Ax8514O68u6HB89VwlGefLwOx15HMU+lKu4
- uQwxNh9AZqFws+yHlTGwaa5n8IXW/qo=
+ bh=173L8vf718O/bPdbE5QQQSIeLcFB1JS87qzy9IasVv4=;
+ b=LbOlZhOQutX9MNuoyQb3/aJTBfBJHNLyLSEEAWkPGJqmZY1ara1JE16Gato3iwt3tY3PTC
+ jPb9Jc4UNVxtAv0G3U7GZL0V2dud6S8ekIj8ppBp4EdAR2OpgTDWsLl8vLNUZgBg9K+DBQ
+ 8j4mXGG3c3UZgcrx66vvkZVI+CnCXpw=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com;
- s=mimecast20200619; t=1620750735;
+ s=mimecast20200619; t=1620756396;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=BkcsnhlbiEwihx1Y/MkTscxX9yrG72E49r/oLeR6HjQ=;
- b=hAdVAsi/N6N8mvsPs8JGUA6sE9KHApB4WLy2rJEj0oUiFMHi5OK1aGbIqmg005MJ0kmrd6
- MdwYg+IKlLK8nH70z4da9cps33gjVPgR790Ax8514O68u6HB89VwlGefLwOx15HMU+lKu4
- uQwxNh9AZqFws+yHlTGwaa5n8IXW/qo=
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05lp2175.outbound.protection.outlook.com [104.47.17.175])
- (Using TLS) by relay.mimecast.com with ESMTP id
- de-mta-38-FvgdQ3jlMd-ge2zQkW3Wyg-1; Tue, 11 May 2021 18:32:14 +0200
-X-MC-Unique: FvgdQ3jlMd-ge2zQkW3Wyg-1
+ bh=173L8vf718O/bPdbE5QQQSIeLcFB1JS87qzy9IasVv4=;
+ b=LbOlZhOQutX9MNuoyQb3/aJTBfBJHNLyLSEEAWkPGJqmZY1ara1JE16Gato3iwt3tY3PTC
+ jPb9Jc4UNVxtAv0G3U7GZL0V2dud6S8ekIj8ppBp4EdAR2OpgTDWsLl8vLNUZgBg9K+DBQ
+ 8j4mXGG3c3UZgcrx66vvkZVI+CnCXpw=
+Received: from EUR02-AM5-obe.outbound.protection.outlook.com
+ (mail-am5eur02lp2057.outbound.protection.outlook.com [104.47.4.57]) (Using
+ TLS) by relay.mimecast.com with ESMTP id
+ de-mta-24-wnnrHb6lMxGgKBdGOMQlDA-1; Tue, 11 May 2021 20:06:35 +0200
+X-MC-Unique: wnnrHb6lMxGgKBdGOMQlDA-1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WDLlBxVCQzKrvP01Bjb7m6Pw0SZU4ShbBrq+e+CUvYjP6IQbNBtVThGu8JZYxh1qw/7uxWrzWpRQib21PUZM9IqT5HhDli/kGAQV6DnHfogdDW+UXVN3tvcZSphHebUqdgOkysuqfDJuvn3lar5qnDyY2t/VKqoZCRgvKNlLIB4CUS09GVcahVTWejLtO38V9KF9ajaNyW1LTtIQrL/4xHemUeyzUh/Su/YpNQ+kunD25ppmGv9WxH7V8ZyzpUEyZpt8Evd4QH8myyfmcn/72p1qUTtRXFKbtfF13AIFtnGLZS8dnWSs8f47TCAmlYB+07hk0iNbQqWcuFSAKgpNAQ==
+ b=WtFqw22Cqw1De/mtMZkXhbhVfyo3tgS2B35zpkA4e5q/uztNibFD9+Q4/a/FnthOZ6EewYggCZwiCZmC9+8jFF/kA8OBkC9SMYGWU7wbPF2inKmBXFeM7EJ8+Y/cTahwGQ3PO12F3h1vjXr+C+GPUbsn79iitmr+52dCfKLrYlKhKgFx2+M/jDJb6DqjGFbpCsyiufkzhrZPGQq5yAPXITn39jqlm5L7UKdjYwUd6LYEG1Zc8JUfojTzg4cIKRFAmT+We58/+GqHJA21kyVDEENFUloBy1Nu7ifYbcJMkBjbmuwrWAGbh5eCkLnViyHgAEe7DFlumpErCO1t1Gxusw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BkcsnhlbiEwihx1Y/MkTscxX9yrG72E49r/oLeR6HjQ=;
- b=POAQeRTrz7hk88m7ExODw0xxiEYMnmZVYsW3dXNS3Q/3h2EdoBcP+MKYI0ngNf+0uHnhgO8bFk+2vrLbXK5Ad8wnHqm0wti9wZgLhv46JGXfPf65BjJvWs7PGIVPw84NLMdxr349A74Vwawr2qsgP3JHbZ+U4MpR/p9TEhaKePanoyya7uwR3xF+H3q+w7zu0IOcH8Ne9gLjT9bhF1t4ivTS5F+2d6S5ZAPCtIholm/5uFvPDVJn73Vxd6EDPw3WJEeLlxIpi30oYzryuf2dA9NUdoQzdEu1qTXj7cqpRHrlIFwJVxPgTj7UrtKaEnBeCTg016oD0xndK9yfKd2Xlg==
+ bh=173L8vf718O/bPdbE5QQQSIeLcFB1JS87qzy9IasVv4=;
+ b=kikWEatoSJtH6cty9PLCV9ivO413WQMn96zN5Re6rzFwwhpL64WuE/6+2cZ+lsUOhbADkVUq54dEYKm8pW1aWZF3eePAGsJ9rVhZ3dfOdmiohu8JUbufHqTPQP6eQemAPnefHjrVDqx58Y5gm6BZod+ysZ4UPG77o/tekVVfNktDcI7QLT0s4SX3rt20ZQomozQxeXl1mrEduh+o2nPWhT6vblWCj1wnqE3Kf8W7nN+OoLOVwkXxCnqbElPOrg3AMTbEiUASafRp7Y7x33Gs7JzQziV37fJwUnBm3fUOUbvDJNedyF6OdSuoHdUBeIKy6My26JwwNw3fUN9T06oBOg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 Authentication-Results: gwmail.gwu.edu; dkim=none (message not signed)
  header.d=none;gwmail.gwu.edu; dmarc=none action=none header.from=suse.com;
 Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com (2603:10a6:803:3::28)
- by VI1PR0401MB2400.eurprd04.prod.outlook.com (2603:10a6:800:2c::15)
+ by VI1PR04MB5918.eurprd04.prod.outlook.com (2603:10a6:803:e1::29)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4108.27; Tue, 11 May
- 2021 16:32:12 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4129.25; Tue, 11 May
+ 2021 18:06:33 +0000
 Received: from VI1PR0402MB3359.eurprd04.prod.outlook.com
  ([fe80::3c87:7c9e:2597:4d94]) by VI1PR0402MB3359.eurprd04.prod.outlook.com
  ([fe80::3c87:7c9e:2597:4d94%5]) with mapi id 15.20.4108.031; Tue, 11 May 2021
- 16:32:12 +0000
-To: wenhuizhang <wenhui@gwmail.gwu.edu>
+ 18:06:33 +0000
+To: Wenhui Zhang <wenhui@gwmail.gwu.edu>
 Subject: Re: [PATCH] Signed-off-by: wenhuizhang <wenhui@gwmail.gwu.edu>
-In-Reply-To: <20210509233327.22241-1-wenhui@gwmail.gwu.edu>
+In-Reply-To: <CAOSEQ1p80+JemJkj975ZTt5xw4XCPtOf2uBEvQs9RfW4UkDWXg@mail.gmail.com>
 References: <20210509233327.22241-1-wenhui@gwmail.gwu.edu>
-Date: Tue, 11 May 2021 18:32:10 +0200
-Message-ID: <875yzptenp.fsf@suse.com>
+ <875yzptenp.fsf@suse.com>
+ <CAOSEQ1p80+JemJkj975ZTt5xw4XCPtOf2uBEvQs9RfW4UkDWXg@mail.gmail.com>
+Date: Tue, 11 May 2021 20:06:31 +0200
+Message-ID: <87zgx1rvq0.fsf@suse.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-Originating-IP: [2003:fa:713:d359:b215:6aa5:3693:e486]
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 Received: from localhost (2003:fa:713:d359:b215:6aa5:3693:e486) by
- ZR0P278CA0075.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:22::8) with Microsoft
+ ZR0P278CA0148.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:41::23) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4108.25 via Frontend Transport; Tue, 11 May 2021 16:32:12 +0000
+ 15.20.4087.50 via Frontend Transport; Tue, 11 May 2021 18:06:33 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 25ac8358-8e52-41c3-081c-08d9149a5487
-X-MS-TrafficTypeDiagnostic: VI1PR0401MB2400:
-X-MS-Oob-TLC-OOBClassifiers: OLM:1728;
+X-MS-Office365-Filtering-Correlation-Id: e554e124-5072-43e7-4a3b-08d914a782af
+X-MS-TrafficTypeDiagnostic: VI1PR04MB5918:
+X-MS-Oob-TLC-OOBClassifiers: OLM:6108;
 X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Message-Info: raiYDMbFWPhdrEKpsnXl9ArXEim92h8OLQbH0qvsPpANxTWlM0YmHDIHDfFqgyQnTYjtbI7GIIzO/ITpTrs0N/4kVAsii7xqco4L69zoIdOVixwqw2Gk7ekjmYURkylDmkC1obYMtAMKIX50RL8M8rtA0Udy2j2p72hzmNJc3eKC9/KmaZPcZBRLn6DWTm43tzUVaai/meiHABs/NGZb1OsvHMmxHxT4h3M1OpjKw2+MK3eSoRkKPZmNoa29rG16I/lGSUSJweaqFRpj5ZivIyR/UqQEoGo+cTdrrRvCTuJeiFdWbHrdbPrrecuSiO1k1bx6rfPPZ4lbXg1RxCnlCLh5UtnyWpwPU+lgAlReIpTTEqjdUfr3xmAMs7LzzbSV2ixx+YJBFGQU2mA0Pj9iabkcwHSKwLiWTR+qEnLVcWWloslPgXeAmOyyf0m5/f9czO2KdVhHLkL4pT4ihJK+SoKyrcZ8B4c8AUC85ievjOQGjUElcXyIydAD1p/WLUfpkOgVQ107P2DUCwJRZClgkw1sg6+DFUBju/pKt/1kN6mI1VeER9rrLY2dgq5shARQ5ipzffbt+a5eOlBSlLeKAA==
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?cDRubS9MaWx1azhBRGVycEQrMHo0Y1VaaTFDL3pPdkFIdTJXeWh5aUJ0bHZK?=
- =?utf-8?B?Wk54LzEyK0pHRmtoQ2lITlFhRS9pQ0JzQm9VaDJRYXdwTmROaXdKRSs2R3Vq?=
- =?utf-8?B?NnFza2UvTWsrRDUxR1pFaTY1ZmlTTmVQZkErZTdpQVNuN2c4RFlkVnlSYUx3?=
- =?utf-8?B?emJjVFhRSmZFa3VKd0JEaVUydDhyeURLSGMzcHVKanlwajY5bXVVc1hIdzh1?=
- =?utf-8?B?d3hianJuZUs0dlJtcFI0K2FJbVJxckh6RVVVZ3BuM1BrWlBmQXpjWE91RGpa?=
- =?utf-8?B?SndMSXdnVGFPcmhZK09SQkdvTWovb2dPU1A2bG9pVHRockZacGtxWEpsbmQw?=
- =?utf-8?B?YzN1cHRJNURSZHpOd21xYk5tbFB0TzJabkVNU0JBVm5RR0ZBUmRVcGFlMGxZ?=
- =?utf-8?B?SUtCMVpZU0lycm9BaWdjYzNUYmVraGVpNW5CTHFhWmk2LzhIbTRzcG1yQnVs?=
- =?utf-8?B?aDNvQWw4RnRzaEtHVlFpZDdRZEp5anI0YmZiN0RRZVVZMGFtUHBBQTVKN0E2?=
- =?utf-8?B?d1U1dVdFU2Y2dEFvV3RHWmx4d2hSZnNxcjhDSmM1OW1sNDc2d00rTm1TYTV1?=
- =?utf-8?B?VWZNMlNPNm56d0FseDA2OHdXaVc0VDh5VEhmL2VjbkIrSlg1YWN6V2F1eDZC?=
- =?utf-8?B?cnZPY2xXMC9FQzhqbUpqT2VMcHIzRXR6Ri9lVk40YXlQak1vRUhVQ3BSemU3?=
- =?utf-8?B?ck4wT0FYeWE3WWlSenlrbHBURG92UExqaUVnM00xaW5qemppc1dBZ3FiSVE2?=
- =?utf-8?B?SnZFdG8za216MWRsMmNnczVrMitwT0VUU0VybnRPRC9kMGJkQy9nY0NnUnBl?=
- =?utf-8?B?L096bkJzY1Yxd0k0NnZYbUU3eVd5Tkd5Zmk4Nm9QM3VYVDVzQThrKys0THpl?=
- =?utf-8?B?elphUGVTT2cya25aNXZNQ2RGTS9YZkJJeCsyWjd0L2JxOVJFamp4M2tNWVNH?=
- =?utf-8?B?QTQ3REdDTUZ1VllaZC9hQVFiOUtxSXV4c0NjbmpjNStzWm5FQTdnSmg0THVp?=
- =?utf-8?B?L0o5YXRCdnlHTy9RZUJZNmNwSmd0WnBlME1ZSmtqUFpQWDdaSmJNV0JkYVdK?=
- =?utf-8?B?Z09BZEpHaG5PVjlzNHFwVEJhWm9UMUNIS2xQRlNnT2x4aFZhN29KNDJCU0l1?=
- =?utf-8?B?REpTRVV5YWZWN1FqOTg4K1ZYdXVVMVR4aE5zU2NQckhRRXhYZERJYVgzYVZ4?=
- =?utf-8?B?bmRleW5kNmNqZ3RwSXZYdk1oVzFzRm84ZXRSOW1mSGV3VWQvaGhzMWRWSFVw?=
- =?utf-8?B?THZxQUtGZTgxT3BLdm5XL3dJTWJCdGE1ZE1nSVVSOGZNbFpjUFZ5blByM1lt?=
- =?utf-8?B?eTZIOVh4cm9rVHJCTW9wQWk0V3lxTzllMGRVMVF3Wk1DMW1QdzNzYnRxTEVH?=
- =?utf-8?B?VlFvVGI2T3VVWDc4UCt4YTZ1MEsybFF0Z0ZjeWhCOUJuUEJ6WkQ5MDdpMXVU?=
- =?utf-8?B?WXRKOXh4bVNwMk9OQWtsMEFXQXhVVmgrdlBPcDNPaGhTb1FIOElieGwrRmxV?=
- =?utf-8?B?eFNkOWRXMFh6dlZCM1M1ckVSZlp6dmFnWVN3SFpxV0dzVjdtckFjZXdvREEy?=
- =?utf-8?B?Z0xBWE5FcUlDeGI5aWduNW9HMFRuYXc3V01XTXlyNUY4SDJ0VnpIUHFBVmZo?=
- =?utf-8?B?WU94YmZ6aXBhN1AvRTJoN2ZNVmw4UllwdnNwYUovWDh0SmYxWEprK0kwMHNr?=
- =?utf-8?B?TjlVRXFDSFJRM0lUMElYTW95S0d6aGl2MHlpZUdEMjJEVHRSeFZHZ1JwbEFS?=
- =?utf-8?B?OWhZN1lMYjBNYjROL2o4NjRhL0NTOEZOWXFZL2VnSjRkVmhVcmJWdnVmOFBx?=
- =?utf-8?B?WEZGWjlPV1lYSlR0Wmo0d3VWYTZYYjVEYkQ5aDFPTVVJaGQvYld0dUUyN3Rs?=
- =?utf-8?Q?KpVL55Xq+iWdn?=
+X-Microsoft-Antispam-Message-Info: bpyZArgTacwSNSj2f3+Pkhimy0LjPT2c/9Pt5rgD9RdIjFgT8sjvmRb+4vLe2a5BT5+zUcENUjKKKtwMgzBKZ8jJ6VediFySFAOtJPcVi3MTXR8mlYmQIzWzJlVqDutGNG84QCOlNEs4c4eXWl6YejWgOAHB493BtkOfd/eP9ePK931m+8USZd8aFfJmWhzgJbpsE4UGR72lpdiuEUak7YfZKSv5nF4cVJE++/jOyN9Lj0BIuNcWqQqtkBTEOYXt8bUr/4MjgyKjPUg/KJRalfcqyljFrxDFAeT31D3Yzaq8IwwM3JuZNM7/n9nS0WZQZEyYWBiUekykPiifjPr0PEh4+kAIvtedxlAtdhm93IA0P7vUaRx+K9a7ivua5O385TMAxIL+vAW4+J7j1G7jVKJuSYzRWm9R5C/s0VvlwW7cYCZGPqtsoVV1v1xuQI+a1HMK2elywjUaASi50aCEA0pxvBS7NEOXkf3SljQKWOVjPl3muRND9UEioI1R7Vs2DVnCXzt+UJm6tmhXf8ApJonjRWOK3DWPvR+jUbLkSJUgqASNrK5m2PawSg1hoElR3w+s7ujmsW+JEsgSkh48kA==
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?UjhrRWlhN0NYVmtIMjQwTGQrYWJ4TEl2eS92UWNSdEVYSnBhVE1nNzNjWmsy?=
+ =?utf-8?B?VHJjVUU4NGFyVVdSL2U2bVQ0aXhlNGxyM0ZpOG5BamRyR1RtMEJNYUVHS0tQ?=
+ =?utf-8?B?MmM4bU02RTN4ellnTjBJSGQ1bS9zcWhNbWp2TGFuVkwxM01FalV0VGNSRkJa?=
+ =?utf-8?B?aHpBRWZLOC8zdEVUT2pldTYxa1JaMXhOTFRzWWkreXh6WHVMbnhPQjlrZWZZ?=
+ =?utf-8?B?MWJrMEF3WGVaQVJ5QURkbG5RWjd4ajFGSDFtTjErbzd2VTNiMVBaVVFldlFj?=
+ =?utf-8?B?dHkyMnFrZkwzYmVnL25vZEw5dFNyN2l5ZHhZemZuWjAxWTM1NkVMaFI5emg3?=
+ =?utf-8?B?cG5La0dLeW1TdFhWYVBZVWs2cnlyOUE3TkEyYjN3WmIzWGlodjhtUWVxYjlF?=
+ =?utf-8?B?Mm9sVFNqRTVhdFl4UUF3U3gxUXE2ZG82MXhkME5STWJ0dEpIdUVVNjlLc0JO?=
+ =?utf-8?B?QXUrdVNMSWtHYy8zU0o1Kyt2V3NKTzgzaDRkOTNTd3ZBaWRKOUlpZm9JSC9l?=
+ =?utf-8?B?UGplc0pzejhsS0ptZWd0SWtJdHlmQXVoeFdPWVBiK1hKcDhiU3ExSjEyaHpB?=
+ =?utf-8?B?YnVCM3J3WkxNNi9KM21ic3hYY0lUL0NvU21hYzBpZnpaWUhhd3Zpc3dYNjF4?=
+ =?utf-8?B?ck1VT1lrbWg5RGhnRlNRSi82NmZBU3NLdTVraWVFUnd0K2wvbWF5WW5nMlZu?=
+ =?utf-8?B?aEk4aFpmK0RzM2E5dDc2RmlvTXNBbXpxYStEZ2JUQVJBZWtOOHR5U3ZoMVNq?=
+ =?utf-8?B?RTlBSnJyRWxYdis4ZTl3VkpxVncyOEExcU1WSlBhYi9DSDVnQzR5N0FDYksy?=
+ =?utf-8?B?aW12QXdoVkVTU2EwdUsxTUZrVkUxOTl3aTFEdFRNcmZwWFVLV0NWOFJEYkdY?=
+ =?utf-8?B?aE94N1lFL1N6ZGdPa21wYStsdUwwQjBsendqd0g2VitFYWxyenNGT1Y5NXRN?=
+ =?utf-8?B?Rmthd0ZJcUJnUFN2eXhoUnB0M1ZjWTBFV0hzRks1bXEvM1dEZk1KMkFiNFNI?=
+ =?utf-8?B?VEIxck5TVG1KQ1JnV0lmRlk4S1g4Wk42bzNqNVNWMFRjc3pma1Q2NlNuQ3N2?=
+ =?utf-8?B?QWdWRWMwMk41RWtadWdaQnowSU5PL09YRWFGWDUrcmQrblBiWExwbWRiSmc2?=
+ =?utf-8?B?am5JeDdFL0hoVk94T1UwTjZhOFM5ejlJTUkrMUtqM0YyZm1pUVhvZnRvV2sr?=
+ =?utf-8?B?Z0k2UnAxSm5HVlp1VXl6MER5b0llSUNRM2FXWVFEVmg4WnlncEIvMXdEUGR4?=
+ =?utf-8?B?dm1vUDAvWERFTnp2akZPVDhJWnZvU2FHZFI3QUY3Rk9qOVdoZ0haakprUC9k?=
+ =?utf-8?B?aGdPaXYzMTZiZjhDS0tpQ2dzOUNUeUkvUnJDRndPZWFCNXR0dkhTWitadkR0?=
+ =?utf-8?B?R1VLdjF1YjArTXBzWFIvY0lZU09wNDJlZUpzUlpKUUx6a2o2K3l1Z1U0NnlC?=
+ =?utf-8?B?aWdmSW40WTM2RWxRVHFvTWg2aHY4MWh4RWp5ZGRJNFVvZFRIcVhpaVBQTmRm?=
+ =?utf-8?B?SGZHN0QxbUJVUlREK1BITkZOZUlQQmpCQlVrWHl1YkwydWVNMGFQTTE5aFJT?=
+ =?utf-8?B?Mmh4UkZ5Niswb0hERmtnSmVUQ0hreWVFNzh5M2dscFJYREx0TDcwSVdlYThj?=
+ =?utf-8?B?QWhNN3ZHRkpQMU52NG9ibFo1NER2Y0NOTDVZNHAySU0zMmdyNjlCd2lleWFo?=
+ =?utf-8?B?R25ramNxb2h1Wjd4Yjd1bkhCZ3NnL1pXbnBuRTFoand4L3IxS2ErOURrL0NM?=
+ =?utf-8?B?aWZVcGhrN1RUUkhGRHRpWWZBdStCem9iOFFCV2ZvVUNYVTRDblVSWThpaFY2?=
+ =?utf-8?B?allZSEQ5RTVkYndpVVVhNVlTeXRhdmpYa24xSTlvZmZaaU9SblZUOEtTWUh6?=
+ =?utf-8?Q?DvM+K7WuSZDsq?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 25ac8358-8e52-41c3-081c-08d9149a5487
+X-MS-Exchange-CrossTenant-Network-Message-Id: e554e124-5072-43e7-4a3b-08d914a782af
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR0402MB3359.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: i2oRHEmB/EfrY/hPpqryzo1cRZ5rtXxHX6ngn3alGcwwohDz+ckyoh6gVkUAXZzK
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0401MB2400
+X-MS-Exchange-CrossTenant-UserPrincipalName: +KFcyzJLg2n8DDdPZWV1zhLMrFVbjWw45YWQgmMbjRLI3UuQnU1ZIF/mKd1/YW4J
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB5918
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -143,29 +145,22 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
 From: =?utf-8?q?Aur=C3=A9lien_Aptel_via_samba-technical?=
  <samba-technical@lists.samba.org>
 Reply-To: =?utf-8?Q?Aur=C3=A9lien?= Aptel <aaptel@suse.com>
-Cc: Steve French <sfrench@samba.org>, wenhui@gwmail.gwu.edu,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- linux-cifs@vger.kernel.org
+Cc: Steve French <sfrench@samba.org>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-wenhuizhang <wenhui@gwmail.gwu.edu> writes:
-> Deadstore detected by Lukas Bulwahn's CodeChecker Tool (ELISA group).
->
-> line 741 struct cifsInodeInfo *cinode;
-> line 747 cinode =3D CIFS_I(d_inode(cfile->dentry));
-> could be deleted.
->
-> Signed-off-by: wenhuizhang <wenhui@gwmail.gwu.edu>
->
-> cinode on filesystem should not be deleted when files are closed, they ar=
-e representations of some data fields on a physical disk, thus no further a=
-ction is required.
-> The virtual inode on vfs will be handled by vfs automatically, and the de=
-notation is inode, which is different from the cinode.
+Wenhui Zhang <wenhui@gwmail.gwu.edu> writes:
+> In this case, should I send out another formatted patch push request?
 
-This looks ok but the patch subject is wrong.
-Also the signed-off tag should be the last thing in the commit msg.
+Yes, fix the patch then you can generate a v2 and send it:
+
+    git format-patch -1 -v 2
+    git send-email --to=3D.... --in-reply-to=3Dmsgid the_fix.patch
+
+where msgid is the Message-Id header of the email you want your v2 to be
+a reply of. To reply to youself, your msg id is
+20210509233327.22241-1-wenhui@gwmail.gwu.edu
 
 Cheers,
 --=20
