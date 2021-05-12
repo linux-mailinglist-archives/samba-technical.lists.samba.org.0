@@ -2,46 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70A2437BA15
-	for <lists+samba-technical@lfdr.de>; Wed, 12 May 2021 12:10:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D8EF37BFC0
+	for <lists+samba-technical@lfdr.de>; Wed, 12 May 2021 16:19:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=ADK5n0wwjbXMzX56x3JazQZVzpBKBWMrOO0D5HjddE0=; b=xJnNAOPP+Fe3qxio417by3CAro
-	I+DPW8P0yPLYJkbj5WigG73nHDYlyr6hTQsiaVdxyFMfOVF7K3ilJMY7DZBLuaoY/gQ8kA1xtIzu+
-	Oqo4FTDWDwggHSwLdrUqAazuoudsA46zZbvjBtBSDTXw4kgSyDXG6OST41+3PpomATotXZY8U2DeI
-	j2/8IjKslEq7mIA0Uk4mlyFNYDGUeXIL/+9NqyONUOSUrt7wzljS0kMrheR+tbdUhjUdYpkdyeRmN
-	mIXsn7hgBvD0lrtI07ZmbSpYV2Ns3H7TIIYumzakuU0M3YttipC8rwshnITDZpZ5MCDQXctvgK2uB
-	HS8pP6sA==;
-Received: from ip6-localhost ([::1]:50752 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=3rDGuJwYx0cWgDzsl84JkCSjOUNPSLWfz4XaQM0f39s=; b=SnATdHtiHY7LRI5C0u+BqpiTJF
+	iVzi+0lBndsYN5Kul2kFp7uh6Hlqp4RCQ/mscl0e3VD4A5yxZJ8NeL/+X/Pk+G6SGpwdKHgLic/0/
+	Y0eNrWIPs1KfKEfNJ9QSPOTncDZa3kHZOpgQhXGVrgTEZ4bu0rZTRgcR2ecrvK/o6/Ti2yJ4x3aQg
+	MUo7i1KyPItkWWj+TSe/aeZeYYbyWWaN5yeTUhjC0gHiuoKE7yMqEAXuIahQHgM64ZPWI2q9XHqr+
+	HS+V2KIo7P42WwHL7H1sM13B8aj3xcoOED0Z8pcDb81YyNIKpaMUcSmUqZXUP6Ma+MCk1rw1Z8qmW
+	Vt3mBelg==;
+Received: from ip6-localhost ([::1]:18448 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lglof-00HD9C-5P; Wed, 12 May 2021 10:10:09 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29262) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lgloZ-00HD93-RH
- for samba-technical@lists.samba.org; Wed, 12 May 2021 10:10:06 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:Cc:From:To;
- bh=ADK5n0wwjbXMzX56x3JazQZVzpBKBWMrOO0D5HjddE0=; b=ZY8mDSfWgXZ+3g5yuPvktlqcPh
- lC3V6Rf/NQWYPC/Lm06lFKbQDi92ClL1hurjNB4kKjwmCzv4yAAHMXF1SktInlF4SOAhompMJqzaS
- Sudn/CKzrsjDr1Url5KdbMlnERqAOwOkoHsh0X0lxJML/9ux90FUtPd/7USImwSzOzv9YW2nRcY0J
- Je8VMmoyYmKZanPdt0iT6W8Acti2dGqgmyYmx8XKOHRcifVnGx442KsgyU48YzRvkC8FVCSWNsAQz
- m8TjlVI5uDWNOTsRDcqkffkxCMX8eRifXJXJn78wKMCCllnBtKVZkiBnx+0755HhsD1bLdjg1P+GD
- V9U4VAL45pFz7tITAQ9VjNzihhMvlLn3a6KC8np0Zy0v9lG7K18jjWOWoNtlFcwqib6kivKVSJ7QC
- vIEEfV5Y+XQzbLjFdutB+vohsHVGM0SgtQQ1NjAiKRlbDMyoSFNsF7Ggo1KejAhJZh+2Q6UtlBGUl
- e8EVOHRYdWdrROzCDqijoPva;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lgloU-0007gx-KC; Wed, 12 May 2021 10:09:58 +0000
-To: Gary Lockyer <gary@catalyst.net.nz>, Andrew Bartlett <abartlet@samba.org>
-Subject: get_{local,remote}_address() in winbindd_dual_pam_auth()
-Message-ID: <40406211-ddb0-39e9-eeca-6f4922269754@samba.org>
-Date: Wed, 12 May 2021 12:09:52 +0200
+	id 1lgphx-00HJtG-Ej; Wed, 12 May 2021 14:19:29 +0000
+Received: from [195.221.236.186] (port=48126 helo=smtp-out2.ac-dijon.fr) 
+ by hr1.samba.org with esmtp (Exim) id 1lgphs-00HJt6-HT
+ for samba-technical@lists.samba.org; Wed, 12 May 2021 14:19:26 +0000
+Received: from hermes.ac-dijon.fr (localhost [127.0.0.1])
+ by smtp-out2.ac-dijon.fr (Postfix) with ESMTP id 30F92105D
+ for <samba-technical@lists.samba.org>; Wed, 12 May 2021 16:19:21 +0200 (CEST)
+Received: from [10.0.0.154] (85-170-166-112.rev.numericable.fr
+ [85.170.166.112])
+ by hermes.ac-dijon.fr (Postfix) with ESMTPSA id 6B587F95
+ for <samba-technical@lists.samba.org>; Wed, 12 May 2021 16:19:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ac-dijon.fr; s=smtp;
+ t=1620829159; h=mime-version:from:date:message-id:subject:to;
+ bh=3rDGuJwYx0cWgDzsl84JkCSjOUNPSLWfz4XaQM0f39s=;
+ b=RPxRVPxvTS4pMK1ttr4qXfLEZ2mtNFg1GXrUQjaOnr75cbHndK/mi7Hp0bfR2JuVNuvjYn
+ cFwU5TFuNXMLx7eAo66spBGKl+MBGgAPPRmU+yZgp4+gMbWXmX76jbUtzPzU2PUUIJ4yoo
+ 6/TcZY7ilHh+6Gwb0+uPaLtvzdsK+ArdIeeXrIzW5ePuHCghxPSa+Fbs1Ao5TgEJ7CGyb4
+ gVlFY5dNY4ndWW/xQEau1mTkMf9mJTYg4/0yXyllDIlxpcFoCmDXfeX91uFakh9NRdc9sS
+ xvxv86R9tCzaa4/3AkYQH15ceOz+HSnnOUAvAqKJgJgNqsjJBLpy1GJ+L1pmDA==
+Subject: Re: GPO created via samba-tool don't Copy or Backup
+To: samba-technical@lists.samba.org
+References: <37f6ef50-99b4-7e37-b22e-a29f219ecf2c@ac-dijon.fr>
+ <bc1323c0-53eb-70d5-7e1a-c3d2e14a4df1@ac-dijon.fr>
+Message-ID: <daae17c9-1bda-01c2-e5f2-7f8cee6aabb8@ac-dijon.fr>
+Date: Wed, 12 May 2021 16:19:19 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="xpv8TnpvEhYYsRNsH5owuUKPNImhXei27"
+In-Reply-To: <bc1323c0-53eb-70d5-7e1a-c3d2e14a4df1@ac-dijon.fr>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,105 +59,103 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>
+From: Klaas TJEBBES via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Klaas TJEBBES <klaas.tjebbes@ac-dijon.fr>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---xpv8TnpvEhYYsRNsH5owuUKPNImhXei27
-Content-Type: multipart/mixed; boundary="ZUtTbJKCdMQoJV20bCzG2ynH2bHs4xZpG";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Gary Lockyer <gary@catalyst.net.nz>, Andrew Bartlett <abartlet@samba.org>
-Cc: Samba Technical <samba-technical@lists.samba.org>
-Message-ID: <40406211-ddb0-39e9-eeca-6f4922269754@samba.org>
-Subject: get_{local,remote}_address() in winbindd_dual_pam_auth()
+Hi,
 
---ZUtTbJKCdMQoJV20bCzG2ynH2bHs4xZpG
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+It looks like I don't get very popular with my question here. But could 
+at least someone test this to tell me if one can reproduce ?
 
-Hi Gary,
+* In RSAT create a new GPO and make a modification in it (I did : 
+Computer Configuration -> Administrative Templates -> System -> Logon 
+“Always Wait for the Network at Computer Startup and Logon” to “Enabled”)
+* Close RSAT
+* Backup GPO via samba-tool (in /tmp/...)
+* Restore GPO via samba-tool (from /tmp/...) with another name
+* In RSAT try to Copy this new GPO (right clic "Copy", right clic on 
+"Group Policy Objects" and Paste)
 
-in commit c8b7b7918b49f3598706190975a82be258aa9c44
-Author:     Gary Lockyer <gary@catalyst.net.nz>
-AuthorDate: Mon Jan 28 15:31:46 2019 +1300
-Commit:     Andrew Bartlett <abartlet@samba.org>
-CommitDate: Wed Feb 20 06:03:09 2019 +0100
-
-    winbind: Log PAM and NTLM authentications.
-
-    Generate JSON authentication messages for winbind PAM_AUTH and
-    PAM_AUTH_CRAP requests.  The logon_id in these messages can be used t=
-o
-    link them to the SamLogon messages.
-
-    Signed-off-by: Gary Lockyer <gary@catalyst.net.nz>
-    Reviewed-by: Andrew Bartlett <abartlet@samba.org>
-
-You added get_local_address(), get_remote_address(), which take a socket =
-filedescriptor
-in order to the addresses from the socket.
-
-However all you pass in is the socket fd that's created in
-fork_domain_child() via socketpair(AF_UNIX, SOCK_STREAM, 0, fdpair).
-
-I'm wondering how this could ever be useful in any way?
-
-Also in _winbind_SamLogon() your passing down
-p->{local,remote}_address from pipes_struct, which were not used
-before in winbindd and are both NULL.
-It means that make_user_info() in winbindd_dual_auth_passdb() will always=
-
-return NT_STATUS_NO_MEMORY. Luckily that code path is not triggered from =
-auth_winbind.
-
-Before we used tsocket_address_inet_from_strings(frame, "ip", "127.0.0.1"=
-, 0)
-only in winbindd_dual_auth_passdb().
-
-You are also using the wrong pid for client_pid, it's state->pid instead
-of state->request->pid, state->pid comes from fork_domain_child():
-state.cli.pid =3D getpid(); and is the pid of the winbindd parent process=
-=2E
-
-Maybe winbindd's parent should check request->pid against SO_PEERCRED/SO_=
-PEERID?
-before using it for auth logging?
-
-How did you tested this (beside making sure it compiles)?
-
-What would be the correct way out of this?
-
-metze
+I get "Invalid directory". Even doing it via powershell and debug and 
+traces, hundreds of log lines, I couldn't figure out why it won't copy...
 
 
---ZUtTbJKCdMQoJV20bCzG2ynH2bHs4xZpG--
+Regards,
+  Klaas
 
---xpv8TnpvEhYYsRNsH5owuUKPNImhXei27
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
 
------BEGIN PGP SIGNATURE-----
+Le 30/04/2021 à 16:04, Klaas TJEBBES via samba-technical a écrit :
+> I'm sorry, I completly forgot to mention this :
+> 
+> root@dc1:~# dpkg -l |grep samba
+> ii  python3-samba                        2:4.11.6+dfsg-0ubuntu1.6    
+> amd64        Python 3 bindings for Samba
+> ii  samba                                2:4.11.6+dfsg-0ubuntu1.6    
+> amd64        SMB/CIFS file, print, and login server for Unix
+> ii  samba-common                         2:4.11.6+dfsg-0ubuntu1.6    
+> all          common files used by both the Samba server and client
+> ii  samba-common-bin                     2:4.11.6+dfsg-0ubuntu1.6    
+> amd64        Samba common files used by both the server and the client
+> ii  samba-dsdb-modules:amd64             2:4.11.6+dfsg-0ubuntu1.6    
+> amd64        Samba Directory Services Database
+> ii  samba-libs:amd64                     2:4.11.6+dfsg-0ubuntu1.6    
+> amd64        Samba core libraries
+> ii  samba-vfs-modules:amd64              2:4.11.6+dfsg-0ubuntu1.6    
+> amd64        Samba Virtual FileSystem plugins
+> 
+> root@dc1:~# cat /etc/lsb-release
+> DISTRIB_ID=Ubuntu
+> DISTRIB_RELEASE=20.04
+> DISTRIB_CODENAME=focal
+> DISTRIB_DESCRIPTION="Ubuntu 20.04.2 LTS"
+> 
+> And Windows 10.20H2.
+> 
+> 
+> Le 30/04/2021 à 15:03, Klaas TJEBBES via samba-technical a écrit :
+>> Hello.
+>>
+>> I am facing a problem with GPO managing on the Samba side.
+>>
+>> When I create a GPO named "test" using the RSAT on Windows, I can then 
+>> Copy and Backup this GPO.
+>>
+>> On the samba server, using "samba-tool gpo backup/restore", I backup 
+>> and restore this "test" GPO under another name, "blabla" for example.
+>>
+>> Back in the RSAT on Windows, this new "blabla" GPO can NOT be Copied 
+>> or Backuped. The error is "invalid directory".
+>>
+>> I CLOSE THE RSAT.
+>>
+>> On the samba server, I go in the "test" GPO directory (in 
+>> "/home/sysvol/domseth.ac-test.fr/Policies/{ID_TEST_GPO}") and do :
+>>   getfattr -d -n user.DOSATTRIB -R . > ../test.attrs
+>>
+>> Then I go in the directory of the "blabla" GPO and do :
+>>    setfattr --restore=../test.attrs
+>>
+>> Then I return on the RSAT and now I can successful Copy and Backup 
+>> "blabla" GPO.
+>>
+>> Why this problem ? Am I doing something wrong ?
+>>
+>>
+>> Thank you, regards,
+>>   Klaas
+>>
+> 
 
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAmCbqXEACgkQDbX1YShp
-vVbZEA/8C5JpqcaPhi1JMk5qOYtqF2bwYD9ZSZdAmYyf19tU90z3uhjFmx4vTep8
-WzLoVELiXiTjmdkboNEnfFkpgyxm0nvhvUz0ndso8o+jpnaKwoPvkObPXS5+jONG
-BVNW1Wv+URn0Kqhiu3x/lI2IsRBtx3HYNxpzAoiW8RBr4OdwVt/iV7JGnqwG49Rg
-SS5dkgptFD3foB/0w2oOCgbTOHqjeDxdkhF9V5pdzfRlO7pjY9tnUlCC67y5oL5i
-VIoGulyCXZtbIklYi+CjQlOMDrBm5RLxNDn1THN1qth8F2RUpS4CFvEvySwwpsxO
-bezfXOwFH24EG6JaCXngL1j/xRDrIml95ys/MiLjRCxZaUqGiZwz7LyeUVxNGZUF
-uUkBJM6QCSRHIwN5/LpICH+heg6pqJjJd1JDre0vt+s+VM8Ak4VUD6i7nf+wDpSd
-Vhmi+CR5swKbeKcaErmuAtVwVQkGlu/MOMi42FM4b1lkM9f2dLG6ijamM61NbWHH
-mU5XYh1v6DXdASoMUZALNIbxIvrBOgJTnPBqd7sh05pGDKMucgMRfFizjn2cRqMH
-Kr5IwCbMsdCcyMWaHCP92badnungc4ydO5AnZNdLAitcCCHUS/u/1tqB+ko1tSP9
-TXI6dHamroXiLHYW6g1nmNrWP5sVJWhVQaNVNUW9LYSnyRedMqw=
-=CJrb
------END PGP SIGNATURE-----
+-- 
+~~~~~~~~~~~~~~~~~~~~~~~
 
---xpv8TnpvEhYYsRNsH5owuUKPNImhXei27--
+- Klaas TJEBBES
+- Equipe EOLE
+- DSI
+- Dijon
+
+~~~~~~~~~~~~~~~~~~~~~~~
+
 
