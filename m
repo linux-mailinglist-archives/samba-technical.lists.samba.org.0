@@ -2,61 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63D1937EF0E
-	for <lists+samba-technical@lfdr.de>; Thu, 13 May 2021 01:08:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F30537F3F3
+	for <lists+samba-technical@lfdr.de>; Thu, 13 May 2021 10:19:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=ZcgFRXkkDjhL4DQBrJnZaWCBPO+CJCU+RP8a5XsgeOw=; b=tDiu3NEZVn30ieu0Vgi0NogMXm
-	7PiatRavLRWMo8ISDuhpthRk8z7oiI7YYu/cT/N6TGcMlk/Oy/jboXF4l5RQlKc5jxXikUqDoxO/M
-	AXGecVxEg/Mh08FNxsxl4ccpx3+jbRb6XjlmkNAoYmrlWsjENLA1dnZ7hW4BndlFrLk4pTnojvTmY
-	2LfBr8FL9hg7ZXCdj/z10v1mPFBozeavM1sRaDsJJ42Vp271ocarO/piaZvlQ1pgwpoEVGB9mWO5e
-	XeN2IG7D7BpxO8WbwHVmZH85CnpSoxD6C3cTquR2UbjIv95vu2akb5bz3TORU0JjDC54NMVu4w3w8
-	7f8kscWQ==;
-Received: from ip6-localhost ([::1]:26722 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=82l4rYUCaXCzUknIej5BDnJINAvrKMRgmvZR5LN8K6U=; b=1TYMq4dj3VKwXtIu1g1FYPZjtv
+	5PLacB48zN57DZcp6nbYd+WACu1emn/BdjYBLJf6jGqKoXiOq+ysw/f4XO6ztWMLaeeM5M9mC/B1u
+	bT+7xhjwYr29g55sfXPD3MKnQpy81E3UnabrtyOQ8NnQGArcjqKm1dXsjheIJfqA9lvs/9mKrhFaJ
+	KF7ntLcHRcgS39gNHV7HQqYL1wMmR3Cf4oj/LMPU0Z4s+cdt8LZOJSePFG0zJ8CkkYrPum13zKhC+
+	10GgTZ4qx2i2CDkGRBzO9VBTTiM6BosnkUnNSFKQhIkAJLdY5yllrtHKbEKg0taoG9nkn4xicI8Rt
+	xviqoNFA==;
+Received: from ip6-localhost ([::1]:29974 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lgxxD-00HOMw-N3; Wed, 12 May 2021 23:07:47 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz
- ([2404:130:4080::4]:56616) 
+	id 1lh6Xo-00HRGX-Ar; Thu, 13 May 2021 08:18:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15878) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lgxx8-00HOMn-7D
- for samba-technical@lists.samba.org; Wed, 12 May 2021 23:07:45 +0000
-Received: from [IPv6:2404:130:0:1000:c423:b4cf:2d5b:d925] (unknown
- [IPv6:2404:130:0:1000:c423:b4cf:2d5b:d925])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (Client did not present a certificate)
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 0EE5780FAC; 
- Thu, 13 May 2021 11:07:20 +1200 (NZST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1620860840;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZcgFRXkkDjhL4DQBrJnZaWCBPO+CJCU+RP8a5XsgeOw=;
- b=bLRtKxED7Z3mU5pZwhvX8bhPmyD5KtynVqQICRin1qylepxUmxS0kWhdHAbOVZgPNMRabU
- Cy5mJT0rFThimqYj7KOzumlpTbf5R2OAwpv89smjwa9yAREBMjyuNGpBSillBRYAl0yvEx
- 7vghzsAbHMAqslrYINSXDdNgll5XJYIvBvOC93N2F7GRSLuZb7ZJi1nWBLdCxGLn8YMdrc
- iIYnCAppUocfm+SzT4ToPi4l5e0ufuoHOQVEkMzGoEWNmYbktVd3900SV2AGfQOjtTyeBD
- 2wYUKTgOc1lA7Es/7Uyy1NDbTxqmKkXuBn9YxGCAJGLg121FPL2O27cjQdIOKw==
-Subject: Re: GPO created via samba-tool don't Copy or Backup
-To: Klaas TJEBBES <klaas.tjebbes@ac-dijon.fr>, samba-technical@lists.samba.org
-References: <37f6ef50-99b4-7e37-b22e-a29f219ecf2c@ac-dijon.fr>
- <bc1323c0-53eb-70d5-7e1a-c3d2e14a4df1@ac-dijon.fr>
- <daae17c9-1bda-01c2-e5f2-7f8cee6aabb8@ac-dijon.fr>
-Message-ID: <86f25c50-02c1-1baa-5ce1-907c54e36e25@catalyst.net.nz>
-Date: Thu, 13 May 2021 11:07:19 +1200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+ (Exim) id 1lh6Xi-00HRGN-8L
+ for samba-technical@lists.samba.org; Thu, 13 May 2021 08:18:05 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=82l4rYUCaXCzUknIej5BDnJINAvrKMRgmvZR5LN8K6U=; b=IqRz01XLHBMmXH3sjoq4zYcenJ
+ 88Qr4ygbu1Tzl4P31wnVF6TSRbgaMRaSIH+oKp39FgLZRiBM0vYFT7oOTOigmWBZ88twTFl9DkGji
+ SilwpBxEOx1jvgtTJz68WKJhJkzePJO/IJOWLSRwYxluK6hXkKwdsLrWqRZFbQukduz64usgHUHP0
+ 6hzQB0QNGhTYNTxVAd30wzreuP3g3fw2kOCqFfDuG21quASWfWuxV4PtsZ53aflbyl8o15AOonzXB
+ Lzt33+MBVOo1U9yWuvaES0Ky6vX6CSNu9XPZo6XzroO1sf+9lWIS6NgbvPyJ6UqLN+EtFbvgyeeBn
+ DqcWikaknehOmQHUETqVsvUmEiP9AmZJKgEpyWqR4c4O8H2pT6FdG3PDinV1kiU7pJkp6lAohAp8V
+ 3E3vNIrg1VLj+4f9e2uxd6xZC1dLzBTENGhgHbB9HzoaCCXm0W0wKX2QM5/UIHTbJ2HBmBNTCdBUk
+ QA34izpea/I4E3L8gh7Ttdda;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lh6Xc-0005dC-U3; Thu, 13 May 2021 08:17:57 +0000
+Message-ID: <516bd798642997a15016d81f9ae6e17e9250f677.camel@samba.org>
+Subject: Offline logon flapping in autobuild?
+To: asn@samba.org
+Date: Thu, 13 May 2021 20:17:48 +1200
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
-In-Reply-To: <daae17c9-1bda-01c2-e5f2-7f8cee6aabb8@ac-dijon.fr>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-NZ
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-0.10 / 15.00]; ARC_NA(0.00)[];
- DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
- MIME_GOOD(-0.10)[text/plain]; MIME_TRACE(0.00)[0:+];
- MID_RHS_MATCH_FROM(0.00)[]
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,43 +53,72 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 13/05/21 2:19 am, Klaas TJEBBES via samba-technical wrote:
-> Hi,
-> 
-> It looks like I don't get very popular with my question here. But could 
-> at least someone test this to tell me if one can reproduce ?
+My most recent autobuild, with (I hope) unrelated changes, fails with:
 
-You are using the wrong mailing list. This one is for people who develop 
-Samba, not those who administer it, and there is not as much overlap 
-between those two groups as you might imagine.
+[141(1068)/143 at 6m5s]
+samba.blackbox.offline_logon(ad_member_offline_logon)
+ERROR: Testsuite[samba.blackbox.offline_logon(ad_member_offline_logon)]
+REASON: unable to set up environment ad_member_offline_logon - exiting
 
-Try asking on the Samba list at
 
-https://lists.samba.org/mailman/listinfo/samba
+could not obtain winbind interface details: WBC_ERR_WINBIND_NOT_AVAILABLE
+could not obtain winbind domain name!
+failed to call wbcPingDc: WBC_ERR_WINBIND_NOT_AVAILABLE
+python3: lpcfg_do_global_parameter: WARNING: The "lanman auth" option is deprecated
+python3: lpcfg_do_global_parameter: WARNING: The "lanman auth" option is deprecated
+dcesrv_netr_creds_server_step_check: CVE-2020-1472(ZeroLogon): netr_LogonGetCapabilities request (opnum[21]) WITH schannel from client_account[OFFLINEADMEM$] client_computer_name[OFFLINEADMEM]
+dcesrv_netr_creds_server_step_check: CVE-2020-1472(ZeroLogon): Option 'server require schannel:OFFLINEADMEM$ = no' not needed!?
+Unable to resolve group domusers to a SID
+Unable to resolve group domadmins to a SID
+Unable to resolve group everyone to a SID
+You are not root, most things won't work
+Creating Users failed with NT_STATUS_ACCESS_DENIED
+smbd child process 1606143 exited with value 0
+nmbd child process 1606141 exited with value 0
+winbindd child process 1606142 exited with value 0
+smbd child process 1606143 isn't here any more
+nmbd child process 1606141 isn't here any more
+winbindd child process 1606142 isn't here any more
+failed to start up environment 'ad_member_offline_logon' at /m/abartlet/aMASTER/b1332721/samba-mit-build/selftest/target/Samba.pm line 126.
+samba can't start up known environment 'ad_member_offline_logon' at /m/abartlet/aMASTER/b1332721/samba-mit-build/selftest/selftest.pl line 824.
+teardown_env(ad_member_idmap_ad)
+teardown_env(ad_member_idmap_rid)
+teardown_env(ad_member)
+teardown_env(ad_member_rfc2307)
+server_stdin_handler: samba: EOF on stdin - PID 1566292 terminating
+server_stdin_handler: samba: EOF on stdin - PID 1485145 terminating
+dns_hub: after poll()
+dns_hub[UDP[10.53.57.64]]: before shutdown()
+server_stdin_handler: samba: EOF on stdin - PID 1491950 terminating
+server_stdin_handler: samba: EOF on stdin - PID 1476425 terminating
+dns_hub[UDP[10.53.57.64]]: after serve_forever()
+dns_hub[UDP[10.53.57.64]]: after shutdown()
+dns_hub[UDP[fd00:0000:0000:0000:0000:0000:5357:5f40]]: before shutdown()
+dns_hub[UDP[fd00:0000:0000:0000:0000:0000:5357:5f40]]: after serve_forever()
+dns_hub[UDP[fd00:0000:0000:0000:0000:0000:5357:5f40]]: after shutdown()
+dns_hub: before exit()
+make: *** [testonly] Error 1
 
-They love answering questions like this.
+I'm doing another GitLab CI and will try autobuild again in the
+morning, but in the meantime is anyone else seeing this or know what is
+going on?
 
-Douglas
+Thanks!
 
-> * In RSAT create a new GPO and make a modification in it (I did : 
-> Computer Configuration -> Administrative Templates -> System -> Logon 
-> “Always Wait for the Network at Computer Startup and Logon” to “Enabled”)
-> * Close RSAT
-> * Backup GPO via samba-tool (in /tmp/...)
-> * Restore GPO via samba-tool (from /tmp/...) with another name
-> * In RSAT try to Copy this new GPO (right clic "Copy", right clic on 
-> "Group Policy Objects" and Paste)
-> 
-> I get "Invalid directory". Even doing it via powershell and debug and 
-> traces, hundreds of log lines, I couldn't figure out why it won't copy...
-> 
-> 
-> Regards,
->   Klaas
-> 
+Andrew Bartlett
+
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+
 
