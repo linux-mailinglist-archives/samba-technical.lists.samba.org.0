@@ -2,40 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E4C138119A
-	for <lists+samba-technical@lfdr.de>; Fri, 14 May 2021 22:18:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A221838133B
+	for <lists+samba-technical@lfdr.de>; Fri, 14 May 2021 23:38:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=/24s4gSEw8AR9giOgwJ8LmyPvJmtlijkYRcLDPMxzec=; b=CU38bxJMpUJoZk08yA2CS9cBWI
-	/sFet2nDb4WWJUi8ZQzkhD3Wti63m/9iyyA1Iwytyw9WjB247abhfwCufknUARJFezNFczsxD99y4
-	l7OblEGihOByLyEi6WyCmXGkEAcQ20UEGkRSPpIQRP1w/epOd+/oVnnw0FyCF2SpvZfrCDGNrQcd9
-	L56nzaLWoLAyznDWyXIPOZCrgOWbEvy1r/IYjj8G4qWn8g03s+g1bh5VulMnTn+dt5rwGNQWxLkrv
-	JhvqFkMjyGjPJ+PLPuJ7+WkChviN9ta8spO/d4mwvJAUezISH+s2P5FyexXxYBIlXP5bx6vHvVobF
-	2kJAlbRw==;
-Received: from ip6-localhost ([::1]:49608 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=HAQ+MKBdAl4Aky+sbz/Q9Iy9loPcu/l+vI3cM/k6DdM=; b=SRkEcdn0oq1w6/LS6znlcQ5BO2
+	amM9qpK+q05j7lC4DV2mj0pOite/G0PwLfCA4IWWYIDqCqkEgrLJUjwPVWppWngKz5SlELVBXDE0N
+	kxvyXCAwq0BNvisZuyVDZkAZvGNRGUpLHTT5hv/nTEZWKX9ZrAb9Hr9q5iHTxsQZx/7UHcwAA9Wv2
+	VINrsxCbwzJE83fU+yeAj166BROIvKtiPXskT7enMp5eqgWvMEQ7got1uk5ZFvC0TntCZ5hqPGgHg
+	KiX8cZaD0vb/+XkpkVpfJXsx7lVsFPcuXHtH2ZV2kYMtazwBgSnnIRFi+DiXoncLpk73UtLeiooCc
+	K/ClePKw==;
+Received: from ip6-localhost ([::1]:52604 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lheFz-000MIq-MH; Fri, 14 May 2021 20:17:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49684) 
+	id 1lhfVB-000NfL-7m; Fri, 14 May 2021 21:37:45 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18580) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lheFt-000MIc-3e; Fri, 14 May 2021 20:17:56 +0000
+ (Exim) id 1lhfV5-000NfC-3V
+ for samba-technical@lists.samba.org; Fri, 14 May 2021 21:37:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=/24s4gSEw8AR9giOgwJ8LmyPvJmtlijkYRcLDPMxzec=; b=kjwTkWptbZvWwPIKm91bPoKXBj
- +tUBNB9D6u9uMYPfK3cHWEWFSvLrnaeKwnLnCcQH+1Mj66aFEq3mC+NqQiBcgFERIQLqsQz86fmLv
- ZDhD38Dn2rYcBGdZTp2ZlEJ/6Bo3pgB9LNmOnS0etEC+rrAovyVGHSQhCoO4244dFWtt8GRiAV6ct
- AIL5b1LLBbnX8hgq+hAnEzTwG84v0BJ2ghF05bLelzNMfKaJ4BKRvwNiDrvRbZy3mqQFOvtfQhqRZ
- j9NJRQcs2AJIiwLU2TR2Tehdt0jqMP77c/G6hqbPvworP3SmAsz9W0MFZWfAlQks2G/pR50JLPXs6
- ynAtGCWxHR6ohPrRl1ruarSgoZQrOQfaM7R15MiD9RCPnhEJWOaujTabdODHwO3Kd+fM5ZEsyocQo
- ozKP2I/W0L9SWpubPhxx2hZw9FiULoVS3bqgzrqNOHRBWstZyi4cPGPbxpOFfbe53TdsVQmUx0++d
- kflWmjY/mNQZyvCmKzwqN2MO;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=HAQ+MKBdAl4Aky+sbz/Q9Iy9loPcu/l+vI3cM/k6DdM=; b=CKPP24ls7ZMsDStIlKLfqYzwLk
+ /h6qCp7ZMT8suqrtgbAziPvxdcTwgDONNs+HsQWyC7RnOk986qwRvzYLWtxIRoxHy97qPaCaNKKwy
+ VTMbkp2DSqCQuw1cftEi+AOk+XFcPV2bCktaIZeYH4hkQpuqzdNWdHO2VLv+DMLu7dgo+uqF8cxr7
+ /PlcxPlh7vqLhpaSQKJSSQxHna175OSkkFMT3Qzliheu9S8kBSW/np2KMNpdA0ppzbokiqKxYXG4S
+ m0ZJ5dywZ7nAXvbw0yRifyEFdGKbS12y1wq2p5ahbTR2prphtSUKFfYy8k+Ktu7GBhns2FXgY2/o+
+ F+44/zMM/FNO3kAUJ/6dBVmy0zLNRiIMhRBy7QjDJgyIv3RbaTwszptyK73JvZo3VP9YnePdhoSZV
+ yhlAeKTEXJw0I6uuwlrAEyJdl0Cyf6nmvEr7lOQLBYdhwoLUqAt2MT5LOrjMGVw6WnX8hdOO4IHfM
+ BHF9ZuXg6FOtqahlXKUJGDw5;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lheFq-00025B-VT; Fri, 14 May 2021 20:17:51 +0000
-Message-ID: <0c7b8b6871f8f8cf8e82536a8f90f3277f18dab1.camel@samba.org>
-Subject: If you have the skills, please help package Samba on Debian
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- samba@lists.samba.org
-Date: Sat, 15 May 2021 08:17:47 +1200
+ (Exim) id 1lhfV2-0002kD-W9; Fri, 14 May 2021 21:37:37 +0000
+Message-ID: <0085446689a4dbeb12d45ee692fdfb1b52ddfdb6.camel@samba.org>
+Subject: Re: Kerberos raw prototol testing
+To: Stefan Metzmacher <metze@samba.org>
+Date: Sat, 15 May 2021 09:37:31 +1200
+In-Reply-To: <a2a22a8f0c59a86f0ad7f659b1e4d6201a6d7601.camel@samba.org>
+References: <3663e2d45ad7855b807286d4d45bba7ef450d9a3.camel@samba.org>
+ <a377c5a5-225e-9fc4-a70a-c52145732121@samba.org>
+ <30ab21963ccb18678de20e7814e97e8e4b13f3f3.camel@samba.org>
+ <b08f1fca-9a92-ba28-5515-7918522dc5ff@samba.org>
+ <a2a22a8f0c59a86f0ad7f659b1e4d6201a6d7601.camel@samba.org>
 Content-Type: text/plain; charset="UTF-8"
 User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
@@ -55,31 +61,45 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ gary@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-G'Day Samba users,
+On Mon, 2021-05-03 at 12:33 +1200, Andrew Bartlett via samba-technical
+wrote:
+> 
+> In this case in particular I've checked the diff and other than of
+> course the pycredentials fix (thanks, obviously good!) this really is
+> quite fine squashed. 
+> 
+> I'm also happy if you keep some of the early preparation patches
+> distinct, eg "python/samba/tests/krb5/rfc4120: better etype
+> dissection"
+> but I wouldn't spend much time beyond that. 
+> 
+> Please propose it squashed down and lets work to get it into master. 
 
-I wanted to mention the Debian Samba Team's RFH, Request for Help:
-https://tracker.debian.org/pkg/samba
-https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=814382
+I've done the squash down here:
 
-The bug is old - Samba in Debian has been under-staffed for years - but
-the need is still quite current.  The Debian Samba packaging team needs
-assistance to triage bugs and prepare stable, unstable and experimental
-updates. 
+https://gitlab.com/samba-team/samba/-/merge_requests/1953
 
-I hang around the team to provide some advise - I did some of the big
-push to get the merged package built - but this really isn't my area
-either.
+Is this OK?
 
-So particularly if you are involved in Debian, or have those skills and
-want to be, please do assist.  It would be much appreciated by many
-users here and of course by Debian users worldwide.
+I can fix up the MIT knownfails if that is the only blocker, but I also
+need your sign-off, particularly as I've written a pile of the commit
+messages for you. 
 
-Thanks,
+I hope - just waiting for some final confirmation - to have some proper
+time to put into the Heimdal upgrade so I'm really excited to get going
+on this. 
+
+Please let me know.
+
+Thanks!
 
 Andrew Bartlett
+
 -- 
 Andrew Bartlett (he/him)       https://samba.org/~abartlet/
 Samba Team Member (since 2001) https://samba.org
