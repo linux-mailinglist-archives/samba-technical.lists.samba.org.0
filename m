@@ -2,62 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49698380DB9
-	for <lists+samba-technical@lfdr.de>; Fri, 14 May 2021 18:03:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E4C138119A
+	for <lists+samba-technical@lfdr.de>; Fri, 14 May 2021 22:18:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=hbs58K5TlV2bJvEoYy+ewLKsVKD8mWsVRSkrb6/1M38=; b=PsCGeTXld6wEIXyzQh/XGe+tqU
-	PPwBZ9DcoNolFDCLEtP741KwCDn992LedUOhTlcWch1gfw5TW58e11+3DzBQT6WbDxOYSlEzsaa9t
-	GgY1u0brYlzWiCSIajOneO9U6XHYLrUgDcZdaKAnak8w/Dd0Ir2cKC8r2Y6dRxijg0GXmfIIgGXuF
-	D+mmFb6NxYP9ctyxd/GfdhaCHsg2yVgZZ9ovbOr5ht5iBwcgZjGVe1EUrE3Da4GfN3jdi1dDv+aMt
-	9L0Ii9ECvAMwtfNNxDCgwjm3UhyZ3dGWMbal3Ai+6t8i+AvtHXLaUEi7cDkyExPUPHdEer+QdOeQv
-	AwWsI/0A==;
-Received: from ip6-localhost ([::1]:40098 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=/24s4gSEw8AR9giOgwJ8LmyPvJmtlijkYRcLDPMxzec=; b=CU38bxJMpUJoZk08yA2CS9cBWI
+	/sFet2nDb4WWJUi8ZQzkhD3Wti63m/9iyyA1Iwytyw9WjB247abhfwCufknUARJFezNFczsxD99y4
+	l7OblEGihOByLyEi6WyCmXGkEAcQ20UEGkRSPpIQRP1w/epOd+/oVnnw0FyCF2SpvZfrCDGNrQcd9
+	L56nzaLWoLAyznDWyXIPOZCrgOWbEvy1r/IYjj8G4qWn8g03s+g1bh5VulMnTn+dt5rwGNQWxLkrv
+	JhvqFkMjyGjPJ+PLPuJ7+WkChviN9ta8spO/d4mwvJAUezISH+s2P5FyexXxYBIlXP5bx6vHvVobF
+	2kJAlbRw==;
+Received: from ip6-localhost ([::1]:49608 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lhaGN-000I46-Lh; Fri, 14 May 2021 16:02:07 +0000
-Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233]:44735) 
+	id 1lheFz-000MIq-MH; Fri, 14 May 2021 20:17:59 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49684) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lhaGH-000I3x-CU
- for samba-technical@lists.samba.org; Fri, 14 May 2021 16:02:03 +0000
-Received: by mail-lj1-x233.google.com with SMTP id s25so13765651ljo.11
- for <samba-technical@lists.samba.org>; Fri, 14 May 2021 09:02:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=hbs58K5TlV2bJvEoYy+ewLKsVKD8mWsVRSkrb6/1M38=;
- b=aWERtuBkNybSMk+QQY4cJ521GkTSpqS+FEMVRqjP4xHxSm0FHJcHPlsDD2wVkwOuZN
- Dbz29Dd6wbD5VElVLOFCSBMnLBIF2//VJjmI25M+DHPp/ooQjvhBOx6n50Nhm3aJIDC7
- gnOpzHv49ogsB7yJIR9N99BnCH/Dw/9oZi6LWF5eS/Dud1iiYz4/Xg1xcKZuB9pOYnNl
- nSgJgJC4vdzVvSEwk0lHDNh6OzXAS2X4vz/70ZPzpXY3+DUyo5fTuE7X+g8HnecDo2WZ
- XknrVjlSLtUwuL9huGcyaP8/i5LracWWNp09klBi93SNmVsuZ/f3x3tWlLkIuJQ63Onx
- /tOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=hbs58K5TlV2bJvEoYy+ewLKsVKD8mWsVRSkrb6/1M38=;
- b=DdWFLcNHKicary10rQmQ/4gie8HX7SYIzzBHJ3brfBXroCabv/U7IFLKZYmzdWGAbn
- 5jTd10CxdnzmnsjnWrTC3zr7OF5HutTzAcl9Mmz7wSrW1Y95y/cN5Soc1Y8aDPIPTyGz
- lepxlfASWaRyMoQ6vebrqctDmYr7DNipBvFeeXam5yKn7dr1QBb10iZZleIyvb+6I7sj
- b5agQnEQ/EN6dI6WLNOp8Dip1jomL5DXQvZx3SPysz8Fe6nKDv8d1O4vh0UZsZLeQeuV
- 9ui9HkVUbjKBazk49t4TMSgtmxlH61OUDTG7TqXaOPBMR+2sVWndKEagv04jSooC3IwJ
- 3uVA==
-X-Gm-Message-State: AOAM5333xlYp/U7KBYlfxoqjiFBjL8wsz8WAdN94i3sH6V559hCEiqA0
- feBXN+AjArKt/CcSeEGIIVkzLvsUH34V+1OZUCw=
-X-Google-Smtp-Source: ABdhPJz9fhj9VklicGlUHwFGpHf0bgXbKi6WLqBEDvp90FsUA5MYMjRvqyHQnaRP5IpjwVvTl8/OCcpHf0lpYkFSFkk=
-X-Received: by 2002:a2e:bc1e:: with SMTP id b30mr4380301ljf.6.1621008120227;
- Fri, 14 May 2021 09:02:00 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210509233327.22241-1-wenhui@gwmail.gwu.edu>
- <20210513165516.17723-1-wenhui@gwmail.gwu.edu>
- <87sg2pshr4.fsf@suse.com>
-In-Reply-To: <87sg2pshr4.fsf@suse.com>
-Date: Fri, 14 May 2021 11:01:49 -0500
-Message-ID: <CAH2r5mtYy9jT80mJNBXnsXwOVRLaTADdLibpTyP7NANMXEtepw@mail.gmail.com>
-Subject: Re: [PATCH] cifs: remove deadstore in cifs_close_all_deferred_files()
-To: =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>
+ (Exim) id 1lheFt-000MIc-3e; Fri, 14 May 2021 20:17:56 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=/24s4gSEw8AR9giOgwJ8LmyPvJmtlijkYRcLDPMxzec=; b=kjwTkWptbZvWwPIKm91bPoKXBj
+ +tUBNB9D6u9uMYPfK3cHWEWFSvLrnaeKwnLnCcQH+1Mj66aFEq3mC+NqQiBcgFERIQLqsQz86fmLv
+ ZDhD38Dn2rYcBGdZTp2ZlEJ/6Bo3pgB9LNmOnS0etEC+rrAovyVGHSQhCoO4244dFWtt8GRiAV6ct
+ AIL5b1LLBbnX8hgq+hAnEzTwG84v0BJ2ghF05bLelzNMfKaJ4BKRvwNiDrvRbZy3mqQFOvtfQhqRZ
+ j9NJRQcs2AJIiwLU2TR2Tehdt0jqMP77c/G6hqbPvworP3SmAsz9W0MFZWfAlQks2G/pR50JLPXs6
+ ynAtGCWxHR6ohPrRl1ruarSgoZQrOQfaM7R15MiD9RCPnhEJWOaujTabdODHwO3Kd+fM5ZEsyocQo
+ ozKP2I/W0L9SWpubPhxx2hZw9FiULoVS3bqgzrqNOHRBWstZyi4cPGPbxpOFfbe53TdsVQmUx0++d
+ kflWmjY/mNQZyvCmKzwqN2MO;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lheFq-00025B-VT; Fri, 14 May 2021 20:17:51 +0000
+Message-ID: <0c7b8b6871f8f8cf8e82536a8f90f3277f18dab1.camel@samba.org>
+Subject: If you have the skills, please help package Samba on Debian
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ samba@lists.samba.org
+Date: Sat, 15 May 2021 08:17:47 +1200
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.36.4-0ubuntu1 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,36 +53,39 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, wenhuizhang <wenhui@gwmail.gwu.edu>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, CIFS <linux-cifs@vger.kernel.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+G'Day Samba users,
 
-On Fri, May 14, 2021 at 6:01 AM Aur=C3=A9lien Aptel via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
->
-> Reviewed-by: Aurelien Aptel <aaptel@suse.com>
->
-> Cheers,
-> --
-> Aur=C3=A9lien Aptel / SUSE Labs Samba Team
-> GPG: 1839 CB5F 9F5B FB9B AA97  8C99 03C8 A49B 521B D5D3
-> SUSE Software Solutions Germany GmbH, Maxfeldstr. 5, 90409 N=C3=BCrnberg,=
- DE
-> GF: Felix Imend=C3=B6rffer, Mary Higgins, Sri Rasiah HRB 247165 (AG M=C3=
-=BCnchen)
->
->
+I wanted to mention the Debian Samba Team's RFH, Request for Help:
+https://tracker.debian.org/pkg/samba
+https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=814382
 
+The bug is old - Samba in Debian has been under-staffed for years - but
+the need is still quite current.  The Debian Samba packaging team needs
+assistance to triage bugs and prepare stable, unstable and experimental
+updates. 
 
---=20
+I hang around the team to provide some advise - I did some of the big
+push to get the merged package built - but this really isn't my area
+either.
+
+So particularly if you are involved in Debian, or have those skills and
+want to be, please do assist.  It would be much appreciated by many
+users here and of course by Debian users worldwide.
+
 Thanks,
 
-Steve
+Andrew Bartlett
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+
 
