@@ -2,56 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D22D383182
-	for <lists+samba-technical@lfdr.de>; Mon, 17 May 2021 16:41:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F3C6383220
+	for <lists+samba-technical@lfdr.de>; Mon, 17 May 2021 16:47:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:subject:cc;
-	bh=2WerzAt9sHboFUJ1FLh5+JdVwvkX9cgbNduU6AfIBtk=; b=G8062FpDpfDrrItY702d8Y2I4h
-	XoiHvpPAHgn/aXgoT0ZUasaTkqoly7SDtEsp/aKsdzv4Y5YreGpCx5PiYe66KDK+6kOKxX2U/drTx
-	0fEQGXkXrQSJI2MbiNNjgzDNFhKRlDjVpvhrk1Dp/fk/F+VYWZdonJG4u0kQTvQze2Py99nNAgr88
-	P6JUOp3v3Ylmwi8E3aa4YCfPGdCqGaslpZ0WAf8B+R5xsydvG+XboEL7Ggp8R7IzYFLFFacBGlboD
-	bssoD+L6fVZ6ex6Dysl1mQCDlT00RXjzBv26ckWmZMWpHVBEGbvlZtbN8sU4nwS/rUKv57yasJ9za
-	dBwl1Z7w==;
-Received: from ip6-localhost ([::1]:24896 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=FZzV5hD/QK6PnrAB1NUcJtQtbCAxTt/yOkEAZwoYCfs=; b=gc+F27nRHs9aTcCmM5aYrxmg5o
+	uNx4ReN/B23YHk0q9UPzMCAUc9aTaCoKgw/dK9OtS21uRlcMUVTPmY9lCnmgy0rdlXuYE7MdKqAZQ
+	b2660mp6b93GBh7fnMVuLVm1fh/vRht8jxJWHDRSEgZ5ZgjilrfildZ8ZlUuEHplRu9vhxflh72PC
+	dp0HG1jXZmdxhdbrQhc8dhBuI/QIzOyTjfUPEJ9ozPfPzouVZ1a/dviHrSvirGYnGmAcJMzhnqMJZ
+	vWUJ4gPCCfgUvTStAzWC+0DsAbHH6xRZol7FahKo/1dAPqpz9y53dnPiGW7rpsXRil6rVBg8aU29B
+	+yWWDUCA==;
+Received: from ip6-localhost ([::1]:25586 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lieQp-000vkh-Qj; Mon, 17 May 2021 14:41:19 +0000
-Received: from mail.itsd.de ([80.153.216.99]:46963) 
+	id 1lieWJ-000w3n-Lj; Mon, 17 May 2021 14:46:59 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17528) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lieQg-000vkY-Ou
- for samba-technical@lists.samba.org; Mon, 17 May 2021 14:41:15 +0000
-Received: from mail.itsd.de (mail.itsd.de [192.168.0.10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by securemail.itsd.de (Postfix) with ESMTPS
- for <samba-technical@lists.samba.org>; Mon, 17 May 2021 16:41:06 +0200 (CEST)
-Received: from nero.itsd.de (unknown [192.168.0.220])
- (using TLSv1.2 with cipher AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.itsd.de (Postfix) with ESMTPSA id B4E25800D6;
- Mon, 17 May 2021 16:41:06 +0200 (CEST)
-subject: Problem with AD membership in an AD with more the 100.000 group
+ (Exim) id 1lieWB-000w3b-4r
+ for samba-technical@lists.samba.org; Mon, 17 May 2021 14:46:56 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=FZzV5hD/QK6PnrAB1NUcJtQtbCAxTt/yOkEAZwoYCfs=; b=hoeKpTl0ExzO8FYPM5DEDlkndI
+ t+szEdWhXQ3R3eh+xTp9VLXy2D6vvAGMsawTZhoBZ3EWP90QKpRDJxen5FLEki6nGuJAehdIvggk9
+ lWgEiIU/4cjhTNQbjktcv56JSxlr8wUVFL3+0Z3AD+39ELv0slKZhXVqQfn5fctoTpeuDGDr4gT9D
+ 43KKb/azyfpC66B/cjPBGxKmIy1wPDmw/4JtVopntqT80vxCOcGP48zTTLRBv20rcM3PCpU1pHFRD
+ 95hgV4tV0ligdOfdz/R542VR2mXtqVR1LuuxKO97KkQQuI4tUtAQiOOK1DMYDp5/jyDlxnPZZLggu
+ Fdry7Ouotdl55Swd17klq8x/p9r2mc/WC9WcQRtzLXx8ueLIdOf3FxmgmLJP1YLRsi58XjloyfHKd
+ 6x7VREu1FGtJSCKf4lE4vs038s4h1uTjH0gNM5fcRmi6nK9nSezLl7DhADK0nk1aEEugdU7+YpU5N
+ FYJI7gjuuarLWvYB/cogLx8C;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lieWA-0004bP-Jt; Mon, 17 May 2021 14:46:50 +0000
+Subject: Re: Problem with AD membership in an AD with more the 100.000 group
  (possible regression in 4.12?)
-To: samba-technical@lists.samba.org
-Organization: itsystems Deutschland AG
-Message-ID: <0b0bb73c-fac8-3072-9609-15028b08936d@itsd.de>
-Date: Mon, 17 May 2021 16:41:06 +0200
+To: =?UTF-8?Q?Dr=2e_Hansj=c3=b6rg_Maurer?= <hansjoerg.maurer@itsd.de>,
+ samba-technical@lists.samba.org
+References: <0b0bb73c-fac8-3072-9609-15028b08936d@itsd.de>
+Message-ID: <baf859ec-06b2-f348-b7ad-46eab7602d0c@samba.org>
+Date: Mon, 17 May 2021 15:46:50 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.0
-X-SM-outgoing: yes
-Content-Language: de-DE
+ Thunderbird/78.10.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg="sha-256"; boundary="----F393FDE511BA3188C6B33143B2534045"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=itsd.de; h=from:subject
- :to:message-id:date:mime-version:content-type; s=default; bh=/4r
- KEJV/OJa/ohPa5M1RWSjEL0qbOH2yYuC8+lhgfYI=; b=TdGZF/4blZTrQBUT3PE
- cfHAtjiFeexBw2cbvIMDd2OJANMNkKgOGjvEjh/DxNEGgacswplRKM3DgCYjWgU7
- 3rskLgSxz9tad4gc4kq/asJEBhqwU7yaFiYATtOPN41dPpJdIQjHENE53D4z6nGv
- uYGjKYKvMTLt5Dyf7evzL5I6dfsRl/FIeCrLmeTN5cLjHMZI990/Qms/Re255wjv
- Ko1E0kQXdgGlnxPZAuFRHLSAEU/deWHRRKqmeSNOpsHfHjo7W7x+6TLZVF8upPog
- WK+ydpI7TXC/eayvootatZBIuqTOJFvilndrnoAcvUeZIXfeQwTlo+PCartfYKQD
- lIA==
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+In-Reply-To: <0b0bb73c-fac8-3072-9609-15028b08936d@itsd.de>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,134 +59,20 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Dr=2E_Hansj=C3=B6rg_Maurer_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?Dr=2e_Hansj=c3=b6rg_Maurer?= <hansjoerg.maurer@itsd.de>
+From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Rowland penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an S/MIME signed message
+On 17/05/2021 15:41, Dr. Hansjörg Maurer via samba-technical wrote:
 
-------F393FDE511BA3188C6B33143B2534045
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
+Sorry, but it is still an empty email and I will not blindly open an 
+attachment.
 
-MIIVSgYJKoZIhvcNAQcCoIIVOzCCFTcCAQExDTALBglghkgBZQMEAgEwCwYJKoZI
-hvcNAQcBoIISkjCCBb0wggOloAMCAQICCE8b1C9Uuy9LMA0GCSqGSIb3DQEBBQUA
-MEcxCzAJBgNVBAYTAkNIMRUwEwYDVQQKEwxTd2lzc1NpZ24gQUcxITAfBgNVBAMT
-GFN3aXNzU2lnbiBTaWx2ZXIgQ0EgLSBHMjAeFw0wNjEwMjUwODMyNDZaFw0zNjEw
-MjUwODMyNDZaMEcxCzAJBgNVBAYTAkNIMRUwEwYDVQQKEwxTd2lzc1NpZ24gQUcx
-ITAfBgNVBAMTGFN3aXNzU2lnbiBTaWx2ZXIgQ0EgLSBHMjCCAiIwDQYJKoZIhvcN
-AQEBBQADggIPADCCAgoCggIBAMTxh3/TeDH3OMn4w5lDvMf3vDfnTnG6S4+lcx1c
-bpiuA1euODdDLxc9H8jOaBDBeK4ZAysQ+ix5g/bouWi5VfIERKc5+fwEix7xok0n
-+WF7urflohO262E+0GzR5vv6Xu0dtJ6gNVuhksvwSZL+hQoFPubZC+JPu9yVN/yR
-6TI1ItEfOk4nhZ2wFZQy2mENR01gQq6SR+iDWlBY6YqLuV2h3N2ZSh82Z7tI5IO2
-N+tIOq8PZ48XB+gEyu9qMYfUwLb5lHF7Z2S4tpFKQntlLjBqDPWQ7pXm8s2C7Nmh
-Suz2skvlRYXmbXiTBC6cgm02qcQxZB+Ggwsq9DUKeMlVz0GwR+kwn5m+YagGhLko
-el842RupOLCDf3PBwztIKoIPIZu4zKg1w4Qbg7M+vqSVaQE6iQB4BNnJ9JkZq1Z+
-W4uGORWRpBAsCTKAYLOTwCq2GAudfo1J8hBKf/nVRi8ZkqOZpyasu4w85g68Rwfc
-c1HxcGQvCPm0Rx0wbETqKTeFkmhmvIM4/ns5LtNQ8B/7XmC2qab6J0Hxmxhy8vWE
-dErJZ8RUrkhk34zRbrAd4QePCB6ZnHHpTNil90cSH3TRUZ6G88KiI0ALc9tLpudz
-BozBoOnBWaxG+uYv+M9xnEZtucQVjTh5A0VI78Rd1wjuhzkihrIND1hD93GpSC79
-6tYfAgMBAAGjgawwgakwDgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8w
-HQYDVR0OBBYEFBegzcHkQbY6WzvLRZ29HMKY+oZYMB8GA1UdIwQYMBaAFBegzcHk
-QbY6WzvLRZ29HMKY+oZYMEYGA1UdIAQ/MD0wOwYJYIV0AVkBAwEBMC4wLAYIKwYB
-BQUHAgEWIGh0dHA6Ly9yZXBvc2l0b3J5LnN3aXNzc2lnbi5jb20vMA0GCSqGSIb3
-DQEBBQUAA4ICAQBzxoHgJ9ItD+CVMOKaQX9QLF9fYmGphmppGAx0SdZdhOpBUhhv
-WK1QViBqxr0oaViR3JERNak6HbwapWCe2B9/RZFp2X67eHLBBg8qzo+FcGGsoM0L
-uDkpVoQyToa7PcQq2dcfcu7+UaEiQbFxAmMagrBiq15XEh/fy911oMBdeZCMG+BQ
-5t4x/ph7cF+lkNit+AK2b9Ng3UBLIsU9rTp6nxoaR5F5M7qC3DJpA5ZuH0vwcf7j
-Z3Kgsb9ci+T6mSLHhLkbjSOXP+0l4M9lu/VhBO/dHrJaQSJaoZ9dLOhbyW2pDAx4
-qmDGVo8BWgxovGkZecQffpcFv8XpJFFe1NVLU+3ZI1o2A2WjwQOtQTDzRhuFkK9l
-tdWx5BZbeHUdl3ptWakqj3vew4eJEJlJc3jIPb1RNXQq1fF+aRsquzu9JbiaWj1y
-YZBmh+4M1k3UEXQLav4LA/yjVVeJ/krLrlsXBcjyjSMxUzjSLWo/grmNCGr3XkF0
-bsMRfgesKWCRPzjKVxANvTAvx6XmQaDargWHmqCkZWxMCQyJurjTucCTijD6jeWa
-axUBTmeq2mJWPoQIZtLENn2nPhD8iODUgOUAvarzTgajemr5YnLjCU/rmw4BI/Gf
-u3zc3GwRlyWy8rRjFNIGKmeMg/XO6gfYmmoe7OQKuypM6wlgOc7KYtgubjCCBgsw
-ggTzoAMCAQICFGplzOVcSV6RRT8V08VMtX9wW/DBMA0GCSqGSIb3DQEBCwUAMFYx
-CzAJBgNVBAYTAkNIMRUwEwYDVQQKEwxTd2lzc1NpZ24gQUcxMDAuBgNVBAMTJ1N3
-aXNzU2lnbiBQZXJzb25hbCBTaWx2ZXIgQ0EgMjAxNCAtIEcyMjAeFw0xOTA3MTYw
-NjMxMTFaFw0yMjA3MTYwNjMxMTFaMEwxJzAlBgkqhkiG9w0BCQEWGGhhbnNqb2Vy
-Zy5tYXVyZXJAaXRzZC5kZTEhMB8GA1UEAwwYaGFuc2pvZXJnLm1hdXJlckBpdHNk
-LmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7fOZiJ0pHsPCz/VF
-1fRDa3rax6dUvTK0NKrHcB0OahQ8Jta0oDgvhudX1pAg96OLfiEejMunwJCebR/9
-8UVRVY4bn97lf+HR2CdDiSxK/r08/1Uzj9vSXxhQGMAOQzDmF95QFhoUdpzL339m
-v4Oaj+2rICH1MzuzY4L41LwkCGMB8yggTdlvdZvPKz6a6fv0FuVepj77idnklONL
-/ZosCxSv3vC5f8fpyFcIcd1bXRySitIDLpS31iZ4+ja2zBVohXlElzt5UEvUoIU2
-F8ztHc4lTpOsvYrnFe5khQEK0A1uWN2iER5xPc2/vNOiwDr9TeuoAm6ik7UiFdek
-64Uc8QIDAQABo4IC2TCCAtUwIwYDVR0RBBwwGoEYaGFuc2pvZXJnLm1hdXJlckBp
-dHNkLmRlMA4GA1UdDwEB/wQEAwIEsDATBgNVHSUEDDAKBggrBgEFBQcDBDAdBgNV
-HQ4EFgQU7TObzYjTJkbDH0JNnGOycX1q9+owHwYDVR0jBBgwFoAU8MejMpG168q1
-WHcVp06+Gl1hQyUwgf8GA1UdHwSB9zCB9DBHoEWgQ4ZBaHR0cDovL2NybC5zd2lz
-c3NpZ24ubmV0L0YwQzdBMzMyOTFCNUVCQ0FCNTU4NzcxNUE3NEVCRTFBNUQ2MTQz
-MjUwgaiggaWggaKGgZ9sZGFwOi8vZGlyZWN0b3J5LnN3aXNzc2lnbi5uZXQvQ049
-RjBDN0EzMzI5MUI1RUJDQUI1NTg3NzE1QTc0RUJFMUE1RDYxNDMyNSUyQ089U3dp
-c3NTaWduJTJDQz1DSD9jZXJ0aWZpY2F0ZVJldm9jYXRpb25MaXN0P2Jhc2U/b2Jq
-ZWN0Q2xhc3M9Y1JMRGlzdHJpYnV0aW9uUG9pbnQwawYDVR0gBGQwYjBWBglghXQB
-WQEDAQswSTBHBggrBgEFBQcCARY7aHR0cDovL3JlcG9zaXRvcnkuc3dpc3NzaWdu
-LmNvbS9Td2lzc1NpZ24tU2lsdmVyLUNQLUNQUy5wZGYwCAYGBACPegEDMIHZBggr
-BgEFBQcBAQSBzDCByTBkBggrBgEFBQcwAoZYaHR0cDovL3N3aXNzc2lnbi5uZXQv
-Y2dpLWJpbi9hdXRob3JpdHkvZG93bmxvYWQvRjBDN0EzMzI5MUI1RUJDQUI1NTg3
-NzE1QTc0RUJFMUE1RDYxNDMyNTBhBggrBgEFBQcwAYZVaHR0cDovL3NpbHZlci1w
-ZXJzb25hbC1nMi5vY3NwLnN3aXNzc2lnbi5uZXQvRjBDN0EzMzI5MUI1RUJDQUI1
-NTg3NzE1QTc0RUJFMUE1RDYxNDMyNTANBgkqhkiG9w0BAQsFAAOCAQEAJzjD/mHF
-B16ZY5JyX2a8sDSBypZZcR0k2l2LRcLFjE27ZJcgJWMzcWN5omZl4JkLZukLqiZG
-QDOTochmTUg47PDHbqMr9sy6FCzLZCnMOi1fIXJfHSdbfSW+wdCoFAslJbRF6YAD
-mUGANqk9otl2I9OGFETdmqRbisAJuESoqOnHwIFMgKTZzUSkes4W1SwNoU3t9erR
-OyL5CQSHhSF8Xb7V24FhoQsgRibRHZzGBjDIOxyTDNdVkyXI3XJFpwdmCdRs46KM
-4GGg5bhs71DPvAFyrhnELVcLnMLt7VldTVotarZZNW1AgN8CzW3UxV/WeXE87qYV
-gDu24KL7pn4WeTCCBr4wggSmoAMCAQICDwVE1k6tHtM21TJAXQC5NjANBgkqhkiG
-9w0BAQsFADBHMQswCQYDVQQGEwJDSDEVMBMGA1UEChMMU3dpc3NTaWduIEFHMSEw
-HwYDVQQDExhTd2lzc1NpZ24gU2lsdmVyIENBIC0gRzIwHhcNMTQwOTE5MjAzNjQ5
-WhcNMjkwOTE1MjAzNjQ5WjBWMQswCQYDVQQGEwJDSDEVMBMGA1UEChMMU3dpc3NT
-aWduIEFHMTAwLgYDVQQDEydTd2lzc1NpZ24gUGVyc29uYWwgU2lsdmVyIENBIDIw
-MTQgLSBHMjIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDLObE5hf76
-yaG8w4OpDkothHIe/2jFp8Qd7A/XqIsTHrPRFotA3A9TbwE97OhktZfbg7yoqMCE
-OFheAxQr5sow7wCy6xM5GZJHKiEA5XLNwjFiDsxWKv93xGOMmMJveNe1tszpfR8z
-ppEFKv7RUtb07Jz+TUxqUuGFdmK7uWjmUmP8wSGRkl0Z2NyA0RnjSRZXAg4ZRIWr
-Kckv+sZtawqh9vf/a2E1FSaUlAJpJV1p971ea4LZkAwG+UMFIknrNtAgWmMQ4zgh
-1X8WK0GKRnryZ+ik0LoefyQndZiUSS1WxFQzkZ1i+dVf3lupFZiclFPBgOkJFxW0
-G4ApMqHQrxOnAgMBAAGjggKWMIICkjAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/
-BAgwBgEB/wIBADAdBgNVHQ4EFgQU8MejMpG168q1WHcVp06+Gl1hQyUwHwYDVR0j
-BBgwFoAUF6DNweRBtjpbO8tFnb0cwpj6hlgwgf8GA1UdHwSB9zCB9DBHoEWgQ4ZB
-aHR0cDovL2NybC5zd2lzc3NpZ24ubmV0LzE3QTBDREMxRTQ0MUI2M0E1QjNCQ0I0
-NTlEQkQxQ0MyOThGQTg2NTgwgaiggaWggaKGgZ9sZGFwOi8vZGlyZWN0b3J5LnN3
-aXNzc2lnbi5uZXQvQ049MTdBMENEQzFFNDQxQjYzQTVCM0JDQjQ1OURCRDFDQzI5
-OEZBODY1OCUyQ089U3dpc3NTaWduJTJDQz1DSD9jZXJ0aWZpY2F0ZVJldm9jYXRp
-b25MaXN0P2Jhc2U/b2JqZWN0Q2xhc3M9Y1JMRGlzdHJpYnV0aW9uUG9pbnQwYQYD
-VR0gBFowWDBWBglghXQBWQEDAQYwSTBHBggrBgEFBQcCARY7aHR0cDovL3JlcG9z
-aXRvcnkuc3dpc3NzaWduLmNvbS9Td2lzc1NpZ24tU2lsdmVyLUNQLUNQUy5wZGYw
-gcYGCCsGAQUFBwEBBIG5MIG2MGQGCCsGAQUFBzAChlhodHRwOi8vc3dpc3NzaWdu
-Lm5ldC9jZ2ktYmluL2F1dGhvcml0eS9kb3dubG9hZC8xN0EwQ0RDMUU0NDFCNjNB
-NUIzQkNCNDU5REJEMUNDMjk4RkE4NjU4ME4GCCsGAQUFBzABhkJodHRwOi8vb2Nz
-cC5zd2lzc3NpZ24ubmV0LzE3QTBDREMxRTQ0MUI2M0E1QjNCQ0I0NTlEQkQxQ0My
-OThGQTg2NTgwDQYJKoZIhvcNAQELBQADggIBAMN5p1e3e61RaPVEjEGVKAF8dNY7
-arxt76fXTTmZHWiNygjZ0HGxGTWTb4LGHEm4Ue5M+WwKb9il+/77MF4A0pSrxBJR
-uqqKq2rdGdcrSvcWsmtRz3RbKaJz3pf+2E8gIX1pDLBQ5Y1YjIAu5Rcc3WN6qu8F
-+cNpnuSMcWJcQu468s3gEu+LXOnOUygy7JULGVSiIY36f1CnT7wZe7JrjCk/dz7K
-I8dpWkGdfWYxb3pxedqpZTrrf9cQ1QtfVBl8zjclJIRQ0K9ANMJfkuJ6kfMvQkcb
-nzxC+9lfpbxwRY7voDmQ9aF4bNfAZ1kZ4QDeXPx46E/du6yRLnKL/OpHb0MovLu5
-jpS++lDdUJMbTBi2dv/DRwpZtM1tVdhqtl/JL8GUNj6+rkA1BiDt4AJMLTRFDkOv
-ovTYkBXl0MCbRECuPI+TUbyZaHNpe3VYmbfUBE/f8YJxER17/BMdd2VVY9dScnzd
-MUeGp5XYrCZxPSPmEjv0f5qWhv4r6qDzJg11xhaMMSDnEUeh56lqsKWygR7cPdCh
-427V8GamHH3XkohNAAcLcedz53PkVGVp/DeN8R5vcO6nbLNSRWdZ1gVIsSHplyjZ
-2fS0pqBnIza8YEcOXCh/XZOKMbqNMTYUx3pCnW8gwWwq+BYPatkAlDK7PVWxxcOh
-DbF5d1Qd4DOCfu7qMYICfjCCAnoCAQEwbjBWMQswCQYDVQQGEwJDSDEVMBMGA1UE
-ChMMU3dpc3NTaWduIEFHMTAwLgYDVQQDEydTd2lzc1NpZ24gUGVyc29uYWwgU2ls
-dmVyIENBIDIwMTQgLSBHMjICFGplzOVcSV6RRT8V08VMtX9wW/DBMAsGCWCGSAFl
-AwQCAaCB5DAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEP
-Fw0yMTA1MTcxNDQxMDdaMC8GCSqGSIb3DQEJBDEiBCBm64AvfoDDBCjl4c06um6j
-abrgpKOqUU18tIkp9yW28zB5BgkqhkiG9w0BCQ8xbDBqMAsGCWCGSAFlAwQBKjAL
-BglghkgBZQMEARYwCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMA4GCCqGSIb3DQMC
-AgIAgDANBggqhkiG9w0DAgIBQDAHBgUrDgMCBzANBggqhkiG9w0DAgIBKDANBgkq
-hkiG9w0BAQEFAASCAQB0U1lnaPYF7Yc11R8HofTaUZaWQ21FRWJhkECOgPVOWw/M
-hRfTNm08BvtvIKa7QvZ/Znxs+zGpz1YrxbrSrhSWVVGycA3rRiQBAWx0Jxr54FHY
-qLQmf3jOd1n5qbga8dAwiuRDse3uvpUi/rpxgT0UGee7uLF0wJfLX6nqarXIj6wT
-Q4tfNWLw/3YbrZXlt4KANTVRu2vrOmdSpXF5tgl+FsjpYwjmoj+b0xwMHcHqlp7X
-OPkIXsurhHYuVI7K/Au+lQTKxqVzepBJHgMcQfpvARjdN69Z15VaO8t/5e2fhXhc
-+JK3NF13QBTPgemZhsWiNGkNFmUUWu9o6Hd5vR97
+Can you please tell us just what your exact problem is, with as much 
+detail as possible.
 
-------F393FDE511BA3188C6B33143B2534045--
+Rowland
+
 
 
