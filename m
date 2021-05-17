@@ -2,45 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43B9838272E
-	for <lists+samba-technical@lfdr.de>; Mon, 17 May 2021 10:38:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A80E1382CCE
+	for <lists+samba-technical@lfdr.de>; Mon, 17 May 2021 15:04:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Be3SoobnVo+874Dpjb9qZRKKPXm47Rj4XLo63KJH91Y=; b=XkVowuQAdhkyoUyOlNiW8V9yck
-	TVJqpVXmMLQt9VQRCJh+j6R/Qiys5rNDTtRnbeoaEzZPNCb2DAFibQjdy6C38Z/kCUQoxFOvM0dii
-	qs/MEC/J+h/F3u54Z7HvAhuqNpkqBmQDvKlkBFareXUzkpi1Wi2aiNGsJNiyJ0QNkQdlbAmU53Cl7
-	gVrZbz49CdSg1PBwfsS4PsNNCUD4hkSG4L105GOE2f2JRpg7wYaDvZwHI81qCg2QnuGF83gCl94N7
-	L2vKq79WhYZV1AbW6LRAcYiVzh8f19wU6Js00roGmk5TjhM/yZSao7QWS75wYdEBHHFEn4jVnzGuF
-	OhISp/eA==;
-Received: from ip6-localhost ([::1]:37326 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Az8LD7+ZJl2rXRKacKGaZEZyVaZpzq2iP8bw/BXmR9c=; b=d3wPUjlIr6FxwJiaVtnAi8+oo7
+	0OK/mDdEh8mMd/aI/yGYNc+QjjgC6Y1S2bV/T0aYRgns7CkOKIsgfaUnsz6mhaG4awlVz5ebqtfrk
+	sgu1RcoqAo1neu2c+nbW5foJrkwBicCKHyZB3ajd6JR+ns3Eb1AL3v6r6mMjBHXaW786igdZHaYou
+	Q+kcliLgnoBx7F2BtFdhLrKmvdVfEai1EZkacwxUtiGG9pgSuJIWJ6mrEQXSL32czdiRZiAWU+jEx
+	d6CYs1m0Mkvp0S7n4GanR+G+FCDhykrBXwrSHGTNB6no130rKaClLqeuvVFydtYaZ7w2AUw27fuQp
+	D/LaLugA==;
+Received: from ip6-localhost ([::1]:57842 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1liYlh-000gmy-1y; Mon, 17 May 2021 08:38:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53032) 
+	id 1licus-000pca-Po; Mon, 17 May 2021 13:04:14 +0000
+Received: from mail.itsd.de ([80.153.216.99]:47326) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1liYlW-000get-H4
- for samba-technical@lists.samba.org; Mon, 17 May 2021 08:38:23 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=Be3SoobnVo+874Dpjb9qZRKKPXm47Rj4XLo63KJH91Y=; b=JJkmeSt3DdUDODigo+7w2EFFMs
- 4T+Z6RC2w+RG5WjbIEhglZSV9i/SvZ+sdOifwFbd9z2bVFehRv99Fl4T8/JI80TBFfOwThqnznTXA
- 9aRrW2sA44yaSWOf1VFaETM2YL992sDM1+oV+1AilRX1t1ufqVwFxFl+cH/o7/UJCt6cX55109mH5
- O2fN/vpOQh5QOaYpUVNNsmMq/VUdc2eaD+lplpUE8ZyHzbo/otx2gApctcgW4IiW1DBw8RqruLlQS
- ZRxkNSw+PvH1N0+GmO+s7IvaK9JMX+vZuu3iMASlSpgVTtVsEJR+HhonHkKBkszM4KXzDoW3wYHlT
- f8JydEnllBJxy2nXKC9e2uJOMjiWYUDB6go39VyDsLbsBqzwpDnBt5Qu6uschQGIlkonBbBvF0xkf
- X5Al/1AV8MKe/6RgtfOulj8I5Af0ghMWfcC5epq+6ZDwiyRqjUlF9U46vmUPiDB2tkmSJxHq011t4
- yPdew7PzH9iz5NiD8G4sp7er;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1liYlV-0000YW-LU; Mon, 17 May 2021 08:38:17 +0000
-To: Andrew Bartlett <abartlet@samba.org>
-Subject: Re: Offline logon flapping in autobuild?
-Date: Mon, 17 May 2021 10:38:15 +0200
-Message-ID: <1949061.8nGXxLBRy0@magrathea>
-In-Reply-To: <516bd798642997a15016d81f9ae6e17e9250f677.camel@samba.org>
-References: <516bd798642997a15016d81f9ae6e17e9250f677.camel@samba.org>
+ (Exim) id 1licuj-000pcQ-5F
+ for samba-technical@lists.samba.org; Mon, 17 May 2021 13:04:11 +0000
+Received: from mail.itsd.de (mail.itsd.de [192.168.0.10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by securemail.itsd.de (Postfix) with ESMTPS
+ for <samba-technical@lists.samba.org>; Mon, 17 May 2021 14:45:51 +0200 (CEST)
+Received: from nero.itsd.de (unknown [192.168.0.220])
+ (using TLSv1.2 with cipher AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.itsd.de (Postfix) with ESMTPSA id 5F201800D6;
+ Mon, 17 May 2021 14:45:51 +0200 (CEST)
+To: samba-technical@lists.samba.org
+Subject: Problem with AD membership in an AD with more the 100.000 group
+ (possible regression in 4.12?)
+Organization: itsystems Deutschland AG
+Message-ID: <8dbf5fca-0af6-a1de-429d-163952538593@itsd.de>
+Date: Mon, 17 May 2021 14:45:50 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
+X-SM-outgoing: yes
+Content-Language: de-DE
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/signed; protocol="application/pkcs7-signature";
+ micalg="sha-256"; boundary="----8F83351301C47A9F32902D3089321976"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=itsd.de; h=to:from
+ :subject:message-id:date:mime-version:content-type; s=default;
+ bh=aHJsF2drRMw5Fx/O1lse+SXd6jmzZgGYgBmf/DMNTR8=; b=CrQKX8iziBHf
+ yozOmY68hut3E6YMphK/6BXIq/Ljrxrz+5ONhizN8L93Jl9QiBDEMaeMttmE3NCK
+ vsHrzwtSbRFYx1NrJNcWJ331mhBxviBwq8HrUuBEzZRDRyS6wvbp3IaefBoxVIyB
+ rkE3dt4APYPtrimu5NiBPmjHQOxINIMz49x/Az7gfDxy5omK4kHmcfptNT8mQ670
+ emMgaJ9Gx5cNdEiAeKWjOHRIsVBBVpNtbe5lLu3br0jZspeG7sK71cOCUvQievSJ
+ 342KFnu9X/zYQv95QwzNry9Domn9F6LYRhCyZMEgU3DiJ89v8CqmRXbEZzAqRYOe
+ acrwzjbV0Q==
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,35 +65,134 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: =?utf-8?q?Dr=2E_Hansj=C3=B6rg_Maurer_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?UTF-8?Q?Dr=2e_Hansj=c3=b6rg_Maurer?= <hansjoerg.maurer@itsd.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thursday, 13 May 2021 10:17:48 CEST Andrew Bartlett wrote:
-> My most recent autobuild, with (I hope) unrelated changes, fails with:
-> 
-> [141(1068)/143 at 6m5s]
-> samba.blackbox.offline_logon(ad_member_offline_logon)
-> ERROR: Testsuite[samba.blackbox.offline_logon(ad_member_offline_logon)]
-> REASON: unable to set up environment ad_member_offline_logon - exiting
-> could not obtain winbind interface details: WBC_ERR_WINBIND_NOT_AVAILABLE
-> could not obtain winbind domain name!
-> failed to call wbcPingDc: WBC_ERR_WINBIND_NOT_AVAILABLE
+This is an S/MIME signed message
 
-It doesn't really have to do something with the offline logon. winbindd did 
-not start and was failing, the error why it didn't start would be the 
-interesing one. However for this we need the logs
+------8F83351301C47A9F32902D3089321976
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
 
+MIIVSgYJKoZIhvcNAQcCoIIVOzCCFTcCAQExDTALBglghkgBZQMEAgEwCwYJKoZI
+hvcNAQcBoIISkjCCBb0wggOloAMCAQICCE8b1C9Uuy9LMA0GCSqGSIb3DQEBBQUA
+MEcxCzAJBgNVBAYTAkNIMRUwEwYDVQQKEwxTd2lzc1NpZ24gQUcxITAfBgNVBAMT
+GFN3aXNzU2lnbiBTaWx2ZXIgQ0EgLSBHMjAeFw0wNjEwMjUwODMyNDZaFw0zNjEw
+MjUwODMyNDZaMEcxCzAJBgNVBAYTAkNIMRUwEwYDVQQKEwxTd2lzc1NpZ24gQUcx
+ITAfBgNVBAMTGFN3aXNzU2lnbiBTaWx2ZXIgQ0EgLSBHMjCCAiIwDQYJKoZIhvcN
+AQEBBQADggIPADCCAgoCggIBAMTxh3/TeDH3OMn4w5lDvMf3vDfnTnG6S4+lcx1c
+bpiuA1euODdDLxc9H8jOaBDBeK4ZAysQ+ix5g/bouWi5VfIERKc5+fwEix7xok0n
++WF7urflohO262E+0GzR5vv6Xu0dtJ6gNVuhksvwSZL+hQoFPubZC+JPu9yVN/yR
+6TI1ItEfOk4nhZ2wFZQy2mENR01gQq6SR+iDWlBY6YqLuV2h3N2ZSh82Z7tI5IO2
+N+tIOq8PZ48XB+gEyu9qMYfUwLb5lHF7Z2S4tpFKQntlLjBqDPWQ7pXm8s2C7Nmh
+Suz2skvlRYXmbXiTBC6cgm02qcQxZB+Ggwsq9DUKeMlVz0GwR+kwn5m+YagGhLko
+el842RupOLCDf3PBwztIKoIPIZu4zKg1w4Qbg7M+vqSVaQE6iQB4BNnJ9JkZq1Z+
+W4uGORWRpBAsCTKAYLOTwCq2GAudfo1J8hBKf/nVRi8ZkqOZpyasu4w85g68Rwfc
+c1HxcGQvCPm0Rx0wbETqKTeFkmhmvIM4/ns5LtNQ8B/7XmC2qab6J0Hxmxhy8vWE
+dErJZ8RUrkhk34zRbrAd4QePCB6ZnHHpTNil90cSH3TRUZ6G88KiI0ALc9tLpudz
+BozBoOnBWaxG+uYv+M9xnEZtucQVjTh5A0VI78Rd1wjuhzkihrIND1hD93GpSC79
+6tYfAgMBAAGjgawwgakwDgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQFMAMBAf8w
+HQYDVR0OBBYEFBegzcHkQbY6WzvLRZ29HMKY+oZYMB8GA1UdIwQYMBaAFBegzcHk
+QbY6WzvLRZ29HMKY+oZYMEYGA1UdIAQ/MD0wOwYJYIV0AVkBAwEBMC4wLAYIKwYB
+BQUHAgEWIGh0dHA6Ly9yZXBvc2l0b3J5LnN3aXNzc2lnbi5jb20vMA0GCSqGSIb3
+DQEBBQUAA4ICAQBzxoHgJ9ItD+CVMOKaQX9QLF9fYmGphmppGAx0SdZdhOpBUhhv
+WK1QViBqxr0oaViR3JERNak6HbwapWCe2B9/RZFp2X67eHLBBg8qzo+FcGGsoM0L
+uDkpVoQyToa7PcQq2dcfcu7+UaEiQbFxAmMagrBiq15XEh/fy911oMBdeZCMG+BQ
+5t4x/ph7cF+lkNit+AK2b9Ng3UBLIsU9rTp6nxoaR5F5M7qC3DJpA5ZuH0vwcf7j
+Z3Kgsb9ci+T6mSLHhLkbjSOXP+0l4M9lu/VhBO/dHrJaQSJaoZ9dLOhbyW2pDAx4
+qmDGVo8BWgxovGkZecQffpcFv8XpJFFe1NVLU+3ZI1o2A2WjwQOtQTDzRhuFkK9l
+tdWx5BZbeHUdl3ptWakqj3vew4eJEJlJc3jIPb1RNXQq1fF+aRsquzu9JbiaWj1y
+YZBmh+4M1k3UEXQLav4LA/yjVVeJ/krLrlsXBcjyjSMxUzjSLWo/grmNCGr3XkF0
+bsMRfgesKWCRPzjKVxANvTAvx6XmQaDargWHmqCkZWxMCQyJurjTucCTijD6jeWa
+axUBTmeq2mJWPoQIZtLENn2nPhD8iODUgOUAvarzTgajemr5YnLjCU/rmw4BI/Gf
+u3zc3GwRlyWy8rRjFNIGKmeMg/XO6gfYmmoe7OQKuypM6wlgOc7KYtgubjCCBgsw
+ggTzoAMCAQICFGplzOVcSV6RRT8V08VMtX9wW/DBMA0GCSqGSIb3DQEBCwUAMFYx
+CzAJBgNVBAYTAkNIMRUwEwYDVQQKEwxTd2lzc1NpZ24gQUcxMDAuBgNVBAMTJ1N3
+aXNzU2lnbiBQZXJzb25hbCBTaWx2ZXIgQ0EgMjAxNCAtIEcyMjAeFw0xOTA3MTYw
+NjMxMTFaFw0yMjA3MTYwNjMxMTFaMEwxJzAlBgkqhkiG9w0BCQEWGGhhbnNqb2Vy
+Zy5tYXVyZXJAaXRzZC5kZTEhMB8GA1UEAwwYaGFuc2pvZXJnLm1hdXJlckBpdHNk
+LmRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7fOZiJ0pHsPCz/VF
+1fRDa3rax6dUvTK0NKrHcB0OahQ8Jta0oDgvhudX1pAg96OLfiEejMunwJCebR/9
+8UVRVY4bn97lf+HR2CdDiSxK/r08/1Uzj9vSXxhQGMAOQzDmF95QFhoUdpzL339m
+v4Oaj+2rICH1MzuzY4L41LwkCGMB8yggTdlvdZvPKz6a6fv0FuVepj77idnklONL
+/ZosCxSv3vC5f8fpyFcIcd1bXRySitIDLpS31iZ4+ja2zBVohXlElzt5UEvUoIU2
+F8ztHc4lTpOsvYrnFe5khQEK0A1uWN2iER5xPc2/vNOiwDr9TeuoAm6ik7UiFdek
+64Uc8QIDAQABo4IC2TCCAtUwIwYDVR0RBBwwGoEYaGFuc2pvZXJnLm1hdXJlckBp
+dHNkLmRlMA4GA1UdDwEB/wQEAwIEsDATBgNVHSUEDDAKBggrBgEFBQcDBDAdBgNV
+HQ4EFgQU7TObzYjTJkbDH0JNnGOycX1q9+owHwYDVR0jBBgwFoAU8MejMpG168q1
+WHcVp06+Gl1hQyUwgf8GA1UdHwSB9zCB9DBHoEWgQ4ZBaHR0cDovL2NybC5zd2lz
+c3NpZ24ubmV0L0YwQzdBMzMyOTFCNUVCQ0FCNTU4NzcxNUE3NEVCRTFBNUQ2MTQz
+MjUwgaiggaWggaKGgZ9sZGFwOi8vZGlyZWN0b3J5LnN3aXNzc2lnbi5uZXQvQ049
+RjBDN0EzMzI5MUI1RUJDQUI1NTg3NzE1QTc0RUJFMUE1RDYxNDMyNSUyQ089U3dp
+c3NTaWduJTJDQz1DSD9jZXJ0aWZpY2F0ZVJldm9jYXRpb25MaXN0P2Jhc2U/b2Jq
+ZWN0Q2xhc3M9Y1JMRGlzdHJpYnV0aW9uUG9pbnQwawYDVR0gBGQwYjBWBglghXQB
+WQEDAQswSTBHBggrBgEFBQcCARY7aHR0cDovL3JlcG9zaXRvcnkuc3dpc3NzaWdu
+LmNvbS9Td2lzc1NpZ24tU2lsdmVyLUNQLUNQUy5wZGYwCAYGBACPegEDMIHZBggr
+BgEFBQcBAQSBzDCByTBkBggrBgEFBQcwAoZYaHR0cDovL3N3aXNzc2lnbi5uZXQv
+Y2dpLWJpbi9hdXRob3JpdHkvZG93bmxvYWQvRjBDN0EzMzI5MUI1RUJDQUI1NTg3
+NzE1QTc0RUJFMUE1RDYxNDMyNTBhBggrBgEFBQcwAYZVaHR0cDovL3NpbHZlci1w
+ZXJzb25hbC1nMi5vY3NwLnN3aXNzc2lnbi5uZXQvRjBDN0EzMzI5MUI1RUJDQUI1
+NTg3NzE1QTc0RUJFMUE1RDYxNDMyNTANBgkqhkiG9w0BAQsFAAOCAQEAJzjD/mHF
+B16ZY5JyX2a8sDSBypZZcR0k2l2LRcLFjE27ZJcgJWMzcWN5omZl4JkLZukLqiZG
+QDOTochmTUg47PDHbqMr9sy6FCzLZCnMOi1fIXJfHSdbfSW+wdCoFAslJbRF6YAD
+mUGANqk9otl2I9OGFETdmqRbisAJuESoqOnHwIFMgKTZzUSkes4W1SwNoU3t9erR
+OyL5CQSHhSF8Xb7V24FhoQsgRibRHZzGBjDIOxyTDNdVkyXI3XJFpwdmCdRs46KM
+4GGg5bhs71DPvAFyrhnELVcLnMLt7VldTVotarZZNW1AgN8CzW3UxV/WeXE87qYV
+gDu24KL7pn4WeTCCBr4wggSmoAMCAQICDwVE1k6tHtM21TJAXQC5NjANBgkqhkiG
+9w0BAQsFADBHMQswCQYDVQQGEwJDSDEVMBMGA1UEChMMU3dpc3NTaWduIEFHMSEw
+HwYDVQQDExhTd2lzc1NpZ24gU2lsdmVyIENBIC0gRzIwHhcNMTQwOTE5MjAzNjQ5
+WhcNMjkwOTE1MjAzNjQ5WjBWMQswCQYDVQQGEwJDSDEVMBMGA1UEChMMU3dpc3NT
+aWduIEFHMTAwLgYDVQQDEydTd2lzc1NpZ24gUGVyc29uYWwgU2lsdmVyIENBIDIw
+MTQgLSBHMjIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDLObE5hf76
+yaG8w4OpDkothHIe/2jFp8Qd7A/XqIsTHrPRFotA3A9TbwE97OhktZfbg7yoqMCE
+OFheAxQr5sow7wCy6xM5GZJHKiEA5XLNwjFiDsxWKv93xGOMmMJveNe1tszpfR8z
+ppEFKv7RUtb07Jz+TUxqUuGFdmK7uWjmUmP8wSGRkl0Z2NyA0RnjSRZXAg4ZRIWr
+Kckv+sZtawqh9vf/a2E1FSaUlAJpJV1p971ea4LZkAwG+UMFIknrNtAgWmMQ4zgh
+1X8WK0GKRnryZ+ik0LoefyQndZiUSS1WxFQzkZ1i+dVf3lupFZiclFPBgOkJFxW0
+G4ApMqHQrxOnAgMBAAGjggKWMIICkjAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/
+BAgwBgEB/wIBADAdBgNVHQ4EFgQU8MejMpG168q1WHcVp06+Gl1hQyUwHwYDVR0j
+BBgwFoAUF6DNweRBtjpbO8tFnb0cwpj6hlgwgf8GA1UdHwSB9zCB9DBHoEWgQ4ZB
+aHR0cDovL2NybC5zd2lzc3NpZ24ubmV0LzE3QTBDREMxRTQ0MUI2M0E1QjNCQ0I0
+NTlEQkQxQ0MyOThGQTg2NTgwgaiggaWggaKGgZ9sZGFwOi8vZGlyZWN0b3J5LnN3
+aXNzc2lnbi5uZXQvQ049MTdBMENEQzFFNDQxQjYzQTVCM0JDQjQ1OURCRDFDQzI5
+OEZBODY1OCUyQ089U3dpc3NTaWduJTJDQz1DSD9jZXJ0aWZpY2F0ZVJldm9jYXRp
+b25MaXN0P2Jhc2U/b2JqZWN0Q2xhc3M9Y1JMRGlzdHJpYnV0aW9uUG9pbnQwYQYD
+VR0gBFowWDBWBglghXQBWQEDAQYwSTBHBggrBgEFBQcCARY7aHR0cDovL3JlcG9z
+aXRvcnkuc3dpc3NzaWduLmNvbS9Td2lzc1NpZ24tU2lsdmVyLUNQLUNQUy5wZGYw
+gcYGCCsGAQUFBwEBBIG5MIG2MGQGCCsGAQUFBzAChlhodHRwOi8vc3dpc3NzaWdu
+Lm5ldC9jZ2ktYmluL2F1dGhvcml0eS9kb3dubG9hZC8xN0EwQ0RDMUU0NDFCNjNB
+NUIzQkNCNDU5REJEMUNDMjk4RkE4NjU4ME4GCCsGAQUFBzABhkJodHRwOi8vb2Nz
+cC5zd2lzc3NpZ24ubmV0LzE3QTBDREMxRTQ0MUI2M0E1QjNCQ0I0NTlEQkQxQ0My
+OThGQTg2NTgwDQYJKoZIhvcNAQELBQADggIBAMN5p1e3e61RaPVEjEGVKAF8dNY7
+arxt76fXTTmZHWiNygjZ0HGxGTWTb4LGHEm4Ue5M+WwKb9il+/77MF4A0pSrxBJR
+uqqKq2rdGdcrSvcWsmtRz3RbKaJz3pf+2E8gIX1pDLBQ5Y1YjIAu5Rcc3WN6qu8F
++cNpnuSMcWJcQu468s3gEu+LXOnOUygy7JULGVSiIY36f1CnT7wZe7JrjCk/dz7K
+I8dpWkGdfWYxb3pxedqpZTrrf9cQ1QtfVBl8zjclJIRQ0K9ANMJfkuJ6kfMvQkcb
+nzxC+9lfpbxwRY7voDmQ9aF4bNfAZ1kZ4QDeXPx46E/du6yRLnKL/OpHb0MovLu5
+jpS++lDdUJMbTBi2dv/DRwpZtM1tVdhqtl/JL8GUNj6+rkA1BiDt4AJMLTRFDkOv
+ovTYkBXl0MCbRECuPI+TUbyZaHNpe3VYmbfUBE/f8YJxER17/BMdd2VVY9dScnzd
+MUeGp5XYrCZxPSPmEjv0f5qWhv4r6qDzJg11xhaMMSDnEUeh56lqsKWygR7cPdCh
+427V8GamHH3XkohNAAcLcedz53PkVGVp/DeN8R5vcO6nbLNSRWdZ1gVIsSHplyjZ
+2fS0pqBnIza8YEcOXCh/XZOKMbqNMTYUx3pCnW8gwWwq+BYPatkAlDK7PVWxxcOh
+DbF5d1Qd4DOCfu7qMYICfjCCAnoCAQEwbjBWMQswCQYDVQQGEwJDSDEVMBMGA1UE
+ChMMU3dpc3NTaWduIEFHMTAwLgYDVQQDEydTd2lzc1NpZ24gUGVyc29uYWwgU2ls
+dmVyIENBIDIwMTQgLSBHMjICFGplzOVcSV6RRT8V08VMtX9wW/DBMAsGCWCGSAFl
+AwQCAaCB5DAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEP
+Fw0yMTA1MTcxMjQ1NTJaMC8GCSqGSIb3DQEJBDEiBCBjL6iAu21gHGWg4HTK5CFU
+STImFLGCs+Dgxg2b8Z/8gDB5BgkqhkiG9w0BCQ8xbDBqMAsGCWCGSAFlAwQBKjAL
+BglghkgBZQMEARYwCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMA4GCCqGSIb3DQMC
+AgIAgDANBggqhkiG9w0DAgIBQDAHBgUrDgMCBzANBggqhkiG9w0DAgIBKDANBgkq
+hkiG9w0BAQEFAASCAQBZuDlCn0yTB1pf5GyQaY07yecNZEeH2pAhoneRSgjTIODo
+wRpowc5NBxVF/xjpRrZe2h6iMVQGe4BAWnrEfzPVtswefPJcQ4KMWSTZI1tAe6tw
+fr+wh9WA/PDpurYDGpAov2MpFU2+V12zLH5jQBJmzndEvw+LCtGf7u4oTPcoqbcB
+TqjCiy8FmSFNOPNbusLbJJYGaJ/JoyG12cb6WvOJu6bEW1P4tGSVcsjunlFrW10x
+TLsZzqIbeWxBZ//nBtSkfZrFVLodBSjkHZOUcoDND+AloUITH70wU5VPmi7thgtA
++457zh0kLo5dWAfj2s7BqWANxhIN7E2Bf0HgS9Ko
 
-	Andreas
-
-
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
+------8F83351301C47A9F32902D3089321976--
 
 
