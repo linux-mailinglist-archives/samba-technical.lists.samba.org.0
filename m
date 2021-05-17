@@ -2,46 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0722B3826FA
-	for <lists+samba-technical@lfdr.de>; Mon, 17 May 2021 10:26:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 43B9838272E
+	for <lists+samba-technical@lfdr.de>; Mon, 17 May 2021 10:38:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=H3ka3sbmrbv0nqdfv2D8EcK7SJRDzaruC4vYTshlmGk=; b=cIasVUtQSYX3oYmHFxv9CrbjfY
-	GH2ybP/gveP0IBiRMBpupsRiJSUFFtYATkdzobn92Kaw4T3UkRFuPkNlmvGHZc2h8JITqNGr1WJ2A
-	JzYx6i6lBnd5Bxag8KzI/eom9LGR9vaFgB3/7EJYR3aUGUiPDbofaaeXeRoVQNkQ9qRW5PLmzJjbN
-	tD8N1TZzfjcLwwVbFpeXdskBJ5zvJhxwRwSR3Ex5G3WlFeYqCfic/giBUVjUTHB0ILWVnXxc/GECv
-	gsl7vmiRfmPyAW2dUKHphomv9Ffe8Pq7HFyZOPeiCqCi+L2j4l12JrYQcs+c708FjIIUTh5U30PTC
-	fIGrl/Ig==;
-Received: from ip6-localhost ([::1]:35194 helo=hr1.samba.org) 
+	bh=Be3SoobnVo+874Dpjb9qZRKKPXm47Rj4XLo63KJH91Y=; b=XkVowuQAdhkyoUyOlNiW8V9yck
+	TVJqpVXmMLQt9VQRCJh+j6R/Qiys5rNDTtRnbeoaEzZPNCb2DAFibQjdy6C38Z/kCUQoxFOvM0dii
+	qs/MEC/J+h/F3u54Z7HvAhuqNpkqBmQDvKlkBFareXUzkpi1Wi2aiNGsJNiyJ0QNkQdlbAmU53Cl7
+	gVrZbz49CdSg1PBwfsS4PsNNCUD4hkSG4L105GOE2f2JRpg7wYaDvZwHI81qCg2QnuGF83gCl94N7
+	L2vKq79WhYZV1AbW6LRAcYiVzh8f19wU6Js00roGmk5TjhM/yZSao7QWS75wYdEBHHFEn4jVnzGuF
+	OhISp/eA==;
+Received: from ip6-localhost ([::1]:37326 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1liYZZ-000g6K-LK; Mon, 17 May 2021 08:25:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47958) 
+	id 1liYlh-000gmy-1y; Mon, 17 May 2021 08:38:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53032) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1liYZV-000g55-6d
- for samba-technical@lists.samba.org; Mon, 17 May 2021 08:25:55 +0000
+ (Exim) id 1liYlW-000get-H4
+ for samba-technical@lists.samba.org; Mon, 17 May 2021 08:38:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=H3ka3sbmrbv0nqdfv2D8EcK7SJRDzaruC4vYTshlmGk=; b=YzilpP4y45QJx/fYNYD021rs9Q
- 7SNyXgKkzUpYhVT7/ps/bTPcf6adGa6UIu+QlDCiWz6PlV9j4eKGDUmeyHsDK/foMvNjj+bRi4dWQ
- G4nyjFirqSqctTMj37cUyFZnHLIKDRk1c9Ir0HA9JObW5DdFqxZ64kBfzq7/EBNH5XX5oPPYw5pmT
- cqPcgRDV6RUZvWDn63oh5Xp9C69ZmvmdBOiAmB6Bj6jlueVO0e4fZM1OHF7Vy3zHvoBOgV987jL9e
- JOHKkKkFIwdoeNgWU5f0amVy75uRN4jbzHoh/m14/4BB2wrEHnbh8/J/2FXQBdqIKbQS/tvlimIb+
- X9/to/WiQV8e6Hlc8Tq472JwqeqtpAF0Z7aKg0WIPG0RLbuU3JlIIpfViDD+djtACXZO44A0cFwQO
- DBVKtEH5bJEVg+asG4v7WMrUcP3SoCI5Yv8p9OJtQETAuaxgVZjYoIWJ3Lis+Ivb3WJoBIBE/YKt4
- pY/Giue5ibYnczH/35ARUjEC;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=Be3SoobnVo+874Dpjb9qZRKKPXm47Rj4XLo63KJH91Y=; b=JJkmeSt3DdUDODigo+7w2EFFMs
+ 4T+Z6RC2w+RG5WjbIEhglZSV9i/SvZ+sdOifwFbd9z2bVFehRv99Fl4T8/JI80TBFfOwThqnznTXA
+ 9aRrW2sA44yaSWOf1VFaETM2YL992sDM1+oV+1AilRX1t1ufqVwFxFl+cH/o7/UJCt6cX55109mH5
+ O2fN/vpOQh5QOaYpUVNNsmMq/VUdc2eaD+lplpUE8ZyHzbo/otx2gApctcgW4IiW1DBw8RqruLlQS
+ ZRxkNSw+PvH1N0+GmO+s7IvaK9JMX+vZuu3iMASlSpgVTtVsEJR+HhonHkKBkszM4KXzDoW3wYHlT
+ f8JydEnllBJxy2nXKC9e2uJOMjiWYUDB6go39VyDsLbsBqzwpDnBt5Qu6uschQGIlkonBbBvF0xkf
+ X5Al/1AV8MKe/6RgtfOulj8I5Af0ghMWfcC5epq+6ZDwiyRqjUlF9U46vmUPiDB2tkmSJxHq011t4
+ yPdew7PzH9iz5NiD8G4sp7er;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1liYZT-0000Or-Rw; Mon, 17 May 2021 08:25:51 +0000
-To: Andreas Schneider <asn@samba.org>
-Subject: smb.conf "log file" broken since e8780be
-Message-ID: <3c7e8c86-eb12-aedc-2dd4-faa9c9ebbbd7@samba.org>
-Date: Mon, 17 May 2021 10:25:51 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.0
+ (Exim) id 1liYlV-0000YW-LU; Mon, 17 May 2021 08:38:17 +0000
+To: Andrew Bartlett <abartlet@samba.org>
+Subject: Re: Offline logon flapping in autobuild?
+Date: Mon, 17 May 2021 10:38:15 +0200
+Message-ID: <1949061.8nGXxLBRy0@magrathea>
+In-Reply-To: <516bd798642997a15016d81f9ae6e17e9250f677.camel@samba.org>
+References: <516bd798642997a15016d81f9ae6e17e9250f677.camel@samba.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="jbkxg657HMgmRQ6HhPpYPxIpvyD3W5yqn"
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,63 +54,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---jbkxg657HMgmRQ6HhPpYPxIpvyD3W5yqn
-Content-Type: multipart/mixed; boundary="P7vxgH8Q6tEA4i1s4jYo0GhaxBZvuRX1s";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Andreas Schneider <asn@samba.org>
-Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Message-ID: <3c7e8c86-eb12-aedc-2dd4-faa9c9ebbbd7@samba.org>
-Subject: smb.conf "log file" broken since e8780be
+On Thursday, 13 May 2021 10:17:48 CEST Andrew Bartlett wrote:
+> My most recent autobuild, with (I hope) unrelated changes, fails with:
+> 
+> [141(1068)/143 at 6m5s]
+> samba.blackbox.offline_logon(ad_member_offline_logon)
+> ERROR: Testsuite[samba.blackbox.offline_logon(ad_member_offline_logon)]
+> REASON: unable to set up environment ad_member_offline_logon - exiting
+> could not obtain winbind interface details: WBC_ERR_WINBIND_NOT_AVAILABLE
+> could not obtain winbind domain name!
+> failed to call wbcPingDc: WBC_ERR_WINBIND_NOT_AVAILABLE
 
---P7vxgH8Q6tEA4i1s4jYo0GhaxBZvuRX1s
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Hi Andreas
-
-it looks like "log file" in smb.conf doesn't work anymore since -2=20
-e8780be. Once I revert both commits it works again. Can you please take=20
-a look?
-
--slow
-
---=20
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+It doesn't really have to do something with the offline logon. winbindd did 
+not start and was failing, the error why it didn't start would be the 
+interesing one. However for this we need the logs
 
 
---P7vxgH8Q6tEA4i1s4jYo0GhaxBZvuRX1s--
+	Andreas
 
---jbkxg657HMgmRQ6HhPpYPxIpvyD3W5yqn
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
 
------BEGIN PGP SIGNATURE-----
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmCiKI8FAwAAAAAACgkQqh6bcSY5nkai
-cw/8DAFJcf/y0uEoTm7n0yfKffDP2yumk4EqJtE89c+nSwnlD6t1I0zVbomNxWSTkAKEKfe5toXQ
-moYxKuh7SBx8+AYYymrKqNXUNXzv9Z5Tq5elEGigE3uBTL2eHOFo2U1R9jL1oXVlbFBtWYdPgbSf
-f8onaHkay1d0VvtNGS67/KtBZnkcEYIJ6wffVUXBaItx6AH5hxztEpqWzijMAeANLZ+KEJOHVGcu
-DyN8O4DC/91HQplY8PVJy7gTUjKtqbpucaf+vgbNUGi8tZ2p2Tm7ga5yZXfxjx8Y3uTtHmRRFSiL
-jpD0syK26mqjPATycxRiG0YccjLhatyzncvtBiBn7MiHwXbfO5+g+6fbINP/hYgQQw67JRULKddM
-t7fSLYgR27a1IC6Snt6FPCVXVwoh+d9QzD4KwV97L/QvzRgnaEe/qd+85L8OTDJGVUSky4fgEhqm
-lQmc0lxngqSS/8BLn226GifOv03o1mTgiRtGoCMv3htYxXsqTRj5/MBimIfP+O09CS6u5RjTs04R
-6zBz53C6Fl8NSc8R4ddD6hcwfGuTGxGayGUsr5lMfHP2ana/1gQsWHCMVtkre1JLquPHz7doizel
-87wl6yBH3e1b3mxokp86NBUaN8kBisayf4V/SfAiHbDpN37ittegKbWisTXiqM0/vIM5RQHu2vN4
-snU=
-=12zi
------END PGP SIGNATURE-----
 
---jbkxg657HMgmRQ6HhPpYPxIpvyD3W5yqn--
 
