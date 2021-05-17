@@ -2,50 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F3C6383220
-	for <lists+samba-technical@lfdr.de>; Mon, 17 May 2021 16:47:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7C68383B18
+	for <lists+samba-technical@lfdr.de>; Mon, 17 May 2021 19:19:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=FZzV5hD/QK6PnrAB1NUcJtQtbCAxTt/yOkEAZwoYCfs=; b=gc+F27nRHs9aTcCmM5aYrxmg5o
-	uNx4ReN/B23YHk0q9UPzMCAUc9aTaCoKgw/dK9OtS21uRlcMUVTPmY9lCnmgy0rdlXuYE7MdKqAZQ
-	b2660mp6b93GBh7fnMVuLVm1fh/vRht8jxJWHDRSEgZ5ZgjilrfildZ8ZlUuEHplRu9vhxflh72PC
-	dp0HG1jXZmdxhdbrQhc8dhBuI/QIzOyTjfUPEJ9ozPfPzouVZ1a/dviHrSvirGYnGmAcJMzhnqMJZ
-	vWUJ4gPCCfgUvTStAzWC+0DsAbHH6xRZol7FahKo/1dAPqpz9y53dnPiGW7rpsXRil6rVBg8aU29B
-	+yWWDUCA==;
-Received: from ip6-localhost ([::1]:25586 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:subject:cc;
+	bh=byUQK97gkLr88p6+ATVJJNy5okHEFadwJ+7SiHEvyhQ=; b=KQKjC74I+rEPy9KTamIgpcP4FZ
+	tfU3pF5U7x6thl5DdV6ieh7HzH28rtKp3FoRL57tFyv0hY0Oj03PgTdL8JLWC/nRMFf8kI7VshkEA
+	e2olt3uXCyPoRLGabsWffkYm2hQEBXiW7fuPsb7n4IVEjPMlRj0lfAchN8IMIRC5gMTvrNdenw2uw
+	4GTh5OlSbZT9fDzfMwAFOzFSU7dUhch7czhsSRnLCfCc9H/xHnV1W1ZxZjdVCKQreRb8D+gXe5YyI
+	zGLRRr7yP0r2UgW7DeeCsFt0KLFb6qDmsIRLPtPQ45LPcSXZLVtuB37neWD9cwdzxHFslmX7rlbrC
+	9x6YRPxg==;
+Received: from ip6-localhost ([::1]:28568 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lieWJ-000w3n-Lj; Mon, 17 May 2021 14:46:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17528) 
+	id 1ligt4-000xij-9p; Mon, 17 May 2021 17:18:38 +0000
+Received: from mail.itsd.de ([80.153.216.99]:11132) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lieWB-000w3b-4r
- for samba-technical@lists.samba.org; Mon, 17 May 2021 14:46:56 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=FZzV5hD/QK6PnrAB1NUcJtQtbCAxTt/yOkEAZwoYCfs=; b=hoeKpTl0ExzO8FYPM5DEDlkndI
- t+szEdWhXQ3R3eh+xTp9VLXy2D6vvAGMsawTZhoBZ3EWP90QKpRDJxen5FLEki6nGuJAehdIvggk9
- lWgEiIU/4cjhTNQbjktcv56JSxlr8wUVFL3+0Z3AD+39ELv0slKZhXVqQfn5fctoTpeuDGDr4gT9D
- 43KKb/azyfpC66B/cjPBGxKmIy1wPDmw/4JtVopntqT80vxCOcGP48zTTLRBv20rcM3PCpU1pHFRD
- 95hgV4tV0ligdOfdz/R542VR2mXtqVR1LuuxKO97KkQQuI4tUtAQiOOK1DMYDp5/jyDlxnPZZLggu
- Fdry7Ouotdl55Swd17klq8x/p9r2mc/WC9WcQRtzLXx8ueLIdOf3FxmgmLJP1YLRsi58XjloyfHKd
- 6x7VREu1FGtJSCKf4lE4vs038s4h1uTjH0gNM5fcRmi6nK9nSezLl7DhADK0nk1aEEugdU7+YpU5N
- FYJI7gjuuarLWvYB/cogLx8C;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lieWA-0004bP-Jt; Mon, 17 May 2021 14:46:50 +0000
-Subject: Re: Problem with AD membership in an AD with more the 100.000 group
+ (Exim) id 1ligsz-000xia-1n
+ for samba-technical@lists.samba.org; Mon, 17 May 2021 17:18:35 +0000
+Received: from mail.itsd.de (mail.itsd.de [192.168.0.10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by securemail.itsd.de (Postfix) with ESMTPS
+ for <samba-technical@lists.samba.org>; Mon, 17 May 2021 19:18:30 +0200 (CEST)
+Received: from nero.itsd.de (unknown [192.168.0.220])
+ (using TLSv1.2 with cipher AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.itsd.de (Postfix) with ESMTPSA id C51A8800D6;
+ Mon, 17 May 2021 19:18:29 +0200 (CEST)
+subject: Problem with AD membership in an AD with more the 100.000 group
  (possible regression in 4.12?)
-To: =?UTF-8?Q?Dr=2e_Hansj=c3=b6rg_Maurer?= <hansjoerg.maurer@itsd.de>,
- samba-technical@lists.samba.org
-References: <0b0bb73c-fac8-3072-9609-15028b08936d@itsd.de>
-Message-ID: <baf859ec-06b2-f348-b7ad-46eab7602d0c@samba.org>
-Date: Mon, 17 May 2021 15:46:50 +0100
+To: samba-technical@lists.samba.org
+Organization: itsystems Deutschland AG
+Message-ID: <d7b0ec24-3c59-1d74-9e93-616eebe6eb44@itsd.de>
+Date: Mon, 17 May 2021 19:18:29 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.0
+ Thunderbird/78.8.0
 MIME-Version: 1.0
-In-Reply-To: <0b0bb73c-fac8-3072-9609-15028b08936d@itsd.de>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
+Content-Language: de-DE
+X-SM-outgoing: yes
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=itsd.de; h=from:subject
+ :to:message-id:date:mime-version:content-type
+ :content-transfer-encoding; s=default; bh=btvdxeYim/BbFtSWH8UP2N
+ kdBykCSzGYNK8IB1NHLWk=; b=A+pxmifqau0KnJaxRBW01jFqkssQaG8Sq5L8ti
+ k8Hzl0FqOh1eN+R4cJ8ayw1r9tQgxFDgpJsNVJwmDfUcprsSnnuWqKyEBq045X8x
+ D8pSrehk6XRpBK8dK6nd+JFiAgS+MMSsYI1mp+XNqvubsXARmSQ3wbbbH/iNqutP
+ niAQDzLFv+jVyuKZwBViXdkComWEcqzh4/TOSsJVMVbnHhtGL9pydqOPa+tCQY2j
+ hNaW3YPElBZVXvuSQYmkSxns1H8Oz2JBUpnWOT2xNJDpF3e5NJH2f0WSUP1kzRZG
+ fmbHskwTfG0AfvZlPRcRGdLmu/XyL0Vh4jUW/0ENi2YCBr8w==
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,20 +64,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland penny <rpenny@samba.org>
+From: =?utf-8?q?Dr=2E_Hansj=C3=B6rg_Maurer_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?UTF-8?Q?Dr=2e_Hansj=c3=b6rg_Maurer?= <hansjoerg.maurer@itsd.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 17/05/2021 15:41, Dr. Hansjörg Maurer via samba-technical wrote:
+Hi
 
-Sorry, but it is still an empty email and I will not blindly open an 
-attachment.
+  - sorry for the noise, did not find the "plain switch" for our mail 
+gateway -
+here the original mail (hopefully)
+samba 4.12.3 on CentOS-8
+I am  trying to run a wbinfo -g on an AD memberserver in an  AD with 
+more the 100.000 groups and it shows no output
 
-Can you please tell us just what your exact problem is, with as much 
-detail as possible.
+The samba logs shows
+   list_groups XXX
+[2021/05/17 14:21:49.826967,  1] ../../librpc/ndr/ndr.c:632(_ndr_pull_error)
+   ndr_pull_array_size: ndr_pull_error(Range Error): More than 65535 NDR 
+tokens stored for array_size at ../../librpc/ndr/ndr.c:1093
 
-Rowland
+the wbinfo -g is still working with samba-4.10 on CentOS-7.
+I am wondering it thhe following change
 
+https://github.com/samba-team/samba/commit/7a0ed44b0e65e742a778915d493e17f04c43b2ef#diff-6a1478caa948ca1d186a648c470ded02699da3705181b633232d582a7c73576d
+
+/*
+  * This value is arbitary, but designed to reduce the memory a client
+  * can allocate and the work the client can force in processing a
+  * malicious packet.
+  *
+  * In an ideal world this would be controlled by range() restrictions
+  * on array sizes and careful IDL construction to avoid arbitary
+  * linked lists, but this is a backstop for now.
+  */
+#define NDR_TOKEN_MAX_LIST_SIZE 65535
+
+leads to this error?
+
+regards
+
+Hansjörg
+
+
+
+
+
+
+
+----------------------------
+Unser System ist mit einem Mailverschluesselungs-Gateway ausgestattet. Wenn Sie moechten, dass an Sie gerichtete E-Mails verschluesselt werden, senden Sie einfach eine S/MIME-signierte E-Mail oder Ihren PGP Public Key an hansjoerg.maurer@itsd.de.
+
+Our system is equipped with an email encryption gateway. If you want email sent to you to be encrypted please send a S/MIME signed email or your PGP public key to hansjoerg.maurer@itsd.de.
 
 
