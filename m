@@ -2,49 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 579173876DE
-	for <lists+samba-technical@lfdr.de>; Tue, 18 May 2021 12:46:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 43C3C387C4F
+	for <lists+samba-technical@lfdr.de>; Tue, 18 May 2021 17:19:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=7jOemCFq2pTBuyo5vsZnutHYoxek21mO200uzrkGYqw=; b=Dg87HG6wDXI2I819EgJ/GjXDPL
-	PYtKhSBM3vWQfpXQkjYCqqtZ9TwM319as6OILdOvXLRKCtPRkQAL6MOB00gnLD/OzNiuWqP1iu6+a
-	8648MO3dh/ia64aiBrbdExCKH1k7RKq9XPJF8gx8P5uR8drttUQfI3zjUZjL/Dj41uSEk2nEVfPqG
-	2hDZ41mUsp/ALS/2gAuGpByBA3N7p986vJEhC/JL51iMheFW/3H6AhPa/2Mjha/v7MCWVT/lvXUC7
-	WuMGRuApO2bXEzme96kD9AzEMVrjY9nMCzODaDAqYOXEBrvxY261yS9/mtGrGJLMv15VC3JaZQ/Tw
-	I3GzK4qQ==;
-Received: from ip6-localhost ([::1]:63908 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:subject:cc;
+	bh=U9oTaodWCXYSfph/bIWPCJVq5Ovk+LtZANfTgxs/HWc=; b=dqfgtbkUJV5bsWdG55znrWp8zf
+	G0EmUTxqBS5/bSQtd+Esf8TbE0V5rNKVoNVOQef76Yq8kX8NW5G/GWrBD62xpcfXmDT8EvdkKm0Kl
+	OEcmzjJyd1HzHG2iwHDR1A94+D6lGlqZAQtdiKjXXtQCqG1//+qv8UAsp155xC/m01rTtSUImaO4N
+	DAQf2N5X6N3K6ac9Y90EJLoh22x8pi2N/U6HL6m/VvpLSGRDJyim6h45nSYWys2rwdU/FiP1j/kxA
+	d6QHNJHhjWR9MBKGEgNa5K5CbQNCvTElBcM5A/7ZyZgqfBvD6Nb3Wnt7zh6n7w8mqxnpDSmvxnnF5
+	T0k1PUjw==;
+Received: from ip6-localhost ([::1]:48692 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lixEX-001FmE-2o; Tue, 18 May 2021 10:45:53 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40270) 
+	id 1lj1V2-001Tzf-Sk; Tue, 18 May 2021 15:19:12 +0000
+Received: from mail.itsd.de ([80.153.216.99]:38769) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lixES-001Fm5-Eg
- for samba-technical@lists.samba.org; Tue, 18 May 2021 10:45:50 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=7jOemCFq2pTBuyo5vsZnutHYoxek21mO200uzrkGYqw=; b=nIpuZdWZ9IBaTgC0vPRGYRHqlh
- 9uC/OD1lgVfOT8QYtWLnaaq4Mm2LkMY1IbqxwUUAFxFRIexr3t5avmhrBBzitDNQHghg57Q5b4JR9
- SgFGtPq/KaR1izBmU1JFwXGMLTJrWLlqWsydz9VCNdXRL7jhtPB1ALEfw6MRk1nlkbYUFHaryNHMU
- nyK5FQI9g0fbme8BKQD8ByS4+JRkC9Qxry4rORaY3gUvIeiKb/pQZYum+ZEG3P9kG5fziarZbu5oz
- Fz1QMv/YL844gXSAiX17nlOZWVJ8nigW1ZnlYRbH7T1lLgfsK9eD3zPjTx3wQ3jMj44n1G3uYkeZ0
- ZytgWEmKBO+wgjb/UnoUNP9s1vWS8eVm/MezYE1tLSTV/ZYPwdAI5ZlIGY7XHanc+qyWFnYTq+ypt
- S4cRCu0cVFCMyM3g4ltyYwVV0Vs2ossXEgfPqJTDL+l06rrsfwY69Y9hwIGEA3KKh8Vxvnn+PRSiP
- m7U8khELnBKCDeNI4Kp+qQpD;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lixEQ-0002at-Up; Tue, 18 May 2021 10:45:47 +0000
-Message-ID: <530ded817f79e3cec0561c0bc59868ab193ef1c0.camel@samba.org>
-Subject: Re: Offline logon flapping in autobuild?
-To: Andreas Schneider <asn@samba.org>
-Date: Tue, 18 May 2021 22:45:43 +1200
-In-Reply-To: <2444523.AYHQVFttfo@magrathea>
-References: <516bd798642997a15016d81f9ae6e17e9250f677.camel@samba.org>
- <1949061.8nGXxLBRy0@magrathea>
- <97407ae87bceb340ed01e5a60f0417810d8ec3f6.camel@samba.org>
- <2444523.AYHQVFttfo@magrathea>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.4-0ubuntu1 
+ (Exim) id 1lj1Ux-001TzU-6K
+ for samba-technical@lists.samba.org; Tue, 18 May 2021 15:19:10 +0000
+Received: from mail.itsd.de (mail.itsd.de [192.168.0.10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by securemail.itsd.de (Postfix) with ESMTPS
+ for <samba-technical@lists.samba.org>; Tue, 18 May 2021 17:19:03 +0200 (CEST)
+Received: from nero.itsd.de (unknown [192.168.0.223])
+ (using TLSv1.2 with cipher AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.itsd.de (Postfix) with ESMTPSA id 7B5A1800D6;
+ Tue, 18 May 2021 17:19:03 +0200 (CEST)
+subject: Re: Problem with AD membership in an AD with more the 100.000 group
+ (possible regression in 4.12?)
+To: samba-technical@lists.samba.org
+References: <d7b0ec24-3c59-1d74-9e93-616eebe6eb44@itsd.de>
+ <5d5b4c230813b6bd6b3001fe14bfd3a9d8ca2b53.camel@samba.org>
+Organization: itsystems Deutschland AG
+Message-ID: <9d2ed0c9-9e13-2848-29cb-aaf6354e33aa@itsd.de>
+Date: Tue, 18 May 2021 17:19:02 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <5d5b4c230813b6bd6b3001fe14bfd3a9d8ca2b53.camel@samba.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: de-DE
+X-SM-outgoing: yes
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=itsd.de; h=subject:to
+ :references:from:message-id:date:mime-version:in-reply-to
+ :content-type:content-transfer-encoding; s=default; bh=lmyZ7cutX
+ WVC1Ztl42V96uHvEUFhzoZLcpVcEzzjT20=; b=RbaL8Y7FroCJRQ0YimqmSW1SS
+ fJo1JaKACM9KcX5CutFhoHvjrPZKdaZFJk+rie5ei90Y8h1TXrQGmPKF5UN2hDfu
+ Cl2eAA0NZvYSFAQ4dFd2cmua6/T6LRlMZZKyOY4ZEgpod32igAGWvQXJvCUasikM
+ I+7+syD5tZ0M+SwAv9e2YutFS8t9hjgfEAPMy5sD5WcOOL2U6nXbVFWInzBWTbMo
+ gL9J8ax3MXdpNSk3hRFzwpKGZyzrTeE6ti5h4qFfSBEuNISLbaMSNWWucETAoR/I
+ yWR8TmR7w5J1+OMKMenYnp9jhOhqSwv2r1Ih01ZySq59Ihed+yVA3dfVWIgiA==
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,61 +67,178 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: =?utf-8?q?Dr=2E_Hansj=C3=B6rg_Maurer_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?UTF-8?Q?Dr=2e_Hansj=c3=b6rg_Maurer?= <hansjoerg.maurer@itsd.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2021-05-18 at 11:36 +0200, Andreas Schneider wrote:
-> On Monday, 17 May 2021 21:01:14 CEST Andrew Bartlett wrote:
-> > On Mon, 2021-05-17 at 10:38 +0200, Andreas Schneider wrote:
-> > > On Thursday, 13 May 2021 10:17:48 CEST Andrew Bartlett wrote:
-> > > > My most recent autobuild, with (I hope) unrelated changes,
-> > > > fails
-> > > > with:
-> > > > 
-> > > > [141(1068)/143 at 6m5s]
-> > > > samba.blackbox.offline_logon(ad_member_offline_logon)
-> > > > ERROR:
-> > > > Testsuite[samba.blackbox.offline_logon(ad_member_offline_logon)
-> > > > ]
-> > > > REASON: unable to set up environment ad_member_offline_logon -
-> > > > exiting
-> > > > could not obtain winbind interface details:
-> > > > WBC_ERR_WINBIND_NOT_AVAILABLE
-> > > > could not obtain winbind domain name!
-> > > > failed to call wbcPingDc: WBC_ERR_WINBIND_NOT_AVAILABLE
-> > 
-> > I got the same failure again re-pushing today.
-> > 
-> > > It doesn't really have to do something with the offline logon.
-> > > winbindd did
-> > > not start and was failing, the error why it didn't start would be
-> > > the
-> > > interesing one. However for this we need the logs
-> > 
-> > I tried a --nocleanup build on sn-devel-184 for samba-admem-mit but
-> > this passed this time, so I'm trying another with all the jobs.
-> 
-> I had similar issues with other tests like idmap when running
-> locally. I 
-> didn't have time to look into it when I discovered it. Checking now
-> ...
-> 
+Hi Andrew
 
-Thanks.  It happens pretty reliably for me trying to push to autobuild,
-but never if I do a job with --tail --nocleanup to actually look for
-the issue. :-(
+Am 18.05.21 um 05:15 schrieb Andrew Bartlett:
 
-Andrew Bartlett
+> Ouch.  This isn't good.
+>
+> While of course you could locally patch to increase the limit,
+yes, tried increasing it and this works
+>   I'm
+> really not sure what to do here, because the way the NDR tokens are
+> handled, some of the behaviour is N^2, so large numbers are a really
+> bad idea.
+>
+> Can you attach a debugger and break on that line?  (It might take some
+> trial/error to find the right process).  It would be helpful to know
+> exactly which structure can't be parsed.  If it is this one from
+> winbind.idl:
+>       NTSTATUS wbint_QueryGroupList(
+> 	[out] wbint_Principals *groups
+> 	);
+here are the last two gdb cycles of
+gdb --args /usr/sbin/winbindd --foreground --no-process-group -S
+  with an breakpoint at
+break librpc/ndr/ndr.c:1089
+         ret = ndr_token_store(ndr, &ndr->array_size_list, p, size);
 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+until the error occurs (cont 65533)
 
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
+
+
+ndr_pull_array_size (ndr=ndr@entry=0x5555558cf020, 
+p=p@entry=0x7fffdca09f78) at ../../librpc/ndr/ndr.c:1090
+1090            if (ret == NDR_ERR_RANGE) {
+(gdb)
+ndr_pull_wbint_Principal (ndr=ndr@entry=0x5555558cf020, 
+ndr_flags=ndr_flags@entry=512, r=0x7fffdca09f30)
+     at librpc/gen_ndr/ndr_winbind.c:566
+566                             NDR_CHECK(ndr_pull_array_size(ndr, 
+&r->name));
+(gdb) cont
+Continuing.
+
+Breakpoint 1, ndr_pull_array_size (ndr=ndr@entry=0x5555558cf020, 
+p=p@entry=0x7fffdca09fc8)
+     at ../../librpc/ndr/ndr.c:1089
+1089            ret = ndr_token_store(ndr, &ndr->array_size_list, p, size);
+(gdb) step
+ndr_token_store (mem_ctx=mem_ctx@entry=0x5555558cf020, 
+list=list@entry=0x5555558cf068,
+     key=key@entry=0x7fffdca09fc8, value=31) at ../../librpc/ndr/ndr.c:979
+979     {
+(gdb)
+980             if (list->tokens == NULL) {
+(gdb)
+987                     uint32_t alloc_count = 
+talloc_array_length(list->tokens);
+(gdb)
+talloc_get_size (context=0x5555573f97b0) at ../../lib/talloc/talloc.c:2821
+2821    {
+(gdb)
+2824            if (context == NULL) {
+(gdb)
+2828            tc = talloc_chunk_from_ptr(context);
+(gdb)
+talloc_get_size (context=0x5555573f97b0) at ../../lib/talloc/talloc.c:2830
+2830            return tc->size;
+(gdb)
+ndr_token_store (mem_ctx=mem_ctx@entry=0x5555558cf020, 
+list=list@entry=0x5555558cf068,
+     key=key@entry=0x7fffdca09fc8, value=31) at ../../librpc/ndr/ndr.c:994
+994                     if (list->count >= NDR_TOKEN_MAX_LIST_SIZE) {
+(gdb)
+997                     if (list->count == alloc_count) {
+(gdb)
+1014            list->tokens[list->count].key = key;
+(gdb)
+1015            list->tokens[list->count].value = value;
+(gdb)
+1016            list->count++;
+(gdb)
+1017            return NDR_ERR_SUCCESS;
+(gdb)
+ndr_pull_array_size (ndr=ndr@entry=0x5555558cf020, 
+p=p@entry=0x7fffdca09fc8) at ../../librpc/ndr/ndr.c:1090
+1090            if (ret == NDR_ERR_RANGE) {
+(gdb)
+ndr_pull_wbint_Principal (ndr=ndr@entry=0x5555558cf020, 
+ndr_flags=ndr_flags@entry=512, r=0x7fffdca09f80)
+     at librpc/gen_ndr/ndr_winbind.c:566
+566                             NDR_CHECK(ndr_pull_array_size(ndr, 
+&r->name));
+(gdb)
+567                             NDR_CHECK(ndr_pull_array_length(ndr, 
+&r->name));
+(gdb) cont
+Continuing.
+
+Breakpoint 1, ndr_pull_array_size (ndr=ndr@entry=0x5555558cf020, 
+p=p@entry=0x7fffdca0a018)
+     at ../../librpc/ndr/ndr.c:1089
+1089            ret = ndr_token_store(ndr, &ndr->array_size_list, p, size);
+(gdb) step
+ndr_token_store (mem_ctx=mem_ctx@entry=0x5555558cf020, 
+list=list@entry=0x5555558cf068,
+     key=key@entry=0x7fffdca0a018, value=31) at ../../librpc/ndr/ndr.c:979
+979     {
+(gdb)
+980             if (list->tokens == NULL) {
+(gdb)
+987                     uint32_t alloc_count = 
+talloc_array_length(list->tokens);
+(gdb)
+talloc_get_size (context=0x5555573f97b0) at ../../lib/talloc/talloc.c:2821
+2821    {
+(gdb)
+2824            if (context == NULL) {
+(gdb)
+2828            tc = talloc_chunk_from_ptr(context);
+(gdb)
+talloc_get_size (context=0x5555573f97b0) at ../../lib/talloc/talloc.c:2830
+2830            return tc->size;
+(gdb)
+ndr_token_store (mem_ctx=mem_ctx@entry=0x5555558cf020, 
+list=list@entry=0x5555558cf068,
+     key=key@entry=0x7fffdca0a018, value=31) at ../../librpc/ndr/ndr.c:994
+994                     if (list->count >= NDR_TOKEN_MAX_LIST_SIZE) {
+(gdb)
+1017            return NDR_ERR_SUCCESS;
+(gdb)
+ndr_pull_array_size (ndr=ndr@entry=0x5555558cf020, 
+p=p@entry=0x7fffdca0a018) at ../../librpc/ndr/ndr.c:1090
+1090            if (ret == NDR_ERR_RANGE) {
+(gdb)
+1091                    return ndr_pull_error(ndr, ret,
+(gdb)
+_ndr_pull_error (ndr=ndr@entry=0x5555558cf020, 
+ndr_err=ndr_err@entry=NDR_ERR_RANGE,
+     function=function@entry=0x7ffff7bcd650 <__FUNCTION__.9556> 
+"ndr_pull_array_size",
+     location=location@entry=0x7ffff7bcc431 "../../librpc/ndr/ndr.c:1093",
+     format=format@entry=0x7ffff7bcce00 "More than %d NDR tokens stored 
+for array_size")
+     at ../../librpc/ndr/ndr.c:606
+606     {
+(gdb)
+607             char *s=NULL;
+
+>
+> Then we have more hope of being able to modify the structure to be less
+> resource-consuming.
+>
+> I wonder if changing to a different string type would help.  Thankfully
+> this isn't a public protocol, so we can be flexible.
+>
+> Try the attached patch.  It uses an encoding that stores the strings as
+> <num bytes><string> rather than <num bytes><pointer> .... <string>,
+> which needs these 'tokens' to get between the stages.
+the patch did not help,
+
+Let me know if I should file a bug or can provide additional information
+
+Regards
+
+Hansjörg
+>
+> Andrew Bartlett
+
 
 
