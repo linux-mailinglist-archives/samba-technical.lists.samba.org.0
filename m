@@ -2,49 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2C2D386EA8
-	for <lists+samba-technical@lfdr.de>; Tue, 18 May 2021 03:02:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0124B38702F
+	for <lists+samba-technical@lfdr.de>; Tue, 18 May 2021 05:16:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=anKijYGCxRdJ8ZxO7zEgX0ZwSflaBcUVfc6BLksrevY=; b=1nlwUM3qdpIno9SeLhdffwigwU
-	WhxHJVZdtFqm6tQ1TYNG8h24yzNkLc/8TmN+ocH6nip2ECnCtlIo5Gynpf7DQZrTaxz8uXVNsNNnJ
-	TxW8WksJSNyUOz6OLJz0UpOapEvQ+LUgwaHHapwwZFUfhfrS93aSJxy8AHnFktj7zKyxKYjZxZTLz
-	hlXu49C7axQ4CJFPcpEUl7Atix5lqPIZwvnFHnHRK84ZRdWNPAQrhzlEKwYp/iW3JkNd4DmMyBnJA
-	Pt/NKMM8YzNXIEzLstQhCYKrU9f1vEAge4S64D/VU4dxoOqbsB+aJ7D4g9BW5zMGJXVv2J1Mw98yY
-	eAX1r+FA==;
-Received: from ip6-localhost ([::1]:44048 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=7c/z7LFHlQKT/EPuR/gOGneLSwqAC75WN3C2hJK9pXg=; b=vJRvOgdymr6GahZqnCzZVCnRxT
+	FMn+RBipmHgO11Q1gW+bRvD0ZpwAIEfCOHPx9OGYnLDcgLD2ZRhXF48sF1Ji4ri353E8gd9MscCEi
+	meIo0xtoDLGNvPeMF6xZ5L9VVLMUPPWlYpWLmSRUtq2YzUUKLtZQGiPpXhwb0gdjxiRhlXfKf3vss
+	G6Xu3Yu6KfVzlGGba44pudsFWxhBEHGYD6/1XuB9JNz88f8oD0Ov2THmODN4xYxqwGn1fcLGB0Fml
+	D/i1aZrrqbwXY4MM8oiLcXnqtBMsMgDz+IpxAr1u/ZwFyDXDP/194NTiaLNmpgZdBn+eaWn3LAiz3
+	+RAABFhA==;
+Received: from ip6-localhost ([::1]:44824 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lio6p-0015UI-PT; Tue, 18 May 2021 01:01:19 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13892) 
+	id 1liqCe-0016Gs-4o; Tue, 18 May 2021 03:15:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54654) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lio6i-0015U8-O3
- for samba-technical@lists.samba.org; Tue, 18 May 2021 01:01:16 +0000
+ (Exim) id 1liqCZ-0016Gj-0T
+ for samba-technical@lists.samba.org; Tue, 18 May 2021 03:15:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=anKijYGCxRdJ8ZxO7zEgX0ZwSflaBcUVfc6BLksrevY=; b=G/z2NZsbzcUDu/kl4JBrE/mzfu
- HBhgFDq8uwhRzbpGYufgf0UC8yfzW/ZkjnUtobd3Do8xRT4bK6QvzqAP+0c/L1fNRffPU7F96aVG0
- JpZtsBSIUx9iUIP9UqgTNuC6xvsdHalJnii0anzzOAtoykG5IMuyPO60S9k3dFuhAWUCnE34HA+gR
- f2xHmD2UJZHEg8JpmlIYdz9t/hfwffCk4kyhXRA9OIl3c26SkfltXSXxa8ccOS+tdlH3zmhMTWVsr
- FGNTPyY9ClGjLKm806y742uEGoPW3iKyIl2ZI0zMnfUuRar3DOjex8j82wfE/xm/LjlNyBKdcGYOv
- TGU2XAzUt3tI+yXV85WtRLMryzd7q1chqrRbDhA4eW5GaQgq+e0eZdpnyEQr+de0vw8bAZl46JejU
- SV9tKWtYZbVawLC4YzVQwRkAJKPfcME89+6jq9C0BZH/OYAHQsIL1d7mvTMcq2dEEMyctsKhHj2P4
- LMr9mhqH7q953PII/La6ATSw;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=7c/z7LFHlQKT/EPuR/gOGneLSwqAC75WN3C2hJK9pXg=; b=Y98NZHb4K39eXuFg7cnxFY2L31
+ GXTil3MwqFp1dEow6SwCVnbpCG/zwzUSWO47x6OVFGUIIMh4ugBzbDtLNkjnJ5NOMH9gbgLlVqDJX
+ /703iJe/bjLod7CGP+vrIj/Fuo/n/K4dQkxfixRMoMbVXC/fT8qDrvaiNLwIqvGwGnQGPsY0EbPNQ
+ 2gKVyMNhQXRkS6GPcfW60fLH2FmiOYJhddQrd2gyi/i2e0op6mzJgSpmmEsvBWZyuJdyJkhC8wfzB
+ 63HEzDh7zt6PsBz8wEzcn06ZNWeOOnfYFVOvhSTS0fLxOtpmqIsqhL/NTxsdARLSEJBJSbjrJoI+h
+ fQo17fdOjHQE9fRLehGHDx5ICSA6wkct01JmQz4bMzZE2x2I2JuIGF1iDBFyXC3jEiAEvDs02MRTK
+ czg/ggjN9uqghi715+ZXQ+ouGbRMV0WkqZ00P5fniGNkSgG32s5QK7uj3O2FD1yFqNZpvSfRY94KK
+ tbnLEJF2cTUncwRtoPyOKqk+;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lio6g-0001Yj-Mj; Tue, 18 May 2021 01:01:11 +0000
-Message-ID: <c91785ea2d0b29ed00d6bbdb4b76a1d59849a5ee.camel@samba.org>
-Subject: Re: Offline logon flapping in autobuild?
-To: Jeremy Allison <jra@samba.org>
-Date: Tue, 18 May 2021 13:01:05 +1200
-In-Reply-To: <20210517191909.GB1795539@jeremy-acer>
-References: <516bd798642997a15016d81f9ae6e17e9250f677.camel@samba.org>
- <1949061.8nGXxLBRy0@magrathea>
- <97407ae87bceb340ed01e5a60f0417810d8ec3f6.camel@samba.org>
- <20210517191909.GB1795539@jeremy-acer>
-Content-Type: text/plain; charset="UTF-8"
+ (Exim) id 1liqCW-0002WL-Bc; Tue, 18 May 2021 03:15:21 +0000
+Message-ID: <5d5b4c230813b6bd6b3001fe14bfd3a9d8ca2b53.camel@samba.org>
+Subject: Re: Problem with AD membership in an AD with more the 100.000 group
+ (possible regression in 4.12?)
+To: "Dr." =?ISO-8859-1?Q?Hansj=F6rg?= Maurer <hansjoerg.maurer@itsd.de>, 
+ samba-technical@lists.samba.org
+Date: Tue, 18 May 2021 15:15:15 +1200
+In-Reply-To: <d7b0ec24-3c59-1d74-9e93-616eebe6eb44@itsd.de>
+References: <d7b0ec24-3c59-1d74-9e93-616eebe6eb44@itsd.de>
+Content-Type: multipart/mixed; boundary="=-bhFkXbvh3JKQETQ249Ob"
 User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,56 +58,61 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Andreas Schneider <asn@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2021-05-17 at 12:19 -0700, Jeremy Allison wrote:
-> On Tue, May 18, 2021 at 07:01:14AM +1200, Andrew Bartlett via samba-
-> technical wrote:
-> > On Mon, 2021-05-17 at 10:38 +0200, Andreas Schneider wrote:
-> > > On Thursday, 13 May 2021 10:17:48 CEST Andrew Bartlett wrote:
-> > > > My most recent autobuild, with (I hope) unrelated changes,
-> > > > fails
-> > > > with:
-> > > > 
-> > > > [141(1068)/143 at 6m5s]
-> > > > samba.blackbox.offline_logon(ad_member_offline_logon)
-> > > > ERROR:
-> > > > Testsuite[samba.blackbox.offline_logon(ad_member_offline_logon)
-> > > > ]
-> > > > REASON: unable to set up environment ad_member_offline_logon -
-> > > > exiting
-> > > > could not obtain winbind interface details:
-> > > > WBC_ERR_WINBIND_NOT_AVAILABLE
-> > > > could not obtain winbind domain name!
-> > > > failed to call wbcPingDc: WBC_ERR_WINBIND_NOT_AVAILABLE
-> > 
-> > I got the same failure again re-pushing today.
-> > 
-> > > It doesn't really have to do something with the offline logon.
-> > > winbindd did
-> > > not start and was failing, the error why it didn't start would be
-> > > the
-> > > interesing one. However for this we need the logs
-> > 
-> > I tried a --nocleanup build on sn-devel-184 for samba-admem-mit but
-> > this passed this time, so I'm trying another with all the jobs.
-> > 
-> > Hopefully I'll get some information.
-> > 
-> > Is anyone else having trouble?
+
+--=-bhFkXbvh3JKQETQ249Ob
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+
+On Mon, 2021-05-17 at 19:18 +0200, Dr. Hansjörg Maurer via samba-
+technical wrote:
+> Hi
 > 
-> Nope, all my recent gitlab-ci's and autobuilds have gone
-> through without incident. Sorry you're having trouble,
-> hopefully we can get this tracked down soon.
+>   - sorry for the noise, did not find the "plain switch" for our
+> mail 
+> gateway -
+> here the original mail (hopefully)
+> samba 4.12.3 on CentOS-8
+> I am  trying to run a wbinfo -g on an AD memberserver in an  AD with 
+> more the 100.000 groups and it shows no output
+> 
+> The samba logs shows
+>    list_groups XXX
+> [2021/05/17 14:21:49.826967,  1]
+> ../../librpc/ndr/ndr.c:632(_ndr_pull_error)
+>    ndr_pull_array_size: ndr_pull_error(Range Error): More than 65535
+> NDR 
+> tokens stored for array_size at ../../librpc/ndr/ndr.c:1093
+> 
 
-I just had another fail, ironically trying to push Andreas' command
-line changes.
+Ouch.  This isn't good.
 
-Andrew,
+While of course you could locally patch to increase the limit, I'm
+really not sure what to do here, because the way the NDR tokens are
+handled, some of the behaviour is N^2, so large numbers are a really
+bad idea.
 
+Can you attach a debugger and break on that line?  (It might take some
+trial/error to find the right process).  It would be helpful to know
+exactly which structure can't be parsed.  If it is this one from
+winbind.idl:
+     NTSTATUS wbint_QueryGroupList(
+	[out] wbint_Principals *groups
+	);
+
+Then we have more hope of being able to modify the structure to be less
+resource-consuming.
+
+I wonder if changing to a different string type would help.  Thankfully
+this isn't a public protocol, so we can be flexible.
+
+Try the attached patch.  It uses an encoding that stores the strings as
+<num bytes><string> rather than <num bytes><pointer> .... <string>,
+which needs these 'tokens' to get between the stages.
+
+Andrew Bartlett
 -- 
 Andrew Bartlett (he/him)       https://samba.org/~abartlet/
 Samba Team Member (since 2001) https://samba.org
@@ -121,5 +124,35 @@ Solutions
 
 
 
+
+--=-bhFkXbvh3JKQETQ249Ob
+Content-Disposition: attachment; filename="less-unique-pointers-in-winbind.patch"
+Content-Transfer-Encoding: base64
+Content-Type: text/x-patch; name="less-unique-pointers-in-winbind.patch";
+	charset="UTF-8"
+
+ZGlmZiAtLWdpdCBhL2xpYnJwYy9pZGwvd2luYmluZC5pZGwgYi9saWJycGMvaWRsL3dpbmJpbmQu
+aWRsCmluZGV4IGEyYmM4MWE5MzMzLi42ZDQ1MjkzYWFmZSAxMDA2NDQKLS0tIGEvbGlicnBjL2lk
+bC93aW5iaW5kLmlkbAorKysgYi9saWJycGMvaWRsL3dpbmJpbmQuaWRsCkBAIC03MywxNCArNzMs
+MTQgQEAgaW50ZXJmYWNlIHdpbmJpbmQKIAkpOwogCiAgICAgdHlwZWRlZiBbcHVibGljXSBzdHJ1
+Y3QgewotCVtzdHJpbmcsY2hhcnNldChVVEY4KV0gY2hhciAqZG9tYWluX25hbWU7Ci0JW3N0cmlu
+ZyxjaGFyc2V0KFVURjgpXSBjaGFyICphY2N0X25hbWU7Ci0JW3N0cmluZyxjaGFyc2V0KFVURjgp
+XSBjaGFyICpmdWxsX25hbWU7Ci0JW3N0cmluZyxjaGFyc2V0KFVURjgpXSBjaGFyICpob21lZGly
+OwotCVtzdHJpbmcsY2hhcnNldChVVEY4KV0gY2hhciAqc2hlbGw7CisJW3N0cmluZyxjaGFyc2V0
+KFVURjgpXSBjaGFyIGRvbWFpbl9uYW1lW107CisJW3N0cmluZyxjaGFyc2V0KFVURjgpXSBjaGFy
+IGFjY3RfbmFtZVtdOworCVtzdHJpbmcsY2hhcnNldChVVEY4KV0gY2hhciBmdWxsX25hbWVbXTsK
+Kwlbc3RyaW5nLGNoYXJzZXQoVVRGOCldIGNoYXIgaG9tZWRpcltdOworCVtzdHJpbmcsY2hhcnNl
+dChVVEY4KV0gY2hhciBzaGVsbFtdOwogCWh5cGVyIHVpZDsKIAloeXBlciBwcmltYXJ5X2dpZDsK
+LQlbc3RyaW5nLGNoYXJzZXQoVVRGOCldIGNoYXIgKnByaW1hcnlfZ3JvdXBfbmFtZTsKKwlbc3Ry
+aW5nLGNoYXJzZXQoVVRGOCldIGNoYXIgcHJpbWFyeV9ncm91cF9uYW1lW107CiAJZG9tX3NpZCB1
+c2VyX3NpZDsKIAlkb21fc2lkIGdyb3VwX3NpZDsKICAgICB9IHdiaW50X3VzZXJpbmZvOwpAQCAt
+MTE2LDcgKzExNiw3IEBAIGludGVyZmFjZSB3aW5iaW5kCiAgICAgdHlwZWRlZiBbcHVibGljXSBz
+dHJ1Y3QgewogCWRvbV9zaWQgc2lkOwogCWxzYV9TaWRUeXBlIHR5cGU7Ci0JW3N0cmluZyxjaGFy
+c2V0KFVURjgpXSBjaGFyICpuYW1lOworCVtzdHJpbmcsY2hhcnNldChVVEY4KV0gY2hhciBuYW1l
+W107CiAgICAgfSB3YmludF9QcmluY2lwYWw7CiAKICAgICB0eXBlZGVmIFtwdWJsaWNdIHN0cnVj
+dCB7Cg==
+
+
+--=-bhFkXbvh3JKQETQ249Ob--
 
 
