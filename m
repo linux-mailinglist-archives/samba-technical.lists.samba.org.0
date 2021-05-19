@@ -2,39 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 244CC388C48
-	for <lists+samba-technical@lfdr.de>; Wed, 19 May 2021 13:03:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5AD338958B
+	for <lists+samba-technical@lfdr.de>; Wed, 19 May 2021 20:35:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=Z191nSa+PjSSI+9UamtQgHhWCamjE4E5+SmtK9wnPW4=; b=TiDk3+QEMFb6pdpeYm6gDVeM8G
-	QxyXuKbU6UXRBhdYqXUlTlAPWQPMuIR1iavvgSpTUkT6X7qfXrMFcsyoSKPu+IHQ1uZGFN1D6js1l
-	Rjbg427ijFOjvKsoy25udRZfES7Lu0S/IHjsBc14BWnitHsGbtOgdXU+482rUXsFoUwLl9TF2IVJm
-	XeYcmAHrdLtkQzncKrXgIkeBtw7J4YZH+21WJLAc50qSqI4JHkjl5xlRLVDk3+Tw+emuVyuj32fs6
-	GUgrQobhTJTUk/labKLSfo99KFvx4tG0RufrKywTFuWCbtEPzBIZvzIzOfq2vk84iibjR34mtAQW/
-	fp1k0CAg==;
-Received: from ip6-localhost ([::1]:30846 helo=hr1.samba.org) 
+	bh=nRGaivmRHyg0gO/Zy7T45BZ2Mfw7exCjuv7k9hESuHo=; b=j6vZlQGuo52x6ekOoeAPf9vbdu
+	dS3qREqBYNfKgY1LOW9DX84wiqeg/r94A58OXDmosPQ+oEr3rAeomE3COXiFbp8/aUGc7c7GMHRp5
+	iwNA80eIHnR2QJgyalh6vPAUiRKKVgHJ9ire/7Cq/Jtz4MEinvJ+7UKOlWLdMUA1PCmeQx4hCVhrt
+	pzmXgiJvo4zd+mkCMu1AXBqDQIbFy+6hQ3bOgh03TRsG4ZVK4taa/KKfr3ZckjdfcMhiYkFdgmPkC
+	p1pq+Pt28IoXVHE9mPFuY9LOLssvcC4V72Qm3xzx6SfIL7r0DSdj1ByqYkI7FWj7j+qmdis819G3W
+	Ljx1tqKA==;
+Received: from ip6-localhost ([::1]:39412 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ljJyQ-001lhR-3z; Wed, 19 May 2021 11:02:46 +0000
-Received: from air.basealt.ru ([194.107.17.39]:39062) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1ljJyK-001lhI-3q
- for samba-technical@lists.samba.org; Wed, 19 May 2021 11:02:43 +0000
-Received: by air.basealt.ru (Postfix, from userid 490)
- id 87AFC58951E; Wed, 19 May 2021 11:02:32 +0000 (UTC)
-Received: from [10.64.129.4] (unknown [193.43.9.4])
- by air.basealt.ru (Postfix) with ESMTPSA id 5A037589438
- for <samba-technical@lists.samba.org>; Wed, 19 May 2021 11:02:30 +0000 (UTC)
-To: samba-technical@lists.samba.org
-Subject: Question about registry operating functions
-Organization: BaseALT
-Message-ID: <c2a2a31b-0b62-5f5b-342d-38d059e35bba@basealt.ru>
-Date: Wed, 19 May 2021 15:02:29 +0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+	id 1ljR1q-001qic-Mk; Wed, 19 May 2021 18:34:46 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60746) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ljR1l-001qiS-QL
+ for samba-technical@lists.samba.org; Wed, 19 May 2021 18:34:44 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=nRGaivmRHyg0gO/Zy7T45BZ2Mfw7exCjuv7k9hESuHo=; b=YFCEl5irIoDPn907+gyH1709SR
+ R0IcY5rnh3xXvhKwwwoBbZJidoKUFsPRznHug+d9CQijvop2Nf+gioMI5X6nkSKDaL1BfhYoxLm3C
+ jZaMlCrFsHw/jclfnh/1n+Pe8aMUDPE62cmqg64CBE/1FoLhphPvvXHtjtT9Z7FSVIagjoeVe21DX
+ 9JoIF+ud+eVdwTCR/aRXmKSk4pR0xjbq/mk9wpewpG2h6BG1Bl2/DHVCwFpSdyg5jbtviwPYLMgSY
+ ZE48znZx1GboDMlAOSYwi6BgYv0f7v+k/4yvx74r86bI/sP+WcoqLDTCZNpU1hythvX2MFEsRoCU3
+ UY0TbwZ8IhXkcrwuBOxCK9PXLMdhZL3GB7aqm16nDjnInSxAXoYze+aSyx7T3p+9bL8tAsXU0lcHh
+ L8UlpK+Vmw/N1p7hV788Huo0CZ6nRM4FoOMz5HAdd25WW7U7520OSCKYAW+FaXbRXXbQmX6Q5wMce
+ tpnONjpBUU05P0wNJeOkJEPh;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ljR1k-0000a0-G3; Wed, 19 May 2021 18:34:40 +0000
+To: samba-technical@lists.samba.org, Andrew Bartlett <abartlet@samba.org>
+Subject: Re: Offline logon flapping in autobuild?
+Date: Wed, 19 May 2021 20:34:40 +0200
+Message-ID: <1923959.sGxDyq99xp@krikkit>
+In-Reply-To: <afc6730cd40ddeff92db1fc82b0aec32f09d85a3.camel@samba.org>
+References: <516bd798642997a15016d81f9ae6e17e9250f677.camel@samba.org>
+ <a7020786d9a620ea18f686fe4ac2c5d6c0a4b800.camel@samba.org>
+ <afc6730cd40ddeff92db1fc82b0aec32f09d85a3.camel@samba.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,106 +56,20 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Igor Chudov via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Igor Chudov <nir@basealt.ru>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi all,
+On Wednesday, 19 May 2021 04:10:17 CEST Andrew Bartlett wrote:
+> This patch seems to help if you are "abartlet" but probably not if you
+> are "bbaumbach" or "mmuehlfeld".
 
-I want to link against `source3/registry/reg_objects.c` but keep getting 
-errors like:
+I think we should use a fixed length for the username, either short it or add 
+a padding so they all have the same length. Then we wont run into that.
 
-```
-[4336/4410] Compiling source3/registry/reg_objects.c
-../../source3/registry/reg_objects.c:38:2: error: unknown type name 
-‘fstring’
-   fstring  valuename;
-   ^~~~~~~
-../../source3/registry/reg_objects.c: In function 
-‘regsubkey_ctr_key_exists’:
-../../source3/registry/reg_objects.c:287:10: error: ‘False’ undeclared 
-(first use in this function); did you mean ‘false’?
-    return False;
-           ^~~~~
-           false
-../../source3/registry/reg_objects.c:287:10: note: each undeclared 
-identifier is reported only once for each function it appears in
-../../source3/registry/reg_objects.c: In function ‘regval_name’:
-../../source3/registry/reg_objects.c:370:12: error: returning ‘int’ from 
-a function with return type ‘char *’ makes pointer from integer without 
-a cast [-Werror=int-conversion]
-   return val->valuename;
-          ~~~^~~~~~~~~~~
-../../source3/registry/reg_objects.c: In function ‘regval_ctr_value_exists’:
-../../source3/registry/reg_objects.c:404:32: error: passing argument 1 
-of ‘strequal’ makes pointer from integer without a cast 
-[-Werror=int-conversion]
-    if ( strequal( ctr->values[i]->valuename, value) )
-                   ~~~~~~~~~~~~~~^~~~~~~~~~~
-In file included from ../../source4/include/includes.h:62,
-                  from ../../source3/registry/reg_objects.c:23:
-../../source3/../lib/util/samba_util.h:343:36: note: expected ‘const 
-char *’ but argument is of type ‘int’
-  _PUBLIC_ bool strequal(const char *s1, const char *s2);
-                         ~~~~~~~~~~~~^~
-../../source3/registry/reg_objects.c:405:11: error: ‘True’ undeclared 
-(first use in this function); did you mean ‘true’?
-     return True;
-            ^~~~
-            true
-../../source3/registry/reg_objects.c:408:9: error: ‘False’ undeclared 
-(first use in this function); did you mean ‘false’?
-   return False;
-          ^~~~~
-          false
-../../source3/registry/reg_objects.c: In function ‘regval_ctr_value_byname’:
-../../source3/registry/reg_objects.c:420:30: error: passing argument 1 
-of ‘strequal’ makes pointer from integer without a cast 
-[-Werror=int-conversion]
-    if (strequal(ctr->values[i]->valuename, value)) {
-                 ~~~~~~~~~~~~~~^~~~~~~~~~~
-In file included from ../../source4/include/includes.h:62,
-                  from ../../source3/registry/reg_objects.c:23:
-../../source3/../lib/util/samba_util.h:343:36: note: expected ‘const 
-char *’ but argument is of type ‘int’
-  _PUBLIC_ bool strequal(const char *s1, const char *s2);
-                         ~~~~~~~~~~~~^~
-In file included from ../../source3/registry/reg_objects.c:30:
-../../source3/registry/reg_objects.c: In function ‘regval_compose’:
-../../lib/util/string_wrappers.h:40:54: error: ‘fstring’ undeclared 
-(first use in this function); did you mean ‘isprint’?
-   strlcpy((d),_fstrcpy_src ? _fstrcpy_src : "",sizeof(fstring)); \
-                                                       ^~~~~~~
-../../source3/registry/reg_objects.c:443:2: note: in expansion of macro 
-‘fstrcpy’
-   fstrcpy(regval->valuename, name);
-   ^~~~~~~
-../../source3/registry/reg_objects.c:443:16: error: passing argument 1 
-of ‘strlcpy’ makes pointer from integer without a cast 
-[-Werror=int-conversion]
-   fstrcpy(regval->valuename, name);
-../../lib/util/string_wrappers.h:40:11: note: in definition of macro 
-‘fstrcpy’
-   strlcpy((d),_fstrcpy_src ? _fstrcpy_src : "",sizeof(fstring)); \
-            ^
-In file included from ../../lib/replace/../replace/replace.h:176,
-                  from ../../source4/include/includes.h:23,
-                  from ../../source3/registry/reg_objects.c:23:
-/usr/include/string.h:466:41: note: expected ‘char * restrict’ but 
-argument is of type ‘int’
-  extern size_t strlcpy (char *__restrict __dest,
-                         ~~~~~~~~~~~~~~~~~^~~~~~
-```
 
-Could anyone possibly point me to the way to build reg_objects.c 
-successfully so I will be able to link against it? Maybe I need to add 
-some target?
+	Andreas
 
--- 
-With best regards, Igor Chudov
-Lead engineer
-BaseALT, Saratov engineering department, UTC+4
-tel. +7 495 1234-7-99 ext. 549
-mobile +7 937 266-51-34
+
 
