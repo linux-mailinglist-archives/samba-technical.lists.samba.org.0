@@ -2,51 +2,38 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C950D388B3D
-	for <lists+samba-technical@lfdr.de>; Wed, 19 May 2021 11:56:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 244CC388C48
+	for <lists+samba-technical@lfdr.de>; Wed, 19 May 2021 13:03:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=k4YEJeH7IpjhV3lawautQG8NotgOdcesMdwVkm6aBYc=; b=eRpFohfEhKCzwMH6c8wbXzdIC2
-	O+fEHi6nm+B2wVQJh0GhpcleJ68ENuE8plnqcsuSFT7oxj4ZWjeBNXQsz0iNLw5joIwaLaof9m5YT
-	/AuA5YXckXHY4Kmmnxd8gbeqzbMX0pKtvecliOsp2Av9F0dW18/EGDr9DDkE6tRPoC9SXNdezsxlZ
-	avLk/t0EU/r8ABWhybXOdbkcVsQ2yJxCCJfQD9U6jgeJBmCqVhDL7NJ3M2Z6CECCtQOVWUpB8Uywd
-	TjaAPlMp2/LsYX1gL7JmG8rEudbO6QPm3wQN4PfMZXT+1hnUmFIykCRISaP3Vbz+UwgnWFXLLqmQk
-	39XBFGsA==;
-Received: from ip6-localhost ([::1]:27958 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Z191nSa+PjSSI+9UamtQgHhWCamjE4E5+SmtK9wnPW4=; b=TiDk3+QEMFb6pdpeYm6gDVeM8G
+	QxyXuKbU6UXRBhdYqXUlTlAPWQPMuIR1iavvgSpTUkT6X7qfXrMFcsyoSKPu+IHQ1uZGFN1D6js1l
+	Rjbg427ijFOjvKsoy25udRZfES7Lu0S/IHjsBc14BWnitHsGbtOgdXU+482rUXsFoUwLl9TF2IVJm
+	XeYcmAHrdLtkQzncKrXgIkeBtw7J4YZH+21WJLAc50qSqI4JHkjl5xlRLVDk3+Tw+emuVyuj32fs6
+	GUgrQobhTJTUk/labKLSfo99KFvx4tG0RufrKywTFuWCbtEPzBIZvzIzOfq2vk84iibjR34mtAQW/
+	fp1k0CAg==;
+Received: from ip6-localhost ([::1]:30846 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ljIvj-001k7s-Ta; Wed, 19 May 2021 09:55:56 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54956) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ljIve-001k7i-QK
- for samba-technical@lists.samba.org; Wed, 19 May 2021 09:55:53 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=k4YEJeH7IpjhV3lawautQG8NotgOdcesMdwVkm6aBYc=; b=3P1LaNYEdbTcbi1AQlAQ01kGWA
- LBh4QjoIo5u9agz5/zEKcLpjjmYKYx1b+7RGkKGq1ycHEkDZLNBVA+4QJz+wa7cxICxahO8zRmu8Q
- 9iCOObJwvBcqEulcHAFJn9UJbSeLp+NSyDo9M2XCVC4OHahzcEASpE/snaqpxlJVrUp+PMRHdNOpu
- o0qlZgCHQ7kti+QUb8e2X93V0eaV1boYkqlVp5TPhKeOnFnFikixpPmC9KOIer4Sws6aJBje1u/1X
- egWuR5ihgoys9JIWvSvrGAEGi6x9MaH1wCVkrd33AJHZjy2S5pyVeP6vJQfCfD5ZDUXI3whe7DynZ
- FVTFDp3uYsNKZANm6NZo0mj0yObPpaNu9PL/SNHbyChmqY3XAdeRJD8cysOcrEdCIazY5DL+3qvTb
- IRbQ3XILhjJMtjxjWGWK+mqzG/dwMHDfAt2V+90L9dIhFSbhwsX/9Np+T5fzNd1aOKco3fJF677wi
- 87f4FgRZabHlAnS8QzhQTcQl;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ljIvc-0003aU-Rt; Wed, 19 May 2021 09:55:49 +0000
-Message-ID: <1911c4eeee7df0fcf1f13d612da214094a9198c0.camel@samba.org>
-Subject: Re: Problem with AD membership in an AD with more the 100.000 group
- (possible regression in 4.12?)
-To: "Dr." =?ISO-8859-1?Q?Hansj=F6rg?= Maurer <hansjoerg.maurer@itsd.de>, 
- samba-technical@lists.samba.org
-Date: Wed, 19 May 2021 21:55:42 +1200
-In-Reply-To: <2da32b9f-8ba0-c1ab-1748-831eeb727f0f@itsd.de>
-References: <d7b0ec24-3c59-1d74-9e93-616eebe6eb44@itsd.de>
- <5d5b4c230813b6bd6b3001fe14bfd3a9d8ca2b53.camel@samba.org>
- <9d2ed0c9-9e13-2848-29cb-aaf6354e33aa@itsd.de>
- <c4713dc0b0d746c834ec66c1ec793572c725b2d2.camel@samba.org>
- <2da32b9f-8ba0-c1ab-1748-831eeb727f0f@itsd.de>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.38.4 (3.38.4-1.fc33) 
+	id 1ljJyQ-001lhR-3z; Wed, 19 May 2021 11:02:46 +0000
+Received: from air.basealt.ru ([194.107.17.39]:39062) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1ljJyK-001lhI-3q
+ for samba-technical@lists.samba.org; Wed, 19 May 2021 11:02:43 +0000
+Received: by air.basealt.ru (Postfix, from userid 490)
+ id 87AFC58951E; Wed, 19 May 2021 11:02:32 +0000 (UTC)
+Received: from [10.64.129.4] (unknown [193.43.9.4])
+ by air.basealt.ru (Postfix) with ESMTPSA id 5A037589438
+ for <samba-technical@lists.samba.org>; Wed, 19 May 2021 11:02:30 +0000 (UTC)
+To: samba-technical@lists.samba.org
+Subject: Question about registry operating functions
+Organization: BaseALT
+Message-ID: <c2a2a31b-0b62-5f5b-342d-38d059e35bba@basealt.ru>
+Date: Wed, 19 May 2021 15:02:29 +0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -61,38 +48,106 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Igor Chudov via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Igor Chudov <nir@basealt.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2021-05-19 at 07:56 +0200, Dr. Hansjörg Maurer wrote:
-> Hi Andrew
-> 
-> tnak you for your quick reply
-> 
-> Am 18.05.21 um 21:59 schrieb Andrew Bartlett:
-> > 
-> > > (gdb)
-> > > 567                             NDR_CHECK(ndr_pull_array_length(ndr,
-> > > &r->name));
-> > > (gdb) cont
-> > > Continuing.
-> > OK, so this case it doesn't happen, which is the one I patched.
-> the gdb run took place with the unpatched version
-> 
+Hi all,
 
-Thanks, can you try with the patched one?  I'm thinking we must be
-hitting a different case now, if you still have issues, as the lines
-you show are gone with this patch (I hope).
+I want to link against `source3/registry/reg_objects.c` but keep getting 
+errors like:
 
-Thanks!
+```
+[4336/4410] Compiling source3/registry/reg_objects.c
+../../source3/registry/reg_objects.c:38:2: error: unknown type name 
+‘fstring’
+   fstring  valuename;
+   ^~~~~~~
+../../source3/registry/reg_objects.c: In function 
+‘regsubkey_ctr_key_exists’:
+../../source3/registry/reg_objects.c:287:10: error: ‘False’ undeclared 
+(first use in this function); did you mean ‘false’?
+    return False;
+           ^~~~~
+           false
+../../source3/registry/reg_objects.c:287:10: note: each undeclared 
+identifier is reported only once for each function it appears in
+../../source3/registry/reg_objects.c: In function ‘regval_name’:
+../../source3/registry/reg_objects.c:370:12: error: returning ‘int’ from 
+a function with return type ‘char *’ makes pointer from integer without 
+a cast [-Werror=int-conversion]
+   return val->valuename;
+          ~~~^~~~~~~~~~~
+../../source3/registry/reg_objects.c: In function ‘regval_ctr_value_exists’:
+../../source3/registry/reg_objects.c:404:32: error: passing argument 1 
+of ‘strequal’ makes pointer from integer without a cast 
+[-Werror=int-conversion]
+    if ( strequal( ctr->values[i]->valuename, value) )
+                   ~~~~~~~~~~~~~~^~~~~~~~~~~
+In file included from ../../source4/include/includes.h:62,
+                  from ../../source3/registry/reg_objects.c:23:
+../../source3/../lib/util/samba_util.h:343:36: note: expected ‘const 
+char *’ but argument is of type ‘int’
+  _PUBLIC_ bool strequal(const char *s1, const char *s2);
+                         ~~~~~~~~~~~~^~
+../../source3/registry/reg_objects.c:405:11: error: ‘True’ undeclared 
+(first use in this function); did you mean ‘true’?
+     return True;
+            ^~~~
+            true
+../../source3/registry/reg_objects.c:408:9: error: ‘False’ undeclared 
+(first use in this function); did you mean ‘false’?
+   return False;
+          ^~~~~
+          false
+../../source3/registry/reg_objects.c: In function ‘regval_ctr_value_byname’:
+../../source3/registry/reg_objects.c:420:30: error: passing argument 1 
+of ‘strequal’ makes pointer from integer without a cast 
+[-Werror=int-conversion]
+    if (strequal(ctr->values[i]->valuename, value)) {
+                 ~~~~~~~~~~~~~~^~~~~~~~~~~
+In file included from ../../source4/include/includes.h:62,
+                  from ../../source3/registry/reg_objects.c:23:
+../../source3/../lib/util/samba_util.h:343:36: note: expected ‘const 
+char *’ but argument is of type ‘int’
+  _PUBLIC_ bool strequal(const char *s1, const char *s2);
+                         ~~~~~~~~~~~~^~
+In file included from ../../source3/registry/reg_objects.c:30:
+../../source3/registry/reg_objects.c: In function ‘regval_compose’:
+../../lib/util/string_wrappers.h:40:54: error: ‘fstring’ undeclared 
+(first use in this function); did you mean ‘isprint’?
+   strlcpy((d),_fstrcpy_src ? _fstrcpy_src : "",sizeof(fstring)); \
+                                                       ^~~~~~~
+../../source3/registry/reg_objects.c:443:2: note: in expansion of macro 
+‘fstrcpy’
+   fstrcpy(regval->valuename, name);
+   ^~~~~~~
+../../source3/registry/reg_objects.c:443:16: error: passing argument 1 
+of ‘strlcpy’ makes pointer from integer without a cast 
+[-Werror=int-conversion]
+   fstrcpy(regval->valuename, name);
+../../lib/util/string_wrappers.h:40:11: note: in definition of macro 
+‘fstrcpy’
+   strlcpy((d),_fstrcpy_src ? _fstrcpy_src : "",sizeof(fstring)); \
+            ^
+In file included from ../../lib/replace/../replace/replace.h:176,
+                  from ../../source4/include/includes.h:23,
+                  from ../../source3/registry/reg_objects.c:23:
+/usr/include/string.h:466:41: note: expected ‘char * restrict’ but 
+argument is of type ‘int’
+  extern size_t strlcpy (char *__restrict __dest,
+                         ~~~~~~~~~~~~~~~~~^~~~~~
+```
 
-Andrew Bartlett
+Could anyone possibly point me to the way to build reg_objects.c 
+successfully so I will be able to link against it? Maybe I need to add 
+some target?
+
 -- 
-Andrew Bartlett (he/him)        https://samba.org/~abartlet/
-Samba Team Member (since 2001)  https://samba.org
-Samba Developer, Catalyst IT    https://catalyst.net.nz/services/samba
-
-
+With best regards, Igor Chudov
+Lead engineer
+BaseALT, Saratov engineering department, UTC+4
+tel. +7 495 1234-7-99 ext. 549
+mobile +7 937 266-51-34
 
