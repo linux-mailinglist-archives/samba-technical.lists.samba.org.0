@@ -2,54 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95ED038ABCC
-	for <lists+samba-technical@lfdr.de>; Thu, 20 May 2021 13:30:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 31A3338AC1E
+	for <lists+samba-technical@lfdr.de>; Thu, 20 May 2021 13:33:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=M0Kmh7wkcGZsbSqJ0rWcPBgWq/GN3BZbuc2MZjmbigk=; b=n3cG5A9BIhioItEqewScktADE5
-	62a7asKkQTs8Tb3JF/y+436I3V/ivK2TWR55WIRYo6JORSliOK1Qp9berozK3ANuU/Zktz8F5VMeF
-	Ga7O8luEh3kgHarTqkIQrUoGwL9jqQK0GIU/wOhdD2xbgX1GMMiVQ0Lr2iQFv21IGXUGtmyqDG3OJ
-	tweCDBnu5qXQbMIPgl7IrGkFPIhjrGeG//IIK7NQM89fJk3nU2qkBqSJ/y01BvVCOG9L78lebt1kx
-	YzK+3EjwA0i9xO8VovktaCl7HK+IzgaJg00GOKtvCirMIaxvrm0htnX1nx1UZ0qnaAdPy7D202vJf
-	EXz1sm3w==;
-Received: from ip6-localhost ([::1]:60304 helo=hr1.samba.org) 
+	bh=1PqwhcrwVcLmSJL8Yvx7Byh2cenRVo9GQSUYJueTzOw=; b=wxtGxSwjJI7voqTCzFstd9fzdx
+	+WnfT2lqNrVZathe5Khyublw0Vi/ioj0GA8CobQRNpFHV9/ImvZXWFxrP5FR5tXM75nrlgaofTU03
+	8hfvr5zZvsgas8Rm+KQtjmiL7J+yw/MZTWoJHN+rhGfRWJe7EeAMklD5Kfv2d+04lqg03ePh+hw5b
+	R0XEXtRyHFfa4T6HPxUCImJrATv/bs7Q+7Y/4qnzWu4CfQ4f21hWcNsWlY957AvelnIzl+jHwc3lu
+	wW3mli0JYJ81VkKraTYpQCxZ++DnGTXEphtVk7NOB7O3awSCNDuQLKbrceJx/s9QB58PiDTLMUWRZ
+	kXTT2wKQ==;
+Received: from ip6-localhost ([::1]:62600 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ljgsL-0023A3-9O; Thu, 20 May 2021 11:30:01 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47188) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ljgsD-00239u-KF
- for samba-technical@lists.samba.org; Thu, 20 May 2021 11:29:57 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=M0Kmh7wkcGZsbSqJ0rWcPBgWq/GN3BZbuc2MZjmbigk=; b=G74l4eajiGO9sj+2O7ul0CcUSM
- y2t5Buh2L3aLrop00TDBe4uiscyKr2kJ3aI+GlwJGUZ2b6IRj7vN3AqO/WOIvjqeo+paE4PixDcbL
- TdTejTe5VIrQIieQcu0igMbQC25bLvUx5BTv7IUYj2BxZpcEAwASOU/63GaFgNgD1cfZVRpI1q+qQ
- JYFWbmQIFJ6G3REAGuezEQuc+G/m7mOWFPC3NtBMohzzojqzqTBafRkpA/zuG4YnsJD0cYHsiDzAu
- okjBpvsFhZuWbthU4LFL1HQplLDi1mGqVcaCK9jsYkV7m2iWyGti8J+ikEHySNZ64XBiZN+IH9FDp
- tt834VuExpWBwE8kIBH5/+bcSJD/qV4XHdCTCeeRQSMbI0OQIf2Dy/+bTL/3W9kAX29tx503Q1AQm
- 3+5kibnul1j43wRhU2wAJjoM93TSjIbR+U83ybIe6ogce6KCANpYo3zwfKtgQju1jBod2+Wrg3FnB
- xB6LbClNLXmAq4YU0sF5lvGV;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ljgsC-0002KI-H6; Thu, 20 May 2021 11:29:53 +0000
-Message-ID: <56d3287c51dc769806d8a4966b54e2a6e672d8b0.camel@samba.org>
-Subject: Re: Problem with AD membership in an AD with more the 100.000 group
- (possible regression in 4.12?)
-To: "Dr." =?ISO-8859-1?Q?Hansj=F6rg?= Maurer <hansjoerg.maurer@itsd.de>, 
+	id 1ljgvv-0024Ad-Sk; Thu, 20 May 2021 11:33:43 +0000
+Received: from [195.221.236.186] (port=36474 helo=smtp-out2.ac-dijon.fr) 
+ by hr1.samba.org with esmtp (Exim) id 1ljgvp-00245T-T6
+ for samba-technical@lists.samba.org; Thu, 20 May 2021 11:33:40 +0000
+Received: from hermes.ac-dijon.fr (localhost [127.0.0.1])
+ by smtp-out2.ac-dijon.fr (Postfix) with ESMTP id 8A936F88;
+ Thu, 20 May 2021 13:33:35 +0200 (CEST)
+Received: from [10.0.0.154] (85-170-166-112.rev.numericable.fr
+ [85.170.166.112])
+ by hermes.ac-dijon.fr (Postfix) with ESMTPSA id 8E1D8F7F;
+ Thu, 20 May 2021 13:33:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ac-dijon.fr; s=smtp;
+ t=1621510413; h=mime-version:from:date:message-id:subject:to;
+ bh=1PqwhcrwVcLmSJL8Yvx7Byh2cenRVo9GQSUYJueTzOw=;
+ b=PKbvamLHYe5QRF6yTrYJ9BeM0RyayqmEkVissgjd00abf1/7cy/fITU2YxTZ0Re9ZVq6+B
+ TygwQzskdwtfx+GJVksyrG2sl8EIZY5h6wHBWGsFmpTEGdAmak7iQ28idyGVVnZ1IvhNHN
+ 5uK76AnbEBnRLyfmjnHvxChWxlufczmT961Sl871/Z3u+2L6i7LX20AJvOYw44YpqT95CY
+ NIS79BtAONPophOM6rgFC66ULBULTOzluhj6Hl84e+nPm/2yOrmojPpEJ/ChVHOxdBFtvU
+ BAgr2fL/5ELbNkUKugw1u8wBpA3pXtphPbZVcyLUu3ePPl5Xow+SsE6qUCg+HA==
+Subject: Re: GPO created via samba-tool don't Copy or Backup
+To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
  samba-technical@lists.samba.org
-Date: Thu, 20 May 2021 23:29:48 +1200
-In-Reply-To: <b83d52e7a5b846fd429811616f3b3c21d2f55480.camel@samba.org>
-References: <d7b0ec24-3c59-1d74-9e93-616eebe6eb44@itsd.de>
- <5d5b4c230813b6bd6b3001fe14bfd3a9d8ca2b53.camel@samba.org>
- <9d2ed0c9-9e13-2848-29cb-aaf6354e33aa@itsd.de>
- <c4713dc0b0d746c834ec66c1ec793572c725b2d2.camel@samba.org>
- <2da32b9f-8ba0-c1ab-1748-831eeb727f0f@itsd.de>
- <1911c4eeee7df0fcf1f13d612da214094a9198c0.camel@samba.org>
- <b6fb9ef1-3cbf-e970-eb2e-9e6e395c65ae@itsd.de>
- <b83d52e7a5b846fd429811616f3b3c21d2f55480.camel@samba.org>
-Content-Type: multipart/mixed; boundary="=-DOU1lAQ/zxRvposOeWaK"
-User-Agent: Evolution 3.36.4-0ubuntu1 
+References: <37f6ef50-99b4-7e37-b22e-a29f219ecf2c@ac-dijon.fr>
+ <bc1323c0-53eb-70d5-7e1a-c3d2e14a4df1@ac-dijon.fr>
+ <daae17c9-1bda-01c2-e5f2-7f8cee6aabb8@ac-dijon.fr>
+ <86f25c50-02c1-1baa-5ce1-907c54e36e25@catalyst.net.nz>
+Message-ID: <303323c1-4683-143a-a619-87996b009539@ac-dijon.fr>
+Date: Thu, 20 May 2021 13:33:32 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
+In-Reply-To: <86f25c50-02c1-1baa-5ce1-907c54e36e25@catalyst.net.nz>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-AU
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,325 +62,109 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Klaas TJEBBES via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Klaas TJEBBES <klaas.tjebbes@ac-dijon.fr>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Hello.
 
---=-DOU1lAQ/zxRvposOeWaK
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+As you told me I've posted my question on the "samba" list.
 
-On Thu, 2021-05-20 at 19:46 +1200, Andrew Bartlett via samba-technical
-wrote:
-> On Thu, 2021-05-20 at 08:36 +0200, Dr. Hansjörg Maurer wrote:
-> > Am 19.05.21 um 11:55 schrieb Andrew Bartlett:
-> > > On Wed, 2021-05-19 at 07:56 +0200, Dr. Hansjörg Maurer wrote:
-> > > > > OK, so this case it doesn't happen, which is the one I
-> > > > > patched.
-> > > > the gdb run took place with the unpatched version
-> > > > 
-> > > Thanks, can you try with the patched one?  I'm thinking we must
-> > > be
-> > > hitting a different case now, if you still have issues, as the
-> > > lines
-> > > you show are gone with this patch (I hope).
-> > Hi Andrew
-> > 
-> > here is the gdb bt output from the patched version
-> > 
-> > I patched the sources an rebuild the RPM with the spec file.
-> > I would expect, this would apply the changes to the winbind.idl
-> > file?
+But I posted it here because it looked to me like a samba bug.
+
+I use the "samba-tool gpo backup/restore" and RSAT only and within a few 
+steps I have a bug. I've tested this on a dozen of different Samba 
+servers, all have the same problem. Playing with DOSATTR (getfattr 
+-dR/setfattr --restore) seems to solve the problem.
+
+I read Python but not C (not that much) and I ended up with this file 
+(from gpo.py line 47) :
+/usr/lib/python3/dist-packages/samba/samba3/libsmb_samba_internal.cpython-38-x86_64-linux-gnu.so
+
+It only takes a couple of minutes to reproduce. All the informations : 
+versions, OS, commands, etc. are in my previous emails.
+
+
+
+* In RSAT create a GPO named "test" AND make a few modifications in it 
+(I did : Computer Configuration -> Administrative Templates -> System -> 
+Logon “Always Wait for the Network at Computer Startup and Logon” to 
+“Enabled”).
+
+On the samba server :
+* 'samba-tool gpo listall' => get the GPO ID of "test"
+* 'samba-tool gpo  backup GPO_ID_OF_TEST' => remember the /tmp/... 
+directory the GPO is backuped in
+* 'samba-tool gpo restore newtest /tmp/BACKUP_GPO_TEST_DIR" -U Administrator
+
+Back in the RSAT :
+* "newttest" GPO is empty, the option “Always Wait for the Network at 
+Computer Startup and Logon” is NOT set
+* "newttest" GPO can NOT be Copied or Backuped. The error is "invalid 
+directory".
+
+
+** What I found :
+On the samba server :
+* cd /home/sysvol/domseth.ac-test.fr/Policies/{ID_TEST_GPO}
+* getfattr -d -n user.DOSATTRIB -R . > ../test.attrs'
+* cd /home/sysvol/domseth.ac-test.fr/Policies/{ID_NEWTEST_GPO}
+* setfattr --restore=../test.attrs '
+
+
+
+
+
+Thank you, regards,
+  Klaas
+
+
+
+Le 13/05/2021 à 01:07, Douglas Bagnall a écrit :
+> On 13/05/21 2:19 am, Klaas TJEBBES via samba-technical wrote:
+>> Hi,
+>>
+>> It looks like I don't get very popular with my question here. But 
+>> could at least someone test this to tell me if one can reproduce ?
 > 
-> Thanks, yes this seems to have been applied.  I've looked at this
-> some
-> more and I see where we leak the tokens.
+> You are using the wrong mailing list. This one is for people who develop 
+> Samba, not those who administer it, and there is not as much overlap 
+> between those two groups as you might imagine.
 > 
-> I'll see what we can do, I think for a conformant array (what I've
-> changed this to) we can be more efficient. 
+> Try asking on the Samba list at
 > 
-> Andrew Bartlett
+> https://lists.samba.org/mailman/listinfo/samba
 > 
-
-Try the attached patch.  I think I've finally fixed the issue.
-
-See https://gitlab.com/samba-team/samba/-/merge_requests/1972
-
-Andrew Bartlett
-
+> They love answering questions like this.
 > 
+> Douglas
+> 
+>> * In RSAT create a new GPO and make a modification in it (I did : 
+>> Computer Configuration -> Administrative Templates -> System -> Logon 
+>> “Always Wait for the Network at Computer Startup and Logon” to “Enabled”)
+>> * Close RSAT
+>> * Backup GPO via samba-tool (in /tmp/...)
+>> * Restore GPO via samba-tool (from /tmp/...) with another name
+>> * In RSAT try to Copy this new GPO (right clic "Copy", right clic on 
+>> "Group Policy Objects" and Paste)
+>>
+>> I get "Invalid directory". Even doing it via powershell and debug and 
+>> traces, hundreds of log lines, I couldn't figure out why it won't copy...
+>>
+>>
+>> Regards,
+>>   Klaas
+>>
+
 -- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+~~~~~~~~~~~~~~~~~~~~~~~
 
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
+- Klaas TJEBBES
+- Equipe EOLE
+- DSI
+- Dijon
 
---=-DOU1lAQ/zxRvposOeWaK
-Content-Disposition: attachment; filename="1972.patch"
-Content-Transfer-Encoding: base64
-Content-Type: text/x-patch; name="1972.patch"; charset="UTF-8"
-
-RnJvbSA3MzliNjQ0MTk5YzI3MmU0YWZmOWMzMjU4MmY3MGFlOWQ1ZDU1Y2ViIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBBbmRyZXcgQmFydGxldHQgPGFiYXJ0bGV0QHNhbWJhLm9yZz4K
-RGF0ZTogVGh1LCAyMCBNYXkgMjAyMSAyMjo0Mzo1MCArMTIwMApTdWJqZWN0OiBbUEFUQ0ggMS80
-XSBwaWRsOiBBdm9pZCBsZWF2aW5nIGFycmF5X3NpemUgYW5kIGFycmF5X2xlbmd0aCBORFIKIHRv
-a2VucyBhcm91bmQKClRoZXNlIGNhbiBhbmQgc2hvdWxkIGJlIGNvbnN1bWVkIGFzIHNvb24gYXMg
-dGhleSBhcmUgdXNlZC4KCkkgd291bGQgaGF2ZSBwcmVmZXJyZWQgdG8gdXNlIGxvY2FsIHZhcmlh
-YmxlcywgYnV0IGhhdmUgYmVlbgp1bmFibGUgdG8gc2NvcGUgdGhvc2UgY29ycmVjdGx5LgoKQlVH
-OiBodHRwczovL2J1Z3ppbGxhLnNhbWJhLm9yZy9zaG93X2J1Zy5jZ2k/aWQ9MTQ3MTAKClNpZ25l
-ZC1vZmYtYnk6IEFuZHJldyBCYXJ0bGV0dCA8YWJhcnRsZXRAc2FtYmEub3JnPgotLS0KIGxpYnJw
-Yy9uZHIvbGlibmRyLmggICAgICAgICAgICAgICAgICAgICAgfCAgNiArKystLQogbGlicnBjL25k
-ci9uZHIuYyAgICAgICAgICAgICAgICAgICAgICAgICB8IDI1ICsrKysrKysrKysrKysrKy0tLS0K
-IGxpYnJwYy9uZHIvbmRyX25lZ29leC5jICAgICAgICAgICAgICAgICAgfCAgOCArKystLS0KIGxp
-YnJwYy9uZHIvbmRyX3Nwb29sc3NfYnVmLmMgICAgICAgICAgICAgfCAgMiArLQogbGlicnBjL3dz
-Y3JpcHRfYnVpbGQgICAgICAgICAgICAgICAgICAgICB8ICAyICstCiBwaWRsL2xpYi9QYXJzZS9Q
-aWRsL1NhbWJhNC9ORFIvUGFyc2VyLnBtIHwgMzEgKysrKysrKysrKysrKysrKysrLS0tLS0tCiA2
-IGZpbGVzIGNoYW5nZWQsIDUzIGluc2VydGlvbnMoKyksIDIxIGRlbGV0aW9ucygtKQoKZGlmZiAt
-LWdpdCBhL2xpYnJwYy9uZHIvbGlibmRyLmggYi9saWJycGMvbmRyL2xpYm5kci5oCmluZGV4IDI1
-YjY4ZGIzNDY2Li4zNGQ1MTM4NzU1YSAxMDA2NDQKLS0tIGEvbGlicnBjL25kci9saWJuZHIuaAor
-KysgYi9saWJycGMvbmRyL2xpYm5kci5oCkBAIC02NTYsMTAgKzY1NiwxMiBAQCBlbnVtIG5kcl9l
-cnJfY29kZSBuZHJfdG9rZW5fcmV0cmlldmUoc3RydWN0IG5kcl90b2tlbl9saXN0ICpsaXN0LCBj
-b25zdCB2b2lkICprZQogdWludDMyX3QgbmRyX3Rva2VuX3BlZWsoc3RydWN0IG5kcl90b2tlbl9s
-aXN0ICpsaXN0LCBjb25zdCB2b2lkICprZXkpOwogZW51bSBuZHJfZXJyX2NvZGUgbmRyX3B1bGxf
-YXJyYXlfc2l6ZShzdHJ1Y3QgbmRyX3B1bGwgKm5kciwgY29uc3Qgdm9pZCAqcCk7CiB1aW50MzJf
-dCBuZHJfZ2V0X2FycmF5X3NpemUoc3RydWN0IG5kcl9wdWxsICpuZHIsIGNvbnN0IHZvaWQgKnAp
-OwotZW51bSBuZHJfZXJyX2NvZGUgbmRyX2NoZWNrX2FycmF5X3NpemUoc3RydWN0IG5kcl9wdWxs
-ICpuZHIsIHZvaWQgKnAsIHVpbnQzMl90IHNpemUpOworZW51bSBuZHJfZXJyX2NvZGUgbmRyX3N0
-ZWFsX2FycmF5X3NpemUoc3RydWN0IG5kcl9wdWxsICpuZHIsIHZvaWQgKnAsIHVpbnQzMl90ICpz
-aXplKTsKK2VudW0gbmRyX2Vycl9jb2RlIG5kcl9jaGVja19zdGVhbF9hcnJheV9zaXplKHN0cnVj
-dCBuZHJfcHVsbCAqbmRyLCB2b2lkICpwLCB1aW50MzJfdCBzaXplKTsKIGVudW0gbmRyX2Vycl9j
-b2RlIG5kcl9wdWxsX2FycmF5X2xlbmd0aChzdHJ1Y3QgbmRyX3B1bGwgKm5kciwgY29uc3Qgdm9p
-ZCAqcCk7CiB1aW50MzJfdCBuZHJfZ2V0X2FycmF5X2xlbmd0aChzdHJ1Y3QgbmRyX3B1bGwgKm5k
-ciwgY29uc3Qgdm9pZCAqcCk7Ci1lbnVtIG5kcl9lcnJfY29kZSBuZHJfY2hlY2tfYXJyYXlfbGVu
-Z3RoKHN0cnVjdCBuZHJfcHVsbCAqbmRyLCB2b2lkICpwLCB1aW50MzJfdCBsZW5ndGgpOworZW51
-bSBuZHJfZXJyX2NvZGUgbmRyX3N0ZWFsX2FycmF5X2xlbmd0aChzdHJ1Y3QgbmRyX3B1bGwgKm5k
-ciwgdm9pZCAqcCwgdWludDMyX3QgKnNpemUpOworZW51bSBuZHJfZXJyX2NvZGUgbmRyX2NoZWNr
-X3N0ZWFsX2FycmF5X2xlbmd0aChzdHJ1Y3QgbmRyX3B1bGwgKm5kciwgdm9pZCAqcCwgdWludDMy
-X3QgbGVuZ3RoKTsKIGVudW0gbmRyX2Vycl9jb2RlIG5kcl9wdXNoX3BpcGVfY2h1bmtfdHJhaWxl
-cihzdHJ1Y3QgbmRyX3B1c2ggKm5kciwgaW50IG5kcl9mbGFncywgdWludDMyX3QgY291bnQpOwog
-ZW51bSBuZHJfZXJyX2NvZGUgbmRyX2NoZWNrX3BpcGVfY2h1bmtfdHJhaWxlcihzdHJ1Y3QgbmRy
-X3B1bGwgKm5kciwgaW50IG5kcl9mbGFncywgdWludDMyX3QgY291bnQpOwogZW51bSBuZHJfZXJy
-X2NvZGUgbmRyX3B1c2hfc2V0X3N3aXRjaF92YWx1ZShzdHJ1Y3QgbmRyX3B1c2ggKm5kciwgY29u
-c3Qgdm9pZCAqcCwgdWludDMyX3QgdmFsKTsKZGlmZiAtLWdpdCBhL2xpYnJwYy9uZHIvbmRyLmMg
-Yi9saWJycGMvbmRyL25kci5jCmluZGV4IDAyNDYzNGQwYTA5Li43NDE3MDA4NWUyOCAxMDA2NDQK
-LS0tIGEvbGlicnBjL25kci9uZHIuYworKysgYi9saWJycGMvbmRyL25kci5jCkBAIC0xMDk2LDE2
-ICsxMDk2LDI0IEBAIF9QVUJMSUNfIGVudW0gbmRyX2Vycl9jb2RlIG5kcl9wdWxsX2FycmF5X3Np
-emUoc3RydWN0IG5kcl9wdWxsICpuZHIsIGNvbnN0IHZvaWQKICovCiBfUFVCTElDXyB1aW50MzJf
-dCBuZHJfZ2V0X2FycmF5X3NpemUoc3RydWN0IG5kcl9wdWxsICpuZHIsIGNvbnN0IHZvaWQgKnAp
-CiB7Ci0JcmV0dXJuIG5kcl90b2tlbl9wZWVrKCZuZHItPmFycmF5X3NpemVfbGlzdCwgcCk7Cisg
-ICAgICAgcmV0dXJuIG5kcl90b2tlbl9wZWVrKCZuZHItPmFycmF5X3NpemVfbGlzdCwgcCk7Cit9
-CisKKy8qCisgIGdldCBhbmQgcmVtb3ZlIGZyb20gdGhlIHN0b3JlZCBsaXN0IHRoZSBzdG9yZWQg
-YXJyYXkgc2l6ZSBmaWVsZAorKi8KK19QVUJMSUNfIGVudW0gbmRyX2Vycl9jb2RlIG5kcl9zdGVh
-bF9hcnJheV9zaXplKHN0cnVjdCBuZHJfcHVsbCAqbmRyLCB2b2lkICpwLCB1aW50MzJfdCAqc2l6
-ZSkKK3sKKwlyZXR1cm4gbmRyX3Rva2VuX3JldHJpZXZlKCZuZHItPmFycmF5X3NpemVfbGlzdCwg
-cCwgc2l6ZSk7CiB9CiAKIC8qCiAgIGNoZWNrIHRoZSBzdG9yZWQgYXJyYXkgc2l6ZSBmaWVsZAog
-Ki8KLV9QVUJMSUNfIGVudW0gbmRyX2Vycl9jb2RlIG5kcl9jaGVja19hcnJheV9zaXplKHN0cnVj
-dCBuZHJfcHVsbCAqbmRyLCB2b2lkICpwLCB1aW50MzJfdCBzaXplKQorX1BVQkxJQ18gZW51bSBu
-ZHJfZXJyX2NvZGUgbmRyX2NoZWNrX3N0ZWFsX2FycmF5X3NpemUoc3RydWN0IG5kcl9wdWxsICpu
-ZHIsIHZvaWQgKnAsIHVpbnQzMl90IHNpemUpCiB7CiAJdWludDMyX3Qgc3RvcmVkOwotCXN0b3Jl
-ZCA9IG5kcl90b2tlbl9wZWVrKCZuZHItPmFycmF5X3NpemVfbGlzdCwgcCk7CisJTkRSX0NIRUNL
-KG5kcl9zdGVhbF9hcnJheV9zaXplKG5kciwgcCwgJnN0b3JlZCkpOwogCWlmIChzdG9yZWQgIT0g
-c2l6ZSkgewogCQlyZXR1cm4gbmRyX3B1bGxfZXJyb3IobmRyLCBORFJfRVJSX0FSUkFZX1NJWkUs
-CiAJCQkJICAgICAgIkJhZCBhcnJheSBzaXplIC0gZ290ICV1IGV4cGVjdGVkICV1XG4iLApAQCAt
-MTE0NCwxMyArMTE1MiwyMCBAQCBfUFVCTElDXyB1aW50MzJfdCBuZHJfZ2V0X2FycmF5X2xlbmd0
-aChzdHJ1Y3QgbmRyX3B1bGwgKm5kciwgY29uc3Qgdm9pZCAqcCkKIAlyZXR1cm4gbmRyX3Rva2Vu
-X3BlZWsoJm5kci0+YXJyYXlfbGVuZ3RoX2xpc3QsIHApOwogfQogCisvKgorICBnZXQgdGhlIHN0
-b3JlZCBhcnJheSBsZW5ndGggZmllbGQgYW5kIHJlbW92ZSBmcm9tIHRoZSBsaXN0CisqLworX1BV
-QkxJQ18gZW51bSBuZHJfZXJyX2NvZGUgbmRyX3N0ZWFsX2FycmF5X2xlbmd0aChzdHJ1Y3QgbmRy
-X3B1bGwgKm5kciwgdm9pZCAqcCwgdWludDMyX3QgKmxlbmd0aCkKK3sKKwlyZXR1cm4gbmRyX3Rv
-a2VuX3JldHJpZXZlKCZuZHItPmFycmF5X2xlbmd0aF9saXN0LCBwLCBsZW5ndGgpOworfQogLyoK
-ICAgY2hlY2sgdGhlIHN0b3JlZCBhcnJheSBsZW5ndGggZmllbGQKICovCi1fUFVCTElDXyBlbnVt
-IG5kcl9lcnJfY29kZSBuZHJfY2hlY2tfYXJyYXlfbGVuZ3RoKHN0cnVjdCBuZHJfcHVsbCAqbmRy
-LCB2b2lkICpwLCB1aW50MzJfdCBsZW5ndGgpCitfUFVCTElDXyBlbnVtIG5kcl9lcnJfY29kZSBu
-ZHJfY2hlY2tfc3RlYWxfYXJyYXlfbGVuZ3RoKHN0cnVjdCBuZHJfcHVsbCAqbmRyLCB2b2lkICpw
-LCB1aW50MzJfdCBsZW5ndGgpCiB7CiAJdWludDMyX3Qgc3RvcmVkOwotCXN0b3JlZCA9IG5kcl90
-b2tlbl9wZWVrKCZuZHItPmFycmF5X2xlbmd0aF9saXN0LCBwKTsKKwlORFJfQ0hFQ0sobmRyX3N0
-ZWFsX2FycmF5X2xlbmd0aChuZHIsIHAsICZzdG9yZWQpKTsKIAlpZiAoc3RvcmVkICE9IGxlbmd0
-aCkgewogCQlyZXR1cm4gbmRyX3B1bGxfZXJyb3IobmRyLCBORFJfRVJSX0FSUkFZX1NJWkUsCiAJ
-CQkJICAgICAgIkJhZCBhcnJheSBsZW5ndGggLSBnb3QgJXUgZXhwZWN0ZWQgJXVcbiIsCmRpZmYg
-LS1naXQgYS9saWJycGMvbmRyL25kcl9uZWdvZXguYyBiL2xpYnJwYy9uZHIvbmRyX25lZ29leC5j
-CmluZGV4IDk1YWRjZTVhN2UzLi43MmM4Nzc0Y2U1YyAxMDA2NDQKLS0tIGEvbGlicnBjL25kci9u
-ZHJfbmVnb2V4LmMKKysrIGIvbGlicnBjL25kci9uZHJfbmVnb2V4LmMKQEAgLTk5LDcgKzk5LDcg
-QEAgZW51bSBuZHJfZXJyX2NvZGUgbmRyX3B1bGxfbmVnb2V4X0JZVEVfVkVDVE9SKHN0cnVjdCBu
-ZHJfcHVsbCAqbmRyLCBpbnQgbmRyX2ZsYWcKIAkJfQogI2lmIDAKIAkJaWYgKHItPmJsb2IuZGF0
-YSkgewotCQkJTkRSX0NIRUNLKG5kcl9jaGVja19hcnJheV9zaXplKG5kciwgKHZvaWQqKSZyLT5i
-bG9iLmRhdGEsIHItPmJsb2IubGVuZ3RoKSk7CisJCQlORFJfQ0hFQ0sobmRyX2NoZWNrX3N0ZWFs
-X2FycmF5X3NpemUobmRyLCAodm9pZCopJnItPmJsb2IuZGF0YSwgci0+YmxvYi5sZW5ndGgpKTsK
-IAkJfQogI2VuZGlmCiAJfQpAQCAtMTc5LDcgKzE3OSw3IEBAIGVudW0gbmRyX2Vycl9jb2RlIG5k
-cl9wdWxsX25lZ29leF9BVVRIX1NDSEVNRV9WRUNUT1Ioc3RydWN0IG5kcl9wdWxsICpuZHIsIGlu
-dCBuCiAJCX0KICNpZiAwCiAJCWlmIChyLT5hcnJheSkgewotCQkJTkRSX0NIRUNLKG5kcl9jaGVj
-a19hcnJheV9zaXplKG5kciwgKHZvaWQqKSZyLT5hcnJheSwgci0+Y291bnQpKTsKKwkJCU5EUl9D
-SEVDSyhuZHJfY2hlY2tfc3RlYWxfYXJyYXlfc2l6ZShuZHIsICh2b2lkKikmci0+YXJyYXksIHIt
-PmNvdW50KSk7CiAJCX0KICNlbmRpZgogCX0KQEAgLTI2NSw3ICsyNjUsNyBAQCBlbnVtIG5kcl9l
-cnJfY29kZSBuZHJfcHVsbF9uZWdvZXhfRVhURU5TSU9OX1ZFQ1RPUihzdHJ1Y3QgbmRyX3B1bGwg
-Km5kciwgaW50IG5kcgogCQl9CiAjaWYgMAogCQlpZiAoci0+YXJyYXkpIHsKLQkJCU5EUl9DSEVD
-SyhuZHJfY2hlY2tfYXJyYXlfc2l6ZShuZHIsICh2b2lkKikmci0+YXJyYXksIHItPmNvdW50KSk7
-CisJCQlORFJfQ0hFQ0sobmRyX2NoZWNrX3N0ZWFsX2FycmF5X3NpemUobmRyLCAodm9pZCopJnIt
-PmFycmF5LCByLT5jb3VudCkpOwogCQl9CiAjZW5kaWYKIAl9CkBAIC0zNTEsNyArMzUxLDcgQEAg
-ZW51bSBuZHJfZXJyX2NvZGUgbmRyX3B1bGxfbmVnb2V4X0FMRVJUX1ZFQ1RPUihzdHJ1Y3QgbmRy
-X3B1bGwgKm5kciwgaW50IG5kcl9mbGEKIAkJfQogI2lmIDAKIAkJaWYgKHItPmFycmF5KSB7Ci0J
-CQlORFJfQ0hFQ0sobmRyX2NoZWNrX2FycmF5X3NpemUobmRyLCAodm9pZCopJnItPmFycmF5LCBy
-LT5jb3VudCkpOworCQkJTkRSX0NIRUNLKG5kcl9jaGVja19zdGVhbF9hcnJheV9zaXplKG5kciwg
-KHZvaWQqKSZyLT5hcnJheSwgci0+Y291bnQpKTsKIAkJfQogI2VuZGlmCiAJfQpkaWZmIC0tZ2l0
-IGEvbGlicnBjL25kci9uZHJfc3Bvb2xzc19idWYuYyBiL2xpYnJwYy9uZHIvbmRyX3Nwb29sc3Nf
-YnVmLmMKaW5kZXggMzkzZDdhZGRlYjUuLjFmZDA3M2VjN2UwIDEwMDY0NAotLS0gYS9saWJycGMv
-bmRyL25kcl9zcG9vbHNzX2J1Zi5jCisrKyBiL2xpYnJwYy9uZHIvbmRyX3Nwb29sc3NfYnVmLmMK
-QEAgLTEyMjcsNyArMTIyNyw3IEBAIF9QVUJMSUNfIGVudW0gbmRyX2Vycl9jb2RlIG5kcl9wdWxs
-X3Nwb29sc3NfRHJpdmVySW5mbzEwMShzdHJ1Y3QgbmRyX3B1bGwgKm5kciwKIAkJCW5kci0+Zmxh
-Z3MgPSBfZmxhZ3Nfc2F2ZV9zdHJpbmc7CiAJCX0KIAkJaWYgKHItPmZpbGVfaW5mbykgewotCQkJ
-TkRSX0NIRUNLKG5kcl9jaGVja19hcnJheV9zaXplKG5kciwgKHZvaWQqKSZyLT5maWxlX2luZm8s
-IHItPmZpbGVfY291bnQpKTsKKwkJCU5EUl9DSEVDSyhuZHJfY2hlY2tfc3RlYWxfYXJyYXlfc2l6
-ZShuZHIsICh2b2lkKikmci0+ZmlsZV9pbmZvLCByLT5maWxlX2NvdW50KSk7CiAJCX0KIAl9CiAJ
-cmV0dXJuIE5EUl9FUlJfU1VDQ0VTUzsKZGlmZiAtLWdpdCBhL2xpYnJwYy93c2NyaXB0X2J1aWxk
-IGIvbGlicnBjL3dzY3JpcHRfYnVpbGQKaW5kZXggMjM5ZTI4OTU1NjUuLmY2MzQ5ZTE2OGZhIDEw
-MDY0NAotLS0gYS9saWJycGMvd3NjcmlwdF9idWlsZAorKysgYi9saWJycGMvd3NjcmlwdF9idWls
-ZApAQCAtNjQ5LDcgKzY0OSw3IEBAIGJsZC5TQU1CQV9MSUJSQVJZKCduZHInLAogICAgIHB1Ymxp
-Y19kZXBzPSdzYW1iYS1lcnJvcnMgdGFsbG9jIHNhbWJhLXV0aWwgdXRpbF9zdHJfaGV4JywKICAg
-ICBwdWJsaWNfaGVhZGVycz0nZ2VuX25kci9taXNjLmggZ2VuX25kci9uZHJfbWlzYy5oIG5kci9s
-aWJuZHIuaDpuZHIuaCcsCiAgICAgaGVhZGVyX3BhdGg9IFsoJypnZW5fbmRyKicsICdnZW5fbmRy
-JyldLAotICAgIHZudW09JzEuMC4yJywKKyAgICB2bnVtPScyLjAuMCcsCiAgICAgYWJpX2RpcmVj
-dG9yeT0nQUJJJywKICAgICBhYmlfbWF0Y2g9JyFuZHJfdGFibGVfKiBuZHJfKiBHVUlEXyogX25k
-cl9wdWxsX2Vycm9yKiBfbmRyX3B1c2hfZXJyb3IqJywKICAgICApCmRpZmYgLS1naXQgYS9waWRs
-L2xpYi9QYXJzZS9QaWRsL1NhbWJhNC9ORFIvUGFyc2VyLnBtIGIvcGlkbC9saWIvUGFyc2UvUGlk
-bC9TYW1iYTQvTkRSL1BhcnNlci5wbQppbmRleCAxMTk1OTBmNjY5Ni4uZDdiZjU0Y2JkZWYgMTAw
-NjQ0Ci0tLSBhL3BpZGwvbGliL1BhcnNlL1BpZGwvU2FtYmE0L05EUi9QYXJzZXIucG0KKysrIGIv
-cGlkbC9saWIvUGFyc2UvUGlkbC9TYW1iYTQvTkRSL1BhcnNlci5wbQpAQCAtMzQwLDE5ICszNDAs
-MjcgQEAgc3ViIFBhcnNlQXJyYXlQdWxsR2V0U2l6ZSgkJCQkJCQpCiAKIAlteSAkc2l6ZTsKIAot
-CWlmICgkbC0+e0lTX0NPTkZPUk1BTlR9KSB7CisJbXkgJGFycmF5X3NpemUgPSAic2l6ZV8kZS0+
-e05BTUV9XyRsLT57TEVWRUxfSU5ERVh9IjsKKworCWlmICgkbC0+e0lTX0NPTkZPUk1BTlR9IGFu
-ZCAoZGVmaW5lZCgkbC0+e1NJWkVfSVN9KSBvciBub3QgJGwtPntJU19aRVJPX1RFUk1JTkFURUR9
-KSkgewogCQkkc2l6ZSA9ICJuZHJfZ2V0X2FycmF5X3NpemUoJG5kciwgIiAuIGdldF9wb2ludGVy
-X3RvKCR2YXJfbmFtZSkgLiAiKSI7CisJCSRzZWxmLT5waWRsKCIkYXJyYXlfc2l6ZSA9ICRzaXpl
-OyIpOworCQkKKwl9IGVsc2lmICgkbC0+e0lTX0NPTkZPUk1BTlR9KSB7CisJCSMgVGhpcyB3aWxs
-IGJlIHRoZSBsYXN0IHVzZSBvZiB0aGUgYXJyYXlfc2l6ZSB0b2tlbgorCQkkc2VsZi0+cGlkbCgi
-TkRSX0NIRUNLKG5kcl9zdGVhbF9hcnJheV9zaXplKCRuZHIsICh2b2lkKikiIC4gZ2V0X3BvaW50
-ZXJfdG8oJHZhcl9uYW1lKSAuICIsICYkYXJyYXlfc2l6ZSkpOyIpOwogCX0gZWxzaWYgKCRsLT57
-SVNfWkVST19URVJNSU5BVEVEfSBhbmQgJGwtPntTSVpFX0lTfSA9PSAwIGFuZCAkbC0+e0xFTkdU
-SF9JU30gPT0gMCkgeyAjIE5vaGVhZGVyIGFycmF5cwogCQkkc2l6ZSA9ICJuZHJfZ2V0X3N0cmlu
-Z19zaXplKCRuZHIsIHNpemVvZigqJHZhcl9uYW1lKSkiOworCQkkc2VsZi0+cGlkbCgiJGFycmF5
-X3NpemUgPSAkc2l6ZTsiKTsKKwogCX0gZWxzZSB7CiAJCSRzaXplID0gUGFyc2VFeHByRXh0KCRs
-LT57U0laRV9JU30sICRlbnYsICRlLT57T1JJR0lOQUx9LAogCQkJY2hlY2tfbnVsbF9wb2ludGVy
-KCRlLCAkZW52LCBzdWIgeyAkc2VsZi0+cGlkbChzaGlmdCk7IH0sCiAJCQkJCSAgICJyZXR1cm4g
-bmRyX3B1bGxfZXJyb3IoJG5kciwgTkRSX0VSUl9JTlZBTElEX1BPSU5URVIsIFwiTlVMTCBQb2lu
-dGVyIGZvciBzaXplX2lzKClcIik7IiksCiAJCQljaGVja19mdWxseV9kZXJlZmVyZW5jZWQoJGUs
-ICRlbnYpKTsKLQl9CisJCSRzZWxmLT5waWRsKCIkYXJyYXlfc2l6ZSA9ICRzaXplOyIpOwogCi0J
-JHNlbGYtPnBpZGwoInNpemVfJGUtPntOQU1FfV8kbC0+e0xFVkVMX0lOREVYfSA9ICRzaXplOyIp
-OwotCW15ICRhcnJheV9zaXplID0gInNpemVfJGUtPntOQU1FfV8kbC0+e0xFVkVMX0lOREVYfSI7
-CisJfQogCiAJaWYgKG15ICRyYW5nZSA9IGhhc19wcm9wZXJ0eSgkZSwgInJhbmdlIikpIHsKIAkJ
-bXkgKCRsb3csICRoaWdoKSA9IHBhcnNlX3JhbmdlKCRyYW5nZSk7CkBAIC0zODUsOSArMzkzLDE0
-IEBAIHN1YiBQYXJzZUFycmF5UHVsbEdldExlbmd0aCgkJCQkJCQ7JCkKIAkJcmV0dXJuICRhcnJh
-eV9zaXplOwogCX0KIAotCW15ICRsZW5ndGggPSAibmRyX2dldF9hcnJheV9sZW5ndGgoJG5kciwg
-IiAuIGdldF9wb2ludGVyX3RvKCR2YXJfbmFtZSkgLiIpIjsKLQkkc2VsZi0+cGlkbCgibGVuZ3Ro
-XyRlLT57TkFNRX1fJGwtPntMRVZFTF9JTkRFWH0gPSAkbGVuZ3RoOyIpOwogCW15ICRhcnJheV9s
-ZW5ndGggPSAibGVuZ3RoXyRlLT57TkFNRX1fJGwtPntMRVZFTF9JTkRFWH0iOworCWlmICgkbC0+
-e0lTX1ZBUllJTkd9IGFuZCAoZGVmaW5lZCgkbC0+e0xFTkdUSF9JU30pIG9yIG5vdCAkbC0+e0lT
-X1pFUk9fVEVSTUlOQVRFRH0pKSB7CisJCW15ICRsZW5ndGggPSAibmRyX2dldF9hcnJheV9sZW5n
-dGgoJG5kciwgIiAuIGdldF9wb2ludGVyX3RvKCR2YXJfbmFtZSkgLiIpIjsKKwkJJHNlbGYtPnBp
-ZGwoIiRhcnJheV9sZW5ndGggPSAkbGVuZ3RoOyIpOworCX0gZWxzZSB7CisJCSMgVGhpcyB3aWxs
-IGJlIHRoZSBsYXN0IHVzZSBvZiB0aGUgYXJyYXlfbGVuZ3RoIHRva2VuCisJCSRzZWxmLT5waWRs
-KCJORFJfQ0hFQ0sobmRyX3N0ZWFsX2FycmF5X2xlbmd0aCgkbmRyLCAodm9pZCopIiAuIGdldF9w
-b2ludGVyX3RvKCR2YXJfbmFtZSkgLiAiLCAmJGFycmF5X2xlbmd0aCkpOyIpOworCX0KIAogCWlm
-IChteSAkcmFuZ2UgPSBoYXNfcHJvcGVydHkoJGUsICJyYW5nZSIpKSB7CiAJCW15ICgkbG93LCAk
-aGlnaCkgPSBwYXJzZV9yYW5nZSgkcmFuZ2UpOwpAQCAtNDM4LDcgKzQ1MSw4IEBAIHN1YiBQYXJz
-ZUFycmF5UHVsbEhlYWRlcigkJCQkJCQpCiAJCQljaGVja19udWxsX3BvaW50ZXIoJGUsICRlbnYs
-IHN1YiB7ICRzZWxmLT5kZWZlcihzaGlmdCk7IH0sCiAJCQkJCSAgICJyZXR1cm4gbmRyX3B1bGxf
-ZXJyb3IoJG5kciwgTkRSX0VSUl9JTlZBTElEX1BPSU5URVIsIFwiTlVMTCBQb2ludGVyIGZvciBz
-aXplX2lzKClcIik7IiksCiAJCQljaGVja19mdWxseV9kZXJlZmVyZW5jZWQoJGUsICRlbnYpKTsK
-LQkJJHNlbGYtPmRlZmVyKCJORFJfQ0hFQ0sobmRyX2NoZWNrX2FycmF5X3NpemUoJG5kciwgKHZv
-aWQqKSIgLiBnZXRfcG9pbnRlcl90bygkdmFyX25hbWUpIC4gIiwgJHNpemUpKTsiKTsKKwkJIyBU
-aGlzIHdpbGwgYmUgZGVmZXJyZWQgdW50aWwgYWZ0ZXIgdGhlIGxhc3QgbmRyX2dldF9hcnJheV9z
-aXplKCkKKwkJJHNlbGYtPmRlZmVyKCJORFJfQ0hFQ0sobmRyX2NoZWNrX3N0ZWFsX2FycmF5X3Np
-emUoJG5kciwgKHZvaWQqKSIgLiBnZXRfcG9pbnRlcl90bygkdmFyX25hbWUpIC4gIiwgJHNpemUp
-KTsiKTsKIAkJJHNlbGYtPmRlZmVyX2RlaW5kZW50OwogCQkkc2VsZi0+ZGVmZXIoIn0iKTsKIAl9
-CkBAIC00NTAsNyArNDY0LDggQEAgc3ViIFBhcnNlQXJyYXlQdWxsSGVhZGVyKCQkJCQkJCkKIAkJ
-CWNoZWNrX251bGxfcG9pbnRlcigkZSwgJGVudiwgc3ViIHsgJHNlbGYtPmRlZmVyKHNoaWZ0KTsg
-fSwKIAkJCQkJICAgInJldHVybiBuZHJfcHVsbF9lcnJvcigkbmRyLCBORFJfRVJSX0lOVkFMSURf
-UE9JTlRFUiwgXCJOVUxMIFBvaW50ZXIgZm9yIGxlbmd0aF9pcygpXCIpOyIpLAogCQkJY2hlY2tf
-ZnVsbHlfZGVyZWZlcmVuY2VkKCRlLCAkZW52KSk7Ci0JCSRzZWxmLT5kZWZlcigiTkRSX0NIRUNL
-KG5kcl9jaGVja19hcnJheV9sZW5ndGgoJG5kciwgKHZvaWQqKSIgLiBnZXRfcG9pbnRlcl90bygk
-dmFyX25hbWUpIC4gIiwgJGxlbmd0aCkpOyIpOworCQkjIFRoaXMgd2lsbCBiZSBkZWZlcnJlZCB1
-bnRpbCBhZnRlciB0aGUgbGFzdCBuZHJfZ2V0X2FycmF5X2xlbmd0aCgpCisJCSRzZWxmLT5kZWZl
-cigiTkRSX0NIRUNLKG5kcl9jaGVja19zdGVhbF9hcnJheV9sZW5ndGgoJG5kciwgKHZvaWQqKSIg
-LiBnZXRfcG9pbnRlcl90bygkdmFyX25hbWUpIC4gIiwgJGxlbmd0aCkpOyIpOwogCQkkc2VsZi0+
-ZGVmZXJfZGVpbmRlbnQ7CiAJCSRzZWxmLT5kZWZlcigifSIpOwogCX0KLS0gCkdpdExhYgoKCkZy
-b20gZWJjMzQ5MDljMzNlOTIwZmJkZjNhZDg3YmVhYjRiZmIxNjAxZDg4ZiBNb24gU2VwIDE3IDAw
-OjAwOjAwIDIwMDEKRnJvbTogQW5kcmV3IEJhcnRsZXR0IDxhYmFydGxldEBzYW1iYS5vcmc+CkRh
-dGU6IFRodSwgMjAgTWF5IDIwMjEgMjM6MDg6MjAgKzEyMDAKU3ViamVjdDogW1BBVENIIDIvNF0g
-bGlicnBjL2lkbDogVXNlIGEgY29uZm9ybWFudCBhcnJheSBpbiB3YmludF9QcmluY2lwYWwKClRo
-aXMgaXMgbW9yZSBlZmZpY2llbnQsIGF2b2lkaW5nIHRoZSB1bmlxdWUgcG9pbnRlcnMKYW5kIGVz
-c2VudGlhbGx5IGVuZGluZyB1cCBpbmxpbmUuCgpUaGlzIGlzIHNsaWdodGx5IG1vcmUgZWZmaWNp
-ZW50LCBhbmQgYXMgdGhpcyBpcyBhbgppbnRlcm5hbCBwcm90b2NvbCBTYW1iYSBpcyBmcmVlIHRv
-IGNob29zZSB0byBkbyB0aGlzLgoKQlVHOiBodHRwczovL2J1Z3ppbGxhLnNhbWJhLm9yZy9zaG93
-X2J1Zy5jZ2k/aWQ9MTQ3MTAKClNpZ25lZC1vZmYtYnk6IEFuZHJldyBCYXJ0bGV0dCA8YWJhcnRs
-ZXRAc2FtYmEub3JnPgotLS0KIGxpYnJwYy9pZGwvd2luYmluZC5pZGwgfCAyICstCiAxIGZpbGUg
-Y2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9saWJy
-cGMvaWRsL3dpbmJpbmQuaWRsIGIvbGlicnBjL2lkbC93aW5iaW5kLmlkbAppbmRleCBhMmJjODFh
-OTMzMy4uM2RjNzgwODIzMzAgMTAwNjQ0Ci0tLSBhL2xpYnJwYy9pZGwvd2luYmluZC5pZGwKKysr
-IGIvbGlicnBjL2lkbC93aW5iaW5kLmlkbApAQCAtMTE2LDcgKzExNiw3IEBAIGludGVyZmFjZSB3
-aW5iaW5kCiAgICAgdHlwZWRlZiBbcHVibGljXSBzdHJ1Y3QgewogCWRvbV9zaWQgc2lkOwogCWxz
-YV9TaWRUeXBlIHR5cGU7Ci0JW3N0cmluZyxjaGFyc2V0KFVURjgpXSBjaGFyICpuYW1lOworCVtz
-dHJpbmcsY2hhcnNldChVVEY4KV0gY2hhciBuYW1lW107CiAgICAgfSB3YmludF9QcmluY2lwYWw7
-CiAKICAgICB0eXBlZGVmIFtwdWJsaWNdIHN0cnVjdCB7Ci0tIApHaXRMYWIKCgpGcm9tIDBkMTBk
-ZGQxYjVjMTgzYzAxNTkxY2M3MWI0YTg4MGE3YTQzMTdjMjMgTW9uIFNlcCAxNyAwMDowMDowMCAy
-MDAxCkZyb206IEFuZHJldyBCYXJ0bGV0dCA8YWJhcnRsZXRAc2FtYmEub3JnPgpEYXRlOiBUaHUs
-IDIwIE1heSAyMDIxIDIzOjEyOjQzICsxMjAwClN1YmplY3Q6IFtQQVRDSCAzLzRdIGxpYnJwYy9p
-ZGw6IFVzZSBpbmxpbmUgc3RyaW5nIGFycmF5cyByYXRoZXIgdGhhbiBmdWxsCiBwb2ludGVycyBp
-biB3aW5iaW5kLmlkbAoKVGhpcyBzeW50YXggdHJpZ2dlcnMgYW4gaW5saW5lIHN0b3JlIG9mIHRo
-ZSBzdHJpbmcgaW4gdGhlIE5EUl9TQ0FMQVJTLCByYXRoZXIKdGhhbiBkZWZlcnJpbmcgdG8gdGhl
-IE5EUl9CVUZGRVJTLgoKQlVHOiBodHRwczovL2J1Z3ppbGxhLnNhbWJhLm9yZy9zaG93X2J1Zy5j
-Z2k/aWQ9MTQ3MTAKClNpZ25lZC1vZmYtYnk6IEFuZHJldyBCYXJ0bGV0dCA8YWJhcnRsZXRAc2Ft
-YmEub3JnPgotLS0KIGxpYnJwYy9pZGwvd2luYmluZC5pZGwgfCAxMiArKysrKystLS0tLS0KIDEg
-ZmlsZSBjaGFuZ2VkLCA2IGluc2VydGlvbnMoKyksIDYgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0
-IGEvbGlicnBjL2lkbC93aW5iaW5kLmlkbCBiL2xpYnJwYy9pZGwvd2luYmluZC5pZGwKaW5kZXgg
-M2RjNzgwODIzMzAuLjZkNDUyOTNhYWZlIDEwMDY0NAotLS0gYS9saWJycGMvaWRsL3dpbmJpbmQu
-aWRsCisrKyBiL2xpYnJwYy9pZGwvd2luYmluZC5pZGwKQEAgLTczLDE0ICs3MywxNCBAQCBpbnRl
-cmZhY2Ugd2luYmluZAogCSk7CiAKICAgICB0eXBlZGVmIFtwdWJsaWNdIHN0cnVjdCB7Ci0JW3N0
-cmluZyxjaGFyc2V0KFVURjgpXSBjaGFyICpkb21haW5fbmFtZTsKLQlbc3RyaW5nLGNoYXJzZXQo
-VVRGOCldIGNoYXIgKmFjY3RfbmFtZTsKLQlbc3RyaW5nLGNoYXJzZXQoVVRGOCldIGNoYXIgKmZ1
-bGxfbmFtZTsKLQlbc3RyaW5nLGNoYXJzZXQoVVRGOCldIGNoYXIgKmhvbWVkaXI7Ci0JW3N0cmlu
-ZyxjaGFyc2V0KFVURjgpXSBjaGFyICpzaGVsbDsKKwlbc3RyaW5nLGNoYXJzZXQoVVRGOCldIGNo
-YXIgZG9tYWluX25hbWVbXTsKKwlbc3RyaW5nLGNoYXJzZXQoVVRGOCldIGNoYXIgYWNjdF9uYW1l
-W107CisJW3N0cmluZyxjaGFyc2V0KFVURjgpXSBjaGFyIGZ1bGxfbmFtZVtdOworCVtzdHJpbmcs
-Y2hhcnNldChVVEY4KV0gY2hhciBob21lZGlyW107CisJW3N0cmluZyxjaGFyc2V0KFVURjgpXSBj
-aGFyIHNoZWxsW107CiAJaHlwZXIgdWlkOwogCWh5cGVyIHByaW1hcnlfZ2lkOwotCVtzdHJpbmcs
-Y2hhcnNldChVVEY4KV0gY2hhciAqcHJpbWFyeV9ncm91cF9uYW1lOworCVtzdHJpbmcsY2hhcnNl
-dChVVEY4KV0gY2hhciBwcmltYXJ5X2dyb3VwX25hbWVbXTsKIAlkb21fc2lkIHVzZXJfc2lkOwog
-CWRvbV9zaWQgZ3JvdXBfc2lkOwogICAgIH0gd2JpbnRfdXNlcmluZm87Ci0tIApHaXRMYWIKCgpG
-cm9tIDhlYTdiYTBkZWJiZGUzZGFlM2E4MTg3MWJhZDEyZmY3NmE0ZmJmY2UgTW9uIFNlcCAxNyAw
-MDowMDowMCAyMDAxCkZyb206IEFuZHJldyBCYXJ0bGV0dCA8YWJhcnRsZXRAc2FtYmEub3JnPgpE
-YXRlOiBXZWQsIDE5IE1heSAyMDIxIDEzOjU3OjIxICsxMjAwClN1YmplY3Q6IFtQQVRDSCA0LzRd
-IHNlbGZ0ZXN0OiBzdGFuZGFyZGlzZSBhbmQgc2hvcnRlbiB3aW5iaW5kIHNvY2tldCBuYW1lCgpU
-aGUgZnVsbCBwYXRoIHRvIHRoZSB3aW5iaW5kZCBzb2NrZXQgbXVzdCBmaXQgd2l0aGluIGEgc3Ry
-dWN0IHNvY2thZGRyX3VuIGFuZCB0aGlzIGhlbHBzIHVzIHdvcmsKd2hlcmUgdGhpcyBpcyBxdWl0
-ZSBkZWVwIG9uIHRoZSBzZXJ2ZXIuCgpTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQmFydGxldHQgPGFi
-YXJ0bGV0QHNhbWJhLm9yZz4KLS0tCiBzZWxmdGVzdC90YXJnZXQvU2FtYmEzLnBtIHwgMiArLQog
-c2VsZnRlc3QvdGFyZ2V0L1NhbWJhNC5wbSB8IDIgKy0KIDIgZmlsZXMgY2hhbmdlZCwgMiBpbnNl
-cnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3NlbGZ0ZXN0L3RhcmdldC9T
-YW1iYTMucG0gYi9zZWxmdGVzdC90YXJnZXQvU2FtYmEzLnBtCmluZGV4IGE2YjM2MzdlZmJlLi44
-NTYyMjFkY2Y2MSAxMDA3NTUKLS0tIGEvc2VsZnRlc3QvdGFyZ2V0L1NhbWJhMy5wbQorKysgYi9z
-ZWxmdGVzdC90YXJnZXQvU2FtYmEzLnBtCkBAIC0yMjU0LDcgKzIyNTQsNyBAQCBzdWIgcHJvdmlz
-aW9uKCQkKQogCXB1c2goQGRpcnMsJGxvY2FsX3N5bWxpbmtzX3NocmRpcik7CiAKIAkjIHRoaXMg
-Z2V0cyBhdXRvY3JlYXRlZCBieSB3aW5iaW5kZAotCW15ICR3YnNvY2tkaXI9IiRwcmVmaXhfYWJz
-L3dpbmJpbmRkIjsKKwlteSAkd2Jzb2NrZGlyPSIkcHJlZml4X2Ficy93YnNvY2siOwogCiAJbXkg
-JG5tYmRzb2NrZGlyPSIkcHJlZml4X2Ficy9ubWJkIjsKIAl1bmxpbmsoJG5tYmRzb2NrZGlyKTsK
-ZGlmZiAtLWdpdCBhL3NlbGZ0ZXN0L3RhcmdldC9TYW1iYTQucG0gYi9zZWxmdGVzdC90YXJnZXQv
-U2FtYmE0LnBtCmluZGV4IDMzZjUzZmU2OGUyLi43MTBmNDYwOTZjMSAxMDA3NTUKLS0tIGEvc2Vs
-ZnRlc3QvdGFyZ2V0L1NhbWJhNC5wbQorKysgYi9zZWxmdGVzdC90YXJnZXQvU2FtYmE0LnBtCkBA
-IC01OTksNyArNTk5LDcgQEAgc3ViIHByb3Zpc2lvbl9yYXdfcHJlcGFyZSgkJCQkJCQkJCQkJCQk
-JCkKIAkkY3R4LT57bG9nZGlyfSA9ICIkcHJlZml4X2Ficy9sb2dzIjsKIAkkY3R4LT57c3RhdGVk
-aXJ9ID0gIiRwcmVmaXhfYWJzL3N0YXRlZGlyIjsKIAkkY3R4LT57Y2FjaGVkaXJ9ID0gIiRwcmVm
-aXhfYWJzL2NhY2hlZGlyIjsKLQkkY3R4LT57d2luYmluZGRfc29ja2V0X2Rpcn0gPSAiJHByZWZp
-eF9hYnMvd2luYmluZGRfc29ja2V0IjsKKwkkY3R4LT57d2luYmluZGRfc29ja2V0X2Rpcn0gPSAi
-JHByZWZpeF9hYnMvd2Jzb2NrIjsKIAkkY3R4LT57bnRwX3NpZ25kX3NvY2tldF9kaXJ9ID0gIiRw
-cmVmaXhfYWJzL250cF9zaWduZF9zb2NrZXQiOwogCSRjdHgtPntuc3N3cmFwX3Bhc3N3ZH0gPSAi
-JGN0eC0+e2V0Y2Rpcn0vcGFzc3dkIjsKIAkkY3R4LT57bnNzd3JhcF9ncm91cH0gPSAiJGN0eC0+
-e2V0Y2Rpcn0vZ3JvdXAiOwotLSAKR2l0TGFiCgo=
-
-
---=-DOU1lAQ/zxRvposOeWaK--
+~~~~~~~~~~~~~~~~~~~~~~~
 
 
