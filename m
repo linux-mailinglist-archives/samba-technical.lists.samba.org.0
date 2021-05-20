@@ -2,47 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5AD338958B
-	for <lists+samba-technical@lfdr.de>; Wed, 19 May 2021 20:35:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28C96389B36
+	for <lists+samba-technical@lfdr.de>; Thu, 20 May 2021 04:13:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=nRGaivmRHyg0gO/Zy7T45BZ2Mfw7exCjuv7k9hESuHo=; b=j6vZlQGuo52x6ekOoeAPf9vbdu
-	dS3qREqBYNfKgY1LOW9DX84wiqeg/r94A58OXDmosPQ+oEr3rAeomE3COXiFbp8/aUGc7c7GMHRp5
-	iwNA80eIHnR2QJgyalh6vPAUiRKKVgHJ9ire/7Cq/Jtz4MEinvJ+7UKOlWLdMUA1PCmeQx4hCVhrt
-	pzmXgiJvo4zd+mkCMu1AXBqDQIbFy+6hQ3bOgh03TRsG4ZVK4taa/KKfr3ZckjdfcMhiYkFdgmPkC
-	p1pq+Pt28IoXVHE9mPFuY9LOLssvcC4V72Qm3xzx6SfIL7r0DSdj1ByqYkI7FWj7j+qmdis819G3W
-	Ljx1tqKA==;
-Received: from ip6-localhost ([::1]:39412 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=FTCd6+qiif01nDICAPQwlVynjOYjR5IJKwPzRGQKUlc=; b=zoKWtS6ljg12idcWmFkDl2fzil
+	nTpt3LSoBxn8++qWUDGOB7ZPjZitH9mOEA64+c+XomOYQuvx2pqjcg85s0peMFuuBPocRhJV0tQsN
+	bxcKr+k9+zfJ5W9qMsKIGBQZ3dsVxYSDLsKDVSIcOOAXtwdV6svNLb5RwBl9CBpX/rqvHkDjjO1vu
+	kolCQPO/OO3kS7h219vTx7j7j/VCSf/fLVMd6JuYNn9kmYR6s0NlwuaQ/Qy7tMmuZunAaFDExZ1mW
+	HGNPKkUgQ1h6rZcotGbgd+W0YDv3NxyE/k+C4ByYzJ519TsYxRFnezOZMJyHIsus++zzxpxOT0304
+	SFivQ9ng==;
+Received: from ip6-localhost ([::1]:45404 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ljR1q-001qic-Mk; Wed, 19 May 2021 18:34:46 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60746) 
+	id 1ljYAo-001ulU-7O; Thu, 20 May 2021 02:12:30 +0000
+Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132]:39445) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ljR1l-001qiS-QL
- for samba-technical@lists.samba.org; Wed, 19 May 2021 18:34:44 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:To:From:CC;
- bh=nRGaivmRHyg0gO/Zy7T45BZ2Mfw7exCjuv7k9hESuHo=; b=YFCEl5irIoDPn907+gyH1709SR
- R0IcY5rnh3xXvhKwwwoBbZJidoKUFsPRznHug+d9CQijvop2Nf+gioMI5X6nkSKDaL1BfhYoxLm3C
- jZaMlCrFsHw/jclfnh/1n+Pe8aMUDPE62cmqg64CBE/1FoLhphPvvXHtjtT9Z7FSVIagjoeVe21DX
- 9JoIF+ud+eVdwTCR/aRXmKSk4pR0xjbq/mk9wpewpG2h6BG1Bl2/DHVCwFpSdyg5jbtviwPYLMgSY
- ZE48znZx1GboDMlAOSYwi6BgYv0f7v+k/4yvx74r86bI/sP+WcoqLDTCZNpU1hythvX2MFEsRoCU3
- UY0TbwZ8IhXkcrwuBOxCK9PXLMdhZL3GB7aqm16nDjnInSxAXoYze+aSyx7T3p+9bL8tAsXU0lcHh
- L8UlpK+Vmw/N1p7hV788Huo0CZ6nRM4FoOMz5HAdd25WW7U7520OSCKYAW+FaXbRXXbQmX6Q5wMce
- tpnONjpBUU05P0wNJeOkJEPh;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ljR1k-0000a0-G3; Wed, 19 May 2021 18:34:40 +0000
-To: samba-technical@lists.samba.org, Andrew Bartlett <abartlet@samba.org>
-Subject: Re: Offline logon flapping in autobuild?
-Date: Wed, 19 May 2021 20:34:40 +0200
-Message-ID: <1923959.sGxDyq99xp@krikkit>
-In-Reply-To: <afc6730cd40ddeff92db1fc82b0aec32f09d85a3.camel@samba.org>
-References: <516bd798642997a15016d81f9ae6e17e9250f677.camel@samba.org>
- <a7020786d9a620ea18f686fe4ac2c5d6c0a4b800.camel@samba.org>
- <afc6730cd40ddeff92db1fc82b0aec32f09d85a3.camel@samba.org>
+ (Exim) id 1ljYAi-001ulL-Qe
+ for samba-technical@lists.samba.org; Thu, 20 May 2021 02:12:27 +0000
+Received: by mail-lf1-x132.google.com with SMTP id q7so20702451lfr.6
+ for <samba-technical@lists.samba.org>; Wed, 19 May 2021 19:12:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=FTCd6+qiif01nDICAPQwlVynjOYjR5IJKwPzRGQKUlc=;
+ b=eby5+MG5WOLfBJG5eg8HoCR/ZBM6jNxULHNd3nt/BEVa8feoOsK/QERWdS6sVXR7mX
+ z2Z+9m72d/z5eyCeX0LythlCLs9TSv6NIjniPi6vO70ZeYt+1pB154TUa+fxTXxfKnto
+ q2jygY4V1DeiFfbI6DxYYI51j0fAVepvIt8ojPfaJRcNSxVQ8BkOqfYCeXMjbwLRTQXO
+ OfEmSwJ86BiN58WIGXsSgBXgO4h7dYO/ho0CnpqtakIT1/x1LUgvpCZTMKV9lZqgpGhE
+ JGINJ2uoVKUqBsi7CSBcKkhiAVD1S5op+4yyIDijfvQxik9DQky+bkBszloJieSp1CUv
+ CkQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=FTCd6+qiif01nDICAPQwlVynjOYjR5IJKwPzRGQKUlc=;
+ b=jGL08uHEBWyEoMF0XntJpzw1eypJRYG9kg++zKQoixK4BF756gUxHZ6o15+Za9Mzux
+ QfveBuNJBzsrUU4wNlGRA1kdahymnsyUUAqWy2OKJnk0ksTM2kw2iRgmct6S7KGT93vR
+ qxEn8vIDhMbbtcPB+qW3qCQh85qgJfPc571YzIcZ9O9PESvQ1yvqV0i8DAZ6cBd5pg/i
+ pddlDUnBLC39zLeJiqjKcJ3bg9JMfzTV560ZttIjuSgyIFJvWRVgdrS+effhDUT0tYpA
+ QeO93LpHCLgfvHSmehfMbPhKZ5Moi/4N5+BAADE2Hz1yHZ6gtJhWnKbNSOWxy7G2X8F1
+ oDWA==
+X-Gm-Message-State: AOAM5334ATs7riFfNbsE4YTsn+rTWd00WGYCpzIp6AXub6OVHSFNhw80
+ x9IXaME0bIHiBYIHX3vJqAQNeH7rO68NWNGbSW4=
+X-Google-Smtp-Source: ABdhPJze41Tna3mdxpem1bwA3YO/pMjKiaQ5H13HVKKTehHFnhDyXjRsAc5yKedHyMM3VA8zA62/1UIE1m2QHNnNOtQ=
+X-Received: by 2002:a19:c397:: with SMTP id t145mr1755064lff.307.1621476742264; 
+ Wed, 19 May 2021 19:12:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+References: <1621421227-34130-1-git-send-email-jiapeng.chong@linux.alibaba.com>
+In-Reply-To: <1621421227-34130-1-git-send-email-jiapeng.chong@linux.alibaba.com>
+Date: Wed, 19 May 2021 21:12:11 -0500
+Message-ID: <CAH2r5mvPTFcueM4VotLvQfiNLDeG0_CMXKQdUtyMYstXYznJqQ@mail.gmail.com>
+Subject: Re: [PATCH] cifs: Fix inconsistent indenting
+To: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,20 +67,50 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wednesday, 19 May 2021 04:10:17 CEST Andrew Bartlett wrote:
-> This patch seems to help if you are "abartlet" but probably not if you
-> are "bbaumbach" or "mmuehlfeld".
+merged into cifs-2.6.git for-next
 
-I think we should use a fixed length for the username, either short it or add 
-a padding so they all have the same length. Then we wont run into that.
+On Wed, May 19, 2021 at 2:27 PM Jiapeng Chong
+<jiapeng.chong@linux.alibaba.com> wrote:
+>
+> Eliminate the follow smatch warning:
+>
+> fs/cifs/fs_context.c:1148 smb3_fs_context_parse_param() warn:
+> inconsistent indenting.
+>
+> Reported-by: Abaci Robot <abaci@linux.alibaba.com>
+> Signed-off-by: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
+> ---
+>  fs/cifs/fs_context.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/fs/cifs/fs_context.c b/fs/cifs/fs_context.c
+> index 5d21cd9..92d4ab0 100644
+> --- a/fs/cifs/fs_context.c
+> +++ b/fs/cifs/fs_context.c
+> @@ -1145,7 +1145,7 @@ static int smb3_fs_context_parse_param(struct fs_context *fc,
+>                 /* if iocharset not set then load_nls_default
+>                  * is used by caller
+>                  */
+> -                cifs_dbg(FYI, "iocharset set to %s\n", ctx->iocharset);
+> +               cifs_dbg(FYI, "iocharset set to %s\n", ctx->iocharset);
+>                 break;
+>         case Opt_netbiosname:
+>                 memset(ctx->source_rfc1001_name, 0x20,
+> --
+> 1.8.3.1
+>
 
 
-	Andreas
+-- 
+Thanks,
 
-
+Steve
 
