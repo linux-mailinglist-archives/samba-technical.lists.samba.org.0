@@ -2,59 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3487838D14D
-	for <lists+samba-technical@lfdr.de>; Sat, 22 May 2021 00:20:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E347938D4AC
+	for <lists+samba-technical@lfdr.de>; Sat, 22 May 2021 11:00:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=kXjTROdN1LfD9XmrTX9oKButLHWCFWucSuR6iY2xDAA=; b=YLIlXUsT8nC/tI/CRyoy4N7xmR
-	yo3Hg/AWYwmonQZBqXTKURaVndRLyJTYMH4IhJmiZtTVjiZ0dfsGOBKICFAGh/2v96unePSVSsann
-	iTt5Bpg7CmjqhKQRB5Xe7mvswO/ppgAWC0UxgvPP9HAdOP7gL+ebwFmo/zd2Z1RdDMDp50M3DQFPt
-	ZkIqMkSFLdUFE6lWoEC7kyygL2lp4V1KqpzGNWNWPgeb8f19t84cNJiULC6wChxv81bdNhJkZXtzm
-	JVNGUdG2QS20Io83J8PzsgbUpGd8jjrTDkagn7YI/Bbxp+0r+bLqAiBPmJl7uATdxBMJz35ubNel4
-	9sOgFfYQ==;
-Received: from ip6-localhost ([::1]:41560 helo=hr1.samba.org) 
+	bh=6Hur745WKK/x7qow9/jiGB3tYXUSwvZYDn81pKT9vl0=; b=P7tlmCaIUktNnGta2vNdwmr29/
+	Pv/zBoZ2gnZiHQ+HYbUbIoJh4/FAl8mmdfvF9Yjmw/O9J6zL3kifrrY9UcmFUq5EtX02Kq7QlzNv/
+	ABfkEKshnjvtX4pNm7hYDywen08D7SP0FEUGq/mV2Pe7vmU7d9W4EDtBBOCJ58qpm8KaH3lPiakli
+	aWBR0jAbaFOSbBZ70BhAbTKY/MvDE51C6y2EByS92Gtjceqhh5hu5FGXIWvujHKM0HM19Fof1FMV/
+	5gC1L2tJY9NAES2EznJYADgPgUwWKon3G+eq96YGprCf5nQgP0yYHptbZ8gjNdLfOk/VDVsLVmmFI
+	MU/m/ZnA==;
+Received: from ip6-localhost ([::1]:44766 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lkDUt-0030Wg-Lp; Fri, 21 May 2021 22:19:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41314) 
+	id 1lkNU7-0033M9-Px; Sat, 22 May 2021 08:59:51 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47766) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lkDUo-0030WX-0H
- for samba-technical@lists.samba.org; Fri, 21 May 2021 22:19:56 +0000
+ (Exim) id 1lkNU2-0033M0-0u
+ for samba-technical@lists.samba.org; Sat, 22 May 2021 08:59:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:To:From:Message-ID:CC;
- bh=kXjTROdN1LfD9XmrTX9oKButLHWCFWucSuR6iY2xDAA=; b=n3zhKTvE3l5gMfrg7dGAKwX0UJ
- 23GtZ1ABmT3yLNFNZiWYoU2FfS4GsKpqqB7jEMeiON9NnnLCuhVJ/5y/jJmXK/81yl8VH3cJFW/JJ
- xmCZdkKOqPSN2GSM5C9Lt6sBvRPRJgsOERvLP0o2sLncfr0pTTEG0CXi5B4fRwf6kcc0OPRcfakkl
- 05iiXmev5GuzfXI6fIxlu4J1o04Mk2HDtoc12ZhEe8j/1OKMnFP9PQqLkxjDFEnae4Ds559b1w2qS
- sUOtOyNc6vtB/7Qh5d5ZVFepKlGG/OnToBCvQN3Ei2iLmEM+qUNtyMSbg5slvOlLLKXPAb7z0+Xlc
- RahLDJgG2QdtH/0q1z2ZW3ai1A8AXXLysu18Kkm4bbVvWSAZTOEO73V2DGrSzF7H+J3gOxWf+vKX+
- j+jAiohaCjiwR5vA1/e6Rk4E9Zz6hj095J2o6kAoMouoYhGwLAEwobfPcfQU4vsjOzhmVVJNddKF5
- lcqI4MfC9oW7CIwd8h80hWnm;
+ bh=6Hur745WKK/x7qow9/jiGB3tYXUSwvZYDn81pKT9vl0=; b=xk/4Lwdj6dQzG8wB9+36yXD653
+ mqaqSzL56IyevAIvifNlrEcH8HTKoNDpaG+p+ifOEem0JgAETGHU1EIxtk4rDrb0NQK+DoggNdC58
+ n5I5xnOwjXgxbSnH1lz1+SAdVGt2Wy8lCPAutSZyHD10CzQy9u72olbnOZ5bcbFagUuvamNNkh6mu
+ 0RvSHurVKmh9AGk+bfw1Wui1S9nuIUgWbZcGaD4XjPgsjcfXMp5x1Ly0UUy3QRsVp+KQ55xJ0LuGT
+ HwOK1iB/5TpYmYZ1yTd8XigLkLWTmKJBIrd42pQO4mZgfE+qQxv886bhIXjyaf/ANDPQDh8AAuF9d
+ S4QXag+AxP+m0tus62lxVbCNx7LUgQWDAfU1l6pSZxVXQuwIv5fcgtZArPQccbcPYmh57RrU8DbOz
+ WgzGePVyZsXgZF9vMLoiUMcIuoYCfPE+DYm2Lzqxi/bUQZizILgXnGaotEIPBLDf1/3tDbUFnQfhC
+ BQ4sSArpu0Gxx5SjmXOr9GeU;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lkDUm-0005tw-CF; Fri, 21 May 2021 22:19:53 +0000
-Message-ID: <7225391f8125266c5ac85e2a28572e9942c440a5.camel@samba.org>
-Subject: Re: Problem with AD membership in an AD with more the 100.000 group
- (possible regression in 4.12?)
-To: "Dr." =?ISO-8859-1?Q?Hansj=F6rg?= Maurer <hansjoerg.maurer@itsd.de>, 
- samba-technical@lists.samba.org
-Date: Sat, 22 May 2021 10:19:46 +1200
-In-Reply-To: <97b1240df9a3ec4b465a3e335037591dd803c029.camel@samba.org>
-References: <d7b0ec24-3c59-1d74-9e93-616eebe6eb44@itsd.de>
- <5d5b4c230813b6bd6b3001fe14bfd3a9d8ca2b53.camel@samba.org>
- <9d2ed0c9-9e13-2848-29cb-aaf6354e33aa@itsd.de>
- <c4713dc0b0d746c834ec66c1ec793572c725b2d2.camel@samba.org>
- <2da32b9f-8ba0-c1ab-1748-831eeb727f0f@itsd.de>
- <1911c4eeee7df0fcf1f13d612da214094a9198c0.camel@samba.org>
- <b6fb9ef1-3cbf-e970-eb2e-9e6e395c65ae@itsd.de>
- <b83d52e7a5b846fd429811616f3b3c21d2f55480.camel@samba.org>
- <56d3287c51dc769806d8a4966b54e2a6e672d8b0.camel@samba.org>
- <fd178861288df9613902ecec24e52f6a2786cea9.camel@samba.org>
- <644dd37c-1260-ccd4-f1ff-0bc32c7b3a64@itsd.de>
- <97b1240df9a3ec4b465a3e335037591dd803c029.camel@samba.org>
+ (Exim) id 1lkNTu-00029g-DH; Sat, 22 May 2021 08:59:39 +0000
+Message-ID: <77ee7b67dee04853744324c6deaef393b2c3053e.camel@samba.org>
+Subject: Re: #samba-technical:matrix.org
+To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+Date: Sat, 22 May 2021 20:59:32 +1200
+In-Reply-To: <1743932.cGlQenkl61@magrathea>
+References: <1743932.cGlQenkl61@magrathea>
 Content-Type: text/plain; charset="UTF-8"
 User-Agent: Evolution 3.36.4-0ubuntu1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,33 +60,28 @@ Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sat, 2021-05-22 at 08:01 +1200, Andrew Bartlett wrote:
-> On Fri, 2021-05-21 at 15:22 +0200, Dr. Hansjörg Maurer wrote:
-> > Am 21.05.21 um 11:31 schrieb Andrew Bartlett:
-> > > On Thu, 2021-05-20 at 23:29 +1200, Andrew Bartlett wrote:
-> > > 
-> > > Just be aware that this isn't a working patch (see the failed
-> > > pipeline).
-> > > 
-> > > I'm not sure if I'll be able to get this approach to work, sadly.
-> > > 
-> > > Andrew Bartlett
-> > > 
-> > Hi Andrew
-> > 
-> > strange ... I have been able to apply the patch to 4.14.4 with one 
-> > manual fix in
-> > librpc/wscript_build
-> > 
-> > and the patched and compiled 4.14.4 fixes our wbinfo -g problem
-> > 
-> > [root@c8-test01 ~]# wbinfo -g  | wc -l
-> > 128167
+On Thu, 2021-05-20 at 11:26 +0200, Andreas Schneider via samba-
+technical wrote:
+> Hi,
 > 
-> Awesome!  Sadly it breaks (at least) printing, because it generically
-> changes the NDR parsing in a way that is wrong. :-(
+> because of
+> 
+> https://boingboing.net/2021/05/19/freenode-irc-staff-quit-after-new-owner-seizes-control.html
+> 
+> I've created #samba-technical:matrix.org as several Samba Team
+> members already 
+> use matrix!
+> 
+> Link: 
+> https://matrix.to/#/!SyczwOXNZYFHgFpCaR:matrix.org?via=matrix.org
+> 
+> 
 
-I've pushed an updated patch that should work for other things as well.
+Thank so much.  I find native matrix rooms much less frustrating than
+IRC-bridge to freenode, so I'm hoping we can just move there. 
+
+I'm already seeing more technical discussion on the new matrix channel
+than I've seen on IRC for years.
 
 Andrew Bartlett
 
