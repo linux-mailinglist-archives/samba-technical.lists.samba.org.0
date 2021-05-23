@@ -2,61 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3618738D854
-	for <lists+samba-technical@lfdr.de>; Sun, 23 May 2021 04:37:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 67E8138D86C
+	for <lists+samba-technical@lfdr.de>; Sun, 23 May 2021 05:12:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=NkGqd4k53BMXwjja9+wvjjI9pdHrq5VLDgaEoS0K1w0=; b=iouk3mtsc2C1oa5Bt9QcrlRz9l
-	PS97G6dMrKBk+zBoWICKgqEOMSQFEeQqajC9wqmemh7Ye1U+7utUon0PzV0SHi92C/gSezwWsfAXK
-	0OH+DujdQ0CAHXbZw7rdp8FvPu14DvQohrs4VCk6lCP1nuH6bDSDZ35ghEhWEJDRFj3LTHUFomPBB
-	Egz3CsqZ37yDlBm+NNfAg/FTk49Ms77A62xq0YClZnw+9bDqyJe5Xc9VmB0oHpngSjDeIGaTUTupu
-	Qz8yzucUuz6kwFmyE7IB4Bl9Fqa+EcwQPdklGTchcPhgl+aOxNr4jKF6ICyOxW5hUWMiY+LrshEpp
-	Rnj91MOA==;
-Received: from ip6-localhost ([::1]:48672 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=52K0w36JaQm2sxt0AoAanCAG34FlpP9WU39ddIjhfSY=; b=fmsikpcFFjoVtZcF9a8CKaUzIk
+	qgTr74QjO41v8IZ54fRS6NLGOhZwZ8rNNRxWec8kMKTpICZDtaKAZ+YVibBEhb4O7oOPwyzB48Krr
+	JVBDsQl6lUrYTVItYgcyEWdXv8451IIN3eaobCIRR9l83ifolKec2zCSWXR9BfrZfKeC7+WPGom94
+	xLFyFjVkbBoQ8NBWLVyOXTmWWMG7pAaYO6rY3r302+slbA3lLhZj311SEibClEd1n0ADICd0NfZHH
+	q8vpkEwFQJaTnIumtejV57nv3OLHU6e9/pYW5LnfGhGQYGsfM7FAYVnJwh0I6lk5+hSLTOAeggavx
+	2qs0x6Zg==;
+Received: from ip6-localhost ([::1]:49396 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lkdyc-0037IB-3O; Sun, 23 May 2021 02:36:26 +0000
-Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132]:33498) 
+	id 1lkeXW-0037fJ-73; Sun, 23 May 2021 03:12:30 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21784) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lkdyV-0037I2-On
- for samba-technical@lists.samba.org; Sun, 23 May 2021 02:36:22 +0000
-Received: by mail-lf1-x132.google.com with SMTP id c10so14472024lfm.0
- for <samba-technical@lists.samba.org>; Sat, 22 May 2021 19:36:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=NkGqd4k53BMXwjja9+wvjjI9pdHrq5VLDgaEoS0K1w0=;
- b=gxeyTaWjWQ2/QslbA0YaCi0fUS3wPrRcYacWGUVUBXLQvxMsq6qNrGtPh7EuZ8nmlt
- r17YJfc3Gv7n192UF4B9MG31VygXGqASmY8tyGn4e3f9OlB+pKf6KDjSXLndAY+YWPVb
- CgxO6MFYA2mFgE6k/gQW2HtiywGMQvf4dSQjnUM9sdB8W4gPDxbocR7zDjYbYlrqUaKn
- N2l4DIXS/xogszW0ooQxotsMQjlufXqIEyn80thkoeFvhyugwVx6sPXZ+LktGuEqXBnD
- UT2BMua96v51n5WzvV8ZQD7DdqwplrXnjD247VB3GbLIL2TeG+8UAm6h3YKFeFtMIK62
- 8kUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=NkGqd4k53BMXwjja9+wvjjI9pdHrq5VLDgaEoS0K1w0=;
- b=nvH5B9mNvyCRemji9xvwc4SpOuj9yu3e3jqHn4UbobHEIkMt6fo0sQ1G7844A8mqzY
- 1K+aLOHCFnt/vKgqI5kSBa/Zy3B6SQsvdowO98KqWJubauwq+nIrhmUr9wn9vIoacAi2
- KxcTS1S73uYXcMgtoUonXeDpb/fNwkZtAi535/5VHcDyz58HPzkcIfyXvmcrwL0NHGpH
- 2Ibgr9mC/GkW7jx6mT8tFy+YSEe8AxHe7qfzeGOb2SA4JaWAssLNfwD3AFVA8+e84Gho
- It4/+waqlqfGNqM7B+haM2sNlQZKubZT2aZxkVnksXfI6uKFm0sYnAmdZIi3fHFnk3fX
- bY0Q==
-X-Gm-Message-State: AOAM532+MTV6IyuBKi5iCG6AO3bEbh5JcAE7PMz3kRm8hUrdS1OhqlBe
- 3afdadTy2A9UUmdZszq+VQwnv4U0EhmvX+IEMsA=
-X-Google-Smtp-Source: ABdhPJyYeFI4q2C9mD9PW9pKzF9kAjVifvOLTDg0EXYi50/aq2X7GL9aFDPeQ7k93ZE2s0K8xTRia5xYHi2SJG34tDE=
-X-Received: by 2002:ac2:546b:: with SMTP id e11mr6508563lfn.395.1621737376856; 
- Sat, 22 May 2021 19:36:16 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210521020051.196434-1-hyc.lee@gmail.com>
- <87o8d4qxyi.fsf@suse.com>
-In-Reply-To: <87o8d4qxyi.fsf@suse.com>
-Date: Sat, 22 May 2021 21:36:06 -0500
-Message-ID: <CAH2r5muZDKC1uZM-q2AGe1f50WtxCHZEPS0oHTBQtROJCZ0QJw@mail.gmail.com>
-Subject: Re: [PATCH v2] cifs: decoding negTokenInit with generic ASN1 decoder
-To: =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>
+ (Exim) id 1lkeXQ-0037fA-Ks
+ for samba-technical@lists.samba.org; Sun, 23 May 2021 03:12:27 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=52K0w36JaQm2sxt0AoAanCAG34FlpP9WU39ddIjhfSY=; b=HkgOuw0jkW3y/IitmE+7YsuxtM
+ F3yFivljhScW34E9FpyRU501qGTFIy4h3sIeXjIZO6JHCEIY0Fu+BZi/n0VcAREYccpnTEXgCX2A7
+ K2u1GpiEzmLrboBaYZQhFyePvUpGqo3XhjftX0YI2/26+ZhdmehM/FpZNSXaupmCv88Wwkj0D5186
+ 9/asxqeG2S2R66hOgBeXD/4DGWkambA0KV1pPGOzfRXWrtirftypOcWKCohga19DskrAI/3h0kK6C
+ xoHXZqjAlSTdYI/9pJiToZwbDFDlfHWKRi0pvfMRlPKshz0LQ2Cn/FMBpfF4npIeALC7/Yepfa5W8
+ X4XaL8ve+wpcxLZIEoUhCAEHhw29/hMAVXgMkKLDbJpz5vnVAk0f6hVSaFptr3ZJHdL+r6hynG7fe
+ 58CM/H/tM3RGq6Qynr5MIi1Tja7SKI8UbBpJwATsEi/gpMSszH4/KcsDFMvqYQv2W3PfEVjNuN0SI
+ 0ICQ6HzpsELvRudBeRVOU9D1;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lkeXO-00076b-Pp; Sun, 23 May 2021 03:12:23 +0000
+Message-ID: <f36563a24207c37e15177eadd6a1dbeff53ce55d.camel@samba.org>
+Subject: Re: Problem with AD membership in an AD with more the 100.000 group
+ (possible regression in 4.12?)
+To: "Dr." =?ISO-8859-1?Q?Hansj=F6rg?= Maurer <hansjoerg.maurer@itsd.de>, 
+ "samba-technical@lists.samba.org (samba-technical@lists.samba.org)"
+ <samba-technical@lists.samba.org>
+Date: Sun, 23 May 2021 15:12:17 +1200
+In-Reply-To: <0df4f538-c7d9-675b-5b08-27b7c94bc2a3@itsd.de>
+References: <d7b0ec24-3c59-1d74-9e93-616eebe6eb44@itsd.de>
+ <5d5b4c230813b6bd6b3001fe14bfd3a9d8ca2b53.camel@samba.org>
+ <9d2ed0c9-9e13-2848-29cb-aaf6354e33aa@itsd.de>
+ <c4713dc0b0d746c834ec66c1ec793572c725b2d2.camel@samba.org>
+ <2da32b9f-8ba0-c1ab-1748-831eeb727f0f@itsd.de>
+ <1911c4eeee7df0fcf1f13d612da214094a9198c0.camel@samba.org>
+ <b6fb9ef1-3cbf-e970-eb2e-9e6e395c65ae@itsd.de>
+ <b83d52e7a5b846fd429811616f3b3c21d2f55480.camel@samba.org>
+ <56d3287c51dc769806d8a4966b54e2a6e672d8b0.camel@samba.org>
+ <fd178861288df9613902ecec24e52f6a2786cea9.camel@samba.org>
+ <644dd37c-1260-ccd4-f1ff-0bc32c7b3a64@itsd.de>
+ <97b1240df9a3ec4b465a3e335037591dd803c029.camel@samba.org>
+ <7225391f8125266c5ac85e2a28572e9942c440a5.camel@samba.org>
+ <0df4f538-c7d9-675b-5b08-27b7c94bc2a3@itsd.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.36.4-0ubuntu1 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,53 +71,49 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: David Howells <dhowells@redhat.com>, CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Hyunchul Lee <hyc.lee@gmail.com>,
- Steve French <sfrench@samba.org>, kernel-team@lge.com,
- Namjae Jeon <linkinjeon@kernel.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, May 21, 2021 at 3:44 AM Aur=C3=A9lien Aptel via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> Hi Hyunchul,
->
-> The existence of multiple ASN1 decoder has been a regular complaint,
-> this looks nice. Have you tested it against any servers?
->
-> I think we need to make sure it works with Windows Server (including
-> increased ones with the increased security flag, Steve do you remember
-> the name of that flag?) and Samba at least.
+On Sat, 2021-05-22 at 23:26 +0200, Dr. Hansjörg Maurer wrote:
+> Am 22.05.21 um 00:19 schrieb Andrew Bartlett via samba-technical:
+> > I've pushed an updated patch that should work for other things as
+> > well.
+> > 
+> > Andrew Bartlett
+> > 
+> 
+> Hi Andrew
+> 
+> this one works too.
+> Thank you very much!
+> Very impressive how you manged it to fix a problem in such a
+> complicated 
+> code area in such short time!
+> 
 
-Are you thinking about the authentication problem to Windows when a
-stricter registry setting is chosen for server name hardening?
+Thanks!  Yes this was quite a tough nut to crack: quite the mission
+really! 
 
-This involves populating the ntlmv2 response area of an NTLMSSP blob
-with the  "Target Name" attribute ie missing MsvAvTargetNamefield and
-maybe also
-MsvAvTimestamp and NTLMSSP_AVFLAG_MIC_IN_AUTHENTICATE_MESSAGE in
-MsvAvFlags.   These (the target name field in particular) are required
-when Windows servers set the registry parm SmbServerNameHardeningLevel
-to 2
+The final iteration here:
 
-See e.g. https://docs.microsoft.com/en-us/windows/security/threat-protectio=
-n/security-policy-settings/microsoft-network-server-server-spn-target-name-=
-validation-level
+https://gitlab.com/samba-team/samba/-/merge_requests/1972
 
-> There is the SDC EMEA plugfest coming up, might be a good time to try it
-> out against other vendors as well.
+https://gitlab.com/samba-team/samba/-/merge_requests/1972.patch
 
-Yes - definitely need to try with various cases (krb5 and ntlmssp in
-SPNEGO) to various servers (Macs, NetApp, Windows, Azure, Samba,ksmbd
-etc)
+Finally passes the full CI:
 
+https://gitlab.com/samba-team/devel/samba/-/pipelines/307912677
 
---=20
-Thanks,
+Andrew Bartlett
 
-Steve
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+
 
