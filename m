@@ -2,71 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CEF438D786
-	for <lists+samba-technical@lfdr.de>; Sat, 22 May 2021 23:27:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3618738D854
+	for <lists+samba-technical@lfdr.de>; Sun, 23 May 2021 04:37:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:subject:cc;
-	bh=T5vNC7r9WE023ZuIlje9KdteHWE1igKAH1lrdnJczqQ=; b=m/dLvJlfmZ+xea234LGsPmmnHl
-	VsUHtsASp0Q70S8p2C5lHby40LHHSiHDGPdbk0F+VHdyX26MRNKu8uSIfACLfDNLy7brQqtQsDubo
-	HzLKOFhpU7jFAM775gfOviFkN6GE4m7c8R/iAhRV0nlAj/l5/mQG5EOoE0OgJhHXquddSqErkVwQR
-	LniOfXJJiGPOEJsE0K/VM9I67XiRV2/V7nNvKAbhRkF1yGBtDTei0q/WeMwFEAtxgityoD3TET12/
-	ye02cpMBOVJWyz2dYHlKTvfayW3I1/rw3BlO4pYwoOFblVZ7ORmqObujbAF0c7NZF3DS1lFN6GytX
-	Pq7uGRYA==;
-Received: from ip6-localhost ([::1]:47934 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=NkGqd4k53BMXwjja9+wvjjI9pdHrq5VLDgaEoS0K1w0=; b=iouk3mtsc2C1oa5Bt9QcrlRz9l
+	PS97G6dMrKBk+zBoWICKgqEOMSQFEeQqajC9wqmemh7Ye1U+7utUon0PzV0SHi92C/gSezwWsfAXK
+	0OH+DujdQ0CAHXbZw7rdp8FvPu14DvQohrs4VCk6lCP1nuH6bDSDZ35ghEhWEJDRFj3LTHUFomPBB
+	Egz3CsqZ37yDlBm+NNfAg/FTk49Ms77A62xq0YClZnw+9bDqyJe5Xc9VmB0oHpngSjDeIGaTUTupu
+	Qz8yzucUuz6kwFmyE7IB4Bl9Fqa+EcwQPdklGTchcPhgl+aOxNr4jKF6ICyOxW5hUWMiY+LrshEpp
+	Rnj91MOA==;
+Received: from ip6-localhost ([::1]:48672 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lkZ8r-0036FO-GC; Sat, 22 May 2021 21:26:41 +0000
-Received: from mail.itsd.de ([80.153.216.99]:28258) 
+	id 1lkdyc-0037IB-3O; Sun, 23 May 2021 02:36:26 +0000
+Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132]:33498) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lkZ8j-0036FF-SO
- for samba-technical@lists.samba.org; Sat, 22 May 2021 21:26:37 +0000
-Received: from mail.itsd.de (mail.itsd.de [192.168.0.10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by securemail.itsd.de (Postfix) with ESMTPS;
- Sat, 22 May 2021 23:26:29 +0200 (CEST)
-Received: from nero.itsd.de (unknown [192.168.0.223])
- (using TLSv1.2 with cipher AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.itsd.de (Postfix) with ESMTPSA id 3D8B0800D6;
- Sat, 22 May 2021 23:26:29 +0200 (CEST)
-subject: Re: Problem with AD membership in an AD with more the 100.000 group
- (possible regression in 4.12?)
-To: Andrew Bartlett <abartlet@samba.org>,
- "samba-technical@lists.samba.org (samba-technical@lists.samba.org)"
- <samba-technical@lists.samba.org>
-References: <d7b0ec24-3c59-1d74-9e93-616eebe6eb44@itsd.de>
- <5d5b4c230813b6bd6b3001fe14bfd3a9d8ca2b53.camel@samba.org>
- <9d2ed0c9-9e13-2848-29cb-aaf6354e33aa@itsd.de>
- <c4713dc0b0d746c834ec66c1ec793572c725b2d2.camel@samba.org>
- <2da32b9f-8ba0-c1ab-1748-831eeb727f0f@itsd.de>
- <1911c4eeee7df0fcf1f13d612da214094a9198c0.camel@samba.org>
- <b6fb9ef1-3cbf-e970-eb2e-9e6e395c65ae@itsd.de>
- <b83d52e7a5b846fd429811616f3b3c21d2f55480.camel@samba.org>
- <56d3287c51dc769806d8a4966b54e2a6e672d8b0.camel@samba.org>
- <fd178861288df9613902ecec24e52f6a2786cea9.camel@samba.org>
- <644dd37c-1260-ccd4-f1ff-0bc32c7b3a64@itsd.de>
- <97b1240df9a3ec4b465a3e335037591dd803c029.camel@samba.org>
- <7225391f8125266c5ac85e2a28572e9942c440a5.camel@samba.org>
-Organization: itsystems Deutschland AG
-Message-ID: <0df4f538-c7d9-675b-5b08-27b7c94bc2a3@itsd.de>
-Date: Sat, 22 May 2021 23:26:28 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.0
+ (Exim) id 1lkdyV-0037I2-On
+ for samba-technical@lists.samba.org; Sun, 23 May 2021 02:36:22 +0000
+Received: by mail-lf1-x132.google.com with SMTP id c10so14472024lfm.0
+ for <samba-technical@lists.samba.org>; Sat, 22 May 2021 19:36:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=NkGqd4k53BMXwjja9+wvjjI9pdHrq5VLDgaEoS0K1w0=;
+ b=gxeyTaWjWQ2/QslbA0YaCi0fUS3wPrRcYacWGUVUBXLQvxMsq6qNrGtPh7EuZ8nmlt
+ r17YJfc3Gv7n192UF4B9MG31VygXGqASmY8tyGn4e3f9OlB+pKf6KDjSXLndAY+YWPVb
+ CgxO6MFYA2mFgE6k/gQW2HtiywGMQvf4dSQjnUM9sdB8W4gPDxbocR7zDjYbYlrqUaKn
+ N2l4DIXS/xogszW0ooQxotsMQjlufXqIEyn80thkoeFvhyugwVx6sPXZ+LktGuEqXBnD
+ UT2BMua96v51n5WzvV8ZQD7DdqwplrXnjD247VB3GbLIL2TeG+8UAm6h3YKFeFtMIK62
+ 8kUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=NkGqd4k53BMXwjja9+wvjjI9pdHrq5VLDgaEoS0K1w0=;
+ b=nvH5B9mNvyCRemji9xvwc4SpOuj9yu3e3jqHn4UbobHEIkMt6fo0sQ1G7844A8mqzY
+ 1K+aLOHCFnt/vKgqI5kSBa/Zy3B6SQsvdowO98KqWJubauwq+nIrhmUr9wn9vIoacAi2
+ KxcTS1S73uYXcMgtoUonXeDpb/fNwkZtAi535/5VHcDyz58HPzkcIfyXvmcrwL0NHGpH
+ 2Ibgr9mC/GkW7jx6mT8tFy+YSEe8AxHe7qfzeGOb2SA4JaWAssLNfwD3AFVA8+e84Gho
+ It4/+waqlqfGNqM7B+haM2sNlQZKubZT2aZxkVnksXfI6uKFm0sYnAmdZIi3fHFnk3fX
+ bY0Q==
+X-Gm-Message-State: AOAM532+MTV6IyuBKi5iCG6AO3bEbh5JcAE7PMz3kRm8hUrdS1OhqlBe
+ 3afdadTy2A9UUmdZszq+VQwnv4U0EhmvX+IEMsA=
+X-Google-Smtp-Source: ABdhPJyYeFI4q2C9mD9PW9pKzF9kAjVifvOLTDg0EXYi50/aq2X7GL9aFDPeQ7k93ZE2s0K8xTRia5xYHi2SJG34tDE=
+X-Received: by 2002:ac2:546b:: with SMTP id e11mr6508563lfn.395.1621737376856; 
+ Sat, 22 May 2021 19:36:16 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <7225391f8125266c5ac85e2a28572e9942c440a5.camel@samba.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-SM-outgoing: yes
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=itsd.de; h=subject:to
- :references:from:message-id:date:mime-version:in-reply-to
- :content-type:content-transfer-encoding; s=default; bh=lx8vJeGci
- XnpODkaYKIHPt8e3vQuHb2u44D4I1yLu+0=; b=ELSoDRzTOsWfxi6eiPl/VdoKI
- u2/5Z0zVHqhbztptDxBQW92b+YVeglxGzGKAtfrJsbsgF/ReX8Oqe3j5jeQx0YaE
- 5R/kY8YkudCu7gDSa+rKRZz6TDHPA+JseyBt0iqK3u66i+1MHlyDdIxckoW/gzK7
- 5BqnRSbIqEuOCjTDaC76hn25nbJq1BZl7X9m6NWctQQKxCX22nlKqY3Lq90U9buZ
- UR56ojGjF18ODC/ipRKguc2BpBFWGLXTfCXHdZ2zpXkDzHvW5mABr/R6iRVTkpCI
- kYjO4Zad9oHnRdGEHsoKS6xlGX5ieH91mu5WU5cIiokmRAa9BKt6LnBfKPdRA==
+References: <20210521020051.196434-1-hyc.lee@gmail.com>
+ <87o8d4qxyi.fsf@suse.com>
+In-Reply-To: <87o8d4qxyi.fsf@suse.com>
+Date: Sat, 22 May 2021 21:36:06 -0500
+Message-ID: <CAH2r5muZDKC1uZM-q2AGe1f50WtxCHZEPS0oHTBQtROJCZ0QJw@mail.gmail.com>
+Subject: Re: [PATCH v2] cifs: decoding negTokenInit with generic ASN1 decoder
+To: =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,53 +70,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Dr=2E_Hansj=C3=B6rg_Maurer_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?Dr=2e_Hansj=c3=b6rg_Maurer?= <hansjoerg.maurer@itsd.de>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: David Howells <dhowells@redhat.com>, CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>, Hyunchul Lee <hyc.lee@gmail.com>,
+ Steve French <sfrench@samba.org>, kernel-team@lge.com,
+ Namjae Jeon <linkinjeon@kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Am 22.05.21 um 00:19 schrieb Andrew Bartlett via samba-technical:
+On Fri, May 21, 2021 at 3:44 AM Aur=C3=A9lien Aptel via samba-technical
+<samba-technical@lists.samba.org> wrote:
 >
-> I've pushed an updated patch that should work for other things as well.
+> Hi Hyunchul,
 >
-> Andrew Bartlett
+> The existence of multiple ASN1 decoder has been a regular complaint,
+> this looks nice. Have you tested it against any servers?
 >
+> I think we need to make sure it works with Windows Server (including
+> increased ones with the increased security flag, Steve do you remember
+> the name of that flag?) and Samba at least.
 
-Hi Andrew
+Are you thinking about the authentication problem to Windows when a
+stricter registry setting is chosen for server name hardening?
 
-this one works too.
-Thank you very much!
-Very impressive how you manged it to fix a problem in such a complicated 
-code area in such short time!
+This involves populating the ntlmv2 response area of an NTLMSSP blob
+with the  "Target Name" attribute ie missing MsvAvTargetNamefield and
+maybe also
+MsvAvTimestamp and NTLMSSP_AVFLAG_MIC_IN_AUTHENTICATE_MESSAGE in
+MsvAvFlags.   These (the target name field in particular) are required
+when Windows servers set the registry parm SmbServerNameHardeningLevel
+to 2
 
-Regards
+See e.g. https://docs.microsoft.com/en-us/windows/security/threat-protectio=
+n/security-policy-settings/microsoft-network-server-server-spn-target-name-=
+validation-level
 
-Hansjörg
+> There is the SDC EMEA plugfest coming up, might be a good time to try it
+> out against other vendors as well.
 
-
-
-
-
--- 
-Dr. Hansjörg Maurer
-itsystems Deutschland AG
-Erzgießereistr. 22
-80335 München
-Tel:   +49-89-52 04 68-41
-Fax:   +49-89-52 04 68-59
-E-Mail: hansjoerg.maurer@itsd.de
-Web:    http://www.itsd.de
+Yes - definitely need to try with various cases (krb5 and ntlmssp in
+SPNEGO) to various servers (Macs, NetApp, Windows, Azure, Samba,ksmbd
+etc)
 
 
-Amtsgericht München HRB 132146
-USt-IdNr. DE 812991301
-Steuer-Nr. 143/100/81575
+--=20
+Thanks,
 
-Aufsichtsratsvorsitzender:
-Stefan Adam
-Vorstand:
-Dr. Michael Krocka
-Dr. Hansjörg Maurer
-
+Steve
 
