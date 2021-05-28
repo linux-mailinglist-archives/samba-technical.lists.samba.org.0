@@ -2,45 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B393939388E
-	for <lists+samba-technical@lfdr.de>; Fri, 28 May 2021 00:07:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA8CF393A05
+	for <lists+samba-technical@lfdr.de>; Fri, 28 May 2021 02:04:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=YLjxaHYQKNjqjNwOEi847+hOLoYgKLLt1AVoUmL9Hcw=; b=ROKXzpSfUPFivFCYB9mDU76t3k
-	rMEJu5sAsqTU0akcCiH1pPeIvyyvCsQxdP8+jdcrXGUKbmedpPKl5DdgD4xgSJ7kR4XJcSo2xZWxe
-	lZ2yJa5A3U4ukokoj8ubBkkooELG0OAR4lI3HLd3Xiv8qeUymRBK6MPVGIVVKPMKqTBJxzO7JnPpL
-	5opdCHxj61Gte0E1w91ZvklHAhTBIbfiQ5+nEAijKuBZpED6pg2sMGEmXrrvKw32cW/fNhcfxM6lo
-	2mD/eB+dEHM16ke6nmQEeo9PCM+cNQ/17F1gkmS/xQbiuIAT3FJvl3XMInzKGvX1rpXeGt0rk3sN1
-	Vx4DGyKQ==;
-Received: from ip6-localhost ([::1]:39752 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=4xiufwoZKgp4BeVLJU6E/Pf7JPM/TfZSNCh+E/0tdTY=; b=SHDufGtBdS029FXcT5Kwqqizwl
+	tEwcezFKShRysrO0nLysSJbn/Qsy44xo91sfT1O9E018RIhpmz6XjsfSmBPlj8/2R6T07gatfYmwZ
+	kQnEPYxGoK6/ZB2oPpUBhsWguc8R2KldZ7smOh6aIFcgeqdTxHO7K4nv86g2Qfp+JFZmDDrLaqUgI
+	z7QkvS6JepczlZ73AL4u98AUe/zB0Y4+DVXhh2ZYTL6KE0qLyWA8x2rCu5UyTT8OeuqIhH3BU36sH
+	Y/fIUH2d6oG6bo8gqIuFR9U+Ha9VM92FDKMPJ8uVJg+1D0xEbcSH9Yi/Stfczlyn/9qvA49dgIXvY
+	OdYBP3Rw==;
+Received: from ip6-localhost ([::1]:40650 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lmO9i-004v47-2S; Thu, 27 May 2021 22:07:06 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54704) 
+	id 1lmPyU-004vhW-S5; Fri, 28 May 2021 00:03:38 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz
+ ([2404:130:4080::4]:59218) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lmO9c-004v3y-QZ
- for samba-technical@lists.samba.org; Thu, 27 May 2021 22:07:02 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=YLjxaHYQKNjqjNwOEi847+hOLoYgKLLt1AVoUmL9Hcw=; b=SJ5U3JDiokTQ4zCjUNJjfBP3lc
- CRUwkK3nFd/tcgyiitdrb5CmsJjBbD+Ofsygk+xgr3CJyLqdrAXnw8PY0VrSZhHhyOyEqFZJZHu8S
- ZJt3F2xRCLHiVUwfCdTLaXlOLDbVwYmvMT4bRk0ppkbRhiRFSVKSCBfPW+F9KsvtWQxJsU61ie05z
- KAqfDxMuDlf/Yi3RlhzC6piTSEYCC/vHPpxG2xSOR2HOHop3o9m3J0es7Zs6FTvPfGoInmKNukNbb
- DzU4vAajZ8MOrI6FjGIzeeniSSjdyrApUHGA+bHjX50Opoy9+TMwjXafDqxgDJU9HTjF88G8eFTnN
- e72Z0fmgH9FLawrQsur7+jz7izUvTRyk+E32VsTcGhilolxdDg0v4HrFLysv7BnIV3kPkouqx9XBg
- HrhNZGQUZAU67pxzIAa3/PN+JeqlTRpc4uD/S6+DQ8IWXhhxn+iFd1cTdppXxRipywMlQzkhz27Q4
- Jn5hDJxCd/aQ+SbML80iIoUo;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lmO9b-0000oc-4K; Thu, 27 May 2021 22:06:59 +0000
-Date: Thu, 27 May 2021 15:06:56 -0700
-To: Andrew Walker <awalker@ixsystems.com>
+ (Exim) id 1lmPyN-004vhN-7Q
+ for samba-technical@lists.samba.org; Fri, 28 May 2021 00:03:35 +0000
+Received: from [IPv6:2404:130:0:1000:3483:8d54:45b1:56a] (unknown
+ [IPv6:2404:130:0:1000:3483:8d54:45b1:56a])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id E6A4480FA5; 
+ Fri, 28 May 2021 12:03:18 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1622160198;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4xiufwoZKgp4BeVLJU6E/Pf7JPM/TfZSNCh+E/0tdTY=;
+ b=a0yg6SbskpdWuNuTu04RNJTsdYTt2X3qrSXAUX96ajZaheuE0YxE/YJNOYBcy2WLSRPruG
+ HT5Sqcy0SYdrxnbrG6Bp8EYjju+QWeOJYvQ/crvCdpZKtj+IrWsQPL+qjJzSU0W9pGxOKJ
+ DJpjPt4jPIzFRGEn90Bh51B6So2O/asgMIALO+U0krTDQrLnJeoZl6plUqHkvmF8tBxKcR
+ IOFtGmwT1KiHylPsAq+AbgkvCRCaZR7BQAH8n27S0z4e/euBwvQmRrA3xCDHKqDFxzl9h0
+ x+5dgNqNsoTRNxDtcJQ5PxcUl20UuJEDwlNzBHWVUhagsMoHcVXqGWUuqpd/ww==
 Subject: Re: JSON input / output for CLI utilities
-Message-ID: <20210527220656.GB3874838@jeremy-acer>
+To: Andrew Walker <awalker@ixsystems.com>,
+ samba-technical <samba-technical@lists.samba.org>
 References: <CAB5c7xqUC9mZ8-VFDmM44b=EL49yBiWkMikf8BWgU0FjC+25MA@mail.gmail.com>
+Message-ID: <cf23d39b-a13b-a9fb-64b1-e5094a4336e5@catalyst.net.nz>
+Date: Fri, 28 May 2021 12:03:17 +1200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
 In-Reply-To: <CAB5c7xqUC9mZ8-VFDmM44b=EL49yBiWkMikf8BWgU0FjC+25MA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-NZ
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-0.10 / 15.00]; ARC_NA(0.00)[];
+ MIME_GOOD(-0.10)[text/plain];
+ DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
+ MIME_TRACE(0.00)[0:+]; MID_RHS_MATCH_FROM(0.00)[]
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,22 +69,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, May 27, 2021 at 05:42:20PM -0400, Andrew Walker via samba-technical wrote:
->I know we've added JSON output to a few of the CLI utils. Over the past
->year or so I've added this to various utils in FreeNAS (using libjansson).
->Is there an overall strategy for this? I'd be happy to upstream what I have.
+On 28/05/21 9:42 am, Andrew Walker via samba-technical wrote:
+> I know we've added JSON output to a few of the CLI utils. Over the past
+> year or so I've added this to various utils in FreeNAS (using libjansson).
+> Is there an overall strategy for this? I'd be happy to upstream what I have.
 
-More and automatable scriptability of our tools is always a good idea !
+Yes, please upstream.
 
-Please upstream.
+I think the strategy is to look around and aim for consistency between 
+tools, but don't let the lack of clear conventions stop you.
 
->Also is there an effort to add support for JSON input to them?
+jansson is the right thing for C; the standard python library is right 
+for python.
 
-Not that I know of.
+> Also is there an effort to add support for JSON input to them?
+
+No effort, but I think we would want to where it makes sense.
+
+Douglas
+
+
 
