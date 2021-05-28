@@ -2,50 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BDD93944E4
-	for <lists+samba-technical@lfdr.de>; Fri, 28 May 2021 17:15:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA30239484C
+	for <lists+samba-technical@lfdr.de>; Fri, 28 May 2021 23:22:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=iZCA6h8fQ/O7u1Jd77UmChcIcWtQ8xDbRSrJ7clPXdk=; b=Z62sMj+TIItXDNi0/VsugKbUJR
-	3nX6JRhZLwMV5WJJ0qQR79+fKY+OJUjar06NLSlQPJK/GtE+TquucZKSrXO8SmCYyEhqVznNs3Oa6
-	dj25njDfJ4V5qVGh3NmSxRKE2uX2PvWU9q+0hOzKH/Nz8378/x9tadqvN8yucwNkS1FJMIrl+tZsc
-	XuvtWNapZ/hFojGp6OjKsMzuq0uPf038/1Z1vDiVzNXVcFLAO/iBUzm0hUuUtU4BYi6p7+ZbVgl9M
-	+iEVmQl1hkBSYILbm04knlQ/wyeQ7egViqcMxe+g0JXKTiYjh6OSLPxRFOLsoxp1nkAJMplwglTjP
-	MhHDel0A==;
-Received: from ip6-localhost ([::1]:62444 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=EIBX6o+2djJXLxJlQazXuJTcJxeaWNw0KouiovhkKdM=; b=41yai65lWQzjjOBuyZpw1Ziy1V
+	WOsONBLiZN8qD8vbj5SfP8deM94wEnYyz1qMR/FYAwor3QX2JBcBR5BhLkeA7d1mu9yNu2swNJQoO
+	rTdnaL6ygmMivzUupAj/O92rphgNGaj9ZdmrhhzS61FDn/C4gN5CoVfr308xq/pXiOeRdBF8v3Jpn
+	no1gjttBEzjqk824yMGk9S1O38GzrbYbUuzilCfI+098+N24Ca06fMg6IGXBQvdVnST990hdEJUeq
+	7Y1hiNAu5TzOtXhGmtNjYUR5iNuSjhjZ08Cnr0z5fCFQslpRrn8ErGQAr7GhcpYCIRfkvIKlg7VXI
+	N4U91a0A==;
+Received: from ip6-localhost ([::1]:63458 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lmeDH-0056uj-UN; Fri, 28 May 2021 15:15:51 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58470) 
+	id 1lmju6-0058Hv-Cx; Fri, 28 May 2021 21:20:26 +0000
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:42831) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lmeDD-0056tp-JW
- for samba-technical@lists.samba.org; Fri, 28 May 2021 15:15:49 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=iZCA6h8fQ/O7u1Jd77UmChcIcWtQ8xDbRSrJ7clPXdk=; b=ky6JAcqbn36GMBuZl7Z6E+FDMi
- TYFlb03UhjCThy1+oA0SrKXmlvV+hCEvi2BhxpYf3dos37gbJLqD0hmcvUYOfC5i3+dj6T/eLXZp3
- WvenG81bztGxReYB6Ko5kd95aEz0rCLVOEtxUY7lKycBBJy7gPYEF2c/F8RSMKLC2qHfjYJyfFOp3
- CqQKQNssDXdTd7MjEnTE/0YUWYycYx3s3svDyGyPYMXXWAJUII/b2/LIkcJMQwGando7sbBxgAlsp
- jdA9z4WqyDBkJOPxx7D/YmFIvKUSFEbTwDecKtB/bc3UdIzOINuRH9rZpIDUkUYfn8qz9Lx4ytgNJ
- 3HYw6DzvslvIvwJx7j0bBc0lqO4TiMab+ShdmmVdzZti9igvSi42meEbl6sQPzShxAk4OuA9Uwpiz
- z93HBoCg1yrjRjeouNcREYZQHuxHQlotQPteaGLBGwwyaKSjSu52EmuUfhm5Bsee6uzRG1sSekl1u
- /C9Sbc5Xl0/ihcyX/hUll15w;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lmeDD-0000wD-Aa; Fri, 28 May 2021 15:15:47 +0000
-Subject: Re: JSON input / output for CLI utilities
-To: Andrew Walker <awalker@ixsystems.com>
+ (Exim) id 1lmjtw-0058Hk-Rk
+ for samba-technical@lists.samba.org; Fri, 28 May 2021 21:20:23 +0000
+Received: by mail-ed1-x52f.google.com with SMTP id i13so6323367edb.9
+ for <samba-technical@lists.samba.org>; Fri, 28 May 2021 14:20:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ixsystems.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ctllRNxmpaY8x6Kard0VgAmnz2Vfd3y1mzzjQYQmiCo=;
+ b=TpyvyxLZqyFZR6qv3xWHX0L/sJkJXjyZ8IHBYAm1000sIOhb96Bp5haN2VTxQQS8li
+ rPsM9Eg43tWXuRNmrHTPLrbEfPDmhX2WxV7mS8S/jR348LWrMte9aXh9NGljeFdKZYDp
+ XBPMgOh6159BYQAd3TCNFWmFpTXyyyRyoWSViYVoyZSK2UquxMPspAcVZDaXt2lrYhdX
+ NXASLmCBLxsAQVuQAyBcypZVfbkjSgUElbalYg/ePIWRb+J3aGigGCMUM3jO4dUS+V9c
+ +TfHaoP58jFQRyRunyjqcL+GziM6M+kORWe/lLzRmaL+mXFsSTYOubC62jlPsit+gMj+
+ C5gw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ctllRNxmpaY8x6Kard0VgAmnz2Vfd3y1mzzjQYQmiCo=;
+ b=Ktu78mlBW6iRSD21Afyx4p2z07DzkmQBdAmd0U/aJY2IxrX1Y0bw2EZCk0L6ez82Oh
+ HGzca5WYf5DogbhKcaY1gRHylJsZtMZgayRkx0ccbvY4HcocWG9oAi8zd2Sal/mKCh/R
+ EKeLPwAyx2SytUg6oc2qfgrUTgoGRHDZRbUUINwdtxsIHn/3ys0HxcE4ZwnWyg4IAzip
+ C4cMmwraj4Em5TTg/ZRXmByhBBKNmQ5HhHT/68YHYt/5rdxR2T2hMVGjL8F2vkhSwSW8
+ TxMXlopmkUEgIXeyLx66AMjuKoHuipnPwsTcp3DnC7M7eAk5YHMyRXz97KLPS/3fdjqV
+ 10AA==
+X-Gm-Message-State: AOAM530ENBwntUjCQeX8nv+xoHsU/QC38UqDSzosUu7JYYzPTE/2mz/6
+ 9W9Ik754W0e2z5K4YrziIPFNmZLR1bVHC+T/psp6Lg==
+X-Google-Smtp-Source: ABdhPJwMuEhfV3cO9bgr+/C6NMmbgL0Ti1QsiYDnc64hQ0sE7DAldXVewLzZ2sgLzrVBoGQUCn1SUbdgPeH0zkvsad8=
+X-Received: by 2002:a05:6402:40d0:: with SMTP id
+ z16mr12252225edb.104.1622236813417; 
+ Fri, 28 May 2021 14:20:13 -0700 (PDT)
+MIME-Version: 1.0
 References: <CAB5c7xqUC9mZ8-VFDmM44b=EL49yBiWkMikf8BWgU0FjC+25MA@mail.gmail.com>
  <cf23d39b-a13b-a9fb-64b1-e5094a4336e5@catalyst.net.nz>
  <CAB5c7xqp3uEaWgFmYr4vtqwN6og-ii-JhizxZZ9qKL3-tkTPyQ@mail.gmail.com>
-Message-ID: <ff479fe2-c8b7-f220-7a97-f1f4e80db852@samba.org>
-Date: Fri, 28 May 2021 17:15:46 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.1
-MIME-Version: 1.0
-In-Reply-To: <CAB5c7xqp3uEaWgFmYr4vtqwN6og-ii-JhizxZZ9qKL3-tkTPyQ@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="EP7CP8d3RJDeJWlcL5x9LXTnRrNjqUbc9"
+ <ff479fe2-c8b7-f220-7a97-f1f4e80db852@samba.org>
+In-Reply-To: <ff479fe2-c8b7-f220-7a97-f1f4e80db852@samba.org>
+Date: Fri, 28 May 2021 17:20:02 -0400
+Message-ID: <CAB5c7xosYmHkn7VE=GhZuRuPJ=06dSCuS1payA2wRTvfUKe21Q@mail.gmail.com>
+Subject: Re: JSON input / output for CLI utilities
+To: Ralph Boehme <slow@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,67 +73,38 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Walker <awalker@ixsystems.com>
 Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---EP7CP8d3RJDeJWlcL5x9LXTnRrNjqUbc9
-Content-Type: multipart/mixed; boundary="3TgHIBTmWRC5xYhICfPjzlSTwqXLnDWwK";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Andrew Walker <awalker@ixsystems.com>
-Cc: samba-technical <samba-technical@lists.samba.org>
-Message-ID: <ff479fe2-c8b7-f220-7a97-f1f4e80db852@samba.org>
-Subject: Re: JSON input / output for CLI utilities
-References: <CAB5c7xqUC9mZ8-VFDmM44b=EL49yBiWkMikf8BWgU0FjC+25MA@mail.gmail.com>
- <cf23d39b-a13b-a9fb-64b1-e5094a4336e5@catalyst.net.nz>
- <CAB5c7xqp3uEaWgFmYr4vtqwN6og-ii-JhizxZZ9qKL3-tkTPyQ@mail.gmail.com>
-In-Reply-To: <CAB5c7xqp3uEaWgFmYr4vtqwN6og-ii-JhizxZZ9qKL3-tkTPyQ@mail.gmail.com>
+On Fri, May 28, 2021 at 11:15 AM Ralph Boehme <slow@samba.org> wrote:
 
---3TgHIBTmWRC5xYhICfPjzlSTwqXLnDWwK
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+> Am 28.05.21 um 17:10 schrieb Andrew Walker via samba-technical:
+> > Should we have version strings for all the JSON output generated by
+> > utilities?
+>
+> yes please.
+>
+> -slow
+>
+> --
+> Ralph Boehme, Samba Team                https://samba.org/
+> Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
+> GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
+>
+>
+I was thinking of something like this:
+```
+root@:/usr/ports/net/samba # net --json groupmap add data='{"nt_name":
+"smbuser", "gid": 1000}'
+{"version": {"major": 1, "minor": 0}, "groupmap": [{"nt_name": "smbuser",
+"sid": "S-1-5-21-3928159180-3161166842-2405926743-1005", "gid": 1000,
+"group_type_int": 2}]}
+```
 
-Am 28.05.21 um 17:10 schrieb Andrew Walker via samba-technical:
-> Should we have version strings for all the JSON output generated by
-> utilities?
-
-yes please.
-
--slow
-
---=20
-Ralph Boehme, Samba Team                https://samba.org/
-Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
-
-
---3TgHIBTmWRC5xYhICfPjzlSTwqXLnDWwK--
-
---EP7CP8d3RJDeJWlcL5x9LXTnRrNjqUbc9
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmCxCSIFAwAAAAAACgkQqh6bcSY5nkaC
-EhAAn6B3oizFNEgQr5L/JW9mPpy6cHIlc/90fmwUz1LojytcuE9xWc8WKrYCOtVoex1YBo5ISMkh
-HgOiIo7yENU7eF4x2i1yW4ZjluTRdNZKxgyEcLZ2goVwKIrRS21Nbn8vuuRpWALUhkVZT3zQKClC
-nvoK1+hXMYvsC28PZ4vRJeYqLC7R8UfKHgkUG/RZ6Yo61Ow5af3OxQXF5BduKpGan9et3MwJy0pP
-myTHX1sHSgcy1lVjenlOJn7usBvi4QxX4Us063XvPQamz2XqMYSwtNbzYjK+FbNIsVV+r356ovLp
-te1HuODwwLfYenGPNKASlvxLHHSG97kSwTTv7aFUcRncS0qlpihw3/48ByH2BMfec5gIceNef4yh
-/88DHAEh3mbM9CpfYFyuQZ5FDZV8HB9rZihgp4TZLFCPTGlfUVE5UQMiTqHIjHn4+1r6RAuBiQ9P
-KF937ETmiTX1kvkZWGZhD4oQSbxeatO8HEVmpJUoAndn/plUF5ZOSTsxuupkJfO7HSMzV83c3Gpk
-Hfs8G381/JALr99R0hnQy4HdIoVycBxLezww2qxE9/yhbfi2UE4NMrUQ/D+SpkW6Mx4/E3gHf0ln
-9uWLD6lZw8ls5SCW1I6vwIoVNsXN0RcCb2lGMGDAw3aL1W2AlkFuPFkE8YLFmYBI30HBhM2OiKFL
-4gQ=
-=3zS/
------END PGP SIGNATURE-----
-
---EP7CP8d3RJDeJWlcL5x9LXTnRrNjqUbc9--
-
+Basically, have the json-input variety for adding a new groupmap entry
+print what actually got added in JSON on stdout. It's probably better
+because scripts may send incomplete information, but may benefit from
+knowing what SID they received.
