@@ -2,64 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA30239484C
-	for <lists+samba-technical@lfdr.de>; Fri, 28 May 2021 23:22:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D67E394B79
+	for <lists+samba-technical@lfdr.de>; Sat, 29 May 2021 11:57:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=EIBX6o+2djJXLxJlQazXuJTcJxeaWNw0KouiovhkKdM=; b=41yai65lWQzjjOBuyZpw1Ziy1V
-	WOsONBLiZN8qD8vbj5SfP8deM94wEnYyz1qMR/FYAwor3QX2JBcBR5BhLkeA7d1mu9yNu2swNJQoO
-	rTdnaL6ygmMivzUupAj/O92rphgNGaj9ZdmrhhzS61FDn/C4gN5CoVfr308xq/pXiOeRdBF8v3Jpn
-	no1gjttBEzjqk824yMGk9S1O38GzrbYbUuzilCfI+098+N24Ca06fMg6IGXBQvdVnST990hdEJUeq
-	7Y1hiNAu5TzOtXhGmtNjYUR5iNuSjhjZ08Cnr0z5fCFQslpRrn8ErGQAr7GhcpYCIRfkvIKlg7VXI
-	N4U91a0A==;
-Received: from ip6-localhost ([::1]:63458 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=Z1HCgd/Tj+ViGfmtsdrRCpt3Eu4lo0O8TEqggzJSD0g=; b=gqPVLxz2tOfcAoZ7jozN53cfbw
+	35uBReo49/SIlJyjXnCzA4a+qQUWE+AiNiJCuPJo5S2VyGNFFTIsms7e8L/xHRD9NBKg0X/q+i6IF
+	TgPuSm9QYSXsNobsl+WcLRuIoV5mYB4jnc+DCTKVVCQM6f6XuHS/fJJy4wgYQzZ9F5ZOEdPswP6nN
+	hZwJocN14bu94B5XrngUslCmzCqX7HNB/mNHkR831QaTMuxDLVCUHtU+p63WaKjxsXKbu5NPR7sqn
+	vRlE89Xl/cqFqEaAGaRmOzBWFr2qqgHm+KYj8z/9gcES8HPd/ccnRr4gomszH34EoAn59hv4i2ceo
+	/mOn+PLg==;
+Received: from ip6-localhost ([::1]:64438 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lmju6-0058Hv-Cx; Fri, 28 May 2021 21:20:26 +0000
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:42831) 
+	id 1lmvhV-005AiM-Ab; Sat, 29 May 2021 09:56:13 +0000
+Received: from ozlabs.org ([203.11.71.1]:41661) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lmjtw-0058Hk-Rk
- for samba-technical@lists.samba.org; Fri, 28 May 2021 21:20:23 +0000
-Received: by mail-ed1-x52f.google.com with SMTP id i13so6323367edb.9
- for <samba-technical@lists.samba.org>; Fri, 28 May 2021 14:20:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ixsystems.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ctllRNxmpaY8x6Kard0VgAmnz2Vfd3y1mzzjQYQmiCo=;
- b=TpyvyxLZqyFZR6qv3xWHX0L/sJkJXjyZ8IHBYAm1000sIOhb96Bp5haN2VTxQQS8li
- rPsM9Eg43tWXuRNmrHTPLrbEfPDmhX2WxV7mS8S/jR348LWrMte9aXh9NGljeFdKZYDp
- XBPMgOh6159BYQAd3TCNFWmFpTXyyyRyoWSViYVoyZSK2UquxMPspAcVZDaXt2lrYhdX
- NXASLmCBLxsAQVuQAyBcypZVfbkjSgUElbalYg/ePIWRb+J3aGigGCMUM3jO4dUS+V9c
- +TfHaoP58jFQRyRunyjqcL+GziM6M+kORWe/lLzRmaL+mXFsSTYOubC62jlPsit+gMj+
- C5gw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ctllRNxmpaY8x6Kard0VgAmnz2Vfd3y1mzzjQYQmiCo=;
- b=Ktu78mlBW6iRSD21Afyx4p2z07DzkmQBdAmd0U/aJY2IxrX1Y0bw2EZCk0L6ez82Oh
- HGzca5WYf5DogbhKcaY1gRHylJsZtMZgayRkx0ccbvY4HcocWG9oAi8zd2Sal/mKCh/R
- EKeLPwAyx2SytUg6oc2qfgrUTgoGRHDZRbUUINwdtxsIHn/3ys0HxcE4ZwnWyg4IAzip
- C4cMmwraj4Em5TTg/ZRXmByhBBKNmQ5HhHT/68YHYt/5rdxR2T2hMVGjL8F2vkhSwSW8
- TxMXlopmkUEgIXeyLx66AMjuKoHuipnPwsTcp3DnC7M7eAk5YHMyRXz97KLPS/3fdjqV
- 10AA==
-X-Gm-Message-State: AOAM530ENBwntUjCQeX8nv+xoHsU/QC38UqDSzosUu7JYYzPTE/2mz/6
- 9W9Ik754W0e2z5K4YrziIPFNmZLR1bVHC+T/psp6Lg==
-X-Google-Smtp-Source: ABdhPJwMuEhfV3cO9bgr+/C6NMmbgL0Ti1QsiYDnc64hQ0sE7DAldXVewLzZ2sgLzrVBoGQUCn1SUbdgPeH0zkvsad8=
-X-Received: by 2002:a05:6402:40d0:: with SMTP id
- z16mr12252225edb.104.1622236813417; 
- Fri, 28 May 2021 14:20:13 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAB5c7xqUC9mZ8-VFDmM44b=EL49yBiWkMikf8BWgU0FjC+25MA@mail.gmail.com>
- <cf23d39b-a13b-a9fb-64b1-e5094a4336e5@catalyst.net.nz>
- <CAB5c7xqp3uEaWgFmYr4vtqwN6og-ii-JhizxZZ9qKL3-tkTPyQ@mail.gmail.com>
- <ff479fe2-c8b7-f220-7a97-f1f4e80db852@samba.org>
-In-Reply-To: <ff479fe2-c8b7-f220-7a97-f1f4e80db852@samba.org>
-Date: Fri, 28 May 2021 17:20:02 -0400
-Message-ID: <CAB5c7xosYmHkn7VE=GhZuRuPJ=06dSCuS1payA2wRTvfUKe21Q@mail.gmail.com>
+ (Exim) id 1lmvhM-005AiC-Gx
+ for samba-technical@lists.samba.org; Sat, 29 May 2021 09:56:10 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4FscPg6nXkz9sVb;
+ Sat, 29 May 2021 19:55:51 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=meltin.net; s=202004;
+ t=1622282152; bh=sNP6a31nl1nQwufnZqkzipdOpYv4ZxEOJGIfnJZ4ZhQ=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=lYLwkzdmCzDWZpsqeCC2TuaxqZUDYnNCfTWIXLtW5sGgXIvfolIW6xYfhBjGaj7r2
+ cWwGB7nO5C9g7TY8vUQ3DtgFvFGUgavrLLdD2H8BxPz0Gnv35WoO7m7+1oSonPaP1D
+ CgnwM2FjACuF2qAEujgKgIQsXEPXwicsiTJZFC31ot7TO+iYFvyGHPzO3jPhj09IQz
+ ukLGWczccfdvvUwTRK4ixpnPQrTXXk5PajQs2UG1zWvDuMG7oII3puCHFdG1z5wPmN
+ IxirxlZM7U3J1oBEuAQ4bC9CaMQg4ipR0NwR0yGAJDlaz75BsRGJlsAO8xi/yI3B3g
+ H7dD6j2ND3DdQ==
+Date: Sat, 29 May 2021 19:55:50 +1000
+To: Andrew Walker <awalker@ixsystems.com>
 Subject: Re: JSON input / output for CLI utilities
-To: Ralph Boehme <slow@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Message-ID: <20210529195550.3dc109c0@martins.ozlabs.org>
+In-Reply-To: <CAB5c7xqUC9mZ8-VFDmM44b=EL49yBiWkMikf8BWgU0FjC+25MA@mail.gmail.com>
+References: <CAB5c7xqUC9mZ8-VFDmM44b=EL49yBiWkMikf8BWgU0FjC+25MA@mail.gmail.com>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,38 +57,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Walker <awalker@ixsystems.com>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, May 28, 2021 at 11:15 AM Ralph Boehme <slow@samba.org> wrote:
+Hi Andrew,
 
-> Am 28.05.21 um 17:10 schrieb Andrew Walker via samba-technical:
-> > Should we have version strings for all the JSON output generated by
-> > utilities?
->
-> yes please.
->
-> -slow
->
-> --
-> Ralph Boehme, Samba Team                https://samba.org/
-> Samba Developer, SerNet GmbH   https://sernet.de/en/samba/
-> GPG-Fingerprint   FAE2C6088A24252051C559E4AA1E9B7126399E46
->
->
-I was thinking of something like this:
-```
-root@:/usr/ports/net/samba # net --json groupmap add data='{"nt_name":
-"smbuser", "gid": 1000}'
-{"version": {"major": 1, "minor": 0}, "groupmap": [{"nt_name": "smbuser",
-"sid": "S-1-5-21-3928159180-3161166842-2405926743-1005", "gid": 1000,
-"group_type_int": 2}]}
-```
+On Thu, 27 May 2021 17:42:20 -0400, Andrew Walker via samba-technical
+<samba-technical@lists.samba.org> wrote:
 
-Basically, have the json-input variety for adding a new groupmap entry
-print what actually got added in JSON on stdout. It's probably better
-because scripts may send incomplete information, but may benefit from
-knowing what SID they received.
+> I know we've added JSON output to a few of the CLI utils. Over the past
+> year or so I've added this to various utils in FreeNAS (using libjansson).
+> Is there an overall strategy for this? I'd be happy to upstream what I have.
+
+Sounds good!
+
+> Also is there an effort to add support for JSON input to them?
+
+Your effort appears to be it!  Thanks for that!  :-)
+
+One wishlist item to think about... and my example is for CTDB...  :-)
+
+If adding JSON output and, perhaps, input it would cool to have the
+command-line tools be able to run in a mode where they stay connected
+to the relevant Unix domain socket.  The most useful example would
+allow "ctdb statistics" to be repeatedly run within the one session, so
+a reporting tool can periodically collect the output without the need
+to reconnect.
+
+This could go hand-in-hand with addition of an interactive mode on
+tools that don't have one (e.g. "ctdb").
+
+If this is an interesting idea then I'm happy to try to work on that
+with you in whatever time I have available...
+
+peace & happiness,
+martin
+
