@@ -2,57 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E977039CAFE
-	for <lists+samba-technical@lfdr.de>; Sat,  5 Jun 2021 22:47:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7967239CB06
+	for <lists+samba-technical@lfdr.de>; Sat,  5 Jun 2021 22:51:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=4cStJ2sFpNIdNUI9DcsT/mkiPPlBZuyp5QLWw6imaYc=; b=RmK2FtLIkZJ9yh4Djg24JMU/1u
-	RLRXuMDlKt/i0E847kXdtE3Xd3n9xRk2QlSm/W00dnOVUvxy7CFbaelPXFNdOcMletLO7sMv1QE2I
-	UPneoExb9D3Ub5xKlHW5FrrSxZf4ML01V36xkIACHHgOoZ1cn8/GKXFT4Olv0iqTEUEyGu8ItpmBi
-	xZ4QT/MeSm1UIh+4aKgqEx/ximcT/pkz71D52C70WgSp36k/xa98N423XMRSw+mym1U27uUCugQVp
-	tB8JuUtkUCu/UEqMRWytCAR3wkwZBVfKgT/ubxOxv+VEVCLFBPT3G8hdjLuC/5cAPu9PonPrV51Xd
-	gi1ei0vA==;
-Received: from ip6-localhost ([::1]:23324 helo=hr1.samba.org) 
+	bh=NeucVVYBqR4NtptCPVit6uqG78d6Me8sFT/5HJOioMM=; b=LY5v+HsZDukZ4WB5/4sLMQ9xIP
+	T1SDxTLcO/aCmvsKIS+er6tuB6MtclAr/yhkTvxIoe37+gEzRF2rMvjtdFQetuyokdm/U4OAhpeFt
+	09TX625TEQY211B91X4ee67Gs0ww30lg4dGOQU0xKIqcZVUxDb+v8UUy1ILE9FZT29Kkhz0BvCLWx
+	AcebHaLetwPAdZiLtYb5ON2qDNh3qItBoqzIxPEMSPkf/fDRDUz0/+3A500zTl19XMADAnav1Ou+P
+	Afx4QuODNrAytkWvYwlLuax2hsDSvyUeAfkPby5SQWBxVsIPmEFCZMJ+XgjdG3jfiyUqOPpsWXcfI
+	qqP0Xolg==;
+Received: from ip6-localhost ([::1]:24026 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lpdCW-003lbk-DH; Sat, 05 Jun 2021 20:47:24 +0000
-Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229]:41515) 
+	id 1lpdGb-003luV-5k; Sat, 05 Jun 2021 20:51:37 +0000
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130]:42854) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lpdCR-003lbb-Nw
- for samba-technical@lists.samba.org; Sat, 05 Jun 2021 20:47:21 +0000
-Received: by mail-lj1-x229.google.com with SMTP id z22so372751ljh.8
- for <samba-technical@lists.samba.org>; Sat, 05 Jun 2021 13:47:19 -0700 (PDT)
+ (Exim) id 1lpdGV-003luM-Kt
+ for samba-technical@lists.samba.org; Sat, 05 Jun 2021 20:51:34 +0000
+Received: by mail-lf1-x130.google.com with SMTP id a2so19447012lfc.9
+ for <samba-technical@lists.samba.org>; Sat, 05 Jun 2021 13:51:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=4cStJ2sFpNIdNUI9DcsT/mkiPPlBZuyp5QLWw6imaYc=;
- b=QtESuXB0PtZjtH++S1RRH4E4aeMpqIog64vtVlivI9L5aWQy/NYlOY0JA49Iw+7ruB
- BKExjUaGCxe5wpVFe4rgQ6s40cHFz+q7wkvol2BmHb3EvlPjfIu87j/ew8qM4sFSHXSc
- yC10oxqRrzS8ZjSaNB30O90jVXqqgrRdON695OlQI517wLSAS2GcZ1dJF1ZBDlWMnlHR
- myxj5iUt44PiHPs1Vak4acZiER0POYz0P+v+h2iFXFhBJJOFo8VPUowU2ACZUdn+yF8I
- MY+OzIQ094gBxShy3RU0hIjXRrdAmR7xOuctFT1Uwkel6tZpZ/hZj/6SXEisjciQfltf
- BTsw==
+ :cc; bh=NeucVVYBqR4NtptCPVit6uqG78d6Me8sFT/5HJOioMM=;
+ b=UfZ4Y7S5wJzmo3KdhQjAWo1UGVea5AGtbObSBCNksHi9GeZ4EqgAOCYZuHrxpi2ZJm
+ 2lLEwjhagfvssQnvzTqEW4Yl0o4LV1/919zs5jo1jviyRzGo1oyPqv/Bk7HJj6BmlMIw
+ AR5LCiMhWuxQs1ePGaWgJ5cVfOBALYWL16whSOI/NAOvnYwC9ym2AAT5xIHGU8Yw5DIQ
+ 4neDdEWkWHEBjAoCz1i5Yu/jKicm5QYom+uIlaiodv0uRPnzUGkzmHBMwgPpHcX2QGvX
+ gJGBaAaDK49yi2XUb8ZWNX3JMMqYXfyZQMYfOgR4w7HZcCcNR/jYsfb0DK5J3VU7WSJB
+ 3/oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=4cStJ2sFpNIdNUI9DcsT/mkiPPlBZuyp5QLWw6imaYc=;
- b=rgA2V8/gq8miOtJy8XfuY8zJzBhXBJ2C49ioA5cjnD3ykoYDEnIEbu2Ia5btHMoLNe
- /uyY1MIdFT6MNM1ku5riuHZjIN1UXjYW77r0lv5WRD2yHbnxBUKarWmKwc/Gt7GPwKK5
- /ssmYxbIr7MPO0lgN/bQuW3za/YpSOZqGvfvzfebO87I2waNkxzaGIA382VxS+lN02MT
- 8ozTJ9KWr3aFPPvGuu6i0F3peo/82j0az/nVr77zJchkWQkDYWofqeSzwIRu59EciMp4
- 8rudWpiPwkoJ338j94tNzDIo8zFS1sjAXPSRp93LYylh/eW06roK8UnfCLU2GeVwGC/a
- 0j7A==
-X-Gm-Message-State: AOAM531Vmu4gesCnpyfcu7HRpg8Mf32+F2+702ISAIj/2oX4af0na2G2
- FLzRjNki4f9wyStyBb43VoTUbYeMH/VvEA4UUgI=
-X-Google-Smtp-Source: ABdhPJx8RG63VVbd8Ot5eXuzN6ZGihtg29eGHWgc2Ip+SPl7/7Ys16S0wZ78B06DRVQgEfhazZNZsB91mSc4gmxKiIk=
-X-Received: by 2002:a2e:9a87:: with SMTP id p7mr3598873lji.477.1622926038656; 
- Sat, 05 Jun 2021 13:47:18 -0700 (PDT)
+ bh=NeucVVYBqR4NtptCPVit6uqG78d6Me8sFT/5HJOioMM=;
+ b=n5zOgQudI1+1v7h30QtVnwOTh6dtTsX/Dn/tb+rvFmPfQCZXatWABKVBNa1gb6y3G0
+ fXLrChpoEEnUb8aKZxS0AqBw/AkALek0q5yB6tV9HJZ+nprlWKydWSxqzSv0KKHd0izr
+ 220iAJ8CSLj4dc31qXPcz1n7Na45sk3KSLfAPlh9vgMVa0f4Rtfjrak69m2BpXp4sqCB
+ IjJyWGS5GEZhqYedgV+8yMgyQ0Ko1pozDX50JEK8vCxfqrTdWsomyNrrY55stY5eVWop
+ 6xhpAyeNTC3rn8EaXFF3tpAfD7pVCrDk8urg1rxCd9zTnItR/eYy1iKR1JzNDoD8kww2
+ I83w==
+X-Gm-Message-State: AOAM530/XaVtLI37jwUTpct+7CQDeioTjmnnNxMkREaMmm83quFRDDuv
+ UXM7vIa5ERxvuiriYTgM7slClnCp1vU2s12tDFI=
+X-Google-Smtp-Source: ABdhPJyaUmu4mJHf+r5EO7tRZFWoqjozfEnvSWdk9NCAhRrVk4dbn75NWh5kpQIuUY6no0ANnljhmpkNOeAmaKpllUg=
+X-Received: by 2002:a05:6512:b17:: with SMTP id
+ w23mr6565422lfu.133.1622926290273; 
+ Sat, 05 Jun 2021 13:51:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210526203545.13160-1-rikard.falkeborn@gmail.com>
-In-Reply-To: <20210526203545.13160-1-rikard.falkeborn@gmail.com>
-Date: Sat, 5 Jun 2021 15:47:07 -0500
-Message-ID: <CAH2r5muYv=tMkkX2bV0W3OU7Z8GLPwiekh_6D0pPQp+ybhmuMQ@mail.gmail.com>
-Subject: Re: [PATCH] cifs: Constify static struct genl_ops
-To: Rikard Falkeborn <rikard.falkeborn@gmail.com>
+References: <CA+G9fYsnWUYuahxv3+vQx3UQ_CvJ5caiQwb7BXEuDGxPjmrM1w@mail.gmail.com>
+In-Reply-To: <CA+G9fYsnWUYuahxv3+vQx3UQ_CvJ5caiQwb7BXEuDGxPjmrM1w@mail.gmail.com>
+Date: Sat, 5 Jun 2021 15:51:19 -0500
+Message-ID: <CAH2r5msKk8=6msSYpUHJftKuV9zq15ptME4MHBNacc4FXb9iUQ@mail.gmail.com>
+Subject: Re: [next] fs: cifsglob.h:955:20: error: passing argument 2 of
+ 'test_bit' from incompatible pointer type
+To: Naresh Kamboju <naresh.kamboju@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -69,42 +71,91 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
+Cc: CIFS <linux-cifs@vger.kernel.org>, Stephen Rothwell <sfr@canb.auug.org.au>,
  samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Samuel Cabrero <scabrero@suse.de>
+ open list <linux-kernel@vger.kernel.org>, lkft-triage@lists.linaro.org,
+ Steve French <sfrench@samba.org>,
+ Linux-Next Mailing List <linux-next@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+Probably was reported earlier and this code has been changed.  The
+multichannel patches are also temporarily removed from for-next while
+Shyam is doing some fixes to the series.
 
-On Wed, May 26, 2021 at 4:06 PM Rikard Falkeborn
-<rikard.falkeborn@gmail.com> wrote:
+On Fri, Jun 4, 2021 at 4:23 AM Naresh Kamboju <naresh.kamboju@linaro.org> wrote:
 >
-> The only usage of cifs_genl_ops[] is to assign its address to the ops
-> field in the genl_family struct, which is a pointer to const. Make it
-> const to allow the compiler to put it in read-only memory.
+> The following builds failed on Linux next-20210604 due to warnings / errors.
 >
-> Signed-off-by: Rikard Falkeborn <rikard.falkeborn@gmail.com>
-> ---
->  fs/cifs/netlink.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>   - arm (s3c2410_defconfig) with gcc- 8 / 9 / 10
+>   - parisc (defconfig) with gcc-8 / 9 / 10
+>   - powerpc (ppc6xx_defconfig) with gcc- 8 / 9 /10
 >
-> diff --git a/fs/cifs/netlink.c b/fs/cifs/netlink.c
-> index 5aaabe4cc0a7..291cb606f149 100644
-> --- a/fs/cifs/netlink.c
-> +++ b/fs/cifs/netlink.c
-> @@ -30,7 +30,7 @@ static const struct nla_policy cifs_genl_policy[CIFS_GENL_ATTR_MAX + 1] = {
->         [CIFS_GENL_ATTR_SWN_RESOURCE_NAME]      = { .type = NLA_STRING},
->  };
+> In file included from fs/cifs/transport.c:38:
+> fs/cifs/transport.c: In function 'cifs_pick_channel':
+> fs/cifs/cifsglob.h:955:20: error: passing argument 2 of 'test_bit'
+> from incompatible pointer type [-Werror=incompatible-pointer-types]
+>   955 |  test_bit((index), &(ses)->chans_need_reconnect)
+>            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>            |
+>            size_t * {aka unsigned int *}
+> fs/cifs/transport.c:1065:7: note: in expansion of macro
+> 'CIFS_CHAN_NEEDS_RECONNECT'
+>  1065 |   if (CIFS_CHAN_NEEDS_RECONNECT(ses, index))
+>       |       ^~~~~~~~~~~~~~~~~~~~~~~~~
+> In file included from arch/powerpc/include/asm/bitops.h:193,
+>                  from include/linux/bitops.h:32,
+>                  from include/linux/kernel.h:12,
+>                  from include/linux/list.h:9,
+>                  from include/linux/wait.h:7,
+>                  from include/linux/wait_bit.h:8,
+>                  from include/linux/fs.h:6,
+>                  from fs/cifs/transport.c:23:
+> include/asm-generic/bitops/non-atomic.h:104:66: note: expected 'const
+> volatile long unsigned int *' but argument is of type 'size_t *' {aka
+> 'unsigned int *'}
+>   104 | static inline int test_bit(int nr, const volatile unsigned long *addr)
+>                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+> cc1: some warnings being treated as errors
+> make[3]: *** [scripts/Makefile.build:272: fs/cifs/transport.o] Error 1
+> fs/cifs/sess.c: In function 'cifs_chan_set_need_reconnect':
+> fs/cifs/sess.c:98:22: error: passing argument 2 of 'set_bit' from
+> incompatible pointer type [-Werror=incompatible-pointer-types]
+>    98 |  set_bit(chan_index, &ses->chans_need_reconnect);
+>              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+>              |
+>              size_t * {aka unsigned int *}
 >
-> -static struct genl_ops cifs_genl_ops[] = {
-> +static const struct genl_ops cifs_genl_ops[] = {
->         {
->                 .cmd = CIFS_GENL_CMD_SWN_NOTIFY,
->                 .validate = GENL_DONT_VALIDATE_STRICT | GENL_DONT_VALIDATE_DUMP,
+>
+> Reported-by: Naresh Kamboju <naresh.kamboju@linaro.org>
+>
+> Full build log:
+> https://gitlab.com/Linaro/lkft/mirrors/next/linux-next/-/jobs/1317929765#L247
+>
+> Steps to reproduce:
+> -----------------------------
+>
+> # TuxMake is a command line tool and Python library that provides
+> # portable and repeatable Linux kernel builds across a variety of
+> # architectures, toolchains, kernel configurations, and make targets.
+> #
+> # TuxMake supports the concept of runtimes.
+> # See https://docs.tuxmake.org/runtimes/, for that to work it requires
+> # that you install podman or docker on your system.
+> #
+> # To install tuxmake on your system globally:
+> # sudo pip3 install -U tuxmake
+> #
+> # See https://docs.tuxmake.org/ for complete documentation.
+>
+> tuxmake --runtime podman --target-arch arm --toolchain gcc-8 --kconfig
+> s3c2410_defconfig
+>
+>
 > --
-> 2.31.1
->
+> Linaro LKFT
+> https://lkft.linaro.org
+
 
 
 -- 
