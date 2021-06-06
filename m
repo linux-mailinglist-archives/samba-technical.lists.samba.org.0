@@ -2,58 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A17F739CB86
-	for <lists+samba-technical@lfdr.de>; Sun,  6 Jun 2021 00:51:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B330B39CDDA
+	for <lists+samba-technical@lfdr.de>; Sun,  6 Jun 2021 09:13:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=H+BwRFKEaOTj0KfJC1K2XC7hYu1ZJUBnpyN02ZeDDi0=; b=jTG8Q9PNiX08e49fvX1733mHuw
-	RM/lr6d337MD7tE4qcmXhheqOsMM404RLMNbM2sC/ylGLV4mdsmwNMVW4NcqocxdFQOCzBFCp5m99
-	E9RLRV9QQ/gk+GTg3olUbd2kexekAEMRGLUwPlaKRUaAImTl/aa8vosREMtKLBRh7KguiN3P418so
-	v23jYczJo8xPov/mEwu+v8GshEBzcayXLY0QYp8NVnXzdSNCYLatBjpPR1rnkCVtctswHJ+oM/Tdl
-	sZ5uZh/9TOk5poJO7yyZ1Me02rVtqzdDPDDQGc53IFSyBQliaSEVoF8HzVGSOj2777m76a/5txSEe
-	mk6HdYlw==;
-Received: from ip6-localhost ([::1]:26952 helo=hr1.samba.org) 
+	bh=OYUBaFTtK+hSWoXiQvsgH4XcUXMu7PaFHiMery0yLvQ=; b=nFqM9CFSDV6cft5cuiwdIxUB9p
+	eR7BeFigSsRyhtc5DDa6+d92Dt4ROYNx3knCuJBc/ll0uQBzPalH95KtmrBjsNTNgQRdNKGzaH1G+
+	YCfT0bo1kOFfxIxWUXyBDWSPcN5a3Izpz3S3kGJIJOLuPB+hR8Dfji6gh2oJ7JLvAcztXj4DRDxzn
+	Y0MkyOxJx2BrkEk04bj8cG+ZET3QLmMn23VaIQG5xlAZAT3l/jtc+2kIyWQPiiYtVIdo+LPKAMAR7
+	YepYO1XSs+HcgnD/StPQFyk/AWbidYgTLDm1zpgGNlSk3li9sDM4E+/HF7z4TAtTVhdntTNUFn84R
+	Los5wSUg==;
+Received: from ip6-localhost ([::1]:34492 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lpf7t-003nOu-Ji; Sat, 05 Jun 2021 22:50:45 +0000
-Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a]:34633) 
+	id 1lpmxM-003s13-Bh; Sun, 06 Jun 2021 07:12:25 +0000
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134]:35620) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lpf7l-003nOl-Kv
- for samba-technical@lists.samba.org; Sat, 05 Jun 2021 22:50:41 +0000
-Received: by mail-lf1-x12a.google.com with SMTP id f30so19759605lfj.1
- for <samba-technical@lists.samba.org>; Sat, 05 Jun 2021 15:50:36 -0700 (PDT)
+ (Exim) id 1lpmwn-003s0u-0n
+ for samba-technical@lists.samba.org; Sun, 06 Jun 2021 07:11:54 +0000
+Received: by mail-lf1-x134.google.com with SMTP id i10so20815796lfj.2
+ for <samba-technical@lists.samba.org>; Sun, 06 Jun 2021 00:11:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=H+BwRFKEaOTj0KfJC1K2XC7hYu1ZJUBnpyN02ZeDDi0=;
- b=nfMiisot2sIfgJgf/8JgzOUigoAA3zNQ0tQcJZ8KPySFtRenPl8+XloQug/wn7psUf
- efd9Db9eiWRP7xnqJ+mZC/SwRcLTgi2m5ApVQyauCriNwYKOqpFfkITbUqFusJaILZMj
- 0fkcIb8nQO6lf90yl4WKssVdgtP8/ubIcLszQ6e66XU4DXnLagc5SLnKnfCwfsh1BDYy
- DXjT+FOPViYHFJEvV8s/3DlR4bRpkOl8jVtWJCgqR1lucohhqekfdy9ZrcHQQzkhCWyJ
- t1wHBxtgw2Sw15eOQ03jvZ0+Yfp9x1vF6TJFtY8dxrBhIUFYQTlwNgxLK3n2bjimV0I4
- KBsw==
+ :cc:content-transfer-encoding;
+ bh=OYUBaFTtK+hSWoXiQvsgH4XcUXMu7PaFHiMery0yLvQ=;
+ b=G0ckF4oyFz614Zv/Dvkwkgj+p2QhnN3eTmyGFIRWfUjl+GJZiMd305edbeGhL9ZqgN
+ 2DZAch6QSJxWxpaaH7+X2qeI/U7aFsOeXoCtdMAHC76uvOsebNZfMvxYy4FztU/+kXyr
+ vG4O/dxrbntpJaZIBntx+hMlhA/NDmRDKrocXoH4w7kV+RdwisrAlL79acL7T6BXhuyI
+ cyxQfRDAw8PpybveOqSYEgm7TTD6P9gVgmwvt/l0J5ENdEBo/trdoR6sRG4pBQ97KsRp
+ tja2Z0ysbwVCtDkybuML5qK9St3yV84k0ll+6/Rg6u909N7bfW2oavfnST/mjA+Owa/D
+ l4yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=H+BwRFKEaOTj0KfJC1K2XC7hYu1ZJUBnpyN02ZeDDi0=;
- b=FQC85LmHcLnFpuxXkKotq1F78B13dMA4taonAlbQU6m/xot1FKeFJcm5iPa1WEteQ/
- hjAgsM0yaJJryv+FesUgKe57g/AE4w8JE4v6vqAHNtdGw+e9f1Bdl9a94iTF/HR4+Oc5
- j/1fDRU4nzxQvRqRLqP4h7lJH4SDnf/aZQICKJL77ABmMCPKnXS1iSIO/6ASPysX/nrJ
- PQaed/S0tvo5qNvWC1VhGU/1L6c1wj5XQwIKQEVtlYP48aSjgvuZpWJOfsPSnTttDSk2
- QLg0NDtqUMWsq7MOWBw/PUuDinBwPZAWDEF2ejxLD2+rrow8Kg4/c0vhsIbdAJcxL6MS
- 9jlw==
-X-Gm-Message-State: AOAM5333aY397vwHkuW+qXjdIxqo9y9lcT9nbZxUNoqSl6ArxeRcbKqZ
- HV3B57Kdklgaw0hGdRwcf1SSUZjt7Pel3Lb5jxQ=
-X-Google-Smtp-Source: ABdhPJypOAFOK6YJ0ncnTQJf5nql8IkvPtGAOJI6uP+ddWMtjUc9lU9KV0xfV3LrmB3yrQt2HcPgZ7QDrn5xVsz1nlo=
-X-Received: by 2002:ac2:414f:: with SMTP id c15mr7207305lfi.307.1622933436039; 
- Sat, 05 Jun 2021 15:50:36 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=OYUBaFTtK+hSWoXiQvsgH4XcUXMu7PaFHiMery0yLvQ=;
+ b=TC6Pk/5HruQ7VCp1O+ckMkSPO7fHZ8CI30YEALsXq9UFoo/qBRHy4Lmu1JbdNclmB0
+ UkTHcaTMnWSsOzCBQPUYPduI/juWrptMLQtiKjuXpuzW01yjazzFeKWcDkdnPFvQQFVx
+ bTtwBRLknHsUF0GJ3Jm7qAG4OT/StYXhmAQzhNdQ50mP82MC6jqvTqJjyyOIFLk+6uzN
+ /Dejt5cGnAKCI4AEsqtETJepp32Ph6lwKW6hJk3jw3O17Cy84DPfcVV50qoWc0wh9TMp
+ Uwly+ldd3VN9WaeumgmTPL7fxkyLCy0/+rlKGLcv+ElJYDYVft3I73/1zLGHxtzEXt5R
+ 7/uQ==
+X-Gm-Message-State: AOAM533EUV602UHVF9ghJnvgOryz8teFXXxszXKtx44yIo0WOP3zspjx
+ utWiY8jQjK+TN6SvXpqv+1YmBuyrrQ37AV3hxa0=
+X-Google-Smtp-Source: ABdhPJwKFm7SxWBvxRiwzPrgChhDA3I2AWuhkNLwn+iuboXSnKDMkNeZmcV39uJ59pQpOSymz99eAPw8bVi617m4lwk=
+X-Received: by 2002:a05:6512:39cb:: with SMTP id
+ k11mr8212093lfu.313.1622963507102; 
+ Sun, 06 Jun 2021 00:11:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210523032853.90909-1-hyc.lee@gmail.com>
-In-Reply-To: <20210523032853.90909-1-hyc.lee@gmail.com>
-Date: Sat, 5 Jun 2021 17:50:24 -0500
-Message-ID: <CAH2r5mvhgAH11mQiBOQ2AVBwEKLqVNsMzWeEPwOrLfx_DRMnXQ@mail.gmail.com>
-Subject: Re: [PATCH v3] cifs: decoding negTokenInit with generic ASN1 decoder
+References: <20210606010608.105516-1-hyc.lee@gmail.com>
+In-Reply-To: <20210606010608.105516-1-hyc.lee@gmail.com>
+Date: Sun, 6 Jun 2021 02:11:36 -0500
+Message-ID: <CAH2r5msL2QGZbU6scDVPyWTD+iXBbZ9h2Py4Nk_9EjgPXHx=kg@mail.gmail.com>
+Subject: Re: [PATCH v4] cifs: decoding negTokenInit with generic ASN1 decoder
 To: Hyunchul Lee <hyc.lee@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,15 +79,59 @@ Cc: David Howells <dhowells@redhat.com>, CIFS <linux-cifs@vger.kernel.org>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I get an error building with your patch.  Is it missing something?
+"make M=3Dfs/cifs"  from the top of the kernel tree worked, but my usual
+script failed
 
-  CC [M]  fs/cifs/asn1.o
-fs/cifs/asn1.c:9:10: fatal error: spnego_negtokeninit.asn1.h: No such
-file or directory
-    9 | #include "spnego_negtokeninit.asn1.h"
-      |          ^~~~~~~~~~~
+"cd fs/cifs"
+then
+"make C=3D1 -C /usr/src/linux-headers-`uname -r` M=3D`pwd` modules
+CF=3D-D__CHECK_ENDIAN__"
 
-On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
+failed with (even after generating the files with the "make M=3Dfs/cifs" ea=
+rlier):
+
+ASN.1   /home/smfrench/cifs-2.6/fs/cifs/spnego_negtokeninit.asn1.[ch]
+  CC [M]  /home/smfrench/cifs-2.6/fs/cifs/asn1.o
+/home/smfrench/cifs-2.6/fs/cifs/asn1.c: In function =E2=80=98gssapi_this_me=
+ch=E2=80=99:
+/home/smfrench/cifs-2.6/fs/cifs/asn1.c:28:13: error: =E2=80=98OID_spnego=E2=
+=80=99
+undeclared (first use in this function)
+   28 |  if (oid !=3D OID_spnego) {
+      |             ^~~~~~~~~~
+/home/smfrench/cifs-2.6/fs/cifs/asn1.c:28:13: note: each undeclared
+identifier is reported only once for each function it appears in
+/home/smfrench/cifs-2.6/fs/cifs/asn1.c: In function =E2=80=98neg_token_init=
+_mech_type=E2=80=99:
+/home/smfrench/cifs-2.6/fs/cifs/asn1.c:47:13: error: =E2=80=98OID_mskrb5=E2=
+=80=99
+undeclared (first use in this function); did you mean =E2=80=98OID_md5=E2=
+=80=99?
+   47 |  if (oid =3D=3D OID_mskrb5)
+      |             ^~~~~~~~~~
+      |             OID_md5
+/home/smfrench/cifs-2.6/fs/cifs/asn1.c:49:18: error: =E2=80=98OID_krb5u2u=
+=E2=80=99
+undeclared (first use in this function)
+   49 |  else if (oid =3D=3D OID_krb5u2u)
+      |                  ^~~~~~~~~~~
+/home/smfrench/cifs-2.6/fs/cifs/asn1.c:51:18: error: =E2=80=98OID_krb5=E2=
+=80=99
+undeclared (first use in this function)
+   51 |  else if (oid =3D=3D OID_krb5)
+      |                  ^~~~~~~~
+/home/smfrench/cifs-2.6/fs/cifs/asn1.c:53:18: error: =E2=80=98OID_ntlmssp=
+=E2=80=99
+undeclared (first use in this function)
+   53 |  else if (oid =3D=3D OID_ntlmssp)
+      |                  ^~~~~~~~~~~
+make[1]: *** [scripts/Makefile.build:272:
+/home/smfrench/cifs-2.6/fs/cifs/asn1.o] Error 1
+make: *** [Makefile:1845: /home/smfrench/cifs-2.6/fs/cifs] Error 2
+make: Leaving directory
+'/usr/src/linux-headers-5.13.0-051300rc3daily20210526-generic
+
+On Sat, Jun 5, 2021 at 8:07 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 >
 > Decode negTokenInit with lib/asn1_decoder. For that,
 > add OIDs in linux/oid_registry.h and a negTokenInit
@@ -96,19 +143,21 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 >
 > Signed-off-by: Hyunchul Lee <hyc.lee@gmail.com>
 > ---
+> changes from v3:
+>  - Change Makefile to fix a compile error, "spnego_negtokeninit.asn1.h: N=
+o such file or directory".
 > changes from v2:
->  - Change Makefile to fix a compile error (kernel test bot).
->  - Add cifsproto.h into asn1.c to fix a compile warning
->    (kernel test bot).
-> changes from v1:
+>  - Change Makefile to fix a compile error(kernel test bot).
+>  - Add cifsproto.h into asn1.c to fix a compile warning(kernel test bot).
+> chnages from v1:
 >  - Select CONFIG_OID_REGISTRY
 >
 >  fs/cifs/Kconfig                  |   2 +
->  fs/cifs/Makefile                 |   6 +-
+>  fs/cifs/Makefile                 |   8 +-
 >  fs/cifs/asn1.c                   | 623 ++-----------------------------
 >  fs/cifs/spnego_negtokeninit.asn1 |  40 ++
 >  include/linux/oid_registry.h     |   8 +
->  5 files changed, 91 insertions(+), 588 deletions(-)
+>  5 files changed, 93 insertions(+), 588 deletions(-)
 >  create mode 100644 fs/cifs/spnego_negtokeninit.asn1
 >
 > diff --git a/fs/cifs/Kconfig b/fs/cifs/Kconfig
@@ -122,29 +171,37 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > +       select ASN1
 > +       select OID_REGISTRY
 >         help
->           This is the client VFS module for the SMB3 family of NAS protocols,
->           (including support for the most recent, most secure dialect SMB3.1.1)
+>           This is the client VFS module for the SMB3 family of NAS protoc=
+ols,
+>           (including support for the most recent, most secure dialect SMB=
+3.1.1)
 > diff --git a/fs/cifs/Makefile b/fs/cifs/Makefile
-> index 3ee3b7de4ded..002963b0b4dc 100644
+> index 3ee3b7de4ded..9d877eafd350 100644
 > --- a/fs/cifs/Makefile
 > +++ b/fs/cifs/Makefile
-> @@ -5,13 +5,15 @@
->  ccflags-y += -I$(src)          # needed for trace events
->  obj-$(CONFIG_CIFS) += cifs.o
+> @@ -6,12 +6,16 @@ ccflags-y +=3D -I$(src)         # needed for trace even=
+ts
+>  obj-$(CONFIG_CIFS) +=3D cifs.o
 >
-> +$(obj)/spnego_negtokeninit.asn1.o: $(obj)/spnego_negtokeninit.asn1.c $(obj)/spnego_negtokeninit.asn1.h
-> +
->  cifs-y := trace.o cifsfs.o cifssmb.o cifs_debug.o connect.o dir.o file.o \
-> -         inode.o link.o misc.o netmisc.o smbencrypt.o transport.o asn1.o \
+>  cifs-y :=3D trace.o cifsfs.o cifssmb.o cifs_debug.o connect.o dir.o file=
+.o \
+> -         inode.o link.o misc.o netmisc.o smbencrypt.o transport.o asn1.o=
+ \
 > +         inode.o link.o misc.o netmisc.o smbencrypt.o transport.o \
 >           cifs_unicode.o nterr.o cifsencrypt.o \
 >           readdir.o ioctl.o sess.o export.o smb1ops.o unc.o winucase.o \
 >           smb2ops.o smb2maperror.o smb2transport.o \
->           smb2misc.o smb2pdu.o smb2inode.o smb2file.o cifsacl.o fs_context.o \
+>           smb2misc.o smb2pdu.o smb2inode.o smb2file.o cifsacl.o fs_contex=
+t.o \
 > -         dns_resolve.o
 > +         dns_resolve.o spnego_negtokeninit.asn1.o asn1.o
+> +
+> +$(obj)/asn1.o: $(obj)/spnego_negtokeninit.asn1.h
+> +
+> +$(obj)/spnego_negtokeninit.asn1.o: $(obj)/spnego_negtokeninit.asn1.c $(o=
+bj)/spnego_negtokeninit.asn1.h
 >
->  cifs-$(CONFIG_CIFS_XATTR) += xattr.o
+>  cifs-$(CONFIG_CIFS_XATTR) +=3D xattr.o
 >
 > diff --git a/fs/cifs/asn1.c b/fs/cifs/asn1.c
 > index 3150c19cdc2f..2db95fe3abfb 100644
@@ -153,8 +210,10 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > @@ -1,612 +1,63 @@
 >  // SPDX-License-Identifier: GPL-2.0-or-later
 > -/*
-> - * The ASB.1/BER parsing code is derived from ip_nat_snmp_basic.c which was in
-> - * turn derived from the gxsnmp package by Gregory McLean & Jochen Friedrich
+> - * The ASB.1/BER parsing code is derived from ip_nat_snmp_basic.c which =
+was in
+> - * turn derived from the gxsnmp package by Gregory McLean & Jochen Fried=
+rich
 > - *
 > - * Copyright (c) 2000 RP Internet (www.rpi.net.au).
 > - */
@@ -171,11 +230,13 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 >  #include "cifsproto.h"
 > +#include "spnego_negtokeninit.asn1.h"
 >
-> -/*****************************************************************************
+> -/***********************************************************************=
+******
 > - *
 > - * Basic ASN.1 decoding routines (gxsnmp author Dirk Wisse)
 > - *
-> - *****************************************************************************/
+> - ***********************************************************************=
+******/
 > -
 > -/* Class */
 > -#define ASN1_UNI       0       /* Universal */
@@ -225,11 +286,13 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -#define KRB5_OID_LEN  7
 > -#define KRB5U2U_OID_LEN  8
 > -#define MSKRB5_OID_LEN  7
-> -static unsigned long SPNEGO_OID[7] = { 1, 3, 6, 1, 5, 5, 2 };
-> -static unsigned long NTLMSSP_OID[10] = { 1, 3, 6, 1, 4, 1, 311, 2, 2, 10 };
-> -static unsigned long KRB5_OID[7] = { 1, 2, 840, 113554, 1, 2, 2 };
-> -static unsigned long KRB5U2U_OID[8] = { 1, 2, 840, 113554, 1, 2, 2, 3 };
-> -static unsigned long MSKRB5_OID[7] = { 1, 2, 840, 48018, 1, 2, 2 };
+> -static unsigned long SPNEGO_OID[7] =3D { 1, 3, 6, 1, 5, 5, 2 };
+> -static unsigned long NTLMSSP_OID[10] =3D { 1, 3, 6, 1, 4, 1, 311, 2, 2, =
+10 };
+> -static unsigned long KRB5_OID[7] =3D { 1, 2, 840, 113554, 1, 2, 2 };
+> -static unsigned long KRB5U2U_OID[8] =3D { 1, 2, 840, 113554, 1, 2, 2, 3 =
+};
+> -static unsigned long MSKRB5_OID[7] =3D { 1, 2, 840, 48018, 1, 2, 2 };
 > -
 > -/*
 > - * ASN.1 context.
@@ -252,20 +315,20 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -static void
 > -asn1_open(struct asn1_ctx *ctx, unsigned char *buf, unsigned int len)
 > -{
-> -       ctx->begin = buf;
-> -       ctx->end = buf + len;
-> -       ctx->pointer = buf;
-> -       ctx->error = ASN1_ERR_NOERROR;
+> -       ctx->begin =3D buf;
+> -       ctx->end =3D buf + len;
+> -       ctx->pointer =3D buf;
+> -       ctx->error =3D ASN1_ERR_NOERROR;
 > -}
 > -
 > -static unsigned char
 > -asn1_octet_decode(struct asn1_ctx *ctx, unsigned char *ch)
 > -{
-> -       if (ctx->pointer >= ctx->end) {
-> -               ctx->error = ASN1_ERR_DEC_EMPTY;
+> -       if (ctx->pointer >=3D ctx->end) {
+> -               ctx->error =3D ASN1_ERR_DEC_EMPTY;
 > -               return 0;
 > -       }
-> -       *ch = *(ctx->pointer)++;
+> -       *ch =3D *(ctx->pointer)++;
 > -       return 1;
 > -}
 > -
@@ -275,14 +338,15 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -{
 > -       unsigned char ch;
 > -
-> -       if (ctx->pointer >= ctx->end) {
-> -               ctx->error = ASN1_ERR_DEC_EMPTY;
+> -       if (ctx->pointer >=3D ctx->end) {
+> -               ctx->error =3D ASN1_ERR_DEC_EMPTY;
 > -               return 0;
 > -       }
 > -
-> -       ch = *(ctx->pointer)++; /* ch has 0xa, ptr points to length octet */
-> -       if ((ch) == ASN1_ENUM)  /* if ch value is ENUM, 0xa */
-> -               *val = *(++(ctx->pointer)); /* value has enum value */
+> -       ch =3D *(ctx->pointer)++; /* ch has 0xa, ptr points to length oct=
+et */
+> -       if ((ch) =3D=3D ASN1_ENUM)  /* if ch value is ENUM, 0xa */
+> -               *val =3D *(++(ctx->pointer)); /* value has enum value */
 > -       else
 > -               return 0;
 > -
@@ -296,14 +360,14 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -{
 > -       unsigned char ch;
 > -
-> -       *tag = 0;
+> -       *tag =3D 0;
 > -
 > -       do {
 > -               if (!asn1_octet_decode(ctx, &ch))
 > -                       return 0;
-> -               *tag <<= 7;
-> -               *tag |= ch & 0x7F;
-> -       } while ((ch & 0x80) == 0x80);
+> -               *tag <<=3D 7;
+> -               *tag |=3D ch & 0x7F;
+> -       } while ((ch & 0x80) =3D=3D 0x80);
 > -       return 1;
 > -}
 > -
@@ -316,11 +380,11 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -       if (!asn1_octet_decode(ctx, &ch))
 > -               return 0;
 > -
-> -       *cls = (ch & 0xC0) >> 6;
-> -       *con = (ch & 0x20) >> 5;
-> -       *tag = (ch & 0x1F);
+> -       *cls =3D (ch & 0xC0) >> 6;
+> -       *con =3D (ch & 0x20) >> 5;
+> -       *tag =3D (ch & 0x1F);
 > -
-> -       if (*tag == 0x1F) {
+> -       if (*tag =3D=3D 0x1F) {
 > -               if (!asn1_tag_decode(ctx, tag))
 > -                       return 0;
 > -       }
@@ -328,29 +392,30 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -}
 > -
 > -static unsigned char
-> -asn1_length_decode(struct asn1_ctx *ctx, unsigned int *def, unsigned int *len)
+> -asn1_length_decode(struct asn1_ctx *ctx, unsigned int *def, unsigned int=
+ *len)
 > -{
 > -       unsigned char ch, cnt;
 > -
 > -       if (!asn1_octet_decode(ctx, &ch))
 > -               return 0;
 > -
-> -       if (ch == 0x80)
-> -               *def = 0;
+> -       if (ch =3D=3D 0x80)
+> -               *def =3D 0;
 > -       else {
-> -               *def = 1;
+> -               *def =3D 1;
 > -
 > -               if (ch < 0x80)
-> -                       *len = ch;
+> -                       *len =3D ch;
 > -               else {
-> -                       cnt = (unsigned char) (ch & 0x7F);
-> -                       *len = 0;
+> -                       cnt =3D (unsigned char) (ch & 0x7F);
+> -                       *len =3D 0;
 > -
 > -                       while (cnt > 0) {
 > -                               if (!asn1_octet_decode(ctx, &ch))
 > -                                       return 0;
-> -                               *len <<= 8;
-> -                               *len |= ch;
+> -                               *len <<=3D 8;
+> -                               *len |=3D ch;
 > -                               cnt--;
 > -                       }
 > -               }
@@ -366,10 +431,11 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -static unsigned char
 > -asn1_header_decode(struct asn1_ctx *ctx,
 > -                  unsigned char **eoc,
-> -                  unsigned int *cls, unsigned int *con, unsigned int *tag)
+> -                  unsigned int *cls, unsigned int *con, unsigned int *ta=
+g)
 > -{
-> -       unsigned int def = 0;
-> -       unsigned int len = 0;
+> -       unsigned int def =3D 0;
+> -       unsigned int len =3D 0;
 > -
 > -       if (!asn1_id_decode(ctx, cls, con, tag))
 > -               return 0;
@@ -377,14 +443,15 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -       if (!asn1_length_decode(ctx, &def, &len))
 > -               return 0;
 > -
-> -       /* primitive shall be definite, indefinite shall be constructed */
-> -       if (*con == ASN1_PRI && !def)
+> -       /* primitive shall be definite, indefinite shall be constructed *=
+/
+> -       if (*con =3D=3D ASN1_PRI && !def)
 > -               return 0;
 > -
 > -       if (def)
-> -               *eoc = ctx->pointer + len;
+> -               *eoc =3D ctx->pointer + len;
 > -       else
-> -               *eoc = NULL;
+> -               *eoc =3D NULL;
 > -       return 1;
 > -}
 > -
@@ -396,30 +463,30 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 >  {
 > -       unsigned char ch;
 > -
-> -       if (eoc == NULL) {
+> -       if (eoc =3D=3D NULL) {
 > -               if (!asn1_octet_decode(ctx, &ch))
 > -                       return 0;
 > -
-> -               if (ch != 0x00) {
-> -                       ctx->error = ASN1_ERR_DEC_EOC_MISMATCH;
+> -               if (ch !=3D 0x00) {
+> -                       ctx->error =3D ASN1_ERR_DEC_EOC_MISMATCH;
 > -                       return 0;
 > -               }
 > -
 > -               if (!asn1_octet_decode(ctx, &ch))
 > -                       return 0;
 > -
-> -               if (ch != 0x00) {
-> -                       ctx->error = ASN1_ERR_DEC_EOC_MISMATCH;
+> -               if (ch !=3D 0x00) {
+> -                       ctx->error =3D ASN1_ERR_DEC_EOC_MISMATCH;
 > -                       return 0;
 > -               }
 > -               return 1;
 > -       } else {
-> -               if (ctx->pointer != eoc) {
-> -                       ctx->error = ASN1_ERR_DEC_LENGTH_MISMATCH;
+> -               if (ctx->pointer !=3D eoc) {
+> -                       ctx->error =3D ASN1_ERR_DEC_LENGTH_MISMATCH;
 > -                       return 0;
 > -               }
 > +       if (asn1_ber_decoder(&spnego_negtokeninit_decoder, server,
-> +                            security_blob, length) == 0)
+> +                            security_blob, length) =3D=3D 0)
 >                 return 1;
 > -       }
 > -}
@@ -427,7 +494,7 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -/* static unsigned char asn1_null_decode(struct asn1_ctx *ctx,
 > -                                     unsigned char *eoc)
 > -{
-> -       ctx->pointer = eoc;
+> -       ctx->pointer =3D eoc;
 > -       return 1;
 > -}
 > -
@@ -440,20 +507,20 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -       if (!asn1_octet_decode(ctx, &ch))
 > -               return 0;
 > -
-> -       *integer = (signed char) ch;
-> -       len = 1;
+> -       *integer =3D (signed char) ch;
+> -       len =3D 1;
 > -
 > -       while (ctx->pointer < eoc) {
 > -               if (++len > sizeof(long)) {
-> -                       ctx->error = ASN1_ERR_DEC_BADVALUE;
+> -                       ctx->error =3D ASN1_ERR_DEC_BADVALUE;
 > -                       return 0;
 > -               }
 > -
 > -               if (!asn1_octet_decode(ctx, &ch))
 > -                       return 0;
 > -
-> -               *integer <<= 8;
-> -               *integer |= ch;
+> -               *integer <<=3D 8;
+> -               *integer |=3D ch;
 > -       }
 > -       return 1;
 > -}
@@ -468,23 +535,23 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -       if (!asn1_octet_decode(ctx, &ch))
 > -               return 0;
 > -
-> -       *integer = ch;
-> -       if (ch == 0)
-> -               len = 0;
+> -       *integer =3D ch;
+> -       if (ch =3D=3D 0)
+> -               len =3D 0;
 >         else
-> -               len = 1;
+> -               len =3D 1;
 > -
 > -       while (ctx->pointer < eoc) {
 > -               if (++len > sizeof(unsigned int)) {
-> -                       ctx->error = ASN1_ERR_DEC_BADVALUE;
+> -                       ctx->error =3D ASN1_ERR_DEC_BADVALUE;
 > -                       return 0;
 > -               }
 > -
 > -               if (!asn1_octet_decode(ctx, &ch))
 > -                       return 0;
 > -
-> -               *integer <<= 8;
-> -               *integer |= ch;
+> -               *integer <<=3D 8;
+> -               *integer |=3D ch;
 > -       }
 > -       return 1;
 > -}
@@ -499,23 +566,23 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -       if (!asn1_octet_decode(ctx, &ch))
 >                 return 0;
 > -
-> -       *integer = ch;
-> -       if (ch == 0)
-> -               len = 0;
+> -       *integer =3D ch;
+> -       if (ch =3D=3D 0)
+> -               len =3D 0;
 > -       else
-> -               len = 1;
+> -               len =3D 1;
 > -
 > -       while (ctx->pointer < eoc) {
 > -               if (++len > sizeof(unsigned long)) {
-> -                       ctx->error = ASN1_ERR_DEC_BADVALUE;
+> -                       ctx->error =3D ASN1_ERR_DEC_BADVALUE;
 > -                       return 0;
 > -               }
 > -
 > -               if (!asn1_octet_decode(ctx, &ch))
 > -                       return 0;
 > -
-> -               *integer <<= 8;
-> -               *integer |= ch;
+> -               *integer <<=3D 8;
+> -               *integer |=3D ch;
 > -       }
 > -       return 1;
 >  }
@@ -529,18 +596,18 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 >  {
 > -       unsigned char *ptr;
 > -
-> -       *len = 0;
+> -       *len =3D 0;
 > -
-> -       *octets = kmalloc(eoc - ctx->pointer, GFP_ATOMIC);
-> -       if (*octets == NULL) {
+> -       *octets =3D kmalloc(eoc - ctx->pointer, GFP_ATOMIC);
+> -       if (*octets =3D=3D NULL) {
 > -               return 0;
 > -       }
 > -
-> -       ptr = *octets;
+> -       ptr =3D *octets;
 > -       while (ctx->pointer < eoc) {
 > -               if (!asn1_octet_decode(ctx, (unsigned char *) ptr++)) {
 > -                       kfree(*octets);
-> -                       *octets = NULL;
+> -                       *octets =3D NULL;
 > -                       return 0;
 > -               }
 > -               (*len)++;
@@ -553,77 +620,79 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -{
 > -       unsigned char ch;
 > -
-> -       *subid = 0;
+> -       *subid =3D 0;
 > -
 > -       do {
 > -               if (!asn1_octet_decode(ctx, &ch))
 > -                       return 0;
 > -
-> -               *subid <<= 7;
-> -               *subid |= ch & 0x7F;
-> -       } while ((ch & 0x80) == 0x80);
+> -               *subid <<=3D 7;
+> -               *subid |=3D ch & 0x7F;
+> -       } while ((ch & 0x80) =3D=3D 0x80);
 > -       return 1;
 > -}
 > -
 > -static int
 > -asn1_oid_decode(struct asn1_ctx *ctx,
-> -               unsigned char *eoc, unsigned long **oid, unsigned int *len)
+> -               unsigned char *eoc, unsigned long **oid, unsigned int *le=
+n)
 > -{
 > -       unsigned long subid;
 > -       unsigned int size;
 > -       unsigned long *optr;
 > -
-> -       size = eoc - ctx->pointer + 1;
+> -       size =3D eoc - ctx->pointer + 1;
 > -
 > -       /* first subid actually encodes first two subids */
 > -       if (size < 2 || size > UINT_MAX/sizeof(unsigned long))
 > -               return 0;
 > -
-> -       *oid = kmalloc_array(size, sizeof(unsigned long), GFP_ATOMIC);
-> -       if (*oid == NULL)
+> -       *oid =3D kmalloc_array(size, sizeof(unsigned long), GFP_ATOMIC);
+> -       if (*oid =3D=3D NULL)
 > -               return 0;
 > -
-> -       optr = *oid;
+> -       optr =3D *oid;
 > -
 > -       if (!asn1_subid_decode(ctx, &subid)) {
 > -               kfree(*oid);
-> -               *oid = NULL;
+> -               *oid =3D NULL;
 > -               return 0;
 > -       }
 > -
 > -       if (subid < 40) {
-> -               optr[0] = 0;
-> -               optr[1] = subid;
+> -               optr[0] =3D 0;
+> -               optr[1] =3D subid;
 > -       } else if (subid < 80) {
-> -               optr[0] = 1;
-> -               optr[1] = subid - 40;
+> -               optr[0] =3D 1;
+> -               optr[1] =3D subid - 40;
 > -       } else {
-> -               optr[0] = 2;
-> -               optr[1] = subid - 80;
+> -               optr[0] =3D 2;
+> -               optr[1] =3D subid - 80;
 > -       }
 > -
-> -       *len = 2;
-> -       optr += 2;
+> -       *len =3D 2;
+> -       optr +=3D 2;
 > +       enum OID oid;
 >
 > -       while (ctx->pointer < eoc) {
 > -               if (++(*len) > size) {
-> -                       ctx->error = ASN1_ERR_DEC_BADVALUE;
+> -                       ctx->error =3D ASN1_ERR_DEC_BADVALUE;
 > -                       kfree(*oid);
-> -                       *oid = NULL;
+> -                       *oid =3D NULL;
 > -                       return 0;
 > -               }
-> +       oid = look_up_OID(value, vlen);
-> +       if (oid != OID_spnego) {
+> +       oid =3D look_up_OID(value, vlen);
+> +       if (oid !=3D OID_spnego) {
 > +               char buf[50];
 >
 > -               if (!asn1_subid_decode(ctx, optr++)) {
 > -                       kfree(*oid);
-> -                       *oid = NULL;
+> -                       *oid =3D NULL;
 > -                       return 0;
 > -               }
 > +               sprint_oid(value, vlen, buf, sizeof(buf));
-> +               cifs_dbg(FYI, "Error decoding negTokenInit header: unexpected OID %s\n",
+> +               cifs_dbg(FYI, "Error decoding negTokenInit header: unexpe=
+cted OID %s\n",
 > +                        buf);
 > +               return -EBADMSG;
 >         }
@@ -639,23 +708,23 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > +                            const void *value, size_t vlen)
 >  {
 > -       unsigned int i;
-> +       struct TCP_Server_Info *server = context;
+> +       struct TCP_Server_Info *server =3D context;
 > +       enum OID oid;
 >
-> -       if (oid1len != oid2len)
+> -       if (oid1len !=3D oid2len)
 > -               return 0;
-> +       oid = look_up_OID(value, vlen);
-> +       if (oid == OID_mskrb5)
-> +               server->sec_mskerberos = true;
-> +       else if (oid == OID_krb5u2u)
-> +               server->sec_kerberosu2u = true;
-> +       else if (oid == OID_krb5)
-> +               server->sec_kerberos = true;
-> +       else if (oid == OID_ntlmssp)
-> +               server->sec_ntlmssp = true;
+> +       oid =3D look_up_OID(value, vlen);
+> +       if (oid =3D=3D OID_mskrb5)
+> +               server->sec_mskerberos =3D true;
+> +       else if (oid =3D=3D OID_krb5u2u)
+> +               server->sec_kerberosu2u =3D true;
+> +       else if (oid =3D=3D OID_krb5)
+> +               server->sec_kerberos =3D true;
+> +       else if (oid =3D=3D OID_ntlmssp)
+> +               server->sec_ntlmssp =3D true;
 >         else {
-> -               for (i = 0; i < oid1len; i++) {
-> -                       if (oid1[i] != oid2[i])
+> -               for (i =3D 0; i < oid1len; i++) {
+> -                       if (oid1[i] !=3D oid2[i])
 > -                               return 0;
 > -               }
 > -               return 1;
@@ -671,7 +740,7 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -       struct asn1_ctx ctx;
 > -       unsigned char *end;
 > -       unsigned char *sequence_end;
-> -       unsigned long *oid = NULL;
+> -       unsigned long *oid =3D NULL;
 > -       unsigned int cls, con, tag, oidlen, rc;
 > -
 > -       /* cifs_dump_mem(" Received SecBlob ", security_blob, length); */
@@ -680,31 +749,34 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > +               char buf[50];
 >
 > -       /* GSSAPI header */
-> -       if (asn1_header_decode(&ctx, &end, &cls, &con, &tag) == 0) {
+> -       if (asn1_header_decode(&ctx, &end, &cls, &con, &tag) =3D=3D 0) {
 > -               cifs_dbg(FYI, "Error decoding negTokenInit header\n");
 > -               return 0;
-> -       } else if ((cls != ASN1_APL) || (con != ASN1_CON)
-> -                  || (tag != ASN1_EOC)) {
-> -               cifs_dbg(FYI, "cls = %d con = %d tag = %d\n", cls, con, tag);
+> -       } else if ((cls !=3D ASN1_APL) || (con !=3D ASN1_CON)
+> -                  || (tag !=3D ASN1_EOC)) {
+> -               cifs_dbg(FYI, "cls =3D %d con =3D %d tag =3D %d\n", cls, =
+con, tag);
 > -               return 0;
 > +               sprint_oid(value, vlen, buf, sizeof(buf));
-> +               cifs_dbg(FYI, "Decoding negTokenInit: unsupported OID %s\n",
+> +               cifs_dbg(FYI, "Decoding negTokenInit: unsupported OID %s\=
+n",
 > +                        buf);
 >         }
 > -
 > -       /* Check for SPNEGO OID -- remember to free obj->oid */
-> -       rc = asn1_header_decode(&ctx, &end, &cls, &con, &tag);
+> -       rc =3D asn1_header_decode(&ctx, &end, &cls, &con, &tag);
 > -       if (rc) {
-> -               if ((tag == ASN1_OJI) && (con == ASN1_PRI) &&
-> -                   (cls == ASN1_UNI)) {
-> -                       rc = asn1_oid_decode(&ctx, end, &oid, &oidlen);
+> -               if ((tag =3D=3D ASN1_OJI) && (con =3D=3D ASN1_PRI) &&
+> -                   (cls =3D=3D ASN1_UNI)) {
+> -                       rc =3D asn1_oid_decode(&ctx, end, &oid, &oidlen);
 > -                       if (rc) {
-> -                               rc = compare_oid(oid, oidlen, SPNEGO_OID,
+> -                               rc =3D compare_oid(oid, oidlen, SPNEGO_OI=
+D,
 > -                                                SPNEGO_OID_LEN);
 > -                               kfree(oid);
 > -                       }
 > -               } else
-> -                       rc = 0;
+> -                       rc =3D 0;
 > -       }
 > -
 > -       /* SPNEGO OID not present or garbled -- bail out */
@@ -714,99 +786,114 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > -       }
 > -
 > -       /* SPNEGO */
-> -       if (asn1_header_decode(&ctx, &end, &cls, &con, &tag) == 0) {
+> -       if (asn1_header_decode(&ctx, &end, &cls, &con, &tag) =3D=3D 0) {
 > -               cifs_dbg(FYI, "Error decoding negTokenInit\n");
 > -               return 0;
-> -       } else if ((cls != ASN1_CTX) || (con != ASN1_CON)
-> -                  || (tag != ASN1_EOC)) {
-> -               cifs_dbg(FYI, "cls = %d con = %d tag = %d end = %p exit 0\n",
+> -       } else if ((cls !=3D ASN1_CTX) || (con !=3D ASN1_CON)
+> -                  || (tag !=3D ASN1_EOC)) {
+> -               cifs_dbg(FYI, "cls =3D %d con =3D %d tag =3D %d end =3D %=
+p exit 0\n",
 > -                        cls, con, tag, end);
 > -               return 0;
 > -       }
 > -
 > -       /* negTokenInit */
-> -       if (asn1_header_decode(&ctx, &end, &cls, &con, &tag) == 0) {
+> -       if (asn1_header_decode(&ctx, &end, &cls, &con, &tag) =3D=3D 0) {
 > -               cifs_dbg(FYI, "Error decoding negTokenInit\n");
 > -               return 0;
-> -       } else if ((cls != ASN1_UNI) || (con != ASN1_CON)
-> -                  || (tag != ASN1_SEQ)) {
-> -               cifs_dbg(FYI, "cls = %d con = %d tag = %d end = %p exit 1\n",
+> -       } else if ((cls !=3D ASN1_UNI) || (con !=3D ASN1_CON)
+> -                  || (tag !=3D ASN1_SEQ)) {
+> -               cifs_dbg(FYI, "cls =3D %d con =3D %d tag =3D %d end =3D %=
+p exit 1\n",
 > -                        cls, con, tag, end);
 > -               return 0;
 > -       }
 > -
 > -       /* sequence */
-> -       if (asn1_header_decode(&ctx, &end, &cls, &con, &tag) == 0) {
-> -               cifs_dbg(FYI, "Error decoding 2nd part of negTokenInit\n");
+> -       if (asn1_header_decode(&ctx, &end, &cls, &con, &tag) =3D=3D 0) {
+> -               cifs_dbg(FYI, "Error decoding 2nd part of negTokenInit\n"=
+);
 > -               return 0;
-> -       } else if ((cls != ASN1_CTX) || (con != ASN1_CON)
-> -                  || (tag != ASN1_EOC)) {
-> -               cifs_dbg(FYI, "cls = %d con = %d tag = %d end = %p exit 0\n",
+> -       } else if ((cls !=3D ASN1_CTX) || (con !=3D ASN1_CON)
+> -                  || (tag !=3D ASN1_EOC)) {
+> -               cifs_dbg(FYI, "cls =3D %d con =3D %d tag =3D %d end =3D %=
+p exit 0\n",
 > -                        cls, con, tag, end);
 > -               return 0;
 > -       }
 > -
 > -       /* sequence of */
 > -       if (asn1_header_decode
-> -           (&ctx, &sequence_end, &cls, &con, &tag) == 0) {
-> -               cifs_dbg(FYI, "Error decoding 2nd part of negTokenInit\n");
+> -           (&ctx, &sequence_end, &cls, &con, &tag) =3D=3D 0) {
+> -               cifs_dbg(FYI, "Error decoding 2nd part of negTokenInit\n"=
+);
 > -               return 0;
-> -       } else if ((cls != ASN1_UNI) || (con != ASN1_CON)
-> -                  || (tag != ASN1_SEQ)) {
-> -               cifs_dbg(FYI, "cls = %d con = %d tag = %d sequence_end = %p exit 1\n",
+> -       } else if ((cls !=3D ASN1_UNI) || (con !=3D ASN1_CON)
+> -                  || (tag !=3D ASN1_SEQ)) {
+> -               cifs_dbg(FYI, "cls =3D %d con =3D %d tag =3D %d sequence_=
+end =3D %p exit 1\n",
 > -                        cls, con, tag, sequence_end);
 > -               return 0;
 > -       }
 > -
 > -       /* list of security mechanisms */
 > -       while (!asn1_eoc_decode(&ctx, sequence_end)) {
-> -               rc = asn1_header_decode(&ctx, &end, &cls, &con, &tag);
+> -               rc =3D asn1_header_decode(&ctx, &end, &cls, &con, &tag);
 > -               if (!rc) {
-> -                       cifs_dbg(FYI, "Error decoding negTokenInit hdr exit2\n");
+> -                       cifs_dbg(FYI, "Error decoding negTokenInit hdr ex=
+it2\n");
 > -                       return 0;
 > -               }
-> -               if ((tag == ASN1_OJI) && (con == ASN1_PRI)) {
+> -               if ((tag =3D=3D ASN1_OJI) && (con =3D=3D ASN1_PRI)) {
 > -                       if (asn1_oid_decode(&ctx, end, &oid, &oidlen)) {
 > -
-> -                               cifs_dbg(FYI, "OID len = %d oid = 0x%lx 0x%lx 0x%lx 0x%lx\n",
-> -                                        oidlen, *oid, *(oid + 1), *(oid + 2),
+> -                               cifs_dbg(FYI, "OID len =3D %d oid =3D 0x%=
+lx 0x%lx 0x%lx 0x%lx\n",
+> -                                        oidlen, *oid, *(oid + 1), *(oid =
++ 2),
 > -                                        *(oid + 3));
 > -
 > -                               if (compare_oid(oid, oidlen, MSKRB5_OID,
 > -                                               MSKRB5_OID_LEN))
-> -                                       server->sec_mskerberos = true;
-> -                               else if (compare_oid(oid, oidlen, KRB5U2U_OID,
+> -                                       server->sec_mskerberos =3D true;
+> -                               else if (compare_oid(oid, oidlen, KRB5U2U=
+_OID,
 > -                                                    KRB5U2U_OID_LEN))
-> -                                       server->sec_kerberosu2u = true;
-> -                               else if (compare_oid(oid, oidlen, KRB5_OID,
+> -                                       server->sec_kerberosu2u =3D true;
+> -                               else if (compare_oid(oid, oidlen, KRB5_OI=
+D,
 > -                                                    KRB5_OID_LEN))
-> -                                       server->sec_kerberos = true;
-> -                               else if (compare_oid(oid, oidlen, NTLMSSP_OID,
+> -                                       server->sec_kerberos =3D true;
+> -                               else if (compare_oid(oid, oidlen, NTLMSSP=
+_OID,
 > -                                                    NTLMSSP_OID_LEN))
-> -                                       server->sec_ntlmssp = true;
+> -                                       server->sec_ntlmssp =3D true;
 > -
 > -                               kfree(oid);
 > -                       }
 > -               } else {
-> -                       cifs_dbg(FYI, "Should be an oid what is going on?\n");
+> -                       cifs_dbg(FYI, "Should be an oid what is going on?=
+\n");
 > -               }
 > -       }
 > -
 > -       /*
-> -        * We currently ignore anything at the end of the SPNEGO blob after
+> -        * We currently ignore anything at the end of the SPNEGO blob aft=
+er
 > -        * the mechTypes have been parsed, since none of that info is
 > -        * used at the moment.
 > -        */
 > -       return 1;
 > +       return 0;
 >  }
-> diff --git a/fs/cifs/spnego_negtokeninit.asn1 b/fs/cifs/spnego_negtokeninit.asn1
+> diff --git a/fs/cifs/spnego_negtokeninit.asn1 b/fs/cifs/spnego_negtokenin=
+it.asn1
 > new file mode 100644
 > index 000000000000..aa5b4a61b3f5
 > --- /dev/null
 > +++ b/fs/cifs/spnego_negtokeninit.asn1
 > @@ -0,0 +1,40 @@
-> +GSSAPI ::=
+> +GSSAPI ::=3D
 > +       [APPLICATION 0] IMPLICIT SEQUENCE {
 > +               thisMech
 > +                       OBJECT IDENTIFIER ({gssapi_this_mech}),
@@ -814,18 +901,18 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > +                       NegotiationToken
 > +       }
 > +
-> +MechType ::= OBJECT IDENTIFIER ({neg_token_init_mech_type})
+> +MechType ::=3D OBJECT IDENTIFIER ({neg_token_init_mech_type})
 > +
-> +MechTypeList ::= SEQUENCE OF MechType
+> +MechTypeList ::=3D SEQUENCE OF MechType
 > +
-> +NegHints ::= SEQUENCE {
+> +NegHints ::=3D SEQUENCE {
 > +       hintName
 > +               [0] GeneralString OPTIONAL,
 > +       hintAddress
 > +               [1] OCTET STRING OPTIONAL
 > +       }
 > +
-> +NegTokenInit2 ::=
+> +NegTokenInit2 ::=3D
 > +       SEQUENCE {
 > +               mechTypes
 > +                       [0] MechTypeList OPTIONAL,
@@ -839,7 +926,7 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 > +                       [3] OCTET STRING OPTIONAL
 > +       }
 > +
-> +NegotiationToken ::=
+> +NegotiationToken ::=3D
 > +       CHOICE {
 > +               negTokenInit
 > +                       [0] NegTokenInit2,
@@ -877,7 +964,7 @@ On Sat, May 22, 2021 at 10:29 PM Hyunchul Lee <hyc.lee@gmail.com> wrote:
 >
 
 
--- 
+--=20
 Thanks,
 
 Steve
