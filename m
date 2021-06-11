@@ -2,56 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50B313A0675
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Jun 2021 23:50:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F257B3A4B7F
+	for <lists+samba-technical@lfdr.de>; Sat, 12 Jun 2021 01:58:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=BSS4C+Tof4hX7XOl0u8vZzIzOJkeQij5kHDcnOxRbtQ=; b=0Rct/pFi8M3awKObmzYpIp0RnC
-	JIkGgg3c6SVHaQrXBP7vmZLzUi80SLXIheS/NrGEC+nj3cz+TEKqncXjZxDNeIGxrNIpdrsfcD+mo
-	LEe7X/mUASSO8SjPOZbijUC4hAxv5910Pb3l0uLMg8BA+DadCgbh3/DBf8fmBy291OCLOydhnAQ52
-	6Q1+VgvMvJ9GJjG8x8GhSQuIlUePntnM3tYwI3a7MPaxMpqeIosSyV/o9AYG+4NYtYg6NsYG99psB
-	dIDgdpgQgjHiML5aztd3aud/F2GcumsCTrV9Se9YD4I1YDde8AXK/5QH4CpnUfnUDPigS+0yZGcGz
-	W1DdPgeA==;
-Received: from ip6-localhost ([::1]:30972 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=ue2Fai1CUUfmls6X3rfEQqAKrunZ8zZrgA/8pkMHeko=; b=NzYr6EMiJL2FCL3AuTfaAsBgMg
+	jv03pMqYqviwL016JG2pQHkAKv7Kggn2pTsHH4OXBj1WiyvKpvUBUtDkEJLWGjlAtiyK2zb4ZTuty
+	QaHQmswd54lkNo3vClyR9ZV+wV4P0wAVuHoOotqO7p+uqJp3qlmuLXInAeVMcSa20Y++FUcr2xwZR
+	qAFTxploEMi8LnBdPKX/CsN+rIlnngljixVIO74JZh0MyQNwym3+IXPFohp5/h8suAMQUKqdO1RSP
+	W7EEbyKWbtyk4AlUC1rPkES1YwIHVRHY9zAzbfpKEwat3PvGNmXUt6mWm9b55293SCT/tpm+h2vJa
+	EfFqGAYw==;
+Received: from ip6-localhost ([::1]:27826 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lqjbb-004d16-Gs; Tue, 08 Jun 2021 21:49:51 +0000
-Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:41708) 
+	id 1lrr1L-005LFl-5Z; Fri, 11 Jun 2021 23:57:03 +0000
+Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:35398) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lqjbX-004d0x-1l
- for samba-technical@lists.samba.org; Tue, 08 Jun 2021 21:49:49 +0000
-Received: by mail-lf1-x129.google.com with SMTP id j20so5165611lfe.8
- for <samba-technical@lists.samba.org>; Tue, 08 Jun 2021 14:49:46 -0700 (PDT)
+ (Exim) id 1lrr1F-005LFc-H2
+ for samba-technical@lists.samba.org; Fri, 11 Jun 2021 23:57:00 +0000
+Received: by mail-lf1-x12e.google.com with SMTP id i10so10988290lfj.2
+ for <samba-technical@lists.samba.org>; Fri, 11 Jun 2021 16:56:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to:cc;
- bh=BSS4C+Tof4hX7XOl0u8vZzIzOJkeQij5kHDcnOxRbtQ=;
- b=u9hj/yoXRsvtCUvpFePU7s2TiK+2tivLMfkX5m6iJFRZrIZzt8312bf7U0Qa4ahyuU
- MzeHFa/IuBbB2yBDJOaIowEMKVDd/SWB8SX0dig0uQdWFmzTg7IE3TMA6I0mJGxe/5Rc
- Y/dE85naosBmQxURJ8jbtHUAc2k3OrrKeT/4PRYsM41zALOb2A2B+MgIGaf3Ep3Qv03B
- q9FXCk5mLAPHgTv5Uut67j/EG3ERdXf1SJRHCP3J4RrHSKC5L94ys0ZMylzSe7tlJdpo
- K9dB51dj13JUev4f5ONQoHYd5wNtKQ7uE+E/+QcxrJjSefXcP3mjP7WFX2nuFziYS8/I
- up/w==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+ bh=ue2Fai1CUUfmls6X3rfEQqAKrunZ8zZrgA/8pkMHeko=;
+ b=KqeHZt0CZA5yhc3KJrpGrio91/L0snDl/UuY/a5bXykdmYl1OpgPKjSRwu1LsPcsJI
+ 11nS3iUH+pYw6T16ZpShpUPANuAks249B0jUU1EF8rrMcr+YaYRd7kR50gGjNCHO4SzR
+ hcfAPkVw0tmya5yR5ATHymHSTGdSdvvX36IGLy4kC2JcIDWxKjWI7eF6v9apr0MZMdXS
+ 2wop1pVsjOkrzlfB3xQP7UsW3NaOt04Gp0f55l4IFnLLG0eWoKzH0+fV3IP+gSfJNa0K
+ 64f3ifFMReiOMNFc8u5mikJRfHo/LOI6FvZPZAxxn3Yjmlepqzq5VB2eZCEtkL9zHtVP
+ CK7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
- bh=BSS4C+Tof4hX7XOl0u8vZzIzOJkeQij5kHDcnOxRbtQ=;
- b=IqIBM3v/45bFAcu1zSWZpGl7kW0uZfmuLLSB1uIsHmMVDSarJPLJY6vFgYHSaoQu2a
- EKJjto35vUzRXBQ7nyEMTH2Kcjr2so6zkCcRO9nEAY+O1QHIYpvozB/aTGARjTKy9S6h
- i8dMKJOkPDn2NiOgo9w6BDugGwfkVI0m+vK13ANnPnp7tOnrIE/MGgl1hLSZnSNgQynA
- J9xo45Qbl4zp5VeR70oGtcldyfxt1mXDYIDB7pOVkL5B3W2KatBx9TYp6aZdm/QqyPZ9
- +GDBhVEOxDzX3GdpPh+fnEUkwNAKn2dfhWHHUF0fURCyXnfD79bfxcOxh8yVy5FxolLo
- ToRQ==
-X-Gm-Message-State: AOAM531jXY5gs+gV8SwdA44w7gTZvAKtCrxudPOiJUNilrJrH83rjnBi
- f4eW/627gVrQhT5Z0vk4GY8WOYjKFroGnAw9F+0=
-X-Google-Smtp-Source: ABdhPJz0r+myW7wXzehh/u9I4qp8s9yNYWkKTuV6fXEQni7Q4eJ9LWDU3QSCbb3mlJBWaylwYcUS/XauJ4A1j+eritw=
-X-Received: by 2002:a05:6512:3694:: with SMTP id
- d20mr8645060lfs.184.1623188985306; 
- Tue, 08 Jun 2021 14:49:45 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to;
+ bh=ue2Fai1CUUfmls6X3rfEQqAKrunZ8zZrgA/8pkMHeko=;
+ b=K1WKGulhZtsNIHn6yVGPtM/GegXIv7gQV4LnxgdoxnaNor1R3IQoVTVxrqx3jMvhQY
+ A5eTitYibBAz4zaCPOE8D2+im3QCtIRbU+vaMlSOwTwa88lHvxlDH05yjqURpiM2ZCX1
+ A+Oj/QL4jSfrg1eXZFjIMIhgk5MOZxTTna0lEVdV/sI60v0tDdq0b7nKYiyI3H0z1E/f
+ 32KCc9o8W9yxaC5HhpmTXq7dyA1OoW+L6jyrKP2tvdIZoQLBsDbL42fkZmnnm72tbrYw
+ b2uwV1UFOqwzE7vy0BYjIqQdI2XfIR9y7HuAP5cEwJazyvd2TGFdLCWYb0eZa4ny82u2
+ eqnQ==
+X-Gm-Message-State: AOAM530u9FeAYt+rbkE6Wv36sUruKbzFRld1jvB4IPhsthGHwjhkp7e5
+ 79HUssJCvl0OVpke8CFJ5byKtOvkmelOW95BiDkoFnyewnk=
+X-Google-Smtp-Source: ABdhPJzkfRg8Id67rhZTsUKfnfu7O4vLh2/QySG8jUbd2VOQ/bTQVLlwc0IIkudoMHJjSwbbNi+MH0DqpDVl8ERphx0=
+X-Received: by 2002:ac2:419a:: with SMTP id z26mr4251204lfh.307.1623455813865; 
+ Fri, 11 Jun 2021 16:56:53 -0700 (PDT)
 MIME-Version: 1.0
-Date: Tue, 8 Jun 2021 16:49:34 -0500
-Message-ID: <CAH2r5mtXtY9K5=DA8dfgNm2rbvLB7GJUUvC7_0q8R1uGLtxV0Q@mail.gmail.com>
-Subject: [CIFS][PATCH] Enable extended stats by default
-To: CIFS <linux-cifs@vger.kernel.org>
-Content-Type: multipart/mixed; boundary="000000000000df7b6a05c4482259"
+References: <CAJwt-Jns5=XneYgidODs+SjJmWvoq=BhwbvRA0Z4SDKLgdZs3Q@mail.gmail.com>
+In-Reply-To: <CAJwt-Jns5=XneYgidODs+SjJmWvoq=BhwbvRA0Z4SDKLgdZs3Q@mail.gmail.com>
+Date: Fri, 11 Jun 2021 18:56:42 -0500
+Message-ID: <CAH2r5mvv8dn+u9JVMJo0dvQ_Nk2esO-uDY4J=equS6AcMgSbOg@mail.gmail.com>
+Subject: Fwd: Is it possible to mount a cifs share with kerberos using the
+ machine account (with active directory)
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,70 +70,35 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: samba-technical <samba-technical@lists.samba.org>,
- COMMON INTERNET FILE SYSTEM SERVER
- <linux-cifsd-devel@lists.sourceforge.net>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000df7b6a05c4482259
-Content-Type: text/plain; charset="UTF-8"
+---------- Forwarded message ---------
+From: Bruno Bigras <bigras.bruno@gmail.com>
+Date: Fri, Jun 11, 2021 at 6:51 PM
+Subject: Is it possible to mount a cifs share with kerberos using the
+machine account (with active directory)
+To: <linux-cifs@vger.kernel.org>
 
-Patch to enable CONFIG_CIFS_STATS2 by default
 
+When a Linux machine joins an Active Directory's domain, a computer
+account is created.
+
+A network share can be configured to give rights to the computer account.
+
+Can I use that account to mount the cifs share with the computer
+account (with the keytab file)?
+
+Almost every example on the internet is about using a user account or
+using multiuser (which also uses a user account).
+
+Thanks,
+
+Bruno
 
 
 -- 
 Thanks,
 
 Steve
-
---000000000000df7b6a05c4482259
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-cifs-enable-extended-stats-by-default.patch"
-Content-Disposition: attachment; 
-	filename="0001-cifs-enable-extended-stats-by-default.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_kpoksrh60>
-X-Attachment-Id: f_kpoksrh60
-
-RnJvbSA3YTZiNmQ1YTVmZmU5YmFlNzViZjEzMGUyZDgyYTM0YzM5ZGJlZTY1IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFR1ZSwgOCBKdW4gMjAyMSAxNjo0Mzo0MSAtMDUwMApTdWJqZWN0OiBbUEFUQ0hdIGNp
-ZnM6IGVuYWJsZSBleHRlbmRlZCBzdGF0cyBieSBkZWZhdWx0CgpDT05GSUdfQ0lGU19TVEFUUzIg
-Y2FuIGJlIHZlcnkgdXNlZnVsIHNpbmNlIGl0IHNob3dzCmxhdGVuY2llcyBieSBjb21tYW5kLCBh
-bmQgYWxsb3dzIGVuYWJsaW5nIHRoZSBzbG93IHJlc3BvbnNlCmR5bmFtaWMgdHJhY2Vwb2ludCB3
-aGljaCBjYW4gYmUgdXNlZnVsIHRvIGlkZW50aWZ5CnBlcmZvcm1hbmNlIHByb2JsZW1zLgoKRm9y
-IGV4YW1wbGU6CgpUb3RhbCB0aW1lIHNwZW50IHByb2Nlc3NpbmcgYnkgY29tbWFuZC4gVGltZSB1
-bml0cyBhcmUgamlmZmllcyAoMTAwMCBwZXIgc2Vjb25kKQogIFNNQjMgQ01ECU51bWJlcglUb3Rh
-bCBUaW1lCUZhc3Rlc3QJU2xvd2VzdAogIC0tLS0tLS0tCS0tLS0tLQktLS0tLS0tLS0tCS0tLS0t
-LS0JLS0tLS0tLQogIDAJCTEJMgkJMgkyCiAgMQkJMgk2CQkyCTQKICAyCQkwCTAJCTAJMAogIDMJ
-CTQJMTEJCTIJNAogIDQJCTIJMTYJCTUJMTEKICA1CQk0NTQ2CTM0MTA0CQkyCTQ4NwogIDYJCTQ0
-MjEJMzI5MDEJCTIJNDg3CiAgNwkJMAkwCQkwCTAKICA4CQk2OTUJMjc4MQkJMgkzOQogIDkJCTM5
-MQkxNzA4CQkyCTI3CiAgMTAJCTAJMAkJMAkwCiAgMTEJCTQJNgkJMQkyCiAgMTIJCTAJMAkJMAkw
-CiAgMTMJCTAJMAkJMAkwCiAgMTQJCTM4ODcJMTc2OTYJCTAJMTI4CiAgMTUJCTAJMAkJMAkwCiAg
-MTYJCTE0NzEJOTk1MAkJMQk0ODcKICAxNwkJMTY5CTI2OTUJCTkJMTE2CiAgMTgJCTgwCTM4MQkJ
-MgkxMAogIDEJCTIJNgkJMgk0CiAgMgkJMAkwCQkwCTAKICAzCQk0CTExCQkyCTQKICA0CQkyCTE2
-CQk1CTExCiAgNQkJNDU0NgkzNDEwNAkJMgk0ODcKICA2CQk0NDIxCTMyOTAxCQkyCTQ4NwogIDcJ
-CTAJMAkJMAkwCiAgOAkJNjk1CTI3ODEJCTIJMzkKICA5CQkzOTEJMTcwOAkJMgkyNwogIDEwCQkw
-CTAJCTAJMAogIDExCQk0CTYJCTEJMgogIDEyCQkwCTAJCTAJMAogIDEzCQkwCTAJCTAJMAogIDE0
-CQkzODg3CTE3Njk2CQkwCTEyOAogIDE1CQkwCTAJCTAJMAogIDE2CQkxNDcxCTk5NTAJCTEJNDg3
-CiAgMTcJCTE2OQkyNjk1CQk5CTExNgogIDE4CQk4MAkzODEJCTIJMTAKClNpZ25lZC1vZmYtYnk6
-IFN0ZXZlIEZyZW5jaCA8c3RmcmVuY2hAbWljcm9zb2Z0LmNvbT4KLS0tCiBmcy9jaWZzL0tjb25m
-aWcgfCA0ICsrLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25z
-KC0pCgpkaWZmIC0tZ2l0IGEvZnMvY2lmcy9LY29uZmlnIGIvZnMvY2lmcy9LY29uZmlnCmluZGV4
-IDdkZTVjODkzYzE4MS4uNzM2NDk1MGE5ZWY0IDEwMDY0NAotLS0gYS9mcy9jaWZzL0tjb25maWcK
-KysrIGIvZnMvY2lmcy9LY29uZmlnCkBAIC01OSw2ICs1OSw3IEBAIGNvbmZpZyBDSUZTCiBjb25m
-aWcgQ0lGU19TVEFUUzIKIAlib29sICJFeHRlbmRlZCBzdGF0aXN0aWNzIgogCWRlcGVuZHMgb24g
-Q0lGUworCWRlZmF1bHQgeQogCWhlbHAKIAkgIEVuYWJsaW5nIHRoaXMgb3B0aW9uIHdpbGwgYWxs
-b3cgbW9yZSBkZXRhaWxlZCBzdGF0aXN0aWNzIG9uIFNNQgogCSAgcmVxdWVzdCB0aW1pbmcgdG8g
-YmUgZGlzcGxheWVkIGluIC9wcm9jL2ZzL2NpZnMvRGVidWdEYXRhIGFuZCBhbHNvCkBAIC02Nyw4
-ICs2OCw3IEBAIGNvbmZpZyBDSUZTX1NUQVRTMgogCSAgZm9yIG1vcmUgZGV0YWlscy4gVGhlc2Ug
-YWRkaXRpb25hbCBzdGF0aXN0aWNzIG1heSBoYXZlIGEgbWlub3IgZWZmZWN0CiAJICBvbiBwZXJm
-b3JtYW5jZSBhbmQgbWVtb3J5IHV0aWxpemF0aW9uLgogCi0JICBVbmxlc3MgeW91IGFyZSBhIGRl
-dmVsb3BlciBvciBhcmUgZG9pbmcgbmV0d29yayBwZXJmb3JtYW5jZSBhbmFseXNpcwotCSAgb3Ig
-dHVuaW5nLCBzYXkgTi4KKwkgIElmIHVuc3VyZSwgc2F5IFkuCiAKIGNvbmZpZyBDSUZTX0FMTE9X
-X0lOU0VDVVJFX0xFR0FDWQogCWJvb2wgIlN1cHBvcnQgbGVnYWN5IHNlcnZlcnMgd2hpY2ggdXNl
-IGxlc3Mgc2VjdXJlIGRpYWxlY3RzIgotLSAKMi4zMC4yCgo=
---000000000000df7b6a05c4482259--
 
