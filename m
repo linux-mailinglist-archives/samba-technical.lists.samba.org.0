@@ -2,59 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F257B3A4B7F
-	for <lists+samba-technical@lfdr.de>; Sat, 12 Jun 2021 01:58:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 207FA3A4BD6
+	for <lists+samba-technical@lfdr.de>; Sat, 12 Jun 2021 03:03:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=ue2Fai1CUUfmls6X3rfEQqAKrunZ8zZrgA/8pkMHeko=; b=NzYr6EMiJL2FCL3AuTfaAsBgMg
-	jv03pMqYqviwL016JG2pQHkAKv7Kggn2pTsHH4OXBj1WiyvKpvUBUtDkEJLWGjlAtiyK2zb4ZTuty
-	QaHQmswd54lkNo3vClyR9ZV+wV4P0wAVuHoOotqO7p+uqJp3qlmuLXInAeVMcSa20Y++FUcr2xwZR
-	qAFTxploEMi8LnBdPKX/CsN+rIlnngljixVIO74JZh0MyQNwym3+IXPFohp5/h8suAMQUKqdO1RSP
-	W7EEbyKWbtyk4AlUC1rPkES1YwIHVRHY9zAzbfpKEwat3PvGNmXUt6mWm9b55293SCT/tpm+h2vJa
-	EfFqGAYw==;
-Received: from ip6-localhost ([::1]:27826 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=Vy1yHSB7QdKoB1Ad0rDI6r8t+sFis1sfjS2gVqOj4YM=; b=YucCFEsvvWWv0VeR+V+Wx9/wCe
+	VaxA0+jEox6FcbOQCXk4yM4zhP8fPZXb1kHvxUxed//bkIpZuqDqV4vkmgFNbcoB2ORPHNgHZyGJv
+	0N8cPniXWpl83lz3US36fRNCV6rkC3lxHcMGXNFg9/+9bxoxMOV0p0+gsrzBhmpWlSIFx0MQoshtg
+	4wRYgpx75mtGYBaCMULi+qf1FRoghh5nAbf6CTtdf+z49wEUaS9ofjtBt2Xmu5BrA27AtF1hnLMrf
+	APtBKbPkYIk0/5I5EuR9HxRWZ9jW2jY/cgo1ElAVMxvTKXpqhqKQbkJ5pTpDjGCOYWggdGq8NdpAB
+	qtx6otxg==;
+Received: from ip6-localhost ([::1]:28552 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lrr1L-005LFl-5Z; Fri, 11 Jun 2021 23:57:03 +0000
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:35398) 
+	id 1lrs2U-005LhF-Aa; Sat, 12 Jun 2021 01:02:18 +0000
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a]:37478) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lrr1F-005LFc-H2
- for samba-technical@lists.samba.org; Fri, 11 Jun 2021 23:57:00 +0000
-Received: by mail-lf1-x12e.google.com with SMTP id i10so10988290lfj.2
- for <samba-technical@lists.samba.org>; Fri, 11 Jun 2021 16:56:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
- bh=ue2Fai1CUUfmls6X3rfEQqAKrunZ8zZrgA/8pkMHeko=;
- b=KqeHZt0CZA5yhc3KJrpGrio91/L0snDl/UuY/a5bXykdmYl1OpgPKjSRwu1LsPcsJI
- 11nS3iUH+pYw6T16ZpShpUPANuAks249B0jUU1EF8rrMcr+YaYRd7kR50gGjNCHO4SzR
- hcfAPkVw0tmya5yR5ATHymHSTGdSdvvX36IGLy4kC2JcIDWxKjWI7eF6v9apr0MZMdXS
- 2wop1pVsjOkrzlfB3xQP7UsW3NaOt04Gp0f55l4IFnLLG0eWoKzH0+fV3IP+gSfJNa0K
- 64f3ifFMReiOMNFc8u5mikJRfHo/LOI6FvZPZAxxn3Yjmlepqzq5VB2eZCEtkL9zHtVP
- CK7Q==
+ (Exim) id 1lrs2O-005Lh5-Al
+ for samba-technical@lists.samba.org; Sat, 12 Jun 2021 01:02:15 +0000
+Received: by mail-ej1-x62a.google.com with SMTP id ce15so7056584ejb.4
+ for <samba-technical@lists.samba.org>; Fri, 11 Jun 2021 18:02:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ixsystems.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=HWrGBO0Ss3W0YlvvEWad3Dvp88JF2iGF/PZKrMHmMlo=;
+ b=NacLFiT32APJpLgdTOcRFJVWY638qXSaNPKhD6S53ROvBqn1ug+BFAwuWheWxbSR0d
+ 73hWIELU6t2J1vLYzvCPlibCa80pIvd4UckJpw+y11gbagM3XCtWe4ZyALAebQdbZ3tn
+ lWHlkSpbRgv3HSCpjZOwqGhZ+nF3KP05txeVgFYhAEdL9+fNa78yJAVohq6EHOfE78YY
+ AzUNBfnXRtzs4D14ax46dgcoX39BqinAjay7Eq0xIWaYHCf+4Sxx2gwsYSa8Yky59uhj
+ w4A/o5Oqn19PnP5Rf8T8wbmE2SLX6iuCWMrLZzisy+ELnDngXpfHkbc94d3HWHNGJDtF
+ vnmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to;
- bh=ue2Fai1CUUfmls6X3rfEQqAKrunZ8zZrgA/8pkMHeko=;
- b=K1WKGulhZtsNIHn6yVGPtM/GegXIv7gQV4LnxgdoxnaNor1R3IQoVTVxrqx3jMvhQY
- A5eTitYibBAz4zaCPOE8D2+im3QCtIRbU+vaMlSOwTwa88lHvxlDH05yjqURpiM2ZCX1
- A+Oj/QL4jSfrg1eXZFjIMIhgk5MOZxTTna0lEVdV/sI60v0tDdq0b7nKYiyI3H0z1E/f
- 32KCc9o8W9yxaC5HhpmTXq7dyA1OoW+L6jyrKP2tvdIZoQLBsDbL42fkZmnnm72tbrYw
- b2uwV1UFOqwzE7vy0BYjIqQdI2XfIR9y7HuAP5cEwJazyvd2TGFdLCWYb0eZa4ny82u2
- eqnQ==
-X-Gm-Message-State: AOAM530u9FeAYt+rbkE6Wv36sUruKbzFRld1jvB4IPhsthGHwjhkp7e5
- 79HUssJCvl0OVpke8CFJ5byKtOvkmelOW95BiDkoFnyewnk=
-X-Google-Smtp-Source: ABdhPJzkfRg8Id67rhZTsUKfnfu7O4vLh2/QySG8jUbd2VOQ/bTQVLlwc0IIkudoMHJjSwbbNi+MH0DqpDVl8ERphx0=
-X-Received: by 2002:ac2:419a:: with SMTP id z26mr4251204lfh.307.1623455813865; 
- Fri, 11 Jun 2021 16:56:53 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=HWrGBO0Ss3W0YlvvEWad3Dvp88JF2iGF/PZKrMHmMlo=;
+ b=j0hhdyi5rAZ3eho4mb8cCl1GK769+TidwaDKXrd2zwX4eK1oU4nE96TFuTjavK2Tp/
+ o9gW5k7OTpKWGjWF5D4SOu4gj6rJ2f+S7BBPpfg6ztNHUp+2kupU/4smfKjjntPeuIOJ
+ ujmOtSonAd8uNmkneMcNXvZP3yG0LSCVK8by6Ug+NheTcCbdjiRKGMOlrXb8x1MwiABu
+ jFWouf3l3Y1Di6RJsco2f/7keeIm6nI556H7kCDh/lk5Mb71EQP0et20t8H+ht8DsleT
+ TaL4RvfEN2Pl3SsU1xnzqXs6wJ9Mk4lm0Yv6uK8+UE5rQ5zPQjxQumC3OvzFgBdMw5wz
+ Z8rA==
+X-Gm-Message-State: AOAM532/YDtqMSTiY8+MDD/nRfsV+qYeaj+VP/Hd16FE8iUZKPt4m69E
+ c6pGfZlV0oB2W4R3KNYxXjrKVgaSv+KSPl3oAAK+QQ==
+X-Google-Smtp-Source: ABdhPJzgZ203SmUuAaSAbDFoqk9l3wcrBwwbcOgC/L4oSHssYZkGTh3Tq7JzuzICZ0pzLkjmzZkT9DExqmEktiLUwuE=
+X-Received: by 2002:a17:906:e2d6:: with SMTP id
+ gr22mr6076511ejb.514.1623459731617; 
+ Fri, 11 Jun 2021 18:02:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAJwt-Jns5=XneYgidODs+SjJmWvoq=BhwbvRA0Z4SDKLgdZs3Q@mail.gmail.com>
-In-Reply-To: <CAJwt-Jns5=XneYgidODs+SjJmWvoq=BhwbvRA0Z4SDKLgdZs3Q@mail.gmail.com>
-Date: Fri, 11 Jun 2021 18:56:42 -0500
-Message-ID: <CAH2r5mvv8dn+u9JVMJo0dvQ_Nk2esO-uDY4J=equS6AcMgSbOg@mail.gmail.com>
-Subject: Fwd: Is it possible to mount a cifs share with kerberos using the
+ <CAH2r5mvv8dn+u9JVMJo0dvQ_Nk2esO-uDY4J=equS6AcMgSbOg@mail.gmail.com>
+In-Reply-To: <CAH2r5mvv8dn+u9JVMJo0dvQ_Nk2esO-uDY4J=equS6AcMgSbOg@mail.gmail.com>
+Date: Fri, 11 Jun 2021 21:02:01 -0400
+Message-ID: <CAB5c7xq-OrQ2VCAm3xuA2VoCj=Ek+LDpP_5AhjM8v337=0cG0Q@mail.gmail.com>
+Subject: Re: Is it possible to mount a cifs share with kerberos using the
  machine account (with active directory)
-To: samba-technical <samba-technical@lists.samba.org>
+To: Steve French <smfrench@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,37 +72,50 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Walker <awalker@ixsystems.com>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
----------- Forwarded message ---------
-From: Bruno Bigras <bigras.bruno@gmail.com>
-Date: Fri, Jun 11, 2021 at 6:51 PM
-Subject: Is it possible to mount a cifs share with kerberos using the
-machine account (with active directory)
-To: <linux-cifs@vger.kernel.org>
+On Fri, Jun 11, 2021 at 7:57 PM Steve French via samba-technical <
+samba-technical@lists.samba.org> wrote:
 
+> ---------- Forwarded message ---------
+> From: Bruno Bigras <bigras.bruno@gmail.com>
+> Date: Fri, Jun 11, 2021 at 6:51 PM
+> Subject: Is it possible to mount a cifs share with kerberos using the
+> machine account (with active directory)
+> To: <linux-cifs@vger.kernel.org>
+>
+>
+> When a Linux machine joins an Active Directory's domain, a computer
+> account is created.
+>
+> A network share can be configured to give rights to the computer account.
+>
+> Can I use that account to mount the cifs share with the computer
+> account (with the keytab file)?
+>
+> Almost every example on the internet is about using a user account or
+> using multiuser (which also uses a user account).
+>
+> Thanks,
+>
+> Bruno
+>
+>
+> --
+> Thanks,
+>
+> Steve
+>
 
-When a Linux machine joins an Active Directory's domain, a computer
-account is created.
-
-A network share can be configured to give rights to the computer account.
-
-Can I use that account to mount the cifs share with the computer
-account (with the keytab file)?
-
-Almost every example on the internet is about using a user account or
-using multiuser (which also uses a user account).
-
-Thanks,
-
-Bruno
-
-
--- 
-Thanks,
-
-Steve
-
+IIRC there are some applications that will use the machine account to
+perform operations over the network (like backup applications). Whether
+this is successful against a Samba server depends on the configured idmap
+backend on the Samba server. If idmap_rid or idmap_autorid are used, then
+it _should_ be possible. If you're relying on rfc2307 attributes for
+idmapping, then it's probably not possible  since they can't be assigned to
+computer accounts IIRC. This is hypothetical, and has caveats. I also
+haven't tested with linux clients.
