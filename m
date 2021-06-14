@@ -2,58 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D2953A5B12
-	for <lists+samba-technical@lfdr.de>; Mon, 14 Jun 2021 01:35:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D13133A5E12
+	for <lists+samba-technical@lfdr.de>; Mon, 14 Jun 2021 10:07:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=pLASACZgoEcl1P3pbbsnivd00oF00ItQz/xXGbfD/EQ=; b=aDBLOIboE2DF2hcO3y1og5INUE
-	n3U5Tf1yQqXypAERWLcbEcYYS602o+UD5DtrAWRVWlvjYFVOpMR2FMo832GjtneSccGp1EPZM7Kbx
-	YWJBNydklPbE4BvOHLCvZQ3CckW7/b4Ir7XQGvcSgldLubu1plqkJp+rk/w+RRae7P7OzOue8z5Kh
-	HacEUAoPNNJry31r7YOAoi3+bFUsss1acdv48yoaO4VQ+Wi25BdK3l3t1M74yUSNWshQD7Fdaq/aM
-	qFjX0n3RS/LqpxRYjTkQvbxXx6s07krU9msVrzLCyadsBeCFT0kdAhc1n20Rn3rItxXMOrS2xf8oO
-	wBjKgExw==;
-Received: from ip6-localhost ([::1]:33376 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=cPi2mAWUH4dBUwQ0+42yleMIrkRQY6tvhTL+Duv5WQ4=; b=IOYl0Hx47Y0rdmoo2Nos3stpDo
+	zAuT3kvwSvTXHJTB7uCGzt/nz19+N0y+JNcEYeUDqCMo1ekaKz8OmjwC7lDuydO3Aoon63miDQdiu
+	XUkUZuMfevJmpWNwsLKTZetF57IHp+7cjvwpvRvX9jSfR0W5gT5sJjlInP82MlAAEpJv3WRF7VLGG
+	L19yaBSucqfF2eH7jMaMHMkKhtJccmP7h4iy6lY4qmpog+g2X42vkRNf9vK/oCy5O1TlIQb7zVDIw
+	8MM0cfbB45fUn3YDWOKXNtsBC7Go92l+9xWtYMYbRrLFnH1VHQfxw/OWS+SWsBgTX+Bizt/n8NJbv
+	grInZv1w==;
+Received: from ip6-localhost ([::1]:34360 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lsZdv-005RUq-Lg; Sun, 13 Jun 2021 23:35:51 +0000
-Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132]:40929) 
+	id 1lshbU-005Sjo-1c; Mon, 14 Jun 2021 08:05:52 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48450) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lsZdq-005RUg-F6
- for samba-technical@lists.samba.org; Sun, 13 Jun 2021 23:35:48 +0000
-Received: by mail-lf1-x132.google.com with SMTP id k40so17972976lfv.7
- for <samba-technical@lists.samba.org>; Sun, 13 Jun 2021 16:35:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=pLASACZgoEcl1P3pbbsnivd00oF00ItQz/xXGbfD/EQ=;
- b=N8yCzvNIgGxKzDVHLs6pGnODwSmKhFqbrXx7BeqkOGVqxPFVXrHPsx25dEJnz4R2ir
- 2l7YB6osG/lUkbOXtobn3Fg3xvIgcDDA/6sBX0pOf/U7/DjjTSvA++JEjLQWj87wcv3G
- Va137eXEb97CBLGkVw8XnswjjxV0fBOVrvke1gJxDl40qWrIs2bjqGapG0kXISPuxKYD
- H0+JatL1I3IoYJK4bZW13sdimWAYaKqwHLRq6AD3R8KadOcC1YEJ3S9hr4Q9DzrzbEMF
- Xo4xe4m8GCxXJTWtrql5iTDFo4Xl0rDbmLWlPfelnp/ntLguOR5Q/9K0CVS6DHQm733w
- 30/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=pLASACZgoEcl1P3pbbsnivd00oF00ItQz/xXGbfD/EQ=;
- b=U4dLytHjt/DlCDFRw2OItZFngy70jEwpE0DTwSMt2wFgyMdssB6EIePPfcE9CtA1bX
- KHxhc0SHqISOGFYXXNPTwN9I/9swiuq8o+P1WKVeZ212LEJzxUTEkuP8JeaJUBXLIdBx
- pQ1FkKmlVkgXzu2QP/TBJ8nnNUGyjU7vlwA3sMvZTZF7RL6wg84Y+VawwdYar9R3M37c
- JZv7/fUonUAg98wr7+dxmlDceLz9ue6exfLRQeBjnwuD+YBCtBI/GJGgiRCOoQ8KhKbo
- PLdrbnxfVMxWEl91T5cx3WR4H21Xlp2WYn/vKMWlF+WfJkOFhyyC1cK+ZithC+3g12Ba
- 80UQ==
-X-Gm-Message-State: AOAM531+RJQ0ZsAy0TNZNCxJJcn0hNaaeOeJLeWmJjOCJ/IciHLRHVHL
- zoElPdZrDaplSl30Op42nFHLEpvEw8A+SXPQGP4=
-X-Google-Smtp-Source: ABdhPJx+Lw4Xbs1wZzyzLdqYERPwT2cOIF0xwW4dXW328s5oJqjcLoZ9f5LbnFns68wyKfnYZ7qu0XXyinSuw7ze+rs=
-X-Received: by 2002:ac2:43b2:: with SMTP id t18mr9819944lfl.133.1623627341275; 
- Sun, 13 Jun 2021 16:35:41 -0700 (PDT)
+ (Exim) id 1lshbO-005Sjf-AG
+ for samba-technical@lists.samba.org; Mon, 14 Jun 2021 08:05:48 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=cPi2mAWUH4dBUwQ0+42yleMIrkRQY6tvhTL+Duv5WQ4=; b=kEluxKA++BjZLGrqxL9cCci5/C
+ /vreC2gjHVWd5eNl7faHbcYTNTT2pmK442qTrNXOJsPY1gZtPcd9X81hW27yEEJuaPD2sYN78TUFu
+ g+ijdx9HCiF++xVbVVQb7ioZc88pNmlA5Tb5JaTgrCoOW6jLXQWwG4UtWtadnr2PUr7SnDp18ef7q
+ JM0L3XwAtXB+O1HHEzvAdazIqchzFiJSzm8OkJBYirmhvPpOHzzzCq+oxe2uakSQomHXwRHZHc2Ic
+ jtNhz2bdy7h7WOEw66sCu19mFNLdhEXJC9MP5aVkeQWps8dguYNyVU5xn7iXjeQBhMuDee3OMa9jS
+ Y1pHrkjFCJZEj0ah9tUe0g14WFqH/Db7pJqCo0aBJwcNG9j7Tj8FZMUxb2oLymh5xl65rSgdbkSJf
+ lBZYwzlHt0DrsUEujLkoS+m7Gz0WrZNAOfZxeh/cPJDuRoJ/9nVWV93taoOwD7SjjA+dTeb+2Rza9
+ ETFJNTXr1/wNzhcqzXPsKqU5;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1lshbN-0003V7-4x; Mon, 14 Jun 2021 08:05:45 +0000
+To: <bigras.bruno@gmail.com>
+References: <CAJwt-Jns5=XneYgidODs+SjJmWvoq=BhwbvRA0Z4SDKLgdZs3Q@mail.gmail.com>
+ <CAH2r5mvv8dn+u9JVMJo0dvQ_Nk2esO-uDY4J=equS6AcMgSbOg@mail.gmail.com>
+In-Reply-To: <CAH2r5mvv8dn+u9JVMJo0dvQ_Nk2esO-uDY4J=equS6AcMgSbOg@mail.gmail.com>
+Subject: RE: Is it possible to mount a cifs share with kerberos using the
+ machine account (with active directory)
+Date: Mon, 14 Jun 2021 10:05:44 +0200
+Message-ID: <BFA44EA808EE4625B335F8D440B1559C@rotterdam.bazuin.nl>
 MIME-Version: 1.0
-References: <20210610114817.3524037-1-libaokun1@huawei.com>
-In-Reply-To: <20210610114817.3524037-1-libaokun1@huawei.com>
-Date: Sun, 13 Jun 2021 18:35:30 -0500
-Message-ID: <CAH2r5mtOfwzNqTmuPhwejk2JBm6YFbF8LgPzyNsKwnrT0V4P2g@mail.gmail.com>
-Subject: Re: [PATCH -next] cifs: fix doc warnings in cifs_dfs_ref.c
-To: Baokun Li <libaokun1@huawei.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Office Outlook 11
+Thread-Index: AddfHYpRc1i/P79LS9auXpWRYUYTXQB08O9w
+X-MimeOLE: Produced By Microsoft MimeOLE
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,50 +60,123 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- YueHaibing <yuehaibing@huawei.com>, LKML <linux-kernel@vger.kernel.org>,
- Steve French <sfrench@samba.org>, yangjihong1@huawei.com,
- Wei Yongjun <weiyongjun1@huawei.com>, yukuai3@huawei.com
+From: "L. van Belle via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: belle@samba.org
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+Yes, that works fine here at least for years for me. 
 
-On Thu, Jun 10, 2021 at 6:39 AM Baokun Li <libaokun1@huawei.com> wrote:
->
-> Add description for `cifs_compose_mount_options` to fix the W=1 warnings:
->
->  fs/cifs/cifs_dfs_ref.c:139: warning: Function parameter or
->   member 'devname' not described in 'cifs_compose_mount_options'
->
-> Signed-off-by: Baokun Li <libaokun1@huawei.com>
-> ---
->  fs/cifs/cifs_dfs_ref.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/fs/cifs/cifs_dfs_ref.c b/fs/cifs/cifs_dfs_ref.c
-> index c87c37cf2914..ec57cdb1590f 100644
-> --- a/fs/cifs/cifs_dfs_ref.c
-> +++ b/fs/cifs/cifs_dfs_ref.c
-> @@ -125,7 +125,7 @@ cifs_build_devname(char *nodename, const char *prepath)
->   * @sb_mountdata:      parent/root DFS mount options (template)
->   * @fullpath:          full path in UNC format
->   * @ref:               optional server's referral
-> - *
-> + * @devname:           return the built cifs device name if passed pointer not NULL
->   * creates mount options for submount based on template options sb_mountdata
->   * and replacing unc,ip,prefixpath options with ones we've got form ref_unc.
->   *
-> --
-> 2.31.1
->
+Make sure you have an A (AAAA) and PTR record in the DNS. 
+Make sure you use /etc/krb5.keytab ( as in, i have not tested it on a AD-DC,
+only members ) 
+
+Add cifs/your.server.fqdn to the keytab file 
+You can use : net ads keytab add_update_ads cifs/$(hostname -f)
+This adds the UPS/SPN to the keytab file and updates it in the AD. 
 
 
--- 
-Thanks,
+( dont forget to install: keyutils ) 
+And as of this point you can pick almost any automouting setup. 
 
-Steve
+Personaly i use systemd and automounting, verything is set in systemd its
+service files. 
+Per example what i use. 
+
+Filename : srv-samba-users.mount << this name must match the path to the
+users folder. 
+
+[Unit]
+Description=UsersHomes (/srv/samba/users) 
+Requires=systemd-networkd.service
+After=network-online.target
+Wants=network-online.target
+
+[Mount]
+What=//server.fqdn/share
+Where=/srv/samba/users
+Options=(no options, try without first, default are often fine.)
+# not working, play with below one.
+#Options=vers=2.1,iocharset=utf8,rw,x-systemd.automount
+Type=cifs
+TimeoutSec=30
+
+[Install]
+WantedBy=multi-user.target
+
+##
+Refresh systemd:  systemctl daemon-reload
+
+Enable it : systemctl enable srv-samba-users.mount
+Test it : systemctl start srv-samba-users.mount
+Mount should be done. 
+Umount. : systemctl stop srv-samba-users.mount
+
+Add automounter.
+# /etc/systemd/system/home-users.automount
+[Unit]
+Description=Automount Home-users
+
+[Automount]
+Where=/srv/samba/users
+
+[Install]
+WantedBy=multi-user.target
+
+Refresh systemd:  systemctl daemon-reload
+
+systemctl enable srv-samba-users.automount
+systemctl start srv-samba-users.automount
+
+
+
+Reboot and test. 
+
+Greetz, 
+
+Louis
+
+
+> -----Oorspronkelijk bericht-----
+> Van: samba-technical 
+> [mailto:samba-technical-bounces@lists.samba.org] Namens Steve 
+> French via samba-technical
+> Verzonden: zaterdag 12 juni 2021 1:57
+> Aan: samba-technical
+> Onderwerp: Fwd: Is it possible to mount a cifs share with 
+> kerberos using the machine account (with active directory)
+> 
+> ---------- Forwarded message ---------
+> From: Bruno Bigras <bigras.bruno@gmail.com>
+> Date: Fri, Jun 11, 2021 at 6:51 PM
+> Subject: Is it possible to mount a cifs share with kerberos using the
+> machine account (with active directory)
+> To: <linux-cifs@vger.kernel.org>
+> 
+> 
+> When a Linux machine joins an Active Directory's domain, a computer
+> account is created.
+> 
+> A network share can be configured to give rights to the 
+> computer account.
+> 
+> Can I use that account to mount the cifs share with the computer
+> account (with the keytab file)?
+> 
+> Almost every example on the internet is about using a user account or
+> using multiuser (which also uses a user account).
+> 
+> Thanks,
+> 
+> Bruno
+> 
+> 
+> -- 
+> Thanks,
+> 
+> Steve
+> 
+> 
+
 
