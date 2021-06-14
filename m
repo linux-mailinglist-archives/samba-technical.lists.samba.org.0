@@ -2,51 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D13133A5E12
-	for <lists+samba-technical@lfdr.de>; Mon, 14 Jun 2021 10:07:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7529E3A7029
+	for <lists+samba-technical@lfdr.de>; Mon, 14 Jun 2021 22:21:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=cPi2mAWUH4dBUwQ0+42yleMIrkRQY6tvhTL+Duv5WQ4=; b=IOYl0Hx47Y0rdmoo2Nos3stpDo
-	zAuT3kvwSvTXHJTB7uCGzt/nz19+N0y+JNcEYeUDqCMo1ekaKz8OmjwC7lDuydO3Aoon63miDQdiu
-	XUkUZuMfevJmpWNwsLKTZetF57IHp+7cjvwpvRvX9jSfR0W5gT5sJjlInP82MlAAEpJv3WRF7VLGG
-	L19yaBSucqfF2eH7jMaMHMkKhtJccmP7h4iy6lY4qmpog+g2X42vkRNf9vK/oCy5O1TlIQb7zVDIw
-	8MM0cfbB45fUn3YDWOKXNtsBC7Go92l+9xWtYMYbRrLFnH1VHQfxw/OWS+SWsBgTX+Bizt/n8NJbv
-	grInZv1w==;
-Received: from ip6-localhost ([::1]:34360 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=h1EXaTfWtA0AMpcnbnYMSCRk8KopxDBJrnFZVP0y5oQ=; b=xfuXSNvhroS9yqfM7ui7N0PjK+
+	GqC7bSzQy5Mi2LMzcGkIfqF2X+r/lENXLaScSfosJ72VQ9GCJq6LUl1BwXSBpdQrt8N3Q3485hAN6
+	p4plnjq3O/v5nsDTCNbDmGiQ+W9RZS9AIbdv1FRqmXgGQuKDAvFZNQUoauwCzLyB5Si6L3y6T+s+m
+	Eggpxaz9y3cetLiQ3E84Dn+DV4cGBmhVZ0T1trOTPODgml+3vnOW4x2QSpGkSZNDw9z4m7t1sg0Rv
+	mgOtu/z/iC4Ad9LaPS6CSNfHtiPt92Pn3Ji+JvQeMGRcTzjsCUr3s9OmE1QuYqNGE4wiwo+BBDl6W
+	dni3FQfg==;
+Received: from ip6-localhost ([::1]:51572 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lshbU-005Sjo-1c; Mon, 14 Jun 2021 08:05:52 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48450) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lshbO-005Sjf-AG
- for samba-technical@lists.samba.org; Mon, 14 Jun 2021 08:05:48 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=cPi2mAWUH4dBUwQ0+42yleMIrkRQY6tvhTL+Duv5WQ4=; b=kEluxKA++BjZLGrqxL9cCci5/C
- /vreC2gjHVWd5eNl7faHbcYTNTT2pmK442qTrNXOJsPY1gZtPcd9X81hW27yEEJuaPD2sYN78TUFu
- g+ijdx9HCiF++xVbVVQb7ioZc88pNmlA5Tb5JaTgrCoOW6jLXQWwG4UtWtadnr2PUr7SnDp18ef7q
- JM0L3XwAtXB+O1HHEzvAdazIqchzFiJSzm8OkJBYirmhvPpOHzzzCq+oxe2uakSQomHXwRHZHc2Ic
- jtNhz2bdy7h7WOEw66sCu19mFNLdhEXJC9MP5aVkeQWps8dguYNyVU5xn7iXjeQBhMuDee3OMa9jS
- Y1pHrkjFCJZEj0ah9tUe0g14WFqH/Db7pJqCo0aBJwcNG9j7Tj8FZMUxb2oLymh5xl65rSgdbkSJf
- lBZYwzlHt0DrsUEujLkoS+m7Gz0WrZNAOfZxeh/cPJDuRoJ/9nVWV93taoOwD7SjjA+dTeb+2Rza9
- ETFJNTXr1/wNzhcqzXPsKqU5;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_AES_256_GCM_SHA384:256)
- (Exim) id 1lshbN-0003V7-4x; Mon, 14 Jun 2021 08:05:45 +0000
-To: <bigras.bruno@gmail.com>
-References: <CAJwt-Jns5=XneYgidODs+SjJmWvoq=BhwbvRA0Z4SDKLgdZs3Q@mail.gmail.com>
- <CAH2r5mvv8dn+u9JVMJo0dvQ_Nk2esO-uDY4J=equS6AcMgSbOg@mail.gmail.com>
-In-Reply-To: <CAH2r5mvv8dn+u9JVMJo0dvQ_Nk2esO-uDY4J=equS6AcMgSbOg@mail.gmail.com>
-Subject: RE: Is it possible to mount a cifs share with kerberos using the
- machine account (with active directory)
-Date: Mon, 14 Jun 2021 10:05:44 +0200
-Message-ID: <BFA44EA808EE4625B335F8D440B1559C@rotterdam.bazuin.nl>
+	id 1lst4J-005aSG-HY; Mon, 14 Jun 2021 20:20:23 +0000
+Received: from mail.univention.de ([82.198.197.8]:29771) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1lst4A-005aS7-2s
+ for samba-technical@lists.samba.org; Mon, 14 Jun 2021 20:20:20 +0000
+Received: from localhost (localhost [127.0.0.1])
+ by solig.knut.univention.de (Postfix) with ESMTP id CC73D13721AC4
+ for <samba-technical@lists.samba.org>; Mon, 14 Jun 2021 22:04:19 +0200 (CEST)
+Received: from mail.univention.de ([127.0.0.1])
+ by localhost (solig.knut.univention.de [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id m4mXx0s1x2AH for <samba-technical@lists.samba.org>;
+ Mon, 14 Jun 2021 22:04:18 +0200 (CEST)
+Received: from braeda.localnet (p4fc05d0e.dip0.t-ipconnect.de [79.192.93.14])
+ by solig.knut.univention.de (Postfix) with ESMTPSA id 440DE13721AB4
+ for <samba-technical@lists.samba.org>;
+ Mon, 14 Jun 2021 22:04:18 +0200 (CEST)
+To: samba-technical@lists.samba.org
+Subject: migrate-samldb-from-tdb-to-mdb
+Date: Mon, 14 Jun 2021 22:04:13 +0200
+Message-ID: <13407703.MucGe3eQFb@braeda>
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Office Outlook 11
-Thread-Index: AddfHYpRc1i/P79LS9auXpWRYUYTXQB08O9w
-X-MimeOLE: Produced By Microsoft MimeOLE
+Content-Type: multipart/signed; boundary="nextPart4326601.GKX7oQKdZx";
+ micalg="pgp-sha256"; protocol="application/pgp-signature"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,123 +50,238 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "L. van Belle via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: belle@samba.org
-Cc: samba-technical@lists.samba.org
+From: Arvid Requate via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Arvid Requate <requate@univention.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Yes, that works fine here at least for years for me. 
+--nextPart4326601.GKX7oQKdZx
+Content-Type: multipart/mixed; boundary="nextPart8033173.1B3tZ46Xf9"
+Content-Transfer-Encoding: 7Bit
 
-Make sure you have an A (AAAA) and PTR record in the DNS. 
-Make sure you use /etc/krb5.keytab ( as in, i have not tested it on a AD-DC,
-only members ) 
+This is a multi-part message in MIME format.
 
-Add cifs/your.server.fqdn to the keytab file 
-You can use : net ads keytab add_update_ads cifs/$(hostname -f)
-This adds the UPS/SPN to the keytab file and updates it in the AD. 
+--nextPart8033173.1B3tZ46Xf9
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 
+Hi,
 
-( dont forget to install: keyutils ) 
-And as of this point you can pick almost any automouting setup. 
+I've written a small script to convert the sam.ldb database backend of a=20
+Samba/AD DC from TDB to LMDB. It just uses python-tdb and python-lmdb and=20
+treats the key/value content uninterpreted as blobs. Maybe it's a useful=20
+addition to the repository section example/scripts or I could turn it into =
+a =20
+subcommand of samba-tool, if anybody thinks that's a good idea.
 
-Personaly i use systemd and automounting, verything is set in systemd its
-service files. 
-Per example what i use. 
+Cheers,
+Arvid
 
-Filename : srv-samba-users.mount << this name must match the path to the
-users folder. 
+=2D-=20
+Arvid Requate
+Open Source Software Engineer
 
-[Unit]
-Description=UsersHomes (/srv/samba/users) 
-Requires=systemd-networkd.service
-After=network-online.target
-Wants=network-online.target
+Univention GmbH
+be open.
+Mary-Somerville-Str.1
+28359 Bremen
+Tel. : +49 421 22232-52
+=46ax : +49 421 22232-99
 
-[Mount]
-What=//server.fqdn/share
-Where=/srv/samba/users
-Options=(no options, try without first, default are often fine.)
-# not working, play with below one.
-#Options=vers=2.1,iocharset=utf8,rw,x-systemd.automount
-Type=cifs
-TimeoutSec=30
+Gesch=C3=A4ftsf=C3=BChrer: Peter H. Ganten
+HRB 20755 Amtsgericht Bremen
+Steuer-Nr.: 71-597-02876
+--nextPart8033173.1B3tZ46Xf9
+Content-Disposition: attachment; filename="migrate-samldb-from-tdb-to-mdb"
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/x-python; charset="UTF-8"; name="migrate-samldb-from-tdb-to-mdb"
 
-[Install]
-WantedBy=multi-user.target
-
-##
-Refresh systemd:  systemctl daemon-reload
-
-Enable it : systemctl enable srv-samba-users.mount
-Test it : systemctl start srv-samba-users.mount
-Mount should be done. 
-Umount. : systemctl stop srv-samba-users.mount
-
-Add automounter.
-# /etc/systemd/system/home-users.automount
-[Unit]
-Description=Automount Home-users
-
-[Automount]
-Where=/srv/samba/users
-
-[Install]
-WantedBy=multi-user.target
-
-Refresh systemd:  systemctl daemon-reload
-
-systemctl enable srv-samba-users.automount
-systemctl start srv-samba-users.automount
+#!/usr/bin/python
+import argparse
+from contextlib import contextmanager
+from datetime import datetime
+import ldb
+import lmdb
+import os
+from samba import Ldb
+from samba.auth import system_session
+from samba.param import LoadParm
+import shutil
+import subprocess
+import sys
+import tdb
+import time
 
 
+# Default the mdb file size for the individual partitions to 8GB
+DEFAULT_BACKEND_SIZE = 8 * 1024**3
 
-Reboot and test. 
+def migrate_sam_ldb_backends_from_tdb_to_mdb(ldb_tdb_backend_dir, ldb_mdb_backend_dir):
+    print("PROCESS: Migrating sam.ldb.d backend files from TDB to MDB")
+    ldb_tdb_backend_files = [fn for fn in os.listdir(ldb_tdb_backend_dir) if fn.endswith(".ldb")]
+    for fn in ldb_tdb_backend_files:
+        t = tdb.Tdb(os.path.join(ldb_tdb_backend_dir, fn))
+        mdb_env = lmdb.open(os.path.join(ldb_mdb_backend_dir, fn), map_size=DEFAULT_BACKEND_SIZE, subdir=False)
+        os.chmod(mdb_env.path(), 0o600)
 
-Greetz, 
+        with mdb_env.begin(write=True) as txn:
+            for i in t:
+                txn.put(i, t[i])
+    print("PROCESS: Migration of sam.ldb.d backend files done")
 
-Louis
+
+@contextmanager
+def sam_ldb_backends_from_tdb_to_mdb(lp):
+    print("PROCESS: Creating new sam.ldb.d directory for Migration")
+    sam_backend_dir = lp.private_path("sam.ldb.d")
+    sam_tdb_backend_dir = lp.private_path("sam.ldb.tdb.d")
+    sam_ldb = lp.private_path("sam.ldb")
+    sam_ldb_bak = lp.private_path("sam.ldb.tdb")
+
+    try:
+        os.rename(sam_backend_dir, sam_tdb_backend_dir)
+    except OSError:
+        print("ERROR: An exception occurred, aborting migration")
+        raise
+
+    os.mkdir(sam_backend_dir)
+    os.chmod(sam_backend_dir, 0o700)
+
+    shutil.copy(sam_ldb, sam_ldb_bak)
+    os.chmod(sam_ldb_bak, 0o600)
+
+    migrate_sam_ldb_backends_from_tdb_to_mdb(sam_tdb_backend_dir, sam_backend_dir)
+
+    try:
+        yield
+    except Exception:
+        print("ERROR: An exception occurred, reverting sam.ldb.d to original state")
+        shutil.rmtree(sam_backend_dir)
+        os.rename(sam_tdb_backend_dir, sam_backend_dir)
+        os.unlink(sam_ldb)
+        os.rename(sam_ldb_bak, sam_ldb)
+        raise
+
+    print("PROCESS: Moving metadata file to new sam.ldb.d directory")
+    os.rename(os.path.join(sam_tdb_backend_dir, "metadata.tdb"), os.path.join(sam_backend_dir, "metadata.tdb"))
 
 
-> -----Oorspronkelijk bericht-----
-> Van: samba-technical 
-> [mailto:samba-technical-bounces@lists.samba.org] Namens Steve 
-> French via samba-technical
-> Verzonden: zaterdag 12 juni 2021 1:57
-> Aan: samba-technical
-> Onderwerp: Fwd: Is it possible to mount a cifs share with 
-> kerberos using the machine account (with active directory)
-> 
-> ---------- Forwarded message ---------
-> From: Bruno Bigras <bigras.bruno@gmail.com>
-> Date: Fri, Jun 11, 2021 at 6:51 PM
-> Subject: Is it possible to mount a cifs share with kerberos using the
-> machine account (with active directory)
-> To: <linux-cifs@vger.kernel.org>
-> 
-> 
-> When a Linux machine joins an Active Directory's domain, a computer
-> account is created.
-> 
-> A network share can be configured to give rights to the 
-> computer account.
-> 
-> Can I use that account to mount the cifs share with the computer
-> account (with the keytab file)?
-> 
-> Almost every example on the internet is about using a user account or
-> using multiuser (which also uses a user account).
-> 
-> Thanks,
-> 
-> Bruno
-> 
-> 
-> -- 
-> Thanks,
-> 
-> Steve
-> 
-> 
+def open_samdb_raw(lp):
+    # Use options=["modules:"] to keep the attached LDB modules from loading
+    samdb_path = lp.private_path("sam.ldb")
+    return Ldb(url=samdb_path, session_info=system_session(),
+                            lp=lp, options=["modules:"])
+
+
+def activate_mdb(lp):
+    print("PROCESS: Switching sam.ldb from TDB to MDB")
+    samdb = open_samdb_raw(lp)
+
+    samdb.transaction_start()
+    try:
+        delta = ldb.Message()
+        delta.dn = ldb.Dn(samdb, "@PARTITION")
+        delta["backendStore"] = \
+           ldb.MessageElement("mdb",
+                           ldb.FLAG_MOD_REPLACE,
+                           "backendStore")
+        samdb.modify(delta)
+
+        delta = ldb.Message()
+        delta.dn = ldb.Dn(samdb, "@SAMBA_DSDB")
+        delta["requiredFeatures"] = \
+           ldb.MessageElement("lmdbLevelOne",
+                           ldb.FLAG_MOD_ADD,
+                           "requiredFeatures")
+        samdb.modify(delta)
+    except ldb.LdbError:
+        samdb.transaction_cancel()
+        print("PROCESS: Switching sam.ldb from TDB to MDB failed")
+        raise
+    else:
+        samdb.transaction_commit()
+        print("PROCESS: Switching sam.ldb from TDB to MDB successful")
+
+
+@contextmanager
+def stopped_samba_and_s4c():
+    print("PROCESS: Stopping Samba and S4-Connector")
+    subprocess.call(("systemctl", "stop", "univention-s4-connector"))
+    subprocess.call(("/etc/init.d/samba", "stop"))
+
+    try:
+        yield
+    except Exception:
+        raise
+
+    print("PROCESS: Starting Samba and S4-Connector again")
+    subprocess.call(("/etc/init.d/samba", "start"))
+    time.sleep(5)
+    subprocess.call(("systemctl", "start", "univention-s4-connector"))
+
+
+def sam_ldb_is_using_mdb(lp):
+    samdb = open_samdb_raw(lp)
+    res = samdb.search(base="@PARTITION", scope=ldb.SCOPE_BASE, attrs=["backendStore"])
+    return (res and "backendStore" in res[0] and str(res[0]["backendStore"]) == "mdb")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Migrate sam.ldb from TDB to MDB")
+    parser.add_argument("--skip-dbcheck", action='store_true')
+    args = parser.parse_args()
+
+    lp = LoadParm()
+
+    if sam_ldb_is_using_mdb(lp):
+        print("INFO: Nothing to do, sam.ldb is already using MDB")
+        sys.exit(0)
+
+    with stopped_samba_and_s4c():
+        if not args.skip_dbcheck:
+            print("PROCESS: Running pre-migration check of sam.ldb database")
+            if subprocess.call(("samba-tool", "dbcheck", "--cross-ncs")):
+                sys.exit(1)
+
+        t0 = datetime.now()
+
+        with sam_ldb_backends_from_tdb_to_mdb(lp):
+            activate_mdb(lp)
+
+        duration = str(datetime.now() - t0).split('.')[:-1][0]
+        print("INFO: Duration: %s" % duration)
+
+        if not args.skip_dbcheck:
+            print("PROCESS: Running post-migration check of sam.ldb database")
+            if subprocess.call(("samba-tool", "dbcheck", "--cross-ncs")):
+                sys.exit(1)
+
+--nextPart8033173.1B3tZ46Xf9--
+
+--nextPart4326601.GKX7oQKdZx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part.
+Content-Transfer-Encoding: 7Bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEzxtmXi4eIVe2j2uTH9EoIGRGfO4FAmDHtj0ACgkQH9EoIGRG
+fO7BIBAAhpapvvBzXihqVK+gRbd7RnhrY/D4mcxnRi2et88rfJVrmTlDc9b3MNgx
+jlC5r2bG8ZQLRaiM2g1lk0pv6y0ymLC2N+sRQJiLFl7Oq2PLdFa4/UP2IZ5iOSIu
+RQ9COEe9HX+JF6wF8pnkokyaQ3o8chRJ9KBQ14wfBui8Uj5EbJfL5zLGCyUNg7Rf
+/lMS1Zg4ljCMWYh9RZs0SXDquTN6iDJC2QHhuRKSp5XgpmlDjdperTJvb1P0VVQn
+xVJNGQhkIJ7FczDGdb7o0CshnGPYSHtdl2b6Ckrt8uo5gYNhsqXLHr0kqadHmAod
+JOD+1Zkqq6ssUPyzjYYPID1e+QHe5QTM6oJjCSm2+HqvHCr/hV3lbImowPlQyYRd
+e87VNOHGSL309IjKrg5a1U4wMItTe8nHk/G8eI/5s0W5R53Z7gCvDnheDocggdxp
+ns5HivAv0XQsJWSWpYMHLNhED8PBu3ogYJ2sGEz2Ijw1h+XFh2rCmur0HkfmdP7O
+bKtqxJmo4dp1Z2wt+8NAA50ikvzQxAalZNfmj6+lNJEQ4VFmT6VC8sgrvwgn+2xH
+FELu16lBRBxjyMDAwJrE8hv04c6M782ubURNKQqn2qWEb1AHSCWt7j0nDcQqtHz7
+ZL2AQ6kZaQGLHVuuq2AT17QOSsYrZtCzTL/MP3CunnLjwO8MYMw=
+=TFsC
+-----END PGP SIGNATURE-----
+
+--nextPart4326601.GKX7oQKdZx--
+
+
 
 
