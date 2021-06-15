@@ -2,41 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3308C3A7B6B
-	for <lists+samba-technical@lfdr.de>; Tue, 15 Jun 2021 12:09:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51C2B3A8D17
+	for <lists+samba-technical@lfdr.de>; Wed, 16 Jun 2021 01:57:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=1x2BYH2HO6f9LEvJzIwh1Kk2ooeEiExeyKaRgJSCTTE=; b=AkxAtkmSIrOKSSOdRi4xKct1xL
-	iL0erBjUW/IDFsKkbNPHr/NgHs6ePagR37AzF0for2sLzEl+xY8U7qpGzLRMAkpBGHvUBxc43Cptc
-	2rvBQ1IcGD9lH6lD7UgU36eI/gyNHh5ox3VrUF1dC+Vwg8c6N/CDjqEKFs8k0V1RUCzghicbm6gq6
-	60WRFJOaf6n1hmI4sGvoH/W82rq4t/QS9q9TxcXzJ30rHbaI/6TWuFKbwqELzwqFvwQVDhIcEjvvR
-	rVXaDqYcIdcNHJLtbLCLd2Que3eG55NCmD8tDNluf/R0vyGKI6ayWBwsVb+644RB7u/+xRMEgvAtu
-	8P9R+1yg==;
-Received: from ip6-localhost ([::1]:52834 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=og/ue3m2KmQHf9xWKja7WjhXJC3AHDDN6U9iOXbluE8=; b=oQzQavHvgWMXRRfmS9g0Xdg3dJ
+	AiGjyAELEyS53NvBHtUZj4fcW9nwMN+9VOv2es9FSLFNjbB5VXuef7CN4F2jVZkF+Q5UU7bfMP7Zv
+	fpjbKOg+Luu5XhQyjjyMhqQ+5TdzPouQvyXR/S1d4r3jlHT18nY9gqjI4ZLwXii1hOP8KJh66/51+
+	jo+92jBFS/fzBad/x/KwatwNz1dvjVeayjnoY6/DZWT2By75ZW4IbDSo3NShBCC6O7oh2r8rbjQHL
+	1Rvd6YVnNfKSFaKZhVqc6z4Vzd5LLJh3WV9kdN3GacaYESNPi/LqMLptlHDQoXRZF4YrUmTCDUvIo
+	ZVYOjDTQ==;
+Received: from ip6-localhost ([::1]:22692 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lt5z3-005dBU-3m; Tue, 15 Jun 2021 10:07:49 +0000
-Received: from mail.univention.de ([82.198.197.8]:9916) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1lt5yx-005dBL-Mz
- for samba-technical@lists.samba.org; Tue, 15 Jun 2021 10:07:46 +0000
-Received: from localhost (localhost [127.0.0.1])
- by solig.knut.univention.de (Postfix) with ESMTP id 54DB3137368B6
- for <samba-technical@lists.samba.org>; Tue, 15 Jun 2021 12:07:40 +0200 (CEST)
-Received: from mail.univention.de ([127.0.0.1])
- by localhost (solig.knut.univention.de [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OskJYH-gKRTj; Tue, 15 Jun 2021 12:07:38 +0200 (CEST)
-Received: from braeda.localnet (p4fc05d0e.dip0.t-ipconnect.de [79.192.93.14])
- by solig.knut.univention.de (Postfix) with ESMTPSA id 2A1D613736864; 
- Tue, 15 Jun 2021 12:07:28 +0200 (CEST)
-To: samba-technical@lists.samba.org
-Subject: Re: migrate-samldb-from-tdb-to-mdb
-Date: Tue, 15 Jun 2021 12:07:22 +0200
-Message-ID: <6313078.2iPT33SAM4@braeda>
-In-Reply-To: <13407703.MucGe3eQFb@braeda>
-References: <13407703.MucGe3eQFb@braeda>
+	id 1ltIv4-0065AE-KL; Tue, 15 Jun 2021 23:56:34 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55780) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ltIuz-0065A5-4z
+ for samba-technical@lists.samba.org; Tue, 15 Jun 2021 23:56:32 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=og/ue3m2KmQHf9xWKja7WjhXJC3AHDDN6U9iOXbluE8=; b=xhgMiU8tt8IfHStIAmT3rVvgtS
+ MZR5z8GS0FApu/df0wAPseBTZY+vWO22TnN7JfhvG5OCELMlZIsQuwmD5Bf0eg8DUs/ZhYCjrZGgq
+ 68cHA4phDWANvLIxjDJAD8kDQxyOecmSlzep5O/S6JWLVfXY7H9BZSvCidksQshPPFV8+LQpO24et
+ rKa4u7Aq8qS8Wl8P35Oav3i9McIhMWnQyEOiiXadu3f5uMvxrD03nvKUfI3tCkNtdrM16YcHYgELG
+ TwB9SBGvMijgX3f1LoTuIXtyjIqBFbBfKDb2mQOd+elgdTF/9oUu8wph9GjovSSFQBBGivW98RJYU
+ FxSn2LMBunjvNe0YrRyCPDOlmDo/RTj9tYE811c/415mOhcYjBNFwy2EAEkGvjabpt/mWG2dt2esV
+ eHxPh8pBT1n5VPrB4Iy90gpJLsymO1yS4WaP8Y4pIUGTVZ399uJ/z911LCoM0D4/65o5FwBmZ7eF3
+ lq5QNacapjCkfNId/MqRsVsB;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ltIuw-00064H-V4; Tue, 15 Jun 2021 23:56:27 +0000
+Message-ID: <b2cb195314281883e378c908784ac6f9f841584d.camel@samba.org>
+Subject: Heimdal upgrade, really happening this time
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Stefan Metzmacher <metze@samba.org>, Isaac Boukris <iboukris@gmail.com>
+Date: Wed, 16 Jun 2021 11:56:22 +1200
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPart4570979.KiezcSG77Q";
- micalg="pgp-sha256"; protocol="application/pgp-signature"
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,78 +54,68 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Arvid Requate via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Arvid Requate <requate@univention.de>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---nextPart4570979.KiezcSG77Q
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+G'Day,
 
-Hi,
+I just wanted to say that Catalyst is finally making a solid run to get
+the Heimdal upgrade done, and FAST implemented.
 
-I've clean up the script a bit, defaulted to Python 3 and created a PR:
+The purpose of this mail is to outline my proposed approach, in case
+there are any major issues.
 
-https://gitlab.com/samba-team/samba/-/merge_requests/2016
+Firstly, I wanted to pass on great thanks to you Metze for your prompt
+review of the patches last night.  Where I can, I want to keep 'drip
+feeding' the patches in, but that might be as much as I can manage on
+the Heimdal side, the rest and pretty firmly tied to the actual
+upgrade.
 
-Cheers,
-Arvid
+There is still so much to do of course and any assistance you can give
+will make things better and safer, but be assured that this time we
+(Catalyst) are committed, serious and can pick up and hold up our end
+of the task.
 
+On testing, our intention is implement an initial Python test for the
+FAST protocol, and enough of the Python testing to allow the C based
+krb5.kdc.canon to be stripped back, stopping it modifying the AS-REQ
+and allowing us to restore the AS-REQ protection.
 
-On Montag, 14. Juni 2021 22:04:13 CEST Arvid Requate via samba-technical=20
-wrote:
-> Hi,
->=20
-> I've written a small script to convert the sam.ldb database backend of a
-> Samba/AD DC from TDB to LMDB. It just uses python-tdb and python-lmdb and
-> treats the key/value content uninterpreted as blobs. Maybe it's a useful
-> addition to the repository section example/scripts or I could turn it int=
-o a
-> subcommand of samba-tool, if anybody thinks that's a good idea.
->=20
-> Cheers,
-> Arvid
+In parallel to that, I'm working to get a modern Heimdal building and
+passing tests, based on the great work already done.  For the Samba-
+tree changes to source4/heimdal in the branch, I'm going to upstream
+what changes I can, and push the rest to lorikeet-heimdal so we are not
+totally blocked on upstream merge issues.
 
+This will land as a pretty big bang, I don't really know any other way
+sadly.
 
-=2D-=20
-Arvid Requate
-Open Source Software Engineer
+We don't have an infinite budget, quite the opposite really, but if we
+are all sensible then I'm confident we can land this by the end of
+2021, perhaps even sooner!
 
-Univention GmbH
-be open.
-Mary-Somerville-Str.1
-28359 Bremen
-Tel. : +49 421 22232-52
-=46ax : +49 421 22232-99
+I greatly appreciate the work you have done over the years towards
+this, without that ongoing effort this just wouldn't be possible.
 
-Gesch=C3=A4ftsf=C3=BChrer: Peter H. Ganten
-HRB 20755 Amtsgericht Bremen
-Steuer-Nr.: 71-597-02876
---nextPart4570979.KiezcSG77Q
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
+My current draft is up as a MR, and I'll continue to work to upstream
+what I can (into Samba/Heimdal).  I do plan to upgrade Heimdal again
+(perhaps to align to a release in 2021 if they make one) before I
+finally merge the branch.
 
------BEGIN PGP SIGNATURE-----
+https://gitlab.com/samba-team/samba/-/merge_requests/2014
 
-iQIzBAABCAAdFiEEzxtmXi4eIVe2j2uTH9EoIGRGfO4FAmDIe9oACgkQH9EoIGRG
-fO7DLBAAjI/KFzw95vbmaG9MFG+6aELEi2b8a7BmVgEotcawuU9y9ZBhBwRE9b3o
-QGLZ0t3YD+AEDNCTDnQkrwuvWZHTz9vZBz9JOYSk1oC6XfjwMdTrVLbheFI5ujg0
-V3lvrDKTKXfk51cpetI0qb9VzCi4SpB6ESX1T1vByJBDTp1CfDlxWya9/W0BE/8p
-8oXDBXFyFoMaVmVzYoO3bY4hathydDwZK0JMPzsPr11ohUkzRjAUdaunw+o3ArCm
-Ak79ID7axKGx+H7WuwOnPowqFl8DAqeEcThhUmyqdE0qF+lXa8Cc+UpbXTbPAx18
-mcAFytUjQUoSXVfMxL6Gq6BX7c9vY2cGhN7OCvhjuZzEGoxCHFuJeZ65zHkcK80Z
-KtHWjx+OXitrHkNo/prPkuGauRFu1+Iw3C9jJkNMAPdSbKpVGwhsUR8HcK/a8ZXm
-ieQujO3NNhrrQjlzyQfX8vkEqVYvc3y6sl9pbJjED8yaThOhvvrjrMSUBStx++Dh
-5zlBGzzDeXQz0MYM5lCXGGJc8Es8RYLzXsIarrs59W5iHskug84AzRBtFQ62XANm
-YeuH2SHxrX54SldkzL4pbPgL6hvwQnSy6YMirEdyRMIrNb4QqlhPrjWfTUtOku1r
-e9HzZ4kg+RXpWa1+zTfLojzrb8gz87WlTib6AHkZIMcqf7FNkG0=
-=qigl
------END PGP SIGNATURE-----
+If you have any specific directions, concerns or hints I should follow
+please let me know early.
 
---nextPart4570979.KiezcSG77Q--
+Andrew Bartlett
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
 
-
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
 
 
