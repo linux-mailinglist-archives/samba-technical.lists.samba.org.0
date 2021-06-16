@@ -2,76 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CA8F3A9588
-	for <lists+samba-technical@lfdr.de>; Wed, 16 Jun 2021 11:06:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C2863AA4AE
+	for <lists+samba-technical@lfdr.de>; Wed, 16 Jun 2021 21:52:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=ZEELOBRcx89CetXXRDQhms06SsV5tr6lHgWkwu+87P8=; b=zZ9g5vHIWc9xDsC5XRSa36Mhwi
-	5aHbzv3CIujFeIIQPNZwDM6JhZhmLogTVR7Gjs3SCzD1PbOMyf7mQj6bnKBfpqUUTaPEqvaJCvKro
-	PfE+0oF7f+ZNogtOmHc4m7ke8tCkR8sm4L9DDE3jcqbAMeimkLENqbDxmvygie9dWwWzWUroIaitU
-	KyWzZ9mnR7442n/N6/3gDtCiyFlcbdLcD3ygq0HAkYhOZ90BPB6sJxzOh7CqvMvlQeXvubZR2d/zg
-	LRdDRf62GItjj3MUk+uwuzuru6nFYgpQQ6VGPYiSfwOFwk8QvRSji2TWqDIB/ssyLkKBNbmnh0HkP
-	baSpjLGQ==;
-Received: from ip6-localhost ([::1]:38086 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=Av0KI7RkFaesTFugEQZT+ddBjEelLrx3vSG1Yx/YO8E=; b=Ttbr0goooG+ds9iPBhbiAuUJ7b
+	/upYuqtnUcBH8fTQpfAPPLhl5dq0J0ILZxZwjUhBPgnlc7dGrHX9jV/3JZpkzuISXWOwCE9o3jwYc
+	pUNbwCqnvxZzD6Tv5EO1FoEfgmJi1lU2MG3n5L6ySZkuNtheyqqwLS4/7W3GpdUO5QPUSCDIlXfHH
+	zcaDbVZtJM16NLRIhCExAuKv+9vdeUfFA33l/t1q/7m6+3AOvTCLeXn2D8LxSoGamcHvy13Mnf1uE
+	1rDQaAOjrGSdR7kTGu73OYEO0LmCehJs2KnG0QkTTmbvVIU3+oHyXvhGwFoOhbfknvhzB1w/AL5Zm
+	H0CQX2nA==;
+Received: from ip6-localhost ([::1]:56016 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ltRUB-006EM8-4x; Wed, 16 Jun 2021 09:05:23 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:26844) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1ltRU2-006ELy-25
- for samba-technical@lists.samba.org; Wed, 16 Jun 2021 09:05:18 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1623834310;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type;
- bh=ccJdyRiHjFjxYS79nLpGsYgqwL5s6iLUsowuxWQrIfc=;
- b=SccPl/7Wr0vUNBzLgtwnOfEzfq3ESDl3t9Rs9QKWXPmPFlrsg5tJNpZ5oIE0P+Y5LIDLwb
- BqplbDmYVWbAXukeaDfmGiKrjzVMPcAASlxZq2YzahWd/Md+7dDE7r9r4wUvpH9jNtP5uL
- npRazBpFVKG3W6hEO0r4WaL6jfEaK6g=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1623834310;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type;
- bh=ccJdyRiHjFjxYS79nLpGsYgqwL5s6iLUsowuxWQrIfc=;
- b=SccPl/7Wr0vUNBzLgtwnOfEzfq3ESDl3t9Rs9QKWXPmPFlrsg5tJNpZ5oIE0P+Y5LIDLwb
- BqplbDmYVWbAXukeaDfmGiKrjzVMPcAASlxZq2YzahWd/Md+7dDE7r9r4wUvpH9jNtP5uL
- npRazBpFVKG3W6hEO0r4WaL6jfEaK6g=
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-494--s7immbOOZ-PKYeDeo0Zzg-1; Wed, 16 Jun 2021 04:49:30 -0400
-X-MC-Unique: -s7immbOOZ-PKYeDeo0Zzg-1
-Received: by mail-pl1-f197.google.com with SMTP id
- bh7-20020a170902a987b029011744126551so408328plb.3
- for <samba-technical@lists.samba.org>; Wed, 16 Jun 2021 01:49:30 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=scRnWfLkR2tJcslRFUhirnZ9r326j2K7KeqzZAcvV0Y=;
- b=Fz50RUZseKx1sV2VnX25cRgVIgntdQXBjUObyelsEI/smCeoBQaeqf9eeqdX1VK43E
- sb9EQQBdTg1aAOg4sGJEYvlWI6HGkIW4D4fbWWdnOoXy0UBWRtWfl2g0M+L4XOuNE84x
- 4g02zjiWygqtv/efG83aEaE0N+6FMO7g2wSA1XFptVApm+L2ijMYmVFPG5K/OqgVGrjO
- qyobZdsdXT+OKXc/yKXC6GLMxqpg8IB3TvIbKMgghQeP3d9clSm7of/Uphnpg+6SEXIO
- zA6x3noRTFFyvydb2BUeze3RMLME9/4h+bGxlgb2Iy61ZLkfe+njSuRXUNNy+1buRw0T
- f90w==
-X-Gm-Message-State: AOAM532pukTscp8HCba0sGsmIopO4X60SbIzrKbh2eYsVOulS8de4Hxw
- NOiIXdPj3YwOZ8SNmbujTl+yS5IR6E99A84MK0+UXT1bMYX2XdlvjBdJYXcwMPS69UQpScKR/O8
- tngYOxSWJG3PQf2hDi81mcj9Bz5SqlW2DW13HiX0i9+i6
-X-Received: by 2002:a63:6c6:: with SMTP id 189mr3842932pgg.366.1623833369511; 
- Wed, 16 Jun 2021 01:49:29 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw+8tVvOnLlXdgfbsn7cZchTnImNPzvS4RruEfKOvmJt/FfRVDdj8K4yhGskTzcCyhNilTxGiakIC9hMp3KcPo=
-X-Received: by 2002:a63:6c6:: with SMTP id 189mr3842904pgg.366.1623833369062; 
- Wed, 16 Jun 2021 01:49:29 -0700 (PDT)
+	id 1ltbZb-006Nuw-7P; Wed, 16 Jun 2021 19:51:39 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59064) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ltbZW-006Nun-D7
+ for samba-technical@lists.samba.org; Wed, 16 Jun 2021 19:51:36 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=Av0KI7RkFaesTFugEQZT+ddBjEelLrx3vSG1Yx/YO8E=; b=LCMxJjv91NOBVjqQkDO7CN1uyG
+ kXDSE+YusI8gxb8i8eIeShCPUFvYZVoMCLKOvrv009CCQsJABR/YIZplIlcKGs9L364PIzNjpVsdc
+ 7vCvIREy7xq2DgMvDXcnaPGA+iCxh1NfUqcH/Q5HqIeZX8lcfneI5OIe79fAEh6H83XSEN6MDviXP
+ wc+hRsBs52CIJogV30mC/odZA11Ofc1JkOn2nZ7SWAtcDcxr9aUf3Yj72ARGOIYPIMBYiwMhE0vKx
+ O/vi0JHRJCugMkABr9Vqe/Nw6ldr4mVsJnDQtozfFP/nboioHEVpod21PNHOf6ChUsqjTw6NmGfYn
+ It2rQXH/jDdtPLwGPcQFmooY/NxNXHsgSI/0/CiRZ9DB64Y6/yxUvq8uDo2s91Syl03ckw0afRIXG
+ 2Igv0sI8CIeiWudM1XNOdidQzumPQcD+5E3jUPLSkOtFLGSDrOme86t0bWHkVodFKvdsUqbnCiZPL
+ Q44X8PHKCcS5VuyPZwZnilsB;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ltbZU-000263-8t; Wed, 16 Jun 2021 19:51:32 +0000
+Date: Wed, 16 Jun 2021 12:51:29 -0700
+To: Pavel Filipensky <pfilipen@redhat.com>
+Subject: Re: duplicit LDAP calls
+Message-ID: <20210616195129.GA669059@jeremy-acer>
+References: <CAEcb10vV+557J6mTRRw+tjTh8x34b0tud-7V2GYkzCTOMgquxw@mail.gmail.com>
 MIME-Version: 1.0
-Date: Wed, 16 Jun 2021 10:49:18 +0200
-Message-ID: <CAEcb10vV+557J6mTRRw+tjTh8x34b0tud-7V2GYkzCTOMgquxw@mail.gmail.com>
-Subject: duplicit LDAP calls
-To: samba-technical@lists.samba.org
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pfilipen@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAEcb10vV+557J6mTRRw+tjTh8x34b0tud-7V2GYkzCTOMgquxw@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,64 +55,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Pavel Filipensky via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Pavel Filipensky <pfilipen@redhat.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+On Wed, Jun 16, 2021 at 10:49:18AM +0200, Pavel Filipensky via samba-technical wrote:
+>Hi,
+>
+>during my my learning/observation of how machine account password is
+>changed via net ads changetrsutpw I have noticed that two same LDAP calls
+>are done in ads_keytab_add_entry() in source3/libads/kerberos_keytab.c  :
+>
+>391 »·······my_fqdn = ads_get_dnshostname(ads, tmpctx, lp_netbios_name());
+>
+>...
+>400 »·······if (!ads_has_samaccountname(ads, tmpctx, lp_netbios_name())) {
+>
+>
+>Both ads_get_dnshostname() and ads_has_samaccountname() call
+>ads_find_machine_acct() and trigger exactly same LDAP search and get the
+>same response. I guess there are more places where an unnecessary network
+>call is done, but at least for this case it is easy to refactor the code to
+>avoid it. Does  it makes sense to gain performance for possibly less
+>structured code?
 
-during my my learning/observation of how machine account password is
-changed via net ads changetrsutpw I have noticed that two same LDAP calls
-are done in ads_keytab_add_entry() in source3/libads/kerberos_keytab.c  :
+Depends on the code changes, but yes, that does seem
+a useful fix !
 
-391 =C2=BB=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7my_fqdn =3D ads_get_dns=
-hostname(ads, tmpctx, lp_netbios_name());
+Thanks !
 
-...
-400 =C2=BB=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7if (!ads_has_samaccount=
-name(ads, tmpctx, lp_netbios_name())) {
-
-
-Both ads_get_dnshostname() and ads_has_samaccountname() call
-ads_find_machine_acct() and trigger exactly same LDAP search and get the
-same response. I guess there are more places where an unnecessary network
-call is done, but at least for this case it is easy to refactor the code to
-avoid it. Does  it makes sense to gain performance for possibly less
-structured code?
-
-Cheers,
-Pavel
-
-This request is send twice:
-
-            LDAPMessage searchRequest(7)
-"dc=3DADDOM,dc=3DSAMBA,dc=3DEXAMPLE,dc=3DCOM" wholeSubtree
-                messageID: 7
-                protocolOp: searchRequest (3)
-                    searchRequest
-                        baseObject: dc=3DADDOM,dc=3DSAMBA,dc=3DEXAMPLE,dc=
-=3DCOM
-                        scope: wholeSubtree (2)
-                        derefAliases: neverDerefAliases (0)
-                        sizeLimit: 0
-                        timeLimit: 15
-                        typesOnly: False
-                        Filter: (samAccountName=3DADMEMKEYTAB$)
-                            filter: equalityMatch (3)
-                                equalityMatch
-                                    attributeDesc: samAccountName
-                                    assertionValue: ADMEMKEYTAB$
-                        attributes: 10 items
-                            AttributeDescription: objectClass
-                            AttributeDescription: SamAccountName
-                            AttributeDescription: userAccountControl
-                            AttributeDescription: DnsHostName
-                            AttributeDescription: ServicePrincipalName
-                            AttributeDescription: userPrincipalName
-                            AttributeDescription: unicodePwd
-                            AttributeDescription: msDS-AdditionalDnsHostNam=
-e
-                            AttributeDescription:
-msDS-SupportedEncryptionTypes
-                            AttributeDescription: nTSecurityDescriptor
