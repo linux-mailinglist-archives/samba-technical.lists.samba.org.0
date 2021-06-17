@@ -2,46 +2,72 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C2863AA4AE
-	for <lists+samba-technical@lfdr.de>; Wed, 16 Jun 2021 21:52:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 124F23AB67C
+	for <lists+samba-technical@lfdr.de>; Thu, 17 Jun 2021 16:50:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=Av0KI7RkFaesTFugEQZT+ddBjEelLrx3vSG1Yx/YO8E=; b=Ttbr0goooG+ds9iPBhbiAuUJ7b
-	/upYuqtnUcBH8fTQpfAPPLhl5dq0J0ILZxZwjUhBPgnlc7dGrHX9jV/3JZpkzuISXWOwCE9o3jwYc
-	pUNbwCqnvxZzD6Tv5EO1FoEfgmJi1lU2MG3n5L6ySZkuNtheyqqwLS4/7W3GpdUO5QPUSCDIlXfHH
-	zcaDbVZtJM16NLRIhCExAuKv+9vdeUfFA33l/t1q/7m6+3AOvTCLeXn2D8LxSoGamcHvy13Mnf1uE
-	1rDQaAOjrGSdR7kTGu73OYEO0LmCehJs2KnG0QkTTmbvVIU3+oHyXvhGwFoOhbfknvhzB1w/AL5Zm
-	H0CQX2nA==;
-Received: from ip6-localhost ([::1]:56016 helo=hr1.samba.org) 
+	bh=R66K19lwsRQwaFFrFo/rs8egBFc+D8JWz5XsXuFq2CQ=; b=sjGNeZgwsPHmPxlVh9zKgcE+LZ
+	Wbh4cEWaIQL4bks/sSLFWsloOowPhMNb+oZhYoGMwuZMDnlZr42YEavC0g5VmrDTI1gpNOxn2kW/b
+	p2Z5tIckANVy9UeWkHqZ4Ax8VB1+b+yhGk11QjXuRlqyZUX2C+x33/tFtaH+MaM8uQ0h/P78cGEa0
+	CosdDQXjxva8Bi2aRLBoG4rVIobMMG4o9py2U7oYnap34mFpBcFvMq5EH3ifJKks5jvg4EcKhKdIl
+	px5jcTnpReD43Ozr12A9RUvMP+x9RNwu+R0tWdo+vkZp7tbqF4/4zXDt1SZS5wdRBD7wrEalyZN72
+	V7v1xa/g==;
+Received: from ip6-localhost ([::1]:22146 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ltbZb-006Nuw-7P; Wed, 16 Jun 2021 19:51:39 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59064) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ltbZW-006Nun-D7
- for samba-technical@lists.samba.org; Wed, 16 Jun 2021 19:51:36 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=Av0KI7RkFaesTFugEQZT+ddBjEelLrx3vSG1Yx/YO8E=; b=LCMxJjv91NOBVjqQkDO7CN1uyG
- kXDSE+YusI8gxb8i8eIeShCPUFvYZVoMCLKOvrv009CCQsJABR/YIZplIlcKGs9L364PIzNjpVsdc
- 7vCvIREy7xq2DgMvDXcnaPGA+iCxh1NfUqcH/Q5HqIeZX8lcfneI5OIe79fAEh6H83XSEN6MDviXP
- wc+hRsBs52CIJogV30mC/odZA11Ofc1JkOn2nZ7SWAtcDcxr9aUf3Yj72ARGOIYPIMBYiwMhE0vKx
- O/vi0JHRJCugMkABr9Vqe/Nw6ldr4mVsJnDQtozfFP/nboioHEVpod21PNHOf6ChUsqjTw6NmGfYn
- It2rQXH/jDdtPLwGPcQFmooY/NxNXHsgSI/0/CiRZ9DB64Y6/yxUvq8uDo2s91Syl03ckw0afRIXG
- 2Igv0sI8CIeiWudM1XNOdidQzumPQcD+5E3jUPLSkOtFLGSDrOme86t0bWHkVodFKvdsUqbnCiZPL
- Q44X8PHKCcS5VuyPZwZnilsB;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ltbZU-000263-8t; Wed, 16 Jun 2021 19:51:32 +0000
-Date: Wed, 16 Jun 2021 12:51:29 -0700
-To: Pavel Filipensky <pfilipen@redhat.com>
-Subject: Re: duplicit LDAP calls
-Message-ID: <20210616195129.GA669059@jeremy-acer>
-References: <CAEcb10vV+557J6mTRRw+tjTh8x34b0tud-7V2GYkzCTOMgquxw@mail.gmail.com>
+	id 1lttL7-006XQ7-2b; Thu, 17 Jun 2021 14:49:53 +0000
+Received: from mx0b-00069f02.pphosted.com ([205.220.177.32]:29238) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1lttL1-006XPy-Pt
+ for samba-technical@lists.samba.org; Thu, 17 Jun 2021 14:49:50 +0000
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 15HE6lm1032639; Thu, 17 Jun 2021 14:17:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2020-01-29;
+ bh=R66K19lwsRQwaFFrFo/rs8egBFc+D8JWz5XsXuFq2CQ=;
+ b=ui7pC6MYyxhbJ/qWqUetP0Sb0qTkX39ztTK7Izndpp0p/I/CFS+fh0+9xJkPZKOr/RM8
+ UwjS3nh/FXnpdDIyWLkAUQVnuEyL5GwZZyf0GTPKN9EtiQh4/YfZfR2aSB624DoVb4mi
+ 7Sb2V73zI59nX/vv1hEvIEIXCOW4kr55I4tfscbLswmVtcOGG2oET2e0DIHt0jTn9ynM
+ 7Uq8BKEUjVqHqBfMjicT2q4hr2xgui7Gm4qlOxM97AA7TU9DoUXbBDB1D3SUIi2DE+BG
+ BsHlthWdVuYfoY5/Dii41i7hGWx4ogh9FE2/8+hD/I4Jkd9aAIhVLqVXfhUV4u4AbAYd 7g== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by mx0b-00069f02.pphosted.com with ESMTP id 39770hbe5v-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 17 Jun 2021 14:17:26 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 15HEBLMb024838;
+ Thu, 17 Jun 2021 14:17:25 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by aserp3030.oracle.com with ESMTP id 396wavn16p-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 17 Jun 2021 14:17:25 +0000
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 15HEHPvn042022;
+ Thu, 17 Jun 2021 14:17:25 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by aserp3030.oracle.com with ESMTP id 396wavn16e-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 17 Jun 2021 14:17:25 +0000
+Received: from abhmp0006.oracle.com (abhmp0006.oracle.com [141.146.116.12])
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 15HEHON4002157;
+ Thu, 17 Jun 2021 14:17:24 GMT
+Received: from kadam (/102.222.70.252) by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Thu, 17 Jun 2021 07:17:23 -0700
+Date: Thu, 17 Jun 2021 17:17:17 +0300
+To: Baokun Li <libaokun1@huawei.com>
+Subject: Re: [PATCH -next] cifs: convert list_for_each to entry variant in
+ smb2misc.c
+Message-ID: <20210617141717.GF1861@kadam>
+References: <20210617132250.690226-1-libaokun1@huawei.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAEcb10vV+557J6mTRRw+tjTh8x34b0tud-7V2GYkzCTOMgquxw@mail.gmail.com>
+In-Reply-To: <20210617132250.690226-1-libaokun1@huawei.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-GUID: xx7frwkBPGXM1q5D5cbwXhDGpSRpkqZK
+X-Proofpoint-ORIG-GUID: xx7frwkBPGXM1q5D5cbwXhDGpSRpkqZK
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,34 +81,54 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Dan Carpenter via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Dan Carpenter <dan.carpenter@oracle.com>
+Cc: Steve French <sfrench@samba.org>, linux-cifs@vger.kernel.org,
+ kernel-janitors@vger.kernel.org, samba-technical@lists.samba.org,
+ Hulk Robot <hulkci@huawei.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jun 16, 2021 at 10:49:18AM +0200, Pavel Filipensky via samba-technical wrote:
->Hi,
->
->during my my learning/observation of how machine account password is
->changed via net ads changetrsutpw I have noticed that two same LDAP calls
->are done in ads_keytab_add_entry() in source3/libads/kerberos_keytab.c  :
->
->391 »·······my_fqdn = ads_get_dnshostname(ads, tmpctx, lp_netbios_name());
->
->...
->400 »·······if (!ads_has_samaccountname(ads, tmpctx, lp_netbios_name())) {
->
->
->Both ads_get_dnshostname() and ads_has_samaccountname() call
->ads_find_machine_acct() and trigger exactly same LDAP search and get the
->same response. I guess there are more places where an unnecessary network
->call is done, but at least for this case it is easy to refactor the code to
->avoid it. Does  it makes sense to gain performance for possibly less
->structured code?
+On Thu, Jun 17, 2021 at 09:22:50PM +0800, Baokun Li wrote:
+> @@ -628,9 +624,7 @@ smb2_is_valid_lease_break(char *buffer)
+>  
+>  	/* look up tcon based on tid & uid */
+>  	spin_lock(&cifs_tcp_ses_lock);
+> -	list_for_each(tmp, &cifs_tcp_ses_list) {
+> -		server = list_entry(tmp, struct TCP_Server_Info, tcp_ses_list);
+> -
+> +	list_for_each_entry(server, &cifs_tcp_ses_list, tcp_ses_list) {
+>  		list_for_each(tmp1, &server->smb_ses_list) {
+>  			ses = list_entry(tmp1, struct cifs_ses, smb_ses_list);
+                        ^^^^^^^^^^^^^^^^
 
-Depends on the code changes, but yes, that does seem
-a useful fix !
+Please convert this one as well.
 
-Thanks !
+>  
+> @@ -687,7 +681,7 @@ bool
+>  smb2_is_valid_oplock_break(char *buffer, struct TCP_Server_Info *server)
+>  {
+>  	struct smb2_oplock_break *rsp = (struct smb2_oplock_break *)buffer;
+> -	struct list_head *tmp, *tmp1, *tmp2;
+> +	struct list_head *tmp1, *tmp2;
+>  	struct cifs_ses *ses;
+>  	struct cifs_tcon *tcon;
+>  	struct cifsInodeInfo *cinode;
+> @@ -710,9 +704,7 @@ smb2_is_valid_oplock_break(char *buffer, struct TCP_Server_Info *server)
+>  
+>  	/* look up tcon based on tid & uid */
+>  	spin_lock(&cifs_tcp_ses_lock);
+> -	list_for_each(tmp, &server->smb_ses_list) {
+> -		ses = list_entry(tmp, struct cifs_ses, smb_ses_list);
+> -
+> +	list_for_each_entry(ses, &server->smb_ses_list, smb_ses_list) {
+>  		list_for_each(tmp1, &ses->tcon_list) {
+>  			tcon = list_entry(tmp1, struct cifs_tcon, tcon_list);
+                        ^^^^^^^^^^^^^^^^^
+And this one.
+
+regards,
+dan carpenter
+
+>  
 
