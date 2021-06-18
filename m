@@ -2,47 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36CA63ACDD5
-	for <lists+samba-technical@lfdr.de>; Fri, 18 Jun 2021 16:47:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 701C73AD3CB
+	for <lists+samba-technical@lfdr.de>; Fri, 18 Jun 2021 22:43:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=9cnpK1eaFN+Hd5GXbP8W0oo9QatNyWNGLgsOae3R2Nw=; b=gNlibgPHQOKmDzCLd6/KSzImas
-	HEa2OdYuVetlrApEjxQhGKyiCCfAo6FFLAyEPjZqNZ6O/UPkcLHS4IW+Tqg7pNAc1n/3pJtLZWSjQ
-	Pr4Ty7+VzaIr3Rf9g8lTSVPUrgfI0fapFF+2rxuxVTaJjW4nxQprkX2R4SRY1x0JCqg+ou4aYUdhG
-	Mk2syFYHUXz6YTQ88oA9er+J3X7eZAvsC+sjeod8v9BfZlKNtTITb1boBtYnY7BZ7Yf1POzkZRPN0
-	pvHCFm9cQQQMgOjpXto52oI+mKZdDGe/GNC4U4coL6G0zCVwnq/gfBc5B5N7bgODjHe/5LEdUFOum
-	2TDRiUqw==;
-Received: from ip6-localhost ([::1]:26548 helo=hr1.samba.org) 
+	bh=gob3l/GAPUmDR0DsaUDMwl15gtQcRHmxQZc/puhaQ3o=; b=Bd5pgH+G1MlpL0Raf39cM2BPZ1
+	+R29YwPfYd4GWNDmf2I95N2HtkfqIZFqdUkVik5m79Z+UtHIIu/qQKAN/MElIMyFGQdip6XJnfmLH
+	o8KvDLvLCOx36m9GMTDxkkpFrQN89ffY6OUJK88Bwhsshwv9oAN/5wzn6yN5vJvEjt0Kcfcmfnv1z
+	Vn7YHlcYt4rGghG83LJlFyNwxb1DrDsr3tPIVCF8Mp+J9VEHNoxIIQMa53vE/7z4tsButBSU4nNFP
+	vq7oaoJalfvN9f5ALS214j2udFcPpCb2utmqE27o6wq+Onvlb7POpgBZ4odDgEqkZHbzKQ98KNVGw
+	QbSvXwdA==;
+Received: from ip6-localhost ([::1]:36536 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1luFm1-006xqv-B9; Fri, 18 Jun 2021 14:47:09 +0000
-Received: from p3plsmtpa12-07.prod.phx3.secureserver.net
- ([68.178.252.236]:42650) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1luFlv-006xqY-WD
- for samba-technical@lists.samba.org; Fri, 18 Jun 2021 14:47:06 +0000
-Received: from [192.168.0.100] ([96.237.161.203]) by :SMTPAUTH: with ESMTPSA
- id uF4gls0BqLRJUuF4glTahm; Fri, 18 Jun 2021 07:02:22 -0700
-X-CMAE-Analysis: v=2.4 cv=G6jZr/o5 c=1 sm=1 tr=0 ts=60cca76f
- a=Pd5wr8UCr3ug+LLuBLYm7w==:117 a=Pd5wr8UCr3ug+LLuBLYm7w==:17
- a=IkcTkHD0fZMA:10 a=x_P2yaRsAAAA:20 a=hGzw-44bAAAA:8 a=tdH9x-Ss9OmRQ7VT4bAA:9
- a=QEXdDO2ut3YA:10 a=HvKuF1_PTVFglORKqfwH:22
-X-SECURESERVER-ACCT: tom@talpey.com
-Subject: Re: duplicit LDAP calls
-To: samba-technical@lists.samba.org
-References: <CAEcb10vV+557J6mTRRw+tjTh8x34b0tud-7V2GYkzCTOMgquxw@mail.gmail.com>
- <20210616195129.GA669059@jeremy-acer>
- <CAEcb10tbH=eH-pwg6dRadrzHUczxwDMuj2hokBs6u4+YfJG6bw@mail.gmail.com>
-Message-ID: <17898c98-e778-da1a-c4f5-ddcbd8944f09@talpey.com>
-Date: Fri, 18 Jun 2021 10:02:22 -0400
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.1
+	id 1luLJc-0073Jk-8c; Fri, 18 Jun 2021 20:42:12 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44426) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1luLJW-0073Jb-6J
+ for samba-technical@lists.samba.org; Fri, 18 Jun 2021 20:42:08 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=gob3l/GAPUmDR0DsaUDMwl15gtQcRHmxQZc/puhaQ3o=; b=HwMeIe0zNhiafH/MhVgXOELmNC
+ XMha+QckY0V9Pyysak14Of+GFBwMGSXHEn4m1mCQWkLH9eZW5khYmtNGy9VAqYpJsLCj2kLk0T9NQ
+ UVdWbm+neQNpdVxLGlYNoaOpsJOdgkzRSusTbM733VtXk5Hk1cVP8rEwSIlEYM12YexJDMmhXWJKx
+ ZfqhCzDjiaq0WP1eQL0XgLXGZjn2MYDYQiWAWGwTuEtRvsrSZZfZwyG1V0uKZohEGmNIITw9v3GYg
+ 5fhTh98Z4CyiogSJi/2Q2vRwnBz8dAxlpatD3ChMUWSRNQPSTsB/Wk6E5bY9NbeM5GRaldr5P3G+E
+ ZbrieHxO1QgP6rLv1iFKv7uEm6ZJK7cmBW78KNJX6eqrX39CbZI1afgWP4m/jdDq7C5+VZc0gVqJm
+ VlSyO6eOBNkdFXAHB1csmR9lz8xrVr6dEEvX08uPebP3DPBiB+S6ckMM4641B5ri7gpZMgNeX4adv
+ /C7c4MZziYimy/DRaEwm7na0;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1luLJT-00057k-Vh; Fri, 18 Jun 2021 20:42:04 +0000
+Message-ID: <26713d5cdcc47d0d9fb017b6a1e546d9501d8efe.camel@samba.org>
+Subject: Re: Heimdal upgrade, really happening this time
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Stefan Metzmacher <metze@samba.org>, Isaac Boukris <iboukris@gmail.com>
+Date: Sat, 19 Jun 2021 08:41:55 +1200
+In-Reply-To: <b2cb195314281883e378c908784ac6f9f841584d.camel@samba.org>
+References: <b2cb195314281883e378c908784ac6f9f841584d.camel@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-In-Reply-To: <CAEcb10tbH=eH-pwg6dRadrzHUczxwDMuj2hokBs6u4+YfJG6bw@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-CMAE-Envelope: MS4xfHcNt6at2R92JzCyPdYxuWsMBENqmhTh/Gw8QGx3qLnHkBqOHcbb4Yoh21P/ssfK5dFpKV3D9KMEoUBvgqsCTHpEDOO0i8ceW2UMzUbTrX0nE6E12jqM
- l8iuhrAj+G+GFE7qc2Y2PnehgpaB2KHyQHxpkwLnjqjMBpnmyvS6mvPSWNP71QiVO15bXC9IxqjEU/ZBbmmIU/8xwyHpCKoILEE=
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,65 +56,50 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Tom Talpey <tom@talpey.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-May I make a language suggestion on the commit title - the English
-"duplicit" means deceitful, or two-faced. I believe the intended
-word here is "duplicate"!
+On Wed, 2021-06-16 at 11:56 +1200, Andrew Bartlett via samba-technical
+wrote:
+> 
+> My current draft is up as a MR, and I'll continue to work to upstream
+> what I can (into Samba/Heimdal).  I do plan to upgrade Heimdal again
+> (perhaps to align to a release in 2021 if they make one) before I
+> finally merge the branch.
+> 
+> https://gitlab.com/samba-team/samba/-/merge_requests/2014
 
-Tom.
+With the current patches on that MR, I think I will have CI passing.
+ I'll know more once we rebase on master as 
+https://gitlab.com/samba-team/samba/-/merge_requests/2028 fixes some of
+the noise-generation. 
 
-On 6/18/2021 4:04 AM, Pavel Filipensky via samba-technical wrote:
-> Here is a commit (it is part of MR 1999) that avoids duplicit LDAP searches:
-> 
-> https://gitlab.com/samba-team/samba/-/merge_requests/1999/diffs?commit_id=9e8a41a07dfdbb05f854f54fd6cd49022031cd3a
-> 
-> Before the fix 'net ads changetrsutpw' issued 35 identical LDAP calls
-> within ads_keytab_create_default(). It was processing only the default
-> SPNs, with additional SPNs there would be even more calls. After the fix
-> there is only one LDAP call.
-> 
-> Cheers,
-> Pavel
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> On Wed, Jun 16, 2021 at 9:51 PM Jeremy Allison <jra@samba.org> wrote:
-> 
->> On Wed, Jun 16, 2021 at 10:49:18AM +0200, Pavel Filipensky via
->> samba-technical wrote:
->>> Hi,
->>>
->>> during my my learning/observation of how machine account password is
->>> changed via net ads changetrsutpw I have noticed that two same LDAP calls
->>> are done in ads_keytab_add_entry() in source3/libads/kerberos_keytab.c  :
->>>
->>> 391 环贩贩贩my_fqdn = ads_get_dnshostname(ads, tmpctx, lp_netbios_name());
->>>
->>> ...
->>> 400 环贩贩贩if (!ads_has_samaccountname(ads, tmpctx, lp_netbios_name())) {
->>>
->>>
->>> Both ads_get_dnshostname() and ads_has_samaccountname() call
->>> ads_find_machine_acct() and trigger exactly same LDAP search and get the
->>> same response. I guess there are more places where an unnecessary network
->>> call is done, but at least for this case it is easy to refactor the code
->> to
->>> avoid it. Does  it makes sense to gain performance for possibly less
->>> structured code?
->>
->> Depends on the code changes, but yes, that does seem
->> a useful fix !
->>
->> Thanks !
->>
->>
-> 
+It is also Saturday here and I should stop :-)
+
+But while there is much still to do to re-enable tests that have been
+skipped, I've cleaned up many conflict markers and dealt with the
+upstream changes that have landed in the meantime, which is a pretty
+good start.
+
+Joseph is also making good progress on landing the Python based tests
+that Metze started a while back, see here:
+https://gitlab.com/samba-team/samba/-/merge_requests/1896
+https://gitlab.com/samba-team/samba/-/merge_requests/2001
+
+This will give us much more confidence for the merge.  This new
+testsuite approach is a game changer, the Python-based tests have found
+a number of important differences and helped us fix those.  It makes me
+much more confident to pull the trigger here.
+
+Andrew Bartlett
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+
 
