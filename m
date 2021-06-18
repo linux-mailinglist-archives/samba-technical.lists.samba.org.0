@@ -2,57 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 993373AC1DE
-	for <lists+samba-technical@lfdr.de>; Fri, 18 Jun 2021 06:16:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D1003AC1EB
+	for <lists+samba-technical@lfdr.de>; Fri, 18 Jun 2021 06:18:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=mCvwX5+vk8V7BQG3zhJB8owe7BcQtEPZvcZWN8YaLew=; b=bSvJ6gtPCz4ZJsbJBLGqAwsu2e
-	gqWJcrVnXYFszqGQ9TcI5zbd+37RHLsV2vWvaL6EKZ7fbLO4Ocu2K8Np3Sm6ZZkLvKlPKs4p0DwTw
-	HMVV3kJP86FfG4ZFjCwNnDOpeGGxm3fIbad9AniYdIbGyjtJqFhjuGolDkbddJTJE6cmXzFsTPlk5
-	/rc3CFTzetql/b8XTVuBia4iU/+aB2+6OHd7kEwPhfGYYHIhasZOPNM0XsGoEqoJzeRxZoWf7krbV
-	faGGQ6v4/l/QA8F5KCFi/bC6ZVt2NPLwjZe/6cuVKsqrcbFe+DMXvC6O5Gw38IUwLtZ0KFRmfr9y9
-	Dm6rgVhw==;
-Received: from ip6-localhost ([::1]:41786 helo=hr1.samba.org) 
+	bh=6H4QkZaU5ORUZ1KVCHUaXIqHAtY5xVo3G4y/EPhgIgk=; b=B4kJ9afJ5Efd0nRMc70/xYZ3dI
+	ILX4IoMQi9miOp7MX9c8aYxtWxKc1PSae3+26Er0O2msIwGhjw4QW1k3Iu/PhuhUWl+rPYoiXwHBa
+	KkEPzdfdN0HiH8dP3fFn1gHiwoQXUZg1TDj6lcb4jcRliEVgpeSzWpBAk2pxIKw0OxK8yt7TgOafb
+	pf6Ih3s6rQkZkt1rwRSylMs6eIJ7+91tnDVQT2UMw+BgWiE5uAKjCgvitbBB+RStjonaIX0OiO0bd
+	/5v7uE/6DpbBqxlW8lD5ZCtD60lNOAHD1S/+yacoGSWRS6djIR4osSUsfk+Tn8Ip4soZd95CMHwhd
+	nKZtUsyA==;
+Received: from ip6-localhost ([::1]:42468 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lu5vu-006i4w-8N; Fri, 18 Jun 2021 04:16:42 +0000
-Received: from mail-lj1-x234.google.com ([2a00:1450:4864:20::234]:38524) 
+	id 1lu5y1-006iNK-P5; Fri, 18 Jun 2021 04:18:53 +0000
+Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229]:39680) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lu5vp-006i4n-6A
- for samba-technical@lists.samba.org; Fri, 18 Jun 2021 04:16:39 +0000
-Received: by mail-lj1-x234.google.com with SMTP id s22so12138687ljg.5
- for <samba-technical@lists.samba.org>; Thu, 17 Jun 2021 21:16:36 -0700 (PDT)
+ (Exim) id 1lu5xv-006iNA-UH
+ for samba-technical@lists.samba.org; Fri, 18 Jun 2021 04:18:50 +0000
+Received: by mail-lj1-x229.google.com with SMTP id c11so12134009ljd.6
+ for <samba-technical@lists.samba.org>; Thu, 17 Jun 2021 21:18:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=mCvwX5+vk8V7BQG3zhJB8owe7BcQtEPZvcZWN8YaLew=;
- b=oEYG8+1CdEWGShhblOI/IyYWbzHssVqmiSiHw5NzI8Mp8BwFBsE+tvAN9SKTZosZ8C
- cVmuWm4BKMXDz2GNjzBvWoYQhMyG8PiBunVcmZXWAF0zJBxgCEe+UKRHfzaW0LmTNjkD
- RQFNhEZvTFGKfx0ApcUyomqirzARoHl75LAv7FoPZFR3xsvfFCpbgIalrAR+TNIOHCub
- iNW1U6t6llTqFiN55Z7gcwmLPJEgUiaM3xQ1xVsxrTW4muT38lWurIkdTVjHQB6KGi1+
- JRhE5uHMM8CawEo2dPpGQAtPDmpJex6bs3ztJLhKJt6D7j9OwPQfxkJ/FlVKay4Z6ACj
- O68A==
+ :cc; bh=6H4QkZaU5ORUZ1KVCHUaXIqHAtY5xVo3G4y/EPhgIgk=;
+ b=jFitRzYsSkj6l7xDBW63GcidXvYhzCLU1dyDQgEgHemJE0bWS/X5Bayf9p9izcBPA2
+ 2EZCseNEglVSoM+TjgQbf5Xluza8yKI2psozGBY5aOIdvRFNQYhuq00ej51gTx9bts9F
+ oFzKL/GOO5yiSFBLReduzGkBhvtWnm0U03GO9DvKbyoCZOin5oUFPCjxpZ8+Vcqa+2qn
+ KOohSIkyMw4ASLwbR20Fpd4r9Fka+k12vyB9dRG1bkBYcFsET+Qvrvc/6cxuWQ9Nfxck
+ RrjlnloRMw0EslXM5zmmSKZYP/hqlrZEcHfEVFKetDmFHmtnTdVgOaV6AIbap4nHPeF9
+ BM3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=mCvwX5+vk8V7BQG3zhJB8owe7BcQtEPZvcZWN8YaLew=;
- b=N8JhAPZOS5uUOtKsKr+bEdnNGB0wZsfMDr32aZfekHfZ+SjDRagrLz5aqi2Wlyfd5x
- anGGFFi6245WUOoJwiX1LKJ7H+4rcDiFWk6xSKw2gjTB8sudzvyVgVPvBzaqDM2EDCdt
- q+l6XJmbotHHJzpiGMSIftznhPCCmYc5qVKhQEOY49dEhHnXNqb1quFjORbgCVUwsIT6
- Udt1NaLKny+7V4W/vHEYBZNZhV0CdK2z4Y9YgL+xd5+qgPASI37iDkgUZM3kijuC6nlg
- 1NgxXus/rjUHz4CWGhruBnzzEdd/7ApnwwSssLxV9c4lXENTPDekBYUzSaJWLrP/JU61
- V51g==
-X-Gm-Message-State: AOAM5307NWeP3YbhDkXvWreSlEVdCRcy7IjEXnPeGRCLTQ83BLjAxtb2
- EKJ/WsIeHMvkA001aadE94m2wvT8kNG+41mGFkM=
-X-Google-Smtp-Source: ABdhPJyUpDXqDD148jq7aVQbdrvt2B+K8YJqgK8iUPmc8bAHZhIJU3ufjCvD+JeK061NBce1HekS9JsPcwAIEHa94oA=
-X-Received: by 2002:a2e:a234:: with SMTP id i20mr7894780ljm.272.1623989795895; 
- Thu, 17 Jun 2021 21:16:35 -0700 (PDT)
+ bh=6H4QkZaU5ORUZ1KVCHUaXIqHAtY5xVo3G4y/EPhgIgk=;
+ b=CYksbAlcigMBnLDU91Hg8SD+V/LofDd26RJXtUJP9z+vxYsK7reJ68rwNaU/CX4J2s
+ UJy2g1LAed7sYlu13HKSXKLvSMbpDROq3+Mi1E/eYhw51yWJByYkJq6D6PCZJpqYD622
+ fAIVKBILYKVZJ5+xzx3pPWlIobQkw6CWP/XSbrcKoyXz3TKDSOZfO5DG0ml7X5/Y1WPX
+ ay8Now4X0a+cCVIHuLsJXQk8qFPwZ/HRiXUVgkk7qtHgXAH7ba1LsBIZ/K7mO9QJmkyX
+ EfkQqI1Jmj2esEzrXYpOLXMCuzzaOP+k36hmpOYcHsct6+vc+14SAIN6L9nn7a333YUD
+ ODWQ==
+X-Gm-Message-State: AOAM533pJ6JW+HnLMv5UFEFqnQ7VZqbAl4fhwRGmRb757eChkDx4fS/H
+ pXSUL5c4JiBTlsyGDIVN7s3SFzIC4DsNtkiCL20=
+X-Google-Smtp-Source: ABdhPJzwq/cJ4iLuZha164RaW9qKFIOBq2+xcuN/3k+wguDHpVwDoW6hkrv9I2/OCPFkSzi6JTU1Q4VrK6doRcel3rc=
+X-Received: by 2002:a2e:a7cd:: with SMTP id x13mr7623913ljp.218.1623989926694; 
+ Thu, 17 Jun 2021 21:18:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210618040232.2550645-1-libaokun1@huawei.com>
-In-Reply-To: <20210618040232.2550645-1-libaokun1@huawei.com>
-Date: Thu, 17 Jun 2021 23:16:24 -0500
-Message-ID: <CAH2r5msqnE+1=yfd_E32MNY0qpgRokMJzQ4j88_RC2rBYGMxqQ@mail.gmail.com>
-Subject: Re: [PATCH -next v2] cifs: convert list_for_each to entry variant in
- smb2misc.c
+References: <20210617113640.4141487-1-libaokun1@huawei.com>
+In-Reply-To: <20210617113640.4141487-1-libaokun1@huawei.com>
+Date: Thu, 17 Jun 2021 23:18:35 -0500
+Message-ID: <CAH2r5ms4c37ykXetxy6CRL1WXWUZB59rFzm7ckG=0d-bYmnt1Q@mail.gmail.com>
+Subject: Re: [PATCH -next] cifs: convert list_for_each to entry variant in
+ cifs_debug.c
 To: Baokun Li <libaokun1@huawei.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
@@ -70,17 +70,16 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
+Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
  kernel-janitors <kernel-janitors@vger.kernel.org>,
- LKML <linux-kernel@vger.kernel.org>, Steve French <sfrench@samba.org>,
- Hulk Robot <hulkci@huawei.com>, Dan Carpenter <dan.carpenter@oracle.com>
+ samba-technical <samba-technical@lists.samba.org>,
+ Hulk Robot <hulkci@huawei.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 tentatively merged into cifs-2.6.git for-next
 
-On Thu, Jun 17, 2021 at 11:02 PM Baokun Li <libaokun1@huawei.com> wrote:
+On Thu, Jun 17, 2021 at 6:40 AM Baokun Li <libaokun1@huawei.com> wrote:
 >
 > convert list_for_each() to list_for_each_entry() where
 > applicable.
@@ -88,105 +87,93 @@ On Thu, Jun 17, 2021 at 11:02 PM Baokun Li <libaokun1@huawei.com> wrote:
 > Reported-by: Hulk Robot <hulkci@huawei.com>
 > Signed-off-by: Baokun Li <libaokun1@huawei.com>
 > ---
-> V1->V2:
->         Convert the missing list_for_each to entry
+>  fs/cifs/cifs_debug.c | 24 +++++++-----------------
+>  1 file changed, 7 insertions(+), 17 deletions(-)
 >
->  fs/cifs/smb2misc.c | 33 ++++++++-------------------------
->  1 file changed, 8 insertions(+), 25 deletions(-)
->
-> diff --git a/fs/cifs/smb2misc.c b/fs/cifs/smb2misc.c
-> index 06d555d4da9a..aba048153f79 100644
-> --- a/fs/cifs/smb2misc.c
-> +++ b/fs/cifs/smb2misc.c
-> @@ -164,12 +164,10 @@ smb2_check_message(char *buf, unsigned int len, struct TCP_Server_Info *srvr)
->                 struct smb2_transform_hdr *thdr =
->                         (struct smb2_transform_hdr *)buf;
->                 struct cifs_ses *ses = NULL;
-> -               struct list_head *tmp;
->
->                 /* decrypt frame now that it is completely read in */
->                 spin_lock(&cifs_tcp_ses_lock);
-> -               list_for_each(tmp, &srvr->smb_ses_list) {
-> -                       ses = list_entry(tmp, struct cifs_ses, smb_ses_list);
-> +               list_for_each_entry(ses, &srvr->smb_ses_list, smb_ses_list) {
->                         if (ses->Suid == thdr->SessionId)
->                                 break;
->
-> @@ -548,7 +546,6 @@ static bool
->  smb2_tcon_has_lease(struct cifs_tcon *tcon, struct smb2_lease_break *rsp)
+> diff --git a/fs/cifs/cifs_debug.c b/fs/cifs/cifs_debug.c
+> index 68e8e5b27841..8857ac7e7a14 100644
+> --- a/fs/cifs/cifs_debug.c
+> +++ b/fs/cifs/cifs_debug.c
+> @@ -50,7 +50,6 @@ void cifs_dump_detail(void *buf, struct TCP_Server_Info *server)
+>  void cifs_dump_mids(struct TCP_Server_Info *server)
 >  {
->         __u8 lease_state;
+>  #ifdef CONFIG_CIFS_DEBUG2
 > -       struct list_head *tmp;
->         struct cifsFileInfo *cfile;
->         struct cifsInodeInfo *cinode;
->         int ack_req = le32_to_cpu(rsp->Flags &
-> @@ -556,8 +553,7 @@ smb2_tcon_has_lease(struct cifs_tcon *tcon, struct smb2_lease_break *rsp)
+>         struct mid_q_entry *mid_entry;
 >
->         lease_state = le32_to_cpu(rsp->NewLeaseState);
+>         if (server == NULL)
+> @@ -58,8 +57,7 @@ void cifs_dump_mids(struct TCP_Server_Info *server)
 >
-> -       list_for_each(tmp, &tcon->openFileList) {
-> -               cfile = list_entry(tmp, struct cifsFileInfo, tlist);
-> +       list_for_each_entry(cfile, &tcon->openFileList, tlist) {
->                 cinode = CIFS_I(d_inode(cfile->dentry));
+>         cifs_dbg(VFS, "Dump pending requests:\n");
+>         spin_lock(&GlobalMid_Lock);
+> -       list_for_each(tmp, &server->pending_mid_q) {
+> -               mid_entry = list_entry(tmp, struct mid_q_entry, qhead);
+> +       list_for_each_entry(mid_entry, &server->pending_mid_q, qhead) {
+>                 cifs_dbg(VFS, "State: %d Cmd: %d Pid: %d Cbdata: %p Mid %llu\n",
+>                          mid_entry->mid_state,
+>                          le16_to_cpu(mid_entry->command),
+> @@ -168,7 +166,7 @@ cifs_dump_iface(struct seq_file *m, struct cifs_server_iface *iface)
 >
->                 if (memcmp(cinode->lease_key, rsp->LeaseKey,
-> @@ -618,7 +614,6 @@ static bool
->  smb2_is_valid_lease_break(char *buffer)
+>  static int cifs_debug_files_proc_show(struct seq_file *m, void *v)
 >  {
->         struct smb2_lease_break *rsp = (struct smb2_lease_break *)buffer;
-> -       struct list_head *tmp, *tmp1, *tmp2;
+> -       struct list_head *stmp, *tmp, *tmp1, *tmp2;
+> +       struct list_head *tmp, *tmp1, *tmp2;
 >         struct TCP_Server_Info *server;
 >         struct cifs_ses *ses;
 >         struct cifs_tcon *tcon;
-> @@ -628,15 +623,9 @@ smb2_is_valid_lease_break(char *buffer)
->
->         /* look up tcon based on tid & uid */
+> @@ -183,9 +181,7 @@ static int cifs_debug_files_proc_show(struct seq_file *m, void *v)
+>         seq_printf(m, " <filename>\n");
+>  #endif /* CIFS_DEBUG2 */
 >         spin_lock(&cifs_tcp_ses_lock);
-> -       list_for_each(tmp, &cifs_tcp_ses_list) {
-> -               server = list_entry(tmp, struct TCP_Server_Info, tcp_ses_list);
-> -
-> -               list_for_each(tmp1, &server->smb_ses_list) {
-> -                       ses = list_entry(tmp1, struct cifs_ses, smb_ses_list);
-> -
-> -                       list_for_each(tmp2, &ses->tcon_list) {
-> -                               tcon = list_entry(tmp2, struct cifs_tcon,
-> -                                                 tcon_list);
+> -       list_for_each(stmp, &cifs_tcp_ses_list) {
+> -               server = list_entry(stmp, struct TCP_Server_Info,
+> -                                   tcp_ses_list);
 > +       list_for_each_entry(server, &cifs_tcp_ses_list, tcp_ses_list) {
-> +               list_for_each_entry(ses, &server->smb_ses_list, smb_ses_list) {
-> +                       list_for_each_entry(tcon, &ses->tcon_list, tcon_list) {
->                                 spin_lock(&tcon->open_file_lock);
->                                 cifs_stats_inc(
->                                     &tcon->stats.cifs_stats.num_oplock_brks);
-> @@ -687,7 +676,6 @@ bool
->  smb2_is_valid_oplock_break(char *buffer, struct TCP_Server_Info *server)
+>                 list_for_each(tmp, &server->smb_ses_list) {
+>                         ses = list_entry(tmp, struct cifs_ses, smb_ses_list);
+>                         list_for_each(tmp1, &ses->tcon_list) {
+> @@ -220,7 +216,7 @@ static int cifs_debug_files_proc_show(struct seq_file *m, void *v)
+>
+>  static int cifs_debug_data_proc_show(struct seq_file *m, void *v)
 >  {
->         struct smb2_oplock_break *rsp = (struct smb2_oplock_break *)buffer;
-> -       struct list_head *tmp, *tmp1, *tmp2;
+> -       struct list_head *tmp1, *tmp2, *tmp3;
+> +       struct list_head *tmp2, *tmp3;
+>         struct mid_q_entry *mid_entry;
+>         struct TCP_Server_Info *server;
+>         struct cifs_ses *ses;
+> @@ -278,11 +274,7 @@ static int cifs_debug_data_proc_show(struct seq_file *m, void *v)
+>
+>         c = 0;
+>         spin_lock(&cifs_tcp_ses_lock);
+> -       list_for_each(tmp1, &cifs_tcp_ses_list) {
+> -               server = list_entry(tmp1, struct TCP_Server_Info,
+> -                                   tcp_ses_list);
+> -
+> -               /* channel info will be printed as a part of sessions below */
+> +       list_for_each_entry(server, &cifs_tcp_ses_list, tcp_ses_list) {
+>                 if (server->is_channel)
+>                         continue;
+>
+> @@ -563,7 +555,7 @@ static int cifs_stats_proc_show(struct seq_file *m, void *v)
+>  #ifdef CONFIG_CIFS_STATS2
+>         int j;
+>  #endif /* STATS2 */
+> -       struct list_head *tmp1, *tmp2, *tmp3;
+> +       struct list_head *tmp2, *tmp3;
+>         struct TCP_Server_Info *server;
 >         struct cifs_ses *ses;
 >         struct cifs_tcon *tcon;
->         struct cifsInodeInfo *cinode;
-> @@ -710,16 +698,11 @@ smb2_is_valid_oplock_break(char *buffer, struct TCP_Server_Info *server)
+> @@ -594,9 +586,7 @@ static int cifs_stats_proc_show(struct seq_file *m, void *v)
 >
->         /* look up tcon based on tid & uid */
+>         i = 0;
 >         spin_lock(&cifs_tcp_ses_lock);
-> -       list_for_each(tmp, &server->smb_ses_list) {
-> -               ses = list_entry(tmp, struct cifs_ses, smb_ses_list);
-> -
-> -               list_for_each(tmp1, &ses->tcon_list) {
-> -                       tcon = list_entry(tmp1, struct cifs_tcon, tcon_list);
-> +       list_for_each_entry(ses, &server->smb_ses_list, smb_ses_list) {
-> +               list_for_each_entry(tcon, &ses->tcon_list, tcon_list) {
->
->                         spin_lock(&tcon->open_file_lock);
-> -                       list_for_each(tmp2, &tcon->openFileList) {
-> -                               cfile = list_entry(tmp2, struct cifsFileInfo,
-> -                                                    tlist);
-> +                       list_for_each_entry(cfile, &tcon->openFileList, tlist) {
->                                 if (rsp->PersistentFid !=
->                                     cfile->fid.persistent_fid ||
->                                     rsp->VolatileFid !=
-> --
-> 2.31.1
+> -       list_for_each(tmp1, &cifs_tcp_ses_list) {
+> -               server = list_entry(tmp1, struct TCP_Server_Info,
+> -                                   tcp_ses_list);
+> +       list_for_each_entry(server, &cifs_tcp_ses_list, tcp_ses_list) {
+>                 seq_printf(m, "\nMax requests in flight: %d", server->max_in_flight);
+>  #ifdef CONFIG_CIFS_STATS2
+>                 seq_puts(m, "\nTotal time spent processing by command. Time ");
 >
 
 
