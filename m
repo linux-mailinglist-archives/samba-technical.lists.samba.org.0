@@ -2,43 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 701C73AD3CB
-	for <lists+samba-technical@lfdr.de>; Fri, 18 Jun 2021 22:43:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E7D63AE0CC
+	for <lists+samba-technical@lfdr.de>; Sun, 20 Jun 2021 23:59:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=gob3l/GAPUmDR0DsaUDMwl15gtQcRHmxQZc/puhaQ3o=; b=Bd5pgH+G1MlpL0Raf39cM2BPZ1
-	+R29YwPfYd4GWNDmf2I95N2HtkfqIZFqdUkVik5m79Z+UtHIIu/qQKAN/MElIMyFGQdip6XJnfmLH
-	o8KvDLvLCOx36m9GMTDxkkpFrQN89ffY6OUJK88Bwhsshwv9oAN/5wzn6yN5vJvEjt0Kcfcmfnv1z
-	Vn7YHlcYt4rGghG83LJlFyNwxb1DrDsr3tPIVCF8Mp+J9VEHNoxIIQMa53vE/7z4tsButBSU4nNFP
-	vq7oaoJalfvN9f5ALS214j2udFcPpCb2utmqE27o6wq+Onvlb7POpgBZ4odDgEqkZHbzKQ98KNVGw
-	QbSvXwdA==;
-Received: from ip6-localhost ([::1]:36536 helo=hr1.samba.org) 
+	bh=ydPR8EXLyk3FRbL0X21X3a/8TSgtPgrfAEuUPghjZ6A=; b=NzsceppkG5DMjaHFTLtaGgIAHn
+	igqAWuOvevfl5DlLwdSe8VdgfoWu6rxnCmMu8fI5VnsYvjRsHrxKU5mH/7kVnFb/XgY4w3Qe/9oHF
+	LgtQL9spyyP6AE+1nknSXpV4AYMRSb2d/fJkXM05AV5ggfZBj275cnhMTKmQXvYLM4fqW2zhfOyOL
+	99zgjy84Q8urM5KoePdhF+wEne49vyZVlxULO9Ptnr55tT7fObf88HPVeXFpUex2zavjLTpV0i6kW
+	hhAPUP2iK232hY+evKsfn+TEpmuJMBc9MvL4FyrDJaKfte0vdDekFM2dJ+fySNJxP6PuIypw/qU9F
+	daaVRsYA==;
+Received: from ip6-localhost ([::1]:45678 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1luLJc-0073Jk-8c; Fri, 18 Jun 2021 20:42:12 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44426) 
+	id 1lv5Rx-007HaA-HT; Sun, 20 Jun 2021 21:57:53 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45372) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1luLJW-0073Jb-6J
- for samba-technical@lists.samba.org; Fri, 18 Jun 2021 20:42:08 +0000
+ (Exim) id 1lv5Rq-007Ha1-BS
+ for samba-technical@lists.samba.org; Sun, 20 Jun 2021 21:57:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:To:From:Message-ID:CC;
- bh=gob3l/GAPUmDR0DsaUDMwl15gtQcRHmxQZc/puhaQ3o=; b=HwMeIe0zNhiafH/MhVgXOELmNC
- XMha+QckY0V9Pyysak14Of+GFBwMGSXHEn4m1mCQWkLH9eZW5khYmtNGy9VAqYpJsLCj2kLk0T9NQ
- UVdWbm+neQNpdVxLGlYNoaOpsJOdgkzRSusTbM733VtXk5Hk1cVP8rEwSIlEYM12YexJDMmhXWJKx
- ZfqhCzDjiaq0WP1eQL0XgLXGZjn2MYDYQiWAWGwTuEtRvsrSZZfZwyG1V0uKZohEGmNIITw9v3GYg
- 5fhTh98Z4CyiogSJi/2Q2vRwnBz8dAxlpatD3ChMUWSRNQPSTsB/Wk6E5bY9NbeM5GRaldr5P3G+E
- ZbrieHxO1QgP6rLv1iFKv7uEm6ZJK7cmBW78KNJX6eqrX39CbZI1afgWP4m/jdDq7C5+VZc0gVqJm
- VlSyO6eOBNkdFXAHB1csmR9lz8xrVr6dEEvX08uPebP3DPBiB+S6ckMM4641B5ri7gpZMgNeX4adv
- /C7c4MZziYimy/DRaEwm7na0;
+ bh=ydPR8EXLyk3FRbL0X21X3a/8TSgtPgrfAEuUPghjZ6A=; b=A9fe3dxH1XnLZkhQLQ5mQ/bU+A
+ 3oF9ldr3M8+CI/kPd8MdzS5lcB30TzeKUf7eTSeIFNhioyhWHQ7ubc//kua09rIxllEVbQScWsK+Y
+ Gsb5zzAMZHMHtesY0JsZMcxXJvywfkl2SURVcLsV9ZIu8UjjqKWmL7r8DstDli128/nTWj8z4Fv3B
+ sI2UAxeLg6GvHJDW4B2tu7n678e7yAMtgajHcklxvj6hJ5X9i/DtlXR1kWoOqhMujOP81vHDD72b/
+ YN02dp8IFyv/BpVuIB6AKXMAPGhPQ4YAUch2WUyXTwIyGkV03Ft5DirRwmSMwBP8hA8btsAGScM7U
+ oDM4bOCaFj6qcPJsM0wnFoBxf/K4RumUiFJQEQQr+f1KvysWXn24Ycw0ryn4A7tGskG4alJBKIiuT
+ FjUNQuAv/MLVXRcHyRVLVcbKUpE6qStnpdQton1shHrvMuIESo3Un6+sGgVr8MtBAJ/a0rTm+mav1
+ 8N5FgnJ7hhuKPYe2zKvRRqIG;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1luLJT-00057k-Vh; Fri, 18 Jun 2021 20:42:04 +0000
-Message-ID: <26713d5cdcc47d0d9fb017b6a1e546d9501d8efe.camel@samba.org>
-Subject: Re: Heimdal upgrade, really happening this time
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Stefan Metzmacher <metze@samba.org>, Isaac Boukris <iboukris@gmail.com>
-Date: Sat, 19 Jun 2021 08:41:55 +1200
-In-Reply-To: <b2cb195314281883e378c908784ac6f9f841584d.camel@samba.org>
-References: <b2cb195314281883e378c908784ac6f9f841584d.camel@samba.org>
+ (Exim) id 1lv5Ro-0005gA-Kl
+ for samba-technical@lists.samba.org; Sun, 20 Jun 2021 21:57:45 +0000
+Message-ID: <21982f254683b61ee5a93a449b402e80f9df9554.camel@samba.org>
+Subject: (again) Ship ldb like libndr and ldbwbclient?  As a Samba public
+ library!
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Mon, 21 Jun 2021 09:57:36 +1200
 Content-Type: text/plain; charset="UTF-8"
 User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
@@ -61,37 +60,117 @@ Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2021-06-16 at 11:56 +1200, Andrew Bartlett via samba-technical
-wrote:
-> 
-> My current draft is up as a MR, and I'll continue to work to upstream
-> what I can (into Samba/Heimdal).  I do plan to upgrade Heimdal again
-> (perhaps to align to a release in 2021 if they make one) before I
-> finally merge the branch.
-> 
-> https://gitlab.com/samba-team/samba/-/merge_requests/2014
+I've asked this a few times before, and I'm hesitant to ask again, but
+I feel quite strongly on this and want to try one last time to make
+this easier for our release management and packaging. 
 
-With the current patches on that MR, I think I will have CI passing.
- I'll know more once we rebase on master as 
-https://gitlab.com/samba-team/samba/-/merge_requests/2028 fixes some of
-the noise-generation. 
+I really thing that, while ldb had noble aims to be as popular as tdb
+and talloc, that ldb should be integrated back into Samba as a Samba
+public library, but not an independent release. 
 
-It is also Saturday here and I should stop :-)
+Rationale
+=========
 
-But while there is much still to do to re-enable tests that have been
-skipped, I've cleaned up many conflict markers and dealt with the
-upstream changes that have landed in the meantime, which is a pretty
-good start.
+I ask this for the following reasons:
 
-Joseph is also making good progress on landing the Python based tests
-that Metze started a while back, see here:
-https://gitlab.com/samba-team/samba/-/merge_requests/1896
-https://gitlab.com/samba-team/samba/-/merge_requests/2001
+Samba-enforced lockstep
+-----------------------
 
-This will give us much more confidence for the merge.  This new
-testsuite approach is a game changer, the Python-based tests have found
-a number of important differences and helped us fix those.  It makes me
-much more confident to pull the trigger here.
+Fundamentally, ldb is generously provided to the world, and used in
+sssd in particular, but is developed by and for Samba.  I'm aware that
+there were early contributions with broader goals, but without wanting
+to hurt any feelings, this this a Samba effort these days.
+
+Samba strictly requires the version included in the Samba release.  Any
+other version is untested, and Samba uses an unstable ABI (the modules
+ABI) and relies on specific behaviours (we fix bugs and rely on those
+fixes). 
+
+There is significant build rule complexity to enforce this requirement,
+yet for some reason this isn't as strict as our runtime rule (release
+version can float at build time, but not at runtime)!
+
+LDB Selftest
+------------
+
+Because ldb does not use the full Samba selftest system, we can't do
+knownfail on tests.  This means our standard practice of having a
+failing test first in the commit stream, with a knownfail entry,
+followed by the revert when the fix can't work.
+
+While of course I trust my fellow developers to always test that their
+tests show the bug, I've certainly found our main-Samba pattern helpful
+in ensuring this is the case, as 'make test TESTS=foo' can be run on
+each commit.
+
+Samba Selftest
+--------------
+
+We also introduce untested (in autobuild) complexity to the Samba
+selftest system, eg 
+python:tests: Fix running tests with system libldb
+https://gitlab.com/samba-team/samba/-/merge_requests/2026
+
+I'll merge that patch, but I wish we didn't need this.
+
+(security) Release time
+-----------------------
+
+The need to, at the last moment, make a ldb release (because someone
+like myself has forgotten to include that in the patches) is a extra
+stress on our release management.  While ABI versions should be bumped,
+a missing ABI bump is not as catastrophic as a whole missing release.
+
+The same applies to our distributors, who for every LDB security
+release need to ship ldb, but also deal with the fact that Samba is
+strictly building against the bundled ldb version.  This brings
+additional complexity and makes it harder to track LDB CVEs, as they
+are issued against Samba bug apply to ldb.
+
+see eg
+https://security-tracker.debian.org/tracker/CVE-2019-3824
+
+
+My proposal
+===========
+
+LDB would remain LGPL, but would be built akin to libwbclient,
+libsmbclient, libndr and other things that broader system packages rely
+on.  We would not search for or use a 'system' ldb, we would only use
+the one we shipped with.
+
+A user wishing only ldb can install the ldb package from a distributor,
+who can continue to package the ldb libraries and binaries separately,
+just as they can install libndr for sssd use via samba-common. 
+
+The independent ldb build would be removed to reduce the complexity for
+developers.  A user building from source wishing to build only ldb
+would build Samba - spending some CPU time - and select to remove other
+than libldb and the modules if they really want.  Samba is developer-
+resource constrained, so we need to make choices to maintain simplicity
+in our project.
+
+
+Next steps
+==========
+
+I recognise this has been a controversial issue in the past, so as to
+be effort-efficient I'm not going wait for a seconder for the proposal
+to ensure I'm on the right track, then make a MR.
+
+Likewise if you have significant concerns from real-world use cases
+please see if we can work something out, but avoid 'straw-man' examples
+please:  LDB is over a decade old, if a use case is needed it would
+have come up by now.
+
+Conclusion
+==========
+
+LDB is used outside Samba, by sssd, but has not flourished in the
+current sate as a semi-independent project, is very unlikely to become
+fully independent and should now be fully folded back into main-Samba. 
+
+Thanks,
 
 Andrew Bartlett
 -- 
