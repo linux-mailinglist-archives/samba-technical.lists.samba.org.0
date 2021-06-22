@@ -2,46 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E7D63AE0CC
-	for <lists+samba-technical@lfdr.de>; Sun, 20 Jun 2021 23:59:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EC0B3AFB27
+	for <lists+samba-technical@lfdr.de>; Tue, 22 Jun 2021 04:41:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=ydPR8EXLyk3FRbL0X21X3a/8TSgtPgrfAEuUPghjZ6A=; b=NzsceppkG5DMjaHFTLtaGgIAHn
-	igqAWuOvevfl5DlLwdSe8VdgfoWu6rxnCmMu8fI5VnsYvjRsHrxKU5mH/7kVnFb/XgY4w3Qe/9oHF
-	LgtQL9spyyP6AE+1nknSXpV4AYMRSb2d/fJkXM05AV5ggfZBj275cnhMTKmQXvYLM4fqW2zhfOyOL
-	99zgjy84Q8urM5KoePdhF+wEne49vyZVlxULO9Ptnr55tT7fObf88HPVeXFpUex2zavjLTpV0i6kW
-	hhAPUP2iK232hY+evKsfn+TEpmuJMBc9MvL4FyrDJaKfte0vdDekFM2dJ+fySNJxP6PuIypw/qU9F
-	daaVRsYA==;
-Received: from ip6-localhost ([::1]:45678 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=/8WjX4cnHEYgo+3vdxIdw+5bVRyOPIY5mBYw6H82eb8=; b=IbPtuWtK3VwOXOJZ2v9X7DFUIq
+	UdvxeMQUlKi3C0pnsrHOzrRTloCa8XBcjqjlweLHfmaE9vs7OwlG0c7Eo0pCrLB8FULStzKFJPZl+
+	59+aQptHzR1rQPhHasYzTwbyZfyVmrJIpfFwz7FdxY89dBT4uCfO2pu20kvLx5Ui8dBlLhOl+8WLM
+	PK8MojTslc3Mk3v6jR873XaaBzN/7klLzvDMAFjtus9cHa9b3DqFkYmKseVfEJ3NLTp/tsaqer2/W
+	Sik6CGyG8TvLKmkuKuKjanAETCv1FZc4Ep+wb0zXFPKtJrhs6TNHDhe71LH67XCu6o0hYkTrx/r53
+	nTx7VS2w==;
+Received: from ip6-localhost ([::1]:56420 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lv5Rx-007HaA-HT; Sun, 20 Jun 2021 21:57:53 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45372) 
+	id 1lvWL3-007OET-Eg; Tue, 22 Jun 2021 02:40:33 +0000
+Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c]:35528) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lv5Rq-007Ha1-BS
- for samba-technical@lists.samba.org; Sun, 20 Jun 2021 21:57:50 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=ydPR8EXLyk3FRbL0X21X3a/8TSgtPgrfAEuUPghjZ6A=; b=A9fe3dxH1XnLZkhQLQ5mQ/bU+A
- 3oF9ldr3M8+CI/kPd8MdzS5lcB30TzeKUf7eTSeIFNhioyhWHQ7ubc//kua09rIxllEVbQScWsK+Y
- Gsb5zzAMZHMHtesY0JsZMcxXJvywfkl2SURVcLsV9ZIu8UjjqKWmL7r8DstDli128/nTWj8z4Fv3B
- sI2UAxeLg6GvHJDW4B2tu7n678e7yAMtgajHcklxvj6hJ5X9i/DtlXR1kWoOqhMujOP81vHDD72b/
- YN02dp8IFyv/BpVuIB6AKXMAPGhPQ4YAUch2WUyXTwIyGkV03Ft5DirRwmSMwBP8hA8btsAGScM7U
- oDM4bOCaFj6qcPJsM0wnFoBxf/K4RumUiFJQEQQr+f1KvysWXn24Ycw0ryn4A7tGskG4alJBKIiuT
- FjUNQuAv/MLVXRcHyRVLVcbKUpE6qStnpdQton1shHrvMuIESo3Un6+sGgVr8MtBAJ/a0rTm+mav1
- 8N5FgnJ7hhuKPYe2zKvRRqIG;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lv5Ro-0005gA-Kl
- for samba-technical@lists.samba.org; Sun, 20 Jun 2021 21:57:45 +0000
-Message-ID: <21982f254683b61ee5a93a449b402e80f9df9554.camel@samba.org>
-Subject: (again) Ship ldb like libndr and ldbwbclient?  As a Samba public
- library!
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Mon, 21 Jun 2021 09:57:36 +1200
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1lvWKy-007OEK-KX
+ for samba-technical@lists.samba.org; Tue, 22 Jun 2021 02:40:30 +0000
+Received: by mail-lj1-x22c.google.com with SMTP id u11so17015751ljh.2
+ for <samba-technical@lists.samba.org>; Mon, 21 Jun 2021 19:40:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=/8WjX4cnHEYgo+3vdxIdw+5bVRyOPIY5mBYw6H82eb8=;
+ b=Mpcpbltx1iFJKINdMHpkVw7066ThgQ06/5vFObBvg7h3S0PL3Srp+IE7Br9m98k1SJ
+ ZqDo+dEkcLjfL7FkK8Wn52U3QwsAXDfyOeFniEiWQPF1BuVKtLf2aIsrJXqkiLgxdWC6
+ zf9vryWqWM6QiNqnIE3nvp9xObWKGu8AguaorfJVr+hP3e972SNzTPlyT7gRsPmgNvVS
+ KjFyfzkB84vOsuTFXAsua3odvruEcsN2HUjZpdgAiom/tLaDEMbjOCC+KVZ+hfPARtky
+ dvsEGfAqFCPJO0cIaLoQFpAd5u6fHkYla/vLQZnE9WUrRcGset52dFERO04bIQkjIE+v
+ e5zA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=/8WjX4cnHEYgo+3vdxIdw+5bVRyOPIY5mBYw6H82eb8=;
+ b=Tc75a9zQrMqCESa1wNkt6Jmw/p5+xaBmUsKtTiNalg7ODLhzA4s3f3Rz2rFBzUTTGK
+ CavI7wxqg95XHK0x5+wIN7HrWn5XeRqSp4ZnpzKMA+X8oTZRukTM7qqzqzwX8jvNM6nR
+ WLkUD/dK519I8atlnwFJovdZcNHld2gX9dZwToWE6e0xOOtWoDwaEo/W+N2LXIBkG4yq
+ th9m/ntfyqYTwFVQJ3eJNpOGQdB6BfR2Rh7kthWvT9cOkQQocPMEyRVk7H0j47m3MF5O
+ 9fVEAC+aVzoVllzuhep+4TC0xTFiY+fq5GXOKN3nnSHdDJFn9Bs/6jZXeZMvJ8mHZh5n
+ m0Tw==
+X-Gm-Message-State: AOAM532Q6IMjms2A5FF0JrLgt4Rp8nZ0JSrC03DGk4w3Yv+mino0MwQb
+ npbBTQ+wy5y5Fecwnwre49b3TzrPOQEdRTe/ifk=
+X-Google-Smtp-Source: ABdhPJySx3U18ns7T15pcuPKCF6pSzDGUr8BT5xrxXYEcg6Ga9upcgyuejaj9zI8ljAitWa/d/r5sLcgqZ00nsmp8P0=
+X-Received: by 2002:a2e:a234:: with SMTP id i20mr1103486ljm.272.1624329627435; 
+ Mon, 21 Jun 2021 19:40:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+References: <20210621214446.1406159-1-keescook@chromium.org>
+In-Reply-To: <20210621214446.1406159-1-keescook@chromium.org>
+Date: Mon, 21 Jun 2021 21:40:16 -0500
+Message-ID: <CAH2r5msjg34KP4OxSwJTHmwawkFBW1k6-EUb4G_Ac4anC9TOgA@mail.gmail.com>
+Subject: Re: [PATCH] cifs: Avoid field over-reading memcpy()
+To: Kees Cook <keescook@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,130 +67,54 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>, Steve French <stfrench@microsoft.com>,
+ linux-hardening@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I've asked this a few times before, and I'm hesitant to ask again, but
-I feel quite strongly on this and want to try one last time to make
-this easier for our release management and packaging. 
+merged into cifs-2.6.git for-next
 
-I really thing that, while ldb had noble aims to be as popular as tdb
-and talloc, that ldb should be integrated back into Samba as a Samba
-public library, but not an independent release. 
-
-Rationale
-=========
-
-I ask this for the following reasons:
-
-Samba-enforced lockstep
------------------------
-
-Fundamentally, ldb is generously provided to the world, and used in
-sssd in particular, but is developed by and for Samba.  I'm aware that
-there were early contributions with broader goals, but without wanting
-to hurt any feelings, this this a Samba effort these days.
-
-Samba strictly requires the version included in the Samba release.  Any
-other version is untested, and Samba uses an unstable ABI (the modules
-ABI) and relies on specific behaviours (we fix bugs and rely on those
-fixes). 
-
-There is significant build rule complexity to enforce this requirement,
-yet for some reason this isn't as strict as our runtime rule (release
-version can float at build time, but not at runtime)!
-
-LDB Selftest
-------------
-
-Because ldb does not use the full Samba selftest system, we can't do
-knownfail on tests.  This means our standard practice of having a
-failing test first in the commit stream, with a knownfail entry,
-followed by the revert when the fix can't work.
-
-While of course I trust my fellow developers to always test that their
-tests show the bug, I've certainly found our main-Samba pattern helpful
-in ensuring this is the case, as 'make test TESTS=foo' can be run on
-each commit.
-
-Samba Selftest
---------------
-
-We also introduce untested (in autobuild) complexity to the Samba
-selftest system, eg 
-python:tests: Fix running tests with system libldb
-https://gitlab.com/samba-team/samba/-/merge_requests/2026
-
-I'll merge that patch, but I wish we didn't need this.
-
-(security) Release time
------------------------
-
-The need to, at the last moment, make a ldb release (because someone
-like myself has forgotten to include that in the patches) is a extra
-stress on our release management.  While ABI versions should be bumped,
-a missing ABI bump is not as catastrophic as a whole missing release.
-
-The same applies to our distributors, who for every LDB security
-release need to ship ldb, but also deal with the fact that Samba is
-strictly building against the bundled ldb version.  This brings
-additional complexity and makes it harder to track LDB CVEs, as they
-are issued against Samba bug apply to ldb.
-
-see eg
-https://security-tracker.debian.org/tracker/CVE-2019-3824
+On Mon, Jun 21, 2021 at 4:45 PM Kees Cook <keescook@chromium.org> wrote:
+>
+> In preparation for FORTIFY_SOURCE performing compile-time and run-time
+> field bounds checking for memcpy(), memmove(), and memset(), avoid
+> intentionally reading across neighboring fields.
+>
+> Instead of using memcpy to read across multiple struct members, just
+> perform per-member assignments as already done for other members.
+>
+> Signed-off-by: Kees Cook <keescook@chromium.org>
+> ---
+>  fs/cifs/smb2pdu.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
+>
+> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
+> index 31784e3fa96f..962826dc3316 100644
+> --- a/fs/cifs/smb2pdu.c
+> +++ b/fs/cifs/smb2pdu.c
+> @@ -2892,7 +2892,10 @@ SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
+>  #endif /* CIFS_DEBUG2 */
+>
+>         if (buf) {
+> -               memcpy(buf, &rsp->CreationTime, 32);
+> +               buf->CreationTime = rsp->CreationTime;
+> +               buf->LastAccessTime = rsp->LastAccessTime;
+> +               buf->LastWriteTime = rsp->LastWriteTime;
+> +               buf->ChangeTime = rsp->ChangeTime;
+>                 buf->AllocationSize = rsp->AllocationSize;
+>                 buf->EndOfFile = rsp->EndofFile;
+>                 buf->Attributes = rsp->FileAttributes;
+> --
+> 2.30.2
+>
 
 
-My proposal
-===========
-
-LDB would remain LGPL, but would be built akin to libwbclient,
-libsmbclient, libndr and other things that broader system packages rely
-on.  We would not search for or use a 'system' ldb, we would only use
-the one we shipped with.
-
-A user wishing only ldb can install the ldb package from a distributor,
-who can continue to package the ldb libraries and binaries separately,
-just as they can install libndr for sssd use via samba-common. 
-
-The independent ldb build would be removed to reduce the complexity for
-developers.  A user building from source wishing to build only ldb
-would build Samba - spending some CPU time - and select to remove other
-than libldb and the modules if they really want.  Samba is developer-
-resource constrained, so we need to make choices to maintain simplicity
-in our project.
-
-
-Next steps
-==========
-
-I recognise this has been a controversial issue in the past, so as to
-be effort-efficient I'm not going wait for a seconder for the proposal
-to ensure I'm on the right track, then make a MR.
-
-Likewise if you have significant concerns from real-world use cases
-please see if we can work something out, but avoid 'straw-man' examples
-please:  LDB is over a decade old, if a use case is needed it would
-have come up by now.
-
-Conclusion
-==========
-
-LDB is used outside Samba, by sssd, but has not flourished in the
-current sate as a semi-independent project, is very unlikely to become
-fully independent and should now be fully folded back into main-Samba. 
-
+-- 
 Thanks,
 
-Andrew Bartlett
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-
+Steve
 
