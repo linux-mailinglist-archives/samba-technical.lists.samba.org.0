@@ -2,58 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EC0B3AFB27
-	for <lists+samba-technical@lfdr.de>; Tue, 22 Jun 2021 04:41:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 59D803B0361
+	for <lists+samba-technical@lfdr.de>; Tue, 22 Jun 2021 13:54:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=/8WjX4cnHEYgo+3vdxIdw+5bVRyOPIY5mBYw6H82eb8=; b=IbPtuWtK3VwOXOJZ2v9X7DFUIq
-	UdvxeMQUlKi3C0pnsrHOzrRTloCa8XBcjqjlweLHfmaE9vs7OwlG0c7Eo0pCrLB8FULStzKFJPZl+
-	59+aQptHzR1rQPhHasYzTwbyZfyVmrJIpfFwz7FdxY89dBT4uCfO2pu20kvLx5Ui8dBlLhOl+8WLM
-	PK8MojTslc3Mk3v6jR873XaaBzN/7klLzvDMAFjtus9cHa9b3DqFkYmKseVfEJ3NLTp/tsaqer2/W
-	Sik6CGyG8TvLKmkuKuKjanAETCv1FZc4Ep+wb0zXFPKtJrhs6TNHDhe71LH67XCu6o0hYkTrx/r53
-	nTx7VS2w==;
-Received: from ip6-localhost ([::1]:56420 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=jF1rOE1ka1kjLVoEdkzZOcOYF8W6bwDXtgL5Olaot4A=; b=A22ov5XyD0FmWbHUwKAhbXzUeO
+	dQnFL/ZW0V/gldg84mxIDgU0ShFvQbdg7gCdIFceGyrKT5cz2YMcZRr9AtDawAv1NIyXjThK2HK/0
+	c1ea374d+RXeq4t1GctSPJYAEfcGQzMv58miyHu4Zjx03r92RFyjfsinLKnQ3Nzx87voqoS2krKX0
+	bPgp1pAV5tmLXePPRQXWWVK6y0rG451iu2UyQiLTisET3XPD6FmAXFr2tGd1j4M+O6daMaOOrFt6i
+	JQ6+47HOuXSXp2ZMd5C/YTxNxy1SLQUdFDmXYTAwDm2RLED4NuP0HRFj8rMPFMf/TklcYWhXI5H1x
+	cs9pzY+Q==;
+Received: from ip6-localhost ([::1]:28084 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lvWL3-007OET-Eg; Tue, 22 Jun 2021 02:40:33 +0000
-Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c]:35528) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1lvWKy-007OEK-KX
- for samba-technical@lists.samba.org; Tue, 22 Jun 2021 02:40:30 +0000
-Received: by mail-lj1-x22c.google.com with SMTP id u11so17015751ljh.2
- for <samba-technical@lists.samba.org>; Mon, 21 Jun 2021 19:40:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/8WjX4cnHEYgo+3vdxIdw+5bVRyOPIY5mBYw6H82eb8=;
- b=Mpcpbltx1iFJKINdMHpkVw7066ThgQ06/5vFObBvg7h3S0PL3Srp+IE7Br9m98k1SJ
- ZqDo+dEkcLjfL7FkK8Wn52U3QwsAXDfyOeFniEiWQPF1BuVKtLf2aIsrJXqkiLgxdWC6
- zf9vryWqWM6QiNqnIE3nvp9xObWKGu8AguaorfJVr+hP3e972SNzTPlyT7gRsPmgNvVS
- KjFyfzkB84vOsuTFXAsua3odvruEcsN2HUjZpdgAiom/tLaDEMbjOCC+KVZ+hfPARtky
- dvsEGfAqFCPJO0cIaLoQFpAd5u6fHkYla/vLQZnE9WUrRcGset52dFERO04bIQkjIE+v
- e5zA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=/8WjX4cnHEYgo+3vdxIdw+5bVRyOPIY5mBYw6H82eb8=;
- b=Tc75a9zQrMqCESa1wNkt6Jmw/p5+xaBmUsKtTiNalg7ODLhzA4s3f3Rz2rFBzUTTGK
- CavI7wxqg95XHK0x5+wIN7HrWn5XeRqSp4ZnpzKMA+X8oTZRukTM7qqzqzwX8jvNM6nR
- WLkUD/dK519I8atlnwFJovdZcNHld2gX9dZwToWE6e0xOOtWoDwaEo/W+N2LXIBkG4yq
- th9m/ntfyqYTwFVQJ3eJNpOGQdB6BfR2Rh7kthWvT9cOkQQocPMEyRVk7H0j47m3MF5O
- 9fVEAC+aVzoVllzuhep+4TC0xTFiY+fq5GXOKN3nnSHdDJFn9Bs/6jZXeZMvJ8mHZh5n
- m0Tw==
-X-Gm-Message-State: AOAM532Q6IMjms2A5FF0JrLgt4Rp8nZ0JSrC03DGk4w3Yv+mino0MwQb
- npbBTQ+wy5y5Fecwnwre49b3TzrPOQEdRTe/ifk=
-X-Google-Smtp-Source: ABdhPJySx3U18ns7T15pcuPKCF6pSzDGUr8BT5xrxXYEcg6Ga9upcgyuejaj9zI8ljAitWa/d/r5sLcgqZ00nsmp8P0=
-X-Received: by 2002:a2e:a234:: with SMTP id i20mr1103486ljm.272.1624329627435; 
- Mon, 21 Jun 2021 19:40:27 -0700 (PDT)
+	id 1lveyb-007Z66-Fc; Tue, 22 Jun 2021 11:53:57 +0000
+Received: from mx0a-00069f02.pphosted.com ([205.220.165.32]:54356) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1lveyV-007Z5w-Sl
+ for samba-technical@lists.samba.org; Tue, 22 Jun 2021 11:53:54 +0000
+Received: from pps.filterd (m0246627.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 15MArN7T006540; Tue, 22 Jun 2021 11:00:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=date : from : to : cc
+ : subject : message-id : mime-version : content-type; s=corp-2020-01-29;
+ bh=jF1rOE1ka1kjLVoEdkzZOcOYF8W6bwDXtgL5Olaot4A=;
+ b=CUJBlrdEOpr0QUI5FpUmcryvghlsP/FDWSNPhKBvmAQiPkCz6WLr0jzTxZ+LkiKkOmtq
+ 4q8w+KHYsiy12T/CKezt7O0eKFwINRcvG1kcQBQQcNBxxKwDRVj1lNFf5XQT8xR5MpII
+ 4xhjRk/U6uEERIrWRr43kAE16kF+XSJHsg/DrkhZ9ItYBtsRlNGWs6+pHggy4dOwHBpR
+ fDhxRQgRLHDBk3uqTwOex3JzS6xkClFMsl6ei1BrtDWkjeOzsK3Qgwd6XsAiblXm+WDs
+ N+WBjzGlE7Bn2qQn4mPYlns+butVyf8JZsychjIMzow66AKIdr1D9IAbXB/sQInQzXu6 qw== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+ by mx0b-00069f02.pphosted.com with ESMTP id 39as86tjv0-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 22 Jun 2021 11:00:10 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+ by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 15MAxqpD128765;
+ Tue, 22 Jun 2021 11:00:09 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by userp3020.oracle.com with ESMTP id 399tbsddus-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 22 Jun 2021 11:00:09 +0000
+Received: from userp3020.oracle.com (userp3020.oracle.com [127.0.0.1])
+ by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 15MB071i130710;
+ Tue, 22 Jun 2021 11:00:07 GMT
+Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
+ by userp3020.oracle.com with ESMTP id 399tbsddrb-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 22 Jun 2021 11:00:07 +0000
+Received: from abhmp0006.oracle.com (abhmp0006.oracle.com [141.146.116.12])
+ by aserv0121.oracle.com (8.14.4/8.14.4) with ESMTP id 15MB03Ze028573;
+ Tue, 22 Jun 2021 11:00:03 GMT
+Received: from mwanda (/102.222.70.252)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Tue, 22 Jun 2021 04:00:02 -0700
+Date: Tue, 22 Jun 2021 13:59:55 +0300
+To: Steve French <sfrench@samba.org>
+Subject: [PATCH] cifs: fix NULL dereference in smb2_check_message()
+Message-ID: <YNHCq6N9bAODxvnp@mwanda>
 MIME-Version: 1.0
-References: <20210621214446.1406159-1-keescook@chromium.org>
-In-Reply-To: <20210621214446.1406159-1-keescook@chromium.org>
-Date: Mon, 21 Jun 2021 21:40:16 -0500
-Message-ID: <CAH2r5msjg34KP4OxSwJTHmwawkFBW1k6-EUb4G_Ac4anC9TOgA@mail.gmail.com>
-Subject: Re: [PATCH] cifs: Avoid field over-reading memcpy()
-To: Kees Cook <keescook@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Proofpoint-ORIG-GUID: BUXnIuDvwyeI93WAyjRGSm8xWtyvsCAH
+X-Proofpoint-GUID: BUXnIuDvwyeI93WAyjRGSm8xWtyvsCAH
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,54 +77,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Steve French <stfrench@microsoft.com>,
- linux-hardening@vger.kernel.org
+From: Dan Carpenter via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Dan Carpenter <dan.carpenter@oracle.com>
+Cc: linux-cifs@vger.kernel.org, kernel-janitors@vger.kernel.org,
+ Baokun Li <libaokun1@huawei.com>, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+This code sets "ses" to NULL which will lead to a NULL dereference on
+the second iteration through the loop.
 
-On Mon, Jun 21, 2021 at 4:45 PM Kees Cook <keescook@chromium.org> wrote:
->
-> In preparation for FORTIFY_SOURCE performing compile-time and run-time
-> field bounds checking for memcpy(), memmove(), and memset(), avoid
-> intentionally reading across neighboring fields.
->
-> Instead of using memcpy to read across multiple struct members, just
-> perform per-member assignments as already done for other members.
->
-> Signed-off-by: Kees Cook <keescook@chromium.org>
-> ---
->  fs/cifs/smb2pdu.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
->
-> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
-> index 31784e3fa96f..962826dc3316 100644
-> --- a/fs/cifs/smb2pdu.c
-> +++ b/fs/cifs/smb2pdu.c
-> @@ -2892,7 +2892,10 @@ SMB2_open(const unsigned int xid, struct cifs_open_parms *oparms, __le16 *path,
->  #endif /* CIFS_DEBUG2 */
->
->         if (buf) {
-> -               memcpy(buf, &rsp->CreationTime, 32);
-> +               buf->CreationTime = rsp->CreationTime;
-> +               buf->LastAccessTime = rsp->LastAccessTime;
-> +               buf->LastWriteTime = rsp->LastWriteTime;
-> +               buf->ChangeTime = rsp->ChangeTime;
->                 buf->AllocationSize = rsp->AllocationSize;
->                 buf->EndOfFile = rsp->EndofFile;
->                 buf->Attributes = rsp->FileAttributes;
-> --
-> 2.30.2
->
+Fixes: 85346c17e425 ("cifs: convert list_for_each to entry variant in smb2misc.c")
+Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
+---
+ fs/cifs/smb2misc.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-
+diff --git a/fs/cifs/smb2misc.c b/fs/cifs/smb2misc.c
+index c6bb2ea1983b..668f77108831 100644
+--- a/fs/cifs/smb2misc.c
++++ b/fs/cifs/smb2misc.c
+@@ -158,11 +158,10 @@ smb2_check_message(char *buf, unsigned int len, struct TCP_Server_Info *srvr)
+ 		list_for_each_entry(ses, &srvr->smb_ses_list, smb_ses_list) {
+ 			if (ses->Suid == thdr->SessionId)
+ 				break;
+-
+-			ses = NULL;
+ 		}
+ 		spin_unlock(&cifs_tcp_ses_lock);
+-		if (ses == NULL) {
++		if (list_entry_is_head(ses, &srvr->smb_ses_list,
++				       smb_ses_list)) {
+ 			cifs_dbg(VFS, "no decryption - session id not found\n");
+ 			return 1;
+ 		}
 -- 
-Thanks,
+2.30.2
 
-Steve
 
