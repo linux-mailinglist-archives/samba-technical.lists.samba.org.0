@@ -2,68 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59D803B0361
-	for <lists+samba-technical@lfdr.de>; Tue, 22 Jun 2021 13:54:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93DC93B0BCE
+	for <lists+samba-technical@lfdr.de>; Tue, 22 Jun 2021 19:46:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=jF1rOE1ka1kjLVoEdkzZOcOYF8W6bwDXtgL5Olaot4A=; b=A22ov5XyD0FmWbHUwKAhbXzUeO
-	dQnFL/ZW0V/gldg84mxIDgU0ShFvQbdg7gCdIFceGyrKT5cz2YMcZRr9AtDawAv1NIyXjThK2HK/0
-	c1ea374d+RXeq4t1GctSPJYAEfcGQzMv58miyHu4Zjx03r92RFyjfsinLKnQ3Nzx87voqoS2krKX0
-	bPgp1pAV5tmLXePPRQXWWVK6y0rG451iu2UyQiLTisET3XPD6FmAXFr2tGd1j4M+O6daMaOOrFt6i
-	JQ6+47HOuXSXp2ZMd5C/YTxNxy1SLQUdFDmXYTAwDm2RLED4NuP0HRFj8rMPFMf/TklcYWhXI5H1x
-	cs9pzY+Q==;
-Received: from ip6-localhost ([::1]:28084 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=FxPWnM2nzBESBSeVwKSFWY5yV1Am4IvV6hH/h/iwhHU=; b=s3sUYVxbhb1ujg1Y4Dkb5tvPkS
+	N00nlbcn7TkzoVQ8H7jHNLejNVBgLApQS65PbxTPv1+s7rGV9RYq+ze4l7Z0Pe+bvAZy9kowgjNw0
+	FBmmHBvzEDJSmFvJrst25OC9TbJ2z3nD6nfDqja4E3lY4urGdhcwSkDdfDOjlARa1xCKEBUMcQSd8
+	z2vyiUVDO4d1mFTUt5vLhOdgs1ZcCT3UNqM3SfVgPBT/p14G7912zKHSDqcI2s6+sEF88qjySsj4F
+	7KelSXtTYeavtbkobxMscJNtNuqu54TXoMoY+4j5UlOsT+qKBxaxux1lQTwguMP/Q8AIWxzmqPvd9
+	qA6bdYAw==;
+Received: from ip6-localhost ([::1]:36578 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lveyb-007Z66-Fc; Tue, 22 Jun 2021 11:53:57 +0000
-Received: from mx0a-00069f02.pphosted.com ([205.220.165.32]:54356) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1lveyV-007Z5w-Sl
- for samba-technical@lists.samba.org; Tue, 22 Jun 2021 11:53:54 +0000
-Received: from pps.filterd (m0246627.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 15MArN7T006540; Tue, 22 Jun 2021 11:00:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : mime-version : content-type; s=corp-2020-01-29;
- bh=jF1rOE1ka1kjLVoEdkzZOcOYF8W6bwDXtgL5Olaot4A=;
- b=CUJBlrdEOpr0QUI5FpUmcryvghlsP/FDWSNPhKBvmAQiPkCz6WLr0jzTxZ+LkiKkOmtq
- 4q8w+KHYsiy12T/CKezt7O0eKFwINRcvG1kcQBQQcNBxxKwDRVj1lNFf5XQT8xR5MpII
- 4xhjRk/U6uEERIrWRr43kAE16kF+XSJHsg/DrkhZ9ItYBtsRlNGWs6+pHggy4dOwHBpR
- fDhxRQgRLHDBk3uqTwOex3JzS6xkClFMsl6ei1BrtDWkjeOzsK3Qgwd6XsAiblXm+WDs
- N+WBjzGlE7Bn2qQn4mPYlns+butVyf8JZsychjIMzow66AKIdr1D9IAbXB/sQInQzXu6 qw== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
- by mx0b-00069f02.pphosted.com with ESMTP id 39as86tjv0-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 22 Jun 2021 11:00:10 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
- by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 15MAxqpD128765;
- Tue, 22 Jun 2021 11:00:09 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
- by userp3020.oracle.com with ESMTP id 399tbsddus-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 22 Jun 2021 11:00:09 +0000
-Received: from userp3020.oracle.com (userp3020.oracle.com [127.0.0.1])
- by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 15MB071i130710;
- Tue, 22 Jun 2021 11:00:07 GMT
-Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
- by userp3020.oracle.com with ESMTP id 399tbsddrb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 22 Jun 2021 11:00:07 +0000
-Received: from abhmp0006.oracle.com (abhmp0006.oracle.com [141.146.116.12])
- by aserv0121.oracle.com (8.14.4/8.14.4) with ESMTP id 15MB03Ze028573;
- Tue, 22 Jun 2021 11:00:03 GMT
-Received: from mwanda (/102.222.70.252)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 22 Jun 2021 04:00:02 -0700
-Date: Tue, 22 Jun 2021 13:59:55 +0300
-To: Steve French <sfrench@samba.org>
-Subject: [PATCH] cifs: fix NULL dereference in smb2_check_message()
-Message-ID: <YNHCq6N9bAODxvnp@mwanda>
+	id 1lvkTX-007eDg-Ru; Tue, 22 Jun 2021 17:46:15 +0000
+Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136]:36630) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lvkTT-007eCJ-3l
+ for samba-technical@lists.samba.org; Tue, 22 Jun 2021 17:46:13 +0000
+Received: by mail-lf1-x136.google.com with SMTP id d16so29815651lfn.3
+ for <samba-technical@lists.samba.org>; Tue, 22 Jun 2021 10:46:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=FxPWnM2nzBESBSeVwKSFWY5yV1Am4IvV6hH/h/iwhHU=;
+ b=Oy8xrawud2O6hsSaAF/CLRkiw4tuPVDUJSYD+X57LKdrstGc5buwoV2Q5IKJa89s6i
+ ipBDuUlydi8pajAKs1q5BAjNN7fPVmf2YNWN61VrxsWYmZp97HHR+Z8d8IRwzg6Mw6F7
+ p2dYIP0WkR1BLi5TEuQCSZb1UHNxr5iQgznRU+hdgA6c8bjKj4dp6e80sLi6tZH2usYo
+ r93aEtuUinRCmtLeVJqw8ua3tVid/ZgRc/HxVJCl6wzsX7Izi+94yw6GDg4o09SlgR+y
+ u6eKo0Cx0+s1D6to7jmQNWd36xb49xOuX+ZxWuVxuaImo+ZSs9kELFIrkdfphZCps19w
+ 1VoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=FxPWnM2nzBESBSeVwKSFWY5yV1Am4IvV6hH/h/iwhHU=;
+ b=mpdqDQ0omvDv4G1CZyIgocnpQdFsqcvy0xIgeP4bJPimLOpTYlch/gq6yRM1/Ss7EU
+ +jmrtp/eUQXYUwi4XqiwsJTayaWIzlBoI5yaZArD7xM6KjoJPjmw153n2UYmtFaNpqUC
+ QlYQdAIVwaCJixrSls7A48bHv6+noSkOb0nQGJzYGSlvfPugSeZRSfhwCH4BPxFsxIu8
+ /Idp9YHomMmWTSlzh36SVQqDJbrzzN4uiA4FfTQtWa+lzJBMQCaBaBL95aAvAujmhmZ4
+ MyZP0kamI/XGT9clhgvi9YpMIWP34yXAw2C6cjdzYh7nX9og8MVtS1UN4xQt+L2qMKng
+ 6A5A==
+X-Gm-Message-State: AOAM530J4Opnw+JXQX/RscbPRlBQT9+rt2lDgUHIM5wu4Uxyktj+FGaw
+ f4OC8DPRX4aCwcgD360QutssEMKNPNHlTouCBGY=
+X-Google-Smtp-Source: ABdhPJzqrSj65fqXRPu74W0R6djEKT8FC7BNjM/WLrPP8jS4kzm3wFoPrV4db2Y08ahORHZPQduyruI3AFMtAVoUheU=
+X-Received: by 2002:a19:f705:: with SMTP id z5mr3676245lfe.395.1624383969085; 
+ Tue, 22 Jun 2021 10:46:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Proofpoint-ORIG-GUID: BUXnIuDvwyeI93WAyjRGSm8xWtyvsCAH
-X-Proofpoint-GUID: BUXnIuDvwyeI93WAyjRGSm8xWtyvsCAH
+Date: Tue, 22 Jun 2021 12:45:58 -0500
+Message-ID: <CAH2r5mvUXZtY3=LNzt8_icDfUAAeZpzjUK3sEErzpCksFDX2WA@mail.gmail.com>
+Subject: Processing ASYNC responses
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>, 
+ COMMON INTERNET FILE SYSTEM SERVER <linux-cifsd-devel@lists.sourceforge.net>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,41 +66,20 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Dan Carpenter via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Dan Carpenter <dan.carpenter@oracle.com>
-Cc: linux-cifs@vger.kernel.org, kernel-janitors@vger.kernel.org,
- Baokun Li <libaokun1@huawei.com>, samba-technical@lists.samba.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This code sets "ses" to NULL which will lead to a NULL dereference on
-the second iteration through the loop.
+I noticed that the client isn't checking for SMB2_FLAGS_ASYNC_COMMAND
+in the header flags field in the response processing.   Are there
+cases where we should be checking for this?  See section 3.2.5.1.5 of
+MS-SMB2
 
-Fixes: 85346c17e425 ("cifs: convert list_for_each to entry variant in smb2misc.c")
-Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
----
- fs/cifs/smb2misc.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/fs/cifs/smb2misc.c b/fs/cifs/smb2misc.c
-index c6bb2ea1983b..668f77108831 100644
---- a/fs/cifs/smb2misc.c
-+++ b/fs/cifs/smb2misc.c
-@@ -158,11 +158,10 @@ smb2_check_message(char *buf, unsigned int len, struct TCP_Server_Info *srvr)
- 		list_for_each_entry(ses, &srvr->smb_ses_list, smb_ses_list) {
- 			if (ses->Suid == thdr->SessionId)
- 				break;
--
--			ses = NULL;
- 		}
- 		spin_unlock(&cifs_tcp_ses_lock);
--		if (ses == NULL) {
-+		if (list_entry_is_head(ses, &srvr->smb_ses_list,
-+				       smb_ses_list)) {
- 			cifs_dbg(VFS, "no decryption - session id not found\n");
- 			return 1;
- 		}
+
 -- 
-2.30.2
+Thanks,
 
+Steve
 
