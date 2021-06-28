@@ -2,34 +2,33 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2DA903B6AEC
-	for <lists+samba-technical@lfdr.de>; Tue, 29 Jun 2021 00:18:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CFC13B6AF0
+	for <lists+samba-technical@lfdr.de>; Tue, 29 Jun 2021 00:22:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=QThlPC5yyfPivbr7LJDizTlLh4na63SMg4E0NsyMhNI=; b=dRZI5/Qw7UHCXQFAH8bbTds+/F
-	82StNgxwKQO8veCx89mOTRnW5L8DzG15vOnEQd3q3Ded/KEFwONIJSEgEk4jNBgSOZFUT4bN6SWtr
-	spPvgQmTyNjNIill5WgTrvZRiO27J+PHFl2v47qNiiLM2l1bkJr9Us7Obit86ng7My6nvayWKT7sz
-	8vUO4/KxE68GSNyAe74Aht9r9oHMv6Tf+rLrmTlvird1t0IM9HzCMNpLkxyiAoItGKUdPakNr+1Md
-	mhZ5xDczPQN65YW2LGKkSTbixpFItR9a/EHzBRFRTEIUNWd9PnaUBYVAYuMRRsZZwLo2axDFuRV68
-	nzhvj48w==;
-Received: from ip6-localhost ([::1]:25354 helo=hr1.samba.org) 
+	bh=wx4L97/TmplzR4XdmjV/rbbYJWSIvemCJaycO2v/Ka0=; b=qDO5nSGWqyuRZ6w4IfWdg0tDvj
+	7OJY/9no9qKAXht2aAOTIN60ZPgza+TaS7Y50SbMVNhbFkx9DHwiFI8zGvj0vnLBT3s7/LFNvUyJt
+	Mj/yIvuM5VTiwizeYzglOFylMHDJQkSSFa0o/Ck/f8aCgt9D1orgVSoBGo3WoVEswRWfFOK7iDj8b
+	BWNL247g6zBqIkM2RX77EIpgU9BbiNOCMFw6lQtPKzmVhs7cjhl0CG6i8kH3/7u+NdJ9MoQsbotFW
+	yGKDNGHrrpq2IcFTzMIGOME/x6hFFKPXE3CtUHzyBD1Vi3/KPWT+0aKvRmtVRNbIIjHPDNP/1+D9D
+	zG59DTuA==;
+Received: from ip6-localhost ([::1]:26058 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lxzZZ-008ovT-EC; Mon, 28 Jun 2021 22:17:45 +0000
-Received: from [104.200.28.160] (port=45900 helo=dup2.asynchrono.us) 
- by hr1.samba.org with esmtp (Exim) id 1lxzZT-008ovI-Fs
- for samba-technical@lists.samba.org; Mon, 28 Jun 2021 22:17:42 +0000
+	id 1lxzeL-008pDx-GF; Mon, 28 Jun 2021 22:22:41 +0000
+Received: from [104.200.28.160] (port=45904 helo=dup2.asynchrono.us) 
+ by hr1.samba.org with esmtp (Exim) id 1lxzeG-008pDo-Su
+ for samba-technical@lists.samba.org; Mon, 28 Jun 2021 22:22:39 +0000
 Received: from edfu.localnet (c-73-114-31-46.hsd1.ma.comcast.net
  [73.114.31.46])
- by dup2.asynchrono.us (Postfix) with ESMTPSA id 8141A1161;
- Mon, 28 Jun 2021 22:17:34 +0000 (UTC)
-To: Abhidnya Joshi <abhidnyachirmule@gmail.com>,
- samba-technical@lists.samba.org
+ by dup2.asynchrono.us (Postfix) with ESMTPSA id 36E431161;
+ Mon, 28 Jun 2021 22:22:34 +0000 (UTC)
+To: samba-technical@lists.samba.org
 Subject: Re: Implementing Samba in Containers
-Date: Mon, 28 Jun 2021 18:17:33 -0400
-Message-ID: <8152977.OV4Wx5bFTl@edfu>
-In-Reply-To: <CALmqtCWLgc6ePq0p2kO0aOe3P8=a-e_ScLd6nN5Rj8V9=j8rEA@mail.gmail.com>
+Date: Mon, 28 Jun 2021 18:22:33 -0400
+Message-ID: <5915047.XAFRqVoOGU@edfu>
+In-Reply-To: <d42dc27e-41d6-a63c-0079-f6bf7c0947f9@basealt.ru>
 References: <5826213.lGaqSPkdTl@edfu>
- <CALmqtCWLgc6ePq0p2kO0aOe3P8=a-e_ScLd6nN5Rj8V9=j8rEA@mail.gmail.com>
+ <d42dc27e-41d6-a63c-0079-f6bf7c0947f9@basealt.ru>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
@@ -48,56 +47,32 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: John Mulligan via samba-technical <samba-technical@lists.samba.org>
 Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
-Cc: Michael Adam <obnox@samba.org>
+Cc: Igor Chudov <nir@basealt.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Monday, June 28, 2021 4:41:13 AM EDT Abhidnya Joshi wrote:
-> Hi John,
+On Monday, June 28, 2021 9:17:22 AM EDT Igor Chudov via samba-technical wrote:
+> Hi!
 > 
-> This is very interesting stuff! I would be interested to know, as part of
-> this:
-> 1. Any goal to reduce /limit resource consumption done by Samba file
-> server, e.g. open file limits, max memory used, etc
-
-I think that would be up to the container runtime or orchestration system. 
-That said I'd be open to hearing more feedback about this. It's not something 
-I've looked into much as of yet.
-
-> 2. Is there any reduced functionality due to Samba running in a container?
-
-There are a few gotchas that I've found but nothing insurmountable. As noted 
-in the linked thread, the container needs CAP_SYS_ADMIN (aka a privileged 
-container) if you want to use the acl xattr vfs module. I also found that to 
-use winbind for active directory users the containers must share the pid 
-namespace. I collect most of the issues I've found at the issues of the 
-project on github.
-
-> 3. Is the idea here also to make winbind available as a separate
-> container in order to support only authentication related stuff?
+> At BaseALT we're interested in running Samba in containers for testing
+> purposes but mostly locally, in Docker or Podman, not in Kubernetes. We
+> will be glad to join the project but I'm not sure how we can help.
 > 
 
-When I run winbind in our k8s based approach, it is running in a separate 
-container from smbd (see the namespace caveat above). I could imagine that the 
-container running winbind could be used for other purposes as well -  the 
-trick would be making sure the sockets, files, and dbs that are needed to be 
-shared outside the container are available. 
-
-Note that above, I'm talking about the running container. We build one image 
-for the file server stuff.
-
-> Thanks and Regards
-> Abhidnya Joshi
+That's great to hear! Personally, I'd love it if a few more people simply want 
+to "kick the tires" - try out the builds, read the docs, and give any and all 
+feedback that comes to mind. :-)
 
 
-Thank you!
+> Have you any experience in running Samba containers orchestrated by
+> OpenNebula?
 
-PS. I'm re-adding the list to the To: line. I hope you don't mind.
+Nope, this is the first I'm hearing of it. I'll read up some more about it. If 
+it supports running OCI containers in a manner similar to docker I think it 
+could work.
 
 > 
-> On Mon, Jun 28, 2021 at 5:11 AM John Mulligan via samba-technical
-> 
-> <samba-technical@lists.samba.org> wrote:
+> On 28.06.2021 3:20, John Mulligan via samba-technical wrote:
 > > Hi List,
 > > 
 > > I wanted to follow up on something that I learned from a thread on the
