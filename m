@@ -2,77 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E035A3B788E
-	for <lists+samba-technical@lfdr.de>; Tue, 29 Jun 2021 21:23:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A19333B8108
+	for <lists+samba-technical@lfdr.de>; Wed, 30 Jun 2021 13:02:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=HAI74XPg1eycCM+AtnjroT1PaC+KqBAgIpqiVe/g6Hk=; b=mfIsQ50IDzRTu0Ha6FIqwv7h6k
-	yzowG5ekOQP4bozDhwJZgIGiBsoKKnAILZ+aRwQWLuoLwNZ6gyAYm70gzeRIgxCE9/zHlEVy7SlW2
-	oXv+JeHWQc8UhgSxvaOzogjw2M2X14bdeEAqzu3+8eaKMBmjcYDzUZF6v+FOodCmZ8dzi0+U6K3Jc
-	SZGsl43G7Zj1raJjkVojy+BQkevM011VBPQXiNOjQzdbGgpHXbnMFhDDR7/r0hovc+TAcUOM16023
-	MLmV4t0MIgB/+2fhhQVZwmW9sgOOVjlQqG7MoeeIPCcyfjJoVLjehRdBxYPMmQhkM13jcWV4poFBl
-	gcaIVd2g==;
-Received: from ip6-localhost ([::1]:51258 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=MVwqp6FOR+hCiozYEE3rt+PQXAHdrRLLAW22WpS2G0g=; b=v8FxRC41Lp884o4N1cTPFhG+iS
+	yQBjjdowj3r2JKgAzZxbpHdNg7+LZpg+JtPX56dLM+k+d89iegZ3/yeHeNzhnKWZ9Y5WUqEbWwVry
+	ET5pkLUeriSAnmD0gb4QZzT1A6liH8Icw6V2qr4BZc3WqMDpYC1CONTTcO69fXd4DgO5ry/TvqLrT
+	LBNYpiP6YBjmIBT0efSW8gZW9tg+MyQ+ehnIcw5/IeD71Vuvkm4y0poDaeGY4Z1IDdcXT91ORKsbS
+	OTQn8KGE1JR+niX3OgrKou8y+Swn0zdb2g7JrjThh00duPki9eS2E2fDbdnTqmAx6OIEN8SNpWjMy
+	CnLI63BQ==;
+Received: from ip6-localhost ([::1]:45132 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1lyJJu-0091Rt-Cy; Tue, 29 Jun 2021 19:22:54 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:21632) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1lyJJn-0091Rk-Vd
- for samba-technical@lists.samba.org; Tue, 29 Jun 2021 19:22:50 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1624994563;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=32578GwktCHVIApi9xqqL7l7z9XwoK29nawsDYtA7js=;
- b=CJX1XxXbAR5vgFySwYc77KR1gURoiGlC/QdmbNcGjcA5LNJ0em6hCxxXZAqLGWBOEn14vE
- h3WujV/I9KKecPxkjumI7jKBvyzyTGDXBp+4cLohrbZH7kS0fTxe9R8C/xvNliUKRb6Wt1
- MpSG7A1mksGL0U/krYKEFAewWoGEnls=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1624994563;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=32578GwktCHVIApi9xqqL7l7z9XwoK29nawsDYtA7js=;
- b=CJX1XxXbAR5vgFySwYc77KR1gURoiGlC/QdmbNcGjcA5LNJ0em6hCxxXZAqLGWBOEn14vE
- h3WujV/I9KKecPxkjumI7jKBvyzyTGDXBp+4cLohrbZH7kS0fTxe9R8C/xvNliUKRb6Wt1
- MpSG7A1mksGL0U/krYKEFAewWoGEnls=
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
- [209.85.216.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-99-61Kk-9qUN1Chv1__S1uLIw-1; Tue, 29 Jun 2021 15:22:41 -0400
-X-MC-Unique: 61Kk-9qUN1Chv1__S1uLIw-1
-Received: by mail-pj1-f72.google.com with SMTP id
- om5-20020a17090b3a85b029016eb0b21f1dso2848015pjb.4
- for <samba-technical@lists.samba.org>; Tue, 29 Jun 2021 12:22:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
- bh=32578GwktCHVIApi9xqqL7l7z9XwoK29nawsDYtA7js=;
- b=MVs7b6Qcsi7qpgtga7Asr49WSohx7LkgAk/yVzsXYhX5pE3vfurqFY3KsFXKrZomDu
- DCAgnrpOJnrsBfWO8t5dadxG0rNPdwVBRmAwWyMson/thYqycO6Lrr+8Js/5++j2scL+
- BAiMLLL3TAmDyF6nBGGp9lazgpC1kZ0cUTiGNoDDOvXBaQtrd2j2e/t3NazV9y4LidO8
- Gm2r0DAck2BWvyScJmthHjQ36jj6rCilsS3w4s1MY6lpwCTc4cg0utnS7exwBS0xk7ZX
- 61ygKWnLPSGpGDrxRqyWDzCkwjXqmQg+vF2vcNZr3B3guquW27ZhkUoODpxeulA6cljV
- tN0A==
-X-Gm-Message-State: AOAM531TPd+GdUXwFBv1Y2AbVodfmVMsoYw2Mhmk8NZgCmc4Wx/mIXSv
- to+GwNEk6KqR0eaPbtTPbSKg1pQyv5cV8tuk5OXxau1OGX6bpoBOLq0/zw65DE3DGacL4aenWzq
- lXfBAdPBbmBmcE88fJFBn6fOA7VV8cY72ifMXgvl2vNpy
-X-Received: by 2002:a62:8097:0:b029:306:7dfc:fa0 with SMTP id
- j145-20020a6280970000b02903067dfc0fa0mr31647335pfd.17.1624994560095; 
- Tue, 29 Jun 2021 12:22:40 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyXxmAQDzL+ee14OCAUClB+pxE2tNmPBhiwFfRoV1uB1UVHSxwPMECypacsEVVs16sJnOfAHtUaSS/SML2YLOI=
-X-Received: by 2002:a62:8097:0:b029:306:7dfc:fa0 with SMTP id
- j145-20020a6280970000b02903067dfc0fa0mr31647322pfd.17.1624994559840; Tue, 29
- Jun 2021 12:22:39 -0700 (PDT)
+	id 1lyXxi-009KIU-7P; Wed, 30 Jun 2021 11:00:58 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20304) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lyXxc-009KIL-4Q
+ for samba-technical@lists.samba.org; Wed, 30 Jun 2021 11:00:55 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=MVwqp6FOR+hCiozYEE3rt+PQXAHdrRLLAW22WpS2G0g=; b=W+eUrAHOxaI9/xXGTIsf4qs+ex
+ FCfolwlPDqv3rq3EweOq5Bmy3U1CEXJwP7Mq4YCIFaJekN7+KHJ2fvJ5DhLVJan6p0YXZYC7duFFE
+ II/Wts9QHQf39Nr+qA3PqrSefrx8z7YGWWkzhWg5o1HsqqpRL7MOVOW4bySJeNPsn5bV4m7vvIuyB
+ CspYdRBEJYb3FuKqojf5tYPraaIicchLRn2Lc59mbjOPIdfVNPN9FbRHzJZ4eM87fuGDPbGyfjYj4
+ xgiU8nyLgZNCH+DwmCYo0nTWPxZkKnY4kXrGXDxTgcHXG9y2zUFG9iXiiLgIB11DjXPBlJuBTHyuK
+ +ri4NB7pd6AFEoVySugo7ex0NrXObYrHVDlvWfTHWn0pEvWwTGuvWDC2RhVsCaM8ZQdwoHs3US39l
+ ZdyEsVNqRLeoNaNHMFXmHscKWlyp614Ph/GHY5+hFta+lM72OivpHWU+TazfQovgM+jCvsPVe+Srf
+ BBkfj8GtDQRF1Ze7Cq6uQp5l;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1lyXxa-0002ne-1l; Wed, 30 Jun 2021 11:00:50 +0000
+To: Pavel Filipensky <pfilipen@redhat.com>
+References: <CAEcb10uXPGgAmZSqZ71PRSEbo+ZiNkem-CmH4afBPemnmXAdZQ@mail.gmail.com>
+Subject: Re: key version number in fill_mem_keytab_from_secrets()
+Message-ID: <f4023375-0dcb-f817-7429-43b5bb78c3fa@samba.org>
+Date: Wed, 30 Jun 2021 13:00:43 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Date: Tue, 29 Jun 2021 21:22:28 +0200
-Message-ID: <CAEcb10uXPGgAmZSqZ71PRSEbo+ZiNkem-CmH4afBPemnmXAdZQ@mail.gmail.com>
-Subject: key version number in fill_mem_keytab_from_secrets()
-To: metze@samba.org
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pfilipen@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+In-Reply-To: <CAEcb10uXPGgAmZSqZ71PRSEbo+ZiNkem-CmH4afBPemnmXAdZQ@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="zAgw1ChWGjnODhGXb9MkMEAtwG46WbiHe"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,75 +57,216 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Pavel Filipensky via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Pavel Filipensky <pfilipen@redhat.com>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Stefan,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--zAgw1ChWGjnODhGXb9MkMEAtwG46WbiHe
+Content-Type: multipart/mixed; boundary="KHvhLWOnNhlEjRRDhfUjRBMMMTfEPMsy6";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Pavel Filipensky <pfilipen@redhat.com>
+Cc: samba-technical@lists.samba.org
+Message-ID: <f4023375-0dcb-f817-7429-43b5bb78c3fa@samba.org>
+Subject: Re: key version number in fill_mem_keytab_from_secrets()
+References: <CAEcb10uXPGgAmZSqZ71PRSEbo+ZiNkem-CmH4afBPemnmXAdZQ@mail.gmail.com>
+In-Reply-To: <CAEcb10uXPGgAmZSqZ71PRSEbo+ZiNkem-CmH4afBPemnmXAdZQ@mail.gmail.com>
 
-can you please help me and answer my questions related to feature
-'Implement 'update keytab' for winbind and tools' (
-https://gitlab.com/samba-team/samba/-/merge_requests/1999).
-
-You commented in MR 1999:
-*I also fail to see where we add the keys for the old(er) passwords.
-Shouldn't we just dump the keys from in memory keytab (which is filled from
-the precalculated hashed of secrets.tdb) into the file keytab.*
---------------------------------------------------
-A) fill_mem_keytab_from_secrets()
---------------------------------------------------
-I have checked the code in fill_mem_keytab_from_secrets() and what it does
-is (code is simplified):
-
-krb5_kvno kvno = 0; /* FIXME: fetch current vno from KDC ? */
-fill_keytab_from_password(krbctx, *keytab, princ, kvno, info->password);
-fill_keytab_from_password(krbctx, *keytab, princ, kvno - 1,
-info->old_password);
-fill_keytab_from_password(krbctx, *keytab, princ, kvno - 2,
-info->older_password);
-fill_keytab_from_password(krbctx, *keytab, princ, kvno - 3,
-info->next_change->password);
-
-I see two issues here:
-1) kvno is incorrectly initialized and keys are added with unreal values:
-vno=0
-vno=4294967295  (-1)
-vno=4294967294  (-2)
-vno=4294967293  (-3)   ###  btw. the semantics of next_change is more (kvno
-+ 1) than (kvno - 3)
-
-2) info->next_change->password should not be passed to
-fill_keytab_from_password().
-next_change, if exists, refers to a password change in progress, and should
-not be used before it is accepted and finalized, then it will become
-info->password and only then it will be added to keytab.
-
-Q: How is it possible that it works with wrong vnos?
-
---------------------------------------------------
-B) ads_keytab_create_default()
---------------------------------------------------
-this is the code I use to implement keytab update. It does:
-
-* ads_get_service_principal_names() and adds keys for all SPNs via
-ads_keytab_add_entry()
-* adds keys for sam_account_name and UPN via ads_keytab_add_entry()
-* It stores SPNs from keys with (kt_entry.vno != kvno) into array
-oldEntries and for whole array ads_keytab_add_entry(ads, res,
-oldEntries[i], false) is called
-
-Every call of ads_keytab_add_entry() also calls
-smb_krb5_kt_seek_and_delete_old_entries(), which deletes all keys with vno
-< vno -1 (i.e. vno -2, vno -3, ....) for given principal.
-So it should also ensure that old (but not older password and it's keys)
-are in keytab.
-
-Q: Do we also need the older password and why? If needed, isn't it better
-just to avoid its removal from keytab, instead of filling it from
-secrets.tdb (or from in memory keytab)?
+--KHvhLWOnNhlEjRRDhfUjRBMMMTfEPMsy6
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
 
-Cheers,
-Pavel
+Hi Pavel,
+
+> can you please help me and answer my questions related to feature
+> 'Implement 'update keytab' for winbind and tools' (
+> https://gitlab.com/samba-team/samba/-/merge_requests/1999).
+>=20
+> You commented in MR 1999:
+> *I also fail to see where we add the keys for the old(er) passwords.
+> Shouldn't we just dump the keys from in memory keytab (which is filled =
+from
+> the precalculated hashed of secrets.tdb) into the file keytab.*
+> --------------------------------------------------
+> A) fill_mem_keytab_from_secrets()
+> --------------------------------------------------
+> I have checked the code in fill_mem_keytab_from_secrets() and what it d=
+oes
+> is (code is simplified):
+>=20
+> krb5_kvno kvno =3D 0; /* FIXME: fetch current vno from KDC ? */
+> fill_keytab_from_password(krbctx, *keytab, princ, kvno, info->password)=
+;
+> fill_keytab_from_password(krbctx, *keytab, princ, kvno - 1,
+> info->old_password);
+> fill_keytab_from_password(krbctx, *keytab, princ, kvno - 2,
+> info->older_password);
+> fill_keytab_from_password(krbctx, *keytab, princ, kvno - 3,
+> info->next_change->password);
+>
+> I see two issues here:
+> 1) kvno is incorrectly initialized and keys are added with unreal value=
+s:
+> vno=3D0
+> vno=3D4294967295  (-1)
+> vno=3D4294967294  (-2)
+> vno=3D4294967293  (-3)   ###  btw. the semantics of next_change is more=
+ (kvno
+> + 1) than (kvno - 3)
+
+This is intended, we could also use 0 for all of them,
+the key is that we should not care about the kvno, as there is
+no reliable way to get the kvno.
+
+We the acceptor should just iterate overall keys (for the given
+encryption type) in the whole keytab and try to decrypt the ticket.
+
+If I remember correctly that's what MIT krb5 does and for
+Heimdal it's a bit random if it iterates the keytab, I think
+it iterates as long as the kvno didn't match, so it's better to use
+numbers which are very unlikely to be used by the KDC and for AD
+the kvno starts with 1 for the first password.
+I also created a GSS_KRB5_CRED_ITERATE_ACCEPTOR_KEYTAB_X for heimdal
+to ensure that it iterates the whole keytab, but it's not yet upstream,
+see https://github.com/heimdal/heimdal/pull/656
+
+Also note that Samba asks gss_accept_sec_context() to ignore the
+SPN values in the keytab, as it's also not possible to know all
+possible names, which are available on the DC.
+
+> 2) info->next_change->password should not be passed to
+> fill_keytab_from_password().
+> next_change, if exists, refers to a password change in progress, and sh=
+ould
+> not be used before it is accepted and finalized, then it will become
+> info->password and only then it will be added to keytab.
+
+No, info->next_change->password might be in progress for 4 reasons:
+1. An error that happens before the password change reached the dc
+2. The DC rejected the password change
+3. The DC changed the password, but the success response didn't reach us
+4. We we're not able to store the success (e.g. a ctdb failure in the clu=
+ster)
+
+But we can't really know/should not care about the difference between the=
+se
+reasons. And for 1. and 3. it's not possible to find the difference.
+So we must be prepared to accept tickets encrypted with the in progress
+password. Naturally we also need to accept all tickets with all other pas=
+swords
+we know about, as ticket lifetimes are typically 10h and we have to deal =
+with
+replication latency.
+
+> Q: How is it possible that it works with wrong vnos?
+
+The acceptor should ignore the kvno, I'm not how
+gss_accept_sec_context works in other applications,
+but for samba's usage I guess the iteration works
+(apart from heimdal without GSS_KRB5_CRED_ITERATE_ACCEPTOR_KEYTAB_X).
+
+> --------------------------------------------------
+> B) ads_keytab_create_default()
+> --------------------------------------------------
+> this is the code I use to implement keytab update. It does:
+>=20
+> * ads_get_service_principal_names() and adds keys for all SPNs via
+> ads_keytab_add_entry()
+> * adds keys for sam_account_name and UPN via ads_keytab_add_entry()
+> * It stores SPNs from keys with (kt_entry.vno !=3D kvno) into array
+> oldEntries and for whole array ads_keytab_add_entry(ads, res,
+> oldEntries[i], false) is called
+>=20
+> Every call of ads_keytab_add_entry() also calls
+> smb_krb5_kt_seek_and_delete_old_entries(), which deletes all keys with =
+vno
+> < vno -1 (i.e. vno -2, vno -3, ....) for given principal.
+> So it should also ensure that old (but not older password and it's keys=
+)
+> are in keytab.
+
+I guess '< kvno -1' comes from times before we stored secrets_domain_info=
+B
+in secrets.tdb. Today would be '< kvno -3'...
+
+> Q: Do we also need the older password and why? If needed, isn't it bett=
+er
+> just to avoid its removal from keytab, instead of filling it from
+> secrets.tdb (or from in memory keytab)?
+
+I think we want the kvno values to stay below 1 in order to have
+heimdal keep iterating the keytab.
+
+I'd do this (with kvno =3D 0):
+- remove all old values with kvno - 3
+- add all new values (if any) for kvno - 3
+- remove all old values with kvno - 2
+- add all new values (if any) for kvno - 2
+- remove all old values for kvno - 1
+- add all new values for kvno - 1
+- remove all old values for kvno
+- add all new values for kvno
+
+The worst thing that can happen is that some keys are stored under two kv=
+no values,
+but we're sure at any given time the old values of kvno, kvno-1 and kvno-=
+2 are still
+in the keytab and we're ready to decrypt incoming tickets.
+
+
+I think 'net ads keytab create' asks a DC about the msDS-KeyVersionNumber=
+, which
+is typically (but not reliable and always) the kvno. We may asks a DC tha=
+t doesn't have
+the current password yet, or it already has the in progress password alre=
+ady or the DC always returns 1,
+see [MS-ADTS] 3.1.1.4.5.16 msDS-KeyVersionNumber:
+https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/cb85=
+ccdf-6469-42d5-a61c-ebae09b72e9d
+
+Maybe we need an option to specify if the kvno should be fetched from the=
+ DC
+for 'net ads keytab ' commands.
+
+The kvno (as well as SPNs) might be important for some applications so
+we better keep the default behavior for the 'net ads keytab' commands.
+
+For legacy reasons this is all really complex in order to be compatible
+with all sorts of situations and setups.
+
+I hope I had some useful comments for you...
+
+metze
+
+
+--KHvhLWOnNhlEjRRDhfUjRBMMMTfEPMsy6--
+
+--zAgw1ChWGjnODhGXb9MkMEAtwG46WbiHe
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAmDcTtwACgkQDbX1YShp
+vVZKeA//TGnXrV2FSpMLGKvIbGbe8/PyZT0f+kA1c1lroe3oMQBVkTOHc/4v/vD2
+dgje8mdwCenoUy8Pz9KSaSqIkLhJkXVJ9JLV71VHgqMWxOfOrp1+e/2aVG6/uVwO
+usuwx1FXQoIz0eWpN2tHOu6UlmOkutj6gt3mx6lsXP+uW0K+YeGiQhS0ZgFnqAuh
+ZDAuoUICY2J3MQRjUsGkjj9uQ5wFiNTZTiLV8pw4rWRXSuOdXNbLuhCTygacBju2
+Zh3yOQqZHI6bGzUwTVRCalw89EhATXYaz9LpdST0KtJjqwn9pcDlxAwYvM5cfkpm
+OSflPhu78Lin9Nrj0MfGq0gee80FYGFKs+iFbyPnuKEHC08J9rfynlXpk9D/MoqB
+G15IsOcgjYDSi5Ssl08zgRh4Vq3a7psZiwJtMFYOxRmAcL66nLiua897Y79S1eJ3
+8EA6wl4uPx9xCWPyA3TJE4h8f99DNqtxXSK+frlDs4CVyouA+gGrY7iUlwxHWPDx
+KiahrJcK2ntuqzF9Znl9TCvQ6SmBthMkLSP263FKTQLoABO7QZFvceCUQkFGqNhY
+B6fmNukXBHcOuDf4gsNN7am/mTcX5nCfaahlM6FtXF0kacsNSnhtrjwik5f2W4Sf
+kVKWK8b6+EVXpZDpmsGo1LRNVXmTEWhPVVBs5GvARIy7DX1LzfA=
+=Afg6
+-----END PGP SIGNATURE-----
+
+--zAgw1ChWGjnODhGXb9MkMEAtwG46WbiHe--
+
