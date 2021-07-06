@@ -2,51 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 119573BC7B0
-	for <lists+samba-technical@lfdr.de>; Tue,  6 Jul 2021 10:15:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7203C3BD753
+	for <lists+samba-technical@lfdr.de>; Tue,  6 Jul 2021 15:00:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=F1WdYUs5c4AVV0hVIlUiXO6m9ia6rGaxlFvRzeMlcaM=; b=SKWXbm3PdGxcGrA95rjM/cpB3A
-	Bt+oYEt0P0A6of4qGsDsO3SsiB8NUnCf8KYdYngQifdVoC1UfJlrxVrBmxFOWqAs57FO9AZpjkac2
-	J6otet/3MEzpJZSZfX4v7E+8zjECnKFaTtfnb3kndmiZ/y36znm1zO5MziNJhzzQDjMkGoG7EAgkX
-	BkQx/bgAjgNbPISIO62HNDWqEVSVcnddgBreUSrIJP8KcgAOtU/pwpNOxYowMP9uOyGkBcYGeyD6C
-	ScoOBE7uz4Ez+NPRxSvKtHrFYzkEf0UW0QNQ0BnBOl/dK8ZTrJx2xN6J/k9GkyW/wS1HfZ4RPUOoy
-	zHN00KTA==;
-Received: from ip6-localhost ([::1]:49656 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=oGx/Zupu/fAxll5i4vd8Y7bQ+QSE8l5gg8QBVKrCe6U=; b=jpJYQRoNQdjmJEDbPM4V6Z2ilh
+	MH22VBywZ1Y/K9cY+JCyHDhAHKulme56B0BoqPtjApOfGiAnaO5fXPkLJ2pO5Nqq98GX21afa3e7P
+	yBbOF0Y20r/cuzJ96kR2+wMCGkrGE9an1ymDzBLbcBqX5SJ8yIWyT8707LG2/oag/4HfFdtSf0eYi
+	uiraPk87eoe0HxUC7dT2jKaUDWl9BPV2xh2GKoeOrYkuaSdU8Oe2EGDAiZiP30iCOuK9kZAqqSAFn
+	xk5lGmh1zFFmN8C3OO1YlYMC/ErrrGUK5QX8X43SqeqnIinUguV1YPCieB4rSDwrHGU+pOl44Zdun
+	pAWnJQAA==;
+Received: from ip6-localhost ([::1]:58456 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1m0gDw-00CQqy-Nu; Tue, 06 Jul 2021 08:14:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45088) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1m0gDq-00CQpn-J4
- for samba-technical@lists.samba.org; Tue, 06 Jul 2021 08:14:29 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=F1WdYUs5c4AVV0hVIlUiXO6m9ia6rGaxlFvRzeMlcaM=; b=TP24u0UbswbvdEBbCElMYNdQu4
- UIBOySXXfowmsD5SJSlSZMN1Fy0MCngUGQG6Tzg8DdSuS9j/jnZwkd9sXQXw/TL9wEtzcmgNyUkNe
- cp6axaz+gPuWzcuIv4/+k1T0GEBTH9ZhHvx9jA1cfT6Uty7EavMFVi8J9Jc8fnl+ORNQQ5dpDB498
- yx44U5LdOwxTbV3lgvWA+n+dAwahBJejAsXkTm+KpcAWYj6nNpt4hseB4VCggg5HYG38JZJg341Mu
- QDhn/5brYzE4tP3u2Sqk9Mi1D+4qAtIljOIDJgz1uXQJpobb5Vs2VST8nNcfN/9uuoj6JBpDhVI8j
- 5c+55FfdTp4Ipu6Ih/iSNsiBRe8iTrBBklvFFc1XTuSr46cimVKvHl/ovTov0o50Zhyp0OHmI9Bn7
- h5vt3j/oV9ttokYze+H+tHn9fgW2CmqBPcGn7k2hyREdFug41mkYQcHofviUEKSzdoCJFJKCyLh0X
- Z9p1ZccbpN2jpIWRC/WEjJi3;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1m0gDp-0003E1-I6; Tue, 06 Jul 2021 08:14:25 +0000
-To: Andrew Bartlett <abartlet@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Isaac Boukris <iboukris@gmail.com>
-References: <b2cb195314281883e378c908784ac6f9f841584d.camel@samba.org>
- <26713d5cdcc47d0d9fb017b6a1e546d9501d8efe.camel@samba.org>
-Subject: Re: Heimdal upgrade, really happening this time
-Message-ID: <c328766b-d894-517f-966c-fa5305558633@samba.org>
-Date: Tue, 6 Jul 2021 10:14:19 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+	id 1m0kfh-00CV4l-Nt; Tue, 06 Jul 2021 12:59:29 +0000
+Received: from phd-imap.ethz.ch ([129.132.80.51]:60928) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1m0kfc-00CV4b-6v
+ for samba-technical@lists.samba.org; Tue, 06 Jul 2021 12:59:26 +0000
+Received: from localhost (ict-networks-192-168-127-049.fwd-v4.ethz.ch
+ [192.168.127.49])
+ by phd-imap.ethz.ch (Postfix) with ESMTP id 4GK2gZ2MJlz3K
+ for <samba-technical@lists.samba.org>; Tue,  6 Jul 2021 14:59:06 +0200 (CEST)
+Received: from phd-mxin.ethz.ch ([192.168.127.53])
+ by localhost (phd-mailscan.ethz.ch [192.168.127.49]) (amavisd-new, port 10024)
+ with LMTP id dJfd3vcXX42p for <samba-technical@lists.samba.org>;
+ Tue,  6 Jul 2021 14:59:06 +0200 (CEST)
+Received: from webmail.phys.ethz.ch
+ (ict-networks-192-168-127-051.fwd-v4.ethz.ch [192.168.127.51])
+ by phd-mxin.ethz.ch (Postfix) with ESMTP id 4GK2gZ18dpz29
+ for <samba-technical@lists.samba.org>; Tue,  6 Jul 2021 14:59:06 +0200 (CEST)
 MIME-Version: 1.0
-In-Reply-To: <26713d5cdcc47d0d9fb017b6a1e546d9501d8efe.camel@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="LSRJqnq3QQb4ryuGSylDv8Dp7EXUXNHtK"
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Date: Tue, 06 Jul 2021 14:59:06 +0200
+To: samba-technical@lists.samba.org
+Subject: State of vfs_nfs4acl_xattr.
+User-Agent: Roundcube Webmail/1.4.11
+Message-ID: <afc32b57e57c35e4d49a2b3904f8d80f@phys.ethz.ch>
+X-Sender: mbonin@phys.ethz.ch
+Organization: ISG D-Phys
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,95 +55,186 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: Maciej Bonin via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Maciej Bonin <mbonin@phys.ethz.ch>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---LSRJqnq3QQb4ryuGSylDv8Dp7EXUXNHtK
-Content-Type: multipart/mixed; boundary="VLjnCTRybyIjvq5SssPfnQelA9Mi4bt1k";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Andrew Bartlett <abartlet@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Isaac Boukris <iboukris@gmail.com>
-Message-ID: <c328766b-d894-517f-966c-fa5305558633@samba.org>
-Subject: Re: Heimdal upgrade, really happening this time
-References: <b2cb195314281883e378c908784ac6f9f841584d.camel@samba.org>
- <26713d5cdcc47d0d9fb017b6a1e546d9501d8efe.camel@samba.org>
-In-Reply-To: <26713d5cdcc47d0d9fb017b6a1e546d9501d8efe.camel@samba.org>
+Dear Samba developers,
 
---VLjnCTRybyIjvq5SssPfnQelA9Mi4bt1k
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+I've recently tried to get vfs_nfs4acl_xattr to work for re-exporting of 
+an nfs4 mount from a linux server.
+As far as I can tell, this is simply not possible at the moment. Am I 
+correct in that belief ?
 
+I've adjusted all the default parameters to make it somewhat funtional, 
+to the values below:
 
-Hi Andrew,
+==CUT
+    nfs4acl_xattr:encoding = nfs
+    nfs4acl_xattr:nfs4_id_numeric = yes
+    nfs4acl_xattr:xattr_name = system.nfs4_acl
+    nfs4acl_xattr:validate_mode = no
+    nfs4acl_xattr:default acl style = posix
+    nfs4acl_xattr:version = 40
+==CUT
 
->> My current draft is up as a MR, and I'll continue to work to upstream
->> what I can (into Samba/Heimdal).  I do plan to upgrade Heimdal again
->> (perhaps to align to a release in 2021 if they make one) before I
->> finally merge the branch.
->>
->> https://gitlab.com/samba-team/samba/-/merge_requests/2014
+However, this seems to work only on directory ACLs, and, for files, 
+neither the NFS4 ACLS, nor the "default" doubly-synthetic acls generated 
+from standard POSIX permissions, work at all.
+For an end user, this seems like you can create and write files, but 
+never edit or even read/download them again.
+Everything I've tried leads to NT_STATUS_ACCESS_DENIED. The sd struct in 
+debug logs seems to look ok, even when the access fails, but I'm not 
+that familiar with NT ACLs to be able to fully verify that. And most 
+certainly not familiar enough with samba internals and source to 
+understand why the checks (presumably performed against samba's 
+internalt NT/nfs4 acl representation created even when not using the vfs 
+module) fail. Please see the below output:
 
-Also keep the following in mind when proposing upstream changes:
-- (kdc outdated passwords)
-  https://gitlab.com/samba-team/samba/-/merge_requests/664
-- S4U2Proxy requests with encrypted authorization-data are rejected by a =
-Samba KDC
-  https://bugzilla.samba.org/show_bug.cgi?id=3D13131
-- The KDC logic arround msDs-supportedEncryptionTypes differs from Window=
-s
-  https://bugzilla.samba.org/show_bug.cgi?id=3D13135
-- S4U2Proxy tickets from a Samba KDC don't pass PAC verification checks (=
-authtime mismatch)
-  https://bugzilla.samba.org/show_bug.cgi?id=3D13137
-- PKINIT fixes:
-  https://github.com/metze-samba/heimdal/tree/heimdal-smartcard
+==CUT
+[2021/07/05 11:36:11.156400, 10, pid=730056, effective(13117, 2320), 
+real(13117, 0)] ../../source3/smbd/open.c:210(smbd_check_access_rights)
+   smbd_check_access_rights: acl for testfile.img is:
+[2021/07/05 11:36:11.156413,  1, pid=730056, effective(13117, 2320), 
+real(13117, 0), class=rpc_parse] 
+../../librpc/ndr/ndr.c:429(ndr_print_debug)
+        sd: struct security_descriptor
+           revision                 : SECURITY_DESCRIPTOR_REVISION_1 (1)
+           type                     : 0x8004 (32772)
+                  0: SEC_DESC_OWNER_DEFAULTED
+                  0: SEC_DESC_GROUP_DEFAULTED
+                  1: SEC_DESC_DACL_PRESENT
+                  0: SEC_DESC_DACL_DEFAULTED
+                  0: SEC_DESC_SACL_PRESENT
+                  0: SEC_DESC_SACL_DEFAULTED
+                  0: SEC_DESC_DACL_TRUSTED
+                  0: SEC_DESC_SERVER_SECURITY
+                  0: SEC_DESC_DACL_AUTO_INHERIT_REQ
+                  0: SEC_DESC_SACL_AUTO_INHERIT_REQ
+                  0: SEC_DESC_DACL_AUTO_INHERITED
+                  0: SEC_DESC_SACL_AUTO_INHERITED
+                  0: SEC_DESC_DACL_PROTECTED
+                  0: SEC_DESC_SACL_PROTECTED
+                  0: SEC_DESC_RM_CONTROL_VALID
+                  1: SEC_DESC_SELF_RELATIVE
+           owner_sid                : *
+               owner_sid                : S-1-22-1-13117
+           group_sid                : *
+               group_sid                : S-1-22-2-2320
+           sacl                     : NULL
+           dacl                     : *
+               dacl: struct security_acl
+                   revision                 : SECURITY_ACL_REVISION_NT4 
+(2)
+                   size                     : 0x004c (76)
+                   num_aces                 : 0x00000003 (3)
+                   aces: ARRAY(3)
+                       aces: struct security_ace
+                           type                     : 
+SEC_ACE_TYPE_ACCESS_ALLOWED (0)
+                           flags                    : 0x00 (0)
+                                  0: SEC_ACE_FLAG_OBJECT_INHERIT
+                                  0: SEC_ACE_FLAG_CONTAINER_INHERIT
+                                  0: SEC_ACE_FLAG_NO_PROPAGATE_INHERIT
+                                  0: SEC_ACE_FLAG_INHERIT_ONLY
+                                  0: SEC_ACE_FLAG_INHERITED_ACE
+                               0x00: SEC_ACE_FLAG_VALID_INHERIT (0)
+                                  0: SEC_ACE_FLAG_SUCCESSFUL_ACCESS
+                                  0: SEC_ACE_FLAG_FAILED_ACCESS
+                           size                     : 0x0018 (24)
+                           access_mask              : 0x00160187 
+(1442183)
+                           object                   : union 
+security_ace_object_ctr(case 0)
+                           trustee                  : S-1-22-1-13117
+                       aces: struct security_ace
+                           type                     : 
+SEC_ACE_TYPE_ACCESS_ALLOWED (0)
+                           flags                    : 0x00 (0)
+                                  0: SEC_ACE_FLAG_OBJECT_INHERIT
+                                  0: SEC_ACE_FLAG_CONTAINER_INHERIT
+                                  0: SEC_ACE_FLAG_NO_PROPAGATE_INHERIT
+                                  0: SEC_ACE_FLAG_INHERIT_ONLY
+                                  0: SEC_ACE_FLAG_INHERITED_ACE
+                               0x00: SEC_ACE_FLAG_VALID_INHERIT (0)
+                                  0: SEC_ACE_FLAG_SUCCESSFUL_ACCESS
+                                  0: SEC_ACE_FLAG_FAILED_ACCESS
+                           size                     : 0x0018 (24)
+                           access_mask              : 0x00120081 
+(1179777)
+                           object                   : union 
+security_ace_object_ctr(case 0)
+                           trustee                  : S-1-22-2-2320
+                       aces: struct security_ace
+                           type                     : 
+SEC_ACE_TYPE_ACCESS_ALLOWED (0)
+                           flags                    : 0x00 (0)
+                                  0: SEC_ACE_FLAG_OBJECT_INHERIT
+                                  0: SEC_ACE_FLAG_CONTAINER_INHERIT
+                                  0: SEC_ACE_FLAG_NO_PROPAGATE_INHERIT
+                                  0: SEC_ACE_FLAG_INHERIT_ONLY
+                                  0: SEC_ACE_FLAG_INHERITED_ACE
+                               0x00: SEC_ACE_FLAG_VALID_INHERIT (0)
+                                  0: SEC_ACE_FLAG_SUCCESSFUL_ACCESS
+                                  0: SEC_ACE_FLAG_FAILED_ACCESS
+                           size                     : 0x0014 (20)
+                           access_mask              : 0x00120081 
+(1179777)
+                           object                   : union 
+security_ace_object_ctr(case 0)
+                           trustee                  : S-1-1-0
+[2021/07/05 11:36:11.156781, 10, pid=730056, effective(13117, 2320), 
+real(13117, 0)] ../../source3/smbd/open.c:1320(open_file)
+   open_file: smbd_check_access_rights on file testfile.img returned 
+NT_STATUS_ACCESS_DENIED
+==CUT
 
-We most likely also need to change some apis in order to generate PAC Tic=
-ket checksums
-(Wireshark support is being added by Isaac and me, see https://gitlab.com=
-/wireshark/wireshark/-/merge_requests/3570)
-and also for compound identity PACs when offering FAST.
-"wip: rework PAC and AD-SIGNTICKET for S4U2Proxy support"
-https://github.com/heimdal/heimdal/pull/767
-might also be related here.
+This file has the following nfs4 xattr permissions:
 
-I'll also try to start the discussion about
-GSS_KRB5_CRED_NO_TRANSIT_CHECK_X again, see
-https://github.com/heimdal/heimdal/pull/656
-https://github.com/krb5/krb5/pull/1005
+==CUT
+nfs4_getfacl /home/isg/testfile.img
+A::OWNER@:rwatTcCy
+A::GROUP@:rtcy
+A::EVERYONE@:rtcy
+==CUT
 
-metze
+and the following POSIX permissions directly in the filesystem:
 
+==CUT
+getfacl /export/censored/isg/testfile.img
+getfacl: Removing leading '/' from absolute path names
+# file: export/censored/isg/testfile.img
+# owner: username_for_uid_13117
+# group: name_for_gid_2320
+user::rw-
+group::r--
+other::r--
+==CUT
 
---VLjnCTRybyIjvq5SssPfnQelA9Mi4bt1k--
+Please note that the failure occurs in very much the same way whether 
+the file actually has extended ACLs set or not.
 
---LSRJqnq3QQb4ryuGSylDv8Dp7EXUXNHtK
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+While I don't expect this to work at the moment, and have reverted to 
+re-exporting nfs mounts purely using nfs3 and letting it follow POSIX 
+extended ACLs, my question is: Will vfs_nfs4acl_xattr ever be in a state 
+where it's possible to use the synthetic xattr from nfs4 mounts and 
+respect (or even edit/set) the extended ACLs, or is this rather very low 
+priority for you ?
+Additionally, could you explain what the original rationale for the vfs 
+module was at all ? I don't understand which implementation the options 
+described in the manual page (and, even more confusingly, the defaults) 
+are supposed to support. A native NTFS+ filesystem exported from a 
+POSIX-compliant host ? There seems to be another module for zfs, which 
+has yet another incompatible implementation available natively, but that 
+doesn't seem to be related to vfs_nfs4acl_xattr.
 
------BEGIN PGP SIGNATURE-----
+Kind regards
 
-iQIyBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAmDkENsACgkQDbX1YShp
-vVbojA/4l0FIElJq+iW7s6vGFiHUjTWU5DnbF9+HTI425uuzDjn+13vyBs5nMVC2
-uySbFWbf1YJDxvMcTS3bYR44AxwODmc2CwSQq+lSk6HuCLh1y7ZRoyjCGwTV3MgY
-7sX1GdwnELVR43MFcFQ3t8S5JVGj0DfrdLwmllrtxqzHiLMOskThuuUToYd+iVaw
-Eye7VXWgwa73iLE23ZhMXJ0YeEOCPcVeVfGBiebD4CzB9mnSqeqPNl+lwkYF74+B
-DHAttWBGAY78gSFf3Vl3EjfyrwR3CaL2VmXX5C3kzz85D5WXqvY1xa2b/x5PMxQf
-/4NkyPRHwGEO54EuI7rLlq5rINloGZzjdHqOy8obNiSbF05YsBzfpn1sZmce6Qqv
-TJgF8mmN0+KBgZ7IhEt7q7NG3jaRQEk0iV/AXg744Ec/T7dEBXKGP28p45bSPg14
-M3J45q1f2Mx/OGVyzeMnEytLz1hznLaIY93wWMhHgj3fmlzmvLQHxrjw6jKpEZA2
-3/KLK5jqVXng4k6CayvfCZEa0VE2Mr0QtkEgXhScw00+k0l6aVSGzfiof9rGtZ/O
-74SFGllw6bClQ0hU7puSxYN5Zf/dfwabAwsLNRxtYHeYn0IQqj+3oVkgrEf7rp3B
-HBoFhuTf3k6uO/CRxXbbIzYJ96a3hqEb4NjyZWRNs4GhIT5gBA==
-=7Uui
------END PGP SIGNATURE-----
+-- 
 
---LSRJqnq3QQb4ryuGSylDv8Dp7EXUXNHtK--
+Maciej Bonin <mbonin@phys.ethz.ch>            support:
+IT Services Group, HPT H 8                    voice:
+Department of Physics, ETH Zurich
+CH-8093 Zurich, Switzerland                   http://nic.phys.ethz.ch/
 
