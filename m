@@ -2,50 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 689B43BF452
-	for <lists+samba-technical@lfdr.de>; Thu,  8 Jul 2021 05:41:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9329D3C223F
+	for <lists+samba-technical@lfdr.de>; Fri,  9 Jul 2021 12:31:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=xY8bW0q6ekvKjnzGHtlupZI/6/1bFNd4014aaiNpMXI=; b=d1utLRL2PYj1rP6d+aKECT66gr
-	3VN5j+xvZdB1HDXOlEl5y/jLdsykZod6zYOF1LuBuVKD0Mn7NMEhwXYToa1zBziO94VxHMD7ZsueK
-	NkbHCFEAT6x/LvRK54vIpUsikaRxSdZO1AVsKgk3mHPftrUGgR0GGyPzKfY1XO+0smWHiFPIWm5i3
-	OQBF9gzbck8BPORuiHaYmCtCZcQ1JbVRB5fwuPR2dV4SvU1POO0uxf+Cpbci7ZZcaFEhogBS82t7g
-	H4LkG3tXh14fK5AqD7mtK0YhHEu7RE9DQkqp7ps/bqSykKkKB/BGNPNkvi9HcvKA7KaEMQpQgrVl1
-	cAr6Cz1w==;
-Received: from ip6-localhost ([::1]:31488 helo=hr1.samba.org) 
+	bh=wKiMRHYvaCdHs6gGAYVBkJTwOxizfJzR8pn2s84MugU=; b=mZDGOtga71csdsTc1G6xDLprDh
+	FtneaLquGjhGBV/kEJ8GHtSkPtXD1Z64p4tvLyEU0xaUpxJIB2oW512EJIQrJhKzcH6eS4C2DGrxj
+	/z4eRvtENBUO6mxoTxPLDMxG6yvPM/KScnenJlUsvPtMgjLCZin3598C0brPyG7PQgaVFFiNcEZHu
+	HaMiYDUv7QE4F2ZL96pCj/H3mnFSutTrxKJ5dWhgbBTI9VzHn0XayVIKqTiVkjs3ti0CRJ5AZStPL
+	09aEO6ofW1FqEPMwVoohBeUiYpFJ6uyXksw6rTudmiCv/F6rC0LhDRddN1DbEAkPcVdbEwugRoA5v
+	3RB/La+g==;
+Received: from ip6-localhost ([::1]:47224 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1m1KtX-00CgdD-VE; Thu, 08 Jul 2021 03:40:12 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26758) 
+	id 1m1nll-00Cpoh-IX; Fri, 09 Jul 2021 10:30:05 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20796) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1m1KtR-00Cgd3-NM
- for samba-technical@lists.samba.org; Thu, 08 Jul 2021 03:40:09 +0000
+ (Exim) id 1m1nlg-00CpoY-4c
+ for samba-technical@lists.samba.org; Fri, 09 Jul 2021 10:30:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:To:From:Message-ID:CC;
- bh=xY8bW0q6ekvKjnzGHtlupZI/6/1bFNd4014aaiNpMXI=; b=ElCSdBOXPY3qFakF4XT4IDJlvA
- +vq+4r7LSljSsoJhLOV04UnhA10ifoxMOrzSHWYlRl7+io708Gw/I3opI8J/yG4eGvOO2hR376zqc
- abh3ABkxGy8MRb3glCEtpe3xdCd9Cf9Ln0Gs3G5wOnq8BNu97B/VTaPyV3dBvqFLB3QFhnMbqAc+s
- 784kIDw0TAzXHOpTeeqoTeoWAjewbZDmtHTtfooIcSQLQ3ihVZAjd90IKwzY0HwqvdlSW4WwaYttw
- JM/uXMUVxSvQSSuXMcQjA+QsAF+0CEhp++f+UvJygaJsQT+nHd8893J2IHtqHC5OWtSNh7l0mcBmM
- drC/I8tjMDylmxL93qUifrmO+dMKC3M2G5Bq8vy2uDoe2YxM2PjsdoFm7d8Mpjf037hdZQBdhdVsP
- AyhFZek5SHqq1FlCtzCxNWUezl8WyJWxuT+vmCv9xvhIuWdB5axbgPqDunYY+Qe33Mu+zBM3s5K8o
- B/vdXn2DhNcTGKwjsk0mMUXl;
+ bh=wKiMRHYvaCdHs6gGAYVBkJTwOxizfJzR8pn2s84MugU=; b=c7carzX5f1lS7HF/Bq1316Bz4/
+ sgF8JiyUdBR5ChJSpgRyRh2xvm1+53jIED1ahyn1S0LA25mmZHJRxlrxAyI6xVBtixtYUE++kicLo
+ lUKpueWTqlbk3/F6KsiQAt1svIYPLGCVDaBhHUayEA2Im9NIWyfleIyyX1ldDs8X0ZoeZ/3kaKLsa
+ UsE2iVNKiX36nDsSX6t5W4FXo/7ElObQ1MyF9zd6OqqJoCtYjTsdlCiKLpYr/UezI1ER5bTGxGFUM
+ SreUDuPNPSFlGlqNocnxflydOsv0gelLL9l6iw9l3BrCFE57ebLF3gp70hfgEIpq8ZAOl44rnfhhX
+ qN3AGY7LQd2XhCTxQF4iglU+h4SnuZGdfHetZl2HuOGawo1+p4XWFJe8Nb66ZdTqZ/It2KYP+Yw6c
+ Xd58R+t/1L1W8a8nN8vEzr+0wJNCrGtRuDJfAL1tKpvKy4KOyi6X9lhYpe8Az9JvM8xIC1u0CnWyR
+ uaF84I8ISTJReOBe9KdQmFkM;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1m1KtN-00025r-NF; Thu, 08 Jul 2021 03:40:02 +0000
-Message-ID: <6274dd618d9f1cab594dca1df38def15db5d024b.camel@samba.org>
+ (Exim) id 1m1nle-0000ed-7p; Fri, 09 Jul 2021 10:29:58 +0000
+Message-ID: <a78f79643b03b31afbe505b932df2cc46fb0254d.camel@samba.org>
 Subject: Re: Heimdal upgrade, really happening this time
-To: Stefan Metzmacher <metze@samba.org>, Andrew Bartlett
- <abartlet@samba.org>,  Upstream Samba Technical Mailing list
- <samba-technical@lists.samba.org>, Isaac Boukris <iboukris@gmail.com>
-Date: Thu, 08 Jul 2021 06:39:59 +0300
+To: Stefan Metzmacher <metze@samba.org>, Upstream Samba Technical Mailing
+ list <samba-technical@lists.samba.org>, Isaac Boukris <iboukris@gmail.com>
+Date: Fri, 09 Jul 2021 22:29:54 +1200
 In-Reply-To: <c328766b-d894-517f-966c-fa5305558633@samba.org>
 References: <b2cb195314281883e378c908784ac6f9f841584d.camel@samba.org>
  <26713d5cdcc47d0d9fb017b6a1e546d9501d8efe.camel@samba.org>
  <c328766b-d894-517f-966c-fa5305558633@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.38.4 (3.38.4-1.fc33) 
+User-Agent: Evolution 3.40.2 (3.40.2-1.fc34) 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,68 +58,79 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Isaac Boukris via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Isaac Boukris <iboukris@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-+ list
-
-On Tue, Jul 6, 2021 at 11:14 AM Stefan Metzmacher <metze@samba.org>
-wrote:
->
-> We most likely also need to change some apis in order to generate PAC
-Tic=
-ket checksums
-> (Wireshark support is being added by Isaac and me, see
-https://gitlab.com=
-/wireshark/wireshark/-/merge_requests/3570)
+On Tue, 2021-07-06 at 10:14 +0200, Stefan Metzmacher via samba-
+technical wrote:
+> Hi Andrew,
+> 
+> > > My current draft is up as a MR, and I'll continue to work to upstream
+> > > what I can (into Samba/Heimdal).  I do plan to upgrade Heimdal again
+> > > (perhaps to align to a release in 2021 if they make one) before I
+> > > finally merge the branch.
+> > > 
+> > > https://gitlab.com/samba-team/samba/-/merge_requests/2014
+> 
+> Also keep the following in mind when proposing upstream changes:
+> - (kdc outdated passwords)
+>   https://gitlab.com/samba-team/samba/-/merge_requests/664
+> - S4U2Proxy requests with encrypted authorization-data are rejected by a Samba KDC
+>   https://bugzilla.samba.org/show_bug.cgi?id=13131
+> - The KDC logic arround msDs-supportedEncryptionTypes differs from Windows
+>   https://bugzilla.samba.org/show_bug.cgi?id=13135
+> - S4U2Proxy tickets from a Samba KDC don't pass PAC verification checks (authtime mismatch)
+>   https://bugzilla.samba.org/show_bug.cgi?id=13137
+> - PKINIT fixes:
+>   https://github.com/metze-samba/heimdal/tree/heimdal-smartcard
+> 
+> We most likely also need to change some apis in order to generate PAC Ticket checksums
+> (Wireshark support is being added by Isaac and me, see https://gitlab.com/wireshark/wireshark/-/merge_requests/3570)
 > and also for compound identity PACs when offering FAST.
 > "wip: rework PAC and AD-SIGNTICKET for S4U2Proxy support"
 > https://github.com/heimdal/heimdal/pull/767
 > might also be related here.
+> 
+> I'll also try to start the discussion about
+> GSS_KRB5_CRED_NO_TRANSIT_CHECK_X again, see
+> https://github.com/heimdal/heimdal/pull/656
+> https://github.com/krb5/krb5/pull/1005
+> 
+> metze
 
-I took a look at PR 767 (which is related to bug 14642), I managed to
-get a poc working, that is the kdc is now able to issue a minimal PAC
-with all signatures even without hdb support, this would allow the
-removal of KRB5SignedPath while keeping S4U2Proxy and its upstream
-test working (we don't need delegation-info for that, and we can live
-on the NDR boundary), I've updated the PR. Here is an example captured
-from the upstream tests:
+For the list, some of the discussion is happening on:
 
-authorization-data: 1 item
-    AuthorizationData item
-        ad-type: aD-IF-RELEVANT (1)
-        ad-data:
-308197308194a00402020080a1818b04818804000000000000000a00000010000000480
-0=E2=
-=80=A6
-            AuthorizationData item
-                ad-type: aD-WIN2K-PAC (128)
-                ad-data:
-04000000000000000a00000010000000480000000000000006000000100000005800000
-0=E2=
-=80=A6
-                    Verified Server checksum 16 keytype 18 using
-keytab principal host/datan.test.h5l.se@TEST.H5L.SE (id=3Dkeytab.1
-same=3D0) (ce52810b...)
-                    Verified KDC checksum 16 keytype 18 using keytab
-principal krbtgt/TEST.H5L.SE@TEST.H5L.SE (id=3Dkeytab.27 same=3D0)
-(ee737882...)
-                    Verified Ticket checksum 16 keytype 18 using
-keytab principal krbtgt/TEST.H5L.SE@TEST.H5L.SE (id=3Dkeytab.27
-same=3D0)
-(ee737882...)
-                    Num Entries: 4
-                    Version: 0
-                    Type: Client Info Type (10)
-                    Type: Server Checksum (6)
-                    Type: Privsvr Checksum (7)
-                    Type: Ticket Checksum (16)
+https://gitlab.com/samba-team/samba/-/merge_requests/2014
+We are really close.  Probably not close enough to drop for 4.15 (we
+may have missed something, and last-moment isn't when to drop in
+something like this) but quite close, and starting the 4.16 development
+cycle would give plenty of time to shake out bugs. 
 
-I'm still confuse about how '_kdc_pac_verify()' should look like, I
-think samba might be picky about the kdc_key (mostly relevant to be
-able to act as a DC along other Windows DCs in the same domain),
-perhaps we should split the api as it is currently overloaded imo.
+There are more tests to write, but also at some point we are going to
+need to just say 'this is good enough and sort the rest out in master'
+as rebasing on both Samba and Heimdal takes time, care and energy. 
+
+To be clear, I won't get in the way if you want to move faster, I've
+just been trying to stay as careful as I thought you would be expecting
+me to be (if that makes any sense).
+
+I do suggest we should keep a fairly 'dirty' history with the previous
+merge points working as much as possible, in case we need to bisect
+back on bugs, to at least have some reference points.  Not our usual
+practice but for this one case I think worthwhile.
+
+We now have a mostly-working branch of current Heimdal on current
+Samba, compiling on all our supported system, which is pretty
+impressive.
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett (he/him)        https://samba.org/~abartlet/
+Samba Team Member (since 2001)  https://samba.org
+Samba Developer, Catalyst IT    https://catalyst.net.nz/services/samba
+
 
 
