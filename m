@@ -2,45 +2,33 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0174E3C8402
-	for <lists+samba-technical@lfdr.de>; Wed, 14 Jul 2021 13:42:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A1B13C89F2
+	for <lists+samba-technical@lfdr.de>; Wed, 14 Jul 2021 19:42:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=MrETce7hRAfxyPKoF3PWbkeHhzqCV03/blDRaZIM918=; b=njoSyQ9isCilyUPYi6Z46lr3n+
-	+hnuL8jJQ0tSkch9iEd7vHIerEUoMBr9Y0SiswvcSXL73TH4DlO2mmmlpPOajA709sWE6SCU14zJi
-	6A91uYIDQAMc/Tv3pTpQlC7zsmKE3gcP1hg/XNu8LrSmcait8CnazUTM5Tb7KUGcqbGIVoDow7ig4
-	b5v2WmZ3p1hczOXnkB9coWo+nRzEPbHGKnYF/KFQTNJ0ywCkTGlhIQhu+R2GKLCjVVXmzVX2ruUNf
-	Bz8eSoFmWi62mt9eTwL2c6RnFsWKvLNnx0qfLkHQsRyHbkBLzUskWnpIxoK95c//fcf4hEyPRYyIP
-	VVFrZ4sQ==;
-Received: from ip6-localhost ([::1]:54416 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=8Fh1XVjKhlBOxfxwNFejNHqRsQYD9K0Izl4K/UXGrjs=; b=FKqaBO34yib4xRG7HTFsgc+ps8
+	5tqIzWI3HFEUAXNatBUFqzfuOlC5GOFbhfamxPmuW0v+naWnmNDlmsEWSLpBNlyq1oWaoqGfpCBcE
+	oDYBmfX540KA2daRwZWqkGR/L8vSwSVMKrJCjjwu5PfAfcQoyzn3ORBHL+QdB62PM1k2ZoNRu2m8Y
+	C9HfjcTZPPLeuDz1uPyVWx+avYxP6/sb30szqWPUlmAgiwRXJ0i3gsiWcuwIA6hOTbrkCYEV9JqOQ
+	koWwaN3dTtPwjk6u1juYyaubxEn6AJB/2XozQ4rGAhvQXqQ/kUHd4lWc0SDWAj73Y+YXqC+CDjtBm
+	tAg4aIUw==;
+Received: from ip6-localhost ([::1]:49702 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1m3dGy-00DM9E-Cq; Wed, 14 Jul 2021 11:41:52 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20112) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1m3dGl-00DM8F-91; Wed, 14 Jul 2021 11:41:42 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=MrETce7hRAfxyPKoF3PWbkeHhzqCV03/blDRaZIM918=; b=gkJ61tkYRxqtWT+GyuzmJfME8R
- DMtzBJqOYFw/ZBoYN5q91nK4AS8bCgUAYJg2NVhkObx2nDYD2OkDy8mvgzDrwa7RIdI9AF3PA1V6k
- WoA22+Fx0KRFi4dXR2OstrH3IDrkfE5XdAydLGso9qa4PfRQjLk3SedAD0m98zPj7k/8JLTiBEFps
- w7MX9gzQB20D2BD/8WSdpSD9XQigghp/r7citkBQlQqV1u20jpbA2UI9iWh8ffRWJ/vklwSNqTdpC
- N0cFjwIcZ6VAj85UQShDnnebGzShExczeMrfL0OfvMfwP0vs7JlMollF3EBk9/TDQt5ahgbW+Nu1Z
- YiiOQYge4OKQy+40/wnYwMKGb7FbOUSn9eedRZB2cGox+TAC8OyS9mDUf2RmEO6F5yf46/8VweY61
- KKUQuD6BjsLtMbCyxwKhrbbMUKTl7ZDNKclHAHzPSlIshLUSY48EgNMiDBeiXNU8JA0CxVcEEB/gK
- Yv5r6Kg6+YUuTIEiGm1m4dDD;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa (TLS1.2:ECDHE_ECDSA_CHACHA20_POLY1305:256)
- (Exim) id 1m3dGk-0000Hd-Kd; Wed, 14 Jul 2021 11:41:38 +0000
-Date: Wed, 14 Jul 2021 13:41:36 +0200
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.13.10 Available for Download
-Message-ID: <20210714114134.GA19296@carrie2.fritz.box>
+	id 1m3it6-00DdtG-UN; Wed, 14 Jul 2021 17:41:37 +0000
+Received: from [104.200.28.160] (port=46542 helo=dup2.asynchrono.us) 
+ by hr1.samba.org with esmtp (Exim) id 1m3it1-00Ddt7-G4
+ for samba-technical@lists.samba.org; Wed, 14 Jul 2021 17:41:34 +0000
+Received: from edfu.localnet (c-73-114-31-46.hsd1.ma.comcast.net
+ [73.114.31.46])
+ by dup2.asynchrono.us (Postfix) with ESMTPSA id 758A27D1;
+ Wed, 14 Jul 2021 17:41:26 +0000 (UTC)
+To: samba-technical@lists.samba.org
+Subject: CTDB Segfault in a container-based env - Looking for pointers
+Date: Wed, 14 Jul 2021 13:41:25 -0400
+Message-ID: <2450252.vFx2qVVIhK@edfu>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature"; boundary="gBBFr7Ir9EOA20Yy"
-Content-Disposition: inline
-User-Agent: Mutt/1.9.4 (2018-02-28)
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,112 +42,184 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Karolin Seeger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: kseeger@samba.org
+From: John Mulligan via samba-technical <samba-technical@lists.samba.org>
+Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
+Cc: amitay@samba.org, gd@samba.org, obnox@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Hi Team,
 
---gBBFr7Ir9EOA20Yy
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I'm currently experimenting with running CTDB as a component in a container 
+based environment (OCI/docker style).
+Unlike smbd and winbind, which were fairly easy to containerize, CTDB is 
+proving a bit more tricky. Specifically, I'm seeing a segfault that I can not 
+trace to something obvious. I'm reaching out to the list for thoughts and 
+suggestions.
 
-Release Announcements
----------------------
+First, here's the logging leading up to the segfault:
 
-This is the latest stable release of the Samba 4.13 release series.
-
-
-Changes since 4.13.9
---------------------
-
-o  Jeremy Allison <jra@samba.org>
-   * BUG 14708: s3: smbd: Ensure POSIX default ACL is mapped into returned
-     Windows ACL for directory handles.
-   * BUG 14721: Take a copy to make sure we don't reference free'd memory.
-   * BUG 14722: s3: lib: Fix talloc heirarcy error in parent_smb_fname().
-   * BUG 14736: s3: smbd: Remove erroneous TALLOC_FREE(smb_fname_parent) in
-     change_file_owner_to_parent() error path.
-
-o  Andrew Bartlett <abartlet@samba.org>
-   * BUG 14575: samba-tool: Give better error information when the
-     'domain backup restore' fails with a duplicate SID.
-
-o  Ralph Boehme <slow@samba.org>
-   * BUG 14714: smbd: Correctly initialize close timestamp fields.
-   * BUG 14740: Spotlight RPC service doesn't work with vfs_glusterfs.
-
-o  Volker Lendecke <vl@samba.org>
-   * BUG 14475: ctdb: Fix a crash in run_proc_signal_handler().
-
-o  Stefan Metzmacher <metze@samba.org>
-   * BUG 14750: gensec_krb5: Restore ipv6 support for kpasswd.
-   * BUG 14752: smbXsrv_{open,session,tcon}: Protect
-     smbXsrv_{open,session,tcon}_global_traverse_fn against invalid records.
-
-o  Joseph Sutton <josephsutton@catalyst.net.nz>
-   * BUG 14027: samba-tool domain backup offline doesn't work against bind =
-DLZ
-     backend.
-   * BUG 14669: netcmd: Use next_free_rid() function to calculate a SID for
-     restoring a backup.
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-=3D=3D Our Code, Our Bugs, Our Responsibility.
-=3D=3D The Samba Team
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+ctdbd[1]: CTDB starting on node
+ctdbd[1]: Starting CTDBD (Version 4.13.9) as PID: 1
+ctdbd[1]: Created PID file /var/run/ctdb/ctdbd.pid
+ctdbd[1]: Listening to ctdb socket /var/run/ctdb/ctdbd.socket
+ctdbd[1]: Set real-time scheduler priority
+ctdbd[1]: Starting event daemon /usr/libexec/ctdb/ctdb-eventd -P 1 -S 9
+ctdb-eventd[7]: daemon started, pid=7
+ctdb-eventd[7]: startup completed successfully
+ctdb-eventd[7]: listening on /var/run/ctdb/eventd.socket
+ctdbd[1]: Set runstate to INIT (1)
+ctdbd[1]: ../../ctdb/server/eventscript.c:654 Running event init with 
+arguments (null)
+ctdbd[1]: ctdb chose network address 10.88.0.5:4379
+ctdbd[1]: PNN is 0
+ctdbd[1]: Not loading public addresses, no file /etc/ctdb/public_addresses
+OH COME ON init
+ctdbd[1]: Vacuuming is disabled for non-volatile database ctdb.tdb
+ctdbd[1]: Attached to database '/var/lib/ctdb/persistent/ctdb.tdb.0' with 
+flags 0x400
+ctdbd[1]: Attached to persistent database ctdb.tdb
+ctdbd[1]: Freeze db: ctdb.tdb
+ctdbd[1]: Set lock helper to "/usr/libexec/ctdb/ctdb_lock_helper"
+ctdbd[1]: SIGCHLD from 20 process:20
+ctdbd[1]: Set runstate to SETUP (2)
+ctdbd[1]: ../../ctdb/server/eventscript.c:654 Running event setup with 
+arguments
+ctdbd[1]: SIGCHLD from 22 process:22
+ctdbd[1]: ===============================================================
+ctdbd[1]: INTERNAL ERROR: Signal 11: Segmentation fault in pid 1 (4.13.9)
+ctdbd[1]: If you are running a recent Samba version, and if you think this 
+problem is not yet fixed in the latest versions, please consider reporting 
+this bug, see https://wiki.samba.org/index.php/Bug_Reporting
+ctdbd[1]: ===============================================================
+ctdbd[1]: PANIC (pid 1): Signal 11: Segmentation fault in 4.13.9
+ctdbd[1]: BACKTRACE: 15 stack frames:
+ctdbd[1]:  #0 /lib64/libsamba-util.so.0(log_stack_trace+0x34) [0x7ff1fbf77254]
+ctdbd[1]:  #1 /lib64/libsamba-util.so.0(smb_panic+0x2a) [0x7ff1fbf7c05a]
+ctdbd[1]:  #2 /lib64/libsamba-util.so.0(+0x1c348) [0x7ff1fbf7c348]
+ctdbd[1]:  #3 /lib64/libpthread.so.0(+0x141e0) [0x7ff1fbeff1e0]
+ctdbd[1]:  #4 /usr/sbin/ctdbd(+0x62d94) [0x55fac130fd94]
+ctdbd[1]:  #5 /lib64/libtevent.so.0(tevent_common_invoke_fd_handler+0x7d) 
+[0x7ff1fbedfa4d]
+ctdbd[1]:  #6 /lib64/libtevent.so.0(+0xd4e7) [0x7ff1fbee34e7]
+ctdbd[1]:  #7 /lib64/libtevent.so.0(+0x5f57) [0x7ff1fbedbf57]
+ctdbd[1]:  #8 /lib64/libtevent.so.0(_tevent_loop_once+0x94) [0x7ff1fbedf414]
+ctdbd[1]:  #9 /lib64/libtevent.so.0(tevent_common_loop_wait+0x1b) 
+[0x7ff1fbedf50b]
+ctdbd[1]:  #10 /lib64/libtevent.so.0(+0x5fc7) [0x7ff1fbedbfc7]
+ctdbd[1]:  #11 /usr/sbin/ctdbd(ctdb_start_daemon+0x6f6) [0x55fac12e34b6]
+ctdbd[1]:  #12 /usr/sbin/ctdbd(main+0x4f9) [0x55fac12c2679]
+ctdbd[1]:  #13 /lib64/libc.so.6(__libc_start_main+0xf2) [0x7ff1fbd331e2]
+ctdbd[1]:  #14 /usr/sbin/ctdbd(_start+0x2e) [0x55fac12c2d3e]
 
 
+And a backtrace from gdb:
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Download Details
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+(gdb) bt
+#0  process_callbacks (locked=<optimized out>, lock_ctx=0x5605e32977f0)
+    at ../../ctdb/server/ctdb_lock.c:271
+#1  ctdb_lock_handler (ev=<optimized out>, tfd=<optimized out>, 
+    flags=<optimized out>, private_data=<optimized out>)
+    at ../../ctdb/server/ctdb_lock.c:372
+#2  0x00007f09fdbe2a4d in tevent_common_invoke_fd_handler (
+    fde=fde@entry=0x5605e3290f50, flags=1, removed=removed@entry=0x0)
+    at ../../tevent_fd.c:138
+#3  0x00007f09fdbe64e7 in epoll_event_loop (tvalp=0x7ffd3e7e5e60, 
+    epoll_ev=0x5605e329c930) at ../../tevent_epoll.c:736
+#4  epoll_event_loop_once (ev=<optimized out>, location=<optimized out>)
+    at ../../tevent_epoll.c:937
+#5  0x00007f09fdbdef57 in std_event_loop_once (ev=0x5605e329a110, 
+    location=0x5605e1d94d00 "../../ctdb/server/ctdb_daemon.c:1647")
+    at ../../tevent_standard.c:110
+#6  0x00007f09fdbe2414 in _tevent_loop_once (ev=ev@entry=0x5605e329a110, 
+    location=location@entry=0x5605e1d94d00 "../../ctdb/server/ctdb_daemon.c:
+1647") at ../../tevent.c:772
+#7  0x00007f09fdbe250b in tevent_common_loop_wait (ev=0x5605e329a110, 
+    location=0x5605e1d94d00 "../../ctdb/server/ctdb_daemon.c:1647")
+    at ../../tevent.c:895
+#8  0x00007f09fdbdefc7 in std_event_loop_wait (ev=0x5605e329a110, 
+    location=0x5605e1d94d00 "../../ctdb/server/ctdb_daemon.c:1647")
+    at ../../tevent_standard.c:141
+#9  0x00005605e1d4b4b6 in ctdb_start_daemon (ctdb=0x5605e327e4f0, 
+    interactive=<optimized out>, test_mode_enabled=<optimized out>)
+    at ../../ctdb/server/ctdb_daemon.c:1647
+#10 0x00005605e1d2a679 in main (argc=<optimized out>, argv=<optimized out>)
+    at ../../ctdb/server/ctdbd.c:398
+(gdb) list
+266             }
+267
+268             /* Since request may be freed in the callback, unset the 
+request */
+269             lock_ctx->request = NULL;
+270
+271             request->callback(request->private_data, locked);
+272
+273             if (!auto_mark) {
+274                     return;
+275             }
+(gdb) p request
+$1 = (struct lock_request *) 0x0
 
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-=66rom:
+In order to not go too far into "wall of text" mode, with lots more gdb and 
+strace output, I'll try to summarize my other findings so far. I can produce 
+much more additional detail at request. Also, please let me know if you think 
+this is better handled in bugzilla. Because this is an experimental setup I 
+thought the list was a better place to begin.
 
-        https://download.samba.org/pub/samba/stable/
+I have a minimal set of configuration files. Specifically, I've only set up 
+one event script, "events/legacy/00.ctdb.script". I also have a custom 
+notify.sh but I don't think it made a difference when we tried it with a 
+standard one from ctdb packages. I have only one single instance running with 
+a nodes file containing only the local IP of the container. I have tried this 
+using both an unprivileged container and a privileged container with the same 
+result. I also attempted to use this same "minimal" configuration on a VM, in 
+that environment I was not able to reproduce the segfault.
 
-The release notes are available online at:
+This crash only occurs if a tdb file exists in the persistent dir. If no tdb 
+files are present then ctdb starts up.
 
-        https://www.samba.org/samba/history/samba-4.13.10.html
+When ctdb starts up with pre-existing tdb files it creates a pipe and forks off 
+a child "lock_helper" process, and then uses tevent to add a handler function 
+"ctdb_lock_handler". In my case this function "ctdb_lock_handler" gets called 
+twice. Once when the child process writes a null byte to the pipe. But it gets 
+called again when epoll returns with an EPOLLHUP type. Despite this not being 
+a true read the same callback is called. However, the first time the callback 
+is called it NULLs out lock_ctx->request. When the function is called the 2nd 
+time it dereferences the null lock_ctx->request.
 
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
 
-                        --Enjoy
-                        The Samba Team
+I've reproduced this issue using packages from Fedora 33 as well as Fedora 34. 
+I skimmed the commits and didn't see anything that might fix this in newer 
+samba but if you feel it's still worth trying a more recent build, let me 
+know.
 
---gBBFr7Ir9EOA20Yy
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+What puzzles me is why don't normal CTDB configurations hit this error. I 
+suppose that in some cases the pipe's fd could be getting removed from tevent 
+before EPOLLHUP is returned. To me, that implies a possible race. As an 
+additional experiment I found that setting a breakpoint in gdb right after 
+'send_result' was run to completion, if I waited a second or two to resume the 
+lock helper process it did not hit the segfault. This deepened my suspicion 
+this might be a race condition. But it's one that only seems to surface when 
+run within a container.
 
-iF0EABECAB0WIQQlQWgAwvkyRy78FZYoaL1+KxeTUQUCYO7NagAKCRAoaL1+KxeT
-UY0zAJ4phWnpj4GJy7Ug8HkUvDjzPsr4KgCeLVvbnf+Bw6NsV/qoffqYKMLh0+4=
-=9+hD
------END PGP SIGNATURE-----
 
---gBBFr7Ir9EOA20Yy--
+In summary, if those on the samba team who are familiar with CTDB (or tevent) 
+can think on this a little and offer any thoughts or suggestions on things I 
+could try, I'd greatly appreciate it. I don't assume a lot of container 
+experience and am happy to answer questions about the peculiarity there. 
+Perhaps a simple question might reveal something we've overlooked so far.
+In a worst case scenario I suppose I could also propose a patch that has `if 
+(lock_ctx->request == NULL) return;` added to 
+`process_callbacks`, but I'm concerned that might be papering over a real 
+problem. 
+So here I am.
+
+Thanks for your time!
+
+
+-- 
+--John M.
+
+
 
