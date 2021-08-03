@@ -2,44 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8DFA3DE5B8
-	for <lists+samba-technical@lfdr.de>; Tue,  3 Aug 2021 06:53:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 187833DE61D
+	for <lists+samba-technical@lfdr.de>; Tue,  3 Aug 2021 07:21:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=mHNfsOn9hBXufqgcFWsrwNkF8Tz/ssCUhmsKYanxdL8=; b=n7mMgxeRuxJd/OSlE7E9AlxfX/
-	UM2bIy/vdGH0GeAeaGPquu2BEARtXvjCUVRRqM93rnRfTQ7nt9R39eFKurfxWz6m2MTp32Z8nFL0S
-	JM64rBrpS4PVnUhVqhMUAmx1SGgRRFKhTexmrlwoY+0XRA1aI8SchFuK9m3TplucbXpk3mdKtBvm1
-	OPKdPZWJNrs8Rketk7O70UZI+IjToibepO5Wb5ItghIAjq9797pAVFwe9nVxujhES5ib8501NLjJE
-	OSNKh8ydxcwLwZ9UcwF0KlhCTERwGepNowht1FlALwMFGZp2mPbkvzJ5krxOY1lEqTU710cOmRiWf
-	IuojjV9w==;
-Received: from ip6-localhost ([::1]:47364 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=qh+IrZu8B7X7ZfR/jkiCM/6ApmFY5/fOD3Bi0mZWSoA=; b=Vjfaa+hKnh3NINXGjsEW1dmWdG
+	xb5lh1bLPO4gHwgZKWq28hcU90R536kFpnyBuf4B/CwRc6FNuclneQkPz1Sbk9usOYczcrAk4WMhN
+	cR/FJcD7QTJdlGzywgjHgJMgAu1Qaq/BltIYO41H/PrZcbGv+Ncs+88nW3hIKqJmIek8/016JC9gh
+	shvW9i/FB/fcjwZW7of4e7EFex88mLYssT0SgasVd4GLoyy/nVsCpUdg8mwO8m1faNBLiRSAg78k8
+	cgGmBCAMEHevlVyOXtOF07c6801/JJ1mylf85ToN6prLtoj4t7CONBmgOaBUz5vidjs7ZAwm6mT/+
+	MoBJ/v+g==;
+Received: from ip6-localhost ([::1]:48066 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mAmPe-0049ef-FY; Tue, 03 Aug 2021 04:52:22 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19130) 
+	id 1mAmrw-0049z0-3m; Tue, 03 Aug 2021 05:21:36 +0000
+Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:45351 helo=ozlabs.org) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mAmPZ-0049eW-EY
- for samba-technical@lists.samba.org; Tue, 03 Aug 2021 04:52:19 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=mHNfsOn9hBXufqgcFWsrwNkF8Tz/ssCUhmsKYanxdL8=; b=G773XCNhn/X0Kk+tCZS6CuKWkS
- r1qhF0rU+DV6a0zfPI97kwZ50glmd7YgBuqObcWvMUh8IszkFSuObho2btj5weZnYhJggBEbBX+aB
- S6tR8uLKPLqntBinDi1lI+FbjFnX3HyPQXeCaVUiTIWgDn9mUc0vwI7iFaMf2u41A1z02YxikeIFc
- juDwwbYuc+oCMta+wFBGmkrqD9kpqnFpQ4g85abHRpEEy812TsP+TwDYW6Sav8OttJzrEck11Lrwi
- qnJwkUrJPtU4u1Umhn9dPxmfzubuDJS3lgghx37LbeFGWAb8rI3neQQx+hGuHJOHbPVm8orRWWF66
- IXuQ4tKNzMGGw64VNLZ0V90iQXNMXlm8J/PKIvk+DcbJdFvH/UtLI/3ypQUjFaRqXMobN17+to6nA
- 1TnYvaxv4MBoT4szcA5H9JisemH799EeuMjwfmTfa6bWUatiulKYk5m7+fswiVACu3yjKzir+Y99Z
- lFoF8ba6YbbcvM35TXu7lh+l;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_X25519__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mAmPX-000KAg-9w; Tue, 03 Aug 2021 04:52:16 +0000
-Message-ID: <f3d35fd592abf06db2277ad15bf22f3a9804b7ba.camel@samba.org>
-Subject: Autobuild paths too long again
-To: Isaac Boukris <iboukris@samba.org>, asn@samba.org
-Date: Tue, 03 Aug 2021 16:52:09 +1200
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1mAmro-0049yq-BZ
+ for samba-technical@lists.samba.org; Tue, 03 Aug 2021 05:21:33 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4Gf2nj1tJLz9sS8;
+ Tue,  3 Aug 2021 15:03:21 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
+ s=202004; t=1627967001;
+ bh=qh+IrZu8B7X7ZfR/jkiCM/6ApmFY5/fOD3Bi0mZWSoA=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=j/EwsoArmQadI7zaG+gqFTAgicrk7BzBf/kuI8SvkEL5KOZKWJ8ALQrXAakPKpPQQ
+ 3P+vppCPsNaJk7y3no+yCXkSxT2Ae5e1y9iDxmkQ4CjvNP2hmTn0LDmliXJw2FoKx8
+ HJ2w2QVv3LrV2f/pqR4ApnnkM5iYSsxre/o/iS9uatdXsEo7Gy4O8IK7GAmSxzpLCT
+ gQdroLv2+zFrQKUJuBOqToPOdsgBehkoyiwXpHh91PQ2aL83fSUGEsnFbgWK2Hir6E
+ OZgy68FyUW+SAmvrGK1eNV60+MFiFe14BVxSzeWSZUpsZ0VjolazkvsrFKKT7chX2Q
+ 6H+G/YWt1ogiw==
+Date: Tue, 3 Aug 2021 15:03:19 +1000
+To: Andrew Bartlett <abartlet@samba.org>
+Subject: Re: Autobuild paths too long again
+Message-ID: <20210803150319.1cab1e0c@martins.ozlabs.org>
+In-Reply-To: <f3d35fd592abf06db2277ad15bf22f3a9804b7ba.camel@samba.org>
+References: <f3d35fd592abf06db2277ad15bf22f3a9804b7ba.camel@samba.org>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -54,62 +58,48 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Since (I'm pretty sure) this commit:
+On Tue, 03 Aug 2021 16:52:09 +1200, Andrew Bartlett via samba-technical
+<samba-technical@lists.samba.org> wrote:
 
-commit 7e9c97ba1cd960df2688718561c4a117b79b259b
-Author:     Isaac Boukris <iboukris@samba.org>
-AuthorDate: Thu Oct 8 14:00:44 2020 +0200
-Commit:     Andreas Schneider <asn@cryptomilk.org>
-CommitDate: Wed Jul 7 15:01:22 2021 +0000
+> Since (I'm pretty sure) this commit:
+> 
+> commit 7e9c97ba1cd960df2688718561c4a117b79b259b
+> Author:     Isaac Boukris <iboukris@samba.org>
+> AuthorDate: Thu Oct 8 14:00:44 2020 +0200
+> Commit:     Andreas Schneider <asn@cryptomilk.org>
+> CommitDate: Wed Jul 7 15:01:22 2021 +0000
+> 
+>     selftest: Add test for one-way trust wbinfo auth
+>     
+>     Signed-off-by: Isaac Boukris <iboukris@samba.org>
+>     Reviewed-by: Andreas Schneider <asn@samba.org>
+>     Reviewed-by: Andrew Bartlett <abartlet@samba.org>
+>     
+>     Autobuild-User(master): Andreas Schneider <asn@cryptomilk.org>
+>     Autobuild-Date(master): Wed Jul  7 15:01:22 UTC 2021 on sn-devel-
+> 184
+> 
+> I've not been able to push. 
+> 
+> Can someone please fix this up again.  The issue is that winbind socket
+> path is too long, which gives:
+> 
+> [...]
 
-    selftest: Add test for one-way trust wbinfo auth
-    
-    Signed-off-by: Isaac Boukris <iboukris@samba.org>
-    Reviewed-by: Andreas Schneider <asn@samba.org>
-    Reviewed-by: Andrew Bartlett <abartlet@samba.org>
-    
-    Autobuild-User(master): Andreas Schneider <asn@cryptomilk.org>
-    Autobuild-Date(master): Wed Jul  7 15:01:22 UTC 2021 on sn-devel-
-184
+Given that this is ongoing pain, socket wrapper is in use here and we're
+testing...
 
-I've not been able to push. 
+I wonder if an additional socket wrapper hack might be useful.  Could
+we make socket wrapper optionally put all Unix domain sockets in some
+top-level (i.e. short) socket wrapper directory and then name the
+sockets by hashing the path?
 
-Can someone please fix this up again.  The issue is that winbind socket
-path is too long, which gives:
-
-...
-[117(1196)/155 at 5m31s] samba3.wbinfo_simple.trust:
---
-krb5auth=$TRUST_REALM/$TRUST_USERNAME%$TRUST_PASSWORD(ad_member_oneway:
-local)
-ERROR: Testsuite[samba3.wbinfo_simple.trust:
---
-krb5auth=$TRUST_REALM/$TRUST_USERNAME%$TRUST_PASSWORD(ad_member_oneway:
-local)]
-REASON: unable to set up environment ad_member_oneway:local - exiting
-
-and
-
-could not obtain winbind interface details:
-WBC_ERR_WINBIND_NOT_AVAILABLE
-could not obtain winbind domain name!
-failed to call wbcPingDc: WBC_ERR_WINBIND_NOT_AVAILABLE
-
-(and yes, I reviewed it.  Oops). 
-
-Thanks!
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-
+peace & happiness,
+martin
 
