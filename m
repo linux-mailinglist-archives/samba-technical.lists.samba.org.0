@@ -2,49 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7719E3DF72E
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Aug 2021 00:03:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DFFD3DFA39
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Aug 2021 06:20:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=ZuTgPSg5HbeTr2YS0OgfqmBYSdDOWu3ZbFii5cN6TBI=; b=ebkckp/1SfA5AO2EekDXU/W81f
-	V42IGf65FqDhOAxLlDkJFkjHc3odEkjk5UE2NRUPugtphBjqEGFdigCFuJnnJYEoZN5+HmulQvOLQ
-	U0d3/MGQg7Y/F5717gixi1025vt5p39j3Xq32dn90Mx4SwAq0nlZqo/tRs6pmIP0oOQHixx4Hy+fT
-	0igLG5xFWAN58BmHfhBq1Ms5noLF0aaJ9qiShsgFOBxCiL03vy7AIgJ1ogLBMXs0r405PCbazvKhW
-	MICpk7WWy04MemP50kXLMrkVyNoenK9fjzfxrjGYVbKYgbC37O3zAjqKTkrDF82BACZ6JMbK51Fc5
-	3aZIOpCA==;
-Received: from ip6-localhost ([::1]:40570 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=SgNL9C7ZQ2BuIF2Cqvnp5ES+Q76cLjnzON0RnWSjHHc=; b=isH0PsI3UcRBKbcS/qyGSC8tUS
+	yvEqADk5+nNGhrIglYvdxHiKEg64+sX1Ov5ZAxJ2av4PoULKxPpzgYmu9F2RXpNjJhnlta083oXnb
+	IsBv3vdoJySBqQpE0Iu0BCv7//0ua0184R2njlyOeBerj3eCOkmEuIfZY2LopmvwRNBntyXprbZYC
+	X+cI7svtp/1NWKGIGgreAvwdP30YxTgyBWMT2I1yw8YxMSGLzAK3qRNOdZD3g9RlTD3nm0LDvIvye
+	EN7lvO24BPku8ewDjR0GhKJU2+s8BTtkGcsV78do5f0X9+OfXdrjBVLvmQhbFhyfpWhuQ03tBB+M/
+	FNZuKLKQ==;
+Received: from ip6-localhost ([::1]:42420 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mB2UK-004RLf-25; Tue, 03 Aug 2021 22:02:16 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37374) 
+	id 1mB8Mr-004Sfk-Nu; Wed, 04 Aug 2021 04:18:57 +0000
+Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:40219 helo=ozlabs.org) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mB2UE-004RLW-LI
- for samba-technical@lists.samba.org; Tue, 03 Aug 2021 22:02:14 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=ZuTgPSg5HbeTr2YS0OgfqmBYSdDOWu3ZbFii5cN6TBI=; b=UNl2jjoc8owcLFS4qUFhUexKWx
- GizavLQZgQLkohpB6F8A459bTe9Qrp1+6JtvC8DwUahNjVJKCWCjzKTfHvYI+dH9VxEMerzQ+tNQ+
- XTfiht+lcPVxVfsk697VDqvkjjpCYwP3HzDzkQSjsV6vQFBqHElcimKluGB9uDKGCQuW4Sg/OxPz5
- ID3E/vY49VWbTV1RkY2K227U8W9An7jzU6vLQ8byh1JdqLW9Tr8+Nuuv3N+rLGUwjRTO/5JfjKZRH
- GEeUxGm8I2iPu4f6HnkSriqb+FXb7Wupbyv7FTBhCqJ+rUKZK1Ur2WhkuEqtLrku9jZR36ginU4Op
- f7jrlmKPWFo4NJeIbYhWlsYQ0PFVzh+9Y9yradOoq3TP1sTqVvJJoNPycnupuxOQJq+7uSG1IdIOj
- JvyVPFyYU7fw4IlLkAX+1Bza8xWbsZisO9T3QQ3mThFdN/RQ7azsGYYkK5PpZvuDNxYjLYWsg+X17
- hRNoHOcg4fL3Mp5YCETz/vFe;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_X25519__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mB2UC-000Ttx-Hc; Tue, 03 Aug 2021 22:02:09 +0000
-Message-ID: <6d86c8294a16ac6091d54d691ce433d4a3dd816a.camel@samba.org>
-Subject: Re: Autobuild paths too long again
-To: Andreas Schneider <asn@samba.org>, Isaac Boukris <iboukris@samba.org>
-Date: Wed, 04 Aug 2021 10:02:03 +1200
-In-Reply-To: <098761f1fe21bdb0790e49b97f20b77c86ea1aa6.camel@samba.org>
-References: <f3d35fd592abf06db2277ad15bf22f3a9804b7ba.camel@samba.org>
- <4329737.EkWKPh09Hk@magrathea>
- <098761f1fe21bdb0790e49b97f20b77c86ea1aa6.camel@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1mB8Ml-004Sfa-Lo
+ for samba-technical@lists.samba.org; Wed, 04 Aug 2021 04:18:54 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4Gfdlf3DMVz9sRN;
+ Wed,  4 Aug 2021 14:18:38 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
+ s=202004; t=1628050718;
+ bh=SgNL9C7ZQ2BuIF2Cqvnp5ES+Q76cLjnzON0RnWSjHHc=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=ORtx9ssDQHKrqV4eTF222N6+ybhvs/Ei5OpLxX5FjU7UmvRPzCAUvpMPl7YafvvoI
+ oTuNfLLMySnm+6OnfkZztv7AqruLmftn6dDYh33Tba+WGUU2ztGE7ni7QozqaoyNQF
+ cnoEfZxxyZUlNdFcv6j7VJkELSPRnk734yDYHUfXUWhho1pPg9medaOU10GgDk3NWr
+ +9aioEimmROYwhuVkv+bjA9RRto9dGWnqnQQ/weFl0FafgjFMr/+7J5MVUNVh7m/4y
+ JKt3lzBqHt783db5eEWTad+2cRqAds3iVyhc8cXpf1LQj3lJOYAOtfa1aT3b75VRSW
+ wHAy7C/SdYzQw==
+Date: Wed, 4 Aug 2021 14:18:37 +1000
+To: Amitay Isaacs <amitay@gmail.com>
+Subject: Re: CTDB Segfault in a container-based env - Looking for pointers
+Message-ID: <20210804141837.45723a29@martins.ozlabs.org>
+In-Reply-To: <CAJ+X7mTdkF4+52wCfMC1SrmyzJ2Xq4VKKBkJ=qFPgOwiekG2Kw@mail.gmail.com>
+References: <2450252.vFx2qVVIhK@edfu>
+ <CAJ+X7mSHG_OUyNF2EiuvEtCQYJ4vOEH67kW0+1rOsLNp4BqaaQ@mail.gmail.com>
+ <CAJ+X7mTSNvN=6v0-WSz_89Gjkg5rCf-AmDcVLo=LLmOhSWkyMw@mail.gmail.com>
+ <2917630.lGaqSPkdTl@edfu>
+ <2D9E704E-CBB4-4F27-94DD-5AFF80EE9482@samba.org>
+ <CAJ+X7mS8WZnsimhonxEBjrwCjj8X=3Cmq=-tc1Xuv+0htoLk9A@mail.gmail.com>
+ <88C43F2E-84D1-4065-969F-D3572DBCDF58@samba.org>
+ <CAJ+X7mTdkF4+52wCfMC1SrmyzJ2Xq4VKKBkJ=qFPgOwiekG2Kw@mail.gmail.com>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,40 +65,51 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2021-08-03 at 22:03 +1200, Andrew Bartlett via samba-technical
-wrote:
-> On Tue, 2021-08-03 at 11:09 +0200, Andreas Schneider via samba-
-> technical wrote:
-> > 
-> > However I would suggest we check this early enough and fail earlier
-> > to be 
-> > sure:
-> > 
-> > https://gitlab.com/samba-team/samba/-/merge_requests/2101
-> > 
-> > 
-> > 	Andreas
-> 
-> Thanks, at least some clear diagnostics would be nice.
+On Tue, 20 Jul 2021 15:59:02 +1000, Amitay Isaacs via samba-technical
+<samba-technical@lists.samba.org> wrote:
 
-That MR landed so I guess that means it worked :-)
+> On Fri, Jul 16, 2021 at 5:47 PM Michael Adam <obnox@samba.org> wrote:
 
-Thanks!
+> The issue is that CTDB makes assumptions about the orphan processes.
+> On most unix systems, an orphan process gets re-parented to init which
+> traditionally has pid =3D 1.  This assumption is built into the code to
+> avoid runaway orhan processes in CTDB.
 
-Andrew Bartlett
+Yes, we explicitly check if the parent process is 1 in the lock helper
+before continuing.  As discussed offline, we should try something with a
+file descriptor event to try to determine whether the parent has gone
+away.
 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+> In the container world, what happens to orphan processes?
 
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
+Everything I can find says they are re-parented to process 1 in the
+container.
 
+> > Even if you don=E2=80=99t see a real benefit of this containerized layo=
+ut
+> > just yet, it might still be beneficial for the code to consider
+> > some modifications to make ctdb more =E2=80=9Ccontainer-ready=E2=80=9D.=
+.. =20
+
+> Provided it makes sense. ;-)
+
+Yep!  If there is no sane re-parenting of orphan processes inside
+containers then we should recommended that CTDB is always run via a
+minimal init.  CTDB launches a lot of processes and if it goes away
+then something needs to look after them.
+
+As we discussed offline, at the moment the current crash reminds us we
+have a problem to solve, so we shouldn't just "fix" it to avoid the
+crash.  We should find a better solution for detecting that the parent
+has gone away, use that and then fix the crash that may still occur.
+We might also be doing a similar thing elsewhere...
+
+peace & happiness,
+martin
 
