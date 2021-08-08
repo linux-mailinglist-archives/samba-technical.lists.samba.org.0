@@ -2,37 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6F303E1403
-	for <lists+samba-technical@lfdr.de>; Thu,  5 Aug 2021 13:38:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 134243E3D24
+	for <lists+samba-technical@lfdr.de>; Mon,  9 Aug 2021 01:13:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=mBOakMlzNCGXs2ywMULB+tUtjLgqaSCecIuYRiOpFz8=; b=co/mBju++ux/rIdH+jlz1zIpts
-	oDmfu6/oxxhFULyW954EdFiePyyTbiBn/is53UN+2j6X1FwlKIKACtzvTx14UqBYBbEniiZHygFnx
-	P1qve/5PN174QcB8lSdWhGxZFNwGOoL9B1nFMAIK44yIEf74AApkkvIE+5YyTZqwGONRKuDYtUQwG
-	47wJxBOv/VifixQ0Mrs6uC6+7RUYm1kt9y9Q4PuJa/iblPAciYWHGvA9eQlHCadMjcxnFxxMLuGSf
-	Ltb0/+6ogcKhvbYn/PVVfcQkJX0LQ60+WXTxcK5RVzXx8rrU2v6m8j8E1WGXndFg4cn2NvEYaVzS2
-	5c0d2uIQ==;
-Received: from ip6-localhost ([::1]:39960 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=okzZPS8sdks5cvVogbWsYBA8i8PiFXncgnMr+q98tyY=; b=MSiQ3xt1XftZpNMdLLlsPJGKz7
+	MR5hlhguSuIZ3kYPYFMFWcsBw5LBKgUO3lN6WwJrp4KoE3ReLAKQGBcYhYCCH9vAbhU09PNsiiN3y
+	f61gth7XLwE46Jq3nhtM8SsbopzaNh/TM2lYQ3jE76UgnaU+PozVkY8s2ksz3rf13KVSLvghEfYTl
+	rVclgOeTH1sPysyXyO0f671nWJsyyWglJFqi6urykBOUDst1AN/oUdNChtgkYyBOS5H+NCHIBF4rL
+	F2med58l+1pL0yUOPtVjv5cUaHTv2uq+SylpmfxUsABr6CuZCpwK5EImSYeQ9OscMhwXPbqnlxufm
+	uorOxdTQ==;
+Received: from ip6-localhost ([::1]:29514 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mBbgh-004obA-5d; Thu, 05 Aug 2021 11:37:23 +0000
-Received: from [104.200.28.160] (port=46782 helo=dup2.asynchrono.us) 
- by hr1.samba.org with esmtp (Exim) id 1mBbgc-004ob1-IC
- for samba-technical@lists.samba.org; Thu, 05 Aug 2021 11:37:20 +0000
-Received: from edfu.localnet (c-73-114-31-46.hsd1.ma.comcast.net
- [73.114.31.46])
- by dup2.asynchrono.us (Postfix) with ESMTPSA id 953BD150C;
- Thu,  5 Aug 2021 11:37:13 +0000 (UTC)
-To: samba-technical@lists.samba.org, Martin Schwenke <martin@meltin.net>
-Subject: Re: CTDB Segfault in a container-based env - Looking for pointers
-Date: Thu, 05 Aug 2021 07:37:12 -0400
-Message-ID: <5719386.LZWGnKmheA@edfu>
-In-Reply-To: <20210804141837.45723a29@martins.ozlabs.org>
-References: <2450252.vFx2qVVIhK@edfu>
- <CAJ+X7mTdkF4+52wCfMC1SrmyzJ2Xq4VKKBkJ=qFPgOwiekG2Kw@mail.gmail.com>
- <20210804141837.45723a29@martins.ozlabs.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+	id 1mCryj-005EU8-Dw; Sun, 08 Aug 2021 23:13:13 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10998) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1mCryd-005ET9-Uj
+ for samba-technical@lists.samba.org; Sun, 08 Aug 2021 23:13:10 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=okzZPS8sdks5cvVogbWsYBA8i8PiFXncgnMr+q98tyY=; b=xaowwyCJWpWEyxAeubnURle5wW
+ sGWJQek6UwFdBpaHwlcREBL/QOTX23P7YSixBL4TfpmwccJNTYW1trVda6bcvepgAE+StrKvHQCZ9
+ Nko4vLjWhbE5kyCjilRoeFW7Cx7aSrjvSGONZu/vjjkHaJcUcs9g5bFNmg4KNam0613KtPQQDh7j5
+ 3rLouOk+NlGUpDfm9N0JfnI/4cgmMEz8uF4ddDAAIfmZt+PIjkf2EN1vxMxcJQ0r3toE3DDCLsCBc
+ MiQQg7I5lEtSXZA3Dzw2vz3lmGlyEPB/4V9UNy6KAFodi68Dtm64snNdPkHZQTCNLo86nz+PA+jZF
+ HeYrokT0HXCzTFtd0OASQBl+/70YicCj479AYwdtq5A/3xAEWhKKt0kNzfJmMuGHyZokHvw2o6cKJ
+ roJNSJMFk9qUNWejYOBCMyrP7T9aLBN9h384KFfYTqa9CXB4x9d1pmQ8+kVmIsj0mUt6+Ep33dmE7
+ WE9pVAojospYay0J7/oV8oA4;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_X25519__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mCryc-000GFQ-B4; Sun, 08 Aug 2021 23:13:07 +0000
+Message-ID: <0a68b013c3d1d6988d54ef5473a47e50973d0892.camel@samba.org>
+Subject: Re: Heimdal upgrade, really happening this time
+To: Stefan Metzmacher <metze@samba.org>, Upstream Samba Technical Mailing
+ list <samba-technical@lists.samba.org>, Isaac Boukris <iboukris@gmail.com>
+Date: Mon, 09 Aug 2021 11:12:59 +1200
+In-Reply-To: <a78f79643b03b31afbe505b932df2cc46fb0254d.camel@samba.org>
+References: <b2cb195314281883e378c908784ac6f9f841584d.camel@samba.org>
+ <26713d5cdcc47d0d9fb017b6a1e546d9501d8efe.camel@samba.org>
+ <c328766b-d894-517f-966c-fa5305558633@samba.org>
+ <a78f79643b03b31afbe505b932df2cc46fb0254d.camel@samba.org>
 Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -46,109 +60,57 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: John Mulligan via samba-technical <samba-technical@lists.samba.org>
-Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wednesday, August 4, 2021 12:18:37 AM EDT Martin Schwenke via samba-
-technical wrote:
-> On Tue, 20 Jul 2021 15:59:02 +1000, Amitay Isaacs via samba-technical
->=20
-> <samba-technical@lists.samba.org> wrote:
-> > On Fri, Jul 16, 2021 at 5:47 PM Michael Adam <obnox@samba.org> wrote:
-> >=20
-> > The issue is that CTDB makes assumptions about the orphan processes.
-> > On most unix systems, an orphan process gets re-parented to init which
-> > traditionally has pid =3D 1.  This assumption is built into the code to
-> > avoid runaway orhan processes in CTDB.
->=20
+On Fri, 2021-07-09 at 22:29 +1200, Andrew Bartlett via samba-technical
+wrote:
+> 
+> We now have a mostly-working branch of current Heimdal on current
+> Samba, compiling on all our supported system, which is pretty
+> impressive.
 
-Would it be worthwhile to have ctdbd explicitly reject running as pid 1? Fo=
-r=20
-example, it could get the pid and if equal to 1 log an error (and exit=20
-nonzero?). I felt a little foolish not having determined this rule on my ow=
-n,=20
-but had this been part of ctdbd already, it would have saved time. I don't=
-=20
-know if I'll be the last person to try it either :-)
+I just wanted to wrap back to the list with an update.  Thanks to some
+great work with Luke Howard recently, host of our pull requests with
+Heimdal have either been merged or will be shortly (as in, I made the
+requested changes and expect them to be accepted).
 
-If you are in agreement that this is a good, small, improvement to ctdb sho=
-uld=20
-I file a bug?
+This means that we are actually fairly close to upstream Heimdal,
+closer than we ever have been I dare to suggest.
 
-> Yes, we explicitly check if the parent process is 1 in the lock helper
-> before continuing.  As discussed offline, we should try something with a
-> file descriptor event to try to determine whether the parent has gone
-> away.
->=20
-> > In the container world, what happens to orphan processes?
->=20
-> Everything I can find says they are re-parented to process 1 in the
-> container.
->=20
+The remaining changes outstanding are:
 
-Agreed. However to add some additional detail - it's parented to PID 1 of t=
-he=20
-current pid namespace. So, even with multiple "containers" if they share th=
-e=20
-same pid namespace it's the PID 1 of whatever process from whatever contain=
-er=20
-was started first for that namespace.
+(these will go in shortly)
+405e9d62c4f1785b565477c14b234455e42f5a00 (lorikeet-heimdal-202108082250) Reintroduce krb5_addlog_func() as as supported API
+758336ede39858c173818474ad5622fca74977ef Allow KDC to always return the salt in the PA-ETYPE-INFO[2]
 
-> > > Even if you don=E2=80=99t see a real benefit of this containerized la=
-yout
-> > > just yet, it might still be beneficial for the code to consider
-> > > some modifications to make ctdb more =E2=80=9Ccontainer-ready=E2=80=
-=9D...
-> >=20
-> > Provided it makes sense. ;-)
->=20
-> Yep!  If there is no sane re-parenting of orphan processes inside
-> containers then we should recommended that CTDB is always run via a
-> minimal init.  CTDB launches a lot of processes and if it goes away
-> then something needs to look after them.
->=20
-
-The good thing is that I have found that the container runtimes docker and=
-=20
-podman come bundled with such a minimal init. This can be started by provid=
-ing=20
-the "--init" option to the `{docker,podman} run` command.
-
-If you are using the "pod" approach to running containers - where some of t=
-he=20
-namespaces are shared between the containers (as in kubernetes or podman)=20
-there will be a "pause" container started first. When the pid namespace is=
-=20
-shared this pause process also reaps processes, serving as the minimal init=
-=20
-needed (AFAICT).
-
-(It's amazing all the things you can find when you know what to look for!)
-
-> As we discussed offline, at the moment the current crash reminds us we
-> have a problem to solve, so we shouldn't just "fix" it to avoid the
-> crash.  We should find a better solution for detecting that the parent
-> has gone away, use that and then fix the crash that may still occur.
-> We might also be doing a similar thing elsewhere...
->=20
-> peace & happiness,
-> martin
-
-Sounds good to me. To circle back to my first suggestion in this message, h=
-ad=20
-the crash been more obviously linked back to ctdb as pid 1 I probably would=
-=20
-have not started this thread. :-)
-I was concerned it was something more subtle than just being run as PID 1. =
-Now=20
-that I know that it's well known that ctdbd can't be PID 1 I think that=20
-putting that knowledge into the code to act as a "wrong way" sign could be=
-=20
-useful for future travelers.
+(these need to be submitted, improved or removed, ideally)
+ba8d4f87c1ac2ade8457c71ed7596c857ed327ee tgs-rep: always return canonical realm
+dadc77a5aa8a5554c424bf564e7c43f561f90296 TODO: auth: For NTLM and KDC authentication, log the authentication duration
+4745180e75403b02a6c76c72ef50827baf0bbc80 lib/krb5 correctly follow KRB5_KDC_ERR_WRONG_REALM client referrals
+f64d59550727a1cdcd38faf71e608af2fc82575f TODO CHECK heimdal: Fix loss of information in _gsskrb5_canon_name() from call to krb5_sname_to_principal()
+9343a315524bae25ae29307fbc27ae5ad24c1747 heimdal: Honour KRB5_CTX_F_DNS_CANONICALIZE_HOSTNAME in parse_name_canon_rules()
+eec5822c9ac6d031e0ad62a55dc4e111355dd2bb TODO: heimdal: Pass extra information to hdb_auth_status() to log success and failures
+ab6abb084231eda70f00eba5f8b869b71688ea7c Change KDC to respect HDB server name type if f.canonicalize is set
+bb7c77747e6655aba98b365d8edfe5693c1d38a7 Export krb5_init_creds_* functions
+ec3346d309ad4a12bd45216e3b778ac0db9fdb04 lib/krb5 correctly follow KRB5_KDC_ERR_WRONG_REALM client referrals
+3d1e065561dc18bc30ce583ed2fc58b7aafcc51e HEIMDAL:kdc: make it possible to disable the principal based referral detection
+a3cad540ecae6696b5ffcf5c5e90a665ca97a822 lib/krb5: windows KDCs always return the canoncalized server principal
+0f1e376f8f93ba01aadf38be3561191f4322e7a0 HACK: Netbios Domain as Realm
+7e3b4a0147dafe103cc2bfbbecf50141106fdd9a kdc: use the correct kvno number for PKINIT in the AS-REP
+8f172e63a3fe34ac552965f13e2ffab31c63c5ac kdc: add krb5plugin_windc_pac_pk_generate() hook
 
 
+Andrew Bartlett
 
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
 
 
