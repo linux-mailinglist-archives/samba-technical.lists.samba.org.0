@@ -2,51 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 134243E3D24
-	for <lists+samba-technical@lfdr.de>; Mon,  9 Aug 2021 01:13:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 843343E3DB8
+	for <lists+samba-technical@lfdr.de>; Mon,  9 Aug 2021 03:38:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=okzZPS8sdks5cvVogbWsYBA8i8PiFXncgnMr+q98tyY=; b=MSiQ3xt1XftZpNMdLLlsPJGKz7
-	MR5hlhguSuIZ3kYPYFMFWcsBw5LBKgUO3lN6WwJrp4KoE3ReLAKQGBcYhYCCH9vAbhU09PNsiiN3y
-	f61gth7XLwE46Jq3nhtM8SsbopzaNh/TM2lYQ3jE76UgnaU+PozVkY8s2ksz3rf13KVSLvghEfYTl
-	rVclgOeTH1sPysyXyO0f671nWJsyyWglJFqi6urykBOUDst1AN/oUdNChtgkYyBOS5H+NCHIBF4rL
-	F2med58l+1pL0yUOPtVjv5cUaHTv2uq+SylpmfxUsABr6CuZCpwK5EImSYeQ9OscMhwXPbqnlxufm
-	uorOxdTQ==;
-Received: from ip6-localhost ([::1]:29514 helo=hr1.samba.org) 
+	bh=cE/wEBMDQzmELnz6lgtQsQEBJRXSpip992ZaeZl9A74=; b=feNnypoDidTsOYA7ugiRmTRLv2
+	d30I2t1L61351/BwW7viX4Dxo7+Ew4Fgc933PDyNLC4kaCaKW0YRBkrR4x48GuwAU3n5YJjSdjoDr
+	39yy2LYpnu1n45or5K8tXyLaF4azdFr80QZAThufTKYz99dsZdRb4JNz4iGx7YYY86pLgslfqIV1e
+	W5s9XwFiEt6Z4x7Gws+SaRZ6GnX1V4wg/QkujyTQFixnM1p7TxYZv6f7WHpLx59vVTgon7yhFLeGp
+	smKi0XkppV/yN5TL3CJvgi42q7GR+RdVl+wp8oMkjfXDxoUxdDXDHAk172M2cNJgmEeORKf8/9E9S
+	ZxkxIgHA==;
+Received: from ip6-localhost ([::1]:32782 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mCryj-005EU8-Dw; Sun, 08 Aug 2021 23:13:13 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10998) 
+	id 1mCuEl-005G1M-IR; Mon, 09 Aug 2021 01:37:55 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:50066) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mCryd-005ET9-Uj
- for samba-technical@lists.samba.org; Sun, 08 Aug 2021 23:13:10 +0000
+ (Exim) id 1mCuEe-005G1D-2f
+ for samba-technical@lists.samba.org; Mon, 09 Aug 2021 01:37:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:To:From:Message-ID:CC;
- bh=okzZPS8sdks5cvVogbWsYBA8i8PiFXncgnMr+q98tyY=; b=xaowwyCJWpWEyxAeubnURle5wW
- sGWJQek6UwFdBpaHwlcREBL/QOTX23P7YSixBL4TfpmwccJNTYW1trVda6bcvepgAE+StrKvHQCZ9
- Nko4vLjWhbE5kyCjilRoeFW7Cx7aSrjvSGONZu/vjjkHaJcUcs9g5bFNmg4KNam0613KtPQQDh7j5
- 3rLouOk+NlGUpDfm9N0JfnI/4cgmMEz8uF4ddDAAIfmZt+PIjkf2EN1vxMxcJQ0r3toE3DDCLsCBc
- MiQQg7I5lEtSXZA3Dzw2vz3lmGlyEPB/4V9UNy6KAFodi68Dtm64snNdPkHZQTCNLo86nz+PA+jZF
- HeYrokT0HXCzTFtd0OASQBl+/70YicCj479AYwdtq5A/3xAEWhKKt0kNzfJmMuGHyZokHvw2o6cKJ
- roJNSJMFk9qUNWejYOBCMyrP7T9aLBN9h384KFfYTqa9CXB4x9d1pmQ8+kVmIsj0mUt6+Ep33dmE7
- WE9pVAojospYay0J7/oV8oA4;
+ bh=cE/wEBMDQzmELnz6lgtQsQEBJRXSpip992ZaeZl9A74=; b=j5WF+7abo6seaXxMAqGnzb5Obl
+ l0XpQ8NQs59snY71wizkgWgPks1ghxTVVVNAy27BtsZ7Ys0voFl5HVxYPKMa/ShlkYQj15Y78k5ER
+ MlMplYKfxAH++gfvxMIUFPsL+G/eTLY4+eogEiU3ejl66l+l6mOCATw7jGm+zj5LggCbD2R/0jHSp
+ gmtG3BVwhazw1F/at0yXesybNNhIn06B2P1vfiOwqavT18kF9Mts3Btyf5Z1o7eJkiXMX6aSdMvda
+ nIHLVEHeOOCDnHNKDpY36vNY8D7lM58s+MrUwXtE5fNWqryLHVcKRbBHKl/BgpTj93+Jd35lfqejN
+ F8mdRHp056+DffN4m4i3wranUNponIUKkosml/jak728k4nhQhxw+yUBcYYzzJeWy4ABtkFfigzT7
+ lRKaoXoZtz+M+rH1+yZpmYYJJpIcLJkgnoG/7uQbCgvjdMtuscQdmz3rSocL7sKFRf4U4BziCPc7g
+ Vqh0GjbzP46s6GASENMAFOFA;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_X25519__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mCryc-000GFQ-B4; Sun, 08 Aug 2021 23:13:07 +0000
-Message-ID: <0a68b013c3d1d6988d54ef5473a47e50973d0892.camel@samba.org>
+ (Exim) id 1mCuEc-000Go3-96; Mon, 09 Aug 2021 01:37:47 +0000
+Message-ID: <fb006a0427d71d5f05a6217ff19e12974a6b647d.camel@samba.org>
 Subject: Re: Heimdal upgrade, really happening this time
 To: Stefan Metzmacher <metze@samba.org>, Upstream Samba Technical Mailing
  list <samba-technical@lists.samba.org>, Isaac Boukris <iboukris@gmail.com>
-Date: Mon, 09 Aug 2021 11:12:59 +1200
-In-Reply-To: <a78f79643b03b31afbe505b932df2cc46fb0254d.camel@samba.org>
+Date: Mon, 09 Aug 2021 13:37:42 +1200
+In-Reply-To: <0a68b013c3d1d6988d54ef5473a47e50973d0892.camel@samba.org>
 References: <b2cb195314281883e378c908784ac6f9f841584d.camel@samba.org>
  <26713d5cdcc47d0d9fb017b6a1e546d9501d8efe.camel@samba.org>
  <c328766b-d894-517f-966c-fa5305558633@samba.org>
  <a78f79643b03b31afbe505b932df2cc46fb0254d.camel@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+ <0a68b013c3d1d6988d54ef5473a47e50973d0892.camel@samba.org>
+Content-Type: multipart/mixed; boundary="=-9MkaY6dj8Bk67IEB+YHH"
 User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,43 +65,50 @@ Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2021-07-09 at 22:29 +1200, Andrew Bartlett via samba-technical
+
+--=-9MkaY6dj8Bk67IEB+YHH
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+On Mon, 2021-08-09 at 11:12 +1200, Andrew Bartlett via samba-technical
 wrote:
+> On Fri, 2021-07-09 at 22:29 +1200, Andrew Bartlett via samba-
+> technical
+> wrote:
+> > We now have a mostly-working branch of current Heimdal on current
+> > Samba, compiling on all our supported system, which is pretty
+> > impressive.
 > 
-> We now have a mostly-working branch of current Heimdal on current
-> Samba, compiling on all our supported system, which is pretty
-> impressive.
+> I just wanted to wrap back to the list with an update.  Thanks to
+> some
+> great work with Luke Howard recently, host of our pull requests with
+> Heimdal have either been merged or will be shortly (as in, I made the
+> requested changes and expect them to be accepted).
+> 
+> This means that we are actually fairly close to upstream Heimdal,
+> closer than we ever have been I dare to suggest.
+> 
+> The remaining changes outstanding are:
+> ...
 
-I just wanted to wrap back to the list with an update.  Thanks to some
-great work with Luke Howard recently, host of our pull requests with
-Heimdal have either been merged or will be shortly (as in, I made the
-requested changes and expect them to be accepted).
+There are also, which were on the Samba side, the attached.
 
-This means that we are actually fairly close to upstream Heimdal,
-closer than we ever have been I dare to suggest.
+I'm not really sure about them - I think
 
-The remaining changes outstanding are:
+source4/heimdal/lib/krb5/init_creds_pw.c KRB5_NT_ENTERPRISE_PRINCIPAL
+ctx->flags.canonicalize = 1
 
-(these will go in shortly)
-405e9d62c4f1785b565477c14b234455e42f5a00 (lorikeet-heimdal-202108082250) Reintroduce krb5_addlog_func() as as supported API
-758336ede39858c173818474ad5622fca74977ef Allow KDC to always return the salt in the PA-ETYPE-INFO[2]
+is trying to do the same as the Samba-side commit:
 
-(these need to be submitted, improved or removed, ideally)
-ba8d4f87c1ac2ade8457c71ed7596c857ed327ee tgs-rep: always return canonical realm
-dadc77a5aa8a5554c424bf564e7c43f561f90296 TODO: auth: For NTLM and KDC authentication, log the authentication duration
-4745180e75403b02a6c76c72ef50827baf0bbc80 lib/krb5 correctly follow KRB5_KDC_ERR_WRONG_REALM client referrals
-f64d59550727a1cdcd38faf71e608af2fc82575f TODO CHECK heimdal: Fix loss of information in _gsskrb5_canon_name() from call to krb5_sname_to_principal()
-9343a315524bae25ae29307fbc27ae5ad24c1747 heimdal: Honour KRB5_CTX_F_DNS_CANONICALIZE_HOSTNAME in parse_name_canon_rules()
-eec5822c9ac6d031e0ad62a55dc4e111355dd2bb TODO: heimdal: Pass extra information to hdb_auth_status() to log success and failures
-ab6abb084231eda70f00eba5f8b869b71688ea7c Change KDC to respect HDB server name type if f.canonicalize is set
-bb7c77747e6655aba98b365d8edfe5693c1d38a7 Export krb5_init_creds_* functions
-ec3346d309ad4a12bd45216e3b778ac0db9fdb04 lib/krb5 correctly follow KRB5_KDC_ERR_WRONG_REALM client referrals
-3d1e065561dc18bc30ce583ed2fc58b7aafcc51e HEIMDAL:kdc: make it possible to disable the principal based referral detection
-a3cad540ecae6696b5ffcf5c5e90a665ca97a822 lib/krb5: windows KDCs always return the canoncalized server principal
-0f1e376f8f93ba01aadf38be3561191f4322e7a0 HACK: Netbios Domain as Realm
-7e3b4a0147dafe103cc2bfbbecf50141106fdd9a kdc: use the correct kvno number for PKINIT in the AS-REP
-8f172e63a3fe34ac552965f13e2ffab31c63c5ac kdc: add krb5plugin_windc_pac_pk_generate() hook
+testprogs/blackbox/ --enterprise --canonicalize
 
+Is that the case, and so could we drop the Heimdal side now?
+
+I also don't know what 
+source4/heimdal/lib/krb5/mcache.c anonymous resolving
+is for or fixes.  Can you shed some light on this?
+
+Thanks,
 
 Andrew Bartlett
 
@@ -112,5 +119,125 @@ Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
 
 Samba Development and Support, Catalyst IT - Expert Open Source
 Solutions
+
+--=-9MkaY6dj8Bk67IEB+YHH
+Content-Disposition: attachment;
+	filename*0=0001-source4-heimdal-lib-krb5-mcache.c-anonymous-resolvin.pat;
+	filename*1=ch
+Content-Transfer-Encoding: base64
+Content-Type: text/x-patch;
+	name="0001-source4-heimdal-lib-krb5-mcache.c-anonymous-resolvin.patch";
+	charset="UTF-8"
+
+RnJvbSBhZjdhNzU0Nzg4NTllMTNmYTQwNjJmOWNlOGFlOTgxMWQ2Zjg2NjcyIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGVmYW4gTWV0em1hY2hlciA8bWV0emVAc2FtYmEub3JnPgpE
+YXRlOiBXZWQsIDEgQXByIDIwMjAgMjM6MDk6NTcgKzAyMDAKU3ViamVjdDogW1BBVENIIDEvMl0g
+c291cmNlNC9oZWltZGFsL2xpYi9rcmI1L21jYWNoZS5jIGFub255bW91cyByZXNvbHZpbmcKCihj
+aGVycnkgcGlja2VkIGZyb20gU2FtYmEgY29tbWl0IDg3MWE0ZTdhMWNhYjI2NWIyODIwZmFjZGJj
+NmYxOWExMTZlOWFmNzQpCi0tLQogbGliL2tyYjUvbWNhY2hlLmMgfCA3NiArKysrKysrKysrKysr
+KysrKystLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQogMSBmaWxlIGNoYW5nZWQsIDI5IGlu
+c2VydGlvbnMoKyksIDQ3IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2xpYi9rcmI1L21jYWNo
+ZS5jIGIvbGliL2tyYjUvbWNhY2hlLmMKaW5kZXggMGRiNmQ2NmI0NS4uNDIxZTYyY2VlNSAxMDA2
+NDQKLS0tIGEvbGliL2tyYjUvbWNhY2hlLmMKKysrIGIvbGliL2tyYjUvbWNhY2hlLmMKQEAgLTgw
+LDYgKzgwLDcgQEAgbWNjX2FsbG9jKGtyYjVfY29udGV4dCBjb250ZXh0LCBjb25zdCBjaGFyICpu
+YW1lLCBrcmI1X21jYWNoZSAqKm91dCkKICAgICBrcmI1X21jYWNoZSAqbSwgKm1fYzsKICAgICBz
+aXplX3QgY291bnRlciA9IDA7CiAgICAgaW50IHJldCA9IDA7CisgICAgdW5zaWduZWQgY3JlYXRl
+X2Fub255bW91cyA9IDA7CiAKICAgICAqb3V0ID0gTlVMTDsKICAgICBBTExPQyhtLCAxKTsKQEAg
+LTkyLDI3ICs5MywxOCBAQCBhZ2FpbjoKICAgICAgICAgZnJlZShtKTsKICAgICAgICAgcmV0dXJu
+IEVBR0FJTjsgLyogWFhYICovCiAgICAgfQotICAgIGlmKG5hbWUgPT0gTlVMTCkKKyAgICBpZihu
+YW1lID09IE5VTEwpIHsKIAlyZXQgPSBhc3ByaW50ZigmbS0+bmFtZSwgInUlcC0lbGx1IiwgbSwg
+KHVuc2lnbmVkIGxvbmcgbG9uZyljb3VudGVyKTsKLSAgICBlbHNlCisgICAgfSBlbHNlIGlmIChz
+dHJjbXAobmFtZSwgImFub255bW91cyIpID09IDApIHsKKwlyZXQgPSBhc3ByaW50ZigmbS0+bmFt
+ZSwgImFub255bW91cy0lcC0lbGx1IiwgbSwgKHVuc2lnbmVkIGxvbmcgbG9uZyljb3VudGVyKTsK
+KyAgICAgICAgY3JlYXRlX2Fub255bW91cyA9IDE7CisgICAgfSBlbHNlIHsKIAltLT5uYW1lID0g
+c3RyZHVwKG5hbWUpOworICAgIH0KICAgICBpZihyZXQgPCAwIHx8IG0tPm5hbWUgPT0gTlVMTCkg
+ewogCWZyZWUobSk7CiAJcmV0dXJuIGtyYjVfZW5vbWVtKGNvbnRleHQpOwogICAgIH0KLSAgICBp
+ZiAoc3RyY21wKG0tPm5hbWUsICJhbm9ueW1vdXMiKSA9PSAwKSB7Ci0gICAgICAgIEhFSU1EQUxf
+TVVURVhfaW5pdCgmKG0tPm11dGV4KSk7Ci0gICAgICAgIG0tPmFub255bW91cyA9IDE7Ci0gICAg
+ICAgIG0tPmRlYWQgPSAwOwotICAgICAgICBtLT5yZWZjbnQgPSAxOwotICAgICAgICBtLT5wcmlt
+YXJ5X3ByaW5jaXBhbCA9IE5VTEw7Ci0gICAgICAgIG0tPmNyZWRzID0gTlVMTDsKLSAgICAgICAg
+bS0+bXRpbWUgPSB0aW1lKE5VTEwpOwotICAgICAgICBtLT5rZGNfb2Zmc2V0ID0gMDsKLSAgICAg
+ICAgbS0+bmV4dCA9IE5VTEw7Ci0gICAgICAgICpvdXQgPSBtOwotICAgICAgICByZXR1cm4gMDsK
+LSAgICB9CiAKICAgICAvKiBjaGVjayBmb3IgZHVwcyBmaXJzdCAqLwogICAgIEhFSU1EQUxfTVVU
+RVhfbG9jaygmbWNjX211dGV4KTsKQEAgLTEyMiw3ICsxMTQsNyBAQCBhZ2FpbjoKICAgICBpZiAo
+bV9jKSB7CiAgICAgICAgIGZyZWUobS0+bmFtZSk7CiAgICAgICAgIGZyZWUobSk7Ci0gICAgICAg
+IGlmIChuYW1lKSB7CisgICAgICAgIGlmIChuYW1lICYmICFjcmVhdGVfYW5vbnltb3VzKSB7CiAg
+ICAgICAgICAgICAvKiBXZSByYWNlZCB3aXRoIGFub3RoZXIgdGhyZWFkIHRvIGNyZWF0ZSB0aGlz
+IGNhY2hlICovCiAgICAgICAgICAgICBtID0gbV9jOwogICAgICAgICAgICAgSEVJTURBTF9NVVRF
+WF9sb2NrKCYobS0+bXV0ZXgpKTsKQEAgLTE0MSw3ICsxMzMsNyBAQCBhZ2FpbjoKICAgICAgICAg
+cmV0dXJuIDA7CiAgICAgfQogCi0gICAgbS0+YW5vbnltb3VzID0gMDsKKyAgICBtLT5hbm9ueW1v
+dXMgPSBjcmVhdGVfYW5vbnltb3VzOwogICAgIG0tPmRlYWQgPSAwOwogICAgIG0tPnJlZmNudCA9
+IDE7CiAgICAgbS0+cHJpbWFyeV9wcmluY2lwYWwgPSBOVUxMOwpAQCAtMjc5LDE4ICsyNzEsNiBA
+QCBtY2NfZGVzdHJveShrcmI1X2NvbnRleHQgY29udGV4dCwKIHsKICAgICBrcmI1X21jYWNoZSAq
+Km4sICptID0gTUNBQ0hFKGlkKTsKIAotICAgIGlmIChtLT5hbm9ueW1vdXMpIHsKLSAgICAgICAg
+SEVJTURBTF9NVVRFWF9sb2NrKCYobS0+bXV0ZXgpKTsKLSAgICAgICAgaWYgKG0tPnJlZmNudCA9
+PSAwKSB7Ci0gICAgICAgICAgICBIRUlNREFMX01VVEVYX3VubG9jaygmKG0tPm11dGV4KSk7Ci0g
+ICAgICAgICAgICBrcmI1X2Fib3J0eChjb250ZXh0LCAibWNjX2Rlc3Ryb3k6IHJlZmNudCBhbHJl
+YWR5IDAiKTsKLSAgICAgICAgfQotICAgICAgICBpZiAoIU1JU0RFQUQobSkpCi0gICAgICAgICAg
+ICBtY2NfZGVzdHJveV9pbnRlcm5hbChjb250ZXh0LCBtKTsKLSAgICAgICAgSEVJTURBTF9NVVRF
+WF91bmxvY2soJihtLT5tdXRleCkpOwotICAgICAgICByZXR1cm4gMDsKLSAgICB9Ci0KICAgICBI
+RUlNREFMX01VVEVYX2xvY2soJm1jY19tdXRleCk7CiAgICAgSEVJTURBTF9NVVRFWF9sb2NrKCYo
+bS0+bXV0ZXgpKTsKICAgICBpZiAobS0+cmVmY250ID09IDApCkBAIC00NTgsNiArNDM4LDI0IEBA
+IHN0cnVjdCBtY2FjaGVfaXRlciB7CiAgICAga3JiNV9tY2FjaGUgKmNhY2hlOwogfTsKIAorc3Rh
+dGljIGtyYjVfbWNhY2hlICoKK21jY19nZXRfY2FjaGVfZmluZF9uZXh0X2ludGVybmFsKGtyYjVf
+bWNhY2hlICpuZXh0KQoreworICAgIEhFSU1EQUxfTVVURVhfbG9jaygmbWNjX211dGV4KTsKKyAg
+ICBmb3IgKDsgbmV4dCAhPSBOVUxMICYmIG5leHQtPmFub255bW91czsgbmV4dCA9IG5leHQtPm5l
+eHQpIHsKKwkvKiBub29wOiBpdGVyYXRlIG92ZXIgYWxsIGFub255bW91cyBlbnRyaWVzICovCisg
+ICAgfQorICAgIGlmIChuZXh0ICE9IE5VTEwpIHsKKwlIRUlNREFMX01VVEVYX2xvY2soJihuZXh0
+LT5tdXRleCkpOworCW5leHQtPnJlZmNudCsrOworCUhFSU1EQUxfTVVURVhfdW5sb2NrKCYobmV4
+dC0+bXV0ZXgpKTsKKwluZXh0ID0gbmV4dC0+bmV4dDsKKyAgICB9CisgICAgSEVJTURBTF9NVVRF
+WF91bmxvY2soJm1jY19tdXRleCk7CisKKyAgICByZXR1cm4gbmV4dDsKK30KKwogc3RhdGljIGty
+YjVfZXJyb3JfY29kZSBLUkI1X0NBTExDT05WCiBtY2NfZ2V0X2NhY2hlX2ZpcnN0KGtyYjVfY29u
+dGV4dCBjb250ZXh0LCBrcmI1X2NjX2N1cnNvciAqY3Vyc29yKQogewpAQCAtNDY3LDE0ICs0NjUs
+NyBAQCBtY2NfZ2V0X2NhY2hlX2ZpcnN0KGtyYjVfY29udGV4dCBjb250ZXh0LCBrcmI1X2NjX2N1
+cnNvciAqY3Vyc29yKQogICAgIGlmIChpdGVyID09IE5VTEwpCiAJcmV0dXJuIGtyYjVfZW5vbWVt
+KGNvbnRleHQpOwogCi0gICAgSEVJTURBTF9NVVRFWF9sb2NrKCZtY2NfbXV0ZXgpOwotICAgIGl0
+ZXItPmNhY2hlID0gbWNjX2hlYWQ7Ci0gICAgaWYgKGl0ZXItPmNhY2hlKSB7Ci0JSEVJTURBTF9N
+VVRFWF9sb2NrKCYoaXRlci0+Y2FjaGUtPm11dGV4KSk7Ci0JaXRlci0+Y2FjaGUtPnJlZmNudCsr
+OwotCUhFSU1EQUxfTVVURVhfdW5sb2NrKCYoaXRlci0+Y2FjaGUtPm11dGV4KSk7Ci0gICAgfQot
+ICAgIEhFSU1EQUxfTVVURVhfdW5sb2NrKCZtY2NfbXV0ZXgpOworICAgIGl0ZXItPmNhY2hlID0g
+bWNjX2dldF9jYWNoZV9maW5kX25leHRfaW50ZXJuYWwobWNjX2hlYWQpOwogCiAgICAgKmN1cnNv
+ciA9IGl0ZXI7CiAgICAgcmV0dXJuIDA7CkBAIC00OTAsMTcgKzQ4MSw4IEBAIG1jY19nZXRfY2Fj
+aGVfbmV4dChrcmI1X2NvbnRleHQgY29udGV4dCwga3JiNV9jY19jdXJzb3IgY3Vyc29yLCBrcmI1
+X2NjYWNoZSAqaWQpCiAgICAgaWYgKGl0ZXItPmNhY2hlID09IE5VTEwpCiAJcmV0dXJuIEtSQjVf
+Q0NfRU5EOwogCi0gICAgSEVJTURBTF9NVVRFWF9sb2NrKCZtY2NfbXV0ZXgpOwogICAgIG0gPSBp
+dGVyLT5jYWNoZTsKLSAgICBpZiAobS0+bmV4dCkKLSAgICB7Ci0gICAgCUhFSU1EQUxfTVVURVhf
+bG9jaygmKG0tPm5leHQtPm11dGV4KSk7Ci0gICAgCW0tPm5leHQtPnJlZmNudCsrOwotICAgIAlI
+RUlNREFMX01VVEVYX3VubG9jaygmKG0tPm5leHQtPm11dGV4KSk7Ci0gICAgfQotCi0gICAgaXRl
+ci0+Y2FjaGUgPSBtLT5uZXh0OwotICAgIEhFSU1EQUxfTVVURVhfdW5sb2NrKCZtY2NfbXV0ZXgp
+OworICAgIGl0ZXItPmNhY2hlID0gbWNjX2dldF9jYWNoZV9maW5kX25leHRfaW50ZXJuYWwobSk7
+CiAKICAgICByZXQgPSBfa3JiNV9jY19hbGxvY2F0ZShjb250ZXh0LCAma3JiNV9tY2Nfb3BzLCBp
+ZCk7CiAgICAgaWYgKHJldCkKLS0gCjIuMjUuMQoK
+
+
+--=-9MkaY6dj8Bk67IEB+YHH
+Content-Disposition: attachment;
+	filename*0=0002-source4-heimdal-lib-krb5-init_creds_pw.c-KRB5_NT_ENT.pat;
+	filename*1=ch
+Content-Transfer-Encoding: base64
+Content-Type: text/x-patch;
+	name="0002-source4-heimdal-lib-krb5-init_creds_pw.c-KRB5_NT_ENT.patch";
+	charset="UTF-8"
+
+RnJvbSBjNGU1MGQ0MmM5MDk4Y2RmZTU1MzBhMDVlMTk2MGEzNTJhYjc4ZjBlIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGVmYW4gTWV0em1hY2hlciA8bWV0emVAc2FtYmEub3JnPgpE
+YXRlOiBNb24sIDYgQXByIDIwMjAgMTU6MTY6NDIgKzAyMDAKU3ViamVjdDogW1BBVENIIDIvMl0g
+c291cmNlNC9oZWltZGFsL2xpYi9rcmI1L2luaXRfY3JlZHNfcHcuYwogS1JCNV9OVF9FTlRFUlBS
+SVNFX1BSSU5DSVBBTCBjdHgtPmZsYWdzLmNhbm9uaWNhbGl6ZSA9IDEKCihjaGVycnkgcGlja2Vk
+IGZyb20gU2FtYmEgY29tbWl0IDYzOWI2NGM4ZmQ3Y2VmYzBmNGU3MzQxNjIyMTZmMjU1YjVhNGVm
+ZWIpCi0tLQogbGliL2tyYjUvaW5pdF9jcmVkc19wdy5jIHwgMiArKwogMSBmaWxlIGNoYW5nZWQs
+IDIgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL2xpYi9rcmI1L2luaXRfY3JlZHNfcHcuYyBi
+L2xpYi9rcmI1L2luaXRfY3JlZHNfcHcuYwppbmRleCAwYzU1ZDJjNGJiLi4zMjViYThhNGMyIDEw
+MDY0NAotLS0gYS9saWIva3JiNS9pbml0X2NyZWRzX3B3LmMKKysrIGIvbGliL2tyYjUvaW5pdF9j
+cmVkc19wdy5jCkBAIC00MjgsNiArNDI4LDggQEAgZ2V0X2luaXRfY3JlZHNfY29tbW9uKGtyYjVf
+Y29udGV4dCBjb250ZXh0LAogCiAgICAgaWYgKGN0eC0+aWNfZmxhZ3MgJiBLUkI1X0lOSVRfQ1JF
+RFNfQ0FOT05JQ0FMSVpFKQogCWN0eC0+ZmxhZ3MuY2Fub25pY2FsaXplID0gMTsKKyAgICBpZiAo
+a3JiNV9wcmluY2lwYWxfZ2V0X3R5cGUoY29udGV4dCwgY2xpZW50KSA9PSBLUkI1X05UX0VOVEVS
+UFJJU0VfUFJJTkNJUEFMKQorCWN0eC0+ZmxhZ3MuY2Fub25pY2FsaXplID0gMTsKIAogICAgIGN0
+eC0+cHJlX2F1dGhfdHlwZXMgPSBOVUxMOwogICAgIGN0eC0+YWRkcnMgPSBOVUxMOwotLSAKMi4y
+NS4xCgo=
+
+
+--=-9MkaY6dj8Bk67IEB+YHH--
 
 
