@@ -2,68 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A58E33E4575
-	for <lists+samba-technical@lfdr.de>; Mon,  9 Aug 2021 14:16:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DDD263E4745
+	for <lists+samba-technical@lfdr.de>; Mon,  9 Aug 2021 16:13:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=x7UJGnJnT70mNioi9y7Q176ixy8oR1x3cK6KYD8HYKI=; b=UayQEEMBqB46GrldkF+ihErW2P
-	Vsv03TDx6nN9w2JSrt+wVQl/oB1WSxYxkRBolhm3NXh5nNOb+jGWMtXzFRUWGomTva2O/v66KHAnR
-	1vKpxFbnpc8BzwBYWJSYlH2BMSRs/V1DzqBlSBcQWzCpBjzqhtwYtpCohOAXTkZHNABsdFqowBBXV
-	5H4HUkguBAMoekv+5iOIK32ekRarlq2bBPJW3FI9iaY+EwaL9eEs+7soSPjH2dmpH2P+hVaaiOasQ
-	fPTKwwt59k85SDWHFlOJqRPs4zQFpAqSDg/L4iy7e/USQslEAeU46K9WO5vsZR3TYowF8/VChCdd+
-	cLuKYZ7Q==;
-Received: from ip6-localhost ([::1]:37806 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=3nbDlsu4nfWqcVOQA7SPWWlVa2jebZq6PrA9V5VHeNc=; b=I3At/WbYJPymK6L7x2tJvt+ofL
+	Ifvjx9OiNKCALSoiFhoKCfKYYXMzENFvzqKfg7nHs7/kbljzhBpbrjLR/ZNOzoU7B5fm2wV7Vhp7G
+	WKxU5B9AX/m8oYAU7kCi7kWS3xJpV4ozlQXYhreze3We04RX+ioTaTsDw/oDzIAzIzMocNv9calR2
+	MDCZKPOG3BPRTxRNeviNpxNIhQKWsva36oq2pbZZW/j/J+zMHRLEhO8sazdpHeG2A65rPNqnI9Gj5
+	9G6yylONOiOlNW95CKKZtf9reUkkebIm8oN1K2Rhw+iVlorEXInebhFteJAnJZX6T8H1KT4jtwx63
+	bTq2Apww==;
+Received: from ip6-localhost ([::1]:41354 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mD4Bg-005JO7-BZ; Mon, 09 Aug 2021 12:15:24 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28586) 
+	id 1mD610-005KwX-D7; Mon, 09 Aug 2021 14:12:30 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19128) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mD4Ba-005JNx-Lo
- for samba-technical@lists.samba.org; Mon, 09 Aug 2021 12:15:21 +0000
+ (Exim) id 1mD60o-005KvZ-R1; Mon, 09 Aug 2021 14:12:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=x7UJGnJnT70mNioi9y7Q176ixy8oR1x3cK6KYD8HYKI=; b=QxugdTQ6vl+D5yVls8AitN37YW
- 8f3Bfgl4tyvpLesmCogn42JNpbsZx9ruUqyK66Sen4tb58Zjb+zbut+urRbGt29yhoz89E6j1ml9F
- wsho2V3pL+4rVtn3wrLvS2Rj/u6mudMeILVD5eSeZ0cG7kdcymqYSl6ekMUPqcoB2w/FOQHFToviB
- LWjgxlxZqpWcmSnEI3M3zPxujdXe9qURvbOf04vffnXzBhSjJIk+LVyuUqAudveuJq5+DNL89K6La
- AA/ONfa4F9u+S/oaPAO1cSrheAgRLwUURhIotuhuEH1SlJzD4n9L29kfQyzxrNCdQ2myCFFWNR+g9
- 1ALk5LTzP1Otx+5LENTU6+kJ1Fu2r8PNq5d7WXnbhTwCrMIRlRaniqscQvk7mcyAHf/+55+yFv1or
- MrDDUS8fK4zEBcee5RP5e0D2ZKRCuHVidh41irRuYaSyOlxeomOuRJvKK0ZIIJK8dn6/Qsf+i6lDm
- Eg3jOmWFQiWQ7NUh6B2CYR6D;
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=3nbDlsu4nfWqcVOQA7SPWWlVa2jebZq6PrA9V5VHeNc=; b=zxH9V3KknZWlgEkjK8L8/V0HkX
+ lKL8mcgbxndc3w0xP29Q3TnnbQacHmltp/rrmXX8DZBnQA8c2HIGg8FTxRkZ9Kno16x5UwNO3waF0
+ UeC+HOwgI4wxXtv6jFPslXEu0Bi2KCZJvUWhobotufHX/uURIHLywflZwwar0vhTNm6f72MCuei9N
+ zXq4EnEgPM/g0ricRUCS8I7T4JJml5lhNRXZpSUeQId7UxI1g+H0dIUGBD0KRqI/lEIi2z3JQCOM6
+ xOMmE+6REKV4kAHziOytBlrHuEhddp4LhBccVJAwU7XMcLekvJ5Hy1GwS5RSNvFl17FSz0WXj5JtG
+ U9IlR2WJ9M5cDOCnERpMETDV7uJkhTPmVzK32nRQCXvoUB8ks22+/mTKpObopvEfn2osUEWE4lYmm
+ 3Jl9KJ9yzopU+jX/93cQpUPj9MoxAqUHAeoVrrdtZaU49a96b7kBm3zoXvQuzQZ44ra+11Wsf+eY6
+ PeSJdUM5r3dhGzrm7TNdHp9i;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_X25519__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mD4BY-000Lvg-IT; Mon, 09 Aug 2021 12:15:16 +0000
-To: Stefan Metzmacher <metze=40samba.org@dmarc.ietf.org>,
- Greg Hudson <ghudson@mit.edu>, Nico Williams <nico@cryptonector.com>
-References: <69d80d24-d461-1652-3cfb-e55d90d31fbf@samba.org>
- <ec067a72-313e-1878-33a0-a3259d2979d5@mit.edu>
- <1503578184.3428.19.camel@redhat.com>
- <db882372-aa1d-e58e-4c94-a268539bd2ee@samba.org>
- <1503596189.3428.26.camel@redhat.com>
- <F363B51E-FDF7-4C91-9ABD-B623B5CE97BC@dukhovni.org>
- <8f68cfb0-2d6b-d86f-4ff0-a9282aa0bf55@samba.org>
- <cb0d7433-9e23-5bce-4e06-1213bf88cade@samba.org>
- <20191121223908.GC26241@localhost>
- <22f96c93-0217-0b2b-d7e1-684f9269fba4@samba.org>
- <20191122224526.GA28614@localhost>
- <8b72197d-2fcc-5b4f-4392-12d53d1ec624@samba.org>
- <5bcc2951-afdf-0849-5c16-f542afe214a1@samba.org>
- <3d693bdd-9a4c-7135-318e-593e18e52cd0@mit.edu>
- <9062428f-f26d-4f10-b71f-f54464df2ff4@samba.org>
- <c388e3f9-bf85-8ffd-3640-b27e0552a96a@samba.org>
- <276401e2-5d09-29d2-be1b-5e876f49c0eb@mit.edu>
- <22c35d56-cc7b-e3b1-c357-d387f11d9d22@samba.org>
-Subject: Re: [kitten] Checking the transited list of a kerberos ticket in a
- transitive cross-realm trust situation...
-Message-ID: <4c48be85-1cec-ca04-19be-296423d3435d@samba.org>
-Date: Mon, 9 Aug 2021 14:15:07 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ (Exim) id 1mD60o-000NCZ-7j; Mon, 09 Aug 2021 14:12:18 +0000
+Date: Mon, 9 Aug 2021 16:12:12 +0200
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.15.0rc2 Available for Download
+Message-ID: <20210809141212.GA379388@SERNOX19>
 MIME-Version: 1.0
-In-Reply-To: <22c35d56-cc7b-e3b1-c357-d387f11d9d22@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="CMVlaZV9k76CfTXOeddOoVj5dgzimXB7p"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5mCyUwZo2JvN/JJP"
+Content-Disposition: inline
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,199 +56,328 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: kitten@ietf.org, Samba Technical <samba-technical@lists.samba.org>,
- "krbdev@mit.edu Dev List" <krbdev@mit.edu>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---CMVlaZV9k76CfTXOeddOoVj5dgzimXB7p
-Content-Type: multipart/mixed; boundary="PK8PA3pSYb89HIiXo3iNUdZLTQ1gBzejt";
- protected-headers="v1"
-From: Stefan Metzmacher <metze@samba.org>
-To: Stefan Metzmacher <metze=40samba.org@dmarc.ietf.org>,
- Greg Hudson <ghudson@mit.edu>, Nico Williams <nico@cryptonector.com>
-Cc: kitten@ietf.org, Samba Technical <samba-technical@lists.samba.org>,
- "krbdev@mit.edu Dev List" <krbdev@mit.edu>
-Message-ID: <4c48be85-1cec-ca04-19be-296423d3435d@samba.org>
-Subject: Re: [kitten] Checking the transited list of a kerberos ticket in a
- transitive cross-realm trust situation...
-References: <69d80d24-d461-1652-3cfb-e55d90d31fbf@samba.org>
- <ec067a72-313e-1878-33a0-a3259d2979d5@mit.edu>
- <1503578184.3428.19.camel@redhat.com>
- <db882372-aa1d-e58e-4c94-a268539bd2ee@samba.org>
- <1503596189.3428.26.camel@redhat.com>
- <F363B51E-FDF7-4C91-9ABD-B623B5CE97BC@dukhovni.org>
- <8f68cfb0-2d6b-d86f-4ff0-a9282aa0bf55@samba.org>
- <cb0d7433-9e23-5bce-4e06-1213bf88cade@samba.org>
- <20191121223908.GC26241@localhost>
- <22f96c93-0217-0b2b-d7e1-684f9269fba4@samba.org>
- <20191122224526.GA28614@localhost>
- <8b72197d-2fcc-5b4f-4392-12d53d1ec624@samba.org>
- <5bcc2951-afdf-0849-5c16-f542afe214a1@samba.org>
- <3d693bdd-9a4c-7135-318e-593e18e52cd0@mit.edu>
- <9062428f-f26d-4f10-b71f-f54464df2ff4@samba.org>
- <c388e3f9-bf85-8ffd-3640-b27e0552a96a@samba.org>
- <276401e2-5d09-29d2-be1b-5e876f49c0eb@mit.edu>
- <22c35d56-cc7b-e3b1-c357-d387f11d9d22@samba.org>
-In-Reply-To: <22c35d56-cc7b-e3b1-c357-d387f11d9d22@samba.org>
 
---PK8PA3pSYb89HIiXo3iNUdZLTQ1gBzejt
+--5mCyUwZo2JvN/JJP
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
+Release Announcements
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Am 09.08.21 um 10:59 schrieb Stefan Metzmacher:
->=20
-> Hi Greg,
->=20
->> On 8/2/21 10:49 AM, Stefan Metzmacher wrote:
->>> To summarize the discussion we had active directory DCs do transited
->>> checking (even without a PAC) and fails to issue service tickets
->>> if the check fails, so any service ticket is already checked,
->>> but without TKT_FLG_TRANSIT_POLICY_CHECKED being added to the
->>> ticket.
->>
->> I just want to acknowledge here that we're taking on technical debt
->> because the non-conformant party is perceived to be inflexible.
->>
->>> The initial solution I proposed was:
->>>
->>> 	gss_set_cred_option(acceptor_creds, GSS_KRB5_CRED_NO_TRANSIT_CHECK_X=
-)
->> [...]
->>> But it seems gss_set_cred_option() is not accepted because it's
->>> a deprecated.
->>
->> Personally I'm fine with this.
->=20
-> Ok, should I just use a different oid (I can allocate one from the Samb=
-a pool)
-> and submit the changes to MIT without the "wait for heimdal first" tag?=
+This is the second release candidate of Samba 4.15.  This is *not*
+intended for production environments and is designed for testing
+purposes only.  Please report any defects via the Samba bug reporting
+system at https://bugzilla.samba.org/.
 
->=20
-> It would be great to have that in MIT and we can also apply it to
-> Samba's fork of Heimdal and have most Samba setups covered.
->=20
->>> 1. An additional cred_store element could be passed to
->>>    gss_acquire_cred_from() in order to set the
->>>    GSS_CF_NO_TRANSIT_CHECK flag on acceptor_creds
->>
->> This is similar to a cred option.  I don't see any strong advantages o=
-f
->> one over the other.
->=20
-> Same here, I just wanted to find ways to make Nico happy.
->=20
->>> 2. I think someone had the idea of using gss_set_sec_context_option()=
+Samba 4.15 will be the next version of the Samba suite.
 
->>
->> This seems hard to do without (per-thread) global state.  Even if we
->> bring in gss_create_sec_context() from some versions of the channel
->> bindings draft, the mechglue doesn't know mechanism will be used to
->> accept the context, so it would have to store OID/value pairs in the
->> mechglue context and replay them to the mech context once it finds out=
 
->> which kind of mech context to create.  (And hope that all of the conte=
-xt
->> option values are flat byte strings, not structures containing pointer=
-s
->> to objects whose lifetimes might have expired between the
->> set_cred_option() call and the first accept_sec_context() call.)
->>
->> Doing this with global state seems strictly worse than communicating t=
+UPGRADING
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+Removed SMB (development) dialects
+----------------------------------
+
+The following SMB (development) dialects are no longer
+supported: SMB2_22, SMB2_24 and SMB3_10. They are were
+only supported by Windows technical preview builds.
+They used to be useful in order to test against the
+latest Windows versions, but it's no longer useful
+to have them. If you have them explicitly specified
+in your smb.conf or an the command line,
+you need to replace them like this:
+- SMB2_22 =3D> SMB3_00
+- SMB2_24 =3D> SMB3_00
+- SMB3_10 =3D> SMB3_11
+Note that it's typically not useful to specify
+"client max protocol" or "server max protocol"
+explicitly to a specific dialect, just leave
+them unspecified or specify the value "default".
+
+New GPG key
+-----------
+
+The GPG release key for Samba releases changed from:
+
+pub   dsa1024/6F33915B6568B7EA 2007-02-04 [SC] [expires: 2021-02-05]
+      Key fingerprint =3D 52FB C0B8 6D95 4B08 4332  4CDC 6F33 915B 6568 B7EA
+uid                 [  full  ] Samba Distribution Verification Key <samba-b=
+ugs@samba.org>
+sub   elg2048/9C6ED163DA6DFB44 2007-02-04 [E] [expires: 2021-02-05]
+
+to the following new key:
+
+pub   rsa4096/AA99442FB680B620 2020-12-21 [SC] [expires: 2022-12-21]
+      Key fingerprint =3D 81F5 E283 2BD2 545A 1897  B713 AA99 442F B680 B620
+uid                 [ultimate] Samba Distribution Verification Key <samba-b=
+ugs@samba.org>
+sub   rsa4096/97EF9386FBFD4002 2020-12-21 [E] [expires: 2022-12-21]
+
+Starting from Jan 21th 2021, all Samba releases will be signed with the new=
+ key.
+
+See also GPG_AA99442FB680B620_replaces_6F33915B6568B7EA.txt
+
+
+NEW FEATURES/CHANGES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+- bind DLZ: Added the ability to set allow/deny lists for zone
+  transfer clients.
+  Up to now, any client could use a DNS zone transfer request
+  to the bind server, and get an answer from Samba.
+  Now the default behaviour will be to deny those request.
+  Two new options have been added to manage the list of
+  authorized/denied clients for zone transfer requests.
+  In order to be accepted, the request must be issued by a client
+  that is in the allow list and NOT in the deny list.
+
+"server multi channel support" no longer experimental
+-----------------------------------------------------
+
+This option is enabled by default starting with to 4.15 (on Linux and FreeB=
+SD).
+Due to dependencies on kernel APIs of Linux or FreeBSD, it's only possible
+to use this feature on Linux and FreeBSD for now.
+
+samba-tool available without the ad-dc
+--------------------------------------
+
+The samba-tool command is now available when samba is configured
+--without-ad-dc. Not all features will work, and some ad-dc specific options
+have been disabled. The samba-tool domain options, for example, are limited
+when no ad-dc is present. Samba must still be built with ads in order to en=
+able
+samba-tool.
+
+Improved command line user experience
+-------------------------------------
+
+Samba utilities did not consistently implement their command line interface=
+=2E A
+number of options were requiring to specify values in one tool and not in t=
 he
->> flag via the cred.
->=20
-> Yes, it seems way to complex.
->=20
->>> 3. Implement a krb5.conf option similar to "dns_canonicalize_hostname=
-"
->>>    or "ignore_acceptor_hostname" from MIT
->>
->> I would argue for this to be a per-realm option if we do this, since
->> it's a statement about a particular realm's KDCs being non-conformant.=
+other, some options meant different in different tools.
 
->=20
-> Ok. I can also implement that in addition to the GSS_KRB5_CRED_NO_TRANS=
-IT_CHECK_X
-> option.
+These should be stories of the past now. A new command line parser has been
+implemented with sanity checking. Also the command line interface has been
+simplified and provides better control for encryption, singing and kerberos.
 
-I just found the "reject_bad_transit" option that's already implemented f=
-or the MIT kdc,
-but I guess we want an extra option, correct?
+Also several command line options have a smb.conf variable to control the
+default now.
 
-Do we want the new "no_transit_check" option to be used via:
-krb5_appdefault_boolean()?
+All tools are logging to stderr by default. You can use --debug-stdout to
+change the behavior.
 
-That would allow the following combinations in MIT:
+### Common parser:
 
-1:
- [appdefaults]
-     app =3D {
-        SOME.REALM =3D {
-             no_transit_check =3D true
-        }
-     }
+Options added:
+--client-protection=3Doff|sign|encrypt
 
-2:
- [appdefaults]
-     app =3D {
-        no_transit_check =3D true
-     }
+Options renamed:
+--kerberos       ->    --use-kerberos=3Drequired|desired|off
+--krb5-ccache    ->    --use-krb5-ccache=3DCCACHE
+--scope          ->    --netbios-scope=3DSCOPE
+--use-ccache     ->    --use-winbind-ccache
 
-3:
- [appdefaults]
-     SOME.REALM =3D {
-        no_transit_check =3D true
-     }
-
-4:
- [appdefaults]
-      no_transit_check =3D true
+Options removed:
+-e|--encrypt
+-C removed from --use-winbind-ccache
+-i removed from --netbios-scope
+-S|--signing
 
 
-While heimdal falls back to 2 additional options:
+### Duplicates in command line utils
 
-5:
-  [realms]
-     SOME.REALM =3D {
-        no_transit_check =3D true
-     }
+ldbadd/ldbsearch/ldbdel/ldbmodify/ldbrename:
+-e is not available for --editor anymore
+-s is not used for --configfile anymore
 
-6:
+ndrdump:
+-l is not available for --load-dso anymore
 
-  [libdefaults]
-      no_transit_check =3D true
+net:
+-l is not available for --long anymore
+
+sharesec:
+-V is not available for --viewsddl anymore
+
+smbcquotas:
+--user        ->    --quota-user
+
+nmbd:
+--log-stdout  ->    --debug-stdout
+
+smbd:
+--log-stdout  ->    --debug-stdout
+
+winbindd:
+--log-stdout  ->    --debug-stdout
+
+Scanning of trusted domains and enterprise principals
+-----------------------------------------------------
+
+As an artifact from the NT4 times, we still scanned the list of trusted dom=
+ains
+on winbindd startup. This is wrong as we never can get a full picture in Ac=
+tive
+Directory. It is time to change the default value to "No". Also with this c=
+hange
+we always use enterprise principals for Kerberos so that the DC will be able
+to redirect ticket requests to the right DC. This is e.g. needed for one way
+trusts. The options `winbind use krb5 enterprise principals` and
+`winbind scan trusted domains` will be deprecated in one of the next releas=
+es.
+
+Support for Offline Domain Join (ODJ)
+-------------------------------------
+
+The net utility is now able to support the offline domain join feature
+as known from the Windows djoin.exe command for many years. Samba's
+implementation is accessible via the "net offlinejoin" subcommand. It
+can provision computers and request offline joining for both Windows
+and Unix machines. It is also possible to provision computers from
+Windows (using djoin.exe) and use the generated data in Samba's net
+utility. The existing options for the provisioning and joining steps
+are documented in the net(8) manpage.
 
 
-metze
+REMOVED FEATURES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+Tru64 ACL support has been removed from this release. The last
+supported release of Tru64 UNIX was in 2012.
+
+NIS support has been removed from this release. This is not
+available in Linux distributions anymore.
+
+The DLZ DNS plugin is no longer built for Bind versions 9.8 and 9.9,
+which have been out of support since 2018.
 
 
---PK8PA3pSYb89HIiXo3iNUdZLTQ1gBzejt--
+smb.conf changes
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
---CMVlaZV9k76CfTXOeddOoVj5dgzimXB7p
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+  Parameter Name                          Description     Default
+  --------------                          -----------     -------
+  client use kerberos                     New             desired
+  client max protocol                     Values Removed
+  client min protocol                     Values Removed
+  client protection                       New             default
+  client smb3 signing algorithms          New             see man smb.conf
+  client smb3 encryption algorithms       New             see man smb.conf
+  preopen:posix-basic-regex               New             No
+  preopen:nomatch_log_level               New             5
+  preopen:match_log_level                 New             5
+  preopen:nodigits_log_level              New             1
+  preopen:founddigits_log_level           New             3
+  preopen:reset_log_level                 New             5
+  preopen:push_log_level                  New             3
+  preopen:queue_log_level                 New             10
+  server max protocol                     Values Removed
+  server min protocol                     Values Removed
+  server multi channel support            Changed         Yes (on Linux and=
+ FreeBSD)
+  server smb3 signing algorithms          New             see man smb.conf
+  server smb3 encryption algorithms       New             see man smb.conf
+  winbind use krb5 enterprise principals  Changed         Yes
+  winbind scan trusted domains            Changed         No
+
+
+CHANGES SINCE 4.15.0rc1
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+o  Andreas Schneider <asn@samba.org>
+   * BUG 14768: smbd/winbind should load the registry if configured
+   * BUG 14777: do not quote passed argument of configure script
+   * BUG 14779: Winbind should not start if the socket path is too long
+
+o  Stefan Metzmacher <metze@samba.org>
+   * BUG 14607: tree connect failed: NT_STATUS_INVALID_PARAMETER
+   * BUG 14764: aes-256-gcm and aes-256-ccm doesn't work in the server
+
+o Ralph Boehme <slow@samba.org>
+   * BUG 14700: file owner not available when file unredable
+
+o Jeremy Allison <jra@samba.org>
+   * BUG 14607: tree connect failed: NT_STATUS_INVALID_PARAMETER
+   * BUG 14759: 4.15rc can leak meta-data about the directory containing the
+     share path
+
+
+KNOWN ISSUES
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.15#Release_bl=
+ocking_bugs
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/rc/
+
+The release notes are available online at:
+
+        https://download.samba.org/pub/samba/rc/samba-4.15.0rc2.WHATSNEW.txt
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--5mCyUwZo2JvN/JJP
+Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAmERHEsACgkQDbX1YShp
-vVba5A/7BXdZWE/ZYPm3p35biNDoaaUcmnMIJf3a1BI6HCXaIiTE6368wAWV2hT+
-wCx85Gr1kzGsmpTJkbCgzc+Dbj2vvAgObeXWDUjr/ak2VQ8tOruLTsqTsMAgxjeZ
-v8cQJZdsG4+U9FWBQsp0BDRUNqHApGon7fz54BjaiCv8Os+zUp/zLwZSLmJTd8K8
-GppGrXDo3Rcjx91+scjmDFv88Q8+fcGFqLkJp7tILuTk6b8N9WeakU9j/jhwVHX7
-NjRv3OctvyqqVxgyA6jafJzTdKdqHSMW/D4zIu1ZoHW2K/7wRS7pQ0F1Gsrq4dh/
-SKj+teWv6lqUwGC/nKbA+CIrmDuTv9IlQ9+4iE8/f6+u9KMGJzJcTgcYNsaCCAwa
-oGc3Ayxn0npvmguv+4kO0D9KNXksZzOOFxOcHJDHzNKR2B9Usrjrd8ehdBo839rs
-xMMlpP3o4u6fJ2/grZhZT5AlPhV5Dd/+FDmPJP24Trt1tzjLm8iOrZfvcspIHpLv
-D+MUXEeNmLxJzkk2LEGKrytVAa9obSZj/P5Q6N68s4izFP8k056G6NOzw1kAp0O1
-ZQOf5KquzVAfozeO6qChVvoU6s0z7SJdMor3B2WSaiKZlW/Js2LMfAVJFm2+h9ne
-t5kriC+aFmcCBi+/DpoI3rce9LgWudhjkUgVawx9rN8vO8EcT0E=
-=2drV
+iQIzBAABCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAmERN7UACgkQDbX1YShp
+vVYzSA/9GdwvQcx7SDchV5RoyTyhu5XZCx6uz7ppO5QlcJ3cRrmWjN7TZTLd+L4R
+cnRjWTv/3E17jpw1ZCj7tPQ78Qd/bnlOrwORpp9G8E5I8m5PHed21pRv8DLkII9V
+8lvQS7rLkoLNes1OjuKwa3vfaJE2EVsnUniPesUHHlfiXuLqab+zwdbTsL+PiGwl
+/EZ72XpLWXwM7rqTZ4D1TTJJO6g6NgsEWvmV3bz5Crl4qrWCZBKOMBT2JQ7SL31F
+ZEtyVhNBOgzOWBe39oQ4K79Jn2OFdOmF8S1i3Xd83a2yHEG6Quvj3hf7W3Pynkg6
+IEPLmJB3qitbYPVGgUzY/IWGifJ1+E1SEhZU7M95x5udXfI7aw9AKKOd3NBgDg64
+ZybtpNpD2+zLQ7doUph/2HCc1zdKe9IxlIy4sj15ccE9jHxJUl2WoGZxGOMtJH35
+PUlExoPYf4zZlQXHQNwQQ9Ds1GBwggSDKooxc6AaJnnB+4E66KHey+lFFczX+rwx
+1Fab8TRBaU2IrVeY0rhsmOnLxDkvTagVbsZzvUgwnoABcJBPoNkFyCVsHG64sTi/
+LAU0YZaoHNUSsdRDGbNM/oCajL+MUYq5rY4za2YNjL0lO81wulH/hqeIUBOQd7Hn
+ADyrIypamE/YtbbAIzb4TGsYOe0rLaokMIceCVg5d0Q9yVrDhrg=
+=igaf
 -----END PGP SIGNATURE-----
 
---CMVlaZV9k76CfTXOeddOoVj5dgzimXB7p--
+--5mCyUwZo2JvN/JJP--
 
