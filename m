@@ -2,54 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B11013E4219
-	for <lists+samba-technical@lfdr.de>; Mon,  9 Aug 2021 11:07:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A58E33E4575
+	for <lists+samba-technical@lfdr.de>; Mon,  9 Aug 2021 14:16:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=dXMIWquwyj944xHxforHqXInhjuHwnHvskVDfwHs+tI=; b=HF1QUuDZO+UHqIf1lPG8LNCRhW
-	J/WPTQZLyBcoZN73gWiknLACDE33/MogOXQ5w1Dfe2HUjqBvKEwSR9Rv3cHJ5CE/p5igAYBMKt3lI
-	1/DshVWLoIftCagllXRQAOwWb1lK8Wa7KHafHyu4m1+aPREzSC43Por7JAIMwReVnwKZx4te73FmJ
-	ZJE7bWW0l3ChbPII8oIcObpaNGryJRtPEVWEpSs8XH9mSVdshEBP7KdqeLtmPrhPgnB7bJjP2ozd7
-	EOGvHHDo5UX+BS/X34vsmJojH8I5VFFbmYXnmb28SvikVKexHLNheW+5oyyygEXsF18YXfDuG86At
-	gJ2XXpHw==;
-Received: from ip6-localhost ([::1]:35690 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=x7UJGnJnT70mNioi9y7Q176ixy8oR1x3cK6KYD8HYKI=; b=UayQEEMBqB46GrldkF+ihErW2P
+	Vsv03TDx6nN9w2JSrt+wVQl/oB1WSxYxkRBolhm3NXh5nNOb+jGWMtXzFRUWGomTva2O/v66KHAnR
+	1vKpxFbnpc8BzwBYWJSYlH2BMSRs/V1DzqBlSBcQWzCpBjzqhtwYtpCohOAXTkZHNABsdFqowBBXV
+	5H4HUkguBAMoekv+5iOIK32ekRarlq2bBPJW3FI9iaY+EwaL9eEs+7soSPjH2dmpH2P+hVaaiOasQ
+	fPTKwwt59k85SDWHFlOJqRPs4zQFpAqSDg/L4iy7e/USQslEAeU46K9WO5vsZR3TYowF8/VChCdd+
+	cLuKYZ7Q==;
+Received: from ip6-localhost ([::1]:37806 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mD1G1-005IBL-C5; Mon, 09 Aug 2021 09:07:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20164) 
+	id 1mD4Bg-005JO7-BZ; Mon, 09 Aug 2021 12:15:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28586) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mD1Fu-005IBB-NV
- for samba-technical@lists.samba.org; Mon, 09 Aug 2021 09:07:37 +0000
+ (Exim) id 1mD4Ba-005JNx-Lo
+ for samba-technical@lists.samba.org; Mon, 09 Aug 2021 12:15:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=dXMIWquwyj944xHxforHqXInhjuHwnHvskVDfwHs+tI=; b=ffEpVsjIm2kTcZhJxXLCi0IfMJ
- PpbKvRNwt+fcUrnZd9TZAQvkbZ0+1Y/oHzh0GoST3jzbXnYBQEv9lvw/LidDyk2Aoz9yBQha/LC4T
- nA+EX0OjSmY7EMlWkRWljUFw+Y7jkVxh4pIT4TfWGNrr6aRgJBjVz3NHj5aHHO3bS7Ae0l1C6794g
- xFHiNNKd/Yj6C0oR5ED22VEKapouD4Paa2oUQQBSkshsDAkup7qLdlC8T0usJQyZZOUUd3epSMGt9
- 4HUBY4H0XscR8WjZzDH07axZ1fSl1xdvghpsWvNwv8USBzcEv1Qc6pQNKqZLBv2GQrS/l+OnTX0uJ
- OiT+Mluc31ScibEbYbRQna4b6CJejcOkuo2mXR51VqOh11BDIwOklnznWbyFIdM4DAU1DgUFKy4BN
- Fyc5RPnIUEC683TERzxlY+zZNgKxg8M8XL+T0XAyWRKZDLcDfjAlaX7qdZ5f1KJw9usJY9cXarFD4
- Zog2sv8Lf5fcMvSllMhIeyr3;
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=x7UJGnJnT70mNioi9y7Q176ixy8oR1x3cK6KYD8HYKI=; b=QxugdTQ6vl+D5yVls8AitN37YW
+ 8f3Bfgl4tyvpLesmCogn42JNpbsZx9ruUqyK66Sen4tb58Zjb+zbut+urRbGt29yhoz89E6j1ml9F
+ wsho2V3pL+4rVtn3wrLvS2Rj/u6mudMeILVD5eSeZ0cG7kdcymqYSl6ekMUPqcoB2w/FOQHFToviB
+ LWjgxlxZqpWcmSnEI3M3zPxujdXe9qURvbOf04vffnXzBhSjJIk+LVyuUqAudveuJq5+DNL89K6La
+ AA/ONfa4F9u+S/oaPAO1cSrheAgRLwUURhIotuhuEH1SlJzD4n9L29kfQyzxrNCdQ2myCFFWNR+g9
+ 1ALk5LTzP1Otx+5LENTU6+kJ1Fu2r8PNq5d7WXnbhTwCrMIRlRaniqscQvk7mcyAHf/+55+yFv1or
+ MrDDUS8fK4zEBcee5RP5e0D2ZKRCuHVidh41irRuYaSyOlxeomOuRJvKK0ZIIJK8dn6/Qsf+i6lDm
+ Eg3jOmWFQiWQ7NUh6B2CYR6D;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_X25519__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mD1Fs-000KTa-FQ; Mon, 09 Aug 2021 09:07:33 +0000
-Message-ID: <57d08d6d05bf60ebc0965a311cae267f539f277f.camel@samba.org>
-Subject: Re: Heimdal upgrade, really happening this time
-To: Stefan Metzmacher <metze@samba.org>, Upstream Samba Technical Mailing
- list <samba-technical@lists.samba.org>, Isaac Boukris <iboukris@gmail.com>
-Date: Mon, 09 Aug 2021 21:07:26 +1200
-In-Reply-To: <376f7f62-7ebd-fa37-45d9-dda065f7517d@samba.org>
-References: <b2cb195314281883e378c908784ac6f9f841584d.camel@samba.org>
- <26713d5cdcc47d0d9fb017b6a1e546d9501d8efe.camel@samba.org>
- <c328766b-d894-517f-966c-fa5305558633@samba.org>
- <a78f79643b03b31afbe505b932df2cc46fb0254d.camel@samba.org>
- <0a68b013c3d1d6988d54ef5473a47e50973d0892.camel@samba.org>
- <fb006a0427d71d5f05a6217ff19e12974a6b647d.camel@samba.org>
- <376f7f62-7ebd-fa37-45d9-dda065f7517d@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1mD4BY-000Lvg-IT; Mon, 09 Aug 2021 12:15:16 +0000
+To: Stefan Metzmacher <metze=40samba.org@dmarc.ietf.org>,
+ Greg Hudson <ghudson@mit.edu>, Nico Williams <nico@cryptonector.com>
+References: <69d80d24-d461-1652-3cfb-e55d90d31fbf@samba.org>
+ <ec067a72-313e-1878-33a0-a3259d2979d5@mit.edu>
+ <1503578184.3428.19.camel@redhat.com>
+ <db882372-aa1d-e58e-4c94-a268539bd2ee@samba.org>
+ <1503596189.3428.26.camel@redhat.com>
+ <F363B51E-FDF7-4C91-9ABD-B623B5CE97BC@dukhovni.org>
+ <8f68cfb0-2d6b-d86f-4ff0-a9282aa0bf55@samba.org>
+ <cb0d7433-9e23-5bce-4e06-1213bf88cade@samba.org>
+ <20191121223908.GC26241@localhost>
+ <22f96c93-0217-0b2b-d7e1-684f9269fba4@samba.org>
+ <20191122224526.GA28614@localhost>
+ <8b72197d-2fcc-5b4f-4392-12d53d1ec624@samba.org>
+ <5bcc2951-afdf-0849-5c16-f542afe214a1@samba.org>
+ <3d693bdd-9a4c-7135-318e-593e18e52cd0@mit.edu>
+ <9062428f-f26d-4f10-b71f-f54464df2ff4@samba.org>
+ <c388e3f9-bf85-8ffd-3640-b27e0552a96a@samba.org>
+ <276401e2-5d09-29d2-be1b-5e876f49c0eb@mit.edu>
+ <22c35d56-cc7b-e3b1-c357-d387f11d9d22@samba.org>
+Subject: Re: [kitten] Checking the transited list of a kerberos ticket in a
+ transitive cross-realm trust situation...
+Message-ID: <4c48be85-1cec-ca04-19be-296423d3435d@samba.org>
+Date: Mon, 9 Aug 2021 14:15:07 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <22c35d56-cc7b-e3b1-c357-d387f11d9d22@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="CMVlaZV9k76CfTXOeddOoVj5dgzimXB7p"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,114 +77,201 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: kitten@ietf.org, Samba Technical <samba-technical@lists.samba.org>,
+ "krbdev@mit.edu Dev List" <krbdev@mit.edu>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2021-08-09 at 10:53 +0200, Stefan Metzmacher wrote:
-> Am 09.08.21 um 03:37 schrieb Andrew Bartlett:
-> > On Mon, 2021-08-09 at 11:12 +1200, Andrew Bartlett via samba-
-> > technical
-> > wrote:
-> > > On Fri, 2021-07-09 at 22:29 +1200, Andrew Bartlett via samba-
-> > > technical
-> > > wrote:
-> > > > We now have a mostly-working branch of current Heimdal on
-> > > > current
-> > > > Samba, compiling on all our supported system, which is pretty
-> > > > impressive.
-> > > 
-> > > I just wanted to wrap back to the list with an update.  Thanks to
-> > > some
-> > > great work with Luke Howard recently, host of our pull requests
-> > > with
-> > > Heimdal have either been merged or will be shortly (as in, I made
-> > > the
-> > > requested changes and expect them to be accepted).
-> > > 
-> > > This means that we are actually fairly close to upstream Heimdal,
-> > > closer than we ever have been I dare to suggest.
-> > > 
-> > > The remaining changes outstanding are:
-> > > ...
-> > 
-> > There are also, which were on the Samba side, the attached.
-> > 
-> > I'm not really sure about them - I think
-> > 
-> > source4/heimdal/lib/krb5/init_creds_pw.c
-> > KRB5_NT_ENTERPRISE_PRINCIPAL
-> > ctx->flags.canonicalize = 1
-> > 
-> > is trying to do the same as the Samba-side commit:
-> > 
-> > testprogs/blackbox/ --enterprise --canonicalize
-> > 
-> > Is that the case, and so could we drop the Heimdal side now?
-> 
-> I don't think enterprise principals will work without canonicalize
-> and we have also non-blackbox cases we need to handle.
-> 
-> Just try and check if all our tests still work.
-> It seems our C code uses krb5_get_init_creds_opt_set_canonicalize(),
-> so we may not need that patch.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--CMVlaZV9k76CfTXOeddOoVj5dgzimXB7p
+Content-Type: multipart/mixed; boundary="PK8PA3pSYb89HIiXo3iNUdZLTQ1gBzejt";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Stefan Metzmacher <metze=40samba.org@dmarc.ietf.org>,
+ Greg Hudson <ghudson@mit.edu>, Nico Williams <nico@cryptonector.com>
+Cc: kitten@ietf.org, Samba Technical <samba-technical@lists.samba.org>,
+ "krbdev@mit.edu Dev List" <krbdev@mit.edu>
+Message-ID: <4c48be85-1cec-ca04-19be-296423d3435d@samba.org>
+Subject: Re: [kitten] Checking the transited list of a kerberos ticket in a
+ transitive cross-realm trust situation...
+References: <69d80d24-d461-1652-3cfb-e55d90d31fbf@samba.org>
+ <ec067a72-313e-1878-33a0-a3259d2979d5@mit.edu>
+ <1503578184.3428.19.camel@redhat.com>
+ <db882372-aa1d-e58e-4c94-a268539bd2ee@samba.org>
+ <1503596189.3428.26.camel@redhat.com>
+ <F363B51E-FDF7-4C91-9ABD-B623B5CE97BC@dukhovni.org>
+ <8f68cfb0-2d6b-d86f-4ff0-a9282aa0bf55@samba.org>
+ <cb0d7433-9e23-5bce-4e06-1213bf88cade@samba.org>
+ <20191121223908.GC26241@localhost>
+ <22f96c93-0217-0b2b-d7e1-684f9269fba4@samba.org>
+ <20191122224526.GA28614@localhost>
+ <8b72197d-2fcc-5b4f-4392-12d53d1ec624@samba.org>
+ <5bcc2951-afdf-0849-5c16-f542afe214a1@samba.org>
+ <3d693bdd-9a4c-7135-318e-593e18e52cd0@mit.edu>
+ <9062428f-f26d-4f10-b71f-f54464df2ff4@samba.org>
+ <c388e3f9-bf85-8ffd-3640-b27e0552a96a@samba.org>
+ <276401e2-5d09-29d2-be1b-5e876f49c0eb@mit.edu>
+ <22c35d56-cc7b-e3b1-c357-d387f11d9d22@samba.org>
+In-Reply-To: <22c35d56-cc7b-e3b1-c357-d387f11d9d22@samba.org>
 
-OK, I will do.  
+--PK8PA3pSYb89HIiXo3iNUdZLTQ1gBzejt
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-That horrible krb5.kdc.canon C based tests show what happens if you
-have enterprise without canonicalise, I wish the KDCs never accepted
-it...
 
-> > I also don't know what 
-> > source4/heimdal/lib/krb5/mcache.c anonymous resolving
-> > is for or fixes.  Can you shed some light on this?
-> 
-> This needed in order to have memory credential caches, which are not
-> part of the global credential cache collection, but are still
-> available
-> to be opened by explicit name, which is the exact usage we need for
-> any
-> in memory caches.
+Am 09.08.21 um 10:59 schrieb Stefan Metzmacher:
+>=20
+> Hi Greg,
+>=20
+>> On 8/2/21 10:49 AM, Stefan Metzmacher wrote:
+>>> To summarize the discussion we had active directory DCs do transited
+>>> checking (even without a PAC) and fails to issue service tickets
+>>> if the check fails, so any service ticket is already checked,
+>>> but without TKT_FLG_TRANSIT_POLICY_CHECKED being added to the
+>>> ticket.
+>>
+>> I just want to acknowledge here that we're taking on technical debt
+>> because the non-conformant party is perceived to be inflexible.
+>>
+>>> The initial solution I proposed was:
+>>>
+>>> 	gss_set_cred_option(acceptor_creds, GSS_KRB5_CRED_NO_TRANSIT_CHECK_X=
+)
+>> [...]
+>>> But it seems gss_set_cred_option() is not accepted because it's
+>>> a deprecated.
+>>
+>> Personally I'm fine with this.
+>=20
+> Ok, should I just use a different oid (I can allocate one from the Samb=
+a pool)
+> and submit the changes to MIT without the "wait for heimdal first" tag?=
 
-Yeah, that's exactly how we use them.
+>=20
+> It would be great to have that in MIT and we can also apply it to
+> Samba's fork of Heimdal and have most Samba setups covered.
+>=20
+>>> 1. An additional cred_store element could be passed to
+>>>    gss_acquire_cred_from() in order to set the
+>>>    GSS_CF_NO_TRANSIT_CHECK flag on acceptor_creds
+>>
+>> This is similar to a cred option.  I don't see any strong advantages o=
+f
+>> one over the other.
+>=20
+> Same here, I just wanted to find ways to make Nico happy.
+>=20
+>>> 2. I think someone had the idea of using gss_set_sec_context_option()=
 
-> The whole global credential cache collection magic seems to be very
-> dangerous
-> for application like samba, which need to use kerberos on behalf of
-> different unrelated identities.
+>>
+>> This seems hard to do without (per-thread) global state.  Even if we
+>> bring in gss_create_sec_context() from some versions of the channel
+>> bindings draft, the mechglue doesn't know mechanism will be used to
+>> accept the context, so it would have to store OID/value pairs in the
+>> mechglue context and replay them to the mech context once it finds out=
 
-Indeed.
+>> which kind of mech context to create.  (And hope that all of the conte=
+xt
+>> option values are flat byte strings, not structures containing pointer=
+s
+>> to objects whose lifetimes might have expired between the
+>> set_cred_option() call and the first accept_sec_context() call.)
+>>
+>> Doing this with global state seems strictly worse than communicating t=
+he
+>> flag via the cred.
+>=20
+> Yes, it seems way to complex.
+>=20
+>>> 3. Implement a krb5.conf option similar to "dns_canonicalize_hostname=
+"
+>>>    or "ignore_acceptor_hostname" from MIT
+>>
+>> I would argue for this to be a per-realm option if we do this, since
+>> it's a statement about a particular realm's KDCs being non-conformant.=
 
-> We already had very strange things happen with MIT, which where very
-> hard to debug,
-> setenv("KRB5CCNAME", "MEMORY:libads", 1) completely ignores the
-> ':libads' part!
-> It always iterates over *all* caches with a "MEMORY:" prefix and use
-> the first cache
-> that has a tgt in the used realm, which may means we authenticate as
-> a completely
-> unexpected user (maybe administrator), while we want to do an LDAP
-> operation
-> on behalf of the local machine account.
+>=20
+> Ok. I can also implement that in addition to the GSS_KRB5_CRED_NO_TRANS=
+IT_CHECK_X
+> option.
 
-Yikes!  I'm still lost about what the patch is, but now I know this
-much I'll be sure not to drop it! 
+I just found the "reject_bad_transit" option that's already implemented f=
+or the MIT kdc,
+but I guess we want an extra option, correct?
 
-If you could tidy up and submit upstream that would be awesome.  I
-submitted a lot of your work up already, but I don't think I can
-explain the code enough for this one, it still confuses me.
+Do we want the new "no_transit_check" option to be used via:
+krb5_appdefault_boolean()?
 
-Thanks so much!
+That would allow the following combinations in MIT:
 
-Andrew Bartlett
+1:
+ [appdefaults]
+     app =3D {
+        SOME.REALM =3D {
+             no_transit_check =3D true
+        }
+     }
 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+2:
+ [appdefaults]
+     app =3D {
+        no_transit_check =3D true
+     }
 
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
+3:
+ [appdefaults]
+     SOME.REALM =3D {
+        no_transit_check =3D true
+     }
 
+4:
+ [appdefaults]
+      no_transit_check =3D true
+
+
+While heimdal falls back to 2 additional options:
+
+5:
+  [realms]
+     SOME.REALM =3D {
+        no_transit_check =3D true
+     }
+
+6:
+
+  [libdefaults]
+      no_transit_check =3D true
+
+
+metze
+
+
+--PK8PA3pSYb89HIiXo3iNUdZLTQ1gBzejt--
+
+--CMVlaZV9k76CfTXOeddOoVj5dgzimXB7p
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAmERHEsACgkQDbX1YShp
+vVba5A/7BXdZWE/ZYPm3p35biNDoaaUcmnMIJf3a1BI6HCXaIiTE6368wAWV2hT+
+wCx85Gr1kzGsmpTJkbCgzc+Dbj2vvAgObeXWDUjr/ak2VQ8tOruLTsqTsMAgxjeZ
+v8cQJZdsG4+U9FWBQsp0BDRUNqHApGon7fz54BjaiCv8Os+zUp/zLwZSLmJTd8K8
+GppGrXDo3Rcjx91+scjmDFv88Q8+fcGFqLkJp7tILuTk6b8N9WeakU9j/jhwVHX7
+NjRv3OctvyqqVxgyA6jafJzTdKdqHSMW/D4zIu1ZoHW2K/7wRS7pQ0F1Gsrq4dh/
+SKj+teWv6lqUwGC/nKbA+CIrmDuTv9IlQ9+4iE8/f6+u9KMGJzJcTgcYNsaCCAwa
+oGc3Ayxn0npvmguv+4kO0D9KNXksZzOOFxOcHJDHzNKR2B9Usrjrd8ehdBo839rs
+xMMlpP3o4u6fJ2/grZhZT5AlPhV5Dd/+FDmPJP24Trt1tzjLm8iOrZfvcspIHpLv
+D+MUXEeNmLxJzkk2LEGKrytVAa9obSZj/P5Q6N68s4izFP8k056G6NOzw1kAp0O1
+ZQOf5KquzVAfozeO6qChVvoU6s0z7SJdMor3B2WSaiKZlW/Js2LMfAVJFm2+h9ne
+t5kriC+aFmcCBi+/DpoI3rce9LgWudhjkUgVawx9rN8vO8EcT0E=
+=2drV
+-----END PGP SIGNATURE-----
+
+--CMVlaZV9k76CfTXOeddOoVj5dgzimXB7p--
 
