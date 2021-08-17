@@ -2,58 +2,80 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 268B33EE6F3
-	for <lists+samba-technical@lfdr.de>; Tue, 17 Aug 2021 09:04:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0AD453EE7E9
+	for <lists+samba-technical@lfdr.de>; Tue, 17 Aug 2021 10:01:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=e8dnk9/IqzkIU1wmvBlT4B7H5gszl7P9cxZrBFF/S80=; b=NRLJDlBcIdoru0U9cUfnsWfzc1
-	a4bAITujAJrCvY+MNeUhymhFqnvi9IfGmDqp3XlWtyiFHKVbSIR/1KblofZIgK4NHsPnjb/+dhZHY
-	2oiu++iXxKk6YTjxDXen+7m+mr5yGtBlfCLhS/lUsh95CuYBSI8iLo61h1chhiF+/oqYZnMeGfLFV
-	jdyAxcXOxOmOnhd0OCF5A6ccxiV7BUGDh1uZd9kgwQiIdvtB9PY3tp9Mv78BFOv4WiPnlh7PuDFSI
-	SCsqZFVbCesAuX+8MKUHwI4zOC+0udYzJtV5XIKNoOuu1XqAVuiWAtvZHYVihDQo4Kh6JOwtN7BBK
-	IOzkrbFg==;
-Received: from ip6-localhost ([::1]:57324 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=z3HdaRcN40N0eRwMHJZPbnDh/2hYtQy0+yASTncT8CM=; b=20SIY2DTepmUwh0lrfKAhyQdn+
+	uhXoBM2GHqAm1AsOM8A6xKGPzOIE6pEzqCfxqiIFeWiQnw8c+N6aa5i2Upe64p5qZGS3v0NE+uo1d
+	6w5nGDj1k/d2aw6pVvV4f3UbxTowP2H0rd6pSNBA4cTct39fcNDQHCyfI7Z7Sm2lBcK5rlLbJhYjH
+	RhKc1I2gxVSqzZnedhzH90uZZxXv1dPvk+8rkn6yWB3vY6kU/tjrhPhoE9ckAE2jnUJ0AmFPeWmdN
+	G44/wGlSf9X+NvOojX1we/fMwTxQqZmZo//H8b3Gssme4NgL4G+E8DFy5B6mQa0ubJUjJ2sZ7FozV
+	nWW5Dk4Q==;
+Received: from ip6-localhost ([::1]:58138 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mFt8j-006mp0-5U; Tue, 17 Aug 2021 07:04:01 +0000
-Received: from mailhopper2.bazuin.nl ([195.134.173.123]:32974) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mFt8N-006mor-TI
- for samba-technical@lists.samba.org; Tue, 17 Aug 2021 07:03:45 +0000
-X-Bazuin-en-Partners-MailScanner-Watermark: 1629788603.72509@2+cFCnG+xcTFVItULpqvjw
-X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
-X-Bazuin-en-Partners-MailScanner: Found to be clean
-X-Bazuin-en-Partners-MailScanner-ID: AD31B11EF14.A8F78
-X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
- Partners for more information
-Received: from ms249-lin-003.rotterdam.bazuin.nl
- (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
- by mailhopper2.bazuin.nl (Postfix) with ESMTP id AD31B11EF14;
- Tue, 17 Aug 2021 09:03:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
- s=mail20180308; t=1629183802;
- bh=82P+fBjISid3HbrKVoY7eXiJ+5oy7XKpNvNVAXITca8=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=F9xy9VXNSDIsPpwtOvWJOVRPdyzzXbl/AUnKrKlBrXn1eepBJqIZZ8ytJz+cz2/sl
- cLUblSddFDXWWAZOSm85qHXUpJagdya9JZ59u/5fmT8Ahn/HF4fkiC7RbtabzYLMkb
- k5Jt2Er8gl/vq8zkr4SdmGg+0nNgh5yaiCP4UJ3ajhMs86LHf8xJgb0p4tlFw7GCtU
- S1I2Th2O3C7q9xsSmADk8J2JLXOqQniMB0rfzgi8ZOBYsuI11Zxy5racgDrzNxwe/d
- uhxf9EvxnwyljKpsdaNkqJQzRIO75IQ/jJAtwFKXDyKfhPJd5mVz1Cdo/tilCokkU7
- hGefohCbSFSGw==
-Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
- by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 6B64B18C2323;
- Tue, 17 Aug 2021 09:03:29 +0200 (CEST)
-Subject: RE: [Samba] wiki returns ERR_HTTP2_PROTOCOL_ERROR
-To: =?windows-1252?Q?Andrew_Bartlett?= <abartlet@samba.org>
-Date: Tue, 17 Aug 2021 09:03:29 +0200
-Mime-Version: 1.0
-Content-Type: text/plain; charset=windows-1252
+	id 1mFu1T-006nWA-4y; Tue, 17 Aug 2021 08:00:35 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:42429) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1mFu1N-006nW0-4n
+ for samba-technical@lists.samba.org; Tue, 17 Aug 2021 08:00:32 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1629187217;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=bUqUpteGRfg6CaTNpdZZbSG0wlpBJqDURCWgViSTwp8=;
+ b=cGlLk7bnnhomGVWSEJ+Lj27IUrFw+jQRW+TnqE7fCQjqqetWze2DHDxEe4Nn14T3Y8F/lP
+ YzJk3YISvPAsAslzClBQbj/LgQDN68G8y0RghTP7r56sV8eosUkBbEfKB/Q1IdKGhiVOlU
+ SR9s8GZDPmAzNlnpZsfnShOehW62ZZo=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1629187217;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=bUqUpteGRfg6CaTNpdZZbSG0wlpBJqDURCWgViSTwp8=;
+ b=cGlLk7bnnhomGVWSEJ+Lj27IUrFw+jQRW+TnqE7fCQjqqetWze2DHDxEe4Nn14T3Y8F/lP
+ YzJk3YISvPAsAslzClBQbj/LgQDN68G8y0RghTP7r56sV8eosUkBbEfKB/Q1IdKGhiVOlU
+ SR9s8GZDPmAzNlnpZsfnShOehW62ZZo=
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-220-ZZK41tpIOoeSioP_eYih1Q-1; Tue, 17 Aug 2021 04:00:15 -0400
+X-MC-Unique: ZZK41tpIOoeSioP_eYih1Q-1
+Received: by mail-pl1-f200.google.com with SMTP id
+ f9-20020a1709028609b0290128bcba6be7so12691632plo.18
+ for <samba-technical@lists.samba.org>; Tue, 17 Aug 2021 01:00:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=bUqUpteGRfg6CaTNpdZZbSG0wlpBJqDURCWgViSTwp8=;
+ b=C0y49GY+TdxuNb/2MAxQ9u7SdfMlV3bfckWM/niX9Zv+Zy1DI0lpvOjjqrsapaVlRJ
+ aA4kKu8xn0T9K022KtpMz808jyN65IqBolMK85fgTVXzizJZxde80L6qzlFZqcH9u/sC
+ wdcVWaOuwlQV2XGDbDEJoQJVMBiOvYyJkpdX1cEJGjSBbvN0h5fnRpAYuEMyUXyjavMT
+ scFGQUgoDCcfD4E7t+j+vU8XEaqw12YBcgLk7yb0IHwxX7tLHIzHJwLuFpEhaW9OaEnV
+ 7FyomxpguvVgUMsclvBp1zRMEOqJOdPIWHHfiiYFXE4WmVoQo64FHQUQJ0fPU7kq/EoS
+ LV3g==
+X-Gm-Message-State: AOAM532bNP9DTWCdYxPcfZPWhaca0wKI2VFf8i7pHt95CNehYid9UytI
+ DQS7VdB9n0jbqKwoWvhnxuIpZXPzixanzGjRMWMXLC6HcOlyge4BCHYwCFISDgs0Mk7jrKvbcl0
+ hFwsAO/uNNvQNenKsAPYSseTJdeIKnYmHCgI6WJEhhbDe
+X-Received: by 2002:a17:90b:3758:: with SMTP id
+ ne24mr2323968pjb.218.1629187213950; 
+ Tue, 17 Aug 2021 01:00:13 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzYHvtW57SNo+d3/g9Ilcc1AQsUvWm5rvQ4OlOL53ThJX41h+QR4WVL8yT63DPBIHnZth4Fgzs+bCQODw3kKH0=
+X-Received: by 2002:a17:90b:3758:: with SMTP id
+ ne24mr2323932pjb.218.1629187213477; 
+ Tue, 17 Aug 2021 01:00:13 -0700 (PDT)
+MIME-Version: 1.0
+Date: Tue, 17 Aug 2021 10:00:02 +0200
+Message-ID: <CAEcb10tURuNjrFxj5CrMqQVkaSbU3feRnmp+GDD7S7kD+oHnGg@mail.gmail.com>
+Subject: Why the communication between winbindd child and DC is not
+ asynchronous?
+To: samba-technical@lists.samba.org
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pfilipen@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+X-Warn: TLS-SNI hr1.samba.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <2c25a430e58843346158c4a3f809dc197df62316.camel@samba.org>
-References: <!&!AAAAAAAAAAAYAAAAAAAAAGDYSmKIm/dOkx5/FTTl6NSCgAAAEAAAALDNuoTUz2BEvIzum5zYFuMBAAAAAA==@sapo.pt>
-X-Priority: 3 (Normal)
-X-Mailer: Zarafa 6.30.19-25148
-Thread-Index: AdeTNfslOrYLDmeCQ6Oz5C5dQg5Gng==
-Message-Id: <vmime.611b5f41.4750.487454c74d69d4d1@ms249-lin-003.rotterdam.bazuin.nl>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,90 +89,226 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
-Cc: "=?windows-1252?Q?samba-technical=40lists.samba.org?="
- <samba-technical@lists.samba.org>
+From: Pavel Filipensky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Filipensky <pfilipen@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hai,=20
+Hi,
+
+I have noticed "winbindd: domain child [ADDOMAIN]" is able to start
+processing of the next incoming request from the main winbindd only after
+the response from the DC is received. This was reproduced in
+ad_member_idmap_rid selftest environment via running:
+
+id ADDOMAIN/user1 & id ADDOMAIN/user2 & id ADDOMAIN/user3 &
+
+To make the sequence of events clearly visible, the DC processing is made
+slower using 1 sec delay before each incoming request is started - using
+gdb breakpoint:
+
+b lsarpc__op_dispatch
+commands
+shell sleep 1
+c
+end
+
+The main winbind traces show the all incoming requests (*in:)* are
+processed within the first second (07:21:13) and the responses (*out:*) are
+coming later ((07:21:14, 07:21:15, 07:21:16):
+
+[2021/08/17 07:21:13.315813,  1, id=3D29, pid=3D1017618, effective(0, 0),
+real(0, 0), class=3Drpc_parse]
+../../librpc/ndr/ndr.c:484(ndr_print_function_debug)
+          in: struct wbint_LookupName
+[2021/08/17 07:21:13.321539,  1, id=3D32, pid=3D1017618, effective(0, 0),
+real(0, 0), class=3Drpc_parse]
+../../librpc/ndr/ndr.c:484(ndr_print_function_debug)
+          in: struct wbint_LookupName
+[2021/08/17 07:21:13.321942,  1, id=3D33, pid=3D1017618, effective(0, 0),
+real(0, 0), class=3Drpc_parse]
+../../librpc/ndr/ndr.c:484(ndr_print_function_debug)
+          in: struct wbint_LookupName
+[2021/08/17 07:21:14.524244,  1, id=3D29, pid=3D1017618, effective(0, 0),
+real(0, 0), class=3Drpc_parse]
+../../librpc/ndr/ndr.c:484(ndr_print_function_debug)
+          out: struct wbint_LookupName
+[2021/08/17 07:21:15.555467,  1, id=3D29, pid=3D1017618, effective(0, 0),
+real(0, 0), class=3Drpc_parse]
+../../librpc/ndr/ndr.c:484(ndr_print_function_debug)
+          out: struct wbint_LookupName
+[2021/08/17 07:21:16.583586,  1, id=3D29, pid=3D1017618, effective(0, 0),
+real(0, 0), class=3Drpc_parse]
+../../librpc/ndr/ndr.c:484(ndr_print_function_debug)
+          out: struct wbint_LookupName
+
+The traces from child show that the incoming request from main winbindd can
+be processed only after the response from DC is delivered:
+
+[2021/08/17 07:21:13.316195,  1, id=3D0, pid=3D1017624, effective(0, 0),
+real(0, 0), class=3Drpc_parse]
+../../librpc/ndr/ndr.c:484(ndr_print_function_debug)
+          in: struct wbint_LookupName
+[2021/08/17 07:21:14.523416,  1, id=3D0, pid=3D1017624, effective(0, 0),
+real(0, 0), class=3Drpc_parse]
+../../librpc/ndr/ndr.c:484(ndr_print_function_debug)
+          out: struct wbint_LookupName
+[2021/08/17 07:21:14.526129,  1, id=3D0, pid=3D1017624, effective(0, 0),
+real(0, 0), class=3Drpc_parse]
+../../librpc/ndr/ndr.c:484(ndr_print_function_debug)
+          in: struct wbint_LookupName
+[2021/08/17 07:21:15.554392,  1, id=3D0, pid=3D1017624, effective(0, 0),
+real(0, 0), class=3Drpc_parse]
+../../librpc/ndr/ndr.c:484(ndr_print_function_debug)
+          out: struct wbint_LookupName
+[2021/08/17 07:21:15.556991,  1, id=3D0, pid=3D1017624, effective(0, 0),
+real(0, 0), class=3Drpc_parse]
+../../librpc/ndr/ndr.c:484(ndr_print_function_debug)
+          in: struct wbint_LookupName
+[2021/08/17 07:21:16.582744,  1, id=3D0, pid=3D1017624, effective(0, 0),
+real(0, 0), class=3Drpc_parse]
+../../librpc/ndr/ndr.c:484(ndr_print_function_debug)
+          out: struct wbint_LookupName
 
 
-I dont know how handles this, but Its something that happend after the renew of the certificicate.=20
-Thats where the misconfiguration is. Missing HPKP.=20
+The reason for this is that we have inner (frame #4) and outer (frame #27)
+tevent loop in the winbindd child when it waits for DC to respond. The
+outer loop used for processing of incoming requests is blocked till the
+inner loop gets the response:
 
-Certificate #1: EC 256 bits (SHA256withRSA)=20
-Serial Number=090337747cc4c9caf0ca7b0eca0f4c32a44b72
-Valid from=09Sat, 29 May 2021 05:25:24 UTC
-Valid until=09Fri, 27 Aug 2021 05:25:24 UTC (expires in 9 days, 22 hours)
-This one  PIN:  DT/SApt3dPXAcaf9rnVmi2YbmxUy4gHvn50WiMLNXJA=3D    Is not published.=20
+#0  epoll_wait () from /lib64/libc.so.6
+#1  epoll_event_loop (epoll_ev=3D0x5619e41014c0, tvalp=3D0x7ffc90bb0ed0) at
+glib/tevent/tevent_epoll.c:650
+#2  epoll_event_loop_once (ev=3D0x5619e4199940, location=3D0x7f832cdb19e0
+"glib/tevent/tevent_req.c:300") at glib/tevent/tevent_epoll.c:937
+#3  std_event_loop_once (ev=3D0x5619e4199940, location=3D0x7f832cdb19e0
+"glib/tevent/tevent_req.c:300") at glib/tevent/tevent_standard.c:110
+#4  _tevent_loop_once (ev=3D0x5619e4199940, location=3D0x7f832cdb19e0
+"glib/tevent/tevent_req.c:300") at glib/tevent/tevent.c:790
+#5  tevent_req_poll (req=3D0x5619e418c5e0, ev=3D0x5619e4199940) at
+glib/tevent/tevent_req.c:300
+#6  tevent_req_poll_ntstatus (req=3D0x5619e418c5e0, ev=3D0x5619e4199940,
+status=3D0x7ffc90bb1024) at glib/util/tevent_ntstatus.c:109
+#7  dcerpc_binding_handle_call (h=3D0x5619e4199730, object=3D0x0,
+table=3D0x7f832c0e4340 <ndr_table_lsarpc>, opnum=3D77, r_mem=3D0x5619e411bd=
+c0,
+r_ptr=3D0x7ffc90bb10d0) at glibrpc/rpc/binding_handle.c:560
+#8  dcerpc_lsa_LookupNames4_r (h=3D0x5619e4199730, mem_ctx=3D0x5619e411bdc0=
+,
+r=3D0x7ffc90bb10d0) at librpc/gen_ndr/ndr_lsa_c.c:13483
+#9  dcerpc_lsa_LookupNames4 (h=3D0x5619e4199730, mem_ctx=3D0x5619e411bdc0,
+_num_names=3D1, _names=3D0x5619e4199530, _domains=3D0x7ffc90bb11c8,
+_sids=3D0x7ffc90bb11a0, _level=3DLSA_LOOKUP_NAMES_DOMAINS_ONLY,
+_count=3D0x7ffc90bb119c,
+_lookup_options=3DLSA_LOOKUP_OPTION_SEARCH_ISOLATED_NAMES,
+_client_revision=3DLSA_CLIENT_REVISION_2, result=3D0x7ffc90bb1280) at
+librpc/gen_ndr/ndr_lsa_c.c:13645
+#10 dcerpc_lsa_lookup_names_generic (h=3D0x5619e4199730,
+mem_ctx=3D0x5619e411bdc0, pol=3D0x7ffc90bb1260, num_names=3D1,
+names=3D0x7ffc90bb1310, dom_names=3D0x7ffc90bb1308,
+level=3DLSA_LOOKUP_NAMES_DOMAINS_ONLY, sids=3D0x7ffc90bb1320,
+types=3D0x7ffc90bb1318, use_lookupnames4=3Dtrue, presult=3D0x7ffc90bb1280) =
+at
+gsource3/rpc_client/cli_lsarpc.c:588
+#11 winbindd_lookup_names (mem_ctx=3D0x5619e411bdc0, domain=3D0x5619e410963=
+0,
+num_names=3D1, names=3D0x7ffc90bb1310, domains=3D0x7ffc90bb1308,
+sids=3D0x7ffc90bb1320, types=3D0x7ffc90bb1318) at
+gsource3/winbindd/winbindd_msrpc.c:1021
+#12 msrpc_name_to_sid (domain=3D0x5619e4109630, mem_ctx=3D0x5619e411bdc0,
+domain_name=3D0x5619e417fa00 "ADDOMAIN", name=3D0x5619e4177330 "BOB5", flag=
+s=3D8,
+pdom_name=3D0x7ffc90bb1448, sid=3D0x5619e4107520, type=3D0x5619e417a6c0) at
+gsource3/winbindd/winbindd_msrpc.c:264
+#13 name_to_sid (domain=3D0x5619e4109630, mem_ctx=3D0x5619e411bdc0,
+domain_name=3D0x5619e417fa00 "ADDOMAIN", name=3D0x5619e4177330 "BOB5", flag=
+s=3D8,
+pdom_name=3D0x7ffc90bb1448, sid=3D0x5619e4107520, type=3D0x5619e417a6c0) at
+gsource3/winbindd/winbindd_ads.c:569
+#14 name_to_sid (domain=3D0x5619e4109630, mem_ctx=3D0x5619e411bdc0,
+domain_name=3D0x5619e417fa00 "ADDOMAIN", name=3D0x5619e4177330 "BOB5", flag=
+s=3D8,
+pdom_name=3D0x7ffc90bb1448, sid=3D0x5619e4107520, type=3D0x5619e417a6c0) at
+gsource3/winbindd/winbindd_reconnect_ads.c:146
+#15 wb_cache_name_to_sid (domain=3D0x5619e4109630, mem_ctx=3D0x5619e411bdc0=
+,
+domain_name=3D0x5619e417fa00 "ADDOMAIN", name=3D0x5619e4177330 "BOB5", flag=
+s=3D8,
+sid=3D0x5619e4107520, type=3D0x5619e417a6c0) at
+gsource3/winbindd/winbindd_cache.c:1803
+#16 _wbint_LookupName (p=3D0x5619e4119f50, r=3D0x5619e411c7a0) at
+gsource3/winbindd/winbindd_dual_srv.c:142
+#17 winbind__op_dispatch_internal (dce_call=3D0x5619e411bdc0,
+mem_ctx=3D0x5619e411bdc0, r=3D0x5619e411c7a0,
+dispatch=3DS3COMPAT_RPC_DISPATCH_INTERNAL) at
+./librpc/gen_ndr/ndr_winbind_scompat.c:186
+#18 winbind__op_local (dce_call=3D0x5619e411bdc0, mem_ctx=3D0x5619e411bdc0,
+r=3D0x5619e411c7a0) at ./librpc/gen_ndr/ndr_winbind_scompat.c:876
+#19 dcesrv_call_dispatch_local (call=3D0x5619e411bdc0) at
+glibrpc/rpc/dcesrv_core.c:2983
+#20 winbindd_dual_ndrcmd (domain=3D0x5619e4109630, state=3D0x7ffc90bb3108) =
+at
+gsource3/winbindd/winbindd_dual_ndr.c:553
+#21 child_process_request (child=3D0x5619e4109890, state=3D0x7ffc90bb3108) =
+at
+gsource3/winbindd/winbindd_dual.c:791
+#22 child_handler (ev=3D0x5619e40e73b0, fde=3D0x5619e411c580, flags=3D1,
+private_data=3D0x7ffc90bb3100) at gsource3/winbindd/winbindd_dual.c:1669
+#23 tevent_common_invoke_fd_handler (fde=3D0x5619e411c580, flags=3D1,
+removed=3D0x0) at glib/tevent/tevent_fd.c:142
+#24 epoll_event_loop (epoll_ev=3D0x5619e4109410, tvalp=3D0x7ffc90bb1820) at
+glib/tevent/tevent_epoll.c:736
+#25 epoll_event_loop_once (ev=3D0x5619e40e73b0, location=3D0x5619e3a3ffb8
+"gsource3/winbindd/winbindd_dual.c:1896") at glib/tevent/tevent_epoll.c:937
+#26 std_event_loop_once (ev=3D0x5619e40e73b0, location=3D0x5619e3a3ffb8
+"gsource3/winbindd/winbindd_dual.c:1896") at
+glib/tevent/tevent_standard.c:110
+#27 _tevent_loop_once (ev=3D0x5619e40e73b0, location=3D0x5619e3a3ffb8
+"gsource3/winbindd/winbindd_dual.c:1896") at glib/tevent/tevent.c:790
+#28 fork_domain_child (child=3D0x5619e4109890) at
+gsource3/winbindd/winbindd_dual.c:1896
+#29 wb_child_request_waited (subreq=3D0x0) at
+gsource3/winbindd/winbindd_dual.c:271
+#30 _tevent_req_notify_callback (req=3D0x5619e411cac0,
+location=3D0x7f832cdb1790 "glib/tevent/tevent_queue.c:355") at
+glib/tevent/tevent_req.c:141
+#31 tevent_req_finish (req=3D0x5619e411cac0, state=3DTEVENT_REQ_DONE,
+location=3D0x7f832cdb1790 "glib/tevent/tevent_queue.c:355") at
+glib/tevent/tevent_req.c:193
+#32 _tevent_req_done (req=3D0x5619e411cac0, location=3D0x7f832cdb1790
+"glib/tevent/tevent_queue.c:355") at glib/tevent/tevent_req.c:199
+#33 tevent_queue_wait_trigger (req=3D0x5619e411cac0, private_data=3D0x0) at
+glib/tevent/tevent_queue.c:355
+#34 tevent_queue_immediate_trigger (ev=3D0x5619e40e73b0, im=3D0x5619e410a32=
+0,
+private_data=3D0x5619e410a280) at glib/tevent/tevent_queue.c:149
+#35 tevent_common_invoke_immediate_handler (im=3D0x5619e410a320, removed=3D=
+0x0)
+at glib/tevent/tevent_immediate.c:190
+#36 tevent_common_loop_immediate (ev=3D0x5619e40e73b0) at
+glib/tevent/tevent_immediate.c:236
+#37 epoll_event_loop_once (ev=3D0x5619e40e73b0, location=3D0x5619e3a13900
+"gsource3/winbindd/winbindd.c:2030") at glib/tevent/tevent_epoll.c:918
+#38 std_event_loop_once (ev=3D0x5619e40e73b0, location=3D0x5619e3a13900
+"gsource3/winbindd/winbindd.c:2030") at glib/tevent/tevent_standard.c:110
+#39 _tevent_loop_once (ev=3D0x5619e40e73b0, location=3D0x5619e3a13900
+"gsource3/winbindd/winbindd.c:2030") at glib/tevent/tevent.c:790
+#40 main (argc=3D7, argv=3D0x7ffc90bb3868) at gsource3/winbindd/winbindd.c:=
+2030
 
 
-Certificate #2: RSA 3072 bits (SHA256withRSA)
-Serial Number=09041aae8a416f93319ff53f29bd2eb6b41d84
-Valid from=09Sat, 31 Jul 2021 05:25:22 UTC
-Valid until=09Fri, 29 Oct 2021 05:25:20 UTC (expires in 2 months and 11 days)
-Pin :  jQJTbIh0grw0/1TkHSumWb+Fs0Ggogr621gT3PvPKG0=3D is published.=20
+I assume that this is an unwanted situation, since the purpose of tevent
+library is to achieve asynchronous communication, or? Can we get rid of the
+inner tevent loop which starts in dcerpc_binding_handle_call()? I am
+wondering what is this TODO comment (from commit 4030bc9b) about:
 
-And with pinning HSTS used and DNS CAA, this is what i would look at first.
+528 NTSTATUS dcerpc_binding_handle_call(struct dcerpc_binding_handle *h,
 
-Published PIN's
-pin-sha256: YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg=3D
-pin-sha256: jQJTbIh0grw0/1TkHSumWb+Fs0Ggogr621gT3PvPKG0=3D
-pin-sha256: J2/oqMTsdhFWW/n85tys6b4yDBtb6idZayIEBx7QTxA=3D
-
-
-So why we have errors in "some" browers, these browsers enforce/follow the best settings,
-Just, these have errors, so we see these.=20
+...
+541 =C2=BB=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7/ * TODO: allow only on=
+e sync call
 
 
 
-Greetz,=20
 
-Louis
-
-=20
-
-> -----Oorspronkelijk bericht-----
-> Van: samba [mailto:samba-bounces@lists.samba.org] Namens=20
-> Andrew Bartlett via samba
-> Verzonden: dinsdag 17 augustus 2021 1:14
-> Aan: miguel medalha; samba@lists.samba.org
-> Onderwerp: Re: [Samba] wiki returns ERR_HTTP2_PROTOCOL_ERROR
->=20
-> On Mon, 2021-08-16 at 23:03 +0100, miguel medalha via samba wrote:
-> > > I went to access the wiki and it is returning
-> > > the error ERR_HTTP2_PROTOCOL_ERROR.
-> >=20
-> > It works here with curl 7.29.0 and 7.19.7
-> >=20
-> > Works with Firefox 91.0
-> >=20
-> > Doesn't work with any browser based on Chrome:
-> > -- Chrome  92.0.4515.131
-> > -- Edge 92.0.902.73
-> > -- Brave 1.28.105 Chromium: 92.0.4515.131
->=20
-> Thanks everyone for the report.  I'll mention this thread to our
-> sysadmin team.  Our sysadmins operate on EU time so hopefully they can
-> deal with it in the next EU day.
->=20
-> Andrew,
->=20
-> --=20
-> Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-> Samba Team Member (since 2001) https://samba.org
-> Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
->=20
-> Samba Development and Support, Catalyst IT - Expert Open Source
-> Solutions
->=20
->=20
-> --=20
-> To unsubscribe from this list go to the following URL and read the
-> instructions:  https://lists.samba.org/mailman/options/samba
->=20
->=20
-
-
+Pavel
