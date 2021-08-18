@@ -2,58 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0DF133EF835
-	for <lists+samba-technical@lfdr.de>; Wed, 18 Aug 2021 04:47:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 952E53F0462
+	for <lists+samba-technical@lfdr.de>; Wed, 18 Aug 2021 15:12:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=RWmXHWwVFrhlQDHC2rVDGYKlpIeA9JdQ6DniyzAK9as=; b=dYHKeS7gBhcW7dSMMg7T1SBUIb
-	ibP3e+1AGUza7KX13ltX1Sx7v6tMAFXJyd7XMHz6FzeH/+HUSJj9oez3yVkbpKjD7IoerfoCzaUt6
-	FNujhrbejWQs7nC0hg8eFaj18pnYKq6RB2zK8iBNpERSma+0VcHFCgmMijXodxyetY3hIH4B1UKyL
-	j+ONYqFHxrFyAJ/kIGH3ggIkN4Isv3/6OjXajCFn0uPaHKEpuoilWg374JLKK9uv6cqRDveak85NW
-	9PhuMGtm05cFV1Yri3KQDQ8HQI2QXE2FaZnViIc5ttuGhItMekDVasviQGDn7/bBdraldTEy5hV/S
-	zUb49K3w==;
-Received: from ip6-localhost ([::1]:56864 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=nJ8ZUocqrMYi1Q38y0gjajKOP8tAqNNOoG14e8Z9VjY=; b=b0D0i7JfJquge4acLBTookNAzo
+	WxhbswzJ3OuoCxW9wQzUJrfwzGhXCkurfKrxNzQfzl8r6l1rIPvEqSqKHLgpEbLdW8TIRjS3vfz4U
+	MOxDb3SjUZxtE0r6c7WhRYEk5hT8s8u5jJB+j5TMQBguB/mxxOkHUqgHfMtFSPTwI9jSey/1085+t
+	L51BaXxzSyQ/kTqDtB8dtuTes6zOZHlzN75jWSHlJC24PhNxmQUZ10OFKrtKc/PU+DWTUxhomWIIj
+	bG8EwU31IE5a3xVAYqzPAabEQDzOhBjGAhh9DVzB/JomQauDYB2uPQHXYBqB30TqZerHmSOYeR0e7
+	uJdfI2Vg==;
+Received: from ip6-localhost ([::1]:29572 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mGBbV-007El3-M4; Wed, 18 Aug 2021 02:46:57 +0000
-Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d]:44907) 
+	id 1mGLLn-007T7b-Hw; Wed, 18 Aug 2021 13:11:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64502) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mGBbO-007EjS-Fu
- for samba-technical@lists.samba.org; Wed, 18 Aug 2021 02:46:53 +0000
-Received: by mail-lj1-x22d.google.com with SMTP id s3so2227826ljp.11
- for <samba-technical@lists.samba.org>; Tue, 17 Aug 2021 19:46:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=RWmXHWwVFrhlQDHC2rVDGYKlpIeA9JdQ6DniyzAK9as=;
- b=qh1RLH0Gd1nVywJwS084M5nIdCuU3fLrE9me78hJx6YJWUywAhES+Rv22p+/SPc1fL
- 9o4aeQ5FiuDpY9zA9fe7S7dVA4fZUyI0E4Ck5FCqY8OVxp4fGUDqm72VfRFfCvL7da0s
- 4gfx8Sp6sXTCSvkI+kKDtqnennbd/VEodL+hFPm8gJTXqV7kaQYtgFavrFzglcF1/0lP
- 6wjk56Z64KV378ezVD85SjvFX3TL1C1oxgjDzi6C/yhxLPewDD/qTijgJGHcgkvlRVOg
- J8Aqjwzc0qVGN8vltM4wiET4xJtYKs6RgUEE+GaZ8Dgkuw0j2UafSoX7quwlrC18yH/I
- qF4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=RWmXHWwVFrhlQDHC2rVDGYKlpIeA9JdQ6DniyzAK9as=;
- b=DSe8Z/Kxm64FRReFOoX63PD/mHvt74nbXvHBCTwX6p87Qg5Bacluhk1nuPYIs5yksm
- hbrWvReDqUNq2YLrHIjmN3sUMgMpgo48t8sheu8ZPVS/RQ13vJY4CeoY20H8K9Ho6xGV
- fjYGsiVd01xUhOgmQu749eMn28rvs8v4DMeQ8jg2JMm6Zw+vuP94jBSsRHKgaIDpR5b2
- DUflpVpFRbTcaUkt7/CkDGElpJwurU7krhfM0AGVCQuxr4pVhXkUiGJ61jdSvumdmUvk
- KM1iLdfvVqIbhCB/lgkIUOwzEfe6vQh+Q48YgdQEKrhevn1vGBWkLz+zCUklcAdUbge0
- LjNA==
-X-Gm-Message-State: AOAM532rM6bgoowtlQNlcFwPuCqye/axZ27YPOcQfdYvddrWlzbEqo/0
- 1axxVt2DgceVJs9cICOWgoA7JSFjt9cw8aaV7wI=
-X-Google-Smtp-Source: ABdhPJwslGU/+xPwEkW6sdIpppodrm2AblhgBsp9WtZcWZkLIovt/JPSv6Jr/pVskQeBDBGbAgTovI27ptCXrwwcQdc=
-X-Received: by 2002:a2e:a884:: with SMTP id m4mr5841362ljq.406.1629254809157; 
- Tue, 17 Aug 2021 19:46:49 -0700 (PDT)
+ (Exim) id 1mGLLf-007T7S-Nx
+ for samba-technical@lists.samba.org; Wed, 18 Aug 2021 13:11:21 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=nJ8ZUocqrMYi1Q38y0gjajKOP8tAqNNOoG14e8Z9VjY=; b=nx370XoEyXqDgUeo2cuI9CARzd
+ got6e7Oj/Y/KYofzZ2KkP8jr3ujhIz7jYtghWJ+AmdAFP+545sEfK4t8w8cLMrfEi8NtzKg3ywTH6
+ oeqdT4kAcGoNS0XW3tu5CV+RNkt+B+JCvJQ/mgF9txhelbRh+nLohV5DRKiLYJc1lv9r+uBD443fP
+ J09JwGTfgoO/ly6AABXpeaGkubt9RCDezklPwmfO94JJOb3Xy79gwUNDjOwOqUjcVSpQYBNf7ErqP
+ uxnHfd/ZC/K9rBBTSqHfaudhDHiP5pe8+yEfGdjMM8c675GgOkEkebSKSRnzBFmzRkfrPGJW1bOS9
+ t5wGx68wnEfcZwn7HKKsJ6XuFeyGBj9oLN+NampGbm8BQsToEoIqxXCUJavIOdVdrjl6Y9dllwDgu
+ P/aww2Bb49v+G+DraksYie2mV7EBmomdLshJlg8ftm2ZmU8Q8/wBHZIl2WZr7Ap6EQ3y29BMOVTdN
+ LMRcttlV+gwvKFEQrTfvHE5u;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mGLLe-001v6V-SX; Wed, 18 Aug 2021 13:11:14 +0000
+To: Pavel Filipensky <pfilipen@redhat.com>, samba-technical@lists.samba.org
+References: <CAEcb10tURuNjrFxj5CrMqQVkaSbU3feRnmp+GDD7S7kD+oHnGg@mail.gmail.com>
+Subject: Re: Why the communication between winbindd child and DC is not
+ asynchronous?
+Message-ID: <43369cfe-75bc-3e48-ca6e-14983e8013ae@samba.org>
+Date: Wed, 18 Aug 2021 15:11:09 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-References: <20210817102709.15046-1-len.baker@gmx.com> <87im03h9zb.fsf@cjr.nz>
-In-Reply-To: <87im03h9zb.fsf@cjr.nz>
-Date: Tue, 17 Aug 2021 21:46:38 -0500
-Message-ID: <CAH2r5mtKsjPesR6yBTO8RB=BFYc5Cb23OA_gEQyWMNrORXdavg@mail.gmail.com>
-Subject: Re: [PATCH] CIFS: Fix a potencially linear read overflow
-To: Paulo Alcantara <pc@cjr.nz>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <CAEcb10tURuNjrFxj5CrMqQVkaSbU3feRnmp+GDD7S7kD+oHnGg@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="0jU5OyRt7nSciqxgxjNslBQ76zEgS8zQA"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,45 +59,110 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Kees Cook <keescook@chromium.org>,
- Suresh Jayaraman <sjayaraman@suse.de>,
- samba-technical <samba-technical@lists.samba.org>,
- Jeff Layton <jlayton@kernel.org>, LKML <linux-kernel@vger.kernel.org>,
- Steve French <sfrench@samba.org>, Len Baker <len.baker@gmx.com>,
- linux-hardening@vger.kernel.org
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-tentatively merged into cifs-2.6.git for-next pending testing
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--0jU5OyRt7nSciqxgxjNslBQ76zEgS8zQA
+Content-Type: multipart/mixed; boundary="IT8K6OIRFD0yJF786mn16QpCsX973hdE1";
+ protected-headers="v1"
+From: Stefan Metzmacher <metze@samba.org>
+To: Pavel Filipensky <pfilipen@redhat.com>, samba-technical@lists.samba.org
+Message-ID: <43369cfe-75bc-3e48-ca6e-14983e8013ae@samba.org>
+Subject: Re: Why the communication between winbindd child and DC is not
+ asynchronous?
+References: <CAEcb10tURuNjrFxj5CrMqQVkaSbU3feRnmp+GDD7S7kD+oHnGg@mail.gmail.com>
+In-Reply-To: <CAEcb10tURuNjrFxj5CrMqQVkaSbU3feRnmp+GDD7S7kD+oHnGg@mail.gmail.com>
 
-On Tue, Aug 17, 2021 at 7:29 PM Paulo Alcantara <pc@cjr.nz> wrote:
+--IT8K6OIRFD0yJF786mn16QpCsX973hdE1
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+
+Hi Pavel,
+
+> I have noticed "winbindd: domain child [ADDOMAIN]" is able to start
+> processing of the next incoming request from the main winbindd only aft=
+er
+> the response from the DC is received. This was reproduced in
+> ad_member_idmap_rid selftest environment via running:
+>=20
+> id ADDOMAIN/user1 & id ADDOMAIN/user2 & id ADDOMAIN/user3 &
 >
-> Len Baker <len.baker@gmx.com> writes:
->
-> > strlcpy() reads the entire source buffer first. This read may exceed the
-> > destination size limit. This is both inefficient and can lead to linear
-> > read overflows if a source string is not NUL-terminated.
-> >
-> > Also, the strnlen() call does not avoid the read overflow in the strlcpy
-> > function when a not NUL-terminated string is passed.
-> >
-> > So, replace this block by a call to kstrndup() that avoids this type of
-> > overflow and does the same.
-> >
-> > Fixes: 066ce6899484d ("cifs: rename cifs_strlcpy_to_host and make it use new functions")
-> > Signed-off-by: Len Baker <len.baker@gmx.com>
-> > ---
-> >  fs/cifs/cifs_unicode.c | 9 ++-------
-> >  1 file changed, 2 insertions(+), 7 deletions(-)
->
-> Reviewed-by: Paulo Alcantara (SUSE) <pc@cjr.nz>
+> To make the sequence of events clearly visible, the DC processing is ma=
+de
+> slower using 1 sec delay before each incoming request is started - usin=
+g
+> gdb breakpoint:
+
+That's exactly the reason why we have winbindd children at all, the logic=
+
+within each child is not async at all. And we use the multiple children
+in order to be at least async in the parent.
+
+> I assume that this is an unwanted situation, since the purpose of teven=
+t
+> library is to achieve asynchronous communication, or? Can we get rid of=
+ the
+> inner tevent loop which starts in dcerpc_binding_handle_call()? I am
+> wondering what is this TODO comment (from commit 4030bc9b) about:
+>=20
+> 528 NTSTATUS dcerpc_binding_handle_call(struct dcerpc_binding_handle *h=
+,
+>=20
+> ...
+> 541 =C2=BB=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7/ * TODO: allow onl=
+y one sync call
+
+We should actually enforce dcerpc_binding_handle_call() to be not recursi=
+ve.
+In some areas (at least in the past) we had the usage of *nested* event l=
+oops,
+where tevent_loop_once() is called recursively more than once on the same=
+ stack
+on the same tevent_context structure, which leads to unpredictable result=
+s.
+But I think we need to avoid the usage of tevent_loop_allow_nesting() and=
+
+prove that everything still works, which is a very hard task to do.
+
+It would be nice to have everything async and tevent_req based in the par=
+ent
+and avoid the children completey, but the logic within the children is of=
+ten
+very complex and it would be a lot of work to rewrite it to be completely=
+
+tevent_req based.
+
+metze
 
 
+--IT8K6OIRFD0yJF786mn16QpCsX973hdE1--
 
--- 
-Thanks,
+--0jU5OyRt7nSciqxgxjNslBQ76zEgS8zQA
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-Steve
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEfFbGo3YXpfgryIw9DbX1YShpvVYFAmEdBu0ACgkQDbX1YShp
+vVZUtw/+INKyn4PA5/fu5XZP5Ztsm92mIhuhTC4nsGKNOEk3b7zw3O6DSF7i87rK
+9pChRAigh1Kjhf9ANLxoRQ0v+y0E+HA2HXQ1zvfz3tyXERIoTkA/nbs8hhkGePk6
+u7pMpjAZLv1ynI8M578YsfmSUdfJLX0B6OJkvkBWgN+16U/qJUe3r0n3cpE+0Yb9
+YB3hNnKKEWbMD8m9lgwxNWAFXKkCL4z/GcyC/RUJUP05ZYFLHtip8n/sE6rB8Osr
+2yi9qMxCVV9EHOc/lvnabaxROo4KkfT3lsxLyHYvnLxqcAr3vGJctCfxociEGAfL
+rXwEgoOTFmDQiBFx0DM5W/MiMfCtSwXS0xif3gmEaZgmprXqLZzydKl1Kf4lkBqI
+J/FC4sRHE9e90ncFBWnCR9M39fPVdWcI5Dr6IsGOE+TCyMjyWsZpPVMYZPwLn4yP
+YSQguxUNWMyPb6g4uBUiF8voRCM/5nkcE9VzdQhFqGG1ELrKd0NIN/Ea6w0N3nVz
+zQzkg88GemTGaABfQn/ZcUrewvyWDM0rds/IWS1F4LMZYaL7wf0RdUrkfH1Vn2Q6
+8anlkWn3MDuksRCqhdjAFkGhWEzbPmOq6W3fnmbeRv7dI/1VMG9cglJr2BRgCNEA
+VuJEQyXFUVQYofeXTV8IMj2MqmwBBX6n537RiVrYHIegmGCcQDs=
+=RMog
+-----END PGP SIGNATURE-----
+
+--0jU5OyRt7nSciqxgxjNslBQ76zEgS8zQA--
 
