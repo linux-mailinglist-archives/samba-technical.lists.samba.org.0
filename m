@@ -2,49 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 625403EEC7E
-	for <lists+samba-technical@lfdr.de>; Tue, 17 Aug 2021 14:33:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8F5B3EF6FD
+	for <lists+samba-technical@lfdr.de>; Wed, 18 Aug 2021 02:45:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=Dje5o93tR2YR92jp+vOKa0R8FZouXgeIGtxUDdJLWk4=; b=JPgqcbmSD96V7gadyiRnhJ350b
-	r1PyGsdXLrhikOb1G0DTPwCZYzdU/tu02z0NIYwKn1CJKKAw/tXeKExunuILUyMfI8ycUjJyZGGUt
-	6WKctmnjdvZDjZT4bW+AGZWRTKescqI1yf6bRSuvR2G5Le9/+sBVQKp4BX6V7eEmqxu0AdyZvrJVF
-	GGx6zyDUab9rvhV3s6jgRWOL+9QLA/qpbDHADb3rz/ucoJVZVFyX4hHYudZLshk23GIpP1D+o4Gy7
-	QK7XPDWNkkLqMZJvfYrEU4tcjTJ1MDMHNxaC87X0dXlbAWaCrtCAt+XE4b5Cp4VwGg2gneQGeq78/
-	h/v0yFRA==;
-Received: from ip6-localhost ([::1]:25572 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=yYTI8eHnDRDCuYc0EGEyTDS9vWJeBebzaFZ1mBVnpqY=; b=RA72JWxk5zYSkPf6Yg2y959S2C
+	cyTXC9u0WwnVbsyHOBFiXodpe03v6CL85jE8KB+yV8T4uYqwyp1Inh5Av+6lAf3E5Xs/8Lpv5ywq7
+	Av3+iSBhfRE2on+HjB54C8p7tn1aSWxzTICGawV4lY21oh3J6mQDCfrPMqbZdmrWFFmdKmN5kYdp7
+	05mojQYAJSMreUb8sdXS1ZvlzX88zs5rl9fmW1LUrkH1TiH65B1FBeQq15pQ6rXvQuAu5ZPntQTzj
+	0paPuA7IIUBfxRS1vFRv8NbV8MKfAYk3DCskw7mVFN/KvcV52oF3TlPbHkMrdS9TbHsYgZu6s6PNK
+	3AUq380g==;
+Received: from ip6-localhost ([::1]:55976 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mFyGe-006v7h-I3; Tue, 17 Aug 2021 12:32:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14250) 
+	id 1mG9hw-007DNG-T6; Wed, 18 Aug 2021 00:45:28 +0000
+Received: from mx.cjr.nz ([51.158.111.142]:61518) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mFyGX-006v7Y-GK
- for samba-technical@lists.samba.org; Tue, 17 Aug 2021 12:32:29 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=AabKs1F/Nfk5D8MuCLa7EKSJYBd2TuY1kP6HblqErrM=; b=H1pk4jg/FZILWkaUpPpJAEbcVd
- LrSugPFz4VJ9wSlvJsaGdQ/WASHH9J0VFg0clVUqV5sraX88nb/q8Uiw4RFVnZp6IHdtjRq49WeFG
- 6x/XYkoRvbk/eG3CruJbqNtt6Ky8QB3g9gZCT7COExZOnkFLVkMjWlae0to6CsHA4Nvm6XEnWQjyh
- TvSFYKmS8ZJfr9nBe56FiJRnZ3B7dX0PFbwxXXw4cJjddrlAVGwWlMbvjlJIBjahCD5SBrR3LTQOQ
- ifMdxEY9GvnfGfRSF5JJkLV4e13itE8Ip50AzMDwZ3R0HKyXejTa5SmsdtW3otucUBW0SoQ5emNlx
- Dq1hhJ6gJ4FUi+ahh8Lm3veKIZonE0XQBD9EfTIaXY1TKqmeeuYCLdiJWXdayo7dLtAwzlktllxyB
- q92Je7EaN2HLOxV0+Niqom4jFxdOHvc+OifybMIh9lnJCmDQW4d4CFOKkQMH3aGcGh6pwclTRvVif
- +JNT8Y756tASHhh8mq1Obppd;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mFyGW-001kKN-VM
- for samba-technical@lists.samba.org; Tue, 17 Aug 2021 12:32:25 +0000
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.14] Freezing release branch today
-Message-ID: <e229bc72-e0b6-b28b-3b86-bccb224f0e5c@samba.org>
-Date: Tue, 17 Aug 2021 14:32:24 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ (Exim) id 1mG9hp-007DN7-Fp
+ for samba-technical@lists.samba.org; Wed, 18 Aug 2021 00:45:26 +0000
+Received: from authenticated-user (mx.cjr.nz [51.158.111.142])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested) (Authenticated sender: pc)
+ by mx.cjr.nz (Postfix) with ESMTPSA id B14107FF6C;
+ Wed, 18 Aug 2021 00:28:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz; s=dkim;
+ t=1629246526;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=yYTI8eHnDRDCuYc0EGEyTDS9vWJeBebzaFZ1mBVnpqY=;
+ b=xNEqtCdNo1Bd1VWZ/z76niW2n6KK3nCMJn5Fm85WH/4+CKIoq/P8l9ZdFpVYnC8IL0TXYd
+ ykoUecU2BuAcbcK67sNJDOp6MCi5Yo4jC7K8SQxW6ZKxtrgWOSdrY/eDD9nD5/WxY3T5Ey
+ 8rhteKBABaNAqecGtYHiYnKxO05MYx/1BivgfstsSYxcn7dRZ+VZf5O7deyzQnd7rhIhMP
+ Zp91ff3F14rrQ684DPL1P7jwBzZ2uWpBIBBOyCzSKFOATOlVKGOA5dIXLkCvs2n/SNc56X
+ QA64M8ytvh/1Qe1ONobUGi8H4A/l28GLROWnvMZpicbq+KOPYg3RJhw8OOHnsg==
+To: Len Baker <len.baker@gmx.com>, Steve French <sfrench@samba.org>, Jeff
+ Layton <jlayton@kernel.org>, Suresh Jayaraman <sjayaraman@suse.de>
+Subject: Re: [PATCH] CIFS: Fix a potencially linear read overflow
+In-Reply-To: <20210817102709.15046-1-len.baker@gmx.com>
+References: <20210817102709.15046-1-len.baker@gmx.com>
+Date: Tue, 17 Aug 2021 21:28:40 -0300
+Message-ID: <87im03h9zb.fsf@cjr.nz>
 MIME-Version: 1.0
-Content-Language: en-US
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,16 +58,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Paulo Alcantara <pc@cjr.nz>
+Cc: linux-cifs@vger.kernel.org, Kees Cook <keescook@chromium.org>,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ Len Baker <len.baker@gmx.com>, linux-hardening@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+Len Baker <len.baker@gmx.com> writes:
 
-this is just a heads-up that the 4.14 branch will be frozen today,
-because Samba 4.14.7 will be released on Tuesday, August 24.
+> strlcpy() reads the entire source buffer first. This read may exceed the
+> destination size limit. This is both inefficient and can lead to linear
+> read overflows if a source string is not NUL-terminated.
+>
+> Also, the strnlen() call does not avoid the read overflow in the strlcpy
+> function when a not NUL-terminated string is passed.
+>
+> So, replace this block by a call to kstrndup() that avoids this type of
+> overflow and does the same.
+>
+> Fixes: 066ce6899484d ("cifs: rename cifs_strlcpy_to_host and make it use new functions")
+> Signed-off-by: Len Baker <len.baker@gmx.com>
+> ---
+>  fs/cifs/cifs_unicode.c | 9 ++-------
+>  1 file changed, 2 insertions(+), 7 deletions(-)
 
-Cheers,
-Jule
+Reviewed-by: Paulo Alcantara (SUSE) <pc@cjr.nz>
 
