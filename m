@@ -2,59 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D0443F2695
-	for <lists+samba-technical@lfdr.de>; Fri, 20 Aug 2021 08:00:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E599D3F3742
+	for <lists+samba-technical@lfdr.de>; Sat, 21 Aug 2021 01:20:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=48Hb/Qgy2m5wWev5VsfncYKR1cJzadSWEDW/hiW1JKE=; b=jfCrrowYXnuaM8d4scUyhGrSXM
-	NQoYoXWGoe/dmBq+Ob5utV7ce2X3Ee2qkeF1sAVW3ezIVn+mBUU7gO1RLLNMshVriS6ZbBh8oCbdo
-	DxvsJHn/enYMVEKHK324jn0c2J2a9S/6xZQXRPkHVOfjxc2i7Jx+3++Zg1y+whWWvHGKq+zRGsD+I
-	HdXRuwX3y5Ol9lvxfxnDEuZIr2nEE0CTf/GmaZsNNaVRLDemx7L83XwrpZqLKddjin554XUJw1V9H
-	9I8qK6We9zNpJWh6ozL4MwVY83tbA23T69hHByzCEeLs7jcjdO1bWR7pvzMgwx4ZUWwJ1XAmP1bgV
-	ghw9990w==;
-Received: from ip6-localhost ([::1]:61018 helo=hr1.samba.org) 
+	bh=injNyqk0O05AWAjdLiK5Yd2rg5V8yrPBZJK/UIJi/0o=; b=myNTEGT+s2cUkaU+KChSAA9E1/
+	a1mbdQ2WrnaP50xFMi+ITDRDXkuPh41dSWj2NzTu53aXoY/78lvQXvp7Xx8qfmhtlPYHJQu5aF4IR
+	42T1ItgaBqTUAaAXRQclSBfjqLGzBFPLYDWdOVxfYyLyCMYiJ8TSIHZHY7KTvpeYW8y9mav8hqJ6v
+	Qooxbya+o/ZovVCF1PxyM5k5xEEBRk5x7QvFjSHpszWTuLRAU487j575zHp++BDPgtG0C15ABzKmP
+	qh9LDffoGIE6pwjMyoce2S4RzMYVs090FTm3U51GcQ3AmYary3HAADc7GgvoAjnbanQHpBHGO0lK9
+	fBhh647A==;
+Received: from ip6-localhost ([::1]:38594 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mGxYc-0086mM-4V; Fri, 20 Aug 2021 05:59:10 +0000
-Received: from mail-lj1-x230.google.com ([2a00:1450:4864:20::230]:34569) 
+	id 1mHDn5-008JxS-Qb; Fri, 20 Aug 2021 23:19:11 +0000
+Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232]:44748) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mGxYV-0086mD-9h
- for samba-technical@lists.samba.org; Fri, 20 Aug 2021 05:59:05 +0000
-Received: by mail-lj1-x230.google.com with SMTP id f2so15485557ljn.1
- for <samba-technical@lists.samba.org>; Thu, 19 Aug 2021 22:59:02 -0700 (PDT)
+ (Exim) id 1mHDmz-008JxI-Ni
+ for samba-technical@lists.samba.org; Fri, 20 Aug 2021 23:19:08 +0000
+Received: by mail-lj1-x232.google.com with SMTP id s3so19642514ljp.11
+ for <samba-technical@lists.samba.org>; Fri, 20 Aug 2021 16:19:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=48Hb/Qgy2m5wWev5VsfncYKR1cJzadSWEDW/hiW1JKE=;
- b=uU6/WcBRyLDu0UTuJ8Px/JqtCnevMORcSNmDk1Xqt0LVStFW3tSw6p+WwlTt7j48Wk
- hlJ6rviDndHRe9M8CyNHjlCDqvPtc3wsKEaDKi4lcmDG02yRpq6QgDrVo41ApjAYeNuw
- CV5jcXpcEBBy9Zf7ilQd7SqCEHtOjD82AkPGc9fN8EdAnhf3z8rmoxfwo+h6Sf+r26kU
- DUaCMI7TACT7qoWCB3+6xDBE/p3ty5dIkel8Vm+WWENUNrzFlxRGgILdfMx69jYjn3I7
- FvcOmHHMFA6+uHEopjdtF86P0Um69G3GtgJCW9ZTRFwzFEr4Ga0UgwaUZy4TK4GdDi2+
- PtTQ==
+ h=mime-version:from:date:message-id:subject:to:cc;
+ bh=injNyqk0O05AWAjdLiK5Yd2rg5V8yrPBZJK/UIJi/0o=;
+ b=OhxktmJd+PAjFzfrGtZaXuFU/maWnJT19lhfCcPO/L8J8X+Oo/ESSzcDGrn4sYcoMk
+ kPS4N3xChJi2pDtasRzktUbuMMqZXEAJPH8gLv6BXeGnRaW7cJjI0LMtaezF1G9bH6lU
+ WzkRpPRR6a7udCiBtXnRy/ybXzqlb65uC3/GWpQA/G+d4DsX4AFUmkxAtyWV9iaVkSzj
+ CcGrhkBuVfsY4013/Bft+F+a4d3+G6z0bkGvNKhmeFdCMacMv7WTHpC/zfDTgyF/6PXk
+ DwUdQcy3j3prh7pR1+s7zLIyIPMDjfC8htOkA5m+1sHQV4Rvdea7qOOnjpTGzTXt8lzE
+ RaYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=48Hb/Qgy2m5wWev5VsfncYKR1cJzadSWEDW/hiW1JKE=;
- b=uVOC4LwD4/LUDZa+cF9wkjtzujB45jXCADfAzyAyntdym9OotK9L4EjIE8swQrtKn0
- Uksetrrajz3p6/P3C1Hcl+ThxCaGn7gdDjeF7s4BCjwrGWl/mAMqqsThGbYDgq6P/bYU
- n/axsaTrf0Qkeoj0vzN251y3tQamhIEDbUQsvXDhhhgM2bJbTSvmFyXteK5xfT+J465r
- I42LK+1ArWL3kc3i+9PSmUtdH2jlaYKSEkLm3B5mMQkfhATrC96S1RozOcPkgOgMddeL
- p0Y9GSlaVV7pMUjxY3+n6skOLDvBoieB4zY4dDgbLhg3df+rYpAojs6/f1LuLYw8ogjc
- MNng==
-X-Gm-Message-State: AOAM532SD1JV5zHevIlCV+pFr3vzWdGGLfDQJXDFqdKldsQTEIRj23hr
- phMDSnkXus0ijbpi2Sco6AVf3RLFOt87mA7o5OE=
-X-Google-Smtp-Source: ABdhPJxJFkEicXBCXcmKO2Qb4x3gTqTvh9KLsu8FLi/awHbRkJtOze0bMErSZYFBjVjGftgdeiVuv7cPIHgvjUQMktI=
-X-Received: by 2002:a2e:2417:: with SMTP id k23mr14866266ljk.256.1629439141581; 
- Thu, 19 Aug 2021 22:59:01 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+ bh=injNyqk0O05AWAjdLiK5Yd2rg5V8yrPBZJK/UIJi/0o=;
+ b=jQde+pu78evgeyQFJoN/QKPy4comniwFibOa7nS0KhsN23/OKJJAJccGIMlr+4s0zr
+ nMWSCzm8gS7yhVp1hvJVp5RVTP7i8E3ykhqGO/Tr1bK+1hJZ+K9EndKH7NSa6nr6yRZx
+ 2QxWlIYQk0mOCts6CggYKq7IoL3BZ1Pj2D/cril0W8na48VhGsBlbl2k1nbblEL1RoJ7
+ 89Jjz2azuXkRBNpdXjZLnyAr1Y9xh3Mo/L1wFZ+37HlrsEk6FYGMcsDY6bromP9sJSe+
+ V2pwczI4ECcavhKmVgRzxvldWegzWE4dBxKHsLCKTs5YsIWfJne/GgKmmupjvmMCr1bL
+ 7IYA==
+X-Gm-Message-State: AOAM533Ey1MY0eOeoUN0v8RcVr3Hi171s+NexhfHZckX0IUTwNdOhyGS
+ fKlAuekR5etmfgo2qi4AKUNnPTVLmpFF4BuZpZQ=
+X-Google-Smtp-Source: ABdhPJzyeII4XBwTu1jh+7vIYJxM4YYTmKb9f2YNy+vDAz9XkX6KruBe+a/aKqw7IhEh0xoyZPVueZ3V2sNx4Y8AX0k=
+X-Received: by 2002:a2e:2417:: with SMTP id k23mr17886463ljk.256.1629501541700; 
+ Fri, 20 Aug 2021 16:19:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210817102709.15046-1-len.baker@gmx.com>
- <2f3a644e279a8a0933343339fa0add8e76276bf8.camel@kernel.org>
-In-Reply-To: <2f3a644e279a8a0933343339fa0add8e76276bf8.camel@kernel.org>
-Date: Fri, 20 Aug 2021 00:58:50 -0500
-Message-ID: <CAH2r5msKF-YZsmWEwqZZEn2ibooEOtFm7khvSnhD9uOidNycew@mail.gmail.com>
-Subject: Re: [PATCH] CIFS: Fix a potencially linear read overflow
-To: Jeff Layton <jlayton@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Date: Fri, 20 Aug 2021 18:18:50 -0500
+Message-ID: <CAH2r5mvxX6BqLvgWO18QE+rQsAZoAzopvu5S3fyy45a+Y-w_MQ@mail.gmail.com>
+Subject: [PATCH] oid_registry: Add OIDs for missing Spnego auth mechanisms to
+ Macs
+To: CIFS <linux-cifs@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>, 
+ David Howells <dhowells@redhat.com>
+Content-Type: multipart/mixed; boundary="0000000000008def7405ca05e408"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,66 +68,84 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Kees Cook <keescook@chromium.org>,
- Suresh Jayaraman <sjayaraman@suse.de>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Steve French <sfrench@samba.org>,
- Len Baker <len.baker@gmx.com>, linux-hardening@vger.kernel.org
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Added RB and repushed to cifs-2.6.git for-next
+--0000000000008def7405ca05e408
+Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Aug 18, 2021 at 8:22 AM Jeff Layton <jlayton@kernel.org> wrote:
->
-> On Tue, 2021-08-17 at 12:27 +0200, Len Baker wrote:
-> > strlcpy() reads the entire source buffer first. This read may exceed the
-> > destination size limit. This is both inefficient and can lead to linear
-> > read overflows if a source string is not NUL-terminated.
-> >
-> > Also, the strnlen() call does not avoid the read overflow in the strlcpy
-> > function when a not NUL-terminated string is passed.
-> >
-> > So, replace this block by a call to kstrndup() that avoids this type of
-> > overflow and does the same.
-> >
-> > Fixes: 066ce6899484d ("cifs: rename cifs_strlcpy_to_host and make it use new functions")
-> > Signed-off-by: Len Baker <len.baker@gmx.com>
-> > ---
-> >  fs/cifs/cifs_unicode.c | 9 ++-------
-> >  1 file changed, 2 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/fs/cifs/cifs_unicode.c b/fs/cifs/cifs_unicode.c
-> > index 9bd03a231032..171ad8b42107 100644
-> > --- a/fs/cifs/cifs_unicode.c
-> > +++ b/fs/cifs/cifs_unicode.c
-> > @@ -358,14 +358,9 @@ cifs_strndup_from_utf16(const char *src, const int maxlen,
-> >               if (!dst)
-> >                       return NULL;
-> >               cifs_from_utf16(dst, (__le16 *) src, len, maxlen, codepage,
-> > -                            NO_MAP_UNI_RSVD);
-> > +                             NO_MAP_UNI_RSVD);
-> >       } else {
-> > -             len = strnlen(src, maxlen);
-> > -             len++;
-> > -             dst = kmalloc(len, GFP_KERNEL);
-> > -             if (!dst)
-> > -                     return NULL;
-> > -             strlcpy(dst, src, len);
-> > +             dst = kstrndup(src, maxlen, GFP_KERNEL);
-> >       }
-> >
-> >       return dst;
-> > --
-> > 2.25.1
-> >
->
-> Reviewed-by: Jeff Layton <jlayton@kernel.org>
->
+ In testing mounts to Macs, noticed that the OIDS for some
+ GSSAPI/SPNEGO auth mechanisms sent by the server were not
+ recognized and were missing from the header.
+
+ Signed-off-by: Steve French <stfrench@microsoft.com>
+
+diff --git a/include/linux/oid_registry.h b/include/linux/oid_registry.h
+index 3d8db1f6a5db..2728842721bc 100644
+--- a/include/linux/oid_registry.h
++++ b/include/linux/oid_registry.h
+@@ -70,6 +70,9 @@ enum OID {
+
+        OID_spnego,                     /* 1.3.6.1.5.5.2 */
+
++       OID_IAKerb,                     /* 1.3.6.1.5.2.5 */
++       OID_PKU2U                       /* 1.3.5.1.5.2.7 */
++       OID_Scram,                      /* 1.3.6.1.5.5.14 */
+        OID_certAuthInfoAccess,         /* 1.3.6.1.5.5.7.1.1 */
+        OID_sha1,                       /* 1.3.14.3.2.26 */
+        OID_id_ansip384r1,              /* 1.3.132.0.34 */
+@@ -104,6 +107,10 @@ enum OID {
+        OID_authorityKeyIdentifier,     /* 2.5.29.35 */
+        OID_extKeyUsage,                /* 2.5.29.37 */
+
++       /* Heimdal mechanisms */
++       OID_NetlogonMechanism,          /* 1.2.752.43.14.2 */
++       OID_appleLocalKdcSupported,     /* 1.2.752.43.14.3 */
++
+        /* EC-RDSA */
+        OID_gostCPSignA,                /* 1.2.643.2.2.35.1 */
+        OID_gostCPSignB,                /* 1.2.643.2.2.35.2 */
 
 
 -- 
 Thanks,
 
 Steve
+
+--0000000000008def7405ca05e408
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-oid_registry-Add-OIDs-for-missing-Spnego-auth-mechan.patch"
+Content-Disposition: attachment; 
+	filename="0001-oid_registry-Add-OIDs-for-missing-Spnego-auth-mechan.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_kskz4e7j0>
+X-Attachment-Id: f_kskz4e7j0
+
+RnJvbSBmNDRlODEzYmVlNDdhOTA3YTA2MmE4NjNiMWYwMWZmZTJhOGY5ODY1IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+CkRhdGU6IEZyaSwgMjAgQXVnIDIwMjEgMTg6MTA6MzYgLTA1MDAKU3ViamVjdDogW1BBVENIXSBv
+aWRfcmVnaXN0cnk6IEFkZCBPSURzIGZvciBtaXNzaW5nIFNwbmVnbyBhdXRoIG1lY2hhbmlzbXMg
+dG8KIE1hY3MKCkluIHRlc3RpbmcgbW91bnRzIHRvIE1hY3MsIG5vdGljZWQgdGhhdCB0aGUgT0lE
+UyBmb3Igc29tZQpHU1NBUEkvU1BORUdPIGF1dGggbWVjaGFuaXNtcyBzZW50IGJ5IHRoZSBzZXJ2
+ZXIgd2VyZSBub3QKcmVjb2duaXplZCBhbmQgd2VyZSBtaXNzaW5nIGZyb20gdGhlIGhlYWRlci4K
+ClNpZ25lZC1vZmYtYnk6IFN0ZXZlIEZyZW5jaCA8c3RmcmVuY2hAbWljcm9zb2Z0LmNvbT4KLS0t
+CiBpbmNsdWRlL2xpbnV4L29pZF9yZWdpc3RyeS5oIHwgNyArKysrKysrCiAxIGZpbGUgY2hhbmdl
+ZCwgNyBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC9vaWRfcmVnaXN0
+cnkuaCBiL2luY2x1ZGUvbGludXgvb2lkX3JlZ2lzdHJ5LmgKaW5kZXggM2Q4ZGIxZjZhNWRiLi4y
+NzI4ODQyNzIxYmMgMTAwNjQ0Ci0tLSBhL2luY2x1ZGUvbGludXgvb2lkX3JlZ2lzdHJ5LmgKKysr
+IGIvaW5jbHVkZS9saW51eC9vaWRfcmVnaXN0cnkuaApAQCAtNzAsNiArNzAsOSBAQCBlbnVtIE9J
+RCB7CiAKIAlPSURfc3BuZWdvLAkJCS8qIDEuMy42LjEuNS41LjIgKi8KIAorCU9JRF9JQUtlcmIs
+CQkJLyogMS4zLjYuMS41LjIuNSAqLworCU9JRF9QS1UyVQkJCS8qIDEuMy41LjEuNS4yLjcgKi8K
+KwlPSURfU2NyYW0sCQkJLyogMS4zLjYuMS41LjUuMTQgKi8KIAlPSURfY2VydEF1dGhJbmZvQWNj
+ZXNzLAkJLyogMS4zLjYuMS41LjUuNy4xLjEgKi8KIAlPSURfc2hhMSwJCQkvKiAxLjMuMTQuMy4y
+LjI2ICovCiAJT0lEX2lkX2Fuc2lwMzg0cjEsCQkvKiAxLjMuMTMyLjAuMzQgKi8KQEAgLTEwNCw2
+ICsxMDcsMTAgQEAgZW51bSBPSUQgewogCU9JRF9hdXRob3JpdHlLZXlJZGVudGlmaWVyLAkvKiAy
+LjUuMjkuMzUgKi8KIAlPSURfZXh0S2V5VXNhZ2UsCQkvKiAyLjUuMjkuMzcgKi8KIAorCS8qIEhl
+aW1kYWwgbWVjaGFuaXNtcyAqLworCU9JRF9OZXRsb2dvbk1lY2hhbmlzbSwJCS8qIDEuMi43NTIu
+NDMuMTQuMiAqLworCU9JRF9hcHBsZUxvY2FsS2RjU3VwcG9ydGVkLAkvKiAxLjIuNzUyLjQzLjE0
+LjMgKi8KKwogCS8qIEVDLVJEU0EgKi8KIAlPSURfZ29zdENQU2lnbkEsCQkvKiAxLjIuNjQzLjIu
+Mi4zNS4xICovCiAJT0lEX2dvc3RDUFNpZ25CLAkJLyogMS4yLjY0My4yLjIuMzUuMiAqLwotLSAK
+Mi4zMC4yCgo=
+--0000000000008def7405ca05e408--
 
