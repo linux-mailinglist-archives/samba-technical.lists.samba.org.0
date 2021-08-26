@@ -2,65 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 531323F62DF
-	for <lists+samba-technical@lfdr.de>; Tue, 24 Aug 2021 18:42:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E19093F7F47
+	for <lists+samba-technical@lfdr.de>; Thu, 26 Aug 2021 02:28:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=aSziwwwdyIEOJ4mYpFaEyyynDBylrGdfxWjE78omM94=; b=zbRS5THBIhMLVs4jiisSqhSD0f
-	NrigP1mWp4chuWtL//9YC/gnD1zSX2iIqZdSpqQGSNybo+hKGnGdRbmaQhXUJz+x5Ju8N5JveEbor
-	dsoy+48Za5oOAruARv7zHyHSJsoPmDA5cvhKlh4RzRHgoy7cIUjkQN6vWkwiYuEEXtN0eMHUszumX
-	Ya4DKvXQnL3SOC0UDw2vuuBBhVh4pa2xTwhT0mfD/PV0LCpiFWLNOWJDNEZH5lPWc6BmeMrkEJvOr
-	E+ASLmxPzG+QPRYnuzl7YT6siWl0mE6wLHIzO0ypg35B1RjHLiYdTlTOQkcSzEwSGHMtcbfGruy8p
-	lewnqBhA==;
-Received: from ip6-localhost ([::1]:45354 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=BUDksw4ypqlYgTncIcjXlCedW6vx3+FDl7h2s+VxHWc=; b=wYy6H8oEefV2MRXBxhCXgH7630
+	hf26Pwv0naQKZPu5/8jQaWQk8QTkSZNzFH9DrdlERy8crPFfeUVav0zXnyUu0wCaWhfFYOv1njmMN
+	KX6PoX4uonGJrgYkRwogMB5im/PaGJePDqlqecrD/BQbUHwMoEOCmSrUw2opQfPSYth+TIvcDs5Ry
+	KmgjYwLAOoRU4b87C1n7Qpf5i5iyPQ/MNyHgz2nmdOZxyJeIJD4IQW7kkPph/o37hKQeQgbxVlyzz
+	mG10mEcODvtkAjoBh9YPzrKumgquGNLjzqvBXZ3SpvNh/Y65S0j8GmvxZNVbWjQniHpEhAPppxRTH
+	5tVuQe8A==;
+Received: from ip6-localhost ([::1]:37882 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mIZUF-008lNY-Pf; Tue, 24 Aug 2021 16:41:19 +0000
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f]:36376) 
+	id 1mJ3El-009Obh-95; Thu, 26 Aug 2021 00:27:19 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24024) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mIZU9-008lNP-TL
- for samba-technical@lists.samba.org; Tue, 24 Aug 2021 16:41:17 +0000
-Received: by mail-lf1-x12f.google.com with SMTP id r9so46874565lfn.3
- for <samba-technical@lists.samba.org>; Tue, 24 Aug 2021 09:41:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=aSziwwwdyIEOJ4mYpFaEyyynDBylrGdfxWjE78omM94=;
- b=DCMmJs4FRG79pqa2rFUGIv1mI88LNPFRfH2H3rCOUVKwIzKqHGC+5U1glL5+Yp8/Cu
- WpqwYj/8GWmDxLMsEyOasYKwMr6QNRYxcOBKYMLJhRwXSnoQ6eRxmfYW3wv1No5d/JBe
- Uo8pM1XuZ6G33c06ZYp0iZUz5JwzZAMlMjB+ld+DkY4Kk9paDbwS7Pi7JRUgxCmMgqFg
- slGFdFrgvOXSv/o23LL3YYIe1Y0/yY//9PLZwr0c0PQ5b0yiQPuqEgZ7EwMo/FRC1iN0
- Tnd6yMAG/hqzagdMGxE4whdKhVAuZKjlXo1R5HQMJDpjOIYWUXux5Y8SZv8iBjpPQmCz
- DclA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=aSziwwwdyIEOJ4mYpFaEyyynDBylrGdfxWjE78omM94=;
- b=d/hKRPF8G0LyI0k4lyqhZVHPR/PzQW5i0Gk0F0OAQFJ4csSJ+QT0noqVaEPMLSegMb
- 2zJxOFbWHk+/Cg7c308hD3eV7UToNp3AtyGioaT63XO3O14uAdqislVvaGVzECiSIPcB
- EItW4yqTz4/ljRMWjrbST34nTuwBn/irGzz+n5ZBfCsWMGFIR1hQbwzuU+Xcbt+HLWHG
- iYiEiK2HkusXkiTw1QORoWTkso5KOGOoliImoCRK5AAZFEJSmw2glOhtAOcbEd65HNLn
- WvCYnk8iDjPXxMzDYCwVujy6IdnkCslBhVKykZlCWp8NH17o4u6Ctchg0NHHYX6ztd9y
- zTKg==
-X-Gm-Message-State: AOAM5309btRMqeeK+j1Qo7eOsqDOJsGDeVivuF/uoZe+fC2k2hDrY69q
- YaaaPOBz9Cg8LDLCBABm3eukFTyOqx0X4rZaE3c=
-X-Google-Smtp-Source: ABdhPJx05vOHbejCKOArldt/GrSeSIg5FEQsOgVl5tYNq+RPz63GDpgaJzlNqDIHHaZ38bIfDvCTpAz7z3Edcq+N724=
-X-Received: by 2002:ac2:4561:: with SMTP id k1mr5393956lfm.313.1629823272322; 
- Tue, 24 Aug 2021 09:41:12 -0700 (PDT)
-MIME-Version: 1.0
-References: <YRXlwDBfQql36wJx@sol.localdomain>
- <CAN05THSm5fEcnLKxcsidKPRUC6PVLCkWMBZUW05KNm4uMJNHWw@mail.gmail.com>
- <YRbT7IbSCXo4Dl0u@sol.localdomain>
- <CAN05THScNOVh5biQnqM8YDOvNid4Dh=wZS=ObczzmSEpv1LpRw@mail.gmail.com>
- <YRrkhzOARiT6TqQA@gmail.com>
- <CAMj1kXH93HU5SNUDLpn+c0ryJUYWpRKVXeoPK8jPOSwiS3_79A@mail.gmail.com>
- <CAN05THS27h9QFpNuVVQmqz8k8_SKD8V8TbzZVYxco7S86i0zWA@mail.gmail.com>
- <627872ec0f8cc52a06f8f58598f96b72b5b9645a.camel@redhat.com>
-In-Reply-To: <627872ec0f8cc52a06f8f58598f96b72b5b9645a.camel@redhat.com>
-Date: Tue, 24 Aug 2021 11:41:01 -0500
-Message-ID: <CAH2r5mtsgYXi2VxQZ5bDLdsAgmgjgJVqeXUxe5Sb1CiA_RyFQA@mail.gmail.com>
-Subject: Re: Building cifs.ko without any support for insecure crypto?
-To: Simo Sorce <simo@redhat.com>
+ (Exim) id 1mJ3Ed-009ObY-Gn
+ for samba-technical@lists.samba.org; Thu, 26 Aug 2021 00:27:16 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=BUDksw4ypqlYgTncIcjXlCedW6vx3+FDl7h2s+VxHWc=; b=Bnhmj7hJ3QybC5Yij3QZySVXJy
+ HuPK9im49ghYFtD5vFBolViLEiiqQH3+JJzP7eHBVGRE9TulEmIOHDbcfB8cZKhohDMNVvJE0sJw5
+ DXEzvJBoJ+dsU0kmgKGI87VGxqRhU9+mH/97SKh9I9tOunTq4wLlk994VarijcbK88zfddAWHFhTt
+ tsUC0vgNnAJ4+MQi5f7c4ksxzwyGAlH0MVfjUebOfI7idahJHVl2V3qBmNle0KH3QKvm7PPU+HSUT
+ XRLePe7PfoNgCx5HTtc3oNd02UFTFVpdeq7kJjS+Hw91BTuHNy4jNPmeuhU7d8vKdY17Auuxk8Nsi
+ NNsTryf95QNeEK2Hv6nW8GE6VkgO798cP8kih8NQQf/Dnbh+x4CU1ShB0jZO8yXq/9DQSPYPkbGJh
+ thwmu5wN7wAGEpCtOn+WimeXf0gLm/KzBD9YGsG50N0lO0tX7iz6LbM21AcqT7YVuI/MearT7WD2q
+ 1saTvlW9NMU5Q3uCCylvHmdX;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mJ3Eb-0032pD-5v; Thu, 26 Aug 2021 00:27:09 +0000
+Message-ID: <394a5fccee57136810d714fbffe9bd4e2e6af49e.camel@samba.org>
+Subject: Re: Heimdal upgrade, really happening this time
+To: Stefan Metzmacher <metze@samba.org>, Upstream Samba Technical Mailing
+ list <samba-technical@lists.samba.org>, Isaac Boukris <iboukris@gmail.com>
+Date: Thu, 26 Aug 2021 12:27:01 +1200
+In-Reply-To: <57d08d6d05bf60ebc0965a311cae267f539f277f.camel@samba.org>
+References: <b2cb195314281883e378c908784ac6f9f841584d.camel@samba.org>
+ <26713d5cdcc47d0d9fb017b6a1e546d9501d8efe.camel@samba.org>
+ <c328766b-d894-517f-966c-fa5305558633@samba.org>
+ <a78f79643b03b31afbe505b932df2cc46fb0254d.camel@samba.org>
+ <0a68b013c3d1d6988d54ef5473a47e50973d0892.camel@samba.org>
+ <fb006a0427d71d5f05a6217ff19e12974a6b647d.camel@samba.org>
+ <376f7f62-7ebd-fa37-45d9-dda065f7517d@samba.org>
+ <57d08d6d05bf60ebc0965a311cae267f539f277f.camel@samba.org>
 Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,46 +64,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: linux-cifs <linux-cifs@vger.kernel.org>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- Eric Biggers <ebiggers@kernel.org>, Steve French <sfrench@samba.org>,
- Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
- Ard Biesheuvel <ardb@kernel.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Aug 23, 2021 at 5:05 AM Simo Sorce <simo@redhat.com> wrote:
-<snip>
-> Another way to handle this part is to calculate the hash in userspace
-> and handle the kernel just the hashes. This would allow you to remove
-> MD4 from the kernel. I guess it would break putting a password on the
-> kernel command line, but is that really a thing to do? Kernels do not
-> boot from cifs shares so you can always use userspace tools (or pass
-> hexed hashes directly on the command line in a pinch).
+Just another update on the Heimdal upgrade.
 
-We can boot from cifs (and given the security features of SMB3.1.1 it probably
-makes more sense than some of the alternatives) albeit with some POSIX
-restrictions unless booting from ksmbd with POSIX extensions enabled.
-Paulo added the support for booting from cifs.ko in the 5.5 kernel.
+I was motivated to rebase again so we could potentially allow Luke to
+test his new FAST changes with our tests.
 
+All the Samba-specific patches to Heimdal are now in lorikeet-heimdal,
+and are listed here:
 
-> > I have patches for both DES removal and forking ARC4 prepared for linux-cifs.
-> > MD4 will require more work since we use it via the crypto_alloc_hash()
-> > api but we will do that too.
-> >
-> > What about MD5? Is it also scheduled for removal? if so we will need
-> > to fork it too.
->
-> MD5 is still used for a ton of stuff, however it may make sense to
-> consider moving it in /lib and our of /lib/crypto as it is not usable
-> in cryptographic settings anymore anyway.
+c946d9e63dcefcc2f99fbe32e8f8eff24262abb9 (HEAD -> lorikeet-heimdal-tmp, lorikeet-heimdal/lorikeet-heimdal-202108260003, lorikeet-heimdal-202108260003) source4/heimdal/lib/krb5/init_creds_pw.c KRB5_NT_ENTERPRISE_PRINCIPAL ctx->flags.canonicalize = 1
+da776d5299ab3e843fd56c5edc9a557b6d7d0b87 source4/heimdal/lib/krb5/mcache.c anonymous resolving
+40a36415a01da169e74a6e2b77c8b26fd93e93d5 tgs-rep: always return canonical realm
+342ad14433cabae9e15dea43d73ae62217988f58 TODO: auth: For NTLM and KDC authentication, log the authentication duration
+947caea4cdd2c0fffbc69329c0b50b08b1671067 lib/krb5 correctly follow KRB5_KDC_ERR_WRONG_REALM client referrals
+299dce8c28a9e1bef1d234a4afec8de549d0c98b TODO CHECK heimdal: Fix loss of information in _gsskrb5_canon_name() from call to krb5_sname_to_principal()
+4fc9a9b0a2a37af6a545de7c7c1841152f384375 heimdal: Honour KRB5_CTX_F_DNS_CANONICALIZE_HOSTNAME in parse_name_canon_rules()
+f6538470c0f18466bec12aef48ab142c7dbcdb6e TODO: kdc: match new GSS pre-auth prototype to ENC-TS etc
+bf0d53ff66c026e38c894c5ac74109c4bd711fdc TODO: heimdal: Pass extra information to hdb_auth_status() to log success and failures
+1fd6203e8bb3ce04a519f1a6c1ecd75d4377c263 Change KDC to respect HDB server name type if f.canonicalize is set
+f22b2b980078ab9f52d6bbe4cb48395c57b7f777 lib/krb5 correctly follow KRB5_KDC_ERR_WRONG_REALM client referrals
+c9b20508c251b8e190dec4e554b68c325c1acac2 HEIMDAL:kdc: make it possible to disable the principal based referral detection
+85ab37844b4819b1c30e4b642c13774cddd0f9b9 lib/krb5: windows KDCs always return the canoncalized server principal
+e5ec1c4f8b08d927d8abe0bdce8d81dfde7bc3a1 HACK: Netbios Domain as Realm
+8a2fd96dfe00306dc64df75731cf3fa0fa42b0f9 kdc: use the correct kvno number for PKINIT in the AS-REP
+3b73118dd77dfec525958aba9353f893785be847 kdc: add krb5plugin_windc_pac_pk_generate() hook
 
-Seems reasonable
+I need to stop now but next I'll see about dropping the 
+ source4/heimdal/lib/krb5/init_creds_pw.c KRB5_NT_ENTERPRISE_PRINCIPAL ctx->flags.canonicalize = 1
+patch
+
+We also need to fix our KDC tests not to use the -1111 enc type, as
+Heimdal considers it (correctly per the RFC) as 'modern'.  We need to
+perhaps change it to 3des or such to get the pattern we want.
+
+Andrew Bartlett
 
 -- 
-Thanks,
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
 
-Steve
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+
 
