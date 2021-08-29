@@ -2,47 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1BF5E3F8463
-	for <lists+samba-technical@lfdr.de>; Thu, 26 Aug 2021 11:18:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E97A13FAE57
+	for <lists+samba-technical@lfdr.de>; Sun, 29 Aug 2021 22:10:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=eftmFbQwv8IegJN8Qfr2kfONG4c40BRmp4S7tnj4cPY=; b=hb713gE4QW6h+xWUS0FMRJsH3D
-	kWKobQdvWV33odwZwU8i/a989pMmGrr64spOPE89Sy/STsmNkVczYHo3W7QG+XaTpxW5bzxBIFqb7
-	phOEP9EjNE6p0tGhRlWwWxH6amp1LBbJTaQagUqkwA7bcDYs87d/Pom8kI+iILVY/EiCj/UxGJxXs
-	mrITvK3HZSk4Fs1r1lTKlWMzDRRw5d/Z6lhJvEXxxMH+AUj7huzyye2pTH+B0x/pqCp1wg68ZuPei
-	ztMjT1DOuvLjcVX9bcVBNWhz8/A4Do66vpVdHIjh2IVScPubXfFlBV9/IONNVOs0SZUikRN03NQka
-	Ly7bAhLQ==;
-Received: from ip6-localhost ([::1]:39296 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=rEgJh4q1HS/+z6CnHNZ9Lix606yWrqDUyeO3On1WAe4=; b=R8TwkoDgIX6voltF5z2BNVaqsB
+	1X2EyKjg2cJdBMTHQMRPyqa616XgYaQKz5/0jMrPNrUG+Sp5oBymDcv3RH4Y5jwLLYaWcc87S6X2B
+	Cd/mgcew7/zTqvUrO09Mhyp9V4Pl/YQ2seaCEA0cAGjY76H9ytrKAPQn/KwPiG8xo+LVTrfSPjnqs
+	xmvyrLFnNCMVZkCYLOvCsIELPPQP/6/iq67KGizXm8q4zC/Ce9Vs7aJODNo6WCT0Qc8pwF/Lukqz2
+	8F/NOIvpVacFwvzXhqhlyZj6X8uaBoln6YbofxY244lU1Avctm7O01O2alMM/GtDnCWeSjvklQiRU
+	QnYmLP2A==;
+Received: from ip6-localhost ([::1]:24272 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mJBWF-009QPa-3T; Thu, 26 Aug 2021 09:17:55 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60612) 
+	id 1mKR7S-009mAb-7G; Sun, 29 Aug 2021 20:09:30 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63068) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mJBW7-009QOu-Eq; Thu, 26 Aug 2021 09:17:52 +0000
+ (Exim) id 1mKR7K-009mAS-Dv
+ for samba-technical@lists.samba.org; Sun, 29 Aug 2021 20:09:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:To:CC;
- bh=eftmFbQwv8IegJN8Qfr2kfONG4c40BRmp4S7tnj4cPY=; b=v7O227KXMLuMmM5Mrprbqbw4Vn
- ZkKnu6oEJ9r0E//5tnGCj6xJ5IW6SVEpEOM8HvhIC0+Qj7/9yssNin+5uAHlivbMrBnRHnkCJMOle
- yJ7Xz/nqg8W9CqsxKxxKnA+1eMOmYCjnMkc7YhEt62io1t1BeJqBgthq+sN3kmBLRDjHXDqpa+Yva
- zGiGSoozEDhT2Kr3lNl1Z5Gcm83iUTc8o7jjjBbUkBi/smyekTzcJYy6pnsk+yz6h4mP8h5NbuRQp
- tjX7nB78qzYyRF960bX93gO713pqdunkQZaLe9MGaENBu04KxaAT6hWppJ0bnxSstbjzVDT4oOWiK
- SM2CuVrrIPO+GS9E6I/Ac1LQfOFDDFhIF5QQ9jU+0vEQ0953Yo+TMjmO2I5eR4wbl69jYznEy3twq
- XBXXHx3twOkGcb1ht5a62zEljrNPbXdSQ08729Z4iTh+L/vmOUtsfK6wMeKUgh/ljlttvNLG19szr
- SwRxaqpiA1w/KGj/UdmBXxTb;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=rEgJh4q1HS/+z6CnHNZ9Lix606yWrqDUyeO3On1WAe4=; b=WAyxEnwwk5R2mUtYonXSQZpUmv
+ Pz4Z7JkR8i78YvZHlaz5Gz0P79ebr0RLpUeilNahneI3FYv+CJf2KPx97Fs+K7dBnBcGI1D4CuldT
+ xtfr78E7qCfJfI7M/KPFUPGqPPiS+aKDEgWKCsVc104YgbTjAAyi2Qpl5GKH7BEZBL5X5yq8dirqZ
+ iiOMgDERg6IsO+3Tve6Eji58acRpWJuJbSzlh5tGk/cmqn3vgLfa9l8Whl+5ENNZjAo52O4evIWe1
+ 5m7Q3uDUDek7f9jNw4XamBVMY1mXdoUcriviW2s0KX2qQXtAQ7y0CMlWE5ds5Y6lb1/b3IMu1YZ/9
+ v/7gpuJg3Deb5TknwR4LCQj9N7Lal1hVko6lxyeLxr/fmS0wHp+Rhe5imaJUPJF7r16aFYrfqXqOM
+ DM2keAzOvC3PHPkboF9bRHY4IxUwic3CkdE3NObLRCmrkhPb+rSPcff5FQH9R2fgUxbM/tJMCva7P
+ P/5ousCRL2hDfpjfGwq1hPvY;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mJBW6-0037VE-Sn; Thu, 26 Aug 2021 09:17:46 +0000
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.15.0rc3 Available for Download
-Message-ID: <20f71595-ac73-e84b-fa13-1c4b612b4ef1@samba.org>
-Date: Thu, 26 Aug 2021 11:17:46 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ (Exim) id 1mKR7I-003bVy-Kc
+ for samba-technical@lists.samba.org; Sun, 29 Aug 2021 20:09:21 +0000
+Message-ID: <599cb100381a83de23ae9db47e3fa55eb87a7f13.camel@samba.org>
+Subject: OSS-fuzz needs some love
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Mon, 30 Aug 2021 08:09:15 +1200
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: de-DE
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,428 +55,46 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Release Announcements
-=====================
+It looks like OSS-Fuzz upstream has moved to Ubuntu 20.04 - perhaps
+only in part - and this has broken Samba on their platform.
 
-This is the third release candidate of Samba 4.15.  This is *not*
-intended for production environments and is designed for testing
-purposes only.  Please report any defects via the Samba bug reporting
-system at https://bugzilla.samba.org/.
+https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=37748
 
-Samba 4.15 will be the next version of the Samba suite.
+This in turn seems to have given those of us on the CC for the bugs a
+flood of mail complaining that the tests are unreproducible.
 
+An upgrade to Ubuntu 20.04 is a good thing, the older 16.04 was the
+oldest platform we supported and we had to have a special exception to
+allow the old python found there.  Leaving 16.04 behind will make
+upgrading our minimum Python and GnuTLS easier in particular.
 
-UPGRADING
-=========
+But this breakage means we won't get fuzzing results for a while until
+someone has some time to work out what is broken and fix it.
 
-Removed SMB (development) dialects
-----------------------------------
+I know everyone is super-busy, but if by some miracle you are not and
+fuzzing is an area of interest then these links might help you help:
 
-The following SMB (development) dialects are no longer
-supported: SMB2_22, SMB2_24 and SMB3_10. They are were
-only supported by Windows technical preview builds.
-They used to be useful in order to test against the
-latest Windows versions, but it's no longer useful
-to have them. If you have them explicitly specified
-in your smb.conf or an the command line,
-you need to replace them like this:
-- SMB2_22 => SMB3_00
-- SMB2_24 => SMB3_00
-- SMB3_10 => SMB3_11
-Note that it's typically not useful to specify
-"client max protocol" or "server max protocol"
-explicitly to a specific dialect, just leave
-them unspecified or specify the value "default".
+https://google.github.io/oss-fuzz/advanced-topics/reproducing/#reproducing-build-failures
 
-New GPG key
------------
+https://wiki.samba.org/index.php/Fuzzing
 
-The GPG release key for Samba releases changed from:
+I'm always happy to give advice and review patches.
 
-pub   dsa1024/6F33915B6568B7EA 2007-02-04 [SC] [expires: 2021-02-05]
-       Key fingerprint = 52FB C0B8 6D95 4B08 4332  4CDC 6F33 915B 6568 B7EA
-uid                 [  full  ] Samba Distribution Verification Key 
-<samba-bugs@samba.org>
-sub   elg2048/9C6ED163DA6DFB44 2007-02-04 [E] [expires: 2021-02-05]
+Thanks!
 
-to the following new key:
+Andrew Bartlett
 
-pub   rsa4096/AA99442FB680B620 2020-12-21 [SC] [expires: 2022-12-21]
-       Key fingerprint = 81F5 E283 2BD2 545A 1897  B713 AA99 442F B680 B620
-uid                 [ultimate] Samba Distribution Verification Key 
-<samba-bugs@samba.org>
-sub   rsa4096/97EF9386FBFD4002 2020-12-21 [E] [expires: 2022-12-21]
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
 
-Starting from Jan 21th 2021, all Samba releases will be signed with the 
-new key.
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
 
-See also GPG_AA99442FB680B620_replaces_6F33915B6568B7EA.txt
-
-
-NEW FEATURES/CHANGES
-====================
-
-Bind DLZ: add the ability to set allow/deny lists for zone transfer clients
----------------------------------------------------------------------------
-
-Up to now, any client could use a DNS zone transfer request to the
-bind server, and get an answer from Samba. Now the default behaviour
-will be to deny those request. Two new options have been added to
-manage the list of authorized/denied clients for zone transfer
-requests. In order to be accepted, the request must be issued by a
-client that is in the allow list and NOT in the deny list.
-
-
-"server multi channel support" no longer experimental
------------------------------------------------------
-
-This option is enabled by default starting with to 4.15 (on Linux and 
-FreeBSD).
-Due to dependencies on kernel APIs of Linux or FreeBSD, it's only possible
-to use this feature on Linux and FreeBSD for now.
-
-samba-tool available without the ad-dc
---------------------------------------
-
-The samba-tool command is now available when samba is configured
---without-ad-dc. Not all features will work, and some ad-dc specific options
-have been disabled. The samba-tool domain options, for example, are limited
-when no ad-dc is present. Samba must still be built with ads in order to 
-enable
-samba-tool.
-
-
-Improved command line user experience
--------------------------------------
-
-Samba utilities did not consistently implement their command line 
-interface. A
-number of options were requiring to specify values in one tool and not 
-in the
-other, some options meant different in different tools.
-
-These should be stories of the past now. A new command line parser has been
-implemented with sanity checking. Also the command line interface has been
-simplified and provides better control for encryption, singing and kerberos.
-
-Also several command line options have a smb.conf variable to control the
-default now.
-
-All tools are logging to stderr by default. You can use --debug-stdout to
-change the behavior.
-
-### Common parser:
-
-Options added:
---client-protection=off|sign|encrypt
-
-Options renamed:
---kerberos       ->    --use-kerberos=required|desired|off
---krb5-ccache    ->    --use-krb5-ccache=CCACHE
---scope          ->    --netbios-scope=SCOPE
---use-ccache     ->    --use-winbind-ccache
-
-Options removed:
--e|--encrypt
--C removed from --use-winbind-ccache
--i removed from --netbios-scope
--S|--signing
-
-
-### Duplicates in command line utils
-
-ldbadd/ldbsearch/ldbdel/ldbmodify/ldbrename:
--e is not available for --editor anymore
--s is not used for --configfile anymore
-
-ndrdump:
--l is not available for --load-dso anymore
-
-net:
--l is not available for --long anymore
-
-sharesec:
--V is not available for --viewsddl anymore
-
-smbcquotas:
---user        ->    --quota-user
-
-nmbd:
---log-stdout  ->    --debug-stdout
-
-smbd:
---log-stdout  ->    --debug-stdout
-
-winbindd:
---log-stdout  ->    --debug-stdout
-
-
-Scanning of trusted domains and enterprise principals
------------------------------------------------------
-
-As an artifact from the NT4 times, we still scanned the list of trusted 
-domains
-on winbindd startup. This is wrong as we never can get a full picture in 
-Active
-Directory. It is time to change the default value to "No". Also with 
-this change
-we always use enterprise principals for Kerberos so that the DC will be able
-to redirect ticket requests to the right DC. This is e.g. needed for one way
-trusts. The options `winbind use krb5 enterprise principals` and
-`winbind scan trusted domains` will be deprecated in one of the next 
-releases.
-
-Support for Offline Domain Join (ODJ)
--------------------------------------
-
-The net utility is now able to support the offline domain join feature
-as known from the Windows djoin.exe command for many years. Samba's
-implementation is accessible via the "net offlinejoin" subcommand. It
-can provision computers and request offline joining for both Windows
-and Unix machines. It is also possible to provision computers from
-Windows (using djoin.exe) and use the generated data in Samba's net
-utility. The existing options for the provisioning and joining steps
-are documented in the net(8) manpage.
-
-
-samba-tool dns zoneoptions for aging control
---------------------------------------------
-
-The samba-tool dns zoneoptions command can be used to turn aging on
-and off, alter the refresh and no-refresh periods, and manipulate the
-timestamps of existing records.
-
-To turn aging on for a zone, you can use something like this:
-
-   samba-tool dns zoneoptions --aging=1 --refreshinterval=306600
-
-which turns on aging and ensures no records less than five years old
-are aged out and scavenged. After aging has been on for sufficient
-time for records to be renewed, the command
-
-   samba-tool dns zoneoptions --refreshinterval=168
-
-will set the refresh period to the standard seven days. Using this two
-step process will help prevent the temporary loss of dynamic records
-if scavenging happens before their first renewal.
-
-
-Marking old records as static or dynamic with samba-tool
---------------------------------------------------------
-
-A bug in Samba versions prior to 4.9 meant records that were meant to
-be static were marked as dynamic and vice versa. To fix the timestamps
-in these domains, it is possible to use the following options,
-preferably before turning aging on.
-
-    --mark-old-records-static
-    --mark-records-dynamic-regex
-    --mark-records-static-regex
-
-The --mark-old-records-static option will make records older than the
-specified date static (that is, with a zero timestamp). For example,
-if you upgraded to Samba 4.9 in November 2018, you could use ensure no
-old records will be mistakenly interpreted as dynamic using the
-following option:
-
-   samba-tool dns zoneoptions --mark-old-records-static=2018-11-30
-
-Then, if you know that that will have marked some records as static
-that should be dynamic, and you know which those are due to your
-naming scheme, you can use commands like:
-
-   samba-tool dns zoneoptions --mark-records-dynamic-regex='\w+-desktop'
-
-where '\w+-desktop' is a perl-compatible regular expression that will
-match 'bob-desktop', 'alice-desktop', and so on.
-
-These options are deliberately long and cumbersome to type, so people
-have a chance to think before they get to the end. You can make a
-mess if you get it wrong.
-
-All samba-tool dns zoneoptions modes can be given a --dry-run/-n
-argument that allows you to inspect the likely results before going
-ahead.
-
-NOTE: for aging to work, you need to have "dns zone scavenging = yes"
-set in the smb.conf of at least one server.
-
-
-DNS tombstones are now deleted as appropriate
----------------------------------------------
-
-When all the records for a DNS name have been deleted, the node is put
-in a tombstoned state (separate from general AD object tombstoning,
-which deleted nodes also go through). These tombstones should be
-cleaned up periodically. Due to a conflation of scavenging and
-tombstoning, we have only been deleting tombstones when aging is
-enabled.
-
-If you have a lot of tombstoned DNS nodes (that is, DNS names for
-which you have removed all the records), cleaning up these DNS
-tombstones may take a noticeable time.
-
-
-DNS tombstones use a consistent timestamp format
-------------------------------------------------
-
-DNS records use an hours-since-1601 timestamp format except for in the
-case of tombstone records where a 100-nanosecond-intervals-since-1601
-format is used (this latter format being the most common in Windows).
-We had mixed that up, which might have had strange effects in zones
-where aging was enabled (and hence tombstone timestamps were used).
-
-
-samba-tool dns update and RPC changes
--------------------------------------
-
-The dnsserver DCERPC pipe can be used by samba-tool and Windows tools
-to manipulate dns records on the remote server. A bug in Samba meant
-it was not possible to update an existing DNS record to change the
-TTL. The general behaviour of RPC updates is now closer to that of
-Windows.
-
-samba-tool dns update is now a bit more careful in rejecting and
-warning you about malformed IPv4 and IPv6 addresses.
-
-
-REMOVED FEATURES
-================
-
-Tru64 ACL support has been removed from this release. The last
-supported release of Tru64 UNIX was in 2012.
-
-NIS support has been removed from this release. This is not
-available in Linux distributions anymore.
-
-The DLZ DNS plugin is no longer built for Bind versions 9.8 and 9.9,
-which have been out of support since 2018.
-
-
-smb.conf changes
-================
-
-   Parameter Name                          Description     Default
-   --------------                          -----------     -------
-   client use kerberos                     New             desired
-   client max protocol                     Values Removed
-   client min protocol                     Values Removed
-   client protection                       New             default
-   client smb3 signing algorithms          New             see man smb.conf
-   client smb3 encryption algorithms       New             see man smb.conf
-   preopen:posix-basic-regex               New             No
-   preopen:nomatch_log_level               New             5
-   preopen:match_log_level                 New             5
-   preopen:nodigits_log_level              New             1
-   preopen:founddigits_log_level           New             3
-   preopen:reset_log_level                 New             5
-   preopen:push_log_level                  New             3
-   preopen:queue_log_level                 New             10
-   server max protocol                     Values Removed
-   server min protocol                     Values Removed
-   server multi channel support            Changed         Yes (on Linux 
-and FreeBSD)
-   server smb3 signing algorithms          New             see man smb.conf
-   server smb3 encryption algorithms       New             see man smb.conf
-   winbind use krb5 enterprise principals  Changed         Yes
-   winbind scan trusted domains            Changed         No
-
-
-CHANGES SINCE 4.15.0rc2
-=======================
-
-o  Jeremy Allison <jra@samba.org>
-    * BUG 14760: vfs_streams_depot directory creation permissions and store
-      location problems.
-    * BUG 14766: vfs_ceph openat() doesn't cope with dirfsp != AT_FDCW.
-    * BUG 14769: smbd panic on force-close share during offload write.
-    * BUG 14805: OpenDir() loses the correct errno return.
-
-o  Ralph Boehme <slow@samba.org>
-    * BUG 14795: copy_file_range() may fail with EOPNOTSUPP.
-
-o  Stefan Metzmacher <metze@samba.org>
-    * BUG 14793: Start the SMB encryption as soon as possible.
-
-o  Andreas Schneider <asn@samba.org>
-    * BUG 14779: Winbind should not start if the socket path is too long.
-
-o  Noel Power <noel.power@suse.com>
-    * BUG 14760: vfs_streams_depot directory creation permissions and store
-      location problems.
-
-
-CHANGES SINCE 4.15.0rc1
-=======================
-
-o  Andreas Schneider <asn@samba.org>
-    * BUG 14768: smbd/winbind should load the registry if configured
-    * BUG 14777: do not quote passed argument of configure script
-    * BUG 14779: Winbind should not start if the socket path is too long
-
-o  Stefan Metzmacher <metze@samba.org>
-    * BUG 14607: tree connect failed: NT_STATUS_INVALID_PARAMETER
-    * BUG 14764: aes-256-gcm and aes-256-ccm doesn't work in the server
-
-o Ralph Boehme <slow@samba.org>
-    * BUG 14700: file owner not available when file unredable
-
-o Jeremy Allison <jra@samba.org>
-    * BUG 14607: tree connect failed: NT_STATUS_INVALID_PARAMETER
-    * BUG 14759: 4.15rc can leak meta-data about the directory 
-containing the
-      share path
-
-
-KNOWN ISSUES
-============
-
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.15#Release_blocking_bugs
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.libera.chat or the
-#samba-technical:matrix.org matrix channel.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-======================================================================
-== Our Code, Our Bugs, Our Responsibility.
-== The Samba Team
-======================================================================
-
-
-================
-Download Details
-================
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-from:
-
-         https://download.samba.org/pub/samba/rc/
-
-The release notes are available online at:
-
-https://download.samba.org/pub/samba/rc/samba-4.15.0rc3.WHATSNEW.txt
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                         --Enjoy
-                         The Samba Team
 
