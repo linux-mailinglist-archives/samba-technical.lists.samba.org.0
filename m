@@ -2,48 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1CD93FCF4E
-	for <lists+samba-technical@lfdr.de>; Tue, 31 Aug 2021 23:50:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BFF5C3FCFD8
+	for <lists+samba-technical@lfdr.de>; Wed,  1 Sep 2021 01:17:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=pXUD4U1J+ORr2aJcawks0gvrd6jUhG/+mbBRpl27d6g=; b=KqSLP77UTm292Om+2KT2Kk9fqe
-	wPpX9qHIT6eElWbR9E6oAYDbkNfDySkPk0HKSaWpqJTljH1UdcsFeTZwKpgssTigOWarxPNYDERbb
-	wPSC4DSdwi9tcOU/zcaJipGM49Z5Nd73UPNS9FBf0N6MlR6IXgw+PkxzLeJwxDIsjr2NwZjKChCrp
-	ry91ROxEi/4J0mgonERSccjQrYqkLZoMj8gzLRkuz4QsazV+FdcOoGho7Bi4P0BO6HnYeVVdyhbu7
-	yoyycsWoubc0n5nHANYvi6ZREeJK7G+VKVc+VZ3p/RmNaqBZOG4kZ+w62XOK/mCHYkGiS3ahvQwz3
-	51Duayzw==;
-Received: from ip6-localhost ([::1]:64006 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=rK0lhNpSkfQUYRREIH98tkAX6QD0CrdFI+TVJ5vqku4=; b=jXoYnHpDqnaCCd4dEgiBbfu1+n
+	UD7Za9mr1XirzMkCfAyZuOAGhG18GI1fX2RmM/OGVnc/PDrRIy5lX8FMTtYrTpinyNNjTnfSE5u2o
+	oO8n0muTJJbiQVt+c/QBoYmgCNI9EKJhi0Bequnny9qI0QCdrJMFDvwRlfPk03fPUZU65ngDf7wp2
+	yUkVZ87RE11ja8KvKtIwyv/6Oiwk14ZmyB9c2t1wPs9Ok5Bxe4an1tzaMsuZQG51umW0/o8gP9RVK
+	TUCPMNuo7UrH94zekFNhIEqhe/5IeMHCnKF5/p5XwqCgFba/Oz727tHCwA1eOc/PxZoGFZ0+reUF3
+	ZJE8KHcw==;
+Received: from ip6-localhost ([::1]:64746 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mLBeL-00AOqr-EG; Tue, 31 Aug 2021 21:50:33 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63822) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mLBeE-00AOqi-E9
- for samba-technical@lists.samba.org; Tue, 31 Aug 2021 21:50:30 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=pXUD4U1J+ORr2aJcawks0gvrd6jUhG/+mbBRpl27d6g=; b=ymHBHFU6kQJTwDj5x/KWI4A1lX
- X0CaIUuE3SjN97+zC769T9EVB/KL+w87ZqWHuQiHAjTURv2bEu8/csaI0qHZwnFgPOzbvfuqDyWFc
- hMW2SvI4Q8Px8wDJwkfHqzUohcEuwse00Y/XaIVM22p4cD9Y9w+pf7A39V02Z/2zNWB8BgL1rcAgz
- IurmiA0qucNFyPwyultZK/DWOw/u7i3ORSU8U5p0dNuM9vEPho/7Nd6TqyVsYBPVl5ihUldlN/vgs
- 7saOj/UD6x8u4pNyBr5T4l4HJalkMXKu4IcDowHWKHG8F0GBWbgeXGUKzmfuZkp2K5JONgATvdbpv
- 9UiQPgFXmHe0hrvi71tZeWpLhnD+KI6xgoMN3QcDRjPKUf6B9aLSJ71EgFhyGPrrcNSCtgP8owhcM
- I9ptR1eby1D0s2oYLo9s5CP+8QzSSysDec6h/bsa7EEPA+VvW0JzGstUfDiXTsOM/1QtWtrhzxdNJ
- zFV203gV2KyNBVjHZczH4r50;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mLBeC-003vsX-MS
- for samba-technical@lists.samba.org; Tue, 31 Aug 2021 21:50:24 +0000
-Date: Tue, 31 Aug 2021 23:50:18 +0200
-To: Samba Technical <samba-technical@lists.samba.org>
-Subject: Re: [GIT PULL] new smb3 kernel server (ksmbd)
-Message-ID: <20210831234757.7467527b@samba.org>
-In-Reply-To: <163042809342.7406.683232852261811056.pr-tracker-bot@kernel.org>
+	id 1mLCzB-00APG4-Rr; Tue, 31 Aug 2021 23:16:09 +0000
+Received: from mail.kernel.org ([198.145.29.99]:54544) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1mLCz3-00APFv-VQ
+ for samba-technical@lists.samba.org; Tue, 31 Aug 2021 23:16:06 +0000
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 1815B61026
+ for <samba-technical@lists.samba.org>; Tue, 31 Aug 2021 22:58:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1630450711;
+ bh=rK0lhNpSkfQUYRREIH98tkAX6QD0CrdFI+TVJ5vqku4=;
+ h=In-Reply-To:References:From:Date:Subject:To:Cc:From;
+ b=AuuXVFq5g1LNTffFQLxP4vJPrn+g9nMJXIi7/lCG9iP4slWzPD1fY2wFF6LvCj6gJ
+ nt5pawNzdt0Y3bSQsFs9NjF3pRcVEpBdLEwWDNH/f3ktqqsDtOHUkWOpGHR91RGvvY
+ ElfTlMxsUNMFFLnfXdZyVbkw9R4GdYArFTKaVgDXiiJbb+3NvvyK9agWwGSMnlnkFq
+ zMlas7CzpAm/pr2qmi5m2eGkzQ2tnbvMq/ayPVzEtBzVbUM6rij9bPI0R2zU3uVaYa
+ SspoaDKNVlkpvuQxdBXPE3I93WLNiCLi8In5A+En+TyAdaMT5CiZOZQrxq9Ekdmbpz
+ YRiMYOqUfkjCA==
+Received: by mail-vs1-f54.google.com with SMTP id q29so891321vsj.13
+ for <samba-technical@lists.samba.org>; Tue, 31 Aug 2021 15:58:31 -0700 (PDT)
+X-Gm-Message-State: AOAM532grUN+1HQFWha2fkbOrHoBA+T3HnsgHW7xDjVX2bZlvkxhpVHU
+ qeT7UK+Gi+kUAaVlTAMqnkanFOybVnhqG8Tq7ig=
+X-Google-Smtp-Source: ABdhPJwFFIgi0Of/u9RcbfXaoQtP4BCznXcNHf7Td6R4xjNNGNGQTUyWvEPXt8i5GNVYk2zehE8H9CVDHPa+PpxO/Lw=
+X-Received: by 2002:a67:d095:: with SMTP id s21mr21535741vsi.37.1630450710253; 
+ Tue, 31 Aug 2021 15:58:30 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a05:6102:c47:0:0:0:0 with HTTP; Tue, 31 Aug 2021 15:58:29
+ -0700 (PDT)
+In-Reply-To: <20210831234757.7467527b@samba.org>
 References: <CAH2r5msoKV7qAgoKipa+QNDJ+xR83YGuz+he+GH9sPTSzBMLHA@mail.gmail.com>
  <163042809342.7406.683232852261811056.pr-tracker-bot@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+ <20210831234757.7467527b@samba.org>
+Date: Wed, 1 Sep 2021 07:58:29 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd-N2BQE1JQ_UgLc=ss8cuvaE0GMKQDrEhMTOMPLeG5-Jg@mail.gmail.com>
+Message-ID: <CAKYAXd-N2BQE1JQ_UgLc=ss8cuvaE0GMKQDrEhMTOMPLeG5-Jg@mail.gmail.com>
+Subject: Re: [GIT PULL] new smb3 kernel server (ksmbd)
+To: Samba Technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,22 +64,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Disseldorp <ddiss@samba.org>
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: David Disseldorp <ddiss@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 31 Aug 2021 16:41:33 +0000, pr-tracker-bot@kernel.org wrote:
+Special thanks to Steve and Ronnie.
 
-> The pull request you sent on Sun, 29 Aug 2021 19:32:41 -0500:
-> 
-> > git://git.samba.org/ksmbd.git tags/5.15-rc-first-ksmbd-merge  
-> 
-> has been merged into torvalds/linux.git:
-> https://git.kernel.org/torvalds/c/e24c567b7ecff1c8b6023a10d7f78256cef742c4
+As soon as I woke up I just noticed that ksmbd was merged into mainline. hurray!
 
-In case any one missed it, ksmbd is now queued in Linus' tree for 5.15.
-Congratulations to everyone involved in this fantastic effort!
+The dream has finally come true since sharing the prototype version
+with Steve in 2015. First, Thanks Steve, I think that your advice on
+the redesign of ksmbd and what we need for the smb server make current
+shape of ksmbd today. Also, I am very grateful to
+Ronnie's e-mail telling me not to give up and continue the this
+project and lots of technical advice as well!
 
-Cheers, David
+Really thank you so much for supporting ksmbd upstream again.
+
+2021-09-01 6:50 GMT+09:00, David Disseldorp via samba-technical
+<samba-technical@lists.samba.org>:
+> On Tue, 31 Aug 2021 16:41:33 +0000, pr-tracker-bot@kernel.org wrote:
+>
+>> The pull request you sent on Sun, 29 Aug 2021 19:32:41 -0500:
+>>
+>> > git://git.samba.org/ksmbd.git tags/5.15-rc-first-ksmbd-merge
+>>
+>> has been merged into torvalds/linux.git:
+>> https://git.kernel.org/torvalds/c/e24c567b7ecff1c8b6023a10d7f78256cef742c4
+>
+> In case any one missed it, ksmbd is now queued in Linus' tree for 5.15.
+> Congratulations to everyone involved in this fantastic effort!
+Thanks for your mail!
+>
+> Cheers, David
+>
+>
 
