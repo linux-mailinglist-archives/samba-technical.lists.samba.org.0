@@ -2,47 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FA523FCF1F
-	for <lists+samba-technical@lfdr.de>; Tue, 31 Aug 2021 23:26:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1CD93FCF4E
+	for <lists+samba-technical@lfdr.de>; Tue, 31 Aug 2021 23:50:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=qpsUr3grmki3HTWKn+EPl7lHbfrNktGguPdVFlMxWes=; b=vzSvY3leXtts1Ix0cqc6mBglhR
-	mujVLOn9OOhLBdly3sbNhdF1X62Oa7ensQysqsOwDKhx1HWYJNB93BgKBzdEZ02lwkLDtLoPW5X7E
-	zu4AFmPewAW4DNQeZ/GcGrFsVfYKFI/Lv+hj+SdyxgUua26A24mjVShYU94OcX4sJ0eEbxuVoTdaZ
-	cf7J2XYYK+w3cyfrSPJuMZhQgx1In88YA9V/8JaMXIRjDl5615GSZCb2s7Bzcn2XPYyreH+6jKmk/
-	qHjTu51i2GAPaxzNV631qeK+VV+TnetBFVDuIWlYxNea7iNlJWN9VhdB0aa/xd97xA7kLVK7GvFbR
-	X0dqblnw==;
-Received: from ip6-localhost ([::1]:61000 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=pXUD4U1J+ORr2aJcawks0gvrd6jUhG/+mbBRpl27d6g=; b=KqSLP77UTm292Om+2KT2Kk9fqe
+	wPpX9qHIT6eElWbR9E6oAYDbkNfDySkPk0HKSaWpqJTljH1UdcsFeTZwKpgssTigOWarxPNYDERbb
+	wPSC4DSdwi9tcOU/zcaJipGM49Z5Nd73UPNS9FBf0N6MlR6IXgw+PkxzLeJwxDIsjr2NwZjKChCrp
+	ry91ROxEi/4J0mgonERSccjQrYqkLZoMj8gzLRkuz4QsazV+FdcOoGho7Bi4P0BO6HnYeVVdyhbu7
+	yoyycsWoubc0n5nHANYvi6ZREeJK7G+VKVc+VZ3p/RmNaqBZOG4kZ+w62XOK/mCHYkGiS3ahvQwz3
+	51Duayzw==;
+Received: from ip6-localhost ([::1]:64006 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mLBG7-00ANaC-J2; Tue, 31 Aug 2021 21:25:31 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58592) 
+	id 1mLBeL-00AOqr-EG; Tue, 31 Aug 2021 21:50:33 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63822) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mLBFz-00ANa3-2r
- for samba-technical@lists.samba.org; Tue, 31 Aug 2021 21:25:28 +0000
+ (Exim) id 1mLBeE-00AOqi-E9
+ for samba-technical@lists.samba.org; Tue, 31 Aug 2021 21:50:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=qpsUr3grmki3HTWKn+EPl7lHbfrNktGguPdVFlMxWes=; b=Qbc1vUyHgqKuC/HJoi3HA3HOq2
- at9XYoOxok5iL5vpOluMfgdKtsFrtrhDimwmvYTEnvqErA1MTs+ZXoU/EWztZHuCXgFV3Jz1og5RV
- OnXyVuEOSS7Yyl3A35R6xfoqcsfOtZnqdZHng79FKtRWA6r2F18f875I535tX6tlrcnsfJwk+EJVC
- KfevdqUbwx7VlDd56ANhb0n3MjaRHAMHz9N//7SmAXVN6BYCNa3SMV1ZrY7LoklaY4o6UlxMrfH5j
- /jVzUpph97UFua499pt2oaBnGiA0jfIu36H9hrRSXUQj6dGCUG0MTjvQKOP8um23KkIpZGSD3v2hS
- vjjLKyEELBiQSW53serEYCS/tfCY9NWmQyPgiYwR0mZL2Ug0rI/kjqJ9BIxKiAI3eYtClhwsC9XYZ
- DZ8P8z2/r/E6BSvXWcx1sIkk1LseLGtFekNZcKERzNFxnMoDm6qUgRUfOD1cs8heLlInoP5kqu3WE
- xTo6PxAsX1YSE8eswb1znWjM;
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=pXUD4U1J+ORr2aJcawks0gvrd6jUhG/+mbBRpl27d6g=; b=ymHBHFU6kQJTwDj5x/KWI4A1lX
+ X0CaIUuE3SjN97+zC769T9EVB/KL+w87ZqWHuQiHAjTURv2bEu8/csaI0qHZwnFgPOzbvfuqDyWFc
+ hMW2SvI4Q8Px8wDJwkfHqzUohcEuwse00Y/XaIVM22p4cD9Y9w+pf7A39V02Z/2zNWB8BgL1rcAgz
+ IurmiA0qucNFyPwyultZK/DWOw/u7i3ORSU8U5p0dNuM9vEPho/7Nd6TqyVsYBPVl5ihUldlN/vgs
+ 7saOj/UD6x8u4pNyBr5T4l4HJalkMXKu4IcDowHWKHG8F0GBWbgeXGUKzmfuZkp2K5JONgATvdbpv
+ 9UiQPgFXmHe0hrvi71tZeWpLhnD+KI6xgoMN3QcDRjPKUf6B9aLSJ71EgFhyGPrrcNSCtgP8owhcM
+ I9ptR1eby1D0s2oYLo9s5CP+8QzSSysDec6h/bsa7EEPA+VvW0JzGstUfDiXTsOM/1QtWtrhzxdNJ
+ zFV203gV2KyNBVjHZczH4r50;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mLBFx-003vhn-6A; Tue, 31 Aug 2021 21:25:21 +0000
-Message-ID: <9f99c5977e7743e615936f070ce8e085a73ed1fb.camel@samba.org>
-Subject: Re: Help writing new SAMBA_INTERNAL DNS test code please.
-To: Jeremy Allison <jra@samba.org>, Matt Grant <matt@mattgrant.net.nz>
-Date: Wed, 01 Sep 2021 09:25:14 +1200
-In-Reply-To: <YS6StQYsctrwXzvu@jeremy-acer>
-References: <CAHA-KoObp6CvJg05wbSypST_4eAtGhuTg9eUkcBYw+PTV612og@mail.gmail.com>
- <YS6StQYsctrwXzvu@jeremy-acer>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1mLBeC-003vsX-MS
+ for samba-technical@lists.samba.org; Tue, 31 Aug 2021 21:50:24 +0000
+Date: Tue, 31 Aug 2021 23:50:18 +0200
+To: Samba Technical <samba-technical@lists.samba.org>
+Subject: Re: [GIT PULL] new smb3 kernel server (ksmbd)
+Message-ID: <20210831234757.7467527b@samba.org>
+In-Reply-To: <163042809342.7406.683232852261811056.pr-tracker-bot@kernel.org>
+References: <CAH2r5msoKV7qAgoKipa+QNDJ+xR83YGuz+he+GH9sPTSzBMLHA@mail.gmail.com>
+ <163042809342.7406.683232852261811056.pr-tracker-bot@kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -57,75 +57,22 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba-technical@lists.samba.org
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2021-08-31 at 13:36 -0700, Jeremy Allison via samba-technical
-wrote:
-> On Tue, Aug 31, 2021 at 05:20:57PM +1200, Matt Grant via samba-
-> technical wrote:
-> > Hi Andrew!
-> > 
-> > Have not created Samba bugs for the following yet, as I am trying
-> > to get
-> > the hardest part doen, writing the test code.
-> > 
-> >   1. Dns server port number specification for smb.conf 'dns
-> > forwarder'
-> >   server list
-> >   2. Restricting the dynamic DNS update ranges so that the
-> > SAMBA_INTERNAL
-> >   server is not spammed with IPv6 PD addresses from the ISP.
-> > 
-> > Main issue is being able to dynamically change the smb.conf setup
-> > for the
-> > Python self test hookup, for 1, specifically within
-> > samba.tests.dns_forwarder.  Being able to do this will also make 2
-> > far
-> > easier.  After looking at the test code set up, I can't see how to
-> > dynamically change the smb.conf file in st/samba/smb.conf while the
-> > tests
-> > are running to set up for testing the port numbers or not.
-> 
-> Look at tests like:
-> 
-> source3/script/tests/test_deadtime.sh
-> 
-> they use a feature:
-> 
-> global_inject_conf=$(dirname $SMB_CONF_PATH)/global_inject.conf
-> 
-> that allows a test to include dynamic smb.conf entries for Samba3
-> tests via the line:
-> 
->          include = $globalinjectconf
-> 
-> inside selftest/target/Samba3.pm.
-> 
-> I don't think the same feature is in selftest/target/Samba4.pm
-> but I'd look into adding that. It might do what you need.
+On Tue, 31 Aug 2021 16:41:33 +0000, pr-tracker-bot@kernel.org wrote:
 
-Sadly the AD DC (except the embedded smbd) still doesn't reload the
-smb.conf (ever!), so that trick won't work.  
+> The pull request you sent on Sun, 29 Aug 2021 19:32:41 -0500:
+> 
+> > git://git.samba.org/ksmbd.git tags/5.15-rc-first-ksmbd-merge  
+> 
+> has been merged into torvalds/linux.git:
+> https://git.kernel.org/torvalds/c/e24c567b7ecff1c8b6023a10d7f78256cef742c4
 
-If custom smb.conf options can't be avoided, they need to be added to
-an existing (if otherwise harmless) or new environment.  Sadly if a new
-server instance (like ad_dc, fl2003dc etc) is needed in Samba4.pm that
-is a fair chunk of work, so we try to fit it in with an existing one.
+In case any one missed it, ksmbd is now queued in Linus' tree for 5.15.
+Congratulations to everyone involved in this fantastic effort!
 
-Sorry!
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-
+Cheers, David
 
