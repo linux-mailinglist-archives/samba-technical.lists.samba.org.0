@@ -2,60 +2,69 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 201F53FF8B0
-	for <lists+samba-technical@lfdr.de>; Fri,  3 Sep 2021 03:47:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB8E33FF92B
+	for <lists+samba-technical@lfdr.de>; Fri,  3 Sep 2021 05:52:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=2H9pmBYNDpedhSLc4OTC9hYxltWv0HIVlChy09Mo7oM=; b=Tbg+RWDmgk6lmIYQDT8S6rj5tD
-	Q0Mo2+ytjfR4QBFQggD4ha0j31ooeULQ6ozF5yA4ySbJcayw+HoBUmmcNMhcZsZesNXgNrcg2+XXk
-	arT2FDet9/jU8Uz2Fr8HixohDtcqW/qOlVrPbIZL6EFTcvtNXbO7Pm4ZFPZeh0wwImczDZlAtMMab
-	/GMyRweWydrx/+SnbzPLC8Qvp1JfH/mMUQxwYAwYDh1qvPE8K8hQNwzulWbw6Y0stlwCYTJ4vlzTD
-	tX5a8VG3zUv0BAPM3ngBgsGNaTcP+Z0Ejm3tqOwMmyg8JRwZSRS3L7KEQELJoYv1TMTKZBlPmFI+K
-	skCNZZ4A==;
-Received: from ip6-localhost ([::1]:59520 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=B3j0AqvToxNc3J/JGswMzWNtr5VFncBejv057oqCNh8=; b=cdNqcMwtWhrhRD1LVTiy6nS7M2
+	q5eKb6DnUkNkcy62PsDbWSup0cM6QrEF67Ocbw+E4rGaRBqoq9lpgDKkgdOWn3mh6QTaV7i+padwE
+	+zPRibv/Z2KOJI8NGG0LLR+hkTyaSIC+u3EjwctPLE0rB2AIWkNKTsOyLCF3PutErsoTRzA1nTetV
+	i8+Cx91W/0JBb+PirKHG5ejR0wzRYorD/jWJ4z+I2gHs27+FjAe932M7R/8RNF0SIDDBBG9UlqwMF
+	UR3nFnb8KXVHxZnpTwTbOaf5fx+Ae1A23JMYdzHYY1FHVzdfGUp0y+iaiaIgdLFDWvsAdF+niQxnj
+	0W7zEkTQ==;
+Received: from ip6-localhost ([::1]:60218 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mLyHs-00CsRm-5T; Fri, 03 Sep 2021 01:46:36 +0000
-Received: from mail-qk1-x736.google.com ([2607:f8b0:4864:20::736]:36353) 
+	id 1mM0Et-00Ct6b-Jv; Fri, 03 Sep 2021 03:51:39 +0000
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:38563) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mLyHl-00CsRd-Cw
- for samba-technical@lists.samba.org; Fri, 03 Sep 2021 01:46:32 +0000
-Received: by mail-qk1-x736.google.com with SMTP id p4so4365131qki.3
- for <samba-technical@lists.samba.org>; Thu, 02 Sep 2021 18:46:28 -0700 (PDT)
+ (Exim) id 1mM0Ek-00Ct6S-JY
+ for samba-technical@lists.samba.org; Fri, 03 Sep 2021 03:51:36 +0000
+Received: by mail-pf1-x42f.google.com with SMTP id s29so3298736pfw.5
+ for <samba-technical@lists.samba.org>; Thu, 02 Sep 2021 20:51:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=mattgrant-net-nz.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
- bh=f8zUeB9jsjgJVf5Ai8RSpaY+cVg3CnVvL3Wnfp6KpGw=;
- b=tjOhefP8Ww3ubS4QcNRxB3DpIgtWfk4315IEhzJnS7U5tGCYo94yFrmM7MN3t0yi2w
- Xoz1D44UMLu0JsA33vrPYsghYfxFSiag4/ISkTCNGatSFZmFTERDxHwnCAbPNQJo5Bwz
- bv+r2t1DKVsx0L6zZusf/ZX0euKHERZW6ud/8cC9UCi7SvgTGlljFf5C/87SkrY6vZPw
- 9uF2fuRHbf4uYPtyg0DwiSAcfF1lGQQ3HUxJeuXvJ0hjrtm2dtQ8lKmFH3jRkA3xTHhQ
- MBpc9WLyl7sTjwct4SxZSkOUoEsS+yx/dmTh1h9FnVDI0xR76f9B/s9tphH3QugtgYkw
- Jc0A==
+ h=to:from:subject:message-id:date:user-agent:mime-version
+ :content-language;
+ bh=skbiV60QtsguOEezPQD837Ywgnd9Km2foyknTHFwRew=;
+ b=ALdzdYfTqN9f9KCGDWW+CwTvmthGQIRSXNO2EjozK7pX8x0uFBDWDSZo+mgXkpr9rR
+ U/NiD2mavmWuZqea2OPnXtcuu1LRiaDk0X7qXvh/velUxtwPPy3y55ys4Dqb1QWWTR6N
+ aTYEuAVBrQ80UlD8ePwSfSB22bULzMn7xt3kDZ0YDQrYzOQwdAPNxetQEE91JxGmmeye
+ F3FJS6zdZLzGXsIFpeCE0U0OUSpwN6O/cWlOfZjSO0tow1cGlSRuJhBL9zhdp0Cd41/k
+ B2L65pu0AtPwOWopA3Qc0gcIwZHpHSJif4R8SNsDon7vMHTsTVScjV4lPOThR/w7rmi1
+ CZ1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to;
- bh=f8zUeB9jsjgJVf5Ai8RSpaY+cVg3CnVvL3Wnfp6KpGw=;
- b=ZmGkRR+wl86YjOUBZ+kPoy372vAyZJJJAZTQVMsRdbl1xir1IFpLeWcNMlQecpf1zn
- 21xyQUkz15nw5uQxLRRnfZsWbfBcCfGeQW1UQ/EVPancr7w9awfnOK29RoXW0Q3Pw1F+
- ux/aJTy52WsTDcsAIqt8At/Sr1IqVdARWKTAJzWBcinFA83EvXcZCm2rbE0RiYEMPUVA
- cWjfxexTjooObBXOEM8+DSX5ymxbSg2spwTR9QcKxrO307rx7zC8HJ0sY9zUJTXzHigs
- fBXTbb/0a6XGl0exX0SVFAF0QhOcDqHjK4oBVOUPH2PKBHDSGanM9mJdQgRc/YiFlOaY
- vMFQ==
-X-Gm-Message-State: AOAM5338kzzPJhmuO/iLh32jyWDlQNfPWNXIIutGVX0vJvU09cnooH6T
- RaxaFpyi2NhwjEU5wG8h85wufmPSVjvtKdk3EqafqfLoTsCT8Q==
-X-Google-Smtp-Source: ABdhPJxOmACyfWhHhFYuh6nbQNJHq2SbadKKeZ/W3uzcX8gga09QZSe/M3JCPkO8f1C+dHaNMyhgyE5uuoj0tuDw+tA=
-X-Received: by 2002:a37:a80c:: with SMTP id r12mr1103038qke.299.1630633587345; 
- Thu, 02 Sep 2021 18:46:27 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAHA-KoNeLd2bUCgU+4nNy=nMFWKUgOYxHrpdEZZsX3M3m523mA@mail.gmail.com>
-In-Reply-To: <CAHA-KoNeLd2bUCgU+4nNy=nMFWKUgOYxHrpdEZZsX3M3m523mA@mail.gmail.com>
-Date: Fri, 3 Sep 2021 13:46:16 +1200
-Message-ID: <CAHA-KoM+Js20vVKOxVMTC7LAA_C0Bw9n2H-tpYB_KYLR64-smA@mail.gmail.com>
-Subject: Fwd: SAMB_INTERNAL DNS forwarding port merge request - my initial
- samba submission
+ h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+ :mime-version:content-language;
+ bh=skbiV60QtsguOEezPQD837Ywgnd9Km2foyknTHFwRew=;
+ b=qoIQIz0L6tcqTgJPg52V72vKdFGIHQbQp2yiWf6YjAfRgRst0snjLJdUEs3c3HALef
+ KZg0SfAugAQKYEzI3aKECHI26a6QAcp2xGUtfh83B3c6CAJrMCCcN/WagOJV4LLRG6lq
+ 7UqikRTNCX9Ri3Z8e5gwfLaEr84EVMMx/tbr7lGv3qwVy/SzhuZZqOFQsfHpAjNqhSUG
+ 7WRFslesUKlYoiXqGAo4UGZJsNcJMppGiTIOoSNU9CIfKsi+xZBBdXmbgjyxjVJi2QUd
+ ODlxNUmlXxk5aYD7R3bnJ3SPsn05FPugtC9Sl2MnQWuQLnzAd9qt8ZphUvsdENVJYihj
+ h1NA==
+X-Gm-Message-State: AOAM5304KfECkPRVIux8cSfn9zoy9BV7wOeklEcOf4Uj76DxzJqKwdfF
+ oc1vy0Ew0VoctjeBAApa6q9zqJ7uPhZ/YA==
+X-Google-Smtp-Source: ABdhPJzSeKRv8xJVNGNZw+TmP1qaoWodsZqzfaB6mh0sGBtoPEThxWt8L2K61mfzziN6z+qhYFE7lA==
+X-Received: by 2002:a65:51c8:: with SMTP id i8mr1638299pgq.451.1630641087033; 
+ Thu, 02 Sep 2021 20:51:27 -0700 (PDT)
+Received: from ?IPv6:2407:7000:96b0:e500:e733:ba37:3588:8ee8?
+ ([2407:7000:96b0:e500:e733:ba37:3588:8ee8])
+ by smtp.gmail.com with ESMTPSA id a78sm3634169pfa.95.2021.09.02.20.51.25
+ for <samba-technical@lists.samba.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 02 Sep 2021 20:51:26 -0700 (PDT)
 To: samba-technical@lists.samba.org
-Content-Type: text/plain; charset="UTF-8"
+Subject: New developer - CI build failure in /usr/include/gpg-error.h - can't
+ read, not connected with patch at all!
+Message-ID: <457c64e2-32b4-2de9-7c63-99583d679942@mattgrant.net.nz>
+Date: Fri, 3 Sep 2021 15:51:21 +1200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
+MIME-Version: 1.0
+Content-Language: en-US
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -77,45 +86,30 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 Hi!
 
-Could a current maintainer check this over please.
+
+In Merge request 2146, CI pipeline #364432341,  had this unexplained
+failure:
+
+Processing file third_party/socket_wrapper/socket_wrapper.c
+Processing file third_party/uid_wrapper/uid_wrapper.c
+_*genhtml: ERROR: cannot read /usr/include/gpg-error.h*_
+Processing file /usr/include/stdlib.h
+Processing file /usr/include/netdb.h
+Processing file /usr/include/pthread.h
+Processing file /usr/include/grp.h
+Processing file /usr/include/gpg-error.h
+section_end:1630640126:step_script
+[0Ksection_start:1630640126:cleanup_file_variables
+[0K[0K[36;1mCleaning up file based variables[0;m[0;m
+section_end:1630640126:cleanup_file_variables
+[0K[31;1mERROR: Job failed: exit code 1[0;m
+
+What gives please?  The patch for the dns forwarder port has nothing to
+do with this header file, every thing compiles for me, and the
+dns_forwarder tests run fine on my Dev environment.
 
 Regards,
 
-Matt
-
----------- Forwarded message ---------
-From: Matt Grant <matt@mattgrant.net.nz>
-Date: Fri, 3 Sept 2021 at 13:45
-Subject: SAMB_INTERNAL DNS forwarding port merge request - my initial samba
-submission
-To: Andrew Bartlett <abartlet@samba.org>
-
-
-Hi Andrew!
-
-Bug number https://bugzilla.samba.org/show_bug.cgi?id=13355, assigned
-to Kai Blin, 2 years ago and never closed.
-
-Could you please review my patch. Merge Request:
-
-https://gitlab.com/samba-team/samba/-/merge_requests/2146
-
-NOTE: In the dns_forwarder helpers, there is a rather nasty feature in
-Python standard library SocketServer code exposed.  You have to subclass
-UDPServer to get it to do IPv6....  Checked module documentation in Python
-3.9, read source code, and this is the only way to fix this ;-(
-
-Also, testparm does not have any parsing support for the smb.conf dns
-forwarder entry as it is specified as a cmd_list....  testparm will take
-just anything there and accept it.  Lots of other places where IP numbers
-are given and no sanity checking done either, so chose to leave well alone,
-as that looks like the subject of another improvement project.
-
-Please let me know of any improvements, especially working around the above
-nasty.  Given, its in the Samba test suite, so its probably not too serious.
-
-Thank you so much!
-
-Regards,
 
 Matt Grant
+
