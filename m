@@ -2,44 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3273B3FF931
-	for <lists+samba-technical@lfdr.de>; Fri,  3 Sep 2021 06:01:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 682923FF9A7
+	for <lists+samba-technical@lfdr.de>; Fri,  3 Sep 2021 06:41:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=cf+mfKZ3NE7IjJz7GWwPxVHLuBy3kg7F1hELMfQWwjI=; b=zXFgRzxzwL/UiFGvgdavFLdFZu
-	M2Jsv4Yhmc5GIcAWYjmUJNg31ZLB40LPipQ2eUk36qUcr50cC1qEIGalzCKmoQ9YKmM3jNlBT7r9c
-	FG0x1SJh8p+u//itnqyPUpJBPrsFdpPLzW4LFScv3Sydo4Lg3292flzKdmGeqQfIzxuiRJf0gNVCA
-	/RacA9sXKvolJD+oZtUmtd7sUiyPJUt2G1KQdejlDB2BQc0rzAn0p0AO+5hNq9EMrANzcKwA0EdUn
-	zIfMeQgxYSMDB0Rj25m2SWVz8mTMZWa2T+inolNIjZSBUWj3KlEznHrZsCO1ENVYoeF85b8vZ/LGV
-	pFMG9Ryw==;
-Received: from ip6-localhost ([::1]:60912 helo=hr1.samba.org) 
+	bh=pvnrqOUVX4koOMx0M+RdhNH1ukeN0k712Qrec7rp68o=; b=d2EB6BicgK0MD3v7W4/00z0ax4
+	Gb5Zr0fxGFyk9ocQQqTlqESzRL9i8lWxbGIGUWaUslJUzptgWHVn7czFfLKtlH7NC1LSZkm4dXJYJ
+	HFyzgBhZX8PVABl202i1Ysv7kMMvw0nHbProaY3EAfqheFZK15qU4k5en9GZWp4KfSVFRgSmVA4Km
+	iSsQZ9+NAH1qdHONobtJXlpAp5ys9MnitlVdlAhIEw8QD+Ch0vYFTm+4H5gVdgkZ1oLocdAXlcxRH
+	L3f9g1R5Xd1Sb+u7E+IGVBOwTfj7Fwn/0aO/lnoRYD83ff7jzQDjEd2+Yb0BKQ6wASF+LolRJptAf
+	13mTKb5A==;
+Received: from ip6-localhost ([::1]:61634 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mM0Np-00CtPR-Pg; Fri, 03 Sep 2021 04:00:53 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57262) 
+	id 1mM10F-00Ctvh-Fw; Fri, 03 Sep 2021 04:40:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:65062) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mM0Nk-00CtPI-FI
- for samba-technical@lists.samba.org; Fri, 03 Sep 2021 04:00:51 +0000
+ (Exim) id 1mM109-00CtvY-Ry
+ for samba-technical@lists.samba.org; Fri, 03 Sep 2021 04:40:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:To:From:Message-ID:CC;
- bh=cf+mfKZ3NE7IjJz7GWwPxVHLuBy3kg7F1hELMfQWwjI=; b=rAwwh2MmG5qR5pFxouu0/l7ts6
- lZsZCzr+JmMvD0+rdXv+1FLUUMIX0hkfoHm80n6A83299Dw1PybS840H4imCP94RkV/4vp/mKQ5oF
- eVPoSr2ffvEHrF6SOGrdrG0NfMlKq9IUds9fJOE3qgd2sBmu9CUyB/QSaeFI48zRAFXwZCQdVVFI1
- VWajUBrKexREHotcC0YYObpz9AQ5uDFPOu5H9B+M6R7192jGuTpohPkBaypcRhHZSEioeWnvHvK9U
- Jqm7DnkB3hse3G5d49xFxvai80DeY14kFVQw+Lk89vQGf5JF1MJqrMEJ9sU6I6DtAYwcfBWzL3ndt
- 0JpGwRixDYoEWuZUYqbLoz2Y4aHJvptzmg9pRxGF9pevds0YuCw0rO/u3WJTRDvuq85osukGUAvSx
- UlNcWhusjevK7xMZ7DjGJPcSLlRp9nc1haDg91EjabdbV1LHrWexJotGGybrXqlevPbcSOXQFamFl
- W726ddb09UP+o3JP5Nfv6lag;
+ bh=pvnrqOUVX4koOMx0M+RdhNH1ukeN0k712Qrec7rp68o=; b=P3A6bC0MXRgSodQLlWgF1IvbPk
+ xT5N+nrrqaevAkjBxLGDVg8YM/U4xyg5J5Famaq6YkVN4/cyEaa/gg5ZD3qfqiyNQ+dgJFlaog4zv
+ 40njc+UWEvF6c+OCVd2OCCdlpSjlAWd2ZLPTYzSV05Ivhjxt0NUyJd7tyT8dzf8luaflEJp6RDY5R
+ L18bHB5aHM/3/P/C4lhI3af1HVv0hw7AGDq0bVV97h/mNw1mAPt+/jamKoZOhk7mrOpe5GFcl8qZ3
+ rOLyrkConE76BV7r+m64TZdjAv7JVt07kP0/IB/+eKPAMm7C6nxu+g6jcurbMjtlJy3ZhgELVI4Qb
+ ZAo/1uqc/0D+gi+qnrFiGT2/3aqXpYTkopWn/5wv9o83TrL/qtzJJZ5Yan10+uoH1nIoSBd5AiP+W
+ cksTPbOmbtWz5fb10BQUf1Pkqp/h3w+GVZHHUyUY8Q8PPPVbCl+I4Lz4Z84jQ7rsb6WmXcqFsBB0m
+ gdo5jqwnDeEuDdPQKXbF7xTN;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mM0Nh-004MnA-WC; Fri, 03 Sep 2021 04:00:46 +0000
-Message-ID: <1325f3bc09eede86bf18dfd7c4af26776d6048ac.camel@samba.org>
+ (Exim) id 1mM108-004N3c-CN; Fri, 03 Sep 2021 04:40:29 +0000
+Message-ID: <ebdac5cf71da609ed05e3ca121c3217a973be2a0.camel@samba.org>
 Subject: Re: New developer - CI build failure in /usr/include/gpg-error.h -
  can't read, not connected with patch at all!
 To: Matt Grant <matt@mattgrant.net.nz>, samba-technical@lists.samba.org
-Date: Fri, 03 Sep 2021 16:00:41 +1200
-In-Reply-To: <457c64e2-32b4-2de9-7c63-99583d679942@mattgrant.net.nz>
+Date: Fri, 03 Sep 2021 16:40:24 +1200
+In-Reply-To: <1325f3bc09eede86bf18dfd7c4af26776d6048ac.camel@samba.org>
 References: <457c64e2-32b4-2de9-7c63-99583d679942@mattgrant.net.nz>
+ <1325f3bc09eede86bf18dfd7c4af26776d6048ac.camel@samba.org>
 Content-Type: text/plain; charset="UTF-8"
 User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
@@ -62,46 +63,30 @@ Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2021-09-03 at 15:51 +1200, Matt Grant via samba-technical
+On Fri, 2021-09-03 at 16:00 +1200, Andrew Bartlett via samba-technical
 wrote:
-> Hi!
 > 
+> This looks like you are somehow attempting a code coverage build.
 > 
-> In Merge request 2146, CI pipeline #364432341,  had this unexplained
-> failure:
-> 
-> Processing file third_party/socket_wrapper/socket_wrapper.c
-> Processing file third_party/uid_wrapper/uid_wrapper.c
-> _*genhtml: ERROR: cannot read /usr/include/gpg-error.h*_
-> Processing file /usr/include/stdlib.h
-> Processing file /usr/include/netdb.h
-> Processing file /usr/include/pthread.h
-> Processing file /usr/include/grp.h
-> Processing file /usr/include/gpg-error.h
-> section_end:1630640126:step_script
-> [0Ksection_start:1630640126:cleanup_file_variables
-> [0K[0K[36;1mCleaning up file based variables[0;m[0;m
-> section_end:1630640126:cleanup_file_variables
-> [0K[31;1mERROR: Job failed: exit code 1[0;m
-> 
-> What gives please?  The patch for the dns forwarder port has nothing
+> The issue is that GitLab has helpfully copied he CI/CD configuration
+> file setting from:
+> https://gitlab.com/samba-team/samba/-/settings/ci_cd
 > to
-> do with this header file, every thing compiles for me, and the
-> dns_forwarder tests run fine on my Dev environment.
+> https://gitlab.com/grantma/samba/-/settings/ci_cd
+> 
+> Set the CI/CD configuration file back to nothing or if that doesn't
+> work, '.gitlab-ci.yml'.
 
-This looks like you are somehow attempting a code coverage build.
+Also, as you are already a member of the shared development repo, you
+may start again from here in the instructions, avoiding the issues of
+the forked project:
 
-The issue is that GitLab has helpfully copied he CI/CD configuration
-file setting from:
-https://gitlab.com/samba-team/samba/-/settings/ci_cd
-to
-https://gitlab.com/grantma/samba/-/settings/ci_cd
+https://wiki.samba.org/index.php/Contribute#Subsequent_Merge_Requests_.28and_complex_first_requests.29
 
-Set the CI/CD configuration file back to nothing or if that doesn't
-work, '.gitlab-ci.yml'.
+In the meantime I've also put the above instruction into the Contribute
+page.
 
 Andrew Bartlett
-
 -- 
 Andrew Bartlett (he/him)       https://samba.org/~abartlet/
 Samba Team Member (since 2001) https://samba.org
