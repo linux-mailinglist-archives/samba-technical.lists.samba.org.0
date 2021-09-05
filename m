@@ -2,72 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3641A400E6E
-	for <lists+samba-technical@lfdr.de>; Sun,  5 Sep 2021 08:34:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D833C400E6F
+	for <lists+samba-technical@lfdr.de>; Sun,  5 Sep 2021 08:36:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=Wp/cFYnK685rlH160ns93E/Nex8Xubcfy/Fw9HmCdh0=; b=siilNhcdHNm8biJiQ3trAWHy/m
-	LVU+WsSGYSdSxSvirH4aSJED2M13izEk8sovS0Kwh1eVZm54t3MPBfzsq0qErAld27ZYGm9us4Cua
-	JPu6e54kIKcxsIXaQ3d/s/+DBiNo1HAsGnEgV/eUcZiePvKwMSDdRBzeXv9IMN38H8tFMafX1PZpW
-	S9aYFPaIF8tEHW04pH8w9bwiAhJDPCgV+woWOuWFYT+VfAO+SPXbAaIvUb58HJcqZLSsPZgktwIJ9
-	VQvtQvx23Nq0npm5MIZaOfLWOgx1P7bMz6AOGD3AQr2NGzFGf9LEPZX0ZBrQ+Q0Is9YuxHldXAT96
-	6ajrGrdg==;
-Received: from ip6-localhost ([::1]:24226 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=WvHV/Ki2MM7rl3uq/j+V7Dls5sbmHAF6pLyenOV6hfk=; b=nCc6OyzFfmZUM3o/5Qx7xGwZUw
+	XyqJFjbIefhcqj+joG+WRCOoZjp1SdNz2rKp6yASUNORoN8rIYrrnXuqXjufYNYx0pBQqMXfWbY4a
+	kXBppjwdiDYclalFBJMeDK8EpAB1EUWHkL2ovVXNWs/jPTfztioeDlmYemsKMBgqRMhx2UuYSAMoC
+	vQ4qn/HCCxflWlUikzEb+7XU9AXqGMfSuTwGoCtz5JW4QpkHwBrs3yi8gNTGQDhD18GmcXK8rGl8Q
+	LjL4qz9FVGQh0EGqLtUnbKJvhHLCEqBpCE6TaAma2k/n6Jtqvy0QJJVxUnPcOZA+0Th9wqxhiqZfF
+	3k9NLDqQ==;
+Received: from ip6-localhost ([::1]:24936 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mMli0-00DN3r-GF; Sun, 05 Sep 2021 06:32:54 +0000
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a]:33327) 
+	id 1mMll0-00DNMd-QO; Sun, 05 Sep 2021 06:35:58 +0000
+Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030]:37477) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mMlhc-00DN3i-Am
- for samba-technical@lists.samba.org; Sun, 05 Sep 2021 06:32:34 +0000
-Received: by mail-pj1-x102a.google.com with SMTP id
- 28-20020a17090a031cb0290178dcd8a4d1so1962725pje.0
- for <samba-technical@lists.samba.org>; Sat, 04 Sep 2021 23:32:27 -0700 (PDT)
+ (Exim) id 1mMlks-00DNMU-9s
+ for samba-technical@lists.samba.org; Sun, 05 Sep 2021 06:35:53 +0000
+Received: by mail-pj1-x1030.google.com with SMTP id
+ j10-20020a17090a94ca00b00181f17b7ef7so2333775pjw.2
+ for <samba-technical@lists.samba.org>; Sat, 04 Sep 2021 23:35:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=mattgrant-net-nz.20150623.gappssmtp.com; s=20150623;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=Wp/cFYnK685rlH160ns93E/Nex8Xubcfy/Fw9HmCdh0=;
- b=P8t5QsIYec+LTnvb+3YjbRPrCFZeCEiS/4ls6eywBSSZ5NyH6A5irRBKHNiIfwEImJ
- h0wH0y4Zf3JntFjJMi1RXbViiy8ifgB1QKRgot+Szr57c71SAf24+Pbcf2T0rR+biRDg
- GpoY3CnNTZlqiYz33oCD6EwdwExVZPu74yeFthPYBcxlvInzQyrXP9aMN2WkCkENE62I
- GfIh8N+S80bJYKl/hAriG9Upy8BCbBtGwpSeyZ6gKofANmeY8TFDevHqB0qygCrKkTj6
- ++rCJ+BY6rzEkrVgnXKFWJvHpBXgpL7o8SA/L6bitCgm514pd+z4sCQVbn6IWdbANqKw
- 17gA==
+ h=subject:from:to:references:message-id:date:user-agent:mime-version
+ :in-reply-to:content-transfer-encoding:content-language;
+ bh=WvHV/Ki2MM7rl3uq/j+V7Dls5sbmHAF6pLyenOV6hfk=;
+ b=PYtD0/qhDs5/Xh9Edfa+MN/OHBTzmj9bPb125V3XbWCdxg0WmtroeOO1f12GGWsa3i
+ 4A9GyNv7vkZdIChMmcRVMD05MgRW0nk9BEvo1S5B4M2LSnQmC4EZf14iQmlvoS/KQXoL
+ DQSFWy6C75C8EkUJsKNUBUypEFSBFi1CT/4r/w5mqEpwTSZHbCYES/nSAU9Rckf8X5Fx
+ cywlSgFhiPUIT6Ch1rYR/+FM8qqBmoMH+6E9xLiIBhJsIOB/WSV+3Y4wpI/QuT+BGJ+z
+ 0jI7EXUSVLs0IGTwwoUBtZTBRNw3LyamMfk6tUEhfXBd4XPXQNO8YDgeqkIgoKq49+hs
+ o1wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ h=x-gm-message-state:subject:from:to:references:message-id:date
  :user-agent:mime-version:in-reply-to:content-transfer-encoding
  :content-language;
- bh=Wp/cFYnK685rlH160ns93E/Nex8Xubcfy/Fw9HmCdh0=;
- b=nv32WEr/L6N/5bVIXdCHtpOhhVxsdyw6zzO6p/yl2nd36c+zQ2Pgzsox/r/B+cs3HZ
- iSJNZGIbRLA//iuvlUbKCchZhAaY/DiNZGtZa09Dzy/PHiDQJyBq16muXXcbawQRMhXO
- sMiULaRlf+FuBE6P8T+GC+TAyiBz+YVotIwS5tnGcr9xBRN3equEgiGuR4a9MU0rFLjB
- czNN9LeKCfBkDV9QUkKIfV6YNtegJK7K7UqS0FnIka3589bZp7wUBBZrqhdD5DFNlHj9
- cVhyB9Y389vm75vab0d7SUOOk8MUU+RH/SYvLLqrbS3O7YWGZCgAEVPaIsQQI5o/N4Kb
- WQfA==
-X-Gm-Message-State: AOAM530w9sPhCSmRCdUPEP0cDnq64UjNKsov1FDBnZpaZ76UuN1Hr9o6
- Au1X65S1vqvYn9s4wYcG4tbnMw==
-X-Google-Smtp-Source: ABdhPJxM+wQz8kiCVVAaswbhAcSX2DAAIDwDdifh2HUhb7bfbcwcwfDCWPQbSI520dn3EZTOixH57A==
-X-Received: by 2002:a17:90a:5d95:: with SMTP id
- t21mr7644270pji.77.1630823544947; 
- Sat, 04 Sep 2021 23:32:24 -0700 (PDT)
+ bh=WvHV/Ki2MM7rl3uq/j+V7Dls5sbmHAF6pLyenOV6hfk=;
+ b=QqYZQA7pOiUOiO2+G5ZgFZXBLf6oLk8Fq/YmoM3K1n3NPkk42gGO2livUbQ7szgR2f
+ 0dDrojydjVjnKpam9SNEve9gqcfd6Hyat7l5bSm91h2nNNtt2TNMvmpG6bPH4D8VfdWP
+ kaw/Vyy3cG3/X1ynDphVSbwYnYoS3AfQWhpy2sKIkKnjEiUnDf3BmwfO3qdybha1p3Gm
+ p4cmSVazqv9BBy59GHy+nK3H9EyNcV+CFnY5h43INaGLT1Kn2dE6/eCsMDPmY9M3mk9i
+ WyFnBwuk9SMappZb5DCfCPZlCL4XHv2r6IdtKpT9Re9slK6ycpqQuQl63qxPEg8deWvc
+ oR7Q==
+X-Gm-Message-State: AOAM530JoEueHCWzGei8qYJVFs6h7fksw18fHPUbsufK6+bhyKMPvLzP
+ RkIUwf3PkFWWyi4/u1xUqw1M0oQCkdeJq5qd
+X-Google-Smtp-Source: ABdhPJz296PPb+8WnKyNmyengIUlNRj+o4zr9fFCw5CJrF76AMpw1MP+ToMLcsoVF6galSRsFMevPQ==
+X-Received: by 2002:a17:90b:e0d:: with SMTP id
+ ge13mr7736349pjb.53.1630823747623; 
+ Sat, 04 Sep 2021 23:35:47 -0700 (PDT)
 Received: from ?IPv6:2407:7000:96b0:e500:e733:ba37:3588:8ee8?
  ([2407:7000:96b0:e500:e733:ba37:3588:8ee8])
- by smtp.gmail.com with ESMTPSA id n185sm4087668pfn.171.2021.09.04.23.32.20
+ by smtp.gmail.com with ESMTPSA id z8sm3786091pfa.113.2021.09.04.23.35.46
+ for <samba-technical@lists.samba.org>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 04 Sep 2021 23:32:24 -0700 (PDT)
-Subject: Re: HEADS UP: The Joys of Logging, or subtle behaviour change of
- logging in the daemons in 4.15
-To: Andrew Bartlett <abartlet@samba.org>, Ralph Boehme <slow@samba.org>,
- samba-technical <samba-technical@lists.samba.org>
-References: <f4ce9085-24be-55fe-e71c-ac7c67b845e4@samba.org>
- <007822c852b35cac5035eb2651380806b306d151.camel@samba.org>
-Message-ID: <f0e2bb66-f856-fbc1-e155-6b55ea095f13@mattgrant.net.nz>
-Date: Sun, 5 Sep 2021 18:32:18 +1200
+ Sat, 04 Sep 2021 23:35:47 -0700 (PDT)
+Subject: Re: Help writing new SAMBA_INTERNAL DNS test code please.
+To: samba-technical@lists.samba.org
+References: <CAHA-KoObp6CvJg05wbSypST_4eAtGhuTg9eUkcBYw+PTV612og@mail.gmail.com>
+Message-ID: <b4d9fe78-eccc-49c0-23d1-61dce244a5c3@mattgrant.net.nz>
+Date: Sun, 5 Sep 2021 18:35:44 +1200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <007822c852b35cac5035eb2651380806b306d151.camel@samba.org>
+In-Reply-To: <CAHA-KoObp6CvJg05wbSypST_4eAtGhuTg9eUkcBYw+PTV612og@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
@@ -86,58 +84,41 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Matt Grant via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Matt Grant <matt@mattgrant.net.nz>
-Cc: Jule Anger <ja@sernet.de>, Stefan Metzmacher <metze@samba.org>,
- Volker Lendecke <vl@samba.org>,
- =?UTF-8?Q?Bj=c3=b6rn_Jacke?= <bjacke@samba.org>, Karolin Seeger <ks@sernet.de>,
- Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Hi!
 
-On 4/09/21 7:52 am, Andrew Bartlett via samba-technical wrote:
-> On Fri, 2021-09-03 at 18:22 +0200, Ralph Boehme wrote:
->> 1) isn't really problematic, but what shall we do with 2) ? Go for 
->> stderr as implemented in the MR or rollback to logging to stdout as
->> we 
->> did in 4.14?
->>
->> I'd vote for stderr, what do others think ?
->>
->> Please note that the 4.15 release is handing in limbo until this
->> issue 
->> is resolved one way or another. :)
-> A major release is the time to get some consistency, we should log to
-> stderr, that's where errors should go (compared to stdout).
+Just wish to offer my well appreciated Thank You  to all those who
+helped me get this going.  Merge request is ready for review.
 
-Here's my 2 cents as a long term Debian Developer, if you don't mind me
-chiming in please.
-
-
-Agree.  In all my experiences with IPSEC and other daemon maintenance in
-Debian, pushing all the errors/debug to stderr when not logging or
-running under systemd init system makes sense.  Especially with the
-prevalence of systemd as the de facto standard Linux init system.
-
-
-Please ignore the following if you have tons of experience, just trying
-to explain for those following this thread.  When going to traditional
-daemon mode, there are errors that can happen before logging has been
-set up, if for example logging is configured in the config file before
-logging is set up.  You then probably want to read the config file
-before forking off into the background so if there are any errors there
-they are reported instead of being blindly not reported.  There are also
-problems with creating PID files that you wan to know about before
-forking as well.
-
-
-Hope I was helpful.
-
-
-Cheers,
-
+Regards,
 
 Matt Grant
 
-> Andrew Bartlett
+On 31/08/21 5:20 pm, Matt Grant wrote:
+> Hi Andrew!
 >
+> Have not created Samba bugs for the following yet, as I am trying to
+> get the hardest part doen, writing the test code.
+>
+>  1. Dns server port number specification for smb.conf 'dns forwarder'
+>     server list
+>  2. Restricting the dynamic DNS update ranges so that the
+>     SAMBA_INTERNAL server is not spammed with IPv6 PD addresses from
+>     the ISP.
+>
+> Main issue is being able to dynamically change the smb.conf setup for
+> the Python self test hookup, for 1, specifically within
+> samba.tests.dns_forwarder.  Being able to do this will also make 2 far
+> easier.  After looking at the test code set up, I can't see how to
+> dynamically change the smb.conf file in st/samba/smb.conf while the
+> tests are running to set up for testing the port numbers or not.
+>
+> Would specifying a 3rd and 4th 'dns forwarder' entry be possible?  I
+> just don't want to up set the already written tests.
+>
+> Best Regards,
+>
+> Matt Grant  
 
