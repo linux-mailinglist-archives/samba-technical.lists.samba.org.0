@@ -2,52 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70963400F33
-	for <lists+samba-technical@lfdr.de>; Sun,  5 Sep 2021 12:59:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 11F484011AF
+	for <lists+samba-technical@lfdr.de>; Sun,  5 Sep 2021 23:11:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=RR4rNuUI3df9zZ+Ybe1cWwI+coLSvw2nQ4LHSMIDfQw=; b=X/8TQ5xlW2tE0LesU+PjnAj6P9
-	xYCbSkdIjc5kESUHxEqNaI+tttUtlzz3MI5gseX8AW21bRgjUd70S9VS6aqkBifMWCOASPu+t9/MY
-	Z5TdmDWpdyk4qeJoedriWjbiAL6PDv5kF1XdfrtW9wOpyohXAFVX9Pw9tL2ankqncGyYZIgny6V6W
-	PAC1llrx7KRu7AlDShTumo4FbZy3yVaOolxhLPGnFCZDe0GqFAWNwL2fN2/0xcrn7XIs7IDU7PXB5
-	H1XQ2Mlu1ZrWkQToLM3VDafkViUFaa1tEUYzgR4ateJtg5cpgS0hveNlWRBJrKLdBEIt1T50TISQh
-	6zs6MsHA==;
-Received: from ip6-localhost ([::1]:28658 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=Mtk79vo1QsZvUZD4GjH2T6PQNVZQBSiLaPcpJon8UWk=; b=DU9WRDU/rnvC+3JzLNJBXn3diN
+	oIu9yvSwB8vvshVZNivubsrvGbJpNjBkdB40OwJfsZMihLsBvsm8c4pfkAezMdtpAdunlDFsNjXo1
+	SfOB37fEA7t3UmtDRwx8+1EgOvWCkdC6CS7hsovjSxY+q+PqFde0oe/mYg6O8c45wT5JZRHmvsepw
+	AmX5CsaH5NjABrjg/VdMZvEwphFqigGSuNciA5IG7ITHFpvfFjs1CpTXTD/66wRRYo5XbS2XYxbU8
+	1eS4Mjfd4iCBAIUyilTch6x96/t/0kX5sYtYLTuA/lRJoeEPWex7X66oSn8E/Q0lHNL7DqSnYu31C
+	s4aXFUSg==;
+Received: from ip6-localhost ([::1]:30650 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mMprV-00DP6F-Fg; Sun, 05 Sep 2021 10:58:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48600) 
+	id 1mMzOa-00DQLu-D1; Sun, 05 Sep 2021 21:09:44 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44546) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mMprP-00DP65-Jh
- for samba-technical@lists.samba.org; Sun, 05 Sep 2021 10:58:54 +0000
+ (Exim) id 1mMzON-00DQLl-W0
+ for samba-technical@lists.samba.org; Sun, 05 Sep 2021 21:09:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:From:Cc:To;
- bh=RR4rNuUI3df9zZ+Ybe1cWwI+coLSvw2nQ4LHSMIDfQw=; b=ctp/jyJwmWqYCnp6afSlUtDOt0
- jnBopiLmJUzixOsWdSlqXU1Apz6ufllVmON5oO5x3/lB6WkouAyANL12XniS+PQs9IKEEkp4XyJQQ
- 9OEdi4stpBcZh7DpFMOwdL+mdQlUPgP+qCVG4EvZ58TogM5qfz/Kv8jA8jRNt+BLf9SXsiEBQJ4/L
- klUalnTi1YGPalv5DlkUhttzgKxsTV/q/vWdqhbESVE0zkUFBRdf1i9zuA2pATXemYr8XWEF9f+1P
- MuKUqIrDXcsLJbr298sHN/uIJN4w6akmG5mvhfD+9qvR5PL/YL8VMnzkh8WUU7sRQP8enWb9eCBc0
- sWSyhG9gieqcye25VeV3nB2lclf8f1c5MoefiX583SVmduxDzrFbCmUMoOTde8Oy2Qu/wOIX3mOLZ
- fjjI9Ixn4n8AALKgHoqvtgpj1URgMe1GsXob6PPH8g/oG3illTTx7MjMNb12/9Xf/hWZTtFBmVCQg
- YEz4JiQ7D3a4MCt+mrC/90xL;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=Mtk79vo1QsZvUZD4GjH2T6PQNVZQBSiLaPcpJon8UWk=; b=GbDcUDVVF1hYsJ066688SiV27v
+ wCLwFgB3Vdgm7aUNre7xAbn+nI3vxnB2ZcVff6Ia9VjWvKvGuiZOXdDRV4JRumHwzsNdLgxbCiV9j
+ pMnE/81CXLPckqaUvzIg33nnD/miEBjnv4KiWhwQqMrrwK3lGuujfzKbfP3oMEm405WKfICkc/9MN
+ NP0BxDKCRnC/+V5qOPapYVFwdysYRzEBGqUWGjFT/f5EOk1UtL2abM4HQPoKcAEfaj5YdA8tVXp4R
+ BaDF+CH04yIqEn5j4hEM5LIGN4PNJevm1rd1C9giYcUAXbtgDaIn8y6DQlJhSTgFoB0Wfi0rA0LwH
+ jUgvOVMnUzDWdQZH6iTRZQufb8oCFvBZ58Uo79nPHsAtWqkadDJIh2C+GAvGr3Uptb2JjFlLN4jA5
+ h6b9r/yOyZQU0h7wR//hhKq6UBbD58pZG1/fLHnXs9T3mF+57tGf0H4iT0HiIBkK7+eAoQnAFibLO
+ LZw3bOBPrI1AhiXmXY/DyVqW;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mMprP-004kA7-8r; Sun, 05 Sep 2021 10:58:51 +0000
-Subject: Re: HEADS UP: The Joys of Logging, or subtle behaviour change of
- logging in the daemons in 4.15
-To: Matt Grant <matt@mattgrant.net.nz>
-References: <f4ce9085-24be-55fe-e71c-ac7c67b845e4@samba.org>
- <007822c852b35cac5035eb2651380806b306d151.camel@samba.org>
- <f0e2bb66-f856-fbc1-e155-6b55ea095f13@mattgrant.net.nz>
-Message-ID: <3724ea20-c074-027c-a590-bcca74b331ee@samba.org>
-Date: Sun, 5 Sep 2021 12:58:50 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ (Exim) id 1mMzOL-004mx5-Cp
+ for samba-technical@lists.samba.org; Sun, 05 Sep 2021 21:09:30 +0000
+Message-ID: <ac892f11889324c9c242da347ae12cbbd7ffd53b.camel@samba.org>
+Subject: Please report flapping tests in the AD DC
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Mon, 06 Sep 2021 09:09:20 +1200
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-In-Reply-To: <f0e2bb66-f856-fbc1-e155-6b55ea095f13@mattgrant.net.nz>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="Wxhb52GJyKCClPBWoCYG7Dm9VWEy85vjE"
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,70 +55,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---Wxhb52GJyKCClPBWoCYG7Dm9VWEy85vjE
-Content-Type: multipart/mixed; boundary="mTuvT44IzNdEj635LkdFzX5kXfD3TN2mg";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Matt Grant <matt@mattgrant.net.nz>
-Cc: samba-technical <samba-technical@lists.samba.org>
-Message-ID: <3724ea20-c074-027c-a590-bcca74b331ee@samba.org>
-Subject: Re: HEADS UP: The Joys of Logging, or subtle behaviour change of
- logging in the daemons in 4.15
-References: <f4ce9085-24be-55fe-e71c-ac7c67b845e4@samba.org>
- <007822c852b35cac5035eb2651380806b306d151.camel@samba.org>
- <f0e2bb66-f856-fbc1-e155-6b55ea095f13@mattgrant.net.nz>
-In-Reply-To: <f0e2bb66-f856-fbc1-e155-6b55ea095f13@mattgrant.net.nz>
+G'Day folks,
 
---mTuvT44IzNdEj635LkdFzX5kXfD3TN2mg
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+We just landed a fix in master which dramatically improves Samba's AD
+DC performance (addresses a regression that was in for far too long,
+sorry!).
 
-Am 05.09.21 um 08:32 schrieb Matt Grant:
-> Here's my 2 cents as a long term Debian Developer, if you don't mind me=
+https://gitlab.com/samba-team/samba/-/merge_requests/2130
 
-> chiming in please.
+This of course changes the odds in the flapping test lottery, so the
+things that flap will have changed.  If you see a flapping test, please
+see if you can fix it yourself (to spread the load), otherwise at least
+let me know so I can look at it.
 
-quite the contrary, thanks for sharing your thoughts!
+Example fixes:
+https://gitlab.com/samba-team/samba/-/merge_requests/2151
+https://gitlab.com/samba-team/samba/-/merge_requests/2154
 
-Cheers!
--slow
+I know these things are a real frustration, so I do make it a priority
+to address these as best as I can.
 
---=20
-Ralph Boehme, Samba Team                 https://samba.org/
-SerNet Samba Team       https://www.sernet.de/en/team-samba
-Samba Development and Support, SerNet Professional Services
+Thanks,
 
+Andrew Bartlett
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
 
---mTuvT44IzNdEj635LkdFzX5kXfD3TN2mg--
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
 
---Wxhb52GJyKCClPBWoCYG7Dm9VWEy85vjE
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmE0ouoFAwAAAAAACgkQqh6bcSY5nkZX
-chAArrr5l1NUGtd9F/QDK+O45OzSRacReYNL0QVTvnZpNysw+PJcJA9mZGR3LbA/7DE9kpFBtW3R
-vUCaAVENBEkY/4hP6Mv86HzC9Kd8QF59ubcflwD6NBkRFKSt4pw7EjCxRfWIl7ti/0iidCBvND0A
-ChS1tEWqphzEeJZvqmDogKnAU7CMo29ZN6rMGODPIDzUtcPEj/GSzctNObqpKb5q8q1b+i3o0a+b
-2aOM8xM/r6NlpM3chSPMZlih6hR4kjtXwXN8hIChACuirTgZ3i2cOYwwQUMdBC6BJCR8TCslJSmw
-BjEA2oYuBFF5okd//uua3iaJ8eJ7MY2jJqFM8JunWhHvab8nMr8Mzkta4+jnLRJkal4MUUhD2wdo
-eWhcF+jR9yp9HniK3ZVwvcKBlzWV2DkMFqP6pikeQ0+z0Vpu4GTO4YiMV4sYbbExpy6L2kYeWrOa
-5S9t1i0S6b1mlQEhplZ6ADaymxVOzBryuD7re0u4O0nKWBsavExDI7Ci23eQmN2pCiPuAHjoZfHt
-17a/qRR58WloSxS03DOZE7OswxitWSuo4YxbeQOz/UvpEfmtk5ixdciW8L676BArj1/P6eFY9jsk
-J2NEocNq99bQAZkzWmr9ijPGHnJ4yXB/yBWCKLd7WGIYFkgL/OEFETcaxo8xEH189PjFUOMtMvEL
-Hv4=
-=tTPT
------END PGP SIGNATURE-----
-
---Wxhb52GJyKCClPBWoCYG7Dm9VWEy85vjE--
 
