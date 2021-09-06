@@ -2,46 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11F484011AF
-	for <lists+samba-technical@lfdr.de>; Sun,  5 Sep 2021 23:11:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F144940162C
+	for <lists+samba-technical@lfdr.de>; Mon,  6 Sep 2021 08:06:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=Mtk79vo1QsZvUZD4GjH2T6PQNVZQBSiLaPcpJon8UWk=; b=DU9WRDU/rnvC+3JzLNJBXn3diN
-	oIu9yvSwB8vvshVZNivubsrvGbJpNjBkdB40OwJfsZMihLsBvsm8c4pfkAezMdtpAdunlDFsNjXo1
-	SfOB37fEA7t3UmtDRwx8+1EgOvWCkdC6CS7hsovjSxY+q+PqFde0oe/mYg6O8c45wT5JZRHmvsepw
-	AmX5CsaH5NjABrjg/VdMZvEwphFqigGSuNciA5IG7ITHFpvfFjs1CpTXTD/66wRRYo5XbS2XYxbU8
-	1eS4Mjfd4iCBAIUyilTch6x96/t/0kX5sYtYLTuA/lRJoeEPWex7X66oSn8E/Q0lHNL7DqSnYu31C
-	s4aXFUSg==;
-Received: from ip6-localhost ([::1]:30650 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=SIr5wXzxC5UGyQJVgdcPZJXZ6WeMryzO5bwA35oywjY=; b=N9GdTDf+rPOlCGpCJ5utsEK7Od
+	kCGQQzpaN+s3dA3gkKZehVuINta/mXaIAHH3moG7tfGk7CBq9kZeHLjv2dbxNk2cDwSjKcIxthyXt
+	GorE9mqGsKWAdvTkjLxNG1klvzPoLG3UsJahUdESPTIQ6dWdaY7/kh8YCtWHlS//BURc6LJobsZ/B
+	LMEXHsUXSGE4WbdAkyboWW8yKWailp88nZM0lhjgYCnIs5cPmg57XBNYuTGZpmJM/ex+hhipVR8Rf
+	LsrIzwgYiWRkFV42lmRi5SZCMFYqxtuRiXQam7Gjvm/mm1FgwGljwz98/MWkpwmO3c9gPrOq7nKBb
+	CA/Bj4Dg==;
+Received: from ip6-localhost ([::1]:31548 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mMzOa-00DQLu-D1; Sun, 05 Sep 2021 21:09:44 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44546) 
+	id 1mN7kT-00DR7m-Ex; Mon, 06 Sep 2021 06:04:53 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36610) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mMzON-00DQLl-W0
- for samba-technical@lists.samba.org; Sun, 05 Sep 2021 21:09:36 +0000
+ (Exim) id 1mN7kK-00DR7d-RX
+ for samba-technical@lists.samba.org; Mon, 06 Sep 2021 06:04:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=Mtk79vo1QsZvUZD4GjH2T6PQNVZQBSiLaPcpJon8UWk=; b=GbDcUDVVF1hYsJ066688SiV27v
- wCLwFgB3Vdgm7aUNre7xAbn+nI3vxnB2ZcVff6Ia9VjWvKvGuiZOXdDRV4JRumHwzsNdLgxbCiV9j
- pMnE/81CXLPckqaUvzIg33nnD/miEBjnv4KiWhwQqMrrwK3lGuujfzKbfP3oMEm405WKfICkc/9MN
- NP0BxDKCRnC/+V5qOPapYVFwdysYRzEBGqUWGjFT/f5EOk1UtL2abM4HQPoKcAEfaj5YdA8tVXp4R
- BaDF+CH04yIqEn5j4hEM5LIGN4PNJevm1rd1C9giYcUAXbtgDaIn8y6DQlJhSTgFoB0Wfi0rA0LwH
- jUgvOVMnUzDWdQZH6iTRZQufb8oCFvBZ58Uo79nPHsAtWqkadDJIh2C+GAvGr3Uptb2JjFlLN4jA5
- h6b9r/yOyZQU0h7wR//hhKq6UBbD58pZG1/fLHnXs9T3mF+57tGf0H4iT0HiIBkK7+eAoQnAFibLO
- LZw3bOBPrI1AhiXmXY/DyVqW;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=SIr5wXzxC5UGyQJVgdcPZJXZ6WeMryzO5bwA35oywjY=; b=heVEiyoAULXlx87rYkwVv0ZUiU
+ eBH0H8m3DlfbcTeSbuaMflDEKOV5DFNmBJYG2h3FeGazV9sIhPyLfItiG6LI1gEQO69nIwAlVtcEh
+ jFVFdQINAtuu9yz6CYtL+xmWKbLfhJqFm6nJLMaOywMgZNGJOVbG9Tw35ALky7CBGdjEuw87l0fFz
+ lqv1katLdG+jo8gzUZgXOcpL0Z6/YabUjbeKt5KrPuOf33vzS1cL7fqKnyoahdsX28CN8Zd1fKzBE
+ dHsFBoi+08Q//fz4UpIRXVg/it3oMyUvGyV00Ko7chWYIZuXvSMQw8dISh9SQvu6qPmOKULSDQzbl
+ +Ln/BFc0F94Ev3UxWTsLUqmVeq8P9K6F9EbctENfWM8Y5Zs2ndffkB2xuU42vBGdXxmc3/Gj9T9sj
+ /f4j9pUnLvgKTxP2yCdE/3TJd5m2hM+DdIaVxYyguoKRnAXnwVI4/dszARiZQg/Cza3GTy91VrTTP
+ WwCxKRmYa6blJvb2xvPAOwjk;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mMzOL-004mx5-Cp
- for samba-technical@lists.samba.org; Sun, 05 Sep 2021 21:09:30 +0000
-Message-ID: <ac892f11889324c9c242da347ae12cbbd7ffd53b.camel@samba.org>
-Subject: Please report flapping tests in the AD DC
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Mon, 06 Sep 2021 09:09:20 +1200
+ (Exim) id 1mN7kJ-004pMZ-75; Mon, 06 Sep 2021 06:04:43 +0000
+Message-ID: <12f2878d17c78e5ae88b0fa831022471cbc0ceb2.camel@samba.org>
+Subject: Re: HEADS UP: The Joys of Logging, or subtle behaviour change of
+ logging in the daemons in 4.15
+To: Ralph Boehme <slow@samba.org>
+Date: Mon, 06 Sep 2021 11:34:40 +0530
+In-Reply-To: <f4ce9085-24be-55fe-e71c-ac7c67b845e4@samba.org>
+References: <f4ce9085-24be-55fe-e71c-ac7c67b845e4@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+User-Agent: Evolution 3.40.4 (3.40.4-1.fc34) 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,40 +57,50 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Anoop C S via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Anoop C S <anoopcs@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-G'Day folks,
+On Fri, 2021-09-03 at 18:22 +0200, Ralph Boehme via samba-technical
+wrote:
+> The following MR addresses all of the above
+> 
+> https://gitlab.com/samba-team/samba/-/merge_requests/2150
+> 
+> 
+> Behaviour of 1) is restored to what we had in 4.14.
+> 
+> 
+> 2) is addressed by opting for stderr instead of stdout, ie
+> 
+> - in 4.14 all daemons were logging to stdout
+> 
+> - in the previous 4.15rc's:
+> 
+>    - smbd and nmbd were logging to stderr
+> 
+>    - winbind and samba were logging to stdout
+> 
+> - with MR 2150 all daemons log to stderr when started with -i
+> 
+> 
+> Not that all of this really matters, in the end it's just logging.
+> But 
+> given the vast amount of tooling around logging these ways, we're 
+> worried that the subtle changes in 2) may be an issue.
+> 
+> 1) isn't really problematic, but what shall we do with 2) ? Go for 
+> stderr as implemented in the MR or rollback to logging to stdout as
+> we 
+> did in 4.14?
+> 
+> I'd vote for stderr, what do others think ?
 
-We just landed a fix in master which dramatically improves Samba's AD
-DC performance (addresses a regression that was in for far too long,
-sorry!).
++1, that's the right way forward.
 
-https://gitlab.com/samba-team/samba/-/merge_requests/2130
 
-This of course changes the odds in the flapping test lottery, so the
-things that flap will have changed.  If you see a flapping test, please
-see if you can fix it yourself (to spread the load), otherwise at least
-let me know so I can look at it.
-
-Example fixes:
-https://gitlab.com/samba-team/samba/-/merge_requests/2151
-https://gitlab.com/samba-team/samba/-/merge_requests/2154
-
-I know these things are a real frustration, so I do make it a priority
-to address these as best as I can.
-
-Thanks,
-
-Andrew Bartlett
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
+-Anoop C S.
 
 
