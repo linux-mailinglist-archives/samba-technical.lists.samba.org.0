@@ -2,52 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B42840180F
-	for <lists+samba-technical@lfdr.de>; Mon,  6 Sep 2021 10:34:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 971F340183C
+	for <lists+samba-technical@lfdr.de>; Mon,  6 Sep 2021 10:50:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=LdRmYrZRb9hnH9VhQUynA1QmzYUkxstjSs55e/CyJ0s=; b=ICSVQ7jDD041n2S1Vi08NLcnxv
-	bSJAlNxIdz4wwQqXwB39OUtz2MlvTlx5H/BUWz9I702/STFtszgbT529I526PeNidCTCxTGQxROVF
-	tPDiq4nAM/mffG+/OhT1i12h0iX9mXg59mxOlbumcR4MEpPP4n98eCVItR41SMHzbkLVEmQDQayFw
-	ZC4QV/BBtVSHEVcyHH8wntvyX4GcDl0CLnRzeUPkIAd+GU6jtCGX/xr/RLDPo0v/vuvzGeRVIltbY
-	kY9URtyH5Q7a+CgHgQRjf7kIrgydLISJRj4LbsHutc/YxilFuBKeNnoqWTWMI9TXWRdeK4uKXC+3M
-	W6AydfQQ==;
-Received: from ip6-localhost ([::1]:32332 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=LBLYNhdX7vqUuXznJ4Z1bErNJXyWcCZL0Pl46gA2OAs=; b=srO6M1ws53SGkBRSnriqjP4Qfz
+	sBwnlkP21brUDnUqNzEBP4qL7r0Ko1wC8PsYc/SNGo7HAWu2bEfomMWryURlBTzi4vWZCWuMjQJyJ
+	b1An3Uh98YRVa50eJVg1RoNYSy4wCV7pNfVcRmygfB+tBXpkn/ruYoYJo3ZgjKQI8CIU2Ts5wjmpL
+	Z4st1+Uokv/4eATkGAtQdhc8KbvtH556U4POXqiAmCs/5xxrN9l1IoXhQCDNUqkWaEuKufY0EnrXd
+	TlySDc9O+96gl2s4BYIULQ68NPpp2+8gbeMX7adJttEtONTDJ7ZbTHk+smBR67MAhA9wNvWhyZpLK
+	FG5qo2Rw==;
+Received: from ip6-localhost ([::1]:34376 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mNA4e-00DRi6-0b; Mon, 06 Sep 2021 08:33:52 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20752) 
+	id 1mNAKQ-00DSbs-FN; Mon, 06 Sep 2021 08:50:10 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:45476) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mNA4T-00DRhw-SF
- for samba-technical@lists.samba.org; Mon, 06 Sep 2021 08:33:46 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=LdRmYrZRb9hnH9VhQUynA1QmzYUkxstjSs55e/CyJ0s=; b=D/RqRvr45p71Dk/nxedwwFoC9m
- Kpon3L788F3LYR+X7Q3GcFs2VBpvild70HxMuzOTSCauZEFupvq4JYnMYpVFjriMspoM06VzgZwkr
- 8edKJRNBT57hLvK85K8neqoFjygyt/JOyu8AX5R9XR5Tzsvd0HRKA8XcAVu4FWsjOH6238vSDrYvi
- EldA+LRnDoFqHmip5G0HzYpzYFcjU/yzvoUHfUiiib7cbtsNwqCRwUohqSSC5C5SmXB3XSeCwgPod
- T9/JCapRk3cynqRo+8dR/QyP5by79HHBAySLYrYEYz6mStSEBaMehj//MsTvOgtF+7k9hKsMtPTIR
- b0PP2S2t7o4B+ozHtZYztqVTVnbwxpvzNV6M27aOnl9SvaX5WWeUJTm0OHqU+hHQKAosCzb9foQ8r
- l+22IjLEvDCpEkV2GerCPGGEXXakJD542ueQ2wWTJWarun/a0DRI7gWf9Gji5oGesnhrZCXVXxaes
- QWrjPp0enjdO9rRRz2nibzQK;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mNA4Q-004ryD-Og; Mon, 06 Sep 2021 08:33:39 +0000
-Message-ID: <80f126c8d4b629f8dbf7e1583d6940e31934c458.camel@samba.org>
-Subject: Re: OSS-fuzz needs some love
-To: Uri Simchoni <uri@samba.org>, Upstream Samba Technical Mailing list
- <samba-technical@lists.samba.org>
-Date: Mon, 06 Sep 2021 20:33:35 +1200
-In-Reply-To: <b316c4a8-23e0-b35d-033a-5176a271ba4b@samba.org>
-References: <599cb100381a83de23ae9db47e3fa55eb87a7f13.camel@samba.org>
- <b4086e94339753e8ee26d4443f4924b7889ee9dc.camel@samba.org>
- <2fc73976-5505-cbb9-7341-10c323b7a095@samba.org>
- <f2b1e57143e2fdfc2865de71412399d7c156333a.camel@samba.org>
- <b316c4a8-23e0-b35d-033a-5176a271ba4b@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.40.4 (3.40.4-1.fc34) 
+ (Exim) id 1mNAKF-00DSbj-Fs
+ for samba-technical@lists.samba.org; Mon, 06 Sep 2021 08:50:03 +0000
+Received: from [192.168.1.80] (115-189-86-182.mobile.spark.co.nz
+ [115.189.86.182])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ (Authenticated sender: josephsutton@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id A998581488
+ for <samba-technical@lists.samba.org>; Mon,  6 Sep 2021 20:34:03 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1630917243;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=cshnD9anQAbRxBqbPKjutmLDm8sst6WIAlk+/B64jvg=;
+ b=f80N6kjREsJbS+T2G+5btawuUnv9sgCqO/KsaoDzt2XYqw7CHmw3n7BRfjp63lnt7idE5S
+ DbwvLu3pF3dzf8oZwZ//I/QCNLn2LrFs6Qp8DTIoya4YC01B5MvpnRRyEbay+ndFQBZ7Pj
+ WTYtlC11MrDnNZf7/ZVBZYoVi1bzf0tquys6qqyDbie9OXUZl+eL0jZFIMUvhKAmfs7Jk7
+ b0VJu6DldgYAsipK7OQBjP6aU/1oKpoAC9vmwST2+LvcvDGueHh03pToyAGEqDZqbmDfZC
+ eTeS/iVG08jD50J/MeRPXKjdkmEv8rcjoSzr/5q3p2OphW9Q/ErVL/k9zSe3fQ==
+To: samba-technical@lists.samba.org
+Subject: Test failure in samba.tests.blackbox.smbcacls_basic(DFS)
+Message-ID: <f4a174ef-09bc-6b7b-dc1a-d4cb0311bc8a@catalyst.net.nz>
+Date: Mon, 6 Sep 2021 20:34:01 +1200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=josephsutton@catalyst.net.nz
+ smtp.mailfrom=josephsutton@catalyst.net.nz
+X-Spamd-Result: default: False [-0.10 / 15.00]; ARC_NA(0.00)[];
+ MIME_GOOD(-0.10)[multipart/alternative,text/plain];
+ DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
+ MIME_TRACE(0.00)[0:+,1:+,2:~];
+ ASN(0.00)[asn:4771, ipnet:115.189.80.0/20, country:NZ];
+ MID_RHS_MATCH_FROM(0.00)[]
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,45 +69,56 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Joseph Sutton via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Joseph Sutton <josephsutton@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sat, 2021-09-04 at 13:30 +0300, Uri Simchoni via samba-technical
-wrote:
-> What I have so far is in 
-> https://gitlab.com/samba-team/samba/-/merge_requests/2152
-> 
-> I'll continue this in a few days hopefully.
-> 
-> One fuzzer, namely fuzz_parse_lpq_entry, doesn't pass check_build, 
-> whereas the others pass the check_build of oss-fuzz (at least in address 
-> sanitizer and libfuzzer mode). Our check_build.sh stops as soon as it 
-> reaches fuzz_parse_lpq_entry so IDK if it passes the rest (probably yes 
-> because of the oss-fuzz result).
-> 
-> The issue with fuzz_parse_lpq_entry seems to be that it references 
-> libtracker-data.so without RPATH.
+I noticed this failure occurring with the samba-no-opath2 job on GitLab
+CI, after rebasing seemingly unrelated changes onto master.
 
-Remember that the way the system copies in the libraries that are
-'needed' on the target is to use ldd.  If somehow the need for this
-doesn't show up with ldd, it will be missed.
+|[146(644)/150 at 22m53s]
+samba.tests.blackbox.smbcacls_basic(DFS)(fileserver)||
+||found ACE for samba||
+||mismatch: inherit: !=3D inherit:0x0||
+||differences between file ACE: ||
+||user_dom=3DFILESERVER,||
+||user=3Dsamba,||
+||type=3DALLOWED,||
+||inherit=3D,||
+||permissions=3DFULL,||
+||and expected ACE: ||
+||user=3Dsamba,||
+||type=3DALLOWED,||
+||inherit=3D0x0,||
+||permissions=3DFULL,||
+||remote remove failed: Command
+'/tmp/samba-testbase/samba-no-opath-build/bin/smbclient
+-Usamba%fileserver //FILESERVER/msdfs-share -c deltree
+smbcacls_sharedir_dfs/*'; shell False; exit status 1; stdout: 'b''';
+stderr: 'b'''||
+||falling back to removing contents of local dir:
+/tmp/samba-testbase/samba-no-opath2/bin/ab/fileserver/share/smbcacls_shar=
+edir_dfs||
+||UNEXPECTED(failure):
+samba.tests.blackbox.smbcacls_basic(DFS).samba.tests.blackbox.smbcacls_ba=
+sic.BasicSmbCaclsTests.test_simple_single_mod(fileserver)||
+||REASON: Exception: Exception: Traceback (most recent call last):||
+||=C2=A0 File "bin/python/samba/tests/blackbox/smbcacls_basic.py", line 7=
+7,
+in test_simple_single_mod||
+||=C2=A0=C2=A0=C2=A0 self.assertTrue(self.file_ace_check(remotepath, ace)=
+)||
+||AssertionError: False is not true||
+||FAILED (1 failures, 0 errors and 0 unexpected successes in 0 testsuites=
+)|
 
-That might be due to our build rules or due to how libtracker-data.so
-is brought in.  It also doesn't seem likely to be used by
-fuzz_parse_lbq_entry so perhaps either the dependencies could be
-trimmed or for fuzzing tracker support could be omitted (change the
-configure options). 
+The full job log can be found here:
+https://gitlab.com/samba-team/devel/samba/-/jobs/1564265401
+<https://gitlab.com/samba-team/devel/samba/-/jobs/1564265401>
 
-Thanks so much for giving this a go!
+I'm not sure exactly what caused this failure, but I'm reporting it here
+in case this is an issue that could warrant further investigation.
 
-Andrew Bartlett
-
--- 
-Andrew Bartlett (he/him)        https://samba.org/~abartlet/
-Samba Team Member (since 2001)  https://samba.org
-Samba Developer, Catalyst IT    https://catalyst.net.nz/services/samba
-
-
-
+Regards,
+Joseph
