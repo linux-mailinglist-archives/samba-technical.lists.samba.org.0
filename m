@@ -2,48 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B96A9402BBD
-	for <lists+samba-technical@lfdr.de>; Tue,  7 Sep 2021 17:27:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4CC49402CE3
+	for <lists+samba-technical@lfdr.de>; Tue,  7 Sep 2021 18:34:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=ObkTc/oaZnlxmJG6K/fRnKFJNgagt9Qdzf3/ahtwGzw=; b=VUfRVBhRingMF+/UaC9oqaixEQ
-	kk/nkAcGXM9Z3q8btSbWetfi4yqMeUdIV6N6O6AzXk8JFvTtCfniqQQ3+Em1azeCuSUnQRGF1oSMt
-	TWfEqcwjW3bea9f0hkjPkqEmYuGbrIcSgo/0uKQtBIoPLNqPKAro6BxyqIewiVsTf1aj3cJoxmff0
-	Lx3yJVUss/tsRB/8msKK9WPnc1c5AjQw+D8ohE/LVTFiagUGTaBMVKe5/wc62LiDmb52aewVenUMF
-	e6deXvvj+jls5jduq6AjLCR20m49KHo33Vhqs3hNFkesQ/rBeBcvR45cOIlHU9Q8lTKp0yauaZVQw
-	XjF+lHeA==;
-Received: from ip6-localhost ([::1]:25150 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=bxrNlDl7b23sMYPtibftDU5CcdiRoJCzNlcqM8NfKuk=; b=MUtT+N9r9kU6mSZwrUmI/9gCQo
+	Ql7DuaIbPHaB7B02h0JNXeFNaZqnTxlmr7FtivaQuh3w5VzajBvvLCYR+J+/4q+f06CdzL2LkkNfV
+	AUDSXKqRb+5C46Fd27zMdMZJw5nr7NrcP2aDjm/+Byrv8ADhmM6a4jfjHHdxk+Rqx4wc/a0xmggnz
+	5stB+qtZJCc+JByFoKgLwDMKFewpLdDz2WbLhVk0B3nf8Lpuhg2f1YM0WAQBvztmnyGw6aOFTUCZa
+	fuCo2IUtgOKAqhsaBVoc3K5/gHWDP9D6/mwV58g540O5543q85Q0SO3mjJTvNxVtQP48/iC/azS+l
+	uQ++EpaQ==;
+Received: from ip6-localhost ([::1]:25868 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mNczz-00Dj7i-HZ; Tue, 07 Sep 2021 15:26:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60968) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mNczt-00Dj7Y-Ip
- for samba-technical@lists.samba.org; Tue, 07 Sep 2021 15:26:55 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=ObkTc/oaZnlxmJG6K/fRnKFJNgagt9Qdzf3/ahtwGzw=; b=dX6pKQRpHW//0Pjua9a1SiVphl
- xdBhik3fWwfe7CqDhXLDIOoPH2Iu1vwHNxVzP2ih+0ptH4V81pHWSIZx9GmSiH9OGGuYHkxdVTbCT
- /vWLQ8OL/epv0qe/ZjFBYBnmfica8GXyR0RpWRW6ilS7J8V8nB3BohN/ei9naXuqW2IPySJ72Z85H
- 1zO6s04oYnRJFAdwabe3BJIbzHb69KcIUZO4H9Dtm5+/ojEQTDVmtbJBK9sJpvn0D4fJ3g32iaFXZ
- f7TjWfvMeCzUOs7Wv9Emvu9dDnCKmC4fYLRmVEkzFcqXdcGQrVzQbTSwgUoISmM84kOnDrRNqeTGo
- kD22NLuzjU5G+znwhTSvIpOn3WQloEJWCa4nUlWX7CCDzJmmBNwgs5QrstaFBPMhteu7pr0OHcAyW
- s5pFOvYcZMwotzLgoVTDnJ0vSfAhlTgT3+TIKLD32TAHX/sn6cTuIW+utR5cd7BJMz/rBq2uhiqhA
- iyvCLK+Tqm68Ah6qrXTZRzLl;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mNczs-00554m-Gc
- for samba-technical@lists.samba.org; Tue, 07 Sep 2021 15:26:52 +0000
-Message-ID: <4b1807f6215c6842b39e752f3978b1926eb16896.camel@samba.org>
-Subject: Re: Suitable replacement of OpenLDAP
-To: samba-technical@lists.samba.org
-Date: Tue, 07 Sep 2021 16:26:52 +0100
-In-Reply-To: <4B4EA55EA622814FB935316CC68B2DFC4B114E@MS-EXMB.mikservices.local>
+	id 1mNe31-00DjUa-4g; Tue, 07 Sep 2021 16:34:11 +0000
+Received: from mail.nestor-services.de ([80.156.233.85]:29290) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim) id 1mNe2u-00DjUR-Uq
+ for samba-technical@lists.samba.org; Tue, 07 Sep 2021 16:34:07 +0000
+Received: from MS-EXMB.mikservices.local ([::1]) by
+ MS-EXHBCS.mikservices.local ([::1]) with mapi id 14.03.0513.000; Tue, 7 Sep
+ 2021 18:33:51 +0200
+To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Subject: AW: Suitable replacement of OpenLDAP
+Thread-Topic: Suitable replacement of OpenLDAP
+Thread-Index: Adej9X7KG0pPy1kiTa6Y/brPK8lIJv//7QwA///MldA=
+Date: Tue, 7 Sep 2021 16:33:50 +0000
+Message-ID: <4B4EA55EA622814FB935316CC68B2DFC4B11A0@MS-EXMB.mikservices.local>
 References: <4B4EA55EA622814FB935316CC68B2DFC4B114E@MS-EXMB.mikservices.local>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.30.5-1.1 
+ <4b1807f6215c6842b39e752f3978b1926eb16896.camel@samba.org>
+In-Reply-To: <4b1807f6215c6842b39e752f3978b1926eb16896.camel@samba.org>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [78.42.17.166]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,108 +52,110 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Rowland Penny <rpenny@samba.org>
+From: "Ronge, Matthias via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: "Ronge, Matthias" <Matthias.Ronge@mik-center.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2021-09-07 at 14:34 +0000, Ronge, Matthias via samba-technical
-wrote:
-> Dear list members,
-> 
-> I am turning to you today about a complex problem, perhaps you can
-> give us a better understanding of what we need to do. We are
-> developers in an open source community that maintains a program that
-> is used to describe scans and display them online.¹ It's a web
-> application. The program has a source code history of more than a
-> decade. None of us have been in it since the beginning, but I've been
-> in it for the longest: over eight years. There's support for LDAP in
-> there.
-
-What do you use the LDAP for ? (note: at this point I haven't read your
-source code.)
-
->  On the one hand, this allows you to log on, but also, if the
-> underlying operating system is correctly configured, a Linux user is
-> created for each user and he/she has CIFS available in his home
-> folder in order to upload scans. The application always creates
-> symbolic links in the home folder for the processes that the user is
-> currently working on. The whole thing was very cleverly thought out
-> back then. But all of this was in place before my time, more than
-> eight years into the past of today.
-> 
-> One must install Samba scheme in LDAP, and in the application, one
-> must set up LDAP server, and an “LDAP group”, with many values from
-> Samba scheme. We know (roughly) what we have to write in the fields
-> for this to work, but none of us has a deeper understanding of what
-> is behind it. Maybe not all of it makes sense or is semantically
-> correct, but someone in the past noticed “oh, it works” and it has
-> been used that way ever since. We are willing to learn.
-> 
-> My question: In one of the inquiries on Ask Ubuntu², I was told:
-> 
-> > you should be aware that Samba is actively working on removing
-> > SMBv1,
-> > this will mean that you will no longer be able to use openldap with
-> > Samba. This will not happen at once, it may be a year or so, but it
-> > will
-> > happen, so I suggest you start planning to upgrade to Samba AD or
-> > similar
-
-Ah, that was myself and it still holds true.
-
-> 
-> We have no real idea what that means. What do we have to change about
-> this web application so that CIFS drives can be made available from
-> the server in the future? Here I ask you for guidance and help.
-
-You probably do not need to change your web application code much, just
-how you interact with Samba.
-
-> 
-> What does this LDAP server AD have to be?
-
-Samba can now be run as an Active Directory Domain Controller (or AD)
-and it comes with LDAP, DNS and kerberos built in.
-
->  Or is there anything like it?
-
-From the sound of it, you are running Samba as an NT4-style Domain
-controller, there are other solutions, freeipa for one, but this (as
-far as I am aware) allow shares.
-
->  Why is OpenLDAP not a solution to use in the future?
-
-You may be able to continue to use openldap, just not with Samba in the
-long term.
-
->  Is SMBv1 the same as OpenLDAP?
-
-No, openldap is a directory service and SMB is a windows protocol.
-
->  Why are you removing it?
-
-It is not being removed, it is just SMBv1 that will, ultimately, be
-removed, SMBv2 and SMBv3 will still be used. Samba has started to
-deprecate a lot of the parameters that an NT4-style domain depends on
-and the NT4-style domains depend on SMBv1. Smbv1 is acient and very
-insecure.
-
-> 
-> If there is a simple solution to this, I'll be more than happy to use
-> it. That means, for example, to do without LDAP altogether, and
-> instead implement a sudo script that edits the smb.cnf file for new
-> users, and everything works without LDAP, which is great, too. Just
-> that we have a solution ready for the future.
-
-Planning for the future is good, at the moment you can continue to use
-your existing setup. Can you point me at the portion of your code where
-you setup openldap and the schemas you are using ? That way I can
-advise what needs to be modified.
-
-Rowland
-
-
-
-
+RGVhciBSb3dsYW5kLA0KDQpUaGFuayB5b3UgdmVyeSBtdWNoIGZvciB5b3VyIHJlc3BvbnNlLg0K
+DQo+IFdoYXQgZG8geW91IHVzZSB0aGUgTERBUCBmb3I/DQoNClRoZXJlIGFyZSB0d28gdGhpbmdz
+LiBPbmUgaXMgdGhlIGxvZ2luLCBidXQgd2UgY291bGQgc2VwYXJhdGUgdGhhdC4gVGhhdCBpcyBu
+b3QgdGhlIHBvaW50IGhlcmUuDQoNClRoZSB3ZWIgYXBwbGljYXRpb24gd3JpdGVzIGEgdXNlciBy
+ZWNvcmQgaW4gdGhlIExEQVAgZm9yIGVhY2ggbG9naW4gdGhhdCBpcyBjcmVhdGVkLiBUaGUgcmVz
+dWx0IGlzIGEgTGludXggdXNlciAod2l0aCBQQU0tTERBUCAvIE5TU3dpdGNoLiBUbyBiZSBob25l
+c3QsIEkgc3RpbGwgaGF2ZW4ndCB1bmRlcnN0b29kIGV4YWN0bHkgd2hhdCBpcyBkb2luZyB3aGF0
+LikgSW4gdGhlIFNhbWJhIGNvbmZpZywgdGhlcmUgaXMgYSBnZW5lcmljIGVudHJ5IGZvciDigJx1
+c2VyIGhvbWVz4oCdLCBzbyB0aGF0IHdoZW4gdGhlIHVzZXIgaXMgY3JlYXRlZCwgdGhlIHVzZXIg
+aGFzIGEgaG9tZSBDSUZTIHNoYXJlIGFuZCBjYW4gYWNjZXNzIGl0IGFzIGEgV2luZG93cyBuZXR3
+b3JrIGRyaXZlOg0KDQotLS0tLS0tLS0tLS0tLS0tDQpbaG9tZXNdDQpjb21tZW50ID0gSG9tZSBE
+aXJlY3Rvcmllcw0KcGF0aCA9IC91c3IvbG9jYWwva2l0b2RvL3VzZXJzLyVVDQpyZWFkIG9ubHkg
+PSBubw0KYnJvd3NlYWJsZSA9IG5vDQp2YWxpZCB1c2VycyA9ICVTDQpndWVzdCBvayA9IG5vDQpp
+bmhlcml0IHBlcm1pc3Npb25zID0geWVzDQotLS0tLS0tLS0tLS0tLS0tDQoNClRoaXMgaXMgdXNl
+ZCB0byB1cGxvYWQgdGhlIHNjYW5zLiBGb3IgYSBzaW5nbGUgYm9vaywgdGhhdCBjb3VsZCBiZSAy
+NTAgcGFnZXMgKG1heWJlIDUwIG9yIG1heWJlIDIsNTAwIGhvd2V2ZXIpLCAyMCBNQiBlYWNoIChi
+dXQgaXQgY291bGQgYWxzbyBzY2FucyBvZiBtYXBzLCB3aXRoIDYgR0IgaW4gb25lIGZpbGUpLiBU
+aGF0IGhhcyB0byBiZSB1cGxvYWRlZCB0byB0aGUgc2VydmVyLiBXaGVuIHRoaXMgd2FzIGludmVu
+dGVkIGEgZGVjYWRlIGFnbywgaXQgY291bGRuJ3QgYmUgdXBsb2FkZWQgdGhyb3VnaCBhIHdlYiBi
+cm93c2VyLiBUaGlzIGlzIGFsc28gYSBwZXJmb3JtYW5jZSBxdWVzdGlvbi4gU28sIGxldCdzIHNh
+eSA1IEdCIGhhdmUgdG8gYmUgcHVzaGVkIG9udG8gdGhlIHNlcnZlciBhcyBxdWlja2x5IGFzIHBv
+c3NpYmxlOyBpbiB0aGUgc2FtZSBidWlsZGluZywgbm8gV0FOLsK5IFRoaXMgaGFwcGVucyB2aWEg
+dGhlIENJRlMgZHJpdmUuIFRoZSB3ZWIgYXBwbGljYXRpb24gY3JlYXRlcyBhIHN5bWJvbGljIGxp
+bmsgaW4gdGhlIHVzZXIgaG9tZSBmb3IgdGhlIHByb2Nlc3MgdGhhdCB0aGUgdXNlciBpcyBjdXJy
+ZW50bHkgd29ya2luZyBvbiwgc28gdGhlIGRhdGEgaXMgd3JpdHRlbiBkaXJlY3RseSBpbnRvIHRo
+ZSBwcm9jZXNzIG9uIExpbnV4LiBUaGUgc2Nhbm5lciBQQyBpcyBjb25maWd1cmVkIHNvIHRoYXQg
+aXQgYXV0b21hdGljYWxseSBjb3BpZXMgdGhlIHNjYW5zIHRvIHRoZSBkcml2ZSBhZnRlciBzY2Fu
+bmluZy4NCg0KDQo+PiB5b3Ugc2hvdWxkIGJlIGF3YXJlIHRoYXQgU2FtYmEgaXMgYWN0aXZlbHkg
+d29ya2luZyBvbiByZW1vdmluZyANCj4+IFNNQnYxLCB0aGlzIHdpbGwgbWVhbiB0aGF0IHlvdSB3
+aWxsIG5vIGxvbmdlciBiZSBhYmxlIHRvIHVzZSANCj4+IG9wZW5sZGFwIHdpdGggU2FtYmEuIFRo
+aXMgd2lsbCBub3QgaGFwcGVuIGF0IG9uY2UsIGl0IG1heSBiZSBhIHllYXIgDQo+PiBvciBzbywg
+YnV0IGl0IHdpbGwgaGFwcGVuLCBzbyBJIHN1Z2dlc3QgeW91IHN0YXJ0IHBsYW5uaW5nIHRvIA0K
+Pj4gdXBncmFkZSB0byBTYW1iYSBBRCBvciBzaW1pbGFyDQo+DQo+IEFoLCB0aGF0IHdhcyBteXNl
+bGYgYW5kIGl0IHN0aWxsIGhvbGRzIHRydWUuDQoNCkkgcmVhbGx5IGFwcHJlY2lhdGUgbWVldGlu
+ZyB5b3UgYWdhaW4gaGVyZS4NCg0KPiBZb3UgcHJvYmFibHkgZG8gbm90IG5lZWQgdG8gY2hhbmdl
+IHlvdXIgd2ViIGFwcGxpY2F0aW9uIGNvZGUgbXVjaCwganVzdCBob3cNCj4geW91IGludGVyYWN0
+IHdpdGggU2FtYmEuDQoNCldlbGwsIHRoZSB3ZWIgYXBwbGljYXRpb24gZG9lcyBub3QgeWV0IGlu
+dGVyYWN0IGRpcmVjdGx5IHdpdGggU2FtYmEsIGJ1dCByYXRoZXIsIHRoZSB3ZWIgYXBwbGljYXRp
+b24gd3JpdGVzIHVzZXIgcmVjb3JkcyBpbiBMREFQLCBhbmQgZnJvbSB0aGVyZSwgU2FtYmEgcGlj
+a3MgaXQgdXAuIFRoaXMgaGFwcGVucyBhdXRvbWF0aWNhbGx5IG9uY2UgaXQgaXMgc2V0IHVwLg0K
+DQpBcyBJIHNhaWQsIGZvciBtZSB0aGUgc2ltcGxlc3Qgc29sdXRpb24gaXMgdGhlIG1vc3QgdmFs
+dWVkLiBBbmQgaWYgZm9yIG5ldyB1c2VyIGEgc3VkbyBzY3JpcHQgZWRpdHMgdGhlIHNtYi5jbmYg
+ZmlsZS4gV2hvIGNhcmVzPyAoSWYgSSBoYXZlIHRvIHJlc3RhcnQgdGhlIGRhZW1vbiBhbmQgaXQg
+YnJlYWtzIG9uZ29pbmcgdXBsb2FkcywgdGhhdCB3b3VsZCBvZiBjb3Vyc2UgYmUgYW5ub3lpbmcg
+YW5kIGEgc29sdXRpb24gd291bGQgaGF2ZSB0byBiZSBmb3VuZCwgYnV0IG1heWJlIHdlIGNhbiBy
+ZXNvbHZlIGl0IHRoaXMgd2F5LikNCg0KDQo+PiBXaGF0IGRvZXMgdGhpcyBMREFQIHNlcnZlciBB
+RCBoYXZlIHRvIGJlPw0KPg0KPiBTYW1iYSBjYW4gbm93IGJlIHJ1biBhcyBhbiBBY3RpdmUgRGly
+ZWN0b3J5IERvbWFpbiBDb250cm9sbGVyIChvciBBRCkgYW5kIGl0DQo+IGNvbWVzIHdpdGggTERB
+UCwgRE5TIGFuZCBrZXJiZXJvcyBidWlsdCBpbi4NCg0KSSBkb24ndCB1bmRlcnN0YW5kIHRoaXMg
+aW4gZGV0YWlsLiAoRm9yIHlvdSB0byBrbm93LCBJJ20gYSBKYXZhIGRldmVsb3BlciwgYnV0IG5v
+dCBhIG5ldHdvcmsgc3BlY2lhbGlzdC4pIEkgY3JlYXRlZCBhIHRpY2tldCBvbiBHaXRIdWIgb24g
+b3VyIHNvZnR3YXJlwrIsIGFuZCBhbm90aGVyIGFkbWluIHdyb3RlIHRoYXQgdGhlcmUgY291bGQg
+YmUgY29uZmxpY3RzIGluIHRoZSBzYW1lIG5ldHdvcmsgaWYgaXQgd2FzIGFscmVhZHkgdGhlcmUg
+YW5vdGhlciBBRCBkaXJlY3RvcnkgdGhlcmUuIEkgZG9uJ3Qga25vdyBpZiB0aGF0J3MgYWN0dWFs
+bHkgdGhlIGNhc2UuIEFuZCB3aXRoIEtlcmJlcm9zLCBJIHRob3VnaHQgdGhhdCBoYWQgc29tZXRo
+aW5nIHRvIGRvIHdpdGggdGVsZXBob255OyBJIGhhdmUgbm8gcHJlY2lzZSBrbm93bGVkZ2Ugb2Yg
+dGhpcy4gKEkgd2FudCB0byBlbXBoYXNpemUgdGhhdCBJIGFtIHdpbGxpbmcgdG8gbGVhcm4gYWJv
+dXQgaXQgaWYgSSBuZWVkIHRvLiBKdXN0LCBhdCB0aGUgbW9tZW50LCB0aGF0IGRvZXNuJ3Qgc2F5
+IG11Y2ggdG8gbWUuKQ0KDQoNCj4+ICBPciBpcyB0aGVyZSBhbnl0aGluZyBsaWtlIGl0Pw0KPg0K
+PiBGcm9tIHRoZSBzb3VuZCBvZiBpdCwgeW91IGFyZSBydW5uaW5nIFNhbWJhIGFzIGFuIE5UNC1z
+dHlsZSBEb21haW4NCj4gY29udHJvbGxlciwgdGhlcmUgYXJlIG90aGVyIHNvbHV0aW9ucywgZnJl
+ZWlwYSBmb3Igb25lLCBidXQgdGhpcyAoYXMgZmFyIGFzDQo+IEkgYW0gYXdhcmUpIGFsbG93IHNo
+YXJlcy4NCg0KQ2FuIHNvbWVvbmUgbW91bnQgRnJlZWlwYSBhcyBhIG5ldHdvcmsgZHJpdmUgdW5k
+ZXIgV2luZG93cz8gV2hhdCBkbyBJIG5lZWQgZm9yIGEgc2VydmljZSBvbiB0aGUgTGludXggc2Vy
+dmVyPyBJIGRvbid0IHdhbnQgdG8gZG93bnBsYXkgU2FtYmEgaGVyZS4gSXQgaGFzIHNlcnZlZCB1
+cyB3ZWxsIGZvciBtYW55IHllYXJzLg0KDQo+PiAgV2h5IGlzIE9wZW5MREFQIG5vdCBhIHNvbHV0
+aW9uIHRvIHVzZSBpbiB0aGUgZnV0dXJlPw0KPg0KPiBZb3UgbWF5IGJlIGFibGUgdG8gY29udGlu
+dWUgdG8gdXNlIG9wZW5sZGFwLCBqdXN0IG5vdCB3aXRoIFNhbWJhIGluIHRoZQ0KPiBsb25nIHRl
+cm0uDQoNCkZvciB1cywgT3BlbkxEQVAgb25seSBzZXJ2ZXMgZm9yIHRoZSBjb21tdW5pY2F0aW9u
+IG9mIHRoZSBleGlzdGluZyB1c2VycyB0byBTYW1iYSwgc28sIHdpdGhvdXQgU2FtYmEgc3VwcG9y
+dGluZyBpdCwgdXNpbmcgT3BlbkxEQVAgbWFrZXMgbm8gc2Vuc2UuDQoNCg0KPj4gSWYgdGhlcmUg
+aXMgYSBzaW1wbGUgc29sdXRpb24gdG8gdGhpcywgSSdsbCBiZSBtb3JlIHRoYW4gaGFwcHkgdG8g
+dXNlIA0KPj4gaXQuIFRoYXQgbWVhbnMsIGZvciBleGFtcGxlLCB0byBkbyB3aXRob3V0IExEQVAg
+YWx0b2dldGhlciwgYW5kIA0KPj4gaW5zdGVhZCBpbXBsZW1lbnQgYSBzdWRvIHNjcmlwdCB0aGF0
+IGVkaXRzIHRoZSBzbWIuY25mIGZpbGUgZm9yIG5ldyANCj4+IHVzZXJzLCBhbmQgZXZlcnl0aGlu
+ZyB3b3JrcyB3aXRob3V0IExEQVAsIHdoaWNoIGlzIGdyZWF0LCB0b28uIEp1c3QgDQo+PiB0aGF0
+IHdlIGhhdmUgYSBzb2x1dGlvbiByZWFkeSBmb3IgdGhlIGZ1dHVyZS4NCj4NCj4gUGxhbm5pbmcg
+Zm9yIHRoZSBmdXR1cmUgaXMgZ29vZCwgYXQgdGhlIG1vbWVudCB5b3UgY2FuIGNvbnRpbnVlIHRv
+IHVzZSB5b3VyDQo+IGV4aXN0aW5nIHNldHVwLiBDYW4geW91IHBvaW50IG1lIGF0IHRoZSBwb3J0
+aW9uIG9mIHlvdXIgY29kZSB3aGVyZSB5b3UNCj4gc2V0dXAgb3BlbmxkYXAgYW5kIHRoZSBzY2hl
+bWFzIHlvdSBhcmUgdXNpbmcgPyBUaGF0IHdheSBJIGNhbiBhZHZpc2Ugd2hhdA0KPiBuZWVkcyB0
+byBiZSBtb2RpZmllZC4NCg0KVGhlcmUgaXMgbm8gY29kZSBmb3Igc2V0dGluZyBpdCB1cDsgd2Ug
+aGF2ZSB0byBkbyB0aGlzIG1hbnVhbGx5IGZvciBlYWNoIHNlcnZlci4gVGhlcmUgYXJlIGluc3Rh
+bGxhdGlvbiBpbnN0cnVjdGlvbnMgaW4gRW5nbGlzaCBoZXJlOg0KDQpodHRwczovL2dpdGh1Yi5j
+b20va2l0b2RvL2tpdG9kby1wcm9kdWN0aW9uL3dpa2kvSW5zdGFsbGF0aW9uLWluc3RydWN0aW9u
+cy1mb3ItS2l0b2RvLlByb2R1Y3Rpb24tMi4zLjENCg0KU2VjdGlvbnMgMS4xLjIsIDEuMS4zLCA1
+LCAxMCBhbmQgMTIgYXJlIHJlbGF0ZWQgdG8gdGhpcy4NCg0KSSB0aGluaywgaW4gdGhlIHNvdXJj
+ZSBjb2RlLCB0aGlzIGlzIHdoZXJlIHRoZSBuZXcgdXNlciBlbnRyeSBpcyB3cml0dGVuIGluIExE
+QVA6DQoNCmh0dHBzOi8vZ2l0aHViLmNvbS9raXRvZG8va2l0b2RvLXByb2R1Y3Rpb24vYmxvYi9t
+YXN0ZXIvS2l0b2RvL3NyYy9tYWluL2phdmEvb3JnL2tpdG9kby9wcm9kdWN0aW9uL3NlcnZpY2Vz
+L2RhdGEvTGRhcFNlcnZlclNlcnZpY2UuamF2YSNMMTY5LUwxNzMNCg0KQXMgSSBzYWlkLCBJIGRv
+bid0IHJlYWxseSBrbm93IHdoeSBhbGwgdGhlc2UgZmllbGRzIGFyZSBjcmVhdGVkIGFuZCB3aGF0
+IGlzIGluIHRoZW0gYW5kIHdoeS4NCg0KS2luZCByZWdhcmRzLA0KTWF0dGhpYXMgUm9uZ2UNCg0K
+DQoxKSBUaGVyZSBhcmUgYWxzbyBzZXQtdXBzIHVzaW5nIFdBTiwgYnV0IHdlIHR5cGljYWxseSB1
+c2UgV2ViREFWIG9yIHNvbWV0aGluZyBlbHNlLCBiZWNhdXNlIFNhbWJhIHNlZW1zIHVuc3RhYmxl
+OyBJJ20gc29ycnkgdG8gc2F5IHNvLiBJIHRoaW5rIHRoZSBwcm9ibGVtIGlzIG5vdCB0aGUgU2Ft
+YmEgaW1wbGVtZW50YXRpb24sIGJ1dCB0aGUgaW1wbGVtZW50YXRpb24gd2l0aGluIE1TIFdpbmRv
+d3MsIGhvd2V2ZXIsIHdlIHNlZSB0aGUgc3lzdGVtIChFeHBsb3JlciwgdGFzayBiYXIsIGV0Yy4p
+IGZyZWV6ZXMgd2hlbiB0aGUgbmV0d29yayBoaWNjdXBzLiBBbnl3YXk6IGZvciBidXNpbmVzcyB1
+c2UsIHdlcmUgbWludXRlcyBkbyBjb3VudCwgaXQgZG9lc24ndCBtYWtlIHNlbnNlLg0KDQoyKSBo
+dHRwczovL2dpdGh1Yi5jb20va2l0b2RvL2tpdG9kby1wcm9kdWN0aW9uL2lzc3Vlcy80NjQ2DQo=
 
