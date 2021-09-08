@@ -2,43 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CC49402CE3
-	for <lists+samba-technical@lfdr.de>; Tue,  7 Sep 2021 18:34:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4098F404192
+	for <lists+samba-technical@lfdr.de>; Thu,  9 Sep 2021 01:07:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=bxrNlDl7b23sMYPtibftDU5CcdiRoJCzNlcqM8NfKuk=; b=MUtT+N9r9kU6mSZwrUmI/9gCQo
-	Ql7DuaIbPHaB7B02h0JNXeFNaZqnTxlmr7FtivaQuh3w5VzajBvvLCYR+J+/4q+f06CdzL2LkkNfV
-	AUDSXKqRb+5C46Fd27zMdMZJw5nr7NrcP2aDjm/+Byrv8ADhmM6a4jfjHHdxk+Rqx4wc/a0xmggnz
-	5stB+qtZJCc+JByFoKgLwDMKFewpLdDz2WbLhVk0B3nf8Lpuhg2f1YM0WAQBvztmnyGw6aOFTUCZa
-	fuCo2IUtgOKAqhsaBVoc3K5/gHWDP9D6/mwV58g540O5543q85Q0SO3mjJTvNxVtQP48/iC/azS+l
-	uQ++EpaQ==;
-Received: from ip6-localhost ([::1]:25868 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=yD7+j2YF9adF1H1D+B1vNydjY7ckpBAWfMJeODdLKnk=; b=Fx12oQPcZPJbcPlm5FotAIpS6H
+	kEAVmlTmUaj76HldZklKsIDtkazQ97S6dRt7JyNMS4mjJgdCAdGe6mliWK+ifyfmsGZq+TE3e+Meb
+	WbGe2mu27dQO2nrUfnAGm4/IwgIVcrtsl7lfe2Cx48h9ZSkfF3EmssnJfoh42iZaKEHbXaWz1mc4N
+	cDV0NRiYDXLUpwTb0d45PA4xXOY8FK/zA4LMnJbZ4fzjuXbvghMHCyYdbWzHDj/BS7RzU2LSCFSya
+	0bNT5NTPJOBkBUJlO5BKcg0TEg6hS0zIqZXVjfKA9B/oFYacWrdQh7apzXIyvHYNfAbhaTv7fSWTA
+	AFDsOP/g==;
+Received: from ip6-localhost ([::1]:51088 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mNe31-00DjUa-4g; Tue, 07 Sep 2021 16:34:11 +0000
-Received: from mail.nestor-services.de ([80.156.233.85]:29290) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_CBC_SHA1:256)
- (Exim) id 1mNe2u-00DjUR-Uq
- for samba-technical@lists.samba.org; Tue, 07 Sep 2021 16:34:07 +0000
-Received: from MS-EXMB.mikservices.local ([::1]) by
- MS-EXHBCS.mikservices.local ([::1]) with mapi id 14.03.0513.000; Tue, 7 Sep
- 2021 18:33:51 +0200
-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Subject: AW: Suitable replacement of OpenLDAP
-Thread-Topic: Suitable replacement of OpenLDAP
-Thread-Index: Adej9X7KG0pPy1kiTa6Y/brPK8lIJv//7QwA///MldA=
-Date: Tue, 7 Sep 2021 16:33:50 +0000
-Message-ID: <4B4EA55EA622814FB935316CC68B2DFC4B11A0@MS-EXMB.mikservices.local>
-References: <4B4EA55EA622814FB935316CC68B2DFC4B114E@MS-EXMB.mikservices.local>
- <4b1807f6215c6842b39e752f3978b1926eb16896.camel@samba.org>
-In-Reply-To: <4b1807f6215c6842b39e752f3978b1926eb16896.camel@samba.org>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [78.42.17.166]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+	id 1mO6di-00DvID-Jx; Wed, 08 Sep 2021 23:05:58 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30506) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1mO6db-00DvI4-Bu
+ for samba-technical@lists.samba.org; Wed, 08 Sep 2021 23:05:55 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=yD7+j2YF9adF1H1D+B1vNydjY7ckpBAWfMJeODdLKnk=; b=sTcEbf1fykyJl264OWnpZaZGiy
+ bdzgGWiCnwgAVoNEhMpxpBUoirmIRWKG5EB0JVgDQuq/FWtfDmi6hUrZ6dsBRQTfkoi2hQGMO6lci
+ 1feq6DtUk+pBjAwBWWRbX37E9FDlYLndoPiIGg5JpepGRpU79Os1+pVhgMsVF1Hdq/4u5IjxbPeqA
+ BqilDzDsiWyXNgDELqQaxjnsRrGKzrOmOa/lXBmy09rG+FaU5ewUVgTtVN1PLTz1dJQvOWyVxpaDS
+ Q9VX5HnqRyEYwVE5BTZQzuT7hDac5V0lmkGACGg9PmdBz+07qrtbyW5kLI7yGUz9qadU9WTJlu/AK
+ bVCAfNUHh7x8H1d+yrmjxgyAgkmwoFra+vDcQX3fHVGWfrQYSmLDoTiS527VeqWPlNJWU0/D9qJDQ
+ A2wAe9r9gKp8C+UX4UvouWLKHvUIL9IjdUdnTZkOhCxzTnQyRqwWkxNksnr3sIZw9VX76XIwOD7oW
+ iXGA0gvlw4THPPoa54wh3/XF;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mO6dZ-005IPY-TN
+ for samba-technical@lists.samba.org; Wed, 08 Sep 2021 23:05:50 +0000
+Message-ID: <1fda50e96d3e1fe3a0f57f23e29ea7fca3941624.camel@samba.org>
+Subject: Re: autobuild[master] failure on sn-devel-184 for task
+ samba-no-opath1 during test
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Thu, 09 Sep 2021 11:05:47 +1200
+In-Reply-To: <E1mNuYv-009jQZ-FT@sn-devel-184>
+References: <E1mNuYv-009jQZ-FT@sn-devel-184>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,110 +58,47 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "Ronge, Matthias via samba-technical" <samba-technical@lists.samba.org>
-Reply-To: "Ronge, Matthias" <Matthias.Ronge@mik-center.de>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-RGVhciBSb3dsYW5kLA0KDQpUaGFuayB5b3UgdmVyeSBtdWNoIGZvciB5b3VyIHJlc3BvbnNlLg0K
-DQo+IFdoYXQgZG8geW91IHVzZSB0aGUgTERBUCBmb3I/DQoNClRoZXJlIGFyZSB0d28gdGhpbmdz
-LiBPbmUgaXMgdGhlIGxvZ2luLCBidXQgd2UgY291bGQgc2VwYXJhdGUgdGhhdC4gVGhhdCBpcyBu
-b3QgdGhlIHBvaW50IGhlcmUuDQoNClRoZSB3ZWIgYXBwbGljYXRpb24gd3JpdGVzIGEgdXNlciBy
-ZWNvcmQgaW4gdGhlIExEQVAgZm9yIGVhY2ggbG9naW4gdGhhdCBpcyBjcmVhdGVkLiBUaGUgcmVz
-dWx0IGlzIGEgTGludXggdXNlciAod2l0aCBQQU0tTERBUCAvIE5TU3dpdGNoLiBUbyBiZSBob25l
-c3QsIEkgc3RpbGwgaGF2ZW4ndCB1bmRlcnN0b29kIGV4YWN0bHkgd2hhdCBpcyBkb2luZyB3aGF0
-LikgSW4gdGhlIFNhbWJhIGNvbmZpZywgdGhlcmUgaXMgYSBnZW5lcmljIGVudHJ5IGZvciDigJx1
-c2VyIGhvbWVz4oCdLCBzbyB0aGF0IHdoZW4gdGhlIHVzZXIgaXMgY3JlYXRlZCwgdGhlIHVzZXIg
-aGFzIGEgaG9tZSBDSUZTIHNoYXJlIGFuZCBjYW4gYWNjZXNzIGl0IGFzIGEgV2luZG93cyBuZXR3
-b3JrIGRyaXZlOg0KDQotLS0tLS0tLS0tLS0tLS0tDQpbaG9tZXNdDQpjb21tZW50ID0gSG9tZSBE
-aXJlY3Rvcmllcw0KcGF0aCA9IC91c3IvbG9jYWwva2l0b2RvL3VzZXJzLyVVDQpyZWFkIG9ubHkg
-PSBubw0KYnJvd3NlYWJsZSA9IG5vDQp2YWxpZCB1c2VycyA9ICVTDQpndWVzdCBvayA9IG5vDQpp
-bmhlcml0IHBlcm1pc3Npb25zID0geWVzDQotLS0tLS0tLS0tLS0tLS0tDQoNClRoaXMgaXMgdXNl
-ZCB0byB1cGxvYWQgdGhlIHNjYW5zLiBGb3IgYSBzaW5nbGUgYm9vaywgdGhhdCBjb3VsZCBiZSAy
-NTAgcGFnZXMgKG1heWJlIDUwIG9yIG1heWJlIDIsNTAwIGhvd2V2ZXIpLCAyMCBNQiBlYWNoIChi
-dXQgaXQgY291bGQgYWxzbyBzY2FucyBvZiBtYXBzLCB3aXRoIDYgR0IgaW4gb25lIGZpbGUpLiBU
-aGF0IGhhcyB0byBiZSB1cGxvYWRlZCB0byB0aGUgc2VydmVyLiBXaGVuIHRoaXMgd2FzIGludmVu
-dGVkIGEgZGVjYWRlIGFnbywgaXQgY291bGRuJ3QgYmUgdXBsb2FkZWQgdGhyb3VnaCBhIHdlYiBi
-cm93c2VyLiBUaGlzIGlzIGFsc28gYSBwZXJmb3JtYW5jZSBxdWVzdGlvbi4gU28sIGxldCdzIHNh
-eSA1IEdCIGhhdmUgdG8gYmUgcHVzaGVkIG9udG8gdGhlIHNlcnZlciBhcyBxdWlja2x5IGFzIHBv
-c3NpYmxlOyBpbiB0aGUgc2FtZSBidWlsZGluZywgbm8gV0FOLsK5IFRoaXMgaGFwcGVucyB2aWEg
-dGhlIENJRlMgZHJpdmUuIFRoZSB3ZWIgYXBwbGljYXRpb24gY3JlYXRlcyBhIHN5bWJvbGljIGxp
-bmsgaW4gdGhlIHVzZXIgaG9tZSBmb3IgdGhlIHByb2Nlc3MgdGhhdCB0aGUgdXNlciBpcyBjdXJy
-ZW50bHkgd29ya2luZyBvbiwgc28gdGhlIGRhdGEgaXMgd3JpdHRlbiBkaXJlY3RseSBpbnRvIHRo
-ZSBwcm9jZXNzIG9uIExpbnV4LiBUaGUgc2Nhbm5lciBQQyBpcyBjb25maWd1cmVkIHNvIHRoYXQg
-aXQgYXV0b21hdGljYWxseSBjb3BpZXMgdGhlIHNjYW5zIHRvIHRoZSBkcml2ZSBhZnRlciBzY2Fu
-bmluZy4NCg0KDQo+PiB5b3Ugc2hvdWxkIGJlIGF3YXJlIHRoYXQgU2FtYmEgaXMgYWN0aXZlbHkg
-d29ya2luZyBvbiByZW1vdmluZyANCj4+IFNNQnYxLCB0aGlzIHdpbGwgbWVhbiB0aGF0IHlvdSB3
-aWxsIG5vIGxvbmdlciBiZSBhYmxlIHRvIHVzZSANCj4+IG9wZW5sZGFwIHdpdGggU2FtYmEuIFRo
-aXMgd2lsbCBub3QgaGFwcGVuIGF0IG9uY2UsIGl0IG1heSBiZSBhIHllYXIgDQo+PiBvciBzbywg
-YnV0IGl0IHdpbGwgaGFwcGVuLCBzbyBJIHN1Z2dlc3QgeW91IHN0YXJ0IHBsYW5uaW5nIHRvIA0K
-Pj4gdXBncmFkZSB0byBTYW1iYSBBRCBvciBzaW1pbGFyDQo+DQo+IEFoLCB0aGF0IHdhcyBteXNl
-bGYgYW5kIGl0IHN0aWxsIGhvbGRzIHRydWUuDQoNCkkgcmVhbGx5IGFwcHJlY2lhdGUgbWVldGlu
-ZyB5b3UgYWdhaW4gaGVyZS4NCg0KPiBZb3UgcHJvYmFibHkgZG8gbm90IG5lZWQgdG8gY2hhbmdl
-IHlvdXIgd2ViIGFwcGxpY2F0aW9uIGNvZGUgbXVjaCwganVzdCBob3cNCj4geW91IGludGVyYWN0
-IHdpdGggU2FtYmEuDQoNCldlbGwsIHRoZSB3ZWIgYXBwbGljYXRpb24gZG9lcyBub3QgeWV0IGlu
-dGVyYWN0IGRpcmVjdGx5IHdpdGggU2FtYmEsIGJ1dCByYXRoZXIsIHRoZSB3ZWIgYXBwbGljYXRp
-b24gd3JpdGVzIHVzZXIgcmVjb3JkcyBpbiBMREFQLCBhbmQgZnJvbSB0aGVyZSwgU2FtYmEgcGlj
-a3MgaXQgdXAuIFRoaXMgaGFwcGVucyBhdXRvbWF0aWNhbGx5IG9uY2UgaXQgaXMgc2V0IHVwLg0K
-DQpBcyBJIHNhaWQsIGZvciBtZSB0aGUgc2ltcGxlc3Qgc29sdXRpb24gaXMgdGhlIG1vc3QgdmFs
-dWVkLiBBbmQgaWYgZm9yIG5ldyB1c2VyIGEgc3VkbyBzY3JpcHQgZWRpdHMgdGhlIHNtYi5jbmYg
-ZmlsZS4gV2hvIGNhcmVzPyAoSWYgSSBoYXZlIHRvIHJlc3RhcnQgdGhlIGRhZW1vbiBhbmQgaXQg
-YnJlYWtzIG9uZ29pbmcgdXBsb2FkcywgdGhhdCB3b3VsZCBvZiBjb3Vyc2UgYmUgYW5ub3lpbmcg
-YW5kIGEgc29sdXRpb24gd291bGQgaGF2ZSB0byBiZSBmb3VuZCwgYnV0IG1heWJlIHdlIGNhbiBy
-ZXNvbHZlIGl0IHRoaXMgd2F5LikNCg0KDQo+PiBXaGF0IGRvZXMgdGhpcyBMREFQIHNlcnZlciBB
-RCBoYXZlIHRvIGJlPw0KPg0KPiBTYW1iYSBjYW4gbm93IGJlIHJ1biBhcyBhbiBBY3RpdmUgRGly
-ZWN0b3J5IERvbWFpbiBDb250cm9sbGVyIChvciBBRCkgYW5kIGl0DQo+IGNvbWVzIHdpdGggTERB
-UCwgRE5TIGFuZCBrZXJiZXJvcyBidWlsdCBpbi4NCg0KSSBkb24ndCB1bmRlcnN0YW5kIHRoaXMg
-aW4gZGV0YWlsLiAoRm9yIHlvdSB0byBrbm93LCBJJ20gYSBKYXZhIGRldmVsb3BlciwgYnV0IG5v
-dCBhIG5ldHdvcmsgc3BlY2lhbGlzdC4pIEkgY3JlYXRlZCBhIHRpY2tldCBvbiBHaXRIdWIgb24g
-b3VyIHNvZnR3YXJlwrIsIGFuZCBhbm90aGVyIGFkbWluIHdyb3RlIHRoYXQgdGhlcmUgY291bGQg
-YmUgY29uZmxpY3RzIGluIHRoZSBzYW1lIG5ldHdvcmsgaWYgaXQgd2FzIGFscmVhZHkgdGhlcmUg
-YW5vdGhlciBBRCBkaXJlY3RvcnkgdGhlcmUuIEkgZG9uJ3Qga25vdyBpZiB0aGF0J3MgYWN0dWFs
-bHkgdGhlIGNhc2UuIEFuZCB3aXRoIEtlcmJlcm9zLCBJIHRob3VnaHQgdGhhdCBoYWQgc29tZXRo
-aW5nIHRvIGRvIHdpdGggdGVsZXBob255OyBJIGhhdmUgbm8gcHJlY2lzZSBrbm93bGVkZ2Ugb2Yg
-dGhpcy4gKEkgd2FudCB0byBlbXBoYXNpemUgdGhhdCBJIGFtIHdpbGxpbmcgdG8gbGVhcm4gYWJv
-dXQgaXQgaWYgSSBuZWVkIHRvLiBKdXN0LCBhdCB0aGUgbW9tZW50LCB0aGF0IGRvZXNuJ3Qgc2F5
-IG11Y2ggdG8gbWUuKQ0KDQoNCj4+ICBPciBpcyB0aGVyZSBhbnl0aGluZyBsaWtlIGl0Pw0KPg0K
-PiBGcm9tIHRoZSBzb3VuZCBvZiBpdCwgeW91IGFyZSBydW5uaW5nIFNhbWJhIGFzIGFuIE5UNC1z
-dHlsZSBEb21haW4NCj4gY29udHJvbGxlciwgdGhlcmUgYXJlIG90aGVyIHNvbHV0aW9ucywgZnJl
-ZWlwYSBmb3Igb25lLCBidXQgdGhpcyAoYXMgZmFyIGFzDQo+IEkgYW0gYXdhcmUpIGFsbG93IHNo
-YXJlcy4NCg0KQ2FuIHNvbWVvbmUgbW91bnQgRnJlZWlwYSBhcyBhIG5ldHdvcmsgZHJpdmUgdW5k
-ZXIgV2luZG93cz8gV2hhdCBkbyBJIG5lZWQgZm9yIGEgc2VydmljZSBvbiB0aGUgTGludXggc2Vy
-dmVyPyBJIGRvbid0IHdhbnQgdG8gZG93bnBsYXkgU2FtYmEgaGVyZS4gSXQgaGFzIHNlcnZlZCB1
-cyB3ZWxsIGZvciBtYW55IHllYXJzLg0KDQo+PiAgV2h5IGlzIE9wZW5MREFQIG5vdCBhIHNvbHV0
-aW9uIHRvIHVzZSBpbiB0aGUgZnV0dXJlPw0KPg0KPiBZb3UgbWF5IGJlIGFibGUgdG8gY29udGlu
-dWUgdG8gdXNlIG9wZW5sZGFwLCBqdXN0IG5vdCB3aXRoIFNhbWJhIGluIHRoZQ0KPiBsb25nIHRl
-cm0uDQoNCkZvciB1cywgT3BlbkxEQVAgb25seSBzZXJ2ZXMgZm9yIHRoZSBjb21tdW5pY2F0aW9u
-IG9mIHRoZSBleGlzdGluZyB1c2VycyB0byBTYW1iYSwgc28sIHdpdGhvdXQgU2FtYmEgc3VwcG9y
-dGluZyBpdCwgdXNpbmcgT3BlbkxEQVAgbWFrZXMgbm8gc2Vuc2UuDQoNCg0KPj4gSWYgdGhlcmUg
-aXMgYSBzaW1wbGUgc29sdXRpb24gdG8gdGhpcywgSSdsbCBiZSBtb3JlIHRoYW4gaGFwcHkgdG8g
-dXNlIA0KPj4gaXQuIFRoYXQgbWVhbnMsIGZvciBleGFtcGxlLCB0byBkbyB3aXRob3V0IExEQVAg
-YWx0b2dldGhlciwgYW5kIA0KPj4gaW5zdGVhZCBpbXBsZW1lbnQgYSBzdWRvIHNjcmlwdCB0aGF0
-IGVkaXRzIHRoZSBzbWIuY25mIGZpbGUgZm9yIG5ldyANCj4+IHVzZXJzLCBhbmQgZXZlcnl0aGlu
-ZyB3b3JrcyB3aXRob3V0IExEQVAsIHdoaWNoIGlzIGdyZWF0LCB0b28uIEp1c3QgDQo+PiB0aGF0
-IHdlIGhhdmUgYSBzb2x1dGlvbiByZWFkeSBmb3IgdGhlIGZ1dHVyZS4NCj4NCj4gUGxhbm5pbmcg
-Zm9yIHRoZSBmdXR1cmUgaXMgZ29vZCwgYXQgdGhlIG1vbWVudCB5b3UgY2FuIGNvbnRpbnVlIHRv
-IHVzZSB5b3VyDQo+IGV4aXN0aW5nIHNldHVwLiBDYW4geW91IHBvaW50IG1lIGF0IHRoZSBwb3J0
-aW9uIG9mIHlvdXIgY29kZSB3aGVyZSB5b3UNCj4gc2V0dXAgb3BlbmxkYXAgYW5kIHRoZSBzY2hl
-bWFzIHlvdSBhcmUgdXNpbmcgPyBUaGF0IHdheSBJIGNhbiBhZHZpc2Ugd2hhdA0KPiBuZWVkcyB0
-byBiZSBtb2RpZmllZC4NCg0KVGhlcmUgaXMgbm8gY29kZSBmb3Igc2V0dGluZyBpdCB1cDsgd2Ug
-aGF2ZSB0byBkbyB0aGlzIG1hbnVhbGx5IGZvciBlYWNoIHNlcnZlci4gVGhlcmUgYXJlIGluc3Rh
-bGxhdGlvbiBpbnN0cnVjdGlvbnMgaW4gRW5nbGlzaCBoZXJlOg0KDQpodHRwczovL2dpdGh1Yi5j
-b20va2l0b2RvL2tpdG9kby1wcm9kdWN0aW9uL3dpa2kvSW5zdGFsbGF0aW9uLWluc3RydWN0aW9u
-cy1mb3ItS2l0b2RvLlByb2R1Y3Rpb24tMi4zLjENCg0KU2VjdGlvbnMgMS4xLjIsIDEuMS4zLCA1
-LCAxMCBhbmQgMTIgYXJlIHJlbGF0ZWQgdG8gdGhpcy4NCg0KSSB0aGluaywgaW4gdGhlIHNvdXJj
-ZSBjb2RlLCB0aGlzIGlzIHdoZXJlIHRoZSBuZXcgdXNlciBlbnRyeSBpcyB3cml0dGVuIGluIExE
-QVA6DQoNCmh0dHBzOi8vZ2l0aHViLmNvbS9raXRvZG8va2l0b2RvLXByb2R1Y3Rpb24vYmxvYi9t
-YXN0ZXIvS2l0b2RvL3NyYy9tYWluL2phdmEvb3JnL2tpdG9kby9wcm9kdWN0aW9uL3NlcnZpY2Vz
-L2RhdGEvTGRhcFNlcnZlclNlcnZpY2UuamF2YSNMMTY5LUwxNzMNCg0KQXMgSSBzYWlkLCBJIGRv
-bid0IHJlYWxseSBrbm93IHdoeSBhbGwgdGhlc2UgZmllbGRzIGFyZSBjcmVhdGVkIGFuZCB3aGF0
-IGlzIGluIHRoZW0gYW5kIHdoeS4NCg0KS2luZCByZWdhcmRzLA0KTWF0dGhpYXMgUm9uZ2UNCg0K
-DQoxKSBUaGVyZSBhcmUgYWxzbyBzZXQtdXBzIHVzaW5nIFdBTiwgYnV0IHdlIHR5cGljYWxseSB1
-c2UgV2ViREFWIG9yIHNvbWV0aGluZyBlbHNlLCBiZWNhdXNlIFNhbWJhIHNlZW1zIHVuc3RhYmxl
-OyBJJ20gc29ycnkgdG8gc2F5IHNvLiBJIHRoaW5rIHRoZSBwcm9ibGVtIGlzIG5vdCB0aGUgU2Ft
-YmEgaW1wbGVtZW50YXRpb24sIGJ1dCB0aGUgaW1wbGVtZW50YXRpb24gd2l0aGluIE1TIFdpbmRv
-d3MsIGhvd2V2ZXIsIHdlIHNlZSB0aGUgc3lzdGVtIChFeHBsb3JlciwgdGFzayBiYXIsIGV0Yy4p
-IGZyZWV6ZXMgd2hlbiB0aGUgbmV0d29yayBoaWNjdXBzLiBBbnl3YXk6IGZvciBidXNpbmVzcyB1
-c2UsIHdlcmUgbWludXRlcyBkbyBjb3VudCwgaXQgZG9lc24ndCBtYWtlIHNlbnNlLg0KDQoyKSBo
-dHRwczovL2dpdGh1Yi5jb20va2l0b2RvL2tpdG9kby1wcm9kdWN0aW9uL2lzc3Vlcy80NjQ2DQo=
+G'Day Team,
+
+I'm wondering if someone can look into this for me.
+
+I'm trying to push Uri's oss-fuzz changes, and I keep getting a failure
+here, in what I honestly hope is unrelated code.
+
+Has anybody got any ideas what might be going on here?
+
+Thanks,
+
+Andrew Bartlett
+
+On Wed, 2021-09-08 at 10:12 +0000, autobuild wrote:
+> [280(1397)/771 at 16m8s] samba3.smb2.notify(nt4_dc)
+> TESTING CHANGE NOTIFY ON DIRECTORIES
+> Testing notify cancel
+> Testing notify mkdir
+> Testing notify rmdir
+> Testing notify mkdir - rmdir - mkdir - rmdir
+> Testing buffered notify on create of 10 files
+> Testing notify on unlink for the first file
+> UNEXPECTED(failure): samba3.smb2.notify.dir(nt4_dc)
+> REASON: Exception: Exception:
+> (../../source4/torture/smb2/notify.c:398) wrong value for
+> notify.smb2.out.num_changes  0x9 should be 0xa
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+
+
+
+
+
 
