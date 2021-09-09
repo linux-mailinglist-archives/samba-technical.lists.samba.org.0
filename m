@@ -2,47 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2472140468F
-	for <lists+samba-technical@lfdr.de>; Thu,  9 Sep 2021 09:55:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CD7A4048D2
+	for <lists+samba-technical@lfdr.de>; Thu,  9 Sep 2021 13:00:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=FqeTsHTH8kC6YLUA2EN+fm4hBKNnTJz8FtWC+c4zxSo=; b=hNEoXpyAJIiZmd07m32swlC4lS
-	NuQKs2tpVLFjZKImAcZ4XlGZTbachB+d/QSfbX0CoRhz5Ivec4Zi1JdmVe99Qkybbq0WVG4bQ3cgJ
-	AXFng0mKnY5+E+UvjQVhVMZQ7kk7Z6Vw98BDD6g1F3i986j0GiwFHO8EFhFEaQnTeUaws8mv8PLW4
-	p9balBAn5xKOtlVi0IRRXThtNAoAoiCRiWEz70uPytOwroz7Mp+XLUudO5WAcvGFWyE1AzyWSOnG/
-	4MZCigjB9sdvjc/Cz66tA2/gyUXN2+cjf7SmvvcbYW1WAP6e209yEvJ3T2M7HShu4E/IES2Wd+2cV
-	HmVZ/dQQ==;
-Received: from ip6-localhost ([::1]:65374 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=JUqUB5cARqh5uAlw0IMirVs+uCwHE1JtgMPPWFrV0FA=; b=ClzlumLkFzt8+EjuKsJ87xAqkA
+	ZbqqZ+1u9JzXND36+xUE06bqGIGY6E+iD0LzFd8GhPQsgGgr5lccSQT7IR3V2xTiWotZ+B64dlwho
+	QgZa7Dm002987v2meyG7oZ1/egCkShXoufuKu9VPf3OgcxS9PUk3akNvfN4yt9rPrtUEC7OTUWBFY
+	bstlCUCZQUwbpbHaUaxQhXIEp9AErWRo7pdDOgegvnQ1Gd4SkNOJTvgQhzYco5VpunEq2dE9jEFyj
+	KkjQMTgTP3kZm4eCDNiHh5TpCrlD7gN/2w/GbUPBsEQKULFpGdyAE+9vQ2CBCvjjy+Lun0Bq8HhYN
+	3WycfXKA==;
+Received: from ip6-localhost ([::1]:23412 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mOEtg-00E1lR-VW; Thu, 09 Sep 2021 07:55:01 +0000
-Received: from mail.briosix.org ([188.164.129.154]:42248) 
+	id 1mOHmq-00E4AH-CH; Thu, 09 Sep 2021 11:00:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60580) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mOEtb-00E1lI-Ll
- for samba-technical@lists.samba.org; Thu, 09 Sep 2021 07:54:57 +0000
-Subject: Re: AW: Suitable replacement of OpenLDAP
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=briosix.org; s=default;
- t=1631173085;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=FqeTsHTH8kC6YLUA2EN+fm4hBKNnTJz8FtWC+c4zxSo=;
- b=CYf9cROEEkVBLeBntHwiPwlFnsUzbpIUTCqev2iyMcmN5bijq0U5E6mSnMOAhBzHmngZ2g
- vddL4bSBWjChqFASz0ijla6DGzgcXue24jkSRoKEmzJ741PaBIKBXPYPw3zZTH5uGA7yG7
- 6bH0NsSj4JLjVJoHqMTGzNI76eW9oOM5MzVTP2O51zCTG9PohslUxdVgpyGOK5olj9X6MU
- FL3q4OzjTYiPkNZc+jlS3jCJ/gvAPuEeJWkR9lo+72DNg8uW7iO5yeGj8a/hP6xle8soBD
- 4G63vHOKamvZSlKSZziLx1ijE28ujDaue8eNEjjjY5HPodIAXttEU8ipZONZlw==
-To: samba-technical@lists.samba.org
-References: <4B4EA55EA622814FB935316CC68B2DFC4B114E@MS-EXMB.mikservices.local>
- <4b1807f6215c6842b39e752f3978b1926eb16896.camel@samba.org>
- <4B4EA55EA622814FB935316CC68B2DFC4B11A0@MS-EXMB.mikservices.local>
-Message-ID: <c6529633-6dd5-81e5-b223-f5fd62d5321e@briosix.org>
-Date: Thu, 9 Sep 2021 09:38:05 +0200
+ (Exim) id 1mOHmk-00E4A7-R7
+ for samba-technical@lists.samba.org; Thu, 09 Sep 2021 11:00:05 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=JUqUB5cARqh5uAlw0IMirVs+uCwHE1JtgMPPWFrV0FA=; b=2Q7VahFi62RoIpHSQpMJBefOM+
+ ujYQnQBFUpmIePLZgGsStLujFJejPqQaEERYTcNAWTS4meh2kNeyuund+pDd5sCH292udvU3xeMTJ
+ UwUYeLcxWczD2LzOF4AlUQiv87yjLRJgWmer7YXR5rtJUmKGQ8vPW7vRJk3ajKB3IS2Vid3LmtHyl
+ eYNCUVXK4QD0JK2ldPHA0HiWTEv/NGb1pUgaOE70bV0CzB1iATXquWL+vr5S6fyPvDqZTt8xeURIL
+ I32dJnsL0IbN77SW2iBu0eqjo94FPQIb3pt4mp/HpVGOIif1PNlnNeWdwiNXBfq47Ty8rkKPll3Ve
+ xyg8bBv+j/rkfnErEyfuqlNfbK41P8x5L3Goe2jBkB1519k+BoyBeAfnnP8JU3RZn05wRY/emyOel
+ yZZb+QGknRQ/qB5PuT1WDJravhEVpKB5zqrTrIJv9a0RuB+oVlI3Kr+596CUtUwKw4EVWcXmBCb68
+ iRz0GV46BwEjKvKvDeUua95X;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mOHmj-005OZ9-4D; Thu, 09 Sep 2021 11:00:01 +0000
+Subject: Re: No Tsocket Unit tests? - Re: Samba | libcli:dns: SAMBA_INTERNAL
+ DNS, set forwarder port (!2148)
+To: Matt Grant <matt@mattgrant.net.nz>
+References: <reply-031540943ffd4db283b8bf3147bd656a@gitlab.com>
+ <merge_request_115283584@gitlab.com> <note_671906917@gitlab.com>
+ <CAHA-KoNQo0VmBccX1FyzvoYepu9=Vq8eWPzWS8HtYNXTNOv2Hw@mail.gmail.com>
+Message-ID: <538f0db3-a91a-662b-98b7-368f53e19d3b@samba.org>
+Date: Thu, 9 Sep 2021 14:00:00 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <4B4EA55EA622814FB935316CC68B2DFC4B11A0@MS-EXMB.mikservices.local>
+In-Reply-To: <CAHA-KoNQo0VmBccX1FyzvoYepu9=Vq8eWPzWS8HtYNXTNOv2Hw@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
 Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,57 +61,45 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alessandro Briosi via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alessandro Briosi <tsdogs@briosix.org>
+From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Uri Simchoni <uri@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi all, just bouncing in the discussion to add my 2c of 
-knowledge/understanding.
+On 9/9/21 8:16 AM, Matt Grant via samba-technical wrote:
+> Hi Uri!
+> 
+> Thank you for helping me while I drill into the tsocket library code.
+> 
+> I have been working  through things, and thought I should check to see if
+> there are any unit of CI tests for the lib/tsocket code and I cannot find
+> one single written test for that library.
+> 
+> Please show me where these tests are if they do exist, otherwise I am
+> asking questions about whether I should be proceeding to touch that library
+> with new code for stability reasons, until a full test suite is written for
+> it.  I believe that should be a separate project covered under a different
+> MR, not this one.
+> 
 
-Basically you are simply using samba as a way to upload files to the 
-server where the application is running.
+tsocket indeed is not tested as a library, as far as I can tell. 
+Historically Samba had torture tests (sending packets to a server and 
+observing the outcome), then blackbox tests (running command-line 
+utilities which interact with a server and observing he outcome), and 
+Python tests (calling C code via Python bindings). A few years ago we 
+finally added good-old unit tests with cmocka - this is good for testing 
+pure "stateless" functions such as in this case, and also allows mocking 
+where there are side effects and environmental dependencies.
 
-To do this the configuration has been using Samba with OpenLDAP as Users 
-backend, but it isn't directly connected to the application (beside 
-using a link inside the home directory of every created user).
+Tsocket has been written in other times, and I think that in today's 
+standards, a new host:port parsing function is a prime candidate for 
+unit-testing, and the cmocka infrastructure should make that fairly 
+easy. I've already pointed at lib/util/tests/test_util_paths.c as a 
+possible example.
 
-So when you add a user you do 2 things:
-1. create the user in OpenLdap (so it creates a home directory) for Samba
-2. Create the same user in your application and point the home directory 
-for document imports
+I'm going to add this test myself to ease the burden a bit.
 
-Now you might have 2 kind of situations:
-1. The application is running on the same server and there is only 1 
-server for every installation (which seems to me your requirement)
-The solution would simply drop the usage of OpenLDAP and use Samba in a 
-standalone environment (creating users directly in Linux and adding them 
-to samba)
-
-2. You need to have the same user access more servers
-The solution would be to setup an AD for the users (possibly a VM to do 
-just that) so it serves the users to all the other hosts, and then 
-simply join all the SAMBA servers to the Created AD domain.
-
-The process would be basically same as now, create the samba user and 
-then in application in both situations.
-
-Just to clarify:
-OpenLDAP is a generic Directory Service which was an option to provide 
-users to Samba in an NT1 Style domain.
-SMB: is the protocol for sharing/transferring files used by MS (in 
-various versions SMBv1, now deprecated, SMBv2 and SMBv3).
-
-SAMBA: implements internally the Directory Services to mimic the Active 
-Directory service by Microsoft which deviated from the standard LDAP 
-protocol specifications.
-
-Samba now is more than just the implementation of the SMB protocol (file 
-sharing/transfer to be simple).
-
-Hope it's clear and it helps you solve your problem.
-
-Alessandro
-
-
+Thanks,
+Uri.
 
