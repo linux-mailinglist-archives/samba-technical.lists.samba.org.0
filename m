@@ -2,46 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55F3C40438F
-	for <lists+samba-technical@lfdr.de>; Thu,  9 Sep 2021 04:26:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E1524043D2
+	for <lists+samba-technical@lfdr.de>; Thu,  9 Sep 2021 05:03:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=Pc3862BjYgZlSqU5uVUKQdS8Wow53UYZaa5jj1uaMhs=; b=mP1s7mODw28XxplYvfyginslkX
-	yxnARqSL30Hnr3SGPKpe2vOudbG+GWYddqsGyHbPIYcsch5k9SmeMJJvVgKrds9Oh43AgkUk/2jfL
-	pLFf8a51DIPEkks/GiQ7jcrNN/96IFBPCgV55RWf+pcMmpZpto0MYjLbU/slHVyQ2dH0wMEJgP2zl
-	bsAtmynbwb8zFlhRaudYSQ5GxQURg0quiSXKR7v7KPvGQ8xgzKq3Xq3tuDD4cat175iqbouWK376S
-	0C6OYjov+ZXzSc14I3sC3cyX/5v2wH6WCuMyhLt4+NJwd37J4V+ZsbWg71nqGqVxhQhIAZgIz7yAB
-	M+U+tqCQ==;
-Received: from ip6-localhost ([::1]:55002 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=MwNOI2TIRuW0qIG0xvZzRFzlELZwHQKED2E3jIk9W2o=; b=MKxzFQMRSSDeyAyGEnFkbF/1mU
+	C1K2xlhzY4RosVHbc0xSyc+XkVF2b3oCXmzVnR8PzlCE7rssb5P4eHbPW1IaZlIB98T6n+dhtktHn
+	hjisx18LhVxp3QX3R+/nGxnCBQ5r70WYgGQQ/30KlBo/30hD0mgL8nwaN1fQiv2eR2gqie1BxFUp7
+	BneKiKPkxmjFgPjd/kWTzV6bfP/98FNly0sVfzBvfNPQdGkLuVns42Fg8lmPMyp+6xxrFnpiIH2qL
+	McxvPKHobhXmj8+6WbWblf/5qlqf6xyxD42KMM7VVwUvxOgKNlsjYIk/VA96xc3KJLG5GWYppzHU/
+	aOn86mIg==;
+Received: from ip6-localhost ([::1]:55818 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mO9l9-00Dx5u-7E; Thu, 09 Sep 2021 02:25:51 +0000
-Received: from ozlabs.org ([2401:3900:2:1::2]:41365) 
+	id 1mOAKk-00DxSa-MW; Thu, 09 Sep 2021 03:02:38 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10014) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mO9l3-00Dx5l-KN
- for samba-technical@lists.samba.org; Thu, 09 Sep 2021 02:25:48 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
- s=202004; t=1631154320;
- bh=Pc3862BjYgZlSqU5uVUKQdS8Wow53UYZaa5jj1uaMhs=;
- h=Date:From:To:Subject:From;
- b=F8zmHcSmWdMC+/HpHtuwh6vB56m3wzviV3sXHV+LtJ2yNm1IAx4tIfUyYCDkpJcr6
- aGEWNaUhutJJ3aztn+o00RZ6H88t7K69DYID3ShiSLpMwtPYzy9oExHG7s9R3m+tG9
- gAL6MAFPppRKD1E8G6qjRBHuD6wNTGducmmrFgOQz7rTjCozsWNL2tWnosoefyfIwW
- k4HOX7CuYo/z4nQQljqxKvdykxXgNvZiDZXukjyCizAE11/KcKTJAY5eWYM6soFpCN
- WRZCF9Yuyc28a21A4EzMQLgSdu/t73/UPQUB44oPKgzwsUIijOceYSxNOx7ICKktnL
- 771+wQevNIejg==
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4H4jXJ369jz9sRN;
- Thu,  9 Sep 2021 12:25:20 +1000 (AEST)
-Date: Thu, 9 Sep 2021 12:25:17 +1000
-To: Samba Technical <samba-technical@lists.samba.org>
-Subject: Is Samba's compile_commands.json useful?
-Message-ID: <20210909122517.5bc193cb@martins.ozlabs.org>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ (Exim) id 1mOAKe-00DxSQ-QM
+ for samba-technical@lists.samba.org; Thu, 09 Sep 2021 03:02:35 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=MwNOI2TIRuW0qIG0xvZzRFzlELZwHQKED2E3jIk9W2o=; b=p8bKNHqumaodNgUTs3ntBLvBVu
+ h4BgnFgppW/iwAiAyivQng0NTuXZCjNJ0uJMcX5x9gz1gmrW6ZmPgPMKSw0qF/h8veE1z+eU2Ggnn
+ KtIVfkbFgO3p7Rv8Bw9gDIqclFJzBcVEn1x3IlRot5pLttVBFuWlQnrMDqYez68kLe2A+gW27kq8V
+ UWHNGMG2SieEI7ucMhVqxxk8N3Xm9ZAYX25bAAb8hmenZeSDDqAXToDKSvW5L77Ks6PNhAAdf21go
+ eeATGahSINMipSz9UPpLeqVuluOKBVOieuf9nxJjwpaP13kSnOQRVQqYsL1BDN0bbcW6rf7jPfpBU
+ yzgE5jiAtx2Q5J31U2DpKkMF6CcXGpLWDaYLaNIc7cRdh95dP/rIrzgyfuOJgLP392m1sjPTRPqRb
+ JswqDTStc6hL/KevgaKr0/9PXCEWpnfFVKkwiiUXefvsOuCOL0Gc9LmdSLyAp09tsWgo9CN/bWQsJ
+ 5rm5FAGclWYqwUZg6xI18kii;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mOAKd-005JqS-3J; Thu, 09 Sep 2021 03:02:31 +0000
+Message-ID: <234c2471b64eb5a311dddea3a61951fbd11beaf5.camel@samba.org>
+Subject: Re: Is Samba's compile_commands.json useful?
+To: Martin Schwenke <martin@meltin.net>, Samba Technical
+ <samba-technical@lists.samba.org>
+Date: Thu, 09 Sep 2021 15:02:27 +1200
+In-Reply-To: <20210909122517.5bc193cb@martins.ozlabs.org>
+References: <20210909122517.5bc193cb@martins.ozlabs.org>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -56,164 +57,43 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I'm getting into the 21st century and attempting to use Emacs with LSP,
-in particular with clangd.
+On Thu, 2021-09-09 at 12:25 +1000, Martin Schwenke via samba-technical
+wrote:
+> 
+> I'm trying to understand how the automatically generated
+> 
+> compile_commands.json can be useful without all of these options.
+> 
+> 
+> 
+> What am I missing?
+> 
+> 
+> 
+> Thanks...
+> 
 
-If I use Samba's automatically generated (via
-./configure [...] && make -j) compile_commands.json then clangd
-generates way too many errors, apparently because it can't find any
-include files. compile_commands.json contains very few details. For
-example, here's what it has for replace.c:
+On the other hand, has this perhaps regressed with the recent waf
+upgrade and changes?  Perhaps try some older versions and check?  If
+so, then we probably need a fix and a test to keep it fixed.
 
-  {
-    "arguments": [
-      "/usr/bin/gcc",
-      "-D_SAMBA_BUILD_=4",
-      "-DHAVE_CONFIG_H=1",
-      "-MMD",
-      "-D_GNU_SOURCE=1",
-      "-D_XOPEN_SOURCE_EXTENDED=1",
-      "-DHAVE_CONFIG_H=1",
-      "../../lib/replace/replace.c",
-      "-c",
-      "-o/home/martins/samba/samba/bin/default/lib/replace/replace.c.2.o"
-    ],
-    "directory": "/home/martins/samba/samba/bin/default",
-    "file": "../../lib/replace/replace.c"
-  },
+Andrew Bartlett
 
-If I generate my own compile_commands.json via something like:
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
 
-  ./configure [...] && bear -- make -j
-
-then this file contains all of the options for compiling each file,
-including -D, -I and -W options, which is what I expect.  This works
-well with clangd.
-
-Here's the snippet for replace.c:
-
-  {
-    "arguments": [
-      "/usr/bin/x86_64-linux-gnu-gcc-10",
-      "-D_SAMBA_BUILD_=4",
-      "-DHAVE_CONFIG_H=1",
-      "-D_GNU_SOURCE=1",
-      "-D_XOPEN_SOURCE_EXTENDED=1",
-      "-DHAVE_CONFIG_H=1",
-      "-D_SAMBA_HOSTCC_",
-      "-DDEVELOPER",
-      "-DDEBUG_PASSWORD",
-      "-fPIC",
-      "-D__STDC_WANT_LIB_EXT1__=1",
-      "-D_REENTRANT",
-      "-DDEVELOPER",
-      "-DDEBUG_PASSWORD",
-      "-DCTDB_HELPER_BINDIR=\"/usr/local/samba/libexec/ctdb\"",
-      "-DLOGDIR=\"/usr/local/samba/var/log\"",
-      "-DCTDB_DATADIR=\"/usr/local/samba/share/ctdb\"",
-      "-DCTDB_ETCDIR=\"/usr/local/samba/etc/ctdb\"",
-      "-DCTDB_VARDIR=\"/usr/local/samba/var/lib/ctdb\"",
-      "-DCTDB_RUNDIR=\"/usr/local/samba/var/run/ctdb\"",
-      "-fstack-protector-strong",
-      "-fstack-clash-protection",
-      "-g",
-      "-Wall",
-      "-Wshadow",
-      "-Wmissing-prototypes",
-      "-Wmissing-field-initializers",
-      "-Wformat-overflow=2",
-      "-Wcast-align",
-      "-Wcast-qual",
-      "-fno-common",
-      "-Werror=address",
-      "-Werror=strict-prototypes",
-      "-Wstrict-prototypes",
-      "-Werror=write-strings",
-      "-Wwrite-strings",
-      "-Werror-implicit-function-declaration",
-      "-Werror=pointer-arith",
-      "-Wpointer-arith",
-      "-Werror=declaration-after-statement",
-      "-Wdeclaration-after-statement",
-      "-Werror=return-type",
-      "-Wreturn-type",
-      "-Werror=uninitialized",
-      "-Wuninitialized",
-      "-Wimplicit-fallthrough",
-      "-Werror=strict-overflow",
-      "-Wstrict-overflow=2",
-      "-Wformat=2",
-      "-Wno-format-y2k",
-      "-Wno-format-zero-length",
-      "-Werror=format-security",
-      "-Wformat-security",
-      "-Werror=format",
-      "-Werror",
-      "-Wno-error=deprecated-declarations",
-      "-Wno-error=tautological-compare",
-      "-Wno-error=cast-align",
-      "-Wno-error=discarded-qualifiers",
-      "-Wno-error=cast-qual",
-      "-Wno-error=missing-field-initializers",
-      "-Wno-error=shadow",
-      "-Wno-error=implicit-fallthrough",
-      "-Wno-error=enum-compare",
-      "-Wno-error=unused-but-set-variable",
-      "-Wno-error=unused-const-variable",
-      "-Wno-error=unused-variable",
-      "-Wno-error=unused-result",
-      "-DSTATIC_ROKEN_HOSTCC_MODULES=NULL",
-      "-DSTATIC_ROKEN_HOSTCC_MODULES_PROTO=extern void __ROKEN_HOSTCC_dummy_module_proto(void)",
-      "-Isource4/heimdal_build",
-      "-I../../source4/heimdal_build",
-      "-Isource4/heimdal/lib/roken",
-      "-I../../source4/heimdal/lib/roken",
-      "-Isource4/heimdal/include",
-      "-I../../source4/heimdal/include",
-      "-Isource4/heimdal_build/include",
-      "-I../../source4/heimdal_build/include",
-      "-Iinclude/public",
-      "-I../../include/public",
-      "-Isource4",
-      "-I../../source4",
-      "-Ilib",
-      "-I../../lib",
-      "-Isource4/lib",
-      "-I../../source4/lib",
-      "-Isource4/include",
-      "-I../../source4/include",
-      "-Iinclude",
-      "-I../../include",
-      "-Ilib/replace",
-      "-I../../lib/replace",
-      "-Ictdb/include",
-      "-I../../ctdb/include",
-      "-Ictdb",
-      "-I../../ctdb",
-      "-I.",
-      "-I../..",
-      "../../source4/heimdal_build/replace.c",
-      "-c",
-      "-o/home/martins/samba/samba/bin/default/source4/heimdal_build/replace.c.3.o"
-    ],
-    "directory": "/home/martins/samba/samba/bin/default",
-    "file": "/home/martins/samba/samba/bin/default/../../source4/heimdal_build/replace.c",
-    "output": "/home/martins/samba/samba/bin/default/../../source4/heimdal_build/replace.o"
-  },
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
 
 
-I'm trying to understand how the automatically generated
-compile_commands.json can be useful without all of these options.
 
-What am I missing?
 
-Thanks...
 
-peace & happiness,
-martin
 
