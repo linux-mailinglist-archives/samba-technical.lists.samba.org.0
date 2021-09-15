@@ -2,59 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76D1740A52A
-	for <lists+samba-technical@lfdr.de>; Tue, 14 Sep 2021 06:15:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6D4C40CB42
+	for <lists+samba-technical@lfdr.de>; Wed, 15 Sep 2021 18:52:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=fk5npy068OgmDV0FJiWIYC2aMiqadNbg9v3BldokMwQ=; b=tI/I24/7sFrUKznlafgL8V5cVP
-	8RnDgL+2Xl9A9pcf7hTKAD3idt0xUjGA+7xRSfTBrQhj6WLW4u5EyR+gV9ypYIroZRGcR0B81smzf
-	WMprviTIAI7FHzTEm5+iCfrFTt9XTYG1Xn55heLuwEPPssUcaelaE6e7Me6FurzMR+yad03W7wd1f
-	TfKebIp4rjXjpfykUMN2bfr3gK99pCmmO81dkP1oM5KkSFxZ20E966nbbqlw7ldK+p42shPBCT7ab
-	SwqJ7iHVsXdggL4Bhge7g6rQyttq+1sYI0rr+3ZBMnPlck7zNCfZjB5HWdwme8oK342EnGB5HngHY
-	zDBgZ+kQ==;
-Received: from ip6-localhost ([::1]:55430 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=Iay7pGNdJ5dDLoilQ4bQO35TJDXTPZVnv57t0xxObMM=; b=egWFlwRkTuPPDUkkXtycgNhvPG
+	AOeKqoGIa09v3Olr7bJbluz0IYlekZdN9vj4lWj3rSyUHC2nJTQxQqiX8uv1Tb4Wbkvn0y9PCppBN
+	U1u5jiFJ4zntK6hXnf0gSBwmKAu4ZsuWYI+xGTyrnS7kpoGzugyHF2jYenz7XgvEaxpQRpOBoA0vO
+	nKbjmZzMSU3wrJE5SuPFovT0G2hbQRKVB7uRXln69EFuJhtI1Rr+6eZ+MXsXXVguzEVJx10i3ikQB
+	+WYayyytQ5tA84XPVeRDbLCiTXAjPtUPZYw4QLaa0PfEVLbCUErX3W3z9zDhwlngbAS6ttDF1o8XI
+	caVkmYzw==;
+Received: from ip6-localhost ([::1]:38586 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mPzqS-00EzOY-3i; Tue, 14 Sep 2021 04:14:56 +0000
-Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d]:40477) 
+	id 1mQY8c-00FEtj-AK; Wed, 15 Sep 2021 16:51:58 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19704) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mPzqM-00EzOP-0c
- for samba-technical@lists.samba.org; Tue, 14 Sep 2021 04:14:52 +0000
-Received: by mail-lj1-x22d.google.com with SMTP id i28so21228934ljm.7
- for <samba-technical@lists.samba.org>; Mon, 13 Sep 2021 21:14:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=fk5npy068OgmDV0FJiWIYC2aMiqadNbg9v3BldokMwQ=;
- b=WM/itaV7eQFGJhf+ut/Gi991yYdBohhD7SdazDTHAFwv9VKd2vKHKooUE7AahtWbzS
- Wp+wcfn/hQsFUTnag8WVBYE4qhYDs0ruiKKAHTifyfSIQTyPlC64ooFV9YctB5diCtH6
- Dsmd48SRDriWu/kBiO9jpIwghSPzYTwI47c2QX0pe5ogfX404H+fxwOZpUKDlhefJ9Oo
- /ubitx4mgD2k25hp4/5q9Nkf8nU5n2Zmlle21O8ZH/NjhBJeSMnL/T8h8UdTEkMwVm/k
- nWIYjjOU8xfu/odao53UkeakVe0K0gxFSTIZvjiY7gKqTClmGVKBSSV6Vl+S9yjhUFXd
- kn6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=fk5npy068OgmDV0FJiWIYC2aMiqadNbg9v3BldokMwQ=;
- b=Zypv0ESPfTheh/k5VAR69Qh7V5u3ZNNiOXeD5HoUzihNdCnvtXRKuXqqWoJ0p0ye6p
- zyKRAZr/eZ5ILNW6QOjiAsQ8fOScwwSgwqooDIDqzCtUMfCpFtyfxTMy9N5kfb9FFPXS
- AsFOQxy4oQlQ7jGoQRKnTJZvl8LaaZToa76xKQ9n+n7/q7HevMTP5ejvYxPYMUomVxz0
- bdI20lPn9RFhXOfoVGW20Wmzb50rqEpcjsLyNFviTXpYqSsVedk3DSuj6vqJorBvjDKB
- PqiXOWwZV42KzZIefqKxuFAYqxWufvu4njWTgPJ/m84cG5W5H+0X8Z9ijcPyiKXFxRB0
- tC6w==
-X-Gm-Message-State: AOAM531nZ3IYvwCZChHfT1oEbBIWZPe/GlSCY8SIEPTvJ9TiMdg3Trxb
- Nl3o+InsWeCSUCOrqhqRd7ubL82RUBBAAhHAPtM=
-X-Google-Smtp-Source: ABdhPJzaLLNRj8vrhhNRwLPGqsQsPoHZir/7AzhIrkrQkQ4S574j5Ukleo7R8h5NRI086wb9A70pZCg+yq/6UqcW0sU=
-X-Received: by 2002:a2e:4e01:: with SMTP id c1mr12814315ljb.460.1631592888353; 
- Mon, 13 Sep 2021 21:14:48 -0700 (PDT)
+ (Exim) id 1mQY8W-00FEta-Fv
+ for samba-technical@lists.samba.org; Wed, 15 Sep 2021 16:51:54 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=Iay7pGNdJ5dDLoilQ4bQO35TJDXTPZVnv57t0xxObMM=; b=tP7jXbMsuE1aoFrQNsFmvvLpVq
+ zDPON3QK118JuH3GMwGaHeLKldD0+mflqEuXYZWheB+FSBD4l2bVHChALDAcSpbyoMlgs68NHwskO
+ dm5KQRy11V57PMoCrjWo1jMBbI09po1qBFp8D6ReExMxTvb6uxhX3FW40sDqh7cvDFa75ScDgLL8R
+ Lnrx+Y3T323G06c6PP4iMNoXHORsYx+Z7y0XeZY8n6yp2BZGpubDe0oUh8RVf8K7aMUgEk9WCsKYp
+ jbfqPRdVY+F1ltg4r0JXcE/QYpwniI52pFAwdJHvP3B7quIjTtCgnYyRhoSWqeH5GBNAIqb1HDifL
+ 8zcZSB9YspdaW5m9HsEBFLgQ3KVxutf8JzvHZ1ublQL5lMLya6tI16ll+QwH4Lpglx6Vgfiweh0O4
+ drO/H7MtIYrXXjLMr4PZlr//VBLTNszviuOp7gB7Qfz4y4thcZRcV5hiasVCgZ0EljSTF6HZxEW+N
+ 9s1cAMZMuNf9fcpCS42PekCw;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mQY8V-006KIN-B5; Wed, 15 Sep 2021 16:51:51 +0000
+To: Ralph Boehme <slow@samba.org>, samba-technical@lists.samba.org
+Subject: Re: Is Samba's compile_commands.json useful?
+Date: Wed, 15 Sep 2021 18:51:50 +0200
+Message-ID: <2603791.mvXUDI8C0e@krikkit>
+In-Reply-To: <20210909170916.045b5e3c@martins.ozlabs.org>
+References: <20210909122517.5bc193cb@martins.ozlabs.org>
+ <877e249b-c99d-380d-45d1-d5950e2b50d4@samba.org>
+ <20210909170916.045b5e3c@martins.ozlabs.org>
 MIME-Version: 1.0
-References: <202109132243.2u0FFC0r-lkp@intel.com>
-In-Reply-To: <202109132243.2u0FFC0r-lkp@intel.com>
-Date: Mon, 13 Sep 2021 23:14:37 -0500
-Message-ID: <CAH2r5msMZFtQt-u+5bw=hXTe4J_s8ugb2JR9RLCP4+9J3Pkzmg@mail.gmail.com>
-Subject: Re: [cifs:for-next 1/1] fs/smbfs/cifsroot.c:83:12: warning: no
- previous prototype for 'cifs_root_data'
-To: kernel test robot <lkp@intel.com>, Paulo Alcantara <pc@cjr.nz>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,62 +57,51 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, kbuild-all@lists.01.org,
- samba-technical <samba-technical@lists.samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Paulo,
-This doesn't look like an error - there is a prototype for this in
-init/do_mount.c
+On Thursday, 9 September 2021 09:09:16 CEST Martin Schwenke via samba-
+technical wrote:
+> On Thu, 9 Sep 2021 06:49:52 +0200, Ralph Boehme <slow@samba.org> wrote:
+> > Am 09.09.21 um 04:25 schrieb Martin Schwenke via samba-technical:
+> > > What am I missing?
+> > 
+> > I also noticed this a few days ago when using lsp im emacs as well.
+> > 
+> > It seems it's a regression introduced by
+> > 5d53b848f60efbb71e4cd2f51f33a06369ca9055. If I revert this change I get
+> > a working compile database.
+> > 
+> > Looking...
+> 
+> Thanks!
+> 
+> That was one of the commits I took a brief look at while trying to
+> understand the problem myself.  I didn't try reverting it.  I also
+> didn't notice the new call to:
+> 
+>     Scripting.run_command('clangdb')
+> 
+> in buildtools/wafsamba/samba_deps.py the first time around.
+> 
+> Duplicating that from
+> third_party/waf/waflib/extras/clang_compilation_database.py looks like
+> it should do some deep magic... but it seems like it isn't quite working
+> as expected.  Deep magic always deserves a comment to explain some
+> subset of what, why and how... :-D
 
-Is a change needed? Or something to quiet the buildbot ..
+I've tried to fix with metze the issue that waf build fully regenerates the 
+compile_commands.json event if nothing changed at all. The problem is that it 
+fails to add the include path now.
 
-On Mon, Sep 13, 2021 at 10:00 AM kernel test robot <lkp@intel.com> wrote:
->
-> tree:   git://git.samba.org/sfrench/cifs-2.6.git for-next
-> head:   bba805a46c91e7a8a1d04704e5409f890acf8b66
-> commit: bba805a46c91e7a8a1d04704e5409f890acf8b66 [1/1] cifs: rename fs/cifs directory to fs/smbfs
-> config: x86_64-allyesconfig (attached as .config)
-> compiler: gcc-9 (Debian 9.3.0-22) 9.3.0
-> reproduce (this is a W=1 build):
->         git remote add cifs git://git.samba.org/sfrench/cifs-2.6.git
->         git fetch --no-tags cifs for-next
->         git checkout bba805a46c91e7a8a1d04704e5409f890acf8b66
->         # save the attached .config to linux build tree
->         make W=1 ARCH=x86_64
->
-> If you fix the issue, kindly add following tag as appropriate
-> Reported-by: kernel test robot <lkp@intel.com>
->
-> All warnings (new ones prefixed by >>):
->
-> >> fs/smbfs/cifsroot.c:83:12: warning: no previous prototype for 'cifs_root_data' [-Wmissing-prototypes]
->       83 | int __init cifs_root_data(char **dev, char **opts)
->          |            ^~~~~~~~~~~~~~
->
->
-> vim +/cifs_root_data +83 fs/smbfs/cifsroot.c
->
-> 8eecd1c2e5bc73 fs/cifs/cifsroot.c Paulo Alcantara (SUSE  2019-07-16  82)
-> 8eecd1c2e5bc73 fs/cifs/cifsroot.c Paulo Alcantara (SUSE  2019-07-16 @83) int __init cifs_root_data(char **dev, char **opts)
->
-> :::::: The code at line 83 was first introduced by commit
-> :::::: 8eecd1c2e5bc73d33f3a544751305679dbf88eb4 cifs: Add support for root file systems
->
-> :::::: TO: Paulo Alcantara (SUSE) <paulo@paulo.ac>
-> :::::: CC: Steve French <stfrench@microsoft.com>
->
-> ---
-> 0-DAY CI Kernel Test Service, Intel Corporation
-> https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
+However I'm on vacation till Sep 28th so it would be great if someone else 
+could find a way to fix it or revert the commit.
 
 
+	Andreas
 
--- 
-Thanks,
 
-Steve
 
