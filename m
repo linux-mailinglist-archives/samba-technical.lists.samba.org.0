@@ -2,46 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56A4A41F44C
-	for <lists+samba-technical@lfdr.de>; Fri,  1 Oct 2021 20:03:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35ED04207BB
+	for <lists+samba-technical@lfdr.de>; Mon,  4 Oct 2021 11:02:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=P/mrA4aLjTMkMhw3cvyKfCfGU+pRXCj/qIXbTlByPkU=; b=zZNZyPvrXFf2KCyK7uszBhXgya
-	eo3znsmi8hRv/dxUNW3JR7WwHCXUo6blIOelG0EmFNy6r1TRF5Ek6tKE//HETssTa6Mlz2L6UqPd1
-	hN2MvrQDNRTUqAAbiKZQ+q0/Cb58oljlwimwMlbW0x7JMXvXFctj2nX9BXrijNGBt1s29u39QWhum
-	Z3CFCZ9DzdnViX4zp2sdn/kmqlHlQqg1qwVdowEWCcwEbuyJkyoYuNxaa2UNc9zs8lNY/2N1YCkIv
-	i/+Cn74arCHWkyMwcmJNoeCWiTbyc7f7c920a8TA0EV2oFXrjjFP6ZGfS+lycsnVgeeXK77yNFxgO
-	WqTN+g4g==;
-Received: from ip6-localhost ([::1]:27350 helo=hr1.samba.org) 
+	bh=4i3ey71zDh26bmgPFLYCM4pF4TOFkmrNbA3xku/iQW8=; b=hYccYi7OOakLa937BYjdoQrZO2
+	GJYm2NDvVg6XZ5h0qS+Shxre/IBEHqXwK7M5rEli7j6mpHQTz7w1kha3GKu8eR0SHm9fFLoQv9PoN
+	kGYtqa02ccFdSp/j6q8L7kHXUODJnyp7xFswOVKjEijGo00BjQWQ0B8PluGY49ZA0nDWGFIPCIaMf
+	lAPnAoT89WCqAPPZxCeJ7VLVPyi9//gvbIcFeVudmBQBp7hd2XjND23Ha0sbvTegRt510Bat/hfAs
+	FlsFWxw3yO7Fu9f+oPVqzAiTpIQNYb793Ef14L8qozfuc2KvPAem4zBXnBREEPi9SAfwRwzfPZZR+
+	Lcgi8M+Q==;
+Received: from ip6-localhost ([::1]:42656 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mWMrz-003Mt3-RI; Fri, 01 Oct 2021 18:02:51 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40974) 
+	id 1mXJq5-003rPp-RN; Mon, 04 Oct 2021 09:00:49 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64446) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mWMru-003Msu-FJ
- for samba-technical@lists.samba.org; Fri, 01 Oct 2021 18:02:49 +0000
+ (Exim) id 1mXJpz-003rPg-5h
+ for samba-technical@lists.samba.org; Mon, 04 Oct 2021 09:00:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=P/mrA4aLjTMkMhw3cvyKfCfGU+pRXCj/qIXbTlByPkU=; b=Ntxx1f4C9oS5MHUMTDEqdvReSZ
- NJSAEa2fHfmDfEr1HkPMuwH6mnerE5N5Bdwk3yCuJGg+/JyXOKJxD4u0xMlcfASc3IXNbSK5/Q5zx
- D5A73OymXIVQXJcJQg27qgvo1ilPq4FMz/dRq1USz4MNIMstUMk//TkFVL7Mmu5pFy61IpWLkiE7Z
- MnbJx9PDjt3U4WcjLbEtLcl15XNb1aAHP+NR9oO+jx4VFps2lrPD1s5A19iwVA9xPotrPMsHSrBYr
- rY37qovjbAWuGSd5jvCpx0Ynz9+OKpiYCm3SoqkFMRH9sFtX9EXGlus68kKDjWkhVSKZLYe8z+nCb
- IL27SocT9JqAMgOz24qfnrEhdJDfwem9AD6p1xt6M2kTnqjHoZkA2GVuVML3oKDCwwkfcRRaxY+Ky
- JiECjLp0wdKDEZZ3wfvoQuiJ4K7g9p4p5flQaLIzaDa4oA2+KYwUCTjY2ONL0PPKCV6VtFrrZ4o9x
- 9fEfTYOhosQf2XWkpBzTIodc;
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=4i3ey71zDh26bmgPFLYCM4pF4TOFkmrNbA3xku/iQW8=; b=hTPTXFJ3OeXWu5jnf6zpdUYGle
+ NP5kQ5VBXfvwVbPqd9RZoRD+PdSylKz5+EYFoRgqX60zKt88/3FckajUBYWuFolbZRmAzsf7Y5XYY
+ dU6/QdGlFvIHvBQ2oZhJSX+NGA1M/VukjewdNSNaWtqERJ1npWIWYYfMCCjhsFGBqIJXmJ+aka6lf
+ mFY1Mon3VdE2+NFoIBDzQE46GN92ErVvxEaOnu+Nb1axTEiLqMEzVSPzFC72nYHD+1Fighm1KgyH7
+ qIQG0H9EkmCwZ13awv+3gn9xK4MwA4op8A6l5ptzGD7jPFMLGUOBK7LovoEdPs/itnwJ2M8NcC+q9
+ e5Kb3W+6oIUoLVnJrMmr9ezlQnuDVcZb/6N28I9OuzTUY5H/no1VFy3M2YutWm+O3MLybO8O3hfOQ
+ hLoWGkK53M60P+GhKSPV1efVuZCkeIyBovZXni+SeJLhnscSkIHa/MlSlVWLlrxf1DMQZuCv6pWA5
+ sEAIJhZh8KN2hNkMbhQ28QSR;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mWMrs-0016OE-He
- for samba-technical@lists.samba.org; Fri, 01 Oct 2021 18:02:45 +0000
-Message-ID: <b5c58afe933683be74b8c1509e697ea319024c07.camel@samba.org>
-Subject: "RN: " syntax for the automated WHATSNEW generation
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Sat, 02 Oct 2021 07:02:36 +1300
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1mXJpy-001R5Z-9y
+ for samba-technical@lists.samba.org; Mon, 04 Oct 2021 09:00:42 +0000
+Subject: Re: "RN: " syntax for the automated WHATSNEW generation
+To: samba-technical@lists.samba.org
+References: <b5c58afe933683be74b8c1509e697ea319024c07.camel@samba.org>
+Message-ID: <bf8474ff-1da5-2017-f457-598273d07213@samba.org>
+Date: Mon, 4 Oct 2021 11:00:42 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
+In-Reply-To: <b5c58afe933683be74b8c1509e697ea319024c07.camel@samba.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,35 +59,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I was just asking a new contributor to prepare a patch for backporting,
-and realised I don't know exactly the new RN: syntax.  Is it strictly
-one line (which might go on for a bit) or multi-line, and what is the
-guidance etc?
+The release notes description can be multi-line, it must be followed by 
+a blank line to mark the end of the RN.
+It should be understandable for admins without code knowledge.
 
-Can someone who knows the exact syntax and what should be in the note
-please document the
+The wiki page was modified accordingly.
 
-RN: ....
 
-syntax for the wiki:
+Jule
 
-https://wiki.samba.org/index.php/Samba_Release_Planning#Release_Branch_Checkin_Procedure
 
-Thanks!
-
-Andrew Bartlett
+Am 01.10.21 um 20:02 schrieb Andrew Bartlett via samba-technical:
+> I was just asking a new contributor to prepare a patch for backporting,
+> and realised I don't know exactly the new RN: syntax.  Is it strictly
+> one line (which might go on for a bit) or multi-line, and what is the
+> guidance etc?
+>
+> Can someone who knows the exact syntax and what should be in the note
+> please document the
+>
+> RN: ....
+>
+> syntax for the wiki:
+>
+> https://wiki.samba.org/index.php/Samba_Release_Planning#Release_Branch_Checkin_Procedure
+>
+> Thanks!
+>
+> Andrew Bartlett
+>
 
 -- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
+Jule Anger
+Release Manager Samba Team      https://samba.org
+SerNet Samba Team               https://sernet.de
 
 
