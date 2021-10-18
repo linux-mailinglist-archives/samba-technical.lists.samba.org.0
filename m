@@ -2,48 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B184942CFE2
-	for <lists+samba-technical@lfdr.de>; Thu, 14 Oct 2021 03:26:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 032BD43140F
+	for <lists+samba-technical@lfdr.de>; Mon, 18 Oct 2021 12:04:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=0oaX0I/iMYdTFM+wqd5pBP1kJdXY/LjaPBNDnuD9nv4=; b=lB60o8TvY+Or46jJq0tjNfYWEB
-	VbE8rnksT1n8ZBRhwRUPvcbTmcCdWqkVbGNldxpjprXvWJRChsd2/34GZWRZJbwrQzP3MKgt4hKpD
-	k3L0zniIFLDdO0lKEPhOtyLs3rOve1g2M1AbC826lb53to8+g+XbO7Zn9bZIRpNcn20k4ANA3utPB
-	cuINsmg8+OOOMZnc/1eGkryoMHoIGOpppjPG8x30GIEMh8kKNxCLP9T+20DzN+N+Gg7NTpo8YRl5n
-	eifZJCJwBDoeCjQZQexYNvYzYZ//MecEGLLgMXr1avgGi8jphhZLVL/xVn1Skbi8Sx5CAbJjc4uZU
-	l/nkZnwQ==;
-Received: from ip6-localhost ([::1]:59898 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=/dOzoaFtEsDy8Pgxwl3D55uDEIqOY7bjBQwbBfBsggQ=; b=p+Qne0FFQ+oRlCM4cmCXiKpAGj
+	oS3HE1IOw905ChRE4StcaZblVFb5fY6AOPLWMbggBAtog/WKNrdfyVv4H4KV5rMDJzsyqlYzTHRJB
+	BAPr+VoEqaq4jMK8ticF6VVmiPRWmWIsvPMGcvTzQMqOfyCVTyZuD3KLUn3Absjp9M34YjUDHkwXg
+	5+5KeJamFrNtkqj3L6TSL/yZ7qbQQgzJnmn2j8liDtRHKxo1DTL2HFuE/PQRlQqUHei6rwNML6cQ9
+	hXtesDEOTmV5KqwThoT4rfZXh0m1SIYlHbs+TDkvs+3LX66QN2tGvbqZtnwqPIARu4ER5FtAM2w7O
+	J+VQ/pCA==;
+Received: from ip6-localhost ([::1]:48518 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mapV7-007SjE-Jx; Thu, 14 Oct 2021 01:25:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56406) 
+	id 1mcPUy-009tSz-VC; Mon, 18 Oct 2021 10:04:05 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56480) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mapUw-007Sj5-D7
- for samba-technical@lists.samba.org; Thu, 14 Oct 2021 01:25:34 +0000
+ (Exim) id 1mcPUt-009tSd-1S
+ for samba-technical@lists.samba.org; Mon, 18 Oct 2021 10:04:01 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=0oaX0I/iMYdTFM+wqd5pBP1kJdXY/LjaPBNDnuD9nv4=; b=lA654jTFzsrgCR9cUUGXfi8ucp
- Gu6vI/9w0etJDMlh9yRN4BjEjAR1z59v30O74T10RLHcD0iFJKrPmT36T+pckPIttMadTGL8LdIKZ
- 2Xv3en3WlhZuCqmc82PzdjeOVqHl++9STEokVVGDxg9rIWoIMBqfKU7EX9ThWi2ZTREcVfWmpdil5
- WYPNjKuKMEbR7To7BsstknMrJyifj5/oemFleEUa9jhJS9C88pD46vhetJpjMqyv7Gs+YOaLH/fuI
- Eg0qVC+F62h34d+OO7QlvakmsPWSRWT1fk4lvRSoXpeffgCVAY7201rRy8QbkA2kuLUw+LI20I6mV
- S0UDYMJDVUDnPxVwRZDa8M4xtUvaofWxR03frUPpNj1MzLwfiICkTv7QGzZB9YfCnEwY3Pil1sn3u
- Hvp4Z0vl4YQhfhnQi8NoF8C1s7r2m4VIUny3R4HoTXhvOVGkP44IrqpTn+kLiBUGXKJtxOpo5M+3z
- X9MYJS01CeoQaWasYphCB7W9;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=/dOzoaFtEsDy8Pgxwl3D55uDEIqOY7bjBQwbBfBsggQ=; b=Gg3bDXKwRtSc3UOAZYYrggoFzP
+ bga2wPwGD8VpTUBAKFmsBz6W1IHUOPHCfbfkajpUHjXIhLrczjlRM+CZHyK6jwN9S3JqTf6LOUdhv
+ dvDtlnmfhpnqhFi+01q2xSH386WULWLTizsSVxz9TsYasM6HC7Jsk226db19X1n0guevNstxjip5u
+ CUdchnQcJBrF//Ec0kDy0+JxLi5+sN7uUrx+MWzD+b7jneOMtvp+f9lhurbaYChKeRjAouaQjhCmi
+ 1YUx9UYgxXzEKNjcyItojWLpy8YedQ4+e5YCoqck6fZO+3u/6XE0gLKXM9fvp9NKU1/EskyiGSZ4G
+ XiY45WlD0LmVWpAtNm4Udxdj3LnIgwdCxy4LUXBNWXnkXYD7Lm3uXG574y+Rku+vUd6Pk974vdp5c
+ T6b1qZFmfIzEAFoJOQI0+d0Lx3xv507o3v64SEiTUeOmTdnAGtmTl6cHnJJDE4SKkDWGvYye65o9U
+ V2XCZwrWY21/AT70Jek+0+Px;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mapUv-001FNP-Fc
- for samba-technical@lists.samba.org; Thu, 14 Oct 2021 01:25:30 +0000
-Message-ID: <1ae04c1227ce92c481b9929edf3b5eacc8d55063.camel@samba.org>
-Subject: Re: GitLab pipeline trouble
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Thu, 14 Oct 2021 14:25:25 +1300
-In-Reply-To: <a01a4caeae1cb27f3bd43aef1c4058450e984db6.camel@samba.org>
-References: <a01a4caeae1cb27f3bd43aef1c4058450e984db6.camel@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1mcPUr-001y5s-9p; Mon, 18 Oct 2021 10:03:57 +0000
+To: abartlet@samba.org, samba-technical@lists.samba.org
+Subject: Re: [SCM] Samba Shared Repository - branch master updated
+Date: Mon, 18 Oct 2021 12:03:56 +0200
+Message-ID: <2303277.XuAQHBpyqA@magrathea>
+In-Reply-To: <646fa34b-9a2a-84e2-b948-1c960049b4c7@samba.org>
+References: <E1macwQ-003K2q-0I@hrx0.samba.org> <7009830.Vje2UjyrXt@magrathea>
+ <646fa34b-9a2a-84e2-b948-1c960049b4c7@samba.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,40 +56,48 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 2021-10-14 at 09:01 +1300, Andrew Bartlett via samba-technical
-wrote:
-> I've just put up 
-> https://gitlab.com/samba-team/samba/-/merge_requests/2204
+On Wednesday, October 13, 2021 6:25:58 PM CEST Ralph Boehme via samba-
+technical wrote:
+> Am 13.10.21 um 18:04 schrieb Andreas Schneider via samba-technical:
 > 
-> which should restore running our full testsuite.  Take care merging
-> MRs
-> proposed until we get the commit in.
+> > On Wednesday, October 13, 2021 2:01:02 PM CEST Andrew Bartlett wrote:
+> > 
+> >> commit 7857e1249b72be8c8841b99cb0820c9c563178f9
+> >> Author: Andrew Bartlett <abartlet@samba.org>
+> >> Date:   Tue Oct 12 07:55:54 2021 +1300
+> >>
+> >>
+> >>
+> >>      .gitlab-ci.yml: Honour AUTOBUILD_SKIP_SAMBA_O3 in GitLab CI
+> >>
+> >>
+> >>
+> >>      GitLab CI resources are expensive and often rationed so
+> >>      provide a way to test other things without testing an -O3
+> >>      build also, as this will save 9 jobs.
+> > 
+> > 
+> > Please documented it in bootstrap/README.md
 > 
-> It looks to me (I tested, honest!) that GitLab updated overnight, but
-> perhaps I just screwed up.  I've also found and fixed why it wanted
-> to
-> double our CI bill, which would have been BAD...
+> 
+> is that really the right place? I would think something like the wiki 
+> where we already have a ton of related documentation would be a better 
+> place.
 
-I'm pretty sure this was just my stuff-up, so please rebase on master
-and it should all be working again.
+This will work too :-)
 
-Andrew Bartlett
+
+	Andreas
 
 -- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-
-
-
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
 
 
