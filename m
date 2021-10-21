@@ -2,33 +2,78 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DBEB432761
-	for <lists+samba-technical@lfdr.de>; Mon, 18 Oct 2021 21:17:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A5086436863
+	for <lists+samba-technical@lfdr.de>; Thu, 21 Oct 2021 18:53:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=AOaxnsf/PBRwqAt8wR8ZXQZVZCTkfFBUzr4lO2utnFY=; b=T+BCt8UQf0d0Q78DiBnnmmpg3t
-	tVwUg30MmQML8gmEIUupQ/piRxnx5Afk615CuK9coZmsgf2F70YdEPcWJ0q87mRlAU7LxEuYsbOPG
-	8f5u0t1pGxOVtS/+OSuFkjt4mmo44XglSmJBe8AG9NmeSIMIp/AdaBM80DsnuWGWiQ7cn9exW/K8j
-	ZBlNwLQV8kzh2NOV+QiAuFuhkh4n1BEUV2Jt152xl/OIRiYnFgLG3sMm7dxT1L1g97Ey43ZmiDF92
-	2XGNGI0pTdUpl0CZ7BGkuVcuLdvma0HRUWuCVEj6FZTSqHZFOFv6Q8n3p3V5YpNeLCwQaxzBssmYm
-	sWJyKBcA==;
-Received: from ip6-localhost ([::1]:62078 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=oE/tKRAINwOFO71/SOYsu0h+uk/m6+DWbHKz1MeJWuc=; b=jTyF71hWh4Ux6K5hQAk0ll35Yn
+	9PGRVN9FNnOcC0XXcSsexX/z7LD7E6BSnzq9gt8NszG7ZPWi+JltW08tYECOuvumU8GSbinZOZ1uN
+	c/PeEhKpmPBAcGGMVJX6xrmkbDVjrhNgEcZGdlLsqVEPTOz24GIyiKoE6n6jG2IGI1A8POeqEt6Tf
+	6XEADhi/e7EypkTdHHqLFFfnryB5mPre/BG7xPnallQE70LGWrEgopBuerNxETzYnpQhaSOPKdnQR
+	i+Mw6bYvUuuWOxMDUMZDTLsjKLF5O3kizJuNl2efwJ5mo7QUtt+t8elhrPy5FmHj+GtG08f92M6MU
+	tkA13o2Q==;
+Received: from ip6-localhost ([::1]:58094 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mcY7a-009zfL-90; Mon, 18 Oct 2021 19:16:30 +0000
-Received: from [104.200.28.160] (port=45048 helo=dup2.asynchrono.us) 
- by hr1.samba.org with esmtp (Exim)
- id 1mcY7T-009zf8-Pn; Mon, 18 Oct 2021 19:16:26 +0000
-Received: from edfu.localnet (c-73-114-31-46.hsd1.ma.comcast.net
- [73.114.31.46])
- by dup2.asynchrono.us (Postfix) with ESMTPSA id AF9AD1512;
- Mon, 18 Oct 2021 18:57:14 +0000 (UTC)
-To: samba-technical@lists.samba.org
-Subject: Samba in Containers/Kubernetes Status Update 1
-Date: Mon, 18 Oct 2021 14:57:14 -0400
-Message-ID: <2614892.8bAqQVQ4q2@edfu>
+	id 1mdbIm-00AyCd-Dd; Thu, 21 Oct 2021 16:52:24 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:53355) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1mdbIe-00AyCU-Fv
+ for samba-technical@lists.samba.org; Thu, 21 Oct 2021 16:52:20 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1634835133;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=ftMWW6DBW15p07wH/yvnC0bGuVw31P9LQvyNaS7YIzY=;
+ b=TFWMsJIIB/D92SLdElWNNwrfIKT8u4rOz7ymuiNrZHFja/EYPlvcS0o/75YZ7vkM59NgCX
+ Ub4jN4ViN4RaxYZnB47aIjliM37HdEqHZLpP8Z1/029ZQ4Rc+wlSW15y4OF365UndGszjb
+ JNIWfxwmcxrAjnbExq+ANpl/YH/J37A=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1634835133;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=ftMWW6DBW15p07wH/yvnC0bGuVw31P9LQvyNaS7YIzY=;
+ b=TFWMsJIIB/D92SLdElWNNwrfIKT8u4rOz7ymuiNrZHFja/EYPlvcS0o/75YZ7vkM59NgCX
+ Ub4jN4ViN4RaxYZnB47aIjliM37HdEqHZLpP8Z1/029ZQ4Rc+wlSW15y4OF365UndGszjb
+ JNIWfxwmcxrAjnbExq+ANpl/YH/J37A=
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-547-jTsPfoyjMaOWuTbzCr58Fg-1; Thu, 21 Oct 2021 12:35:47 -0400
+X-MC-Unique: jTsPfoyjMaOWuTbzCr58Fg-1
+Received: by mail-pl1-f199.google.com with SMTP id
+ w8-20020a170902a70800b0013ffaf12fbaso425084plq.23
+ for <samba-technical@lists.samba.org>; Thu, 21 Oct 2021 09:35:47 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=ftMWW6DBW15p07wH/yvnC0bGuVw31P9LQvyNaS7YIzY=;
+ b=gOrEX1RG1aGS0p7Q4ns6TKeVwMlnIzHCSOeM+xh2rSvbtQetYrE+X44+WGzvhk1kJ1
+ iC2vmI0FO0anuh6E72Ruco8t3Rt/XX9B2dV/cY7hcAIHoqRh6S+/G8Ea5k0dLUsmdj7K
+ ImZpMMUUpxcECXkLH8FIOQbS911Xj2ynXE3q3wTAFbpofwNos5WsncO7lwGoqZNprZhw
+ x+P2SEpRtW4hP4G/j9z7rrPodEz8ne5hrYCKQzCwgEpLIAp1+hz7l2sPF5lJUom7YEYE
+ e/02FwqVxdyyBb2vxnre9wS4bnoYO14uprjSBghYXllJ1nEKRpAAJp+G8o/cF57fJAcd
+ nT6w==
+X-Gm-Message-State: AOAM530wYQpJXyGp1i5JVz7nmp1xxc8LRfAaEs4gWvOUKpJd/MO3IMTP
+ h13UrixeKdNNQkAQBmZe6neLlxATPUqY7YFnCa06fHsY6EFL9ZNQmDCtoVk/J5j3wWwR+ME6HuE
+ dUhfbJ0yONA9OBa/i/bAXynnL8yxTE/GJPG8mNDMKeOCn
+X-Received: by 2002:a05:6a00:888:b0:44c:c00e:189c with SMTP id
+ q8-20020a056a00088800b0044cc00e189cmr6515289pfj.79.1634834146153; 
+ Thu, 21 Oct 2021 09:35:46 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJw1ZcSswbTGy4R/fVvoGjHPrUw3l2KWPPtwzX9uAtht4zj2tQ+pYD3WQbXuZMdTUti+kiRxLrGNh2i4XjCQm5Q=
+X-Received: by 2002:a05:6a00:888:b0:44c:c00e:189c with SMTP id
+ q8-20020a056a00088800b0044cc00e189cmr6515250pfj.79.1634834145640; Thu, 21 Oct
+ 2021 09:35:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+Date: Thu, 21 Oct 2021 18:35:35 +0200
+Message-ID: <CAEcb10tdLGRKeBs-D+n=JMFGbtNMk6815TA09QQyWXUcnSAsEw@mail.gmail.com>
+Subject: directory with a symlink pointing to non-existing file
+To: samba-technical@lists.samba.org
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pfilipen@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+X-Warn: TLS-SNI hr1.samba.org
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -42,166 +87,47 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: John Mulligan via samba-technical <samba-technical@lists.samba.org>
-Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
-Cc: samba@lists.samba.org
+From: Pavel Filipensky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Filipensky <pfilipen@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Samba in Containers & Kubernetes Status Update vol. 1
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
+Hi,
 
-As some of you may remember, I've been working on an effort to include SMB,
-via Samba, in the container ecosystem [1] and Kubernetes. It's been a while
-since I wrote anything about these projects. I want to give an update on our
-work to keep others informed, and possibly get others interested in what
-we've been doing. I hope to make this a regular thing (unless you get
-annoyed and tell me to stop ;-) ).
+if on local linux file system there is a directory with only one file - a
+symlink pointing to a non-existing file then:
+- from SMB point of view the directory is *empty*, such symlink is not shown
+- but SMB does allow to delete such *empty* directory, it gives
+NT_STATUS_DIRECTORY_NOT_EMPTY
 
-We gave a presentation on these projects at sambaXP [2] and also have had a
-few posts on the samba mailing list about them. Since then we've been doing
-a lot of varied work and below is a small slice of it.
+This is seen with samba 4.10 and 4.13. Could there be a difference with the
+latest samba?
 
-CTDB
-=2D----
+setting those smb.conf params has no effect:
 
-I took on the task of trying to "containerize" CTDB-enabled Samba over this
-summer. With assistance of the samba-technical mailing list we successfully
-started running CTDB in a containerized environment. I proceeded to automate
-parts of the CTDB configuration in our sambacc library [3]. Finally, we
-created new example YAML files in samba-containers [4] that demonstrate a
-clustered instance of Samba running under Kubernetes orchestration.
-
-There were a lot of challenges getting CTDB working automatically in a
-container and there's still a lot to do. For example, the code I wrote to h=
-elp
-manage the CTDB nodes file isn't as robust as I'd like it to be and is still
-generally immature. We'd like to discuss ways we might update CTDB to make =
-the
-nodes easier to manage through automation (in our environment) and hope such
-discussions could improve things for other use cases as well.
-
-At the moment, we've been using a Kubernetes based mechanism [5] for getting
-clients running outside of the cluster access to the shares. Without plungi=
-ng
-deep into the particulars of Kubernetes networking; the method works well
-enough but does not use the CTDB public address mechanism. As such, we feel=
- the
-failover behavior we have right now may not be as nice at getting clients to
-quickly fail-over when compared to CTDB's tickle-ack. This is an area we're
-going to be actively investigating and would like to hear additional feedba=
-ck
-on this topic.
-
-We're also adding support for the CTDB enabled Samba instances to the
-Kubernetes operator code. The plan is to continue to use the single SMB
-instance by default but add an experimental mode for running a StatefulSet =
-of
-Pods that include CTDB for clustering across multiple nodes.
-
-We are also discussing the need for using the fileid vfs module on top the
-clustered file system we intend to use (cephfs). However, we don't want to
-require a PVC to be any particular file system and so we have been discussi=
-ng
-ways to enable the fileid module, and how to configure it, only in cases th=
-at
-we need it in an easy-to-use manner.
-
-ACL Xattr
-=2D---------
-
-We are very interested in being able to use NTACLs on the shares that we ho=
-st
-in containerized Samba servers. Today, the acl_xattr module stores the NTACL
-metadata in an xattr named "security.NTACL". The "security" namespaces on L=
-inux
-requires the use of the CAP_SYS_ADMIN capability - basically the "root user=
-" of
-Linux capabilities. This would require running the containers with escalated
-privileges; something we would prefer not to do. So, G=FCnther Deschner, wi=
-th
-feedback from Ralph B=F6hme and Michael Adam and others, has been working o=
-n the
-patches in MR#1908 [6].
-
-With these changes in place, we'd be able to configure Samba with a custom
-xattr for our containerized Samba instances and thus avoid needing to run a
-privileged container while still supporting NTACLs.
-
-Nightly Builds
-=2D--------------
-
-We've been looking in an easy way to try out the latest code in Samba and a=
-re
-planning on adding support for building container images based on nightly
-package builds. Anoop C S has already added support to the sambacc layer in
-order to support the newer CLI options present in Samba 4.15. Next we plan =
-to
-add new build rules to the samba-containers project that will create new bu=
-ild
-tags in our container registry repo(s). Soon we should be able to more easi=
-ly
-test and experiment with the latest versions Samba has to offer!
-
-Metrics
-=2D-------
-
-In the slightly longer term, we would like to add metrics support to our
-pods running in Kubernetes. Our plan is to follow the de-facto standard
-in this space and export Prometheus metrics. In order to do this we need
-to get the data out of our Samba stack and rather than try and directly
-scrape the output of a tool like smbstatus we are very interested in the
-effort to add JSON output support to samba tools. In our case, we want JSON
-output from smbstatus. As such we're very interested in MR#1269 [7].
-We'll probably be getting more involved here in the near future.
-
-Offline Domain Join
-=2D-------------------
-
-One new feature that landed in Samba 4.15 is the new Offline Domain Join (O=
-DJ)
-support. Currently, to connect our containers with Active Directory we're
-asking users to store a username/password in a Kubernetes secret [8]. We are
-aware that storing a password (even within a secret) isn't the best thing
-to do, so we're looking forward to trying to integrate the ODJ feature
-into our projects so that users never have to store a password.
-Watch this space! :-)
-
-Wrap Up
-=2D-------
-
-If you have any questions or comments feel free to ask! I'm hoping this
-update both serves to inform you of what we're up to as well as serving as
-a prompt for you to give us feedback.
-
-Thanks for reading!
-
-[1] - Specifically OCI/Docker style containers.
-
-[2] - https://sambaxp.org/fileadmin/user_upload/sambaxp2021-slides/Mulligan=
-_Adam_samba_operator.pdf
-
-[3] - https://github.com/samba-in-kubernetes/sambacc/
-
-[4] - https://github.com/samba-in-kubernetes/samba-container/
-
-[5] - https://kubernetes.io/docs/tasks/access-application-cluster/create-ex=
-ternal-load-balancer/
-
-[6] - https://gitlab.com/samba-team/samba/-/merge_requests/1908
-
-[7] - https://gitlab.com/samba-team/samba/-/merge_requests/1269
-
-[8] - Not strictly true, as you can leave out the secret and then run
- a command in the container to complete the join. However, this
- runs counter to the level of automation we'd like to provide, but
- is an option.
-
-=2D- John M.
+allow insecure wide links = yes
+unix extensions = no
+follow symlinks = yes
+wide links = yes
 
 
+How to approach it? I can imagine these:
+
+1.  Do nothing. A symlink pointing to a non-existing file was created
+without involving SMB, so we should not blame SMB and instead make sure
+that such behind the scene manipulations do not happen...
+
+2. Implement fix to allow deletion of directory which contains only
+pointing-to-nowhere symlinks
+
+3. Implement fix that puts also pointing-to-nowhere symlinks to directory
+listing
+
+4. Provide better info when deletion of* empty *dir fails with
+NT_STATUS_DIRECTORY_NOT_EMPTY. How?
 
 
+Cheers,
+Pavel
 
+P.S. There is a related BUG: https://bugzilla.samba.org/show_bug.cgi?id=5209
