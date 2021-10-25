@@ -2,86 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F794439CEB
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Oct 2021 19:06:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7B12439C1B
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Oct 2021 18:51:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=rQssMtYHQd/UscShRfV5XY3a/dld3qv47owm2c8gEXI=; b=0kHJeuBJ801/T5QzvmjvfSWiau
-	r35gf3LmkJTEuX4YOgSzGOsGZxXVdcwWI9Nq8Z0xw4anoH/0k7xol2FH2IwHyP5Kc8lKjS3FBAq6H
-	nhQ3EMo3Vl7yJfvXVg6z1HRIjMqp+mRe0Epj8rw/MLSQBAJfVjzOAPzoUqoueKMtAvBFdcWARHoIP
-	2r2pREc0UB1CJByRLsbmy2XoR8sgxQgT8BYZoqhg1eIWj8PLbDdGTsOipUvJVFR7i1McUll2R5nSx
-	//ggY3yozpJ7iix2jlIQYh72AyTdDIp/zlV3xpRj+5XP67XV6xD8GLoO7F0RO/p8D0u0yOzqZWZ2H
-	3V3pp2kg==;
-Received: from ip6-localhost ([::1]:31850 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=V/xpWN2nQxrYEhxHVHKod/RwnLey/zQVAXxtB4rp3OQ=; b=bwdJ9zOw3CSLrk/u69LN1L98BC
+	ShypbmsoAb8RIMeQ5SyPsWfzn+5IbwkEpu1Disyr5ocTqaSVsCBZzWtwfVJFuVDF9cE5yxbnfKCrF
+	QnuCzvbSPo5SLwwzqKbSjhsp1PYIVm0bvsB2gSIRZ6CuVO3S8MHXmG/pl0DhZgZfwh3lQHAMMdGOZ
+	V4GNdhpNpNfZR3VLZ1+n1JVp+KxsLSsCLxiyjq5d65GMGPHDgPfWXMGhHEdT+VZpL17A0WLUfHJ8m
+	SA7vO4jgOF7DrUnp0u0MGCPrnt0EKd20ZaIKXAN4HiuaXWZ/a+zE1y0xHaJ3N3yKzKJ+dNgEpRFr4
+	7vJrZz3w==;
+Received: from ip6-localhost ([::1]:21830 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mf3Qf-00Cm8X-Jl; Mon, 25 Oct 2021 17:06:33 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:58090) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1mf3Qa-00Cm8N-8t
- for samba-technical@lists.samba.org; Mon, 25 Oct 2021 17:06:31 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1635181584;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=oWkNyR1HjcwqjrTN9CUqEzQMyPVcVjFtgVd/YYh0oec=;
- b=gqH231IZzoB8fxKZfwAq8F9vhZBIUvGBbs7+UPXhxfY96mvT2NlBNz5/Xs2TU34qnqz6sQ
- aOLv3GgDKnGVcOrQ/2SUgBh8pQnsF6LruBnhM+gK4Z5RcvhWNpzVsBbI0SLIb7z2U+GITV
- hHPaMBs11cRc3lKW8Z5gbVsnt5lxduM=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1635181584;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=oWkNyR1HjcwqjrTN9CUqEzQMyPVcVjFtgVd/YYh0oec=;
- b=gqH231IZzoB8fxKZfwAq8F9vhZBIUvGBbs7+UPXhxfY96mvT2NlBNz5/Xs2TU34qnqz6sQ
- aOLv3GgDKnGVcOrQ/2SUgBh8pQnsF6LruBnhM+gK4Z5RcvhWNpzVsBbI0SLIb7z2U+GITV
- hHPaMBs11cRc3lKW8Z5gbVsnt5lxduM=
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
- [209.85.210.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-340-k7wvAq93OtCZco1x6dt2SQ-1; Mon, 25 Oct 2021 12:50:21 -0400
-X-MC-Unique: k7wvAq93OtCZco1x6dt2SQ-1
-Received: by mail-pf1-f199.google.com with SMTP id
- h2-20020aa796c2000000b0047bded559faso3173001pfq.12
- for <samba-technical@lists.samba.org>; Mon, 25 Oct 2021 09:50:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=oWkNyR1HjcwqjrTN9CUqEzQMyPVcVjFtgVd/YYh0oec=;
- b=SVYFoJIrCLPm+fE3W1ebB8mMRkj5zVeF4RDd4Aqte/HHnhCn28WXp8PRxPiAmKGySG
- t2LpDIu/Ut0m8nGqqZRq2gtucy+bDSAZRjC9uxDxyBM8XzDaNt414AG+2tVYJ9yNN+GN
- l5KGg6F+3gaWP6I/i/XoG+rpvrYKLcCpjyulD5ZDzyB7z1JrLySc4b/m7Rfcl6Koe5GD
- kjdsyMZO3pItD7X4vDp8GM9wGwQoFBhG32zP0kLPS4J1ULkG77NDQ3E60wsGVKjwKVPh
- FAEh5QSNnSY9hBwtZYJAHzoxmapGMAlkv/2is/VxKBXUs06orVE7oPW08FUEuZUjkk2L
- 39mg==
-X-Gm-Message-State: AOAM532eDW4YSR7EWyybbD3tOK9p0J8dCkMIQkSWfcPnxViWKT4liVrl
- FP4/BlsGSK3Q6FFgdZVHS+b8fzS/zxUHV0wH4YUNZ46pumcskLeoLzTMC5utAUQYlsB+EcVwHBa
- 0HnDb5VOnRJgxzHm1oLDZPodRU0Ye/legtRIagRdO70+m
-X-Received: by 2002:a63:8f5a:: with SMTP id r26mr7972832pgn.50.1635180620083; 
- Mon, 25 Oct 2021 09:50:20 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyGrrUKy7iushAd9W1ery5nrWW2qTivkDZtcm+M0fGXC4h/dijoq5aVmuUzNSv2tpjn+nzWIva6+jwWH0sHlws=
-X-Received: by 2002:a63:8f5a:: with SMTP id r26mr7972804pgn.50.1635180619726; 
- Mon, 25 Oct 2021 09:50:19 -0700 (PDT)
-MIME-Version: 1.0
+	id 1mf3C8-00Ci3l-A4; Mon, 25 Oct 2021 16:51:32 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56690) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1mf3C3-00Ci3T-B9
+ for samba-technical@lists.samba.org; Mon, 25 Oct 2021 16:51:29 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=V/xpWN2nQxrYEhxHVHKod/RwnLey/zQVAXxtB4rp3OQ=; b=KgVoWQ0m9opZI6fq5XGfRLnSXr
+ pKKzEcZehjgdjLmIaqmPuickERLsw+no0umPuqBa/qRWkuRGeWnPOLQ5vCNX06lYagu/jjt2q9+Cd
+ LO+nz+lyi8bmOP3siz0azyYsH9SCpWrtObksPCKF8/+qEe+6dGq8HKGe1t6nAinfalHtTwGepAJIa
+ 7kEiIhKh41QqcuhELgDlw2oUPU+xc0McAl0v47nvlgQYO//gKDsrvzOVjOPS93hIyWDIw/ghSfPpy
+ uGSe3Slj7PhB7yTU9zgSTC7J6JKrw8x7q8tk5xTb+J4kX/adgQZjG1UqxCKs5vHKZbl7OLNgtN97S
+ wReQXhIoZUH+6gKoOJ9KGrbbZsWkMFcxrwh20/leL6nCMawAxCU+vZnut+263Xi/7ewuj1XIdgHlu
+ lbW30hJ2Rpi1v39iPg/+jyJQCr1W/CA8VVExenO5redFlCCs//U1GrfbKhE1cD4yiuPpFJHvJYIIC
+ Gj+NqoyhOB3Q5rK5Hv7mb6ia;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mf3C2-0038U0-0v; Mon, 25 Oct 2021 16:51:26 +0000
+Date: Mon, 25 Oct 2021 09:51:23 -0700
+To: Pavel Filipensky <pfilipen@redhat.com>
+Subject: Re: directory with a symlink pointing to non-existing file
+Message-ID: <YXbgiyTKKU15KUzL@jeremy-acer>
 References: <CAEcb10tdLGRKeBs-D+n=JMFGbtNMk6815TA09QQyWXUcnSAsEw@mail.gmail.com>
  <YXGd6x6nxD4pHj6l@jeremy-acer> <YXGh+Mp1s/oMnHzU@jeremy-acer>
  <YXGyEPiGNwaXyPln@jeremy-acer> <YXG0WUXsDFpmFVZr@jeremy-acer>
  <CAEcb10sPbR1eDzQCyGt4c7A12MTPhf7QTmR_R5oDnMDvMOJTJQ@mail.gmail.com>
  <YXbcnQJl78LG9txV@jeremy-acer>
-In-Reply-To: <YXbcnQJl78LG9txV@jeremy-acer>
-Date: Mon, 25 Oct 2021 18:50:08 +0200
-Message-ID: <CAEcb10twxsCBi-jno5V0fh5c6ubZ307tOKPEjDOcueCs=7-Tag@mail.gmail.com>
-Subject: Re: directory with a symlink pointing to non-existing file
-To: Jeremy Allison <jra@samba.org>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pfilipen@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-X-Warn: TLS-SNI hr1.samba.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+ <CAEcb10twxsCBi-jno5V0fh5c6ubZ307tOKPEjDOcueCs=7-Tag@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <CAEcb10twxsCBi-jno5V0fh5c6ubZ307tOKPEjDOcueCs=7-Tag@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,133 +60,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Pavel Filipensky via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Pavel Filipensky <pfilipen@redhat.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
 Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I was not aware of xatrr_tdb, thx for pointing that out. I do not care
-about config with xattr_tdb, it was more or less a coincidence.
-
-However, it does not work with "fileserver" environment for me. What
-exactly is your regression test doing?
-
-some grep for "fileserver" environment :
-
-$ grep test1 st/fileserver/logs/log.smbd
-
-  synthetic_pathref: stat [test1/l2] failed: No such file or directory
-  streams_depot_stat called for [test1/l2]
-  streams_depot_stat called for [test1]
-  streams_depot_rmdir_internal: called for test1
-  rmdir_acl_common: unlink of test1 failed Directory not empty
-  rmdir_internals: couldn't remove directory test1 : Directory not empty
-  close_directory: test1. Delete on close was set - deleting directory
-returned NT_STATUS_DIRECTORY_NOT_EMPTY.
-  smbd_smb2_close: close_file[test1]: NT_STATUS_DIRECTORY_NOT_EMPTY
-
-
-
-
-On Mon, Oct 25, 2021 at 6:34 PM Jeremy Allison <jra@samba.org> wrote:
-
-> On Mon, Oct 25, 2021 at 06:21:00PM +0200, Pavel Filipensky via
-> samba-technical wrote:
-> >Hi Jeremy,
-> >
-> >thanks for looking into this and providing the fix. I was trying to test
-> >the fix attached to https://bugzilla.samba.org/show_bug.cgi?id=3D14879 b=
-ut
-> >still doesn't work.
-> >I am using this env:
-> >
-> >make -j8 testenv SELFTEST_TESTENV=3Dad_member_idmap_rid:local SCREEN=3D1
-> > SMBD_OPTIONS=3D-d100
-> >mkdir st/ad_member_idmap_rid/share/test1
-> >ln -s st/ad_member_idmap_rid/share/test1/l1
-> >st/ad_member_idmap_rid/share/test1/l2
-> >
-> >smb.conf has "delete veto files =3D yes"
-> >
-> >then I run "rmdir test1" in
-> >
-> >bin/smbclient //$SERVER/tmp -U$DC_USERNAME%$DC_PASSWORD
-> >
-> >
-> >The point where it all  fails is here:
-> >
-> >(gdb) bt 6
-> >#0  xattr_tdb_unlinkat (handle=3D0x557646d5cd30, dirfsp=3D0x557646d69fc0=
-,
-> >smb_fname=3D0x557646d70a50, flags=3D0) at
-> >../../source3/modules/vfs_xattr_tdb.c:524
-> >#1  0x00007f84d2fd73ce in smb_vfs_call_unlinkat (handle=3D0x557646d5cd30=
-,
-> >dirfsp=3D0x557646d69fc0, smb_fname=3D0x557646d70a50, flags=3D0) at
-> >../../source3/smbd/vfs.c:2218
-> >#2  0x00007f84d31141ca in unlink_acl_common (handle=3D0x557646d54170,
-> >dirfsp=3D0x557646d69fc0, smb_fname=3D0x557646d70a50, flags=3D0) at
-> >../../source3/modules/vfs_acl_common.c:1146
-> >#3  0x00007f84bdb0ed06 in acl_xattr_unlinkat (handle=3D0x557646d54170,
-> >dirfsp=3D0x557646d69fc0, smb_fname=3D0x557646d70a50, flags=3D0) at
-> >../../source3/modules/vfs_acl_xattr.c:265
-> >#4  0x00007f84d2fd73ce in smb_vfs_call_unlinkat (handle=3D0x557646d54170=
-,
-> >dirfsp=3D0x557646d69fc0, smb_fname=3D0x557646d70a50, flags=3D0) at
-> >../../source3/smbd/vfs.c:2218
-> >#5  0x00007f84d2fcdb5a in rmdir_internals (ctx=3D0x557646c91760,
-> >fsp=3D0x557646d628f0) at ../../source3/smbd/close.c:1285
-> >
-> >On line 522 SMB_VFS_NEXT_STAT() returns -1 with errno 2:
-> >
-> >
-> >  519 =C2=BB=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7if (full_fname->fl=
-ags & SMB_FILENAME_POSIX_PATH) {
-> >
-> >  520 =C2=BB=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=BB=C2=B7=C2=B7=
-=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7ret =3D SMB_VFS_NEXT_LSTAT(handle, full_fname=
-);
-> >
-> >  521 =C2=BB=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7} else {
-> >
-> >  522 =C2=BB=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=BB=C2=B7=C2=B7=
-=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7ret =3D SMB_VFS_NEXT_STAT(handle, full_fname)=
-;
-> >
-> >                                            523 =C2=BB=C2=B7=C2=B7=C2=B7=
-=C2=B7=C2=B7=C2=B7=C2=B7}
-> >
-> >  524 =C2=BB=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7if (ret =3D=3D -1)=
- {
-> >
-> >  525 =C2=BB=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=BB=C2=B7=C2=B7=
-=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7goto out;
-> >
-> >  526 =C2=BB=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7=C2=B7}
-> >
-> >=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >
-> >If it helps I can prepare some regression test.
+On Mon, Oct 25, 2021 at 06:50:08PM +0200, Pavel Filipensky wrote:
+>I was not aware of xatrr_tdb, thx for pointing that out. I do not care
+>about config with xattr_tdb, it was more or less a coincidence.
 >
-> That's probably expected when you have xattr_tdb loaded.
-> That's an unusual configuration to be running with dangling
-> symlinks and I don't expect any normal fileserver to be
-> doing that.
+>However, it does not work with "fileserver" environment for me. What
+>exactly is your regression test doing?
 >
-> Don't do that (ie. don't run the regression test against
-> ad_member_idmap_rid :-).
+>some grep for "fileserver" environment :
 >
-> I have a regression test that works against the "fileserver"
-> environment. I'm planning on fixing this up and submitting
-> to Ralph for review this week.
+>$ grep test1 st/fileserver/logs/log.smbd
 >
-> Once it's in, if you really want to make it work against
-> an AD-DC config with xattr_tdb loaded then we'll log a
-> separate bug and deal with it there, but to be honest
-> it's unlikely anyone would care.
->
-> Jeremy.
->
->
->
+>  synthetic_pathref: stat [test1/l2] failed: No such file or directory
+>  streams_depot_stat called for [test1/l2]
+>  streams_depot_stat called for [test1]
+>  streams_depot_rmdir_internal: called for test1
+>  rmdir_acl_common: unlink of test1 failed Directory not empty
+>  rmdir_internals: couldn't remove directory test1 : Directory not empty
+>  close_directory: test1. Delete on close was set - deleting directory
+>returned NT_STATUS_DIRECTORY_NOT_EMPTY.
+>  smbd_smb2_close: close_file[test1]: NT_STATUS_DIRECTORY_NOT_EMPTY
+
+I'm still working on it Pavel, can you give me a day or so :-).
+
+Code's not quite right yet..
+
+I'll point you at the ci when I'm done.
+
