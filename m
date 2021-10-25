@@ -2,51 +2,87 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7B12439C1B
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Oct 2021 18:51:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60F8C439C30
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Oct 2021 18:58:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=V/xpWN2nQxrYEhxHVHKod/RwnLey/zQVAXxtB4rp3OQ=; b=bwdJ9zOw3CSLrk/u69LN1L98BC
-	ShypbmsoAb8RIMeQ5SyPsWfzn+5IbwkEpu1Disyr5ocTqaSVsCBZzWtwfVJFuVDF9cE5yxbnfKCrF
-	QnuCzvbSPo5SLwwzqKbSjhsp1PYIVm0bvsB2gSIRZ6CuVO3S8MHXmG/pl0DhZgZfwh3lQHAMMdGOZ
-	V4GNdhpNpNfZR3VLZ1+n1JVp+KxsLSsCLxiyjq5d65GMGPHDgPfWXMGhHEdT+VZpL17A0WLUfHJ8m
-	SA7vO4jgOF7DrUnp0u0MGCPrnt0EKd20ZaIKXAN4HiuaXWZ/a+zE1y0xHaJ3N3yKzKJ+dNgEpRFr4
-	7vJrZz3w==;
-Received: from ip6-localhost ([::1]:21830 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=S0iCKs1h9z8P+YLGgtEDkkSftzLx4ER7nyep2235y5g=; b=wh2icq6eG+Jcj7mYMaPtudrXR9
+	55rKFLMdU/Hsdxa2eG1mrF47XNwERS1RWeC8Isq41AT9lDm+0yRdPt+zoZhpYyYWs99mDxHQ5SeNS
+	mj/Izu6onLHOnmvDYEAHyxxob99f9yX0ciQaZyV2evyYNbsY8ojTJqG6kv8JFLBhmgG9e8WmgOrmr
+	2YMND2jrIgJU8hq4WGJcZMpsog9ODn91oYKpgjars6Ia4IlDIyiaHUsoV1kPZSuS05RHECAOrHND6
+	7sjMWgEW2H/p4IeCGwpuHYfmkrcUGZ7cKVI9t9zaLrUC3VzDC+brTggXVkwo/wv3sh/y4HYIsLRi3
+	e7PcdyNQ==;
+Received: from ip6-localhost ([::1]:24668 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mf3C8-00Ci3l-A4; Mon, 25 Oct 2021 16:51:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56690) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mf3C3-00Ci3T-B9
- for samba-technical@lists.samba.org; Mon, 25 Oct 2021 16:51:29 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=V/xpWN2nQxrYEhxHVHKod/RwnLey/zQVAXxtB4rp3OQ=; b=KgVoWQ0m9opZI6fq5XGfRLnSXr
- pKKzEcZehjgdjLmIaqmPuickERLsw+no0umPuqBa/qRWkuRGeWnPOLQ5vCNX06lYagu/jjt2q9+Cd
- LO+nz+lyi8bmOP3siz0azyYsH9SCpWrtObksPCKF8/+qEe+6dGq8HKGe1t6nAinfalHtTwGepAJIa
- 7kEiIhKh41QqcuhELgDlw2oUPU+xc0McAl0v47nvlgQYO//gKDsrvzOVjOPS93hIyWDIw/ghSfPpy
- uGSe3Slj7PhB7yTU9zgSTC7J6JKrw8x7q8tk5xTb+J4kX/adgQZjG1UqxCKs5vHKZbl7OLNgtN97S
- wReQXhIoZUH+6gKoOJ9KGrbbZsWkMFcxrwh20/leL6nCMawAxCU+vZnut+263Xi/7ewuj1XIdgHlu
- lbW30hJ2Rpi1v39iPg/+jyJQCr1W/CA8VVExenO5redFlCCs//U1GrfbKhE1cD4yiuPpFJHvJYIIC
- Gj+NqoyhOB3Q5rK5Hv7mb6ia;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mf3C2-0038U0-0v; Mon, 25 Oct 2021 16:51:26 +0000
-Date: Mon, 25 Oct 2021 09:51:23 -0700
-To: Pavel Filipensky <pfilipen@redhat.com>
-Subject: Re: directory with a symlink pointing to non-existing file
-Message-ID: <YXbgiyTKKU15KUzL@jeremy-acer>
+	id 1mf3J1-00CjFl-9B; Mon, 25 Oct 2021 16:58:39 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:43984) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1mf3Iv-00CjFc-QF
+ for samba-technical@lists.samba.org; Mon, 25 Oct 2021 16:58:36 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1635181110;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=zBbmqNfwGMXhSQA0EIztYB2QURyO2bcFSasxmVRA2ts=;
+ b=LXM3J0D6b3H2WJcnOhD0ohQ0a0Sz48P/ZiYBIlv/4ZCq6KOeqpM9VBgRPt9jgADePJlagC
+ G5hXWbovVSZJmmbC0zdHDnInQn3f+UhOxmgdMAbASAxsYRaCf0JdC5fiAJUeE9a32dWbva
+ N797ZKarV0sxWT/z6zy5diqAuS6XY4A=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1635181110;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=zBbmqNfwGMXhSQA0EIztYB2QURyO2bcFSasxmVRA2ts=;
+ b=LXM3J0D6b3H2WJcnOhD0ohQ0a0Sz48P/ZiYBIlv/4ZCq6KOeqpM9VBgRPt9jgADePJlagC
+ G5hXWbovVSZJmmbC0zdHDnInQn3f+UhOxmgdMAbASAxsYRaCf0JdC5fiAJUeE9a32dWbva
+ N797ZKarV0sxWT/z6zy5diqAuS6XY4A=
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
+ [209.85.210.197]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-255-nv4poLB3P9O6EuHLMrNGXA-1; Mon, 25 Oct 2021 12:58:28 -0400
+X-MC-Unique: nv4poLB3P9O6EuHLMrNGXA-1
+Received: by mail-pf1-f197.google.com with SMTP id
+ 3-20020a620403000000b0044dbf310032so6829677pfe.0
+ for <samba-technical@lists.samba.org>; Mon, 25 Oct 2021 09:58:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=zBbmqNfwGMXhSQA0EIztYB2QURyO2bcFSasxmVRA2ts=;
+ b=YQBfLDwELsh9ilCLcrOmJae72ywDx0vA4oFStNOKdOQ8jehedN6Pnv/BSq+IZmccj8
+ E4XksqAhmad3asKJTpTJAr/N2nFyRHcFxvmo0pgnK8q64OhRIeDVzu9vxF+OdIyp0fvo
+ j9xWREla+yrxQcwU90M+fKazELOgqb6qvoLghR0D2ELWZZThbEt5Ec9i4ts4rEKEc7Zt
+ CB2CaiTft6MtYnS0NY4kerQNXXvnIpxhREAT+rxlEwdzIbRYxa/dvInIQF6aXrCjlvK5
+ beLTsIbjVr2w/u5BKuslkiViJwzXQocHvHFa67nO3zlW1huDwAlRkPYOiztYWxgOZpek
+ 4A4Q==
+X-Gm-Message-State: AOAM532gOw8E4f95ZtF5mdO/+DUPcPRHRwTj8SI5tx5Nzb2zrxPABBPS
+ VOVOsg3IvSa3qBA50SR0nq3RIq4ckSbXjODXMeO+nVxJSo+FbRZnVahHui9Rqi9Pc1ngKrkx9T7
+ 7dskm3zoSEhxcra27Zh2kG++2rVEBAwOWTguS4+MZRHH2
+X-Received: by 2002:a63:3c1b:: with SMTP id j27mr8297499pga.462.1635181107497; 
+ Mon, 25 Oct 2021 09:58:27 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJynbIopweDO6LYjmfwXpVXH6POlvZmdKsuolHY348cuMXEtK1JglceVLInySQJtyk8ENsRqL2+51vOykEEDXPU=
+X-Received: by 2002:a63:3c1b:: with SMTP id j27mr8297475pga.462.1635181107184; 
+ Mon, 25 Oct 2021 09:58:27 -0700 (PDT)
+MIME-Version: 1.0
 References: <CAEcb10tdLGRKeBs-D+n=JMFGbtNMk6815TA09QQyWXUcnSAsEw@mail.gmail.com>
  <YXGd6x6nxD4pHj6l@jeremy-acer> <YXGh+Mp1s/oMnHzU@jeremy-acer>
  <YXGyEPiGNwaXyPln@jeremy-acer> <YXG0WUXsDFpmFVZr@jeremy-acer>
  <CAEcb10sPbR1eDzQCyGt4c7A12MTPhf7QTmR_R5oDnMDvMOJTJQ@mail.gmail.com>
  <YXbcnQJl78LG9txV@jeremy-acer>
  <CAEcb10twxsCBi-jno5V0fh5c6ubZ307tOKPEjDOcueCs=7-Tag@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <CAEcb10twxsCBi-jno5V0fh5c6ubZ307tOKPEjDOcueCs=7-Tag@mail.gmail.com>
+ <YXbgiyTKKU15KUzL@jeremy-acer>
+In-Reply-To: <YXbgiyTKKU15KUzL@jeremy-acer>
+Date: Mon, 25 Oct 2021 18:58:16 +0200
+Message-ID: <CAEcb10v3vw14qe=BzBiKhNdcL1zu18MCVeTtuNSRDTWiNfnPOg@mail.gmail.com>
+Subject: Re: directory with a symlink pointing to non-existing file
+To: Jeremy Allison <jra@samba.org>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pfilipen@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+X-Warn: TLS-SNI hr1.samba.org
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,36 +96,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
+From: Pavel Filipensky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Filipensky <pfilipen@redhat.com>
 Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Oct 25, 2021 at 06:50:08PM +0200, Pavel Filipensky wrote:
->I was not aware of xatrr_tdb, thx for pointing that out. I do not care
->about config with xattr_tdb, it was more or less a coincidence.
->
->However, it does not work with "fileserver" environment for me. What
->exactly is your regression test doing?
->
->some grep for "fileserver" environment :
->
->$ grep test1 st/fileserver/logs/log.smbd
->
->  synthetic_pathref: stat [test1/l2] failed: No such file or directory
->  streams_depot_stat called for [test1/l2]
->  streams_depot_stat called for [test1]
->  streams_depot_rmdir_internal: called for test1
->  rmdir_acl_common: unlink of test1 failed Directory not empty
->  rmdir_internals: couldn't remove directory test1 : Directory not empty
->  close_directory: test1. Delete on close was set - deleting directory
->returned NT_STATUS_DIRECTORY_NOT_EMPTY.
->  smbd_smb2_close: close_file[test1]: NT_STATUS_DIRECTORY_NOT_EMPTY
+Sure ;-) I was just not sure if I am missing something...
 
-I'm still working on it Pavel, can you give me a day or so :-).
+On Mon, Oct 25, 2021 at 6:51 PM Jeremy Allison <jra@samba.org> wrote:
 
-Code's not quite right yet..
-
-I'll point you at the ci when I'm done.
-
+> On Mon, Oct 25, 2021 at 06:50:08PM +0200, Pavel Filipensky wrote:
+> >I was not aware of xatrr_tdb, thx for pointing that out. I do not care
+> >about config with xattr_tdb, it was more or less a coincidence.
+> >
+> >However, it does not work with "fileserver" environment for me. What
+> >exactly is your regression test doing?
+> >
+> >some grep for "fileserver" environment :
+> >
+> >$ grep test1 st/fileserver/logs/log.smbd
+> >
+> >  synthetic_pathref: stat [test1/l2] failed: No such file or directory
+> >  streams_depot_stat called for [test1/l2]
+> >  streams_depot_stat called for [test1]
+> >  streams_depot_rmdir_internal: called for test1
+> >  rmdir_acl_common: unlink of test1 failed Directory not empty
+> >  rmdir_internals: couldn't remove directory test1 : Directory not empty
+> >  close_directory: test1. Delete on close was set - deleting directory
+> >returned NT_STATUS_DIRECTORY_NOT_EMPTY.
+> >  smbd_smb2_close: close_file[test1]: NT_STATUS_DIRECTORY_NOT_EMPTY
+>
+> I'm still working on it Pavel, can you give me a day or so :-).
+>
+> Code's not quite right yet..
+>
+> I'll point you at the ci when I'm done.
+>
+>
