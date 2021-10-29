@@ -2,45 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B652743F9EE
-	for <lists+samba-technical@lfdr.de>; Fri, 29 Oct 2021 11:32:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB73B43FA4D
+	for <lists+samba-technical@lfdr.de>; Fri, 29 Oct 2021 11:55:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=P+l7F8w+NC2uiwMkfoRjI3uBxXqAD1XzE+2p7ArZy8U=; b=VeGu1JxxyOglZ+dlOdEBnj2iWB
-	cUJRA+A8sgT70UOt3KRpNUylQgQp1xolTOfAZwHd53o+sCFm4bqQ814kuGig1eyktasfZ7ObLU/FA
-	S6TRHw8o02BfLIx2V+LMG0S8ds0ZIucm4y+obLSMwoZaLbVMTW+y+dSwFj4WBrktkfLJ1w8S3X6+N
-	VWntTqnmVp5SJZzwu301Y5DVDBHh+PDcqDT6OccOMCgztmhDHuq788Zsw8YSxuSa1HItH0U20DENT
-	6UbcWdtyShTyyrEJiYfDPCueeRXbrMWVHWZh5wgDlVCRacZJDxGcJ0eG+e5BsNpam9rZY6qJGNpqr
-	qWQ1L2lQ==;
-Received: from ip6-localhost ([::1]:56688 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=go1WWUQXD3YeQPypt+Rylq7YM7eUSRHfr0qDN5wg9J0=; b=a21QnhnBI2v2UgZJI+RSjUUSia
+	SuCBMFZYdD/bW8qSWIhnFVbmshctkDH0UMK3pRWlzOpNDCuam6faMp7PvbQ16pni1AYaYEY4mg1AD
+	K7BNNrc1YBgjb0CFI2/V1uPKI4cxFMsZvJryL8cIldXh6OAsREalpcOOSkfhjHp7+VjMXIAUwey0M
+	0HHGr9AA2AmixBx2Bh/hBoNYapXYi7u6rpSM2v8a+xUaj4RAHJ0DDG2ba524d5k+H8JxiOXW4wgw8
+	K1iNxPXmMuqH+VGWg8ebMUFn2tCIX9ZXWbIzHsMNsfwfB4ljTIChyqkJ8OyqujEHPZ6wBL3qSQsQF
+	dbzfzd6Q==;
+Received: from ip6-localhost ([::1]:60182 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mgOF7-001jmU-O9; Fri, 29 Oct 2021 09:32:09 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56912) 
+	id 1mgObR-001lGQ-Te; Fri, 29 Oct 2021 09:55:14 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56914) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mgOF1-001jmL-45
- for samba-technical@lists.samba.org; Fri, 29 Oct 2021 09:32:06 +0000
+ (Exim) id 1mgObM-001lGH-Aa
+ for samba-technical@lists.samba.org; Fri, 29 Oct 2021 09:55:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:To:From:CC;
- bh=P+l7F8w+NC2uiwMkfoRjI3uBxXqAD1XzE+2p7ArZy8U=; b=kGdcQYtOqxSBVrZ2AFp2HrRqWS
- vzULDwIOq2Cq7UUJjGFJM5+CRSrqC4GUMYa7jtj8JYYAwZRqZXMqWbEz2Z9pIbxa9OwMdJTMRxj8l
- QfuFHhuRfC2fCkG7G7tJA2cvMAzoMFgPY4fCOgQo2g8SY4D/kOZFkD/pjqq27iarUALscv9b1Zb+3
- GOfuGFrGFeBSc9iFv3RaNdMP9HvMKiWztxUtY8HUtuQWQpVEFTpt+zZluIoiDeGyZoVG7Rv0SsV33
- zueTTt/yhuAbu3cmP5EuAmvMQfBC+ZWnG8rnDmS19jOJa8mkkT7Z2elyh/Ax9CLE+XfBS63d0e0Ie
- SE9mkZ9jekPHm6y8Gb9qfcTo/TgaK8XVwUIhIe9Rei3zhzYoUo2xrJxVqKcUT7m9EYlaHc/jN447S
- LBZ250qPm3yhg5O0OImO3go1UZi665Teh8XUDn7LqbLo/nk2NLTpH1CU46ziKOl4CgeE1QVGi75LV
- AkfGivgb41z7nrFVGtSkxLvB;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=go1WWUQXD3YeQPypt+Rylq7YM7eUSRHfr0qDN5wg9J0=; b=0YJTeZkPnLmMKssWFnfTAIS3Xr
+ rMT8bst0Mx2CShSgpg3LmqDTce/OrZY671ecssKDVqIC9iLk14QDgkBwlxSEK0SnFV/wS/7hOnRVd
+ QCyL1i/rFdu/Os1FxU5APEFEX6vnQ3H9bVhLmVwyWZaO7zq+Unq2Rctpi4eDHOHzw6zqbmZYDzwos
+ xlcr2EiWusmm/yeoPHGLPJcBhd+ysKhTFEb0uVBzef9mH1brKq8Rcvy2AeylrMvY+ulI7tXiN0kgW
+ vUdNJKj8PfD3Nr5JTzIC2BQ+ImpdNZuQVGuj8AkecT+ftCzMDu5K+AV3cjAVvsWjwiMaCYnEuacmv
+ luLI5ZPwjUnGplQULQhMm/wgC0amCkzabazHvua5kH1kzyNSZXLdt1HMQfWnBVAess+fsrQtIrLdv
+ nrcQaBC7EpFkWtMoz/iIBkf+cvacSKb/jy2gyrrFviIX/y2ml4AIGpQQAjWixVPzoqNIA3++QiWDX
+ 3td6L+RWcZfnT00qmvPtNyM0;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mgOF0-003zwN-Gt
- for samba-technical@lists.samba.org; Fri, 29 Oct 2021 09:32:02 +0000
-To: samba-technical@lists.samba.org
-Subject: git worktrees
-Date: Fri, 29 Oct 2021 11:31:59 +0200
-Message-ID: <1878168.t9pZBThubR@magrathea>
+ (Exim) id 1mgObJ-0040B6-RL; Fri, 29 Oct 2021 09:55:05 +0000
+Message-ID: <34e64bc4-39a0-db4d-4474-820801cb7f0e@samba.org>
+Date: Fri, 29 Oct 2021 11:55:04 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: git worktrees
+Content-Language: en-US
+To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+References: <1878168.t9pZBThubR@magrathea>
+In-Reply-To: <1878168.t9pZBThubR@magrathea>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------eS845JwOBjPxGqLWl60aJi02"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,58 +59,57 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------eS845JwOBjPxGqLWl60aJi02
+Content-Type: multipart/mixed; boundary="------------2nFPgkKK63MNK6gK0Z0bUmtN";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+Message-ID: <34e64bc4-39a0-db4d-4474-820801cb7f0e@samba.org>
+Subject: Re: git worktrees
+References: <1878168.t9pZBThubR@magrathea>
+In-Reply-To: <1878168.t9pZBThubR@magrathea>
 
-I often have to hop between different branches. Either to fix a bug or to just 
-run a test. As Samba doesn't support out of source builds, this was a pain 
-till I discovered `git worktree` [1].
+--------------2nFPgkKK63MNK6gK0Z0bUmtN
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-git-worktree allows you to have multiple working trees. You can use it with 
-any git checkout you have. However to work with it in a nice manner, the right 
-thing is to use a bare repository. Here is how this works:
+T24gMTAvMjkvMjEgMTE6MzEsIEFuZHJlYXMgU2NobmVpZGVyIHZpYSBzYW1iYS10ZWNobmlj
+YWwgd3JvdGU6DQo+IEhvcGUgdGhpcyBpcyB1c2VmdWwgZm9yIG90aGVycyB0b28sIG1ldHpl
+IGFscmVhZHkgdXNlcyBpdCA7LSkNCg0KeWVhaCwgbWUgdG9vIHNpbmNlIG1ldHplIHBvaW50
+ZWQgbWUgYXQgaXQgYSBmZXcgeWVhcnMgYWdvLiBUaGVzZSBkYXlzIA0KaXQncyBsaXRlcmFs
+bHkgd29ya3RyZWVzIGV2ZXJ5d2hlcmUuIDopDQoNCkNoZWVycyENCi1zbG93DQoNCi0tIA0K
+UmFscGggQm9laG1lLCBTYW1iYSBUZWFtICAgICAgICAgICAgICAgICBodHRwczovL3NhbWJh
+Lm9yZy8NClNlck5ldCBTYW1iYSBUZWFtIExlYWQgICAgICBodHRwczovL3Nlcm5ldC5kZS9l
+bi90ZWFtLXNhbWJhDQo=
 
-Setting up the directory for the first time:
+--------------2nFPgkKK63MNK6gK0Z0bUmtN--
 
-mkdir samba
-cd samba
-git clone --bare https://git.samba.org/samba.git .bare
-echo "gitdir: ./.bare" > .git
+--------------eS845JwOBjPxGqLWl60aJi02
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-Now you can create a branch and check it out:
-git branch asn-mywork origin/master
-git worktree add mywork asn-mywork
+-----BEGIN PGP SIGNATURE-----
 
-This will create a directory `mywork` and checkout the branch `asn-mywork`
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmF7xPgFAwAAAAAACgkQqh6bcSY5nkYs
+FhAAl0lvXSYo2iDB1WOGsttPC9c2+V4iUSq+On3R9MHzuli/SjoGZAjYrlA8KqIFqDa1ORk0AW3x
+VUwVZGqY4VEeLiQYhokGtLy0lEUXA512hOCcO/2Ts4dy6effghfWszHKjMbSjs0aY5+SXNEmwc36
+sgJtaev7drMlOQbV8omD+3zNRmKzz7zUypZ4P686GyMgd9hX/Ief/9PVuP4TuvbFUPwu4pR+5NDM
+upyyJ6YzWHAkhkFmNG1SYPRV8kEQt+U4fXHsPl4vnWcmdNOX8+OSyAqRVdbMI0H5DleGEvq+A9h6
+n21rfU6QNS9ME9BSwhwOu0e8dIHQyZEyVqgzCiFCypXlMDgNlDHySNw90+GM/MccFFMmr05JRrw2
+3I5LOjRRJ/eqlDxqm4QEAI8Rb8xa5wkN12bS7i/s9OVN9hvR/Mp6dosUpjQXpPUwAWwh8MkEI0Su
+BpkKm4PttsoqUYvsLEcRzt0jxNX0Ua+0xR6MAbhcSyUuZbUi622Hoex8K4zZc9cCgTHjap4HknPB
+uCoLIeIXGjR5+JJ099setfQt1rln+7EvjDYoifzJr/LSb9TFSF19vJoQiToaEnceF/piN0puVba2
+ExrgxvkjM408UHVpnAg9qQ4jZbt3F5RFRRqrYxoOEe599b96E2cUVywuhaeq/77KNLR+mbEwaupU
+jwk=
+=e4Ko
+-----END PGP SIGNATURE-----
 
-cd mywork
-
-Now you can start breaking Samba ... :-)
-
-
-I've created two aliases:
-
-[alias]
-     wtb = "!f() { git branch $1 $2; git worktree add $1 $1; }; f"
-     wtr = "!f() { git worktree remove $1; git branch -D $1; }; f"
-
-Hope this is useful for others too, metze already uses it ;-)
-
-
-	Andreas
-
-
-[1] https://git-scm.com/docs/git-worktree
-
-
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
+--------------eS845JwOBjPxGqLWl60aJi02--
 
