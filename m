@@ -2,47 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4128643F745
-	for <lists+samba-technical@lfdr.de>; Fri, 29 Oct 2021 08:35:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B652743F9EE
+	for <lists+samba-technical@lfdr.de>; Fri, 29 Oct 2021 11:32:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=NX6seD9N+tMfHx57nnkGJyA2V5smM6+sDJ+y+B3HKfw=; b=zivUpEE9lhvkORA9TzlHz7UvL5
-	xbj04t/IMvHlHjcMUC8dMhokAEjl8qabQny/3uFvd1CDPnoaBEcQqCnjCRlrXypIENp43cgyRwZv7
-	hlKjJxNERnFd4Am8NluxmiqgjsOgukSxpyoWddFfEpkHZCPWeIpvWTTzip/sHU/Un1GMu2cl4oWbI
-	VGglcmDUKZWdDjRQV/cmiKqZO5y/Qh87imsN059Da3kOCW7lK8ni0J4SLtWpg+HYt+ZjfZIMVFYKQ
-	i2PC871cMMFx7IkBBQTP5gq50lfi5b1bCMilJqCgX6CoXpu6k3DCGA7A8e7q0+GY4qPRqO/D+LlaJ
-	fJWHPuxw==;
-Received: from ip6-localhost ([::1]:49746 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=P+l7F8w+NC2uiwMkfoRjI3uBxXqAD1XzE+2p7ArZy8U=; b=VeGu1JxxyOglZ+dlOdEBnj2iWB
+	cUJRA+A8sgT70UOt3KRpNUylQgQp1xolTOfAZwHd53o+sCFm4bqQ814kuGig1eyktasfZ7ObLU/FA
+	S6TRHw8o02BfLIx2V+LMG0S8ds0ZIucm4y+obLSMwoZaLbVMTW+y+dSwFj4WBrktkfLJ1w8S3X6+N
+	VWntTqnmVp5SJZzwu301Y5DVDBHh+PDcqDT6OccOMCgztmhDHuq788Zsw8YSxuSa1HItH0U20DENT
+	6UbcWdtyShTyyrEJiYfDPCueeRXbrMWVHWZh5wgDlVCRacZJDxGcJ0eG+e5BsNpam9rZY6qJGNpqr
+	qWQ1L2lQ==;
+Received: from ip6-localhost ([::1]:56688 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mgLSo-001gnX-O9; Fri, 29 Oct 2021 06:34:07 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56904) 
+	id 1mgOF7-001jmU-O9; Fri, 29 Oct 2021 09:32:09 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56912) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mgLSD-001gnE-AY; Fri, 29 Oct 2021 06:33:35 +0000
+ (Exim) id 1mgOF1-001jmL-45
+ for samba-technical@lists.samba.org; Fri, 29 Oct 2021 09:32:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Message-ID:To:From:CC;
- bh=NX6seD9N+tMfHx57nnkGJyA2V5smM6+sDJ+y+B3HKfw=; b=J+ugvUG8YPzxyHGVPkyrY85H2v
- gdx2OHcmth8ocsPPlTlANTsx3Rk0RZhWdS7FB7Z0ySvKy+wFnOnDwgb+e73UrjjkNBIkiYeYvVjPQ
- jIXRedBhloyPDt0LREPRuA42dAYYZM2OcdLrSErBvvnKMmsDKtyVkD4PFE5S6oTxUY0hRJlHyYC5J
- z96/TU+CLHWu0DA7z6oSTgzXpmGiqXpsjE/lUwdIr/Yt4A9hg3ozyKwIWsAw6w8n+4xc7NuSsJ21T
- 7vuTFqY4NkZ5FuGH1VIP4aMes5cFtBR6hdrZVZqZiqVVQgo/hkmpZlr7LmOy5XpSdXRVDLvA1nTQV
- duw8JZ8mNaYlkUYGv4LOuly/ZiLXknXZSGRNSqMVe60WSowXlbLNb+K5RIuX4CTSnYxSgxx7fYFUc
- m35V6Ql7TaF0QuUImnXXgzPHqiWvKscqoLilHaeUX3ZSSxMTVcAWji3q6+Ej/E1QHyM8WaM/ZeRET
- +6zvyEj6lQSzDG3iQZgm4cLk;
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=P+l7F8w+NC2uiwMkfoRjI3uBxXqAD1XzE+2p7ArZy8U=; b=kGdcQYtOqxSBVrZ2AFp2HrRqWS
+ vzULDwIOq2Cq7UUJjGFJM5+CRSrqC4GUMYa7jtj8JYYAwZRqZXMqWbEz2Z9pIbxa9OwMdJTMRxj8l
+ QfuFHhuRfC2fCkG7G7tJA2cvMAzoMFgPY4fCOgQo2g8SY4D/kOZFkD/pjqq27iarUALscv9b1Zb+3
+ GOfuGFrGFeBSc9iFv3RaNdMP9HvMKiWztxUtY8HUtuQWQpVEFTpt+zZluIoiDeGyZoVG7Rv0SsV33
+ zueTTt/yhuAbu3cmP5EuAmvMQfBC+ZWnG8rnDmS19jOJa8mkkT7Z2elyh/Ax9CLE+XfBS63d0e0Ie
+ SE9mkZ9jekPHm6y8Gb9qfcTo/TgaK8XVwUIhIe9Rei3zhzYoUo2xrJxVqKcUT7m9EYlaHc/jN447S
+ LBZ250qPm3yhg5O0OImO3go1UZi665Teh8XUDn7LqbLo/nk2NLTpH1CU46ziKOl4CgeE1QVGi75LV
+ AkfGivgb41z7nrFVGtSkxLvB;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mgLSB-003yUe-SH; Fri, 29 Oct 2021 06:33:28 +0000
-Subject: [Announce] Samba 4.13.13 Available for Download
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Message-ID: <f2cbd655-48b0-1ebc-94ee-defa9ea8306c@samba.org>
-Date: Fri, 29 Oct 2021 08:33:24 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ (Exim) id 1mgOF0-003zwN-Gt
+ for samba-technical@lists.samba.org; Fri, 29 Oct 2021 09:32:02 +0000
+To: samba-technical@lists.samba.org
+Subject: git worktrees
+Date: Fri, 29 Oct 2021 11:31:59 +0200
+Message-ID: <1878168.t9pZBThubR@magrathea>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: de-DE
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,140 +54,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Release Announcements
----------------------
+Hi,
 
-This is the latest stable release of the Samba 4.13 release series.
+I often have to hop between different branches. Either to fix a bug or to just 
+run a test. As Samba doesn't support out of source builds, this was a pain 
+till I discovered `git worktree` [1].
 
+git-worktree allows you to have multiple working trees. You can use it with 
+any git checkout you have. However to work with it in a nice manner, the right 
+thing is to use a bare repository. Here is how this works:
 
-Changes since 4.13.12
----------------------
+Setting up the directory for the first time:
 
-o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-    * BUG 14868: rodc_rwdc test flaps.
-    * BUG 14881: Backport bronze bit fixes, tests, and selftest 
-improvements.
+mkdir samba
+cd samba
+git clone --bare https://git.samba.org/samba.git .bare
+echo "gitdir: ./.bare" > .git
 
-o  Andrew Bartlett <abartlet@samba.org>
-    * BUG 14642: Provide a fix for MS CVE-2020-17049 in Samba [SECURITY] 
-'Bronze
-      bit' S4U2Proxy Constrained Delegation bypass in Samba with
-      embedded Heimdal.
-    * BUG 14836: Python ldb.msg_diff() memory handling failure.
-    * BUG 14845: "in" operator on ldb.Message is case sensitive.
-    * BUG 14848: Release LDB 2.3.1 for Samba 4.14.9.
-    * BUG 14871: Fix Samba support for UF_NO_AUTH_DATA_REQUIRED.
-    * BUG 14874: Allow special chars like "@" in samAccountName when 
-generating
-      the salt.
-    * BUG 14881: Backport bronze bit fixes, tests, and selftest 
-improvements.
+Now you can create a branch and check it out:
+git branch asn-mywork origin/master
+git worktree add mywork asn-mywork
 
-o  Isaac Boukris <iboukris@gmail.com>
-    * BUG 14642: Provide a fix for MS CVE-2020-17049 in Samba [SECURITY] 
-'Bronze
-      bit' S4U2Proxy Constrained Delegation bypass in Samba with
-      embedded Heimdal.
-    * BUG 14881: Backport bronze bit fixes, tests, and selftest 
-improvements.
+This will create a directory `mywork` and checkout the branch `asn-mywork`
 
-o  Viktor Dukhovni <viktor@twosigma.com>
-    * BUG 12998: Fix transit path validation.
-    * BUG 14881: Backport bronze bit fixes, tests, and selftest 
-improvements.
+cd mywork
 
-o  Luke Howard <lukeh@padl.com>
-    * BUG 14642: Provide a fix for MS CVE-2020-17049 in Samba [SECURITY] 
-'Bronze
-      bit' S4U2Proxy Constrained Delegation bypass in Samba with
-      embedded Heimdal.
-    * BUG 14881: Backport bronze bit fixes, tests, and selftest 
-improvements.
-
-o  Stefan Metzmacher <metze@samba.org>
-    * BUG 14881: Backport bronze bit fixes, tests, and selftest 
-improvements.
-
-o  David Mulder <dmulder@suse.com>
-    * BUG 14881: Backport bronze bit fixes, tests, and selftest 
-improvements.
-
-o  Andreas Schneider <asn@samba.org>
-    * BUG 14870: Prepare to operate with MIT krb5 >= 1.20.
-    * BUG 14881: Backport bronze bit fixes, tests, and selftest 
-improvements.
-
-o  Joseph Sutton <josephsutton@catalyst.net.nz>
-    * BUG 14642: Provide a fix for MS CVE-2020-17049 in Samba [SECURITY] 
-'Bronze
-      bit' S4U2Proxy Constrained Delegation bypass in Samba with
-      embedded Heimdal.
-    * BUG 14645: rpcclient NetFileEnum and net rpc file both cause lock 
-order
-      violation: brlock.tdb, share_entries.tdb.
-    * BUG 14836: Python ldb.msg_diff() memory handling failure.
-    * BUG 14845: "in" operator on ldb.Message is case sensitive.
-    * BUG 14848: Release LDB 2.3.1 for Samba 4.14.9.
-    * BUG 14868: rodc_rwdc test flaps.
-    * BUG 14871: Fix Samba support for UF_NO_AUTH_DATA_REQUIRED.
-    * BUG 14874: Allow special chars like "@" in samAccountName when 
-generating
-      the salt.
-    * BUG 14881: Backport bronze bit fixes, tests, and selftest 
-improvements.
-
-o  Nicolas Williams <nico@twosigma.com>
-    * BUG 14642: Provide a fix for MS CVE-2020-17049 in Samba [SECURITY] 
-'Bronze
-      bit' S4U2Proxy Constrained Delegation bypass in Samba with
-      embedded Heimdal.
-    * BUG 14881: Backport bronze bit fixes, tests, and selftest 
-improvements.
+Now you can start breaking Samba ... :-)
 
 
-#######################################
-Reporting bugs & Development Discussion
-#######################################
+I've created two aliases:
 
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
+[alias]
+     wtb = "!f() { git branch $1 $2; git worktree add $1 $1; }; f"
+     wtr = "!f() { git worktree remove $1; git branch -D $1; }; f"
 
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
+Hope this is useful for others too, metze already uses it ;-)
 
 
-======================================================================
-== Our Code, Our Bugs, Our Responsibility.
-== The Samba Team
-======================================================================
+	Andreas
 
 
+[1] https://git-scm.com/docs/git-worktree
 
-================
-Download Details
-================
 
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-from:
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
-         https://download.samba.org/pub/samba/stable/
 
-The release notes are available online at:
-
-         https://www.samba.org/samba/history/samba-4.13.13.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                         --Enjoy
-                         The Samba Team
 
