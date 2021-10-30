@@ -2,50 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB73B43FA4D
-	for <lists+samba-technical@lfdr.de>; Fri, 29 Oct 2021 11:55:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEE5D440A27
+	for <lists+samba-technical@lfdr.de>; Sat, 30 Oct 2021 18:09:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=go1WWUQXD3YeQPypt+Rylq7YM7eUSRHfr0qDN5wg9J0=; b=a21QnhnBI2v2UgZJI+RSjUUSia
-	SuCBMFZYdD/bW8qSWIhnFVbmshctkDH0UMK3pRWlzOpNDCuam6faMp7PvbQ16pni1AYaYEY4mg1AD
-	K7BNNrc1YBgjb0CFI2/V1uPKI4cxFMsZvJryL8cIldXh6OAsREalpcOOSkfhjHp7+VjMXIAUwey0M
-	0HHGr9AA2AmixBx2Bh/hBoNYapXYi7u6rpSM2v8a+xUaj4RAHJ0DDG2ba524d5k+H8JxiOXW4wgw8
-	K1iNxPXmMuqH+VGWg8ebMUFn2tCIX9ZXWbIzHsMNsfwfB4ljTIChyqkJ8OyqujEHPZ6wBL3qSQsQF
-	dbzfzd6Q==;
-Received: from ip6-localhost ([::1]:60182 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=bx5Jvopj/jMRtAFahqQ7rRNrzsTquK7C76t5hI785i0=; b=xFQNJOMrIOk8tNKUyK89cT3VRA
+	4ysewQ2ukr05YQ6y5+FD5okjKs4luRpAvScn2SC5XGGh9nuoWo8I0K1Dobl0+1j1q1gzqX/QHPimw
+	n5IyiDwF01jFnb9r03YdvQZykDyYZOl0VG1aGUGzdhu6gl91uh5qVyfKL/qphpQqksC0OfSeG2/7V
+	MnYBYRdGiwWUqN3VzQpKaQv0JvYPoF+G8thQgAuaB4/oJ2ZXgjJmFNXHDJx5kJYqyAcrYACq0dJvQ
+	CzJEPqwNGh8VRIQ+V0l1sR2MKEkS+Syw9XMBtvYXMVJ4MyPx20aevmzUa2gMlZ07os5sjN4wTkF30
+	iWXNQF9Q==;
+Received: from ip6-localhost ([::1]:45010 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mgObR-001lGQ-Te; Fri, 29 Oct 2021 09:55:14 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56914) 
+	id 1mgquL-002N5c-32; Sat, 30 Oct 2021 16:08:37 +0000
+Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:36385) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mgObM-001lGH-Aa
- for samba-technical@lists.samba.org; Fri, 29 Oct 2021 09:55:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=go1WWUQXD3YeQPypt+Rylq7YM7eUSRHfr0qDN5wg9J0=; b=0YJTeZkPnLmMKssWFnfTAIS3Xr
- rMT8bst0Mx2CShSgpg3LmqDTce/OrZY671ecssKDVqIC9iLk14QDgkBwlxSEK0SnFV/wS/7hOnRVd
- QCyL1i/rFdu/Os1FxU5APEFEX6vnQ3H9bVhLmVwyWZaO7zq+Unq2Rctpi4eDHOHzw6zqbmZYDzwos
- xlcr2EiWusmm/yeoPHGLPJcBhd+ysKhTFEb0uVBzef9mH1brKq8Rcvy2AeylrMvY+ulI7tXiN0kgW
- vUdNJKj8PfD3Nr5JTzIC2BQ+ImpdNZuQVGuj8AkecT+ftCzMDu5K+AV3cjAVvsWjwiMaCYnEuacmv
- luLI5ZPwjUnGplQULQhMm/wgC0amCkzabazHvua5kH1kzyNSZXLdt1HMQfWnBVAess+fsrQtIrLdv
- nrcQaBC7EpFkWtMoz/iIBkf+cvacSKb/jy2gyrrFviIX/y2ml4AIGpQQAjWixVPzoqNIA3++QiWDX
- 3td6L+RWcZfnT00qmvPtNyM0;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mgObJ-0040B6-RL; Fri, 29 Oct 2021 09:55:05 +0000
-Message-ID: <34e64bc4-39a0-db4d-4474-820801cb7f0e@samba.org>
-Date: Fri, 29 Oct 2021 11:55:04 +0200
+ (Exim) id 1mgquE-002N5T-VV
+ for samba-technical@lists.samba.org; Sat, 30 Oct 2021 16:08:34 +0000
+Received: by mail-il1-x12c.google.com with SMTP id l13so13911232ilh.3
+ for <samba-technical@lists.samba.org>; Sat, 30 Oct 2021 09:08:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=EIioyvot0pULd4+jfl/fiGsucENDY/2mvh0vZBt0yzg=;
+ b=Rdtzvpi08rFzsXh8Q91Qftc00xq+wWv2rzZbhmTLVHgLUOBP5R+V2CiJ//zUr5BZq2
+ wr1QXVr3JFgEaATTkLZq/yPrtdgIIXQdNcW/3D4DftoNNEbD6FX5kF6JVOsASlI7J6Gh
+ +Y0bWmH3RJve+7jBO28OveO3sqCfRg/wHx173ZH7vGn+a3vmkpu/3QeqEmvIJWN6OKS5
+ zozF8f5PuA57y0/jy7m+1jRSYK2bzb20ZgYOepWqIf1vCpFK1zGA8pOnmpQJOexP9BBb
+ wcN1uhlsxU+88AmwNL16LmcuZHARzGDo+wBsnQ/e3tvjY17Tv06PatkQQVPieO2WG9YL
+ Y4hg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=EIioyvot0pULd4+jfl/fiGsucENDY/2mvh0vZBt0yzg=;
+ b=y2O+JPp8maVVjnb1bz9IzPrvR+pqRZs209juBCd52xVPc8KFer1NUsunyUkoy/pKVj
+ O00iqAWQNX6yPuOXvyfE8Ly+r5Xzjw3jq0dRcl7ouGnsy2S58n4r1DUi0J/NX1XsJby6
+ /2gABhTlIQOgEu/QYF6n8cG2UcfNLJG88UfBPKZHWm6tsCVpHIsw/NI0iAuJ10XzXpFG
+ jQed22wo7kFftLMQGCB6zibVjEOAcpakOgkIrpZYgTmUG/vJQ8qQiaMNXoLo3NwzmVKI
+ k6qmh6R+diLQ0vRtlkYV8SYIpPv0Y/2EUNCoyQqrO7o/6M0VHuIM133L+t7kmOTV3dd+
+ WHdA==
+X-Gm-Message-State: AOAM531OhG7dBGCk7XAi8bbMGl2Plqgj4Bk1/e6XSJDrhWwT5z8bcsEa
+ yVSPFlNj+m/puCVX/3LHVcDGWLm3q4xqkJZne2M=
+X-Google-Smtp-Source: ABdhPJww1mocDm5dJWivoXz+Flo+ynoCB3bH+rQ0nccN3Np1QM8w2bEMqtF8oF2DgoZTfKYHHzr2uHD9VKzBRKh2F+Y=
+X-Received: by 2002:a05:6e02:b2e:: with SMTP id
+ e14mr12330470ilu.47.1635610107707; 
+ Sat, 30 Oct 2021 09:08:27 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: git worktrees
-Content-Language: en-US
-To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
-References: <1878168.t9pZBThubR@magrathea>
-In-Reply-To: <1878168.t9pZBThubR@magrathea>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------eS845JwOBjPxGqLWl60aJi02"
+References: <CALwZj3JLO3iRDkgHeHtUpYo4j7=Ck8eo+egAu0s+LTsny4o8TA@mail.gmail.com>
+ <YWB+RusAvL91oAfS@jeremy-acer>
+In-Reply-To: <YWB+RusAvL91oAfS@jeremy-acer>
+Date: Sat, 30 Oct 2021 18:08:15 +0200
+Message-ID: <CALwZj3+TotL+bchNpX1Z5PmZeF9c1LuNOGSziD9sN-BNgz5MpQ@mail.gmail.com>
+Subject: Re: Samba name mangling change?
+To: Jeremy Allison <jra@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,57 +70,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Steffen Kern via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steffen Kern <kernsteffen1990@gmail.com>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------eS845JwOBjPxGqLWl60aJi02
-Content-Type: multipart/mixed; boundary="------------2nFPgkKK63MNK6gK0Z0bUmtN";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
-Message-ID: <34e64bc4-39a0-db4d-4474-820801cb7f0e@samba.org>
-Subject: Re: git worktrees
-References: <1878168.t9pZBThubR@magrathea>
-In-Reply-To: <1878168.t9pZBThubR@magrathea>
+Thank you that helped. Unfortunately I had to realize that since version
+3.00 mangled map was disabled. Is there a way to enable this again or
+another method to make e.g. *.xlsx become *.xls?
 
---------------2nFPgkKK63MNK6gK0Z0bUmtN
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Jeremy Allison <jra@samba.org> schrieb am Fr., 8. Okt. 2021, 19:22:
 
-T24gMTAvMjkvMjEgMTE6MzEsIEFuZHJlYXMgU2NobmVpZGVyIHZpYSBzYW1iYS10ZWNobmlj
-YWwgd3JvdGU6DQo+IEhvcGUgdGhpcyBpcyB1c2VmdWwgZm9yIG90aGVycyB0b28sIG1ldHpl
-IGFscmVhZHkgdXNlcyBpdCA7LSkNCg0KeWVhaCwgbWUgdG9vIHNpbmNlIG1ldHplIHBvaW50
-ZWQgbWUgYXQgaXQgYSBmZXcgeWVhcnMgYWdvLiBUaGVzZSBkYXlzIA0KaXQncyBsaXRlcmFs
-bHkgd29ya3RyZWVzIGV2ZXJ5d2hlcmUuIDopDQoNCkNoZWVycyENCi1zbG93DQoNCi0tIA0K
-UmFscGggQm9laG1lLCBTYW1iYSBUZWFtICAgICAgICAgICAgICAgICBodHRwczovL3NhbWJh
-Lm9yZy8NClNlck5ldCBTYW1iYSBUZWFtIExlYWQgICAgICBodHRwczovL3Nlcm5ldC5kZS9l
-bi90ZWFtLXNhbWJhDQo=
-
---------------2nFPgkKK63MNK6gK0Z0bUmtN--
-
---------------eS845JwOBjPxGqLWl60aJi02
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmF7xPgFAwAAAAAACgkQqh6bcSY5nkYs
-FhAAl0lvXSYo2iDB1WOGsttPC9c2+V4iUSq+On3R9MHzuli/SjoGZAjYrlA8KqIFqDa1ORk0AW3x
-VUwVZGqY4VEeLiQYhokGtLy0lEUXA512hOCcO/2Ts4dy6effghfWszHKjMbSjs0aY5+SXNEmwc36
-sgJtaev7drMlOQbV8omD+3zNRmKzz7zUypZ4P686GyMgd9hX/Ief/9PVuP4TuvbFUPwu4pR+5NDM
-upyyJ6YzWHAkhkFmNG1SYPRV8kEQt+U4fXHsPl4vnWcmdNOX8+OSyAqRVdbMI0H5DleGEvq+A9h6
-n21rfU6QNS9ME9BSwhwOu0e8dIHQyZEyVqgzCiFCypXlMDgNlDHySNw90+GM/MccFFMmr05JRrw2
-3I5LOjRRJ/eqlDxqm4QEAI8Rb8xa5wkN12bS7i/s9OVN9hvR/Mp6dosUpjQXpPUwAWwh8MkEI0Su
-BpkKm4PttsoqUYvsLEcRzt0jxNX0Ua+0xR6MAbhcSyUuZbUi622Hoex8K4zZc9cCgTHjap4HknPB
-uCoLIeIXGjR5+JJ099setfQt1rln+7EvjDYoifzJr/LSb9TFSF19vJoQiToaEnceF/piN0puVba2
-ExrgxvkjM408UHVpnAg9qQ4jZbt3F5RFRRqrYxoOEe599b96E2cUVywuhaeq/77KNLR+mbEwaupU
-jwk=
-=e4Ko
------END PGP SIGNATURE-----
-
---------------eS845JwOBjPxGqLWl60aJi02--
-
+> On Fri, Oct 08, 2021 at 07:17:03PM +0200, Steffen Kern via samba-technical
+> wrote:
+> >I wanted to use my Ubuntu machine as a file server but I have programs
+> that
+> >still use 8dot3 names. I have already tested the name mangling of samba
+> but
+> >with hash as method I only have 5 characters of the original name and I
+> >need at least 6 characters because many folders consist of preceeding
+> >numbers like "2100001 test". so I would be interested if there is a way to
+> >customize this
+> >thanks in advance for at least looking at it
+>
+> Check out the smb.conf parameters:
+>
+> mangle prefix
+> mangling char
+> mangling method
+>
+> Hope this helps !
+>
