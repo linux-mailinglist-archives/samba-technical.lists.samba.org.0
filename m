@@ -2,43 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F39F544680E
-	for <lists+samba-technical@lfdr.de>; Fri,  5 Nov 2021 18:46:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ADA3144A55E
+	for <lists+samba-technical@lfdr.de>; Tue,  9 Nov 2021 04:36:41 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=y3o0zDhH1O/b9xZAMpLfb03mHQRu+Pe89KFD0yFpchc=; b=1eDULvcNEzuJHY51mRqoSUVHKP
-	VXN00M3ftYo3+PxsHC5n41xY8cCNuCbW4SzAubSpiJj7mNQX98E/Z4EMKnAEG2LK/Hd3fque/o8ce
-	Yr3cU3EEzN0+zSSUhRGqkJu60fMh1VJn/9M7+HDgOr2MCI00+Uqh2i5822T1lplXFeAc/AR14/TIy
-	K3JB9UPBO1MQx2dZ85uGnIVmoL4PqaD5d94+CS0XbjC38OwMirIV+7URdFp36Ia3zv79FjkNbBZgO
-	MR2amOqP5sEKwZ63sH3LbueY7YOVPqbv03dgaLPNoFNKfrxRKODxsRRLkPemrAJ+qzLDK5whC6FFL
-	XciXLoZg==;
-Received: from ip6-localhost ([::1]:26814 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=UOW2/aSbo3xiKg4elIvNPLdDntu3IoYBmR/BR4nYDEI=; b=0jZsV7WWc2A+RgFidFjxx/xddX
+	6JQlcQkJ2kx6I5byeuPsH+frZ3gCE8upWKdW3/HVakYakYtPt07+1TFFg50jH7Hqme3mJBKl6SVB4
+	uz8sVH9PDqeAoMwWjH4JIK/mIOdNwSciW17Q+P4h+hI51iakJBEronV9UtXC4fYBhyDMmUKkV0Puy
+	9N/PMR65LTus4ap7YsseCMZDYaD3o8Pwvf0VNI7O/+Tb81uhQ5pdTr8JLKHchCINkBFdX34TgguEo
+	4Eo4VtxMq8I94VmFXW93uFexe8uZfsYhTYStjAUdFJi9/MsEH9RGgeEoejpN/sBpBjGSw3ovLxUhV
+	He885grg==;
+Received: from localhost ([::1]:28458 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mj3Hs-008O4M-1h; Fri, 05 Nov 2021 17:46:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57594) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mj3Hj-008O3o-7L; Fri, 05 Nov 2021 17:45:53 +0000
+	id 1mkHva-008uoM-OY; Tue, 09 Nov 2021 03:36:09 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57706) 
+ by hr1.samba.org with esmtps
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mkEB5-008sj5-UX; Mon, 08 Nov 2021 23:35:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=y3o0zDhH1O/b9xZAMpLfb03mHQRu+Pe89KFD0yFpchc=; b=HQcVEmsY8dnwZwoGzRYly4xyco
- 78PjsWf/65AoFTq8TRz4Sr/c8h6F34jX5gJvrGfx4VcwO733Vx/p1S0krxrMQ2UcIA1Ymd/EatJmd
- JfI8SDyUr29rsn3VDyryBDB5xXBdIxgzmQL+YvTWjobDpjo59RNtER60SWyIwbPsVQgEi4Gcw5oSI
- 5h0HLOUvKFUT+dKwNXv/h4kV0oqdpxTqR8GDG++PstEHb3OQ74jWKJzu0VudyzlxXJJa81/1VuI5I
- n5/5M/HJrkET7yRh+ZL4haylK3sBlRDETOdYoZ+5UuyYKghE+VkuSo3D+8YwDRY15TvQdPa8Wuj7X
- KHzNnC9IbkjGdIMNqrVZJjk8G60ytJ2mvlVNb00PUVErZrtcO8uyX6fMS9LbsyApBRJFVC+iTYAg+
- Qtl777mb3C5GNURWHpb3JmNF6YbCmXXA92BTXCJ9IwWIpe7ujWA2JJubrLGMkXNePyaI5u2i0/Vmf
- biHQYr3Sz82hOLkGKEcHflbL;
+ s=42; h=Date:Message-ID:From:Cc:To;
+ bh=UOW2/aSbo3xiKg4elIvNPLdDntu3IoYBmR/BR4nYDEI=; b=sEeZ449k4mqMPS1LfaCNAj8xnN
+ jU6ZrL7gJtM2bSHaIn7Y2nP1pECxjXp3hb9jWxgQ1q3JURezYoLy69KBlTTTgizlu3tjcKBk33YZC
+ yF1ZN3q5Xx/9Y1wYcCZxrOBqYOYMioWySTXjxt7/dmno03GyMGZe6NBRi2i2U3DWoKJMuyfrrNIeR
+ WZLXzSgNHxosQRpNMzGlhrmYkRxCAmN+bot4i5c2JI/nBdkPXKJ3ptFf4RMTP9GAaYAmAo5XOuygP
+ gF7sF003mMxOPc87m/e62Brn47cgIbnoCx/JPF3jqafjOjbeaLp6EG6XQ6GbtIGp/95Otfr3y3LjD
+ snglB99zVA95FzNNcv3nm6KwRMnwff3Ox2qv6drvZKeVBOS4jMUtfe5G5LEHSd3uhZ+N3YICgwibc
+ 4Ek7mW23ofPSJim71D3T0rs9HPt1PFqPVLvonKKT7/MgTEsehM9p4UcxZFlQlRbQIcWldtSnzLVSf
+ hkZ/NgdQXlP2AgXMBCyLNEGE;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mj3Hi-005Ptj-3M; Fri, 05 Nov 2021 17:45:50 +0000
-Date: Fri, 5 Nov 2021 10:45:47 -0700
-To: samba@lists.samba.org, samba-technical@lists.samba.org
-Subject: Storage Developer Conference 2021 Samba Talks available.
-Message-ID: <YYVty5SVXZPXNkVo@jeremy-acer>
+ (Exim) id 1mkEB5-005raJ-2Q; Mon, 08 Nov 2021 23:35:51 +0000
+To: Andrew Bartlett <abartlet@samba.org>, samba-announce@lists.samba.org
+References: <654d3e50d01a29a8e67a3a188e2b3e10aa4f3f1b.camel@samba.org>
+Subject: Re: Upcoming Samba security release
+Message-ID: <199f0e15-291b-aebc-c2ed-8a429c9552c7@samba.org>
+Date: Tue, 9 Nov 2021 00:35:49 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
+In-Reply-To: <654d3e50d01a29a8e67a3a188e2b3e10aa4f3f1b.camel@samba.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,24 +58,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: samba@lists.samba.org, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On youtube !
+Hi,
 
-Ralph on "The New Samba VFS:
+the release will happen around 18:00 UTC November 9th.
 
-https://www.youtube.com/watch?v=D9EZO3gkT9U&list=PLH_ag5Km-YUbveQ0cD-JD8xP0F-1R98UF&index=40
+metze
 
-Metze on "Samba Multi-Channel/io_uring Status Update":
+> this is a heads-up that there will be Samba security updates
+> on Tuesday, November 9. Please make sure that your Samba servers
+> will be updated immediately after the release!
+> 
+> Impacted components:
+> 
+> * AD DC (CVSS 8.8, high)
+> * AD Domain member (CVSS 8.1, high)
+> * File server (CVSS 4.8 medium)
+> 
+> Cheers,
+> 
+> Andrew Bartlett
+> 
 
-https://www.youtube.com/watch?v=fnA4imgBsUo&list=PLH_ag5Km-YUbveQ0cD-JD8xP0F-1R98UF&index=56
-
-Both great talks, enjoy !
-
-If I find more Samba talks I'll post them :-).
-
-Jeremy.
 
