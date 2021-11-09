@@ -2,38 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E521844B3CB
-	for <lists+samba-technical@lfdr.de>; Tue,  9 Nov 2021 21:11:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F67F44B305
+	for <lists+samba-technical@lfdr.de>; Tue,  9 Nov 2021 20:07:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=9uoLM4piT7r4ZEVcMks7tTCnYAIR1M0CquPJA1nYMtI=; b=aTHl5BPewlX26PY2QF2d6ZJlWM
-	SNM4VGMpZ8rFMsB0/x++qWIrGJ7R5njEZZcrAFLxqxzZQ1QgWdTcU9HeZ+DZRAxTz8Ry09bUKsHIC
-	NvI5pWE2hEfM6fypKu3uZR0pakF6vlBha4LtwJWhpppbai3WbqNzP6gtqracDf8pwoDNZbSR9Uo/D
-	3jiscJzbf7lTN07GJ45OM5JU6wcVUbhDcSFbln/04JprppIDeOYlTuQoSpV+Bq/IOOqaHr1OI99fx
-	YvZ1TiWUNHqBDbpUJYPZwjguHEwmtKXJYuR5Pj0izKJ6S6hrUyTDk5qVVygrHCqCBydzk7FMW5cuz
-	g3AnthWg==;
-Received: from ip6-localhost ([::1]:54276 helo=hr1.samba.org) 
+	bh=9uoLM4piT7r4ZEVcMks7tTCnYAIR1M0CquPJA1nYMtI=; b=VZJfHKVGgArxuogHTJFFIQfGCb
+	bIy15yKuau2Bnt+lebgTlaZUUFUy7sYAbLUtYZAyhDDKJ9lf08Wsj7rC7Zz2JX6wizgybi/3NKZva
+	HV6Ixp3iqkW+/XpAbXhauVa+x0dn2ZtoIFtg+TmdLFJqMsEQuj7zYerWRl6aha0C6uoCgjoGyotnk
+	+x9YjFIWtVOXfxgeve1UTCSW8cw6Sbp4fZbWwogeUwKJ9h3zwYiEguHP2/7m2lZtQakuOGcRwND28
+	+woAymIjfen9bTXFPRHb+olaOSGxJLg6K0ja1Tei+Nt3XWFBKPhxbr7GfnNkEtyxxVp70Et/gNR6R
+	hYf3QLpQ==;
+Received: from ip6-localhost ([::1]:27458 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mkXRN-0096QG-ME; Tue, 09 Nov 2021 20:09:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57846) 
+	id 1mkWSF-0092o0-7h; Tue, 09 Nov 2021 19:06:48 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57934) 
  by hr1.samba.org with esmtps
  (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mkVol-0091oh-Ku; Tue, 09 Nov 2021 18:26:02 +0000
+ (Exim) id 1mkWS0-0092np-Nw
+ for samba-technical@lists.samba.org; Tue, 09 Nov 2021 19:06:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:To:From:Date:CC;
- bh=9uoLM4piT7r4ZEVcMks7tTCnYAIR1M0CquPJA1nYMtI=; b=KnZIaNqLAjt1cnQkNJXZahFEer
- 05QByenFe2O3P/GOpJtYISxMu09ZwdO8aDPb0VlbHvEJq7HTzjbiCgAv0+nGOWlKMwOzLN7y9IJpC
- dNJeL5TqjnImPXb7rGdcvTyKbkwoyljVWHVIwwDbFEjW7lGpSoOpXvgxYJboTu37M5EiH+3b4WA1s
- s/wzTTi+w6a1i+KnCf437zP1u4BMTWcm03xRBz+x8zuMqm9ZAUHEzTfwnG4mnBOqVjiI/pYW1BOJd
- MAlfxWFvhG7BCJazvh/+adeUpRSG4G6PKta+HQNK9ruw9nyyCqno0kSefxQXa9D4jCqj8VARMxPnO
- 1xXKSi+RGs78n+iRtuLeNgP0gOP0E+ZM8ajZ4MysGXalx5Z1FRpXvgafL0d4s72RfAvWt5PSTggNO
- amxoikAY5I8MMqbubxug41Yo0RQnXvNTyzeYNJjKDT66kLDlTZPj9YKF8+6W+mozeuTrb1urGC9H6
- dfuB0l1jmZxcQOiqyUwmSde0;
+ bh=9uoLM4piT7r4ZEVcMks7tTCnYAIR1M0CquPJA1nYMtI=; b=yudENJyz1c0EUUiMi2gl6Y+3A7
+ 7NwRd7ydndivCQzSck8v+pOh59oEZ7RpHC7pcD3qQ9qxXZ9Nfei6AmFmkZV1FOkN3d8AGGFKplQFB
+ mvxu3fmRLxqkvZnuy0vVXwKIPo0uRgvCHT2g/ONSJXMgPwf9+LGslcYWQ4geH6p+YWqlr0K6aQkoF
+ TpeWDVwf3By9HygklpG7DfaBt1mBkVPm2fZmnP76RF1EqKxn5iFEVZY9GbOKmVFDWLyZm6sN2zuPL
+ 93ugxOS2334625kIlJfcddovVQeA+rX99+1I3JoAZ3Ewmyn0j1rMhboIWTiCwGXbXg4WN83YU8o9w
+ eq1W87uiB7ypgfTlkSDn8PM7GR9up5RMk6cW49kue3hZPYOYEbIDj62uEvm06QPeq8U3a1K0HTLaN
+ W44zQg9e/SlZPtt6ACt+nO8m5AmRVbCiKO3OVd3ilM3QmwbrTapQLKI0NXCDJjFm7XiseNrtsgy9V
+ piLFxyXb6eA/p4LNHJs09JXw;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mkVol-0063zZ-5x; Tue, 09 Nov 2021 18:25:59 +0000
-Date: Tue, 9 Nov 2021 19:25:54 +0100
+ (Exim) id 1mkWRy-00677D-WF
+ for samba-technical@lists.samba.org; Tue, 09 Nov 2021 19:06:31 +0000
+Resent-From: Stefan Metzmacher <metze@samba.org>
+Resent-To: samba-technical@lists.samba.org
+Resent-Date: Tue, 9 Nov 2021 20:06:30 +0100
+Resent-Message-ID: <7b34f42e-997e-6ea9-b297-dc726a51c009@samba.org>
+Date: Tue, 9 Nov 2021 19:26:03 +0100
 To: samba-announce@lists.samba.org, samba@lists.samba.org,
  samba-technical@lists.samba.org
 Subject: [Announce] Samba 4.15.2, 4.14.10, 4.13.14 Security Releases are
