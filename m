@@ -2,45 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA79244B3A9
-	for <lists+samba-technical@lfdr.de>; Tue,  9 Nov 2021 21:00:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E521844B3CB
+	for <lists+samba-technical@lfdr.de>; Tue,  9 Nov 2021 21:11:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=mzUpbZzV6GlFdYDuOWJlMNv4AFsHQHs9siTYOu1H22M=; b=pddK89Imf1x6Iew4cO8aRvMk0Y
-	f0My4HvPGt9hxwBcRFZH7Sf1pm4sPzQAilE0nuVe5mm1hCccXCJIRS963VLxPaUcDTNN9/Hbp/uo0
-	x2ETH5n/nenj8RM+3gq8VDMw9LxnxBQIhqjQVsFJnhiyS9x2G8aSl/t+9RE84B06BoCmzit2uwWkw
-	yGsc71gCAfMQmbLfj8Rlmme1pf8e0pydC74zt5ZOMT9L5RBsrKgVXHf4Lmobszv5URcdPZwEvqBpz
-	dtA1drfifHRoczjPX6X/vjM/i45NWM/9NxBJRElOgDl9nbPO2Q5plFPGTdwnM9qLOXwHeova2bLVJ
-	nx/TI/7g==;
-Received: from ip6-localhost ([::1]:48206 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=9uoLM4piT7r4ZEVcMks7tTCnYAIR1M0CquPJA1nYMtI=; b=aTHl5BPewlX26PY2QF2d6ZJlWM
+	SNM4VGMpZ8rFMsB0/x++qWIrGJ7R5njEZZcrAFLxqxzZQ1QgWdTcU9HeZ+DZRAxTz8Ry09bUKsHIC
+	NvI5pWE2hEfM6fypKu3uZR0pakF6vlBha4LtwJWhpppbai3WbqNzP6gtqracDf8pwoDNZbSR9Uo/D
+	3jiscJzbf7lTN07GJ45OM5JU6wcVUbhDcSFbln/04JprppIDeOYlTuQoSpV+Bq/IOOqaHr1OI99fx
+	YvZ1TiWUNHqBDbpUJYPZwjguHEwmtKXJYuR5Pj0izKJ6S6hrUyTDk5qVVygrHCqCBydzk7FMW5cuz
+	g3AnthWg==;
+Received: from ip6-localhost ([::1]:54276 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mkXGw-0095bp-EQ; Tue, 09 Nov 2021 19:59:12 +0000
-Received: from p3plsmtpa11-01.prod.phx3.secureserver.net
- ([68.178.252.102]:51324) by hr1.samba.org with esmtps
- (TLS1.2:ECDHE_SECP256R1__RSA_SHA512__AES_256_GCM:256) (Exim)
- id 1mkUDm-0090pl-2Y
- for samba-technical@lists.samba.org; Tue, 09 Nov 2021 16:43:44 +0000
-Received: from [192.168.0.100] ([98.118.115.249]) by :SMTPAUTH: with ESMTPSA
- id kTWnmwtOV7YfNkTWomEtyT; Tue, 09 Nov 2021 08:59:18 -0700
-X-CMAE-Analysis: v=2.4 cv=E/wIGYRl c=1 sm=1 tr=0 ts=618a9ad6
- a=T+zzzuy42cdAS+8Djmhmkg==:117 a=T+zzzuy42cdAS+8Djmhmkg==:17
- a=IkcTkHD0fZMA:10 a=vnREMb7VAAAA:8 a=hNOTfydlAAAA:8 a=YRg_dh6e-o_V8Oi-LqQA:9
- a=QEXdDO2ut3YA:10 a=fZunMKNLB757I4m4HZ3M:22
-X-SECURESERVER-ACCT: tom@talpey.com
-Message-ID: <a618a531-c72a-ccad-db0e-035ddcd48dc7@talpey.com>
-Date: Tue, 9 Nov 2021 10:59:19 -0500
+	id 1mkXRN-0096QG-ME; Tue, 09 Nov 2021 20:09:59 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57846) 
+ by hr1.samba.org with esmtps
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mkVol-0091oh-Ku; Tue, 09 Nov 2021 18:26:02 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=9uoLM4piT7r4ZEVcMks7tTCnYAIR1M0CquPJA1nYMtI=; b=KnZIaNqLAjt1cnQkNJXZahFEer
+ 05QByenFe2O3P/GOpJtYISxMu09ZwdO8aDPb0VlbHvEJq7HTzjbiCgAv0+nGOWlKMwOzLN7y9IJpC
+ dNJeL5TqjnImPXb7rGdcvTyKbkwoyljVWHVIwwDbFEjW7lGpSoOpXvgxYJboTu37M5EiH+3b4WA1s
+ s/wzTTi+w6a1i+KnCf437zP1u4BMTWcm03xRBz+x8zuMqm9ZAUHEzTfwnG4mnBOqVjiI/pYW1BOJd
+ MAlfxWFvhG7BCJazvh/+adeUpRSG4G6PKta+HQNK9ruw9nyyCqno0kSefxQXa9D4jCqj8VARMxPnO
+ 1xXKSi+RGs78n+iRtuLeNgP0gOP0E+ZM8ajZ4MysGXalx5Z1FRpXvgafL0d4s72RfAvWt5PSTggNO
+ amxoikAY5I8MMqbubxug41Yo0RQnXvNTyzeYNJjKDT66kLDlTZPj9YKF8+6W+mozeuTrb1urGC9H6
+ dfuB0l1jmZxcQOiqyUwmSde0;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mkVol-0063zZ-5x; Tue, 09 Nov 2021 18:25:59 +0000
+Date: Tue, 9 Nov 2021 19:25:54 +0100
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.15.2, 4.14.10, 4.13.14 Security Releases are
+ available for Download
+Message-ID: <20211109182554.GA3180235@SERNOX19>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.0
-Subject: Re: Storage Developer Conference 2021 Samba Talks available.
-Content-Language: en-US
-To: samba-technical@lists.samba.org
-References: <YYVty5SVXZPXNkVo@jeremy-acer>
-In-Reply-To: <YYVty5SVXZPXNkVo@jeremy-acer>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CMAE-Envelope: MS4xfJS8VlOI9DxC9eXI2yRtox+1/8xMRbXhiYrhTYdEJa4nBgHCuMOj2FlunvyWXxEisuxkhb1MS0qWNQT1PHu1uZAnoz2WLacMPpm44WSYOsrLAPcuPp4a
- ByzY312f/qbLiXohj+cb24qMdPwx9LtZc889Q/FJj7C1BMX2wetXegM9ltKvvcvFs3JMG5ncfUFBKyIsWxJiaECn9M2gNJ44lTA=
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="UugvWAfsgieZRqgk"
+Content-Disposition: inline
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,53 +56,166 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Tom Talpey <tom@talpey.com>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 
-On 11/5/2021 1:45 PM, Jeremy Allison via samba-technical wrote:
-> On youtube !
-> 
-> Ralph on "The New Samba VFS:
-> 
-> https://www.youtube.com/watch?v=D9EZO3gkT9U&list=PLH_ag5Km-YUbveQ0cD-JD8xP0F-1R98UF&index=40 
-> 
-> 
-> Metze on "Samba Multi-Channel/io_uring Status Update":
-> 
-> https://www.youtube.com/watch?v=fnA4imgBsUo&list=PLH_ag5Km-YUbveQ0cD-JD8xP0F-1R98UF&index=56 
-> 
-> 
-> Both great talks, enjoy !
-> 
-> If I find more Samba talks I'll post them :-).
-> 
-> Jeremy.
-> 
-> 
-
-Steven Tran and Wen Xin (Microsoft) on SMB3 Landscape and Directions
-
-https://www.youtube.com/watch?v=PQtPnNPdqLU
+--UugvWAfsgieZRqgk
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
 
-Steve French on To the Cloud and Beyond, Accessing Files Remotely from 
-Linux: Update on SMB3.1.1
 
-https://www.youtube.com/watch?v=j94pHGyB1z4
+Release Announcements
+---------------------
+
+These are security releases in order to address the following defects:
+
+o CVE-2016-2124:  SMB1 client connections can be downgraded to plaintext
+                  authentication.
+                  https://www.samba.org/samba/security/CVE-2016-2124.html
+
+o CVE-2020-25717: A user on the domain can become root on domain members.
+                  https://www.samba.org/samba/security/CVE-2020-25717.html
+                  (PLEASE READ! There are important behaviour changes descr=
+ibed)
+
+o CVE-2020-25718: Samba AD DC did not correctly sandbox Kerberos tickets is=
+sued
+                  by an RODC.
+                  https://www.samba.org/samba/security/CVE-2020-25718.html
+
+o CVE-2020-25719: Samba AD DC did not always rely on the SID and PAC in Ker=
+beros
+                  tickets.
+                  https://www.samba.org/samba/security/CVE-2020-25719.html
+
+o CVE-2020-25721: Kerberos acceptors need easy access to stable AD identifi=
+ers
+                  (eg objectSid).
+                  https://www.samba.org/samba/security/CVE-2020-25721.html
+
+o CVE-2020-25722: Samba AD DC did not do suffienct access and conformance
+                  checking of data stored.
+                  https://www.samba.org/samba/security/CVE-2020-25722.html
+
+o CVE-2021-3738:  Use after free in Samba AD DC RPC server.
+                  https://www.samba.org/samba/security/CVE-2021-3738.html
+
+o CVE-2021-23192: Subsequent DCE/RPC fragment injection vulnerability.
+                  https://www.samba.org/samba/security/CVE-2021-23192.html
+
+There's sadly a regression that "allow trusted domains =3D no" prevents win=
+bindd
+=66rom starting, we'll try to provide a follow up fix as soon as possible.
+
+Changes:
+--------------------
+
+o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+   * CVE-2020-25722
+
+o  Andrew Bartlett <abartlet@samba.org>
+   * CVE-2020-25718
+   * CVE-2020-25719
+   * CVE-2020-25721
+   * CVE-2020-25722
+
+o  Ralph Boehme <slow@samba.org>
+   * CVE-2020-25717
+
+o  Alexander Bokovoy <ab@samba.org>
+   * CVE-2020-25717
+
+o  Samuel Cabrero <scabrero@samba.org>
+   * CVE-2020-25717
+
+o  Nadezhda Ivanova <nivanova@symas.com>
+   * CVE-2020-25722
+
+o  Stefan Metzmacher <metze@samba.org>
+   * CVE-2016-2124
+   * CVE-2020-25717
+   * CVE-2020-25719
+   * CVE-2020-25722
+   * CVE-2021-23192
+   * CVE-2021-3738
+   * ldb release 2.3.2 (for Samba 4.14.10)
+   * ldb release 2.2.3 (for Samba 4.13.14)
+
+o  Andreas Schneider <asn@samba.org>
+   * CVE-2020-25719
+
+o  Joseph Sutton <josephsutton@catalyst.net.nz>
+   * CVE-2020-17049
+   * CVE-2020-25718
+   * CVE-2020-25719
+   * CVE-2020-25721
+   * CVE-2020-25722
+   * MS CVE-2020-17049
 
 
-The entire SDC2021 playlist is now public:
+#######################################
+Reporting bugs & Development Discussion
+#######################################
 
-https://www.youtube.com/playlist?list=PLH_ag5Km-YUbveQ0cD-JD8xP0F-1R98UF
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.libera.chat or the
+#samba-technical:matrix.org matrix channel.
 
-And searchable via SNIA Educational Library!
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
 
-https://www.snia.org/educational-library?search=&field_edu_content_type_tid=All&field_assoc_event_name_tid=3939&field_release_date_value_2%5Bvalue%5D%5Byear%5D=2021&field_focus_areas_tid=All&field_author_tid=&field_release_date_value=All&items_per_page=20
 
-Enjoy.
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=3D=3D Our Code, Our Bugs, Our Responsibility.
+=3D=3D The Samba Team
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Tom.
+
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Download Details
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+=66rom:
+
+        https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+        https://www.samba.org/samba/history/samba-4.15.2.html
+        https://www.samba.org/samba/history/samba-4.14.10.html
+        https://www.samba.org/samba/history/samba-4.13.14.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                        --Enjoy
+                        The Samba Team
+
+--UugvWAfsgieZRqgk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQT7piwqO01BwrlU3LLHuFQ7rrL7egUCYYq9KgAKCRDHuFQ7rrL7
+ev6DAQCG1xYypb8BJzyMdd0Ah/iBWNpeT9MrUCh7YGfABNYusAD/UAIWnFHAheHq
+BiB3Nfh+iHx85vp1odoPgTpfpbcPAQU=
+=5afN
+-----END PGP SIGNATURE-----
+
+--UugvWAfsgieZRqgk--
 
