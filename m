@@ -2,59 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5371F44FE1C
-	for <lists+samba-technical@lfdr.de>; Mon, 15 Nov 2021 06:14:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A891450A37
+	for <lists+samba-technical@lfdr.de>; Mon, 15 Nov 2021 17:54:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=zZoE+xQ2U7qWcLCwPm3BWxfe1Es+mpw14CoOgK3M7Ok=; b=RuSY/WJFzdAR/SPIStopyas73X
-	hQebIGGXuiICPlFwK8gyRp8YfFCiDvolB0fW8p/oddXoTSR7qHnH3CqCLhC4Fk+hMKrq9b055dhkC
-	e0NiNxF1Q13o/c5ZLkoFEVIaQvqv1LJn5x/9o8hzs3aghhTVkfj/nw6kEEvKjoCYJdQlCh0XDqQwZ
-	agyKchQE/u2hD76s6ZBU1LjxveCTkgRLgcTkZCneGCIQFTjhvWgNe8yWI3SSf0ud03lquD3sIxVrb
-	a6/v0lcE+zv/21VsLFcgJt3SBayGAfQd/Y6dSEPAQtc3L4mhaGzSD8GOs7hQmwC6d1xH1BlyVK7Kf
-	qeNZxt3w==;
-Received: from ip6-localhost ([::1]:38596 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=k26W8xtMh0d+5SOCUDM/wjEcGZ+ELdJFPj7pdNOLbFU=; b=eU9sKqdIzMCqd8Qa6i0LHwMNqd
+	mmNkDwHYN/pMVHejqQ2Z2NWWwa+3+B7yOon25xVP1Ilph4RwGPYTL/xmsVNMKDDcO0oB5NT5wYOXu
+	NUGTw6wnDb11YE5EXp9yuV2vXKP+fvm2Oahk5CB5cSNHCYY51oKMmxOlUpvYM/HyqOMPBZV4QAZiu
+	lYRHB6loBau4EXcPG0p+l7psE5Qs5XmfnRUX0Zz1NbMkTcZR2XXIxv3dIo/O0eA6qqPoOgdrFYcO7
+	kaR1rq1UQ9dC7eEVITPCQjDfZxv53ZF/u3e6fSvwJa6Z2NCxCNQccMIB91o9vgBvC+vPG828dgVjI
+	8HWQlXgw==;
+Received: from ip6-localhost ([::1]:28018 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mmUJC-001Jhi-Cn; Mon, 15 Nov 2021 05:13:34 +0000
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f]:40490) 
+	id 1mmfEn-001ZRQ-IV; Mon, 15 Nov 2021 16:53:45 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58258) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mmUJ6-001JhZ-LJ
- for samba-technical@lists.samba.org; Mon, 15 Nov 2021 05:13:32 +0000
-Received: by mail-lf1-x12f.google.com with SMTP id l22so40245264lfg.7
- for <samba-technical@lists.samba.org>; Sun, 14 Nov 2021 21:13:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=zZoE+xQ2U7qWcLCwPm3BWxfe1Es+mpw14CoOgK3M7Ok=;
- b=mwm1VjQ772gRZ4PuPgObB+pw+oQgHGo0gH8xXfY20IrpKUmrCNqdtnQD17BsNf6flb
- fqYRtMBtI8ssq47EvKK7k7me43tk/1EnUxRmYFUbhTTxtJNsECVuv6H+9l7mM2L8kMHl
- Ti1HfiRu2dIiAJWG/R1O7ne2eNsNFDVJi1P42Sqihk2iGMQOmkczpZQDvo5Ck1SHfRH1
- 8d5la2PFPHcSPqrjh8OdXiQmYMw9LKgpnjowZpsrK7pAMT1Yo1gYkbvcuzvt1WvNazI/
- EJgF9gNnwRrNIyAXiwWOYHO5F0ojNXbNmrbx5TX26Oem6zIYnrkUfhFQ8gbRfhcbUyI0
- VenA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=zZoE+xQ2U7qWcLCwPm3BWxfe1Es+mpw14CoOgK3M7Ok=;
- b=0WCO+jgqfi9fiX5qeEEuHm1AXJTEkmXiHuSZJvitleAvsuQMHtW17qvYNwbTsQEGh8
- StNQv/vDg7HOjXyhkzsx/tdyqpOvHGH3OKMZaojhFaB7DDS+O2Gl5kMUuM/fNXZhiDSR
- ro7htz95yljQ8+7I4+vy5/WCXjigv9ejFnIL7iIsXXXOkWKGCa3ehqlR64Kae6b+cUf3
- kRyLoWDVEf71jE0/l9D1prKFM1YA7oq3RPud1J4qgNCTAxBRZ0m3pZRQlFwZviizP7CK
- cueQOvG8p3q4fMwHmfvNCdK4hsVH7IXa9eV2lPzJ7AUNRsXjK0yJ+SaoJuvYuSuXQGj9
- WqJw==
-X-Gm-Message-State: AOAM530Fu477j3guU6Y8ilQMtL6i5rrgLN7C7ZUNi1uyWizByiOD/TTy
- xPfZemroYIRFzbByBDNx2/JQ8T99/xET7lOtMp4=
-X-Google-Smtp-Source: ABdhPJxXns1wG+psRT62X8UPM7sHi3HbTaMCW/uGnIXCXyY36drmrlPsz+a6JG96myvs8cZdB598PP5mo7jAIvMlvZs=
-X-Received: by 2002:a19:770a:: with SMTP id s10mr34265127lfc.234.1636953207366; 
- Sun, 14 Nov 2021 21:13:27 -0800 (PST)
+ (Exim) id 1mmfEi-001ZRG-3M
+ for samba-technical@lists.samba.org; Mon, 15 Nov 2021 16:53:42 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=k26W8xtMh0d+5SOCUDM/wjEcGZ+ELdJFPj7pdNOLbFU=; b=RC5iI1PcWA/ptyibSOhjwYXlEC
+ WZ+xWnPJO3DCeFGpVHxCiCPwFiJgJ3Wh2aszx+vtRVG5HN73csE8UNSo+pkQqwgRRs6d4aWNoQqrV
+ h4a+LAb0aq5p169ge/pA+OuBSydzbFx9wEXXPCmORVx9dkV/lyqzZ/Tx3EHgXJZdwKMA/RWrHVt3z
+ qPvBkOs8HdqgCjt/JgPPFOWXZx2vw7Q46XomouCneAnvQ9VfQD7l3vUiE7iLiKVmnKR0DoxV/UNAK
+ DLvemwRAAiPBpkGav7sK+LmXxF37b2qjE0NRnASVcd1LN2xAdQUOFr/p+wy9KvPYR1c5ES10F8T4m
+ EBIA4MJmj1T4IeePKDGaz7lfVrRREMRN5QDDz0KQcwfFkT2dUUb99N8+JdzD6S1LPEye+5QvA9FNU
+ bp+FMyWppayr8IohSr5nlWmx5+8bWgGCncIznC0f/ANf+2CDeB1S5fo3uNgKde6jnYXOadcSydbdE
+ wk0/V1k5D25rBtjzKTqY6h+W;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mmfEg-007EZA-Q9; Mon, 15 Nov 2021 16:53:39 +0000
+Date: Mon, 15 Nov 2021 08:53:36 -0800
+To: Andrew Bartlett <abartlet@samba.org>
+Subject: Re: GitLab CI runners rebuilt
+Message-ID: <YZKQkOUG9cUzWkLC@jeremy-acer>
+References: <f4f292d60951b18d7be31def569bb6e4c23258ef.camel@samba.org>
 MIME-Version: 1.0
-References: <20211112093051.9366-1-chi.minghao@zte.com.cn>
-In-Reply-To: <20211112093051.9366-1-chi.minghao@zte.com.cn>
-Date: Sun, 14 Nov 2021 23:13:16 -0600
-Message-ID: <CAH2r5muJ14DbEax2N2p30MD_wWcteeHfH4TCJM4K_eSDsU2dBQ@mail.gmail.com>
-Subject: Re: [PATCH] fs:cifs: convert from atomic_t to refcount_t on
- tlink->tl_count
-To: cgel.zte@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <f4f292d60951b18d7be31def569bb6e4c23258ef.camel@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,73 +55,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Zeal Robot <zealci@zte.com.cm>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, chiminghao <chi.minghao@zte.com.cn>,
- Steve French <sfrench@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next pending testing
+On Fri, Nov 12, 2021 at 08:39:40PM +1300, Andrew Bartlett via samba-technical wrote:
+>I've rebuilt the GitLab CI runners and destroyed the old bastion host.
+>
+>Hopefully nothing will be noticed, but just in case there are different
+>wobbles over the weekend I figure I should tell folks.
+>
+>We need to do this every few weeks as the Rackspace images we use get
+>updated, that keeps the runner start fast and the instances more
+>secure.
 
-On Fri, Nov 12, 2021 at 3:32 AM <cgel.zte@gmail.com> wrote:
->
-> From: chiminghao <chi.minghao@zte.com.cn>
->
-> use refcount_t instead of atomic_t
-> which prevents reference counter overflows.
->
-> Reported-by: Zeal Robot <zealci@zte.com.cm>
-> Signed-off-by: chiminghao <chi.minghao@zte.com.cn>
-> ---
->  fs/cifs/cifsglob.h | 4 ++--
->  fs/cifs/connect.c  | 2 +-
->  2 files changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/fs/cifs/cifsglob.h b/fs/cifs/cifsglob.h
-> index 41e97df4e0e5..a8edaada0fea 100644
-> --- a/fs/cifs/cifsglob.h
-> +++ b/fs/cifs/cifsglob.h
-> @@ -8,7 +8,7 @@
->   */
->  #ifndef _CIFS_GLOB_H
->  #define _CIFS_GLOB_H
-> -
-> +#include <linux/refcount.h>
->  #include <linux/in.h>
->  #include <linux/in6.h>
->  #include <linux/inet.h>
-> @@ -1115,7 +1115,7 @@ struct tcon_link {
->  #define TCON_LINK_PENDING      1
->  #define TCON_LINK_IN_TREE      2
->         unsigned long           tl_time;
-> -       atomic_t                tl_count;
-> +       refcount_t              tl_count;
->         struct cifs_tcon        *tl_tcon;
->  };
->
-> diff --git a/fs/cifs/connect.c b/fs/cifs/connect.c
-> index 9637465d23db..4aad8c9acf2e 100644
-> --- a/fs/cifs/connect.c
-> +++ b/fs/cifs/connect.c
-> @@ -2318,7 +2318,7 @@ cifs_put_tlink(struct tcon_link *tlink)
->         if (!tlink || IS_ERR(tlink))
->                 return;
->
-> -       if (!atomic_dec_and_test(&tlink->tl_count) ||
-> +       if (!refcount_dec_and_test(&tlink->tl_count) ||
->             test_bit(TCON_LINK_IN_TREE, &tlink->tl_flags)) {
->                 tlink->tl_time = jiffies;
->                 return;
-> --
-> 2.25.1
->
+Thanks for the maintanence work. It's not usually noticed or
+appreciated, but stuff like this is what keeps Samba running :-).
 
-
--- 
-Thanks,
-
-Steve
+Thanks !
 
