@@ -2,43 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CFBE645942B
-	for <lists+samba-technical@lfdr.de>; Mon, 22 Nov 2021 18:44:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FA0345B03A
+	for <lists+samba-technical@lfdr.de>; Wed, 24 Nov 2021 00:31:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=G1U7Y2DEpWXAPMj+3X6PAHBJte0VDz6oH1RoB/HgIFE=; b=r34ZyaGbbBsGVHSxldkgK6TerG
-	0UicKioXLNR2jBr4KxGDuMASNA8o1twykHjDOrM7waqk65FiIWPeCB63k30a6ROpPbYgMqo/B/e70
-	ibEyASni0zdTmD240tsyfM8Oku5tJ+ZGYetgjMLDFzP/ZFskV3bjZLtyPOAWESuhxormdO1ZZGmfw
-	ktSe5Dl3cnEY7PLOy0vmOTf/U3023RzRoGTZZHmmhA+phPa0AdVJzcopo9hHhPDGnDPAWMuPYhHjg
-	GPgWqELWtZcwuyHbNVGSvAulKsPH7A7R8Q3CGT1rgQquKeCd3HquTwsVqW9YZO+wwjH795iMwYfQo
-	WfMBC/+w==;
-Received: from ip6-localhost ([::1]:36852 helo=hr1.samba.org) 
+	bh=5XDVZnMHI504HmGNfru+gax6byhGp324YgHgQ1yPoHc=; b=UDjak7DLlFV6c7RcL8TZ1cIQl4
+	1fy/7VLi7TiGHwacRgrWLdIXDCl7PUaVSzeolxTP9/rN9RlZje+/NqyK8pn5qs0CZtWKg52PsYb/a
+	Y4QSk6JQbXN4+Ro7bGNqxWUSPooIb0f7s+m0eyeB0kJqbNq/lwiPbdCwDGIqYQ/S0pWEhDrCxgxXh
+	l53u1crcl6bNx+KFozuP7X6Sth22lL/JgPPTqqoPbUiTM8AmuqQfIdnYPvDrRfwk5IL3XIE3z2CRJ
+	3CqNofGPwRteoZeR+2+Diso8yAOxwOK0IamFKYCUlcOGU0aUjswj29qBnDzhAoA2sbKfbtESgtT1Y
+	tpxoAL8w==;
+Received: from ip6-localhost ([::1]:64982 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mpDMQ-003ldu-R6; Mon, 22 Nov 2021 17:44:10 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58454) 
+	id 1mpfFJ-003zKO-7C; Tue, 23 Nov 2021 23:30:41 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58472) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mpDMG-003ldg-GV; Mon, 22 Nov 2021 17:44:04 +0000
+ (Exim) id 1mpfFC-003zK9-GP; Tue, 23 Nov 2021 23:30:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:Cc:To:From:Message-ID;
- bh=G1U7Y2DEpWXAPMj+3X6PAHBJte0VDz6oH1RoB/HgIFE=; b=Hnn5eLVUdXpGKT31wTNAuQh5uD
- C33gXLaIHEV+qL+asJeunQgZJ5P4fsqBbvGmszuJbpXTyQ1MeT1TFlGvmxY9sRKHrhRLyNg8MJJcX
- AtjexTUjPacMiQjNbtKV4XTFdffmn6mkCeEeP0RlKick2irYv8z/FeUR03DIHJA5vhK3IKj4GGv88
- VNsIa5Lil1q8DOOhDTjOaLTS9cVrCBUjiUoluMx4fuyBSwropiCpvZNksbkIT10q7Z9ROZOA6bE/M
- ZlI4Dr2QZO9JXvTDfctWb0JBVYD+r3z6aceQSsbTDkc1jyGj9J+o8fLA/KT4I7SwNzuYXxQiVkL0o
- SQPOhQz/lR+AaO/5zMhhpj0Db1WYyhmlHHdDPMNnWOZP5JkWyUZVCq8E5br06fMc2/1jM3YddT5d+
- +3ZfDjxB1d2cZNc66z+Caj6sCK4DL2lvLpoBAAg7pyuAQyyr4dY8Lz0aUGsuRhAYbX2OTuJEPKvq/
- TujiRB6IG7ZA8bp/vEmsTsAh;
+ bh=5XDVZnMHI504HmGNfru+gax6byhGp324YgHgQ1yPoHc=; b=z9Zpzdl5Wou20vWxZ21bO3OzvF
+ XN5bqyrDnWUXW4zk8u9Y7s6SWONVgs4K8yDlKyY0is4VP+9ltLgVI1ivrTYq7MrKR9oMe4KxOCDCj
+ gZQNXTToMIPyTqK6TIniWwZBuds/u5LzVSa2BXuTK6yfdcd8RrveV4KajftBn3ymLbIHNtDBv8/ep
+ EE3BpMLkFQs6SaYfYJBzYPMfvybsLDTWalv76CO0KX1oocfUO3Bs/KhAHVUiAbU9vpUMJJomKQIFZ
+ 80c5xdaPQ2pLkbb38sInKi6evaCRLLNt8SE6lO2VBfkefncRIJM6ZEJR3SgtITI6wn6FmsZbRPQhf
+ SIF1KgyBY3tzHDxs2XMDr+H56oTcMxAJFK6TFFl74XxZqGbP76g90Kv7AfkRj0z/4dlBOUQPjY5JN
+ HZU/M5Ag4F4woTrzmj2QPRW84FkLlvJ+gX5FqwUiQiDHP47ChDo6+MUevqYVY44A3eNAh7ttZa5qv
+ rlU/+se9ZphnJJsOJTBcvnm+;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mpDME-008PoI-Sm; Mon, 22 Nov 2021 17:43:59 +0000
-Message-ID: <409e2ab4b21677c183a10cf109d10ce7a2a882ea.camel@samba.org>
-Subject: Re: Partial mitigations for the Nov Samba CVEs
+ (Exim) id 1mpfFA-008csz-U1; Tue, 23 Nov 2021 23:30:33 +0000
+Message-ID: <fc493905aca034c362fb8b20f2fffeca252f98bf.camel@samba.org>
+Subject: Re: [Pkg-samba-maint] Partial mitigations for the Nov Samba CVEs
 To: Salvatore Bonaccorso <carnil@debian.org>
-Date: Tue, 23 Nov 2021 06:43:50 +1300
-In-Reply-To: <YZuiw+V9vrzrI8UL@eldamar.lan>
+Date: Wed, 24 Nov 2021 12:30:27 +1300
+In-Reply-To: <YZv1imZpBb+xIhtC@eldamar.lan>
 References: <c8187137526a42e9c370415ddcfa5aa1df2a6af3.camel@samba.org>
  <YZuiw+V9vrzrI8UL@eldamar.lan>
+ <409e2ab4b21677c183a10cf109d10ce7a2a882ea.camel@samba.org>
+ <YZv1imZpBb+xIhtC@eldamar.lan>
 Content-Type: text/plain; charset="UTF-8"
 User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
@@ -66,60 +68,20 @@ Cc: "sathieu@debian.org" <sathieu@debian.org>, seb@debian.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2021-11-22 at 15:01 +0100, Salvatore Bonaccorso wrote:
+On Mon, 2021-11-22 at 20:54 +0100, Salvatore Bonaccorso wrote:
 > 
-> Thank you helping identifying the bare minimum to pick. I'm working
-> on
+> I do not know if you have spare cycles to review what is applied for
+> Debian, but if you have I will defintively wait for your ack. 
 > 
-> this for Debian (for buster) and based on the above I have test
-> 
-> packages at:
-> 
-> 
-> 
-> https://people.debian.org/~carnil/tmp/samba/2021-11-09/
-> 
+> Regards,
+> Salvatore
 
-Great, thanks for picking this up.
+Thanks.  The patches you apply seem reasonable, on a simple read-
+though.  A full CI cycle would be needed to check more.  
 
-> 
-> (they are not signed! So anyone reading this, they should not be
-> 
-> considered production ready)
-> 
-> 
-> 
-> What is missing from here with that: The above referenced update
-> would
-> 
-> still require admins of the setups described in
-> 
-> https://www.samba.org/samba/security/CVE-2020-25717.html to apply the
-> 
-> 'username map' and 'username map script'. So a followup in the form
-> of
-> 
-> https://bugzilla.samba.org/show_bug.cgi?id=14901 as well for 4.9
-> would
-> 
-> be good to have (help on that part as well much appreciated if
-> 
-> possible).
-> 
-> 
-> 
-> I see there are patches for 4.10, so I will try to take your patches
-> 
-> for 4.9.
+Cherry-picking in the dom_sid_buf change is the right approach. 
 
-The trick there would be to take the C parts, as the new testsuite is
-Python 3.6 only anyway.  The C code hasn't changed much, I hope it will
-drop in OK.
-
-The same would apply for almost all the patches really, I'm not
-expecting big dramas to take the tested C patches from 4.10 to 4.9 but
-the more that is changed the riskier it becomes, and I don't 'do'
-untested patches :-)
+I hope this helps,
 
 Andrew Bartlett
 
@@ -130,5 +92,9 @@ Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
 
 Samba Development and Support, Catalyst IT - Expert Open Source
 Solutions
+
+
+
+
 
 
