@@ -2,49 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FA0345B03A
-	for <lists+samba-technical@lfdr.de>; Wed, 24 Nov 2021 00:31:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 448A345E694
+	for <lists+samba-technical@lfdr.de>; Fri, 26 Nov 2021 04:32:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=5XDVZnMHI504HmGNfru+gax6byhGp324YgHgQ1yPoHc=; b=UDjak7DLlFV6c7RcL8TZ1cIQl4
-	1fy/7VLi7TiGHwacRgrWLdIXDCl7PUaVSzeolxTP9/rN9RlZje+/NqyK8pn5qs0CZtWKg52PsYb/a
-	Y4QSk6JQbXN4+Ro7bGNqxWUSPooIb0f7s+m0eyeB0kJqbNq/lwiPbdCwDGIqYQ/S0pWEhDrCxgxXh
-	l53u1crcl6bNx+KFozuP7X6Sth22lL/JgPPTqqoPbUiTM8AmuqQfIdnYPvDrRfwk5IL3XIE3z2CRJ
-	3CqNofGPwRteoZeR+2+Diso8yAOxwOK0IamFKYCUlcOGU0aUjswj29qBnDzhAoA2sbKfbtESgtT1Y
-	tpxoAL8w==;
-Received: from ip6-localhost ([::1]:64982 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=rDFqm1jkQ60CUK2AAx0JS+iz3IaSCyggZtrPU/jdaf0=; b=Cr+LkxPZv9KlkjIKwrkObK5YP8
+	RBRl3MrhJoTBVWUMg8NwaE3sEK00HU9gmMNAeu8JJhcAi6SUOAd8PjUFvvDUTzhiGl8nm/NkBB6jz
+	q6rRG0GGo3k12zEDc2/zpkCpTH0J3pLNjakypTWw3B7TWppYm+S8qwDRA536Lj+YV96J/rT834dX8
+	0SNjvVnHWndhwDkVgi1Z0Nd9gr8/lp6LKlzRZsLcqC+VwtD51WP5lA5ZKGwqLo2Ra/Rm7W0SMKzMX
+	jnEO/+dDBnwR7ETZxOM0TI/IqYS1ONrZGYVX0iX8cwguB1VLpXQ8PrIgvI4sYANJIWDJhjnK2gqVX
+	1B/3Eqlg==;
+Received: from ip6-localhost ([::1]:28378 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mpfFJ-003zKO-7C; Tue, 23 Nov 2021 23:30:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58472) 
+	id 1mqRxU-004kyg-1Z; Fri, 26 Nov 2021 03:31:32 +0000
+Received: from mail-qv1-xf34.google.com ([2607:f8b0:4864:20::f34]:47004) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mpfFC-003zK9-GP; Tue, 23 Nov 2021 23:30:37 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=5XDVZnMHI504HmGNfru+gax6byhGp324YgHgQ1yPoHc=; b=z9Zpzdl5Wou20vWxZ21bO3OzvF
- XN5bqyrDnWUXW4zk8u9Y7s6SWONVgs4K8yDlKyY0is4VP+9ltLgVI1ivrTYq7MrKR9oMe4KxOCDCj
- gZQNXTToMIPyTqK6TIniWwZBuds/u5LzVSa2BXuTK6yfdcd8RrveV4KajftBn3ymLbIHNtDBv8/ep
- EE3BpMLkFQs6SaYfYJBzYPMfvybsLDTWalv76CO0KX1oocfUO3Bs/KhAHVUiAbU9vpUMJJomKQIFZ
- 80c5xdaPQ2pLkbb38sInKi6evaCRLLNt8SE6lO2VBfkefncRIJM6ZEJR3SgtITI6wn6FmsZbRPQhf
- SIF1KgyBY3tzHDxs2XMDr+H56oTcMxAJFK6TFFl74XxZqGbP76g90Kv7AfkRj0z/4dlBOUQPjY5JN
- HZU/M5Ag4F4woTrzmj2QPRW84FkLlvJ+gX5FqwUiQiDHP47ChDo6+MUevqYVY44A3eNAh7ttZa5qv
- rlU/+se9ZphnJJsOJTBcvnm+;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mpfFA-008csz-U1; Tue, 23 Nov 2021 23:30:33 +0000
-Message-ID: <fc493905aca034c362fb8b20f2fffeca252f98bf.camel@samba.org>
-Subject: Re: [Pkg-samba-maint] Partial mitigations for the Nov Samba CVEs
-To: Salvatore Bonaccorso <carnil@debian.org>
-Date: Wed, 24 Nov 2021 12:30:27 +1300
-In-Reply-To: <YZv1imZpBb+xIhtC@eldamar.lan>
-References: <c8187137526a42e9c370415ddcfa5aa1df2a6af3.camel@samba.org>
- <YZuiw+V9vrzrI8UL@eldamar.lan>
- <409e2ab4b21677c183a10cf109d10ce7a2a882ea.camel@samba.org>
- <YZv1imZpBb+xIhtC@eldamar.lan>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1mqRxL-004kyX-2s
+ for samba-technical@lists.samba.org; Fri, 26 Nov 2021 03:31:28 +0000
+Received: by mail-qv1-xf34.google.com with SMTP id jo22so6112748qvb.13
+ for <samba-technical@lists.samba.org>; Thu, 25 Nov 2021 19:31:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mattgrant-net-nz.20210112.gappssmtp.com; s=20210112;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=nuTeBeTsOgY6C/J0uG+ZASo2qhNrHC5sRFbZ5ajmj3c=;
+ b=A62t1fSDhwwjpq5PkJixXWp1OV22vJLuYQsWqrQ4qUUeyM0In4vqXQ/B3K1PedAKvO
+ WbVi15BuAia5SiJjL8MysZEBcKRUgIGQiZOqpapPIrwwLjM9FCPGXX5sGlW8PjZklByb
+ 2wIsMkssNdS6WPf/RCwDaVM1Td2SUGuEOiPeIDeY1cQFMcXSh/w++TjGaU5C264WSTMb
+ FXuVcU8nPqLXna1hevgQUQeVG27NJqvzB5ph0qEY6p+CHpF8nGoiL9sFZjAkgRbRe8x7
+ Xn37+axLPB9ifd5uk5co5VBJXQcgQVMtsyTE0SjofBMutt7bSrG1KrElxBfdBa2tXnUB
+ 5/4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=nuTeBeTsOgY6C/J0uG+ZASo2qhNrHC5sRFbZ5ajmj3c=;
+ b=sgH5plWppHrer/F17WoMPdCynwRCWVgjO9rZURrYPyZbrqqbnhd8ZrFXZ8ihdB2phU
+ /+sJmGVKOKt4qjw8FGOMSR+bj//n0Irb3x7Jl9ElZ1eHMLIpXTy03Ho/kOYSk+I7Z7qG
+ 2/imha+hVoQOPi5vhWAZaEsqXzCvTVBGrxJQQAkg2EH1nseyozja+7JFt2KDG1ypzqrx
+ T0mbpaLORyBR8/s1RK02SZR2XQnSE+jU01ydGZc864urdQDkABBt3Vtd1gM+jVXPJpvu
+ 1JwLPLVI22scD81g59fjfsF8YHjjyE71SWBXrPEYeLneWCW621x6Ge/+x3/jmUKed8RH
+ 5Zbw==
+X-Gm-Message-State: AOAM533bMVlbTkbi6y7UYvBY2bI2mqvI3CQB79oPjKi6lWkx0nl1Gipd
+ 0nJRzT2HJaoUXwxcyRhnkmMhFmkwLoENFo/MHXsJkRVCLq4=
+X-Google-Smtp-Source: ABdhPJzI2ymS9ysVAshD+XGLZ/+zpwXFdP29ihvbE5I06l39idHGADd0D83e7LVx8g1n8fnFMgMp5Ml5P4gXhZz23P0=
+X-Received: by 2002:a05:6214:19e3:: with SMTP id
+ q3mr22839712qvc.35.1637897479114; 
+ Thu, 25 Nov 2021 19:31:19 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Date: Fri, 26 Nov 2021 16:31:11 +1300
+Message-ID: <CAHA-KoMZENMX2U3vMVYUro_trOAU0qBtQYPqYtfPw7cJ8Sj7YQ@mail.gmail.com>
+Subject: Failing pipeline build,
+ https://gitlab.com/samba-team/samba/-/merge_requests/2271/pipelines
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,43 +68,19 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: "sathieu@debian.org" <sathieu@debian.org>, seb@debian.org,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- samba@lists.samba.org,
- Debian Samba Maintainers <pkg-samba-maint@lists.alioth.debian.org>,
- jmm@debian.org
+From: Matt Grant via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Matt Grant <matt@mattgrant.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2021-11-22 at 20:54 +0100, Salvatore Bonaccorso wrote:
-> 
-> I do not know if you have spare cycles to review what is applied for
-> Debian, but if you have I will defintively wait for your ack. 
-> 
-> Regards,
-> Salvatore
+Hi!
 
-Thanks.  The patches you apply seem reasonable, on a simple read-
-though.  A full CI cycle would be needed to check more.  
+Have a failing pipeline build for a patch set which I would like RFCed for
+work on for merging.  This builds cleanly on my set up at home, and
+there don't appear to be any build logs that tell me where gitlab-ci is
+going wrong for merge request 2271....
 
-Cherry-picking in the dom_sid_buf change is the right approach. 
+Thank you for your patience!  I am a bit of a green horn when it comes to
+this...
 
-I hope this helps,
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-
-
-
-
-
-
+Matt Grant
