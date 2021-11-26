@@ -2,59 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 448A345E694
-	for <lists+samba-technical@lfdr.de>; Fri, 26 Nov 2021 04:32:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1C5545E6FD
+	for <lists+samba-technical@lfdr.de>; Fri, 26 Nov 2021 05:57:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=rDFqm1jkQ60CUK2AAx0JS+iz3IaSCyggZtrPU/jdaf0=; b=Cr+LkxPZv9KlkjIKwrkObK5YP8
-	RBRl3MrhJoTBVWUMg8NwaE3sEK00HU9gmMNAeu8JJhcAi6SUOAd8PjUFvvDUTzhiGl8nm/NkBB6jz
-	q6rRG0GGo3k12zEDc2/zpkCpTH0J3pLNjakypTWw3B7TWppYm+S8qwDRA536Lj+YV96J/rT834dX8
-	0SNjvVnHWndhwDkVgi1Z0Nd9gr8/lp6LKlzRZsLcqC+VwtD51WP5lA5ZKGwqLo2Ra/Rm7W0SMKzMX
-	jnEO/+dDBnwR7ETZxOM0TI/IqYS1ONrZGYVX0iX8cwguB1VLpXQ8PrIgvI4sYANJIWDJhjnK2gqVX
-	1B/3Eqlg==;
-Received: from ip6-localhost ([::1]:28378 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=qcFugw1yqZy6uUvlriO+EjvhO35FvTnDEKLXGUIgYeM=; b=WDl6hqSR0fVjK2RDjDBWmRFrfG
+	hnNi54L/At3iUrpLOr4E76aKtoENDILd8mJ+DsFrqC1nGSLSbxJPXfiFHxaV2FVcZ0st6xRXVlykQ
+	GkjLwxwvHobTUr3lWQp3s80lysPlFprWguEwXsIz9FFFTRZEvYqt50wiCQNR3L3hHrFuVi23nbDxO
+	LOQrxFA+itjw6BP8ZNnTwJ109tgt15r8oWetL1kNgmqN5bw7OKcswpzAiw4/PUIrgRzgBZ3gopMIJ
+	YvgDVzZEsbWASNiJvBknVEwRiymjM8lo8jmHKJSgKsAn+pd2hAj1A8ijLeOoFPPaQLXVgHo/7N7ei
+	RBVOdhtA==;
+Received: from ip6-localhost ([::1]:31958 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mqRxU-004kyg-1Z; Fri, 26 Nov 2021 03:31:32 +0000
-Received: from mail-qv1-xf34.google.com ([2607:f8b0:4864:20::f34]:47004) 
+	id 1mqTJ1-004mgF-3L; Fri, 26 Nov 2021 04:57:51 +0000
+Received: from gandalf.ozlabs.org ([150.107.74.76]:34505) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mqRxL-004kyX-2s
- for samba-technical@lists.samba.org; Fri, 26 Nov 2021 03:31:28 +0000
-Received: by mail-qv1-xf34.google.com with SMTP id jo22so6112748qvb.13
- for <samba-technical@lists.samba.org>; Thu, 25 Nov 2021 19:31:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mattgrant-net-nz.20210112.gappssmtp.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to;
- bh=nuTeBeTsOgY6C/J0uG+ZASo2qhNrHC5sRFbZ5ajmj3c=;
- b=A62t1fSDhwwjpq5PkJixXWp1OV22vJLuYQsWqrQ4qUUeyM0In4vqXQ/B3K1PedAKvO
- WbVi15BuAia5SiJjL8MysZEBcKRUgIGQiZOqpapPIrwwLjM9FCPGXX5sGlW8PjZklByb
- 2wIsMkssNdS6WPf/RCwDaVM1Td2SUGuEOiPeIDeY1cQFMcXSh/w++TjGaU5C264WSTMb
- FXuVcU8nPqLXna1hevgQUQeVG27NJqvzB5ph0qEY6p+CHpF8nGoiL9sFZjAkgRbRe8x7
- Xn37+axLPB9ifd5uk5co5VBJXQcgQVMtsyTE0SjofBMutt7bSrG1KrElxBfdBa2tXnUB
- 5/4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=nuTeBeTsOgY6C/J0uG+ZASo2qhNrHC5sRFbZ5ajmj3c=;
- b=sgH5plWppHrer/F17WoMPdCynwRCWVgjO9rZURrYPyZbrqqbnhd8ZrFXZ8ihdB2phU
- /+sJmGVKOKt4qjw8FGOMSR+bj//n0Irb3x7Jl9ElZ1eHMLIpXTy03Ho/kOYSk+I7Z7qG
- 2/imha+hVoQOPi5vhWAZaEsqXzCvTVBGrxJQQAkg2EH1nseyozja+7JFt2KDG1ypzqrx
- T0mbpaLORyBR8/s1RK02SZR2XQnSE+jU01ydGZc864urdQDkABBt3Vtd1gM+jVXPJpvu
- 1JwLPLVI22scD81g59fjfsF8YHjjyE71SWBXrPEYeLneWCW621x6Ge/+x3/jmUKed8RH
- 5Zbw==
-X-Gm-Message-State: AOAM533bMVlbTkbi6y7UYvBY2bI2mqvI3CQB79oPjKi6lWkx0nl1Gipd
- 0nJRzT2HJaoUXwxcyRhnkmMhFmkwLoENFo/MHXsJkRVCLq4=
-X-Google-Smtp-Source: ABdhPJzI2ymS9ysVAshD+XGLZ/+zpwXFdP29ihvbE5I06l39idHGADd0D83e7LVx8g1n8fnFMgMp5Ml5P4gXhZz23P0=
-X-Received: by 2002:a05:6214:19e3:: with SMTP id
- q3mr22839712qvc.35.1637897479114; 
- Thu, 25 Nov 2021 19:31:19 -0800 (PST)
-MIME-Version: 1.0
-Date: Fri, 26 Nov 2021 16:31:11 +1300
-Message-ID: <CAHA-KoMZENMX2U3vMVYUro_trOAU0qBtQYPqYtfPw7cJ8Sj7YQ@mail.gmail.com>
-Subject: Failing pipeline build,
+ (Exim) id 1mqTIv-004mg6-7d
+ for samba-technical@lists.samba.org; Fri, 26 Nov 2021 04:57:48 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4J0hpt57PHz4xYy;
+ Fri, 26 Nov 2021 15:39:18 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
+ s=202004; t=1637901559;
+ bh=qcFugw1yqZy6uUvlriO+EjvhO35FvTnDEKLXGUIgYeM=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=aaYg3S2virPKnMzsM8NvxoLLv+terAdUOTEzPuanK3IWNWFcDV2Xq2/XPyIBBPzPq
+ tR+mqLwR1RSXUlRhABHfbuKKXAziR5WN5x8xziFWBB2RbUwb7vJ4TnVPckngrU1vq4
+ ppXlW++elAcw4/IWnOuV3AQ0+X7T10NbbQNpuG+n+N1kFRP/4lR9XnsT5v2F8nFgLp
+ TxEGZnJ4/kcaqI/2LmAE8MJ53UGIe5ejNDrx+9WU8JsDjDRlIEfGzZ76GCKSoVc1Y1
+ Yfy6iJZntRzEJ++u76D0dMWZBewnV6mSMuDqIBMbpOyhU1xa/+0O9qr7HxYqgwbELi
+ pe99F2bzaceFA==
+Date: Fri, 26 Nov 2021 15:39:15 +1100
+To: Matt Grant <matt@mattgrant.net.nz>
+Subject: Re: Failing pipeline build,
  https://gitlab.com/samba-team/samba/-/merge_requests/2271/pipelines
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Message-ID: <20211126153915.1a8bbf3a@martins.ozlabs.org>
+In-Reply-To: <CAHA-KoMZENMX2U3vMVYUro_trOAU0qBtQYPqYtfPw7cJ8Sj7YQ@mail.gmail.com>
+References: <CAHA-KoMZENMX2U3vMVYUro_trOAU0qBtQYPqYtfPw7cJ8Sj7YQ@mail.gmail.com>
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,19 +59,38 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Matt Grant via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Matt Grant <matt@mattgrant.net.nz>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi!
+Hi Matt,
 
-Have a failing pipeline build for a patch set which I would like RFCed for
-work on for merging.  This builds cleanly on my set up at home, and
-there don't appear to be any build logs that tell me where gitlab-ci is
-going wrong for merge request 2271....
+On Fri, 26 Nov 2021 16:31:11 +1300, Matt Grant via samba-technical
+<samba-technical@lists.samba.org> wrote:
 
-Thank you for your patience!  I am a bit of a green horn when it comes to
-this...
+> Have a failing pipeline build for a patch set which I would like RFCed for
+> work on for merging.  This builds cleanly on my set up at home, and
+> there don't appear to be any build logs that tell me where gitlab-ci is
+> going wrong for merge request 2271....
+> 
+> Thank you for your patience!  I am a bit of a green horn when it comes to
+> this...
 
-Matt Grant
+When on the page in the subject line, click on the pipeline number to
+go to:
+
+  https://gitlab.com/samba-team/devel/samba/-/pipelines/416690068
+
+Under "Build_first" you'll see a couple of red Xs for failed jobs.
+Click on the first one and you'll get a build log at:
+
+  https://gitlab.com/samba-team/devel/samba/-/jobs/1821378056
+
+If you scroll back a bit, before the clean-up, then you'll see the build
+error...  ;-)
+
+peace & happiness,
+martin
+
