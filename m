@@ -2,50 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1C5545E6FD
-	for <lists+samba-technical@lfdr.de>; Fri, 26 Nov 2021 05:57:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9527245E6FA
+	for <lists+samba-technical@lfdr.de>; Fri, 26 Nov 2021 05:54:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=qcFugw1yqZy6uUvlriO+EjvhO35FvTnDEKLXGUIgYeM=; b=WDl6hqSR0fVjK2RDjDBWmRFrfG
-	hnNi54L/At3iUrpLOr4E76aKtoENDILd8mJ+DsFrqC1nGSLSbxJPXfiFHxaV2FVcZ0st6xRXVlykQ
-	GkjLwxwvHobTUr3lWQp3s80lysPlFprWguEwXsIz9FFFTRZEvYqt50wiCQNR3L3hHrFuVi23nbDxO
-	LOQrxFA+itjw6BP8ZNnTwJ109tgt15r8oWetL1kNgmqN5bw7OKcswpzAiw4/PUIrgRzgBZ3gopMIJ
-	YvgDVzZEsbWASNiJvBknVEwRiymjM8lo8jmHKJSgKsAn+pd2hAj1A8ijLeOoFPPaQLXVgHo/7N7ei
-	RBVOdhtA==;
-Received: from ip6-localhost ([::1]:31958 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=21w45EqBRe4RkM6lvtVcYrUwF9Rp3Hur4JLbnMRA/Ng=; b=olp9L1v+c6k2P/tQwwXVNFNwnH
+	6jxQ2Un3Co/4cvbdjmjmEaKEZPps14cZSzFoQOEygLI6Gs+lGqLZ13DMs5gDJfVYouUsXJ5JUaQ/g
+	Um2W1IIQ5gZTgg7s/iNYylM0bAnWhUaaiDKLECBRrajH2EnS1Tg/A7LTbpKW7uSYNGbHPqC9jjSEZ
+	6Ah8gscds5K3dFuycrCM8U0g60Nw8zNsd2S9QtDSDU9HEL2okk6bvKS7zjthYBPneLTwwAumdQMAu
+	LNdcPKGxfhays1YDEOYYd3w7KG75d0Z5cqphTp3jwGHeMr2hkW6fRgXCULwUIO8NUqC9/XFega05B
+	/eqv9oSw==;
+Received: from ip6-localhost ([::1]:31286 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mqTJ1-004mgF-3L; Fri, 26 Nov 2021 04:57:51 +0000
-Received: from gandalf.ozlabs.org ([150.107.74.76]:34505) 
+	id 1mqTFF-004mNr-Hy; Fri, 26 Nov 2021 04:53:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58522) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mqTIv-004mg6-7d
- for samba-technical@lists.samba.org; Fri, 26 Nov 2021 04:57:48 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4J0hpt57PHz4xYy;
- Fri, 26 Nov 2021 15:39:18 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
- s=202004; t=1637901559;
- bh=qcFugw1yqZy6uUvlriO+EjvhO35FvTnDEKLXGUIgYeM=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=aaYg3S2virPKnMzsM8NvxoLLv+terAdUOTEzPuanK3IWNWFcDV2Xq2/XPyIBBPzPq
- tR+mqLwR1RSXUlRhABHfbuKKXAziR5WN5x8xziFWBB2RbUwb7vJ4TnVPckngrU1vq4
- ppXlW++elAcw4/IWnOuV3AQ0+X7T10NbbQNpuG+n+N1kFRP/4lR9XnsT5v2F8nFgLp
- TxEGZnJ4/kcaqI/2LmAE8MJ53UGIe5ejNDrx+9WU8JsDjDRlIEfGzZ76GCKSoVc1Y1
- Yfy6iJZntRzEJ++u76D0dMWZBewnV6mSMuDqIBMbpOyhU1xa/+0O9qr7HxYqgwbELi
- pe99F2bzaceFA==
-Date: Fri, 26 Nov 2021 15:39:15 +1100
-To: Matt Grant <matt@mattgrant.net.nz>
+ (Exim) id 1mqTF9-004mNi-4n
+ for samba-technical@lists.samba.org; Fri, 26 Nov 2021 04:53:53 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=21w45EqBRe4RkM6lvtVcYrUwF9Rp3Hur4JLbnMRA/Ng=; b=hitjvhjk0Nauc+gSg038ny8Icy
+ 5AvMpLRIl6HhgNH4WhrvwI+h1B4dKAlCH70CLzSr83S5lk8Jd9UGZlPtXL4n6yneCoSoLmbneLO8+
+ 1bvSXc8wT3QrWWLxyOdrrrcZvmwLMG43oSaZv7PrX43ew1qlLk0fLKvUkoTe3KtreKnBw3Bo/eepi
+ CkutIBhBG4kTZjevP2AZc7VaXGTLMeY1RgxT4NLytWx7uVMEGBRRkIUmj6VKDRGo+9+cgjbrL0ANe
+ FgWf2Lg/xsPj0mTx8W6XuWOnOdIZLzXeHcfkUHjNydkUwz+5QTPBIiZjU+O4/ValDrkJ+3JAKEtGx
+ MNdjIRSAUh0lkDvFqGFnyaieXKY1llgEmTh1ML3CTQ58InxHcMCdYHEr7QtIusRrjAEKdxYJhgaVU
+ +mK5EzuoxupMKEpf6hhQ1BI0sB55zkf1kFhUZ3PQz2ykK9UrJANS2fTksDMtO1fXPF00g1kp9aUqI
+ 5uJL2kuagU8lzpJrWNiwZVaQ;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mqTF5-0091D6-Np; Fri, 26 Nov 2021 04:53:47 +0000
+Message-ID: <fa1baa3a-13e0-94ec-7bbf-69453a2d49fc@samba.org>
+Date: Fri, 26 Nov 2021 05:53:47 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.0
 Subject: Re: Failing pipeline build,
  https://gitlab.com/samba-team/samba/-/merge_requests/2271/pipelines
-Message-ID: <20211126153915.1a8bbf3a@martins.ozlabs.org>
-In-Reply-To: <CAHA-KoMZENMX2U3vMVYUro_trOAU0qBtQYPqYtfPw7cJ8Sj7YQ@mail.gmail.com>
+Content-Language: en-US
+To: Matt Grant <matt@mattgrant.net.nz>,
+ samba-technical <samba-technical@lists.samba.org>
 References: <CAHA-KoMZENMX2U3vMVYUro_trOAU0qBtQYPqYtfPw7cJ8Sj7YQ@mail.gmail.com>
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <CAHA-KoMZENMX2U3vMVYUro_trOAU0qBtQYPqYtfPw7cJ8Sj7YQ@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------pvCSfT01sW80xRpM5hFqTG7w"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,38 +61,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: samba-technical@lists.samba.org
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Matt,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------pvCSfT01sW80xRpM5hFqTG7w
+Content-Type: multipart/mixed; boundary="------------JN6p10H5oEjxl0E2ImlULQA0";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Matt Grant <matt@mattgrant.net.nz>,
+ samba-technical <samba-technical@lists.samba.org>
+Message-ID: <fa1baa3a-13e0-94ec-7bbf-69453a2d49fc@samba.org>
+Subject: Re: Failing pipeline build,
+ https://gitlab.com/samba-team/samba/-/merge_requests/2271/pipelines
+References: <CAHA-KoMZENMX2U3vMVYUro_trOAU0qBtQYPqYtfPw7cJ8Sj7YQ@mail.gmail.com>
+In-Reply-To: <CAHA-KoMZENMX2U3vMVYUro_trOAU0qBtQYPqYtfPw7cJ8Sj7YQ@mail.gmail.com>
 
-On Fri, 26 Nov 2021 16:31:11 +1300, Matt Grant via samba-technical
-<samba-technical@lists.samba.org> wrote:
+--------------JN6p10H5oEjxl0E2ImlULQA0
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-> Have a failing pipeline build for a patch set which I would like RFCed for
-> work on for merging.  This builds cleanly on my set up at home, and
-> there don't appear to be any build logs that tell me where gitlab-ci is
-> going wrong for merge request 2271....
-> 
-> Thank you for your patience!  I am a bit of a green horn when it comes to
-> this...
+SGVsbG8gTWF0dCwNCg0KT24gMTEvMjYvMjEgMDQ6MzEsIE1hdHQgR3JhbnQgdmlhIHNhbWJh
+LXRlY2huaWNhbCB3cm90ZToNCj4gSGF2ZSBhIGZhaWxpbmcgcGlwZWxpbmUgYnVpbGQgZm9y
+IGEgcGF0Y2ggc2V0IHdoaWNoIEkgd291bGQgbGlrZSBSRkNlZCBmb3INCj4gd29yayBvbiBm
+b3IgbWVyZ2luZy4gIFRoaXMgYnVpbGRzIGNsZWFubHkgb24gbXkgc2V0IHVwIGF0IGhvbWUs
+IGFuZA0KPiB0aGVyZSBkb24ndCBhcHBlYXIgdG8gYmUgYW55IGJ1aWxkIGxvZ3MgdGhhdCB0
+ZWxsIG1lIHdoZXJlIGdpdGxhYi1jaSBpcw0KPiBnb2luZyB3cm9uZyBmb3IgbWVyZ2UgcmVx
+dWVzdCAyMjcxLi4uLg0KDQpodHRwczovL2dpdGxhYi5jb20vc2FtYmEtdGVhbS9kZXZlbC9z
+YW1iYS8tL2pvYnMvMTgyMTM3ODA1Ng0KDQouLi8uLi9zb3VyY2U0L2Ruc19zZXJ2ZXIvZG5z
+X3VwZGF0ZS5jOiBJbiBmdW5jdGlvbiDigJhkbnNfdXBkYXRlX2dldF9jYWRkcuKAmToNCi4u
+Ly4uL3NvdXJjZTQvZG5zX3NlcnZlci9kbnNfdXBkYXRlLmM6Nzc1Ojc6IGVycm9yOiB1bnVz
+ZWQgdmFyaWFibGUgDQrigJh1bmFtZV9sY2hy4oCZIFstV2Vycm9yPXVudXNlZC12YXJpYWJs
+ZV0NCiAgIGNoYXIgdW5hbWVfbGNocj0wOw0KDQpIdGghDQotc2xvdw0KDQotLSANClJhbHBo
+IEJvZWhtZSwgU2FtYmEgVGVhbSAgICAgICAgICAgICAgICAgaHR0cHM6Ly9zYW1iYS5vcmcv
+DQpTZXJOZXQgU2FtYmEgVGVhbSBMZWFkICAgICAgaHR0cHM6Ly9zZXJuZXQuZGUvZW4vdGVh
+bS1zYW1iYQ0K
 
-When on the page in the subject line, click on the pipeline number to
-go to:
+--------------JN6p10H5oEjxl0E2ImlULQA0--
 
-  https://gitlab.com/samba-team/devel/samba/-/pipelines/416690068
+--------------pvCSfT01sW80xRpM5hFqTG7w
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-Under "Build_first" you'll see a couple of red Xs for failed jobs.
-Click on the first one and you'll get a build log at:
+-----BEGIN PGP SIGNATURE-----
 
-  https://gitlab.com/samba-team/devel/samba/-/jobs/1821378056
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmGgaFsFAwAAAAAACgkQqh6bcSY5nkbN
+fw//fB/GdXLRlndALfW5QgbY77uC6VNrZJjBRJwCDF+48o/o32MqCxzMcHae5g7HkPwubOKEh9XX
+iP1XxhS8ajtSPya4SgFWNyVmtJOTdRVsaBxtuQsieNkplXl6/rMJwUue3U8c0/Qf+UjCAk5c83BE
+MrlFoOBMDl7Gu+pQVy75V8MKrolSA8dqF76cemL4X1y/HKghU0hr5KOYMfUBxBQs5mmKC+Nr+AQ4
+0TdchY9GFlktsgU/pT0lokZ+oTjlR2pj+mJW9HfnGjj2evW45tEDW3NCr4omdMX45A+ZaT/F7sOV
+2FL4I/P3gCYZExsTvot3WeToozLICjyCBgodT/bGfcnR58gFaTS0VCKR4OcZ9oCWM0P0tow3bECH
+BNK8t97fGqIXsHgHdH/k6HGzNhP0HZixwS/RRxmLn5Jl4iLc5fMQef4Gv692TnLDa9Q4tKvMwj5v
+qQY6SiZiPJyCl1aC2XDNZV4po61OKXc8W+F9U6ktubOymt9TFO+AqKpTnqAectL4aaNSa7j1Lr2V
+4NdVY0R7bsEhcvK8+x/l9MfeEYEUM4m1go9kc9TND9iwC6sFcaL0ygt0X6gljkDUCCIJ307ljC8x
+6qZlZIqGVoyHRc14cn0b6JGk1StGxMI3R/tVRV4P20m3EAFHRIgdQ3MqCFYlEPFiNqmKsJQeq3DX
+wXI=
+=xgMG
+-----END PGP SIGNATURE-----
 
-If you scroll back a bit, before the clean-up, then you'll see the build
-error...  ;-)
-
-peace & happiness,
-martin
+--------------pvCSfT01sW80xRpM5hFqTG7w--
 
