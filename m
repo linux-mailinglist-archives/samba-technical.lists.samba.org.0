@@ -2,59 +2,78 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87F0646013F
-	for <lists+samba-technical@lfdr.de>; Sat, 27 Nov 2021 20:46:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57CD7461B7C
+	for <lists+samba-technical@lfdr.de>; Mon, 29 Nov 2021 17:01:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=n/vpJ4uYs3FbtlFDc2fDvQd3F20YtZOAFpAagkWfDxw=; b=O7spIzu6tnkZE+Og1zrJAnS6IS
-	6lNz7+R7xDshnKB7KMQ8RJ6xYBgWcQ6nqHVnpNDdrwCN3fytIPVwut5xqI1dafGk5CG6T3duEhcfA
-	e91LNFjzRoQcfvzbgBq9wxybtSPzbVMh7uOjnISlR7iWvKkR4qWmDm7fm2ZhYk+Wsg8xDRA3CI2Cc
-	h33YYpL5GNaR53LdhUh+XbIP4JjPqGbGlPD8RK0JHqYOuGibfUbw8kitKtBoeXTdzUrH0Nf1gK7PE
-	XjFsh0sKnyYAkIYj7xxgqEA36L9Ktgc8dGBuTxMc9KGckl2Kr1LSmuZZwhDRBZtTD4iWTaIj8Tw0G
-	STEAsK0A==;
-Received: from ip6-localhost ([::1]:51284 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=tf96AuO5x5gjp6koQeTaZjV3TfVhaiadm4gVY/ssPY0=; b=XWUy26H2Vw03BvLtFccgGCoN7Z
+	a6fvEQrmbe+UNchfSbokIXw2C1ekSvIVRKh/a31+Z1oKx3EGRiJROzdgf1fmP6CT1zdxPKeiLyLrl
+	Vov+Tpdv7ivvYmggebHc3qCBg6J+csjtlwEVZrrffDkKzkOmYsbKj3EXXhKgJF8tdsr6SgnK6vwk3
+	6AYSAHg2YmPDpDL43mma4lkAHRzvUr4gxk7iUMLbDudTKkuHZ98ITOpZIPX70nU6mgC2jbKNUteY0
+	cpvIcJtSMLFJM8OSKKP6BjJXCGP3MNkDrZgf+kfLIcptbonYZxaZcMFMCuoyUruVlT4s1Jbs1xGVc
+	vVsFnPWA==;
+Received: from ip6-localhost ([::1]:62558 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mr3dV-0003zY-Bf; Sat, 27 Nov 2021 19:45:25 +0000
-Received: from mail-qv1-xf31.google.com ([2607:f8b0:4864:20::f31]:45904) 
+	id 1mrj4y-000U8r-8R; Mon, 29 Nov 2021 16:00:32 +0000
+Received: from smtp-relay-internal-1.canonical.com ([185.125.188.123]:44030) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mr3dL-0003zP-6I
- for samba-technical@lists.samba.org; Sat, 27 Nov 2021 19:45:22 +0000
-Received: by mail-qv1-xf31.google.com with SMTP id s9so10228280qvk.12
- for <samba-technical@lists.samba.org>; Sat, 27 Nov 2021 11:45:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mattgrant-net-nz.20210112.gappssmtp.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to;
- bh=kxbxnkZx7iziGAPlovzHsGsbSHSMGWARGH9obU/64i4=;
- b=gCELdyp5wRVtI/LZ5N/k8bOBnFLlgVPCUHtJRMEpWhRGBHYmtK+wE2WxK+I01cC05O
- E2Lu7iOV3ffjt+QPG+TmzqWDcPPQWGCPenAWSxYNA4gniWVpkcOb++Pt8FTY3rhO+zlK
- Vva0SnatdMHyigASsxF2ARYnBgJSjvusj2998XjMhMXBR2hobLvK35Otl/jdJoKbsQKy
- Ea5uZARgXoan6WK4qSlClEfFjYegEXsLSe4fhqTo10KVIi5GdsIDsXjfUmSFn+NEjcOI
- tafyZ3fU5au+F5xEt31janmdNcc6ptNIE6pu7rM9JiEx6ahloSE6p3NqKwm7S26ojsN3
- UjQg==
+ (Exim) id 1mrj4p-000U8i-JT
+ for samba-technical@lists.samba.org; Mon, 29 Nov 2021 16:00:26 +0000
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
+ [209.85.210.198])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 78CC640016
+ for <samba-technical@lists.samba.org>; Mon, 29 Nov 2021 15:35:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1638200132;
+ bh=tf96AuO5x5gjp6koQeTaZjV3TfVhaiadm4gVY/ssPY0=;
+ h=From:Subject:To:Cc:Message-ID:Date:MIME-Version:Content-Type;
+ b=IFG+lHwQP3RkS/mSaK1drPo5kbj6CASSintGwAkI5b59bXilvaTMA6ag7fPvLTIt2
+ R2+1mweyok/KPFkq9jHCAEthtd//xRbHEZVvdZg18I06W6gwLhWxR6WGoZB7Y9kagn
+ nzu7EXhYNBGQ0hFBQpLrboSbh+H5pHF0/ADuZCCmT39vSnLz63YTZuWL5+7u/lDwua
+ 8qlVbGw/+9RdJ+LffNSGvsjey2imq39YRhBG9LXonO5CGxEXwB85AMdSAqazuELhiT
+ dvNLuVqBTnaeQlfS7RpEVnU5NcPG/wWgmB8lM30q2KtqqGnjE6BB24sZj2pO8b/IEv
+ rvEum9PQoh+OA==
+Received: by mail-pf1-f198.google.com with SMTP id
+ m16-20020a628c10000000b004a282d715b2so11007537pfd.11
+ for <samba-technical@lists.samba.org>; Mon, 29 Nov 2021 07:35:32 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=kxbxnkZx7iziGAPlovzHsGsbSHSMGWARGH9obU/64i4=;
- b=GRdBzmHRp+Rg6gxoYvZBKk0LwtSLRhdPNTkhrb9sp5lWqx2LiHVHFf6ZcFuNuDItM2
- RT1bHzftSQEbHx8ivWTU4n53hYnfi5OkexUwkWgZZ0KdY7SUg+iXQryu+tW25UYlOVK5
- G2ylJQLUh5Aw9GcTa03ME06neVls5xRBXgxK+Rvq4nDpq8A6aSBNDI2YX7YAYim2Lx5q
- roJboggfCVXvx+66PFueL0fPAVqElVBAMjZ5f24qVdECmsnZcoB57pJQQ0CTrx17RRiq
- iFVCRT9tKfuDtBptiQi6L60zeXZyZmwjV5v8d//nePh/5wMFL7wpVn2dzpDWFF8UOs/s
- eBBw==
-X-Gm-Message-State: AOAM531XzxXHh8ex+38F/Uo3uOd4Coy1cn6jyh5A0K1y+qLwyqpEJJSd
- 8qd+gGuc/A4otKDc10m9JABi4BECykRhhyxbw8CQtplBZSpFiA==
-X-Google-Smtp-Source: ABdhPJyYjWdSjVkhS1cQyFRedPHDBpar/Wn9G7lTZlTAfoCebuVw55sR+sUUHGbE/bidr59WrlO7rwP9f1EiMUMjTRg=
-X-Received: by 2002:a05:6214:19e3:: with SMTP id
- q3mr33752070qvc.35.1638042312816; 
- Sat, 27 Nov 2021 11:45:12 -0800 (PST)
+ h=x-gm-message-state:from:subject:to:cc:message-id:date:user-agent
+ :mime-version:content-language:content-transfer-encoding;
+ bh=tf96AuO5x5gjp6koQeTaZjV3TfVhaiadm4gVY/ssPY0=;
+ b=YxILj0g5vN4RM+6Yqvo7mbDrCQxTJHOuPlVhArHqZPP4R6t1PZ31fJV3YXxNucuDcw
+ Tz79b/Hr7JKDatw/sNBkjQofQsAA5NkkrKHwr3mnJzXDL5pT0a6RNVoz+m7Ms53lIfi9
+ ESFGmQBZ0bsR9nMMAyC43QbgFCRG0/SDj+4P/y3D8DaY6atOROcDkIA3YPogqab4BY47
+ +qAs7sq7fz+a2As+pUj6IozDkSYFHKuUvH51VsIFYAPH+TOOS3/48pMSPsLGFvxKqXil
+ o2RfihDQgMSEcBgjcaY6+NddqMLuWjlGDRdy0PjRbp9LDKxIK9tROPQTC0lXL06KI6S+
+ Hzxw==
+X-Gm-Message-State: AOAM531nz+rzDBhRvR6fezJRvQHsLHgmdWT6Z4KVW/pL2YHK7bMeHcLI
+ qAupvqrW/UlYH7K4HEtaUMtbjUsJgfces31GifTZRgtSQeFxWs3d3818GoqgEKYjB7uXhwbdOHt
+ HCrPzDZpTYx7/Yxkv8keFAWwfg28qOiPnO87w7XikU5YyYA==
+X-Received: by 2002:a17:90a:bf8a:: with SMTP id
+ d10mr38703494pjs.67.1638200131219; 
+ Mon, 29 Nov 2021 07:35:31 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJzrtghVy2cB06KZtU+MpQ0hZ+SPUtpz89k2kZUBlz6J0QLHMTxsDRgbAg5O5FYs/Nbm1imESQ==
+X-Received: by 2002:a17:90a:bf8a:: with SMTP id
+ d10mr38703435pjs.67.1638200130843; 
+ Mon, 29 Nov 2021 07:35:30 -0800 (PST)
+Received: from [192.168.1.124] ([69.163.84.166])
+ by smtp.gmail.com with ESMTPSA id u30sm12251881pgo.60.2021.11.29.07.35.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 29 Nov 2021 07:35:30 -0800 (PST)
+Subject: Commit f980d055a0f858d73d9467bb0b570721bbfcdfb8 causes a regression
+To: len.baker@gmx.com
+Message-ID: <a8b2287b-c459-2169-fbf4-31f3065e0897@canonical.com>
+Date: Mon, 29 Nov 2021 08:35:29 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-Date: Sun, 28 Nov 2021 08:45:05 +1300
-Message-ID: <CAHA-KoMMWdtT3Mt5=2d8Ndo4-iytM+e_u8w_hy5-X1aHPivZFw@mail.gmail.com>
-Subject: RFC Merge request !2271 - DNS updates allow/deny for SAMBA_INTERAL
- dns server.
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,31 +87,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Matt Grant via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Matt Grant <matt@mattgrant.net.nz>
+From: Tim Gardner via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Tim Gardner <tim.gardner@canonical.com>
+Cc: linux-cifs@vger.kernel.org,
+ samba-technical <samba-technical@lists.samba.org>, pc@cjr.nz,
+ jlayton@kernel.org, LKML <linux-kernel@vger.kernel.org>,
+ stable@vger.kernel.org, Kamal Mostafa <Kamal.Mostafa@canonical.com>,
+ stfrench@microsoft.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi!
+Hi Len,
 
-Could some of the Samba Team please have a look at the following:
+I have a report (https://bugs.launchpad.net/bugs/1952094) that commit 
+f980d055a0f858d73d9467bb0b570721bbfcdfb8 ("CIFS: Fix a potencially 
+linear read overflow") causes a regression as a stable backport in a 5.4 
+based kernel. I don't know if this regression exists in tip as well, or 
+if it is unique to the backported environment. I suspect, given the 
+content of the patch, that it is generic. As such, it has been 
+backported to a number of stable releases:
 
-https://gitlab.com/samba-team/samba/-/merge_requests/2271
+linux-4.4.y.txt:0955df2d9bf4857e3e2287e3028903e6cec06c30
+linux-4.9.y.txt:8878af780747f498551b7d360cae61b415798f18
+linux-4.14.y.txt:20967547ffc6039f17c63a1c24eb779ee166b245
+linux-4.19.y.txt:bea655491daf39f1934a71bf576bf3499092d3a4
+linux-5.4.y.txt:b444064a0e0ef64491b8739a9ae05a952b5f8974
+linux-5.10.y.txt:6c4857203ffa36918136756a889b12c5864bc4ad
+linux-5.13.y.txt:9bffe470e9b537075345406512df01ca2188b725
+linux-5.14.y.txt:c41dd61c86482ab34f6f039b13296308018fd99b
 
-Could I please have your thoughts on the code changes, and a bullet list of
-the tests that you believe are required for the Samba test suite.
+Could this be an off-by-one issue if the source string is full length ?
 
-Here is a summary of what this patch does:
+rtg
+-- 
+-----------
+Tim Gardner
+Canonical, Inc
 
-Mechanism for DNS update host/rrnet allow/deny lists. Three functions
-dns_update_check_access(), dns_update_get_caddr() (gets subject address for
-check from A, AAAA, and PTR records), and dns_update_ipaddr_check_access()
-are backended by allow_access_flag_lo() from lib/util/access.c using the
-already existing host allow/deny access mechanism.
-
-Thank you so very much!
-
-Best Regards,
-
-Matt Grant
-<#checklist>
