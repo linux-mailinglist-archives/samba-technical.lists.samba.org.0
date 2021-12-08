@@ -2,46 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6216A46C859
-	for <lists+samba-technical@lfdr.de>; Wed,  8 Dec 2021 00:43:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CDFF46CC98
+	for <lists+samba-technical@lfdr.de>; Wed,  8 Dec 2021 05:34:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=P+cQM7QBEBe+wOXlOOUAAm4La+DvcvRf8HnlPD0GWD4=; b=lMj68+3gunneVqxd3aSVGn9/wd
-	P9YcFbQL25z//3w20vLX1F7FAwbHCJeMbxqFUa0z0OW3iUcDSLFEUfGzFEJUvUY5tr/FVX/98YoWt
-	uI8IPGxKC+MTI4HiK+F722zqPNN8JWHuXShdoubUK2R3V0Mwiy/j52GsAfr3FRunCTFD7bv4EPHpa
-	G4uEZhvcS2xDnef3lxyalPcJUPm4CKAYGuTB487Nz8xlMV+Pd82PTAzLEI/yagXowpZKpP+1BoW+x
-	PAyQK6WS8GBisO2zuikx/V7GbLYmF7Q/KGEULT8ZxIJu+j6VMRXuIFaXEe1g7+1ozZmJgcVI6Q6b1
-	U13UIO8w==;
-Received: from ip6-localhost ([::1]:32868 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=EN1o8XpoKN4as2yUaOYdrp8Cti7k7n7wDJbtCFFci+Y=; b=hWt2ITy/bibndkVoker1+5k4uQ
+	BRuSy21iShK1GQUPYYTtqQ9wdGCE74SRzGx3/OO0REPbLxbZ2FIWLslw3oa/zXvuMNdouCy2TH2rB
+	8wxGwN3wezrHz+xLPTqHxyNQnOp19ZkQF6AzBhHFV3KngWB7qrfUIgfiR6wrqlQQmkCvUplNVHKeZ
+	RppsJWXht1zZuVE1QKnZoKax+USnTyVVuPUmSFBNZ7kC83fTbMDYU8RRfkKEzmi11UJRwMQPghR0q
+	+nxhIII7BLU4AFD6FWkdOno069qKyDLdBoloGUfIxlrR7OgIugPmZMacuakn69DSgfQRvIIEmmYrh
+	+ZD1yBVA==;
+Received: from ip6-localhost ([::1]:33602 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1muk6w-003xwW-Jw; Tue, 07 Dec 2021 23:43:02 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54310) 
+	id 1muoe0-003ynr-SL; Wed, 08 Dec 2021 04:33:28 +0000
+Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:43523) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1muk6r-003xwN-8G
- for samba-technical@lists.samba.org; Tue, 07 Dec 2021 23:43:00 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=P+cQM7QBEBe+wOXlOOUAAm4La+DvcvRf8HnlPD0GWD4=; b=Up2u3VJZTOP4aSJelOKXs8QpLE
- vizqdUIJjZAWVBVJWubnqkUi/UQ9sAxGx1p7qKyVfh3AesOIhtM67rXA4C3iSNcCyCvCN+QPscfMU
- zGPhU+dIT53F9HPHucLBkJ47ZpxY0327kD+IPF1sSVNqXJiX+90NUmP5dqJamZCB9S90dIqpHQK4/
- mp6KEaXqztg/d0nVZAix6BEqVZuQam5Fs0ZZLum91OJ8DbnwU97eHQZVzPCTze+OZl0HFeLnkL1gB
- AgEtnSOt69xCpX23AToRG9Z4CJFRj3Eyg6tHRG4bXgY7Tfrz0xjHW9BzpkVoUUOZKBKznVS4atE9e
- J4tjCyuypyXhr8gstmtqE5ruLVEQUkRTlmJPKdyRhnZJqilq2JugVo3O4A/H0OmI8APpRDkDBcbsq
- rmbdhG+PDyuItCxyVLnIZx140vwmkvENRHgfQ4iCgZCppZuZvOmDsIZfWQe25xbPelP1Tc2JAcZkf
- q93tp7DyS2rdhxVnbyfwP1sf;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1muk6n-001f5W-Gc; Tue, 07 Dec 2021 23:42:53 +0000
-Date: Tue, 7 Dec 2021 15:42:50 -0800
-To: Steven Engelhardt <steven.engelhardt@relativity.com>
-Subject: Re: Duplicate SMB file_ids leading to Windows client cache poisoning
-Message-ID: <Ya/xevFuEmiugek+@jeremy-acer>
-References: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
+ (Exim) id 1muodv-003yni-GX
+ for samba-technical@lists.samba.org; Wed, 08 Dec 2021 04:33:26 +0000
+Received: by mail-lf1-x12e.google.com with SMTP id b40so3009035lfv.10
+ for <samba-technical@lists.samba.org>; Tue, 07 Dec 2021 20:33:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=EN1o8XpoKN4as2yUaOYdrp8Cti7k7n7wDJbtCFFci+Y=;
+ b=lzk6Ja0MRaTF0ii1RSV3qpELQCzRZ2oDBAf+jsOusYOmESpT5SRM9S8Jyg6NSP9xgI
+ ifjeG5Zs1YF+A6Xp2qkVaN36SIzfuOo9wfXseZt42E6Wasnu1Rc99acbnndCpuYWAGat
+ dtny7bZZ8z+x4PJubJQy1S/B/dtf9wOHSS3MFT/bskThLk2EHJfoGnLuYtlpIUxyFCQW
+ P1dv3UwwoPGIuhnggYWQ1/ZMZs8J6nSCA0DwYvtT8R90GSK4ak1yGa27F9BqmEKKC+ER
+ JpRB1E53P2f97NcLueqUpt98tZWAHZCZIvb8Hu9c1BH1B4CXCRWhJIjbp1n2rmuc/1XH
+ SK6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=EN1o8XpoKN4as2yUaOYdrp8Cti7k7n7wDJbtCFFci+Y=;
+ b=HnOoEnAjO8JqHuIlcmekHdXQGV5rDKaN8zpuZ1hqRIqLEfPj+xAzHKLWceRKjrPazj
+ 2J0Qk0Lhb+rOZQ3A21alRyKl+Rb2k5o4EHLAwNlYccKapIL0Qd5DW5WgyTPCt7odjwOc
+ kpLVyTTGRury2xV9tBBEjaK/pTrH6Sx4R96skbx8VjcDP4+DWjXFdeULD+fqBO2UKktN
+ /N3Kkb1hYfUCwi5I1ia9Gg6kQ1PRJXeNbGnZuHidjsZ0DwaYqOpZgBOnIfnr+2T8oiV+
+ arkOlBMjBPfnaK9Wv98atJr4akdZj+lK0btH9Q+pk2BQ+4UWjpXbIQSq4wiUPxbju7HN
+ U8XA==
+X-Gm-Message-State: AOAM532LXUVrcLK2bIfRRwPxia5VYmBQfahXdMrzBRFi2yLGVOAIEuHT
+ EqivpNs68C9nUAoD2VnHOwo3pUknVdxVYRSaIsc=
+X-Google-Smtp-Source: ABdhPJwIdiWlGyg9QKfiqlNkmB52N2pXz78n6hNt6wd/g8Q34QRsZhd+Zv1DyXbdwQWK8+nGuCI+uiTucfKvH8IFsow=
+X-Received: by 2002:a05:6512:3991:: with SMTP id
+ j17mr45568787lfu.545.1638938002185; 
+ Tue, 07 Dec 2021 20:33:22 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
+References: <20211207115420.18713-1-vincent.whitchurch@axis.com>
+In-Reply-To: <20211207115420.18713-1-vincent.whitchurch@axis.com>
+Date: Tue, 7 Dec 2021 22:33:10 -0600
+Message-ID: <CAH2r5mtxkO9whCCKrFXMYNr26RcShx-QT4_EZvLJj52AkQjWqw@mail.gmail.com>
+Subject: Re: [PATCH] cifs: Fix crash on unload of cifs_arc4.ko
+To: Vincent Whitchurch <vincent.whitchurch@axis.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,87 +68,61 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- jra@samba.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>, Hyunchul Lee <hyc.lee@gmail.com>,
+ Ronnie Sahlberg <lsahlber@redhat.com>, Steve French <sfrench@samba.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>, kernel <kernel@axis.com>,
+ Namjae Jeon <linkinjeon@kernel.org>, Steve French <stfrench@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Dec 07, 2021 at 11:18:40PM +0000, Steven Engelhardt via samba-technical wrote:
->Samba Team,
->
->While trying to roll out recent versions of Samba, we believe we have discovered a bug in Samba related to SMB file id generation which can lead to Windows SMB clients to observe wrong data.
->
->Samba version 4.11.1 changed how it generates SMB file ids to be instantiation time-based. This change introduced a bug in that it made it possible for two different files on the same volume to have the same file id, in volation of the SMB spec.  This appears to lead to cache poisoning in the Windows SMB client-side cache, in which two different files share a common cache key, which can cause Windows SMB clients to observe wrong data (e.g. the length of a file is reported incorrectly).
->
->We first noticed this with a C# client program on Windows which created 10,000 files in parallel, each of a different file size (e.g. the first file has size 1 byte, the second has size 2 bytes, etc.), and then checked the file sizes of each of the files one-by-one using Directory.EnumerateFiles() and FileInfo.Length, noting any time that a file does not have the correct expected size.
->
->This bug is particularly easy to trigger on Ubuntu 18.04 in WSL2 on Windows 10, as it appears to have an effective itime clock resolution (based on observing returned st_ctime and st_mtime from `stat(2)` system calls) of 10ms.  In other words, if you can create two files on a WSL2 machine within 10ms of each other, its exceptionally likely that they will be assigned the same itime and hence have the same SMB file id.  However, we have also observed this bug in the wild on Ubuntu 16.04 VMs and Ubuntu 18.04 VMs running in Azure.  Obviously, the better resolution of the clock from stat(2), the less likely this bug is to trigger.
->
->We tested a number of different Samba versions and observed the following:
->| Samba Version | Date Tested | Status |
->| ------------- | ----------- | ------ |
->| 4.10.18       | 2021-11-26  | Good   |
->| 4.11.0        | 2021-11-26  | Good   |
->| 4.11.1        | 2021-11-26  | Bad    |
->| 4.11.3        | 2021-11-26  | Bad    |
->| 4.11.7        | 2021-11-26  | Bad    |
->| 4.11.17       | 2021-11-26  | Bad    |
->| 4.13.10       | 2021-11-26  | Bad    |
->| 4.13.11       | 2021-11-26  | Bad    |
->| 4.13.14       | 2021-11-26  | Bad    |
->| 4.14.10       | 2021-11-26  | Bad    |
->| 4.15.2        | 2021-11-26  | Bad    |
->
->Using git bisect, we traced the bug to the commit 459acf2728aa0c3bc935227998cdc59ead5a2e7c.
->
->We can also deliberately trigger the bug by creating multiple files in a directory with identical itimes by manually setting the user.DOSATTRIB xattr, and observe that these files are served with duplicate SMB file_ids, in violation of the SMB protocol.
->
->We wrote a simple patch to temporarily remove itime-based file id generation which has resolved this bug for us:
->
->diff --color -Naur samba-4.13.11.orig/source3/modules/vfs_default.c samba-4.13.11/source3/modules/vfs_default.c
->--- samba-4.13.11.orig/source3/modules/vfs_default.c	2021-08-09 02:20:55.000000000 -0500
->+++ samba-4.13.11/source3/modules/vfs_default.c	2021-11-30 15:40:00.089302200 -0600
->@@ -3003,10 +3003,6 @@
-> {
-> 	uint64_t file_id;
->
->-	if (!(psbuf->st_ex_iflags & ST_EX_IFLAG_CALCULATED_FILE_ID)) {
->-		return psbuf->st_ex_file_id;
->-	}
->-
-> 	if (handle->conn->base_share_dev == psbuf->st_ex_dev) {
-> 		return (uint64_t)psbuf->st_ex_ino;
-> 	}
->
->We would appreciate any guidance on the correct long-term resolution of this issue.
+merged into cifs-2.6.git for-next
 
-Thanks Steven,
+On Tue, Dec 7, 2021 at 6:11 AM Vincent Whitchurch via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> The exit function is wrongly placed in the __init section and this leads
+> to a crash when the module is unloaded.  Just remove both the init and
+> exit functions since this module does not need them.
+>
+> Fixes: 71c02863246167b3d ("cifs: fork arc4 and create a separate module...")
+> Signed-off-by: Vincent Whitchurch <vincent.whitchurch@axis.com>
+> ---
+>  fs/smbfs_common/cifs_arc4.c | 13 -------------
+>  1 file changed, 13 deletions(-)
+>
+> diff --git a/fs/smbfs_common/cifs_arc4.c b/fs/smbfs_common/cifs_arc4.c
+> index 85ba15a60b13..043e4cb839fa 100644
+> --- a/fs/smbfs_common/cifs_arc4.c
+> +++ b/fs/smbfs_common/cifs_arc4.c
+> @@ -72,16 +72,3 @@ void cifs_arc4_crypt(struct arc4_ctx *ctx, u8 *out, const u8 *in, unsigned int l
+>         ctx->y = y;
+>  }
+>  EXPORT_SYMBOL_GPL(cifs_arc4_crypt);
+> -
+> -static int __init
+> -init_smbfs_common(void)
+> -{
+> -       return 0;
+> -}
+> -static void __init
+> -exit_smbfs_common(void)
+> -{
+> -}
+> -
+> -module_init(init_smbfs_common)
+> -module_exit(exit_smbfs_common)
+> --
+> 2.33.1
+>
+>
 
-I created https://bugzilla.samba.org/show_bug.cgi?id=14928
-and assigned it to Ralph as he created 459acf2728aa0c3bc935227998cdc59ead5a2e7c.
 
-Unfortunately I reviewed that change, so I'm also responsible :-(.
-
-If you create a Samba bugzilla account you can add yourself
-to the bug to follow along.
-
-Could you share any test code/scripts you have for this
-so we can ensure we have a good regression test for this
-when we fix it ?
-
-The code you have for:
-
-"deliberately trigger the bug by creating multiple files in a
-directory with identical itimes by manually setting the user.DOSATTRIB
-xattr, and observe that these files are served with duplicate SMB file_ids,
-in violation of the SMB protocol."
-
-would be really useful in creating a regression test for this !
-
+-- 
 Thanks,
 
-Jeremy.
->
+Steve
 
