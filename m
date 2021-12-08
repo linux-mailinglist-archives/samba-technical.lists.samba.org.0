@@ -2,210 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07B7246DD15
-	for <lists+samba-technical@lfdr.de>; Wed,  8 Dec 2021 21:29:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EFEF546DDFB
+	for <lists+samba-technical@lfdr.de>; Wed,  8 Dec 2021 23:03:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=JDPoddv5O+Flf9TkHugTDvRejT8wxnjSmbxon16I68A=; b=N1WOKK5A177yPkUjHpn5OKjmy4
-	TuEG2Wdi45vb7E63fXnNFBndtYeuaMkRblx3XbJSk7Ad8uVRfemQSythO6XShJximSiDhQGjpWa5R
-	iW42L6rpfZvHwVtuLruQFAEpbYZM1ylVs5yKranlBIhyG0XdFT+fQQDEdmXqSFnOCE0Gt5m0VGXUt
-	+kGwub6QS7xumN9s49w/ZDYz3edA8BiUgmverh5kIjKOSYFppJfBkX0kE5LgWuP7AFeeHxkVcvW3K
-	84X0cN/Grate3VwkCfWEBu2WZgnw2KV6/xNut9Xj8ptSFgB9YWUfGKFJDeVy8DEyL4InoHmVxr4sR
-	X1R81PxQ==;
-Received: from ip6-localhost ([::1]:48046 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=9bcucxe5NTFSp6ukAi0nP88vBhggBfeYwpWyFwBWVKE=; b=auP4d/3JfydXup/geEMwmUA3O8
+	Ua8czRhakF2F8G9jBcGBytTBq3WhqBcwngJt8hdr7+IhSd99RVNrmiP5+JTLF5JNymvmrVyZwe5Aj
+	JR4kAYA3Xvn4DJYslelFDcOSosYUu0mP3l/6LhTAPscHRTeWT7w1yCo/xYqUxRid6rt5bWByQaVLh
+	ArP7zH5JPc4bdWJnhxPkc2ZNWg29D+GrCPW8x/Umd4dQ4064pQYf/cyqnrMnBl6Xb0vqKcX2CYpWP
+	523gyF9SVFmZt1wk7nLevikOTMUB6IRk9vMuQHXcst1K5oxnVyErQZkt07jL+UtICu/wOJrW7guWz
+	TPvBgvyA==;
+Received: from ip6-localhost ([::1]:48756 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mv3Z5-004PRG-RL; Wed, 08 Dec 2021 20:29:23 +0000
-Received: from mx0b-002bd802.pphosted.com ([148.163.155.76]:6178) 
+	id 1mv51X-004PxL-DA; Wed, 08 Dec 2021 22:02:51 +0000
+Received: from p3plsmtpa09-09.prod.phx3.secureserver.net
+ ([173.201.193.238]:58946) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1mv3Yy-004PR7-J6
- for samba-technical@lists.samba.org; Wed, 08 Dec 2021 20:29:21 +0000
-Received: from pps.filterd (m0146914.ppops.net [127.0.0.1])
- by mx0a-002bd802.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 1B8IbtJm028004;
- Wed, 8 Dec 2021 14:08:12 -0600
-Received: from nam10-bn7-obe.outbound.protection.outlook.com
- (mail-bn7nam10lp2105.outbound.protection.outlook.com [104.47.70.105])
- by mx0a-002bd802.pphosted.com (PPS) with ESMTPS id 3ctcy2hs15-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 08 Dec 2021 14:08:12 -0600
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BmA1AcYvwR26GXefT5vTxk1l16KdUbskLIloxjB9uzKRR6JpYoVkhmfCtgG1dheVA8knWth5WKGQ9dNAy9SdjZhwCYlgwxIVSrcDOKJeb2zNkvelYESFxYg/Kei+U050fLECMH94guMigeWNlAuYk0BCcQdhEeJrDhrAMhzFXbs6D2ZAT/CwOpocr3wj8ErscJiAapaPcavzeK9Aus4QJQ6ZgW05Ce4sZn254GQal13tncbxJeV1DaVjJ9sU7ZLNg9v/0FQZV7Gux0AAg9u7IdCGUChVMtYgRHCfadTq69gU5L7EP/s/Utp1MPoundq+URmGR9LIcC1AwAm1l7XR1A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JDPoddv5O+Flf9TkHugTDvRejT8wxnjSmbxon16I68A=;
- b=WRs+f/LTgCAHcvFvbIRW82TRkm1yDmBRCrBPEEXXSr/ofpn89IOrORbOUPhNVW2/To8BNaK5zafkRFuvVk8aTwv7cID4f3+uv+z0qe0DzGq/qoVU+F2QFNrpvRV2sHedMOWoenparG5RX9ifTBB0itQIzcftBf5Pp4XrAmQ2wJ+cqliuFayzZk8u9z5HuvuI5moBzhVQY7a0JUvNrzv1UrFByCl1DGAckN9eqWcTyZTA8v8xHlv6kWK4XmE5aibUrBY7zVxdaDStJPrhih83boqtoU6xSeCUcP3Gt5j1BKY12Z+3tGPe6SaiV0YMNs+xQhm3Mptfe59SF+kv10oUMQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=relativity.com; dmarc=pass action=none
- header.from=relativity.com; dkim=pass header.d=relativity.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=relativity.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JDPoddv5O+Flf9TkHugTDvRejT8wxnjSmbxon16I68A=;
- b=hG7J3uy4HVyflW0hkYF8cXK+f0lbCfr53UKrZ8KbAeYwWg2XRMwSpoCxuM3NHdyZCntJxj2qAib299ssfAWbANIpHAR8E4oHZfJb4ysdwYdOKH5+mJDKOKN0OhJH9Vie+7bIv9aOMJitJ6ogfRw1Wr6cLi9smS+3DG/2/QVIb1SZWtce6BIir09+jR0pyp2GR8SOY+FlpCR0v3NaBKTuMvwcI8CxecXZC8ZwqchMO1EGVYlJj2mU3KW9l2CZ/AOsgO2jhfQjzAMYX1CJnP4PKmaz7K+vHsDrEMPdFIkr529282klRI9N6iD4Wv/sufW6fpzbiOSVE8IkTQlemGWfhA==
-Received: from CH2PR12MB4152.namprd12.prod.outlook.com (2603:10b6:610:a7::8)
- by CH2PR12MB4215.namprd12.prod.outlook.com (2603:10b6:610:ab::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4778.13; Wed, 8 Dec
- 2021 20:08:10 +0000
-Received: from CH2PR12MB4152.namprd12.prod.outlook.com
- ([fe80::59d:27e5:56a2:513b]) by CH2PR12MB4152.namprd12.prod.outlook.com
- ([fe80::59d:27e5:56a2:513b%8]) with mapi id 15.20.4755.024; Wed, 8 Dec 2021
- 20:08:10 +0000
-To: Ralph Boehme <slow@samba.org>, "samba-technical@lists.samba.org"
- <samba-technical@lists.samba.org>
-Subject: RE: Duplicate SMB file_ids leading to Windows client cache poisoning
-Thread-Topic: Duplicate SMB file_ids leading to Windows client cache poisoning
-Thread-Index: AdfrvsECucADkDAcQeeM2h+0DdErwgAP7EgAABr8tsA=
-Date: Wed, 8 Dec 2021 20:08:10 +0000
-Message-ID: <CH2PR12MB415202EB8137713529ECEF6E9F6F9@CH2PR12MB4152.namprd12.prod.outlook.com>
+ (Exim) id 1mv51Q-004PxC-2q
+ for samba-technical@lists.samba.org; Wed, 08 Dec 2021 22:02:48 +0000
+Received: from [192.168.0.100] ([98.118.115.249]) by :SMTPAUTH: with ESMTPSA
+ id v4KRmoUsPjHgNv4KSmWppA; Wed, 08 Dec 2021 14:18:20 -0700
+X-CMAE-Analysis: v=2.4 cv=LM2j/La9 c=1 sm=1 tr=0 ts=61b1211c
+ a=T+zzzuy42cdAS+8Djmhmkg==:117 a=T+zzzuy42cdAS+8Djmhmkg==:17
+ a=IkcTkHD0fZMA:10 a=JqEG_dyiAAAA:8 a=S7LNXbijaLDHmeZnjoMA:9 a=QEXdDO2ut3YA:10
+X-SECURESERVER-ACCT: tom@talpey.com
+Message-ID: <1cd1e3f9-1773-2ba9-24f2-f7a0c4f49cbd@talpey.com>
+Date: Wed, 8 Dec 2021 16:18:20 -0500
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.0
+Subject: Re: Duplicate SMB file_ids leading to Windows client cache poisoning
+Content-Language: en-US
+To: Steven Engelhardt <steven.engelhardt@relativity.com>,
+ Ralph Boehme <slow@samba.org>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 References: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
  <d37f9e09-fdca-07c8-ac5c-b5e859930b9e@samba.org>
-In-Reply-To: <d37f9e09-fdca-07c8-ac5c-b5e859930b9e@samba.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-dg-ref: =?utf-8?B?UEcxbGRHRStQR0YwSUc1dFBTSmliMlI1TG5SNGRDSWdjRDBpWXpwY2RYTmxj?=
- =?utf-8?B?bk5jYzNSbGRtVnVMbVZ1WjJWc2FHRnlaSFJjWVhCd1pHRjBZVnh5YjJGdGFX?=
- =?utf-8?B?NW5YREE1WkRnME9XSTJMVE15WkRNdE5HRTBNQzA0TldWbExUWmlPRFJpWVRJ?=
- =?utf-8?B?NVpUTTFZbHh0YzJkelhHMXpaeTA0Wm1JM05XUXdOUzAxT0RZeUxURXhaV010?=
- =?utf-8?B?WVRVMU55MHdPR1F5TTJVNE1UbGtORGxjWVcxbExYUmxjM1JjT0daaU56VmtN?=
- =?utf-8?B?RGN0TlRnMk1pMHhNV1ZqTFdFMU5UY3RNRGhrTWpObE9ERTVaRFE1WW05a2VT?=
- =?utf-8?B?NTBlSFFpSUhONlBTSXhNVEV6SWlCMFBTSXhNekk0TXpRMk56WTRPVEk1TXpB?=
- =?utf-8?B?NE5EY2lJR2c5SW5CQlZVaGliSEU0VGxreWNETjJURkZOVHpOT2QxUkpibkpE?=
- =?utf-8?B?V1QwaUlHbGtQU0lpSUdKc1BTSXdJaUJpYnowaU1TSWdZMms5SW1OQlFVRkJS?=
- =?utf-8?B?VkpJVlRGU1UxSlZSazVEWjFWQlFVcDNSMEZCUVdacmR6VlRZaXQ2V0VGV2JV?=
- =?utf-8?B?WTNlR2RJV0hFMVJWZFpXSFpIUVdSbGNtdFJTMEZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVRklRVUZCUVVGelFtZEJRVUZCUVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGRlFVRlJRVUpCUVVGQkswWldlV3hSUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkJTalJCUVVGQ2FFRkhVVUZhUVVKNVFVZFZRV04zUW5wQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVW?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlowRkJRVUZCUVc1blFVRkJSMDFCV1hkQ1prRkhUVUZr?=
- =?utf-8?B?VVVKNlFVaFJRV0ozUW5SQlJqaEJXVkZDZFVGSWEwRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRlJRVUZCUVVGQlFVRkJRMEZCUVVGQlFVTmxRVUZCUVZsM1Fq?=
- =?utf-8?B?RkJTRTFCWkVGQ2RrRkhNRUZZZDBKM1FVZFZRV05uUW5wQlJ6aEJZbWRCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVRkJRVUZDUVVGQlFVRkJRVUZCUVVsQlFVRkJRVUZL?=
- =?utf-8?B?TkVGQlFVSnFRVWhWUVdOM1FqQkJSemhCWWxGQ1prRklRVUZoUVVKd1FVZHpR?=
- =?utf-8?B?VnBSUWpWQlNHTkJZbmRDZVVGSFVVRmpkMEZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlJVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?Rm5RVUZCUVVGQmJtZEJRVUZIVFVGa1VVSjZRVWhSUVdKM1FuUkJSamhCWTBG?=
- =?utf-8?B?Q2IwRkhPRUZpWjBKc1FVYzBRV1JSUW5SQlIwbEJXbEZDZVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVkZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZEUVVGQlFVRkJRMlZCUVVGQldYZENNVUZJVFVGa1FVSjJR?=
- =?utf-8?B?VWN3UVZoM1FucEJTRTFCWW1kQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVKQlFVRkJRVUZCUVVGQlNVRkJRVUZCUVVvMFFVRkJRbXRCU0dk?=
- =?utf-8?B?QldIZENha0ZIT0VGYVFVSnNRVWhOUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkZRVUZCUVVGQlFVRkJRV2RCUVVGQlFVRnVa?=
- =?utf-8?B?MEZCUVVkVlFXSlJRbWhCUjJ0QllrRkNaa0ZIUlVGYVFVSnJRVWhKUVZwUlFu?=
- =?utf-8?B?cEJTRTFCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCVVVGQlFVRkJRVUZCUVVO?=
- =?utf-8?B?QlFVRkJRVUZEWlVGQlFVRmhRVUpxUVVoQlFWbDNRbnBCUmpoQldYZENka0ZI?=
- =?utf-8?B?VVVGYVVVSjZRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFrRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkpRVUZCUVVGQlNqUkJRVUZDZDBGSVowRllkMEpxUVVjNFFW?=
- =?utf-8?B?cEJRbXhCU0UxQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?B?QlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZC?=
- =?utf-8?B?UVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJR?=
- =?utf-8?B?VUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFV?=
- =?utf-8?B?RkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVG?=
- =?utf-8?Q?BQUFBQUVBQUFBQUFBQUFBZ0FBQUFBQSIvPjwvbWV0YT4=3D?=
-x-dg-rorf: true
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 2f6122fa-ab6b-415a-9c5f-08d9ba867567
-x-ms-traffictypediagnostic: CH2PR12MB4215:EE_
-x-ms-oob-tlc-oobclassifiers: OLM:7219;
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam-message-info: D7RvY5En2aw81J+FP8lcCl5qXwVt3OH42eKbLFOytCLO/HeVSQG99VMQaj8II7YXQXoztwlNoS8Td+f51WtT88T9jOnmq4xIZTMmRVfnHHxIJiq30p3A0HKDYE1qmW5uPa9gQNSoANrJG/yuMlgbiMX+suRmkmMO7QXUwImW1/y10AYj8GPAhYcmZttoowIpw8zcUAA5MsXs9HS3MmKVJXKQ4Mca295QDUt31UJPw40FoQsUvb9G5sGEjssgY8oGgYfFQhYVac2S74ndFUWmI96IVGL+mHMxq1BE+svLoD3OOym1ng/LIthWQOIiWopyPRroU0hA5uNv77VF6h9fKL19GaJ4MimYPXeIMknfNnWfhSZSzG6hZnSZ5NvWsg1f3Koo0RPMxVh+KWsCM01UEV5uTQUvQFrRAVXEAWNgJZFJKkojq9RX/6fll0JuB3Ubgc/RmKwZtnr5TazABaQngrT5FDkUkkTbtzYI6uw5zVhlFPpBvX4mQ6uv4uOyVnjjCZxUprbcsuYoQchxgAqYmWB3F3u8wqlQoBBnkwd+AiTXU8J19txyfjTjoeW3edy0ZKq5j627ylj/b77Pert4fxQuKNdix+0758eneT1jiFgVatfH90u3VRLqJ/0kp8uMXVmV4L/9HE2C4mn87siIy/+sE5dSWJmMWAj0SGkj/xNXx2RndTh/cziw7JQ9KonbMFAVWVM0+ABCrGqPOJEXq20MygOvg8mnDJJa2gg5haol7GVyTNnHCui3FZcO9I2bSJW3c1xfuiJI2bsTN3ZXjqftnca2UPpGphxmptesWhc=
-x-ms-exchange-antispam-messagedata-chunkcount: 2
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?YjVJNlFpTlI0bzhRY1Zxd2ltaThWbXVLRTRtMy8wMlJiODhpd1I0eEQyZW1w?=
- =?utf-8?B?TDFyc2RuU1pQaGZ2WXg3MDZ0OWNEOUZzQXp1QkR0c3psSlFqaGVENnpYaWdM?=
- =?utf-8?B?Z2RuMWpBM29WS0RCdTdPb3c2aXFpNEpKNFdOemRhcTFVT2dDZWRFZFJFWENF?=
- =?utf-8?B?a01naTNZeDRPSVY1QzNuWXpzQ0x2V09HZzFsczMvUkxPQUNobW1XQzNMM3VP?=
- =?utf-8?B?QlVCL1RCa1RXYlJodnMxaXJvMWRuUERvdEdRTUVxV2syQXBBaXZjNXpoRTUr?=
- =?utf-8?B?Szh6ZHJpd2MxNElVV2xKUE9zeWFnNWpLVVBySFJBa1NWRldmSkl0c1JmMktx?=
- =?utf-8?B?Qmx6L3BvSU5nZnhMK2hBTlA2REhTOHozY1RXS0FZeHZGQUhNUzd5S2lVZkRq?=
- =?utf-8?B?MHppZitnY3RmcnUxbmNzNkY2WE9wQ2x1cjFjbjhjSTA3RVNTK214Q3NTSUdo?=
- =?utf-8?B?aWRqeFhhaHE3eXRVZWpsOEFPMkVna213bUhqa0tqRGo5c2dRc21lWlRBdzRJ?=
- =?utf-8?B?c29tOXZDUXQ1RnRLQU5aY0FxRTcwc2ZoQWV3Y3JtOTcwWEpLRWNiRldCc3Uv?=
- =?utf-8?B?dG1TWmN5OWxiMHk0MndrSHBkMklwamovTVpNd3l5VGgwSTlxMlU1R0pFYk91?=
- =?utf-8?B?U0tPbkxCdUE4TG5saHhjRTVOVklaY2krUWFkYUlzNlVmaFY0SHJHTlNLUmlt?=
- =?utf-8?B?NjlnSWFFRFIyLzZTV1FEc2RVZlJuQUFYN21Gc2w3Snh5MmcrMTMwU3Y4dHdm?=
- =?utf-8?B?OWFSeS9JUWRGRzFudmh6NFlXaFdmQi9IYVRCdUtzbnk0bDl0R3FGOTZwNkd1?=
- =?utf-8?B?czRNMGVnMDlTdFFHaFpCMThlUDM2TTJycmFYNGc0bmZwd3haUit2cUVvYUVt?=
- =?utf-8?B?UXczdXl1bml0a1NYcFdhcWcwWjVtK1B4Q0F2NTFSd3dmeVBpQm0vd0d2ekdB?=
- =?utf-8?B?eFhYcXdXaFZVL1ZDQzY3eGlPWTNXOWtzUVRUVk42cFR0M29ZRVE3RzFQeUJF?=
- =?utf-8?B?N0ZMMHZRbXFUc1hHWFlQUzBMNjF6U28rQjJJOGQwUEh3cVB3TG5MMnlGZDJJ?=
- =?utf-8?B?KzRBWUlScm02WCtpaGJnaWJxa2ZKMEhsaUlYSm82YlNJMGxDME5JR29YblZ2?=
- =?utf-8?B?T0JMeWRsTXczS0xaSi80ZWJvNi9KeWN0WkIrNU9JN0dNSUNhd05WRVFDK3Fq?=
- =?utf-8?B?R1Bja1VHZ1doTnUwS0lVWTZzNUMzbFNPWXY0TldVeFd3N3dpdjNTc2QxOVBk?=
- =?utf-8?B?L2EyWWJXYS9Gb05YcUlwRVVnSWlIc3Fxd1JVOWVOZFgzdUV6ZHhtS2VEVXdE?=
- =?utf-8?B?VUxOa1ZleE1DV3FxSHlrbUE1MGd1azM2dG81Q2ZDOUJLSFFpWkNlbk5pQWJa?=
- =?utf-8?B?UDVuS2FhM2x4Q0lPWHVoY2pxUVBaVDk4aVBKcXZQbm9QcllwQTlxeGVacStS?=
- =?utf-8?B?SFpXdlo5NjVWQ0RPNnJydFNMVlRORTBsNThpMVBYdGEvMlMrMGlqMFhSYXh0?=
- =?utf-8?B?cW5acjRhK1JTdmRTRkljMm41OEt2U1g1WGVMekhjbnc3akxDZlcvb1drZ1dy?=
- =?utf-8?B?UHJhU3pWNHNoQ2U1elJOWktkdGVEWG9hQlh5bzFRaVg5YUg2K2srNVVITDgz?=
- =?utf-8?B?cWEvQWF3UkpDWTJVS2VvT1J4MUp1U2NqZ1JXcEt2R29kblRVSGozeURqRmZr?=
- =?utf-8?B?S1FiMVk2RUxIQmZvL0VNVExHVkNFMzB4TnFoUTNtUm5ucHVuUXNhT2F3TDl1?=
- =?utf-8?B?VGpYSGtMOEZCbVFHRmM0dEVUdVlFcjcxbG9DMDV4OUJIWTk2YWMyeGhOWW1L?=
- =?utf-8?B?MDl5aTdya1BWZFUrZnYxRmRBQm4yekFtZjBlU1dSS3BhcEM4cVh3YzJOUWJJ?=
- =?utf-8?B?QnRKd3NKT0RoL01MeUNzS21ubHlBZGR1dFFwU3RPMEFTcG4rNW9zVWY2NnE2?=
- =?utf-8?B?SHlNTUxFcnIvVWk0MVd3cTBwZWhLUWZPcVRIc0ZzRkFDbFRNVG1WejZQaFpD?=
- =?utf-8?B?S0VWWUdOZEVyQ0hsZi9NWVN0TEN3K0hSZFV0VkZsRTZpRGpCYWVkdUpEenA4?=
- =?utf-8?B?WTBVT3pCRStuUnUvTFhvenhvY1l0eU02bFdJdVBITy81RXVhUDZsY2hWRDVj?=
- =?utf-8?B?UW0vazVGQWJoR3lzRkRCRHo2S3ppeVVtalFaZE8xdzRvK3pwQmxweTRMbVJL?=
- =?utf-8?B?alQ3UnZIYXR6dm0vV3pFcHdCTkhIYlFhemxpTUJDYW94bGhCNy9PUERlRnZX?=
- =?utf-8?B?RXFNUWF4MEtYUFlQN083MnZmWDhxU2FILzNkOGxJbkltV1FERHlKaitwN3cv?=
- =?utf-8?B?L2l6azdGc1gxeVIzRURHakZlaFNPeGVxYlpyRVVQWFloeHRhTnBaT3Q1SUVm?=
- =?utf-8?Q?w6PqNn3fisVbOL8THCXYrLcQffi29eK3q4zLR1x/75b98?=
-x-ms-exchange-antispam-messagedata-1: HggYBfBt4lZEmQ==
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-X-OriginatorOrg: relativity.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CH2PR12MB4152.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2f6122fa-ab6b-415a-9c5f-08d9ba867567
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 8afe73f9-0d93-4821-a898-c5c2dc320953
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: M6UIFbI6u31+1R5L87q+ORaG4hx+9zRGhE0nDdq7aoA6ZV5TKaK83UqFjDLFstgDim72BADxcemdpxP2k3y5T53koVCzBtDErX0oC8a/KsXxOTHpPlL8BnZnlfUXeuo+
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4215
-X-Proofpoint-ORIG-GUID: JNGTmYZ71WWXHwkUsnKdn4HTDcH98_Hn
-X-Proofpoint-GUID: JNGTmYZ71WWXHwkUsnKdn4HTDcH98_Hn
-X-Proofpoint-Spam-Reason: orgsafe
+ <CH2PR12MB415202EB8137713529ECEF6E9F6F9@CH2PR12MB4152.namprd12.prod.outlook.com>
+In-Reply-To: <CH2PR12MB415202EB8137713529ECEF6E9F6F9@CH2PR12MB4152.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-CMAE-Envelope: MS4xfC77L1sgYi5Xoc9If/NnSTRTzJl2JTnvpRNaipGhs8IDT39QSXx1g7RjQTgP1xXewExszne4NcoMyfONsVIMSCm5vFGjR8FbOOqTJmaubsdPB5rxe0h7
+ HUKHqqVRP6QCmg+xcxfe3vuxmrbU8KmBSud2E4q4IeGo0mITwcwYtvZzLDtg3Z8cBPciErvhWz8Xd9r4aVhLMOqUbtX8WgrkfIq+I4wdKerQXUnHljF1T9m+
+ P0pCxiCgSwz3mueDoRhEpIhxhuQ/t5grwskgOWEIZgw=
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -219,27 +58,39 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steven Engelhardt via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steven Engelhardt <steven.engelhardt@relativity.com>
+From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Tom Talpey <tom@talpey.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Pj4gV2Ugd291bGQgYXBwcmVjaWF0ZSBhbnkgZ3VpZGFuY2Ugb24gdGhlIGNvcnJlY3QgbG9uZy10
-ZXJtIHJlc29sdXRpb24gDQo+PiBvZiB0aGlzIGlzc3VlLg0KPiANCj4gSXQgd2lsbCB1c2UgdGhl
-IG9sZGVzdCBvbmUgb2YgYXRpbWUsIG10aW1lIG9yIGN0aW1lLiBXaGF0IGlzIHlvdXIgc2VydmVy
-cydzIGZpbGVzeXN0ZW0gdGltZXN0YW1wIGdyYW51bGFyaXR5Pw0KPiANCj4gQ2FuIHlvdSBzaGFy
-ZSB0aGUgcmVzdWx0IG9mIHJ1bm5pbmcgc3RhdCBjbGkgY29tbWFuZCBvbiBmaWxlcyB0aGF0IHRy
-aWdnZXJlZCB0aGUgaXNzdWU/IE9yIGp1c3QgZ2VuZXJhbGx5IHNoYXJlIGluZm8gYWJvdXQgeW91
-ciBmaWxlc3lzdGVtIGFuZCBpdHMgdGltZXN0YW1wIGdyYW51bGFyaXR5Pw0KDQpTdXJlLiAgVXNp
-bmcgdGhlIHN0YXRyZXMgdG9vbCAocHJvdmlkZWQgaW4gYSBwcmV2aW91cyBlbWFpbCk6DQoNCkVz
-dGltYXRlZCBzdGF0LnN0X210aW0gKGFuZCBmcmllbmRzKSByZXNvbHV0aW9uOg0KDQpVYnVudHUg
-MTguMDQgb24gYW4gQXp1cmUgU3RhbmRhcmRfRDVfdjI6IDAuMDAzOTk5OTU0cw0KVWJ1bnR1IDE4
-LjA0IG9uIGFuIEF6dXJlIFN0YW5kYXJkX0RTNV92MjogMC4wMDQwMDAxNjNzDQpVYnVudHUgMTgu
-MDQgb24gV1NMMiAodXNlZCBmb3IgbG9jYWwgZGV2ZWxvcG1lbnQgJiB0ZXN0aW5nKTogMC4wMTAw
-MDAwMDBzDQoNCj4gSSdtIHRoaW5raW5nIHRoYXQgbWF5YmUgd2Ugc2hvdWxkIGp1c3QgdXNlIHRo
-ZSBjdXJyZW50IHRpbWUgZm9yIHRoZSAgaXRpbWUgYXMgcmV0dXJuZWQgYnkgY2xvY2tfZ2V0dGlt
-ZV9tb25vKCkuDQoNClN1cmUsIGJ1dCBhIG5vdGFibGUgYWx0ZXJuYXRpdmVzIGluY2x1ZGUgcHVy
-ZS1yYW5kb20gb3Igc29tZXRoaW5nIGxpa2UgVHdpdHRlcidzIFNub3dmbGFrZQ0KaWQgZ2VuZXJh
-dGlvbiBhbGdvcml0aG0gYXMgaW4gaHR0cHM6Ly9ibG9nLnR3aXR0ZXIuY29tL2VuZ2luZWVyaW5n
-L2VuX3VzL2EvMjAxMC9hbm5vdW5jaW5nLXNub3dmbGFrZS4NCg0KU3RldmUNCg==
+On 12/8/2021 3:08 PM, Steven Engelhardt via samba-technical wrote:
+>>> We would appreciate any guidance on the correct long-term resolution
+>>> of this issue.
+>>
+>> It will use the oldest one of atime, mtime or ctime. What is your servers's filesystem timestamp granularity?
+>>
+>> Can you share the result of running stat cli command on files that triggered the issue? Or just generally share info about your filesystem and its timestamp granularity?
+> 
+> Sure.  Using the statres tool (provided in a previous email):
+> 
+> Estimated stat.st_mtim (and friends) resolution:
+> 
+> Ubuntu 18.04 on an Azure Standard_D5_v2: 0.003999954s
+> Ubuntu 18.04 on an Azure Standard_DS5_v2: 0.004000163s
+> Ubuntu 18.04 on WSL2 (used for local development & testing): 0.010000000s
+> 
+>> I'm thinking that maybe we should just use the current time for the  itime as returned by clock_gettime_mono().
+> 
+> Sure, but a notable alternatives include pure-random or something like Twitter's Snowflake
+> id generation algorithm as in https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake.
+
+I have to say that I'm siding with Steve on not using timestamps,
+even with a monotonicity salt. They're terribly old-school and
+for good reason. If you want reliable results when running on
+everything from embedded ARM systems with FAT (2-second granularity)
+on an MMC card, all the way up to servers with PMEM (<<1us access
+time) and networks with 100+ Gbps pipes, timestamps will be
+whack-a-mole for many years. MHO.
+
+Tom.
 
