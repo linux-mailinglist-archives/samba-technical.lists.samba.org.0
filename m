@@ -2,59 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CDFF46CC98
-	for <lists+samba-technical@lfdr.de>; Wed,  8 Dec 2021 05:34:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0330A46CDE0
+	for <lists+samba-technical@lfdr.de>; Wed,  8 Dec 2021 07:41:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=EN1o8XpoKN4as2yUaOYdrp8Cti7k7n7wDJbtCFFci+Y=; b=hWt2ITy/bibndkVoker1+5k4uQ
-	BRuSy21iShK1GQUPYYTtqQ9wdGCE74SRzGx3/OO0REPbLxbZ2FIWLslw3oa/zXvuMNdouCy2TH2rB
-	8wxGwN3wezrHz+xLPTqHxyNQnOp19ZkQF6AzBhHFV3KngWB7qrfUIgfiR6wrqlQQmkCvUplNVHKeZ
-	RppsJWXht1zZuVE1QKnZoKax+USnTyVVuPUmSFBNZ7kC83fTbMDYU8RRfkKEzmi11UJRwMQPghR0q
-	+nxhIII7BLU4AFD6FWkdOno069qKyDLdBoloGUfIxlrR7OgIugPmZMacuakn69DSgfQRvIIEmmYrh
-	+ZD1yBVA==;
-Received: from ip6-localhost ([::1]:33602 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=5gIx9HH1oFADuy9lmIqlau/kLWN/HT+HDAmh3P9H8I4=; b=BFyancNjr7K02BpBHHmgbAYpId
+	HXd/QgVgZIslrZHNSmhpGqvy6rUid7qnImLHuKdcz+nyW8DWpkJlGuF4GwDhZ2GG0NyPEK5/hfXfA
+	tsNqiNlBjYoWhwGnJoT1raqzVgrEUtpi15m0xbPqldPioH2p3ndGJSaL5OpP3veYHajTfz3XCqqco
+	vv3XHwQZ0VtcgwgjYrhbdNFoksWd3sqMAFVupEIiv3uUy9+/Ol0qvGGk3pTvIv1I0wSwFc9vm0dmH
+	9rdZ+sXK1517xuiT9zao63DANyg+rFLs/OkdkpadYmLGaPbL+LSKXOq3ZCl0oocSvo2iSYred6TSG
+	jhhaTHqA==;
+Received: from ip6-localhost ([::1]:34326 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1muoe0-003ynr-SL; Wed, 08 Dec 2021 04:33:28 +0000
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:43523) 
+	id 1muqd7-003zPZ-7d; Wed, 08 Dec 2021 06:40:41 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54314) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1muodv-003yni-GX
- for samba-technical@lists.samba.org; Wed, 08 Dec 2021 04:33:26 +0000
-Received: by mail-lf1-x12e.google.com with SMTP id b40so3009035lfv.10
- for <samba-technical@lists.samba.org>; Tue, 07 Dec 2021 20:33:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=EN1o8XpoKN4as2yUaOYdrp8Cti7k7n7wDJbtCFFci+Y=;
- b=lzk6Ja0MRaTF0ii1RSV3qpELQCzRZ2oDBAf+jsOusYOmESpT5SRM9S8Jyg6NSP9xgI
- ifjeG5Zs1YF+A6Xp2qkVaN36SIzfuOo9wfXseZt42E6Wasnu1Rc99acbnndCpuYWAGat
- dtny7bZZ8z+x4PJubJQy1S/B/dtf9wOHSS3MFT/bskThLk2EHJfoGnLuYtlpIUxyFCQW
- P1dv3UwwoPGIuhnggYWQ1/ZMZs8J6nSCA0DwYvtT8R90GSK4ak1yGa27F9BqmEKKC+ER
- JpRB1E53P2f97NcLueqUpt98tZWAHZCZIvb8Hu9c1BH1B4CXCRWhJIjbp1n2rmuc/1XH
- SK6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=EN1o8XpoKN4as2yUaOYdrp8Cti7k7n7wDJbtCFFci+Y=;
- b=HnOoEnAjO8JqHuIlcmekHdXQGV5rDKaN8zpuZ1hqRIqLEfPj+xAzHKLWceRKjrPazj
- 2J0Qk0Lhb+rOZQ3A21alRyKl+Rb2k5o4EHLAwNlYccKapIL0Qd5DW5WgyTPCt7odjwOc
- kpLVyTTGRury2xV9tBBEjaK/pTrH6Sx4R96skbx8VjcDP4+DWjXFdeULD+fqBO2UKktN
- /N3Kkb1hYfUCwi5I1ia9Gg6kQ1PRJXeNbGnZuHidjsZ0DwaYqOpZgBOnIfnr+2T8oiV+
- arkOlBMjBPfnaK9Wv98atJr4akdZj+lK0btH9Q+pk2BQ+4UWjpXbIQSq4wiUPxbju7HN
- U8XA==
-X-Gm-Message-State: AOAM532LXUVrcLK2bIfRRwPxia5VYmBQfahXdMrzBRFi2yLGVOAIEuHT
- EqivpNs68C9nUAoD2VnHOwo3pUknVdxVYRSaIsc=
-X-Google-Smtp-Source: ABdhPJwIdiWlGyg9QKfiqlNkmB52N2pXz78n6hNt6wd/g8Q34QRsZhd+Zv1DyXbdwQWK8+nGuCI+uiTucfKvH8IFsow=
-X-Received: by 2002:a05:6512:3991:: with SMTP id
- j17mr45568787lfu.545.1638938002185; 
- Tue, 07 Dec 2021 20:33:22 -0800 (PST)
+ (Exim) id 1muqch-003zPP-MA
+ for samba-technical@lists.samba.org; Wed, 08 Dec 2021 06:40:20 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=5gIx9HH1oFADuy9lmIqlau/kLWN/HT+HDAmh3P9H8I4=; b=BbaBWco02BMsW+v46Qbsf49aDA
+ EzUTeyyBQidT5qCvlJqW9DZ2cuPc3HQ5Q3kAnmZe7X4cWXmMDvc8l0f3nCxXZsqcLk1ncgMzBswwM
+ AFJ4EFs1G2V+b3uAlD7auyLFyCbYcLkmPJT4KfK5xkZcaSFp60zSqUjUzVUZguEyv7JrssHlqywXH
+ pJxYcBYKNu3brCvo2ztomYngCZ4+RR/0sr5Q9wkpnXGYqEsvQmz8Dq+9R2So09w+85ospuiCqizaS
+ y2DcGfjawolB7uy/XexnkQUWcXSM0/BVtKaqb5SRUs3IwqmUYd7NCYuBqEz2i+2g9/celuGtZwv0Q
+ lImOjUfz+rx62p5gWU9aOeVrE2m5BDMxsyqvNU24iv0L0u8JJvdWCMv60EhsxHzcsNzDVb8IqEDg0
+ CkkybvIJMBd3IpyqvYrcqyAVoccGd9Jk82htyv/xsT/ktitywCcA+hyPvvCxp9y8gLgay3jUKROW/
+ 3LUoagZs7cknvExqgOzs2QZ3;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1muqcd-001jcY-6H; Wed, 08 Dec 2021 06:40:11 +0000
+Message-ID: <d37f9e09-fdca-07c8-ac5c-b5e859930b9e@samba.org>
+Date: Wed, 8 Dec 2021 07:40:10 +0100
 MIME-Version: 1.0
-References: <20211207115420.18713-1-vincent.whitchurch@axis.com>
-In-Reply-To: <20211207115420.18713-1-vincent.whitchurch@axis.com>
-Date: Tue, 7 Dec 2021 22:33:10 -0600
-Message-ID: <CAH2r5mtxkO9whCCKrFXMYNr26RcShx-QT4_EZvLJj52AkQjWqw@mail.gmail.com>
-Subject: Re: [PATCH] cifs: Fix crash on unload of cifs_arc4.ko
-To: Vincent Whitchurch <vincent.whitchurch@axis.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.0
+Subject: Re: Duplicate SMB file_ids leading to Windows client cache poisoning
+Content-Language: en-US
+To: Steven Engelhardt <steven.engelhardt@relativity.com>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+References: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
+In-Reply-To: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------7OC4Jpf1Ni60cJmp1nDumwQj"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,61 +60,65 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Hyunchul Lee <hyc.lee@gmail.com>,
- Ronnie Sahlberg <lsahlber@redhat.com>, Steve French <sfrench@samba.org>,
- Sergey Senozhatsky <senozhatsky@chromium.org>, kernel <kernel@axis.com>,
- Namjae Jeon <linkinjeon@kernel.org>, Steve French <stfrench@microsoft.com>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------7OC4Jpf1Ni60cJmp1nDumwQj
+Content-Type: multipart/mixed; boundary="------------gDyl2yvbw4oHnPaevpu0tJUx";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Steven Engelhardt <steven.engelhardt@relativity.com>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+Message-ID: <d37f9e09-fdca-07c8-ac5c-b5e859930b9e@samba.org>
+Subject: Re: Duplicate SMB file_ids leading to Windows client cache poisoning
+References: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
+In-Reply-To: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
 
-On Tue, Dec 7, 2021 at 6:11 AM Vincent Whitchurch via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> The exit function is wrongly placed in the __init section and this leads
-> to a crash when the module is unloaded.  Just remove both the init and
-> exit functions since this module does not need them.
->
-> Fixes: 71c02863246167b3d ("cifs: fork arc4 and create a separate module...")
-> Signed-off-by: Vincent Whitchurch <vincent.whitchurch@axis.com>
-> ---
->  fs/smbfs_common/cifs_arc4.c | 13 -------------
->  1 file changed, 13 deletions(-)
->
-> diff --git a/fs/smbfs_common/cifs_arc4.c b/fs/smbfs_common/cifs_arc4.c
-> index 85ba15a60b13..043e4cb839fa 100644
-> --- a/fs/smbfs_common/cifs_arc4.c
-> +++ b/fs/smbfs_common/cifs_arc4.c
-> @@ -72,16 +72,3 @@ void cifs_arc4_crypt(struct arc4_ctx *ctx, u8 *out, const u8 *in, unsigned int l
->         ctx->y = y;
->  }
->  EXPORT_SYMBOL_GPL(cifs_arc4_crypt);
-> -
-> -static int __init
-> -init_smbfs_common(void)
-> -{
-> -       return 0;
-> -}
-> -static void __init
-> -exit_smbfs_common(void)
-> -{
-> -}
-> -
-> -module_init(init_smbfs_common)
-> -module_exit(exit_smbfs_common)
-> --
-> 2.33.1
->
->
+--------------gDyl2yvbw4oHnPaevpu0tJUx
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+T24gMTIvOC8yMSAwMDoxOCwgU3RldmVuIEVuZ2VsaGFyZHQgdmlhIHNhbWJhLXRlY2huaWNh
+bCB3cm90ZToNCj4gV2Ugd291bGQgYXBwcmVjaWF0ZSBhbnkgZ3VpZGFuY2Ugb24gdGhlIGNv
+cnJlY3QgbG9uZy10ZXJtIHJlc29sdXRpb24NCj4gb2YgdGhpcyBpc3N1ZS4NCg0KdGhlIGZ1
+bmN0aW9uIHRoYXQgY2FsY3VsYXRlZCB0aGUgaXRpbWUgZnJvbSB0aGUgZmlsZXN5c3RlbSB0
+aW1lc3RhbXBzIGlzIA0KbWFrZV9maWxlX2lkX2Zyb21faXRpbWUoKS4NCg0KSXQgd2lsbCB1
+c2UgdGhlIG9sZGVzdCBvbmUgb2YgYXRpbWUsIG10aW1lIG9yIGN0aW1lLiBXaGF0IGlzIHlv
+dXIgDQpzZXJ2ZXJzJ3MgZmlsZXN5c3RlbSB0aW1lc3RhbXAgZ3JhbnVsYXJpdHk/DQoNCkNh
+biB5b3Ugc2hhcmUgdGhlIHJlc3VsdCBvZiBydW5uaW5nIHN0YXQgY2xpIGNvbW1hbmQgb24g
+ZmlsZXMgdGhhdCANCnRyaWdnZXJlZCB0aGUgaXNzdWU/IE9yIGp1c3QgZ2VuZXJhbGx5IHNo
+YXJlIGluZm8gYWJvdXQgeW91ciBmaWxlc3lzdGVtIA0KYW5kIGl0cyB0aW1lc3RhbXAgZ3Jh
+bnVsYXJpdHk/DQoNCkknTSB0aGlua2luZyB0aGF0IG1heWJlIHdlIHNob3VsZCBqdXN0IHVz
+ZSB0aGUgY3VycmVudCB0aW1lIGZvciB0aGUgDQppdGltZSBhcyByZXR1cm5lZCBieSBjbG9j
+a19nZXR0aW1lX21vbm8oKS4NCg0KLXNsb3cNCg0KLS0gDQpSYWxwaCBCb2VobWUsIFNhbWJh
+IFRlYW0gICAgICAgICAgICAgICAgIGh0dHBzOi8vc2FtYmEub3JnLw0KU2VyTmV0IFNhbWJh
+IFRlYW0gTGVhZCAgICAgIGh0dHBzOi8vc2VybmV0LmRlL2VuL3RlYW0tc2FtYmENCg==
 
--- 
-Thanks,
+--------------gDyl2yvbw4oHnPaevpu0tJUx--
 
-Steve
+--------------7OC4Jpf1Ni60cJmp1nDumwQj
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmGwU0oFAwAAAAAACgkQqh6bcSY5nkYC
+Vw/+KkZ17y8znEdtGuaIRBCeY2skktm9trsn4lGa9kOeQELY4A+i/xtbPvMwRC3wE6tXyDdZ/HfS
+0RWIyNCrS+F0nZpRtqlEOWVCj/jdoMk7k1YQwfjSLnxf8GXm/Ker5lk7E8WbKF+Fg4zCD0548vLs
+HstPJp6gIP42d9VwKFIeWiAoZ0qAK48Xjb1cdRdA0LRfz3DaThewq13Gle5HOeNQIJKpKliRM7S8
+zMxKS1c/EzDQQwsgY0jJCDx2uyFIkPVMjBHdH2Kxla3DDagiBPLo+AYtFG5MlhECtDg8AWLqUFxI
+DlwUj2JTg6t0P8ThV+MKXWZO+nD3JaakZUQZV+5+3cdX0mRlpUrad8Qs3zHP1d9DFPlLwg6Om6Lr
+7SaxXC3pgpQtCqM8fPexZyNJdDE5e1alPG8ttfdJL1xt7emiTYTkRGvjdVGmh9YIG/kvNtlOrLy2
+XfKKqFoSYMNnYDLgNwPq+5Ka5exbZ99WBrBCmZ2Yhl/EUeEH03j41ORR1Z2pykjkSEwmcNi0ACZ2
+dTRZXiemLjGYaLZnY73bktwuYAb1fcu29LpV7t1ggsGB4o4Q1Q/E+BUc9fI9++oeupnbvJ1YMiDB
+KFUDV5K1CtNYFfKjQiJJdLZeeg+Sp9P/ARdKf3fiEMkOxRHENUJHNUkrCGqkrCm/7ZiVLkcbN/k2
+iQs=
+=VE0o
+-----END PGP SIGNATURE-----
+
+--------------7OC4Jpf1Ni60cJmp1nDumwQj--
 
