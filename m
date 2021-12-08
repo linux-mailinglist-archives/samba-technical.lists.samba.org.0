@@ -2,51 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0330A46CDE0
-	for <lists+samba-technical@lfdr.de>; Wed,  8 Dec 2021 07:41:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0699F46D632
+	for <lists+samba-technical@lfdr.de>; Wed,  8 Dec 2021 15:55:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=5gIx9HH1oFADuy9lmIqlau/kLWN/HT+HDAmh3P9H8I4=; b=BFyancNjr7K02BpBHHmgbAYpId
-	HXd/QgVgZIslrZHNSmhpGqvy6rUid7qnImLHuKdcz+nyW8DWpkJlGuF4GwDhZ2GG0NyPEK5/hfXfA
-	tsNqiNlBjYoWhwGnJoT1raqzVgrEUtpi15m0xbPqldPioH2p3ndGJSaL5OpP3veYHajTfz3XCqqco
-	vv3XHwQZ0VtcgwgjYrhbdNFoksWd3sqMAFVupEIiv3uUy9+/Ol0qvGGk3pTvIv1I0wSwFc9vm0dmH
-	9rdZ+sXK1517xuiT9zao63DANyg+rFLs/OkdkpadYmLGaPbL+LSKXOq3ZCl0oocSvo2iSYred6TSG
-	jhhaTHqA==;
-Received: from ip6-localhost ([::1]:34326 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=Cq2GLUJYOkhbWoPBkIZi0lJjN/B0SSRGFfsY7SCdHVA=; b=AY/uVy8oKXZfopBpBzuWLWFOrH
+	7TBTHQIrHgD2cMvwHxCr9VYaxo4lnbVybB/J6hF8qroTKadwMwr8X7Pilcjjvd++Hyr2jzg2ghLCZ
+	tsASH6bxUOJUbByRMJSUq8poZmASYQqNqwmJHdebp2+2Zsfvyi5ZrYpj9Fq53ryKMNUgGK+ZewGHz
+	QBQ1tP8JxlNVEXB6bbgPkJ5B4Tft85ZsqtRZ/kySE8bw3+qT/swbQvr9appuEK7gdpq1qk0fyTlrt
+	mraJYaUYdC5+XZvZ0u3WzwJrxSqYrfk2IUL4vwsmxq/U13CbdQ0ZjgXMqdowVNh5Hwb0TbHkahLTC
+	GzonA4zQ==;
+Received: from ip6-localhost ([::1]:21882 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1muqd7-003zPZ-7d; Wed, 08 Dec 2021 06:40:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54314) 
+	id 1muyKz-004EKf-2k; Wed, 08 Dec 2021 14:54:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54338) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1muqch-003zPP-MA
- for samba-technical@lists.samba.org; Wed, 08 Dec 2021 06:40:20 +0000
+ (Exim) id 1muyKr-004EKM-Fj; Wed, 08 Dec 2021 14:54:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=5gIx9HH1oFADuy9lmIqlau/kLWN/HT+HDAmh3P9H8I4=; b=BbaBWco02BMsW+v46Qbsf49aDA
- EzUTeyyBQidT5qCvlJqW9DZ2cuPc3HQ5Q3kAnmZe7X4cWXmMDvc8l0f3nCxXZsqcLk1ncgMzBswwM
- AFJ4EFs1G2V+b3uAlD7auyLFyCbYcLkmPJT4KfK5xkZcaSFp60zSqUjUzVUZguEyv7JrssHlqywXH
- pJxYcBYKNu3brCvo2ztomYngCZ4+RR/0sr5Q9wkpnXGYqEsvQmz8Dq+9R2So09w+85ospuiCqizaS
- y2DcGfjawolB7uy/XexnkQUWcXSM0/BVtKaqb5SRUs3IwqmUYd7NCYuBqEz2i+2g9/celuGtZwv0Q
- lImOjUfz+rx62p5gWU9aOeVrE2m5BDMxsyqvNU24iv0L0u8JJvdWCMv60EhsxHzcsNzDVb8IqEDg0
- CkkybvIJMBd3IpyqvYrcqyAVoccGd9Jk82htyv/xsT/ktitywCcA+hyPvvCxp9y8gLgay3jUKROW/
- 3LUoagZs7cknvExqgOzs2QZ3;
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=Cq2GLUJYOkhbWoPBkIZi0lJjN/B0SSRGFfsY7SCdHVA=; b=l2suvMVWCVFMGDcbUqc2YcciTe
+ g0NBU0G0twMCR42296QW2x9hrCKnd8f/LyultJbZR0/128jhfLfI29ALByqbg7q6E4I9RAPk7FgDt
+ O6Jv8N8nVPVO/4Ecf+y4WRuWv9BFlaJFVbJ+CLrVQAKgBDFWPK7dAlxo3JgeBxCMiugbRdfkLiFHC
+ OHS8261uM3B07rLGYfHFDWfus4ViDzx4hQ+LjCwVX6jDobnglM7FxQccoEN/YGnCD4It34sQPJwWj
+ vpAVYr9sLgCtQRSgwNneRO6M/WAJ2rU/g7KfQKYra014Tw10SOYJsKzuLAEALKkWNwuaW6WbkfZlX
+ FZ8zLMKoMhMp55UEQQA0CEr7/AjbnKkUW9cm3TOv8whkRkx7TtRd5NAigP4j6iiDew4r5DE33qCk6
+ Ao2bhaHCsSnL8IbBmaHhjjTmZD5CIBYs49EsMujajhKYtEBpv1uh5GKgeOEMau9xSDOhyMY4Jbg1o
+ uwI4XtZ+prjG8tll3el9tU0q;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1muqcd-001jcY-6H; Wed, 08 Dec 2021 06:40:11 +0000
-Message-ID: <d37f9e09-fdca-07c8-ac5c-b5e859930b9e@samba.org>
-Date: Wed, 8 Dec 2021 07:40:10 +0100
+ (Exim) id 1muyKq-001o3g-T3; Wed, 08 Dec 2021 14:54:20 +0000
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.15.3 Available for Download
+Message-ID: <b72fcd09-bf65-b76a-6b7f-79b1a529e906@samba.org>
+Date: Wed, 8 Dec 2021 15:54:20 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.0
-Subject: Re: Duplicate SMB file_ids leading to Windows client cache poisoning
-Content-Language: en-US
-To: Steven Engelhardt <steven.engelhardt@relativity.com>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-References: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
-In-Reply-To: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------7OC4Jpf1Ni60cJmp1nDumwQj"
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: de-DE
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,65 +56,155 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------7OC4Jpf1Ni60cJmp1nDumwQj
-Content-Type: multipart/mixed; boundary="------------gDyl2yvbw4oHnPaevpu0tJUx";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Steven Engelhardt <steven.engelhardt@relativity.com>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Message-ID: <d37f9e09-fdca-07c8-ac5c-b5e859930b9e@samba.org>
-Subject: Re: Duplicate SMB file_ids leading to Windows client cache poisoning
-References: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
-In-Reply-To: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
+Release Announcements
+---------------------
 
---------------gDyl2yvbw4oHnPaevpu0tJUx
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+This is the latest stable release of the Samba 4.15 release series.
 
-T24gMTIvOC8yMSAwMDoxOCwgU3RldmVuIEVuZ2VsaGFyZHQgdmlhIHNhbWJhLXRlY2huaWNh
-bCB3cm90ZToNCj4gV2Ugd291bGQgYXBwcmVjaWF0ZSBhbnkgZ3VpZGFuY2Ugb24gdGhlIGNv
-cnJlY3QgbG9uZy10ZXJtIHJlc29sdXRpb24NCj4gb2YgdGhpcyBpc3N1ZS4NCg0KdGhlIGZ1
-bmN0aW9uIHRoYXQgY2FsY3VsYXRlZCB0aGUgaXRpbWUgZnJvbSB0aGUgZmlsZXN5c3RlbSB0
-aW1lc3RhbXBzIGlzIA0KbWFrZV9maWxlX2lkX2Zyb21faXRpbWUoKS4NCg0KSXQgd2lsbCB1
-c2UgdGhlIG9sZGVzdCBvbmUgb2YgYXRpbWUsIG10aW1lIG9yIGN0aW1lLiBXaGF0IGlzIHlv
-dXIgDQpzZXJ2ZXJzJ3MgZmlsZXN5c3RlbSB0aW1lc3RhbXAgZ3JhbnVsYXJpdHk/DQoNCkNh
-biB5b3Ugc2hhcmUgdGhlIHJlc3VsdCBvZiBydW5uaW5nIHN0YXQgY2xpIGNvbW1hbmQgb24g
-ZmlsZXMgdGhhdCANCnRyaWdnZXJlZCB0aGUgaXNzdWU/IE9yIGp1c3QgZ2VuZXJhbGx5IHNo
-YXJlIGluZm8gYWJvdXQgeW91ciBmaWxlc3lzdGVtIA0KYW5kIGl0cyB0aW1lc3RhbXAgZ3Jh
-bnVsYXJpdHk/DQoNCkknTSB0aGlua2luZyB0aGF0IG1heWJlIHdlIHNob3VsZCBqdXN0IHVz
-ZSB0aGUgY3VycmVudCB0aW1lIGZvciB0aGUgDQppdGltZSBhcyByZXR1cm5lZCBieSBjbG9j
-a19nZXR0aW1lX21vbm8oKS4NCg0KLXNsb3cNCg0KLS0gDQpSYWxwaCBCb2VobWUsIFNhbWJh
-IFRlYW0gICAgICAgICAgICAgICAgIGh0dHBzOi8vc2FtYmEub3JnLw0KU2VyTmV0IFNhbWJh
-IFRlYW0gTGVhZCAgICAgIGh0dHBzOi8vc2VybmV0LmRlL2VuL3RlYW0tc2FtYmENCg==
+Important Notes
+===============
 
---------------gDyl2yvbw4oHnPaevpu0tJUx--
+There have been a few regressions in the security release 4.15.2:
 
---------------7OC4Jpf1Ni60cJmp1nDumwQj
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+o CVE-2020-25717: A user on the domain can become root on domain members.
+https://www.samba.org/samba/security/CVE-2020-25717.html
+                   PLEASE [RE-]READ!
+                   The instructions have been updated and some workarounds
+                   initially adviced for 4.15.2 are no longer required and
+                   should be reverted in most cases.
 
------BEGIN PGP SIGNATURE-----
+o BUG-14902: User with multiple spaces (eg Fred<space><space>Nurk) become
+              un-deletable. While this release should fix this bug, it is
+              adviced to have a look at the bug report for more detailed
+              information, see 
+https://bugzilla.samba.org/show_bug.cgi?id=14902.
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmGwU0oFAwAAAAAACgkQqh6bcSY5nkYC
-Vw/+KkZ17y8znEdtGuaIRBCeY2skktm9trsn4lGa9kOeQELY4A+i/xtbPvMwRC3wE6tXyDdZ/HfS
-0RWIyNCrS+F0nZpRtqlEOWVCj/jdoMk7k1YQwfjSLnxf8GXm/Ker5lk7E8WbKF+Fg4zCD0548vLs
-HstPJp6gIP42d9VwKFIeWiAoZ0qAK48Xjb1cdRdA0LRfz3DaThewq13Gle5HOeNQIJKpKliRM7S8
-zMxKS1c/EzDQQwsgY0jJCDx2uyFIkPVMjBHdH2Kxla3DDagiBPLo+AYtFG5MlhECtDg8AWLqUFxI
-DlwUj2JTg6t0P8ThV+MKXWZO+nD3JaakZUQZV+5+3cdX0mRlpUrad8Qs3zHP1d9DFPlLwg6Om6Lr
-7SaxXC3pgpQtCqM8fPexZyNJdDE5e1alPG8ttfdJL1xt7emiTYTkRGvjdVGmh9YIG/kvNtlOrLy2
-XfKKqFoSYMNnYDLgNwPq+5Ka5exbZ99WBrBCmZ2Yhl/EUeEH03j41ORR1Z2pykjkSEwmcNi0ACZ2
-dTRZXiemLjGYaLZnY73bktwuYAb1fcu29LpV7t1ggsGB4o4Q1Q/E+BUc9fI9++oeupnbvJ1YMiDB
-KFUDV5K1CtNYFfKjQiJJdLZeeg+Sp9P/ARdKf3fiEMkOxRHENUJHNUkrCGqkrCm/7ZiVLkcbN/k2
-iQs=
-=VE0o
------END PGP SIGNATURE-----
+Changes since 4.15.2
+--------------------
 
---------------7OC4Jpf1Ni60cJmp1nDumwQj--
+o  Jeremy Allison <jra@samba.org>
+    * BUG 14878: Recursive directory delete with veto files is broken in 
+4.15.0.
+    * BUG 14879: A directory containing dangling symlinks cannot be 
+deleted by
+      SMB2 alone when they are the only entry in the directory.
+    * BUG 14892: SIGSEGV in rmdir_internals/synthetic_pathref - dirfsp 
+is used
+      uninitialized in rmdir_internals().
+
+o  Andrew Bartlett <abartlet@samba.org>
+    * BUG 14694: MaxQueryDuration not honoured in Samba AD DC LDAP.
+    * BUG 14901: The CVE-2020-25717 username map [script] advice has 
+undesired
+      side effects for the local nt token.
+    * BUG 14902: User with multiple spaces (eg Fred<space><space>Nurk) 
+become
+      un-deletable.
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 14127: Avoid storing NTTIME_THAW (-2) as value on disk.
+    * BUG 14882: smbXsrv_client_global record validation leads to crash if
+      existing record points at non-existing process.
+    * BUG 14890: Crash in vfs_fruit asking for fsp_get_io_fd() for an 
+XATTR call.
+    * BUG 14897: Samba process doesn't log to logfile.
+    * BUG 14907: set_ea_dos_attribute() fallback calling
+      get_file_handle_for_metadata() triggers locking.tdb assert.
+    * BUG 14922: Kerberos authentication on standalone server in MIT realm
+      broken.
+    * BUG 14923: Segmentation fault when joining the domain.
+
+o  Alexander Bokovoy <ab@samba.org>
+    * BUG 14903: Support for ROLE_IPA_DC is incomplete.
+
+o  Günther Deschner <gd@samba.org>
+    * BUG 14767: rpcclient cannot connect to ncacn_ip_tcp services anymore
+    * BUG 14893: winexe crashes since 4.15.0 after popt parsing.
+
+o  Volker Lendecke <vl@samba.org>
+    * BUG 14908: net ads status -P broken in a clustered environment.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 14788: Memory leak if ioctl(FSCTL_VALIDATE_NEGOTIATE_INFO) 
+fails before
+      smbd_smb2_ioctl_send.
+    * BUG 14882: smbXsrv_client_global record validation leads to crash if
+      existing record points at non-existing process.
+    * BUG 14899: winbindd doesn't start when "allow trusted domains" is off.
+    * BUG 14901: The CVE-2020-25717 username map [script] advice has 
+undesired
+      side effects for the local nt token.
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 14767: rpcclient cannot connect to ncacn_ip_tcp services anymore.
+    * BUG 14883: smbclient login without password using '-N' fails with
+      NT_STATUS_INVALID_PARAMETER on Samba AD DC.
+    * BUG 14912: A schannel client incorrectly detects a downgrade 
+connecting to
+      an AES only server.
+    * BUG 14921: Possible null pointer dereference in winbind.
+
+o  Andreas Schneider <asn@cryptomilk.org>
+    * BUG 14846: Fix -k legacy option for client tools like smbclient, 
+rpcclient,
+      net, etc.
+
+o  Martin Schwenke <martin@meltin.net>
+    * BUG 14872: Add Debian 11 CI bootstrap support.
+
+o  Joseph Sutton <josephsutton@catalyst.net.nz>
+    * BUG 14694: MaxQueryDuration not honoured in Samba AD DC LDAP.
+    * BUG 14901: The CVE-2020-25717 username map [script] advice has 
+undesired
+      side effects for the local nt token.
+
+o  Andrew Walker <awalker@ixsystems.com>
+    * BUG 14888: Crash in recycle_unlink_internal().
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.freenode.net.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.15.3.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
