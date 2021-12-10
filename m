@@ -2,42 +2,42 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CBAB470C3D
-	for <lists+samba-technical@lfdr.de>; Fri, 10 Dec 2021 22:06:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BED40470C72
+	for <lists+samba-technical@lfdr.de>; Fri, 10 Dec 2021 22:21:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=y8axYVmoOOBFNCX45QS0cpgAUtnHT+8llVm5W1rn7Yc=; b=gUFMJGtVPJRepkE37meJIg8iD2
-	xfWI0EiWdg5SSTDaov1SCuQQLjquxxqaJWBceL1jADipCj8gTwbRMYHjoklmxFbGZsCe0AIMHKFXH
-	IjTj18svJrA12ilD/4b5OGsq4hSMZcC9nPDiHBpzmIoEibnpjDDjBazTzeMk88jpdFLr+vqODwu1t
-	4cUOhgZtLKZvZiP4bhqiJU11PAlEt2Nbctz4o6ZQnIMOrP/eqDj2pJe4ggfi0tZtxyKAaNE0Ip8P3
-	VvY92Ie5SHAr/Nc9yiUQ4iiFgwVPqbWxT9M3aSzaMARXlSdjqa3aaB1mNg1KwNWiSlyo4iaktOVSE
-	MWjaa2Lg==;
-Received: from ip6-localhost ([::1]:49752 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=2utFcEQE7rwQ2NRNcaWaNu92Sa9azEiHLTM2p2N6ZDI=; b=D6/JXCrQ65YjKvTy76S10IBWud
+	PBzBSiPMcmf4R6IKsjhwtY350UJRopDX+1nYI1+V0yK0cpo9Z+CNugwFMaUDC3go5T4yNpPraQKG7
+	ZRaXMAswiVEq/02cQYIyER5mU+YqVpI950EkW18q/DSAdi8tiC6KmnWbb00XwDQxOcWgbrGrCB3uz
+	HbgfsNlo2E36jV97/ms9j+xuBWH6Oxn8dFh6mo3Z+CL9G41fBVFHhBmpy8mrvjyWlPp/6E9vLZnND
+	lX/dGQKIo3WDBYRAN6mpwiFAA57Z5YaApJma77kfTjXom9mi9d8oiU7PK3UJGaKi88F/G9D+itnF8
+	YDcBn68g==;
+Received: from ip6-localhost ([::1]:50426 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mvn6E-0056bY-T7; Fri, 10 Dec 2021 21:06:38 +0000
-Received: from p3plsmtpa09-06.prod.phx3.secureserver.net
- ([173.201.193.235]:54074) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1mvn65-0056bO-OF
- for samba-technical@lists.samba.org; Fri, 10 Dec 2021 21:06:35 +0000
-Received: from [192.168.0.100] ([98.118.115.249]) by :SMTPAUTH: with ESMTPSA
- id vn3pmgMtIDmxfvn3pmmgeO; Fri, 10 Dec 2021 14:04:10 -0700
-X-CMAE-Analysis: v=2.4 cv=cbsXElPM c=1 sm=1 tr=0 ts=61b3c0ca
- a=T+zzzuy42cdAS+8Djmhmkg==:117 a=T+zzzuy42cdAS+8Djmhmkg==:17
- a=IkcTkHD0fZMA:10 a=hGzw-44bAAAA:8 a=ac0Z_fNiEn2viTdyHQ8A:9 a=QEXdDO2ut3YA:10
- a=HvKuF1_PTVFglORKqfwH:22
-X-SECURESERVER-ACCT: tom@talpey.com
-Message-ID: <a58df604-6341-5a18-377f-8ff204ab53da@talpey.com>
-Date: Fri, 10 Dec 2021 16:04:09 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.4.0
+	id 1mvnKA-0056uK-MA; Fri, 10 Dec 2021 21:21:02 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54454) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1mvnK5-0056uB-5U
+ for samba-technical@lists.samba.org; Fri, 10 Dec 2021 21:21:00 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=2utFcEQE7rwQ2NRNcaWaNu92Sa9azEiHLTM2p2N6ZDI=; b=zYa5ngMBFKbtB+zr5AmQaeNSNw
+ FXNxDQkqETym8dINbsuWroqwYsYgHIp9jGPJlmxmdVUzYUM8BRtbdJppfrAHL9CVzgX5P37kdq4qJ
+ xaOPa/6E1m+XFRgqc54/ZdsgRNbuuFM8ExK31Y8ShMcCDUA9wYqFF20jrxHyNDih/IgIWcC8bOW6l
+ 0CoP/XOixP09SfPpTO2R1hwBQlpmf+iqDTnI3XavasjdM8cdMhhEwMKrZc+tm8xQDX1CY80e+/QLV
+ odMy6AjF6/mqHY4kO6yxAZK4UQ1iKMQbBsnXl5dfpnfMewMfTHEI/CWKWSevJVHH94dhYYMAx3Nfm
+ 0OuCcTLV4aZxVdGXtGBEG5I+Q2Yt1n4WBgwmVNhrvrCRvqEQF/K0+vji85cwc1PFWWTpBRC6N1i9w
+ 13ZQUXaCVrl0eog/hNCSDUPaIIcP/Pt55nvIhK/buKloYZwBQLQU7rK3KkqyZimtt579Ayp4cUECs
+ Nrte9PHGa406yHWmikDttT+h;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1mvnK2-002EMV-6z; Fri, 10 Dec 2021 21:20:54 +0000
+Date: Fri, 10 Dec 2021 14:20:51 -0700
+To: Andrew Walker <awalker@ixsystems.com>
 Subject: Re: Duplicate SMB file_ids leading to Windows client cache poisoning
-Content-Language: en-US
-To: Christof Schmitt <cs@samba.org>, Jeremy Allison <jra@samba.org>
-References: <CAB5c7xqZcK9-Oa+o+w5Mva9Dr8_wWojx=krWiP+4zQ0X3ksH+Q@mail.gmail.com>
- <6c8aca36-8856-cf8a-2ea9-902106d0adc3@talpey.com>
- <a25972a3-3688-367b-fcab-fa748e590153@samba.org>
+Message-ID: <YbPEs2tQD0CP3yXV@samba.org>
+References: <a25972a3-3688-367b-fcab-fa748e590153@samba.org>
  <CAB5c7xp-zEwjcZSHfjL8YyWd_4y=K3HC3GSjAzvMoJR9aPOv6A@mail.gmail.com>
  <9bbb9a27-9100-9a61-50e3-bdc7ab0bab1a@samba.org>
  <CAB5c7xpys+Ch65-6v0qv6rtGonFcKkMKJRYEzOboiRfiOPLs4Q@mail.gmail.com>
@@ -45,12 +45,11 @@ References: <CAB5c7xqZcK9-Oa+o+w5Mva9Dr8_wWojx=krWiP+4zQ0X3ksH+Q@mail.gmail.com>
  <CAB5c7xpBqoumBu_dX9N7eVY_vYUhu57Y+PDeT-S7jOs325GcyA@mail.gmail.com>
  <9ed4d4ed-155c-7740-854a-8819eb7bec91@samba.org>
  <YbOU84ZAt6FE81gb@jeremy-acer> <YbOlvjkCcbp41r0e@samba.org>
-In-Reply-To: <YbOlvjkCcbp41r0e@samba.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CMAE-Envelope: MS4xfH/42gI5+YJT8ldhCcjKf5lCun3e9XQHhtq0Y7avKOQMNacLngslRDUBgrukYqdgtmoIMYnhLGQJ1/5w1VJz8ovXRu+Stp4DXFVXaIFW6mugrQ5BFDu1
- usaJA2JD/Yx0HRZJtBDDaGg0ZdN+Hjs/IvG8uAf7tnIlOVHc5qZapDQuxa+FKeKMDh+ox7Rpc6DTFB3oEPJZ/K4Oag8EbRQsSQFx3DX/dzZC5rTcz1OyfNFO
- x1tSe9oDiy6qPZ0lYyLcmVZTXsojdZnYkHH7zp1Djx6oi6K/AN2qT4Y9SnCkdBceojx6VQQdP6bkh6VmR2VeHQ==
+ <CAB5c7xp+Gs05F3RLX+Zwkx4=WRFY0Wb__bNnbf9Oc9oVv77d7Q@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAB5c7xp+Gs05F3RLX+Zwkx4=WRFY0Wb__bNnbf9Oc9oVv77d7Q@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,94 +63,93 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Tom Talpey <tom@talpey.com>
-Cc: Andrew Walker <awalker@ixsystems.com>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christof Schmitt <cs@samba.org>
+Cc: Tom Talpey <tom@talpey.com>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
+ Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 12/10/2021 2:08 PM, Christof Schmitt wrote:
-> On Fri, Dec 10, 2021 at 09:57:07AM -0800, Jeremy Allison via samba-technical wrote:
->> On Fri, Dec 10, 2021 at 06:06:56PM +0100, Ralph Boehme via samba-technical wrote:
->>> On 12/10/21 17:56, Andrew Walker wrote:
->>>> That's a good point, but if MacOS SMB client is faking up an inode
->>>> number based on a hash of the filename in the zero-id case, isn't it
->>>> even more likely to yield a collision at some point?
->>>
->>> well, it's somehash(name) combined with the parent-inode number. I know,
->>> it's not ideal.
->>>
->>> But going back to inode numbers brings us back to:
->>>
->>> https://bugzilla.samba.org/show_bug.cgi?id=12715
->>>
->>> *scratches head*
->>
->> OK, seems to me that we need inode numbers by default,
->> as that's what works with both Windows an Linux clients.
->>
->> If Mac's need special handling here, then we have the
->> capability to detect them and switch out the inode
->> numbers for Mac clients (fruit... :-) :-).
+On Fri, Dec 10, 2021 at 03:37:57PM -0500, Andrew Walker via samba-technical wrote:
+> On Fri, Dec 10, 2021 at 2:08 PM Christof Schmitt <cs@samba.org> wrote:
 > 
-> Not every Samba server where Mac clients connect has vfs_fruit enabled.
-> And requiring vfs_fruit to prevent data corruption seems like a big
-> step. The requirement for Mac clients is the same, no matter whether
-> the fileid is generated in vfs_default or vfs_fruit.
+> > On Fri, Dec 10, 2021 at 09:57:07AM -0800, Jeremy Allison via
+> > samba-technical wrote:
+> > > On Fri, Dec 10, 2021 at 06:06:56PM +0100, Ralph Boehme via
+> > samba-technical wrote:
+> > > > On 12/10/21 17:56, Andrew Walker wrote:
+> > > > > That's a good point, but if MacOS SMB client is faking up an inode
+> > > > > number based on a hash of the filename in the zero-id case, isn't it
+> > > > > even more likely to yield a collision at some point?
+> > > >
+> > > > well, it's somehash(name) combined with the parent-inode number. I
+> > know,
+> > > > it's not ideal.
+> > > >
+> > > > But going back to inode numbers brings us back to:
+> > > >
+> > > > https://bugzilla.samba.org/show_bug.cgi?id=12715
+> > > >
+> > > > *scratches head*
+> > >
+> > > OK, seems to me that we need inode numbers by default,
+> > > as that's what works with both Windows an Linux clients.
+> > >
+> > > If Mac's need special handling here, then we have the
+> > > capability to detect them and switch out the inode
+> > > numbers for Mac clients (fruit... :-) :-).
+> >
+> > Not every Samba server where Mac clients connect has vfs_fruit enabled.
+> > And requiring vfs_fruit to prevent data corruption seems like a big
+> > step. The requirement for Mac clients is the same, no matter whether
+> > the fileid is generated in vfs_default or vfs_fruit.
+> >
+> > The initial problem is fairly easy to recreate: Use a Samba version that
+> > reports inode numbers as file ids, create 100 different files with
+> > different data from MacOS. Now go to the file system, delete those files
+> > and create files with the same name and different data. Then read those
+> > files on the Mac client. Chances are that the Mac client will now show
+> > the data from the old files (due to the fileid based caching. If a new
+> > file got the same inode, it has the same fileid).
+> >
 > 
-> The initial problem is fairly easy to recreate: Use a Samba version that
-> reports inode numbers as file ids, create 100 different files with
-> different data from MacOS. Now go to the file system, delete those files
-> and create files with the same name and different data. Then read those
-> files on the Mac client. Chances are that the Mac client will now show
-> the data from the old files (due to the fileid based caching. If a new
-> file got the same inode, it has the same fileid).
+> Are we sure about that? For the fun of it, I just rewrote how we were
+> allocating file_ids so that they were derived from smb_fname->base_name.
 > 
-> As this thread shows, timestamps are not a universal solution.
-> In vfs_gpfs, we are able to retrieve the inode number and the inode
-> generation and use that to generate unique ids. That seems to work
-> reasonably well. But even the standard Linux statx() call does not
-> return the generation number. So that would only be solution for file
-> systems that that provide an interface to query the generation number.
-
-I believe the EXT, BTRFS, XFS and a few other Linux filesystems support
-retrieving the generation number via ioctl(FS_IOC_GETVERSION). But I'm
-not certain how universal this is. There being hundreds of file systems
-in Linux...
-
-Could Samba perhaps insert a kernel module, or use the SMB client kmod,
-to fetch this? It'd be ugly and will have security implications, so I
-would not go into it lightly.
-
-> For additional fun, the spec says:
+> ```
+> Andrews-MacBook-Pro:share2 awalker$ cat testfile
+> CCC
+> Andrews-MacBook-Pro:share2 awalker$ cat testfile2
+> BBB
+> Andrews-MacBook-Pro:share2 awalker$ stat testfile2
+> 872415469 3840159432845878725 -rwxr--r-- 1 awalker staff 0 4 "Dec 10
+> 15:24:36 2021" "Dec 10 15:27:17 2021" "Dec 10 15:27:17 2021" "Dec 10
+> 15:24:36 2021" 1024 2 0 testfile2
+> Andrews-MacBook-Pro:share2 awalker$ stat testfile
+> 872415469 398 -rw-r--r-- 1 awalker staff 0 4 "Dec 10 15:27:56 2021" "Dec 10
+> 15:27:56 2021" "Dec 10 15:27:56 2021" "Dec 10 15:27:56 2021" 1024 2 0x10000
+> testfile
+> Andrews-MacBook-Pro:share2 awalker$ cat testfile2
+> CCC
+> Andrews-MacBook-Pro:share2 awalker$ cat testfile
+> BBB
+> Andrews-MacBook-Pro:share2 awalker$ stat testfile2
+> 872415469 3840159432845878725 -rw-r--r-- 1 awalker staff 0 4 "Dec 10
+> 15:28:46 2021" "Dec 10 15:29:30 2021" "Dec 10 15:29:30 2021" "Dec 10
+> 15:28:46 2021" 1024 2 0 testfile2
+> Andrews-MacBook-Pro:share2 awalker$ stat testfile
+> 872415469 6066312061719206029 -rwxr--r-- 1 awalker staff 0 4 "Dec 10
+> 15:24:36 2021" "Dec 10 15:27:17 2021" "Dec 10 15:27:17 2021" "Dec 10
+> 15:24:36 2021" 1024 2 0 testfile
+> Andrews-MacBook-Pro:share2 awalker$
+> ```
 > 
->      2.1.9 64-bit file ID
-> ...
->     The identifier SHOULD<10> be unique to the volume and stable until the
->     file is deleted.
-> ...
+> Behind the scenes on my Samba server I renamed the files. Inodes stayed the
+> same when viewed from MacOS client, but file contents changed. This was in
+> Big Sur though. Or is this application-specific?
 
-Yeah, that SHOULD is confusing (and technically a doc bug). It is not
-making any reliable normative statement. We could toss that to dochelp.
+I tested this two years ago, and could demonstrate the problem.
 
-> So technically the Mac is wrong to expect identifiers to be unique
-> across file deletions. I assume this comes from the old MacOS file
-> systems that have a CNID that is only increasing.
-> 
-> I am not sure how to solve this for the general case...
-
-I think the exception for deletion is stemming from the possibility of
-oplocks or leases, which will provide a callback that the client will
-use to flush its cache. But these are optional, and aren't completely
-reliable, in the face of network partitioning. It gets particularly
-messy when the server supports durable, resilient or persistent handles.
-
-Ralph, did you try returning FFFF instead of zero for the DiskFileId in
-vfs_fruit? As in, cannot be provided for just that file? Perhaps MacOS
-does something different in that case.
-
-Sorry, no brilliant nuggets of wisdom from me at this point either.
-
-Tom.
+Christof
 
