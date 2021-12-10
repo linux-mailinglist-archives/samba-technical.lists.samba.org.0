@@ -2,52 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00D724704FB
-	for <lists+samba-technical@lfdr.de>; Fri, 10 Dec 2021 16:54:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B39C470573
+	for <lists+samba-technical@lfdr.de>; Fri, 10 Dec 2021 17:19:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=eksus8VYegBXQqg8/ehAYqSReLaB5XPXwjr2+UdtAPo=; b=EljTgHGSVZGoCKW+5kBduduz1M
-	77eEM/gwlBtYK9u1Q+EUDqR2qAH5/uyfsPbKcqfnOX//nDSnsxbcDD3RizsYO/H4WeUvdavWVgqC3
-	LWa7/s2L2eLwjZxyhZUKD/2Nsd8UNO23zrHxfIRf2GzemlgBJEGcteaxy/dZzgNhqS8S6DRqB6OS0
-	N5RgdcV5ej+1rk2yRrUVPpf0ci8qEGqv/X+Am6bplHxEcwRVv6qHVOozMbMZxXIU32DzUiNsVu9MC
-	Bm7RmV4hx+Pef5z9X/ujhFj+nGCjuOHIoREhRh5DrAqy0LHrKcD2nphS85j8WpVK2pPQPNoiwtlzf
-	ChGJbJ4Q==;
-Received: from ip6-localhost ([::1]:29088 helo=hr1.samba.org) 
+	bh=k8L3DNuy+D05qVO+sF1MsrrGfcIbHU7Lr89yY2jDpU0=; b=BR7umeeKYhW850dRm0m/tIRDC1
+	C12gioHEbrWBwiIqyWuMhfXQr8/4tUJHwwTa4xK6mPozbhO9voagfgfGThMFQoRlKvLZ8PPyAAgY5
+	xM8X55V+OXnIzoqhDUAe2pYTgkfARNwM3lHJGtr0hRsx8GhVpXfBuBWTYApoKzM3eXeRn+pAGMNZr
+	MSqSrWJhoVy3uW77Lr2Afn+dgg3Mh6xqXDlagLPjD3hGDna5VRypagSfWa6TTFXRDTAx2mcAVQnPL
+	gJPG9026n+4eijqOHFllpy8lIwLGpLDr0xjXMmTC8f+QtXrdp00zg/BNxCKXvXdORrFZdz0OQAP30
+	DGt/VadQ==;
+Received: from ip6-localhost ([::1]:36252 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mviDr-004xnR-31; Fri, 10 Dec 2021 15:54:11 +0000
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530]:40582) 
+	id 1mvicO-0050iX-7U; Fri, 10 Dec 2021 16:19:32 +0000
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:38701) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mviDl-004xnH-5Z
- for samba-technical@lists.samba.org; Fri, 10 Dec 2021 15:54:07 +0000
-Received: by mail-ed1-x530.google.com with SMTP id r25so30871236edq.7
- for <samba-technical@lists.samba.org>; Fri, 10 Dec 2021 07:54:04 -0800 (PST)
+ (Exim) id 1mvicI-0050iO-UC
+ for samba-technical@lists.samba.org; Fri, 10 Dec 2021 16:19:29 +0000
+Received: by mail-ed1-x52f.google.com with SMTP id x10so14204353edd.5
+ for <samba-technical@lists.samba.org>; Fri, 10 Dec 2021 08:19:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ixsystems.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=4YI9QXCbYvGzb1hL++LozKV1IJaWjUzEB1BzJoC3q1s=;
- b=TR/ZmWnyBItoJKY44YBxCYDobaGovatdS67QHnRjMx53LTduS+Vy07WT7ttHtdJXdx
- a72+d3OSVOIECnYAHY1uglIh6hzM0RDqwRARhGULd/cmdng/LrnxbTAA0TYbaQq5+x6V
- 7Ao6rfq5Pg8sF16/vPwQBEj7vbfwR+9U99uULi9epsj6i6/lAPYTiSrs+orcUR/CaG4L
- bn6YwjLrOvPpnRlcbG+MI0HYnmpGitAcE+ytusSD3qk/yBIrCeStdwcN+u3MH/iji3fc
- zpcudM/k3YO3EIm2nwvDOWCURnuUNnYGQkI09bZ4bmVHcE7IwKSZgXdDJEGcqnvM7WmV
- 4H8A==
+ :cc; bh=i2wqY9VmA/FI/Dsx1yquLL9Mx9J/2v/pB0JDR8ZF91Y=;
+ b=A3+qMvDrI0l3+T7NkxOrOqF3A20q1cLnCzcWVAzrfJZbYdYLcQLtgUMbtLaUlE3T8b
+ NdNhLzLoZT/AWut/7ZjcMK3aUGjsPl3kIznREKpqGpjeF0cZQE0MCe03/hAa0//zq7OE
+ gbHF9pOhT9FBRm6no7feWol4nbkChSN5fTxCU+VB80AQmL2z5lkGdqCZbfk9He5qGFVa
+ XkhidoV/UmKzbOadU8SOcP2FK2ICksUufI8YJuBZLdm7YagYCUtoistZJoDmf8dZYDQb
+ L0caWIYVeRIBmR6mHPLEeETcuLUab3+vEcFhkD8K5zblOTDnSZd6cbb5VfwxP8Uw9vum
+ aJXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=4YI9QXCbYvGzb1hL++LozKV1IJaWjUzEB1BzJoC3q1s=;
- b=QQUGgvluFDC2lVuryedYRf+sQ/qq+Z/PvLVP/zkp5PqdK8sAcqev0NlpSSDp0teVqy
- EUZ5M/uMyfCp8LJAA/7Y63vCDDu9Qn16adfNNWZw8w6HcLqjXlYhmj3Z8LCB+FH6Ho4d
- DRSaLcyEjm8fVWH4kdBRs3MmD6x3yHyH4/A6N835cuYeTOBhAq3JhCWYuWySVIat88CM
- 0UHWwkzik1NppoVvDSoM8wmg6XRcJDBublqrBqkrci7cBmJbbH+q1VU+JD/F21an8Nuu
- 9/w1Q2rwa1HheEuksQ62CfC6OiaZ4zCz1qIopRGQs2pB5PbH1ch/pyr7JcOVB4vBah8m
- gZhg==
-X-Gm-Message-State: AOAM533Hu8Yvis5lGGwtOz1p0FwVpbWzNKFOby3XLVw8wtO7jloAztic
- u49qNf8bNe7AkpzrM+6+AzjqBQWFqfMqU32WOEd4UPuChZla5w==
-X-Google-Smtp-Source: ABdhPJwjoVXGZ/d0cJbVty5Xs9W0U8b+ZBTJy+4UtnO1H1ua0jgmS9G4C4GbAniRNhQ8j8/SWmsCyh8gTjzoVcCuPSA=
-X-Received: by 2002:a05:6402:3596:: with SMTP id
- y22mr40353722edc.297.1639151640905; 
- Fri, 10 Dec 2021 07:54:00 -0800 (PST)
+ bh=i2wqY9VmA/FI/Dsx1yquLL9Mx9J/2v/pB0JDR8ZF91Y=;
+ b=U4T7qcX6yvsXQQ6wTjQ5WNwbKd6WG4G/vptAnFmwken4Jqb1v80xa///Y+G0F3UU9I
+ ySPZqh6lL/IeUfGYot3IUsZZ3vHpBF9RD90/AVTyJlPcREno8UFE40HGQNs9kuGIe80w
+ /vz7BmMOdLmNrtBcTxyzBZ3AUNnqnB+/+8c755f/uIBEp8GU66H5l/mk6qvkKsR7cwyg
+ Kzvry+oLliP0/dLQayu/5HaJXWb1vA9OjG8K4jLSMgu/O4dZb2gY9dXsTu8HVmz0CZ1a
+ oUwpYBpxhpuoFltmnpl0FhNF7YZ8unOOmBGMLy4ps4pOGQN8LCJS5Tmh66rWEmowS5oc
+ T4bw==
+X-Gm-Message-State: AOAM531OevUdUOlONk6MNl96fAeyDJK7q7HpGH9WhkiydjpWErAGjsrB
+ lnj0uEhjSBhVA7lqU6teIrSDA8q9eaW5SjCdt6JwmnGewlg/KA==
+X-Google-Smtp-Source: ABdhPJwh+uWzPyp2ZmPuBU38t/yB4aNUJPnAKy4g8VAAT3AvEGhbkNNELSk6OkFTGFMMPaRg2OtR/9Zk6yQRTRSkaO4=
+X-Received: by 2002:a17:907:d22:: with SMTP id
+ gn34mr25121839ejc.195.1639153160571; 
+ Fri, 10 Dec 2021 08:19:20 -0800 (PST)
 MIME-Version: 1.0
 References: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
  <d37f9e09-fdca-07c8-ac5c-b5e859930b9e@samba.org>
@@ -62,9 +62,10 @@ References: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.
  <a25972a3-3688-367b-fcab-fa748e590153@samba.org>
  <CAB5c7xp-zEwjcZSHfjL8YyWd_4y=K3HC3GSjAzvMoJR9aPOv6A@mail.gmail.com>
  <9bbb9a27-9100-9a61-50e3-bdc7ab0bab1a@samba.org>
-In-Reply-To: <9bbb9a27-9100-9a61-50e3-bdc7ab0bab1a@samba.org>
-Date: Fri, 10 Dec 2021 10:53:49 -0500
-Message-ID: <CAB5c7xpys+Ch65-6v0qv6rtGonFcKkMKJRYEzOboiRfiOPLs4Q@mail.gmail.com>
+ <CAB5c7xpys+Ch65-6v0qv6rtGonFcKkMKJRYEzOboiRfiOPLs4Q@mail.gmail.com>
+In-Reply-To: <CAB5c7xpys+Ch65-6v0qv6rtGonFcKkMKJRYEzOboiRfiOPLs4Q@mail.gmail.com>
+Date: Fri, 10 Dec 2021 11:19:09 -0500
+Message-ID: <CAB5c7xqdxsPyuxNfOx-tCxCu3Jfm--CNQZXn=YCwUC3M72jSKQ@mail.gmail.com>
 Subject: Re: Duplicate SMB file_ids leading to Windows client cache poisoning
 To: Ralph Boehme <slow@samba.org>
 Content-Type: text/plain; charset="UTF-8"
@@ -89,96 +90,10 @@ Cc: Tom Talpey <tom@talpey.com>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Dec 10, 2021 at 8:18 AM Ralph Boehme <slow@samba.org> wrote:
+For the pathologically curious, forgot to include link to MacOS SMB client
+/ server source:
+https://opensource.apple.com/source/smb/
 
-> On 12/10/21 12:49, Andrew Walker wrote:
-> exactly. Thanks for digging out the references. Didn't remember I ever
-> wrote such a comprehensive summary. :)
+IIRC it began its life as the BSD SMB1 client.
+
 >
-
-Took a little digging to find it :)
-
-
-> So what shall we do? Back to inode numbers? I've been recommending
-> fruit:zero_file_id=yes to customers who've been reporting strange issues
-> with Mac clients. That causes Samba to return 0 file-ids which has been
-> problematic in the past, but it seems to be working atm.
->
-
-
-Looking through latest MacOS SMB code that I have on hand (which is _very_
-old - smb-759.40.1 / Yosemite), zero file caused MacOS
-SMB client to determine that file IDs are not supported by the SMB server,
-which looks like it causes node lookups to be caused by
-hash of filename rather than inode number...  see comments in
-`kernel/smbfs/smbfs_io.c` and smbfs_hash() in `kernel/smbfs/smbfs_node.c`.
-
-```
-                                /*
-                                 * Some applications use the inode as a
-marker and expect it to
-                                 * be persistent. If file IDs are not
-supported by the server,
-                                 * then our inode numbers are created by
-hashing the name and
-                                 * adding the parent inode number. Once a
-node is created we
-                                 * should try to keep the same inode number
-through out its
-                                 * life. The smbfs_nget will either create
-the node or
-                                 * return one found in the hash table. The
-one that gets created
-                                 * will use ctx->f_attr.fa_ino, but if its
-in our hash table it
-                                 * will have its original number. So in
-either case set the file
-                                 * number to the inode number that was used
-when the node was
-                                 * created.
-                                 */
-```
-
-That seems annoying, but the MacOS source is also quite old. Do we know
-that there are still issues with MacOS when an inode is reused during the
-lifetime of an SMB session? Do we have an easy way to reproduce the MacOS
-issue? Perhaps if we can determine that the issue only impacts legacy
-versions of MacOS we can go back to just returning the inode and tell
-people with EOL MacOS to upgrade :)
-
-Just spitballing here, but what's the downside of just including the
-current inode number in the file_id we're generating? (Trying to think of
-what we can do that's minimally invasive).
-```
-diff --git a/source3/lib/file_id.c b/source3/lib/file_id.c
-index 6bfcf1463d2..8f3d76e66f9 100644
---- a/source3/lib/file_id.c
-+++ b/source3/lib/file_id.c
-@@ -113,6 +113,7 @@ uint64_t make_file_id_from_itime(const struct stat_ex
-*st)
-        file_id = ((uint64_t)1) << 63;
-        file_id |= (uint64_t)itime.tv_sec << 30;
-        file_id |= file_id_low;
-+       file_id |= ino;
-
-        return file_id;
- }
-```
-
-
-> Tom, do you know if it using any of the mentioned fallbacks from MS-FSCC:
->
->    For file systems that do not support a 64-bit file ID,
->    this field MUST be set to 0, and MUST be ignored.
->
->    For files for which a unique 64-bit file ID cannot be
->    established, this field MUST be set to 0xffffffffffffffff,
->    and MUST be ignored.
->
-> would be a way forward? Macs can deal with 0, not sure about UINT64_MAX.
->
-> Thanks!
-> -slow
->
-
-This seems to be rather extreme for what is putatively a MacOS client issue.
