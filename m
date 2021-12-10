@@ -2,61 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BABCC47016B
-	for <lists+samba-technical@lfdr.de>; Fri, 10 Dec 2021 14:19:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 473C2470377
+	for <lists+samba-technical@lfdr.de>; Fri, 10 Dec 2021 16:04:41 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=tbCxUFRCITnIinH0UvnhfzvBFdLVZ7+MLVrbO2+GyM0=; b=AFvVRvZAArAD6qo3VYVy4CQkLg
-	8COLT9EMgfy/9qJj5DC3LhicpWyxhAFdcOdu/IGqXgt7gIEGlSZw9e40dGCTaq0xDmNwzHsHFSeG1
-	5QtIUd9A6UfEZBODewDTqcsbSGyPaEPPya8oalvnxkoZZw311coXCuYCN0O8pGPiUVvZOJL7VDY9o
-	nq6MC8jAJNwMi8bsZk8ug62SVCvu7BRc94v0Oe6L+2k44+jT6ApYndQUzsseGG0Lb7ai/4A9BKKS/
-	EAJMiTiTvEkdYYH1824D/w50izsN2MCSb11mZRY9YyBwIOkKrp/6rDVADmjH/1bM38XRsE/TA160b
-	dPbnaOEw==;
-Received: from ip6-localhost ([::1]:60778 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=ao+uef46xJvDRjVuMvwP6aNzvXZDmUU5KN80l4WVzSg=; b=1hAwe/OpD82sYLVVX/e97yeZdx
+	JCJ//DgEk3PwEtOrwK7vPaVjgu3AnsOeNVj79MA9NZ4hiMh716hXuruBS6aT4VYSygkWtGhfrV0D9
+	ha4JEnj6L22K0jpbTN/MVEm6qHtBbqJw9QvJB/I+JDEtS44Xy/KtZN/9ObL7+815Tzmz6GIYH7UkY
+	NdHov8OdufEEVmIlvslaFekgRwH5WA/TAimtOvKMq0DM0/UHKwQAiSkfmKmE4M32mTBjpjwtQwpf7
+	FrcqG4uB9vZioYVfxyEhQwlLLCT2dje3Bf0Hz/j9wBkc6r4nz24SBdPBFsC+WO/heyHVFMfgtgiJo
+	yBN/aj9w==;
+Received: from ip6-localhost ([::1]:27056 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mvfnX-004rDV-AR; Fri, 10 Dec 2021 13:18:51 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54410) 
+	id 1mvhRN-004wqy-F8; Fri, 10 Dec 2021 15:04:05 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54418) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mvfnS-004rDK-4y
- for samba-technical@lists.samba.org; Fri, 10 Dec 2021 13:18:48 +0000
+ (Exim) id 1mvhRI-004wqp-F5
+ for samba-technical@lists.samba.org; Fri, 10 Dec 2021 15:04:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=tbCxUFRCITnIinH0UvnhfzvBFdLVZ7+MLVrbO2+GyM0=; b=Rvdh3EnHVkBIcZyy+jVWUPUuwt
- 0Obq8jpy+bROJAvk9TcyLEFJubdwTHwapGn6FL7ROFnsyvQUKX9HSycCf/sDcQK7f9A8PFsyQUHQk
- e83x0YFOkfIGEwJH7UnxBx920RbVjJLfIEoemlmhhTUhLoj3y/fIwAizuLI2xrsfzgsuWvPj/mQTV
- cZ58XOaaofJhfiK2HhLNaClxmEDojPPZV5sJuFRcjNH95KfKvRi0roOa9/XaKvYOmYrihOnOtLE3D
- 1zdPQu2BFGzRsDo38c9JZhZyGgV8vhc9OtqDPrXcPcCC76zSk1n01VNV2TM9qmfWj6UEBl++1BerX
- i/0uZZ4VZ9fxk8jrTJVtHgoRUrFN3QrfsOK/MtsMYG3aNNoJqovM/mVjONY+2c7HczCHvI8jtQvWI
- 8rXzHSPCywMNdbwzzZ1b9AKUBhHuQXlYSwK0irP4gH6yTcWEuI29gFRwIKb5ewbL/nTwZlt+UcNYS
- lM0C+eBzHrOIDZ3joF5ZF40u;
+ s=42; h=Message-ID:To:From:Date:CC;
+ bh=ao+uef46xJvDRjVuMvwP6aNzvXZDmUU5KN80l4WVzSg=; b=ggIdUSn+T7BYaBebPXJabo9pNY
+ In6G8bVjOP3auqPFvMJlQmIqGM0j5Jje4fnApt18lVg3iJkUqFussbvggFiTP/fobGLlKoJ/vP9LJ
+ jsniZ9yJeQePT4jgFb6F2KXTJuL9nEwtRxRHfE6u6crryylltmqq4LKEem25bnk3goHVGQi1zUpIl
+ UWFZu/bD3S9RYWdRu44u7n6VGeH2vL4pf+E6uqA8CQUyqFI9VfJweD0k6vwav0tZuFq6lU9hQ24Wu
+ jW8+oBLzIb7AVNVYn6w4yyfqO/DAuhgXU7Bw/n8/6opgrAI5tDpzWJavjQX0LH/3OowLbpHauw2L+
+ k0dloVb8T9bWxNR9aUKr3UaRWBV939Tlnu2DyowevtUSzuoqu4oVsG2AGqd6gntffZEXs5UeiTb27
+ fBRz8vC/suSfjLRxoXqv1l+8+UUGGj+aDD319f4dPCffQlRGYWw6f5TEE7TY4O29WT5iEhbnDQcD+
+ ZGcZSQt9BJI07sK9Hy/Tq+QU;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mvfnN-002AEX-DZ; Fri, 10 Dec 2021 13:18:41 +0000
-Message-ID: <9bbb9a27-9100-9a61-50e3-bdc7ab0bab1a@samba.org>
-Date: Fri, 10 Dec 2021 14:18:40 +0100
+ (Exim) id 1mvhRH-002B7g-Hq; Fri, 10 Dec 2021 15:03:59 +0000
+Date: Fri, 10 Dec 2021 17:03:57 +0200
+To: vl@samba.org, samba-technical@lists.samba.org
+Subject: Re: samba-dcerpcd
+Message-ID: <YbNsXUpMw/k4oJBI@pinega.vda.li>
+References: <E1mvhGg-00H6Ho-3p@hrx0.samba.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.0
-Subject: Re: Duplicate SMB file_ids leading to Windows client cache poisoning
-Content-Language: en-US
-To: Andrew Walker <awalker@ixsystems.com>
-References: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
- <d37f9e09-fdca-07c8-ac5c-b5e859930b9e@samba.org>
- <CH2PR12MB415202EB8137713529ECEF6E9F6F9@CH2PR12MB4152.namprd12.prod.outlook.com>
- <1cd1e3f9-1773-2ba9-24f2-f7a0c4f49cbd@talpey.com>
- <5f6cc5cf-55ee-8422-b284-bd45b8faf448@samba.org>
- <84a566c0-4b04-eafd-89f4-d636ff655371@talpey.com>
- <93cc9a8b-8404-f5a1-3615-62919be31e69@samba.org>
- <fdbdbd51-92cf-d424-655f-fca636583e13@talpey.com>
- <CAB5c7xqZcK9-Oa+o+w5Mva9Dr8_wWojx=krWiP+4zQ0X3ksH+Q@mail.gmail.com>
- <6c8aca36-8856-cf8a-2ea9-902106d0adc3@talpey.com>
- <a25972a3-3688-367b-fcab-fa748e590153@samba.org>
- <CAB5c7xp-zEwjcZSHfjL8YyWd_4y=K3HC3GSjAzvMoJR9aPOv6A@mail.gmail.com>
-In-Reply-To: <CAB5c7xp-zEwjcZSHfjL8YyWd_4y=K3HC3GSjAzvMoJR9aPOv6A@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------iwy18sZOmNmkZAyoZI2HD0lN"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <E1mvhGg-00H6Ho-3p@hrx0.samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,83 +55,51 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Tom Talpey <tom@talpey.com>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Alexander Bokovoy <ab@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------iwy18sZOmNmkZAyoZI2HD0lN
-Content-Type: multipart/mixed; boundary="------------Bjq7whfJnIZkVGEoYhVkVm6u";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Andrew Walker <awalker@ixsystems.com>
-Cc: Tom Talpey <tom@talpey.com>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Message-ID: <9bbb9a27-9100-9a61-50e3-bdc7ab0bab1a@samba.org>
-Subject: Re: Duplicate SMB file_ids leading to Windows client cache poisoning
-References: <CH2PR12MB4152F65AF85E23297EB5146D9F6E9@CH2PR12MB4152.namprd12.prod.outlook.com>
- <d37f9e09-fdca-07c8-ac5c-b5e859930b9e@samba.org>
- <CH2PR12MB415202EB8137713529ECEF6E9F6F9@CH2PR12MB4152.namprd12.prod.outlook.com>
- <1cd1e3f9-1773-2ba9-24f2-f7a0c4f49cbd@talpey.com>
- <5f6cc5cf-55ee-8422-b284-bd45b8faf448@samba.org>
- <84a566c0-4b04-eafd-89f4-d636ff655371@talpey.com>
- <93cc9a8b-8404-f5a1-3615-62919be31e69@samba.org>
- <fdbdbd51-92cf-d424-655f-fca636583e13@talpey.com>
- <CAB5c7xqZcK9-Oa+o+w5Mva9Dr8_wWojx=krWiP+4zQ0X3ksH+Q@mail.gmail.com>
- <6c8aca36-8856-cf8a-2ea9-902106d0adc3@talpey.com>
- <a25972a3-3688-367b-fcab-fa748e590153@samba.org>
- <CAB5c7xp-zEwjcZSHfjL8YyWd_4y=K3HC3GSjAzvMoJR9aPOv6A@mail.gmail.com>
-In-Reply-To: <CAB5c7xp-zEwjcZSHfjL8YyWd_4y=K3HC3GSjAzvMoJR9aPOv6A@mail.gmail.com>
+On pe, 10 joulu 2021, Volker Lendecke wrote:
+> The branch, master has been updated
+>        via  ea2ec7ea5e8 WHATSNEW. Added section about samba-dcerpcd.
+>        via  7b62fa967d0 dcesrv_core: Remove unused dcesrv_reinit_context()
+>        via  730f7dfd615 s3:rpc_server: Delete unused code and doc references
+>        via  9e3ee8c40c0 printing: Remove "start_daemons" from printing_subsystem_init()
+>        via  a7c65958a15 s3:rpc_server: Activate samba-dcerpcd
+>        via  d522a8cce12 s3:rpc_server: Add samba-dcerpcd helper programs
+>        via  3fb2fd49445 s3:winbind: Close internal RPC pipes after 5 idle seconds
+>        via  a350a000f10 s3:rpc_server: Make npa_state_init() public
+>        via  a0075a1fd0e unittest: Remove test_sambafs_srv_pipe
+>        via  c2b8cf05c37 s3:printing: Move pcap_cache_loaded() to load.c
+>        via  3aee4c171c2 smbcontrol: Add rpc-dump-status
+>        via  188586dddde s3:rpc_client: Add rpc_pipe_open_local_np()
+>        via  d3e1ece1a45 s3:rpc_server: Implement the rpcd_* helper-end of the samba-dcerpc protocol
+>        via  4d75f08fd22 s3:rpc_client: Add local_np_connect()
+>        via  3ca7c640da0 s3:rpc_server: Add samba-dcerpcd
+>        via  8ffeb18b9a1 docs-xml: Add "rpc start on demand helpers", true by default.
+>        via  a697814eba9 idl: Define messages sent between samba-dcerpcd and rpcd's
+>        via  da90c02b168 dcesrv_core: Add dcesrv_loop_next_packet()
+>        via  95659031e45 backupkey.idl: Don't listen on \pipe tsvcs
+>        via  3284ee9985d dcesrv_core: Add dcesrv_context_set_callbacks()
+>        via  ebc3918f7d0 s3:rpc_client: Bump debug level for ncalrpc connect error
+>        via  f83f7bd6bdd s3:rpc_server: Remove direct registry access from svcctl_init_winreg
+>        via  a60c7b4ff29 s3:services: Disable rcinit-based service control code
+>        via  afd014245a9 test: Prime the kpasswd server
+>        via  d5fa6263948 rpc_server: Check info5->transport
+>        via  00e41d198d2 librpc: Get transport out of tstream_npa_accept_existing_recv()
+>        via  fa445f15318 auth: Fix a typo in auth/gensec/ncalrpc.c
+>        via  1bab76223cd librpc: Add named_pipe_auth_req_info5->transport
+>        via  530fb4fdfb3 named_pipe_auth.idl: Add "need_idle_server"
+>        via  d1934e2331f named_pipe_auth: Bump info4 to info5
+>       from  bd98e040d4a Update WHATSNEW.txt with removal of wildcard copy, rename and unlink.
 
---------------Bjq7whfJnIZkVGEoYhVkVm6u
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Thank you, Volker! This is a huge step forward for Samba!
 
-T24gMTIvMTAvMjEgMTI6NDksIEFuZHJldyBXYWxrZXIgd3JvdGU6DQo+IENvcnJlY3Q/DQoN
-CmV4YWN0bHkuIFRoYW5rcyBmb3IgZGlnZ2luZyBvdXQgdGhlIHJlZmVyZW5jZXMuIERpZG4n
-dCByZW1lbWJlciBJIGV2ZXIgDQp3cm90ZSBzdWNoIGEgY29tcHJlaGVuc2l2ZSBzdW1tYXJ5
-LiA6KQ0KDQpTbyB3aGF0IHNoYWxsIHdlIGRvPyBCYWNrIHRvIGlub2RlIG51bWJlcnM/IEkn
-dmUgYmVlbiByZWNvbW1lbmRpbmcgDQpmcnVpdDp6ZXJvX2ZpbGVfaWQ9eWVzIHRvIGN1c3Rv
-bWVycyB3aG8ndmUgYmVlbiByZXBvcnRpbmcgc3RyYW5nZSBpc3N1ZXMgDQp3aXRoIE1hYyBj
-bGllbnRzLiBUaGF0IGNhdXNlcyBTYW1iYSB0byByZXR1cm4gMCBmaWxlLWlkcyB3aGljaCBo
-YXMgYmVlbiANCnByb2JsZW1hdGljIGluIHRoZSBwYXN0LCBidXQgaXQgc2VlbXMgdG8gYmUg
-d29ya2luZyBhdG0uDQoNClRvbSwgZG8geW91IGtub3cgaWYgaXQgdXNpbmcgYW55IG9mIHRo
-ZSBtZW50aW9uZWQgZmFsbGJhY2tzIGZyb20gTVMtRlNDQzoNCg0KICAgRm9yIGZpbGUgc3lz
-dGVtcyB0aGF0IGRvIG5vdCBzdXBwb3J0IGEgNjQtYml0IGZpbGUgSUQsDQogICB0aGlzIGZp
-ZWxkIE1VU1QgYmUgc2V0IHRvIDAsIGFuZCBNVVNUIGJlIGlnbm9yZWQuDQoNCiAgIEZvciBm
-aWxlcyBmb3Igd2hpY2ggYSB1bmlxdWUgNjQtYml0IGZpbGUgSUQgY2Fubm90IGJlDQogICBl
-c3RhYmxpc2hlZCwgdGhpcyBmaWVsZCBNVVNUIGJlIHNldCB0byAweGZmZmZmZmZmZmZmZmZm
-ZmYsDQogICBhbmQgTVVTVCBiZSBpZ25vcmVkLg0KDQp3b3VsZCBiZSBhIHdheSBmb3J3YXJk
-PyBNYWNzIGNhbiBkZWFsIHdpdGggMCwgbm90IHN1cmUgYWJvdXQgVUlOVDY0X01BWC4NCg0K
-VGhhbmtzIQ0KLXNsb3cNCg0KLS0gDQpSYWxwaCBCb2VobWUsIFNhbWJhIFRlYW0gICAgICAg
-ICAgICAgICAgIGh0dHBzOi8vc2FtYmEub3JnLw0KU2VyTmV0IFNhbWJhIFRlYW0gTGVhZCAg
-ICAgIGh0dHBzOi8vc2VybmV0LmRlL2VuL3RlYW0tc2FtYmENCg==
+I am going to look at adopting FreeIPA to use samba-dcerpcd during
+Christmas weekend.
 
---------------Bjq7whfJnIZkVGEoYhVkVm6u--
 
---------------iwy18sZOmNmkZAyoZI2HD0lN
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmGzU7AFAwAAAAAACgkQqh6bcSY5nkbB
-fw//ezPHS34woexlqIRx57+gQlPBR+lL9g0+BmGNA7KfrDozAWezTr2L+hIJkPJiGQleBf6YZcfV
-VSvyBaWPON5j3XDNRLxNFvPsuoLYIgTaupPmiwikC3QopMM4rmm8mwvq9LDMvXW3s//kKkEHGS2d
-e7pcKRtV5WKm5ErNJJJQtajd1Pvj0Z/uF5kZa6aU0sBW6ho7l4kdNPNXqxr0fOAphWaRKjDPcQE0
-RvMyKIh34x0wv+LzfwPfNccJKAlNiSbqhFBJ7Mbe79l5JxxVeQ6OFno8ffRaM0WBPROjAQxFUuQD
-M5jVEAfThzOa5YppvfKjABfNRvottfPTqRgNC8XDONWwiMvG1uEZNUVGTdxfmsi4eYzV48BFoL4u
-fnnGrFz1Yo96N1LBWuozgsHEXnic4qLF1LWYF3bUjXdlBB96/XkXB6/ohoblN46cxwo9kjZ2ALyW
-c8ym7oHSUqnVAq4BhupYAUqQC8KqtDE5UuStoQcj+tD/hqB6oSr7T/TiPi40wIklzRF/CN8q6Dmn
-Yl8ctQh86/BwTaebmo1kWsqtvGdP42Zf0p1XP69NpF05sO5CstOWp6Koz5EqNGJTDXH8YqofdX27
-YnDHGRThPzm/KWa8YcZKgvz4/Useb6+ovXd5hwMb9Hi4wF3xwvwN4oytgB4n7kqOS2pDbDVnKQul
-dY4=
-=g99W
------END PGP SIGNATURE-----
-
---------------iwy18sZOmNmkZAyoZI2HD0lN--
+-- 
+/ Alexander Bokovoy
 
