@@ -2,41 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 967A5475ABC
-	for <lists+samba-technical@lfdr.de>; Wed, 15 Dec 2021 15:37:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F2D6475B58
+	for <lists+samba-technical@lfdr.de>; Wed, 15 Dec 2021 16:06:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=AF/RsakAYTumLTkfbUQrOLpnaopf7CwYLgUxEq/l0/M=; b=gICjY816p3C8FZYhkUnIqxMfpC
-	hFyHhwluKAHFJ3jgg0MFZ/O4V2QxCZvZn/IGA6hlQv6xFZeOAZhN9WXfhQcnzuQ6XM91fG4Krjfc0
-	OxjRHrZ7cEM22Uh6jp3QYmlnIEFZd01UWCl37gCh96lWeB1F1OVESOxaq7yppNdf60e2/rUJHshuo
-	+eS+OmImiBvQthE+4unq0WSek5vblO12Krm1twSAIssNOewENRtQR6URJU6qUQ1RfOpioB/0hDEsr
-	px82dVAn5EqJwPciUzXSsj/Pj3L85m5qj/oZ1FRa22TPhrAyff4mxD/6b8nJQJmMzAhXQnu63+Z54
-	Iaq90VYg==;
-Received: from ip6-localhost ([::1]:29556 helo=hr1.samba.org) 
+	bh=Hee9BMjn4qeON3ggopnNSJBlMoNzNviueS4LHF+80sg=; b=4uRbR5CQ8+atWAu6oKmKb6bxoK
+	pDDRwX3rmIW/vlywxjxCiBny1+D80xhHrdtx80IJWx8T5qPF41LI1E30KzIQOqvpHte3vXgj007uB
+	9w7osktR3xcZ8t5DvclLwEVoYei48NtHKqms6N2Bxu8PcVQyfkWeBpiGQJ5tROcog/DDHpi8UbccR
+	TT/Hy4kp4VqGv0iKGxKvcRYoEErsGKW333PuAz6V7WoMLRh2+hr7HPqwVev5uSu3eWzvxoxDl9wfq
+	PMgj2qzfa/2DuOeZyDJ4LsTrmDD3InFE7HGiDizso724vL8t1yPrCyrLA2uKFOP3IIhNup51ogxnd
+	l72dsAYQ==;
+Received: from ip6-localhost ([::1]:35596 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mxVOi-000h0s-5y; Wed, 15 Dec 2021 14:36:48 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54538) 
+	id 1mxVqw-000jC8-Hp; Wed, 15 Dec 2021 15:05:58 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54548) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mxVOd-000h0Z-18; Wed, 15 Dec 2021 14:36:46 +0000
+ (Exim) id 1mxVqq-000jBo-TH; Wed, 15 Dec 2021 15:05:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:Message-ID:From:To:CC;
- bh=AF/RsakAYTumLTkfbUQrOLpnaopf7CwYLgUxEq/l0/M=; b=rbA2EToLs7CWPuJmYlhINp3Dsh
- sdrUJPajNg7X/Wf1+RroB8D071uicMJJ4Zdh/aqoU9kfb1EvVRfwwP+snUikSEJpUnd6ytWEuMKrC
- fAF6UMyiW4AinCGeKXxRa+wetKNWm39iW8J+qSurPbxZ6BA1dIdagGqW9rBGH5b2s9LlujkB+7x5u
- OTT8MSSSi7syGPttBIS9kG6EUNv53CHEsSlMchrtPf3wjcfVDQoO70JaomuYarzyuyaYIgOYa8KqW
- 6WGDQLkq+UeMvrys3E+gW0iZx1tSBjiR8lsYbiVBw8sSa08B5Og/m3r9S47ZeUmrvxvIpHLYcPSKy
- FCaslnKCWoSi0x7hV4vD6L6TlWST8mXYY7fpJpY6rdLcfdL55E41CZ897cq6kNRLVh+BUGPIxlSSL
- EXtW+li5qEFOHj023zqnDlm5AuzaoSS8R98DKWGhgx5keKiON36gZzP/gSlfZO+igTjemH+M2DsbD
- vVx1pwJq6YjmP3nqvd+tffb6;
+ bh=Hee9BMjn4qeON3ggopnNSJBlMoNzNviueS4LHF+80sg=; b=QdMCT+j+Mf2bk1ckHv5dPvTB/f
+ q3pXDPu4NXdRZNvIwGB/TeyzxrXXyt8KDnJQ7HIWDWv4hBF7akyXxsCyV1BqXzPbXiKjjK1ciyati
+ mEaTtB88eKUtvKKa5ErfEMrOoUIQeXSR2eO9yOWjYxVDTysAiyvYg0TcnLuY74HrSoJ9kPhS0/28D
+ bc+Hqkcwi+dSaOCkXMCjq/2wQ6ld/kgbgIr8Z0IlEV98nTXTu3hS60luF1mXe8/hTdDweLBq4lses
+ Ja8W9tUWV6NQGMlVPzdgTSHo22Um+FzQpHWszeIQBSIsfI3Z61eF4uZJd4KX4C/Q7+mvVskvNsEbN
+ zfz5uJagN07EGPcqFDNqJL+ERbhNj0wiaSTERhU1K6k8SIwCiX3rI2CQNKxXlajRJTq+Wn1YJa118
+ xfAtpPvETea/5iFxYdOWwPwdSUqgmNPKu1fG+oQB0ukQDIlhRKP2ZHBt30FrvlDdJ8th0nDCUX5Ox
+ g/Q9M245jPixlWldDTD8u8Kd;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mxVOc-0030QU-G2; Wed, 15 Dec 2021 14:36:42 +0000
+ (Exim) id 1mxVqq-0030ww-Ax; Wed, 15 Dec 2021 15:05:52 +0000
 To: samba-announce@lists.samba.org, samba@lists.samba.org,
  samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.13.15 Available for Download
-Message-ID: <1aef63fd-647c-b8b1-333a-81d251a8a436@samba.org>
-Date: Wed, 15 Dec 2021 15:36:42 +0100
+Subject: [Announce] Samba 4.14.11 Available for Download
+Message-ID: <b7a08de9-76bb-948e-6367-4c440b9718e5@samba.org>
+Date: Wed, 15 Dec 2021 16:05:52 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
@@ -64,18 +64,18 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 Release Announcements
 ---------------------
 
-This is the latest stable release of the Samba 4.13 release series.
+This is the latest stable release of the Samba 4.14 release series.
 
 Important Notes
 ===============
 
-There have been a few regressions in the security release 4.13.14:
+There have been a few regressions in the security release 4.14.10:
 
 o CVE-2020-25717: A user on the domain can become root on domain members.
 https://www.samba.org/samba/security/CVE-2020-25717.html
                    PLEASE [RE-]READ!
                    The instructions have been updated and some workarounds
-                   initially adviced for 4.13.14 are no longer required and
+                   initially adviced for 4.14.10 are no longer required and
                    should be reverted in most cases.
 
 o BUG-14902: User with multiple spaces (eg Fred<space><space>Nurk) become
@@ -84,11 +84,20 @@ o BUG-14902: User with multiple spaces (eg Fred<space><space>Nurk) become
               information, see 
 https://bugzilla.samba.org/show_bug.cgi?id=14902.
 
-Changes since 4.13.14
+Changes since 4.14.10
 ---------------------
+
+o  Jeremy Allison <jra@samba.org>
+    * BUG 14878: Recursive directory delete with veto files is broken.
+    * BUG 14879: A directory containing dangling symlinks cannot be 
+deleted by
+      SMB2 alone when they are the only entry in the directory.
 
 o  Andrew Bartlett <abartlet@samba.org>
     * BUG 14656: Spaces incorrectly collapsed in ldb attributes.
+    * BUG 14694: Ensure that the LDB request has not timed out during filter
+      processing as the LDAP server MaxQueryDuration is otherwise not 
+honoured.
     * BUG 14901: The CVE-2020-25717 username map [script] advice has 
 undesired
       side effects for the local nt token.
@@ -97,19 +106,27 @@ become un-
       deletable.
 
 o  Ralph Boehme <slow@samba.org>
+    * BUG 14127: Avoid storing NTTIME_THAW (-2) as value on disk
     * BUG 14922: Kerberos authentication on standalone server in MIT realm
       broken.
+    * BUG 14923: Segmentation fault when joining the domain.
 
 o  Alexander Bokovoy <ab@samba.org>
     * BUG 14903: Support for ROLE_IPA_DC is incomplete.
 
 o  Stefan Metzmacher <metze@samba.org>
+    * BUG 14788: Memory leak if ioctl(FSCTL_VALIDATE_NEGOTIATE_INFO) 
+fails before
+      smbd_smb2_ioctl_send.
     * BUG 14899: winbindd doesn't start when "allow trusted domains" is off.
     * BUG 14901: The CVE-2020-25717 username map [script] advice has 
 undesired
       side effects for the local nt token.
 
 o  Joseph Sutton <josephsutton@catalyst.net.nz>
+    * BUG 14694: Ensure that the LDB request has not timed out during filter
+      processing as the LDAP server MaxQueryDuration is otherwise not 
+honoured.
     * BUG 14901: The CVE-2020-25717 username map [script] advice has 
 undesired
       side effects for the local nt token.
@@ -148,7 +165,7 @@ from:
 
 The release notes are available online at:
 
-         https://www.samba.org/samba/history/samba-4.13.15.html
+         https://www.samba.org/samba/history/samba-4.14.11.html
 
 Our Code, Our Bugs, Our Responsibility.
 (https://bugzilla.samba.org/)
