@@ -2,54 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 446C247800A
-	for <lists+samba-technical@lfdr.de>; Thu, 16 Dec 2021 23:37:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36805478C06
+	for <lists+samba-technical@lfdr.de>; Fri, 17 Dec 2021 14:10:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=81Vv3nh8r/RaJZSOy1jxoqWeljKTaFBSysmjdaArh0k=; b=J3Wm0OFyHhtlIY61WC/aai/TIf
-	hsYoNk0unNXOU1TRs6djO00q2uX/JWHJUx3S5CRTBEKYIId305MwqMBHfUMYi5Cb2whmAr6qhawcT
-	EsRyjRuAe3qkY+JCWJUpDhJFVWIO2RHfJ1RAvZPGGJr3yIUku/JMrN6PjA7RhH9cK/LalhKosCzCH
-	3MlQoAqoZlZNCZ2IHghSnoKtzmkYxXt3kEQ65SKflhyghP+5+gEQ6T+WakPHL/+Vv3m/UGkFGSyf0
-	DYXTeybor6HzkMHAdH0+ZdaYOkSHrXI7qwLYJBD/O5h9uBI8yZOKSzNHcjl4WHpfRslZhETLv7nb9
-	iUi8uOBw==;
-Received: from ip6-localhost ([::1]:62410 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=VOrNKDqeuDmIYC1CnDQzSwocRECXb6C0+M5VIi6hyW0=; b=dm3KVVCrUTQUOWwlFtaX2YyBp9
+	c5oXwsSFUAOpZetykhp2yBjJ2rSOEyJLa6MvdCAq4tCUle5jR5Rl4VA7D3LmBaxiCw2jqKbHtJhtT
+	tdSKlAboKo/yREQ89F29IrguMfhZK32eZfaGmryRqT0zp+reNJyu9tac3TJsRl/dmI4W+uYoNN3N7
+	qbJjcExCqkVHpFdEK4Pin+km5nLv/yRgDiRKGn+ONENbupgnTGBm8Tq+W7RCtW447H4AC3Kar9rFW
+	Hd+0RDV+6tneikhDLhEMDiTlPIBX0MyjsEwS//q7EXPWgBvo6p7X80RpG/DzBZBWXhpxa31vUxM+h
+	I7a9xvhQ==;
+Received: from ip6-localhost ([::1]:25692 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1mxzLt-000wuL-5g; Thu, 16 Dec 2021 22:35:53 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54574) 
+	id 1myCzo-0012uh-5Y; Fri, 17 Dec 2021 13:10:00 +0000
+Received: from mout.kundenserver.de ([212.227.126.135]:51231) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1mxzLo-000wuC-0m
- for samba-technical@lists.samba.org; Thu, 16 Dec 2021 22:35:50 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=81Vv3nh8r/RaJZSOy1jxoqWeljKTaFBSysmjdaArh0k=; b=0Z1NStck/J4pwPMOoYkhttgTEJ
- 5+phNvOlZ8ptmEVJsULiZwKNpVWqw91s4iSqalVffkNPUfbPMD7axx8CdXMri5FT39nCtd0KrOzdJ
- MYX59CLqHqVqTP9dkUCP7WvkK4qvwqChvBFVzSk0vIWP150esUuH27dumc4Cnj5UsLz1dMjMBXlhE
- akBgCBZwt3VdEmFCEyMHXi9S7i5MvD3fh4LWrzq0HJ8Bk3stAJNupio2sf2+m0HLuEzIi2nVndz3d
- 4imVN+gdoCvU5/8FvhickIs8WNjsjiL3sr1rdzUqBhNszWoGQQHLNgxpCvA6DHJ1DGvf1iz7QsCvw
- lJpN4A4fjUrm+TIc+Rh6XLL+oqb8oipWWmpO9r2ASZI27X8l/WOdTBZxWLqZsZWJn/0SalIUrk+a9
- EiN9qdGVg/KKdkQ4tkQ0ojVpG9HSa06WRgi8KdOBLnqo8PIshwGvfphCfO6SfYOALUwfShkecKD81
- H3K9QQnm+Zfzso45KcrHAc/e;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1mxzLk-003Hvi-Eo; Thu, 16 Dec 2021 22:35:44 +0000
-Date: Thu, 16 Dec 2021 14:35:41 -0800
-To: "J. Bruce Fields" <bfields@fieldses.org>
-Subject: Re: Duplicate SMB file_ids leading to Windows client cache poisoning
-Message-ID: <Ybu/PSnO1XNqWUCh@jeremy-acer>
-References: <CAB5c7xp-zEwjcZSHfjL8YyWd_4y=K3HC3GSjAzvMoJR9aPOv6A@mail.gmail.com>
- <9bbb9a27-9100-9a61-50e3-bdc7ab0bab1a@samba.org>
- <CAB5c7xpys+Ch65-6v0qv6rtGonFcKkMKJRYEzOboiRfiOPLs4Q@mail.gmail.com>
- <a806f198-69d1-a836-b5d8-c1b7b37c4d87@samba.org>
- <CAB5c7xpBqoumBu_dX9N7eVY_vYUhu57Y+PDeT-S7jOs325GcyA@mail.gmail.com>
- <9ed4d4ed-155c-7740-854a-8819eb7bec91@samba.org>
- <YbOU84ZAt6FE81gb@jeremy-acer> <YbOlvjkCcbp41r0e@samba.org>
- <a58df604-6341-5a18-377f-8ff204ab53da@talpey.com>
- <20211214224045.GB15579@fieldses.org>
+ (Exim) id 1myCze-0012uY-VH
+ for samba-technical@lists.samba.org; Fri, 17 Dec 2021 13:09:57 +0000
+Received: from mail-wm1-f53.google.com ([209.85.128.53]) by
+ mrelayeu.kundenserver.de (mreue011 [213.165.67.97]) with ESMTPSA (Nemesis) id
+ 1M2NqA-1mvRpt3MaM-003qkD for <samba-technical@lists.samba.org>; Fri, 17 Dec
+ 2021 14:09:47 +0100
+Received: by mail-wm1-f53.google.com with SMTP id
+ b186-20020a1c1bc3000000b00345734afe78so1550508wmb.0
+ for <samba-technical@lists.samba.org>; Fri, 17 Dec 2021 05:09:47 -0800 (PST)
+X-Gm-Message-State: AOAM533/ptzNeYyVXlabK1VhaLRNoCvswVY276tcL8uPknJGFJamn6I/
+ ecPWsV11uT367yDwh02yqOr8L2e95SYiXiEv80k=
+X-Google-Smtp-Source: ABdhPJz7G1Jphi5B+WPZUUBROjJfTQT5bMgaRQTtBbW6svcijGRnk/NTqL4833WgkZbH4dijpWWNsIR992CZFrm3sB8=
+X-Received: by 2002:a05:600c:6d2:: with SMTP id
+ b18mr2709166wmn.98.1639746587350; 
+ Fri, 17 Dec 2021 05:09:47 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <20211214224045.GB15579@fieldses.org>
+References: <20211216094426.2083802-1-alexandre.ghiti@canonical.com>
+ <20211216094426.2083802-6-alexandre.ghiti@canonical.com>
+ <1956456.1639746081@warthog.procyon.org.uk>
+In-Reply-To: <1956456.1639746081@warthog.procyon.org.uk>
+Date: Fri, 17 Dec 2021 14:09:31 +0100
+X-Gmail-Original-Message-ID: <CAK8P3a1M-kDqe0uwzyfUiErOavoEi3bVpy4m4BPbBXQr6JrHdw@mail.gmail.com>
+Message-ID: <CAK8P3a1M-kDqe0uwzyfUiErOavoEi3bVpy4m4BPbBXQr6JrHdw@mail.gmail.com>
+Subject: Re: [PATCH v2 5/6] Documentation, arch, fs: Remove leftovers from
+ fscache object list
+To: David Howells <dhowells@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Provags-ID: V03:K1:mnqSly7pUHEg+P0WEJrQGir2YF9+KIjHGWjZ3IcCAiK6QOm3cDk
+ RSXylAREMXzK3llxl1tBDfdd0kgOznbxqroQPaE5r62DUaCHPCpWJIJkwOMJMJA98GoNlog
+ yluUhfIUUy4mlaOfZPze3FJAjMp15pPy7+ujmub6osi55PPr8LB8bV3ix3jEOXw18TYGfqo
+ PPI6XELpJlYxFroNYnCnA==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:Run2DePwJUI=:YGl5ddI2KoCsDpouJCtdeR
+ hLmY3OAkns/SBQpt/MgZHAE68d6jIiCALror/E8h4Ml02PPxe2+faLXm7nC/DpRp99hso17B/
+ TiTjE/yoRy50iVL2oK9+jmgIpUVc00V7AbrBgwmh+bgNkaNTVx8345dr+Jx1k+NuDYaa/lzT0
+ eAdat8mHOpbHvjwGaBXhijZvFbdBe9EZRhlx8J4C5FenXEFvyvD4OayKYbWLIlY03oQZg8/dK
+ Mbh35DsV7nEYKh2p8JZW8JyVEJOD7cxbo1TVQu3LhPJoTrha8CKvYlqXZGQ4hLYkjp1t5JKTW
+ ZMpPXwGazaJigX5UV58VLVWS6eo6LcVrEvm0m0VlLpf6BblAsGTap6XHtJhXkEsUXwVGyDoeM
+ Eq+VuHq1QR2hCzbhwwgSNZ41KXB/zZ3JB2SoSBS0v8px2Mv45IwltYeHtfEHYf8FfLUt3mQWu
+ 9MJG3ovw6Y1JKx9SUDINRdcmG73tkmglutd6x0834faEuLVxuidYrqoVnnibQj+QC0vc87myy
+ aXfGSpMvZRifzF/Q5H3lWmrYyfuIjaj9pwh0OAVe+VK5mPNqE8QpCXAAq8HquDGe9Rs4f9wKd
+ Xj3p3iCU+r2MYcVkty0uuBvu1jncEKpFlsNic5R8EeC8vZ4v8Dk30gsouKkGPzIEJgHOD5450
+ NdradQWstrnjjyzReN5czkaVLC9QX5qd9MNPb8XmO0k02XH1y0BEIqTaCFzkdlK9Dwto=
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,112 +73,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Tom Talpey <tom@talpey.com>, Andrew Walker <awalker@ixsystems.com>,
- Christof Schmitt <cs@samba.org>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- jra@samba.org
+From: Arnd Bergmann via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Arnd Bergmann <arnd@arndb.de>
+Cc: linux-cifs@vger.kernel.org, Arnd Bergmann <arnd@arndb.de>,
+ Jonathan Corbet <corbet@lwn.net>, samba-technical@lists.samba.org,
+ "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+ Jeff Layton <jlayton@kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Steve French <sfrench@samba.org>, linux-cachefs@redhat.com,
+ Alexandre Ghiti <alexandre.ghiti@canonical.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Dec 14, 2021 at 05:40:45PM -0500, J. Bruce Fields wrote:
+On Fri, Dec 17, 2021 at 2:01 PM David Howells <dhowells@redhat.com> wrote:
 >
->Even if you could: it's true that there's an i_generation in the generic
->struct inode, but I doubt there's any guarantee it meets your
->requirements (or is even initialized to anything at all) for a given
->filesystem.
+> Hi Alexandre,
 >
->(Whereas if it were added to statx then the filesystem could choose to
->return it or not depending on whether it's supported.)
+> >  Documentation/filesystems/caching/fscache.rst | 89 -------------------
+> > ...
+> >  fs/fscache/object.c                           |  3 -
+> >  fs/fscache/proc.c                             | 12 ---
+>
+> Can you please drop all of the fscache bits?  They're dealt with by my
+> fscache-rewrite patchset that I'm proposing for the next merge window[1].
 
-So to step back a bit, I think this only affects MacOSX clients.
+I've dropped them both from the asm-generic tree.
 
-I believe (Tom please correct me if I'm wrong) the Windows buffer
-cache is based on pathname from the share root, not the reported fileid.
-
-Also, I'm guessing that the buffer cache should not be preserved
-over a connection loss. Or is it preserved if the client has a
-persistent handle ?
-
-So from the server side we have a 64-bit number we need to keep
-constant over the lifetime of a particular file, and at least
-for MacOSX clients we can't re-use any number even if the file
-is deleted and re-created over the lifetime of a connection.
-
-I'm just trying to scope out the exact issue we're trying
-to solve.
-
-Currently in Samba, we have a 64-bit fileid, which
-we return via the following call in the VFS.
-
-uint64_t fileid = SMB_VFS_FS_FILE_ID(conn, &stat_struct);
-
-The default is:
-
-vfswrap_fs_file_id(), which looks like:
-
-static uint64_t vfswrap_fs_file_id(struct vfs_handle_struct *handle,
-                                    const SMB_STRUCT_STAT *psbuf)
-{
-        uint64_t file_id;
-
-         if (!(psbuf->st_ex_iflags & ST_EX_IFLAG_CALCULATED_FILE_ID)) {
-                 return psbuf->st_ex_file_id;
-         }
-
-         if (handle->conn->base_share_dev == psbuf->st_ex_dev) {
-                 return (uint64_t)psbuf->st_ex_ino;
-         }
-
-         /* FileIDLow */
-         file_id = ((psbuf->st_ex_ino) & UINT32_MAX);
-
-         /* FileIDHigh */
-         file_id |= ((uint64_t)((psbuf->st_ex_dev) & UINT32_MAX)) << 32;
-
-         return file_id;
-}
-
-By default, when reading the stat info from a file,
-st_ex_file_id is set directly from the inode number.
-
-         st_ex_file_id = ex_ino;
-         st_ex_iflags |= ST_EX_IFLAG_CALCULATED_FILE_ID;
-
-and the flag ST_EX_IFLAG_CALCULATED_FILE_ID is set to
-show this is a 'calculated from inode' fileid.
-
-When smbd itself creates a file or directory, it calls:
-
-                         file_id = make_file_id_from_itime(&smb_dname->st);
-                         update_stat_ex_file_id(&smb_dname->st, file_id);
-
-where make_file_id_from_itime() returns the immutable "birth time"
-as the fileid, and update_stat_ex_file_id() does:
-
-         st_ex_file_id = file_id;
-         st_ex_iflags &= ~ST_EX_IFLAG_CALCULATED_FILE_ID;
-
-so it clears the ST_EX_IFLAG_CALCULATED_FILE_ID flag,
-meaning that vfswrap_fs_file_id() will directly return
-st_ex_file_id (i.e. the immutable "birth time") as
-the fileid.
-
-These two calls (make_file_id_from_itime()/update_stat_ex_file_id())
-are also done when smbd reads an extended attribute containing
-a stored DOS attribute with the XATTR_DOSINFO_ITIME flag set,
-meaning we always return the same fileid for a file with
-a given birthtime.
-
-This fixes the problem for MacOSX clients (in that
-birthtime is always increasing as the arrow of time
-marches on) but then fails for the case where the
-birthtime timestamp resolution is so poor that two
-files can end up with the same birthtime.
-
-I'm thinking a tweak in the make_file_id_from_itime()
-case must be the eventual fix here.
-
-Still considering the right way to go about this...
+       Arnd
 
