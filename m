@@ -2,57 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A30C47EFCF
-	for <lists+samba-technical@lfdr.de>; Fri, 24 Dec 2021 16:16:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0BF3482C18
+	for <lists+samba-technical@lfdr.de>; Sun,  2 Jan 2022 17:33:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Kl0YYPYD5040RHk8tdUC5mMa6Ge8dZ75v7xiKZepmfQ=; b=lZHxMIu21UOxSiwSLnruw/k2tW
-	S/QvDARElU7u2Oa5L/BnGMuWRbFLInxD6z6LGQMqYPVyVLm6DXQoZgfk21rp3fCjsfbE0BEcSJCNY
-	V5ETDoqmeYV+vMMfK+pnvm4Il16JcIc5o0JPPCOE52brMGiEL8IMzyHywjIMwH74xMEHF8qdulm6X
-	YkQeLkcawq827KZK2xLkVprluH2t8Q1bGGNI3e3+HgBRRQgbmOh0b9VY4kUUOMq330ioUj9dyq0kF
-	XdAWsl+XA5kNlvQholsRyFIQbm1BEBFBtC3/BgOg0IPQag6g9YfdWvrlQS/NlaK9mE9+TB8qL/Tgh
-	eWXM/QKg==;
-Received: from ip6-localhost ([::1]:56550 helo=hr1.samba.org) 
+	bh=GIVbZ1XBMOWPL/zoXI8aDKLYQ4VBp0+MVfN0Sqp5lrM=; b=mAAR3y47URRnvFAMkuSU9v3Wl3
+	Paw9+dEjqIgNbaIO1n8/Cm8LV98mnaLyXVlpvi9QqPLD8iol3dwbv4sjOSA589bNVZXste6vMYoeP
+	R8sUplbOZv30L+MPBNBPb8YGfQn+h7I9ho8W4Y2mWbbTVqANGwWuUt5vwiXYw7uW3wTzchOUkhFSW
+	YfJTPgKMxhNpntuiSVbWXF3uWvDXmkHfYFFgFruy1IUJ74bjKVILTU4oQpaY6gWo6XZpEBYI8pvq+
+	18hXjBNbRwi97HmIKdTmc7HqaB19hQlnUSZ6195H9eB/iLruJyiucd3bDLcRuRqH2Ppv2yk+uMOMN
+	11U+u9Zw==;
+Received: from ip6-localhost ([::1]:21872 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1n0mII-001ljA-Dy; Fri, 24 Dec 2021 15:15:42 +0000
-Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d]:46051) 
+	id 1n43mo-004R3L-KO; Sun, 02 Jan 2022 16:32:46 +0000
+Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:34336) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1n0mID-001lj1-Bt
- for samba-technical@lists.samba.org; Fri, 24 Dec 2021 15:15:39 +0000
-Received: by mail-lj1-x22d.google.com with SMTP id h15so973610ljh.12
- for <samba-technical@lists.samba.org>; Fri, 24 Dec 2021 07:15:36 -0800 (PST)
+ (Exim) id 1n43mi-004R38-Fl; Sun, 02 Jan 2022 16:32:43 +0000
+Received: by mail-il1-x12a.google.com with SMTP id d14so24426377ila.1;
+ Sun, 02 Jan 2022 08:32:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Kl0YYPYD5040RHk8tdUC5mMa6Ge8dZ75v7xiKZepmfQ=;
- b=TdibYtwGxEk3xJK5BKqfhxRSGn0kwEs7mi3sd9Jwqmtyjdc1pHJFynRD4PJjvY+o2K
- +6uRtu+hvwIv1fxKIUHmqsipqsxFNm2zp/7DK3W03gdkUmjlG8oTh7zBand97wfsAmfo
- bhL282nL7UGVtnxGVhMmTRzzw+xSqXPMeBPBzzbkhxhCdFQJQTMbT3hgXchHZEGvviff
- CX7G0ONo96bzdxQ5bSPdNR5ZADZu25z7X1dIkc7JVb7MhiYmCQOlqAp8ONlRGRgoWcbw
- vrk1c15Krp9maIduMTMEvoVV/y2iKaaN6eUlIZV10p66RMzYQb8nD/5qfcWIktZAk2FD
- aZHg==
+ :cc; bh=GIVbZ1XBMOWPL/zoXI8aDKLYQ4VBp0+MVfN0Sqp5lrM=;
+ b=KBH8UcLCmcUTGTUCuUhRyudc9sjnquQRVNEpDv7t5zgVbquCG7YPESPSQK9InvWkAq
+ Xj7qZDSI5fuR0mnNsC16wR8RKNkKb52TPZ2mVfxYDWi900m66ho8FUglcfp7J+5VypEg
+ SqcH2CrwjrBJ7xaKBkM4ifxR/SqL8gs3cYGTNsZcvANXyZ54eWhGNRJ8b9i/3mXfIPwc
+ 2sv3EWionc9C7UHvZhgjDNg4dPl6DZmmpADG9kQGjoMlODF8GtO9Cg4/YUhcZZ8UK4GJ
+ d3d2EJDw3q+4qu90Rg1uzJYhyFGFh8CJZIbNWBvr2V8aKbFNs2AxU/zJQggb7I1KEznL
+ 3DUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Kl0YYPYD5040RHk8tdUC5mMa6Ge8dZ75v7xiKZepmfQ=;
- b=bsnnhGgd4Nk0LEQfdlZrROtyO6BA5i4Sz68zvt+GFxbGMZ7FXrYWsb/RQsnHt+IXEm
- Mn0WngZTTnowa/1yS/noRZVH/BfnoKqS7Zr7+yAN1ognLVX7oW+/iGgJcL89vuITJpiO
- ETXZMhXeLrjAoB20Gyf8dz/Zr1XmGbQKjP8JG7YVOnyOeAJ8FxAxaRp23D80V1VyPi1F
- kOHuWFhtOtOMeiixHYU2DjounAifl66lpqe7Ilo3K5O3HUS+GkxwFsGn6FMPnI0GyGS1
- pEV3lpsbfmiEXRybUxwQ9zmhgi1dlO+av7v22RkEsoehAXmbdt3+4UUVsFoCb12/FBeh
- 5Enw==
-X-Gm-Message-State: AOAM531xSsugYmj8uYAjJ8OwbLrZs55VOMIeyqXkRcYN0uXI8/u++HP3
- vqxV0FDifRX33Yyl/30yvxBtVr2/sR3ol819aGk=
-X-Google-Smtp-Source: ABdhPJycFT6tNzlLJNgcf4f6fB2GoEbU/rKg+UQBbjMijLF4lW1jPgAVwtQvmTSu8G8DKZfefm2uQkyCSQCjNU8xRwY=
-X-Received: by 2002:a2e:9c8a:: with SMTP id x10mr2384131lji.209.1640358935120; 
- Fri, 24 Dec 2021 07:15:35 -0800 (PST)
+ bh=GIVbZ1XBMOWPL/zoXI8aDKLYQ4VBp0+MVfN0Sqp5lrM=;
+ b=ZoDEaT+skcGwgNh6gUr5F5+RhnQ10Gr84bBqSWTTssS4yU9rC3qtqaaHQyym+CZxY/
+ t3Fa0Vho4GIZd0la0beo+8HVKz0Ru0DcDyyanNqSJ/BzwYJD/r1rqppQv9SNZGiBM6Vf
+ o9QqGrLbsYw8AGF1/6CG3EIBsbppl1/NYuarU8TkWjfgBgGFJj8uzbi9qxeg0py1epW9
+ 3+SuIy6nnvE5hN+Wri80e2resqIAciKCmMjVylrs1SamYHL/7AE35uk9kVJFG+j7CLKH
+ Rt8OQxy55jlloGjKuaURLEHS0KSui6QvtOi42LLFhngB3PNa/oJUOwzEejU8rCuglolj
+ 9QLg==
+X-Gm-Message-State: AOAM5304MqJEsYZs3UK3Juqqv2rsCktgGRxqPLpvhb7ecI1xeoOQBp9D
+ VI+O8KBDYVFQXEc5opKJKd4nFEt2wMqAMFcOHEs=
+X-Google-Smtp-Source: ABdhPJyBRzhrP7CgiBkh9HUXZLdVv9UpzELyeRkiz2YG+JnCtpxRjTpTv173XGEccxr1D/XLaMySf4h7Sjh8We4K5YE=
+X-Received: by 2002:a92:c24b:: with SMTP id k11mr21117391ilo.198.1641141151531; 
+ Sun, 02 Jan 2022 08:32:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20211221004809.213602-1-colin.i.king@gmail.com>
-In-Reply-To: <20211221004809.213602-1-colin.i.king@gmail.com>
-Date: Fri, 24 Dec 2021 09:15:24 -0600
-Message-ID: <CAH2r5ms_VWd6WEh6c6ydfF0it+xdnS9YJL02RwN-baVzdiHmQA@mail.gmail.com>
-Subject: Re: [PATCH] cifs: remove redundant assignment to pointer p
-To: Colin Ian King <colin.i.king@gmail.com>
+References: <CAKywueSZyJtH_V8MVa5bznPN=RdjbphY7xo74ABWn=bMAud+ZQ@mail.gmail.com>
+In-Reply-To: <CAKywueSZyJtH_V8MVa5bznPN=RdjbphY7xo74ABWn=bMAud+ZQ@mail.gmail.com>
+Date: Sun, 2 Jan 2022 18:32:20 +0200
+Message-ID: <CAOQ4uxg2K-hgEvh==yrG49fRshHr3ahSKecOoCok5mafkZtSSw@mail.gmail.com>
+Subject: Re: [ANNOUNCE] cifs-utils release 6.12 ready for download
+To: Pavel Shilovsky <pshilovsky@samba.org>,
+ Boris Protopopov <pboris@amazon.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -67,48 +67,102 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
- kernel-janitors <kernel-janitors@vger.kernel.org>,
+From: Amir Goldstein via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Amir Goldstein <amir73il@gmail.com>
+Cc: Shyam Prasad N <nspmangalore@gmail.com>,
+ linux-cifs <linux-cifs@vger.kernel.org>,
+ Rohith Surabattula <rohiths.msft@gmail.com>,
+ "Paulo Alcantara \(SUSE\)" <pc@cjr.nz>,
  samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>
+ =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@suse.com>,
+ Ronnie Sahlberg <lsahlber@redhat.com>, samba@lists.samba.org,
+ Pavel Shilovskiy <pshilov@microsoft.com>,
+ Steve French <stfrench@microsoft.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+On Thu, Dec 31, 2020 at 10:09 PM Pavel Shilovsky via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> New version 6.12 of cifs-utils has been released today.
+>
+> Highlighted changes:
+>
+> - get/setcifsacl tools are improved to support changing owner, group and SACLs
+> - mount.cifs is enhanced to use SUDO_UID env variable for cruid
+> - smbinfo is re-written in Python language
+>
+> webpage: https://wiki.samba.org/index.php/LinuxCIFS_utils
+> tarball: https://download.samba.org/pub/linux-cifs/cifs-utils/
+> git: git://git.samba.org/cifs-utils.git
+> gitweb: http://git.samba.org/?p=cifs-utils.git;a=summary
+>
+> Detailed list of changes since 6.11 was released:
+>
+> 73008e3 cifs-utils: bump version to 6.12
+> 16af2c4 smbinfo: fix fsctl-getobjid output
+> 85a7865 smbinfo: fix list-snapshots output and installation
+> 207f192 cifs.upcall: drop bounding capabilities only if CAP_SETPCAP is given
+> 1a15076 mount.cifs: use SUDO_UID env variable for cruid
+> 7156c6e mount.cifs: fix max buffer size when parsing snapshot option
+> 8f46aaa Add missing position handling to mount parameters
+> gid/backup_gid/snapshot
+> 4205fdc cifs.upcall: update the cap bounding set only when CAP_SETPCAP is given
+> e406fb1 mount.cifs: update the cap bounding set only when CAP_SETPCAP is given
+> c3f8e81 Extend cifs acl utilities to handle SACLs
+> 6da2dd3 getcifsacl: return error if input path doesn't exist
+> 1f37d9c Fix mount error when mount point has an extra trailing slash.
+> 1252355 mount.cifs: ignore comment mount option
+> ff54e6f setcifsacl: fix quoting of backslash in man page
+> c6507ce Separate binary names using comma in mount.cifs.rst
+> aeaa786 cifs-utils: fix probabilistic compiling error
+> c608a7f cifs-utils: Don't create symlinks for mans if mans are disabled
+> a00e843 cifs-utils: Respect DESTDIR when installing smb3 stuff
+> b9d94cd mount.cifs.rst: add nolease mount option
+> 3d399e4 Add support for setting owner and group in ntsd
+> a138fd1 Convert owner and group SID offsets to LE format
+> 9bd8c8d smbinfo: remove invalid arguments to ioctl method
+> 422f0e9 smbinfo: rewrite in python
+>
+> Summary:
+>
+> Alexander Koch (1):
+>       cifs.upcall: drop bounding capabilities only if CAP_SETPCAP is given
+>
+> Aurelien Aptel (1):
+>       smbinfo: rewrite in python
+>
+> Bjoern Jacke (1):
+>       setcifsacl: fix quoting of backslash in man page
+>
+> Boris Protopopov (3):
+>       Convert owner and group SID offsets to LE format
+>       Add support for setting owner and group in ntsd
+>       Extend cifs acl utilities to handle SACLs
+>
 
-On Mon, Dec 20, 2021 at 8:01 PM Colin Ian King <colin.i.king@gmail.com> wrote:
->
-> The pointer p is being assigned with a value that is never read. The
-> pointer is being re-assigned a different value inside the do-while
-> loop. The assignment is redundant and can be removed.
->
-> Signed-off-by: Colin Ian King <colin.i.king@gmail.com>
-> ---
->  fs/cifs/cifsfs.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/fs/cifs/cifsfs.c b/fs/cifs/cifsfs.c
-> index d3f3acf340f1..61091eed8c65 100644
-> --- a/fs/cifs/cifsfs.c
-> +++ b/fs/cifs/cifsfs.c
-> @@ -775,7 +775,7 @@ cifs_get_root(struct smb3_fs_context *ctx, struct super_block *sb)
->
->         sep = CIFS_DIR_SEP(cifs_sb);
->         dentry = dget(sb->s_root);
-> -       p = s = full_path;
-> +       s = full_path;
->
->         do {
->                 struct inode *dir = d_inode(dentry);
-> --
-> 2.32.0
->
+Guys,
 
+I realize this question is in a year delay, but how is setting group SID
+via smb3_ntsd/smb3_ntsd_full expected to work with this kernel code:
 
--- 
+                                switch (handler->flags) {
+                                case XATTR_CIFS_NTSD_FULL:
+                                        aclflags = (CIFS_ACL_OWNER |
+                                                    CIFS_ACL_DACL |
+                                                    CIFS_ACL_SACL);
+                                        break;
+                                case XATTR_CIFS_NTSD:
+                                        aclflags = (CIFS_ACL_OWNER |
+                                                    CIFS_ACL_DACL);
+                                        break;
+
+Shouldn't aclflags include CIFS_ACL_GROUP?
+BTW, CIFS_ACL_GROUP was not set even before
+smb3_ntsd_full patches.
+
+What am I missing?
+
 Thanks,
-
-Steve
+Amir.
 
