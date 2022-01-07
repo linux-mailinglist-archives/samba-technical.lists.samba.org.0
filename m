@@ -2,46 +2,55 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0804B485EE4
-	for <lists+samba-technical@lfdr.de>; Thu,  6 Jan 2022 03:43:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 701CF487E07
+	for <lists+samba-technical@lfdr.de>; Fri,  7 Jan 2022 22:09:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=RF57lH9vXa6dEwG7I7ka7Qj7KALqc9VxA03Yk5T4SkI=; b=XGjDogw1TuNE56SiH+8RKeCKpD
-	XuiAqMCDWGl4vTR+TQAMLwPw9EEU9Hz3A5Cspf48EopNx9qbCMiU12G9AO16W06LCzXbrH8x7kzoy
-	WGoIL1yO05oLUtD/wbPDD2Q1s3ClaZSn7OIUlKJ2Q7sgczaneU+nR0Ce8+cAH9Q0kyn6nj+afYyZd
-	AK3NXCMMoGNCiogkHHXkAbMeZwvlz9zCRe5e1axQYKHyAssdcdJsMIIm2qD5x5w4rd3r7M1XudcTS
-	OTGctNSFrYacGeZfDvhZKty+c3uKTns6xQHMqWiIEBVLjPGkM0TAicfspmj99PDZyRFI9UsWR9gq3
-	JegzeQIg==;
-Received: from ip6-localhost ([::1]:52576 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=vKxoMTS/D3yEZNYxS4o55LLk6q39y2nCegoNuH2Idps=; b=pldmU/sVuV1bCyBV27Lo0EVN/n
+	MSppamLe01fDvl/PP5kddBXpCPTQ4I9KJL8Ck98kNTr/rlGsshl8Nf74xuzbrM/ycwDdMKroEqTAT
+	fnOlqZTG/A8ejyyarl2K4y3pBySiJbSBlNE4WVo178c8i+P2EG084OrMX+9w/Upk3izCawP21qM+G
+	XpE5Z/675vzOAW0y1EEyr3T2dtNxWvdDolI2sy+GdNdZy8SBDPhNU1jDuO0REaXavHIWJMGLMY/VP
+	UajbFc7anEUv3yZN/QWYvhuST97cCd9jgtscY+mPTuSJxk9syK5noI+Oo2QoFFgc/Sb4nw4Yey1un
+	bSQYCtbg==;
+Received: from ip6-localhost ([::1]:24934 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1n5Ij7-005A6W-14; Thu, 06 Jan 2022 02:42:05 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54736) 
+	id 1n5wTm-005nwf-DU; Fri, 07 Jan 2022 21:08:54 +0000
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:45009) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1n5Ij2-005A6N-ML
- for samba-technical@lists.samba.org; Thu, 06 Jan 2022 02:42:02 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=RF57lH9vXa6dEwG7I7ka7Qj7KALqc9VxA03Yk5T4SkI=; b=2GfZ1I9jkMmkbcdSfnu3yHIVRS
- P9mrdEsa8rD22LVTZFF9MHQRkAivBTHczQUWgGHPDJiZBUen36n0BorQTBqYb0RFBbFDip3SocxZU
- kzrYhW1ssuggdMjy81PibqtCyP4cr8rHF4jtB+9WEZtyyL9o3l+ue8188UyTx17PyYYsRfcYTw4ww
- jZt5HMKiKr1/BTOyZPTyW5Z8hD1E84K4ScTGnQOllnXW/LWPaGrJXoYT6eW6tkZ0Gcwct+gcun5mS
- LPfTMf8UMbZod57gnaRjWLZuGYGaKNjDXRXobXAfHEZyD6l0UoUE0w1X+zpzf3PRRIFKQ/VMb048z
- UBfmpgwr2/f9Cp3AnCbM/LhoHqlviUY7Au/4V5Q08zg0YcmPfv3wWUu/P7cschjWW/3QpP/kqn04x
- Fn1a/DKX7T7SMImMaQKarCuH/9LkF7d6upf1Reprsv4C5nPsHyf1E/DyUHWTDobGn85Ut32QBCHPY
- wZsHktZg6Ki4L2YXBOVUsaag;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1n5Ij0-005xgB-AD; Thu, 06 Jan 2022 02:41:58 +0000
-Date: Wed, 5 Jan 2022 18:41:54 -0800
-To: Orion <orion@et.byu.edu>
-Subject: Re: Unbecome Root in VFS Module
-Message-ID: <YdZW8mY5liRL+TDN@jeremy-acer>
-References: <f48481ea-1c2c-51fc-89a3-c7c81b97e48d@et.byu.edu>
+ (Exim) id 1n5wTh-005nwW-Lw
+ for samba-technical@lists.samba.org; Fri, 07 Jan 2022 21:08:51 +0000
+Received: by mail-lf1-x12b.google.com with SMTP id g26so19900070lfv.11
+ for <samba-technical@lists.samba.org>; Fri, 07 Jan 2022 13:08:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=vKxoMTS/D3yEZNYxS4o55LLk6q39y2nCegoNuH2Idps=;
+ b=TCEhMPWhFBuANZQXoh80Dou4Lq91/vvoUWiYlIRL8EFU/NUmL1w+KWlkSqphL+kc0T
+ DdiLdzN/ApGNLha1isu9yo6RZHyacJ2k2P+niu0t1AT+/ghAzOmtjhxKynbTXyE7+5Xv
+ uaacWaLBMz7yafAkGbm7OI8broIHKXZMTtjyJgEnb/gH9s6Rl+Y32VsoFeVX6h2cjcAD
+ jPNTqrD+1I5q/YdVCi7fUzqrTd8b764rSGZHVbjwqaIGnePL5lpLFEwl1jKFajkWJOCS
+ 1aW4KY67dob8DBjRJfF9oQ7Mu02TEVrgxZv2z6IsRwNk9/TPse2cCunLuDkd/c28gses
+ +OyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=vKxoMTS/D3yEZNYxS4o55LLk6q39y2nCegoNuH2Idps=;
+ b=Of3izVgH+P97ZuNMf8gMqLlqIN6i/KxRl7IRYGMl57khQvCMr17aGKHHuiHkfvsrt5
+ MF0pHaPOMjcr/E/TDC4S6bJYPZaU7sjxu5hrQE7KN3HCgu5E1b22ZyM8RL6tMSgG8YWC
+ l/TXB0H6u59tlwDa+FOZ163WGqxyhcfsayG6pU0HPIQeYMG1c14KWN9mSBuXafA8Dvhr
+ fXfJ4Aqw2CAhdhZ9bGqMRSQBoSnzTKxNK+s3z2C/du61JKvRf0qAVDBzm0QJS9WqEIBx
+ s+9eRzcVgT5cgdQ7Ml3nSiW+0PmyOYa56SZw1Wr/XlkUuddzMFoEQUpRyP8pJTRq9D/8
+ jG1A==
+X-Gm-Message-State: AOAM530E5eltq1rSx0py5jmqAoiXynmZNVVShhecfeMlot25IBryRc0X
+ fEcRoWDglHtczWQpEDb+BqlVBFO6jDall20TPdpHNHnT
+X-Google-Smtp-Source: ABdhPJyxGsK1R9JnMP4qvmHgqqEo/FoUnmyjoUbU21z0Kt3LB4HELOxptl3Pnx8nxfy0zT4d3OpAOQQFCZgOvcizUKY=
+X-Received: by 2002:a2e:a26d:: with SMTP id k13mr52600158ljm.229.1641589727897; 
+ Fri, 07 Jan 2022 13:08:47 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <f48481ea-1c2c-51fc-89a3-c7c81b97e48d@et.byu.edu>
+Date: Fri, 7 Jan 2022 15:08:36 -0600
+Message-ID: <CAH2r5mspLap2Fz=ZrMd2q3q2qikL=qYJOFa_G-THUyJph+f=yQ@mail.gmail.com>
+Subject: FreeBSD SMB3 client
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,33 +64,18 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jan 05, 2022 at 02:56:58PM -0700, Orion via samba-technical wrote:
->Hello,
->
->While adding NFS RQUOTA V2 support to Samba, the request is being made 
->as root and is thus root squashed by the server and fails.
->
->The reason for the issue is source3/smbd/quotas.c executing 
->become_root() before calling the VFS module.
->
->I tried calling unbecome_root() within the module, but it did not 
->work.
+Do you know the most common FreeBSD SMB3 client that we see mounting
+to Samba?  It is confusing looking at their man pages (e.g. "man
+mount_smbfs") because they refer to the "ports" collection for the
+SMB3 client but with no details in the man page they refer you to
 
-It most certainly should work - if you notice, it's
-very common for Samba to do:
+-- 
+Thanks,
 
-become_root()
-... do privileged operation..
-unbecome_root()
-
->Is there another way to change back to normal UID/GID from 
->within the VFS module?
-
-Explain "but it did not work" more completely please :-).
+Steve
 
