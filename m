@@ -2,59 +2,33 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D241F48B9CB
-	for <lists+samba-technical@lfdr.de>; Tue, 11 Jan 2022 22:42:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1845E48CB70
+	for <lists+samba-technical@lfdr.de>; Wed, 12 Jan 2022 20:02:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=xfXoAe+Vr+wVYpAjUIwEml+WxjdDvaFLuGHxawax4dI=; b=IJ4n/eXw7OCCNLSdEQo8PTZmxd
-	CpaaiXUI2eZq92I9i5BqTTtWg6lelyKbfsHXVR3PAhOMLjRODSUi6zo7TCY2YbOiS8n3QG+IP2MlU
-	djsmz4gFxlGKxBdIaMq0kMkbYzK61hqG1DD7hQPzQbD+A4QguNyFfJz1Y2Q9+ysae5gnrOazkoAT1
-	zsZOO/tP09uI7WbPPNepapozUy77xJFuIbTE4LxgHT26Vlj3pvTkLXKGYwn3/8gbS5F6dWmMHmAqW
-	AUA48VcMGiXk+MCFTg7AykVC+vkSnsdz/E6bsMIW4SFn/x4nhNrqEbLtIczhYKQ97sHljgjsa2jgP
-	sJgq/oew==;
-Received: from ip6-localhost ([::1]:46898 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=vMub7EWCfBMfbU8fJbIuTTIBKzwGI+xV4lRJYtKgTuQ=; b=QjDC/Ao9OOQXopb9C9kn1IrGOa
+	BwDbU7myEX0Ltqm6GyQ1ewwJ2x50DEquDaWIhUAC5vzoOQRxtwkyPGtGceojAnV8URC+KuD83z4iM
+	/ZMt2wUvRNB0ro3LXuhLNKOwhS/R2rOpec7N8VhouFxL4Ybd9I5ythx4cYl61lODsptDJ4fCIOS+T
+	Dg4wncp6PPNh/4KDU5hai8ZSfDa1CJlT0McEG/FPCGKyuQh9QJNKv3I8JPiU+PRY1ILgILIVc0ndi
+	txajtENMaU+twxqDm6ftdtBozXlxPigwARkDdhYZ7tOzzvTz08/Zu+Pb0Humtfa4+mU5GTwLubql1
+	uedN1pHQ==;
+Received: from ip6-localhost ([::1]:28336 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1n7Otd-007NMc-0v; Tue, 11 Jan 2022 21:41:37 +0000
-Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:44782) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1n7OtE-007NMS-Hq
- for samba-technical@lists.samba.org; Tue, 11 Jan 2022 21:41:17 +0000
-Received: by mail-lf1-x129.google.com with SMTP id o15so1237396lfo.11
- for <samba-technical@lists.samba.org>; Tue, 11 Jan 2022 13:41:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=xfXoAe+Vr+wVYpAjUIwEml+WxjdDvaFLuGHxawax4dI=;
- b=TC0pmGpn3hr9VXbQQ74r4BDQQEllW9JeN3eeTIadmMbbY1D8baGxOFdJEoARQtYMs0
- 7D8yUFtaGv6sANxEc/VSM8IRUQjEsreLAa1lcHak9yvBsMYeVPcsnXBnkXzxsGOKOclz
- O08RF+BEf5sjYj6u7PPLyi83lBCM1jkma6PU17aTfrq+xpeoFF61oo1sy41D26b+8CO8
- 2IzG+Ble9qig1OIbVABc9RjqPhyUDCR/7NzffXVvDP6MjgGC4HQZ7D5X8VOX+/VlpqUn
- AscMcLncvlESH5uFzqOUx5c53vmwjp77Kag5di+MaNxrMtnll3QS0hdvaCkIKkGC8Gga
- C+lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=xfXoAe+Vr+wVYpAjUIwEml+WxjdDvaFLuGHxawax4dI=;
- b=i5h3rbYffw8iL7TVCkwjJnZLzfE0hi7p2tnimyT+CE7nXNOq3gBWtYYQQtTpyW4OMS
- /zMrc9hP/jZpAhNBhe6H3PBGuIvZHfpL4MKYxK6RkOXU8xbcF46+9Ifev2tbGkgE6awt
- HX+MGDM3e0M93SpwSY8nWXZDFk77mpqNd3pTlhv0WAGoR7679FPZIpmW8fXsDk6W5jvM
- drJPhJaCfRgZP4Z1QOCzxIBC0fIBS2rRTHomvftO1e41711Ppd5UpCO8MA1ceH3H1p9e
- Gp0HPI9UvYtzPlB1CA1u+AG/CoWJw3wcBFPyan6uZH2QV2phoPM41SG0yNhU37Xwh6ft
- I6Jw==
-X-Gm-Message-State: AOAM532cahHxukYHlnzMjLQMX1OKU3qTkqStuG5PUjBa4bUWeZ+Hfl+e
- Zkfywi8eM8mrrwQfyCzU/8NTKN9+8OFM/K775iPqEP2RAW8=
-X-Google-Smtp-Source: ABdhPJw4OLUWqvCpcDqUSuvMj9lAi1g2N7kIL3KMpZb6//moWAFGpxg63qUB5ebSf5RsSu+gcaApisEgWYUhPy39qs8=
-X-Received: by 2002:a05:6512:3e02:: with SMTP id
- i2mr4638095lfv.667.1641937268836; 
- Tue, 11 Jan 2022 13:41:08 -0800 (PST)
+	id 1n7ish-007gnF-Db; Wed, 12 Jan 2022 19:01:59 +0000
+Received: from [104.200.28.160] (port=45068 helo=dup2.asynchrono.us) 
+ by hr1.samba.org with esmtp (Exim) id 1n7isc-007gn6-5C
+ for samba-technical@lists.samba.org; Wed, 12 Jan 2022 19:01:56 +0000
+Received: from edfu.localnet (c-73-114-31-46.hsd1.ma.comcast.net
+ [73.114.31.46])
+ by dup2.asynchrono.us (Postfix) with ESMTPSA id A82DD3CB;
+ Wed, 12 Jan 2022 18:42:12 +0000 (UTC)
+To: samba-technical@lists.samba.org
+Subject: Samba in Containers/Kubernetes Status Update 2
+Date: Wed, 12 Jan 2022 13:42:12 -0500
+Message-ID: <2815519.vuYhMxLoTh@edfu>
 MIME-Version: 1.0
-References: <20220111071716.GC11243@kili>
-In-Reply-To: <20220111071716.GC11243@kili>
-Date: Tue, 11 Jan 2022 15:40:58 -0600
-Message-ID: <CAH2r5mtpdxfAcuThHDs+-UHFf1S=dmSxyXkk2NbaxMwd6FwfQA@mail.gmail.com>
-Subject: Re: [PATCH] cifs: uninitialized variable in cifs_get_next_mid()
-To: Dan Carpenter <dan.carpenter@oracle.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,63 +42,148 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Shyam Prasad N <sprasad@microsoft.com>,
- Enzo Matsumiya <ematsumiya@suse.de>,
- samba-technical <samba-technical@lists.samba.org>,
- kernel-janitors <kernel-janitors@vger.kernel.org>,
- Steve French <sfrench@samba.org>
+From: John Mulligan via samba-technical <samba-technical@lists.samba.org>
+Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
+Cc: samba@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-That was fixed similarly a couple of days ago by a patch from Enzo
 
-commit 1913e1116a3174648cf2e6faedf29204f31cc438
-Author: Enzo Matsumiya <ematsumiya@suse.de>
-Date:   Fri Jan 7 19:51:39 2022 -0300
+Samba in Containers/Kubernetes Status Update vol. 2
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D
 
-    cifs: fix hang on cifs_get_next_mid()
+I had hoped to update the wider Samba community with another status report
+in December but I missed that boat. So January will have to do. This message
+is part of an ongoing effort to summarize what we've been up to as we
+work on integration for Samba in containers and Kubernetes [1].
 
-    Mount will hang if using SMB1 and DFS.
-
-    This is because every call to get_next_mid() will, unconditionally,
-    mark tcpStatus to CifsNeedReconnect before even establishing the
-    initial connect, because "reconnect" variable was not initialized.
-
-On Tue, Jan 11, 2022 at 5:03 AM Dan Carpenter via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> The "reconnect" was never initialized to false.
->
-> Fixes: 220c5bc25d87 ("cifs: take cifs_tcp_ses_lock for status checks")
-> Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
-> ---
->  fs/cifs/smb1ops.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/fs/cifs/smb1ops.c b/fs/cifs/smb1ops.c
-> index 54319a789c92..6b1b048b36ae 100644
-> --- a/fs/cifs/smb1ops.c
-> +++ b/fs/cifs/smb1ops.c
-> @@ -163,7 +163,8 @@ cifs_get_next_mid(struct TCP_Server_Info *server)
->  {
->         __u64 mid = 0;
->         __u16 last_mid, cur_mid;
-> -       bool collision, reconnect;
-> +       bool reconnect = false;
-> +       bool collision;
->
->         spin_lock(&GlobalMid_Lock);
->
-> --
-> 2.20.1
->
->
+As a reminder: our focus is to enable Samba based services running within
+Kubernetes clusters, however our container work should be completely
+independent of the orchestration layer, so you can use docker, podman, or=20
+other OCI container based orchestration systems.
 
 
--- 
-Thanks,
+Clustering/CTDB
+=2D----------------
 
-Steve
+We have continued working on making clustered smbd instances with CTDB a=20
+viable option for users. The low level work has not been changing a lot=20
+recently, and we've focused on improving the operator and how we create and=
+=20
+manage clustered instances. The feature is still experimental but the workf=
+low=20
+should not be changing much in the near future. Largely, you just need to=20
+create "SmbShare" resources that indicate they should be clustered and the=
+=20
+minimum size of the cluster. We've improved our testing coverage but need t=
+o=20
+improve our infrastructure before we can stabilize the feature. We also hav=
+e=20
+some plans to revisit how we configure the CTDB cluster as the nodes file i=
+s a=20
+bit of a challenge.
+
+Like I mentioned in my previous message, we want to look into improving
+behavior with regards to node and container failover. We have not been able=
+ to
+spend much time on this yet, so we are unclear if we can combine CTDB's nat=
+ive
+IP failover with Kubernetes networking.
+
+We're nearly done adding support for the vfs fileid module to the operator.
+Sachin Prabhu has a PR open on this topic [2]. This change will ensure that=
+=20
+the file system we're targeting (cephfs) will not depend on external factor=
+s=20
+like what order file systems were mounted by the kernel. For now, this is=20
+always enabled but we can make it configurable in the future.
+
+
+ACL Xattr
+=2D---------
+
+We still want to run our containers without privileges and therefore being=
+=20
+able to store NTACLs outside of "security.NTACL" continues to be a goal. In=
+=20
+order to get this functionality, G=FCnther Deschner is continuing work on t=
+he=20
+open Samba project merge request [3]. G=FCnther is working to improve the h=
+ooks=20
+into the VFS layer to handle performance and layering concerns raised in th=
+at=20
+PR.
+
+
+CI and Testing Infrastructure
+=2D------------------------------
+
+Currently, all our projects rely entirely on the github actions CI. However,
+we've hit some limitations with this infrastructure, especially with the=20
+ability to run integration tests on multi-node clusters for CTDB Clustered=
+=20
+instances. Anoop C S has been working on arranging a new testing=20
+infrastructure using the CentOS CI [4]. This system will allow us to run VM=
+s=20
+in our tests and support virtual multi-node clusters. In addition to settin=
+g=20
+up this infrastructure for our Samba-in-Containers work, the plan is to als=
+o=20
+use this for the gluster/samba integration tests, and perhaps other samba=20
+integration tests in the future.
+
+
+AD DC Containers
+=2D----------------
+
+The samba-containers project generates images for client, server, and AD (D=
+C)
+servers.  However, the AD DC server images today produce containers that can
+only act as a single DC in a hard-coded domain with hard-coded users and
+groups. This has been working fine for our team for a while because our nee=
+ds
+for the Samba AD is limited: we use it as part of our integration tests and=
+=20
+not much else. As part of a general effort to make the samba-containers=20
+project more generally useful, I spent some time over the holidays working =
+on=20
+making the AD DC container image work with custom settings [5]. The new ima=
+ge=20
+will be based on the sambacc project, just like the file server image has b=
+een=20
+for a while. Soon, the image will be configurable, support provisioning a n=
+ew=20
+domain, as well as joining a new DC to an existing domain.
+
+Running an AD DC container continues to require executing the container with
+SYS_ADMIN capabilities.
+
+
+Wrap Up
+=2D--------
+
+Work continues on many of the projects living under the samba-in-kubernetes
+umbrella.  We're hoping that these (semi-)regular updates help create some
+additional interest in these efforts. Feel free to reply with
+questions/comments/concerns. We'd also love it if you drop by our github
+projects as well. Even feature requests are welcome. :-)
+
+
+Thanks for reading!
+
+
+[1] - https://github.com/samba-in-kubernetes
+
+[2] - https://github.com/samba-in-kubernetes/samba-operator/pull/129
+
+[3] - https://gitlab.com/samba-team/samba/-/merge_requests/1908
+
+[4] - https://jenkins-samba.apps.ocp.ci.centos.org/
+
+[5] - https://github.com/samba-in-kubernetes/sambacc/pull/28
+
+
+
 
