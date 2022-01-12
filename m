@@ -2,46 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4188748CB8D
-	for <lists+samba-technical@lfdr.de>; Wed, 12 Jan 2022 20:10:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6E6648CC5E
+	for <lists+samba-technical@lfdr.de>; Wed, 12 Jan 2022 20:52:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=RJoEzruDqWMaJaLrESwL9owzA2IrfdxmuAOZ/w/3k+Y=; b=LfLJ/oPG4oGgBTG/VvlFK3+hFB
-	dxaQ2QUNvgf3+Fi9bxzjS/pnPzVlS/H0BsrTAH2oM8ALmV0ajU0NHChnUuJx/4/EqV8eGD3yRTBxg
-	eezVIWMz4/vAHGTH9xPcE2hpktLWIG9vnnIijm5YtfkPZlddBBOf53F+gQM4ez8XrLUrLizuPruIR
-	aE+ow++IAV86S5Qftr0uSVPiGABJu1CqQGH0g1pZEwku5kuiJGbW23oZ+OjLpeti8GNKV1sDHC9b5
-	6VEFvked3VetdHsEfFFEbtp+BRBjUPx/Wa2WaRtTouNebOx15g34xWZVQbVqxidEp4KlLO7VEnHB7
-	1W2es66Q==;
-Received: from ip6-localhost ([::1]:29014 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=s4L4UwCJxujet1ynm1Y/FVumqDbAKgur/GOwl7Rk6ZA=; b=SfByjxqaKUT+3tBIVmqJv0+78z
+	aXoTefmAqy739hvt8R8quT9Bdn8xph0wQ824Yw2fftHDbEGyVzVu0vcAHrnXGSFDcokRjTJikFstV
+	3geNwVc2HAI+xYFbyc9YKWDyPZNveH1a/ZmXzFv3iU+ZEar9oCh43DsR/ukRP+0VigC8vsQ7PF+Qg
+	50vXdLZiJq5geggMBOxKzOQ2V5D8CinP6HlfW+zvqFmi1C+qCk3woXKKmTRzqbCOHOlke6990Q8Zm
+	W6y0+mLyrH1kPK5xd2jRU3YNVn4AH+tr3o08rKLGqaf2V96kwIizgCym3Bk6v/7llo7CxG2vhA2rz
+	AY3r5mkw==;
+Received: from ip6-localhost ([::1]:31854 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1n7j1A-007h69-DT; Wed, 12 Jan 2022 19:10:44 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54936) 
+	id 1n7jfJ-007idw-4t; Wed, 12 Jan 2022 19:52:13 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54938) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1n7j16-007h5v-35; Wed, 12 Jan 2022 19:10:42 +0000
+ (Exim) id 1n7jfD-007idi-QD; Wed, 12 Jan 2022 19:52:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=RJoEzruDqWMaJaLrESwL9owzA2IrfdxmuAOZ/w/3k+Y=; b=l430Br5yL6WObASho79EwlUOjy
- +AiALowFpr+eBZ436P5D0nmbG6tfgEhLz1PapbKCk+HVYBZbSJi51YcunWqWervKbnBPZ9XwR+1Un
- 5xh1/i876tP8rPyoNG4KS3lJOgBCRSZw/GFJXYRZlNvlXf0BHwGiIO2R27rGrzUySYRyAAwW+xyFl
- lJjOMuL/WURWRYlGcRXCxctCgi3nGo3fdeJFjBRKiWoUZUV38rsO9TYw2FF6GbG5sUFQN6yMX6G0s
- OVQ8rA/SNK6C8Ioyed7/M3GWvtR5LPVpquznOnqnlVF5dass28q9hrb00+EoyMfyS7bbCJphZR9gy
- v2jG+C492fcM56QO9HXasWIx+jtjxDymlqF9NL9DFqr2au9AQUvKS7DeCeAb6CYuzbTYAkc/O4+8w
- 6g7vZeLDMOLDwh/dpv1U9Ik2hSf+DZlbrFvsZRWQy+hsTQnTxCNN9sNKR7XGvrvaPxH396tb2sR9W
- jlxq56Gt6F6gEOTUBUwzyCsQ;
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=s4L4UwCJxujet1ynm1Y/FVumqDbAKgur/GOwl7Rk6ZA=; b=YEqmSdaiTUAbv4H+gLHZoyViR5
+ loM98QOFyGTr2WvMkDf+IfYlBVsIAMEo1jyO3SQ+T2WGpIhZb6do6A49jFGgtz1ULYbImelPvUXSW
+ 6IS7W23RFKMW0btwmOWDoEjVJZdKwdvSyCzzSyrc3Eek8z1sHG2aJLdlprbkw04gw3LAMsmCNPwd0
+ j23viLnFQ3pzfoZTPXCss0ao3gzI1CxjNSS6HkdLP/nhoWgHx7u3DRWqh/kqxZ+S3d49Pz47jSmdh
+ 8sBqg+1FB4YNcOLuO80EC/AGYcLeU8HlA1fBMMaJMh7M3XkBFH7LTMXCBcbNDSl/fIDUux151jpQ0
+ tRkqfqHwtMEU5qXhjJZUNJCjWTi37+K/E2zmTKvZi+hiPnr4MP+r6uCtmEcpTfoWysTasM+k7s/g9
+ SfbDGHVisropXZGZfP9dF+77N+UgjEs8Z8I87tvpZHrfV6P4jjiSt+Si7pUb0Zi+uIamxz7gBk+7m
+ 6mkiOhGv75SJT5gZKzFK3mtJ;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1n7j15-006ybM-44; Wed, 12 Jan 2022 19:10:39 +0000
-Date: Wed, 12 Jan 2022 11:10:36 -0800
-To: John Mulligan <phlogistonjohn@asynchrono.us>
-Subject: Re: [Samba] Samba in Containers/Kubernetes Status Update 2
-Message-ID: <Yd8nrK4sKgYwdRRx@jeremy-acer>
-References: <2815519.vuYhMxLoTh@edfu>
+ (Exim) id 1n7jfA-006yuD-PK; Wed, 12 Jan 2022 19:52:04 +0000
+Message-ID: <07456f70-6a59-9591-d096-6d42132db41d@samba.org>
+Date: Wed, 12 Jan 2022 20:52:04 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.0
+Subject: Re: [Samba] Samba in Containers/Kubernetes Status Update 2
+Content-Language: en-US
+To: John Mulligan <phlogistonjohn@asynchrono.us>,
+ samba-technical@lists.samba.org
+References: <2815519.vuYhMxLoTh@edfu>
 In-Reply-To: <2815519.vuYhMxLoTh@edfu>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------yHRBZECTGQnJR3BQ0wBoob9n"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,34 +59,68 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba@lists.samba.org, samba-technical@lists.samba.org
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: samba@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Jan 12, 2022 at 01:42:12PM -0500, John Mulligan via samba wrote:
->
->Samba in Containers/Kubernetes Status Update vol. 2
->====================================================
->
->I had hoped to update the wider Samba community with another status report
->in December but I missed that boat. So January will have to do. This message
->is part of an ongoing effort to summarize what we've been up to as we
->work on integration for Samba in containers and Kubernetes [1].
->....
->ACL Xattr
->----------
->
->We still want to run our containers without privileges and therefore being
->able to store NTACLs outside of "security.NTACL" continues to be a goal. In
->order to get this functionality, Günther Deschner is continuing work on the
->open Samba project merge request [3]. Günther is working to improve the hooks
->into the VFS layer to handle performance and layering concerns raised in that
->PR.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------yHRBZECTGQnJR3BQ0wBoob9n
+Content-Type: multipart/mixed; boundary="------------Xe8uSyxLmf0EHemlh3yOejAp";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: John Mulligan <phlogistonjohn@asynchrono.us>,
+ samba-technical@lists.samba.org
+Cc: samba@lists.samba.org
+Message-ID: <07456f70-6a59-9591-d096-6d42132db41d@samba.org>
+Subject: Re: [Samba] Samba in Containers/Kubernetes Status Update 2
+References: <2815519.vuYhMxLoTh@edfu>
+In-Reply-To: <2815519.vuYhMxLoTh@edfu>
 
-Thanks so much for this update John. Günther, let me know if I can help
-get this (store NTACLs outside of "security.NTACL") change upstream.
+--------------Xe8uSyxLmf0EHemlh3yOejAp
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Looking forward to fully supported Samba in containers and Kubernetes !
+T24gMS8xMi8yMiAxOTo0MiwgSm9obiBNdWxsaWdhbiB2aWEgc2FtYmEgd3JvdGU6DQo+IFdy
+YXAgVXANCj4gLS0tLS0tLS0tDQo+IA0KPiBXb3JrIGNvbnRpbnVlcyBvbiBtYW55IG9mIHRo
+ZSBwcm9qZWN0cyBsaXZpbmcgdW5kZXIgdGhlIHNhbWJhLWluLWt1YmVybmV0ZXMNCj4gdW1i
+cmVsbGEuICBXZSdyZSBob3BpbmcgdGhhdCB0aGVzZSAoc2VtaS0pcmVndWxhciB1cGRhdGVz
+IGhlbHAgY3JlYXRlIHNvbWUNCj4gYWRkaXRpb25hbCBpbnRlcmVzdCBpbiB0aGVzZSBlZmZv
+cnRzLiBGZWVsIGZyZWUgdG8gcmVwbHkgd2l0aA0KPiBxdWVzdGlvbnMvY29tbWVudHMvY29u
+Y2VybnMuIFdlJ2QgYWxzbyBsb3ZlIGl0IGlmIHlvdSBkcm9wIGJ5IG91ciBnaXRodWINCj4g
+cHJvamVjdHMgYXMgd2VsbC4gRXZlbiBmZWF0dXJlIHJlcXVlc3RzIGFyZSB3ZWxjb21lLiA6
+LSkNCj4gDQo+IA0KPiBUaGFua3MgZm9yIHJlYWRpbmchDQoNCnRoYW5rcyBmb3IgdGhlIHVw
+ZGF0ZSwgZm9yIGFsbCB0aGUgZ3JlYXQgd29yayBhbmQgZm9yIHByb3ZpZGluZyBzdWNoIGFu
+IA0KZXhjZWxsZW50IHN1bW1hcnkhIExvb2tpbmcgZm9yd2FyZCB0byBzZWUgU2FtYmEgaW4g
+Y29udGFpbmVycyB0aHJpdmUhDQoNCkxldCBtZSBrbm93IGlmIHRoZXJlJ3MgYW50aGluZyB5
+b3UgbmVlZCBoZWxwIHdpdGggYW5kIEknbGwgc2VlIHdoYXQgSSANCmNhbiBkbyENCg0KVGhh
+bmtzIGFnYWluIQ0KLXNsb3cNCg0KLS0gDQpSYWxwaCBCb2VobWUsIFNhbWJhIFRlYW0gICAg
+ICAgICAgICAgICAgIGh0dHBzOi8vc2FtYmEub3JnLw0KU2VyTmV0IFNhbWJhIFRlYW0gTGVh
+ZCAgICAgIGh0dHBzOi8vc2VybmV0LmRlL2VuL3RlYW0tc2FtYmENCg==
+
+--------------Xe8uSyxLmf0EHemlh3yOejAp--
+
+--------------yHRBZECTGQnJR3BQ0wBoob9n
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmHfMWQFAwAAAAAACgkQqh6bcSY5nkZr
+Rw//Xjt1wUZu+oYTUcABnP+Vgf8Eyn/f5OHH/gkwCoOMICFX2NMaKWWqR9ZU/baFdv4ZqvRlDM9/
+M8LB6JjHoNXfmlPiCVGU6nOQ8l5cHVAd/UQ3+L9tnrhpTl+O/DyzUdglMQ4UASncu/UMRwCsCpcq
+SE3Ys5zZ3l+0TmfamrApj+0eSH8PckJBPb6ltQS2ZA2qeUCWl5dcWbc5+bx1qwefBE6xMeSGKGRT
+CK1UBl/7856uhp9xb07VcaAUiRu4aOmyRgHHo3QBTFeQB0+crqHF2wep0gvBYi11FahMWwuI5TBN
+ULxpj8WwDN+w2gUUQF/mY8ESRfeGz1eiTnjbeicvz5uRwgUhXwxJo1CbGeTxO+Md6iPy6K2i0DSJ
+16THSEStyGYiaJzNK6BLwYWIYc12I17h6ZrcjA7uvC3RupO3wmSshCfv5Au2+8ms9fDhYt3Sx1Qh
+/4rpBf0kmgkOiakinMhLpdrTH2YvDOUiBbccBQZOgxdxO6ykBc/IrQ6YwHkulsQeh4lNUe3SBYTf
+/l9FnKJd6KyNqJohK2gYJIkhn88DYgCclZANEfKoo/UhmrEuHjSijBrdugUo4kcQPY0DGtpzz3L1
+AMD1PfVzgnMTGAjlK6IzhoS1WneHQBVGR8OZDgDgIF9H9Tg/jlva+ckvNdTHeZ217wfuJtt6n9ds
+1z0=
+=0+Jc
+-----END PGP SIGNATURE-----
+
+--------------yHRBZECTGQnJR3BQ0wBoob9n--
 
