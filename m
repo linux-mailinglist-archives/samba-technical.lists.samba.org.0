@@ -2,57 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC7BB49113A
-	for <lists+samba-technical@lfdr.de>; Mon, 17 Jan 2022 22:02:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0AC14930F1
+	for <lists+samba-technical@lfdr.de>; Tue, 18 Jan 2022 23:40:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=E/L36AdK5Ipen2tmpRXUP0pX59XDvEK9cBawMrh2MjE=; b=LocG6tq3wzTZmNybQ1neTaPXGL
-	Rh0dFdEi8x5CMn3ooBAE4KtUaKBZcNT+MIqqtOH66UOTg/6wIj8YV3pvO8R7g+qA+chXrpU+BdRSY
-	w0V9QCEzbAoQNr7udDFe6HAY8QrF9OQ4ODNzxB07CM+aPrtzCgQMDbxLnXH6k/wpWaIV2tVUbohnk
-	HMWjjLmhENhBu1MZ53nAx/K+h+QAiHRJHxXNyCPvACWEmaB40FceMf2GByN6SB+8vu1lXiBV//Rsi
-	OvTLFXqTCDhHkj8l1h0prM/8u0QW0oJLMhnIi/3xawt884+zfty/CBNN3PponeUopMAwSQ2f9WqGY
-	mhx8oZUA==;
-Received: from ip6-localhost ([::1]:58664 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=yqjcDkDLFuxD/E3IY7kN5HbG7Me5rWq+SC0fQFHJSCU=; b=DtZLOrY8UYaQHLznPVZ/XwkO9y
+	2SkxMvftTWdzjdzlTMddJOx2g3CNWu8utgCCAHjShnm3ZX95prvBxlc9iDFc/pz5PxzfqSy+DoXmT
+	SNjaWwfr0+ulSlitwmtJcNhl6eH/2iSaj+NkyblJjev9PXR4FRQNjKvaxLS+CvL6bIaQNReHe+g1T
+	PR6Ovft7hQZJUGL70u0D6lkzAz2FVzQVYGlKOiTCh4CsAcppbAjlfLt3mjaa/AE2clYcDq+a6mWbd
+	tBkltCVgh6MKBoE2bN3NPUnymeviqH9h27g/PEGyOHo2KRRqscaSnrQTyVHxXJDrpIrm59NC14ywC
+	CUegoARg==;
+Received: from ip6-localhost ([::1]:24826 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1n9Z8I-009Enb-Q1; Mon, 17 Jan 2022 21:01:42 +0000
-Received: from mail-yb1-xb36.google.com ([2607:f8b0:4864:20::b36]:44916) 
+	id 1n9x9O-009gHS-E2; Tue, 18 Jan 2022 22:40:26 +0000
+Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c]:35345) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1n9Z8D-009EnS-B7
- for samba-technical@lists.samba.org; Mon, 17 Jan 2022 21:01:40 +0000
-Received: by mail-yb1-xb36.google.com with SMTP id z22so49054576ybi.11
- for <samba-technical@lists.samba.org>; Mon, 17 Jan 2022 13:01:36 -0800 (PST)
+ (Exim) id 1n9x9E-009gFz-S4
+ for samba-technical@lists.samba.org; Tue, 18 Jan 2022 22:40:20 +0000
+Received: by mail-lf1-x12c.google.com with SMTP id x11so1425339lfa.2
+ for <samba-technical@lists.samba.org>; Tue, 18 Jan 2022 14:40:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=E/L36AdK5Ipen2tmpRXUP0pX59XDvEK9cBawMrh2MjE=;
- b=DligtBPwqn6VtiU+rpAn5X+wN11F98GkoqMRJbBi53/INouP3OZYi4BtPYLmhfHf7W
- YAbGiO6l/guh3I1zu20VxIFUqvd2xlQ4X2C7GWESOPxMC1Rtmvysn0lBEoc0krZG2eDh
- +EHyAxlxaB91ofBqytmoOm6j3O3EhP+ujjSCroUGMLct0ASx49rMLrK95JesRNrkO97j
- L/5hAuK3K08Y80yWzXfXX9DtZqRenb2y2Gnm40NOQvZUaal9aV8Q+puBweI0GDpnJ31Z
- mPVhhzwNuk8lvKAdau1XGZj3HSTJpTLmM3eurQKuW6CJNz//eHH4uJEJaB28/wgmpS8m
- uyxg==
+ h=mime-version:from:date:message-id:subject:to;
+ bh=yqjcDkDLFuxD/E3IY7kN5HbG7Me5rWq+SC0fQFHJSCU=;
+ b=ikQYOBQho1WQEk+6MPYwSlxb/cMjeYv6C784FHZww1zgXtO2sscmmkXUMrlQKKCDrA
+ VlO8zKIJS92c+S/4lwFC4YNPqXGVwTsENkgWPuBXP1HPi3+8hu7rHcShgPawkUxf0on2
+ 1Yjn8swD/EvXh6d1unoKf3Wd6g+hYMpXWNl7JddD+L37wViRXBhATWI3joxEFYYDd0QE
+ BsBWosUmuX58e2rU6/F6ZaMVqo719kd8I1TfYIPnGof2QnKi82URtJ5FqETG/7Z3GA9/
+ BYEnVq6/Z5JN1Szq54siNIb6v62vS1/3uqtjW950JRG1WpMZStYZPCRDzz8qSqHi6z3y
+ baUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=E/L36AdK5Ipen2tmpRXUP0pX59XDvEK9cBawMrh2MjE=;
- b=3qp47GJXJmLTy4LNNs8xyNHOau9NNoz/nyX2Yn0kOckbKnK1zdQIYobHmzWtdBXs5l
- i6C2CwJ6eTPEYa48Dy1tYM+ctJd+yFor6TESyOXexVMnocSTlXZsDVvAynD+KdqiDsn3
- 7euluBTB0LC7SvVVkCUGpH7BFgHBeCovQyWm8njtVv9Ok8ILCBO5wq8ul6FNE5F+2yYJ
- Z93vL5Q0ngFbhlxmlKcK0Ohktr2XqoEgCwH0QuxuF5UxfcvWjvaIpo9uhXf/wdys5nJy
- 6rREx/AYjLYTKCZl0MZn9QnT7YP8gM6KeQWO7kgGS1uPu3pIqYkNRmhT+HRbqAv79M9Z
- vkUQ==
-X-Gm-Message-State: AOAM532ORSZnK7JTTV4cjoGX+G3/IOfivIrkIQH2nqRHZYuLp695cCK0
- 2wRaAfNWdSd0XoXI4C02lCNUwUkHTB3O0EnFFBE=
-X-Google-Smtp-Source: ABdhPJz2qC1gbLERDHPFPmDnVv4rb4ybLBXYBQWsc0lxZSVX9k2ZYOya1CMbAN8jg7o53QZDYaTP6MHHW0h2Q+EsfXA=
-X-Received: by 2002:a25:b184:: with SMTP id h4mr13155000ybj.738.1642453295121; 
- Mon, 17 Jan 2022 13:01:35 -0800 (PST)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=yqjcDkDLFuxD/E3IY7kN5HbG7Me5rWq+SC0fQFHJSCU=;
+ b=A6jRjCDKWN8u893ZVcyewKCajc8EsqSRlqXmBircfsWpIsfZX0BzX8MTUXjNLdIhdl
+ 5Hehq9Uwwmvall4p3fuPVhjrmjgrXi754HASVLd+L1JWLDeoUp4QsmxnAe1bIl4M6oLH
+ a/a3x+4XDHp3Psj7ulBxM4jkXZjyG4z6CHQWvi0Foa6sMOzhQwERZP4vpcbqFyXxv/F0
+ HX7i0D6RsDrXaI6RL2ZmTUSzOnIz0E12LWFFzN/2HRzyOBD/Pk6rIeJzNuUC0Bins499
+ Ojje3sGJLMd+tKd68vkeKK5TY+JAh1FVXrDon6OfINsXDCW0n8qv2rurXWt1KJvtpXIZ
+ y8+g==
+X-Gm-Message-State: AOAM532RapGLu6xxwHEwNR9ls8ra5eif3wd+ix9DrHey1LcuIReFA9mC
+ O+RxX3lBU4B1bP/tAs184LuR1BRQn2SIYlvMy3MBOeBTE7k=
+X-Google-Smtp-Source: ABdhPJx7wt+iJsuUhXfvPvn17JqE5Ol++PQR8kFg7Zxhiu6ZUoVqek9wvXcqtMsQD37C7XRI5UujJa0wIPHbVQw5S/I=
+X-Received: by 2002:a05:651c:1503:: with SMTP id
+ e3mr19651971ljf.460.1642545615084; 
+ Tue, 18 Jan 2022 14:40:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20220114064625.765511-1-deng.changcheng@zte.com.cn>
-In-Reply-To: <20220114064625.765511-1-deng.changcheng@zte.com.cn>
-Date: Tue, 18 Jan 2022 07:01:23 +1000
-Message-ID: <CAN05THS5A5r8PgaHk8BaK+8kTyT8mJ3LdB__tJCbSb8Cs+yaKQ@mail.gmail.com>
-Subject: Re: [PATCH] cifs: Replace one-element array with flexible-array member
-To: cgel.zte@gmail.com
+Date: Tue, 18 Jan 2022 16:40:04 -0600
+Message-ID: <CAH2r5msv5w5oWVomujjwoC=PiNBu3b7kbQO6uJXVKbAwxGKuJw@mail.gmail.com>
+Subject: [PATCH][SMB3] add new defines from protocol specification
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -67,65 +66,55 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: linux-cifs <linux-cifs@vger.kernel.org>, Zeal Robot <zealci@zte.com.cn>,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>,
- Changcheng Deng <deng.changcheng@zte.com.cn>, Steve French <sfrench@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This patch is wrong.
-qi_iov is not even the trailing element of the array so we cant change
-it to be a flexible array member.
-This change will likely clobber io_iov so the potential for breaking,
-memory leaks or ooops is quite possible.
-qi_iov is supposed to be exactly one element in size.
+Trivial update to list of valid smb3 fsctls
 
-Same for close_iov, while it is the last element in the structure, it
-is not a flexible array but an array of exactly one member.
-This change to close_iov would likely lead to reading/writing beyond
-the end of the structure.
+In the October updates to MS-SMB2 two additional FSCTLs
+were described.  Add the missing defines for these,
+as well as fix a typo in an earlier define.
 
+Signed-off-by: Steve French <stfrench@microsoft.com>
+---
+ fs/smbfs_common/smb2pdu.h  | 2 +-
+ fs/smbfs_common/smbfsctl.h | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-NACK
+diff --git a/fs/smbfs_common/smb2pdu.h b/fs/smbfs_common/smb2pdu.h
+index 7ccadcbe684b..38b8fc514860 100644
+--- a/fs/smbfs_common/smb2pdu.h
++++ b/fs/smbfs_common/smb2pdu.h
+@@ -449,7 +449,7 @@ struct smb2_netname_neg_context {
+  */
 
-On Sat, Jan 15, 2022 at 12:44 AM <cgel.zte@gmail.com> wrote:
->
-> From: Changcheng Deng <deng.changcheng@zte.com.cn>
->
-> There is a regular need in the kernel to provide a way to declare having
-> a dynamically sized set of trailing elements in a structure. Kernel code
-> should always use "flexible array members" for these cases. The older
-> style of one-element or zero-length arrays should no longer be used.
-> Reference:
-> https://www.kernel.org/doc/html/latest/process/deprecated.html#zero-length-and-one-element-arrays
->
-> Reported-by: Zeal Robot <zealci@zte.com.cn>
-> Signed-off-by: Changcheng Deng <deng.changcheng@zte.com.cn>
-> ---
->  fs/cifs/smb2ops.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/fs/cifs/smb2ops.c b/fs/cifs/smb2ops.c
-> index af5d0830bc8a..5c104b2f308a 100644
-> --- a/fs/cifs/smb2ops.c
-> +++ b/fs/cifs/smb2ops.c
-> @@ -1609,10 +1609,10 @@ struct iqi_vars {
->         struct smb_rqst rqst[3];
->         struct kvec rsp_iov[3];
->         struct kvec open_iov[SMB2_CREATE_IOV_SIZE];
-> -       struct kvec qi_iov[1];
-> +       struct kvec qi_iov[];
->         struct kvec io_iov[SMB2_IOCTL_IOV_SIZE];
->         struct kvec si_iov[SMB2_SET_INFO_IOV_SIZE];
-> -       struct kvec close_iov[1];
-> +       struct kvec close_iov[];
->  };
->
->  static int
-> --
-> 2.25.1
->
+ /* Flags */
+-#define SMB2_ACCEPT_TRANSFORM_LEVEL_SECURITY 0x00000001
++#define SMB2_ACCEPT_TRANSPORT_LEVEL_SECURITY 0x00000001
+
+ struct smb2_transport_capabilities_context {
+  __le16 ContextType; /* 6 */
+diff --git a/fs/smbfs_common/smbfsctl.h b/fs/smbfs_common/smbfsctl.h
+index 926f87cd6af0..d51939c43ad7 100644
+--- a/fs/smbfs_common/smbfsctl.h
++++ b/fs/smbfs_common/smbfsctl.h
+@@ -95,8 +95,10 @@
+ #define FSCTL_SET_SHORT_NAME_BEHAVIOR 0x000901B4 /* BB add struct */
+ #define FSCTL_GET_INTEGRITY_INFORMATION 0x0009027C
+ #define FSCTL_GET_REFS_VOLUME_DATA   0x000902D8 /* See MS-FSCC 2.3.24 */
++#define FSCTL_SET_INTEGRITY_INFORMATION_EXT 0x00090380
+ #define FSCTL_GET_RETRIEVAL_POINTERS_AND_REFCOUNT 0x000903d3
+ #define FSCTL_GET_RETRIEVAL_POINTER_COUNT 0x0009042b
++#define FSCTL_REFS_STREAM_SNAPSHOT_MANAGEMENT 0x00090440
+ #define FSCTL_QUERY_ALLOCATED_RANGES 0x000940CF
+ #define FSCTL_SET_DEFECT_MANAGEMENT  0x00098134 /* BB add struct */
+ #define FSCTL_FILE_LEVEL_TRIM        0x00098208 /* BB add struct */
+-- 
+
+-- 
+Thanks,
+
+Steve
 
