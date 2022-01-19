@@ -2,58 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50BFB4930FC
-	for <lists+samba-technical@lfdr.de>; Tue, 18 Jan 2022 23:45:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DA90493D0B
+	for <lists+samba-technical@lfdr.de>; Wed, 19 Jan 2022 16:26:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=3zVzd8hYKT3zsWzOt6lF6gWakNp/Fk139BBliRPW3Kw=; b=6bAIKQP0T18bhPwZ+OLTgcoUmr
-	SUxfVNCY5bG1bPUKZz7w0yqHwsht5RHuPwiFgHq/yTZ3FoAuHzjCyTNOsM2bSeozT7jedMOz8fxSw
-	xvAK3PNCg1WRbAl1glP8m/bZohk9HURnvEnKDeul5ps5VCZGBj0KBGmz//JhnrfE0U4+IqbMLQTYG
-	pPG2W6kkr0kWWjQv+qbB9AOo5KxJRLN+0TggQ25SsJeg8TyTVFDCa6UJSfLZu+XU2JZjMFWvTYdYk
-	iH/carqO4YjdlqfcbWfO0lMEap2njUlxNMozBJbnTDhKuDhoSLaxAb+uyISPTnhEWj98EaRP3re+g
-	VIlmJGrw==;
-Received: from ip6-localhost ([::1]:25540 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=aiJrEo4gzB38pmkAyxp0VUKfDiilIHIJUpRc78UpxUQ=; b=aed/ZFe3DjXZNDfxTNv4A2QCpn
+	nqGOCWtBUSzj+b1AlGPrTZ27ak6KLNe8HwRxKNMeHJ/NgxCEhFW8gt9a0tP114MwWaY44/ZRfu3FZ
+	dJz6jgVW8xV19+t/em3eV6CpyiUlnr/tZU1/y7x87qNwGSZdc62wG/ufjBNxFiRTi6KYdt3Ybllpl
+	Yyzyt97eecP2GpZQV1kV1l9vAr9YOwIehJx2Ba1/QRg2Zj7zAYLJfODcjwNIhXWxPKr01AoOVvovX
+	7+LVE/OhPfpwHCMybnUUzMKXJLjEmPv6jh2qN0SqWehGS2+hbnf2SUKSbKmQEomQK1G55jXGEhjmm
+	zEUljjog==;
+Received: from ip6-localhost ([::1]:54338 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1n9xED-009gb8-Hw; Tue, 18 Jan 2022 22:45:25 +0000
-Received: from mail-yb1-xb30.google.com ([2607:f8b0:4864:20::b30]:40916) 
+	id 1nACqJ-009u68-8E; Wed, 19 Jan 2022 15:25:47 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55158) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1n9xE3-009gaz-NN
- for samba-technical@lists.samba.org; Tue, 18 Jan 2022 22:45:18 +0000
-Received: by mail-yb1-xb30.google.com with SMTP id 23so1465654ybf.7
- for <samba-technical@lists.samba.org>; Tue, 18 Jan 2022 14:45:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=3zVzd8hYKT3zsWzOt6lF6gWakNp/Fk139BBliRPW3Kw=;
- b=dqjE55k+zE/bKty/XlwHbc859LBeNKFcShQy2gKWecSD/mJiOhhmnRC05/WqtyiBQ/
- aGfTZvBOpuMBBXA+I3LKVUIP3gdNXYoXpvLdmgVbYYWHMoKvrjNQ72OK8XQivMNRUtst
- bB12Gz4kXyn1lN07dXd+DBS/rN+GA8cfFjehJcblwKqvLEd+/KehVqjqY6z3WPes7vmi
- IWh3Q5T5coBCqBte8v5Dgo7GYZ3Y/u7cHPvvQ944Ezqd7m/Kwkc9GPloHgTjzBagVky5
- KW/CWOnSU6tnnDW2EYKPeg30H8kbpPKaoRAm6wLS/gIZ77WHjl/h1UlR5/HQz7U2ICAx
- BpUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=3zVzd8hYKT3zsWzOt6lF6gWakNp/Fk139BBliRPW3Kw=;
- b=a8XA0G6VLL2TuXk/9wo4I5ezh5PW+qiFrwl2M5bWdzEU4sDOVbHEwit3qg44WUjzbo
- uvSWIOkrRKhhI8wApfMKlZcGMhazp/vXIL319JIbBUfiwA+xpkn5aQ90alX4T0XkeR1c
- fXyVSiAUl4cMqwXTirrnNViJnhk7Wazz7/Zoh/Pn5nNjUNa9fmVGJXrhZMQEyZUFHfK2
- rUUVtoV64wT2F59N/oZu4avTGSkoELKrU4YZuqKqZSSAe8hXC8nvRM8Agp+osXUPlD7T
- LyNFFrS8aVUkQ1qBQDHP0HtGqvD37gqkKbk2J7cHIgb/apkoHtiv9sjv4FAnBzc4oZ4w
- kWow==
-X-Gm-Message-State: AOAM531IWZNp0rQPeUD5RgQ9FFb8vN/9xohZhg6iaO07vdVhfc3fCKoJ
- OVY2OgaUs9U2lOMxOn1LweNruvPPxcoXeuocWPE=
-X-Google-Smtp-Source: ABdhPJweMgO2xTgCPT+YiGAWMyne3hp/hAARqLDLslSk/68CSSVvqduh7ws90XpLiT3sZt6IP3eWDn62ekIKLvx8jjo=
-X-Received: by 2002:a25:1e0b:: with SMTP id e11mr36255586ybe.272.1642545913530; 
- Tue, 18 Jan 2022 14:45:13 -0800 (PST)
+ (Exim) id 1nACqE-009u5p-GS; Wed, 19 Jan 2022 15:25:45 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Message-ID:From:To:CC;
+ bh=aiJrEo4gzB38pmkAyxp0VUKfDiilIHIJUpRc78UpxUQ=; b=xBzzZihlUIRZ23BXYRtz7KD41E
+ lBxaULF7OepA2i3meDY4z1B6ZXKF68Si+vnzv6RBaZm4iiKSgkUfpc+6lEI0nxgg7M8Z43vclSxdC
+ UP6qZo9AUvN0T8qDYaAl1bOywZvqHxHZIFjrA5+JLlQvicqEctzFvr4iJG93alc+BR9ZY90VUlvfR
+ j5o3tIIWQGj2YMpAmHiY49B4Gfrp5rYlJPrTr2bHOF4JOuRBIdPsK7uHOgXQbkIOaMj46tswxAZrA
+ 3jyUcK+IusaW6Bl2yBUz31kGmwm2+brrDSwqfOErW3JomrgQgWIAzdVunCeyJ+ZWG2aJ6mIseoGOG
+ TlzmoSFS3I+GTM1PmuJt/ekl7EyPmTx6UdOdsm+JYyVMfW8nZdANPUsmHhUO7uUiSY2Rk0dYgupte
+ 1tGf3oIzzRYsQr0Wm6UQkbOQHHac1jA3wnVpr36jQtC7VtSeLvA1IjV8Hzp2atoTvZ66nxYpLUuzB
+ fbBWL/2BbN3cL2OBValiP9RX;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1nACqD-0083fe-VD; Wed, 19 Jan 2022 15:25:42 +0000
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.15.4 Available for Download
+Message-ID: <fcf094b3-2ea1-34e4-4a6b-bb4fd1039743@samba.org>
+Date: Wed, 19 Jan 2022 16:25:41 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-References: <CAH2r5msv5w5oWVomujjwoC=PiNBu3b7kbQO6uJXVKbAwxGKuJw@mail.gmail.com>
-In-Reply-To: <CAH2r5msv5w5oWVomujjwoC=PiNBu3b7kbQO6uJXVKbAwxGKuJw@mail.gmail.com>
-Date: Wed, 19 Jan 2022 08:45:01 +1000
-Message-ID: <CAN05THSRBhqs=YMGGhp1BSB-Qhm=7bQc83UcBDhrr6Qo36sZQQ@mail.gmail.com>
-Subject: Re: [PATCH][SMB3] add new defines from protocol specification
-To: Steve French <smfrench@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: de-DE
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,63 +56,94 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-reviewed by me
+Release Announcements
+---------------------
 
-On Wed, Jan 19, 2022 at 8:41 AM Steve French via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> Trivial update to list of valid smb3 fsctls
->
-> In the October updates to MS-SMB2 two additional FSCTLs
-> were described.  Add the missing defines for these,
-> as well as fix a typo in an earlier define.
->
-> Signed-off-by: Steve French <stfrench@microsoft.com>
-> ---
->  fs/smbfs_common/smb2pdu.h  | 2 +-
->  fs/smbfs_common/smbfsctl.h | 2 ++
->  2 files changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/fs/smbfs_common/smb2pdu.h b/fs/smbfs_common/smb2pdu.h
-> index 7ccadcbe684b..38b8fc514860 100644
-> --- a/fs/smbfs_common/smb2pdu.h
-> +++ b/fs/smbfs_common/smb2pdu.h
-> @@ -449,7 +449,7 @@ struct smb2_netname_neg_context {
->   */
->
->  /* Flags */
-> -#define SMB2_ACCEPT_TRANSFORM_LEVEL_SECURITY 0x00000001
-> +#define SMB2_ACCEPT_TRANSPORT_LEVEL_SECURITY 0x00000001
->
->  struct smb2_transport_capabilities_context {
->   __le16 ContextType; /* 6 */
-> diff --git a/fs/smbfs_common/smbfsctl.h b/fs/smbfs_common/smbfsctl.h
-> index 926f87cd6af0..d51939c43ad7 100644
-> --- a/fs/smbfs_common/smbfsctl.h
-> +++ b/fs/smbfs_common/smbfsctl.h
-> @@ -95,8 +95,10 @@
->  #define FSCTL_SET_SHORT_NAME_BEHAVIOR 0x000901B4 /* BB add struct */
->  #define FSCTL_GET_INTEGRITY_INFORMATION 0x0009027C
->  #define FSCTL_GET_REFS_VOLUME_DATA   0x000902D8 /* See MS-FSCC 2.3.24 */
-> +#define FSCTL_SET_INTEGRITY_INFORMATION_EXT 0x00090380
->  #define FSCTL_GET_RETRIEVAL_POINTERS_AND_REFCOUNT 0x000903d3
->  #define FSCTL_GET_RETRIEVAL_POINTER_COUNT 0x0009042b
-> +#define FSCTL_REFS_STREAM_SNAPSHOT_MANAGEMENT 0x00090440
->  #define FSCTL_QUERY_ALLOCATED_RANGES 0x000940CF
->  #define FSCTL_SET_DEFECT_MANAGEMENT  0x00098134 /* BB add struct */
->  #define FSCTL_FILE_LEVEL_TRIM        0x00098208 /* BB add struct */
-> --
->
-> --
-> Thanks,
->
-> Steve
->
+This is the latest stable release of the Samba 4.15 release series.
+
+
+Changes since 4.15.3
+--------------------
+
+o  Jeremy Allison <jra@samba.org>
+    * BUG 14928: Duplicate SMB file_ids leading to Windows client cache
+      poisoning.
+    * BUG 14939: smbclient -L doesn't set "client max protocol" to NT1 
+before
+      calling the "Reconnecting with SMB1 for workgroup listing" path.
+    * BUG 14944: Missing pop_sec_ctx() in error path inside 
+close_directory().
+
+o  Pavel Filipenský <pfilipen@redhat.com>
+    * BUG 14940: Cross device copy of the crossrename module always fails.
+    * BUG 14941: symlinkat function from VFS cap module always fails with an
+      error.
+    * BUG 14942: Fix possible fsp pointer deference.
+
+o  Volker Lendecke <vl@samba.org>
+    * BUG 14934: kill_tcp_connections does not work.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 14932: Failed to parse NTLMv2_RESPONSE length 95 - Buffer Size 
+Error -
+      NT_STATUS_BUFFER_TOO_SMALL.
+    * BUG 14935: Can't connect to Windows shares not requiring 
+authentication
+      using KDE/Gnome.
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 14945: "smbd --build-options" no longer works without an 
+smb.conf file.
+
+o  Jones Syue <jonessyue@qnap.com>
+    * BUG 14928: Duplicate SMB file_ids leading to Windows client cache
+      poisoning.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.libera.chat or the
+#samba-technical:matrix.org matrix channel.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.15.4.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
