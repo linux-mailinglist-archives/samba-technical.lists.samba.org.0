@@ -2,49 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70A8E49D151
-	for <lists+samba-technical@lfdr.de>; Wed, 26 Jan 2022 19:00:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B24C549D318
+	for <lists+samba-technical@lfdr.de>; Wed, 26 Jan 2022 21:05:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=bHDJS+Kuz5HO6+xvaLLpkRSOuamZUX2cEyE4WsIHLnM=; b=zeLUsXgboRJ7s5XLe6cmFun9Ys
-	FaiodRJp2vd8wc42RQBYPeyUIevzQzEwI7mv6i626ww/DFyT4JvLwXKXDilfhGfDlf9mxn3Txgauy
-	B8qWyZD+jhs70GonFDxnlCySuM/pnKwX1im3AcvpodshfW1IU9qbnCZI2vQWBQatzbVF2rmHVjRyh
-	WNITjgEdyoHgR91lcjXAnh+tBgWxKE3/cr0+tJmeF9a3eDX8WM81vLC7rkn4RDjr81Uq06VwzoGqE
-	v9VzwdPjODMuAWlwoDveQaEjkhJppmd2vo4SVpBWzbnJNA2QYxR2Y4lqkZLu7N0crFaWxHL+CyIvw
-	8GhpPuzw==;
-Received: from ip6-localhost ([::1]:19528 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=cyfzh3JnjTBJROKnj/XglMfBOQtn7VbZGjSvNZF5J4c=; b=pszH1iopj60QskxDcPa/0/x/bo
+	ge6jQeLdFab20uWXpm/e2AyCBJUGfg/PaiT/QW1xFdQuTHfF5CrpGPOUHHNc4X+1bwZIgHXbMRrvd
+	kXVfC/Pxhh8HTEZQE1IaCK+5M/k0P/mlYzawFSMvXDy4l/Kq4ckxUNZTcEkE06dbSShxlALA8Iv/r
+	htA2b7A9nTldZYxbb7GvI9GrFtZLN1QC7ULsIgBOrftb+Hjx4nS54rAeQuUSnmWDiLrJhC46VWVQI
+	3wUyx0srBRwXXyx3a3QC4zSSGOPP8423C29gPTOJlUIAN8ieUADH2Mw/3FG9BWfmcpynSOmY6bET0
+	SNKb6Kyw==;
+Received: from ip6-localhost ([::1]:33014 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nCmat-001A1w-Tp; Wed, 26 Jan 2022 18:00:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48386) 
+	id 1nCoXp-001FtI-Co; Wed, 26 Jan 2022 20:05:29 +0000
+Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f]:40653) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nCmao-001A1i-Dr; Wed, 26 Jan 2022 18:00:29 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=bHDJS+Kuz5HO6+xvaLLpkRSOuamZUX2cEyE4WsIHLnM=; b=zi76AWSjipQvNqVNH1HjWgpwEa
- 2WL01qnkDDrwhSVmRH0ilJrTbuxbgyk8Af8rd1SgQ7UU0X+PHqLAcGxNxwQEkxK24tgSRG5kQMmgr
- oswhv4xaXohpkuZ4OCjg3W6fPBg4OKwtScX6LK4cdxca6Aymz+C199dEj/J9CzRHlvV97DgXVZBJj
- GlSAKK3ECYhaILtr7CdNBOmUrJJD+84zAB0FbQB8wBZXx3UIgTcNxhW8iwwBQYc800rTu9jospyBC
- Ht7CZEhy0qaQ0ZLkRlPOYnMsOSsJ0D4nPZjrD6Pt9v+cb6cradigokuCQfSlmKQ93JBVe5yLNwqhG
- VRfnM/3EerGtCUBEeo5l7M46dJFF+idqcbsLDaK7pqJrgcwcSluJxWvxeeu1JSrqeNBFNFGfOjTyY
- pSkeEJJSKy3xDwjhmkuWhh1B7xDYVpXs5vQNB3x7c6gLqbw5ocpVRGGFvoXRY5s0jos8I/rT01sYa
- DkeImE330AGDv8pcxeREbDCz;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nCmak-000khp-TE; Wed, 26 Jan 2022 18:00:24 +0000
-Message-ID: <9df52f1eb4b6dbda5bc6c63718c28793124c7c98.camel@samba.org>
-Subject: Re: [Samba] Remove LanMan auth from the AD DC and possibly file
- server?
-To: Jeremy Allison <jra@samba.org>, Upstream Samba Technical Mailing list
- <samba-technical@lists.samba.org>, samba@lists.samba.org
-Date: Thu, 27 Jan 2022 07:00:18 +1300
-In-Reply-To: <YfF8+OMLV0UkzicQ@jeremy-acer>
-References: <53125588031f8ffad9e7c8a4b16a7f093781a39f.camel@samba.org>
- <20220126115058.GA936420@sernet.de> <YfF8+OMLV0UkzicQ@jeremy-acer>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1nCoXg-001Ft8-Bi
+ for samba-technical@lists.samba.org; Wed, 26 Jan 2022 20:05:25 +0000
+Received: by mail-lj1-x22f.google.com with SMTP id q22so1149460ljh.7
+ for <samba-technical@lists.samba.org>; Wed, 26 Jan 2022 12:05:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=cyfzh3JnjTBJROKnj/XglMfBOQtn7VbZGjSvNZF5J4c=;
+ b=QFb4iaxMACx/RhLoHqB8wkUFn0HIIvallRkj+zuHy4FgjdzFJJIeQn9HY4UmpEZPSQ
+ u9RMibhCSSpoSLNB1SMoTOwOAIX/SUyU9LwznUHwMfzRh305JJkbo/nyjWIThC26+m9s
+ 3G3OBagkEfrx7lQFJBZCccqOh1ueEZEa9zNmttGLSHoODtyV0WGsMO1/Ttw2qzRfqONp
+ r/1Sf0H3ZjEhnklr65CytnnO/gJtgEu8meqPl5WTn7rH57EkzQoLhe8Okyt77vBDHWio
+ fLp5xqYGuUvj1+29Ic18inEOk3WPRy2wSIkiSwptlwk81BSRIlMryneps8HFWls/Azh3
+ xZFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=cyfzh3JnjTBJROKnj/XglMfBOQtn7VbZGjSvNZF5J4c=;
+ b=I2TetGWm+Fdxq72NUlWK+l/hdK0BCRjm1hPF5I+lDmfvV5a8klEME/vF3RYvmB/Q8w
+ tB4F92Cw690il+7IEzmVq9yHbUAUGBWo5bwd5MCqsT/dl9ihn48GDKrNiKm1C+UhdNpD
+ 6KD35B9oFQXvFdpd/EBEv3LCAConqRpGMlH3Fa5yQIjtTIKmBAEmNRRStsPnesFSvgzO
+ SapxPSA8lSA4i4l+cUY4nfrfz/CYCh4woMBBJ1b8n4a4NIgRx2SPNZwUM71IZrlxfnSS
+ TLyAEw66XGpV2HIyUkZsx7soe+FSh5kF9b7zFC/ZSSpCfpypOa7MmIZhA2x2jLa2IeBE
+ gI/Q==
+X-Gm-Message-State: AOAM531jm01U0UwFYhI/h3j3L5qfaBsKUKS34G0s63AtRayTsXPjRomU
+ nef6inA16y2FW6e4xVd+3xPFDaKJ7BiauZ9eOntv1E4Rk0s=
+X-Google-Smtp-Source: ABdhPJxtoBEc30lr2ZaJ/FSZIPsDjLN8uTwGR61hwJ9jo3OlfLR7Pz6fy407kXfSCaNKH5Q76pKJ1zBbwuWBnLVH9bM=
+X-Received: by 2002:a2e:9c04:: with SMTP id s4mr466162lji.229.1643227518658;
+ Wed, 26 Jan 2022 12:05:18 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAH2r5mvVanfR+7ipZfUfOg+3i_3+C8aYT=z2i6+C8RU8SA08fA@mail.gmail.com>
+ <bab38b9741214fdd5b11040caaa0480b58305aaf.camel@samba.org>
+In-Reply-To: <bab38b9741214fdd5b11040caaa0480b58305aaf.camel@samba.org>
+Date: Wed, 26 Jan 2022 14:05:07 -0600
+Message-ID: <CAH2r5mvg80Tr=jQE8H89LA3aPH-G022EAj13S6pn0b4Z_dP=pA@mail.gmail.com>
+Subject: Re: Samba build error: module 'time' has no attribute 'clock'
+To: Andrew Bartlett <abartlet@samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,63 +68,85 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: samba-technical <samba-technical@lists.samba.org>,
+ Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2022-01-26 at 08:55 -0800, Jeremy Allison via samba wrote:
-> On Wed, Jan 26, 2022 at 12:50:58PM +0100, Björn JACKE via samba
+I cloned jra's tree to fresh tree (master-smb2 branch) and get this
+error on build:
+
+Checking for python version >= 2.6.0
+           : 3.9.7
+python-config
+           : /usr/bin/python3-config
+Asking python-config for pyembed '--cflags --libs --ldflags' flags
+           : yes
+Testing pyembed configuration
+           : Could not build a python embedded interpreter
+Testing pyembed configuration
+           : Could not build a python embedded interpreter
+The configuration failed
+(complete log in /home/smfrench/jra/samba/bin/config.log)
+PYTHONHASHSEED=1 WAF_MAKE=1  ./buildtools/bin/waf build
+The project was not configured: run "waf configure" first!
+
+(Running waf configure directly gets a similar error)
+
+Checking for python version >= 2.6.0
+           : 3.9.7
+python-config
+           : /usr/bin/python3-config
+Asking python-config for pyembed '--cflags --libs --ldflags' flags
+           : yes
+Testing pyembed configuration
+           : Could not build a python embedded interpreter
+Testing pyembed configuration
+           : Could not build a python embedded interpreter
+The configuration failed
+(complete log in /home/smfrench/jra/samba/bin/config.log)
+
+The command being run was:
+./configure --without-pam --without-ldap --without-winbind
+--without-ads --without-ad-dc
+
+On Wed, Jan 26, 2022 at 11:57 AM Andrew Bartlett <abartlet@samba.org> wrote:
+>
+> On Wed, 2022-01-26 at 11:40 -0600, Steve French via samba-technical
 > wrote:
-> > On 2022-01-26 at 16:50 +1300 Andrew Bartlett via samba sent off:
-> > > My feeling is that for the Win9X and OS/2 irrilplacable
-> > > industrial
-> > > equipment case, that guest authentication would suffice, combined
-> > > with
-> > > 'force user' and 'hosts allow' for 'security'.
-> > > 
-> > > What do folks think?
-> > 
-> > my gut feeling is that many users will be very unhappy with such a
-> > change. I
-> > know many setups where the clients say that ntlm auth is still
-> > required for
-> > them and where guest auth would not be an option. Even on AD DCs
-> > sometimes. For
-> > sure on member servers.
-> 
-> Correct me if I'm wrong Andrew, but I think Andrew is not
-> thinking about removing NTLM, but only the storage of
-> LM password hashes.
-> 
->  From the "lanman auth" section of the man page:
-> 
-> This parameter has been deprecated since Samba 4.11 and
-> support for LanMan (as distinct from NTLM, NTLMv2 or Kerberos
-> authentication) will be removed in a future Samba release.
-> 
-> Removing the LM password hashes gets a hearty thumbs-up
-> from me :-).
+> > Not having much luck building Jeremy's master-smb2 branch (
+> >
+> > https://git.samba.org/?p=jra/samba/.git;a=shortlog;h=refs/heads/master-smb2)
+> >
+> > on Ubuntu
+> >
+> >
+> >
+> > Anyone recognize this Samba build error and how to fix it?
+>
+> Try with a very clean tree, if you haven't built Samba for a very long
+> time.
+>
+> We had a Samba python file called time.py that could therefore jump in
+> front of the system time, but I never saw it cause build errors.  We
+> renamed it a long while back, but an old .pyc file could be the issue.
+>
+> Andrew Bartlett
+>
+> --
+> Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+> Samba Team Member (since 2001) https://samba.org
+> Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+>
+> Samba Development and Support, Catalyst IT - Expert Open Source
+> Solutions
+>
 
-That's exactly what I mean.
 
-> But I may be miss-reading the original message. Sorry
-> if I'm just adding to the confusion :-).
+-- 
+Thanks,
 
-No, you got my meaning perfectly.  Even for Win9X there is, from
-memory, some strange update to make it do 'raw NTLMv2', instead of LM.
-
-I really think we should be able to ditch this, ideally across the
-codebase but certainly in the AD DC, in 2022.
-
-Andrew Bartlett
-
---
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-
+Steve
 
