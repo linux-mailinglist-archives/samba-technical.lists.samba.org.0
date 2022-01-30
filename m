@@ -2,50 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C11F4A3991
-	for <lists+samba-technical@lfdr.de>; Sun, 30 Jan 2022 21:56:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D0954A3998
+	for <lists+samba-technical@lfdr.de>; Sun, 30 Jan 2022 21:58:41 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=7Ym3zqeTkGWjYeS5yJaX0IAgMXpFuagct7MILgC0hzU=; b=VaLN/h55WWXa68cBApsFDTyVGJ
-	ghIDGbbr9O2EwVToajvTQjYz1vTMYgp3biAlEcgqIydd/Pm++HAK8EVbFXysBZnW2bKjxtLS8wYyL
-	TnbRams81AnuNhBItGG6XXL63zI89OUtoVHayh8z1TU2fTDwcYVkh0kYf/y8j9wqKKdNs6zYyNQLf
-	QNBUkHRVtB/NTedEROgRoDsUeC3jXoVjcKL3PoEX+YFX25ALCCMF9Pp0dynLDypGnkucu/z+CdP+8
-	kKVPgYrtfRw3g5NPxQSdWBYRNfY4t9wUqXUYa9kOOgJmejH36bEY7SRfyYa8r8St2S+pr082R5lwg
-	fejsDDGg==;
-Received: from ip6-localhost ([::1]:37938 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=pErbJCZ6WAjLj9/cRKvZdCFnuMaW66cGhQZaxSq8z8g=; b=MQMFC1DqIF6jEX1ZgP241UTdZW
+	8eha+BH8xjTkaOSqI+qhzqNZKTjk+k8ahviBvxb+3WU4ueIHmoHRgygZknoJVObrS8NqGkpollufn
+	uyltJnpfIy6QoIlwgl9ttqhIrPP5KibbI4nFrZr30lgyvZXjG4yj5HqPfSSoOrPKtsYPHTrKEdmON
+	V7tutVUin3bFX2ups5/sJgQ+MKYP1MK6F6SqOGB1+gz4H9v60lRRjpyo52wIMipe20ApvheNhAXs5
+	hlNPmeJThiPCtTHIbxcq7YMH6NBpAoMUCPAkFibmhoMmJTjWKUpok7jmPMEp8CzKGNIiloXvvzZ4Z
+	LjkTc4Iw==;
+Received: from ip6-localhost ([::1]:38614 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nEHEo-002WpD-NO; Sun, 30 Jan 2022 20:55:54 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48506) 
+	id 1nEHHR-002X7O-Jr; Sun, 30 Jan 2022 20:58:37 +0000
+Received: from mail-lf1-x12d.google.com ([2a00:1450:4864:20::12d]:44675) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nEHEi-002Wp4-UV
- for samba-technical@lists.samba.org; Sun, 30 Jan 2022 20:55:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=7Ym3zqeTkGWjYeS5yJaX0IAgMXpFuagct7MILgC0hzU=; b=1+nOo9SewwgZlSS18EAW0q0iIc
- KCTOLu9on8mUwE1ei7K3xjNgrX3uulJG9kU0nAJP4D+Th6QhQrlgFwCFejYWOZpwlvQFa9rB301zB
- Yd4ynu0zItc5+mJ2xaVxFc9esZy5oPtDbmWfQ47KYk4BU1UtSJQzWDzCa3L7oaVUZc86l5mnpxFhO
- w3/+oT5ZXqleA9RgxwmfzLlYpIKt3DuvH748eKXP2ecGwDo7XOmo4lCicaWmcx+8SfYbKMtP6KSmm
- LzS1f4ufXf6Zj7D7MmoefguktkDjylgjHHj7jJ59bdIkhxKjGxwTpnkhH2IS/p9nexmALqFcqWiQs
- YpCYhU9Mm7BsS3MxbKZwWKSlQyv/dlUzAu+Uu73HIXUjga10BVhcFAil6h6TgaYO3959NT/guJ+Uj
- uSmlPGFk2g8h6QWV/CvOcnC6ZPUUzS0ZEwOppq0HzjXnerrEcqYaPzDvOVwcrxJxBaecr0UV0LFhJ
- xM9DuWD509ikAsbJxvMyOwkf;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nEHEg-001Os0-L8; Sun, 30 Jan 2022 20:55:47 +0000
-Message-ID: <d3f7a5fab640810ff2baf01baf66eda7287038ba.camel@samba.org>
-Subject: Re: Microsoft Enforcement Mode
-To: Andreas Schneider <asn@samba.org>, Stefan Kania
- <stefan@kania-online.de>,  samba-technical@lists.samba.org
-Date: Mon, 31 Jan 2022 09:55:42 +1300
-In-Reply-To: <4510140.vXUDI8C0e8@krikkit>
-References: <cc895930-b174-0371-c4c5-807bc06e34aa@kania-online.de>
- <d235f497057f4188e9ea447477c32e6e0d66469e.camel@samba.org>
- <4510140.vXUDI8C0e8@krikkit>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.42.3 (3.42.3-1.fc35) 
+ (Exim) id 1nEHHN-002X7F-0C
+ for samba-technical@lists.samba.org; Sun, 30 Jan 2022 20:58:35 +0000
+Received: by mail-lf1-x12d.google.com with SMTP id u14so22764828lfo.11
+ for <samba-technical@lists.samba.org>; Sun, 30 Jan 2022 12:58:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=pErbJCZ6WAjLj9/cRKvZdCFnuMaW66cGhQZaxSq8z8g=;
+ b=IXzIB9oEAc7j0fPA8LKIrgMGAOPE8efp7v1f7uANKFjMJawXjJ4OnfC8D0NMQzFqZb
+ 9DaVFIk7xtrD2mdGQWaQR9Yrm0hrQS3aZFhD8WkubbOjIwOzmQrMUEbgPlEOroJJnLCz
+ zyrmBiCwKTVn+ZSUt/m/cMdg4LTXy16XN1UpNsF4h4IQc9wFvVMIREhs8IHWWmM04AEX
+ u7Y+IuSI1ydxVnEpvICY7wLfyqVSbtOi0GN/wQr+pTO+6QgAeJBwr6kkwa7Yi+b3DiL/
+ uIrb3jUaJgsLgS4peAJR45cBPmTLW1YYAigbmFhK36kTzRDnRv4I9eac36HbbsWVfGD1
+ 6EFg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=pErbJCZ6WAjLj9/cRKvZdCFnuMaW66cGhQZaxSq8z8g=;
+ b=R8gMpX5cncu/E6Yuij9rmUp30SNGkth0rgO4mT5CHWLBR2k/QZWq1N3Z8Xg1vDEZ9f
+ 4srooAA5Q9xy/yEmtrHYVrxXnOjDozdDeiUQvCir7MIws1su9O5ZARqV0Q5t8WilsvzC
+ e3xe/5R5MmwY3D35hxmnsm3j79AgsjVsx4gDE8Efn8BJN1GZ1UMO2vbiUliDKyeF5sX8
+ fZi7OvwmSCu4LAop4F6jhHRex6v0D8DivXkChVkg8WyGMs/CrINnsIPL29t9e8YLKfuw
+ MFHaCFEIt4nKUoXZdtFWEA99YW+2jrfqxzGX6mcdQi67VnB4zTrIlqpw3vvT/6CR1M4L
+ FB0A==
+X-Gm-Message-State: AOAM532tSR/i91XdYuWw1bTWsDfEDmHkWbEt1WS+aBFl3XlkmUbTCJDR
+ eQQTLouNyaIc3dKFpq3BJgNG+bdjDsb0TT5xWRGgSlHPbTU=
+X-Google-Smtp-Source: ABdhPJzI14Q+ZK4gqomPNAcbQ6U8b1tZO6JhzxoS7TUr7Tcjls27osVt+Prgo8i+UHzdoo1ntNLurxQlBtB41OGykLs=
+X-Received: by 2002:ac2:456c:: with SMTP id k12mr13959667lfm.234.1643576311509; 
+ Sun, 30 Jan 2022 12:58:31 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Date: Sun, 30 Jan 2022 14:58:20 -0600
+Message-ID: <CAH2r5mv8pEt7Msx0=2BPFciu8gPGLyMLPvOAzyiKg7=W=6ehOw@mail.gmail.com>
+Subject: additional regression tests added for cifs.ko (to the buildbot)
+To: samba-technical <samba-technical@lists.samba.org>,
+ CIFS <linux-cifs@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,47 +65,21 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: David Mulder <dmulder@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sun, 2022-01-30 at 17:41 +0100, Andreas Schneider wrote:
-> On Sunday, 30 January 2022 08:47:50 CET Andrew Bartlett via samba-technical 
-> wrote:
-> > On Sat, 2022-01-29 at 11:41 +0100, Stefan Kania via samba-technical
-> > 
-> > wrote:
-> > > I just read, that Microsoft uses a new Enforcement Mode on all MS DCs to
-> > > protect the DC against CVE-2021-42287 and CVE-2021-42278. The
-> > > Enforcement Mode can be deactivated until June, then MS will force it on
-> > > all DCs.
-> > > But with this mode active it's no longer possible to join a Linux-Client
-> > > to a MS-Domain. I could not find out if this will affect Samba or only
-> > > SSSD. If it affect Samba will it affect all Samba-version?
-> > 
-> > This isn't something that I expected to fail/change based on the
-> > intensive discussions I had with Microsoft during development, so I
-> > think this is an unintentional regression.
-> > 
-> > David Mulder is chasing this down via the protocols team.
-> > 
-> > Samba sets passwords via LDAP typically during the join, so isn't as
-> > impacted compared with the tools around sssd (adcli), as I understand
-> > it.
-> 
-> It is relatively new that we set passwords over ldap. We used DCERPC before. I 
-> think adcli is also just using LDAP.
+Added 10 additional regression tests to the buildbot (mostly to Samba
+exporting over btrfs)
 
-The traces I saw were showing an issue with KPASSWD.  David has the
-details.
+http://smb3-test-rhel-75.southcentralus.cloudapp.azure.com/#/builders/2/builds/876
 
-Andrew,
+Will also need updates to the corresponding xfstest pages on
+wiki.samba.org later this week
 
 -- 
-Andrew Bartlett (he/him)        https://samba.org/~abartlet/
-Samba Team Member (since 2001)  https://samba.org
-Samba Developer, Catalyst IT    https://catalyst.net.nz/services/samba
+Thanks,
 
+Steve
 
