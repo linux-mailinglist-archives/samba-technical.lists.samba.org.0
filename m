@@ -2,58 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 953EE4A66B9
-	for <lists+samba-technical@lfdr.de>; Tue,  1 Feb 2022 21:58:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99EE74AC6BF
+	for <lists+samba-technical@lfdr.de>; Mon,  7 Feb 2022 18:07:09 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=9HuensPuwQseU1qchjfF316urY7c5a9vIyOH5w1EfwI=; b=WwY9QNrmXMoBnWq0oL/Cu5xkGN
-	EUexg87rzLIJ9RulCLnaryIkSsmJLGI7a2gSdPVkO3ABel9u3ZZ0RjKHJ13GUyRJy+VH3ldkLl59I
-	lpiSH2WG1I/2sL+1swzAGe7J5xEl5FyT+ol2bES1z4vrLHltUoptrhouV2OQaN3NLfrH8FLt2syak
-	0VtOvQcYFF7C7TTw7LHqydfLjE8mFHokhmempe78gdAiquv07QTuRw1m/xfZjDZ9aToO2Lg+Euf0z
-	yke6XGqZS6wywM+FdmfxmIh57t/BwUiYUpspQk+27apPW4OloQ3GepxBG7Iv8A0+p9K+t8NJprQlz
-	05EhO81Q==;
-Received: from ip6-localhost ([::1]:63742 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=Lrgrct5d6UXaWdakKeIFck51kbLLjHDla9ZVrHn1Hng=; b=j0+ZjDeHGn8KlDHRj1B9dJ8f6t
+	BqRTBJm3ZsHU8D1bqlh0GKNzjZ0dM6C7l5uWDqExM+HdGIOKFBLykPjtWnhQtZZW0xSgnLI92YI10
+	4rdbZqB/7iY0ndz8QorlbKzVd3LmdYu7K+ycdeHnTcwFb9TbtjERt+rJm4p2UBOkMU6KGPwxWK3VA
+	G/RvaC7m+LQy6FQw8AtNCGjDt8aL20wSyShd8ebIp2jcEKcivEidFKi+VCma5oNtu1ukpjYUUP6X0
+	48RIRg5Eg2ktx2Tx6MM2jmoE/tnGOMzr0p3/jfb5r8U9yvova6XPwQ/4npUwh9Mxv6MAZhteWDtf6
+	gnFAX6qQ==;
+Received: from ip6-localhost ([::1]:36388 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nF0Dy-004pOK-Lk; Tue, 01 Feb 2022 20:58:02 +0000
-Received: from mail-yb1-xb34.google.com ([2607:f8b0:4864:20::b34]:40829) 
+	id 1nH7TO-005PlO-M0; Mon, 07 Feb 2022 17:06:42 +0000
+Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:53589) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nF0Ds-004pO8-7G; Tue, 01 Feb 2022 20:57:58 +0000
-Received: by mail-yb1-xb34.google.com with SMTP id 23so54668761ybf.7;
- Tue, 01 Feb 2022 12:57:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9HuensPuwQseU1qchjfF316urY7c5a9vIyOH5w1EfwI=;
- b=GN3GBwJVe7e8BNsuqcjSu6erLSdMuIH18EkroD6+L7hJoI6A5AoCUhdZspsl/X0yrN
- wjaeIzhcZocizgiywNijzF984pXUGGIcoBN6HURhBEC+8rrbjqtYMRMHx57h7eQBcQzR
- jYNZeJ0yxJQO/OquAXaq96+H2VqMeQDxWipk9pEu4EiYUIAMiwrtSkvZDju//z6/8/pF
- p0+sksBoTq1Zu3VoPKplfAHplGAZtsACHliIsl5dkw9uutdKtYUncHSn/dRJgG5R5NP5
- nQYQiwNDzCxBT5okRgk5Y/cVfGy6AryVm2a0t7xRggJq2gXY/ilL4vjYDdfRAMPbn97F
- AMXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=9HuensPuwQseU1qchjfF316urY7c5a9vIyOH5w1EfwI=;
- b=XNKuwRoCWePhgjWV297f35ZOfcUV+CPUUIDW1I5LF2KHhM0qDDQcWR/Xu78HwFYTYu
- 8my2uW07zn7COYQvYRoF7eQCeatfHbnvJ/I048E6kuMRSYLi6uW5QwUY6veYWIxVD8E7
- kIN8dxFZZ1gJd88JzS3q/C436aOHtian7eaZKTU6CUxMEBtu1jcq8Vy5cUXJ9Tuawjye
- V3NxD4NLZ9GJYT701s5b2U4mtp4mL9a88oUM46N3O//PwXY4B5PbU4wxHZdZ9b51GhGJ
- DpgnIbdqHq1UtDfBaPqmoapDrdzX/pwsOsYl2/UPkThiMKR+iDQ5sxZvxaCjWcZzV9/9
- YBRQ==
-X-Gm-Message-State: AOAM531Wg7iiloG7C0YN+ENq8iDx1W2SZrBRWbZmrKmh9b8xr/vtomVU
- q+eLwVaU7QNSmATXSBhbOao61fAzW8dLA3p6BtE=
-X-Google-Smtp-Source: ABdhPJwxkL8k6wzYIwO0IA8a4e0CA2Zp9oYFxLrIIeS4ZKcCICcKaogFmmqa6WTq6/ivA1Spz4b539jwWKfGDz5AWVU=
-X-Received: by 2002:a05:6902:1508:: with SMTP id
- q8mr33941904ybu.738.1643749074223; 
- Tue, 01 Feb 2022 12:57:54 -0800 (PST)
+ (Exim) id 1nH7TJ-005PlA-B5; Mon, 07 Feb 2022 17:06:40 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sernet.de; 
+ s=20210621-rsa;
+ h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Lrgrct5d6UXaWdakKeIFck51kbLLjHDla9ZVrHn1Hng=; b=TX31rYajUoSvGJjNM0NWbp1v1x
+ ZOFcvKbKh+GxIE1MREBK3IulbxVAs8SrotkBAv/Hy31a8EWlBXs5wAhqNn3ikKRjY+ad7SEHBo4Qu
+ 8vfPmLrqmBTso9F6+roSBjn0nRu7t7LvUoOGefUGHSXqczwhnhgMEVH2uxBnTuqyl3/P7KSkTgNxo
+ y1Q/x0z5HYV4CPF0ou8zppcLA/KaBzd2A0JKtUHd7ppRZtnt7KBIj7OjEf708QSBhaYAQIVn3GPM/
+ nbRRnWt6OxEIhqadU2Ej7ilJkzcI/UlrdPhj7Af3OYsPqBb/edyAYUUY/kucRIhAHKzAk5VomvZ9L
+ UI02uVQg==;
+DKIM-Signature: v=1; a=ed25519-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=sernet.de; s=20210621-ed25519; h=In-Reply-To:Content-Transfer-Encoding:
+ Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
+ Sender:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Lrgrct5d6UXaWdakKeIFck51kbLLjHDla9ZVrHn1Hng=; b=aS3IfmV1FqYSUX4pUL7ZlIwUC2
+ Are5iC4jxwz/4CQG5zDMJ+dB1r1/d3eL+SMblwK+RCXR3WCoaw0pzo3z5dBA==;
+Received: from intern.sernet.de by mail.sernet.de
+ with esmtps (Exim Mail Transfer Agent)
+ id 1nH7TH-0006B2-LW; Mon, 07 Feb 2022 18:06:35 +0100
+Received: by intern.sernet.de
+ id 1nH7TH-0006AF-J1; Mon, 07 Feb 2022 18:06:35 +0100
+Received: from bjacke by pell.sernet.de with local (Exim 4.93)
+ (envelope-from <bjacke@sernet.de>)
+ id 1nH7TH-0054n3-0y; Mon, 07 Feb 2022 18:06:35 +0100
+Date: Mon, 7 Feb 2022 18:06:34 +0100
+To: Andrew Bartlett <abartlet@samba.org>
+Subject: Re: [Samba] Remove LanMan auth from the AD DC and possibly file
+ server?
+Message-ID: <20220207170634.GC1203621@sernet.de>
+Mail-Followup-To: Andrew Bartlett <abartlet@samba.org>,
+ Jeremy Allison <jra@samba.org>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ samba@lists.samba.org
+References: <53125588031f8ffad9e7c8a4b16a7f093781a39f.camel@samba.org>
+ <20220126115058.GA936420@sernet.de> <YfF8+OMLV0UkzicQ@jeremy-acer>
+ <9df52f1eb4b6dbda5bc6c63718c28793124c7c98.camel@samba.org>
 MIME-Version: 1.0
-References: <YfmYyVJIwDOzagUb@jeremy-acer>
-In-Reply-To: <YfmYyVJIwDOzagUb@jeremy-acer>
-Date: Wed, 2 Feb 2022 06:57:43 +1000
-Message-ID: <CAN05THTOq-aVCbkUFejKo5AUfZmNoPNxMdXXSzAZYKtfc=Uzug@mail.gmail.com>
-Subject: Re: SONOS finally adds support for SMB2/3
-To: Jeremy Allison <jra@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <9df52f1eb4b6dbda5bc6c63718c28793124c7c98.camel@samba.org>
+X-Q: Die Schriftsteller koennen nicht so schnell schreiben, wie die
+ Regierungen Kriege machen; denn das Schreiben verlangt Denkarbeit. - Brecht
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,36 +79,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+From: =?utf-8?q?Bj=C3=B6rn_JACKE_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?iso-8859-1?Q?Bj=F6rn?= JACKE <bjacke@SerNet.DE>
 Cc: samba@lists.samba.org,
- "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Took them god damn long, but better late than never I guess.
+On 2022-01-27 at 07:00 +1300 Andrew Bartlett via samba-technical sent off:
+> No, you got my meaning perfectly.  Even for Win9X there is, from
+> memory, some strange update to make it do 'raw NTLMv2', instead of LM.
+> 
+> I really think we should be able to ditch this, ideally across the
+> codebase but certainly in the AD DC, in 2022.
 
-FYI: Playstation2 has had support for SMB3.11 since several years.
+okay, with the AD DC I agree, I think we can remove it there.
 
-On Wed, Feb 2, 2022 at 6:33 AM Jeremy Allison via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> Release notes for their update are here:
->
-> https://support.sonos.com/s/article/3521?language=en_US
->
-> I have a lot of SONOS kit so this is good
-> news (finally :-). Now, of course this is
-> only for SONOSv2 devices, not V1, but that's
-> understandable given the hardware restrictions
-> on the units.
->
-> The last real user of SMB1 is dead ! We can
-> get on with removing it from Samba :-).
->
-> Cheers,
->
-> Jeremy Allison,
-> Samba Team.
->
+For local SAM's users I would vote to keep LM hashes supported until we ditch
+SMB1 anyway in the not so far future. There are really still people relying on
+this.
+
+Björn
+-- 
+SerNet GmbH, Bahnhofsallee 1b, 37081 Göttingen
+phone: 0551-370000-0, mail: kontakt@sernet.de
+Gesch.F.: Dr. Johannes Loxen & Reinhild Jung
+AG Göttingen: HR-B 2816 - https://samba.plus/
+
 
