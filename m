@@ -2,50 +2,39 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D926F4AE332
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Feb 2022 23:15:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C5AD04AEBFC
+	for <lists+samba-technical@lfdr.de>; Wed,  9 Feb 2022 09:16:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=z6fSUZ2c0eNSLVqyS5rA3tqhZZ4AioZrNBboD670uSY=; b=xzj1xIclC668an314LnPyNdB4C
-	+C2rSOjYtJrHO2fyIpH+E4ZBKcifXVwJlyfYSDUOplgRgg/e3xoimupgaAwmvRYs3TcZecWfW+P03
-	6J+duJxOc7liTRpmPPy6xA3m3MOTL17XpPTpEjLF+nLSuz4RkzDfTd4w9Xm3nMDWD7SchFVhL1DjL
-	eNQ7oKwWj/H1s8j7zpzUMRW+LVYNwqUuNtMS68KXXuwJxyNcFKEsJL4ks/PV5ddS6Vgd8JtDbjw4i
-	Kmhz4TkHKzYuaQ6KFeyiIY5LmUTTT6f9LYxCfLceb8CIahXVRPtgGMC4EPto98Bs+YDjJabYUGkuV
-	qfXa2Xng==;
-Received: from ip6-localhost ([::1]:38706 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=I/zKMz2er7OP8zBpyrkT9QkAvfHcLQ+B68ZMtZXRmLc=; b=Tkbx4qFW3Dr+D7mLxAarsDFhG8
+	ROSYNbehZ1CctwCQcQi8ANn9zQ44W37bwHdAECVs541/Osp9iJjZ9aCYLV9d9FHzidIpCTfnbm7mF
+	PXtJrUc1aieDgA7MtR3T9uq6j7cFF4upKzaIBKkWfPF1qlveBmor5LQ1+w7zU/FwVMGTeYe7zbqIM
+	jpRbpFc5B9Tw5yKZE908UqDZZtH0wUEy5lcfR3LK0GH4r/JIG2mxVmT4V5/5zXNn/tsKbbpfeeNAK
+	03bPqdsYB7Zk3T7LQxsUgW62FaLeoMDr9/Vq7SzueG3ymh40OIcWhsxm55R1KGKrov7CD7ypRqGVK
+	2Os9a7UA==;
+Received: from ip6-localhost ([::1]:42202 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nHYkm-005mzp-R6; Tue, 08 Feb 2022 22:14:28 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48790) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nHYkd-005mzH-MT; Tue, 08 Feb 2022 22:14:22 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=z6fSUZ2c0eNSLVqyS5rA3tqhZZ4AioZrNBboD670uSY=; b=oZSgNqgs1cikTvCwigiuDrNwKO
- eihGzDY9sSQwqt2SRwVM8rwkSA10BZFpq6gpbMQRBGOkdG3orm93zkjh6FnjpeCsGK3VgAuEbqQXK
- Wbxc7o+4eN0bSTHWxvPtjzFUbe+H4/AxV7xd4LjDyI/rlswPUUEEhJahid1dBusUDx/fwqO/AbnFb
- PqJQSOwS+Q6FCWRDY1E8r7e1jLsdq6lmV/Bv/KuHK/xH6ciFAb415Tu3sYOITjW98MANJEmzVy3ZO
- mxd+k39I4Go83n5RS3zGP/qWTNuZci+v+L5kEzHFCWiEpakQaKQba+wbRpnT90fco6MmAC6l7kwAY
- v6UhqbMCI9uzoYPk6babYF7oeAzSD+ya/EWcEpV53qlCKsQaKM0cSu3o7L6luGQWhEPlaHIpPYB12
- 5eqxmA07BuWdC42YutblJehPkE0SaEEuNa80Yp/wt5D5jPcQheZXO7PP9OQ4fWzp72v6rpMUDwjAJ
- 3+uiWdqAaPcwH+2yM3jSz+8w;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nHYkW-002mUo-SR; Tue, 08 Feb 2022 22:14:13 +0000
-Message-ID: <9366e519039acf37002ab5f99c9038d378550e4b.camel@samba.org>
-Subject: Re: [Samba] Remove LanMan auth from the AD DC and possibly file
- server?
-To: Jeremy Allison <jra@samba.org>
-Date: Wed, 09 Feb 2022 11:14:03 +1300
-In-Reply-To: <YgH8F7/VoCe0pUyv@jeremy-acer>
-References: <53125588031f8ffad9e7c8a4b16a7f093781a39f.camel@samba.org>
- <28c3b502-7146-4403-b728-4815dafa9110@samba.org>
- <4406c0a37ed78d50bef9d10198fb6e565e633588.camel@samba.org>
- <YgH8F7/VoCe0pUyv@jeremy-acer>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+	id 1nHi82-005pp5-Mz; Wed, 09 Feb 2022 08:15:06 +0000
+Received: from air.basealt.ru ([194.107.17.39]:40708) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1nHi7w-005pos-Nb
+ for samba-technical@lists.samba.org; Wed, 09 Feb 2022 08:15:03 +0000
+Received: by air.basealt.ru (Postfix, from userid 490)
+ id 58DF4589436; Wed,  9 Feb 2022 07:55:48 +0000 (UTC)
+Received: from nir-nwb.smb.basealt.ru (unknown [85.140.7.54])
+ by air.basealt.ru (Postfix) with ESMTPSA id C793D58958B
+ for <samba-technical@lists.samba.org>; Wed,  9 Feb 2022 07:55:45 +0000 (UTC)
+To: samba-technical@lists.samba.org
+Subject: Announcement of GPUI utilitiy
+Organization: BaseALT
+Message-ID: <8c1a1aa2-3383-a231-44fa-d45a61f5b541@basealt.ru>
+Date: Wed, 9 Feb 2022 11:55:45 +0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,61 +48,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba@lists.samba.org,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Igor Chudov via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Igor Chudov <nir@basealt.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2022-02-07 at 21:13 -0800, Jeremy Allison via samba-technical
-wrote:
-> On Tue, Feb 08, 2022 at 06:04:01PM +1300, Andrew Bartlett via samba
-> wrote:
-> > On Mon, 2022-02-07 at 18:38 +0100, Ralph Boehme via samba wrote:
-> > > On 1/26/22 04:50, Andrew Bartlett via samba wrote:
-> > > > What do folks think?
-> > > 
-> > > I would vote for removing it and if people still require it to
-> > > work
-> > > with
-> > > old shit they can just continue using the latest Samba version
-> > > that
-> > > supports it.
-> > 
-> > Thanks!
-> 
-> Yes, to be honest I'm more leaning on supporting Ralph
-> now than trying to split hairs :-).
+Hi all!
 
-Thanks!
+BaseALT team recently released first version ( 0.1.0 ) of GPUI software: 
+https://github.com/august-alt/gpui . It is designed as a Group Policy 
+Template file editor. It complements ADMC software ( 
+https://github.com/altlinux/admc/ ) which was designed as a Samba domain 
+tree (LDAP) editor.
 
-> If people want LANMAN auth they can just keep running
-> the last version that supports it. It's not like they're
-> worried about security anyway :-) :-).
+As for now you may try to load ADMX files into GPUI and attempt to edit 
+local Registry.pol file using graphical interface written in C++/Qt5. At 
+the moment it may be buggy but we will be glad to hear your feedback.
 
-One other benefit is that I have often seen this turned on by folks
-where things broke (particularly when we moved to NTLMv2 only by
-default) and they just turned everything on, and then left it that way.
+I can see that David Mulder is already found some bugs like:
 
-This change would therefore secure those sites.
+* https://github.com/altlinux/admc/issues/348
+* https://github.com/altlinux/admc/issues/347
 
-Björn, after reading the discussion here is your position still that we
-need to retain LanMan authentication for DOS, OS/2, Win3.11 and Win9X?
-
-I would like to take a crack at the patch but it makes more sense to
-know your position up-front to avoid misdirected effort.
-
-Thanks,
-
-Andrew Bartlett
+And we're working on resolution.
 
 -- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-
+With best regards, Igor Chudov
+Modern Hardware Platform Development Manager
+BaseALT, Saratov engineering department, UTC+4
+tel. +7 495 1234-7-99 ext. 549
+mobile +7 937 266-51-34
 
