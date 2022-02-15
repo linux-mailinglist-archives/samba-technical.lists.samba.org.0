@@ -2,47 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D178E4B64C9
-	for <lists+samba-technical@lfdr.de>; Tue, 15 Feb 2022 08:53:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 841CD4B673F
+	for <lists+samba-technical@lfdr.de>; Tue, 15 Feb 2022 10:16:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=VNRmeZadJI4YaQP/QjMgamvAiqmNe+RI2JQwA3JSSLw=; b=PqQlQcvei6tg0omw2nNURofXzx
-	ZpcuvBhuYvAv6q5BoAyhd5068Qo3ZWF1Qdg8lKGT+p+5nWgSxqXDNMuZqIi2J/3q8TxCUxGi9mhkg
-	gpna430h2TqqkdCm+cDBGwH/PWlAVtwBXH1t+J5m09lNsA1EuYxOou+s38tc0OHNFddbeAaxAfGH3
-	Y+GCEYrQLYUN0DRJVPUX6KQpLI4gDIhOjrUyD09QwNr8bIRFdmFXN3JgIlepQR39SPcz425aCoUI2
-	3YfDMxgAZoXjr/4yLSr4QoMQ1rsf54Vho/DOHbCMZ8CZIvtmOMkvx32yr+AXG/Wx9lLo9/oTWfuFY
-	VGjuEG7g==;
-Received: from ip6-localhost ([::1]:47006 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=isvotgJ3DhWYd8KVSBMCPFceNuqZF0bZ1ydfSKj9xSk=; b=3g9Vqhi3bY6Sh+ZEqMsgIB2civ
+	2I47h4ZaeLw0FJHvd11fVo2z90UPKeYzQ3w4PA65HHhl5OUr7xKerwrEqUq8BFuCN1myfz5iuXRJ4
+	VRaI04W0ISstcj7qy8vILSAiMz2o40sDpqO68UD5IFN7ARigD9BKWOlcdj1oAt7fwt+X6xr+e3DjI
+	ssweqZxNF3Ry60aHzbZkCk7BQqlc0W9zK+a27AJxuEIWS3D71PGojO9lfjy/jQGHjntZ4o549ieku
+	7WdN3g+7MJDVuDYE5t4ZOBDaaBvlJxzKua3k+pLk3bNVOfGcqTiQbWJ+Nac9Q2KGTcitinE5FRjNl
+	VIVqHk4w==;
+Received: from ip6-localhost ([::1]:50958 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nJse3-008YQz-11; Tue, 15 Feb 2022 07:53:07 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49004) 
+	id 1nJtvl-008aO2-5C; Tue, 15 Feb 2022 09:15:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49008) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nJsdy-008YQq-6b
- for samba-technical@lists.samba.org; Tue, 15 Feb 2022 07:53:04 +0000
+ (Exim) id 1nJtvg-008aNt-9n
+ for samba-technical@lists.samba.org; Tue, 15 Feb 2022 09:15:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=VNRmeZadJI4YaQP/QjMgamvAiqmNe+RI2JQwA3JSSLw=; b=PjZmHYwevFu/nAg9cIGmpI7wsy
- QAsdwXH8s2ry+RoEdkEsLn5T2pO6/Hwd+v0VRNSW9sQ6mNngaJj8cqp1aLJcCi7oHF5JCiVH3dkJx
- CTVJaDAGgCMISqSNPhOTH+wFq0LgpYpisTwOQb43+TnmbNFNSOyMjGna8/cGzcYasoWWJKSi8oDmo
- +lxrMIbV8aLV+gfp4HTNRiz9t9GqZUciBOiMvlrG4WfMrka27qG8U/VwrV8Rllrdg0hUXQ9XDTBnf
- tFLe4+kNlaN5n0Riaa0jrIASl4ApyRlySCWNhRTm5M1HAK7lkWlxoWdctIL4edPVMUFzxH//DNyC8
- z5Dl/1FE5kxbSdenDyCu+h/5/cRQ3BwFV0h15ohq8v/ZYUDnH+GHg3jPiLebZMLH6kEgzL/+02xJ4
- RC7KR3pR7N4Bl7uJJGxPSwMsrXuXt/9iUQAGEuGyu3NyMoomeGWgkdKtDfkqzPQK6UqJtS7kZ2msl
- hBzAa/N7RO2CTGoGEiew4yiN;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=isvotgJ3DhWYd8KVSBMCPFceNuqZF0bZ1ydfSKj9xSk=; b=FUBHzmDlTITpwmS+mUFgACQsKs
+ JHYoXNKRg91jZ82Pd3YJBO8ciQeE8Ba7iz/hxBt62HxghF8Vqy5a0trMQ4lh9or9ZPGgXp6Be1Lp7
+ DS2Sm7f1TEtKqwNZtHWiZa/xncUWO0J5Cr7cZWwACPWCQXnDcpzvjnTEDg9wUTjGLRbqIx6/zORP6
+ SgHyRot58AvA0IpthpY0+Tim4E6q3wPJN+7j/BOCScXaiX7peUTwNk5S2nVpiAdvQDh97gAP1YugT
+ 5gbEdcRTSXsssWygVMsIVQLogXHMc1e1anAe83KeKdiNyp5waWUAAnQN0hCKN8ztsQkFsyvp/pQS5
+ V70z2kXzeq6ZvlFfXNAj8aeBXZP0XGZpagR7K3JIXGHBD3HQ91r/HQx10KMdVoFWFoOIbg7LHfSv6
+ HyAbLh1BjNp1LuoK30ooRSZjDDmz9aMp6ARZlKN6eB8MC9jQL0vG887EkPrp/qWt01xCc+JREMFWt
+ +Xc4j9T/6GWpbTOM7Tz/AsUj;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nJsdv-003pFw-KL
- for samba-technical@lists.samba.org; Tue, 15 Feb 2022 07:53:00 +0000
-Message-ID: <5dc4454e3ffdc7a0bd1b889c2d99e64d460cc655.camel@samba.org>
-Subject: Heimdal upgrade: Re: [Announce] Samba 4.16.0rc3 Available for Download
-To: samba-technical@lists.samba.org
-Date: Tue, 15 Feb 2022 20:52:54 +1300
-In-Reply-To: <3bed4df7-3f56-de41-e14a-1b5f989ba523@samba.org>
-References: <3bed4df7-3f56-de41-e14a-1b5f989ba523@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1nJtvd-003pvx-Nw; Tue, 15 Feb 2022 09:15:21 +0000
+Message-ID: <056415d0-b357-d7b8-9a56-cf1cf3eac0df@samba.org>
+Date: Tue, 15 Feb 2022 10:15:21 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: Heimdal upgrade: Re: [Announce] Samba 4.16.0rc3 Available for
+ Download
+Content-Language: en-US
+To: Andrew Bartlett <abartlet@samba.org>, samba-technical@lists.samba.org
+References: <3bed4df7-3f56-de41-e14a-1b5f989ba523@samba.org>
+ <5dc4454e3ffdc7a0bd1b889c2d99e64d460cc655.camel@samba.org>
+In-Reply-To: <5dc4454e3ffdc7a0bd1b889c2d99e64d460cc655.camel@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -57,36 +60,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2022-02-15 at 08:36 +0100, Jule Anger via samba-technical
-wrote:
-> Release Announcements
-> =====================
+Am 15.02.22 um 08:52 schrieb Andrew Bartlett via samba-technical:
+> On Tue, 2022-02-15 at 08:36 +0100, Jule Anger via samba-technical
+> wrote:
+>> Release Announcements
+>> =====================
+>>
+>> This is the third release candidate of Samba 4.16.  This is *not*
+>> intended for production environments and is designed for testing
+>> purposes only.  Please report any defects via the Samba bug reporting
+>> system at https://bugzilla.samba.org/.
+>>
+>> Samba 4.16 will be the next version of the Samba suite.
+>>
 > 
-> This is the third release candidate of Samba 4.16.  This is *not*
-> intended for production environments and is designed for testing
-> purposes only.  Please report any defects via the Samba bug reporting
-> system at https://bugzilla.samba.org/.
+> This is a note to myself as much as anyone, but just so it is written
+> down somewhere:
 > 
-> Samba 4.16 will be the next version of the Samba suite.
-> 
+> We need to mention the Heimdal upgrade, the resulting FAST support and
+> the limitations (useful to Linux clients only really).
 
-This is a note to myself as much as anyone, but just so it is written
-down somewhere:
+I just noticed that some parts of the heimdal client don't
+work with non-FAST servers, so I fear we have a bit of work to do before
+we can release the final 4.16.0...
 
-We need to mention the Heimdal upgrade, the resulting FAST support and
-the limitations (useful to Linux clients only really). 
-
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
+metze
 
 
