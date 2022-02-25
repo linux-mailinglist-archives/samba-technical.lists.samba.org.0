@@ -2,51 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CB2E4C420A
-	for <lists+samba-technical@lfdr.de>; Fri, 25 Feb 2022 11:16:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8FE44C48DF
+	for <lists+samba-technical@lfdr.de>; Fri, 25 Feb 2022 16:29:04 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=7O30mPN88yI4hvEOCFFsbQb6EBkeFCUh7mnO17ID5LY=; b=x+I1CrDJ/5jql1UTAWbExNOCAo
-	YQge4IlEPx4AdaW85I+QTBxaul4v3ul0UADgknwhV1nhel2s8F/zkIvF8PDEELs52Zz01+5SMYit2
-	eBwhg27nSnvGZ6nbfhiiI4s5m2tIaXQNnpaglV52CkGn7QEbJLykbnFD0oEmbzJkX5PEn6ZCJ0Y2N
-	aVQ/Ew33BGaI6gnUBH3cu22rRgPowJSPOAcjKCamW/oEpaD4sGLqelW/+c4YR5li0IA5KFofBhtcJ
-	pG/xfDgjDbD0pdObE30j7SFuklVRFyxJmkOmX0n6mMSwL559+2xhRYyJu7w0ffBPy559CeHM7ZWJ3
-	cYzKYwoQ==;
-Received: from ip6-localhost ([::1]:49218 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=9EAGZgY5SPdT1cVkvJoh2QfrN+7asBE1KRK8S40gaDQ=; b=CytUgwH2vAGt57ZMnZEORKkx+7
+	nAwXDL6CeQhhQdI00/v1QY7Liwjv05VZl34pSYrt84LgMppQady72ybUSTb50UK/onyx4NMJe54na
+	sNz5ZYsCA3QxRHsI51+8WUtvxepkA+emaEOtZQ7rkCd90RKUOTIpl2uCuy5HLb7dRyKWHCFTaa5Hk
+	ihXbRubFHzzzviEgf4KvCyXairBvdjAUKu99yFoxdlVuP7fc0CM33dFR6Ty0tqqSsmWwjMEgd9SKy
+	rXpKvtBrlVpi5BkNz8mA8cCwWVpRbzMQoH4Y80FkleTOxIPeXQjJ1RpZDTbiOhE0+fv7U10FBqORb
+	Gk0EDDDA==;
+Received: from ip6-localhost ([::1]:57592 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nNXeP-00BdlO-Rp; Fri, 25 Feb 2022 10:16:37 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49210) 
+	id 1nNcVz-00Bhcm-B0; Fri, 25 Feb 2022 15:28:15 +0000
+Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233]:34444) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nNXeK-00BdlF-7m
- for samba-technical@lists.samba.org; Fri, 25 Feb 2022 10:16:35 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=7O30mPN88yI4hvEOCFFsbQb6EBkeFCUh7mnO17ID5LY=; b=hoUZXfSpv4TO4rb+WQYcDQ5kbY
- pIGrVN1hisMhkIR4AWbFED4vV80GNOO7y1Nu3fYoovOKrPwBIJSWCY8T1czKari7BhvaWG22E/4QT
- buYt8lkFNlnmjFedT8N+3upZRZsUn/6DKrfIly/6juR00S5NybkxTeG+zkNl91bMmk/1zEBWjoTLP
- agY/XS5OXtCJgquMUB16XLtECHvcrFxA/BL98FsybIajQhF90zXFBpNlrfBBfYO72ORGUhuHYiuaN
- WHzpqKk+BCYa9bljDvAocNPBQWRwgLrodWeGTk+R0Tu3So4kv56bLPvOcGPH72ir8lBrV3Jq0K4G5
- eL4yNZNxdo3adCNrUvZj3PIj6jK2b/dxpnYWP1o+H/AyvK3KxDNhFBF35Gjj/U3KL6lO4bQKWabeG
- yoRoAbdT26Atnq+LsgXM8POh/dVKR5ZErrTNjC3WhNhWmsyZLZ0JaZElXyMgaIU9LfTID7phtICxd
- gyM3TxJ6VVzjK1m7CHLPMgu+;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nNXeI-005Ra8-PL; Fri, 25 Feb 2022 10:16:30 +0000
-Date: Fri, 25 Feb 2022 12:16:27 +0200
-To: Andrew Bartlett <abartlet@samba.org>
-Subject: Re: MIT Kerberos version support for the AD DC in master (eg 1.20
- and 1.19)
-Message-ID: <Yhise5JFfPM4fheF@pinega.vda.li>
-References: <reply-4ecf65ee6e5c0adbf25c57ec268d6f8e@gitlab.com>
- <note_855084458@gitlab.com>
- <23462492d1a7b61ee1c40313445f737296421f2a.camel@samba.org>
- <2427635.MdZvMZBkg4@magrathea>
- <d61e615650ba4f3d531d3ba0e2b73b27293ec59b.camel@samba.org>
+ (Exim) id 1nNcVt-00Bhcd-JA
+ for samba-technical@lists.samba.org; Fri, 25 Feb 2022 15:28:12 +0000
+Received: by mail-lj1-x233.google.com with SMTP id r20so7923398ljj.1
+ for <samba-technical@lists.samba.org>; Fri, 25 Feb 2022 07:28:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=9EAGZgY5SPdT1cVkvJoh2QfrN+7asBE1KRK8S40gaDQ=;
+ b=fRej6ns/ZWUEzUvxNGbQZNAT0BSw4zJppp4g8vJ12SjSS7/PKWYqWh+qGLnO51O8iL
+ xYfz41lSy7g9p5dFSX/Vhn9G1iI4DI42ZpPD98CNT4CIVD+KHqAMGHjPeFAxtW7r4OWJ
+ Bt24gJWuMtOlAENd3MxdHU1fclGI3Ej7waj6TqxJBGC+e5Plc8MWVww3O23yMZN5MEai
+ +v5oPQeRV/Ecda+PFN2Fi3sqCicKjkSIcXNayKhRTQKBSKzcFg6VPMXnJJl+dWQ+yZ2I
+ Us39X3Lp2huMeqYZOnP4q4WORoar2kNDCdTWI8b0htO7xg8iaNf+S0vFGZcd7nT8mqH5
+ YvuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=9EAGZgY5SPdT1cVkvJoh2QfrN+7asBE1KRK8S40gaDQ=;
+ b=yLC9KNNS6LZhD9/j2rraQVMhDEGBI9vpwVci68+F71Ikm/zQwabfZPqczly4ISIykm
+ rPrbdre7LFCPQKBw/BpQoEKp8XUvy7EAZ1SpCRE0lrJoYUPl9VRZORGmNrxNvpcF9Auz
+ 8Rc4wvTicQLi/Ud6DBWEtjwIRYUe6tiN9Hq1Wuyl6WeuJfAbIKin/t+9qORecsoMq6Kl
+ 9Gc0+Fad6HPJChaH5MIlmkO88cQItEAFP/9sxrSs01FBrj4TeATDhPR3BgIovXyILrzE
+ usg9QHCogfLWbRFC41e2TY58HRKV4WDYVFtiyMeWEegueSDI5yassj5ANHuwKAbNpPuF
+ ZJSQ==
+X-Gm-Message-State: AOAM532oLB0aX3eLgXLv+8y2eKuJHtWuuuy4bCqivekfr6m9thoeE3it
+ xKIvGO8gT+v+FSUTiipm+xVQyb5p8HRyj1tNHjQ=
+X-Google-Smtp-Source: ABdhPJwxd5AOIZzj1xHVv9ZDVXsnGHmJoUs7e6+bgciCEyzgPU77fjeFtutgvognPrXU36YRHWEpujkFHRb8BSzbEgE=
+X-Received: by 2002:a2e:b014:0:b0:23c:9593:f7 with SMTP id
+ y20-20020a2eb014000000b0023c959300f7mr5517803ljk.209.1645802886225; 
+ Fri, 25 Feb 2022 07:28:06 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <d61e615650ba4f3d531d3ba0e2b73b27293ec59b.camel@samba.org>
+References: <CAH2r5mt9OfU+8PoKsmv_7aszhbw-dOuDCL6BOxb_2yRwc4HHCw@mail.gmail.com>
+ <Yhf+FemcQQToB5x+@redhat.com>
+ <CAH2r5mt6Sh7qorfCHWnZzc6LUDd-s_NzGB=sa-UDM2-ivzpmAQ@mail.gmail.com>
+ <YhjYSMIE2NBZ/dGr@redhat.com> <YhjeX0HvXbED65IM@casper.infradead.org>
+In-Reply-To: <YhjeX0HvXbED65IM@casper.infradead.org>
+Date: Fri, 25 Feb 2022 09:27:55 -0600
+Message-ID: <CAH2r5mt9EtTEJCKsHkvRctfhMv7LnT6XT_JEvAb7ji6-oYnTPg@mail.gmail.com>
+Subject: Re: [LSF/MM/BPF TOPIC] Enabling change notification for network and
+ cluster fs
+To: Matthew Wilcox <willy@infradead.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,113 +72,51 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexander Bokovoy <ab@samba.org>
-Cc: Andreas Schneider <asn@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>, Ioannis Angelakopoulos <jaggel@bu.edu>,
+ linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ lsf-pc@lists.linux-foundation.org, Vivek Goyal <vgoyal@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On pe, 25 helmi 2022, Andrew Bartlett via samba-technical wrote:
-> On Fri, 2022-02-25 at 10:41 +0100, Andreas Schneider via samba-
-> technical wrote:
-> > On Friday, February 25, 2022 9:48:52 AM CET Andrew Bartlett via
-> > samba-
-> > technical wrote:
-> > > I think this is a discussion worth having somewhere a little less
-> > > hidden than a MR.  So sent to Samba-technical, but BCC to the
-> > > MR.  Lets
-> > > see if that works...
-> > > 
-> > > On 
-> > > https://gitlab.com/samba-team/samba/-/merge_requests/2330#note_855084458
-> > > Andreas, Alexander and I are caught on the philosophical point of
-> > > what
-> > > MIT krb5 versions we should be including runtime support for in
-> > > master.
-> > > 
-> > > My point is that we test MIT 1.20 on Fedora.  The non-Fedora builds
-> > > all
-> > > build Heimdal.  That is, with these changes the MIT 1.19 support is
-> > > untested in our CI, so we shouldn't put untested code in such
-> > > important
-> > > codepaths.
-> > 
-> > This is not true!
-> > 
-> > Take a look at the pipeline:
-> > 
-> > https://gitlab.com/samba-team/devel/samba/-/pipelines/478777772
-> > 
-> > samba-addc-mit120 - This runner tests MIT Kerberos 1.20 (pre-
-> > release). It
-> >                     tests the most important bits which have
-> > significantly
-> >                     changed. Like the KDB interface, S4U and RBCD.
-> >                     If you look at the log you can see:
-> >     $ if [ -x "$(command -v krb5-config)" ]; then krb5-config --
-> > version; fi
-> >     Kerberos 5 release 1.20-prerelease
-> 
-> Thanks for that.  I missed that detail when I looked over the patches,
-> I didn't consider that the patch was further extending the number of
-> jobs (this is a different also difficult issue). 
-> 
-> > 
-> > samba-addc-mit-1 - This runner tests MIT Kerberos 1.19
-> >     From the log:
-> >     $ if [ -x "$(command -v krb5-config)" ]; then krb5-config --
-> > version; fi
-> >     Kerberos 5 release 1.19.2
-> > 
-> > samba-addc-mit-4a - This runner tests MIT Kerberos 1.19
-> > samba-addc-mit-4b - This runner tests MIT Kerberos 1.19
-> > samba-admem-mit - This runner tests MIT Kerberos 1.19
-> > samba-mitkrb5 - This runner tests MIT Kerberos 1.19
-> > 
-> > > I'm honestly not making this argument to destroy the MIT KDC
-> > > effort, on
-> > > the contrary I want it to succeed!
-> > > 
-> > > But for it to be a long-term success we must also be able to learn
-> > > from
-> > > the past 6 months in particular to ensure we have a viable,
-> > > practised
-> > > process for changes need to be made in both codebases.
-> > > 
-> > > In particular, I'm concerned that the AD DC 'will build and
-> > > securely
-> > > operate against the MIT version found on enterprise distributions'
-> > > is
-> > > just not a promise we can keep, so setting that up as the baseline
-> > > expectation sets us up to fail.
-> > 
-> > What sense does it make to drop support for the latest MIT Kerberos
-> > release 
-> > (version 1.19) and require our users to build MIT Kerberos from git
-> > master 
-> > with the next Samba release?
-> 
-> Fair enough.  This makes a lot of sense.  It also answers a bit of my
-> question (that I've been trying to figure out how to artfully put) of
-> how to make incremental development of features that cross the
-> Samba/KDC boundary practical and viable.
-> 
-> More importantly this looks like a pattern we can follow - security
-> releases will be harder, but even that could be handled similarly (with
-> an in-script private build of MIT rather than a COPR repo).
+On Fri, Feb 25, 2022 at 7:49 AM Matthew Wilcox <willy@infradead.org> wrote:
+>
+> On Fri, Feb 25, 2022 at 08:23:20AM -0500, Vivek Goyal wrote:
+> > What about local events. I am assuming you want to supress local events
+> > and only deliver remote events. Because having both local and remote
+> > events delivered at the same time will be just confusing at best.
+>
+> This paragraph confuses me.  If I'm writing, for example, a file manager
+> and I want it to update its display automatically when another task alters
+> the contents of a directory, I don't care whether the modification was
+> done locally or remotely.
+>
+> If I understand the SMB protocol correctly, it allows the client to take
+> out a lease on a directory and not send its modifications back to the
+> server until the client chooses to (or the server breaks the lease).
+> So you wouldn't get any remote notifications because the client hasn't
+> told the server.
 
-Yes, the use of COPR is simply to provide a test target until there is a
-release of MIT 1.20 available, beta or otherwise.
+Directory leases would be broken by file create so the more important
+question is what happens when client 1 has a change notification on writes
+to files in a directory then client 2 opens a file in the same directory and is
+granted a file lease and starts writing to the file (which means the
+writes could get cached).   This is probably a minor point because when
+writes get flushed from client 2, client 1 (and any others with notifications
+requested) will get notified of the event (changes to files in a directory
+that they are watching).
 
-So the real goal is to make it an overlapping CI testing until we get
-all MIT platforms to migrate to 1.20 once it is released. During past 6
-months it was a real pain to work on solving conflicts when Kerberos
-test suite changes were done in master without testing them against a
-proper MIT target. Now that we have a capable MIT-based AD DC target,
-this will hopefully be less tolling.
-
+Local applications watching a file on a network or cluster mount in Linux
+(just as is the case with Windows, Macs etc.) should be able to be notified of
+local (cached) writes to a remote file or remote writes to the file from another
+client.  I don't think the change is large, and there was an earlier version of
+a patch circulated for this
 
 -- 
-/ Alexander Bokovoy
+Thanks,
+
+Steve
 
