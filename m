@@ -2,52 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9EAEA4C566F
-	for <lists+samba-technical@lfdr.de>; Sat, 26 Feb 2022 14:57:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 403DB4C62A9
+	for <lists+samba-technical@lfdr.de>; Mon, 28 Feb 2022 06:44:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=9/LCC3EoMAN5DWykB5U5qACDXj3wL7fTfBmLP0xeOH4=; b=xD+g9RSn7KEOBIDyKK5JgV/lgX
-	SUnFZ6Cozgrzv2hAJ9+xdlSP7tN3MNDibOXGiaHo5DNAs8hnSqFLfcVxxOUJL4bhHKq+PUkVcfImX
-	wwum2gkpA4sRI0a7XiWYmJul5K/5jfpOS7ipvKqSN79mZ7tQhh8QrnK4PdioZ+gaP3hqmy3JOlD9K
-	gZImn/YF9C+FDUQxRcn3BxM94DD813D1L27L7y3ZY6RzwP+EFkgHCyr78ZW/HGG6egW0tPfNIiNhb
-	cHNQNmb9zuaMvWreTPJVFbOkvHZ+D6P+3vdJC3SJM+zoMIPdcaHabdLuYnZBJJVTqbeDdeWThwm1y
-	4yPj7dMg==;
-Received: from ip6-localhost ([::1]:32706 helo=hr1.samba.org) 
+	bh=ZarKmxo+ugXggNHBorwehSX+5pGd4hCfQ7JY95+wXEI=; b=ZdNirNsbcntFQicFacs5WaXNt8
+	upw32LgKShS/vdG5Dq6FVjSs5PXYRw7JVIZxkbVD/Vy0nQbT2UEJU5FCf5g7JsRja9xaw9zMhrOGi
+	CuOSs0bHSiASg0jWyQmnkV+a9P5NGYKSZI9bvBs2cjVdj4VEW+XWMTizy/8bKIk4XgyTUdfO/+xUQ
+	BP3BSrnudZ35qUWYuFCupe66x4DXm/X2zFO+JzRiSkOtbn6pLdrQX0gYWRoBrYGQfyRaBHDSEmZa7
+	01rukcFTc6xs1QrE3CoH4e89dQRfwv63Bhmd6mjReptL5/T/bwSFu1TJpRDyT5ehLhI1BGKT0c0H2
+	T1C39R+w==;
+Received: from ip6-localhost ([::1]:57312 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nNxYd-00CC4T-7R; Sat, 26 Feb 2022 13:56:23 +0000
-Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f]:39774) 
+	id 1nOYo4-00CP5i-3Q; Mon, 28 Feb 2022 05:42:48 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49258) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nNxYY-00CC4K-BI
- for samba-technical@lists.samba.org; Sat, 26 Feb 2022 13:56:20 +0000
-Received: by mail-lj1-x22f.google.com with SMTP id bn33so11142074ljb.6
- for <samba-technical@lists.samba.org>; Sat, 26 Feb 2022 05:56:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=w6hbvtK/381byrzAsWeJVyIIIL888w9IJeVifJvVTY4=;
- b=KYK+PlITusd8SWTzBWPD4csp95CwQ2Urcst6JYhvaiXdIVJykOe62msWRzWbLzSvRs
- cQYXSG8GaAo71srCvM+qDoBrKpLGgm0/AFaofCV5ZB+2CGUW4ngY4knXQhqUkvPIDSL2
- fue5YskJu+yjuJe4vSJWXzUQGaotWcriRFYk9U19AM1SJtmjOhahUz6E9bKPyqu4Jrvq
- zouHwKirwTfBwr91z3nVEJoTrCulVwxm7Jh61Q1OTRFD4ZXlUoD17l9RS5lmo/dHUGK7
- 9TAtWr7zP6rqNKL1H7ZTHV1t/xIPakwdGFXxpvDIhhIIn0Bx0Fw5dzopnxUCd0Nz+tCM
- WgMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=w6hbvtK/381byrzAsWeJVyIIIL888w9IJeVifJvVTY4=;
- b=0MpOct3upHcQA5ssqL0VqbJnkpxl8AxwFHa5nhtFj2Is8qoi1td1gI581faSLWurg8
- WPBYZiOzldzwqEzAbse1+Wiq7vfcbaU/sHNOOA1rdmTzhENvUitc5SJLsTYe7Z2YKC7U
- QwgNr3B5+haq1b4FEhY6wP/vD6vMisEaYeiPl6N8h56vIrvlB0QH2VPo5mNw9zvu8+ac
- vr7ZurcVGxW2TnavY0jak2SahQCXHc9JdBPWEo2h23lLiw+mHd0qqqAUh4yldE64zyLv
- Ie6/UkUBusonBZptxBEM7X7c6RuVRfLdVFF5ZTpYQdD4QoJqWBFZ1Z0IrByAOv4724A4
- t5yg==
-X-Gm-Message-State: AOAM532UO2BrEwvKUXQ54OZNcQSfIr3XY0seNjEfl+fe2ukGinijvoW8
- t+yLOdqB/CmHoicwmd1Xswjbfwhs5eDYWuIANbZbK/fQ
-X-Google-Smtp-Source: ABdhPJzpktz9e3J09h/oXUdEjS2nYvWdOTaKklFo3pr0Yv3GKhgFpsoAizT/JzOBUbEH/N094VhfLiRIlR/n2L8IGRA=
-X-Received: by 2002:a2e:908f:0:b0:246:3e31:a80e with SMTP id
- l15-20020a2e908f000000b002463e31a80emr8528638ljg.23.1645883776809; Sat, 26
- Feb 2022 05:56:16 -0800 (PST)
+ (Exim) id 1nOYnz-00CP5Z-Bv
+ for samba-technical@lists.samba.org; Mon, 28 Feb 2022 05:42:45 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=ZarKmxo+ugXggNHBorwehSX+5pGd4hCfQ7JY95+wXEI=; b=ocZgmVNRz4UhLSI31zBjGwrXff
+ FRXuCbcpR0g7OPLOwncqvBKP7FxOzrZL1qaDfC9xrwevGV4bqR0e8YWLWG776CvMaRUX2fdkPS4m9
+ HmL+pXxZN6imPx9Z6cEvkez7rrTSEOsRoMml8anMQuU3GEt05TIFyXw3mRSD0OxD8APS8B/qGZF5w
+ 467T943XGoz4BCHAwan9360I3F/njMd+yQowFAUKrdYb83a38lAO7/E6RIZp73gekd9qCN/J1sJ2F
+ nWkQy7fhKOdaNv251AHA3reQiRzwYEDGfKSPWOVSbbIVqHSKYUugw9myc6FbSEurM3T3/LPVkxVo8
+ 8nyV0hY3OHccr2Kmu/KrVgtX0ENX77tfspFEGUqBCTPGutZVgUOEVw9sVkgn6ymzk7KgBMYvBSOTZ
+ JAyqLigrFFobqpFWSk2o7SNvUDujk6ZR3FKTQUEx7r57kG5VTnJRHmaMhTkDbwnGJ7gBBlwZq8uzG
+ EMAiL7hP9uP4VosbEaPMxXNS;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1nOYnu-005nxf-3y; Mon, 28 Feb 2022 05:42:38 +0000
+Message-ID: <d1b3419e-886c-d479-0c43-b4e64e5465a8@samba.org>
+Date: Mon, 28 Feb 2022 06:42:36 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [Lsf-pc] [LSF/MM/BPF TOPIC] Enabling change notification for
+ network and cluster fs
+Content-Language: en-US
+To: Amir Goldstein <amir73il@gmail.com>, Steve French <smfrench@gmail.com>
 References: <CAH2r5mt9OfU+8PoKsmv_7aszhbw-dOuDCL6BOxb_2yRwc4HHCw@mail.gmail.com>
  <Yhf+FemcQQToB5x+@redhat.com>
  <CAH2r5mt6Sh7qorfCHWnZzc6LUDd-s_NzGB=sa-UDM2-ivzpmAQ@mail.gmail.com>
@@ -57,13 +51,9 @@ References: <CAH2r5mt9OfU+8PoKsmv_7aszhbw-dOuDCL6BOxb_2yRwc4HHCw@mail.gmail.com>
  <CAH2r5msPz1JZK4OWX_=+2HTzKTZE07ACxbEv3xM-1T0HTnVWMw@mail.gmail.com>
  <CAOQ4uxi+VJG56TPvcpOqoVAGgbb8gZQJEfvhXyGyB5VboRE2wA@mail.gmail.com>
 In-Reply-To: <CAOQ4uxi+VJG56TPvcpOqoVAGgbb8gZQJEfvhXyGyB5VboRE2wA@mail.gmail.com>
-Date: Sat, 26 Feb 2022 08:56:05 -0500
-Message-ID: <CAH2r5msFj-csymszRvJHP5ngGnj_8jt6c-e6a1GR1J06B8Zx8A@mail.gmail.com>
-Subject: Re: [Lsf-pc] [LSF/MM/BPF TOPIC] Enabling change notification for
- network and cluster fs
-To: Amir Goldstein <amir73il@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------JEWlc3Q4btmHvqWa9vlw3Pbv"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,8 +67,8 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Cc: CIFS <linux-cifs@vger.kernel.org>,
  samba-technical <samba-technical@lists.samba.org>,
  LKML <linux-kernel@vger.kernel.org>, Matthew Wilcox <willy@infradead.org>,
@@ -88,35 +78,65 @@ Cc: CIFS <linux-cifs@vger.kernel.org>,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-It is common to have read leases on directories but they should not be a
-problem with notify
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------JEWlc3Q4btmHvqWa9vlw3Pbv
+Content-Type: multipart/mixed; boundary="------------L1f0AmtwKPzAH3rid24m0PNl";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Amir Goldstein <amir73il@gmail.com>, Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>, Matthew Wilcox <willy@infradead.org>,
+ Ioannis Angelakopoulos <jaggel@bu.edu>,
+ linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ lsf-pc <lsf-pc@lists.linux-foundation.org>, Vivek Goyal <vgoyal@redhat.com>
+Message-ID: <d1b3419e-886c-d479-0c43-b4e64e5465a8@samba.org>
+Subject: Re: [Lsf-pc] [LSF/MM/BPF TOPIC] Enabling change notification for
+ network and cluster fs
+References: <CAH2r5mt9OfU+8PoKsmv_7aszhbw-dOuDCL6BOxb_2yRwc4HHCw@mail.gmail.com>
+ <Yhf+FemcQQToB5x+@redhat.com>
+ <CAH2r5mt6Sh7qorfCHWnZzc6LUDd-s_NzGB=sa-UDM2-ivzpmAQ@mail.gmail.com>
+ <YhjYSMIE2NBZ/dGr@redhat.com> <YhjeX0HvXbED65IM@casper.infradead.org>
+ <CAH2r5mt9EtTEJCKsHkvRctfhMv7LnT6XT_JEvAb7ji6-oYnTPg@mail.gmail.com>
+ <YhkFZE8wUWhycwX2@redhat.com>
+ <CAH2r5msPz1JZK4OWX_=+2HTzKTZE07ACxbEv3xM-1T0HTnVWMw@mail.gmail.com>
+ <CAOQ4uxi+VJG56TPvcpOqoVAGgbb8gZQJEfvhXyGyB5VboRE2wA@mail.gmail.com>
+In-Reply-To: <CAOQ4uxi+VJG56TPvcpOqoVAGgbb8gZQJEfvhXyGyB5VboRE2wA@mail.gmail.com>
 
-On Sat, Feb 26, 2022, 05:22 Amir Goldstein <amir73il@gmail.com> wrote:
+--------------L1f0AmtwKPzAH3rid24m0PNl
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-> On Fri, Feb 25, 2022 at 8:11 PM Steve French <smfrench@gmail.com> wrote:
-> >
-> > > IOW, in general disable all local events and let filesystems decide
-> which
-> > local events to generate? And locally cached write is one such example?
-> >
-> > The fs doesn't see cached writes so probably best to still use the common
-> > existing code for notification on local writes
-> >
->
-> I guess SMB protocol does not allow client B to request a NOTIFY on change
-> when client A has a directory lease, because requesting NOTIFY requires
-> getting a read file handle on the dir?
->
-> Effectively, smb client needs to open the remote directory for read in
-> order
-> to prove that the client has read access to the directory, which is the
-> prerequisite for getting directory change notifications.
->
-> The local check for permissions is not enough for remote notifications:
->         /* you can only watch an inode if you have read permissions on it
-> */
->         error = path_permission(path, MAY_READ);
->
-> Thanks,
-> Amir.
->
+SGkgQW1pciwNCg0KT24gMi8yNi8yMiAxMToyMiwgQW1pciBHb2xkc3RlaW4gd3JvdGU6DQo+
+IEkgZ3Vlc3MgU01CIHByb3RvY29sIGRvZXMgbm90IGFsbG93IGNsaWVudCBCIHRvIHJlcXVl
+c3QgYSBOT1RJRlkgb24gY2hhbmdlDQo+IHdoZW4gY2xpZW50IEEgaGFzIGEgZGlyZWN0b3J5
+IGxlYXNlLCBiZWNhdXNlIHJlcXVlc3RpbmcgTk9USUZZIHJlcXVpcmVzDQo+IGdldHRpbmcg
+YSByZWFkIGZpbGUgaGFuZGxlIG9uIHRoZSBkaXI/DQpmd2l3LCB5b3UgZG9uJ3QgZ2V0IGEg
+IlciIFNNQjMgZGlyZWN0b3J5IGxlYXNlLCBzbyB0aGlzIGlzIG5vdCBhIHByb2JsZW0uDQoN
+Ci1zbG93DQo=
+
+--------------L1f0AmtwKPzAH3rid24m0PNl--
+
+--------------JEWlc3Q4btmHvqWa9vlw3Pbv
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmIcYMwFAwAAAAAACgkQqh6bcSY5nkbN
+khAAqRE+qx1Qbz8iS3db4Q568BEftRKDCQKnklyufG4iQ4ecGeIowtqJQpNNAgcdoV6OaMxB/+7j
+89aZjdzC00Dis/xnC+bB13njUK2fEBb/XLq/UiHJSm0LQbeQRT7LAZiiXhaLsiOLSBY7rg/1J4kG
+t4ewoM2sk4ynQO7hz7zxO3vZ4jS0gxZXtjBvjNmDJERsJ9mCPYmLFB9OfwfOyIf406xN7UHHhuou
+x+95l0gA8CdulBXXqLuy/8tp08XLxNi2BC7M+JDR0Db1ak2vTEqQpBISkdEMBJt1g/dWceIv7tgs
+MUGW/sCuEr2zDT7ipUYZiHg2B9p4RDxcin7CwsUx2/w/Ly8SOh9KRNH8GbNStOUTqBB7G0n7/mt9
+WC1pMgcBsm+8VV0lhFmlt8/EwsXWhJuZdRl5yDmDdO2qM3jdpKuUcQvrb4SaYdE5F9l/ovhBfixe
+WEl2Gk0sYwmShqYm3cHDBjv/wPKq9S0AteI8ngb33HH078w2YZIRUy3edK7KzaujPC/Cj2kY7kHK
+KHQhp0Wg2eb4z5zSxRO6SJ+8zaMyhk5OYL+/9HSX5haCWdqQs+HRNB5w9tV7ayZo298e1AnP0zXB
+fgl6bKibWJNz90gTQINFtQYBA4sIuH0QXvviX/In5aA+d1MBXEDdWiqW6vZ5X+gvn9AHATAGaOpu
+/dw=
+=ZJvZ
+-----END PGP SIGNATURE-----
+
+--------------JEWlc3Q4btmHvqWa9vlw3Pbv--
+
