@@ -2,47 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E03D4C871F
-	for <lists+samba-technical@lfdr.de>; Tue,  1 Mar 2022 09:51:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3B014CC7A1
+	for <lists+samba-technical@lfdr.de>; Thu,  3 Mar 2022 22:10:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=HpYOYir9swIWCSyTd1nMKqGc2GBqMQNf+K8NqUEFkFs=; b=NotCmBRLnIr+JQg3PR8Dpp7HyC
-	096dwCylDe8yFJrVmFS5dH9A3z8fZVIX2bWi1NP/cyhxdgBLWsOuqyU1d8+3jSLatAm+xrKeaW3DD
-	H2Tf1Y15jkhW79zxXYVpSbsUm/CMhcc7zfx0S2w4Pf1HLIP0QE7mMzCFd67KG7oXuhl0T0R8d5tDa
-	5spnrgxL7/mSInmnEmZwlS4I++t0ojefWFlaVO4GUteMOLE7HcT2tCpEIDvUwf8elUYEexQovYQV0
-	yk2adJK1iS3LxpUQrIizsONA25mHNVQZgdt+LT1X6CsfqCRpJna8LCroTmEHVxh5CLKhkTIvTUEAE
-	h6laETlg==;
-Received: from ip6-localhost ([::1]:60994 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=pyx8lwsdPJwjcK7XIBauiKCmqgRTmS3+YW7TuUWBxl4=; b=dA8q9fUSvM/H/S/R0H43XMr+vn
+	GoUb1LseRpuS8b7wfsi7zyylb54VZxlFqvNO5bqHWRTNyRXTTFFvXydc1ZOpUyBNV71EL8ra2Ob5E
+	73jox2eN3G37mqxow2naBUfag/+9y3Qn/lx3FOMq3n6Iu0LtB8lP5PKMEgBJjrXZTw0+nUzTav19M
+	nKLw4TensNOG0PsnUxMYsZhoWgJnvOZuldlSJ/bbXJ+Jnc5E8RKkajh7PIS1lTWpp6qbUAMzzcty5
+	YjiyrDJSct18aTUICKT6e3DK66kHSLCBaW3/ujc+35o+qej5rrecERlo0GIgyJ//oF6j9CT/TzRu2
+	wgD+xO0Q==;
+Received: from ip6-localhost ([::1]:43430 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nOyDs-00EYm6-GV; Tue, 01 Mar 2022 08:51:08 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49300) 
+	id 1nPshE-00FVF4-4H; Thu, 03 Mar 2022 21:09:12 +0000
+Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d]:42863) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nOyDg-00EYl3-W6; Tue, 01 Mar 2022 08:51:00 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=HpYOYir9swIWCSyTd1nMKqGc2GBqMQNf+K8NqUEFkFs=; b=UGrrLadJ1xsiiQ2g6QQCKPSXFZ
- TQxxnGz6TQQMVUS9YtSb/51owlmOEopmSiitgGeTmc5ecdzOvLtmLb6gkKzqg7I9RQ+nRZ+g5IYoK
- 7h+q9qUBQaar7mOfG3NAk54emcPhyd5REccE4LgWLAdjWZCk2xo+c2I/SltqtU6nwA7jCRbpSd555
- WmPc+TEdT5R6bRqW+jwVPbISdxFADnN89kZzMQoDBzwuHzXEw5bzJkhmNNf97NII65NzFlUnCsn5z
- /Wss6t1NTqPz7j7kI14CY4JNPLdOgVedGSIspmEag4p9gbuq29IS+LXWg47Hejrt80lTk0oaJLlGW
- 5c/IsRJ7IRPEO4CdzeYmuZ1JbWDP7BK+EeGpJg4UpO7gi1VlDiKXV/vxfQ8Od7p4Vhok2sRbeNiJq
- fQ1vTSmOoLx07cVncHVDbHf0nNC+3cB/mjhKm6U3pfrovvCd97YGQEo1RB2m7SdK/Azq+SovYurxW
- x1I/U1MUjCFyKmTVPEBupKs0;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nOyDg-0062Kb-4i; Tue, 01 Mar 2022 08:50:56 +0000
-Message-ID: <7677fe08-1c53-93ce-6e16-d0d93846862f@samba.org>
-Date: Tue, 1 Mar 2022 09:50:55 +0100
+ (Exim) id 1nPsh8-00FVEv-A1
+ for samba-technical@lists.samba.org; Thu, 03 Mar 2022 21:09:09 +0000
+Received: by mail-vk1-xa2d.google.com with SMTP id c4so3246930vkq.9
+ for <samba-technical@lists.samba.org>; Thu, 03 Mar 2022 13:09:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=pyx8lwsdPJwjcK7XIBauiKCmqgRTmS3+YW7TuUWBxl4=;
+ b=iy0KbbQCMQ507a5aZLukn7D+/ckJtO5+xGwCxBXfO0VrP8bX5adWgLCPtSyxXoaSSx
+ ssyBc+6vgPBaBydIGHKY0VN2mQ/2nNs1hpEm+R84kJlCc6AgaJKaEqihiLXI/9/AdgNu
+ LVRGXQp9U1jxXefyGRnFhQYROWzoTr1V7ukJdRJk9byo0SfRSC4mVb/YsigZ+540H3P4
+ A+3S11HibiwnWrMdKISZffMWJXeDaclCxJ3YEbFcMn9HU4Vys9P94DNLW0kZkRwtNQdF
+ 2/hxDXyljTUVblktJPDv0zzDH3U4MQs6OW6VA5a01xEnLHXM0g8T7sabg8MWKGygQdl5
+ OI/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=pyx8lwsdPJwjcK7XIBauiKCmqgRTmS3+YW7TuUWBxl4=;
+ b=5e6pa3+UIeYO5+4yF4UoGwzr2l+kyrm+x+bxUMZH/JrY3vrz0BQZ3S7ys3Msth9GX9
+ SpYU5sKzBvNErHIJEmyc/e4plOWnAGlOHisTWLUlMVHq3b52N313Dg05uko9iu/8uzW/
+ gcjS2KfWrR2tynRfF8Xn8nEelpHp5VEWwzHrlVWfRoRDKdeoVvTmziD9jv5icxrO08gR
+ cQh5FilHygbCHvZrLQWvESuigJmi8HFnvjCebJO9tlK8j+vOlOpobNQz1D+D5SC6A+4B
+ DEthAzZ9upaI427JVKMe2sdafpiSBc5AYwSNh4jV7mlN+Fwb1VN+Oz5EAkx/TS4JmTOm
+ MqVA==
+X-Gm-Message-State: AOAM532rkM0T687L2g9R6c50yVC+AYjZrK6szevSDF4KRhjpx+DemdZP
+ 43yRP9zJFb26qhQzzWyLksVUdz0YZhtrz38OaHCoQ/hL
+X-Google-Smtp-Source: ABdhPJx/ex5V3kixdERqTNciR2uCnH9BfEkgakIdc6MFZw/+6ahFRaMckjor1dLLlkSMlDamYoUJNvM8IH8ybXsdkZM=
+X-Received: by 2002:a05:6122:1692:b0:336:50d0:c772 with SMTP id
+ 18-20020a056122169200b0033650d0c772mr7465165vkl.3.1646341744307; Thu, 03 Mar
+ 2022 13:09:04 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Content-Language: de-DE
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.16.0rc4 Available for Download
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Received: by 2002:ab0:15a4:0:0:0:0:0 with HTTP;
+ Thu, 3 Mar 2022 13:09:03 -0800 (PST)
+Date: Thu, 3 Mar 2022 23:09:03 +0200
+Message-ID: <CAAQNcwukKj0fXtbFW7A3nm4QOiVG-H4L7kHG30mGkyX_eJBz8A@mail.gmail.com>
+Subject: [PATCH] cifs-utils: work around missing krb5_free_string in Heimdal
+To: samba-technical@lists.samba.org
+Content-Type: multipart/mixed; boundary="000000000000d942cd05d956ce1f"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,321 +67,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: atheik via samba-technical <samba-technical@lists.samba.org>
+Reply-To: atheik <atteh.mailbox@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Release Announcements
-=====================
-
-This is the fourth release candidate of Samba 4.16.  This is *not*
-intended for production environments and is designed for testing
-purposes only.  Please report any defects via the Samba bug reporting
-system at https://bugzilla.samba.org/.
-
-Samba 4.16 will be the next version of the Samba suite.
-
-
-UPGRADING
-=========
-
-
-NEW FEATURES/CHANGES
-====================
-
-New samba-dcerpcd binary to provide DCERPC in the member server setup
----------------------------------------------------------------------
-
-In order to make it much easier to break out the DCERPC services
-from smbd, a new samba-dcerpcd binary has been created.
-
-samba-dcerpcd can be used in two ways. In the normal case without
-startup script modification it is invoked on demand from smbd or
-winbind --np-helper to serve DCERPC over named pipes. Note that
-in order to run in this mode the smb.conf [global] section has
-a new parameter "rpc start on demand helpers = [true|false]".
-This parameter is set to "true" by default, meaning no changes to
-smb.conf files are needed to run samba-dcerpcd on demand as a named
-pipe helper.
-
-It can also be used in a standalone mode where it is started
-separately from smbd or winbind but this requires changes to system
-startup scripts, and in addition a change to smb.conf, setting the new
-[global] parameter "rpc start on demand helpers = false". If "rpc
-start on demand helpers" is not set to false, samba-dcerpcd will
-refuse to start in standalone mode.
-
-Note that when Samba is run in the Active Directory Domain Controller
-mode the samba binary that provides the AD code will still provide its
-normal DCERPC services whilst allowing samba-dcerpcd to provide
-services like SRVSVC in the same way that smbd used to in this
-configuration.
-
-The parameters that allowed some smbd-hosted services to be started
-externally are now gone (detailed below) as this is now the default
-setting.
-
-samba-dcerpcd can also be useful for use outside of the Samba
-framework, for example, use with the Linux kernel SMB2 server ksmbd or
-possibly other SMB2 server implementations.
-
-Certificate Auto Enrollment
----------------------------
-
-Certificate Auto Enrollment allows devices to enroll for certificates from
-Active Directory Certificate Services. It is enabled by Group Policy.
-To enable Certificate Auto Enrollment, Samba's group policy will need to be
-enabled by setting the smb.conf option `apply group policies` to Yes. Samba
-Certificate Auto Enrollment depends on certmonger, the cepces certmonger
-plugin, and sscep. Samba uses sscep to download the CA root chain, then uses
-certmonger paired with cepces to monitor the host certificate templates.
-Certificates are installed in /var/lib/samba/certs and private keys are
-installed in /var/lib/samba/private/certs.
-
-Ability to add ports to dns forwarder addresses in internal DNS backend
------------------------------------------------------------------------
-
-The internal DNS server of Samba forwards queries non-AD zones to one or 
-more
-configured forwarders. Up until now it has been assumed that these 
-forwarders
-listen on port 53. Starting with this version it is possible to 
-configure the
-port using host:port notation. See smb.conf for more details. Existing 
-setups
-are not affected, as the default port is 53.
-
-CTDB changes
-------------
-
-* The "recovery master" role has been renamed "leader"
-
-   Documentation and logs now refer to "leader".
-
-   The following ctdb tool command names have changed:
-
-     recmaster -> leader
-     setrecmasterrole -> setleaderrole
-
-   Command output has changed for the following commands:
-
-     status
-     getcapabilities
-
-   The "[legacy] -> recmaster capability" configuration option has been
-   renamed and moved to the cluster section, so this is now:
-
-     [cluster] -> leader capability
-
-* The "recovery lock" has been renamed "cluster lock"
-
-   Documentation and logs now refer to "cluster lock".
-
-   The "[cluster] -> recovery lock" configuration option has been
-   deprecated and will be removed in a future version.  Please use
-   "[cluster] -> cluster lock" instead.
-
-   If the cluster lock is enabled then traditional elections are not
-   done and leader elections use a race for the cluster lock.  This
-   avoids various conditions where a node is elected leader but can not
-   take the cluster lock.  Such conditions included:
-
-   - At startup, a node elects itself leader of its own cluster before
-     connecting to other nodes
-
-   - Cluster filesystem failover is slow
-
-   The abbreviation "reclock" is still used in many places, because a
-   better abbreviation eludes us (i.e. "clock" is obvious bad) and
-   changing all instances would require a lot of churn.  If the
-   abbreviation "reclock" for "cluster lock" is confusing, please
-   consider mentally prefixing it with "really excellent".
-
-* CTDB now uses leader broadcasts and an associated timeout to
-   determine if an election is required
-
-   The leader broadcast timeout can be configured via new configuration
-   option
-
-     [cluster] -> leader timeout
-
-   This specifies the number of seconds without leader broadcasts
-   before a node calls an election.  The default is 5.
-
-
-REMOVED FEATURES
-================
-
-SMB1 CORE and LANMAN1 protocol wildcard copy, unlink and rename removed
-=======================================================================
-
-In preparation for the removal of the SMB1 server, the unused
-SMB1 command SMB_COM_COPY (SMB1 command number 0x29) has been
-removed from the Samba smbd server. In addition, the ability
-to process file name wildcards in requests using the SMB1 commands
-SMB_COM_COPY (SMB1 command number 0x2A), SMB_COM_RENAME (SMB1 command
-number 0x7), SMB_COM_NT_RENAME (SMB1 command number 0xA5) and
-SMB_COM_DELETE (SMB1 command number 0x6) have been removed.
-
-This only affects clients using MS-DOS based versions of
-SMB1, the last release of which was Windows 98. Users requiring
-support for these features will need to use older versions
-of Samba.
-
-No longer using Linux mandatory locks for sharemodes
-====================================================
-
-smbd mapped sharemodes to Linux mandatory locks. This code in the Linux 
-kernel
-was broken for a long time, and is planned to be removed with Linux 
-5.15. This
-Samba release removes the usage of mandatory locks for sharemodes and the
-"kernel share modes" config parameter is changed to default to "no". The 
-Samba
-VFS interface is kept, so that file-system specific VFS modules can 
-still use
-private calls for enforcing sharemodes.
-
-
-smb.conf changes
-================
-
-   Parameter Name                          Description     Default
-   --------------                          -----------     -------
-   kernel share modes                      New default     No
-   dns forwarder                           Changed
-   rpc_daemon                              Removed
-   rpc_server                              Removed
-   rpc start on demand helpers             Added           true
-
-
-CHANGES SINCE 4.16.0rc3
-=======================
-
-o  Samuel Cabrero <scabrero@suse.de>
-    * BUG 14979: Problem when winbind renews Kerberos.
-
-o  Björn Jacke <bj@sernet.de>
-    * BUG 13631: DFS fix for AIX broken.
-    * BUG 14974: Solaris and AIX acl modules: wrong function arguments.
-    * BUG 7239: Function aixacl_sys_acl_get_file not declared / coredump.
-
-o  Andreas Schneider <asn@samba.org>
-    * BUG 14967: Samba autorid fails to map AD users if id rangesize 
-fits in the
-      id range only once.
-
-o  Martin Schwenke <martin@meltin.net>
-    * BUG 14958: CTDB can get stuck in election and recovery.
-
-
-CHANGES SINCE 4.16.0rc2
-=======================
-
-o  Jeremy Allison <jra@samba.org>
-    * BUG 14169: Renaming file on DFS root fails with
-      NT_STATUS_OBJECT_PATH_NOT_FOUND.
-    * BUG 14938: NT error code is not set when overwriting a file during 
-rename
-      in libsmbclient.
-
-o  Ralph Boehme <slow@samba.org>
-    * BUG 14674: net ads info shows LDAP Server: 0.0.0.0 depending on 
-contacted
-      server.
-
-o  Pavel Filipenský <pfilipen@redhat.com>
-    * BUG 14971: virusfilter_vfs_openat: Not scanned: Directory or 
-special file.
-
-o  Volker Lendecke <vl@samba.org>
-    * BUG 14900: Regression: Samba 4.15.2 on macOS segfaults intermittently
-      during strcpy in tdbsam_getsampwnam.
-    * BUG 14975: Fix a crash in vfs_full_audit - CREATE_FILE can free a 
-used fsp.
-
-o  Stefan Metzmacher <metze@samba.org>
-    * BUG 14968: smb2_signing_decrypt_pdu() may not decrypt with
-      gnutls_aead_cipher_decrypt() from gnutls before 3.5.2.
-
-o  Andreas Schneider <asn@samba.org>
-    * BUG 14960: SDB uses HDB flags directly which can lead to unwanted side
-      effects.
-
-
-CHANGES SINCE 4.16.0rc1
-=======================
-
-o  Jeremy Allison <jra@samba.org>
-    * BUG 14911: CVE-2021-44141: UNIX extensions in SMB1 disclose 
-whether the
-      outside target of a symlink exists.
-
-o  Ralph Boehme <slow@samba.org>
-    * BUG 14914: CVE-2021-44142: Out-of-Bound Read/Write on Samba vfs_fruit
-      module.
-    * BUG 14961: install elasticsearch_mappings.json
-
-o  FeRD (Frank Dana) <ferdnyc@gmail.com>
-    * BUG 14947: samba-bgqd still notifying systemd, triggering log warnings
-      without NotifyAccess=all.
-
-o  Stefan Metzmacher <metze@samba.org>
-    * BUG 14867: Printing no longer works on Windows 7 with 2021-10 monthly
-      rollup patch.
-    * BUG 14956: ndr_push_string() adds implicit termination for
-      STR_NOTERM|REMAINING empty strings.
-
-o  Joseph Sutton <josephsutton@catalyst.net.nz>
-    * BUG 14950: CVE-2022-0336: Re-adding an SPN skips subsequent SPN 
-conflict
-      checks.
-
-
-KNOWN ISSUES
-============
-
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.16#Release_blocking_bugs
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.freenode.net.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-======================================================================
-== Our Code, Our Bugs, Our Responsibility.
-== The Samba Team
-======================================================================
-
-
-================
-Download Details
-================
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-from:
-
-         https://download.samba.org/pub/samba/rc/
-
-The release notes are available online at:
-
-https://download.samba.org/pub/samba/rc/samba-4.16.0rc4.WHATSNEW.txt
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                         --Enjoy
-                         The Samba Team
+--000000000000d942cd05d956ce1f
+Content-Type: text/plain; charset="UTF-8"
+
+The krb5_free_string function is not present in Heimdal and instead
+krb5_xfree should be used for freeing the string allocation done by
+krb5_cc_get_full_name.
+
+--000000000000d942cd05d956ce1f
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-cifs-utils-work-around-missing-krb5_free_string-in-H.patch"
+Content-Disposition: attachment; 
+	filename="0001-cifs-utils-work-around-missing-krb5_free_string-in-H.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: file0
+
+RnJvbSA0MjE2MTVjY2RmOTRjMmQyYzg0NDJmMDIzZmVlNzQ2YTU5ZDkxYjc3IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBhdGhlaWsgPGF0dGVoLm1haWxib3hAZ21haWwuY29tPgpEYXRl
+OiBUaHUsIDMgTWFyIDIwMjIgMjI6NDY6MjUgKzAyMDAKU3ViamVjdDogW1BBVENIXSBjaWZzLXV0
+aWxzOiB3b3JrIGFyb3VuZCBtaXNzaW5nIGtyYjVfZnJlZV9zdHJpbmcgaW4gSGVpbWRhbAoKVGhl
+IGtyYjVfZnJlZV9zdHJpbmcgZnVuY3Rpb24gaXMgbm90IHByZXNlbnQgaW4gSGVpbWRhbCBhbmQg
+aW5zdGVhZAprcmI1X3hmcmVlIHNob3VsZCBiZSB1c2VkIGZvciBmcmVlaW5nIHRoZSBzdHJpbmcg
+YWxsb2NhdGlvbiBkb25lIGJ5CmtyYjVfY2NfZ2V0X2Z1bGxfbmFtZS4KClNpZ25lZC1vZmYtYnk6
+IGF0aGVpayA8YXR0ZWgubWFpbGJveEBnbWFpbC5jb20+Ci0tLQogY2lmcy51cGNhbGwuYyB8IDQg
+KysrKwogY29uZmlndXJlLmFjICB8IDUgKysrKysKIDIgZmlsZXMgY2hhbmdlZCwgOSBpbnNlcnRp
+b25zKCspCgpkaWZmIC0tZ2l0IGEvY2lmcy51cGNhbGwuYyBiL2NpZnMudXBjYWxsLmMKaW5kZXgg
+YWQwNDMwMS4uYTMwZjZkYSAxMDA2NDQKLS0tIGEvY2lmcy51cGNhbGwuYworKysgYi9jaWZzLnVw
+Y2FsbC5jCkBAIC01MzMsNyArNTMzLDExIEBAIGdldF9leGlzdGluZ19jYyhjb25zdCBjaGFyICpl
+bnZfY2FjaGVuYW1lKQogCQlzeXNsb2coTE9HX0RFQlVHLCAiJXM6IGtyYjVfY2NfZ2V0X2Z1bGxf
+bmFtZSBmYWlsZWQ6ICVkXG4iLCBfX2Z1bmNfXywgcmV0KTsKIAl9IGVsc2UgewogCQlzeXNsb2co
+TE9HX0RFQlVHLCAiJXM6IGRlZmF1bHQgY2NhY2hlIGlzICVzXG4iLCBfX2Z1bmNfXywgY2FjaGVu
+YW1lKTsKKyNpZmRlZiBIQVZFX0tSQjVfRlJFRV9TVFJJTkcJLyogTUlUICovCiAJCWtyYjVfZnJl
+ZV9zdHJpbmcoY29udGV4dCwgY2FjaGVuYW1lKTsKKyNlbHNlCS8qIEhlaW1kYWwgKi8KKwkJa3Ji
+NV94ZnJlZShjYWNoZW5hbWUpOworI2VuZGlmCiAJfQogCiAJaWYgKCFnZXRfdGd0X3RpbWUoY2Mp
+KSB7CmRpZmYgLS1naXQgYS9jb25maWd1cmUuYWMgYi9jb25maWd1cmUuYWMKaW5kZXggYmE2ZGZl
+MS4uMjkzN2VlMiAxMDA2NDQKLS0tIGEvY29uZmlndXJlLmFjCisrKyBiL2NvbmZpZ3VyZS5hYwpA
+QCAtMjU2LDYgKzI1NiwxMSBAQCBpZiB0ZXN0ICRlbmFibGVfY2lmc3VwY2FsbCAhPSAibm8iOyB0
+aGVuCiAJQUNfQ0hFQ0tfRlVOQ1MoW2tyYjVfYXV0aF9jb25fc2V0YWRkcnMga3JiNV9hdXRoX2Nv
+bl9zZXRfcmVxX2Nrc3VtdHlwZV0pCiBmaQogCisjIGRldGVybWluZSBob3cgdG8gZnJlZSBhIHN0
+cmluZyBhbGxvY2F0ZWQgYnkgYSBrcmI1IGZ1bmN0aW9uCitpZiB0ZXN0ICRlbmFibGVfY2lmc3Vw
+Y2FsbCAhPSAibm8iOyB0aGVuCisJQUNfQ0hFQ0tfRlVOQ1MoW2tyYjVfZnJlZV9zdHJpbmddKQor
+ZmkKKwogaWYgdGVzdCAkZW5hYmxlX3N5c3RlbWQgIT0gIm5vIjsgdGhlbgogCUFDX0RFRklORShF
+TkFCTEVfU1lTVEVNRCwgMSwgW0VuYWJsZSBzeXN0ZW1kIHNwZWNpZmljIGJlaGF2aW9yIGZvciBt
+b3VudC5jaWZzXSkKIGZpCi0tIAoyLjM1LjEKCg==
+--000000000000d942cd05d956ce1f--
 
