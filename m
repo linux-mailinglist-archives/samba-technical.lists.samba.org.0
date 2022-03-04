@@ -2,50 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 285FA4CD750
-	for <lists+samba-technical@lfdr.de>; Fri,  4 Mar 2022 16:09:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C9594CDB18
+	for <lists+samba-technical@lfdr.de>; Fri,  4 Mar 2022 18:38:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=X6BXNIX4tjZlXzj9Kk2YGon2XMEsMwC4WZDv70ZVYYo=; b=jx1Pf26zcBBIPe/mdaLsWbK7YQ
-	yge5pf39wXDcl/kc9zoifrBGNvn22teyisUgKN/QxluJ9Xse3gc/Hxnz4YqbfZs4ClnNBDZ/+VKuu
-	IdTKLmNGTwYFA2jsZM8A/cQ1Sx8A2ewr4PZpR5giImQX6TKzuroKt3ziIakpFNkB0tomxm/wl8ZhM
-	9mwQal9mNOP1wCllCALJzMcb5eqIe7PwMiEaTVoZSAe1MMXfZKZBWNgVmJmzyGY7ELAoUoY2tmc/6
-	IH7GOAptBG70w1eJeRS3qbYKEenGNDzCTRCoeRDnKBg0c+KXjNXqeFOOvF232fya1Bn3eTfT9G6cE
-	NVgspzLg==;
-Received: from ip6-localhost ([::1]:26336 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=NQd1nzLWdNmlS6lhM2MAPdK4D8+lAdul7JWazUsrJKE=; b=xt+TiGLJYiCYWdZsXC70ag4r8A
+	x4IFmGmaTGFw7gsfUARyiba0PHh7A0bkLHBPu6UGU1FKU+UbfLiNqjPiAQdLmGQfj+sa/On0WH+f0
+	zzS4iFzPbQIBE2OadWIJedGZhNbmT5Ubp63skghFBlrJadmfSbd4rkRAf8au6SeYKUCmmjfkDvWUJ
+	IxkTrDhLyhtBaPSnhdhWbDTOISlNeH4LLREqym9rFdR5sGjImzl04YVZ9srl5yziIbK3KNSM/KVpl
+	UbfxtRQhphkIwA6qk6vdD67KhqwW+uwd1WPcA+MYKPsJSGaCQP+yIL7yIIVgg6ISFiw6JH1HmA51E
+	+eyWjfmQ==;
+Received: from ip6-localhost ([::1]:33410 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nQ9Y2-00Fmz1-PE; Fri, 04 Mar 2022 15:08:50 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49404) 
+	id 1nQBsa-00FqMR-Q6; Fri, 04 Mar 2022 17:38:12 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49414) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nQ9Xy-00Fmys-Eb
- for samba-technical@lists.samba.org; Fri, 04 Mar 2022 15:08:48 +0000
+ (Exim) id 1nQBsW-00FqMI-9N
+ for samba-technical@lists.samba.org; Fri, 04 Mar 2022 17:38:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=X6BXNIX4tjZlXzj9Kk2YGon2XMEsMwC4WZDv70ZVYYo=; b=cXKa5sadBRf6U1xAmtTdddJhjm
- bZlsX5aX2UedBvc0v92OmNJWBAfaEckwvjBgoOs5Wv0f8KB8MHLHnbCwN0UiPUHSdsIB+SZuaQFBF
- OuNdbB8cKiFxIc0LNOo6qKcIK3nXRcFde3ulnP11MNd98wDf4CV4tTnd2xiCMNctlR6fhlsBOnRMm
- eLXcBjvgiT81rd55nmJDIqEPq+qrgQFKOur9HEyixrptD5uXpZROmGydLaRNypfRWtqH1CYpZ7mVu
- yLaV0ffrNEe4wGAxhCSuqZmynI3e6S1vrHNrT2QCKymGgVxXSHB5NhsKXFaagF4YiJezNr3qqy6Uh
- 41oyHphLN1lLJfNKnOqtkBWrGfw0m2a55QJpgOOXhrwaTl5rdXJlsmP4ZA8Z7+CiwoFTXuHOY9+M2
- lpk8dTm8dYJWqf1n03ZLkoHAgnz7dcITEPVvvSrnfIF5MzkoMS6pDEOKUqY3i3RiFRs6+mvxyL3pp
- uKG7lILzL0W5b9FG3KTemyyg;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=NQd1nzLWdNmlS6lhM2MAPdK4D8+lAdul7JWazUsrJKE=; b=uJRLxppgvEGM1XWTZIZo02J+S9
+ oLTIIBDeGbwUrdFC4GUIe5H6oe8+qHn0RmkI7X8rN6Srm89vQm6umCWNZfWvxzkzipXS392psqtm+
+ rgEmX3Xp9s+rGnnXidkoi6UtNGSvko6uJyBSwWFL0YvPgqk/ncEGyaZy1AFHopPNTLQ0iw9/y3DLT
+ r/6gJaxidI8U9p0ZXmPrrHq7cNOPrm0bJ85rJzQmcYaPFASihJfoJg6POtByXsaOgBhSNHxLWYkXI
+ NIRQEoOIj+Ndh44PQfUma3Mlq37lon+jAK/mYVswIBCiXThUpwQcxa6CTD/StAT2+0sZiomT03oKU
+ E4euCu4sYihaY0vdaIYf2qhiiYsRHyKNT6/5MYzDxj7YkqP1ouLoJpuSfmRVUARh6xKjSe9OKTJAK
+ kGabAuKM6zOuyYWHCvTgH+ghCQX7abh9W2GXGlBPjbynCWwT1K+ylTRqzCawaPG4fM7ikHwQs9vpI
+ 4A5BlaAToCn+QnzcVm5vArJP;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nQ9Xx-006hKs-BA; Fri, 04 Mar 2022 15:08:45 +0000
-Message-ID: <1b5f084c-936b-888d-aea8-88aaa2a8175d@samba.org>
-Date: Fri, 4 Mar 2022 16:08:45 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
+ (Exim) id 1nQBsU-006ibB-PT; Fri, 04 Mar 2022 17:38:07 +0000
+Message-ID: <a9c303b8edab648bc5d3b109f5ccbffaeb577cf7.camel@samba.org>
 Subject: Re: Two samba domains in one forest
-Content-Language: en-US
-To: =?UTF-8?Q?Pavel_B=c5=99ezina?= <pbrezina@redhat.com>,
+To: Pavel =?UTF-8?Q?B=C5=99ezina?= <pbrezina@redhat.com>, 
  samba-technical@lists.samba.org
-References: <81206267-0468-54eb-8724-4710d22cae89@redhat.com>
+Date: Sat, 05 Mar 2022 06:38:03 +1300
 In-Reply-To: <81206267-0468-54eb-8724-4710d22cae89@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <81206267-0468-54eb-8724-4710d22cae89@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.42.4 (3.42.4-1.fc35) 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,17 +57,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Pavel,
+On Fri, 2022-03-04 at 15:21 +0100, Pavel Březina via samba-technical
+wrote:
+> Hi samba-technical,
+> is it possible to create a domain trust between two domains to achieve a 
+> subdomain relationship in a forest? For example child.samba.test <--> 
+> samba.test.
 
-> is it possible to create a domain trust between two domains to achieve a subdomain relationship in a forest? For example child.samba.test <--> samba.test.
+Not with Samba as an AD DC.
 
-This is currently not possible, it would require quite work to add.
+I started on this a while back but never got it finished.  If you find
+any parts of that work please don't assume it works.
 
-metze
+You can however make a trust between any two distinct forests. 
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett (he/him)        https://samba.org/~abartlet/
+Samba Team Member (since 2001)  https://samba.org
+Samba Developer, Catalyst IT    https://catalyst.net.nz/services/samba
 
 
