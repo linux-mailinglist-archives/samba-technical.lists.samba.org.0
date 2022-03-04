@@ -2,47 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E8F74CDD0A
-	for <lists+samba-technical@lfdr.de>; Fri,  4 Mar 2022 19:57:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E616B4CDD54
+	for <lists+samba-technical@lfdr.de>; Fri,  4 Mar 2022 20:30:07 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=vsO/EilcSYmiwyUQTxjCvYeL2vyLE0zGeT0JGmDrl3I=; b=byCTRtNttFZIucDl8Hj5EHrZaR
-	5czP2vvsuitCBeI5rH+8udPfuMUs/wiF/vYEDYjekyg1yP+aKuVEWWZD4xV4ZEz6s3cf+1cbVoiOM
-	B4ubYWDHjbN0q2/Snt16H4TscY394paXX5LmuD9X6rU1QaOSxqJdWH5LGY1RkIVIyUKEbuxvi3Hrf
-	Qg6/21nWz09tOuls0igvo+qm9rjvXAML5VP1yktcsfKda2Z2+NuMetdZgp/XuhSyb/48+Ek1kml84
-	MwM9khPcoY0qjpu1scw4nCNJ0BF/yUT3W/0Z0Q8oQhGD0S+EI64DQ3OD0UtyXm51mEV8d0hE+9W8R
-	c+WZl65g==;
-Received: from ip6-localhost ([::1]:41420 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=FFCRIhdyMggGxggFpWXznCTlYuGztYmEHjwu93O0lk4=; b=LrvggE9qszaEAAvsCNom0TFph6
+	s2i70PdoMZFzpgcqidIPgpZCz/KVJcoSLghJ3pkQ/JNumPw6902KPoTr2tVCAv8/E/8fzIlJsHdwn
+	rI64Xpcom15PG2koz75qNm5YIZ0TfNnBdN2JlyGXB7jHLr9vJHvmCzMz6ba7A98A1xYFQexezH/Q+
+	cjaZkMxRUBsRLT42AcwVLi+YU5mE/egsk2l6XltS2plC+/4lav+a+/ItlR8FdFAXEKenDpk6aRSXc
+	EWBx+tEeP557Vf8DmCKp4MOGAFN08w5EtXNgwJam7RS5DDhxj2AxEmCG+08HBV1Vr6FYjTiXMlH99
+	rGSgz6HQ==;
+Received: from ip6-localhost ([::1]:44216 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nQD6S-00FtuZ-Ha; Fri, 04 Mar 2022 18:56:36 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49424) 
+	id 1nQDcA-00Fv94-9I; Fri, 04 Mar 2022 19:29:22 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49428) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nQD6N-00FtuP-HR
- for samba-technical@lists.samba.org; Fri, 04 Mar 2022 18:56:34 +0000
+ (Exim) id 1nQDc5-00Fv8u-Nr
+ for samba-technical@lists.samba.org; Fri, 04 Mar 2022 19:29:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=vsO/EilcSYmiwyUQTxjCvYeL2vyLE0zGeT0JGmDrl3I=; b=SFnqz0bn3OA5tbmt2aDY5D7BD/
- QOohbMZWlAvnKAK89+cQMeCBHlgp1OtQl+pd6V78y45DNX9e2dqcipudbeN4Heci4nOgfOU1gT2ui
- WIdEOC8uyztadkKYmcOgodiBjFwj43kusIyE8VQLvXTUR1SiV/pPTFyvAnAqV5spCdrowr2GX+FEQ
- m+rkObLTvfGC6WZgNrsntPvDWttialjBVzo0hZaF+cU+or+MuhxKVCFeeCbebKHhDs4DfD0Fxkq3x
- o3GJfTU1t6Y/op8TxA35qH3NuWN9vbSHIGIcVgOVKoNW/Gqx2yjEl16eOMTVoo+HOr9JEdEBO/PUA
- cqAq0NIYQywGoalN2XAtZONzrV1v8pSP1tioLUfv+WXLkKv/riiFPSf/6gVsftzz4uA7DsfAtsMjH
- 0bEnU4cUhbl9oThiEk2/JHVKrvedaffo+GEUmjVPDlSp4FvyvzkCZmXYHeu7b48T0v74iS6MnWwyE
- SZCDKYfk/7JYQkUl36t9iVvo;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=FFCRIhdyMggGxggFpWXznCTlYuGztYmEHjwu93O0lk4=; b=XqWv0ODi64Urc5iUdjZvhaiuoW
+ kGNkylXlw0/nCD5Tnb21FBxXLfNZCco8v9eECbe4tykuv3DrqOlcT52gaN4ZVh4BKIwLLYjjxRYjM
+ 3tEEDhqOOA6HEpoVhqRaim1caSl6TF//Y4tURTQQaAQa35mx9t1shQiZ1OngHTcAWqfyaw7O+HQT0
+ 4ZeBG6bQGg6J+tp3MmEBXXZke509pmCs4oM2RXIP6YbvxIlMlgtvbrqDy9dOKQA7e36jWs6WXQKUc
+ jH5tpWGuIfxJL74JX8wi6fLmROt9HpdagVggFBNsZndBzGwk6GR+V56B6Xr1BnSdAdypEmHfeq0sw
+ tw8ZM9JTh9c75PjAMSEBjrYfNg3/gORVZ0DdA1nfsQocYX3pE9iRrssulaImfjGaGERd4eLbeNx22
+ 7RhC8DYF3DNDuoJL6yxiVugGU03IE1OOKQwQq1C0kPXNMTg45D/35hiE7W4GRQx0t2A8wtiKEHbI6
+ OmwYMpnUHNIBgFkOBwTr52NL;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nQD6M-006jLc-0P; Fri, 04 Mar 2022 18:56:30 +0000
-Message-ID: <3d52d8c4423ac247d09600c34ea499670b2c6a4a.camel@samba.org>
+ (Exim) id 1nQDc4-006jdl-Mm; Fri, 04 Mar 2022 19:29:17 +0000
+Date: Fri, 4 Mar 2022 11:29:14 -0800
+To: Tim Rice <tim@multitalents.net>
 Subject: Re: issues with 4.10.16 UnixWare port
-To: Tim Rice <tim@multitalents.net>, samba-technical@lists.samba.org
-Date: Sat, 05 Mar 2022 07:56:26 +1300
-In-Reply-To: <alpine.UW2.2.11.2203040933550.4550@server01.int.multitalents.net>
+Message-ID: <YiJoiir6B1brZBvm@jeremy-acer>
 References: <alpine.UW2.2.11.2203040933550.4550@server01.int.multitalents.net>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.42.4 (3.42.4-1.fc35) 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <alpine.UW2.2.11.2203040933550.4550@server01.int.multitalents.net>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,70 +55,25 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This comes from the default idmap.ldb database values.  You could
-adjust the template.
+On Fri, Mar 04, 2022 at 10:04:53AM -0800, Tim Rice via samba-technical wrote:
+>
+>I am attempting to do some initial tests on my UnixWare port
+>of samba-4.10.16. (4.15.3 required symlinkat, readlinkat, etc. UW
+>does not have)
 
-However as you have noticed the AD DC is totally untested on UnixWare
-and you will hit more problems soon.
+Just an FYI. Without the XXXXat() system calls Samba
+will never be safe against symlink attacks on this
+platform (neither will any other user-space code,
+so I don't feel particulary picked on here :-).
 
-You need xattrs and posix ACLs in particular.
-
-Andrew Bartlett
-
-On Fri, 2022-03-04 at 10:04 -0800, Tim Rice via samba-technical wrote:
-> I am attempting to do some initial tests on my UnixWare port
-> of samba-4.10.16. (4.15.3 required symlinkat, readlinkat, etc. UW
-> does not have)
-> 
-> While running "samba-tool domain provision --use-rfc2307 --
-> interactive"
-> I see
-> .....
-> INFO 2022-03-04 11:49:05,728 pid:28273 /opt/lib/python3.9/site-
-> packages/samba/provision/__init__.py #1571: Setting up self join
-> Security context active token stack underflow!
-> PANIC (pid 28273): Security context active token stack underflow!
-> unable to produce a stack trace on this platform
-> Can not dump core: corepath not set up
-> root@timaddc1 #
-> .....
-> 
-> Looking at the truss output I see
-> .....
-> 2013:   open("/var/opt/samba/locks/sysvol", 02000000, 0644) = 14
-> [snip]
-> 2013:   fchown(14, 0, 3000000)                          Err#22 EINVAL
-> 2013:   write(2, 0xBF6F2380, 47)                        = 47
-> 2013:      S e c u r i t y   c o n t e x t   a c t i v e   t o k e
-> n   s t
-> 2013:      a c k   u n d e r f l o w !\n
-> .....
-> 
-> Since MAXUID is 60002 in this platform, it is no wonder 3000000
-> produced an EINVAL.
-> 
-> What I have not been able to track down yet is, where in the source
-> is the 3000000 comming from?
-> 
-> Any ideas?
-> 
-> Thanks for your consideration.
-> 
-> -- 
-> Tim Rice				Multitalents
-> tim@multitalents.net
-> 
-> 
-> 
-
--- 
-Andrew Bartlett (he/him)        https://samba.org/~abartlet/
-Samba Team Member (since 2001)  https://samba.org
-Samba Developer, Catalyst IT    https://catalyst.net.nz/services/samba
-
+Please explain this to any users of your port,
+so they only expose files over SMB2+ (which renders
+them safe vs. SMB symlink attacks, but not local
+ones).
 
