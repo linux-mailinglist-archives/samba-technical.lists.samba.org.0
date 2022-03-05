@@ -2,45 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 679984CE237
-	for <lists+samba-technical@lfdr.de>; Sat,  5 Mar 2022 03:23:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7BB54CE7A6
+	for <lists+samba-technical@lfdr.de>; Sun,  6 Mar 2022 00:26:41 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=y1k7u6Lj2dK3jAhddacFma0qo1m0EXCqcj6Wyf5Ql2M=; b=X1MtvcXRju5PPBhd1FdLx0Ahm3
-	Y1t3cR8fVTfrQUX3VhM8xJoTR3HVkKwhMWwZKippCYnxiRC4ovm3VhFYUvOIocYuqX0lRxee+dtQb
-	vv2TJd7JRd0qC6IE/1z86MmEUQfr8v04J7imKmq1KjdM000ayel1LvJ7uJddilMPE881AeSfE5/1r
-	jM5z69d1bWeyk6PsJt6/PqfrGDgdLdI6cnW5/hlc/2kGN9TfiBvk2o2nnvPfNWbyplUfMkbmwejp5
-	TFtMkAJ1PWcv4UbY+14kjLwtuxjhEieBMiq0SGooy+vArqI4CYkNqqfXHzbX5oiC2JbAFQgnSmr26
-	GJ4ZFyow==;
-Received: from ip6-localhost ([::1]:65444 helo=hr1.samba.org) 
+	bh=wzzC/cR+mJ6QnmHJL5fFhu4LhN1tjZezVLhuzBOSXdo=; b=gjSIScHqV0BVflRoL0WVtZkXiC
+	W0JhnBLTgmzLatKH4uW4MqIuild/5c+31UvaaSxpVooDnHRQ2xlHYXozXtefGnZtPaduGzKNP4Gn0
+	wSve+ez9E8uA9FvceYtVCK9Comj1WcM+OOtxIzBuYp3S+hFD71fjrfFt3kNnOVpOXeQi2ssPvX9xJ
+	SJpSy26fEWPjoN16AuayhXJ8kHmhY6q1QslPCiaHObYRTkJZLIZm9qgwIaqJ7z92+VkYDIRE5WqEq
+	itMQX0AAQviHDAGT34Jy8rqerE8jLpManPaVYhsI/V+9Hlx8p+QqBhLiV2lFjzJ8JdHxWDJvrX+7W
+	gZKg3snA==;
+Received: from ip6-localhost ([::1]:25448 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nQK3j-00G5FH-10; Sat, 05 Mar 2022 02:22:15 +0000
-Received: from ext140.multitalents.net ([173.164.249.140]:56952
- helo=server01.int.multitalents.net) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1nQK3d-00G5F7-4a
- for samba-technical@lists.samba.org; Sat, 05 Mar 2022 02:22:12 +0000
-Received: from server01.int.multitalents.net (localhost [127.0.0.1])
- by server01.int.multitalents.net (8.15.2/8.13.8) with ESMTP id 2252M308023091
- for <samba-technical@lists.samba.org>; Fri, 4 Mar 2022 18:22:03 -0800 (PST)
-Received: from localhost (tim@localhost)
- by server01.int.multitalents.net (8.15.2/8.13.8/Submit) with ESMTP id
- 2252M2lY023088
- for <samba-technical@lists.samba.org>; Fri, 4 Mar 2022 18:22:03 -0800 (PST)
-X-Authentication-Warning: server01.int.multitalents.net: tim owned process
- doing -bs
-Date: Fri, 4 Mar 2022 18:22:02 -0800 (PST)
-X-X-Sender: tim@server01.int.multitalents.net
-To: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+	id 1nQdmN-00GCeT-7p; Sat, 05 Mar 2022 23:25:39 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49440) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1nQdmI-00GCeJ-FV
+ for samba-technical@lists.samba.org; Sat, 05 Mar 2022 23:25:36 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=wzzC/cR+mJ6QnmHJL5fFhu4LhN1tjZezVLhuzBOSXdo=; b=XFnaIKQ3y7BodO45u5tlphW/7w
+ VeRdgZvvhXy8KA1DhnElSK+LofVroiJW/C3jprB5xB/eXgBOyd9XpxjTJMD3MjO/w0ifhSYm/WdeP
+ 1QprA05mqdYJuL9Q51OtuKmp8TNV/Pb5LDouuK0Ig0AOzk3u+dmZKQrgyufBElm642oV7EjXIIm5r
+ tL0u6JS1T7RK2GgN7+oq0/dlMYUKJYMl+7nHFo/PaXrO04g43FK28RWbAgg7ZDBFp51vERV0xbJs/
+ ItTPoUNK7TcMaY1mSOZK+E3/SPpDtAegmQyeeX+zHt6OTUb/5kXtVwq5QMbgaFdUj+lFAJZBCwKVS
+ MwRSxZBiHxCaes6La8veiW4rntyJJRawQqqGO3kjclFt+VtQ1HoE9kt4ySQCpn9v79s1wn+MkReVK
+ AcfWdAb/tpRv5eSGVr5iyAEt18lxWMyOQ1TnkMguhGNMZzMbOejrfu1Ztouv+elhY9tvfFckaCqb2
+ 2Kbt3oHsloY8M4O49740rlCe;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1nQdmF-006th8-LD; Sat, 05 Mar 2022 23:25:32 +0000
+Date: Sat, 5 Mar 2022 15:25:27 -0800
+To: samba-technical <samba-technical@lists.samba.org>
 Subject: Re: issues with 4.10.16 UnixWare port
-In-Reply-To: <3d52d8c4423ac247d09600c34ea499670b2c6a4a.camel@samba.org>
-Message-ID: <alpine.UW2.2.11.2203041738580.17423@server01.int.multitalents.net>
+Message-ID: <YiPxZ932JA9XwN0v@jeremy-acer>
 References: <alpine.UW2.2.11.2203040933550.4550@server01.int.multitalents.net>
  <3d52d8c4423ac247d09600c34ea499670b2c6a4a.camel@samba.org>
-User-Agent: Alpine 2.11 (UW2 23 2013-08-11)
+ <alpine.UW2.2.11.2203041738580.17423@server01.int.multitalents.net>
 MIME-Version: 1.0
-Content-Type: TEXT/PLAIN; charset=US-ASCII
-Content-ID: <alpine.UW2.2.11.2203041805221.17423@server01.int.multitalents.net>
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <alpine.UW2.2.11.2203041738580.17423@server01.int.multitalents.net>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,60 +57,20 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tim Rice via samba-technical <samba-technical@lists.samba.org>
-Reply-To: samba-technical <samba-technical@lists.samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
 Cc: Tim Rice <tim@multitalents.net>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+On Fri, Mar 04, 2022 at 06:22:02PM -0800, Tim Rice via samba-technical wrote:
+>
+>Right, UW does not have xattrs. As near as I can tell, neither does
+>Solaris or FreeBSD. Is AD DC a Linux only thing?
 
-Hi Andrew,
+Both Solaris and FreeBSD have xattrs. The interfaces
+for them are different to Linux but are mapped to look
+the same.
 
-On Sat, 5 Mar 2022, Andrew Bartlett via samba-technical wrote:
-
-> This comes from the default idmap.ldb database values.  You could
-> adjust the template.
-
-If only I could find the template. I must be blind.
-Before asking here I thought it might be source4/setup/idmap_init.ldif
-but dropping some zeros and rebuilding did not change anything. The truss
-output still showed
-fchown(15, 0, 3000000)                          Err#22 EINVAL
-
-> However as you have noticed the AD DC is totally untested on UnixWare
-> and you will hit more problems soon.
-
-I expected problems and wanted to see how far I could get.
-
-> You need xattrs and posix ACLs in particular.
-
-UnixWare like Solaris has ACLs, the #defines for the ACL operations
-have different names. Although having been implemented long ago
-they my not be up to current standards. I'll have to track down the
-specs and research that.
-
-Right, UW does not have xattrs. As near as I can tell, neither does
-Solaris or FreeBSD. Is AD DC a Linux only thing?
-
-Fortunately for this port I only need stand-alone capability
-or to join an AD domain.
-
-Jeremy, thanks for your feedback also. The UW engineers know
-XXXXat() syscalls are needed. Just not here today.
-
-> 
-> Andrew Bartlett
-> 
-> On Fri, 2022-03-04 at 10:04 -0800, Tim Rice via samba-technical wrote:
-[snip]
-> > .....
-> > 2013: open("/var/opt/samba/locks/sysvol", 02000000, 0644) = 14
-> > [snip]
-> > 2013: fchown(14, 0, 3000000)        Err#22 EINVAL
-[snip]
-
--- 
-Tim Rice				Multitalents	(707) 456-1146
-tim@multitalents.net
-
+Look inside lib/replace/xattr.c
 
