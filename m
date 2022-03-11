@@ -2,59 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F2C54D5997
-	for <lists+samba-technical@lfdr.de>; Fri, 11 Mar 2022 05:32:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27C9D4D65F7
+	for <lists+samba-technical@lfdr.de>; Fri, 11 Mar 2022 17:21:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=vqpljt6ZpyAjIUia5P3lm3uadIOWvOoOHCdqVEXnM3M=; b=BvxYsPdQnSpfB61Jekw6Ls0F03
-	/J0X4VBzjMNOwvLaeyT3AzaUJLHZyL9OB1Py/twTJaCuCLJzRChld8S7VbjJ51P/JbsHIgrPhcNRZ
-	n2JYoUro1LpM6xLQlXot6WJGNJHQvRNhHwi+trvwCXxFkk5M0ctE0l6+0BniSOmI7B8QsjEqXf2I4
-	7bBYTtyXi/2A+LOimCHm5tiSjYHfxytwjHssfj7uEA8BJfpCZgh/tb3rPEDAeqCkEpB4Ls1gBXoW/
-	3RXvKJaTQsWS1HSl4ly103yTl0MaJ9jnY4aGSF/6z6OKFdRBgthA/buFTdKdN1d3MQokbL54BPDIZ
-	IB0T8uQA==;
-Received: from ip6-localhost ([::1]:63876 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=km1QIlV6rHidiw2QJ2kCxiYKTbyNV9oMepFXyi8KzdA=; b=FVy34PiZhY/ZM0q19AQjmgJNYW
+	Q0akcdU1GB3dJJ0uWsplXciPH2CaoGgEsbirlbACD5oKNSDZGp6VapKVakyqhxOHdEcRo3WzHWI02
+	o/gsifmnHgtVccCH/QKjSOLpUp0UCg9O5FRmIB4RFq7zKqP1NSRWG5KgGHHmXD4U/I1J3/N8pkIRA
+	xLncN1P/f+RNPbr09ZsLIxsQtloqI/VPmC4FxRNRABz7ks6oosNM2QsD/Vv5+gWOjoqbhoBCLYrhG
+	xv8c4NZDeAynO+/WKLPh06fBMrZNkFILRrc+sapOxL7/Y/yTOdWJXu2kEjETmn7fHhcUKnWWFolvB
+	cTd6E7eA==;
+Received: from ip6-localhost ([::1]:43138 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nSWve-001Zzx-LF; Fri, 11 Mar 2022 04:31:02 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz ([202.78.240.226]:46686) 
+	id 1nSi0J-001mUd-Ko; Fri, 11 Mar 2022 16:20:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37492) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nSWvY-001Zzo-OP
- for samba-technical@lists.samba.org; Fri, 11 Mar 2022 04:30:59 +0000
-Received: from [192.168.1.80] (115-189-131-117.mobile.spark.co.nz
- [115.189.131.117])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (Client did not present a certificate)
- (Authenticated sender: josephsutton@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 95512817C0
- for <samba-technical@lists.samba.org>; Fri, 11 Mar 2022 17:06:09 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1646971570;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=vqpljt6ZpyAjIUia5P3lm3uadIOWvOoOHCdqVEXnM3M=;
- b=Kux7Ph9nIOilDbu7xiemV8E/40SXfSwAxDfXA47LJ4ND/Dt2pGytdDf5qCEA3oPBNKIExq
- 2us1JE2wy9xi+yZQT6zojtSWLnDqYIS/y6Z4fResyAkTBVbEfN4pumflTM3e2zeW8HHAhg
- uMASiY7hkeY7bnA7vsbMZUkBOUtFp7/rWqXIlfhfA8Vc7npsk2XlhSflXwFWQzs2tjRU/O
- TGvcA2neXFY4l1vidKokj4p3+PGtypleaBQmOzr2vnr4zy7hz2kjUVq4QF9HrOUHKJ3DW6
- 7VFb3MwYZi8rLd1yKHmXMBeWfiCg4J8fRNfAn1oyCOOOMKmHv5nGZwr7OFTCqQ==
-Message-ID: <abca441b-aae3-5a1b-7415-d596bc4877ea@catalyst.net.nz>
-Date: Fri, 11 Mar 2022 17:06:00 +1300
+ (Exim) id 1nSi0D-001mUU-Cn
+ for samba-technical@lists.samba.org; Fri, 11 Mar 2022 16:20:32 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=km1QIlV6rHidiw2QJ2kCxiYKTbyNV9oMepFXyi8KzdA=; b=xROsVKQ7x1VF0fkrqIEaFoGnuD
+ aNktuRl7VD1cfymsy4tXlm4xpPf0IiOx5i0NhkFLHWk7V5PDVIWUiiYoAJm58Lr9/EcHF1/kbJLyS
+ w3am38UhmfJSRvBsZEY67ticmJ3L14KgX0lUkBlmLq+FwZV8QtPZfRd8n2yCd3w/Wagoz+h9Kk/ZX
+ LL+A4BmlocnVjxMe7kpxk+Oua+Z/Xrsbi4Yg/4DEFQ0ltSb4eYGVfQTHefNC1RzLTAkRvqEvX+Wlj
+ ++WkIWK5J0g5IU0SKYFr/ZfaB3xqsCvfpH+SByHyQo/6QE4zPGnsEAzVmZzq29WYadkIjvzbFGMm+
+ E/xWHzMV1iSxa7OabWy1Toyy5wu85cv6QjNnFq2uHSZhHvEF4VyceGpRuuK35rAvCNyPvtU7nv4m6
+ tPIJN+LXda2fP1kfbzCm1aEFYycyDUBfhUEfBu0PlL8yuA1RXfSuZ2yBZcZubply/haT9pgcYFyp0
+ re/4zOlLB2/6ScqkPvODOgPb;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1nSi0A-000vdM-JG; Fri, 11 Mar 2022 16:20:26 +0000
+Date: Fri, 11 Mar 2022 17:20:20 +0100
+To: Joseph Sutton <josephsutton@catalyst.net.nz>
+Subject: Re: samba-ad-dc-1 CI job is slow
+Message-ID: <20220311162020.GA1054246@SERNOX19>
+References: <abca441b-aae3-5a1b-7415-d596bc4877ea@catalyst.net.nz>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Content-Language: en-US
-To: samba-technical@lists.samba.org
-Subject: samba-ad-dc-1 CI job is slow
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=josephsutton@catalyst.net.nz
- smtp.mailfrom=josephsutton@catalyst.net.nz
-X-Spamd-Result: default: False [-0.10 / 15.00]; MIME_GOOD(-0.10)[text/plain];
- ARC_NA(0.00)[]; MIME_TRACE(0.00)[0:+];
- DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
- ASN(0.00)[asn:4771, ipnet:115.189.128.0/20, country:NZ];
- MID_RHS_MATCH_FROM(0.00)[]
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <abca441b-aae3-5a1b-7415-d596bc4877ea@catalyst.net.nz>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,21 +56,33 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Joseph Sutton via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Joseph Sutton <josephsutton@catalyst.net.nz>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 Hi,
 
-This is a heads-up/warning that something has been affecting the
-samba-ad-dc-1 CI job since several hours ago, causing it to run more
-slowly than usual. All Samba CI pipelines are currently failing due to
-timeouts as a result.
+> This is a heads-up/warning that something has been affecting the
+> samba-ad-dc-1 CI job since several hours ago, causing it to run more
+> slowly than usual. All Samba CI pipelines are currently failing due to
+> timeouts as a result.
+>=20
+> Just something to be aware of if you're going to be running any pipelines.
 
-Just something to be aware of if you're going to be running any pipelines.
+I've just recreated our rackspace gitlab-runners and changed
+to from '8 GB Standard Instance' to '8 GB General Purpose v1'
+VMs.
 
-Regards,
-Joseph
+These use Intel CPUs and hopefully all support aes instructions.
 
+With the legacy '8 GB Standard Instance' we're randomly getting
+VMs on AMD processors without aes instructions.
+I'm not 100% sure that was the cause for the problems.
+
+At least the first job in using the new runner seems to be fast again,
+see https://gitlab.com/samba-team/devel/samba/-/jobs/2193522060
+
+metze
 
