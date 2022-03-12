@@ -2,47 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27C9D4D65F7
-	for <lists+samba-technical@lfdr.de>; Fri, 11 Mar 2022 17:21:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 082694D714E
+	for <lists+samba-technical@lfdr.de>; Sat, 12 Mar 2022 23:48:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=km1QIlV6rHidiw2QJ2kCxiYKTbyNV9oMepFXyi8KzdA=; b=FVy34PiZhY/ZM0q19AQjmgJNYW
-	Q0akcdU1GB3dJJ0uWsplXciPH2CaoGgEsbirlbACD5oKNSDZGp6VapKVakyqhxOHdEcRo3WzHWI02
-	o/gsifmnHgtVccCH/QKjSOLpUp0UCg9O5FRmIB4RFq7zKqP1NSRWG5KgGHHmXD4U/I1J3/N8pkIRA
-	xLncN1P/f+RNPbr09ZsLIxsQtloqI/VPmC4FxRNRABz7ks6oosNM2QsD/Vv5+gWOjoqbhoBCLYrhG
-	xv8c4NZDeAynO+/WKLPh06fBMrZNkFILRrc+sapOxL7/Y/yTOdWJXu2kEjETmn7fHhcUKnWWFolvB
-	cTd6E7eA==;
-Received: from ip6-localhost ([::1]:43138 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=ov6Vk3sqiSIA/GBlo0gQ6f7EioPUyI2osqGOXXjpY14=; b=5IqvX6m/ntgZotsYVP4k+eEwte
+	jkvCDnDVbGF7EKNH4y1PAT51NPQjtlB11oa44nVAhf79ewl175dO07AEp7ye/VT+0EYL4Qgf42crp
+	S1uiEiw765RQrUdRWm4runBhZrj24VwxPUBT9isjp17U0NdSDhvqe7YvpXukfkCwsmvc1wYOS1I6a
+	UL1iV+mfh52KgayZrOOarYlFaEley1Xpb/2/lJtYbVSLUoQ+by82OOO5LRFqnT3nF62HxlOLn0OiE
+	e/rjW8rSqs41cFHVMYY+p/y4VJ+tS5bTlwzyWU6hjs3cAJI9CXS9V3QSSODFbyVXt9FEmXljTL1I8
+	eHZ2amfQ==;
+Received: from ip6-localhost ([::1]:35602 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nSi0J-001mUd-Ko; Fri, 11 Mar 2022 16:20:35 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37492) 
+	id 1nTAWC-0025hP-G3; Sat, 12 Mar 2022 22:47:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37530) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nSi0D-001mUU-Cn
- for samba-technical@lists.samba.org; Fri, 11 Mar 2022 16:20:32 +0000
+ (Exim) id 1nTAW7-0025hG-BL
+ for samba-technical@lists.samba.org; Sat, 12 Mar 2022 22:47:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=km1QIlV6rHidiw2QJ2kCxiYKTbyNV9oMepFXyi8KzdA=; b=xROsVKQ7x1VF0fkrqIEaFoGnuD
- aNktuRl7VD1cfymsy4tXlm4xpPf0IiOx5i0NhkFLHWk7V5PDVIWUiiYoAJm58Lr9/EcHF1/kbJLyS
- w3am38UhmfJSRvBsZEY67ticmJ3L14KgX0lUkBlmLq+FwZV8QtPZfRd8n2yCd3w/Wagoz+h9Kk/ZX
- LL+A4BmlocnVjxMe7kpxk+Oua+Z/Xrsbi4Yg/4DEFQ0ltSb4eYGVfQTHefNC1RzLTAkRvqEvX+Wlj
- ++WkIWK5J0g5IU0SKYFr/ZfaB3xqsCvfpH+SByHyQo/6QE4zPGnsEAzVmZzq29WYadkIjvzbFGMm+
- E/xWHzMV1iSxa7OabWy1Toyy5wu85cv6QjNnFq2uHSZhHvEF4VyceGpRuuK35rAvCNyPvtU7nv4m6
- tPIJN+LXda2fP1kfbzCm1aEFYycyDUBfhUEfBu0PlL8yuA1RXfSuZ2yBZcZubply/haT9pgcYFyp0
- re/4zOlLB2/6ScqkPvODOgPb;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=ov6Vk3sqiSIA/GBlo0gQ6f7EioPUyI2osqGOXXjpY14=; b=jfUjnBdMgDrl7OKUv13Espw1Io
+ l0JQgm71M47aWEPgwkxAvyZBXJmlmpim4aeKVos9WypFWr0QAwtXqrYdNgSDjemw1fFMV/W/Bvz9A
+ GgxYyRLPKewDK1zyVHJjlivkWCH6uOdoGdaLXfalG+Vgd0yniIJQzb8WpB/HcDtIZM6Uc6gLYxEtV
+ 0Xo5PX3GoakF4MNeoSP2seawaN85o+D/uDycuURbCTfbZG92qEakY/eh1QWAQRTKRzfx6zJNVQjYl
+ +koqQ5BhVeXo8gGfcMHCTljkYeL7S52Xt2EpEyfHMnwPWGaa2mg1GFu7iwQ+4k6S7BTq+dyDB8rTY
+ zfxwz0IKqeetcoGqEVAkc93abmik4nXWqyYMsKTKUIkJX58IBD45OwoO6rfKDtFUqOxlICm6uMu4z
+ xfHx6hAtsZNwRCB6kmICRBSD82v9qQ4nOPid6oWkwwCOPRubRXvuc910VU96NEoujob+N4tR4NIFE
+ tLN7fAHF0sqrz3FTnErYWIw4;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nSi0A-000vdM-JG; Fri, 11 Mar 2022 16:20:26 +0000
-Date: Fri, 11 Mar 2022 17:20:20 +0100
-To: Joseph Sutton <josephsutton@catalyst.net.nz>
-Subject: Re: samba-ad-dc-1 CI job is slow
-Message-ID: <20220311162020.GA1054246@SERNOX19>
-References: <abca441b-aae3-5a1b-7415-d596bc4877ea@catalyst.net.nz>
+ (Exim) id 1nTAW4-00164G-UO; Sat, 12 Mar 2022 22:47:17 +0000
+Message-ID: <15f3b6f1fa0c6911be44ae49c1d4723744b99a27.camel@samba.org>
+Subject: Re: tevent: reproducible-builds: build path embedded in various
+ libraries
+To: Vagrant Cascadian <vagrant@reproducible-builds.org>, 
+ samba-technical@lists.samba.org
+Date: Sun, 13 Mar 2022 11:47:13 +1300
+In-Reply-To: <87o82a3kjc.fsf@contorta>
+References: <87k0d6619e.fsf@contorta>
+ <ee068c77b1e0d6a72e12c24ca1d447015529a094.camel@samba.org>
+ <87o82a3kjc.fsf@contorta>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.42.4 (3.42.4-1.fc35) 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <abca441b-aae3-5a1b-7415-d596bc4877ea@catalyst.net.nz>
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,33 +60,54 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: 1006863@bugs.debian.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+On Sat, 2022-03-12 at 13:53 -0800, Vagrant Cascadian wrote:
+> On 2022-03-07, Andrew Bartlett wrote:
+> > I would rather this be discussed and implemented upstream.
+> > 
+> > For one, the tevent build system is shared with the rest of Samba, and
+> > if possible this should be implemented by default for all 'make
+> > install' runs, just as we do to strip out the bin/default from -rpath.
+> 
+> Originally reported as https://bugs.debian.org/1006863 where I proposed
+> passing additional arguments via CFLAGS in the debian build system.
+> 
+> Attached is a proof of concept patch that works by adding the argument
+> to CFLAGS by patching the upstream buildsystem.
+> 
+> The patch is bit ugly in how it derives the top level source directory
+> and likely error-prone... a cleaner way of going about that would be
+> much appreciated!
+> 
+> It also requires gcc 8+ or clang 10+ ... making it detect weather the
+> argument was supported and only adding it conditionally might be
+> desireable.
 
-> This is a heads-up/warning that something has been affecting the
-> samba-ad-dc-1 CI job since several hours ago, causing it to run more
-> slowly than usual. All Samba CI pipelines are currently failing due to
-> timeouts as a result.
->=20
-> Just something to be aware of if you're going to be running any pipelines.
+testflags=True should be doing that, the CI should help determine if
+that works for this option.
 
-I've just recreated our rackspace gitlab-runners and changed
-to from '8 GB Standard Instance' to '8 GB General Purpose v1'
-VMs.
+> I am not too familiar with samba project processes, let me know if
+> there's a better place to send this!
 
-These use Intel CPUs and hopefully all support aes instructions.
+https://wiki.samba.org/index.php/Contribute shows how to open a Merge
+Request for samba.  Once you get a gitlab username let me know and you
+can skip to using our shared development repo for a full CI.
 
-With the legacy '8 GB Standard Instance' we're randomly getting
-VMs on AMD processors without aes instructions.
-I'm not 100% sure that was the cause for the problems.
+conf.env.srcdir should get you the srcdir you need.
 
-At least the first job in using the new runner seems to be fast again,
-see https://gitlab.com/samba-team/devel/samba/-/jobs/2193522060
+I guess my main concern is once Samba is packaged etc, can we still get
+a full backtrace?  How does this interact with debug packages etc?
 
-metze
+Andrew Bartlett
+
+-- 
+Andrew Bartlett (he/him)        https://samba.org/~abartlet/
+Samba Team Member (since 2001)  https://samba.org
+Samba Developer, Catalyst IT    https://catalyst.net.nz/services/samba
+
 
