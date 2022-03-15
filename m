@@ -2,60 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E9BB4D933E
-	for <lists+samba-technical@lfdr.de>; Tue, 15 Mar 2022 05:16:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA74E4D9C59
+	for <lists+samba-technical@lfdr.de>; Tue, 15 Mar 2022 14:35:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=MX+6thpdmH9Fmh6G8WI/hYT23j8vgEmJnH4dIzx5fhI=; b=0OIYd77tgZqBTRKdVaTmayVnUX
-	oB29+t9YD2bSP4HSmXEJJX9uyU5TQWAl/IURUdezjfFmb/VWoleU/IYVeDRq6fCAirIny1tsdpTLv
-	TZJv1jajClgjMX5+EvSB5Ka2Ob7PLx55e3MLTcbywAoQZa97w79LTAj0CnkVgnv8JZnZJD73b/ZdX
-	B364PaA/HLHupcI8HDtxGU6qb0gI7/3Fri7VGRn8EzceLSpI1Ov7KzwWl4TMKABc0sYQhGE/rOGiK
-	5GsMtX7mjZcGRxXpKoB9br7KHWae+FeHMuEzW3JdW0XL8QU/DkMw9FKujtrWOeYZ6jz6P781P7SAs
-	+psPKW6A==;
-Received: from ip6-localhost ([::1]:33998 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=qYCDU3BpzsGXQlWdQ70UlJVBwWQum/llaLIANov0uAY=; b=K9nslr+enIIGcXu8Cjoafstwxc
+	lhMKwPxA2YGpwSPuwzlRa4kJqkP/yfTkVMEKeHYD6KsrPXSVZccWnWc/TK7x3WUqAO61guYvsCtgl
+	Ywv0OLFQLwQcBAoZrBf+RNsNDEAeLc7Rbui8SHmpBTa5udyNErv5f4kRJaYS5px7VKaxfYL/qMbPr
+	dLyg/hSgSzyorF5XlTnbRDCmdyK7ZrnRR36IlfwRrNiK0Z1QHoy8+4N53YIDnEGAf5BVKStBRj8YL
+	tiUiMBAy99SccNJS7nT4zfWiriSJ1kFFmM5LrQK02Q35q0TBdOL904GgM43aRA19oPsgEyAl5RB2f
+	jHSzSxnA==;
+Received: from ip6-localhost ([::1]:36376 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nTyav-002V1n-Tk; Tue, 15 Mar 2022 04:15:38 +0000
-Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:37587) 
+	id 1nU7KK-002X7s-UO; Tue, 15 Mar 2022 13:35:05 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37576) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nTyaq-002V1e-V9
- for samba-technical@lists.samba.org; Tue, 15 Mar 2022 04:15:35 +0000
-Received: by mail-lf1-x12b.google.com with SMTP id b28so19140338lfc.4
- for <samba-technical@lists.samba.org>; Mon, 14 Mar 2022 21:15:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=MX+6thpdmH9Fmh6G8WI/hYT23j8vgEmJnH4dIzx5fhI=;
- b=VYtL8vemdJkuH/Vis/B8Rof9Cp3UWDhYCJj/PVdFco+0KeaZ8btcr5zxL/DxWpUOOZ
- nuUiJMoTnqiAIb5l1ZywONQgyQF2U3KUwkYHZAL2y3JpWG+bsocGuEY/cHWxkwn2SBSc
- fcZ0ZL38lizuWMJjn9Vzp7a9bZt414Nn26+BD+F5xBTzfwsgW2t6tFPDuO7A+F32ATHi
- Ooytl5VhT02NLwbgaduZySpG0XfqkxTA4dCo6LuKypk5jZGHX2ENR5ReRTWpAiXwS9KJ
- OPPxH09ZwYSCbUGLeKXJxThPoNkXkDPdKzDUFpHs1Dj9d03WONUwopdi+dgAZVpbsxLc
- 8MuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=MX+6thpdmH9Fmh6G8WI/hYT23j8vgEmJnH4dIzx5fhI=;
- b=gC3AZuEi2VYtbAReznulQpUgaRGJ05ik76JGuY/xZlocrX7f66EFRFlO36Y+ZBKBKr
- sc3EzFxLm2DjgCarobsspK9nJQtvWwR1cZdBaaT6L9z1VK7iUNZ5N0Wlp7cCydyoHTk0
- kmmVHr21LAUdU30dX2Egl/2l/TEVDU9KS9oGRTnOrZgGrm+kix52mLMhdIRPVfB0f451
- NS+zksr7DDipGQRMNUzeKJg4x97WqDQPaGOYcapUkkWB5I7fh6QMKyEyWOjTBOGlv5SI
- kYbZFHiHR6OEruD9pVuG6Qg6AmFZLpmyFjXJQi22/mIMr/3tFAm3XHhG0O1EVuR8G4tu
- 5oxA==
-X-Gm-Message-State: AOAM530aKpXYPxn3Rf9MGOSYY3RHxys2qyJwGQgmY8ElFrYCT4FiKImH
- s2kDs1yZjYtpBlOcTGahj45nLvkg9GmZeeVKjPs=
-X-Google-Smtp-Source: ABdhPJz37KwMUSCRY+zf4rBXiMdU8hH8Ijn8GNbH3cY07jiXP3+drPZ9RfdPXYk9LDPnv/CO8u6fcDfxk+ak4Ncq8+0=
-X-Received: by 2002:a19:490f:0:b0:448:4bf8:6084 with SMTP id
- w15-20020a19490f000000b004484bf86084mr14810015lfa.537.1647317731326; Mon, 14
- Mar 2022 21:15:31 -0700 (PDT)
+ (Exim) id 1nU7K9-002X6t-JK; Tue, 15 Mar 2022 13:34:56 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=To:From:Date:Message-ID:CC;
+ bh=qYCDU3BpzsGXQlWdQ70UlJVBwWQum/llaLIANov0uAY=; b=uP37MYc1wbKRbY9C3mpa9ecYHn
+ jxAVNjiWUGns8XDpaPdRBwtvmTxrkhRXjt0gDEJs5f6I6dQCIXEuUqwup5L0umrHH+73HN87+IICD
+ 9JkPeHRyK9y24hLpivijosrBtftjvcch6lNL2Cumlyz+xTDIrLEMhodOrnbxhuslL17qaUsiSNmRK
+ yLFrbWChIJylO1+XxOTEVwTNRNuwN3tNO5AZ2o8RpP9dxW96xv28kFLiyktCarUUcJC/DlZGGD67u
+ WkxXwElW1cQZM28xhbUA86sRKu7zfZF1mPICpT27LhLWDH7nQAMcKHGsK5B7oJEf5jJVxRijUSej6
+ PJ1SF6Dj3gcdy/v9gmBF0E8mW8vR+fBs70UkcCkmrQLGWb7tqRVhvfs/V9iJ6+Eg+IRVWzgLbTH7p
+ zaLilX1TLnhjYForLlT0kO8ooe+81iPpvMcreQMEfG85UO3xcE7N9q2OjDFlmGFK6XamOslCOoOY4
+ v+/yfvILrp2Hgfzms1LD5Q76;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1nU7K8-001XT4-OK; Tue, 15 Mar 2022 13:34:52 +0000
+Message-ID: <17797329-3a24-0a5d-fa59-a412081b885f@samba.org>
+Date: Tue, 15 Mar 2022 14:34:52 +0100
 MIME-Version: 1.0
-References: <20220312102705.71413-1-Julia.Lawall@inria.fr>
- <20220312102705.71413-2-Julia.Lawall@inria.fr>
-In-Reply-To: <20220312102705.71413-2-Julia.Lawall@inria.fr>
-Date: Mon, 14 Mar 2022 23:15:20 -0500
-Message-ID: <CAH2r5mtD3=BiSDE4pLMpsc708dkP43hXosdyorfENawV9ura9g@mail.gmail.com>
-Subject: Re: [PATCH 1/6] cifs: use kzalloc
-To: Julia Lawall <Julia.Lawall@inria.fr>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Content-Language: de-DE
+Subject: [Announce] Samba 4.15.6 Available for Download
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,65 +56,115 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- kernel-janitors <kernel-janitors@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Which tree should this be merged from?  cifs-2.6.git for-next ... or
-do you prefer that these all go together through a different tree
+Release Announcements
+---------------------
 
-On Sun, Mar 13, 2022 at 11:36 AM Julia Lawall <Julia.Lawall@inria.fr> wrote:
->
-> Use kzalloc instead of kmalloc + memset.
->
-> The semantic patch that makes this change is:
-> (https://coccinelle.gitlabpages.inria.fr/website/)
->
-> //<smpl>
-> @@
-> expression res, size, flag;
-> @@
-> - res = kmalloc(size, flag);
-> + res = kzalloc(size, flag);
->   ...
-> - memset(res, 0, size);
-> //</smpl>
->
-> Signed-off-by: Julia Lawall <Julia.Lawall@inria.fr>
->
-> ---
->  fs/cifs/transport.c |    3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
->
-> diff --git a/fs/cifs/transport.c b/fs/cifs/transport.c
-> index eeb1a699bd6f..4ff8e165a180 100644
-> --- a/fs/cifs/transport.c
-> +++ b/fs/cifs/transport.c
-> @@ -464,13 +464,12 @@ smb_send_rqst(struct TCP_Server_Info *server, int num_rqst,
->                 return -EIO;
->         }
->
-> -       tr_hdr = kmalloc(sizeof(*tr_hdr), GFP_NOFS);
-> +       tr_hdr = kzalloc(sizeof(*tr_hdr), GFP_NOFS);
->         if (!tr_hdr)
->                 return -ENOMEM;
->
->         memset(&cur_rqst[0], 0, sizeof(cur_rqst));
->         memset(&iov, 0, sizeof(iov));
-> -       memset(tr_hdr, 0, sizeof(*tr_hdr));
->
->         iov.iov_base = tr_hdr;
->         iov.iov_len = sizeof(*tr_hdr);
->
+This is the latest stable release of the Samba 4.15 release series.
 
 
--- 
-Thanks,
+Changes since 4.15.5
+--------------------
 
-Steve
+o  Jeremy Allison <jra@samba.org>
+    * BUG 14169: Renaming file on DFS root fails with
+      NT_STATUS_OBJECT_PATH_NOT_FOUND.
+    * BUG 14737: Samba does not response STATUS_INVALID_PARAMETER when 
+opening 2
+      objects with same lease key.
+    * BUG 14938: NT error code is not set when overwriting a file during 
+rename
+      in libsmbclient.
+
+o  Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+    * BUG 14996: Fix ldap simple bind with TLS auditing.
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 14674: net ads info shows LDAP Server: 0.0.0.0 depending on 
+contacted
+      server.
+
+o  Samuel Cabrero <scabrero@suse.de>
+    * BUG 14979: Problem when winbind renews Kerberos.
+
+o  Günther Deschner <gd@samba.org>
+    * BUG 8691: pam_winbind will not allow gdm login if password about 
+to expire.
+
+o  Pavel Filipenský <pfilipen@redhat.com>
+    * BUG 14971: virusfilter_vfs_openat: Not scanned: Directory or 
+special file.
+
+o  Björn Jacke <bj@sernet.de>
+    * BUG 13631: DFS fix for AIX broken.
+    * BUG 14974: Solaris and AIX acl modules: wrong function arguments.
+    * BUG 7239: Function aixacl_sys_acl_get_file not declared / coredump.
+
+o  Volker Lendecke <vl@samba.org>
+    * BUG 14900: Regression: Samba 4.15.2 on macOS segfaults intermittently
+      during strcpy in tdbsam_getsampwnam.
+    * BUG 14989: Fix a use-after-free in SMB1 server.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 14968: smb2_signing_decrypt_pdu() may not decrypt with
+      gnutls_aead_cipher_decrypt() from gnutls before 3.5.2.
+    * BUG 14984: changing the machine password against an RODC likely 
+destroys
+      the domain join.
+    * BUG 14993: authsam_make_user_info_dc() steals memory from its struct
+      ldb_message *msg argument.
+    * BUG 14995: Use Heimdal 8.0 (pre) rather than an earlier snapshot.
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 14967: Samba autorid fails to map AD users if id rangesize 
+fits in the
+      id range only once.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.libera.chat or the
+#samba-technical:matrix.org matrix channel.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.15.6.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
+
 
