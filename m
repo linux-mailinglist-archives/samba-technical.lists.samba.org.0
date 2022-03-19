@@ -2,51 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 148314DE19B
-	for <lists+samba-technical@lfdr.de>; Fri, 18 Mar 2022 20:09:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D16254DE55C
+	for <lists+samba-technical@lfdr.de>; Sat, 19 Mar 2022 04:39:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=+cXldiyZkYDni0zFWbc65pa5LElI/al2vHdp9Ryjuus=; b=kIK/E0SSic++Q5E1e3un9ULEqT
-	spjY06TzSi27ivg3wGfyEq1uwI39wPArffi4+Qv3aFFv5bm0oL+ARusSqZ798bTcJnrP+SiHZSGu7
-	l3IZQxk9sGHvjaDsCCcuucSyAGbnpEx0PsHrqiH2kIEi+Cb6c+YGBpjvGrMAuMScBUscBct93xhRF
-	ZwrAVRfZ1sDXjjfwnTF7CcCdyndPhpWJYKfbpqllhySPxmwszYP79ulQz9HPmJCl4hK2KHmIZxd+L
-	ot6qQN0rAvFUWIoRKaQDuElZ/LYipcHTSi1cZk7O13Mm4eLe+olYGtDoEpQD4GD9a2wL64h5gzvBH
-	aiQPOm1w==;
-Received: from ip6-localhost ([::1]:60438 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=P5HVMst4XokfGKAJRjIs1cTmZO3fVYAodwoctjMKPfQ=; b=iKJ1GWlUrZpZuhwVwltR+VlXQs
+	6ULaBSwWn+NkZp1agnq+3BS0PMoN37PiJtqv2T0YQooo7jjcJvhF88xKZJmvnHDLSANfk1uQcrAuJ
+	EZ1yXcoN9ETMHWN40k332GMmi4zisXbBcbgMI+61i8HPLpdfRk0Gqu4iKvSmoJMDX3aUb903qJZ2o
+	yb4VYRdtiPKeVc1Mvui/sJnpL3iXczMvubTD9NFCqtuuP0nRIuDm4iAXfhYOgdBj1NItBdNRb5X6B
+	48IV0SKA4FRs047uacmN04eA8UCnw3uCtXIJiiql5ZC63r71IuPlTBTDUGUi+0RSZbbMsH6ww+8vU
+	LoCi9TvA==;
+Received: from ip6-localhost ([::1]:22222 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nVHye-003UoE-9f; Fri, 18 Mar 2022 19:09:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37710) 
+	id 1nVPvJ-003ZCL-1C; Sat, 19 Mar 2022 03:38:37 +0000
+Received: from smtp-out1.suse.de ([195.135.220.28]:43878) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nVHyY-003Uo5-WE
- for samba-technical@lists.samba.org; Fri, 18 Mar 2022 19:09:29 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=3TAYy+o3WY57EI5v31S3pjRSiGPCOmEwjA+mY8Qr14U=; b=ltzkjtwQc+XTRH1GW53S59YwHI
- mtNCOesB/pjBwvLIh/A4llD+HxYHgY98Oou2qS6daO0BRhyL2D2stl9EO6BJJukT6aIbuYnqfq6hR
- 8Yu2VoPIVRHgm86BrsuD0XMAapGklAy3nu1mftz7Kq5A+smVJrvO3Y7F8MI5BBlGzAR+yMKd5bmhg
- Y8k0ox+sjqFjoFUAiaz1ilm0G5yIrJ1j5aN/MzL2iF2JEx4M8Kg3wcB/qlnBRqQMM9G+WG/qI9nYs
- 5SNQtgS64G9/rFAOovP3k+nTJ3LvR2FryTv/D7ndfLJ2IAmYdSXexyr2tUNbhI5XAB4f34kskUPb/
- XA+UzreWC5OPTBU12ebv1xqvs5VnR1/d2e/ZrQU/iMY3OawzB2zgR2XJj6HM8kBts+Uh9fsBGZrTm
- dPRcI8ZuLy+KpklJPvYBt0Zv5sNoy0DQfxeD16c/psvFC4qfubBkdaaststY/KFai4LLEcMuuYfn/
- fD9cbAfx1B3Ne1qULXUuLEKp;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nVHyW-002C2S-SP; Fri, 18 Mar 2022 19:09:25 +0000
-Message-ID: <3ada695fdff1b1cb3e1f0edd14b41e9b4605dff4.camel@samba.org>
-Subject: Re: We need to rework "allow weak crypto" mode in Samba
-To: Aleksandar Kostadinov <akostadinov@gmail.com>
-Date: Sat, 19 Mar 2022 08:09:21 +1300
-In-Reply-To: <CAH9M6rL7Xc9BnymYt5vgiacwG4jOStNBmumvgOt0dDMGwSwVVg@mail.gmail.com>
-References: <e0c3b5921e018a5b74448f40a26af4015193824c.camel@samba.org>
- <CAH9M6r+uJ8VPTdHy_=094QXOqQaf63DpfN9H0k0kUaKfUk5ajA@mail.gmail.com>
- <0d1584239bc53567cb2165074b63338d6570f4d6.camel@samba.org>
- <CAH9M6rL7Xc9BnymYt5vgiacwG4jOStNBmumvgOt0dDMGwSwVVg@mail.gmail.com>
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1nVPvE-003ZCC-64
+ for samba-technical@lists.samba.org; Sat, 19 Mar 2022 03:38:34 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 8E7BB210FD;
+ Sat, 19 Mar 2022 03:20:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1647660031; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type;
+ bh=P5HVMst4XokfGKAJRjIs1cTmZO3fVYAodwoctjMKPfQ=;
+ b=bNb23TSIRlsbZCu3Vh6STEuRsnhmLndGfnHCpuP7x1hgM4Rwjdjtbd+3gDAMb59SIWCugB
+ oIYT2q273lfVDs9c2TasubyZAkysMlLlZ0dyhAmtmN/6cpiWcfHSnrS1rOWQcWbQqujPSQ
+ iadHIN/vHcu09onAVdNMcOCqWaP5td0=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1647660031;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type;
+ bh=P5HVMst4XokfGKAJRjIs1cTmZO3fVYAodwoctjMKPfQ=;
+ b=iaG9qMJdhJl4jLpvtNUAx9Yoxin0t+B+m4yPJOlLT9s+T0ttctN4J4fbwWyikqRllHZYXJ
+ DJSbEyCVwzCoBlDQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0B2D1132C1;
+ Sat, 19 Mar 2022 03:20:30 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id f1JdL/5LNWKQRgAAMHmgww
+ (envelope-from <ematsumiya@suse.de>); Sat, 19 Mar 2022 03:20:30 +0000
+Date: Sat, 19 Mar 2022 00:20:25 -0300
+To: samba-technical@lists.samba.org, linux-cifs@vger.kernel.org
+Subject: Signature check for LOGOFF response
+Message-ID: <20220319032012.46ezg2pxjlrsdlpq@cyberdelia>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,87 +68,45 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Enzo Matsumiya via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Enzo Matsumiya <ematsumiya@suse.de>
+Cc: smfrench@gmail.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Fair enough, and largely my point. Samba doesn't really have a FIPS
-mode (given it is applied inconsistently), we have a "allow weak
-crypto" switch currently controlled by the GnuTLS detection of the
-system FIPS
-mode.   
-We should have better global control of weaker crypto, to allow
-organisational policy guides to be written, that is beyond the
-GnuTLSFIPS mode.
-Andrew,
-On Fri, 2022-03-18 at 21:00 +0200, Aleksandar Kostadinov wrote:
-> It is good for samba to have some switch for enabling only secure
-> algorithms. But I don't think it has to be implemented by the FIPS
-> mode. Some newer secure ciphers can yet be unaccepted in a FIPS
-> standard. FIPS doesn't mean highest security. It just means the FIPS
-> standard.
-> 
-> On Fri, Mar 18, 2022 at 8:36 PM Andrew Bartlett <abartlet@samba.org>
-> wrote:
-> > Correct, Samba can't be FIPS compliant, but we can avoid using
-> > known
-> > 
-> > poor cryptography not for certification purposes, but for sensible
-> > 
-> > 'secure by default' or at least 'can be configured to be sensibly
-> > 
-> > secure' design principles. 
-> > 
-> > 
-> > 
-> > Just as you wouldn't offer SSLv3 even when the host is not FIPS-140
-> > 
-> > certified.
-> > 
-> > 
-> > 
-> > Samba's CI system runs on a Ubuntu 20.04 base for the majority of
-> > the
-> > 
-> > tests (as mentioned, we run a tiny number of tests in a Fedora 35
-> > 
-> > environment to test "FIPS mode"), but most importantly the final
-> > 
-> > autobuild is under the Ubuntu 20.04 platform, so we should ensure
-> > that
-> > 
-> > our tests are run there when possible.
-> > 
-> > 
-> > 
-> > I'm quite disappointed at the "FIPS mode" in GnuTLS is optional in
-> > this
-> > 
-> > way - also denying any application or administrator the opportunity
-> > to
-> > 
-> > opt out of weak ciphers on a per-app basis - but that is life.
-> > 
-> > 
-> > 
-> > Andrew Bartlett
-> > 
-> > 
-> > 
-> > On Fri, 2022-03-18 at 12:07 +0200, Aleksandar Kostadinov via samba-
-> > 
-> > technical wrote:
-> > 
-> > > How can samba be FIPS compliant on a non-FIPS compliant operating
-> > system?
-> > 
-> > > Might be easier to just run the tests in a FIPS compliant
-> > environment.
-> > 
-> > 
-> > 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-Samba Development and Support, Catalyst IT - Expert Open SourceSolutions
+Hi,
+
+The LOGOFF command response is not signed (=> signature is 0x0), but we
+check it anyway, displaying "sign fail" errors in ring buffer.
+
+As far as I checked, an explicit LOGOUT is only sent when tlink pruning
+happens (i.e. TLINK_IDLE_EXPIRE expires), but we have a case of this
+causing issues on production env.
+
+I didn't find LOGOFF being a signature check exception in MS-SMB2 rev64.
+Relevant sections:
+
+2.2.7 SMB2 LOGOFF Request
+2.2.8 SMB2 LOGOFF Response
+3.2.5.4 Receiving an SMB2 LOGOFF Response
+3.3.5.6 Receiving an SMB2 LOGOFF Request
+
+If this is implementation defined, maybe something like this could work?
+(100% untested)
+
+--- a/fs/cifs/smb2transport.c
++++ b/fs/cifs/smb2transport.c
+@@ -667,6 +667,7 @@ smb2_verify_signature(struct smb_rqst *rqst, struct TCP_Server_Info *server)
+         if ((shdr->Command == SMB2_NEGOTIATE) ||
+             (shdr->Command == SMB2_SESSION_SETUP) ||
+             (shdr->Command == SMB2_OPLOCK_BREAK) ||
++           (shdr->Command == SMB2_LOGOFF) ||
+             server->ignore_signature ||
+             (!server->session_estab))
+                 return 0;
+
+Thoughts?
+
+
+Enzo
+
