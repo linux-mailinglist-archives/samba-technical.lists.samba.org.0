@@ -2,49 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3AC34E26C9
-	for <lists+samba-technical@lfdr.de>; Mon, 21 Mar 2022 13:43:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0029F4E38B6
+	for <lists+samba-technical@lfdr.de>; Tue, 22 Mar 2022 07:08:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=qDc5Df0cUPiLdMKwYVThOqjPmTV/nNpYR38Pr2nJbiQ=; b=hIpyCFA9xWxWEaHs/4Gqm5PgLJ
-	xP+z8mTh4bRMexp5y9J9e3/v9xxM5zysXK36kxLygTl+sOC9g7X2vboAVHVPcGlragow+B1JaaFvY
-	hL0YIoeFXTbH9yy7+rH0a4gAEAex6Uzphr14Tb/H6IyXB2F1rBVMNhIHfWb2N1Xz86hP1jwAgoFhq
-	R1gTtUAH8VAzF5x5+2ZG4LqJ9tjVByuz/bCHICHgDsWs+T2sIjA6Yc2SHleRLlJO/XiNG7gBPolUp
-	Ben69AniSPrrKhPn4dUaHQ7ODQAmZlqURhJVJ5KyEZCTBR/5oH9Uz6zs0yDFrAu7nBE77QokojUSM
-	NXTBFAgA==;
-Received: from ip6-localhost ([::1]:24250 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=1hm+docfkUVqEam48lSJ/XtpRGXyQocEIR0nX5W2ZtM=; b=ka/R2532Y4HbhacaUUm97/QrgK
+	b4CKidCcnaQlTGYRIQw78ddYW3irpWIUzLTNDCGifS1jX9Hfcx2mqaB7qMq2HV8qz9h1vf8AxI6jR
+	mnH+slL8WicnEnhgsicGvtNM1fztQG0HcybFr6rNhY5hnYVr170/X9Aiv34yKb6+pP0keHzy8thVT
+	4XNfbfCU88R9wFxp44qFXxq4N4YL9CqpLgM+iOBk9I98m0xe0eSePTyN0PF3J6BL6Z0uaqc5uvKQ2
+	MPMNRqCKa7936bp5lbw41u4t5BD/wch1oKa6aAEQiAFaI+63rPYuxl4ycgJxtVBWsZTNoexwXVoZE
+	XSsx+oAg==;
+Received: from ip6-localhost ([::1]:43044 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nWHO3-003xKy-Ac; Mon, 21 Mar 2022 12:43:51 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37748) 
+	id 1nWXfy-0048gc-Oi; Tue, 22 Mar 2022 06:07:26 +0000
+Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634]:41897) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nWHNw-003xJu-St
- for samba-technical@lists.samba.org; Mon, 21 Mar 2022 12:43:47 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=To:From:Date:Message-ID:CC;
- bh=G5gklf5wd36QIxrFSymLPeQXmyWZxYHABoZuZCzPKlc=; b=2MhYKgikrBlwqMsFzjY+GMF1h9
- uQFapym6Epxgq+NTYT2rHvK5VIAMkBvJJA2TpMEmO6kpwDr3yGDqkAWD36SyVWCm906JFPF3Biqjt
- pNfdA4h5tlXswqKrnLyYdXyrGT2x3yH8uOIWjvRJ4UEPHp53jU0NH1ebdDwqBxg5Q+sfaaaqM/A2U
- i22m38WV+xwlYuhmuCJEps/5xXV6Jx4AZ1zN/nf8PVw8PNlSZO1AtqaFCE0S5O+P8g1pdR/3nYxM/
- tqv+GRuSyoQa7pvKgZwOC7VrXrD2fyztbBFjH4RRuAQsPs1vGiuEhyLMjzA3nd9MfW/kUQCYGOaOE
- UbExozbrU6H05oDahW8Q3SdfY/GSYCmwkkcw8RiaZu7BxGQQSR0sUxZnbsxR25MAYpoN8FKXAkR4q
- ls+MgSyXdg1F9R7aziANwhSKjFtwiZtgBHy6NbJ9uRXcwpVxpz3861O9hxiHCNXEDBOWCZl+4Vjfy
- dif6M9+vVrCCuqO03s2x04tO;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nWHNw-002dHn-Hm
- for samba-technical@lists.samba.org; Mon, 21 Mar 2022 12:43:44 +0000
-Message-ID: <ab263e7e-1fbd-4bd3-1755-f71bb2151d67@samba.org>
-Date: Mon, 21 Mar 2022 13:43:44 +0100
+ (Exim) id 1nWXfs-0048gT-V1
+ for samba-technical@lists.samba.org; Tue, 22 Mar 2022 06:07:23 +0000
+Received: by mail-ej1-x634.google.com with SMTP id a8so34014567ejc.8
+ for <samba-technical@lists.samba.org>; Mon, 21 Mar 2022 23:07:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=1hm+docfkUVqEam48lSJ/XtpRGXyQocEIR0nX5W2ZtM=;
+ b=VywcMOvEZFwLhpkST2+FlCVyLxNDV0cChbksFCwU8GKcB0RIFZRTZXsWrBSl6KqT4i
+ PUZ/EeRnH/koriftEd/z89xhuf5wo4Gi68p05x221zllgBBYSPBJOIKmIXMSojLsMiId
+ o8B7fswqMyzlAUiGzX0vV4RmxVFy9NlZ3gkU0q6A1mwwXEgh0sQ6uYaPasUq32rMX12j
+ ugAmGJ9ZCyKPg+Sb496yHdkwhcf+o+vDVaAc09v423HDsALdDWOfUiN+mag7XnedL8HI
+ 8HnZx5Jokft+D06Yj9NVXOvUYH5kKRYeJER9UFZZe4UNoxMwUeK7IGZX60BtL4bZxHlF
+ 0mMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=1hm+docfkUVqEam48lSJ/XtpRGXyQocEIR0nX5W2ZtM=;
+ b=wwPEqkbJ3o05RcW2oXYHpYp7dRgDcIgxhbwHfgisCafU9l/DIyxY/OZZO/AWST57Gv
+ 40oBiGnTdoZZfXJSsJ5jPRfffbuijv+rFdq1GiOI/8xr7Q9ylA7wLSZ5X1U6S0M7yeoF
+ 2MXSO7PXN0XNGc2kOp6hCXA+G8ORiyaf56MngHNXT7zRuEPDo+hSfCkyRuKHGggr5ABs
+ P0onN/T1GA1zZfD3Lut0hY9mRAzYe35lxu38/83r7n6BXH684ftBZnvAR0nWgSwFTU67
+ LUsRyjJ74ghSB/eDnv+S+j3NpPqL5ICNxDZxl+PTkTO2z6vUcUe3ZQMd9thhX0nWiWQC
+ mJvw==
+X-Gm-Message-State: AOAM533tFoXC+Vsx75BWvbdaiYs+7tJPT2JRErbp981lb4xomKfgElD0
+ uoZas7hJKQoz4tgK1ikDHR8QYstDmdhOzwMEd24=
+X-Google-Smtp-Source: ABdhPJyK/wsqhsSQyJvOrciSXA3uBP98YcKlsmdsB31Cxv9jYH4FgXeH3iTdG9GXePOmDPRombY3tIpaa9KFnEDxPSs=
+X-Received: by 2002:a17:907:2ce3:b0:6df:d80f:ca1 with SMTP id
+ hz3-20020a1709072ce300b006dfd80f0ca1mr13595196ejc.61.1647929239809; Mon, 21
+ Mar 2022 23:07:19 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Content-Language: de-DE
-Subject: [Release Planning 4.16] Samba 4.16.1
-To: samba-technical@lists.samba.org
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+References: <20220320135015.19794-1-xiam0nd.tong@gmail.com>
+In-Reply-To: <20220320135015.19794-1-xiam0nd.tong@gmail.com>
+Date: Tue, 22 Mar 2022 11:37:08 +0530
+Message-ID: <CANT5p=qEmVtgC5gD5G3D1o+7mxLMpQawnh0DSY+dLD-Dyrw5Uw@mail.gmail.com>
+Subject: Re: [PATCH] cifs: fix incorrect use of list iterator after the loop
+To: Xiaomeng Tong <xiam0nd.tong@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,29 +68,69 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>, sprasad@microsoft.com,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>, Steven French <sfrench@samba.org>,
+ jakobkoschel@gmail.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+On Mon, Mar 21, 2022 at 3:50 PM Xiaomeng Tong <xiam0nd.tong@gmail.com> wrote:
+>
+> The bug is here:
+> if (!tcon) {
+>         resched = true;
+>         list_del_init(&ses->rlist);
+>         cifs_put_smb_ses(ses);
+>
+> Because the list_for_each_entry() never exits early (without any
+> break/goto/return inside the loop), the iterator 'ses' after the
+> loop will always be an pointer to a invalid struct containing the
+> HEAD (&pserver->smb_ses_list). As a result, the uses of 'ses' above
+> will lead to a invalid memory access.
+>
+> The original intention should have been to walk each entry 'ses' in
+> '&tmp_ses_list', delete '&ses->rlist' and put 'ses'. So fix it with
+> a list_for_each_entry_safe().
+>
+> Fixes: 3663c9045f51a ("cifs: check reconnects for channels of active tcons too")
+> Signed-off-by: Xiaomeng Tong <xiam0nd.tong@gmail.com>
+> ---
+>  fs/cifs/smb2pdu.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+>
+> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
+> index 7e7909b1ae11..f82d6fcb5c64 100644
+> --- a/fs/cifs/smb2pdu.c
+> +++ b/fs/cifs/smb2pdu.c
+> @@ -3858,8 +3858,10 @@ void smb2_reconnect_server(struct work_struct *work)
+>         tcon = kzalloc(sizeof(struct cifs_tcon), GFP_KERNEL);
+>         if (!tcon) {
+>                 resched = true;
+> -               list_del_init(&ses->rlist);
+> -               cifs_put_smb_ses(ses);
+> +               list_for_each_entry_safe(ses, ses2, &tmp_ses_list, rlist) {
+> +                       list_del_init(&ses->rlist);
+> +                       cifs_put_smb_ses(ses);
+> +               }
+>                 goto done;
+>         }
+>
+>
+> base-commit: 14702b3b2438e2f2d07ae93b5d695c166e5c83d1
+> --
+> 2.17.1
+>
 
-with today's release of Samba 4.16.0,
-- Samba 4.15 has been turned into the *maintenance mode* and
-- Samba 4.14 into the *security fixes only mode* (there will be a last 
-bugfix release in two weeks).
-- Samba 4.13 is end of life now.
+Hi Xiaomeng,
+Good catch.
+Reviewed-by: Shyam Prasad N <sprasad@microsoft.com>
 
-Samba 4.16.1 is scheduled for Monday, May 02 2022.
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.16 
-<https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.14>
-has been updated accordingly.
-
-
-Best,
-Jule
+Steve, This one needs to be marked for CC stable 5.17+
 
 -- 
-Jule Anger
-Release Manager Samba Teamhttps://samba.org  
-SerNet Samba Teamhttps://sernet.de
+Regards,
+Shyam
+
