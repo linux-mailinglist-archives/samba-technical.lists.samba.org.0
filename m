@@ -2,60 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09D2E4E417C
-	for <lists+samba-technical@lfdr.de>; Tue, 22 Mar 2022 15:37:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F2C54E4AFC
+	for <lists+samba-technical@lfdr.de>; Wed, 23 Mar 2022 03:39:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=4QFC7wD2f8NyrU+V9IfhPZZ4570NNl/bW6dl2S6xb70=; b=YiZbofdwfHva5Fx7tm+BGcmP7k
-	TJgInNr878P1JYdU80EWIcjw6Vq9ue/YD8qUDNMSkwgfh8WJc9vrvgu46/DHYUemenpklKzo/Ner4
-	NT/sHg00us9KvBcLL0x3ZUdTPtQx/p2NSOuc4ACYg+Lg4AEnk1vYzDvcrQxXVsqVQD1RSKCK/GnUj
-	r7NTyGLy8DZDjiLf2ulkyjJcdDLL+2oRIRUD8IU+4WhFPQjc3W20788UfoKrFPBWS0ZSxlJN6+i/I
-	uIwfBvZI8jChJSjjgW48Bkkg7ol1QXWQLkjV3Mv5vz1i5loRyPj1u05rbEjIAMEfC1YJBWMibUNsQ
-	TRlzRsaQ==;
-Received: from ip6-localhost ([::1]:49458 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=4HKIjFQYMfFcRYUIundfC8sdbggBvrs3FJen1eraIeg=; b=xUHbNOb6Lgeb6csoWCzXSahK9A
+	m/ge3CPxjJ4vchvk8tmh9FITcQFk3MFFAjzNs/G+wT7/5/DfPIr8DlT9zoIfGhYLNx1ka1b3Y+BDZ
+	7OignJZhBpDrkW7oxUCvlKOtEuaTLxK7tOKLmhCUhKb3JQmPtgy8ShxrKJvW8E6sgiV46ZaIhNJdR
+	fCzGWSzMCOOBa4ehhtKdYn+wc0LG5CO0mbEFgtxBJ97yVePxo/gTVpNp/e5kMpSt+LWcCp4UZZenI
+	pGGI3CJOJnhiqccJSWwS7eNsUZzgmGQAd69e7k410bRfN6bXe3gBbjZvdyg+8Hoicg9bN5VN49Q+5
+	xsHxZKbQ==;
+Received: from ip6-localhost ([::1]:58938 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nWfcC-004Cml-0O; Tue, 22 Mar 2022 14:36:04 +0000
-Received: from mail-lj1-x231.google.com ([2a00:1450:4864:20::231]:42982) 
+	id 1nWqt6-004IP8-TS; Wed, 23 Mar 2022 02:38:16 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37784) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nWfc3-004Cmb-Uu
- for samba-technical@lists.samba.org; Tue, 22 Mar 2022 14:36:01 +0000
-Received: by mail-lj1-x231.google.com with SMTP id c15so24192131ljr.9
- for <samba-technical@lists.samba.org>; Tue, 22 Mar 2022 07:35:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=4QFC7wD2f8NyrU+V9IfhPZZ4570NNl/bW6dl2S6xb70=;
- b=aqQvPSoYUzAWoKP+RCT+gNjGBZouHYy4cFxwXmHNsxpveBX1AbqI4qAQseLuM16i9l
- u3fUgLs14FkrsUZV5PAu92WLy2W7ULyVESU8Od7eevwqlJG1O2iwho79otrCaVJMgs15
- nJRcjDXvz3nfTywN3ul13P3FUZdpkjxWVIKqvrgYh/Gw424bntpDaAu09W1ZBFAlJ0As
- NKf6pgToW0daQpmrOXBKlEpi39dIUSR87VgSc4qCzD0aXO3s+ULvPnen/HFzPMjN1d4r
- C3rOafuAoNgVHMfomlFwB6O+4tTQXJ7gL7sloP6o8jLc/Y5wQenhFy3YwXrKJrpCDhv3
- WDsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=4QFC7wD2f8NyrU+V9IfhPZZ4570NNl/bW6dl2S6xb70=;
- b=nIbeNK9oHdCb8IQ6uIkQYZM3ucxlcZIQf23g45S9kLEr7avHUjsSeMfi/6tQ/MX3c6
- lA3Uu4BqQgO1g9R6EqqspkpA0tK5psl2eKukg9ZnLhtVyWjx2E+QCdORgGnTES8P51MT
- Mv7BcbXP2W+uIwIIRC1Va4yihxQfmENcAKFuGiPgd2GMPA0Meb7ftf6aN+uKIdNXjaEs
- J9Dx6I/VVVZqt4H9tM4n1G9GNjex378+z/GQFmBDWRPabiyBdGb0m4P0tV3nlcndShDQ
- iM/QJCh6JhO1EtQXsANn/IXcfgshWqmEXPz3g8f/uTopRoQ9Ud0bHtg5FAfNMApR/saZ
- /Nyg==
-X-Gm-Message-State: AOAM532R62bXoFv5pMY5Cc40D0FpvSx7NQViPw+o1jB4XuY7XiLzeu3C
- LyTrQaje3BwcAnqhUN1ZNmBiMYkqWfnYyIy7AwU=
-X-Google-Smtp-Source: ABdhPJxJQKTW5hv1D0gmq2yXlJ4T7YlsKgTYCESts6Cvaqq0CfEzlbpWzWt3qw7q55yP02e5yHf9+9pFbabmZ666h8M=
-X-Received: by 2002:a05:651c:1597:b0:247:f79c:5794 with SMTP id
- h23-20020a05651c159700b00247f79c5794mr18473828ljq.398.1647959754588; Tue, 22
- Mar 2022 07:35:54 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220320135015.19794-1-xiam0nd.tong@gmail.com>
- <CANT5p=qEmVtgC5gD5G3D1o+7mxLMpQawnh0DSY+dLD-Dyrw5Uw@mail.gmail.com>
-In-Reply-To: <CANT5p=qEmVtgC5gD5G3D1o+7mxLMpQawnh0DSY+dLD-Dyrw5Uw@mail.gmail.com>
-Date: Tue, 22 Mar 2022 09:35:43 -0500
-Message-ID: <CAH2r5mv0mEYDofMrOrkpqE1PLYt9rYa9fAi-cjihR3x2MF0v3w@mail.gmail.com>
-Subject: Re: [PATCH] cifs: fix incorrect use of list iterator after the loop
-To: Shyam Prasad N <nspmangalore@gmail.com>
+ (Exim) id 1nWqt2-004IOy-0P
+ for samba-technical@lists.samba.org; Wed, 23 Mar 2022 02:38:14 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=4HKIjFQYMfFcRYUIundfC8sdbggBvrs3FJen1eraIeg=; b=Aoi8c+fGK76eyYVK80rx2kOuJt
+ j5RpbCSu//u+hd6N1oMss3tZzmqRu0hbYPOqu1F8mRVgn4poGYnXIwBK8VqiQg5VDRHu3b2cSsM8H
+ nHpRNFhG+XzKF0dTEEoOfvWGG1nMX6OxgSZfePuakkB9rfE3712Noa3Ow5lHRg6FzjIn+8WoQmC5o
+ 9I0sImzsyc9W+hHMb1nj51vI5x0FtdKB4SCcg1fqy15gbjNE6eol9viVYqLufu0GqvVc5ISOcrvYF
+ 5Hr9ma/lYvoJnEu07iQMWkCyKcBc+7xr6UYwSUjsNSmrCc589O56zgZABbfSDO6gGZdRbjdAKECGs
+ tPeSZV3SSQEj0Rm7SgQjPxvtBLQnIzzGjJaW7UwmtVjQpSMqgv2YSEONn0V/a5+cYmEXwzKgCpL/O
+ 4Z++mWXCqZ2OjVsr9LTrAqrXzVEfFXP78mzbtaEFLTAMW4Y3fATAlwE70sgJ+WsOmgNFbkFO+6oqJ
+ yoSB7FrpW07tAh2+ZtkaKqoP;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1nWqsz-002vkL-KJ; Wed, 23 Mar 2022 02:38:10 +0000
+Message-ID: <94244c0fe851b635a68ce718a0e37be755c50d00.camel@samba.org>
+Subject: Re: We need to rework "allow weak crypto" mode in Samba
+To: Alexander Bokovoy <ab@samba.org>
+Date: Wed, 23 Mar 2022 15:38:05 +1300
+In-Reply-To: <YjWlCoHEI9qvaUn/@pinega.vda.li>
+References: <e0c3b5921e018a5b74448f40a26af4015193824c.camel@samba.org>
+ <CAH9M6r+uJ8VPTdHy_=094QXOqQaf63DpfN9H0k0kUaKfUk5ajA@mail.gmail.com>
+ <0d1584239bc53567cb2165074b63338d6570f4d6.camel@samba.org>
+ <CAH9M6rL7Xc9BnymYt5vgiacwG4jOStNBmumvgOt0dDMGwSwVVg@mail.gmail.com>
+ <3ada695fdff1b1cb3e1f0edd14b41e9b4605dff4.camel@samba.org>
+ <YjWlCoHEI9qvaUn/@pinega.vda.li>
 Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,81 +61,51 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Shyam Prasad N <sprasad@microsoft.com>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Steven French <sfrench@samba.org>,
- Xiaomeng Tong <xiam0nd.tong@gmail.com>, jakobkoschel@gmail.com
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
+ Aleksandar Kostadinov <akostadinov@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-cc:stable too?
+On Sat, 2022-03-19 at 11:40 +0200, Alexander Bokovoy via samba-
+technical wrote:
+> 
+> 
+> Note, though, if you'd follow strictly FIPS 140-3 (or even FIPS 140-
+> 2)
+> requirements, krb5kdf function is not FIPS-compliant, so aes256-sha1
+> and
+> aes128-sha1 encryption types could not be used in FIPS mode. Active
+> Directory has no support for RFC 8009 types (aes256-sha2 and
+> aes128-sha2), so in a strict following of a FIPS 140-3 environment,
+> there is simply no way to interoperate with Microsoft Windows clients
+> in
+> Active Directory. I believe Samba AD has no support for these
+> encryption
+> types either even though underlying MIT Kerberos and Heimdal do
+> support
+> them.
+> 
 
-On Tue, Mar 22, 2022 at 1:09 AM Shyam Prasad N via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> On Mon, Mar 21, 2022 at 3:50 PM Xiaomeng Tong <xiam0nd.tong@gmail.com> wrote:
-> >
-> > The bug is here:
-> > if (!tcon) {
-> >         resched = true;
-> >         list_del_init(&ses->rlist);
-> >         cifs_put_smb_ses(ses);
-> >
-> > Because the list_for_each_entry() never exits early (without any
-> > break/goto/return inside the loop), the iterator 'ses' after the
-> > loop will always be an pointer to a invalid struct containing the
-> > HEAD (&pserver->smb_ses_list). As a result, the uses of 'ses' above
-> > will lead to a invalid memory access.
-> >
-> > The original intention should have been to walk each entry 'ses' in
-> > '&tmp_ses_list', delete '&ses->rlist' and put 'ses'. So fix it with
-> > a list_for_each_entry_safe().
-> >
-> > Fixes: 3663c9045f51a ("cifs: check reconnects for channels of active tcons too")
-> > Signed-off-by: Xiaomeng Tong <xiam0nd.tong@gmail.com>
-> > ---
-> >  fs/cifs/smb2pdu.c | 6 ++++--
-> >  1 file changed, 4 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
-> > index 7e7909b1ae11..f82d6fcb5c64 100644
-> > --- a/fs/cifs/smb2pdu.c
-> > +++ b/fs/cifs/smb2pdu.c
-> > @@ -3858,8 +3858,10 @@ void smb2_reconnect_server(struct work_struct *work)
-> >         tcon = kzalloc(sizeof(struct cifs_tcon), GFP_KERNEL);
-> >         if (!tcon) {
-> >                 resched = true;
-> > -               list_del_init(&ses->rlist);
-> > -               cifs_put_smb_ses(ses);
-> > +               list_for_each_entry_safe(ses, ses2, &tmp_ses_list, rlist) {
-> > +                       list_del_init(&ses->rlist);
-> > +                       cifs_put_smb_ses(ses);
-> > +               }
-> >                 goto done;
-> >         }
-> >
-> >
-> > base-commit: 14702b3b2438e2f2d07ae93b5d695c166e5c83d1
-> > --
-> > 2.17.1
-> >
->
-> Hi Xiaomeng,
-> Good catch.
-> Reviewed-by: Shyam Prasad N <sprasad@microsoft.com>
->
-> Steve, This one needs to be marked for CC stable 5.17+
->
-> --
-> Regards,
-> Shyam
->
+Thanks Alexander, this and the other comments that I didn't quote do
+help.  
 
+It is now clear to me that we should ensure that Samba has independent
+configuration for the 'weak' crypto operations that we may wish to
+enable/disable, totally aside from a system 'FIPS mode'.
+
+We can still override and disable operations if that is be globally
+defined of course.
+
+Andrew Bartlett
 
 -- 
-Thanks,
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
 
-Steve
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+
 
