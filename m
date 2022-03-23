@@ -2,60 +2,78 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E105D4E4BDF
-	for <lists+samba-technical@lfdr.de>; Wed, 23 Mar 2022 05:21:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B91C4E50A1
+	for <lists+samba-technical@lfdr.de>; Wed, 23 Mar 2022 11:50:06 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=pc/hvVo0/6NKpglRsU7c5DEB6PgMyaUIQfdPH5do0+I=; b=bQNGuJ6wuw/iYm3VWo0mXFgl9r
-	mx58kSIpzcdzV6W58edXEkVkR97IY/r9XPgoNzSptH1N0ideOOVkjwuAUGbbFgfDl9nOD9SXLg8Lc
-	H1cue/QnkMGaB14KSZ63OG6JzSqe0HnvFmedvwx3KVs5jPzu3qXJw08uKg/i3mTjrCcfHossAKGWD
-	0r4B5Fixg57z0ZeSiCHAxsXgyeYdwf7i++hBzVOwOEU6NsijX64l4TbPtaE5yHHgtsTXqVvVs/hbs
-	mZ/xF5UxEP2UpKogp+yDyGAmlfu9rutTZDcg9bMYvSLtM4no/ZOJY9l9ur7ohGMnwQ814EZF08VcG
-	Rm3ttXrw==;
-Received: from ip6-localhost ([::1]:59670 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=DG2gLNZztFwyiRqAOG4Wz1dQm5lB/zMGTgcFsNJ6gI8=; b=aGc9t6O4RURs6Ai0l27VosXS3g
+	QVMhUBe6MWBBI/W0VV2GA73Ff6G9giq9xrmijz2lHdEfF+LaoH58/WfUkqNx9T4TF4sp0+ImRTCiU
+	4QtAEMRsMsqxDiLnHV11VnWwxTaG92BCVTCK93XAnradxiAlr9NTUWuLdFt7mG94jj+pXq0OBHuXX
+	WHGUQnkciL8xaDVcMPrCmahHc5jNV4133NTtzVGJnfv/rSNkOsZLJiz5l0RCjClOZD/9OXO0tgASo
+	A5g2hTodEdewxz6hD0Cw1NtPWanMejNOiZgU/VoMfNvAL5hy6IBTbIMXuac9xF0ilEFbwzEVIvg4D
+	ynhXL7qg==;
+Received: from ip6-localhost ([::1]:19366 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nWsUH-004J4f-Ew; Wed, 23 Mar 2022 04:20:45 +0000
-Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a]:43532) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nWsU8-004J4U-Qr
- for samba-technical@lists.samba.org; Wed, 23 Mar 2022 04:20:42 +0000
-Received: by mail-lf1-x12a.google.com with SMTP id a26so681286lfg.10
- for <samba-technical@lists.samba.org>; Tue, 22 Mar 2022 21:20:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=pc/hvVo0/6NKpglRsU7c5DEB6PgMyaUIQfdPH5do0+I=;
- b=B8/vZ43epAmy3zm8teeKI/qHOROvXFw2pqqi7vPAPsEBeqdMz8Pt+h2wZ75zku3TYT
- WbFHYje2B7Eya5XOrU0sGzEfJjtzxRE93umNgv0tFao6nRnN/QmNlr5CwVxFsI93yrko
- Tpmsc2fYdj/G7lzLS+knpFvtAmnbzsj+rXPPPleQHeB5Pa3NzRK0le7btPS3JN/L+pZw
- IOSWaV0xPtckwXx7Uy0KFi2gzLl5BdtQGDcuUwWzJzvnS/byEQ1G1I1gaNI6gGDZQfhe
- S6slYlZOiCR/YWzOPr6PtjElWmwZTS/9TPCEJswqoTSI7biWZ6b0VX8poP9b2E5q/tY4
- xQMA==
+	id 1nWyYX-004N1f-Nf; Wed, 23 Mar 2022 10:49:33 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:39347) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1nWyYS-004N1W-KM
+ for samba-technical@lists.samba.org; Wed, 23 Mar 2022 10:49:31 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1648032564;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=x+05QSl0u+0PMpZ5Tjv39l4NKc8HvT3WYsuT9EvN7Yk=;
+ b=HvaDSdSwnULzPdI0HwmpCwKaFanxE1OJJwS1u0DU8JANudMXldZe04PQSPHmuSqfCv7EC5
+ 8elulYmpgH5gzLctodQIytqbFqMF2sxZPa9OIhcQX4N96ECJSGQC4+E6JPSix7sl8b1/47
+ jWv914CAtGDpAnZ5s+5+5WinfBS9zwg=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1648032564;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=x+05QSl0u+0PMpZ5Tjv39l4NKc8HvT3WYsuT9EvN7Yk=;
+ b=HvaDSdSwnULzPdI0HwmpCwKaFanxE1OJJwS1u0DU8JANudMXldZe04PQSPHmuSqfCv7EC5
+ 8elulYmpgH5gzLctodQIytqbFqMF2sxZPa9OIhcQX4N96ECJSGQC4+E6JPSix7sl8b1/47
+ jWv914CAtGDpAnZ5s+5+5WinfBS9zwg=
+Received: from mail-yw1-f199.google.com (mail-yw1-f199.google.com
+ [209.85.128.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-88-vxZVUHuPNTu6lW4Povhk3g-1; Wed, 23 Mar 2022 06:33:36 -0400
+X-MC-Unique: vxZVUHuPNTu6lW4Povhk3g-1
+Received: by mail-yw1-f199.google.com with SMTP id
+ 00721157ae682-2d7eaa730d9so9775237b3.13
+ for <samba-technical@lists.samba.org>; Wed, 23 Mar 2022 03:33:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=pc/hvVo0/6NKpglRsU7c5DEB6PgMyaUIQfdPH5do0+I=;
- b=q53VvXXJ6F2KnumegJN8SQ7+mN7RqKrc8dCmid1udk7X+EwQDwbuV5DOC6iMlfnwJW
- jOacY4I396LV/y4LPbeVwojd35oDlloQx2VRsJ3watyKqfODaNNQLZvCuBwJWaku/+Bi
- cx5dNIT/FdwQiOpeCLX/QuGIBhdTUfFPjvor9Yj0TNixeNLiKmcpfbhzxxKiWHKSYnT6
- 97qxn5D9x1YJn0E2kH4mSJTJcZ7L1nmzriQ9QMrLskHe6ERJs6WcwKXKBWFLdNTbxvLE
- GDEcWg1WS6hfjURXri73sFvOb5dDVLY1wXcX/X+0zWBYTSTXr2IUW1oVIn9/DQWo+8DC
- Othg==
-X-Gm-Message-State: AOAM530iN/wXlvljoDT7woLX1OROrTHtPVHugoaPyQDJTf3qfK0OfyBF
- 30Za2Tc1fSLj3dS92hNlL0Maeh6U9HMwjJybo5s=
-X-Google-Smtp-Source: ABdhPJwYUD5lEyXExITlf9Ho8r5Y0Xi7y7bkZfLHtNb1ieORDpPSd1WYv2KM4NKaeou5qsHbZLInXFMrkn3nqTaCftY=
-X-Received: by 2002:a05:6512:b19:b0:446:f1c6:81bd with SMTP id
- w25-20020a0565120b1900b00446f1c681bdmr20966035lfu.320.1648009232002; Tue, 22
- Mar 2022 21:20:32 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=x+05QSl0u+0PMpZ5Tjv39l4NKc8HvT3WYsuT9EvN7Yk=;
+ b=e57c0ieZOVDA/M3664igUFSBntpxiAe7tvlG0663NaKKYa6c8DAPeEedlg0L1Xq0EQ
+ MhqnIBe8KWbmT5ZrZ5MyD2pmarZWzqr3hmvlu8KBGy80lCalGYbLxONO7+/jBmr+lFIR
+ PZUFn5OKielkvchUE8TgO26n1PXT6cpUU1IfBQdvHMVl1/gNJ6qqJFxMtSpzP1t5SLb7
+ 57ZevZPcPT9tg/S40XuZW06aZOPXOkiH4iJJi8Qd1rl4BsV9LXO5kX4s4p/8NZQ0bNCe
+ yWY6ClPNEbgIVhxQ2tGcy2+szHO0oFv/JYTKzkUFA9l4AQDPsim4brKaHEfjtaJwCHpA
+ 5xCw==
+X-Gm-Message-State: AOAM531KIdP+lDxu5ix+63haRT/TYkXhPfrXDDePmQUQYywXztuhf6dH
+ 8yYjLAhO2Ma+vtYiu4WiJYr63ad8OZ9aCNhdwMzs2iG0EciuuPR95+5PqweX2fL+VikfaXbhSCW
+ yIQNAiEZxL4ZFUHO7bPRQjAchQnY5TvoVawYpCZdNQivp
+X-Received: by 2002:a25:c607:0:b0:633:ba19:ce7d with SMTP id
+ k7-20020a25c607000000b00633ba19ce7dmr24960374ybf.232.1648031616344; 
+ Wed, 23 Mar 2022 03:33:36 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxrsFVlxzOPXtxoEO7Mvob5wFLx7vB3m8fw7f86BHLH84bxFN9f5o/FB9rhfC+l9HpZmiMWLW2NXnwoOJzmZFU=
+X-Received: by 2002:a25:c607:0:b0:633:ba19:ce7d with SMTP id
+ k7-20020a25c607000000b00633ba19ce7dmr24960365ybf.232.1648031616134; Wed, 23
+ Mar 2022 03:33:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220320135015.19794-1-xiam0nd.tong@gmail.com>
- <CANT5p=qEmVtgC5gD5G3D1o+7mxLMpQawnh0DSY+dLD-Dyrw5Uw@mail.gmail.com>
-In-Reply-To: <CANT5p=qEmVtgC5gD5G3D1o+7mxLMpQawnh0DSY+dLD-Dyrw5Uw@mail.gmail.com>
-Date: Tue, 22 Mar 2022 23:20:21 -0500
-Message-ID: <CAH2r5mu-Ci=HL+BkeEYVkW8Qc9jCW7ma7a_yK4-70MgoJgJkhA@mail.gmail.com>
-Subject: Re: [PATCH] cifs: fix incorrect use of list iterator after the loop
-To: Shyam Prasad N <nspmangalore@gmail.com>
+Date: Wed, 23 Mar 2022 11:33:25 +0100
+Message-ID: <CAEcb10u6HsW2Z_WpvPWYaCzhdva0ijbUaJ9EVjfguiMBdr2FSQ@mail.gmail.com>
+Subject: test, please ignore
+To: samba-technical@lists.samba.org
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pfilipen@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,83 +87,9 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Shyam Prasad N <sprasad@microsoft.com>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Steven French <sfrench@samba.org>,
- Xiaomeng Tong <xiam0nd.tong@gmail.com>, jakobkoschel@gmail.com
+From: Pavel Filipensky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Filipensky <pfilipen@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-tentatively merged into cifs-2.6.git for-next pending additional testing
-
-Also added cc:stable 5.17
-
-On Tue, Mar 22, 2022 at 1:09 AM Shyam Prasad N via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> On Mon, Mar 21, 2022 at 3:50 PM Xiaomeng Tong <xiam0nd.tong@gmail.com> wrote:
-> >
-> > The bug is here:
-> > if (!tcon) {
-> >         resched = true;
-> >         list_del_init(&ses->rlist);
-> >         cifs_put_smb_ses(ses);
-> >
-> > Because the list_for_each_entry() never exits early (without any
-> > break/goto/return inside the loop), the iterator 'ses' after the
-> > loop will always be an pointer to a invalid struct containing the
-> > HEAD (&pserver->smb_ses_list). As a result, the uses of 'ses' above
-> > will lead to a invalid memory access.
-> >
-> > The original intention should have been to walk each entry 'ses' in
-> > '&tmp_ses_list', delete '&ses->rlist' and put 'ses'. So fix it with
-> > a list_for_each_entry_safe().
-> >
-> > Fixes: 3663c9045f51a ("cifs: check reconnects for channels of active tcons too")
-> > Signed-off-by: Xiaomeng Tong <xiam0nd.tong@gmail.com>
-> > ---
-> >  fs/cifs/smb2pdu.c | 6 ++++--
-> >  1 file changed, 4 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
-> > index 7e7909b1ae11..f82d6fcb5c64 100644
-> > --- a/fs/cifs/smb2pdu.c
-> > +++ b/fs/cifs/smb2pdu.c
-> > @@ -3858,8 +3858,10 @@ void smb2_reconnect_server(struct work_struct *work)
-> >         tcon = kzalloc(sizeof(struct cifs_tcon), GFP_KERNEL);
-> >         if (!tcon) {
-> >                 resched = true;
-> > -               list_del_init(&ses->rlist);
-> > -               cifs_put_smb_ses(ses);
-> > +               list_for_each_entry_safe(ses, ses2, &tmp_ses_list, rlist) {
-> > +                       list_del_init(&ses->rlist);
-> > +                       cifs_put_smb_ses(ses);
-> > +               }
-> >                 goto done;
-> >         }
-> >
-> >
-> > base-commit: 14702b3b2438e2f2d07ae93b5d695c166e5c83d1
-> > --
-> > 2.17.1
-> >
->
-> Hi Xiaomeng,
-> Good catch.
-> Reviewed-by: Shyam Prasad N <sprasad@microsoft.com>
->
-> Steve, This one needs to be marked for CC stable 5.17+
->
-> --
-> Regards,
-> Shyam
->
-
-
--- 
-Thanks,
-
-Steve
-
+Testing mail delivery from redhat.com to samba.org.
