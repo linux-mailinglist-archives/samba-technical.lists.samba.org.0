@@ -2,111 +2,111 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B31984E65BD
-	for <lists+samba-technical@lfdr.de>; Thu, 24 Mar 2022 15:57:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C133B4E65CC
+	for <lists+samba-technical@lfdr.de>; Thu, 24 Mar 2022 16:05:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=3qt7pdHkWT/29JnIueB4dMyA8lWn/yA+2KnovnW1BZU=; b=3htNEzv0TSSf8f0CLoJdfp77GH
-	e1oF+dXLKW9SVnGbGj57oKXru6Y2aY2bsng+u86Z0xarIMbX+GrwyqoNxVQ3a2lv2aBWJx/+l50l1
-	X1iGDXVVFJ3kiy4ItberfuLOw8+SnOFelRVnWM1r8GQzpLVjphkI87aSCSVOPNtgAHUaDbKyX34sR
-	S2nN1SaPr+sS6jTYdGH8QDPDfezWaP0chBYz0uy3hDZkwKmD/RKBCONVtP4f7obKhyEAART80kUL5
-	nEOBCb1gqsBIA13TOftjhEEYdQXvjPqdYgik4zLWXts24VS0LOGhjSaDJ2SnblyXsoeyptkgn7Oad
-	PIjPjp7A==;
-Received: from ip6-localhost ([::1]:36748 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=xndBW+JNoW9fr6rbnaMKxppD9I3iPdM/vbgioWbk+wI=; b=U2X25UBPI9mbxtbz5vnWxJbnal
+	rLJH5Qos1+Kk3pnZ35M3SY1ART1QdwCQAxJw8cZof6GcU8bkDZgAF92O/pVCfmyr0xic0Y4hDH7cq
+	ArXF77KqCnoK7vBjMaf0u8D6zQG6KEwUnWwCzVYoM3sbjdsnEofvvslKln9nhlec9F61a/UA7BroS
+	IyfL0lmYd7cPGnnyprb/NjC1s7BiIjYuZcwcU1LkAHffsAp94S++IVUWJoT6rOLCEF8PhxgGRaQ4G
+	8f8FolFfF1cgCCYsUtqunWqpPX7ZdEhBfrKnLtvrbriH3f1lxvx0EnF12dolLr3IcN0Yu5Es6h8UW
+	FGqi3EdA==;
+Received: from ip6-localhost ([::1]:37418 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nXOst-004rhL-46; Thu, 24 Mar 2022 14:56:19 +0000
-Received: from mail-am6eur05olkn20822.outbound.protection.outlook.com
- ([2a01:111:f400:7e1b::822]:9056
- helo=EUR05-AM6-obe.outbound.protection.outlook.com) 
+	id 1nXP1G-004s1V-4R; Thu, 24 Mar 2022 15:04:58 +0000
+Received: from mail-bn8nam12on2062a.outbound.protection.outlook.com
+ ([2a01:111:f400:fe5b::62a]:12480
+ helo=NAM12-BN8-obe.outbound.protection.outlook.com) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1nXOsl-004rhC-C7
- for samba-technical@lists.samba.org; Thu, 24 Mar 2022 14:56:15 +0000
+ (Exim) id 1nXP1B-004s1L-4T
+ for samba-technical@lists.samba.org; Thu, 24 Mar 2022 15:04:55 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AVvyOvNrTR7ChjkMqsUW8iURjNymBaZvub3oEY34QnKXX87W+BYb5xAjuOvo/RDcOtv2+TISIcFWwjx2ecPDn5+KdnoBjroCeznW8txnhJ+2eK6XuB46W9C7Eh9DkHCuSF/E264TJQhKDmBdRsp0aCQ4Rx1t6+x2LnyTRj0cZywjHqUl2ZURayEqs6R8R/jQwTbrUqyPW7cfW30VHJwNO6aQzQkaSsxomcELwp373/NqP3/j4RNR6pgrDWSyL/7vJMXbdk84g/vyuBLU01XsFpCq0rRPjUaZzlp5G23MDqUA5TKBpZHF2OneB0J4wwwIAlNUpo8SPa3wVeXgx+XpEw==
+ b=GNtPq2pGq9dFvZPe+K5dpWqEA3UqJxFUrHODsXtgkUSGBaJTTI/YKXuEif5Zn1eALuXVcX+4FRdJxJvj0SxJobJp5R633tnM9BXm3CS+MYklym4NqDLSi1aVfSw3HZsCAKgzTT13BNCpvsNqNgc/mUMjI56yFTfq0Xpq9EyxgocLnliTsU/8wyzrpMRw6OFpSBOKO04mjVyJDJBs5xejDGh294gjp4/dqrUbmjLH5veT+w/vVPhddE8lBo2lgl8f0i4OTQ3HkfFFHiz6GtDDKJwKqOjk/1mmBXlK3O2hkel8kMSSgUyysImRxZaeyLjVMNvcLu+NTqaTq1fqgiVLfQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=U22qYqGpSPeuDqq/Bds+B5mJoJ0+gFOiP9JJppK/zc0=;
- b=W7GyPFFBihRUYgqqJf43sZi7LKdyX4xz7QDD7MXZcM4RU0l/aRTXdetSEZrpzyWfWbkuX0PQiE4QcEPUYzH3a3ZTdF59ZzV+hAeqFdT9mjD8ajXUAlhjVuv9rXpZ+Kha1LPCfu3tQ910h5IPY3/T21T42558SPsMYrw485BVjy636AiMZhqSsvRbi2oNMiTfKp3u+kB/EoT/FcfguXY3/PasxbYmQzeHl8ceU3nMARbqZHNNKUN6S5A+YRhzIPVMPCpXYrsX/o1Bl8ws8AxDv8RZTAWbf/R4uGV9Ko/euW4HxfkA/riyKgYsaSbMqWsSMYnrZu3MIDSmOllci57Trw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=U22qYqGpSPeuDqq/Bds+B5mJoJ0+gFOiP9JJppK/zc0=;
- b=uRVjt/i3Jq+L5HX9s54X0/hMhLvbdpOCv3WhC8udOdP1g5YmdfYTJ60L3jMo2HS+awrC8wuFy/rPSB3EH+ITTwTgoCCBUvgkEk69RkjHIcYiswIKn8kWyqA/og/WnwywIQO+zvvt2317xXQnyEaWDawogJ3k+l+nSdvgf/J87nOKyvTcYSQgNWQ7Yc+4uMv54+QKjvvuuwxRAf5Gw65qWmU+pwXi1GRgIHEfbtIOVPCJSl2W2wEqi1dW3JR0q9qf2Wx8cL+yiZuvlxwy0lcS4IMnlrA7a+5Dd2WW0hu6ZHHSh9Y90woCO0aWZV/rp4Z2DwZafrdT7r87MUCF4Zv8DQ==
-Received: from HE1PR06MB3148.eurprd06.prod.outlook.com (2603:10a6:7:1b::19) by
- VE1PR06MB6880.eurprd06.prod.outlook.com (2603:10a6:800:1aa::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5081.19; Thu, 24 Mar
- 2022 14:56:00 +0000
-Received: from HE1PR06MB3148.eurprd06.prod.outlook.com
- ([fe80::6554:406d:1be3:50dd]) by HE1PR06MB3148.eurprd06.prod.outlook.com
- ([fe80::6554:406d:1be3:50dd%6]) with mapi id 15.20.5102.018; Thu, 24 Mar 2022
- 14:56:00 +0000
-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Subject: Re: getpwuid(13891) failed Failed to finalize nt token
-Thread-Topic: getpwuid(13891) failed Failed to finalize nt token
-Thread-Index: AQHYPv5LdU7dCTO6eUOwRvAfLDRLZazNgjMAgAAHKHmAAALyAIAAAX8kgACIKgCAAB7UAoAACcIAgABgI6s=
-Date: Thu, 24 Mar 2022 14:56:00 +0000
-Message-ID: <HE1PR06MB3148DC4E562D9D80E4C1C459EE199@HE1PR06MB3148.eurprd06.prod.outlook.com>
-References: <HE1PR06MB314825C38C5FED0EFE6E2B76EE189@HE1PR06MB3148.eurprd06.prod.outlook.com>
- <be695e607739913e530fb1c8a0ccc191ea8eefe0.camel@samba.org>
- <HE1PR06MB31488952C3D608E9374C7FC6EE189@HE1PR06MB3148.eurprd06.prod.outlook.com>
- <007c551a46cbad5f4e8179c156ce647891f519d5.camel@samba.org>
- <HE1PR06MB31486C485C9614D48D1B0FDFEE189@HE1PR06MB3148.eurprd06.prod.outlook.com>
- <798cdbdcc5bb1f59af4d9c7353a569dbb55036d8.camel@samba.org>
- <HE1PR06MB3148D20F5FB86CE01ED06A7BEE199@HE1PR06MB3148.eurprd06.prod.outlook.com>
- <34f8dd3498a8ca684f20291adbcfd2d7350b0283.camel@samba.org>
-In-Reply-To: <34f8dd3498a8ca684f20291adbcfd2d7350b0283.camel@samba.org>
-Accept-Language: en-US
+ bh=xndBW+JNoW9fr6rbnaMKxppD9I3iPdM/vbgioWbk+wI=;
+ b=i7t2/4aEX5iejPT9ig4oH/PnbrgfYLW5xZ1CqyTlFSRu9Cy1flqC5wzqm5THSWyIV0hhIir6V2vBNGi2l+Z1ZjSlww5nwiMhl/lCmjPo+bvlJDXDOfq/Ce8X49bGOAf3Z77LvVejbuxjYo7gSRxayxk/fsgVahIHvwnH8kHMht2E+gVksbgmHPjl/AdhzkF1ohZzUu21LhDTYZm10/KiK7LkjVbnf034uCsem+M2PT0WSd66eDjrwWNNXKJT1sUme3jpnCJSqLrEacj42K26SyvEf6nXjsxSdeIpT2V0djnxveI43M2r8EZqhKNrMsD01fUnZmjM8lzG15GrdlDQ1g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=talpey.com; dmarc=pass action=none header.from=talpey.com;
+ dkim=pass header.d=talpey.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=talpey.com;
+Received: from SN6PR01MB4445.prod.exchangelabs.com (2603:10b6:805:e2::33) by
+ BL0PR01MB4211.prod.exchangelabs.com (2603:10b6:208:48::32) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5081.23; Thu, 24 Mar 2022 15:04:32 +0000
+Received: from SN6PR01MB4445.prod.exchangelabs.com
+ ([fe80::3452:1c0a:743a:602d]) by SN6PR01MB4445.prod.exchangelabs.com
+ ([fe80::3452:1c0a:743a:602d%4]) with mapi id 15.20.5081.024; Thu, 24 Mar 2022
+ 15:04:31 +0000
+Message-ID: <e23752b1-b610-98f9-c338-5faea047494c@talpey.com>
+Date: Thu, 24 Mar 2022 11:04:30 -0400
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Subject: Re: Signature check for LOGOFF response
 Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-tmn: [xFxxOZnWlsT9NEuDvki4B4HFHxqkQsuR]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 1a021524-f7b6-4c3a-4493-08da0da668da
-x-ms-traffictypediagnostic: VE1PR06MB6880:EE_
-x-microsoft-antispam-message-info: 8rGb2kYKImdl8C6xGGU9ZEMt5ty9SlpI/nYWMlGJ/GZLsStApuNeJYXTajRJSqtKlizg97xiKqoAHdftHUm4v7MtJiLQhy1EBzGdGuUofNA2ElhqdGzL4kUlOqvwwcSWx83IzwkstUBYxQMuPqzYBxyf++WidkJe4b9mZFilk/I+W8MDXNZrLACP7a+wFv5M62ql1NlG69Pf5fwK10KAX4mwO4rQfK/orSsPPf0sqBH5pgQRLS0JaxqVnfk59BzZH4p6FHCHZ0eOrrRs/BaoPh1d5hoIG/dYgpeYkxXDA57B1XwsnuTynBY4o2E/18SwVk2eABb0Eh5yUXvmYJyPCFUSOEgng68F0pimNMjoiGkWtgSPmD8jsb+uoJif0Z2jablX7J5MjHo19LFBWmJt+Xnzrx4dTyGhGYZK2zu6plf3NEYaF+cfkVNJ33d8W1C6LEJkqAggRo7QIlDYCM3q8qEXLAHsnfqi7xih35+3voXY2sUJMkbQ6HxxqdLEyuyJum++FYzPfMYS8jVSaJQ8IXkkTcn34vQT0vnta3IOIVno3qswD9GN+9Y5ofvFmNIQGBSoxMKvM/BDnE5gDoKGdw==
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?V9Uci/ZpsJ1JLCa66JQnmPZKDIgSl2zjWNV1GcrYYVW+zGB9aPnSfDQGRN?=
- =?iso-8859-1?Q?Cqp8pU+7EGB+fV1WyLe4xfzXuP1lKFsIe1YdAWtIcelf/67rBhPgWfuZsw?=
- =?iso-8859-1?Q?nE0mE8R68V/C/EUK0FK3USpA8tyubICb3LxvkCEcf7eh7CK0uaZoL0148J?=
- =?iso-8859-1?Q?wsH3rwZYQlmHYJnksifBBH2Qk1j04UzDhW5BIvtJ1qgMzQQy4UcGlsCiY1?=
- =?iso-8859-1?Q?E85FJdxgUAsUqQNngw7eFCVN+NoSyP6euZE1LKAk1dQqFpZaNXSEoiPMhs?=
- =?iso-8859-1?Q?neI/DCcE7tH+l8mDc46tjsLFCX7vziMvda36Li1AHmrpZ2WQjUJWvxjPQz?=
- =?iso-8859-1?Q?xRsMfEJtQCOAz3cPkdWO8LPddpBa5/m7C6gVpqPzYmD8cRS8VFUFuK9UKB?=
- =?iso-8859-1?Q?jzHBY8frEfA6IAQ0RsN4aH+nbp9dTO+KGVQ9m9LoIRQCITFkBiMNR+3Ofk?=
- =?iso-8859-1?Q?2imotfS9bCS/lMpSDkyYJZm1+GCPxcA8V9itHPLpwJQQIleaKZvpofSda1?=
- =?iso-8859-1?Q?y+IiTRJfWJf+pvL+3KNuEdPPWUZyk9rQMKl17QRAQl7WgDhkU+VJixVKRS?=
- =?iso-8859-1?Q?hUjG3NbgzyBqMzm4HQbUzwx4vaT5OOx0irQqc8R1BazCMJZUafkoFf4ht0?=
- =?iso-8859-1?Q?kvXMd250BA8Vgsckcr4p9pC51hdDHz3hGqjOw/kDw5O3bQ58XWqQrDa2A1?=
- =?iso-8859-1?Q?UKHntJqOLgxcw4vDsS9DUnlqh/ij7L6jNkouUKXgra8P/AuxCNp/y2BE71?=
- =?iso-8859-1?Q?mqNXpMm0W8K9Fl+IFJPBTzQYPJYowiKTShXV1v3qC+39PaZpnAB2b5TPqM?=
- =?iso-8859-1?Q?YtEom+WgVGOtSglRHTr8ogOH+PPJLCx2kHS3svV06or3niPbKqju4+e7/7?=
- =?iso-8859-1?Q?fpuhk4TYmHzUcBni6Gwh27JYmJfWiJ/cVOc7osgQ+edITyqwJYSzPkxUIX?=
- =?iso-8859-1?Q?sMCZmFtmxD89DywPWZVf9KvVu0cCkhbgwlQXu2AW1fPaO4Xz85zAnISV+R?=
- =?iso-8859-1?Q?dU5CEPE0+dCyiOKE2KctSlocjQrCFxncdGR55N6uzEkFBCs/81YQJAVkEu?=
- =?iso-8859-1?Q?VOzReB0u0a8e8zP7d68FleFCKNpcXdzRp+QHplbSFrm1vhl52atlRm2M1N?=
- =?iso-8859-1?Q?2owheef6Dq4mb8i6sPKlKXFL3DAfc0SN7DI0lsd+rfn2J/+W8YGwYzshiT?=
- =?iso-8859-1?Q?vzYHGhGxCaPA9Q=3D=3D?=
+To: Enzo Matsumiya <ematsumiya@suse.de>
+References: <20220319032012.46ezg2pxjlrsdlpq@cyberdelia>
+ <a0972fb5-38d3-5990-7c8e-0b7dd61d1abb@talpey.com>
+ <20220323172913.56cr2atzfcunv5kf@cyberdelia>
+In-Reply-To: <20220323172913.56cr2atzfcunv5kf@cyberdelia>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 MIME-Version: 1.0
-X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-6e454.templateTenant
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 3f4ae936-09f4-4053-d11e-08da0da799ad
+X-MS-TrafficTypeDiagnostic: BL0PR01MB4211:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Message-Info: TVWqCb8RUjstisPuqkCXNcFULUxSr7FqdL9/nll5DvjE3zDA3MZ7+qejl4xrPJsLj8Hnq2bW0WBLrgnIpEr6RW6vG3LyilbVsg+eT0mQ9ugLbRBZOtKZcH2GweLWvcSio1kzBYNM3Rl/kQjEgtFlKAYELjLp/tq3ajejjMOhYD/nfQNGwTIwsC5riZKzLLO1ELkrgpHWtYkj7inufDBD6mta8uxQgRirRwy2bY5336Y6ssTE0x1ETCjHK2NjJYzRCIx3UtaDuW2bEIGY1wlrl/JTFgb5NbQueIz8TZcu+Olrpkm+njlAICNqr5kAsslbFdBJcmB14blYdQFFi3Jid5VJsmzHQqoIRDGyt38mR+/2cvlwjAcjCL9O/cj4BnDC6UXKZTeGOOEbjof0jGRpKwoReJln7q1eVOCtNTvLGGMexCRd551pKt+TRsvY/5MaJRmiteS7EoT54Zq0c/aOBOvf5e7y8IYS8h/HbQ0hDBocDf4egLq1lXotkeT/vbOQ2EgBul79YJ6XvF5cWQwyaN8RHySANrnwrBlm3nV61dawRpZSIXO5rIxVFF/bW4ZYtJ0JavH11p8f/Ed44L0yRk+o9DSdXNeTfo+Erh3PFFoL4EqBbl7azAavXmptjWXOocXCzoUfp3xkFj9sKLugVN6hPWTR4//UYKu7kJ+K95REZS5N/XqPbwv8rJuHbSUjOmFYNGnUJlCc07ouPqgcITAQd3MUXGNs8WXqKQ2QN0I=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K3BxKyt5V3BrbGl2OXNtRldhUU9iU2NUT2daOUZXQWhGVVJITC9yRjdpWHZS?=
+ =?utf-8?B?WVhQTHIxM2tFU1Nkbi8rSUpVOVdGY1psd01LTDdkUFg5OXFEYWRSMjNEemVI?=
+ =?utf-8?B?ZEU5c3JmSWlnWHlXdXdDTHdObmZxcXlGVlFXVm1zS2tCLytXM1B3Y01UalBv?=
+ =?utf-8?B?TG05YW55U2VyMEMvWjJ3SkdPTVNDUFpUZlpQQjMrTTZCMDJ1RENKOEJlV3ZO?=
+ =?utf-8?B?YTZpOWk3ajlGSlU2UVdLSC9qUXE4d2lRNVBPdGhDTmI1MFVDcTcyZ0dJODdH?=
+ =?utf-8?B?RVo0bGtJbVh4dDNoUmQ0VzZuZHU5VVd1SktNTURCT0V2S1cyOXRvNFFlT09o?=
+ =?utf-8?B?ZThGKzRtSkVkZTJlVDFoL0hRYlAxQ3RoK051V0Z2WHJYSTVXemwwTXNBSHVO?=
+ =?utf-8?B?REg4b0tQZGFjbWRPWHNpMVVCWXM1QmFITWtCWm0vOEpDbFhXcmxaaUlYRGs3?=
+ =?utf-8?B?VnIxQkIvVXRzMFlVQStQQVNJM1RMb1hGamdQa0xVS3hxSGtRTTZoL0NTVktF?=
+ =?utf-8?B?bkkvS090SGRDZm5OelRRY3pNVGJTTTRFaEtDQlNMQmJSU2ZMYmF6bHY4MEw1?=
+ =?utf-8?B?eXNrWG1wNmtDM1k3MHBpTGx5SjV6WnZVODB4SzhRU3lQSUFjMmtDekNqS3RM?=
+ =?utf-8?B?dGlsR0t0ZEVVVTJGTytBVkNDS3NJTXBIaVRCcFNmUjhqL3ZXQVpjVTM4cHAv?=
+ =?utf-8?B?YXFncUxqR2oyS0xabWdRbGZsUFp4QmNXYm9hR1d3dlM3VUJrenU2TlhiVy9X?=
+ =?utf-8?B?NlJSWkVLS3VTTmF6VFEwSExFdHgxNnYyS29nQmhvaGgyNEpNcHFRRTMwNElM?=
+ =?utf-8?B?RGx3L1l5MVlMcFNxTnZSZC9UT2g5a1BMeUZIRGJscUh0bHMzMkJSdGthRmJL?=
+ =?utf-8?B?a1Y4Si9BUWFmWm5hRERHMjZMTEhycmFxMkp4dWs2SkJFV0g4WExsSGMvUjZj?=
+ =?utf-8?B?YXhuT3Z0V0dKRk5CNDRmNlZYSDRXZkc0eDlrR3ErZTRiVzBlb201c1RLaXMz?=
+ =?utf-8?B?cCtSdm5PbS9BTHAvTHBIUmtMNzBEVnRsN1l0cE1Da1FiUWJvanYwRlptTFpF?=
+ =?utf-8?B?cGgwanQxdlM4cCs2L1l1dXZVZlE3aWEzYlVBaEJRa1dWeERmUytSRm15K1FC?=
+ =?utf-8?B?OUhmTEVVREVCTCtETGtXR1hqRGhudGRraDhDZVIzSHNtNkh1T2VSYS8vdW1F?=
+ =?utf-8?B?dVkwTjN5Zk5yQXRudnV4YmZ3cTEyalErQ3ZKK2FhSUJ3ZTFIS2QxdktNVmRL?=
+ =?utf-8?B?MHFhdzFtSzF3SDRKOUNybjlUa0hYTWdSZk5aVlRaMjhtVStxMDFJSFlGUklP?=
+ =?utf-8?B?a3BQa1pZUGduYmFlK3NaclpOMlR6dUIrT25uZ1ltWW90SVpKaWlqbEZVMUlk?=
+ =?utf-8?B?QlFKdHNWWkh3aDZ2N3Bqc1ZpMFRkS1NwRGQyTVM2eHhCREt3eC9GRnEvdS9P?=
+ =?utf-8?B?a3BIeFQyZmdzT2p5SUxkbmlYSnVsTEtmR0s0czJuMkNkZ01hbkhjaW56Wm9K?=
+ =?utf-8?B?WnVYVy92dndrbWU2MkFkWUFha2xraWQrQzkxc3daUnFTd0lRZXFMSHp3T1Fr?=
+ =?utf-8?B?YjJQOTc5YjZLWitxVERpaHFDNWZLWnpWOWp3ZFh2ckU1cWxRRVNWT2JYaVZu?=
+ =?utf-8?B?bE5jd3V3VThkVFNpNHB3MFBlRjVTRU1xQlNPRU5WQm9mQllqbGFCSWF0aGhL?=
+ =?utf-8?B?L0lqU0JtZFltZ21FVnZjUlVtdXhlWmdmU3Fxc3hGUFJJZkFuZkpVQ3kxaWZs?=
+ =?utf-8?B?RGd6bVZEOFlxOEplWkMvY2ZUdTRzdFlORktGYi9USDNXSUptb1doa21MbHNi?=
+ =?utf-8?B?bFdJZnFXVDUrS1FjdHdza1BTVzF3aWhJcnJNOFhCZXBsMGRaS3pNdFg2d1Fp?=
+ =?utf-8?B?MUZ2dEEzNjZBbk5Qc2Y3L0h4NTByZmx0ZUI0VU5CeWMyYTBLT1RwVVBnQlZL?=
+ =?utf-8?Q?Wu3WCqCO3vM=3D?=
+X-OriginatorOrg: talpey.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3f4ae936-09f4-4053-d11e-08da0da799ad
+X-MS-Exchange-CrossTenant-AuthSource: SN6PR01MB4445.prod.exchangelabs.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: HE1PR06MB3148.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1a021524-f7b6-4c3a-4493-08da0da668da
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR06MB6880
-X-Warn: EHLO/HELO not verified: Remote host 2a01:111:f400:7e1b::822
- (mail-am6eur05olkn20822.outbound.protection.outlook.com) incorrectly
- presented itself as EUR05-AM6-obe.outbound.protection.outlook.com
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 2b2dcae7-2555-4add-bc80-48756da031d5
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: G5z1GMc5lJur3u3u/XrRaY7IS2ijTqnkP6AjJFZ88OXXVCBnvFMaEvKx08le9ZNe
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR01MB4211
+X-Warn: EHLO/HELO not verified: Remote host 2a01:111:f400:fe5b::62a
+ (mail-bn8nam12on2062a.outbound.protection.outlook.com) incorrectly presented
+ itself as NAM12-BN8-obe.outbound.protection.outlook.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -120,87 +120,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: capricorn cap via samba-technical <samba-technical@lists.samba.org>
-Reply-To: capricorn cap <cool_capricorn80@hotmail.com>
+From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Tom Talpey <tom@talpey.com>
+Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ smfrench@gmail.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Its was the previous guy so not sure when it was configured. May be in past=
- it was NT based domain with PDC and BDC but now the domain has FSMO roles.
+On 3/23/2022 1:29 PM, Enzo Matsumiya wrote:
+> Hi Tom,
+> 
+> On 03/19, Tom Talpey wrote:
+>> What server is returning this unsigned response? Assuming it's Windows,
+>> that is either a doc bug or (arguably) a server bug, and should be
+>> reported before deciding how to address it here.
+> 
+> It's a NetApp ONTAP 9.5P13. We've identified it's also setting wrong
+> signatures on READ responses with STATUS_END_OF_FILE.
+> 
+> Our tests against Windows Server 2019 showed it to behave ok, so it
+> looks like something on NetApp side.
 
-global]
-        workgroup =3D NUTI.ME
-        netbios aliases =3D FS1, SB5
-        server string =3D %h server (Samba %v)
-        security =3D DOMAIN
-        auth methods =3D winbind
-        winbind:ignore domains =3D ETL_UIP
-        map to guest =3D Bad Uid
-        obey pam restrictions =3D Yes
-        passwd program =3D /usr/bin/passwd %u
-        passwd chat =3D *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spa=
-ssword:* %n\n *password\supdated\ssuccessfully* .
-        syslog =3D 0
-        log file =3D /var/log/samba/log.%m
-        max log size =3D 1000
-        server signing =3D auto
-        load printers =3D No
-        local master =3D No
-        domain master =3D No
-        dns proxy =3D No
-        wins server =3D 192.168.1.34
-        kernel oplocks =3D No
-        ldap ssl =3D no
-        panic action =3D /usr/share/samba/panic-action %d
-        idmap uid =3D 10000-20000
-        idmap gid =3D 10000-20000
-        winbind use default domain =3D Yes
-        invalid users =3D root
-        printcap cache time=3D0
-        smb ports =3D 445
+In this case I don't think it is appropriate to apply the suggested
+patch. Allowing unsigned or invalidly signed responses will greatly
+reduce security. I'll be interested if NetApp provides any information.
 
-[homes]
-        comment =3D Home Directories
-        read only =3D No
-        guest ok =3D Yes
-        browseable =3D No
-
-[nobackup]
-        comment =3D These files are not backed up
-        path =3D /export1/nobackup
-        read only =3D No
-        acl group control =3D Yes
-        guest ok =3D Yes
-
-
-________________________________
-From: samba-technical <samba-technical-bounces@lists.samba.org> on behalf o=
-f Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Sent: Thursday, March 24, 2022 9:05 AM
-To: samba-technical@lists.samba.org <samba-technical@lists.samba.org>
-Cc: Rowland Penny <rpenny@samba.org>
-Subject: Re: getpwuid(13891) failed Failed to finalize nt token
-
-On Thu, 2022-03-24 at 08:32 +0000, capricorn cap via samba-technical
-wrote:
-> We have another outdate Debian server with samba 3.5.6 with security
-> =3D Domain. That was configured really long time ago.
->
-> I can understand that its EOL but any clue about why I am getting
-> this kind of error?
-
-Lets see if I understand this correctly:
-
-You have an extremely old Debian server running Samba 3.5.6 which
-appears to be a member of an NT4-style domain.
-
-Is this correct ?
-
-If it is, what is the Domain Controller ? A Samba PDC or an AD DC ?
-
-Please post the smb.conf from the Samba 3.5.6 machine.
-
-Rowland
-
-
+Tom.
 
