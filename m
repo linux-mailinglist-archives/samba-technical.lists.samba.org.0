@@ -2,31 +2,31 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80B614E880A
-	for <lists+samba-technical@lfdr.de>; Sun, 27 Mar 2022 16:19:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BCB764E8819
+	for <lists+samba-technical@lfdr.de>; Sun, 27 Mar 2022 16:29:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=hNkyo7z72KFrIaHPYZibbfYag7JmvfA2QBHFldJQVFM=; b=6YsmAkVQ+RiM0imk8L7+qeoe10
-	PpRZXj5GDBx+H7y6WDuJbI/7G5dS/rmoUejeb5YP/5X5OI7tqxacK/dFleRuKTNeMZM5BkVkNN7NH
-	HI6c7F4aYRYx4GTE3XHUsoWM0YsNf8y1UJ5fOQ/FVTXJzkEiCeLAUFn7nN4QHNagB2fp6Dc7qa6kv
-	ZGUF4q3wqcPC4S8Wqum75wxhA2OIBCn6tiIl/vpWKAA9USYP97mzHGLcio+htiVnXcWSnU5IwZf1s
-	8FxWmVvFpkPv5p1z1FCVRQvZ77iGJIqZqnl0QMvgzksQxgSrs+LPxPPuU/NTlnHoktIfdx+GWkxIr
-	ZhmzCwkg==;
-Received: from ip6-localhost ([::1]:63866 helo=hr1.samba.org) 
+	bh=LIjGO/AjzlZvq0qCK6keq6dDpiOceLkN00e08oi50Zo=; b=JCSf3B9gjCrrzN76NjGMD+iz+b
+	C/BfuIeKZ+X9kIPXPirOGiP5CyGUYzSI+xPyhQwBHyduEeQxtFsnxkXgklDyRRF+l0wMIL5iWE7Ku
+	axAruxF6+X4H98c/Q0NQY1pcSlY1NM43gJo7tCwI9ZyguBNGRpZooTrBcXHCaZYghtIx+8B6byCtI
+	GjROvFxYVVkPM2gpbAIUG+PApRtl4UHUyeJHcXsHYSMKfGEEKqC5KkuR8i74f+6o6e6f7vfOoFEmR
+	cc2jRP6C24rzpKvvZVkhCj7gDC35fUxnqOgo0DNmkjpDmbt9gbIrtzf4N/E2NKiTL/jOU0B4F+gIq
+	p9EIcaWg==;
+Received: from ip6-localhost ([::1]:64526 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nYTjy-005goW-0m; Sun, 27 Mar 2022 14:19:34 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:36763) 
+	id 1nYTtd-005hC0-0Y; Sun, 27 Mar 2022 14:29:33 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:58591) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nYTjs-005goM-Cy
- for samba-technical@lists.samba.org; Sun, 27 Mar 2022 14:19:30 +0000
+ (Exim) id 1nYTtY-005hBr-U0
+ for samba-technical@lists.samba.org; Sun, 27 Mar 2022 14:29:30 +0000
 Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 34540408C3;
- Sun, 27 Mar 2022 17:19:23 +0300 (MSK)
+ by isrv.corpit.ru (Postfix) with ESMTP id 8FF25408C3;
+ Sun, 27 Mar 2022 17:29:26 +0300 (MSK)
 Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 75A8E36F;
- Sun, 27 Mar 2022 17:15:36 +0300 (MSK)
-Message-ID: <16d846bb-45ae-ef7a-b70a-6c8354b9a771@msgid.tls.msk.ru>
-Date: Sun, 27 Mar 2022 17:19:21 +0300
+ by tsrv.corpit.ru (Postfix) with ESMTP id 142A036F;
+ Sun, 27 Mar 2022 17:25:39 +0300 (MSK)
+Message-ID: <9d71399f-09fc-87be-66bc-86c1ec5aec19@msgid.tls.msk.ru>
+Date: Sun, 27 Mar 2022 17:29:24 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.7.0
@@ -58,28 +58,18 @@ Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 27.03.2022 17:12, Nico Kadel-Garcia via samba-technical wrote:
-> "Building on Debian" isn't enough information. Which release of Debian?
-
-It doesn't matter since the same result is achieved on current stable
-debian (bullseye) and current unstable "rolling release" (provided all
-external dependencies are satisfied - and there's no new build dependencies
-as far as I can see).
-
+..
 > The latest release has some critical dependencies, especially of a
-> recent version. Do your steps work with the previous releases of
-> Samba?
+> recent version.
 
-Yes ofcourse, the current steps definitely work with previous releases
-of samba - this is exactly how samba package in debian is built.
+I missed this one, please excuse me.
 
-The build problems I outlined are within samba, at least some of them,
-and I described the reasons why it is so and provided the fixes for
-some (or at least work-arounds).
+Which dependencies do you consider critical and for which dependencies
+a "especially recent version" should be provided?
 
-My intention is to get some help with the samba build system, using
-the issues I'm seeing as examples.
+What's different here compared with 4.13 version for example?
 
-Thanks,
+Thanks!
 
 /mjt
 
