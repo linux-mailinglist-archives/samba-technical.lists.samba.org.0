@@ -2,43 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 312B34E92DB
-	for <lists+samba-technical@lfdr.de>; Mon, 28 Mar 2022 12:56:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D5644E9C00
+	for <lists+samba-technical@lfdr.de>; Mon, 28 Mar 2022 18:12:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=gXWFGta8ecVMggQtyiIBBMr8TemQUoIfFR7ouyqo4QA=; b=mUo7peTN61hWwkTYjPI2nBY4YO
-	Pk4wk1k8a2HxM/015Km2P/+NJDMt0y2NfOMOp8HPkkQkxmxiSJZatKrO0O9Xl2kt4fwVBVeWRizYX
-	+cJul89GbqwrfZRPWUmuXH3Q0vcYslfrGMw4gQmUR1GKxH9TYa8QtQF3ntW8VsknzMotdV9tr+wjV
-	d0ntMMkwTkZvgyxia7kz6S2foin6xfSMx2ZSHiJZPihva+3kTlzXudNFAh2dID/xBflvtCc4kWv8R
-	odpmYTsB/s172G8wot4979JYnWLNVSJ5QwFXBNmKQfPL1fXm59Gbld1HaVYSZ3hsDgnKaS+Q1Y6ks
-	kJJxeLhg==;
-Received: from ip6-localhost ([::1]:40482 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=FMa69ynIDe4+vxPCmJfU6qeHFC3hWjX/JnpxJqVVqaY=; b=GtNBh8WcWrMuka3WHlDNj+5gs9
+	4edHvcr6YkTrv3V9FnHG5DOMLmlv9YUcyg9iQRIuKgrcnLWDiP31XJRG5RN0Zlz3sM3I2OerXn+a0
+	LmXf7stKuJIMCt5rITFaDCKHB6I1d7l49Y+4glWNs9YCrmDLKd1ILxg4S29sYb4m8+UPZm7FHtLLP
+	t/QrIx+/h5Gaix579LQuyHnAewhGfNjLjkj4tKlvsXdo/6C6eBTRvqHoKgMPua5BGkRz4xX5jZ1ax
+	yca5NfOl9UTCHE4ITB60HLbI4WvRHeeYNNgj2tIUpIhFpoSFKFEuTOSj+VUcdB3NFWdfUTewXTrei
+	LTKK/tpQ==;
+Received: from ip6-localhost ([::1]:45310 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nYn27-005vko-HP; Mon, 28 Mar 2022 10:55:35 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:42291) 
+	id 1nYrxo-005yrA-5F; Mon, 28 Mar 2022 16:11:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37950) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nYn23-005vkf-2d
- for samba-technical@lists.samba.org; Mon, 28 Mar 2022 10:55:33 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 8A68B40A1C
- for <samba-technical@lists.samba.org>; Mon, 28 Mar 2022 13:55:28 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 4A953352
- for <samba-technical@lists.samba.org>; Mon, 28 Mar 2022 13:51:42 +0300 (MSK)
-Message-ID: <cf23e9ec-10f8-cc3f-d2a5-af39516f5d14@msgid.tls.msk.ru>
-Date: Mon, 28 Mar 2022 13:55:27 +0300
+ (Exim) id 1nYrxj-005yr1-Sa
+ for samba-technical@lists.samba.org; Mon, 28 Mar 2022 16:11:26 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=FMa69ynIDe4+vxPCmJfU6qeHFC3hWjX/JnpxJqVVqaY=; b=wh5B0MoSpjTullWge3z9gdhDY0
+ leRd06ZUCdI6/C24g16m79KXbtpZcIA9p6v4kqoGlLVid/zBJBVue9Lxrv/yRSSY4NdYUom/u6ROK
+ 2OhTGKbTBdNbfhdqFmOSQ5AyOCVXBcE/ghBsnkfqGfrRr+o/duF4g3PNDJsI7QLyA0PtmQ1Ifksw0
+ jvXcO+4mW3ohcgxU3j2NOPybdCJtry8HTlXGcmBuNBeAFqdiO4zI6Q1KjiVzOjoZLKKKVbtyW/YS4
+ IzLbg1FPm+nfa28JEeOxkSzLPomwc7KwxcfC1vh+fp0uBoV2oyUNEz1v0G1TBtmflY2CONODOZ/wB
+ P8qIh0MtX+onh8vWmPVmzja7U3gyFXCWtqQ0rbfav/SYYZUWLKuvtJPW8/AXZlrHSMP/UE9Ugl7vS
+ 6SiOSfn8hJojjLTU3OSag8R6DQyGAZz2t1Eqh5GTsHVj5d1Qbr5GiMSUsjzKU93zIWwLkAyKpDIgS
+ xOz4guEbX535dQrbySRpQeD/;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1nYrxi-0041wd-Mc; Mon, 28 Mar 2022 16:11:23 +0000
+Date: Mon, 28 Mar 2022 09:11:18 -0700
+To: Richard Sharpe <realrichardsharpe@gmail.com>
+Subject: Re: Are there Python3 libraries for the net commands and etc?
+Message-ID: <YkHeJrztO2KnRMpn@jeremy-acer>
+References: <CACyXjPw0iqTm=HE9Neb=J99wZ0+=GRdQ0+13+BAuDvvLvQeWaA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: hex_encode_talloc() in libwbclient
-Content-Language: en-US
-To: samba-technical@lists.samba.org
-References: <5e2f2d0c-a182-30e7-8e18-00b239042cb1@samba.org>
- <97e26db1-4dd1-149d-d01e-d6431ce5ecac@msgid.tls.msk.ru>
- <a2240c745392efe4c8ebceb4ce8cddf73271cd22.camel@samba.org>
-In-Reply-To: <a2240c745392efe4c8ebceb4ce8cddf73271cd22.camel@samba.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <CACyXjPw0iqTm=HE9Neb=J99wZ0+=GRdQ0+13+BAuDvvLvQeWaA@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,40 +55,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-28.03.2022 02:52, Andrew Bartlett via samba-technical wrote:
-> On Sat, 2022-03-26 at 20:12 +0300, Michael Tokarev via samba wrote:
->> Right now, I'm trying to deal with one missing symbol when
->> dynamically
->>
->> linking libwbclient.so: it misses hex_encode_talloc symbol since
->> obviously
->>
->> lib/util/util.o file is not included into the wbclient library link
->> line.
->>
->> Is libwbclient.so supposed to be buildable as shared library?
-> 
-> libwbclient as an LGPL shared lib must not depend on lib/util/util.o
-> 
-> We need to work out why we have code that gets brought in to
-> libwbclient.so that needs this symbol.
+On Sun, Mar 27, 2022 at 09:21:38AM -0700, Richard Sharpe via samba-technical wrote:
+>Hi folks,
+>
+>A lot of system management scripts these days are implemented in
+>Python and I am sick of using popen and system in python to run Samba
+>commands and then grub through the output to figure out what I need.
+>
+>Are there any Python3 libraries that provide the functionality of the
+>net commands?
 
-There's nothing, actually. The whole issue was again due to PYTHONHASHSEED=1,
-ie, it was an ordering issue, not LGPL-compat issue.
+I don't think so. The only python SMB stuff I'm aware of is:
 
-The name libwbclient sneaked in wrongly due to error on my part.
-After whole day dealing with all these numerous libraries, I
-wrote libwbclient instead of libsmbconf. It was libsmbconf which
-failed to build, not libwbclient.
+https://pysmb.readthedocs.io/en/latest/
 
-So here, there's no problem, except PYTHONHASHSEED= requirement.
+I think only Samba does the management stuff. However,
+most of our management stuff is drivable directly from
+python, as that's how we do much of the testing.
 
-Thanks!
-
-/mjt
+Talk to David Mulder from SuSE or some of the Catalyst
+Team as they know much more about this than I.
 
