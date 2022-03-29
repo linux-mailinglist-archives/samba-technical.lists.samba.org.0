@@ -2,42 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27D4C4EA7DA
-	for <lists+samba-technical@lfdr.de>; Tue, 29 Mar 2022 08:28:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BFED84EAFCC
+	for <lists+samba-technical@lfdr.de>; Tue, 29 Mar 2022 17:07:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=Or83GhCN40AnioXwB1yzcDd5ajWi5dZ1JOBrYkckQYo=; b=gQawcdBPCfKh2zXzCVkNPOCZl4
-	u4QacQvXTWIHSKzc7TEl9NDqV1SZrk7tZDSxu51NAyr4181Td4NTFHA3Y3F9ci0lXd3qknsRUlS9e
-	MwWeJ4WhXc/C9+lKsg5TTGT8TWk7nHSkBnKUZY3UohZaWfaTUSFBfxXR2K9R5jV60+tW4fNAAVWzE
-	sq/asd7Gqiu9HsrjBp+Qhb8q45qS1AhOuHyQQzIA+kEG14cPQDkXPMcMfVqTSm9W3p1PXyZyGNb0X
-	ZucrIfJjILjrin1CzV9VN4syS+DA/LTYptQJ6+v4MedlVCPe/PKcAz283OMA2eh+mgwkAXzuaKq+A
-	bIuAhwMg==;
-Received: from ip6-localhost ([::1]:31976 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=Zcyzc4xKLs2P9FXr8IwYgK///el9Cf/S5TS0frUesCo=; b=Kbv9J+IiCLvkQrOuLQkfj9lWwM
+	mGtfKi1cGCur8+CKZrjafqVNfiLpQa3SpOtnFd5gqPkHwIoCB8l2wj9P41X4kcU1dO/zjqIKZ2Kr6
+	z3hEnBU9KiJ7MRfcrPDSVWes3LtdWjlcoTuuJBXp7GOjHCOC/pg/59rIL6W2PdQ67REYZCA4KLL+k
+	5xRwtalLKvDBSCwg+azRrHGH40TELKBeE9U78qwDPezwahV/zrQXrWtBgyqxWg82mARJQMUp5sSQ3
+	nyk4mNvfggTSrkTpHNS4AbDcrRVqpMBvWhc/9q5XRUFyeQKPyk8/lIV1AAkMCmdxqT+yKxLGy0S3C
+	K0X6r7uA==;
+Received: from ip6-localhost ([::1]:49596 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nZ5JT-006FZj-V9; Tue, 29 Mar 2022 06:26:44 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:50317) 
+	id 1nZDQ6-006OWY-4o; Tue, 29 Mar 2022 15:06:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38002) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nZ5JO-006FYl-El
- for samba-technical@lists.samba.org; Tue, 29 Mar 2022 06:26:41 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 866BD40A01;
- Tue, 29 Mar 2022 09:26:34 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 6D00A352;
- Tue, 29 Mar 2022 09:22:46 +0300 (MSK)
-Message-ID: <f129265e-17cd-c6e9-2ef5-8bd6d68b91f2@msgid.tls.msk.ru>
-Date: Tue, 29 Mar 2022 09:26:31 +0300
+ (Exim) id 1nZDQ0-006OWP-VA
+ for samba-technical@lists.samba.org; Tue, 29 Mar 2022 15:06:03 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=ds6vFt8LqO/gsjKviSTi5vZ2VtZqcXFhvbmgSlmVGw4=; b=u11yeuNBJP7dTafi7D9mOerGqn
+ k5tzI7xWWJZ+wpGbY4CL6e2c1gFpqxLo6aooSGyiVu1zgEFwh2rj36w0UHcC2hGPpsgBUowyZIzs9
+ 7iG7WQ7N4VW33cPfeXk9ianx+WexaB5k9Ufnpikvkicyff6umYydNwlv8Z3iWW9jTHvOc4LxdZ2g2
+ 9oURErpiA3Z6vftyF9JRSBR4bV/neK2km/qpwOEe4kQ1AXj3FHWJ+DXIdJroruN9tfXv0YdWe5fKq
+ yyeGOZpeCsy9DZGHtYd8yAxZc31G0PHN331lDig7Yr9gElwFE64jKaY6lBmm0lPAADZlL3+MDoi6d
+ 46XYrufE0GksECnAJG0gWhUGadeKr60eytUWYah+YaNouD7/mk7Qua5CEY6ywmlX3Y7dosFvo+Aj2
+ z8C83A8WN3JJlxYauMXUBc1jDymkIWnAAPHKUB3CV8U+VCIH1w7zIR/rnTzMNIauTR5snZvLnxNsq
+ y/s2hJhklkWJ7V0EVpEqPkGc;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1nZDQ0-004Dw5-4X
+ for samba-technical@lists.samba.org; Tue, 29 Mar 2022 15:06:00 +0000
+Message-ID: <7dc59386-beae-d875-4587-d9c8c5b24d25@samba.org>
+Date: Tue, 29 Mar 2022 17:05:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.7.0
-Subject: Re: Samba 4.16 build failures
-Content-Language: en-US
-To: Matt Grant <matt@mattgrant.net.nz>,
- samba-technical <samba-technical@lists.samba.org>
-References: <CAHA-KoOSMkK=CsqE5Z8uaTYpK0tDNPAmXyLiF6yoh7r0hFkiEg@mail.gmail.com>
-In-Reply-To: <CAHA-KoOSMkK=CsqE5Z8uaTYpK0tDNPAmXyLiF6yoh7r0hFkiEg@mail.gmail.com>
+Content-Language: de-DE
+To: samba-technical@lists.samba.org
+Subject: [Release Planning 4.14] Last bug fix release
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -51,35 +58,20 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-29.03.2022 04:41, Matt Grant via samba-technical write:
-> Hi!
-> 
-> Just trying to compile 4.16.0 for my debian servers as a Debian package,
-> from debian/rules based on actual Debian packaging.
-> 
-> Keep getting lots of errors about GSSAPI_LIB_FUNCTION not being defined....
-> 4.15.x compiles.
+Hi,
 
-I prepared the 4.16 verson of the debian samba package set. It took quite
-significant amount of resources to complete, the amount of changes is also
-quite significant. See
-https://salsa.debian.org/samba-team/samba/-/tree/mjt-4.16
-for the result so far.  It also includes a relatively large change - it
-builds ldb packages out of samba source too, instead of using separate
-package.
+this is just a heads-up that the last bug fix release of 4.14 will be on Monday.
+So if anyone still has a patch that should be applied in 4.14, assign it to me by Friday.
 
-This is pending some review, some testing, maybe bug triaging, and I'm
-also waiting for the ongoing python transition in debian to settle down
-before uploading it.
+Cheers,
+Jule
 
-The plan is to upload it to experimental first.
-
-Thanks,
-
-/mjt
-
+-- 
+Jule Anger
+Release Manager Samba Teamhttps://samba.org  
+SerNet Samba Teamhttps://sernet.de
