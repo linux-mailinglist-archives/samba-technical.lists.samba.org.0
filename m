@@ -2,47 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8AE634EB3C8
-	for <lists+samba-technical@lfdr.de>; Tue, 29 Mar 2022 21:01:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D27AE4EB409
+	for <lists+samba-technical@lfdr.de>; Tue, 29 Mar 2022 21:21:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=/TKnfTaPSIjxK1KQZ3FqqIMbgHfNL7XNIr7+enmmo3g=; b=FSjIyqNnCFn1fzGSHO9IAD5WVi
-	tjTUqFZTbvdw+dU+kA/9Fs+nngwemjzDR1d/Q95xNog4BqDsrvHIDCsVbML2HH+mMR1S4vFOYwcV9
-	BdF622wszluOfGZ/iT1sA+YO0LuAWed/hgyT7zKx2j3/taf04U9Dm4QoOdZq/xe1W5vCy6bm4uB/9
-	6kREc51TtZiKbKaTHHqILkCAIv2SK9pEqdCMTxTXFQhhvKBomqUmcjTyqSJrHWWjPCoxKpIorl6ZB
-	5ivYCwwCmnc0B0+5gQiO8Z1lhAPWCxc6zdcNWO3he+mvmlgbmcNqoymiPU5udvpggsvTC5E9s3ZeG
-	HEMPp0gg==;
-Received: from ip6-localhost ([::1]:56898 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=4ijmfgDgUW5SlkQ5GorckGCTAVxIyvOSB4LFBAXKseg=; b=GNiNyskAdb8ouEmwNVmBWTeh5p
+	vjoLv7a5ltLE1/Wak/Ict/tXj/uvHCVPFA//Txk0mB4qGKM2zihIOZk0pD16TV/HcfFnsMtoFHF7O
+	rmvKRowFEo94r6AFRD/HJJOU8263CPIKNGN+ffm67iRx7ueQhtyDP55hn/htkmx12GJ+cELft2017
+	r3MCgvCNJ303l+nRrjQzlDnTfmvURD3CMcaffu4a2DRtyTsSklqF2DbGR8ywbvxSpsxRLVF+SILlV
+	NvGqZr2FxQUV1agrtl6nGAFmVtmm9iNg7FiUzrlGMyze/pwMta7nW78314TwEvQbC+MoFeJ2qvRRK
+	UPTdMw9Q==;
+Received: from ip6-localhost ([::1]:59272 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nZH4v-006SGO-C0; Tue, 29 Mar 2022 19:00:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38006) 
+	id 1nZHOl-006TJH-98; Tue, 29 Mar 2022 19:20:59 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38008) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nZH4f-006SGF-7u
- for samba-technical@lists.samba.org; Tue, 29 Mar 2022 19:00:20 +0000
+ (Exim) id 1nZHOg-006THx-7T
+ for samba-technical@lists.samba.org; Tue, 29 Mar 2022 19:20:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=To:From:Date:Message-ID:CC;
- bh=/TKnfTaPSIjxK1KQZ3FqqIMbgHfNL7XNIr7+enmmo3g=; b=QwTNLnJCGT2LfzsQUQroAgXmF5
- i9ohToGPPer54LyStUiIWG+OQ30eKELQQhu28NJ7gqzwixhBWTklNiujBox+v8JnF8AJ7e1f8LjS2
- Y9QvcybTEApWu0lWa+LX8wDs6vxjykbgrb0YfN/0tosHv6ZTvaD4t6xmd6dRxkpm4sFFh3x8gB+gj
- urTKMwGx0A1uiOjFXkTcG3fimYwcfbkLBBK1JnR57q/RdDyOXJrJv8NUsPLSmFHP9rwiVeV6gMtKx
- 6mEsPetXO9sahJdiozFF/v1elOn7AXyUxCiQWRNA/1lotfto3bACnKGP2REkuWCHBYi3dBNZFf2xU
- 2kTs62qqz0KwCxkcj/nTcS2i9owUARqwA4ZaPBHLzL8L0YwU38XQf57H+fAuXWisl/O2ypiiGH02M
- LV8/fIYy240GRAeoShmcsmxl+kiITqmB+ACkLQbty4CufyHxok1i4jh7TSwy2VE9mGEuYXlzcTms6
- kpAIjcfvS6M84I9Z4cL02jK3;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=4ijmfgDgUW5SlkQ5GorckGCTAVxIyvOSB4LFBAXKseg=; b=RsO/uALexodxmdvLpXiGZcuMU7
+ B4Ub7eD63UDTC/z9RV0MqrbVUKmBv74Lv63PW+QY02G+GYR23UWE1gmBL9e9CckzkhRfABhumSRNy
+ I0hcgyKbVoLTeN5rRqYkqxZ+4yhgE9BMgAbU1H68q5LF1pnlEqvwfdH1z4/tKPbPNYsE0u6WANZb+
+ 9JLE5b+X4KfOa28bHFNlB0ktUYmbAdATb1ucjqgl+L5Aty40ruolV0pPx768F+Ij3mxscjwesAMNz
+ rpW6sSQ/H3atewEJ+WiYk80Rr9OgPZHxSbhYrRb82UH6N99+I3RNROjRaxd+EIDHJKJxTLQMfU2Xr
+ rTPv3DjPWR6IAffBcU1VEJSLsn+MwHZqqLLcAR1KlMkHBalgxoGoN6FNcID7/V8i7iD5X7Iqpj/km
+ Dugeo4f91d9db0fj/fPXLSV6Vs4C3cT3Gu9EF2K9bEP4fVaRDTE+iD5sU9J4OT4Ue9GbGub8hLBST
+ IrJWZz9g/ucN6ydsCe9NNPjS;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nZH4c-004FlE-B6
- for samba-technical@lists.samba.org; Tue, 29 Mar 2022 19:00:10 +0000
-Message-ID: <6b999085-4639-ec62-0026-e99d26c5d6f6@samba.org>
-Date: Tue, 29 Mar 2022 13:00:10 -0600
+ (Exim) id 1nZHOe-004Fvi-OM
+ for samba-technical@lists.samba.org; Tue, 29 Mar 2022 19:20:53 +0000
+Message-ID: <926eed4f-2c9b-ac62-a31a-e325d7c09006@samba.org>
+Date: Tue, 29 Mar 2022 13:20:53 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.7.0
+Subject: Re: Are there Python3 libraries for the net commands and etc?
+Content-Language: en-US
 To: samba-technical@lists.samba.org
-Subject: Re: Regarding Mac os behaviour in samba domain
-References: <CAM61p33mA2Oc7v_+iQj8-uuowyJJh2WTfbLGWQHUxiZdAmbLcg@mail.gmail.com>
-In-Reply-To: <CAM61p33mA2Oc7v_+iQj8-uuowyJJh2WTfbLGWQHUxiZdAmbLcg@mail.gmail.com>
+References: <CACyXjPw0iqTm=HE9Neb=J99wZ0+=GRdQ0+13+BAuDvvLvQeWaA@mail.gmail.com>
+ <YkHeJrztO2KnRMpn@jeremy-acer> <3853301.dWV9SEqChM@edfu>
+ <CACyXjPwFhse8VtiuitVco-Q9UtpzUSwk3xxUz020rK7M=gtp4w@mail.gmail.com>
+In-Reply-To: <CACyXjPwFhse8VtiuitVco-Q9UtpzUSwk3xxUz020rK7M=gtp4w@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -59,27 +62,58 @@ List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: David Mulder via samba-technical <samba-technical@lists.samba.org>
-Reply-To: dmulder@samba.org
+Reply-To: David Mulder <dmulder@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 3/27/22 10:36 AM, Prince Chaudhary via samba-technical <samba-technical@lists.samba.org> wrote:
-> Hello team,
->   I am writing this mail after spending two three months on understanding
-> samba and implementing on mixed os environment (window,mac,linux).
-> 
-> Samba domain works fine in case of linux and windows system,
-> But in case of mac when i am joining a mac machine to samba domain it join
-> properly and shows all domain users as well, all ok, but when i restart my
-> machine "other users" option which allow domain users to login won't appear.
-> I have to relogin in local user and then i have to logout then other user
-> options appear and then i am able to login with domain users.
-> 
-> Can you help me with this?,
-> Why this is happening and what should i do? To make it happen all i want
-> that other users option on login screen of mac os machine should always be
-> there whenever i restart my machine
-> 
 
-It sounds like the MacOS client is having a problem. You should contact Apple Support.
+
+On 3/28/22 1:44 PM, Richard Sharpe via samba-technical wrote:
+> 
+> smb_mgmt_net_ads_join/smb_mgmt_net_ads_leave
+
+These already have bindings. See the python module `samba.net_s3`.
+
+> smb_mgmt_net_ads_status
+
+This appears to just do an ldap search for the local host, to see info 
+about the join?
+You could write something similar using the samba.samdb python module.
+So,
+```
+from samba.samdb import SamDB
+from samba.auth import system_session
+samdb = SamDB(url='ldap://some-server', session_info=system_session(), 
+credentials=creds, lp=lp)
+samdb.search(...)
+```
+The net ads status command searches for these attributes:
+                 "objectClass",
+                 "SamAccountName",
+                 "userAccountControl",
+                 "DnsHostName",
+                 "ServicePrincipalName",
+                 "userPrincipalName",
+                 "unicodePwd",
+                 "msDS-AdditionalDnsHostName",
+                 "msDS-SupportedEncryptionTypes",
+                 "nTSecurityDescriptor",
+                 "objectSid"
+With the filter: `"(samAccountName=%s$)" % machine_name`
+
+> smb_mgmt_net_conf_list
+> smb_mgmt_net_conf_setparm
+
+We don't have bindings for these right now. It probably wouldn't be 
+difficult to add them though.
+
+-- 
+*David Mulder*
+Labs Software Engineer, Samba
+SUSE
+1221 Valley Grove Way
+Pleasant Grove, UT 84062
+
+dmulder@suse.com
+http://www.suse.com
 
