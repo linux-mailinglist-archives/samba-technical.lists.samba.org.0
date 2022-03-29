@@ -2,52 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30DE74EA4C4
-	for <lists+samba-technical@lfdr.de>; Tue, 29 Mar 2022 03:50:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 567354EA708
+	for <lists+samba-technical@lfdr.de>; Tue, 29 Mar 2022 07:19:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=McH4GCc2nwv3NYo5FD7suzHDMnnVy3Zg0/DQQYvPUFE=; b=S7fFrNQ1W0b1QyYF/rMuXhUEz+
-	LiSOVnKVJHYsH5+olGNf6Vw9QoOWzy/AcMkzhnT+Y/wNmgaaCdAPoD48rtD4zq4bOztC4IllXXCak
-	JbSVpDgUEYBto+HpuUb4lG7jfIPEZp1wZ+ECn198Sg6JOECO7qcCDK5GXoz2ft+hVe696wytu2fEe
-	IMhwEhCQrzxrv03BCLvw7m7vsLtoVOU+QOJKMjNY47s32wQUuD5+ZdvG1M3Rb+SrqdvNknoVZpIsn
-	rq8a6XL2OqAl1IvMOPywBF2GD8deaeubAqmLjGwmQYhS4pN5bg6UMSjbkiISdSFyv/Vd1diVApfWu
-	BJ6sWvzQ==;
-Received: from ip6-localhost ([::1]:23906 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=vubK8Nkefj55Inx9JQ9DxnNUfBs/xPBDp5nMMdI75bw=; b=LOmUqiXdoCsOTIIUAnH3J0GLD+
+	XMPNVTf7cAsTsvUCyHssr0nZ5SQCFQKWd7pqbT0A9LI1nfrdmENa6iZZsdExbF4CeH3Rvh9SroMlq
+	S1S3Efs7iUyE6gzgW/kUxDVRabRzscKOSjy2VUrFcudGvrCqfmhyrKEfEugxoc0oVFShb8JmvMjlx
+	cG3H1ZhRn9e5uxhVyddAwQcrLG0BUPb0mRL5XEaRWaPzTg0DDiw7HSZgiqZKKIA0xwekhCFjSr5Zz
+	D1hxN5PzYJuCVgl1jvFavWk/pwFnR3ODO4S/sGtvRiFXZmMCryZdoEEBkJJkDJZ5XSONHIK8TxxoC
+	wWQlTS5A==;
+Received: from ip6-localhost ([::1]:31222 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nZ0zP-006BA7-Cv; Tue, 29 Mar 2022 01:49:43 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37980) 
+	id 1nZ4Fp-006EtE-VF; Tue, 29 Mar 2022 05:18:54 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37986) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nZ0zJ-006B9x-TK
- for samba-technical@lists.samba.org; Tue, 29 Mar 2022 01:49:40 +0000
+ (Exim) id 1nZ4Fl-006Et5-2f
+ for samba-technical@lists.samba.org; Tue, 29 Mar 2022 05:18:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=McH4GCc2nwv3NYo5FD7suzHDMnnVy3Zg0/DQQYvPUFE=; b=TOoAqql7vgORmqWRzzOV6kDx5B
- BmBXnqCXith2Q7lJYFZ1mAQo0Bt7SPeXfZ8RIljd/uLoGN374CtAorhQ86il2oj7C51N5BG6WdTyz
- 7idK04ArkCLs0+k8wOo4f+3JpLeAMB24xUTzDCPk7n08OLJVLezYk/JwbDPV0mLh3BoJUPZkLlTXP
- iz5/E6TTH5IqkuFVZvTTFRFLkDrxIEnbIm5aZC1sP/0GRqjHBVVibtYnwwhlfDHQbWGd7zDx/NgMJ
- hFQZPE3ZWe2QLJoX+gNJiLk8I9sOEN8/XmyRBQy4Myr2yP23AU3amr8XUNl+CxkOSOxUzqZxnRJdd
- sgrx45kGbowThqFIo6siOTRvV8nsik6qWk9RhoPlZBd1GoGtRElk4DasW44Wp/Pb2V8Qe7542knR+
- +/APSZD+OUfKXoJ6tVUSQWuA5KGsZ3pCpGuC4H2IjTNv0Xhv0rs/3J1vno1UnvDQkOFOTkXeXVtGE
- 6IBVNwvcLj1q6U+NGt2Sz5qF;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=vubK8Nkefj55Inx9JQ9DxnNUfBs/xPBDp5nMMdI75bw=; b=fx9JbPuUuSWaCw7oc1cFDMix1V
+ az9Gqv317AVmL25R+O7WcFFvu6ZHGBIHUCu3shmIQJxh4unhKT70+P5O/UMCVaNBTE9ty6Www1Uqb
+ OGSBVU1RjyXtJuJSjTmkdrQ73pzFhL435k+SXfqVYrx+8xaFd96OCPYgL8+nJSQA5UqfEsGQiGWfi
+ DDae7vlYQXC+uyAuSC0esYtMNcawOGW90+7udhT0Vrbiy3FTIkZz0kX5KiwOHXYn4TxRsk0LdZDyD
+ hSwW24QiXLrxGH2CdclBMSUI5oGRzQR8OvL+B+30PqPJW3let5BhT4c0+Ayhs69ek4MKKmjsUngap
+ 1JiceAXIB3bJn+CrqebyxMOfdi/QPq+oPmLZO2ouH2Qgd6EGtBAnoe3QJAnaNQXz1Bp1+UHGk17Fl
+ H4OfVWUPLZK3OM8kGiNDPsRQoBB0AngSHEhh6T1YnWu8LZXFGhKTgR2Hl6yaG9/SnS425VLaGYSdS
+ S8/AwGMIcL4plQmO/gkn9i9p;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nZ0zI-0046KP-Dn; Tue, 29 Mar 2022 01:49:37 +0000
-Message-ID: <dd5cc07df7125de729cb5eca87ec4f0d101974dc.camel@samba.org>
-Subject: Re: heimdal headers ordering (gssapi/gssapi.h, crypto-headers.h)
-To: Michael Tokarev <mjt@tls.msk.ru>, Stefan Metzmacher <metze@samba.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Date: Tue, 29 Mar 2022 14:49:32 +1300
-In-Reply-To: <7980f215-2192-5caf-b436-e5cf781ffb87@msgid.tls.msk.ru>
-References: <412176a7-bbb3-1937-357d-5325ec4f5d2d@msgid.tls.msk.ru>
- <bffcbec6-8e6c-e076-ff0a-2ce00047fe04@samba.org>
- <9d28aabc-dd1c-d2c9-fb7d-db05ab40a6f1@msgid.tls.msk.ru>
- <4fe2488cc85607e4fa9de85f7ab644b75ce00a84.camel@samba.org>
- <7980f215-2192-5caf-b436-e5cf781ffb87@msgid.tls.msk.ru>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1nZ4Fi-0047pw-8H; Tue, 29 Mar 2022 05:18:46 +0000
+Message-ID: <07fccb86-3895-5ad7-a332-4ad84bb58ab4@samba.org>
+Date: Tue, 29 Mar 2022 07:18:44 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Subject: Re: Are there Python3 libraries for the net commands and etc?
+Content-Language: en-US
+To: Richard Sharpe <realrichardsharpe@gmail.com>,
+ Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+References: <CACyXjPw0iqTm=HE9Neb=J99wZ0+=GRdQ0+13+BAuDvvLvQeWaA@mail.gmail.com>
+In-Reply-To: <CACyXjPw0iqTm=HE9Neb=J99wZ0+=GRdQ0+13+BAuDvvLvQeWaA@mail.gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------vGxI7auHgzFCBWcB9bCOQiWy"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,52 +60,65 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2022-03-28 at 12:53 +0300, Michael Tokarev via samba-technical
-wrote:
-> 28.03.2022 11:21, Andrew Bartlett wrote:
-> > On Mon, 2022-03-28 at 11:13 +0300, Michael Tokarev wrote:
-> > > It'd be very nice to have this fixed inside waf too :)
-> 
-> If not fixing it in waf, but at least waf can check if
-> PYTHONHASHSEED is set and refuse to run if it is not.
-> This will save a lot of grief like in that bugreport,
-> like I encountered too, and like another bugreport
-> against upstream heimdal with proposals to fix their
-> headers.. :)
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------vGxI7auHgzFCBWcB9bCOQiWy
+Content-Type: multipart/mixed; boundary="------------1iniGSvwm0Zl02OKPNWdSJvP";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Richard Sharpe <realrichardsharpe@gmail.com>,
+ Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Message-ID: <07fccb86-3895-5ad7-a332-4ad84bb58ab4@samba.org>
+Subject: Re: Are there Python3 libraries for the net commands and etc?
+References: <CACyXjPw0iqTm=HE9Neb=J99wZ0+=GRdQ0+13+BAuDvvLvQeWaA@mail.gmail.com>
+In-Reply-To: <CACyXjPw0iqTm=HE9Neb=J99wZ0+=GRdQ0+13+BAuDvvLvQeWaA@mail.gmail.com>
 
-https://gitlab.com/samba-team/samba/-/merge_requests/2463
+--------------1iniGSvwm0Zl02OKPNWdSJvP
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-> > Just so you know how that works, like the other 'third_party'
-> > components, to do that we would need to work it with upstream, then
-> > import a new version.
-> 
-> Is waf also an external tool?  Okay... :)  Anyway, it can
-> be patched in samba locally just to prevent this from
-> happening. :)  Hopefully there will be less issues now
-> once we release 4.16 in debian (and I hope to address
-> this very issue in the next debian stable upload too).
+SGkgUmljaGFyZA0KDQpPbiAzLzI3LzIyIDE4OjIxLCBSaWNoYXJkIFNoYXJwZSB2aWEgc2Ft
+YmEtdGVjaG5pY2FsIHdyb3RlOg0KPiBBIGxvdCBvZiBzeXN0ZW0gbWFuYWdlbWVudCBzY3Jp
+cHRzIHRoZXNlIGRheXMgYXJlIGltcGxlbWVudGVkIGluDQo+IFB5dGhvbiBhbmQgSSBhbSBz
+aWNrIG9mIHVzaW5nIHBvcGVuIGFuZCBzeXN0ZW0gaW4gcHl0aG9uIHRvIHJ1biBTYW1iYQ0K
+PiBjb21tYW5kcyBhbmQgdGhlbiBncnViIHRocm91Z2ggdGhlIG91dHB1dCB0byBmaWd1cmUg
+b3V0IHdoYXQgSSBuZWVkLg0KPiANCj4gQXJlIHRoZXJlIGFueSBQeXRob24zIGxpYnJhcmll
+cyB0aGF0IHByb3ZpZGUgdGhlIGZ1bmN0aW9uYWxpdHkgb2YgdGhlDQo+IG5ldCBjb21tYW5k
+cz8NCg0KaXQgd291bGQgYmUgZ3JlYXQgdG8gaGF2ZSBzdWNoIGJpbmRpbmdzIQ0KDQpBcyBw
+b2ludGVkIG91dCBieSBvdGhlcnMsIEp1bGUgaXMgY3VycmVudGx5IHdvcmtpbmcgb24gSlNP
+TiBvdXRwdXQgZm9yIA0Kc21ic3RhdHVzLg0KDQpBZGRpbmcgUHl0aG9uIGJpbmRpbmdzIGZv
+ciB0aGUgZGVzaXJlZCBmdW5jdGlvbmFsaXR5IHNob3VsZG4ndCBiZSB0aGF0IA0KZGlmZmlj
+dWx0LCBsZXQgbWUga25vdyBpZiB5b3UgaGF2ZSBhbnkgcXVlc3Rpb25zIGhvdyB0byB0YWNr
+bGUgdGhpcy4NCg0KQ2hlZXJzIQ0KLXNsb3cNCg0KLS0gDQpSYWxwaCBCb2VobWUsIFNhbWJh
+IFRlYW0gICAgICAgICAgICAgICAgIGh0dHBzOi8vc2FtYmEub3JnLw0KU2VyTmV0IFNhbWJh
+IFRlYW0gTGVhZCAgICAgIGh0dHBzOi8vc2VybmV0LmRlL2VuL3RlYW0tc2FtYmENCg==
 
-So, waf is a tool to build build systems.  The core of waf is a
-third_party library that we consume, and then we provide scripts that
-run as part of it (the wscript files and scripts under wafsamba).
+--------------1iniGSvwm0Zl02OKPNWdSJvP--
 
-So some things we fix in our use of waf, others like how dependencies
-are ordered etc we need to fix upstream first, lest we end up
-maintaining our own version of waf forever.
+--------------vGxI7auHgzFCBWcB9bCOQiWy
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-Andrew,
+-----BEGIN PGP SIGNATURE-----
 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmJClrQFAwAAAAAACgkQqh6bcSY5nkZR
+qQ/9GzgBIxElRlwGtXb3uTiBQXWoYyMkwtvyP9w71JvY5tv9uOI7kfR/SGcINi11r1a4RHbIDPSH
+Y2TfchQEVeV06egwGqYhaAWNBBbIBsZ6Kw1c1TotEuaMOfhVyO78HLbXigR7e+EOTW28jJ1P95RH
+AwO+yGPB62CmrAzUKOdSlqIXYo0eijXP60q4UNBT280S5gZNNW0nsd6QTuc5w8EITRDbDiN3kGmS
+SEoxpeKIvUmq1uZgy5qUuR/MeStlPRjww/4Uw3YnXvZhRLi4Avs+z6CnIJ/sHq+JbiTkMKhXiyqH
+vN7uDc1/AwwmIhGTFN2c9Ay640bDApiqBwDS/0A8p8VzUUJ9hm2ehizTzC1PvOvc5wpZhMUan6Yi
+VJCZatLBoJOzy1XYVvqmgy8ZRB8WfN1nbwXiPPrGyMjwXHRrNxB7RpHae4vg9423JmeoNM+Nb27p
+6HdjQ425wP33NekggH5sxKmVkTGTUv1wvJqaC+XcUXok+4xNkLKn/ppP57Hrb3Hl1iCY3hKFsZJr
+xse7I9xkt1eWz6MfgUtTKocZ0YLNqr4ni9uzJqU8uZZIF2Un8PMZ7KrIMC3zN3dHTpq8gy2VVonM
+Qdys08i9bEoUvc/Q4XKqee3KSMOpYruLVcZb5sgL2zh3D95XzDnH8tzf6uSadTplQlKKozCm/KjJ
+Veg=
+=hGjI
+-----END PGP SIGNATURE-----
 
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-
+--------------vGxI7auHgzFCBWcB9bCOQiWy--
 
