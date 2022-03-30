@@ -2,45 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42BA14EB8C1
-	for <lists+samba-technical@lfdr.de>; Wed, 30 Mar 2022 05:25:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D93C4EBBF4
+	for <lists+samba-technical@lfdr.de>; Wed, 30 Mar 2022 09:42:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=HMXOfXuGNMbp7OXUBmwtTcheWJ9mi4RKQ42OnPp+JcA=; b=AsKMIyHt0nv/VjxMeD/AkRWY0q
-	e/+gpjvwDSb1DqgQ3IwxLHWx/5zLahg+L4+q7UtwusKW6meJCLRI2vzZrZ9MoCuCfPROCNG7PeVWf
-	X5lJPocrYI75bKN5WM2vB+dzU4j8/FeB92TgkS3W1BIqqCBWrRuLrTUztQnGwqLRWtz81z79oXvr9
-	ikE83miP3P91HvUtiASy+IlT6ZGsWlRCMfX3aW6EbMEjMqUt3WksKzoBYUecHYQqFT7TXidO5O9J+
-	thQK0rflOJHcb9vjXO1tP07fGs4O+m0a7BquDWSOnn0F3ABXHwKYyDTzWS/fTw/zjR5/7psvjr6FL
-	7ZFyXI4Q==;
-Received: from ip6-localhost ([::1]:29714 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=3miyIrlTCsM2raTK49KOht9R7hMOWTic4ouCC35PZ7g=; b=HSDgATABmJ9oSvWKiX2R0GiSnP
+	UK0K7tU/heU+1R+dm6w430AJ7d+hyP2rJHIzy34CSp5TxA2TeRQ6gNKcEK/l2Yn4SZNtLRT6IH9AC
+	lZMDDwTaCz5X4n8+3lNinW/9QRf/txcyXuFYjEXU/8Gxwo5kKfbyrSeKUyMgLIwdp8C0RYbS082T3
+	YqL7fKlMnVltI3D3b4Uud4joXuky9vxW4uwBRjjcicHZgUHCAtT7luWdHkGF9J9wYZqIQbqOsbaXW
+	aWh+kCfLMByIgDmLV6nigxLNWOhbDsT+6vnMA4WntjzsW3oXjFQS8e21kUn+sxvyYf2o2iUgr+Ylf
+	RLh/wCZw==;
+Received: from ip6-localhost ([::1]:39082 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nZOx5-006cGT-Lu; Wed, 30 Mar 2022 03:24:55 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38024) 
+	id 1nZSxY-006hEY-4i; Wed, 30 Mar 2022 07:41:40 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38028) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nZOx0-006cGK-4x
- for samba-technical@lists.samba.org; Wed, 30 Mar 2022 03:24:52 +0000
+ (Exim) id 1nZSxO-006hEP-HH
+ for samba-technical@lists.samba.org; Wed, 30 Mar 2022 07:41:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=HMXOfXuGNMbp7OXUBmwtTcheWJ9mi4RKQ42OnPp+JcA=; b=AdpWK+krqkL+LWIiBGnQckhyEI
- zZ8XIRsQ+t8FeFPYOTR+oBs9NTZtVcjFx9RBoxH1xB4teGpRWRmCw8KwlVuGOw0lx8P1CUj1dKN/q
- qe3usBkMqfWtvknyagVaVVtOCs7DKtlc0LUE5TZIoy2qskPZybhfE5pW44qbW5EcNt7BnoCRJSFC3
- 9oigYj/GezJYQT3xXaXK9gewLKKvMjURVEmqCJjusbKepKm6KzCM4OUVg62Kv1U18cIxPQYaa4BrJ
- vJxViscfaAC8d2hW9yrdi12dTa/xrlisVfOv5N+Q2URTrnDRONQtncvT+8QPWbzweQESv0d4KxVhL
- nHecbAm/I61Ugl/OntiX+D4cNC1Tm3IILKZjRPxPrS1FxEenAbq9Tzq+lOFexYxDKyFtP9dfBC1nX
- pXAIwBu2y+k195zTW8QC/Ci/S76qli24kxZdREPSfhkiM/jrGtRfi0u95v2pJ/FQJV7OGo03h0mPn
- UPVtdQIYosU943tTUQgMNfyo;
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=3miyIrlTCsM2raTK49KOht9R7hMOWTic4ouCC35PZ7g=; b=MMYsVrcaZts8JuY9AfctmRsHvx
+ XygS1xNc0lSrCCa6UiHJDhKeXg3BTkd6BHDDyx4Tkx6Bh2uyT8vxOO16FUgSmbcQ4fy34dnnqwmH6
+ b4kM/5u4SXRDNLQEAO1izHE2hUBXjDa/HMlzkyQjG5oh476DdgGYCjVa4qPN4vqHmUusWwkk8306v
+ XvyILYh62kdkIYiiKPHryEl4s1ttzU6+iJelLs/4WZBqK6whtHRV5c5IfDX7lEc3gLL/iF2PxQnG2
+ y3el/ddOTaMyur1Tl/UfVt/Egks1XPdxp4IJK3WkEIgeLy3UpRnPZukzpj3OrcdwVBVWyia2cnyjY
+ ZYUmOvk6OAVu1W8qd9J5IPpX11vPwDQfhdqx4bgg9CT2jKkuB/R+6Zd5HnvKpVK0BmwV0GZjljaKJ
+ PwRxhIXu15w6Wz0wEZr+ji1kLq2gyhaOOSAUklI9q+ak24wvNSbW61A9eaMPQarS17lsQ+P2ZpNW6
+ PpDqGFQy9L0wMm30aU2fdcro;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nZOwy-004Iwy-Gs
- for samba-technical@lists.samba.org; Wed, 30 Mar 2022 03:24:49 +0000
-Message-ID: <c5c78237f38a1240141ebb8ef6bd25eba53ebabb.camel@samba.org>
-Subject: FAST fast response is missing FX-FAST: Time sync issue
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Wed, 30 Mar 2022 16:24:43 +1300
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1nZSxM-004Lsf-Vz; Wed, 30 Mar 2022 07:41:29 +0000
+Message-ID: <70a0f26e-0d6a-ff5e-b638-343d1ea090e0@samba.org>
+Date: Wed, 30 Mar 2022 01:41:28 -0600
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Subject: Re: Regarding Mac os behaviour in samba domain
+Content-Language: en-US
+To: Prince Chaudhary <chaudharyprince64@gmail.com>
+References: <CAM61p33mA2Oc7v_+iQj8-uuowyJJh2WTfbLGWQHUxiZdAmbLcg@mail.gmail.com>
+ <6b999085-4639-ec62-0026-e99d26c5d6f6@samba.org>
+ <CAM61p315WDPO0ZKzw2s4z7VPyJw5fV+9pgsesTmLjgo1uBT3tA@mail.gmail.com>
+In-Reply-To: <CAM61p315WDPO0ZKzw2s4z7VPyJw5fV+9pgsesTmLjgo1uBT3tA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -55,33 +60,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: David Mulder via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Mulder <dmulder@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I just joined Samba master (eg very close to 4.16) to a Windows 2019
-server at functional level 2008R2.
+On 3/29/22 7:46 PM, Prince Chaudhary wrote:
+> Hi,
+> Thanks for your reply, i have checked this issue on apple forums but 
+> there is no exact solution on it.
+> 
 
-I was getting replication failures until I sorted out my VM's time.
-
-Until I did that and restarted samba I got a lot of LOGON_FAILURE in
-the showrepl output and this curious message:
-
-FAST fast response is missing FX-FAST 
-
-I mention this not only to get the attention of those who know more,
-but also so that when others see this, that they might check their time
-sync until we can improve our error descriptions.
-
-Andrew Bartlett
+IIRC, Apple's domain join capabilities are a proprietary solution, so 
+probably no one on the Samba team is going to know much about it. Your 
+best bet will be opening a support ticket with Apple.
 
 -- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+*David Mulder*
+Labs Software Engineer, Samba
+SUSE
+1221 Valley Grove Way
+Pleasant Grove, UT 84062
 
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
-
+dmulder@suse.com
+http://www.suse.com
 
