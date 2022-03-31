@@ -2,37 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 582024EE44A
-	for <lists+samba-technical@lfdr.de>; Fri,  1 Apr 2022 00:41:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA6134EE48B
+	for <lists+samba-technical@lfdr.de>; Fri,  1 Apr 2022 01:13:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=oyQalBHVZz+V+cznQRdovT6WDo3AfuO89mnaF5IAxxU=; b=4zdlwugGHbogDPktRInf20Gr/4
-	RHpCHJ9DD+MOfjh8MTUo2nj5zkI668TBCb5JvlUwww8cLVYjxs7oYaJm4KRBhrzfrj4AFBtVo2WCQ
-	jfEmefZCH0eMmRO+Bt5Tx3M9qxOlmfrDtuxKURuTXAOapHB0mnx4qN8PMjWTuE2SNCUVcRf3R2K8i
-	eRwliJ/bGPDGquHdBnXAIe8kMeNv6JySu8jfRAHmNnA+gGQh9LnICJoDoFZ+dlqTYHJLdlFE7DtWY
-	5Wb8I4jn+j/QGYjDPntHA92pYz0EiWkqWzkHMnm91nkDBtdKq4iddz2Nn2AAy1emb1ffaytsdoTWZ
-	GUdUBtew==;
-Received: from ip6-localhost ([::1]:55004 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=KvJXahkHc6TiQC2hsGgCt3btDQ/pJ53LIo3yqoeBs3U=; b=GM7dRzCKmq13jhPF+qbQIVvGgd
+	U4dniiPO4hRMK67eKFszwmMfP5GYF5cVcD2PJ6QXxxt/kiv5tAXiCTT+/pVAovgX/zEiexcJmwqSt
+	bJ559UQ8cSR4t+q9veuFBjKkZLQHnV1wpKBrZ48G6TJhxd6LlOTvmCBrAXvqP3TeaeIu8gkfjhYie
+	735Y8rlwq8QS0LRZHg+d8BLrwtU3v3Ghqf2yySY2MEELw+EfXJsGu/fMnP4OC1f+XystoWxOWUz2U
+	tniBf+aTTQUSQ8pGM1nxTWrXyDUdPlK0movrCtIdj0QmOJm9ptr02mhDwI95W+6sMYpzteE7fdZG5
+	Vd/cPpZQ==;
+Received: from ip6-localhost ([::1]:55764 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1na3Sl-007H36-Jk; Thu, 31 Mar 2022 22:40:20 +0000
-Received: from [104.200.28.160] (port=45080 helo=dup2.asynchrono.us) 
- by hr1.samba.org with esmtp (Exim) id 1na3Sb-007H2x-Dj
- for samba-technical@lists.samba.org; Thu, 31 Mar 2022 22:40:11 +0000
-Received: from edfu.localnet (c-73-114-31-46.hsd1.ma.comcast.net
- [73.114.31.46])
- by dup2.asynchrono.us (Postfix) with ESMTPSA id B4A132617;
- Thu, 31 Mar 2022 22:40:05 +0000 (UTC)
-To: samba-technical <samba-technical@lists.samba.org>
-Subject: Re: Are there Python3 libraries for the net commands and etc?
-Date: Thu, 31 Mar 2022 18:40:05 -0400
-Message-ID: <2564963.hkbZ0PkbqX@edfu>
-In-Reply-To: <CACyXjPxfpMvWT8qBfwWw57y1N9fwYUJsvp7zGm05FOWrqqXRFw@mail.gmail.com>
-References: <CACyXjPw0iqTm=HE9Neb=J99wZ0+=GRdQ0+13+BAuDvvLvQeWaA@mail.gmail.com>
- <2421934.YKUYFuaPT4@edfu>
- <CACyXjPxfpMvWT8qBfwWw57y1N9fwYUJsvp7zGm05FOWrqqXRFw@mail.gmail.com>
+	id 1na3yH-007HSO-Cj; Thu, 31 Mar 2022 23:12:53 +0000
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b]:41864) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1na3yC-007HSF-1f
+ for samba-technical@lists.samba.org; Thu, 31 Mar 2022 23:12:50 +0000
+Received: by mail-ej1-x62b.google.com with SMTP id bh17so2327771ejb.8
+ for <samba-technical@lists.samba.org>; Thu, 31 Mar 2022 16:12:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=KvJXahkHc6TiQC2hsGgCt3btDQ/pJ53LIo3yqoeBs3U=;
+ b=OOq8p1M+aVdTpex338Ucle4wEDjRYo/wJhkJ9bG7oSbkMiRgZ7WQAAM9fAf8kEsnfn
+ ykI/3SUEdgct8NT/XeO7EoHOv87HP9Ss8hoyeZXRWfj1vRcPucXI1Fre768c0Ql3E5c6
+ +A56uY59k8s1zgm39smfttwRlD3ULTszTR6KJ+N9Vg5UBGBXQH3r65WMrNu0HrbJThfg
+ AuHd+HxI/2eHvQrNj1NbnqpQMWmW2WHUtgsEYv1Bf9X5xJv+4ztpBPx8nij6rPoUU/h9
+ z3XltRRev2O79XnxCfhEsreQaooAz8byqWMx6KRLgk/x0Oc9MJhr4wzWtheQR6Go5DQx
+ vtDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=KvJXahkHc6TiQC2hsGgCt3btDQ/pJ53LIo3yqoeBs3U=;
+ b=ewrlV6BxLl++z1QKMnyV9gQHQe3ziiN3A6rTOs9DnoKqY2pm9SOmSa8GDR0hOSUUw8
+ 3b25aOEfz4yDm7my7RNViiKgmicCDntoliKzzRFiu2hUA/LoY5UJm4tbSD3vBs8LVZ9E
+ 6xOhyvovna22McXnSBhYY6uUTh6ndZo0VDRStgHwVW626Tbf7CGXp7b8MVIwtFq9QX36
+ /O301FbhT/MYzXlroknMe4/QvOPUE1udLL6L4nGlzSaxxOdY9xK3RkNG6afRG0sD5As5
+ NXuZzALzKu2Esz+fT18FKnF2YWLJfuCKs9T4J6HP9KrCft1woN6vSGXiHmDYFP9HLoI/
+ QRlA==
+X-Gm-Message-State: AOAM533ws5QpvV9XWxj0NG9D3tudPV8ROK41gRiAA3rc8IT3m+BVX9L1
+ 78h73ZtbQpy+nlKunGKyfHjehD+9M+9zr+9bnXELc3E=
+X-Google-Smtp-Source: ABdhPJzzQuWHezKJ+vW3dlPUvowxqI9kqMpZwdSr2Z5186nhJQrsOPgKucEMwHIfUdGw67hN1vWbjzNR5mHx/lV/fA8=
+X-Received: by 2002:a17:907:1ca7:b0:6e0:346:ca6 with SMTP id
+ nb39-20020a1709071ca700b006e003460ca6mr6759744ejc.311.1648768367121; Thu, 31
+ Mar 2022 16:12:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+References: <CAAQNcwukKj0fXtbFW7A3nm4QOiVG-H4L7kHG30mGkyX_eJBz8A@mail.gmail.com>
+ <YiFgXtz5W26CZRbm@jeremy-acer>
+ <CAAQNcwtc1SbYNxRRf6_F50sg8cYgFc4bBjxaVFxsPP+JOdU=jA@mail.gmail.com>
+ <YiKZYnFjAm0fbMX2@jeremy-acer>
+In-Reply-To: <YiKZYnFjAm0fbMX2@jeremy-acer>
+Date: Thu, 31 Mar 2022 16:12:36 -0700
+Message-ID: <CAKywueRDRwg_eyVjFDfFZhxCwC00aAELMa432Z-PLHtWDtjkZA@mail.gmail.com>
+Subject: Re: [PATCHv2] cifs-utils: work around missing krb5_free_string in
+ Heimdal
+To: Jeremy Allison <jra@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -46,50 +74,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: John Mulligan via samba-technical <samba-technical@lists.samba.org>
-Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
-Cc: David Mulder <dmulder@samba.org>
+From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Shilovsky <piastryyy@gmail.com>
+Cc: atheik <atteh.mailbox@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thursday, March 31, 2022 4:02:32 PM EDT Richard Sharpe wrote:
-> On Thu, Mar 31, 2022 at 10:57 AM John Mulligan via samba-technical
-> 
-> <samba-technical@lists.samba.org> wrote:
-> > > We don't have bindings for these right now. It probably wouldn't be
-> > > difficult to add them though.
-> > 
-> > I'm interested in contributing patches for this. I've already looked at
-> > the
-> > code needed to be wrapped (lib/smbconf and source3/lib/smbconf). I've even
-> > started prototyping.  I've done C/Python APIs before, but it's been a
-> > while
-> > and I'm rusty, so I'll probably start by making a draft merge request for
-> > a
-> > subset of these API to get early feedback.
-> 
-> How were you planning on dealing with the 'net conf list output'? As a
-> list of dictionaries, one per section or a dictionary of dictionaries?
+Thanks for the patch! Merged.
 
-The bindings are a bit low level, so my plan is to map the `struct 
-smbconf_service` to a tuple, like so:
-(<name>, [(<param-name 0>, <param-value 0>), (<param-name 1>, <param-value 
-1>)...])
-That's a two-tuple of the share/section name, an then a list of two-tuples 
-each as a pair for the param name & param value.  It's very easy to go back 
-and forth between a dict and a list of key-value pairs.  Once the low level 
-bindings are more in shape we can also discuss if there should be a more 
-"pythonic" wrapper on top.  
+--
+Best regards,
+Pavel Shilovsky
 
-For example, I want to have a python function that implements the equivalent 
-of `net conf import` but I'd rather (re)implement the logic in python not C. 
-And if so, we'll need another py file in the samba tree for that. It could 
-contain other useful wrapper types and functions. We'll see what others think 
-when it comes time... :-)
-
-I just filed a draft MR with my prototype. Please feel free to provide feedback 
-on this attempt so far: https://gitlab.com/samba-team/samba/-/merge_requests/
-2469
-
-
+=D0=BF=D1=82, 4 =D0=BC=D0=B0=D1=80. 2022 =D0=B3. =D0=B2 14:58, Jeremy Allis=
+on via samba-technical
+<samba-technical@lists.samba.org>:
+>
+> On Sat, Mar 05, 2022 at 12:51:43AM +0200, atheik wrote:
+> >On 3/4/22, Jeremy Allison <jra@samba.org> wrote:
+> >> Does cifs-utils have a libreplace equivalent ?
+> >
+> >I have no idea about libreplace but cifs.upcall.c of
+> >cifs-utils already has a lot of these #ifdefs for
+> >compatibility between MIT and Heimdal KRB5.
+> >
+> >> Wouldn't it be easier to test for the existence of
+> >> krb5_free_string() and write a libreplace wrapper
+> >> function so krb5_free_string() can be called from
+> >> all code without #ifdefs in the main code ?
+> >
+> >This patch adds just another #ifdef to cifs.upcall.c
+> >so that cifs-utils builds against Heimdal again.
+> >
+> >I have attached a new patch that doesn't place the
+> >#ifdefs in the function body.
+>
+> That looks cleaner to me, thanks !
+>
 
