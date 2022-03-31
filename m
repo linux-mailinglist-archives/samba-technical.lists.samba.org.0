@@ -2,40 +2,37 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99F3A4EDEC6
-	for <lists+samba-technical@lfdr.de>; Thu, 31 Mar 2022 18:26:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF7494EDFF3
+	for <lists+samba-technical@lfdr.de>; Thu, 31 Mar 2022 19:57:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=aWzC6ZBrufG2v6Jgt4L+iq2caxddbG4FXhSMCCrRyfM=; b=WYMeyQ+ux7wPYwJpbqiX8drDw6
-	AxneInt7dB4hz1W+vDwc4tJ64A9vaS/jIqxd/sFRbfCbl9qcI0qEmy/gg7TiqwUYU9dnv5pZRgzHb
-	+DfgAeZDBMd+lfUFgDSLaIZyAy+ynvozRInDE97nUTmWIq8Fa1CilsgCZmtouVpN/RSAx8Mb4M0Op
-	PZvOpQjB58f5EPd5yHfMYhHANwwggfFM26LwFDnaM79ga1OfteS/bJxc89L/bcgF2Dgiym1lK/H6M
-	49X6XC2+PyTXTV9FSUD8SWjJpw6ZydbiACCM/dzgb7be8nlRTFYeiUrPlPaOV+jKTgxukv8MytF+H
-	phNCI99g==;
-Received: from ip6-localhost ([::1]:45436 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=zpc+puEcLQhgfVgETmtZsBJZqLV5cqGktObY9MyFkUg=; b=DEk47AnrVk14hpIoeWPzbq/SKD
+	6ZNg4yxnG1IhzB1IssbSnv5LHY5QVbYe/MhWfjiJlmXH4FA/3HeL+aDh03cmGoDGQo80szSfHg+BY
+	gklhtjmYNaGQnGf+aQWEh0bJjZooKNsA46M5gpmEpM+V3x/+Z5tKb7SLDv5GbrmLbGqZz2GLtxbaO
+	0r1lKc19DtKxR2pMBYqwo3X7tQxvx0KWciVHxAKxnWbZ37l8H3CR6IoKB0ia9SpWcuviBlxrToRd9
+	kK7BH4xqgUNtLU43p7pR84LLUxL78JWDCQo2s3Ohx4LjPz9Bz9VR2V0xZ7W1/D6yoj5XIgwsXW5Mh
+	uLpZmRzg==;
+Received: from ip6-localhost ([::1]:48304 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nZxby-007BIS-7n; Thu, 31 Mar 2022 16:25:26 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:55805) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nZxbp-007BIJ-Jt
- for samba-technical@lists.samba.org; Thu, 31 Mar 2022 16:25:21 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 4E8C140A4B
- for <samba-technical@lists.samba.org>; Thu, 31 Mar 2022 19:25:14 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id CCA9136F
- for <samba-technical@lists.samba.org>; Thu, 31 Mar 2022 19:21:27 +0300 (MSK)
-Message-ID: <d6c9f1d0-df3d-b75b-af5a-edef130c309f@msgid.tls.msk.ru>
-Date: Thu, 31 Mar 2022 19:25:12 +0300
+	id 1nZz1v-007CtI-Bx; Thu, 31 Mar 2022 17:56:19 +0000
+Received: from [104.200.28.160] (port=45078 helo=dup2.asynchrono.us) 
+ by hr1.samba.org with esmtp (Exim) id 1nZz1q-007Ct9-9k
+ for samba-technical@lists.samba.org; Thu, 31 Mar 2022 17:56:16 +0000
+Received: from edfu.localnet (c-73-114-31-46.hsd1.ma.comcast.net
+ [73.114.31.46])
+ by dup2.asynchrono.us (Postfix) with ESMTPSA id 5D46D2617;
+ Thu, 31 Mar 2022 17:56:10 +0000 (UTC)
+To: samba-technical@lists.samba.org
+Subject: Re: Are there Python3 libraries for the net commands and etc?
+Date: Thu, 31 Mar 2022 13:56:09 -0400
+Message-ID: <2421934.YKUYFuaPT4@edfu>
+In-Reply-To: <926eed4f-2c9b-ac62-a31a-e325d7c09006@samba.org>
+References: <CACyXjPw0iqTm=HE9Neb=J99wZ0+=GRdQ0+13+BAuDvvLvQeWaA@mail.gmail.com>
+ <CACyXjPwFhse8VtiuitVco-Q9UtpzUSwk3xxUz020rK7M=gtp4w@mail.gmail.com>
+ <926eed4f-2c9b-ac62-a31a-e325d7c09006@samba.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: en-US
-To: samba-technical <samba-technical@lists.samba.org>
-Subject: https://bugzilla.samba.org/show_bug.cgi?id=14583 : weak crypto is
- allowed
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -49,37 +46,59 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: John Mulligan via samba-technical <samba-technical@lists.samba.org>
+Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
+Cc: David Mulder <dmulder@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi!
+On Tuesday, March 29, 2022 3:20:53 PM EDT David Mulder via samba-technical 
+wrote:
+> On 3/28/22 1:44 PM, Richard Sharpe via samba-technical wrote:
+> > smb_mgmt_net_ads_join/smb_mgmt_net_ads_leave
+> 
+> These already have bindings. See the python module `samba.net_s3`.
+> 
+> > smb_mgmt_net_ads_status
+> 
+> This appears to just do an ldap search for the local host, to see info
+> about the join?
+> You could write something similar using the samba.samdb python module.
+> So,
+> ```
+> from samba.samdb import SamDB
+> from samba.auth import system_session
+> samdb = SamDB(url='ldap://some-server', session_info=system_session(),
+> credentials=creds, lp=lp)
+> samdb.search(...)
+> ```
+> The net ads status command searches for these attributes:
+>                  "objectClass",
+>                  "SamAccountName",
+>                  "userAccountControl",
+>                  "DnsHostName",
+>                  "ServicePrincipalName",
+>                  "userPrincipalName",
+>                  "unicodePwd",
+>                  "msDS-AdditionalDnsHostName",
+>                  "msDS-SupportedEncryptionTypes",
+>                  "nTSecurityDescriptor",
+>                  "objectSid"
+> With the filter: `"(samAccountName=%s$)" % machine_name`
+> 
+> > smb_mgmt_net_conf_list
+> > smb_mgmt_net_conf_setparm
+> 
+> We don't have bindings for these right now. It probably wouldn't be
+> difficult to add them though.
 
-I come across this too, quite some time, each
-time tying to find error my smb.conf file, even
-trying to tweak protocol settings.
+I'm interested in contributing patches for this. I've already looked at the 
+code needed to be wrapped (lib/smbconf and source3/lib/smbconf). I've even 
+started prototyping.  I've done C/Python APIs before, but it's been a while 
+and I'm rusty, so I'll probably start by making a draft merge request for a 
+subset of these API to get early feedback.
 
-I don't have bugzilla account (asked about it some days ago),
-so here it goes.
 
-How about this simple fix?
 
-Thanks,
 
-/mjt
-
-diff --git a/source3/utils/testparm.c b/source3/utils/testparm.c
-index 58ba46bc15f..4d419fd4805 100644
---- a/source3/utils/testparm.c
-+++ b/source3/utils/testparm.c
-@@ -875,7 +875,7 @@ static void do_per_share_checks(int s)
-         } else {
-                 weak_crypo_str = "disallowed";
-         }
--       fprintf(stderr, "Weak crypto is %s\n", weak_crypo_str);
-+       fprintf(stderr, "Weak crypto is %s by gnutls\n", weak_crypo_str);
-
-         if (skip_logic_checks == 0) {
-                 ret = do_global_checks();
 
