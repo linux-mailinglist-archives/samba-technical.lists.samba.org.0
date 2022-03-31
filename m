@@ -2,52 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 065404EE12C
-	for <lists+samba-technical@lfdr.de>; Thu, 31 Mar 2022 20:56:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33AE94EE25B
+	for <lists+samba-technical@lfdr.de>; Thu, 31 Mar 2022 22:09:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=r88D5DBkB+gla0PnO48iUTGogUJI5U9L4CQmwAHkr3Y=; b=fuZumMha4Pf6qIfYAjXOgZSwR/
-	PMBNKBOO4IB8Of/Ps+N96KhZXG3Yv/iqRs9+aeqHzz8mb1kzS60RLnMXlV87zGJSfJpCmJzMNFoLX
-	q9bpCFJB1mkUhNxGx6QYIZlwvCbZhUGK/E7j1FWK2OX+VuSjvRluXrcPNNKnx8Cu3P3wlsoKlfdM1
-	lMNMskDHtB7qAkMmacpdPhQzHzIscbKveDrk5vVqEODMBqzChVmpYEXhemXN+8Cc+dn3/uRf2ysR9
-	Jz8tvst+/3SXE8mxQfF756qOjrGdh4W+eM3PNgCXz1952ayxWwyQKRY2SQG5QL4CLXRjIfI3S9Xwm
-	JQpUcIFA==;
-Received: from ip6-localhost ([::1]:53492 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=1lVmG39N9YoePkdVXqUfuuY77Fze4sAui5IMHZuxd1c=; b=VjjLJZbfJAlCuKvR4QojjWfQxh
+	xJMZ6s2+0b4UOzSfLFD9WL9VpgIO6Rvkn7WSoQOhrFSwtfbjfF4ktE2Vi4gCXuyzzEp44KGNpATIb
+	hmrKLriPa6dch2NJdTovTw8h7J5skRoTjs4onuEGF/ot7agbHMKzsNc0n3Ix2tGI8S0gXoNdzW3Qr
+	HL3rIjgHjZGbpLpBbvCl8xRxIJupt9nRZvtB3hMufx44ShdpkukTa6uGE7pkygM4xGwnjrCnMOewS
+	SB7fL1u+nV0kIyTLqcZBdSzXLLpC2zNM2qHCQhWJ3QDLkLgMxikH3HjU4rw9kBoJI/otTqm4yKPAt
+	/uXEIXwg==;
+Received: from ip6-localhost ([::1]:54234 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nZzxw-007FKu-1R; Thu, 31 Mar 2022 18:56:16 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38066) 
+	id 1na15g-007G3p-OP; Thu, 31 Mar 2022 20:08:20 +0000
+Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636]:36355) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nZzxq-007FKl-5V
- for samba-technical@lists.samba.org; Thu, 31 Mar 2022 18:56:14 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=r88D5DBkB+gla0PnO48iUTGogUJI5U9L4CQmwAHkr3Y=; b=rSWRqaub9Cbx1fMNnNphRrJyS5
- 6LR7ST/JzHETnRbgvQCNRiiqgJbFHDh0s0P0D7IDeD1VYEf95+/8ChInEuohKTecfpltEGlT+qI9q
- RvHOvCBpvUy2ARcyCHDWbk/JCjGNOEPbCWFV9hIRA9c2uBng9i+dKlkYnNdQ3emJy6NVYgxoN7aoO
- pL340PV4iw/S/pfFgoSdf/hmos+Qi218zyPifBDdvuSR+9PpXfXYF6haJFbh+SUfYDtwLMYwp4SSR
- T0AUeoRL68qUxyUsNz0GfFM7SLNWrtQiqqRnkPkVd/orCaB3OCoA0fPK+KTFKhYZMU2tc2sCBan8O
- lDunj6NhxbXjNZXeI5ysKEDuEYsGdJmU0W2HCTXnT1pyZtnEejYUJw/Yf9+p3gykjtsSRbAdxgJTC
- xIHdOaBDeEVbvNuttbLohCtNk+SHczABcyvajMOLpRLiA5l91BmIBT6JR3/rfARMQw/FRnsx1o33U
- y1Ct0d7ew4sUYAi4beYAqbJS;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nZzxp-004dqI-6C
- for samba-technical@lists.samba.org; Thu, 31 Mar 2022 18:56:09 +0000
-Message-ID: <9417a531-1687-d052-b8cb-bf1be9b1cec1@samba.org>
-Date: Thu, 31 Mar 2022 12:56:09 -0600
+ (Exim) id 1na15b-007G3g-VP
+ for samba-technical@lists.samba.org; Thu, 31 Mar 2022 20:08:18 +0000
+Received: by mail-ej1-x636.google.com with SMTP id bi12so1611539ejb.3
+ for <samba-technical@lists.samba.org>; Thu, 31 Mar 2022 13:08:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=1lVmG39N9YoePkdVXqUfuuY77Fze4sAui5IMHZuxd1c=;
+ b=Jic2vCxAIFUYvM4k21ghtxzwDuR/5ZEpuwOKkIaXIg3/eyJhP/7QnLh456ou3qyuip
+ oLzNIx7oXe+QncOk2ReTdeeYC/tqB1yW4FNai8BLMmO5Upe8E9gyxfsZJUpsg26o1H/a
+ 2bcCt9rnni4+WCqAFi4WwLcosg5Opu51n1Wq0P0p9QaoF5yUwFv/GeBU9sPXpaI19+6D
+ nWQAboY1fy4HuojnyLyFUbgHvFlzPKO2QUb0Pu+zaaTJjX2VIQCQzsI99Efmtv10ke9L
+ K40FAevU85FLwDEG2EGj1RHixWvptxzzd4DYlympqPKAbV5PdLnSMdxupKGDVYDYAq9p
+ 8FMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=1lVmG39N9YoePkdVXqUfuuY77Fze4sAui5IMHZuxd1c=;
+ b=Tlc0HcMPIj6TG2kheZVWwcc4541qVlB/K7/1ORwImZTByHRZinFuQCbk55f+/D9pe/
+ NCjIxN912b8Fn0IOw34mwrwH6gqdf4iffKkWR6kL17X+U1Whzj8TRSE75MhrE+3slKBU
+ Aik9bteoQDKdotN/ZcVVvTkKygJde+WAR0G+mcZoOjX8CGCa2jRvyFEaQFHNQMiRW7iW
+ hj1X9jTWHM6ncdJn5ncUOwMtwr14IfLGq4bkbCeE3ovYadyyt1ixuC3xQbycT6POHuA8
+ E+TRyBjyxSj+ebvtWvMAQyfllgHWMMzb5x/WF6hpo0NYCBjcbumHkJdI/8DGYqBOw6s3
+ TAnw==
+X-Gm-Message-State: AOAM532Ai9upZP52jyyg0VccMm/qxfAtMvODDWVL4VYmx61ZpZwxu6VS
+ s1kyZZItNEbUJrE6p/A7o/kcYpWEyWweNNkm3Pk=
+X-Google-Smtp-Source: ABdhPJxNvhoeuGSAYywYp7LWUxWTB75recx3Rc+6jmuN78uYVRcUvU3jL9ncp0ykknF5AitnJLl5OwIkbPTIiaJ0Op8=
+X-Received: by 2002:a17:906:99c5:b0:6df:8215:4ccd with SMTP id
+ s5-20020a17090699c500b006df82154ccdmr6434894ejn.684.1648757294746; Thu, 31
+ Mar 2022 13:08:14 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: Are there Python3 libraries for the net commands and etc?
-Content-Language: en-US
-To: samba-technical@lists.samba.org
 References: <CACyXjPw0iqTm=HE9Neb=J99wZ0+=GRdQ0+13+BAuDvvLvQeWaA@mail.gmail.com>
  <CACyXjPwFhse8VtiuitVco-Q9UtpzUSwk3xxUz020rK7M=gtp4w@mail.gmail.com>
  <926eed4f-2c9b-ac62-a31a-e325d7c09006@samba.org> <2421934.YKUYFuaPT4@edfu>
 In-Reply-To: <2421934.YKUYFuaPT4@edfu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Date: Thu, 31 Mar 2022 13:02:32 -0700
+Message-ID: <CACyXjPxfpMvWT8qBfwWw57y1N9fwYUJsvp7zGm05FOWrqqXRFw@mail.gmail.com>
+Subject: Re: Are there Python3 libraries for the net commands and etc?
+To: John Mulligan <phlogistonjohn@asynchrono.us>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,29 +72,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: David Mulder via samba-technical <samba-technical@lists.samba.org>
-Reply-To: David Mulder <dmulder@samba.org>
+From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
+Cc: David Mulder <dmulder@samba.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 3/31/22 11:56 AM, John Mulligan via samba-technical wrote:
-> 
-> I'm interested in contributing patches for this. I've already looked at the
-> code needed to be wrapped (lib/smbconf and source3/lib/smbconf). I've even
-> started prototyping.  I've done C/Python APIs before, but it's been a while
-> and I'm rusty, so I'll probably start by making a draft merge request for a
+On Thu, Mar 31, 2022 at 10:57 AM John Mulligan via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> > We don't have bindings for these right now. It probably wouldn't be
+> > difficult to add them though.
+>
+> I'm interested in contributing patches for this. I've already looked at t=
+he
+> code needed to be wrapped (lib/smbconf and source3/lib/smbconf). I've eve=
+n
+> started prototyping.  I've done C/Python APIs before, but it's been a whi=
+le
+> and I'm rusty, so I'll probably start by making a draft merge request for=
+ a
 > subset of these API to get early feedback.
-> 
 
-Ping me when you have a draft ready, and I'll be happy to review them.
+How were you planning on dealing with the 'net conf list output'? As a
+list of dictionaries, one per section or a dictionary of dictionaries?
 
--- 
-*David Mulder*
-Labs Software Engineer, Samba
-SUSE
-1221 Valley Grove Way
-Pleasant Grove, UT 84062
-
-dmulder@suse.com
-http://www.suse.com
+--=20
+Regards,
+Richard Sharpe
+(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
+=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
+=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
 
