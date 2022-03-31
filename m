@@ -2,41 +2,38 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39BE54ED52E
-	for <lists+samba-technical@lfdr.de>; Thu, 31 Mar 2022 10:05:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99F3A4EDEC6
+	for <lists+samba-technical@lfdr.de>; Thu, 31 Mar 2022 18:26:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=hrxrRIqcPVNujl9iukTCfQDHS7SND0ESPIl0D+gpqX4=; b=6Th17raDRomwnRUizdI1NS1eBL
-	rJyXa/kG0rZylxqUQbEv37IID0vDO7kJjL7HGPMq+q0k8BTBOAN/w6FdJwFaxjuYkPYJt31agU5d+
-	avtwXtmSI6miDmuPYRWvPqptZho5IFfvcO/suzExAWW0DV/AcveaoLcmYUlkUaMq0gE/fd8yl2rKG
-	Lohg8o5Tb1SRWRqCTALZCnjq7DIi7bdHgQZ0/lzzK3d0NKJtP9uRSWGYYCa2D3smeov2+ADt2TwJU
-	rrhkMV8n1FQ11SkjZmncUlW12hOak90gk0jYTfMVjUW+6pvOvq9KE1TTd0cT/KvghmqLfWBerQoLS
-	Fr8oV2dA==;
-Received: from ip6-localhost ([::1]:25874 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=aWzC6ZBrufG2v6Jgt4L+iq2caxddbG4FXhSMCCrRyfM=; b=WYMeyQ+ux7wPYwJpbqiX8drDw6
+	AxneInt7dB4hz1W+vDwc4tJ64A9vaS/jIqxd/sFRbfCbl9qcI0qEmy/gg7TiqwUYU9dnv5pZRgzHb
+	+DfgAeZDBMd+lfUFgDSLaIZyAy+ynvozRInDE97nUTmWIq8Fa1CilsgCZmtouVpN/RSAx8Mb4M0Op
+	PZvOpQjB58f5EPd5yHfMYhHANwwggfFM26LwFDnaM79ga1OfteS/bJxc89L/bcgF2Dgiym1lK/H6M
+	49X6XC2+PyTXTV9FSUD8SWjJpw6ZydbiACCM/dzgb7be8nlRTFYeiUrPlPaOV+jKTgxukv8MytF+H
+	phNCI99g==;
+Received: from ip6-localhost ([::1]:45436 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nZpoP-0071No-JU; Thu, 31 Mar 2022 08:05:45 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:44121) 
+	id 1nZxby-007BIS-7n; Thu, 31 Mar 2022 16:25:26 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:55805) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nZpoK-0071Nf-1I
- for samba-technical@lists.samba.org; Thu, 31 Mar 2022 08:05:42 +0000
+ (Exim) id 1nZxbp-007BIJ-Jt
+ for samba-technical@lists.samba.org; Thu, 31 Mar 2022 16:25:21 +0000
 Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 4F1DF40A50;
- Thu, 31 Mar 2022 11:05:37 +0300 (MSK)
+ by isrv.corpit.ru (Postfix) with ESMTP id 4E8C140A4B
+ for <samba-technical@lists.samba.org>; Thu, 31 Mar 2022 19:25:14 +0300 (MSK)
 Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 799BC2A;
- Thu, 31 Mar 2022 11:01:51 +0300 (MSK)
-Message-ID: <6955fdd8-c58f-dada-c257-a97dd6f14558@msgid.tls.msk.ru>
-Date: Thu, 31 Mar 2022 11:05:36 +0300
+ by tsrv.corpit.ru (Postfix) with ESMTP id CCA9136F
+ for <samba-technical@lists.samba.org>; Thu, 31 Mar 2022 19:21:27 +0300 (MSK)
+Message-ID: <d6c9f1d0-df3d-b75b-af5a-edef130c309f@msgid.tls.msk.ru>
+Date: Thu, 31 Mar 2022 19:25:12 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.7.0
-Subject: Re: Offline question - waf install recompiles another 4k files after
- waf build built its own 4k?
 Content-Language: en-US
-To: Kees van Vloten <keesvanvloten@gmail.com>,
- Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-References: <03946334-dac7-96b0-405c-b24c4f2acb3b@gmail.com>
-In-Reply-To: <03946334-dac7-96b0-405c-b24c4f2acb3b@gmail.com>
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: https://bugzilla.samba.org/show_bug.cgi?id=14583 : weak crypto is
+ allowed
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -57,38 +54,32 @@ Reply-To: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-31.03.2022 10:51, Kees van Vloten via samba-technical wrote:
-> Hi Stefan,
-> 
-> I am following the discussion on samba-technical around building packages for Debian, which you take part in as Samba team-member.
-> 
-> I am quite suprised that no one has pointed a Louis' packaging work so far. He is doing exactly the same a what Michael wants to achieve, or am I 
-> completely mistaken?
+Hi!
 
-We're working with him since the beginning of my involvement.
-Actually I started this with a hope to help a bit - if maybe
-he has not enough time or something small is missing ;)
+I come across this too, quite some time, each
+time tying to find error my smb.conf file, even
+trying to tweak protocol settings.
 
-Unfortunately it turned out he has very little expirence, ditto
-for the previous maintainer of the samba package in Debian.
-And, as also has been discovered, the debian packaging instructions
-needed much more love than they received in a long time (like this
-PYTHONHASHSEED thing for example, - the prob has been in debian for
-years).
+I don't have bugzilla account (asked about it some days ago),
+so here it goes.
 
-Louis did it as long as it Just Worked (after adjusting version inf).
-But with 4.16, nothing worked anymore :)  So here we are.
+How about this simple fix?
 
-Well, the package is almost ready, what's left is just small issues
-here and there.  I'm waiting for the ongoing python3 transition in
-Debian to settle down before uploading the new samba to debian, and
-meanwhile discover various other fun issues to solve :)
-
-And Louis knows what's going on. He just can't help because the
-current situation requires far better overall expirience than he
-has.
-
-Thanks!
+Thanks,
 
 /mjt
+
+diff --git a/source3/utils/testparm.c b/source3/utils/testparm.c
+index 58ba46bc15f..4d419fd4805 100644
+--- a/source3/utils/testparm.c
++++ b/source3/utils/testparm.c
+@@ -875,7 +875,7 @@ static void do_per_share_checks(int s)
+         } else {
+                 weak_crypo_str = "disallowed";
+         }
+-       fprintf(stderr, "Weak crypto is %s\n", weak_crypo_str);
++       fprintf(stderr, "Weak crypto is %s by gnutls\n", weak_crypo_str);
+
+         if (skip_logic_checks == 0) {
+                 ret = do_global_checks();
 
