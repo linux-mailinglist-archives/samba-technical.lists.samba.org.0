@@ -2,60 +2,38 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 715C24EFCDF
-	for <lists+samba-technical@lfdr.de>; Sat,  2 Apr 2022 00:45:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC3E54F07A5
+	for <lists+samba-technical@lfdr.de>; Sun,  3 Apr 2022 06:54:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Ibv7hjPooUg+cfvEtghGL5hSRPahsD9zFXXRzSZ+XoY=; b=UYigYrQ96kTDeK6D4ipyz3+vQY
-	WvqLxBgDLKqnrqVm4OniVSG/6U4x67ICFSlNE1lJIZwzFjTN6r3pNSrS+7q4lE2iHbZMPrGRw9c+1
-	0CaYc8+71RLqE1azHM2eQyv4E+NXA/e8D8XbfHh5mvQRTzSNT3tQCztphxs6ljytVkD+T6u4h8XZR
-	iyRmLpEGhzP/+sikwtcBUOTb+LlhIrh1YfRlnPXG70FHWUh89rhUZxsuX3STtOyksjNtQKlxih7q+
-	XAokqVCzlRpWCxCF/lUO/LEEHHjwpLL2zcjK9rocINm/MA/Ml4pZWD1+WSb+JGHQQFTNLTyBxZXPT
-	+pHiQoZg==;
-Received: from ip6-localhost ([::1]:43242 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=z5VBAdHImvj9SznOTB0zeoWG4tIOMoMNOvUby1YI8iY=; b=aci1G4lepupGQxMRV7+elLl6mk
+	d/Rvb6WojG98cXWAuSA4i7FGPmyclTlNcDPMy4RQobRltVKmUP620D03a4WZYENd0NI6/CK5v4Wq9
+	fPZ9CFB93PZMdpT1+//laUVdljcnBMX+H8JcOVTt+SlPdrt6NSXqTvmtqRvOPDyUn81+V7dIUaDeh
+	v6ugpAnCNrOtKYTnjuyaOPv8M8Sh/4tppvgW6YIIoK2+Z+exifJYIZV5QxgF5tXqd8XSoj1CHdNzL
+	BXIDViwyQLk0auoKHsbQcVnQkUZ4rM+4WUyIfYO+a74nyrioz0wmDZzwGRb4VaFbYUuUDBLZ14/5N
+	QEXrq3gA==;
+Received: from ip6-localhost ([::1]:23952 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1naQ0k-009MkR-7R; Fri, 01 Apr 2022 22:44:54 +0000
-Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135]:47080) 
+	id 1nasEb-009eI3-9I; Sun, 03 Apr 2022 04:53:05 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:42717) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1naQ0e-009MkI-Gm
- for samba-technical@lists.samba.org; Fri, 01 Apr 2022 22:44:50 +0000
-Received: by mail-lf1-x135.google.com with SMTP id e16so7356096lfc.13
- for <samba-technical@lists.samba.org>; Fri, 01 Apr 2022 15:44:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Ibv7hjPooUg+cfvEtghGL5hSRPahsD9zFXXRzSZ+XoY=;
- b=PeGRrVIRDfksKrlCQFDeVeOo5EG4l/ke4QBxquqnC2URzOjxADt3EAKpBASnA24wWH
- 4lujpUtOex3q36ISwLA7GqkE9FSVvTW6A72DIzt0EbRFJEUFialbBrrcyC/jVoNYqxon
- z66CEDQU8NfACq9o3OFhQ+j4JR0pjpSyK08adU82V7TaudcbmUfil4eXkuP/y6qfJff9
- zv288j4MbHmoHxzhBzM8Q1O8d4nIOBQ/Bh4kK0j+CBdDjgxvNy6/jWUq+VvHmy0PmI4n
- 3xcLw4/LGxekXH/3Y8NEBiZcjFFyCof+wOguwC2XdcyC24srKC6Iz3IzZYPVRApWaq7K
- ZnUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Ibv7hjPooUg+cfvEtghGL5hSRPahsD9zFXXRzSZ+XoY=;
- b=mAa5w47eBvJWcIkNdpeLHuC/uhq951twJbYCGaSq/q868mPUb5WkrEC4vFywBVKy2J
- SaavfgPPZOr3tXIcBpQtIgi9Rf7HwEp7dNLbrAcyEZUKyjvotQUv1BSQs5+k5scKlYx1
- fFCXRUzpPbDmb1wwNhGzYd2EUAkFpK4rFZkOAWTmd2I1kqd2D0zG0eyeHFav9Rwpd6PQ
- nDGOonWK/cKA/6sHpsmaSwOWSt+4qwnMQIXHQorRBWisY+iLCY4VdintxKAvX4XrlkEg
- oo8qOr52Eqzz7J+JETsFIefysNx6GOk2vboa13NXhDWuUKklhtVf6c6thlELRe5+dusU
- pugA==
-X-Gm-Message-State: AOAM533W09EVP/M1a7r21LJaMHsaYtJaN7qSuY7STS7VF74IpndOCxFk
- ILEydKk9+Il/PP2mqXAF8ahHeBiM9k36P7rWCHI=
-X-Google-Smtp-Source: ABdhPJxrs5fSlNWnALwwUXR0mZMrAGAzRjdfOA/LjAHNqmMD9l69PAjCiqYAQtSdEHps123SkZCho3qgOEMHwfgdG9E=
-X-Received: by 2002:ac2:5444:0:b0:44a:846e:ad2b with SMTP id
- d4-20020ac25444000000b0044a846ead2bmr15448715lfn.545.1648853087123; Fri, 01
- Apr 2022 15:44:47 -0700 (PDT)
+ (Exim) id 1nasES-009eHu-4I
+ for samba-technical@lists.samba.org; Sun, 03 Apr 2022 04:52:59 +0000
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id DDF0340124
+ for <samba-technical@lists.samba.org>; Sun,  3 Apr 2022 07:52:50 +0300 (MSK)
+Received: from tls.msk.ru (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with SMTP id 7036930C;
+ Sun,  3 Apr 2022 07:49:05 +0300 (MSK)
+Received: (nullmailer pid 1824869 invoked by uid 1000);
+ Sun, 03 Apr 2022 04:52:50 -0000
+To: samba-technical@lists.samba.org
+Subject: tons of uselib_local warnings in waf
+Date: Sun,  3 Apr 2022 07:52:29 +0300
+Message-Id: <20220403045229.1824798-1-mjt@msgid.tls.msk.ru>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-References: <20220331215541.883746-1-jakobkoschel@gmail.com>
-In-Reply-To: <20220331215541.883746-1-jakobkoschel@gmail.com>
-Date: Fri, 1 Apr 2022 17:44:36 -0500
-Message-ID: <CAH2r5mv-GCwR74QEv4WncTN6KMHceCT+YcLX7SnmuZwO67DuFQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] cifs: replace unnecessary use of list iterator
- variable with head
-To: Jakob Koschel <jakobkoschel@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,83 +47,104 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, "Bos, H.J." <h.j.bos@vu.nl>,
- Brian Johannesmeyer <bjohannesmeyer@gmail.com>,
- Steve French <sfrench@samba.org>, Cristiano Giuffrida <c.giuffrida@vu.nl>,
- Mike Rapoport <rppt@kernel.org>
+From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+Cc: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-It looks like this no longer applies cleanly.   Can you recheck
-fs/cifs/smb2pdu.c (function smb2_reconnect_server) and see if it
-applies now that it has changed e.g.
+when doing samba configure/build with waf verbosity
+level >= 1 (to see what it is doing), there's a *ton*
+(about 2000) of warnings like this:
 
+  compat: "uselib_local" is deprecated, replace by "use"
 
-/* allocate a dummy tcon struct used for reconnect */
-tcon = kzalloc(sizeof(struct cifs_tcon), GFP_KERNEL);
-if (!tcon) {
-resched = true;
-list_for_each_entry_safe(ses, ses2, &tmp_ses_list, rlist) {
-list_del_init(&ses->rlist);
-cifs_put_smb_ses(ses);
-}
-goto done;
-}
+apparently this comes from buildtools/wafsamba/samba_deps.py
+(and samba_conftests.py), - that's where uselib_local
+is used  (the warning itself is apparently in
+buildtools/wafsamba/samba_waf18.py).
 
-You had this:
+I tried to dig there, but weren't able to figure out how
+it all works.  The following change does eliminate the
+warning, but I'm not sure the resulting thing actually
+does what it is supposed to do.  For one, there's no
+function like "apply_use()" in samba_waf18.py which does
+something similar to "apply_uselib_local()", - I don't
+see where this "use" attribute is processed.
 
---- fs/cifs/smb2pdu.c
-+++ fs/cifs/smb2pdu.c
-@@ -3858,7 +3858,7 @@ void smb2_reconnect_server(struct work_struct *work)
-  tcon = kzalloc(sizeof(struct cifs_tcon), GFP_KERNEL);
-  if (!tcon) {
-  resched = true;
-- list_del_init(&ses->rlist);
-+ list_del_init(&pserver->smb_ses_list);
-  cifs_put_smb_ses(ses);
-  goto done;
-  }
+What would be the right fix for this?
 
-On Fri, Apr 1, 2022 at 2:23 AM Jakob Koschel <jakobkoschel@gmail.com> wrote:
->
-> When list_for_each_entry() completes the iteration over the whole list
-> without breaking the loop, the iterator variable will *always* be a
-> bogus pointer computed based on the head element.
->
-> To avoid type confusion use the actual list head directly instead of
-> the last iterator value.
->
-> Signed-off-by: Jakob Koschel <jakobkoschel@gmail.com>
-> ---
->  fs/cifs/smb2pdu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
-> index 7e7909b1ae11..4ac86b77a7c9 100644
-> --- a/fs/cifs/smb2pdu.c
-> +++ b/fs/cifs/smb2pdu.c
-> @@ -3858,7 +3858,7 @@ void smb2_reconnect_server(struct work_struct *work)
->         tcon = kzalloc(sizeof(struct cifs_tcon), GFP_KERNEL);
->         if (!tcon) {
->                 resched = true;
-> -               list_del_init(&ses->rlist);
-> +               list_del_init(&pserver->smb_ses_list);
->                 cifs_put_smb_ses(ses);
->                 goto done;
->         }
->
-> base-commit: f82da161ea75dc4db21b2499e4b1facd36dab275
-> --
-> 2.25.1
->
+Also, where to look for some basic docs about waf
+internals?
 
+Thank you!
 
--- 
-Thanks,
+/mjt
 
-Steve
+diff --git a/buildtools/wafsamba/samba_conftests.py b/buildtools/wafsamba/samba_conftests.py
+index ef632ba9033..59b1258c7de 100644
+--- a/buildtools/wafsamba/samba_conftests.py
++++ b/buildtools/wafsamba/samba_conftests.py
+@@ -315,7 +315,7 @@ def CHECK_LIBRARY_SUPPORT(conf, rpath=False, version_script=False, msg=None):
+     o = bld(features='c cprogram',
+             source='main.c',
+             target='prog1',
+-            uselib_local='lib1')
++            use='lib1')
+ 
+     if rpath:
+         o.rpath=os.path.join(bdir, 'default/libdir')
+diff --git a/buildtools/wafsamba/samba_deps.py b/buildtools/wafsamba/samba_deps.py
+index 9c922f7e036..cf59827f7ba 100644
+--- a/buildtools/wafsamba/samba_deps.py
++++ b/buildtools/wafsamba/samba_deps.py
+@@ -79,7 +79,7 @@ def build_dependencies(self):
+ 
+     if self.samba_type in ['LIBRARY', 'PLUGIN', 'BINARY', 'PYTHON']:
+         self.uselib        = list(self.final_syslibs)
+-        self.uselib_local  = list(self.final_libs)
++        self.use  = list(self.final_libs)
+         self.add_objects   = list(self.final_objects)
+ 
+         # extra link flags from pkg_config
+@@ -98,8 +98,8 @@ def build_dependencies(self):
+             for f in self.env.undefined_ignore_ldflags:
+                 self.ldflags.append(f)
+ 
+-        debug('deps: computed dependencies for target %s: uselib=%s uselib_local=%s add_objects=%s',
+-              self.sname, self.uselib, self.uselib_local, self.add_objects)
++        debug('deps: computed dependencies for target %s: uselib=%s use=%s add_objects=%s',
++              self.sname, self.uselib, self.use, self.add_objects)
+ 
+     if self.samba_type in ['SUBSYSTEM', 'BUILTIN']:
+         # this is needed for the cflags of libs that come from pkg_config
+@@ -331,7 +331,7 @@ def check_group_ordering(bld, tgt_list):
+ 
+     ret = True
+     for t in tgt_list:
+-        tdeps = getattr(t, 'add_objects', []) + getattr(t, 'uselib_local', [])
++        tdeps = getattr(t, 'add_objects', []) + getattr(t, 'use', [])
+         for d in tdeps:
+             t2 = bld.get_tgen_by_name(d)
+             if t2 is None:
+@@ -355,8 +355,8 @@ def show_final_deps(bld, tgt_list):
+     for t in tgt_list:
+         if not targets[t.sname] in ['LIBRARY', 'PLUGIN', 'BINARY', 'PYTHON', 'SUBSYSTEM', 'BUILTIN']:
+             continue
+-        debug('deps: final dependencies for target %s: uselib=%s uselib_local=%s add_objects=%s',
+-              t.sname, t.uselib, getattr(t, 'uselib_local', []), getattr(t, 'add_objects', []))
++        debug('deps: final dependencies for target %s: uselib=%s use=%s add_objects=%s',
++              t.sname, t.uselib, getattr(t, 'use', []), getattr(t, 'add_objects', []))
+ 
+ 
+ def add_samba_attributes(bld, tgt_list):
+@@ -1038,7 +1038,7 @@ savedeps_version = 3
+ savedeps_inputs  = ['samba_deps', 'samba_includes', 'local_include', 'local_include_first', 'samba_cflags',
+                     'source', 'grouping_library', 'samba_ldflags', 'allow_undefined_symbols',
+                     'use_global_deps', 'global_include' ]
+-savedeps_outputs = ['uselib', 'uselib_local', 'add_objects', 'includes',
++savedeps_outputs = ['uselib', 'use', 'add_objects', 'includes',
+                     'cflags', 'ldflags', 'samba_deps_extended', 'final_libs']
+ savedeps_outenv  = ['INC_PATHS']
+ savedeps_envvars = ['NONSHARED_BINARIES', 'GLOBAL_DEPENDENCIES', 'EXTRA_CFLAGS', 'EXTRA_LDFLAGS', 'EXTRA_INCLUDES' ]
 
