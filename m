@@ -2,38 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC3E54F07A5
-	for <lists+samba-technical@lfdr.de>; Sun,  3 Apr 2022 06:54:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B27A4F11C1
+	for <lists+samba-technical@lfdr.de>; Mon,  4 Apr 2022 11:13:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=z5VBAdHImvj9SznOTB0zeoWG4tIOMoMNOvUby1YI8iY=; b=aci1G4lepupGQxMRV7+elLl6mk
-	d/Rvb6WojG98cXWAuSA4i7FGPmyclTlNcDPMy4RQobRltVKmUP620D03a4WZYENd0NI6/CK5v4Wq9
-	fPZ9CFB93PZMdpT1+//laUVdljcnBMX+H8JcOVTt+SlPdrt6NSXqTvmtqRvOPDyUn81+V7dIUaDeh
-	v6ugpAnCNrOtKYTnjuyaOPv8M8Sh/4tppvgW6YIIoK2+Z+exifJYIZV5QxgF5tXqd8XSoj1CHdNzL
-	BXIDViwyQLk0auoKHsbQcVnQkUZ4rM+4WUyIfYO+a74nyrioz0wmDZzwGRb4VaFbYUuUDBLZ14/5N
-	QEXrq3gA==;
-Received: from ip6-localhost ([::1]:23952 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=CYd71ljJP417W+wO1dYywMELH2IPCk0zF4zds6dwnf0=; b=zolGW7OiuSaaI/6SKOLRZoEU2C
+	1IPquV60jSxTxZpKHxA4PwV/zh4brStkzwl1Z0Yrxo/9OEK6P1lD5neZDzGTBWOwyCsJnxNhwA5tC
+	Lcr/nVxxBEszL9mmwXt0eZauso08nxyEyAsrMT24rhrJUmKbM2YLoOkBJ04n9ODAptWDelV72rTPB
+	gUDteZdN74S6cK7cZcP7//J86Kxvj4dp2cvbnpxFmcbfRru0i9ewuOxSDd84IgiDtKVIOgu1ATTdR
+	sKG+IP3pLpWQLxKd0iV7Z/Vu9WLbc5quOQgoHE5HNMW0/4wJcAyBRWEd56fxLTCnEMDAgD/n3BkkC
+	Bu7qI39w==;
+Received: from ip6-localhost ([::1]:30966 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nasEb-009eI3-9I; Sun, 03 Apr 2022 04:53:05 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:42717) 
+	id 1nbIlR-009lQl-G5; Mon, 04 Apr 2022 09:12:45 +0000
+Received: from mailhopper2.bazuin.nl ([92.66.229.69]:57496) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nasES-009eHu-4I
- for samba-technical@lists.samba.org; Sun, 03 Apr 2022 04:52:59 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id DDF0340124
- for <samba-technical@lists.samba.org>; Sun,  3 Apr 2022 07:52:50 +0300 (MSK)
-Received: from tls.msk.ru (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with SMTP id 7036930C;
- Sun,  3 Apr 2022 07:49:05 +0300 (MSK)
-Received: (nullmailer pid 1824869 invoked by uid 1000);
- Sun, 03 Apr 2022 04:52:50 -0000
-To: samba-technical@lists.samba.org
-Subject: tons of uselib_local warnings in waf
-Date: Sun,  3 Apr 2022 07:52:29 +0300
-Message-Id: <20220403045229.1824798-1-mjt@msgid.tls.msk.ru>
-X-Mailer: git-send-email 2.30.2
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ (Exim) id 1nbIlI-009lQb-NG
+ for samba-technical@lists.samba.org; Mon, 04 Apr 2022 09:12:39 +0000
+X-Bazuin-en-Partners-MailScanner-Watermark: 1649668344.96547@9clIHopU5lfkcxDnWZqmZA
+X-Bazuin-en-Partners-MailScanner-From: belle@bazuin.nl
+X-Bazuin-en-Partners-MailScanner: Found to be clean
+X-Bazuin-en-Partners-MailScanner-ID: A5CEC122734.A85A3
+X-Bazuin-en-Partners-MailScanner-Information: Please contact Bazuin en
+ Partners for more information
+Received: from ms249-lin-003.rotterdam.bazuin.nl
+ (ms249-lin-003.rotterdam.bazuin.nl [192.168.249.243])
+ by mailhopper2.bazuin.nl (Postfix) with ESMTP id A5CEC122734;
+ Mon,  4 Apr 2022 11:12:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=bazuin.nl;
+ s=mail20220103; t=1649063544;
+ bh=CYd71ljJP417W+wO1dYywMELH2IPCk0zF4zds6dwnf0=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=1HEphdaWARYsJLCXZDkZNVs4dEI08NjPAGSSqIP4KzWxvX+3sTnKswvgWtEdkj/Gj
+ uVuAB42ZHpnBWWnFoiGU8DCDOpHjRzhgc19hy1/nKYkOzIW4MqUz2WFcOPSDwDuMd3
+ /ZQZri0EAsKau59AWg9R+2loaOfbPQxPbK/lhELw61g8l3s2fPwcwOdm0Dov5vG7ei
+ Y445HiA53gKFPQAVSL1HP2d1LTySVlFcqGHPRaS1B0tRbT/z8SWfYk9sCjSBPC5KrM
+ rl7pVpURICvKHgWXB2vZnRtAG1EOKmkcES31ja9himCVhYGvS8vreE4es7f9XZn+5d
+ FUuXzeysqzCZQ==
+Received: from ms249-lin-003.rotterdam.bazuin.nl (localhost [127.0.0.1])
+ by ms249-lin-003.rotterdam.bazuin.nl (Postfix) with SMTP id 7744018C2444;
+ Mon,  4 Apr 2022 11:12:30 +0200 (CEST)
+Subject: RE: Offline question - waf install recompiles another 4k files after
+ waf build built its own 4k?
+To: =?windows-1252?Q?Kees_van_Vloten?= <keesvanvloten@gmail.com>
+Date: Mon, 4 Apr 2022 11:12:30 +0200
+Mime-Version: 1.0
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <03946334-dac7-96b0-405c-b24c4f2acb3b@gmail.com>
+References: <03946334-dac7-96b0-405c-b24c4f2acb3b@gmail.com>
+X-Priority: 3 (Normal)
+X-Mailer: Zarafa 6.30.19-25148
+Thread-Index: AdhIBBuUZoexbnyiRoeeZZmndYAp1A==
+Message-Id: <vmime.624ab67e.2c4b.6323897232149b5e@ms249-lin-003.rotterdam.bazuin.nl>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,104 +68,56 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
-Cc: Michael Tokarev <mjt@tls.msk.ru>
+From: "L.P.H. van Belle via samba-technical" <samba-technical@lists.samba.org>
+Reply-To: "=?windows-1252?Q?L.P.H._van_Belle?=" <belle@bazuin.nl>
+Cc: "=?windows-1252?Q?samba-technical=40lists.samba.org?="
+ <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-when doing samba configure/build with waf verbosity
-level >= 1 (to see what it is doing), there's a *ton*
-(about 2000) of warnings like this:
+Hai Kees,=20
 
-  compat: "uselib_local" is deprecated, replace by "use"
+On 4.16.. And why the delay, well.=20
+I'm was hitting exact same problems as Michael.=20
+Current part is one i could not figure out and he is going strong.=20
+Love what is going on so far, also, i had a week off, and im behind
+so im reading all messages currently.=20
 
-apparently this comes from buildtools/wafsamba/samba_deps.py
-(and samba_conftests.py), - that's where uselib_local
-is used  (the warning itself is apparently in
-buildtools/wafsamba/samba_waf18.py).
+Im also soon testing again here and where i can, i chip in.=20
+First catch up on my regular work.=20
 
-I tried to dig there, but weren't able to figure out how
-it all works.  The following change does eliminate the
-warning, but I'm not sure the resulting thing actually
-does what it is supposed to do.  For one, there's no
-function like "apply_use()" in samba_waf18.py which does
-something similar to "apply_uselib_local()", - I don't
-see where this "use" attribute is processed.
+Greetz,=20
 
-What would be the right fix for this?
+Louis
 
-Also, where to look for some basic docs about waf
-internals?
 
-Thank you!
 
-/mjt
+> -----Oorspronkelijk bericht-----
+> Van: samba-technical=20
+> [mailto:samba-technical-bounces@lists.samba.org] Namens Kees=20
+> van Vloten via samba-technical
+> Verzonden: donderdag 31 maart 2022 9:52
+> Aan: Stefan Metzmacher via samba-technical
+> Onderwerp: Offline question - waf install recompiles another=20
+> 4k files after waf build built its own 4k=3F
+>=20
+> Hi Stefan,
+>=20
+> I am following the discussion on samba-technical around building=20
+> packages for Debian, which you take part in as Samba team-member.
+>=20
+> I am quite suprised that no one has pointed a Louis'=20
+> packaging work so=20
+> far. He is doing exactly the same a what Michael wants to=20
+> achieve, or am=20
+> I completely mistaken=3F
+>=20
+> Louis has not jumped in himself, but he is having some family matters=20
+> lately (which is probably why his 4.16.0 packages are delayed).
+>=20
+> - Kees
+>=20
+>=20
+>=20
 
-diff --git a/buildtools/wafsamba/samba_conftests.py b/buildtools/wafsamba/samba_conftests.py
-index ef632ba9033..59b1258c7de 100644
---- a/buildtools/wafsamba/samba_conftests.py
-+++ b/buildtools/wafsamba/samba_conftests.py
-@@ -315,7 +315,7 @@ def CHECK_LIBRARY_SUPPORT(conf, rpath=False, version_script=False, msg=None):
-     o = bld(features='c cprogram',
-             source='main.c',
-             target='prog1',
--            uselib_local='lib1')
-+            use='lib1')
- 
-     if rpath:
-         o.rpath=os.path.join(bdir, 'default/libdir')
-diff --git a/buildtools/wafsamba/samba_deps.py b/buildtools/wafsamba/samba_deps.py
-index 9c922f7e036..cf59827f7ba 100644
---- a/buildtools/wafsamba/samba_deps.py
-+++ b/buildtools/wafsamba/samba_deps.py
-@@ -79,7 +79,7 @@ def build_dependencies(self):
- 
-     if self.samba_type in ['LIBRARY', 'PLUGIN', 'BINARY', 'PYTHON']:
-         self.uselib        = list(self.final_syslibs)
--        self.uselib_local  = list(self.final_libs)
-+        self.use  = list(self.final_libs)
-         self.add_objects   = list(self.final_objects)
- 
-         # extra link flags from pkg_config
-@@ -98,8 +98,8 @@ def build_dependencies(self):
-             for f in self.env.undefined_ignore_ldflags:
-                 self.ldflags.append(f)
- 
--        debug('deps: computed dependencies for target %s: uselib=%s uselib_local=%s add_objects=%s',
--              self.sname, self.uselib, self.uselib_local, self.add_objects)
-+        debug('deps: computed dependencies for target %s: uselib=%s use=%s add_objects=%s',
-+              self.sname, self.uselib, self.use, self.add_objects)
- 
-     if self.samba_type in ['SUBSYSTEM', 'BUILTIN']:
-         # this is needed for the cflags of libs that come from pkg_config
-@@ -331,7 +331,7 @@ def check_group_ordering(bld, tgt_list):
- 
-     ret = True
-     for t in tgt_list:
--        tdeps = getattr(t, 'add_objects', []) + getattr(t, 'uselib_local', [])
-+        tdeps = getattr(t, 'add_objects', []) + getattr(t, 'use', [])
-         for d in tdeps:
-             t2 = bld.get_tgen_by_name(d)
-             if t2 is None:
-@@ -355,8 +355,8 @@ def show_final_deps(bld, tgt_list):
-     for t in tgt_list:
-         if not targets[t.sname] in ['LIBRARY', 'PLUGIN', 'BINARY', 'PYTHON', 'SUBSYSTEM', 'BUILTIN']:
-             continue
--        debug('deps: final dependencies for target %s: uselib=%s uselib_local=%s add_objects=%s',
--              t.sname, t.uselib, getattr(t, 'uselib_local', []), getattr(t, 'add_objects', []))
-+        debug('deps: final dependencies for target %s: uselib=%s use=%s add_objects=%s',
-+              t.sname, t.uselib, getattr(t, 'use', []), getattr(t, 'add_objects', []))
- 
- 
- def add_samba_attributes(bld, tgt_list):
-@@ -1038,7 +1038,7 @@ savedeps_version = 3
- savedeps_inputs  = ['samba_deps', 'samba_includes', 'local_include', 'local_include_first', 'samba_cflags',
-                     'source', 'grouping_library', 'samba_ldflags', 'allow_undefined_symbols',
-                     'use_global_deps', 'global_include' ]
--savedeps_outputs = ['uselib', 'uselib_local', 'add_objects', 'includes',
-+savedeps_outputs = ['uselib', 'use', 'add_objects', 'includes',
-                     'cflags', 'ldflags', 'samba_deps_extended', 'final_libs']
- savedeps_outenv  = ['INC_PATHS']
- savedeps_envvars = ['NONSHARED_BINARIES', 'GLOBAL_DEPENDENCIES', 'EXTRA_CFLAGS', 'EXTRA_LDFLAGS', 'EXTRA_INCLUDES' ]
 
