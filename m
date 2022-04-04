@@ -2,40 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 270A94F196F
-	for <lists+samba-technical@lfdr.de>; Mon,  4 Apr 2022 18:57:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1E904F1DF2
+	for <lists+samba-technical@lfdr.de>; Mon,  4 Apr 2022 23:53:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=psaFexqr5P1d9QTlXvPwr9oXkBnr016sCrSRM5sYfo0=; b=BEtSiJtP5Mo0hwg3lbWrVczrNi
-	gTtP3MfSkmQZ4l4DPkAtBcpi8ypNZyVXt2tdHT3sLlqSNFDAmwceW52REg0zNof78rXjTnoxPBUxW
-	4kdm8hAVg44m6kW8UXjhfL2CAbI1B+bTZfJFR7hrmle/1z0GlDWjasSPPliHmSBHHl5f6CxEQkPx4
-	igDMaYfLu1mYUkyRNPv/a8OYUGbuDE0ui5kQnhvweqfLw24vLuIy5xmF3/PsUsgF/SvEe1DIl5atl
-	NsB7gDXkF0IEPBuIxHUFMzdbCDft0+r4zPqLMdeHPpPDCdtkc5sCU2p9+70erUbdX/4RwHLn89IVa
-	minULpVw==;
-Received: from ip6-localhost ([::1]:41870 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=DS+IJuy+JNGCIAtOYJb6Uii+m1WciykEf7DUsVkj9yI=; b=OPPVUWMc+i/Mzoipbne6irFPUS
+	JVvYMzj/gDExhnMMT+DEINvI8FavkEg8FjTs/vLHia6Z2fTQcbvRf84I9Xx54ePNKYeqkATmmxTrl
+	82VEVp2gQzChn3feDWHalS7oinfwmOhbxW1g0cDIZmvAfWfTq0wqY+pUAcEdf1aNk4dUn8TKvAj9J
+	1Ji4S0eD6p1iiDuvcgepwDYu6KQT1UOr9qh6HlEx2qSaxiH/Ij3N27mUcSt0vjumVNL+WMJWEKK2K
+	oESAw9iuLkLebzQVcjE8YeXS0SzMLeEMD+g2a4Mr8a7UMRWdsOTit24ub0KIlon4LUiOPqyrx1Idp
+	50EzcDvA==;
+Received: from ip6-localhost ([::1]:44908 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nbQ0R-009qjj-4U; Mon, 04 Apr 2022 16:56:43 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:35175) 
+	id 1nbUcI-009sZd-2e; Mon, 04 Apr 2022 21:52:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38128) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nbQ0M-009qjZ-I5
- for samba-technical@lists.samba.org; Mon, 04 Apr 2022 16:56:41 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 8F69E40175;
- Mon,  4 Apr 2022 19:56:30 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 37C7430C;
- Mon,  4 Apr 2022 19:52:44 +0300 (MSK)
-Message-ID: <942d4519-909a-22d6-6e45-75b976a9f29b@msgid.tls.msk.ru>
-Date: Mon, 4 Apr 2022 19:56:29 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
+ (Exim) id 1nbUcD-009sZT-AG
+ for samba-technical@lists.samba.org; Mon, 04 Apr 2022 21:52:03 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=DS+IJuy+JNGCIAtOYJb6Uii+m1WciykEf7DUsVkj9yI=; b=xTo56eRypFy31LhSCZV6teL0JS
+ Vdie1B5XpSYORdPaPHJDBeHh1ab9DlRxHi83QrvgrmoBxQmWRVc3vUQcR34JKEFUDFEqI7bBhGgrH
+ qEFzAtK1+UmwznHqF+zwThWuAT/gQUHnKEq3If9Ow/9fASdmUMVjjSz0Uvm8vTd1ecwaJnmxsUdpP
+ gipiYx++2zZKzW+ExtSJye1S9O+NXeRmDfGKKrW+b5iMqtbl3WSffE6oIhoMsn+DpiKJuSUdaNYuA
+ 1nhWdCc+2va7g2AA4TZEts1ChJz6WbuzWF6tXFES9gnoDhFsmKDAGe47CAgeVneTLWeRAE0hMpr/7
+ +y1hLOwP0a5PKBMKOaTCmU7Q8/Xez9B4O+CX8//ivIOwJwMQqgeesURdFPw7aakrs9kldYWFUNeS8
+ +zo4YgG4wlbx98WIzDYzLQW3om4Nb/t9Uk3U0U70Ps4J5XGNiyWoTrCyRfi4UU4pMC7gad0Qqp10m
+ 1V8ZK+WhzCdJ6sogwGiE73NZ;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1nbUcB-005JI6-2k; Mon, 04 Apr 2022 21:51:59 +0000
+Message-ID: <2165e797b4fab04bd8b625b7b182bf2d9982d2d3.camel@samba.org>
 Subject: Re: doing a test build of samba
-Content-Language: en-US
-To: samba-technical <samba-technical@lists.samba.org>
+To: Michael Tokarev <mjt@tls.msk.ru>, samba-technical
+ <samba-technical@lists.samba.org>
+Date: Tue, 05 Apr 2022 09:51:55 +1200
+In-Reply-To: <942d4519-909a-22d6-6e45-75b976a9f29b@msgid.tls.msk.ru>
 References: <245e18ba-a620-6a19-33d5-8794f010a617@msgid.tls.msk.ru>
-In-Reply-To: <245e18ba-a620-6a19-33d5-8794f010a617@msgid.tls.msk.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ <942d4519-909a-22d6-6e45-75b976a9f29b@msgid.tls.msk.ru>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -50,72 +58,55 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Cc: Mathieu Parent <math.parent@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-04.04.2022 13:30, Michael Tokarev via samba-technical wrote:
-..
-> I've been told that the --enable-selftest build should not be
-> used to install things for production.
+On Mon, 2022-04-04 at 19:56 +0300, Michael Tokarev via samba-technical
+wrote:
+> 04.04.2022 13:30, Michael Tokarev via samba-technical wrote:
+> ..
+> > I've been told that the --enable-selftest build should not be
+> > used to install things for production.
+> 
+> So I took a look at what --enable-selftest actually does. Here's the
+> list, for reference:
+> 
+> two new functions (not used in samba code) now return true:
+>   is_selftest_enabled is_ntvfs_fileserver_built
+> 
+> two new "printers": test and lvp
+> 
+> dns lookups can use file pointed to by $RESOLV_CONF variable if set,
+> instead of using system-wide /etc/resolv.conf.
+> 
+> 2 ipc messages are enabled: sleep and inject (fault injection)
+> 
+> 
+> build enables -D WITH_NTVFS_FILESERVER=1.
+> This one, in turn does this:
 
-So I took a look at what --enable-selftest actually does. Here's the
-list, for reference:
+This MUST NOT be enabled in production, as Samba upstream provides no
+security support for this code, which remains because it is hard work
+to remove due to the support it provides to some of our tests. 
 
-two new functions (not used in samba code) now return true:
-  is_selftest_enabled is_ntvfs_fileserver_built
+If you want to do a selftest build, do a selftest build but don't put
+it into the production binaries.
 
-two new "printers": test and lvp
+If Debian can't handle that, talk to Debian :-)
 
-dns lookups can use file pointed to by $RESOLV_CONF variable if set,
-instead of using system-wide /etc/resolv.conf.
+Sorry,
 
-2 ipc messages are enabled: sleep and inject (fault injection)
+Andrew Bartlett
 
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
 
-build enables -D WITH_NTVFS_FILESERVER=1.
-This one, in turn does this:
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
 
-source4/ntvfs/posix/posix_eadb.c 4 new functions:
-  pull_xattr_blob_tdb() push_xattr_blob_tdb() delete_posix_eadb() unlink_posix_eadb()
-
-source4/ntvfs/posix/wscript_build 4 new modules:
-  pvfs_acl pvfs_acl_xattr pvfs_acl_nfs4 ntvfs_posix
-
-source4/ntvfs/wscript_build 3 new modules:
-  ntvfs_cifs ntvfs_simple ntvfs_ipc
-
-source4/rpc_server/wscript_build 2 new modules:
-  dcerpc_srvsvc dcerpc_winreg
-
-source4/smb_server/wscript_build new module:
-  service_smb
-
-source4/torture/wscript_build
-# Yes, the spoolss_notify test uses the NTVFS file server to run the SMB server expected
-# to handle the RPC callback!
-if bld.CONFIG_SET('WITH_NTVFS_FILESERVER'):
-         ntvfs_specific['source'] += ' rpc/spoolss_notify.c'
-         ntvfs_specific['deps'] += ' SMB_SERVER dcerpc_server ntvfs'
-
-That's about it.
-
-To me, this does not look like something which should be avoided
-in production at all costs.
-
-The two "new" printers are harmless, as are two new ipc messages
-(okay, root can inject stuff to your samba daemons and cause delays
-with a handy tool instead of using standard system tools for that :) ).
-
-The extra ntvfs modules appears to be optional and can be left out
-of the production package build.
-
-Am I missing something or is it actually okay to use build produced
-by --enable-selftest configuration?
-
-Thanks!
-
-/mjt
 
