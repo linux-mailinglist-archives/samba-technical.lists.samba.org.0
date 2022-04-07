@@ -2,40 +2,40 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 444364F8756
-	for <lists+samba-technical@lfdr.de>; Thu,  7 Apr 2022 20:49:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB0CC4F876E
+	for <lists+samba-technical@lfdr.de>; Thu,  7 Apr 2022 20:52:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=4gLaEq8qIGBRaiClq+78KsY+RGxF+ZZZ0IulHvR+TMc=; b=phCSq1DpGvyrkPpHgDkD/33Bjd
-	nGDLVsx7cvcq0i+hzxjW62bvnBJZpLGf3qMoVTwXMM6yz28rWFudPOAmJ0m11HPOo99kXUQlZvEav
-	ZpZjIhEgmNoFvvI9oVS4N9Q7LbcIYGGziU7abMTSNH3I9X7Ud63RmwnxPtpjO3FIu4Bb4elX8K35S
-	0EhgsYUfPrF+8C7wkxdrndGBUR9wGri6wTIHcJHzpVTsBVcUdsSkdt5XAHacEw6sesHS8Iv49vxHk
-	Ou7IPzIQdwoJYHzKiQTHAnOvVyKomktTcGmYoVSq4mZufg4bdzui3jtC1x3zH5UTq8qVniNlL9LGf
-	7QtR6GCg==;
-Received: from ip6-localhost ([::1]:38794 helo=hr1.samba.org) 
+	bh=NWOe6rgrKfDvJ9gkHUGK464q8vrVbmhEuhEhO+YZTag=; b=hyb1z31eOCvrTUitoppeV/aFrx
+	wMgtSNDNoVnMDkqieNh2GQO8Zp/B2Vs7cowjQ5RC9fULESgsrPkjqWJRDSY21KNnPpKgQB+7UWxMU
+	q8YWm7VXR86oBj/XeAVh9d+r/G3oYRAhl9RFelQgSVCiHI38KFPZ61ROMnua45em94KvGyCnkU3VV
+	ohkdWCfysCAM71Bj7x3qrk7SMvL46FBNbGp1CPQjdEPOdJldYUSx4/SPHuUz0AN0EjZPVIiGpmBa0
+	9+IePKNGAilPWxlmNySdvfQ4aKg9hXm8knj5/twcPZOX8gYc8mrOkMaHg7rcUD8mwFNJNT+twoXuQ
+	bFpBTL6w==;
+Received: from ip6-localhost ([::1]:39474 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ncXCB-00AvMy-OP; Thu, 07 Apr 2022 18:49:27 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38246) 
+	id 1ncXF7-00AvgG-Cf; Thu, 07 Apr 2022 18:52:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38250) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ncXC6-00AvMo-9r
- for samba-technical@lists.samba.org; Thu, 07 Apr 2022 18:49:24 +0000
+ (Exim) id 1ncXF2-00Avg6-Kq
+ for samba-technical@lists.samba.org; Thu, 07 Apr 2022 18:52:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=4gLaEq8qIGBRaiClq+78KsY+RGxF+ZZZ0IulHvR+TMc=; b=k452qxnGH1kDnz9FLagTWoITMM
- Gx1qIgZqU6pMEwtp51bl3nVsaUD4hp/8ok1rf26dd1WnXKtWzX4MatrNOt+xJrGwR29KxriKv6a9s
- qzcBeLOaew8rQRSBqRrXn932Wkgn/tCnfXVNaLzrU1sElIigt5NZZeqEzfzckcltrd3eHZjHMg4X/
- 86RFEAf9OIeNOROp4hhq2/vOQgZzDpFCE3ayxcLf1Hnu8vYvCjaBNm2uR4AUQvO7Nk/Q1QmHTNzuc
- t0xtIcBEUraEg0pRFmZIPXibyi2lnBRlmqjU87yc14tN2+G8pUDuSzsMl8Sm4RqWdY0432UIsV/QM
- qBsbfXNTYE1Or4r5ANPKsOJlPQy7XoC3f8a0yqdt/BmkzSmebNNkuISrVnm8PXPoU/WTvXY4btKSj
- hvMiyp9BMh2uEoaP6OOhcTLkx2G3Rvte4V4lDeRC7W5BKcz85yzBrmUGQOOek7IT+DIQMCIVc7Dq7
- haryBNtNmCWwb30yt10yQKBD;
+ bh=NWOe6rgrKfDvJ9gkHUGK464q8vrVbmhEuhEhO+YZTag=; b=ktmaph/t0G2LYBFwtAbYpVPB0U
+ DeaGGQILEb2aH5qpTOy3JELnZDaKWBBlzYrpokeBR0F+U6NRIqgSMYUa4bwgMbyqad4ACdF3cqqcL
+ hfYeCH8PE5SZH3epSsAhjMF/o44/9exqC8HXFmLSGG0StQdg2pQW2JQ6t3udyyVCysBE4Drk1wp2Z
+ 4PfHea1mk1CQQYzOD7oEQJrTfZ8KkNpyn9Q9fZ23+qQnOSmh9hdSXLGaVCUX8YWRVkw4c0fic+QkZ
+ 3tMkVq4r/2L93y/t18eHxyPDcYUjitJwjO86GQYOEQE1iLOiYU3/Ex724K1Ve+vZ6XX6uj8H6YGji
+ KsloFn6AM+Fseq955Qd0OVGWCGeYJrR8bh4qOdZ6cPE48MBn2dsRv/BgoAJCntxOhOXTPtAulw4vq
+ GBS+8+xXH8u+sAQUbg9xd+t6LUTJ3Vp601tTsw+A4imtW16kXtAmLG2M8sV4+Xy2+6NB2oHZlfsD0
+ hJbM8bWxJyB03Lu1RKe/EYRi;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ncXC5-005tYC-Aw
- for samba-technical@lists.samba.org; Thu, 07 Apr 2022 18:49:21 +0000
-Message-ID: <8f1a87e9-fef6-599a-c0f6-1dc4921e355b@samba.org>
-Date: Thu, 7 Apr 2022 12:49:22 -0600
+ (Exim) id 1ncXF1-005tdn-Uo
+ for samba-technical@lists.samba.org; Thu, 07 Apr 2022 18:52:24 +0000
+Message-ID: <0d486c94-2570-c79a-a582-a049d908be50@samba.org>
+Date: Thu, 7 Apr 2022 12:52:25 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.7.0
@@ -43,7 +43,8 @@ Subject: Re: SMB1 can now be removed from the server code !
 Content-Language: en-US
 To: samba-technical@lists.samba.org
 References: <Yk8w5TWMP7bKmy0z@jeremy-acer>
-In-Reply-To: <Yk8w5TWMP7bKmy0z@jeremy-acer>
+ <8f1a87e9-fef6-599a-c0f6-1dc4921e355b@samba.org>
+In-Reply-To: <8f1a87e9-fef6-599a-c0f6-1dc4921e355b@samba.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -64,16 +65,20 @@ Reply-To: David Mulder <dmulder@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 4/7/22 12:43 PM, Jeremy Allison via samba-technical wrote:
+On 4/7/22 12:49 PM, David Mulder via samba-technical wrote:
+> On 4/7/22 12:43 PM, Jeremy Allison via samba-technical wrote:
+>>
+>> to David Mulder from SuSE for writing this code, and to Samba
+>> Team members Ralph Boehme from SerNet and Andrew Bartlett from
+>> Catalyst for reviewing and improving the code changes before
+>> merge.
+>>
 > 
-> to David Mulder from SuSE for writing this code, and to Samba
-> Team members Ralph Boehme from SerNet and Andrew Bartlett from
-> Catalyst for reviewing and improving the code changes before
-> merge.
+> Jeremy failed to mention that he also played a huge role in both writing 
+> code and reviewing. Thank you Jeremy!
 > 
 
-Jeremy failed to mention that he also played a huge role in both writing 
-code and reviewing. Thank you Jeremy!
+Also, thank you Volker Lendec! He also participated in code review.
 
 -- 
 *David Mulder*
