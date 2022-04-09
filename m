@@ -2,39 +2,37 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D4F24FA57F
-	for <lists+samba-technical@lfdr.de>; Sat,  9 Apr 2022 08:55:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B45904FA58F
+	for <lists+samba-technical@lfdr.de>; Sat,  9 Apr 2022 09:15:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=4aQtRuyeKYeKGO8v4ItHmpgVi+OryjATbS/Yt9O6zA8=; b=IIqD1QSrYOk2zKcJh+PQyQWDfV
-	ruDZeY1gQ4bGkWqZI/nEnqt4z1V/7HmHCjq9Q8Kot45jUyFGjDYmdMoIY5zBy08/K2rymfAmWcn6K
-	3TVFRPFQ2qaYl+BrkI3R3OmBdwM+x5zJhJDsJ5tPnS5EC0QR99Z2qON5GM/Xd+vl4iix1BWAvVOfJ
-	RTkyBrjIZBUgOTqKeRLAj4Ae88QV7ZeZAy2OBLP159Kay3i+14EQzh1XzzY2NMgaTzXBXVJaQF/kM
-	j063b0UWZnCVFsxpNWBPVUM0lC3UGSFbGOtHqaOXSH8Xtzjd53iJHuwpC3Z9D+PZU/fxypkLaf+VC
-	8xyGA9nQ==;
-Received: from ip6-localhost ([::1]:36000 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=xPyaxJmzNFv3FN0go8npl1SRBw78GnSM68Ql+2+C9WU=; b=cPzrhhomR4kk52qGFRmsBKME2z
+	LFs4WdzpLWQQkXapHTyEhKYdeSbsvn9g9p0H0rD/Yhs67HzpKGbiBSExJhB0pdGVJ7VBzCZPJAvxZ
+	wdDo9ZdduBDZ1Nc1uD2HW6v3dbPyQuVtQAWGF2guX1W5IfCV9rqazxZku7YqpOD6OHJgnlSWMshne
+	V0zdMhCWbJFSn5xQBOI1etztTtG+h0RXma5v9HqZJzOHw1MqTxbeWokZ5o1tamOZgO/j2e+xMqL4T
+	Ija5hEhvbzOK6pO7G4L6o3ZVPIWq2ijLOoQq47h4Aj9/qukV8XwYExacJX/3QGU/7Bgyr3EsKX1Og
+	81L7w+7Q==;
+Received: from ip6-localhost ([::1]:36682 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nd50Q-00BHLS-9v; Sat, 09 Apr 2022 06:55:35 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:55345) 
+	id 1nd5It-00BHfN-Nf; Sat, 09 Apr 2022 07:14:39 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:46723) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nd504-00BHLF-P6
- for samba-technical@lists.samba.org; Sat, 09 Apr 2022 06:55:16 +0000
+ (Exim) id 1nd5Io-00BHfE-Fk
+ for samba-technical@lists.samba.org; Sat, 09 Apr 2022 07:14:36 +0000
 Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id C6B8C40161
- for <samba-technical@lists.samba.org>; Sat,  9 Apr 2022 09:55:09 +0300 (MSK)
+ by isrv.corpit.ru (Postfix) with ESMTP id 35C0E40161
+ for <samba-technical@lists.samba.org>; Sat,  9 Apr 2022 10:14:31 +0300 (MSK)
 Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 7B709352
- for <samba-technical@lists.samba.org>; Sat,  9 Apr 2022 09:51:24 +0300 (MSK)
-Message-ID: <7159d706-8e71-3d3e-9eca-979ebd117eb3@msgid.tls.msk.ru>
-Date: Sat, 9 Apr 2022 09:55:09 +0300
+ by tsrv.corpit.ru (Postfix) with ESMTP id CFC00352
+ for <samba-technical@lists.samba.org>; Sat,  9 Apr 2022 10:10:45 +0300 (MSK)
+Message-ID: <d210d52b-40f2-9420-9c12-9b5207fda5a1@msgid.tls.msk.ru>
+Date: Sat, 9 Apr 2022 10:14:30 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.7.0
-Subject: Re: waf, PYTHONHASHSEED & -I order on other architectures
 Content-Language: en-US
 To: samba-technical <samba-technical@lists.samba.org>
-References: <76a4f905-6f2a-18f4-7c9d-f9846681ec01@msgid.tls.msk.ru>
-In-Reply-To: <76a4f905-6f2a-18f4-7c9d-f9846681ec01@msgid.tls.msk.ru>
+Subject: waf and building python modules for multiple python versions
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -55,16 +53,49 @@ Reply-To: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Just adding 3 comments to clarify (it is -ENOCOFFEE time).
+Hi!
 
-1. I do set PYTHONHASHSEED=1 now everywhere, including this failing arch
+How it is possible to build python modules for the libraries
+shiped by samba (such as talloc, tdb etc) for multiple python
+versions? (*)
 
-2. complete build logs are available at
-  https://buildd.debian.org/status/package.php?p=samba . There, the sparc64
-  build failing (Click on the "Build-Attempted" link) exactly due to this
-  issue.
+I'm not a python expert so the following might be inaccurate,
+especially the usage of words.
 
-3. the "good" version is taken from amd64 build of the same file.
+When you ship a python module using any standard declarative
+file for python, such as setup.py. From this file, automatic
+tools do exist to produce and install a python module for any
+given installed python version. In debian, we have helper
+tools that automatically build things for whatever python
+versions being installed on the system (pybuild).
+
+Here with waf, I don't see how it is possible. Well, I do
+see one possibility: to copy source into yet another separate
+subdir (as many subdirs as there are additional python
+versions for the build) and run configure & build & install
+in every of them in turn, specifying the right PYTHON= in
+the environment.  This *should* work.
+
+(another question is how to install just the given target
+instead of installing the whole thing, again, into its own
+subdir, and picking just the python modules from there).
+
+But this is insanely ugly and requires a lot of extra
+recompilation of everything on each build.
+
+Is there a better approach?  How about I build for "default"
+python first, and re-build it with PYTHON=otherpython?
+
+(*)
+Building for multiple python versions helps transitions
+from one version to another. When you plan such transition,
+say, from 3.9 to 3.10, you may compile many packages in
+a way so they provide *two* python versions in a single
+package, and when you switch python, you don't have to
+rebuild everything python-related, most stuff is already
+ready. And before the next transition, many updated
+packages, again, will have support for both python
+versions - 3.10 and the next planning 3.11.
 
 Thanks,
 
