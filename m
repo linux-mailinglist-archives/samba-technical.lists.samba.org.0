@@ -2,45 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E87C4FAC7C
-	for <lists+samba-technical@lfdr.de>; Sun, 10 Apr 2022 09:07:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81B914FB319
+	for <lists+samba-technical@lfdr.de>; Mon, 11 Apr 2022 06:53:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=o1MYPvHVCmOT1XT9tpyKlEFn/GemE95po3Dzx/3csmg=; b=eieuMZxT299FTG1chZHtE4wjfm
-	MmzmZOChY+9VmPTo0hb30383rwmqEjDX6KqKTdUHVJ2EQwiL27dg+YJOYC654nEWKw+fwFYwEykGx
-	Ggm2Lxg4ZoqKE9c7TLmrwRAYDNIMVAH+/9WasjrbWi/pLYFvRANUlIUGD7kSdjzlNheadgwfBkWTz
-	QWTD6Ak5HBV54z+EpeJ28O3EVpYL38Z+dt8+GV5lGzxObhTq5quWNuVkp5Ybd4vlv0kS84cnV20mP
-	QbP6L9o+uqab5fGoQTDkSpOgTnrzArnz8m40p8w8+kv7wzGkBpHZFlB6NfRIHbIlnCxb9gOpcEta+
-	vvfsXwOQ==;
-Received: from ip6-localhost ([::1]:40706 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=vJR84yCYZifCmgdbD6UKApA6Ko6jy383HlYHrYL4WBA=; b=qXSN+tR+DzCxsR5/Fze8J3ZS6y
+	3+vxP1fyYNaepASdIVTwuoxUuQFpbV7hkkqCwhCxMvF4umexaTGdc2/5Cky77LfzC2OH8gJMA9PEU
+	CR+uGiwpqsM6Q4//OCHAXwBpR2PnqS3xuSQ4vsDqywgTobLX5rP1qCChurfpXLyOUWMgDN5PsoqOF
+	zJ6n09jwl5VJlo/GNj+uDLsvmtEP+Oa07oDjHhssONYrf1ZaE2jqJ06UCRrlMoub0deAKzYhTHbqw
+	GsNkAm8u9QMkNQv6WyXJzA7gVhjbFUF5QJEKVm9MfEYTwjKj0yt2p+E+Q0x1WByYMNQy/IGeYPuS4
+	HeMF06HA==;
+Received: from ip6-localhost ([::1]:41838 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ndReb-00BLrN-GN; Sun, 10 Apr 2022 07:06:33 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:43799) 
+	id 1ndm1x-00BO5p-1F; Mon, 11 Apr 2022 04:52:01 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38274) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ndReB-00BLr9-PW
- for samba-technical@lists.samba.org; Sun, 10 Apr 2022 07:06:12 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 4D5DC4016D;
- Sun, 10 Apr 2022 10:06:02 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 00CA52A;
- Sun, 10 Apr 2022 10:02:16 +0300 (MSK)
-Message-ID: <efc8a9cf-4f1a-6950-13ec-15cdb276be4f@msgid.tls.msk.ru>
-Date: Sun, 10 Apr 2022 10:06:01 +0300
+ (Exim) id 1ndm1s-00BO5f-H6
+ for samba-technical@lists.samba.org; Mon, 11 Apr 2022 04:51:59 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=vJR84yCYZifCmgdbD6UKApA6Ko6jy383HlYHrYL4WBA=; b=2GlM9Pi+Pjr5yd5KIFj0WCMBrY
+ MjT1zR6QsZEL5sK3JTKZWeUSex1Pvcd8K3aH5OvYVV6kLDHXeuemPJaFRjBApkHTib6oAR8LzobNk
+ aXtPUAEvnYSRSYROajVSx3u9IT+x2FGZpkgSttRnrYCaSnbbMfTWJeouWelpZLYgc1ZvDUPWVMI1T
+ 33JHWsQMOAG/1KhfHf3qZBLoh1A+nxucwM1uutS1645rtduqZ3f9j97YArsMBzpGi7jtJe++lyuW/
+ fEtfW9A7pKgdoan76IYIyQ0wuARDI4TesEGEzahmA7GIlzUOW4A9nbI1mQcc4zmDnyp4ArmminhQ/
+ dm8JOOq7Hy8ZWGkjww5k5d8PIGNTw9zHc5Yvj3rzj4+ZS+giVNa7W2vOlbbanwm9Kq76GwzHACyY2
+ R3WCXFB4Bw0YR40kQun9fh+/FzHalF8i/0IsHMVUkU2h29ArXW8WMvOUHFMUE8PI7bhDrl2EuHwQS
+ TvL7hlw9NY9zk4jpMPhqjCEj;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1ndm1q-006M9w-4r; Mon, 11 Apr 2022 04:51:55 +0000
+Message-ID: <23df11d3ea437a4e13a935798fc1c71b922b249f.camel@samba.org>
+Subject: Re: waf, PYTHONHASHSEED & -I order on other architectures
+To: Michael Tokarev <mjt@tls.msk.ru>, samba-technical
+ <samba-technical@lists.samba.org>
+Date: Mon, 11 Apr 2022 16:51:50 +1200
+In-Reply-To: <7159d706-8e71-3d3e-9eca-979ebd117eb3@msgid.tls.msk.ru>
+References: <76a4f905-6f2a-18f4-7c9d-f9846681ec01@msgid.tls.msk.ru>
+ <7159d706-8e71-3d3e-9eca-979ebd117eb3@msgid.tls.msk.ru>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: waf and building python modules for multiple python versions
-Content-Language: en-US
-To: Andrew Bartlett <abartlet@samba.org>,
- samba-technical <samba-technical@lists.samba.org>
-References: <d210d52b-40f2-9420-9c12-9b5207fda5a1@msgid.tls.msk.ru>
- <8368b49259376d59184da5aadc7c156226b950a4.camel@samba.org>
- <bb99e0b1-ceaf-fa70-8830-6eb2f145f273@msgid.tls.msk.ru>
- <3b7bbcfff82c15a6e6fb8e186e75e4e8e54c6fa6.camel@samba.org>
-In-Reply-To: <3b7bbcfff82c15a6e6fb8e186e75e4e8e54c6fa6.camel@samba.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,29 +58,93 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-10.04.2022 07:26, Andrew Bartlett via samba-technical wrote:
-[]
-> Just run the whole thing twice for those, right from the top, picking
-> out the different modules.  The 'used elsewhere' libs are much simpler
-> and only have python -> C deps thankfully.  They are also really fast
-> to recompile.
+On Sat, 2022-04-09 at 09:55 +0300, Michael Tokarev via samba-technical
+wrote:
+> Just adding 3 comments to clarify (it is -ENOCOFFEE time).
+> 
+> 1. I do set PYTHONHASHSEED=1 now everywhere, including this failing
+> arch
+> 
+> 2. complete build logs are available at
+>   https://buildd.debian.org/status/package.php?p=samba . There, the
+> sparc64
+>   build failing (Click on the "Build-Attempted" link) exactly due to
+> this
+>   issue.
+> 
+> 3. the "good" version is taken from amd64 build of the same file.
 
-I did exactly that yesterday as an experiment for talloc. That worked.
-FWIW, the configure step takes about two orders of magniture
-more time than compiling it - even if for talloc about 99% tests which
-are done at configure time are useless :)
+Thanks Michael,
 
-(For talloc it really is trivial to build it with just 3 commands to
-build the 3 .so libs with about 5-10 -Defines for configure-generated
-variables which re _actually_ used in there.  For other parts it is
-not _that_ simple :) )
+I've always suspected that fixing PYTHONHASHSEED to 1 was only part of
+the fix here, and that we really should not be relying on that
+entirely.  However getting things close to upstream was always the
+first step needed.
 
-Thanks!
+I think what we have were is the war of the build systems, brought up
+in 2022 because we now import the whole Heimdal tree, not just some of
+it.  
 
-/mjt
+I've checked, and in the past the file didn't exist, it came in as
+lib/gssapi/gssapi.h in 40b65c840e03bd5eb7f3b02fe80144650c63c005
+
+Likewise it seems the stragely named lib/gssapi/gssapi/gssapi.h was
+added upstream by:
+
+ommit b65ef282f1ad2a33114ea86a109895742623cf2b
+Author: Love Hörnquist Åstrand <lha@kth.se>
+Date:   Sat Oct 7 22:06:25 2006 +0000
+
+    x
+    
+    
+    git-svn-id: svn://svn.h5l.se/heimdal/trunk/heimdal@18333 ec53bebd-
+3082-4978-b11e-865c3cabbd6b
+
+diff --git a/lib/gssapi/ChangeLog b/lib/gssapi/ChangeLog
+index e348f10a95..47f3696cee 100644
+--- a/lib/gssapi/ChangeLog
++++ b/lib/gssapi/ChangeLog
+@@ -1,5 +1,12 @@
+ 2006-10-07  Love H<F6>rnquist <C5>strand  <lha@it.su.se>
+ 
++       * gssapi.h: Add file inclusion protection.
++
++       * gssapi/gssapi.h: Correct header file inclusion protection.
++
++       * gssapi/gssapi.h: Move the gssapi.h from lib/gssapi/ to
++       lib/gssapi/gssapi/ to please automake.
++       
+        * spnego/spnego_locl.h: Maybe include <sys/types.h>.
+ 
+        * mech/mech_locl.h: Include <roken.h>.
+
+
+So the (time expensive) fix could be to work out how to remove the
+'tripple gssapi' upstream, finding out if automake still requires this.
+
+Otherwise, we need to find a way to depend on the .c files in
+lib/gssapi but not the .h files or perhaps it might be as simple as
+adding a empty subsystem to get the include path of lib/gssapi/gssapi/.
+
+Either way, I agree there is a real bug here, we just need to stop
+papering it over.
+
+As always, I'm glad to provide more advice and review,
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+
 
