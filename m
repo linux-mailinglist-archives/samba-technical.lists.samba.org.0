@@ -2,89 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8515A4FC393
-	for <lists+samba-technical@lfdr.de>; Mon, 11 Apr 2022 19:40:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C11CB4FC546
+	for <lists+samba-technical@lfdr.de>; Mon, 11 Apr 2022 21:47:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=Xo16GBYUDK4jDbSYr4gIb03AT9QiaSP0NZTk2SebSoU=; b=kTAX2cuO4eBjkCGwb87b3v7g5P
-	Ytb6jelBfMEh9cNOe++Vr91z3lcDH29SHAm03F8vcejoGZ1F0zzfLoKt3C05L7mkGMS6v17vr+UD/
-	JMfanvva1pjryrvaIuc9v7GYv8trMx230DUunBMbygDbBLlYHEQK82TAjkf2OoQxfjfsiaAI+CKCb
-	7S6yeFS07mQIjuAfFnOFbLVNywa6yj6nn685/TjdFgILOOb38dTZBeycTCm/3biiIDNpfPJVpQ3Cb
-	5TL9CwmKcVsfrLy3eMuqkxtpJhGEYOn9SQxO6qYb8iCeTlGEVuYOxZoVXnD3c+y9bDOyqb0cNgGQ4
-	Oj+Y7uJw==;
-Received: from ip6-localhost ([::1]:60434 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=JHiZrYKpPjlj15CI5Scnf5xOit9T1sOmHMAK+z8Boco=; b=PM5hvqPdqU6/QCIHGle6Z8RXz2
+	dV/2mXQRshgzu6CUs2wsbz5ZKOjCKaIlpvSGeKn/VvgUIj2aYgb0c1NdrLK+6jgPwt5SOKwX1V3Ku
+	Mplbf95fE0NRkV2r5ExNHF5G9S4RLTKoom+GkU8oWDEVEwSWx3HbIVbD8ZTz3Jz6/jwv7dGXBbk33
+	XFEGVlD8rFsBeNsxAzIw6Hz9I3K34jKpOfspkwt2md6MBp3X34Y8oyZSczl607mgdL6GnCa6RyCLR
+	h1Dqf7nT707ufExg7/+ACSk+l7l9bbmMEoBtc4PQajJxRE19zw7eQeLUNJFAz8JvzFsuLq8YrBecd
+	c4Czr1qg==;
+Received: from ip6-localhost ([::1]:18234 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ndy0Z-00BWqm-1m; Mon, 11 Apr 2022 17:39:23 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:35055) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1ndy0S-00BWqT-FB
- for samba-technical@lists.samba.org; Mon, 11 Apr 2022 17:39:19 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1649698752;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=Xo16GBYUDK4jDbSYr4gIb03AT9QiaSP0NZTk2SebSoU=;
- b=ZL/O3PRYPGEnUP7vsKECRxVkcxKwFWO/IQk1duf8bNTCvgepcbf2CgAqWOuISzP6YtnbiL
- aNqvzlHPUk/EbvlrdU02Qn8B6PbN9pb8WDP20YnrVQQiNJJwVdF1iiaeKDgRF3azM9R4J/
- rpbX59p6KyzGZMTbLGu4qd79AJRROkQ=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1649698752;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=Xo16GBYUDK4jDbSYr4gIb03AT9QiaSP0NZTk2SebSoU=;
- b=ZL/O3PRYPGEnUP7vsKECRxVkcxKwFWO/IQk1duf8bNTCvgepcbf2CgAqWOuISzP6YtnbiL
- aNqvzlHPUk/EbvlrdU02Qn8B6PbN9pb8WDP20YnrVQQiNJJwVdF1iiaeKDgRF3azM9R4J/
- rpbX59p6KyzGZMTbLGu4qd79AJRROkQ=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-457-DId_zIbXPxy4_9hTv-cjsw-1; Mon, 11 Apr 2022 13:23:04 -0400
-X-MC-Unique: DId_zIbXPxy4_9hTv-cjsw-1
-Received: by mail-wm1-f70.google.com with SMTP id
- y11-20020a7bc18b000000b0038eac019fc0so4657502wmi.9
- for <samba-technical@lists.samba.org>; Mon, 11 Apr 2022 10:23:04 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:subject:from:to:cc:date:user-agent
- :mime-version:content-transfer-encoding;
- bh=Xo16GBYUDK4jDbSYr4gIb03AT9QiaSP0NZTk2SebSoU=;
- b=QyG8BGsHArDp0+aO9tm6ZDkY/wercMOGk7JGpo3fYFGTjU+W6xeMJr1koiamzKtwtA
- djJrusRTFNXTYtKAwE4BKiHuBu7RWA1S2zAy8I2cGS/IF1gICS/MswjRWB65zIDaoip2
- WkmjV2XHu+PHMa1ivR0c5U3cS6/tjikpcOP5i9ZgPufQRTI6h7tNpTeI4C0yhcayisdU
- ra3RSSLh7rBg23h3pzKf7p75ew2Fkk4Bas91EvX7kyJAC/DLqXtp0YuHclx4FqHX298q
- S8aBmnQYOC5I7Rn9gJmUArvRVbskeg3scYvPF4dzXO1sHnwLp6LVRSDqVO6ElTcfvHD3
- Z6Sg==
-X-Gm-Message-State: AOAM533mlNY8f5UsC9YGpSiselTDkVmtah74/6LihEmVN/n5xYpqf+0S
- fPKs2PI+DBTjI0/Gcf3pELen3ceZnOpiJdS3QjiuUb9H1XA3liDDKCI2GjIsVtACZYEKK8iRbbw
- JjpIaYMzFrEfSqrgfhVvMfy2I8vsPWEZ9ZCiPwON1eTxa4GPN/uUjaPUsciWsmqw8QiFBgPlGek
- EJs7I=
-X-Received: by 2002:a5d:6449:0:b0:207:a1f4:b52 with SMTP id
- d9-20020a5d6449000000b00207a1f40b52mr8346797wrw.511.1649697783187; 
- Mon, 11 Apr 2022 10:23:03 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJz9/QqhsnrSaZRL1GMgcEIcXjRZ6+2h31Ui+q+iGEoCJSxaNvqBFRuLloksNcNEYs4PKgYlJA==
-X-Received: by 2002:a5d:6449:0:b0:207:a1f4:b52 with SMTP id
- d9-20020a5d6449000000b00207a1f40b52mr8346769wrw.511.1649697782711; 
- Mon, 11 Apr 2022 10:23:02 -0700 (PDT)
-Received: from [192.168.21.20]
- (host86-140-101-80.range86-140.btcentralplus.com. [86.140.101.80])
- by smtp.gmail.com with ESMTPSA id
- v8-20020a05600c214800b0038ec51d544csm114139wml.27.2022.04.11.10.23.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Apr 2022 10:23:02 -0700 (PDT)
-Message-ID: <0a33793ae6a05b492a899ffbde9a8533d14c7faf.camel@redhat.com>
-Subject: Samba in Containers/Kubernetes Status Update 2
-To: samba-technical@lists.samba.org
-Date: Mon, 11 Apr 2022 18:23:00 +0100
-User-Agent: Evolution 3.42.2 (3.42.2-1.module_f35+13513+2c5bddf4)
+	id 1ne00E-00BZ5R-63; Mon, 11 Apr 2022 19:47:10 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38294) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ne009-00BZ5D-7k; Mon, 11 Apr 2022 19:47:07 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=JHiZrYKpPjlj15CI5Scnf5xOit9T1sOmHMAK+z8Boco=; b=uFp4wQNPGGTZbvrA3JqI3oNeX7
+ zJWWx/FjyRcW17y/Rm/ra2OXAUccR2xYX5KzSh+16KsYO9RXJ7wXe6beL3OLtUEeGvyGXG3VF6Wcd
+ SE5EmSqL3xACt5FVaioLTDk07JBA4N3hPda4EUV4dIIIIPCkc9bCLMvd43n5KhEaWX6TNa8A3nfaW
+ w5CRwGwtYLsLpjBiee7lPj8aWRBMUivVjo09ika1ia5X0V1y+WVi+HoopyGUeGuNU0nygezsi59O7
+ oALkoT0UAqMly8CjHjICjRU326TBRnYhxplwxEeLB4FeOTqzKnAc6eP+C40Ge/wvdIoaf/p1cJ9+w
+ 7wBv0fMa/HzhDjKmtRKQ+NylJ5k9jsxzKRal4czkm0PCKLyuZBk+9HqrR/1npwB6LUsOx+wZd4fEi
+ FEATtWj+QxJiDaTjdumSLhAMPIB48URfMNGZ76nsHgDMVure2DE1i1c3+biIkZnjsEZ8E5ga4B1u1
+ 6yLQnEeUQp3+K7uCQUEA0GeK;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1ne008-006URK-9v; Mon, 11 Apr 2022 19:47:04 +0000
+Message-ID: <735213dc-d0d7-6cd9-81cd-d93d770564e9@samba.org>
+Date: Mon, 11 Apr 2022 21:47:03 +0200
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sprabhu@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Subject: Re: [Samba] Samba in Containers/Kubernetes Status Update 2
+Content-Language: en-US
+To: sprabhu@redhat.com, samba-technical@lists.samba.org
+References: <0a33793ae6a05b492a899ffbde9a8533d14c7faf.camel@redhat.com>
+In-Reply-To: <0a33793ae6a05b492a899ffbde9a8533d14c7faf.camel@redhat.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------omdPrusG0BXycU02FDL4CdhV"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -98,101 +58,59 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Sachin Prabhu via samba-technical <samba-technical@lists.samba.org>
-Reply-To: sprabhu@redhat.com
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Cc: samba@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Samba in Containers & Kubernetes Status Update vol. 2
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------omdPrusG0BXycU02FDL4CdhV
+Content-Type: multipart/mixed; boundary="------------6VL6R0lHHm0783L0XSQX0kzB";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: sprabhu@redhat.com, samba-technical@lists.samba.org
+Cc: samba@lists.samba.org
+Message-ID: <735213dc-d0d7-6cd9-81cd-d93d770564e9@samba.org>
+Subject: Re: [Samba] Samba in Containers/Kubernetes Status Update 2
+References: <0a33793ae6a05b492a899ffbde9a8533d14c7faf.camel@redhat.com>
+In-Reply-To: <0a33793ae6a05b492a899ffbde9a8533d14c7faf.camel@redhat.com>
 
-We are a small team within Red Hat working on an effort to export SMB
-shares via Samba in the container ecosystem and Kubernetes. The last
-status update email was sent by John Mulligan on 18 Oct 2021. This
-email contains a status update documenting our work on this project
-since then. This is also an invitation for more community participation
-in the project. 
+--------------6VL6R0lHHm0783L0XSQX0kzB
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-We have had a productive quarter which includes several new
-improvements and features.
+SGkgU2FjaGluIQ0KDQpPbiA0LzExLzIyIDE5OjIzLCBTYWNoaW4gUHJhYmh1IHZpYSBzYW1i
+YSB3cm90ZToNCj4gU2FtYmEgaW4gQ29udGFpbmVycyAmIEt1YmVybmV0ZXMgU3RhdHVzIFVw
+ZGF0ZSB2b2wuIDINCnRoaXMgaXMgZ3JlYXQgc3R1ZmYhIFRoYW5rcyBmb3Igc2hhcmluZyB0
+aGUgdXBkYXRlLiBSZWFsbHkgbG9va2luZyANCmZvcndhcmQgdG8gSm9obidzIFNhbWJhWFAg
+cHJlc2VudGF0aW9uIQ0KDQpDaGVlcnMhDQotc2xvdw0KDQotLSANClJhbHBoIEJvZWhtZSwg
+U2FtYmEgVGVhbSAgICAgICAgICAgICAgICAgaHR0cHM6Ly9zYW1iYS5vcmcvDQpTZXJOZXQg
+U2FtYmEgVGVhbSBMZWFkICAgICAgaHR0cHM6Ly9zZXJuZXQuZGUvZW4vdGVhbS1zYW1iYQ0K
 
-Clustering/CTDB: 
 
-High Availability is provided by the CTDB service. This feature is
-currently marked as experimental in the project. New features added
-bring us closer to our goal of providing a reliable service to export
-SMB shares.
+--------------6VL6R0lHHm0783L0XSQX0kzB--
 
-This includes adding readiness probes to automatically detect node
-failures and to disable them. 
-https://github.com/samba-in-kubernetes/samba-operator/issues/135
+--------------omdPrusG0BXycU02FDL4CdhV
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-We have also added support to scale out CTDB clusters to keep up with
-increasing workloads.
-https://github.com/samba-in-kubernetes/samba-operator/issues/120
+-----BEGIN PGP SIGNATURE-----
 
-Anoop CS has been working on setting up a multi-node Kubernetes testing
-on the CentOS-CI infrastructure where the clustered features of the
-operators are now tested regularly.
-https://github.com/samba-in-kubernetes/samba-operator/issues/121
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmJUhbcFAwAAAAAACgkQqh6bcSY5nkZK
+xA//ZLl1NFq5SAS3tbRfl4HauIv6rTAMZh3WY76iKKFKaPp1F9bJwncpSSg4OoV9EUtGECeGSbLW
+8ZiJmr5zhqXdrEZdA5FghbFDpbvkTJgAYEaMSOkmynACMdg5mgL7zKiH44xogejAvkBuk8ZXHkyM
+vgVOTs6Z95Tesfi0yW9DS1VpU3EhZ4yO0BnpvmYffuml1DEUynuL9/H+of8Fl2e3MO/5k1+a4C/R
+v2OmqSvCZiTHnA3zR9lEMMOmgzdLAd0Aa5qfJeejQLkKZYmwgyjw8R9I2AE9qmAmYqkDB/IV3hD/
+0q1MlKiGx3se5mWjDxAA4NDHWwji0IK8tk3qkAk++71ocdAn/L9J71Niooqhpaia3TX5Q7aH97Az
+Z3UoNwTJ8FXrvofCnZ3JbulNiOR5zktNOG6AGex/iZ4d9b+DExLeQJNycw2ZZWsy48T1GHNvM5e9
+15juvLCfHNCjhtCQ3LaES36jPUHzbmz2QsUxELCFFMJs4Y9uF+UITTRWffI5N+syGhUN/XweyWi+
+9MZgyXdCrlfDRmuO35YKI96Vn4hcMw5gUDdWxW1LCzMVsdGyKSu5sJVVi83FJ5PfFOTYachP6+Y+
+ixv574Dj7cdOS62S+IBOtPa7PFCApu6BpdgErsjDb7auZ7F2U14j2hIgSg9dt95midr+6EAQLkjj
+l+0=
+=Rwfz
+-----END PGP SIGNATURE-----
 
-CTDB/Multus:
-
-John Mulligan has been running tests to check the feasibility of having
-CTDB manage public-facing ip addresses using Multus to provide the
-required NICs within the container. The expectation was to see faster
-failover with Windows-based systems using tickle-acks. Unfortunately,
-the failovers are taking longer than expected. This is still a work in
-progress and further updates will be provided as we make progress on
-this feature.
-
-Metrics:
-
-Shachar Sharon has been working on adding a sidecar container to each
-SmbShare resource, which exports metrics via Prometheus. This container
-consumes data from the smbstatus command and exposes it via HTTP as
-standard Prometheus metrics.  Although built for the container
-environment, smbmetrics may also be used in other situations where
-smbstatus stats are available.
-We are closely following the merge request to add json support for the
-smbstatus output. This will simplify the code for the consumption of
-data.
-https://github.com/samba-in-kubernetes/samba-operator/pull/160
-https://github.com/samba-in-kubernetes/smbmetrics
-
-Specify PVC-Path:
-
-This feature allows users to specify a path to export from within a PV.
-Building onto this work, John is working on features that will allow
-the operator to detect if a new SmbShare can be serviced by an existing
-SmbShare repo. 
-
-CI infrastructure:
-
-As mentioned earlier, Anoop has been working on improving the CI
-infrastructure. The project now takes advantage of the CentOS-CI
-infrastructure which provides us with more resources for our test
-environments. 
-https://jenkins-samba.apps.ocp.ci.centos.org/view/SINK/
-
-Others:
-
-Updates were made to the base versions of the container as well as the
-Go version used. The developer workflow has been improved with new
-makefile targets to simplify the tasks of the developer. There have
-been some additions to the documentation too. We would like to thank
-Tobias Florek for his help in this effort.
-
-John has proposed a new merge request to add python bindings for the
-lib/smbconf API to allow programmatic access to the Samba
-configuration. More information is available at
-https://gitlab.com/samba-team/samba/-/merge_requests/2469
-
-We look forward to the upcoming SambaXP where John will be providing
-further updates on Samba in Kubernetes. The talk is scheduled for 15:30
-on 2022-06-01.
-
-Thank you,
-Sachin Prabhu
-
+--------------omdPrusG0BXycU02FDL4CdhV--
 
