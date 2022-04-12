@@ -2,49 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C11CB4FC546
-	for <lists+samba-technical@lfdr.de>; Mon, 11 Apr 2022 21:47:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D2EB4FEA26
+	for <lists+samba-technical@lfdr.de>; Wed, 13 Apr 2022 00:33:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=JHiZrYKpPjlj15CI5Scnf5xOit9T1sOmHMAK+z8Boco=; b=PM5hvqPdqU6/QCIHGle6Z8RXz2
-	dV/2mXQRshgzu6CUs2wsbz5ZKOjCKaIlpvSGeKn/VvgUIj2aYgb0c1NdrLK+6jgPwt5SOKwX1V3Ku
-	Mplbf95fE0NRkV2r5ExNHF5G9S4RLTKoom+GkU8oWDEVEwSWx3HbIVbD8ZTz3Jz6/jwv7dGXBbk33
-	XFEGVlD8rFsBeNsxAzIw6Hz9I3K34jKpOfspkwt2md6MBp3X34Y8oyZSczl607mgdL6GnCa6RyCLR
-	h1Dqf7nT707ufExg7/+ACSk+l7l9bbmMEoBtc4PQajJxRE19zw7eQeLUNJFAz8JvzFsuLq8YrBecd
-	c4Czr1qg==;
-Received: from ip6-localhost ([::1]:18234 helo=hr1.samba.org) 
+	bh=FsJYLxOhIxt3rQLA+O/P6SUgZEOQeFz25qq7q/fcHi8=; b=aVDcmWMiZ9bDW9E5e0r2UpfCth
+	xtg3tw90N2ddlHK2FaK5d19pqFaupArT2wFpCKI5SbD3M0u2UhMmdZH0fDsHZVM4P6dlX/p9YmrfS
+	TGcquC+oGZsVX5Z60OGPGOthTwnEIngUVWymkTltVftbNkP1cweBMOomY/ZxJ86qHIc651I/JdWzQ
+	ES9q0ulJ8BeImuOvqzspFIgyvaO5OdjoaNKwcdbToRRinsEbuvW1biVSlOWzKFBRlFXc2Ps9IZy9k
+	eId0Q7P2+iqDB1sX4XXr3iENFTN4KYlihVgtw9g2QQ0XH8GI0h9IzKZ38K0WQFcymxxleVEZ9xZ96
+	p/yuIUjg==;
+Received: from ip6-localhost ([::1]:34822 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ne00E-00BZ5R-63; Mon, 11 Apr 2022 19:47:10 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38294) 
+	id 1neP3e-0007tX-Kn; Tue, 12 Apr 2022 22:32:22 +0000
+Received: from mail-lj1-x22e.google.com ([2a00:1450:4864:20::22e]:33422) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ne009-00BZ5D-7k; Mon, 11 Apr 2022 19:47:07 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=JHiZrYKpPjlj15CI5Scnf5xOit9T1sOmHMAK+z8Boco=; b=uFp4wQNPGGTZbvrA3JqI3oNeX7
- zJWWx/FjyRcW17y/Rm/ra2OXAUccR2xYX5KzSh+16KsYO9RXJ7wXe6beL3OLtUEeGvyGXG3VF6Wcd
- SE5EmSqL3xACt5FVaioLTDk07JBA4N3hPda4EUV4dIIIIPCkc9bCLMvd43n5KhEaWX6TNa8A3nfaW
- w5CRwGwtYLsLpjBiee7lPj8aWRBMUivVjo09ika1ia5X0V1y+WVi+HoopyGUeGuNU0nygezsi59O7
- oALkoT0UAqMly8CjHjICjRU326TBRnYhxplwxEeLB4FeOTqzKnAc6eP+C40Ge/wvdIoaf/p1cJ9+w
- 7wBv0fMa/HzhDjKmtRKQ+NylJ5k9jsxzKRal4czkm0PCKLyuZBk+9HqrR/1npwB6LUsOx+wZd4fEi
- FEATtWj+QxJiDaTjdumSLhAMPIB48URfMNGZ76nsHgDMVure2DE1i1c3+biIkZnjsEZ8E5ga4B1u1
- 6yLQnEeUQp3+K7uCQUEA0GeK;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ne008-006URK-9v; Mon, 11 Apr 2022 19:47:04 +0000
-Message-ID: <735213dc-d0d7-6cd9-81cd-d93d770564e9@samba.org>
-Date: Mon, 11 Apr 2022 21:47:03 +0200
+ (Exim) id 1neP3Y-0007tO-QG
+ for samba-technical@lists.samba.org; Tue, 12 Apr 2022 22:32:18 +0000
+Received: by mail-lj1-x22e.google.com with SMTP id r18so157370ljp.0
+ for <samba-technical@lists.samba.org>; Tue, 12 Apr 2022 15:32:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=FsJYLxOhIxt3rQLA+O/P6SUgZEOQeFz25qq7q/fcHi8=;
+ b=lTexwf1HxdZGAcVTWoD0ugTlac61PvCWW3F8HQtXKOmX3JezT10nb4HZtZdWAwyAwK
+ JAdEJHFK9RQ/adANwbDQRAaFvoWqugCSX+rmZpNxYgLLIvBDFcubPsVUTYWzT2US476a
+ Kn4Syv5auhCIo1tQNRvXnWTtVK/P4WbvG+TOUgy5Q2N1L1Wfqdfw5uxG1aLNJA2OceYV
+ 8aIWX1aPlJcZRtT6uyUE55A1cT1nC1sNHsziyzGUCqvrktoKiX14f2a20EX+erSlVdie
+ Ho4JypLz4jjjI+vJwFUGBiYcsPyGkJJC2E13XFQoTGMcO9aL6gUabeo6bomqYDjTn/XL
+ MfdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=FsJYLxOhIxt3rQLA+O/P6SUgZEOQeFz25qq7q/fcHi8=;
+ b=WTRASunXOffRo6+zj3Yz/J6TjqYnaMyw3K8/dSt0GwRzmcgUgTMDjdlhrdMLpJ8jF+
+ elebv1Fag0lSuRS5zXgBFGiHSU8ndnqrdX3m9uvOzt4HZBb7/RzzpyiRXshlKL82ODmR
+ Nwi8hIfXQwhPIl/LwJNamlSiEpkPzSLhiv/JMFHuGAG3Qa2cXYIjqpxoZ7zJoZS4wZwP
+ gKW6DHocYISr5wOWlcAWrFOnIWLCHDCcpJ2/G7OIxlk4PsLWaYIRBkuN6xYvzPSKElJ5
+ vj31So5VJnJ3bHNfUs12kAkWkzB+HC4Rc9Qe5kXLhGut6oLt6zWMSwrNagPWQy4egj0f
+ OMAA==
+X-Gm-Message-State: AOAM530z6CwYiRX2tS4TP2X3sXA1mhru7KnDrI+e+qyDk9eW75oLtbn6
+ 7DX3kiChG+U3YiXe/G5LdpOX85GOkh831KDXUpw=
+X-Google-Smtp-Source: ABdhPJyotQc5lx8nzjPYQvWzHV1dNOIG+D0mdNU459MdDr2om1lc6UhX9ewBqaAIaX3WVyEVwQZVknBGkIfV+hqY9gg=
+X-Received: by 2002:a05:651c:ba0:b0:24b:6046:3f24 with SMTP id
+ bg32-20020a05651c0ba000b0024b60463f24mr8499467ljb.460.1649802734687; Tue, 12
+ Apr 2022 15:32:14 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [Samba] Samba in Containers/Kubernetes Status Update 2
-Content-Language: en-US
-To: sprabhu@redhat.com, samba-technical@lists.samba.org
-References: <0a33793ae6a05b492a899ffbde9a8533d14c7faf.camel@redhat.com>
-In-Reply-To: <0a33793ae6a05b492a899ffbde9a8533d14c7faf.camel@redhat.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------omdPrusG0BXycU02FDL4CdhV"
+References: <20220412043823.57037-1-harshit.m.mogalapalli@oracle.com>
+In-Reply-To: <20220412043823.57037-1-harshit.m.mogalapalli@oracle.com>
+Date: Tue, 12 Apr 2022 17:32:03 -0500
+Message-ID: <CAH2r5mvBH8wO9rS2UwCpgjbhcLp89-RLbr1wxK76Pj=OprKwOA@mail.gmail.com>
+Subject: Re: [PATCH] cifs: potential buffer overflow in handling symlinks
+To: Harshit Mogalapalli <harshit.m.mogalapalli@oracle.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,59 +68,69 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: samba@lists.samba.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Stefan Metzmacher <metze@samba.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>, Steve French <sfrench@samba.org>,
+ Dan Carpenter <dan.carpenter@oracle.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------omdPrusG0BXycU02FDL4CdhV
-Content-Type: multipart/mixed; boundary="------------6VL6R0lHHm0783L0XSQX0kzB";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: sprabhu@redhat.com, samba-technical@lists.samba.org
-Cc: samba@lists.samba.org
-Message-ID: <735213dc-d0d7-6cd9-81cd-d93d770564e9@samba.org>
-Subject: Re: [Samba] Samba in Containers/Kubernetes Status Update 2
-References: <0a33793ae6a05b492a899ffbde9a8533d14c7faf.camel@redhat.com>
-In-Reply-To: <0a33793ae6a05b492a899ffbde9a8533d14c7faf.camel@redhat.com>
+Wouldn't it be easier and clearer to do the compare vs the maximum len ie
 
---------------6VL6R0lHHm0783L0XSQX0kzB
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+if (link_len > CIFS_MF_SYMLINK_LINK_MAXLEN)
 
-SGkgU2FjaGluIQ0KDQpPbiA0LzExLzIyIDE5OjIzLCBTYWNoaW4gUHJhYmh1IHZpYSBzYW1i
-YSB3cm90ZToNCj4gU2FtYmEgaW4gQ29udGFpbmVycyAmIEt1YmVybmV0ZXMgU3RhdHVzIFVw
-ZGF0ZSB2b2wuIDINCnRoaXMgaXMgZ3JlYXQgc3R1ZmYhIFRoYW5rcyBmb3Igc2hhcmluZyB0
-aGUgdXBkYXRlLiBSZWFsbHkgbG9va2luZyANCmZvcndhcmQgdG8gSm9obidzIFNhbWJhWFAg
-cHJlc2VudGF0aW9uIQ0KDQpDaGVlcnMhDQotc2xvdw0KDQotLSANClJhbHBoIEJvZWhtZSwg
-U2FtYmEgVGVhbSAgICAgICAgICAgICAgICAgaHR0cHM6Ly9zYW1iYS5vcmcvDQpTZXJOZXQg
-U2FtYmEgVGVhbSBMZWFkICAgICAgaHR0cHM6Ly9zZXJuZXQuZGUvZW4vdGVhbS1zYW1iYQ0K
+instead of
+
+if (link_len > buf_len - CIFS_MF_SYMLINK_LINK_OFFSET)
+
+since buf_len is  CIFS_MF_SYMLINK_FILE_SIZE and looking at link.c line
+26 and 27 this means we can use CIFS_MF_SYMLINK_LINK_OFFSET for the
+comparison:
+
+#define CIFS_MF_SYMLINK_LINK_MAXLEN (1024)
+#define CIFS_MF_SYMLINK_FILE_SIZE \
+        (CIFS_MF_SYMLINK_LINK_OFFSET + CIFS_MF_SYMLINK_LINK_MAXLEN)
+
+On Tue, Apr 12, 2022 at 1:01 AM Harshit Mogalapalli
+<harshit.m.mogalapalli@oracle.com> wrote:
+>
+> Smatch printed a warning:
+>         arch/x86/crypto/poly1305_glue.c:198 poly1305_update_arch() error:
+>         __memcpy() 'dctx->buf' too small (16 vs u32max)
+>
+> It's caused because Smatch marks 'link_len' as untrusted since it comes
+> from sscanf(). Add a check to ensure that 'link_len' is not larger than
+> the size of the 'link_str' buffer.
+>
+> Fixes: c69c1b6eaea1 ("cifs: implement CIFSParseMFSymlink()")
+> Signed-off-by: Harshit Mogalapalli <harshit.m.mogalapalli@oracle.com>
+> ---
+>  fs/cifs/link.c | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/fs/cifs/link.c b/fs/cifs/link.c
+> index 852e54e..ebfedae 100644
+> --- a/fs/cifs/link.c
+> +++ b/fs/cifs/link.c
+> @@ -85,6 +85,9 @@
+>         if (rc != 1)
+>                 return -EINVAL;
+>
+> +       if (link_len > buf_len - CIFS_MF_SYMLINK_LINK_OFFSET)
+> +               return -EINVAL;
+> +
+>         rc = symlink_hash(link_len, link_str, md5_hash);
+>         if (rc) {
+>                 cifs_dbg(FYI, "%s: MD5 hash failure: %d\n", __func__, rc);
+> --
+> 1.8.3.1
+>
 
 
---------------6VL6R0lHHm0783L0XSQX0kzB--
+-- 
+Thanks,
 
---------------omdPrusG0BXycU02FDL4CdhV
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmJUhbcFAwAAAAAACgkQqh6bcSY5nkZK
-xA//ZLl1NFq5SAS3tbRfl4HauIv6rTAMZh3WY76iKKFKaPp1F9bJwncpSSg4OoV9EUtGECeGSbLW
-8ZiJmr5zhqXdrEZdA5FghbFDpbvkTJgAYEaMSOkmynACMdg5mgL7zKiH44xogejAvkBuk8ZXHkyM
-vgVOTs6Z95Tesfi0yW9DS1VpU3EhZ4yO0BnpvmYffuml1DEUynuL9/H+of8Fl2e3MO/5k1+a4C/R
-v2OmqSvCZiTHnA3zR9lEMMOmgzdLAd0Aa5qfJeejQLkKZYmwgyjw8R9I2AE9qmAmYqkDB/IV3hD/
-0q1MlKiGx3se5mWjDxAA4NDHWwji0IK8tk3qkAk++71ocdAn/L9J71Niooqhpaia3TX5Q7aH97Az
-Z3UoNwTJ8FXrvofCnZ3JbulNiOR5zktNOG6AGex/iZ4d9b+DExLeQJNycw2ZZWsy48T1GHNvM5e9
-15juvLCfHNCjhtCQ3LaES36jPUHzbmz2QsUxELCFFMJs4Y9uF+UITTRWffI5N+syGhUN/XweyWi+
-9MZgyXdCrlfDRmuO35YKI96Vn4hcMw5gUDdWxW1LCzMVsdGyKSu5sJVVi83FJ5PfFOTYachP6+Y+
-ixv574Dj7cdOS62S+IBOtPa7PFCApu6BpdgErsjDb7auZ7F2U14j2hIgSg9dt95midr+6EAQLkjj
-l+0=
-=Rwfz
------END PGP SIGNATURE-----
-
---------------omdPrusG0BXycU02FDL4CdhV--
+Steve
 
