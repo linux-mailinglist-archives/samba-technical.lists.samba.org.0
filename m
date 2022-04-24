@@ -2,58 +2,39 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7D3D5084E5
-	for <lists+samba-technical@lfdr.de>; Wed, 20 Apr 2022 11:25:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DBC650D503
+	for <lists+samba-technical@lfdr.de>; Sun, 24 Apr 2022 22:09:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=lKjV/Yhuv7f9fJwhIuPaq3izkveOQFW9/Hm3eKtz6Cc=; b=KzSdN62VfheXqiFftAacpixCur
-	L2bhkLH52ccyncC+Wbxt/EB48TwN+cc6g/m7rYheTYssD3JnqTUaWI56B5dV+z3UnAnTaHox2bm3W
-	Ds1oRBX+qDcPEeU0xWRRWmWMfGy2802hyjF6KRX5/S17NgCVE16Xsor97lMkN+Rq2pNrXL2JJY4mh
-	qnBH0eYMeTyfbbz9oj5N2FlCzisVphPepA6pMjYynkMe6myg8sfzw0AfzKM+vUyeddFbgQF9/LTV6
-	MrUHa9RTN0u2MOTJ8w0vYBHA6nNxsvadL2AiOjxDlwVyBAQyRb/PjMldnMmBUhO/le54080GM3wQ6
-	cdpoqFAw==;
-Received: from ip6-localhost ([::1]:21478 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=2izbUUjQSIJmw7wlCiSnLcSiE8kdYoOY1L73mL60BgE=; b=ly59Iw3sJoLGVGGUxG8nJXiZso
+	ggG1cEsEBfeyCMkIQocimksvMzTIaeeNbH42O5eb0A2FnkPRoezXv2fByuIgv9ACUXoBJgqL8M1wM
+	e8q+vi2grzNEorRcigU7nn6dnXAyJHtMwP3xq0484wQkTPzvG4krtY2fldfkdeBbavsxxbLAbzuE4
+	AvG/S0KJ3aU+QHrdCrmEDVI8y+6T2wwRS1HDvG9ZsD780jFCKb7DCA21ZQI9yCogIbDPUPV9j4NhX
+	m52uCXPYyRuButj8Lxbp300z0dxk8kmLBAJ8EcWDxQDTwZkOWq4BgG0duQ2laatPsxfV0mjmjuE4e
+	v5sK3Hvg==;
+Received: from ip6-localhost ([::1]:48822 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nh6ZS-001IKG-Bw; Wed, 20 Apr 2022 09:24:22 +0000
-Received: from mail.ozlabs.org ([2404:9400:2221:ea00::3]:39977
- helo=gandalf.ozlabs.org) 
+	id 1niiX6-001yls-KJ; Sun, 24 Apr 2022 20:08:36 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:49281) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nh6ZM-001IK7-Uk
- for samba-technical@lists.samba.org; Wed, 20 Apr 2022 09:24:19 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4KjwG64PV3z4xPw;
- Wed, 20 Apr 2022 19:23:42 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
- s=202004; t=1650446625;
- bh=lKjV/Yhuv7f9fJwhIuPaq3izkveOQFW9/Hm3eKtz6Cc=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=iGYvpT+1QyfRN9LRjVjtaZI59Z5n8XVim5J/CyeW6Nn4vcn65jhDAfYIaX+/T2Tvy
- eauPy/FRohczc6KzxoBB5Vi2LU39eWGhG2uzERhVvCTBPs3KPpBc2F7aWk12GIzsCR
- Cdu73C+B7cNm5DhaXpfmT70k5TDBcbFJCCOxcYx8Qlq7JW2ECohsPoHsCDbwKCqLWr
- 0R0LRZnSWkdv/jMrKlNN++1j0kyElY81pr17PkFYXciVj5t7W/eNfZuADU5oICypnt
- lpV7fktCHSRJNcSe5u8lPMC3jA2RyV/5a80heezIu1soIOH6KIP5Wu+zlrv8IQNjrG
- WZY/TdMw7l/9w==
-Date: Wed, 20 Apr 2022 19:23:41 +1000
-To: samba-technical@lists.samba.org
-Subject: Re: doing a test build of samba
-Message-ID: <20220420192341.5c8ce0ce@martins.ozlabs.org>
-In-Reply-To: <1b3f5415-f263-8b56-c66d-77049719b018@msgid.tls.msk.ru>
-References: <245e18ba-a620-6a19-33d5-8794f010a617@msgid.tls.msk.ru>
- <5f048c2b3b9a93b653f19e2573b2f60ad4688af3.camel@samba.org>
- <30f1d626-f8c4-ca8a-38d0-a2c7eb2ed03a@msgid.tls.msk.ru>
- <9327243.eNJFYEL58v@krikkit>
- <794ca2a4-6d67-ae04-2dec-ca291d633cc8@msgid.tls.msk.ru>
- <0a7f7fb7724efaa78937a1020ffb110eb5e6b75f.camel@samba.org>
- <1b3f5415-f263-8b56-c66d-77049719b018@msgid.tls.msk.ru>
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.31; x86_64-pc-linux-gnu)
+ (Exim) id 1niiX2-001yli-2e
+ for samba-technical@lists.samba.org; Sun, 24 Apr 2022 20:08:34 +0000
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id E89BA40124
+ for <samba-technical@lists.samba.org>; Sun, 24 Apr 2022 23:08:29 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id B023335C
+ for <samba-technical@lists.samba.org>; Sun, 24 Apr 2022 23:03:14 +0300 (MSK)
+Message-ID: <14f83e34-b8b1-1c15-2f19-4a010ff96601@msgid.tls.msk.ru>
+Date: Sun, 24 Apr 2022 23:08:28 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.0
+Content-Language: en-US
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: msg.sock: is it really private dir, or a runtime/pid dir?
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Warn: EHLO/HELO not verified: Remote host 2404:9400:2221:ea00::3
- (mail.ozlabs.org) incorrectly presented itself as gandalf.ozlabs.org
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,28 +48,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: Michael Tokarev <mjt@tls.msk.ru>
+From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Michael,
+I noticed msg.sock/ subdir is created within samba private directory,
+and it contains sockets for various samba processes.  This smells like
+it should be done in a runtime directory (/run/samba/) instead.
 
-[Replying to a random message in this thread that is still in my samba
- folder... :-) ]
+In the code, in source3/lib/messages.c, this is indeed done in private dir:
 
-On Tue, 5 Apr 2022 22:57:16 +0300, Michael Tokarev via samba-technical
-<samba-technical@lists.samba.org> wrote:
+       priv_path = private_path("msg.sock");
 
-> Before uploading such a monster I'd love to know if it at least
-> quacks still, instead of relying on my users to report problems.
+I think the sockets should not be in a private state directory to start
+with.
 
-Samba 4.16.0 landed on my Debian testing system today.  I hope you
-managed to get through some successful test runs.  Either way...
+Thanks,
 
-Congratulations!  Excellent job!
-
-peace & happiness,
-martin
+/mjt
 
