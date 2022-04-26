@@ -2,38 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 718AE50F8D0
-	for <lists+samba-technical@lfdr.de>; Tue, 26 Apr 2022 11:43:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 505AF50F9DC
+	for <lists+samba-technical@lfdr.de>; Tue, 26 Apr 2022 12:12:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=1i923IECzJikwfJFN7hHFpvAOqkg1mCdcnRvXZzW+O0=; b=gsMVDBv0AKQ/nOmIO9D+yLRkxb
-	Nz5BAOyIoO75w7VC47cp7shUJu19DQPNvLvqRTE7/da+TBBHahFT9fuZryM2KXfqxlnKSjWA6wy9K
-	vYC7aGghY3rVNdzFZ7hqqUVVmPfVRZ9ZaeAiy0NxIoeR7wcg46Hg6leLmG3tLSYpeN+dWTKrfNq3S
-	xZhDxpROTRsDXtQjmnetyn3VsYW85wF4tLOf+kSrqTKbfh/Z9SB0khKXCp9ov8iVZynoCS0ZO6Oy4
-	WUvom2OVTbQtErFflamRxfT3VcJqSC5pGBrDI05Q5SgUGydUHchhu0Kd1C5ktCN9hd6KWudUD5spi
-	YyerzYoA==;
-Received: from ip6-localhost ([::1]:27860 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=zTPxNDU6K0LHiWYA1WMVJQYEdwf5RUkVT7vx+9zuQvU=; b=Swf3QVgTg1B6cgzVUFFH9QcQJv
+	PPyNtoe3OD1jthNcjCXuRZ4R2qLdFCvSILyhxEDiCm8YNIMQxd3bVwfp9ICDLkVifHquhtsuQCvQj
+	gYxU+ixJ1qi4TXf7pb711fVozdi/dd1L7Ma9qEtnuQhCUzpXxFRA6wBElGKLjNXuXZ/91sjGDjMAa
+	XgBtqYlJmLb8SXpBxGv1dJYsV3qtu+1hXr0pQ1tEiBhxGv5v84FlScKYtTVEyKY9ulvDhID9II0CC
+	G1A1xC/LcQslpsnZRlR7Q/eNTN3OEG4sFf/L6y+YDhwrOBMUo3t/BStepPvUEEpTwOZ0XDDL/LtiW
+	p/PV1X/g==;
+Received: from ip6-localhost ([::1]:28538 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1njHih-002ENL-VB; Tue, 26 Apr 2022 09:42:56 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:49063) 
+	id 1njIBT-002Ej8-Du; Tue, 26 Apr 2022 10:12:39 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55882) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1njHie-002ENA-4U
- for samba-technical@lists.samba.org; Tue, 26 Apr 2022 09:42:54 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 4B6B94078B
- for <samba-technical@lists.samba.org>; Tue, 26 Apr 2022 12:42:49 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id DC9DC39C
- for <samba-technical@lists.samba.org>; Tue, 26 Apr 2022 12:37:34 +0300 (MSK)
-Content-Type: multipart/mixed; boundary="------------mLIIhDK22xquOE0oOAqCS3tb"
-Message-ID: <ff4e3861-adca-cb4e-55ed-2fc7471dc0f5@msgid.tls.msk.ru>
-Date: Tue, 26 Apr 2022 12:42:48 +0300
+ (Exim) id 1njIBL-002EiZ-TG; Tue, 26 Apr 2022 10:12:34 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=zTPxNDU6K0LHiWYA1WMVJQYEdwf5RUkVT7vx+9zuQvU=; b=YWlTgvCWDcdJytD+1T6EPIw6mk
+ DTMWf5Z0XHGNqxma6en8DrweG36gQdet2e9VMiJT9lUKUDJLFGy6ZkFfmswSnVHZloeIDvCtxFVss
+ y6ThwQ1Qa9GhhzLK3i+PJo5078W4hnGjfAJC2t9d68VUC4cTblR5VQ12TLf0KD5Y/obiW2wE9a8zA
+ vhgmzrcbhbYopTm6AkXa08HAoOzYp/BQmTMZtBtHBiDg57uYATvRC6ur+bVd2h27OadnC3+JU6uS4
+ hZ5/uRYJCKatFRVwRvTSK2cHqE+hx26WNGpRhsZ0sxmjtVMXAMthznMFcQszcx0EF1G6sb2jABsg4
+ +qOB+FSHhaX0tjMSoAZh7oI4KmDptyvcKvaph9HsYkCZ4ja4R+gtoRWSAwfQvot6mC5fWsMaeLcfv
+ rp4ST8JODvfnOAy8IDrGNwz2YZ/I7nnBYeqs00jrYsv/CgffVHsob3opLP82wtQFI+t5jCOxEFX9g
+ u9yISekE4x0ZPFOMnYRdnji5;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1njIBK-002Oxg-89; Tue, 26 Apr 2022 10:12:30 +0000
+Date: Tue, 26 Apr 2022 12:12:24 +0200
+To: "David C. Rankin via samba" <samba@lists.samba.org>
+Subject: Re: [Samba] libICU 7.1 update to 14.6 build - [homes] no longer
+ visible from iPhone Files app (IOS 14.8.1)
+Message-ID: <20220426121224.7a61526d@samba.org>
+In-Reply-To: <5c0ffbda-4961-3165-4ee9-6619802cf5de@gmail.com>
+References: <5c0ffbda-4961-3165-4ee9-6619802cf5de@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Content-Language: en-US
-To: samba-technical <samba-technical@lists.samba.org>
-Subject: pid_directory error in testparm?
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,46 +55,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
+Cc: "David C. Rankin" <drankinatty@gmail.com>,
+ Samba Technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a multi-part message in MIME format.
---------------mLIIhDK22xquOE0oOAqCS3tb
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+[cc'ing samba-technical]
 
-Hi!
+Hi David,
 
-I noticed testparm is failing when samba pid directory does not exist.
-However, some samba daemons do create this directory automatically, and
-as far as I can see, samba can be started just fine without this directory
-(maybe not all daemons do this, I'm not sure yet).
+I'd suggest that you open a bugzilla.samba.org ticket and attach a
+network trace of the non-working share access attempt, preferably also
+a working access trace from a libICU downgrade...
 
-How about something like the attached change for testparam.c, to denote
-this condition from being ERROR to a mere WARNING instead?
+On Sat, 23 Apr 2022 01:34:56 -0500, David C. Rankin via samba wrote:
 
-Thanks,
+> All,
+> 
+>   This is a strange issue. 14.6 standalone, IOS 14.8.1 Files app. A few months
+> back I had to add:
+> 
+> vfs object = fruit streams_xattr
 
-/mjt
---------------mLIIhDK22xquOE0oOAqCS3tb
-Content-Type: text/x-patch; charset=UTF-8;
- name="testparm-do-not-fail-if-pid-dir-does-not-exists.patch"
-Content-Disposition: attachment;
- filename="testparm-do-not-fail-if-pid-dir-does-not-exists.patch"
-Content-Transfer-Encoding: base64
+I'm unfamiliar with the iOS Files client, but have you tried adding the
+catia VFS module to your configuration above ("catia" before "fruit")?
+I ask due to Ralph's comment in vfs_fruit.c:
+  * The OS X client maps all NTFS illegal characters to the Unicode
+  * private range. This module optionally stores the characters using
+  * their native ASCII encoding using vfs_catia. If you're not enabling
+  * this feature, you can skip catia from vfs modules.
 
-ZGlmZiAtLWdpdCBhL3NvdXJjZTMvdXRpbHMvdGVzdHBhcm0uYyBiL3NvdXJjZTMvdXRpbHMv
-dGVzdHBhcm0uYwppbmRleCAyZDcxN2YxOTc1Ni4uNmQ2ZTQ2MmQwODQgMTAwNjQ0Ci0tLSBh
-L3NvdXJjZTMvdXRpbHMvdGVzdHBhcm0uYworKysgYi9zb3VyY2UzL3V0aWxzL3Rlc3RwYXJt
-LmMKQEAgLTI4Myw5ICsyODMsOCBAQCBzdGF0aWMgaW50IGRvX2dsb2JhbF9jaGVja3Modm9p
-ZCkKIAl9CiAKIAlpZiAoIWRpcmVjdG9yeV9leGlzdF9zdGF0KGxwX3BpZF9kaXJlY3Rvcnko
-KSwgJnN0KSkgewotCQlmcHJpbnRmKHN0ZGVyciwgIkVSUk9SOiBwaWQgZGlyZWN0b3J5ICVz
-IGRvZXMgbm90IGV4aXN0XG5cbiIsCisJCWZwcmludGYoc3RkZXJyLCAiV0FSTklORzogcGlk
-IGRpcmVjdG9yeSAlcyBkb2VzIG5vdCBleGlzdFxuXG4iLAogCQkgICAgICAgbHBfcGlkX2Rp
-cmVjdG9yeSgpKTsKLQkJcmV0ID0gMTsKIAl9CiAKIAlpZiAobHBfcGFzc2RiX2V4cGFuZF9l
-eHBsaWNpdCgpKSB7Cg==
+That said, I wouldn't expect this mapping behaviour to affect [homes]
+section handling.
 
---------------mLIIhDK22xquOE0oOAqCS3tb--
+Cheers, David
 
