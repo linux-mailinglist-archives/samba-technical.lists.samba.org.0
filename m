@@ -2,41 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 138C8510A7B
-	for <lists+samba-technical@lfdr.de>; Tue, 26 Apr 2022 22:31:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 10B5B511C96
+	for <lists+samba-technical@lfdr.de>; Wed, 27 Apr 2022 19:26:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=VuGXG5JgPsjNesQ0qxFhkK7pHnS8wO/nL6i/8JvOdvc=; b=x24pSDvNya2x8jj2qWzyx0ekTH
-	enDV1Gj6Wi3J1/AhmbARvLX9fROUhy5v8cAhqPwVTyB1NvT6G281Epc9/gJQ0ZcWV0fLDmaHwYKKF
-	+FMzmmn7VjrCA+feo4BMa01+9UjTastvFsxzCLjCT2qWUeHCEeaDL+cki1/0gTf13hNyrgRPrkby4
-	ZjEpzkxePuQCZ8UyJursLKVLO5nHwBaohgJTrPFSTxbrLCs8rTgzlJzh5uy1SyS8gnagFZSyTFDLS
-	MiBY9ncc8bq2eSG8HFkGZvQecps1Z4sZJ7o6kCPdKJJiWQDg5IEtn2IO8Vb3hh5dEY49eW85BvPYn
-	udU0PPHA==;
-Received: from ip6-localhost ([::1]:57502 helo=hr1.samba.org) 
+	bh=AMIJysOIClyhWI40Frd16XNEy0LkHD61PbPvdqPpKpE=; b=Rq7nwWGeMM3sV9J4Yy29m4Y/Z/
+	PKgRyS0k+UCWkkWr+XQX8g+HeRT6CPqcANOVWhACV9LJe7R5KwajpIXQVYjgaZRvXcBvDxywcRk/7
+	JICZeKHS2e7ggynhSmaS5WeMreE0OtTwVsz5h3u+Hlm2oC+2v6M3MYxpHTE3LWLKPO3fFsxJAUxuv
+	2qlbRI8Y/4aGwDqPtpCFN7gi9Q+zJIxJwiw3uVlR4iHnyZn4A8+iZiDvbR6eTDm41tw2C0d7AlHJw
+	8IBn+2MWYldTtHtTt+VDl++EEhMTwITUKDeUQt23CmM8lV9HRKt3ZzcXIpp/cTf/vpryrp4oJDdgJ
+	HXzgYPwA==;
+Received: from ip6-localhost ([::1]:25302 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1njRpR-002Rgo-4D; Tue, 26 Apr 2022 20:30:33 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:42897) 
+	id 1njlQJ-002avC-EL; Wed, 27 Apr 2022 17:25:55 +0000
+Received: from mail-lj1-x231.google.com ([2a00:1450:4864:20::231]:46711) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1njRpK-002Rgf-2S
- for samba-technical@lists.samba.org; Tue, 26 Apr 2022 20:30:29 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id A85F040799
- for <samba-technical@lists.samba.org>; Tue, 26 Apr 2022 23:30:23 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 62E4D39C
- for <samba-technical@lists.samba.org>; Tue, 26 Apr 2022 23:25:08 +0300 (MSK)
-Message-ID: <a614d5b2-3995-88ae-a5b3-cc8f745959fc@msgid.tls.msk.ru>
-Date: Tue, 26 Apr 2022 23:30:22 +0300
+ (Exim) id 1njlQE-002av3-5Q
+ for samba-technical@lists.samba.org; Wed, 27 Apr 2022 17:25:53 +0000
+Received: by mail-lj1-x231.google.com with SMTP id 16so3531949lju.13
+ for <samba-technical@lists.samba.org>; Wed, 27 Apr 2022 10:25:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ixsystems.com; s=google;
+ h=mime-version:from:date:message-id:subject:to;
+ bh=H41M13ZlLzFGeomWSI5q+bsCsnziMNQVeEHqJ+vLJi8=;
+ b=NGEJ9CFKtPP8A88lwx3Ytg6VOMXlfdxl0y5ytSq5q+FpXela3TlFfumVUL0WdGf3aQ
+ bbfUVQ2DZlI+oL6E9qvBMMRbheTxGk6blthdRNbiyZaujxQWtnMi21+5wJo1le+eNG6N
+ Nc71fwhSzWgxyoaHn9yAyamwUzPV2rAJRAOdP5fiRnFBF8aVVA/6VOXIZBVhPVwQZu0X
+ bLbHFNVM+KbzjRycuM0Cf8xlPvV8MK+lWeJLIK7DbpluhT8CKnygn/DX2nHqUvJaVJF6
+ R9n0Aes5/lwlTdVwUuewlUbf5FK9yZrInwC4hLhWhiMHSO9VQRTpS7UmkmRAViIGGRVv
+ OS6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=H41M13ZlLzFGeomWSI5q+bsCsnziMNQVeEHqJ+vLJi8=;
+ b=sDp4d3+NL4BXUci5p4fcyppUh31vdW8VdAFCvIdJVHkH3kTqb1M4ST9s6qg4PU98DR
+ Kv888cGtMznCbfIL4KN6XrYY6ZokTJz3kQzp1QHSaIvMUbANgimzoFLnwtMSL1etE+Td
+ 2vK0BbdFr9zkMIcm4bbHdagEjhQQsY9HkyXT3JrRm13j0aJAtwab3eEVZgCSisk70JRi
+ OXxjRWhYmgzrJxhegm+0t5q069U7Ty9lJruAi7Sv4Ect1P3hu8hKwa72QWUDRH03pBM4
+ vo1TwJ0XTM5GKUXIZnL85kOoPliL6sfSt5jl4Wj0lnOcwtE+yv/XqNed639x9/+6lS7t
+ pNZg==
+X-Gm-Message-State: AOAM533Y2FrlKk3D1DPgmt496lC4YIOoiaxfOQhb4xx6grPQNNsfTqFG
+ jDJ5IysPm9lUYEZZ6tiM7I3d2pGSyN20YAXXc8LahT4stncVsA==
+X-Google-Smtp-Source: ABdhPJzowESURDNRucRPZNFL1g9ChJ2luoJb4UPF2hu/TAYjBksStDS1rPhsRUQMJJoqNTATQM2NrDGsZGeklCmrHMc=
+X-Received: by 2002:a2e:934f:0:b0:24f:ea1:6232 with SMTP id
+ m15-20020a2e934f000000b0024f0ea16232mr12138162ljh.135.1651080348803; Wed, 27
+ Apr 2022 10:25:48 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: waf, PYTHONHASHSEED & -I order on other architectures
-Content-Language: en-US
+Date: Wed, 27 Apr 2022 13:25:37 -0400
+Message-ID: <CAB5c7xrKB52rmAP9qPFxzjtCcBLvGsGiUn_ODz7QwQwrJ15o0A@mail.gmail.com>
+Subject: ctdb client python bindings
 To: samba-technical <samba-technical@lists.samba.org>
-References: <76a4f905-6f2a-18f4-7c9d-f9846681ec01@msgid.tls.msk.ru>
-In-Reply-To: <76a4f905-6f2a-18f4-7c9d-f9846681ec01@msgid.tls.msk.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -50,72 +67,60 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Walker <awalker@ixsystems.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-09.04.2022 09:41, Michael Tokarev via samba-technical wrote:
-> Hi!
-> 
-> I'm having a build failure of samba on sparc64.  It fails due to finding
-> wrong include for <gssapi/gssapi.h>, as it has already seen before due to
-> PYTHONHASHSEED not being set, having python hashes in random order so -I
-> includes were unpredictable.
-> 
-> The good -I order is this:
-> 
->   -Ithird_party/heimdal/lib/gssapi
->   -Ithird_party/heimdal/lib
-> 
-> the bad is:
-> 
->   -Ithird_party/heimdal/lib
->   -Ithird_party/heimdal/lib/gssapi
-> 
-> (I picked up only the -I options for dirs where <gssapi/gssapi.h> exists).
-> 
-> This is stable on sparc64, all builds of samba-4.16 are failing due to
-> this very issue.
-> 
-> How to work around this?
+Hey all,
 
-It turned out this is even more interesting.
+I threw together some quick python bindings for a ctdb client. WIP, but any
+feedback would be appreciated (either in-list or direct email to this
+address).
 
-The same issue started happening on alpha too now on Debian, after
-update of python from 3.9 to 3.10.  Before, with python 3.9, it
-worked fine.  Again, this is WITH pythonhashseed=1 set. This is
-exactly the case with heimdal includes. The log is here:
+I've currently thrown together
 
-https://buildd.debian.org/status/fetch.php?pkg=samba&arch=alpha&ver=2%3A4.16.0%2Bdfsg-7&stamp=1650980011&raw=0
+https://gitlab.com/samba-team/devel/samba/-/commits/anodos325-ctdb_python_bindings
 
-it is exactly the same prob as on sparc64.
-Neither sparc64 nor alpha are Debian release architectures,
-so it is not a big deal that the build fails there, but it
-looks like the thing is quite fragile.
+below are some basic operations
+* initializing client
+* getting cluster status
+* creating a new persistent ctdb file (if that's your thing)
+* listing current nodes
+* getting pnn0 object and printing its current status
 
-And there's more to this. This time, the built was made
-WITHOUT specifying PYTHONHASHSEED=1, - this is before I
-become aware of this.  Please see here for the complete thing:
-
-https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1009726#10
-
-TL;DR version: successful build sometimes results in broken
-binaries due to the link order - the resulting binaries are
-segfaulting randomly. This is, again, without setting
-PYTHONHASHSEED=1.
-
-But having in mind the hash order is architecture and python
-version dependent, how far we are from getting broken builds
-even WITH "fixed" hashes?
-
-It looks like this whole thing needs a more real fix, so it
-is not dependent on architecture or python version.  It is
-not just the wrong include order and the compiler finding the
-wrong include file because there are too many of files with
-the same name. It is successful build producing broken binaries.
-
-Thanks,
-
-/mjt
-
+```
+>>> import ctdb
+>>> cl = ctdb.Client()
+>>> cl.status()
+{'nodemap': {'node_count': 1, 'deleted_node_count': 0, 'nodes': [{'pnn': 0,
+'address': {'type': 'INET', 'address': '192.168.0.92'}, 'flags': [],
+'flags_raw': 0, 'partially_online': False, 'this_node': True}]}, 'vnnmap':
+{'size': 1, 'generation': 705683446, 'entries': [{'hash': 0, 'lmaster':
+0}]}, 'recovery_mode_raw': 0, 'recovery_mode_str': 'NORMAL'}
+>>> import os
+>>> db = ctdb.Ctdb(cl, "curly.tdb", os.O_CREAT)
+>>> db.exists
+False
+>>> db.attach(ctdb.DB_PERSISTENT)
+>>> db.exists
+True
+>>> db.status()
+{'dbid': '0x3c05769c', 'dbid_raw': 1006991004, 'name': 'curly.tdb', 'path':
+'/usr/local/samba/var/lib/ctdb/persistent/curly.tdb.0', 'persistent': True,
+'replicated': False, 'sticky': False, 'readonly': False, 'flags_raw': 1,
+'health': 'OK'}
+>>> cl.listnodes()
+{'node_count': 1, 'deleted_node_count': 0, 'nodes': [<ctdb.CtdbNode object
+at 0x7f013deb95a0>]}
+>>> my_node = cl.listnodes()['nodes'][0]
+>>> my_node.
+my_node.ban(             my_node.disable(         my_node.flags
+ my_node.private_address  my_node.unban(
+my_node.current_node     my_node.enable(          my_node.pnn
+ my_node.rebalance(
+>>> my_node.pnn
+0
+>>> my_node.flags
+{'parsed': [], 'raw': 0}
+```
