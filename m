@@ -2,64 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9DEB514A4B
-	for <lists+samba-technical@lfdr.de>; Fri, 29 Apr 2022 15:10:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37BB85157CF
+	for <lists+samba-technical@lfdr.de>; Sat, 30 Apr 2022 00:04:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=L1lh/rmTs6pWnhQRLw0qWkCmH6y8DO5zsuf8wwW1rWU=; b=qxvhpVBtDvVchqmrdKBqn9luXr
-	Nu66b2h3SAk/l6EoL9VIc94eC1vWXDTBiAp7p42dPSEXtJixpZf/6/8TKT1idWtweqCeL9GBw1/L2
-	2ujKKe8h1y0lRcQ/y2nG7Sr6Vqm9cGcULCIW7A7rJHwb0HghJw2LnqaCdXD8OBkTFc9+3ZYgB0JP2
-	JvwPB+EqBHAU94LOXP6EWWOLR1VLMceHlxYLHAPcVa78rMSdsxVGZoFEAeACVKWTWj/HPjRzRsqE4
-	rv63/xCbaYYDDAPDqkVTboy+GXXP9R8zyf8lLY8WZsilzqpVmjRck3ZoYJPVV5N9JRhIbr2gyVe8x
-	xh8lXtPw==;
-Received: from ip6-localhost ([::1]:29814 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=bPmhOVUWo0n5hG/Bfz/n8rvpnhUee/nCZeFEHS7ETZ8=; b=zdhpL1Phi0TgcuUGxMeo1IyaFU
+	cYa6QybIgGmbxZffj29RislqGZ7dRjJdK9K4LawPXAr65pVaK7PQKAXOKZKqP3ZUxLjraptoWpwSi
+	VThFMcL+Qt17+M9Cq8H15bOpwCPpJltthUR1fJuqjC/9WUDOr9sWpXURSiBWKdRBiM4GMwCcQiD77
+	LefHn8dwdFgzfsxWIQhVvTYOCoIsrTzpRQdBiBZA5RKoftOVD0QBmr9MpJyUZQzHlW+XtFvnqth3O
+	fNmbv22zLOckhcS19Z1ruH8L1HrSHjstJ6UjqQF80vG65JgPbzvoyhcqbiwl3Q9oPHL4gFr49Wk9j
+	SJDz6UyQ==;
+Received: from ip6-localhost ([::1]:30668 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nkQNT-003LXq-N3; Fri, 29 Apr 2022 13:09:43 +0000
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:34322) 
+	id 1nkYi3-003MVM-SP; Fri, 29 Apr 2022 22:03:31 +0000
+Received: from mail-ed1-f41.google.com ([209.85.208.41]:41791) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nkQNL-003LXg-N4
- for samba-technical@lists.samba.org; Fri, 29 Apr 2022 13:09:40 +0000
-Received: by mail-lf1-x12e.google.com with SMTP id x33so14001990lfu.1
- for <samba-technical@lists.samba.org>; Fri, 29 Apr 2022 06:09:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ixsystems.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=h8lwTo7eW79RT1pfROoVIglkwrsISHnDlEk8d1iGNwA=;
- b=ScZyyLuWfDHZtLNdCMDrkoYAuGO8nj45kDNlpHsJy1LdV0yGS9swjUEbg/pIk3Brhg
- maySIO/TnBpC4yOBA87l7CJk5zJONgtU7KZm1nwwZYm+EbLi2C/oCcGmOaZR/VGWf0KG
- 5PLUiIIyzzJ9SUaY3X+FoQLq4zOtaAuCiVaWz4kI+CTm3qyoOHzbGEG+6xaPlnfwS8fy
- YuBt3coSMwTi4PUtHAU992dQGWVXRvUqipFG+d0R4sef5UuKew43So+SgxXDLk/mXu29
- OhT9b2OowoN9WXQfIqcVkQ9ZM4WAh+GtKZ0QSLEzdRqEFGahxfauKsJobJzD6UiBUpO2
- MAjg==
+ (Exim) id 1nkYht-003MVA-70; Fri, 29 Apr 2022 22:03:29 +0000
+Received: by mail-ed1-f41.google.com with SMTP id d6so10506850ede.8;
+ Fri, 29 Apr 2022 15:03:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=h8lwTo7eW79RT1pfROoVIglkwrsISHnDlEk8d1iGNwA=;
- b=UjomLFQAQJ7Is+Bo+7FhO1cgZmgGlLc9sbr9oDVomqCsqnqlJ9VCvZUpcWqadZw4Ft
- Sh/Bbw3eC3/hSdfs+1C60oBfcpUX7zIi5MaxxdTOQ4+MbWUGjm82j6xwQRqDNjBbuYeB
- htL3FXXeBv0zJpxwOB77+xgsPBnjbasLJd+KzPwmFjDg0KGX2wO1iHOF8Wf7Q1KQIGyp
- IthJFjFyyBT/Tc/P4ERZw/4hk/Ouc8MwHh5+XisWHLNmfQlVF2Y7otCE81uUV5W3Y3pc
- MSlKLALqdMA2Las9ZFnlgEO5nvgEYelT0oTuL4R6klw+cqv2qKcX+MeWJtLg1DRgmB7x
- rClg==
-X-Gm-Message-State: AOAM531K1cihqwLGXo6FEEm+LHX14mKfqE+KpCk09Dhzo7hz4Wh7mwYR
- ij5A8v3lqCYvwuL2uv+as8NwUTvrcWOo05e4ajTxZYLoP9E=
-X-Google-Smtp-Source: ABdhPJyIjZxLqnueLJlmmTFB7Fr+Dnd3Sxkw595IGiybYbw+Yu/MHTCZUiurwwKA61cuRTk7qhR30SVovaUW+u4yrGQ=
-X-Received: by 2002:a05:6512:15a0:b0:472:d09:a6b4 with SMTP id
- bp32-20020a05651215a000b004720d09a6b4mr16260294lfb.656.1651237774187; Fri, 29
- Apr 2022 06:09:34 -0700 (PDT)
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+ bh=bPmhOVUWo0n5hG/Bfz/n8rvpnhUee/nCZeFEHS7ETZ8=;
+ b=UMIl7K1pup8ZHcLhAatRsnpPkgMq/4cTlGMF/Px/rVDyq6r2+t8Vbm0MVH4IWrd9fG
+ FC9u8CVNaH2K5lomTFjW5siImXbH9S1mxuEJVhz3rCkZbJ+rNGIsj4fEaEwEvIG5JXNT
+ S4lzd6Q0nGcusnyNxSWRKUMCmM8h8g0/GR+8K54Pnb1izm+CYAYqYxRNgYVLwyZuN4A3
+ hGCqB0b9tRilnNUAxb+FMytDwdohPLOWlol9ZPKf0UrQ18sa8K/JLJBPimOYemLM2l7C
+ OwFGnGbwgfRPQa7xOWaj6ajMDpqsf6ydAtYRUCPSrGAL6N2DwUDHIxfgOp7lC0ejttRu
+ goTQ==
+X-Gm-Message-State: AOAM530KFcBVXDZ+NfHIuo/Z6FmHIqYhO0Qz2z1zwGe7dgtEJCxzYRY3
+ 8V/UU7POUneG7E0BySXXMG+Gbgy3XGTjV2jtTg==
+X-Google-Smtp-Source: ABdhPJz/yv8Dcvt94vlyaoWhyHGprWg7rzxKlb8JpI2bt+Gp6VAMUHLZm6+HKxdDU1uDwyyX3pLYDyXcLpN3mhEcoDc=
+X-Received: by 2002:a50:c3cf:0:b0:41d:5fc4:7931 with SMTP id
+ i15-20020a50c3cf000000b0041d5fc47931mr1453175edf.244.1651269799450; Fri, 29
+ Apr 2022 15:03:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAB5c7xrKB52rmAP9qPFxzjtCcBLvGsGiUn_ODz7QwQwrJ15o0A@mail.gmail.com>
- <CAJ+X7mTv5xR0J5e7OxLzhsnbHuB0wuECwL9Zn7pS+gu3LL2mBw@mail.gmail.com>
- <CAB5c7xrbN6UUuSOnOg+AHVeV6-VNQtgvHQ5KFqJKkF=X7LBxZQ@mail.gmail.com>
- <CAJ+X7mQUZKgaAf=ULXJezL1Up19sUK5JnRo4UcgOp1bb1bSdpw@mail.gmail.com>
-In-Reply-To: <CAJ+X7mQUZKgaAf=ULXJezL1Up19sUK5JnRo4UcgOp1bb1bSdpw@mail.gmail.com>
-Date: Fri, 29 Apr 2022 09:09:23 -0400
-Message-ID: <CAB5c7xryFXvWwkWhfhwROU1yUwnjPgwSHXzgr65z0v=9FDGQMQ@mail.gmail.com>
-Subject: Re: ctdb client python bindings
-To: Amitay Isaacs <amitay@gmail.com>
+Date: Fri, 29 Apr 2022 15:03:07 -0700
+Message-ID: <CAKywueTY1gvxKAH7q3rP1U0XSU9AhTZqUcH3GoqgQdbOfbh=Ow@mail.gmail.com>
+Subject: [ANNOUNCE] cifs-utils release 6.15 ready for download
+To: linux-cifs <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>, samba@lists.samba.org, 
+ Jeffrey Bencteux <jbe@improsec.com>, David Disseldorp <ddiss@suse.de>,
+ Steve French <smfrench@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,110 +58,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Walker <awalker@ixsystems.com>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Shilovsky <pshilovsky@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Apr 29, 2022 at 5:35 AM Amitay Isaacs <amitay@gmail.com> wrote:
+New version 6.15 of cifs-utils has been released today. This is a
+security release to address the following bugs:
 
-> Hi Andrew,
->
-> On Fri, Apr 29, 2022 at 1:04 AM Andrew Walker <awalker@ixsystems.com>
-> wrote:
-> > On Thu, Apr 28, 2022 at 4:14 AM Amitay Isaacs <amitay@gmail.com> wrote:
-> >>
-> >> I appreciate the efforts to implement python bindings for ctdb client
-> >> interfaces.  However, I fail to understand the motivation behind this
-> >> work.  Is there a requirement from some applications to have a python
-> >> interface to CTDB?  Or do you have some other plans?
-> >
-> >
-> > Well, I was working on this because our own (truenas) has python-based
-> > middleware and I was wanting to be able to get ctdb status info without
-> > having to launch subprocesses. I was also planning to write python-based
-> > collectd plugin to gather stats from ctdb at configurable intervals.
->
-> Thanks for describing the motivation for python bindings for CTDB client
-> API.
->
-> >> In the past, Martin and I had considered developing python bindings
-> >> for client interfaces.  The motivation there was to rewrite the ctdb
-> >> tool in python. However, we never got around to doing that.
-> >
-> >
-> > That's a good idea. I could go that route, which would reduce code
-> > duplication. Basically keep existing behaviors and arguments for ctdb
-> tool,
-> > but have it be python tool. Then it will probably not increase
-> maintenance
-> > load.
->
-> Before you commit to the idea of rewriting the ctdb tool in python,
-> there are few things that need some consideration (Martin might have
-> more things to add.)
->
-> For the last few years, Martin and I have been discussing the
-> monolithic ctdb daemon into separate daemons based on gross
-> functionality.  These include database, cluster, failover, event etc.
-> Unfortunately we have not been able to make much progress on that
-> front in recent years.  That does not mean we have given up on the
-> idea, it's still in the works.  Whenever that happens, obviously the
-> python bindings need to be modified accordingly.
+- CVE-2022-27239: mount.cifs: fix length check for ip option parsing
+- CVE-2022-29869: mount.cifs: fix verbose messages on option parsing
 
+Description
 
-Hmm... do you have a general idea of the gross functionality you want to
-have separate daemon's for. I was already breaking up functionality into
-different classes in the bindings I was writing. E.g.
+CVE-2022-27239:
 
-ctdb.Ctdb - interacting with databases
-ctdb.Node - interacting with cluster nodes
-ctdb.IP - interacting with public IP addresses
+In cifs-utils through 6.14, a stack-based buffer overflow when parsing
+the mount.cifs ip= command-line argument could lead to local attackers
+gaining root privileges.
 
-I could eliminate the convention of
-```
-cl = ctdb.Client() # get client handle
-ctdb.Ctdb(cl, ...)
-```
-and just initialize whatever client structures are needed in the object's
-tp_init()
-function so that the backend daemon / api can change without having to alter
-the python binding significantly.
+CVE-2022-29869:
 
-This has implications on the ctdb tool also.  We would like to group the
-> ctdb
-> functions as per the gross functionality.  This means restructuring
-> the ctdb commands in the style of "ctdb event" and subcommands, rather
-> than top-level commands.  This breakup of ctdb tool functionality is
-> likely to happen sooner than splitting of the daemon code.  We are
-> also thinking of transforming the ctdb tool into a ctdb shell with
-> readline.
->
+cifs-utils through 6.14, with verbose logging, can cause an
+information leak when a file contains = (equal sign) characters but is
+not a valid credentials file.
 
-I think these sorts of changes are probably quicker if the tool is written
-in
-python.
+Both issues were originally reported and fixed by Jeffrey Bencteux.
 
+Links
 
-> I am sure it will be possible to adapt all the features with python
-> implementation.  One thing I haven't yet figured out is how to run
-> tevent event loop along with the python main loop.
+webpage: https://wiki.samba.org/index.php/LinuxCIFS_utils
+tarball: https://download.samba.org/pub/linux-cifs/cifs-utils/
+git: git://git.samba.org/cifs-utils.git
+gitweb: http://git.samba.org/?p=cifs-utils.git;a=summary
 
+Thanks to everyone who contributed to the release!
 
-I wonder if we need to have separate temporary tevent contexts for each
-awaitable that
-we return. Basically let python wrap around the loop_once() to iterate
-until it completes.
-C.F. PEP 492 and tp_as_async.am_await function (granted this is pre-coffee
-thought).
+Best regards,
+Pavel Shilovsky
 
-If we decide to rewrite the ctdb tool in python, then it's essential to
-> maintain the
-> async event handling in python. I would like to get rid of the
-> synchronous api layer completely.
-
-
-I could switch to using the async API in the python bindings. Even for
-implementing
-a non-async module, this probably would result in better exception handling.
