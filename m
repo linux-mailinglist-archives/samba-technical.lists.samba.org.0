@@ -2,49 +2,39 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37BB85157CF
-	for <lists+samba-technical@lfdr.de>; Sat, 30 Apr 2022 00:04:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6568351679F
+	for <lists+samba-technical@lfdr.de>; Sun,  1 May 2022 22:02:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=bPmhOVUWo0n5hG/Bfz/n8rvpnhUee/nCZeFEHS7ETZ8=; b=zdhpL1Phi0TgcuUGxMeo1IyaFU
-	cYa6QybIgGmbxZffj29RislqGZ7dRjJdK9K4LawPXAr65pVaK7PQKAXOKZKqP3ZUxLjraptoWpwSi
-	VThFMcL+Qt17+M9Cq8H15bOpwCPpJltthUR1fJuqjC/9WUDOr9sWpXURSiBWKdRBiM4GMwCcQiD77
-	LefHn8dwdFgzfsxWIQhVvTYOCoIsrTzpRQdBiBZA5RKoftOVD0QBmr9MpJyUZQzHlW+XtFvnqth3O
-	fNmbv22zLOckhcS19Z1ruH8L1HrSHjstJ6UjqQF80vG65JgPbzvoyhcqbiwl3Q9oPHL4gFr49Wk9j
-	SJDz6UyQ==;
-Received: from ip6-localhost ([::1]:30668 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=FwZ1rNOvQDHYkpGC1If1h+FyJFcEJbSwYGjJl9hTDIg=; b=TuWxclD3RDc3ughSPbcnB9lgUa
+	23iVkDLmGJ231nR/gbxUSuzPAFOfOaB992iMu1MkFsGI+00MYf+bzZyzXAQ33OBsW4zaj20D5br9x
+	6CDe3JlBYlMBSzMlnf4A5LMlSg0VW/VuEBYBcsH19hw0/fXels7toNAfcQEreSYu+d1D/KeUIpyuj
+	tzlh0b72aKDe8Q93qzXWEU6YK2UM0d3gisO3tMlsh63Yoiwuc/pbUKqDkpcil6BOKnmCpvl8sk6GL
+	Ari1e7D0bBYNj2Jnk/P1zvRkyMSjGvwDaIY25C5C2kRBlGfboXISe+7C1h8cjLlCbxaIzQqrj1SBi
+	ne/MO7eA==;
+Received: from ip6-localhost ([::1]:21484 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nkYi3-003MVM-SP; Fri, 29 Apr 2022 22:03:31 +0000
-Received: from mail-ed1-f41.google.com ([209.85.208.41]:41791) 
+	id 1nlFkl-005SkG-R4; Sun, 01 May 2022 20:01:11 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:51455) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nkYht-003MVA-70; Fri, 29 Apr 2022 22:03:29 +0000
-Received: by mail-ed1-f41.google.com with SMTP id d6so10506850ede.8;
- Fri, 29 Apr 2022 15:03:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=bPmhOVUWo0n5hG/Bfz/n8rvpnhUee/nCZeFEHS7ETZ8=;
- b=UMIl7K1pup8ZHcLhAatRsnpPkgMq/4cTlGMF/Px/rVDyq6r2+t8Vbm0MVH4IWrd9fG
- FC9u8CVNaH2K5lomTFjW5siImXbH9S1mxuEJVhz3rCkZbJ+rNGIsj4fEaEwEvIG5JXNT
- S4lzd6Q0nGcusnyNxSWRKUMCmM8h8g0/GR+8K54Pnb1izm+CYAYqYxRNgYVLwyZuN4A3
- hGCqB0b9tRilnNUAxb+FMytDwdohPLOWlol9ZPKf0UrQ18sa8K/JLJBPimOYemLM2l7C
- OwFGnGbwgfRPQa7xOWaj6ajMDpqsf6ydAtYRUCPSrGAL6N2DwUDHIxfgOp7lC0ejttRu
- goTQ==
-X-Gm-Message-State: AOAM530KFcBVXDZ+NfHIuo/Z6FmHIqYhO0Qz2z1zwGe7dgtEJCxzYRY3
- 8V/UU7POUneG7E0BySXXMG+Gbgy3XGTjV2jtTg==
-X-Google-Smtp-Source: ABdhPJz/yv8Dcvt94vlyaoWhyHGprWg7rzxKlb8JpI2bt+Gp6VAMUHLZm6+HKxdDU1uDwyyX3pLYDyXcLpN3mhEcoDc=
-X-Received: by 2002:a50:c3cf:0:b0:41d:5fc4:7931 with SMTP id
- i15-20020a50c3cf000000b0041d5fc47931mr1453175edf.244.1651269799450; Fri, 29
- Apr 2022 15:03:19 -0700 (PDT)
+ (Exim) id 1nlFke-005Sk7-74
+ for samba-technical@lists.samba.org; Sun, 01 May 2022 20:01:09 +0000
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id 0F6A64001E
+ for <samba-technical@lists.samba.org>; Sun,  1 May 2022 23:01:06 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id C48B310C
+ for <samba-technical@lists.samba.org>; Sun,  1 May 2022 22:55:46 +0300 (MSK)
+Message-ID: <eec55602-46e4-4561-2aa3-108f789289a1@msgid.tls.msk.ru>
+Date: Sun, 1 May 2022 23:01:00 +0300
 MIME-Version: 1.0
-Date: Fri, 29 Apr 2022 15:03:07 -0700
-Message-ID: <CAKywueTY1gvxKAH7q3rP1U0XSU9AhTZqUcH3GoqgQdbOfbh=Ow@mail.gmail.com>
-Subject: [ANNOUNCE] cifs-utils release 6.15 ready for download
-To: linux-cifs <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>, samba@lists.samba.org, 
- Jeffrey Bencteux <jbe@improsec.com>, David Disseldorp <ddiss@suse.de>,
- Steve French <smfrench@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.0
+Content-Language: en-US
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: tevent test failures on debian
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,42 +48,94 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Pavel Shilovsky <pshilovsky@samba.org>
+From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-New version 6.15 of cifs-utils has been released today. This is a
-security release to address the following bugs:
+Hi!
 
-- CVE-2022-27239: mount.cifs: fix length check for ip option parsing
-- CVE-2022-29869: mount.cifs: fix verbose messages on option parsing
+I'm seeing somewhat strange, to my taste, tevent test failures on
+debian salsa-ci, without an apparent reason, which is quite puzzling.
 
-Description
+The change which triggers the failures seems to be quite innocent.
+It is the debian tevent binary package build procedure, which is done
+in a form of makefile (named debian/rules), with a help of a set of
+"debhelper" tools.  Here's the commit which immediately triggers the
+failure:
 
-CVE-2022-27239:
+--- a/debian/rules
++++ b/debian/rules
+@@ -35,2 +35,5 @@ override_dh_auto_build: bin/config-stamp
 
-In cifs-utils through 6.14, a stack-based buffer overflow when parsing
-the mount.cifs ip= command-line argument could lead to local attackers
-gaining root privileges.
++override_dh_auto_test:
++       ${MAKE} -j2 test
++
+  override_dh_auto_install:
 
-CVE-2022-29869:
+what is going on there. debhelper which is used to build this package,
+runs override_dh_auto_build target, which builds the package
+(${MAKE} all). Next, if there's no override_dh_auto_test target
+in d/rules, it runs dh_auto_test, which by default runs this:
 
-cifs-utils through 6.14, with verbose logging, can cause an
-information leak when a file contains = (equal sign) characters but is
-not a valid credentials file.
+   make -j2 test VERBOSE=1
 
-Both issues were originally reported and fixed by Jeffrey Bencteux.
+which turns into
 
-Links
+  PYTHONHASHSEED=1 WAF_MAKE=1  `PATH=buildtools/bin:../../buildtools/bin:$PATH which waf` test
 
-webpage: https://wiki.samba.org/index.php/LinuxCIFS_utils
-tarball: https://download.samba.org/pub/linux-cifs/cifs-utils/
-git: git://git.samba.org/cifs-utils.git
-gitweb: http://git.samba.org/?p=cifs-utils.git;a=summary
+and this one succeeds.
 
-Thanks to everyone who contributed to the release!
+Now I'd love to experiment with the test target, to make it verbose.
+So I override dh_auto_test target and run ${MAKE} directly just like
+dh_auto_test does, as per the above diff.  This target is now being
+run instead of the default dh_auto_test, and it gives:
 
-Best regards,
-Pavel Shilovsky
+   debian/rules override_dh_auto_test
+make[1]: Entering directory '/builds/samba-team/tevent/debian/output/source_dir'
+/usr/bin/make -j1 test
+make[2]: Entering directory '/builds/samba-team/tevent/debian/output/source_dir'
+PYTHONHASHSEED=1 WAF_MAKE=1  `PATH=buildtools/bin:../../buildtools/bin:$PATH which waf` test
+test: test_fd_tag
+success: test_fd_tag
+test: test_timer_tag
+success: test_timer_tag
+test: test_signal_tag
+success: test_signal_tag
+test: test_immediate_tag
+success: test_immediate_tag
+test: test_trace_event_fd__loop
+failure: test_trace_event_fd__loop [
+tctx->before_handler
+../../tests/test_tevent_trace.c:398: error: Failure!
+]
+...
+
+it *seems* to be doing exactly the same thing (minus the VERBOSE=1),
+I even added the same -j2 just out of curiocity (it fails without -j too).
+But the test fails.
+
+What is this particular test about, anyway?  There's one more test
+failing in the same way:
+
+test: test_trace_event_fd__free_in_handler
+failure: test_trace_event_fd__free_in_handler [
+tctx->before_handler
+../../tests/test_tevent_trace.c:491: error: Failure!
+]
+
+(which is also about before_handler).
+
+What this particular failure means?
+
+The logs:
+
+https://salsa.debian.org/samba-team/tevent/-/jobs/2666368 -- build ok
+https://salsa.debian.org/samba-team/tevent/-/jobs/2666380 -- test fails
+
+Help?
+
+Thank you!
+
+/mjt
 
