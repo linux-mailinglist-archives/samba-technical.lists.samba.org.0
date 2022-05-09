@@ -2,45 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 055F151F292
-	for <lists+samba-technical@lfdr.de>; Mon,  9 May 2022 03:59:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A8685209B6
+	for <lists+samba-technical@lfdr.de>; Tue, 10 May 2022 01:54:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=AKqUq01TDAF15zfpdLlHaS/w3ULfAwqSSNiuxxbx6g0=; b=1ZjrJBZAOw2xX7MRbeLVuIwFGu
-	C17z6CrfKvIaNYW/xiXHcZUhuEyHVYddGhxcrfpyNwLpFbfipigmh33HfpBSNqnMlnl8anFpp9toE
-	RwfJeKnf6mxNyrk2iZPvH7GnjqY9bWJ7vsPcpuTRK4zggqX/GFTLl6nPzDs6NxdMxjkyqRTdRMB1t
-	k3sbPXyvgVq5X6XVLw/W3h4EQNi4mPHSCLJYchYU2lcOh/WQEKrrg9Sifmq0W2AlpjB7CYhpwI1lo
-	XkVTtOAAW7pgGMb1K0Rspq8Kwz698Ru4y+PJPBYjHVn/SIogDl6/nq4vXesgSMWhH5NkwKqvQmi0i
-	XSqYZ1dg==;
-Received: from ip6-localhost ([::1]:28594 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=8og8gmpLDfWpTnsGg43Y4qru759orsP9nywoqYtuaiE=; b=hVcxC4vcMRFYsxhXRktZpfzCOn
+	5c/23DdHv19A49Wc71js8suzcKOUXmV/trfsWHvqut8t+D/r490+b6lCMNDyDjFupn1hS0PGJ2Wt8
+	97RUyQfO9jUm9QjEafyrspmuTY1h/ZLDVyf624S0XiHLGTKwjx2yR1vrwVMwMv9a3sPnEh59e1Ud8
+	v23VEpRWsN2qCzr3w/+XgKHKGBftcbktAmtuxDLAtkIaWBRsZOc+HxZGjZsUiIw1btruUzLUQOoPU
+	n2cA6JIkvN6rVYu0cNlx8/vdY+0rEFn5wgoxbCq67LEOF4DJQhWvMWlv7KLXALT4qwLUp4QtG3Q56
+	DsHE9SKQ==;
+Received: from ip6-localhost ([::1]:19860 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nnsfd-006pj9-ID; Mon, 09 May 2022 01:58:45 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48470) 
+	id 1noDBj-0007Sr-N4; Mon, 09 May 2022 23:53:15 +0000
+Received: from mailtransmit04.runbox.com ([2a0c:5a00:149::25]:42108) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nnsfY-006pj0-Pm
- for samba-technical@lists.samba.org; Mon, 09 May 2022 01:58:43 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=AKqUq01TDAF15zfpdLlHaS/w3ULfAwqSSNiuxxbx6g0=; b=ZcJvpM31Fq1LZ2Kj1fkkkc6VR3
- EFTSEIFoEu428n6mXi7CVxTt2VXXWfwRU3GA449Hfcr1i+QzdvDK5nm4e9u4HIpnKT764KDV5Ym6z
- 7jRKmR12hfm75aRwPoSWgzRDT4+HXYVxY5X4pLqu6Opl7b7Rs6a2EFyPdalxMC0KomqeFiB7/8xCY
- 0TpxRmWm+t93VIwwptJ9sze2pHC/OUC75xDZ3Avt5xXIK9TiD120xKGoi8V85vfOsApWoOPDqF2/O
- SEI50iM15NdrnQY6aDS70oRymFKdIplw7cAkZi8D0jsGbbiFdT2NvOujTrHMPcnuM/IEQuAVz0LkO
- /b4b5p48V9mIp1ruKrIR7ly3wxTGE2jo3As3enscKECSXedfqV7UTt+NKlwZkM7/T5cwIMwiwGLoP
- LpO4YWm3Ucq3GxdIjP0SXLuSqRSb+AdluLd7SdIIHEJDOSLSTVbWvnqL0fE7f62zB8sMb2qrVlSw0
- Dlmc5VVnkC3uFhYZkpt2v7NS;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nnsfO-004z8X-Tc; Mon, 09 May 2022 01:58:31 +0000
-Message-ID: <5cfc3706f386d516a520aab0b609aaff9ad10830.camel@samba.org>
-Subject: Status towards using OSU OSL for GitLab CI
-To: samba-technical@lists.samba.org
-Date: Mon, 09 May 2022 13:58:27 +1200
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1noDBe-0007Si-4w
+ for samba-technical@lists.samba.org; Mon, 09 May 2022 23:53:13 +0000
+Received: from mailtransmit03.runbox ([10.9.9.163] helo=aibo.runbox.com)
+ by mailtransmit04.runbox.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.93)
+ (envelope-from <tnagy@waf.io>) id 1noCjW-00AD2w-TJ
+ for samba-technical@lists.samba.org; Tue, 10 May 2022 01:24:06 +0200
+Received: from [10.9.9.127] (helo=rmmprod05.runbox)
+ by mailtransmit03.runbox with esmtp (Exim 4.86_2)
+ (envelope-from <tnagy@waf.io>) id 1noCjW-0007MC-HC
+ for samba-technical@lists.samba.org; Tue, 10 May 2022 01:24:06 +0200
+Received: from mail by rmmprod05.runbox with local (Exim 4.86_2)
+ (envelope-from <tnagy@waf.io>) id 1noCjW-0005xO-Fz
+ for samba-technical@lists.samba.org; Tue, 10 May 2022 01:24:06 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Received: from [Authenticated alias (664370)] by runbox.com with http
+ (RMM6); for <samba-technical@lists.samba.org>; Mon, 09 May 2022 23:24:06
+ GMT
+To: "samba-technical" <samba-technical@lists.samba.org>
+Subject: Re: waf, PYTHONHASHSEED & -I order on other architectures
+Date: Tue, 10 May 2022 01:24:06 +0200 (CEST)
+X-RMM-Aliasid: 664370
+X-Mailer: RMM6
+In-Reply-To: <61faf7be6359dfb8a87445041b2b1ccac23d147e.camel@samba.org>
+Message-Id: <E1noCjW-0005xO-Fz@rmmprod05.runbox>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,45 +58,76 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Uri Simchoni <uri@samba.org>
+From: Thomas Nagy via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Thomas Nagy <tnagy@waf.io>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I've been looking into what the critical blockers are before we can
-fire up the runners at OSU OSL for more than tests.
+On Mon, 09 May 2022 08:53:12 +1200, Andrew Bartlett via samba-technical <sa=
+mba-technical@lists.samba.org> wrote:
 
-My current task list (which is what I'm working on, in this order) is:
- - provide API keys to cloud_checker.py so it can terminate old
-Openstack hosts
- - test operation with only API keys and not original passwords
+> On Sat, 2022-04-09 at 09:41 +0300, Michael Tokarev via samba-technical
+> wrote:
+> > Hi!
+> >=20
+> > I'm having a build failure of samba on sparc64.  It fails due to
+> > finding
+> > wrong include for <gssapi/gssapi.h>, as it has already seen before
+> > due to
+> > PYTHONHASHSEED not being set, having python hashes in random order so
+> > -I
+> > includes were unpredictable.
+> >=20
+> > The good -I order is this:
+> >=20
+> >   -Ithird_party/heimdal/lib/gssapi
+> >   -Ithird_party/heimdal/lib
+> >=20
+> > the bad is:
+> >=20
+> >   -Ithird_party/heimdal/lib
+> >   -Ithird_party/heimdal/lib/gssapi
+> >=20
+> > (I picked up only the -I options for dirs where <gssapi/gssapi.h>
+> > exists).
+> >=20
+> > This is stable on sparc64, all builds of samba-4.16 are failing due
+> > to
+> > this very issue.
+> >=20
+> > How to work around this?
+>=20
+> I agree that at this point there is a bug, but nobody has had the time
+> to work out the missing dependencies or get into the guts of waf to get
+> a more proper solution.=20
 
-The next step would be
- - Reconfigure runner limits to per-cloud and to match our OSU OSL
-quota
- - Work out link or otherwise between 
-https://gitlab.com/samba-team/gitlab-runner/ansible-role-gitlab-runner/-/blob/master/vars/docker-machine/osu-osl.yml
- and 
-https://gitlab.com/samba-team/gitlab-runner/samba-cloud-autobuild/-/blob/master/gitlab-ci/cloud_images.yml
- - engage with SFC via the PLC to get commercial terms with OSU OSL
-agreed.
+About the guts of waf:
 
-In terms of our fallback position:
+When changing the PYTHONHASHSEED value in the Makefile and adding traces (-=
+-zones=3Ddeps):
+"""
+WAF_BINARY=3D$(PYTHON) ./buildtools/bin/waf --zones=3Ddeps
+WAF=3DPYTHONHASHSEED=3D20 WAF_MAKE=3D1 $(WAF_BINARY)
+"""
 
-I would note that while it would not be ideal to allow all our jobs to
-run at Rackspace, the cost increase ($700 per month I think - 150,000
-[avarage mins] / 60 [mins per hour] * 0.28 [price for smaller rackspace
-VMs]) is not great, but not nightmare stuff either.
+A full rebuild is observed here. The library link order changes as reflecte=
+d by the traces below:
 
-Andrew Bartlett
- 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+with PYTHONHASHSEED=3D10: deps computed dependencies for target ldb_ildap: =
+uselib=3D[] uselib_local=3D['talloc', 'ldb', 'tevent', 'samdb', 'cli-ldap',=
+ 'samba-security', 'samba-credentials'] add_objects=3D['ldb_ildap.objlist']
 
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
+with PYTHONHASHSEED=3D20: deps computed dependencies for target ldb_ildap: =
+uselib=3D[] uselib_local=3D['tevent', 'samba-security', 'cli-ldap', 'samba-=
+credentials', 'talloc', 'ldb', 'samdb'] add_objects=3D['ldb_ildap.objlist']
+
+They take their origin in the file buildtools/wafsamba/samba_deps.py before=
+ reaching the Waf parts. That file contains a significant amount of non-tri=
+vial set() operations.
+
+Even if a hash seed is provided, the link order may change with a new Pytho=
+n version or on a different operating system.
+
+Thomas
 
 
