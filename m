@@ -2,52 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADC975221AA
-	for <lists+samba-technical@lfdr.de>; Tue, 10 May 2022 18:49:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E1DE52233E
+	for <lists+samba-technical@lfdr.de>; Tue, 10 May 2022 20:03:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=L91w5stgUuGxNt3dOwzQcBn1fzVX4Z7+0g9TJD1apR0=; b=OZmOgJBAUGzbp/9D9zzBPdQVID
-	8chAYS5u7BGf3zDenZ8MwQDxEj6SsN6uER+gCa31qwDnUi2JZgJQ0POTEfoXJuhROOeLDzlRupZ33
-	x5T/Xv64fqwyeW9W6iatIvKJ5JGPvA4lBcikSEoBHxZyZ142n/aJfgQdgs5xUlK/R3MgWOKfhwJjM
-	/QcNDl0vJkLpWM6BgstnBYdgfzIGB4JzfUcHmgxppjzjeOOHGr5TFU2h8xioDNchExzAplCTplAEQ
-	Dn6JOgjjNcsGHcbo+btMjCkGsucE5sa8Riv1ujT9H3k1bg19tFlXE+0q14HUb7oV6e+xMZsGbkLC3
-	WubK53WA==;
-Received: from ip6-localhost ([::1]:56778 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=kbHId0O6/KpvEc/oztPoEXORCKetKiOzilYu3Ked9TU=; b=Q/8UEqnK/p0w3PVK2k64PC3spy
+	3LBOsDQCE7+eR1m/qfxg4LI5tPYksfZa7XdakyAapmFoCgVvhuOqHFC0YAFn7F1cYEQIt627CAZ0c
+	sY/JixPhfpU0wJqz3/N82FMPoTxF3tLkkmXzaPmoAPQX13t7Pr+V7l5ipCY88m20jykRGiiDay2eb
+	ILLK/CTXV2cr7u+VTaZ+XagcXztZny6kKw1/ZLsWAkxjpLUuh1bPsk2IGLDhHMhtv42G5vqQiltMx
+	UrDWwP+zpXjvTQ2Q/pM8/yQnqyktox0DXt6RxUHVKQbyPmhFWo1X25hBnNbj/8ypb96ZAi98GJopW
+	UdmxAt8Q==;
+Received: from ip6-localhost ([::1]:61634 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1noT2a-000Ofe-Ph; Tue, 10 May 2022 16:48:52 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61452) 
+	id 1noUBy-000QlW-9s; Tue, 10 May 2022 18:02:38 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61456) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1noT2V-000OfV-Sb
- for samba-technical@lists.samba.org; Tue, 10 May 2022 16:48:49 +0000
+ (Exim) id 1noUBt-000QlM-JJ
+ for samba-technical@lists.samba.org; Tue, 10 May 2022 18:02:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=L91w5stgUuGxNt3dOwzQcBn1fzVX4Z7+0g9TJD1apR0=; b=tnKOIU0uTkhn50jhtjzzJm6W6/
- CfaqE3Y2IlQzh/T/glQvGmL9DokUZPZUcogu/ul1Qg3eNyXr4OYibnvMj9oQvpMsZPEWm+NsmOLwo
- PMwW77csuWQ3RC06rsFphNv1sd7NKQhFK/wMZ+SpJthtXa1xA6p3cMebi9s1Quwykeki4GKvEu9Cc
- bWw+im+n6AfFGvJha/lNBrZZJxr2uRZPr8u3I6A9xIDESOy/sydBVJ3rj/QwRR3ii4sr717D+XjQV
- V8F3H6gJ56CZ1hsRkSTB01lXtOCe6BncuPpQcTb5anTu6HsuBcbxeQy+xigWlVvxNj8debG8nVchD
- 802IPrFz+uohapZ9ldeaD8y7o4WuvQyUKPcXB03nZFrS4jg2wc0vlUssyMDq8/DB4RTePFPHph4Rl
- 7yBa07/JYDAyC1ZL4koSO6MG2oF39SQRuJXicdXF2vn2IKcJHSCUXXxPOOlRuzj/r0bCI0R2U8OeM
- rb+HY3GRCRzpNhMtQLhQJf+r;
+ bh=kbHId0O6/KpvEc/oztPoEXORCKetKiOzilYu3Ked9TU=; b=m56oXgDgInfn8Kk40d3RMpJPUo
+ IQ9q8QQSZa2srWsCb1iCTg6cjIv7WAc2E1My9hc+cVfAB2dURUX7AC/1ymDG+d9Buia+WALvvgQj4
+ n+9d8D2L4guKn41XYR56rLisFtXFBoUwlnOcjkwFq38AM8BJq8kt4Uoj7dcmninZuIKfzSdwv1gTg
+ GVvHwv6QYiJ6RqjQmi15k/18WTQ1Y89yix7oyC+a4F9Tt0/yhtYrCUtHj5KwJDyrkjfwijVrDDzr5
+ Km9uM73TrmrYcjvJehZeN6eBXgqy9ECAXin+oJUh3UckJoKuQsdDIx9+0UUWshwPqpTqllq1Va+ir
+ 759ZWh71nDguPUCFVYJHnbzRMyEdI40bPjVcyhLRMhichoAKSn+Axa2fgcw102NsDR06P2cXSygKr
+ V0jrBQJaYw+ueMz4fCVfi/5fhDi7iHLfxNTdwIF1HZeAFrw29JdULCFy7isgoy4xZRSJRBVJ0Q1fJ
+ n1n0SR4wd3SFWHwxUmf3sJM7;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1noT2V-000ClW-6c; Tue, 10 May 2022 16:48:47 +0000
-Message-ID: <2bf98ce9-8e76-6647-85c7-b0dfa217dc35@samba.org>
-Date: Tue, 10 May 2022 18:48:46 +0200
+ (Exim) id 1noUBs-000DCK-IQ; Tue, 10 May 2022 18:02:32 +0000
+Message-ID: <004187c0-a4ee-8457-a1a3-8264efa56dc8@samba.org>
+Date: Tue, 10 May 2022 20:02:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.1
+ Thunderbird/91.8.0
+Subject: Re: Can someone try buildar for building our bootstrap CI images?
 Content-Language: en-US
-To: Michael Tokarev <mjt@tls.msk.ru>, Thomas Nagy <tnagy@waf.io>,
- samba-technical <samba-technical@lists.samba.org>
-References: <E1noCjW-0005xO-Fz@rmmprod05.runbox>
- <32a069f2-ecf5-ee08-ee80-30183e72e428@msgid.tls.msk.ru>
-Subject: crash on debian i386 in krb5_plugin_register(hdb_samba4_interface)
- (Re: waf, PYTHONHASHSEED & -I order on other architectures)
-In-Reply-To: <32a069f2-ecf5-ee08-ee80-30183e72e428@msgid.tls.msk.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+To: Andrew Bartlett <abartlet@samba.org>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+References: <cce05b792f8377095d010cedf715bdefdcc580cf.camel@samba.org>
+In-Reply-To: <cce05b792f8377095d010cedf715bdefdcc580cf.camel@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------CS5vudhZo8ME91FimFcJnIgL"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,55 +60,60 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Stefan Metzmacher <metze@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------CS5vudhZo8ME91FimFcJnIgL
+Content-Type: multipart/mixed; boundary="------------ifCua0YXcnKexSKAoyQuUP98";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Andrew Bartlett <abartlet@samba.org>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Message-ID: <004187c0-a4ee-8457-a1a3-8264efa56dc8@samba.org>
+Subject: Re: Can someone try buildar for building our bootstrap CI images?
+References: <cce05b792f8377095d010cedf715bdefdcc580cf.camel@samba.org>
+In-Reply-To: <cce05b792f8377095d010cedf715bdefdcc580cf.camel@samba.org>
 
-Hi Michael,
+--------------ifCua0YXcnKexSKAoyQuUP98
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-> As I already wrote in another email, it is not "just" the link order.
-> Well, it is, but sometimes it even produces an executable (or a library)
-> which starts but crashes later.  We have such a broken build of samba in
-> debian i386 stable right now.
+T24gNS82LzIyIDA0OjU3LCBBbmRyZXcgQmFydGxldHQgdmlhIHNhbWJhLXRlY2huaWNhbCB3
+cm90ZToNCj4gSSdtIG1vcmUgdGhhbiBoYXBweSB0byBhbnN3ZXIgYW55IHF1ZXN0aW9ucy4N
+Cg0KYWZhaXQgdGhpcyBzaG91bGRuJ3QgYmUgbmVlZGVkIGdpdmVuIHBvZG1hbiBjYW4gYmUg
+dXNlZCB0byBidWlsZCANCmNvbnRhaW5lcnMgaW4gcm9vdGxlc3MgbW9kZSBhbmQgZ2l0bGFi
+IHBsYW5zIHRvIHN1cHBvcnQgcG9kbWFuIGluIHRoZSANCmZ1dHVyZSBhcyBwb2ludGVkIG91
+dCBieSBBbmRyZWFzLCByaWdodD8NCg0KSnVzdCB0cnlpbmcgdG8gY29ubmVjdCB0aGUgZG90
+cyBvZiB0aGUgdmFyaW91cyBnaXRsYWIgcmVsYXRlZCB0aHJlYWRzIA0Kd2UncmUgc3Bpbm5p
+bmcuLi4NCg0KLXNsb3cNCg0KLS0gDQpSYWxwaCBCb2VobWUsIFNhbWJhIFRlYW0gICAgICAg
+ICAgICAgICAgIGh0dHBzOi8vc2FtYmEub3JnLw0KU2VyTmV0IFNhbWJhIFRlYW0gTGVhZCAg
+ICAgIGh0dHBzOi8vc2VybmV0LmRlL2VuL3RlYW0tc2FtYmENCg==
 
-Today I found a crash problem on i386 in:
+--------------ifCua0YXcnKexSKAoyQuUP98--
 
-         ret = krb5_plugin_register(kdc->smb_krb5_context->krb5_context,
-                                    PLUGIN_TYPE_DATA, "hdb_samba4_interface",
-                                    &hdb_samba4_interface);
+--------------CS5vudhZo8ME91FimFcJnIgL
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-This is because krb5_plugin_register => heim_plugin_register casts:
+-----BEGIN PGP SIGNATURE-----
 
-struct hdb_method {
-     int                 version;
-     unsigned int        is_file_based:1;
-     unsigned int        can_taste:1;
-     krb5_error_code     (*init)(krb5_context, void **);
-     void                (*fini)(void *);
-     const char *prefix;
-     krb5_error_code (*create)(krb5_context, HDB **, const char *filename);
-};
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmJ6qLcFAwAAAAAACgkQqh6bcSY5nkZL
+vg//eOcn4eDQ/6biIApkX9elS1otB59xezWGNlIMaVYplYAWcsG51OauNSF6ZsJDEbz0TnOXWa6l
+sV9LsyxajIxBcaevovnhTCx7ctbIJmjnmH1lQhYblXAtHL+E0NIPnJAZOVHjacAeBvHJuJBLDP66
+pok94dw/R3mBBs4GJdmYkK0BdgGzfftBGn7EcIY6OIfzddkwZ2eXMcL3m5nMRocuMsQOFTbsa8I9
+5zVAuSNV2vGNo9LyyhUM2BSvMy7CtQrUopDMlpQxaJl7IU6U8EkM3nDWKHqUv6dW/WXm0kyaent3
+XQ7Xd7e9aVqkILxQ3yzKm5uVkQ+aG0fLFv6MUnb8wRaAtbVMNxY354Hvd5n/t9vGzK8NmXuN0v0K
+isiB5upmUopBB9lj6gb9IealqSxJLCESkYbnUYfEjfk3Q5CQS6gr9s+WEsEyQS3BNypa/QSEZZ+d
+WYKKiRxnOuNKXlcqhgZ6zN2CTKOFz35m9XSKnhjaAikxmQdpZ/K2C2Fsm3UUg/DyZiCZpIgDFv5T
+JUBibRmFBXOGl3DgBE9kpKbG3/pnPYkqTEHCQw7XPA/O1fV9+9Cjf4TsfaWbZOQHiS1jDSntPAC7
+UN4m30LySdolmyqAg4H4hAowr9sZ7kxToJid3mSgsFiTfFGiu3eBw393gCPIerYf2S7caIJj0D06
+uys=
+=9q0N
+-----END PGP SIGNATURE-----
 
-into:
-
-struct heim_plugin_common_ftable_desc {
-     int                 version;
-     int                 (HEIM_LIB_CALL *init)(heim_pcontext, void **);
-     void                (HEIM_LIB_CALL *fini)(void *);
-};
-
-This seems to work on x86_64 as we have 4 padding bytes after 'int version',
-so that the 'init' function pointer is at offset 8.
-
-But on i386 hdb_method has 'init' at offset 8 while
-heim_plugin_common_ftable_desc has it at offset 4.
-
-So is_file_based and can_tast need to move behind the 'fini' function
-pointer.
-
-Is that the crash you are seeing?
-
-metze
+--------------CS5vudhZo8ME91FimFcJnIgL--
 
