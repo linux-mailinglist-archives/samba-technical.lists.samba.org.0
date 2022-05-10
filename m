@@ -2,40 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 534745210AD
-	for <lists+samba-technical@lfdr.de>; Tue, 10 May 2022 11:20:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E4A4252216E
+	for <lists+samba-technical@lfdr.de>; Tue, 10 May 2022 18:39:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=ySH6NPplKZQJEDt8F6VBH0Vf2AurFre9JuqkKlbO028=; b=Fuw/vbr8FFOBuqTEay1xnUUnW3
-	cCQ00UaZ0U7T4KHjeyzu8UCClFAEvem9SduBw37SxBOvE7eIaqD7AqyXroHqPKvoXw4IPmocwie/c
-	wEeGjGYmiR0F9BcKrKKNpflO4e+khmKjIOi5l3JJuZsd9vI7N/n8Mkd9fRvs7bVKVUonhL18++eTw
-	9TISIRHgpwvhJxlneYtXVl7+vNI8D38WC8z1n4wphtZInM2fHJeXxYxifOu8vLWpn7FfuXpKEwT2X
-	527gMUpXAPr7N0CU3dWZp0qUjLZqP6846SYufO3GuwKD7G28GfirTXFoR0Bky3hbxJ1nhskI4LcPz
-	tV8xRQUA==;
-Received: from ip6-localhost ([::1]:33506 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=aRM+AkqVDvqaE+TfOz2fJh9N+A5I+FtktbJuy0KC7Mc=; b=o6HFcbDhcybJ89oya8qN4iHVb4
+	QSB8Ji/TjJ4XiU04nOrSklQHpmtmXzZ7cozIoBeoHSV2ZleZagJTvTWjPN50NneBZ7B6+uhVn/DWY
+	0Unuabz21Eu/OWPnMsleSf8GtCLpvJ+GHCIazR4zqY9dWn6nHW3TDFziADYll198/bsJ/yxv46a8+
+	JkoGM4Nf5kuBw4BIEflsemBi5ayAkhJ566SGI4AHaDJZMfsdiUrlBX4dsjrZr52IrpJqIy5pThvd+
+	CMVX3Q4YIZKPMTHE60U3RON3V7EGIpoB2PGreQ/W62YhcZE9jo/iZCcuTTloe+NPWf2aAPVPQDqHW
+	Xz7ez+yg==;
+Received: from ip6-localhost ([::1]:56114 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1noM1Y-000EHZ-Le; Tue, 10 May 2022 09:19:20 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:41217) 
+	id 1noSs8-000OLi-Fv; Tue, 10 May 2022 16:38:04 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61450) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1noM1R-000EHO-Lh
- for samba-technical@lists.samba.org; Tue, 10 May 2022 09:19:18 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id AEDE140353;
- Tue, 10 May 2022 12:19:05 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 18D9F13A;
- Tue, 10 May 2022 12:19:05 +0300 (MSK)
-Message-ID: <32a069f2-ecf5-ee08-ee80-30183e72e428@msgid.tls.msk.ru>
-Date: Tue, 10 May 2022 12:19:05 +0300
+ (Exim) id 1noSs3-000OLZ-Ei
+ for samba-technical@lists.samba.org; Tue, 10 May 2022 16:38:01 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=aRM+AkqVDvqaE+TfOz2fJh9N+A5I+FtktbJuy0KC7Mc=; b=B6jGMNHVPhMet9mxlaBsvuB6AM
+ T2ysGxp2yS63VcGMNPSsbWAEysC/yQSOhmmod7gv5GmO6y19ETX79Fjhq1nhw2VMsfh4bRavken0w
+ OKiwZhGdVZu4asF9ltszbb6wQv7tAfy3nAjVgtAAJvgg5ljbIg+I9ufUND6U4ETrhqr7g/wxYCpaH
+ TBb/+B9CXolxbFF8ZOAqK2EGsYL299KXJlPSWzdrgP+uu8IOHwOp7cEXPXgR4eDX2DHzWmyP5hun5
+ tA5X6K2oByELZuMRplCpVyDA3y7r+CHA9RDPykC/uroCgVBz3O4XAQxRK7jc3vwVM4U3hMEExj1lu
+ egDalZ9cJnBZ6WgMKfghtxxaQALEfdA5yXJQZKZ134ET7cj7KzOwb/OgM4CWmOBxHvrRU9iEVtdAI
+ spJ/Yv4jJrxd7kW7HLytJf7grtCA5leDcm6ezA/BY821VZ4O65JtbdawFJaPFD4HWcv+hfIoLvyPg
+ Dyk7zx9qSlQDHtdg+erPmEeS;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1noSs2-000Chb-Ch; Tue, 10 May 2022 16:37:58 +0000
+Message-ID: <ddb8bf80-2f8e-b550-8db7-69fff7a68c07@samba.org>
+Date: Tue, 10 May 2022 18:37:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: waf, PYTHONHASHSEED & -I order on other architectures
+ Thunderbird/91.8.1
 Content-Language: en-US
-To: Thomas Nagy <tnagy@waf.io>,
- samba-technical <samba-technical@lists.samba.org>
-References: <E1noCjW-0005xO-Fz@rmmprod05.runbox>
-In-Reply-To: <E1noCjW-0005xO-Fz@rmmprod05.runbox>
+To: Andrew Bartlett <abartlet@samba.org>, samba-technical@lists.samba.org
+References: <5cfc3706f386d516a520aab0b609aaff9ad10830.camel@samba.org>
+Subject: Re: Status towards using OSU OSL for GitLab CI
+In-Reply-To: <5cfc3706f386d516a520aab0b609aaff9ad10830.camel@samba.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -51,42 +58,56 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: Uri Simchoni <uri@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-10.05.2022 02:24, Thomas Nagy via samba-technical wrote:
-...
-> About the guts of waf:
+Am 09.05.22 um 03:58 schrieb Andrew Bartlett via samba-technical:
+> I've been looking into what the critical blockers are before we can
+> fire up the runners at OSU OSL for more than tests.
+
+At least a full pipeline passed! Many thanks!
+https://gitlab.com/samba-team/gitlab-runner/samba/-/pipelines/523380456
+
+> My current task list (which is what I'm working on, in this order) is:
+>   - provide API keys to cloud_checker.py so it can terminate old
+> Openstack hosts
+>   - test operation with only API keys and not original passwords
 > 
-> When changing the PYTHONHASHSEED value in the Makefile and adding traces (--zones=deps):
-> """
-> WAF_BINARY=$(PYTHON) ./buildtools/bin/waf --zones=deps
-> WAF=PYTHONHASHSEED=20 WAF_MAKE=1 $(WAF_BINARY)
-> """
+> The next step would be
+>   - Reconfigure runner limits to per-cloud and to match our OSU OSL
+> quota
+>   - Work out link or otherwise between
+> https://gitlab.com/samba-team/gitlab-runner/ansible-role-gitlab-runner/-/blob/master/vars/docker-machine/osu-osl.yml
+
+As far as I remember this is not used at all by us.
+
+>   and
+> https://gitlab.com/samba-team/gitlab-runner/samba-cloud-autobuild/-/blob/master/gitlab-ci/cloud_images.yml
+
+These are used in
+https://gitlab.com/samba-team/gitlab-runner/samba-cloud-autobuild/-/blob/master/gitlab-ci/osu-osl-samba_team.yml
+and
+https://gitlab.com/samba-team/gitlab-runner/samba-cloud-autobuild/-/blob/master/gitlab-ci/vault_samba_team.yml-REDACTED
+
+With this commit I did today:
+https://gitlab.com/samba-team/gitlab-runner/samba-cloud-autobuild/-/commit/15cbe2f06036d6a7ac5a12fce0a4bd7193797d05
+we should be able to login into the runner as root and inspect /etc/gitlab-runner/config.toml
+
+>   - engage with SFC via the PLC to get commercial terms with OSU OSL
+> agreed.
 > 
-> A full rebuild is observed here. The library link order changes as reflected by the traces below:
+> In terms of our fallback position:
+> 
+> I would note that while it would not be ideal to allow all our jobs to
+> run at Rackspace, the cost increase ($700 per month I think - 150,000
+> [avarage mins] / 60 [mins per hour] * 0.28 [price for smaller rackspace
+> VMs]) is not great, but not nightmare stuff either.
 
-As I already wrote in another email, it is not "just" the link order.
-Well, it is, but sometimes it even produces an executable (or a library)
-which starts but crashes later.  We have such a broken build of samba in
-debian i386 stable right now - at the time we didn't know about this
-PYTHONHASHSEED thing at all, so it was a random thing, and one of the
-values it choosen resulted in a broken build with us puzzled entirely,
-thinking it is due to some 32/64 bit issue.
+Maybe we can run both and spreed the load?
 
-...
-> They take their origin in the file buildtools/wafsamba/samba_deps.py before reaching the Waf parts. That file contains a significant amount of non-trivial set() operations.
+metze
 
-Yes.
-
-> Even if a hash seed is provided, the link order may change with a new Python version or on a different operating system.
-
-And it *does* change with different python version and on different
-architectures as I already mentioned in this thread.  It did change
-when switching from pythin3.9 to 3.10 too, and here it is the sparc64
-build which does not work at all.
-
-/mjt
 
