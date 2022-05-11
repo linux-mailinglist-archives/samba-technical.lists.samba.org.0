@@ -2,46 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B62D523BA3
-	for <lists+samba-technical@lfdr.de>; Wed, 11 May 2022 19:36:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 766A2523D98
+	for <lists+samba-technical@lfdr.de>; Wed, 11 May 2022 21:34:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=VA6QXjbjVXg3woU6A5yu7pj5ub/nw6AJU6IvOIgmuEk=; b=yTtaZo0rKK1Sc25VEo3H4HHjmY
-	FgnG8I0t3QsuHY0o0OKdUg4ImUH2cq+fLDi5yU8RdiGhPI7QEzJSwMV1K2+KX4ID08Rej+yKtgRVN
-	57BOmu5brK9iUYstPXfOirZu75bvhQ7EjVYI6Xhyd+65i3V6oeHgz9QH7LCaJaOkBVIxbsiaY5pIf
-	VPIaD0yro69hfag6umKL/8BnItyoBZMPmB6WiVFyb1Q/PdAneVyFhbJ8BEiKGJt9nE0Lyq0r8te7f
-	HCThilcHanc+/iz41abbgqr7VrUMwF4jWUlkeo2mYbdd5PSVRi037DTEEb22NMbjH7aEpH8lorMDL
-	/V2lhtcw==;
-Received: from ip6-localhost ([::1]:57680 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=XXF6OYI3qB5yttavT8X42EHp+sKvbnUf1JIGgX6NgFY=; b=TWSe7erElhTZVfHE8AeDw4meio
+	4AMY4XQAEr1j0P8VhCRiNoKemKX8j+C+TSZFY/S58Ua840iDUVRK/M+F562cyvMuSncxX2PwDmb7D
+	GK7Bqe9byhYCNa+f1lYrtfrrQgElLrqBSB99Xhe6RsTpW9ZDJQ1bedSfZae8SJqN76wBeGyQ5h4Ib
+	K4KMzXIFFSE+yyNCVXnZvWLZe9PQXms2J2H9MK4nmPLSW3RYx9T66KkrI3KoyOqJoIPeJT3iCKL7S
+	7L+jHuIHtHJEbop1Zi2SQKRbDte0lSGTQBW+PvuRk66QyvXYF1+Pn9LDOMcK28AfQToT52z6NkQ6n
+	0VvleS3A==;
+Received: from ip6-localhost ([::1]:62648 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1noqFK-000m1F-63; Wed, 11 May 2022 17:35:34 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61534) 
+	id 1nos5H-000oK7-5U; Wed, 11 May 2022 19:33:19 +0000
+Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f]:42899) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1noqFE-000m11-G0; Wed, 11 May 2022 17:35:30 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=VA6QXjbjVXg3woU6A5yu7pj5ub/nw6AJU6IvOIgmuEk=; b=0BU6lI7Ldc358dim4SvXwEYGmN
- STJiQ9RYdm2Fj8voG8Y8j1HNHrtEk0a3tRlwS1R7AoE5EgB+6XEI3CVj0M+d6o328jgAWit3W+9Ww
- 8xiuOQRLwkN260EuMCgAkEQcHyDuQOi+CwtruBleDxA8+Rm0vD5hr+RmfySCHdVlSWrvQOj66lsmy
- stVjTYLej709+F2l2lalSZu32sNjkwQ+VO6Ht0PfZOJUoM18AtCB+kjLHsYHbwwQ/YRcpv/3hLibG
- TbwYAK9X7jpCrhKS4ZpmKYFaqfRwAc1Bw83DdMYis8UF8r3TQ4GA1IAw+q6bF56RTeMdRSv0eHopD
- DD54Hii8tWDySNx47lfpKqI7Zw+4Kx9DE8KIrinio+RfiMXi7j7XBe9t+oZNFDhvWZsX/pZhZ8uLN
- hJQiA03hZ15u5z/TJ2U0oKJKEyh73Luf4sMrxMzpdOlyRc6SKVVpyjjEh4nFpanYBJPQKxsmKFD7Y
- q5HhZx1Rxy+4GANfzT3Zk9Kt;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1noqFD-000Ozo-Sf; Wed, 11 May 2022 17:35:28 +0000
-Date: Wed, 11 May 2022 10:35:23 -0700
-To: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Subject: Re: Invitation to sambaXP 2022: digital & free - 31 May to 2 June
-Message-ID: <Ynvz237Hx1gWkYPN@jeremy-acer>
-References: <0597e6ea-0538-e867-542f-bf65ba641901@samba.org>
+ (Exim) id 1nos5C-000oJy-Np
+ for samba-technical@lists.samba.org; Wed, 11 May 2022 19:33:16 +0000
+Received: by mail-lf1-x12f.google.com with SMTP id b18so5287614lfv.9
+ for <samba-technical@lists.samba.org>; Wed, 11 May 2022 12:33:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:from:date:message-id:subject:to:cc;
+ bh=XXF6OYI3qB5yttavT8X42EHp+sKvbnUf1JIGgX6NgFY=;
+ b=nxwpZRXVnOwm4rI3doQVxeE/xUeSHswRsyAoCuN6or15H3sbP7P+moh3izUYSh8q0o
+ vKhwd8GQwUoAQ9X7ZfT/GKK4Ce/Eb8A8spYo8cvOTh4dsuAFtuO2JJF0O5jzUnF646/2
+ PdKpNTBqNcOrAI6XNrK7WjixloC96hyYbbYZXo+nL94dfvKU7ps8OJdLG0mZFRHudjaW
+ rZYfWnJ8bOrciigZxEZxotB04VlspQFDto9Z/HWT9xNgAihFKe5+m9YEtsroP+i7hVGa
+ n6PNeM4bs/4QmkHzeJyar2i1jfbWWJhrLTpe+mB9tIFDVbpAbLufvrgpy90bpZfCN4Zk
+ QvIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+ bh=XXF6OYI3qB5yttavT8X42EHp+sKvbnUf1JIGgX6NgFY=;
+ b=oLvscWGTO5R9TZtiae9BY4RV2aRQsXE0OE+aLSm+Re5ySngsuCXJFS4H9djnjZYOY6
+ oXlEhwk1uVoyQcQ97Gy2BJU0nvAzXOhleHCMKWUT2JNLCLdZPXuuniJl0zXGvYWNARiA
+ umNzMCNU6Vxf0Kmie1IxStbryXV3eq7s762ya0STzzqi1UwNAEyFPmBeELmDVNafPAHU
+ S8rQUq++4noET4p1rTJDQZsG1GhhGFgo/0MFrD4jiyrYew78W+gUNDTcGNP4nmL7ix2E
+ 2gNHAMGCDfdNCaRGejkku0ThQF6RTy+tGX0fyyL+qPPupn7QV77yMEFmmQFBU6XdAJjs
+ XU7g==
+X-Gm-Message-State: AOAM530/01Lu1WxkmfT+ZkwzNyuMFAe3qO3Qya2KkVUFQTnXHS15ykIe
+ rRlyEHJSuRTjI80vH/IFVBxPcOq0m27+7Rch8ZM=
+X-Google-Smtp-Source: ABdhPJweqdnMSyi9XqObW6kKsNdHrxKx+zPWGJJv17tn1WEi+m85s2En6OuemBGJA8Qpn54NlXDPyXsjnpcipz1rmFA=
+X-Received: by 2002:a19:ca0f:0:b0:474:40ca:af2 with SMTP id
+ a15-20020a19ca0f000000b0047440ca0af2mr4076979lfg.320.1652297593133; Wed, 11
+ May 2022 12:33:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <0597e6ea-0538-e867-542f-bf65ba641901@samba.org>
+Date: Wed, 11 May 2022 14:33:01 -0500
+Message-ID: <CAH2r5mvoQskGmY5SkgktzS1ZALeq7uk29EpLELLjVwcwYRwT1g@mail.gmail.com>
+Subject: misreported st_blocks (AllocationSize)
+To: linux-fsdevel <linux-fsdevel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,55 +65,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: sambalist <samba@lists.samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, May 11, 2022 at 06:59:38PM +0200, Ralph Boehme via samba-technical wrote:
->Hello all!
->
->From 31 May to 2 June 2022, SerNet will be hosting sambaXP for the 
->21st time – for the third time as a purely digital event. The Orga 
->Committee has published the agenda at https://sambaxp.org. Tickets, 
->which are free of charge, are also available there. To allow as many 
->people as possible worldwide to participate the program will start at 
->3 pm (CEST) to serve as many different time zones as possible.
->
->Special thanks go to this year's sponsors Google, Microsoft and SerNet.
->
->The kick-off on May 31 belongs again to the traditional samba workshop 
->by Stefan Kania. His tutorial (3 pm to 9:30 pm CEST) will cover the 
->topics "Setting up GPOs with Samba" and "Disaster recovery of an 
->Active Directory" at once.
->
->The actual conference will be opened by chairman Jeremy Allison 
->(Google / Samba Team) on June 1st at 3pm.
->
->Detailed abstracts and everything needed for participation can also be 
->found at https://sambaxp.org.
->
->Any questions? You can always contact the LOC – just mail us at 
->loc@sambaXP.org.
+Was investigating trying to fix emulation of some fallocate flags, and
+was wondering how common is it for a fs to very loosely report
+allocation size (st_blocks) for a file - ie the allocation sizes does
+not match the allocate ranges returned by fiemap (or
+SEEK_HOLE/SEEK_DATA).   Presumably there are Linux fs that coalesce
+ranges on the fly so allocation sizes may be a 'guess' for some fs.
 
-I would just like to enthusiastically encourage anyone with
-any interest in Samba to register and attend SambaXP (timezone
-permitting :-).
+How common is this for it to be off?
 
-It really is a great and very friendly conference, where you can
-listen to and interact with the people making Samba and
-all associated code (the kernel SMB client and server).
+-- 
+Thanks,
 
-As we can't all go to Germany to attend in person (unfortunately)
-a virtual conference free to all is an excellent replacement !
-
-I'd like to thank SerNet for hosting.
-
-Please join us there !
-
-Cheers,
-
-	Jeremy Allison,
-	Samba Team.
+Steve
 
