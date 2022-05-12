@@ -2,56 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 766A2523D98
-	for <lists+samba-technical@lfdr.de>; Wed, 11 May 2022 21:34:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8338A5242F8
+	for <lists+samba-technical@lfdr.de>; Thu, 12 May 2022 05:05:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=XXF6OYI3qB5yttavT8X42EHp+sKvbnUf1JIGgX6NgFY=; b=TWSe7erElhTZVfHE8AeDw4meio
-	4AMY4XQAEr1j0P8VhCRiNoKemKX8j+C+TSZFY/S58Ua840iDUVRK/M+F562cyvMuSncxX2PwDmb7D
-	GK7Bqe9byhYCNa+f1lYrtfrrQgElLrqBSB99Xhe6RsTpW9ZDJQ1bedSfZae8SJqN76wBeGyQ5h4Ib
-	K4KMzXIFFSE+yyNCVXnZvWLZe9PQXms2J2H9MK4nmPLSW3RYx9T66KkrI3KoyOqJoIPeJT3iCKL7S
-	7L+jHuIHtHJEbop1Zi2SQKRbDte0lSGTQBW+PvuRk66QyvXYF1+Pn9LDOMcK28AfQToT52z6NkQ6n
-	0VvleS3A==;
-Received: from ip6-localhost ([::1]:62648 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=LFgpPeyFNmyLBQiypih2qBl6KgKEpBul/01jmjQ4s9A=; b=3laXNyfPQK8rT5WjVetXgTyFqB
+	6112IcVPrryX8Z7SuXM+PQJpgW9iFqJYMntBDW5/eVTGZ6vRtyv5BkvAGuavWtrBdvyYkNmMPBCVn
+	x3PbI6yfXHLTifI8MBZacZmJl2G5XjWwnNdVNyyZ84Nz1ThXOAZHaJ/dcX93PXCvb8mtfU0SCjCTs
+	Dm2opFqSBzvPYeP7OWGpSR7JtoZU6tpqp3a6XigZbo/VtFucPNDHFhGzqV+AID5jVNwP8fl+V1vvw
+	rp84pvUDnNYUm7z4zyds/hromP3IOQvjcAh7pkrJ3ZBQPP7e0KuWHw9YogEgqHYnrwebcBSYVGFBC
+	bmc31QOw==;
+Received: from ip6-localhost ([::1]:18050 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nos5H-000oK7-5U; Wed, 11 May 2022 19:33:19 +0000
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f]:42899) 
+	id 1noz7P-000qV8-V5; Thu, 12 May 2022 03:04:00 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61548) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nos5C-000oJy-Np
- for samba-technical@lists.samba.org; Wed, 11 May 2022 19:33:16 +0000
-Received: by mail-lf1-x12f.google.com with SMTP id b18so5287614lfv.9
- for <samba-technical@lists.samba.org>; Wed, 11 May 2022 12:33:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to:cc;
- bh=XXF6OYI3qB5yttavT8X42EHp+sKvbnUf1JIGgX6NgFY=;
- b=nxwpZRXVnOwm4rI3doQVxeE/xUeSHswRsyAoCuN6or15H3sbP7P+moh3izUYSh8q0o
- vKhwd8GQwUoAQ9X7ZfT/GKK4Ce/Eb8A8spYo8cvOTh4dsuAFtuO2JJF0O5jzUnF646/2
- PdKpNTBqNcOrAI6XNrK7WjixloC96hyYbbYZXo+nL94dfvKU7ps8OJdLG0mZFRHudjaW
- rZYfWnJ8bOrciigZxEZxotB04VlspQFDto9Z/HWT9xNgAihFKe5+m9YEtsroP+i7hVGa
- n6PNeM4bs/4QmkHzeJyar2i1jfbWWJhrLTpe+mB9tIFDVbpAbLufvrgpy90bpZfCN4Zk
- QvIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
- bh=XXF6OYI3qB5yttavT8X42EHp+sKvbnUf1JIGgX6NgFY=;
- b=oLvscWGTO5R9TZtiae9BY4RV2aRQsXE0OE+aLSm+Re5ySngsuCXJFS4H9djnjZYOY6
- oXlEhwk1uVoyQcQ97Gy2BJU0nvAzXOhleHCMKWUT2JNLCLdZPXuuniJl0zXGvYWNARiA
- umNzMCNU6Vxf0Kmie1IxStbryXV3eq7s762ya0STzzqi1UwNAEyFPmBeELmDVNafPAHU
- S8rQUq++4noET4p1rTJDQZsG1GhhGFgo/0MFrD4jiyrYew78W+gUNDTcGNP4nmL7ix2E
- 2gNHAMGCDfdNCaRGejkku0ThQF6RTy+tGX0fyyL+qPPupn7QV77yMEFmmQFBU6XdAJjs
- XU7g==
-X-Gm-Message-State: AOAM530/01Lu1WxkmfT+ZkwzNyuMFAe3qO3Qya2KkVUFQTnXHS15ykIe
- rRlyEHJSuRTjI80vH/IFVBxPcOq0m27+7Rch8ZM=
-X-Google-Smtp-Source: ABdhPJweqdnMSyi9XqObW6kKsNdHrxKx+zPWGJJv17tn1WEi+m85s2En6OuemBGJA8Qpn54NlXDPyXsjnpcipz1rmFA=
-X-Received: by 2002:a19:ca0f:0:b0:474:40ca:af2 with SMTP id
- a15-20020a19ca0f000000b0047440ca0af2mr4076979lfg.320.1652297593133; Wed, 11
- May 2022 12:33:13 -0700 (PDT)
-MIME-Version: 1.0
-Date: Wed, 11 May 2022 14:33:01 -0500
-Message-ID: <CAH2r5mvoQskGmY5SkgktzS1ZALeq7uk29EpLELLjVwcwYRwT1g@mail.gmail.com>
-Subject: misreported st_blocks (AllocationSize)
-To: linux-fsdevel <linux-fsdevel@vger.kernel.org>
+ (Exim) id 1noz7K-000qUy-V4
+ for samba-technical@lists.samba.org; Thu, 12 May 2022 03:03:57 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=LFgpPeyFNmyLBQiypih2qBl6KgKEpBul/01jmjQ4s9A=; b=NeQB3p2tlTW7bCWzTz5xGbhz6S
+ f9CdXNoRyoMHUFMynEGj8ZiCEI3yhlFuOCzWuPq5xsXJe26dqTLcZEiYZDbC79GCjxvJKPV0/H6oC
+ p0BfSG3Cn7UxSM+SLyU3csfKmdtfAYu7iwzQIN2mubjiz2onqNF6gHV5nwzWB/cVMFTJrksulS8gY
+ 3L2YwFqNhoAL4dJunoWPILpJSetdfBwTRsmuyRdt2SSVzXSZMWVScuwX7J4CyCEYlUUldWjFWiOMP
+ MLCROYDcCNxiVms7tWgJIxO+CAZUx5kggD704Sr18Utw1MWs9Q34LGKM2CN8gltn1pPxnmEy5dxef
+ qn5/H16YuBkwNzfELC8oi0EBqru9tKmJMF8j9QdOcRMCZP5gSAZ/c5XBBhfPP1qmgJ4KxuyBqxycf
+ eHHZaN/YnKlQIICRmmwKsh43NIgCr5PSw/AimkCaMsZgSl0km+p5VbCPZus68SXaPRIkvH46kKNmY
+ z92KltYoh9RB3S2oF7Uwhnvu;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1noz7J-000Rbj-F4
+ for samba-technical@lists.samba.org; Thu, 12 May 2022 03:03:54 +0000
+Message-ID: <b2e7c521b206ae21889e7409735dca2107e78e38.camel@samba.org>
+Subject: Remove last bits of DCOM code?
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Thu, 12 May 2022 15:03:49 +1200
 Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,24 +55,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Was investigating trying to fix emulation of some fallocate flags, and
-was wondering how common is it for a fs to very loosely report
-allocation size (st_blocks) for a file - ie the allocation sizes does
-not match the allocate ranges returned by fiemap (or
-SEEK_HOLE/SEEK_DATA).   Presumably there are Linux fs that coalesce
-ranges on the fly so allocation sizes may be a 'guess' for some fs.
+Bits of Samba that were implemented in the hope of doing DCOM cause us
+work, be it from users who dare to hope that there is a future for wmic
+in Samba, or from oss-fuzz when it finds inefficiency in our NDR
+parsing.
 
-How common is this for it to be off?
+It is just a dead weight on the project.
 
--- 
+Does anybody object if I remove it? (I will submit a MR if there are no
+objections)
+
 Thanks,
 
-Steve
+Andrew Bartlett
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+
+
+
+
+
 
