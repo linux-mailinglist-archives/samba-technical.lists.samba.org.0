@@ -2,48 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4FB85293DE
-	for <lists+samba-technical@lfdr.de>; Tue, 17 May 2022 00:56:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D09005298FA
+	for <lists+samba-technical@lfdr.de>; Tue, 17 May 2022 07:12:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=oJA2b/cwYk+dUeNb2ChROR636DF99MpzjGPtbbaCkCo=; b=cyv8RlNfYiJyN9BIMgwUMbUszU
-	RWzoq2m6a1nObeAzh0Ed26ZSz0bEleXjy+8BoUneaW3m1WmRHzteDBAJpgUIzSC9hZyMEIYHPD5bg
-	Z48U9CNIKvfUGhYXHK11koTTrVDh5MEB8LKR2DNK08rZffqqBVZLy8klulv6CVavK31E/nBId55cv
-	Wa4XGtRChY3bKgUrvkbnLY0ACYS7tweYW96bW4x8gr9olkw5euEl8PvLmDHae2p9cHXhfUVsgrGxb
-	ODCtAArdnoei9kGcEZNzI7Au5dIqW1gKT6V7hbyCu2A+Jbm5Eb6Zgkykz/esqtzXOFwvbO4edhcP1
-	V2Aqo9iQ==;
-Received: from ip6-localhost ([::1]:51878 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=S7BPgVhIA7U0B3tfQ386TG97jrPRnlXOiGANPw4M6bY=; b=3K0anS6JcaWaGu6f8OvKpmD9U6
+	gJaCBFOFE8RYS325Fg52Jm8HibB+fmyRNlysWrC5gf8qxsU49zlZV8wTD9xYvPC1BgctPSOeq98Jl
+	Db7So0GOKf8/Ny4VZCL9PGesmI5u5GMYBYgslD3neu2hygWGMzHcnMGsuFghgMNhfYsh+TRZ4TM3T
+	v8ghH84+ycNakEDt6P23P+qahMPFbYCBN64lJ5LDOI2GB205jU5pW4qgUqaF9ONGx/cJ4MSkKXXw/
+	Oa3fa7OMQT7IjZ8Lwftvla2FbTQoBwhs3od45BgzTYn/h26ckFhoD+MtdLJXwW78Obbn4gJa76QgI
+	t2+TNCdg==;
+Received: from ip6-localhost ([::1]:61058 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nqjcu-001fIa-RH; Mon, 16 May 2022 22:55:44 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61618) 
+	id 1nqpVI-001jdH-9N; Tue, 17 May 2022 05:12:16 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61632) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nqjcq-001fIR-Jc
- for samba-technical@lists.samba.org; Mon, 16 May 2022 22:55:43 +0000
+ (Exim) id 1nqpVD-001jd8-E6
+ for samba-technical@lists.samba.org; Tue, 17 May 2022 05:12:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=oJA2b/cwYk+dUeNb2ChROR636DF99MpzjGPtbbaCkCo=; b=mw8bF6J4oNyNxjI6FH+hL446Rl
- jMhveJ516RCMYii0WfZElQwdbW1y6RIVkVjW9v5igqaZe/NWCb9M3aiymcowZtJ9PcSisK9LeSW4S
- 6yV19JROKVC7SHruxVAA+rXlzwEiR2/wu2g78F18LkUm7a9SMO7NQtZcejYR9xSl84ijqsLqfPNvK
- oT2SEOXh2+DNv9B/5Jgy0zX1xnERpNUNN6GglBcLlRqBMRdQ2zCKTCV5c9L/OmYR/gme9EMp8eDcP
- E++/3ho8OKxSLuEZfFKB6qnc8s0y65dZ+hD65nVuVEuoW735BJxkYWRQuIQNz3WCXUGQZY68j5iy1
- Sw2lnLjTTRk7QkNmbFbI896iv05nIbC7KpW5/6FjlXgMCOpR0viSKV+6KfhndP/UIXymDDH42SDdI
- G6jHljH4PW/wbhqB4InFVfynVGFMd+0izgrO9rcpERUR1ubNO4+33rqvYv2+7CNYxm3wkSkNQKofn
- 4aVo0EEk3kgUPXUHoLM519bf;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=S7BPgVhIA7U0B3tfQ386TG97jrPRnlXOiGANPw4M6bY=; b=ES3xm+h68rrWtqOVSmfK4kqYWo
+ GAFic4h9vmU+ne0kuKWrZm47+8d2e0uSwuET5yIz2Z0ZyMWruoEJ8ea5/A4F0Nr9puTF9rx5eWyxf
+ vGqapGwyokiyONRsfZQZcbKs/5l5Sbjh4LWW2q4p38vPhbkSNcWE31USSGL+XI6zI+oJlHTOBYmUW
+ TcXIKM4KKOLMp6NI+m93DlP2ntI1XbHwqxMclBADD5PSwiiP4/LKMhAfCROl4hbo2QBKz6ye5DNgT
+ ERWEzR/ga4U7XhyMuJPT7u0vqfJvXcIgrqz6ltWIwkYq0xYKl7b90gP3Me+KWgSUwWq4fwccCChf7
+ Ho3nu+ef8IzKKHvm9kxmQQpJ/f0vQxvKTkLDiL9jjjLN56eHDDOT13EjjSyVxm2tkowSq0uV9hoIC
+ CZ21Dneb4I2DZ65XxlLr5/QgRAchFQwfKEcK/knorBvtervPTdhwH4smIs3NHYokCF46nB8Mepqqc
+ TbCFpsqvUCgqtpEs0na47D7c;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nqjco-001DWk-S6; Mon, 16 May 2022 22:55:39 +0000
-Message-ID: <eb8c4f632adbea7eaab7edc87115ae6143092c88.camel@samba.org>
+ (Exim) id 1nqpVC-001FSw-Ck; Tue, 17 May 2022 05:12:10 +0000
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Subject: Re: A blog about my "Dollar Ticket" attack (Nov 2021 security issue)
-To: Nadezhda Ivanova <nivanova@samba.org>, samba-technical@lists.samba.org
-Date: Tue, 17 May 2022 10:55:32 +1200
-In-Reply-To: <7f196939-bd37-7dcf-8a5e-54c567175642@samba.org>
+Date: Tue, 17 May 2022 07:12:09 +0200
+Message-ID: <2754825.mvXUDI8C0e@krikkit>
+In-Reply-To: <527f79427e6de47e8e367596ebf4795dcbb16e36.camel@samba.org>
 References: <527f79427e6de47e8e367596ebf4795dcbb16e36.camel@samba.org>
- <7f196939-bd37-7dcf-8a5e-54c567175642@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,54 +55,20 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Thanks.  It is only looking back at it now, with a bit of distance, can
-I really appreciate it. 
-
-So Thank You, and thanks for your support along the way, it was great
-to have you on this journey!
-
-Andrew,
-
-On Mon, 2022-05-16 at 15:08 +0300, Nadezhda Ivanova via samba-technical 
+On Friday, 13 May 2022 08:22:17 CEST Andrew Bartlett via samba-technical 
 wrote:
-> Great article, Andrew, thank you for sharing it!
-> 
-> You and the Catalyst team deserve a medal for your immense effort
-> and 
-> your technical brilliance on this issue!
-> 
-> On 13/05/2022 09:22, Andrew Bartlett via samba-technical wrote:
-> > I wrote up
-> > https://www.catalyst.net.nz/blog/stay-curious-lessons-doller-ticket-security-issue
-> > to explain a bit of how we got to the big Nov 2021 security issue.
-> > 
-> > I do want to say again a really big thanks to everyone who stepped
-> > up
-> > to help us in the rush up to November last year.
-> > 
-> > Also, here is the puff-piece we wrote up regarding finding the
-> > issue
-> > https://www.catalyst.net.nz/blog/catalyst-samba-team-fixes-critical-microsoft-security-issue
-> > 
-> > Oh, and one last thing:
-> > 
-> > https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-26931
-> > 
-> > is credited to me.  Fun times!  MS hasn't put as much detail out on
-> > that one, but I'll talk more once that is public.
-> > 
-> > Andrew,
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+> I wrote up
+> https://www.catalyst.net.nz/blog/stay-curious-lessons-doller-ticket-security
+> -issue to explain a bit of how we got to the big Nov 2021 security issue.
 
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
+I finally had the time to read it. Great write up Andrew. Thanks for sharing.
+
+
 
 
