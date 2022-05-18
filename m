@@ -2,49 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DA6B52B1D5
-	for <lists+samba-technical@lfdr.de>; Wed, 18 May 2022 07:27:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A0B2752B315
+	for <lists+samba-technical@lfdr.de>; Wed, 18 May 2022 09:12:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=Kj3fSM9V2bk0iuAuYcDBR8x9zKfPhlL5wHc5TUZLhK8=; b=e8ofcnGcU1VLMICi4/mZb1M3hf
-	MMu8Z8TPlMyjogsTkFtBJLIQcnq47/Ljr4ziUktlLFZnU00yNFyF/mUxUlJFrolY/qz/D4OUKVEM2
-	uKroTeO1bI8I9yMUmvUIZEtfM2Q+TqdRnBpwticmYsqsGVtnH58mZR+BS5qbUDMEcV4acAofkalUm
-	u/dmn0ktsfrfB+wSr5cCadGlzzbvg0Pv5eRC9JPf6ZJE9wnz9zopI9dHkmUJv9HDh+W7V/WZvwoB2
-	HB701lwrUqK2Qis5aabAj4QqKtlEIOmlKrpniAT5Oap2jK+DQfIQAqQQYkdLHIlV0qiTnuaceR/ok
-	h6MFiuSw==;
-Received: from ip6-localhost ([::1]:34660 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=Vg2LOdyNIJEUFLqpC4QkMRX0hLBenNyU2FcA/7YPHfU=; b=RWi7acEA7iJvzP7MCCR78pZS2h
+	eUkvtnLspShg9F21qa5WCu34kLFskUAaFoogmD64ucxZX4pya6hwudNo7F7SCYLVn0prSrvC4jitH
+	KFk/x7BNeRTp3CiwKLbKhy6igczPLphW+9b3RAeQIAX9pC3tM6L/k6oypy4yMG8SA6uZIxyEVuhNm
+	Cc7lujF3UFr/mzEV/GrAcegYaRX0AP74r7xsxt9mhmLMNu2KoBxPvoOht7Ose80qTD3SYRnVvvFOK
+	TNlAMKNzmcg+7WXecQX6YeyUbPj3pwFTDmCItMXqODijqcxzRpOu6ftzarab9TQekwi0D4fw/gnGa
+	2IG8KDAw==;
+Received: from ip6-localhost ([::1]:35386 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nrCCC-001uOV-0q; Wed, 18 May 2022 05:26:04 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61646) 
+	id 1nrDqT-001uya-Ex; Wed, 18 May 2022 07:11:45 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61648) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nrCC7-001uOM-Fb
- for samba-technical@lists.samba.org; Wed, 18 May 2022 05:26:01 +0000
+ (Exim) id 1nrDq8-001uyQ-1R
+ for samba-technical@lists.samba.org; Wed, 18 May 2022 07:11:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=Kj3fSM9V2bk0iuAuYcDBR8x9zKfPhlL5wHc5TUZLhK8=; b=WAO34RzsP5TAJ7j1Fsu/NGHN69
- xCSAzyfkIG5TxIfzSnVhkL7HeyTpJfzn4pQ6yfIltf0J8/o/msEUoUIVQYPI4BjhOoHYQobv0n0Tj
- ubv0AhR/woNa03SEmvBPqpJXLrfR5fimSTQfj547dMQtstSFYgEfNGfFYknxeeZbcceme3PSbuiv3
- iT3DQSISHu7X1YBzzFk/4ld1Pg8+m/eUNh9+0Ay3XUHUItHpPgVIGwQkpytUkCRzp199vBU2r2SiY
- FwUhdR8+7gNU3/J3K10+u3JyeHe04m3aEWy8V+1C4cYVPMmMnRoctp291JO5+x0ppjTSR+cHymmvu
- JpmrjWuKznE87xhrAWfPdLhqLImKUeaW388Y5t8TxmoVEWSfF8whCDfLAAlV7bLPln/amD83ySSFh
- LpwSOlKto/VmdSMBywHsgyzwEMU/hA8OAeBUcMNVetpCPxsE4KKeOW5vR3rMjtqnpcQ8/+u8QLrY1
- ty/BC3m8hpyZMIB0AjSksvgO;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=Vg2LOdyNIJEUFLqpC4QkMRX0hLBenNyU2FcA/7YPHfU=; b=nlry2JgoivHMg/68x/ZRM1f3/F
+ B075ikSanR/9Cb59xQz7adyzJTZ7DURSsPwSnn2+4GJemn7+YjMaMODNi/vBxr0Zpsri3pvKsLIAL
+ rLqdLE+sapdn3iWlU06eSoVsxeeS/qmCuPE6Vc1YGJ0SAjBBMvo4+pwuURfXqbvCXbn9GZPszLuar
+ j1JNZkMxTWRYk7DE6/s8j7A5BgzF0aOgcriRPctILu4TNO37Pbn6PbNhCIJKe53fwTZDJjhkfWGfc
+ UDkalFzoi5jRkSwY3xcX0Cgr1mK5x8vhEdGjKAaL5R04S2G2PNtwIoi/SDm2/JBxnSUP6szIjW0gB
+ doDEp4m33tPMF37CDnzEcCrvGRee552TJQzBl2a3w7awB7o0zwP55hiYAk86tyGdsaWBQTpJef3XE
+ OGYn4JXXcP3K0i8npWTcZQpj3eQ3dw9DSid7blY4enM6DDJD/fDwv1lcoqdTCsWuBRSJnXizBBDDo
+ f25+gmDyuob21TrkOYVtFmn9;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nrCC6-001QPt-6e; Wed, 18 May 2022 05:25:58 +0000
-To: Ralph Boehme <slow@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Subject: Re: Can someone try buildar for building our bootstrap CI images?
-Date: Wed, 18 May 2022 07:25:57 +0200
-Message-ID: <12009659.O9o76ZdvQC@magrathea>
-In-Reply-To: <6138f33dd48dce98b7a2f8cc93353db4b55ad6cf.camel@samba.org>
-References: <cce05b792f8377095d010cedf715bdefdcc580cf.camel@samba.org>
- <004187c0-a4ee-8457-a1a3-8264efa56dc8@samba.org>
- <6138f33dd48dce98b7a2f8cc93353db4b55ad6cf.camel@samba.org>
+ (Exim) id 1nrDq3-001SjG-9b
+ for samba-technical@lists.samba.org; Wed, 18 May 2022 07:11:19 +0000
+Message-ID: <68118e13ab297de53be260deeeb3094563ce7f3d.camel@samba.org>
+Subject: Re: ** server can't find 36.40.168.192.in-addr.arpa: NXDOMAIN
+To: samba-technical@lists.samba.org
+Date: Wed, 18 May 2022 08:11:18 +0100
+In-Reply-To: <CAM61p32DPdUCwLLSXx7Pez_HD8xc7nLQYkVhZFrhNDJ5wT7yBA@mail.gmail.com>
+References: <CAM61p32DPdUCwLLSXx7Pez_HD8xc7nLQYkVhZFrhNDJ5wT7yBA@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.30.5-1.1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,38 +57,28 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Andrew Bartlett <abartlet@samba.org>
+From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: samba-technical@lists.samba.org
+Cc: Rowland Penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tuesday, May 10, 2022 9:06:49 PM CEST Andrew Bartlett via samba-technical 
+On Tue, 2022-05-17 at 11:55 +0530, Prince Chaudhary via samba-technical 
 wrote:
-> On Tue, 2022-05-10 at 20:02 +0200, Ralph Boehme wrote:
-> > On 5/6/22 04:57, Andrew Bartlett via samba-technical wrote:
-> > > I'm more than happy to answer any questions.
-> > 
-> > afait this shouldn't be needed given podman can be used to build
-> > containers in rootless mode and gitlab plans to support podman in
-> > the
-> > future as pointed out by Andreas, right?
-> 
-> Well we can't really wait for the future, the need is imminent, unless
-> we dedicate our entire GitLab.com quota just to image rebuilds
-> (possible, just costly).
+> Hello Samba Team,
+> i am getting this error *{** server can't find 36.40.168.192.in-
+> addr.arpa:
+> NXDOMAIN} *while i do nslookup to my server ip, this came after i
+> added
+> reverse lookup zone and tried to get server name using ip address
+> although all other tests are successful, could you please guide me if
+> i am
+> missing something?
 
-I see in the gitlab runner issues that people already use podman 4.x 
-successfully.
+You are asking in the wrong place, trying asking on the 'samba mailing
+list'
 
-https://gitlab.com/gitlab-org/gitlab-runner/-/issues/27119
-
-https://gitlab.com/gitlab-org/gitlab-runner/-/issues/28815
-
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+Rowland
 
 
 
