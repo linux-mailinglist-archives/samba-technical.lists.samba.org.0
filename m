@@ -2,50 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50EC252DE5A
-	for <lists+samba-technical@lfdr.de>; Thu, 19 May 2022 22:25:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02F9552E59F
+	for <lists+samba-technical@lfdr.de>; Fri, 20 May 2022 09:02:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=67Nhom7MzXNwKUpjYNC6c3ty6Zw9OObpt5Zh1RLMH9U=; b=cYR0HzuUuipCSq2wKQdLyV6kJk
-	Ki8ys7XZ8Wc2psZL7LtukWvoTijFq+RaTPzX4CIfJYrS1hjn6RsMxg3aVz/O7qYUzHOYKDXNm2+al
-	a4KTWTkAo8EPuaqBNuWFDx7ijfY52IpXJMlxtLmyfbBsZsO+8phbfNOrzt/B/WX9reuGqPuToNsUG
-	xEozO5hYGtlnGC1y1zv0jVX3t7S+IAf3SR/PSmz9tIPcomNcieTFtTCFN4xA4wIRl+xtjNH461Hs5
-	dqPuV8mKxgakm+Bh4L+jncxWzl9fdqK7V4CyVFOezYKsJdACnhU+dgOIjecp6SyAxwyEr1VMsTjd+
-	VjyFBBdQ==;
-Received: from ip6-localhost ([::1]:52494 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=t+WuceGbLrRY15wccKYv/71Dqi+jQafmVPtc2mSdsek=; b=rGr5lgEoJ9/hD6OZgkKnSon3ah
+	snKVHA15/z5kiBWGTfWLV86bJ0MNZb49sf1VA8USjfl8dpvG8tvQNYmsRbxEDbSzFs60jWOpD1/So
+	MMxYw+AAAeu2BjFl6xO++WoDuMerO9NdkB8475dXqgmjnNYcIVow6RnLQ9+FSa5CSm6a5u5JJJ8O4
+	KyFLNvPGAg69hv57DUQckU6F6adwHdxL2ifDej8+A0ql0Dy2EQTdYCcfgfJQ4EarPvr4yM766fr/t
+	v/2x8dGG0JAgCN3iq9Yn7SKdE+h97/pNW2WsIsWeKsI2RJr/lvweFYcDq7qXJm+EWymIKW3EyqWgV
+	KqPdcfEQ==;
+Received: from ip6-localhost ([::1]:61792 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nrmhu-0025S2-Rv; Thu, 19 May 2022 20:25:15 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61688) 
+	id 1nrwdx-002ANV-TS; Fri, 20 May 2022 07:01:49 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:60631) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nrmhl-0025Rs-PI
- for samba-technical@lists.samba.org; Thu, 19 May 2022 20:25:08 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=67Nhom7MzXNwKUpjYNC6c3ty6Zw9OObpt5Zh1RLMH9U=; b=3H1RnjC+aDk5ahFMU0iUVdekyF
- oP0VgEOXaGWdMojsyxMRboib7hUzAozqaeNFXkdTN6rnzLfyH/uaGKzMk3DMZIeX6mjpNYFhZtQeY
- xE5ABeLF7K73JNLU/w33XfflAI4xuCRf0+qEcKZxekVQq1GQrR/9QQFw5/WlrLEsXtclt5h2cAoq3
- IgYp8RjGnTURU71v6pqMY4RWDI1w9fTbIbUO11lcYlIOxUvEoNGqXmAfihIL0QbO3kXmNoaOyBein
- ecKcd1RXJuBA1RuwPgAxbSQfVJCxetJzJaHWvGYQMYQekk6DmgB68mFsO8Ocy+bjFezZEIzbrMko9
- WsfI+zOEON9Yz/C5OMl046yzmhPyyf36cQbbWMbZ/AlpqZLoVFJXeYafqPWKFdQsJYSpfjQmUnRMF
- 5ER3ofTq21ZiK683GCaAZcLE87H3H98uWPSZVARyEoGbrRA/kX09NSYL9af3RlllCZk2j0IqdHLtB
- wR9Vpi8nAnfyEHlGC3+81UYE;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nrmhk-001gpx-P4; Thu, 19 May 2022 20:25:05 +0000
-Date: Thu, 19 May 2022 13:25:00 -0700
-To: Michael Tokarev <mjt@tls.msk.ru>
+ (Exim) id 1nrwdX-002ANM-T4
+ for samba-technical@lists.samba.org; Fri, 20 May 2022 07:01:31 +0000
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id CA61040ACC;
+ Fri, 20 May 2022 10:01:20 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 3484035C;
+ Fri, 20 May 2022 10:01:20 +0300 (MSK)
+Message-ID: <4d5700cf-e39c-e387-439d-d404bc0221e7@msgid.tls.msk.ru>
+Date: Fri, 20 May 2022 10:01:20 +0300
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.0
 Subject: Re: Q: RUNPATH missing in libsmbldap.so but not other
  executables/libraries?
-Message-ID: <YoannKUkiUp5SfAZ@jeremy-acer>
+Content-Language: en-US
+To: Alexander Bokovoy <ab@samba.org>
 References: <528f0ed8-cd28-0e7c-f517-4cbf96eb0844@msgid.tls.msk.ru>
  <c5500558-829f-c737-278e-45f4da2b5ab1@msgid.tls.msk.ru>
  <YoaJUS5Gn0MqIl+L@pinega.vda.li>
  <c5e2be16-bd32-a758-3293-2a1c149a1b9c@msgid.tls.msk.ru>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
 In-Reply-To: <c5e2be16-bd32-a758-3293-2a1c149a1b9c@msgid.tls.msk.ru>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,29 +54,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Alexander Bokovoy <ab@samba.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, May 19, 2022 at 11:15:47PM +0300, Michael Tokarev via samba-technical wrote:
->
->Now I know how to deal with this. The prob with submitting is that all
->my patches goes to /dev/null, even the simplest spelling fixes. I had
->enough of that.
+19.05.2022 23:15, Michael Tokarev via samba-technical wrote:
+..
+> ....  Maybe there can
+> be some automated way to detect these things. Again, maybe wafsamba
+> can help there.
 
-That's disturbing Michael and not at all the experience
-we want contributors to have.
+Actually it should stop listing all dependencies of dependencies in
+the link command when using shared libraries. Only static libs needs
+their dependencies in the linker command line, not the shared libs.
+This way the deps will be much more accurate because it will be
+obvious when the dep becomes missing.
 
-Can you please try again, submitting via our gitlab interface
-and I'll personally promise to review everything you submit.
+At the same time it should be possible to fix the random order of
+the link-line arguments too.
 
-I really don't want someone who works so hard to help us
-have such a hard time.
+Alexander, do you know maybe just a little bit how wafsamba works?
+In particular, where does it expand dependencies recursively, and
+how to tell it to stop the recursion if the given dependency is
+a shared library?
 
-Apologies for your previous experiences,
-
-Jeremy.
+/mjt
 
