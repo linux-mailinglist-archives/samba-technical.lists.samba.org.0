@@ -2,49 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED26C52F5C2
-	for <lists+samba-technical@lfdr.de>; Sat, 21 May 2022 00:38:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9200952FE01
+	for <lists+samba-technical@lfdr.de>; Sat, 21 May 2022 18:01:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=1pYifmp2fAi/C+NTeGbtKhmPW7zZnymiTifaYc5bz1M=; b=GSduy2iuYZ6Rym2zJq5KwVXqln
-	37yxnPJuxzpw4FPqq0ETLYKEZF2zH23bIRhW10JxD+JEPvAGUyvR/3Z2235p60FiQZtN+8/m0Uf+w
-	m3kmbs2xbGisKq3mLaHjOpg+rUZvmgwZztf5CQt41w11lTAKwycvp3/cWYlvTlPtIgNOG6Q/aGW+3
-	NJLwzvK4TeCUHhzFkv2ssOjzrvDASM+5bpMzCvxHBvqrHwdnOIj+1T1+pcDeCFEcV3X0lkaAtB/ZH
-	x2BKgTdTX5MB3LHqwnpb+q8enpmhERHkL6DS0srO58Y2jaSgas2lJCblNz01vwEAQrBNjTuRPvig9
-	O+2n9Naw==;
-Received: from ip6-localhost ([::1]:36598 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:subject:Date:cc;
+	bh=j637ml7RM4j9vwOTj3WqxqSdlKfT3e7fGlVqqHc+6mg=; b=gEi2MYXcUtewqa0HKwtAITPvUt
+	iZjkK9Gg4M4QXwa1iL7RcNEHsxNyMM1gQT9903pZ/F/qTIuS0g29eN43bTE4G/StsUWhazgAmzjfv
+	sdEyAQY/+HB9AZWDQ5gzPPy/FyZihIrMMCdBSIhzaq9TOgNb0Cr0kjVwB5yTaR+fW1g2f9ePdjJ4X
+	hf4tPs6vg5H+wDxWG3h1pX8voxHIimAwyefOAHKFs/DnDa4cetnEkRPXsUgCAntmvCG+peapU2nAV
+	uDxGgYzISkYFa13BrqG5iBnq2yC2ApnAzzKyFYPpfybIAFZT6vVc1XZRBj499WTh+KXMA2ume8jTB
+	w8oPvuxA==;
+Received: from ip6-localhost ([::1]:40568 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nsBGH-002KqF-PO; Fri, 20 May 2022 22:38:21 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61728) 
+	id 1nsRX0-002NuH-8w; Sat, 21 May 2022 16:00:42 +0000
+Received: from mail.itsd.de ([80.153.216.99]:45851) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nsBGB-002Kq5-On
- for samba-technical@lists.samba.org; Fri, 20 May 2022 22:38:20 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=1pYifmp2fAi/C+NTeGbtKhmPW7zZnymiTifaYc5bz1M=; b=EROefkf59CHDvKEZlSYDFd7p5X
- hjnWLga4PKOaj+ir5ghg7taN+c8sqg/sMowzsIL2rTCcXQQhn1AhBmPbJJ6n7qvqKd3Q/SrtavKEH
- 4xdt4GSyLk3iU2afJlFzK1drl8pVMJIKOPN9h4xCpOyZg+2SiNOUJnbHtibSEpfRsF836MTJnbX98
- WIhXzJ7Ig+OFPGNCRbt6vayp7R17bdnJmpwnmY6zDRaPwA8vY8TzbONeroxVZHYe2K5qyUnnED100
- J7yoJ8047wuYwOEJ5TzRfe9qrvnh3l2VaA/kb4MZoxEkx3lIPB9GOKPM/E5jvy7kZBZIKw6tcA88C
- M9bl2xbTL1RRBtVJuCuod/vigWiX6l0lbbHfvdvkETqK26+AzmWWsGDcG+jOWd4/hXyqjWSyOhThk
- 1++XjZIlytnGUJTd/mfCqgL8MF46dLc/rrY/Wo/xMZYEcb4Zgp9Igp3sujR4+UjmcBBjyLKITcHyH
- T8eQgwwLoJqMf7t2Nne/s4x4;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nsBGA-001ptN-AW; Fri, 20 May 2022 22:38:15 +0000
-Message-ID: <957f6a8362f2643902b839ae1defd02770ded806.camel@samba.org>
-Subject: Re: ldap simple bind problem after upgrade from 4.14 to 4.15
-To: "Dr." =?ISO-8859-1?Q?Hansj=F6rg?= Maurer <hansjoerg.maurer@itsd.de>, 
+ (Exim) id 1nsRWq-002Nu8-2Q
+ for samba-technical@lists.samba.org; Sat, 21 May 2022 16:00:38 +0000
+Received: from mail.itsd.de (mail.itsd.de [192.168.0.10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by securemail.itsd.de (Postfix) with ESMTPS;
+ Sat, 21 May 2022 18:00:20 +0200 (CEST)
+Received: from [192.168.0.220] (unknown [192.168.0.220])
+ (using TLSv1.2 with cipher AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.itsd.de (Postfix) with ESMTPSA id 06AFE800D9;
+ Sat, 21 May 2022 18:00:19 +0200 (CEST)
+Message-ID: <a832001c-1c26-ae6e-c9f5-b3cd15605851@itsd.de>
+Date: Sat, 21 May 2022 18:00:19 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.0
+subject: Re: ldap simple bind problem after upgrade from 4.14 to 4.15
+Content-Language: de-DE
+To: Andrew Bartlett <abartlet@samba.org>,
  "samba-technical@lists.samba.org (samba-technical@lists.samba.org)"
  <samba-technical@lists.samba.org>
-Date: Sat, 21 May 2022 10:38:11 +1200
-In-Reply-To: <e7d2c0a2-ce6c-e5a4-c100-f429acb0cb58@itsd.de>
 References: <e7d2c0a2-ce6c-e5a4-c100-f429acb0cb58@itsd.de>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.42.4 (3.42.4-2.fc35) 
-MIME-Version: 1.0
+ <957f6a8362f2643902b839ae1defd02770ded806.camel@samba.org>
+Organization: itsystems Deutschland AG
+In-Reply-To: <957f6a8362f2643902b839ae1defd02770ded806.camel@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-SM-outgoing: yes
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=itsd.de; h=message-id
+ :date:mime-version:subject:to:references:from:in-reply-to
+ :content-type:content-transfer-encoding; s=default; bh=2wEkSAM0x
+ XYesL2PecCQPKsoFc7T0JakbcyZN6HQXes=; b=HihBARHNEovsjY2+o5Gd0tdvx
+ aU7AZhfVPsnNFWYK4ThOjH+fuDrLPSDk0v1L29ctx6qQTYGQYLaQZ6cAp8YahgDL
+ /6/XEiQw2yoXz2+BfZvp2JUDEBIlq3f4o3QriQAaQjTpSoHk89TV1Fpyy6Yl4dG8
+ PzvX9zVYlYi1B0sy6vQmzsKS4sWtUzp9p4BLfbkv4w/ghDszHI+pv1XMslFqxqS5
+ mEJhrhwV6vJsb0ovi/GhLcqQCrsUOaq2LVHg6jOFbT5KjOPI+GrO/yN7OFrqcIHJ
+ OVuhk0vddGWeLjvMs4NzeTdf1I7i9xBINLcmRCzrJEbSDCTzMI7vTXWTU7YZw==
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,67 +68,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: =?utf-8?q?Dr=2E_Hansj=C3=B6rg_Maurer_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?UTF-8?Q?Dr=2e_Hansj=c3=b6rg_Maurer?= <hansjoerg.maurer@itsd.de>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2022-05-20 at 11:12 +0200, Dr. Hansjörg Maurer via samba-
-technical wrote:
-> Hi
-> 
-> we upgraded an 4.14.12  AD-DC to 4.15.7 and after the upgrade all LDAP 
-> searches with simple bind failed with
-> 
-> A commandline  ldap search (working before, User and domaininformation 
-> replaced) shows
-> ldapsearch -x -D "CN=user,CN=Users,DC=xxx,DC=yyy,DC=de" -W -H 
-> ldap://192.168.0.1:389 -b "CN=Users,DC=xxx,DC=yyy,DC=de" -s sub 'uid=ccc'
-> Enter LDAP Password:
-> ldap_bind: Invalid credentials (49)
->          additional info: 80090308: LdapErr: DSID-0C0903A9, comment: 
-> AcceptSecurityContext error, data 531, v1db1
-> 
-> 
-> 
-> During the bind Samba  Logs  (User and domaininformation replaced as above)
-> 
-> 
->    {"timestamp": "2022-05-20T08:38:09.967130+0200", "type": 
-> "Authentication", "Authentication": {"version": {"major": 1, "minor": 
-> 2}, "eventId": 4625, "logonId": "0", "logonType": 8, "status": 
-> "NT_STATUS_INVALID_WORKSTATION", "localAddress": "ipv4:192.168.0.1:389", 
-> "remoteAddress": "ipv4:192.168.0.10:56620", "serviceDescription": 
-> "LDAP", "authDescription": "simple bind", "clientDomain": "DOM", 
-> "clientAccount": "CN=user,CN=Users,DC=xxx,DC=yyy,DC=de", "workstation": 
-> "DC01", "becameAccount": null, "becameDomain": null, "becameSid": null, 
-> "mappedAccount": "user", "mappedDomain": "DOM", "netlogonComputer": 
-> null, "netlogonTrustAccount": null, "netlogonNegotiateFlags": 
-> "0x00000000", "netlogonSecureChannelType": 0, "netlogonTrustAccountSid": 
-> null, "passwordType": "Plaintext", "duration": 2301}}
-> [2022/05/20 08:38:09.969011,  3] 
+Hi Andrew
 
-> The domain above is a rather old one, migrated from samba NT DC with 
-> openldap backend many years ago
-> 
-> I tried to setup a fresh 4.14 AD-DC Testsysstem, migrated it to 4.15 and 
-> the problem does not occur.
-> 
-> What does the
-> NT_STATUS_INVALID_WORKSTATION mean and could the problem be DNS related?
 
-Do you have a list of workations set in userWorkstations on this user?
+Am 21.05.22 um 00:38 schrieb Andrew Bartlett:
+>
+>> The domain above is a rather old one, migrated from samba NT DC with
+>> openldap backend many years ago
+>>
+>> I tried to setup a fresh 4.14 AD-DC Testsysstem, migrated it to 4.15 and
+>> the problem does not occur.
+>>
+>> What does the
+>> NT_STATUS_INVALID_WORKSTATION mean and could the problem be DNS related?
+> Do you have a list of workations set in userWorkstations on this user?
+>
+> For this version we fixed a bug with a crash in simple binds going to
+> winbind (RODC) and filled in a "workstation" for LDAP binds, which may
+> have meant this policy started to be enforced.
+>
+> Andrew Bartlett
+>
+>
 
-For this version we fixed a bug with a crash in simple binds going to
-winbind (RODC) and filled in a "workstation" for LDAP binds, which may
-have meant this policy started to be enforced.
+thanks a lot. exactly this was the case.
+The bind user we use to connect to ldap service has the workstation 
+option set (do not know why :-))
 
-Andrew Bartlett
+I have upgraded again , deleted this restriction  and simple ldap bind 
+works  know
+
+regards
+
+Hansjörg
 
 
 -- 
-Andrew Bartlett (he/him)        https://samba.org/~abartlet/
-Samba Team Member (since 2001)  https://samba.org
-Samba Developer, Catalyst IT    https://catalyst.net.nz/services/samba
+Dr. Hansjörg Maurer
+itsystems Deutschland AG
+Erzgießereistr. 22
+80335 München
+Tel:   +49-89-52 04 68-41
+Fax:   +49-89-52 04 68-59
+E-Mail: hansjoerg.maurer@itsd.de
+Web:    http://www.itsd.de
+
+
+Amtsgericht München HRB 132146
+USt-IdNr. DE 812991301
+Steuer-Nr. 143/100/81575
+
+Aufsichtsratsvorsitzender:
+Stefan Adam
+Vorstand:
+Dr. Michael Krocka
+Dr. Hansjörg Maurer
 
 
