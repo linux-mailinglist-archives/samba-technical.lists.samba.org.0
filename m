@@ -2,57 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF7D153079A
-	for <lists+samba-technical@lfdr.de>; Mon, 23 May 2022 04:22:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81549530C87
+	for <lists+samba-technical@lfdr.de>; Mon, 23 May 2022 12:14:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=Q3jKQaxqAE7GBPPEIBwvitJGeUWBviEptDmBFb5Uuqo=; b=mIbGm8AuQxIisNFwtK09zwXDoZ
-	2SkKQ1mUYwCoVCsJhImFDGDiFHUHq22eKBtb1JKXOoehcsdHYMF05a4uacVO1+yLVIieu+u/MoktF
-	GwaGofFVhb85Vkm2gvWluV5NYzOt52vHVefypO1Cyu7YJO68/vHb2mwf5x9chvSRu19LUX6Kl1JyK
-	W/kpMSJhp7I4yGU+vAyUlHuKipnf/BnyJx+RFsnXQVyWCaSlQDC7kt18pfOjM2xKmBvk9YElWhFMu
-	mXCHw1lzaFY/PGGcEzclX0g2PJNKXW92PJ9B9KZyKLX9/8FTTinIKfzACgQIz8utiUVmvL6ciABkN
-	bqjv6Y/A==;
-Received: from ip6-localhost ([::1]:44560 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=mBuqr4Xysnbts/387iae8Z7cheTZBoyBd5m7Gq72ZU8=; b=XpvMNjQJeESG1hLZyQwvJZ22xg
+	2LsPwCK0e0AdXWdpHEN6l0lJC4OwOP217U/cYxns4fM5Y1PmHlvkNyqOt/1eV+DF71pTe10pdesM8
+	NwCE/onuJ5smMTAU0zNHGRHqQ2BNoIkYi+O/kfXXPj/kF/gb8HHFieaHK1aK5zwNlVAVwjNJNmtb0
+	fN2HF1IGzKtOYD0B4I2nVI/w7FC+UFrAVZ3u3BHkm9DTrdELP3Xj/+IjkcbKPrfR0nUw+W2xOFh5E
+	MYMBuTf2gwF8wze64QUyOnGYNNI5wdpTeKwIuc6gleEo1uaVAEV2xou/w5SBOG7EEacbqAFPc45do
+	GA9cj+mw==;
+Received: from ip6-localhost ([::1]:45434 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nsxgw-002S5L-Ag; Mon, 23 May 2022 02:21:06 +0000
-Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29]:45848) 
+	id 1nt54T-002T5N-KU; Mon, 23 May 2022 10:13:53 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61744) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nsxgr-002S5C-22
- for samba-technical@lists.samba.org; Mon, 23 May 2022 02:21:03 +0000
-Received: by mail-vs1-xe29.google.com with SMTP id j7so1557271vsp.12
- for <samba-technical@lists.samba.org>; Sun, 22 May 2022 19:21:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to;
- bh=Q3jKQaxqAE7GBPPEIBwvitJGeUWBviEptDmBFb5Uuqo=;
- b=D9BMmHvLWxOybZU1gk5riHki1g7Q4q1Wh2tQAB2kTpBllSHqAs6I/cZJbY4xiJIT8o
- F/vHQAWFXxejXV73YLaZ3hM5qMygWcRZzsj6S1yv5k0rksbTK9KfgeVGqRB6nwPOtLpN
- s7igEKccfnx4qvSTwo5wB8UD79yRIzHne3jCOuwMeDAEvIojayBG2zjhGpTFvTBDQHHO
- GHHu23UVIUi4l3tf1Z8aDHEc8zSQ6gvP2bfMvLeVZyMkByQxmPh0CW3DQ/KtPpGmccaH
- +Mrrqlj2QqLND132FMKqBj6Hg6KNwehSIeGCnfRo0T2L3/CdOjAQ6bJD2pjyTE2L9345
- 7EiQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=Q3jKQaxqAE7GBPPEIBwvitJGeUWBviEptDmBFb5Uuqo=;
- b=Pd5Zt8bAyDWCqI7ocFufJS6YP30MY9VDPnwntchmQkx3RnpOXliAdz8UOzSwktKP86
- NXXUDJivlIvrockYSc5YCIczfHzb8EN5ki/ll3Fij4xd9dJrR3tAsSXyAcGinzSSP9Zb
- 0iW+JrkkUg9MQuzRfyt29LF2cf+RQOMwtr4X/bm8XLDNxH655Fenx54GuyuP/ZcG8bhR
- GeZs70qts/zL3JnC7n5EUE3Fpc3/OBeSzcbOnFCf1ld8BDifrM7ykB2QDVp79z+DPmRL
- lVLxJP58ZODDbVZ011SeAloIrO06Hg7SouDmovpqaX4aGql8gFPbl9RpXTsxyvxCu9BF
- LgAw==
-X-Gm-Message-State: AOAM530rExOGqeX31ui953pTbDsoZGMf6IKB6/T483VAyu/EqM7KzOFT
- siHJFuxT2SYiyxyLeFXiyiBLIpH7R4JDndfJlrA=
-X-Google-Smtp-Source: ABdhPJwVCpjE6I6y1septQuGn2LsPmR3OM1ZlLijeVRdNryWbX3+QA/iDLyi7gbFTft1gVA2UoeA+T2PKcYKtwNgzKo=
-X-Received: by 2002:a67:fe57:0:b0:335:ef50:1b94 with SMTP id
- m23-20020a67fe57000000b00335ef501b94mr6312596vsr.6.1653272458985; Sun, 22 May
- 2022 19:20:58 -0700 (PDT)
+ (Exim) id 1nt54P-002T5E-I3
+ for samba-technical@lists.samba.org; Mon, 23 May 2022 10:13:51 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=mBuqr4Xysnbts/387iae8Z7cheTZBoyBd5m7Gq72ZU8=; b=N32MaajTAgBZ9DLrXoDHzrLT+V
+ Mm4RiSqqAVC1aPSCUflg0URC8guVgNAx1jN3FPmO7MxdiCW8qgtehJY/MG/S3gDmU9b94BwUkBGa4
+ VRWS2sYLiKz5oJo/rFY7DWUk2E2VYJ7Uc+Gy1sdSB9dQANYLkH8ID4GJNP+iNloCIuOk3NL05mO9R
+ /mQbg7cAp/R0snv4Mg8rXQgMelf6pnrlkCBpJqhpeSEg8Sg4OV2dVciwrzANPbcHeg/d27Xj+h83S
+ Gbdx03YHNFPyw+pjEYnH31KBOccBNa77RbqIwuebdJ4MdTQ7Ch2Q64MgnLlpqehnjfXjahjDj3GRt
+ gcncL2i6/oXmenp5j0oZwBIwLh/VVpjqj1brem5EoEaMAYLG46EL2UhGJsHxYUDmLM/jeQ4uT/Kj6
+ e57b2z3H6HtbnwLA8nTmTlw4+uuBdpiYqFR4txTm9BKXTqaayqCVXkNTM9alq+QUq3WqHXNCj4Gol
+ Mvy6OJv9mg+ORWlB9+/EOwu4;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1nt54O-0027bs-DS; Mon, 23 May 2022 10:13:48 +0000
+Date: Mon, 23 May 2022 12:13:47 +0200
+To: Steve French via samba-technical <samba-technical@lists.samba.org>
+Subject: Re: [PATCH][SMB3] Add defines for various newer FSCTLs
+Message-ID: <20220523121347.46d2b764@samba.org>
+In-Reply-To: <CAH2r5mveWTtio_Aei3VEht6KaxU6quSgwgopvXbFfMtE40q0YQ@mail.gmail.com>
+References: <CAH2r5muiMW76Xt2zRNJWTcQVuewEj3Qs3p4oc8tvEyw5f6528g@mail.gmail.com>
+ <CAH2r5mveWTtio_Aei3VEht6KaxU6quSgwgopvXbFfMtE40q0YQ@mail.gmail.com>
 MIME-Version: 1.0
-Date: Sun, 22 May 2022 21:20:46 -0500
-Message-ID: <CAH2r5mufGzZGSRm7F3KL5gk5HXNUfKg4-0FAywkkG2o_dYoTsw@mail.gmail.com>
-Subject: [PATCH][SMB3] Add various fsctl structs
-To: CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="000000000000a2941805dfa47d04"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,128 +56,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
+Cc: Steve French <smfrench@gmail.com>,
+ Samba Technical <samba-technical@lists.samba.org>,
+ CIFS <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000a2941805dfa47d04
-Content-Type: text/plain; charset="UTF-8"
+Patch looks fine to me:
+Reviewed-by: David Disseldorp <ddiss@suse.de>
 
-Add various fsctl structs
+On Sun, 22 May 2022 19:09:34 -0500, Steve French via samba-technical wrote:
 
-      Add missing structure definition for various newer fsctl operations
-      - duplicate_extents_ex
-      - get_integrity_information
-      - query_file_regions
-      - query_on_disk_volume_info
+>  #define FSCTL_DUPLICATE_EXTENTS_TO_FILE 0x00098344
+> +#define FSCTL_DUPLICATE_EXTENTS_TO_FILE_EX 0x000983E8
 
-And move a few more fsctl definitions to smbfs_common
+This one looks interesting - I wonder what kind of client use it gets.
+FICLONERANGE / BTRFS_IOC_CLONE_RANGE is atomic, so it should be possible
+to extend Samba's current dup-extents support to handle the new flag
+(DUPLICATE_EXTENTS_DATA_EX_SOURCE_ATOMIC) without needing any lower
+level changes.
 
--- 
-Thanks,
-
-Steve
-
---000000000000a2941805dfa47d04
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-SMB3-Add-various-fsctl-structs.patch"
-Content-Disposition: attachment; 
-	filename="0001-SMB3-Add-various-fsctl-structs.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_l3i3q3610>
-X-Attachment-Id: f_l3i3q3610
-
-RnJvbSBkMTRkNzY5ODIxYjI1OTFhMzVjZGIxMjIxMTdkMDkxNzI2YWZiNDE4IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFN1biwgMjIgTWF5IDIwMjIgMjE6MTQ6NDIgLTA1MDAKU3ViamVjdDogW1BBVENIXSBb
-U01CM10gQWRkIHZhcmlvdXMgZnNjdGwgc3RydWN0cwoKICBBZGQgbWlzc2luZyBzdHJ1Y3R1cmUg
-ZGVmaW5pdGlvbiBmb3IgdmFyaW91cyBuZXdlciBmc2N0bCBvcGVyYXRpb25zCiAgLSBkdXBsaWNh
-dGVfZXh0ZW50c19leAogIC0gZ2V0X2ludGVncml0eV9pbmZvcm1hdGlvbgogIC0gcXVlcnlfZmls
-ZV9yZWdpb25zCiAgLSBxdWVyeV9vbl9kaXNrX3ZvbHVtZV9pbmZvCgpTaWduZWQtb2ZmLWJ5OiBT
-dGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+Ci0tLQogZnMvY2lmcy9zbWIycGR1
-LmggICAgICAgICB8ICAyMiAtLS0tLS0tLQogZnMvc21iZnNfY29tbW9uL3NtYjJwZHUuaCB8IDEw
-OCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0tLQogMiBmaWxlcyBjaGFuZ2Vk
-LCAxMDEgaW5zZXJ0aW9ucygrKSwgMjkgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZnMvY2lm
-cy9zbWIycGR1LmggYi9mcy9jaWZzL3NtYjJwZHUuaAppbmRleCBkOGM0Mzg4YjE5MGQuLmY1Nzg4
-MWI4NDY0ZiAxMDA2NDQKLS0tIGEvZnMvY2lmcy9zbWIycGR1LmgKKysrIGIvZnMvY2lmcy9zbWIy
-cGR1LmgKQEAgLTI2MCwyOCArMjYwLDYgQEAgc3RydWN0IGdldF9yZXRyaWV2YWxfcG9pbnRlcnNf
-cmVmY291bnRfcnNwIHsKIAlzdHJ1Y3Qgc21iM19leHRlbnRzIGV4dGVudHNbXTsKIH0gX19wYWNr
-ZWQ7CiAKLXN0cnVjdCBmc2N0bF9zZXRfaW50ZWdyaXR5X2luZm9ybWF0aW9uX3JlcSB7Ci0JX19s
-ZTE2CUNoZWNrc3VtQWxnb3JpdGhtOwotCV9fbGUxNglSZXNlcnZlZDsKLQlfX2xlMzIJRmxhZ3M7
-Ci19IF9fcGFja2VkOwotCi1zdHJ1Y3QgZnNjdGxfZ2V0X2ludGVncml0eV9pbmZvcm1hdGlvbl9y
-c3AgewotCV9fbGUxNglDaGVja3N1bUFsZ29yaXRobTsKLQlfX2xlMTYJUmVzZXJ2ZWQ7Ci0JX19s
-ZTMyCUZsYWdzOwotCV9fbGUzMglDaGVja3N1bUNodW5rU2l6ZUluQnl0ZXM7Ci0JX19sZTMyCUNs
-dXN0ZXJTaXplSW5CeXRlczsKLX0gX19wYWNrZWQ7Ci0KLS8qIEludGVncml0eSBDaGVja3N1bUFs
-Z29yaXRobSBjaG9pY2VzIGZvciBhYm92ZSAqLwotI2RlZmluZQlDSEVDS1NVTV9UWVBFX05PTkUJ
-MHgwMDAwCi0jZGVmaW5lCUNIRUNLU1VNX1RZUEVfQ1JDNjQJMHgwMDAyCi0jZGVmaW5lIENIRUNL
-U1VNX1RZUEVfVU5DSEFOR0VECTB4RkZGRgkvKiBzZXQgb25seSAqLwotCi0vKiBJbnRlZ3JpdHkg
-ZmxhZ3MgZm9yIGFib3ZlICovCi0jZGVmaW5lIEZTQ1RMX0lOVEVHUklUWV9GTEFHX0NIRUNLU1VN
-X0VORk9SQ0VNRU5UX09GRgkweDAwMDAwMDAxCi0KIC8qIFNlZSBNUy1ERlNDIDIuMi4yICovCiBz
-dHJ1Y3QgZnNjdGxfZ2V0X2Rmc19yZWZlcnJhbF9yZXEgewogCV9fbGUxNiBNYXhSZWZlcnJhbExl
-dmVsOwpkaWZmIC0tZ2l0IGEvZnMvc21iZnNfY29tbW9uL3NtYjJwZHUuaCBiL2ZzL3NtYmZzX2Nv
-bW1vbi9zbWIycGR1LmgKaW5kZXggMDUwN2FlY2ZjNjY5Li4yY2FiNDEzZmZmZWUgMTAwNjQ0Ci0t
-LSBhL2ZzL3NtYmZzX2NvbW1vbi9zbWIycGR1LmgKKysrIGIvZnMvc21iZnNfY29tbW9uL3NtYjJw
-ZHUuaApAQCAtMTI0NCw2ICsxMjQ0LDEwNiBAQCBzdHJ1Y3QgZmlsZV96ZXJvX2RhdGFfaW5mb3Jt
-YXRpb24gewogCV9fbGU2NAlCZXlvbmRGaW5hbFplcm87CiB9IF9fcGFja2VkOwogCisvKiBTZWUg
-TVMtRlNDQyAyLjMuNyAqLworc3RydWN0IGR1cGxpY2F0ZV9leHRlbnRzX3RvX2ZpbGUgeworCV9f
-dTY0IFBlcnNpc3RlbnRGaWxlSGFuZGxlOyAvKiBzb3VyY2UgZmlsZSBoYW5kbGUsIG9wYXF1ZSBl
-bmRpYW5uZXNzICovCisJX191NjQgVm9sYXRpbGVGaWxlSGFuZGxlOworCV9fbGU2NCBTb3VyY2VG
-aWxlT2Zmc2V0OworCV9fbGU2NCBUYXJnZXRGaWxlT2Zmc2V0OworCV9fbGU2NCBCeXRlQ291bnQ7
-ICAvKiBCeXRlcyB0byBiZSBjb3BpZWQgKi8KK30gX19wYWNrZWQ7CisKKy8qIFNlZSBNUy1GU0ND
-IDIuMy44ICovCisjZGVmaW5lIERVUExJQ0FURV9FWFRFTlRTX0RBVEFfRVhfU09VUkNFX0FUT01J
-QwkweDAwMDAwMDAxCitzdHJ1Y3QgZHVwbGljYXRlX2V4dGVudHNfdG9fZmlsZV9leCB7CisJX191
-NjQgUGVyc2lzdGVudEZpbGVIYW5kbGU7IC8qIHNvdXJjZSBmaWxlIGhhbmRsZSwgb3BhcXVlIGVu
-ZGlhbm5lc3MgKi8KKwlfX3U2NCBWb2xhdGlsZUZpbGVIYW5kbGU7CisJX19sZTY0IFNvdXJjZUZp
-bGVPZmZzZXQ7CisJX19sZTY0IFRhcmdldEZpbGVPZmZzZXQ7CisJX19sZTY0IEJ5dGVDb3VudDsg
-IC8qIEJ5dGVzIHRvIGJlIGNvcGllZCAqLworCV9fbGUzMiBGbGFnczsKKwlfX2xlMzIgUmVzZXJ2
-ZWQ7Cit9IF9fcGFja2VkOworCisKKy8qIFNlZSBNUy1GU0NDIDIuMy4yMCAqLworc3RydWN0IGZz
-Y3RsX2dldF9pbnRlZ3JpdHlfaW5mb3JtYXRpb25fcnNwIHsKKwlfX2xlMTYJQ2hlY2tzdW1BbGdv
-cml0aG07CisJX19sZTE2CVJlc2VydmVkOworCV9fbGUzMglGbGFnczsKKwlfX2xlMzIJQ2hlY2tz
-dW1DaHVua1NpemVJbkJ5dGVzOworCV9fbGUzMglDbHVzdGVyU2l6ZUluQnl0ZXM7Cit9IF9fcGFj
-a2VkOworCisvKiBTZWUgTVMtRlNDQyAyLjMuNTUgKi8KK3N0cnVjdCBmc2N0bF9xdWVyeV9maWxl
-X3JlZ2lvbnNfcmVxIHsKKwlfX2xlNjQJRmlsZU9mZnNldDsKKwlfX2xlNjQJTGVuZ3RoOworCV9f
-bGUzMglEZXNpcmVkVXNhZ2U7CisJX19sZTMyCVJlc2VydmVkOworfSBfX3BhY2tlZDsKKworLyog
-RGVzaXJlZFVzYWdlIGZsYWdzIHNlZSBNUy1GU0NDIDIuMy41Ni4xICovCisjZGVmaW5lIEZJTEVf
-VVNBR0VfSU5WQUxJRF9SQU5HRQkweDAwMDAwMDAwCisjZGVmaW5lIEZJTEVfVVNBR0VfVkFMSURf
-Q0FDSEVEX0RBVEEJMHgwMDAwMDAwMQorI2RlZmluZSBGSUxFX1VTQUdFX05PTkNBQ0hFRF9EQVRB
-CTB4MDAwMDAwMDIKKworc3RydWN0IGZpbGVfcmVnaW9uX2luZm8geworCV9fbGU2NAlGaWxlT2Zm
-c2V0OworCV9fbGU2NAlMZW5ndGg7CisJX19sZTMyCURlc2lyZWRVc2FnZTsKKwlfX2xlMzIJUmVz
-ZXJ2ZWQ7Cit9IF9fcGFja2VkOworCisvKiBTZWUgTVMtRlNDQyAyLjMuNTYgKi8KK3N0cnVjdCBm
-c2N0bF9xdWVyeV9maWxlX3JlZ2lvbl9yc3AgeworCV9fbGUzMiBGbGFnczsKKwlfX2xlMzIgVG90
-YWxSZWdpb25FbnRyeUNvdW50OworCV9fbGUzMiBSZWdpb25FbnRyeUNvdW50OworCV9fdTMyICBS
-ZXNlcnZlZDsKKwlzdHJ1Y3QgIGZpbGVfcmVnaW9uX2luZm8gUmVnaW9uc1tdOworfSBfX3BhY2tl
-ZDsKKworLyogU2VlIE1TLUZTQ0MgMi4zLjU4ICovCitzdHJ1Y3QgZnNjdGxfcXVlcnlfb25fZGlz
-a192b2xfaW5mb19yc3AgeworCV9fbGU2NAlEaXJlY3RvcnlDb3VudDsKKwlfX2xlNjQJRmlsZUNv
-dW50OworCV9fbGUxNglGc0Zvcm1hdE1halZlcnNpb247CisJX19sZTE2CUZzRm9ybWF0TWluVmVy
-c2lvbjsKKwlfX3U4CUZzRm9ybWF0TmFtZVsyNF07CisJX19sZTY0CUZvcm1hdFRpbWU7CisJX19s
-ZTY0CUxhc3RVcGRhdGVUaW1lOworCV9fdTgJQ29weXJpZ2h0SW5mb1s2OF07CisJX191OAlBYnN0
-cmFjdEluZm9bNjhdOworCV9fdTgJRm9ybWF0SW1wbEluZm9bNjhdOworCV9fdTgJTGFzdE1vZGlm
-eUltcGxJbmZvWzY4XTsKK30gX19wYWNrZWQ7CisKKy8qIFNlZSBNUy1GU0NDIDIuMy43MyAqLwor
-c3RydWN0IGZzY3RsX3NldF9pbnRlZ3JpdHlfaW5mb3JtYXRpb25fcmVxIHsKKwlfX2xlMTYJQ2hl
-Y2tzdW1BbGdvcml0aG07CisJX19sZTE2CVJlc2VydmVkOworCV9fbGUzMglGbGFnczsKK30gX19w
-YWNrZWQ7CisKKy8qIFNlZSBNUy1GU0NDIDIuMy43NSAqLworc3RydWN0IGZzY3RsX3NldF9pbnRl
-Z3JpdHlfaW5mb19leF9yZXEgeworCV9fdTgJRW5hYmxlSW50ZWdyaXR5OworCV9fdTgJS2VlcFN0
-YXRlOworCV9fdTE2CVJlc2VydmVkOworCV9fbGUzMglGbGFnczsKKwlfX3U4CVZlcnNpb247CisJ
-X191OAlSZXNlcnZlZDJbN107Cit9IF9fcGFja2VkOworCisvKiBJbnRlZ3JpdHkgQ2hlY2tzdW1B
-bGdvcml0aG0gY2hvaWNlcyBmb3IgYWJvdmUgKi8KKyNkZWZpbmUJQ0hFQ0tTVU1fVFlQRV9OT05F
-CTB4MDAwMAorI2RlZmluZQlDSEVDS1NVTV9UWVBFX0NSQzY0CTB4MDAwMgorI2RlZmluZQlDSEVD
-S1NVTV9UWVBFX1VOQ0hBTkdFRAkweEZGRkYJLyogc2V0IG9ubHkgKi8KKworLyogSW50ZWdyaXR5
-IGZsYWdzIGZvciBhYm92ZSAqLworI2RlZmluZSBGU0NUTF9JTlRFR1JJVFlfRkxBR19DSEVDS1NV
-TV9FTkZPUkNFTUVOVF9PRkYJMHgwMDAwMDAwMQorCiAvKiBSZXBhcnNlIHN0cnVjdHVyZXMgLSBz
-ZWUgTVMtRlNDQyAyLjEuMiAqLwogCiAvKiBzdHJ1Y3QgZnNjdGxfcmVwYXJzZV9pbmZvX3JlcSBp
-cyBlbXB0eSwgb25seSByZXNwb25zZSBzdHJ1Y3RzIChzZWUgYmVsb3cpICovCkBAIC0xMzA0LDEz
-ICsxNDA0LDYgQEAgc3RydWN0IHZhbGlkYXRlX25lZ290aWF0ZV9pbmZvX3JzcCB7CiAJX19sZTE2
-IERpYWxlY3Q7IC8qIERpYWxlY3QgaW4gdXNlIGZvciB0aGUgY29ubmVjdGlvbiAqLwogfSBfX3Bh
-Y2tlZDsKIAotc3RydWN0IGR1cGxpY2F0ZV9leHRlbnRzX3RvX2ZpbGUgewotCV9fdTY0IFBlcnNp
-c3RlbnRGaWxlSGFuZGxlOyAvKiBzb3VyY2UgZmlsZSBoYW5kbGUsIG9wYXF1ZSBlbmRpYW5uZXNz
-ICovCi0JX191NjQgVm9sYXRpbGVGaWxlSGFuZGxlOwotCV9fbGU2NCBTb3VyY2VGaWxlT2Zmc2V0
-OwotCV9fbGU2NCBUYXJnZXRGaWxlT2Zmc2V0OwotCV9fbGU2NCBCeXRlQ291bnQ7ICAvKiBCeXRl
-cyB0byBiZSBjb3BpZWQgKi8KLX0gX19wYWNrZWQ7CiAKIC8qIFBvc3NpYmxlIEluZm9UeXBlIHZh
-bHVlcyAqLwogI2RlZmluZSBTTUIyX09fSU5GT19GSUxFCTB4MDEKQEAgLTE0MTksNiArMTUxMiw3
-IEBAIHN0cnVjdCBzbWIyX3F1ZXJ5X2luZm9fcnNwIHsKICAqCVBEVSBxdWVyeSBpbmZvbGV2ZWwg
-c3RydWN0dXJlIGRlZmluaXRpb25zCiAgKi8KIAorLyogU2VlIE1TLUZTQ0MgMi4zLjUyICovCiBz
-dHJ1Y3QgZmlsZV9hbGxvY2F0ZWRfcmFuZ2VfYnVmZmVyIHsKIAlfX2xlNjQJZmlsZV9vZmZzZXQ7
-CiAJX19sZTY0CWxlbmd0aDsKLS0gCjIuMzQuMQoK
---000000000000a2941805dfa47d04--
+Cheers, David
 
