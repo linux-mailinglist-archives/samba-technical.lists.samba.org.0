@@ -2,43 +2,69 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B44CB53526F
-	for <lists+samba-technical@lfdr.de>; Thu, 26 May 2022 19:11:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88C1D53553D
+	for <lists+samba-technical@lfdr.de>; Thu, 26 May 2022 22:57:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=zFrn2mghhi18p+QwyXwt5t3uM4S1bXu3KIorOyT1GI8=; b=Og1nHFD5STrzWuJAnI2rfV0g9H
-	5W0ESgVR+gWKEvv7N+TX9BOhXDYo7cFE0d6gvHhTFBQ44x3IzuTnMs9Xlt4aF8vQOTgDg5ItSYBxy
-	a8j716aFgEFho+r4dcWfX8NTDA97C9A3qXqEU8gRqLlwLtz3h1AEdNy6zO7qA8xU3Jt20TEtnVWcO
-	x/I5pOGPuD19YfMg1Rp+wBdVgCAFU8IWCs03zMNNIKyhITd5YguQaPqWYbsHtYkD+ul5ADEpaqE90
-	tBiZV4fi/9FBv2yqsZ4sHhlip7GQP7/IRWizepIyE+Rg23UuB2k7zoASSJPmiW3RmaU7SHp13jZFO
-	LuqpjTlQ==;
-Received: from ip6-localhost ([::1]:37802 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=qeYoBwClMquOdM4mrLC20XcvsQqVIaRivM3jxGFd6y4=; b=dGah9/kwMYeStRSbRax+eszxiJ
+	tnPtVbQ9ze+ovktSEFlQT5oWP3gfncJukCj7mOR3s5S/OhDvud+jh0M2yGZ+F9tdvVv10A8T0+xZi
+	Y6T3F7kv+6COO08sX8Az6s4E7YcwlNFMNMc0MTOc/2fTtmz8ZSJIjQUIkHnDaNEaO+cx1LUgVFAgs
+	9WT8+XF2lwozn6FPcKh2OD7s3oq6oeo4i6CK1YN4GDJEvjpFEe37yGgc2FbSQSlzn38vdzdXlvB7Q
+	whgXfaP/7dAcHnEsnGUh6HZSwlUEKnm7nn3eTJmu4F+ygzUXdEgCNP8r6JrgqWUrlaAshoZqZMx1b
+	T+QtGqNg==;
+Received: from ip6-localhost ([::1]:49126 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nuGzn-003Ahr-EL; Thu, 26 May 2022 17:09:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61832) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nuGzg-003AhJ-0m; Thu, 26 May 2022 17:09:54 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=zFrn2mghhi18p+QwyXwt5t3uM4S1bXu3KIorOyT1GI8=; b=XXVUmRKqklaOOEOsVxRvi/fEfn
- LzHI5iL8gTIST//7XgJ+vloUPgulwPeSrpmiwcmzG8RDwMPKs7Bmc/Fx0sLdb1Dl0pqEJAjuiaIPf
- BXh9UquWbjkihTQ1K/7t2lCP5ZCSLfsL5nGiFEMG6YdTRKTK66HwnpJVLv9i2gNRwf2IHwhD9Geg2
- gtIFan+3dD2z/p5NCqNK2pUsfTO1eTMSC/VzqKtCRrhX/ETGTh6uX6XD2CQETQKCaC20QoXPW0Y1x
- ZYMvsBqaE2vDrxCPlx4SEyEWL/YWHiCViPgfGDTkplSQSTFoDMtnlUgPfHYIkIqB3j0PspUgvypXd
- yNhaL5ddjJPTL4dBJEWaZpFUQHrogzOh6LDuqQToIGzf3LuKhhDrUTTw9NRnht4LpsWqECtKGJp5O
- 6rZofbfvHyMFm6E/fF7/kIBPzC+g0HxGFyYqPVuRtK185syKxAzRkISyW851Kiuw4yDMELv8YJ3uo
- XcrDhZa2TPFgkS8Hufc7aqPJ;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nuGze-002cH8-Pz; Thu, 26 May 2022 17:09:51 +0000
-Date: Thu, 26 May 2022 10:09:47 -0700
-To: samba@lists.samba.org, samba-technical@lists.samba.org
-Subject: (Virtual) SambaXP Conference next week !
-Message-ID: <Yo+0W0chbLCiGrVb@jeremy-acer>
+	id 1nuKX2-003FYV-Kw; Thu, 26 May 2022 20:56:32 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:58851) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1nuKWy-003FYM-JF
+ for samba-technical@lists.samba.org; Thu, 26 May 2022 20:56:30 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1653598584;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=qeYoBwClMquOdM4mrLC20XcvsQqVIaRivM3jxGFd6y4=;
+ b=YjPczSy9slGfZCxsKAH2muBvZGMgVfgj8bYE39z3S0VFga7AVgWejhYrimprP9G/QUdpHZ
+ oC6VLwlWb1tB7imouGcReUjpskU78CAt0Bn/0CKL77fVChv6b/M1Wvoa46eRSgGZHHbZBU
+ vxKet+rWOC9gX/dAnS9QQPfyl3/+X3Y=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1653598585;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=qeYoBwClMquOdM4mrLC20XcvsQqVIaRivM3jxGFd6y4=;
+ b=gLGC+spN5L68XHGmktILVe3ak3UhywjQLhqB1E/wb3EhwW5Y99AiDUTJZmIUAHdkW5vaen
+ RDLowbdvZJNTEIj2JccfBmlPoCoMjrf3DJVBzozyKhIlj/s+/LQv1ZyidxlJORjZ+xEYbU
+ IgxzGRSkFUqVPsUMbd50cWr74vo9Y2M=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-112-mc-1D6SBM96eFkb1G_VMfw-1; Thu, 26 May 2022 16:40:40 -0400
+X-MC-Unique: mc-1D6SBM96eFkb1G_VMfw-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A2A5D185A7A4;
+ Thu, 26 May 2022 20:40:39 +0000 (UTC)
+Received: from segfault.boston.devel.redhat.com
+ (segfault.boston.devel.redhat.com [10.19.60.26])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 31DDF1121315;
+ Thu, 26 May 2022 20:40:39 +0000 (UTC)
+To: Frederick Lawler <fred@cloudflare.com>
+Subject: Re: [PATCH v2] cred: Propagate security_prepare_creds() error code
+References: <20220525183703.466936-1-fred@cloudflare.com>
+X-PGP-KeyID: 1F78E1B4
+X-PGP-CertKey: F6FE 280D 8293 F72C 65FD  5A58 1FF8 A7CA 1F78 E1B4
+Date: Thu, 26 May 2022 16:43:44 -0400
+In-Reply-To: <20220525183703.466936-1-fred@cloudflare.com> (Frederick Lawler's
+ message of "Wed, 25 May 2022 13:37:03 -0500")
+Message-ID: <x49o7zkvxbz.fsf@segfault.boston.devel.redhat.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 2.78 on 10.11.54.3
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,26 +78,46 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
+From: Jeff Moyer via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeff Moyer <jmoyer@redhat.com>
+Cc: linux-aio@kvack.org, linux-nfs@vger.kernel.org, amir73il@gmail.com,
+ linux-cifs@vger.kernel.org, selinux@vger.kernel.org, netdev@vger.kernel.org,
+ linux-doc@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, linux-unionfs@vger.kernel.org,
+ linux-mm@kvack.org, linux-security-module@vger.kernel.org,
+ linux-cachefs@redhat.com, keyrings@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, kernel-team@cloudflare.com, serge@hallyn.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Just a reminder, if you're on these lists we'd *love*
-to see you at the virtual SambaXP conference next
-week, 31st of May - 2nd of June 2022.
+Frederick Lawler <fred@cloudflare.com> writes:
 
-https://sambaxp.org/
+> While experimenting with the security_prepare_creds() LSM hook, we
+> noticed that our EPERM error code was not propagated up the callstack.
+> Instead ENOMEM is always returned.  As a result, some tools may send a
+> confusing error message to the user:
+>
+> $ unshare -rU
+> unshare: unshare failed: Cannot allocate memory
+>
+> A user would think that the system didn't have enough memory, when
+> instead the action was denied.
+>
+> This problem occurs because prepare_creds() and prepare_kernel_cred()
+> return NULL when security_prepare_creds() returns an error code. Later,
+> functions calling prepare_creds() and prepare_kernel_cred() return
+> ENOMEM because they assume that a NULL meant there was no memory
+> allocated.
+>
+> Fix this by propagating an error code from security_prepare_creds() up
+> the callstack.
+>
+> Signed-off-by: Frederick Lawler <fred@cloudflare.com>
 
-It's easy to register, and free too ! If you are
-using or developing with Samba, there is lots of
-content that you're sure to find interesting and
-helpful.
+The fs/aio.c part looks ok to me.  We should probably also update the
+man page for io_submit, though, to document the conditions under which
+EPERM can be returned.
 
-Hope to see you all (virtually) there !
+Acked-by: Jeff Moyer <jmoyer@redhat.com>
 
-Cheers,
-
-Jeremy Allison,
-Samba Team.
 
