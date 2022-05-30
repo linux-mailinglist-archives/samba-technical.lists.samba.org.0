@@ -2,48 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D70A537635
-	for <lists+samba-technical@lfdr.de>; Mon, 30 May 2022 10:07:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3EA1D537C9F
+	for <lists+samba-technical@lfdr.de>; Mon, 30 May 2022 15:36:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=FF0/kn0e8JUBJ1Tl8wThVb3mkdEvSnZvDjG0KKn5F9Q=; b=A2bd13AVvV7O4B3GvigsecaxAe
-	zS6YOjRKuGm24F1uOl5CAXWim+4rh2Xmk/QrDqz7YtvoU3sTOusFKXOuzj8ImiyJc2XoalX66kXya
-	IYDpBrLCHN+dgGYLv4/MTgpBcMXhQ8Hk9dmvo4io/MC3PYBMw+ZovwfU/9jwpPlhoS0EjvMKcFmQT
-	uLmE1sb2Y0Cxgo8o/gCrbNXu63YgimOIN/WrZdqd0zcUMuSknjdz5geBZQO6F7KpEOyGGdavMxtYW
-	HGh4OnxIBLn/nucp0i3Zl0wYoi/Ct4QTQobt/Ikw+D6kqRv7U4epX7N0w5Q+zwygfF47+lna4ukg5
-	LB9QI10g==;
-Received: from ip6-localhost ([::1]:61780 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=KhzcZVOPs02gr3CfJu2X7CBmMzm7aF2q/RNaRE78xmo=; b=yMo6uEMPOSIW0Xus7FxPaUt8dn
+	woGFExfCuX33ADX2siT5TNYPFj/g0VDVw36fJy/BrpxLc3nBUr7Di/QboktBPsrROGsyZqB9LZPFv
+	WmmMbMYVk2Evev1sfnIbJY/2v/b1vGaI46sL6/5Mzvv9A2RKcbmjnqYvwrc5Amwh8zs0XNISC+zd7
+	p46NpkmIEoSuR38lbL7bsdlqu9sku5Q02MVF39cxymz/niNkKEqFu1aeoCu2caglxrcMrmNZ6q+sd
+	VDAimjKdHHx6bXGY/gaOPluv2ry6RMjQx4HmzWOi3au7mmqDLdOAXecEbX5mA4fXuETddQrqRdQwk
+	5d81NJGg==;
+Received: from ip6-localhost ([::1]:63962 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nvaQF-003lVA-Cv; Mon, 30 May 2022 08:06:43 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61870) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nvaQ8-003lV1-J7
- for samba-technical@lists.samba.org; Mon, 30 May 2022 08:06:40 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=FF0/kn0e8JUBJ1Tl8wThVb3mkdEvSnZvDjG0KKn5F9Q=; b=04zgSn5gK7KXytH6c5MZC1pqkQ
- zVLlYkYipBiYZQBYxlgFAxC3S512IFQRSQSc7DN+T940RWQ1GWLsuMhFj5ENCQyr8gdUxFAEj+ZO5
- FY5Y3tK9O7rhR4AecZRasRMYp4eQhcsIZkJn+VFP9t0YN2DujuFNB53rwnthDH2m9dQyByiBfaWT/
- Ge+PlrztpQ/k3rN3CTa8amEa3Rx0tH8K1RfxlOjEpQCws8tBftakDoYyg9wjzF3m8JAwwKhQR7ddD
- zhbTn/WsmYuTq41G8q5K4t/v/kji9cqKF3DSByPXmFZqVS7jcJfkOw9+KwzyWhAekcwQXaNQ2Hqbx
- I70LwCHXJ5CFfkqU8TfxGjt0c3/5DXJlNtmecjYy2AtaAeuoub0xJLBSatVORL6fRCowGyh1ZD2qc
- AhiQRqRJBOZoBCzw8z0nAMWMZQ4u7i8qFJHOzz7A86qcRpRLe1AtR6ETX2nMRT/1exnwV71XPtyGx
- Ie6HfH3ClCdcvRTFRpELIEHQ;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nvaPz-003AX2-3K; Mon, 30 May 2022 08:06:27 +0000
-Message-ID: <0c51e268e2a0ee77903d4620e9727f947ef5abe2.camel@samba.org>
-Subject: Re: internal backtrace support - libunwind or backtrace_symbols?
-To: Michael Tokarev <mjt@tls.msk.ru>
-Date: Mon, 30 May 2022 20:06:21 +1200
-In-Reply-To: <0bcbbf18-94b0-b859-7961-eb9c969b392a@msgid.tls.msk.ru>
-References: <ef350519d999afb7e2ba44b90744150a691777a5.camel@samba.org>
- <0bcbbf18-94b0-b859-7961-eb9c969b392a@msgid.tls.msk.ru>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+	id 1nvfXo-003mpM-Ia; Mon, 30 May 2022 13:34:52 +0000
+Received: from smtp1.axis.com ([195.60.68.17]:52872) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1nvfXj-003mpD-0T
+ for samba-technical@lists.samba.org; Mon, 30 May 2022 13:34:49 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=axis.com; q=dns/txt; s=axis-central1; t=1653917687;
+ x=1685453687;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=KhzcZVOPs02gr3CfJu2X7CBmMzm7aF2q/RNaRE78xmo=;
+ b=GEd/MucgDdO5vz5wVShv4tKMYDGyXhQW2hECIMv9i9NNamMc2gTmJcF+
+ M64VIr9YbRg2ru6RxYFa3RSu9QlU50R9gRzcPjKLA7sK+dQbaCi2lsbCi
+ wHZINhtTlWYdfwuVB3cMoFySDUkg/a2pU5EK2UT6T3lUcGlEAASd2d9ja
+ iVXLafvHd5dE+wIItOeEujOS3d3ezZ0ScANiZBep3iKzcRHDPdWEPrq8u
+ EyWyjDJ/nJ7Q6dljxFQR8vN716AdE1PQCmCcVhtTZH1ZOAfR1Fkrj75xk
+ QQMad1sBhRs110066/W6UE7/OYY1k+G775af+ZlttG0vI/EAJVfIQa3QO g==;
+To: Steve French <sfrench@samba.org>
+Subject: [PATCH] cifs: fix potential deadlock in direct reclaim
+Date: Mon, 30 May 2022 15:21:54 +0200
+Message-ID: <20220530132155.4019006-1-vincent.whitchurch@axis.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,54 +52,644 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Fco Javier Felix <ffelix@inode64.com>
+From: Vincent Whitchurch via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Vincent Whitchurch <vincent.whitchurch@axis.com>
+Cc: Shyam Prasad N <nspmangalore@gmail.com>, linux-cifs@vger.kernel.org,
+ Vincent Whitchurch <vincent.whitchurch@axis.com>,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org, kernel@axis.com,
+ Lars Persson <larper@axis.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2022-05-30 at 10:49 +0300, Michael Tokarev wrote:
-> 
-> Now I looked at the traces he's getting, and it looks like the prob
-> there is
-> 
-> not the lack of a backtrace but a corrupt stack which can't be
-> backtraced.
-> 
+The srv_mutex is used during writeback so cifs should ensure that
+allocations done when that mutex is held are done with GFP_NOFS, to
+avoid having direct reclaim ending up waiting for the same mutex and
+causing a deadlock.  This is detected by lockdep with the splat below:
 
-There was also a message from me that made it seem that no backtrace
-was a packaging problem.  I had got in my head that backtrace_symbols()
-was for some exotic platform, not a standard glibc feature. 
+ ======================================================
+ WARNING: possible circular locking dependency detected
+ 5.18.0 #70 Not tainted
+ ------------------------------------------------------
+ kswapd0/49 is trying to acquire lock:
+ ffff8880195782e0 (&tcp_ses->srv_mutex){+.+.}-{3:3}, at: compound_send_recv
 
-Anyway...
+ but task is already holding lock:
+ ffffffffa98e66c0 (fs_reclaim){+.+.}-{0:0}, at: balance_pgdat
 
-> I'll disable libunwind on debian samba build now once things are
-> clear.
-> 
-> And this mess is what I'm getting when trying to be just a bit
-> helpful
-> 
-> but in a rush.  Please excuse me for the noise.  
+ which lock already depends on the new lock.
 
-No worries.  I'm glad to got a moment to check some facts properly.  We
-will get this as right as possible soon!
+ the existing dependency chain (in reverse order) is:
 
-> Unfortunately I still
-> 
-> don't know what to do with Dirk's case.
+ -> #1 (fs_reclaim){+.+.}-{0:0}:
+        fs_reclaim_acquire
+        kmem_cache_alloc_trace
+        __request_module
+        crypto_alg_mod_lookup
+        crypto_alloc_tfm_node
+        crypto_alloc_shash
+        cifs_alloc_hash
+        smb311_crypto_shash_allocate
+        smb311_update_preauth_hash
+        compound_send_recv
+        cifs_send_recv
+        SMB2_negotiate
+        smb2_negotiate
+        cifs_negotiate_protocol
+        cifs_get_smb_ses
+        cifs_mount
+        cifs_smb3_do_mount
+        smb3_get_tree
+        vfs_get_tree
+        path_mount
+        __x64_sys_mount
+        do_syscall_64
+        entry_SYSCALL_64_after_hwframe
 
-Yeah, I've not fully understood it but likewise nothing has jumped out
-at me yet.
+ -> #0 (&tcp_ses->srv_mutex){+.+.}-{3:3}:
+        __lock_acquire
+        lock_acquire
+        __mutex_lock
+        mutex_lock_nested
+        compound_send_recv
+        cifs_send_recv
+        SMB2_write
+        smb2_sync_write
+        cifs_write
+        cifs_writepage_locked
+        cifs_writepage
+        shrink_page_list
+        shrink_lruvec
+        shrink_node
+        balance_pgdat
+        kswapd
+        kthread
+        ret_from_fork
 
-Andrew Bartlett
+ other info that might help us debug this:
 
+  Possible unsafe locking scenario:
+
+        CPU0                    CPU1
+        ----                    ----
+   lock(fs_reclaim);
+                                lock(&tcp_ses->srv_mutex);
+                                lock(fs_reclaim);
+   lock(&tcp_ses->srv_mutex);
+
+  *** DEADLOCK ***
+
+ 1 lock held by kswapd0/49:
+  #0: ffffffffa98e66c0 (fs_reclaim){+.+.}-{0:0}, at: balance_pgdat
+
+ stack backtrace:
+ CPU: 2 PID: 49 Comm: kswapd0 Not tainted 5.18.0 #70
+ Call Trace:
+  <TASK>
+  dump_stack_lvl
+  dump_stack
+  print_circular_bug.cold
+  check_noncircular
+  __lock_acquire
+  lock_acquire
+  __mutex_lock
+  mutex_lock_nested
+  compound_send_recv
+  cifs_send_recv
+  SMB2_write
+  smb2_sync_write
+  cifs_write
+  cifs_writepage_locked
+  cifs_writepage
+  shrink_page_list
+  shrink_lruvec
+  shrink_node
+  balance_pgdat
+  kswapd
+  kthread
+  ret_from_fork
+  </TASK>
+
+Fix this by using the memalloc_nofs_save/restore APIs around the places
+where the srv_mutex is held.  Do this in a wrapper function for the
+lock/unlock of the srv_mutex, and rename the srv_mutex to avoid missing
+call sites in the conversion.
+
+Note that there is another lockdep warning involving internal crypto
+locks, which was masked by this problem and is visible after this fix,
+see the discussion in this thread:
+
+ https://lore.kernel.org/all/20220523123755.GA13668@axis.com/
+
+Link: https://lore.kernel.org/r/CANT5p=rqcYfYMVHirqvdnnca4Mo+JQSw5Qu12v=kPfpk5yhhmg@mail.gmail.com/
+Reported-by: Shyam Prasad N <nspmangalore@gmail.com>
+Suggested-by: Lars Persson <larper@axis.com>
+Signed-off-by: Vincent Whitchurch <vincent.whitchurch@axis.com>
+---
+ fs/cifs/cifs_swn.c    |  4 ++--
+ fs/cifs/cifsencrypt.c |  8 ++++----
+ fs/cifs/cifsglob.h    | 20 +++++++++++++++++++-
+ fs/cifs/connect.c     | 26 +++++++++++++-------------
+ fs/cifs/dfs_cache.c   |  4 ++--
+ fs/cifs/sess.c        |  6 +++---
+ fs/cifs/smb1ops.c     |  6 +++---
+ fs/cifs/smb2pdu.c     |  6 +++---
+ fs/cifs/smbdirect.c   |  4 ++--
+ fs/cifs/transport.c   | 40 ++++++++++++++++++++--------------------
+ 10 files changed, 71 insertions(+), 53 deletions(-)
+
+diff --git a/fs/cifs/cifs_swn.c b/fs/cifs/cifs_swn.c
+index 180c234c2f46..1e4c7cc5287f 100644
+--- a/fs/cifs/cifs_swn.c
++++ b/fs/cifs/cifs_swn.c
+@@ -465,7 +465,7 @@ static int cifs_swn_reconnect(struct cifs_tcon *tcon, struct sockaddr_storage *a
+ 	int ret = 0;
+ 
+ 	/* Store the reconnect address */
+-	mutex_lock(&tcon->ses->server->srv_mutex);
++	cifs_server_lock(tcon->ses->server);
+ 	if (cifs_sockaddr_equal(&tcon->ses->server->dstaddr, addr))
+ 		goto unlock;
+ 
+@@ -501,7 +501,7 @@ static int cifs_swn_reconnect(struct cifs_tcon *tcon, struct sockaddr_storage *a
+ 	cifs_signal_cifsd_for_reconnect(tcon->ses->server, false);
+ 
+ unlock:
+-	mutex_unlock(&tcon->ses->server->srv_mutex);
++	cifs_server_unlock(tcon->ses->server);
+ 
+ 	return ret;
+ }
+diff --git a/fs/cifs/cifsencrypt.c b/fs/cifs/cifsencrypt.c
+index 0912d8bbbac1..663cb9db4908 100644
+--- a/fs/cifs/cifsencrypt.c
++++ b/fs/cifs/cifsencrypt.c
+@@ -236,9 +236,9 @@ int cifs_verify_signature(struct smb_rqst *rqst,
+ 					cpu_to_le32(expected_sequence_number);
+ 	cifs_pdu->Signature.Sequence.Reserved = 0;
+ 
+-	mutex_lock(&server->srv_mutex);
++	cifs_server_lock(server);
+ 	rc = cifs_calc_signature(rqst, server, what_we_think_sig_should_be);
+-	mutex_unlock(&server->srv_mutex);
++	cifs_server_unlock(server);
+ 
+ 	if (rc)
+ 		return rc;
+@@ -626,7 +626,7 @@ setup_ntlmv2_rsp(struct cifs_ses *ses, const struct nls_table *nls_cp)
+ 
+ 	memcpy(ses->auth_key.response + baselen, tiblob, tilen);
+ 
+-	mutex_lock(&ses->server->srv_mutex);
++	cifs_server_lock(ses->server);
+ 
+ 	rc = cifs_alloc_hash("hmac(md5)",
+ 			     &ses->server->secmech.hmacmd5,
+@@ -678,7 +678,7 @@ setup_ntlmv2_rsp(struct cifs_ses *ses, const struct nls_table *nls_cp)
+ 		cifs_dbg(VFS, "%s: Could not generate md5 hash\n", __func__);
+ 
+ unlock:
+-	mutex_unlock(&ses->server->srv_mutex);
++	cifs_server_unlock(ses->server);
+ setup_ntlmv2_rsp_ret:
+ 	kfree(tiblob);
+ 
+diff --git a/fs/cifs/cifsglob.h b/fs/cifs/cifsglob.h
+index 8de977c359b1..719d419a0a06 100644
+--- a/fs/cifs/cifsglob.h
++++ b/fs/cifs/cifsglob.h
+@@ -16,6 +16,7 @@
+ #include <linux/mempool.h>
+ #include <linux/workqueue.h>
+ #include <linux/utsname.h>
++#include <linux/sched/mm.h>
+ #include <linux/netfs.h>
+ #include "cifs_fs_sb.h"
+ #include "cifsacl.h"
+@@ -621,7 +622,8 @@ struct TCP_Server_Info {
+ 	unsigned int in_flight;  /* number of requests on the wire to server */
+ 	unsigned int max_in_flight; /* max number of requests that were on wire */
+ 	spinlock_t req_lock;  /* protect the two values above */
+-	struct mutex srv_mutex;
++	struct mutex _srv_mutex;
++	unsigned int nofs_flag;
+ 	struct task_struct *tsk;
+ 	char server_GUID[16];
+ 	__u16 sec_mode;
+@@ -736,6 +738,22 @@ struct TCP_Server_Info {
+ #endif
+ };
+ 
++static inline void cifs_server_lock(struct TCP_Server_Info *server)
++{
++	unsigned int nofs_flag = memalloc_nofs_save();
++
++	mutex_lock(&server->_srv_mutex);
++	server->nofs_flag = nofs_flag;
++}
++
++static inline void cifs_server_unlock(struct TCP_Server_Info *server)
++{
++	unsigned int nofs_flag = server->nofs_flag;
++
++	mutex_unlock(&server->_srv_mutex);
++	memalloc_nofs_restore(nofs_flag);
++}
++
+ struct cifs_credits {
+ 	unsigned int value;
+ 	unsigned int instance;
+diff --git a/fs/cifs/connect.c b/fs/cifs/connect.c
+index 42e14f408856..5226f975d8e4 100644
+--- a/fs/cifs/connect.c
++++ b/fs/cifs/connect.c
+@@ -148,7 +148,7 @@ static void cifs_resolve_server(struct work_struct *work)
+ 	struct TCP_Server_Info *server = container_of(work,
+ 					struct TCP_Server_Info, resolve.work);
+ 
+-	mutex_lock(&server->srv_mutex);
++	cifs_server_lock(server);
+ 
+ 	/*
+ 	 * Resolve the hostname again to make sure that IP address is up-to-date.
+@@ -159,7 +159,7 @@ static void cifs_resolve_server(struct work_struct *work)
+ 				__func__, rc);
+ 	}
+ 
+-	mutex_unlock(&server->srv_mutex);
++	cifs_server_unlock(server);
+ }
+ 
+ /*
+@@ -267,7 +267,7 @@ cifs_abort_connection(struct TCP_Server_Info *server)
+ 
+ 	/* do not want to be sending data on a socket we are freeing */
+ 	cifs_dbg(FYI, "%s: tearing down socket\n", __func__);
+-	mutex_lock(&server->srv_mutex);
++	cifs_server_lock(server);
+ 	if (server->ssocket) {
+ 		cifs_dbg(FYI, "State: 0x%x Flags: 0x%lx\n", server->ssocket->state,
+ 			 server->ssocket->flags);
+@@ -296,7 +296,7 @@ cifs_abort_connection(struct TCP_Server_Info *server)
+ 		mid->mid_flags |= MID_DELETED;
+ 	}
+ 	spin_unlock(&GlobalMid_Lock);
+-	mutex_unlock(&server->srv_mutex);
++	cifs_server_unlock(server);
+ 
+ 	cifs_dbg(FYI, "%s: issuing mid callbacks\n", __func__);
+ 	list_for_each_entry_safe(mid, nmid, &retry_list, qhead) {
+@@ -306,9 +306,9 @@ cifs_abort_connection(struct TCP_Server_Info *server)
+ 	}
+ 
+ 	if (cifs_rdma_enabled(server)) {
+-		mutex_lock(&server->srv_mutex);
++		cifs_server_lock(server);
+ 		smbd_destroy(server);
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 	}
+ }
+ 
+@@ -359,7 +359,7 @@ static int __cifs_reconnect(struct TCP_Server_Info *server,
+ 
+ 	do {
+ 		try_to_freeze();
+-		mutex_lock(&server->srv_mutex);
++		cifs_server_lock(server);
+ 
+ 		if (!cifs_swn_set_server_dstaddr(server)) {
+ 			/* resolve the hostname again to make sure that IP address is up-to-date */
+@@ -372,7 +372,7 @@ static int __cifs_reconnect(struct TCP_Server_Info *server,
+ 		else
+ 			rc = generic_ip_connect(server);
+ 		if (rc) {
+-			mutex_unlock(&server->srv_mutex);
++			cifs_server_unlock(server);
+ 			cifs_dbg(FYI, "%s: reconnect error %d\n", __func__, rc);
+ 			msleep(3000);
+ 		} else {
+@@ -383,7 +383,7 @@ static int __cifs_reconnect(struct TCP_Server_Info *server,
+ 				server->tcpStatus = CifsNeedNegotiate;
+ 			spin_unlock(&cifs_tcp_ses_lock);
+ 			cifs_swn_reset_server_dstaddr(server);
+-			mutex_unlock(&server->srv_mutex);
++			cifs_server_unlock(server);
+ 			mod_delayed_work(cifsiod_wq, &server->reconnect, 0);
+ 		}
+ 	} while (server->tcpStatus == CifsNeedReconnect);
+@@ -488,12 +488,12 @@ static int reconnect_dfs_server(struct TCP_Server_Info *server)
+ 
+ 	do {
+ 		try_to_freeze();
+-		mutex_lock(&server->srv_mutex);
++		cifs_server_lock(server);
+ 
+ 		rc = reconnect_target_unlocked(server, &tl, &target_hint);
+ 		if (rc) {
+ 			/* Failed to reconnect socket */
+-			mutex_unlock(&server->srv_mutex);
++			cifs_server_unlock(server);
+ 			cifs_dbg(FYI, "%s: reconnect error %d\n", __func__, rc);
+ 			msleep(3000);
+ 			continue;
+@@ -510,7 +510,7 @@ static int reconnect_dfs_server(struct TCP_Server_Info *server)
+ 			server->tcpStatus = CifsNeedNegotiate;
+ 		spin_unlock(&cifs_tcp_ses_lock);
+ 		cifs_swn_reset_server_dstaddr(server);
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 		mod_delayed_work(cifsiod_wq, &server->reconnect, 0);
+ 	} while (server->tcpStatus == CifsNeedReconnect);
+ 
+@@ -1565,7 +1565,7 @@ cifs_get_tcp_session(struct smb3_fs_context *ctx,
+ 	init_waitqueue_head(&tcp_ses->response_q);
+ 	init_waitqueue_head(&tcp_ses->request_q);
+ 	INIT_LIST_HEAD(&tcp_ses->pending_mid_q);
+-	mutex_init(&tcp_ses->srv_mutex);
++	mutex_init(&tcp_ses->_srv_mutex);
+ 	memcpy(tcp_ses->workstation_RFC1001_name,
+ 		ctx->source_rfc1001_name, RFC1001_NAME_LEN_WITH_NULL);
+ 	memcpy(tcp_ses->server_RFC1001_name,
+diff --git a/fs/cifs/dfs_cache.c b/fs/cifs/dfs_cache.c
+index 956f8e5cf3e7..261ebe88a328 100644
+--- a/fs/cifs/dfs_cache.c
++++ b/fs/cifs/dfs_cache.c
+@@ -1327,9 +1327,9 @@ static bool target_share_equal(struct TCP_Server_Info *server, const char *s1, c
+ 		cifs_dbg(VFS, "%s: failed to convert address \'%s\'. skip address matching.\n",
+ 			 __func__, ip);
+ 	} else {
+-		mutex_lock(&server->srv_mutex);
++		cifs_server_lock(server);
+ 		match = cifs_match_ipaddr((struct sockaddr *)&server->dstaddr, &sa);
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 	}
+ 
+ 	kfree(ip);
+diff --git a/fs/cifs/sess.c b/fs/cifs/sess.c
+index 32f478c7a66d..dadfc3c6ba60 100644
+--- a/fs/cifs/sess.c
++++ b/fs/cifs/sess.c
+@@ -1093,14 +1093,14 @@ sess_establish_session(struct sess_data *sess_data)
+ 	struct cifs_ses *ses = sess_data->ses;
+ 	struct TCP_Server_Info *server = sess_data->server;
+ 
+-	mutex_lock(&server->srv_mutex);
++	cifs_server_lock(server);
+ 	if (!server->session_estab) {
+ 		if (server->sign) {
+ 			server->session_key.response =
+ 				kmemdup(ses->auth_key.response,
+ 				ses->auth_key.len, GFP_KERNEL);
+ 			if (!server->session_key.response) {
+-				mutex_unlock(&server->srv_mutex);
++				cifs_server_unlock(server);
+ 				return -ENOMEM;
+ 			}
+ 			server->session_key.len =
+@@ -1109,7 +1109,7 @@ sess_establish_session(struct sess_data *sess_data)
+ 		server->sequence_number = 0x2;
+ 		server->session_estab = true;
+ 	}
+-	mutex_unlock(&server->srv_mutex);
++	cifs_server_unlock(server);
+ 
+ 	cifs_dbg(FYI, "CIFS session established successfully\n");
+ 	return 0;
+diff --git a/fs/cifs/smb1ops.c b/fs/cifs/smb1ops.c
+index c71c9a44bef4..2e20ee4dab7b 100644
+--- a/fs/cifs/smb1ops.c
++++ b/fs/cifs/smb1ops.c
+@@ -38,10 +38,10 @@ send_nt_cancel(struct TCP_Server_Info *server, struct smb_rqst *rqst,
+ 	in_buf->WordCount = 0;
+ 	put_bcc(0, in_buf);
+ 
+-	mutex_lock(&server->srv_mutex);
++	cifs_server_lock(server);
+ 	rc = cifs_sign_smb(in_buf, server, &mid->sequence_number);
+ 	if (rc) {
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 		return rc;
+ 	}
+ 
+@@ -55,7 +55,7 @@ send_nt_cancel(struct TCP_Server_Info *server, struct smb_rqst *rqst,
+ 	if (rc < 0)
+ 		server->sequence_number--;
+ 
+-	mutex_unlock(&server->srv_mutex);
++	cifs_server_unlock(server);
+ 
+ 	cifs_dbg(FYI, "issued NT_CANCEL for mid %u, rc = %d\n",
+ 		 get_mid(in_buf), rc);
+diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
+index 1b7ad0c09566..2397bcf22235 100644
+--- a/fs/cifs/smb2pdu.c
++++ b/fs/cifs/smb2pdu.c
+@@ -1369,13 +1369,13 @@ SMB2_sess_establish_session(struct SMB2_sess_data *sess_data)
+ 	struct cifs_ses *ses = sess_data->ses;
+ 	struct TCP_Server_Info *server = sess_data->server;
+ 
+-	mutex_lock(&server->srv_mutex);
++	cifs_server_lock(server);
+ 	if (server->ops->generate_signingkey) {
+ 		rc = server->ops->generate_signingkey(ses, server);
+ 		if (rc) {
+ 			cifs_dbg(FYI,
+ 				"SMB3 session key generation failed\n");
+-			mutex_unlock(&server->srv_mutex);
++			cifs_server_unlock(server);
+ 			return rc;
+ 		}
+ 	}
+@@ -1383,7 +1383,7 @@ SMB2_sess_establish_session(struct SMB2_sess_data *sess_data)
+ 		server->sequence_number = 0x2;
+ 		server->session_estab = true;
+ 	}
+-	mutex_unlock(&server->srv_mutex);
++	cifs_server_unlock(server);
+ 
+ 	cifs_dbg(FYI, "SMB2/3 session established successfully\n");
+ 	return rc;
+diff --git a/fs/cifs/smbdirect.c b/fs/cifs/smbdirect.c
+index 31ef64eb7fbb..35829d2a0918 100644
+--- a/fs/cifs/smbdirect.c
++++ b/fs/cifs/smbdirect.c
+@@ -1382,9 +1382,9 @@ void smbd_destroy(struct TCP_Server_Info *server)
+ 	log_rdma_event(INFO, "freeing mr list\n");
+ 	wake_up_interruptible_all(&info->wait_mr);
+ 	while (atomic_read(&info->mr_used_count)) {
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 		msleep(1000);
+-		mutex_lock(&server->srv_mutex);
++		cifs_server_lock(server);
+ 	}
+ 	destroy_mr_list(info);
+ 
+diff --git a/fs/cifs/transport.c b/fs/cifs/transport.c
+index c667e6ddfe2f..71750cf7bf55 100644
+--- a/fs/cifs/transport.c
++++ b/fs/cifs/transport.c
+@@ -822,7 +822,7 @@ cifs_call_async(struct TCP_Server_Info *server, struct smb_rqst *rqst,
+ 	} else
+ 		instance = exist_credits->instance;
+ 
+-	mutex_lock(&server->srv_mutex);
++	cifs_server_lock(server);
+ 
+ 	/*
+ 	 * We can't use credits obtained from the previous session to send this
+@@ -830,14 +830,14 @@ cifs_call_async(struct TCP_Server_Info *server, struct smb_rqst *rqst,
+ 	 * return -EAGAIN in such cases to let callers handle it.
+ 	 */
+ 	if (instance != server->reconnect_instance) {
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 		add_credits_and_wake_if(server, &credits, optype);
+ 		return -EAGAIN;
+ 	}
+ 
+ 	mid = server->ops->setup_async_request(server, rqst);
+ 	if (IS_ERR(mid)) {
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 		add_credits_and_wake_if(server, &credits, optype);
+ 		return PTR_ERR(mid);
+ 	}
+@@ -868,7 +868,7 @@ cifs_call_async(struct TCP_Server_Info *server, struct smb_rqst *rqst,
+ 		cifs_delete_mid(mid);
+ 	}
+ 
+-	mutex_unlock(&server->srv_mutex);
++	cifs_server_unlock(server);
+ 
+ 	if (rc == 0)
+ 		return 0;
+@@ -1109,7 +1109,7 @@ compound_send_recv(const unsigned int xid, struct cifs_ses *ses,
+ 	 * of smb data.
+ 	 */
+ 
+-	mutex_lock(&server->srv_mutex);
++	cifs_server_lock(server);
+ 
+ 	/*
+ 	 * All the parts of the compound chain belong obtained credits from the
+@@ -1119,7 +1119,7 @@ compound_send_recv(const unsigned int xid, struct cifs_ses *ses,
+ 	 * handle it.
+ 	 */
+ 	if (instance != server->reconnect_instance) {
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 		for (j = 0; j < num_rqst; j++)
+ 			add_credits(server, &credits[j], optype);
+ 		return -EAGAIN;
+@@ -1131,7 +1131,7 @@ compound_send_recv(const unsigned int xid, struct cifs_ses *ses,
+ 			revert_current_mid(server, i);
+ 			for (j = 0; j < i; j++)
+ 				cifs_delete_mid(midQ[j]);
+-			mutex_unlock(&server->srv_mutex);
++			cifs_server_unlock(server);
+ 
+ 			/* Update # of requests on wire to server */
+ 			for (j = 0; j < num_rqst; j++)
+@@ -1163,7 +1163,7 @@ compound_send_recv(const unsigned int xid, struct cifs_ses *ses,
+ 		server->sequence_number -= 2;
+ 	}
+ 
+-	mutex_unlock(&server->srv_mutex);
++	cifs_server_unlock(server);
+ 
+ 	/*
+ 	 * If sending failed for some reason or it is an oplock break that we
+@@ -1190,9 +1190,9 @@ compound_send_recv(const unsigned int xid, struct cifs_ses *ses,
+ 	if ((ses->status == CifsNew) || (optype & CIFS_NEG_OP) || (optype & CIFS_SESS_OP)) {
+ 		spin_unlock(&cifs_tcp_ses_lock);
+ 
+-		mutex_lock(&server->srv_mutex);
++		cifs_server_lock(server);
+ 		smb311_update_preauth_hash(ses, server, rqst[0].rq_iov, rqst[0].rq_nvec);
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 
+ 		spin_lock(&cifs_tcp_ses_lock);
+ 	}
+@@ -1266,9 +1266,9 @@ compound_send_recv(const unsigned int xid, struct cifs_ses *ses,
+ 			.iov_len = resp_iov[0].iov_len
+ 		};
+ 		spin_unlock(&cifs_tcp_ses_lock);
+-		mutex_lock(&server->srv_mutex);
++		cifs_server_lock(server);
+ 		smb311_update_preauth_hash(ses, server, &iov, 1);
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 		spin_lock(&cifs_tcp_ses_lock);
+ 	}
+ 	spin_unlock(&cifs_tcp_ses_lock);
+@@ -1385,11 +1385,11 @@ SendReceive(const unsigned int xid, struct cifs_ses *ses,
+ 	   and avoid races inside tcp sendmsg code that could cause corruption
+ 	   of smb data */
+ 
+-	mutex_lock(&server->srv_mutex);
++	cifs_server_lock(server);
+ 
+ 	rc = allocate_mid(ses, in_buf, &midQ);
+ 	if (rc) {
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 		/* Update # of requests on wire to server */
+ 		add_credits(server, &credits, 0);
+ 		return rc;
+@@ -1397,7 +1397,7 @@ SendReceive(const unsigned int xid, struct cifs_ses *ses,
+ 
+ 	rc = cifs_sign_smb(in_buf, server, &midQ->sequence_number);
+ 	if (rc) {
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 		goto out;
+ 	}
+ 
+@@ -1411,7 +1411,7 @@ SendReceive(const unsigned int xid, struct cifs_ses *ses,
+ 	if (rc < 0)
+ 		server->sequence_number -= 2;
+ 
+-	mutex_unlock(&server->srv_mutex);
++	cifs_server_unlock(server);
+ 
+ 	if (rc < 0)
+ 		goto out;
+@@ -1530,18 +1530,18 @@ SendReceiveBlockingLock(const unsigned int xid, struct cifs_tcon *tcon,
+ 	   and avoid races inside tcp sendmsg code that could cause corruption
+ 	   of smb data */
+ 
+-	mutex_lock(&server->srv_mutex);
++	cifs_server_lock(server);
+ 
+ 	rc = allocate_mid(ses, in_buf, &midQ);
+ 	if (rc) {
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 		return rc;
+ 	}
+ 
+ 	rc = cifs_sign_smb(in_buf, server, &midQ->sequence_number);
+ 	if (rc) {
+ 		cifs_delete_mid(midQ);
+-		mutex_unlock(&server->srv_mutex);
++		cifs_server_unlock(server);
+ 		return rc;
+ 	}
+ 
+@@ -1554,7 +1554,7 @@ SendReceiveBlockingLock(const unsigned int xid, struct cifs_tcon *tcon,
+ 	if (rc < 0)
+ 		server->sequence_number -= 2;
+ 
+-	mutex_unlock(&server->srv_mutex);
++	cifs_server_unlock(server);
+ 
+ 	if (rc < 0) {
+ 		cifs_delete_mid(midQ);
 -- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
-
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
+2.34.1
 
 
