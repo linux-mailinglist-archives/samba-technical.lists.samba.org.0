@@ -2,46 +2,33 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F91E53CD8F
-	for <lists+samba-technical@lfdr.de>; Fri,  3 Jun 2022 18:54:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1C9B53CFE1
+	for <lists+samba-technical@lfdr.de>; Fri,  3 Jun 2022 19:57:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=QNtH04VF3Pjkzc8dciANe321uBQ8VQDQarlDju17a0g=; b=HRcE8glDqyMZkJgkRutEETgp6g
-	Y6zKbcrBNcDa7MhBZ8X1zV30QGajj7GO3B8xfb26JebQmN/aDeVNE0KiQWaXxyca7FOyNEMTPM7+f
-	rMgwNhVepbB1HkiOt64wl0to+8s0ovVTdd1zUos6D6Ohd51UwCgfhFuMLSHswW2bTOvBapuJGmB4n
-	vtFYTQLVcfK3KNMCHJmP6zfCX+kAItAVkkwSrGPbK0CB9GiCTsHJOdDbE3AfFFHJPtzpRvBb5nxUa
-	5Ks5vj+OLtGaObCG8wXQwBumb7jNF1JiZgv0MyOOKjIIxFt95By9qY99nj779MjasJJwzV3tqJvFU
-	VrYOcBRA==;
-Received: from ip6-localhost ([::1]:29682 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=LgiQ84xU2YFARIcuRFEF9QUYiPQKWuYfnmICPyU0Wro=; b=iAnKMKiSz3mDjy+j9wOn67xkns
+	4l5D9zhtteJdZrGLj0Zc0Awb1Pqu3o/bvfZBAQ76EljWY4KlWl+o692qxJmX3FDuCGeg4097AeCC5
+	/L7lLgI+Yug2jRt8rs1GQAxjhz8hecscXSxpmGNqRYgpQSxNgE9s4YYKewKU2mRGvgYIhxslgkMBv
+	Gtw4wgNK/GmuAMqZUwsRKYI07/VHH8KXRK9yo3+ESJ+7yrAWh0BmqeG8WcR1Gygsjp8UbiWYjeyVJ
+	0YI/WNJ91V+rhLcj3diU5QKMojhBr+gi6Fa3j2Qi669SortA+AmVU9cBSbK+NXBY3gsUG8EIUzPby
+	pmSy+3vA==;
+Received: from ip6-localhost ([::1]:30368 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nxAY4-0075GY-Ah; Fri, 03 Jun 2022 16:53:20 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62012) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nxAXz-0075GP-LC
- for samba-technical@lists.samba.org; Fri, 03 Jun 2022 16:53:17 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=QNtH04VF3Pjkzc8dciANe321uBQ8VQDQarlDju17a0g=; b=NeH4oz5T0MCcTnovgMIWq8we8h
- hWJ6hoU11EtTe5m7FeG1X+SwWnI/YtfJ9NICRCwpjQlxTekhECxJXZ4yiUmo0gFN2e/xgE4OKaXHq
- KCPoMyDzWJHmLrnuLTZhL4WYJn6kXEs01Y9jsPOvgpmJXxoZMmqIKEGqcx+r8Qd8e8hz1uRDKN2jG
- jYHb09Q4sDhfP6ulATnBNsI8scPPfDkthAudcduy+D5Cwjv08IDYxvrulOKwk3rM1OYFa84pEw4D7
- x3E97so069r5Y7+dPohtI6ylLlQbN6/Bdsvnq3jGAVmeOmABAt38UzM5vQYib6rX64zbVs6vzZcq1
- dqV3XmMnEXD4yibTveXt2sY/gxWayyq7DLzPAqavpv5ujeXD7ECQ4weuDNSph+pOBp5VFAhNu0nfC
- 007qHX5wXyN6f/uO81Js8nGjgUSs4nvh2vKlpA8xcusroyHict5mVR59yg6tKMxZMNZJJRWu+XUK1
- xLbmubJwBpOQi+ajMUm+8VMm;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nxAXy-003raX-4Z; Fri, 03 Jun 2022 16:53:14 +0000
-Date: Fri, 3 Jun 2022 09:53:09 -0700
-To: scabrero@samba.org
-Subject: Re: Reintroduce netgroups support?
-Message-ID: <Ypo8dcAnXWqnhBye@jeremy-acer>
-References: <7b6cb695be2fe801b2e10139eaf84873e6578fea.camel@samba.org>
+	id 1nxBXe-0075f5-Pt; Fri, 03 Jun 2022 17:56:58 +0000
+Received: from [104.200.28.160] (port=45092 helo=dup2.asynchrono.us) 
+ by hr1.samba.org with esmtp (Exim) id 1nxBXa-0075ew-Gg
+ for samba-technical@lists.samba.org; Fri, 03 Jun 2022 17:56:56 +0000
+Received: from edfu.localnet (c-73-114-31-46.hsd1.ma.comcast.net
+ [73.114.31.46])
+ by dup2.asynchrono.us (Postfix) with ESMTPSA id 66D5E1514;
+ Fri,  3 Jun 2022 17:56:50 +0000 (UTC)
+To: samba-technical@lists.samba.org
+Subject: AD DC option to use acl_tdb rather than acl_xattr?
+Date: Fri, 03 Jun 2022 13:56:49 -0400
+Message-ID: <5979975.vuYhMxLoTh@edfu>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <7b6cb695be2fe801b2e10139eaf84873e6578fea.camel@samba.org>
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,36 +42,25 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: John Mulligan via samba-technical <samba-technical@lists.samba.org>
+Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
+Cc: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Jun 03, 2022 at 12:00:16PM +0200, Samuel Cabrero via samba-technical wrote:
->Hi,
->
->I have received some complains after we dropped netgroups support in
->Samba 4.15.0. Our release notes only mention we dropped NIS but
->netgroups went with it.
->
->Some people still use netgroups without NIS, stored in LDAP and made
->available to the system through nss_sss, but it is also possible to use
->/etc/netgroups.
->
->I had a look to the removed code and I think it is possible to
->reintroduce netgroups support independently from NIS, using the
->getdomainname() function from glibc instead of yp_get_default_domain()
->from libnsl.
->
->Should we bring back netgroups support?
+Hi Andrew,
+During the sambaXP conference you mentioned that there may be an option to 
+swap the vfs/xattr backend even on an AD DC. I'm interested in using this as 
+it ought to avoid the need for always running our AD DC container images in a 
+privileged mode.  You mentioned it should be OK for our use-case where the 
+sysvol is not heavily used. Unfortunately, I haven't found any documentation 
+for it. I looked over the interactive help from 'samba-tool' as well as the 
+wiki and didn't see anything that jumped out at me.  
 
-If you can do it to help a customer without an extra
-support burdon, then go for it !
+I was hoping you could point me in the right direction. Even if it's an 
+unreleased feature, or needs a "cheat code".  Thank you very much!
 
-I will help review the code.
+--John M.
 
-Cheers,
 
-	Jeremy.
 
