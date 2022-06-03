@@ -2,46 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08D2A53C80E
-	for <lists+samba-technical@lfdr.de>; Fri,  3 Jun 2022 12:01:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A8AA53C828
+	for <lists+samba-technical@lfdr.de>; Fri,  3 Jun 2022 12:10:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=F3H+DpnK9eQFEkfQMUeWV2l/cSdUKLP83qGtZmGJ1lI=; b=Tu+B0yuBdLq8buZGYd2lGsXrgR
-	jN9gpjFfvkz4dnh/Bb+Fi8I2RJJjMVBN9tAiY8nXYH4H/9aCkzDGLHcHdEaSAbmGYNnP02QKWDllJ
-	y7qL2hnjAxqS1ojbdZHCsu5qYFkT0Y9prPyLIsmO4NSQG6WT0tkIGeK4raNFhRV6iqnzsjXUi2ak0
-	2dhUTKxbZP3eDVebazHh6UnQ1x4vWmrDtUtVdcSvJBdiuyfjVUDJ+k7TfyWgIQdqwDBYwp403qtRT
-	0DhdlhQ5pdFz4RJStamj7WrGag3pmmQkqZnzm1Xt1C03tfD/znZ7XLNFS+2BP9hGLY+Sm41L2ufgH
-	J6ObhLGg==;
-Received: from ip6-localhost ([::1]:38804 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=Eob4NJbfluRd4tiTwB0mudq0pYcogT51WQQH/VR6csI=; b=zXRhaiIfYz5dQ+m00LcwAMzlKR
+	Or/rYamaG4DOXvzhwjK8vgtaVUlvytAWSxKoPcjRaI6sfUjVGQcedCNqy89FtC6qMVlw/T8JSD0XM
+	tFW7fuyPWbTmm1AUMEjZSme8RzE1h5IGz+hSWZYNSMl+FbJwK4e2Z0tXnOcR+Cnp3KHqd8UdXy3oc
+	Tl9K+faDvrnc+mwyck/SweAqyl7ApgWvLAeAMTfi6Qkv3nfImhicpphGEPEAzFBST533NoBDRTz9a
+	DilxIXmZdCVEzt9IVvj5FsDF30xetIltW/LmYCqavIKJO3BMcQtexx4wHt8DJ+hu3/fizp0EmIh4Z
+	s2fpB8rQ==;
+Received: from ip6-localhost ([::1]:39490 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nx46S-006ouJ-Ny; Fri, 03 Jun 2022 10:00:25 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61982) 
+	id 1nx4G9-006pCe-AC; Fri, 03 Jun 2022 10:10:25 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61984) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nx46N-006ouA-Ea
- for samba-technical@lists.samba.org; Fri, 03 Jun 2022 10:00:22 +0000
+ (Exim) id 1nx4G4-006pCV-TN
+ for samba-technical@lists.samba.org; Fri, 03 Jun 2022 10:10:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Date:To:From:Message-ID:CC;
- bh=F3H+DpnK9eQFEkfQMUeWV2l/cSdUKLP83qGtZmGJ1lI=; b=q79WKSWmHVYC2qotdNNH7i+FSJ
- cnpsdB4aqStWGUUwbkwGYmrjD7XEkUXnpqXnXHCIAHzpy6eQs6r4ZPjcEw/Pi9uubBbGwlR+I/hMJ
- QPxra4DeCHXehmW3KZx4ZqT+IHsVjGJUNCEBhllNx5lZz9PXvMm4Gl2/8tIp+xObAS19PLLdVFQ8Y
- Azle9565f96bCQ0lHRDXnpnq5MNI2o+6ey6/2FN8M54kaWtPYKnn318FXUTfEbLTOpEk82AHykHU0
- ALo1FLfd8RhUhnDJH2d0hbYbPANOSOJOehRoXxFosX77+/0smpUmw0cuSKyixhce5n6GJGOe2XBaB
- mT5zFBsDFCh75N078WfznVr4deqM6zk1Gk4YwmFa6EAXGWAI6yM2KVUl5CLiZM5s2ccZxluKN456t
- 3P81UeGd1OktHJbL+vJTyxuddu/TOgziLq5ZE6H2BOj8U92fa34sfHfth7v9c1WsaMvMRVaLoBPtF
- uMMLP+or7wu0gkqTB7C+QHtF;
+ bh=Eob4NJbfluRd4tiTwB0mudq0pYcogT51WQQH/VR6csI=; b=CPrtDGipyUWOkRHdhofuLq4PZJ
+ 7w06/WkysMCcYxPG+NBO3O4jeiD4kISmyxz/pKIEwNDsdqkq+ltEXDVcUx/ThaOBKWWaAazCKmJWa
+ C7IJvde1WOLZu0H5fDoDKhGOkzy1q40a23PvBAoArqG+Yg6d2sNluWIKr/MS1BMgoug/ncj/I/hdQ
+ tCTytioeXQOPs1vCgQCG+0RZYdiqDMdSVpUsHW8relmuLFrm9C4LCnpKZMfaYKwnsIwgwk1Ik36tV
+ WFoS0tstDDdPBMyjc0k3uanC9Ax5RTDmkei/T3TxeQ6UqtyI3vaKMBwiLchTnPPieY0MRl8tiM1JS
+ JlO/7iHZmZ5YlJaLR5VVIHdOrnHYWk/JjOKJZ/VQbpcAHoJ6kC74ef9u/+q59g6ntRDPbfcHTqi22
+ exAnmAGmqCWc7Bcqyy36OsxVG7Fn1FOrlssr7gW9/S5l6dQ5UKw6iOGZZCf1ofEK0GCNcyEuZ4Q89
+ uH18cKhD3tQev5c41mEDwekC;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nx46L-003owC-PG
- for samba-technical@lists.samba.org; Fri, 03 Jun 2022 10:00:18 +0000
-Message-ID: <7b6cb695be2fe801b2e10139eaf84873e6578fea.camel@samba.org>
-Subject: Reintroduce netgroups support?
+ (Exim) id 1nx4G4-003p0D-8Q
+ for samba-technical@lists.samba.org; Fri, 03 Jun 2022 10:10:20 +0000
+Message-ID: <4170ad2340f7a3f2bc40c4f6c77ba5420a0c1cc8.camel@samba.org>
+Subject: Re: Reintroduce netgroups support?
 To: samba-technical@lists.samba.org
-Date: Fri, 03 Jun 2022 12:00:16 +0200
+Date: Fri, 03 Jun 2022 11:10:19 +0100
+In-Reply-To: <7b6cb695be2fe801b2e10139eaf84873e6578fea.camel@samba.org>
+References: <7b6cb695be2fe801b2e10139eaf84873e6578fea.camel@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.1 
+User-Agent: Evolution 3.30.5-1.1 
 MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,28 +57,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Samuel Cabrero via samba-technical <samba-technical@lists.samba.org>
-Reply-To: scabrero@samba.org
+From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: samba-technical@lists.samba.org
+Cc: Rowland Penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+On Fri, 2022-06-03 at 12:00 +0200, Samuel Cabrero via samba-technical
+wrote:
+> Hi,
+> 
+> I have received some complains after we dropped netgroups support in
+> Samba 4.15.0. Our release notes only mention we dropped NIS but
+> netgroups went with it.
 
-I have received some complains after we dropped netgroups support in
-Samba 4.15.0. Our release notes only mention we dropped NIS but
-netgroups went with it.
+Well, netgroups are part of NIS
 
-Some people still use netgroups without NIS, stored in LDAP and made
-available to the system through nss_sss, but it is also possible to use
-/etc/netgroups.
+> 
+> Some people still use netgroups without NIS, stored in LDAP and made
+> available to the system through nss_sss, but it is also possible to
+> use
+> /etc/netgroups.
 
-I had a look to the removed code and I think it is possible to
-reintroduce netgroups support independently from NIS, using the
-getdomainname() function from glibc instead of yp_get_default_domain()
-from libnsl.=20
+Why and how are they using a part of NIS without NIS ?
 
-Should we bring back netgroups support?
+> 
+> I had a look to the removed code and I think it is possible to
+> reintroduce netgroups support independently from NIS, using the
+> getdomainname() function from glibc instead of
+> yp_get_default_domain()
+> from libnsl. 
+> 
+> Should we bring back netgroups support?
 
---=20
-Samuel
+I do not see the point, AD groups can do the same thing.
+
+Rowland
+
+
 
