@@ -2,49 +2,36 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DC96540068
-	for <lists+samba-technical@lfdr.de>; Tue,  7 Jun 2022 15:47:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A59554013D
+	for <lists+samba-technical@lfdr.de>; Tue,  7 Jun 2022 16:24:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=gHbvsfxseEp0eAhUlZOPdnVJ0+VF1l69mVCxzWqY5qE=; b=HhZQxqeHwt7x+XkKg/oSvZFYET
-	7EmNpV7jb0jqXLTdRQ9chfZecgDyR6kEBpgF2b9azaZTuWnowlXsG/xo82Px1UINZQ8YlVyG3GAFt
-	uJbKYvcIvn9KB3CDWVPI4aSmKlkAEnnecWslc9PMuO8omrgfgvWNcTloRUGjPWeY4RUt7qdCoaeSn
-	IkZfSIT6pj7NSr86TQbRbR3GrMD7fAStR5uf8xbiP5Rg+lxac2XIqPN82tqFPCkU9q6LjG/XfCUoi
-	OiVpHenXmvJ0AunVmFVLSBdW4oBXWgQpSzTfEo7ZxzuGV+Eka6o0p+7amIR124/2UyOvvvJriNFbi
-	n91mLPZw==;
-Received: from ip6-localhost ([::1]:19902 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=zXCWVjJludvQJPQLy3H92OoKnuz3kz/25FzuYYBt/SQ=; b=BktOMF+2ioblP8VucVaCCYxLjN
+	iSKSkeZs9moTcZIxiu3e1ZM7oGnlIvF6Sx+LLAyyE4ttrx7umraLo8hEDvJZaWb4OcWqUcA6mpd4O
+	B4h2pxoRFAi8nUL7kkQX3rKK6DLtFNYnccl3Mzl1FpQGOnqukQA6PE04rwSQBLa/z0HYhGDdJnK/5
+	RWUp6V/aOZVxzsPHF7LYQq/3L0CrygPZvEkzQrcQHh3oQsHkSyYN3pprWhbK/iEWgMLWedVXKwr7K
+	IzNJaNNSyagoYpXiq+8Wf9LjYe2O47xXkuzO8i+xIzgnToZG7F+nXxslYPfmFynhfS7AnSzDDqjs4
+	5aYDa6rQ==;
+Received: from ip6-localhost ([::1]:26452 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nyZX3-007lCk-6o; Tue, 07 Jun 2022 13:46:05 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62096) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nyZWy-007lCa-5C
- for samba-technical@lists.samba.org; Tue, 07 Jun 2022 13:46:02 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=gHbvsfxseEp0eAhUlZOPdnVJ0+VF1l69mVCxzWqY5qE=; b=g998Pcdli90OPSlPIs8Bnq0QLK
- l2MyCtj+ksDw8dZNHWYfDSwUmFpemBpNRUuBtL+qAYXR+wQPzfB7PXXd6+KhSEk+ze0RwTB7fzI9d
- WBSFMxRuUgZTtV0sor4I4U98OJskFCHhl9Jw+GtRxSrqqQ9uMQy+ajlY2oxX2340GQMiHpq5RCbWP
- u6jKrBaL8eDf0VptA/0vMGNBdqTIFV1nThjA4Nz6vz1UAOA05EZ5820ATGavjM1oo0AkqRZDL8Y5T
- dCrHLqaqO2zkhCduByxoHffWSHP8nKOlnUGVEs2xECuZCugMYVg0Z38X7+nBF6ND/yYIf5TJcFwA4
- v7W2hPVJbkIdGydHJ2uYRHE4BofVsyYi4VRzb/O7dOz+xqDZ4+gDlLBeKirIGE+2BUDjBllLqCvJR
- CV1SASDG2ut3CHSatRjjf3JkjbreKgrUmWyHMLRQheSsjerbQMrF7bk22L/sxqddT7HY/qIRz5Ku8
- 5ryBuF6WDgkPABvn7SToTXR3;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nyZWw-004PAC-DB; Tue, 07 Jun 2022 13:45:58 +0000
-Message-ID: <751604e96a30f1462464829ffc38df2190c5376b.camel@samba.org>
-Subject: Re: Reintroduce netgroups support?
-To: Andrew Bartlett <abartlet@samba.org>, Jeremy Allison <jra@samba.org>
-Date: Tue, 07 Jun 2022 15:45:57 +0200
-In-Reply-To: <73fce0f07e74d97fb7cf78569448591162dea1c4.camel@samba.org>
-References: <7b6cb695be2fe801b2e10139eaf84873e6578fea.camel@samba.org>
- <Ypo8dcAnXWqnhBye@jeremy-acer>
- <73fce0f07e74d97fb7cf78569448591162dea1c4.camel@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.2 
+	id 1nya7a-007nyL-C8; Tue, 07 Jun 2022 14:23:50 +0000
+Received: from [104.200.28.160] (port=45094 helo=dup2.asynchrono.us) 
+ by hr1.samba.org with esmtp (Exim) id 1nya7R-007nvJ-Kn
+ for samba-technical@lists.samba.org; Tue, 07 Jun 2022 14:23:47 +0000
+Received: from edfu.localnet (c-73-114-31-46.hsd1.ma.comcast.net
+ [73.114.31.46])
+ by dup2.asynchrono.us (Postfix) with ESMTPSA id DADCF195;
+ Tue,  7 Jun 2022 14:23:35 +0000 (UTC)
+To: samba-technical@lists.samba.org
+Subject: Re: AD DC option to use acl_tdb rather than acl_xattr?
+Date: Tue, 07 Jun 2022 10:23:35 -0400
+Message-ID: <28842628.1r3eYUQgxm@edfu>
+In-Reply-To: <add80d159f1399d7efce0ec93e38cecdc4d52963.camel@samba.org>
+References: <5979975.vuYhMxLoTh@edfu>
+ <add80d159f1399d7efce0ec93e38cecdc4d52963.camel@samba.org>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,67 +45,64 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Samuel Cabrero via samba-technical <samba-technical@lists.samba.org>
-Reply-To: scabrero@samba.org
-Cc: samba-technical@lists.samba.org
+From: John Mulligan via samba-technical <samba-technical@lists.samba.org>
+Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
+Cc: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2022-06-07 at 22:08 +1200, Andrew Bartlett via samba-technical
+On Tuesday, June 7, 2022 6:02:42 AM EDT Andrew Bartlett via samba-technical 
 wrote:
-> On Fri, 2022-06-03 at 09:53 -0700, Jeremy Allison via samba-technical
+> On Fri, 2022-06-03 at 13:56 -0400, John Mulligan via samba-technical
+> 
 > wrote:
-> > On Fri, Jun 03, 2022 at 12:00:16PM +0200, Samuel Cabrero via samba-
-> > technical wrote:
-> > > Hi,
-> > >=20
-> > > I have received some complains after we dropped netgroups support
-> > > in
-> > > Samba 4.15.0. Our release notes only mention we dropped NIS but
-> > > netgroups went with it.
-> > >=20
-> > > Some people still use netgroups without NIS, stored in LDAP and
-> > > made
-> > > available to the system through nss_sss, but it is also possible
-> > > to
-> > > use
-> > > /etc/netgroups.
-> > >=20
-> > > I had a look to the removed code and I think it is possible to
-> > > reintroduce netgroups support independently from NIS, using the
-> > > getdomainname() function from glibc instead of
-> > > yp_get_default_domain()
-> > > from libnsl.
-> > >=20
-> > > Should we bring back netgroups support?
-> >=20
-> > If you can do it to help a customer without an extra
-> > support burdon, then go for it !
+> > Hi Andrew,
+> > During the sambaXP conference you mentioned that there may be an
+> > option to
+> > swap the vfs/xattr backend even on an AD DC. I'm interested in using
+> > this as
+> > it ought to avoid the need for always running our AD DC container
+> > images in a
+> > privileged mode.  You mentioned it should be OK for our use-case
+> > where the
+> > sysvol is not heavily used. Unfortunately, I haven't found any
+> > documentation
+> > for it. I looked over the interactive help from 'samba-tool' as well
+> > as the
+> > wiki and didn't see anything that jumped out at me.
+> > 
+> > I was hoping you could point me in the right direction. Even if it's
+> > an
+> > unreleased feature, or needs a "cheat code".  Thank you very much!
+> 
+> Thanks for asking, and I'm glad I burned the midnight oil to listen to
+> your talk, these things are worth attending in real time.
+> 
 
-Certainly this is the case and the reason of this thread, the complains
-come from a SLE customer.
+:-D
 
-> >=20
-> > I will help review the code.
->=20
-> I agree.=C2=A0 It is a hard line to find but I'm sorry we got too
-> aggressive
-> pulling stuff that folks were using.
->=20
-> There is still a real use case for Samba that isn't all AD domains,
-> no
-> matter how much I love them, and a set of administrators who have
-> been
-> with us for decades now that have Samba working just how they want
-> it.
-> We removed it because the supporting libraries were going away, but
-> looking over the code I see how netgroups could be quite handy,
-> exactly
-> because they are not unix groups.=20
+> So the trick here is that samba-tool domain provision will honour the
+> smb.conf it was loaded with.
+> 
+> so you can set (eg):
+>         vfs objects = dfs_samba4 acl_xattr xattr_tdb
+>        xattr_tdb:file = $prefix_abs/statedir/xattr.tdb
+> 
+> (where $prefix_abs is of course a real path)
+> 
+> And Samba will use those during the provision.
+> 
 
-Yes, it looks like some deployments are still using them. I have partly
-reverted the patches removing NIS support to bring back only netgroups
-and created a bug for the backports.
+Very useful, thanks!  I think this will help with another issue reported  on 
+the DC container that I'm looking at too.
 
-https://gitlab.com/samba-team/samba/-/merge_requests/2564
+
+> This is how selftest works, see selftest/target/Samba4.pm
+> 
+> Andrew Bartlett
+
+Thanks again!
+
+
+
 
