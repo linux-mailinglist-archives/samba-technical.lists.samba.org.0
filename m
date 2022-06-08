@@ -2,51 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D437543C80
-	for <lists+samba-technical@lfdr.de>; Wed,  8 Jun 2022 21:09:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B40FC543DBC
+	for <lists+samba-technical@lfdr.de>; Wed,  8 Jun 2022 22:47:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=kUBIPpcFtwoYKs5BfVadTivYrLy0pCX9/UFp6Rkg3GI=; b=M9Gl8oPIulmWpHB7ZPv2Y46sjg
-	R5R5pY+nGD52zZCyCk4cIsoMpnXDlhSLgfbQvMUET62IqmDbF3EclL0QFopu4aqgV7U1C/kEbBG2u
-	IhwP9CoR/7rrmCwec6dMKN4tH/zZ3hCkp3WxQ6I/kz+zM6l1e6sc7u707nUitZQwwPRCFn31zvGoq
-	QevYmGpdqMf8Mu+HdCGAtCFX7XJdJOaCO3H+J4aMcUDXr4sDyuoh3ZaRlvF80pAO6JCz8M88UXbSF
-	fGqJ3APtk7gyL4fGbs87jyavnBvQs95MF6OWYRervtTGT964JM3hzYEJLiMbpJs/KGjU0VHBsr5Bl
-	Tp1XtTbQ==;
-Received: from ip6-localhost ([::1]:19026 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=cOOd0zAaUc+vtVFfP31GeGxeJHGvuWV92wTFzYBUeGg=; b=mnlXEO3PcmvS3lCFOARWsR+mhZ
+	/fUA6Nzsh4sGeMEttkQ3AxmXrqQZ0hczCFWGOWCU6NPhQEaPqQFEof6OVZpw/EC5NkaIrNwmcdF17
+	KKtxD3Zw1g3Jg7LJxVy0vQ2sOcDtx6K/1ubYQFg5H2tQvUSg8cqQu0L23VTafCXZrPxnjNOkL93xa
+	/FM+9x2oI5+4jTWOa8wI5DkDfwjwjlkzFzsQC5sYnR6coaizmRBAWRqQlWKUpGfA7IWvcE/BU/v9X
+	LGEipK+0OpApe8O7zmcxmNZ++UWI6I82iToClMei+Sdq6MoDflClrQ7+DL1RlPqV9HvVCB+4o5RNq
+	J1cHoKkQ==;
+Received: from ip6-localhost ([::1]:34274 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nz136-008Qnq-NA; Wed, 08 Jun 2022 19:09:00 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62168) 
+	id 1nz2Zy-008X9Y-0R; Wed, 08 Jun 2022 20:47:02 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62176) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1nz132-008Qnh-CA
- for samba-technical@lists.samba.org; Wed, 08 Jun 2022 19:08:58 +0000
+ (Exim) id 1nz2Zt-008X9P-8y
+ for samba-technical@lists.samba.org; Wed, 08 Jun 2022 20:46:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=kUBIPpcFtwoYKs5BfVadTivYrLy0pCX9/UFp6Rkg3GI=; b=lhsbdNpDfdTS+QCuYvd7Zgvc7v
- WBM5U1dCgPNVnC77bOfugxbV0B4RNz1u5FtV85eH2BJEV/p/kWgGgaPiHV4RJx/9pC/TU9zcxBJh2
- UGCaqFYsUiZfbPOD4M2p43j4HM+MlkWQlGU5X/idUPiModDeyUeXJVufLSHumDIZiVcQjzR3ijtkk
- H77T03mb8MxACpF8/WOQBxa8RO90sFNRV2bU8inc/YNoVxuvj39/PKX5vK0r5/JBBusXirzInQvTW
- m43XS+RDtTK0n3CcsLRE5sMIKUSfZTLy0JZDIynXoOLlFyojQdAEjDKb4p323wnFPfyvMz+e16kQs
- qoUS48xWttmwp/0So2y8m55+JASpFWov7ALAetLEEdj0XiUcO2kcZp2OYtO9raTd1OCEzNP0rspFv
- uGH5pF7kSEIcglz9QDc87RMi31VzidtCg4a3mWXlNq5689GidB37yffFpsdVt1hlsASZ+KohVAExA
- sinEdcLquIj6j0O5BOUDLl0Q;
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=cOOd0zAaUc+vtVFfP31GeGxeJHGvuWV92wTFzYBUeGg=; b=OIrXugPuPdzOi3XdwQ1IXVhNJf
+ /OG0rYyVI19zsmeshBd1HJf2iNyT/SSlxYNyC9liVMVUlzjFME7KoZSxWbrZKK5+541t9wAdswX/V
+ JMq0epBNc4O5UOpIXdqmHzHYj2oUUh6j+1cG+n1AmSQ9w99iAqS9e5TC/cqdnrJ92rpHChuqNNwxD
+ tbT9HKXT12yz/Zk83XZ2JlNONa35dlHXsfhAF8/wjKieUZdbASaB1e+py2VlT2kZuqDP0Vs5Q0mvg
+ raPCu64cBdInWBAnp3+XT2PsA2eIh29rx+VUVTjFlfd11VE+NfZs3E5q7U4EVY0JF1rWNNEtvp7YT
+ LLGgvThFQDRI9SaMkdY8FaliVcguQI9yu3FMlw9hB7IqgvpSp8YPeZKvxbtv130cZGl1M305Syxkq
+ pJ7+SU9hsidwTr8W9B4Gtl14dmJl2Wpbx/0SvoqGXBUrJTrNlBjAo5tAw+ysUrI3dhq9kjGowViTp
+ Im/GtHKUpVdsbl4EZaNuFcmA;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1nz130-004crw-82; Wed, 08 Jun 2022 19:08:54 +0000
-Message-ID: <fbd3d4cbd94e639a87cb7fce4ff21da643c3a854.camel@samba.org>
-Subject: Re: More Podman work needed
-To: Uri Simchoni <uri@samba.org>, Andreas Schneider <asn@samba.org>
-Date: Thu, 09 Jun 2022 07:08:50 +1200
-In-Reply-To: <73759a92-13f9-1a92-06d1-42d24873ff42@samba.org>
+ (Exim) id 1nz2Zr-004e88-6f; Wed, 08 Jun 2022 20:46:55 +0000
+Message-ID: <f160ccd9-f0a2-7e1a-d04e-e35473917ae3@samba.org>
+Date: Wed, 8 Jun 2022 23:46:49 +0300
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.10.0
+Content-Language: en-US
+To: Andreas Schneider <asn@samba.org>, Andrew Bartlett <abartlet@samba.org>
 References: <55008d104d4efc5c286e790836e1a6d4a01ea525.camel@samba.org>
  <1737413.VLH7GnMWUR@magrathea>
- <2f5a0903-d3bd-8833-6e3d-da3540124c2f@samba.org>
- <1924935.usQuhbGJ8B@magrathea>
- <4f5b548b-ee32-cd2c-6359-de61f0d7f15f@samba.org>
- <73759a92-13f9-1a92-06d1-42d24873ff42@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
-MIME-Version: 1.0
+Subject: Re: More Podman work needed
+In-Reply-To: <1737413.VLH7GnMWUR@magrathea>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -61,41 +59,63 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Uri Simchoni via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Uri Simchoni <uri@samba.org>
 Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2022-06-08 at 21:44 +0300, Uri Simchoni wrote:
-> On 6/8/22 21:30, Uri Simchoni wrote:
-> > On 6/8/22 19:22, Andreas Schneider wrote:
-> > > Maybe the rpmkey package is missing for the repo. Which repo was
-> > > it?
-> > > 
-> > CentOS Stream 9 - BaseOS
-> >                                                               1.6
-> > MB/s | 
-> > 1.6 kB     00:00
-> > Importing GPG key 0x8483C65D:
-> >   Userid     : "CentOS (CentOS Official Signing Key) <
-> > security@centos.org>"
-> >   Fingerprint: 99DB 70FA E1D7 CE22 7FB6 4882 05B5 55B3 8483 C65D
-> >   From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
-> > Key imported successfully
-> Correction - the key was there prior to installation of additional 
-> packages, so all is well, sorry for the noise.
+Well,
 
-Thanks so much Uri and Andreas for all the work here!
+I tried simply starting off with quay.io/centos/centos:stream9 (and then 
+stream8) and it failed 
+(https://gitlab.com/samba-team/devel/samba/-/pipelines/559016078). I 
+then tried using the existing quay.io/podman/stable:latest image and 
+installing diffutils on top and it seems to work fine (I hope I don't 
+jump to conclusions - 
+https://gitlab.com/samba-team/devel/samba/-/pipelines/559093380).
 
-Andrew,
+Then I took a closer look at the recipe for building 
+quay.io/podman/stable, which you can find here - 
+https://github.com/containers/podman/tree/main/contrib/podmanimage/stable (Containerfile 
+must be the RedHat-speak for Dockerfile), and as you can observe they 
+pull some tricks to make things work - install fuse-overlayfs and apply 
+a special configuration. Seems like I was really lucky to pick that image...
 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+I'd argue that our requirements are "stock POSIX + diff + podman", *but* 
+podman installation is not a default one to make it runnable within a 
+Docker container.
 
-Samba Development and Support, Catalyst IT - Expert Open Source
-Solutions
+I estimate that any future instability might come from the podman side 
+and not from the Fedora base OS side, and therefore we're better off not 
+maintaining special podman tricks and relying instead on the maintained 
+quay.io/podman/stable:latest image, even though it is based on Fedora. 
+We had some bad experience but hopefully it will not repeat itself.
+
+I would not lock the quay.io/podman/stable to some tag we know is 
+working, because it prevents us from receiving security updates.
+
+Thanks,
+Uri.
+
+
+On 6/8/22 15:03, Andreas Schneider wrote:
+> On Wednesday, June 8, 2022 5:23:09 AM CEST Andrew Bartlett via samba-technical
+> wrote:
+>> Kia Ora Uri,
+>>
+>> Thanks so much for the podman work, this was awesome!
+>>
+>> We have had a couple of niggles on the CI recently, and one was
+>> that quay.io/podman/stable is following Fedora images fairly closely,
+>> and 'diff' got dropped from fedora 36 by default.  Ouch!
+> 
+> I would suggest to use CentOS 9 Stream
+> 
+> https://quay.io/repository/centos/centos?tab=tags <<< stream9
+> 
+> instead.
+> 
+> 
 
 
