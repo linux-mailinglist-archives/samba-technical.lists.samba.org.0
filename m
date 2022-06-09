@@ -2,35 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02BE6545676
-	for <lists+samba-technical@lfdr.de>; Thu,  9 Jun 2022 23:26:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E3A55457AD
+	for <lists+samba-technical@lfdr.de>; Fri, 10 Jun 2022 00:55:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=GQtnguqOiM+AzLROpdjCe1fC6LDdA1HneD72sQgMico=; b=5hLBZeBI3suk06yB3ZEg0a/4e6
-	wdc/c6cb3PdqXxJOl+qwBVIZG/cloyBT6nRqeSqdAQP11s0q9k5RXhdAvk/cAzHzNy4wAm7luDlQT
-	H9pN+XaU099W7CWLeNAFpItNRhTilFeU62RA/0UNUuRmsIh6TWbmK9y4xRmcU84P0TQj9TaUaJrjQ
-	K0ou8B9bcnR0yBxiUQKGv3C5bXtXT8IGG+mmj8qh7BSsstN7GukE18X9WaEB/YNCPsS4jOF2f6fm3
-	ozaBY9BS7vn+NgJmVIG46CUaSiJ4kYl5WCjEqyT+hBpDnB2v+KubUqGGOhhDYurNHPI1cXVQWCUMj
-	kHA/fMQA==;
-Received: from ip6-localhost ([::1]:42982 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=kiy10e/X7sta8+X0hwjO+iz+gOK3RBpuILNUVoEF9r0=; b=TnFMfm7ZEBarFKW5XWe2IMEkfG
+	hvan/CEAz82epImWhiYE/V1ZZgaqKeGuFPMGBDK+qbdjUZlJQ9k7ABDz+NV43NBtusPsL7gk8XPwL
+	GwC4Hsm3aTntbLSE43D0JCRriyWgIxjdK/zLp0gABktOMPJf9aBFkI0ajkvVFkG+dcItwsemUG5ZP
+	lfYQHTYQCUIzTU0Adjqd4pLSh4drcrL8cf5OLlyCP2QxpigZvICWJwYR+gIlKKlVX+V8/l8+6waMJ
+	SlH6oO6ITDXstjiEwG/kGwr4PqzKyOpW2iMqM3WhbNeXH5LbRR5xeZdl+EUGKaGt21q5js/B2PWod
+	WoR/eUbg==;
+Received: from ip6-localhost ([::1]:47596 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1nzPfl-008wLY-Fr; Thu, 09 Jun 2022 21:26:33 +0000
-Received: from [104.200.28.160] (port=45098 helo=dup2.asynchrono.us) 
- by hr1.samba.org with esmtp (Exim) id 1nzPfg-008wJV-AY
- for samba-technical@lists.samba.org; Thu, 09 Jun 2022 21:26:30 +0000
-Received: from pretzel.localnet (nat-pool-bos-t.redhat.com [66.187.233.206])
- by dup2.asynchrono.us (Postfix) with ESMTPSA id B69E86A9;
- Thu,  9 Jun 2022 21:26:24 +0000 (UTC)
-To: samba-technical@lists.samba.org
-Subject: Re: [Samba] Samba in Kubernetes (and Containers) - Release v0.2
-Date: Thu, 09 Jun 2022 17:26:24 -0400
-Message-ID: <26648066.1r3eYUQgxm@pretzel>
-In-Reply-To: <6fd92c53-4f64-ecff-6568-9a01908d958b@samba.org>
-References: <3245098.9o76ZdvQCi@pretzel>
- <6fd92c53-4f64-ecff-6568-9a01908d958b@samba.org>
+	id 1nzR3N-008yRg-Iv; Thu, 09 Jun 2022 22:55:01 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62218) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1nzR3H-008yRW-P9
+ for samba-technical@lists.samba.org; Thu, 09 Jun 2022 22:54:58 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=kiy10e/X7sta8+X0hwjO+iz+gOK3RBpuILNUVoEF9r0=; b=0z8dv7sxxuRf/56ARLnxlr9jWL
+ FqTNu/rSj6HrkGZzrXGoRzdfCVXGx6rsfNi2hZX/j6Heq8X3zLXvfKnvUWCKVwTyqT9s/qrmMFs62
+ sX03Lms/AAts/QQwfURqcMQ2IN/6BKZx5cH5d1aAXykRT0v/AtHJxBz0cFqg956KR6756TBzdt6+g
+ ClML5BpYtfy+lLFyZIWv6VsmPPGdxfhxo/VjaxFIkIz2+0UXG82cEKogwYwJlaI8ia/+AeZ33TYCX
+ 7qS/gsxB23Y6vcs+xn5E9G3LBAVIdfW+eltndXni8iRN7st7zh34b7KOuyiXkx/QlX0CuDwwCDizT
+ IA8RJjD8LnjuuqvjuEvLkr32o/4VOys2+THwW6H+FVeoEoP3jqosSk7C+MSsPE+ICZ8FkBSzBTy0r
+ Y8mKJMU1vabPKWpMA6E95g3QO8F59yB0skIm9d6zcHyp1fzuqK5bJKYrK565i3DKwXlaoRfqlXRqu
+ x0uikFqdoypmajUclsCdD1EB;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1nzR3G-004sdc-4W; Thu, 09 Jun 2022 22:54:54 +0000
+Message-ID: <0803764a1436e3306cac0eb06d0fe0a8cdd047e5.camel@samba.org>
+Subject: Re: More Podman work needed
+To: Uri Simchoni <uri@samba.org>, Andreas Schneider <asn@samba.org>
+Date: Fri, 10 Jun 2022 10:54:48 +1200
+In-Reply-To: <f160ccd9-f0a2-7e1a-d04e-e35473917ae3@samba.org>
+References: <55008d104d4efc5c286e790836e1a6d4a01ea525.camel@samba.org>
+ <1737413.VLH7GnMWUR@magrathea>
+ <f160ccd9-f0a2-7e1a-d04e-e35473917ae3@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -44,45 +58,50 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: John Mulligan via samba-technical <samba-technical@lists.samba.org>
-Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thursday, June 9, 2022 4:15:00 PM EDT Ralph Boehme wrote:
-> Hi John,
+On Wed, 2022-06-08 at 23:46 +0300, Uri Simchoni via samba-technical
+wrote:
 > 
-> On 6/9/22 19:40, John Mulligan via samba wrote:
+> I'd argue that our requirements are "stock POSIX + diff + podman",
+> *but* 
+> podman installation is not a default one to make it runnable within
+> a 
+> Docker container.
 > 
-> > The team behind the "Samba in Kubernetes" project is happy to announce
-> > our
-> > first set of releases. Release v0.2 means we're confident that more people
-> > can
- use the samba-operator, the samba-container images, or any of our
-> > many other projects without having to be a developer deeply involved with
-> > these code bases.
+> I estimate that any future instability might come from the podman
+> side 
+> and not from the Fedora base OS side, and therefore we're better off
+> not 
+> maintaining special podman tricks and relying instead on the
+> maintained 
+> quay.io/podman/stable:latest image, even though it is based on
+> Fedora. 
+> We had some bad experience but hopefully it will not repeat itself.
 > 
-> 
-> congrats and thanks to you and anyone involved in the effort!
-> 
-> Fwiw, it seems we're finally able to help you and the SINK project by 
-> settling on an viable approach how to manage the NTACLs in xattrs in 
-> containers.
-> 
-> https://gitlab.com/samba-team/samba/-/merge_requests/2557
-> 
-> I'll try to wrap this up and request for review in the next days, stay 
-> tuned.
-> 
-> Cheers!
-> -slow
+> I would not lock the quay.io/podman/stable to some tag we know is 
+> working, because it prevents us from receiving security updates.
 
-Indeed, thanks a ton for making this happen so quickly. I can't wait to try it 
-out.  I'll need to make good use of our 'nightly' builds that consume pre-
-release samba versions.
+Thanks Uri for your investigation and analysis to get us out of this
+pickle with the least long-term maintenance pain.  I've pushed your MR
+now.  Thanks!
 
-Thanks again!
---John M.
+Andrew Bartlett
+
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+
+
+
 
 
 
