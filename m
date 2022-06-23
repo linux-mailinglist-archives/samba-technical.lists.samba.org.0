@@ -2,47 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id EEEF45520C8
-	for <lists+samba-technical@lfdr.de>; Mon, 20 Jun 2022 17:27:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 789E355736A
+	for <lists+samba-technical@lfdr.de>; Thu, 23 Jun 2022 09:00:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=SGTGXgDU2CcEpZoche1uRqCaG1VbB7wAuS+0jDeWk0I=; b=OFu42ed+tnR+f3FiaHpy6HrFuW
-	ish9z9v0Qi4Rt7LPsZE3GAp86XcpYQ+7ydzqnoH56krVtQdLfShPs4QZNfCXXSYPLK/vyGau/qZaM
-	XxdVnStskiOfFm7SyZIGdv+QJ3ZY6STJwViNV0b8gJHV8uyR6HvLUwmcm7qC73u8yuSca4zppNI5g
-	CaBAzXOrTvg7uxQeddXpWo0fnVmrpVgT3+04Znf+WDEKTMhJB0IzcV6wgS24ua6+/lV9176qRCUjz
-	ldodnxPYlPJ654lp7gH4kBT5sZPQyoNxjMFLcdZx4GRW3DB5In6N2+9GCwLTWXtu3mwvAa8v999Cx
-	D1HhGdTA==;
-Received: from ip6-localhost ([::1]:40386 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=CGlsODOMgOcfnv4vCIGwDYr+qWmDXTQQ+1Rwy5ehiRA=; b=UsOPaia49ASj9jdf7LAH9qvuNw
+	lL4X67AI1MKpHXIwBpOP6IWdXm7T7ZDKl7tskbgaHL0bHojJYuLKVetA91PXDrOa2fgHufn6tO1ZL
+	As6bNlbK+a7QGam9W4dP2bc2Np7Rb8JGfndvhWwF1GWrNwgJvcIy+1ka+zcp1awh7ikP2gtl096Bf
+	wRwiuhLos0UF89BlpDcu4SqE34x5o5oG4Wo/5jeaaLRWaXfhh1pk6KK5W+H/Weihrjn6ij+SJCcun
+	Z3ny8OakX3t60JqqujUgSO0xFMxlwQ77khVdJTDE5aXBZrep1+EyU/FGDCz4ZOjXOqsZVneWmXEiD
+	iBm6cSIw==;
+Received: from ip6-localhost ([::1]:22492 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1o3JI0-00BMW1-Gb; Mon, 20 Jun 2022 15:26:08 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:14932) 
+	id 1o4GoU-00CILq-Ue; Thu, 23 Jun 2022 06:59:39 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:20480) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1o3JHw-00BMVs-0u
- for samba-technical@lists.samba.org; Mon, 20 Jun 2022 15:26:06 +0000
+ (Exim) id 1o4GoB-00CILh-3k
+ for samba-technical@lists.samba.org; Thu, 23 Jun 2022 06:59:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=SGTGXgDU2CcEpZoche1uRqCaG1VbB7wAuS+0jDeWk0I=; b=pZau2Y13YRpb1gO4DuHpuZIxlp
- v7vd0dK3yoFKmwDb/s6RpcmHqEozjtSxxzoH+qa3DL23ojjM9cXY0Ml1+GWdmEGpxZsYm7ljFI4en
- jO3E330c2oRQ6qXU7Guz5sX2xl4hmVvF7yChkPW2e4hPFcxLZiw72dqoxufUAq3QUDxgbFQMhqnfS
- bhHyG9Q1Rzkx1Lun7k2zLAXuGd9vKtO+6noPISoNVBSsSU4Zt20Mf6LvLcUCtwvlXy19n1eELWpvy
- QwCqNy6Hum3riKiO6VRgK7IiPp3A4p1w59sNAK06ffg6gxRptbPUebBvgOdgiQJbjD2mrzBiGi+Ha
- FPeOJ9tfpfAb9CYHAQNTSNjQtJ9ZVGndAJ29bs/wY60CreqY+VTLnF47OFcjOOuyoR+lW9S7uSJ8C
- 3/ouzbX8ZmwnVyLNqvpMsLHR1alxnkpAKvuj7KRpcW2bSVCt18DjfYoIKvA2weUI92S3jUT9/cMpz
- FRrO9BpaIGU3WSrRnhgqhLdX;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=CGlsODOMgOcfnv4vCIGwDYr+qWmDXTQQ+1Rwy5ehiRA=; b=jNsdOiZKF2plNAmAVRuMjh/5Z6
+ hLMxhWbblAGZYkmdBT5mS0idIehdEvzm06xk6rkX09ee484/TfuZYAcBTBwYqjypqIACcfZfOya9a
+ HTb+jVOOD5Zv8x/1RCJD96yJFlX94+XtmB8XVPvIuqx2X3afElNXQCW4CWlmXMt8loLpU3J7GTxyb
+ tRrFejWiZicAukcK/WISuk+TXkjNs7skkoXC0hk/La52nFW7UmU7UT2Z41aGYkXOjnP1xXkZbmoOu
+ Q0km9/pka5hFT7KzTrj3rfsM6Xt3HGpz6URlCBe/2s4B1MFDGh2XOL8xXso6BekAEtRnRweO6JoEn
+ lSywREb78VwTH/JGfpmSNH+x8l3fMUMf8y6GMbgSMLv8eKmVr9Z3V3J+VcbiWRTSh+e88mCQexN0C
+ mC0c+tAR2pjFQv6UO9OLWrpqx09aVNgplCLgmUhzbNhQbUu9wAoYOqibdKGP5Emyt+GE+/PCE8Rzj
+ +KIRTeEOaqHhKH3SjjSqxwfr;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1o3JHt-000kDn-Hi; Mon, 20 Jun 2022 15:26:01 +0000
-To: Uri Simchoni <uri@samba.org>,
- samba-technical <samba-technical@lists.samba.org>
-Subject: Re: How to write unit tests for dns-updates-allow-deny
-Date: Mon, 20 Jun 2022 17:26:00 +0200
-Message-ID: <4199916.ejJDZkT8p0@magrathea>
-In-Reply-To: <CAHA-KoPYFfqJ0Yk_B92i7iVq09KBnmWqHw71-gzcYN9vcaydMQ@mail.gmail.com>
-References: <CAHA-KoPYFfqJ0Yk_B92i7iVq09KBnmWqHw71-gzcYN9vcaydMQ@mail.gmail.com>
+ (Exim) id 1o4Go0-001E5A-OZ; Thu, 23 Jun 2022 06:59:09 +0000
+Message-ID: <9175231eefdb5340a351f83aba7ba151ce47ae1d.camel@samba.org>
+Subject: Re: [SCM] Samba Shared Repository - branch master updated
+To: samba-technical@lists.samba.org
+Date: Thu, 23 Jun 2022 18:59:02 +1200
+In-Reply-To: <5fa9ff82-5d33-bd90-fbb3-9ca81684defc@miami.edu>
+References: <E1o43SU-00CrjB-5H@hrx0.samba.org>
+ <5fa9ff82-5d33-bd90-fbb3-9ca81684defc@miami.edu>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,66 +57,51 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Matt Grant <matt@mattgrant.net.nz>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Monday, June 20, 2022 1:43:51 AM CEST Matt Grant via samba-technical wrote:
-> Hi!
+Thanks so much, I'll fix that.  Are you happy for me to put your name
+and e-mail in the commit message?
+
+(or I can do just name, or link to this in the archives)
+
+Thanks,
+
+Andrew
+
+On Wed, 2022-06-22 at 16:53 +0000, Brown, James William wrote:
+> The delete should be "rm -f build/DTD/samba.build.pathconfig" to
+> match 
+> other uses.
 > 
-> Have a draft merge request up at:
-> 
-> https://gitlab.com/samba-team/samba/-/merge_requests/2271
-> 
-> I am looking for someone to help me get the unit tests written for merging
-> into Samba 4.17 please. (Uri Simchoni, are you available again please?)
-> 
-> This has been around for some time, but I have finally got everything else
-> to the point where I can get this done.
-> 
-> Main issue is that I need to be able to do DNS requests from different
-> source addresses into the SAMBA_INTERNAL DNS server in the test hook up.
-> Currently python/samba/tests/dns_forwarder.py only does them from 127.0.0.1
-> or ::1.  Multiple sources are needed as the Samba test framework can only
-> use a single smb.conf for a whole test run (as far as I understand it).
-> 
-> How can we get:
-> 
-> 1) multiple 192.168.x.x and IPv6 ULA addresses set up in the test framework?
-
-The number of IP addresses is limited. The IP address used is determined by
-SOCKET_WRAPPER_DEFAULT_IFACE.
-
-If you change that variable, you will get a different IP address.
-
-More details at:
-
-https://gitlab.com/cwrap/socket_wrapper/-/blob/master/doc/socket_wrapper.
-1.adoc
-
-> 2) Create DNS requests from these addresses (probably simple once 1) is
-> done)?
-
-You can change the SOCKET_WRAPPER_DEFAULT_IFACE environment variable.
-
-
-Note that several IP addresses are taken by different environments:
-
-https://gitlab.com/samba-team/samba/-/blob/master/selftest/target/
-Samba.pm#L596=
-
-
-I hope that helps.
-
-
-	Andreas
-
+> On 6/22/2022 12:44 PM, Andreas Schneider wrote:
+> > diff --git a/docs-xml/Makefile b/docs-xml/Makefile
+> > index c614097f6c0..ae50b14d79a 100644
+> > --- a/docs-xml/Makefile
+> > +++ b/docs-xml/Makefile
+> > @@ -17,7 +17,7 @@ DBLATEX_OPTIONS = -p xslt/latex.xsl -i xslt/latex
+> > 
+> >   DATETIME := $(shell date +%Y%m%d%H%M%S)
+> > 
+> > -XSLTPROC_DEPS = build/catalog.xml build/DTD/samba.build.version
+> > +XSLTPROC_DEPS = build/catalog.xml build/DTD/samba.build.version
+> > build/DTD/samba.build.pathconfig
+> > 
+> >   ifeq ($(PROFILE), Y)
+> >   XSLTPROC += --profile --load-trace --timing
+> > @@ -57,6 +57,7 @@ clean::
+> >          rm -f xslt/figures/*pdf
+> >          rm -f $(SMBDOTCONFDOC)/parameters.*.xml
+> >          rm -f build/catalog.xml
+> > +       rm -f DTD/samba.build.pathconfig
 -- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
 
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
 
 
