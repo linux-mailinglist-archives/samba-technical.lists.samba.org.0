@@ -2,49 +2,56 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92EC555BEF3
-	for <lists+samba-technical@lfdr.de>; Tue, 28 Jun 2022 09:03:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 652A555C0EB
+	for <lists+samba-technical@lfdr.de>; Tue, 28 Jun 2022 14:24:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=RQXVZGjxlDtiNDtMVRyuT/DP/9292E04FJrqaqvSk3w=; b=rqOuxr/+nLdoEG4WkOcJKUCwJY
-	1EBYtOMkmqo2ovTNe6zCqc4sqgdxUHQjnoWW+R2+cos3hCq+FiliaxMPh5y3lCWZ6s9I5YmMg902O
-	7QeJvYnjVT/IomPU4QFeHOEK9xMo8DheWA6++5a7iaGkOPcBJHepa/6xNEKkZD4531V6yk5yQW0kp
-	ZlACzpdkBpmOPSj4XXJeWQrjnTrP+ByWYyTWwAccZkqHkt+6Ij2FLbQm7ItznN0dNVSt4ulEjAKwW
-	MjdhTy2lKc6N4o0AhuJ1Df5LXIw6hzEn3czzzZG3bcR3PhfIYhgNSskr3Vv3qvYnPnfmjLtz7HseS
-	Ee9PSENQ==;
-Received: from ip6-localhost ([::1]:28988 helo=hr1.samba.org) 
+	bh=YUs5vQ4eXbQ14LgAOLT7yihGr29i9rtxuRF4Imrg2C0=; b=QQhhZEGNgO7lZzDkn0MBi4Fl54
+	eB7xV9Lf6c6OA+L4VpM/lVwQF6EnOHPczVuw9eRuEo0AyghyRTK+onAg7baeS9w/WnTkvZ4a5Pa9S
+	EFOvznU+mCSPPdY6kTwPLjWxOGwhQVgFpNInW9Atc/+a6RJFjs3L/zOzLFKu1fqtOQsgoJJ6VIWMc
+	3+Jd1gAzyX1afKItM6iLn9TGfTAX7mz52U32UYckTcoTnDmfPlhOXXFTt/oKSIGIGgJ0CewlQlNiC
+	NLbL7dmxi8MzqS64piR4TPhuys2XlKbd8svJT5A0Fw3uh7LdJuaiC4pn7WXQOHh1jnAwLxSS1nDoF
+	6nmm5VMA==;
+Received: from ip6-localhost ([::1]:36228 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1o65Fk-00D7nE-NX; Tue, 28 Jun 2022 07:03:17 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41522) 
+	id 1o6AG0-00DB2F-QH; Tue, 28 Jun 2022 12:23:52 +0000
+Received: from grace.univie.ac.at ([2001:62a:4:25::25:115]:54572) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1o65FX-00D7hG-5B
- for samba-technical@lists.samba.org; Tue, 28 Jun 2022 07:03:07 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=6fT4oCB74l/Ziu6kxjTPQmQtORX7XkRshGWG9nw+48M=; b=t09sxI9R/WEjkVsyH3pEXeUs1D
- ao0Vp+sEFNXmk/1qYYybR2pgi18d8h/KLLmq59pXhfNHHWKSMUbZGDahcO4QUj7RGnNWE0Tpiwyvm
- MDyB8xrK5/Mt5jbyqw7FdWpFb88GyD44IgwwuRVK4rCnuwQsfstQ9c1b/L5AnMMhqfzwhm7v3aQ0u
- ePkWTqMDn+TDVXYsKwbs96LpCtt3SCrurFw60cEf53ACh/h9lBthK1AmbzLmwwaVHg/ECLqoL1wZ4
- OoFd93B+R+Xo9MpT6WFl1tA/FlYAwJpDBeeJSgsWwp4gG0tAX1q+yLRRUcexpSlAoukk6xUK8t85f
- NaRMU9U3J28OMLMUCyFfRjAtSvItfyGNMG53296FZj+6rHbP5CpzcFLjImfLzUVvC/r0OBjw3nykB
- +lkWgqtySvcEMYtcF5pwROl68WnvCDee2kT3G4BX3OwzW+M38FfSM54Z7EuZiM+QGmXfehaMWzuQk
- kICVp+FRWapl5yjILVN/kkEf;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1o65FV-0024XT-OV
- for samba-technical@lists.samba.org; Tue, 28 Jun 2022 07:03:01 +0000
-Message-ID: <baf17649-2a59-e136-e398-30434f7f6e47@samba.org>
-Date: Tue, 28 Jun 2022 09:03:01 +0200
+ (Exim) id 1o6AFw-00DB26-JV
+ for samba-technical@lists.samba.org; Tue, 28 Jun 2022 12:23:50 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=univie.ac.at; s=rev3; h=Content-Transfer-Encoding:Content-Type:Subject:From
+ :To:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References;
+ bh=YUs5vQ4eXbQ14LgAOLT7yihGr29i9rtxuRF4Imrg2C0=; b=svp0+NOIQsd/drWY6H+bPJeWvH
+ W8Rg5YRTQKNW5sVa1lOaHahlwo9059cNCueOmlhQm6tA0uQ5zb2JLrcIOOmfRl3cCOXWBcmtXX2ps
+ e3YZTrKgXGUnfmyY4ZznNhtmtvp9vkMIbEokHflw/Mk91m5yCG2aTWzWfzNstKOts+Hu5PL3bUD9k
+ FfQCPe1fo+23byeMSN0pAeQC/OlH3VawP52es/Npeg7hB8dK+1XJwwpHRG9PAQJJ0KDG8Co/vGkUx
+ IgNk7JEnUt+YRQ86pb3FQs47klIhhw3aj2VKYtkPe7qN9ea7+4KFUL2QLCj/LDK6CD3R3oXAebRhT
+ 7f66/fjw==;
+Received: from joan.univie.ac.at ([131.130.3.110] helo=joan.univie.ac.at)
+ by grace.univie.ac.at with esmtps (TLS1.3:TLS_AES_256_GCM_SHA384:256)
+ (Exim 4.95) (envelope-from <robert.weilharter@univie.ac.at>)
+ id 1o6AFt-006jJg-N1 for samba-technical@lists.samba.org;
+ Tue, 28 Jun 2022 14:23:45 +0200
+Received: from robertw22.vpn.univie.ac.at ([2001:62a:4:32:131:130:222:140])
+ by joan.univie.ac.at with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
+ (Exim 4.96) (envelope-from <robert.weilharter@univie.ac.at>)
+ id 1o6AFt-00AHMv-1q for samba-technical@lists.samba.org;
+ Tue, 28 Jun 2022 14:23:45 +0200
+Message-ID: <07c7040e-f4be-a6f1-5c50-80db9f39c101@univie.ac.at>
+Date: Tue, 28 Jun 2022 14:23:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.9.1
-Content-Language: de-DE
+Content-Language: en-US
 To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.15] Samba 4.15.9
+Subject: Expand groups with Samba 4.15
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+X-Univie-Virus-Scan: scanned by ClamAV on joan.univie.ac.at
+X-Univie-DANE: verified lists-mx.samba.org
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,23 +65,43 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Robert Weilharter via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Robert Weilharter <robert.weilharter@univie.ac.at>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+We have the following AD-setup:
 
-Samba 4.15.9 is scheduled for Tuesday, August 30 2022.
+Domain: USERS: Most regular users and groups exist in this domain
+Subdomain: SERVER.USERS: samba server is joined in this domain
+
+smb.conf has "winbind expand groups = 1"
+
+After upgrade to 4.15 (latest version on RHEL 8) "wbinfo --group-info 
+USERS\\somegroup" did not expand groupmembers.
+
+Reason is, the default for "winbind scan trusted domains" changed to "no".
+
+Queries for users in domain USERS with wbinfo still work as expected. 
+Most queries regarding
+groups do not work at all (group not shown) or give incomplete results 
+(no group members expanded).
+
+All queries for users and groups in SERVER.USERS work as expected.
+
+After setting "winbind scan trusted domains = yes" everything works as 
+it did with version 4.11.
+
+The release notes for 4.15 state "`winbind scan trusted domains` will be 
+deprecated in one of the next releases."
+
+In our current setup this parameter is needed.
+
+Is this expected behavior, or should we report a bug?
 
 
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.15
-has been updated accordingly.
+Thanks,
+
+Rober
 
 
-Jule
-
--- 
-Jule Anger
-Release Manager Samba Teamhttps://samba.org  
-SerNet Samba Teamhttps://sernet.de
