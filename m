@@ -2,49 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03AEA55E56C
-	for <lists+samba-technical@lfdr.de>; Tue, 28 Jun 2022 16:45:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 446935644BE
+	for <lists+samba-technical@lfdr.de>; Sun,  3 Jul 2022 06:29:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=EnxshFvsfD1/LKs114VpO3qcUlmNTZcFy6ATFC6EcVw=; b=3hCwUZUU8EkFkoIqoKSXAKifj+
-	fNFnnSgBz4XNT+zCzE62UGziHSJeh4GMJWbAdBF+HkUk4mAoVAlPD3h9SkmHseMtaVJQita571oQN
-	5KZh0Ins0XCKbJMw8BjvHzCbWcf/6pCjFXPToO03FbDsAoNqw4N8rrUgqMfMUV2v1bed0ePLLfytk
-	qt20XGAgtHH0x+1ry/ztY38tzq/TgeJuwBkPfwqo6Nyd5ujtWlBMco7J3NiE6Y8jPBqOnTNW4hYC5
-	wYXqnHAHTdKKW2OtJuN63qkFAYptDnHq8VCfvZ/jepQZB19AK4Y5NCRhCigr3pnF6KV3rczOwP9e8
-	pvQe7eZA==;
-Received: from ip6-localhost ([::1]:40328 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=ZPp1iqE9WbnI1BB7CGfKQapKem5vMNrsn0GT1sug9GI=; b=rVdsSfihfzHp9lQjylaWFmfP6B
+	oekmOHSjDhdoCBuQXNv2KWOphb+kTpau26oW5aHHe0NMONTaBZR7LW5LvLvM2scCuFmikeL4ZIDJV
+	6zjjjQM68L8Kv2MeGUmOHAbS9IqN9sINut7eqRra/tJGxMxyVIc0g2rIOnIWnFPIt0yt5Gy0qejOj
+	Ah9WuZCvHY8AzYzycMt8T9GXaO+ZkvTvUHn3Bv4IoEmH5VVb7b5gwzzi3E4NqFAppvylUWL32imuT
+	LZyq20DopL4E8Deh6+wnx57AmQpFnQQEIUIhigm1ujVALlAzpkV14Ygrw6IZWSPWee3A1RULouF+6
+	S+I+3WJg==;
+Received: from ip6-localhost ([::1]:23872 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1o6CSZ-00DD5Z-6q; Tue, 28 Jun 2022 14:44:59 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31664) 
+	id 1o7rE1-00FNQx-KC; Sun, 03 Jul 2022 04:28:49 +0000
+Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d]:35832) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1o6CSU-00DD5Q-F7
- for samba-technical@lists.samba.org; Tue, 28 Jun 2022 14:44:56 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=EnxshFvsfD1/LKs114VpO3qcUlmNTZcFy6ATFC6EcVw=; b=yrzXgUOsJTjsxVSuOHDSU5mnAJ
- j37NrBnAQ7oCAaI0TnkisJstWOown/VWFFB8JvPDd0oTQQJM86EHHOJZxTmTvb6cNq8+6EPl3Mw3k
- XW0ibSF8SwH1ta+KAp5uJSrIor2pd8bWgveuAU9/n/yIWdvCw/8Qc2nWnR00OKPu/VL+3moh54g2K
- M0iw35ywE2ohQgVaBPGFPkgbhG95M1NRneBjZHf6BxSh4gkGppefMjSKzbnU7s6AihTxLqAtUztMh
- ViFU1zKJc5NDK7g3JB9kEYUdUdlv1X6Y6bEei8mrcfWr75ck1kko3y9wCYeLD+Wp7nOWOnD3nkU0f
- lizR7YBnH8nye6FA77xB2O2h/ePJP77bvN7C7aGr22HBzq0Xeopm+ai8GMUxchzpPjlapsdSbOCRY
- ptgRLvzqOesgsZR/+1ih27qGDSgEhlYubOsWXqAoCNYPx2vZibFKZyWl/VYDl3baWDgC0wWT6qiD5
- Hp8ZpZciA30J4LYD57w8hVhK;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1o6CST-0027vS-8r; Tue, 28 Jun 2022 14:44:53 +0000
-Message-ID: <3562f4fd008b9a522be532daa60ba1dbc56266f5.camel@samba.org>
-Subject: Re: Expand groups with Samba 4.15
-To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
-Date: Tue, 28 Jun 2022 15:44:52 +0100
-In-Reply-To: <3459742.iIbC2pHGDl@magrathea>
-References: <07c7040e-f4be-a6f1-5c50-80db9f39c101@univie.ac.at>
- <002a98fbfe8742f13b5d975e4db80ec37a6bcf3d.camel@samba.org>
- <3459742.iIbC2pHGDl@magrathea>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.30.5-1.1 
+ (Exim) id 1o7rDr-00FNQm-0g
+ for samba-technical@lists.samba.org; Sun, 03 Jul 2022 04:28:44 +0000
+Received: by mail-vs1-xe2d.google.com with SMTP id 189so6060099vsh.2
+ for <samba-technical@lists.samba.org>; Sat, 02 Jul 2022 21:28:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ZPp1iqE9WbnI1BB7CGfKQapKem5vMNrsn0GT1sug9GI=;
+ b=RXNkE9JF6DjC19sZwzs3/ijuoY4C1yRyI7c4OQwd2w3npPywV4ggvjUuGMIB3dxbEU
+ FlEXg0Wvf5yXXLFMnk9WJ5yAQIp/p1QEWHj6wfgtRhNHzKCJxzm0gAcvqJ+LaVg1TGQc
+ 9sU1d4jC372iPJllloxMm83ytNqmDg2qBlMzI2awz0diZqu9hPSP+hjOE5Hkn29hVk2o
+ xFQg8WWk6Ygott4BaP8PlN9Wo8ScKAZpNnraCOKmNptF2/DDrk7A/fGpYnxfQ0XVHf6n
+ GxC8YbrB68/VTxo29zdkb+W2/Nx9rmI17dP2LzKXLR+lFSIHtnt4Z+zt6tt8vNR468d7
+ XHoQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ZPp1iqE9WbnI1BB7CGfKQapKem5vMNrsn0GT1sug9GI=;
+ b=0d2x66oXUjkyoUdPzHPN3fjzrnB7Ex8TxzpQ9Dcw/T4r77BBWkMGHpYrg7CVL+AxCI
+ kG5lfIMIZVEe9Ytt9j6IWfF8kOeuCuIvL9e42Qs1JUP7C4sRa72pSY0ZpSbWyOFlPsi0
+ qAZTHj1+GihfJkOxiGpy7wpBwdwOwkjBqVNsQww38sjSdB4VtjojCMNRSxMAd9qFSJBB
+ ownAcNswPk2uUGr41EWaXQ+DHnacw6M2eCretuUvUL89nfZuMm9rTLl2dA6lG5FELrnA
+ 6A/70qy0bMMB7dxsCMliVLUc9fv6mxciBFASonqrYhDFQj9gP7WmO0/797kyFSiLx0gg
+ 4frg==
+X-Gm-Message-State: AJIora+byYwPuwWmV5szqxLDpLlFIrz64QvVMS10c7xqdzC0TJ83A1ae
+ vT/QIee7jpqok87G4295RpASOzAIdWin6Jm7gXk=
+X-Google-Smtp-Source: AGRyM1uWamAWth4kZc4SzjqduqRteA3dvdPek5fMaJyOpogJGLVS3NqZezhwbI0Em/Z7D0JYB63jsHyi/RV6ymwF+0I=
+X-Received: by 2002:a67:fe50:0:b0:356:a09d:afe4 with SMTP id
+ m16-20020a67fe50000000b00356a09dafe4mr4322566vsr.6.1656822508482; Sat, 02 Jul
+ 2022 21:28:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+References: <20220628213229.354032-1-colin.i.king@gmail.com>
+In-Reply-To: <20220628213229.354032-1-colin.i.king@gmail.com>
+Date: Sat, 2 Jul 2022 23:28:17 -0500
+Message-ID: <CAH2r5mucQ9LRBO9Kw6dEeSG=fWsbUnOv=C9b5Bp+fZg_Ox-7-w@mail.gmail.com>
+Subject: Re: [PATCH] cifs: remove redundant initialization to variable
+ mnt_sign_enabled
+To: Colin Ian King <colin.i.king@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,94 +69,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: samba-technical@lists.samba.org
-Cc: Rowland Penny <rpenny@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Steve French <sfrench@samba.org>, CIFS <linux-cifs@vger.kernel.org>,
+ kernel-janitors <kernel-janitors@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ LKML <linux-kernel@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 2022-06-28 at 16:24 +0200, Andreas Schneider wrote:
-> On Tuesday, June 28, 2022 2:50:10 PM CEST Rowland Penny via samba-
-> technical 
-> wrote:
-> > On Tue, 2022-06-28 at 14:23 +0200, Robert Weilharter via samba-
-> > 
-> > technical wrote:
-> > > We have the following AD-setup:
-> > > 
-> > > Domain: USERS: Most regular users and groups exist in this domain
-> > > Subdomain: SERVER.USERS: samba server is joined in this domain
-> > 
-> > I take it, that by 'Domain' you mean 'netbios domain'. if so, you
-> > shouldn't use a period in one, so your netbios domain should be
-> > something like 'SERVERUSERS' or 'SERVER_USERS', a bit late now.
-> > 
-> > > smb.conf has "winbind expand groups = 1"
-> > > 
-> > > After upgrade to 4.15 (latest version on RHEL 8) "wbinfo --group-
-> > > info
-> > > USERS\\somegroup" did not expand groupmembers.
-> > > 
-> > > Reason is, the default for "winbind scan trusted domains" changed
-> > > to
-> > > "no".
-> > > 
-> > > Queries for users in domain USERS with wbinfo still work as
-> > > expected.
-> > > Most queries regarding
-> > > groups do not work at all (group not shown) or give incomplete
-> > > results
-> > > (no group members expanded).
-> > > 
-> > > All queries for users and groups in SERVER.USERS work as
-> > > expected.
-> > > 
-> > > After setting "winbind scan trusted domains = yes" everything
-> > > works
-> > > as
-> > > it did with version 4.11.
-> > > 
-> > > The release notes for 4.15 state "`winbind scan trusted domains`
-> > > will
-> > > be
-> > > deprecated in one of the next releases."
-> > > 
-> > > In our current setup this parameter is needed.
-> > > 
-> > > Is this expected behavior, or should we report a bug?
-> > 
-> > Probably both.
-> > I came to the same conclusion yesterday while replying to a post on
-> > the
-> > samba mailing list, I was awaiting a reply to that, to confirm it
-> > one
-> > way or another. It looks like I do not have to wait.
-> > 
-> > Rowland
-> 
-> You will never get a correct picture with `wbinfo --group-info` this
-> worked in 
-> NT4 times but not in an AD with forests and different kind of trust.
-> 
-> We only get a valid picture about a users groups during login. The DC
-> is able 
-> to collect those information. A domain member with just a machine
-> account 
-> doesn't have the necessary privileges to get a full picture. If it
-> does work 
-> for you, then because your domain setup might be simple enough.
-> 
-> Don't rely on `wbinfo --group-info` to be 100% complete!
-> 
-> 
-> 	Andreas
+merged into cifs-2.6.git for-next
 
-I never said you could rely on 'wbinfo --group-info', I was commenting
-on the fact that two users were having different but connected problems
-since the default for 'winbind scan trusted domains' was changed to
-'no'. 
-
-Rowland
+On Tue, Jun 28, 2022 at 4:40 PM Colin Ian King <colin.i.king@gmail.com> wrote:
+>
+> Variable mnt_sign_enabled is being initialized with a value that
+> is never read, it is being reassigned later on with a different
+> value. The initialization is redundant and can be removed.
+>
+> Cleans up clang scan-build warning:
+> fs/cifs/cifssmb.c:465:7: warning: Value stored to 'mnt_sign_enabled
+>  during its initialization is never read
+>
+> Signed-off-by: Colin Ian King <colin.i.king@gmail.com>
+> ---
+>  fs/cifs/cifssmb.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/fs/cifs/cifssmb.c b/fs/cifs/cifssmb.c
+> index 6371b9eebdad..9ed21752f2df 100644
+> --- a/fs/cifs/cifssmb.c
+> +++ b/fs/cifs/cifssmb.c
+> @@ -462,7 +462,7 @@ cifs_enable_signing(struct TCP_Server_Info *server, bool mnt_sign_required)
+>  {
+>         bool srv_sign_required = server->sec_mode & server->vals->signing_required;
+>         bool srv_sign_enabled = server->sec_mode & server->vals->signing_enabled;
+> -       bool mnt_sign_enabled = global_secflags & CIFSSEC_MAY_SIGN;
+> +       bool mnt_sign_enabled;
+>
+>         /*
+>          * Is signing required by mnt options? If not then check
+> --
+> 2.35.3
+>
 
 
+-- 
+Thanks,
+
+Steve
 
