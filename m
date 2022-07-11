@@ -2,48 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D84856D277
-	for <lists+samba-technical@lfdr.de>; Mon, 11 Jul 2022 03:23:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 162FE56D3A0
+	for <lists+samba-technical@lfdr.de>; Mon, 11 Jul 2022 06:09:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=r7+SILlltsfWzcbNKgJdyuND2SasHZKHuaR7oa0dFuE=; b=uq5GsmhdqAjNEv3gJnUMBhK1yP
-	XliV+YxgrprT3FhOef67MSgZrz8EFV6onbujhMhlYkRP6UEkly4H8chXqDb1bEYsESgWZql8lZLbZ
-	hfGUNCEK4Ao8NfVrP9kgPlIFyO4aBJDJ8sEVCMATtYofU1Kz/aD0Mp/Vrmnp+MLkpKyKehW3pJFX1
-	gazcfOQsk/L2rV2aMHiiAVhBRJVHEK80ydgaCDTzloTj75U1v1EwJ9yswaCZ4S8+PUnfpAG+SI5yL
-	eHYtGRD+IuSDXzd4QqlKG4caLab0H1zts/ONX1P6rt/C3XKouACbXvV7u2/nNvBotIEMHGj34IpLz
-	IgrVi6eQ==;
-Received: from ip6-localhost ([::1]:53732 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=fllguJpF5BnkzkEtoQdiaDv1n0MWRGtfi77Hkgiwu7w=; b=VBY3+cDX9udNmTKoIex0JSnGHq
+	L9YuqFDJaeL86ue79ujBjkJKUTvmizBatAs/aPLJMsBqr3++WyoCCgbbgTqD7iSyrFQCU6vCM10KN
+	zow3KgO5W0cUGSBbrpLp9R37Xb82C8EVrF7xkTaEqhwK+E4VEsm8BPsskg2DbBVEOcbilmT04DMDT
+	wcGAlhnf967qJQZXqkJsrMeaEAMfbamI3ljkyPP2bfn1FW2zarFk1JFjjNR8CW3WwlADpVXl3Fqoc
+	PPBT6l373jZBMlaSPi4I9rC8+ZhwsUl8Z4ptBSta/VjltC4Kki+ARVo/ucd2YarfOl8g6O0nHOH7X
+	/bh+c9tA==;
+Received: from ip6-localhost ([::1]:54478 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oAi82-00GtYb-Ve; Mon, 11 Jul 2022 01:22:27 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63582) 
+	id 1oAkix-00Gu5o-Id; Mon, 11 Jul 2022 04:08:43 +0000
+Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e]:36657) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oAi7y-00GtYS-0b
- for samba-technical@lists.samba.org; Mon, 11 Jul 2022 01:22:24 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=r7+SILlltsfWzcbNKgJdyuND2SasHZKHuaR7oa0dFuE=; b=zjAySePMi0DE1G62XZHhPQXYBo
- sYwPGrgeGxpSYz6M3HI8PUzXeInQGUQBeKGN9HqiWU8O4dau+X/eJ3oOpNeOJH7UGwS21J9+aGsyc
- sBhdDQHcGuhPaqH++Z1/7enaLT1nXMLhqMhS5iSE+dC9cUgVMV9aDobq4WA/8ba2r/Abwi2XtdQ/e
- O2ijkGVgPv6THodVI68GZpgNzSTmZgm7z+SH51Bmd2hu28fzZ745mv1BdeaH1RC0M5k89yvf+7SVr
- Uh0HOo9vO+RR6dnMbGHgQssiMAgUG91YFxwyq5nj6z8DNFV8qLZHSCw/izeuszuq36/JSILiC96wg
- AcSb80w8NixToYMsGYzzXw3x4C8x5i3X7Srbf0KrsUZXEhqC/45c3k2V3jkjuiy4HVbkhDiKsmhZO
- BOmoD6NNVbvJ4zRotDKFUAX55MgmeECQjc3m1JkbbegbsBP9tIgwbHaKD70ywtDxOw3s32XiaaFm5
- sWRPG/FmD2oHPvD53Tw7ZAcQ;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1oAi7k-0044Cj-32; Mon, 11 Jul 2022 01:22:08 +0000
-Message-ID: <ace59e5ae596201e0626cda0fd96fa264f8ddebe.camel@samba.org>
-Subject: Re: Video of my Kawaiicon talk: The "Dollar Ticket Attack" on AD
- and Linux Kerberos clients
-To: samba-technical@lists.samba.org, krbdev@mit.edu
-Date: Mon, 11 Jul 2022 13:22:04 +1200
-In-Reply-To: <04cd9526caa11ac094fe6b276113639e46177aa4.camel@samba.org>
-References: <04cd9526caa11ac094fe6b276113639e46177aa4.camel@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.3 (3.44.3-1.fc36) 
+ (Exim) id 1oAkir-00Gu5e-JH
+ for samba-technical@lists.samba.org; Mon, 11 Jul 2022 04:08:40 +0000
+Received: by mail-vs1-xe2e.google.com with SMTP id j65so3874703vsc.3
+ for <samba-technical@lists.samba.org>; Sun, 10 Jul 2022 21:08:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=fllguJpF5BnkzkEtoQdiaDv1n0MWRGtfi77Hkgiwu7w=;
+ b=J0g3ViFEff4Py7WHG4RL4FSWzOVY8gx+z+C3KxUmstsBfH6cvz7QKPt2cRe0Sn+Yle
+ GdA1pxlKrQuslgEkVfgSEyxOT6GDUcuzbV2PhRql8g3TaRFUGKEajXTwurqEByYRnY9i
+ aqnAZcsw3I3rRlsHXYaRlcXzh+t6VNxh51h33YrZUt/dHQfLkCFQ0QxbYiTJZmq9rkiy
+ QzVm0FjiLWuA1WXz/cHheGn0PkoMjnyP6ZzH5ZnjpF35DVW8YtoVldA7ccS/gboKa8uP
+ DdNO3o5TtAQM8Cg2FZjlX8PqluHilQCjSpczyTzSe7SVgmjQMJ+wpYUDJDADetAuXVRw
+ tprA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=fllguJpF5BnkzkEtoQdiaDv1n0MWRGtfi77Hkgiwu7w=;
+ b=onNgQVTcoaRuOQHKDYZhC/Q6VQf74JrcFjGZcTRyWtZD3aFhXTq4W5qqvpeF6Akyca
+ BwTncUOJL5SCeeL/BO8QFpkbFIVJIzVoFN7kM8/U7e+dGkbEU6zhN0AONgWcl7cQm9BQ
+ QLONYM58Map/m/NweMfGiFumIKAR4pLiyXn56GX1megMCVfhDxpzxTGJML/oU55s1Ggo
+ jfWhvG600swkiPnyD5QxjjUz8v+9IhKTCnxnSneqMLeaudGP0pkfWRR0oBvjjKRjzdNd
+ hCvAwwqTmpMTvdiWbSW2l9bbiZ0aJFFGGJyX0FMHsTJVLKxueADskxQgs1sDZgch0NpO
+ REDQ==
+X-Gm-Message-State: AJIora8CDOVZxyydi2C3jYj3oyKZrhPD0r9khyRcg1HTv1vgd68Sw/xf
+ a5UbIWzBkCfNGbKiRiA/bcw45jUWTxeFE3pCiPc=
+X-Google-Smtp-Source: AGRyM1uX1bCiFSyBL4si1vDblPNKneQTJ3LnVUKFcoIbF3k0f/Xh+iDpdXh/5E5KrsRDaadVkConD+zaRe6mZ5VFS0k=
+X-Received: by 2002:a67:ca82:0:b0:357:32b6:5f04 with SMTP id
+ a2-20020a67ca82000000b0035732b65f04mr5405610vsl.60.1657512515219; Sun, 10 Jul
+ 2022 21:08:35 -0700 (PDT)
 MIME-Version: 1.0
+References: <CAARpZ=_WCZhEZ2DzR3jRNLNLx28duH2iSn7WwRVezGKpjX0LDA@mail.gmail.com>
+In-Reply-To: <CAARpZ=_WCZhEZ2DzR3jRNLNLx28duH2iSn7WwRVezGKpjX0LDA@mail.gmail.com>
+Date: Sun, 10 Jul 2022 23:08:24 -0500
+Message-ID: <CAH2r5mtYzhd9EpzJAFLH+AHvKB0CaUtVBTP+UP4PDgg686-SFA@mail.gmail.com>
+Subject: Re: mount.cifs broken after update, advice?
+To: Brian Caine <brian.d.caine@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,53 +68,83 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Alexander Bokovoy <ab@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: "Stefan \(metze\) Metzmacher" <metze@samba.org>,
+ CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sat, 2022-07-09 at 18:46 +1200, Andrew Bartlett via krbdev wrote:
-> I was going to wait until a per-talk video was hosted by the organisers
-> of the conference, but in the meantime this link into the live stream
-> works.
->=20
-> I'm sharing this as I wanted to share the video as folks have been
-> interested.=20
->=20
-> https://youtu.be/4hBLf2vQc8k?t=3D30560
->=20
-> It would be great if the linux side could become harder to exploit at
-> some point, I have some suggestions at the end of the talk, and Sumit
-> has had some suggestions around disabling an 'a2ln' plugin.=20
->=20
-> It would be good if someone could write up some good guidance for users
-> on how best to defend against it on the Linux side, both with a 'simple
-> keytab on server', or 'samba publishing keytab' or other similar
-> configurations.
->=20
-> I also tell the tale of how I broke into Windows AD last November,
-> similar to but more punchy than SambaXP talk, which I think was pretty
-> cool.=20
->=20
-> Anyway, enjoy and be worried!
+This looks like the Samba server bug pointed out in an earlier email
+thread by Metze (fixed by
+https://git.samba.org/?p=samba.git;a=commitdiff;h=147dd9d58a429695a3b6c6e45c8b0eaafc67908a)
 
-I've started to put together a wiki page mostly with links.  It is
-probably still at the stage of being confusing even to this audience
-(and is totally missing a 'how do I protect myself' section), but
-perhaps someone can help fill that out. =20
+I had trouble reproducing it on my systems but it looks like (based on
+Julian Sikorski's testing) when we fixed the netname context to not be
+null in some multichannel cases, the reordering of the contexts
+(putting netname context after the posix negotiate context) triggered
+this bug in some versions of Samba (which was fixed earlier by the
+Samba server commit above).
 
-In the meantime at least it links some of the various documents, talks,
-exploit steps etc:
-https://wiki.samba.org/index.php/Security/Dollar_Ticket_Attack
+On Sun, Jul 10, 2022 at 10:35 PM Brian Caine <brian.d.caine@gmail.com> wrote:
+>
+> Hey all,
+>
+> So I recently updated my kernel and my previously-working CIFS
+> mountpoints are broken. The server hasn't changed.
+>
+> I can successfully access it via smbclient. Only mount.cifs is broken.
+>
+> On the server:
+>
+> % /usr/local/sbin/smbd --version
+> Version 4.12.15
+>
+> On the client:
+>
+> $ mount.cifs --version
+> mount.cifs version: 6.15
+>
+> $ smbclient --version
+> Version 4.16.2
+>
+> $ uname -r
+> 5.18.9-arch1-1
+>
+> (I know it's not a vanilla kernel, so I wanted to ask for advice here
+> before making a bug report.)
+>
+> As mentioned, smbclient still works:
+>
+> $ smbclient -U brian //192.168.1.131/backup -c ls
+> Password for [WORKGROUP\brian]:
+>   .                                   D        0  Sat Apr 24 16:01:23 2021
+>   ..                                  D        0  Tue Dec  1 20:18:28 2020
+>   brian                               D        0  Sat Apr 24 16:09:46 2021
+>
+> 15119769681 blocks of size 1024. 12418540722 blocks available
+>
+> This doesn't though:
+>
+> # mount.cifs --verbose --verbose -o username=brian
+> //192.168.1.131/backup /tmp/foo
+> Password for brian@//192.168.1.131/backup:
+> mount error(22): Invalid argument
+> Refer to the mount.cifs(8) manual page (e.g. man mount.cifs) and
+> kernel log messages (dmesg)
+>
+> I attached my kernel output. Is there anything there that jumps out at
+> anyone? Any easy fixes or should I look into opening a bug report?
+> Anything else I can provide, just ask.
+>
+> Thanks,
+> Brian
 
-I would appreciate it being extended.  (Please don't be put off by
-needing to get an account, it just a spam prevention barrier).=20
 
-Andrew Bartlett
---=20
-Andrew Bartlett (he/him)        https://samba.org/~abartlet/
-Samba Team Member (since 2001)  https://samba.org
-Samba Developer, Catalyst IT    https://catalyst.net.nz/services/samba
 
+-- 
+Thanks,
+
+Steve
 
