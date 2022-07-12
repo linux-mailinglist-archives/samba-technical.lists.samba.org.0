@@ -2,58 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75A815711DC
-	for <lists+samba-technical@lfdr.de>; Tue, 12 Jul 2022 07:35:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6ED4B5712C8
+	for <lists+samba-technical@lfdr.de>; Tue, 12 Jul 2022 09:05:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=LGs9JyoVpvCiq2kVkyuR1T4N2KrkXSFfXc1vKiYlBUw=; b=XlGrQKY+mnK/7s/NBf5rvWmsqZ
-	IKyfe7I9HCor85uQ4Ajxl3ZeliSwzQVqWf6EsqHR/d0sOy6wNlEfGq9J9QU63YjZmSpQ5YTmd65Q9
-	9HtCmpZEecjffDrtsWNB1lgTATmT7TCT8A5F4cKc26lGIuf/Yepxx5xOS+uq27mP6fa3810gmhsBJ
-	rvjoToQXAVRLPukgyVSTh1nVuWqBXbwWk22Ch0BssKoqfh6qNnbc5/5MDKoss0130RQnXeqp9bLDz
-	oQS/coEFL86+NquppFjG7BAmNXt/SXSH+TKaR3T4iiHV3sMstaaC9C5K7pCUbHuTBBB56m7xXj4GL
-	A1DtL8xg==;
-Received: from ip6-localhost ([::1]:30576 helo=hr1.samba.org) 
+	bh=0SR11JOlqS86kYB77tLwSQhTs+CSI9KEYKU5NjcFe5k=; b=wDN3TSw+eVxzTDcF/PQCrLzQyT
+	HGICpnFwRlsFdu7ZOUtpRRaS+fXMfM34mfl5hJL/BjNOVdc13hblaoSqlmqnbblCxhaNFtgFgp4ph
+	Xw4c31vMqa9pA0Vd9qjS0DnX2MdOsHUObBKW6lkmQ2++dbJdssRgE76GgDMULjZrALd3pffkjLhEq
+	D8zx3+PUI9FsQfeHbynAOZrwlZEMwDuJmbNiJvp7Lg/8q8v6pNvDiAWuvRwf4NaOEUr7rKO9ArdFh
+	ZCn/h2mvIHqaZ8/9BVybaAcaeSyF+33Z0EOd3DprpIUC5aytlBeHq3/aiSbSlBon2xVZnmeROrwc6
+	RFDUpdGw==;
+Received: from ip6-localhost ([::1]:31942 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oB8Xf-00H6Yp-0O; Tue, 12 Jul 2022 05:34:39 +0000
-Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34]:33484) 
+	id 1oB9x9-00H7Pq-9D; Tue, 12 Jul 2022 07:05:03 +0000
+Received: from mail-qk1-x72b.google.com ([2607:f8b0:4864:20::72b]:33421) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oB8Xa-00H6YY-1b
- for samba-technical@lists.samba.org; Tue, 12 Jul 2022 05:34:36 +0000
-Received: by mail-vs1-xe34.google.com with SMTP id l190so6874692vsc.0
- for <samba-technical@lists.samba.org>; Mon, 11 Jul 2022 22:34:33 -0700 (PDT)
+ (Exim) id 1oB9wp-00H7Ph-E2
+ for samba-technical@lists.samba.org; Tue, 12 Jul 2022 07:04:46 +0000
+Received: by mail-qk1-x72b.google.com with SMTP id f14so5640043qkm.0
+ for <samba-technical@lists.samba.org>; Tue, 12 Jul 2022 00:04:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to:cc;
- bh=LGs9JyoVpvCiq2kVkyuR1T4N2KrkXSFfXc1vKiYlBUw=;
- b=pZjMKJL1y+hW5NBl8ezagz/tDW6wST8LZ6Ly9iVT2VOcjbYSaYUkAfSu6hJr6IZbuk
- ENrx5D+6R480CP6BC9OWUmzG+QX45HB1WZ8Wa9kVh5UTaL4+t1KpNJFcbv9TU2wXz/Z5
- wi3BZdMaQPhI6fdEU5g6cPy5wiJElsPScqmnmFog+Rwmg/FiwKijBQeWnQMFdMIQR97f
- cpelQDlWRDwwg2MCMemv4GacM/xr5lVXjcis+gx+TWTNzsmpUke5UI+BylWhyzQzh/LS
- BHj9iDf5dujYOTrehxe44itVEcwgss5JP85/dw52qDMsqQnvpbBpSrVWN5oyt9agYgO2
- /CAQ==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=0SR11JOlqS86kYB77tLwSQhTs+CSI9KEYKU5NjcFe5k=;
+ b=TOWZ+dbZrdVAcKgbyHn+DOS5qzJPrQvvQaB6622RvJO+urOcAS6Y7AnMOElWOP+TED
+ aj2m58Os8og+ZBQy9G1o6nQdmea9sxJOm6GOHsVABGPawRr+ufUZNXstYCIgc54C2kj5
+ NQ8feYlzBnLK8JVhgLbtDOP8lgwpYtuk5SFYZ5LHGpPt3/fv/J2xI/K1ngiNiDJVJmGr
+ pnGBRfA8+zIr5H3g92bthjrNeIgZOTgMT+s/PRMTJOH1jrq7fOb0MLcd2wFEazrC9a9B
+ yVEgXTdWm2Nxn6stGJ++P1+5uDvGKSrYt0SnuMMynOt3QBIoKDJbI+HLNH3E7EudCJze
+ AAJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
- bh=LGs9JyoVpvCiq2kVkyuR1T4N2KrkXSFfXc1vKiYlBUw=;
- b=yNaLj3bpSdE7EIcTnE95Wx0SVMvjbzQo1zgCyt2S2VsPzQJv8aCM3CV0PYHxojLb+z
- LgHFFxL3MMtEE1rpr0+BU6JHFJSRPzdgdUG8iwngM0i3y02/0VOu3XVLnhgVyNX0QVUo
- nxxdKnVlV3v1emGCsrZg6cuKbO/hOy+JZn2QmMfd3ec6lRwMwTpeO0qiVWa2aYEzesYQ
- XKK6c+eKEvJrYu0XksiP/4BC9kWDXUEHp06VQlYd65DjvYNcBst48RuujsCy2PjH8CSl
- 7HCAsKIprU4jwJn7VLSEfFx7PpMPljZMVOJGCtSjt3AVrpwnpfFW1pbm/nplLzIwSXhM
- qd/w==
-X-Gm-Message-State: AJIora9vLfbcY1mosqUOvw+C0i9IcQQV5Zs37xeXFsPVo8fGOnq9JjDY
- 1inMNqUgU2qeW13NoSFRCwo0kXNWPVXPbeII7fs=
-X-Google-Smtp-Source: AGRyM1tuc1bOmS5NfSmyHLMQgHxXONpP1zjOIaaUQg0QsSlhadPuiPtNsxdBPtW0lYod8X1A8tu8Dpzijurv3Fq4ijk=
-X-Received: by 2002:a67:6d86:0:b0:357:3d99:ec77 with SMTP id
- i128-20020a676d86000000b003573d99ec77mr6931141vsc.6.1657604071919; Mon, 11
- Jul 2022 22:34:31 -0700 (PDT)
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=0SR11JOlqS86kYB77tLwSQhTs+CSI9KEYKU5NjcFe5k=;
+ b=CeT+QHF8eGFe1C+3pL+coszyNSS6uK8Gd5LgI46eJb5GNb7IK3RIg7oOKu4LNGEt8L
+ VtdEYHW/sR3VzJUmcuoSdGpDd5sKNxAqTLPOkEzlih9pyqQiskH+9OCooKfvXg1YppO5
+ 2FLtk5SAuo6TOptSQOD2FMh//eXDDNnOqp8xUzX0bp0rg5Rb4mfDqpROhxXtbaZPtbfT
+ feIvpynecBu/umCOL53Iy0wNvZAnxcqWL6xv3geGmC7zK/vXjzaEEvlj+pDb7erIC/pe
+ 6AHHeo3VBbtQDDqZwMOEYL3Y7bVvxlqeHgDHSzWHZjdZn5ixvIQRLxDYtOZAt5kGkcBr
+ 4WpQ==
+X-Gm-Message-State: AJIora9N3PvavI5Uj5KZvQVuHkTUtRbURhFUSuXlvW9Bs3jdLPYsd4NQ
+ teJyDdaLcgNaAbuSecQYo9axeUNUVvfmK+Jp5Yk=
+X-Google-Smtp-Source: AGRyM1t42UeQuuXca2u1hT62pefv/Zz8qnm+InhzVAcdPcHBASnoVTryiA53z10tikXE/RMTK1DKrkce6y8Oaf6+n1Y=
+X-Received: by 2002:a05:620a:46a2:b0:6b5:5998:17a1 with SMTP id
+ bq34-20020a05620a46a200b006b5599817a1mr13455387qkb.208.1657609481439; Tue, 12
+ Jul 2022 00:04:41 -0700 (PDT)
 MIME-Version: 1.0
-Date: Tue, 12 Jul 2022 00:34:21 -0500
-Message-ID: <CAH2r5mtuN-yswT5VTbNPzj02fwiHYOCe2eR8mcgRgRE8Qpkjgw@mail.gmail.com>
-Subject: [PATCH][SMB3] workaround negprot bug in some Samba servers by
+References: <CAH2r5mtuN-yswT5VTbNPzj02fwiHYOCe2eR8mcgRgRE8Qpkjgw@mail.gmail.com>
+In-Reply-To: <CAH2r5mtuN-yswT5VTbNPzj02fwiHYOCe2eR8mcgRgRE8Qpkjgw@mail.gmail.com>
+Date: Tue, 12 Jul 2022 12:34:30 +0530
+Message-ID: <CANT5p=p-hCPd-faCs=MsBaVAkS07AFexeUjujysZ=ukQSAnMxg@mail.gmail.com>
+Subject: Re: [PATCH][SMB3] workaround negprot bug in some Samba servers by
  changing order of negcontexts sent by Linux kernel client
-To: CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="000000000000e2ac8c05e39505f1"
+To: Steve French <smfrench@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,79 +69,36 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Shyam Prasad N <nspmangalore@gmail.com>,
- "Stefan \(metze\) Metzmacher" <metze@samba.org>, Paulo Alcantara <pc@cjr.nz>,
- Brian Caine <brian.d.caine@gmail.com>, Julian Sikorski <belegdol@gmail.com>
+From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>, Julian Sikorski <belegdol@gmail.com>,
+ Paulo Alcantara <pc@cjr.nz>, samba-technical <samba-technical@lists.samba.org>,
+ "Stefan \(metze\) Metzmacher" <metze@samba.org>,
+ Brian Caine <brian.d.caine@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000e2ac8c05e39505f1
-Content-Type: text/plain; charset="UTF-8"
+On Tue, Jul 12, 2022 at 11:04 AM Steve French <smfrench@gmail.com> wrote:
+>
+> Starting with 5.18.8 (and 5.19-rc4) mount can now fail to older Samba
+> servers due to a server bug handling padding at the end of the last
+> negotiate context (negotiate contexts typically round up to 8 byte
+> lengths by adding padding if needed). This server bug can be avoided
+> by switching the order of negotiate contexts, placing a negotiate
+> context at the end that does not require padding (prior to the recent
+> netname context fix this was the case on the client).
+>
+> Fixes: 73130a7b1ac9 ("smb3: fix empty netname context on secondary channels")
+>
+> See attached fix to cifs.ko
+> --
+> Thanks,
+>
+> Steve
 
-Starting with 5.18.8 (and 5.19-rc4) mount can now fail to older Samba
-servers due to a server bug handling padding at the end of the last
-negotiate context (negotiate contexts typically round up to 8 byte
-lengths by adding padding if needed). This server bug can be avoided
-by switching the order of negotiate contexts, placing a negotiate
-context at the end that does not require padding (prior to the recent
-netname context fix this was the case on the client).
+Looks good to me.
 
-Fixes: 73130a7b1ac9 ("smb3: fix empty netname context on secondary channels")
-
-See attached fix to cifs.ko
 -- 
-Thanks,
-
-Steve
-
---000000000000e2ac8c05e39505f1
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-smb3-workaround-negprot-bug-in-some-Samba-servers.patch"
-Content-Disposition: attachment; 
-	filename="0001-smb3-workaround-negprot-bug-in-some-Samba-servers.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_l5hqgxgu0>
-X-Attachment-Id: f_l5hqgxgu0
-
-RnJvbSBhOGQ4NTMyZTRjMzM1ZjBhMzFkZDIxM2FiZTRlMzE2ODJmMzQ2NDdjIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFR1ZSwgMTIgSnVsIDIwMjIgMDA6MTE6NDIgLTA1MDAKU3ViamVjdDogW1BBVENIXSBz
-bWIzOiB3b3JrYXJvdW5kIG5lZ3Byb3QgYnVnIGluIHNvbWUgU2FtYmEgc2VydmVycwoKTW91bnQg
-Y2FuIG5vdyBmYWlsIHRvIG9sZGVyIFNhbWJhIHNlcnZlcnMgZHVlIHRvIGEgc2VydmVyCmJ1ZyBo
-YW5kbGluZyBwYWRkaW5nIGF0IHRoZSBlbmQgb2YgdGhlIGxhc3QgbmVnb3RpYXRlCmNvbnRleHRz
-IChuZWdvdGlhdGUgY29udGV4dHMgdHlwaWNhbGx5IHJvdW5kIHVwIHRvIDggYnl0ZQpsZW5ndGhz
-IGJ5IGFkZGluZyBwYWRkaW5nIGlmIG5lZWRlZCkuIFRoaXMgc2VydmVyIGJ1ZyBjYW4KYmUgYXZv
-aWRlZCBieSBzd2l0Y2hpbmcgdGhlIG9yZGVyIG9mIG5lZ290aWF0ZSBjb250ZXh0cywKcGxhY2lu
-ZyBhIG5lZ290aWF0ZSBjb250ZXh0IGF0IHRoZSBlbmQgdGhhdCBkb2VzIG5vdApyZXF1aXJlIHBh
-ZGRpbmcgKHByaW9yIHRvIHRoZSByZWNlbnQgbmV0bmFtZSBjb250ZXh0IGZpeAp0aGlzIHdhcyB0
-aGUgY2FzZSBvbiB0aGUgY2xpZW50KS4KCkZpeGVzOiA3MzEzMGE3YjFhYzkgKCJzbWIzOiBmaXgg
-ZW1wdHkgbmV0bmFtZSBjb250ZXh0IG9uIHNlY29uZGFyeSBjaGFubmVscyIpClJlcG9ydGVkLWJ5
-OiBKdWxpYW4gU2lrb3Jza2kgPGJlbGVnZG9sQGdtYWlsLmNvbT4KU2lnbmVkLW9mZi1ieTogU3Rl
-dmUgRnJlbmNoIDxzdGZyZW5jaEBtaWNyb3NvZnQuY29tPgotLS0KIGZzL2NpZnMvc21iMnBkdS5j
-IHwgMTMgKysrKysrKy0tLS0tLQogMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKSwgNiBk
-ZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9mcy9jaWZzL3NtYjJwZHUuYyBiL2ZzL2NpZnMvc21i
-MnBkdS5jCmluZGV4IDEyYjRkZGRhZWRiMC4uYzcwNWRlMzJlMjI1IDEwMDY0NAotLS0gYS9mcy9j
-aWZzL3NtYjJwZHUuYworKysgYi9mcy9jaWZzL3NtYjJwZHUuYwpAQCAtNTcxLDEwICs1NzEsNiBA
-QCBhc3NlbWJsZV9uZWdfY29udGV4dHMoc3RydWN0IHNtYjJfbmVnb3RpYXRlX3JlcSAqcmVxLAog
-CSp0b3RhbF9sZW4gKz0gY3R4dF9sZW47CiAJcG5lZ19jdHh0ICs9IGN0eHRfbGVuOwogCi0JYnVp
-bGRfcG9zaXhfY3R4dCgoc3RydWN0IHNtYjJfcG9zaXhfbmVnX2NvbnRleHQgKilwbmVnX2N0eHQp
-OwotCSp0b3RhbF9sZW4gKz0gc2l6ZW9mKHN0cnVjdCBzbWIyX3Bvc2l4X25lZ19jb250ZXh0KTsK
-LQlwbmVnX2N0eHQgKz0gc2l6ZW9mKHN0cnVjdCBzbWIyX3Bvc2l4X25lZ19jb250ZXh0KTsKLQog
-CS8qCiAJICogc2Vjb25kYXJ5IGNoYW5uZWxzIGRvbid0IGhhdmUgdGhlIGhvc3RuYW1lIGZpZWxk
-IHBvcHVsYXRlZAogCSAqIHVzZSB0aGUgaG9zdG5hbWUgZmllbGQgaW4gdGhlIHByaW1hcnkgY2hh
-bm5lbCBpbnN0ZWFkCkBAIC01ODYsOSArNTgyLDE0IEBAIGFzc2VtYmxlX25lZ19jb250ZXh0cyhz
-dHJ1Y3Qgc21iMl9uZWdvdGlhdGVfcmVxICpyZXEsCiAJCQkJCSAgICAgIGhvc3RuYW1lKTsKIAkJ
-KnRvdGFsX2xlbiArPSBjdHh0X2xlbjsKIAkJcG5lZ19jdHh0ICs9IGN0eHRfbGVuOwotCQluZWdf
-Y29udGV4dF9jb3VudCA9IDQ7Ci0JfSBlbHNlIC8qIHNlY29uZCBjaGFubmVscyBkbyBub3QgaGF2
-ZSBhIGhvc3RuYW1lICovCiAJCW5lZ19jb250ZXh0X2NvdW50ID0gMzsKKwl9IGVsc2UKKwkJbmVn
-X2NvbnRleHRfY291bnQgPSAyOworCisJYnVpbGRfcG9zaXhfY3R4dCgoc3RydWN0IHNtYjJfcG9z
-aXhfbmVnX2NvbnRleHQgKilwbmVnX2N0eHQpOworCSp0b3RhbF9sZW4gKz0gc2l6ZW9mKHN0cnVj
-dCBzbWIyX3Bvc2l4X25lZ19jb250ZXh0KTsKKwlwbmVnX2N0eHQgKz0gc2l6ZW9mKHN0cnVjdCBz
-bWIyX3Bvc2l4X25lZ19jb250ZXh0KTsKKwluZWdfY29udGV4dF9jb3VudCsrOwogCiAJaWYgKHNl
-cnZlci0+Y29tcHJlc3NfYWxnb3JpdGhtKSB7CiAJCWJ1aWxkX2NvbXByZXNzaW9uX2N0eHQoKHN0
-cnVjdCBzbWIyX2NvbXByZXNzaW9uX2NhcGFiaWxpdGllc19jb250ZXh0ICopCi0tIAoyLjM0LjEK
-Cg==
---000000000000e2ac8c05e39505f1--
+Regards,
+Shyam
 
