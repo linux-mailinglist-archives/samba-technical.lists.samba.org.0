@@ -2,52 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A79B757A420
-	for <lists+samba-technical@lfdr.de>; Tue, 19 Jul 2022 18:22:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4AC057A5DE
+	for <lists+samba-technical@lfdr.de>; Tue, 19 Jul 2022 19:56:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=i+L/oMUeNgKBvLA80lMVogvDvR94eyMVbDZqCTd40CI=; b=z+ODJs7Ivo8WfPkBH4owot464L
-	2MWTGPm+qpbD7BTX4SbNXoXHPyGLv92tWsGCr8I2fDU0VvyHfmDBnm7AOyMG2ssAF3vMYOb9tzGky
-	0frbdyxUOLvzdsSv3m5ZjhumE8nIbK28njmFv/b1h2ok7PPHM9rmKKwcj3oq001EiOSK0kuzyaNcp
-	CcNlteBECGIbcPbLt1fwuWlApwAumbmXHXzQ0zYralTqnRZT0S5t5IyVgS9ifTn3ywhKX10Y+cDUe
-	Lf56apWQI77aDY+12kMA/OV+LAILB+KFPTtNjZqO6oWa49CBdJ5j0nCCA6c+j6VnQhcfw2q8f2XvP
-	lsf0UV2w==;
-Received: from ip6-localhost ([::1]:57422 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=k1VGhG+NXRy7XtLhWLHXCjGSF+yI2m4gJLKqPzSGOPY=; b=2GfWwpmgHIl+3b5IMDQ3wEr2qj
+	jYFsOGholTNO01kTOpi/OA3S1oXaudPdRKKWTQZzhUl0dNgZ3v9A7Js4KIPlite4rLrUBw+qYJKQm
+	O8Hie4eL/AEZZsPi3eCIqDGKIeCDvbNZJI50Vd0S80HCP0GxomlhK0gOjCyo9PySESiTpvWB8YyI4
+	hT0+20+sjnLetaeflXcoNiKnwDWNqZDiesVzATjBtuG3s/MRZog1hz7j1AUOw4MrZEc/6rUcO5Wti
+	Agdd2BXsJaJFiZU7kKbY0NMC8508jpU0YnretCwkXGhh355WtumObLxFAZV6Y+w80LiO5s2pJOzoo
+	UbjJmNuA==;
+Received: from ip6-localhost ([::1]:58968 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oDpyZ-000tPl-Sz; Tue, 19 Jul 2022 16:21:35 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61888) 
+	id 1oDrSZ-000u8q-5d; Tue, 19 Jul 2022 17:56:39 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:52618) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oDpyV-000tPc-4R
- for samba-technical@lists.samba.org; Tue, 19 Jul 2022 16:21:33 +0000
+ (Exim) id 1oDrSU-000u5P-L3
+ for samba-technical@lists.samba.org; Tue, 19 Jul 2022 17:56:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=i+L/oMUeNgKBvLA80lMVogvDvR94eyMVbDZqCTd40CI=; b=E4EUgZtL+4M42NrpwVHqjFOCaw
- FnsMQg91RKe2KyD50y0uSakWibhmkaqMGfWUxM0E6Fwld9p4Ukyv+A0o2iuh3WRC2P3Z5DweWNMUX
- mcSvjN37y0EX68IlZcUC1tFl+ZVHtvs6iqLQKCLahItZFkDw7X0D9NiQCQXe7Ox5SgScBpNeG/8jo
- o9ocx/2yFx76fXJZEX5H4USTa7liQvdQ5urbDH6PElSwtIR6eu3GYgjlcuUhuVHgKbXUpUj9th50z
- aaUNCQYkVJZLTiMyPQDqUAzhTWUTeLfFDyu+fELzjFQtPSrV8sZ5mID6U9ORWtpSuTdAF29g0+Zzs
- X0PN4ojtuXhlaHdRVgkJbluchesjG5NC65xhifxd7Q/S9X8F1+eW8PKUG+kuhQwuYJJ5lCt+GBRF2
- zsWg2uLJrHVCXGH/aBvYQAn/YHTvBkwYls/qyrYSvL3zxqUAV7TtJL4Kpi35NxPTO9B5fwVaubf+/
- DrGl7Tx4lo6dGupM5BBz21Yl;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=k1VGhG+NXRy7XtLhWLHXCjGSF+yI2m4gJLKqPzSGOPY=; b=ojsggXWQ7oIMe9fwZqvosYVciN
+ FIGWr+0tAHcZ0BAioo1gydyyq1DQZrEBWjdVeH6+XsfrEscNCrUKpICHOgaNQw29guSKjErTm8udg
+ HZJdLbKUKWoqt/qTUDOIq+fGgmgxm8TjOpyKGTXWPt0A4+sVWiO/GWIzOOwACgMBTgIYpEEX3Ir1A
+ gVEWZ2Xoh7HzV3bl3nB/dcbWGR/BrFW0Erdsc2l0W7VWLup2963FeVY15EmhZZdK2VhAM+TMrTjqN
+ 44ZzDbLsA71ZVWCDKgoiEeWqjevLtxIdvXH43jzU7mLGKCtvZ3Vu7UJxIho0euzQFOH/jGPc2MXOk
+ +Ty/dEGJQYhrovm3oeF8W7SudnKymHTyyKainUv8oQeEghH65fOSDv1gbdMoJCPYo3H2DMM1vwJRV
+ nSFTCSINQUjWErnFCdmZbbI+/Jl03P3xzf+BDVraWKrHuPTJjHPRzqVwlXFRDQT6/EDt1+hV8RQoc
+ bbZwlP9OEgvWUysa7yIJmOKb;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1oDpyT-005Ubp-NA; Tue, 19 Jul 2022 16:21:29 +0000
-Message-ID: <2c1bdb62-8bdc-a80e-3a22-609c3150c883@samba.org>
-Date: Tue, 19 Jul 2022 18:21:28 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
+ (Exim) id 1oDrST-005VDC-Fg; Tue, 19 Jul 2022 17:56:33 +0000
+Date: Tue, 19 Jul 2022 10:56:29 -0700
+To: Shilpa K <shilpa.krishnareddy@gmail.com>
 Subject: Re: Issue if SearchResEntry and SearchResDone CLDAP responses are in
  2 packets
-Content-Language: en-US
-To: Shilpa K <shilpa.krishnareddy@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>
+Message-ID: <YtbwTQoc8Fq1L/58@jeremy-acer>
 References: <CAHbM3qimf=1xi0+UMZa5QFKDr0_JdHz2MF=T-bMBO8ZAhuzP8A@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
 In-Reply-To: <CAHbM3qimf=1xi0+UMZa5QFKDr0_JdHz2MF=T-bMBO8ZAhuzP8A@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------SMFFcCR45xosqqlSvRdZNqTy"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,59 +56,89 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------SMFFcCR45xosqqlSvRdZNqTy
-Content-Type: multipart/mixed; boundary="------------wbtgryoYPmW4OxrZLumqGUMg";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Shilpa K <shilpa.krishnareddy@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>
-Message-ID: <2c1bdb62-8bdc-a80e-3a22-609c3150c883@samba.org>
-Subject: Re: Issue if SearchResEntry and SearchResDone CLDAP responses are in
- 2 packets
-References: <CAHbM3qimf=1xi0+UMZa5QFKDr0_JdHz2MF=T-bMBO8ZAhuzP8A@mail.gmail.com>
-In-Reply-To: <CAHbM3qimf=1xi0+UMZa5QFKDr0_JdHz2MF=T-bMBO8ZAhuzP8A@mail.gmail.com>
+On Tue, Jul 19, 2022 at 09:20:09PM +0530, Shilpa K via samba-technical wrote:
+>Hello,
+>
+>We have a setup where there are 3 DCs in a domain and Samba is joined as
+>Member Server. 2 of the DCs run Windows 2019 and one of them was Windows
+>2008. Windows 2008 DC was decommissioned. Samba was joined to the domain
+>when Windows 2008 was available. After Windows 2008 was decommissioned, net
+>ads commands started failing as below:
+>
+>ads_try_connect: sending CLDAP request to <IP>...
+>....
+>cldap_netlogon_recv for domain <DOMAIN> failed with status
+>LDAP_PROTOCOL_ERROR
+>
+>Upon checking the network trace, we noticed that in response to the CLDAP
+>request SearchRequest, Windows 2019 DCs responded with SearchResEntry and
+>SearchResDone in 2 separate packets. Checking the code, it failed below:
+>
+>NTSTATUS cldap_search_recv(struct tevent_req *req,
+>                           TALLOC_CTX *mem_ctx,
+>                           struct cldap_search *io)
+>{
+>...
+>...
+>status = ldap_decode(state->response.asn1, NULL, ldap_msg);
+>        if (!NT_STATUS_IS_OK(status)) {
+>                goto failed;
+>        }
+>        ZERO_STRUCT(io->out);
+>        /* the first possible form has a search result in first place */
+>        if (ldap_msg->type == LDAP_TAG_SearchResultEntry) {
+>....
+>                *io->out.response = ldap_msg->r.SearchResultEntry;
+>                /* decode the 2nd part */
+>                status = ldap_decode(state->response.asn1, NULL, ldap_msg);
+>--->failed call
+>                if (!NT_STATUS_IS_OK(status)) {
+>                        goto failed;
+>                }
+>        }
+>
+>...
+>}
+>
+>The 2nd ldap_decode(..) fails because:
+>
+>
+>/* Peek into an ASN1 buffer, not advancing the pointer */
+>bool asn1_peek(struct asn1_data *data, void *p, int len)
+>{
+>...
+>        if (data->ofs + len > data->length) {
+>                /* we need to mark the buffer as consumed, so the caller
+>knows
+>                   this was an out of data error, and not a decode error */
+>                data->ofs = data->length;
+>                return false;
+>        }
+>..
+>}
+>
+>Here, after the first call to ldap_decode(...) in cldap_search_recv(), the
+>value of data->ofs and data->length was 163 and len was 1. len was 1
+>because of below code:
+>
+>_PUBLIC_ NTSTATUS ldap_decode(..)
+>{
+> ...
+>        if (!asn1_start_tag(data, ASN1_SEQUENCE(0))) goto prot_err;
+>...
+>}
+>
+>We think the issue is because SearchResEntry and SearchResDone responses
+>are in 2 different packets. Could you please confirm if this is so?
 
---------------wbtgryoYPmW4OxrZLumqGUMg
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-
-SGkgU2hpbHBhLA0KDQpPbiA3LzE5LzIyIDE3OjUwLCBTaGlscGEgSyB2aWEgc2FtYmEtdGVj
-aG5pY2FsIHdyb3RlOg0KPiBXZSB0aGluayB0aGUgaXNzdWUgaXMgYmVjYXVzZSBTZWFyY2hS
-ZXNFbnRyeSBhbmQgU2VhcmNoUmVzRG9uZSByZXNwb25zZXMNCj4gYXJlIGluIDIgZGlmZmVy
-ZW50IHBhY2tldHMuIENvdWxkIHlvdSBwbGVhc2UgY29uZmlybSBpZiB0aGlzIGlzIHNvPw0K
-DQpjYW4geW91IHNoYXJlIGxvZ3MgYW5kIHRyYWNlcz8NCg0KQ2hlZXJzIQ0KLXNsb3cNCg0K
-LS0gDQpSYWxwaCBCb2VobWUsIFNhbWJhIFRlYW0gICAgICAgICAgICAgICAgIGh0dHBzOi8v
-c2FtYmEub3JnLw0KU2VyTmV0IFNhbWJhIFRlYW0gTGVhZCAgICAgIGh0dHBzOi8vc2VybmV0
-LmRlL2VuL3RlYW0tc2FtYmENCg==
-
---------------wbtgryoYPmW4OxrZLumqGUMg--
-
---------------SMFFcCR45xosqqlSvRdZNqTy
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmLW2ggFAwAAAAAACgkQqh6bcSY5nkbS
-DQ//emY+4YAWdfj90zvlGJNyidTu/vZP+OpA6+E3AH4Wu6L3n9ZReFECaV1cAWbTiGCiVERkM2g4
-tuUrCImZUyTGELPuhoxqOT1cGdzr0Q4Kh1AdMZ0xlX8PC56vKX85sfrVgK9MLAdwDtBEE2ull05C
-OAt4MQROkC9I1iR4ZDREBdKu3kQHvdsg5V32/AcaSMxBC7QQ4O4esahhboaMqAcCBgMVEzpkQL1A
-mX8MdAXxyBUsD4/gUyBdzIg6rnhEDJhe3hgVKFGICVx85RbFQv/m2o7qcLJyyV+1rQIuDGVrM4Wb
-p4fKigULHdffam/NYDKRPkjtvxF771bJvblr1+4SaMmMAk0ZVBZq4eqiTIdV2jOikVxVePKCGz3I
-muiPcRptUFb6OlKExRHSCM+/8BqmCRe+g6B7GchqSUwIysltP+Led7zcNi96LIb3xqyfxuBRfeY9
-ljYR0j7lK14o8pHo1G45Th83kO1ggyzwO+O4Wvp0UxVP0xVAmrLdyADb8+UFxhSoPut0Efe0ubz6
-Dv1+nnihQc26HAzL8zsNlDXTgiBRUXNo/EYa/UndEP9GWnab5mJ4EgVmYqHrdFB/6VDnEvaYFWio
-Ef+ejAstyOFM/ilMuh4Brmmg/d3tiyYaAXdOz+bMXFIOgKnxsVb8nvs+XmTDIRMq9Efv28wVbTfF
-hNo=
-=8Y1M
------END PGP SIGNATURE-----
-
---------------SMFFcCR45xosqqlSvRdZNqTy--
+Yes, the cldap_search_recv() code expects the replies to be
+in one packet. As Ralph says, if you can share packet traces
+we can possibly add code to do a second packet read if the SearchResDone
+response isn't found in the first reply.
 
