@@ -2,59 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3065E57DA91
-	for <lists+samba-technical@lfdr.de>; Fri, 22 Jul 2022 09:03:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7F3357F992
+	for <lists+samba-technical@lfdr.de>; Mon, 25 Jul 2022 08:43:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=EpcYbDE7/2KU27KxwJieyazUqKaCxCPio2AYQ9S6IuE=; b=Ej3dzo4B6GDXLvAPbAmJC94R53
-	FzofUaacBLbxgR9NA123Wpl2cX1nUnoTvhIEbtSt1Uf1eN8+nxZmUzcfsaq3QQcxlICezJeBaKT6W
-	PSD35wtuxKbCoAkXYgagBzgR5wYjce3MVIxQrK2w5BHd5E4IM1nKOKU2ovEQ3Y8m+sjMpXMSjC+KE
-	3CeoPTCuW+chIATV4bJW5Qt9kGl23cs9/NdNYiP/+aGeTLMHN1Vns14oir+iv50sFf6yo9ZV/ucRD
-	X28s6WxvlRjkjJZYmL0fylLamlgdNZ6/0fRtDHrQWdka2CwqOd3Ih6pHyOYRTCC7e4Q7upCyqLZN/
-	tzNheLDQ==;
-Received: from ip6-localhost ([::1]:59126 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=6pyt3T5x30kr5AhC96VkB7FfkysDE8vWUZlK936Cbuo=; b=GK31qUc/D5tusdMswWJNiY3vD1
+	U/mFdblPM2zpqI7+zKiszT7Cb8fjicFJoxP++mZ1qOsPrOBTz47idVww3V+wwVNxE3uG2x96ntl5z
+	N2g6XGRgZX6kpTh07pfStvNZySRtNlKtvDfG8BpSrTRpioafxhJxiNINrghvtYaSxH0NjKpGJE8cH
+	ozPgwNU9eDs7kPtOqUtPChvyU28HqFo/EYHW7ZiriKKpD7bdfi3pWzfAo7Cs8hhA0njbVVqqZMkKe
+	2W7Dnd4rCVqgphu2q1DByTnozWXqdSgmM5sh0eo5zlRUbpF3yJ68W3qTptnlbxubfL5TSgoNJ70mD
+	jXN5yEng==;
+Received: from ip6-localhost ([::1]:37306 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oEmgR-001dJn-TG; Fri, 22 Jul 2022 07:02:48 +0000
-Received: from mail-qk1-x731.google.com ([2607:f8b0:4864:20::731]:43680) 
+	id 1oFroL-001t6F-0h; Mon, 25 Jul 2022 06:43:25 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25504) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oEmg5-001dJd-UR
- for samba-technical@lists.samba.org; Fri, 22 Jul 2022 07:02:29 +0000
-Received: by mail-qk1-x731.google.com with SMTP id o21so3006151qkm.10
- for <samba-technical@lists.samba.org>; Fri, 22 Jul 2022 00:02:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mattgrant-net-nz.20210112.gappssmtp.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to:cc;
- bh=sxWHuai0MKjCHbIAbiIZikFGf1kwWGJe1AT2tp+QOos=;
- b=mHtlwAHTbZXnUcnMvIQxUb4VSibSx+YUGmX9Mt5sbURylcVRxQrQuTepN5rWQwo/oq
- PviwD/btMhT3VzCJGuiIfCMSTMdKObkECDf0/a+533o0ae9YLFovWzoayWnFOwQlMYHy
- KYaaQdlt1ansYlbAuta1ftgMvwQ7d8hPda77auwnWuJRUMxKCxIxSFg09naodMEKO46O
- Z+xIEGtJ9Lb6JAv2eAWcQ5i5yRmD6XNVL71JAzXcvf4B8/LJ18LJSpz15wsSFI5lxeAT
- iAnv2QcXaq5a7I7sMXXZcILklrwbdRVPtZ2hF+9CkzScVlyO7p7FIOu8YQFU9MuD5j4B
- KRmQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
- bh=sxWHuai0MKjCHbIAbiIZikFGf1kwWGJe1AT2tp+QOos=;
- b=g28cpcx0h4A32xjHWBe7yu9cdDMfEV2ZPvASOC8uFKga/wducfs/LWw29OnGoczoTi
- NDIM71bN6vfixbrLfVhQ0/8ZW+xT7m5IvooE3PV7YXWbZL3zj5kWWUpb73gJkx5BwDOR
- 15ERQkHRIxjyBuXyE95IeC3bhSr3ldHgF8Qmujw1pmtjoe7WuG4q/HqAEg7gGrqSKczU
- oBBe2VOzgCGT7ilEt9C7ZgU0gdrF3X2gasF9fyilOu85iT9LEtT4i3FSK5nM6FC3QMgb
- Ftbs76cRvLCLXM5Q94tdDLdWVKsCol7RK8KaUp4fQWu80Kh/HN69M9+4xKgmzuOcWIGX
- X1Mw==
-X-Gm-Message-State: AJIora/B3w0Tx2OzaOpAyAvDtDu682mzf4NglZmMP2mTF3s2ZNjva4/m
- 1Esvud5GxlRG8XOgDn0uHDjD4uaLC1bK90fvBIFHCdyW4+RJGA==
-X-Google-Smtp-Source: AGRyM1vxV4ufardKeCHgU/09Cr1wR1jDdetmiNaNs2D/3j9b5FZQbpEDCf6u4nGK5HILz7yndgPABBTHK6QblFZKk8c=
-X-Received: by 2002:a37:8903:0:b0:6b5:5a5e:69b5 with SMTP id
- l3-20020a378903000000b006b55a5e69b5mr1504706qkd.406.1658473331776; Fri, 22
- Jul 2022 00:02:11 -0700 (PDT)
-MIME-Version: 1.0
-Date: Fri, 22 Jul 2022 19:02:01 +1200
-Message-ID: <CAHA-KoMxMB60rhaU9YPBPTvG0HE0A_4G2L1-MvZ1rOnrHJf65A@mail.gmail.com>
-Subject: Merge Request - DNS updates allow/deny for SAMBA_INTERAL dns server.
- Help PLEASE!
-To: samba-technical <samba-technical@lists.samba.org>
+ (Exim) id 1oFro4-001t66-RD
+ for samba-technical@lists.samba.org; Mon, 25 Jul 2022 06:43:12 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=6pyt3T5x30kr5AhC96VkB7FfkysDE8vWUZlK936Cbuo=; b=BfNDoEBqOrHCURjmDP54ZCQw/R
+ yxAWQeAKw4GuNN/MqTPH7Rn4M0npm7BV4CWnbjmqFriK8Gb2huBJY40vuWJNbZ+Dk9bHWBzDPWdv3
+ UwKzuHRzL//o8fzguQe+4UxvyBwJ7TLoXfNJ+lGoqI8gbqX+67FjHpSukWpMLhu+xqC6RDJCSGlf4
+ U81fDoLnnicfm85Z//oD1tsmMebI1xWMeOLqBVraKdKEffWBAIsu+pViTV+QgzP1uyEceufVenkEj
+ nc0/l9dLpBuogseaBICiDJLjlhBCTb9A8gT1xL6DcHeuFUMe9F5i+24+sHqEfr/hwSknEEfcqgdTE
+ 1J1NHt291ZEHjeSn0pOpqtEGDV47Jj0X2EHipu+e9bG1mpJtsb0PKoDFbuvLDbMvmg6FYEXx7kmUg
+ kSbJ/70WXhX0iLt7XrWh89BazJ5DZV8rXwjlyLsB3+JJjYmrtuK61hfwP6evfeXPs8n4wBPiV48cc
+ ZTh4zMkWg4ASXwVerpiNN/76;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1oFro2-006L17-9W; Mon, 25 Jul 2022 06:43:06 +0000
+Message-ID: <32ca91c03708ad035e01ab768af6054927e2b2dd.camel@samba.org>
+Subject: Re: [Samba] Samba in Kubernetes (and Containers) - Release v0.2
+To: Ralph Boehme <slow@samba.org>
+Date: Mon, 25 Jul 2022 12:13:04 +0530
+In-Reply-To: <c4611b9a-84c9-0a9c-2a6b-b8b30ea52ee1@samba.org>
+References: <3245098.9o76ZdvQCi@pretzel>
+ <6fd92c53-4f64-ecff-6568-9a01908d958b@samba.org>
+ <26648066.1r3eYUQgxm@pretzel>
+ <c4611b9a-84c9-0a9c-2a6b-b8b30ea52ee1@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.3 (3.44.3-1.fc36) 
+MIME-Version: 1.0
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,45 +59,38 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Matt Grant via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Matt Grant <matt@mattgrant.net.nz>
-Cc: Uri Simchoni <uri@samba.org>
+From: Anoop C S via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Anoop C S <anoopcs@samba.org>
+Cc: John Mulligan <phlogistonjohn@asynchrono.us>,
+ samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi All!
+On Fri, 2022-06-10 at 10:47 +0200, Ralph Boehme via samba-technical
+wrote:
+> On 6/9/22 23:26, John Mulligan wrote:
+> > Indeed, thanks a ton for making this happen so quickly. I can't
+> > wait to try it
+> > out.=C2=A0 I'll need to make good use of our 'nightly' builds that
+> > consume pre-
+> > release samba versions.
+>=20
+> fwiw, there's also this MR from Jule for the smbstatus JSON output:
+>=20
+> https://gitlab.com/samba-team/samba/-/merge_requests/2449
+>=20
+> It would be awesome if you could give it a whirl or at least take a
+> look=20
+> at the example output and let us know if the output format is spot on
+> or=20
+> if there's anything that should be tweaked.
 
-Want comments on code changes, and what further tests are required for
-Samba test suite. Its been some time since my first MR, and this one is a
-major
-for the required test complexity?
+FYI: Our colleague finally got around to try and consume these changes
+in smbmetrics[1] and was impressed with the details included as per the
+latest patchset. Unless there are any objections let's get this into
+master soon(may be even before 4.17 branch is cut :-)).
 
-Uri, would you be able to help me out again please to help get this
-finished?
-Thank you!
+[1] https://github.com/samba-in-kubernetes/smbmetrics
 
-Mechanism for DNS update host/rrnet allow/deny lists. Three functions
-dns_update_check_access(), dns_update_get_caddr() (gets subject address
-for check from A, AAAA, and PTR records), and
-dns_update_ipaddr_check_access() are backended by allow_access_flag_lo()
-from lib/util/access.c using the already existing host allow/deny access
-mechanism.
+Anoop C S.
 
-The motivation for this is to control what DNS dynamic updates get added
-to the SAMBA_INTERNAL DNS in SOHO setups. With out this IPv6 dynamic
-addresses from your ISP IPv6 delegated prefix end up in the AD DNS,
-even when you have specified an fd00::/16 ULA prefix or RFC 1918 IPv4....
-The dns update rrnet allow/deny lists are used for this, in combination
-with an interfaces = lo fd14:beee:baaa::DEAD::BEEF/64 statement. Forward
-and reverse DNS zones are supported.
-
-Support for clients NOT updating the DNS, but a router running a DHCP
-server with a dynamic DNS update client was added via the
-dns updates ip auth allow/deny and dns updates allow/deny parameters.
-
-Thus this patch gives SAMBA_INTERNAL dns server the best of both the above
-set ups, making it as flexible as using Samba with Bind9 DLZ.
-
-How would I test access lists for update source, and
-auth by IP number?  Can't see how in test suite to bind update request
-to a source IP address.
