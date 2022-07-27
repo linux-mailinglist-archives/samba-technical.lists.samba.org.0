@@ -2,54 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A610B57F99B
-	for <lists+samba-technical@lfdr.de>; Mon, 25 Jul 2022 08:49:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60AE65823EA
+	for <lists+samba-technical@lfdr.de>; Wed, 27 Jul 2022 12:11:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=IMDyRoKLAPg86x8EeWgV/2PrWRyB0cSQ9cAuFOMKwOQ=; b=YSP7Xq6opVQSXLEwcnOCICc46z
-	0FpraRbH4XFgHZv867Ip/9YdQEIq7FvmpqxM85/LWv1bdlr4t3ynYkVL0e4Xoh53Cs7AAWEPesFdp
-	GlCNG/GGWgmBTDHP3i5m6srJyp37A1dq2MArtv09UhzkIwZkBp0g4fud33QA/ukZE06lkWdTzHRux
-	ZGrkSgasiDqXbLvHninY0AdrByp5EIXi4kDhXi2VDe6T2lqu8AEraXYeAJ6zo5m0DkSPx1ieLHEEY
-	lU1fIOc1tFaB3VF4XeJZm6FuxWD2shZtEvfdTz7/BHfe2rRolhU2Z9RtdoyX4NIovRl/OLPJrowQL
-	lmVMWeKQ==;
-Received: from ip6-localhost ([::1]:40922 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=fz8JosNNya8HKk4OSG/HpQkoq3TMJq6cj5+bCgBb+x4=; b=M3GX3719/eD8xaYECm409F6mqC
+	1aNi31yqBoL2GCiFCIqBLcYZRcFlqKXrAj9yA81Rk7hibM9OAK62Hlvx13Hrr/vS1AjDA3+Wb106y
+	AzNMIM8IieRkyVG4qErU3y2+rw4n4uasgsbPjAxsPr9H7Rvu5BoiMkKsCyC49P9oBDkOyeNLGAflG
+	CnkBSR8ao7WuRqS9YR2DGBu/Br65JCoOi6ibwOFd2JeaiA8RuKmPRt9ErQoVaQoaY5E07+nGAJ1XU
+	Ldi5rEKG2RgqMJsy4tijqyTV4lMRLcZLUEUr5pirgIDVKsU7AexwwjITHEAiPDpSVBk938n0Ezrd7
+	OeuOkVTA==;
+Received: from ip6-localhost ([::1]:25410 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oFruA-001uTG-AY; Mon, 25 Jul 2022 06:49:26 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55918) 
+	id 1oGe0A-002BHk-SK; Wed, 27 Jul 2022 10:10:50 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39504) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oFru4-001uT7-TL
- for samba-technical@lists.samba.org; Mon, 25 Jul 2022 06:49:23 +0000
+ (Exim) id 1oGdzz-002BGo-LE; Wed, 27 Jul 2022 10:10:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=IMDyRoKLAPg86x8EeWgV/2PrWRyB0cSQ9cAuFOMKwOQ=; b=UZzn7+fmzwoOzp8QLTtr5KAzuV
- AHxyvRDoY4pGUpumjQIUVW//i0MmXOPAP6pxFpeIkilQaygqleaCRImkOasKV9HVHZuUt9s0U/8N6
- wikhdXSt18EOIweBbTZcAPCd4hdibL+55pxh7TRNmnLll0+KS5YKkNidgDStF1JeSskl0X7rfg16O
- gIpC+NrMDM1OGIToE3SULvXwbcI7PzRfPmwFLZ7rrGubG7dFrwNmHDapcU4MpSeNjVYYh7/84GBmM
- TIgjJLQIDe2yLGjyftuPlv7PL63IJFAHsRYvogISLtUM31cMw5VxrzjIfb9nfGQkWqNDUBO93ldiz
- CxKwqXJMpukbiYeaCBK1AowogYxjzCRpVa5hdji4bj0FWEHSABGYFBgEVTC0qN+pDWJB5SChwBNW0
- y1GWstwfdK41njmLdLWWoB7ZC1hViXKeMCRL8siUrMpzMSDFQ07Gy/JKaheg4kD5nTSysQXAZLDQq
- Kd2r1nTP3jZw0mC9OvNOOWfQ;
+ s=42; h=To:From:Date:Message-ID:CC;
+ bh=fz8JosNNya8HKk4OSG/HpQkoq3TMJq6cj5+bCgBb+x4=; b=mUq1LyV+pF5yXFx7TxWUG1jQam
+ Q3u5gdrOgTojW3K5Q25cfQmXrdLGBUMNp9nG4/PUURexFBGfq2iKpJWa31xda2v/JiXgY7ZmZVys0
+ xRE1onYtKp4JXOcRa6VmWDnkQHTfZlL+NH3yxDA8zx6Q9I2R+6/2exhwKGoirIhGXQaRZbpTdHGtQ
+ Xs3tq0G4U1QuWksnwlznMNr+UrhrRaUNbY3bFYoiOHIPD1xeMaPxoD4CBXC3jonPoJFAfQc8gUMrI
+ BNFhC1o/JBzP/+IPFU6LoChPgI5T9nAO42yQ6pk6dLkpHv3uumX+aaowZXb8V5SJ60khmsjnKkblz
+ 6YmMfTYb/kywTOsRifFQ8oJHbvTkzgEwKmB05102re4E3lRjNO//a/UOvH5SQ5Dt8K+kj+5D5EnXn
+ dSFivGfeMsBXSfkMtvyE/aQhES/fviXXjVjBveCz9OhFZEydEXYZ8zHf3tXtbedQjOq3/890cAQCA
+ 4Uv2hbVnVt+n5TmN1uZQ4zFb;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1oFru3-006L9U-Ux; Mon, 25 Jul 2022 06:49:20 +0000
-Message-ID: <26efe5a8-2681-d357-abc9-1de9992cf43e@samba.org>
-Date: Mon, 25 Jul 2022 08:49:19 +0200
+ (Exim) id 1oGdzy-006l29-SC; Wed, 27 Jul 2022 10:10:38 +0000
+Message-ID: <ff4a7ffa-7e22-a642-8143-df31df4a0be2@samba.org>
+Date: Wed, 27 Jul 2022 12:10:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [Samba] Samba in Kubernetes (and Containers) - Release v0.2
-Content-Language: en-US
-To: Anoop C S <anoopcs@samba.org>
-References: <3245098.9o76ZdvQCi@pretzel>
- <6fd92c53-4f64-ecff-6568-9a01908d958b@samba.org>
- <26648066.1r3eYUQgxm@pretzel>
- <c4611b9a-84c9-0a9c-2a6b-b8b30ea52ee1@samba.org>
- <32ca91c03708ad035e01ab768af6054927e2b2dd.camel@samba.org>
-In-Reply-To: <32ca91c03708ad035e01ab768af6054927e2b2dd.camel@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------kD8OE9IMunULJlTfPK72VBtS"
+Content-Language: de-DE
+Subject: [Announce] Samba 4.16.4, 4.15.9, 4.14.14 Security Releases are
+ available for Download
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,68 +57,109 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: John Mulligan <phlogistonjohn@asynchrono.us>,
- samba-technical@lists.samba.org
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------kD8OE9IMunULJlTfPK72VBtS
-Content-Type: multipart/mixed; boundary="------------mdJw2x0NfSahagos37Nd0RMG";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Anoop C S <anoopcs@samba.org>
-Cc: John Mulligan <phlogistonjohn@asynchrono.us>,
- samba-technical@lists.samba.org
-Message-ID: <26efe5a8-2681-d357-abc9-1de9992cf43e@samba.org>
-Subject: Re: [Samba] Samba in Kubernetes (and Containers) - Release v0.2
-References: <3245098.9o76ZdvQCi@pretzel>
- <6fd92c53-4f64-ecff-6568-9a01908d958b@samba.org>
- <26648066.1r3eYUQgxm@pretzel>
- <c4611b9a-84c9-0a9c-2a6b-b8b30ea52ee1@samba.org>
- <32ca91c03708ad035e01ab768af6054927e2b2dd.camel@samba.org>
-In-Reply-To: <32ca91c03708ad035e01ab768af6054927e2b2dd.camel@samba.org>
+Release Announcements
+---------------------
 
---------------mdJw2x0NfSahagos37Nd0RMG
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+This are security releases in order to address the following defects:
 
-T24gNy8yNS8yMiAwODo0MywgQW5vb3AgQyBTIHdyb3RlOg0KPiBGWUk6IE91ciBjb2xsZWFn
-dWUgZmluYWxseSBnb3QgYXJvdW5kIHRvIHRyeSBhbmQgY29uc3VtZSB0aGVzZSBjaGFuZ2Vz
-DQo+IGluIHNtYm1ldHJpY3NbMV0gYW5kIHdhcyBpbXByZXNzZWQgd2l0aCB0aGUgZGV0YWls
-cyBpbmNsdWRlZCBhcyBwZXIgdGhlDQo+IGxhdGVzdCBwYXRjaHNldC4gVW5sZXNzIHRoZXJl
-IGFyZSBhbnkgb2JqZWN0aW9ucyBsZXQncyBnZXQgdGhpcyBpbnRvDQo+IG1hc3RlciBzb29u
-KG1heSBiZSBldmVuIGJlZm9yZSA0LjE3IGJyYW5jaCBpcyBjdXQgOi0pKS4NCg0Kb2gsIHRo
-YXQncyBhIGdvb2QgcG9pbnQhIDopIEp1bGUsIGNhbiB3ZSBzb21laG93IGdldCB0aGlzIHJl
-YWR5IHNvb25pc2g/DQoNCkFuZCB0aGFua3MgZm9yIHRlc3RpbmcgQW5vb3AhDQoNCkNoZWVy
-cyENCi1zbG93DQoNCi0tIA0KUmFscGggQm9laG1lLCBTYW1iYSBUZWFtICAgICAgICAgICAg
-ICAgICBodHRwczovL3NhbWJhLm9yZy8NClNlck5ldCBTYW1iYSBUZWFtIExlYWQgICAgICBo
-dHRwczovL3Nlcm5ldC5kZS9lbi90ZWFtLXNhbWJhDQo=
+o CVE-2022-2031:  Samba AD users can bypass certain restrictions 
+associated with
+                   changing passwords.
+https://www.samba.org/samba/security/CVE-2022-2031.html
 
---------------mdJw2x0NfSahagos37Nd0RMG--
+o CVE-2022-32744: Samba AD users can forge password change requests for 
+any user.
+https://www.samba.org/samba/security/CVE-2022-32744.html
 
---------------kD8OE9IMunULJlTfPK72VBtS
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+o CVE-2022-32745: Samba AD users can crash the server process with an 
+LDAP add
+                   or modify request.
+https://www.samba.org/samba/security/CVE-2022-32745.html
 
------BEGIN PGP SIGNATURE-----
+o CVE-2022-32746: Samba AD users can induce a use-after-free in the server
+                   process with an LDAP add or modify request.
+https://www.samba.org/samba/security/CVE-2022-32746.html
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmLePO8FAwAAAAAACgkQqh6bcSY5nka0
-vg/+I5tLNFJxRkX6blBVBDQIWgNtTCJKn1u+iRhk2cGgqAbkBR1Lg7/obkQqZ2AUqihFi05AiJK+
-EGYgQcFS9y0xLCjscoCPyvVKj9rKNeq2UmqhU8dMl6W8DoqTUYNMPy1Luwu3aJfl70zQ30Mb63ML
-a2hwBWRd0K8GJO6agASvdAsiaPFYAJ6TQnMJ1MFTEcdGA6e+8eAiM7wup0WNTUJuW4BS7mP4IWhV
-cWwJYncK6yMySCrwW5gTeCZvAE2b+hD4b6B/ppwm4Fe6DfIgd3HCfzqwHeC5e8ANTND6p1/UpGtZ
-LxFf7ssX2lJoU8BrE6OGBBABjJ0nOkS+N8zzlA9Jjthf2hIZejo8MVtnU6JEY9nWWm9IGI0ewZOH
-FdtRVWbNfuW+wbd3y4A3eKFvishvYLCqNiBcXGFjie//yasjimfmeZBGL+hby2nO4g71Vhz7AUGj
-eZIgwnGR87sXyIU4IhNneeCSphBuikaO7Y+iqJBkFWp6nHgyF8UEfhNb9+XSJM/C/obyuD0dHEJ+
-IBj4qux6znyknsniGwSK7rjCTNcYqmcsc3H6CETyEyCAUuksxgVNoCpu6/6EkhqRFlAjLf2VUnyK
-Dpj6HPSlQeflvOOfEp1qUHqASqIr+mktyN3ZZXR/2+KMxHrKpau+IwVWSz2Bd+Dy7NnBc5ThsKY8
-bAU=
-=1Ywh
------END PGP SIGNATURE-----
+o CVE-2022-32742: Server memory information leak via SMB1.
+https://www.samba.org/samba/security/CVE-2022-32742.html
 
---------------kD8OE9IMunULJlTfPK72VBtS--
+Changes
+-------
+
+o  Jeremy Allison <jra@samba.org>
+    * BUG 15085: CVE-2022-32742.
+
+o  Andrew Bartlett <abartlet@samba.org>
+    * BUG 15009: CVE-2022-32746.
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 15047: CVE-2022-2031.
+
+o  Joseph Sutton <josephsutton@catalyst.net.nz>
+    * BUG 15008: CVE-2022-32745.
+    * BUG 15009: CVE-2022-32746.
+    * BUG 15047: CVE-2022-2031.
+    * BUG 15074: CVE-2022-32744.
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical IRC channel on irc.libera.chat or the
+#samba-technical:matrix.org matrix channel.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed Samba tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620). The Samba source code can be downloaded
+from:
+
+https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.16.4.html
+         https://www.samba.org/samba/history/samba-4.15.9.html
+         https://www.samba.org/samba/history/samba-4.14.14.html
+
+If you are building/using ldb from a system library, you'll
+also need the related updated ldb tarball, otherwise you can ignore it.
+The uncompressed ldb tarballs have been signed using GnuPG (ID 
+4793916113084025).
+The ldb source code can be downloaded from:
+
+samba-4.16.4:
+https://download.samba.org/pub/ldb/ldb-2.5.2.tar.gz
+samba-4.15.9:
+https://download.samba.org/pub/ldb/ldb-2.4.4.tar.gz
+samba-4.14.14:
+https://download.samba.org/pub/ldb/ldb-2.3.4.tar.gz
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
