@@ -2,46 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8A44F586F7B
-	for <lists+samba-technical@lfdr.de>; Mon,  1 Aug 2022 19:22:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D116587167
+	for <lists+samba-technical@lfdr.de>; Mon,  1 Aug 2022 21:28:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=/y97U8MZkfW7qK+QJcpwexMElJ6RxsFfd1LgCTqV++0=; b=6KtBrvg8gJvH9YY5S+Q3aiKqeD
-	FfjUaGvLnW14I/vi5dM+GmZKKqScLL8f8bqGIMm6W2ls6Ch1iAmflADzktOlOmP1Q3NWITkbHwsY6
-	JWcsEFy9ThDNKY1wK5schaTxzYl6Drv1dWMWFHWDnUnTLbm/nmVsCXYOMxzI3JmDmitLn8c4XOLJm
-	9rnlJ7RNQF7B1Lhv9ZRCmDm2GkFj4IqWAbJIvTl774M7WdMN/y8es406YaSl8KTEJfO2JjZf01IpK
-	WcD0GPXaoDVmfQYV/7yDvFF84hu0Go0YpMhmrZv+UJX/1v2DcUWpDswXThuBxqxWsQzXdvbesy6Cy
-	kzffEHFg==;
-Received: from ip6-localhost ([::1]:26340 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=6+JrXqJEltXUWg9QjhAUhtfwUJNVGIb39jMoxht6RQM=; b=jhE0Pt1hBz//SZ0at1V4mwNshM
+	66D/mDetwx2l6tUtbOJBnIx1jTj7Wb8SYXxDy8QXYNrBFigxXusua17FTqLUd4vxOH3FuWZeqCPkI
+	EmO83lSNknfjQZHJdPGTyZXhApDwq3aJ5ybUPaY/ml0AH0NnzdTBjt7w6qjo8FvWH4x5Ttkda/CHD
+	RsE/4hnA380RMv3cNXkSX0C/g5DLNhanH+iHHmChEiNUrpyHNUclc1xR1rvek+YeWHuApGSouH0We
+	q/9mwv1V+tqD23262o4mA3uiE0IxkLOt4U4eGKkDURoewhmryeqhVLEVa+YDLeBm10wHxtbqCU8tD
+	qeiTM9TQ==;
+Received: from ip6-localhost ([::1]:27460 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oIZ6k-004pSw-JE; Mon, 01 Aug 2022 17:21:34 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25314) 
+	id 1oIb5U-004q7d-Jl; Mon, 01 Aug 2022 19:28:24 +0000
+Received: from smtp-out1.suse.de ([2001:67c:2178:6::1c]:52624) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oIZ6g-004pSn-3R
- for samba-technical@lists.samba.org; Mon, 01 Aug 2022 17:21:32 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=/y97U8MZkfW7qK+QJcpwexMElJ6RxsFfd1LgCTqV++0=; b=fnJdK3hV+uWZfOebm5e1QTm/Ab
- Q0HxCBYeXOz3pbPrT6orPGaI6iCmS8l9OMALyrs2Qpyy/4JaMS8uxLvlwBQLSbHa+PzCQJTxxbiP2
- Ow/zwCzybinIeyoaMEQLb0jgcjDn1wY8xFy198ssFKXEUnHRiijH+uMx2OlBn5H7WYEOfpPygp61M
- 1JNirrC3Lmx+wXQLgl+Zhz5UnygEstY7FWfcWkm+o2YQ4gGtsNT41pyu7vNsMt6D6zsZpSq1Mg3D+
- 1w287GN4uM17uDjcQBtrmmsBcgRSHE0UVO0NGAWmKtADCntAUSAvZxsYy9Zwse1yrcysXe/FKPxVh
- n23Yr/HYHizhaTVx/BcO/MIwuT4FKFgsnhjv99FBMf/45y9hiBpvmwct5jOWBphlB6pd6T10lYa+J
- hgkQb4WpQmsOoVR7IQPuJakjbH/iBuTE2GyE5ev5xGbKkUTuGXU8C8AU5okSbSWJW3TPdJgEFb1N+
- uRsAlzQ0Wun/kTNe542HMAn7;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1oIZ6e-007cNi-RV; Mon, 01 Aug 2022 17:21:29 +0000
-Date: Mon, 1 Aug 2022 10:21:24 -0700
-To: Michael Tokarev <mjt@tls.msk.ru>
-Subject: Re: running only selected tests in samba sources
-Message-ID: <YugLlNwmCwmWDfPG@jeremy-acer>
-References: <587ebe9d-3f91-7389-5ad1-c6d96e435b99@msgid.tls.msk.ru>
+ (Exim) id 1oIb5O-004q5v-BH
+ for samba-technical@lists.samba.org; Mon, 01 Aug 2022 19:28:20 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 924E534F3A;
+ Mon,  1 Aug 2022 19:09:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1659380981; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=6+JrXqJEltXUWg9QjhAUhtfwUJNVGIb39jMoxht6RQM=;
+ b=g+/T2tb8ECWrIXttXqfIOPuOQ/irhfulZq3n7iOZUWwwRKqBuQjwAzpHXZDuI87dZ9JpL7
+ MQ0NFg+feKxIrjvc5VkXOQAropkUm3kMlzJUEZ/yqksYFxadQOabZFsbVR9Kv4Eu6WTIzb
+ jxAqRYSA9hybHk7OY8kDiCz/MBRYRaE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1659380981;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=6+JrXqJEltXUWg9QjhAUhtfwUJNVGIb39jMoxht6RQM=;
+ b=swMNRBGXCXuFqp0p3KYlFXyvgSQS8uGzTGMNcaRFHfexdMFcGZqhO6+UAHLFhOEoJsZ19s
+ ie2pavcJ2UiRYiAQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0DC4613AAE;
+ Mon,  1 Aug 2022 19:09:40 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id AeHtL/Qk6GJ5SgAAMHmgww
+ (envelope-from <ematsumiya@suse.de>); Mon, 01 Aug 2022 19:09:40 +0000
+To: linux-cifs@vger.kernel.org
+Subject: [RFC PATCH 0/3] Rename "cifs" module to "smbfs"
+Date: Mon,  1 Aug 2022 16:09:30 -0300
+Message-Id: <20220801190933.27197-1-ematsumiya@suse.de>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <587ebe9d-3f91-7389-5ad1-c6d96e435b99@msgid.tls.msk.ru>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,36 +68,221 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Enzo Matsumiya via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Enzo Matsumiya <ematsumiya@suse.de>
+Cc: nspmangalore@gmail.com, pc@cjr.nz, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, pshilovsky@samba.org, tom@talpey.com,
+ smfrench@gmail.com, linux-fsdevel@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Aug 01, 2022 at 05:35:15PM +0300, Michael Tokarev via samba-technical wrote:
->Hi!
->
->Is there a way, after successful build of samba source, to run just selected tests
->without running whole testsuite, *and* without (re)building everything with the
->--enable-selftest option?
->
->Many tests do not require this option to be enabled. For a very simple example,
->consider lib/ldb/ tests - when ldb is built from its own separate source
->tarball, it's easy to run its tests. But when it is built as part of whole samba
->source, an attempt to run ldb tests - even by providing the right test selection -
->still fails due to main samba wscript checking if --enable-selftest has been enabled.
->
->In Debian we used to build libldb from its own source, and running a testsuite there
->has been useful. But now we build it from main samba source tree and we can't run
->the testsuite anymore.
->
->Many more other tests can be useful without --enable-selftest too.
->
->I'm about to patch wscript to omit checks for --enable-selftest options in wscripts..
+Hi,
 
-make test TESTS=(wildcard test name)
+As part of the ongoing effort to remove the "cifs" nomenclature from the
+Linux SMB client, I'm proposing the rename of the module to "smbfs".
 
-for example, to test only the SMB raw.streams tests:
+As it's widely known, CIFS is associated to SMB1.0, which, in turn, is
+associated with the security issues it presented in the past. Using
+"SMBFS" makes clear what's the protocol in use for outsiders, but also
+unties it from any particular protocol version. It also fits in the
+already existing "fs/smbfs_common" and "fs/ksmbd" naming scheme.
 
-make test TESTS=raw.stream
+This short patch series only changes directory names and includes/ifdefs in
+headers and source code, and updates docs to reflect the rename. Other
+than that, no source code/functionality is modified (WIP though).
+
+Patch 1/3: effectively changes the module name to "smbfs" and create a
+	   "cifs" module alias to maintain compatibility (a warning
+	   should be added to indicate the complete removal/isolation of
+	   CIFS/SMB1.0 code).
+Patch 2/3: rename the source-code directory to align with the new module
+	   name
+Patch 3/3: update documentation references to "fs/cifs" or "cifs.ko" or
+	   "cifs module" to use the new name
+
+Enzo Matsumiya (3):
+  cifs: change module name to "smbfs.ko"
+  smbfs: rename directory "fs/cifs" -> "fs/smbfs"
+  smbfs: update doc references
+
+ Documentation/admin-guide/index.rst           |   2 +-
+ .../admin-guide/{cifs => smbfs}/authors.rst   |   0
+ .../admin-guide/{cifs => smbfs}/changes.rst   |   4 +-
+ .../admin-guide/{cifs => smbfs}/index.rst     |   0
+ .../{cifs => smbfs}/introduction.rst          |   0
+ .../admin-guide/{cifs => smbfs}/todo.rst      |  12 +-
+ .../admin-guide/{cifs => smbfs}/usage.rst     | 168 +++++++++---------
+ .../{cifs => smbfs}/winucase_convert.pl       |   0
+ Documentation/filesystems/index.rst           |   2 +-
+ .../filesystems/{cifs => smbfs}/cifsroot.rst  |  14 +-
+ .../filesystems/{cifs => smbfs}/index.rst     |   0
+ .../filesystems/{cifs => smbfs}/ksmbd.rst     |   2 +-
+ Documentation/networking/dns_resolver.rst     |   2 +-
+ .../translations/zh_CN/admin-guide/index.rst  |   2 +-
+ .../translations/zh_TW/admin-guide/index.rst  |   2 +-
+ fs/Kconfig                                    |   6 +-
+ fs/Makefile                                   |   2 +-
+ fs/cifs/Makefile                              |  34 ----
+ fs/{cifs => smbfs}/Kconfig                    | 108 +++++------
+ fs/smbfs/Makefile                             |  34 ++++
+ fs/{cifs => smbfs}/asn1.c                     |   0
+ fs/{cifs => smbfs}/cifs_debug.c               |  72 ++++----
+ fs/{cifs => smbfs}/cifs_debug.h               |   4 +-
+ fs/{cifs => smbfs}/cifs_dfs_ref.c             |   2 +-
+ fs/{cifs => smbfs}/cifs_fs_sb.h               |   0
+ fs/{cifs => smbfs}/cifs_ioctl.h               |   0
+ fs/{cifs => smbfs}/cifs_spnego.c              |   4 +-
+ fs/{cifs => smbfs}/cifs_spnego.h              |   0
+ .../cifs_spnego_negtokeninit.asn1             |   0
+ fs/{cifs => smbfs}/cifs_swn.c                 |   0
+ fs/{cifs => smbfs}/cifs_swn.h                 |   4 +-
+ fs/{cifs => smbfs}/cifs_unicode.c             |   0
+ fs/{cifs => smbfs}/cifs_unicode.h             |   0
+ fs/{cifs => smbfs}/cifs_uniupr.h              |   0
+ fs/{cifs => smbfs}/cifsacl.c                  |   6 +-
+ fs/{cifs => smbfs}/cifsacl.h                  |   0
+ fs/{cifs => smbfs}/cifsencrypt.c              |   0
+ fs/{cifs => smbfs}/cifsglob.h                 |  26 +--
+ fs/{cifs => smbfs}/cifspdu.h                  |   6 +-
+ fs/{cifs => smbfs}/cifsproto.h                |  10 +-
+ fs/{cifs => smbfs}/cifsroot.c                 |   0
+ fs/{cifs => smbfs}/cifssmb.c                  |  14 +-
+ fs/{cifs => smbfs}/connect.c                  |  36 ++--
+ fs/{cifs/cifsfs.c => smbfs/core.c}            |  49 ++---
+ fs/{cifs => smbfs}/dfs_cache.c                |   2 +-
+ fs/{cifs => smbfs}/dfs_cache.h                |   0
+ fs/{cifs => smbfs}/dir.c                      |   2 +-
+ fs/{cifs => smbfs}/dns_resolve.c              |   0
+ fs/{cifs => smbfs}/dns_resolve.h              |   0
+ fs/{cifs => smbfs}/export.c                   |   8 +-
+ fs/{cifs => smbfs}/file.c                     |  16 +-
+ fs/{cifs => smbfs}/fs_context.c               |  20 +--
+ fs/{cifs => smbfs}/fs_context.h               |   0
+ fs/{cifs => smbfs}/fscache.c                  |   0
+ fs/{cifs => smbfs}/fscache.h                  |   6 +-
+ fs/{cifs => smbfs}/inode.c                    |  10 +-
+ fs/{cifs => smbfs}/ioctl.c                    |   6 +-
+ fs/{cifs => smbfs}/link.c                     |   2 +-
+ fs/{cifs => smbfs}/misc.c                     |  14 +-
+ fs/{cifs => smbfs}/netlink.c                  |   0
+ fs/{cifs => smbfs}/netlink.h                  |   0
+ fs/{cifs => smbfs}/netmisc.c                  |   2 +-
+ fs/{cifs => smbfs}/nterr.c                    |   0
+ fs/{cifs => smbfs}/nterr.h                    |   0
+ fs/{cifs => smbfs}/ntlmssp.h                  |   2 +-
+ fs/{cifs => smbfs}/readdir.c                  |   4 +-
+ fs/{cifs => smbfs}/rfc1002pdu.h               |   0
+ fs/{cifs => smbfs}/sess.c                     |  10 +-
+ fs/{cifs => smbfs}/smb1ops.c                  |   4 +-
+ fs/{cifs => smbfs}/smb2file.c                 |   2 +-
+ fs/{cifs => smbfs}/smb2glob.h                 |   0
+ fs/{cifs => smbfs}/smb2inode.c                |   2 +-
+ fs/{cifs => smbfs}/smb2maperror.c             |   0
+ fs/{cifs => smbfs}/smb2misc.c                 |   0
+ fs/{cifs => smbfs}/smb2ops.c                  |  32 ++--
+ fs/{cifs => smbfs}/smb2pdu.c                  |  22 +--
+ fs/{cifs => smbfs}/smb2pdu.h                  |   0
+ fs/{cifs => smbfs}/smb2proto.h                |   0
+ fs/{cifs => smbfs}/smb2status.h               |   0
+ fs/{cifs => smbfs}/smb2transport.c            |   2 +-
+ fs/{cifs => smbfs}/smbdirect.c                |   0
+ fs/{cifs => smbfs}/smbdirect.h                |   2 +-
+ fs/{cifs => smbfs}/smbencrypt.c               |   0
+ fs/{cifs => smbfs}/smberr.h                   |   0
+ fs/{cifs/cifsfs.h => smbfs/smbfs.h}           |  12 +-
+ fs/{cifs => smbfs}/trace.c                    |   0
+ fs/{cifs => smbfs}/trace.h                    |   0
+ fs/{cifs => smbfs}/transport.c                |   4 +-
+ fs/{cifs => smbfs}/unc.c                      |   0
+ fs/{cifs => smbfs}/winucase.c                 |   0
+ fs/{cifs => smbfs}/xattr.c                    |  18 +-
+ 91 files changed, 414 insertions(+), 417 deletions(-)
+ rename Documentation/admin-guide/{cifs => smbfs}/authors.rst (100%)
+ rename Documentation/admin-guide/{cifs => smbfs}/changes.rst (73%)
+ rename Documentation/admin-guide/{cifs => smbfs}/index.rst (100%)
+ rename Documentation/admin-guide/{cifs => smbfs}/introduction.rst (100%)
+ rename Documentation/admin-guide/{cifs => smbfs}/todo.rst (95%)
+ rename Documentation/admin-guide/{cifs => smbfs}/usage.rst (87%)
+ rename Documentation/admin-guide/{cifs => smbfs}/winucase_convert.pl (100%)
+ rename Documentation/filesystems/{cifs => smbfs}/cifsroot.rst (85%)
+ rename Documentation/filesystems/{cifs => smbfs}/index.rst (100%)
+ rename Documentation/filesystems/{cifs => smbfs}/ksmbd.rst (99%)
+ delete mode 100644 fs/cifs/Makefile
+ rename fs/{cifs => smbfs}/Kconfig (72%)
+ create mode 100644 fs/smbfs/Makefile
+ rename fs/{cifs => smbfs}/asn1.c (100%)
+ rename fs/{cifs => smbfs}/cifs_debug.c (96%)
+ rename fs/{cifs => smbfs}/cifs_debug.h (98%)
+ rename fs/{cifs => smbfs}/cifs_dfs_ref.c (99%)
+ rename fs/{cifs => smbfs}/cifs_fs_sb.h (100%)
+ rename fs/{cifs => smbfs}/cifs_ioctl.h (100%)
+ rename fs/{cifs => smbfs}/cifs_spnego.c (98%)
+ rename fs/{cifs => smbfs}/cifs_spnego.h (100%)
+ rename fs/{cifs => smbfs}/cifs_spnego_negtokeninit.asn1 (100%)
+ rename fs/{cifs => smbfs}/cifs_swn.c (100%)
+ rename fs/{cifs => smbfs}/cifs_swn.h (95%)
+ rename fs/{cifs => smbfs}/cifs_unicode.c (100%)
+ rename fs/{cifs => smbfs}/cifs_unicode.h (100%)
+ rename fs/{cifs => smbfs}/cifs_uniupr.h (100%)
+ rename fs/{cifs => smbfs}/cifsacl.c (99%)
+ rename fs/{cifs => smbfs}/cifsacl.h (100%)
+ rename fs/{cifs => smbfs}/cifsencrypt.c (100%)
+ rename fs/{cifs => smbfs}/cifsglob.h (99%)
+ rename fs/{cifs => smbfs}/cifspdu.h (99%)
+ rename fs/{cifs => smbfs}/cifsproto.h (99%)
+ rename fs/{cifs => smbfs}/cifsroot.c (100%)
+ rename fs/{cifs => smbfs}/cifssmb.c (99%)
+ rename fs/{cifs => smbfs}/connect.c (99%)
+ rename fs/{cifs/cifsfs.c => smbfs/core.c} (98%)
+ rename fs/{cifs => smbfs}/dfs_cache.c (99%)
+ rename fs/{cifs => smbfs}/dfs_cache.h (100%)
+ rename fs/{cifs => smbfs}/dir.c (99%)
+ rename fs/{cifs => smbfs}/dns_resolve.c (100%)
+ rename fs/{cifs => smbfs}/dns_resolve.h (100%)
+ rename fs/{cifs => smbfs}/export.c (91%)
+ rename fs/{cifs => smbfs}/file.c (99%)
+ rename fs/{cifs => smbfs}/fs_context.c (99%)
+ rename fs/{cifs => smbfs}/fs_context.h (100%)
+ rename fs/{cifs => smbfs}/fscache.c (100%)
+ rename fs/{cifs => smbfs}/fscache.h (98%)
+ rename fs/{cifs => smbfs}/inode.c (99%)
+ rename fs/{cifs => smbfs}/ioctl.c (99%)
+ rename fs/{cifs => smbfs}/link.c (99%)
+ rename fs/{cifs => smbfs}/misc.c (99%)
+ rename fs/{cifs => smbfs}/netlink.c (100%)
+ rename fs/{cifs => smbfs}/netlink.h (100%)
+ rename fs/{cifs => smbfs}/netmisc.c (99%)
+ rename fs/{cifs => smbfs}/nterr.c (100%)
+ rename fs/{cifs => smbfs}/nterr.h (100%)
+ rename fs/{cifs => smbfs}/ntlmssp.h (98%)
+ rename fs/{cifs => smbfs}/readdir.c (99%)
+ rename fs/{cifs => smbfs}/rfc1002pdu.h (100%)
+ rename fs/{cifs => smbfs}/sess.c (99%)
+ rename fs/{cifs => smbfs}/smb1ops.c (99%)
+ rename fs/{cifs => smbfs}/smb2file.c (99%)
+ rename fs/{cifs => smbfs}/smb2glob.h (100%)
+ rename fs/{cifs => smbfs}/smb2inode.c (99%)
+ rename fs/{cifs => smbfs}/smb2maperror.c (100%)
+ rename fs/{cifs => smbfs}/smb2misc.c (100%)
+ rename fs/{cifs => smbfs}/smb2ops.c (99%)
+ rename fs/{cifs => smbfs}/smb2pdu.c (99%)
+ rename fs/{cifs => smbfs}/smb2pdu.h (100%)
+ rename fs/{cifs => smbfs}/smb2proto.h (100%)
+ rename fs/{cifs => smbfs}/smb2status.h (100%)
+ rename fs/{cifs => smbfs}/smb2transport.c (99%)
+ rename fs/{cifs => smbfs}/smbdirect.c (100%)
+ rename fs/{cifs => smbfs}/smbdirect.h (99%)
+ rename fs/{cifs => smbfs}/smbencrypt.c (100%)
+ rename fs/{cifs => smbfs}/smberr.h (100%)
+ rename fs/{cifs/cifsfs.h => smbfs/smbfs.h} (97%)
+ rename fs/{cifs => smbfs}/trace.c (100%)
+ rename fs/{cifs => smbfs}/trace.h (100%)
+ rename fs/{cifs => smbfs}/transport.c (99%)
+ rename fs/{cifs => smbfs}/unc.c (100%)
+ rename fs/{cifs => smbfs}/winucase.c (100%)
+ rename fs/{cifs => smbfs}/xattr.c (98%)
+
+-- 
+2.35.3
+
 
