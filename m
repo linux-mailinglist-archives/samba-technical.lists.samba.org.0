@@ -2,67 +2,64 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80ED9588294
-	for <lists+samba-technical@lfdr.de>; Tue,  2 Aug 2022 21:36:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DB5A588355
+	for <lists+samba-technical@lfdr.de>; Tue,  2 Aug 2022 23:16:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=wKwulhIx515tBs9KarM3vkMSrD1Pc01HY8nx9DrB6Ko=; b=V4eo4Yxtz7QoLKMYL5dnBu+n7Z
-	3dhqHKCueXeRy4nPLwm2fRWhDOir7K1zjh2JdI3Qwl8QmOqcqomnR6zPjnBbXgd3tLdN1Fx32s4VQ
-	D2VgJ8mI/qyQCbLMreOdyukj1dMn8J85mtaqOd/02dBHUkhtYvjyaW9SSf+/Y7z6BQDEGLB/CnZ40
-	kDRyp+lfVVPMkqA1DkVLWQZoYruOOyVRaXAiPVG7I53kWgrOYpha7RttMaHPExxsqE2L558OBrRPl
-	30BV+Dvexcu8tSMPvlMlHB0/arW14b1AD0DiLTmMhpO4n0bU0gRpfJ9ny8IMBxkAi9pdyBZGp6j+i
-	SWaxY+Cg==;
-Received: from ip6-localhost ([::1]:49478 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=4xaiOwOgJrHiZuJtU+1q9cwLcyPfoad6YXuqRYPmA6g=; b=GSSUwEq3sqIfcmVoJF2s2fpeKP
+	6+S+YML7O7RMQ0TRYG3cBFdy0PgViThwbbNs8puSmtqqr8r56c8pUw0wbk9sKfXT3DbxmW3utyH2A
+	87OjFt0v9+CqYp++wpP3zXJ5iCU46LicSZRko3hNnFnEHXbxXRFRWlLni+BE3ChMXh012badexwkW
+	rNdIxm++xD/rPQIsWEDfDimFk7GXHrWyHIwloF3sUQNoCbaHNwlDHuwGm/RPxRX3unDgEiSPjnWhO
+	qX8wE1+GfSK8O58l70Vby0E+3Bjj1uNwWEELTL3ZVQU+a21xr4aavg22SpyeYwawLTtTnoQ7xAGXL
+	MimmWpUw==;
+Received: from ip6-localhost ([::1]:51042 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oIxgu-0052d8-MM; Tue, 02 Aug 2022 19:36:32 +0000
-Received: from smtp-out1.suse.de ([195.135.220.28]:37416) 
+	id 1oIzEq-0053V5-V0; Tue, 02 Aug 2022 21:15:41 +0000
+Received: from mail-qt1-x831.google.com ([2607:f8b0:4864:20::831]:43792) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oIxgo-0052cl-CN
- for samba-technical@lists.samba.org; Tue, 02 Aug 2022 19:36:29 +0000
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id D192A3874B;
- Tue,  2 Aug 2022 19:36:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1659468983; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=wKwulhIx515tBs9KarM3vkMSrD1Pc01HY8nx9DrB6Ko=;
- b=lIxgGmgiJjHkY4CpdyLYOyrlEZr6WXWjSxUXwr7T3l6G3upE9bl6mkc06qVICbyJV25D5j
- NN6IMBnVJ2ikFzF6e3VxiEeAurK54PYq8864I4xh6dLh4NxwezB7QvuJh7TqP2aaMbzwUo
- 7jVXeZ1t2Lcu0SuoH5FUysm4N4xDEv4=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1659468983;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=wKwulhIx515tBs9KarM3vkMSrD1Pc01HY8nx9DrB6Ko=;
- b=NQfgJ+ZFnqEBYm9kVtWA/ahzEUqSBoH97VXJ/OSSWF6JgIYf9eKq87vwjCYHFcq5dZwe0B
- VtNvgOR948PO1lAw==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4438713A8E;
- Tue,  2 Aug 2022 19:36:23 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id qliOAbd86WItbAAAMHmgww
- (envelope-from <ematsumiya@suse.de>); Tue, 02 Aug 2022 19:36:23 +0000
-Date: Tue, 2 Aug 2022 16:36:20 -0300
-To: Jeff Layton <jlayton@kernel.org>
-Subject: Re: [RFC PATCH 0/3] Rename "cifs" module to "smbfs"
-Message-ID: <20220802193620.dyvt5qiszm2pobsr@cyberdelia>
-References: <20220801190933.27197-1-ematsumiya@suse.de>
- <c05f4fc668fa97e737758ab03030d7170c0edbd9.camel@kernel.org>
+ (Exim) id 1oIzEj-0053Uv-SM
+ for samba-technical@lists.samba.org; Tue, 02 Aug 2022 21:15:37 +0000
+Received: by mail-qt1-x831.google.com with SMTP id a15so1529681qto.10
+ for <samba-technical@lists.samba.org>; Tue, 02 Aug 2022 14:15:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mattgrant-net-nz.20210112.gappssmtp.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+ bh=QuTfyJTyyo7X/tFJZb7+/bdbzCr31LihNeLDoI+fSiE=;
+ b=LCnavnbJtCJAd7LEb1+BkHpZdSzbKQloyc2QMso2FMUB9e/Ebi6zRMPK94e/CNVhl8
+ mwhy3oe2zKymG8/rzG03dB3QuTaAh+j/0m4VAuBLfKaa9fAoJY6XCQ9I9j1/7ChsHAPe
+ LrFnOV9IlbmVda1uWZsXpGsfxkEeWf0ZGxBYV3LyFdm2Nzr4riT8klHrpJStBjYBOJ/I
+ kaB9skJIB0MdGaHvrNR1GuQLjyMnHN/4PKyFSm++a9T4RFt9f8UFDbCTgS3DCxI2MLAN
+ 7k24bbegnoxXvMXznfXL5RKH1qcmKiSsrMQCMxrUvXb1hmpBucaYWUd+bRL7TBXJl4XI
+ ZnzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to;
+ bh=QuTfyJTyyo7X/tFJZb7+/bdbzCr31LihNeLDoI+fSiE=;
+ b=nJdAj8I/108MYxWBbcZpv1R8tZF/O9eE/k4rzeLv0U1bafVJKDHrDCF6MsiPML9RZl
+ wreIsnn0c1+uvp1u9ApL+uz+uUZxvrskQf7S5fRTen/gLGMBgUM6UzbgfDEnXc9lMvlL
+ lTbKHldUdm7G2aZ4LEE+tNDzOySYCmSRpapLtot9vNg5Rrz37m5q0CE5OvTN4GzVxETS
+ UD69AbW5h6wKGb0HIb5b3dHwIjHwGo5/JVDKLMcR3iTjVnPvMLhC7QkAERgQOaeYkPCq
+ mN+ufu3sJv8QYtjAXXay8ALv5Spz85zkqYBOpg0tVUeOOQRDFD8EcGkZZvtifbw5x07M
+ zpKw==
+X-Gm-Message-State: AJIora+5nLTqO6L//FlkVQDM02sj3wdQTvS7p8gWiG6qUqA8CxwkkcXK
+ hh1E4y6DED0znOfRa0Pa9Xa37qoFYg6abNVbateN/A==
+X-Google-Smtp-Source: AGRyM1sdb10TsFsgOokcTovbdynhr6xW5flx8GN2jIAOmDzQof8GL5Veheo84eB60EF2c3hIKAiXpvH05mKgeT/PgYU=
+X-Received: by 2002:ac8:58c2:0:b0:31f:8a2:1bb2 with SMTP id
+ u2-20020ac858c2000000b0031f08a21bb2mr19388821qta.121.1659474926101; Tue, 02
+ Aug 2022 14:15:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <c05f4fc668fa97e737758ab03030d7170c0edbd9.camel@kernel.org>
+References: <CAHA-KoMtF8x6mRHoyXuv4oeXo+1KKbVx=AVwgPO6YHsYvpW-EQ@mail.gmail.com>
+In-Reply-To: <CAHA-KoMtF8x6mRHoyXuv4oeXo+1KKbVx=AVwgPO6YHsYvpW-EQ@mail.gmail.com>
+Date: Wed, 3 Aug 2022 09:15:15 +1200
+Message-ID: <CAHA-KoME1TZeUmnRks5mQg6nVG3+eUvaJJ5SnE=YUA16YHvVsw@mail.gmail.com>
+Subject: Re: Hung up on writing Unit tests for dynamic DNS update from
+ different source addresses
+To: "asn@samba.org" <asn@samba.org>,
+ samba-technical <samba-technical@lists.samba.org>, 
+ Joseph Sutton <josephsutton@catalyst.net.nz>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,87 +73,54 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Enzo Matsumiya via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Enzo Matsumiya <ematsumiya@suse.de>
-Cc: nspmangalore@gmail.com, linux-cifs@vger.kernel.org, pc@cjr.nz,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- pshilovsky@samba.org, tom@talpey.com, smfrench@gmail.com,
- linux-fsdevel@vger.kernel.org
+From: Matt Grant via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Matt Grant <matt@mattgrant.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 08/02, Jeff Layton wrote:
->On Mon, 2022-08-01 at 16:09 -0300, Enzo Matsumiya wrote:
->> Hi,
->>
->> As part of the ongoing effort to remove the "cifs" nomenclature from the
->> Linux SMB client, I'm proposing the rename of the module to "smbfs".
->>
->> As it's widely known, CIFS is associated to SMB1.0, which, in turn, is
->> associated with the security issues it presented in the past. Using
->> "SMBFS" makes clear what's the protocol in use for outsiders, but also
->> unties it from any particular protocol version. It also fits in the
->> already existing "fs/smbfs_common" and "fs/ksmbd" naming scheme.
->>
->> This short patch series only changes directory names and includes/ifdefs=
- in
->> headers and source code, and updates docs to reflect the rename. Other
->> than that, no source code/functionality is modified (WIP though).
->>
->> Patch 1/3: effectively changes the module name to "smbfs" and create a
->> 	   "cifs" module alias to maintain compatibility (a warning
->> 	   should be added to indicate the complete removal/isolation of
->> 	   CIFS/SMB1.0 code).
->> Patch 2/3: rename the source-code directory to align with the new module
->> 	   name
->> Patch 3/3: update documentation references to "fs/cifs" or "cifs.ko" or
->> 	   "cifs module" to use the new name
->>
->> Enzo Matsumiya (3):
->>   cifs: change module name to "smbfs.ko"
->>   smbfs: rename directory "fs/cifs" -> "fs/smbfs"
->>   smbfs: update doc references
->> ...
+Hi!
+
+Figured it out, after a bit of digging.
+
+Can't use the test process itself as need to
+set SOCKET_WRAPPER_DEFAULT_IFACE to say 251 which sets the source IP
+numbers to 10.53.57.251 and fd00::5357:5fxx.  Or maybe I could try the
+loopback source address of ::1 for example?
+
+Will call nsupdate (needed for testing samba_dnsupdate) via Python
+subprocess module to do the work.  Bit messy, but there is NO way to add
+extra IP numbers to the current socket_wrapper interface context that I can
+see from its man page.
+
+Thanks guys!  Will get this done.
+
+Best Regards,
+
+Matt Grant
+
+On Tue, 2 Aug 2022 at 21:12, Matt Grant <matt@mattgrant.net.nz> wrote:
+
+> Hi!
 >
->Why do this? My inclination is to say NAK here.
+> Code as it is up in merge request:
+> https://gitlab.com/samba-team/samba/-/merge_requests/2271
 >
->This seems like a lot of change for not a lot of benefit. Renaming the
->directory like this pretty much guarantees that backporting patches
->after this change to kernels that existed before it will be very
->difficult.
-
-Hi Jeff, yes that's a big concern that I've discussed internally with my
-team as well, since we'll also suffer from those future backports.
-
-But, as stated in the commit message, and from what I gathered from
-Steve, it has been an ongoing wish to have the "cifs" name no longer
-associated with a module handling SMB2.0 and SMB3.0, as the name brings
-back old bad memories for several users.
-
-There really is no functional benefit for this change, and I have no
-argument against that.
-
->Also, bear in mind that there used to be an smbfs in the kernel that
->predated cifs.ko. That was removed ~2010 though, which is long enough
->ago that it shouldn't produce conflicts in currently shipping releases.=A0
-
-Yes, I was aware of this before sending v1, and it got raised again in
-https://lore.kernel.org/all/20220802135201.4vm36drd5mp57nvv@cyberdelia/
-
-I have no experience on what kind of issues/problems could arise of
-that, aside from the git commit history being weird. If you ever seen
-any problems with that happening, please do share.
-
->Jeff Layton <jlayton@kernel.org>
-
-I sent a v2 with a new "fs/smb" directory name, but kept "smbfs" as the
-module name.
-
-Sorry I didn't reply to you before that, I got confused as the thread
-replies all went to different folders in my mailbox.
-
-
-Cheers,
-
-Enzo
-
+> It's come a long way.  Been cleaned up a lot, and just completing the test
+> suite.  Need to test
+> denying DNS update by IP source address, and updates authed by IP source
+> address.
+>
+> Have managed to update dns_base.py to optionally bind to a source IP
+> address for a query, but can't figure how to
+> set SOCKET_WRAPPER_DEFAULT_IFACE for the test/special test suite process
+> socket wrapper stuff.  Tis getting quite seeing double inside
+> selftest/target/Samba4.pm and source4/selftest/tests.py....
+>
+> Could some one please lay out a map for me how to proceed with this, or
+> just help me to give it this extra push with this to get this over the hump
+> and accepted for merging?
+>
+> Thank you!
+>
+> Matt Grant
+>
