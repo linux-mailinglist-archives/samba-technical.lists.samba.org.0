@@ -2,51 +2,33 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BA6B5907EF
-	for <lists+samba-technical@lfdr.de>; Thu, 11 Aug 2022 23:16:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FD5A5931B8
+	for <lists+samba-technical@lfdr.de>; Mon, 15 Aug 2022 17:23:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=PYXTE58EuokZU+z2UHNf9Q+RbopgDavG6L73ydditw4=; b=ZbGquRJHzW+pzm58SiGTPF0EBs
-	SA3+rtxY/ZroqhIaYOnzKT/ibKYVwdgASUSUG5/KctBZGXK9VkArCrPaWpSlVM3jL11/FQNmIjw6X
-	Xuw8ABxq3b4c+azKojKFADqJ7SdQccPFfZk432Gb14C24Kr63wj6SvN8pYk8Lt7cQ5WKuzLp1lPz3
-	l5TLKYFTOPm9FYPn/C+ZxoBzE75mIwVWFMvj2r4LQA7Wt0HT1+k+zHH+ifwjCrykMzJLtwbUvH6eW
-	5WgB6EqCfrqgNRBdQYmVgXXuvp0bN1du17qVw2EzbBFis0IPjOdphOSsd1QyNBBJFmzsmJhmmLPOy
-	rUAj2DWg==;
-Received: from ip6-localhost ([::1]:57742 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=0st8YVUaSQr2/Wkfn8skH4jl++RaUk5/QfDmfHj1q44=; b=wj21WrrvUnhFvhDZQ6jBfOJNds
+	Ce7GF/oYvJ6N6JsSL/b5bU9psxK/fntp8pgdBgf1S6hJEMOqoAEHssrwBBDcp7QW+kPHU45Fe02eB
+	9uI8q84KC7xxukVM+p+G+H+6T+H+YfmICm30bHj614R+gwqYYmHuJUn3wAIDgFVFvkoUEM6nyNYu2
+	Qncsc/g1FmM5RSvPUe3Z9Az6EqetDGGT1gsdtev8uCSnHwmYCjR3z2/MrqaZgTZ8uR6VoTcFWiRO4
+	O78QaO4zrw8QIJoH1d9JKi/1XGlbEYKh4WixxA/en+MCpV0AHQ3K6r7y0VSROfQrttjyd04SfyhlQ
+	9zCco+/g==;
+Received: from ip6-localhost ([::1]:45928 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oMFWo-006xrz-9F; Thu, 11 Aug 2022 21:15:42 +0000
-Received: from mail-qk1-f170.google.com ([209.85.222.170]:37471) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oMFWh-006xrm-UI; Thu, 11 Aug 2022 21:15:39 +0000
-Received: by mail-qk1-f170.google.com with SMTP id v14so8901603qkf.4;
- Thu, 11 Aug 2022 14:15:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc;
- bh=PYXTE58EuokZU+z2UHNf9Q+RbopgDavG6L73ydditw4=;
- b=GD5CxqLyMm244m8ZZjxAiOZD3Hc5EdTtd8CLF17jgrgYzn5Yt8vL3TwxIoEkIZvm3N
- cAQCg9zmPJ1aD1ryu7sOnVkiNkltxqvVOMioj33EoyCIZoZNQFg9MJM3Fex1aAwoug6P
- ZFALZ4b4SFAnuimp8ZtK8ucQASKI8OyGM2zuLWtN8oJ/VvX1/ENYZXA77QbMQgzP3xPr
- rxP2SAM7tX8hD0SzY45/lMMjyat3CaOda3zaFvKOnx2xQxHrxDROGtUWmdjOtIBGYn7S
- eS7qrBAjHDZkBqakV7kHkQS2Jq99ROCzHk66G28keNUYnSkRtnsjz+yk3JRDdCBA9aXl
- c0FQ==
-X-Gm-Message-State: ACgBeo0YkaIR8JMXamFUdJRBgphmjvpnMitzJBRULp+q+9ncV9/wgHQi
- CAUIw/tGlzr3TZW6uBNGWTjZn481tvnlE7X58Q==
-X-Google-Smtp-Source: AA6agR4ePdidHDEOrpbJHnrPgIJip/gYVbD3Yqt5nkuBLsKXKH2vXcyVkBbKs7NxdzWbNWNPgb1GBbfHygD5OJbgQdQ=
-X-Received: by 2002:a05:620a:2589:b0:6ab:91fd:3f7 with SMTP id
- x9-20020a05620a258900b006ab91fd03f7mr760273qko.104.1660252525388; Thu, 11 Aug
- 2022 14:15:25 -0700 (PDT)
+	id 1oNbvE-0006Bg-FR; Mon, 15 Aug 2022 15:22:32 +0000
+Received: from [104.200.28.160] (port=45104 helo=dup2.asynchrono.us) 
+ by hr1.samba.org with esmtp (Exim) id 1oNbv6-0006BX-2w
+ for samba-technical@lists.samba.org; Mon, 15 Aug 2022 15:22:30 +0000
+Received: from edfu.localnet (c-73-114-31-46.hsd1.ma.comcast.net
+ [73.114.31.46])
+ by dup2.asynchrono.us (Postfix) with ESMTPSA id B83A01508
+ for <samba-technical@lists.samba.org>; Mon, 15 Aug 2022 15:06:05 +0000 (UTC)
+To: samba-technical@lists.samba.org
+Subject: WHATSNEW: add section for new smbconf python api
+Date: Mon, 15 Aug 2022 11:06:05 -0400
+Message-ID: <11549021.eNJFYEL58v@edfu>
 MIME-Version: 1.0
-Date: Thu, 11 Aug 2022 14:15:14 -0700
-Message-ID: <CAKywueTujSTFAv5B=o2t6zjNdyVdVV6PaYQov-XR7duYXrs5tA@mail.gmail.com>
-Subject: [ANNOUNCE] cifs-utils release 7.0 ready for download
-To: linux-cifs <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>, samba@lists.samba.org, 
- Steve French <smfrench@gmail.com>, Jacob Shivers <jshivers@redhat.com>, 
- Alexander Bokovoy <ab@samba.org>, Michael Weiser <michael.weiser@atos.net>, 
- Ronnie Sahlberg <lsahlber@redhat.com>, atheik <atteh.mailbox@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/mixed; boundary="nextPart23187184.4csPzL39Zc"
+Content-Transfer-Encoding: 7Bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,40 +42,63 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Pavel Shilovsky via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Pavel Shilovsky <pshilovsky@samba.org>
+From: John Mulligan via samba-technical <samba-technical@lists.samba.org>
+Reply-To: John Mulligan <phlogistonjohn@asynchrono.us>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-New version 7.0 of cifs-utils has been released today.
+This is a multi-part message in MIME format.
 
-It brings GSS-Proxy support which when configured allows unattended
-access to shares (e.g. from batch jobs).
+--nextPart23187184.4csPzL39Zc
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Links
+Sorry for the late update, but here's a patch for WHATSNEW related to the 
+smbconf python APIs I added a few months ago.
 
-webpage: https://wiki.samba.org/index.php/LinuxCIFS_utils
-tarball: https://download.samba.org/pub/linux-cifs/cifs-utils/
-git: git://git.samba.org/cifs-utils.git
-gitweb: http://git.samba.org/?p=cifs-utils.git;a=summary
+Thanks!
+--nextPart23187184.4csPzL39Zc
+Content-Disposition: attachment; filename="0001-WHATSNEW-add-section-for-new-smbconf-python-api.patch"
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/x-patch; charset="UTF-8"; name="0001-WHATSNEW-add-section-for-new-smbconf-python-api.patch"
 
-Detailed list of changes since 6.15 was released:
+From 2b780e1d0c4e1dab6e7441b0b47b34bdf16e25cb Mon Sep 17 00:00:00 2001
+From: John Mulligan <jmulligan@redhat.com>
+Date: Thu, 11 Aug 2022 14:04:27 -0400
+Subject: [PATCH] WHATSNEW: add section for new smbconf python api
 
-3165220 cifs-utils: bump version to 7.0
-7b91873 cifs-utils: don't return uninitialized value in cifs_gss_get_req
-d9f5447 cifs-utils: make GSSAPI usage compatible with Heimdal
-5e5aa50 cifs-utils: work around missing krb5_free_string in Heimdal
-dc60353 fix warnings for -Waddress-of-packed-member
-c4c94ad setcifsacl: fix memory allocation for struct cifs_ace
-4ad2c50 setcifsacl: fix comparison of actions reported by covscan
-9b074db cifs.upcall: remove unused variable and fix syslog message
-2981686 cifs.upcall: Switch to RFC principal type naming
-8a288d6 man-pages: Update cifs.upcall to mention GSS_USE_PROXY
-aeee690 cifs.upcall: fix compiler warning
-e2430c0 cifs.upcall: add gssproxy support
+Signed-off-by: John Mulligan <jmulligan@redhat.com>
+---
+ WHATSNEW.txt | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-Thanks to everyone who contributed to the release!
+diff --git a/WHATSNEW.txt b/WHATSNEW.txt
+index d39748f0587..9bbdf53a76a 100644
+--- a/WHATSNEW.txt
++++ b/WHATSNEW.txt
+@@ -147,6 +147,16 @@ can cause the Kerberos password salt to change.  This means that after
+ *both* an account rename and a password change, only the current
+ password will be recognised for password history purposes.
+ 
++Python API for smbconf
++----------------------
++
++Samba's smbconf library provides a generic frontend to various
++configuration backends (plain text file, registry) as a C library. A
++new Python wrapper, importable as 'samba.smbconf' is available.  An
++additional module, 'samba.samba3.smbconf', is also available to enable
++registry backend support. These libraries allow Python programs to
++read, and optionally write, Samba configuration natively.
++
+ 
+ REMOVED FEATURES
+ ================
+-- 
+2.37.1
 
-Best regards,
-Pavel Shilovsky
+
+--nextPart23187184.4csPzL39Zc--
+
+
+
 
