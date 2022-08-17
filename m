@@ -2,72 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7868759683C
-	for <lists+samba-technical@lfdr.de>; Wed, 17 Aug 2022 06:35:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 90BC1596DDE
+	for <lists+samba-technical@lfdr.de>; Wed, 17 Aug 2022 13:56:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=KCLVroMuBteTYjcy64/ZQKWupRLLTo9ytt0/i79spSg=; b=EByqv4fZoHMT6zkfaSMme0nMkO
-	rpq4Pb93wVKTixgkjKLYgUdo3YA+5+/zOXhW0u5JoHr8zR0WhZhm2/VK8T+Y18oNUZDcodLq/JH2N
-	llgpVQ/5+e+aqWfOI3QyUoji5O6qy/laCaEjCGeti6kiGsQ+N5CsgMIm3YpTNr1TDHY403Ifrb720
-	+POsK4msOAqsxZwQiqdAO919x9Nt2ZaeO24l0LzPmljWHCykYMxUrPUhUYt3VHPLuE1IURmSS5JXy
-	upnnYX+QKS4qbPRISfg0uG0QHUwc4HC6RSSyVtOLWIcP8u/JkvaBWeoSAm0jkBSk8OiygcXHgayYX
-	5TjfoJCw==;
-Received: from ip6-localhost ([::1]:45506 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=5eVl+tmzocwKBtQCIzRay1azYDF8Hx1ar9fi5IPt/cQ=; b=spAsOyo9xld3fgKBX5jFjXJvG/
+	bqe7TQJelGPf4a5sjtG+J311l5GAbcmN7HLB87uZv8yZs2DlH9RzdDmLCVyFYJYhaxgAdT3cCN0bT
+	PhLPxjIrmFa6SG9ArP4yXQUtUuYFJX4JnPplRFvbpynbmFbB3Fh6RbBwyAXq0TVCzBLGpZSSl2YMI
+	zURRf6pzOO4gvhTtul75kVuTx/D6DZruNPPhVUwmqF/MZ9JZ9fE9izI8ibQDj4uOC24GslHBdfFJp
+	S9bu3vb8rcumyNfWKbsYUdFNFhPOyL6BXlGp3TiDe7vyM/YV8COTHwZbdtLMI9JkKJA0iOf9VKjn+
+	rcxEiszA==;
+Received: from ip6-localhost ([::1]:51014 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oOAll-000MLJ-W9; Wed, 17 Aug 2022 04:35:06 +0000
-Received: from mail-qv1-xf2a.google.com ([2607:f8b0:4864:20::f2a]:44741) 
+	id 1oOHef-000RSc-KO; Wed, 17 Aug 2022 11:56:13 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:40486) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oOAlf-000ML7-BU
- for samba-technical@lists.samba.org; Wed, 17 Aug 2022 04:35:03 +0000
-Received: by mail-qv1-xf2a.google.com with SMTP id mk9so9342291qvb.11
- for <samba-technical@lists.samba.org>; Tue, 16 Aug 2022 21:34:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mattgrant-net-nz.20210112.gappssmtp.com; s=20210112;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc; bh=9wDIqY1Zan8rvqHQHn1t8Pi8uT9vpBT85Z/2v3cZudA=;
- b=ybVVIaifTAzF5Tx5mGCYIh5fSg2feIOOMCJ3ir2xNFTS9RNEE6j3NsJhF4SvyIkhlc
- FyR41qL6E8pjzuTbEMP947dAkN0REqP3P/CY/0jns/n4ZeBX58e9bPfIxedUXQFjpVzI
- +7FcWbnFgJ8M3K25f8j/UcKNfhhKzLV1ZtoZBRfSXPUrII4zhsyAaY8orVQ+f3VEvEqO
- TBRoHYoCUxcwHNM8VMaxjh/CHxavpveZ7CL99MkWMg1ID75ZKyYqiYAtHKqap5ttbZS7
- z+HuBK8dZfp0t43tgglOdU6Jcrb/2XPo0goZWiU/SoYaZHnlWoyRBcPm4gKOp1mKbOlP
- tS0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-message-state:from:to:cc;
- bh=9wDIqY1Zan8rvqHQHn1t8Pi8uT9vpBT85Z/2v3cZudA=;
- b=Ww0+kOft2PkhJpWLOBqd25d4kbq59h6jx9ZMZvstf2GtWFZbIFT4391oacwTWXDXtV
- vKOZ2oxJpUbuSiAJOSteQlpRTUR3Cz74YUjyqsVnPTZlx4Pvzr6KKrv7h4grRW6uoDr/
- IEpUVW0+5ejGtly2M5gZbox92yK0d8KZMwV3z+AH07bNdwK7ShiHBjleHzHptbob/Sml
- JCREVGHwdBHqbQoAg/YRpns67fyjWfUuTuY02W4fA+IxrfTnuFccaHGStlEkWsWyKrqT
- mNV+EsrzJlJnSBh3rjY/mjXIhQO2mbSBLAmbJ6+BPuE389n/p+Z+ARIfaDdYoL5cv1N+
- N98g==
-X-Gm-Message-State: ACgBeo3zdx7V4pfuoXH18UvI/d8Q8otb8hABsAKdwCQ0wY0Wg5b+s+yk
- wo+58e1ve95GcIvdLho8fKrj19bzdP7qM/rF1hl8Tw==
-X-Google-Smtp-Source: AA6agR6iap0MN/Haqq5fkMqBxMdghMU0kOU8P9vQjtc0c2zQRfYRLOyJ3/sCxZqM/cLm9XXjx7J1+vlWEYgDIJsK/6c=
-X-Received: by 2002:a05:6214:f6c:b0:476:6e82:7af4 with SMTP id
- iy12-20020a0562140f6c00b004766e827af4mr20709675qvb.129.1660710892981; Tue, 16
- Aug 2022 21:34:52 -0700 (PDT)
+ (Exim) id 1oOHeZ-000RST-9i
+ for samba-technical@lists.samba.org; Wed, 17 Aug 2022 11:56:11 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=5eVl+tmzocwKBtQCIzRay1azYDF8Hx1ar9fi5IPt/cQ=; b=3SUnOFJ+DlsmhS8NdeJnxacHfr
+ dVb9H91tGxU/uuWOFSShVRd6tjDMLHHl1Qy1SnWtfImfCiEnny4oSmQMBzLRlJH9ejtNhPx/ydUds
+ 1nrhiEfqZQf15P/Nu5l1l+u8tomKzxaPpVmF+eppe4k8IhC/K/nxffZ8NovFJe0oSnzr54ODyM7g/
+ R5z8mwplw3u7HqPc2rIA2CZgeOWSk5wu62COFfA4DSFNqxK+GxsopQPwCViCb0+55EonayPHyRq4e
+ pHLBHHk0g2LiB2ieCDtzykuaaQoIdaJbJnQxJeUAfXtOKqWYp4ao3Xv8F1Kc+JXCNkKQXu3AwbDZJ
+ 8Ga0nZ5/+bnDttF5/bANXPU3qDG2ef+aXde3zWkKSaP7J3XlouP3u37EZ2mLdQw+MLlf//e5M2lE8
+ tGDBbVwDXYt1RY5086syLmFCHMUw0MCQXfm8k2U8UbpDMZiSvlNC5MZReX9ligG+lktweeuB3zpq8
+ FuHDBavf/5IHutjeMNMiioDh;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1oOHeY-000XZK-Bj
+ for samba-technical@lists.samba.org; Wed, 17 Aug 2022 11:56:06 +0000
+Content-Type: multipart/mixed; boundary="------------rMQj8JnjEHl1UV0Qt7y0n4pd"
+Message-ID: <686f397f-223c-d7d9-64ad-86f63f2f810f@samba.org>
+Date: Wed, 17 Aug 2022 13:56:05 +0200
 MIME-Version: 1.0
-References: <reply-7437a5432d1d1dd66e01a873476af718@gitlab.com>
- <merge_request_127929163@gitlab.com> <note_1053244139@gitlab.com>
- <note_1055213731@gitlab.com> <note_1055338429@gitlab.com>
- <note_1055412158@gitlab.com>
- <note_1056302555@gitlab.com> <note_1056303456@gitlab.com>
- <note_1056304663@gitlab.com>
- <CAHA-KoMZ+mqdVfzAAWZwuDiLjRtFQr_2wjCSrYnq_fbt2RukAg@mail.gmail.com>
- <CAHA-KoMbp=nyMa2vDeFy5VBJpBtjNYzLetUWTSi-kWkbd5RBgQ@mail.gmail.com>
-In-Reply-To: <CAHA-KoMbp=nyMa2vDeFy5VBJpBtjNYzLetUWTSi-kWkbd5RBgQ@mail.gmail.com>
-Date: Wed, 17 Aug 2022 16:34:41 +1200
-Message-ID: <CAHA-KoN=EbO_fs5XCsAn4K28JhO-0i5by52_cEoa_cHdrnXV9Q@mail.gmail.com>
-Subject: Re: Samba | DNS updates allow/deny for SAMBA_INTERAL dns server.
- (!2271)
-To: "The Samba Team / Samba"
- <incoming+7437a5432d1d1dd66e01a873476af718@incoming.gitlab.com>, 
- samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.12.0
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: [PATCH] WHATSNEW: document new volume serial number smb.conf,
+ parameter
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,94 +56,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Matt Grant via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Matt Grant <matt@mattgrant.net.nz>
+From: Christian Ambach via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christian Ambach <ambi@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Joseph and Douglas!
+This is a multi-part message in MIME format.
+--------------rMQj8JnjEHl1UV0Qt7y0n4pd
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Should be ready for merge, if there are no further issues.  As below, have
-corrected formatting issues.  Please let me know how you go.
+Sorry, forgot to add the new parameter to WHATSNEW while working on it.
 
-Have been through ALL the code and reformatted it, fixed over length lines
-past 80 chars that should not be overlength, and fixed functions in if
-statements etc as per README.Coding.md
 
-BTW, could you please rerun the fuzzing check on dns_update_get_caddr() in
-source4/dns_server/dns_update.c.
+Regards,
+Christian
+--------------rMQj8JnjEHl1UV0Qt7y0n4pd
+Content-Type: text/plain; charset=UTF-8;
+ name="0001-WHATSNEW-document-new-volume-serial-number-smb.conf-.patch"
+Content-Disposition: attachment;
+ filename*0="0001-WHATSNEW-document-new-volume-serial-number-smb.conf-.pa";
+ filename*1="tch"
+Content-Transfer-Encoding: base64
 
-There was a return WERR_OK that should have been return WERR_CONTINUE in
-the default: part of the switch statement on update->rr_type that was
-causing the NULL values in *caddrptr with WERR_OK that you found Douglas.
+RnJvbSA1MDI4MGFkNGY0ZGEzYTYyYzQ2NTg5N2NkZTM3YzVkNzcyYjFhZjg4IE1vbiBTZXAg
+MTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBDaHJpc3RpYW4gQW1iYWNoIDxhbWJpQHNhbWJhLm9y
+Zz4KRGF0ZTogV2VkLCAxNyBBdWcgMjAyMiAxMzoxNzoyOSArMDIwMApTdWJqZWN0OiBbUEFU
+Q0hdIFdIQVRTTkVXOiBkb2N1bWVudCBuZXcgdm9sdW1lIHNlcmlhbCBudW1iZXIgc21iLmNv
+bmYKIHBhcmFtZXRlcgoKU2lnbmVkLW9mZi1ieTogQ2hyaXN0aWFuIEFtYmFjaCA8YW1iaUBz
+YW1iYS5vcmc+Ci0tLQogV0hBVFNORVcudHh0IHwgMSArCiAxIGZpbGUgY2hhbmdlZCwgMSBp
+bnNlcnRpb24oKykKCmRpZmYgLS1naXQgYS9XSEFUU05FVy50eHQgYi9XSEFUU05FVy50eHQK
+aW5kZXggOTg4YzRjNjZlZDguLjYwZTcxZDRmNzllIDEwMDY0NAotLS0gYS9XSEFUU05FVy50
+eHQKKysrIGIvV0hBVFNORVcudHh0CkBAIC0yMDQsNiArMjA0LDcgQEAgc21iLmNvbmYgY2hh
+bmdlcwogICAtLS0tLS0tLS0tLS0tLSAgICAgICAgICAgICAgICAgICAgICAgICAgLS0tLS0t
+LS0tLS0gICAgIC0tLS0tLS0KICAgZG5zIHBvcnQgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIE5ldyBkZWZhdWx0ICAgICA1MwogICBudCBoYXNoIHN0b3JlCQkJCSAgTmV3IHBh
+cmFtZXRlciAgIGFsd2F5cworICB2b2x1bWUgc2VyaWFsIG51bWJlcgkJCSAgTmV3IHBhcmFt
+ZXRlciAgIC0xCiAKIENIQU5HRVMgU0lOQ0UgNC4xNy4wcmMxCiA9PT09PT09PT09PT09PT09
+PT09PT09PQotLSAKMi4xNy4xCgo=
 
-BTW, does lib/util/access.c have any test suite coverage for the
-allow_access*() functions? Looks like it's pretty ancient, pre unit testing
-and I can't find any tests...  The stuff I have done for the
-dns-updates-allow-deny tests may be the ONLY code that exercises it?
+--------------rMQj8JnjEHl1UV0Qt7y0n4pd--
 
-Thank you for all your help,
-
-Matt Grant
-
-On Thu, 11 Aug 2022 at 22:48, Matt Grant <matt@mattgrant.net.nz> wrote:
-
-> Hi Douglas!
->
-> Have included the fuzzer commit you wrote into the merge request, added
-> tag that it was Written-by: Douglas Bagnall <
-> douglas.bagnall@catalyst.net.nz>
->
-> Could you please check that the fuzzer works.  Think I have fixed the
-> problem line in dns_updates_get_caddr() to return WERR_CONTINUE instead o=
-f
-> WERR_OK.
->
-> Thank you for all your help!
->
-> Best Regards,
->
-> Matt Grant
->
-> On Thu, 11 Aug 2022 at 22:00, Matt Grant <matt@mattgrant.net.nz> wrote:
->
->> Hi Douglas!
->> Could you please show me how to include the fuzzer for
->> dns_updates_get_caddr you wrote in the tests for the dns-updates-allow-d=
-eny
->> merge?  I would like to include it so that people won't have too many
->> questions when auditing that code, as it does serve a useful purpose
->> turning a PTR domain lookup into an address for the dns updates rrnet
->> allow/deny filter.
->> Thank you!
->> Matt Grant
->>
->> On Wed, 10 Aug 2022 at 12:37, Douglas Bagnall (@douglasbagnall) <
->> gitlab@mg.gitlab.com> wrote:
->>
->>> Douglas Bagnall <https://gitlab.com/douglasbagnall> commented on a
->>> discussion
->>> <https://gitlab.com/samba-team/samba/-/merge_requests/2271#note_1056304=
-663>:
->>>
->>>
->>> The prototype fuzzer I mentioned is in
->>>
->>>
->>> https://gitlab.com/samba-team/devel/samba/-/commits/douglas-grantma-dns=
--updates-allow-deny-tests
->>>
->>> =E2=80=94
->>> Reply to this email directly or view it on GitLab
->>> <https://gitlab.com/samba-team/samba/-/merge_requests/2271#note_1056304=
-663>.
->>>
->>> You're receiving this email because of your account on gitlab.com.
->>> Unsubscribe
->>> <https://gitlab.com/-/sent_notifications/7437a5432d1d1dd66e01a873476af7=
-18/unsubscribe>
->>> from this thread =C2=B7 Manage all notifications
->>> <https://gitlab.com/-/profile/notifications> =C2=B7 Help
->>> <https://gitlab.com/help>
->>>
->>
