@@ -2,61 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C542D599537
-	for <lists+samba-technical@lfdr.de>; Fri, 19 Aug 2022 08:21:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E430599568
+	for <lists+samba-technical@lfdr.de>; Fri, 19 Aug 2022 08:41:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=0MSWc7wdb4JmTnyiY3TNYUbqrM+fW7halymViKhckH0=; b=WIJd2sAAGLcLiIJTmKAlMiPTwf
-	sPWtosiONmzsaPSU8z0JOfZc8NEGwCyOa4NEcdMQdtGGwFS55clA0aDYLU0CkXAbDpgDNrP9mvHQK
-	ZbJQtzUXs7/2ZRnOaw+QsbPORFbmVLHAbNeW4dZmlnvPZq6cgcrdfBTI0PsCry11xd2a19P2vNTOF
-	jneionqiEmgrIFa50ilc52l4AHBNSEJxw4sOV0ORKkcudFh8SmoH2l8YvzrvH5XRbmjymSWFHB2L3
-	qVFyDnLnuYs91V/ZZX+3j+ylHB0n8HpQe8aqw9+sO2hsa7RWDhNp66YfSXg8shKzLk4oMSk/6V/PT
-	vHdliHQw==;
-Received: from ip6-localhost ([::1]:22230 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=rMH2Pm/j0xcNYoLCEcwNZp8Xx3Z6m7xxwz92rvcG/mo=; b=ZYalFw3zxba/mqqI5kLD6IkvUd
+	P1624hosEFLP0yUpQTF9E5iPdREbTeWtDWQBz4Ol/oDLleGBWtQH5DNwUECPw9Bu9x+TVkjWbhlRH
+	wsUvvTmK9ppvVEPZhmdNL7DYWeobQPJ8Y6vc3vo5kGk7Dvhm83+iKfz7Mq/OAL+yJV0M73Pjr0Bas
+	oEBsdW8QXp0E3BMUada7jIjWKNqYWEIyPnDOi4LRusqkKFACsJkCs7Zdk8oefo9yta/KTXPM3LSXF
+	eGilFZ1xqizlMhDR4+77E/zcjvVZRsh5nWNf/FipnTmzhMvr2f3XsQ967hyw8YfGHTEf1WvHGVysh
+	LzwYnKTw==;
+Received: from ip6-localhost ([::1]:34918 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oOvMw-001KEd-TZ; Fri, 19 Aug 2022 06:20:34 +0000
-Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930]:39734) 
+	id 1oOvgv-001KrS-HK; Fri, 19 Aug 2022 06:41:13 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24240) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oOvMq-001KEU-9x
- for samba-technical@lists.samba.org; Fri, 19 Aug 2022 06:20:31 +0000
-Received: by mail-ua1-x930.google.com with SMTP id i5so1448415uat.6
- for <samba-technical@lists.samba.org>; Thu, 18 Aug 2022 23:20:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc;
- bh=0MSWc7wdb4JmTnyiY3TNYUbqrM+fW7halymViKhckH0=;
- b=ldS6CT+CSIK1ONsRd4HFvX5zLNhbwOSmfYXGXtouMr+obCzSyvKuevfrvhdq9568Tf
- rfa6MxqeABVgMEcTGyshxoXuxXa9gl4AuwAaPLNZ3ekA0qZKoig9MT8Go5qMKM0vtu/K
- uR6ifXy80K0kwL3BXvLdZnJiY+LiGdkInUmrd3D1WtZaOvhhare2mc707N79qXaHATAA
- sDsEORXOqx8O+GCqes40t2SC+n8f82bIjnV9w30Jwr3Id/5O54G1eDQV8ebxdKEsKdwz
- UHdZaGW09CuOHSCJ6ZA2LD7GHZ3ICNYjW4k9XSi2AYnK4ADMLbiKN8IbpslU7chE6epU
- dwNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc;
- bh=0MSWc7wdb4JmTnyiY3TNYUbqrM+fW7halymViKhckH0=;
- b=Yjdz5hzA+CRdMyh8hYYh3v1W7KxgFB0Ie4bOaPR7ygKqSmiNFY3fXp8psrj3mvRt/V
- AzkRFzPXWsAoc4Spb9Q4ERwouWQqPHYMOS4Y5j4DtwKzvlZcz8FB2uMf3i5NEYX7WG2L
- 9PIXqR+49q4FL7MC289NbfaYc/7mRYlP0ji6cVm7ApdkPn/wj4G3c5aVViNotBlg19MP
- TXmytF4MnMemYkVdm1syS/8WclJ0N5KQUdA0TkfukYFD48d2VCcxExkj9bc+SM1bXNAG
- ZuySS5Aqy6k7FqkVcMt14QSgJc9LVAVFtucvh6/Kf1NzmxvmfCEMajk+UkoYe40sq6IJ
- 3kfQ==
-X-Gm-Message-State: ACgBeo1reriWpn/umjHz3iXnb9OxPJrRAG5YCQH0QJenisBPolM8Rr/F
- 5sHDDb+IS3wPqNEu9ZRXmRiFf6MWuPhpZzPDpkc=
-X-Google-Smtp-Source: AA6agR6FNSsP/9mrdqwlhKF+kOZqYewx8f9uLyJBK/GqLrNmGE86ASbR883Y2sokThy2rEEDu1AZojaH4LFG/Bxwwgg=
-X-Received: by 2002:ab0:3bc6:0:b0:381:c4db:ef5 with SMTP id
- q6-20020ab03bc6000000b00381c4db0ef5mr2542135uaw.81.1660890025731; Thu, 18 Aug
- 2022 23:20:25 -0700 (PDT)
+ (Exim) id 1oOvgf-001Kqy-Iz
+ for samba-technical@lists.samba.org; Fri, 19 Aug 2022 06:41:00 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=rMH2Pm/j0xcNYoLCEcwNZp8Xx3Z6m7xxwz92rvcG/mo=; b=3ROW1OwlSU8/ZssQ9N3iMfgGEN
+ bKpackSrr7dOX61gcqt9ZGWZzsJeaK5lNE4ggEPDqeQTTgyLOrh1EoPyCU50Ze8YEPMivk/sojuY7
+ 3dlB9+HiGUdlvi88uhfJDKV/CIhM/wd7N59f41rVnwmGhhWS6dYlMWwCwB+2N54v8cOJHe1GWE9uX
+ jLezd7x6gMq+B2EmEZ13MZJeLA1gsRYyRGgr+t/9/MZoKsThvdXSwpMrSd6YwSM3ynJbpH7p1MP4H
+ t+atD7F8PlJPs8LklW6/ybJVYN31SbRYJodCJrki6riOaKr63jzneJ+gwF14GBdnSrynhppO/uS9z
+ /XFZHzPsjdpxLPIOJ/b2V34v5bHFvCGzpHOJQJUZJKVtNTKPWVphg6oF63/fE3elQ635klZc0M/Oy
+ pqea0inh78kWNJEmTH3Lz6cO06NsPzT+CPXtggSvqfkfJ1kBF4IrrSd2+y+fibZ+VqcEhHnVpVvVK
+ h/44nrtD4HC3szkVbHazY1mt;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1oOvge-000oi7-Fz; Fri, 19 Aug 2022 06:40:56 +0000
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: Re: running only selected tests in samba sources
+Date: Fri, 19 Aug 2022 08:40:56 +0200
+Message-ID: <5854748.lOV4Wx5bFT@magrathea>
+In-Reply-To: <587ebe9d-3f91-7389-5ad1-c6d96e435b99@msgid.tls.msk.ru>
+References: <587ebe9d-3f91-7389-5ad1-c6d96e435b99@msgid.tls.msk.ru>
 MIME-Version: 1.0
-References: <20220818210142.7867-1-wsa+renesas@sang-engineering.com>
- <CAH2r5muBD8AV51ZQMapGoXyF=5Mk0GW2tYz2ng9XrhKRp_b96g@mail.gmail.com>
-In-Reply-To: <CAH2r5muBD8AV51ZQMapGoXyF=5Mk0GW2tYz2ng9XrhKRp_b96g@mail.gmail.com>
-Date: Fri, 19 Aug 2022 01:20:14 -0500
-Message-ID: <CAH2r5mt9Qs+Mb5Fj6xSOADcDZdggxALuxdDr6bd5HHzi2Z6WHw@mail.gmail.com>
-Subject: Re: [PATCH] cifs: move from strlcpy with unused retval to strscpy
-To: Wolfram Sang <wsa+renesas@sang-engineering.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,89 +55,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Shyam Prasad N <sprasad@microsoft.com>,
- Paulo Alcantara <pc@cjr.nz>, samba-technical <samba-technical@lists.samba.org>,
- LKML <linux-kernel@vger.kernel.org>, Ronnie Sahlberg <lsahlber@redhat.com>,
- Steve French <sfrench@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-tentatively merged into cifs-2.6.git for-next pending testing
+On Monday, 1 August 2022 16:35:15 CEST Michael Tokarev via samba-technical 
+wrote:
+> Hi!
 
-On Fri, Aug 19, 2022 at 12:00 AM Steve French <smfrench@gmail.com> wrote:
->
-> Looks fine.   Do you want this merged through my tree?
->
-> On Thu, Aug 18, 2022 at 4:11 PM Wolfram Sang
-> <wsa+renesas@sang-engineering.com> wrote:
-> >
-> > Follow the advice of the below link and prefer 'strscpy' in this
-> > subsystem. Conversion is 1:1 because the return value is not used.
-> > Generated by a coccinelle script.
-> >
-> > Link: https://lore.kernel.org/r/CAHk-=wgfRnXz0W3D37d01q3JFkr_i_uTL=V6A6G1oUZcprmknw@mail.gmail.com/
-> > Signed-off-by: Wolfram Sang <wsa+renesas@sang-engineering.com>
-> > ---
-> >  fs/cifs/cifsroot.c | 2 +-
-> >  fs/cifs/connect.c  | 2 +-
-> >  fs/cifs/smb2pdu.c  | 2 +-
-> >  3 files changed, 3 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/fs/cifs/cifsroot.c b/fs/cifs/cifsroot.c
-> > index 9e91a5a40aae..56ec1b233f52 100644
-> > --- a/fs/cifs/cifsroot.c
-> > +++ b/fs/cifs/cifsroot.c
-> > @@ -59,7 +59,7 @@ static int __init cifs_root_setup(char *line)
-> >                         pr_err("Root-CIFS: UNC path too long\n");
-> >                         return 1;
-> >                 }
-> > -               strlcpy(root_dev, line, len);
-> > +               strscpy(root_dev, line, len);
-> >                 srvaddr = parse_srvaddr(&line[2], s);
-> >                 if (*s) {
-> >                         int n = snprintf(root_opts,
-> > diff --git a/fs/cifs/connect.c b/fs/cifs/connect.c
-> > index 9111c025bcb8..3da5da9f16b0 100644
-> > --- a/fs/cifs/connect.c
-> > +++ b/fs/cifs/connect.c
-> > @@ -3994,7 +3994,7 @@ CIFSTCon(const unsigned int xid, struct cifs_ses *ses,
-> >                 }
-> >                 bcc_ptr += length + 1;
-> >                 bytes_left -= (length + 1);
-> > -               strlcpy(tcon->treeName, tree, sizeof(tcon->treeName));
-> > +               strscpy(tcon->treeName, tree, sizeof(tcon->treeName));
-> >
-> >                 /* mostly informational -- no need to fail on error here */
-> >                 kfree(tcon->nativeFileSystem);
-> > diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
-> > index 9b31ea946d45..9958b5f1c12f 100644
-> > --- a/fs/cifs/smb2pdu.c
-> > +++ b/fs/cifs/smb2pdu.c
-> > @@ -1928,7 +1928,7 @@ SMB2_tcon(const unsigned int xid, struct cifs_ses *ses, const char *tree,
-> >         tcon->capabilities = rsp->Capabilities; /* we keep caps little endian */
-> >         tcon->maximal_access = le32_to_cpu(rsp->MaximalAccess);
-> >         tcon->tid = le32_to_cpu(rsp->hdr.Id.SyncId.TreeId);
-> > -       strlcpy(tcon->treeName, tree, sizeof(tcon->treeName));
-> > +       strscpy(tcon->treeName, tree, sizeof(tcon->treeName));
-> >
-> >         if ((rsp->Capabilities & SMB2_SHARE_CAP_DFS) &&
-> >             ((tcon->share_flags & SHI1005_FLAGS_DFS) == 0))
-> > --
-> > 2.35.1
-> >
->
->
-> --
-> Thanks,
->
-> Steve
+Hi Michael,
+ 
+> Is there a way, after successful build of samba source, to run just selected
+> tests without running whole testsuite, *and* without (re)building
+> everything with the --enable-selftest option?
 
+you can find documentation in our wiki here:
+
+https://wiki.samba.org/index.php/Writing_Torture_Tests#Running_tests
+
+
+Improvements are welcome :-)
+
+
+Best regards
+
+
+	Andreas
 
 
 -- 
-Thanks,
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
-Steve
+
 
