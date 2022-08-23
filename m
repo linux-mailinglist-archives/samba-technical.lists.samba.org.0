@@ -2,72 +2,72 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6029859E402
-	for <lists+samba-technical@lfdr.de>; Tue, 23 Aug 2022 15:08:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 77B5059E40E
+	for <lists+samba-technical@lfdr.de>; Tue, 23 Aug 2022 15:23:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=41srhtC1DtBCiKuNUZse2LJ9UWvjGkyUijYd/UmDvl8=; b=vwmAv3nb6Z1exRbPWIB9xHY5dV
-	DPKiTaOGMXnPXzfeqE52O4W3DWR9WHFKIp4/XkLofDMgKNKKwHugBSL3PdZEV8mMbM/+OHtf3VaW0
-	mLRMqmg4ijugVC7rjP7ZsSX7+y8hEPv/qvDk+oMpk8b5H8YMG8h+325Ls/MmNLNkhBEAAQCpFWNlY
-	gM9Z9unMpfkO7/XW/HNLOZIJZ61FuOA5Zp2y0C+WCYko2yJLt+gHiJ/SxhELqbQcB9+yg+HYdr9fC
-	ASuTEQqAJ9YWtz0ExUDWMDXh89+Of1CXSlGcZzy1fuZIaKR7vYJ71ER8me6d2Zi2AuiesmTlDl4bD
-	xE4dELpA==;
-Received: from ip6-localhost ([::1]:33426 helo=hr1.samba.org) 
+	bh=d3i5wVY9ochj5YmCQFYqh+DQ+Bg9CInRp2iKPoE27ps=; b=YOtGLw/zpyOHoCL5zh+tvqv7hR
+	x/D6sX55VRXsIky0zjYkKt9CwcHjN/Xp3cYloUwsoOYGbJ8A4vxtY9eKR/hb7rcSDBgHTreA0b/kR
+	oefTW0u4tnBLpb34hAKicLJTr3HnmioYhI1ECEi33YotnGtC/o1pEKOiVBDljq/adiuF3qWup+vF3
+	fXV3VMDWie4hnOYFTJa3U0WXQXZreKD1rSUAiMjjbt0Cpt1bXDh1lTHAN4tQZym/KXblgDiSwt9KX
+	S22dhsgGMVRmC5HJF4yb80ZmjJBrNIOd4lI+mTZ/LMGU5vd5CjKrE3ReSDR2CXbNRKXdK6wHPfVFR
+	kHV/jQfQ==;
+Received: from ip6-localhost ([::1]:35142 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oQTdV-0020dF-0w; Tue, 23 Aug 2022 13:08:05 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:57434) 
+	id 1oQTsc-0021tv-Vt; Tue, 23 Aug 2022 13:23:43 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:60223) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1oQTdN-0020cb-Hn
- for samba-technical@lists.samba.org; Tue, 23 Aug 2022 13:08:02 +0000
+ (Exim) id 1oQTsW-0021q1-OA
+ for samba-technical@lists.samba.org; Tue, 23 Aug 2022 13:23:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1661260074;
+ s=mimecast20190719; t=1661261013;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=41srhtC1DtBCiKuNUZse2LJ9UWvjGkyUijYd/UmDvl8=;
- b=GQTNsTseX/Eo5kAogM8919fXUh6n8ep+F1bUO/KDdaM8EF7MmQG/6nFAjR3K/1r4TCtSpg
- 88bdg82pVWkLcj9apo/io6rrv2o2h/kGOraUZ5VnVh32h3XmYnSPs7OnynQ3iJTDxhtrCW
- 8/IkpoKxFMyEVqlUNj1haJaGk8/m4n4=
+ bh=d3i5wVY9ochj5YmCQFYqh+DQ+Bg9CInRp2iKPoE27ps=;
+ b=Q7EP+eoL21VoPxx74trTs9uKw1JxLTeKPuE22Ojs7qo3GEMyZc2WYdyzvd5jiP7gwvPEt3
+ umIyc8SFidsQBSOmBirvpk1b/lr9E8u022p73Zb5JpbfNXJZjrYTabHGjo0VEBRjX4fV27
+ JsknsWaA9ETMC2wTMMsCpQHXDWUeD2M=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1661260074;
+ s=mimecast20190719; t=1661261013;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=41srhtC1DtBCiKuNUZse2LJ9UWvjGkyUijYd/UmDvl8=;
- b=GQTNsTseX/Eo5kAogM8919fXUh6n8ep+F1bUO/KDdaM8EF7MmQG/6nFAjR3K/1r4TCtSpg
- 88bdg82pVWkLcj9apo/io6rrv2o2h/kGOraUZ5VnVh32h3XmYnSPs7OnynQ3iJTDxhtrCW
- 8/IkpoKxFMyEVqlUNj1haJaGk8/m4n4=
+ bh=d3i5wVY9ochj5YmCQFYqh+DQ+Bg9CInRp2iKPoE27ps=;
+ b=Q7EP+eoL21VoPxx74trTs9uKw1JxLTeKPuE22Ojs7qo3GEMyZc2WYdyzvd5jiP7gwvPEt3
+ umIyc8SFidsQBSOmBirvpk1b/lr9E8u022p73Zb5JpbfNXJZjrYTabHGjo0VEBRjX4fV27
+ JsknsWaA9ETMC2wTMMsCpQHXDWUeD2M=
 Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
  [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-483-Qpmpwwt-O9i9IEC4IzE4_A-1; Tue, 23 Aug 2022 09:07:51 -0400
-X-MC-Unique: Qpmpwwt-O9i9IEC4IzE4_A-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
- [10.11.54.1])
+ us-mta-98--U2nptawM7S0xhEt02RCBA-1; Tue, 23 Aug 2022 09:07:57 -0400
+X-MC-Unique: -U2nptawM7S0xhEt02RCBA-1
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 71E7B3C0CD5D;
- Tue, 23 Aug 2022 13:07:50 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4D1433806650;
+ Tue, 23 Aug 2022 13:07:57 +0000 (UTC)
 Received: from warthog.procyon.org.uk (unknown [10.33.36.72])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 4FEE940CFD0A;
- Tue, 23 Aug 2022 13:07:49 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 2CB52492C3B;
+ Tue, 23 Aug 2022 13:07:56 +0000 (UTC)
 Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
  Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
  Kingdom.
  Registered in England and Wales under Company Registration No. 3798903
-Subject: [PATCH 4/5] smb3: missing inode locks in punch hole
+Subject: [PATCH 5/5] smb3: fix temporary data corruption in insert range
 To: sfrench@samba.org, linux-cifs@vger.kernel.org
-Date: Tue, 23 Aug 2022 14:07:48 +0100
-Message-ID: <166126006871.548536.9826412629988468617.stgit@warthog.procyon.org.uk>
+Date: Tue, 23 Aug 2022 14:07:55 +0100
+Message-ID: <166126007561.548536.12315282792952269215.stgit@warthog.procyon.org.uk>
 In-Reply-To: <166126004083.548536.11195647088995116235.stgit@warthog.procyon.org.uk>
 References: <166126004083.548536.11195647088995116235.stgit@warthog.procyon.org.uk>
 User-Agent: StGit/1.4
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.84 on 10.11.54.1
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.9
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,59 +89,78 @@ Cc: samba-technical@lists.samba.org, jlayton@kernel.org,
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-smb3 fallocate punch hole was not grabbing the inode or filemap_invalidate
-locks so could have race with pagemap reinstantiating the page.
+insert range doesn't discard the affected cached region
+so can risk temporarily corrupting file data.
+
+Also includes some minor cleanup (avoiding rereading
+inode size repeatedly unnecessarily) to make it clearer.
 
 Cc: stable@vger.kernel.org
+Fixes: 7fe6fe95b9360 ("cifs: FALLOC_FL_INSERT_RANGE support")
 Signed-off-by: David Howells <dhowells@redhat.com>
 Signed-off-by: Steve French <stfrench@microsoft.com>
+cc: Ronnie Sahlberg <lsahlber@redhat.com>
 ---
 
- fs/cifs/smb2ops.c |   12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ fs/cifs/smb2ops.c |   24 ++++++++++++++++--------
+ 1 file changed, 16 insertions(+), 8 deletions(-)
 
 diff --git a/fs/cifs/smb2ops.c b/fs/cifs/smb2ops.c
-index 75fcf6a0df56..5b5ddc1b4638 100644
+index 5b5ddc1b4638..00c8d6a715c7 100644
 --- a/fs/cifs/smb2ops.c
 +++ b/fs/cifs/smb2ops.c
-@@ -3375,7 +3375,7 @@ static long smb3_zero_range(struct file *file, struct cifs_tcon *tcon,
- static long smb3_punch_hole(struct file *file, struct cifs_tcon *tcon,
- 			    loff_t offset, loff_t len)
- {
--	struct inode *inode;
-+	struct inode *inode = file_inode(file);
+@@ -3722,35 +3722,43 @@ static long smb3_insert_range(struct file *file, struct cifs_tcon *tcon,
  	struct cifsFileInfo *cfile = file->private_data;
- 	struct file_zero_data_information fsctl_buf;
- 	long rc;
-@@ -3384,14 +3384,12 @@ static long smb3_punch_hole(struct file *file, struct cifs_tcon *tcon,
+ 	struct inode *inode = file_inode(file);
+ 	__le64 eof;
+-	__u64  count;
++	__u64  count, old_eof;
++
++	inode_lock(inode);
  
  	xid = get_xid();
  
--	inode = d_inode(cfile->dentry);
--
-+	inode_lock(inode);
- 	/* Need to make file sparse, if not already, before freeing range. */
- 	/* Consider adding equivalent for compressed since it could also work */
- 	if (!smb2_set_sparse(xid, tcon, cfile, inode, set_sparse)) {
- 		rc = -EOPNOTSUPP;
--		free_xid(xid);
--		return rc;
-+		goto out;
+-	if (off >= i_size_read(inode)) {
++	old_eof = i_size_read(inode);
++	if (off >= old_eof) {
+ 		rc = -EINVAL;
+ 		goto out;
  	}
  
- 	filemap_invalidate_lock(inode->i_mapping);
-@@ -3411,8 +3409,10 @@ static long smb3_punch_hole(struct file *file, struct cifs_tcon *tcon,
- 			(char *)&fsctl_buf,
- 			sizeof(struct file_zero_data_information),
- 			CIFSMaxBufSize, NULL, NULL);
--	free_xid(xid);
- 	filemap_invalidate_unlock(inode->i_mapping);
-+out:
+-	count = i_size_read(inode) - off;
+-	eof = cpu_to_le64(i_size_read(inode) + len);
++	count = old_eof - off;
++	eof = cpu_to_le64(old_eof + len);
+ 
++	filemap_invalidate_lock(inode->i_mapping);
+ 	filemap_write_and_wait(inode->i_mapping);
++	truncate_pagecache_range(inode, off, old_eof);
+ 
+ 	rc = SMB2_set_eof(xid, tcon, cfile->fid.persistent_fid,
+ 			  cfile->fid.volatile_fid, cfile->pid, &eof);
+ 	if (rc < 0)
+-		goto out;
++		goto out_2;
+ 
+ 	rc = smb2_copychunk_range(xid, cfile, cfile, off, count, off + len);
+ 	if (rc < 0)
+-		goto out;
++		goto out_2;
+ 
+-	rc = smb3_zero_range(file, tcon, off, len, 1);
++	rc = smb3_zero_data(file, tcon, off, len, xid);
+ 	if (rc < 0)
+-		goto out;
++		goto out_2;
+ 
+ 	rc = 0;
++out_2:
++	filemap_invalidate_unlock(inode->i_mapping);
+  out:
 +	inode_unlock(inode);
-+	free_xid(xid);
+ 	free_xid(xid);
  	return rc;
  }
- 
 
 
 
