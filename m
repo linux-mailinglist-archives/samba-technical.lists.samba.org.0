@@ -2,48 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFC9059E569
-	for <lists+samba-technical@lfdr.de>; Tue, 23 Aug 2022 16:56:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2737759E6D4
+	for <lists+samba-technical@lfdr.de>; Tue, 23 Aug 2022 18:18:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=csxDZUnjTsbsViSjeikS51nnDWPuURy3wjjnJk9xyAQ=; b=n81cT4BBzGLj+hpHBHWLJ6sFPX
-	HcN5MHrVCEiH7mvmCagpYjAx3n+NeXXr9x1kyfh8M2nPhbf7PNtiqykdLKbHJVQmAkg9eOk/BrfMF
-	I2UBuBrQWpGAfS/wGhf3Cv5q8JNKN5a/mXASSxqeqAPUkYDDQvtF2ZxR/Bs5cR1/OKg6+WK6ulq6h
-	giSq0JC+GulbP6+62FA7/Q3eYTFOrcXLftEMWe+kA4+brCFr7JwPaaree58W+UY20+B36zqZqnR5T
-	2SQL3cfXub64yxxzL0di3Y1czIf4XYEQTk5Hw2JYHZ8m0Yu2KG+QWdUxWMvc9hOAvmEnPYL9ROnhL
-	RsYzwS0w==;
-Received: from ip6-localhost ([::1]:49408 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=dZWB/c4dvkv3o16v1g1/9WAB1iWBXC3+DQUdPOKs3Q4=; b=a3AiWuOyIveWPso9fAyheTIiI7
+	6uxZR9nOCjB4dbWxXILv9+ZJYX1hZ0Pr+Quwfx++kzXB3Xy2rGW+qQ0vOjY/mIKTX55nXS7JmBHsu
+	v2W8tYHzW8kkWZffVrSKjd5cTrJtB2OLq01Klw9A/IwD1m6cSK9tK7AfpXpvcUzDaskfdQYe0uBRT
+	sFD0XlPcDc6npFg5q8ISYM8FBr00OEwh3oeTc359CzxucJZYKYfYiweMA3FSy6RJ+JK/UPHWZSfD6
+	cVel1RZVqFKst3Si6w+Sti83JLciyAa1s9clq1IxkM7ktt8AVTtm29VoVHG92TuaEX5R+VdtyXWCS
+	mKsrJboQ==;
+Received: from ip6-localhost ([::1]:31844 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oQVKS-0024Ob-Kw; Tue, 23 Aug 2022 14:56:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17818) 
+	id 1oQWae-0026ds-A8; Tue, 23 Aug 2022 16:17:20 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35246) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oQVKM-0024NK-BE
- for samba-technical@lists.samba.org; Tue, 23 Aug 2022 14:56:28 +0000
+ (Exim) id 1oQWaZ-0026dj-6x
+ for samba-technical@lists.samba.org; Tue, 23 Aug 2022 16:17:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=csxDZUnjTsbsViSjeikS51nnDWPuURy3wjjnJk9xyAQ=; b=RAhQjaQLbKKFK8HI4Q42GMeg31
- y/w47DryCisJTl1AccvjpJj+KKo6+nURt4GwAiKSS0RwvGqznize/9+jK0Y7Zip31W1oXK2AMABxq
- 5lYFYLQSy9Toyku1kNPGEIGuZ6fcw4dxxAsTO2FSRAYR4lEhibWM7MyI9QzxjWGrjX0k/zqWoJ3ld
- waABLJgmgL4mBq+eCToJqRPZvCp4vVaryk7p24jb+zHPVYvcu73HRND4M72hzOqH8/+0ap8SJNUMl
- 1tjHrdzTHPot6OyX64CigvpmohkTN8Z9JVUwSuALxVxJKocWzDcjz15dNwQ/ZY2li13eJ6q7LL1pG
- 8qE1EVx45s1XcZRHP8M4p0upn9PUtuSHkg7BJujZecVmXPMtkk/a0hYzhQMD8ctG0XYqp7i5s9Amj
- nFfPSKGK6lYUiebgxpaCe0u0NFRwZyB+tH0arW05wzi6LqxbxqFzjvexp85SW5gfjcIMhNrIiW73R
- b8mBwubm+akRfMR25ZVYnlsN;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=dZWB/c4dvkv3o16v1g1/9WAB1iWBXC3+DQUdPOKs3Q4=; b=ELoGEksDaYhesMsZndlVbyzBEF
+ UWuSO9cc2xhah7FyXosdMkSh4Yygz4Hmwt0F4n9wL7i3fS1VsE2ayDWWM3oYS7b1sEDZPLQ65wO6/
+ Odhby30DUip2WC79Va+46FHYt+ZutA3oDEPtyJB45G9OkJqN94rS2krjUCPMpRQP7m3TAxiHMku1r
+ 9Ju/dKOhusZoBsMXs/Y7X2UCjnnjMy4IfQ3msclyNZsN6Ak2TqRbI+RVY8KPdiREJTm4yceFqIDGq
+ AC12EXYVagI1i+lvDC1qMmQhNKjJO0yDZ9bPa2fkfMV48ApVGyh91v40om+jAM+XOTSy9rIZIsmS9
+ TbljXKIM68J8nXrvoI9K2oki8/F2HG/mFjRh7uaW3yDh6HFJhak9J0WSfL2TufOAKbLrVsJJqwhoF
+ /rJ104XT9k/ORQVXxyBdgilNH06CT2lZzhEQtDrELL9L14iF4t9PTg0w/ikioljoPtupn5KgkH6+5
+ /pvKOPrfOeS/fZcygrQjapTX;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1oQVKM-001Qdw-5W
- for samba-technical@lists.samba.org; Tue, 23 Aug 2022 14:56:26 +0000
-Message-ID: <6393a012-a15d-a38d-f9dd-82cf33a48623@samba.org>
-Date: Tue, 23 Aug 2022 16:56:25 +0200
+ (Exim) id 1oQWaY-001RCi-3V; Tue, 23 Aug 2022 16:17:14 +0000
+Date: Tue, 23 Aug 2022 09:17:10 -0700
+To: Martin Schwenke <martin@meltin.net>
+Subject: Re: Samba and ShellCheck
+Message-ID: <YwT9hms85GTQIg5k@samba.org>
+References: <4766256.31r3eYUQgx@magrathea>
+ <20220823180243.565f35e2@martins.ozlabs.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: de-DE
-To: samba-technical@lists.samba.org
-Subject: [Release Planning 4.17] Samba 4.17.0rc4
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220823180243.565f35e2@martins.ozlabs.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,25 +56,70 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Christof Schmitt via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christof Schmitt <cs@samba.org>
+Cc: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+On Tue, Aug 23, 2022 at 06:02:43PM +1000, Martin Schwenke via samba-technical wrote:
+> Hi Andreas,
+> 
+> On Tue, 23 Aug 2022 07:50:24 +0200, Andreas Schneider via
+> samba-technical <samba-technical@lists.samba.org> wrote:
+> 
+> > for Samba master we have ShellCheck with error level in place now. It will 
+> > check that our scripts are error free!
+> 
+> Yay!
+> 
+> That probably isn't true for CTDB, but we are gradually improving things.
+> 
+> > The next step would be to move ShellCheck to warning level and this will be 
+> > quite some work.
+> 
+> Yep!
+> 
+> > But first we need to discuss something.
+> > 
+> > If I run ShellCheck in warning level:
+> > 
+> > ./script/check-shell-scripts.sh $(pwd) warning
+> > 
+> > The warning I see most of the time is:
+> > 
+> > warning: In POSIX sh, 'local' is undefined. [SC3043]
+> 
+> This is why I never use local in /bin/sh scripts.  It has never made it
+> into POSIX.  I suspect the reason is that different shells implemented
+> different semantics.  For example:
+> 
+>   local foo=$(example --command)
+> 
+> I think local in bash eats the exit code of the subshell.  Other shells
+> may implement it differently.
+> 
+> I use an "excellent" convention for local variables in /bin/sh scripts,
+> specially designed to reduce readability.  ;-)  I prefix any local
+> variable with '_'.  However, it makes no semantic difference, it just
+> acts as a hint.
+> 
+> > Why do do we use POSIX shell (#/bin/sh) for the majority of our tests (we also 
+> > have scripts with #!/bin/bash)?
+> 
+> For portability.  I would encourage anyone writing scripts that do not
+> need bash features to use /bin/sh instead.
+> 
+> In CTDB we have switched our bash scripts (we definitely have some)
+> to use
+> 
+>   #!/usr/bin/env bash
+> 
+> so they have a chance of working on platforms without /bin/bash.
 
-Samba 4.17.0rc4 is scheduled for Tuesday, August 30 2022.
+Would it be worthwhile to capture the outcome of this discussion in
+README.Coding and somewhere under
+https://wiki.samba.org/index.php/Developer_Documentation ?
 
-
-https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.17
-has been updated accordingly.
-
-
-Jule
-
--- 
-Jule Anger
-Release Manager Samba Team      https://samba.org
-SerNet Samba Team               https://sernet.de
-
+Christof
 
