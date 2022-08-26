@@ -2,47 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9A645A086C
-	for <lists+samba-technical@lfdr.de>; Thu, 25 Aug 2022 07:23:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C0F35A2D11
+	for <lists+samba-technical@lfdr.de>; Fri, 26 Aug 2022 19:04:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=H69lMk7CSq2G9PbBTczWuJYxxQnmoCogl6a13wsQTn8=; b=u91PlAsiLR9bkwMbdpFW9sxgRe
-	6zMmYJ753HcnRMjUJZ/CI4Ljum2bfgsseWc2m5V3LwCsefV5L3OMQUSvwjvnjlg63pRaP4gqcWuUc
-	4onpKeu8F1g5JncB3HGU+cYdd7JwzTO6cUP9RlIIemJa7wkqYh/gQ5gaYvgG0Xier+sSyM1VmJuB7
-	lVba+YSBdxhdQZXkPoXMaw3fwYub9UuyYxVwW+jYLN0aiAwjEDHFiVjZ7cZ+zZe0LB4WTr2UJPZyc
-	YrtCYsQT88GBTDVmwHkNpIq6+YWU59EOcClGZE1soAklBmLo4GTgH8Gi97vm/HX2tohuRZexPD+Mz
-	cFeVZOGQ==;
-Received: from ip6-localhost ([::1]:46114 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=6WZpViZNgR1/hRp8CSBwVaNRN7STwyR7VIzrI9ZEhMg=; b=pfc/xcM6ybImpoA9RZ/Mc3/RMU
+	1R+fWROJ+9WDpQaPkmLDsbHeCVI0Zo72LTwSFkTu2B5cYlrEZTjZ5gFvAOwvmovr1KvZYOyUalrnm
+	/mIzExacUFEKHnwAtlFvYZztG5kAq+YpeGr3mxuVjfW5ZQh7s3MkJxzrRPXJvySM1RRsqKaqw+1Zp
+	BWENMjILzr/m8wLsit3x5+kXZWhhe/JSfx39IXEuQb5eyNvoewulXfzqoWieiKhB998mBfBDLkVc9
+	i8p6U+VNSnPVA1uGZHqHHuJ3NCFVZXEss06gchVE/QHassv7htUP9bQgbn217Tg/XGKtAO2Ih4Zl0
+	v9nfCeYw==;
+Received: from ip6-localhost ([::1]:30308 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oR5Jp-002P2H-Mr; Thu, 25 Aug 2022 05:22:17 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55474) 
+	id 1oRckP-002cPO-TH; Fri, 26 Aug 2022 17:03:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62140) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oR5Jl-002P28-Fl
- for samba-technical@lists.samba.org; Thu, 25 Aug 2022 05:22:15 +0000
+ (Exim) id 1oRckL-002cPF-B8
+ for samba-technical@lists.samba.org; Fri, 26 Aug 2022 17:03:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=To:From:Date:Message-ID:CC;
- bh=H69lMk7CSq2G9PbBTczWuJYxxQnmoCogl6a13wsQTn8=; b=oTdgy8CSjqNb72sHaOZewFMobI
- S9iW2IKIg25DYYO/cKahCBrLHAWswTMxUJ7ls8+PvsnLTEzOJ+ehmS+uHm1y3FSGXbjl/uHXx1L1N
- fdxeUwimJ3Wzkla0MRh8tzobe0MifYVbSLIax7gbqmLwTWbAaVCn97gGZ6W5irrX5JIVDAHqfujFi
- Mj8otXf31fde+60vcq8f3J2tIzPfPE5eEfqDz02d+i+sk84y5Oru8e7qC/7RgHTOPRgfcNr0RG8PV
- QjFMf5XbuiDHD3WMUORf6vnkqV9q/GLch9UTzjt/6DDLbm+BaNvP/7FfxObnTWfqZb1nWiXtE/u+2
- MNCvZDa3//g5BlM9T9FXBQsLHq19lKQPNuZGc3ss8kOh24Rx0rOBvBcHoIznj82HSl8ve0CClajRw
- ZywoCQnMezuJA0QwUKsQ2CvzMQAOU1Qz4YGWXXhSkN4PapjUQgkM6WH5Bbd/XOCpUvvWUGmmsIYyZ
- M+lysDm0VIRjyFTRjI9GXFLm;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=6WZpViZNgR1/hRp8CSBwVaNRN7STwyR7VIzrI9ZEhMg=; b=pIWk6Os67Jc8zJceVMvvfrMIsK
+ BYXp6cWYxy8Cf5ji6aoN714aQ7HjhR297qE8/qewcNuR18MBebjx0BnERtyabVpHnkEk5DkCZ+Cig
+ 05CdJUxPYlesWl/1beFIH0ilW3+BSs3iclLTWkIV0s0Mlh9ALhUrLWnr1F/Z2d2efKGFVNGdXjkNg
+ b9t7lAf1y5sR3wxzvwCttQIGmQCpUE/8mYLGxtTwF5vzhJc1MUKmGb5LIgi5W3aXh3O5CZ3MWlNVK
+ m8KRVxnPCxnRQhp7cN/YUinPJ+pi6dZflD8Oksk6xxEQ5kdo+b0MKE0LKNuiXpz8Xot7EGK7ZVP+G
+ 7OfUUCjrqeYriWpWLl7t6DkXlyjM+gSuJNnYtGSTEVnBMZozRy/CdlOwgijmm6zhc76K5gxYKSlkP
+ zy310YuUybfy8lTVK8AkWks+FsbJQeMtzXpZEjWpzvZFTwi80fiysuqEZogp8kGugCAXK49jWm1XM
+ zr5SKCHRcXcYNS+xbpQ9Xe/G;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1oR5Jk-001dsp-Ow
- for samba-technical@lists.samba.org; Thu, 25 Aug 2022 05:22:13 +0000
-Content-Type: multipart/mixed; boundary="------------bOCsScPzVIK609nv75a0H7a1"
-Message-ID: <5a1451ef-654d-f5f9-5785-9ff1cf422687@samba.org>
-Date: Thu, 25 Aug 2022 17:22:05 +1200
+ (Exim) id 1oRckE-001sGG-Cv; Fri, 26 Aug 2022 17:03:46 +0000
+Date: Fri, 26 Aug 2022 10:03:42 -0700
+To: Rowland Penny <rpenny@samba.org>
+Subject: Re: Phantom samba-tool option
+Message-ID: <Ywj87hCJ2MG7l5IS@jeremy-acer>
+References: <e3eeb1eda243c5cd80260add048423173c2b0b32.camel@samba.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: [PATCH] WHATSNEW: Document new Protected Users group
-To: samba-technical@lists.samba.org
-Content-Language: en-US
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <e3eeb1eda243c5cd80260add048423173c2b0b32.camel@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,74 +55,97 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Joseph Sutton via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Joseph Sutton <jsutton@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a multi-part message in MIME format.
---------------bOCsScPzVIK609nv75a0H7a1
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+On Fri, Aug 26, 2022 at 09:19:58AM +0100, Rowland Penny wrote:
+>Hi Jeremy, a user on the samba mailing list asked about the '-A' option
+>for samba-tool, an option I had never heard of. It is shown in the
+>samba-tool manpage:
+>
+>       -U|--user=[DOMAIN\]USERNAME[%PASSWORD]
+>           Sets the SMB username or username and password.
+>
+>           If %PASSWORD is not specified, the user will be prompted.
+>The client will first check the USER environment
+>           variable (which is also permitted to also contain the
+>password seperated by a %), then the LOGNAME variable (which
+>           is not permitted to contain a password) and if either
+>exists, the value is used. If these environmental variables
+>           are not found, the username found in a Kerberos Credentials
+>cache may be used.
+>
+>           A third option is to use a credentials file which contains
+>the plaintext of the username and password. This option
+>           is mainly provided for scripts where the admin does not wish
+>to pass the credentials on the command line or via
+>           environment variables. If this method is used, make certain
+>that the permissions on the file restrict access from
+>           unwanted users. See the -A for more details.
+>
+>           Be cautious about including passwords in scripts or passing
+>user-supplied values onto the command line. For
+>           security it is better to let the Samba client tool ask for
+>the password if needed, or obtain the password once
+>           with kinit.
+>
+>           While Samba will attempt to scrub the password from the
+>process title (as seen in ps), this is after startup and
+>           so is subject to a race.
+>
+>The only problem is that the '-A' option does not exist for samba-tool,
+>it is a smbclient option.
+>
+>I traced it down to it coming from docs-xml/build/DTD/samba.entities,
+>but I cannot see how I stop the samba-tool manpage from using it
+>without totally removing the relevant paragraph, which will (I presume)
+>remove it from the smbclient manpage. Can you suggest how this can be
+>done, or should I open a bug report ?
 
-Sorry, I have another late WHATSNEW update for 4.17. We were missing
-documentation on the Protected Users group, particularly on the
-samba-tool command that creates it.
+This comes from : cmdline.common.credentials.user
+which is included in:
 
-Regards,
-Joseph
---------------bOCsScPzVIK609nv75a0H7a1
-Content-Type: text/x-patch; charset=UTF-8;
- name="0001-WHATSNEW-Document-new-Protected-Users-group.patch"
-Content-Disposition: attachment;
- filename="0001-WHATSNEW-Document-new-Protected-Users-group.patch"
-Content-Transfer-Encoding: base64
+manpages/samba-tool.8.xml
 
-RnJvbSAwZWU5MGJhYzJhOGYyYWM0YTBlNGFjOTMxMTI2ODcyN2VjZWNkMTc1IE1vbiBTZXAg
-MTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBKb3NlcGggU3V0dG9uIDxqb3NlcGhzdXR0b25AY2F0
-YWx5c3QubmV0Lm56PgpEYXRlOiBUaHUsIDI1IEF1ZyAyMDIyIDE2OjU4OjA2ICsxMjAwClN1
-YmplY3Q6IFtQQVRDSF0gV0hBVFNORVc6IERvY3VtZW50IG5ldyBQcm90ZWN0ZWQgVXNlcnMg
-Z3JvdXAKClNpZ25lZC1vZmYtYnk6IEpvc2VwaCBTdXR0b24gPGpvc2VwaHN1dHRvbkBjYXRh
-bHlzdC5uZXQubno+Ci0tLQogV0hBVFNORVcudHh0IHwgMzUgKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysKIDEgZmlsZSBjaGFuZ2VkLCAzNSBpbnNlcnRpb25zKCspCgpk
-aWZmIC0tZ2l0IGEvV0hBVFNORVcudHh0IGIvV0hBVFNORVcudHh0CmluZGV4IDYzYzVmZTA5
-YTkwLi5iMDQyNWEwNTA3NCAxMDA2NDQKLS0tIGEvV0hBVFNORVcudHh0CisrKyBiL1dIQVRT
-TkVXLnR4dApAQCAtMTg3LDYgKzE4Nyw0MSBAQCBjb3ZlcnMgYWxsIHRoZSBleGlzdGluZyB0
-ZXh0IG91dHB1dCBpbmNsdWRpbmcgc2Vzc2lvbnMsIGNvbm5lY3Rpb25zLAogb3BlbiBmaWxl
-cywgYnl0ZS1yYW5nZSBsb2Nrcywgbm90aWZpZXMgYW5kIHByb2ZpbGUgZGF0YSB3aXRoIGFs
-bAogbG93LWxldmVsIGluZm9ybWF0aW9uIG1haW50YWluZWQgYnkgU2FtYmEgaW4gdGhlIHJl
-c3BlY3RpdmUgZGF0YWJhc2VzLgogCitQcm90ZWN0ZWQgVXNlcnMgc2VjdXJpdHkgZ3JvdXAK
-Ky0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQorCitTYW1iYSBBRCBEQyBub3cgaW5j
-bHVkZXMgc3VwcG9ydCBmb3IgdGhlIFByb3RlY3RlZCBVc2VycyBzZWN1cml0eQorZ3JvdXAg
-aW50cm9kdWNlZCBpbiBXaW5kb3dzIFNlcnZlciAyMDEyIFIyLiBUaGUgZmVhdHVyZSByZWR1
-Y2VzIHRoZQorYXR0YWNrIHN1cmZhY2Ugb2YgdXNlciBhY2NvdW50cyBieSBwcmV2ZW50aW5n
-IHRoZSB1c2Ugb2Ygd2VhaworZW5jcnlwdGlvbiB0eXBlcy4gSXQgYWxzbyBtaXRpZ2F0ZXMg
-dGhlIGVmZmVjdHMgb2YgY3JlZGVudGlhbCB0aGVmdCBieQorbGltaXRpbmcgY3JlZGVudGlh
-bCBsaWZldGltZSBhbmQgc2NvcGUuCisKK1RoZSBwcm90ZWN0aW9ucyBhcmUgaW50ZW5kZWQg
-Zm9yIHVzZXIgYWNjb3VudHMgb25seSwgYW5kIHNlcnZpY2Ugb3IKK2NvbXB1dGVyIGFjY291
-bnRzIHNob3VsZCBub3QgYmUgYWRkZWQgdG8gdGhlIFByb3RlY3RlZCBVc2VycworZ3JvdXAu
-IFVzZXIgYWNjb3VudHMgYWRkZWQgdG8gdGhlIGdyb3VwIGFyZSBncmFudGVkIHRoZSBmb2xs
-b3dpbmcKK3NlY3VyaXR5IHByb3RlY3Rpb25zOgorCisgICAqIE5UTE0gYXV0aGVudGljYXRp
-b24gaXMgZGlzYWJsZWQuCisgICAqIEtlcmJlcm9zIHRpY2tldC1ncmFudGluZyB0aWNrZXRz
-IChUR1RzKSBlbmNyeXB0ZWQgd2l0aCBSQzQgYXJlCisgICAgIG5vdCBpc3N1ZWQgdG8gb3Ig
-YWNjZXB0ZWQgZnJvbSBhZmZlY3RlZCBwcmluY2lwYWxzLiBUaWNrZXRzCisgICAgIGVuY3J5
-cHRlZCB3aXRoIEFFUywgYW5kIHNlcnZpY2UgdGlja2V0cyBlbmNyeXB0ZWQgd2l0aCBSQzQs
-IGFyZQorICAgICBub3QgYWZmZWN0ZWQgYnkgdGhpcyByZXN0cmljdGlvbi4KKyAgICogVGhl
-IGxpZmV0aW1lIG9mIEtlcmJlcm9zIFRHVHMgaXMgcmVzdHJpY3RlZCB0byBhIG1heGltdW0g
-b2YgZm91cgorICAgICBob3Vycy4KKyAgICogS2VyYmVyb3MgY29uc3RyYWluZWQgYW5kIHVu
-Y29uc3RyYWluZWQgZGVsZWdhdGlvbiBpcyBkaXNhYmxlZC4KKworSWYgdGhlIFByb3RlY3Rl
-ZCBVc2VycyBncm91cCBpcyBub3QgYWxyZWFkeSBwcmVzZW50IGluIHRoZSBkb21haW4sIGl0
-CitjYW4gYmUgY3JlYXRlZCB3aXRoICdzYW1iYS10b29sIGdyb3VwIGFkZCcuIFRoZSBuZXcg
-Jy0tc3BlY2lhbCcKK3BhcmFtZXRlciBtdXN0IGJlIHNwZWNpZmllZCwgd2l0aCAnUHJvdGVj
-dGVkIFVzZXJzJyBhcyB0aGUgbmFtZSBvZiB0aGUKK2dyb3VwLiBBbiBleGFtcGxlIGNvbW1h
-bmQgaW52b2NhdGlvbiBpczoKKworc2FtYmEtdG9vbCBncm91cCBhZGQgJ1Byb3RlY3RlZCBV
-c2VycycgLS1zcGVjaWFsIC1IIC91c3IvbG9jYWwvc2FtYmEvcHJpdmF0ZS9zYW0ubGRiIC1V
-IEFkbWluaXN0cmF0b3IKKworVGhlIFByb3RlY3RlZCBVc2VycyBncm91cCBpcyBpZGVudGlm
-aWVkIGluIHRoZSBkb21haW4gYnkgaXRzIGhhdmluZyBhCitSSUQgb2YgNTI1LiBUaHVzLCBp
-dCBzaG91bGQgb25seSBiZSBjcmVhdGVkIHdpdGggc2FtYmEtdG9vbCBhbmQgdGhlCisnLS1z
-cGVjaWFsJyBwYXJhbWV0ZXIsIGFzIGFib3ZlLCBzbyB0aGF0IGl0IGhhcyB0aGUgdGhlIHJl
-cXVpcmVkIFJJRAordG8gZnVuY3Rpb24gY29ycmVjdGx5LgorCiAKIFJFTU9WRUQgRkVBVFVS
-RVMKID09PT09PT09PT09PT09PT0KLS0gCjIuMzUuMAoK
+'-A' is described in cmdline.common.credentials.authenticationfile
 
---------------bOCsScPzVIK609nv75a0H7a1--
+which isn't included in:
+
+manpages/samba-tool.8.xml
+
+So the problem is the '-A' text:
+
+------------------------------------------------------------
+"A third option is to use a credentials file which contains
+the plaintext of the username and password. This option
+is mainly provided for scripts where the admin does not wish
+to pass the credentials on the command line or via
+environment variables. If this method is used, make certain
+that the permissions on the file restrict access from
+unwanted users. See the -A for more details.
+
+Be cautious about including passwords in scripts or passing
+user-supplied values onto the command line. For
+security it is better to let the Samba client tool ask for
+the password if needed, or obtain the password once
+with kinit.
+
+While Samba will attempt to scrub the password from the
+process title (as seen in ps), this is after startup and
+so is subject to a race."
+------------------------------------------------------------
+
+So I think maybe we need to duplicate this section without
+the -A text as a new ENTITY cmdline.samba-tool.credentials.user
+and include that inside manpages/samba-tool.8.xml instead of
+cmdline.common.credentials.user.
+
+I'm CC:ing this to samba-technical for opinions from the
+rest of the Team, and I also think you should log a bug
+so we can track it.
+
+Thanks ! Jeremy.
 
