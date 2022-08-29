@@ -2,49 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29E9F5A3DE7
-	for <lists+samba-technical@lfdr.de>; Sun, 28 Aug 2022 15:58:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F4A45A4222
+	for <lists+samba-technical@lfdr.de>; Mon, 29 Aug 2022 07:08:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=AQ8C7b+thH0mpwbCH/TBEOtrOwu4gl0fivWfD8OCDSo=; b=mjS0RGphS+y4e8AfETIOPdgUne
-	DuNyYROrBjYaRKmRTh532YqK6eNzLdR8jlFslFmiCRqD5NNqY+b8TxLxMpcAMKEn4cvG+qyqEpX4K
-	hTaL0W1zL+UMaAfo5x5/BLyl01LeNLQFF9nhQ6sHtXg4eDJF6uyDDIo/iUoa/0LX+azKmmp4nCkQW
-	7g8DLzGUeUbpwbmsi/WX8fEC+bM6sFZB/e6BZEmnPqe6yse4uZ99wB0JmJkJjpNkci0I6fA2lriLd
-	XVOVTa5XJJrR7ck30Qmrbr+udhcj4wuy26GeibEtvhGCoMQd6xOikyuIIbPmEceHSVZHyBZTvqIR3
-	MeyDsA3Q==;
-Received: from ip6-localhost ([::1]:23274 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=qDOlBO8M3knCdtBqq7VFSNn3zWVTBCbhwMXpQDGbaKs=; b=zcqJru9y+aQr0i5tV+VEq6qob1
+	QajB4hSEIJKHVILRwfeZWptXfKSDn3ihIGACDDVjYxXvcd5ow/9UUf565aT4g/MJnDd7Bd+pZRbzQ
+	VN5Dg9N6LolJILAyHdnc+AdSEz8VaVxK8O9PIkyaQoi6US61ZmWTwC0klyk5gvmiv0lbzw08V846Y
+	a5lNji+1hCjopK9JcX86joNjtR7w8+WwAM/rt4meqiueHEzSZHiw8Si4hZBEjPxxXHQQhCSsZXE8c
+	ONNmpg157pRa9valM25e+v5BxAFF71HZE/2Ui4BrnoZoSIExYvEUFqS4OjJU0x4ZI7GyU57qFGFwK
+	mO74Kk3g==;
+Received: from ip6-localhost ([::1]:46866 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oSIn4-002lFZ-EJ; Sun, 28 Aug 2022 13:57:30 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38158) 
+	id 1oSWzL-002mjZ-GS; Mon, 29 Aug 2022 05:07:07 +0000
+Received: from mail-vk1-xa2b.google.com ([2607:f8b0:4864:20::a2b]:43521) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oSIn0-002lFQ-0U
- for samba-technical@lists.samba.org; Sun, 28 Aug 2022 13:57:28 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=AQ8C7b+thH0mpwbCH/TBEOtrOwu4gl0fivWfD8OCDSo=; b=pQJ5ztIvNoKROWl/Rr+uExZsnV
- 6g1bt1AGglbQUEd8mu0IZ0DTiI7YZoxKZnuDVma2HNO1IadaIkFBoUZ2rrY/P/joEbtSFcHx7tNqk
- nZNrUHn3TPc0R3Y5/pke+BrnW/0uCV4yoboERNA5kMaHDzJFRXgIpnnIdNc1p9UCGbTaoHmDcUWgS
- kckgz66gGO+FGJSLGLmvO7tpaGU+8i11y8+5j1cyDABSFcebZQAij5hEHm/K77mL6iqxV7LlMJ9vw
- bVIXWvbmllH2mtVf5HEjaxVDpFRsdcHJq93tfDOe0RjtvCpCbCKghgnGiy6aB1tfRrWTIBAZCNDZM
- yOUU8dkE/zLbX7IF5f48SOZi8aqBBblqOieKfbmMC2Q+8f7ql2pbPcWzAmFuaHtrbqNEPL6kwOLy+
- T4V4z772X1ZVVFIAPHTIupmu4J6Ofl3r1J6aprRyz2zAYEGLOSm5Qq16WzLRLXmNA5O5BfgOQdo3C
- xlkLeihOF4LKdxQBZJa40Y75;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1oSImz-00265W-8z
- for samba-technical@lists.samba.org; Sun, 28 Aug 2022 13:57:25 +0000
-Message-ID: <a1011fbdde1c46ad943ff336904bb4ad990de902.camel@samba.org>
-Subject: Re: Phantom samba-tool option
-To: samba-technical <samba-technical@lists.samba.org>
-Date: Sun, 28 Aug 2022 14:57:24 +0100
-In-Reply-To: <Ywj87hCJ2MG7l5IS@jeremy-acer>
-References: <e3eeb1eda243c5cd80260add048423173c2b0b32.camel@samba.org>
- <Ywj87hCJ2MG7l5IS@jeremy-acer>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.30.5-1.1 
+ (Exim) id 1oSWzF-002mjQ-ED
+ for samba-technical@lists.samba.org; Mon, 29 Aug 2022 05:07:04 +0000
+Received: by mail-vk1-xa2b.google.com with SMTP id w129so3243049vkg.10
+ for <samba-technical@lists.samba.org>; Sun, 28 Aug 2022 22:06:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc;
+ bh=qDOlBO8M3knCdtBqq7VFSNn3zWVTBCbhwMXpQDGbaKs=;
+ b=JhSp8ZCo+u+70xYvY2SqqvQM3/P9g9rt/QRhkPlFs/LoMzTZCynWIQSkKKSukx0vS+
+ GRRbeRKut0oQs3veOJ9ZvYaD2/0z8nHbTMGLsM1spGRgkrGsvEzQMTJm7UbZMbBiC7NO
+ aSlQPpC8YxBzDTxy2ohnWGkVhuXfUgKEmhvBnzuRCgPOhTPG+cKlxuPjTEERIdy2E6xh
+ mWa4VtkkKAQX4YRRvM4uCHHxUYEfELg4OJVh/b4s7Ga9eMhFLpyo+sfzZvf2R+1bkX0k
+ SzYO8KJRiFHz8T1xe8kzKGSXeDQvVgDgpyhswzPB4pVCEq0N00Q5tFBnF9duLRMs0uDg
+ hKBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc;
+ bh=qDOlBO8M3knCdtBqq7VFSNn3zWVTBCbhwMXpQDGbaKs=;
+ b=P7G1dDFr/s35+PPSX+30NwbGVy79oOxPzunq5N8lpN/dl1C0W0sLk1vBjfARKrftPi
+ IZeFEexVTeBhMI8r1wQfNee6bBPoyXA6xsjW4EB2FnwKuEOliumWdngdlMRJDBiplXPV
+ wcLQhJnd3Gezg5NWSN3QRiknWiB3lgkwlNBSIp6IemdQZvwyeJxnjfYupCgDmo/LQaLL
+ c4YeuB5r7bzj+xRE+dA50iaIJLKDfj5YyFWfMdVQLw25paMX6MRioKpF6+BJ6A5ZeCER
+ rnsBcEljTDLcjh4D2tHjOAPHmfLDA/2w5lzVC0R6nFkL0od57YoLws0X3D76/6HU+o56
+ 0eDw==
+X-Gm-Message-State: ACgBeo0f9hyrM5A/XO4T8s/MePym3QXZN4ZRo60CHFjQS57LM/dh91h3
+ kuPJnlRt7Zi0zhuRESC490VXRoK7FNAZZE8gadM=
+X-Google-Smtp-Source: AA6agR6bESZQgt0/NGDHgpqg2YlxlXfqv9MlFaFbcYHqbBuUnSse2j2x0UU6+2ThpJ/ZPE4VL1/WDlmd8KxaNM/eqrk=
+X-Received: by 2002:a1f:ab4e:0:b0:394:5af3:c490 with SMTP id
+ u75-20020a1fab4e000000b003945af3c490mr938940vke.24.1661749612187; Sun, 28 Aug
+ 2022 22:06:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+References: <166126004083.548536.11195647088995116235.stgit@warthog.procyon.org.uk>
+ <166126004796.548536.8555773200873112505.stgit@warthog.procyon.org.uk>
+In-Reply-To: <166126004796.548536.8555773200873112505.stgit@warthog.procyon.org.uk>
+Date: Mon, 29 Aug 2022 00:06:41 -0500
+Message-ID: <CAH2r5mt5iXtarkUAY7PSMGOLhkQd5LFcEz-rAnTkayxQMq_ppA@mail.gmail.com>
+Subject: Re: [PATCH 1/5] smb3: Move the flush out of smb2_copychunk_range()
+ into its callers
+To: David Howells <dhowells@redhat.com>
+Content-Type: multipart/mixed; boundary="000000000000573bac05e75a3b91"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,125 +71,167 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: samba-technical <samba-technical@lists.samba.org>
-Cc: Rowland Penny <rpenny@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: linux-cifs@vger.kernel.org, jlayton@kernel.org,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ willy@infradead.org, lsahlber@redhat.com, sfrench@samba.org,
+ dchinner@redhat.com, linux-fsdevel@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2022-08-26 at 10:03 -0700, Jeremy Allison wrote:
-> On Fri, Aug 26, 2022 at 09:19:58AM +0100, Rowland Penny wrote:
-> > Hi Jeremy, a user on the samba mailing list asked about the '-A'
-> > option
-> > for samba-tool, an option I had never heard of. It is shown in the
-> > samba-tool manpage:
-> > 
-> >       -U|--user=[DOMAIN\]USERNAME[%PASSWORD]
-> >           Sets the SMB username or username and password.
-> > 
-> >           If %PASSWORD is not specified, the user will be prompted.
-> > The client will first check the USER environment
-> >           variable (which is also permitted to also contain the
-> > password seperated by a %), then the LOGNAME variable (which
-> >           is not permitted to contain a password) and if either
-> > exists, the value is used. If these environmental variables
-> >           are not found, the username found in a Kerberos
-> > Credentials
-> > cache may be used.
-> > 
-> >           A third option is to use a credentials file which
-> > contains
-> > the plaintext of the username and password. This option
-> >           is mainly provided for scripts where the admin does not
-> > wish
-> > to pass the credentials on the command line or via
-> >           environment variables. If this method is used, make
-> > certain
-> > that the permissions on the file restrict access from
-> >           unwanted users. See the -A for more details.
-> > 
-> >           Be cautious about including passwords in scripts or
-> > passing
-> > user-supplied values onto the command line. For
-> >           security it is better to let the Samba client tool ask
-> > for
-> > the password if needed, or obtain the password once
-> >           with kinit.
-> > 
-> >           While Samba will attempt to scrub the password from the
-> > process title (as seen in ps), this is after startup and
-> >           so is subject to a race.
-> > 
-> > The only problem is that the '-A' option does not exist for samba-
-> > tool,
-> > it is a smbclient option.
-> > 
-> > I traced it down to it coming from docs-
-> > xml/build/DTD/samba.entities,
-> > but I cannot see how I stop the samba-tool manpage from using it
-> > without totally removing the relevant paragraph, which will (I
-> > presume)
-> > remove it from the smbclient manpage. Can you suggest how this can
-> > be
-> > done, or should I open a bug report ?
-> 
-> This comes from : cmdline.common.credentials.user
-> which is included in:
-> 
-> manpages/samba-tool.8.xml
-> 
-> '-A' is described in cmdline.common.credentials.authenticationfile
-> 
-> which isn't included in:
-> 
-> manpages/samba-tool.8.xml
-> 
-> So the problem is the '-A' text:
-> 
-> ------------------------------------------------------------
-> "A third option is to use a credentials file which contains
-> the plaintext of the username and password. This option
-> is mainly provided for scripts where the admin does not wish
-> to pass the credentials on the command line or via
-> environment variables. If this method is used, make certain
-> that the permissions on the file restrict access from
-> unwanted users. See the -A for more details.
-> 
-> Be cautious about including passwords in scripts or passing
-> user-supplied values onto the command line. For
-> security it is better to let the Samba client tool ask for
-> the password if needed, or obtain the password once
-> with kinit.
-> 
-> While Samba will attempt to scrub the password from the
-> process title (as seen in ps), this is after startup and
-> so is subject to a race."
-> ------------------------------------------------------------
-> 
-> So I think maybe we need to duplicate this section without
-> the -A text as a new ENTITY cmdline.samba-tool.credentials.user
-> and include that inside manpages/samba-tool.8.xml instead of
-> cmdline.common.credentials.user.
-> 
-> I'm CC:ing this to samba-technical for opinions from the
-> rest of the Team, and I also think you should log a bug
-> so we can track it.
-> 
-> Thanks ! Jeremy.
+--000000000000573bac05e75a3b91
+Content-Type: text/plain; charset="UTF-8"
 
-So after Ralph posted his latest post about gitlab, I browsed the open
-MR's on the Samba gitlab and found this:
-https://gitlab.com/samba-team/samba/-/merge_requests/2468
+Shouldn't this be using filemap_write_and_wait_range() not
+filemap_write_and_wait as we see in similar code in ext4 (and
+shouldn't it check rc in some of these cases)?   For example for the
+copychunk_range example shouldn't the patch be modified similar to the
+following:
 
-Now this would give samba-tool the missing '-A', but I do not see the
-need for it. It seems to be meant to stop entering the password on the
-command line during a domain join and sending it over the wire. This is
-something that can be done by running kinit and then 'net ads join --
-use-kerberos=required'. Using kerberos would mean that the plaintext
-password would never leave the computer, which I believe is better than
-using a credentials file.
+diff --git a/fs/cifs/cifsfs.c b/fs/cifs/cifsfs.c
+index e9fb338b8e7e..51963e83daf7 100644
+--- a/fs/cifs/cifsfs.c
++++ b/fs/cifs/cifsfs.c
+@@ -1219,8 +1219,6 @@ ssize_t cifs_file_copychunk_range(unsigned int xid,
 
-Rowland
+        cifs_dbg(FYI, "copychunk range\n");
+
+-       filemap_write_and_wait(src_inode->i_mapping);
+-
+        if (!src_file->private_data || !dst_file->private_data) {
+                rc = -EBADF;
+                cifs_dbg(VFS, "missing cifsFileInfo on copy range src file\n");
+@@ -1250,6 +1248,12 @@ ssize_t cifs_file_copychunk_range(unsigned int xid,
+        lock_two_nondirectories(target_inode, src_inode);
+
+        cifs_dbg(FYI, "about to flush pages\n");
++
++       rc = filemap_write_and_wait_range(src_inode->i_mapping, off,
++                                         off + len - 1);
++        if (rc)
++               goto out;
++
+        /* should we flush first and last page first */
+        truncate_inode_pages(&target_inode->i_data, 0);
+
+On Tue, Aug 23, 2022 at 8:09 AM David Howells via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> Move the flush out of smb2_copychunk_range() into its callers.  This will
+> allow the pagecache to be invalidated between the flush and the operation
+> in smb3_collapse_range() and smb3_insert_range().
+>
+> Signed-off-by: David Howells <dhowells@redhat.com>
+> cc: Steve French <stfrench@microsoft.com>
+> cc: Ronnie Sahlberg <lsahlber@redhat.com>
+> ---
+>
+>  fs/cifs/cifsfs.c  |    2 ++
+>  fs/cifs/smb2ops.c |   20 ++++++++------------
+>  2 files changed, 10 insertions(+), 12 deletions(-)
+>
+> diff --git a/fs/cifs/cifsfs.c b/fs/cifs/cifsfs.c
+> index f54d8bf2732a..e9fb338b8e7e 100644
+> --- a/fs/cifs/cifsfs.c
+> +++ b/fs/cifs/cifsfs.c
+> @@ -1219,6 +1219,8 @@ ssize_t cifs_file_copychunk_range(unsigned int xid,
+>
+>         cifs_dbg(FYI, "copychunk range\n");
+>
+> +       filemap_write_and_wait(src_inode->i_mapping);
+> +
+>         if (!src_file->private_data || !dst_file->private_data) {
+>                 rc = -EBADF;
+>                 cifs_dbg(VFS, "missing cifsFileInfo on copy range src file\n");
+> diff --git a/fs/cifs/smb2ops.c b/fs/cifs/smb2ops.c
+> index 96f3b0573606..7e3de6a0e1dc 100644
+> --- a/fs/cifs/smb2ops.c
+> +++ b/fs/cifs/smb2ops.c
+> @@ -1600,17 +1600,8 @@ smb2_copychunk_range(const unsigned int xid,
+>         int chunks_copied = 0;
+>         bool chunk_sizes_updated = false;
+>         ssize_t bytes_written, total_bytes_written = 0;
+> -       struct inode *inode;
+>
+>         pcchunk = kmalloc(sizeof(struct copychunk_ioctl), GFP_KERNEL);
+> -
+> -       /*
+> -        * We need to flush all unwritten data before we can send the
+> -        * copychunk ioctl to the server.
+> -        */
+> -       inode = d_inode(trgtfile->dentry);
+> -       filemap_write_and_wait(inode->i_mapping);
+> -
+>         if (pcchunk == NULL)
+>                 return -ENOMEM;
+>
+> @@ -3689,6 +3680,8 @@ static long smb3_collapse_range(struct file *file, struct cifs_tcon *tcon,
+>                 goto out;
+>         }
+>
+> +       filemap_write_and_wait(inode->i_mapping);
+> +
+>         rc = smb2_copychunk_range(xid, cfile, cfile, off + len,
+>                                   i_size_read(inode) - off - len, off);
+>         if (rc < 0)
+> @@ -3716,18 +3709,21 @@ static long smb3_insert_range(struct file *file, struct cifs_tcon *tcon,
+>         int rc;
+>         unsigned int xid;
+>         struct cifsFileInfo *cfile = file->private_data;
+> +       struct inode *inode = file_inode(file);
+>         __le64 eof;
+>         __u64  count;
+>
+>         xid = get_xid();
+>
+> -       if (off >= i_size_read(file->f_inode)) {
+> +       if (off >= i_size_read(inode)) {
+>                 rc = -EINVAL;
+>                 goto out;
+>         }
+>
+> -       count = i_size_read(file->f_inode) - off;
+> -       eof = cpu_to_le64(i_size_read(file->f_inode) + len);
+> +       count = i_size_read(inode) - off;
+> +       eof = cpu_to_le64(i_size_read(inode) + len);
+> +
+> +       filemap_write_and_wait(inode->i_mapping);
+>
+>         rc = SMB2_set_eof(xid, tcon, cfile->fid.persistent_fid,
+>                           cfile->fid.volatile_fid, cfile->pid, &eof);
+>
+>
+>
 
 
+-- 
+Thanks,
+
+Steve
+
+--000000000000573bac05e75a3b91
+Content-Type: text/x-patch; charset="US-ASCII"; name="use-filemap_write_and_wait_range.patch"
+Content-Disposition: attachment; 
+	filename="use-filemap_write_and_wait_range.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_l7easojh0>
+X-Attachment-Id: f_l7easojh0
+
+ZGlmZiAtLWdpdCBhL2ZzL2NpZnMvY2lmc2ZzLmMgYi9mcy9jaWZzL2NpZnNmcy5jCmluZGV4IGU5
+ZmIzMzhiOGU3ZS4uNTE5NjNlODNkYWY3IDEwMDY0NAotLS0gYS9mcy9jaWZzL2NpZnNmcy5jCisr
+KyBiL2ZzL2NpZnMvY2lmc2ZzLmMKQEAgLTEyMTksOCArMTIxOSw2IEBAIHNzaXplX3QgY2lmc19m
+aWxlX2NvcHljaHVua19yYW5nZSh1bnNpZ25lZCBpbnQgeGlkLAogCiAJY2lmc19kYmcoRllJLCAi
+Y29weWNodW5rIHJhbmdlXG4iKTsKIAotCWZpbGVtYXBfd3JpdGVfYW5kX3dhaXQoc3JjX2lub2Rl
+LT5pX21hcHBpbmcpOwotCiAJaWYgKCFzcmNfZmlsZS0+cHJpdmF0ZV9kYXRhIHx8ICFkc3RfZmls
+ZS0+cHJpdmF0ZV9kYXRhKSB7CiAJCXJjID0gLUVCQURGOwogCQljaWZzX2RiZyhWRlMsICJtaXNz
+aW5nIGNpZnNGaWxlSW5mbyBvbiBjb3B5IHJhbmdlIHNyYyBmaWxlXG4iKTsKQEAgLTEyNTAsNiAr
+MTI0OCwxMiBAQCBzc2l6ZV90IGNpZnNfZmlsZV9jb3B5Y2h1bmtfcmFuZ2UodW5zaWduZWQgaW50
+IHhpZCwKIAlsb2NrX3R3b19ub25kaXJlY3Rvcmllcyh0YXJnZXRfaW5vZGUsIHNyY19pbm9kZSk7
+CiAKIAljaWZzX2RiZyhGWUksICJhYm91dCB0byBmbHVzaCBwYWdlc1xuIik7CisKKwlyYyA9IGZp
+bGVtYXBfd3JpdGVfYW5kX3dhaXRfcmFuZ2Uoc3JjX2lub2RlLT5pX21hcHBpbmcsIG9mZiwKKwkJ
+CQkJICBvZmYgKyBsZW4gLSAxKTsKKyAgICAgICAgaWYgKHJjKQorCQlnb3RvIG91dDsKKwogCS8q
+IHNob3VsZCB3ZSBmbHVzaCBmaXJzdCBhbmQgbGFzdCBwYWdlIGZpcnN0ICovCiAJdHJ1bmNhdGVf
+aW5vZGVfcGFnZXMoJnRhcmdldF9pbm9kZS0+aV9kYXRhLCAwKTsKIAo=
+--000000000000573bac05e75a3b91--
 
