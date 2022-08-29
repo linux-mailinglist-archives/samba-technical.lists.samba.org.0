@@ -2,62 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F4A45A4222
-	for <lists+samba-technical@lfdr.de>; Mon, 29 Aug 2022 07:08:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E929B5A437D
+	for <lists+samba-technical@lfdr.de>; Mon, 29 Aug 2022 09:02:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=qDOlBO8M3knCdtBqq7VFSNn3zWVTBCbhwMXpQDGbaKs=; b=zcqJru9y+aQr0i5tV+VEq6qob1
-	QajB4hSEIJKHVILRwfeZWptXfKSDn3ihIGACDDVjYxXvcd5ow/9UUf565aT4g/MJnDd7Bd+pZRbzQ
-	VN5Dg9N6LolJILAyHdnc+AdSEz8VaVxK8O9PIkyaQoi6US61ZmWTwC0klyk5gvmiv0lbzw08V846Y
-	a5lNji+1hCjopK9JcX86joNjtR7w8+WwAM/rt4meqiueHEzSZHiw8Si4hZBEjPxxXHQQhCSsZXE8c
-	ONNmpg157pRa9valM25e+v5BxAFF71HZE/2Ui4BrnoZoSIExYvEUFqS4OjJU0x4ZI7GyU57qFGFwK
-	mO74Kk3g==;
-Received: from ip6-localhost ([::1]:46866 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=8nHav887B7rtd7YfsewbcaST7KWDf5OTDCmuzDY9J9M=; b=cQoCJzfNWQwVg4NT3SCxavpJ6U
+	iNBEzCRYmZ+wcLia8bxY/LnO00Zckr2ZJlkRMRMLqB1r3hbdoe0bhjsdyfcnNjDIRmo9suyOj+heu
+	hyVPRZ+WHNoHJFpwgMdUq/aAAMgsWnYVAJF7rb2aUystRWcLdt8MLExbwLUHP/u00DM8cnYKjhGok
+	skmrTxm8wRr/imgJy63PWazA4qcuYgXA6axDe+HFyhgZD43ObEAslnp5JXzQ1o6mMRWxuuStP/e7l
+	g3k0nbfWHxPyQttwwrbtJBgHGj1N4wBTLljx22Pe/XtUoGW8K2Vs1nBWWfWy+72Is8S/3k4EVUsRa
+	qxfEGxjg==;
+Received: from ip6-localhost ([::1]:62364 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oSWzL-002mjZ-GS; Mon, 29 Aug 2022 05:07:07 +0000
-Received: from mail-vk1-xa2b.google.com ([2607:f8b0:4864:20::a2b]:43521) 
+	id 1oSYlv-002nGM-5L; Mon, 29 Aug 2022 07:01:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26998) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oSWzF-002mjQ-ED
- for samba-technical@lists.samba.org; Mon, 29 Aug 2022 05:07:04 +0000
-Received: by mail-vk1-xa2b.google.com with SMTP id w129so3243049vkg.10
- for <samba-technical@lists.samba.org>; Sun, 28 Aug 2022 22:06:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc;
- bh=qDOlBO8M3knCdtBqq7VFSNn3zWVTBCbhwMXpQDGbaKs=;
- b=JhSp8ZCo+u+70xYvY2SqqvQM3/P9g9rt/QRhkPlFs/LoMzTZCynWIQSkKKSukx0vS+
- GRRbeRKut0oQs3veOJ9ZvYaD2/0z8nHbTMGLsM1spGRgkrGsvEzQMTJm7UbZMbBiC7NO
- aSlQPpC8YxBzDTxy2ohnWGkVhuXfUgKEmhvBnzuRCgPOhTPG+cKlxuPjTEERIdy2E6xh
- mWa4VtkkKAQX4YRRvM4uCHHxUYEfELg4OJVh/b4s7Ga9eMhFLpyo+sfzZvf2R+1bkX0k
- SzYO8KJRiFHz8T1xe8kzKGSXeDQvVgDgpyhswzPB4pVCEq0N00Q5tFBnF9duLRMs0uDg
- hKBQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc;
- bh=qDOlBO8M3knCdtBqq7VFSNn3zWVTBCbhwMXpQDGbaKs=;
- b=P7G1dDFr/s35+PPSX+30NwbGVy79oOxPzunq5N8lpN/dl1C0W0sLk1vBjfARKrftPi
- IZeFEexVTeBhMI8r1wQfNee6bBPoyXA6xsjW4EB2FnwKuEOliumWdngdlMRJDBiplXPV
- wcLQhJnd3Gezg5NWSN3QRiknWiB3lgkwlNBSIp6IemdQZvwyeJxnjfYupCgDmo/LQaLL
- c4YeuB5r7bzj+xRE+dA50iaIJLKDfj5YyFWfMdVQLw25paMX6MRioKpF6+BJ6A5ZeCER
- rnsBcEljTDLcjh4D2tHjOAPHmfLDA/2w5lzVC0R6nFkL0od57YoLws0X3D76/6HU+o56
- 0eDw==
-X-Gm-Message-State: ACgBeo0f9hyrM5A/XO4T8s/MePym3QXZN4ZRo60CHFjQS57LM/dh91h3
- kuPJnlRt7Zi0zhuRESC490VXRoK7FNAZZE8gadM=
-X-Google-Smtp-Source: AA6agR6bESZQgt0/NGDHgpqg2YlxlXfqv9MlFaFbcYHqbBuUnSse2j2x0UU6+2ThpJ/ZPE4VL1/WDlmd8KxaNM/eqrk=
-X-Received: by 2002:a1f:ab4e:0:b0:394:5af3:c490 with SMTP id
- u75-20020a1fab4e000000b003945af3c490mr938940vke.24.1661749612187; Sun, 28 Aug
- 2022 22:06:52 -0700 (PDT)
+ (Exim) id 1oSYlg-002nGC-5p
+ for samba-technical@lists.samba.org; Mon, 29 Aug 2022 07:01:13 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=8nHav887B7rtd7YfsewbcaST7KWDf5OTDCmuzDY9J9M=; b=QDuOiymcinuY5P6PVNZwbH0Wh1
+ vsSTZra2/WHCD7QWOHxo1SkA/EXp3ahdt4d0iX2Aawb5dKrj5MXh45y1MyjGWmfLcfOq81L06iFgM
+ GMky3iCmY3EBTSVqVcQ+AayRO2BlTwhXGUpQWlt/4YrDvxXWkRXqz5ODqhTjbQIUXOd7+3AlZmyZp
+ wHey6z+ITigHiKOCpit19yQ/d+kszzNWJfprx5Nshpb/Jnkga/fMyt5fETWtk+BG7te4h1CY9xAoF
+ EqOtG5n0Eoi6DRRG3BeqXZ/+COU49PLTqVOefVXneWxEJnQtfA3TWy2k1KVzDy07LBfWWWOXMSNXU
+ rtFmoroUkCE3fyCdDyKEkg6aRXRREZmp1GSDXL2TJb27UQtvFoREGgH81pYIJSEru0IOUAkMPzAwG
+ GwljUCs9TN6QPr1YThQY2evJZOwYu0xiJZ2E+0YsAcmGVdTG+2ZK1PPR+6j/GAhKOPnct/roVrDVH
+ xlKqdiXjZbKcQKb/8RUIqGcP;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1oSYle-002BdV-7V; Mon, 29 Aug 2022 07:01:06 +0000
+To: samba-technical@lists.samba.org
+Subject: Re: Samba and ShellCheck
+Date: Mon, 29 Aug 2022 09:01:05 +0200
+Message-ID: <5601373.DvuYhMxLoT@magrathea>
+In-Reply-To: <20220823180243.565f35e2@martins.ozlabs.org>
+References: <4766256.31r3eYUQgx@magrathea>
+ <20220823180243.565f35e2@martins.ozlabs.org>
 MIME-Version: 1.0
-References: <166126004083.548536.11195647088995116235.stgit@warthog.procyon.org.uk>
- <166126004796.548536.8555773200873112505.stgit@warthog.procyon.org.uk>
-In-Reply-To: <166126004796.548536.8555773200873112505.stgit@warthog.procyon.org.uk>
-Date: Mon, 29 Aug 2022 00:06:41 -0500
-Message-ID: <CAH2r5mt5iXtarkUAY7PSMGOLhkQd5LFcEz-rAnTkayxQMq_ppA@mail.gmail.com>
-Subject: Re: [PATCH 1/5] smb3: Move the flush out of smb2_copychunk_range()
- into its callers
-To: David Howells <dhowells@redhat.com>
-Content-Type: multipart/mixed; boundary="000000000000573bac05e75a3b91"
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,167 +56,84 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: linux-cifs@vger.kernel.org, jlayton@kernel.org,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- willy@infradead.org, lsahlber@redhat.com, sfrench@samba.org,
- dchinner@redhat.com, linux-fsdevel@vger.kernel.org
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000573bac05e75a3b91
-Content-Type: text/plain; charset="UTF-8"
+On Tuesday, 23 August 2022 10:02:43 CEST Martin Schwenke via samba-technical 
+wrote:
+> Hi Andreas,
+> 
+> On Tue, 23 Aug 2022 07:50:24 +0200, Andreas Schneider via
+> 
+> samba-technical <samba-technical@lists.samba.org> wrote:
+> > for Samba master we have ShellCheck with error level in place now. It will
+> > check that our scripts are error free!
+> 
+> Yay!
+> 
+> That probably isn't true for CTDB, but we are gradually improving things.
+> 
+> > The next step would be to move ShellCheck to warning level and this will
+> > be
+> > quite some work.
+> 
+> Yep!
+> 
+> > But first we need to discuss something.
+> > 
+> > If I run ShellCheck in warning level:
+> > 
+> > ./script/check-shell-scripts.sh $(pwd) warning
+> > 
+> > The warning I see most of the time is:
+> > 
+> > warning: In POSIX sh, 'local' is undefined. [SC3043]
+> 
+> This is why I never use local in /bin/sh scripts.  It has never made it
+> into POSIX.  I suspect the reason is that different shells implemented
+> different semantics.  For example:
+> 
+>   local foo=$(example --command)
+> 
+> I think local in bash eats the exit code of the subshell.  Other shells
+> may implement it differently.
+> 
+> I use an "excellent" convention for local variables in /bin/sh scripts,
+> specially designed to reduce readability.  ;-)  I prefix any local
+> variable with '_'.  However, it makes no semantic difference, it just
+> acts as a hint.
 
-Shouldn't this be using filemap_write_and_wait_range() not
-filemap_write_and_wait as we see in similar code in ext4 (and
-shouldn't it check rc in some of these cases)?   For example for the
-copychunk_range example shouldn't the patch be modified similar to the
-following:
+Either we convert everything to this convention or we disable the shellcheck 
+warning in those scripts. What do you prefer?
 
-diff --git a/fs/cifs/cifsfs.c b/fs/cifs/cifsfs.c
-index e9fb338b8e7e..51963e83daf7 100644
---- a/fs/cifs/cifsfs.c
-+++ b/fs/cifs/cifsfs.c
-@@ -1219,8 +1219,6 @@ ssize_t cifs_file_copychunk_range(unsigned int xid,
+./script/check-shell-scripts.sh $(pwd) warning >shell.log 2>&1
 
-        cifs_dbg(FYI, "copychunk range\n");
 
--       filemap_write_and_wait(src_inode->i_mapping);
--
-        if (!src_file->private_data || !dst_file->private_data) {
-                rc = -EBADF;
-                cifs_dbg(VFS, "missing cifsFileInfo on copy range src file\n");
-@@ -1250,6 +1248,12 @@ ssize_t cifs_file_copychunk_range(unsigned int xid,
-        lock_two_nondirectories(target_inode, src_inode);
+Example to disable the warning:
 
-        cifs_dbg(FYI, "about to flush pages\n");
-+
-+       rc = filemap_write_and_wait_range(src_inode->i_mapping, off,
-+                                         off + len - 1);
-+        if (rc)
-+               goto out;
-+
-        /* should we flush first and last page first */
-        truncate_inode_pages(&target_inode->i_data, 0);
 
-On Tue, Aug 23, 2022 at 8:09 AM David Howells via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> Move the flush out of smb2_copychunk_range() into its callers.  This will
-> allow the pagecache to be invalidated between the flush and the operation
-> in smb3_collapse_range() and smb3_insert_range().
->
-> Signed-off-by: David Howells <dhowells@redhat.com>
-> cc: Steve French <stfrench@microsoft.com>
-> cc: Ronnie Sahlberg <lsahlber@redhat.com>
-> ---
->
->  fs/cifs/cifsfs.c  |    2 ++
->  fs/cifs/smb2ops.c |   20 ++++++++------------
->  2 files changed, 10 insertions(+), 12 deletions(-)
->
-> diff --git a/fs/cifs/cifsfs.c b/fs/cifs/cifsfs.c
-> index f54d8bf2732a..e9fb338b8e7e 100644
-> --- a/fs/cifs/cifsfs.c
-> +++ b/fs/cifs/cifsfs.c
-> @@ -1219,6 +1219,8 @@ ssize_t cifs_file_copychunk_range(unsigned int xid,
->
->         cifs_dbg(FYI, "copychunk range\n");
->
-> +       filemap_write_and_wait(src_inode->i_mapping);
-> +
->         if (!src_file->private_data || !dst_file->private_data) {
->                 rc = -EBADF;
->                 cifs_dbg(VFS, "missing cifsFileInfo on copy range src file\n");
-> diff --git a/fs/cifs/smb2ops.c b/fs/cifs/smb2ops.c
-> index 96f3b0573606..7e3de6a0e1dc 100644
-> --- a/fs/cifs/smb2ops.c
-> +++ b/fs/cifs/smb2ops.c
-> @@ -1600,17 +1600,8 @@ smb2_copychunk_range(const unsigned int xid,
->         int chunks_copied = 0;
->         bool chunk_sizes_updated = false;
->         ssize_t bytes_written, total_bytes_written = 0;
-> -       struct inode *inode;
->
->         pcchunk = kmalloc(sizeof(struct copychunk_ioctl), GFP_KERNEL);
-> -
-> -       /*
-> -        * We need to flush all unwritten data before we can send the
-> -        * copychunk ioctl to the server.
-> -        */
-> -       inode = d_inode(trgtfile->dentry);
-> -       filemap_write_and_wait(inode->i_mapping);
-> -
->         if (pcchunk == NULL)
->                 return -ENOMEM;
->
-> @@ -3689,6 +3680,8 @@ static long smb3_collapse_range(struct file *file, struct cifs_tcon *tcon,
->                 goto out;
->         }
->
-> +       filemap_write_and_wait(inode->i_mapping);
-> +
->         rc = smb2_copychunk_range(xid, cfile, cfile, off + len,
->                                   i_size_read(inode) - off - len, off);
->         if (rc < 0)
-> @@ -3716,18 +3709,21 @@ static long smb3_insert_range(struct file *file, struct cifs_tcon *tcon,
->         int rc;
->         unsigned int xid;
->         struct cifsFileInfo *cfile = file->private_data;
-> +       struct inode *inode = file_inode(file);
->         __le64 eof;
->         __u64  count;
->
->         xid = get_xid();
->
-> -       if (off >= i_size_read(file->f_inode)) {
-> +       if (off >= i_size_read(inode)) {
->                 rc = -EINVAL;
->                 goto out;
->         }
->
-> -       count = i_size_read(file->f_inode) - off;
-> -       eof = cpu_to_le64(i_size_read(file->f_inode) + len);
-> +       count = i_size_read(inode) - off;
-> +       eof = cpu_to_le64(i_size_read(inode) + len);
-> +
-> +       filemap_write_and_wait(inode->i_mapping);
->
->         rc = SMB2_set_eof(xid, tcon, cfile->fid.persistent_fid,
->                           cfile->fid.volatile_fid, cfile->pid, &eof);
->
->
->
+ ctdb/tests/run_tests.sh | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/ctdb/tests/run_tests.sh b/ctdb/tests/run_tests.sh
+index ff431f8831f..12e495e3dc0 100755
+--- a/ctdb/tests/run_tests.sh
++++ b/ctdb/tests/run_tests.sh
+@@ -1,4 +1,5 @@
+ #!/usr/bin/env bash
++# shellcheck disable=SC3043
+ 
+ usage() {
+     cat <<EOF
+
 
 
 -- 
-Thanks,
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
-Steve
 
---000000000000573bac05e75a3b91
-Content-Type: text/x-patch; charset="US-ASCII"; name="use-filemap_write_and_wait_range.patch"
-Content-Disposition: attachment; 
-	filename="use-filemap_write_and_wait_range.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_l7easojh0>
-X-Attachment-Id: f_l7easojh0
-
-ZGlmZiAtLWdpdCBhL2ZzL2NpZnMvY2lmc2ZzLmMgYi9mcy9jaWZzL2NpZnNmcy5jCmluZGV4IGU5
-ZmIzMzhiOGU3ZS4uNTE5NjNlODNkYWY3IDEwMDY0NAotLS0gYS9mcy9jaWZzL2NpZnNmcy5jCisr
-KyBiL2ZzL2NpZnMvY2lmc2ZzLmMKQEAgLTEyMTksOCArMTIxOSw2IEBAIHNzaXplX3QgY2lmc19m
-aWxlX2NvcHljaHVua19yYW5nZSh1bnNpZ25lZCBpbnQgeGlkLAogCiAJY2lmc19kYmcoRllJLCAi
-Y29weWNodW5rIHJhbmdlXG4iKTsKIAotCWZpbGVtYXBfd3JpdGVfYW5kX3dhaXQoc3JjX2lub2Rl
-LT5pX21hcHBpbmcpOwotCiAJaWYgKCFzcmNfZmlsZS0+cHJpdmF0ZV9kYXRhIHx8ICFkc3RfZmls
-ZS0+cHJpdmF0ZV9kYXRhKSB7CiAJCXJjID0gLUVCQURGOwogCQljaWZzX2RiZyhWRlMsICJtaXNz
-aW5nIGNpZnNGaWxlSW5mbyBvbiBjb3B5IHJhbmdlIHNyYyBmaWxlXG4iKTsKQEAgLTEyNTAsNiAr
-MTI0OCwxMiBAQCBzc2l6ZV90IGNpZnNfZmlsZV9jb3B5Y2h1bmtfcmFuZ2UodW5zaWduZWQgaW50
-IHhpZCwKIAlsb2NrX3R3b19ub25kaXJlY3Rvcmllcyh0YXJnZXRfaW5vZGUsIHNyY19pbm9kZSk7
-CiAKIAljaWZzX2RiZyhGWUksICJhYm91dCB0byBmbHVzaCBwYWdlc1xuIik7CisKKwlyYyA9IGZp
-bGVtYXBfd3JpdGVfYW5kX3dhaXRfcmFuZ2Uoc3JjX2lub2RlLT5pX21hcHBpbmcsIG9mZiwKKwkJ
-CQkJICBvZmYgKyBsZW4gLSAxKTsKKyAgICAgICAgaWYgKHJjKQorCQlnb3RvIG91dDsKKwogCS8q
-IHNob3VsZCB3ZSBmbHVzaCBmaXJzdCBhbmQgbGFzdCBwYWdlIGZpcnN0ICovCiAJdHJ1bmNhdGVf
-aW5vZGVfcGFnZXMoJnRhcmdldF9pbm9kZS0+aV9kYXRhLCAwKTsKIAo=
---000000000000573bac05e75a3b91--
 
