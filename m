@@ -2,47 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E929B5A437D
-	for <lists+samba-technical@lfdr.de>; Mon, 29 Aug 2022 09:02:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DD155A4AAF
+	for <lists+samba-technical@lfdr.de>; Mon, 29 Aug 2022 13:48:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=8nHav887B7rtd7YfsewbcaST7KWDf5OTDCmuzDY9J9M=; b=cQoCJzfNWQwVg4NT3SCxavpJ6U
-	iNBEzCRYmZ+wcLia8bxY/LnO00Zckr2ZJlkRMRMLqB1r3hbdoe0bhjsdyfcnNjDIRmo9suyOj+heu
-	hyVPRZ+WHNoHJFpwgMdUq/aAAMgsWnYVAJF7rb2aUystRWcLdt8MLExbwLUHP/u00DM8cnYKjhGok
-	skmrTxm8wRr/imgJy63PWazA4qcuYgXA6axDe+HFyhgZD43ObEAslnp5JXzQ1o6mMRWxuuStP/e7l
-	g3k0nbfWHxPyQttwwrbtJBgHGj1N4wBTLljx22Pe/XtUoGW8K2Vs1nBWWfWy+72Is8S/3k4EVUsRa
-	qxfEGxjg==;
-Received: from ip6-localhost ([::1]:62364 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=1HrZzmnSgLAlGTdBk3PmXSDo7PBqNscrRzXY2aAvWvo=; b=ASL165d4wqTaTV8ANT6OTodqt4
+	VZlP2Hjo06fIS2uQ6tPnvJAxeU15m1wei9luIyGH3VEw82MQJ/oWPHaEu1MxRCiSMk77BnhSqwW3O
+	E5dEY1O6uvQlCI4s6sB9+8FE5eTrG6t+Ni0XaMmskMv+pJBJ6G8tIw351kdaizD5azBHtCWETutAQ
+	gF55HotZ8f10Uv0QrHJOstD5xQXDZ4Jt7G0UdMpru2rJqyVDSdBFOjUHSfTXQnRHChu9BPnEqcpV3
+	PNNIs/OOZSTzY67CZrMyc4+bZPQkXRUERpoElqkXjhD2iFNjFQZ7W//pcq0QsRp6LTOZLAfm6dlVe
+	Zv9SNB8Q==;
+Received: from ip6-localhost ([::1]:38302 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oSYlv-002nGM-5L; Mon, 29 Aug 2022 07:01:23 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26998) 
+	id 1oSdEr-002rJB-RK; Mon, 29 Aug 2022 11:47:33 +0000
+Received: from gandalf.ozlabs.org ([150.107.74.76]:50303) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oSYlg-002nGC-5p
- for samba-technical@lists.samba.org; Mon, 29 Aug 2022 07:01:13 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=8nHav887B7rtd7YfsewbcaST7KWDf5OTDCmuzDY9J9M=; b=QDuOiymcinuY5P6PVNZwbH0Wh1
- vsSTZra2/WHCD7QWOHxo1SkA/EXp3ahdt4d0iX2Aawb5dKrj5MXh45y1MyjGWmfLcfOq81L06iFgM
- GMky3iCmY3EBTSVqVcQ+AayRO2BlTwhXGUpQWlt/4YrDvxXWkRXqz5ODqhTjbQIUXOd7+3AlZmyZp
- wHey6z+ITigHiKOCpit19yQ/d+kszzNWJfprx5Nshpb/Jnkga/fMyt5fETWtk+BG7te4h1CY9xAoF
- EqOtG5n0Eoi6DRRG3BeqXZ/+COU49PLTqVOefVXneWxEJnQtfA3TWy2k1KVzDy07LBfWWWOXMSNXU
- rtFmoroUkCE3fyCdDyKEkg6aRXRREZmp1GSDXL2TJb27UQtvFoREGgH81pYIJSEru0IOUAkMPzAwG
- GwljUCs9TN6QPr1YThQY2evJZOwYu0xiJZ2E+0YsAcmGVdTG+2ZK1PPR+6j/GAhKOPnct/roVrDVH
- xlKqdiXjZbKcQKb/8RUIqGcP;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1oSYle-002BdV-7V; Mon, 29 Aug 2022 07:01:06 +0000
-To: samba-technical@lists.samba.org
+ (Exim) id 1oSdEm-002rJ2-Tx
+ for samba-technical@lists.samba.org; Mon, 29 Aug 2022 11:47:31 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4MGTFD0MLQz4xGK;
+ Mon, 29 Aug 2022 21:47:11 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
+ s=202004; t=1661773632;
+ bh=1HrZzmnSgLAlGTdBk3PmXSDo7PBqNscrRzXY2aAvWvo=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=bs8q3fl+ZNVBB1t7aJQOAYCb1nBH3OuoEEeE0OC5Yx8HefHgkqEjxPC+hgHcbLMUa
+ gA922A0bVM+oYTeaJTCgQFo4QKD/d9SDrs8FbQKaLmHE4buwbNx4WH03jMAAuQ7RoB
+ 8sf36CtxLUMfGIir62KFdgJTffjuoVNNWD8Coj0tkYngkAv2iDydTEng6Bhaizu+5j
+ CeePcPtAr8r4uKbN4yC/HF6M5b55FIrrYO26+WjtjUY92RxG7hIHBYgge7HByoDB3k
+ zrRCF3jo12dupHzOVELxee3TIcJvhtSTXTGNNdZkYb0t2WwkfZHIkzTh/7BZH3/r1y
+ K4Lv4ZjeOaDDA==
+Date: Mon, 29 Aug 2022 21:47:11 +1000
+To: Andreas Schneider <asn@samba.org>
 Subject: Re: Samba and ShellCheck
-Date: Mon, 29 Aug 2022 09:01:05 +0200
-Message-ID: <5601373.DvuYhMxLoT@magrathea>
-In-Reply-To: <20220823180243.565f35e2@martins.ozlabs.org>
+Message-ID: <20220829214711.03b3fe89@martins.ozlabs.org>
+In-Reply-To: <5601373.DvuYhMxLoT@magrathea>
 References: <4766256.31r3eYUQgx@magrathea>
  <20220823180243.565f35e2@martins.ozlabs.org>
+ <5601373.DvuYhMxLoT@magrathea>
+X-Mailer: Claws Mail 4.1.0 (GTK 3.24.34; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,84 +60,68 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tuesday, 23 August 2022 10:02:43 CEST Martin Schwenke via samba-technical 
+On Mon, 29 Aug 2022 09:01:05 +0200, Andreas Schneider <asn@samba.org>
 wrote:
-> Hi Andreas,
+
+> On Tuesday, 23 August 2022 10:02:43 CEST Martin Schwenke via samba-technical 
+> wrote:
+
+> > I use an "excellent" convention for local variables in /bin/sh scripts,
+> > specially designed to reduce readability.  ;-)  I prefix any local
+> > variable with '_'.  However, it makes no semantic difference, it just
+> > acts as a hint.  
 > 
-> On Tue, 23 Aug 2022 07:50:24 +0200, Andreas Schneider via
+> Either we convert everything to this convention or we disable the shellcheck 
+> warning in those scripts. What do you prefer?
+
+I wouldn't want to force that convention on anyone.  Out of those 2
+choices, I would say disable the warning.
+
+> ./script/check-shell-scripts.sh $(pwd) warning >shell.log 2>&1
 > 
-> samba-technical <samba-technical@lists.samba.org> wrote:
-> > for Samba master we have ShellCheck with error level in place now. It will
-> > check that our scripts are error free!
 > 
-> Yay!
+> Example to disable the warning:
 > 
-> That probably isn't true for CTDB, but we are gradually improving things.
 > 
-> > The next step would be to move ShellCheck to warning level and this will
-> > be
-> > quite some work.
+>  ctdb/tests/run_tests.sh | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> Yep!
-> 
-> > But first we need to discuss something.
-> > 
-> > If I run ShellCheck in warning level:
-> > 
-> > ./script/check-shell-scripts.sh $(pwd) warning
-> > 
-> > The warning I see most of the time is:
-> > 
-> > warning: In POSIX sh, 'local' is undefined. [SC3043]
-> 
-> This is why I never use local in /bin/sh scripts.  It has never made it
-> into POSIX.  I suspect the reason is that different shells implemented
-> different semantics.  For example:
-> 
->   local foo=$(example --command)
-> 
-> I think local in bash eats the exit code of the subshell.  Other shells
-> may implement it differently.
-> 
-> I use an "excellent" convention for local variables in /bin/sh scripts,
-> specially designed to reduce readability.  ;-)  I prefix any local
-> variable with '_'.  However, it makes no semantic difference, it just
-> acts as a hint.
+> diff --git a/ctdb/tests/run_tests.sh b/ctdb/tests/run_tests.sh
+> index ff431f8831f..12e495e3dc0 100755
+> --- a/ctdb/tests/run_tests.sh
+> +++ b/ctdb/tests/run_tests.sh
+> @@ -1,4 +1,5 @@
+>  #!/usr/bin/env bash
+> +# shellcheck disable=SC3043
+>  
+>  usage() {
+>      cat <<EOF
 
-Either we convert everything to this convention or we disable the shellcheck 
-warning in those scripts. What do you prefer?
+It looks like check-shell-scripts.sh is wrong.  It should not force
+POSIX shell via --shell=sh.  shellcheck passes on
+ctdb/tests/run_tests.sh with no options.  It is a bash script and
+shellcheck can figure that out.  There are other shell scripts in ctdb/
+historically named with a .sh suffix but which shellcheck can't figure
+out the type of, and they would be a problem.
 
-./script/check-shell-scripts.sh $(pwd) warning >shell.log 2>&1
+Note that in ctdb/ we already have ctdb/tests/UNIT/shellcheck/, which
+contains tests to run shellcheck (with some exclusions) on all scripts
+that are known to pass.  Try:
 
+  ./ctdb/tests/run_tests.sh ./ctdb/tests/UNIT/shellcheck
 
-Example to disable the warning:
+I have WIP patches that add coverage for more scripts.
 
+I think ctdb/ is relatively under control.  We have been improving
+shellcheck compliance for quite a few years (since 2016, apparently).
+:-)
 
- ctdb/tests/run_tests.sh | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/ctdb/tests/run_tests.sh b/ctdb/tests/run_tests.sh
-index ff431f8831f..12e495e3dc0 100755
---- a/ctdb/tests/run_tests.sh
-+++ b/ctdb/tests/run_tests.sh
-@@ -1,4 +1,5 @@
- #!/usr/bin/env bash
-+# shellcheck disable=SC3043
- 
- usage() {
-     cat <<EOF
-
-
-
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
+peace & happiness,
+martin
 
