@@ -2,64 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D4845A6117
-	for <lists+samba-technical@lfdr.de>; Tue, 30 Aug 2022 12:49:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B622C5A670D
+	for <lists+samba-technical@lfdr.de>; Tue, 30 Aug 2022 17:13:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=KRp01oZfJFm6ILCgWA5QXfLM3Bth9pOxgctimQX+jlg=; b=eijBuBvyRAAt1t2hw/qOH0vq7a
-	E+QxlzwU4h4VX7HWvIZRUhyd0S+ndaHQclu8tCRlZDZRsqzcIrT9n1kcEEwBo3QC9xOIapYiKAjh0
-	rC0xexiMlMS0Zd1GvB0aem+/4dYJKLLhFtGUco8N4XcRliVMnK/Vacjb+DH0fLKcSRiEUshJPsf5G
-	6/FBPn9JZKj1Ar9CiWYJPDE2VT/uSmqNYo4/1EGWXevHRu66XpMMoTHV9C5uJVzwZMUsnBXXW7oMC
-	TvSiBVRfP3tZnZJvcCjt9moWEdJVTljys3a0XsICotbzwp+FbNg/ZGldJWB5ZwxlhTutDIL/al2av
-	grbrLZYw==;
-Received: from ip6-localhost ([::1]:60744 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=qY7rapIqISS4qYIaqgBNTPBwIX7O/GVloMzZw5vlz6g=; b=4yFMS6eqiANUopqTe/GPHZobmc
+	VGpcunX7m9/BV3QNuUgqKKUzVa8Buv7gaGMQGULHzvL+2sLTkcF4kgLx/kGtFLh5jGF8ikVvMawvT
+	IwY7krmn3F49ctPcxih89FVpk4+PbkGVBzD2jTDiWVdCwu5hekY+9McBbao8A95kxcCB8Tm1defdP
+	MbdGvehVx4y5OlHrKg+CCESPrJBxk1YYCwxCGc7McglOM0nsq+Nua9k1UNuYJOhvKX2D+Cvr+Gdl2
+	SW3WnNbOyRDTWWA5SU/BkWec9ee+a2ZbWm6K4Rkir/Em+jt3C/Gz7KZ2DpUoGywEi+u+b8OeXfBnP
+	Q6nW96Kw==;
+Received: from ip6-localhost ([::1]:63998 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oSynL-0031KS-Ag; Tue, 30 Aug 2022 10:48:35 +0000
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334]:42558) 
+	id 1oT2uy-0034EI-QU; Tue, 30 Aug 2022 15:12:44 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58348) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oSynG-0031KJ-M9
- for samba-technical@lists.samba.org; Tue, 30 Aug 2022 10:48:33 +0000
-Received: by mail-wm1-x334.google.com with SMTP id
- d12-20020a05600c34cc00b003a83d20812fso4290217wmq.1
- for <samba-technical@lists.samba.org>; Tue, 30 Aug 2022 03:48:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ixsystems.com; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc;
- bh=1ogIRRm0UJ0mklN2iJnheUzfs5qW5ZCNmWDB2nKapJQ=;
- b=RFOi/DF1lkB97Ofn9aZZwB4BCnVou2JwN/6kfE9TJae1ZO1DVluj+XN/gI3MJxonUC
- os6uXfk7iP8O5oe+tDgsNMuKOg2sw/9PqeDQVfZBG3Nc5FCvkqRZUvhFYb7D8qDtcthd
- TrL76I8B7Ph9KA1yP91d7xAXkdWAgfm7U/BF1KVL1TZqBmPGwR+q0d0N7dgeK/mageg1
- IYVkM3JvB3FHhNYyofaHHP3UUMB1oarYhgpE0VrP6bcakTgrGq6+T8a5addh+d3EGpN3
- 6GzqEeOJ3NtlsXtOCfqUcxR9BuFxjYODyhK7yrZCC7yLgSy+s6wMxK4asW5mLrHSB0Wj
- t4uQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc;
- bh=1ogIRRm0UJ0mklN2iJnheUzfs5qW5ZCNmWDB2nKapJQ=;
- b=PXzsTAOTAsYL00vwWkqLzs3kKZW/JrNS67cAafgRPpaVw33C+ytbFeYgZlTsKlNYTy
- l3r3JqXx3db5xZOFq8mG/122eKjrEUlN3CpL63d0Sypdp3Irp5UewiNnCMbILfJl6zsh
- VY+hfeB67V+1zpwbEWuH420m8stppdRbtikmkqROu3XU01xm10Qaheb18DLa3rfFDYsZ
- VgmLSQYm8so5ywi1hGWcXJWcFen3nPY2a0fVe9TI3/l+HU6CzhKIVfPYPS8rB3pWpKwD
- ImrZbVoA9N44u4TwXoY+SlBHJKa5mAZy9tSpFE6zzM2Yov32NxEsE3cIDbqL8gKWWL8+
- OjbQ==
-X-Gm-Message-State: ACgBeo3EHTTqpbQ0abOQNAm3l2VUBj3Su41Ns26nT9GVxQXiGlBqvUNV
- qkFb57fXw6AOcYHAyO2hplbY23t7QBDo5FZuE3VawXQgp9g=
-X-Google-Smtp-Source: AA6agR7va7P4P0DZ+Gn0K3TSh6LcPLkpjRJ4EPx8zVjcCjE11w5U2n36mRbXLinjoAiqk6sr0990feBVW5r3CIyXfJM=
-X-Received: by 2002:a05:600c:3516:b0:3a5:c28a:f01d with SMTP id
- h22-20020a05600c351600b003a5c28af01dmr9683566wmq.165.1661856501686; Tue, 30
- Aug 2022 03:48:21 -0700 (PDT)
+ (Exim) id 1oT2uo-0034DM-Mo; Tue, 30 Aug 2022 15:12:37 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=qY7rapIqISS4qYIaqgBNTPBwIX7O/GVloMzZw5vlz6g=; b=Q9hnwy9UxVhwedo82dug5IeNCY
+ uQm7oDDUu4O544D1sjViw2/VVGllLVZD2TLQ4vDx8ugd8fWDJNQQFO7ZLyTPk0R1CaXga2wa1W6Ha
+ tywLGoHk/ROjR44S0liWdF0F0IqadIFIxGbBtXC9vUmC9Z2Z1HZ93TWmE1jobzNeVR3Jc6+5RsNXJ
+ 98VZENwVXmPjF+Nca7G8p3pSf+6Cfc/jj6Oum5FnmZZR0UNG4qbuqrdcKdmwhJPnowdhVIXrqqFV9
+ WkkhrCwlQDi2dRGW80Kj5eRwbudueijaTmhhFBmhoHp1Z7ADMZA/cYZ8YqIMH/ufWUt3r9ea41UN7
+ o9YvdtHAgM1/RTHayGySvY/5DOHgY8vlrceznPYuEdObasSBIyh3RHY0NrS2uhFGTUDLH93QyAZJj
+ 9SK/wa3UUuz1yBTY3qCHVvjDrcLBR9tBg3S+8n9dlk3NTeYj56ODNJsaFxwVESw2XaokZJ9ZXIRDu
+ UZxMAhb+2L06jS6r+clC1UG8;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1oT2un-002NHb-Og; Tue, 30 Aug 2022 15:12:33 +0000
+Message-ID: <dec0a7b1-3f43-80c4-76eb-6d4b7f9429d9@samba.org>
+Date: Tue, 30 Aug 2022 17:12:32 +0200
 MIME-Version: 1.0
-References: <CAB5c7xobm2hCmdmC3rspWC4-YOETb-S4Q7wtfMmccqMZRt8+Hw@mail.gmail.com>
- <012ee9705f94cb2b06bd891106fbfc2d15478c47.camel@samba.org>
-In-Reply-To: <012ee9705f94cb2b06bd891106fbfc2d15478c47.camel@samba.org>
-Date: Tue, 30 Aug 2022 06:48:10 -0400
-Message-ID: <CAB5c7xrnuL2-5uCE_8ZYRYZPtNZoksnZWTHfLO0=vasc440MSQ@mail.gmail.com>
-Subject: Re: Samba 4.17.0rc3 opens via vfs_glusterfs fail
-To: Anoop C S <anoopcs@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.17.0rc4 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,31 +56,332 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Walker <awalker@ixsystems.com>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Aug 30, 2022 at 3:59 AM Anoop C S via samba-technical <
-samba-technical@lists.samba.org> wrote:
+Release Announcements
+=====================
 
-> This was an issue with glfs_open() and is now already fixed[1]. I hope
-> you were having a released version of GlusterFS installed in which the
-> fix is not yet available and must have encountered the problem. I'll
-> try to see if backports can be made available.
->
-> [1] https://github.com/gluster/glusterfs/pull/3307
->
-> Thanks,
-> Anoop C S.
->
+This is the fourth release candidate of Samba 4.17.  This is *not*
+intended for production environments and is designed for testing
+purposes only.  Please report any defects via the Samba bug reporting
+system at https://bugzilla.samba.org/.
 
-Correct. I was using glusterfs 10.2 (latest release) via debian. I see the
-next minor release for
-glusterfs (10.3) is not scheduled until November 15th, and so we may have
-some gap between
-when Samba 4.17 is released and a version of glusterfs that works with it
-is released.
+Samba 4.17 will be the next version of the Samba suite.
 
-Andrew
+
+UPGRADING
+=========
+
+
+NEW FEATURES/CHANGES
+====================
+
+SMB Server performance improvements
+-----------------------------------
+
+The security improvements in recent releases
+(4.13, 4.14, 4.15, 4.16), mainly as protection against symlink races,
+caused performance regressions for meta data heavy workloads.
+
+With 4.17 the situation improved a lot again:
+
+- Pathnames given by a client are devided into dirname and basename.
+   The amount of syscalls to validate dirnames is reduced to 2 syscalls
+   (openat, close) per component. On modern Linux kernels (>= 5.6) smbd
+   makes use of the openat2() syscall with RESOLVE_NO_SYMLINKS,
+   in order to just use 2 syscalls (openat2, close) for the whole dirname.
+
+- Contended path based operations used to generate a lot of unsolicited
+   wakeup events causing thundering herd problems, which lead to masive
+   latencies for some clients. These events are now avoided in order
+   to provide stable latencies and much higher throughput of open/close
+   operations.
+
+Configure without the SMB1 Server
+---------------------------------
+
+It is now possible to configure Samba without support for
+the SMB1 protocol in smbd. This can be selected at configure
+time with either of the options:
+
+--with-smb1-server
+--without-smb1-server
+
+By default (without either of these options set) Samba
+is configured to include SMB1 support (i.e. --with-smb1-server
+is the default). When Samba is configured without SMB1 support,
+none of the SMB1 code is included inside smbd except the minimal
+stub code needed to allow a client to connect as SMB1 and immediately
+negotiate the selected protocol into SMB2 (as a Windows server also
+allows).
+
+None of the SMB1-only smb.conf parameters are removed when
+configured without SMB1, but these parameters are ignored by
+the smbd server. This allows deployment without having to change
+an existing smb.conf file.
+
+This option allows sites, OEMs and integrators to configure Samba
+to remove the old and insecure SMB1 protocol from their products.
+
+Note that the Samba client libraries still support SMB1 connections
+even when Samba is configured as --without-smb1-server. This is
+to ensure maximum compatibility with environments containing old
+SMB1 servers.
+
+Bronze bit and S4U support with MIT Kerberos 1.20
+-------------------------------------------------
+
+In 2020 Microsoft Security Response Team received another Kerberos-related
+report. Eventually, that led to a security update of the CVE-2020-17049,
+Kerberos KDC Security Feature Bypass Vulnerability, also known as a ‘Bronze
+Bit’. With this vulnerability, a compromised service that is configured 
+to use
+Kerberos constrained delegation feature could tamper with a service 
+ticket that
+is not valid for delegation to force the KDC to accept it.
+
+With the release of MIT Kerberos 1.20, Samba AD DC is able able to 
+mitigate the
+‘Bronze Bit’ attack. MIT Kerberos KDC's KDB (Kerberos Database Driver) 
+API was
+changed to allow passing more details between KDC and KDB components. 
+When built
+against MIT Kerberos, Samba AD DC supports MIT Kerberos 1.19 and 1.20 
+versions
+but 'Bronze Bit' mitigation is provided only with MIT Kerberos 1.20.
+
+In addition to fixing the ‘Bronze Bit’ issue, Samba AD DC now fully supports
+S4U2Self and S4U2Proxy Kerberos extensions.
+
+Resource Based Constrained Delegation (RBCD) support
+----------------------------------------------------
+
+Samba AD DC built with MIT Kerberos 1.20 offers RBCD support now. With MIT
+Kerberos 1.20 we have complete RBCD support passing Sambas S4U testsuite.
+Note that samba-tool lacks support for setting this up yet!
+
+To complete RBCD support and make it useful to Administrators we added the
+Asserted Identity [1] SID into the PAC for constrained delegation. This is
+available for Samba AD compiled with MIT Kerberos 1.20.
+
+[1] 
+https://docs.microsoft.com/en-us/windows-server/security/kerberos/kerberos-constrained-delegation-overview
+
+Customizable DNS listening port
+-------------------------------
+
+It is now possible to set a custom listening port for the builtin DNS 
+service,
+making easy to host another DNS on the same system that would bind to the
+default port and forward the domain-specific queries to Samba using the 
+custom
+port. This is the opposite configuration of setting a forwarder in Samba.
+
+It makes possible to use another DNS server as a front and forward to Samba.
+
+Dynamic DNS updates may not be proxied by the front DNS server when 
+forwarding
+to Samba. Dynamic DNS update proxying depends on the features of the 
+other DNS
+server used as a front.
+
+CTDB changes
+------------
+
+* When Samba is configured with both --with-cluster-support and
+   --systemd-install-services then a systemd service file for CTDB will
+   be installed.
+
+* ctdbd_wrapper has been removed.  ctdbd is now started directly from
+   a systemd service file or init script.
+
+* The syntax for the ctdb.tunables configuration file has been
+   relaxed.  However, trailing garbage after the value, including
+   comments, is no longer permitted.  Please see ctdb-tunables(7) for
+   more details.
+
+Operation without the (unsalted) NT password hash
+-------------------------------------------------
+
+When Samba is configured with 'nt hash store = never' then Samba will
+no longer store the (unsalted) NT password hash for users in Active
+Directory.  (Trust accounts, like computers, domain controllers and
+inter-domain trusts are not impacted).
+
+In the next version of Samba the default for 'nt hash store' will
+change from 'always' to 'auto', where it will follow (behave as 'nt
+hash store = never' when 'ntlm auth = disabled' is set.
+
+Security-focused deployments of Samba that have eliminated NTLM from
+their networks will find setting 'ntlm auth = disabled' with 'nt hash
+store = always' as a useful way to improve compliance with
+best-practice guidance on password storage (which is to always use an
+interated hash).
+
+Note that when 'nt hash store = never' is set, then arcfour-hmac-md5
+Kerberos keys will not be available for users who subsequently change
+their password, as these keys derive their values from NT hashes. AES
+keys are stored by default for all deployments of Samba with Domain
+Functional Level 2008 or later, are supported by all modern clients,
+and are much more secure.
+
+Finally, also note that password history in Active Directory is stored
+in nTPwdHistory using a series of NT hash values.  Therefore the full
+password history feature is not available in this mode.
+
+To provide some protection against password re-use previous Kerberos
+hash values (the current, old and older values are already stored) are
+used, providing a history length of 3.
+
+There is one small limitation of this workaround: Changing the
+sAMAccountName, userAccountControl or userPrincipalName of an account
+can cause the Kerberos password salt to change.  This means that after
+*both* an account rename and a password change, only the current
+password will be recognised for password history purposes.
+
+Python API for smbconf
+----------------------
+
+Samba's smbconf library provides a generic frontend to various
+configuration backends (plain text file, registry) as a C library. A
+new Python wrapper, importable as 'samba.smbconf' is available. An
+additional module, 'samba.samba3.smbconf', is also available to enable
+registry backend support. These libraries allow Python programs to
+read, and optionally write, Samba configuration natively.
+
+JSON support for smbstatus
+--------------------------
+
+It is now possible to print detailed information in JSON format in
+the smbstatus program using the new option --json. The JSON output
+covers all the existing text output including sessions, connections,
+open files, byte-range locks, notifies and profile data with all
+low-level information maintained by Samba in the respective databases.
+
+
+REMOVED FEATURES
+================
+
+LanMan Authentication and password storage removed from the AD DC
+-----------------------------------------------------------------
+
+The storage and authentication with LanMan passwords has been entirely
+removed from the Samba AD DC, even when "lanman auth = yes" is set.
+
+smb.conf changes
+================
+
+   Parameter Name                          Description     Default
+   --------------                          -----------     -------
+   dns port                                New default     53
+   nt hash store                  New parameter   always
+   volume serial number              New parameter   -1
+
+CHANGES SINCE 4.17.0rc3
+=======================
+
+o  Anoop C S <anoopcs@samba.org>
+    * BUG 15157: Make use of glfs_*at() API calls in vfs_glusterfs.
+
+
+CHANGES SINCE 4.17.0rc2
+=======================
+
+o  Jeremy Allison <jra@samba.org>
+    * BUG 15128: Possible use after free of connection_struct when iterating
+      smbd_server_connection->connections.
+
+o  Christian Ambach <ambi@samba.org>
+    * BUG 15145: `net usershare add` fails with flag works with --long 
+but fails
+      with -l.
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15126: acl_xattr VFS module may unintentionally use filesystem
+      permissions instead of ACL from xattr.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15125: Performance regression on contended path based operations.
+    * BUG 15148: Missing READ_LEASE break could cause data corruption.
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 15141: libsamba-errors uses a wrong version number.
+
+o  Joseph Sutton <josephsutton@catalyst.net.nz>
+    * BUG 15152: SMB1 negotiation can fail to handle connection errors.
+
+
+CHANGES SINCE 4.17.0rc1
+=======================
+
+o  Jeremy Allison <jra@samba.org>
+    * BUG 15143: New filename parser doesn't check veto files smb.conf 
+parameter.
+    * BUG 15144: 4.17.rc1 still uses symlink-race prone unix_convert()
+    * BUG 15146: Backport fileserver related changed to 4.17.0rc2
+
+o  Jule Anger <janger@samba.org>
+    * BUG 15147: Manpage for smbstatus json is missing
+
+o  Volker Lendecke <vl@samba.org>
+    * BUG 15146: Backport fileserver related changed to 4.17.0rc2
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15125: Performance regression on contended path based operations
+    * BUG 15146: Backport fileserver related changed to 4.17.0rc2
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 15140: Fix issues found by coverity in smbstatus json code
+    * BUG 15146: Backport fileserver related changed to 4.17.0rc2
+
+
+KNOWN ISSUES
+============
+
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.17#Release_blocking_bugs
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/rc/
+
+The release notes are available online at:
+
+https://download.samba.org/pub/samba/rc/samba-4.17.0rc4.WHATSNEW.txt
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
+
