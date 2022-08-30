@@ -2,48 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9F4B5A5D85
-	for <lists+samba-technical@lfdr.de>; Tue, 30 Aug 2022 09:59:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E9025A5E76
+	for <lists+samba-technical@lfdr.de>; Tue, 30 Aug 2022 10:47:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=64Zlx2OGGcBRJ0uzlXUAFdyDaCDbw03K5+5jVSYDGXs=; b=gEGpTQmt+kWwnCwIq3Bs4nU2Gr
-	jlLQCpUzRGxr7d96jPbYQGwcL+7nz+QUkgv8L032YDkrK5qZIDR9LU8jGybatobm36zCfeBttMQAh
-	S+QQElIeP8ReN137GuD40YB/a+EGdiQ+k625Yo2qFl1e5Eh1ie+BHbGyDmqe3evEZmJS2pEZ5ODYu
-	haCFYmPIFLj0FCgKmHEpSwSnJviMPN64ug23X6s11JOsKy+2JLhsqjsXApk7XApPR9W2ZvW0eVLlA
-	akZiaXFyWv4xHn3NHhbfgR9tqRZite+FaDSlJXhlTrMwy87xN71hkBFZE3rM1R5VP6Z/c+/L6FpMh
-	oDJlN/SQ==;
-Received: from ip6-localhost ([::1]:61864 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=tsLY5F5Ozz1AdHlAsgibfQkv7JMTI/b0jjcNGuI8VEA=; b=JLQV6RZcAWi16Oam8Epn2Uz3dr
+	VSeqqvNTDNBCH1s1yv7woTksL4P8Uxksbm9P1Ei4R01qbXS67fQyGsIs29joE56jpcujOd4M7bUlB
+	zgYu0W336PV364Fi3KNPc258o1i9plpigRQsw2LGwZBF4LrcOhHzLyOpeHWRB9siVW2xOCLDfyaDA
+	wm8c1uB8navsKrQRLN7bh/EpNbiavEvtQ3dlF4RKpkK281XniqtrRMV8YfxYqF5mPrFBmxn83106S
+	VPaGlEe5rWaMHXcYo68GcznbNWEIrRODoFiLpCRCEIkW1HREU38qA0qMpUGo8JpvwmA3oNy0fQ+rV
+	vcmgiogQ==;
+Received: from ip6-localhost ([::1]:58754 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oSw8p-0030V2-2Y; Tue, 30 Aug 2022 07:58:35 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25804) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oSw8f-0030Us-Di
- for samba-technical@lists.samba.org; Tue, 30 Aug 2022 07:58:27 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=64Zlx2OGGcBRJ0uzlXUAFdyDaCDbw03K5+5jVSYDGXs=; b=mee3K0lbtSWvR+PlBsikzEmgKP
- t2Za+aR5IwaGtgVskn5QAxiig2f4lA/D7ZeOYWxt76BepTWzvA67i73iaHOYKcSeyOCqmeL/7Eeb6
- FoXaTKAqZxzYh+DbBURE+89bFb19IQ3ne/x1NLIZ+pvk2Qlz2RogYqnXRwsB5vcWqPhRxlZNSP22B
- skqkxQvBeO12NL+4L/UWHivQCe9tBe4kSLl90MzcHPSivnDV3U8EUmEHhQZmF/0k9SvX2OoXw/PvZ
- XnrVw28AOGiq0IXVgPWPojsi7cpax5K4ZIa1VIPuYIJ8a86QaFWxxM9w1wXo3OcZz8KA19NQnBggR
- Gr9B1122TpTic3dwb+utDOqJPvy/yBNiFrpogAtUPbEZZV2OfRreZmXicq8LgqIrobBuR2nPaPL45
- OutAMaH5XaKABkgqqcxpUKgqrN91hcmo2xjYIc30Eso23qlBsUo9f9gwKJk7JawJkc83HjxiHKimE
- gmaMFbnVvlSOpvTw/vyffFSM;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1oSw8e-002KqV-2B
- for samba-technical@lists.samba.org; Tue, 30 Aug 2022 07:58:24 +0000
-Message-ID: <012ee9705f94cb2b06bd891106fbfc2d15478c47.camel@samba.org>
-Subject: Re: Samba 4.17.0rc3 opens via vfs_glusterfs fail
-To: samba-technical <samba-technical@lists.samba.org>
-Date: Tue, 30 Aug 2022 13:28:22 +0530
-In-Reply-To: <CAB5c7xobm2hCmdmC3rspWC4-YOETb-S4Q7wtfMmccqMZRt8+Hw@mail.gmail.com>
-References: <CAB5c7xobm2hCmdmC3rspWC4-YOETb-S4Q7wtfMmccqMZRt8+Hw@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4 (3.44.4-1.fc36) 
+	id 1oSwtq-0030rI-R2; Tue, 30 Aug 2022 08:47:10 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:54426) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1oSwtm-0030r9-AF
+ for samba-technical@lists.samba.org; Tue, 30 Aug 2022 08:47:08 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1661849222;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=tsLY5F5Ozz1AdHlAsgibfQkv7JMTI/b0jjcNGuI8VEA=;
+ b=Q+CD1ZDRk2tPvasfP0m9eBZzFtCYRS568w1FCW5chkWlP5R+t/pfwjt+yBuOsUvkczkJXK
+ 5zI4/CVpS/si5D/d0rIBxnSeGakv7mtDCA7394XW/jZCp+tHGJHtWLoqYM6oGe9jE3OAQ4
+ OZtl9hDRoQT2rJv0oSRvY2JJt0lRWTU=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1661849222;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=tsLY5F5Ozz1AdHlAsgibfQkv7JMTI/b0jjcNGuI8VEA=;
+ b=Q+CD1ZDRk2tPvasfP0m9eBZzFtCYRS568w1FCW5chkWlP5R+t/pfwjt+yBuOsUvkczkJXK
+ 5zI4/CVpS/si5D/d0rIBxnSeGakv7mtDCA7394XW/jZCp+tHGJHtWLoqYM6oGe9jE3OAQ4
+ OZtl9hDRoQT2rJv0oSRvY2JJt0lRWTU=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-529-4P5jwUmHM7KyShcoWHJFJQ-1; Tue, 30 Aug 2022 04:46:56 -0400
+X-MC-Unique: 4P5jwUmHM7KyShcoWHJFJQ-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.4])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 427C180418F;
+ Tue, 30 Aug 2022 08:46:56 +0000 (UTC)
+Received: from warthog.procyon.org.uk (unknown [10.33.36.72])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 5881E2026D64;
+ Tue, 30 Aug 2022 08:46:55 +0000 (UTC)
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+ Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+ Kingdom.
+ Registered in England and Wales under Company Registration No. 3798903
+In-Reply-To: <CAH2r5muT-nX+tgk6wm=L1qjWNhc2c5GDBaQXBGbrE-hNkPr3cw@mail.gmail.com>
+References: <CAH2r5muT-nX+tgk6wm=L1qjWNhc2c5GDBaQXBGbrE-hNkPr3cw@mail.gmail.com>
+To: Steve French <smfrench@gmail.com>
+Subject: Re: [PATCH v2][SMB3 client] smb3: use filemap_write_and_wait_range
+ instead of filemap_write_and_wait
 MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <1899334.1661849214.1@warthog.procyon.org.uk>
+Date: Tue, 30 Aug 2022 09:46:54 +0100
+Message-ID: <1899335.1661849214@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 2.78 on 10.11.54.4
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,31 +79,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Anoop C S via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Anoop C S <anoopcs@samba.org>
+From: David Howells via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Howells <dhowells@redhat.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>,
+ samba-technical <samba-technical@lists.samba.org>,
+ Jeff Layton <jlayton@kernel.org>, LKML <linux-kernel@vger.kernel.org>,
+ Matthew Wilcox <willy@infradead.org>, dhowells@redhat.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2022-08-29 at 15:36 -0400, Andrew Walker via samba-technical
-wrote:
-> ```
-> [2022/08/27 14:48:25.748586,=C2=A0 0]
-> ../../source3/smbd/files.c:1187(synthetic_pathref)
-> =C2=A0 synthetic_pathref: opening [.] failed
-> ```
->=20
-> Seeing this on trying to connect to share. Looks like we're trying to
-> glfs_open() <connectpath>/. with flags (O_RDONLY | O_NOFOLLOW |
-> O_NONBLOCK), and it fails with EISDIR.
+Steve French <smfrench@gmail.com> wrote:
 
-This was an issue with glfs_open() and is now already fixed[1]. I hope
-you were having a released version of GlusterFS installed in which the
-fix is not yet available and must have encountered the problem. I'll
-try to see if backports can be made available. =20
+> Subject: [PATCH] smb3: use filemap_write_and_wait_range instead of
+>  filemap_write_and_wait
+> 
+> When doing insert range and collapse range we should be
+> writing out the cached pages for the ranges affected but not
+> the whole file.
+> 
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Steve French <stfrench@microsoft.com>
 
-[1]=C2=A0https://github.com/gluster/glusterfs/pull/3307
-
-Thanks,
-Anoop C S.
+Reviewed-by: David Howells <dhowells@redhat.com>
 
 
