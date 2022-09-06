@@ -2,48 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8119C5AD9B2
-	for <lists+samba-technical@lfdr.de>; Mon,  5 Sep 2022 21:35:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D2395ADD59
+	for <lists+samba-technical@lfdr.de>; Tue,  6 Sep 2022 04:31:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=pcB6SZ5fescp8Ia4xgKWad/9aY/3YzuWpVWRlcizHf4=; b=k5KvTOeAnohZ4hs7iyQBRCB9lK
-	E1mVEKZuA/Tvn91cehSzULoNITARVnPKK9eAsi5IYMk/32OEaNWdnBLgc5JqC9nkzJvNAUIXo2C+w
-	77h90hN+wkhtdexm6EzVV0CxXMiT/d4PPr6t4YSWrGygv3ZhmAH5LWMTd0+vBY6p90qd3d1fQ0+jl
-	lqzyDcMSR+37WU7SFgDFv9UpJTJvExY28KYJTrA7YBJbqe2SDvblsZfxe+HOB9bYFV+pdrLq+0PIi
-	Nufhd//uHIOstXnCRhZHWCJhrr/FRlnOq5WkKrZIeGcdGYV3mCPHr8CKda/jgPIicAlRn2dZq8utX
-	wzZIMZyw==;
-Received: from ip6-localhost ([::1]:52674 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=sGRXsNDAe55sUCdC/6rEEkz3khLOU2eoLDaSoU/QHrQ=; b=2FLKkYsuJm6odBV3RMsL79AlqT
+	w91Ifd2DKm2uJnLH9hIHaRmOZJBbbYQT8lVBC2wwRT/q1eBYF7lYHZPsWsy+Eiz/GvoqoGC/VwBfp
+	SLymhltVx5jxhdCScoMNXK2rbjywawwgtQEbWnn6eiHkul8ZpEpcBU7jYa5GnOsyzPEklKz4RkeOd
+	bxfWybMHq3r3MEDzYH8R/G/kG/oXjkpzSjlcIkmNjHW6l1cGFcW5hobUxMLF2vq0d492AGUZSOjfL
+	uoPxQqKlWa0F5NwnjyFEh5BHyli3JffN6a+Xlb0KC6BdpICCH4IrAW056x9N3oiDT+4JTs7Hh7kOY
+	eH6RzwRQ==;
+Received: from ip6-localhost ([::1]:31516 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oVHrN-005bcX-MZ; Mon, 05 Sep 2022 19:34:17 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:13660) 
+	id 1oVOLk-005dY0-8j; Tue, 06 Sep 2022 02:30:04 +0000
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b]:40759) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oVHrI-005bcO-1Y
- for samba-technical@lists.samba.org; Mon, 05 Sep 2022 19:34:14 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=gFmsKKxdCCtFHqaCKftDqGyL5MGoz0WRwdoD3JY36Lo=; b=NMwWpEeI5kgYqJx7D7CeGBNeW/
- Ddq4vxojRfxy05uRgid0cMKVyts81Fi/f9ZNvEiAo32uWTOo4Rnd0nlKZel8z1GGCvhpjcUUveU2u
- ehNGwQSfp7ZPgiylSLpcuj/M67N180HFWWZBPshE2JVZ56jrzn+f2nqTeM6d643rzoYijc/URBDQz
- 93AqBjTpsZOko8nupVMvK2PjvFcrmKGDLKIXmARQVVXM5WrnISbu8D/IfkkeG4P0fMscJr4KQ0Lxc
- 02nA9SrmxcohC7sX5L9uoYMZ70u/gvYod5FFd5eLKbCz4sIAtl0jVpS/L1Io60+yDiB6kduX32kvl
- 8ll43CW2pfmIL8zVGbQXj22lzTvP90GbChdBDVDJ0qfneblYVVMAUId5S2oHSUn64ODjZk9JA8e9L
- +91KboYJQi2rMY+FsJaor3VJvB35ZUp5gGGRg1lD+AdssWrHs5GZ4vsDfTii4YzOyh4AyP45u3MXy
- iM9L4EO4YQMSxhMYg2HbDj0U;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1oVHrG-003EaI-JY; Mon, 05 Sep 2022 19:34:11 +0000
-Message-ID: <221eb5788b13cebb6eff3514863407dad9aca07a.camel@samba.org>
-Subject: Re: Phantom samba-tool option
-To: Jeremy Allison <jra@samba.org>, Rowland Penny <rpenny@samba.org>
-Date: Tue, 06 Sep 2022 07:34:07 +1200
-In-Reply-To: <Ywj87hCJ2MG7l5IS@jeremy-acer>
-References: <e3eeb1eda243c5cd80260add048423173c2b0b32.camel@samba.org>
- <Ywj87hCJ2MG7l5IS@jeremy-acer>
-User-Agent: Evolution 3.44.4 (3.44.4-1.fc36) 
+ (Exim) id 1oVOLe-005dXr-Bw
+ for samba-technical@lists.samba.org; Tue, 06 Sep 2022 02:30:01 +0000
+Received: by mail-pf1-x42b.google.com with SMTP id b144so5206552pfb.7
+ for <samba-technical@lists.samba.org>; Mon, 05 Sep 2022 19:29:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ixsystems.com; s=google;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date; bh=ckB6mQ0Pd3pVcYEzGf9I+eCgyO8u8+wHRWy2xXC1uIw=;
+ b=fcrwXApfp+9Gz+Pn8pCyPlQLAIocGTSJDu39uj4WPLhGFqKlW5fx6ylwZqeuyIV8if
+ 9GPwb5OkvTtW1uibCqyuelCRpZiyFwz4e6lWQqFzMdi/QlUjbTCkSZC61mE3Bbf+OcZO
+ 4VuXG7SIh/XllSdvoel6mYI7G2Lr5jnW/Vo0x9PX4CwFI3O9EqImGtFcH/N1b2fYRXIe
+ SOdRzIM5EQnVewrr+vGIMoY6pIcOt+iOWZXV2k4yDFrngDyxt6arEU2QXtrCGClZ8nXQ
+ lFnuS0LaAdtq+A8a8OpuWGW3mlO29In7EWaezfv+TLMqCRmxk+00BkdiWt4Rk6n677NU
+ BgEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date;
+ bh=ckB6mQ0Pd3pVcYEzGf9I+eCgyO8u8+wHRWy2xXC1uIw=;
+ b=lcIU6a8TGZWXA9DSctf5cUrjeU5ftZrfZeLpiULSXDIvu+GF+OOcroiJg9Yb7IgxIx
+ WiCCI5/HMXeBguteHI9KDuJGh0UI0dx4p2YmPy69KebSWWn69HIzbMitUOEhyUxj8Jz8
+ tsEA+0cZj9FMbl6xmaK2glDM/MaQ65gPrB1Eo1Jua3ILZZcw2I8L/qO3g/hFvzT3dW7Q
+ VOTPqMmzqQmmI/+u53O6XFym5NbfGSaLJwJ+xY/9Gxe/iOG7fzUoTrKZ8GgrXImfd2bD
+ 7QgfryIPZb0jqztiwzqc7gPLPUid8Fc913mX6/K+qN7JXbDDYVnlInlWJvryGGjOQuYo
+ j3+w==
+X-Gm-Message-State: ACgBeo0o4hGyUIvQYmh7RZgpAZGmSmJ7UjpMcxwBei5zVUXc3VZixB+l
+ RoScfqjD0k40R4qibv8ZHX93OSNABE3Ujx9N2sIUYTvodWpPlg==
+X-Google-Smtp-Source: AA6agR72moggBvW2itHu9A6PST2L4XK7/lDG03RGZHt73SMKoMY4l0EsPvoNpU72khxwB76VXscn5JPc6+w2uZbDxZ4=
+X-Received: by 2002:a63:89c1:0:b0:42b:afcf:d5ce with SMTP id
+ v184-20020a6389c1000000b0042bafcfd5cemr38410776pgd.4.1662431394769; Mon, 05
+ Sep 2022 19:29:54 -0700 (PDT)
 MIME-Version: 1.0
+Date: Mon, 5 Sep 2022 22:29:43 -0400
+Message-ID: <CAB5c7xq9MR0=-J10tG3xTTuCh+Z-Y4b8FoJKkM3Sh_ynsV_ybw@mail.gmail.com>
+Subject: libwbclient python bindings
+To: samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -58,35 +68,68 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Walker <awalker@ixsystems.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2022-08-26 at 10:03 -0700, Jeremy Allison via samba-technical
-wrote:
->=20
-> So I think maybe we need to duplicate this section without
-> the -A text as a new ENTITY cmdline.samba-tool.credentials.user
-> and include that inside manpages/samba-tool.8.xml instead of
-> cmdline.common.credentials.user.
->=20
-> I'm CC:ing this to samba-technical for opinions from the
-> rest of the Team, and I also think you should log a bug
-> so we can track it.
->=20
-> Thanks ! Jeremy.
+Hey all,
 
-Or we would add the feature. =C2=A0Perhaps somebody can take over this MR
-and split it up as requested so it can be reviewed?
+I made a draft of python bindings for libwbclient.
 
-https://gitlab.com/samba-team/samba/-/merge_requests/2468
+https://gitlab.com/samba-team/samba/-/merge_requests/2707
 
-Andrew,
+They mostly cover areas that I would commonly shell out to `wbinfo` for
+(like pinging DC, checking trust creds, seeing which DC winbindd is
+currently connected to, and converting SIDs to Unix IDs and vice-versa),
+but I would like to make sure that any other common `wbinfo` usage would
+also be covered.
 
---=20
-Andrew Bartlett (he/him) https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Developer, Catalyst IT https://catalyst.net.nz/services/samba
+Sample:
+```
+>>> import wbclient
+>>> ctx = wbclient.Ctx()
+>>> ctx.
+ctx.all_domains(       ctx.domain(            ctx.netbios_name
+ctx.sids_to_unix_ids(  ctx.version
+ctx.dns_domain         ctx.netbios_domain     ctx.separator
+ ctx.unix_ids_to_sids(
 
+>>> my_dom = ctx.domain()
+>>> my_dom.ping_dc()
+'DC01.BILLY.GOAT'
+>>> repr(my_dom)
+'wbclient.Domain(netbios_domain=BILLY, dns_domain=BILLY.GOAT,
+sid=S-1-5-21-1002530428-2020721000-3540273080)'
+
+>>> my_dom.users()
+['BILLY\\administrator', 'BILLY\\guest', 'BILLY\\krbtgt', 'BILLY\\joiner',
+'BILLY\\user1']
+
+>>> my_dom.groups()
+['BILLY\\domain computers', 'BILLY\\domain controllers', 'BILLY\\schema
+admins', 'BILLY\\enterprise admins', 'BILLY\\cert publishers',
+'BILLY\\domain admins', 'BILLY\\domain users', 'BILLY\\domain guests',
+'BILLY\\group policy creator owners', 'BILLY\\ras and ias servers',
+'BILLY\\allowed rodc password replication group', 'BILLY\\denied rodc
+password replication group', 'BILLY\\read-only domain controllers',
+'BILLY\\enterprise read-only domain controllers', 'BILLY\\cloneable domain
+controllers', 'BILLY\\protected users', 'BILLY\\key admins',
+'BILLY\\enterprise key admins', 'BILLY\\dnsadmins', 'BILLY\\dnsupdateproxy']
+
+>>> my_dom.domain_info()
+{'netbios_domain': 'BILLY', 'dns_name': 'BILLY.GOAT', 'sid':
+'S-1-5-21-1002530428-2020721000-3540273080', 'domain_flags': {'raw': 7,
+'parsed': ['ACTIVE_DIRECTORY', 'NATIVE', 'PRIMARY']}, 'online': True}
+
+>>> ctx.sids_to_unix_ids(['S-1-5-32-544', 'S-1-5-32-545'])
+{'mapped': [{'id_type': 'GID', 'id': 90000001}, {'id_type': 'GID', 'id':
+90000002}], 'unmapped': []}
+```
+
+Just writing this email I realized I probably want to include the SID in
+the mapping results.
+
+Is there any other functionality that is desirable?
+
+Andrew
