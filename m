@@ -2,59 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 358DD5B5399
-	for <lists+samba-technical@lfdr.de>; Mon, 12 Sep 2022 07:38:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 944C65B53A6
+	for <lists+samba-technical@lfdr.de>; Mon, 12 Sep 2022 07:51:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=a4HITrssL9lZzOzrCQRucdis7ZBIvQg9YWyrnqcN5vQ=; b=Y7Arvt+8v9WnIxBLG+DHUnwuMd
-	Ao0BiH/PyxfEmK9YmXENOn5ppUr3xZHGOLojf6Bjip2Ztv6lrn6YiP0/vLRbdzOYxo2VTDfXoPC3c
-	248mnH/F5DvERHybtlH9oaq10vmreSDIfhDB74NW5L49yFDqvMSDYC9jIem50rquku2bqRNhdssJ/
-	2okBz1kqQwA/ngf+xXKz7fqM/wS7kGuPwgbFx2I5UGsFyGWLCOr94QePlS3NtUhH95JZ9qkD+2owR
-	hC1R1oIU9o/jzjCvVXRJhoKH0kKBnzNmNUxN58zs9Lbl0mGFutyFN4NkNY6TLdA9PCt+sL35wXoRR
-	1Vtab3lA==;
-Received: from ip6-localhost ([::1]:18534 helo=hr1.samba.org) 
+	bh=Pa2tM8kQKr8724t5VPraRwpy8UCxXWndh5kdpjMinLs=; b=AtsxhMLBndkyoofsOGMinIJmAC
+	hCM1FWxvGCXwsdH+iruzFTOXw/rDeeX4DdhWfN1hpx9KjO69DXr5tqCAaAutJAw3j4guZcDOm+eng
+	1oph5WvBOClLbuxIyxRibn3W7i2wtVda80w4zzqkpY83oOZ7XCs0Q4CCB+Pf6nvajn8YosWSXNYez
+	LkOX37QHhiRwmgNZI7fOIBv3DCV5BP4bjQcKzN3SwBYEsToM/FWNBiIxqc07vbFrosRk7ahRZKXyf
+	m3CEnIu48MVl6JbrBXuhhD3UVxhDyIC8+kq+9iLRlzG7l/daexe0pEzY3eOo1LvCA8xHvq30ThAKj
+	6ouhbP6w==;
+Received: from ip6-localhost ([::1]:28084 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oXc7p-0000Jd-HE; Mon, 12 Sep 2022 05:36:53 +0000
-Received: from mail-vk1-xa2b.google.com ([2607:f8b0:4864:20::a2b]:42933) 
+	id 1oXcM7-0000fg-V8; Mon, 12 Sep 2022 05:51:40 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31226) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oXc7b-0000JU-Rg
- for samba-technical@lists.samba.org; Mon, 12 Sep 2022 05:36:45 +0000
-Received: by mail-vk1-xa2b.google.com with SMTP id s192so3675554vkb.9
- for <samba-technical@lists.samba.org>; Sun, 11 Sep 2022 22:36:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date; bh=a4HITrssL9lZzOzrCQRucdis7ZBIvQg9YWyrnqcN5vQ=;
- b=hCjl4J0E5bHi6xZpeMSIw3rLqUTnOhwHIsxQIhHPFi/HCFUJYJnC33eu+bV0gSGilj
- d3E2cD4un3gFj78Fu1ggymQyjp/OgXAA/ygFXZx4q2w80pGLogaeymSWYH2xq7mlqTXd
- w+Gs41O2v3qtrN7eKQ6IFwgr6jpxali4ay/oBIhxnYoYkqdFm6LNOaQvZproCsnD5u2S
- AAhiK5qDu34FYsSlq4IzqZHM2+ICCi/S4FQqAWB7Hepd+YrYjwuIJ/a4njUqebnuXxIj
- AOeD65+CGniIXwB9+uwU5oFNdUBrK0SSxZ+xQ7X58aqEzxVEFGtJVL1T60hREN+tuvNq
- pFWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date;
- bh=a4HITrssL9lZzOzrCQRucdis7ZBIvQg9YWyrnqcN5vQ=;
- b=BJm62mSPdI13ibO9VoCt91d7LmZ6sRV6oPMU8DRNZ7QevONgkIu0+QJ1EfZSv3j+II
- rCQDDG6jdDbOQmwwUGOGkySqfPKCn2lE+AZ/Hu+YI+v5HiiRiABeKyGGtfTF0gVIWT5H
- +DE0V/9NuCkAeCJiAbBpb/eUWQd/ASwnbwMgrQmTuZB/sWeFBD4kHo7iF352Nb6SBmwH
- Kj6PqeZ6nNQP/eW+8ifS79mvUKkKNQGnRnZVXyatS1bnsNN8tjOlWX4JSU0OqwT4DHar
- Py1BQWxkGp2vDfiKo/6fjVie1SCgFAtBWvOuRjqydQq2C6OnEgCsIJQ6EkSt1LtXFOyW
- SrlQ==
-X-Gm-Message-State: ACgBeo0ZdXrqhBOw4Lb5BsCjB2CqAEyqcBLtjOtxqek+rTuEdR0fp4cI
- QP1prHEriytIa6wj6QbAz7h4j2yi+qKRBTnL9Vc=
-X-Google-Smtp-Source: AA6agR7/Jh1/FGcgHek5mUy5wZbYIUdspD8MZ2KULLT9rMElUd3UnSKyt54ebSYcOBBQjBp/SBYI625PDaAE5YNEmvE=
-X-Received: by 2002:a1f:918d:0:b0:3a1:e376:7463 with SMTP id
- t135-20020a1f918d000000b003a1e3767463mr4874860vkd.38.1662960991032; Sun, 11
- Sep 2022 22:36:31 -0700 (PDT)
+ (Exim) id 1oXcM3-0000fV-Dv
+ for samba-technical@lists.samba.org; Mon, 12 Sep 2022 05:51:37 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=Pa2tM8kQKr8724t5VPraRwpy8UCxXWndh5kdpjMinLs=; b=KGEEi9/ta6VFfr3JYxWlM88Q8p
+ szOKdHqxb+aC5k28SkEQuTulJ7R9lSMXwbFKLzI+1Db88r+fXICqam2lSZBlGkTkC6lFvy3P37E9Q
+ VoCnwZEtSlAbEHgFlSmv3QSbg+z88j0Kjsiquw5ykQnfPfHEGEdU1yeIdaUYDJet4ZQ3KY0133V9S
+ cNRbileC9CF/cnkXRpD5+zcQundcv88WMy9yTejeiHqHnnYWaliP2me7X68CCvTzjIO2LazvJkLJh
+ dprVy44GW9612EIgmKapw0a3KFrkEFMAD0v5QEpp/0QVa76/2VM/Uyhc8Az9fVaRKUPol56mwNJo/
+ dMzequq2KUmk4ic7n8me2/OcBD0ASVMD2S1AWgpaoIiC6WitLOdn8TcwSsrXE8T33gtsGrvs2Udpf
+ bE3CDSQ/T/OGYGhDpKVzY5VZs/1wjjor52Pbn2JMPAbvzqpwsq5v+VID9x6aiUSdqr5FazEz+iBAM
+ fLdUBNyTxS8iMMDFAyfUmyi/;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1oXcM2-0000UY-18; Mon, 12 Sep 2022 05:51:34 +0000
+Message-ID: <f19d2bf6-6b05-f782-fcfa-1c09c867dcb2@samba.org>
+Date: Mon, 12 Sep 2022 07:51:32 +0200
 MIME-Version: 1.0
-Date: Mon, 12 Sep 2022 00:36:20 -0500
-Message-ID: <CAH2r5mvC5sqwuLyLt=3PXYvPegOm-8rqSMYcCpjM3+T64fv2sg@mail.gmail.com>
-Subject: [PATCH][SMB3.1.1 client] fallback to query fs all info if posix query
- fs not supported
-To: CIFS <linux-cifs@vger.kernel.org>, 
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH][SMB3.1.1 client] fallback to query fs all info if posix
+ query fs not supported
+Content-Language: en-US
+To: Steve French <smfrench@gmail.com>, CIFS <linux-cifs@vger.kernel.org>,
  samba-technical <samba-technical@lists.samba.org>
-Content-Type: multipart/mixed; boundary="0000000000002581cd05e87447e3"
+References: <CAH2r5mvC5sqwuLyLt=3PXYvPegOm-8rqSMYcCpjM3+T64fv2sg@mail.gmail.com>
+In-Reply-To: <CAH2r5mvC5sqwuLyLt=3PXYvPegOm-8rqSMYcCpjM3+T64fv2sg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,104 +60,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---0000000000002581cd05e87447e3
-Content-Type: text/plain; charset="UTF-8"
+Am 12.09.22 um 07:36 schrieb Steve French via samba-technical:
+> A version of Samba that I was testing, supported POSIX extensions, but
+> not the query fs info
+> level.  Fall back to query fs all info if POSIX query fs info not
+> supported.
+> 
+> Also fixes the problem that compounding wasn't being used for posix
+> qfs info in this path (statfs) but was being used in others, so
+> improves performance of posix query fs info.
 
-A version of Samba that I was testing, supported POSIX extensions, but
-not the query fs info
-level.  Fall back to query fs all info if POSIX query fs info not
-supported.
+I don't think having hacks to work with work in progress branches should be
+added, instead the server should be fixed.
 
-Also fixes the problem that compounding wasn't being used for posix
-qfs info in this path (statfs) but was being used in others, so
-improves performance of posix query fs info.
+metze
 
--- 
-Thanks,
-
-Steve
-
---0000000000002581cd05e87447e3
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-smb311-fallback-to-query-fs-all-info-if-posix-query-.patch"
-Content-Disposition: attachment; 
-	filename="0001-smb311-fallback-to-query-fs-all-info-if-posix-query-.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_l7ybw61y0>
-X-Attachment-Id: f_l7ybw61y0
-
-RnJvbSAyZWY3ODUzMDExMWUwZGRiNTViMzI1ODVjOWRmNGNmZTY2NmZiODkxIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFN1biwgMTEgU2VwIDIwMjIgMTk6NDk6MDQgLTA1MDAKU3ViamVjdDogW1BBVENIXSBz
-bWIzMTE6IGZhbGxiYWNrIHRvIHF1ZXJ5IGZzIGFsbCBpbmZvIGlmIHBvc2l4IHF1ZXJ5IGZzIG5v
-dAogc3VwcG9ydGVkCgpBIHZlcnNpb24gb2YgU2FtYmEsIHN1cHBvcnRlZCBQT1NJWCBleHRlbnNp
-b25zLCBidXQgbm90IHRoZSBxdWVyeSBmcyBpbmZvCmxldmVsLiAgRmFsbCBiYWNrIHRvIHF1ZXJ5
-IGZzIGFsbCBpbmZvIGlmIFBPU0lYIHF1ZXJ5IGZzIGluZm8gbm90CnN1cHBvcnRlZC4KCkFsc28g
-Zml4ZXMgdGhlIHByb2JsZW0gdGhhdCBjb21wb3VuZGluZyB3YXNuJ3QgYmVpbmcgdXNlZCBmb3Ig
-cG9zaXgKcWZzIGluZm8gaW4gdGhpcyBwYXRoIChzdGF0ZnMpIGJ1dCB3YXMgYmVpbmcgdXNlZCBp
-biBvdGhlcnMsIHNvCmltcHJvdmVzIHBlcmZvcm1hbmNlIG9mIHBvc2l4IHF1ZXJ5IGZzIGluZm8u
-CgpTaWduZWQtb2ZmLWJ5OiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+Ci0t
-LQogZnMvY2lmcy9zbWIyb3BzLmMgICB8IDQ0ICsrKysrKysrKysrKysrKysrKysrKysrKysrLS0t
-LS0tLS0tLS0tLS0tLS0tCiBmcy9jaWZzL3NtYjJwZHUuYyAgIHwgIDIgKy0KIGZzL2NpZnMvc21i
-MnByb3RvLmggfCAgMiArKwogMyBmaWxlcyBjaGFuZ2VkLCAyOSBpbnNlcnRpb25zKCspLCAxOSBk
-ZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9mcy9jaWZzL3NtYjJvcHMuYyBiL2ZzL2NpZnMvc21i
-Mm9wcy5jCmluZGV4IDQyMWJlNDNhZjQyNS4uNTQwMDJkMWVmNWMzIDEwMDY0NAotLS0gYS9mcy9j
-aWZzL3NtYjJvcHMuYworKysgYi9mcy9jaWZzL3NtYjJvcHMuYwpAQCAtMjU1NywzMSArMjU1Nywz
-OSBAQCBzdGF0aWMgaW50CiBzbWIzMTFfcXVlcnlmcyhjb25zdCB1bnNpZ25lZCBpbnQgeGlkLCBz
-dHJ1Y3QgY2lmc190Y29uICp0Y29uLAogCSAgICAgICBzdHJ1Y3QgY2lmc19zYl9pbmZvICpjaWZz
-X3NiLCBzdHJ1Y3Qga3N0YXRmcyAqYnVmKQogeworCXN0cnVjdCBzbWIyX3F1ZXJ5X2luZm9fcnNw
-ICpyc3A7CisJc3RydWN0IGt2ZWMgcnNwX2lvdiA9IHtOVUxMLCAwfTsKKwlGSUxFX1NZU1RFTV9Q
-T1NJWF9JTkZPICppbmZvID0gTlVMTDsKKwlpbnQgYnVmdHlwZSA9IENJRlNfTk9fQlVGRkVSOwog
-CWludCByYzsKLQlfX2xlMTYgc3JjaF9wYXRoID0gMDsgLyogTnVsbCAtIG9wZW4gcm9vdCBvZiBz
-aGFyZSAqLwotCXU4IG9wbG9jayA9IFNNQjJfT1BMT0NLX0xFVkVMX05PTkU7Ci0Jc3RydWN0IGNp
-ZnNfb3Blbl9wYXJtcyBvcGFybXM7Ci0Jc3RydWN0IGNpZnNfZmlkIGZpZDsKIAogCWlmICghdGNv
-bi0+cG9zaXhfZXh0ZW5zaW9ucykKIAkJcmV0dXJuIHNtYjJfcXVlcnlmcyh4aWQsIHRjb24sIGNp
-ZnNfc2IsIGJ1Zik7CiAKLQlvcGFybXMudGNvbiA9IHRjb247Ci0Jb3Bhcm1zLmRlc2lyZWRfYWNj
-ZXNzID0gRklMRV9SRUFEX0FUVFJJQlVURVM7Ci0Jb3Bhcm1zLmRpc3Bvc2l0aW9uID0gRklMRV9P
-UEVOOwotCW9wYXJtcy5jcmVhdGVfb3B0aW9ucyA9IGNpZnNfY3JlYXRlX29wdGlvbnMoY2lmc19z
-YiwgMCk7Ci0Jb3Bhcm1zLmZpZCA9ICZmaWQ7Ci0Jb3Bhcm1zLnJlY29ubmVjdCA9IGZhbHNlOwot
-Ci0JcmMgPSBTTUIyX29wZW4oeGlkLCAmb3Bhcm1zLCAmc3JjaF9wYXRoLCAmb3Bsb2NrLCBOVUxM
-LCBOVUxMLAotCQkgICAgICAgTlVMTCwgTlVMTCk7Ci0JaWYgKHJjKQotCQlyZXR1cm4gcmM7CisJ
-cmMgPSBzbWIyX3F1ZXJ5X2luZm9fY29tcG91bmQoeGlkLCB0Y29uLCAiIiwKKwkJCQkgICAgICBG
-SUxFX1JFQURfQVRUUklCVVRFUywKKwkJCQkgICAgICBGU19QT1NJWF9JTkZPUk1BVElPTiwKKwkJ
-CQkgICAgICBTTUIyX09fSU5GT19GSUxFU1lTVEVNLAorCQkJCSAgICAgIHNpemVvZihGSUxFX1NZ
-U1RFTV9QT1NJWF9JTkZPKSwKKwkJCQkgICAgICAmcnNwX2lvdiwgJmJ1ZnR5cGUsIGNpZnNfc2Ip
-OworCWlmIChyYyA9PSAtRUlPKSAvKiBzb21lIHBvc2l4IHNlcnZlcnMgZGlkbid0IHN1cHBvcnQg
-dGhpcyBpbmZvIGxldmVsICovCisJCXJldHVybiBzbWIyX3F1ZXJ5ZnMoeGlkLCB0Y29uLCBjaWZz
-X3NiLCBidWYpOworCWVsc2UgaWYgKHJjKQorCQlnb3RvIHBxZnNfZXhpdDsKIAotCXJjID0gU01C
-MzExX3Bvc2l4X3Fmc19pbmZvKHhpZCwgdGNvbiwgZmlkLnBlcnNpc3RlbnRfZmlkLAotCQkJCSAg
-IGZpZC52b2xhdGlsZV9maWQsIGJ1Zik7CisJcnNwID0gKHN0cnVjdCBzbWIyX3F1ZXJ5X2luZm9f
-cnNwICopcnNwX2lvdi5pb3ZfYmFzZTsKIAlidWYtPmZfdHlwZSA9IFNNQjJfU1VQRVJfTUFHSUM7
-Ci0JU01CMl9jbG9zZSh4aWQsIHRjb24sIGZpZC5wZXJzaXN0ZW50X2ZpZCwgZmlkLnZvbGF0aWxl
-X2ZpZCk7CisJaW5mbyA9IChGSUxFX1NZU1RFTV9QT1NJWF9JTkZPICopKAorCQlsZTE2X3RvX2Nw
-dShyc3AtPk91dHB1dEJ1ZmZlck9mZnNldCkgKyAoY2hhciAqKXJzcCk7CisJcmMgPSBzbWIyX3Zh
-bGlkYXRlX2lvdihsZTE2X3RvX2NwdShyc3AtPk91dHB1dEJ1ZmZlck9mZnNldCksCisJCQkgICAg
-ICAgbGUzMl90b19jcHUocnNwLT5PdXRwdXRCdWZmZXJMZW5ndGgpLAorCQkJICAgICAgICZyc3Bf
-aW92LAorCQkJICAgICAgIHNpemVvZihGSUxFX1NZU1RFTV9QT1NJWF9JTkZPKSk7CisJaWYgKCFy
-YykKKwkJY29weV9wb3NpeF9mc19pbmZvX3RvX2tzdGF0ZnMoaW5mbywgYnVmKTsKKworcHFmc19l
-eGl0OgorCWZyZWVfcnNwX2J1ZihidWZ0eXBlLCByc3BfaW92Lmlvdl9iYXNlKTsKIAlyZXR1cm4g
-cmM7CiB9CiAKZGlmZiAtLWdpdCBhL2ZzL2NpZnMvc21iMnBkdS5jIGIvZnMvY2lmcy9zbWIycGR1
-LmMKaW5kZXggNjM1MmFiMzJjN2U3Li4wMWYwY2MxNjIwYmQgMTAwNjQ0Ci0tLSBhL2ZzL2NpZnMv
-c21iMnBkdS5jCisrKyBiL2ZzL2NpZnMvc21iMnBkdS5jCkBAIC01MjUxLDcgKzUyNTEsNyBAQCBz
-bWIyX2NvcHlfZnNfaW5mb190b19rc3RhdGZzKHN0cnVjdCBzbWIyX2ZzX2Z1bGxfc2l6ZV9pbmZv
-ICpwZnNfaW5mLAogCXJldHVybjsKIH0KIAotc3RhdGljIHZvaWQKK3ZvaWQKIGNvcHlfcG9zaXhf
-ZnNfaW5mb190b19rc3RhdGZzKEZJTEVfU1lTVEVNX1BPU0lYX0lORk8gKnJlc3BvbnNlX2RhdGEs
-CiAJCQlzdHJ1Y3Qga3N0YXRmcyAqa3N0KQogewpkaWZmIC0tZ2l0IGEvZnMvY2lmcy9zbWIycHJv
-dG8uaCBiL2ZzL2NpZnMvc21iMnByb3RvLmgKaW5kZXggM2Y3NDBmMjRiOTZhLi5jOTZjNmNhZDkw
-YTQgMTAwNjQ0Ci0tLSBhL2ZzL2NpZnMvc21iMnByb3RvLmgKKysrIGIvZnMvY2lmcy9zbWIycHJv
-dG8uaApAQCAtMjY3LDYgKzI2Nyw4IEBAIGV4dGVybiBpbnQgc21iMl92YWxpZGF0ZV9hbmRfY29w
-eV9pb3YodW5zaWduZWQgaW50IG9mZnNldCwKIGV4dGVybiB2b2lkIHNtYjJfY29weV9mc19pbmZv
-X3RvX2tzdGF0ZnMoCiAJIHN0cnVjdCBzbWIyX2ZzX2Z1bGxfc2l6ZV9pbmZvICpwZnNfaW5mLAog
-CSBzdHJ1Y3Qga3N0YXRmcyAqa3N0KTsKK2V4dGVybiB2b2lkIGNvcHlfcG9zaXhfZnNfaW5mb190
-b19rc3RhdGZzKEZJTEVfU1lTVEVNX1BPU0lYX0lORk8gKnJlc3BvbnNlX2RhdGEsCisJCQkJCSAg
-c3RydWN0IGtzdGF0ZnMgKmtzdCk7CiBleHRlcm4gaW50IHNtYjMxMV9jcnlwdG9fc2hhc2hfYWxs
-b2NhdGUoc3RydWN0IFRDUF9TZXJ2ZXJfSW5mbyAqc2VydmVyKTsKIGV4dGVybiBpbnQgc21iMzEx
-X3VwZGF0ZV9wcmVhdXRoX2hhc2goc3RydWN0IGNpZnNfc2VzICpzZXMsCiAJCQkJICAgICAgc3Ry
-dWN0IFRDUF9TZXJ2ZXJfSW5mbyAqc2VydmVyLAotLSAKMi4zNC4xCgo=
---0000000000002581cd05e87447e3--
 
