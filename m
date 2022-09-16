@@ -2,61 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B3665BB366
-	for <lists+samba-technical@lfdr.de>; Fri, 16 Sep 2022 22:21:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC65F5BB38C
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Sep 2022 22:33:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=/p/cBO/XssbkqvUTH9RprLOq5yAZKr5YUundr0PST84=; b=kDyzK4sKksaao66Q+dJ7iqO9iD
-	lI1AbS4QW8v1JOgQ9vZb/xX3cpU6fbr5Cy8buGyv72YKY6qbVqj7EX6rIDOQdMvPB7inhNyQVz4dy
-	sh+5+BUuhH14QH1pgGg2pauLbsfjGWW6Gg1RVJ2cQOn9dT+ldF2eZLmPaJxMgbSnqfq4GtJxmS9db
-	YbeHH8hyyoz/MoPzyyTAau5PUQJ0VtfF2KAZsSFUZEsHGDf3G6L79jtnMp03kq9sWVSQmBOSZbFWu
-	7OTrHqC8oczJSLBF1sozuve747JfCYuvV2zhmHcQxQ4nFzsNaLEjZMioFS5jTpcGGCvCcU5R2iigr
-	g7PmheDQ==;
-Received: from ip6-localhost ([::1]:38092 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=rsk6ByWcAnYLKDvQDQwIbv8GNU24x1xbPg96f+tcQwQ=; b=NftvtgHjpEMWB7QA2jx1w0Ofon
+	Rpdk895SL1IPoS3Q7ufD934bJ9Rlz2J68bVF56C9SViMAJ3qhRsjHR2bLbW+XQvbiPmI47Zw1L2XL
+	6g1+4lJS7DkjzHp1eAVKkmsnsJq2MKDm0NPjYFv4kqBHRQ8beP71lOlBtihy5fQv8RNLXJk8aSjT+
+	DqYQ1RtmyNTlJJIQ0ux/4EBvcPI3j9GoTGf6aUJ3UmF09aUlDV2zYpgqE7xoD78hN4siXelgALbC/
+	jJzQVcKFKj+4DKxjp0d57TXKDFy+E9ssmtWgbbVXg5jpt8mBtp4zv50feAl23f5U5T71U8ozdoJoK
+	Ig4iAW1g==;
+Received: from ip6-localhost ([::1]:46118 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oZHq4-001435-8C; Fri, 16 Sep 2022 20:21:28 +0000
-Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633]:38782) 
+	id 1oZI1o-0014QL-UU; Fri, 16 Sep 2022 20:33:37 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:34948) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oZHpy-00142u-Vx
- for samba-technical@lists.samba.org; Fri, 16 Sep 2022 20:21:25 +0000
-Received: by mail-ej1-x633.google.com with SMTP id u9so52011680ejy.5
- for <samba-technical@lists.samba.org>; Fri, 16 Sep 2022 13:21:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date;
- bh=kqh1s4qLyf6VbWUZCrASfIx3UkjRFHI0SieYF+jFAG0=;
- b=XkUjjtoe9clbWn3wuDK7baLg6/+7jxpM2Y/Mh55rdBFDwDOOCmk5ApCmqNEbGGGeKQ
- sXV1vh/spOSWrBwuRXexx8d6rR+ft4fWTizh0/eQW7qokL8GwmnMJvUZF44Kj/kYTtwT
- 3lVE0VDC5N8PTp+49+n0AwaPzl75v1uD5fUH0njTxiaGjZBDtKA5/eXA/UbkZ4CVZCgb
- YYH1/sJZq0HzQWlcplCP28MAHRpaFEa5MhcQ/8mKmhVgwj9N2HWFYsNSp31cFf9Ey5da
- 7BV5WGS9gSFYBY0L+/sTH92IwoGvTB3AAsovZDscVq9yGod1vEvpG2D0+XTwz3N05o8i
- qZSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-message-state:from:to:cc:subject:date;
- bh=kqh1s4qLyf6VbWUZCrASfIx3UkjRFHI0SieYF+jFAG0=;
- b=WCsv1vnbZZ4IucmpJHbCx0KhRkW295//ORFPjvEMHe0gJ+WUIrvbjiAnGja1pjlkC1
- LXc2tPEmcTEUu0xg3ffYCf/1LfIRmeDjVLrjNM8nxjmSiLKYVxslHuLDDcf8eqW47QzM
- WCYW9/fepQRmNJy49BCSHPzmwOS336xgVHORM4Egkk21JmW7ACcnmVT83Ucmk4gXhhCz
- tbQoHNUpCFG30yFcoJTaygKRdcJ57qkiiyUPu8F5ZsQvzwE4skHLPalICRdG5l3j9V6B
- dYMseQAkA39/hMUTN5r6uinxNz9Js8L+mv9PV+GqGZr2TUQiNhXaWq4rPRnbzrxPnL+f
- AJdA==
-X-Gm-Message-State: ACrzQf0DVLNlYkKq7SlkYdndNt5yJOMXYWFnoESbjgJOGdf4Ky4HFoMJ
- 2LJOaiwz0l8pm4tdq7lQzygbRY1PmrlzpwyI29UXK3B6kx4Y/w==
-X-Google-Smtp-Source: AMsMyM72cDeb8f82Hl+eXEFZCH0nWUKzn4h8xxKBIzj7fVa9FVd646Re6eVGNgT+ySrcHTT8EVuGNXem6zfs9u2PNVM=
-X-Received: by 2002:a17:906:cc58:b0:76f:c119:acb5 with SMTP id
- mm24-20020a170906cc5800b0076fc119acb5mr4476652ejb.651.1663359677714; Fri, 16
- Sep 2022 13:21:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAPw4iV4nxm2F9TeVvaA=M1Ony92eONtu981WzwUADVBdFET0XQ@mail.gmail.com>
-In-Reply-To: <CAPw4iV4nxm2F9TeVvaA=M1Ony92eONtu981WzwUADVBdFET0XQ@mail.gmail.com>
-Date: Fri, 16 Sep 2022 16:21:06 -0400
-Message-ID: <CAPw4iV7KThffTERmpsWQMv-gJfBRSi_+g+i3xMZBEU-YrXFfOg@mail.gmail.com>
+ (Exim) id 1oZI1k-0014QC-3R
+ for samba-technical@lists.samba.org; Fri, 16 Sep 2022 20:33:34 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=rsk6ByWcAnYLKDvQDQwIbv8GNU24x1xbPg96f+tcQwQ=; b=2DqG9KfiAcmV0FrZXuOxGzSaAb
+ QtdA8UGT+jTRCPfopNz/633YKDy2ZwJ87jMLthK5QG8EOq2djruD1EUAvT4pB/+AltzEl6P1tYOvW
+ LTeQ6bonLdVGBny5Z3X2Cqqs70+1Eabhv5F0CGthe0g5mZI1Sf0PXgh853BA7dYCFoP5eqkwAQJtw
+ eEOOLziG18w9kR9IraUa8xA7aCw2otIIGfmFAVG4nGETHfPJJDCQjj5PZpMG/uzMIT8JFROgZpKY8
+ KuSrG6bXVbwftsHxOX855fqID4SOIVKaVj0ZktCh/UohW7jz6cUf+NjD1hFvud4bGglNfvdql94Ad
+ 622/UcIksEgOawGyGyozxALlAkbeQgA6YNvzDF6IGLlgI0I359T0m5HSTbGIr/Ul0oB7j19bVU09U
+ r8sbFaXU+BQhriVTTdfrVpu+pF9EecnuSoPaosowvG4maEDlpjW5lecEyxDMgm6KWXNPkukYj6yJv
+ a8xk47V7o3eVhjyrzE2PT5AI;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1oZI1j-000ijk-Ea; Fri, 16 Sep 2022 20:33:31 +0000
+Date: Fri, 16 Sep 2022 13:33:26 -0700
+To: "Nathaniel W. Turner" <nathanielwyliet@gmail.com>
 Subject: Re: IPv6 and commit d882add695bbd5ea03961c08ac2c0380fbf2947b
-To: samba-technical@lists.samba.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Message-ID: <YyTdlsd2ExgX8U9r@jeremy-acer>
+References: <CAPw4iV4nxm2F9TeVvaA=M1Ony92eONtu981WzwUADVBdFET0XQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <CAPw4iV4nxm2F9TeVvaA=M1Ony92eONtu981WzwUADVBdFET0XQ@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,45 +55,38 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: "Nathaniel W. Turner via samba-technical"
- <samba-technical@lists.samba.org>
-Reply-To: "Nathaniel W. Turner" <nathanielwyliet@gmail.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Sep 16, 2022 at 4:17 PM Nathaniel W. Turner <
-nathanielwyliet@gmail.com> wrote:
-
-> Hi folks,
+On Fri, Sep 16, 2022 at 04:17:46PM -0400, Nathaniel W. Turner via samba-technical wrote:
+>Hi folks,
 >
-> I'm investigating an apparent regression in IPv6 support in the "net"
-> command, and I have some questions about commit
-> d882add695bbd5ea03961c08ac2c0380fbf2947b.
+>I'm investigating an apparent regression in IPv6 support in the "net"
+>command, and I have some questions about commit
+>d882add695bbd5ea03961c08ac2c0380fbf2947b.
 >
-> It looks like it was intended to improve and simplify DNS lookups, but
-> unless I'm reading it wrong, it seems to have introduced the assumption
-> that if a DC has IPv4 addresses, all clients will too.
+>It looks like it was intended to improve and simplify DNS lookups, but
+>unless I'm reading it wrong, it seems to have introduced the assumption
+>that if a DC has IPv4 addresses, all clients will too.
 >
-> If a DC is configured to support both IPv4 and IPv6, and a client in that
-> environment is configured IPv6-only (e.g. as part of a transition to
-> all-IPv6), it looks like the logic will pick one of the DC's IPv4 addresses
-> and ignore it's IPv6 addresses.
+>If a DC is configured to support both IPv4 and IPv6, and a client in that
+>environment is configured IPv6-only (e.g. as part of a transition to
+>all-IPv6), it looks like the logic will pick one of the DC's IPv4 addresses
+>and ignore it's IPv6 addresses.
 >
-> Am I missing something?
->
+>Am I missing something?
 
-Here's the commit message for context (sorry, meant to include this):
+No that's probably correct. I didn't think I'd
+changed the logic here, but it seems I did.
 
-commit d882add695bbd5ea03961c08ac2c0380fbf2947b
-Author: Jeremy Allison <jra@samba.org>
-Date:   Tue Jul 21 22:09:27 2020 -0700
+If you'd like to log a bug and send a fix for this
+to gitlab, I'm happy to review and get it into
+the supported trees.
 
-    s3: libsmb: Make discover_dc_dns() use async DNS.
+Thanks !
 
-    Change to call dns_lookup_list_async(). This is
-    doing the samba SRV lookup followed by A and AAAA
-    record host lookup as resolve_ads() does and so
-    benefits from the same changes to make it async.
+Jeremy.
 
-    Signed-off-by: Jeremy Allison <jra@samba.org>
-    Reviewed-by: Andreas Schneider <asn@samba.org>
