@@ -2,71 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71DAE5BB695
-	for <lists+samba-technical@lfdr.de>; Sat, 17 Sep 2022 07:51:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4C775BDB24
+	for <lists+samba-technical@lfdr.de>; Tue, 20 Sep 2022 06:04:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Date:Subject:cc;
-	bh=lx8GNlsWwjBlRGCPj1m269oYpMFY3tiSk3tAz0M7nYo=; b=uJp4hgWV+mut8czdwIU0RPVxU2
-	RFuOXf45p6CFlNcTGls75RxEKRIpFglUXh+NVA7+CkcNzmp2y8XYTL9Whk6B9EkQ5+8cpoTnruokB
-	e4Y32Knz5QMXC8MEsFoUsAdL7/4cHdnCfbfduXSYEpmQeV6O4w6IzLANJJUtPQC2GmenIW2i3o3vK
-	QNOPbvglpduhoVMKdWKiZuD+y3mZ7u+D2CO3LV5xZSHp97IHC+ZMjsVxvjWmUYffoCjKK3ov79v/q
-	4O94C3WeCzL5NhO17s8fB/fWNNibELGHKcTJBJ+iJTDI+xADPFdr1huTzQQPboLlxdDa3SFU8dask
-	PCpUuJJw==;
-Received: from ip6-localhost ([::1]:31676 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=9p3vxJkL8RheHt7HmOzh/lIGQhD2BoRvtqGyfowdj8E=; b=RWMgVqLqPshfr+DtxSdeClGrnz
+	0NwUY9W1RoWulQEgfl9TcWUu3MqeS0ZxL8INqWCXN8fwcsTjFKlJTvLt7l00v/QO0zAQq1gl9P1Fh
+	NJPk+UeZluY3n/Load9AhrbOb8WADdglrzpi94reLPHUU0ArZaarhNzMzD8cI6/uYa2XeXsUKz/jD
+	Tpe7W33sTKI8wWlPkUQRSSvfrqVkmpuVD5CwvvxGjlHc08bxIq3qoE7xRyRVaaplydykLKO3KHQup
+	bJbTihAQNnOL8Ih056G9eJdoUcErpQlPMzsvztOABuEyLnid169vJQeSzsV+GH4LJn0eqtsZ8Ira5
+	uPZCizfw==;
+Received: from ip6-localhost ([::1]:54492 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oZQib-0018CC-HU; Sat, 17 Sep 2022 05:50:22 +0000
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329]:36603) 
+	id 1oaUU8-0028H9-AH; Tue, 20 Sep 2022 04:03:48 +0000
+Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32]:41931) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oZQiM-0018C3-27
- for samba-technical@lists.samba.org; Sat, 17 Sep 2022 05:50:12 +0000
-Received: by mail-wm1-x329.google.com with SMTP id
- i203-20020a1c3bd4000000b003b3df9a5ecbso1105046wma.1
- for <samba-technical@lists.samba.org>; Fri, 16 Sep 2022 22:50:01 -0700 (PDT)
+ (Exim) id 1oaUU2-0028H0-CM
+ for samba-technical@lists.samba.org; Tue, 20 Sep 2022 04:03:44 +0000
+Received: by mail-vs1-xe32.google.com with SMTP id k2so1739056vsk.8
+ for <samba-technical@lists.samba.org>; Mon, 19 Sep 2022 21:03:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=to:date:message-id:subject:mime-version:from
- :content-transfer-encoding:from:to:cc:subject:date;
- bh=9jSbPXGChm7V7oF3IKeYmt9xVxoqiSmm8v3dhDjp94o=;
- b=hjAaRzQ53yamLmyRh83VnLqZaRgVYzidqfuvDdFvBQNqqTIjYqkZroS8HJtr42yGlF
- 7LC+bmqDPGkMh8iGYLhc7wmUggWyjzzWWCurX5yG8yD32gSRC7arPmOYdOIbUNc359rG
- AtoSm7qc3D1KrY8xU49X6P2D5NSc99N3NKXv+pmmEjShhKi8iW41nt5LiCwoNDc4ZKwV
- q3wrKs+eeizIJkGFr0qzrDDvCGVg/VkQN6hgviRYIEMLWMrOe9pNLlK8qCaA8rvhGB4P
- I+uLS+w0tkWsPwtOpz12Gm3VKa4PoNC2XCQs79dgC3Q7c+bLJSbHwmPhAR6TzLEVoNwq
- pfAQ==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date;
+ bh=9p3vxJkL8RheHt7HmOzh/lIGQhD2BoRvtqGyfowdj8E=;
+ b=THBlQ+1cFNQAVS1QfnzfbeC2nXo47pElTnE0D+OpEfYecuzQsa1JD8aMC02cDcJPal
+ YNC+V/Q+dEqxxDCSxim1w7qf3KXlWjdZu/0b5QL/eT6Iicqyh8u86C9sBKvb1Tkdn/yp
+ m38VomC6rgkA4zcP3InZJPBER0FtmDPdZ87viOdDq5403fo5m6cHhVvQUwlmSTrwixRr
+ 2YtxKp5MDkYtxmR384m/U1ZnkduuqYAqUGMWCYSdg3Hj6h8JnORyvTSfqKur1spRnfyY
+ 9iY2KHFFh2uS+A6v1IGWkTUSagUVGx16nD9hpykvsKhoNAlFZZKUuWVzL1xfXM50+wAH
+ lwFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=to:date:message-id:subject:mime-version:from
- :content-transfer-encoding:x-gm-message-state:from:to:cc:subject
- :date;
- bh=9jSbPXGChm7V7oF3IKeYmt9xVxoqiSmm8v3dhDjp94o=;
- b=KYBGSmY5EMdmEiKYhuIlh8GRXkY0AZLhGMWhmwsBfdcE42BAEGxieliraTA4tc6o4k
- 9kR6kHf0z0IA47MI4fFWX5eLQOdGYU/hDx33TvWmqM1PiBusHRL1oa2MzwPwjPtMllZd
- B5MTx4IMtMvubeZM45cLpDw/+T35Qri+woyyGIuEShBiWCYAYt+pJtll1SchnVWRVTdx
- aUOKgcxFnbH05exwqSLaH2IvIdS4w8miu4avDIU21Z37qqKv+4C5Jz0qj3XqNKN1WmbT
- 66Qf97pqnLyeoIxgJ80YlRkuayQbKgohE44Z8E3Zgl7oW4LhC9nVAMgsJUxT/0iSv6u6
- LOXA==
-X-Gm-Message-State: ACrzQf0I0zo6DwHwcXIlLjTEPpd6rTf5MvK7y8/zE90qII78qWIh63a+
- kZ8WyYSbLazDQNeMcD4FQG25TdHE1kM=
-X-Google-Smtp-Source: AMsMyM7ZH1SfPLnIBP35fwppc/1PcUhM+XDa1H1sJ3xeId9PR+gdZxmydVe2Em1rIvlFJQIqO1hjqg==
-X-Received: by 2002:a05:600c:4e0a:b0:3b4:91fe:80e3 with SMTP id
- b10-20020a05600c4e0a00b003b491fe80e3mr5497744wmq.91.1663393799746; 
- Fri, 16 Sep 2022 22:49:59 -0700 (PDT)
-Received: from smtpclient.apple (93-44-81-67.ip96.fastwebnet.it. [93.44.81.67])
- by smtp.gmail.com with ESMTPSA id
- p26-20020a05600c1d9a00b003b47ff307e1sm4761439wms.31.2022.09.16.22.49.58
- for <samba-technical@lists.samba.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Sep 2022 22:49:59 -0700 (PDT)
-Mime-Version: 1.0 (1.0)
-Subject: Samba and ZFS: Snapshot folder appears empty via SMB share but can
- 'cd' into subfolders 
-Message-Id: <ABADD348-85FA-4817-AA29-A1EDE55792D9@gmail.com>
-Date: Sat, 17 Sep 2022 07:49:58 +0200
-To: samba-technical@lists.samba.org
-X-Mailer: iPhone Mail (19G82)
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date;
+ bh=9p3vxJkL8RheHt7HmOzh/lIGQhD2BoRvtqGyfowdj8E=;
+ b=1KB5OoGvjvb4JJYimJ53DZRfumTyhgZD/jCZrrGqSQCWDu3JVkxlePRj+mTrPoJ40F
+ R1MXdobE0r3BjaZQqhrHmpFIfF5t7C8K0kXpHHhrJ2mTI4qK/G8F4G4WT5EAZRc2YA9w
+ zCheuHse/zeomv69mSSnAel0baBlztV3H3dlrCuhUqHkvWTsV1zoyilwvYiFU8+XyQ+k
+ djSv7KtKukJ31mWiEG0QnUYizuQfKv0J2qZh8/cJ2mN8RV4cfasCVAKFp5T5OrT/nYZx
+ Q+fdSV76XENX2IieT8tXsthHC0BeSVq3fxt9jcDFh4OXG+5FEnZETmrzyieEH2f2lH56
+ DNeg==
+X-Gm-Message-State: ACrzQf2fL/76Vc+iDuR/fWjIgLsg09h4SmefvCC9C7d0ZwyQ5UrtpOz9
+ RU2Ala5x/muw+0Q6iMnmWsPGprjgXBeinP24D2w=
+X-Google-Smtp-Source: AMsMyM5OLjPVlyDmbcFZXVFLFn/qjtrCjidXLl8EJBGPLWirDOanB0DlnvAT425b9eSqVvk8+m0m9YfzYW5ttWyWsU0=
+X-Received: by 2002:a67:1d87:0:b0:398:6d94:dbf4 with SMTP id
+ d129-20020a671d87000000b003986d94dbf4mr7045221vsd.6.1663646619247; Mon, 19
+ Sep 2022 21:03:39 -0700 (PDT)
+MIME-Version: 1.0
+References: <20220906032435.932451-1-13667453960@163.com>
+In-Reply-To: <20220906032435.932451-1-13667453960@163.com>
+Date: Mon, 19 Sep 2022 23:03:28 -0500
+Message-ID: <CAH2r5muzL_wNVKxzoeQ17rMmbG8Loz8H_REWWysOV2qy2JzyzQ@mail.gmail.com>
+Subject: Re: [PATCH] cifs: misc: fix spelling typo in comment
+To: Jiangshan Yi <13667453960@163.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,94 +69,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrea Mencarelli via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrea Mencarelli <andrea3000@gmail.com>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: linux-cifs@vger.kernel.org, sprasad@microsoft.com, pc@cjr.nz,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ lsahlber@redhat.com, sfrench@samba.org, k2ci <kernel-bot@kylinos.cn>,
+ Jiangshan Yi <yijiangshan@kylinos.cn>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-=EF=BB=BF
-Hello,
+merged into cifs-2.6.git for-next
 
-I'm running the latest version of OpenZFS on Linux (Unraid) with Samba 4.15.=
-7.
+On Mon, Sep 5, 2022 at 10:29 PM Jiangshan Yi <13667453960@163.com> wrote:
+>
+> From: Jiangshan Yi <yijiangshan@kylinos.cn>
+>
+> Fix spelling typo in comment.
+>
+> Reported-by: k2ci <kernel-bot@kylinos.cn>
+> Signed-off-by: Jiangshan Yi <yijiangshan@kylinos.cn>
+> ---
+>  fs/cifs/misc.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/fs/cifs/misc.c b/fs/cifs/misc.c
+> index 87f60f736731..c6679398fff9 100644
+> --- a/fs/cifs/misc.c
+> +++ b/fs/cifs/misc.c
+> @@ -824,7 +824,7 @@ cifs_close_deferred_file_under_dentry(struct cifs_tcon *tcon, const char *path)
+>         free_dentry_path(page);
+>  }
+>
+> -/* parses DFS refferal V3 structure
+> +/* parses DFS referral V3 structure
+>   * caller is responsible for freeing target_nodes
+>   * returns:
+>   * - on success - 0
+> --
+> 2.25.1
+>
+>
+> No virus found
+>                 Checked by Hillstone Network AntiVirus
+>
 
-I have encountered a very annoying issue that I can't seem to be able to res=
-olve.
-I run hourly snapshots on all my datasets in the ZFS pool, and I can see and=
- access them just fine on the server by browsing to the hidden .zfs/snapshot=
- directory, which contains a directory for each snapshot created for that da=
-taset.
-I have also set snapdir visibility to visible in ZFS.=20
 
-To be able to access the data on the ZFS pool from the client (MacOS) I use a=
- Samba share that is configured like this:
-[global]
-vfs objects =3D catia fruit streams_xattr
-fruit:aapl =3D yes
-fruit:model =3D MacSamba
-fruit:metadata =3D stream
-fruit:resource =3D xattr
-fruit:encoding =3D native
-fruit:nfs_aces =3D no
-fruit:wipe_intentionally_left_blank_rfork =3D yes
-fruit:delete_empty_adfiles =3D yes
-ea support =3D yes
-map archive =3D no
-map hidden =3D no
-map system =3D no
-store dos attributes =3D no
+-- 
+Thanks,
 
-[ShareTest]
-path =3D /zfs/test
-comment =3D ShareTest
-browseable =3D yes
-writeable =3D yes
-valid users =3D andrea
-write list =3D andrea
-guest ok =3D no
-create mask =3D 0775
-directory mask =3D 0775
-vfs objects =3D catia fruit streams_xattr
-veto files =3D /.DS_Store/
-delete veto files =3D yes
+Steve
 
-When I connect to the Samba share from the MacOS client (but the same happen=
-s from Windows) like this:
-smb://[IP address of server]/ShareTest
-
-I can cd to the hidden /ShareTest/.zfs directory.=20
-Inside there I can list and cd into the snapshot directory.
-However, if I do ls -a inside the snapshot directory I don't see any of the s=
-napshots folders.=20
-andrea@192 snapshot % pwd
-/Volumes/ShareTest/.zfs/snapshot
-andrea@192 snapshot % ls -a
-.	..=20
-
-However, if I try to cd into any of the snapshot folders by starting to type=
- the name of the directory and pressing tab to autocomplete, the auto-comple=
-tion shows all the missing folders and I can cd into any of them.
-andrea@192 snapshot % cd 2022-0
-2022-08-21_18-00/  2022-08-24_08-00/  2022-08-25_20-00/  2022-08-28_15-00/  2=
-022-09-03_22-00/  2022-09-09_23-00/  2022-09-11_10-00/
-2022-08-23_22-00/  2022-08-24_23-00/  2022-08-25_21-00/  2022-09-03_12-00/  2=
-022-09-03_23-00/  2022-09-10_17-00/=20
-
-As far as I know, when something like this happens is because I don't have r=
-ead permission on the snapshots directories. This isn't the case this time, t=
-hough.
-
-What's even more odd is that if I do the following:
-- Try to (unsuccessfully) list the snapshots folders for a given share
-- Restart the Samba service with this command: smbcontrol all reload-config
-- Try again to reconnect to the share and list the snapshot folders
-
-It almost always shows all the snapshots this time!!
-This only applies to that given share (and not the others) and only until I r=
-eboot the server or the client.
-For example, if I connect to a different share and I try to list the snapsho=
-ts, I get an empty list again and I have to restart the Samba service once m=
-ore.
-
-Does anybody know what's causing this issue?
-=20
