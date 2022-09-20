@@ -2,60 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4C775BDB24
-	for <lists+samba-technical@lfdr.de>; Tue, 20 Sep 2022 06:04:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC1215BE93A
+	for <lists+samba-technical@lfdr.de>; Tue, 20 Sep 2022 16:44:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=9p3vxJkL8RheHt7HmOzh/lIGQhD2BoRvtqGyfowdj8E=; b=RWMgVqLqPshfr+DtxSdeClGrnz
-	0NwUY9W1RoWulQEgfl9TcWUu3MqeS0ZxL8INqWCXN8fwcsTjFKlJTvLt7l00v/QO0zAQq1gl9P1Fh
-	NJPk+UeZluY3n/Load9AhrbOb8WADdglrzpi94reLPHUU0ArZaarhNzMzD8cI6/uYa2XeXsUKz/jD
-	Tpe7W33sTKI8wWlPkUQRSSvfrqVkmpuVD5CwvvxGjlHc08bxIq3qoE7xRyRVaaplydykLKO3KHQup
-	bJbTihAQNnOL8Ih056G9eJdoUcErpQlPMzsvztOABuEyLnid169vJQeSzsV+GH4LJn0eqtsZ8Ira5
-	uPZCizfw==;
-Received: from ip6-localhost ([::1]:54492 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=bh5JhODSYX5KQDRBD9gBYyoTJZvU7Fw2I7XOBdRGgBc=; b=PAzhUvK/vikldUPeddVzZg59mW
+	kw8Q5AyWyCFWiG2fFil5DaHtWyv2lOFWWDAl1Zl4h59Zwv5APiOe/3Eu4VQ7W/ysBSOZ4hgkMU63z
+	08Ix3YbAOgNHcJuSgGcCGrMYYUtiGhP/T6G+iLBHiumnwzogaFEkyCf7vftz6l4cOdNEBpPg5FUGr
+	QzGcJ89Jq4aBcUeJ/Y5J5eeBOwNFOUsSAwYZXe79lgWwj0rdOAzFVCVeB57qBh+wg53X0yrYa3WFa
+	OJf7y9eMw1dDtYb7xheQePUo9ajf7ZxD8ZtiTzAnOui3tUTgdSPFz9jN9OPN4SUFAfOgr9ETa4sEf
+	qB2v1VPw==;
+Received: from ip6-localhost ([::1]:58060 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oaUU8-0028H9-AH; Tue, 20 Sep 2022 04:03:48 +0000
-Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32]:41931) 
+	id 1oaeTF-002HyA-Rf; Tue, 20 Sep 2022 14:43:33 +0000
+Received: from smtp-out1.suse.de ([2001:67c:2178:6::1c]:58464) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oaUU2-0028H0-CM
- for samba-technical@lists.samba.org; Tue, 20 Sep 2022 04:03:44 +0000
-Received: by mail-vs1-xe32.google.com with SMTP id k2so1739056vsk.8
- for <samba-technical@lists.samba.org>; Mon, 19 Sep 2022 21:03:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date;
- bh=9p3vxJkL8RheHt7HmOzh/lIGQhD2BoRvtqGyfowdj8E=;
- b=THBlQ+1cFNQAVS1QfnzfbeC2nXo47pElTnE0D+OpEfYecuzQsa1JD8aMC02cDcJPal
- YNC+V/Q+dEqxxDCSxim1w7qf3KXlWjdZu/0b5QL/eT6Iicqyh8u86C9sBKvb1Tkdn/yp
- m38VomC6rgkA4zcP3InZJPBER0FtmDPdZ87viOdDq5403fo5m6cHhVvQUwlmSTrwixRr
- 2YtxKp5MDkYtxmR384m/U1ZnkduuqYAqUGMWCYSdg3Hj6h8JnORyvTSfqKur1spRnfyY
- 9iY2KHFFh2uS+A6v1IGWkTUSagUVGx16nD9hpykvsKhoNAlFZZKUuWVzL1xfXM50+wAH
- lwFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=9p3vxJkL8RheHt7HmOzh/lIGQhD2BoRvtqGyfowdj8E=;
- b=1KB5OoGvjvb4JJYimJ53DZRfumTyhgZD/jCZrrGqSQCWDu3JVkxlePRj+mTrPoJ40F
- R1MXdobE0r3BjaZQqhrHmpFIfF5t7C8K0kXpHHhrJ2mTI4qK/G8F4G4WT5EAZRc2YA9w
- zCheuHse/zeomv69mSSnAel0baBlztV3H3dlrCuhUqHkvWTsV1zoyilwvYiFU8+XyQ+k
- djSv7KtKukJ31mWiEG0QnUYizuQfKv0J2qZh8/cJ2mN8RV4cfasCVAKFp5T5OrT/nYZx
- Q+fdSV76XENX2IieT8tXsthHC0BeSVq3fxt9jcDFh4OXG+5FEnZETmrzyieEH2f2lH56
- DNeg==
-X-Gm-Message-State: ACrzQf2fL/76Vc+iDuR/fWjIgLsg09h4SmefvCC9C7d0ZwyQ5UrtpOz9
- RU2Ala5x/muw+0Q6iMnmWsPGprjgXBeinP24D2w=
-X-Google-Smtp-Source: AMsMyM5OLjPVlyDmbcFZXVFLFn/qjtrCjidXLl8EJBGPLWirDOanB0DlnvAT425b9eSqVvk8+m0m9YfzYW5ttWyWsU0=
-X-Received: by 2002:a67:1d87:0:b0:398:6d94:dbf4 with SMTP id
- d129-20020a671d87000000b003986d94dbf4mr7045221vsd.6.1663646619247; Mon, 19
- Sep 2022 21:03:39 -0700 (PDT)
+ (Exim) id 1oaeTB-002Hy0-7T
+ for samba-technical@lists.samba.org; Tue, 20 Sep 2022 14:43:31 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 44C7821AFA;
+ Tue, 20 Sep 2022 14:43:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1663685005; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=bh5JhODSYX5KQDRBD9gBYyoTJZvU7Fw2I7XOBdRGgBc=;
+ b=pb0CKmYhXfDIZlHh+GCD4WBcI1ygj1WbIttk+OuT+ALOIMcFyS48FY9hwZu/zk5C5UMqZI
+ /bHX1pGaUkTftQVyyDwVs+oPUTZpRvIG8Dzf9+7vwvrY/Vj4g1ofnKwBR3Cfi32sxbFFD5
+ 8erv518dvsDd0TtE2aZg8VDYrkE1oCk=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1663685005;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=bh5JhODSYX5KQDRBD9gBYyoTJZvU7Fw2I7XOBdRGgBc=;
+ b=nitLZjRqen8ug3dfExc4IABFQBZZFUwd6c40nhXZNfTIzN1gekg82V/fcJ2cziiO00gYPG
+ 6BSreDuCReRQCbDA==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AAFF413ABB;
+ Tue, 20 Sep 2022 14:43:24 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id gLDBGozRKWONHQAAMHmgww
+ (envelope-from <ematsumiya@suse.de>); Tue, 20 Sep 2022 14:43:24 +0000
+Date: Tue, 20 Sep 2022 11:43:22 -0300
+To: kernel test robot <oliver.sang@intel.com>
+Subject: Re: [cifs]  c9ba95b978:
+ BUG:KASAN:use-after-free_in_SMB2_sess_free_buffer[cifs]
+Message-ID: <20220920144322.tkd6eeezfeesva3r@suse.de>
+References: <20220918033619.16522-1-ematsumiya@suse.de>
+ <202209201529.ec633796-oliver.sang@intel.com>
 MIME-Version: 1.0
-References: <20220906032435.932451-1-13667453960@163.com>
-In-Reply-To: <20220906032435.932451-1-13667453960@163.com>
-Date: Mon, 19 Sep 2022 23:03:28 -0500
-Message-ID: <CAH2r5muzL_wNVKxzoeQ17rMmbG8Loz8H_REWWysOV2qy2JzyzQ@mail.gmail.com>
-Subject: Re: [PATCH] cifs: misc: fix spelling typo in comment
-To: Jiangshan Yi <13667453960@163.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <202209201529.ec633796-oliver.sang@intel.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,53 +74,41 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: linux-cifs@vger.kernel.org, sprasad@microsoft.com, pc@cjr.nz,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- lsahlber@redhat.com, sfrench@samba.org, k2ci <kernel-bot@kylinos.cn>,
- Jiangshan Yi <yijiangshan@kylinos.cn>
+From: Enzo Matsumiya via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Enzo Matsumiya <ematsumiya@suse.de>
+Cc: nspmangalore@gmail.com, linux-cifs@vger.kernel.org, lkp@intel.com,
+ smfrench@gmail.com, pc@cjr.nz, samba-technical@lists.samba.org,
+ lkp@lists.01.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
-
-On Mon, Sep 5, 2022 at 10:29 PM Jiangshan Yi <13667453960@163.com> wrote:
+On 09/20, kernel test robot wrote:
 >
-> From: Jiangshan Yi <yijiangshan@kylinos.cn>
+>Greeting,
 >
-> Fix spelling typo in comment.
+>FYI, we noticed the following commit (built with gcc-11):
 >
-> Reported-by: k2ci <kernel-bot@kylinos.cn>
-> Signed-off-by: Jiangshan Yi <yijiangshan@kylinos.cn>
-> ---
->  fs/cifs/misc.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/fs/cifs/misc.c b/fs/cifs/misc.c
-> index 87f60f736731..c6679398fff9 100644
-> --- a/fs/cifs/misc.c
-> +++ b/fs/cifs/misc.c
-> @@ -824,7 +824,7 @@ cifs_close_deferred_file_under_dentry(struct cifs_tcon *tcon, const char *path)
->         free_dentry_path(page);
->  }
->
-> -/* parses DFS refferal V3 structure
-> +/* parses DFS referral V3 structure
->   * caller is responsible for freeing target_nodes
->   * returns:
->   * - on success - 0
-> --
-> 2.25.1
->
->
-> No virus found
->                 Checked by Hillstone Network AntiVirus
+>commit: c9ba95b978808970633b0221b70c5255ebc8630e ("[PATCH v2] cifs: replace kfree() with kfree_sensitive() for sensitive data")
+>url: https://github.com/intel-lab-lkp/linux/commits/Enzo-Matsumiya/cifs-replace-kfree-with-kfree_sensitive-for-sensitive-data/20220918-113758
+>base: git://git.samba.org/sfrench/cifs-2.6.git for-next
+>patch link: https://lore.kernel.org/linux-cifs/20220918033619.16522-1-ematsumiya@suse.de
 >
 
+snip
 
--- 
-Thanks,
+>If you fix the issue, kindly add following tag
+>| Reported-by: kernel test robot <oliver.sang@intel.com>
+>| Link: https://lore.kernel.org/r/202209201529.ec633796-oliver.sang@intel.com
 
-Steve
+snip
+
+>kern  :info  : [   81.927031] CIFS: Attempting to mount \\localhost\fs
+>kern  :err   : [   81.949059] ==================================================================
+>kern  :err   : [   81.956956] BUG: KASAN: use-after-free in SMB2_sess_free_buffer+0xba/0x1c0 [cifs]
+>kern  :err   : [   81.965177] Write of size 44 at addr ffff8881219a3c00 by task mount.cifs/1530
+
+Will send v2.
+
+
+Enzo
 
