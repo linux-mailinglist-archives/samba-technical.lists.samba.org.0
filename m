@@ -2,49 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9D085ECFAA
-	for <lists+samba-technical@lfdr.de>; Tue, 27 Sep 2022 23:58:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D98265EDC47
+	for <lists+samba-technical@lfdr.de>; Wed, 28 Sep 2022 14:05:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=9AENIiwAcDKK260ripmU2lBGyqgmAlGYu5GsfeZItKo=; b=z/7OZQ4OeGgJucYuI7z8FAzKph
-	nlDpQ3uCWRGGt98WEn7QreRWJ3srkamzQEkkjwqv1P+FhR7MtkXRC+CZr/uQuvJCedue+I4ll7Xo3
-	4Io72yikAeohvx1ZwVGx35EQi/MkWuYJm8fQzeniFwCtDAln7OYpG2Y6zauY1x7KdN2F8IllTTivc
-	VKedWJ4WgASQdOz4jWYwBXAMl9dJEzun4y+rx+nCSkYnfnma0sYeZlKu8EsKpGwbazwNbPuyMmH7i
-	LduUQ4jp7MS2lfzrp2Vqx2J2iOL/XbvhOhgYSfB6t5//mYaBt/jG1uvEJ7/utc6RZgNmUpr06J0Dc
-	NIEgD6eg==;
-Received: from ip6-localhost ([::1]:46958 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=ObrA5ixW/QGiV7lH9PP/1yeNvu3sueDIa+LKMc7QNvU=; b=2xOzl1QoMMIGRDFCL/+f5TDfb7
+	dvdDG3nAn11r6CtxQyGMmdCv4oLft3E7T9TosVoCtTcgPHy0gsFHHpv5SKwPR5Lv2cQMMYjDARG4w
+	kfmW4GPYx2gJDn86j9i/AFZUnVjZGHODFlx3w/78eVXZTIx3iiedK8pPWo2K7E60MBqHOgqFJTIPT
+	pFy5QhmYZ3eUbhKKWOh0sr4a/GeEP/+PgnAfHmm1mCcd0LUSL91QRt+TLaI66XIXwWoNqoCZeVhdz
+	uZnnHnH3ru2bM3eKiuRvDfx2ZG8AO9NoTEkQWfP3FFazOdtBEkakkh355MVbQaQwuiCdYmibDNCR1
+	aQLDFD1g==;
+Received: from ip6-localhost ([::1]:65434 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1odIbH-004UJo-Qs; Tue, 27 Sep 2022 21:58:47 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53960) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1odIbD-004UJf-Kc
- for samba-technical@lists.samba.org; Tue, 27 Sep 2022 21:58:45 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=9AENIiwAcDKK260ripmU2lBGyqgmAlGYu5GsfeZItKo=; b=xKFxgThh9ECtwx0DMfjNZcx2DT
- 3cT/wict62KlTfOqVWyQguFUxFZzv7OXPKVS+6EOTqKJVya4Dq/DANTGpJfllQhYDyjVmOyviddqn
- WzrJF2K3jayXWWMwBE8/aXtXkhczJ+n5P89rJddXRJ9uNA7dw7B9QaZif/UavZVtsXJwjyAa8pFSO
- 9J2/GEriITE+Gzaf76PNLNCkHsWRG7Z/IqYTY0g8JcCQwzldkPao9mwpErvzuPV0hPoeDLxNA2rZs
- c2VwM1PHQWyhO3dHnUUXud2pluafSQ+OiQDMo/frIPnrLgFRa4F3S+9AHM4yCdVgAu/Gyxsw+sa6q
- 2t1N4l04EhkmKPKkBt9p3SOwxBR/JxKqqv+bpLa4/ra/m4ntsRlB5w2x5KD5QrwS/iSHzDcihzNh+
- lhIY0dDfcGHa7H/NWe+qNKvfGCZDdhuZn9YhUK4hGG6vfN4l/zB7voHgr64sy2PYrt3HcPh5ulGA1
- 4D/PgSZ0HrvcnYb/mo9KnYhW;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1odIbB-0029AE-Dj; Tue, 27 Sep 2022 21:58:41 +0000
-Date: Tue, 27 Sep 2022 14:58:36 -0700
-To: Andrew Bartlett <abartlet@samba.org>
-Subject: Re: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
-Message-ID: <YzNyDJ43AIAkUSTX@jeremy-acer>
-References: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
- <d1cd76d317998a3dd4456e7877b3950901019c14.camel@samba.org>
- <YzNu47xX9+j0BLKH@jeremy-acer>
- <1074acc48316978ba1fc5af74c7cd486fbe2ce0c.camel@samba.org>
+	id 1odVoo-004Zk0-Ib; Wed, 28 Sep 2022 12:05:38 +0000
+Received: from hartley.uberspace.de ([185.26.156.169]:46856) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1odVoi-004Zjq-U2
+ for samba-technical@lists.samba.org; Wed, 28 Sep 2022 12:05:35 +0000
+Received: (qmail 17660 invoked by uid 990); 28 Sep 2022 12:04:29 -0000
+Authentication-Results: hartley.uberspace.de;
+	auth=pass (plain)
+Message-ID: <adaa5aab-92d5-019d-f86e-969938cb5788@merten.dev>
+Date: Wed, 28 Sep 2022 14:04:28 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <1074acc48316978ba1fc5af74c7cd486fbe2ce0c.camel@samba.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To: samba-technical@lists.samba.org
+Subject: buggy krb5 ccache behavior and cmocka unit tests
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------wPc8g4NIkYNKyCMFu70XYUmC"
+X-Rspamd-Bar: ---
+X-Rspamd-Report: BAYES_HAM(-2.612135) MIME_GOOD(-0.2)
+ MIME_BASE64_TEXT_BOGUS(1) MIME_BASE64_TEXT(0.1) SIGNED_PGP(-2)
+X-Rspamd-Score: -3.712135
+Received: from unknown (HELO unkown) (::1)
+ by hartley.uberspace.de (Haraka/2.8.28) with ESMTPSA;
+ Wed, 28 Sep 2022 14:04:29 +0200
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,43 +53,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Daniel Kobras <kobras@puzzle-itc.de>,
- Michael Weiser <michael.weiser@atos.net>, samba-technical@lists.samba.org
+From: Christian Merten via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christian Merten <christian@merten.dev>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Sep 28, 2022 at 10:53:19AM +1300, Andrew Bartlett wrote:
->On Tue, 2022-09-27 at 14:45 -0700, Jeremy Allison wrote:
->> On Wed, Sep 28, 2022 at 10:37:41AM +1300, Andrew Bartlett via samba-
->> technical wrote:
->> > I honestly can't think of a way out of this that doesn't break
->> > something.
->>
->> What would it break ?
->
->Perhaps I spoke too strongly, what I meant was be a user-visible
->change, that could potentially break some unknown user.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------wPc8g4NIkYNKyCMFu70XYUmC
+Content-Type: multipart/mixed; boundary="------------6LVfF8CANh5KjF00S2TzfXu6";
+ protected-headers="v1"
+From: Christian Merten <christian@merten.dev>
+To: samba-technical@lists.samba.org
+Message-ID: <adaa5aab-92d5-019d-f86e-969938cb5788@merten.dev>
+Subject: buggy krb5 ccache behavior and cmocka unit tests
 
-Yes, true. But as below, I think the original code
-exposing non-user EA's was the real bug. My fault
-of course, as are most design errors in Samba :-).
+--------------6LVfF8CANh5KjF00S2TzfXu6
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
->> What am I missing ? Under what circumstances would an
->> SMB3 client get or set a non-user namespace EA ?
->
->We are in agreement.  What I'm saying is that it seems to be a mistake,
->which can be observed externally, to have mapped other namespaces by
->simply stripping a prefix.
+SGVsbG8sDQoNCjEuKSBJIGVuY291bnRlcmVkIGEgZmV3IGlzc3VlcyB3aGVuIHVzaW5nIG90
+aGVyIGNjYWNoZSBuYW1lcyBpbiANCnNhbWJhLXRvb2wuIEZvciBleGFtcGxlOg0KDQpzYW1i
+YS10b29sIHVzZXIgbGlzdCAtLXVzZS1rZXJiZXJvcz1yZXF1aXJlZCAtLXVzZS1rZXJiZXJv
+cz1yZXF1aXJlZCANCi0tdXNlLWtyYjUtY2NhY2hlPUtFWVJJTkc6cGVyc2lzdGVudDoxMjM0
+NToxMjM0NQ0KDQpnaXZlcyBOVF9TVEFUVVNfVU5TVUNDRVNTRlVMDQoNCmFsdGhvdWdoIGts
+aXN0IGNvcnJlY3RseSBzaG93cyBhIHRpY2tldCB0aGF0IGlzIHdvcmtpbmcgd2l0aCBsZGFw
+c2VhcmNoLg0KDQpBbHNvIHVzaW5nIC0tdXNlLWtyYjUtY2NhY2hlPURJUiBnaXZlcyBhIHNl
+Z21lbnRhdGlvbiBmYXVsdC4gVGhlIA0Kc2VnbWVudGF0aW9uIGZhdWx0IGlzIHRocm93biBz
+b21ld2hlcmUgaW4gdGhlIHB5dGhvbiBmdW5jdGlvbiANCnNldF9uYW1lZF9jY2FjaGUgcGF0
+Y2hlZCBpbiBhdXRoL2NyZWRlbnRpYWxzL3B5Y3JlZGVudGlhbHMuYy4gSSB0cmllZCB0byAN
+CnRyYWNrIGl0IGJhY2sgdG8gdGhlIGFjdHVhbCBjIGNvZGUsIGJ1dCBJIHN0dW1ibGVkIHVw
+b24gY21vY2thIHRlc3RzLiANClRoaXMgbGVhZHMgbWUgdG8gbXkgc2Vjb25kIHF1ZXN0aW9u
+Og0KDQoyLikgSG93IGRvIEkgcnVuIGNtb2NrYSB1bml0IHRlc3RzPyBJIHRyaWVkIG1ha2Ug
+c3VidW5pdC10ZXN0cyANClRFU1RTPWF1dGguY3JlZGVudGlhbHMudGVzdHMudGVzdF9jcmVk
+cyBidXQgSSBvbmx5IGdldDogc2tpcHBpbmcgc3VidW5pdCANCih0ZXN0c2NlbmFyaW9zIGFy
+ZSBub3QgYXZhaWxhYmxlKS4NCg0KQmVzdCByZWdhcmRzDQpDaHJpc3RpYW4NCg0KLS0gDQpD
+aHJpc3RpYW4gTWVydGVuDQpQR1AgS2V5OiBodHRwczovL2tleXMub3BlbnBncC5vcmcvdmtz
+L3YxL2J5LWZpbmdlcnByaW50LzkwNEFCNzhBNzA0NjQzMUU0QjhFOTZEMkQ5NTNENjk3MjFC
+OTQ4QjMNCg0K
 
-Yes ! +1. Exposing other namespaces was the original
-bug. IMHO we should fix for 4.18.0 and announce now
-this change is coming.
+--------------6LVfF8CANh5KjF00S2TzfXu6--
 
-If someone *really* depends on this, we could have
-an option to keep the original behavior.
+--------------wPc8g4NIkYNKyCMFu70XYUmC
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-But I really don't want to (add that option, that
-is :-).
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEEkEq3inBGQx5LjpbS2VPWlyG5SLMFAmM0OEwFAwAAAAAACgkQ2VPWlyG5SLPM
+uRAAvTIOrTG9jX/hX/TO42HTZwlNH43EWDurL5OeIEl+e/3X6MBTcnrpnS7pUKred5/LwTLXS/XQ
+UXUgzz4MZGTfMn5XmAEwPEqEOsOtS9RDgFp5NxVqEbolj3fNy/QU9EySaHWeR3e5bdVvsH1G79cq
+kURoEJsLEsFwpUjOphuIGHf3JccLKcOx5JF+UaFu8WjU7LfW+12XW4RxN8vIMhGgooGSxfF/+FQJ
+hfy3cCUO43zS9nKUtEdhdFsvEBh7NZJPci6vH8tSUvM+/MwDm/25UTYQ7EpPBKRbKFMIV4hicR2E
+2WUK7V2HU1BQgD3LqfX1rEoJJrWdZo7/hnneETuXzqD69bej8KOY3zcQ76Q+BC+Oz9whOnwZXCcA
+jakgaISLL7Y4GDuYDYHBuQjo1wze2pwvjWNqBIE0Wr8x3fsMIAjcus5KSLmovp6PkGCqQYa66hJu
+fc2iOVR7Dhcj1XcAwOkOTtYMNNLOLa8rt4TFo7d7NsL5mkTnlQL3u2VTjW1PWOm2t1yYMDuORjM8
+4t1/q7zmfdWdRkQuLd9420NIgVWYkZPWI3o+tPX0iFmfi1t5X5F5jqo3jashrEOXFWB/gcwY/M8J
+cVp6tki6uDLuE+esJQzflux+aGa4byzXwKYo4dx9eiOgUgOaIlr9tEWTnl8LJ8d797qUvhAn8TnH
+Ap0=
+=tGiH
+-----END PGP SIGNATURE-----
+
+--------------wPc8g4NIkYNKyCMFu70XYUmC--
 
