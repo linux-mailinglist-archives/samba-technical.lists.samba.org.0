@@ -2,48 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCB5C5EE39D
-	for <lists+samba-technical@lfdr.de>; Wed, 28 Sep 2022 19:54:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 747145EE5C0
+	for <lists+samba-technical@lfdr.de>; Wed, 28 Sep 2022 21:33:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=nI/6H9rn7WzWB8lphKG/BrqbK6A4c3qNgREPVl4/cTo=; b=2NAMTYrdCNeAcR6idAltyE0osN
-	WEVgYxDU5YWdE/ofvXlQvhTeWr7dFJI8OLaZfew/+pRWE9YYXyB0eoXRJY42firIRxTfTzmDMk5Hr
-	dgFxfnWOpGIUoWAsgBVpU2EcPuXAizhkIsJIQSBeNpKm2tY6cXZWALcUkjXYwfR/zUJVIQ0TaywVf
-	hoXPEV/0XLwJK7dHh004/9gQ32Qyn3EvzaMd0uSUrEhcfHOVl8JaLfC0u9q/Q4tscrvBo85ixEE7v
-	KKDpwXneOiMuVsV965Nv2EqXBkHxil20G9lYDEhNhQVTTnEaCLJPAt9z4JU2HHSZAa9wuNBUSlERQ
-	mnVvzkfQ==;
-Received: from ip6-localhost ([::1]:28250 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=uwCCTFQtnrLcqUyx1sYKrjfj6CUFpGLfGi/wt6y5D6c=; b=HY+xTMFRrE369UNrXjQYbIMWcZ
+	X+fM877Mzmq+TrnLDhot5HnBlu3gh/qMcYR+K+4W8QPOMPO2jiq+bZO8k8lBS63m2JJdHE4umGZMj
+	ShVF/3YO2P+LulxCwpdbynas8FtYBd9TP8Rmx9moQnHaoHkcVobHnQfjeZkrK/+aaeMv8TDNP39Ip
+	o9384ZiZBpwNlm+vQXUthru6a/KwX+dBOoMep7ndbRK3J0mvCSYdB8HCzszWxLvrLnekOSXt/OhGp
+	yTKyOTOIs+UUHpPf7VZiPIZQ541kFFFa75q23GReGr3eTyq2KMXnssAQCoGzMJLtrWtEa0LtVq9GS
+	bUhvYfHA==;
+Received: from ip6-localhost ([::1]:22882 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1odbGQ-004gCs-6v; Wed, 28 Sep 2022 17:54:30 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19396) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1odbGL-004gCj-Gv
- for samba-technical@lists.samba.org; Wed, 28 Sep 2022 17:54:27 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=oGifRDJHO1cS2bTCStqUVyktOdLSWsvnnecEgOLV+SE=; b=omS52UNhWoONTVcNu2gr5hLDDa
- 5RrPZYIuhIDBVXVwJV30g6tgmNmOo524xyVBwmB47ufFluTGoccgz8MBZ0b1FuRzCyHtBLTS6sdbZ
- dUmVSX+DH1r7xHurLwssbJlpuegMFxHZ5zwovLDsc7l0DLxzb29lwIx2aWA2/16ud4E1i/F0dOgqZ
- srhkJmJsT+3C66ULZFX4kRFv+eghZLJ6qEG3RVXjUSBu/JBRGjLdCes1o5d5cnqvMrWlDgxk2HRng
- 9L5JORZY/1tR00BdoQde0p4ruNNP+k3/YUQtd4/WiZLAby2RMLXZGP4k4UKKipknZ1SySpk935q0v
- vCEsrDzm1isg15OTZr6ixDYHrVKu5nMZZnyL3avLtZskZw9GdHy3S3enruAvQzauH940snZ/S7Y0Q
- XMnTOw4jVx+iIuIy0Ep2UIyjKZDjzZ0QaFd4Dhq6+AV2XQC9sUb3wH+akL/NF0cvv9F0BQCe80ORn
- +JPA21mjWxeXyvzoUjoMCU9n;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1odbGJ-002G7s-U7; Wed, 28 Sep 2022 17:54:24 +0000
-Message-ID: <c7c6a7091ea929b2937ea41c5b07d37439277571.camel@samba.org>
-Subject: Re: buggy krb5 ccache behavior and cmocka unit tests
-To: Christian Merten <christian@merten.dev>, samba-technical@lists.samba.org
-Date: Thu, 29 Sep 2022 06:54:20 +1300
-In-Reply-To: <adaa5aab-92d5-019d-f86e-969938cb5788@merten.dev>
-References: <adaa5aab-92d5-019d-f86e-969938cb5788@merten.dev>
-User-Agent: Evolution 3.44.4 (3.44.4-1.fc36) 
+	id 1odcnJ-004gkV-0N; Wed, 28 Sep 2022 19:32:33 +0000
+Received: from hartley.uberspace.de ([185.26.156.169]:40316) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1odcnE-004gkM-BS
+ for samba-technical@lists.samba.org; Wed, 28 Sep 2022 19:32:30 +0000
+Received: (qmail 2193 invoked by uid 990); 28 Sep 2022 19:31:25 -0000
+Authentication-Results: hartley.uberspace.de;
+	auth=pass (plain)
+Message-ID: <742fcb2c-69d2-235b-91c1-a188f0b9a90f@merten.dev>
+Date: Wed, 28 Sep 2022 21:31:24 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.10.0
+Subject: Re: buggy krb5 ccache behavior and cmocka unit tests
+Content-Language: en-US
+To: Andrew Bartlett <abartlet@samba.org>, samba-technical@lists.samba.org
+References: <adaa5aab-92d5-019d-f86e-969938cb5788@merten.dev>
+ <c7c6a7091ea929b2937ea41c5b07d37439277571.camel@samba.org>
+In-Reply-To: <c7c6a7091ea929b2937ea41c5b07d37439277571.camel@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Bar: --
+X-Rspamd-Report: BAYES_HAM(-2.896322) MIME_GOOD(-0.1)
+X-Rspamd-Score: -2.996322
+Received: from unknown (HELO unkown) (::1)
+ by hartley.uberspace.de (Haraka/2.8.28) with ESMTPSA;
+ Wed, 28 Sep 2022 21:31:25 +0200
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,52 +54,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Christian Merten via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Christian Merten <christian@merten.dev>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2022-09-28 at 14:04 +0200, Christian Merten via samba-technical
-wrote:
-> Hello,
->=20
-> 1.) I encountered a few issues when using other ccache names in=20
-> samba-tool. For example:
->=20
-> samba-tool user list --use-kerberos=3Drequired --use-kerberos=3Drequired=
-=20
-> --use-krb5-ccache=3DKEYRING:persistent:12345:12345
->=20
-> gives NT_STATUS_UNSUCCESSFUL
->=20
-> although klist correctly shows a ticket that is working with ldapsearch.
->=20
-> Also using --use-krb5-ccache=3DDIR gives a segmentation fault. The=20
-> segmentation fault is thrown somewhere in the python function=20
-> set_named_ccache patched in auth/credentials/pycredentials.c. I tried to=
-=20
-> track it back to the actual c code, but I stumbled upon cmocka tests.=20
-> This leads me to my second question:
+On 9/28/22 19:54, Andrew Bartlett via samba-technical wrote:
+> DIR and KEYRING are implemented in MIT Kerberos, if you are running
+> Samba as an AD DC then you will most likely have Samba built with our
+> bundled Heimdal Kerberos.
+Ah my bad. How about introducing a check that throws a descriptive error 
+message if the
+requested ccache type is not supported?
 
-DIR and KEYRING are implemented in MIT Kerberos, if you are running
-Samba as an AD DC then you will most likely have Samba built with our
-bundled Heimdal Kerberos.
+Christian
 
-In any case, these are not tested.
+-- 
+Christian Merten
+http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xD953D69721B948B3
 
-> 2.) How do I run cmocka unit tests? I tried make subunit-tests=20
-> TESTS=3Dauth.credentials.tests.test_creds but I only get: skipping subuni=
-t=20
-> (testscenarios are not available).
-
-Try shortening the test name, the part of the code that filters for
-tests doesn't see into the full test, only the prefix.
-
-Andrew Bartlett
-
-
---=20
-Andrew Bartlett (he/him) https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Developer, Catalyst IT https://catalyst.net.nz/services/samba
 
