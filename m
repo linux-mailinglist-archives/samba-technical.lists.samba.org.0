@@ -2,47 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3515A5EE0BC
-	for <lists+samba-technical@lfdr.de>; Wed, 28 Sep 2022 17:42:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CCB5C5EE39D
+	for <lists+samba-technical@lfdr.de>; Wed, 28 Sep 2022 19:54:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=ZBJ8YoB4yLYWelatN8Omu4bneq9UCWYO+t6MRELC3D8=; b=RcdS9Xk2pMfRDau5b6eojKDJQq
-	Z5jUEVZWRT2mBqZoke2mYdk/ZTYRy1emFuOdELXNf7PIqkRA4m1uUo9xtlye3+4YVVy3yoFs6kGYU
-	cHc6I3+BserdZs4JrjoU6UMbfVughGtX802ca4CFMMcXKBcWGd/opveLS4yl2vuaelyJ4SSHLq6Vu
-	RxA3A7qx/wrwEOvlNYpJiizvnSDzPXH7uVzDuMtXzvtZEuwFojpQrhF4t3fwhbppZ2w7fnTe5+obG
-	N4HSAmarA6E0OuCsMcaD0kEXA6QVNsvnaDubAU3kHrU1bzMneztqMciKHdfbzLo5aPAo3zgaLnnxe
-	hZlwbUDw==;
-Received: from ip6-localhost ([::1]:18438 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=nI/6H9rn7WzWB8lphKG/BrqbK6A4c3qNgREPVl4/cTo=; b=2NAMTYrdCNeAcR6idAltyE0osN
+	WEVgYxDU5YWdE/ofvXlQvhTeWr7dFJI8OLaZfew/+pRWE9YYXyB0eoXRJY42firIRxTfTzmDMk5Hr
+	dgFxfnWOpGIUoWAsgBVpU2EcPuXAizhkIsJIQSBeNpKm2tY6cXZWALcUkjXYwfR/zUJVIQ0TaywVf
+	hoXPEV/0XLwJK7dHh004/9gQ32Qyn3EvzaMd0uSUrEhcfHOVl8JaLfC0u9q/Q4tscrvBo85ixEE7v
+	KKDpwXneOiMuVsV965Nv2EqXBkHxil20G9lYDEhNhQVTTnEaCLJPAt9z4JU2HHSZAa9wuNBUSlERQ
+	mnVvzkfQ==;
+Received: from ip6-localhost ([::1]:28250 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1odZCF-004cMI-PS; Wed, 28 Sep 2022 15:42:03 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64734) 
+	id 1odbGQ-004gCs-6v; Wed, 28 Sep 2022 17:54:30 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19396) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1odZC3-004cLL-9j; Wed, 28 Sep 2022 15:41:53 +0000
+ (Exim) id 1odbGL-004gCj-Gv
+ for samba-technical@lists.samba.org; Wed, 28 Sep 2022 17:54:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=ZBJ8YoB4yLYWelatN8Omu4bneq9UCWYO+t6MRELC3D8=; b=PgLVQ9vLPjnAeXH5UhPF66qrUd
- nH/R4noLZzYdfK6GQ/UV+SuUC2+aUXUM0fP9T7+C40iE6IJthSuurIcTlABujZeWoKu6EjlVlQhv6
- QBA5nyL4wvbW3SC7DuEFxdqHows6Bjk6XbGJzj6LYVyBjSRHPqLFXfgKloADTuTLAeTFMqUE75Ut5
- +Cb2mATmw+ohGTvUQ5PssU6RVm5qzAmancOij99H5xNelGf4jlLBsGo/Sa9u/GLyMh3uWOFpROozj
- DvsuHztqGtQaG1i3IRapTHoRny08DOaQpc7115Fnl2Tcvcb3zMsjwnnhi2aFF1emY80oloaNY0Pw4
- QLE+yy2oTM4L9IJQGarfGBh9tqUXALmefPI7cix/M/5wVQm26dKJDYO81VEfFffXpCO3gwAoKX6Ct
- BZ2dr8f/53tehyvk7UW1hskmQgSroUNKCsaAbf1t7Ya57ecTELzUefmHFE00hHQmWr4elgr9BiRw3
- ko66muwBA8zGSvrZP/FJBNmf;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=oGifRDJHO1cS2bTCStqUVyktOdLSWsvnnecEgOLV+SE=; b=omS52UNhWoONTVcNu2gr5hLDDa
+ 5RrPZYIuhIDBVXVwJV30g6tgmNmOo524xyVBwmB47ufFluTGoccgz8MBZ0b1FuRzCyHtBLTS6sdbZ
+ dUmVSX+DH1r7xHurLwssbJlpuegMFxHZ5zwovLDsc7l0DLxzb29lwIx2aWA2/16ud4E1i/F0dOgqZ
+ srhkJmJsT+3C66ULZFX4kRFv+eghZLJ6qEG3RVXjUSBu/JBRGjLdCes1o5d5cnqvMrWlDgxk2HRng
+ 9L5JORZY/1tR00BdoQde0p4ruNNP+k3/YUQtd4/WiZLAby2RMLXZGP4k4UKKipknZ1SySpk935q0v
+ vCEsrDzm1isg15OTZr6ixDYHrVKu5nMZZnyL3avLtZskZw9GdHy3S3enruAvQzauH940snZ/S7Y0Q
+ XMnTOw4jVx+iIuIy0Ep2UIyjKZDjzZ0QaFd4Dhq6+AV2XQC9sUb3wH+akL/NF0cvv9F0BQCe80ORn
+ +JPA21mjWxeXyvzoUjoMCU9n;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1odZC3-002FLz-2p; Wed, 28 Sep 2022 15:41:51 +0000
-Message-ID: <419afc66-7b72-82e8-65bb-937d62275260@samba.org>
-Date: Wed, 28 Sep 2022 17:41:49 +0200
+ (Exim) id 1odbGJ-002G7s-U7; Wed, 28 Sep 2022 17:54:24 +0000
+Message-ID: <c7c6a7091ea929b2937ea41c5b07d37439277571.camel@samba.org>
+Subject: Re: buggy krb5 ccache behavior and cmocka unit tests
+To: Christian Merten <christian@merten.dev>, samba-technical@lists.samba.org
+Date: Thu, 29 Sep 2022 06:54:20 +1300
+In-Reply-To: <adaa5aab-92d5-019d-f86e-969938cb5788@merten.dev>
+References: <adaa5aab-92d5-019d-f86e-969938cb5788@merten.dev>
+User-Agent: Evolution 3.44.4 (3.44.4-1.fc36) 
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: de-DE
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.15.10 Available for Download
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,92 +57,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Release Announcements
----------------------
+On Wed, 2022-09-28 at 14:04 +0200, Christian Merten via samba-technical
+wrote:
+> Hello,
+>=20
+> 1.) I encountered a few issues when using other ccache names in=20
+> samba-tool. For example:
+>=20
+> samba-tool user list --use-kerberos=3Drequired --use-kerberos=3Drequired=
+=20
+> --use-krb5-ccache=3DKEYRING:persistent:12345:12345
+>=20
+> gives NT_STATUS_UNSUCCESSFUL
+>=20
+> although klist correctly shows a ticket that is working with ldapsearch.
+>=20
+> Also using --use-krb5-ccache=3DDIR gives a segmentation fault. The=20
+> segmentation fault is thrown somewhere in the python function=20
+> set_named_ccache patched in auth/credentials/pycredentials.c. I tried to=
+=20
+> track it back to the actual c code, but I stumbled upon cmocka tests.=20
+> This leads me to my second question:
 
-This is the latest stable release of the Samba 4.15 release series.
+DIR and KEYRING are implemented in MIT Kerberos, if you are running
+Samba as an AD DC then you will most likely have Samba built with our
+bundled Heimdal Kerberos.
 
+In any case, these are not tested.
 
-Changes since 4.15.9
---------------------
+> 2.) How do I run cmocka unit tests? I tried make subunit-tests=20
+> TESTS=3Dauth.credentials.tests.test_creds but I only get: skipping subuni=
+t=20
+> (testscenarios are not available).
 
-o  Jeremy Allison <jra@samba.org>
-    * BUG 15128: Possible use after free of connection_struct when iterating
-      smbd_server_connection->connections.
-    * BUG 15174: smbXsrv_connection_shutdown_send result leaked.
+Try shortening the test name, the part of the code that filters for
+tests doesn't see into the full test, only the prefix.
 
-o  Ralph Boehme <slow@samba.org>
-    * BUG 15086: Spotlight RPC service returns wrong response when 
-Spotlight is
-      disabled on a share.
-    * BUG 15126: acl_xattr VFS module may unintentionally use filesystem
-      permissions instead of ACL from xattr.
-    * BUG 15153: Missing SMB2-GETINFO access checks from MS-SMB2 3.3.5.20.1.
-    * BUG 15161: assert failed: !is_named_stream(smb_fname)") at
-      ../../lib/util/fault.c:197.
-
-o  Stefan Metzmacher <metze@samba.org>
-    * BUG 15148: Missing READ_LEASE break could cause data corruption.
-
-o  Andreas Schneider <asn@samba.org>
-    * BUG 15124: rpcclient can crash using setuserinfo(2).
-    * BUG 15132: Samba fails to build with glibc 2.36 caused by including
-      <sys/mount.h> in libreplace.
-
-o  Joseph Sutton <josephsutton@catalyst.net.nz>
-    * BUG 15152: SMB1 negotiation can fail to handle connection errors.
-
-o  Michael Tokarev <mjt@tls.msk.ru>
-    * BUG 15078: samba-tool domain join segfault when joining a samba ad 
-domain.
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical:matrix.org matrix room, or
-#samba-technical IRC channel on irc.libera.chat.
+Andrew Bartlett
 
 
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-======================================================================
-== Our Code, Our Bugs, Our Responsibility.
-== The Samba Team
-======================================================================
-
-
-
-================
-Download Details
-================
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-from:
-
-         https://download.samba.org/pub/samba/stable/
-
-The release notes are available online at:
-
-         https://www.samba.org/samba/history/samba-4.15.10.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                         --Enjoy
-                         The Samba Team
-
+--=20
+Andrew Bartlett (he/him) https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Developer, Catalyst IT https://catalyst.net.nz/services/samba
 
