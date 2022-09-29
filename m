@@ -2,76 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5B025EF34A
-	for <lists+samba-technical@lfdr.de>; Thu, 29 Sep 2022 12:18:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE7DB5EF516
+	for <lists+samba-technical@lfdr.de>; Thu, 29 Sep 2022 14:18:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=aLSvmb2kiKFQC/DDborU0eZSV6Z5HwqSn58O/cc+lO0=; b=yzCAdXTyeNXjEFTtDmZxmKx9sy
-	WeBc4kDCEO6aw/l96LWNkf/2Ec570saJckkb4r1pHM8dhVl8GdNsptBd+EU0RRqmRpaVujM5L7Q9b
-	6TA084KDgwqeV+L78JC1mf/YJBFFGGqupvYpU9LFrZeSwDNOe+Hm3i4AuUVAIsoduboM7pKL5eb3e
-	jgHFKpFjU9sR4dnZ8r9V/4hw0zwPfel8FBgCRR+cqskGjSJGvuap7Y38MSIRXCTNw0qoqg3dyqE5v
-	2XIW1+WVd6XVesgqoePC6qsfFC72u5blyyIY2GWQtvRS7pc17tYV9FgzUk3mIdgnY5ST/mmnplIAZ
-	iHs5Xxcw==;
-Received: from ip6-localhost ([::1]:19830 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=fHAzdV9Nm2Ba7r3AwMwXbOx3mytGZ/9ChoJLVQnCqFo=; b=6KcZ+wdYWK80mbqNB9wZF3I00x
+	FpzFJCd6uZPy+412I+qWJuqWEJ9AE5L1sRy+FNiU0gN94aBErHOtPCuoOZxX6O1HiwJJDtPo5GLjG
+	JeT2IifJIVG8gtz4PEIPxS1hHTO7p7+9gHbWi07Oc0/2r03ay1JpIEz9vZD7gTkMAzVsSXcNb8QV4
+	5kjspo2ZcTyAzbcV2iGYn+l7vbrbu2daduMqoDbEIXE1fkacovnKjz0vV2c3Fss+AsEV4Lsz7K7sI
+	aLuw0VZSSH0KHpKcm4AoPiXDj0LTpf9Tp0J5Eu9/1fQ/MZ7PJzCAcXCZ4bdeN99TRMfszsEQvOz5h
+	ETSW05AA==;
+Received: from ip6-localhost ([::1]:36276 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1odqbW-004p9w-VJ; Thu, 29 Sep 2022 10:17:19 +0000
-Received: from smtppost.atos.net ([193.56.114.176]:29760
- helo=smarthost3.atos.net) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1odqbK-004p9k-TV
- for samba-technical@lists.samba.org; Thu, 29 Sep 2022 10:17:16 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=atos.net; i=@atos.net; q=dns/txt; s=mail2022;
- t=1664446626; x=1695982626;
- h=from:to:subject:date:message-id:references:in-reply-to:
- content-transfer-encoding:mime-version;
- bh=aLSvmb2kiKFQC/DDborU0eZSV6Z5HwqSn58O/cc+lO0=;
- b=GQEpTAaiGCtMBGVeMGyvPi4s1NNws4pnma6qFhCSV2wfwRucYRc1wtnX
- otHGeLADpo6P8h4CB9M3uVXq9OP2xpAjbPJLiYWxhcXx5GL/J1Ac9hSoP
- 8USX0oEw/UGZXS1/6JZvqakKNjvA2xsg6Pq7w41+vq2iS6udIbvMUgWvV
- 0qif895emIfpEy4eCsvX5qCv/v8MOglkJmKkGpliyXkRwMT0sAr+1lD7W
- CfGoHqOuQyZAl2uRQqapuMi+GYK9Mqhh47TuTr7jqPGmMd+Nak8d7xCMu
- 34ENWSgNuHBJaMh60cvMuKRUmUtyAgPpee0UfHnxETd0W+LIISmPKOWQI A==;
-X-MGA-submission: =?us-ascii?q?MDHPIwxRAzHiHQHsXloyLYsQHsJ/TDeTF9TsNb?=
- =?us-ascii?q?XbyWG4CZkwZm4puAzrgV3RnR30IO+FSCHMUost+bzzIvsffeW3DJWM7I?=
- =?us-ascii?q?0dNhw2I3bOm3XVyaN3mNfJYWOOQXDqIKXpaAjpFvbkDnUPDlUBTLgUwL?=
- =?us-ascii?q?x7?=
-Received: from mail.sis.atos.net (HELO
- GITEXCPRDMB14.ww931.my-it-solutions.net) ([10.89.28.144])
- by smarthost3.atos.net with ESMTP/TLS/AES256-GCM-SHA384;
- 29 Sep 2022 12:00:51 +0200
-Received: from GITEXCPRDMB14.ww931.my-it-solutions.net (10.89.28.144) by
- GITEXCPRDMB14.ww931.my-it-solutions.net (10.89.28.144) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Thu, 29 Sep 2022 12:00:50 +0200
-Received: from GITEXCPRDMB14.ww931.my-it-solutions.net
- ([fe80::4817:dcd:3f05:31dd]) by GITEXCPRDMB14.ww931.my-it-solutions.net
- ([fe80::4817:dcd:3f05:31dd%8]) with mapi id 15.01.2375.024; Thu, 29 Sep 2022
- 12:00:50 +0200
-To: Daniel Kobras <kobras@puzzle-itc.de>, "samba-technical@lists.samba.org"
- <samba-technical@lists.samba.org>
-Subject: Re: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
-Thread-Topic: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
-Thread-Index: AQHY0q0xP3Tuh09CpEaQNbeEgtOwFa3zq9yAgAACE4CAAAJLgIAAAXoAgAFtPwCAAQ3o0g==
-Date: Thu, 29 Sep 2022 10:00:50 +0000
-Message-ID: <9ef5fdf14ff44bf6812c8ce709da26e6@atos.net>
-References: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
- <d1cd76d317998a3dd4456e7877b3950901019c14.camel@samba.org>
- <YzNu47xX9+j0BLKH@jeremy-acer>
- <1074acc48316978ba1fc5af74c7cd486fbe2ce0c.camel@samba.org>
- <YzNyDJ43AIAkUSTX@jeremy-acer>,
- <70e9c734-9c7e-c70f-4465-efa1946313fc@puzzle-itc.de>
-In-Reply-To: <70e9c734-9c7e-c70f-4465-efa1946313fc@puzzle-itc.de>
-Accept-Language: en-GB, en-US
-Content-Language: en-GB
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.79.0.29]
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+	id 1odsUP-004qyr-7E; Thu, 29 Sep 2022 12:18:05 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10650) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1odsUK-004qyi-J5
+ for samba-technical@lists.samba.org; Thu, 29 Sep 2022 12:18:03 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=fHAzdV9Nm2Ba7r3AwMwXbOx3mytGZ/9ChoJLVQnCqFo=; b=jsbA/Ah6oYjG3nncfIEIb8qVNP
+ CZs5hlX7ASSibJLtvzyom7Mn3R8fdsohRToj58E2WQ4YgpPjE5zjHB/HUNFQMewXZeRkFa0jj0iU1
+ uoCnxkvfDeTefKGKqXcjlKxtnIgX24RpX6YCq7K/vzcEj7bxiysIYoqNWwj5jbp7PBZYaxArYsz+I
+ vS1wIU8IAcDuAADMdVawoQR4+ySwsvbneT023ltLzgTsT+cH56zMv6WZId5SzPczEkNOdE9Tn/Yrr
+ hPKwUjQfumWXGzje/ir2DCulp/nd5c88U9w+gE5QR24Ied2x3Kn4HvB/5sHi6WCI0UhwRIAvn/CLW
+ Lp9MHWNQAR+Y9lUJtHRHXd0nDPHlbWU3Zm9HXtt39Uu9SOH3Stg3OQTZG9EdXBJRSiutRgFctnLv5
+ mpO3MI/ItkFlYyHwYAiLIIu0XgzOPV5yZjowXliF/d0l3EtlRgS39JFaDsfqMITrOfXtsVXcriAM2
+ 2BkHVrXBp0WpUesPKPZDMPgy;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1odsUI-002MN5-KY; Thu, 29 Sep 2022 12:17:58 +0000
+Message-ID: <ecd8ac98-c8d7-43b6-b0c0-d6deb7352ad7@samba.org>
+Date: Thu, 29 Sep 2022 14:17:57 +0200
 MIME-Version: 1.0
-X-Warn: EHLO/HELO not verified: Remote host 193.56.114.176 (smtppost.atos.net)
- incorrectly presented itself as smarthost3.atos.net
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.1
+Subject: Re: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
+Content-Language: en-US
+To: Daniel Kobras <kobras@puzzle-itc.de>, Jeremy Allison <jra@samba.org>
+References: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
+In-Reply-To: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------HIMhBrY0ItYhaFPw8cHNRuyW"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,29 +59,71 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Weiser via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Weiser <michael.weiser@atos.net>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Daniel,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------HIMhBrY0ItYhaFPw8cHNRuyW
+Content-Type: multipart/mixed; boundary="------------e4PO84ywZHRW0RDU4ALxYyaO";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: Daniel Kobras <kobras@puzzle-itc.de>, Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
+Message-ID: <ecd8ac98-c8d7-43b6-b0c0-d6deb7352ad7@samba.org>
+Subject: Re: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
+References: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
+In-Reply-To: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
 
-> > Yes ! +1. Exposing other namespaces was the original
-> > bug. IMHO we should fix for 4.18.0 and announce now
-> > this change is coming.
+--------------e4PO84ywZHRW0RDU4ALxYyaO
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-> Even if there were someone depending on this, pointing out the bug in
-> their setup and suggesting to fix it with a specific VFS module that can
-> perform the mapping in a reliable fashion, seems to be the proper course
-> of action to me.
+T24gOS8yNy8yMiAxMzoxMCwgRGFuaWVsIEtvYnJhcyB2aWEgc2FtYmEtdGVjaG5pY2FsIHdy
+b3RlOg0KPiBUaGUgaXNzdWVzIGNhbiBiZSBhdm9pZGVkIHdpdGggYSBjb25zaXN0ZW50IG1h
+cHBpbmcgYmV0d2VlbiBXaW5kb3dzIEVBcw0KPiBhbmQgdGhlICd1c2VyJyBuYW1lc3BhY2Ug
+aW4gYm90aCBkaXJlY3Rpb25zLCBpZS4gbm8gbG9uZ2VyIHByZXNlbnQgRUFzDQo+IG91dHNp
+ZGUgb2YgJ3VzZXInIGFzIFdpbmRvd3MgRUFzIGluIFNNQl9JTkZPX1FVRVJZX0FMTF9FQVMg
+YW5kIGZyaWVuZHMuDQo+IERvIHlvdSBhZ3JlZSB3aXRoIHRoaXMgYXBwcm9hY2g/IEFyZSB0
+aGVyZSBhcHBsaWNhdGlvbnMgdGhhdCByZWx5IG9uDQo+IHRoZSBjdXJyZW50IG1hcHBpbmcg
+b2Ygbm9uLXVzZXIgRUFzPyBQbGVhc2UgbGV0IG1lIGtub3cgaWYgSSBzaG91bGQNCj4gc3Vi
+bWl0IHRoZSBwYXRjaCBhcyBhIHByb3BlciBNUi4NCmJlZm9yZSBqdW1waW5nIHRvIGFjdGlv
+biBjYW4gd2UgYWxzbyBwbGVhc2UgYnJpZWZseSBjb25zaWRlciB0aGUgTGludXggDQprZXJu
+ZWwgbW91bnQgY2FzZSB3aXRoIFNNQjMgVW5peCBFeHRlbnNpb25zIGFuZCBtb3VudCBvdmVy
+IFNNQj8NCg0KVGhlIHByb3Bvc2VkIGFwcHJvYWNoIG1ha2VzIHNlbnNlIGZvciBXaW5kb3dz
+IGNsaWVudHMsIG1heWJlIGJlIHNob3VsZCANCmluY29ycG9yYXRlIGV4cG9zaW5nIHRoZSBy
+YXcgbmFtZXNwYWNlIHdoZW4gVU5JWCBleHRlbnNpb25zIGFyZSANCm5lZ290aWF0ZWQuIElu
+IHRoZSBlbmQgdGhpcyBpcyBsaWtlbHkgZ29pbmcgdG8gYmUgYSBtYWRlIHZpYSBhIGxhdGVy
+IE1SIA0KaW4gdGhlIGZ1dHVyZSwgYnV0IEknZCBsaWtlIHRvIHNlZSBib3RoIGNhc2VzIGNv
+bnNpZGVyZWQgbm93IHRoYXQgd2UncmUgDQptYWtpbmcgY2hhbmdlcy4NCg0KVGhhbmtzIQ0K
+LXNsb3cNCg0KLS0gDQpSYWxwaCBCb2VobWUsIFNhbWJhIFRlYW0gICAgICAgICAgICAgICAg
+IGh0dHBzOi8vc2FtYmEub3JnLw0KU2VyTmV0IFNhbWJhIFRlYW0gTGVhZCAgICAgIGh0dHBz
+Oi8vc2VybmV0LmRlL2VuL3RlYW0tc2FtYmENCg0K
 
-FWIW, I can confirm that in my test setup this change solves the
-original problem (as was to be expected) and causes no obvious fallout=20
-with today's HEAD (commit 318da783e9df83550d86fcefcf89f55a77addcbe).
+--------------e4PO84ywZHRW0RDU4ALxYyaO--
 
-Reviewed-by: Michael Weiser <michael.weiser@atos.net>
-Tested-by: Michael Weiser <michael.weiser@atos.net>
---
-Thanks!
-Michael=
+--------------HIMhBrY0ItYhaFPw8cHNRuyW
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmM1jPUFAwAAAAAACgkQqh6bcSY5nkaT
+Eg//cRb/at4Vgwdi+GorqQNdo0T4E4LDTNaabWyq9+rG+Uo0FpNdRVfKXJj6aC7JyTAPOrut/i/C
++Z3wc1IuqXIeS/MbIfYQzjiUO4p1QxV5CTIS/T+IIqBgQpqCsOOerQadNslI1hMgCTZ6F+dWxnqc
+FzOuFewGEBeTKIG60vo8q0gr+hbOOt4+zp2RI606D+FeR1EV+43KfpMZKmYbypTX7BaQBq+ZbUmh
+6xJv7T2lF2zsGcrflWuXjJWK09h7ky6WW0p83AM75C/FnE5Xrfh4xM10Ss1/EBMvinZbntz73uDK
+xKGVqjzKx2kKyYQ2edbOpRFhg4TZ4IOLZ+95GQFPXoDw4hICOO5mCw3m2Qbh1SLO2FI8CB6aGVM/
+qLTnpahB0YyySPd2q2crMyv5fW7paFhNs+LmDuiKIuVSviD+VAAmVekOnLrfq7f44DfeoXrsHi3m
+EXcXlDg81qtXPLNsF4Cdp8+gt88rwiUgcdz5CRMPK7ueKHmNGgEaAa5KWCZxLdIhB2DI+gNfn9Gn
+1mBVuK3H8Z5g2C7+cB3ZoscA3alsOZmGIggJJ+cqL0FYzRcx9cBjtYhtcWlAerDEU3rxJ2wfmMwW
+H7Gf4Xl0vW0MEQ2bPPzxmuW36nXKxxvS2Lty+f+FiGQjKKRbr5MonctqmLAfWqa2qEsS5NJGebRK
+/oo=
+=3LOI
+-----END PGP SIGNATURE-----
+
+--------------HIMhBrY0ItYhaFPw8cHNRuyW--
 
