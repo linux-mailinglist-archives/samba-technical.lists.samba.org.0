@@ -2,50 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE7DB5EF516
-	for <lists+samba-technical@lfdr.de>; Thu, 29 Sep 2022 14:18:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EAEA15F0239
+	for <lists+samba-technical@lfdr.de>; Fri, 30 Sep 2022 03:27:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=fHAzdV9Nm2Ba7r3AwMwXbOx3mytGZ/9ChoJLVQnCqFo=; b=6KcZ+wdYWK80mbqNB9wZF3I00x
-	FpzFJCd6uZPy+412I+qWJuqWEJ9AE5L1sRy+FNiU0gN94aBErHOtPCuoOZxX6O1HiwJJDtPo5GLjG
-	JeT2IifJIVG8gtz4PEIPxS1hHTO7p7+9gHbWi07Oc0/2r03ay1JpIEz9vZD7gTkMAzVsSXcNb8QV4
-	5kjspo2ZcTyAzbcV2iGYn+l7vbrbu2daduMqoDbEIXE1fkacovnKjz0vV2c3Fss+AsEV4Lsz7K7sI
-	aLuw0VZSSH0KHpKcm4AoPiXDj0LTpf9Tp0J5Eu9/1fQ/MZ7PJzCAcXCZ4bdeN99TRMfszsEQvOz5h
-	ETSW05AA==;
-Received: from ip6-localhost ([::1]:36276 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=SP8jJLLlaKR9hndDi9YL/EE69w52mNu6cWG+4rtsvag=; b=N3VEqH+SKaA1jf24BJHkSocJYC
+	Msz87tcSL2UWJujKW4eB3PjKrXeGNaG4nDliFQjlI0Mmk4bnu4qeX4HP8jPLOhbxOF4k+LVSSBCnt
+	B07gsLkBizoKvRSPEOTaXgYJR0faXMN9iqj136ALSVWcKwIndpKD/1Uhgp728ExYOsPA7hEOZFPzB
+	j6zpiVSDm+FVghEEdOYsySUyxNyxW0fxgEOiY5k8wWjFcURdm53yh96+qc9UcykudL4DdVhtQYsQH
+	+FJSakUNObyHvhgpfBbrnSVRkKKbs1K+N/MxrQ7U+vkavh2eBsM/j4l2knr5ZY0ysW1iTngK727og
+	WuUoT0BQ==;
+Received: from ip6-localhost ([::1]:42048 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1odsUP-004qyr-7E; Thu, 29 Sep 2022 12:18:05 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10650) 
+	id 1oe4ng-004uDG-SF; Fri, 30 Sep 2022 01:26:48 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29230) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1odsUK-004qyi-J5
- for samba-technical@lists.samba.org; Thu, 29 Sep 2022 12:18:03 +0000
+ (Exim) id 1oe4nZ-004uD6-68
+ for samba-technical@lists.samba.org; Fri, 30 Sep 2022 01:26:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=fHAzdV9Nm2Ba7r3AwMwXbOx3mytGZ/9ChoJLVQnCqFo=; b=jsbA/Ah6oYjG3nncfIEIb8qVNP
- CZs5hlX7ASSibJLtvzyom7Mn3R8fdsohRToj58E2WQ4YgpPjE5zjHB/HUNFQMewXZeRkFa0jj0iU1
- uoCnxkvfDeTefKGKqXcjlKxtnIgX24RpX6YCq7K/vzcEj7bxiysIYoqNWwj5jbp7PBZYaxArYsz+I
- vS1wIU8IAcDuAADMdVawoQR4+ySwsvbneT023ltLzgTsT+cH56zMv6WZId5SzPczEkNOdE9Tn/Yrr
- hPKwUjQfumWXGzje/ir2DCulp/nd5c88U9w+gE5QR24Ied2x3Kn4HvB/5sHi6WCI0UhwRIAvn/CLW
- Lp9MHWNQAR+Y9lUJtHRHXd0nDPHlbWU3Zm9HXtt39Uu9SOH3Stg3OQTZG9EdXBJRSiutRgFctnLv5
- mpO3MI/ItkFlYyHwYAiLIIu0XgzOPV5yZjowXliF/d0l3EtlRgS39JFaDsfqMITrOfXtsVXcriAM2
- 2BkHVrXBp0WpUesPKPZDMPgy;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=SP8jJLLlaKR9hndDi9YL/EE69w52mNu6cWG+4rtsvag=; b=IGyS2S7/z1rYeDx03ByN3gDoZy
+ Iw5mvtehe7NLBsaPHJgn9r4re0s7CT0QdQdtxyONL/g1lUBxK0zATRZtX7o1ObeRFTPyrax2w/bv3
+ Fftx4Q4geLBFxWtl2OQsKvy2xXRchmSe/frCH6ed/8xYuPQ7I8hQNiRHd9+s82vvp5LnF6x8OqpPR
+ 5gc1mMIWDP02jPw12srFc4aI7mxModQ2GHEFwmLLGSopH6Aj7Qds2bU4/QIaPPv8ZlecXypEYSnth
+ syGkiy4SxxeJ+rCcLbXLWGkeYc8NedTPK/po3CeZI/b7VkgP7I8jp5eJPhrI/oQF3kIyZN/1UVIAQ
+ 3AVC25gjUjnPFfuNveSNMAO0blppgtHby26pSq1QqUzxD9iltx8NoGSrB5dUCAH4Ko992SQrABO47
+ Ttc66QwCRt7SB7P4POzFqbN/6IJmR/fm2aTAfGB/c9dFz1m+V6wG8K1hksUtoz1QUOrww1ZLvO5qk
+ DUJI6AzVe/2F8sQpHvuFyIxy;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1odsUI-002MN5-KY; Thu, 29 Sep 2022 12:17:58 +0000
-Message-ID: <ecd8ac98-c8d7-43b6-b0c0-d6deb7352ad7@samba.org>
-Date: Thu, 29 Sep 2022 14:17:57 +0200
+ (Exim) id 1oe4nP-002QRk-Nx
+ for samba-technical@lists.samba.org; Fri, 30 Sep 2022 01:26:32 +0000
+Message-ID: <d0c713564b3c9f848bab99ba74f3ce79a5add2f6.camel@samba.org>
+Subject: How to detect a client-closed connection during a write from our
+ LDAP server?
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Fri, 30 Sep 2022 14:26:28 +1300
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.1
-Subject: Re: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
-Content-Language: en-US
-To: Daniel Kobras <kobras@puzzle-itc.de>, Jeremy Allison <jra@samba.org>
-References: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
-In-Reply-To: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------HIMhBrY0ItYhaFPw8cHNRuyW"
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,71 +56,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------HIMhBrY0ItYhaFPw8cHNRuyW
-Content-Type: multipart/mixed; boundary="------------e4PO84ywZHRW0RDU4ALxYyaO";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Daniel Kobras <kobras@puzzle-itc.de>, Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
-Message-ID: <ecd8ac98-c8d7-43b6-b0c0-d6deb7352ad7@samba.org>
-Subject: Re: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
-References: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
-In-Reply-To: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
+I've been trying to chase down the CPU spins reported by our users in
+the writev() codepath from our LDAP server.
 
---------------e4PO84ywZHRW0RDU4ALxYyaO
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+A private mail the the strace output shows the sockets are in
+CLOSE_WAIT state, returning EAGAIN over and over (after a call to
+epoll() each time).  That alone would be enough to keep things
+spinning.
 
-T24gOS8yNy8yMiAxMzoxMCwgRGFuaWVsIEtvYnJhcyB2aWEgc2FtYmEtdGVjaG5pY2FsIHdy
-b3RlOg0KPiBUaGUgaXNzdWVzIGNhbiBiZSBhdm9pZGVkIHdpdGggYSBjb25zaXN0ZW50IG1h
-cHBpbmcgYmV0d2VlbiBXaW5kb3dzIEVBcw0KPiBhbmQgdGhlICd1c2VyJyBuYW1lc3BhY2Ug
-aW4gYm90aCBkaXJlY3Rpb25zLCBpZS4gbm8gbG9uZ2VyIHByZXNlbnQgRUFzDQo+IG91dHNp
-ZGUgb2YgJ3VzZXInIGFzIFdpbmRvd3MgRUFzIGluIFNNQl9JTkZPX1FVRVJZX0FMTF9FQVMg
-YW5kIGZyaWVuZHMuDQo+IERvIHlvdSBhZ3JlZSB3aXRoIHRoaXMgYXBwcm9hY2g/IEFyZSB0
-aGVyZSBhcHBsaWNhdGlvbnMgdGhhdCByZWx5IG9uDQo+IHRoZSBjdXJyZW50IG1hcHBpbmcg
-b2Ygbm9uLXVzZXIgRUFzPyBQbGVhc2UgbGV0IG1lIGtub3cgaWYgSSBzaG91bGQNCj4gc3Vi
-bWl0IHRoZSBwYXRjaCBhcyBhIHByb3BlciBNUi4NCmJlZm9yZSBqdW1waW5nIHRvIGFjdGlv
-biBjYW4gd2UgYWxzbyBwbGVhc2UgYnJpZWZseSBjb25zaWRlciB0aGUgTGludXggDQprZXJu
-ZWwgbW91bnQgY2FzZSB3aXRoIFNNQjMgVW5peCBFeHRlbnNpb25zIGFuZCBtb3VudCBvdmVy
-IFNNQj8NCg0KVGhlIHByb3Bvc2VkIGFwcHJvYWNoIG1ha2VzIHNlbnNlIGZvciBXaW5kb3dz
-IGNsaWVudHMsIG1heWJlIGJlIHNob3VsZCANCmluY29ycG9yYXRlIGV4cG9zaW5nIHRoZSBy
-YXcgbmFtZXNwYWNlIHdoZW4gVU5JWCBleHRlbnNpb25zIGFyZSANCm5lZ290aWF0ZWQuIElu
-IHRoZSBlbmQgdGhpcyBpcyBsaWtlbHkgZ29pbmcgdG8gYmUgYSBtYWRlIHZpYSBhIGxhdGVy
-IE1SIA0KaW4gdGhlIGZ1dHVyZSwgYnV0IEknZCBsaWtlIHRvIHNlZSBib3RoIGNhc2VzIGNv
-bnNpZGVyZWQgbm93IHRoYXQgd2UncmUgDQptYWtpbmcgY2hhbmdlcy4NCg0KVGhhbmtzIQ0K
-LXNsb3cNCg0KLS0gDQpSYWxwaCBCb2VobWUsIFNhbWJhIFRlYW0gICAgICAgICAgICAgICAg
-IGh0dHBzOi8vc2FtYmEub3JnLw0KU2VyTmV0IFNhbWJhIFRlYW0gTGVhZCAgICAgIGh0dHBz
-Oi8vc2VybmV0LmRlL2VuL3RlYW0tc2FtYmENCg0K
+But they are being shut down, however our LDAP server won't be
+triggering a read any time soon, it is waiting to flush the response
+out.
 
---------------e4PO84ywZHRW0RDU4ALxYyaO--
+Technically even after our server OS has got the FIN, there is
+potentially data in the read buffer (so a read() might not return 0
+anyway), but perhaps most of the time that would be 0.
 
---------------HIMhBrY0ItYhaFPw8cHNRuyW
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+So how can we detect this?  Can we at least put a timeout on a writev()
+call via tsocket et al?  If so, how do we do that?
 
------BEGIN PGP SIGNATURE-----
+Mailing list threads: 
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmM1jPUFAwAAAAAACgkQqh6bcSY5nkaT
-Eg//cRb/at4Vgwdi+GorqQNdo0T4E4LDTNaabWyq9+rG+Uo0FpNdRVfKXJj6aC7JyTAPOrut/i/C
-+Z3wc1IuqXIeS/MbIfYQzjiUO4p1QxV5CTIS/T+IIqBgQpqCsOOerQadNslI1hMgCTZ6F+dWxnqc
-FzOuFewGEBeTKIG60vo8q0gr+hbOOt4+zp2RI606D+FeR1EV+43KfpMZKmYbypTX7BaQBq+ZbUmh
-6xJv7T2lF2zsGcrflWuXjJWK09h7ky6WW0p83AM75C/FnE5Xrfh4xM10Ss1/EBMvinZbntz73uDK
-xKGVqjzKx2kKyYQ2edbOpRFhg4TZ4IOLZ+95GQFPXoDw4hICOO5mCw3m2Qbh1SLO2FI8CB6aGVM/
-qLTnpahB0YyySPd2q2crMyv5fW7paFhNs+LmDuiKIuVSviD+VAAmVekOnLrfq7f44DfeoXrsHi3m
-EXcXlDg81qtXPLNsF4Cdp8+gt88rwiUgcdz5CRMPK7ueKHmNGgEaAa5KWCZxLdIhB2DI+gNfn9Gn
-1mBVuK3H8Z5g2C7+cB3ZoscA3alsOZmGIggJJ+cqL0FYzRcx9cBjtYhtcWlAerDEU3rxJ2wfmMwW
-H7Gf4Xl0vW0MEQ2bPPzxmuW36nXKxxvS2Lty+f+FiGQjKKRbr5MonctqmLAfWqa2qEsS5NJGebRK
-/oo=
-=3LOI
------END PGP SIGNATURE-----
+https://lists.samba.org/archive/samba/2022-September/241869.html
+https://lists.samba.org/archive/samba/2022-September/241873.html
 
---------------HIMhBrY0ItYhaFPw8cHNRuyW--
+Andrew Bartlett
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source
+Solutions
+
 
