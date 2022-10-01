@@ -2,73 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96C255F0D66
-	for <lists+samba-technical@lfdr.de>; Fri, 30 Sep 2022 16:21:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 78E145F1DF3
+	for <lists+samba-technical@lfdr.de>; Sat,  1 Oct 2022 18:56:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=ceBoo9Xu5lL/LOQmRd/4t6hCG+4IOaeeyZgl90jBrF4=; b=AgMc8a8GAKnzywdOd/GJtaNOEF
-	QwRVEhC3EEKdJCaOSzyYU8VBVQM7LG24SXXjbCLLh2/vVhDzcViP53iPBpH1FZftwopYgvh3r7v26
-	fgfstIoCgy60ccJN4GRMrd8rWJxvf//845K7ABzZ7U5n7JGES3kD0GY4r40nEuYIeQsRBVYiFJrIe
-	ovLHDjYv2skeoa1Af/LyhA1YumjO7JfOna/h2b//d+5dPCO7sZID9Y7FDmwF0QmMV4+y9T4TpkhyT
-	cTKyCob7ASUrg5HrxZrR/nOyzESQ1A17dow26GuBsHFhN3BZCE690QfQBtf1JANO5FgCbmmOudz+6
-	0wggX2Rg==;
-Received: from ip6-localhost ([::1]:42720 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=IS18AKkvs6Ni+OLfS43Y4FnjRvwNRzH8XXbVwq68aoA=; b=tcPnW5skoej9GP2eIKgjGsg1uJ
+	KwgUfqXUzoRsBMiXdk6kOLU+DRNcEqHeCsezfvL7Ua5+xVJDUZ5vnFDujhplfK/Mow1EFznCHGdwb
+	lEZ7FK2Dw8y8HuWTL0kyr1rvhjN5dtW+cvLxu/OELSG+LVJowb9D3JAxUbBd/OAMiwj/eNsBWFThS
+	lJhzlw2E3QbOYBcp46PdZB8nrimy0HZyD6XDV1vbU2T+5CWHMRx9twvpIAALvg2anLv8OPUBd7GXq
+	Rxx4AoPV/ETj0RDwyCeF1hIJRM0/bql80m3eCRPMa2LPEDpQ+4Qd3ZfbuFRGrio5NhwALOXRLm+zh
+	++DIkTHw==;
+Received: from ip6-localhost ([::1]:36610 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oeGsK-00561a-Rx; Fri, 30 Sep 2022 14:20:25 +0000
-Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d]:33709) 
+	id 1oeflV-0075ZP-0x; Sat, 01 Oct 2022 16:55:01 +0000
+Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a]:42908) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oeGsE-00561R-BP
- for samba-technical@lists.samba.org; Fri, 30 Sep 2022 14:20:21 +0000
-Received: by mail-ej1-x62d.google.com with SMTP id lc7so9413496ejb.0
- for <samba-technical@lists.samba.org>; Fri, 30 Sep 2022 07:20:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=puzzle-itc.de; s=google;
- h=content-transfer-encoding:content-language:in-reply-to:subject
- :organization:from:references:cc:to:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date;
- bh=ceBoo9Xu5lL/LOQmRd/4t6hCG+4IOaeeyZgl90jBrF4=;
- b=K2Y87nw+aRCJnMz2CC6EPVxAAJO9145KB6E6vkgoEW+3YEwmevu5+srHsZHsJ2Syop
- 7k/lhrJrdJUmOsDbutGxNVazUHQapbhi364LK0TtK7HPQaxFh6/ihgKt4YrCq5vUNJXq
- bzgbgMTMi5C0gdDZRdefEQPFVbDvfWrKOgKjA=
+ (Exim) id 1oeflQ-0075ZG-A6
+ for samba-technical@lists.samba.org; Sat, 01 Oct 2022 16:54:58 +0000
+Received: by mail-vk1-xa2a.google.com with SMTP id s192so3688988vkb.9
+ for <samba-technical@lists.samba.org>; Sat, 01 Oct 2022 09:54:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date; bh=IS18AKkvs6Ni+OLfS43Y4FnjRvwNRzH8XXbVwq68aoA=;
+ b=TsYJAdoRgM4M/jM/6/oohzhNg5OJ0csO7MG9B6vYWTJZcTWd+VmmNR37Ri4r9Us+Tc
+ Gy1D0zOSey9o4lkxHz1P/wuEo81O7sEIWy5jyaErkx3Glq1tQ8NIAF2aMEZXueee4xRg
+ XJSxaOWuz5nTMtsK5gB+OXcKh2+EK79TLf/p+E8jYrzseTQsmEPvw187jp0LEseRo88U
+ pdoXXTlRZpsIaqiSUXbbiGqYfUPOrCHjlvydDH58vgzDgUOy1xqjzfgcnUH/sgYmSJOL
+ FdWKx7Fupl/LP2owpT6KIS0dare8tVfeNgxmiC6tPBLGVk5CoRkArpNAMBD78KvpZLrm
+ XIoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:content-language:in-reply-to:subject
- :organization:from:references:cc:to:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date;
- bh=ceBoo9Xu5lL/LOQmRd/4t6hCG+4IOaeeyZgl90jBrF4=;
- b=HXb1XSSKgAVj6UR6ErIsKFIlzm/Zcs2DgKy+z2LtUnKVrcGrfvNTHxhysBSLkrN/md
- fXqvnjzHeY9ON61NpeIJm4h56ApQBb3umTFkqmff+/5x8YxTEAmjFo+5Kf8S99hzovOV
- 9Tshtp2TnTR2+l7fr8Atn0ZTLH9b86GwrfwU6ePJT/n+s0tuiiw+xr73FN5HaeDZa6Pk
- RpdvNlTdsvdiXLk68J1QJGM27gqpfa7NoatJHJ0PUFnOXS/+CSLJ/Miqp/MMQ4jyqzFj
- N7ziUvHn6ViOlXZG9g11Psi248d/dmcSvarWJLq8XDKfE+GLfBCeiVm94dx3U89l7Mzv
- z9DA==
-X-Gm-Message-State: ACrzQf2kwv5uEnLh6db6PiMF8G/XX/YAp0T1KWqjCR+r6DpBNC/neK0I
- caC/ncPjwj6r2zl0Ah59loQyLXnzvk0rJSqU8LcaEAP0PjAlnzQkVRLQLRl5NUFarv2IPGIzxZ8
- Yp37tb30nFiNswdMrDT5xLAnFa5NNjQ==
-X-Google-Smtp-Source: AMsMyM5PYqpy4vXK2FkSHXbDbMm8PX18ZYQs7arq3NvElfMx0mNr69S6Kq6uZlcJegg2PvyfKA0neg==
-X-Received: by 2002:a17:907:96a2:b0:782:4072:19da with SMTP id
- hd34-20020a17090796a200b00782407219damr6490884ejc.398.1664547617136; 
- Fri, 30 Sep 2022 07:20:17 -0700 (PDT)
-Received: from ?IPV6:2a02:8070:8884:cd80:d1d0:6e40:f97a:5481?
- ([2a02:8070:8884:cd80:d1d0:6e40:f97a:5481])
- by smtp.gmail.com with ESMTPSA id
- c5-20020a17090603c500b007835316a1aesm1261435eja.65.2022.09.30.07.20.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 30 Sep 2022 07:20:16 -0700 (PDT)
-Message-ID: <c8dbc08a-0979-83e4-5f29-c8604c0322fd@puzzle-itc.de>
-Date: Fri, 30 Sep 2022 16:20:15 +0200
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date;
+ bh=IS18AKkvs6Ni+OLfS43Y4FnjRvwNRzH8XXbVwq68aoA=;
+ b=Kcx5KHd/F2EsunOlqmMzGCilCcR65+NA5sMCQCETMRQB1VRCecZVu4Ew/wzWjMtG6T
+ F4SVbGzxRqID1s8QbdmSebghTOmntz+8xki8nfDy7lN7NpXSqrDhLeNE/3OqRBXleV4A
+ mXPCoK9WemIqVH8qPupGpRBFGTClDd+aDBDzj8PtXFeAZs1/M8g9eiQ16a2gmVMMrzbK
+ hq54ZSx21oS+D9mgO+cP/Epa9lRbu6tibzVPLZt1D5ioxcTktZJzz2rDt75G7uly7Xh4
+ 9MV5/2Ccqh60qbW2qzUSPXk/CGlOdq7mjA4f04hKAfwlfdlReZFY1DQzdbehgQKayoTJ
+ Zi+Q==
+X-Gm-Message-State: ACrzQf31e84+PgutvJ+t7zbiHzrlJWWGo4EGSYnNFcJpi3v8hDoBgOUO
+ 2XdIUKdiyhTbeEWLATkbuLJ2D6E7KmebxJLTbwc=
+X-Google-Smtp-Source: AMsMyM66PwdUyNYg0aQe6ynKxht23H2THhvyK4vZB9qjMsiuLWbCvF9lD7HjKRIxpYFYkbJr2CkDpewOc4716Qul0cE=
+X-Received: by 2002:ac5:cb0a:0:b0:3a2:2fa3:87d8 with SMTP id
+ r10-20020ac5cb0a000000b003a22fa387d8mr6352562vkl.3.1664643294079; Sat, 01 Oct
+ 2022 09:54:54 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-To: Ralph Boehme <slow@samba.org>
-References: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
- <ecd8ac98-c8d7-43b6-b0c0-d6deb7352ad7@samba.org>
-Organization: Puzzle ITC Deutschland GmbH
-Subject: Re: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
-In-Reply-To: <ecd8ac98-c8d7-43b6-b0c0-d6deb7352ad7@samba.org>
-Content-Language: en-US
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Date: Sat, 1 Oct 2022 11:54:43 -0500
+Message-ID: <CAH2r5mvS6_AXjbK8sY_dEWUbmtRjodSYEtxeNz_NST9+EyC96A@mail.gmail.com>
+Subject: [PATCH][smb3 client] log less confusing message on multichannel
+ mounts to Samba when no interfaces returned
+To: CIFS <linux-cifs@vger.kernel.org>
+Content-Type: multipart/mixed; boundary="00000000000038ecb905e9fbf87c"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,65 +67,67 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Daniel Kobras via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Daniel Kobras <kobras@puzzle-itc.de>
-Cc: samba-technical@lists.samba.org, Jeremy Allison <jra@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Am 29.09.22 um 14:17 schrieb Ralph Boehme:
-> before jumping to action can we also please briefly consider the Linux
-> kernel mount case with SMB3 Unix Extensions and mount over SMB?
->=20
-> The proposed approach makes sense for Windows clients, maybe be should
-> incorporate exposing the raw namespace when UNIX extensions are
-> negotiated. In the end this is likely going to be a made via a later MR
-> in the future, but I'd like to see both cases considered now that we're
-> making changes.
+--00000000000038ecb905e9fbf87c
+Content-Type: text/plain; charset="UTF-8"
 
-Fair enough. The current SMB implementation in the Linux kernel
-unconditionally adds a 'user.' prefix to names returned from
-SMB_INFO_QUERY_ALL_EAS/SMB2_FILE_FULL_EA_INFORMATION. IOW it already
-assumes the proposed restriction to only the 'user' namespace, and
-reports an incorrect name for EAs from other namespaces.
+Some servers can return an empty network interface list so, unless
+multichannel is requested, no need to log an error for this, and
+when multichannel is requested on mount but no interfaces, log
+something less confusing.  For this case change
+   parse_server_interfaces: malformed interface info
+to
+   empty network interface list returned by server
 
-Exposing the raw (unmapped) name only makes sense if namespaces other
-than 'user' should be accessible from the generic EA interface. Have
-there been any plans to do so? For comparison, the recently added
-support for NFSv4.2 xattrs is restricted to 'user' as well. As far as I
-understood, that's because from the point of view of a network
-filesystem, the 'user' namespace is special as by definition it is
-interpreted by higher levels, and can just be passed around verbatim. In
-contrast, the semantics of other EAs are defined at the system level.
-They require interpretation when transferred between different systems,
-and cannot just be passed through a generic interface. For example, even
-if we restricted ourselves to Linux systems, we could not just expose
-'system.posix_acl*' as generic EAs, but instead need a dedicated
-interface that takes the differences between client and server (uid/gid
-mapping in this case) into account.
+Cc: <stable@vger.kernel.org>
+Signed-off-by: Steve French <stfrench@microsoft.com>
 
-So back to the proposed change, there's good reason to keep the
-restriction even in the future. In any case, it shouldn't make the
-situation any worse for in-kernel SMB on Linux because it just does what
-the client-side code already assumes.
+See attached patch
 
-Kind regards,
+-- 
+Thanks,
 
-Daniel
---=20
-Daniel Kobras
-Principal Architect
-Puzzle ITC Deutschland
-+49 7071 14316 0
-www.puzzle-itc.de
+Steve
 
---=20
-Puzzle ITC Deutschland GmbH
-Sitz der Gesellschaft: Eisenbahnstra=C3=9Fe 1, 72072=20
-T=C3=BCbingen
+--00000000000038ecb905e9fbf87c
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-smb3-do-not-log-confusing-message-when-server-return.patch"
+Content-Disposition: attachment; 
+	filename="0001-smb3-do-not-log-confusing-message-when-server-return.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_l8q5m2il0>
+X-Attachment-Id: f_l8q5m2il0
 
-Eingetragen am Amtsgericht Stuttgart HRB 765802
-Gesch=C3=A4ftsf=C3=BChrer:=20
-Lukas Kallies, Daniel Kobras, Mark Pr=C3=B6hl
-
+RnJvbSA5NmEwYWYyYzUwYWM1ZTQ1NGQxZTg5NmE5ODc3YTUxZWQxMDAzMTJiIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
+CkRhdGU6IFNhdCwgMSBPY3QgMjAyMiAxMTo0NDowOCAtMDUwMApTdWJqZWN0OiBbUEFUQ0hdIHNt
+YjM6IGRvIG5vdCBsb2cgY29uZnVzaW5nIG1lc3NhZ2Ugd2hlbiBzZXJ2ZXIgcmV0dXJucyBubwog
+bmV0d29yayBpbnRlcmZhY2VzCgpTb21lIHNlcnZlcnMgY2FuIHJldHVybiBhbiBlbXB0eSBuZXR3
+b3JrIGludGVyZmFjZSBsaXN0IHNvLCB1bmxlc3MKbXVsdGljaGFubmVsIGlzIHJlcXVlc3RlZCwg
+bm8gbmVlZCB0byBsb2cgYW4gZXJyb3IgZm9yIHRoaXMsIGFuZAp3aGVuIG11bHRpY2hhbm5lbCBp
+cyByZXF1ZXN0ZWQgb24gbW91bnQgYnV0IG5vIGludGVyZmFjZXMsIGxvZwpzb21ldGhpbmcgbGVz
+cyBjb25mdXNpbmcuICBGb3IgdGhpcyBjYXNlIGNoYW5nZQogICBwYXJzZV9zZXJ2ZXJfaW50ZXJm
+YWNlczogbWFsZm9ybWVkIGludGVyZmFjZSBpbmZvCnRvCiAgIGVtcHR5IG5ldHdvcmsgaW50ZXJm
+YWNlIGxpc3QgcmV0dXJuZWQgYnkgc2VydmVyCgpDYzogPHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmc+
+ClNpZ25lZC1vZmYtYnk6IFN0ZXZlIEZyZW5jaCA8c3RmcmVuY2hAbWljcm9zb2Z0LmNvbT4KLS0t
+CiBmcy9jaWZzL3NtYjJvcHMuYyB8IDExICsrKysrKysrKysrCiAxIGZpbGUgY2hhbmdlZCwgMTEg
+aW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL2ZzL2NpZnMvc21iMm9wcy5jIGIvZnMvY2lmcy9z
+bWIyb3BzLmMKaW5kZXggNWIwNjAwOTM5MjA2Li44OGNiZjI4OTBmNmEgMTAwNjQ0Ci0tLSBhL2Zz
+L2NpZnMvc21iMm9wcy5jCisrKyBiL2ZzL2NpZnMvc21iMm9wcy5jCkBAIC01NDMsNiArNTQzLDE3
+IEBAIHBhcnNlX3NlcnZlcl9pbnRlcmZhY2VzKHN0cnVjdCBuZXR3b3JrX2ludGVyZmFjZV9pbmZv
+X2lvY3RsX3JzcCAqYnVmLAogCX0KIAlzcGluX3VubG9jaygmc2VzLT5pZmFjZV9sb2NrKTsKIAor
+CS8qCisJICogU2FtYmEgc2VydmVyIGUuZy4gY2FuIHJldHVybiBhbiBlbXB0eSBpbnRlcmZhY2Ug
+bGlzdCBpbiBzb21lIGNhc2VzLAorCSAqIHdoaWNoIHdvdWxkIG9ubHkgYmUgYSBwcm9ibGVtIGlm
+IHdlIHdlcmUgcmVxdWVzdGluZyBtdWx0aWNoYW5uZWwKKwkgKi8KKwlpZiAoYnl0ZXNfbGVmdCA9
+PSAwKSB7CisJCWlmIChzZXMtPmNoYW5fbWF4ID4gMSkKKwkJCWNpZnNfZGJnKFZGUywgImVtcHR5
+IG5ldHdvcmsgaW50ZXJmYWNlIGxpc3QgcmV0dXJuZWQgYnkgc2VydmVyXG4iKTsKKwkJcmMgPSAt
+RUlOVkFMOworCQlnb3RvIG91dDsKKwl9CisKIAl3aGlsZSAoYnl0ZXNfbGVmdCA+PSBzaXplb2Yo
+KnApKSB7CiAJCW1lbXNldCgmdG1wX2lmYWNlLCAwLCBzaXplb2YodG1wX2lmYWNlKSk7CiAJCXRt
+cF9pZmFjZS5zcGVlZCA9IGxlNjRfdG9fY3B1KHAtPkxpbmtTcGVlZCk7Ci0tIAoyLjM0LjEKCg==
+--00000000000038ecb905e9fbf87c--
 
