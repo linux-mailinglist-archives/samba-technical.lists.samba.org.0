@@ -2,114 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79DCD5F31E6
-	for <lists+samba-technical@lfdr.de>; Mon,  3 Oct 2022 16:23:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C6C65F35A1
+	for <lists+samba-technical@lfdr.de>; Mon,  3 Oct 2022 20:30:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=liKmkes9+WhhoOtEH9P2r3Lc2iHpl+VkGZsdzHE5aFo=; b=shfq8V/Op7rPuSYMMj0c/PGwUY
-	wYRWoF+FzkXPcar9GYHkoI0JzcSONy+ebsENbGr1uqgmgs6puIuI0xQP4vV9xr6YOFcIy27rLhlPn
-	1PYdfkirq+1mj8hpL0C3T79Wos+2se8uVJl37lCaHYa2KJkwtEw190JrCLHmUe0bvmfbMYSVTiE6g
-	3jaFYwcI9CZG0lGMNizJK8jc5Sh6R3rp0NXca1+Ae8T4AL0gLs1hc4ow0tJUn5DemSB3FmL5p+mJT
-	azwxhs3uFBTbfQ4uNwXr4lndjR2ieopUq8FfLR6lHqllUEq6No5eD2csIuUa9sQKIe0spLgKuINBU
-	rdwWYoGQ==;
-Received: from ip6-localhost ([::1]:19380 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=2b9g/BFbhPI0GBzwr+NMEAI6XpVHYCfGhG+LTaegFIM=; b=mHMku3JkE9kFai3NMMXJRF0cBg
+	RzTM32+CvWpmQtbTc5FwSdK0mgFm3g3i/0rJyi7YvKtfUUoimtMl6HoYqlnkgLO7WypxtEWyyjX5w
+	XUvnGvh5hBeaaccHMngWHR1knUmkIpY68xfkxAk2ysN7HJS09mBlFayLwkEyEuJnOVSi42AaxuPC2
+	tO9WNf17yCeUL6f1lVsQKTZnjArfMMvvPVMrhEFEmX7qfZ2gUSfEMo5T4KDgXiGNcY7iMpAT42vlq
+	HcDNsHcAX3bBNWW/pAlv9g+ae7Pc1sASfFxwzhc6ORs54e/uOHllY4HT/PttS66rY+/60/hovW2D/
+	bG+UiYVg==;
+Received: from ip6-localhost ([::1]:56740 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ofMKj-007Mxd-Rx; Mon, 03 Oct 2022 14:22:13 +0000
-Received: from mail-dm3nam02on2058.outbound.protection.outlook.com
- ([40.107.95.58]:47585 helo=NAM02-DM3-obe.outbound.protection.outlook.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1ofMKf-007MxU-4s
- for samba-technical@lists.samba.org; Mon, 03 Oct 2022 14:22:11 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OTBpMaUZwEhESDQ89PjuTWhvFLPj+zV9WDgaPu63hYWc4Cb+faqN2u1Wt3Je3qz++qxFwbbrGZ3TqRvGtGgZK1EUNTtRelZePJ0Zy+9+WYcpCFYVm6WwDKZtH0bNPdgmGPC3bf2aVxrW4FeN/YwrhIdgJCZHmWnlJiJ//SBQ3YjCEIdlf91tyKTc/NmSpZXo+Z9jj1am9ebuuFE4Vy+TtXYGrM35CR2KGJhECg2RcEUYe7Q5GCo7gNWfNjMB2Fhm7vUnXSpS+OFR/fG6vCUhTKF4BRaGkAPOIclQjpzGFuowLtB6bimVFtw9KrOjBcSE/a6wqKGKDstV7v+VnD41vQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=liKmkes9+WhhoOtEH9P2r3Lc2iHpl+VkGZsdzHE5aFo=;
- b=UwoCMZFZJs7d5+DWqxlgl+BGQz+a7/X3qXBrwbL2MgcCZ7geWy71Y+MYNZxWYLnx54B9OMnp3dT2nVIOsiqxq/34FSK7V6UhewvjSN4Sw/VMOpeika3T8vVMoQKwwqf/Pi+T7IvTpy17BQKUJ2G2MNVdu00s+oK2ym8ZomlNvAMwnvRywJYkZZVzXrmU39mTJObLZWSpe3NDbfX8jzMnXCH6zk+nCVyZv4QsZCgeJJXV1fOZvvle7eJQ5/zbTMsDvmcfXD0mHceNwLc2FXTFdHh439h9/gF7qQqVha54HYbi4BjSLNhtrznJQcrmRBp83PP0I+WmiSa2QfaU9PzPMw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=talpey.com; dmarc=pass action=none header.from=talpey.com;
- dkim=pass header.d=talpey.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=talpey.com;
-Received: from SN6PR01MB4445.prod.exchangelabs.com (2603:10b6:805:e2::33) by
- BN6PR01MB3283.prod.exchangelabs.com (2603:10b6:404:d7::22) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5676.23; Mon, 3 Oct 2022 14:21:53 +0000
-Received: from SN6PR01MB4445.prod.exchangelabs.com
- ([fe80::454c:df56:b524:13ef]) by SN6PR01MB4445.prod.exchangelabs.com
- ([fe80::454c:df56:b524:13ef%5]) with mapi id 15.20.5676.028; Mon, 3 Oct 2022
- 14:21:52 +0000
-Message-ID: <d7bf66c8-0695-a239-4bfb-d234241479ac@talpey.com>
-Date: Mon, 3 Oct 2022 10:21:50 -0400
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.1
-Subject: Re: [PATCH][smb3 client] log less confusing message on multichannel
- mounts to Samba when no interfaces returned
-Content-Language: en-US
-To: Steve French <smfrench@gmail.com>
-References: <CAH2r5mvS6_AXjbK8sY_dEWUbmtRjodSYEtxeNz_NST9+EyC96A@mail.gmail.com>
- <df473fde-e79d-ae90-37bb-3a3869d3aa9a@talpey.com>
- <CAH2r5msDX4eaGuyine__ePtOTRoSBDjiUN_dthaHpiA9UKm0yg@mail.gmail.com>
-In-Reply-To: <CAH2r5msDX4eaGuyine__ePtOTRoSBDjiUN_dthaHpiA9UKm0yg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+	id 1ofQBz-007ajU-PK; Mon, 03 Oct 2022 18:29:27 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48390) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1ofQBv-007ajL-L9
+ for samba-technical@lists.samba.org; Mon, 03 Oct 2022 18:29:25 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=2b9g/BFbhPI0GBzwr+NMEAI6XpVHYCfGhG+LTaegFIM=; b=ejkWie0OU8RIZAViGTd/nvddLX
+ zpTdM2bvocIjg2jjAmyIVWzmr5oO0e/7+Jt9SXiu3BQpzYOPRVcv3O8FYxvpO+hWmipbFzyWV0ZB3
+ 3PVTNJDikY5Im37obLNhj8agz9Kx/+/6irgXZtnUSDVJusGUT60KjW9xH17eY+gl8qg+eL1sbpail
+ vkSng6rgMFoveigxCV0GqwwPv3pQPSXRmuLscV1LXywL08Te3uNhn1OVm7ITJgHUpi0DKlawYE/KS
+ G/yySAoTBJ+9m5CTRt5zo5cJpDT7XuexfqCp8Naz0+XLYWFqSHDaa2XMvski52e7GGbY0Gs18q6O8
+ ps1WhINCCH4vkGNXJr5EHxJDmyspa7WicM7jRnYbqm5uJhmDiLcLMQ+XZ7YzC+TMOzFv9o6EeEMiC
+ IdAO110MG7haqxxDbM3qSaY/JdvSc5RDi9fnnSqejsm5YquXhhYNVfeeJo7KvDXzTHJU8Jk6YCJ0s
+ /sScgBOMky9tolaxVWbV3IB6;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1ofQBu-002rZT-1U; Mon, 03 Oct 2022 18:29:22 +0000
+Date: Mon, 3 Oct 2022 11:29:17 -0700
+To: Ralph Boehme <slow@samba.org>
+Subject: Re: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
+Message-ID: <Yzsp/U5itUs486Ic@jeremy-acer>
+References: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
+ <ecd8ac98-c8d7-43b6-b0c0-d6deb7352ad7@samba.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN6PR01MB4445:EE_|BN6PR01MB3283:EE_
-X-MS-Office365-Filtering-Correlation-Id: 99faaec2-dab7-4554-a99a-08daa54a9e31
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Message-Info: iChqZH6G//JiG7VHuqPHDXw8/7XlJICqT5dIhs0L+coiyqyYgD6aeth9EAKf93oexkCN3Y9BHkziJhWUKzA06BtFn4ViNQl0LLa+ZhQ7EeThX67ha+Ko65je51E7xhHHYpL5eRvjx3LGBr1ADPUv8ksl4eMwLHtU0aEATWbPyf+bRSa37oaULbKxyptBrv4fmQ3QxAg3YHbEb4846PVwi4AUv8wlLw7OEqTer+jXSQUPx7nWoP459rJaQyyVn1i55D8yaWn6rJtQwUiI2JPWV8zSniqwSIOeR5A2QHU+li54ut6djsOjXwq9svs483hW+tNrRjmvI1bjeFKum/zgxn4xZX01i/QTGFJ5lpzFV8X98+x+JklNP6zg3m/Ew5p1AfFNVv0KtvWaXkk2WZbIVD7G5p+1bx5urolhKhbaCUQ3TW+REOkCSjXFpF+xPNRKTanJd3eQW+rP4GuiZr00XtfvXwMIKaPCX7cNxyLNAq2JWH2k7/ZZJcJK48FaJWAoGUlDqYw1a5zSKdcMeEfvOnprGluGrF3nXGh3GonY1KNOaCEsgAk9YzZmTigqW8rXzwLOIk1vDy+TI5pyFofTaOuYsp4u+r31lkJnM7GrrnjKnqNAXqc1NiJ1LO1mTZj6dyWhS9n8Gn2NUN7reedjlKXcbCf3qWm243+CwlzmNZk4APeVeDOeh03tKsTrwEvcpCbldQBkQdKQUGcb6i4TJVZCxETtDhvorT2UerNnYm3VQQJu1JAcGIKqcwWFReTSbyYRrwlgeaWavna+kdm+aBtlN7XfOrGzknAD3fEJogo=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y0kyQndvbFd3dEpGeUZJUmhCVHhSalAybGJZZWx4clpxVnJRVW5oK05pSVdw?=
- =?utf-8?B?TFd0NkQ4QXZaNXg2cGhUb3pqb1NUNVJwcW1STnp3bEtPQmlYVk5mMDlkR0tQ?=
- =?utf-8?B?ajUxYmE5V2xGWitJUDdGUmRyN3NCZElDMkltT3RETkxPSEJZb3NuVFdEazFx?=
- =?utf-8?B?QWVRL2Q4T0FHajBFV21SZE9ibU9MMjRnL1RmN1FnMTZrK0NIcVAwbHhBemNh?=
- =?utf-8?B?eWxRSzVadUwrSUpENFArS0tnSzV0QjA3Y3B5SlJyVXQ2d2NqY3BObk8xRERT?=
- =?utf-8?B?c2NtcTlKOURLN2NDc2Z2L1g2dTU4WmhpRmdDcGxKa2paVG5jZUJZTnVDeEsx?=
- =?utf-8?B?S09PdEZiUjgzNTVSUmMrYzZnQksxQndrcWltdjZLYzhwZlJIdXJTajZaaldh?=
- =?utf-8?B?ZDFxMDZHS1oweXZKdEw4T1l5QXdmS2VNb2U4T1h2RSt4cmdLaUtScjJ2QTE0?=
- =?utf-8?B?TG10WW5ZVlRvTDlJeURPQ2JtRm55dThtKzVZQTI4eWw0eDlDY0RWcWFScUwr?=
- =?utf-8?B?ZDdmVWpaYW0zTTNlMkJCdjNIK2ZPZE41R2M4dGl2RnNpelF3MlJYemJ0YzRI?=
- =?utf-8?B?SkhrdlQ0VTN1QWw2TWRnZWRFUklDUnV0aHJVSWh3Y0ZpNEFkYkl5eUE0YUxx?=
- =?utf-8?B?d1Z0ak44VzdGdVQ2RVNqdW1rMnlySUFGYmQ2Y2thalNQcjFKSUY4RUVYYnNG?=
- =?utf-8?B?NmJ0aTk2MHlOUVJsTXlkMEhDV2pGcnozYzVCelR2NG9Oa1lHSFZkR0lTeGla?=
- =?utf-8?B?aHFOUVI4MXJRaU8yRzI1UGsyOXJvSHFFSVl5QUVNc3R2US9hS01qeHozZGts?=
- =?utf-8?B?cDZtSnkySmx1aDZMV3g0RGlRZk51VGVYZkVhdUdQaWhaeHcyNnpKT3hCcThU?=
- =?utf-8?B?dFo0TkdrdmFVU1lxa1k5SXJ4UFRENHN5Z0FkelRoWjVwTEN3TWc4OHVUT2s2?=
- =?utf-8?B?dVpnUGN3MGdjQVM0VERlYmYrZW8ydmhVTm9ndDB2TG83ZjlaWjJrUU9DTU0y?=
- =?utf-8?B?amhlVDNqZnlTd1FkZEc1aWpSTDVGbTdEQzhZSGpqWDBTRU5nNjZsTUFMQ0NS?=
- =?utf-8?B?Z202L0g2cWZpK01qMHZWOWxxdkJ6RTVYaGxWS2J3cEFLVi9XeDUyQjVhbGpv?=
- =?utf-8?B?WXFwYU5uaUd1OVV2ZTdrVTYwbmhqaEtrODFZSEU5bGRSYjRlWjBsVDZjbm1h?=
- =?utf-8?B?R1hJRy9hZkNOWDY3NmE5QnFsZWNLazkvTE5SZWxya2hQUjZmV1YvYjJaeU5v?=
- =?utf-8?B?U1RzclJjanZMM3YvM29MaEI3Q3gxM25uMWFoUXRGMzB5Tk5CYk1STGpZSmtT?=
- =?utf-8?B?ZEdIWUdxSEVoZXdhOXc1QXR1L2JVaU5XbitLNHNQVWNYYm9OSHRzWkhvY2JZ?=
- =?utf-8?B?ZFRkRkVkUjRzQVdDY2NaZldsOEM1bitzN0dBL2lLRGtZR3R5ZmVsT2tXdmlH?=
- =?utf-8?B?VkxHT3BOVFhjeEhxMi9DWHdwK0p2cEZpYXI5Q25JZHlxT04wbHcwaUw5cnox?=
- =?utf-8?B?ZE1VRzVvK255Q1NsMFZ6cXJUVnlwUktUclJIdmNreEFPYmFWWWhjdm5UTzdt?=
- =?utf-8?B?aWpOU1c5K3o2bmNITkRiTmNDb0xDN25YSndLN0hZTTcyZWJLYlo4dDMyaEw5?=
- =?utf-8?B?dm5zQXlKaHZpdmxWaVlmaGkvMlFOZFFzK3hFbTlQbzVIb1Njb3R0YXZ4blVx?=
- =?utf-8?B?c05XNFlPWS9qRnFiS3dqT0t3Rm9SQUdaeTRpSEE4NHFiY0Z4WUxVQjd0MklB?=
- =?utf-8?B?YW5JcWZXV000UmNsNVZnVnhPYWNkeHlKNE1Da0tPR2hKSFhiaVM4d3d5VE1z?=
- =?utf-8?B?YXNZU2wwVFZvWldHdFZWUWp3OXFQV3lMQkZVZW8rdEFyK2VCdTl5c3BneWQ2?=
- =?utf-8?B?cEFyVjBCUmJFVzRaemJyYmIzNm5nV1Z6eFlLcHp2RFZaNDVWNlFQTHd2Y29Y?=
- =?utf-8?B?NURYS1d6RC9RcDMwY29DNXF4REZSdlUrRjB1TTNub0NGSlN5VnA3Y0VzdXdn?=
- =?utf-8?B?bUpVYWhCYUs3WFV2bzlHM1VKWCsvUjFteFA5Z01ZUkE3LzdnakpySkdBS1lz?=
- =?utf-8?B?VGRkNnY3ajFZUis0VXBvVzBrN3lkNVl4aTVVSUNpQ3QxRXdVMEFDY0NmWXcy?=
- =?utf-8?Q?SOzg=3D?=
-X-OriginatorOrg: talpey.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 99faaec2-dab7-4554-a99a-08daa54a9e31
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR01MB4445.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 2b2dcae7-2555-4add-bc80-48756da031d5
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: eP7IgAdkD52tLDRbRy6O3vTvFoBsy5vVtAJZVxbBo/HQ7xrLkUVgytInD/GdhhR/
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR01MB3283
-X-Warn: EHLO/HELO not verified: Remote host 40.107.95.58
- (mail-dm3nam02on2058.outbound.protection.outlook.com) incorrectly presented
- itself as NAM02-DM3-obe.outbound.protection.outlook.com
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <ecd8ac98-c8d7-43b6-b0c0-d6deb7352ad7@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -123,63 +56,42 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Tom Talpey <tom@talpey.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Daniel Kobras <kobras@puzzle-itc.de>, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 10/3/2022 12:38 AM, Steve French wrote:
-> On Sat, Oct 1, 2022 at 6:22 PM Tom Talpey <tom@talpey.com> wrote:
->>
->> On 10/1/2022 12:54 PM, Steve French wrote:
->>> Some servers can return an empty network interface list so, unless
->>> multichannel is requested, no need to log an error for this, and
->>> when multichannel is requested on mount but no interfaces, log
->>> something less confusing.  For this case change
->>>      parse_server_interfaces: malformed interface info
->>> to
->>>      empty network interface list returned by server
->>
->> Will this spam the log if it happens on every MC refresh (10 mins)?
->> It might be helpful to identify the servername, too.
-> 
-> Yes - I just noticed that in this case (multichannel mount to Samba
-> where no valid interfaces) we log it every ten minutes.
-> Maybe best way to fix this is to change it to a log once error (with
-> server name is fine with me) since it is probably legal to return an
-> empty list (so not serious enough to be worth logging every ten
-> minutes) and in theory server could fix its interfaces later.
+On Thu, Sep 29, 2022 at 02:17:57PM +0200, Ralph Boehme wrote:
+>On 9/27/22 13:10, Daniel Kobras via samba-technical wrote:
+>>The issues can be avoided with a consistent mapping between Windows EAs
+>>and the 'user' namespace in both directions, ie. no longer present EAs
+>>outside of 'user' as Windows EAs in SMB_INFO_QUERY_ALL_EAS and friends.
+>>Do you agree with this approach? Are there applications that rely on
+>>the current mapping of non-user EAs? Please let me know if I should
+>>submit the patch as a proper MR.
+>before jumping to action can we also please briefly consider the Linux 
+>kernel mount case with SMB3 Unix Extensions and mount over SMB?
+>
+>The proposed approach makes sense for Windows clients, maybe be should 
+>incorporate exposing the raw namespace when UNIX extensions are 
+>negotiated. In the end this is likely going to be a made via a later 
+>MR in the future, but I'd like to see both cases considered now that 
+>we're making changes.
 
-Ten minutes is the default recommended polling interval in the doc.
+The SMB3 Unix Extensions can be fixed later via a new MR.
 
-While it's odd, it's not prevented by the protocol. I could guess
-that a server running in a namespace might return strange things
-as devices came and went, for example.
+The behavior for SMB3 Unix Extensions should be that GetEA/SetEA
+calls on a SMB3 Unix Extensions file handle should not hide the
+namespace from the client. From my experiments as root on Linux,
+the ListEA call only ever returns names from the user. namespace
+but it probably won't hust to just return the full namespace+name
+for a ListEA on a SMB3 Unix Extensions file handle.
 
-It's not an error, so the message is purely informational. It is
-useful though. Is it possible to suppress the logging if the
-message *doesn't* change, but otherwise emit new ones? That might
-require some per-server fiddling to avoid multiple servers flipping
-the message.
+The nice thing about this is that it means that we can
+cope with case-sensitive EA's - but only on a SMB3 Unix Extensions
+file handle.
 
-A boolean or bit in the server struct? A little ugly for the purpose,
-but surfacing multichannel events - especially ones that prevent it
-from happening - seems worthwhile.
-
-Tom.
-
-
-Tom.
-
-
->>> Cc: <stable@vger.kernel.org>
->>> Signed-off-by: Steve French <stfrench@microsoft.com>
->>>
->>> See attached patch
->>>
-> 
-> 
-> 
+IMHO this fix is good for now for the only existing case of
+Windows handles, and we can fix SMB3 Unix Extensions up later.
 
