@@ -2,63 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F4DF5F4563
-	for <lists+samba-technical@lfdr.de>; Tue,  4 Oct 2022 16:24:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3FF15F49AB
+	for <lists+samba-technical@lfdr.de>; Tue,  4 Oct 2022 21:24:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=5gUUNgEDhizGEpFxKtQMBGFV8uYs1I5bUDwiFyCdJPs=; b=wENXH/snLcvQLQqGIYeaChYrAu
-	JlD5jcH/PBGlaRfT9nYYv1FEmtQAL/nNqs3xCvTJNXRs2AuXZgplHPp14atRapAxxZy8+ff9Gs6ia
-	SmMK+zPqn5e3FDZTr/bVVnwf/2MuT7bV+BRg4dMG03Sht3ZIWNQhzUN9ut6WmpVyqZlRKK3lBJXT5
-	F+aqppof65jG3ypIO6bW7U7+eDYicF6Zm9pIwuIqhHtJCDo7r/J+nRMQRkGowkCHo+FmntnMdkwre
-	1HF9Evx/cVLWi0JJJohLVgW1n9qMQuqqGxW3SKiW0aUV9tJqv1Sv4UU2y63AiKvb2Z9xBu10IpUym
-	W5TIm83w==;
-Received: from ip6-localhost ([::1]:36096 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=myIGBnfBacIG2+HWik5iZ7600MHQKUlDlQPLoFbcxX8=; b=dnVFxr+fiVCur1h2A1ij5OKMhH
+	IprksIHRre2prelQB4XonNwRseFDq7FYq67vV3RMPhexaC0vr6gl3RKOgawtd6gKSxQ+iZSeNAKJe
+	kph6Rwr1gszcViNSIFRTBKNO6s1yN8vYGIz8RGbj2FldElIUJenbpqLLfyzkGDtGDzP809OT1WKva
+	mU3530BgtC4m8xnOFKvqqGSbQCdR5D7Crd8806ARPTx2SsjmST1VOh/JpZ/Y5k7LX7I171MnpNbiz
+	w9WEkHpT+SMRVZaf7hrqCdn9wkpGnk9JtIke/lkI5v184czV9oCH84FFjqDJMh9sArUxyXNk/ezNe
+	PIwXHTug==;
+Received: from ip6-localhost ([::1]:50018 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ofipQ-007uzh-EM; Tue, 04 Oct 2022 14:23:24 +0000
-Received: from smtp-out1.suse.de ([2001:67c:2178:6::1c]:59930) 
+	id 1ofnWN-007yjy-Et; Tue, 04 Oct 2022 19:24:03 +0000
+Received: from mx.cjr.nz ([51.158.111.142]:32984) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ofipL-007uzY-MN
- for samba-technical@lists.samba.org; Tue, 04 Oct 2022 14:23:21 +0000
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (Exim) id 1ofnWH-007yjp-HY
+ for samba-technical@lists.samba.org; Tue, 04 Oct 2022 19:23:59 +0000
+Received: from authenticated-user (mx.cjr.nz [51.158.111.142])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 08A432198D;
- Tue,  4 Oct 2022 14:23:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1664893389; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested) (Authenticated sender: pc)
+ by mx.cjr.nz (Postfix) with ESMTPSA id CAACC8079F;
+ Tue,  4 Oct 2022 18:59:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz; s=dkim;
+ t=1664909946;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=5gUUNgEDhizGEpFxKtQMBGFV8uYs1I5bUDwiFyCdJPs=;
- b=Zt/OhUS5ydTQ9UGifRGK41t6GwEwC9hWteg+uA6BanmdxcmrHSUmnRwaax6muvmAzKKREl
- HvCVf6R1AOho0RNxtGGq8BX7drQ5X+U22DhcXFne3NLKWdoz22LRBr9nP61FvgBdh/CnD2
- lrLR8nF+sDF1Wgk/6b85JyPAcKbmAGw=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1664893389;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=5gUUNgEDhizGEpFxKtQMBGFV8uYs1I5bUDwiFyCdJPs=;
- b=nnwkZhu5TLtAve4z+S1eE5DR29Ezv4gT6tG61WizYluhc4rs1VB3OA9gmZrHP6yk89nLJM
- fz5UHGvz5kGnMFBQ==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 80A1D139EF;
- Tue,  4 Oct 2022 14:23:08 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id Ds5VEcxBPGPpdAAAMHmgww
- (envelope-from <ematsumiya@suse.de>); Tue, 04 Oct 2022 14:23:08 +0000
-Date: Tue, 4 Oct 2022 11:23:06 -0300
-To: Muhammad Usama Anjum <usama.anjum@collabora.com>
+ bh=myIGBnfBacIG2+HWik5iZ7600MHQKUlDlQPLoFbcxX8=;
+ b=Z+jJ47GsoCRk3wbcpVcQrV8XfZWlkR8lL3oB+/fogM5z1dR3mNRIGwP6ReWz4Lk0YeX36e
+ oGdtEMAT8m0M6/KP5Eauwre+fIEIQy7QlUOqvW0PnlZU0P+sIYADe+5Ww2ypWiMEIdeLFc
+ HfJPAl6ItKbFOw2BLBfqyDCRVhtVonxNbHSdqyZA115hohF29tSGJgiaiXgSd9CU678qUs
+ a4G8tdM2eaNljBM+NjnoW4vpJFVt8snRqpZ2Mqx4pfoJ+UCGk0agmC+MaITtN2QRuWA7dn
+ vOZZqOBdquVN5yEHr5AF3Un+bhHl1GbTIMdqC4QECmYOhknIIypGzvL6CUzzTg==
+To: Muhammad Usama Anjum <usama.anjum@collabora.com>, Steve French
+ <sfrench@samba.org>, Ronnie Sahlberg <lsahlber@redhat.com>, Shyam Prasad N
+ <sprasad@microsoft.com>, Tom Talpey <tom@talpey.com>
 Subject: Re: [PATCH 1/2] cifs: remove initialization value
-Message-ID: <20221004142306.ysgh45nhgdo4z3ok@suse.de>
-References: <20221004062333.416225-1-usama.anjum@collabora.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
 In-Reply-To: <20221004062333.416225-1-usama.anjum@collabora.com>
+References: <20221004062333.416225-1-usama.anjum@collabora.com>
+Date: Tue, 04 Oct 2022 15:59:55 -0300
+Message-ID: <87o7ur4dp0.fsf@cjr.nz>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,47 +59,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Enzo Matsumiya via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Enzo Matsumiya <ematsumiya@suse.de>
-Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
- linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- Paulo Alcantara <pc@cjr.nz>, kernel-janitors@vger.kernel.org,
- linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
- Steve French <sfrench@samba.org>, kernel@collabora.com
+From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Paulo Alcantara <pc@cjr.nz>
+Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Muhammad Usama Anjum <usama.anjum@collabora.com>, kernel@collabora.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Usama,
+Muhammad Usama Anjum <usama.anjum@collabora.com> writes:
 
-On 10/04, Muhammad Usama Anjum wrote:
->Don't initialize the rc as its value is being overwritten before its
->use.
-
-Being bitten by an unitialized variable bug as recent as 2 days ago, I'd
-say this is a step backwards from the "best practices" POV.
-
->Signed-off-by: Muhammad Usama Anjum <usama.anjum@collabora.com>
->---
-> fs/cifs/smb2pdu.c | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
+> Don't initialize the rc as its value is being overwritten before its
+> use.
 >
->diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
->index 0600f0a07628..2bf43c892ae6 100644
->--- a/fs/cifs/smb2pdu.c
->+++ b/fs/cifs/smb2pdu.c
->@@ -879,7 +879,7 @@ SMB2_negotiate(const unsigned int xid,
-> 	struct smb2_negotiate_rsp *rsp;
-> 	struct kvec iov[1];
-> 	struct kvec rsp_iov;
->-	int rc = 0;
->+	int rc;
-> 	int resp_buftype;
-> 	int blob_offset, blob_length;
-> 	char *security_blob;
->-- 
->2.30.2
+> Signed-off-by: Muhammad Usama Anjum <usama.anjum@collabora.com>
+> ---
+>  fs/cifs/smb2pdu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Cheers,
-
-Enzo
+Reviewed-by: Paulo Alcantara (SUSE) <pc@cjr.nz>
 
