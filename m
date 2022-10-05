@@ -2,61 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6B745F4ECE
-	for <lists+samba-technical@lfdr.de>; Wed,  5 Oct 2022 05:31:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F2665F501F
+	for <lists+samba-technical@lfdr.de>; Wed,  5 Oct 2022 09:03:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=AhtD3Nxeo233ijtaBGAkFch/kfp5ptj7ps5Ve0jS3rE=; b=xZZzCKLfZfuzhLv2JXPngqBMSN
-	hSn54NsHOhab7wMJnQPjMk7bEBApyI/85mB+ysgh1lTCyNy1RyxV5bS2op9PIzvH8AEtX+SPqGthr
-	smpwizI3CcWy6JJFGkYdi0/0H8e0M5OXexfPl0h4rXfuwhA3jNlsY1OVxZoeXpkzFxFASc3KVLtrA
-	TQjCZWxsmP5MSt2ct9rVFpMa8vzUPBB7bukHtmCHzgPgz4UGt/p6HiUYn9Df4jC0OgfnjGb11o7Qr
-	736wyMcqFTKJri27TXRkN6qoIwBXQGTDLkUKgcPQDSDecrQZSi5U7cOArrcDwGPzNS+nE8nkikSZR
-	DU1RiXKA==;
-Received: from ip6-localhost ([::1]:26518 helo=hr1.samba.org) 
+	bh=UHE5t3RzuZq9XWIvg02NUOpVAjCk9hgPmV9IZeL6AF0=; b=jcgk3M1cno/tBiTI//un0tBcU2
+	Rbaz5BC/3ObPrtfk0YrYpCE8F5qSxKdYH/FDnHVlYysPqtkgg8GYNGH+pknjbUUIOShYApVr6Qn+V
+	Q0RG36UaVOmR+GQb8L3B7f4UThw7q2eJgRd5jPCvCeAo+WbVR6jPbqxTdn0TGX7WnOmsBC+/G9nWa
+	Ixx3JDJ+4BgFVABmn3RG2LU4YojE35FJouhxBnBKaRnuGSqsRIEgc4fCfQSj6aflJjoP6c6e4+zJD
+	ZzkR2fDGRDVl0HSOOCXKGv/Jxn4jdXPZA00gptI79HmHNGSRCAPD1BoVPrfNBM5Ao0J0KIUCqMcEq
+	y3W7dkkg==;
+Received: from ip6-localhost ([::1]:38988 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ofv7G-0000Zo-FV; Wed, 05 Oct 2022 03:30:38 +0000
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630]:33471) 
+	id 1ofyQ4-0001Va-SN; Wed, 05 Oct 2022 07:02:17 +0000
+Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929]:33648) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ofv78-0000Zd-Fx
- for samba-technical@lists.samba.org; Wed, 05 Oct 2022 03:30:35 +0000
-Received: by mail-ej1-x630.google.com with SMTP id lt21so7520736ejb.0
- for <samba-technical@lists.samba.org>; Tue, 04 Oct 2022 20:30:25 -0700 (PDT)
+ (Exim) id 1ofyPn-0001VR-DN
+ for samba-technical@lists.samba.org; Wed, 05 Oct 2022 07:02:02 +0000
+Received: by mail-ua1-x929.google.com with SMTP id p4so3868961uao.0
+ for <samba-technical@lists.samba.org>; Wed, 05 Oct 2022 00:01:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AhtD3Nxeo233ijtaBGAkFch/kfp5ptj7ps5Ve0jS3rE=;
- b=PwXAORUakcWhQUOq+9BdIiqm5+8hgckUXnhGYtenuGEQKFD2WR5BXzI0aZjcNWIcW2
- MLfOfhA+zo30sbiASXK/KLXM7FVB5qiT46CvHWSYUYXZIUCwbK8JUuWjm8j1dqxJnfaO
- /nvIQ4pO5tXkPmtMW1vMP8jbeiHjGBgtPJVfICYQYeZUbBdxblgGPg0ofZDan4t6vOhp
- luGdjgmmxpJ+ExWCcy6VEx4YfvNhXk5ezdF/APujX0Xj4TsXwz5o3WUacfKba0nHvGId
- tGi/n/EKJUpVUzgz8LTcQyCO2q2fBEEAnWBYPYHfNthW7BfVU+1wKMcg3ZYDDrqXzu35
- YUSA==
+ :mime-version:from:to:cc:subject:date;
+ bh=UHE5t3RzuZq9XWIvg02NUOpVAjCk9hgPmV9IZeL6AF0=;
+ b=kP3f4YiUiDivevu4zAGXlYrKAOJlutMNKn6F5yIFF00YcICIH5rjJl0LBZT5GCCjsY
+ 69s/Bby2S72Hh7TBgL7MwHdMO0YQpgUh7FevpScA+LznPtgic6mmLxWx8UzxnKfRLKAV
+ noMyp9oDFwwtsdzsxtp//jreujUdk889nkHGqvPg909Cp/3u12fgcN+CeroJg7y05qgK
+ OXodXbrPEFrYc5ZJDbU/kvd7z9ZcivDaJ3Eude90UhwXHOZTQiKiQI1869Rc1KWBlzfR
+ NSdzTujvLTApSxjzmBEQ3XMwKlaLluwAsp133cg9cK5dTJBw+NZjAY6OA5EMIkSx/Irp
+ hDsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AhtD3Nxeo233ijtaBGAkFch/kfp5ptj7ps5Ve0jS3rE=;
- b=sk0bpLrhU48apFENJEk63+tNSDCESFDl2jLrm7qGj02bulM3NpC3/BM3VP6xvULtZa
- x8L5CK9jv+lj5L+x9iWKokqd33UC8etd3aifYtDYWbOEh9BGaFK+YheP1HYK60gZVN/O
- D8rOxixZLIQyCql8arKgI/iC+xxEyUbPEIOFx8uBcz7SfyuC+YLcSeqOTCNy53a/2FJV
- o72/ZKpxjbvbwcE57cjM476IYfPhJwu4Peo4Ef24wkbz0Q7mv3y+jOevFHSbVJBXXLsF
- sUUl5t40nHigVZk32iifJGJB6bmKA4Cc81mdXoKo/s5f3O56Znl0vbgogRxGThXyujA8
- dyiw==
-X-Gm-Message-State: ACrzQf32jR/I7rTLLfcXj5a4LDYJ9+981tFR+ho9pa0jTFHHfBSmTUmJ
- 3hm5jlarP/F1rh809JUaX/xB0GthFlU92ZuPb8c=
-X-Google-Smtp-Source: AMsMyM5A5Rg0fahdHRX2NmyF9xDhTtT+izdF3OpQ519ZZD4mACJaPW88EtlUSodvSQxp8WVYYjo2cDNK1yEUWgDtkB8=
-X-Received: by 2002:a17:907:7b95:b0:731:113a:d7a2 with SMTP id
- ne21-20020a1709077b9500b00731113ad7a2mr21333233ejc.377.1664940624371; Tue, 04
- Oct 2022 20:30:24 -0700 (PDT)
+ :mime-version:x-gm-message-state:from:to:cc:subject:date;
+ bh=UHE5t3RzuZq9XWIvg02NUOpVAjCk9hgPmV9IZeL6AF0=;
+ b=3cBthWvM5yB/WpGbVia+KYzqXloDcVC1wDZZ0/kRR38tXFJ0Od8xlb+PUPX/7Q+JKa
+ ZAkUTHihk5seI0XddIP0m0bkAWLLEVZBgdZqc+bPoxdAuw+yqiS6NmWRNoUjM37naq9U
+ BMAlICsdF1q2HzSYAyEf6s4m7Du2MP84vNNZqRDOCpvxVLuhBneIc5/xmYefFBqkP6NC
+ LoYjzp8HhlCnk7wNLUmPscbkJ0dwfAiG/bBg8rrQIkzv3ivNGchlQ6B8JcRU2NgRKvX3
+ AgZF4TuNyNd1Ue83k3bclRL5ZZbnoCKLlHAoKWSNh/aXaF45mbGn6UaT922JPWjX7vZz
+ rtbg==
+X-Gm-Message-State: ACrzQf1DeROP/jyplNpYE7NPeT5keMFNMLURFh35OvSrBwmzUltH+CUH
+ lLmUyqQXGNo/j7MMKgUnxdUXbplpw1lAYXDUhWA=
+X-Google-Smtp-Source: AMsMyM7opRWyJTc9JIX5uLYrdIGDJWkxhKLOsdSnzRVdpu9POeg0Wb6Q0q1K2dyoWLvENxdOt6ZXyzNGD5uCI3sPYcg=
+X-Received: by 2002:ab0:992:0:b0:3cb:c597:48ff with SMTP id
+ x18-20020ab00992000000b003cbc59748ffmr14169017uag.19.1664953316796; Wed, 05
+ Oct 2022 00:01:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <YzzjKyHDuFoQAVCu@work>
-In-Reply-To: <YzzjKyHDuFoQAVCu@work>
-Date: Wed, 5 Oct 2022 13:30:11 +1000
-Message-ID: <CAN05THRcwWjJiYyBdVuVZrvqgK4VP7LKiNQ=XVMg5oOy5u9kzg@mail.gmail.com>
+References: <YzzjKyHDuFoQAVCu@work> <202210042006.9A12D208@keescook>
+In-Reply-To: <202210042006.9A12D208@keescook>
+Date: Wed, 5 Oct 2022 02:01:45 -0500
+Message-ID: <CAH2r5muz9cGwtX5HF5wL0g9ix=cKs6C35BZObqMr6dgL-sOF-g@mail.gmail.com>
 Subject: Re: [PATCH][next] cifs: Replace a couple of one-element arrays with
  flexible-array members
-To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+To: Kees Cook <keescook@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -71,97 +70,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
- linux-cifs@vger.kernel.org, Paulo Alcantara <pc@cjr.nz>,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ linux-cifs@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Paulo Alcantara <pc@cjr.nz>, samba-technical@lists.samba.org,
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>,
  Ronnie Sahlberg <lsahlber@redhat.com>, Steve French <sfrench@samba.org>,
  linux-hardening@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 5 Oct 2022 at 12:31, Gustavo A. R. Silva <gustavoars@kernel.org> wrote:
->
-> One-element arrays are deprecated, and we are replacing them with flexible
-> array members instead. So, replace one-element arrays with flexible-array
-> member in structs negotiate_req and extended_response, and refactor the
-> rest of the code, accordingly.
->
-> Also, make use of the DECLARE_FLEX_ARRAY() helper to declare flexible
-> array member EncryptionKey in union u. This new helper allows for
-> flexible-array members in unions.
->
-> Change pointer notation to proper array notation in a call to memcpy()
-> where flexible-array member DialectsArray is being used as destination
-> argument.
->
-> Important to mention is that doing a build before/after this patch results
-> in no binary output differences.
+merged into cifs-2.6.git for-next
 
-Looks good to me.
-Reviewed-by me
-
-Thanks for verifying that it does not change the binary utput.
-
+On Tue, Oct 4, 2022 at 10:17 PM Kees Cook <keescook@chromium.org> wrote:
 >
-> This helps with the ongoing efforts to tighten the FORTIFY_SOURCE
-> routines on memcpy() and help us make progress towards globally
-> enabling -fstrict-flex-arrays=3 [1].
+> On Tue, Oct 04, 2022 at 08:51:39PM -0500, Gustavo A. R. Silva wrote:
+> > One-element arrays are deprecated, and we are replacing them with flexible
+> > array members instead. So, replace one-element arrays with flexible-array
+> > member in structs negotiate_req and extended_response, and refactor the
+> > rest of the code, accordingly.
+> >
+> > Also, make use of the DECLARE_FLEX_ARRAY() helper to declare flexible
+> > array member EncryptionKey in union u. This new helper allows for
+> > flexible-array members in unions.
+> >
+> > Change pointer notation to proper array notation in a call to memcpy()
+> > where flexible-array member DialectsArray is being used as destination
+> > argument.
+> >
+> > Important to mention is that doing a build before/after this patch results
+> > in no binary output differences.
+> >
+> > This helps with the ongoing efforts to tighten the FORTIFY_SOURCE
+> > routines on memcpy() and help us make progress towards globally
+> > enabling -fstrict-flex-arrays=3 [1].
+> >
+> > Link: https://github.com/KSPP/linux/issues/79
+> > Link: https://github.com/KSPP/linux/issues/229
+> > Link: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=101836 [1]
+> > Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
 >
-> Link: https://github.com/KSPP/linux/issues/79
-> Link: https://github.com/KSPP/linux/issues/229
-> Link: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=101836 [1]
-> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
-> ---
->  fs/cifs/cifspdu.h | 7 ++++---
->  fs/cifs/cifssmb.c | 2 +-
->  2 files changed, 5 insertions(+), 4 deletions(-)
+> Looks good to me; thanks!
 >
-> diff --git a/fs/cifs/cifspdu.h b/fs/cifs/cifspdu.h
-> index aeba371c4c70..d1abaeea974a 100644
-> --- a/fs/cifs/cifspdu.h
-> +++ b/fs/cifs/cifspdu.h
-> @@ -483,7 +483,7 @@ put_bcc(__u16 count, struct smb_hdr *hdr)
->  typedef struct negotiate_req {
->         struct smb_hdr hdr;     /* wct = 0 */
->         __le16 ByteCount;
-> -       unsigned char DialectsArray[1];
-> +       unsigned char DialectsArray[];
->  } __attribute__((packed)) NEGOTIATE_REQ;
+> Reviewed-by: Kees Cook <keescook@chromium.org>
 >
->  #define MIN_TZ_ADJ (15 * 60) /* minimum grid for timezones in seconds */
-> @@ -508,13 +508,14 @@ typedef struct negotiate_rsp {
->         __u8 EncryptionKeyLength;
->         __u16 ByteCount;
->         union {
-> -               unsigned char EncryptionKey[1]; /* cap extended security off */
-> +               /* cap extended security off */
-> +               DECLARE_FLEX_ARRAY(unsigned char, EncryptionKey);
->                 /* followed by Domain name - if extended security is off */
->                 /* followed by 16 bytes of server GUID */
->                 /* then security blob if cap_extended_security negotiated */
->                 struct {
->                         unsigned char GUID[SMB1_CLIENT_GUID_SIZE];
-> -                       unsigned char SecurityBlob[1];
-> +                       unsigned char SecurityBlob[];
->                 } __attribute__((packed)) extended_response;
->         } __attribute__((packed)) u;
->  } __attribute__((packed)) NEGOTIATE_RSP;
-> diff --git a/fs/cifs/cifssmb.c b/fs/cifs/cifssmb.c
-> index 7aa91e272027..7a808e41b1b8 100644
-> --- a/fs/cifs/cifssmb.c
-> +++ b/fs/cifs/cifssmb.c
-> @@ -465,7 +465,7 @@ CIFSSMBNegotiate(const unsigned int xid,
->         for (i = 0; i < CIFS_NUM_PROT; i++) {
->                 size_t len = strlen(protocols[i].name) + 1;
->
-> -               memcpy(pSMB->DialectsArray+count, protocols[i].name, len);
-> +               memcpy(&pSMB->DialectsArray[count], protocols[i].name, len);
->                 count += len;
->         }
->         inc_rfc1001_len(pSMB, count);
 > --
-> 2.34.1
->
+> Kees Cook
+
+
+
+-- 
+Thanks,
+
+Steve
 
