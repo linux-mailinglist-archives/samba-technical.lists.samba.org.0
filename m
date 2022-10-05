@@ -2,51 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9102B5F49A7
-	for <lists+samba-technical@lfdr.de>; Tue,  4 Oct 2022 21:20:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6B745F4ECE
+	for <lists+samba-technical@lfdr.de>; Wed,  5 Oct 2022 05:31:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=cvV5XO3ylK5FK1gANSWSwikc0pVYpXVdsUgPuT78aGo=; b=GdSCthv5sRFUXWyTfqvQJpusVX
-	bdlg48k+yoYWLdb5ZGKOuSl8oCb75IvjP4WARK65ZJnuiLtJiwWvu5xR5TPuW9hrtj4IX8aWF28Ps
-	7y/IFIZ/IVVVGHrX/7iOdB2u9WaZYxK6gExeouW2mNbv1hvGs4Q7xdAsN++dwLVUZblaDXxvkr/14
-	V0rQu7Sw2kDmkeFmyd/RaNlWQkJJ8qp1EXVkNjxT8T5Kk1pEaEWRaUdaqEQ/gRGnn8t7tbBg2NkYw
-	V/5tiuB8y6WhuOdWH0z1BPx5xdeciESwqbXqWIefMnMM7r4T9WXIGqtou+ssCqTMShhCA7B7TD7wS
-	JhP1du4Q==;
-Received: from ip6-localhost ([::1]:45076 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=AhtD3Nxeo233ijtaBGAkFch/kfp5ptj7ps5Ve0jS3rE=; b=xZZzCKLfZfuzhLv2JXPngqBMSN
+	hSn54NsHOhab7wMJnQPjMk7bEBApyI/85mB+ysgh1lTCyNy1RyxV5bS2op9PIzvH8AEtX+SPqGthr
+	smpwizI3CcWy6JJFGkYdi0/0H8e0M5OXexfPl0h4rXfuwhA3jNlsY1OVxZoeXpkzFxFASc3KVLtrA
+	TQjCZWxsmP5MSt2ct9rVFpMa8vzUPBB7bukHtmCHzgPgz4UGt/p6HiUYn9Df4jC0OgfnjGb11o7Qr
+	736wyMcqFTKJri27TXRkN6qoIwBXQGTDLkUKgcPQDSDecrQZSi5U7cOArrcDwGPzNS+nE8nkikSZR
+	DU1RiXKA==;
+Received: from ip6-localhost ([::1]:26518 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ofnRd-007ySB-Sk; Tue, 04 Oct 2022 19:19:09 +0000
-Received: from mx.cjr.nz ([51.158.111.142]:32538) 
+	id 1ofv7G-0000Zo-FV; Wed, 05 Oct 2022 03:30:38 +0000
+Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630]:33471) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ofnRR-007yS2-74
- for samba-technical@lists.samba.org; Tue, 04 Oct 2022 19:19:07 +0000
-Received: from authenticated-user (mx.cjr.nz [51.158.111.142])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested) (Authenticated sender: pc)
- by mx.cjr.nz (Postfix) with ESMTPSA id 6487080B8A;
- Tue,  4 Oct 2022 19:00:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz; s=dkim;
- t=1664910050;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=cvV5XO3ylK5FK1gANSWSwikc0pVYpXVdsUgPuT78aGo=;
- b=a3q3LfgY8Yo+sVRT9GjdQDSTwwwPwiqdHpRUvYQ6jJp9vJEnReR++sGUTQye6hXBl37ezf
- PinXzTjZ5dYJN1Q1Q8H6gEPDwukEZIK0+XE7wUtV1Ao0h7dpL1iNBjmbXffkMOuTMk2tiL
- wDc5sHGkNLPBrPBO2THnYC6Eq7W5rlmOeJKylEQAPIJSs3eHoE+4QfkJ1oEkVAPd3c+0J9
- qMtErMk3G4nU+a7KdlrWeM+q/h4eeTZswV0i3jLu+ySRK1T6f+M0gIyTNSPsOrxdBM0oNQ
- 53zVaJ6M/3RykpuPh2NKb39YpMGbQe+AYG8e2YvfyevJ6q7DfkOwVgbqiFkbhQ==
-To: Muhammad Usama Anjum <usama.anjum@collabora.com>, Steve French
- <sfrench@samba.org>, Ronnie Sahlberg <lsahlber@redhat.com>, Shyam Prasad N
- <sprasad@microsoft.com>, Tom Talpey <tom@talpey.com>
-Subject: Re: [PATCH 2/2] cifs: check returned value for error
-In-Reply-To: <20221004062333.416225-2-usama.anjum@collabora.com>
-References: <20221004062333.416225-1-usama.anjum@collabora.com>
- <20221004062333.416225-2-usama.anjum@collabora.com>
-Date: Tue, 04 Oct 2022 16:01:40 -0300
-Message-ID: <87lepv4dm3.fsf@cjr.nz>
+ (Exim) id 1ofv78-0000Zd-Fx
+ for samba-technical@lists.samba.org; Wed, 05 Oct 2022 03:30:35 +0000
+Received: by mail-ej1-x630.google.com with SMTP id lt21so7520736ejb.0
+ for <samba-technical@lists.samba.org>; Tue, 04 Oct 2022 20:30:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=AhtD3Nxeo233ijtaBGAkFch/kfp5ptj7ps5Ve0jS3rE=;
+ b=PwXAORUakcWhQUOq+9BdIiqm5+8hgckUXnhGYtenuGEQKFD2WR5BXzI0aZjcNWIcW2
+ MLfOfhA+zo30sbiASXK/KLXM7FVB5qiT46CvHWSYUYXZIUCwbK8JUuWjm8j1dqxJnfaO
+ /nvIQ4pO5tXkPmtMW1vMP8jbeiHjGBgtPJVfICYQYeZUbBdxblgGPg0ofZDan4t6vOhp
+ luGdjgmmxpJ+ExWCcy6VEx4YfvNhXk5ezdF/APujX0Xj4TsXwz5o3WUacfKba0nHvGId
+ tGi/n/EKJUpVUzgz8LTcQyCO2q2fBEEAnWBYPYHfNthW7BfVU+1wKMcg3ZYDDrqXzu35
+ YUSA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AhtD3Nxeo233ijtaBGAkFch/kfp5ptj7ps5Ve0jS3rE=;
+ b=sk0bpLrhU48apFENJEk63+tNSDCESFDl2jLrm7qGj02bulM3NpC3/BM3VP6xvULtZa
+ x8L5CK9jv+lj5L+x9iWKokqd33UC8etd3aifYtDYWbOEh9BGaFK+YheP1HYK60gZVN/O
+ D8rOxixZLIQyCql8arKgI/iC+xxEyUbPEIOFx8uBcz7SfyuC+YLcSeqOTCNy53a/2FJV
+ o72/ZKpxjbvbwcE57cjM476IYfPhJwu4Peo4Ef24wkbz0Q7mv3y+jOevFHSbVJBXXLsF
+ sUUl5t40nHigVZk32iifJGJB6bmKA4Cc81mdXoKo/s5f3O56Znl0vbgogRxGThXyujA8
+ dyiw==
+X-Gm-Message-State: ACrzQf32jR/I7rTLLfcXj5a4LDYJ9+981tFR+ho9pa0jTFHHfBSmTUmJ
+ 3hm5jlarP/F1rh809JUaX/xB0GthFlU92ZuPb8c=
+X-Google-Smtp-Source: AMsMyM5A5Rg0fahdHRX2NmyF9xDhTtT+izdF3OpQ519ZZD4mACJaPW88EtlUSodvSQxp8WVYYjo2cDNK1yEUWgDtkB8=
+X-Received: by 2002:a17:907:7b95:b0:731:113a:d7a2 with SMTP id
+ ne21-20020a1709077b9500b00731113ad7a2mr21333233ejc.377.1664940624371; Tue, 04
+ Oct 2022 20:30:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <YzzjKyHDuFoQAVCu@work>
+In-Reply-To: <YzzjKyHDuFoQAVCu@work>
+Date: Wed, 5 Oct 2022 13:30:11 +1000
+Message-ID: <CAN05THRcwWjJiYyBdVuVZrvqgK4VP7LKiNQ=XVMg5oOy5u9kzg@mail.gmail.com>
+Subject: Re: [PATCH][next] cifs: Replace a couple of one-element arrays with
+ flexible-array members
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,29 +71,97 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Paulo Alcantara <pc@cjr.nz>
-Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
- Muhammad Usama Anjum <usama.anjum@collabora.com>, kernel@collabora.com
+From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
+Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
+ linux-cifs@vger.kernel.org, Paulo Alcantara <pc@cjr.nz>,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ Ronnie Sahlberg <lsahlber@redhat.com>, Steve French <sfrench@samba.org>,
+ linux-hardening@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Muhammad Usama Anjum <usama.anjum@collabora.com> writes:
-
-> smb311_decode_neg_context() can return error. Its return value should be
-> checked for errors.
+On Wed, 5 Oct 2022 at 12:31, Gustavo A. R. Silva <gustavoars@kernel.org> wrote:
 >
-> Signed-off-by: Muhammad Usama Anjum <usama.anjum@collabora.com>
+> One-element arrays are deprecated, and we are replacing them with flexible
+> array members instead. So, replace one-element arrays with flexible-array
+> member in structs negotiate_req and extended_response, and refactor the
+> rest of the code, accordingly.
+>
+> Also, make use of the DECLARE_FLEX_ARRAY() helper to declare flexible
+> array member EncryptionKey in union u. This new helper allows for
+> flexible-array members in unions.
+>
+> Change pointer notation to proper array notation in a call to memcpy()
+> where flexible-array member DialectsArray is being used as destination
+> argument.
+>
+> Important to mention is that doing a build before/after this patch results
+> in no binary output differences.
+
+Looks good to me.
+Reviewed-by me
+
+Thanks for verifying that it does not change the binary utput.
+
+>
+> This helps with the ongoing efforts to tighten the FORTIFY_SOURCE
+> routines on memcpy() and help us make progress towards globally
+> enabling -fstrict-flex-arrays=3 [1].
+>
+> Link: https://github.com/KSPP/linux/issues/79
+> Link: https://github.com/KSPP/linux/issues/229
+> Link: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=101836 [1]
+> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
 > ---
->  fs/cifs/smb2pdu.c | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
+>  fs/cifs/cifspdu.h | 7 ++++---
+>  fs/cifs/cifssmb.c | 2 +-
+>  2 files changed, 5 insertions(+), 4 deletions(-)
 >
-> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
-> index 2bf43c892ae6..c6e37352dbe1 100644
-
-This patch doesn't apply in Steve's for-next branch[1].  If it still
-makes sense, please rebase and resend.
-
-[1] git://git.samba.org/sfrench/cifs-2.6.git
+> diff --git a/fs/cifs/cifspdu.h b/fs/cifs/cifspdu.h
+> index aeba371c4c70..d1abaeea974a 100644
+> --- a/fs/cifs/cifspdu.h
+> +++ b/fs/cifs/cifspdu.h
+> @@ -483,7 +483,7 @@ put_bcc(__u16 count, struct smb_hdr *hdr)
+>  typedef struct negotiate_req {
+>         struct smb_hdr hdr;     /* wct = 0 */
+>         __le16 ByteCount;
+> -       unsigned char DialectsArray[1];
+> +       unsigned char DialectsArray[];
+>  } __attribute__((packed)) NEGOTIATE_REQ;
+>
+>  #define MIN_TZ_ADJ (15 * 60) /* minimum grid for timezones in seconds */
+> @@ -508,13 +508,14 @@ typedef struct negotiate_rsp {
+>         __u8 EncryptionKeyLength;
+>         __u16 ByteCount;
+>         union {
+> -               unsigned char EncryptionKey[1]; /* cap extended security off */
+> +               /* cap extended security off */
+> +               DECLARE_FLEX_ARRAY(unsigned char, EncryptionKey);
+>                 /* followed by Domain name - if extended security is off */
+>                 /* followed by 16 bytes of server GUID */
+>                 /* then security blob if cap_extended_security negotiated */
+>                 struct {
+>                         unsigned char GUID[SMB1_CLIENT_GUID_SIZE];
+> -                       unsigned char SecurityBlob[1];
+> +                       unsigned char SecurityBlob[];
+>                 } __attribute__((packed)) extended_response;
+>         } __attribute__((packed)) u;
+>  } __attribute__((packed)) NEGOTIATE_RSP;
+> diff --git a/fs/cifs/cifssmb.c b/fs/cifs/cifssmb.c
+> index 7aa91e272027..7a808e41b1b8 100644
+> --- a/fs/cifs/cifssmb.c
+> +++ b/fs/cifs/cifssmb.c
+> @@ -465,7 +465,7 @@ CIFSSMBNegotiate(const unsigned int xid,
+>         for (i = 0; i < CIFS_NUM_PROT; i++) {
+>                 size_t len = strlen(protocols[i].name) + 1;
+>
+> -               memcpy(pSMB->DialectsArray+count, protocols[i].name, len);
+> +               memcpy(&pSMB->DialectsArray[count], protocols[i].name, len);
+>                 count += len;
+>         }
+>         inc_rfc1001_len(pSMB, count);
+> --
+> 2.34.1
+>
 
