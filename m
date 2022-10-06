@@ -2,48 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D88595F6D43
-	for <lists+samba-technical@lfdr.de>; Thu,  6 Oct 2022 19:56:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E91195F6D6D
+	for <lists+samba-technical@lfdr.de>; Thu,  6 Oct 2022 20:19:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=ivdOJ7Ipa1WnMQ2q5ZQsUkwP+k/B7aaCCCWNmcQa5UE=; b=4aPiAFTUsvROzMLoQYwxM9a2rI
-	oDZGjg0LVv28YwGQUqFx9atvwxTc2VW5SE6YxY2LpHF4Cz9o6rMxiANcEjY3Lu0xZIAIuEp0iko28
-	b4szqad0PFwZd5BKQA2SHfDtyoiYvpEyL/hJlpUQ6I8H7a+ecuaqqC3Slx+xDIWvn0ArPBPqgUh9k
-	FZlTNMQKr0CGONFqzX0MxpQWTUTjSFgwjvWOdjo7xsxDwiw7uPiS7kOv88GEEp8T7Wqqd32v7gDX8
-	rjlDe+v+T7A0IVhW1+CSKW4g3eHoOW+Qrlb3MBkNJbTvouIRZoaVxJIuSMNhGiKa52OVYf4knFAKh
-	wpC33+Jw==;
-Received: from ip6-localhost ([::1]:27500 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=lZAn0nc20ZSyu2thsRn/Tj7cNaQyvi2UZJAOsvF4BlQ=; b=Eu0X/HEZWYyG7Rhhm2FYdXf5EI
+	ac4M5SxTuykWVPv+pmegmvQ+ESP1zlVw3cAKTMx5v8dNO67iXHhmGIP090Lx9TOfwestWsmXFvT2m
+	yE6S2dLYw8+cGnQDNFCzSBILmeBs4h4t5yTwTMbBqGg2i0xf6Q0nb2ymvk+vFLbQV9mIgeK4EDQTO
+	RYWrg8OH1kmrf1cny8BVxAgC8+ZQBFYY67ihdcFv3DJ9FKKCljVP44Z1x/oCj8iSXobl35qPYlcFZ
+	ofk4J+4p0uM+ICxrN4vjuAGe0R4ky2dLyF5aQW/fBh9VnG8ZDIkJHXM3QcVuBQIZCkgQGPfTkvnFD
+	tCiYV04Q==;
+Received: from ip6-localhost ([::1]:63722 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ogV5j-000G9R-EK; Thu, 06 Oct 2022 17:55:27 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:52130) 
+	id 1ogVTG-000HJm-N8; Thu, 06 Oct 2022 18:19:46 +0000
+Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b]:39508) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ogV5c-000G9I-Ax
- for samba-technical@lists.samba.org; Thu, 06 Oct 2022 17:55:25 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=ivdOJ7Ipa1WnMQ2q5ZQsUkwP+k/B7aaCCCWNmcQa5UE=; b=TjwFTwedg3dBUBUmrn4GY6I33P
- sGCrYLT+92NaTTWJX10EXcEQA8x8uFGfwkQ3wbhOgReqq3mV00no1b+5y6n0CB7ZF6lbwffLF/oBi
- 4XyDKH+Z25PqLxoB+piMPzl4qldZ+Hj3ODJh/Qdkd9Zuh7yWlq46eYg1IVJHnNRITGi5JI6J02Aab
- wajDEszCVKCMYESpcKJ1oIGI80JbB0kiHXlfzgRe6D665BEP79pEgrcSUVjoUOGNw/p0do5QDKYTh
- N2B76s4U16GZVOFAkqdaKPMs5RbDjclr8zkznSjPBcIK51bNwU8xKvfbYoZBzBNVTNbXHO0WyI8oq
- vdCPgniLT6Izd4PNiAz52As0juARAk23NHQJlATCXfl2k884+BwgoCxoT4/G/8yP9s6ZGMs1ho7V3
- cp/AoxXUNmKV3lae5LKq54Un4blTV83ze/No4azDGUHQXybFsDb3N8azSVaE4FPONlwsAyJtkpp81
- 8CJD9lp/H84CQyqDZ0LtbFM6;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ogV5V-003GoY-3Y; Thu, 06 Oct 2022 17:55:13 +0000
-Date: Thu, 6 Oct 2022 10:55:10 -0700
-To: Andrew Walker <awalker@ixsystems.com>
-Subject: Re: vfs_crossrename not working in samba-4.15.*
-Message-ID: <Yz8WfqhSldLLC7RX@jeremy-acer>
-References: <8fbdc4c2-09db-3032-38c4-1608aae5e7f9@samba.org>
- <CAB5c7xrru41LZs76Qy9wdT6gXbWkWsEi9oyzKMY_Ux_eqw+LgQ@mail.gmail.com>
+ (Exim) id 1ogVTB-000HJd-Dc
+ for samba-technical@lists.samba.org; Thu, 06 Oct 2022 18:19:43 +0000
+Received: by mail-vs1-xe2b.google.com with SMTP id d187so2835275vsd.6
+ for <samba-technical@lists.samba.org>; Thu, 06 Oct 2022 11:19:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date; bh=lZAn0nc20ZSyu2thsRn/Tj7cNaQyvi2UZJAOsvF4BlQ=;
+ b=daGdrzrc5o5rRc5vGwqSwIeYm7Mh1AZPs0ePiUur68WtEzHBcIhLpPaJtCLqBbBuM7
+ 4qtpTomSrvmIXsREz+y0Z6/XRuHKpCO4rAKUZKl9cEBx5tEvV/mDhs3g+7ERCBg0vRsf
+ nlCkJiFFxzkbMmkmHO/QqkXmSvbVxK5SBhXFgMPYJX37CuzZ8SvobF1bkPimRDckXk7C
+ MrulpME8IKzrnUBKjdaklB8j/3WSFl9mEyeYiJgYRXdh0UXkwUTS9BGGKueuOPsfPlsf
+ iXo57iwc838tM+ulwWFZNzKGOdPvIyH7girRGj954WxCTiAlAYrekLuq4lTpa9Kj3qYt
+ TFZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date;
+ bh=lZAn0nc20ZSyu2thsRn/Tj7cNaQyvi2UZJAOsvF4BlQ=;
+ b=YFUINg1ybekITo6D4bmaeYVPCbXWk7m27Bgih1jhQkUq4/9Q3xNMEOreTUgPTd2TZ8
+ WMUeoQPHujvaV5vPhlIxbI1Zu6JuM0zS83c2sP6VIzcPnD5uSO/vL8MYlahnODt5muKg
+ bEj17h5wRSGgJcCIN3X1DEA/zhVI5jL9BorH+mJ5sPv8zfjP6I06geaUHdRXxbcwDRl2
+ ahKKLROWTK1ujkA6OVE/sedhzcbRWDXTBHFi9vVFr0b7+8SvSuPAAEsGJa4nJIJr5NSk
+ TsdIN2d/C6iE/3HXIHK0J61Oz+djo+iOMA+iJOJXVqKmszoQ7P8vOjlbSu/+/psvpq+v
+ WDqg==
+X-Gm-Message-State: ACrzQf3KSHUADwHNHSttCI8JfnHkbAbJKllTEJ1QyvDg9CMErFZDktDj
+ HmdC2NpnooLHweHJYDG4zSYNclzrtNYzeTFCdC4wzt8LI0w=
+X-Google-Smtp-Source: AMsMyM6LYZHChCSVA4dq/kWFMPqdj1yU9NVfw9/LfL+G6tUmcWQr9ydPOFLl4HZLj33v/3O5XKIqdCOZeoPfa6b8wFw=
+X-Received: by 2002:a67:f603:0:b0:3a6:ff45:997e with SMTP id
+ k3-20020a67f603000000b003a6ff45997emr877666vso.6.1665080379233; Thu, 06 Oct
+ 2022 11:19:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAB5c7xrru41LZs76Qy9wdT6gXbWkWsEi9oyzKMY_Ux_eqw+LgQ@mail.gmail.com>
+Date: Thu, 6 Oct 2022 13:19:28 -0500
+Message-ID: <CAH2r5mtt7TCJJ12nzSF3NeZpBwV9wbu03N4amGhhY7mGL90T2g@mail.gmail.com>
+Subject: missing multichannel crediting patch in Linux client
+To: samba-technical <samba-technical@lists.samba.org>,
+ CIFS <linux-cifs@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,255 +67,38 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org,
- Pavel =?iso-8859-1?Q?Filipensk=FD?= <pfilipensky@samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: Shyam Prasad N <nspmangalore@gmail.com>,
+ =?UTF-8?Q?Aur=C3=A9lien_Aptel?= <aaptel@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Oct 06, 2022 at 10:40:57AM -0400, Andrew Walker via samba-technical wrote:
->On Thu, Oct 6, 2022 at 10:28 AM Pavel Filipenský via samba-technical <
->samba-technical@lists.samba.org> wrote:
->
->> Hi,
->>
->> I am working on a fix for RH bugzillahttps://
->> bugzilla.redhat.com/show_bug.cgi?id=2125339
->>
->> If the share is using vfs_recycle and vfs_crossrename modules and the
->> recycle repo is on a different filesystem, like here:
->>
->> vfs objects = recycle crossrename
->> recycle:repository = /different_filesystem/
->>
->> The deleted file should be moved to /different_filesystem/recycle, but it
->> fails. Since this is a different fs, we cannot use
->>
->> rename("File", "/different_filesystem/recycle/File")
->>
->> but instead samba code uses two syscalls:
->>
->> unlink("/different_filesystem/recycle/File")
->> openat(AT_FDCWD, "/different_filesystem/recycle/File", O_CREAT, 0600)
->>
->> Normally, the destination file "/different_filesystem/recycle/File" does
->> not exist and unlink() fails with ENOENT. This is correctly handled in
->> samba-4.12:
->>
->>
->>   51 static int copy_reg(const char *source, const char *dest)
->>   52 {
->> ...
->>   76 »···if (unlink (dest) && errno != ENOENT) {
->>   77 »···»···close(ifd);
->>   78 »···»···return -1;
->>   79 »···}
->>
->> But newer versions of samba miss the check for ENOENT and the operation
->> fails, doing map_nt_error_from_unix(errno). I have tried to the same fix,
->> and added to copy_reg() this:
->>
->> -       if (ret == -1) {
->> +       if (ret == -1 && errno != ENOENT) {
->>                  status = map_nt_error_from_unix(errno);
->>                  goto out;
->>          }
->>
->> Unfortunately, it does not work. It causes this panic:
->>
->>
->>
->> Program received signal SIGABRT, Aborted.
->> __pthread_kill_implementation (threadid=<optimized out>, signo=signo@entry=6,
->> no_tid=no_tid@entry=0) at pthread_kill.c:44
->> 44»·      return INTERNAL_SYSCALL_ERROR_P (ret) ? INTERNAL_SYSCALL_ERRNO
->> (ret) : 0;
->> #0  __pthread_kill_implementation (threadid=<optimized out>,
->> signo=signo@entry=6, no_tid=no_tid@entry=0) at pthread_kill.c:44
->> #1  0x00007fc04abb7cb3 in __pthread_kill_internal (signo=6,
->> threadid=<optimized out>) at pthread_kill.c:78
->> #2  0x00007fc04ab679c6 in __GI_raise (sig=sig@entry=6) at
->> ../sysdeps/posix/raise.c:26
->> #3  0x00007fc04ab517f4 in __GI_abort () at abort.c:79
->> #4  0x00007fc04b076bfa in dump_core () at ../../source3/lib/dumpcore.c:338
->> #5  0x00007fc04b088661 in smb_panic_s3 (why=0x7fc04b311928 "assert failed:
->> share_mode_lock_key_refcount == 0") at ../../source3/lib/util.c:713
->> #6  0x00007fc04ad7c9a1 in smb_panic (why=0x7fc04b311928 "assert failed:
->> share_mode_lock_key_refcount == 0") at ../../lib/util/fault.c:198
->> #7  0x00007fc04b1bfd7a in _share_mode_entry_prepare_lock
->> (prepare_state=0x7fffa9900f60, id=..., servicepath=0x565379144e10
->> "/home/pfilipen/workspace/projects/samba/2571/st/ad_member/share",
->>      smb_fname=0x565379162da0, old_write_time=0x7fffa9900eb0,
->> fn=0x7fc04b2145d9 <open_ntcreate_lock_add_entry>,
->> private_data=0x7fffa9900f60, location=0x7fc04b32c0f0
->> "../../source3/smbd/open.c:4342")
->>      at ../../source3/locking/share_mode_lock.c:3010
->> #8  0x00007fc04b215b14 in open_file_ntcreate (conn=0x5653790d46b0,
->> req=0x0, access_mask=137, share_access=7, create_disposition=1,
->> create_options=0, new_dos_attributes=0, oplock_request=8, lease=0x0,
->>      private_flags=0, parent_dir_fname=0x5653790019b0,
->> smb_fname_atname=0x565379156ec0, pinfo=0x7fffa990111c, fsp=0x565379162bc0)
->> at ../../source3/smbd/open.c:4342
->> #9  0x00007fc04b21a8c8 in create_file_unixpath (conn=0x5653790d46b0,
->> req=0x0, dirfsp=0x56537905a9d0, smb_fname=0x5653791497d0, access_mask=137,
->> share_access=7, create_disposition=1, create_options=0,
->>      file_attributes=128, oplock_request=8, lease=0x0, allocation_size=0,
->> private_flags=0, sd=0x0, ea_list=0x0, result=0x7fffa99012e0,
->> pinfo=0x7fffa99012ec) at ../../source3/smbd/open.c:6337
->> #10 0x00007fc04b21b4ae in create_file_default (conn=0x5653790d46b0,
->> req=0x0, dirfsp=0x56537905a9d0, smb_fname=0x5653791497d0, access_mask=137,
->> share_access=7, create_disposition=1, create_options=0,
->>      file_attributes=128, oplock_request=0, lease=0x0, allocation_size=0,
->> private_flags=0, sd=0x0, ea_list=0x0, result=0x7fffa9901548,
->> pinfo=0x7fffa990153c, in_context_blobs=0x0, out_context_blobs=0x0)
->>      at ../../source3/smbd/open.c:6656
->> #11 0x00007fc04b1cb932 in vfswrap_create_file (handle=0x565379152be0,
->> req=0x0, dirfsp=0x56537905a9d0, smb_fname=0x5653791497d0, access_mask=137,
->> share_access=7, create_disposition=1, create_options=0,
->>      file_attributes=128, oplock_request=0, lease=0x0, allocation_size=0,
->> private_flags=0, sd=0x0, ea_list=0x0, result=0x7fffa9901548,
->> pinfo=0x7fffa990153c, in_context_blobs=0x0, out_context_blobs=0x0)
->>      at ../../source3/modules/vfs_default.c:827
->> #12 0x00007fc04b227e43 in smb_vfs_call_create_file (handle=0x565379152be0,
->> req=0x0, dirfsp=0x56537905a9d0, smb_fname=0x5653791497d0, access_mask=137,
->> share_access=7, create_disposition=1, create_options=0,
->>      file_attributes=128, oplock_request=0, lease=0x0, allocation_size=0,
->> private_flags=0, sd=0x0, ea_list=0x0, result=0x7fffa9901548,
->> pinfo=0x7fffa990153c, in_context_blobs=0x0, out_context_blobs=0x0)
->>      at ../../source3/smbd/vfs.c:1576
->> #13 0x00007fc04b1e4b77 in copy_internals (ctx=0x5653790e1330,
->> conn=0x5653790d46b0, req=0x0, src_dirfsp=0x56537905a9d0,
->> smb_fname_src=0x5653791497d0, dst_dirfsp=0x5653790d4aa0,
->> smb_fname_dst=0x565379162700,
->>      attrs=6) at ../../source3/smbd/smb2_nttrans.c:248
->> #14 0x00007fc0365e4060 in copy_reg (handle=0x565379148050,
->> srcfsp=0x56537905a9d0, source=0x565379155650, dstfsp=0x5653790d4aa0,
->> dest=0x5653790e28e0) at ../../source3/modules/vfs_crossrename.c:115
->> #15 0x00007fc0365e41aa in crossrename_renameat (handle=0x565379148050,
->> srcfsp=0x56537905a9d0, smb_fname_src=0x565379155650, dstfsp=0x5653790d4aa0,
->> smb_fname_dst=0x5653790e28e0)
->>      at ../../source3/modules/vfs_crossrename.c:166
->> #16 0x00007fc04b228c91 in smb_vfs_call_renameat (handle=0x565379148050,
->> srcfsp=0x56537905a9d0, smb_fname_src=0x565379155650, dstfsp=0x5653790d4aa0,
->> smb_fname_dst=0x5653790e28e0) at ../../source3/smbd/vfs.c:1775
->> #17 0x00007fc0365ded2f in recycle_unlink_internal (handle=0x565379148680,
->> dirfsp=0x56537905a9d0, smb_fname=0x565379155650, flags=0) at
->> ../../source3/modules/vfs_recycle.c:690
->> #18 0x00007fc0365defaa in recycle_unlinkat (handle=0x565379148680,
->> dirfsp=0x56537905a9d0, smb_fname=0x565379155650, flags=0) at
->> ../../source3/modules/vfs_recycle.c:735
->> #19 0x00007fc04b2296fe in smb_vfs_call_unlinkat (handle=0x565379148680,
->> dirfsp=0x56537905a9d0, smb_fname=0x565379155650, flags=0) at
->> ../../source3/smbd/vfs.c:1932
->> #20 0x00007fc04b21d106 in close_remove_share_mode (fsp=0x565379152c80,
->> close_type=NORMAL_CLOSE) at ../../source3/smbd/close.c:581
->> #21 0x00007fc04b21dcf2 in close_normal_file (req=0x5653790ce430,
->> fsp=0x565379152c80, close_type=NORMAL_CLOSE) at
->> ../../source3/smbd/close.c:910
->> #22 0x00007fc04b22061c in close_file_smb (req=0x5653790ce430,
->> fsp=0x565379152c80, close_type=NORMAL_CLOSE) at
->> ../../source3/smbd/close.c:1663
->>
->>
->> The cause of the panic is  "assert failed: share_mode_lock_key_refcount ==
->> 0" in source3/locking/share_mode_lock.c:3010
->> The share_mode_lock_key_refcount is already 1, the first reference is
->> taken here:
->>
->> Hardware watchpoint 2: share_mode_lock_key_refcount
->> Old value = 0
->> New value = 1
->> get_share_mode_lock_internal (id=..., servicepath=0x0, smb_fname=0x0,
->> old_write_time=0x0, lck=0x7fffa9901980) at
->> ../../source3/locking/share_mode_lock.c:972
->> 972»»···if (static_share_mode_data != NULL) {
->> #0  get_share_mode_lock_internal (id=..., servicepath=0x0, smb_fname=0x0,
->> old_write_time=0x0, lck=0x7fffa9901980) at
->> ../../source3/locking/share_mode_lock.c:972
->> #1  0x00007fc04b1bfa24 in share_mode_entry_prepare_lock_fn
->> (glck=0x7fffa9901190, cb_private=0x7fffa9901760) at
->> ../../source3/locking/share_mode_lock.c:2952
->> #2  0x00007fc04b05c7d2 in g_lock_lock_cb_run_and_store
->> (cb_state=0x7fffa9901190) at ../../source3/lib/g_lock.c:597
->> #3  0x00007fc04b05e8c1 in g_lock_lock_simple_fn (rec=0x7fffa99014a0,
->> value=..., private_data=0x7fffa9901630) at ../../source3/lib/g_lock.c:1212
->> #4  0x00007fc04b05833d in dbwrap_watched_do_locked_fn
->> (backend_rec=0x7fffa9901350, backend_value=...,
->> private_data=0x7fffa9901470) at ../../source3/lib/dbwrap/dbwrap_watch.c:458
->> #5  0x00007fc04aa33e44 in db_tdb_do_locked (db=0x5653790ca050, key=...,
->> fn=0x7fc04b0582ab <dbwrap_watched_do_locked_fn>,
->> private_data=0x7fffa9901470) at ../../lib/dbwrap/dbwrap_tdb.c:208
->> #6  0x00007fc04aa304db in dbwrap_do_locked (db=0x5653790ca050, key=...,
->> fn=0x7fc04b0582ab <dbwrap_watched_do_locked_fn>,
->> private_data=0x7fffa9901470) at ../../lib/dbwrap/dbwrap.c:553
->> #7  0x00007fc04b058435 in dbwrap_watched_do_locked (db=0x5653790cf910,
->> key=..., fn=0x7fc04b05e4fa <g_lock_lock_simple_fn>,
->> private_data=0x7fffa9901630) at ../../source3/lib/dbwrap/dbwrap_watch.c:480
->> #8  0x00007fc04aa304db in dbwrap_do_locked (db=0x5653790cf910, key=...,
->> fn=0x7fc04b05e4fa <g_lock_lock_simple_fn>, private_data=0x7fffa9901630) at
->> ../../lib/dbwrap/dbwrap.c:553
->> #9  0x00007fc04b05eb28 in g_lock_lock (ctx=0x565379020280, key=...,
->> type=G_LOCK_WRITE, timeout=..., cb_fn=0x7fc04b1bf90d
->> <share_mode_entry_prepare_lock_fn>, cb_private=0x7fffa9901760) at
->> ../../source3/lib/g_loc…
->> #10 0x00007fc04b1bfe1c in _share_mode_entry_prepare_lock
->> (prepare_state=0x7fffa9901960, id=..., servicepath=0x0, smb_fname=0x0,
->> old_write_time=0x0, fn=0x7fc04b21c0b5 <close_share_mode_lock_prepare>,
->> private_dat…
->> #11 0x00007fc04b21c99b in close_remove_share_mode (fsp=0x565379152c80,
->> close_type=NORMAL_CLOSE) at ../../source3/smbd/close.c:451
->> #12 0x00007fc04b21dcf2 in close_normal_file (req=0x5653790ce430,
->> fsp=0x565379152c80, close_type=NORMAL_CLOSE) at
->> ../../source3/smbd/close.c:910
->> #13 0x00007fc04b22061c in close_file_smb (req=0x5653790ce430,
->> fsp=0x565379152c80, close_type=NORMAL_CLOSE) at
->> ../../source3/smbd/close.c:1663
->>
->>
->> So the issue comes from the logic in close_remove_share_mode()
->>
->> static NTSTATUS close_remove_share_mode(files_struct *fsp, enum
->> file_close_type close_type)
->> {
->>         status =
->> share_mode_entry_prepare_lock_del(&lck_state.prepare_state,
->>
->>         ret = SMB_VFS_UNLINKAT(conn,
->>
->>         ulstatus =
->> share_mode_entry_prepare_unlock(&lck_state.prepare_state,
->> }
->>
->> Each process can hold just one share_mode_lock_key_refcount, but here we
->> have two nested calls, both grabbing share_mode_lock_key_refcount:
->> 1. share_mode_entry_prepare_lock_del()
->> 2. SMB_VFS_UNLINKAT() -> recycle_unlink_internal() ->
->> crossrename_renameat() -> open_file_ntcreate() ->
->> _share_mode_entry_prepare_lock()
->>
->>
->>
->> How this should be fixed? Can we remove the assert and allow to grab the
->> share_mode_lock_key_refcount
->>   again give the owner is the process itself?
->>
->>
->> Thanks,
->> Pavel
->>
->
->Perhaps instead of layering the recyclebin over vfs_crossrename, we should
->generate separate recyclebins at filesystem mountpoints when the SMB
->share contains nested ones?
->
->This would preserve atomicity of the rename operation and would avoid
->exposing users to limits of vfs_crossrename (e.g. purging of files that
->exceed the cross-rename limit -- which is a pretty significant POLA
->violation).
->
->If we want to go this route, I can make a merge request to add it (since I
->already have POC code to do this).
+Was looking through old patches and noticed one from Aurelien that
+looks important but didn't seem to get incorporated into the current
+pick_channel code on the client.
+It looks like without this patch we could have cases where we assigned
+requests to a channel which was out of credits rather than one with
+enough credits.
+round robin channel allocation is probably fine for many cases except
+when other channels have more credits and this channel is short of
+credits.  Thoughts?
+It might explain some of the perf problems we see with multichannel
+not scaling as well as expected on some workloads
 
-That sounds like a plan to me ! Can we see the MR request ?
+"Subject: [PATCH] cifs: try to pick channel with a minimum of credits
+
+Check channel credits to prevent the client from using a starved
+channel that cannot send anything.
+
+Special care must be taken in selecting the minimum value: when
+channels are created they start off with a small amount that slowly
+ramps up as the channel gets used. Thus a new channel might never be
+picked if the min value is too big.
+
+
+-- 
+Thanks,
+
+Steve
 
