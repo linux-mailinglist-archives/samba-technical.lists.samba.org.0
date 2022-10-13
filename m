@@ -2,68 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id B702F5FBFE9
-	for <lists+samba-technical@lfdr.de>; Wed, 12 Oct 2022 06:33:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F5175FDD1A
+	for <lists+samba-technical@lfdr.de>; Thu, 13 Oct 2022 17:24:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Di8xCF6TO0Gd3i2FmdDYcyv6RFWtKtZLf8fTnEOU/Bk=; b=10WeUWSgLMhUBfjxTs28f2VETq
-	oDo+SU/RKahQDegw5X0kAYprwG2kzw6DmkBFMp/3LuBnRPlyQFvOaYtsp7/vwMB23MtrpFnKpZYGD
-	X3D7kG7H7CnEUg4b+GBGX10JWr9snICT5c/LjwoNtBC7ziQUUfHO7XIGarGrshBYjfxmJL1lXxPF9
-	pbFNqoD7AbQ2BKMaVCKjdJIOQqsONzZ+TtPvurfqjZ1Cdhyvfn64t4cazkNzv2PAnC6J5LvSdMrtZ
-	AetP9/6DETgy4WYJ5gh6Ra/9nqpFclfu+vsQnZ09IVA/yk0nsIKNeW8ZvBmx92F77NyW+wzMyFz2X
-	pk4OcLtw==;
-Received: from ip6-localhost ([::1]:19808 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=MqNULQAwKFFnO+2ZcbX2Lxpk4IWGQUP+XxkVoou8oMo=; b=ZF41thH8MEy2wM8fKxjmTFs45y
+	oL7/HvNDlmmcmg/YxUu83EXTGSIlPZxN1llAdINxSXGjSfyQ24eH41JgKatuwG6yrOpjOgAFx5Nuq
+	9Z6pqYTDv+kSF6ENuMWMuKEgobsz/m7cYsLrIwdkThDegrvuQA/d09ef/fZ3e6M2VqQB2w8PduoMV
+	PtwWrdxrJ0GzcrIfGLH11Ti+QmnhLxtZ7cXYBwBqBVHKMDYypb8Ffbz5ASaMXIHQC6aMNi9xHk//c
+	V3MReK87ExDR5MsPoKr+8JyVKs5x0znPSz7oRp7IQPP/lTM8x98YyeqGQu0JIA2gQtjRl7tXRaQZe
+	opffwWWQ==;
+Received: from ip6-localhost ([::1]:20776 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oiTQd-001ObP-FG; Wed, 12 Oct 2022 04:33:11 +0000
-Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f]:39679) 
+	id 1oj03Y-001vAn-RP; Thu, 13 Oct 2022 15:23:32 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18456) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oiTQW-001ObG-B5
- for samba-technical@lists.samba.org; Wed, 12 Oct 2022 04:33:08 +0000
-Received: by mail-vk1-xa2f.google.com with SMTP id e5so7614877vkg.6
- for <samba-technical@lists.samba.org>; Tue, 11 Oct 2022 21:32:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Di8xCF6TO0Gd3i2FmdDYcyv6RFWtKtZLf8fTnEOU/Bk=;
- b=ju/EJA5Z8QcNY+fxSb7zY94rmJPwUzftKPnZzkiotY5cNUBsBKpHmVdjztm+nwhEJD
- TuPFxs//UYKkdmLGgAo9g/Cl16lJhiYKkUwmYQ5t0GPDAC6/S2rTTmtyFzENyEgZ+CEJ
- yBJzHVaxLPKvXBfeSXDDrC4NnvP+t6abbRFnujz9aoqdopvLV+Zqs+X9DKFquiQ8paSL
- /zBMcicDBKo4SuBMMAoaBhcSGYTOu9jYONUEpIkGVOp3W0ey5i9k4Civyi3BlLCm66xl
- RtV0NySchedEYXQYvTngGoqxP0HVFcJu0FNGnF6L7G4c9fqVaXFZtXGY0bn5bebI4xOt
- mDPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Di8xCF6TO0Gd3i2FmdDYcyv6RFWtKtZLf8fTnEOU/Bk=;
- b=PFhJRyK3NrMgnnTCQAqLsaxPTdb9ZFol5UkX9cBMCkNJ45/+qxIKkVkxwYDMy7MU/c
- 2pdfEIcc3HTMCc+F1w83rk2zNAhhmIw0Xy2nbPXDL7AG6g2lgL8GtJ84pU1jef/1CWO1
- hd46Yq9Kmfr29YXjTFpSnXKHp7pK3k+esYneM6sn7IEgDuaXaPqz1k21r45UehZRON2n
- 6mdkPqcVxEwvwwLNDQBXv3DozXrW9Ki8KWAg8K7Ts6N5+QCT+tz3a7DtKH9Si5XBWYx8
- n51fFKiuVES8VjucY51x7Z1lGVL0r5AADUAttxBUuQvUyZlvze6ggY233A9h+FOoTl7J
- CKkQ==
-X-Gm-Message-State: ACrzQf2FHevVgQ28LjpNAQya37V7R5sGfyd9CWVNXQoUFXwbkWHBLpOt
- 1HQs6iy8VwOS3loHu9p3wcWn9hX4o3ouDrjuEqM=
-X-Google-Smtp-Source: AMsMyM7+faC63KBJnCY6qH9SBk/LOSzE76EXO6NwcTsW4zjhCOUZyJWpJbGV1yY9Mai00VwmYxw1Av92i0IyaL1zx9Q=
-X-Received: by 2002:a1f:d583:0:b0:3aa:9112:570f with SMTP id
- m125-20020a1fd583000000b003aa9112570fmr12451017vkg.3.1665549173606; Tue, 11
- Oct 2022 21:32:53 -0700 (PDT)
+ (Exim) id 1oj03R-001vAL-5o
+ for samba-technical@lists.samba.org; Thu, 13 Oct 2022 15:23:29 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=MqNULQAwKFFnO+2ZcbX2Lxpk4IWGQUP+XxkVoou8oMo=; b=kIrluOdLoULmZ0wqqbdG/oR9bz
+ dU0vIFcpWkmI0vUkANwjQQooLqsNGlJgIZV5iU5k+lSmx8AHqvTg4UDBfdA7ZO2IbGFpoYaDPxYaL
+ 8rHTpVhpuJWe7m6YSAGMKq4R80muCAB/YYVQgKo9vjepgOyO1+ra7Z8VS3+6MF8mtUdo5Urk039He
+ ij3YGsRJv4vvVNcbRx6arGr47XRaCFa7HuBNmaBtOP3N2TR1VLXjCBRPwNRA+IdIiLfJo9O4zUL3q
+ 0qylvs3/v1EN/918dXI58WuU+4/IvlTVKTcCGB9qC1mi7pKl8X5I2QbxgAuYs7k0QMBkKpaAW2610
+ X5VH4iGrR7c+YOVqMwqmqq/Ghthi7ts8MRseX72FzgXtcvd2f2KNE7Cyrkz8XCOYRKIkW6fe3zfSR
+ gDLK95gntDb3fzaLnumiWF5xxkEhq/jO3vE1wz3MPvLvkdS8xEsW8ikZOuxUcL1pMvYZ7IHkETJda
+ lAT2qtGgjTlr1DYUlmgnEtPo;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1oj03H-0047QF-MA; Thu, 13 Oct 2022 15:23:15 +0000
+Message-ID: <35d239c7-86c6-dccd-815f-0a4c771204c3@samba.org>
+Date: Thu, 13 Oct 2022 17:23:14 +0200
 MIME-Version: 1.0
-References: <CAH2r5mvS6_AXjbK8sY_dEWUbmtRjodSYEtxeNz_NST9+EyC96A@mail.gmail.com>
- <df473fde-e79d-ae90-37bb-3a3869d3aa9a@talpey.com>
- <CAH2r5msDX4eaGuyine__ePtOTRoSBDjiUN_dthaHpiA9UKm0yg@mail.gmail.com>
- <d7bf66c8-0695-a239-4bfb-d234241479ac@talpey.com>
- <CAH2r5mtyshZWxN9nycxyu-_mDsJBkmFP_JMJZCm5RL_FP+3bmA@mail.gmail.com>
- <CAH2r5muv++9HAyCMfxuez8DakR=1-kkGYpGNVF=TE86FvsUkBA@mail.gmail.com>
- <f2452332-c85b-ef7d-7f96-de097e0594b0@talpey.com>
-In-Reply-To: <f2452332-c85b-ef7d-7f96-de097e0594b0@talpey.com>
-Date: Tue, 11 Oct 2022 23:32:42 -0500
-Message-ID: <CAH2r5muOo4yq9aQpxO_UQhDe79brJ7O8fEW+73cEKPv-OOHDJQ@mail.gmail.com>
-Subject: Re: [PATCH][smb3 client] log less confusing message on multichannel
- mounts to Samba when no interfaces returned
-To: Tom Talpey <tom@talpey.com>
-Content-Type: multipart/mixed; boundary="000000000000d9a75f05eacee28a"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+To: Andrew Bartlett <abartlet@samba.org>,
+ ronnie sahlberg <ronniesahlberg@gmail.com>,
+ Isaac Boukris <iboukris@samba.org>
+References: <d0c713564b3c9f848bab99ba74f3ce79a5add2f6.camel@samba.org>
+ <0fdfd28f916f5260e99c7b6463eb37080e129fa6.camel@samba.org>
+ <CAN05THTFo3rKAahxaK9U44NO8K4YNROFUmHS3WyQ7QqwXeeZFw@mail.gmail.com>
+ <4f5684e9-81b3-f602-d5f5-f2ed3e312b03@samba.org>
+ <bfbb1347-be6e-a7c8-497a-f8a08248cdc0@samba.org>
+ <54c46768-ff78-f9ed-fab5-da20d79ce31e@samba.org>
+ <724a820463e6b68137a06d4c8b6ae962c236aa81.camel@samba.org>
+Content-Language: en-US
+Subject: Re: How to detect a client-closed connection during a write from our
+ LDAP server?
+In-Reply-To: <724a820463e6b68137a06d4c8b6ae962c236aa81.camel@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,162 +67,159 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000d9a75f05eacee28a
-Content-Type: text/plain; charset="UTF-8"
+Hi Andrew,
 
-message updated as suggested
-
-    multichannel not available
-    empty network interface returned by server localhost
-
-See attached
-
-On Tue, Oct 11, 2022 at 2:40 PM Tom Talpey <tom@talpey.com> wrote:
->
-> In the patch:
->
-> > +     /*
-> > +      * Samba server e.g. can return an empty interface list in some cases,
-> > +      * which would only be a problem if we were requesting multichannel
-> > +      */
-> > +     if (bytes_left == 0) {
-> > +             /* avoid spamming logs every 10 minutes, so log only in mount */
-> > +             if ((ses->chan_max > 1) && in_mount)
-> > +                     cifs_dbg(VFS,
-> > +                              "empty network interface list returned by server %s\n",
-> > +                              ses->server->hostname);
-> > +             rc = -EINVAL;
-> > +             goto out;
-> > +     }
->
->
->
-> This logs the server name, but it might be confusing to the
-> admin since the mount does not actually fail. Perhaps add some
-> words to the effect of "multichannel not available"?
->
-> Acked-by: Tom Talpey <tom@talpey.com>
->
-> On 10/3/2022 6:36 PM, Steve French wrote:
-> > attached wrong patch - resending
-> >
-> >
-> > On Mon, Oct 3, 2022 at 5:32 PM Steve French <smfrench@gmail.com> wrote:
-> >>
-> >> updated patch to:
-> >> 1) log the server name for this message
-> >> 2) only log on mount (not every ten minutes)
-> >>
-> >> See attached
-> >>
-> >> On Mon, Oct 3, 2022 at 9:21 AM Tom Talpey <tom@talpey.com> wrote:
-> >>>
-> >>> On 10/3/2022 12:38 AM, Steve French wrote:
-> >>>> On Sat, Oct 1, 2022 at 6:22 PM Tom Talpey <tom@talpey.com> wrote:
-> >>>>>
-> >>>>> On 10/1/2022 12:54 PM, Steve French wrote:
-> >>>>>> Some servers can return an empty network interface list so, unless
-> >>>>>> multichannel is requested, no need to log an error for this, and
-> >>>>>> when multichannel is requested on mount but no interfaces, log
-> >>>>>> something less confusing.  For this case change
-> >>>>>>       parse_server_interfaces: malformed interface info
-> >>>>>> to
-> >>>>>>       empty network interface list returned by server
-> >>>>>
-> >>>>> Will this spam the log if it happens on every MC refresh (10 mins)?
-> >>>>> It might be helpful to identify the servername, too.
-> >>>>
-> >>>> Yes - I just noticed that in this case (multichannel mount to Samba
-> >>>> where no valid interfaces) we log it every ten minutes.
-> >>>> Maybe best way to fix this is to change it to a log once error (with
-> >>>> server name is fine with me) since it is probably legal to return an
-> >>>> empty list (so not serious enough to be worth logging every ten
-> >>>> minutes) and in theory server could fix its interfaces later.
-> >>>
-> >>> Ten minutes is the default recommended polling interval in the doc.
-> >>>
-> >>> While it's odd, it's not prevented by the protocol. I could guess
-> >>> that a server running in a namespace might return strange things
-> >>> as devices came and went, for example.
-> >>>
-> >>> It's not an error, so the message is purely informational. It is
-> >>> useful though. Is it possible to suppress the logging if the
-> >>> message *doesn't* change, but otherwise emit new ones? That might
-> >>> require some per-server fiddling to avoid multiple servers flipping
-> >>> the message.
-> >>>
-> >>> A boolean or bit in the server struct? A little ugly for the purpose,
-> >>> but surfacing multichannel events - especially ones that prevent it
-> >>> from happening - seems worthwhile.
-> >>>
-> >>> Tom.
-> >>>
-> >>>
-> >>> Tom.
-> >>>
-> >>>
-> >>>>>> Cc: <stable@vger.kernel.org>
-> >>>>>> Signed-off-by: Steve French <stfrench@microsoft.com>
-> >>>>>>
-> >>>>>> See attached patch
-> >>>>>>
-> >>>>
-> >>>>
-> >>>>
-> >>
-> >>
-> >>
-> >> --
-> >> Thanks,
-> >>
-> >> Steve
-> >
-> >
-> >
+>> Ah, we register tstream_bsd_fde_handler() with
+>> TEVENT_FD_READ|TEVENT_FD_WRITE
+>> and have this logic:
+>>
+>> static void tstream_bsd_fde_handler(struct tevent_context *ev,
+>>                                       struct tevent_fd *fde,
+>>                                       uint16_t flags,
+>>                                       void *private_data)
+>> {
+>>           struct tstream_bsd *bsds =
+>> talloc_get_type_abort(private_data,
+>>                                      struct tstream_bsd);
+>>
+>>           if (flags & TEVENT_FD_WRITE) {
+>>                   bsds->writeable_handler(bsds->writeable_private);
+>>                   return;
+>>           }
+>>           if (flags & TEVENT_FD_READ) {
+>>                   if (!bsds->readable_handler) {
+>>                           if (bsds->writeable_handler) {
+>>
+>> =============> here we have the loop
+>>
+> 
+> Awesome debugging!
 
 
+I created https://bugzilla.samba.org/show_bug.cgi?id=15202 for the problem.
 
--- 
-Thanks,
+And I understand what happens in the kernel...
 
-Steve
+tcp_fin() has this:
+         struct tcp_sock *tp = tcp_sk(sk);
 
---000000000000d9a75f05eacee28a
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-smb3-clarify-multichannel-warning.patch"
-Content-Disposition: attachment; 
-	filename="0001-smb3-clarify-multichannel-warning.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_l954yq3w0>
-X-Attachment-Id: f_l954yq3w0
+         inet_csk_schedule_ack(sk);
 
-RnJvbSA2YzAzYTRkZDgwNzNjMjEzZDExM2MzOWM4MzlhYTMyOTVhMjA5YWY2IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTdGV2ZSBGcmVuY2ggPHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+
-CkRhdGU6IFR1ZSwgMTEgT2N0IDIwMjIgMjM6MjY6MzMgLTA1MDAKU3ViamVjdDogW1BBVENIXSBz
-bWIzOiBjbGFyaWZ5IG11bHRpY2hhbm5lbCB3YXJuaW5nCgpXaGVuIHNlcnZlciBkb2VzIG5vdCBy
-ZXR1cm4gbmV0d29yayBpbnRlcmZhY2VzLCBjbGFyaWZ5IHRoZQptZXNzYWdlIHRvIGluZGljYXRl
-IHRoYXQgIm11bHRpY2hhbm5lbCBub3QgYXZhaWxhYmxlIiBub3QganVzdAp0aGF0ICJlbXB0eSBu
-ZXR3b3JrIGludGVyZmFjZSByZXR1cm5lZCBieSBzZXJ2ZXIgLi4uIgoKU3VnZ2VzdGVkLWJ5OiBU
-b20gVGFscGV5IDx0b21AdGFscGV5LmNvbT4KU2lnbmVkLW9mZi1ieTogU3RldmUgRnJlbmNoIDxz
-dGZyZW5jaEBtaWNyb3NvZnQuY29tPgotLS0KIGZzL2NpZnMvc21iMm9wcy5jIHwgMyArKy0KIDEg
-ZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQg
-YS9mcy9jaWZzL3NtYjJvcHMuYyBiL2ZzL2NpZnMvc21iMm9wcy5jCmluZGV4IDUxODcyNTBjNWY2
-Ni4uOWVkNGRhZWY2NzcwIDEwMDY0NAotLS0gYS9mcy9jaWZzL3NtYjJvcHMuYworKysgYi9mcy9j
-aWZzL3NtYjJvcHMuYwpAQCAtNTUwLDcgKzU1MCw4IEBAIHBhcnNlX3NlcnZlcl9pbnRlcmZhY2Vz
-KHN0cnVjdCBuZXR3b3JrX2ludGVyZmFjZV9pbmZvX2lvY3RsX3JzcCAqYnVmLAogCQkvKiBhdm9p
-ZCBzcGFtbWluZyBsb2dzIGV2ZXJ5IDEwIG1pbnV0ZXMsIHNvIGxvZyBvbmx5IGluIG1vdW50ICov
-CiAJCWlmICgoc2VzLT5jaGFuX21heCA+IDEpICYmIGluX21vdW50KQogCQkJY2lmc19kYmcoVkZT
-LAotCQkJCSAiZW1wdHkgbmV0d29yayBpbnRlcmZhY2UgbGlzdCByZXR1cm5lZCBieSBzZXJ2ZXIg
-JXNcbiIsCisJCQkJICJtdWx0aWNoYW5uZWwgbm90IGF2YWlsYWJsZVxuIgorCQkJCSAiRW1wdHkg
-bmV0d29yayBpbnRlcmZhY2UgbGlzdCByZXR1cm5lZCBieSBzZXJ2ZXIgJXNcbiIsCiAJCQkJIHNl
-cy0+c2VydmVyLT5ob3N0bmFtZSk7CiAJCXJjID0gLUVJTlZBTDsKIAkJZ290byBvdXQ7Ci0tIAoy
-LjM0LjEKCg==
---000000000000d9a75f05eacee28a--
+         sk->sk_shutdown |= RCV_SHUTDOWN;
+         sock_set_flag(sk, SOCK_DONE);
+
+         switch (sk->sk_state) {
+         case TCP_SYN_RECV:
+         case TCP_ESTABLISHED:
+                 /* Move to CLOSE_WAIT */
+                 tcp_set_state(sk, TCP_CLOSE_WAIT);
+                 inet_csk_enter_pingpong_mode(sk);
+                 break;
+
+
+It means RCV_SHUTDOWN gets set as well as TCP_CLOSE_WAIT, but
+sk->sk_err is not changed to indicate an error.
+
+tcp_sendmsg_locked has this:
+...
+         err = -EPIPE;
+	if (sk->sk_err || (sk->sk_shutdown & SEND_SHUTDOWN))
+		goto do_error;
+
+	while (msg_data_left(msg)) {
+		int copy = 0;
+
+		skb = tcp_write_queue_tail(sk);
+		if (skb)
+			copy = size_goal - skb->len;
+
+		if (copy <= 0 || !tcp_skb_can_collapse_to(skb)) {
+			bool first_skb;
+
+new_segment:
+			if (!sk_stream_memory_free(sk))
+				goto wait_for_space;
+
+...
+
+wait_for_space:
+		set_bit(SOCK_NOSPACE, &sk->sk_socket->flags);
+		if (copied)
+			tcp_push(sk, flags & ~MSG_MORE, mss_now,
+				 TCP_NAGLE_PUSH, size_goal);
+
+		err = sk_stream_wait_memory(sk, &timeo);
+		if (err != 0)
+			goto do_error;
+
+It means if (sk->sk_err || (sk->sk_shutdown & SEND_SHUTDOWN)) doesn't
+hit as we only have RCV_SHUTDOWN and sk_stream_wait_memory returns -EAGAIN.
+
+And tcp_poll has this:
+
+         if (sk->sk_shutdown & RCV_SHUTDOWN)
+                 mask |= EPOLLIN | EPOLLRDNORM | EPOLLRDHUP;
+
+So we'll get EPOLLIN | EPOLLRDNORM | EPOLLRDHUP triggering TEVENT_FD_READ
+and writev/sendmsg keep getting EAGAIN.
+
+metze
+
+
+>>                                   bsds->writeable_handler(bsds-
+>>> writeable_private);
+>>                                   return;
+>>                           }
+>>                           TEVENT_FD_NOT_READABLE(bsds->fde);
+>>                           return;
+>>                   }
+>>                   bsds->readable_handler(bsds->readable_private);
+>>                   return;
+>>           }
+>> }
+>>
+>> We call the writeable handler (which is non-blocking) when we get
+>> TEVENT_FD_READ
+>> because we assume it will get an error if TEVENT_FD_READ was
+>> generated by
+>> EPOLLERR. I think moving TEVENT_FD_NOT_READABLE(bsds->fde); before
+>> if (bsds->writeable_handler) would make sure we only try that path
+>> once
+>> and not many times in a busy loop.
+> 
+> How would we then, in this case, detect that the socket is closed?
+> 
+> While we would start processing other connections, wouldn't we change
+> to a not-busy wait never closing the socket as there is still data to
+> send but never getting to read the EOF?
+> 
+> How can we proceed to closing the socket?
+> 
+>> And in ldapsrv_call_writev_start() we may want to use
+>> tevent_req_set_endtime() on
+>> the subreq of tstream_writev_queue_send(), so that
+>> ldapsrv_call_writev_done()
+>> will get ETIMEDOUT from tstream_writev_queue_recv() and call
+>> ldapsrv_terminate_connection().
+> 
+> Do we have a good precedent for what the send timeout should be?
+> 
+> I can't see any good examples elsewhere in the code sadly.
+> 
+> One option is to reuse the search timeout, so that a query could at
+> most take 240sec, eg 2x 120sec, once for the search itself and once to
+> send over the network.  This would give only one knob to change (which
+> is good and bad).
+> 
+> In the meantime I'm going to try and mock this up in a self-contained
+> cmocka test.
+> 
+> Andrew Bartlett
+
 
