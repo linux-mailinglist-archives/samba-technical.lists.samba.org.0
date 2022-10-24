@@ -2,47 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 819B560BB53
-	for <lists+samba-technical@lfdr.de>; Mon, 24 Oct 2022 22:56:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 34CA860BC12
+	for <lists+samba-technical@lfdr.de>; Mon, 24 Oct 2022 23:25:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=wxRvx4GtdJ/exb9h0M/QkKJdhSa2P1/zXmw+WxBOVD4=; b=qCPZOL6WdBQb7g1WfM5JdAEDtB
-	Dmj/KuaUXjkLYxk4/eILJOMnB3CESw4ZgvyzSBK89nyDdJUJUDYjoALkycYQvb5fCZTuE1z9jdW2W
-	djvqlFVRbIaCelGdvUyrrGZHhzPDGZJ7E1VvaO6PsAf+x1LeBUc4T/3TmJBtTiX36hEfjgZ1/EEZN
-	pEyVdmgCagdAvx7hHzTOXP5GnUHKO2pAlINu+HDpfrz46vE9f+gTnqvHPws1AOrGJPtjzBaIYIU8t
-	Hvdx1D1rkm39YFv3V0xZEfNJTfa9ArTBvfX9rXoCOGMi/bPv6YdobIP4KaV9gV2BYBnWkiYbv8OrL
-	NNuVp0nw==;
-Received: from ip6-localhost ([::1]:23480 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=zquQZiNLQSPWJk4YalzVJq/OKT5BLuZUkqlobtvCjP8=; b=wRfYaGQtAKIcpPsQ6aCSe/UEIt
+	D09ZzHusxknOG3jVMT8SPwSq47askGVtbxFwAPwFO0m6uaOknfqDTIxOpJJDDK8YRk5Y+ev+1ltgk
+	e4Lc9jBMAV2M5K/8kRThpWAttykzKPAUHOqDOEoh7HvIbMTKZDmV2NnlhwoCFBZEK1prC28A9gYQh
+	8b/T7iKeeEI81x80DxdLh0flgtOpypiooc39VmbIR6o+uE5SMUYIbSsRuLVPwTiwPbKMBnXhUFFu2
+	H0PAvQ6qa88cicvSJa5DWYFnP8bpMYH/1oJ3Q+9xRi8nwzwKarlAnqn3aRJy4qNGY6ua1U9sxN+35
+	zj6QlQzQ==;
+Received: from ip6-localhost ([::1]:31872 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1on4Tv-005Z3i-8A; Mon, 24 Oct 2022 20:55:35 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58654) 
+	id 1on4vx-005ZRp-Ev; Mon, 24 Oct 2022 21:24:33 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41402) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1on4Tp-005Z3Z-VD
- for samba-technical@lists.samba.org; Mon, 24 Oct 2022 20:55:32 +0000
+ (Exim) id 1on4vn-005ZRg-0m
+ for samba-technical@lists.samba.org; Mon, 24 Oct 2022 21:24:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=wxRvx4GtdJ/exb9h0M/QkKJdhSa2P1/zXmw+WxBOVD4=; b=bTozQbmmPg2YPukzrN4xfU3h8P
- DdmZL1C+VEATFvXEe4IqtxEvMs9QJNaZVczKqyfA9W8UFaJiOvlfYuz5DroX9MfmGvSNbdBxHml1z
- bGdcKTlWXcchA8ADJcNO9NfBQSWm4SXlN3wgotFpFcuFy3I/wZUJE1C+cAUncSAflXZWCgVpSxykl
- 1/qdOyBMHSWsLYTFH5rmOSrEV8HnLm9IIi6fBYN+piNqIZpte4rXRkul//uo92BLb6wY6+aO5hqi0
- O1yXGebzDTGZ9L55vuWeQG1EXHAqjfXAjrPCAR/tHU9p1gHAB5N2qy/Xed8CvEwUYr2GWh/dyaEH5
- e98ufnrEDS5sPJuTYo95imQUGU8lIwp+MQy2Lm2avb7a3861o4fwne1cV55KDTKwUBg60vHfD7xa2
- vvqzpMWdkOcHixAvvoIZMNIvg8qlv86pHMGch4vD92WK8p1ESQWylH5k6Aeq9aHSavJDfF0dsUWDS
- 1DyY9Vl7GOryP9NE+ZGGLmiF;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=zquQZiNLQSPWJk4YalzVJq/OKT5BLuZUkqlobtvCjP8=; b=HV3LwR+W4NBIBlyjL01mMPtUSD
+ 3ggXKu1sYqByccV+q2xfYaiZHxXnKX4l0BXVXU+O7u9nh5nw8XAH8+HFzHGr7DXf/mB6zIT5ddD6W
+ D82t0rr43a+0vPxvVnOu2oTtD7VyQqVcagh674eZ4qf0oy5LrQo8QLsyR3oIhZl3KB49P/DgMOfv9
+ 4iMcPobYitbBP4b/YzTP41q91TKp795GwkS5WC0+k2ZRD9jOv188Vgz01yL39EtVV3oe5ePN77wk/
+ nkd406rxZtfwDb+x1mSv42f9a0vF5UsL4ZeU3NRXBN+jga2GmABtKJ76EXWoTzQJBq9lUDKGdwP7F
+ nFuimrnkz2YxJb+GT5djNuJO+RJTWG8qwRewrZ6xUi8QDmGBvj5dOA6xdmf6nJ7xujF0p2tx1TWxL
+ KSSldGHi3K5wXoMjPQcRcF1c9BY3gBeB3ZMlKtdmsOuO1hR0J+xDXSijZ3ObpyrvbT+0ph0Ns9ZoL
+ Luf1S6JQ8RU8+uEUrIWv0ZGy;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1on4To-005aBv-JC; Mon, 24 Oct 2022 20:55:28 +0000
-Date: Mon, 24 Oct 2022 13:55:26 -0700
-To: Pavel =?iso-8859-1?Q?Filipensk=FD?= <pfilipensky@samba.org>
-Subject: Re: [ANNOUNCE] priv_wrapper initial release 1.0.0 ready for download
-Message-ID: <Y1b7vgm43+FIJ72t@jeremy-acer>
-References: <8008015e-90e4-1db9-202c-8f3d6582e46c@samba.org>
+ (Exim) id 1on4vl-005aOL-H8; Mon, 24 Oct 2022 21:24:22 +0000
+Message-ID: <fb434777e5cf9c369de54b4c47b894c162ce91b6.camel@samba.org>
+Subject: Could we move to GnuTLS 3.7 minimum and Ubuntu 22.04 as our primary
+ testing distribution?
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Tue, 25 Oct 2022 10:24:17 +1300
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <8008015e-90e4-1db9-202c-8f3d6582e46c@samba.org>
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,29 +55,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: asn@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Oct 24, 2022 at 01:38:12PM +0200, Pavel Filipenský via samba-technical wrote:
->The new priv_wrapper library  (version 1.0.0)  is released today.
->
->It can be used to disable resource limits and other privilege dropping 
->(allows to disable chroot, prctl, pledge and setrlmit system calls.)
->
->Home page:
->
->https://cwrap.org/priv_wrapper.html
->
->Download link:
->
->https://download.samba.org/pub/cwrap
->
->
->Thanks to Pavel Filipenský, Nikos Mavrogiannopoulos and Andreas Schneider.
+It is a bit of work, but I think it would be very worthwhile to upgrade
+to Ubuntu 22.04 (replacing Ubuntu 18.04) and GnuTLS 3.6.13 as our
+minimum requirements.
 
-Great work you guys ! That should help a lot in improving testing
-on more security-focussed systems.
+We would also need to update OpenSUSE Leap 15.3 to OpenSUSE Leap 15.4
+as like Ubuntu 18.04 it doesn't have the package. 
+
+For CentOS 7, we are already pulling GnutTLS 3.6.16 from an appstream
+repo it seems.
+
+This would allow us to remove the last of the in-tree AES code,  as
+well as automatically test the new PBKDF2 based password change code in
+SAMR. 
+
+This came up because this MR:
+https://gitlab.com/samba-team/samba/-/merge_requests/2753
+is not automatically tested as it is behind an #ifdef not triggered on
+Ubuntu 18.04
+
+What do folks think? 
+
+Andrew Bartlett
+--
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source 
+Solutions
+
+
+
+
+
 
