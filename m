@@ -2,73 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62684609B59
-	for <lists+samba-technical@lfdr.de>; Mon, 24 Oct 2022 09:33:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0292A60A20E
+	for <lists+samba-technical@lfdr.de>; Mon, 24 Oct 2022 13:38:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=k5Duj9LK3E7iZ/FhGQXlDLrhqmEfDy3TfcrcL/yhUZM=; b=Re6GU4Mow54ASQkXBQd5Lvs8w+
-	+zOH6IMCV8aE4pmaHg51Pt5F5gJAwEVLiudvVFGtgC7U3twDO1rtOfxP4jvf0QBy1NjZ8T97SX2iT
-	pxv0Qjp8AbcLeN8KD0KR85MW6R8FcIEN9YlPTUsu/Z+NfU3kHhp2LoY+exZiJAJeDwFFldr+qUP9f
-	YZLbF6n9LMTH5t7K03vjAT3gwruCB68fKvW3Ti9LGynQXwFcCuM9j3yZujnn2yQxxo4qh8e9qROOR
-	WoQeQnHuquWQF3az6mMIk9inloWba2NeGLvY4hcA2vOdbxFFevxQT9b7PfGCJ7kbUMoicJ+qC6j7U
-	T3xxhmIQ==;
-Received: from ip6-localhost ([::1]:36208 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=lXDEJX+Bmt2in7iUJ20Ic8tj1rGjnK528MrHwsbKkQM=; b=amiIKO9wjQQfKaW1IokVvXvYEv
+	NqgZ3k9+NsSDz0xd/mQHp0FCe427hERVo0I932kjhKkCCPf+vnQMvKHTtsXOkBTO3bR6y/swaXKI8
+	pbXNnGbb5BHuZKRxFRSuTkb9dMZcIiI4neRa4ZNUvnmtd9329u9j6/zjpRrArymUoZntEGmUAKV25
+	8rLK1veUzd2qYzXSlrQNwEQ/zpTntSr+vlmhr1R9f819KLDxyD+7cpkdddYWiazq0EWvCuNBCDcPw
+	q7hUP9S1RmZsfY1DDDJQ69Oszyzrel3sFh3dmbyyVlM2i+yp5J5FQu6odFql/QNRisASGMqpCa0OT
+	YjkdaNsg==;
+Received: from ip6-localhost ([::1]:60772 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1omrvu-005G7E-Gl; Mon, 24 Oct 2022 07:31:38 +0000
-Received: from smtppost.atos.net ([193.56.114.176]:21697
- helo=smarthost3.atos.net) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1omrvX-005G74-2n
- for samba-technical@lists.samba.org; Mon, 24 Oct 2022 07:31:19 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=atos.net; i=@atos.net; q=dns/txt; s=mail2022;
- t=1666596675; x=1698132675;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=k5Duj9LK3E7iZ/FhGQXlDLrhqmEfDy3TfcrcL/yhUZM=;
- b=DAWkWpYjxlcksGrmiLqyzgOHQ3pFPChwMyQ/mMhJVc1nP7PBY32hP4sD
- NIz+dfzgQpKWtnc/JiGTH9oQPy+XQax/DO4tRh5SceVwaqfhbjA21KTvn
- 9ah0KS9no6tkzRwb28YCJEOZELV3fGdpEB1KQyTQntVPnLR1Mr5JUYCUA
- Ge34/vWIzuuY62MSrn1d3WRBFPu4TaU1wEVViQFbeJ0+cjmcR+u9YmWRs
- QUiVSTKxCSn8BAoCALOZt5LEs4iZJGKP6nTG1qY7q2FQow4dfUiQNF34l
- Q7YeHwEgBl7YH41BlzKdXoftMdWvjhhjm1jPPkn6Hx8m/QAs5DqfHmMIn w==;
-X-MGA-submission: =?us-ascii?q?MDHDJT6m0TatatLBDpb+0JPKhO1KUulQAWVMpK?=
- =?us-ascii?q?GT8ttsKElKGYCQdDvsM/knWuvuqELCkRWBRRyXvz3xy+AtPSSjYaKB/z?=
- =?us-ascii?q?GAp1wZdUVpE+eDR9hi66P9HcJu/M3bSvsZg31lPuB1aJXcRg89vpM0Lf?=
- =?us-ascii?q?EY?=
-Received: from mail.sis.atos.net (HELO
- GITEXCPRDMB12.ww931.my-it-solutions.net) ([10.89.28.142])
- by smarthost3.atos.net with ESMTP/TLS/AES256-GCM-SHA384;
- 24 Oct 2022 09:31:05 +0200
-Received: from GITEXCPRDMB14.ww931.my-it-solutions.net (10.89.28.144) by
- GITEXCPRDMB12.ww931.my-it-solutions.net (10.89.28.142) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.32; Mon, 24 Oct 2022 09:31:04 +0200
-Received: from GITEXCPRDMB14.ww931.my-it-solutions.net
- ([fe80::4817:dcd:3f05:31dd]) by GITEXCPRDMB14.ww931.my-it-solutions.net
- ([fe80::4817:dcd:3f05:31dd%8]) with mapi id 15.01.2375.032; Mon, 24 Oct 2022
- 09:31:04 +0200
-To: Daniel Kobras <kobras@puzzle-itc.de>
-Subject: Re: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
-Thread-Topic: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
-Thread-Index: AQHY0q0xP3Tuh09CpEaQNbeEgtOwFa32NCKAgAaxE4CAAADrAIAcFQaAgARSbWc=
-Date: Mon, 24 Oct 2022 07:31:03 +0000
-Message-ID: <0698402c43a54ae6baf045e99e8c259c@atos.net>
-References: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
- <ecd8ac98-c8d7-43b6-b0c0-d6deb7352ad7@samba.org>
- <Yzsp/U5itUs486Ic@jeremy-acer> <YzsqwptGoGijMcib@jeremy-acer>,
- <5b08d4aa-2d59-b5d6-07ad-9cc40438aeb1@puzzle-itc.de>
-In-Reply-To: <5b08d4aa-2d59-b5d6-07ad-9cc40438aeb1@puzzle-itc.de>
-Accept-Language: en-GB, en-US
-Content-Language: en-GB
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.79.0.29]
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+	id 1omvmd-005Jyj-9r; Mon, 24 Oct 2022 11:38:19 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:42740) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1omvmY-005JyY-1O
+ for samba-technical@lists.samba.org; Mon, 24 Oct 2022 11:38:16 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=lxUa6UkwjLpNsibrtP8RqENuyuQ1AimnUQ+5tvA6WIo=; b=ZX7anNOwR73uM24xbX5Q4UrTvY
+ cH1imzoP/Ge2pbZY8+CsZVDHxmokImLgILYOlP/uFqBu+lqyvZwxylCLjLrKfvBjEj2jHTN6S6XN0
+ oIZdomCmxQ4oZelxEGfQAmXgn3a+N22KZJhDp0as+CJew3+t4n8qfqzzSVRkRNNp5JWQfuycdLbOF
+ ebw/RLKmsgFCroEIGiEzrPopAYz/ywjGEn5IyL/x09qOSsrFQF/u93TMwNRNwHKuSEKitnggzBiwk
+ jsyt2RERJo39C0WtYpJFla9Vyj0Tq9bWuNHmt9nCs3/mGUeRPZXwDJw2fiGxw9WIYi3p4RfYwPHA7
+ 8pp8ttGLCcAEI8te9ebj2alT/HDbwHqEW+GGDRMdkyprR/oxhRkWR4PLJk4T2dZ1l4INNBH5kXmpC
+ mLZSaeIu4+WidarEaACT53UgA96XICx37fGuSFNW7kXBmTX4LI9vmpBIFnUBj6cJaknBeiRTrHhSA
+ la9jcchBSLOdo8kvaQ++hWr1;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1omvmX-005WQ2-2v
+ for samba-technical@lists.samba.org; Mon, 24 Oct 2022 11:38:13 +0000
+Message-ID: <8008015e-90e4-1db9-202c-8f3d6582e46c@samba.org>
+Date: Mon, 24 Oct 2022 13:38:12 +0200
 MIME-Version: 1.0
-X-Warn: EHLO/HELO not verified: Remote host 193.56.114.176 (smtppost.atos.net)
- incorrectly presented itself as smarthost3.atos.net
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.1
+Content-Language: en-US
+To: samba-technical@lists.samba.org
+Subject: [ANNOUNCE] priv_wrapper initial release 1.0.0 ready for download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,26 +58,28 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Weiser via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Weiser <michael.weiser@atos.net>
-Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>,
- Jeremy Allison <jra@samba.org>
+From: =?utf-8?q?Pavel_Filipensk=C3=BD_via_samba-technical?=
+ <samba-technical@lists.samba.org>
+Reply-To: =?UTF-8?Q?Pavel_Filipensk=c3=bd?= <pfilipensky@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Daniel,
+The new priv_wrapper library  (version 1.0.0)  is released today.
 
-> > Still, that doesn't change the underlying fix for now.
+It can be used to disable resource limits and other privilege dropping 
+(allows to disable chroot, prctl, pledge and setrlmit system calls.)
 
-> Ok, I've just submitted the fix in
-> <https://gitlab.com/samba-team/samba/-/merge_requests/2763>.
+Home page:
 
-Thanks for your effort! We are in the meantime in the process of testing yo=
-ur
-fix in the affected environment. I fully expect it to resolve the issue. Wi=
-ll
-keep you posted.
---=20
-Best wishes,
-Michael=
+https://cwrap.org/priv_wrapper.html
 
+Download link:
+
+https://download.samba.org/pub/cwrap
+
+
+Thanks to Pavel Filipenský, Nikos Mavrogiannopoulos and Andreas Schneider.
+
+
+Best regards,
+Pavel Filipenský
