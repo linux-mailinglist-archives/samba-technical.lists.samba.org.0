@@ -2,48 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D965760BC24
-	for <lists+samba-technical@lfdr.de>; Mon, 24 Oct 2022 23:28:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8953D60BCF9
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Oct 2022 00:02:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=HNj7JTidOsPBwtfvwmQp8Ya9rT1nErvr+rSZNS0OgJ8=; b=w9c+sLYRBMaGYN8t46mkwwWsic
-	yot/P773LPptUbcIkYARwoAjapQaDAyywBO8TC0Ep8CRaayx5mlEHQYC8FAcArgXbUbHSy03uqmxv
-	3ezwJnVUjtWAiHU4efrHjRGTVspd8kPanMDLx17N+cQRsZB/iv1yZ8LUn3JMqrJyeZlCf4CzU1gEI
-	HKnIiLs9xRbkrKwngQdMpha+64ygquIMtshb6RqsZZipKgPh3L9u2ieE+TpGxQKxVT5BWGqDEDZ7K
-	zNCmdt4YqQw5TTXgwqyHCl1prlUX9J1Q8v7sOqGvEQH+WXc/nNeBqnnYDahkz+cv/5sNLUj+DSvhm
-	iWEqsfOQ==;
-Received: from ip6-localhost ([::1]:38008 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=AqUvKyhyUdpNHx2Qoj88ROb/yEnfoDx5lrEK8jVPKkk=; b=XnHyzHyQII/fiVpaGwHiRhXmTc
+	S5qQFI9VhzD4fynDMAXwKL+STTt58Cf3xdCW7xYQLYghKcCuoSs5avYObWWcVGkdcX4Zzxhj1B95v
+	7SslZtik4+63HBb3dDMJUa3fX17ApsIvUhwuer/Bh3mDGOiL8hAylY5wOrHrOFuWq/QISuVkkeYgX
+	o+nGSl7102vQn8BY2rYJHVKrQw9WKA3UvZkWGtU4xUmqq5qKKscvmn10nPgyA3b4K/IQYSI1B0i83
+	ZX+9k1qDW+hw9Y5R41Z7IrxF1Zf8MVh5wKewb4vZlHXQHXIz9ZjOyM77u+7exjvSn4YC5+IYHYJds
+	w6f7AtCg==;
+Received: from ip6-localhost ([::1]:28790 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1on4zB-005Zjb-U0; Mon, 24 Oct 2022 21:27:54 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38244) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1on4z6-005ZjS-Fq
- for samba-technical@lists.samba.org; Mon, 24 Oct 2022 21:27:50 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=HNj7JTidOsPBwtfvwmQp8Ya9rT1nErvr+rSZNS0OgJ8=; b=Wccv2zyjcvK+h+j0ffYdgyv/90
- ZOW3cT3LGjeAprJq8pXuEe2jN481kQzOtIz1i8hS2qyVMJ458a+0DlWQ+b4Cjq0Jo5FIpVV0WORmw
- ytx2yWLaOCQXUmr3IwQLY27ydC/P846c34rz3nwOu3fptOwOWYlJSwiof6MnLWNsUR4PQkYGAorMe
- A0tOm25yyIEKoSApcAthAVxdwr2F5DstWIM+cyYkGBv5ETwysci+f0NySI0N6ZEbiAW8w9UN12GyL
- ujzmeHq7K9F9YvSdvRPK19oCAvooVz2T4GtVpx2dAHO4+wecHtlv0VN1jPYsXg9y6oGZfbMxq87Cb
- Y+URjPF9E2FhJCEj6WrmwCXAMWuy/kgk5ODVz70zCC8wivNUpUIDVJC6SX5Tt2PIQLUEBvntfIeej
- Wq40IK8ioC2t8kR4YoAqC7bAj9KaI+WyB6RyrmH7x+AMlp3lF91kSkHeWyMWHwSGVOhnbolfEBlRh
- e7WAZi0VVAslcoTKUDjDSLu7;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1on4z5-005aRS-F7; Mon, 24 Oct 2022 21:27:48 +0000
-Message-ID: <db0531ab8158841c10ddbc9d6b9ff031c88f8860.camel@samba.org>
-Subject: Re: Could we move to GnuTLS 3.6.13 minimum and Ubuntu 22.04 as our
- primary testing distribution?
-To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
-Date: Tue, 25 Oct 2022 10:27:44 +1300
-In-Reply-To: <fb434777e5cf9c369de54b4c47b894c162ce91b6.camel@samba.org>
-References: <fb434777e5cf9c369de54b4c47b894c162ce91b6.camel@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+	id 1on5Wn-005aOR-IE; Mon, 24 Oct 2022 22:02:37 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:38952) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1on5Wh-005aMg-I6
+ for samba-technical@lists.samba.org; Mon, 24 Oct 2022 22:02:34 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1666648947;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=AqUvKyhyUdpNHx2Qoj88ROb/yEnfoDx5lrEK8jVPKkk=;
+ b=Nc1yQMdivzq7IepPqDM//nm3Gk+h7wh30dZ6hi9Aj/iLpNOrYm0CSBUbTqdXuG17QB/foT
+ /oRUCrsfHpvaDtVE/+FCS305AGegPDsLyzqhqwgasbVEm8M+X3m0xsGIv//G0zyopvbeis
+ YBarrezcwzuLRnso2WPzfkjqTwmQrO0=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1666648947;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=AqUvKyhyUdpNHx2Qoj88ROb/yEnfoDx5lrEK8jVPKkk=;
+ b=Nc1yQMdivzq7IepPqDM//nm3Gk+h7wh30dZ6hi9Aj/iLpNOrYm0CSBUbTqdXuG17QB/foT
+ /oRUCrsfHpvaDtVE/+FCS305AGegPDsLyzqhqwgasbVEm8M+X3m0xsGIv//G0zyopvbeis
+ YBarrezcwzuLRnso2WPzfkjqTwmQrO0=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-597-iYnBC2noPqSd9WBhME0wTw-1; Mon, 24 Oct 2022 17:46:46 -0400
+X-MC-Unique: iYnBC2noPqSd9WBhME0wTw-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.7])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 969E5382F1A9
+ for <samba-technical@lists.samba.org>; Mon, 24 Oct 2022 21:46:35 +0000 (UTC)
+Received: from oldenburg.str.redhat.com (unknown [10.2.16.74])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 1B16F1415114
+ for <samba-technical@lists.samba.org>; Mon, 24 Oct 2022 21:46:23 +0000 (UTC)
+To: samba-technical@lists.samba.org
+Subject: vfswrap_getxattrat_do_async and unshare(CLONE_FS)
+Date: Mon, 24 Oct 2022 23:46:22 +0200
+Message-ID: <87czag28up.fsf@oldenburg.str.redhat.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.7
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,72 +72,32 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: asn@samba.org
+From: Florian Weimer via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Florian Weimer <fweimer@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-(Corrected subject, I realised we couldn't go GnuTLS 3.7 and don't need
-to so far)
+As far as I can tell, vfswrap_getxattrat_do_async relies on
+unshare(CLONE_FS) to do fgetxattrat emulation with a thread-local fchdir
+and getxattr.  There do not seem to be any other uses in the sources.
 
-On Tue, 2022-10-25 at 10:24 +1300, Andrew Bartlett via samba-technical
-wrote:
-> It is a bit of work, but I think it would be very worthwhile to
-> upgrade
-> to Ubuntu 22.04 (replacing Ubuntu 18.04) and GnuTLS 3.6.13 as our
-> minimum requirements.
-> 
-> We would also need to update OpenSUSE Leap 15.3 to OpenSUSE Leap 15.4
-> as like Ubuntu 18.04 it doesn't have the package. 
-> 
-> For CentOS 7, we are already pulling GnutTLS 3.6.16 from an appstream
-> repo it seems.
-> 
-> This would allow us to remove the last of the in-tree AES code,  as
-> well as automatically test the new PBKDF2 based password change code
-> in
-> SAMR. 
-> 
-> This came up because this MR:
-> https://gitlab.com/samba-team/samba/-/merge_requests/2753
-> 
-> is not automatically tested as it is behind an #ifdef not triggered
-> on
-> Ubuntu 18.04
-> 
-> What do folks think? 
-> 
-> Andrew Bartlett
-> --
-> Andrew Bartlett (he/him)       
-> https://samba.org/~abartlet/
-> 
-> Samba Team Member (since 2001) 
-> https://samba.org
-> 
-> Samba Team Lead, Catalyst IT   
-> https://catalyst.net.nz/services/samba
-> 
-> 
-> Samba Development and Support, Catalyst IT - Expert Open Source 
-> Solutions
-> 
-> 
-> 
-> 
-> 
-> 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+I think the more usual way to emulate the missing fgetxattrat system
+call is to open the file with openat and O_PATH, and then use getxattr
+on the synthetic path under /proc/self/fd.  While these paths present as
+symbolic links, they actually are not, so there is no race possible.
+(fgetxattr cannot operate on the open file descriptor directly.)
 
-Samba Development and Support, Catalyst IT - Expert Open Source 
-Solutions
+Why wasn't the /proc-based approach chosen for Samba?  It looks a bit
+simpler to implement, and does not do strange things to the process
+state behind glibc's back.
 
+This came up in a discussion regarding a proposal to implement an
+interface for per-thread current working directories in glibc:
 
+  Per-thread file system attributes
+  <https://www.openwall.com/lists/libc-coord/2022/10/24/1>
 
-
+Thanks,
+Florian
 
 
