@@ -2,47 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D446260D1C9
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Oct 2022 18:45:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8949960D24E
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Oct 2022 19:16:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=ElHVdP9mxidpscHMwR/QTWmh6zCQ1i2CUbTYGJa5Lu4=; b=SHRycIlNA9DWYWKJ9Ow+uVfhlQ
-	9obG/tmqwKlnc38AEkg8Kqrz1fsEXKPl2QaVr08lbYVS39HCPJZZmM32uyL6mvaoevf9k4gCnVFQ4
-	K8o1HODNagkMmTyIzPbrQrYa0Xo83ULlMiHRdhNIaHMkcPDtPiAARX1skGAVrWuDXx76xJJ3XbN69
-	Y3K0nAx3mHxq9O38X0FAH2Yx0dOkl2leE8Apcfv6r0MMbL2IM3DQU9TFPe7jB+T4FkGurnli3Vz6O
-	+qjwgnERKiWy0mhTrBV49Z/Y9us7KGWrfWaDhBmtzsPPZrsImo4Vs9YrTKDyzThEApAjXUpxSIZuH
-	9r+ylQTQ==;
-Received: from ip6-localhost ([::1]:58544 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=vXzMT8ihPJ2lLJ/p2pnyw7avLwBA1aEHyew2ZMyUxa0=; b=EDzGGqTDU7M5q4YFRxkiw5xXgi
+	infT69sax8vdi594fuUv4ZUU0rPUfb1I8wonkDpyPPc+R/OKNs9MEGhqoIcqlqMAgm5mj7SBNdeSr
+	edfpxQ9Yqwpws49evNCOEmgO4R0zpd5c/i3DTf7Tu+xIEyUhBabhZ42A5dnv1x+uep2XstQXfHi/j
+	9MFLEchgTetXnXhkxDPI6oZUuAmBOlbiHFUYQmXSh50mcsRkaS4O8Slnv18wpaBj3lr3oS7fQ5cIw
+	hZxi2LnDg7lDmFotas9uIgT9Ck0WzR6B1bqtlPwOOYqPjI9/zxq0MYePTxOB+zWb+oM8VkuQumbMl
+	z0dnGXOQ==;
+Received: from ip6-localhost ([::1]:18532 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1onN3d-005xMl-2e; Tue, 25 Oct 2022 16:45:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30890) 
+	id 1onNX6-005ydH-D1; Tue, 25 Oct 2022 17:16:08 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:32876) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1onN3X-005xMb-Km
- for samba-technical@lists.samba.org; Tue, 25 Oct 2022 16:45:38 +0000
+ (Exim) id 1onNWz-005yd6-4j
+ for samba-technical@lists.samba.org; Tue, 25 Oct 2022 17:16:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=ElHVdP9mxidpscHMwR/QTWmh6zCQ1i2CUbTYGJa5Lu4=; b=cJqBcu6sWl37MEVRU/s/Ot91Qc
- HhyPy6hZnhNQ+O0oviq49YP8r/3lScg4aVkDURX3ychiYCgejO0FEc+PWUuMAybR5XYOuCeREo1db
- fM38mHl8LoGlFYQ/YFqx6nvAA2aBdonsdxg5DKRhh+z47xKcJkWD7CNdilkopWdVHKkdNfLWLUnrn
- Vc+Mq30+BSAMi2/n8rBfavyBv8R2HOHCIhDyvm3e+/cEPO0axRrxND4d1dKVw1nY3GB292YU9neIB
- Kg43f63etZnKHlTQST3OM6UviUP2Yl6mZQgj25t/7ebwYmpQjsrTOq4mVMC7+Vw/6Qp7HvlXtJ6C9
- EB8bnaqANS6ehNMBVcwZTbJQgjMNxzcihlcJU7SoFnQQTxaw6sqSSfiDah9V2l6TJTv07njxdn02d
- Nj2pDZqYfJ/ikp1FC4RW4QxUIxemgyYxKENTtl71hQFn1BX57VlIutAz/hgO62Vnl1OfXVxJwEEr4
- XnVHTpkJEJjZjdt/3M6xh9TY;
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=vXzMT8ihPJ2lLJ/p2pnyw7avLwBA1aEHyew2ZMyUxa0=; b=rODughKaiKPwheM6Rv7+aaENBd
+ ybzqP/LXoXNWP7om96UjllaW2Qld+FM4VVPDQkpVwzAhdcRLv4djezeNrJnkBBkixMDEK+DyUg49M
+ NJgPIBQMDfYAKVFR8zEK1x9LIvAHHjaJWouWKhJ2+3WCdb3VDJYFAaZteGfdG/t/gRLI1TEpU9Z36
+ 1xVrm/x2SKqzAzFCNIdz59LzJh55HibhZNiI6dxDaEBFj0yGcHefVJyvIuV/cJptiB49QBWSsPyTr
+ JaiwfQTovPXS8INUAtcAahzEPneqJkQ8TJtKZPGrahJCwJaS/FoDhkzE3ZPB/hMrBrz9MWyx6WM7q
+ 6xe3CRFdkl8V7nBMjmhjH03HtsaHA4On7LIc+xEJsPZ2vaWCX4lR73G31T09NE6tHun8q4t2iCKa+
+ LtDyWfUUR5LrI2VyeIGFwAfD/tWoe3/y8S/3/OpOSx1Mxj3ZNFhH0qnsNKQR30W56h3IpL8j2pQLo
+ wiRi2jO4RsXFEPKu24Mx/qUe;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1onN3W-005kyT-Le; Tue, 25 Oct 2022 16:45:35 +0000
-Date: Tue, 25 Oct 2022 09:45:32 -0700
-To: Michael Tokarev <mjt@tls.msk.ru>
-Subject: Re: smbclient --max-protocol=NT1: why it requres setting MIN
- protocol too?
-Message-ID: <Y1gSrECALfFgazNj@jeremy-acer>
-References: <24ff5bf2-8bf0-6a88-a3b1-aab36099c9b3@msgid.tls.msk.ru>
+ (Exim) id 1onNWy-005lRh-GW; Tue, 25 Oct 2022 17:16:00 +0000
+To: samba-technical <samba-technical@lists.samba.org>,
+ Michael Tokarev <mjt@tls.msk.ru>
+Subject: Re: running only selected tests in samba sources
+Date: Tue, 25 Oct 2022 19:16:00 +0200
+Message-ID: <2855388.e9J7NaK4W3@magrathea>
+In-Reply-To: <afca8f8d-f9df-3489-902c-bc82ced76731@msgid.tls.msk.ru>
+References: <587ebe9d-3f91-7389-5ad1-c6d96e435b99@msgid.tls.msk.ru>
+ <2656048.mvXUDI8C0e@magrathea>
+ <afca8f8d-f9df-3489-902c-bc82ced76731@msgid.tls.msk.ru>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <24ff5bf2-8bf0-6a88-a3b1-aab36099c9b3@msgid.tls.msk.ru>
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,39 +58,39 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Oct 25, 2022 at 06:45:55PM +0300, Michael Tokarev via samba-technical wrote:
->Hi!
->
->When trying to use current smbclient to connect to, say, a windowsXP machine
->(which implements only NT1 protocol), smbclient has to be told to use lower
->protocol version than it's default - this is intended.
->
->But the thing is that it doesn't work:
->
->  $ smbclient --max-protocol=NT1 //testhost/share
->  Unable to initialize messaging context
->  protocol negotiation failed: NT_STATUS_INVALID_PARAMETER_MIX
->
->Using -m/--max-protocol=NT1 *also* requires setting another option:
->
->  $ smbclient --max-protocol=NT1 --option='client min protocol = CORE' //testhost/share
->
->This way it actually works.
->
->Can't smbclient either warn about this situation, or better yet,
->lower its min protocol automatically if it is greater than
->the requested max protocol?
+On Tuesday, 25 October 2022 12:49:50 CEST Michael Tokarev wrote:
+> 25.10.2022 13:15, Andreas Schneider wrote:
+> > On Tuesday, 25 October 2022 11:16:30 CEST Michael Tokarev via
+> > samba-technical
+> ..
+> 
+> >>> https://wiki.samba.org/index.php/Writing_Torture_Tests#Running_tests
+> >> 
+> >> All this applies to a build with --enable-selftest. My question was how
+> >> it is possible to run certain tests (like ldb selftests for example)
+> >> without building whole thing with --enable-selftest.
+> > 
+> > Run 'make test' in the ldb package. See the libldb spec file.
+> 
+> Um. What *is* ldb package? Do you mean the separate ldb-x.y.x.tar.gz
+> tarball? I was asking about the ldb bundled within samba tarball.
+> 
+> Does samba ship spec files? I don't see any?
 
-I think that's a great idea for usability. Can you log
-a bug so we can track it ?
+cd lib/ldb
+./configure
+make
+make test
 
-Thanks,
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
-Jeremy.
+
 
