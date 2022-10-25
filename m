@@ -2,46 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D669B60BD39
-	for <lists+samba-technical@lfdr.de>; Tue, 25 Oct 2022 00:16:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0827060C7C2
+	for <lists+samba-technical@lfdr.de>; Tue, 25 Oct 2022 11:17:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=H8VBsBHKyOW0MEt7mFJ3CDm24zxJKIXcxFxXw5gDXtI=; b=xiWrJuy9DIAUN8WA/ai5GwOwhO
-	6R1ujFSlaxvkjlmXWny9jyeRR9MlR1nwZsPP1VAz+q35jRRPMtacfwUQaMe70GlvsxtPoB728RywY
-	dhRjFX7fL9M1JDXeSlu8mIomhvkAbzrRn9OsbU3yn8rPR6Yl8IwA5SJ96thMUoRiA7CwVTVUgbG9b
-	9r43Km1t80ggUgdyS5KMQhWgaD/32+Rw1+SrZuj/DoG56Gp15g6s4eljNgS7SZjZ11ggg+X+YN7fu
-	2ymTnS4aWndTCpMvwOHvWvvftyEAFaolo6igbrDmIFPoVb2cdmGkQSfiJ6B1rAsxeZTUE2pDaOuDn
-	MOgrqGGQ==;
-Received: from ip6-localhost ([::1]:19112 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=kY1TeW5Hjy3NXiGzvbm1P3uWVGYz5Zoxno2j07oLzvQ=; b=pfSAV+EEwcgtFiPoPoLOjDRf5r
+	Kn+RoQ6aOUNelBIhW9NyXLG3hexNW1Uu+0zNhRdKVC5K+fpjUKe57LZPNmRI5CAuSequO790t6AFd
+	GFSVUco7oD7KmWSBt8anuEaJFmT1iLMGy4QK9s4g3K0BFcmuY1+aTXnMeJD4MUnWIMMsNHuPfCn30
+	o0bhyHmP0jl79tJ14KfsLgU37W6M24/FmhfzjX3LSIxAeh1YAGZYmV3+kaXbsWH5LJ2sNzCcFRPT1
+	ZTbXKt82zTFVpuxKV4w0ikErDaXxxrP8+CatG0Fymz+jwKXHETbPmgGj2YKD8l11V2C3FKaw3AX62
+	SlUi0IlA==;
+Received: from ip6-localhost ([::1]:46066 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1on5kK-005csC-5l; Mon, 24 Oct 2022 22:16:36 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47602) 
+	id 1onG35-005nyx-0C; Tue, 25 Oct 2022 09:16:39 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:44177) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1on5kF-005cr2-Fh
- for samba-technical@lists.samba.org; Mon, 24 Oct 2022 22:16:33 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=H8VBsBHKyOW0MEt7mFJ3CDm24zxJKIXcxFxXw5gDXtI=; b=inGSJnVc5EI/ZAVqYPmyqyjEqO
- AsK2DxCUjHNujMyLB8eR8W/o/uynGBCmTjwOASAA+2R3r6Y/vBKisC3eWemU5SlTKMUYrbFlQfhBq
- YYSHqbhi55tjUzRYRcCZdoqnGjTGg/kUh0Rzxuwgj8ZywmK3ACPjknCheAX8W3uaZ5LCNLx8cnsbK
- 6KxVBY8Sw3qnG5T4YpvqnvaDofJu+QZ9yXQlAvwBMQlLY9IgkjQ1i98olF3uewRg/Ve3Ikv+s3DCu
- JHvDL2zRh37O92FvCc70i4kZdhAoDTEZaoahv7ioMdZGqLiQdmetc391CeOfS6e9yyJ4xFmUmQNZU
- 1IAVbuWBPn2Kpyht5C/54CwVD7bWOPLx3iPZgWClFnXs+K2aMpz6QkE10FV1SvE+DvrX8CXoQsLSe
- HQgJ5KBKxwUzRipKkoIdsLEWC28sSkeKyjgrwuZB+LeqS79HjJEnF2CX87Dk5frd5n/wqEwM5PA2U
- UAJpzrS3wr86D/Xz3eDM9Ww7;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1on5kE-005an0-Fg; Mon, 24 Oct 2022 22:16:31 +0000
-Date: Mon, 24 Oct 2022 15:16:28 -0700
-To: Florian Weimer <fweimer@redhat.com>
-Subject: Re: vfswrap_getxattrat_do_async and unshare(CLONE_FS)
-Message-ID: <Y1cOvCrfk4QEaE4m@jeremy-acer>
-References: <87czag28up.fsf@oldenburg.str.redhat.com>
+ (Exim) id 1onG30-005nxM-BW
+ for samba-technical@lists.samba.org; Tue, 25 Oct 2022 09:16:36 +0000
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id 375C140D93;
+ Tue, 25 Oct 2022 12:16:31 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 5CA1513A;
+ Tue, 25 Oct 2022 12:16:34 +0300 (MSK)
+Message-ID: <7fc71093-524a-2936-32c6-c41d83777569@msgid.tls.msk.ru>
+Date: Tue, 25 Oct 2022 12:16:30 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <87czag28up.fsf@oldenburg.str.redhat.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.0
+Subject: Re: running only selected tests in samba sources
+Content-Language: en-US
+To: Andreas Schneider <asn@samba.org>,
+ samba-technical <samba-technical@lists.samba.org>
+References: <587ebe9d-3f91-7389-5ad1-c6d96e435b99@msgid.tls.msk.ru>
+ <5854748.lOV4Wx5bFT@magrathea>
+In-Reply-To: <5854748.lOV4Wx5bFT@magrathea>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,34 +52,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Oct 24, 2022 at 11:46:22PM +0200, Florian Weimer via samba-technical wrote:
->As far as I can tell, vfswrap_getxattrat_do_async relies on
->unshare(CLONE_FS) to do fgetxattrat emulation with a thread-local fchdir
->and getxattr.  There do not seem to be any other uses in the sources.
->
->I think the more usual way to emulate the missing fgetxattrat system
->call is to open the file with openat and O_PATH, and then use getxattr
->on the synthetic path under /proc/self/fd.  While these paths present as
->symbolic links, they actually are not, so there is no race possible.
->(fgetxattr cannot operate on the open file descriptor directly.)
->
->Why wasn't the /proc-based approach chosen for Samba?  It looks a bit
->simpler to implement, and does not do strange things to the process
->state behind glibc's back.
+[Rehashing a relatively old thread]
 
-As I recall it was done that way as there are various OEMs with fuse-based
-filesystems that are very slow on fetching EA's, which we have to do
-on every directory entry returned. Doing this inside a pthread using
-unshare(CLONE_FS) to keep a per-thread directory was found to allow
-these filesystems to have a decent performance.
+19.08.2022 09:40, Andreas Schneider via samba-technical wrote:
+> On Monday, 1 August 2022 16:35:15 CEST Michael Tokarev via samba-technical
+> wrote:
+>> Hi!
+> 
+> Hi Michael,
+>   
+>> Is there a way, after successful build of samba source, to run just selected
+>> tests without running whole testsuite, *and* without (re)building
+>> everything with the --enable-selftest option?
+> 
+> you can find documentation in our wiki here:
+> 
+> https://wiki.samba.org/index.php/Writing_Torture_Tests#Running_tests
 
-This was before the VFS-rewrite to use fd's everywhere as I recall,
-so it's possible it may no longer be required. But I'd wait for
-Metze to chime in here as he was deeply involved in this I think.
+All this applies to a build with --enable-selftest. My question was how
+it is possible to run certain tests (like ldb selftests for example)
+without building whole thing with --enable-selftest.
+
+> Improvements are welcome :-)
+
+I'd love to if I knew how to do that ;)
+
+/mjt
 
