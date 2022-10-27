@@ -2,50 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30DD360F6BC
-	for <lists+samba-technical@lfdr.de>; Thu, 27 Oct 2022 14:05:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09B2F610190
+	for <lists+samba-technical@lfdr.de>; Thu, 27 Oct 2022 21:26:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=BJb1Kk7GF9cOzQWU+/M02gbNTsVeaeweLROo/X/n1M4=; b=N1QzOvqTlse3YkDuUpAP7MqsJl
-	nsVBBxKvGhaiHFdW0TavHhv3r7Y54VD2g8UVFWNanY0XK0XyVj8dLxsQvFEsFrthlgwyCUgHAvvb1
-	hYsPAqApXjyd2k1xyCtVnu/555qbqREU7QVEXC4fldU0JOVincvPqeQ1xMFLaEp+kjGvO1E+WXDh+
-	XOQKIMebIgFRhZ9neU/VkxYn/MFi7YYY+M+1NPCj6owM5mvpYkWwbugGCqVqNn6Sw746VUXWKeXYy
-	T7XXEOzzn3o5d45aEDXIiUt78cvNLUpQ0fTMozzckfkGC35DyTJ+KUrHWoyZuleiBMxz8hJ52X5d4
-	Yrf8NNnA==;
-Received: from ip6-localhost ([::1]:21744 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=031l/r5kkCuqbbOOYoOtuMUIsqsFHtnwgj5Awjr32+E=; b=OZrH+y/Rt+jDrui5n9xuIQXpyR
+	tVM3pRNF3c07EdH6EPUGLMy+JH5JxcZDaAQtJhxM5G4bJtESJJENCC/VPf23NVHi0qW+XijrW8HFD
+	6n4JqAXLGRhv1aDlNBerU4VlCdotePEs9kpgpERDrXzmsKDPOUUFYdDbtaLvo+AxxAOc9odDwZJGG
+	yQBUH94ELyvNglWtjFEtmkUAVPRfGMxgqIGfsvWHTzUgiU4pZ2V6XLN8cl1sYKqt9C6Hg/qL5vnfm
+	H+9RH4aE8wWzuIIs8hVFCRA3qA+LxuCJNpZcMuYKYNHt1DYTLDEFvG1iY5hivVpeWjRhPGkGSol9B
+	tru2fp0A==;
+Received: from ip6-localhost ([::1]:35818 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oo1cx-006Q0H-TY; Thu, 27 Oct 2022 12:04:51 +0000
-Received: from mx.cjr.nz ([51.158.111.142]:23678) 
+	id 1oo8VT-006XuZ-KZ; Thu, 27 Oct 2022 19:25:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:38654) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oo1ct-006Q08-3i
- for samba-technical@lists.samba.org; Thu, 27 Oct 2022 12:04:49 +0000
-Received: from authenticated-user (mx.cjr.nz [51.158.111.142])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested) (Authenticated sender: pc)
- by mx.cjr.nz (Postfix) with ESMTPSA id BF77180789;
- Thu, 27 Oct 2022 12:04:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz; s=dkim;
- t=1666872284;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=BJb1Kk7GF9cOzQWU+/M02gbNTsVeaeweLROo/X/n1M4=;
- b=Yz46Hnt6E5EU6iZqONWTfxHOqzhnh+dZNZ+JIcNtcUgjTkq2JxRQ6OtVUBMrHLUog6YPf6
- r+0CUhcvCehlQNIKqcWEAVgXbeQ993wUxpclGWbun4sZ3Yyzl03pMr7Q5W2bmA+3d3AUm9
- oSxYmfx3ht8d37r5G12bq8Y80Fh83EoF8tEiPMoPGhxuTDqzdhkZSTT/6U/3L1ySqcp3B4
- 75UBjGnYbMYw9w/tsMIn0NJkoo4fobpgMmp2KUwCulPTl01XLt7AK61kVnQ0nUWkQVFe/T
- Sk2Pcgyi0JS5T4mL+3j9ygflekLEoijFGmp3gcAW93oQezPSJtgLywUvaz1rqg==
-To: Zeng Heng <zengheng4@huawei.com>, sfrench@samba.org, tom@talpey.com,
- sprasad@microsoft.com, lsahlber@redhat.com
-Subject: Re: [PATCH v3] cifs: fix use-after-free caused by invalid pointer
- `hostname`
-In-Reply-To: <20221027112127.2433605-1-zengheng4@huawei.com>
-References: <20221027112127.2433605-1-zengheng4@huawei.com>
-Date: Thu, 27 Oct 2022 09:05:50 -0300
-Message-ID: <878rl1h3oh.fsf@cjr.nz>
+ (Exim) id 1oo8VO-006XuQ-Fl
+ for samba-technical@lists.samba.org; Thu, 27 Oct 2022 19:25:33 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=031l/r5kkCuqbbOOYoOtuMUIsqsFHtnwgj5Awjr32+E=; b=zIQXmXh+BmwTQcAUE0BNHeFgnh
+ cabbnRR2Ife+9sMa6PPDQ4JDscZLVumhhvhrFQF2a665mnaWJmj1gjQ38zYSrYobOQM4VH+HZdbHe
+ m11Oq65HmWNdUswpn8q/+//+1CbLR659rHeE0p2yqTCsf7gUJUs4c50wdbUo1E4xNalraw6nRhXs/
+ CFuZQvRdl1+wRVgNiXLyqFkVTO8F4UI8I3va3i2Q9GbtHUhCkrHb0n9jmkl4NbkP4W4dvOfBIXuzs
+ vhmzFGWY0ueJzJpg/XvFDK66fJxqSIQ55Ahj8iRF5ik03G3j6FRYKQyw19TIjKYKl+Bcnq/3khpB3
+ YLnpPqHHoUbPayVhIMoE3XMZidvCDwMFkdmYBq23WY25zaztryMQvaPRUBFn/Qw9WMih5+MnJGvJx
+ 6BpTWhf0qCQW89F+0w/arA0kWB4GDcYHaa1NsJNchjnTWLHGMqNctkqW6s5McN6NCyQIe61HOgFcA
+ PlWnxWys74QZnlZXEOoDbOr3;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1oo8VN-0064pF-9J; Thu, 27 Oct 2022 19:25:29 +0000
+Message-ID: <60ce8938-77ed-0b43-0852-7895140c3553@samba.org>
+Date: Thu, 27 Oct 2022 21:25:29 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+Subject: Re: Problems replacing epoll with io_uring in tevent
+Content-Language: en-US
+To: Jens Axboe <axboe@kernel.dk>
+References: <c01f72ac-b2f1-0b1c-6757-26769ee071e2@samba.org>
+ <949fdb8e-bd12-03dc-05c6-c972f26ec0ec@samba.org>
+ <270f3b9a-8fa6-68bf-7c57-277f107167c9@kernel.dk>
+ <2a9e4484-4025-2806-89c3-51c590cfd176@samba.org>
+In-Reply-To: <2a9e4484-4025-2806-89c3-51c590cfd176@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,119 +61,357 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Paulo Alcantara <pc@cjr.nz>
-Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, liwei391@huawei.com
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
+Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+ Samba Technical <samba-technical@lists.samba.org>,
+ io-uring <io-uring@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Zeng Heng <zengheng4@huawei.com> writes:
+Hi Jens,
 
-> `hostname` needs to be set as null-pointer after free in
-> `cifs_put_tcp_session` function, or when `cifsd` thread attempts
-> to resolve hostname and reconnect the host, the thread would deref
-> the invalid pointer.
->
-> Here is one of practical backtrace examples as reference:
->
-> Task 477
-> ---------------------------
->  do_mount
->   path_mount
->    do_new_mount
->     vfs_get_tree
->      smb3_get_tree
->       smb3_get_tree_common
->        cifs_smb3_do_mount
->         cifs_mount
->          mount_put_conns
->           cifs_put_tcp_session
->           --> kfree(server->hostname)
->
-> cifsd
-> ---------------------------
->  kthread
->   cifs_demultiplex_thread
->    cifs_reconnect
->     reconn_set_ipaddr_from_hostname
->     --> if (!server->hostname)
->     --> if (server->hostname[0] == '\0')  // !! UAF fault here
->
-> CIFS: VFS: cifs_mount failed w/return code = -112
-> mount error(112): Host is down
-> BUG: KASAN: use-after-free in reconn_set_ipaddr_from_hostname+0x2ba/0x310
-> Read of size 1 at addr ffff888108f35380 by task cifsd/480
-> CPU: 2 PID: 480 Comm: cifsd Not tainted 6.1.0-rc2-00106-gf705792f89dd-dirty #25
-> Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
-> Call Trace:
->  <TASK>
->  dump_stack_lvl+0x68/0x85
->  print_report+0x16c/0x4a3
->  kasan_report+0x95/0x190
->  reconn_set_ipaddr_from_hostname+0x2ba/0x310
->  __cifs_reconnect.part.0+0x241/0x800
->  cifs_reconnect+0x65f/0xb60
->  cifs_demultiplex_thread+0x1570/0x2570
->  kthread+0x2c5/0x380
->  ret_from_fork+0x22/0x30
->  </TASK>
-> Allocated by task 477:
->  kasan_save_stack+0x1e/0x40
->  kasan_set_track+0x21/0x30
->  __kasan_kmalloc+0x7e/0x90
->  __kmalloc_node_track_caller+0x52/0x1b0
->  kstrdup+0x3b/0x70
->  cifs_get_tcp_session+0xbc/0x19b0
->  mount_get_conns+0xa9/0x10c0
->  cifs_mount+0xdf/0x1970
->  cifs_smb3_do_mount+0x295/0x1660
->  smb3_get_tree+0x352/0x5e0
->  vfs_get_tree+0x8e/0x2e0
->  path_mount+0xf8c/0x1990
->  do_mount+0xee/0x110
->  __x64_sys_mount+0x14b/0x1f0
->  do_syscall_64+0x3b/0x90
->  entry_SYSCALL_64_after_hwframe+0x63/0xcd
-> Freed by task 477:
->  kasan_save_stack+0x1e/0x40
->  kasan_set_track+0x21/0x30
->  kasan_save_free_info+0x2a/0x50
->  __kasan_slab_free+0x10a/0x190
->  __kmem_cache_free+0xca/0x3f0
->  cifs_put_tcp_session+0x30c/0x450
->  cifs_mount+0xf95/0x1970
->  cifs_smb3_do_mount+0x295/0x1660
->  smb3_get_tree+0x352/0x5e0
->  vfs_get_tree+0x8e/0x2e0
->  path_mount+0xf8c/0x1990
->  do_mount+0xee/0x110
->  __x64_sys_mount+0x14b/0x1f0
->  do_syscall_64+0x3b/0x90
->  entry_SYSCALL_64_after_hwframe+0x63/0xcd
-> The buggy address belongs to the object at ffff888108f35380
->  which belongs to the cache kmalloc-16 of size 16
-> The buggy address is located 0 bytes inside of
->  16-byte region [ffff888108f35380, ffff888108f35390)
-> The buggy address belongs to the physical page:
-> page:00000000333f8e58 refcount:1 mapcount:0 mapping:0000000000000000 index:0xffff888108f350e0 pfn:0x108f35
-> flags: 0x200000000000200(slab|node=0|zone=2)
-> raw: 0200000000000200 0000000000000000 dead000000000122 ffff8881000423c0
-> raw: ffff888108f350e0 000000008080007a 00000001ffffffff 0000000000000000
-> page dumped because: kasan: bad access detected
-> Memory state around the buggy address:
->  ffff888108f35280: fa fb fc fc fa fb fc fc fa fb fc fc fa fb fc fc
->  ffff888108f35300: fa fb fc fc fa fb fc fc fa fb fc fc fa fb fc fc
->>ffff888108f35380: fa fb fc fc fa fb fc fc fa fb fc fc fa fb fc fc
->                    ^
->  ffff888108f35400: fa fb fc fc fc fc fc fc fc fc fc fc fc fc fc fc
->  ffff888108f35480: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
->
-> Fixes: 28eb24ff75c5 ("cifs: Always resolve hostname before reconnecting")
-> Signed-off-by: Zeng Heng <zengheng4@huawei.com>
-> ---
->  fs/cifs/connect.c | 1 +
->  1 file changed, 1 insertion(+)
+>>> I'm currently trying to prototype for an IORING_POLL_CANCEL_ON_CLOSE
+>>> flag that can be passed to POLL_ADD. With that we'll register
+>>> the request in &req->file->f_uring_poll (similar to the file->f_ep list for epoll)
+>>> Then we only get a real reference to the file during the call to
+>>> vfs_poll() otherwise we drop the fget/fput reference and rely on
+>>> an io_uring_poll_release_file() (similar to eventpoll_release_file())
+>>> to cancel our registered poll request.
+>>
+>> Yes, this is a bit tricky as we hold the file ref across the operation. I'd
+>> be interested in seeing your approach to this, and also how it would
+>> interact with registered files...
+> 
+> Here's my current patch:
+> https://git.samba.org/?p=metze/linux/wip.git;a=commitdiff;h=b9cccfac515739fc279c6eec87ce655a96f94685
+> It compiles, but I haven't tested it yet. And I'm not sure if the locking is done correctly...
 
-Reviewed-by: Paulo Alcantara (SUSE) <pc@cjr.nz>
+It doesn't deadlock nor blow up immediately :-)
+And it does fix the problem I had.
+
+So what do you think about that patch?
+Am I doing stupid things there?
+
+These points might be changed:
+- returning -EBADF instead of -ECANCELED
+   might be better and allow the caller to avoid
+   retrying.
+- I guess we could use a single linked list, but
+   I'm mostly used to how struct list_head works.
+   And I want something that works first.
+- We may find a better name than IORING_POLL_CANCEL_ON_CLOSE
+- struct io_poll is completely full, as well as io_kiocb->flags
+   (maybe we should move flags to 64 bit?),
+   so we need to use some other generic struct io_kiocb space,
+   which might also be good in order make it possible to keep io_poll_add()
+   and io_arm_poll_handler() in common.
+   But we may have the new field a bit differently. Note that
+   struct io_kiocb (without this patch) still has 32 free bytes before
+   4 64 byte cachelines are filled. With my patch 24 bytes are left...
+- In struct file it might be possible to share a reference list with
+   with the epoll code, where each element can indicate it epoll
+   or io_uring is used.
+
+I'm pasting it below in order to make it easier to get comments...
+
+metze
+
+  fs/file_table.c                |   3 ++
+  include/linux/fs.h             |   1 +
+  include/linux/io_uring.h       |  12 +++++
+  include/linux/io_uring_types.h |   4 ++
+  include/uapi/linux/io_uring.h  |   1 +
+  io_uring/opdef.c               |   1 +
+  io_uring/poll.c                | 100 ++++++++++++++++++++++++++++++++++++++++-
+  io_uring/poll.h                |   1 +
+  8 files changed, 122 insertions(+), 1 deletion(-)
+
+diff --git a/fs/file_table.c b/fs/file_table.c
+index dd88701e54a9..cad408e9c0f5 100644
+--- a/fs/file_table.c
++++ b/fs/file_table.c
+@@ -16,6 +16,7 @@
+  #include <linux/security.h>
+  #include <linux/cred.h>
+  #include <linux/eventpoll.h>
++#include <linux/io_uring.h>
+  #include <linux/rcupdate.h>
+  #include <linux/mount.h>
+  #include <linux/capability.h>
+@@ -147,6 +148,7 @@ static struct file *__alloc_file(int flags, const struct cred *cred)
+  	}
+
+  	atomic_long_set(&f->f_count, 1);
++	INIT_LIST_HEAD(&f->f_uring_poll);
+  	rwlock_init(&f->f_owner.lock);
+  	spin_lock_init(&f->f_lock);
+  	mutex_init(&f->f_pos_lock);
+@@ -309,6 +311,7 @@ static void __fput(struct file *file)
+  	 * in the file cleanup chain.
+  	 */
+  	eventpoll_release(file);
++	io_uring_poll_release(file);
+  	locks_remove_file(file);
+
+  	ima_file_free(file);
+diff --git a/include/linux/fs.h b/include/linux/fs.h
+index e654435f1651..7f99efa7a1dc 100644
+--- a/include/linux/fs.h
++++ b/include/linux/fs.h
+@@ -972,6 +972,7 @@ struct file {
+  	/* Used by fs/eventpoll.c to link all the hooks to this file */
+  	struct hlist_head	*f_ep;
+  #endif /* #ifdef CONFIG_EPOLL */
++	struct list_head	f_uring_poll;
+  	struct address_space	*f_mapping;
+  	errseq_t		f_wb_err;
+  	errseq_t		f_sb_err; /* for syncfs */
+diff --git a/include/linux/io_uring.h b/include/linux/io_uring.h
+index 43bc8a2edccf..c931ea92c29a 100644
+--- a/include/linux/io_uring.h
++++ b/include/linux/io_uring.h
+@@ -61,6 +61,15 @@ static inline void io_uring_free(struct task_struct *tsk)
+  	if (tsk->io_uring)
+  		__io_uring_free(tsk);
+  }
++
++void io_uring_poll_release_file(struct file *file);
++static inline void io_uring_poll_release(struct file *file)
++{
++	if (likely(list_empty_careful(&file->f_uring_poll)))
++		return;
++
++	io_uring_poll_release_file(file);
++}
+  #else
+  static inline int io_uring_cmd_import_fixed(u64 ubuf, unsigned long len, int rw,
+  			      struct iov_iter *iter, void *ioucmd)
+@@ -92,6 +101,9 @@ static inline const char *io_uring_get_opcode(u8 opcode)
+  {
+  	return "";
+  }
++static inline void io_uring_poll_release(struct file *file)
++{
++}
+  #endif
+
+  #endif
+diff --git a/include/linux/io_uring_types.h b/include/linux/io_uring_types.h
+index f5b687a787a3..2373e01c57e7 100644
+--- a/include/linux/io_uring_types.h
++++ b/include/linux/io_uring_types.h
+@@ -547,8 +547,12 @@ struct io_kiocb {
+  	union {
+  		/* used by request caches, completion batching and iopoll */
+  		struct io_wq_work_node	comp_list;
++		struct {
+  		/* cache ->apoll->events */
+  		__poll_t apoll_events;
++		u8 poll_cancel_on_close:1;
++		struct list_head		f_uring_poll_entry;
++		};
+  	};
+  	atomic_t			refs;
+  	atomic_t			poll_refs;
+diff --git a/include/uapi/linux/io_uring.h b/include/uapi/linux/io_uring.h
+index a2ce8ba7abb5..fe311667cb8c 100644
+--- a/include/uapi/linux/io_uring.h
++++ b/include/uapi/linux/io_uring.h
+@@ -276,6 +276,7 @@ enum io_uring_op {
+  #define IORING_POLL_UPDATE_EVENTS	(1U << 1)
+  #define IORING_POLL_UPDATE_USER_DATA	(1U << 2)
+  #define IORING_POLL_ADD_LEVEL		(1U << 3)
++#define IORING_POLL_CANCEL_ON_CLOSE	(1U << 4)
+
+  /*
+   * ASYNC_CANCEL flags.
+diff --git a/io_uring/opdef.c b/io_uring/opdef.c
+index 34b08c87ffa5..540ee55961a3 100644
+--- a/io_uring/opdef.c
++++ b/io_uring/opdef.c
+@@ -131,6 +131,7 @@ const struct io_op_def io_op_defs[] = {
+  		.name			= "POLL_ADD",
+  		.prep			= io_poll_add_prep,
+  		.issue			= io_poll_add,
++		.cleanup		= io_poll_cleanup,
+  	},
+  	[IORING_OP_POLL_REMOVE] = {
+  		.audit_skip		= 1,
+diff --git a/io_uring/poll.c b/io_uring/poll.c
+index 0d9f49c575e0..d4ccf2f2e815 100644
+--- a/io_uring/poll.c
++++ b/io_uring/poll.c
+@@ -163,6 +163,19 @@ static inline void io_poll_remove_entry(struct io_poll *poll)
+
+  static void io_poll_remove_entries(struct io_kiocb *req)
+  {
++	if (!list_empty_careful(&req->f_uring_poll_entry)) {
++		spin_lock(&req->file->f_lock);
++		list_del_init_careful(&req->f_uring_poll_entry);
++		/*
++		 * upgrade to a full reference again,
++		 * it will be released in the common
++		 * cleanup code via io_put_file().
++		 */
++		if (!(req->flags & REQ_F_FIXED_FILE))
++			WARN_ON_ONCE(!get_file_rcu(req->file));
++		spin_unlock(&req->file->f_lock);
++	}
++
+  	/*
+  	 * Nothing to do if neither of those flags are set. Avoid dipping
+  	 * into the poll/apoll/double cachelines if we can.
+@@ -199,6 +212,54 @@ enum {
+  	IOU_POLL_REMOVE_POLL_USE_RES = 2,
+  };
+
++static inline struct file *io_poll_get_additional_file_ref(struct io_kiocb *req,
++							   unsigned issue_flags)
++{
++	if (!(req->poll_cancel_on_close))
++		return NULL;
++
++	if (unlikely(!req->file))
++		return NULL;
++
++	req->flags |= REQ_F_NEED_CLEANUP;
++
++	if (list_empty_careful(&req->f_uring_poll_entry)) {
++		/*
++		 * This first time we need to add ourself to the
++		 * file->f_uring_poll.
++		 */
++		spin_lock(&req->file->f_lock);
++		list_add_tail(&req->f_uring_poll_entry, &req->file->f_uring_poll);
++		spin_unlock(&req->file->f_lock);
++		if (!(req->flags & REQ_F_FIXED_FILE)) {
++			/*
++			 * If it's not a fixed file,
++			 * we can allow the caller to drop the existing
++			 * reference.
++			 */
++			return req->file;
++		}
++		/*
++		 * For fixed files we grab an additional reference
++		 */
++	}
++
++	io_ring_submit_lock(req->ctx, issue_flags);
++	if (unlikely(!req->file)) {
++		io_ring_submit_unlock(req->ctx, issue_flags);
++		return NULL;
++	}
++	rcu_read_lock();
++	if (unlikely(!get_file_rcu(req->file))) {
++		req->file = NULL;
++		req->cqe.fd = -1;
++		io_poll_mark_cancelled(req);
++	}
++	rcu_read_unlock();
++	io_ring_submit_unlock(req->ctx, issue_flags);
++	return req->file;
++}
++
+  /*
+   * All poll tw should go through this. Checks for poll events, manages
+   * references, does rewait, etc.
+@@ -230,7 +291,12 @@ static int io_poll_check_events(struct io_kiocb *req, bool *locked)
+  		/* the mask was stashed in __io_poll_execute */
+  		if (!req->cqe.res) {
+  			struct poll_table_struct pt = { ._key = req->apoll_events };
++			unsigned issue_flags = (!*locked) ? IO_URING_F_UNLOCKED : 0;
++			struct file *file_to_put = io_poll_get_additional_file_ref(req, issue_flags);
++			if (unlikely(!req->file))
++				return -ECANCELED;
+  			req->cqe.res = vfs_poll(req->file, &pt) & req->apoll_events;
++			io_put_file(file_to_put);
+  		}
+
+  		if ((unlikely(!req->cqe.res)))
+@@ -499,6 +565,7 @@ static int __io_arm_poll_handler(struct io_kiocb *req,
+  				 unsigned issue_flags)
+  {
+  	struct io_ring_ctx *ctx = req->ctx;
++	struct file *file_to_put;
+  	int v;
+
+  	INIT_HLIST_NODE(&req->hash_node);
+@@ -506,6 +573,7 @@ static int __io_arm_poll_handler(struct io_kiocb *req,
+  	io_init_poll_iocb(poll, mask, io_poll_wake);
+  	poll->file = req->file;
+  	req->apoll_events = poll->events;
++	INIT_LIST_HEAD(&req->f_uring_poll_entry);
+
+  	ipt->pt._key = mask;
+  	ipt->req = req;
+@@ -529,7 +597,11 @@ static int __io_arm_poll_handler(struct io_kiocb *req,
+  	if (issue_flags & IO_URING_F_UNLOCKED)
+  		req->flags &= ~REQ_F_HASH_LOCKED;
+
++	file_to_put = io_poll_get_additional_file_ref(req, issue_flags);
++	if (unlikely(!req->file))
++		return -ECANCELED;
+  	mask = vfs_poll(req->file, &ipt->pt) & poll->events;
++	io_put_file(file_to_put);
+
+  	if (unlikely(ipt->error || !ipt->nr_entries)) {
+  		io_poll_remove_entries(req);
+@@ -857,11 +929,17 @@ int io_poll_add_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe)
+  	if (sqe->buf_index || sqe->off || sqe->addr)
+  		return -EINVAL;
+  	flags = READ_ONCE(sqe->len);
+-	if (flags & ~IORING_POLL_ADD_MULTI)
++	if (flags & ~(IORING_POLL_ADD_MULTI|IORING_POLL_CANCEL_ON_CLOSE))
+  		return -EINVAL;
+  	if ((flags & IORING_POLL_ADD_MULTI) && (req->flags & REQ_F_CQE_SKIP))
+  		return -EINVAL;
+
++	if (flags & IORING_POLL_CANCEL_ON_CLOSE) {
++		req->poll_cancel_on_close = 1;
++	} else {
++		req->poll_cancel_on_close = 0;
++	}
++
+  	poll->events = io_poll_parse_events(sqe, flags);
+  	return 0;
+  }
+@@ -963,3 +1041,23 @@ void io_apoll_cache_free(struct io_cache_entry *entry)
+  {
+  	kfree(container_of(entry, struct async_poll, cache));
+  }
++
++void io_uring_poll_release_file(struct file *file)
++{
++	struct io_kiocb *req, *next;
++
++	list_for_each_entry_safe(req, next, &file->f_uring_poll, f_uring_poll_entry) {
++		io_ring_submit_lock(req->ctx, IO_URING_F_UNLOCKED);
++		io_poll_mark_cancelled(req);
++		list_del_init_careful(&req->f_uring_poll_entry);
++		io_poll_remove_entries(req);
++		req->file = NULL;
++		io_poll_execute(req, 0);
++		io_ring_submit_unlock(req->ctx, IO_URING_F_UNLOCKED);
++	}
++}
++
++void io_poll_cleanup(struct io_kiocb *req)
++{
++	io_poll_remove_entries(req);
++}
+diff --git a/io_uring/poll.h b/io_uring/poll.h
+index ef25c26fdaf8..43e6b877f1bc 100644
+--- a/io_uring/poll.h
++++ b/io_uring/poll.h
+@@ -27,6 +27,7 @@ struct async_poll {
+
+  int io_poll_add_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe);
+  int io_poll_add(struct io_kiocb *req, unsigned int issue_flags);
++void io_poll_cleanup(struct io_kiocb *req);
+
+  int io_poll_remove_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe);
+  int io_poll_remove(struct io_kiocb *req, unsigned int issue_flags);
+
 
