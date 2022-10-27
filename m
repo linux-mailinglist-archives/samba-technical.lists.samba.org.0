@@ -2,54 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B4DD60F598
-	for <lists+samba-technical@lfdr.de>; Thu, 27 Oct 2022 12:44:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 30DD360F6BC
+	for <lists+samba-technical@lfdr.de>; Thu, 27 Oct 2022 14:05:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=k6vkOzYRr8FG9PxvNSHth44Nw0jg6hIdjggzP/2/mVs=; b=iCoSMpxhcoWeI/fkVF2tQOSQQw
-	EqdNIIfABMHeQuVuSYDiF789boYNnOdKhbbNAP8YCYGly5Sdpplk98niIAp361YwjcAwt6qZJNBKV
-	prQ7Q7JKfkQdGayYBF5ah29K3POhuGpQROZDaeoCh3YvN3Ic3YmJRfphV5yBYpbDu63RuV77gpiOO
-	XocYsFRZcoH/f5VHOKOFbrtA1wlwUgxmablLodor7yTUPbHz7w2nKyilprqdq/nQWBT2Es9JSUVXS
-	UhB26jvKy4HCxchFjisNf/xx628ovSlD1ex8D2i6YTeDLWhRcTZPZwi3g/7I46XreJx/nq4Kuzwsm
-	5Yd15Fjw==;
-Received: from ip6-localhost ([::1]:46730 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=BJb1Kk7GF9cOzQWU+/M02gbNTsVeaeweLROo/X/n1M4=; b=N1QzOvqTlse3YkDuUpAP7MqsJl
+	nsVBBxKvGhaiHFdW0TavHhv3r7Y54VD2g8UVFWNanY0XK0XyVj8dLxsQvFEsFrthlgwyCUgHAvvb1
+	hYsPAqApXjyd2k1xyCtVnu/555qbqREU7QVEXC4fldU0JOVincvPqeQ1xMFLaEp+kjGvO1E+WXDh+
+	XOQKIMebIgFRhZ9neU/VkxYn/MFi7YYY+M+1NPCj6owM5mvpYkWwbugGCqVqNn6Sw746VUXWKeXYy
+	T7XXEOzzn3o5d45aEDXIiUt78cvNLUpQ0fTMozzckfkGC35DyTJ+KUrHWoyZuleiBMxz8hJ52X5d4
+	Yrf8NNnA==;
+Received: from ip6-localhost ([::1]:21744 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oo0Mv-006NZ7-MD; Thu, 27 Oct 2022 10:44:13 +0000
-Received: from smtp.arcada.fi ([2001:708:170:33::246]:52206
- helo=hipper.arcada.fi) 
+	id 1oo1cx-006Q0H-TY; Thu, 27 Oct 2022 12:04:51 +0000
+Received: from mx.cjr.nz ([51.158.111.142]:23678) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oo0Mr-006NYx-4G
- for samba-technical@lists.samba.org; Thu, 27 Oct 2022 10:44:11 +0000
-Received: from penti.sit.fi (penti.sit.fi [IPv6:2001:708:170:33:0:0:0:237])
- by hipper.arcada.fi (8.15.2/8.15.2/Debian-14~deb10u1) with ESMTPS id
- 29RAi5f4088927
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 27 Oct 2022 13:44:05 +0300
-DKIM-Filter: OpenDKIM Filter v2.11.0 hipper.arcada.fi 29RAi5f4088927
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arcada.fi; s=2013-11;
- t=1666867445; bh=oLwW61WyMyBiPIaqySGmkv0MJG1wN/U2zpZtYJyPhz4=;
- h=Date:From:To:cc:Subject:In-Reply-To:References:From;
- b=Zw198lUnzFbXYadSaQrZU1cHsXOwm4pedwsI/0LlK70RnbMG7K8Th6Wc5L7XodlLG
- jyPhcmTfhc6wyBX0putsy597i9z25znVExL4hNwS/y8RrWv8kUgLMrbXO8KmyKDx+S
- TuGYC0C0eVEb5y/Ol6ILTHapewReujKeMyN9qrAc=
-Received: from penti.sit.fi ([IPv6:::1])
- by penti.sit.fi (8.14.7/8.14.7) with ESMTP id 29RAi5g9014968;
- Thu, 27 Oct 2022 13:44:05 +0300
-Received: from localhost (harald@localhost)
- by penti.sit.fi (8.14.7/8.14.9/Submit) with ESMTP id 29RAi5N7014964;
- Thu, 27 Oct 2022 13:44:05 +0300
-X-Authentication-Warning: penti.sit.fi: harald owned process doing -bs
-Date: Thu, 27 Oct 2022 13:44:05 +0300 (EEST)
-To: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Subject: Re: Upgrade AD DS from 4.9.5 -> 4.13.13, cannot resolve usernames
- on member server
-In-Reply-To: <eca6131a-3c87-d4e8-963b-e00f918e9d67@samba.org>
-Message-ID: <2b744d34-9af4-049-48bd-7f7a738eedf6@arcada.fi>
-References: <6611f3fb-6ff-565f-c3c9-9476c33fb31d@arcada.fi>
- <eca6131a-3c87-d4e8-963b-e00f918e9d67@samba.org>
+ (Exim) id 1oo1ct-006Q08-3i
+ for samba-technical@lists.samba.org; Thu, 27 Oct 2022 12:04:49 +0000
+Received: from authenticated-user (mx.cjr.nz [51.158.111.142])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested) (Authenticated sender: pc)
+ by mx.cjr.nz (Postfix) with ESMTPSA id BF77180789;
+ Thu, 27 Oct 2022 12:04:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz; s=dkim;
+ t=1666872284;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=BJb1Kk7GF9cOzQWU+/M02gbNTsVeaeweLROo/X/n1M4=;
+ b=Yz46Hnt6E5EU6iZqONWTfxHOqzhnh+dZNZ+JIcNtcUgjTkq2JxRQ6OtVUBMrHLUog6YPf6
+ r+0CUhcvCehlQNIKqcWEAVgXbeQ993wUxpclGWbun4sZ3Yyzl03pMr7Q5W2bmA+3d3AUm9
+ oSxYmfx3ht8d37r5G12bq8Y80Fh83EoF8tEiPMoPGhxuTDqzdhkZSTT/6U/3L1ySqcp3B4
+ 75UBjGnYbMYw9w/tsMIn0NJkoo4fobpgMmp2KUwCulPTl01XLt7AK61kVnQ0nUWkQVFe/T
+ Sk2Pcgyi0JS5T4mL+3j9ygflekLEoijFGmp3gcAW93oQezPSJtgLywUvaz1rqg==
+To: Zeng Heng <zengheng4@huawei.com>, sfrench@samba.org, tom@talpey.com,
+ sprasad@microsoft.com, lsahlber@redhat.com
+Subject: Re: [PATCH v3] cifs: fix use-after-free caused by invalid pointer
+ `hostname`
+In-Reply-To: <20221027112127.2433605-1-zengheng4@huawei.com>
+References: <20221027112127.2433605-1-zengheng4@huawei.com>
+Date: Thu, 27 Oct 2022 09:05:50 -0300
+Message-ID: <878rl1h3oh.fsf@cjr.nz>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII; format=flowed
-X-Virus-Status: Clean
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,59 +59,119 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Harald Hannelius via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Harald Hannelius <harald+samba@arcada.fi>
+From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Paulo Alcantara <pc@cjr.nz>
+Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, liwei391@huawei.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+Zeng Heng <zengheng4@huawei.com> writes:
 
-On Thu, 27 Oct 2022, Rowland Penny via samba-technical wrote:
-> On 27/10/2022 10:57, Harald Hannelius via samba-technical wrote:
->> 
->> I upgraded my AD DS servers from Debian 10 to Debian 11 bullseye which also 
->> upgraded Samba from 4.9.5 to 4.13.13.
->> 
->> Now I notice that I am unable to resolve usernames on the member servers. I 
->> have only numbers in the processlist for example. 'getent passwd 
->> "DOMAIN\harald"' doesn't return anything.
->> 
->> Did I miss something in the upgrade process?
+> `hostname` needs to be set as null-pointer after free in
+> `cifs_put_tcp_session` function, or when `cifsd` thread attempts
+> to resolve hostname and reconnect the host, the thread would deref
+> the invalid pointer.
 >
-> No idea, you haven't given us enough to work with.
+> Here is one of practical backtrace examples as reference:
 >
-> How did you upgrade your DC's ?
-
-apt-get upgrade && apt-get dist-upgrade
-
-> Did you upgrade them in place or did you create new DC's and demote the old 
-> ones ?
-
-In place.
-
-> What idmap backend are you using on the Unis domain members ?
-
- 	idmap config domain:unix_primary_group = yes
- 	idmap config domain:unix_nss_info = yes
- 	idmap config domain:range = 500-4000000
- 	idmap config domain:schema_mode = rfc2307
- 	idmap config domain:backend = ad
- 	idmap config * : range = 5000000-9000000
- 	idmap config * : backend = tdb
-
->> Now when I restarted the smbd, winbind and nmbd I am unable to connect to 
->> the member server.
+> Task 477
+> ---------------------------
+>  do_mount
+>   path_mount
+>    do_new_mount
+>     vfs_get_tree
+>      smb3_get_tree
+>       smb3_get_tree_common
+>        cifs_smb3_do_mount
+>         cifs_mount
+>          mount_put_conns
+>           cifs_put_tcp_session
+>           --> kfree(server->hostname)
 >
-> Sounds like a possible dns issue.
+> cifsd
+> ---------------------------
+>  kthread
+>   cifs_demultiplex_thread
+>    cifs_reconnect
+>     reconn_set_ipaddr_from_hostname
+>     --> if (!server->hostname)
+>     --> if (server->hostname[0] == '\0')  // !! UAF fault here
+>
+> CIFS: VFS: cifs_mount failed w/return code = -112
+> mount error(112): Host is down
+> BUG: KASAN: use-after-free in reconn_set_ipaddr_from_hostname+0x2ba/0x310
+> Read of size 1 at addr ffff888108f35380 by task cifsd/480
+> CPU: 2 PID: 480 Comm: cifsd Not tainted 6.1.0-rc2-00106-gf705792f89dd-dirty #25
+> Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
+> Call Trace:
+>  <TASK>
+>  dump_stack_lvl+0x68/0x85
+>  print_report+0x16c/0x4a3
+>  kasan_report+0x95/0x190
+>  reconn_set_ipaddr_from_hostname+0x2ba/0x310
+>  __cifs_reconnect.part.0+0x241/0x800
+>  cifs_reconnect+0x65f/0xb60
+>  cifs_demultiplex_thread+0x1570/0x2570
+>  kthread+0x2c5/0x380
+>  ret_from_fork+0x22/0x30
+>  </TASK>
+> Allocated by task 477:
+>  kasan_save_stack+0x1e/0x40
+>  kasan_set_track+0x21/0x30
+>  __kasan_kmalloc+0x7e/0x90
+>  __kmalloc_node_track_caller+0x52/0x1b0
+>  kstrdup+0x3b/0x70
+>  cifs_get_tcp_session+0xbc/0x19b0
+>  mount_get_conns+0xa9/0x10c0
+>  cifs_mount+0xdf/0x1970
+>  cifs_smb3_do_mount+0x295/0x1660
+>  smb3_get_tree+0x352/0x5e0
+>  vfs_get_tree+0x8e/0x2e0
+>  path_mount+0xf8c/0x1990
+>  do_mount+0xee/0x110
+>  __x64_sys_mount+0x14b/0x1f0
+>  do_syscall_64+0x3b/0x90
+>  entry_SYSCALL_64_after_hwframe+0x63/0xcd
+> Freed by task 477:
+>  kasan_save_stack+0x1e/0x40
+>  kasan_set_track+0x21/0x30
+>  kasan_save_free_info+0x2a/0x50
+>  __kasan_slab_free+0x10a/0x190
+>  __kmem_cache_free+0xca/0x3f0
+>  cifs_put_tcp_session+0x30c/0x450
+>  cifs_mount+0xf95/0x1970
+>  cifs_smb3_do_mount+0x295/0x1660
+>  smb3_get_tree+0x352/0x5e0
+>  vfs_get_tree+0x8e/0x2e0
+>  path_mount+0xf8c/0x1990
+>  do_mount+0xee/0x110
+>  __x64_sys_mount+0x14b/0x1f0
+>  do_syscall_64+0x3b/0x90
+>  entry_SYSCALL_64_after_hwframe+0x63/0xcd
+> The buggy address belongs to the object at ffff888108f35380
+>  which belongs to the cache kmalloc-16 of size 16
+> The buggy address is located 0 bytes inside of
+>  16-byte region [ffff888108f35380, ffff888108f35390)
+> The buggy address belongs to the physical page:
+> page:00000000333f8e58 refcount:1 mapcount:0 mapping:0000000000000000 index:0xffff888108f350e0 pfn:0x108f35
+> flags: 0x200000000000200(slab|node=0|zone=2)
+> raw: 0200000000000200 0000000000000000 dead000000000122 ffff8881000423c0
+> raw: ffff888108f350e0 000000008080007a 00000001ffffffff 0000000000000000
+> page dumped because: kasan: bad access detected
+> Memory state around the buggy address:
+>  ffff888108f35280: fa fb fc fc fa fb fc fc fa fb fc fc fa fb fc fc
+>  ffff888108f35300: fa fb fc fc fa fb fc fc fa fb fc fc fa fb fc fc
+>>ffff888108f35380: fa fb fc fc fa fb fc fc fa fb fc fc fa fb fc fc
+>                    ^
+>  ffff888108f35400: fa fb fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+>  ffff888108f35480: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+>
+> Fixes: 28eb24ff75c5 ("cifs: Always resolve hostname before reconnecting")
+> Signed-off-by: Zeng Heng <zengheng4@huawei.com>
+> ---
+>  fs/cifs/connect.c | 1 +
+>  1 file changed, 1 insertion(+)
 
-I have to check that next time I try doing this upgrade. Thanks.
-
-> This isn't really the place to be discussing this, you should have posted to 
-> the samba mailing list.
-
-Oh, sorry. I'll repost there.
-
-Thank You for Your time, appreciated.
--- 
-
-Harald Hannelius | harald.hannelius/a\arcada.fi | +358 50 594 1020
+Reviewed-by: Paulo Alcantara (SUSE) <pc@cjr.nz>
 
