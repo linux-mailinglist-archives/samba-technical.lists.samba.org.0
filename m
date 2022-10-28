@@ -2,58 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1445E6109B3
-	for <lists+samba-technical@lfdr.de>; Fri, 28 Oct 2022 07:21:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FFE16109CC
+	for <lists+samba-technical@lfdr.de>; Fri, 28 Oct 2022 07:42:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=CN6XjvDtu46q0u2KRm5mMXry24we3sE+OyWEdY5evzU=; b=wlXF+MHbsNpa0YqJhVxYEbupIC
-	uxt/vP3138NaejV4AqTK9i/4wNzmyreZE7kQ10/osG9KNYhVncMeqEenDlb15ludnZakji+LC250b
-	uZhV+KQJXuZzUfNmqZxM+QmUs8A7RLX0QIMlvVbtSLpFveJVMcSGbulgg6zD4vKWbwfFD4573k+dO
-	AzUQQfbL0WrzJcKQiISCKjM1KGeG+V8RlFhwa/CJF2wc/33RLC0W/UuCgGIFkLoyDgPUd6j4LjiRN
-	vNTTu4zj+ckgaEkIQ/JdVaodLvExF9o0AJm04D5o7WEfrP8E0XbA3IXLqNCaALlyCoMvfzzgFuawA
-	6HF7V3fw==;
-Received: from ip6-localhost ([::1]:51736 helo=hr1.samba.org) 
+	bh=UMDC/dOy4cljPNRTKHBYaRwX000WJ6DjueBu7SmlAg8=; b=Dv6sHSRI1rGhE+Y9dekTn4adoL
+	8uAH92vEgqhLr9p6uRNUGKT4OVpy/QWu6pCjsgDpCDPKyIVO72taSJfUtG6GH1v1C8YE8KLuB+PR0
+	1Sjolpf5SfxVbnKFK2i5zRRMHNTU/TqFiX7YHKwEoSQslXYo17v2MGFq1hFX7p3Ni6l92B0E4vfDo
+	cAjGNs2ZSWjAzeCNws8UMaCYkgQrJyjU5oFvg7yKo/O/bSZEB6JtrXwd8sEQrh9NnK4Av+GdjFpSa
+	KTcj2oCD16jFr0dYAZOKDX9nBusnLqgvk5tKS+ugWWeHDYjaHOW8nKAN1rYi/AAAx/Teyi/eGwGcI
+	ysJvfsqw==;
+Received: from ip6-localhost ([::1]:37352 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ooHnP-006ctC-Oq; Fri, 28 Oct 2022 05:20:43 +0000
-Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:41477) 
+	id 1ooI80-006dDL-5H; Fri, 28 Oct 2022 05:42:00 +0000
+Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b]:33531) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ooHnL-006ct3-9D
- for samba-technical@lists.samba.org; Fri, 28 Oct 2022 05:20:41 +0000
-Received: by mail-lf1-x129.google.com with SMTP id f37so6483332lfv.8
- for <samba-technical@lists.samba.org>; Thu, 27 Oct 2022 22:20:38 -0700 (PDT)
+ (Exim) id 1ooI7u-006dDC-CO
+ for samba-technical@lists.samba.org; Fri, 28 Oct 2022 05:41:56 +0000
+Received: by mail-lj1-x22b.google.com with SMTP id b8so7077745ljf.0
+ for <samba-technical@lists.samba.org>; Thu, 27 Oct 2022 22:41:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CN6XjvDtu46q0u2KRm5mMXry24we3sE+OyWEdY5evzU=;
- b=pyjbPtyLw+hu0QM/S/SIX/Ny0NwoIrbrnLAvgmhZ9Sc7dM6f6/I6mW96gkAIOk07pF
- DOycU/wjze4oJHt/wkl8+iED6D0vpr+xLsxW1LBhWefofMwgDEHaVz3JWyd8xLpN28Yi
- IQtM7XrA2QCgj/tbJFU7kqMrP4udtagDWum2y9VUxbEnTYZEA+jCa674prtjx9nIC0Zl
- +QgYe6B3npdujZn7nrXR9QvVcrXvwIF/iAzcVS9OuioU5AsvS1tdf+mghfURfdDK67mr
- io+YtCs4j8lQqUdplKjkWGKt5vyhoEfyaIJm5iwzO45NoGHzFOWDFyC18M40rwrXoZ1W
- YCWQ==
+ bh=UMDC/dOy4cljPNRTKHBYaRwX000WJ6DjueBu7SmlAg8=;
+ b=CVAHJsq6SxixoOWMCGb5QpSJqkLw0tqM4JzUMRRUXerlDl3W2U8/1jTgQDTpzp13il
+ p9MfXRinI4Z0TtL6IgCsiepM6mjGo6CNgGGYtY2drggN4u8HiL2cq8wreawvqyKn0LXn
+ qeLiiIv8jhsxhuhyjDRjdWnueZU7ls9kiJiQ5sc2Fz5tsuqCuiXV+pm8Z8n6k5+iHS/h
+ DRchu+fGSXN2Y1w+BNHxOgHWQLaBAAeZB+zjOwy1+JB6SldALiX9fWd5atSRhCANLIxb
+ mhxdLllP3o8tXfB0OvyE1Mn7sxTodtBGS650IBcob1g4fEZw4ctBwAfvq7z3AegLk334
+ +2Bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=CN6XjvDtu46q0u2KRm5mMXry24we3sE+OyWEdY5evzU=;
- b=RnzShWofqSyRs2uLR9FTj+caoff4eD/lvAxInHsEEhLat6SLrXEhG7N3714QESj1h/
- 3+XTp4PKRvzBzgfiqM/ZYwPArtBaNdfChenUadzv4p7dSZhuQZJunlgiByQ455lchYQ6
- XyL8EvuWIwpkrpDSbZ6aC9nd63HCixZGDfb3TCZHoxyA6PIFhLpzDWMpORnA5hLj7MWr
- M3T4sc7zD1ZnXpBZb/9OoKJc/1fynBC/rM8qFiDGX+9OKRjSVzF7rMHn5sF8QM6+c7wE
- YgZBvTAieZGtRjq5vty58t63Ro5JVNBSrPhbLMudUs8kNk5Qicx6u5bUOH5w/qof5UfZ
- CeOQ==
-X-Gm-Message-State: ACrzQf0zkhBxUue6PLyZybQ3PYY4vV/qm0TCHNO/socfijQwOocKUr/k
- gMyVrDRoTEXhZHV8iTNwpq44pU1w3m141cRspE8=
-X-Google-Smtp-Source: AMsMyM6QW7+6YgKsOE7rghTy3mNlmrpkNv+xLE4oZvFKfk7Cf8VrSXH3mueaGQBwfTwLvSWB/O/Uv3lVLK+kN7Qxl1w=
-X-Received: by 2002:a05:6512:104c:b0:4a2:6cee:ae17 with SMTP id
- c12-20020a056512104c00b004a26ceeae17mr18449491lfb.417.1666934437436; Thu, 27
- Oct 2022 22:20:37 -0700 (PDT)
+ bh=UMDC/dOy4cljPNRTKHBYaRwX000WJ6DjueBu7SmlAg8=;
+ b=OAkMUwibpuJWyk0OjAOwautUMGISeo+4WSTNqTrbWlH19AtqvW1try7vZUEuvkchWU
+ GGjnO6LWWuGAjnUbLtkGWMAu78nUrogB1CjkpZz/AX8NhxgTYdfC6uRQozu9eA+yB628
+ 5cyNw350xq0lzJbI8hbzw7cmLVHxyfZUPBY86EUUFM0CkVeqJZuQeP8okKtiQ8C8gkgW
+ yjl7jCYqtL6FPd1teHIQSFxUkI2HQ+0uWKl4T3ln6Z8hf74fPq1h/6NmVuhSyovo5Og0
+ J5LzK0soiB8R8fC1mbKsWCX7E1yE2EUc4FsxfO0RX5pTizboSuJUwCleRvQxfi29mWZK
+ tGtQ==
+X-Gm-Message-State: ACrzQf1IRUZjJGk48OAZpQGVQgeGHAuEwUEZ/kMztTxGiHqc9Jb9yncG
+ 9ZHaeUxGX2O1O8tB5OF9/u4yIB1JJ64EYw2V4zw=
+X-Google-Smtp-Source: AMsMyM7693AnLxq2N/ho3oYaoWG0coWbVHn6THOF59OEVVCdrYRCWzzcf089xBN4D4YeH9Vq3b2xaUHQi0O64Y38jAM=
+X-Received: by 2002:a2e:a7d6:0:b0:277:221a:eb3 with SMTP id
+ x22-20020a2ea7d6000000b00277221a0eb3mr4611995ljp.476.1666935712686; Thu, 27
+ Oct 2022 22:41:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <20221027124528.2487025-1-zengheng4@huawei.com>
 In-Reply-To: <20221027124528.2487025-1-zengheng4@huawei.com>
-Date: Fri, 28 Oct 2022 00:20:25 -0500
-Message-ID: <CAH2r5mu2-jfhFBTJDf8Td7yF5e4QEJbG85wVpxyePK1q8bMjAg@mail.gmail.com>
+Date: Fri, 28 Oct 2022 11:11:40 +0530
+Message-ID: <CANT5p=q50Kt+eyVaxyh891sizFSzC=eUp5P46ON-odHFRjMsEQ@mail.gmail.com>
 Subject: Re: [PATCH v4] cifs: fix use-after-free caused by invalid pointer
  `hostname`
 To: Zeng Heng <zengheng4@huawei.com>
@@ -71,19 +71,15 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Shyam Prasad N via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Shyam Prasad N <nspmangalore@gmail.com>
 Cc: tom@talpey.com, sprasad@microsoft.com, linux-cifs@vger.kernel.org,
  pc@cjr.nz, samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
  lsahlber@redhat.com, sfrench@samba.org, liwei391@huawei.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6 for-next
-
-thx
-
-On Thu, Oct 27, 2022 at 7:49 AM Zeng Heng <zengheng4@huawei.com> wrote:
+On Thu, Oct 27, 2022 at 6:19 PM Zeng Heng <zengheng4@huawei.com> wrote:
 >
 > `hostname` needs to be set as null-pointer after free in
 > `cifs_put_tcp_session` function, or when `cifsd` thread attempts
@@ -211,9 +207,12 @@ On Thu, Oct 27, 2022 at 7:49 AM Zeng Heng <zengheng4@huawei.com> wrote:
 > 2.25.1
 >
 
+Good catch. But I think there can be a better fix.
+How about moving the lines that follow i.e. cifsd thread kill to
+before setting tcpStatus? That way, we don't leave scope for things to
+race.
 
 -- 
-Thanks,
-
-Steve
+Regards,
+Shyam
 
