@@ -2,31 +2,31 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E51F8615D64
-	for <lists+samba-technical@lfdr.de>; Wed,  2 Nov 2022 09:13:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3EA4615D7E
+	for <lists+samba-technical@lfdr.de>; Wed,  2 Nov 2022 09:18:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=EbpTzqBKGY8Ya8LpE47EVU6Ioc5/yh3L6h4t7d3wtnE=; b=4aCn7NnBKV0OUPPXlQakhDMxh1
-	USrW0lSgU0FXcT2uPVcf3xs3Pzoz8Dr2pZ/Rj61JLeHLNiHp2rFyn2zI2ika4M8NQGFWoHTx+e467
-	RbZwLft34dTiry2HIuWNZqmVpwdN1W5iM27c6Xljnyo7JPhDRNRVOeC3BJCNkWF/qVBBZ+5Mqkgix
-	GtGAxNyGUxuM1iw69y6wyyOh4ZORFlNaYOGUg6tzwhQuwYKhrTV4qqW3Dn81/ZgJkHyT8IXb60Qki
-	3A4AlTMviCI+6nHifLkQATHyy5zUUA4t7TkNnf15sQGpissBeggQ3Dcs9I6r8toH/+lbc285Uex0S
-	lSsv85XQ==;
-Received: from ip6-localhost ([::1]:32490 helo=hr1.samba.org) 
+	bh=3DcyoZrQ2NoWYLGRCoM+xjDFtsYQ2Y0nZRNrM2EP8cA=; b=xIWlyRDJ5VZ5o77DNU872+uDEg
+	/d1MY9xb6AS4wxfjxP3EJ4P5DIXKIZ9VVJG0Bk1/ZL3tvmO46cOtrEKsrseJPXsZg8pGNIJaPx9Rq
+	pWzSEGLftGe7XUh8ISgaAynyDdD9zjP2y5795/pcNTu5wMyILYtW396CdjCCwDsj/lJIXYzk4CEL9
+	0jlONsXw1HjjW9OgQtI+xEpCM4RyriXRlQL3S4iNJLZIWKfRT8qlTjCp3tzyt8EQd22abIqOVMfmm
+	TZ/Wq6ee/cw1uJ1cmc7pxC9dfH1UeLliiMLg+g/QDeaJV6El79w+ocOzP+qnBR9q8WA/CfsiVCaCf
+	LQ2r8I9A==;
+Received: from ip6-localhost ([::1]:59018 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oq8rn-00A2Na-Mg; Wed, 02 Nov 2022 08:12:55 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:42275) 
+	id 1oq8wl-00A2fZ-Ap; Wed, 02 Nov 2022 08:18:03 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:53603) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oq8ri-00A2NR-E0
- for samba-technical@lists.samba.org; Wed, 02 Nov 2022 08:12:52 +0000
+ (Exim) id 1oq8wh-00A2fQ-2S
+ for samba-technical@lists.samba.org; Wed, 02 Nov 2022 08:18:01 +0000
 Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 41AD3402B2;
- Wed,  2 Nov 2022 11:12:39 +0300 (MSK)
+ by isrv.corpit.ru (Postfix) with ESMTP id 2A88940287;
+ Wed,  2 Nov 2022 11:17:56 +0300 (MSK)
 Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 280D93D3;
- Wed,  2 Nov 2022 11:12:42 +0300 (MSK)
-Message-ID: <ba935af9-6523-2e90-e69b-bea832119dd2@msgid.tls.msk.ru>
-Date: Wed, 2 Nov 2022 11:12:36 +0300
+ by tsrv.corpit.ru (Postfix) with ESMTP id 7A10B3D3;
+ Wed,  2 Nov 2022 11:18:00 +0300 (MSK)
+Message-ID: <82137f01-82fd-e041-e931-21d40f06634c@msgid.tls.msk.ru>
+Date: Wed, 2 Nov 2022 11:17:55 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.0
@@ -36,7 +36,8 @@ To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
 References: <20221101092113.2691975-1-mjt@tls.msk.ru>
  <20221101092113.2691975-2-mjt@msgid.tls.msk.ru>
  <2262146.ElGaqSPkdT@magrathea>
-In-Reply-To: <2262146.ElGaqSPkdT@magrathea>
+ <ba935af9-6523-2e90-e69b-bea832119dd2@msgid.tls.msk.ru>
+In-Reply-To: <ba935af9-6523-2e90-e69b-bea832119dd2@msgid.tls.msk.ru>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -58,38 +59,20 @@ Cc: =?UTF-8?Q?Pavel_Filipensk=c3=bd?= <pfilipen@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-02.11.2022 11:00, Andreas Schneider via samba-technical wrote:
+02.11.2022 11:12, Michael Tokarev via samba-technical wrote:
+> 02.11.2022 11:00, Andreas Schneider via samba-technical wrote:
 ..
->> @@ -654,7 +654,7 @@ bld.SAMBA_LIBRARY('ndr',
->>       public_deps='samba-errors talloc samba-util util_str_hex',
->>       public_headers='gen_ndr/misc.h gen_ndr/ndr_misc.h ndr/libndr.h:ndr.h',
->>       header_path= [('*gen_ndr*', 'gen_ndr')],
->> -    vnum='3.0.0',
->> +    vnum='2.0.1',
->>       abi_directory='ABI',
->>       abi_match='!ndr_table_* ndr_* GUID_* _ndr_pull_error*
->> _ndr_push_error*', )
-> 
-> Please fix packaging and rebuild packages depending on this library.
-> 
-> libndr is not a stable API! We never claimed that and there is not guarantee
-> that the API/ABI will stay the same in future!
+>> Please fix packaging and rebuild packages depending on this library.
+>>
+>> libndr is not a stable API! We never claimed that and there is not guarantee
+>> that the API/ABI will stay the same in future!
 
-I'd *love* to "fix packaging". But I've no way to do this now, and
-this is exactly an attempt to do that.
+What I'm trying to say: the lack of such guarantee is not a reason to
+break ABI at will. We already had libndr.so.1 => .2 bump recently, and
+that one has at least been reasonable. This one is absolutely not
+reasonable, at my opinion anyway. Especially since this symbol in question
+was not used at all outside of samba..
 
-If libndr isn't public, other software should not be using it I guess.
-But it does.
-
-It's a bit difficult to explain, there are quite some Debian specifics
-involved which are different on Redhat.  But think about this context:
-providing a more recent samba packages to older Redhat releases (this
-is the context we're talking about right now). Other packages in there
-should be rebuilt. I for one can't provide backports of sssd or
-evolution-mapi or whatnot just because of a no-op, absolutely unwarranted
-soname bump...
-
-Hwell...
 
 /mjt
 
