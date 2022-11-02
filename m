@@ -2,41 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C11D616F07
-	for <lists+samba-technical@lfdr.de>; Wed,  2 Nov 2022 21:45:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B81C6170CB
+	for <lists+samba-technical@lfdr.de>; Wed,  2 Nov 2022 23:39:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=NQOWspA6GGfvmF/vIUnmdYvoXjoEM0XvcDNd40BHkiY=; b=vHJhNBc9gLMir9KQUTHOz+4Wm5
-	Jeuh6pHMRF/atBKGrKAJGrNkkBNRw1bGfzRrgPDWlFTcSmSPUSEpjH6SgcreE21oUO7R0cXsByhlc
-	9cpxEvkAm7mx809TNaRPwrjzmfuc8mzPiL+U4Gnp+ChCYriYI5jngF9xq1y3VWDdFgi3OJu9IY7X0
-	T8+vLg33HUe6vSZ6lkAi1eT/CQNI9tEJjxowgSlFV00LN5DtwfAW+nBodtKlV68mV84yA242UCTeO
-	1vG3ycvtrRjxefO5wiDqHBnGee0/fcoeu8IA9qTpSL1LWEF63XM/D56LjXRFiROvDPbIsuFvQeQs8
-	yKqRUgUQ==;
-Received: from ip6-localhost ([::1]:26468 helo=hr1.samba.org) 
+	bh=kZ713GlUN5O1TmUdT1JqZrhEYtUG9/lMSxYeYsey8wo=; b=LrWE4OFpSiGsQexRb8k1Cs3j/T
+	q8O7ZZHe4j4CM1JxEk93C90O2Qz4M8VrFTfQypPiklXycE+GseRUGuNjxmgLPqhBuYlILM72jMNdB
+	fJVpfA/L2YspyczK59BtqLJqIpmRy8HSaaoNFG/Cn06GRmW2+15rHqUz5JaqzRB87mwckP4txLZIv
+	CB78inSLrogXD16KCkh9ZEEQds/11ZWKFBLl2LX14EDKR1RGoVdo9kxGI3l1loOeyEOfSc0T/+2NC
+	SGWVlRbUPSHYfaXNJEkbzVT6JYtWpHTgbhIXkGrqjtsEtGHfozK1Sm+dsABiovh57YkJuZmmljh/P
+	KYZ/UrzA==;
+Received: from ip6-localhost ([::1]:59612 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oqKc8-00ABPR-Db; Wed, 02 Nov 2022 20:45:32 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56738) 
+	id 1oqMNN-00ABp6-2w; Wed, 02 Nov 2022 22:38:25 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55250) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oqKbz-00ABPI-7S
- for samba-technical@lists.samba.org; Wed, 02 Nov 2022 20:45:27 +0000
+ (Exim) id 1oqMNG-00ABow-Co
+ for samba-technical@lists.samba.org; Wed, 02 Nov 2022 22:38:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Cc:To:From:Date;
- bh=NQOWspA6GGfvmF/vIUnmdYvoXjoEM0XvcDNd40BHkiY=; b=yrADK9wzYn97WUPO/TaUNhXKNt
- oGRzMAY2z/Ct8upcKACPu3xVaLU0+0jy6qhyIKxebwB7dy+bVSYcZJDacPLU0rTtraV1mF8+iHR0v
- BIyOLeMOnXlhAvCsNyhmnAMCWfSLRw6cdu8rZTTCuKNBQHFnWqOfga/fhOYTYI50QS/GGGiOWHXi3
- 3cUPB9zoWou23buwlapQ53Zeg8wLx2BBtwqLW9c032Jj+TCTWevefg5ZWrVBdLb4OIVb47dft+Awa
- jJsPaVMUw3H3KH8BQe+YBWnqtMfOPESCwjN+ittoUO8jT6KG8D+chlwlvIdK55LqLg3ykw4SgOgzw
- ljTMF6vkVOHoTGtNFbpgB78U4fYlDSwNHxSBWbyxD6cz0o7EuhTpA6fZLAigp/q7kmyxPKAuD5bmu
- c9agPMnYzBfD9FFpFk/9SENdGtZBnNaPZZ+nWRbXMt3cXQU0K/jvvM1Aof6vE2E+fl32fa666pdRF
- 2FkFacsE4bHrp2JpmlENQHgX;
+ bh=kZ713GlUN5O1TmUdT1JqZrhEYtUG9/lMSxYeYsey8wo=; b=290ysgIpSnn0ZnOSqKUoMepLXq
+ 2pioD+S5nzlp8SfkbAYwOeneAUu9/hQNnNdmE4WwVbPS0Zeu2e3x0N+J6tnhUo2+0huJBecJ3sNHR
+ lIxH2p3FBpDTVYHdIbIYUqdfAAHMvPgZ10bY8nMovmnoZydPWlUUo2Uj8nWVyhFxQ0NYqV1DHku3j
+ TJx9hfyomHR6Dmh+Bfsyh6vfqS9lXJDZHYpF3Qumh0slqa+Y6ZMllXZC/Na8LeoruxdlH1Fo9oKcd
+ VllsVWfsAy/1LbTDJTTreHG8251JVchWgafOL+r7Q7IRY9bX/SLTT1KMo6bm+67KTrbDJPsMMV5Cy
+ z5umlsgyJfReGanhPUtAmj8B4THL+MWDAc869rELurq4xKG1RSWK0naL/bdB6/dOBtijs2jGzw/xf
+ cqMwU35E5pKXlI1612JeuEuRslf+91vlz4rBPhifDpqLQ12oN4dfJ7x+z819vK1O6/X8h6wvGr9vB
+ 4tg4vYwN7NVB0UVL/6Necr9k;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1oqKbu-006vNF-DO; Wed, 02 Nov 2022 20:45:19 +0000
-Date: Wed, 2 Nov 2022 13:45:15 -0700
+ (Exim) id 1oqMN6-006vsX-Dg; Wed, 02 Nov 2022 22:38:08 +0000
+Date: Wed, 2 Nov 2022 15:38:01 -0700
 To: Andrew Bartlett <abartlet@samba.org>
 Subject: Re: How to push to a non Samba Team member branch on gitlab ?
-Message-ID: <Y2LW2wXTuvwsAw1x@jeremy-acer>
+Message-ID: <Y2LxSR6Iv6Qwd0ub@jeremy-acer>
 References: <Y2LRam/bPaaRWRjy@jeremy-acer> <Y2LR/7ytNMuNPxDV@jeremy-acer>
  <0939d282f53194402d6615485a7fc97716fc3b7b.camel@samba.org>
 MIME-Version: 1.0
@@ -62,49 +62,19 @@ Cc: metze@samba.org, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, Nov 03, 2022 at 09:41:10AM +1300, Andrew Bartlett via samba-technical wrote:
->On Wed, 2022-11-02 at 13:24 -0700, Jeremy Allison wrote:
->> On Wed, Nov 02, 2022 at 01:22:02PM -0700, Jeremy Allison wrote:
->> > I'm working with a new contributor here:
->> >
->> > https://gitlab.com/samba-team/samba/-/merge_requests/2741
->> >
->> > and want to push a modified version of their patch
->> > that corrects some things to help them work with
->> > us here on the Team. Pushing to their branch
->> > helps them see what I corrected so is a very
->> > desirable thing to do.
->> >
->> > The gitlab page above shows their branch name as:
->> >
->> > vporpo/samba:master
->> ...
->> > git push gitlab +HEAD:vporpo/samba:master
->> >
->> > fails, as does:
->> >
->> > git push gitlab +HEAD:vporpo:master
->>
->> git push gitlab +HEAD:vporpo/master
->>
->> pushes, but not to MR 2741, so isn't
->> desirable :-(.
->>
->> > I can't see any logic or patterns in this, or am I just
->> > missing something about git (again).
->> >
->> > Jeremy.
+On Thu, Nov 03, 2022 at 09:41:10AM +1300, Andrew Bartlett wrote:
 >
->Sadly there isn't a way to change which branch a MR is for, you can
->however mention the old MR in the new MR which will trigger a
->notification.
->
->This is an unfortunate side-effect of the non-standard way we use
->GitLab, as the typical approach is to push back to their branch, as as
->it is typical the incantation is learnt earlier in the learning process
->(I've given that on the MR).
+>   Sadly there isn't a way to change which branch a MR is for, you can
+>   however mention the old MR in the new MR which will trigger a
+>   notification.
+>   This is an unfortunate side-effect of the non-standard way we use GitLab,
+>   as the typical approach is to push back to their branch, as as it is
+>   typical the incantation is learnt earlier in the learning process (I've
+>   given that on the MR).
+>   Andrew Bartlett
 
-Thanks for the help Andrew, it is *much* appreciated.
+On a more humourous note, anyone wanting to learn git
+should *always* start here :-) :-) :-):
 
-git and gitlab are not always obvious :-).
+https://git-man-page-generator.lokaltog.net/
 
