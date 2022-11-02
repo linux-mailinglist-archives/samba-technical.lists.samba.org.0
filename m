@@ -2,43 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 118E16169C1
-	for <lists+samba-technical@lfdr.de>; Wed,  2 Nov 2022 17:53:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE96A616E85
+	for <lists+samba-technical@lfdr.de>; Wed,  2 Nov 2022 21:22:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=s7Do+YqqJZrwu0I9uZtpegQw+jIAaNwYfndcQ/l49x0=; b=Fkeq0eacIgRbiOJcxM2kcrH0VV
-	t3P5tcFKfH8FtTi9sUvd12NqiGAcTu68iPIY07J+OrcO7Uzfqpmq2k/1Hrm5oW6YIdRcuLPHlc/2r
-	uukk2N1+DnMQe7rkh77rPMmMjxHGoSjLuY8wuTzup8H+7jfQG6N3+0fwl56k7tg6Ks+xS6mq77RoU
-	giLtJvsRyHEetPH0Mm5LgMvxdIfFU08uxOgf0Js/fjM1ff0KegOJ02G6Y3ylMWdGKvM5jUjQUMypR
-	joNDLbL4f1r+P/0WaGHf45NmBC6Nv4+LzxmVZ7aTf6R5e4asnGPxWHxkHaKZVaTqhpZQozVOitjj8
-	6vmVTVYg==;
-Received: from ip6-localhost ([::1]:58488 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=sZAGLQU96h91MPxyyrrFNtLcsjd3YS6+yGLqTjOdfJc=; b=4amulE+Il0yiYhT6L35vZuA4fC
+	Q9ncYHSsWsT7iLrJYZFpJIvV+1CIip8Zhegf4shQl5MblmwJRkfHPuFJ+SQ4gsmdXVhkZcGWXDB9n
+	5MnGH5FqWKqrDJ+YwMH4SYPNSpqDijVFDuPI50u4jqJXDZt4ic5pwSNrX+zKOtGe3J4K1lWRXIonA
+	A/fm9lb0OcUHyzRcCuVypnkwmY5D3laPRinSptUkk+oJKPBIqgKN5+Ti7SIFH4hiJ+BWvvHEOpomy
+	vF3pVSKORNKopAOWK8lZ58b7oZHurnoEvBajfWRRxLdCBqizgs1yA3khHL9kralwZTI1vXLrwygQU
+	HwNG4c5A==;
+Received: from ip6-localhost ([::1]:46632 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oqGzG-00A4kx-Vi; Wed, 02 Nov 2022 16:53:11 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:57901) 
+	id 1oqKFX-00AAWK-N2; Wed, 02 Nov 2022 20:22:11 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60680) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oqGzB-00A4ko-KE
- for samba-technical@lists.samba.org; Wed, 02 Nov 2022 16:53:08 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 6A4284049A;
- Wed,  2 Nov 2022 19:53:03 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 24DFE3D3;
- Wed,  2 Nov 2022 19:53:07 +0300 (MSK)
-Message-ID: <5f42aebe-c572-e686-b29d-dce05bf2314b@msgid.tls.msk.ru>
-Date: Wed, 2 Nov 2022 19:53:02 +0300
+ (Exim) id 1oqKFT-00AAWA-2q
+ for samba-technical@lists.samba.org; Wed, 02 Nov 2022 20:22:09 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=sZAGLQU96h91MPxyyrrFNtLcsjd3YS6+yGLqTjOdfJc=; b=mA05jTh216BCe2G7MuYXLHrqGC
+ /p8vfvg7qri7ZygncOwCQ/k5QqfY2oKY4ByzlkpE0kE2BI+R1q8th82vGVFuJ+R01piiGi3AiZFzo
+ nE4UnGosiANDAmI3+brTNg4WW/SQcfYXzA5Iejbsv7wR766rXbze6zSJO7cYlXv7KHBE05XNUU+rc
+ 8uNgwc5Uzd9oO2fMt2qTJF2u+iKQM735tircpC4s6G2gy+x3kl0L0mNEmf+5wOggJeg7+8r0lWIpR
+ 4k1lmLDvrISn2D/Pf2PPRjXlruvX9ZKRI1IlSCp+KOShY9/KGG3x1uFYlw2mhe1GPrkyRwtg5PhpN
+ 450DiHkGYBwPYpYQJTUMupd3qhGQVqdApDjD3cdLRFpoMgkNORDBFTeQRiPIVTSzat5wk3MRWcv4e
+ yA4NBB6Y8F43F3OwSxZhvFKReCyuz5uwxix2T2SWXzfmjLJl6NXBnzxLHw1ysJPJrGWAJjaM+qI7V
+ 5I3qoG54m72MHqnGgh2Yf9gK;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1oqKFR-006v6S-2Y; Wed, 02 Nov 2022 20:22:05 +0000
+Date: Wed, 2 Nov 2022 13:22:02 -0700
+To: samba-technical@lists.samba.org, metze@samba.org, abartlet@samba.org
+Subject: How to push to a non Samba Team member branch on gitlab ?
+Message-ID: <Y2LRam/bPaaRWRjy@jeremy-acer>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.0
-Subject: Re: Bug#1022945: smbclient: ambiguous duplications in the
- smbclient(1) manpage
-Content-Language: en-US
-To: Patrice DUROUX <patrice.duroux@gmail.com>, 1022945@bugs.debian.org,
- samba-technical@lists.samba.org
-References: <166694210264.3504927.11927218818268507176.reportbug@kappa2>
-In-Reply-To: <166694210264.3504927.11927218818268507176.reportbug@kappa2>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,116 +53,55 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: jra@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+I'm working with a new contributor here:
 
-28.10.2022 10:28, Patrice DUROUX wrote:
-> Package: smbclient
-> Version: 2:4.16.6+dfsg-5
-> Severity: wishlist
-> 
-> Dear Maintainer,
-> 
-> The smbclient(1) manpage contains some multiple entries in the OPTIONS
-> section regarding the SYNOPSIS list.
-> 
-> Here are the two detected cases:
-> 
-> 71:       -m|--max-protocol protocol
-> 72-           This allows the user to select the highest SMB protocol level that smbclient will use to connect to the server. By default this is set to highest available SMB3
-> and
-> 259:       -m|--max-protocol=MAXPROTOCOL
-> 260-           The value of the parameter (a string) is the highest protocol level that will be supported by the client.
+https://gitlab.com/samba-team/samba/-/merge_requests/2741
 
-samba manpages are generated. And this is interesting.
+and want to push a modified version of their patch
+that corrects some things to help them work with
+us here on the Team. Pushing to their branch
+helps them see what I corrected so is a very
+desirable thing to do.
 
-The first text above comes from docs-xml/manpages/smbclient.1.xml:
+The gitlab page above shows their branch name as:
 
-                 <term>-m|--max-protocol protocol</term>
-                 <listitem><para>This allows the user to select the
-                 highest SMB protocol level that smbclient will use to
-                 connect to the server. By default this is set to..
+vporpo/samba:master
 
-And the second text comes from docs-xml/smbdotconf/protocol/clientmaxprotocol.xml:
+and clicking the "copy" button for this MR gives
+the text string: master, which certainly doesn't
+seem right as a branch name to push to.
 
-   <samba:parameter name="client max protocol"
-                  context="G"
-                  type="enum"
-                  function="_client_max_protocol"
-                  enumlist="enum_protocol"
-                  xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
-   <description>
-     <para>The value of the parameter (a string) is the highest
-     protocol level that will be supported by the client.</para>
-     ...
+For another Samba Team member MR normally I'd just do:
 
-So it looks like smbclient.1.xml manpage lists *all* options available,
-and also includes other files which lists some options which are referenced
-by smbclient.1.xml. And it looks like the same applies to other manpages too.
+git push gitlab +HEAD:<copy name>
 
-I'm Cc'ing samba-technical@ with this.
+where <copy name> is the string copied when
+I click the "copy" button on the MR. For example,
 
-Thanks,
+https://gitlab.com/samba-team/samba/-/merge_requests/2750
 
-/mjt
+"copy" gives: dmulder/smb3_posix_ext
 
+which would allow my changes to overlay the
+changes in the MR.
 
-> 76:       -P|--machine-pass
-> 77-           Make queries to the external server using the machine account of the local server.
-> and
-> 335:       -P|--machine-pass
-> 336-           Use stored machine account password.
-> 
-> Moreover the entries in the OPTIONS section should be more consistent to the SYNOPSIS
-> syntax. For instance, SYNOPSIS is:
-> 
->         smbclient [-M|--message=HOST] [-I|--ip-address=IP] [-E|--stderr] [-L|--list=HOST] [-T|--tar=<c|x>IXFvgbNan] [-D|--directory=DIR] [-b|--send-buffer=BYTES]
->          [-t|--timeout=SECONDS] [-p|--port=PORT] [-g|--grepable] [-q|--quiet] [-B|--browse] [-?|--help] [--usage] [-d|--debuglevel=DEBUGLEVEL] [--debug-stdout]
->          [-s|--configfile=CONFIGFILE] [--option=name=value] [-l|--log-basename=LOGFILEBASE] [--leak-report] [--leak-report-full] [-R|--name-resolve=NAME-RESOLVE-ORDER]
->          [-O|--socket-options=SOCKETOPTIONS] [-m|--max-protocol=MAXPROTOCOL] [-n|--netbiosname=NETBIOSNAME] [--netbios-scope=SCOPE] [-W|--workgroup=WORKGROUP]
->          [--realm=REALM] [-U|--user=[DOMAIN/]USERNAME%[PASSWORD]] [-N|--no-pass] [--password=STRING] [--pw-nt-hash] [-A|--authentication-file=FILE] [-P|--machine-pass]
->          [--simple-bind-dn=DN] [--use-kerberos=desired|required|off] [--use-krb5-ccache=CCACHE] [--use-winbind-ccache] [--client-protection=sign|encrypt|off] [-V|--version]
->          [-c|--command=STRING]
-> 
-> and the entries in OPTIONS are (with the duplicates):
->         -M|--message NetBIOS name      <- =HOST
->         -p|--port port                 <- =PORT
->         -g|--grepable
->         -m|--max-protocol protocol     <- duplicated
->         -P|--machine-pass              <- duplicated
->         -I|--ip-address IP-address     <- =IP
->         -E|--stderr
->         -L|--list                      <- =HOST
->         -b|--send-buffer buffersize    <- =BYTES
->         -B|--browse
->         -t|--timeout <timeout-seconds> <- =SECONDS
->         -T|--tar tar options           <- =<c|x>IXFvgbNan
->         -D|--directory initial directory <- =DIR
->         -c|--command command string    <- =STRING
->         -?|--help
->         -d|--debuglevel=DEBUGLEVEL
->         -l|--log-basename=logdirectory <- =LOGFILEBASE
->         -V|--version
->         -R|--name-resolve=NAME-RESOLVE-ORDER
->         -O|--socket-options=SOCKETOPTIONS
->         -m|--max-protocol=MAXPROTOCOL
->         -n|--netbiosname=NETBIOSNAME
->         -W|--workgroup=WORKGROUP
->         -r|--realm=REALM
->         -U|--user=[DOMAIN\]USERNAME[%PASSWORD] <- / or \ ?
->         -N|--no-pass
->         -A|--authentication-file=filename
->         -P|--machine-pass
-> 
-> And as we can see, the SYNOPSIS set is much larger than that of OPTIONS.
-> 
-> Regards,
-> Patrice
-> 
-> ps: I just used the following command to check: man smbclient | grep -n -A 1 '\-.|'
-> https://alioth-lists.debian.net/cgi-bin/mailman/listinfo/pkg-samba-maint
+But what is the magic incantation to push my changes
+to this MR ?
 
+git push gitlab +HEAD:vporpo/samba:master
+
+fails, as does:
+
+git push gitlab +HEAD:vporpo:master
+
+I can't see any logic or patterns in this, or am I just
+missing something about git (again).
+
+Jeremy.
 
