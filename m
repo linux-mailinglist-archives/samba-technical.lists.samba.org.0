@@ -2,40 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC027616876
-	for <lists+samba-technical@lfdr.de>; Wed,  2 Nov 2022 17:22:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 118E16169C1
+	for <lists+samba-technical@lfdr.de>; Wed,  2 Nov 2022 17:53:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=t+i7TTCdIaybad+gLaQoDjwuknptaCT/aeH7Tsd7nG8=; b=sqE1TAwFAdT1/J8T4rhoxRcDfY
-	JDsLUTT0nftxEJ4ZAMOYBu+bb1UCSQgsq3t3FqZqCqtqVBQndTZAIp0IPIISDopuhnd8GCD5fjY07
-	yJ8g2xvftvl5Sfd9qMBVcimCJ9IaigMvQ3sOuiFsMMx70a1AAl2iYjqtzMPoFG9ftYVLVh9H7ZV9l
-	QUKALlAHksxhyOrSc4Z6e7kN01NC2cm9yn5DXuw2x1EiiJ2wpIePqxhjaI4G2ptzhmj5JM6ON5Me+
-	ifQS5YpfxAKbwCwwlxa3kfBn+BKfWXHxL5KIqfSiUMQQ7AhzJyGy6VKrCh+8kOJ1YAdAw1zYhFo9D
-	bduNCnZw==;
-Received: from ip6-localhost ([::1]:31326 helo=hr1.samba.org) 
+	bh=s7Do+YqqJZrwu0I9uZtpegQw+jIAaNwYfndcQ/l49x0=; b=Fkeq0eacIgRbiOJcxM2kcrH0VV
+	t3P5tcFKfH8FtTi9sUvd12NqiGAcTu68iPIY07J+OrcO7Uzfqpmq2k/1Hrm5oW6YIdRcuLPHlc/2r
+	uukk2N1+DnMQe7rkh77rPMmMjxHGoSjLuY8wuTzup8H+7jfQG6N3+0fwl56k7tg6Ks+xS6mq77RoU
+	giLtJvsRyHEetPH0Mm5LgMvxdIfFU08uxOgf0Js/fjM1ff0KegOJ02G6Y3ylMWdGKvM5jUjQUMypR
+	joNDLbL4f1r+P/0WaGHf45NmBC6Nv4+LzxmVZ7aTf6R5e4asnGPxWHxkHaKZVaTqhpZQozVOitjj8
+	6vmVTVYg==;
+Received: from ip6-localhost ([::1]:58488 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oqGUx-00A4Pl-G2; Wed, 02 Nov 2022 16:21:51 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:48705) 
+	id 1oqGzG-00A4kx-Vi; Wed, 02 Nov 2022 16:53:11 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:57901) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oqGUs-00A4Pc-RL
- for samba-technical@lists.samba.org; Wed, 02 Nov 2022 16:21:49 +0000
+ (Exim) id 1oqGzB-00A4ko-KE
+ for samba-technical@lists.samba.org; Wed, 02 Nov 2022 16:53:08 +0000
 Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id A784A4049A;
- Wed,  2 Nov 2022 19:21:44 +0300 (MSK)
+ by isrv.corpit.ru (Postfix) with ESMTP id 6A4284049A;
+ Wed,  2 Nov 2022 19:53:03 +0300 (MSK)
 Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 6E5163D3;
- Wed,  2 Nov 2022 19:21:48 +0300 (MSK)
-Message-ID: <1533a6b5-1795-919a-4fa5-14636e0dcebe@msgid.tls.msk.ru>
-Date: Wed, 2 Nov 2022 19:21:43 +0300
+ by tsrv.corpit.ru (Postfix) with ESMTP id 24DFE3D3;
+ Wed,  2 Nov 2022 19:53:07 +0300 (MSK)
+Message-ID: <5f42aebe-c572-e686-b29d-dce05bf2314b@msgid.tls.msk.ru>
+Date: Wed, 2 Nov 2022 19:53:02 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.0
-Subject: Re: omitting SONAMEs for plugins?
+Subject: Re: Bug#1022945: smbclient: ambiguous duplications in the
+ smbclient(1) manpage
 Content-Language: en-US
-To: Stefan Metzmacher <metze@samba.org>, samba-technical@lists.samba.org
-References: <13f38497-ad24-254f-68d8-0a3c66da04c0@msgid.tls.msk.ru>
- <825cbe37-9d71-85aa-b0d0-2518e452e31a@samba.org>
-In-Reply-To: <825cbe37-9d71-85aa-b0d0-2518e452e31a@samba.org>
+To: Patrice DUROUX <patrice.duroux@gmail.com>, 1022945@bugs.debian.org,
+ samba-technical@lists.samba.org
+References: <166694210264.3504927.11927218818268507176.reportbug@kappa2>
+In-Reply-To: <166694210264.3504927.11927218818268507176.reportbug@kappa2>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -56,87 +57,111 @@ Reply-To: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-02.11.2022 18:37, Stefan Metzmacher via samba-technical wrote:
-> Am 31.10.22 um 10:22 schrieb Michael Tokarev via samba-technical:
->> Hi!
->>
->> What's different between a shared library and a plugin is that
->> a plugin does not have a SONAME, while a library should have
->> one.
->>
->> When samba is built, SONAME is added to all shared objects, be
->> it a library or a plugin.
->>
->> I'm not familiar with waf (and with python) enough to understand
->> how the final link command is constructed, the thing is quite
->> a bit complicated there, with multiple layers and multiple
->> operating systems and linkers support.
->>
->> Is there a way to omit the SONAME field for plugins?
+
+28.10.2022 10:28, Patrice DUROUX wrote:
+> Package: smbclient
+> Version: 2:4.16.6+dfsg-5
+> Severity: wishlist
 > 
-> We have SAMBA_PLUGIN() instead of SAMBA_LIBRARY() and SAMBA_MODULE()
+> Dear Maintainer,
+> 
+> The smbclient(1) manpage contains some multiple entries in the OPTIONS
+> section regarding the SYNOPSIS list.
+> 
+> Here are the two detected cases:
+> 
+> 71:       -m|--max-protocol protocol
+> 72-           This allows the user to select the highest SMB protocol level that smbclient will use to connect to the server. By default this is set to highest available SMB3
+> and
+> 259:       -m|--max-protocol=MAXPROTOCOL
+> 260-           The value of the parameter (a string) is the highest protocol level that will be supported by the client.
 
-Yes, I've seen SAMBA_PLUGIN(). It is not used for stuff like /usr/lib/samba/vfs/*.so,
-/usr/lib/samba/ldb/*.so, /usr/lib/samba/idmap/*.so and so on, which are
-plugins. It's used for pam and nss stuff only.
+samba manpages are generated. And this is interesting.
 
-But it is not what I asked. SAMBA_PLUGIN does provide SONAME at the link
-time, for example here's how pam_winbind is being linked:
+The first text above comes from docs-xml/manpages/smbclient.1.xml:
 
-'/usr/lib/ccache/gcc', '-Wl,--as-needed', '-Wl,-h,pam_winbind.so', \
-    '-shared',... '-o/<<PKGBUILDDIR>>/bin/default/nsswitch/lib_plugin_pamwinbind.inst.so'...
+                 <term>-m|--max-protocol protocol</term>
+                 <listitem><para>This allows the user to select the
+                 highest SMB protocol level that smbclient will use to
+                 connect to the server. By default this is set to..
 
-Note -Wl,-h,pam_winbind.so : this is the SONAME in the shared library.
+And the second text comes from docs-xml/smbdotconf/protocol/clientmaxprotocol.xml:
 
-What I asked was whenever it is possible to _omit_ this -Wl,-h for all
-samba plugins.  So far I haven't found a way to omit this -Wl,-h for
-certain dynamically linked objects.
+   <samba:parameter name="client max protocol"
+                  context="G"
+                  type="enum"
+                  function="_client_max_protocol"
+                  enumlist="enum_protocol"
+                  xmlns:samba="http://www.samba.org/samba/DTD/samba-doc">
+   <description>
+     <para>The value of the parameter (a string) is the highest
+     protocol level that will be supported by the client.</para>
+     ...
 
-Why.
+So it looks like smbclient.1.xml manpage lists *all* options available,
+and also includes other files which lists some options which are referenced
+by smbclient.1.xml. And it looks like the same applies to other manpages too.
 
-Well, the thing is somewhat interesting.
+I'm Cc'ing samba-technical@ with this.
 
-Debian has a tool, dpkg-shlibdeps, which tries to find packages where
-each referenced-by-an-executable symbol is located. For that it checks
-for all UNDEFINED symbols in all libraries this executable is linked
-with.
-
-For many samba internal libraries it dumps quite a lot of warnings -
-"symbol SYM used by libsamba-LIB.so found in none of its libraries".
-For example:
-
-  symbol find_domain_from_name used by \
-    debian/winbind/usr/lib/x86_64-linux-gnu/samba/libidmap-samba4.so.0 \
-    found in none of the libraries
-
-This is actually a build system bug, a missing dependency information
-between internal samba libraries.  I guess this can and should be
-fixed, but keeping this info in wscripts up to date is rather
-difficult (maybe some automatic tool can be used for this).  This is
-not a problem in practice because all executables linked with that
-library are *also* linked with their dependencies already, so at ld.so
-is able to resolve all symbols. But it works just by a chance, because
-it so *happens* all the executable loads all the required libraries
-already.
-
-But there are many plugns too. Which *might* have unresolved symbols,
-which are provided by the executable which load them.  And it is
-interesting whenever samba have such plugins to begin with, - I guess
-most of them should *not* use any application-provided symbols, except
-maybe the vfs modules (which are loaded by smbd only, hopefully anyway).
-
-So it looks like my question is moot. A better question would be what
-to do with such libraries which lack dependencies. There are many of
-them.  Omitting some -Wl,-no-undefined reveals them nicely, but it
-is, again, difficult to distinguish where this should be used and where
-it shouldn't.
-
-Why the plugin context popped up is because this same Debian tool,
-dpkg-shlibdeps, omits these warnings for shared objects with no
-SONAME field, which is the only sane way to distinguish a plugin
-from a regular shared library.
-
-Thanks!
+Thanks,
 
 /mjt
+
+
+> 76:       -P|--machine-pass
+> 77-           Make queries to the external server using the machine account of the local server.
+> and
+> 335:       -P|--machine-pass
+> 336-           Use stored machine account password.
+> 
+> Moreover the entries in the OPTIONS section should be more consistent to the SYNOPSIS
+> syntax. For instance, SYNOPSIS is:
+> 
+>         smbclient [-M|--message=HOST] [-I|--ip-address=IP] [-E|--stderr] [-L|--list=HOST] [-T|--tar=<c|x>IXFvgbNan] [-D|--directory=DIR] [-b|--send-buffer=BYTES]
+>          [-t|--timeout=SECONDS] [-p|--port=PORT] [-g|--grepable] [-q|--quiet] [-B|--browse] [-?|--help] [--usage] [-d|--debuglevel=DEBUGLEVEL] [--debug-stdout]
+>          [-s|--configfile=CONFIGFILE] [--option=name=value] [-l|--log-basename=LOGFILEBASE] [--leak-report] [--leak-report-full] [-R|--name-resolve=NAME-RESOLVE-ORDER]
+>          [-O|--socket-options=SOCKETOPTIONS] [-m|--max-protocol=MAXPROTOCOL] [-n|--netbiosname=NETBIOSNAME] [--netbios-scope=SCOPE] [-W|--workgroup=WORKGROUP]
+>          [--realm=REALM] [-U|--user=[DOMAIN/]USERNAME%[PASSWORD]] [-N|--no-pass] [--password=STRING] [--pw-nt-hash] [-A|--authentication-file=FILE] [-P|--machine-pass]
+>          [--simple-bind-dn=DN] [--use-kerberos=desired|required|off] [--use-krb5-ccache=CCACHE] [--use-winbind-ccache] [--client-protection=sign|encrypt|off] [-V|--version]
+>          [-c|--command=STRING]
+> 
+> and the entries in OPTIONS are (with the duplicates):
+>         -M|--message NetBIOS name      <- =HOST
+>         -p|--port port                 <- =PORT
+>         -g|--grepable
+>         -m|--max-protocol protocol     <- duplicated
+>         -P|--machine-pass              <- duplicated
+>         -I|--ip-address IP-address     <- =IP
+>         -E|--stderr
+>         -L|--list                      <- =HOST
+>         -b|--send-buffer buffersize    <- =BYTES
+>         -B|--browse
+>         -t|--timeout <timeout-seconds> <- =SECONDS
+>         -T|--tar tar options           <- =<c|x>IXFvgbNan
+>         -D|--directory initial directory <- =DIR
+>         -c|--command command string    <- =STRING
+>         -?|--help
+>         -d|--debuglevel=DEBUGLEVEL
+>         -l|--log-basename=logdirectory <- =LOGFILEBASE
+>         -V|--version
+>         -R|--name-resolve=NAME-RESOLVE-ORDER
+>         -O|--socket-options=SOCKETOPTIONS
+>         -m|--max-protocol=MAXPROTOCOL
+>         -n|--netbiosname=NETBIOSNAME
+>         -W|--workgroup=WORKGROUP
+>         -r|--realm=REALM
+>         -U|--user=[DOMAIN\]USERNAME[%PASSWORD] <- / or \ ?
+>         -N|--no-pass
+>         -A|--authentication-file=filename
+>         -P|--machine-pass
+> 
+> And as we can see, the SYNOPSIS set is much larger than that of OPTIONS.
+> 
+> Regards,
+> Patrice
+> 
+> ps: I just used the following command to check: man smbclient | grep -n -A 1 '\-.|'
+> https://alioth-lists.debian.net/cgi-bin/mailman/listinfo/pkg-samba-maint
+
 
