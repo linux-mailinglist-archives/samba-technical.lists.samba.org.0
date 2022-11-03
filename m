@@ -2,38 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39AFC617685
-	for <lists+samba-technical@lfdr.de>; Thu,  3 Nov 2022 07:01:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7790B617759
+	for <lists+samba-technical@lfdr.de>; Thu,  3 Nov 2022 08:12:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=ozxyfahGtcgcP7mhI1e+m4oNCH8hXdm9QHZJ5/rl2FM=; b=CvZ4w9a+Mtk8feYyIwQbNNn5I3
-	gGTQLRlZNA33aYPBnLhM7R2uRqIOFNIdBZIhKcpkM1xsPtNl/POosxyLOPyj27befCJwc13r3DBKK
-	J6qxDEpnkR2OZlMhcnt6N38sPXs7fotEZmXcjlFJcKpZnjr6vKn8vKUokB15apJ+/Uy042htrLcYn
-	AB/XPKFpvYaGRvEL7xwWiXuYPfUkpsRuuyve2duC0BIND1JCx2dpjkbd/lbvU4d4kJdZ/TybQtHmf
-	9nh2U6bUKR24H/je76kgma/CbpVron8ojDGznFxNyzON6PuW05PdwUcMhDliCz6iipSaVH8wL0wiz
-	+7a0774A==;
-Received: from ip6-localhost ([::1]:58302 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=5ioYIG3VBFVqTjFBaCTf8dM5J7hSwAiY55eP0/9o++8=; b=uauZRk7GRUSREMp7109vEUvRAb
+	OR4RD6OGlZ3h2va7Qlzgf2PuLSDZ47Sg/dtzXo7l9zF5Aof/N8AloqOc1Dpyfo6WauvQ6Mg0CNEbJ
+	5ToUCTK0EHHbYMiEOhGVnJaUb22sA+58TcS/WzfGu7bOHN68QeXpTmWWHavY0PYe3fndjXpieMfoa
+	wOBbx4RnpW6X8Y6PaTsFYm06NqCybG1uVN/fCFkcc1MBmMyJ+w5HfRxcmcx8V45N6sGy02ZwoRIgB
+	3fvCh9RJmuE0B7uFwxcJpVgpqd55dEx5fzETO+zN4EGQmpWc8FyGMqw3a79/FAsjAvDKG/B4k2R0Z
+	PH8u9hpg==;
+Received: from ip6-localhost ([::1]:53912 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oqTHo-00AEI3-Cj; Thu, 03 Nov 2022 06:01:08 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:40067) 
+	id 1oqUNm-00AEpP-WD; Thu, 03 Nov 2022 07:11:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31934) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oqTHg-00AEH7-6K
- for samba-technical@lists.samba.org; Thu, 03 Nov 2022 06:01:05 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id CDB24405CE
- for <samba-technical@lists.samba.org>; Thu,  3 Nov 2022 09:00:56 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 8AB723D3
- for <samba-technical@lists.samba.org>; Thu,  3 Nov 2022 09:01:01 +0300 (MSK)
-Content-Type: multipart/mixed; boundary="------------1Yivx240KRk5jzdKZCra7zbw"
-Message-ID: <f3548884-736e-f7d8-2eba-af5f02bfa7c4@msgid.tls.msk.ru>
-Date: Thu, 3 Nov 2022 09:00:56 +0300
+ (Exim) id 1oqUNU-00AEpG-Nf
+ for samba-technical@lists.samba.org; Thu, 03 Nov 2022 07:11:09 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=5ioYIG3VBFVqTjFBaCTf8dM5J7hSwAiY55eP0/9o++8=; b=woOmV/CVmtEfFv3LNkmc9/LUWo
+ ijgJQNEG/Ae19Kv9Yz4DRsCxfFW9hxeRv7g9ni96xCNzN0SsFRKsrYZw6hTPp45zOp9KHqHpc/4M0
+ YrkzbsxXsY1iQdOFjd4gkj88WNpKi4vc4TEf3g4ZzSVrZTbNfkERweij4e1tg9RjK0HdDhlymqG3z
+ 0C8w/3mpS7NXcENCDq0gmCFSiQWBGtcLvr5LDQbMHmhCkhISD2j0+X+UFQOOTBxSt8ukhl9vDSgv8
+ g9ovTBsRF6NLTpohrxdunOOXSwYbdnsRe1PYkESibsxW7WiS/CjVpO5oWJ5BeK8NATgLYarMB/q3m
+ 8Y6K6qPT16trTSWIL5MtlIoHCnFZ6IolDKSJTDXVsD6eQJ320Hec6643WeTkzjVe6rXyS111GnfIT
+ X53ms2oKG9sIb6UkCzq2vzRR0TCgNsQi9cn/KR1wX6kgqe7o3j7aciB69cvPMGS1ON+DWPrhRpLmV
+ 1bz5Y4Bzkeo9KP23uVB0obJS;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1oqUNS-0071j0-Lq; Thu, 03 Nov 2022 07:11:03 +0000
+To: jra@samba.org
+Subject: Re: [SCM] Samba Shared Repository - smbclient rate limit
+Date: Thu, 03 Nov 2022 08:11:01 +0100
+Message-ID: <12090652.O9o76ZdvQC@magrathea>
+In-Reply-To: <E1oqMWf-005wfA-O3@hrx0.samba.org>
+References: <E1oqMWf-005wfA-O3@hrx0.samba.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.0
-Content-Language: en-US
-To: samba-technical@lists.samba.org
-Subject: Move msg.sock from var/lib/samba to /run/samba?
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,82 +55,265 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a multi-part message in MIME format.
---------------1Yivx240KRk5jzdKZCra7zbw
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+On Wednesday, 2 November 2022 23:48:01 CET Jeremy Allison wrote:
+> The branch, master has been updated
+>        via  b3292b541ec smbget: Adds a rate limiting option --limit-rate in
+> KB/s from  bf446bcf612 third_party/heimdal_build: Update fallthrough macro
+> for switch statements
+> 
+> https://git.samba.org/?p=samba.git;a=shortlog;h=master
+> 
+> 
+> - Log -----------------------------------------------------------------
+> commit b3292b541ec1feb3162a514a0493054a1a5318ab
+> Author: vporpo <v.porpodas@gmail.com>
+> Date:   Sat Oct 1 14:45:18 2022 -0700
+> 
+>     smbget: Adds a rate limiting option --limit-rate in KB/s
+> 
+>     This patch implements a very simple rate limiter. It works by pausing
+> the main download loop whenever the bytes transferred are more than what we
+> would get with if it were transferred at the rate set by the user.
+>     Please note that this may reduce the blocksize if the limit is too
+> small.
+> 
+>     Signed-off-by: Vasileios Porpodas <v.porpodas@gmail.com>
+>     Reviewed-by: Jeremy Allison <jra@samba.org>
+>     Reviewed-by: Andreas Schneider <asn@samba.org>
+> 
+>     Autobuild-User(master): Jeremy Allison <jra@samba.org>
+>     Autobuild-Date(master): Wed Nov  2 22:47:10 UTC 2022 on sn-devel-184
+> 
+> -----------------------------------------------------------------------
+> 
+> Summary of changes:
+>  docs-xml/manpages/smbget.1.xml      |  6 +++
+>  source3/script/tests/test_smbget.sh | 30 +++++++++++++++
+>  source3/utils/smbget.c              | 73
+> +++++++++++++++++++++++++++++++++++++ 3 files changed, 109 insertions(+)
+> 
+> 
+> Changeset truncated at 500 lines:
+> 
+> diff --git a/docs-xml/manpages/smbget.1.xml b/docs-xml/manpages/smbget.1.xml
+> index 64924ef9ca8..9d1db967f96 100644
+> --- a/docs-xml/manpages/smbget.1.xml
+> +++ b/docs-xml/manpages/smbget.1.xml
+> @@ -35,6 +35,7 @@
+>  		<arg choice="opt">-O, --stdout</arg>
+>  		<arg choice="opt">-u, --update</arg>
+>  		<arg choice="opt">-e, --encrypt</arg>
+> +		<arg choice="opt">--limit-rate=INT</arg>
+>  		<arg choice="opt">-?, --help</arg>
+>  		<arg choice="opt">--usage</arg>
+>  		<arg choice="req">smb://host/share/path/to/file</arg>
+> @@ -151,6 +152,11 @@
+>  		<listitem><para>Enable SMB encryption.</para></listitem>
+>  	</varlistentry>
+> 
+> +	<varlistentry>
+> +        <term>--limit-rate=INT</term>
+> +		<listitem><para>Limit download rate by this many KB/s.</
+para></listitem>
+> +	</varlistentry>
+> +
+>  </refsect1>
+> 
+>  <refsect1>
+> diff --git a/source3/script/tests/test_smbget.sh
+> b/source3/script/tests/test_smbget.sh index c1c99579a8c..2322f3af942 100755
+> --- a/source3/script/tests/test_smbget.sh
+> +++ b/source3/script/tests/test_smbget.sh
+> @@ -269,6 +269,32 @@ test_msdfs_link()
+>  	return 0
+>  }
+> 
+> +# Tests --limit-rate. Getting the testfile (128K in size) with --limit-rate
+> 100 +# (that is 100KB/s) should take at least 1 sec to complete.
+> +test_limit_rate()
+> +{
+> +	clear_download_area
+> +	echo "$SMBGET -v -a --limit-rate 100 smb://$SERVER_IP/smbget/
+testfile"
+> +	time_begin=$(date +%s)
+> +	$SMBGET -v -a --limit-rate 100 smb://$SERVER_IP/smbget/testfile
+> +	if [ $? -ne 0 ]; then
+> +		echo 'ERROR: RC does not match, expected: 0'
+> +		return 1
+> +	fi
+> +	time_end=$(date +%s)
+> +	cmp --silent $WORKDIR/testfile ./testfile
+> +	if [ $? -ne 0 ]; then
+> +		echo 'ERROR: file content does not match'
+> +		return 1
+> +	fi
+> +	if [ $((time_end - time_begin)) -lt 1 ]; then
+> +		echo 'ERROR: It should take at least 1s to transfer 128KB 
+with rate
+> 100KB/s' +		return 1
+> +	fi
+> +	return 0
+> +}
+> +
+> +
+>  create_test_data
+> 
+>  pushd $TMPDIR
+> @@ -306,6 +332,10 @@ testit "update" test_update ||
+> 
+>  testit "msdfs" test_msdfs_link ||
+>  	failed=$((failed + 1))
+> +
+> +testit "limit rate" test_limit_rate ||
+> +	failed=$((failed + 1))
+> +
+>  clear_download_area
+> 
+>  popd # TMPDIR
+> diff --git a/source3/utils/smbget.c b/source3/utils/smbget.c
+> index 3e7c5687d83..5f3ac16b204 100644
+> --- a/source3/utils/smbget.c
+> +++ b/source3/utils/smbget.c
+> @@ -56,6 +56,7 @@ struct opt {
+>  	bool send_stdout;
+>  	bool update;
+>  	int debuglevel;
+> +	unsigned limit_rate;
+>  };
+>  static struct opt opt = { .blocksize = SMB_DEFAULT_BLOCKSIZE };
+> 
+> @@ -355,6 +356,10 @@ static bool smb_download_file(const char *base, const
+> char *name, off_t offset_download = 0, offset_check = 0, curpos = 0,
+>  	      start_offset = 0;
+>  	struct stat localstat, remotestat;
+> +	clock_t start_of_bucket_ticks = 0;
+> +	size_t bytes_in_bucket = 0;
+> +	size_t bucket_size = 0;
+> +	clock_t ticks_to_fill_bucket = 0;
+> 
+>  	snprintf(path, SMB_MAXPATHLEN-1, "%s%s%s", base,
+>  		 (*base && *name && name[0] != '/' &&
+> @@ -576,6 +581,44 @@ static bool smb_download_file(const char *base, const
+> char *name, offset_check = 0;
+>  	}
+> 
+> +	/* We implement rate limiting by filling up a bucket with bytes and
+> +	 * checking, once the bucket is filled, if it was filled too fast.
+> +	 * If so, we sleep for some time to get an average transfer rate that
+> +	 * equals to the one set by the user.
+> +	 *
+> +	 * The bucket size directly affects the traffic characteristics.
+> +	 * The smaller the bucket the more frequent the pause/resume cycle.
+> +	 * A large bucket can result in burst of high speed traffic and large
+> +	 * pauses. A cycle of 100ms looks like a good value. This value (in
+> +	 * ticks) is held in `ticks_to_fill_bucket`. The `bucket_size` is
+> +	 * calculated as:
+> +	 * `limit_rate * 1024 * / (CLOCKS_PER_SEC / ticks_to_fill_bucket)`
+> +	 *
+> +	 * After selecting the bucket size we also need to check the 
+blocksize
+> +	 * of the transfer, since this is the minimum unit of traffic that we
+> +	 * can observe. Achieving a ~10% precision requires a blocksize with 
+a
+> +	 * maximum size of `bucket_size / 10`.
+> +	 */
+> +	if (opt.limit_rate > 0) {
+> +		unsigned max_block_size;
+> +		/* This is the time that the bucket should take to fill. */
+> +		ticks_to_fill_bucket = 100 /*ms*/ * CLOCKS_PER_SEC / 1000;
+> +		/* This is the size of the bucket in bytes.
+> +		 * If we fill the bucket too quickly we should pause */
+> +		bucket_size = opt.limit_rate * 1024 / (CLOCKS_PER_SEC /
+> ticks_to_fill_bucket); +		max_block_size = bucket_size / 10;
+> +		max_block_size = max_block_size > 0 ? max_block_size : 1;
+> +		if (opt.blocksize > max_block_size) {
+> +			if (opt.blocksize != SMB_DEFAULT_BLOCKSIZE) {
+> +				fprintf(stderr,
+> +				        "Warning: Overriding block size to 
+%d \
+> +				         due to limit-rate", 
+max_block_size);
+> +			}
+> +			opt.blocksize = max_block_size;
+> +		}
+> +		start_of_bucket_ticks = clock();
+> +	}
+> +
+>  	readbuf = (char *)SMB_MALLOC(opt.blocksize);
+>  	if (!readbuf) {
+>  		fprintf(stderr, "Failed to allocate %zu bytes for read "
+> @@ -592,7 +635,30 @@ static bool smb_download_file(const char *base, const
+> char *name, ssize_t bytesread;
+>  		ssize_t byteswritten;
+> 
+> +		/* Rate limiting. This pauses the transfer to limit traffic. 
+*/
+> +		if (opt.limit_rate > 0) {
+> +			if (bytes_in_bucket > bucket_size) {
+> +				clock_t now_ticks = clock();
+> +				clock_t diff_ticks = now_ticks
+> +				                     - 
+start_of_bucket_ticks;
+> +				/* Check if the bucket filled up too fast. 
+*/
+> +				if (diff_ticks < ticks_to_fill_bucket) {
+> +					/* Pause until 
+`ticks_to_fill_bucket` */
+> +					double sleep_us
+> +					 = (ticks_to_fill_bucket - 
+diff_ticks)
+> +					  * 1000000 / CLOCKS_PER_SEC;
+> +					usleep(sleep_us);
+> +				}
+> +				/* Reset the byte counter and the ticks. 
+*/
+> +				bytes_in_bucket = 0;
+> +				start_of_bucket_ticks = clock();
+> +			}
+> +		}
+> +
+>  		bytesread = smbc_read(remotehandle, readbuf, opt.blocksize);
+> +		if (opt.limit_rate > 0) {
+> +			bytes_in_bucket += bytesread;
+> +		}
+>  		if(bytesread < 0) {
+>  			fprintf(stderr,
+>  				"Can't read %zu bytes at offset %jd, file 
+%s\n",
+> @@ -902,6 +968,13 @@ int main(int argc, char **argv)
+>  			.val        = 'f',
+>  			.descrip    = "Use specified rc file"
+>  		},
+> +		{
+> +			.longName   = "limit-rate",
+> +			.argInfo    = POPT_ARG_INT,
+> +			.arg        = &opt.limit_rate,
+> +			.val        = 'l',
 
-Hi!
+This should use an enum OPT_LIMIT_RATE instead of 'l' or it will confilict 
+with common options!
 
-What's the reason to have msg.sock directory (for sockets to communicate
-with various samba processes) in /var/lib/samba/ (in private_directory)
-instead of in run directory where it clearly belongs?
 
-On linux, this would be /run/samba/msg.sock/.
+	Andreas
 
-Below is a patch I use in Debian since Apr this year. There's no "rundir"
-parameter in samba, it is "lockdir", - I used this one. It smells a bit
-hackish, but maybe we should introduce "rundir" parameter and point
-"lockdir" to it, or just rename --with-lockdir to --with-rundir.
+> +			.descrip    = "Limit download speed to this many 
+KB/s"
+> +		},
+> 
+>  		POPT_TABLEEND
+>  	};
 
-There's also --with-sockets-dir but that one is used for different purpose.
 
-(A side note, there are many configure-time parameters which are misnamed.
-For example, -with-privileged-socket-dir is not used for anything but
-ntp_signd/, maybe it should be renamed to --with-ntp-signd-dir. Ditto for
-some parameters related to ctdb only, but from the name it looks like it
-should affect samba too. Should we clean up this mess?)
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
-Thanks,
 
-/mjt
---------------1Yivx240KRk5jzdKZCra7zbw
-Content-Type: text/x-patch; charset=UTF-8;
- name="move-msg.sock-from-var-lib-samba-to-run-samba.patch"
-Content-Disposition: attachment;
- filename="move-msg.sock-from-var-lib-samba-to-run-samba.patch"
-Content-Transfer-Encoding: base64
-
-RnJvbTogTWljaGFlbCBUb2thcmV2IDxtanRAdGxzLm1zay5ydT4KRGF0ZTogVHVlLCAyNiBB
-cHIgMjAyMiAxNjoxMTo0OCArMDMwMApTdWJqZWN0OiBtb3ZlIG1zZy5zb2NrIGZyb20gL3Zh
-ci9saWIvc2FtYmEgdG8gL3J1bi9zYW1iYQoKVGhpcyBtb3ZlcyBhIHNvY2tldCBkaXJlY3Rv
-cnkgZnJvbSAvdmFyL2xpYi9zYW1iYSB0byAvcnVuL3NhbWJhLgoKaHR0cHM6Ly9saXN0cy5z
-YW1iYS5vcmcvYXJjaGl2ZS9zYW1iYS10ZWNobmljYWwvMjAyMi1BcHJpbC8xMzczMjIuaHRt
-bAoKZGlmZiAtLWdpdCBhL3NvdXJjZTMvbGliL21lc3NhZ2VzLmMgYi9zb3VyY2UzL2xpYi9t
-ZXNzYWdlcy5jCmluZGV4IDg2NDFhOWRhZDU2Li5iZjg2NmU2NWU0NCAxMDA2NDQKLS0tIGEv
-c291cmNlMy9saWIvbWVzc2FnZXMuYworKysgYi9zb3VyY2UzL2xpYi9tZXNzYWdlcy5jCkBA
-IC00NjEsMTEgKzQ2MSw2IEBAIHN0YXRpYyBpbnQgbWVzc2FnaW5nX2NvbnRleHRfZGVzdHJ1
-Y3RvcihzdHJ1Y3QgbWVzc2FnaW5nX2NvbnRleHQgKmN0eCkKIAlyZXR1cm4gMDsKIH0KIAot
-c3RhdGljIGNvbnN0IGNoYXIgKnByaXZhdGVfcGF0aChjb25zdCBjaGFyICpuYW1lKQotewot
-CXJldHVybiB0YWxsb2NfYXNwcmludGYodGFsbG9jX3RvcygpLCAiJXMvJXMiLCBscF9wcml2
-YXRlX2RpcigpLCBuYW1lKTsKLX0KLQogc3RhdGljIE5UU1RBVFVTIG1lc3NhZ2luZ19pbml0
-X2ludGVybmFsKFRBTExPQ19DVFggKm1lbV9jdHgsCiAJCQkJCXN0cnVjdCB0ZXZlbnRfY29u
-dGV4dCAqZXYsCiAJCQkJCXN0cnVjdCBtZXNzYWdpbmdfY29udGV4dCAqKnBtc2dfY3R4KQpA
-QCAtNTAwLDcgKzQ5NSw3IEBAIHN0YXRpYyBOVFNUQVRVUyBtZXNzYWdpbmdfaW5pdF9pbnRl
-cm5hbChUQUxMT0NfQ1RYICptZW1fY3R4LAogCQlyZXR1cm4gTlRfU1RBVFVTX0FDQ0VTU19E
-RU5JRUQ7CiAJfQogCi0JcHJpdl9wYXRoID0gcHJpdmF0ZV9wYXRoKCJtc2cuc29jayIpOwor
-CXByaXZfcGF0aCA9IGxvY2tfcGF0aCh0YWxsb2NfdG9zKCksICJtc2cuc29jayIpOwogCWlm
-IChwcml2X3BhdGggPT0gTlVMTCkgewogCQlyZXR1cm4gTlRfU1RBVFVTX05PX01FTU9SWTsK
-IAl9CkBAIC02NjMsNyArNjU4LDcgQEAgTlRTVEFUVVMgbWVzc2FnaW5nX3JlaW5pdChzdHJ1
-Y3QgbWVzc2FnaW5nX2NvbnRleHQgKm1zZ19jdHgpCiAJCW1zZ19jdHgtPnBlcl9wcm9jZXNz
-X3RhbGxvY19jdHgsCiAJCW1zZ19jdHgtPmV2ZW50X2N0eCwKIAkJJm1zZ19jdHgtPmlkLnVu
-aXF1ZV9pZCwKLQkJcHJpdmF0ZV9wYXRoKCJtc2cuc29jayIpLAorCQlsb2NrX3BhdGgodGFs
-bG9jX3RvcygpLCAibXNnLnNvY2siKSwKIAkJbGNrX3BhdGgsCiAJCW1lc3NhZ2luZ19yZWN2
-X2NiLAogCQltc2dfY3R4LApkaWZmIC0tZ2l0IGEvc291cmNlNC9saWIvbWVzc2FnaW5nL21l
-c3NhZ2luZy5jIGIvc291cmNlNC9saWIvbWVzc2FnaW5nL21lc3NhZ2luZy5jCmluZGV4IGEw
-MGMzNWJlMGQ1Li5kYTY0MWJjMDZhYSAxMDA2NDQKLS0tIGEvc291cmNlNC9saWIvbWVzc2Fn
-aW5nL21lc3NhZ2luZy5jCisrKyBiL3NvdXJjZTQvbGliL21lc3NhZ2luZy9tZXNzYWdpbmcu
-YwpAQCAtNTAwLDcgKzUwMCw3IEBAIHN0cnVjdCBpbWVzc2FnaW5nX2NvbnRleHQgKmltZXNz
-YWdpbmdfaW5pdChUQUxMT0NfQ1RYICptZW1fY3R4LAogCQlnb3RvIGZhaWw7CiAJfQogCi0J
-bXNnLT5zb2NrX2RpciA9IGxwY2ZnX3ByaXZhdGVfcGF0aChtc2csIGxwX2N0eCwgIm1zZy5z
-b2NrIik7CisJbXNnLT5zb2NrX2RpciA9IGxwY2ZnX2xvY2tfcGF0aChtc2csIGxwX2N0eCwg
-Im1zZy5zb2NrIik7CiAJaWYgKG1zZy0+c29ja19kaXIgPT0gTlVMTCkgewogCQlnb3RvIGZh
-aWw7CiAJfQo=
-
---------------1Yivx240KRk5jzdKZCra7zbw--
 
