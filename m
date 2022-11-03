@@ -2,49 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A57FE6170CD
-	for <lists+samba-technical@lfdr.de>; Wed,  2 Nov 2022 23:45:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83B776173F7
+	for <lists+samba-technical@lfdr.de>; Thu,  3 Nov 2022 03:02:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=Qiff3D2LAiqPSOMdqxvuOjimmFAqGNK/Uy4l+dIsZwg=; b=Khj9tVUkaLxRPQ5OXa/wbQBCgO
-	moOWsmJaXlVuigJd0lOg+lI6EhuB9c7teRP/CW+6q6U6XZUJ/GjlAmoyz1ITUGnb+u7+/CgaUy20Y
-	tNBPlRPyFm4HQzYV4gkEj10cDnQzIYLcfjIOHH5tcHbZpenBhX//4iorSvZGBM7GVJcQEwbYfjUeS
-	WqfOLnaZLFp/n/uaYUBQkirY0tr/sYCnEgH0hSZeo5zBEOhcQAdfyilGNGyLNmaiyNEm8QWlnc1qV
-	H4/pbghTdTjAfvxwenxnj7rZMG/j/6fTD4iPyMsOXAnuRbJdlumRrITCg4saQE5vjGqBXBvk8By18
-	LrtTdz6Q==;
-Received: from ip6-localhost ([::1]:47356 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=OXfXNKGmOVOqWfPs+jZcf/wH53ypaXLa4pEcNzPFAbg=; b=Kopok2hw/DxExXQdsV4gTGkgrZ
+	t04lTGHLmMOD7G7mXrB6x6rTHS4M3MGhV4AlL5Aitbefll9u/YljV4ARmlU81zACxvz09TFmsQhnz
+	/CF/kap97KRfwteclPmoqn2ws4Egf8PmLcqKCoBTgb1xNnLx9fOt0lbyd0vj/uu/hy7/9kHLCbGoS
+	UuPCrHCIvj+u4IMEV2KiGQzUys9x7xMOqaZ/OxjZipRgcZOP0TjDdfCB0V+sJrrX+qxW8/3yAxXSy
+	SRhXPH3qtuxckK0f+df0RZaK2FzO/D5d3ngA1FqdiAj4Rg2VrwYz0Qon4AkpW17NEycnlr1SH4LOf
+	7NUa+0xQ==;
+Received: from ip6-localhost ([::1]:59958 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oqMUU-00AC8j-1S; Wed, 02 Nov 2022 22:45:46 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64882) 
+	id 1oqPXn-00ADcK-UC; Thu, 03 Nov 2022 02:01:24 +0000
+Received: from gandalf.ozlabs.org ([150.107.74.76]:54765) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oqMUO-00AC8a-RL
- for samba-technical@lists.samba.org; Wed, 02 Nov 2022 22:45:43 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:To:From:Date:CC;
- bh=Qiff3D2LAiqPSOMdqxvuOjimmFAqGNK/Uy4l+dIsZwg=; b=tkRCf65QJ0wXoaTKl7Xa6IO7BO
- UyqzFScn0pIXMllrYPVI70RTdA1EzY1hZMv3zq7Dkex/2r0eea21C1/5l+4xwdRq/juuM3AhdIjJF
- D9zvmxwwaXcuisTv02Alo2yktWW7BKaPg3Swi5e28fvKlaj9rMGlUdU9n5nsSNZv9/smFJQhwpLQz
- X8eM0RiTt5/ISpZdeOglTzAq3pe5RDuHqTe46hAXH0uMdQvaCB8pOmCKoIE9qbyA6DaJKk8ACmp2o
- J8e36osGl4VBCH214PhUvi+yj9ZASkm5vpXl5prFOpjkt9/um4nJ033iQ9rx6VAnldaNI4a8Y5vNr
- nzOutRhAYX0Y/UdWXHBaHozYmAQum++Gbth/FUPJ6QSwN5O7SG/YEI5eCv8ESFAfV2YAKFVHSiWRi
- 3NqeO2ku6URg6iRflWC/Q4nBZOmAE0l3t93InZ5dGbM+Dnkr5ZrqLy0dzQRENL37LG8KJIR63jGbO
- N7CQF4oSwzYl3dxetH2mXVdX;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1oqMUJ-006vwR-2S; Wed, 02 Nov 2022 22:45:35 +0000
-Date: Wed, 2 Nov 2022 15:45:32 -0700
-To: Andrew Bartlett <abartlet@samba.org>, metze@samba.org,
- samba-technical@lists.samba.org
+ (Exim) id 1oqPXj-00ADcB-Jd
+ for samba-technical@lists.samba.org; Thu, 03 Nov 2022 02:01:22 +0000
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4N2n6R43mZz4xP9;
+ Thu,  3 Nov 2022 13:01:03 +1100 (AEDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
+ s=202004; t=1667440863;
+ bh=OXfXNKGmOVOqWfPs+jZcf/wH53ypaXLa4pEcNzPFAbg=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=DFWXxVsb5q7a19yFmtaN89fbtb2jO9nNYzgqGbfRNv8E6F5bL8K1q3V5SVhA8p/0J
+ cWdZxd89WHyfNPlBoeMHCgwSeCubTRplizrJ3/yTFNXxbwjoJfeqH4OJDS4cFLVKZI
+ Lxl82/EivY7oHjnEtJMFDvz5Q2VV2VhccyQJe6xd3HtOD+fsvKxWdj2z5spni0Uj2m
+ IC+EsJb/Ia2Ytiy/uHV0Kj9jrQQYN5HiMguVCvOpuSXBrUtBohenwMrmGL9nf1pI9/
+ G/pKyT1Y0Gy1j5XMWQGNstz641nl1SVFSInwlvjQagN+p+3rPcSI83Iu2cykGraIqs
+ mhRawFJ2iCtyg==
+Date: Thu, 3 Nov 2022 13:01:02 +1100
+To: samba-technical@lists.samba.org
 Subject: Re: How to push to a non Samba Team member branch on gitlab ?
-Message-ID: <Y2LyRyHfRZMbRQQU@jeremy-acer>
+Message-ID: <20221103130102.675b7106@martins.ozlabs.org>
+In-Reply-To: <Y2LxSR6Iv6Qwd0ub@jeremy-acer>
 References: <Y2LRam/bPaaRWRjy@jeremy-acer> <Y2LR/7ytNMuNPxDV@jeremy-acer>
  <0939d282f53194402d6615485a7fc97716fc3b7b.camel@samba.org>
  <Y2LxSR6Iv6Qwd0ub@jeremy-acer>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.34; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <Y2LxSR6Iv6Qwd0ub@jeremy-acer>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,28 +60,22 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
+From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Martin Schwenke <martin@meltin.net>
+Cc: Jeremy Allison <jra@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Nov 02, 2022 at 03:38:01PM -0700, Jeremy Allison via samba-technical wrote:
->On Thu, Nov 03, 2022 at 09:41:10AM +1300, Andrew Bartlett wrote:
->>
->>  Sadly there isn't a way to change which branch a MR is for, you can
->>  however mention the old MR in the new MR which will trigger a
->>  notification.
->>  This is an unfortunate side-effect of the non-standard way we use GitLab,
->>  as the typical approach is to push back to their branch, as as it is
->>  typical the incantation is learnt earlier in the learning process (I've
->>  given that on the MR).
->>  Andrew Bartlett
->
->On a more humourous note, anyone wanting to learn git
->should *always* start here :-) :-) :-):
->
->https://git-man-page-generator.lokaltog.net/
+On Wed, 2 Nov 2022 15:38:01 -0700, Jeremy Allison via samba-technical
+<samba-technical@lists.samba.org> wrote:
 
-We need something similar for an smb.conf option
-generator :-).
+> On a more humourous note, anyone wanting to learn git
+> should *always* start here :-) :-) :-):
+> 
+> https://git-man-page-generator.lokaltog.net/
+
+ROTFL
+
+peace & happiness,
+martin
 
