@@ -2,44 +2,58 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B7C661F006
-	for <lists+samba-technical@lfdr.de>; Mon,  7 Nov 2022 11:12:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1EDA6204E1
+	for <lists+samba-technical@lfdr.de>; Tue,  8 Nov 2022 01:46:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=k8x9SQoZ69TGpyOsHd4wp9dWIU3va/fVMjRn0dd8r7E=; b=UhZNFlXi5n15quPVaPpquXEMG+
-	mgfyJyFclGsFbU2frc0XAq9O8U6tiU9ygDsm9VtM+vkU2vc9Z2NEdt0Mbon8hbEwlCDShqNTPhi7l
-	GlgN9Xo5W//612o/hxIkVUXWGw0SCTDRvMCQaJ50OtGekpwViTmz2mmH2HPf2CPkZ0DVqicKS/bT7
-	uQc7ippUiPSFoHh6w7I4ivCPHoGOWl7TGjjhCE80yyNfXHZen3bVbkeuuJe8u8dqxS3jclZKs9TTF
-	pv3tqs0Ru6M7GJNa+7CMuDvCLf7Q0idttCT8zdHKtLpAyE99RI70xvUyecxpbPiifzrMcavwJGZ2I
-	ytR5SF0w==;
-Received: from ip6-localhost ([::1]:37778 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=XHHgdMe4feIszYMppdCPgQObrblKNWDiQjxYle8RSks=; b=3/haWI9TWynyOZXvju26xItZDj
+	GLvGQoBuVXPuVw3EcV4iJ8ro9eRm5ktE+e1sLnoLmi4PeQxvTNqOI86Rj/3dfNc2wcmLVBfIOH1QQ
+	CgKmLPLhabgByPQhBXPwx4bR9mY0LLJ6/cKl0KvrzJZmWo/yCBgw6X7DuvMazixMteR+PIZTRJNau
+	ZUZ3Zc7Fof6Baa88e1gypAXvtDisEwo3JFEve7V6CTnqLm5uQ7fpbnLBFZT1j1jeTpop67KJWCcyB
+	yCiwsod/jnkUWbO3DduttBrFZQ/zExPVtA0GznC/nkjFnpLYJ16YqVyZFQJR7UrBcOdrWo+I5THa0
+	aNjMG+TQ==;
+Received: from ip6-localhost ([::1]:39930 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1orz79-00BGWD-7Y; Mon, 07 Nov 2022 10:12:23 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:35509) 
+	id 1osCkW-00BPhF-DK; Tue, 08 Nov 2022 00:45:56 +0000
+Received: from mail-lj1-x231.google.com ([2a00:1450:4864:20::231]:47053) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1orz74-00BGW3-HS
- for samba-technical@lists.samba.org; Mon, 07 Nov 2022 10:12:20 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 962AD40010;
- Mon,  7 Nov 2022 13:12:15 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 8EBA43D3;
- Mon,  7 Nov 2022 13:12:20 +0300 (MSK)
-Message-ID: <bdc745cc-4e05-29d5-45c8-5b9a96baa7a6@msgid.tls.msk.ru>
-Date: Mon, 7 Nov 2022 13:12:14 +0300
+ (Exim) id 1osCkS-00BPh6-9Z
+ for samba-technical@lists.samba.org; Tue, 08 Nov 2022 00:45:54 +0000
+Received: by mail-lj1-x231.google.com with SMTP id l8so18823551ljh.13
+ for <samba-technical@lists.samba.org>; Mon, 07 Nov 2022 16:45:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=XHHgdMe4feIszYMppdCPgQObrblKNWDiQjxYle8RSks=;
+ b=h4XLxXH8Yhp2IyB86fiD6frLrGkd8Y/i2XqTJ1mCnnOaVTHsm0K4mjV9YHK7K8e66p
+ uQv5drfMdAXscM5VFgcCO/t+SzMTy3acy4RpTllUpVRF1i28npyJyB/MqqC6s5SYBWAY
+ BDfIu4/Rs6BjZ0qn4IMMo8/L0vRwaLAxBlNDXZswIC7q49UEX47Ry3lQJHyS9+/mKcu/
+ 053hdhDTuPuK/KwgRZrchqvftt90xT41kuSpgRuK/nif1gRdxARiCS7t4Bcc0ncJ/BRK
+ 0uKhXDK+B2nYI1x2gWtsbFS+IpBshmVgVnUafmacBD3o3VChD/GQ3Az4kyanknLCk1Xg
+ LwxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=XHHgdMe4feIszYMppdCPgQObrblKNWDiQjxYle8RSks=;
+ b=FxsYzebgl80pPX3mYrcMloP+wY1eVGDRTnYwcsJb2fGajwtkWf3ROgfb3Qka4AI2z/
+ qfVg/vlBOIa3c3pqyvN3Wx4HAavxbmq/y047fvBRUCk7P1/lRaDWkWfLyX4EICffCKqd
+ HbOmeQ9bGElp/fxqFV/sNrw5gNUgMtdHFDXCz2gN7QUal1iFv362vunPh0aCFbWe93Dj
+ D1R/49c4nSRykpp1OH3laOTysXMMzSWo3hQpPTJgeezfKh9daui0eam1Vklqsq5h46eL
+ /GQdEv6EC15NREZm7LZ3WpgnTPEvnAS/a3up4H/S4Oy2ednTPaAtpkZ+Di6dXWKGOkQd
+ nNQQ==
+X-Gm-Message-State: ACrzQf1LaeeZ8hMZGTVD9WvZLX2NdArycwPoocu6L/q1Fkrd/MtjvXlo
+ OO7+XnixmOV0qqsa7Tr3lzc4yhFt0bFvStP4cJ1kGNNn
+X-Google-Smtp-Source: AMsMyM7tU9tdzvaaGDXNitVJ6s/eVgDrkDEuRsiIGYgVCfFiX1+FC11549zOmgJ0fi80wmPJf33QqvyV5h9XUvBvGTA=
+X-Received: by 2002:a2e:9bcc:0:b0:277:f0f:927e with SMTP id
+ w12-20020a2e9bcc000000b002770f0f927emr6356995ljj.138.1667868350504; Mon, 07
+ Nov 2022 16:45:50 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.0
-Subject: Re: samba-tool gpo listall failing - what's going on please
-Content-Language: en-US
-To: Matt Grant <matt@mattgrant.net.nz>,
- samba-technical <samba-technical@lists.samba.org>
-References: <CAHA-KoNnFFXfyB=vR-2F6oooTnGcPVHafQOVKQDpQjaDJa-0-g@mail.gmail.com>
- <CAHA-KoPuf=VhT4N_km-G8cnEzYDOVv42C7Yi8BOTw+heRHLJRg@mail.gmail.com>
- <CAHA-KoPL7+N=BZz6a+6ZU_QPqjrDi9BO9dfeStNJD79DVW0dkw@mail.gmail.com>
-In-Reply-To: <CAHA-KoPL7+N=BZz6a+6ZU_QPqjrDi9BO9dfeStNJD79DVW0dkw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Date: Mon, 7 Nov 2022 18:45:38 -0600
+Message-ID: <CAH2r5mtc6rHC=zfWCjmGMex0qJrYKeuAcryW95-ru0KyZsaqpA@mail.gmail.com>
+Subject: reflink support and Samba running over XFS
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,25 +67,26 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: CIFS <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-07.11.2022 08:01, Matt Grant via samba-technical wrote:
-..
-> - uint32_t a_num, total;
-> + uint32_t addr_num, total;
+I noticed that reflink (FSCTL_DUPLICATE_EXTENTS) is not supported on
+Samba when run over XFS but is with the vfs_btrfs.
 
-There's no need to rename this really. "a_num" just as well can stand for
-"number of addresses" like for "number of A records". This way the patch
-will be just a one-liner.
+I can do reflink locally on the XFS mount point, but not remotely
+unless it is BTRFS (or to Windows eg. when the share is on REFS).
 
-[Caveat: I'm not a samba developer, but I'd do it that way myself]
+Any idea if there is a way to enable reflink (FSCTL_DUPLICATE_EXTENT)
+support for Samba when not running on btrfs (e.g. on xfs)?
 
-FWIW, I'd still avoid ipv6-only network, at least internally.
+duplicate extents is needed for various Linux client features
+(especially various fallocate operations)
 
+-- 
 Thanks,
 
-/mjt
+Steve
 
