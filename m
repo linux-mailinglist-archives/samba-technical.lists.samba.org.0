@@ -2,47 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C55676209DF
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Nov 2022 08:13:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D074A620B46
+	for <lists+samba-technical@lfdr.de>; Tue,  8 Nov 2022 09:34:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=6ZjC2Z9pJhd6LI9EDKmT/K7rAJbA5xGUE4Au2jRNhR4=; b=n69cYsATeRQJGdMnIZc697HMJ9
-	Eqxqmts8wixhnmPbYw9mEZySMzlDoaqWWwtysTW0UmSr8j4DDoGTUlcHtjeW4uMQHhYE6ihWgzXwX
-	vZ8nEpBh+bMvXsQS1lU/VuQAZG06C6z+LqqqgintO+lmwNImrI02K099urg+r2YiZ7q0yEpCZiEja
-	jD/uRVh4u9oC5KKPoPTvRIL5Jp8wOTHX7LeaAlTl3NsPgWu7/xtq6AQzeov5EAq/3QT6o3f85z1O2
-	uzD3QC2UL16lmbhEdq2CzmLtvaRPtldzOSL3L70ALxZ5cGUrF+mIs5z/pceZJqQMhLEyuGqKyC4il
-	fAzUs08w==;
-Received: from ip6-localhost ([::1]:53512 helo=hr1.samba.org) 
+	bh=HMvbfCFUjTx0ioEcsF40SkcdsXHBJR5eCZikTotmfxE=; b=OTofOLlQPSpmDF+RD2T9WkkbuY
+	6mSVevLYdezuEl2M2IL1aweaNdmR14Qf5lE+0RKLaCR/c2ku9FIh64oT37otG6qkO1Ho8ZEfrPL54
+	URpkY+ebAdOMKuwoqcmLFusiZhKNpwF2GbDlRxP3Cxjw8f1qGRolVQvJjpo/Qxk+jjmbzuHLA6Xzt
+	YMgeT19tDcMsRq26d+LeIx2MoO6pH6mY+wn8/X9rsAEO4igvzSX1jmAmURm5s0lc05uPdmVMHPzyU
+	DIhKOEnSwz0p/KtnQ7DbbwTA1uS1q/gSGek6udZOwK2f5RNVX8KjLAKur0ctikbSbGwtIyXiERyE4
+	71R8/1HA==;
+Received: from ip6-localhost ([::1]:26336 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1osImR-00BRHy-5q; Tue, 08 Nov 2022 07:12:19 +0000
-Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:45842) 
+	id 1osK3p-00BSbL-1T; Tue, 08 Nov 2022 08:34:21 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62306) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1osIm3-00BRHp-FF
- for samba-technical@lists.samba.org; Tue, 08 Nov 2022 07:12:01 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=6ZjC2Z9pJhd6LI9EDKmT/K7rAJbA5xGUE4Au2jRNhR4=; b=UcL8wKS+s0sQImYuafrsXbBNGl
- YMta9vrsUUNsLN/MoLu9VTwOofkrdmlABaamGFjK+Y0lyk1LZKOmw2VtyEIbDvWi3vJz0DG/2Bpww
- 1Z3j315wmC0+8H95w2OmkOZFImFAKCJSmSdc7QoHq4SNB5G8h86fI1Ir4rd/iBlbpU5IpVeudQhWE
- elkPyp2ZJNSVoud1WL87ranb+Z0l4kFNlpgCb7IUZeG5xL0uG1XNcslAVye6+VHJ7vgwfD0TOgxXI
- fJXi93oRRghN7rie3bMaEAC4Lrnakr219K9/7yOPtkOws/25C1mNbKP13Rrg6IYcDeEbxhPswEBO/
- 2twFbtXQ==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1osIOi-003FcT-JP; Tue, 08 Nov 2022 06:47:48 +0000
-Date: Mon, 7 Nov 2022 22:47:48 -0800
-To: Jeremy Allison <jra@samba.org>
-Subject: Re: reflink support and Samba running over XFS
-Message-ID: <Y2n7lENy0jrUg7XD@infradead.org>
-References: <CAH2r5mtc6rHC=zfWCjmGMex0qJrYKeuAcryW95-ru0KyZsaqpA@mail.gmail.com>
- <Y2molp4pVGNO+kaw@jeremy-acer>
+ (Exim) id 1osK3g-00BSal-7J; Tue, 08 Nov 2022 08:34:14 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=HMvbfCFUjTx0ioEcsF40SkcdsXHBJR5eCZikTotmfxE=; b=Gq1iWtC1saBMmy9hrh6qqLBPXO
+ xHGMO28b4sX9BBpLPjv/se/ZpsCV079yvkDnttDf6V8TeJsio9DWHOwH+OfpfQU8/Eqv9id0yrotE
+ pR3ihKNHG6WJ7GxVEVWgaCEPvoNb4T9omCk6ymcQ8+mkpDnuqCYY38BaUs9LnOdtufwLFvvry2TD3
+ ZtOPAVFyD/G405PtFd1YndeW6FMTj20bDFnlKxfW7g3gLf5OE81Q+xJKqEgxeWuUf9IVS/LmqeSSr
+ LHHHjpyPXy4J8s9R61DJr5zFwkwpMMw2zvlYwUGnAapw9j5aPIXgm07J5wg0yXd6IE2aY6ifoNXMk
+ N55Jlt2uv1nK5kwPu/HJ6dCmdPWVt50HlV1pDsrUutlAY0wLWXmLkNBsA9KnDHzisWlUtolelDHE2
+ cN6sRNYJaymE+BY4+AJ51FPKpiWrbGs2rYvLZendNJ6zpVhZdt0Od20YUIs3ITSSrZNJgcyEnT4w5
+ rWEbbw1KRWn/Tuiah4ZsoLaC;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1osK3f-007fy3-A9; Tue, 08 Nov 2022 08:34:11 +0000
+Message-ID: <dbbab218-aa21-6e63-7e71-15ed89324f6a@samba.org>
+Date: Tue, 8 Nov 2022 09:34:11 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Y2molp4pVGNO+kaw@jeremy-acer>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+Content-Language: de-DE
+To: samba-announce@lists.samba.org
+Subject: Heads-up: Upcoming Samba security releases
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,21 +55,28 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Christoph Hellwig via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Christoph Hellwig <hch@infradead.org>
-Cc: Steve French <smfrench@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>,
- CIFS <linux-cifs@vger.kernel.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
+Cc: samba@lists.samba.org, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Nov 07, 2022 at 04:53:42PM -0800, Jeremy Allison via samba-technical wrote:
-> ret = ioctl(fsp_get_io_fd(dest_fsp), BTRFS_IOC_CLONE_RANGE, &cr_args);
-> 
-> what ioctls are used for this in XFS ?
-> 
-> We'd need a VFS module that implements them for XFS.
+Hi,
 
-That ioctl is now implemented in the Linux VFS and supported by btrfs,
-ocfs2, xfs, nfs (v4.2), cifs and overlayfs.
+this is a heads-up that there will be Samba security updates for 4.15, 
+4.16 and 4.17 on Tuesday, November 15 2022. Please make sure that your 
+Samba servers will be updated soon after the release!
+
+Impacted components:
+  - AD DC (CVSS 6.4, Medium)
+
+
+Cheers,
+Jule Anger
+
+-- 
+Jule Anger
+Release Manager Samba Team      https://samba.org
+SerNet Samba Team               https://sernet.de
+
 
