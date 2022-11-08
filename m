@@ -2,44 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCA896212D5
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Nov 2022 14:43:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91DD5621B2F
+	for <lists+samba-technical@lfdr.de>; Tue,  8 Nov 2022 18:52:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=D6+Ia7vAYJ74yIAOoY4uWKPSaBczAUlfiQcAu6gUrrY=; b=iEAWxmoBSUDWj2zyggBsRURJkx
-	ICX4o2vga00ODdjPCy13nojOsrb2qbA7f/msq5oOzWmXws3nKSQcmUCM+eF1IyrU+uBbmegA748eI
-	rXA/iQcFfDUaqH0lDRpprsiTO+Y5v9n8ybQzJNuGUnHmvnL6fprJZjtyLvAKb9PXRhKMmCh/wR07J
-	PANmHRIVNkrXVqrfBghFWX/zKoLxesTEOU6wQTu9lwyH5Lc7gausRkQC9gg5A03xha4aqKMTTzxgi
-	aB4OYlh1LsJkC/p9N+4pDI2ddeuYPi8mRKbmq/ErBUMiav94xoHHZ7kl2MthAl5BWgZGlFgR6l2/2
-	qYS+rsCg==;
-Received: from ip6-localhost ([::1]:40376 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=4HCzvnYYJ4FTBcGnxPniMTg08AG209PkLi4tYI8BtcA=; b=hs2wNfkPJ+/CBcW4/tw8RSiiww
+	Ox71M005udvOiSpUpTE4PZh3GMFIUFYINq1xePpwkoIsfp/TWBEcS5gW6i+G9m7kzpSJxYrr7Rkb5
+	4pJCQ+F4T3vYX4uD5o4wg0xb9Mvp8Bp4298IVt/synOb+3fA6DfiBBziDfyppAMBK942aaEMK9UdJ
+	CwUjXXOsU96CTkrGTSh3vXs7oU6Du90rTqsWYbIhfbDcb6w57ByT8iu5IsmyugttV9ujvo1b6LejG
+	ldeYXAoJsI5daNxofMMHKhfB119ERWvnxsuPCI28RAr9O0PQqascVr25HjhCeXtpFSY1unYKAe572
+	z0W8LIrA==;
+Received: from ip6-localhost ([::1]:26628 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1osOsK-00BYPr-Jj; Tue, 08 Nov 2022 13:42:48 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:36917) 
+	id 1osSlS-00Baxt-H9; Tue, 08 Nov 2022 17:51:58 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62656) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1osOsF-00BYPi-Mf
- for samba-technical@lists.samba.org; Tue, 08 Nov 2022 13:42:46 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 5337B40115;
- Tue,  8 Nov 2022 16:42:41 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 2CBE930C;
- Tue,  8 Nov 2022 16:42:46 +0300 (MSK)
-Message-ID: <dc57ecfe-0058-e0c6-f75c-e4274da0f1ee@msgid.tls.msk.ru>
-Date: Tue, 8 Nov 2022 16:42:40 +0300
+ (Exim) id 1osSlL-00Baxk-Dn
+ for samba-technical@lists.samba.org; Tue, 08 Nov 2022 17:51:54 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=4HCzvnYYJ4FTBcGnxPniMTg08AG209PkLi4tYI8BtcA=; b=YEFaKWh2f1V1luwzh1kJXlR2jY
+ QCWJnz84MSfqocRUZJfayG8UYfLBmxdsMULb/0bjX5O3re21Jp0KebMC36b4E+2rrsnDb4yvbOlIR
+ WD6Qj3qB2lC1q+lD7pm2zReLVjr5a4f1PxP9VSpp+JPdkLWJYdyvJThrezbIYRifTVJkU0vY6X+Kv
+ 6yF+ca52bOEKK/gU+lLS5nrZqZELXAjQtCW2MX/ZymrHCPXl93zlOV6ViqDw8qz8eUz/UDxrtg5f7
+ RTqBBcYKXncdc/OH3h3KYlG4vmxUZqL1QqwdTovaLIpJXDPOxjLdSxCxu+kFT6WxkfQwPPlqo6f7G
+ GRMY/zE9v0vnvRVFwKvljmdwSfZUyaVliaJW7beJ+pL0FB++OwW/8K8cLvz1aU4l89369je/J8//+
+ 3umMblf8xSl1zQQbtsdWwy0iYeHlRr2MyPYLobxCGuImri7PCoUljDx59Gd7sqBmemaNWhkPj5xfE
+ Pq9faB1GrLUBquVXh0bHH0v7;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1osSlD-007jQH-Ho; Tue, 08 Nov 2022 17:51:43 +0000
+Date: Tue, 8 Nov 2022 09:51:40 -0800
+To: Christoph Hellwig <hch@infradead.org>
+Subject: Re: reflink support and Samba running over XFS
+Message-ID: <Y2qXLNM5xvxZHuLQ@jeremy-acer>
+References: <CAH2r5mtc6rHC=zfWCjmGMex0qJrYKeuAcryW95-ru0KyZsaqpA@mail.gmail.com>
+ <Y2molp4pVGNO+kaw@jeremy-acer> <Y2n7lENy0jrUg7XD@infradead.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.0
-Subject: Re: samba does not work with liburing 2.3
-Content-Language: en-US
-To: Stefan Metzmacher <metze@samba.org>, samba-technical@lists.samba.org,
- io-uring <io-uring@vger.kernel.org>
-References: <5a3d3b11-0858-e85f-e381-943263a92202@msgid.tls.msk.ru>
- <df789124-d596-cec3-1ca0-cdebf7b823da@msgid.tls.msk.ru>
- <6dde692a-145f-63bd-95bd-1eb1c1b108ce@samba.org>
-In-Reply-To: <6dde692a-145f-63bd-95bd-1eb1c1b108ce@samba.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <Y2n7lENy0jrUg7XD@infradead.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -53,45 +56,29 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Steve French <smfrench@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>,
+ CIFS <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-08.11.2022 16:26, Stefan Metzmacher wrote:
+On Mon, Nov 07, 2022 at 10:47:48PM -0800, Christoph Hellwig wrote:
+>On Mon, Nov 07, 2022 at 04:53:42PM -0800, Jeremy Allison via samba-technical wrote:
+>> ret = ioctl(fsp_get_io_fd(dest_fsp), BTRFS_IOC_CLONE_RANGE, &cr_args);
+>>
+>> what ioctls are used for this in XFS ?
+>>
+>> We'd need a VFS module that implements them for XFS.
+>
+>That ioctl is now implemented in the Linux VFS and supported by btrfs,
+>ocfs2, xfs, nfs (v4.2), cifs and overlayfs.
 
->> http://bugs.debian.org/1023654
-> 
-> I don't see where this changes the struct size:
+I'm assuming it's this:
 
-Yeah, I noticed that too after filing that bugreport,
-indeed, the problem not in the size of the structures,
-but in the changed way - old inline functions used the
-deprecated ring_kmask & ring_kentries, while the new
-ones uses new ring_mask & ring_entries.
+https://man7.org/linux/man-pages/man2/ioctl_ficlonerange.2.html
 
-> -       unsigned pad[4];
-> +       unsigned ring_mask;
-> +       unsigned ring_entries;
-> +
-> +       unsigned pad[2];
-> 
-> But I see a problem when you compile against 2.3 and run against 2.2
-> as the new values are not filled.
-> 
-> The problem is the mixture of inline and non-inline functions...
-
-Yeah.
-
-> The packaging should make sure it requires the version is build against...
-
-It is either Depends: liburing2 > $version, or, if the ABI is broken like
-this, it is Depends: liburing3 > $newversion (with the soname bump).
-
-At any rate, this is not exactly samba problem, but it affects samba.
-
-Thanks,
-
-/mjt
-
+Yeah ? I'll write some test code and see if I can get it
+into the vfs_default code.
 
