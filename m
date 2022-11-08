@@ -2,37 +2,39 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89AB0620D3B
-	for <lists+samba-technical@lfdr.de>; Tue,  8 Nov 2022 11:26:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BFD2B621191
+	for <lists+samba-technical@lfdr.de>; Tue,  8 Nov 2022 13:57:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=jCsIiugayGUH9DBnKcl6CTQdsea1zxanwOHQ02pnMlM=; b=5Ytrsa8xVKg8PXBJ94Cyha8Crk
-	stU1GpHV7WoOZ7VCuE2UhTcgMczND9mdrNo5daECC7vTlJLNiUIuzFuTMrDTQWDCgFcOuniWW7x2q
-	wP019oSACxeHumkKzTSgLuZoYSXaY4THszwvzgWpic3ffagLAaj2oxczG6leOOGrq3DKsxIcOBbzE
-	6DtNlY66wtbWwnZ2Rnd6YDYUzoz/LEOTBUuxesCYBTQTMF3uaXkPIEC+kWriTpHegZqGS9I7Pu8rE
-	IcII4MtfFIQvPJaZtuSiAEiWoKkim6g+G2puOU8IwiQa380LJQRsajThDWRnoFutuDB/0DyAE50EA
-	KAsiLk+w==;
-Received: from ip6-localhost ([::1]:48568 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=6wl0DxMGlkqHY/o2YF7cdNbT7+o+wjQo3jpeMGEgIL0=; b=5I3j0aKu68q7kyFe2N+75/MNsz
+	yP9kFiqnWagnbqpwKjidWLELXZqxIs4R/6EeDk1irR5vjL2rPw6iwWV6Eu5Zgnvf7qFA+dXtYkw1j
+	EE9sgfTLBYHcS5rAU1dRjkX7+K9FoCZ7Y4iFInXp1tHsTuYQx7vUDaJFWyuhBV2WYX9XICZmqONk1
+	tChIai8R79+QJZNJ4nPhWcsIs4lZU+OitcVeYWQKICb6FEfGU39q6gNRIuJhBu1QpwOhhTNdgS4kD
+	PJWvAZJLAmk1udh39fxlZyIYpJ0rg7Y0PekQt3kSI5ezBljRk1e6FFte7WVH2br4IX0UfikiA7Ob/
+	ajMRxA2w==;
+Received: from ip6-localhost ([::1]:44574 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1osLnd-00BVbq-Cr; Tue, 08 Nov 2022 10:25:45 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:59341) 
+	id 1osO9V-00BXjK-Qk; Tue, 08 Nov 2022 12:56:29 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:44377) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1osLnX-00BVbh-7c
- for samba-technical@lists.samba.org; Tue, 08 Nov 2022 10:25:41 +0000
+ (Exim) id 1osO9P-00BXjB-8Y
+ for samba-technical@lists.samba.org; Tue, 08 Nov 2022 12:56:27 +0000
 Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 519B0400A8
- for <samba-technical@lists.samba.org>; Tue,  8 Nov 2022 13:25:36 +0300 (MSK)
+ by isrv.corpit.ru (Postfix) with ESMTP id AC9C440112
+ for <samba-technical@lists.samba.org>; Tue,  8 Nov 2022 15:56:20 +0300 (MSK)
 Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 7200F30C
- for <samba-technical@lists.samba.org>; Tue,  8 Nov 2022 13:25:41 +0300 (MSK)
-Message-ID: <5a3d3b11-0858-e85f-e381-943263a92202@msgid.tls.msk.ru>
-Date: Tue, 8 Nov 2022 13:25:35 +0300
+ by tsrv.corpit.ru (Postfix) with ESMTP id 9444830C
+ for <samba-technical@lists.samba.org>; Tue,  8 Nov 2022 15:56:25 +0300 (MSK)
+Message-ID: <df789124-d596-cec3-1ca0-cdebf7b823da@msgid.tls.msk.ru>
+Date: Tue, 8 Nov 2022 15:56:19 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.0
+Subject: Re: samba does not work with liburing 2.3
 Content-Language: en-US
 To: samba-technical@lists.samba.org
-Subject: samba does not work with liburing 2.3
+References: <5a3d3b11-0858-e85f-e381-943263a92202@msgid.tls.msk.ru>
+In-Reply-To: <5a3d3b11-0858-e85f-e381-943263a92202@msgid.tls.msk.ru>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -53,14 +55,17 @@ Reply-To: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-FWIW, samba built against the relatively new liburing-2.3 does not
-work right, io_uring-enabled samba just times out in various i/o
-operations (eg from smbclient) when liburing used at compile time
-was 2.3. It works fine with liburing 2.2.
+08.11.2022 13:25, Michael Tokarev via samba-technical wrote:
+> FWIW, samba built against the relatively new liburing-2.3 does not
+> work right, io_uring-enabled samba just times out in various i/o
+> operations (eg from smbclient) when liburing used at compile time
+> was 2.3. It works fine with liburing 2.2.
 
-That's just a heads-up/JFYI for now.
+This turned out to be debian packaging issue, but it might affect
+others too. liburing 2.3 breaks ABI by changing layout of the main
+struct io_uring object in a significant way.
 
-Thanks,
+http://bugs.debian.org/1023654
 
 /mjt
 
