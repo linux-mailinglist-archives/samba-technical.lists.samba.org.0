@@ -2,48 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61F03622631
-	for <lists+samba-technical@lfdr.de>; Wed,  9 Nov 2022 10:04:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 086D1622715
+	for <lists+samba-technical@lfdr.de>; Wed,  9 Nov 2022 10:33:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=APKcTa1hR/RmW8NS4QKqvByff55KXcVdtHfa0tZTJ14=; b=XwdDHnm/2Ppu6Y2Mo1qlS/qXzj
-	jehglLqu/AKiQc89Kg83FJmpVDNo3wfPBVwZR4Bym7mJRKbjiun2Ak8xHptLX2d9OXpUWrke5t0zO
-	ZkYl4oV7bk9wUGeiBJBZ5yi65PL9RCliBTLgsT8lmjBCU+8HCh3zE4xBkngHpQuwkQJW05ZhysnvN
-	4e+HY6W9llc5HiSYNMv9UQcPc4ernyR9M2ODTh+uGyVfJT2VSLAbukXnrzC/4QmdQlVQrW8GRWM4a
-	1FdqRV7AjBR5sbubxXlnRPCaGuNTZ3Mei/cWL2qaqfaiYNQ0NjlM8StxaK1ysjYt05Vz9WpMLrrX2
-	NVMT0AJg==;
-Received: from ip6-localhost ([::1]:28324 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=THb68An7mfXpt0g3Ic/C3ZXToG90RI2yCfZeF6+B/ow=; b=xOTu/YDLayTunhMkVehmsida5m
+	eHKTtU78YONkNgssPT8LlBG4RjXFW4BRBFUltAEakc0FhO+7gmcGSVh8IGWuPKwr+BcdLq42a2tmT
+	fR21em8+T9BckdgCMS1VyoVtPgPVmEED8QGXMTUGbNR7DMTuK23zsRvCmrtCrX/dS+1kBeXFZeSMA
+	Kn1I2Uj+0guujpMQF/bWMzY9/AMksgPzFB1Fv+zlBOZKaP8JZy804BG8AA4cd1577XNLKvPkdia+2
+	u11MM3036o5qClEDnVrC9q/43IZgL4FtXPjND9+XZgIrFSwP1ZE9vSgTWonXKEZ6qS8bT5cDeHroy
+	FkdiDQqw==;
+Received: from ip6-localhost ([::1]:37828 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1osgzx-00BjVz-EY; Wed, 09 Nov 2022 09:03:53 +0000
-Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:56018) 
+	id 1oshRz-00BjsR-Iv; Wed, 09 Nov 2022 09:32:51 +0000
+Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b]:35488) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1osgzs-00BjVp-KC
- for samba-technical@lists.samba.org; Wed, 09 Nov 2022 09:03:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=APKcTa1hR/RmW8NS4QKqvByff55KXcVdtHfa0tZTJ14=; b=ngO4vTXkz7fYj2rFDkQh1BtzXY
- b4KuCiolqd90OYoEZeJDfuNZQT1RQDCFN9OldY9MznOTpLu2hNnhRjPLA37ms7revHLmYHK/4mB7Y
- IChmq1fqQb9oAAXvr9CZUYLEYVXYUIa7ps96oywHhR0ZMYzfB6llOTkNpKLmI2z//aOVppjknsbBu
- s1u6xgH1+Mxo5Y13ebTcZS7N1np8PwevFUULCNFxryGjAWRsH+yjl5LCbJ/nAhUnVzwCOiY+P0nRW
- 9psS1s1rH6vh+/9nrrRRQibK2+7rIhvHPJYGdbH6RJrwxmFAeKr0X1cmbC15H8NJKCNegfk+CxOxa
- khP8NWPA==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1osfkU-00Bic8-0y; Wed, 09 Nov 2022 07:43:50 +0000
-Date: Tue, 8 Nov 2022 23:43:50 -0800
-To: Jeremy Allison <jra@samba.org>
-Subject: Re: reflink support and Samba running over XFS
-Message-ID: <Y2taNrM8GfOBEDA/@infradead.org>
+ (Exim) id 1oshRr-00BjsI-Lz
+ for samba-technical@lists.samba.org; Wed, 09 Nov 2022 09:32:48 +0000
+Received: by mail-vs1-xe2b.google.com with SMTP id k67so16058037vsk.2
+ for <samba-technical@lists.samba.org>; Wed, 09 Nov 2022 01:32:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=THb68An7mfXpt0g3Ic/C3ZXToG90RI2yCfZeF6+B/ow=;
+ b=HUGPGsm20IbfwA5GyEqowBP3i+al6ZnVpjpIXj7t75JmZOYCJ411wPpyPGq102bAIa
+ C/qUw1PniqVHxGEVsHVw1M37bspjbfZ3PrnEoJOFpR5qoCCslZiiHKdjYsSMljIdgo7G
+ u1VUEkQ1ADuFsJm7WqML/PVb8p/8WsmUUmU9wD9s4VKOBhEZ4HfyM6JTs3U1g2PDY5EV
+ yOb802ScGQhcYs9kVL8GXRFoob0YLFwAVRC1D2bV+PNWPlxOGD7uXbSLr4iRiIvpSRo4
+ QdO5gOX0kfWWHvq0xrnUOmGIZAuJ1i52GLVCt/RB/CCf5A5zQIMGCJ0A4komqef71U/l
+ zidw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=THb68An7mfXpt0g3Ic/C3ZXToG90RI2yCfZeF6+B/ow=;
+ b=gNvLCJbtCWO+h6AasjoeHT2xUq3URmx4fUK4oxMdZOH4puhAp/q9PSsym3jMPaJuTN
+ f/lWvPH/Tk7MTME/f9OqD69qlmyeMGnGunc8aqT2Zo+SeoikmVNSjUVK768CGU07fOuQ
+ tjfOVY9klsiw/Pp6gvhk/emSZAFO6IpfyPaZdKTBQTGQzfv3Q0hkkLG9sEy4hrhJAhVS
+ e+wxIfcL1/B0JzVGy8yq1dCmeI7+Ob/35rBNDd68rTkKEQVcivZuQZs30oBfX/K8jyE/
+ rBUszq06XnoNOe4FGRVbkHG8DuYPNLk6On7eQvqmmAnA0gGlt+Z/hI8vbdrP2P9yqieD
+ h3jQ==
+X-Gm-Message-State: ACrzQf2B+IQ5zmuVY3w8ktDsKFAqBPRcnhkUJrtX01YghFqoHOhPcoao
+ /wKPs/DdIgyLbpTm4W5DLbKRyOWS1RlCbuR6Jtk=
+X-Google-Smtp-Source: AMsMyM5LH22jLKQC76s3HOT5UdE9nLihj8jTFUKP5CrdBli9QohEuz15EJhSCagrQWFXtVnGQ4PuN9Z5Thu2oC56JuI=
+X-Received: by 2002:a67:c990:0:b0:3aa:320a:90a7 with SMTP id
+ y16-20020a67c990000000b003aa320a90a7mr982645vsk.3.1667986361406; Wed, 09 Nov
+ 2022 01:32:41 -0800 (PST)
+MIME-Version: 1.0
 References: <CAH2r5mtc6rHC=zfWCjmGMex0qJrYKeuAcryW95-ru0KyZsaqpA@mail.gmail.com>
  <Y2molp4pVGNO+kaw@jeremy-acer> <Y2n7lENy0jrUg7XD@infradead.org>
  <Y2qXLNM5xvxZHuLQ@jeremy-acer>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 In-Reply-To: <Y2qXLNM5xvxZHuLQ@jeremy-acer>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Date: Wed, 9 Nov 2022 11:32:30 +0200
+Message-ID: <CAOQ4uxgyXtr6DU-eAP+kR1a7NsS-zDhXi5-0BJ7i=-erLa3-kg@mail.gmail.com>
+Subject: Re: reflink support and Samba running over XFS
+To: Jeremy Allison <jra@samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,18 +72,43 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Christoph Hellwig via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Christoph Hellwig <hch@infradead.org>
+From: Amir Goldstein via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Amir Goldstein <amir73il@gmail.com>
 Cc: Steve French <smfrench@gmail.com>,
  samba-technical <samba-technical@lists.samba.org>,
  CIFS <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Nov 08, 2022 at 09:51:40AM -0800, Jeremy Allison wrote:
+On Tue, Nov 8, 2022 at 7:53 PM Jeremy Allison via samba-technical
+<samba-technical@lists.samba.org> wrote:
+>
+> On Mon, Nov 07, 2022 at 10:47:48PM -0800, Christoph Hellwig wrote:
+> >On Mon, Nov 07, 2022 at 04:53:42PM -0800, Jeremy Allison via samba-technical wrote:
+> >> ret = ioctl(fsp_get_io_fd(dest_fsp), BTRFS_IOC_CLONE_RANGE, &cr_args);
+> >>
+> >> what ioctls are used for this in XFS ?
+> >>
+> >> We'd need a VFS module that implements them for XFS.
+> >
+> >That ioctl is now implemented in the Linux VFS and supported by btrfs,
+> >ocfs2, xfs, nfs (v4.2), cifs and overlayfs.
+>
 > I'm assuming it's this:
-> 
+>
 > https://man7.org/linux/man-pages/man2/ioctl_ficlonerange.2.html
+>
+> Yeah ? I'll write some test code and see if I can get it
+> into the vfs_default code.
+>
 
-Yes.
+Looks like this was already discussed during the work on generic
+implementation of FSCTL_SRV_COPYCHUNK:
+https://bugzilla.samba.org/show_bug.cgi?id=12033#c3
+
+Forgotten?
+Left for later?
+
+Thanks,
+Amir.
 
