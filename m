@@ -2,50 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CCFE624B19
-	for <lists+samba-technical@lfdr.de>; Thu, 10 Nov 2022 20:58:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 095C2624C24
+	for <lists+samba-technical@lfdr.de>; Thu, 10 Nov 2022 21:49:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=HZrgbKwq/Zv90fuyRQGa8KO1ffIc2cK2MUEJ6rWQ+Sk=; b=qzuO1FoXk1e+0sT8e62o6gM3wr
-	vK0osPaSRP2jq5/2Z8OX7FBxigdBe7YqF+5qxJD3G4lUHNM+1GVWXO7X8hPXMHfo3y7NWmSTN2Qt9
-	RpsNNtaz/eSwMhknhC9DCwc0XvYtustNXvoU5IffIaoIFS50VPOVGP/0EjCQ+KU3qTS0KDo2bAHAg
-	q/g4fpMUZOZK9Y77zQqkBfQG0bvIWvU43WOuud98G70l0qmfZv7+Lb6iALEty2jxh/X+lozJRd9In
-	cnFcd8sERkP2rDnFDZ2mMr/BqQyJTIEbgyBbDgBVCoUrhMiau2tI6oYg8xMMdAslOY89I3bQPb8/R
-	tA58Gurg==;
-Received: from ip6-localhost ([::1]:37086 helo=hr1.samba.org) 
+	bh=i6kr/WyeNkhqxs16oeYp/s+3oRnYWCPaJEGZRz7vDSs=; b=tY1gaeeXZafJSwy3aBKaJ0TM2W
+	90ZN2toReprZTrbL0j0X1jw9FygSbGIbpBJckvBZasYnVP+AHAJtSXgS9SLpnXNwE7fM7osirMQYB
+	qYNogzteIDOmpl5AAtm/d/lCSFbrEN99ASGg59t/4WpcODxQo7jmBTig0mqjorQmXLjl7q6BGkf9C
+	1WhFfm46bCwtaPG+cVyhcF5JX3Y9eZr9ORw6Icjr87kTeHu+zt1Mm/eI6TFPOrgRMhvwOmoiznb4O
+	+NGjGFS0epITjYGINh03s7nxPmjf43TyMchYZuRYeeLyMv/ZjqRNe6K4l2EKqnKA/ko2Dvx7VXGMq
+	2+2u7kVQ==;
+Received: from ip6-localhost ([::1]:34348 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1otDgI-00C3Of-Nx; Thu, 10 Nov 2022 19:57:46 +0000
-Received: from bombadil.infradead.org ([2607:7c80:54:3::133]:36286) 
+	id 1otETc-00C4B7-MQ; Thu, 10 Nov 2022 20:48:44 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54894) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1otDgC-00C3OU-LZ
- for samba-technical@lists.samba.org; Thu, 10 Nov 2022 19:57:43 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=HZrgbKwq/Zv90fuyRQGa8KO1ffIc2cK2MUEJ6rWQ+Sk=; b=ACCb2RAqTLt2zjn9qwHc6INnrN
- oUe83br+N3BC7/eBR2Iv3pKUNafrieTf+9c5cDqIFF9gjVmRScGcgrVNTE+jPXM6i9FkREiPJXAmG
- L6Wb9s0L4xxe256dSKrVaLaEmud/7MUtMX5dh92wvcZQuNU21B4rb8wQXeXWXGXZmA673Dt5dCNRM
- mksw5m1MbkdXeYq+Ura9lWxOoUCLcfahgoyQzUCwyXV6crOejg2ZuKXbgNeucPfO/Ubw4wxm18ZtD
- I94+zy9ESc0/M14daQChYTWY30XzzvN4YEPr3L8Eiy70qimMwFr6uG8HKOCn3CN3HE1pZIofWOGE/
- 1Xwe7Ldw==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1ot5w2-005RuC-Sa; Thu, 10 Nov 2022 11:41:30 +0000
-Date: Thu, 10 Nov 2022 03:41:30 -0800
-To: Jeremy Allison <jra@samba.org>
-Subject: Re: reflink support and Samba running over XFS
-Message-ID: <Y2zjaoiw0m/8b0t/@infradead.org>
-References: <CAH2r5mtc6rHC=zfWCjmGMex0qJrYKeuAcryW95-ru0KyZsaqpA@mail.gmail.com>
- <Y2molp4pVGNO+kaw@jeremy-acer> <Y2n7lENy0jrUg7XD@infradead.org>
- <Y2qXLNM5xvxZHuLQ@jeremy-acer>
- <CAOQ4uxgyXtr6DU-eAP+kR1a7NsS-zDhXi5-0BJ7i=-erLa3-kg@mail.gmail.com>
- <Y2vzinRPFEBZyACg@jeremy-acer> <Y2v1zQbnPoqg+0aj@jeremy-acer>
+ (Exim) id 1otETX-00C4Ay-DE
+ for samba-technical@lists.samba.org; Thu, 10 Nov 2022 20:48:41 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=i6kr/WyeNkhqxs16oeYp/s+3oRnYWCPaJEGZRz7vDSs=; b=JjP0kSc+tCEqVI9/DK1G/tH48x
+ CBC8JexG7b2Roev2jEYXLAYWTA/l5l38Lqu0E6eK07VjS6aCC7nn9DpnaJCWn8Qymv4wZ7RrexK93
+ EIYYLA5WgYd9aHv0b6u2wzbF9JlNoxC1gLtTuXlh3w99Jx77E288esFUJlAsopyu10qxWQVpEHdnj
+ bIer3TBkZ/X0sJnSiXWaf7Gi1jxxvBKyLLv8sVhmYcTe+rVU/LeNbAGclm6b9ksQEB4rBUOAzzzDE
+ Zon2/C80cjvtjJtAHG8MTyqrduO79HV8uIgpWGLn3qpIQ1X3GajaR5ovKLMWpHC7xx3ZfmuPSvqBo
+ vAGjo7NdDkSeG3Dr0uYFOJ7BNpERuJxpFuIQRYIvKJtGU4k7kOM3zY/mBXDz7ZHX1KOvU65iqJ2yo
+ P3goM8bpaSvzQ4rriLzFTocNqJacVcp0b4yh3OgylmCcyvpBzbjbxA1K8Nl1J61oC4WKtFrf4r7vS
+ VXqI/ieGthb1kYixazygib2h;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1otETV-0083Mi-Tg; Thu, 10 Nov 2022 20:48:38 +0000
+Date: Thu, 10 Nov 2022 12:48:35 -0800
+To: Andrew Walker <awalker@ixsystems.com>
+Subject: Re: FSCTL_READ_FILE_USN_DATA on "SmartScreen" alternate data stream
+Message-ID: <Y21joyg1L6gJ9WAo@jeremy-acer>
+References: <CAB5c7xqc7BfQ3dCA=Le9izqxzC=bzAWZpYzE4tFUv1N-_Ocfmw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-In-Reply-To: <Y2v1zQbnPoqg+0aj@jeremy-acer>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
+In-Reply-To: <CAB5c7xqc7BfQ3dCA=Le9izqxzC=bzAWZpYzE4tFUv1N-_Ocfmw@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,22 +55,71 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Christoph Hellwig via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Christoph Hellwig <hch@infradead.org>
-Cc: CIFS <linux-cifs@vger.kernel.org>, Amir Goldstein <amir73il@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>, metze@samba.org,
- Steve French <smfrench@gmail.com>, vl@samba.org
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, Nov 09, 2022 at 10:47:41AM -0800, Jeremy Allison via samba-technical wrote:
-> So it *looks* like the copy_file_range() syscall will internally
-> call the equivalent of FICLONERANGE if the underlying file
-> system supports it.
+On Wed, Nov 09, 2022 at 12:58:07PM -0500, Andrew Walker via samba-technical wrote:
+>Hey all,
+>
+>I just saw an smbd crash where we asserted here:
+>```
+>static NTSTATUS vfswrap_fsctl(struct vfs_handle_struct *handle,
+>                              struct files_struct *fsp,
+>                              TALLOC_CTX *ctx,
+>                              uint32_t function,
+>                              uint16_t req_flags, /* Needed for UNICODE ...
+>*/
+>                              const uint8_t *_in_data,
+>                              uint32_t in_len,
+>                              uint8_t **_out_data,
+>                              uint32_t max_out_len,
+>                              uint32_t *out_len)
+>{
+>        const char *in_data = (const char *)_in_data;
+>        char **out_data = (char **)_out_data;
+>        NTSTATUS status;
+>
+>        SMB_ASSERT(!fsp_is_alternate_stream(fsp));
+>```
+>
+>Due to what appears to be a client sending FSCTL_READ_FILE_USN_DATA ioctl
+>to a SmartScreen alternate data stream.
+>
+>```
+>#6  0x00000008016d13be in vfswrap_fsctl (handle=0x816c73280,
+>fsp=0x816c3d260, ctx=0x810398670, function=590059, req_flags=49217,
+>_in_data=0x0, in_len=0, _out_data=0x7fffffffdfa0, max_out_len=320,
+>    out_len=0x7fffffffe070)
+>
+>(gdb) p *fsp.fsp_name
+>$3 = {base_name = 0x816c3e5c0 "System/Drivers/Peripherals/SoundBlaster
+>X3/Drivers version 3.4.98.00/USBCMDMasterInstaller_3.4.98.00.exe",
+>stream_name = 0x816c3e690 ":SmartScreen", flags = 0, st = {
+>    st_ex_dev = 17440526963365876026, st_ex_ino = 13799128922567319488,
+>st_ex_gen = 27211941, st_ex_file_id = 33830, st_ex_mode = 33272,
+>st_ex_nlink = 1, st_ex_uid = 1000, st_ex_gid = 0,
+>    st_ex_rdev = 18446744073709551615, st_ex_size = 7, st_ex_atime =
+>{tv_sec = 1667955800, tv_nsec = 250523235}, st_ex_mtime = {tv_sec =
+>1667955806, tv_nsec = 707597100}, st_ex_ctime = {
+>      tv_sec = 1667955806, tv_nsec = 707691237}, st_ex_btime = {tv_sec =
+>1667955801, tv_nsec = 825131076}, st_ex_itime = {tv_sec = 1667955801,
+>tv_nsec = 825131076}, st_ex_blksize = 131072,
+>    st_ex_blocks = 1, st_ex_flags = 2048, st_ex_iflags = 6}, twrp = 0, fsp
+>= 0x816c3d260, fsp_link = 0x810237480}
+>```
+>
+>Of course, it's a soundblaster driver file :))) has anyone else seen this
+>behavior before from client? Perhaps we need to add fsctl hook to
+>streams_xattr since this I think asserting here is probably a bit excessive
+>(maybe pass along base fsp in this case)?
 
-Yes.  The separate clone interface exists for the cases where
-applications only want to do the fast metadata only operation and
-not fall back toan actual copy.  I'll leave it to people with more
-SMB experience if and how that matters to the protocol.  For NFS
-CLONE and COPY primitives exist on the wire with a similar distinction.
+Can you give the entire call stack. Might be easier to
+just change the upper level code to pass on metadata_fsp(fsp)
+instead.
+
+I don't think there's a case where an FSCTL/IOCTL is done
+on an alternate stream fsp.
 
