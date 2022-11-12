@@ -2,38 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78F1362697C
-	for <lists+samba-technical@lfdr.de>; Sat, 12 Nov 2022 13:47:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73285626B8E
+	for <lists+samba-technical@lfdr.de>; Sat, 12 Nov 2022 21:25:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=Nf9k3Fs2X7OJeejDpjtC872IyPXNppAakrh3IAr979Q=; b=ccC5HEMSC6M9QxADQPTMeCWOeA
-	Fxu5CYRjcZxY37NQ9stlvnrzjzfcxxvioPrWQ7f0DBfLI0fIhTnH3GPkP4ib+QtnD+adN9FyUbCuA
-	4MDuTJ8V+GlazY750T4Z7lUMG7tjM+TTukTbtU4Pu3w4YPA+oQY+dLC50451Mm9ge+fWu7oEZd3/U
-	nRNjknrkCKifhcEfl2xHUPP2Ht8R8YBTRsUA/zK1hS+E31E/KMJE47DwGDrusqgo7y0bZBjFAtHZ6
-	/i7IougLWcKSj5ZKcwaTEqyhIozRPP49WJi4g7fdjSk8v+GjzQzCNKaF0ZhZ6sx6/jpf4EYQnDnrI
-	3hvwqIJw==;
-Received: from ip6-localhost ([::1]:30774 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=iL6+wWhbTe7/c2xlgmAPVXGblK7E0GMc8Y7FVzhAAJo=; b=5nOmeOTdpgDDpeY3fbHYHKIc2W
+	6V96Yjwm68x7btj2+zHucff4Dk/uPcxDCHMF0MORXZBLh+xy/RxNgwuuRJlfuTJYBYqANjKQw7tcX
+	OIzuQwfaChc9E3HxMbtU2lTqnH19o6SjoIPdmGrz3L+cKWbqzvpsxffqHyeSa56TV3a1+bd861RhY
+	jEMuKCMYt1ZeOD48rZ8QZZLLjiYFhZZelLwp8ZF+Q4nl3qM0p9S2LFrtdugfcP//gOP5NtRu/JUlU
+	pKfQccDwi9Oz2QfJtQJhfI1MD+GhHSqgSpKoF/RIqlWNFCD2ufWajaJvpYuaDlEdag+0qY5nFD3/v
+	HCn1Z0Qg==;
+Received: from ip6-localhost ([::1]:60080 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1otpu2-00CYNv-9C; Sat, 12 Nov 2022 12:46:30 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:54489) 
+	id 1otx3Q-00CaDY-Ue; Sat, 12 Nov 2022 20:24:41 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:33225) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1otptw-00CYNm-Ii
- for samba-technical@lists.samba.org; Sat, 12 Nov 2022 12:46:27 +0000
+ (Exim) id 1otx3K-00CaDP-AE
+ for samba-technical@lists.samba.org; Sat, 12 Nov 2022 20:24:38 +0000
 Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 8D41840191
- for <samba-technical@lists.samba.org>; Sat, 12 Nov 2022 15:46:21 +0300 (MSK)
+ by isrv.corpit.ru (Postfix) with ESMTP id 537CB40191
+ for <samba-technical@lists.samba.org>; Sat, 12 Nov 2022 23:24:23 +0300 (MSK)
 Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 681AF6B
- for <samba-technical@lists.samba.org>; Sat, 12 Nov 2022 15:46:25 +0300 (MSK)
-Content-Type: multipart/mixed; boundary="------------IMLifU99z1qN8qhZdb5RP5Rx"
-Message-ID: <4197c161-ef1e-3710-f50e-7631ddaf5f3f@msgid.tls.msk.ru>
-Date: Sat, 12 Nov 2022 15:46:19 +0300
+ by tsrv.corpit.ru (Postfix) with ESMTP id 218AA6B
+ for <samba-technical@lists.samba.org>; Sat, 12 Nov 2022 23:24:28 +0300 (MSK)
+Message-ID: <06c4ce9f-0dfb-8deb-7ef0-78ffd78e630c@msgid.tls.msk.ru>
+Date: Sat, 12 Nov 2022 23:24:21 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.0
+Subject: Re: failing tests in the testsuite on debian
 Content-Language: en-US
 To: samba-technical@lists.samba.org
-Subject: failing tests in the testsuite on debian
+References: <4197c161-ef1e-3710-f50e-7631ddaf5f3f@msgid.tls.msk.ru>
+In-Reply-To: <4197c161-ef1e-3710-f50e-7631ddaf5f3f@msgid.tls.msk.ru>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,294 +55,93 @@ Reply-To: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is a multi-part message in MIME format.
---------------IMLifU99z1qN8qhZdb5RP5Rx
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-Hi!
-
-I tried to run samba selftests in debian, at least the --quick tests.
-But I always end up with whole thing failing.
-
-There's seems to be a constant issue with rpc_proxy tests. Regular `waf test --quick' fails
-in the way as shown in rpc_proxyQ.log (attached).  But when run just this single test, --
-`waf test --tests=samba4.ntvfs.cifs.ntlm.base.unlink', it fails too but differently, as shown
-in  rpc_proxy1.log. It is interesting that in first case it fails with undef-ptr-deref in
-in selftest/selftest.pl:
-
-sub getlog_env($)
-{
-         my ($envname) = @_;
-         return "" if ($envname eq "none");
-         my $env = get_running_env($envname);
-         return $env->{target}->getlog_env($env);  <<== here, apparently $env->{target} is undef
-}
+ok. After quite some digging I found out that the selftest was missing
+two pieces - namely, tdb-tools (for tdbbackup) and lmdb-utils - spotted
+this in the test log, by a very good chance.  After installing the two,
+the --quick test looks quite a bit more promising now.  But there are
+failures still.
 
 
-but this does not happen when just this (set of 2) test is requested.
+1.
+xfail: samba3.smb2.session enc.reconnect1(nt4_dc) [
+Exception: Exception: ../../source4/torture/smb2/session.c:91: (&io1)->out.file_attr was 128 (0x80), expected 32 (0x20): out.file_attr incorrect
+]
+there are 30+ failures like this.
+
+This is FILE_ATTRIBUTE_ARCHIVE (0x20) vs FILE_ATTRIBUTE_NORMAL (0x80).
+Apparently the testsuite expects a file to have ARCHIVE attribute,
+but in reality it is NORMAL instead.  This happens in
+samba3.smb2.session enc.* tests only, so far.
 
 
-Next, there are a few more tests failing, even from the --quick set:
-
-[35(230)/370 at 58s] samba3.smb2.session enc(nt4_dc)
-UNEXPECTED(failure): samba3.smb2.session enc.reauth1(nt4_dc)
-REASON: Exception: Exception: ../../source4/torture/smb2/session.c:247: (&io1)->out.file_attr was 128 (0x80), expected 32 (0x20): out.file_attr incorrect
-UNEXPECTED(failure): samba3.smb2.session enc.reauth2(nt4_dc)
-REASON: Exception: Exception: ../../source4/torture/smb2/session.c:323: (&io1)->out.file_attr was 128 (0x80), expected 32 (0x20): out.file_attr incorrect
-UNEXPECTED(failure): samba3.smb2.session enc.reauth3(nt4_dc)
-REASON: Exception: Exception: ../../source4/torture/smb2/session.c:414: (&io1)->out.file_attr was 128 (0x80), expected 32 (0x20): out.file_attr incorrect
-UNEXPECTED(failure): samba3.smb2.session enc.reauth4(nt4_dc)
-
-(whole samba3.smb2.session enc.reauth4 seems to be failing)
+2.
+failure: samba3.rpc.schannel_anon_setpw anonymous password set (schannel enforced server-side).schannel_anon_setpw(nt4_dc_schannel) [
+Exception: Exception: ../../source4/torture/rpc/schannel.c:796: status was NT_STATUS_CONNECTION_DISCONNECTED, expected NT_STATUS_OK: Failed to connect 
+without schannel
+]
 
 
-[50(509)/370 at 5m31s, 1 errors] samba3.rpc.schannel_anon_setpw anonymous password set (schannel enforced server-side)(nt4_dc_schannel)
-smbtorture 4.17.2-Debian
-Using seed 1668256024
-Failed with dcerpc_flags=0x800220
-WARNING!: ../../source4/torture/rpc/schannel.c:796: status was NT_STATUS_CONNECTION_DISCONNECTED, expected NT_STATUS_OK: Failed to connect without 
-schannel
-Failed with dcerpc_flags=0x800220
-UNEXPECTED(failure): samba3.rpc.schannel_anon_setpw anonymous password set (schannel enforced server-side).schannel_anon_setpw(nt4_dc_schannel)
+3.
+Repacking database from v1 to v2 format (first record CN=CA-Certificate-DN,CN=Schema,CN=Configuration,DC=LOCALRPCPROXY)
+Repack: re-packed 10000 records so far
+Repacking database from v1 to v2 format (first record CN=organizationalUnit-Display,CN=40C,CN=DisplaySpecifiers,CN=Configuration,DC=LOCALRPCPROXY)
+Repacking database from v1 to v2 format (first record CN=Backup Operators,CN=Builtin,DC=LOCALRPCPROXY)
+Could not find machine account in secrets database: Failed to fetch machine account password for SAMBADOMAIN from both secrets.ldb (Could not find 
+entry to match filter: '>
+Could not find machine account in secrets database: Failed to fetch machine account password for SAMBADOMAIN from both secrets.ldb (Could not find 
+entry to match filter: '>
+Could not find machine account in secrets database: Failed to fetch machine account password for SAMBADOMAIN from both secrets.ldb (Could not find 
+entry to match filter: '>
+Joined domain SAMBADOMAIN (S-1-5-21-3017863810-1230438808-2260356029)
+ERROR: Unable to find account where 'sAMAccountName=localrpcproxy$'
+Delegation failed
+NSS_WRAPPER_HOSTS='/build/pkg/samba-4.17.2+dfsg/testbuild/st/hosts' SOCKET_WRAPPER_DEFAULT_IFACE="21" 
+RESOLV_WRAPPER_HOSTS="/build/pkg/samba-4.17.2+dfsg/testbuild/st/dns_h>
+failed to start up environment 'rpc_proxy' at /build/pkg/samba-4.17.2+dfsg/testbuild/selftest/target/Samba.pm line 126.
+samba can't start up known environment 'rpc_proxy' at /build/pkg/samba-4.17.2+dfsg/testbuild/selftest/selftest.pl line 824.
+no output for name[samba4.rpc.echo against rpc proxy with domain creds(rpc_proxy)]
+
+It is still failing in setting environment for rpc_proxy, but now due to a different error,
+it seems, - missing sAMAccountName=localrpcproxy$.  This is seen in the output only not
+in st/subunit. In the subunit file, here's the info about this:
+
+PROVISIONING RPC PROXY...
+User 'testallowed' added successfully
+User 'srv_account' added successfully
+Modified 1 records successfully
+Modified 1 records successfully
+User 'testdenied' added successfully
+Modified 1 records successfully
+User 'testupnspn' added successfully
+Modified 1 records successfully
+Added members to group Allowed RODC Password Replication Group
+User 'alice' added successfully
+User 'bob' added successfully
+User 'jane' added successfully
+User 'joe' added successfully
+Added group Samba Users
+Added members to group Samba Users
+Changed primary group to 'Samba Users'
+Modified 1 records successfully
+NSS_WRAPPER_HOSTS='/build/pkg/samba-4.17.2+dfsg/testbuild/st/hosts' SOCKET_WRAPPER_DEFAULT_IFACE="21" 
+RESOLV_WRAPPER_HOSTS="/build/pkg/samba-4.17.2+dfsg/testbuild/st/dns_host_file" 
+KRB5_CONFIG="/build/pkg/samba-4.17.2+dfsg/testbuild/st/ad_dc_ntvfs/etc/krb5.conf" 
+KRB5CCNAME="/build/pkg/samba-4.17.2+dfsg/testbuild/st/rpc_proxy/krb5_ccache" 
+RESOLV_CONF="/build/pkg/samba-4.17.2+dfsg/testbuild/st/dns_hub/rootdnsforwarder/resolv.conf" 
+GNUPGHOME="/build/pkg/samba-4.17.2+dfsg/testbuild/st/ad_dc_ntvfs/gnupg" python3 ./bin/samba-tool delegation for-any-protocol 'LOCALRPCPROXY$' on 
+--configfile=/build/pkg/samba-4.17.2+dfsg/testbuild/st/ad_dc_ntvfs/etc/smb.conftestsuite: samba4.rpc.echo against rpc proxy with domain creds(rpc_proxy)
+testsuite-error: samba4.rpc.echo against rpc proxy with domain creds(rpc_proxy) [
+unable to set up environment rpc_proxy - exiting
+]
 
 
-Testing unlink after ntcreatex with DELETE access
-UNEXPECTED(uxsuccess): samba4.ntvfs.cifs.ntlm.base.unlink.unlink(ad_dc_ntvfs)
-
-(this is a part of the unlink test above, which also fails with rpc_proxy).
+And the summary is:
+FAILED (39 failures, 0 errors and 0 unexpected successes in 3 testsuites)
 
 
-The test "framework" in samba is insanely twisted.  I'd love to get some help
-here - with general explanation about how the selftest works, and about the
-tests which are failing, especially the rpc_proxy one as I can't seem to be
-able to bypass its failure.
+Should we be concerned?
 
-
-It currently seems like I'm just doing something wrong here, and samba on debian
-is quite broken, as it can't pass even the minimal of its own testsuite.
-
-All the *_wrapper bits are the ones coming from samba source.
-
-Thank you!
+Thanks,
 
 /mjt
---------------IMLifU99z1qN8qhZdb5RP5Rx
-Content-Type: text/x-log; charset=UTF-8; name="rpc_proxyQ.log"
-Content-Disposition: attachment; filename="rpc_proxyQ.log"
-Content-Transfer-Encoding: base64
-
-UmVwYWNraW5nIGRhdGFiYXNlIGZyb20gdjEgdG8gdjIgZm9ybWF0IChmaXJzdCByZWNvcmQg
-Q049bXMtRFMtUmVwbC1WYWx1ZS1NZXRhLURhdGEsQ049U2NoZW1hLENOPUNvbmZpZ3VyYXRp
-b24sREM9TE9DQUxSUENQUk9YWSkKUmVwYWNrOiByZS1wYWNrZWQgMTAwMDAgcmVjb3JkcyBz
-byBmYXIKUmVwYWNraW5nIGRhdGFiYXNlIGZyb20gdjEgdG8gdjIgZm9ybWF0IChmaXJzdCBy
-ZWNvcmQgQ049aW50ZXJTaXRlVHJhbnNwb3J0LURpc3BsYXksQ049NDBDLENOPURpc3BsYXlT
-cGVjaWZpZXJzLENOPUNvbmZpZ3VyYXRpb24sREM9TE9DQUxSUENQUk9YWSkKUmVwYWNraW5n
-IGRhdGFiYXNlIGZyb20gdjEgdG8gdjIgZm9ybWF0IChmaXJzdCByZWNvcmQgQ049RmlsZSBS
-ZXBsaWNhdGlvbiBTZXJ2aWNlLENOPVN5c3RlbSxEQz1MT0NBTFJQQ1BST1hZKQpDb3VsZCBu
-b3QgZmluZCBtYWNoaW5lIGFjY291bnQgaW4gc2VjcmV0cyBkYXRhYmFzZTogRmFpbGVkIHRv
-IGZldGNoIG1hY2hpbmUgYWNjb3VudCBwYXNzd29yZCBmb3IgU0FNQkFET01BSU4gZnJvbSBi
-b3RoIHNlY3JldHMubGRiIChDb3VsZCBub3QgZmluZCBlbnRyeSB0byBtYXRjaCBmaWx0ZXI6
-ICcoJihmbGF0bmFtZT1TQU1CQURPTUFJTikob2JqZWN0Y2xhc3M9cHJpbWFyeURvbWFpbikp
-JyBiYXNlOiAnY249UHJpbWFyeSBEb21haW5zJzogTm8gc3VjaCBvYmplY3Q6IGRzZGJfc2Vh
-cmNoIGF0IC4uLy4uL3NvdXJjZTQvZHNkYi9jb21tb24vdXRpbC5jOjQ4MzYpIGFuZCBmcm9t
-IC9idWlsZC9wa2cvc2FtYmEtNC4xNy4yK2Rmc2cvdGVzdGJ1aWxkL3N0L3JwY19wcm94eS9w
-cml2YXRlL3NlY3JldHMudGRiOiBOVF9TVEFUVVNfQ0FOVF9BQ0NFU1NfRE9NQUlOX0lORk8K
-Q291bGQgbm90IGZpbmQgbWFjaGluZSBhY2NvdW50IGluIHNlY3JldHMgZGF0YWJhc2U6IEZh
-aWxlZCB0byBmZXRjaCBtYWNoaW5lIGFjY291bnQgcGFzc3dvcmQgZm9yIFNBTUJBRE9NQUlO
-IGZyb20gYm90aCBzZWNyZXRzLmxkYiAoQ291bGQgbm90IGZpbmQgZW50cnkgdG8gbWF0Y2gg
-ZmlsdGVyOiAnKCYoZmxhdG5hbWU9U0FNQkFET01BSU4pKG9iamVjdGNsYXNzPXByaW1hcnlE
-b21haW4pKScgYmFzZTogJ2NuPVByaW1hcnkgRG9tYWlucyc6IE5vIHN1Y2ggb2JqZWN0OiBk
-c2RiX3NlYXJjaCBhdCAuLi8uLi9zb3VyY2U0L2RzZGIvY29tbW9uL3V0aWwuYzo0ODM2KSBh
-bmQgZnJvbSAvYnVpbGQvcGtnL3NhbWJhLTQuMTcuMitkZnNnL3Rlc3RidWlsZC9zdC9ycGNf
-cHJveHkvcHJpdmF0ZS9zZWNyZXRzLnRkYjogTlRfU1RBVFVTX0NBTlRfQUNDRVNTX0RPTUFJ
-Tl9JTkZPCkNvdWxkIG5vdCBmaW5kIG1hY2hpbmUgYWNjb3VudCBpbiBzZWNyZXRzIGRhdGFi
-YXNlOiBGYWlsZWQgdG8gZmV0Y2ggbWFjaGluZSBhY2NvdW50IHBhc3N3b3JkIGZvciBTQU1C
-QURPTUFJTiBmcm9tIGJvdGggc2VjcmV0cy5sZGIgKENvdWxkIG5vdCBmaW5kIGVudHJ5IHRv
-IG1hdGNoIGZpbHRlcjogJygmKGZsYXRuYW1lPVNBTUJBRE9NQUlOKShvYmplY3RjbGFzcz1w
-cmltYXJ5RG9tYWluKSknIGJhc2U6ICdjbj1QcmltYXJ5IERvbWFpbnMnOiBObyBzdWNoIG9i
-amVjdDogZHNkYl9zZWFyY2ggYXQgLi4vLi4vc291cmNlNC9kc2RiL2NvbW1vbi91dGlsLmM6
-NDgzNikgYW5kIGZyb20gL2J1aWxkL3BrZy9zYW1iYS00LjE3LjIrZGZzZy90ZXN0YnVpbGQv
-c3QvcnBjX3Byb3h5L3ByaXZhdGUvc2VjcmV0cy50ZGI6IE5UX1NUQVRVU19DQU5UX0FDQ0VT
-U19ET01BSU5fSU5GTwpKb2luZWQgZG9tYWluIFNBTUJBRE9NQUlOIChTLTEtNS0yMS0xNDg4
-NzQwNDIxLTE3MTUxMDA2Ni0xMjA0MDIwMzAzKQpFUlJPUjogVW5hYmxlIHRvIGZpbmQgYWNj
-b3VudCB3aGVyZSAnc0FNQWNjb3VudE5hbWU9bG9jYWxycGNwcm94eSQnCkRlbGVnYXRpb24g
-ZmFpbGVkCk5TU19XUkFQUEVSX0hPU1RTPScvYnVpbGQvcGtnL3NhbWJhLTQuMTcuMitkZnNn
-L3Rlc3RidWlsZC9zdC9ob3N0cycgU09DS0VUX1dSQVBQRVJfREVGQVVMVF9JRkFDRT0iMjEi
-IFJFU09MVl9XUkFQUEVSX0hPU1RTPSIvYnVpbGQvcGtnL3NhbWJhLTQuMTcuMitkZnNnL3Rl
-c3RidWlsZC9zdC9kbnNfaG9zdF9maWxlIiBLUkI1X0NPTkZJRz0iL2J1aWxkL3BrZy9zYW1i
-YS00LjE3LjIrZGZzZy90ZXN0YnVpbGQvc3QvYWRfZGNfbnR2ZnMvZXRjL2tyYjUuY29uZiIg
-S1JCNUNDTkFNRT0iL2J1aWxkL3BrZy9zYW1iYS00LjE3LjIrZGZzZy90ZXN0YnVpbGQvc3Qv
-cnBjX3Byb3h5L2tyYjVfY2NhY2hlIiBSRVNPTFZfQ09ORj0iL2J1aWxkL3BrZy9zYW1iYS00
-LjE3LjIrZGZzZy90ZXN0YnVpbGQvc3QvZG5zX2h1Yi9yb290ZG5zZm9yd2FyZGVyL3Jlc29s
-di5jb25mIiBHTlVQR0hPTUU9Ii9idWlsZC9wa2cvc2FtYmEtNC4xNy4yK2Rmc2cvdGVzdGJ1
-aWxkL3N0L2FkX2RjX250dmZzL2dudXBnIiBweXRob24zIC4vYmluL3NhbWJhLXRvb2wgZGVs
-ZWdhdGlvbiBmb3ItYW55LXByb3RvY29sICdMT0NBTFJQQ1BST1hZJCcgb24gLS1jb25maWdm
-aWxlPS9idWlsZC9wa2cvc2FtYmEtNC4xNy4yK2Rmc2cvdGVzdGJ1aWxkL3N0L2FkX2RjX250
-dmZzL2V0Yy9zbWIuY29uZiBhdCAvYnVpbGQvcGtnL3NhbWJhLTQuMTcuMitkZnNnL3Rlc3Ri
-dWlsZC9zZWxmdGVzdC90YXJnZXQvU2FtYmE0LnBtIGxpbmUgMTQ1MS4KZmFpbGVkIHRvIHN0
-YXJ0IHVwIGVudmlyb25tZW50ICdycGNfcHJveHknIGF0IC9idWlsZC9wa2cvc2FtYmEtNC4x
-Ny4yK2Rmc2cvdGVzdGJ1aWxkL3NlbGZ0ZXN0L3RhcmdldC9TYW1iYS5wbSBsaW5lIDEyNi4K
-c2FtYmEgY2FuJ3Qgc3RhcnQgdXAga25vd24gZW52aXJvbm1lbnQgJ3JwY19wcm94eScgYXQg
-L2J1aWxkL3BrZy9zYW1iYS00LjE3LjIrZGZzZy90ZXN0YnVpbGQvc2VsZnRlc3Qvc2VsZnRl
-c3QucGwgbGluZSA4MjQuCm5vIG91dHB1dCBmb3IgbmFtZVtzYW1iYTQubnR2ZnMuY2lmcy5r
-cmI1LmJhc2UudW5saW5rKHJwY19wcm94eSldClszMTQoMjY1MykvMzcwIGF0IDEybThzLCA0
-IGVycm9yc10gc2FtYmE0Lm50dmZzLmNpZnMubnRsbS5iYXNlLnVubGluayhycGNfcHJveHkp
-CkNhbid0IGNhbGwgbWV0aG9kICJnZXRsb2dfZW52IiBvbiBhbiB1bmRlZmluZWQgdmFsdWUg
-YXQgL2J1aWxkL3BrZy9zYW1iYS00LjE3LjIrZGZzZy90ZXN0YnVpbGQvc2VsZnRlc3Qvc2Vs
-ZnRlc3QucGwgbGluZSA4NjQuCnNlcnZlcl9zdGRpbl9oYW5kbGVyOiBzYW1iYTogRU9GIG9u
-IHN0ZGluIC0gUElEIDEwMjMyNyB0ZXJtaW5hdGluZwpzZXJ2ZXJfc3RkaW5faGFuZGxlcjog
-c2FtYmE6IEVPRiBvbiBzdGRpbiAtIFBJRCAxMDE4NTEgdGVybWluYXRpbmcKc2VydmVyX3N0
-ZGluX2hhbmRsZXI6IHNhbWJhOiBFT0Ygb24gc3RkaW4gLSBQSUQgOTg1MjUgdGVybWluYXRp
-bmcKc2VydmVyX3N0ZGluX2hhbmRsZXI6IHNhbWJhOiBFT0Ygb24gc3RkaW4gLSBQSUQgMTAy
-MDg2IHRlcm1pbmF0aW5nCnNlcnZlcl9zdGRpbl9oYW5kbGVyOiBzYW1iYTogRU9GIG9uIHN0
-ZGluIC0gUElEIDEwMjUzMSB0ZXJtaW5hdGluZwpkbnNfaHViOiBhZnRlciBwb2xsKCkKZG5z
-X2h1YltVRFBbMTAuNTMuNTcuNjRdXTogYmVmb3JlIHNodXRkb3duKCkKc2VydmVyX3N0ZGlu
-X2hhbmRsZXI6IHNhbWJhOiBFT0Ygb24gc3RkaW4gLSBQSUQgOTY2MDUgdGVybWluYXRpbmcK
-c2VydmVyX3N0ZGluX2hhbmRsZXI6IHNhbWJhOiBFT0Ygb24gc3RkaW4gLSBQSUQgOTU1ODgg
-dGVybWluYXRpbmcKZG5zX2h1YltVRFBbMTAuNTMuNTcuNjRdXTogYWZ0ZXIgc2VydmVfZm9y
-ZXZlcigpCmRuc19odWJbVURQWzEwLjUzLjU3LjY0XV06IGFmdGVyIHNodXRkb3duKCkKZG5z
-X2h1YltVRFBbZmQwMDowMDAwOjAwMDA6MDAwMDowMDAwOjAwMDA6NTM1Nzo1ZjQwXV06IGJl
-Zm9yZSBzaHV0ZG93bigpCmRuc19odWJbVURQW2ZkMDA6MDAwMDowMDAwOjAwMDA6MDAwMDow
-MDAwOjUzNTc6NWY0MF1dOiBhZnRlciBzZXJ2ZV9mb3JldmVyKClkbnNfaHViW1VEUFtmZDAw
-OjAwMDA6MDAwMDowMDAwOjAwMDA6MDAwMDo1MzU3OjVmNDBdXTogYWZ0ZXIgc2h1dGRvd24o
-KQoKZG5zX2h1YjogYmVmb3JlIGV4aXQoKQoKRkFJTEVEICgzOSBmYWlsdXJlcywgMCBlcnJv
-cnMgYW5kIDEgdW5leHBlY3RlZCBzdWNjZXNzZXMgaW4gNCB0ZXN0c3VpdGVzKQoKQSBzdW1t
-YXJ5IHdpdGggZGV0YWlsZWQgaW5mb3JtYXRpb24gY2FuIGJlIGZvdW5kIGluOgogIC4vc3Qv
-c3VtbWFyeQpUT1AgMTAgc2xvd2VzdCB0ZXN0cwpzYW1iYTQubnR2ZnMuY2lmcy5udGxtLmJh
-c2UudW5saW5rKGFkX2RjX250dmZzKSAtPiAxNjY4MjU2NDE2CnNhbWJhMy5zbWIyLnNlc3Np
-b24ga3JiNShhZF9kYykgLT4gMTIzCnNhbWJhMy5zbWIyLnNlc3Npb24ga3JiNShhZF9tZW1i
-ZXJfaWRtYXBfcmlkKSAtPiA5NgpzYW1iYTMucnBjLnNjaGFubmVsKGFkX2RjKSAtPiAxNgpz
-YW1iYTQucnBjLnNjaGFubmVsIHdpdGggdmFsaWRhdGUoYWRfZGMpIC0+IDEzCnNhbWJhNC5y
-cGMuc2NoYW5uZWwgd2l0aCBiaWdlbmRpYW4oYWRfZGMpIC0+IDEyCnNhbWJhNC5ycGMuc2No
-YW5uZWwgb24gbmNhY25fbnAgd2l0aCB2YWxpZGF0ZShhZF9kY19kZWZhdWx0KSAtPiAxMgpz
-YW1iYTQucnBjLnNjaGFubmVsIHdpdGggc2VhbCxwYWRjaGVjayhhZF9kYykgLT4gMTIKc2Ft
-YmE0LnJwYy5zY2hhbm5lbCBvbiBuY2Fjbl9ucCB3aXRoIGJpZ2VuZGlhbihhZF9kY19kZWZh
-dWx0KSAtPiAxMQpzYW1iYTQucnBjLnNjaGFubmVsIG9uIG5jYWNuX25wIHdpdGggc2VhbCxw
-YWRjaGVjayhhZF9kY19kZWZhdWx0KSAtPiAxMQpFUlJPUjogdGVzdCBmYWlsZWQgd2l0aCBl
-eGl0IGNvZGUgMQo=
---------------IMLifU99z1qN8qhZdb5RP5Rx
-Content-Type: text/x-log; charset=UTF-8; name="rpc_proxy1.log"
-Content-Disposition: attachment; filename="rpc_proxy1.log"
-Content-Transfer-Encoding: base64
-
-VW5hYmxlIHRvIGRldGVybWluZSB0aGUgRG9tYWluU0lELCBjYW4gbm90IGVuZm9yY2UgdW5p
-cXVlbmVzcyBjb25zdHJhaW50IG9uIGxvY2FsIGRvbWFpblNJRHMKClJlcGFja2luZyBkYXRh
-YmFzZSBmcm9tIHYxIHRvIHYyIGZvcm1hdCAoZmlyc3QgcmVjb3JkIENOPW1zLURTLUNsYWlt
-LVZhbHVlLVR5cGUsQ049U2NoZW1hLENOPUNvbmZpZ3VyYXRpb24sREM9TE9DQUxSUENQUk9Y
-WSkKUmVwYWNrOiByZS1wYWNrZWQgMTAwMDAgcmVjb3JkcyBzbyBmYXIKUmVwYWNraW5nIGRh
-dGFiYXNlIGZyb20gdjEgdG8gdjIgZm9ybWF0IChmaXJzdCByZWNvcmQgQ049QWN0aXZlRGly
-ZWN0b3J5Um9kY1VwZGF0ZSxDTj1Gb3Jlc3RVcGRhdGVzLENOPUNvbmZpZ3VyYXRpb24sREM9
-TE9DQUxSUENQUk9YWSkKUmVwYWNraW5nIGRhdGFiYXNlIGZyb20gdjEgdG8gdjIgZm9ybWF0
-IChmaXJzdCByZWNvcmQgQ049aXBzZWNOZWdvdGlhdGlvblBvbGljeXs3MjM4NTIzRi03MEZB
-LTExRDEtODY0Qy0xNEEzMDAwMDAwMDB9LENOPUlQIFNlY3VyaXR5LENOPVN5c3RlbSxEQz1M
-T0NBTFJQQ1BST1hZKQpDb3VsZCBub3QgZmluZCBtYWNoaW5lIGFjY291bnQgaW4gc2VjcmV0
-cyBkYXRhYmFzZTogRmFpbGVkIHRvIGZldGNoIG1hY2hpbmUgYWNjb3VudCBwYXNzd29yZCBm
-b3IgU0FNQkFET01BSU4gZnJvbSBib3RoIHNlY3JldHMubGRiIChDb3VsZCBub3QgZmluZCBl
-bnRyeSB0byBtYXRjaCBmaWx0ZXI6ICcoJihmbGF0bmFtZT1TQU1CQURPTUFJTikob2JqZWN0
-Y2xhc3M9cHJpbWFyeURvbWFpbikpJyBiYXNlOiAnY249UHJpbWFyeSBEb21haW5zJzogTm8g
-c3VjaCBvYmplY3Q6IGRzZGJfc2VhcmNoIGF0IC4uLy4uL3NvdXJjZTQvZHNkYi9jb21tb24v
-dXRpbC5jOjQ4MzYpIGFuZCBmcm9tIC9idWlsZC9wa2cvc2FtYmEtNC4xNy4yK2Rmc2cvdGVz
-dGJ1aWxkL3N0L3JwY19wcm94eS9wcml2YXRlL3NlY3JldHMudGRiOiBOVF9TVEFUVVNfQ0FO
-VF9BQ0NFU1NfRE9NQUlOX0lORk8KQ291bGQgbm90IGZpbmQgbWFjaGluZSBhY2NvdW50IGlu
-IHNlY3JldHMgZGF0YWJhc2U6IEZhaWxlZCB0byBmZXRjaCBtYWNoaW5lIGFjY291bnQgcGFz
-c3dvcmQgZm9yIFNBTUJBRE9NQUlOIGZyb20gYm90aCBzZWNyZXRzLmxkYiAoQ291bGQgbm90
-IGZpbmQgZW50cnkgdG8gbWF0Y2ggZmlsdGVyOiAnKCYoZmxhdG5hbWU9U0FNQkFET01BSU4p
-KG9iamVjdGNsYXNzPXByaW1hcnlEb21haW4pKScgYmFzZTogJ2NuPVByaW1hcnkgRG9tYWlu
-cyc6IE5vIHN1Y2ggb2JqZWN0OiBkc2RiX3NlYXJjaCBhdCAuLi8uLi9zb3VyY2U0L2RzZGIv
-Y29tbW9uL3V0aWwuYzo0ODM2KSBhbmQgZnJvbSAvYnVpbGQvcGtnL3NhbWJhLTQuMTcuMitk
-ZnNnL3Rlc3RidWlsZC9zdC9ycGNfcHJveHkvcHJpdmF0ZS9zZWNyZXRzLnRkYjogTlRfU1RB
-VFVTX0NBTlRfQUNDRVNTX0RPTUFJTl9JTkZPCkNvdWxkIG5vdCBmaW5kIG1hY2hpbmUgYWNj
-b3VudCBpbiBzZWNyZXRzIGRhdGFiYXNlOiBGYWlsZWQgdG8gZmV0Y2ggbWFjaGluZSBhY2Nv
-dW50IHBhc3N3b3JkIGZvciBTQU1CQURPTUFJTiBmcm9tIGJvdGggc2VjcmV0cy5sZGIgKENv
-dWxkIG5vdCBmaW5kIGVudHJ5IHRvIG1hdGNoIGZpbHRlcjogJygmKGZsYXRuYW1lPVNBTUJB
-RE9NQUlOKShvYmplY3RjbGFzcz1wcmltYXJ5RG9tYWluKSknIGJhc2U6ICdjbj1QcmltYXJ5
-IERvbWFpbnMnOiBObyBzdWNoIG9iamVjdDogZHNkYl9zZWFyY2ggYXQgLi4vLi4vc291cmNl
-NC9kc2RiL2NvbW1vbi91dGlsLmM6NDgzNikgYW5kIGZyb20gL2J1aWxkL3BrZy9zYW1iYS00
-LjE3LjIrZGZzZy90ZXN0YnVpbGQvc3QvcnBjX3Byb3h5L3ByaXZhdGUvc2VjcmV0cy50ZGI6
-IE5UX1NUQVRVU19DQU5UX0FDQ0VTU19ET01BSU5fSU5GTwpEb2luZyBhIGZ1bGwgc2NhbiBv
-biBEQz1Gb3Jlc3REbnNab25lcyxEQz1zYW1iYSxEQz1leGFtcGxlLERDPWNvbSBhbmQgbG9v
-a2luZyBmb3IgZGVsZXRlZCBvYmplY3RzCkRvaW5nIGEgZnVsbCBzY2FuIG9uIERDPURvbWFp
-bkRuc1pvbmVzLERDPXNhbWJhLERDPWV4YW1wbGUsREM9Y29tIGFuZCBsb29raW5nIGZvciBk
-ZWxldGVkIG9iamVjdHMKRG9pbmcgYSBmdWxsIHNjYW4gb24gQ049Q29uZmlndXJhdGlvbixE
-Qz1zYW1iYSxEQz1leGFtcGxlLERDPWNvbSBhbmQgbG9va2luZyBmb3IgZGVsZXRlZCBvYmpl
-Y3RzCkRvaW5nIGEgZnVsbCBzY2FuIG9uIERDPXNhbWJhLERDPWV4YW1wbGUsREM9Y29tIGFu
-ZCBsb29raW5nIGZvciBkZWxldGVkIG9iamVjdHMKSm9pbmVkIGRvbWFpbiBTQU1CQURPTUFJ
-TiAoUy0xLTUtMjEtMjE2OTcxODcyMi00Mjk3NjkyLTE3MDM1MjQ1NjMpCnNhbWJhIHZlcnNp
-b24gNC4xNy4yLURlYmlhbiBzdGFydGVkLgpDb3B5cmlnaHQgQW5kcmV3IFRyaWRnZWxsIGFu
-ZCB0aGUgU2FtYmEgVGVhbSAxOTkyLTIwMjIKYmluYXJ5X3NtYmRfbWFpbjogc2FtYmEgUElE
-IDEwMzU2NyB3YXMgY2FsbGVkIHdpdGggbWF4cnVudGltZSAxODAwMCAtIGN1cnJlbnQgdHMg
-MTY2ODI1NjYwNApiaW5hcnlfc21iZF9tYWluOiBzYW1iYTogdXNpbmcgJ3N0YW5kYXJkJyBw
-cm9jZXNzIG1vZGVsCk5hbWUgcmVnaXN0ZXIgZmFpbHVyZSB3aXRoIFdJTlMgZm9yIExPQ0FM
-UlBDUFJPWFk8MDA+IC0gTlRfU1RBVFVTX05FVFdPUktfVU5SRUFDSEFCTEUKTmFtZSByZWdp
-c3RlciBmYWlsdXJlIHdpdGggV0lOUyBmb3IgTE9DQUxSUENQUk9YWTwwMz4gLSBOVF9TVEFU
-VVNfTkVUV09SS19VTlJFQUNIQUJMRQpOYW1lIHJlZ2lzdGVyIGZhaWx1cmUgd2l0aCBXSU5T
-IGZvciBMT0NBTFJQQ1BST1hZPDIwPiAtIE5UX1NUQVRVU19ORVRXT1JLX1VOUkVBQ0hBQkxF
-Ck5hbWUgcmVnaXN0ZXIgZmFpbHVyZSB3aXRoIFdJTlMgZm9yIFNBTUJBRE9NQUlOPDAwPiAt
-IE5UX1NUQVRVU19ORVRXT1JLX1VOUkVBQ0hBQkxFCi9idWlsZC9wa2cvc2FtYmEtNC4xNy4y
-K2Rmc2cvdGVzdGJ1aWxkL2Jpbi93aW5iaW5kZDogWzIwMjIvMTEvMTIgMTI6MzY6NDQsICAw
-XSAuLi8uLi9saWIvdXRpbC9kZWJ1Zy5jOjEyNjQocmVvcGVuX29uZV9sb2cpCi9idWlsZC9w
-a2cvc2FtYmEtNC4xNy4yK2Rmc2cvdGVzdGJ1aWxkL2Jpbi93aW5iaW5kZDogICByZW9wZW5f
-b25lX2xvZzogVW5hYmxlIHRvIG9wZW4gbmV3IGxvZyBmaWxlICcvdmFyL2xvZy9zYW1iYS9s
-b2cud2luYmluZGQnOiBObyBzdWNoIGZpbGUgb3IgZGlyZWN0b3J5CmRjZXNydl9uZXRyX2Ny
-ZWRzX3NlcnZlcl9zdGVwX2NoZWNrOiBDVkUtMjAyMC0xNDcyKFplcm9Mb2dvbik6IFBsZWFz
-ZSBjb25maWd1cmUgJ3NlcnZlciBzY2hhbm5lbCA9IHllcycsIFNlZSBodHRwczovL2J1Z3pp
-bGxhLnNhbWJhLm9yZy9zaG93X2J1Zy5jZ2k/aWQ9MTQ0OTcKZGNlc3J2X25ldHJfY3JlZHNf
-c2VydmVyX3N0ZXBfY2hlY2s6IENWRS0yMDIwLTE0NzIoWmVyb0xvZ29uKTogbmV0cl9Mb2dv
-bkdldENhcGFiaWxpdGllcyByZXF1ZXN0IChvcG51bVsyMV0pIFdJVEggc2NoYW5uZWwgZnJv
-bSBjbGllbnRfYWNjb3VudFtMT0NBTFJQQ1BST1hZJF0gY2xpZW50X2NvbXB1dGVyX25hbWVb
-TE9DQUxSUENQUk9YWV0KZGNlc3J2X25ldHJfY3JlZHNfc2VydmVyX3N0ZXBfY2hlY2s6IENW
-RS0yMDIwLTE0NzIoWmVyb0xvZ29uKTogT3B0aW9uICdzZXJ2ZXIgcmVxdWlyZSBzY2hhbm5l
-bDpMT0NBTFJQQ1BST1hZJCA9IG5vJyBub3QgbmVlZGVkIT8KWzIoMSkvMiBhdCAxNXMsIDEg
-ZXJyb3JzXSBzYW1iYTQubnR2ZnMuY2lmcy5udGxtLmJhc2UudW5saW5rKHJwY19wcm94eSkK
-c21idG9ydHVyZSA0LjE3LjItRGViaWFuCldBUk5JTkc6IFRoZSBvcHRpb24gLWt8LS1rZXJi
-ZXJvcyBpcyBkZXByZWNhdGVkIQpVc2luZyBzZWVkIDE2NjgyNTY2MDkKT3BlbmluZyBhIGZp
-bGUKVW5saW5raW5nIGEgb3BlbiBmaWxlClRlc3RpbmcgdW5saW5rIGFmdGVyIG50Y3JlYXRl
-eCB3aXRoIERFTEVURSBhY2Nlc3MKVU5FWFBFQ1RFRCh1eHN1Y2Nlc3MpOiBzYW1iYTQubnR2
-ZnMuY2lmcy5udGxtLmJhc2UudW5saW5rLnVubGluayhycGNfcHJveHkpCnRlYXJkb3duX2Vu
-dihhZF9kY19udHZmcykKdGVhcmRvd25fZW52KHJwY19wcm94eSkKY29tbWFuZDogIC9idWls
-ZC9wa2cvc2FtYmEtNC4xNy4yK2Rmc2cvdGVzdGJ1aWxkL2Jpbi9zbWJ0b3J0dXJlICAkTE9B
-RExJU1QgLS1jb25maWdmaWxlPSRTTUJfQ09ORl9QQVRIIC0tb3B0aW9uPSdmc3M6c2VxdWVu
-Y2UgdGltZW91dD0xJyAtLW1heGltdW0tcnVudGltZT0kU0VMRlRFU1RfTUFYVElNRSAtLWJh
-c2VkaXI9JFNFTEZURVNUX1RNUERJUiAtLWZvcm1hdD1zdWJ1bml0IC0tb3B0aW9uPXRvcnR1
-cmU6cHJvZ3Jlc3M9bm8gLS10YXJnZXQ9c2FtYmE0IC8vJE5FVEJJT1NOQU1FL2NpZnNfdG9f
-ZGMgLVUkRENfVVNFUk5BTUUlJERDX1BBU1NXT1JEIC0ta2VyYmVyb3M9bm8gLS1vcHRpb249
-dG9ydHVyZTpzaGFyZWRlbGF5PTEwMDAwMCAtLW9wdGlvbj10b3J0dXJlOm9wbG9ja3RpbWVv
-dXQ9MyAtLW9wdGlvbj10b3J0dXJlOndyaXRldGltZXVwZGF0ZWRlbGF5PTUwMDAwMCBiYXNl
-LnVubGluayAyPiYxICB8IHB5dGhvbjMgL2J1aWxkL3BrZy9zYW1iYS00LjE3LjIrZGZzZy90
-ZXN0YnVpbGQvc2VsZnRlc3QvZmlsdGVyLXN1YnVuaXQgLS1mYWlsLW9uLWVtcHR5IC0tcHJl
-Zml4PSJzYW1iYTQubnR2ZnMuY2lmcy5udGxtLmJhc2UudW5saW5rLiIgLS1zdWZmaXg9Iihy
-cGNfcHJveHkpIgpleHBhbmRlZCBjb21tYW5kOiAgL2J1aWxkL3BrZy9zYW1iYS00LjE3LjIr
-ZGZzZy90ZXN0YnVpbGQvYmluL3NtYnRvcnR1cmUgICRMT0FETElTVCAtLWNvbmZpZ2ZpbGU9
-L2J1aWxkL3BrZy9zYW1iYS00LjE3LjIrZGZzZy90ZXN0YnVpbGQvc3QvY2xpZW50L2NsaWVu
-dC5jb25mIC0tb3B0aW9uPSdmc3M6c2VxdWVuY2UgdGltZW91dD0xJyAtLW1heGltdW0tcnVu
-dGltZT0xMjAwIC0tYmFzZWRpcj0vYnVpbGQvcGtnL3NhbWJhLTQuMTcuMitkZnNnL3Rlc3Ri
-dWlsZC9zdC90bXAgLS1mb3JtYXQ9c3VidW5pdCAtLW9wdGlvbj10b3J0dXJlOnByb2dyZXNz
-PW5vIC0tdGFyZ2V0PXNhbWJhNCAvL0xPQ0FMUlBDUFJPWFkvY2lmc190b19kYyAtVUFkbWlu
-aXN0cmF0b3IlbG9jRENwYXNzMSAtLWtlcmJlcm9zPW5vIC0tb3B0aW9uPXRvcnR1cmU6c2hh
-cmVkZWxheT0xMDAwMDAgLS1vcHRpb249dG9ydHVyZTpvcGxvY2t0aW1lb3V0PTMgLS1vcHRp
-b249dG9ydHVyZTp3cml0ZXRpbWV1cGRhdGVkZWxheT01MDAwMDAgYmFzZS51bmxpbmsgMj4m
-MSAgfCBweXRob24zIC9idWlsZC9wa2cvc2FtYmEtNC4xNy4yK2Rmc2cvdGVzdGJ1aWxkL3Nl
-bGZ0ZXN0L2ZpbHRlci1zdWJ1bml0IC0tZmFpbC1vbi1lbXB0eSAtLXByZWZpeD0ic2FtYmE0
-Lm50dmZzLmNpZnMubnRsbS5iYXNlLnVubGluay4iIC0tc3VmZml4PSIocnBjX3Byb3h5KSIK
-RVJST1I6IFRlc3RzdWl0ZVtzYW1iYTQubnR2ZnMuY2lmcy5udGxtLmJhc2UudW5saW5rKHJw
-Y19wcm94eSldClJFQVNPTjogU3VidW5pdC9GaWx0ZXIgUmVhc29uCiB1eHN1Y2Nlc3NbMV0K
-CmRuc19odWI6IGFmdGVyIHBvbGwoKQpkbnNfaHViW1VEUFsxMC41My41Ny42NF1dOiBiZWZv
-cmUgc2h1dGRvd24oKQpzZXJ2ZXJfc3RkaW5faGFuZGxlcjogc2FtYmE6IEVPRiBvbiBzdGRp
-biAtIFBJRCAxMDM1NjcgdGVybWluYXRpbmcKc2VydmVyX3N0ZGluX2hhbmRsZXI6IHNhbWJh
-OiBFT0Ygb24gc3RkaW4gLSBQSUQgMTAzNDYwIHRlcm1pbmF0aW5nCmRuc19odWJbVURQWzEw
-LjUzLjU3LjY0XV06IGFmdGVyIHNlcnZlX2ZvcmV2ZXIoKWRuc19odWJbVURQWzEwLjUzLjU3
-LjY0XV06IGFmdGVyIHNodXRkb3duKCkKCmRuc19odWJbVURQW2ZkMDA6MDAwMDowMDAwOjAw
-MDA6MDAwMDowMDAwOjUzNTc6NWY0MF1dOiBiZWZvcmUgc2h1dGRvd24oKQpkbnNfaHViW1VE
-UFtmZDAwOjAwMDA6MDAwMDowMDAwOjAwMDA6MDAwMDo1MzU3OjVmNDBdXTogYWZ0ZXIgc2Vy
-dmVfZm9yZXZlcigpCmRuc19odWJbVURQW2ZkMDA6MDAwMDowMDAwOjAwMDA6MDAwMDowMDAw
-OjUzNTc6NWY0MF1dOiBhZnRlciBzaHV0ZG93bigpCmRuc19odWI6IGJlZm9yZSBleGl0KCkK
-CkZBSUxFRCAoMCBmYWlsdXJlcywgMCBlcnJvcnMgYW5kIDIgdW5leHBlY3RlZCBzdWNjZXNz
-ZXMgaW4gMiB0ZXN0c3VpdGVzKQoKQSBzdW1tYXJ5IHdpdGggZGV0YWlsZWQgaW5mb3JtYXRp
-b24gY2FuIGJlIGZvdW5kIGluOgogIC4vc3Qvc3VtbWFyeQpUT1AgMTAgc2xvd2VzdCB0ZXN0
-cwpzYW1iYTQubnR2ZnMuY2lmcy5udGxtLmJhc2UudW5saW5rKHJwY19wcm94eSkgLT4gMQpz
-YW1iYTQubnR2ZnMuY2lmcy5udGxtLmJhc2UudW5saW5rKGFkX2RjX250dmZzKSAtPiAxCkVS
-Uk9SOiB0ZXN0IGZhaWxlZCB3aXRoIGV4aXQgY29kZSAxCg==
-
---------------IMLifU99z1qN8qhZdb5RP5Rx--
 
