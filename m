@@ -2,53 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FB21629E74
-	for <lists+samba-technical@lfdr.de>; Tue, 15 Nov 2022 17:07:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF6D862A049
+	for <lists+samba-technical@lfdr.de>; Tue, 15 Nov 2022 18:28:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=iyQh1FnLApgtdnwpa4GAKVzCS/K/mFcqmGWyttc3XpE=; b=fF2lPiJIbQ/vTE3UGgH+R7yTgN
-	uSP4g6JKIJB3zDphdEWYYY6IzE3v6BNQs0GhiQvQsyGCi8dIYVD6KefJ6a1DSTC60EvfrsNNwuJlu
-	kHRp1Pqc4jtiSS2+7LeOrASH2sRVPSD6tLpf7I7xwzmPsYJVxgQv/i/b9XlQ8PzYxvO0dc7eJulRn
-	SPnZURPwWa2RZ3u3rBS9oYZHBvwCQAYrWJqzthjCJXmOCJ5K0k9r8t5b5KSe1XpaiPJ2cbVkrHF18
-	q36H9FgxeI21XtEqdE0gt3zxnIfdx6oLIdtqaJeoFBn6s+eQU+TDYDh0cVnSq1G1MnwbXQbQdGHIJ
-	EVX+YAzw==;
-Received: from ip6-localhost ([::1]:42876 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=5J7nWETikFTbSkFlaWmv/W7hJZ3X6DCRTzpF1AZBFJI=; b=jUzHO5jwzxOhQuIZJ+xFpROKmo
+	GQQpEcn9upRJaPJlG5S8zZ8S7LWfzTMGkrELVNt/mJ2xQbUTxIdiFfZp4So9TXBocPtcxnnYkbCB8
+	7L5VsZbQq3/WvMAMGAVxmVOet52pvbEYzc+Jo5hPancOOihfbJSL5ottRDis54kmrTU3HbutwTNRt
+	QlQk34oofapk8smhBvdTt+Bmfw7HBZGrUuW2U7SUuYEgH9GSULX/mLPPwyJofX8utWT04GwM9VVy/
+	u6EMb3qPsTX3fLOpS+zTfZ3t/YQAjnpZNIyLgL7uSYS8qaIEa4Gjgjud2FxKYYNSFU5RZCtU1howG
+	m8Dn15BQ==;
+Received: from ip6-localhost ([::1]:49076 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ouySO-00Dtwp-CQ; Tue, 15 Nov 2022 16:06:40 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60510) 
+	id 1ouziV-00DvXE-NK; Tue, 15 Nov 2022 17:27:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:53442) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ouySK-00Dtwg-4R
- for samba-technical@lists.samba.org; Tue, 15 Nov 2022 16:06:38 +0000
+ (Exim) id 1ouziR-00DvX5-3F
+ for samba-technical@lists.samba.org; Tue, 15 Nov 2022 17:27:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=iyQh1FnLApgtdnwpa4GAKVzCS/K/mFcqmGWyttc3XpE=; b=ArybLe0lN5RtIgFBxcn4rUzLPH
- ucvRyOkt0ZUH23Dg3GAwy6antGUtzWZ5JYll5/ONUMUqRfsnvLgR+MUItNlWV7Mtmdbsif3xBJ01R
- hzdBfXp0s/Q1NS7NkQMMt583Nj0wH6xKpZob7T3wnF/1P71gODZc6ja4AGbUj3UbRNHXBD0MnuZpK
- qMIPuP7mcyA9kLcqbxYh6Dd4Sy4dyD1f5JyUOxNqrRhRga4rltvFBpjH/cg0XK8P7r8UsStbvCfmM
- jjxJ4/W3Qla5QDKH2azyZjEuqMjVx3Bq3G/dkYWru9H2m3f3Jj6Ua5GJUM0NOrD7sQ9XxKd/s2WMi
- CmKpga2H7/QyPGy67e0wE79LGt0qfhCP4rlgdyIUxnhjb1yw/DYfChUwtlXMSRXpMw7T2W+xreivG
- Cwqit/yTS2qrdwBE3gaOpGJIV45bG2iYvv4hUY+tOlCRlzfDwrGJspAAx7rJk9zMMa+1lCeBNjOrq
- O8a38WFYCj7eAJmrTv6LVm0c;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=5J7nWETikFTbSkFlaWmv/W7hJZ3X6DCRTzpF1AZBFJI=; b=mSHyeXDMhndIm7ycTb6AcIp4yY
+ wP8R9QXPOMW2tLCE9cOLd+ILcCSFMBbMRoN6VWlcGI46UrsEOGBXT4edqFiAHxKFWW5MAodPoGGmF
+ 1TzuNI8JFYGV/z4ORWjy+n8oYo8qFEuT+fICEKs1SkepzCtCsxIUeankY8NkDIWlSW5f32plkwXvh
+ jIXSpmh/j+S/CMML2YGPuztgrz+RVfeQjwAU7BgmZB2OO0rPmvgkPfnQZ9oOdcHQBAiYp9ugg/3T3
+ NqxquJNPAIO4y81l7Dx0JAef1IZRBrU7HfnKBT6qfazP+YUSb1fsDZ5lScxpnbyOCX9mjPbiRQ37V
+ tLWTaHjeiwnkE1gSwYvYkT3r5eVgPGr3aww5922ONtMFZlx5oFoRUUOzYf+qiEAgJ5ARMeHy5asAb
+ 9fgnNy5BKGL/VmQUu/8tpyKi4nBERzgUK6BVpjrz6DQqHLj4+VKxUcR71eCh+vDSfmKDnrbIXOzSZ
+ UrgfNbUuHuoVlMKjwcukXGOz;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ouySJ-008jen-Ni; Tue, 15 Nov 2022 16:06:35 +0000
-Message-ID: <de202ee9-9380-a728-b8a5-74491115b508@samba.org>
-Date: Tue, 15 Nov 2022 17:06:35 +0100
+ (Exim) id 1ouziP-008kLO-Hl; Tue, 15 Nov 2022 17:27:17 +0000
+Date: Tue, 15 Nov 2022 09:27:14 -0800
+To: Michael Weiser <michael.weiser@atos.net>
+Subject: Re: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
+Message-ID: <Y3PL8jDH0FT+TVKv@jeremy-acer>
+References: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
+ <ecd8ac98-c8d7-43b6-b0c0-d6deb7352ad7@samba.org>
+ <Yzsp/U5itUs486Ic@jeremy-acer> <YzsqwptGoGijMcib@jeremy-acer>
+ <5b08d4aa-2d59-b5d6-07ad-9cc40438aeb1@puzzle-itc.de>
+ <0698402c43a54ae6baf045e99e8c259c@atos.net>
+ <29f2f344ce954367b65e54bac76bb2d8@atos.net>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.1
-Subject: Re: failing tests in the testsuite on debian
-Content-Language: en-US
-To: Michael Tokarev <mjt@tls.msk.ru>, samba-technical@lists.samba.org
-References: <4197c161-ef1e-3710-f50e-7631ddaf5f3f@msgid.tls.msk.ru>
- <de87d255-95d0-ac34-1544-fa0aac441f4b@msgid.tls.msk.ru>
- <dccabfb1-bc92-6c95-b45d-8cc69f650fb9@samba.org>
- <6b2c8e12-d888-9230-2d18-aa73080c6967@msgid.tls.msk.ru>
-In-Reply-To: <6b2c8e12-d888-9230-2d18-aa73080c6967@msgid.tls.msk.ru>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------gqfD7vbGwpoWKWuPv5SGXq82"
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <29f2f344ce954367b65e54bac76bb2d8@atos.net>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,59 +60,28 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: Daniel Kobras <kobras@puzzle-itc.de>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------gqfD7vbGwpoWKWuPv5SGXq82
-Content-Type: multipart/mixed; boundary="------------oYydwhSMEmpw0IZDKqE8Ynvq";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Michael Tokarev <mjt@tls.msk.ru>, samba-technical@lists.samba.org
-Message-ID: <de202ee9-9380-a728-b8a5-74491115b508@samba.org>
-Subject: Re: failing tests in the testsuite on debian
-References: <4197c161-ef1e-3710-f50e-7631ddaf5f3f@msgid.tls.msk.ru>
- <de87d255-95d0-ac34-1544-fa0aac441f4b@msgid.tls.msk.ru>
- <dccabfb1-bc92-6c95-b45d-8cc69f650fb9@samba.org>
- <6b2c8e12-d888-9230-2d18-aa73080c6967@msgid.tls.msk.ru>
-In-Reply-To: <6b2c8e12-d888-9230-2d18-aa73080c6967@msgid.tls.msk.ru>
+On Tue, Nov 15, 2022 at 09:33:17AM +0000, Michael Weiser wrote:
+>Hi Daniel, Jeremy,
+>
+>> > Ok, I've just submitted the fix in
+>> > <https://gitlab.com/samba-team/samba/-/merge_requests/2763>.
+>
+>> Thanks for your effort! We are in the meantime in the process of testing your
+>> fix in the affected environment. I fully expect it to resolve the issue. Will
+>> keep you posted.
+>
+>As (hopefully) final feedback on this issue I can report that we've deployed
+>the fix in two affected environments without fallout. One is running RHEL 8.3
+>with samba-4.11.2 the other RHEL 8.6 with samba-4.15.5. Backporting the patch
+>was trivial.
 
---------------oYydwhSMEmpw0IZDKqE8Ynvq
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-
-T24gMTEvMTUvMjIgMTY6MDksIE1pY2hhZWwgVG9rYXJldiB3cm90ZToNCj4gQWxzbyBJJ2Qg
-bG92ZSB0byBrbm93IHdoaWNoIHRoaW5ncyBkbyBleGlzdCB0aGVyZSAtIHZlcnkgYmFzaWMg
-b3ZlcnZpZXcuDQoNCm1heWJlIHRoaXMgaXMgYSBzdGFydDoNCg0KaHR0cHM6Ly93aWtpLnNh
-bWJhLm9yZy9pbmRleC5waHAvVGhlX1NhbWJhX1NlbGZ0ZXN0X1N5c3RlbQ0KDQotc2xvdw0K
-DQotLSANClJhbHBoIEJvZWhtZSwgU2FtYmEgVGVhbSAgICAgICAgICAgICAgICAgaHR0cHM6
-Ly9zYW1iYS5vcmcvDQpTZXJOZXQgU2FtYmEgVGVhbSBMZWFkICAgICAgaHR0cHM6Ly9zZXJu
-ZXQuZGUvZW4vdGVhbS1zYW1iYQ0KDQo=
-
---------------oYydwhSMEmpw0IZDKqE8Ynvq--
-
---------------gqfD7vbGwpoWKWuPv5SGXq82
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmNzuQsFAwAAAAAACgkQqh6bcSY5nkYH
-2xAAnms219xoJMJB9clsS7jp2svfKpewmunsdJ/nPsQURq/DKru67HJj/o7tzgcSDN3BdIDE1Vh0
-Jtx6kU0MUYmdrLFeh6Vnt50aORebfLN/cep+ZrVHUa6lcaYnGHnl396NJBmEVCVJNGsFipWcyVk9
-CCvzIoavxQxcYPo2wJGibiUaCh66MlMpVm1LktpxxHqNbeJ2qtjhnnaQJ3XCvc7WsVx2aGljLa8B
-WwLonZQkPffD4OneWxjjrnPhM9jkGIrJ0WCEJ4HFLwWihCuerGzsN4zCAvvR3EnBLuIe3oUua92/
-l0jx4uAD34wxgi4CtMj+gUThXlGiArPq8ZhC4IMFVYqOrdYqbHDqq6REqY93No45wMCWQcNXzRpA
-U0y/BzcpucdIY0MTQhJ5eCigMWMi/wC7QfCta2p75GJS/s6JuG1vIz4up9Hb7ZCqtMcsxN+AJq+l
-8omkb9hhRpp7JVCNUgHGv+OKh36rVPUuBRQ/+RJYhSz5VweLHOestmx3oFLZ4NNWf8KkT1LKLXxA
-q8kuZOi4u3qKxRoabPEHABSZtiTGZGYUzDQ3dRzQS1jfY9ZwXOGS1HVQgP7JUL6ctTkAfanGYvLG
-C8Xj8mishsCQTIvq6SyDWiWWSo+ZgM6BqIZhX+kxCTkHdP/ARPhiLlGSvgimnYrQEVH9dUZKILVr
-5V8=
-=uUKd
------END PGP SIGNATURE-----
-
---------------gqfD7vbGwpoWKWuPv5SGXq82--
+Thanks, the fix has already gone into 4.17.next and will
+be in the next 4.17 release.
 
