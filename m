@@ -2,48 +2,74 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97F056287A1
-	for <lists+samba-technical@lfdr.de>; Mon, 14 Nov 2022 18:59:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D1F0962945E
+	for <lists+samba-technical@lfdr.de>; Tue, 15 Nov 2022 10:33:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=qgb3vMfYxVabzJ6/dALzxYjUnB1qM3Scl+sbpBdSe9o=; b=IGpbDMo9fRQDTBqEgZYUcfzt5e
-	00U/9zrL6GysjCB8AlIZAN+HY559Afij9HTBlhNxwbHUpYvuLxOakBfdXkPBF0ElcdQYWGspctrWY
-	+DHBWbmdICOiAolCPKmxXfvdMce2Ih0X6y6wSdtF7G3GYMQKaQ7jM2lr701MIdqJVE5cCDA6UL5mG
-	0bJrUQA4o2h1GfD67f1WJZhLG5jMfB4kk+FjiGDpcZ+KDtb6PSgAyzVixCfkAT2SL/P76p4PLMXeT
-	UthOQv2lUgutx3Fya1TaktPQpKC54IJiVgpeVBpMnC8gMf0YXilrIUR/+rBcpNmbicSJ/MHw8hjqO
-	2/hles/A==;
-Received: from ip6-localhost ([::1]:38306 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=/DTyVth83gkSIB1XgvROyROFgyD9vTXe9EtXzqjK9kY=; b=sq1S0xkmlOqEWM/p2mHDVDz6rn
+	aSx7EvQSChqKu9628afijvs4Uxi6I/UMivQRyKWOW8rlk72rqwogiBApchHfTQaFSkv3YcMA490Cb
+	yKBHdy2QdtyfJmOaZjF521980DFW6tkT9Ce6ob2mB1lr7ZLwEYKLDQPbDjhCdpa/NLPUSL1lcEZU4
+	6SjZKHT89hvTzzw7mCXEmLoNNSKIDg70cYIEA64TWf9gCaDTuJXGeqOv3v3rVIrltw/PIHawvd5Zf
+	f1IAdZLdXSPviWbAqXyPkyzTETXrk0RKw6x59t16SFYJ6sJ771LM2cs6+/IROKfzj2YUrQmXTO13a
+	WOPQiMHQ==;
+Received: from ip6-localhost ([::1]:48954 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oudjN-00DCFf-5o; Mon, 14 Nov 2022 17:58:49 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16458) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oudjJ-00DCFW-BS
- for samba-technical@lists.samba.org; Mon, 14 Nov 2022 17:58:47 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=qgb3vMfYxVabzJ6/dALzxYjUnB1qM3Scl+sbpBdSe9o=; b=QXjqM9Rky4tBPzSmSrzjBjLv0D
- Y1XlbpLGuwvUHuovflWnv2MtoS/IDr065EOC8MxW+Z0mTWyg0JEKzW0tT4YsPKspBLv+Dt1O9OaB+
- 6ZEjj7H28m5Oy0Aa55iZBGDnU1MexD+C6GKRhu7Z894vZovyB5+61fDyzQiDQwMn2148SKFDTSn4v
- KFMzi7giOp+x+KbGz2mJ4KV+Sjoipg1c9VjTiSy4t7wPyw645dmhcIsn6MqlwR4L/8MwjD/xxoHOv
- svnWhIe1tcNJvQtD4/MsEZdZWW7Ah1vmmS6bjseB4eBfJby9GkJBt83eZb5y51uHo7KBfagezdQ+6
- eIpNbQwgxF8LTX36xK6EfmkiNFAdsyDcu1UJKJzO7TUmzK+qTJBKGNJtn7QY7cF935YV0bXNGOrS0
- XjbF8LjZrQIqC5DaGuI+SC0QnSNTWOvIFYOrEcqdaD/pXIFS45m8KrcGngjH0GXGdGoikGv2ishHQ
- q1GklTtwmqOzo1Q/XVJDuHlL;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1oudjI-008ZqU-GL; Mon, 14 Nov 2022 17:58:44 +0000
-Date: Mon, 14 Nov 2022 09:58:42 -0800
-To: Michael Tokarev <mjt@tls.msk.ru>
-Subject: Re: failing tests in the testsuite on debian
-Message-ID: <Y3KB0gz+EtO3RSzP@jeremy-acer>
-References: <4197c161-ef1e-3710-f50e-7631ddaf5f3f@msgid.tls.msk.ru>
- <06c4ce9f-0dfb-8deb-7ef0-78ffd78e630c@msgid.tls.msk.ru>
- <919e7519-7787-f0dd-12ea-99ba664ac312@msgid.tls.msk.ru>
+	id 1ousJw-00DetD-9c; Tue, 15 Nov 2022 09:33:32 +0000
+Received: from smtppost.atos.net ([193.56.114.177]:19496
+ helo=smarthost4.atos.net) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1ousJq-00Det4-Hg
+ for samba-technical@lists.samba.org; Tue, 15 Nov 2022 09:33:29 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=atos.net; i=@atos.net; q=dns/txt; s=mail2022;
+ t=1668504806; x=1700040806;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=/DTyVth83gkSIB1XgvROyROFgyD9vTXe9EtXzqjK9kY=;
+ b=Pd0fzlXjnthHYAOyZEotjehpjhrYpulf5xAS8F4JmpSO0Py+fXPg8Y9Q
+ GPRQajShCsYCHSlKMawicasPeUj3cUA8/OHQnGL61/xYx9jFwCgRvsxFc
+ XD8HWPorIsKwDWuDtUhRMT0EfuD2GQtFyTRO4lTUaQ+oxh82HoOUVHyYZ
+ AyF8/LPGAUnWXANGJlgpOYhSuuLOVgmyztP6BGlbyp7hXf3KFBAP6O/V2
+ ZmoonLtkN/oojUcFxMDZSva5Bau4xCwM6OvozNcZlmmKS5OjsWIIs+iML
+ oa8diGx2V58dHMRmM3z7FKM5O0qe/4YL3BmW0WUYw45uSQ6aqQ55XtETU g==;
+X-MGA-submission: =?us-ascii?q?MDHMCWADl/mDVwGAMe5vtEVexayg170ya6xjXl?=
+ =?us-ascii?q?IW0alHiF0iuGASDiJBnddr6l2pcYwiYtZ7Wmtc1eno9tAI/aAwJk98Jo?=
+ =?us-ascii?q?B5nhQngIi1mYm2wioM6ext7aUaK3MoPzKKJMZlAt+Ht3Ph2yRcKk5tih?=
+ =?us-ascii?q?RT?=
+Received: from mail.sis.atos.net (HELO
+ GITEXCPRDMB11.ww931.my-it-solutions.net) ([10.89.28.141])
+ by smarthost4.atos.net with ESMTP/TLS/AES256-GCM-SHA384;
+ 15 Nov 2022 10:33:17 +0100
+Received: from GITEXCPRDMB14.ww931.my-it-solutions.net (10.89.28.144) by
+ GITEXCPRDMB11.ww931.my-it-solutions.net (10.89.28.141) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.32; Tue, 15 Nov 2022 10:33:17 +0100
+Received: from GITEXCPRDMB14.ww931.my-it-solutions.net
+ ([fe80::4817:dcd:3f05:31dd]) by GITEXCPRDMB14.ww931.my-it-solutions.net
+ ([fe80::4817:dcd:3f05:31dd%8]) with mapi id 15.01.2375.032; Tue, 15 Nov 2022
+ 10:33:17 +0100
+To: Daniel Kobras <kobras@puzzle-itc.de>, Jeremy Allison <jra@samba.org>
+Subject: Re: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
+Thread-Topic: [PATCH RFC] s3: smbd: Consistently map EAs to user namespace
+Thread-Index: AQHY0q0xP3Tuh09CpEaQNbeEgtOwFa32NCKAgAaxE4CAAADrAIAcFQaAgARSbWeAIpE1UA==
+Date: Tue, 15 Nov 2022 09:33:17 +0000
+Message-ID: <29f2f344ce954367b65e54bac76bb2d8@atos.net>
+References: <d9c11a44-538d-963e-46b5-37fa24bf5bb9@puzzle-itc.de>
+ <ecd8ac98-c8d7-43b6-b0c0-d6deb7352ad7@samba.org>
+ <Yzsp/U5itUs486Ic@jeremy-acer> <YzsqwptGoGijMcib@jeremy-acer>,
+ <5b08d4aa-2d59-b5d6-07ad-9cc40438aeb1@puzzle-itc.de>,
+ <0698402c43a54ae6baf045e99e8c259c@atos.net>
+In-Reply-To: <0698402c43a54ae6baf045e99e8c259c@atos.net>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.79.0.28]
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <919e7519-7787-f0dd-12ea-99ba664ac312@msgid.tls.msk.ru>
+X-Warn: EHLO/HELO not verified: Remote host 193.56.114.177 (smtppost.atos.net)
+ incorrectly presented itself as smarthost4.atos.net
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,31 +83,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Michael Weiser via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Michael Weiser <michael.weiser@atos.net>
+Cc: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sun, Nov 13, 2022 at 12:14:45AM +0300, Michael Tokarev via samba-technical wrote:
->12.11.2022 23:24, Michael Tokarev via samba-technical wrote:
->..
->>NSS_WRAPPER_HOSTS='/build/pkg/samba-4.17.2+dfsg/testbuild/st/hosts' 
->>SOCKET_WRAPPER_DEFAULT_IFACE="21" RESOLV_WRAPPER_HOSTS="/build/pkg/samba-4.17.2+dfsg/testbuild/st/dns_h>
->>failed to start up environment 'rpc_proxy' at /build/pkg/samba-4.17.2+dfsg/testbuild/selftest/target/Samba.pm line 126.
->>samba can't start up known environment 'rpc_proxy' at /build/pkg/samba-4.17.2+dfsg/testbuild/selftest/selftest.pl line 824.
->>no output for name[samba4.rpc.echo against rpc proxy with domain creds(rpc_proxy)]
->
->I can't seem to be able to 'whitelist' this.  Adding
->
-> samba4.rpc.echo against rpc proxy with domain creds\(rpc_proxy\)
->
->or some variations to the knownfail list makes no difference. Adding
->samba4.rpc.echo.* makes whole lot of false positives which also fails.
->
->How to mark this failure as "known" properly?
+Hi Daniel, Jeremy,
 
-Getting the wildcarding right for knowfail is a bear :-(.
+> > Ok, I've just submitted the fix in
+> > <https://gitlab.com/samba-team/samba/-/merge_requests/2763>.
 
-Ensure you escape spaces with \.
+> Thanks for your effort! We are in the meantime in the process of testing =
+your
+> fix in the affected environment. I fully expect it to resolve the issue. =
+Will
+> keep you posted.
+
+As (hopefully) final feedback on this issue I can report that we've deploye=
+d
+the fix in two affected environments without fallout. One is running RHEL 8=
+.3=20
+with samba-4.11.2 the other RHEL 8.6 with samba-4.15.5. Backporting the pat=
+ch
+was trivial.
+--=20
+Thanks again,
+Michael=
 
