@@ -2,52 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E381629D5F
-	for <lists+samba-technical@lfdr.de>; Tue, 15 Nov 2022 16:27:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA848629DCA
+	for <lists+samba-technical@lfdr.de>; Tue, 15 Nov 2022 16:40:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=CS0j4vlYRw/A1+PRkaEPt4RHl1qGKeeXVBk4429wuaQ=; b=HY+A6eo263GCV2iE//tal56RK1
-	kXUYaLECauehNRJNVGA+AXESZkomzrFAwEKNGc2BNH0aL8tSLPwveubo2h98raZPWsvX9njPzffQM
-	vxedj8S7W2mtH3EAuGxymu8pjz+hpbZ7ApwbUgfxnCXSoY88r3yhp8Eq48PmGU5c+IpX+cZfH9m8g
-	xF6Z3FtI5w8gXzoT4gR1cwRRlbbzn/a00GfOSFGBFASaJM/m7F0K9/2InaPQP3tlwb0m/NsmCXYhE
-	uTRjaYQwpMMtbCxsE1it810N2YfhxC+GAtZFempv2TqWwR4tSIFL/PKAja7tOiqi+wP+N+OIGmVXe
-	9mTealYw==;
-Received: from ip6-localhost ([::1]:49590 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=iJ5Kjpxe5ICb4U+HiCAc4iO4N+u4FdUyasjsTuyF7zI=; b=0P3Q0ouY8yBNih4zcEoRYmDRFa
+	1mc6lxGoNRvlM4bsbe2oikBgTH8J+u95lnTbvoo/3BPmbDsS84rmjRxQ49OAomZiFt0AY0fDPpkYi
+	oeOiuHwYNCc/OCrlv9AFCtQv6SfKgp6i81KE+udKjNto2ov3pQXuGYU5FfFHuE7bWUmCOTVLC99mB
+	e5xvTKAWydM/XMm8RVaKlNtwe0CyD05ZnYKw5NSpKOZDTmiNMkwDqWlLpI7k++mPPpAp2NR3OkWc9
+	dZ8Z/gett4W8z5xfbD2RUIW/jUBLs540Xesc1fJgsuG/W0LzbCo5xj0iVwCYC7znS3zIFl118+/mB
+	sB2pH0Iw==;
+Received: from ip6-localhost ([::1]:23490 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ouxqR-00Dq5r-UJ; Tue, 15 Nov 2022 15:27:27 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:28042) 
+	id 1ouy3L-00DrJW-RM; Tue, 15 Nov 2022 15:40:47 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:41117) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ouxqN-00Dq5i-Fp
- for samba-technical@lists.samba.org; Tue, 15 Nov 2022 15:27:25 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=CS0j4vlYRw/A1+PRkaEPt4RHl1qGKeeXVBk4429wuaQ=; b=zZyVBPKr2ib8y3TQfFmsuACORZ
- m1uciD1ckzJi5IP3H/Phvdjq+vRaStmF/reJj1bVHM8k2dISOHUEYUYgg+fOCadGsdaVMpMICGgCD
- HKZ/9uQ1yoiJLAmZeTSBsDgx899m2Xdcgum5MhNxKeExJvVGXs4ENC2D2RDNfgskw7Je68GXan5gT
- pyBGPHHsUo0CiUCH2k80EZjhluIAY8by4d4Jx+cnYuaTQV29C7IgIlse2dzlMPFWB8gAOFlQzQmpc
- 1aCw3Q7s5p2+072rF0vltquSDX/FUN4fOi3Lv78cGFpZ2rqf7hW5EZ0YpEi0gbJyBWdkvqZcyO4h8
- zTTxU/FLPGHgpyaQYBNTbV0VgfMaykW73dBGboJyywCV5V4/9Tk3pfw1gAbBb2TQR7PnrjK9S/ofL
- 2sdS6VFeZ/y5UD9ki479VXiVcesRt88MViUsOmpKMzLyMnL/2iBEvijMjsbTJwC1QcUGvkiiMYt6t
- k67F8lA2WkyOi1BrFlB7P2gk;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ouxqN-008imc-0X
- for samba-technical@lists.samba.org; Tue, 15 Nov 2022 15:27:23 +0000
-Message-ID: <49dbbe9e-5f1b-0d8c-5d38-60e5ab7a50bf@samba.org>
-Date: Tue, 15 Nov 2022 15:27:22 +0000
+ (Exim) id 1ouy3D-00DrIy-EE
+ for samba-technical@lists.samba.org; Tue, 15 Nov 2022 15:40:41 +0000
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id 400A3402B5;
+ Tue, 15 Nov 2022 18:40:37 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 1C27310C;
+ Tue, 15 Nov 2022 18:40:36 +0300 (MSK)
+Message-ID: <61aedeea-87ca-11e7-e770-c25a5967cb37@msgid.tls.msk.ru>
+Date: Tue, 15 Nov 2022 18:40:36 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.0
+ Thunderbird/102.4.0
 Subject: Re: failing tests in the testsuite on debian
-Content-Language: en-GB
+Content-Language: en-US
 To: samba-technical@lists.samba.org
 References: <4197c161-ef1e-3710-f50e-7631ddaf5f3f@msgid.tls.msk.ru>
  <de87d255-95d0-ac34-1544-fa0aac441f4b@msgid.tls.msk.ru>
  <66781199-ab84-1c05-3224-ed65cb9b12bc@msgid.tls.msk.ru>
-In-Reply-To: <66781199-ab84-1c05-3224-ed65cb9b12bc@msgid.tls.msk.ru>
+ <49dbbe9e-5f1b-0d8c-5d38-60e5ab7a50bf@samba.org>
+In-Reply-To: <49dbbe9e-5f1b-0d8c-5d38-60e5ab7a50bf@samba.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,58 +53,68 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: samba-technical@lists.samba.org
-Cc: Rowland Penny <rpenny@samba.org>
+From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+15.11.2022 18:27, Rowland Penny via samba-technical wrote:
+..
+> Hi Michael, I think you may be over thinking this ;-)
 
+Heh! :) It very well might be!
 
-On 15/11/2022 15:12, Michael Tokarev via samba-technical wrote:
-> 15.11.2022 16:35, Michael Tokarev via samba-technical wrote:
-> ...
->> In particular, one can't re-run tests, because on subsequent runs, even
->> if you `rm -rf st' in-between, the result will be different, and 
->> different
->> tests will fail and the ones failed before will succeed
-> 
-> I figured this part out. It was my environment which was buggy. It turned
-> out I tried to run stuff in a separate pid namespace without a proper
-> process reaper, so zombies from the exited daemons weren't cleaned up
-> properly and certain resources had become busy and was never freed
-> before this namespace termination.  It was nothing to do with the
-> samba testsuite.
-> 
-> Certain tests do continue to fail though, and I still don't see how
-> to address this.
-> 
-> Thanks,
-> 
-> /mjt
-> 
+> It is my understanding that the tests are designed to test the entire Samba suite at compile time. It is this way to ensure that changes do not break 
+> something else. Some tests are expected to succeed, while others are expected to fail, it is when a test does something that it isn't expected to do 
+> that you get errors.
 
-Hi Michael, I think you may be over thinking this ;-)
+Yes, that's why samba have knownfails.  Which, btw, fail if it didn't fail ;)
+(I mean, if a test marked as knownfail is NOT failing, it is a testsuite failure).
 
-It is my understanding that the tests are designed to test the entire 
-Samba suite at compile time. It is this way to ensure that changes do 
-not break something else. Some tests are expected to succeed, while 
-others are expected to fail, it is when a test does something that it 
-isn't expected to do that you get errors.
+> You can run individual tests, but this is usually only done when altering an individual part of Samba, a python script for instance.
 
-You can run individual tests, but this is usually only done when 
-altering an individual part of Samba, a python script for instance.
+Yeah.  I was thinking about not individual tests, but about group of tests already
+defined in samba, like the selftest/quick list.  Here's the comment from this file:
 
-So, when the Samba tarball gets to you, you can be fairly sure that 
-Samba is correct. Any errors, after you compile Samba and create debs 
-from it, are likely to be packing errors, perhaps you need your own 
-tests for that ?
+# This file contains regexes matching the tests that should be run
+# when doing a "quicktest" - verifying whether the build is working
+# rather than trying to see what exactly is broken.
+#
+# This should be as quick as possible but cover as much code as possible.
 
-I see no use in packing the tests (if this is what you are trying to 
-do), they are really only of use at compile time.
+To me it looks like a good way to use in a distribution right after next samba
+release is built, exactly to do this: to test if the packager didn't break
+anything.
 
-This is my understanding of the tests, if it is wrong, I am sure someone 
-will jump in and correct my errors.
+> So, when the Samba tarball gets to you, you can be fairly sure that Samba is correct. Any errors, after you compile Samba and create debs from it, are 
+> likely to be packing errors, perhaps you need your own tests for that ?
 
-Rowland
+Yeah. It must be a packaging error. I want to know where my error is, find
+it and fix it.  I want to know why this thing works at the samba side,
+but does not work at my side, where my side is wrong and how to make it
+right.
+
+Sure I can replicate samba test suite, at least some of it, -- like from
+the "quick" list above. Wouldn't it be a waste of efforts since it is
+already written and in use?
+
+> I see no use in packing the tests (if this is what you are trying to do), they are really only of use at compile time.
+
+This is exactly the compile time I'm talking about ;)
+
+Not even *any* compile, but after I do something with the Debian package
+when I'm not exactly 100% sure for the result and want a way to verify
+some basic functionality.
+
+Though I understand fairy well this is testing a separate build,
+not the thing which has been just built "for production"
+
+> This is my understanding of the tests, if it is wrong, I am sure someone will jump in and correct my errors.
+
+It looks like your understanding is correct.
+
+Thank you for the comments!
+
+/mjt
+
 
