@@ -2,60 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D5DB62C79F
-	for <lists+samba-technical@lfdr.de>; Wed, 16 Nov 2022 19:29:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DF0062C7A6
+	for <lists+samba-technical@lfdr.de>; Wed, 16 Nov 2022 19:30:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=SaUwZWGzJJ1Lp4N1+t6rbLaZmBRDQDLgc44MZWkfSlA=; b=YBpQQIozWFpXqe/ez4H4yW9E6z
-	9Z4lhamwaD16E2sQr3Q4d+w2lF42Ms7Ju0/7DGXohStNc5vNiNeKQWSqgSYMqYHjNPg5ldyO/eRXI
-	qyt3ezs08n2TNLJSW9MUYdPaIL9SUq90qix3lJMQY0wtt9NWTeRd0s34VLtMr6RncL5B3rAlI6LZ/
-	MLZWV98zyWoPIu6L93ACM39KpRp4HCKkBYDNbAhiXe1AUhF/IYbnV3Ah9YgHIdrXYwS7vRMc6WAcJ
-	+zg5jOAa3UuNX05vjAipDxWgCE9hjgmFPjMrNyrksXj/uojl+tc17DKXNSBPaEmvBSl3OSYlcaSoh
-	7CjDld+Q==;
-Received: from ip6-localhost ([::1]:36026 helo=hr1.samba.org) 
+	bh=77XAxebAqAyYMRUyAGlAPFj2TGmxkp7bESfvwt/Tuuw=; b=omKSQ5IesIOmRRDsnIvnCvtRvS
+	M5x+fkc9JxZzqveyXjmSpjha1Der0bCWSnRa4iNWKBgBbuYD3fNUGXErpuIKAU99d+irOP3gIAVKO
+	H22oMNKUsWsMtipewfFge25jwRyhu1d7y73nOuVNM07hKY1gp0aLBNGbruImPeIbcCNq5MVQjPGOn
+	Wh7CsoYZSuWq+oU5AaPhz6Vu2ewpVEsrSV417Sx/34hPz+LDzSd8/uMky7GuLdzPz3OwuU2r9gRqd
+	BWNTVovbYHxvZMtRjoVjj9FqFLq49eLtgAZOM1f8GnzlMjrS7FD8vowfhoaV3dRx6Jia7M/EgFnaQ
+	gm/3h1VQ==;
+Received: from ip6-localhost ([::1]:30396 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ovN9Q-00EZ9P-M0; Wed, 16 Nov 2022 18:28:44 +0000
-Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:43732) 
+	id 1ovNAd-00EZQr-0f; Wed, 16 Nov 2022 18:29:59 +0000
+Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d]:34623) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ovN9L-00EZ9G-Op
- for samba-technical@lists.samba.org; Wed, 16 Nov 2022 18:28:41 +0000
-Received: by mail-lf1-x129.google.com with SMTP id d6so30876851lfs.10
- for <samba-technical@lists.samba.org>; Wed, 16 Nov 2022 10:28:39 -0800 (PST)
+ (Exim) id 1ovNAX-00EZQi-NY
+ for samba-technical@lists.samba.org; Wed, 16 Nov 2022 18:29:55 +0000
+Received: by mail-lj1-x22d.google.com with SMTP id d3so22962173ljl.1
+ for <samba-technical@lists.samba.org>; Wed, 16 Nov 2022 10:29:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SaUwZWGzJJ1Lp4N1+t6rbLaZmBRDQDLgc44MZWkfSlA=;
- b=PvwaWTcGbS+vSRmoDoFJEVax8j5icW23HNgH4TXBKd348S7cJZtyYQCgOIlypt1bJb
- +Amq0mHuuHfvyomxOCHoDZBF53tiairPCihc0spc8jdR8wjfGLu9+HBmjXo9UmVBCuYE
- VyNmUvxMFEDnoFZEsdD0BwypFrTJpQ2fWfPQah/wOPWdN1eP1Lmubf8KHJXetc1/p3nN
- uErQO+uWLr2LRlDzlzAFYP7fPCqSposoRjuglQvJ5mZqSLId2FpGVCgejoF1z6aqKsNP
- es6n1AHY7ZXO974JB3HqHyDk3cENtI3tDsB0nbugIX9HePrGaO8C3JQUXHr8TFOZ9nmA
- UvTg==
+ bh=77XAxebAqAyYMRUyAGlAPFj2TGmxkp7bESfvwt/Tuuw=;
+ b=Ja6dYWT5y6u1fweLisiUvKCbgo3mSLr0bX/aGUpQ7jZ0SfWUytQ2wrGSltAXq+pF95
+ +tNLir/3Szkp/vj+K+v/gAlzhjjikWjn5YOgQc+p/SX7zFvMIQMhEZLW2yRMMW3BO0bt
+ 1UuNHTkRbha9S5zZ4Zieh4qC8JvSmOJKZoJyh6fYa01EXp9LagEL1HhnjFpafz8MP0bO
+ mFGjglR1hKlh44IiaOlb4luJ6iHLd2+wy1vR74UyfE7ebbemTpb0EDZXG224uNlVwiwm
+ iwsX43XtucD8RbhEeUhdZ2MOnaGlDEfdgRrv1MumVxNgq22ErI6BZEJVbhueBmIfw3Md
+ DpzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SaUwZWGzJJ1Lp4N1+t6rbLaZmBRDQDLgc44MZWkfSlA=;
- b=md4qixqXxqrV6C/7xDAy+O0bC7SMAdfgeu9O72kxBdHrr2rwVuBYXj1io6eDFoqoU+
- zFICbXk0KHEF5qaFMczDvE8AG2o61XykrFYQab0VHIImOZNo1eg3DSOUfztn9RV3J7Q2
- WGvpIn/RxvTyNq2We6GGy9qtho+8QOsGYQYRyWcEFrI7I02+gZ2TDMfilh+g5HlFV6tq
- eRi92wENcFyA0miVTKM7y9CcHxY2csQVu8vd6M3H5ukhRe+XANQVj9AupndMJOwhqqf4
- lqI2d4NZkKovtjYRQfpk0FWwjGOf+9vctOSJXFI0fxPNKItF1T8z+CmCKWwLcUP5M9pc
- CQtw==
-X-Gm-Message-State: ANoB5pk/GxKIQJKK7vTG7qzTsZ1LpDZq1KFOKhDGphD1gxs2he8+hjwV
- a+unmb44X04VvjOZEEX0e8D/LCN4ziSmAsN9gDc=
-X-Google-Smtp-Source: AA0mqf4XAj8KhiMXEUh3kTVoZTHiB6PysvJJIUmhvFuRbnqAPxGcPIr/D7q1zdvmFUDba6t+gl/bVLhJ1Fc4aHjtEII=
-X-Received: by 2002:a05:6512:3910:b0:4b0:a51e:2b3 with SMTP id
- a16-20020a056512391000b004b0a51e02b3mr8760830lfu.636.1668623318329; Wed, 16
- Nov 2022 10:28:38 -0800 (PST)
+ bh=77XAxebAqAyYMRUyAGlAPFj2TGmxkp7bESfvwt/Tuuw=;
+ b=i6jPHIKrt9WBCOuHYgvEnJgzBzX6w2HwbAxJ/bqKHkx3ATjbc7vNNqfSBVt9SbBl2L
+ gZVwsD+m/1uivKPMYddp6NBnzyycGXdm88/NfOeUDa74ah8AmcRDeASysv+xUfH26EKU
+ q61K3G6LE6VO/L35gJolBCg7TosriCfg8iaR8tea+U251XOF0VB5+0CYuBMSAIwze+V+
+ IMlYjztcYjSFkOpHaPtkC9/v9C273b/MXwyjvDtzTckQJDq1LXNe+W4pIFmgnIPzh7c1
+ 7AHu0RE3TupBjgve7FTFhUnHci+UWkyRZvRKoMjy0hAF1uYJ27lApOrdRrd7yh9PKw0E
+ YC0g==
+X-Gm-Message-State: ANoB5plPXQtQuLqSK/Q9vdjtXxO9X2FVUIR20xFlaC9ss2WVisSpfIlQ
+ kKaJaNJSkpsAMtUOwuVxULDHA7OpXdmuPNbQdZ4=
+X-Google-Smtp-Source: AA0mqf75A6ArBLdkF4AmDh9po4MnZp8rDpfDM0un7FEUw3DM8zMVDcDpWZ8h3i6d0tBgWOYykunVZ5ke/DslnGiqdtU=
+X-Received: by 2002:a2e:9853:0:b0:277:9e5:6cc4 with SMTP id
+ e19-20020a2e9853000000b0027709e56cc4mr8817737ljj.137.1668623392463; Wed, 16
+ Nov 2022 10:29:52 -0800 (PST)
 MIME-Version: 1.0
-References: <20221116141027.10947-1-abelova@astralinux.ru>
-In-Reply-To: <20221116141027.10947-1-abelova@astralinux.ru>
-Date: Wed, 16 Nov 2022 12:28:26 -0600
-Message-ID: <CAH2r5murCb6icxS4YbguNbhKLsrrw9FR-p6vW-3njCtMDw3yrw@mail.gmail.com>
-Subject: Re: [PATCH] cifs: add check for returning value of SMB2_set_info_init
-To: Anastasia Belova <abelova@astralinux.ru>
+References: <20221116131835.2192188-1-hch@lst.de>
+In-Reply-To: <20221116131835.2192188-1-hch@lst.de>
+Date: Wed, 16 Nov 2022 12:29:41 -0600
+Message-ID: <CAH2r5msoMJ6jNFDtHigKOqq9EwxEb9buxGVi8duW8EMz6wwgBg@mail.gmail.com>
+Subject: Re: RFC: remove cifs_writepage
+To: Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -73,45 +73,26 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
 From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
 Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
- lvc-project@linuxtesting.org, linux-cifs@vger.kernel.org,
- Paulo Alcantara <pc@cjr.nz>, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
- Steve French <sfrench@samba.org>
+ linux-cifs@vger.kernel.org, Paulo Alcantara <pc@cjr.nz>,
+ samba-technical@lists.samba.org, Ronnie Sahlberg <lsahlber@redhat.com>,
+ Steve French <sfrench@samba.org>, David Howells <dhowells@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+I can run some tests on this later this week.
 
-On Wed, Nov 16, 2022 at 8:26 AM Anastasia Belova <abelova@astralinux.ru> wrote:
+On Wed, Nov 16, 2022 at 7:29 AM Christoph Hellwig <hch@lst.de> wrote:
 >
-> If the returning value of SMB2_set_info_init is an error-value,
-> exit the function.
+> Hi Steve,
 >
-> Found by Linux Verification Center (linuxtesting.org) with SVACE.
+> this series tries to remove the ->writepage method from cifs, as there
+> is no good reason for the method to exist anymore and we're trying to
+> remove it entirely.
 >
-> Fixes: 0967e5457954 ("cifs: use a compound for setting an xattr")
->
-> Signed-off-by: Anastasia Belova <abelova@astralinux.ru>
-> ---
->  fs/cifs/smb2ops.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/fs/cifs/smb2ops.c b/fs/cifs/smb2ops.c
-> index 880cd494afea..c77e49b3fcc6 100644
-> --- a/fs/cifs/smb2ops.c
-> +++ b/fs/cifs/smb2ops.c
-> @@ -1116,6 +1116,8 @@ smb2_set_ea(const unsigned int xid, struct cifs_tcon *tcon,
->                                 COMPOUND_FID, current->tgid,
->                                 FILE_FULL_EA_INFORMATION,
->                                 SMB2_O_INFO_FILE, 0, data, size);
-> +       if (rc)
-> +               goto sea_exit;
->         smb2_set_next_command(tcon, &rqst[1]);
->         smb2_set_related(&rqst[1]);
->
-> --
-> 2.30.2
->
+> The series is entirely untested as I don't have a CIFS setup at the
+> moment, and patch 2 is a bit crude and there might be much better
+> ways to handle the small wsize case.
+
 
 
 -- 
