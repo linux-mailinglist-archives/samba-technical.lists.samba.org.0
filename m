@@ -2,61 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DF0062C7A6
-	for <lists+samba-technical@lfdr.de>; Wed, 16 Nov 2022 19:30:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 77CC962CB8A
+	for <lists+samba-technical@lfdr.de>; Wed, 16 Nov 2022 21:53:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=77XAxebAqAyYMRUyAGlAPFj2TGmxkp7bESfvwt/Tuuw=; b=omKSQ5IesIOmRRDsnIvnCvtRvS
-	M5x+fkc9JxZzqveyXjmSpjha1Der0bCWSnRa4iNWKBgBbuYD3fNUGXErpuIKAU99d+irOP3gIAVKO
-	H22oMNKUsWsMtipewfFge25jwRyhu1d7y73nOuVNM07hKY1gp0aLBNGbruImPeIbcCNq5MVQjPGOn
-	Wh7CsoYZSuWq+oU5AaPhz6Vu2ewpVEsrSV417Sx/34hPz+LDzSd8/uMky7GuLdzPz3OwuU2r9gRqd
-	BWNTVovbYHxvZMtRjoVjj9FqFLq49eLtgAZOM1f8GnzlMjrS7FD8vowfhoaV3dRx6Jia7M/EgFnaQ
-	gm/3h1VQ==;
-Received: from ip6-localhost ([::1]:30396 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=mpaHON3Aynlibc+LT6xg4VKSGYTpNbmj8R0PrvRytNM=; b=v2KFJMAcz/Mu8DNyQDUGkOj2eI
+	kTPuyr4A4olA3M1ZMcA4nPurvHKezf0Cn3+7Qa05u4vB8DZhAhUq68PUQzQ8WV7uFHp1R+zkqI6gk
+	YhZSn4s45sfTXYP22KWqhcU5O9jFgbdZYDK1HsJsL/QUpTarQz9rUdPxmjiAD5/b1AhRT1V49i31c
+	W3aqEgtzZipJqK2Nas7PyMAXqMHzVSFif0sY2KGYFdSU2obWdnvXPiCsTH7mwfh9hsLAfmziFQBmR
+	ix8ecir3nCHdKZbtNwcHYkNgF2pgcQvc4y4I/Gr/8exv9mwAthGz8ToFr07axPkrXqHCYuZu6XKne
+	xW4tBzBQ==;
+Received: from ip6-localhost ([::1]:23970 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ovNAd-00EZQr-0f; Wed, 16 Nov 2022 18:29:59 +0000
-Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d]:34623) 
+	id 1ovPOI-00EaEA-Ol; Wed, 16 Nov 2022 20:52:14 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47988) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ovNAX-00EZQi-NY
- for samba-technical@lists.samba.org; Wed, 16 Nov 2022 18:29:55 +0000
-Received: by mail-lj1-x22d.google.com with SMTP id d3so22962173ljl.1
- for <samba-technical@lists.samba.org>; Wed, 16 Nov 2022 10:29:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=77XAxebAqAyYMRUyAGlAPFj2TGmxkp7bESfvwt/Tuuw=;
- b=Ja6dYWT5y6u1fweLisiUvKCbgo3mSLr0bX/aGUpQ7jZ0SfWUytQ2wrGSltAXq+pF95
- +tNLir/3Szkp/vj+K+v/gAlzhjjikWjn5YOgQc+p/SX7zFvMIQMhEZLW2yRMMW3BO0bt
- 1UuNHTkRbha9S5zZ4Zieh4qC8JvSmOJKZoJyh6fYa01EXp9LagEL1HhnjFpafz8MP0bO
- mFGjglR1hKlh44IiaOlb4luJ6iHLd2+wy1vR74UyfE7ebbemTpb0EDZXG224uNlVwiwm
- iwsX43XtucD8RbhEeUhdZ2MOnaGlDEfdgRrv1MumVxNgq22ErI6BZEJVbhueBmIfw3Md
- DpzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=77XAxebAqAyYMRUyAGlAPFj2TGmxkp7bESfvwt/Tuuw=;
- b=i6jPHIKrt9WBCOuHYgvEnJgzBzX6w2HwbAxJ/bqKHkx3ATjbc7vNNqfSBVt9SbBl2L
- gZVwsD+m/1uivKPMYddp6NBnzyycGXdm88/NfOeUDa74ah8AmcRDeASysv+xUfH26EKU
- q61K3G6LE6VO/L35gJolBCg7TosriCfg8iaR8tea+U251XOF0VB5+0CYuBMSAIwze+V+
- IMlYjztcYjSFkOpHaPtkC9/v9C273b/MXwyjvDtzTckQJDq1LXNe+W4pIFmgnIPzh7c1
- 7AHu0RE3TupBjgve7FTFhUnHci+UWkyRZvRKoMjy0hAF1uYJ27lApOrdRrd7yh9PKw0E
- YC0g==
-X-Gm-Message-State: ANoB5plPXQtQuLqSK/Q9vdjtXxO9X2FVUIR20xFlaC9ss2WVisSpfIlQ
- kKaJaNJSkpsAMtUOwuVxULDHA7OpXdmuPNbQdZ4=
-X-Google-Smtp-Source: AA0mqf75A6ArBLdkF4AmDh9po4MnZp8rDpfDM0un7FEUw3DM8zMVDcDpWZ8h3i6d0tBgWOYykunVZ5ke/DslnGiqdtU=
-X-Received: by 2002:a2e:9853:0:b0:277:9e5:6cc4 with SMTP id
- e19-20020a2e9853000000b0027709e56cc4mr8817737ljj.137.1668623392463; Wed, 16
- Nov 2022 10:29:52 -0800 (PST)
+ (Exim) id 1ovPOD-00EaE1-PH
+ for samba-technical@lists.samba.org; Wed, 16 Nov 2022 20:52:12 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=mpaHON3Aynlibc+LT6xg4VKSGYTpNbmj8R0PrvRytNM=; b=ECsIOV680d3lC2gAw7qzth9Qso
+ pWBObY3XamxWZTSAkQnpEfmYrKHbn1f7sisWNIe+l8T1gM6l1wDZo99kxxo2B9SxDrrZH6tOY9jnM
+ IqzvuQCGcP7zkCPWedR8zPHVvZWQW+KFCup+IcCGJg7+ivu4ttV5Cku75bgxqoTnF9sGM+Qh+70De
+ TSL6lub8NK0k3CtYaQpr7plf6qaloADYIRl1z6xTRq0QO8bX4SD/FRibShUyZtOklySK5FofQ6IMY
+ 1xqn7j/stjN/xhe3cGBiokXRoyvUNoIZcTKBSIMzl51x0lu/MC60dwd1Gp6W8vqaPOQjXDbhzKwtk
+ ZXDJzlul50axqDxjtwEzCPZo98gnm2Vm5v74l4uHpexRX2P1k7SMrH6eepGJNgt2ElIj3VFGFfpfW
+ 3qVx2CCrXq8WjPosxsfN3QNyXJInBJsTUoc5QILXqZWIRywS/uvXA8AchhKzvVIPuPGGTXfDEQOFF
+ XzwEP/6lS+CLPhzcYJWR2RSb;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1ovPOD-008x4V-Gn; Wed, 16 Nov 2022 20:52:09 +0000
+To: samba-technical@lists.samba.org
+Subject: Re: failing tests in the testsuite on debian
+Date: Wed, 16 Nov 2022 21:52:08 +0100
+Message-ID: <2264343.ElGaqSPkdT@magrathea>
+In-Reply-To: <06c4ce9f-0dfb-8deb-7ef0-78ffd78e630c@msgid.tls.msk.ru>
+References: <4197c161-ef1e-3710-f50e-7631ddaf5f3f@msgid.tls.msk.ru>
+ <06c4ce9f-0dfb-8deb-7ef0-78ffd78e630c@msgid.tls.msk.ru>
 MIME-Version: 1.0
-References: <20221116131835.2192188-1-hch@lst.de>
-In-Reply-To: <20221116131835.2192188-1-hch@lst.de>
-Date: Wed, 16 Nov 2022 12:29:41 -0600
-Message-ID: <CAH2r5msoMJ6jNFDtHigKOqq9EwxEb9buxGVi8duW8EMz6wwgBg@mail.gmail.com>
-Subject: Re: RFC: remove cifs_writepage
-To: Christoph Hellwig <hch@lst.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,33 +56,58 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
- linux-cifs@vger.kernel.org, Paulo Alcantara <pc@cjr.nz>,
- samba-technical@lists.samba.org, Ronnie Sahlberg <lsahlber@redhat.com>,
- Steve French <sfrench@samba.org>, David Howells <dhowells@redhat.com>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I can run some tests on this later this week.
+On Saturday, 12 November 2022 21:24:21 CET Michael Tokarev via samba-technical 
+wrote:
+> ok. After quite some digging I found out that the selftest was missing
+> two pieces - namely, tdb-tools (for tdbbackup) and lmdb-utils - spotted
+> this in the test log, by a very good chance.  After installing the two,
+> the --quick test looks quite a bit more promising now.  But there are
+> failures still.
 
-On Wed, Nov 16, 2022 at 7:29 AM Christoph Hellwig <hch@lst.de> wrote:
->
-> Hi Steve,
->
-> this series tries to remove the ->writepage method from cifs, as there
-> is no good reason for the method to exist anymore and we're trying to
-> remove it entirely.
->
-> The series is entirely untested as I don't have a CIFS setup at the
-> moment, and patch 2 is a bit crude and there might be much better
-> ways to handle the small wsize case.
+You should look at the bootstrap/config.py which packages we require to 
+actually run selftest.
+
+Or you just run:
+
+bootstrap/generated-dists/ubuntu2004/bootstrap.sh
 
 
+If a test is failing you need to debug it. Somewhere normally you have the 
+expanded command printed out. Note it!
+
+Check against which env the test failed and start it.
+
+make testenv SELFTEST_TESTENV="ad_member"
+
+You will get an xterm (you have to have xterm installed). Paste the expanded 
+comment and it will run the test. You can add debugger or add options to 
+increase debug output.
+
+If you want to increase it on the server side use e.g.:
+
+make testenv SELFTEST_TESTENV="ad_member" SERVER_LOG_LEVEL="1 kerberos:10"
+ 
+
+If you want to learn more about selftest, start to read the https://cwrap.org/ 
+and all the sub-pages!
+
+
+
+Cheers
+
+
+	Andreas
 
 -- 
-Thanks,
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
-Steve
+
 
