@@ -2,37 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F36B62DBE4
-	for <lists+samba-technical@lfdr.de>; Thu, 17 Nov 2022 13:46:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63FBB62E19A
+	for <lists+samba-technical@lfdr.de>; Thu, 17 Nov 2022 17:26:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=PmVvM63hok24cDInP2LJ2cM3bo85Rc8VT7bbf+CmR5Y=; b=SyEK/EFUUaDEjksBIQ6g+uzp/5
-	K7j7IRGWCuhObU4ikwwULQFlN6J/JY4OCveZHMpFPKjstYLu4gpvK9mBErFJkm6s8P3WwF9yeO1LA
-	BMuR5/kr9szUoH+oVQN8EC4owYKl/MKVyX/kERqHxppvPJrhtQdnsWDmZFbwTgtdaWUgmA7e8uI+U
-	CYKfXyAe74cvVNzwD+qFFTtFKQ/s1qCd2wC9HnSHRYGSuncn595rjL37lfK8N2/r70Xh+iPzQPW8s
-	PRbSk275lFpN/7GoAKJE0UNya9B0lIkxoOkWbQKJMILdNCUrtT3OeSLjFaxi90Z3Exw7lt2h6s416
-	1erWlfkA==;
-Received: from ip6-localhost ([::1]:62028 helo=hr1.samba.org) 
+	bh=28qsusM0dKIBeb+QN1iS4sQD/d+otONyx83fbDxldwk=; b=Odgv6PEFgJnoet96eOvdEN0mhG
+	FUblZq43Ea7PWzRTvST2HDIZ77MjSURXOATXwVn7/fTgUcugUSKWNLpKjsxXPKDDsRLXrYLNiTGus
+	WGH7Xe+NzammXufXZqeUAp/TJaMVJbGbxxUr5S6X3ldP5RAmoOOzYjfp5VdH+3NluvS9Ja5bFpjVX
+	/WA5ArKMuiY1RZqZg0D4ZRF+S4se2Z1QCj1BJaB+OdNJZLvoOMjXn00Me1ZfI5s90kdcRnHdtJYUr
+	9nugsALx3Oyl6FlTna6sCPf+PPdpXpywnbnAEuY3YA5ybAlkjlhIRFaR7mfbD4MrZsn+8pJCP0jWd
+	g3/9lgmw==;
+Received: from ip6-localhost ([::1]:41116 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1oveH2-00EqvH-NU; Thu, 17 Nov 2022 12:45:44 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:59247) 
+	id 1ovhhj-00EyXO-BD; Thu, 17 Nov 2022 16:25:31 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25568) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1oveGw-00Eqv8-2s
- for samba-technical@lists.samba.org; Thu, 17 Nov 2022 12:45:41 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 357284030A;
- Thu, 17 Nov 2022 15:45:35 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 55B1F131;
- Thu, 17 Nov 2022 15:45:34 +0300 (MSK)
-Message-ID: <6e43c434-ff08-0b9a-4c35-3a2e3117f7ac@msgid.tls.msk.ru>
-Date: Thu, 17 Nov 2022 15:45:34 +0300
+ (Exim) id 1ovhhc-00EyXE-Sc
+ for samba-technical@lists.samba.org; Thu, 17 Nov 2022 16:25:29 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:Cc:To:Date:Message-ID;
+ bh=28qsusM0dKIBeb+QN1iS4sQD/d+otONyx83fbDxldwk=; b=dirEiSJZKMYPGoRTiT7sOI1Olh
+ 9zbeVLmKzFRbXutiffXuDhrE6CsqTCEBd4t8MRf5uokb0+qsptoTs6qA8b7U++Rn8Lq8uY9vfapnE
+ dPDIolmZ/ceIGF2SnmGYHKYBN9iyYvMUUCXoE0X8CnKqlHqJ9N5EK7AQg7DLkmEC6f74GunEZWKQL
+ RiGb5O/qDrnpxadac8VMq/xomA0n4iH7/GyVvOXKRYNtLAZAYZjqPrnyn5zGaCzyRGRfrxgbinRc9
+ m4CwxjeOPeXCrx5uC4lf0bVz2MaW5Jcen8Fn2J4APWL1CkLGbuXp2KPA85ihLdhb7Q5nQM0ORQAEr
+ KqaKT5zq87FHRoqepdJ/S2GnJBfBerE0JXVcTqHdzwiPoUEJNp/DCUqNFRAy58Cl9IViVagLV+2Kz
+ BNziIbl9ss/XyHIzjfJQZ4zCS2YI54qfzM+gYP/l7CFSOnFeW8HXKBvK+Zy8J9CvhFDTFfVH6vT15
+ uRhFSNCrDvTVO8Kjuo+G9TsO;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1ovhhW-00953X-LT; Thu, 17 Nov 2022 16:25:19 +0000
+Message-ID: <17ba2422-03e6-9a5d-d0b9-358e392396c3@samba.org>
+Date: Thu, 17 Nov 2022 17:25:18 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.0
+ Thunderbird/102.4.2
 Subject: Re: Can someone please build us a 32-bit Debian container image
  please?
-Content-Language: en-US
+Content-Language: en-US, de-DE
 To: Andrew Bartlett <abartlet@samba.org>,
  Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
 References: <c2802ea35aa48ada6a638c31ff19b7235845c268.camel@samba.org>
@@ -52,29 +60,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Cc: Uri Simchoni <uri@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-17.11.2022 04:02, Andrew Bartlett via samba-technical wrote:
+Am 17.11.22 um 02:02 schrieb Andrew Bartlett via samba-technical:
 > https://github.com/docker-32bit/debian is GPLv3 and small, could
 > someone please adapt that into our bootstrap system and buildar and
 > have us build a Debian i686 image for our CI?
+> 
+> We might even be able to do less, provided we do two stages, one to get
+> enough for our normal bootstrap to run, and then proceed as normal.
+> 
+> We have had (eg
+> https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=974868) a number of
+> 32 bit bugs, not just the recent PAC issue and we need CI and safe and
+> easily downloaded image we can use.
+> 
+> We are assuming that 32-bit userspace on a 64-bit host will be enough
+> for now, so no emulation is needed, just time setting up the image and
+> getting us past the samba-o3 build on it.
+> 
+> Uri:  You have been incredibly helpful with things like this before,
+> would you happen to have time?
 
-I know very little about docker, but I do use debian images (and other
-system images) quite often, - in particular, to test samba and qemu
-(which I happen to maintain too).  I use various images to build samba
-for different versions of different systems this way, too.
+Lets see where this goes...
+https://gitlab.com/samba-team/devel/samba/-/jobs/3340360869
+https://gitlab.com/samba-team/devel/samba/-/commit/e2cec9d775ebda50ed341632b107f7de86437357
 
-The procedure outlined in there is trivial, they use debootstrap to
-install a base system image into a directory, create a tar archive
-out of it and import it to docker. Debootstrap utility is a shell
-script which is supposed to run on various unix-like OSes.
+The hardest part was to find the need to the 'registry-1.docker.io/' prefix before
+'i386/debian:11', 'docker pull i386/debian:11', but podman requires
+'podman pull registry-1.docker.io/i386/debian:11'
 
-Andrew, what is needed, exactly?  I mean, what should this image
-contain and how it will be used?
+On ubuntu18.04 i386 I needed --disable-warnings-as-errors in order to compile,
+but the warnings should be fixed, as they might also be real 32bit bugs.
+And lmdb is also not available on 32bit...
 
-/mjt
+metze
+
 
