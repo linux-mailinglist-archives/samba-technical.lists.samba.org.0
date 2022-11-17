@@ -2,47 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77CC962CB8A
-	for <lists+samba-technical@lfdr.de>; Wed, 16 Nov 2022 21:53:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21C0262D058
+	for <lists+samba-technical@lfdr.de>; Thu, 17 Nov 2022 02:03:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=mpaHON3Aynlibc+LT6xg4VKSGYTpNbmj8R0PrvRytNM=; b=v2KFJMAcz/Mu8DNyQDUGkOj2eI
-	kTPuyr4A4olA3M1ZMcA4nPurvHKezf0Cn3+7Qa05u4vB8DZhAhUq68PUQzQ8WV7uFHp1R+zkqI6gk
-	YhZSn4s45sfTXYP22KWqhcU5O9jFgbdZYDK1HsJsL/QUpTarQz9rUdPxmjiAD5/b1AhRT1V49i31c
-	W3aqEgtzZipJqK2Nas7PyMAXqMHzVSFif0sY2KGYFdSU2obWdnvXPiCsTH7mwfh9hsLAfmziFQBmR
-	ix8ecir3nCHdKZbtNwcHYkNgF2pgcQvc4y4I/Gr/8exv9mwAthGz8ToFr07axPkrXqHCYuZu6XKne
-	xW4tBzBQ==;
-Received: from ip6-localhost ([::1]:23970 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=ggYwO0s9p6n6AAybfmUpfNfmnXJWgMdX/yhdeN9w0VU=; b=zqJplWzf0DR1vXPrp0yWgHi3DB
+	tDJ9QtYMJ2oJAbTQrg7JR4avo9IrBu7njKJ0IPcc7LBinfBSCT0iZ1qx+iti5c5C4gIzcLNXKPPDr
+	p2s4FJeLS7CwDc7vg/OZpsOwgGv+3/F/eI40UC58tvZR7xLHccTrb/VFYbwSnQ84k+W66r8Eyx6qb
+	VXU3c78O306YHO6D9irsX73oAHWgF+oKNTyWi1QQFlnC3K80vm64OvOsXBbT4SG+FhEGao5awi1E7
+	+8F7Ye1ckcP0HAotRW/vFe8UCnyLGxCVtjD2lgOUTVz5YWNyEa+ytu7c+GqGhEHnI599f2g40o0KK
+	wTlm0P5w==;
+Received: from ip6-localhost ([::1]:51274 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ovPOI-00EaEA-Ol; Wed, 16 Nov 2022 20:52:14 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:47988) 
+	id 1ovTIZ-00Ec8H-3v; Thu, 17 Nov 2022 01:02:35 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:18470) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1ovPOD-00EaE1-PH
- for samba-technical@lists.samba.org; Wed, 16 Nov 2022 20:52:12 +0000
+ (Exim) id 1ovTIT-00Ec88-Pf
+ for samba-technical@lists.samba.org; Thu, 17 Nov 2022 01:02:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=mpaHON3Aynlibc+LT6xg4VKSGYTpNbmj8R0PrvRytNM=; b=ECsIOV680d3lC2gAw7qzth9Qso
- pWBObY3XamxWZTSAkQnpEfmYrKHbn1f7sisWNIe+l8T1gM6l1wDZo99kxxo2B9SxDrrZH6tOY9jnM
- IqzvuQCGcP7zkCPWedR8zPHVvZWQW+KFCup+IcCGJg7+ivu4ttV5Cku75bgxqoTnF9sGM+Qh+70De
- TSL6lub8NK0k3CtYaQpr7plf6qaloADYIRl1z6xTRq0QO8bX4SD/FRibShUyZtOklySK5FofQ6IMY
- 1xqn7j/stjN/xhe3cGBiokXRoyvUNoIZcTKBSIMzl51x0lu/MC60dwd1Gp6W8vqaPOQjXDbhzKwtk
- ZXDJzlul50axqDxjtwEzCPZo98gnm2Vm5v74l4uHpexRX2P1k7SMrH6eepGJNgt2ElIj3VFGFfpfW
- 3qVx2CCrXq8WjPosxsfN3QNyXJInBJsTUoc5QILXqZWIRywS/uvXA8AchhKzvVIPuPGGTXfDEQOFF
- XzwEP/6lS+CLPhzcYJWR2RSb;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=ggYwO0s9p6n6AAybfmUpfNfmnXJWgMdX/yhdeN9w0VU=; b=DusxpihvPhDSw0fNJJ6LJSuJbP
+ NgV3wMKKzlza/Ru/TI+8vTKcxfHlmeFUl/5FIwyjNrFZu0DnwlYRG18YsE6gYRuvhGM1IjXvgZu0q
+ i19uPEbwDCXB0XHalxcDfwK+BoUYOx21eHPk/GDUW4qQmGnvR/DsfHTpb5w/LrzXiCylawGQotOny
+ EDBH4qy2NLS1y9XkiXuU+k24uA7NQy7jjxYHh9NK81v/A+iR/eJWQ44czaCX435zzhM56M6qqY5Up
+ PUR5eSpqxbzva+WWvvzImsoIfICBUJ4WDIDCD24QMZmdGNzdJxp9IzXmYxNT6BKpgTLb4YvKPABo6
+ OwP7/Ffp4g2WpQK5wXcEfQB6kXedm0/XWzqBMwk1buEwjZcHVUDp9QNDCXqo2UQPZHTTk1ZEEsSQC
+ PJ5Om7M6EnA/YflPls9Ew7aexQuHtPkNBSA3pAyn6vM8Y9XHj1kvoc8vFdTj4rSBo3p4rmtSa8jXv
+ Yjo7wWhwiTp+1C6VThNxVtrs;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1ovPOD-008x4V-Gn; Wed, 16 Nov 2022 20:52:09 +0000
-To: samba-technical@lists.samba.org
-Subject: Re: failing tests in the testsuite on debian
-Date: Wed, 16 Nov 2022 21:52:08 +0100
-Message-ID: <2264343.ElGaqSPkdT@magrathea>
-In-Reply-To: <06c4ce9f-0dfb-8deb-7ef0-78ffd78e630c@msgid.tls.msk.ru>
-References: <4197c161-ef1e-3710-f50e-7631ddaf5f3f@msgid.tls.msk.ru>
- <06c4ce9f-0dfb-8deb-7ef0-78ffd78e630c@msgid.tls.msk.ru>
+ (Exim) id 1ovTIS-008yHw-8K; Thu, 17 Nov 2022 01:02:28 +0000
+Message-ID: <c2802ea35aa48ada6a638c31ff19b7235845c268.camel@samba.org>
+Subject: Can someone please build us a 32-bit Debian container image please?
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Thu, 17 Nov 2022 14:02:25 +1300
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,58 +54,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Michael Tokarev <mjt@tls.msk.ru>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Uri Simchoni <uri@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Saturday, 12 November 2022 21:24:21 CET Michael Tokarev via samba-technical 
-wrote:
-> ok. After quite some digging I found out that the selftest was missing
-> two pieces - namely, tdb-tools (for tdbbackup) and lmdb-utils - spotted
-> this in the test log, by a very good chance.  After installing the two,
-> the --quick test looks quite a bit more promising now.  But there are
-> failures still.
+https://github.com/docker-32bit/debian is GPLv3 and small, could
+someone please adapt that into our bootstrap system and buildar and
+have us build a Debian i686 image for our CI?
 
-You should look at the bootstrap/config.py which packages we require to 
-actually run selftest.
+We might even be able to do less, provided we do two stages, one to get
+enough for our normal bootstrap to run, and then proceed as normal.
 
-Or you just run:
+We have had (eg 
+https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=974868) a number of
+32 bit bugs, not just the recent PAC issue and we need CI and safe and
+easily downloaded image we can use.
 
-bootstrap/generated-dists/ubuntu2004/bootstrap.sh
+We are assuming that 32-bit userspace on a 64-bit host will be enough
+for now, so no emulation is needed, just time setting up the image and
+getting us past the samba-o3 build on it.
 
+Uri:  You have been incredibly helpful with things like this before,
+would you happen to have time?
 
-If a test is failing you need to debug it. Somewhere normally you have the 
-expanded command printed out. Note it!
+Thanks,
 
-Check against which env the test failed and start it.
-
-make testenv SELFTEST_TESTENV="ad_member"
-
-You will get an xterm (you have to have xterm installed). Paste the expanded 
-comment and it will run the test. You can add debugger or add options to 
-increase debug output.
-
-If you want to increase it on the server side use e.g.:
-
-make testenv SELFTEST_TESTENV="ad_member" SERVER_LOG_LEVEL="1 kerberos:10"
- 
-
-If you want to learn more about selftest, start to read the https://cwrap.org/ 
-and all the sub-pages!
-
-
-
-Cheers
-
-
-	Andreas
-
+Andrew
 -- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead, Catalyst IT   https://catalyst.net.nz/services/samba
+
+Samba Development and Support, Catalyst IT - Expert Open Source 
+Solutions
+
+
+
 
 
 
