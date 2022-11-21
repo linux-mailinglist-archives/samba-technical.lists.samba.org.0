@@ -2,61 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D3C6631098
-	for <lists+samba-technical@lfdr.de>; Sat, 19 Nov 2022 21:04:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6EDF632689
+	for <lists+samba-technical@lfdr.de>; Mon, 21 Nov 2022 15:41:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=ccp2wBYFO08vbXEm/oc3l6HKT+S2pZFfZ4H2UKRPVcM=; b=14K0a+90DTHeUPhsWFJ+FfnQwa
-	vciNXqW9xjLIVEcpSfH4U20n+lSDc7lRYMG9qivpAQawJJqDYkTM3nmLC/0cFxM9WeL3gWUZKbGda
-	xRqFIU+AgrBU32iBZnnMmRI2wRi2cgw0gorEgodBujHF/9wSLa5WvmbwOVAyz92s7+n6Nj9NwkPxm
-	HKINUVBuqOp/g+6OC+jRpimBbXAHCl3GLA9ICB8n7JxsQR+sTh31NP9FRkC+vwP0L7pLtM5Qzak1P
-	a9kDQ8BcDSCcs+vQF1+WRehyAsjSAuAdbQ5HMGJqGo058Rsr806BNU/iLc7iZEFo8UmBZ5L+OG2kX
-	zwlj37PA==;
-Received: from ip6-localhost ([::1]:21158 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=bEARu0JbQorKPvi4zAUJ1f0tT4f5K3ZqomAc0zTv4IU=; b=v2RwdFWgFbd/i2thOal/jgKbcb
+	9a9WJmYZ1R0aADvNhadhnV8uEP5CA+E6jvH3/WCzoLanFvO9VcV6IWlJgUn25VpJ1cEAx4B4AeSvK
+	sKFuE7R4PBX6rgPpcHxqqpPFhfYwKb2vbz9/h3wCBfJyi5XvhPcAD1dUqZ1MmfkTxmenKfxs1iVJ2
+	MnzWYJ7xILBl7O100Uhul9kri5YIxlYgiSxneOGYcnp5TcbBh0bPH/rGoBwiOe6IfuYSmtGJt7jhZ
+	GMRnljb2fQr0po5Bpiv+Ga+nJrfknSzuh3crBYD+VyOV7b7vHdL5TEtNxny+DS4leZAh06b14kE2w
+	pRjXV7SA==;
+Received: from ip6-localhost ([::1]:24424 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1owU4Z-00Fj1b-U2; Sat, 19 Nov 2022 20:04:19 +0000
-Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:43856) 
+	id 1ox7yW-00GJhZ-GG; Mon, 21 Nov 2022 14:40:44 +0000
+Received: from mx.cjr.nz ([51.158.111.142]:58630) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1owU4U-00Fj1S-IN
- for samba-technical@lists.samba.org; Sat, 19 Nov 2022 20:04:16 +0000
-Received: by mail-lf1-x129.google.com with SMTP id d6so13342639lfs.10
- for <samba-technical@lists.samba.org>; Sat, 19 Nov 2022 12:04:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ccp2wBYFO08vbXEm/oc3l6HKT+S2pZFfZ4H2UKRPVcM=;
- b=oJIdZboD3LegFim07gTIpp2yjxJgy6JTs/1S+LgCUkXEHlNZp1otIlsxSu8jimHZoz
- KNcCV4OHsBzp0dtTE0spPqgKXa8M54B2NUtIkt8ViDhh3r5qrmBaBhztY6a5kBnM8y3q
- Rdzj4rFrqxJ5fmPSXV6qJ7rxwN8cfgmW6X+fRotJhCzxEkXK/4AJxqXDEYhNc4Ms0FBe
- M3LP6x0HDK/PESNm4LFXHNpN/kSOhwXT5PdQOIECMHiwDSiwRTR4Ij/U9xGGHVdu7rOh
- HSfHh/7aOKspgZmAG1a0SgpbeaOPmyGSMyQ8ydbpjSl+RqLYuhU7H0PZAiGvBfq8vCMl
- /sBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ccp2wBYFO08vbXEm/oc3l6HKT+S2pZFfZ4H2UKRPVcM=;
- b=8CEGL1cBaizLxRVTNBYstgYEP6NP4zT3aqT23ts0T5LdMZPaEHzZmV8+509C1Yllg8
- uxADk2zQaOC+yU7cQIk0NMVgiubqCOUu8CfjKut0apwsuJGw+MNWJ/u8TNbNHO/gszcg
- UVt5C9oxsfdSySKX45TwHu+4vCOEZjBtWiAjUVlnXc6j873bfPt//L2gkfJx0fXi+a+E
- VkoK7lpPs475BSDwqmHFHzJTQCIzSGjKkC0PN8NNvaKGnD88m+AbjhjzIk2DOHCq1gqU
- 9841PqqXUL9dAZQt+Rn37Cfakd0HllzV28tFErWnWatfKz/nKQgeGsk8g2q7Sig7blkU
- YPZw==
-X-Gm-Message-State: ANoB5pkpgjVA6KJGqE7jlIwfHRWiAT/MZOwigSA7nVMMNoc5Joj590KD
- TVUeKJoVlYtoPJYhUmr4JTL1UaupYNAwRuA/CzU=
-X-Google-Smtp-Source: AA0mqf6Ox0HWsFKikihBgL/tqHbJffquiFQYL/D/NGLcRMUKabfuF1EhgDX6YA33mt/gp/ydXospydzbprKOFR6YxGs=
-X-Received: by 2002:a05:6512:20cb:b0:4a2:23f5:c1f6 with SMTP id
- u11-20020a05651220cb00b004a223f5c1f6mr4164415lfr.472.1668888253418; Sat, 19
- Nov 2022 12:04:13 -0800 (PST)
-MIME-Version: 1.0
-References: <20221119045159.1400244-1-chenxiaosong2@huawei.com>
-In-Reply-To: <20221119045159.1400244-1-chenxiaosong2@huawei.com>
-Date: Sat, 19 Nov 2022 14:04:01 -0600
-Message-ID: <CAH2r5mttt0zhzaz4XwPqz0x2m-P98oD45JJuMVfqu7EP2nbq_g@mail.gmail.com>
+ (Exim) id 1ox7yS-00GJhQ-6l
+ for samba-technical@lists.samba.org; Mon, 21 Nov 2022 14:40:42 +0000
+Received: from authenticated-user (mx.cjr.nz [51.158.111.142])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested) (Authenticated sender: pc)
+ by mx.cjr.nz (Postfix) with ESMTPSA id 45B8B7FD25;
+ Mon, 21 Nov 2022 14:40:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cjr.nz; s=dkim;
+ t=1669041637;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=bEARu0JbQorKPvi4zAUJ1f0tT4f5K3ZqomAc0zTv4IU=;
+ b=bUeIfrhiI1iRGk6aylBQTqyrT9PYNIYcVY0djJjxf6ssRl1nqqNJltP6/NdbjN6LDiPdOo
+ bOYBdhhQLZtO27XSd7Oal3iLJIyDYc5KT68mYjzRw1JO4BKli3GTh+z8DNChXSjRI+Pn5D
+ NOU0Un9UlJcI9rSRJUHPG80FG9dMY/CN4ou1YtcjVh202tI1/ATCRaN1AGXUI/QJF0D0Tk
+ wbvyHuebllBcWXFOzFt5RadidQq+bVdMeGF3EPnmFFBYqn5f3sWGHD9MFUdIXE5Jla3Uz7
+ hfGrtR6LX5FCIBTF1tjoadg2/L2d5oCyNpVxWnM6MX8yB7kCoZFk6jT/+v4iUA==
+To: ChenXiaoSong <chenxiaosong2@huawei.com>, sfrench@samba.org,
+ dhowells@redhat.com
 Subject: Re: [PATCH] cifs: fix missing unlock in cifs_file_copychunk_range()
-To: ChenXiaoSong <chenxiaosong2@huawei.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20221119045159.1400244-1-chenxiaosong2@huawei.com>
+References: <20221119045159.1400244-1-chenxiaosong2@huawei.com>
+Date: Mon, 21 Nov 2022 11:42:01 -0300
+Message-ID: <871qpw1i9y.fsf@cjr.nz>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,20 +58,16 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: dhowells@redhat.com, linux-cifs@vger.kernel.org, yi.zhang@huawei.com,
- pc@cjr.nz, samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- sfrench@samba.org, yanaijie@huawei.com, zhangxiaoxu5@huawei.com
+From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Paulo Alcantara <pc@cjr.nz>
+Cc: linux-cifs@vger.kernel.org, yi.zhang@huawei.com, chenxiaosong2@huawei.com,
+ yanaijie@huawei.com, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, zhangxiaoxu5@huawei.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-good catch.
+ChenXiaoSong <chenxiaosong2@huawei.com> writes:
 
-merged into cifs-2.6.git for-next
-
-On Fri, Nov 18, 2022 at 10:09 PM ChenXiaoSong <chenxiaosong2@huawei.com> wrote:
->
 > xfstests generic/013 and generic/476 reported WARNING as follows:
 >
 >   WARNING: lock held when returning to user space!
@@ -106,36 +90,6 @@ On Fri, Nov 18, 2022 at 10:09 PM ChenXiaoSong <chenxiaosong2@huawei.com> wrote:
 > ---
 >  fs/cifs/cifsfs.c | 4 +++-
 >  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/fs/cifs/cifsfs.c b/fs/cifs/cifsfs.c
-> index fe220686bba4..712a43161448 100644
-> --- a/fs/cifs/cifsfs.c
-> +++ b/fs/cifs/cifsfs.c
-> @@ -1281,7 +1281,7 @@ ssize_t cifs_file_copychunk_range(unsigned int xid,
->         rc = filemap_write_and_wait_range(src_inode->i_mapping, off,
->                                           off + len - 1);
->         if (rc)
-> -               goto out;
-> +               goto unlock;
->
->         /* should we flush first and last page first */
->         truncate_inode_pages(&target_inode->i_data, 0);
-> @@ -1297,6 +1297,8 @@ ssize_t cifs_file_copychunk_range(unsigned int xid,
->          * that target is updated on the server
->          */
->         CIFS_I(target_inode)->time = 0;
-> +
-> +unlock:
->         /* although unlocking in the reverse order from locking is not
->          * strictly necessary here it is a little cleaner to be consistent
->          */
-> --
-> 2.31.1
->
 
-
--- 
-Thanks,
-
-Steve
+Reviewed-by: Paulo Alcantara (SUSE) <pc@cjr.nz>
 
