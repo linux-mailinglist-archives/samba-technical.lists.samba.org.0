@@ -2,60 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C49AC643C80
-	for <lists+samba-technical@lfdr.de>; Tue,  6 Dec 2022 05:43:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BABB064468F
+	for <lists+samba-technical@lfdr.de>; Tue,  6 Dec 2022 15:52:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=EmQnhFLYiKVLZ0sQxBjLXkPoOHHxOBv8/dLLVHr33BU=; b=uA+oPNlSZX2NPNwxSKT3rd+Zpu
-	EyDYjAm4etg6m/4J0uovFBthJX9SwA2AGajfZmDf4bCpRu9VM8K66Qnaxr2QwBDyJEGk0id24q90d
-	jZqLpHGowM89PNaxzxiBuMvb7DR0hLeAdOZUBT1p+CEBKFz82etG9smN+L2pmmIC6CYp5wlDkHFba
-	qydQ/E0y3brvD9IN8d8GxWrOonK0n0Ki+/31ioYNbbzKbxHW25B56LFKJb5BpAGonvnk3oth5k3N4
-	lNYsB4HhC8ziOnfGhAB8VNXO5ZSxjRzzloUM5184I70Ku3QjfLSyXBgssuQmS/QyFmRNFVj9wCyDk
-	Jz/cmCZg==;
-Received: from ip6-localhost ([::1]:63878 helo=hr1.samba.org) 
+	bh=+c8r9/oIt50HC1wYqsQEflGL3D83a+hq7Wa/m7aZeeY=; b=qpbsn+wMyUvMJ39dQgUZZ1+egO
+	Ne7+D8039mt/6xnlLgd/8H7YveJmBILbjZATMc94iB3aoaBpPaW4iyJHx9eftDHf8VYRwCiFGIZFC
+	9oNwz2Tzl3cPWnrny+emdMuwWyI/ftndNDxicM8l4Vh1p7zmdj2umqUi7ZjfTCZgJq98A8+X+Z14o
+	jKC6sfb9H7Ob5nllneuZLGTgtkWyJmQxniMzv4Jlmfxyi6JRGNAnY976qir+aq2+nK1CWZG5mloVs
+	W6jLe3Qz1ZiUiC+6JNCBWCen+vEwofD/fWrpjePNWdTNAPC4hIsDHhZMdz3G/fVaYKCYF43fx/58n
+	HtC14qjQ==;
+Received: from ip6-localhost ([::1]:41284 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1p2Pn5-006Zoq-IJ; Tue, 06 Dec 2022 04:42:47 +0000
-Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134]:35364) 
+	id 1p2ZId-006fiu-D6; Tue, 06 Dec 2022 14:51:59 +0000
+Received: from mail-lj1-x234.google.com ([2a00:1450:4864:20::234]:42836) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1p2Pn0-006Zog-Ad
- for samba-technical@lists.samba.org; Tue, 06 Dec 2022 04:42:44 +0000
-Received: by mail-lf1-x134.google.com with SMTP id b3so21843108lfv.2
- for <samba-technical@lists.samba.org>; Mon, 05 Dec 2022 20:42:41 -0800 (PST)
+ (Exim) id 1p2ZIY-006fil-3Y
+ for samba-technical@lists.samba.org; Tue, 06 Dec 2022 14:51:56 +0000
+Received: by mail-lj1-x234.google.com with SMTP id q7so17465221ljp.9
+ for <samba-technical@lists.samba.org>; Tue, 06 Dec 2022 06:51:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EmQnhFLYiKVLZ0sQxBjLXkPoOHHxOBv8/dLLVHr33BU=;
- b=nbnCJFb1UM/7eT5kl6UMan5FW3VaziTWa7/nh//braawBcn5TqWN5D8jS6B/T5PBQI
- U/ar8Z3PHZvRjKV4ipKi6wOpDMWCfhb1AvPbhdxB44wvET2KvyUiF1H4yGH4wtpLDfXU
- BR+PZKFAbNp2zkjKy3T00mKrkCScomK40jeKmHYuW/EMisVUUiRxDZY+RR4G56ulbbv0
- QJcI8fK6ah2zzRNVOYwVdFx3N1uy21GgZkQqLuqGun8ZgHkJLTp+o03FER/tKMXenjsW
- 0eo4UKQtbTP4W0UN+S+GSyugZv/VEF02nPzlFBZ2AtCkBk/KGCQmFyECI/+la6mzFeIC
- bR+Q==
+ bh=+c8r9/oIt50HC1wYqsQEflGL3D83a+hq7Wa/m7aZeeY=;
+ b=DqAQCaMBLr8JlEoTNR3xKiOTqEYAXX1FVcPv7Out7W5CzTaZC72nCKbMe9DWKB/V/p
+ yM1gntmsSEMFMz3phuGvPPDRWw2EagzvKGzjBbL+e6KwBnEZaQCSNFAlcHnYXhzLEo4P
+ OoBrjAeKfeHbmJO4nElGme+U/ZbedJaI1tPw3crfIOf7GkmLJn5n1xnLXCUihZsm5vN8
+ nz0WJvohlmKP0wMcoImPZurmBbsp3Jqlp8eJqB3pt0eyfAY1LZrTfPcVHjnPZWIMpR1U
+ uIMljITRcL1Cn6Wm6V1NcYMOnWDLQdxu1Em0QK33QkVOeRnCTcqDlpJN1nDxC1FcAuJH
+ 3HNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EmQnhFLYiKVLZ0sQxBjLXkPoOHHxOBv8/dLLVHr33BU=;
- b=GbCwKqM3MuVX8W44dahVqaQ2Q6ouxVkeHaW/BXJkQYzYPe69p/XqzcwSiXo8/ir/af
- MCxEBketphvjTZonhrBXYhYjTDKqxFeXv3TfXHimtYrpiHv8OihDxTO965Q6Uaxzii9W
- mEscjkVHOsluRtJhn6dTd4wb/lYGpeJMlAcKfHCry4i8IgevKAybhQDqvZC5B5VETZJv
- r2qPFAFl9rrB2jfoPXENN8Ojz3DithBoOQbfaO6YHU947LR2UJSNyvoRCYDbOPZkMpQl
- FF9FSINiaZrcrKMF9FUDsM4qp96fYMwYXJN77gAsPegSDzEYrteGoZeIUsY1IA7SEsNq
- oF1Q==
-X-Gm-Message-State: ANoB5pnO67Jd6OSmqFl9iYJe50eaiVh+aZuZtoqQCv9Me9WgyNIz+X3w
- dGnf/TDex7BOwguvYOkU52ZJve+2Urw14qsPp50=
-X-Google-Smtp-Source: AA0mqf57OrDVOXhUTa4ozOdA768OvYfpqUnqVu7DvaGpyBAHMk2rQqboIzSXdXhNWfZ8Ec5byIBpUUUbXCHwfPkdrjg=
-X-Received: by 2002:ac2:4bd1:0:b0:4a2:4dc3:a2e with SMTP id
- o17-20020ac24bd1000000b004a24dc30a2emr23841388lfq.403.1670301760473; Mon, 05
- Dec 2022 20:42:40 -0800 (PST)
+ bh=+c8r9/oIt50HC1wYqsQEflGL3D83a+hq7Wa/m7aZeeY=;
+ b=8KTzld4c2p7dbNR7eKjm0VfgDVbsYS3b6re1/HpaERwHA/crjVU9CJjUkoWGRqVh8W
+ 8zKMj9wACenkFtLCcJ1kfYroZ06Wn56AWOhc3y0hFXajAggAe+msQJX/ffdRBji//eIY
+ z3WJ1IyIh0C6Br6yrMw8fPYy7r9lWeU+zgPQd075Z7Z/Wkemm0e9jYshruUtet9xcotX
+ qX5D09a9zyiEsUqI3MqWwbSl+RBx/G5izo3M8s0nGRKbUx0gV7RVTJ+Z4vhyk3yr7Ljg
+ mYe7uG/pS7zUkClCEj0KWh66KZ7gmP8vgfAGKiB9rwb1BDfASBbaUiQHnHmntSMUwBQC
+ qumQ==
+X-Gm-Message-State: ANoB5pluJKOn45JKYPLJ3ZhP1/COQ/h5mUyEcGfCdRe3t8ZwHjCt3xrM
+ YeG+KDR6HCmhF/dWCqZTAOa4ohOei3ClXdINXzE=
+X-Google-Smtp-Source: AA0mqf5mxr0kaG2P9ih3iG5KC/btRmXOc8R7RI0wvfkVEv5gxA9Ug7a5PA4i9/JLGTi7sE76Ji09E5ARVqV7qPs0p2s=
+X-Received: by 2002:a05:651c:12c1:b0:277:2fd5:482 with SMTP id
+ 1-20020a05651c12c100b002772fd50482mr23681476lje.194.1670338312401; Tue, 06
+ Dec 2022 06:51:52 -0800 (PST)
 MIME-Version: 1.0
-References: <184e4ae599e.dafedd623365931.2204914765704117230@elijahpepe.com>
- <184e4fef6ac.ef8cabb03371505.6462526642609891535@elijahpepe.com>
-In-Reply-To: <184e4fef6ac.ef8cabb03371505.6462526642609891535@elijahpepe.com>
-Date: Mon, 5 Dec 2022 22:42:29 -0600
-Message-ID: <CAH2r5mvYhYfO10U8QbRVsx03VUnudv-hcQvtqyw4Qt+4ugGT9A@mail.gmail.com>
-Subject: Re: [PATCH] cifs: fix tabbing
+References: <184e5d5c395.e6da05c53387741.2839551941271541423@elijahpepe.com>
+In-Reply-To: <184e5d5c395.e6da05c53387741.2839551941271541423@elijahpepe.com>
+Date: Tue, 6 Dec 2022 08:51:40 -0600
+Message-ID: <CAH2r5mvhP=Sh1Y0YKwHbChdu-oisfT05D6_XF95kGtfE+Vcaaw@mail.gmail.com>
+Subject: Re: [PATCH v2] cifs: add ipv6 parsing
 To: Elijah Conners <business@elijahpepe.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
@@ -75,42 +74,122 @@ From: Steve French via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Steve French <smfrench@gmail.com>
 Cc: linux-cifs <linux-cifs@vger.kernel.org>, sprasad <sprasad@microsoft.com>,
  pc <pc@cjr.nz>, samba-technical <samba-technical@lists.samba.org>,
- lsahlber <lsahlber@redhat.com>, tom <tom@talpey.com>,
- sfrench <sfrench@samba.org>
+ tom <tom@talpey.com>, sfrench <sfrench@samba.org>,
+ lsalhber <lsalhber@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-wasn't this problem introduced in your previous patch?  Why not merge
-them together since this is a cleanup for the tab problem in the
-previous patch
+Can you fix the whitespace error and make sure it merges (cifsroot.c
+hasn't changed in over a year so should be easy). I got this error
+when trying to apply the patch.
 
-On Mon, Dec 5, 2022 at 7:15 PM Elijah Conners <business@elijahpepe.com> wrote:
+Applying: cifs: add ipv6 parsing
+.git/rebase-apply/patch:26: trailing whitespace.
+{
+error: fs/cifs/cifsroot.c: does not match index
+Patch failed at 0001 cifs: add ipv6 parsing
+
+On Mon, Dec 5, 2022 at 11:25 PM Elijah Conners <business@elijahpepe.com> wrote:
+>
+> CIFS currently lacks IPv6 parsing, presenting complications for CIFS
+> over IPv6.
+>
+> To parse both IPv4 and IPv6 addresses, the parse_srvaddr() function
+> was altered; parse_srvaddr() now returns void. To retrieve the IP
+> address from parse_srvaddr(), the parameters *out6 and *out32, an
+> in6_addr and a __be32 respectively, are provided. The value of
+> root_server_addr is determined by if those parameters are set or not.
+>
+> The parsing in parse_srvaddr() was updated slightly. The character addr
+> can hold up to 46 characters, the longest a possible IPv6 address can
+> be. In the while loop, isdigit() has been replaced with isxdigit() to
+> account for letters present in IPv6 addresses, and *start is also
+> checked for being a colon. Finally, the function uses inet_pton() to
+> determine if the address is an IPv6 address; if so, *out6 is equal to
+> in6, set by inet_pton, otherwise, *out32 is set to in_aton(addr).
 >
 > Signed-off-by: Elijah Conners <business@elijahpepe.com>
 > ---
->  fs/cifs/cifsroot.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  fs/cifs/cifsroot.c | 29 ++++++++++++++++++++---------
+>  1 file changed, 20 insertions(+), 9 deletions(-)
 >
 > diff --git a/fs/cifs/cifsroot.c b/fs/cifs/cifsroot.c
-> index f0aba7c824dc..46aaa731723d 100644
+> index 9e91a5a40aae..0246e0792d8e 100644
 > --- a/fs/cifs/cifsroot.c
 > +++ b/fs/cifs/cifsroot.c
-> @@ -37,9 +37,9 @@ static void __init parse_srvaddr(char *start, char *end, struct in6_addr *out6,
->         addr[i] = '\0';
+> @@ -14,6 +14,7 @@
+>  #include <linux/in.h>
+>  #include <linux/inet.h>
+>  #include <net/ipconfig.h>
+> +#include <arpa/inet.h>
 >
->         if (inet_pton(AF_INET6, addr, &in6) > 0) {
-> -    *out6 = in6;
-> -  } else {
-> -    *out32 = in_aton(addr);
+>  #define DEFAULT_MNT_OPTS \
+>         "vers=1.0,cifsacl,mfsymlinks,rsize=1048576,wsize=65536,uid=0,gid=0," \
+> @@ -22,19 +23,24 @@
+>  static char root_dev[2048] __initdata = "";
+>  static char root_opts[1024] __initdata = DEFAULT_MNT_OPTS;
+>
+> -static __be32 __init parse_srvaddr(char *start, char *end)
+> -{
+> -       /* TODO: ipv6 support */
+> -       char addr[sizeof("aaa.bbb.ccc.ddd")];
+> +static void __init parse_srvaddr(char *start, char *end, struct in6_addr *out6, __be32 *out32)
+> +{
+> +       char addr[INET6_ADDRSTRLEN];
+> +       struct in6_addr in6;
+>         int i = 0;
+>
+>         while (start < end && i < sizeof(addr) - 1) {
+> -               if (isdigit(*start) || *start == '.')
+> +               if (isxdigit(*start) || *start == '.' || *start == ':')
+>                         addr[i++] = *start;
+>                 start++;
+>         }
+>         addr[i] = '\0';
+> -       return in_aton(addr);
+> +
+> +       if (inet_pton(AF_INET6, addr, &in6) > 0) {
 > +               *out6 = in6;
 > +       } else {
 > +               *out32 = in_aton(addr);
->    }
+> +       }
 >  }
 >
+>  /* cifsroot=//<server-ip>/<share>[,options] */
+> @@ -42,7 +48,8 @@ static int __init cifs_root_setup(char *line)
+>  {
+>         char *s;
+>         int len;
+> -       __be32 srvaddr = htonl(INADDR_NONE);
+> +       struct in6_addr addr6;
+> +       __be32 addr32;
+>
+>         ROOT_DEV = Root_CIFS;
+>
+> @@ -60,7 +67,7 @@ static int __init cifs_root_setup(char *line)
+>                         return 1;
+>                 }
+>                 strlcpy(root_dev, line, len);
+> -               srvaddr = parse_srvaddr(&line[2], s);
+> +               parse_srvaddr(&line[2], s, &addr6, &addr32);
+>                 if (*s) {
+>                         int n = snprintf(root_opts,
+>                                          sizeof(root_opts), "%s,%s",
+> @@ -73,7 +80,11 @@ static int __init cifs_root_setup(char *line)
+>                 }
+>         }
+>
+> -       root_server_addr = srvaddr;
+> +       if (addr6.is_set) {
+> +               root_server_addr = addr6;
+> +       } else if (addr32.is_set) {
+> +               root_server_addr = addr32;
+> +       }
+>
+>         return 1;
+>  }
 > --
 > 2.29.2.windows.2
->
 >
 >
 
