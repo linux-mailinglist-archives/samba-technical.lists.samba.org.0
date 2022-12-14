@@ -2,62 +2,116 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0845964C35C
-	for <lists+samba-technical@lfdr.de>; Wed, 14 Dec 2022 05:58:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5C3B64C462
+	for <lists+samba-technical@lfdr.de>; Wed, 14 Dec 2022 08:30:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=ajhW9t358rJQB8MHn9DjK0GaLclWuaE3UlU09Pj8U5g=; b=GfE9QLCWg+dFDdZkHrY31uCUC1
-	c4Jx6OIMlsZDeeWABFQsSL0MakYpMF1nYo0JdtyNJSGVTPSV5q6YHv64aYxQXClZzEdYKx1PzyuZl
-	l9hSe+UugrPIzhyJKmQbyJdZ26RPVp/6EnF8XfMhh/5oGOkbaw+NqQNWuTgpfQTELTGIrZ6dAFBWb
-	4CXbZZmmfSm7PQJJNEO9bY+x2jvthSfGIt0hDkC6f/kaii0k5wPAUwkB5xm7Qg/qG5SjkFGRgfodZ
-	lWH7jQUBq9TG9mUJ/x2RHQBIUvyi8Q0sQkB8TNZVECNGgJ26k8hc9EmDXWfWWTwBgs1bBc90QPBlY
-	HKvYP7jQ==;
-Received: from ip6-localhost ([::1]:28200 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=EOoAqryafrGOxeuiesMswBLy12h1J1P4XDBWn9IpuGQ=; b=MRIrRDDa8DWSfMG3hqLcLhW9Yn
+	yZz5GeqF+LlIA3JweGSc502ZQff01MYdY7azzPL7YExWJL0RwDxTrvMTkfwq3CN0f6dYxsgdx9ihH
+	qTYtlDAeH7d+T9yc30GW9fPfnbC8TP1A7e3XLaggueeTSKwszpku85Gqktj17WhMbR5Ns7IUrAY/G
+	YWL+2VTPVi+l4FP9iYy8Ih5UM7MED/CwmUUBnNuE9s5aZdKjxs5YyqS5KaFK+yyxPBMs1o3q+vNwf
+	WT0ug2S3IrdDy30afSj9r/o/bmi3Lv+tP8meav067UJ5MZBdoGbqSkBcU/mvyNJUUiT1BoMX9QKWI
+	DZlX0KGA==;
+Received: from ip6-localhost ([::1]:35700 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1p5Jpk-008xFa-GU; Wed, 14 Dec 2022 04:57:32 +0000
-Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c]:38801) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1p5Jpd-008xFR-5t
- for samba-technical@lists.samba.org; Wed, 14 Dec 2022 04:57:29 +0000
-Received: by mail-lj1-x22c.google.com with SMTP id b9so5530886ljr.5
- for <samba-technical@lists.samba.org>; Tue, 13 Dec 2022 20:57:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3xgSUy00+qCYyEoOi5NBasSre59KZUaI8eBSedCVpJU=;
- b=qM/lOPUoLSFQF42vDnTGOysLqvvfxuSH72kcSHNtKNCkELACAOtPZ4drXaImfMghgF
- NqKRKgbH6O77NZ388SkB62UHZnK+LS6rc3acUlOkGet9nbQpJOVme+CeHTnYXLcHKkvM
- oTMsUCB9hqxXeT+WW3VZiRfjAibtNMh64MUA2a7CrnVgoe0Kfcuj+6f3PE/w6i5m1Vr4
- bxxvVUzdp4L3YcFlRuOcEVvDfzpBV1KevNc51gAV4aSZkrXpVwLV9Rc7lU/ZXxKfVMav
- MZ4yxJ4ldcHPvl4/q7YuDfBZ7ejPCWehfNPx3aUTp/Nm/5NIPiatCz4NTMwgKqQAuTqu
- K+Yw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3xgSUy00+qCYyEoOi5NBasSre59KZUaI8eBSedCVpJU=;
- b=r+eiqo+xIY+bmoGDzTtr17oAIut/SU+JiYSk3PWV6NtK3TISzAaFjgCLiaYEaBqpVk
- x24+qzxulGfUS7QczyDSzbB48UuUgjHWthnLaS5i6XYYEDS7dFbRfPuxfNoy02H61i2W
- cfVvLDBXB2hxK8Gif468qL4dZmvO4dz81GZfehC9SL46BeBg38QORIp3xdG1Dtrq8Mr6
- bVTn/7rPZ++VdY+fFh2jYqEcD494ONJ8c7fswEb5dRMzXa3zTJP1ZIO2cue02fjRCDud
- 1M0XONWwC40FkMTC5FLlGOhGyiJX908bqj87VhzzHTU2KB8IvXia+lKCoCNL63MjzGx2
- 264Q==
-X-Gm-Message-State: ANoB5pkalgIATCKqjCZ9ZJGyip8TaLEYRaQXFdxlkZrNkaAeOcloltwj
- /jvFw/b4L92B090N5PHjsTPyGeBT6nZWLEQ6ycY=
-X-Google-Smtp-Source: AA0mqf7WNj0Ynm3PVCvuA29jAkmOA6Npbs1AyiQtj/0mTTzWdFCqHbDeiD8ErZ1SR9kcqEYq7+Xn80+mV03F61nKsNU=
-X-Received: by 2002:a2e:86d2:0:b0:279:df97:e895 with SMTP id
- n18-20020a2e86d2000000b00279df97e895mr8534659ljj.226.1670993843453; Tue, 13
- Dec 2022 20:57:23 -0800 (PST)
+	id 1p5MDN-008z4G-W5; Wed, 14 Dec 2022 07:30:06 +0000
+Received: from mail-db8eur05on2068.outbound.protection.outlook.com
+ ([40.107.20.68]:32131 helo=EUR05-DB8-obe.outbound.protection.outlook.com) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1p5MDA-008z47-9X
+ for samba-technical@lists.samba.org; Wed, 14 Dec 2022 07:29:55 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OHq/+zP4Gafwqk0BHEhSKCAjaIm2JznOuzLhvEtxd+mF+1i86wdR8IMMJVt3QNeXSSXYchNayR+RQICHw/AyIDELL5y6TOa6ksAHtxYW09+5VKvLaTnft/KX+sKwBi3H48BNzMdSW0sAj/j+yWwQAeRa+TtDnrsYKBxx6iZLfCq/jBVGXQVdEB/26UztWKDlatjox3jXMS3G9ghKQpYUwUUey0N5SQZPCaDklPqGlXovie92jMulfZn8YlaN8NKjFYgdH1Bjn6X5BQVQ2I7MooapzWuGSgomHr5cng57ldwjrIe0g/PzgyZjVMUXfaMBAXQrP223XLXjfKoOdgclTw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=EOoAqryafrGOxeuiesMswBLy12h1J1P4XDBWn9IpuGQ=;
+ b=Dj8w8wvFiE4Fgf7APrIFvEHsiiJ+1TSMO2SFzbfwAKuY3W/Po7/6hw1JprmQu/zp0fP0FkyDcM/ifJLPGFal6OfPxVDV/wlJSFZAWY2/GF3BgWuHwISUuCVOxjrZHWRvSovpKA8BNMS1aBMa9ci3xxz+IK399IouhJIJPJOE6t1xb3Y1VV4X5Otu29G3vO9arP0oXofzHGyb1jJACaoP2eUiromxtMmSsZV/zgvlNSs1axo1dL9XVJ+BrUmwKhoSqUXZ817lY5uXJ0eO9b0cncr57b0XCsvRUBpS47u0hYOjQCe7VWpiRvtsvpWpWmNgDly00P6tDzumCiTRCuANbg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=EOoAqryafrGOxeuiesMswBLy12h1J1P4XDBWn9IpuGQ=;
+ b=pnhOaR5MaS6GeUjCUN7ZlguXL/Mjy4mK9+aTtJgmzgKuuBnPKMBADaETwFcCjMHpPM71AQmyuWnYLj2e9K2lQKpgg0Lh0BMKRPebBnsDYfzTfjaLIHHUuKNvKeIuAAU+lIdebFIYVV/KQNJ0nJiAlpShRKAWyrLImGOoIKeWxAtb2w7zQLypNwaPXDlucicR9Y9tRoooBpJVQG6TIIRXPq6a8cqMX11sss9QnD7cK+iv0NAhvM1ermCUGE/gSXBxK6UjWSNyQbx3e5tB/deSBQePCH8BPEa4aao50UF0EuilHVPGD4TsYrwOg4WQjP/qCOQriVYse7dTT7z1JvXmag==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Received: from AM5PR04MB3073.eurprd04.prod.outlook.com (2603:10a6:206:9::24)
+ by AM0PR04MB7028.eurprd04.prod.outlook.com (2603:10a6:208:19a::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.11; Wed, 14 Dec
+ 2022 07:29:38 +0000
+Received: from AM5PR04MB3073.eurprd04.prod.outlook.com
+ ([fe80::6cfd:9a8f:259b:f3bd]) by AM5PR04MB3073.eurprd04.prod.outlook.com
+ ([fe80::6cfd:9a8f:259b:f3bd%7]) with mapi id 15.20.5880.019; Wed, 14 Dec 2022
+ 07:29:38 +0000
+Message-ID: <669d9ee8-5fec-ca73-dffc-80c522e091f5@suse.com>
+Date: Wed, 14 Dec 2022 18:29:26 +1100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.0
+Subject: CFP: Everything Open 2023 (Melbourne, Australia, March 14-16)
+To: samba-technical@lists.samba.org
+References: <20221214071507.GA7582@seshat.divinus.wirejunkie.com>
+Content-Language: en-US
+In-Reply-To: <20221214071507.GA7582@seshat.divinus.wirejunkie.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-References: <20221214023911.85141-1-yang.lee@linux.alibaba.com>
-In-Reply-To: <20221214023911.85141-1-yang.lee@linux.alibaba.com>
-Date: Tue, 13 Dec 2022 22:57:11 -0600
-Message-ID: <CAH2r5mteMFGi2B2eYei_pfZk_MLVbk4JQ0bNujZhhJVd5=te2w@mail.gmail.com>
-Subject: Re: [PATCH -next] cifs: Remove duplicated include in cifsglob.h
-To: Yang Li <yang.lee@linux.alibaba.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM5PR04MB3073:EE_|AM0PR04MB7028:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3e97f240-a9ef-4b0f-d910-08dadda4f52a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Message-Info: rOYjoTHlDB45vkZtqeIWDyWJziZITGLzLihlguHCX6ao2RWgRQcTNhEMBzwoX2Rj9t6B8+VYrHryJCsUNAOM6mZ5krZdA/ayVAmCBgTGGNBpMmLxTDKTQ4q1OkIkhJaVawPooFKzC88P9s91aKdcPL3EczvDy4JoM+19sU/vOzFprDC/pldekMC4EpAajT+55/lL+WPvWpcO67vTgZfHxGMyCtV0pvKj51t1eomMzRnhBbh5S3F48/EtFZJ0S05X6cRCmxqjMsXI2gYRbr4btH8PO7jOPybyaAHhsTrgQ0dUPE0mplAKcalrie5z0HkulpZtXruVSMlRguSQz0/8K1GKJBgpDcy8Bbo8wB1BzAmS1tK/Qdfb0wbqeZyvZ+6o9OpdoJUsOg5Zxe668uIKzpAIlYpW0l0/tiJ+aif7tyV9168Bi0/uDWgMjc/fEys9gcbHhx2ZJwC9e/a6n1UuZmlk4qopThybQY02SUEo0NSHbwvTw7jJyw0qzEtDKC6fAX5wIySCD9R+PB4wR9jAHqIY/3ww9xTZYRu4YQUYxKcGswxxzKcpSm4/nGfRebi2gxztWnKo5fzcA0jTdbvflaTtlrqQvZrHTfYpr7/UIV8xszNOQA299MLIBL8gCMwgxKYCeN2L2AhEByfW0RQ7EjaNUA91bmvVKo64wMP3vNDQkggrDOKL/r4mMaYKvZu4NRDNcKG1l8zI2naMU2lvM/aFruRuC6MafGjv2Q/vvpcZFKDTo8YcFTsFRdIe632Mx+oUPpHrZw/mL1hbIM1Ggw==
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b2k1clozeWZKcllhYnUzVmxDNVdwL1VlcmtmVGZtYm5LaUFvQ3dZaHVNRnFQ?=
+ =?utf-8?B?Y1ZQYXVpTk8vMCtmcXA5b0VSdWRMbUROcFRtTzBrTmdscit4bzMxM2FqS1Jq?=
+ =?utf-8?B?TEJ4d242RzgzYzBkRjJ4bXkxb0VYWXE3a2ptUEVldHJLbkhpdHlyQVhaemph?=
+ =?utf-8?B?dis5QnhOYVVYMlFGeVZUOWRvbGRoOUIycTJnSVpCaS9rNmo0bG9nV0pGZXJM?=
+ =?utf-8?B?QmVEdjBsMnc5YndySDAzRDkrODkzMVpZMkd1NkEvTFhDVThvVHhLRVdkTUdX?=
+ =?utf-8?B?RWVORktjcTN6b09oTHFCWTR5WXJmaGk2amV5YWdGVmlBUzdwZXhtbSs2QlRq?=
+ =?utf-8?B?d2dNOHZhbXNoT0VLeTRvR2RtOWE0aFN0OHVtZW1pWlR1a0lhZXp1V05Iekh2?=
+ =?utf-8?B?aEptVXRKdXlNSnBDRk0xclNXTVFLUVBYc012dlI3TkZ5UVFIeWh6N3hsWHha?=
+ =?utf-8?B?YzVCRWhBVWwxSTRRbHdWODBwRHNrVElUZE5OZGU1T2ZRRlF4c29XWDZVQlJE?=
+ =?utf-8?B?dURDbTB2SXhkREpDVDc1N3hNZlErSWVpT0FqcE5KYnUxYTlyOVdWTlBIUjhU?=
+ =?utf-8?B?Z0s4V2htRFhFOWdCT3NVdEs2cmlZRThMdHRTY2lNVVhTaVpiL0NMSjVvNTVH?=
+ =?utf-8?B?YXkvRytubXZySG8yQktHNllBREFIdk9WK1Z0Y3R4MWgxdW5ZcFBReW9pOTdC?=
+ =?utf-8?B?QW9MVGFpdWZzemNMNC82L1pZT3VnalRZcEl2blZ2U0pEVzd1eVI3SG1mRXVU?=
+ =?utf-8?B?RWg3YjlhR2JtVmZzdDNNeXNGSGo3UGZXa29FT0J4aFU3dFRIRGVKdDc0NHhS?=
+ =?utf-8?B?K05RSDBTRWpKOEZkRGdBbUR6WTY0RHZyRlNjdHcxOVVyVWt6Qlh4UGd4SmlC?=
+ =?utf-8?B?b3BIcmZpTjRackZFS1I4Qk5jSVZ0ZDRwUFQ2MjNzRUhmVHgyRmoxTHlDSnV6?=
+ =?utf-8?B?NEJRMVlrR3FycVplcVRYcDRvZmRhcVJaYk9tNDJWaW9HY0tNUVpSdVVuSEh1?=
+ =?utf-8?B?V25PVnByb1Y2bXBCNDdFV0Q5SE1XTGxSdFRzbzBHVmlWbG9hSy95NGE4RFdK?=
+ =?utf-8?B?NGF4TStZR0pSeWI5eWhyRkZxOXcwWFFHMEhvM1pWaHRnZHRwRyt4RnZMSUJy?=
+ =?utf-8?B?VnMySUNuSU43eDIrNGMvNG00a0RLUHNDOURaSFV6RFF5VThnSTI2SDBKTkZa?=
+ =?utf-8?B?ZDZqVDQ1YWc1YWcxQlhoRzAwbzdVYm1Deld5bCtEczh2bzd6aWhPODduUDZ1?=
+ =?utf-8?B?dGNBakYwdGI5YW04R2pQdmlBM2tBVlV0VTAyaVNtUTVhQTVvTlNyeUNYTUN4?=
+ =?utf-8?B?K2tiNEFtciswdERlT1Z1dzVqVE5Eelc1dmtaSUtHVGJsQlRmeUx0Qk9zR0VZ?=
+ =?utf-8?B?b2pHempvSTNwQTY1aGpmUWpOS0hZR2cwdk5wVUdBZTFZTXNoQ3d5VFlwZ3hM?=
+ =?utf-8?B?SVcwZ000RHdDRjFZQ3JXUWxvb011TzNLUWVicDFsZlhsVFhEUkZ4T1pnNVRF?=
+ =?utf-8?B?U0hUKzg2dEdIb2hVeU1RVnVYOG13MlBKSExtSkdNVTBMWThYdUJRbDUvb3pi?=
+ =?utf-8?B?VkpjQmpCYVVPbmFxOTN1dnVLTGFPNWRyekczQjg2ZkdtcFZlZncxUjVYdFcz?=
+ =?utf-8?B?aXVscE15VGQ1b3VuOWlLdTBZbWh4KzQyVisxNW93TklVOVU5L0d0WjU1dTA3?=
+ =?utf-8?B?dGEzczY3Rk94NWVKRHY4bk81T2NBWEtzcVF4OWs5d1FkMkdUVEpIQ2xsKzlk?=
+ =?utf-8?B?VnkzRHoxVzh3TWdnTU5BU2dnRUt4SVdvRytveCttVFlqWWozNW1QdmJESHN5?=
+ =?utf-8?B?ZGtOR3JQN01YTnA4ODhSdDBzdlBTcGxPZU9tZVI0Zzh4NmY0TFd2dFEyWno3?=
+ =?utf-8?B?QnB3TjcvdEdubEVOTjhpTkNXVCtSZHRoVG4zVjIyVFJuQUtRajI2dEUrcG13?=
+ =?utf-8?B?MEhsWExjZTJZSG5OLzJWSCsvbitxTjJCQ3MyMmoxdWJjNDFmNGFma0FkUFg5?=
+ =?utf-8?B?eG9KVnJaUnhlVCttbHlzdmpnUTgvYTgweEd3eWFxd1lIdU9KeXIrWms5eUZZ?=
+ =?utf-8?B?UGpZWVpTUTZuQ3V3cHNnTUdZazFLZ3ZNQkdNNXV0SEQvd0FjU2VkZkdDWUov?=
+ =?utf-8?Q?8pTo=3D?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3e97f240-a9ef-4b0f-d910-08dadda4f52a
+X-MS-Exchange-CrossTenant-AuthSource: AM5PR04MB3073.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /iGfPdZqvFbDOL6iA6LkbYgmqVRF68XTzWdyJ/SEBYa8tNuZH00tH5Hp2jBrJ7tfvEUV78F/Nz39upcQryTN0A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB7028
+X-Warn: EHLO/HELO not verified: Remote host 40.107.20.68
+ (mail-db8eur05on2068.outbound.protection.outlook.com) incorrectly presented
+ itself as EUR05-DB8-obe.outbound.protection.outlook.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,47 +125,147 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: linux-cifs@vger.kernel.org, sprasad@microsoft.com,
- Abaci Robot <abaci@linux.alibaba.com>, Paulo Alcantara <pc@cjr.nz>,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- lsahlber@redhat.com, tom@talpey.com
+From: Tim Serong via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Tim Serong <tserong@suse.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Merged into cifs-2.6.git for-next
+Everything Open is a new open tech conference auspiced by Linux
+Australia.  For background see:
 
-On Tue, Dec 13, 2022 at 8:44 PM Yang Li <yang.lee@linux.alibaba.com> wrote:
+  https://everythingopen.au/news/introducing-everything-open/
 
-> ./fs/cifs/cifsglob.h: linux/scatterlist.h is included more than once.
->
-> Link: https://bugzilla.openanolis.cn/show_bug.cgi?id=3459
-> Fixes: f7f291e14dde ("cifs: fix oops during encryption")
-> Reported-by: Abaci Robot <abaci@linux.alibaba.com>
-> Signed-off-by: Yang Li <yang.lee@linux.alibaba.com>
-> ---
->  fs/cifs/cifsglob.h | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/fs/cifs/cifsglob.h b/fs/cifs/cifsglob.h
-> index 703685e2db5e..82f2d3070c26 100644
-> --- a/fs/cifs/cifsglob.h
-> +++ b/fs/cifs/cifsglob.h
-> @@ -23,7 +23,6 @@
->  #include "cifs_fs_sb.h"
->  #include "cifsacl.h"
->  #include <crypto/internal/hash.h>
-> -#include <linux/scatterlist.h>
->  #include <uapi/linux/cifs/cifs_mount.h>
->  #include "../smbfs_common/smb2pdu.h"
->  #include "smb2pdu.h"
-> --
-> 2.20.1.7.g153144c
->
->
+For the CFP and other details, read on...
 
--- 
-Thanks,
+-------- Forwarded Message --------
+Subject: [Announce] Everything Open, All At Once!
+Date: Tue, 13 Dec 2022 20:00:15 +1000
+From: Everything Open <contact@everythingopen.au>
+To: eo-announce@lists.linux.org.au, announce@lists.linux.org.au
 
-Steve
+The Everything Open 2023 organising team is excited to announce:
+
+* Call for Sessions
+* Call for Volunteers
+* Financial Assistance applications
+
+ARE NOW OPEN!!!
+
+----
+
+Wominjeka Everyone,
+
+Everything Open will run over three days - March 14-16, 2023 - in Naarm
+(Melbourne) at the Melbourne Convention and Exhibition Centre.
+We are excited to be opening our Call for Sessions to get another wide
+range of talks and tutorials in our schedule.
+We also need a team of volunteers to help us achieve success with this
+conference.
+
+
+## Call for Sessions
+
+We invite you to submit a session proposal on a topic you are familiar
+with via our proposals portal at
+https://2023.everythingopen.au/programme/proposals/.
+The Call for Sessions will remain open until 11:59 pm on Sunday 15
+January 2023 anywhere on earth (AoE).
+
+There will be multiple streams catering for a wide range of interest
+areas across the many facets of open technology, including Linux, open
+source software, open hardware, standards, formats and documentation,
+and our communities. In keeping with the conference's aim to be
+inclusive to all community members, presentations can be aimed at any
+level, ranging from technical deep-dives through to beginner and
+intermediate level presentations for those who are newer to the subject.
+Where possible, talks on a related subject will be arranged sequentially
+in the schedule.
+
+There will be two types of sessions at Everything Open: talks and
+tutorials. Talks will nominally be 45 minutes long on a single topic
+presented in lecture format. We will also have a few short talk slots
+(25 minutes) available, which are perfect for people new to presenting
+at a conference. Tutorials are interactive and hands-on in nature,
+presented in classroom format. Each accepted session will receive one
+Professional level ticket to attend the conference.
+
+The Session Selection Committee is looking forward to reading your
+submissions. We would also like to thank them for coming together and
+volunteering their time to help put this conference together.
+
+
+## Call for Volunteers
+
+We're calling on people to come forward and lend a hand again. If you've
+done it all before and just want to get on with signing up, all the
+details can be found at the volunteers page -
+https://2023.everythingopen.au/attend/volunteer/.
+
+If you're new to it all and want to help out, keep reading!
+
+We're all volunteers ourselves and we need more – we can't run the
+conference by ourselves, particularly during the week of the conference
+itself. We need help with:
+
+* Checking attendees in when they arrive
+* Operating AV equipment such as audio gear and cameras
+* Directing people around our venue
+* Ensuring talks and tutorials run to schedule
+* Setting up and packing up the conference
+
+Anyone who has volunteered for a Linux Australia event before will tell
+you it's a very busy time, but also very worthwhile. It's satisfying to
+know that you've helped everyone at the conference to get the most out
+of it. It's very rewarding knowing that you've made a positive
+difference to someone's day.
+
+You don't just get to meet the delegates and speakers, you also get to
+know many of them while helping them out. You are presented with a
+unique opportunity to get the behind the scenes and close to the action.
+You'll get to forge new relationships with amazing, interesting and
+wonderful people (just like you), whom you might not have otherwise had
+the good fortune to meet in any other way.
+
+In return for your help we'll provide you with:
+* Food - morning tea, lunch and afternoon tea
+* A clean T shirt everyday
+* If you want one, a letter of reference at the end of the conference
+
+Depending on the number of volunteers we get and workload (many hands
+make light work), we'll do our best to allocate you to roles so that you
+can attend talks that interest you.
+
+For more information, please check out our volunteers page at
+https://2023.everythingopen.au/attend/volunteer/, where we have full
+details of what we need assistance with.
+We review and approve applications regularly.
+
+
+## Financial Assistance
+
+We have budget set aside for providing financial assistance to
+Everything Open attendees who might otherwise find it difficult to
+attend. This program is a key part of our outreach and inclusion efforts
+for Everything Open.
+
+Anyone can apply for financial assistance for Everything Open 2023. The
+assistance can cover things such as a ticket to the conference, travel,
+accommodation, or other costs that you would incur to attend. We will be
+processing applications on a regular basis until funds are exhausted, so
+we encourage you to apply early for a greater chance of being accepted.
+
+Full details about the program and the application form can be found in
+our Financial Assistance guide at
+https://2023.everythingopen.au/attend/assistance/.
+
+If you have any other questions you can contact us via email at
+contact@everythingopen.au.
+
+
+_______________________________________________
+announce mailing list
+announce@lists.linux.org.au
+http://lists.linux.org.au/mailman/listinfo/announce
+
+----- End forwarded message -----
+
