@@ -2,48 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2715564DEF9
-	for <lists+samba-technical@lfdr.de>; Thu, 15 Dec 2022 17:49:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 59AC564DFAE
+	for <lists+samba-technical@lfdr.de>; Thu, 15 Dec 2022 18:32:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=jZGX/zJfFNKY/tC4SE/cZ7x9XlT82IhoDIPQ2uhFUYc=; b=Vhy5RYo3XTm5q/6tu76fVNLFPv
-	w00VDNVul5dgVnovd22CUSmjM67oOUFxEvjGL6uJwML9c0d9yIyeQtv7ip5fyy33v2XrZ1519puR/
-	6DK01tGARahT+/zTaZ2lYrj0FTZrwzquQKJdSzSN/gV4GjKxrg2PX0IET+G/DyfX8HxGmviBQ89Ju
-	NjpxQtTwUTYiw3HwgrR0yfU0936/8fJ9NkwIA6UNLqYSeH4QgQHFI73bWrakwjSF7lI2dIEn1mRKx
-	jCuTj6Yj8TWiNIsPDz6FTg4zRstyAPvyw2WDgkkdARQwp8hP/XL4w84PCu7jQLZGrQFyYjipUHooZ
-	ngYgaukQ==;
-Received: from ip6-localhost ([::1]:52724 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=yx+/4Hono+gqlnuQrIQ/6Fb0USNjpDrLnYIxc0VJ2I8=; b=0K6d0L4l99v1sD9toqU5/3JUv/
+	+EXwwxjsXQfEKKbTLeiuEXCAr3xHTz0ClkI21k5s5rQyWl4cJR97x2FUQfkpEyD8VPKnwhKSrWeAK
+	LyuOp7JduJrIH2+1AWAEdeVYLKLJsbXZ5xK/94MpTFamHS+cBrbxXAs2n18wCcFMSRrY1Kgy9kH3T
+	WmsIQeuB3HgSp8sbYTagku+iv6LBhSmg/8dIwVjGc7H430y2gTycCfxCM9vubYgvk+lBqg3BQ3rHm
+	uAREPZOoOA8wvtgWSM2OPTS9PE87lQDl5twmYI0K4ebSnLqsU7kMLgGiB4sNLhEajAlLXQnnV1KOI
+	s2FjHpYg==;
+Received: from ip6-localhost ([::1]:29202 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1p5rQ8-009VOy-H1; Thu, 15 Dec 2022 16:49:20 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36910) 
+	id 1p5s5M-009XLS-1G; Thu, 15 Dec 2022 17:31:56 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23940) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1p5rPy-009VO2-6v; Thu, 15 Dec 2022 16:49:12 +0000
+ (Exim) id 1p5s5C-009XKu-KT; Thu, 15 Dec 2022 17:31:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=jZGX/zJfFNKY/tC4SE/cZ7x9XlT82IhoDIPQ2uhFUYc=; b=XWo36Wf/icEkz+hRbFL3Z2jVFI
- JzdJOdXewNCW1wUm22eEOCn+Q7U384PtnMryHrDg7bNCquNcKjbCOj7cE6/8lImMElFI+kQQisYGJ
- dWjBdWbTy+U0DNl+zQO4ypJFO36IoH4ZAY/mjtNuOCxD6dm9jxoievF3rSmlUnDIGF0i3BFpzmREx
- nvtwYgLgAQNf1T3r67SDGWHuwxrt8ttNOG43F++KKdut/kIMXBxkGq3cj61zjVxeiG7Tqwi36I4Fx
- VurLaXkw0CQ/UbkyCc7I3Vn8DtsbWmq20CM3QkuTg/4RvqqEI7FAzoMkX3Rf7xQkG/bPlvOIQ28BN
- OVfKy/wVAVUeQglblfZcQdRsRDhNub4e9q5o2ezLUmk/H4IuFFdLQ9L/Ivvs5gPmG/5RV/POId7/G
- jPF0snfCj+icJynBGHrM1iL16+ygwVQMu8UGFqy5EGeq8Osv0W+HS0OCgaNU8BOUSyrsm3kWU6/kQ
- 7Duq9DNBkaFBEztf4SZlgW4x;
+ bh=yx+/4Hono+gqlnuQrIQ/6Fb0USNjpDrLnYIxc0VJ2I8=; b=Wm16nmyAs0roYGU3SJQkunZNW/
+ kyOGDBNig8s4u6KtX2NOC/hwJ3hlm4HCHLrRivysr0fpL8S7ukJNnmqLAwyCJe5t1IZVvgp8XRnmZ
+ qRnFJiuYiuhbmcppSDwwKGfhKu2ZCvmoZw/6iBa2V9Vl6EySHxlneDtLGUD+H0mzQtKxSAQqWbobc
+ v/L4V+Hj8yZMqeqz/SEc2cSTT6SxefE/e/91C0D7xfpjXT/M8Fi9E/wx71nPUAVUsc/Qc4myERLb7
+ JXdqwn2rzyafWGvWX1JCnbQDNZn3xpbFM9wQ1bBd5RMe6Idd0JWJ8NskZAaI3nsZYbcBdggdSMxUO
+ w/TtlAkZ6NeYfdLWhLPK6asqKtBAaHxEggeNACkGAOHM1YmW3yjzOgpf/Wqswk8MmEifFKUoj3zcz
+ U9+6EX0gp/ENyPGMQs1Y4RMFHY7J3iq8jtjPVtw4a9FKr3KcXcf40yiAZ9mGJIcRQVmaKt1MRCWgU
+ 3a6CtnrBD7/fMTbd3mixpBOV;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1p5rPx-0045Gc-LU; Thu, 15 Dec 2022 16:49:09 +0000
-Message-ID: <fff8f470-f67f-a92b-8f38-d1adb0b9e5dc@samba.org>
-Date: Thu, 15 Dec 2022 17:49:08 +0100
+ (Exim) id 1p5s59-0045Up-St; Thu, 15 Dec 2022 17:31:44 +0000
+Message-ID: <50c413cf-d514-2483-8ae9-edc8bb8bb49f@samba.org>
+Date: Thu, 15 Dec 2022 18:31:43 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Content-Language: de-DE
-To: samba-announce@lists.samba.org, samba@lists.samba.org,
- samba-technical@lists.samba.org
-Subject: [Announce] Samba 4.17.4, 4.16.8 and 4.15.13 Security Releases are
- available for Download
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ Thunderbird/102.4.1
+Subject: Re: [Samba] [Announce] Samba 4.17.4, 4.16.8 and 4.15.13 Security
+ Releases are available for Download
+Content-Language: en-US
+To: samba@lists.samba.org, samba-technical@lists.samba.org
+References: <fff8f470-f67f-a92b-8f38-d1adb0b9e5dc@samba.org>
+In-Reply-To: <fff8f470-f67f-a92b-8f38-d1adb0b9e5dc@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------PWG3ORcZcDF2A08rHK4E9OSz"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,168 +59,184 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jule Anger <janger@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Release Announcements
----------------------
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------PWG3ORcZcDF2A08rHK4E9OSz
+Content-Type: multipart/mixed; boundary="------------6iqhkzbx9RjeyyIxhm0ZA9FI";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: samba@lists.samba.org, samba-technical@lists.samba.org
+Message-ID: <50c413cf-d514-2483-8ae9-edc8bb8bb49f@samba.org>
+Subject: Re: [Samba] [Announce] Samba 4.17.4, 4.16.8 and 4.15.13 Security
+ Releases are available for Download
+References: <fff8f470-f67f-a92b-8f38-d1adb0b9e5dc@samba.org>
+In-Reply-To: <fff8f470-f67f-a92b-8f38-d1adb0b9e5dc@samba.org>
 
-This are security releases in order to address the following defects:
+--------------6iqhkzbx9RjeyyIxhm0ZA9FI
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+V29vaG9vLCBmaW5hbGx5ISA6KQ0KDQpUaGFua3MgZXZlcnlvbmUgd2hvIGhhcyBiZWVuIGlu
+dm9sdmVkIGluIHRoaXMgc2VjdXJpdHkgcmVsZWFzZSwgZWl0aGVyIA0KaW4gcmVzZWFyY2gs
+IGNvZGluZywgdGVzdGluZywgZG9jdW1lbnRhdGlvbiBvciBnZXR0aW5nIGl0IG91dCB0aGUg
+ZG9vciENCg0KRXNwZWNpYWxseSBBbmRyZXcsIEpvc2VwaCBhbmQgbWV0emUhDQoNClRoYW5r
+cyEhDQotc2xvdw0KDQotLSANClJhbHBoIEJvZWhtZSwgU2FtYmEgVGVhbSAgICAgICAgICAg
+ICAgICAgaHR0cHM6Ly9zYW1iYS5vcmcvDQpTZXJOZXQgU2FtYmEgVGVhbSBMZWFkICAgICAg
+aHR0cHM6Ly9zZXJuZXQuZGUvZW4vdGVhbS1zYW1iYQ0KDQpPbiAxMi8xNS8yMiAxNzo0OSwg
+SnVsZSBBbmdlciB2aWEgc2FtYmEgd3JvdGU6DQo+IFJlbGVhc2UgQW5ub3VuY2VtZW50cw0K
+PiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gDQo+IFRoaXMgYXJlIHNlY3VyaXR5IHJlbGVh
+c2VzIGluIG9yZGVyIHRvIGFkZHJlc3MgdGhlIGZvbGxvd2luZyBkZWZlY3RzOg0KPiANCj4g
+DQo+IG8gQ1ZFLTIwMjItMzc5NjY6IFRoaXMgaXMgdGhlIFNhbWJhIENWRSBmb3IgdGhlIFdp
+bmRvd3MgS2VyYmVyb3MNCj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+UkM0LUhNQUMgRWxldmF0aW9uIG9mIFByaXZpbGVnZSBWdWxuZXJhYmlsaXR5DQo+ICDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGRpc2Nsb3NlZCBieSBNaWNyb3NvZnQg
+b24gTm92IDggMjAyMi4NCj4gDQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIEEgU2FtYmEgQWN0aXZlIERpcmVjdG9yeSBEQyB3aWxsIGlzc3VlIHdlYWsgcmM0LWht
+YWMNCj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc2Vzc2lvbiBrZXlz
+IGZvciB1c2UgYmV0d2VlbiBtb2Rlcm4gY2xpZW50cyBhbmQgc2VydmVycw0KPiAgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBkZXNwaXRlIGFsbCBtb2Rlcm4gS2VyYmVy
+b3MgaW1wbGVtZW50YXRpb25zIHN1cHBvcnRpbmcNCj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgdGhlIGFlczI1Ni1jdHMtaG1hYy1zaGExLTk2IGNpcGhlci4NCj4g
+DQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIE9uIFNhbWJhIEFjdGl2
+ZSBEaXJlY3RvcnkgRENzIGFuZCBtZW1iZXJzDQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgICdrZXJiZXJvcyBlbmNyeXB0aW9uIHR5cGVzID0gbGVnYWN5JyB3b3Vs
+ZCBmb3JjZQ0KPiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByYzQtaG1h
+YyBhcyBhIGNsaWVudCBldmVuIGlmIHRoZSBzZXJ2ZXIgc3VwcG9ydHMNCj4gIMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYWVzMTI4LWN0cy1obWFjLXNoYTEtOTYgYW5k
+L29yIGFlczI1Ni1jdHMtaG1hYy1zaGExLTk2Lg0KPiANCj4gaHR0cHM6Ly93d3cuc2FtYmEu
+b3JnL3NhbWJhL3NlY3VyaXR5L0NWRS0yMDIyLTM3OTY2Lmh0bWwNCj4gDQo+IG8gQ1ZFLTIw
+MjItMzc5Njc6IFRoaXMgaXMgdGhlIFNhbWJhIENWRSBmb3IgdGhlIFdpbmRvd3MNCj4gIMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgS2VyYmVyb3MgRWxldmF0aW9uIG9m
+IFByaXZpbGVnZSBWdWxuZXJhYmlsaXR5DQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIGRpc2Nsb3NlZCBieSBNaWNyb3NvZnQgb24gTm92IDggMjAyMi4NCj4gDQo+
+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIEEgc2VydmljZSBhY2NvdW50
+IHdpdGggdGhlIHNwZWNpYWwgY29uc3RyYWluZWQNCj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgZGVsZWdhdGlvbiBwZXJtaXNzaW9uIGNvdWxkIGZvcmdlIGEgbW9y
+ZSBwb3dlcmZ1bA0KPiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB0aWNr
+ZXQgdGhhbiB0aGUgb25lIGl0IHdhcyBwcmVzZW50ZWQgd2l0aC4NCj4gDQo+IGh0dHBzOi8v
+d3d3LnNhbWJhLm9yZy9zYW1iYS9zZWN1cml0eS9DVkUtMjAyMi0zNzk2Ny5odG1sDQo+IA0K
+PiBvIENWRS0yMDIyLTM4MDIzOiBUaGUgIlJDNCIgcHJvdGVjdGlvbiBvZiB0aGUgTmV0TG9n
+b24gU2VjdXJlIGNoYW5uZWwgDQo+IHVzZXMgdGhlDQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIHNhbWUgYWxnb3JpdGhtcyBhcyByYzQtaG1hYyBjcnlwdG9ncmFw
+aHkgaW4gS2VyYmVyb3MsDQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IGFuZCBzbyBtdXN0IGFsc28gYmUgYXNzdW1lZCB0byBiZSB3ZWFrLg0KPiANCj4gaHR0cHM6
+Ly93d3cuc2FtYmEub3JnL3NhbWJhL3NlY3VyaXR5L0NWRS0yMDIyLTM4MDIzLmh0bWwNCj4g
+DQo+IG8gQ1ZFLTIwMjItNDUxNDE6IFNpbmNlIHRoZSBXaW5kb3dzIEtlcmJlcm9zIFJDNC1I
+TUFDIEVsZXZhdGlvbiBvZiANCj4gUHJpdmlsZWdlDQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIFZ1bG5lcmFiaWxpdHkgd2FzIGRpc2Nsb3NlZCBieSBNaWNyb3Nv
+ZnQgb24gTm92IDggMjAyMg0KPiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBhbmQgcGVyIFJGQzg0MjkgaXQgaXMgYXNzdW1lZCB0aGF0IHJjNC1obWFjIGlzIHdlYWss
+DQo+IA0KPiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBWdWxuZXJhYmxl
+IFNhbWJhIEFjdGl2ZSBEaXJlY3RvcnkgRENzIHdpbGwgaXNzdWUgDQo+IHJjNC1obWFjDQo+
+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGVuY3J5cHRlZCB0aWNrZXRz
+IGRlc3BpdGUgdGhlIHRhcmdldCBzZXJ2ZXIgc3VwcG9ydGluZw0KPiAgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBiZXR0ZXIgZW5jcnlwdGlvbiAoZWcgYWVzMjU2LWN0
+cy1obWFjLXNoYTEtOTYpLg0KPiANCj4gaHR0cHM6Ly93d3cuc2FtYmEub3JnL3NhbWJhL3Nl
+Y3VyaXR5L0NWRS0yMDIyLTQ1MTQxLmh0bWwNCj4gDQo+IENoYW5nZXMNCj4gLS0tLS0tLQ0K
+PiANCj4gb8KgIEplcmVteSBBbGxpc29uIDxqcmFAc2FtYmEub3JnPg0KPiAgwqDCoCAqIEJV
+RyAxNTIyNDogcGFtX3dpbmJpbmQgdXNlcyB0aW1lX3QgYW5kIHBvaW50ZXJzIGFzc3VtaW5n
+IHRoZXkgYXJlIA0KPiBvZiB0aGUNCj4gIMKgwqDCoMKgIHNhbWUgc2l6ZS4NCj4gDQo+IG/C
+oCBBbmRyZXcgQmFydGxldHQgPGFiYXJ0bGV0QHNhbWJhLm9yZz4NCj4gIMKgwqAgKiBCVUcg
+MTQ5Mjk6IENWRS0yMDIyLTQ0NjQwIFtTRUNVUklUWV0gVXBzdHJlYW0gSGVpbWRhbCBmcmVl
+IG9mDQo+ICDCoMKgwqDCoCB1c2VyLWNvbnRyb2xsZWQgcG9pbnRlciBpbiBGQVNULg0KPiAg
+wqDCoCAqIEJVRyAxNTIxOTogSGVpbWRhbCBzZXNzaW9uIGtleSBzZWxlY3Rpb24gaW4gQVMt
+UkVRIGV4YW1pbmVzIHdyb25nIA0KPiBlbnRyeS4NCj4gIMKgwqAgKiBCVUcgMTUyMzc6IENW
+RS0yMDIyLTM3OTY2Lg0KPiAgwqDCoCAqIEJVRyAxNTI1ODogZmlsdGVyLXN1YnVuaXQgaXMg
+aW5lZmZpY2llbnQgd2l0aCBsYXJnZSBudW1iZXJzIG9mIA0KPiBrbm93bmZhaWxzLg0KPiAN
+Cj4gb8KgIFJhbHBoIEJvZWhtZSA8c2xvd0BzYW1iYS5vcmc+DQo+ICDCoMKgICogQlVHIDE1
+MjQwOiBDVkUtMjAyMi0zODAyMy4NCj4gIMKgwqAgKiBCVUcgMTUyNTI6IHNtYmQgYWxsb3dz
+IHNldHRpbmcgRklMRV9BVFRSSUJVVEVfVEVNUE9SQVJZIG9uIA0KPiBkaXJlY3Rvcmllcy4N
+Cj4gDQo+IG/CoCBTdGVmYW4gTWV0em1hY2hlciA8bWV0emVAc2FtYmEub3JnPg0KPiAgwqDC
+oCAqIEJVRyAxMzEzNTogVGhlIEtEQyBsb2dpYyBhcnJvdW5kIG1zRHMtc3VwcG9ydGVkRW5j
+cnlwdGlvblR5cGVzIA0KPiBkaWZmZXJzIGZyb20NCj4gIMKgwqDCoMKgIFdpbmRvd3MuDQo+
+ICDCoMKgICogQlVHIDE0NjExOiBDVkUtMjAyMS0yMDI1MSBbU0VDVVJJVFldIEJhZCBwYXNz
+d29yZCBjb3VudCBub3QgDQo+IGluY3JlbWVudGVkDQo+ICDCoMKgwqDCoCBhdG9taWNhbGx5
+Lg0KPiAgwqDCoCAqIEJVRyAxNTIwMzogQ1ZFLTIwMjItNDI4OTggW1NFQ1VSSVRZXSBrcmI1
+X3BhY19wYXJzZSgpIGJ1ZmZlciBwYXJzaW5nDQo+ICDCoMKgwqDCoCB2dWxuZXJhYmlsaXR5
+Lg0KPiAgwqDCoCAqIEJVRyAxNTIwNjogbGlibmV0OiBjaGFuZ2VfcGFzc3dvcmQoKSBkb2Vz
+bid0IHdvcmsgd2l0aA0KPiAgwqDCoMKgwqAgZGNlcnBjX3NhbXJfQ2hhbmdlUGFzc3dvcmRV
+c2VyNCgpLg0KPiAgwqDCoCAqIEJVRyAxNTIxOTogSGVpbWRhbCBzZXNzaW9uIGtleSBzZWxl
+Y3Rpb24gaW4gQVMtUkVRIGV4YW1pbmVzIHdyb25nIA0KPiBlbnRyeS4NCj4gIMKgwqAgKiBC
+VUcgMTUyMzA6IE1lbW9yeSBsZWFrIGluIHNucHJpbnRmIHJlcGxhY2VtZW50IGZ1bmN0aW9u
+cy4NCj4gIMKgwqAgKiBCVUcgMTUyMzc6IENWRS0yMDIyLTM3OTY2Lg0KPiAgwqDCoCAqIEJV
+RyAxNTI0MDogQ1ZFLTIwMjItMzgwMjMuDQo+ICDCoMKgICogQlVHIDE1MjUzOiBST0RDIGRv
+ZXNuJ3QgcmVzZXQgYmFkUHdkQ291bnQgcmVsaWFibGUgdmlhIGFuIFJXREMNCj4gIMKgwqDC
+oMKgIChDVkUtMjAyMS0yMDI1MSByZWdyZXNzaW9uKS4NCj4gDQo+IG/CoCBOb2VsIFBvd2Vy
+IDxub2VsLnBvd2VyQHN1c2UuY29tPg0KPiAgwqDCoCAqIEJVRyAxNTIyNDogcGFtX3dpbmJp
+bmQgdXNlcyB0aW1lX3QgYW5kIHBvaW50ZXJzIGFzc3VtaW5nIHRoZXkgYXJlIA0KPiBvZiB0
+aGUNCj4gIMKgwqDCoMKgIHNhbWUgc2l6ZS4NCj4gDQo+IG/CoCBBbm9vcCBDIFMgPGFub29w
+Y3NAc2FtYmEub3JnPg0KPiAgwqDCoCAqIEJVRyAxNTE5ODogUHJldmVudCBFQkFERiBlcnJv
+cnMgd2l0aCB2ZnNfZ2x1c3RlcmZzLg0KPiANCj4gb8KgIEFuZHJlYXMgU2NobmVpZGVyIDxh
+c25Ac2FtYmEub3JnPg0KPiAgwqDCoCAqIEJVRyAxNTIzNzogQ1ZFLTIwMjItMzc5NjYuDQo+
+ICDCoMKgICogQlVHIDE1MjQzOiAlVSBmb3IgaW5jbHVkZSBkaXJlY3RpdmUgZG9lc24ndCB3
+b3JrIGZvciBzaGFyZSBsaXN0aW5nDQo+ICDCoMKgwqDCoCAobmV0c2hhcmVlbnVtKS4NCj4g
+IMKgwqAgKiBCVUcgMTUyNTc6IFN0YWNrIHNtYXNoaW5nIGluIG5ldCBvZmZsaW5lam9pbiBy
+ZXF1ZXN0b2RqLg0KPiANCj4gb8KgIEpvc2VwaCBTdXR0b24gPGpvc2VwaHN1dHRvbkBjYXRh
+bHlzdC5uZXQubno+DQo+ICDCoMKgICogQlVHIDE1MTk3OiBXaW5kb3dzIDExIDIySDIgYW5k
+IFNhbWJhLUFEIDQuMTUgS2VyYmVyb3MgbG9naW4gaXNzdWUuDQo+ICDCoMKgICogQlVHIDE1
+MjE5OiBIZWltZGFsIHNlc3Npb24ga2V5IHNlbGVjdGlvbiBpbiBBUy1SRVEgZXhhbWluZXMg
+d3JvbmcgDQo+IGVudHJ5Lg0KPiAgwqDCoCAqIEJVRyAxNTIzMTogQ1ZFLTIwMjItMzc5Njcu
+DQo+ICDCoMKgICogQlVHIDE1MjM3OiBDVkUtMjAyMi0zNzk2Ni4NCj4gDQo+IG/CoCBOaWNv
+bGFzIFdpbGxpYW1zIDxuaWNvQHR3b3NpZ21hLmNvbT4NCj4gIMKgwqAgKiBCVUcgMTQ5Mjk6
+IENWRS0yMDIyLTQ0NjQwIFtTRUNVUklUWV0gVXBzdHJlYW0gSGVpbWRhbCBmcmVlIG9mDQo+
+ICDCoMKgwqDCoCB1c2VyLWNvbnRyb2xsZWQgcG9pbnRlciBpbiBGQVNULg0KPiANCj4gDQo+
+ICMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIw0KPiBSZXBvcnRpbmcg
+YnVncyAmIERldmVsb3BtZW50IERpc2N1c3Npb24NCj4gIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjDQo+IA0KPiBQbGVhc2UgZGlzY3VzcyB0aGlzIHJlbGVhc2Ug
+b24gdGhlIHNhbWJhLXRlY2huaWNhbCBtYWlsaW5nIGxpc3Qgb3IgYnkNCj4gam9pbmluZyB0
+aGUgI3NhbWJhLXRlY2huaWNhbCBJUkMgY2hhbm5lbCBvbiBpcmMubGliZXJhLmNoYXQgb3Ig
+dGhlDQo+ICNzYW1iYS10ZWNobmljYWw6bWF0cml4Lm9yZyBtYXRyaXggY2hhbm5lbC4NCj4g
+DQo+IElmIHlvdSBkbyByZXBvcnQgcHJvYmxlbXMgdGhlbiBwbGVhc2UgdHJ5IHRvIHNlbmQg
+aGlnaCBxdWFsaXR5DQo+IGZlZWRiYWNrLiBJZiB5b3UgZG9uJ3QgcHJvdmlkZSB2aXRhbCBp
+bmZvcm1hdGlvbiB0byBoZWxwIHVzIHRyYWNrIGRvd24NCj4gdGhlIHByb2JsZW0gdGhlbiB5
+b3Ugd2lsbCBwcm9iYWJseSBiZSBpZ25vcmVkLsKgIEFsbCBidWcgcmVwb3J0cyBzaG91bGQN
+Cj4gYmUgZmlsZWQgdW5kZXIgdGhlIFNhbWJhIDQuMSBhbmQgbmV3ZXIgcHJvZHVjdCBpbiB0
+aGUgcHJvamVjdCdzIEJ1Z3ppbGxhDQo+IGRhdGFiYXNlIChodHRwczovL2J1Z3ppbGxhLnNh
+bWJhLm9yZy8pLg0KPiANCj4gDQo+ID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCj4gPT0gT3VyIENvZGUs
+IE91ciBCdWdzLCBPdXIgUmVzcG9uc2liaWxpdHkuDQo+ID09IFRoZSBTYW1iYSBUZWFtDQo+
+ID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT0NCj4gDQo+IA0KPiANCj4gPT09PT09PT09PT09PT09PQ0KPiBE
+b3dubG9hZCBEZXRhaWxzDQo+ID09PT09PT09PT09PT09PT0NCj4gDQo+IFRoZSB1bmNvbXBy
+ZXNzZWQgdGFyYmFsbHMgYW5kIHBhdGNoIGZpbGVzIGhhdmUgYmVlbiBzaWduZWQNCj4gdXNp
+bmcgR251UEcgKElEIEFBOTk0NDJGQjY4MEI2MjApLsKgIFRoZSBzb3VyY2UgY29kZSBjYW4g
+YmUgZG93bmxvYWRlZA0KPiBmcm9tOg0KPiANCj4gaHR0cHM6Ly9kb3dubG9hZC5zYW1iYS5v
+cmcvcHViL3NhbWJhL3N0YWJsZS8NCj4gDQo+IFRoZSByZWxlYXNlIG5vdGVzIGFyZSBhdmFp
+bGFibGUgb25saW5lIGF0Og0KPiANCj4gaHR0cHM6Ly93d3cuc2FtYmEub3JnL3NhbWJhL2hp
+c3Rvcnkvc2FtYmEtNC4xNy40Lmh0bWwNCj4gaHR0cHM6Ly93d3cuc2FtYmEub3JnL3NhbWJh
+L2hpc3Rvcnkvc2FtYmEtNC4xNi44Lmh0bWwNCj4gaHR0cHM6Ly93d3cuc2FtYmEub3JnL3Nh
+bWJhL2hpc3Rvcnkvc2FtYmEtNC4xNS4xMy5odG1sDQo+IA0KPiBPdXIgQ29kZSwgT3VyIEJ1
+Z3MsIE91ciBSZXNwb25zaWJpbGl0eS4NCj4gKGh0dHBzOi8vYnVnemlsbGEuc2FtYmEub3Jn
+LykNCj4gDQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIC0tRW5qb3kNCj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgVGhlIFNhbWJhIFRlYW0NCj4gDQo=
 
-o CVE-2022-37966: This is the Samba CVE for the Windows Kerberos
-                   RC4-HMAC Elevation of Privilege Vulnerability
-                   disclosed by Microsoft on Nov 8 2022.
+--------------6iqhkzbx9RjeyyIxhm0ZA9FI--
 
-                   A Samba Active Directory DC will issue weak rc4-hmac
-                   session keys for use between modern clients and servers
-                   despite all modern Kerberos implementations supporting
-                   the aes256-cts-hmac-sha1-96 cipher.
+--------------PWG3ORcZcDF2A08rHK4E9OSz
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-                   On Samba Active Directory DCs and members
-                   'kerberos encryption types = legacy' would force
-                   rc4-hmac as a client even if the server supports
-                   aes128-cts-hmac-sha1-96 and/or aes256-cts-hmac-sha1-96.
+-----BEGIN PGP SIGNATURE-----
 
-https://www.samba.org/samba/security/CVE-2022-37966.html
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmObWf8FAwAAAAAACgkQqh6bcSY5nkZG
+Uw/8C+qE+AT0tRw2FlzdS5KVVEamNx2kko5fuEZz1NqGGGcDumThoUQ+q0Hkvgc7qnJ9tsqD6pym
+WnXIHzmxqiuMj/MTQiqxRwClbCNyTK3fZQeLkRnz/EIyR0IuCxbG2Cddl/FhLQpFXQ0P8pjF/AMx
+8ESlq/NYYqNM66r+2ng0K34+FAH01BIRea4i/cZf83OBNe9KacAvB2gZ3Wyvt7ScpSpzb0z88/Dv
+tW8Z/Ci5o77ZARfp32UA0v+9J8MAm4dNpEYj7T42OGa6SqLgnQJvIHEKTvFXMR3iqjtB7FvYlGUM
+J3RUsq8NXne7UsPgfKp0m1OdgYcZdL9wO8ErhO+Qt9UWaqzwU53q9PZ7K1j59wi7KgatUUQru6bT
+kSWF1aplWXE6cy1vziAtFtnGfJGWkdo0HVTe01m70xaaEp7YR370h5eae40mGbAB5Kuj1Q9RH5ej
+5/V3XoazllKYgwNy8OOxldlF08TtJ7d3UyxVzWZdRZOMUaD/anf4AvTYE+xcQiNkuRvG1+rzFV/v
+e0+qy7xh1eVCtrqc7/ubVLH1KF/gEIV7yUAi5Y6Rwp3/jzuSQz8p8P9Y26nc5sx5JyIG2aqwXTSN
+PrFvIVylL8EftUejkwpqcE9LXDpchTpbBA+qTh75DTKQJF+QIaf2xCWXcANmgcJzRV19V9qioWhg
+QHE=
+=rKCG
+-----END PGP SIGNATURE-----
 
-o CVE-2022-37967: This is the Samba CVE for the Windows
-                   Kerberos Elevation of Privilege Vulnerability
-                   disclosed by Microsoft on Nov 8 2022.
-
-                   A service account with the special constrained
-                   delegation permission could forge a more powerful
-                   ticket than the one it was presented with.
-
-https://www.samba.org/samba/security/CVE-2022-37967.html
-
-o CVE-2022-38023: The "RC4" protection of the NetLogon Secure channel 
-uses the
-                   same algorithms as rc4-hmac cryptography in Kerberos,
-                   and so must also be assumed to be weak.
-
-https://www.samba.org/samba/security/CVE-2022-38023.html
-
-o CVE-2022-45141: Since the Windows Kerberos RC4-HMAC Elevation of Privilege
-                   Vulnerability was disclosed by Microsoft on Nov 8 2022
-                   and per RFC8429 it is assumed that rc4-hmac is weak,
-
-                   Vulnerable Samba Active Directory DCs will issue rc4-hmac
-                   encrypted tickets despite the target server supporting
-                   better encryption (eg aes256-cts-hmac-sha1-96).
-
-https://www.samba.org/samba/security/CVE-2022-45141.html
-
-Changes
--------
-
-o  Jeremy Allison <jra@samba.org>
-    * BUG 15224: pam_winbind uses time_t and pointers assuming they are 
-of the
-      same size.
-
-o  Andrew Bartlett <abartlet@samba.org>
-    * BUG 14929: CVE-2022-44640 [SECURITY] Upstream Heimdal free of
-      user-controlled pointer in FAST.
-    * BUG 15219: Heimdal session key selection in AS-REQ examines wrong 
-entry.
-    * BUG 15237: CVE-2022-37966.
-    * BUG 15258: filter-subunit is inefficient with large numbers of 
-knownfails.
-
-o  Ralph Boehme <slow@samba.org>
-    * BUG 15240: CVE-2022-38023.
-    * BUG 15252: smbd allows setting FILE_ATTRIBUTE_TEMPORARY on 
-directories.
-
-o  Stefan Metzmacher <metze@samba.org>
-    * BUG 13135: The KDC logic arround msDs-supportedEncryptionTypes 
-differs from
-      Windows.
-    * BUG 14611: CVE-2021-20251 [SECURITY] Bad password count not 
-incremented
-      atomically.
-    * BUG 15203: CVE-2022-42898 [SECURITY] krb5_pac_parse() buffer parsing
-      vulnerability.
-    * BUG 15206: libnet: change_password() doesn't work with
-      dcerpc_samr_ChangePasswordUser4().
-    * BUG 15219: Heimdal session key selection in AS-REQ examines wrong 
-entry.
-    * BUG 15230: Memory leak in snprintf replacement functions.
-    * BUG 15237: CVE-2022-37966.
-    * BUG 15240: CVE-2022-38023.
-    * BUG 15253: RODC doesn't reset badPwdCount reliable via an RWDC
-      (CVE-2021-20251 regression).
-
-o  Noel Power <noel.power@suse.com>
-    * BUG 15224: pam_winbind uses time_t and pointers assuming they are 
-of the
-      same size.
-
-o  Anoop C S <anoopcs@samba.org>
-    * BUG 15198: Prevent EBADF errors with vfs_glusterfs.
-
-o  Andreas Schneider <asn@samba.org>
-    * BUG 15237: CVE-2022-37966.
-    * BUG 15243: %U for include directive doesn't work for share listing
-      (netshareenum).
-    * BUG 15257: Stack smashing in net offlinejoin requestodj.
-
-o  Joseph Sutton <josephsutton@catalyst.net.nz>
-    * BUG 15197: Windows 11 22H2 and Samba-AD 4.15 Kerberos login issue.
-    * BUG 15219: Heimdal session key selection in AS-REQ examines wrong 
-entry.
-    * BUG 15231: CVE-2022-37967.
-    * BUG 15237: CVE-2022-37966.
-
-o  Nicolas Williams <nico@twosigma.com>
-    * BUG 14929: CVE-2022-44640 [SECURITY] Upstream Heimdal free of
-      user-controlled pointer in FAST.
-
-
-#######################################
-Reporting bugs & Development Discussion
-#######################################
-
-Please discuss this release on the samba-technical mailing list or by
-joining the #samba-technical IRC channel on irc.libera.chat or the
-#samba-technical:matrix.org matrix channel.
-
-If you do report problems then please try to send high quality
-feedback. If you don't provide vital information to help us track down
-the problem then you will probably be ignored.  All bug reports should
-be filed under the Samba 4.1 and newer product in the project's Bugzilla
-database (https://bugzilla.samba.org/).
-
-
-======================================================================
-== Our Code, Our Bugs, Our Responsibility.
-== The Samba Team
-======================================================================
-
-
-
-================
-Download Details
-================
-
-The uncompressed tarballs and patch files have been signed
-using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
-from:
-
-https://download.samba.org/pub/samba/stable/
-
-The release notes are available online at:
-
-https://www.samba.org/samba/history/samba-4.17.4.html
-https://www.samba.org/samba/history/samba-4.16.8.html
-https://www.samba.org/samba/history/samba-4.15.13.html
-
-Our Code, Our Bugs, Our Responsibility.
-(https://bugzilla.samba.org/)
-
-                         --Enjoy
-                         The Samba Team
+--------------PWG3ORcZcDF2A08rHK4E9OSz--
 
