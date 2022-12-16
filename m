@@ -2,50 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59AC564DFAE
-	for <lists+samba-technical@lfdr.de>; Thu, 15 Dec 2022 18:32:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AE0164E859
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Dec 2022 09:56:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=yx+/4Hono+gqlnuQrIQ/6Fb0USNjpDrLnYIxc0VJ2I8=; b=0K6d0L4l99v1sD9toqU5/3JUv/
-	+EXwwxjsXQfEKKbTLeiuEXCAr3xHTz0ClkI21k5s5rQyWl4cJR97x2FUQfkpEyD8VPKnwhKSrWeAK
-	LyuOp7JduJrIH2+1AWAEdeVYLKLJsbXZ5xK/94MpTFamHS+cBrbxXAs2n18wCcFMSRrY1Kgy9kH3T
-	WmsIQeuB3HgSp8sbYTagku+iv6LBhSmg/8dIwVjGc7H430y2gTycCfxCM9vubYgvk+lBqg3BQ3rHm
-	uAREPZOoOA8wvtgWSM2OPTS9PE87lQDl5twmYI0K4ebSnLqsU7kMLgGiB4sNLhEajAlLXQnnV1KOI
-	s2FjHpYg==;
-Received: from ip6-localhost ([::1]:29202 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=W7+H6wxzQNhdRHYGRuGvq3l6SqXtwXlaJew3gTljPLE=; b=6NwDaTuy1D24hPGplz4wsh2L79
+	hyP3jH4XeJeKBnxapzF5iKpeEI/W3fRxwQK2HsGEPoqrK2VHReiT9GaTwcewKoiPxjb58T1mvoIUD
+	jvuv7DE6AN+OOBhBd2altvFNxEBnV0UsloBS3J5aZ1BwL7iomgk5JhdyhNBXRzTjT5CyBWdXBagI5
+	fSYG1azJUEH1mh9+bRYDvbfd/8ohYEqlJVReEMH0wBYvmL9m7qXBZ7zjR1vhrLTpdMOpldtf0NjEO
+	SEmg/ZwEbsXFZ9ggXmI0b1cZ2mgVqaY9QH1Im72p6wzbrpjAQP03wMqnxvX97FrAKhOamDTBsm3JD
+	sqXxCzaA==;
+Received: from ip6-localhost ([::1]:62496 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1p5s5M-009XLS-1G; Thu, 15 Dec 2022 17:31:56 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23940) 
+	id 1p66VX-009ied-63; Fri, 16 Dec 2022 08:55:55 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29714) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1p5s5C-009XKu-KT; Thu, 15 Dec 2022 17:31:51 +0000
+ (Exim) id 1p66VS-009id0-EH
+ for samba-technical@lists.samba.org; Fri, 16 Dec 2022 08:55:52 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=yx+/4Hono+gqlnuQrIQ/6Fb0USNjpDrLnYIxc0VJ2I8=; b=Wm16nmyAs0roYGU3SJQkunZNW/
- kyOGDBNig8s4u6KtX2NOC/hwJ3hlm4HCHLrRivysr0fpL8S7ukJNnmqLAwyCJe5t1IZVvgp8XRnmZ
- qRnFJiuYiuhbmcppSDwwKGfhKu2ZCvmoZw/6iBa2V9Vl6EySHxlneDtLGUD+H0mzQtKxSAQqWbobc
- v/L4V+Hj8yZMqeqz/SEc2cSTT6SxefE/e/91C0D7xfpjXT/M8Fi9E/wx71nPUAVUsc/Qc4myERLb7
- JXdqwn2rzyafWGvWX1JCnbQDNZn3xpbFM9wQ1bBd5RMe6Idd0JWJ8NskZAaI3nsZYbcBdggdSMxUO
- w/TtlAkZ6NeYfdLWhLPK6asqKtBAaHxEggeNACkGAOHM1YmW3yjzOgpf/Wqswk8MmEifFKUoj3zcz
- U9+6EX0gp/ENyPGMQs1Y4RMFHY7J3iq8jtjPVtw4a9FKr3KcXcf40yiAZ9mGJIcRQVmaKt1MRCWgU
- 3a6CtnrBD7/fMTbd3mixpBOV;
+ bh=W7+H6wxzQNhdRHYGRuGvq3l6SqXtwXlaJew3gTljPLE=; b=z6zpt9LTI9eJajTDKcbPO1lSe1
+ SHO20VRYNZ6JJM8Q19/sk7WIno9pr9PxMaHzfn2F23bj7U1CFEAX7WYImmOSnq8z/vdToPNEAuJ26
+ lVye8+1NZ57mJpbGwdjpwMTkqMGy9SePrXYniu+/1ZDuORxRTCLVyCaK5s+rCFz/YcXa+7BH91LxZ
+ sFAHg5ZLg6wnp65rpEHNVnLdc08w4JL84z/ItbEI68jJpSPnljYNWGYhT+8nwV2oAwOjKzyrammTg
+ 4/b5PS3M46//uc+66n4PujPHlQn21wHuo5IRKzcf/oMkYZTnoudxRL1C73kY8GjyZswUbnHiaVhZE
+ zNg+jgMRlgxiL8TphQQxolITT4osIo4hrFq+STo/MZzXorhzhMeJNaqIQAkt22XqfCGTHk07833gX
+ H0Ql/vaG+fW2iPXNSbB120yr+q41C19iMpYdvPg63+/W+LK+fG7oHoLL+UpSi284DVXVRftb9P60V
+ QyoTN98celI8Q33SuFWIhY/z;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1p5s59-0045Up-St; Thu, 15 Dec 2022 17:31:44 +0000
-Message-ID: <50c413cf-d514-2483-8ae9-edc8bb8bb49f@samba.org>
-Date: Thu, 15 Dec 2022 18:31:43 +0100
+ (Exim) id 1p66VR-004B4Y-Rh
+ for samba-technical@lists.samba.org; Fri, 16 Dec 2022 08:55:49 +0000
+Message-ID: <38bf0a43-b9c4-b7de-436d-1ee1265113a1@samba.org>
+Date: Fri, 16 Dec 2022 09:55:49 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.1
-Subject: Re: [Samba] [Announce] Samba 4.17.4, 4.16.8 and 4.15.13 Security
- Releases are available for Download
-Content-Language: en-US
-To: samba@lists.samba.org, samba-technical@lists.samba.org
-References: <fff8f470-f67f-a92b-8f38-d1adb0b9e5dc@samba.org>
-In-Reply-To: <fff8f470-f67f-a92b-8f38-d1adb0b9e5dc@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------PWG3ORcZcDF2A08rHK4E9OSz"
+ Thunderbird/102.4.2
+Content-Language: de-DE
+To: samba-technical@lists.samba.org
+Subject: [Release Planning 4.17 and 4.16] Samba 4.17.5 and 4.16.9
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,184 +57,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------PWG3ORcZcDF2A08rHK4E9OSz
-Content-Type: multipart/mixed; boundary="------------6iqhkzbx9RjeyyIxhm0ZA9FI";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: samba@lists.samba.org, samba-technical@lists.samba.org
-Message-ID: <50c413cf-d514-2483-8ae9-edc8bb8bb49f@samba.org>
-Subject: Re: [Samba] [Announce] Samba 4.17.4, 4.16.8 and 4.15.13 Security
- Releases are available for Download
-References: <fff8f470-f67f-a92b-8f38-d1adb0b9e5dc@samba.org>
-In-Reply-To: <fff8f470-f67f-a92b-8f38-d1adb0b9e5dc@samba.org>
+Hi,
 
---------------6iqhkzbx9RjeyyIxhm0ZA9FI
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Samba 4.17.5 is scheduled for Thursday, January 26 2023.
 
-V29vaG9vLCBmaW5hbGx5ISA6KQ0KDQpUaGFua3MgZXZlcnlvbmUgd2hvIGhhcyBiZWVuIGlu
-dm9sdmVkIGluIHRoaXMgc2VjdXJpdHkgcmVsZWFzZSwgZWl0aGVyIA0KaW4gcmVzZWFyY2gs
-IGNvZGluZywgdGVzdGluZywgZG9jdW1lbnRhdGlvbiBvciBnZXR0aW5nIGl0IG91dCB0aGUg
-ZG9vciENCg0KRXNwZWNpYWxseSBBbmRyZXcsIEpvc2VwaCBhbmQgbWV0emUhDQoNClRoYW5r
-cyEhDQotc2xvdw0KDQotLSANClJhbHBoIEJvZWhtZSwgU2FtYmEgVGVhbSAgICAgICAgICAg
-ICAgICAgaHR0cHM6Ly9zYW1iYS5vcmcvDQpTZXJOZXQgU2FtYmEgVGVhbSBMZWFkICAgICAg
-aHR0cHM6Ly9zZXJuZXQuZGUvZW4vdGVhbS1zYW1iYQ0KDQpPbiAxMi8xNS8yMiAxNzo0OSwg
-SnVsZSBBbmdlciB2aWEgc2FtYmEgd3JvdGU6DQo+IFJlbGVhc2UgQW5ub3VuY2VtZW50cw0K
-PiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gDQo+IFRoaXMgYXJlIHNlY3VyaXR5IHJlbGVh
-c2VzIGluIG9yZGVyIHRvIGFkZHJlc3MgdGhlIGZvbGxvd2luZyBkZWZlY3RzOg0KPiANCj4g
-DQo+IG8gQ1ZFLTIwMjItMzc5NjY6IFRoaXMgaXMgdGhlIFNhbWJhIENWRSBmb3IgdGhlIFdp
-bmRvd3MgS2VyYmVyb3MNCj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-UkM0LUhNQUMgRWxldmF0aW9uIG9mIFByaXZpbGVnZSBWdWxuZXJhYmlsaXR5DQo+ICDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGRpc2Nsb3NlZCBieSBNaWNyb3NvZnQg
-b24gTm92IDggMjAyMi4NCj4gDQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIEEgU2FtYmEgQWN0aXZlIERpcmVjdG9yeSBEQyB3aWxsIGlzc3VlIHdlYWsgcmM0LWht
-YWMNCj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc2Vzc2lvbiBrZXlz
-IGZvciB1c2UgYmV0d2VlbiBtb2Rlcm4gY2xpZW50cyBhbmQgc2VydmVycw0KPiAgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBkZXNwaXRlIGFsbCBtb2Rlcm4gS2VyYmVy
-b3MgaW1wbGVtZW50YXRpb25zIHN1cHBvcnRpbmcNCj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgdGhlIGFlczI1Ni1jdHMtaG1hYy1zaGExLTk2IGNpcGhlci4NCj4g
-DQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIE9uIFNhbWJhIEFjdGl2
-ZSBEaXJlY3RvcnkgRENzIGFuZCBtZW1iZXJzDQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgICdrZXJiZXJvcyBlbmNyeXB0aW9uIHR5cGVzID0gbGVnYWN5JyB3b3Vs
-ZCBmb3JjZQ0KPiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByYzQtaG1h
-YyBhcyBhIGNsaWVudCBldmVuIGlmIHRoZSBzZXJ2ZXIgc3VwcG9ydHMNCj4gIMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYWVzMTI4LWN0cy1obWFjLXNoYTEtOTYgYW5k
-L29yIGFlczI1Ni1jdHMtaG1hYy1zaGExLTk2Lg0KPiANCj4gaHR0cHM6Ly93d3cuc2FtYmEu
-b3JnL3NhbWJhL3NlY3VyaXR5L0NWRS0yMDIyLTM3OTY2Lmh0bWwNCj4gDQo+IG8gQ1ZFLTIw
-MjItMzc5Njc6IFRoaXMgaXMgdGhlIFNhbWJhIENWRSBmb3IgdGhlIFdpbmRvd3MNCj4gIMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgS2VyYmVyb3MgRWxldmF0aW9uIG9m
-IFByaXZpbGVnZSBWdWxuZXJhYmlsaXR5DQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgIGRpc2Nsb3NlZCBieSBNaWNyb3NvZnQgb24gTm92IDggMjAyMi4NCj4gDQo+
-ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIEEgc2VydmljZSBhY2NvdW50
-IHdpdGggdGhlIHNwZWNpYWwgY29uc3RyYWluZWQNCj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgZGVsZWdhdGlvbiBwZXJtaXNzaW9uIGNvdWxkIGZvcmdlIGEgbW9y
-ZSBwb3dlcmZ1bA0KPiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB0aWNr
-ZXQgdGhhbiB0aGUgb25lIGl0IHdhcyBwcmVzZW50ZWQgd2l0aC4NCj4gDQo+IGh0dHBzOi8v
-d3d3LnNhbWJhLm9yZy9zYW1iYS9zZWN1cml0eS9DVkUtMjAyMi0zNzk2Ny5odG1sDQo+IA0K
-PiBvIENWRS0yMDIyLTM4MDIzOiBUaGUgIlJDNCIgcHJvdGVjdGlvbiBvZiB0aGUgTmV0TG9n
-b24gU2VjdXJlIGNoYW5uZWwgDQo+IHVzZXMgdGhlDQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgIHNhbWUgYWxnb3JpdGhtcyBhcyByYzQtaG1hYyBjcnlwdG9ncmFw
-aHkgaW4gS2VyYmVyb3MsDQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IGFuZCBzbyBtdXN0IGFsc28gYmUgYXNzdW1lZCB0byBiZSB3ZWFrLg0KPiANCj4gaHR0cHM6
-Ly93d3cuc2FtYmEub3JnL3NhbWJhL3NlY3VyaXR5L0NWRS0yMDIyLTM4MDIzLmh0bWwNCj4g
-DQo+IG8gQ1ZFLTIwMjItNDUxNDE6IFNpbmNlIHRoZSBXaW5kb3dzIEtlcmJlcm9zIFJDNC1I
-TUFDIEVsZXZhdGlvbiBvZiANCj4gUHJpdmlsZWdlDQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgIFZ1bG5lcmFiaWxpdHkgd2FzIGRpc2Nsb3NlZCBieSBNaWNyb3Nv
-ZnQgb24gTm92IDggMjAyMg0KPiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCBhbmQgcGVyIFJGQzg0MjkgaXQgaXMgYXNzdW1lZCB0aGF0IHJjNC1obWFjIGlzIHdlYWss
-DQo+IA0KPiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBWdWxuZXJhYmxl
-IFNhbWJhIEFjdGl2ZSBEaXJlY3RvcnkgRENzIHdpbGwgaXNzdWUgDQo+IHJjNC1obWFjDQo+
-ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGVuY3J5cHRlZCB0aWNrZXRz
-IGRlc3BpdGUgdGhlIHRhcmdldCBzZXJ2ZXIgc3VwcG9ydGluZw0KPiAgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBiZXR0ZXIgZW5jcnlwdGlvbiAoZWcgYWVzMjU2LWN0
-cy1obWFjLXNoYTEtOTYpLg0KPiANCj4gaHR0cHM6Ly93d3cuc2FtYmEub3JnL3NhbWJhL3Nl
-Y3VyaXR5L0NWRS0yMDIyLTQ1MTQxLmh0bWwNCj4gDQo+IENoYW5nZXMNCj4gLS0tLS0tLQ0K
-PiANCj4gb8KgIEplcmVteSBBbGxpc29uIDxqcmFAc2FtYmEub3JnPg0KPiAgwqDCoCAqIEJV
-RyAxNTIyNDogcGFtX3dpbmJpbmQgdXNlcyB0aW1lX3QgYW5kIHBvaW50ZXJzIGFzc3VtaW5n
-IHRoZXkgYXJlIA0KPiBvZiB0aGUNCj4gIMKgwqDCoMKgIHNhbWUgc2l6ZS4NCj4gDQo+IG/C
-oCBBbmRyZXcgQmFydGxldHQgPGFiYXJ0bGV0QHNhbWJhLm9yZz4NCj4gIMKgwqAgKiBCVUcg
-MTQ5Mjk6IENWRS0yMDIyLTQ0NjQwIFtTRUNVUklUWV0gVXBzdHJlYW0gSGVpbWRhbCBmcmVl
-IG9mDQo+ICDCoMKgwqDCoCB1c2VyLWNvbnRyb2xsZWQgcG9pbnRlciBpbiBGQVNULg0KPiAg
-wqDCoCAqIEJVRyAxNTIxOTogSGVpbWRhbCBzZXNzaW9uIGtleSBzZWxlY3Rpb24gaW4gQVMt
-UkVRIGV4YW1pbmVzIHdyb25nIA0KPiBlbnRyeS4NCj4gIMKgwqAgKiBCVUcgMTUyMzc6IENW
-RS0yMDIyLTM3OTY2Lg0KPiAgwqDCoCAqIEJVRyAxNTI1ODogZmlsdGVyLXN1YnVuaXQgaXMg
-aW5lZmZpY2llbnQgd2l0aCBsYXJnZSBudW1iZXJzIG9mIA0KPiBrbm93bmZhaWxzLg0KPiAN
-Cj4gb8KgIFJhbHBoIEJvZWhtZSA8c2xvd0BzYW1iYS5vcmc+DQo+ICDCoMKgICogQlVHIDE1
-MjQwOiBDVkUtMjAyMi0zODAyMy4NCj4gIMKgwqAgKiBCVUcgMTUyNTI6IHNtYmQgYWxsb3dz
-IHNldHRpbmcgRklMRV9BVFRSSUJVVEVfVEVNUE9SQVJZIG9uIA0KPiBkaXJlY3Rvcmllcy4N
-Cj4gDQo+IG/CoCBTdGVmYW4gTWV0em1hY2hlciA8bWV0emVAc2FtYmEub3JnPg0KPiAgwqDC
-oCAqIEJVRyAxMzEzNTogVGhlIEtEQyBsb2dpYyBhcnJvdW5kIG1zRHMtc3VwcG9ydGVkRW5j
-cnlwdGlvblR5cGVzIA0KPiBkaWZmZXJzIGZyb20NCj4gIMKgwqDCoMKgIFdpbmRvd3MuDQo+
-ICDCoMKgICogQlVHIDE0NjExOiBDVkUtMjAyMS0yMDI1MSBbU0VDVVJJVFldIEJhZCBwYXNz
-d29yZCBjb3VudCBub3QgDQo+IGluY3JlbWVudGVkDQo+ICDCoMKgwqDCoCBhdG9taWNhbGx5
-Lg0KPiAgwqDCoCAqIEJVRyAxNTIwMzogQ1ZFLTIwMjItNDI4OTggW1NFQ1VSSVRZXSBrcmI1
-X3BhY19wYXJzZSgpIGJ1ZmZlciBwYXJzaW5nDQo+ICDCoMKgwqDCoCB2dWxuZXJhYmlsaXR5
-Lg0KPiAgwqDCoCAqIEJVRyAxNTIwNjogbGlibmV0OiBjaGFuZ2VfcGFzc3dvcmQoKSBkb2Vz
-bid0IHdvcmsgd2l0aA0KPiAgwqDCoMKgwqAgZGNlcnBjX3NhbXJfQ2hhbmdlUGFzc3dvcmRV
-c2VyNCgpLg0KPiAgwqDCoCAqIEJVRyAxNTIxOTogSGVpbWRhbCBzZXNzaW9uIGtleSBzZWxl
-Y3Rpb24gaW4gQVMtUkVRIGV4YW1pbmVzIHdyb25nIA0KPiBlbnRyeS4NCj4gIMKgwqAgKiBC
-VUcgMTUyMzA6IE1lbW9yeSBsZWFrIGluIHNucHJpbnRmIHJlcGxhY2VtZW50IGZ1bmN0aW9u
-cy4NCj4gIMKgwqAgKiBCVUcgMTUyMzc6IENWRS0yMDIyLTM3OTY2Lg0KPiAgwqDCoCAqIEJV
-RyAxNTI0MDogQ1ZFLTIwMjItMzgwMjMuDQo+ICDCoMKgICogQlVHIDE1MjUzOiBST0RDIGRv
-ZXNuJ3QgcmVzZXQgYmFkUHdkQ291bnQgcmVsaWFibGUgdmlhIGFuIFJXREMNCj4gIMKgwqDC
-oMKgIChDVkUtMjAyMS0yMDI1MSByZWdyZXNzaW9uKS4NCj4gDQo+IG/CoCBOb2VsIFBvd2Vy
-IDxub2VsLnBvd2VyQHN1c2UuY29tPg0KPiAgwqDCoCAqIEJVRyAxNTIyNDogcGFtX3dpbmJp
-bmQgdXNlcyB0aW1lX3QgYW5kIHBvaW50ZXJzIGFzc3VtaW5nIHRoZXkgYXJlIA0KPiBvZiB0
-aGUNCj4gIMKgwqDCoMKgIHNhbWUgc2l6ZS4NCj4gDQo+IG/CoCBBbm9vcCBDIFMgPGFub29w
-Y3NAc2FtYmEub3JnPg0KPiAgwqDCoCAqIEJVRyAxNTE5ODogUHJldmVudCBFQkFERiBlcnJv
-cnMgd2l0aCB2ZnNfZ2x1c3RlcmZzLg0KPiANCj4gb8KgIEFuZHJlYXMgU2NobmVpZGVyIDxh
-c25Ac2FtYmEub3JnPg0KPiAgwqDCoCAqIEJVRyAxNTIzNzogQ1ZFLTIwMjItMzc5NjYuDQo+
-ICDCoMKgICogQlVHIDE1MjQzOiAlVSBmb3IgaW5jbHVkZSBkaXJlY3RpdmUgZG9lc24ndCB3
-b3JrIGZvciBzaGFyZSBsaXN0aW5nDQo+ICDCoMKgwqDCoCAobmV0c2hhcmVlbnVtKS4NCj4g
-IMKgwqAgKiBCVUcgMTUyNTc6IFN0YWNrIHNtYXNoaW5nIGluIG5ldCBvZmZsaW5lam9pbiBy
-ZXF1ZXN0b2RqLg0KPiANCj4gb8KgIEpvc2VwaCBTdXR0b24gPGpvc2VwaHN1dHRvbkBjYXRh
-bHlzdC5uZXQubno+DQo+ICDCoMKgICogQlVHIDE1MTk3OiBXaW5kb3dzIDExIDIySDIgYW5k
-IFNhbWJhLUFEIDQuMTUgS2VyYmVyb3MgbG9naW4gaXNzdWUuDQo+ICDCoMKgICogQlVHIDE1
-MjE5OiBIZWltZGFsIHNlc3Npb24ga2V5IHNlbGVjdGlvbiBpbiBBUy1SRVEgZXhhbWluZXMg
-d3JvbmcgDQo+IGVudHJ5Lg0KPiAgwqDCoCAqIEJVRyAxNTIzMTogQ1ZFLTIwMjItMzc5Njcu
-DQo+ICDCoMKgICogQlVHIDE1MjM3OiBDVkUtMjAyMi0zNzk2Ni4NCj4gDQo+IG/CoCBOaWNv
-bGFzIFdpbGxpYW1zIDxuaWNvQHR3b3NpZ21hLmNvbT4NCj4gIMKgwqAgKiBCVUcgMTQ5Mjk6
-IENWRS0yMDIyLTQ0NjQwIFtTRUNVUklUWV0gVXBzdHJlYW0gSGVpbWRhbCBmcmVlIG9mDQo+
-ICDCoMKgwqDCoCB1c2VyLWNvbnRyb2xsZWQgcG9pbnRlciBpbiBGQVNULg0KPiANCj4gDQo+
-ICMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIw0KPiBSZXBvcnRpbmcg
-YnVncyAmIERldmVsb3BtZW50IERpc2N1c3Npb24NCj4gIyMjIyMjIyMjIyMjIyMjIyMjIyMj
-IyMjIyMjIyMjIyMjIyMjIyMjDQo+IA0KPiBQbGVhc2UgZGlzY3VzcyB0aGlzIHJlbGVhc2Ug
-b24gdGhlIHNhbWJhLXRlY2huaWNhbCBtYWlsaW5nIGxpc3Qgb3IgYnkNCj4gam9pbmluZyB0
-aGUgI3NhbWJhLXRlY2huaWNhbCBJUkMgY2hhbm5lbCBvbiBpcmMubGliZXJhLmNoYXQgb3Ig
-dGhlDQo+ICNzYW1iYS10ZWNobmljYWw6bWF0cml4Lm9yZyBtYXRyaXggY2hhbm5lbC4NCj4g
-DQo+IElmIHlvdSBkbyByZXBvcnQgcHJvYmxlbXMgdGhlbiBwbGVhc2UgdHJ5IHRvIHNlbmQg
-aGlnaCBxdWFsaXR5DQo+IGZlZWRiYWNrLiBJZiB5b3UgZG9uJ3QgcHJvdmlkZSB2aXRhbCBp
-bmZvcm1hdGlvbiB0byBoZWxwIHVzIHRyYWNrIGRvd24NCj4gdGhlIHByb2JsZW0gdGhlbiB5
-b3Ugd2lsbCBwcm9iYWJseSBiZSBpZ25vcmVkLsKgIEFsbCBidWcgcmVwb3J0cyBzaG91bGQN
-Cj4gYmUgZmlsZWQgdW5kZXIgdGhlIFNhbWJhIDQuMSBhbmQgbmV3ZXIgcHJvZHVjdCBpbiB0
-aGUgcHJvamVjdCdzIEJ1Z3ppbGxhDQo+IGRhdGFiYXNlIChodHRwczovL2J1Z3ppbGxhLnNh
-bWJhLm9yZy8pLg0KPiANCj4gDQo+ID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0NCj4gPT0gT3VyIENvZGUs
-IE91ciBCdWdzLCBPdXIgUmVzcG9uc2liaWxpdHkuDQo+ID09IFRoZSBTYW1iYSBUZWFtDQo+
-ID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT0NCj4gDQo+IA0KPiANCj4gPT09PT09PT09PT09PT09PQ0KPiBE
-b3dubG9hZCBEZXRhaWxzDQo+ID09PT09PT09PT09PT09PT0NCj4gDQo+IFRoZSB1bmNvbXBy
-ZXNzZWQgdGFyYmFsbHMgYW5kIHBhdGNoIGZpbGVzIGhhdmUgYmVlbiBzaWduZWQNCj4gdXNp
-bmcgR251UEcgKElEIEFBOTk0NDJGQjY4MEI2MjApLsKgIFRoZSBzb3VyY2UgY29kZSBjYW4g
-YmUgZG93bmxvYWRlZA0KPiBmcm9tOg0KPiANCj4gaHR0cHM6Ly9kb3dubG9hZC5zYW1iYS5v
-cmcvcHViL3NhbWJhL3N0YWJsZS8NCj4gDQo+IFRoZSByZWxlYXNlIG5vdGVzIGFyZSBhdmFp
-bGFibGUgb25saW5lIGF0Og0KPiANCj4gaHR0cHM6Ly93d3cuc2FtYmEub3JnL3NhbWJhL2hp
-c3Rvcnkvc2FtYmEtNC4xNy40Lmh0bWwNCj4gaHR0cHM6Ly93d3cuc2FtYmEub3JnL3NhbWJh
-L2hpc3Rvcnkvc2FtYmEtNC4xNi44Lmh0bWwNCj4gaHR0cHM6Ly93d3cuc2FtYmEub3JnL3Nh
-bWJhL2hpc3Rvcnkvc2FtYmEtNC4xNS4xMy5odG1sDQo+IA0KPiBPdXIgQ29kZSwgT3VyIEJ1
-Z3MsIE91ciBSZXNwb25zaWJpbGl0eS4NCj4gKGh0dHBzOi8vYnVnemlsbGEuc2FtYmEub3Jn
-LykNCj4gDQo+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIC0tRW5qb3kNCj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqAgVGhlIFNhbWJhIFRlYW0NCj4gDQo=
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.17
+has been updated accordingly.
 
---------------6iqhkzbx9RjeyyIxhm0ZA9FI--
 
---------------PWG3ORcZcDF2A08rHK4E9OSz
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+Samba 4.16.9 is scheduled for Thursday, February 16 2023.
 
------BEGIN PGP SIGNATURE-----
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.16
+has been updated accordingly.
 
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmObWf8FAwAAAAAACgkQqh6bcSY5nkZG
-Uw/8C+qE+AT0tRw2FlzdS5KVVEamNx2kko5fuEZz1NqGGGcDumThoUQ+q0Hkvgc7qnJ9tsqD6pym
-WnXIHzmxqiuMj/MTQiqxRwClbCNyTK3fZQeLkRnz/EIyR0IuCxbG2Cddl/FhLQpFXQ0P8pjF/AMx
-8ESlq/NYYqNM66r+2ng0K34+FAH01BIRea4i/cZf83OBNe9KacAvB2gZ3Wyvt7ScpSpzb0z88/Dv
-tW8Z/Ci5o77ZARfp32UA0v+9J8MAm4dNpEYj7T42OGa6SqLgnQJvIHEKTvFXMR3iqjtB7FvYlGUM
-J3RUsq8NXne7UsPgfKp0m1OdgYcZdL9wO8ErhO+Qt9UWaqzwU53q9PZ7K1j59wi7KgatUUQru6bT
-kSWF1aplWXE6cy1vziAtFtnGfJGWkdo0HVTe01m70xaaEp7YR370h5eae40mGbAB5Kuj1Q9RH5ej
-5/V3XoazllKYgwNy8OOxldlF08TtJ7d3UyxVzWZdRZOMUaD/anf4AvTYE+xcQiNkuRvG1+rzFV/v
-e0+qy7xh1eVCtrqc7/ubVLH1KF/gEIV7yUAi5Y6Rwp3/jzuSQz8p8P9Y26nc5sx5JyIG2aqwXTSN
-PrFvIVylL8EftUejkwpqcE9LXDpchTpbBA+qTh75DTKQJF+QIaf2xCWXcANmgcJzRV19V9qioWhg
-QHE=
-=rKCG
------END PGP SIGNATURE-----
 
---------------PWG3ORcZcDF2A08rHK4E9OSz--
+Jule
+
+-- 
+Jule Anger
+Release Manager Samba Team      https://samba.org
+SerNet Samba Team               https://sernet.de
+
 
