@@ -2,51 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20C0665D016
-	for <lists+samba-technical@lfdr.de>; Wed,  4 Jan 2023 11:02:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3CA065D01B
+	for <lists+samba-technical@lfdr.de>; Wed,  4 Jan 2023 11:03:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=DYzmZlWgzPQ4TeHB6g1FhWkIoqTm5H5bvLK18SfPaWU=; b=eQ3yjiFI3zTcs87e3R7bBqE3xF
-	Y6sUgYi7ONrvkLHQThGgu6AlnUG2twbRbIhUKws8WVD/p5r/RTU3p2BTK7L1ygmxxfGHQpEaxwl23
-	1PnCMeyhLkRT2ALdwZUD7HD3/jESY+GfPF/Tq0RYNWuvT0XmOIEoWoMe4zeRtBZ1O8Sd7BLKJ8LS7
-	98a/LxvuccEwESrYMJTutVWM3fYVzsKm+TYYG9J2mdSibRtGqQpO4BY/RGSPLDinvzK1VkKDkpTFL
-	OA4+u4wkoWNjc2d2xKnlX0CcBG4cOORAQSa0l5ph/7s4teXWP95hZRw5ko/fO9xSjDc8y/vpmBmUy
-	OqNZXyTw==;
-Received: from ip6-localhost ([::1]:60410 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=GDytqpRp9ghBCgMhibhLR0A/nu1ehwhlCVi4gMWG26U=; b=CljtgVs6d2Vj5UrOjy94U4KNpg
+	nBo37Gb8SBoYtbDkMPJKZLcVsosLTYMS0zVkIcxMZ0P7ddHoBh8RuIxlXANqH0ybmOvJAIMoimlXR
+	YhSZAAtu3Z+jTv8VxzxMFcirtcrGi/W4h37rdfxxD5l1AZ9wHgT7wQNI8oqM4O7NISEgH5trG6huv
+	BatGdJC7i23tUBVkDiHGxnWK6u+ygZuQs2VgEoBKSj+foL2anxImIKWOoxh6x1jkHoKCbCn2KO25l
+	Zy46hoBnlkg7l/CeZ8NXnjJqCGNYSHZn/GWH+p/pwucoIIbcgsSpl1e72nHwoIdK01MjoQEmLFH6W
+	zb/7L6Zw==;
+Received: from ip6-localhost ([::1]:51870 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pD0b8-00EXAo-EH; Wed, 04 Jan 2023 10:02:14 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:29146) 
+	id 1pD0cg-00EXS7-PJ; Wed, 04 Jan 2023 10:03:50 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54316) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pD0b3-00EXAf-QT
- for samba-technical@lists.samba.org; Wed, 04 Jan 2023 10:02:12 +0000
+ (Exim) id 1pD0cc-00EXRy-5L
+ for samba-technical@lists.samba.org; Wed, 04 Jan 2023 10:03:48 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=DYzmZlWgzPQ4TeHB6g1FhWkIoqTm5H5bvLK18SfPaWU=; b=ZmD3AW64iWqxMR+uTfHWxtJ5sq
- NhM6F4mxkq+mntC8fVWNz7M/VQaPmH3hDfKLpxb9FlzOcP1JAGr4e0elpvvlXlfsKWMi0t32UpCeu
- aSSama3IuFQ+PGavzHwKX35GYSZ/5P9pyoMg5keHP8HIQeF+Z74odBrihBChSM1rar0+8rkQp19si
- 9XOTI2tHTEEHvvx0lhxi7ooPjFmWY3DVAOj5b71fCNN51zi8oswEASYGjZNPUnzTf8WpbO+FAf8V9
- qRYo3mke6gQ/DD6zIUj8J4S7vlP2EMXici2AsmNm+ls/gzGU1fri299QpdCp3gyS8Wy8pPmtXrI46
- u+U4y8HSq92pxyZOwAVVMCPudTtcsc+cR746RHj3w3Tif4JfKn+RaaANl8zJf5UXhGeuSPOCKwym7
- FWRfZweGhUvVCn0ceKF7GpLJzvCvy8ygDxnNIAD5VQfJ7n+E2vWe3HC0eTOl3TjivUSA8N1W61WFq
- tQ0pf9voDCwwwTzUdvDryqET;
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=GDytqpRp9ghBCgMhibhLR0A/nu1ehwhlCVi4gMWG26U=; b=PdUgbpUh83OZOm4nFICM1SsB9l
+ jQ9a8InNCwlfHP/YL/4Kv6knFewrBOt2tGq0A0AN8ZftQkBl1qcODxDIV6W+chAC8LeQ8t1JjUNAa
+ 8brKUi34WJRTbFM5d0muSXD+h4SzudgkCV/qp6SR48KrhSQ8DVxm3Wt/kl0SJwfjhzW+Kgvd2ygx1
+ 3c/UMuTvJm5knPSreKugMx+9fX9xMVt/Ui/simNco5bFVN5OKtWL2GuE+rQ/F4Mj7sd8B+8IQmy19
+ eJ2QubmuPdpqHERppZg2JVlUgniiDRFDJ9W20kuOFwfHVTa6crxwUM6iOqCUbe6azMnm7K2OIjMHs
+ PCYPVzyn5fukkCGGm0BxAGMNqTlDsMrdD6guevbIqIksW5BEe9numW51J0Mlok9J5qnPTGEY2DU1P
+ Sbqwhw+UyGZqiFoIZn40TP67WLdVr6SqHoC2bshVk3M1Q22381lrXS2ScW8ovYL5sYTDKclqnTIVb
+ sIJOjM4X0YjboGjKlvtyEqnA;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pD0az-006hUH-7E; Wed, 04 Jan 2023 10:02:05 +0000
-Message-ID: <01c42bcc-e066-b14b-9258-0378d74618df@samba.org>
-Date: Wed, 4 Jan 2023 11:02:04 +0100
+ (Exim) id 1pD0cb-006hWT-Sb
+ for samba-technical@lists.samba.org; Wed, 04 Jan 2023 10:03:45 +0000
+Message-ID: <a4c3c03e-7857-afea-36d9-ba4141f8b9f0@samba.org>
+Date: Wed, 4 Jan 2023 10:03:45 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.1
+ Thunderbird/102.3.0
 Subject: Re: Wiki: 64 bit printer drivers
-Content-Language: en-US
-To: samba-technical@lists.samba.org
 References: <f613dab1-cbb0-3846-6256-b492afb32c8c@samba.org>
  <87089e51-9b9b-6539-8c1b-0063d37c180e@samba.org>
-In-Reply-To: <87089e51-9b9b-6539-8c1b-0063d37c180e@samba.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------ndNYLWZQC95MXJ8IkympLjSr"
+ <01c42bcc-e066-b14b-9258-0378d74618df@samba.org>
+Content-Language: en-GB
+To: samba-technical@lists.samba.org
+In-Reply-To: <01c42bcc-e066-b14b-9258-0378d74618df@samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,61 +61,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: samba-technical@lists.samba.org
+Cc: Rowland Penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------ndNYLWZQC95MXJ8IkympLjSr
-Content-Type: multipart/mixed; boundary="------------T609EXMHn1T1hWkPjeGDvKDF";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: samba-technical@lists.samba.org
-Cc: Rowland Penny <rpenny@samba.org>
-Message-ID: <01c42bcc-e066-b14b-9258-0378d74618df@samba.org>
-Subject: Re: Wiki: 64 bit printer drivers
-References: <f613dab1-cbb0-3846-6256-b492afb32c8c@samba.org>
- <87089e51-9b9b-6539-8c1b-0063d37c180e@samba.org>
-In-Reply-To: <87089e51-9b9b-6539-8c1b-0063d37c180e@samba.org>
 
---------------T609EXMHn1T1hWkPjeGDvKDF
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
 
-SGkgUm93bGFuZCwNCg0KT24gMS80LzIzIDEwOjQ2LCBSb3dsYW5kIFBlbm55IHZpYSBzYW1i
-YS10ZWNobmljYWwgd3JvdGU6DQo+IEkgcmV2ZXJ0ZWQgaXQgYmVjYXVzZSB0aGVyZSBhcmUg
-c3RpbGwgMzJiaXQgc3lzdGVtcyBvdXQgdGhlcmUgYW5kLCBhZnRlciANCj4gY2hlY2tpbmcs
-IEkgY291bGRuJ3QgZmluZCBhbnl0aGluZyB0aGF0IHNhaWQgdGhhdCBwcmludGluZyB3YXMg
-bm93IDY0Yml0IA0KPiBvbmx5Lg0KDQpQbGVhc2UgbG9vayBjbG9zZWx5OiBqdXN0IHRoZSAq
-ZGVmYXVsdCogY2hhbmdlZCwgdGhpcyBoYXMgbm90aGluZyB0byBkbyANCndpdGggYmVpbmcg
-NjQtYml0ICpvbmx5Ki4NCg0KVGhhbmtzIQ0KLXNsb3cNCg0KLS0gDQpSYWxwaCBCb2VobWUs
-IFNhbWJhIFRlYW0gICAgICAgICAgICAgICAgIGh0dHBzOi8vc2FtYmEub3JnLw0KU2VyTmV0
-IFNhbWJhIFRlYW0gTGVhZCAgICAgIGh0dHBzOi8vc2VybmV0LmRlL2VuL3RlYW0tc2FtYmEN
-Cg0K
+On 04/01/2023 10:02, Ralph Boehme wrote:
+> Hi Rowland,
+> 
+> On 1/4/23 10:46, Rowland Penny via samba-technical wrote:
+>> I reverted it because there are still 32bit systems out there and, 
+>> after checking, I couldn't find anything that said that printing was 
+>> now 64bit only.
+> 
+> Please look closely: just the *default* changed, this has nothing to do 
+> with being 64-bit *only*.
+> 
+> Thanks!
+> -slow
+> 
 
---------------T609EXMHn1T1hWkPjeGDvKDF--
+OK, so just the default changed, but where is this documented ?
 
---------------ndNYLWZQC95MXJ8IkympLjSr
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmO1TpwFAwAAAAAACgkQqh6bcSY5nkbO
-IxAAoS+xffbUoxqGJVPmNMoWlJWhgK5tCIuEwVNyewSYoH1tOP+zgu2FwyOPouDyz8pLbnfdRHnj
-WbsKNI1ckEV2KWwXgY1PEhvo6QT9GGxsbJzZZ7HrBbMUnqgqjB91PqbmvtmkPqs/eAobHcacIyYy
-8rLxF1O3DjSytbhrs0TmIZcFljL53T+cQXJCzaFbDKweFtjLUloJGB1YGFKVbebJg3oDhI2OUBdV
-fyC6etw/ofpnI2oVPW+6vrXzhREYDXp3vgi6c5v9aNueF37pxUavvoKqrEDbzAp5pXE0RILSSV6Q
-vKJQF0AOvprZXqE4EYKUz+ysI7KLYinkLKO9PyXuEau+ySkosDiXba8PKRU9bME3TiDe0fKaEefL
-FAQ1QrnWxTdNltB+UBcItv//fxUEedddTQxxFjToDjPurSpXLnvStMQgY3hxk//1JW3aoT7+vVlu
-sw6w6cIbS2sg6tKwiFaKbibyxle1NSGOin5/P2MjumqefAx3Eo7LXY6X5bSN9wdJ7QYG/Bv7eoo0
-xGWU9YklEFiw60Hir0ntts80RDam3Mxy8EdyizLEeeyIVq8AC6q+wbsUumtOuTfec4BpsPanfki/
-cikceqSqPfq+9DZP/pvgsCVfpsbha8PtvT8VVhWH5sGmU2Dn+w1nlZO6kdG2SmxGSwfBQ+7oTK8c
-U1I=
-=Kh3S
------END PGP SIGNATURE-----
-
---------------ndNYLWZQC95MXJ8IkympLjSr--
+Rowland
 
