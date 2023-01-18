@@ -2,78 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87B0F672239
-	for <lists+samba-technical@lfdr.de>; Wed, 18 Jan 2023 16:57:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EEF92672631
+	for <lists+samba-technical@lfdr.de>; Wed, 18 Jan 2023 19:02:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=TnZWFcWmNxBYxlm36v8cfD5yZDpkKQ0aC3UZSD0jltk=; b=Ro06bf5OyL0PhAR7owwjj32Qap
-	sItpIwVRgdM8QSmbw4k0vUt4k2vdaNbn1QUslcqx+C+Mu4f1YnLuSpn6ReRTqwXuu6MoIxlUPeLoJ
-	+ovz+Mnwvt47+nNO5/U5dOSzdisS3M6XIvp07xSOIJuYtMlWQRLZzJigdu0m+2EZuaS/Z8EjY7+OH
-	OlRpb5sX5nMNkrVSpIbqrypWqa1eu1OlGV4seTo6ibu+H1D8JRjW79JIsTIydcPsg+0N6D0uN15dU
-	P2XxVblyxY61X7o3Av3t1/QxezeN8XwtGc6DqsM4eymtpEPLq1ibp94K84PuTLqFNh2gYbKbATmG+
-	Fe4aOuLA==;
-Received: from ip6-localhost ([::1]:24074 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=RBr7m0/JS2rvcKUb0AlQBV2939S38sqFk0z7SSutX5A=; b=kwBeHWhP4NwvnbXi2mCsRVG81G
+	gEofC5cJKKnwRAkS2BqD79QSTSPVXNQQpdOKWpPY6d5TjnHBOofh+uBTbIyWLllvCYn6nheDAXTUY
+	yQeuVk4KCX1IuHtoEvq6lq6HOchOS4fVXzpsGWxZeWMEZ0IcZHz3a4Cc4fa39asxbCY3V/21eRmLO
+	P/dA795zQpWHdK5PFg9gHDtM9PwAMYwSiVvkkHP01dU52zdR5nZ3jqW2bWKnifCdWrim6TInbkXcd
+	fB/XMhKVIVVNr0Ff0jQq2wPItsVEKrQtmQJRv7k0XFhMBkkBcMrx+5lSGYjt4CIjFGZv2U0MVyRSu
+	5VzNsoGw==;
+Received: from ip6-localhost ([::1]:30974 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pIAnj-000Vxy-Jr; Wed, 18 Jan 2023 15:56:35 +0000
-Received: from mail-oa1-x36.google.com ([2001:4860:4864:20::36]:36780) 
+	id 1pICkt-000g30-NE; Wed, 18 Jan 2023 18:01:47 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:46664) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pIAnd-000Vxp-NG
- for samba-technical@lists.samba.org; Wed, 18 Jan 2023 15:56:32 +0000
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-15bb8ec196aso24154546fac.3
- for <samba-technical@lists.samba.org>; Wed, 18 Jan 2023 07:56:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=kernel-dk.20210112.gappssmtp.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=TnZWFcWmNxBYxlm36v8cfD5yZDpkKQ0aC3UZSD0jltk=;
- b=wj7S76lZhgHNR/wz3qfMP29apc9hMbtbb5WF2C14Bo++5qkvJ4e7cUbAUDGb9J8QCX
- dzSYBgXtRaI++DQRqSSnYNv4SrPLLoVODS8JWIRHGIHcR24PSlF8sq5bNoyRdh8yv11i
- ATgVH2qgsjkEIuGwgsnQQ2woSpnbZ52db2BBqubVJuLYazxHpNBeE6rgv/hoU+sdGeAl
- jGCKsQIYzIkT8m8OYTEmlcQIt+IXAglqZv1DhGOuTztsGG/Ene1Ox27Si18bdlJal0Sa
- KiNNb73l/YhY8HBEaMZgGsFEny0fGoERIWiUzrpAw0MpO9tp8jaWbCcb7duo6AvCQFBx
- I+BA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TnZWFcWmNxBYxlm36v8cfD5yZDpkKQ0aC3UZSD0jltk=;
- b=jJOsFnSkBcvjXeIAjtWd3UhVqY7+Sm2Atlpf2KPV1GkTNb7dX7VPmoKi1uUYF5ydju
- OzyZaAapvsDNXdwk+i88KrcQA2WYmwwGVBtODgNpTcWxqdt4ccs3EbflhBgvbg9vCLqD
- 9FbuRgjoxjlejf14/XpvSIXZkQqXKO64MksuPzkpi3MGdtvz3iOoDLUjNlflwtsDQArn
- v4rmkg/x1lY3oyGnWWFyoSwV+USWXZRISJae+zZNRXLEM7l7kclgNphsI9W6vU7WIdq7
- whzq4urqZG0VNiug7ytjNOWwwXns9juSgz/Cgy54wZ1EZ/Q2qsACCgltC7u+3tmLUmpf
- d2iA==
-X-Gm-Message-State: AFqh2kobn6IovTY2FeQLdnV2RtqQOBMwxsGhF3mmkVI+pzrDCidxCL+D
- LtLwLu/ZWgDhSmLYEJKm3JLP7w==
-X-Google-Smtp-Source: AMrXdXtO0qt6CqcaBM6jnu8tk2EWZ2JoCctBJbQ+Cucb0k7ebKS2GvCT120dezrjMJvHRCuOSiXiYw==
-X-Received: by 2002:a05:6870:9564:b0:15b:a3dc:d5f6 with SMTP id
- v36-20020a056870956400b0015ba3dcd5f6mr789144oal.3.1674057377075; 
- Wed, 18 Jan 2023 07:56:17 -0800 (PST)
-Received: from [192.168.1.94] ([207.135.234.126])
- by smtp.gmail.com with ESMTPSA id
- d5-20020a4aaa85000000b004cb050fd09fsm16663392oon.29.2023.01.18.07.56.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Jan 2023 07:56:16 -0800 (PST)
-Message-ID: <b3cbaa88-9b01-e82f-bcfa-2fccc69b37c4@kernel.dk>
-Date: Wed, 18 Jan 2023 08:56:15 -0700
+ (Exim) id 1pICkh-000g24-Vq; Wed, 18 Jan 2023 18:01:38 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=RBr7m0/JS2rvcKUb0AlQBV2939S38sqFk0z7SSutX5A=; b=cAT9tNPohIkDn6WcIkX7t7JQp6
+ MOtjanQuDPaNLInh8EnmTtKYC+uL+E7GMFt84U8vS5g6cy0SKp8mgLVWmHWU285wuTg++Q/o4tmv+
+ 5751p3TUr0crbjb3zg6kbIKKoekvgUkSqNFWfuatWArMh1P3G3oMHsyMdNHXuz3NLqnXpQhc8b/HR
+ KWhMvRDTTS0hdIx17DYKAQg0UOu3E829+LfjCkrIE3Wdgd8Ni9/1UbhiYo3h6yhnnKCuPJ8JFfIow
+ 96DvKTOLZbklfpCF0QVI/V1jk8ncg5xlTq/ANRPPQjzxTaBIfNCm5ERSoPQ1WyWDJj5td9laPexiU
+ Is+9ueIJLm+U+4M6058Yga6hDn2GQmmExtxuufegsOOEoVaT5POxV3J6pkwh7WPrHV5tq+igR/FC8
+ mor85ux6rTPf69ebF9SJp9kXYfoy/PepetzdKq2y8HPiibKuD3rIHuDl9ZdtyGyZtY07r1PdOYR96
+ KihCHkJxuJPXxuC+1tvXLC+9;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pICkh-0097Ck-5L; Wed, 18 Jan 2023 18:01:35 +0000
+Message-ID: <1f018166-c9d0-cacf-844c-f65cd3582846@samba.org>
+Date: Wed, 18 Jan 2023 19:01:34 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux aarch64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Subject: Re: Problems replacing epoll with io_uring in tevent
-Content-Language: en-US
-To: Stefan Metzmacher <metze@samba.org>
-References: <c01f72ac-b2f1-0b1c-6757-26769ee071e2@samba.org>
- <949fdb8e-bd12-03dc-05c6-c972f26ec0ec@samba.org>
- <270f3b9a-8fa6-68bf-7c57-277f107167c9@kernel.dk>
- <2a9e4484-4025-2806-89c3-51c590cfd176@samba.org>
- <60ce8938-77ed-0b43-0852-7895140c3553@samba.org>
- <79b3e423-16aa-48f1-ee27-a198c2db2ba8@samba.org>
-In-Reply-To: <79b3e423-16aa-48f1-ee27-a198c2db2ba8@samba.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.18.0rc1 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,34 +56,151 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jens Axboe via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jens Axboe <axboe@kernel.dk>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>,
- Samba Technical <samba-technical@lists.samba.org>,
- io-uring <io-uring@vger.kernel.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 12/28/22 9:19?AM, Stefan Metzmacher wrote:
-> Hi Jens,
-> 
-> any change to get some feedback on these?
-> https://lore.kernel.org/io-uring/60ce8938-77ed-0b43-0852-7895140c3553@samba.org/
-> and
-> https://lore.kernel.org/io-uring/c9a5b180-322c-1eb6-2392-df9370aeb45c@samba.org/
-> 
-> Thanks in advance!
+Release Announcements
+=====================
 
-Finally getting around to this after the break...
+This is the first release candidate of Samba 4.18.  This is *not*
+intended for production environments and is designed for testing
+purposes only.  Please report any defects via the Samba bug reporting
+system at https://bugzilla.samba.org/.
 
-I think your initial patch looks reasonable for doing cancel-on-close.
-Can you resubmit it against for-6.3/io_uring so we can get it moving
-forward, hopefully?
+Samba 4.18 will be the next version of the Samba suite.
 
-That would also be a good point to discuss the fixed file case as well,
-as ideally this should obviously work on both types.
 
--- 
-Jens Axboe
+UPGRADING
+=========
 
+
+NEW FEATURES/CHANGES
+====================
+
+More succinct samba-tool error messages
+---------------------------------------
+
+Historically samba-tool has reported user error or misconfiguration by
+means of a Python traceback, showing you where in its code it noticed
+something was wrong, but not always exactly what is amiss. Now it
+tries harder to identify the true cause and restrict its output to
+describing that. Particular cases include:
+
+  * a username or password is incorrect
+  * an ldb database filename is wrong (including in smb.conf)
+  * samba-tool dns: various zones or records do not exist
+  * samba-tool ntacl: certain files are missing
+  * the network seems to be down
+  * bad --realm or --debug arguments
+
+Accessing the old samba-tool messages
+-------------------------------------
+
+This is not new, but users are reminded they can get the full Python
+stack trace, along with other noise, by using the argument '-d3'.
+This may be useful when searching the web.
+
+The intention is that when samba-tool encounters an unrecognised
+problem (especially a bug), it will still output a Python traceback.
+If you encounter a problem that has been incorrectly identified by
+samba-tool, please report it on https://bugzilla.samba.org.
+
+Colour output with samba-tool --color
+-------------------------------------
+
+For some time a few samba-tool commands have had a --color=yes|no|auto
+option, which determines whether the command outputs ANSI colour
+codes. Now all samba-tool commands support this option, which now also
+accepts 'always' and 'force' for 'yes', 'never' and 'none' for 'no',
+and 'tty' and 'if-tty' for 'auto' (this more closely matches
+convention). With --color=auto, or when --color is omitted, colour
+codes are only used when output is directed to a terminal.
+
+Most commands have very little colour in any case. For those that
+already used it, the defaults have changed slightly.
+
+  * samba-tool drs showrepl: default is now 'auto', not 'no'
+
+  * samba-tool visualize: the interactions between --color-scheme,
+    --color, and --output have changed slightly. When --color-scheme is
+    set it overrides --color for the purpose of the output diagram, but
+    not for other output like error messages.
+
+No colour with NO_COLOR environment variable
+--------------------------------------------
+
+With both samba-tool --color=auto (see above) and some other places
+where we use ANSI colour codes, the NO_COLOR environment variable will
+disable colour output. See https://no-color.org/ for a description of
+this variable. `samba-tool --color=always` will use colour regardless
+of NO_COLOR.
+
+New wbinfo option --change-secret-at
+------------------------------------
+
+The wbinfo command has a new option, --change-secret-at=<DOMAIN CONTROLLER>
+which forces the trust account password to be changed at a specified domain
+controller. If the specified domain controller cannot be contacted the
+password change fails rather than trying other DCs.
+
+
+REMOVED FEATURES
+================
+
+
+smb.conf changes
+================
+
+   Parameter Name                          Description     Default
+   --------------                          -----------     -------
+
+
+KNOWN ISSUES
+============
+
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.18#Release_blocking_bugs
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/rc/
+
+The release notes are available online at:
+
+https://download.samba.org/pub/samba/rc/samba-4.18.0rc1.WHATSNEW.txt
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
