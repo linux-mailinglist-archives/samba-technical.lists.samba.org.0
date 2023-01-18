@@ -2,46 +2,78 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F3C8B66E795
-	for <lists+samba-technical@lfdr.de>; Tue, 17 Jan 2023 21:17:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87B0F672239
+	for <lists+samba-technical@lfdr.de>; Wed, 18 Jan 2023 16:57:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=G7BLmrkQRtvynRwcKHFmk8xBwnFMrvOwT9MK6Rol/LU=; b=3ow9lee4uVO02BqlY3GxniD9w/
-	gd4zo1d4Jj4wbakN0S972S1p47l1dqvE3VVXtSiwXk1TwWBRGe5DpKlkA7T8QGN6KFGI95fr9SVaO
-	fbL/uxDGM9K7SyeGLgs9TxOIF8zFHT5CLIGyQ06Wje2EwvnKMr4kJMZl3NIYEcK/hbq3ZwQKOkKM8
-	8H9deX+dZKD1t0jIRCDTfe+8rWPRTpEd/VyBLkgkNHGdgLcpJNOX6ETdu/zlj+l1tAipxENzsEB7N
-	Qh8ClT/z3zcRmLwK4ANL9dFIxJm///AODKUzgEfPrYpOG3JRQqwJv9f3P63Z/p/O7iHHCuuVbndna
-	+qVb8V6A==;
-Received: from ip6-localhost ([::1]:30840 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=TnZWFcWmNxBYxlm36v8cfD5yZDpkKQ0aC3UZSD0jltk=; b=Ro06bf5OyL0PhAR7owwjj32Qap
+	sItpIwVRgdM8QSmbw4k0vUt4k2vdaNbn1QUslcqx+C+Mu4f1YnLuSpn6ReRTqwXuu6MoIxlUPeLoJ
+	+ovz+Mnwvt47+nNO5/U5dOSzdisS3M6XIvp07xSOIJuYtMlWQRLZzJigdu0m+2EZuaS/Z8EjY7+OH
+	OlRpb5sX5nMNkrVSpIbqrypWqa1eu1OlGV4seTo6ibu+H1D8JRjW79JIsTIydcPsg+0N6D0uN15dU
+	P2XxVblyxY61X7o3Av3t1/QxezeN8XwtGc6DqsM4eymtpEPLq1ibp94K84PuTLqFNh2gYbKbATmG+
+	Fe4aOuLA==;
+Received: from ip6-localhost ([::1]:24074 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pHsOT-000M52-Gg; Tue, 17 Jan 2023 20:17:17 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48068) 
+	id 1pIAnj-000Vxy-Jr; Wed, 18 Jan 2023 15:56:35 +0000
+Received: from mail-oa1-x36.google.com ([2001:4860:4864:20::36]:36780) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pHsON-000M4t-KS
- for samba-technical@lists.samba.org; Tue, 17 Jan 2023 20:17:14 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=G7BLmrkQRtvynRwcKHFmk8xBwnFMrvOwT9MK6Rol/LU=; b=OZ+AuCEH19JXO/d18O6p/yhjaa
- D7reWTEdcLDoIWp8SDmNeGubalELRuawiHESD5iYbM0Cc317W6i0Jdsbg472ciGADVc7GFEcqZH2T
- DPSNSPiguiSbXiMQwx3NZteQKQLy/sQOegkdmXd3/lULEzaZlnYZPxJK/L2JFlqtgRZp7qDyGlhsY
- I35DuSz7fTMWluTIa3St7nw+kzhlw5YnYOrz5oftcmmz1KSTSKAIKoeuFYeQMsj8H+yCo8daebrax
- gZ5vSrb3ocqyeTLO+ULJQqcdooDsQB3DNzXXhLQYbtyaTVa4m98yxb8ZzZ3c3waBDD9oIwVr+EVHq
- lnONHhbR19I60vweRQEqdITF0xKE6Ojo2x2jEuJqQQZ6ydEvFB3vVNPmkDYUJzheBy4WSVROChKjD
- UisVuiZzAk6YnrkE/+0ZxnjaqIqOtM9SmMSRwiVh8q+YdeH/FQo/lLZRzWGtSXCMojUHdP+re2v5g
- 6Odi44snlTEMZ7HYUwhOqGz0;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pHsOL-008phV-Im; Tue, 17 Jan 2023 20:17:09 +0000
-Date: Tue, 17 Jan 2023 12:17:06 -0800
-To: Ralph Boehme <slow@samba.org>
-Subject: Re: dbwrap_py: rapid dbwrap backend prototyping and FoundationDB
-Message-ID: <Y8cCQmnpnLi91qvk@jeremy-acer>
-References: <1f68b352-130d-8a6d-52b6-2f7689fe92b6@samba.org>
+ (Exim) id 1pIAnd-000Vxp-NG
+ for samba-technical@lists.samba.org; Wed, 18 Jan 2023 15:56:32 +0000
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-15bb8ec196aso24154546fac.3
+ for <samba-technical@lists.samba.org>; Wed, 18 Jan 2023 07:56:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kernel-dk.20210112.gappssmtp.com; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=TnZWFcWmNxBYxlm36v8cfD5yZDpkKQ0aC3UZSD0jltk=;
+ b=wj7S76lZhgHNR/wz3qfMP29apc9hMbtbb5WF2C14Bo++5qkvJ4e7cUbAUDGb9J8QCX
+ dzSYBgXtRaI++DQRqSSnYNv4SrPLLoVODS8JWIRHGIHcR24PSlF8sq5bNoyRdh8yv11i
+ ATgVH2qgsjkEIuGwgsnQQ2woSpnbZ52db2BBqubVJuLYazxHpNBeE6rgv/hoU+sdGeAl
+ jGCKsQIYzIkT8m8OYTEmlcQIt+IXAglqZv1DhGOuTztsGG/Ene1Ox27Si18bdlJal0Sa
+ KiNNb73l/YhY8HBEaMZgGsFEny0fGoERIWiUzrpAw0MpO9tp8jaWbCcb7duo6AvCQFBx
+ I+BA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=TnZWFcWmNxBYxlm36v8cfD5yZDpkKQ0aC3UZSD0jltk=;
+ b=jJOsFnSkBcvjXeIAjtWd3UhVqY7+Sm2Atlpf2KPV1GkTNb7dX7VPmoKi1uUYF5ydju
+ OzyZaAapvsDNXdwk+i88KrcQA2WYmwwGVBtODgNpTcWxqdt4ccs3EbflhBgvbg9vCLqD
+ 9FbuRgjoxjlejf14/XpvSIXZkQqXKO64MksuPzkpi3MGdtvz3iOoDLUjNlflwtsDQArn
+ v4rmkg/x1lY3oyGnWWFyoSwV+USWXZRISJae+zZNRXLEM7l7kclgNphsI9W6vU7WIdq7
+ whzq4urqZG0VNiug7ytjNOWwwXns9juSgz/Cgy54wZ1EZ/Q2qsACCgltC7u+3tmLUmpf
+ d2iA==
+X-Gm-Message-State: AFqh2kobn6IovTY2FeQLdnV2RtqQOBMwxsGhF3mmkVI+pzrDCidxCL+D
+ LtLwLu/ZWgDhSmLYEJKm3JLP7w==
+X-Google-Smtp-Source: AMrXdXtO0qt6CqcaBM6jnu8tk2EWZ2JoCctBJbQ+Cucb0k7ebKS2GvCT120dezrjMJvHRCuOSiXiYw==
+X-Received: by 2002:a05:6870:9564:b0:15b:a3dc:d5f6 with SMTP id
+ v36-20020a056870956400b0015ba3dcd5f6mr789144oal.3.1674057377075; 
+ Wed, 18 Jan 2023 07:56:17 -0800 (PST)
+Received: from [192.168.1.94] ([207.135.234.126])
+ by smtp.gmail.com with ESMTPSA id
+ d5-20020a4aaa85000000b004cb050fd09fsm16663392oon.29.2023.01.18.07.56.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Jan 2023 07:56:16 -0800 (PST)
+Message-ID: <b3cbaa88-9b01-e82f-bcfa-2fccc69b37c4@kernel.dk>
+Date: Wed, 18 Jan 2023 08:56:15 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <1f68b352-130d-8a6d-52b6-2f7689fe92b6@samba.org>
+User-Agent: Mozilla/5.0 (X11; Linux aarch64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.0
+Subject: Re: Problems replacing epoll with io_uring in tevent
+Content-Language: en-US
+To: Stefan Metzmacher <metze@samba.org>
+References: <c01f72ac-b2f1-0b1c-6757-26769ee071e2@samba.org>
+ <949fdb8e-bd12-03dc-05c6-c972f26ec0ec@samba.org>
+ <270f3b9a-8fa6-68bf-7c57-277f107167c9@kernel.dk>
+ <2a9e4484-4025-2806-89c3-51c590cfd176@samba.org>
+ <60ce8938-77ed-0b43-0852-7895140c3553@samba.org>
+ <79b3e423-16aa-48f1-ee27-a198c2db2ba8@samba.org>
+In-Reply-To: <79b3e423-16aa-48f1-ee27-a198c2db2ba8@samba.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,82 +87,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Volker Lendecke <vl@samba.org>, Stefan Metzmacher <metze@samba.org>,
- gd <gd@samba.org>, Samba-Technical <samba-technical@lists.samba.org>,
- Samuel Cabrero <scabrero@samba.org>
+From: Jens Axboe via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jens Axboe <axboe@kernel.dk>
+Cc: Linus Torvalds <torvalds@linux-foundation.org>,
+ Samba Technical <samba-technical@lists.samba.org>,
+ io-uring <io-uring@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Jan 17, 2023 at 03:33:42PM +0100, Ralph Boehme wrote:
->Hi!
->
->I've hacked a new dbwrap backend called dbwrap_py that calls into 
->Python for the database operations. This came out of the desire to 
->play around with the many available distributed database that are 
->available these days, eg Cassandra, etcd, FoundationDB and so on [1]. 
->All of them have Python bindings and implementing the required 
->primitives in Python is much simpler then doing it in C.
->
->I've developed dbwrap_py hand in hand with an initial backend 
->targetting FoundationDB which is a scalable, high-performance 
->key-value store with strong consistency and transaction support
->
->Thanks to the transaction support in FoundationDB it is possible to 
->implement locking using a dedicated locking record per record combined 
->with a fencing token that guards modfying database operations. Other 
->databases may offer other primitives to implement record locking.
->
->The whole thing is now functional enough such that it passes certain 
->torture tests when configured to put locking.tdb and 
->smbXsrv_open_global.tdb behind dbwrap_py.
->
->Currently the whole dbwrap layering runs unchanged on top of the 
->backend. As locking is implemented in the backend and FoundationDB 
->support watches, it would be possible to not use the current g_lock 
->and dbwrap_watch backend for dbs enabled for FoundationDB.
->
->With metze's new smb2.bench.path-contention-shared benchmark I'm 
->getting 25 opens/closes per second on my laptop with FoundationDB 
->being a single node cluster running on the laptop as well:
->
->$ bin/smbtorture //localhost/test -U slow%Passw0rd 
->smb2.bench.path-contention-shared
->...
->Opened 4 connections with qdepth=1 => 4 loops
->Running for 10 seconds
->...
->open[num/s=25,avslat=0.019662,minlat=0.000000,maxlat=0.028768] 
->close[num/s=25,avslat=0.019845,minlat=0.000000,maxlat=0.034462]
->
->$ bin/smbtorture3 //localhost/test -U slow%Passw0rd LOCAL-DBWRAP-PY
->...
->dbwrap_fetch_locked() took: 2799 us
->dbwrap_record_store() took: 4205 us
->dbwrap_exists() took: 364 us
->dbwrap_parse_record() took: 3571 us
->dbwrap_do_locked() took: 5552 us
->...
->
->The code is here:
-><https://git.samba.org/?p=slow/samba.git;a=shortlog;h=refs/heads/dbwrap_py>
->
->Config:
->
->    dbwrap_py:module = samba.samba3.dbwrap_py_fdb
->    dbwrap_py:locking.tdb = yes
->    dbwrap_py:smbXsrv_open_global.tdb = yes
->    dbwrap_py:test_db_py.tdb = yes
->
->FoundationDB would be a good candidate for a public cloud SMB frontend 
->ala Azure SMB, this is not aiming at the ctdb high performance SMB NAS 
->usecase.
->
->I'll try to get a small FoundationDB cluster setup in K8 to see how 
->that feels like. Stay tune... ;)
+On 12/28/22 9:19?AM, Stefan Metzmacher wrote:
+> Hi Jens,
+> 
+> any change to get some feedback on these?
+> https://lore.kernel.org/io-uring/60ce8938-77ed-0b43-0852-7895140c3553@samba.org/
+> and
+> https://lore.kernel.org/io-uring/c9a5b180-322c-1eb6-2392-df9370aeb45c@samba.org/
+> 
+> Thanks in advance!
 
-Great work Ralph ! I'm looking forward to playing with this.
+Finally getting around to this after the break...
 
-Jeremy.
+I think your initial patch looks reasonable for doing cancel-on-close.
+Can you resubmit it against for-6.3/io_uring so we can get it moving
+forward, hopefully?
+
+That would also be a good point to discuss the fixed file case as well,
+as ideally this should obviously work on both types.
+
+-- 
+Jens Axboe
+
 
