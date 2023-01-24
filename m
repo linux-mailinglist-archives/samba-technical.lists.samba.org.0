@@ -2,63 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FEE0675DCF
-	for <lists+samba-technical@lfdr.de>; Fri, 20 Jan 2023 20:18:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 403A4679822
+	for <lists+samba-technical@lfdr.de>; Tue, 24 Jan 2023 13:32:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=fYPQJWlniGBmq4AzLRQJWodVCfnM6YRZwibUhCT+d5A=; b=hvBtzlyB/VnWYPg3oS0o9fS6CL
-	CO9nOyMK16fkbbVSVi8xHfYSPa34mbW0NEpVUfppCBboZfPdxQZtlhPCdWx0gJmtUUlERRHWH9ky8
-	y1NixsYx9sp1vbCpAspErTvk2E6fkOsLlEPkN7Aod2HF3L1UiyVem/YJ+O7UPZxEddhiTbLxP+x7R
-	KvZJKG0ojk7XgqYGg3wKVzwcCVIo3mdKDTclMVguzQ4apbcSBdRUBeZtQ+U3K5pbDZaGr7NShud8f
-	8oh8EUDdMDyhfw1+v3cHoCC7vrwLpoTe/NXMjJC2nqT8AnbLpxf2/pypd3eKqP99kdNfzcTVYyV1S
-	iV1RDKWg==;
-Received: from ip6-localhost ([::1]:36388 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=VUvKc4qgvos/AW63Pn+D8+wPcOwMiycIo9rMmeryRSQ=; b=mWEzmwSPMsaSbl4M/fir8MBETM
+	Nt8fjIgdwR28CqincSJEoNVVdzEZMYn+3QroaSSo57aJOnTJAeEYPqjElqyV0tQ3Si+3XZfyZ/VnW
+	is2bX6Xpjp4Svz2rLif6EjGjbR+j7SsqeF6Z7YAEf4icT1x6Tj3LGdzZq0HKaLWEMAEH8KArKp/ez
+	2U5dJM8RNZfT3NuM4lbuKJW0ujtISFr1tFiuwQGYBP3hm67TL0WtMGVHFquqEpyet20Lz2gW7i4xO
+	DnduuWkZgAFTwPcrvhxFxkh84EJIR+uOrP5vcUk6SV9gm5G0Yey4hQTyxcXiaq6gAfROjFLzct8Gm
+	NgnyIubw==;
+Received: from ip6-localhost ([::1]:27464 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pIwtp-001FGx-Gp; Fri, 20 Jan 2023 19:18:05 +0000
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f]:34553) 
+	id 1pKIT6-0026XC-5A; Tue, 24 Jan 2023 12:32:04 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31898) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pIwtk-001FGo-6i
- for samba-technical@lists.samba.org; Fri, 20 Jan 2023 19:18:02 +0000
-Received: by mail-lf1-x12f.google.com with SMTP id cf42so9543423lfb.1
- for <samba-technical@lists.samba.org>; Fri, 20 Jan 2023 11:17:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fYPQJWlniGBmq4AzLRQJWodVCfnM6YRZwibUhCT+d5A=;
- b=heb15bTtdZT17xmmqjNbgXZT0dR2QN6/fu8nuXR960n6sInBBperAgntX22WCjwI2n
- I+g6HqywVBYfiBrGn/zojiY5V3EHTnonOlNP3RdOw44+HwSm34z5JjBJz65SuGhOCXC9
- j+iv6bzjhCisC3KHwxyceKjn5A2X5q1fy0Pc3sF2M34Fp8VqntW18liDTWnUl8MWrLUA
- OIIgmEnMkN9lfCwBscWFHFAXWURMk6uvWbUx2WSxUdtg9mmwAxunaqv6Gty9RdskDzjw
- W2NrC8hH594iosmYoGQ3BGNbWdf93K6yNPM3md3/ij/lk289A5YBrVcQRwMsbRqdHTPw
- v1Vg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fYPQJWlniGBmq4AzLRQJWodVCfnM6YRZwibUhCT+d5A=;
- b=3WZm0533Acmxd0IVbB0YD4TYVGY5EhqUyH4nDjVHqMftl9LEKJCVF6b8cAsNC+0yds
- kPUPiFxkYovmxiLNMXdtg3xc50AVzBlo3R6aMLOVKWC8P6l3rQ8+WnV45VmzVSjKzFwI
- VdF8WzoyGrbTLOMgCko6mJdr0xHYwftld0n7jZWo4/0VpTyqO4idYoH3XpIwqhDYyMf4
- Ta9C7Q7rfxNorMZEeJJ3ayb8yDdfCSZhHRUD7m3DvFFYpa0mQedG4zmPnJl12BK9i4rH
- tkCfNUvKPEfsSfdAIQ3agzUdH+I/0E3iTWmMMZwPdzEhYKVWQGxdr8Hp6+Wpv4eJTSIB
- Kv4g==
-X-Gm-Message-State: AFqh2ko8sP0GZokxnn/UrCh3WhT5Pf/b4hPl5z1HeUW1G1fBshbJ30uC
- LlCHlu0wApmsKtKIjIObtpwF7HTV8qQABBFfunM=
-X-Google-Smtp-Source: AMrXdXtDjM/fxl3sPQunHrLRY+Jj0Ha2oXd/y57zrVpFObrM9t3REGLn9LV3cDjpgSmVtgRrV4wMJxAi7FbJPsX/uXE=
-X-Received: by 2002:a05:6512:2397:b0:494:842e:3f6 with SMTP id
- c23-20020a056512239700b00494842e03f6mr858882lfv.225.1674242278695; Fri, 20
- Jan 2023 11:17:58 -0800 (PST)
+ (Exim) id 1pKIT1-0026Ww-7z; Tue, 24 Jan 2023 12:32:01 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=VUvKc4qgvos/AW63Pn+D8+wPcOwMiycIo9rMmeryRSQ=; b=rHn+PXprGHdEWrWR0unNnVJwSh
+ 6EXk5y0dgakEdo63c17ySkEL7wncHAJkRzmY4OtvXNHTCMvajhGyH4zma4P7Kzzs32z8Z8ib9RwjS
+ I9q/R9WACBESrmKGkdouegPr2jeyZNcJN4frkknjNtJek56nwl3zoN/xQBANs420nwaqP4St2xcOa
+ WTtGw7C0cCRL1BotLZxyCAp8bR+TNMujmKzkgHX/8nsLRSqihhnB82sartvHCy/yf+wjAyWbrMHjV
+ LBnTEY9pK5I1wHb7dKylYlFGqsK6rjFWufLL5cIxbZulRUy0ahL6drnl0kb96IW/4iZVBjfPdUSg3
+ VfTNocvVlllzAObkvlisy8VJB9CuIvd+19K/e0LWUTObtTKdk1n+XrKvXWhV6fzFZ7SK302SFUDaU
+ pE+6Hj/QnH+nPKdb6D6b740S3byIip6uoVYCDRPrAPnKf5JALpOyxh5HvL0Wc34z9emFDHzMUGI9L
+ 6Ua+8rFFfS0JgaSVKHQR6bpb;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pKIT0-00A5j9-9V; Tue, 24 Jan 2023 12:31:58 +0000
+Message-ID: <c08b0b3f-8ef5-1063-5412-18e96a1809e9@samba.org>
+Date: Tue, 24 Jan 2023 13:31:57 +0100
 MIME-Version: 1.0
-References: <20230120120857.60444-1-andriy.shevchenko@linux.intel.com>
- <87r0vpe182.fsf@cjr.nz>
-In-Reply-To: <87r0vpe182.fsf@cjr.nz>
-Date: Fri, 20 Jan 2023 13:17:47 -0600
-Message-ID: <CAH2r5mvgSnVhLSx=sjAu=dK1C5q9tqby-EmSz6_3rp+Azw-hKg@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] cifs: Get rid of unneeded conditional in the
- smb2_get_aead_req()
-To: Paulo Alcantara <pc@cjr.nz>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Subject: Re: [SCM] Samba Shared Repository - branch master updated
+To: samba-technical@lists.samba.org, samba-cvs@lists.samba.org
+References: <E1pKFPN-006HUv-Jj@hrx0.samba.org>
+Content-Language: en-US, de-DE
+In-Reply-To: <E1pKFPN-006HUv-Jj@hrx0.samba.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,42 +57,90 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: linux-cifs@vger.kernel.org, Shyam Prasad N <sprasad@microsoft.com>,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- Ronnie Sahlberg <lsahlber@redhat.com>, Steve French <sfrench@samba.org>,
- Tom Talpey <tom@talpey.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Steve French <stfrench@microsoft.com>
+From: Stefan Metzmacher via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-merged into cifs-2.6.git for-next
+Am 24.01.23 um 10:16 schrieb Volker Lendecke:
+> The branch, master has been updated
+>         via  f7b50bc059d smbd: Use smbXsrv_open_global_parse_record() in .._verify_record()
+>         via  132b83d0659 smbd: Simplify smbXsrv_open_global_parse_record()
+>         via  2f6776741dc smbd: Move smbXsrv_open_global_parse_record() up in smbXsrv_open.c
+>         via  3c779de8cf9 smbd: Simplify smbXsrv_open_global_verify_record()
+>         via  f1a66267bcf smbd: Save a few lines in smb2srv_open_lookup_replay_cache()
+>         via  35a32171b50 smbd: Fix a typo
+>        from  253891032ee python: Don't use deprecated escape sequences
+> 
+> https://git.samba.org/?p=samba.git;a=shortlog;h=master
+> 
+> 
+> - Log -----------------------------------------------------------------
+> commit f7b50bc059d1b5c7e40cdc4e88ef5ee16f7db670
+> Author: Volker Lendecke <vl@samba.org>
+> Date:   Thu Jan 19 12:29:20 2023 +0100
+> 
+>      smbd: Use smbXsrv_open_global_parse_record() in .._verify_record()
+>      
+>      Signed-off-by: Volker Lendecke <vl@samba.org>
+>      
+>      Autobuild-User(master): Volker Lendecke <vl@samba.org>
+>      Autobuild-Date(master): Tue Jan 24 09:15:26 UTC 2023 on atb-devel-224
+> 
+> commit 132b83d0659ddc25a96327edc1c7dd23b17a56fd
+> Author: Volker Lendecke <vl@samba.org>
+> Date:   Thu Jan 19 12:25:21 2023 +0100
+> 
+>      smbd: Simplify smbXsrv_open_global_parse_record()
+>      
+>      It does not need a db_record.
+>      
+>      Signed-off-by: Volker Lendecke <vl@samba.org>
+> 
+> commit 2f6776741dc6469d78b94da22d75f26cccca5fc9
+> Author: Volker Lendecke <vl@samba.org>
+> Date:   Thu Jan 19 12:22:33 2023 +0100
+> 
+>      smbd: Move smbXsrv_open_global_parse_record() up in smbXsrv_open.c
+>      
+>      Avoid a prototype in the next patches
+>      
+>      Signed-off-by: Volker Lendecke <vl@samba.org>
+> 
+> commit 3c779de8cf99d0936956a12484fd726d5be46c7e
+> Author: Volker Lendecke <vl@samba.org>
+> Date:   Fri Jan 6 16:25:03 2023 +0100
+> 
+>      smbd: Simplify smbXsrv_open_global_verify_record()
+>      
+>      Don't depend on the record to be passed in, return NTSTATUS. The two
+>      flags were a bit confusing to me, now NT_STATUS_OK means "found a
+>      valid record with a live process", and NT_STATUS_FATAL_APP_EXIT means
+>      we found a stale record from a crashed smbd
+>      
+>      Signed-off-by: Volker Lendecke <vl@samba.org>
+> 
+> commit f1a66267bcfcd48f3c7ca2ada3f62d40209163e3
+> Author: Volker Lendecke <vl@samba.org>
+> Date:   Wed Jan 11 11:44:29 2023 +0100
+> 
+>      smbd: Save a few lines in smb2srv_open_lookup_replay_cache()
+>      
+>      Directly initialize variables, don't leave dangling pointers in TDB_DATA
+>      
+>      Signed-off-by: Volker Lendecke <vl@samba.org>
+> 
+> commit 35a32171b5067d5b80acffc99f8d43cdc7f5f9a7
+> Author: Volker Lendecke <vl@samba.org>
+> Date:   Wed Jan 11 08:18:35 2023 +0100
+> 
+>      smbd: Fix a typo
+>      
+>      Signed-off-by: Volker Lendecke <vl@samba.org>
+>      Reviewed-by: Stefan Metzmacher <metze@samba.org>
 
-On Fri, Jan 20, 2023 at 8:22 AM Paulo Alcantara via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> Andy Shevchenko <andriy.shevchenko@linux.intel.com> writes:
->
-> > In the smb2_get_aead_req() the skip variable is used only for
-> > the very first iteration of the two nested loops, which means
-> > it's basically in invariant to those loops. Hence, instead of
-> > using conditional on each iteration, unconditionally assing
-> > the 'skip' variable before the loops and at the end of the
-> > inner loop.
-> >
-> > Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-> > ---
-> >  fs/cifs/smb2ops.c | 14 +++++++++-----
-> >  1 file changed, 9 insertions(+), 5 deletions(-)
->
-> Reviewed-by: Paulo Alcantara (SUSE) <pc@cjr.nz>
->
+These were all reviewd by me...
 
+metze
 
--- 
-Thanks,
-
-Steve
 
