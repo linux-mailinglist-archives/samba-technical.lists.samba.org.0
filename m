@@ -2,44 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B47B679A92
-	for <lists+samba-technical@lfdr.de>; Tue, 24 Jan 2023 14:51:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE46B679F41
+	for <lists+samba-technical@lfdr.de>; Tue, 24 Jan 2023 17:55:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=G664Oa9E7tgCDrjDcRfXXtUoQ2gBUe0+aLCIqxLL0A8=; b=ao+U1tKJnLr4FkJ5SK2lKEZ/md
-	0WaTJefE2AACJA8uyfQPyc9eV+XieV6mL1LzvytHOtfspGx75VaM7DRc7GppX82sUlVdUTI03waar
-	FPao8rUyPdgJPZPhhlmHUvXG8WFMI75csUW2ChsBsnjF0f1xO4zzI8hT1CAYBYvhvLxxJG5yU2hvs
-	+/xjsIo9iW08kyPk5JXF6/8ze5Pp3Ftsw1QYAWKRKD722YSMTgMqAgRWGWH3qo+0JyjI+HIPoO4Er
-	/A5nHwdQE5/whSIBddHpCc42rBKXYd+4gOumBOIE4BmtOZLh8BxdLnwdbgOAkPhSC1LoQ0+JLba8k
-	DEVf9GXg==;
-Received: from ip6-localhost ([::1]:20944 helo=hr1.samba.org) 
+	bh=ffFJ42GCdaPg3I0RAabsDJE1R4K70jxPonfY1VXA/Io=; b=0/N0qjlKQ4cK97GZcWNHLBlibQ
+	/0nIBwfxNdjfTBX1gu8eycoSUK958Xx43M0sjcDCYpwjKxxRf46UddtZVBN0NrDQL9DeUyOR5+XEp
+	iehLKl7kHrqWAuvRxu/ok7k/JPpB69dYMzrHp17+YBYclxJ2h7O3wHKFB8XuZXEyov1MINYyiZrCG
+	DX8fDf+5Eu1m9jqOemPMV7sIriTUFqEVR/fXyVs8H2177fRGEMOozA54KSRWnJzeGGYUNHJ5NeY8E
+	Nqp5jxmRjjFSEmKQ3g8gy9M73mkIwlJf86hEhbGcwNFUQWVgW3fjxjckS08ajmZjMFnsL4NrOPfa9
+	YCvCxs8A==;
+Received: from ip6-localhost ([::1]:38562 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pKJhI-0027Bx-3J; Tue, 24 Jan 2023 13:50:48 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:32054) 
+	id 1pKMZB-002Adu-Ok; Tue, 24 Jan 2023 16:54:37 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:22384) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pKJhC-0027Bo-Aq
- for samba-technical@lists.samba.org; Tue, 24 Jan 2023 13:50:44 +0000
+ (Exim) id 1pKMZ5-002Adk-LO
+ for samba-technical@lists.samba.org; Tue, 24 Jan 2023 16:54:34 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:To:From:CC;
- bh=G664Oa9E7tgCDrjDcRfXXtUoQ2gBUe0+aLCIqxLL0A8=; b=X8VU0GCyMGGnbra6F33NL3SLwz
- 2cPZnPbzsY/0/xHuJL5uG85jzcSPM1xHsiY3vo8hr5UZGq+9ttfY/LYyNco5Kdr8N//UhRcMIsRme
- FkqJtFUEicRYreiFMKknMAROX8YgjBQc4AJ/Yrv3/hie4+M3kZK5rVAoBXgsgHTbRbUwUiXfT0Qta
- 5DVcBaLG/9E+yubPg3cEUuupFiOD4Ao5/tGvZV4r7/Rw1kkCHFaux5bPtbMFduilXROVg5pJJlmvb
- fst5SsiXaOMG68b1T4K/3PpOlU9oDs56uol9wDwcHTHbbeYy0WSCjNlP4dY6FiN58LzCNct6CaHV1
- 66Yy8JfcG9HYN2O/6ytwd4V0ix1A4zFqtQ/fudmCUsOmRPVqodAp8Oo23vPdlfN4dsKC5mDivlaNz
- k58rrQb6lQLWsDziP/CMD4pMdoJN3omkmFCh5byJtC+PECGOlGyzppfLJdl89WnzdTNL4j0QHY0Zh
- U82F6WmP4n66fcW1pc3WvPGi;
+ bh=ffFJ42GCdaPg3I0RAabsDJE1R4K70jxPonfY1VXA/Io=; b=KUzkimo3/lyN/tvcUq/pauVxjx
+ 8nLhF8g21pgDFmPibdbNXpyY9kD/3wy7Y/XYKWoI1QJsonsL5ncXMgm32K6js56ulljSmiFiWxOwC
+ YnnxgfpzgN6Vuw/SQy8sgMiXwQ2kIC7cnVJY1oh3WEoVbMYbX8C3VeMDK7n7AUBnCfDIxsy82m++m
+ ZZmgfZTYARoRV6nTTuDSoTgJCsp6y6z3oGCGKTZcX1/9MVhokDR1WREiPl2Wg5ZmInAqMXEQW6jHo
+ bNYQlldPH8icD0f+Vas3RaNmvjgABQVAfqu6srP/CF4KePxQPxsyqnAsCQbo9WnUB/7M/MyKe0Qj1
+ D4Pm+io8weG1edk/0zvOUvFozSCob2iz9Mvv/BI9JEG+FV5KFlcA3Y2GWWRHrhiv/YZ40y0eKUQl9
+ BkrS7C79j6uS28gOQAXAyQT+L8/URRiOoOzvO4S4N3L8f97elff9I6DWhp7rBA30GLUzj7ISOXFc0
+ N96k8JgbdmATc2ek+j5CiIOA;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pKJh8-00A68M-Vg; Tue, 24 Jan 2023 13:50:39 +0000
+ (Exim) id 1pKMZ4-00A71R-Hc; Tue, 24 Jan 2023 16:54:30 +0000
 To: samba-technical@lists.samba.org, Stefan Metzmacher <metze@samba.org>
 Subject: Re: [SCM] Samba Shared Repository - branch master updated
-Date: Tue, 24 Jan 2023 14:50:37 +0100
-Message-ID: <1869592.tdWV9SEqCh@magrathea>
-In-Reply-To: <c08b0b3f-8ef5-1063-5412-18e96a1809e9@samba.org>
+Date: Tue, 24 Jan 2023 17:54:30 +0100
+Message-ID: <3744464.kQq0lBPeGt@magrathea>
+In-Reply-To: <1869592.tdWV9SEqCh@magrathea>
 References: <E1pKFPN-006HUv-Jj@hrx0.samba.org>
  <c08b0b3f-8ef5-1063-5412-18e96a1809e9@samba.org>
+ <1869592.tdWV9SEqCh@magrathea>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
@@ -61,101 +62,35 @@ Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tuesday, 24 January 2023 13:31:57 CET Stefan Metzmacher via samba-technical 
+On Tuesday, 24 January 2023 14:50:37 CET Andreas Schneider via samba-technical 
 wrote:
-> Am 24.01.23 um 10:16 schrieb Volker Lendecke:
-> > The branch, master has been updated
+> > > commit 35a32171b5067d5b80acffc99f8d43cdc7f5f9a7
+> > > Author: Volker Lendecke <vl@samba.org>
+> > > Date:   Wed Jan 11 08:18:35 2023 +0100
+> > > 
+> > >      smbd: Fix a typo
+> > >      
+> > >      Signed-off-by: Volker Lendecke <vl@samba.org>
+> > >      Reviewed-by: Stefan Metzmacher <metze@samba.org>
 > > 
-> >         via  f7b50bc059d smbd: Use smbXsrv_open_global_parse_record() in
-> >         .._verify_record() via  132b83d0659 smbd: Simplify
-> >         smbXsrv_open_global_parse_record() via  2f6776741dc smbd: Move
-> >         smbXsrv_open_global_parse_record() up in smbXsrv_open.c via 
-> >         3c779de8cf9 smbd: Simplify smbXsrv_open_global_verify_record()
-> >         via  f1a66267bcf smbd: Save a few lines in
-> >         smb2srv_open_lookup_replay_cache() via  35a32171b50 smbd: Fix a
-> >         typo
-> >        
-> >        from  253891032ee python: Don't use deprecated escape sequences
+> > These were all reviewd by me...
 > > 
-> > https://git.samba.org/?p=samba.git;a=shortlog;h=master
-> > 
-> > 
-> > - Log -----------------------------------------------------------------
-> > commit f7b50bc059d1b5c7e40cdc4e88ef5ee16f7db670
-> > Author: Volker Lendecke <vl@samba.org>
-> > Date:   Thu Jan 19 12:29:20 2023 +0100
-> > 
-> >      smbd: Use smbXsrv_open_global_parse_record() in .._verify_record()
-> >      
-> >      Signed-off-by: Volker Lendecke <vl@samba.org>
-> >      
-> >      Autobuild-User(master): Volker Lendecke <vl@samba.org>
-> >      Autobuild-Date(master): Tue Jan 24 09:15:26 UTC 2023 on atb-devel-224
-> > 
-> > commit 132b83d0659ddc25a96327edc1c7dd23b17a56fd
-> > Author: Volker Lendecke <vl@samba.org>
-> > Date:   Thu Jan 19 12:25:21 2023 +0100
-> > 
-> >      smbd: Simplify smbXsrv_open_global_parse_record()
-> >      
-> >      It does not need a db_record.
-> >      
-> >      Signed-off-by: Volker Lendecke <vl@samba.org>
-> > 
-> > commit 2f6776741dc6469d78b94da22d75f26cccca5fc9
-> > Author: Volker Lendecke <vl@samba.org>
-> > Date:   Thu Jan 19 12:22:33 2023 +0100
-> > 
-> >      smbd: Move smbXsrv_open_global_parse_record() up in smbXsrv_open.c
-> >      
-> >      Avoid a prototype in the next patches
-> >      
-> >      Signed-off-by: Volker Lendecke <vl@samba.org>
-> > 
-> > commit 3c779de8cf99d0936956a12484fd726d5be46c7e
-> > Author: Volker Lendecke <vl@samba.org>
-> > Date:   Fri Jan 6 16:25:03 2023 +0100
-> > 
-> >      smbd: Simplify smbXsrv_open_global_verify_record()
-> >      
-> >      Don't depend on the record to be passed in, return NTSTATUS. The two
-> >      flags were a bit confusing to me, now NT_STATUS_OK means "found a
-> >      valid record with a live process", and NT_STATUS_FATAL_APP_EXIT means
-> >      we found a stale record from a crashed smbd
-> >      
-> >      Signed-off-by: Volker Lendecke <vl@samba.org>
-> > 
-> > commit f1a66267bcfcd48f3c7ca2ada3f62d40209163e3
-> > Author: Volker Lendecke <vl@samba.org>
-> > Date:   Wed Jan 11 11:44:29 2023 +0100
-> > 
-> >      smbd: Save a few lines in smb2srv_open_lookup_replay_cache()
-> >      
-> >      Directly initialize variables, don't leave dangling pointers in
-> >      TDB_DATA
-> >      
-> >      Signed-off-by: Volker Lendecke <vl@samba.org>
-> > 
-> > commit 35a32171b5067d5b80acffc99f8d43cdc7f5f9a7
-> > Author: Volker Lendecke <vl@samba.org>
-> > Date:   Wed Jan 11 08:18:35 2023 +0100
-> > 
-> >      smbd: Fix a typo
-> >      
-> >      Signed-off-by: Volker Lendecke <vl@samba.org>
-> >      Reviewed-by: Stefan Metzmacher <metze@samba.org>
+> > metze
 > 
-> These were all reviewd by me...
+> I suggest to use my `git review+` tool :-)
 > 
-> metze
+> https://git.cryptomilk.org/users/asn/dotfiles.git/tree/git/bin/git-review+
+> 
+> same for signoff:
+> https://git.cryptomilk.org/users/asn/dotfiles.git/tree/git/bin/git-signoff+
 
-I suggest to use my `git review+` tool :-)
+Oh and I have a review check in for my 'autobuild' command.
 
-https://git.cryptomilk.org/users/asn/dotfiles.git/tree/git/bin/git-review+
+https://git.cryptomilk.org/users/asn/dotfiles.git/tree/git/.gitconfig#n113
 
-same for signoff:
-https://git.cryptomilk.org/users/asn/dotfiles.git/tree/git/bin/git-signoff+
+line 113-119
 
+This will warn you if there are unreviewed patches.
 
 -- 
 Andreas Schneider                      asn@samba.org
