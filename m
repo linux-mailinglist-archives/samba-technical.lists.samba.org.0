@@ -2,54 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5966B67A8DF
-	for <lists+samba-technical@lfdr.de>; Wed, 25 Jan 2023 03:39:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A1A867B10C
+	for <lists+samba-technical@lfdr.de>; Wed, 25 Jan 2023 12:21:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=LF1I/eUJ9dASCcGcgp8rOJSaKcuY07mcGyU5McPNQv8=; b=IvnU72IHKFoewIBAPRLLs5lbQD
-	2uPEUTzIbluWIwpsjZ5diFm8yEIIpPe3YDRdk3AJukU6S8rokCtUmHc30EuVDbD+soFqAv4H2tPa0
-	Zl2OW44eLwu8iBUk+kzFW+MxVMJMn7uJEptfgR1kpzIDIctB260/pMG73Ae8zDWolCEyZHeQye6Rn
-	9HuTntNNxSO9KoWnlJqTg5t6ahV86h2XmhsomK/vXbfAkCX4tPQBZGUeG3sAe9w2dLHoz4CmzjYzK
-	yB92lRwtQfqGMmAoIbKZsoct4ZG1RX5/yj7qfc9HwpwBKiBVLvLKSDyj0M6eWAIZ01G5n77vPXjTZ
-	O2oE/SWg==;
-Received: from ip6-localhost ([::1]:20864 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=C3EmoLnTRuxJ3dlIShe6A8VSUJ4GgNJBCud7pAkQ5mY=; b=NECL5Raa9vlv0Wk5yTH6ROERhK
+	hd7RZ74iUyD29HQ9fat3nHn4FGR5pHMNS/SEPKATn0fLU9kAykHoWL9wDEsI1RquiJP8uYQVXQUcI
+	CeiVVhJCe1Ua31CmBcAeS4omhgvpm21Dw4a4KUlQ0vneci3dj9Q0nhCK6tL8TPKrteGThegSzLd+/
+	DOwGJjktXJIlPq5gLz1tCM9B02fsESklYmCXlc0eFcYOPur/I4+MBJv3o5ywWktALZiJZANom+DBz
+	WB7I+ysdb4aBFDPGgrMls1QOmmdM/ImSEWCmx7HANTFDYRGku4MIxXnXmaS/6GFRYmzawlSvI8HAf
+	XgfbpDxQ==;
+Received: from ip6-localhost ([::1]:65146 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pKVgx-002fuM-4u; Wed, 25 Jan 2023 02:39:15 +0000
-Received: from mail.ozlabs.org ([2404:9400:2221:ea00::3]:53351
- helo=gandalf.ozlabs.org) 
+	id 1pKdpv-002mwb-E1; Wed, 25 Jan 2023 11:21:03 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55468) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pKVgs-002fuC-Du
- for samba-technical@lists.samba.org; Wed, 25 Jan 2023 02:39:13 +0000
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4P1p1v4bymz4xZb;
- Wed, 25 Jan 2023 13:38:59 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
- s=202004; t=1674614339;
- bh=LF1I/eUJ9dASCcGcgp8rOJSaKcuY07mcGyU5McPNQv8=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=IEtpcQvXwJLuIjEFWr5sUNqjav25oiDwZD9j1QKOL+zjbgCr3InsBUXa5cbM/6zxy
- NaNh1jYEOgAemO1LYghMilNpQvR8VLlg7KrdD/orZELRQPPrkvOqXzYbT05U/fAK/o
- q83Gp1wKncSXAWzWkLgxcUAsDWdSMpHAVjghtZzjvU68cB3uGgcqaluNxRjPX0UtKa
- UC48j2jG5uW+6eOAD8D0BKnjtQhCFhpQCABujidk/vbD7iXDAfZtuDmvGOnfiSx4IM
- HfQnDvuPZcr6DG0kGum/2MkQqm6RtLknok/62zS4tQ1YoSWJmSD+lKzvxTtxEAASKX
- TYwcEr06aZFtw==
-Date: Wed, 25 Jan 2023 13:38:58 +1100
-To: samba-technical@lists.samba.org
+ (Exim) id 1pKdpq-002mwS-Gw
+ for samba-technical@lists.samba.org; Wed, 25 Jan 2023 11:21:01 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=C3EmoLnTRuxJ3dlIShe6A8VSUJ4GgNJBCud7pAkQ5mY=; b=WWtRK2jb+rx7qsVg5XUPUUIjP1
+ XFJFR06sCcEH7LK9k7iIuay91Bm8Q+SDwiJDuZ5B1MAKTzPZ09OwfBkr1oklgFk2jJYw/D3e9ddcP
+ qHEuorOGRWTXQW0WOsEk5AOKDaMIn4jjxq11uHkPgWcQTlDYRpxyroxicuQKzQ7yiHOpRnvFcDNhz
+ ha2AD+cPwWNO3VwXmEI2ksKZd6pydUaoyFepthsp0GshTJqR8rF2kRarzYoLbY+WO32HKXMUW7IJU
+ YVJl5L50hhmuq55ll1supcUY2DaDmASFrAj39hKXpgvgb93TSFD9cRLs4R8Ap/gm3fzMNRN+TUg3E
+ QyEvBlRGxPuLvkXM25lq7IQlNEMW+nSpJzq4jvGd6x9Nxfa2ABdpadgk0kUaQGw4NyHLQBEiANAVG
+ YRXS/lQZJvCLinW/mQ12f4Lya1miHNNx03zxQpdHhUdAPDQVYDxyzFwWHcFWtWz3tM5Z+gLpH3Y5V
+ 3U3ykeNfA0t1MtOpO41l7hSG;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pKdpp-00AEJr-As; Wed, 25 Jan 2023 11:20:57 +0000
+To: Jeremy Allison <jra@samba.org>
 Subject: Re: [SCM] Samba Shared Repository - branch master updated
-Message-ID: <20230125133858.2108cdc8@martins.ozlabs.org>
-In-Reply-To: <3744464.kQq0lBPeGt@magrathea>
-References: <E1pKFPN-006HUv-Jj@hrx0.samba.org>
- <c08b0b3f-8ef5-1063-5412-18e96a1809e9@samba.org>
- <1869592.tdWV9SEqCh@magrathea> <3744464.kQq0lBPeGt@magrathea>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.35; x86_64-pc-linux-gnu)
+Date: Wed, 25 Jan 2023 12:20:56 +0100
+Message-ID: <5801755.MhkbZ0Pkbq@magrathea>
+In-Reply-To: <Y9CEVgJd3XgnHqN6@jeremy-acer>
+References: <E1pKFPN-006HUv-Jj@hrx0.samba.org> <1869592.tdWV9SEqCh@magrathea>
+ <Y9CEVgJd3XgnHqN6@jeremy-acer>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Warn: EHLO/HELO not verified: Remote host 2404:9400:2221:ea00::3
- (mail.ozlabs.org) incorrectly presented itself as gandalf.ozlabs.org
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,68 +56,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: Andreas Schneider <asn@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Stefan Metzmacher <metze@samba.org>, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, 24 Jan 2023 17:54:30 +0100, Andreas Schneider via
-samba-technical <samba-technical@lists.samba.org> wrote:
-
- 
-> Oh and I have a review check in for my 'autobuild' command.
+On Wednesday, 25 January 2023 02:22:30 CET Jeremy Allison wrote:
+> On Tue, Jan 24, 2023 at 02:50:37PM +0100, Andreas Schneider via samba-
+technical wrote:
+> >I suggest to use my `git review+` tool :-)
+> >
+> >https://git.cryptomilk.org/users/asn/dotfiles.git/tree/git/bin/git-review+
+> >
+> >same for signoff:
+> >https://git.cryptomilk.org/users/asn/dotfiles.git/tree/git/bin/git-signoff+
 > 
-> https://git.cryptomilk.org/users/asn/dotfiles.git/tree/git/.gitconfig#n113
+> Great work Andreas ! Although I personally prefer to use the
+> "Reviewed-by: <myself>" tag as a mark I've actually read and
+> understood the code I've merged in my tree.
 > 
-> line 113-119
+> Whilst I'm reviwing someone's patch I leave off the "Reviewed-by: <myself>"
+> tag on patches I don't understand, and only add them once I'm
+> good with the code.
 > 
-> This will warn you if there are unreviewed patches.
+> So doing a bulk add of "Reviewed-by: <myself>" actually breaks
+> my workflow.
 
-I think this will error with no possibility of override.
+It depends.
 
-I agree that a review check in a hook is a good idea.
+For example I reviewed already Pavel his debug indentation patches but asked 
+to add a test now. So once this is done I will review the test and as I 
+reviewed the other stuff already I can just call `git review+`.
 
-However, before doing that, we need to clarify our rule:
+It can also be the other way around. Someone reviews my MR and adds a comment 
+that the patches look fine. Lets assume that was you. Then I can just do:
 
-  Each commit in master should have been reviewed by at least two samba
-  team members. For this purpose, involvement in patch creation is
-  considered as reviewing.
+  git review+ --by jra
+  git autobuild
 
-  - https://wiki.samba.org/index.php/CodeReview#policy
 
-There is also this:
+	Andreas
 
-  Outside contributors are welcome to review patches also, this is a
-  good way to learn more about Samba! 
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
-  - https://wiki.samba.org/index.php/Contribute#Review_process
 
-To me, a sane understanding of is that each patch must contain 2
-Signed-off-by: and/or Reviewed-by: tags by different Samba team members.
-Checking for 1 Reviewed-by: tag isn't sufficient (for non-team
-submissions and if there are non-team reviews) and we will occasionally
-still mess up.
-
-What we really need is a script that has access to a list of Samba Team
-email addresses (which are already public knowledge), and counts the
-number of Sign-off-by: and Reviewed-by: tags containing those addresses.
-
-However, there is still a corner case.  :-(  Notice I said "different"
-above?  I have many WIP commits in branches that are years old.  If I
-update and contribute some of those now, they will have my personal
-Signed-off-by:, to acknowledge the circumstances under which they were
-initially written, and a DDN Signed-off-by:, to acknowledge current
-circumstances. In this case, we could de-dupe using the name, so the
-process would become:
-
-1. Get Signed-off-by: and Reviewed-by: lines
-2. Keep the name for those with a Samba team email address
-3. Count the number of unique names
-4. Is it 2 or more?
-
-Any other corner cases?  :-)
-
-peace & happiness,
-martin
 
