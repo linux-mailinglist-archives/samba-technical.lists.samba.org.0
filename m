@@ -2,67 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CFF1680148
-	for <lists+samba-technical@lfdr.de>; Sun, 29 Jan 2023 21:04:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 08FB5680B3C
+	for <lists+samba-technical@lfdr.de>; Mon, 30 Jan 2023 11:48:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=vJxH3/2WK1vJAtWDWu9OWSqPWPvJWZWlvGmZt8o4Wqg=; b=13sb90cFS+pZXAz5P18uuaaTge
-	5uVFLNMkFjDUtl6+MZHZq4IXd2AvEw4aHbYi+4pVUpqrRMS8XB9g3N43hNaaOWHv4GsTW+pTbya5b
-	DYxM5kxkcL1dGwE7B+oOOBtwAu+mbYv8mPV3bMdP3a9jC1U9aopI40PM5Vr+niC1R4VkLo2GZFquN
-	JNhZ0QHkLnZ8PlYNbG3SugX7Jkbn6YA3WXAWddDU9EDLb35Ie5qSildYBszAnqdrEYjjtHzHtp8Qf
-	E+nfgB6z4ZAi5Drea/HCM/nnAE7saVjVYY7ibUXKPfLLOKTMKkNqKAuCZIaU+yGJ9M6G04PsKyKfN
-	WHanMU9w==;
-Received: from ip6-localhost ([::1]:50716 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=CICRFAbCzChYD1znyWS61qGZqh3HfSsIj8zLg6AqEXc=; b=srHfnumusKjuelkhW9SCagbMXt
+	m/zgch7ijJX1dexjb93Ktcj75gpCnPBjKYaKedPJMfIkfike0LO15Q0xcm37fEKwOeUeLrAlLrlhz
+	tRhJZB7NK1oenJ8H8zB+E6xWKGU1Vh/Ex5LH6nl528PNWDTFzOiRbS/TV56nRvv/rl9FYdH8fuxwp
+	Rza+C93uvsvIXro5zAmm+PSYCZhV4RHdXpyOTMKmEwHu5jbCIq8LaFMr30GSPVNS2bYWmCCdhYMqr
+	wmiNOM+p+ldpFrNNbHTXc2ZdKY/du0cCJy25IYStWVDfQsLxPlwLZg3iQriyfU/lJSeCzkU0/9vmm
+	/fe+XrVg==;
+Received: from ip6-localhost ([::1]:30696 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pMDuF-004P0k-E7; Sun, 29 Jan 2023 20:04:03 +0000
-Received: from mail-qv1-xf35.google.com ([2607:f8b0:4864:20::f35]:37601) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pMDu9-004P0P-G7
- for samba-technical@lists.samba.org; Sun, 29 Jan 2023 20:04:00 +0000
-Received: by mail-qv1-xf35.google.com with SMTP id jf11so3871639qvb.4
- for <samba-technical@lists.samba.org>; Sun, 29 Jan 2023 12:03:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6qV6T5pbqCUgwa7OV/meXsk6cATN/NVGxc79YaWs6bc=;
- b=MmvpX/pDMnU6JsL7pfOzrcyGZaAxvtdUsVyAlikyv7JdZsrFeezS0eyUFR5EzDLAg3
- gaBIU+t2nr/K44O/2dLxyB4Hq/DLAH4yCkipLeqk9YYowd25oSMa+MwcNIzYuurow9h6
- 9buOakgQM/egy4l2IRUk3LSJc6zO6ScpIP1lqCsPmk5JrHcqVCXNci5SeUjlQH2HNrg1
- 3zLNjw+w60xRzuyRwMsusPyPNH0fkBEueZN7y3vA08N/whK1GVZR5Oc+/9uCgOXCxEZU
- 5hr/v3mjX4ZmWJawYzh1oWP/2SQqiEbeWLaxBvVbIWaphepqWRr/gKSNygFGX8su1+yG
- +IQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6qV6T5pbqCUgwa7OV/meXsk6cATN/NVGxc79YaWs6bc=;
- b=Xt47T8Vq+YJGmiqPksQpz+ug60IZSN6pc+Y69SJKrI9bxSQB+HOuS23hYrIhk3LzBW
- 2ZFU0FJDIN0gWdMRL86fCDtVWkFoQyqp5VtnvuRNSObKkheId1fOu7zXx0+OlMUBLdCt
- 7qu2DGWWDvGmKJ0bMgWkZE64TK6oQ+qE21sSNJrdiZvI5B8CCr8zVkvRxSUcf/CdbFX9
- u8O+wwKCSTNVF201yFZak81Fyc29D9+hUFe+ftZDLviU+WJJ2yIArcTEjQegP1CucXyV
- bAeq6IUApSsg162P4+euunbmSlavMwDwQqHLQdvCKloJDsuEN5J7rx6JvasTjBeJDJ+Y
- okFQ==
-X-Gm-Message-State: AFqh2kpGCxwJjf6lU/FHJFXOOo1WpuD9LbWqwhndo4yVTitm259JYWPn
- VnrRndUGYEDLj2YBhU9M+3J6CJY8EfXFvsKsUWU5/QUIbvk=
-X-Google-Smtp-Source: AMrXdXu7btjTWe/Anjd8/cJnMvHKJanZTjrRrR6i78H8oU/h+f89FQjX/cR6BaXlL+r196XfZNrO6WrBbnKShcvuXU0=
-X-Received: by 2002:a05:6214:5781:b0:535:1c64:4261 with SMTP id
- lv1-20020a056214578100b005351c644261mr2572429qvb.103.1675022635048; Sun, 29
- Jan 2023 12:03:55 -0800 (PST)
+	id 1pMRhp-004ckA-Dg; Mon, 30 Jan 2023 10:48:09 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:23986) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1pMRhk-004ck1-Sh
+ for samba-technical@lists.samba.org; Mon, 30 Jan 2023 10:48:06 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1675075680;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=CICRFAbCzChYD1znyWS61qGZqh3HfSsIj8zLg6AqEXc=;
+ b=MHldm3Q39pGhe9CUJ0c5YHL5iXrVJJpgTsdj4r/WTAIv3nLpzloq8Cue1w0LGfghXM8IZw
+ GEvOKRPG2WB3w9ah88Xa+wWweUzfPytGL6fama1XJFW+ACm4wBYnf7LLYPbtvB8FwbDikJ
+ sgdlwzYkqQjP5yVQkei8pweAdndBeds=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1675075681;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=CICRFAbCzChYD1znyWS61qGZqh3HfSsIj8zLg6AqEXc=;
+ b=OlvYUt6c2t1ShAFTlHjsrJdGPR5wg69nObJ/dJ0zYvczTTOUpPPt4JKfhqmUDIghjC6Sii
+ F9H4loshiJ8HJgFBg+iX7XMbFUr8dtMJM37MRu+cl2qKMcZLTv8be6mKRI/wEK1v4hPwmi
+ fyp1WOVTmQJW/JmNRjXTDACfXFW2bog=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-107-m7rZ0bd0PKa4hu7tOJYsfA-1; Mon, 30 Jan 2023 05:31:27 -0500
+X-MC-Unique: m7rZ0bd0PKa4hu7tOJYsfA-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 408462999B26;
+ Mon, 30 Jan 2023 10:31:26 +0000 (UTC)
+Received: from warthog.procyon.org.uk (unknown [10.33.36.97])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4AA28C15BAD;
+ Mon, 30 Jan 2023 10:31:24 +0000 (UTC)
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+ Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+ Kingdom.
+ Registered in England and Wales under Company Registration No. 3798903
+In-Reply-To: <20230130092157.1759539-21-hch@lst.de>
+References: <20230130092157.1759539-21-hch@lst.de>
+ <20230130092157.1759539-1-hch@lst.de>
+To: Christoph Hellwig <hch@lst.de>
+Subject: Re: [PATCH 20/23] rxrpc: use bvec_set_page to initialize a bvec
 MIME-Version: 1.0
-References: <CA+RDaRC68P7Sfa80X9Z6VFyYnrvoxvC-hLGh=X6BQuXJW9jO8w@mail.gmail.com>
- <6b9c96ed-b116-3cdc-d361-44662662626c@samba.org>
- <Y9QgJwNzUh9EQFQV@jeremy-acer>
- <CA+RDaRCMPnsbg9yH9ciO_uPErDm_pKa+_fZtLtu0JbRpPkJUnw@mail.gmail.com>
- <Y9QuBd7wf9hfbpT5@jeremy-acer>
-In-Reply-To: <Y9QuBd7wf9hfbpT5@jeremy-acer>
-Date: Mon, 30 Jan 2023 01:33:38 +0530
-Message-ID: <CA+RDaRAxOKK9FmwOFrh=ZNkw1ZP7xZiyah=NjKjjxvs7HnK7tA@mail.gmail.com>
-Subject: Re: Does the CreateDisposition flag of a client depend on Server's
- response ?
-To: Jeremy Allison <jra@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <3347458.1675074683.1@warthog.procyon.org.uk>
+Date: Mon, 30 Jan 2023 10:31:23 +0000
+Message-ID: <3347459.1675074683@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,33 +79,24 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: varun mittal via samba-technical <samba-technical@lists.samba.org>
-Reply-To: varun mittal <vmittal05@gmail.com>
-Cc: samba-technical@lists.samba.org
+From: David Howells via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Howells <dhowells@redhat.com>
+Cc: linux-block@vger.kernel.org, linux-nfs@vger.kernel.org, kvm@vger.kernel.org,
+ linux-scsi@vger.kernel.org, linux-cifs@vger.kernel.org, netdev@vger.kernel.org,
+ samba-technical@lists.samba.org, linux-nvme@lists.infradead.org,
+ virtualization@lists.linux-foundation.org, dhowells@redhat.com,
+ linux-mm@kvack.org, target-devel@vger.kernel.org, io-uring@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, ceph-devel@vger.kernel.org,
+ linux-afs@lists.infradead.org, devel@lists.orangefs.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I made some progress on this.
-It seems the `streams_xattr` VFS module is making the difference.
+Christoph Hellwig <hch@lst.de> wrote:
 
-On Samba-4.9.5-Debian, which was not working earlier,
-once I disable this module Robocopy changes the CreateDisposition flag
-and it starts working. But I could not spot the difference in traces
-https://tinyurl.com/robocopy-issue
+> +		bvec_set_page(&bv, ZERO_PAGE(0), len, 0);
+
+Maybe bvec_set_zero_page()?
+
+David
 
 
-On Sat, Jan 28, 2023 at 1:33 AM Jeremy Allison <jra@samba.org> wrote:
-
-> On Sat, Jan 28, 2023 at 01:27:36AM +0530, varun mittal wrote:
-> >   > Wireshark will be the key. Compare between Windows server and Samba.
-> >   That is what I thought and have started looking. Any suggestions on
-> which
-> >   call in particular, there are so many :)
-> >   BTW, with a Windows server, the flag is FILE_OPEN_IF
->
-> Well that's at the point you know there's a difference,
-> so work back from that point. Try bisecting the trace
-> to see where it starts to diverge. No tools for that
-> so you'll have to do it by hand (something I unfortunately
-> have great experience with :-).
->
