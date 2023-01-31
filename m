@@ -2,122 +2,144 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EC966824CC
-	for <lists+samba-technical@lfdr.de>; Tue, 31 Jan 2023 07:47:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23BE3682EEA
+	for <lists+samba-technical@lfdr.de>; Tue, 31 Jan 2023 15:12:09 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=sGnNe8qJE2X3yj5rqYKUQ6LbP0wF0XqKxGbve+l6rv8=; b=Gm8eVpmqePfqR8rZeLKH3pieP+
-	eGu48RLQ+zrTbZ4h8cr9N9/oQVWwr9OWXe81t+JzqQvBGyoD7L1C9D/DPkVMOz2MxsbSdCILlViLq
-	tMGOoxXDLLosRleZUeURmRldzQvPv/QMD+R+GoXwajNHy90w8aOB2asTeaOW94ftKdjswZ1TIb3bv
-	BG6EhWHHqXjj8A/sFvs3dO1/67ihbw2WVgiN/KQlO2aaQxUXCmFwXnz5dqS+fcQ3QLDPW7c0yU/gi
-	/V0T0cB59gN5k9HdEQ7Ddi0x5DWQs3ByIO0x9gBWimo2DjB4DxI0igFUydvqCUfD2eZqX+s0FO1i7
-	T81MMo2w==;
-Received: from ip6-localhost ([::1]:32666 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=czeLNgb7LoxtSLWAfCLtVBbXztQ9vuiucjgaR4p7aFM=; b=Odq2BjmVuE1TWzo90GLVzRVIcD
+	H30yWzkuoiBC84fX5WLbFUPW5PUi4YN+zFvCOYipKVti5briePntTXrPGxbClKMwyUl8R9PvhVxcN
+	9Dp3hQgFCLbb43qJ1loAvOk9CjNHB6Er5H3Z+H+g2DMiNqPsKhUwm/qT4ap4gu8/no8PGp/G8VeYP
+	pYabPCVFbfSWiHtuJRrml4/qk0zMq9xOS54Cjo8eWFI5CEow0pc5YfvO+DX7pg3wTRBVlxeUxrdjh
+	H2MifY/JLz90I9PHs5fq9vJepqS/fOSjpNxE/IDvYwo3nj7bytGps/cMQ+UrBzuffooxLRjgbtPMt
+	O1uarrjw==;
+Received: from ip6-localhost ([::1]:31136 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pMkQ9-004yKb-V3; Tue, 31 Jan 2023 06:47:10 +0000
-Received: from mail-psaapc01on2123.outbound.protection.outlook.com
- ([40.107.255.123]:9568 helo=APC01-PSA-obe.outbound.protection.outlook.com) 
+	id 1pMrM5-0053ki-F5; Tue, 31 Jan 2023 14:11:25 +0000
+Received: from mx0b-00069f02.pphosted.com ([205.220.177.32]:45444) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1pMkPu-004yKR-W6
- for samba-technical@lists.samba.org; Tue, 31 Jan 2023 06:46:59 +0000
+ (Exim) id 1pMrM0-0053kY-BQ
+ for samba-technical@lists.samba.org; Tue, 31 Jan 2023 14:11:23 +0000
+Received: from pps.filterd (m0333520.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 30V7wmum005442
+ for <samba-technical@lists.samba.org>; Tue, 31 Jan 2023 12:21:07 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=message-id : date :
+ to : from : subject : content-type : content-transfer-encoding :
+ mime-version; s=corp-2022-7-12;
+ bh=czeLNgb7LoxtSLWAfCLtVBbXztQ9vuiucjgaR4p7aFM=;
+ b=o+nWmxr1ch+AkyIk1tBz3+bisK1/L/hBFAtBhDgKwhGoERgIu19gMuiYDHZZEYcPEf9E
+ Ee3y931JmojLg4wHWqPgq6tzcPr9LobCYuqxNBeOZGPrkMqGfy08ZOobpYA+g5aHga8l
+ ckEPa+x08R0jEeeq70N057sDRAssKUMJ+sZZdGB9eSVtZtof0wgA9ILRCF9m2CkJ/VOP
+ 1PY6xXOa0ABB0HpQCm4yaTP/fc/jMKNxJEv8I9gQd4nFKQwHklTCtiI8T/8bse3ordFb
+ LFFkRlrWJew2Ve+Vba4rkACWHB8/BBj7hlraHqs5O8xjXz36EUyQh10JKPP0sjO/qvGp 0A== 
+Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3ncvqwwe0t-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+ for <samba-technical@lists.samba.org>; Tue, 31 Jan 2023 12:21:07 +0000
+Received: from pps.filterd
+ (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
+ with ESMTP id 30VCCGGH010391
+ for <samba-technical@lists.samba.org>; Tue, 31 Jan 2023 12:21:06 GMT
+Received: from nam12-bn8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12lp2169.outbound.protection.outlook.com [104.47.55.169])
+ by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
+ 3nct55tnx3-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+ for <samba-technical@lists.samba.org>; Tue, 31 Jan 2023 12:21:06 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Oec66MA+Vior57MHHOPq77ST+kHjhhIKcDnn8fDKUDSttHob/yrwsq8daKo2LB0wfsjaYqUAKcVRejl8l8oQLUrX7BD9ewCF66oJpDM2eBCGcJED7L4h1Qe9vK7hAXSt++z9v1aO1epHht1YS+gFcNG9sjRtkEnU2h/3zez9+wlNUBqrRzGFe5d1mn75ywAZSQWFltmUNL9dpnUYAcN3srEsPsFDBwAgtjcEibTE+gDfSq+T25kfL244TrQKD+FMbBySWSF0Sf3f46CI7tYgrmaoNcT/jSjKE41EFhjbaPanz6qzK37alNNodSbyB5yzmNLValFn0TTReRxDUNL4XA==
+ b=dOqiCgFfjZb2VOboulQnlb1gx3qV7UPlaSXSghQR2br5j0fX09KTiykWaDk8//kuCa3Gdk1ybgZ1CJo8xcG5goKhG4HfbIRDtyWlpBFrxb3eSTvGC3RsAKlHU4EeIInA0rTtnzxCuuXgoqXYTsrU0IN3Zrt5sRXEK0Xq3MOpjODwLqvAbRavnJ3wOY94bmZusEtAC1kvq63T5yllW6zdQNGSb6qzYuEkXQqMftqkFpycwwYkS9MQ/+10MuOWJxXs5L6oUX6f5n4XbXTEZrRCzENV2zB/mvNB1p2wWwI/R/uVp8gJ/SqLoz5fcEnQN4QHwNh4GCSddd0oRtcDBdhODw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Qb20FGU7PaRdkUl0xbuQO2dmKdPuGpW3hL5bQn854+M=;
- b=c4GWIkWBnrFOZGFj1a2fKiAG8bSjnkoG4X0iEPO2304shBWO85kQxmtqQiyZVdVcWtBL5cQ8ZTc3zEuVYfZB+lFJQxhhLuV9HKIvgGPuYCRG82b6zgYNoI1YERpAuyzozZ+P1kJoXSKi2SgM1ObFzLH12hC3L1Q7D6O6TNwbMqPzbyMXKDG2foBW3mHSVYYHZ3h+rEj3LtWEwh+ftOQEfqRsoeBKbZhF8bEeEEDSBWjLA6+iHhut8SdCqCbd256UHO2chlMXexQ1YBUW4bkeeG9qr8r1TUXB+96lt55cIpT09quuxWUaKQl7oX492gHxMsS/vIU/xiTOSnvee1gHbA==
+ bh=czeLNgb7LoxtSLWAfCLtVBbXztQ9vuiucjgaR4p7aFM=;
+ b=n1xW8d14RN+hjhTuI12ny7TvLr0mfsQnMXhzaFrJ6Ecw5cOerliaLNlbUFMIIATHAxdyYu0tKC1IBIwp7WbugRdbmAmfOj7ydtCoje0OCnvqK2W/iJdhELAfWBzk8VBACJzVeVML1uUv0kjRHSfeSEt6CSvSTjZ4lsHL/bGuEkHFF6G4qUHRDPqbGFtonaATsgX4IoOxp7JKEyfUKwEnKZbymVFGJ+BZhDDQQ4VgtsO39eFmXszMA6AuxQncvJCHMdgGQfrMzs6yskneUJTZctsfo2SZGOpgC2ItU5T11fx7b1zG6KO2AWjqU10V05SdSpGpj9iiLWvIUOQlBl/5rQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=grown-up.com; dmarc=pass action=none header.from=grown-up.com;
- dkim=pass header.d=grown-up.com; arc=none
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=grownupgroup.onmicrosoft.com; s=selector2-grownupgroup-onmicrosoft-com;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Qb20FGU7PaRdkUl0xbuQO2dmKdPuGpW3hL5bQn854+M=;
- b=NPNij1roLKnoLzL8cCiHz7VekZaJ7MyD2ikBXnLQY3PlUumu/OoN13A0pQ4eIXOmcTTG20+/SHZNrW0g9EtCZdDjoZqwmpTwrhH7Md+Bp3pVUHGJzEesA4xyQL7dtneSDsH6lN1RINe7ah2p20KubWmXI4Ji/TdehA8vRw1Avj8=
-Received: from PSBPR01MB3558.apcprd01.prod.exchangelabs.com
- (2603:1096:301:9::8) by TYZPR01MB3886.apcprd01.prod.exchangelabs.com
- (2603:1096:400:33::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.36; Tue, 31 Jan
- 2023 06:46:35 +0000
-Received: from PSBPR01MB3558.apcprd01.prod.exchangelabs.com
- ([fe80::a913:96e4:25dd:87c0]) by PSBPR01MB3558.apcprd01.prod.exchangelabs.com
- ([fe80::a913:96e4:25dd:87c0%4]) with mapi id 15.20.6043.036; Tue, 31 Jan 2023
- 06:46:35 +0000
-To: "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
-Subject: problem with GPO Policy after rename
-Thread-Topic: problem with GPO Policy after rename
-Thread-Index: AQHZNSjp98oJzN48tkWwOsKAkcqFnQ==
-Date: Tue, 31 Jan 2023 06:46:35 +0000
-Message-ID: <3E14DFAD-1094-4089-8897-88AF7CA133EF@grown-up.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-GB
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Microsoft-MacOutlook/16.69.23011802
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=grown-up.com;
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PSBPR01MB3558:EE_|TYZPR01MB3886:EE_
-x-ms-office365-filtering-correlation-id: 61d7b821-978b-40b7-4d97-08db0356e594
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam-message-info: 9uWGf/tatixFbEdn65j3Bh+CyIiGEUf3pJ6nIDLXLAgMYLt5CFrMynP3r4IdNzKe7ZnaY6zZzc+hfJxrJLnYirfyjn1DGkNkXi5x/9vtOBs/UK9dJXQDGWz5by5DnKqMcyDmirbgvLMlHm2mlJwiYgtDFsP190X4SA/12S/bFiX2v0++5u0Rud1Pm+1ak4Rl5vTuFQ+ScmNGQh28b7NYFQUpJvdxBz4Jzmx+Ky256sJIJFhXf6fGREfERos1kQTUczZvhvfQFJipk00kX959XZc94/RyPJ0OZDd2P9RnvDE50taunFlYClrNDyMs1AxhyE8Mecd1/zo+w8CGBWZ8YP3ZjMeezLe/w0Hh/hHLLeCpbo9MLGhfM/MU9gAJMPOYa3tf+dKR8AYZEYeZagYenuMI7KP5hVJm758h814XD+JDdAK4T8ynlCBZMMEVALopvmMWk4A9SdgVWkvuiJrPqQiWghPI3V0scM0KYyqQStDfiNCoaYSVzwINB8rof0AVM/eMJYJJWIISih0PBuR+73zVddG106Yo4/uhhAbccG/t83exbng2UTV7sS+LUi8bLBOuNsFb0BUwWgSVplrYKc1G9sdKQahSZ1HcZxKLb5X/3JUYQt9Owh60UB6+zcBrcM9jeM55bF2y+LFxEhUpCxBi8rfIcgEUyN9N+DY43pIgujGa1BJfuLijLTnoGpwty2hap1xzihQAH3S8fr8aoQ==
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?TGVVZS9BUFh6MXFLSHQzN2loNitDN1BKcFRsb2hrOE9tbXZoTlZJcG90Yjcv?=
- =?utf-8?B?OFlmVWd6MVFyTllaN1p6eUpsMENhemNndkJXWjQ5eFR3U2U3eEoyRHV5OFph?=
- =?utf-8?B?NjhHVUh6a3dwYW9ERG9rMEVtYjZVb0tKbTZoMTVDT1lhaE5KWVNCZVZPc3lX?=
- =?utf-8?B?bW5vVUJHdkk1YnV4UFFHdzM4a2xjS0FLNlUyWkpVZEY5RTFFQllBWjJ5dzUw?=
- =?utf-8?B?a0phcS9wdkdaamQrTmJJQTBHblp3K0NTbzFxWDE3Q21mNkVDdHRwd0JaemUr?=
- =?utf-8?B?RFBJR0VWRVdrbzFHM2RmMkMyTnovbmlHY1FNMWJXdjN1RFBwSzlBWm5Ia3hO?=
- =?utf-8?B?ak10UjM0ODdJL2FOT25BUHRJb0NtWXNNV29OQlEzYUJuVUtqQnU5MDIveDNj?=
- =?utf-8?B?V3N1Y1Y3U0NUTm84ZmR1Kyt5Z2JNL3JIUkRPaEhHazdsd2t0cVJaajhudEdu?=
- =?utf-8?B?RU9pcktIa2lXcjlzQnJ1NUFtcGpFMjV3clU2Qm1NQVhCNXU3Q2pHQy9wMElm?=
- =?utf-8?B?R0RyUFRxMnNvNWVWT2ZGN1NUVDJUNDdycndMaXRvemZ0SjgzWm9qbjhJYWFU?=
- =?utf-8?B?S0FGb0w1dW5kV3lUY01LekVJUnlkaEZ4MnZYcUFHallBVDRWOWVEamNmRkZ1?=
- =?utf-8?B?Qm1rUjNkVXdlbXFIazdDeEhGQzBaa1JoUElJcjYzUmtDc3h5U3llWnAvZTJx?=
- =?utf-8?B?dkhzWUZNSzZ6aFdhckhlU1lUdU5MaGtvY2FLWFhlSFZQdlgwb3I0aEZvWW5I?=
- =?utf-8?B?ZWQ2SjdzK2huK3A0SFpuOStISzdGd2R5TEdwOVpNNzBzQ0dDUFJwSTlGQ0dM?=
- =?utf-8?B?UXc4VGpQR2t6RjZ1eGc3b00rVWltNlBmZUpIWlowMTZGYXE5Vi8wNkR0Q2c3?=
- =?utf-8?B?NFNpbmwyK2tFNTZxTHVlaUlWUHBQMVhuSW1NcjRMZ0hXeTE0U2RSMm5naWx0?=
- =?utf-8?B?bVIvSWJEV2I4elBoc3RtOElDRzFYREhUSi9GNWdrUHBVUG5naytLUmd0dVN3?=
- =?utf-8?B?cmt0cnROQkxWSXhpT1JKaXYxR3VVQjR0VmpJVURsQXZtSisrMTJLWldPaEpF?=
- =?utf-8?B?dHlObWtnUktZRE1WZ0xUTXlrOGs3bm9xaHhjUDJObTJtc1B2MEwwNkFvWVNN?=
- =?utf-8?B?djc3MENsbXlrK3NTc3IzZ24zb3BXTUNRUlNzdVJ3UHRKQlpBSXZvRUNFV0tq?=
- =?utf-8?B?Y2w4M3l1STI5RHhseDMzUWZsbk9aM0psb0dVWlp6V3BNdjgwNTA0ZytnWjlK?=
- =?utf-8?B?V085d0FEaTcxSTd2RU9uVEZSWWZzUFV1cFdISmlEaWYwN3ZlN2ZlQ2k3Tm9E?=
- =?utf-8?B?akNRb3Z1VDhGQks0ZjNsL3hsbDh1eXZrME5adTJ4OVNINWhlUThpaEUyVFg4?=
- =?utf-8?B?ODl0NVh2d3loc3ZLRWpad283QUU3Mmh2TFEwbU82VkRlTkpwWWdxYSsxcjRC?=
- =?utf-8?B?d3N0U1NucUR4S2RyOWsvU2Y3RE03OGFhSVNCcU00dDdQcVdPbUpMMUhRNzVq?=
- =?utf-8?B?WnNVWFlBNzRHbCs1d01PYkJWYy8yMEkyL3pzSmRMTnMramJIVldJaGtqMkNP?=
- =?utf-8?B?N1Z1dnlwTklQTzcydUhWSnkxaVdlTXp0eENXb014RG15VEk0aG5ZbEtWMVJq?=
- =?utf-8?B?T1dmZHkzVWdObGZkcjlReHhkTXZMQ0pTaTIvdFdyY29vVmFPeTkzZDM4Y3p5?=
- =?utf-8?B?ZlNXMGVSb0FwZU1uTGdCK2x4MGhqWmFhbFh3R1RaSkRwYVBzS1Y5a3FlOXJV?=
- =?utf-8?B?ME02N2NnUWdLUlpOajMyL0dTNW5QVnoycCtzbjdJeW9TOFRRdXRCMGFRUTB4?=
- =?utf-8?B?MTdDdTlsL1lpN1VZM0gxRTIrTUZRYkU5ZHF3dExtOHhPSHFPL2tDNmN6Tm0v?=
- =?utf-8?B?eVNlRDl6YVZ0QzhxNnEzZXBQbDFUVTBnQTYrV2p5RWkyMzdDZ0RybUhHWnJP?=
- =?utf-8?B?dmJMelRHcVJJZUo0NW9Nakwyb0laSjJMVnRUejA3a2txN0w1c1FBRkJlQStJ?=
- =?utf-8?B?RUdwcDN2Yk5oZ2xJU3daUC8ycXBoZVVhV0JOT0dHVE9qTWNsbHlpWTVya2NC?=
- =?utf-8?B?TzdBNVBrNFlDQTVOTWMwZlgzN2xEOFMyNFNxSWxDdnJka09XSjBFOUo3TENm?=
- =?utf-8?B?bTlGK1NqakZuK1BzbDNCUmN1ZkJMQjRCUXlGMktPVTFncFRKQWdlYnJrWG1G?=
- =?utf-8?Q?r4BDBMoE2D21FY/evh1hEPY=3D?=
+ bh=czeLNgb7LoxtSLWAfCLtVBbXztQ9vuiucjgaR4p7aFM=;
+ b=kVAJ88mfm0F6nr9rwSdTVGoi9QcPNbs4iooRUDAKW909jE5yIzlh1QpfHc5b/W+++2WSx13QfTN7/wc10tVF6ZeryAeI8Z3f1v4yiLaq3v2nBF0P275a/Sro9ciMcFgVGXsikz2jdCPRBycusxumjX/nd1jV8ZvqaTONlYY21J0=
+Received: from BY5PR10MB3842.namprd10.prod.outlook.com (2603:10b6:a03:1f9::15)
+ by DM6PR10MB4313.namprd10.prod.outlook.com (2603:10b6:5:212::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.22; Tue, 31 Jan
+ 2023 12:21:04 +0000
+Received: from BY5PR10MB3842.namprd10.prod.outlook.com
+ ([fe80::ff33:e85b:2d10:68f6]) by BY5PR10MB3842.namprd10.prod.outlook.com
+ ([fe80::ff33:e85b:2d10:68f6%7]) with mapi id 15.20.6064.022; Tue, 31 Jan 2023
+ 12:21:04 +0000
+Message-ID: <313c49ae-fde5-bea8-e150-676176a6f8c9@oracle.com>
+Date: Tue, 31 Jan 2023 13:21:02 +0100
+User-Agent: Mozilla/5.0 (X11; SunOS i86pc; rv:91.0) Gecko/20100101
+ Thunderbird/91.12.0
+Content-Language: en-US
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: How to handle @LIB_RPATH@ macro in a/source3/libsmb/smbclient.pc.in ?
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 MIME-Version: 1.0
-X-OriginatorOrg: grown-up.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY5PR10MB3842:EE_|DM6PR10MB4313:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4423bc26-1d60-46e3-967d-08db03859efa
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Message-Info: 2N9REdxX5B4ddfbK0p1VK/8Zzuw9vx4NKk2YffKfzq3Pq+5sUD4Y1n18VgRLm3OyPbkGpJn6s2xjytMm4F9jnU2XS/nlv+2BQtxwsowbRdQDjwy+qAxpL5qPTWzwEqj/oPLQgSBXnoX++ww/pJo4Oi6PlrlKO7aNjATQ/4YJ+TA6fCuv6mBgGjqoKAklzx4L4HHs6qed/FiKSy0neKGEEf7ex2yxdwPhEvQzWLa+nzxaDpHCE0UymSEfcCc+qtWhmzGz9PsnQrSsZi5r7zQ5bzNaAZnEqiQYzA/pWiB3aVEl/FVVXJU047x6ohkldjIhLgA3tAwW3ttdkmGn0oRGiFu3crCP445YABCWhqUQBz3/E1MRKJFtJFzjLt4QfS2nC1oWcYL6kIOYIe4yLoXbY709UEEOp+PW3r6R+r1yo8wZr+qS1UD8YRE+fe8Cuh+8gV8Lap3UAz7O1YWT2iyhj2aZ8U+XO+i1dVSZTiMyheWysm6MGAC8HHJfCbXhj+yGkEoC6UkFwyLX8+luwIqHB+uGoIg5UQWZRFZqFMUNb7nN5H5LrOElMqFQMIrF02qjVSZzvhgGdeRsaQOLM/vIDr2xYT0R+DI6oujF39JKuiKxigbxC5UQTcRQ/v5oGedaTOI/icRm8VuAMuNdfSYjJhan9H09n/6wUvngKFBlHsNlsR2NPWRYwBehLUIvtDK1v6IQYW+4fxrG8eKD8KsmJFUoWS6PPlNDvjZQnmFebaM=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QWdkVSs1RkxqZW9lb2ticEkzdG94YlJSNTliY2tXaFhEbmpiOTlIcnV0YlBu?=
+ =?utf-8?B?K0hQbzdVY0kwU0FHRDZ3aEI2L1ozaW9MaUphQ2lVRmFtWEdoYTVqSDlWYTVm?=
+ =?utf-8?B?eEZxL05vTzV1ZUQybk9QWWV6a29xSDlpRDNsMElpSDRIRXJVcHNncGUrektj?=
+ =?utf-8?B?QVBPQnhlT2Z2bm5zL2RhZG82VG9CSUUyQzJLVmM1NnRuc1FJYVpzTVV3YXla?=
+ =?utf-8?B?dHN4RVRueTYxODNtKy95UStpNUpRRzFSYXlLcEttbEc5ZThRS2NkYnBOVk5B?=
+ =?utf-8?B?RVhHY3pycDJHdUhSRkV4NHNua1YwZjFsVXEzRFRaWlc3OSsybmVmSW8rbGJ5?=
+ =?utf-8?B?SFZCVWhCaS9pWGhPTjdtcTZUYmZJcWFJMERKNFlEeDlibk1hRHJ6VEJHcnh2?=
+ =?utf-8?B?bmxLMnYraS9rMGt3ZlpYYWhNMU5RZzVwUVdNRmRWR1ZUcFFnemdIaWhjZng0?=
+ =?utf-8?B?aWlCSmx5YUUrdXphd1ZGMmg1c1lDL3hwTTRSTEZuUVFkSGlHS09HSFRjYzZ6?=
+ =?utf-8?B?NmFwWE5HVzM5S0hGQTdGUGFWWnV6ZmZuRm1rdkM0bnNIWlU0L2xtS3dVZEtY?=
+ =?utf-8?B?WHdjZ3BOeXo3OElhV2V2bjRNdnZDb1cvV1dsanowYWNnY3lIbjQvdU1vRUc0?=
+ =?utf-8?B?dXd4eHE1L2ZvVUJ5UnlxMXRiT3pWQkxQK0s5aDQ2S09sQnB4U2FXR3dwTzRD?=
+ =?utf-8?B?bmZ4WDlLR3VvZ0t1N0FlSEdxazViN1RPUm1vcXF2U3RoaWZBblQ0UjZ6UXhD?=
+ =?utf-8?B?Vy9hdUdwMGNnelQ1Z1F2NHl5WnpvcThPWGRjS2pZa0xXS1NXL2w3Uks2T2FE?=
+ =?utf-8?B?d0lYZFVUQ1dUTHN5Z0R4U3lUU3FyV3ZJQWZuMmFQZXczVXVXN2NvUENOOS82?=
+ =?utf-8?B?ZWlrZEN5SzlJTHZvTTNLR0RPZDF5K3czZm84ZWZKQ045aXJxWGlxN3dwVnhq?=
+ =?utf-8?B?VGxVODUrMjh0dHBjU28wNkd0QytOTnoxdmRwZ2hqK0l1VmwxK2o0ekVFNGFT?=
+ =?utf-8?B?M0dzMURoWnQ0ZW1EZmY1RDBiTEd2UGZwbXovZmNrTTZxMWhDVzJDTHNGVldt?=
+ =?utf-8?B?QXpqZmJjd1lwR21tRzBqby92S0V2cDY0WmVGZ3haRmZWZE5rc2g5M1FYRnd1?=
+ =?utf-8?B?OVU3dHc0SGxXdHZOV3lkN2hyYWVTY0t6aUlGUnd1ODZKR0pSWUUxM3pmZHRj?=
+ =?utf-8?B?L2U2UUN6cXQ3b2dtWktWYWZKZm4za3UwM2FRZDN6bmhBeElBSmIrNjBNV3pR?=
+ =?utf-8?B?Y3YzVlF1TmNMT2pJU2hrQ1RqOHpqV2hCVUJ6Y0dUeWZTYWVsQmRxcDR1N1ln?=
+ =?utf-8?B?NjMxL3J4N20zdy9KYUl5dDVGWnNKU0lXQzlwUHFYYk45Rlc1cGtGb3NyQzFV?=
+ =?utf-8?B?UFkvb1hqcWhKR2Izd1dzK2dNSkxJQ1JLYkhza2YzMEdrK1hHRXZwTmRhWEtB?=
+ =?utf-8?B?a2VFaEpIOXBUQnE5R3YybzRoTXRBdkpKa0lCL1loRHcva3c0TFRLS0REazdw?=
+ =?utf-8?B?TUgvd2RjQnB0ZEw4d3lkTmhieTV1WnpxUSthcUVPRDRsUmptaFJ6d0sxMHlU?=
+ =?utf-8?B?K1doS3N2ZytaU2trNzQreFI1REFwdTBOVFpBYWt3VWNJZCswRWlWZ0g0MVcx?=
+ =?utf-8?B?eWdVb0szckk1WDczM0NzMkgrejBsckZYc2p2YWozeWJxcjdwUnh2UnB6U0ww?=
+ =?utf-8?B?SDZTTzZjb0NxSXJTZGdHSVVoYzRZcVN3MEJMd2JZZVVQMXdBYTRYc3NtTnFH?=
+ =?utf-8?B?L3JaakRmUFVGdHg1akMwSVN6SUxuNFRRQnp0NjhtUE9kM2hVNWVTT2NBOWNP?=
+ =?utf-8?B?YjRidGVlcWxYVjhHdmhKcmVaWExGb1BuTjhPeE9ocWZiOHJ3OFlNYnJpWWZY?=
+ =?utf-8?B?ZkpWbmhqQldqQ25ITFpENXdwdUhxaVRVcmR5Mlp2RkdHemFjYkpQYnhEMEpL?=
+ =?utf-8?B?OTdrSHlITXRIeVNMcCsvemkyY2J2cnhsV0ZGOU5KRWliZE0zWStWb01aQmZO?=
+ =?utf-8?B?OFFzMXh4MTJDeUZFZTJlVnRiRHNTZGZhWmQrWjNOQlR0emtIZFU4d1lxOFZx?=
+ =?utf-8?B?RWh6OGFoTkF2L2U4Ylh1WW15RHJaelN1NDJjVFlheklGZmt6V3hMakhxR3pS?=
+ =?utf-8?B?NkFubDhtMjdSQWdqZGdzc2twT2tJWkM2SEcvOGtFK0VkQ0s2Mk9uM0E0bGJN?=
+ =?utf-8?B?a0E9PQ==?=
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: p314gXjGCNGxre8vupdyfmIJL64YIkFpU4XwHSj5kfqzhQdYXlg2n0n/wr8ItDNxN7k3UuyRq63NVJ1+nR954Usx0KZNhSf/aXe6gpkaiSCw7aHQK7EWwYUs2Ktpz8psW5k0vexRNWxdDr5I3cDY/+5m+1dL3I5Qy5UPiaLGQGMr9cIYD9DjUyXjdx6HdVvjIZh5DQQvHnyuHRW05fKta6gQw/nYXbk8q2i7rIAybPRWB4VT+IAHc2irebpmCoBQppS/yv+b6wGLcq0r7+FG5inrsBYpqVkjbdRgQKXnZJcvTTZ17KERz0nU/XUc1dIR+PoCMCeKU57ODWUah8OsUzMs6h2xwwEQuGcM21r0jhGLMmc7gih+ayE/h75XEvDWdG3HGTdqCiWn62u409IIdZv3ZD1qeVcaonPVchi3XshvPu7jerDIHC5mjamZCvhJBiQoQVtjglSMBjkbS0SpZBrRSplx1ULmY4D14eR/vCkBgD8P1HptxxWqr3eLxtTH73WDogfFVX4A0OBZ74mnO7cLPC2v/OdfB4wpFWZ+Ai+jcZPklidkRnUB0VgeCgL2aqxbdCKoT0VUtOhJ7YeRQKYfFc2tT7ZO58qCTTvLgbfNn9YqVWQBMO7sJdjQT4Ya0qFCMiNMa3TSiHfOLVHAyTVrRNz+SHwkUKqWsZpjTkDcfvChasuwAJzhYglrK0MMaXifmg+Ej9dgcxBl20OZOKdUcJaWU8aFcMdqQoRsYvRky77ZdMMIPM3BtWy14ThSK15uIKZuMBz8G3ZHkBAN7w==
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4423bc26-1d60-46e3-967d-08db03859efa
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR10MB3842.namprd10.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PSBPR01MB3558.apcprd01.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 61d7b821-978b-40b7-4d97-08db0356e594
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 055f2264-e854-4baf-a73b-40bb967b417c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 6j5W/Zi5csRsNFlfKo/2E0NTzEAQtUoH0JPRxBUzzJos22SSwAU7XbYwrIsALPfkYGC9onRhY+a9cO3Gl88yCSamjapluTM2NjfXGDbkkTE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR01MB3886
-X-Warn: EHLO/HELO not verified: Remote host 40.107.255.123
- (mail-psaapc01on2123.outbound.protection.outlook.com) incorrectly presented
- itself as APC01-PSA-obe.outbound.protection.outlook.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: IimkkWO9EJdyfm60zJFfjr/0WydPZUGUL9dARW6E14x6hm8u5VzhYWGxNSAaSteVnd0VIs7tzVu8hvKCRHFaQQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR10MB4313
+X-Proofpoint-ORIG-GUID: qYCDWxzGNEVsJ-mbmhwXWikHagJSgciI
+X-Proofpoint-GUID: qYCDWxzGNEVsJ-mbmhwXWikHagJSgciI
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -131,27 +153,18 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: itdept_head via samba-technical <samba-technical@lists.samba.org>
-Reply-To: itdept_head <itdept_head@grown-up.com>
+From: =?utf-8?q?Ji=C5=99=C3=AD_=C5=A0a=C5=A1ek_-_Solaris_Prague_via_samba-techn?=
+ =?utf-8?q?ical?= <samba-technical@lists.samba.org>
+Reply-To: =?UTF-8?B?SmnFmcOtIMWgYcWhZWsgLSBTb2xhcmlzIFByYWd1ZQ==?=
+ <jiri.sasek@oracle.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-DQpTYW1iYSA0LjE0LjQNCk1pZ3JhdGVkIGEgZG9tYWluLiB3aXRoIGEgIFJlbmFtZS4NClRoZSBk
-b21haW4gaXMgdXAgYW5kIHJlc29sdmluZyBjb3JyZWN0bHkgYW5kIGxvZ3MgaW4gZXRjLiAoc2Vl
-bXMgdG8gZnVuY3Rpb24gdG90YWxseSBjb3JyZWN0bHkpDQoNCg0KDQoNCkFzIHN0YXRlZCBpbiBk
-b2N1bWVudHMgdGhlIEdQTyBwb2ludCB0byB0aGUgb2xkIGRvbWFpbi4NCg0KT2xkOiBuczAxLkpp
-bS5jb20NCk5ldzogb3JnLmJvYi5jb20NCg0KDQpIb3dldmVyIHRoaXMgaGFuZ3MgdGhlIHdpbmRv
-d3MgMTAgIGdwbWMubXNjIHRvb2wuDQoNCkZvcmVzdDogb3JnLmJvYi5jb20NCkRvbWFpbnM6IG9y
-Zy5ib2IuY29tDQpvcmcuYm9iLmNvbQ0KDQphcyBzb29uIGFzIHlvdSBzZWxlY3QgdGhlIOKAnG9y
-Zy5ib2IuY29t4oCdIHRvIG1haW50YWluIHRoZSB0cmVlIG9mIHVzZXJzL2dwbyAsZXRjIHlvdSBn
-ZXQgaW50byBhbiBlbmRsZXNzIGxvb3Agc2luY2UgIOKAnG5zMDEuamltLmNvbeKAnSBjYW5ub3Qg
-YmUgZm91bmQgKGFsc28geW91IG1pZ2h0IG5vdCB3YW50IGl0IHJlZmVyZW5jaW5nIHRoZSBvbGQg
-ZG9tYWluKQ0KDQrigJxEb21haW46IG5zMDEuSmltLmNvbeKAnQ0K4oCcVGhlIHNwZWNpZmllZCBk
-b21haW4gZWl0aGVyIGRvZXMgbm90IGV4aXN0IG9yIGNvdWxkIG5vdCBiZSBjb250YWN0ZWQu4oCd
-DQpUaGlzIHRoZW4gcHV0cyB0aGUgTVMgdG9vbHMgaW50byBhIHRpZ2h0IGxvb3Agd2l0aCBubyBj
-YW5jZWwgb3B0aW9ucy4NCg0KDQpRVUVTVElPTjoNCldoZXJlIGlzIHRoaXMgcmVmZXJlbmNlIHRv
-ICDigJxEb21haW46IG5zMDEuSmltLmNvbeKAnS4ga2VwdCBpbiB0aGUgTERBUC4NClRvdGFsbHkg
-ZGVsZXRpbmcgdGhlIEdQTyBmcm9tIFNZU1ZPTCBBTkQgIGdvaW5nIGludG8gQ049UG9saWNpZXMu
-Q049U3lzdGVtLiBUbyBkZWxldGUgYW55IHVzZWQgR1BPIGxpbmtzICwgIGFuZCByZXN0YXJ0aW5n
-IHRoZSAgc2FtYmEgZG9lcyBub3QgcmVtb3ZlIHRoZSByZWZlcmVuY2VzLg0KDQoNClRoYW4NCg0K
-a3MNCg==
+Hello Samba hackers,
+I understand it is under the level of problems discussed here but I 
+would like to know how to deliver -R${libdir} into Libs: in .pc files. I 
+think the LIB_RPATH macro is the correct way but I can not find the 
+option to unpack this macro.
+Thanks,
+Jiri
+
