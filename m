@@ -2,51 +2,126 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D08B6830ED
-	for <lists+samba-technical@lfdr.de>; Tue, 31 Jan 2023 16:10:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C59D685D60
+	for <lists+samba-technical@lfdr.de>; Wed,  1 Feb 2023 03:36:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=ZtoHDNV7OnoB61VhXvccxwq58ecDbYgDXNemVGXZngk=; b=TvYl8Hcf0gRzkrRbMpnCVkSdjW
-	cr7c9KmpYDrbLFiY2TMMF/2md69Hd2Wplt/y1aR8dZsEN6HOyoP53FtMwf3gRF4igfXfyQ6me/Drs
-	MvBYBbScUsutC8p/tCedb9HeLq+kpvMlMntk0AxY/ZGMpUUcZFhSLMM5ssa5mF2mVDFSeLP1lfvyD
-	8gIyWc6lq51wI2iFwDBxK2vPATm04T/QhD+bwL06i8JFy9iiRyY9+AzyICD9yygWZ4RoyxrF7EpSf
-	KzMEFVKAfQ9jxLMzI8h3zsITuhbMxP6ELwlsrbNqX4ibruyYb2HtpgQLgOKZoXmH9s2G7z/Lw6k/t
-	WNyrPMzg==;
-Received: from ip6-localhost ([::1]:41224 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=0bK4u0Tx4P3O5j34Gg+xdCSFUwlZrCbW6vXbKNjvZ1s=; b=ddLEKcz0kas10AQLjhXEMFzEUm
+	E8h2vS5vNONFuA7BGnVX4eO2XZorwCSCVvPzQbQt5C2QeSjTi3wSxuo5vZwnETYrWn0ZmeYDsYO7+
+	OKdDUTUOV60GkDTy8WgYmGna2AM24bAAfJ+IN3XQZ7rkgxhA3K2Ck0sptPqBoET4zKCtuw0AKN9yD
+	rMM8o/C2lXpxU1If7uakAIT+SGifxPuA8l5lr/Ms9CHhwftriQ8MV+Uz6DF4li++qsdoE9c2CUohc
+	LAiIwsEwnU0yQFz7XW956kKaYK72njCbLSYmvqN4yGVyoLZuoz63sp/PbPt/omf79FD73lnNiAr+R
+	G/EL9VrQ==;
+Received: from ip6-localhost ([::1]:26288 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pMsGY-0054Rw-C1; Tue, 31 Jan 2023 15:09:46 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:35708) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pMsGS-0054Rn-Vt
- for samba-technical@lists.samba.org; Tue, 31 Jan 2023 15:09:43 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=ZtoHDNV7OnoB61VhXvccxwq58ecDbYgDXNemVGXZngk=; b=zxyVlR2ovf/YtbTIsEyh4hGNEj
- Kty9RIZ3NmqU7fffjc1+X9aXT5tJGQH4Ro0gkV5BEuwuIri7udoJRk45/W3JjFf8F/o/w/mu4WlGc
- BSqxvwk46RlKH6BByIidSJlRKsjJFsB2wBqPpDKt/ERlhE53/fRaL1ZyjB6Bt0iRn/TNhuCXsFmzg
- Mej97cBOeXAGsYRraayEYx8/PlOv/TD0PewglFTO+88gXE36ZTq9DbLnGbh3lb9mszHiMy8eZ6Sla
- H38uaBTBSTQkQD4/WaDP0TZU/7THL0vb6eVK45CipIE7T+jx+Oo9FlTXpKX4gib1UNkzjLuQhNEYT
- vzCDlvnvAbPqToBwqryohbdXIr055jQGofreNYNzrKJ7h26ItgQW8fCzZA0gofiuJL6E7SdxEHpvG
- G88YH/50MVbdokd3g1vOIXbGphVuGE5grfOfSRxmlYJ2434LooL6ITtYQo2KcUf4svZcoD3MDIY1X
- V+3OztucTjIbgPGGcyACHqCC;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pMsGS-00B5ba-2e
- for samba-technical@lists.samba.org; Tue, 31 Jan 2023 15:09:40 +0000
-Message-ID: <bcad6c3a-045b-a717-ff48-b7345d7e976b@samba.org>
-Date: Tue, 31 Jan 2023 15:09:39 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
+	id 1pN2yE-007Cok-DB; Wed, 01 Feb 2023 02:35:34 +0000
+Received: from mail-sgaapc01on2126.outbound.protection.outlook.com
+ ([40.107.215.126]:17248 helo=APC01-SG2-obe.outbound.protection.outlook.com) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1pN2y6-007CoY-O4; Wed, 01 Feb 2023 02:35:30 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=gujnLD5vX5DFhgGszyHqI+bRseQ+PFPVXJSF9SiQu/xD1hkqIpIp97iXBHlKBImJB6Un2Yi3ipHQg9sffPpKazLVUhgXiuP1FBbpCETCKk0kGyl5tjIh9ahcfdE2PjAT0XZnS19OOS1CihvnXbc1asUJZacwzUhk7SmbTl8AZ8oxHM5cDhG4WUGl2/9ye5+GiqvwkJcigwomKp34fGCJD6OFZXb6bPQhwOLOy1J8SzwfXCu3pXBPigl3cVSwuByJvTVLf4xRXZwRpgvBv9DILqXhkxhfHk/F2Dgz/CeBWVSl+U9EKpm3CVzou59qqu4c/r7imGOLxdC9vBwpwjYoTA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0bK4u0Tx4P3O5j34Gg+xdCSFUwlZrCbW6vXbKNjvZ1s=;
+ b=MiwJrDClJeuu+a+xnZjEcPnJuCrDCGO/yGBsXI0IIhv36NddAeNd0n+rKnnACD7g86/KYJHyvxK2JQYWd8HZP18F9gMrBAa6+M3AyWGNgkRiofsCcCtBuPDuF0gRFRJvtl4KgWM4XQ2lmmxAqmpwIQgvQgcyoVCxMIVrl9Fnfu9X3fXaVguMUKwONX7KqBYW415mzbPkCeG49Tk4PGPPS16DyfaPdtAqvP63uX9FiQAeVC/Egfw8KoVdhyvckvKgesDAKvFKJ5yMix4P5H3Gg1OKbtes8r19eYyTANjpdi8/J7kgP+WzvlBuSitse8awV+XFjRuZDe4W1aSRSqK9ww==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=grown-up.com; dmarc=pass action=none header.from=grown-up.com;
+ dkim=pass header.d=grown-up.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=grownupgroup.onmicrosoft.com; s=selector2-grownupgroup-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0bK4u0Tx4P3O5j34Gg+xdCSFUwlZrCbW6vXbKNjvZ1s=;
+ b=MhkT7//+htcAcC+9YFOq5q36k8SblLpF3BOiurbBn8y0ZXCCv1CmERsYJ0vYqwq0itfFYmU8R04BuWmojZ+uXt0wSsUTXEc1yh8NTdmmJRx+cgSYiOJcHhCDA6zZj11SJm6TzvkRFv/cA8lEPdOQIeeogiKGCEJq+E4kVf1Mclg=
+Received: from SG2PR01MB3564.apcprd01.prod.exchangelabs.com
+ (2603:1096:0:3::12) by SEZPR01MB4448.apcprd01.prod.exchangelabs.com
+ (2603:1096:101:4f::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.38; Wed, 1 Feb
+ 2023 02:35:07 +0000
+Received: from SG2PR01MB3564.apcprd01.prod.exchangelabs.com
+ ([fe80::6378:80b2:8b18:5ae7]) by SG2PR01MB3564.apcprd01.prod.exchangelabs.com
+ ([fe80::6378:80b2:8b18:5ae7%4]) with mapi id 15.20.6064.022; Wed, 1 Feb 2023
+ 02:35:07 +0000
+To: "samba@lists.samba.org" <samba@lists.samba.org>,
+ "samba-technical@lists.samba.org" <samba-technical@lists.samba.org>
 Subject: Re: problem with GPO Policy after rename
-Content-Language: en-GB
-To: samba-technical@lists.samba.org
+Thread-Topic: problem with GPO Policy after rename
+Thread-Index: AQHZNSjp98oJzN48tkWwOsKAkcqFnQ==
+Date: Wed, 1 Feb 2023 02:35:07 +0000
+Message-ID: <9A315111-78EF-42DB-9A44-32879E0A6391@grown-up.com>
 References: <3E14DFAD-1094-4089-8897-88AF7CA133EF@grown-up.com>
  <e0eb8658-8c7f-b270-df2e-c19bfa5c9841@samba.org>
-In-Reply-To: <e0eb8658-8c7f-b270-df2e-c19bfa5c9841@samba.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ <bcad6c3a-045b-a717-ff48-b7345d7e976b@samba.org>
+In-Reply-To: <bcad6c3a-045b-a717-ff48-b7345d7e976b@samba.org>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Microsoft-MacOutlook/16.69.23011802
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=grown-up.com;
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SG2PR01MB3564:EE_|SEZPR01MB4448:EE_
+x-ms-office365-filtering-correlation-id: f5b4a7ca-772f-4049-858b-08db03fcee96
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam-message-info: sbvGEzZUckdGNj4EQF2WRmU+7wBk7/s+CcLYyGeFHZomcMOhsICmerkfpP+EhuFFUo2eppdSXSf1jXMNQ2y5Fa0BcAcaRU2RHVh+U0BSy/RWQFl80GGCOJb3Xp4m4hST607aYp1baJfKFw12COdje0xNFsEH4vZ/e2/ao9H95YSSh3Y/D3IHQzCI1FWVUQV9YXcqIMTggokdbzFuMY3JMLgoQztbLL8A2T5aAnT7//S+H9EpBDzDyFuhn5qga6E4ZOFhYvn+sSIrDnP9ih5Xge9DTK12hlm5LH9zi8SxG3CItFrFv/FmYhbsCDxJ2EnfoVrGhHjY1+7lMsQT+nsPOi2JNEmOUVTCj2mClCdTIXY2UZ52My8u22Lzta+sjfRTW9v2Az9BfsLhkS6LAG7TwmTNDQzOblU71qVZ5Fn+pzm2nCI/7LsxloxfhUviJMGONmHz+xRizIqRXTknh+i2yn9zPQskIo5SQaRgGBrmie22TbuomLNxdyVbWYvgJtckEM9lAKpVfAVBZMe7hpl1fDLCUmJPCninit34+HnU7TphvkaVKV2TkgdybLX+SLKIU+OpAiIdM2QbiR8yUfQVRS4WK7doAs8IOk4g+XbHytE37iByLqt35+l3kMfWmBNPl9E9Sfv2PdSYaQrOBt3xqmV7ZZ80wT8fDpbktePBW4CNX59087tJDF9hWi10YgDbLk3l+SrvKLtl9RW39N6zK4PFKzcZ7Ha7aacpzVy0WW6BGslrTyT1YSEZZwyP9nHE
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?a0FNdENtNGorV0xKTDZiaVFwY25hTURFUlcyWWQ5Rzg3aHdSOW0wRVA2S2dl?=
+ =?utf-8?B?cFM1RzZBQjNSZGV2T1FkZk9KWkFWeUhSYWIrdFp2QXFyNjRBYzB2ZzNySjJa?=
+ =?utf-8?B?RTg5Q2Q5ejd6Smx2RUUyLzhSOVFNL1ZibitwM3l5ZXBqR0RRUlVSWW5FOFQx?=
+ =?utf-8?B?MzZZeEM1TGk2N3ZHNTc2SzNVeFJKNzZ6aTdJYXJiZHVUODNDdnY1ejJmVEda?=
+ =?utf-8?B?RHBWamxJVHRRZ1dXMzJCa2dTREVuRjZvOVdRaGZMMDlwbW4wZXNhRmMwazBs?=
+ =?utf-8?B?Z3V2ZWthRDI4a1I0UzdOSU4rZkJQa1RzYm1CMVRuRjNmakx3UWRHT2lNcFJF?=
+ =?utf-8?B?cXlzaDJoRjhmMGZEQk5OdlY5c09aMWR6YU8rVzd2M084WWt5NFBMMUdVb0ZQ?=
+ =?utf-8?B?VWxDMFlSVm9kUTJsYWE5V0w3amsrVEg1b2FlanY3OXl0cTkrOENFWmxZTGFm?=
+ =?utf-8?B?UGlUTTllQzNIMDlGRkNnU2dlaXJadGdPZ1ZjZjNXYThEWlZucXZpWndDMVlz?=
+ =?utf-8?B?b3pXL2NTSjZobkpCckh2YXZwZFYyZEV6VkFoSndQc01JcFB5L0VicithTWpG?=
+ =?utf-8?B?MjFrZHlvYUc0RXFyYzg2NzBmVnAzeE9LczFoRFJPM0JDMXk3cHp2dVdwRDIr?=
+ =?utf-8?B?V3p3M3hMNU9rYkwwRmY1cXBOaSs1YUtobkQzUUVXVFM3U2pkeDQzZHZJMDQy?=
+ =?utf-8?B?d29FdUlXRnFOcFVvdmNWR3JGRjFjaTM2ZDBRWDZDVWY0cXZRNUdHTU5BOEZ0?=
+ =?utf-8?B?S25MY2RUWUZLMDdsZUY5Mk1QR1oxZlN1R2xyRThNTW1qbkZmM1FlMmlzZFZX?=
+ =?utf-8?B?N1RBeVcvVEh6ZWxJNVVwMG9UNm9WU2NDdmVVMjV6ZCtBdnN5Wk1qOXUzZVVF?=
+ =?utf-8?B?ZnZ4aG1nMUtYOGdybW5Mc1ZwNFR6SmVYN0NKZHNLNDNER1ladTNMdUJIZHlP?=
+ =?utf-8?B?MTV4YVI5UVVMQ2NhSXlwUmJaZDVKNXhvWFBvUFI0VnZEMzQrUWdnTm01NDNZ?=
+ =?utf-8?B?UVFZT0w2dldUN1BrNnJFbFFLczk1ZEtHSXJuTVRHNXZPNTJsdkJNR0dXVExK?=
+ =?utf-8?B?NjRDQW9nSWRPTG1zcWVGTk94dEM2VWx1emJrRGxOMk84SHFKcnFjTzh6TUc2?=
+ =?utf-8?B?NGxKZXRUeWd3QnpORDJzb1kraGxwWGJEYWREQ2NpZ1krcnR0VTU0MFRGeW1K?=
+ =?utf-8?B?aGwwak8zVC9HS1FTVm1wL2haTnZadVJ3THo0YUpsck95WllNL04rcTB3d2Yx?=
+ =?utf-8?B?Sk82enhac24vck0yOStKV2JEUVk1WkwrQ3hKb1NhUmE2T2laNXJ5L2h1NWRz?=
+ =?utf-8?B?cjMrbFBlWnNkQ2dsZURJL3pVSUlyQTYwbVNlSXpXNnB0M3B4ZFRTalZ5VG1t?=
+ =?utf-8?B?Mk1saWF6UTRGSXphY1djNTlEOXp5VVdaNFQraENBbXRxb3NQbXhQSmtvbTdw?=
+ =?utf-8?B?d1ZBaHVOcE1qTlhpSHgwd2NDUEtwNEQ5UEdaaUh1UGFVZGFHcnRjeXF6aFZo?=
+ =?utf-8?B?bVowNVpKWUMvck40NTQycTFrYTJNK0RkMnVIUllIcERIcjFUOHpPNU9FeWJX?=
+ =?utf-8?B?dndRQi9zb2QyVTdWU3hXQTUyN2xrV2pVY3c4SW0xSWZ5VVBPcnM2UUlPSExv?=
+ =?utf-8?B?bEV5Z3F5RVJOSjNCZUpSTnJDbFNRRlNEUGIxOGNPOW5Sbk1xbUp6VldWTW10?=
+ =?utf-8?B?bDBEbUx4VjFnL2FPS2U2czBLaUVqT1BzTFpZdnZUQ1lpdVN5by83eTN3RlRB?=
+ =?utf-8?B?SHprWmFzcXpvanVUUDlaUGt6R2wrUklJS1k5RWQ5b0VlSzIwWEt4dFFzRzJu?=
+ =?utf-8?B?d3pzZW1nTFZkMnlNVGtHeVdtZ2prWU03WlRYMnZXVStkd1RHN1FBQkpwUW9o?=
+ =?utf-8?B?MWJGalo2TTQ1V09RTFhYaTJoYlNuOU1QTlYzM3BaVFpsSGtSZlBzb3BWWkJL?=
+ =?utf-8?B?bERoWFdXMWdqVEFKQVJHNEZaMDIzL21UTHRMalNHcmo3WHB6Q3RYcU1XVHRq?=
+ =?utf-8?B?NnJsM0hlcHdOVWIwek9SUkFFazg5N1FTUjVuVHRnWXRybVpvSnVaU2tEZ054?=
+ =?utf-8?B?eFZsWEtmUDB0dlUySHFraW83bTN6NjgzQlpzUHFyMENsallwQ01QZmxCQVRB?=
+ =?utf-8?B?d1RKaHBkYU44MlVkZHlXYk1hQmREQ283WlorZENMMUptV0VPVXJCZko4VEdh?=
+ =?utf-8?Q?eiMSJ9bjZnja8ewtebX4QEE=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <52002DEA71017847BEEC7C59A2661AFE@apcprd01.prod.exchangelabs.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: grown-up.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SG2PR01MB3564.apcprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f5b4a7ca-772f-4049-858b-08db03fcee96
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 055f2264-e854-4baf-a73b-40bb967b417c
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: BQzgbXs/iQoYzCuQTVt7UDVs1N75Sk3+DGar24dp+BmHtpyaVluKo2ZTOzQnIBaukQf+Zvewb2rVdJZEfTny3Ks/bko3OfpL/Hw47MqUX9s=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR01MB4448
+X-Warn: EHLO/HELO not verified: Remote host 40.107.215.126
+ (mail-sgaapc01on2126.outbound.protection.outlook.com) incorrectly presented
+ itself as APC01-SG2-obe.outbound.protection.outlook.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,78 +135,141 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: samba@lists.samba.org
-Cc: Rowland Penny <rpenny@samba.org>
+From: itdept_head via samba-technical <samba-technical@lists.samba.org>
+Reply-To: itdept_head <itdept_head@grown-up.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-
-
-On 31/01/2023 14:49, David Mulder via samba-technical wrote:
-> On 1/30/23 11:46 PM, itdept_head via samba-technical wrote:
->> Samba 4.14.4
->> Migrated a domain. with a  Rename.
->> The domain is up and resolving correctly and logs in etc. (seems to 
->> function totally correctly)
->>
->>
->>
->>
->> As stated in documents the GPO point to the old domain.
->>
->> Old: ns01.Jim.com
->> New: org.bob.com
->>
->>
->> However this hangs the windows 10  gpmc.msc tool.
->>
->> Forest: org.bob.com
->> Domains: org.bob.com
->> org.bob.com
->>
->> as soon as you select the “org.bob.com” to maintain the tree of 
->> users/gpo ,etc you get into an endless loop since  “ns01.jim.com” 
->> cannot be found (also you might not want it referencing the old domain)
->>
->> “Domain: ns01.Jim.com”
->> “The specified domain either does not exist or could not be contacted.”
->> This then puts the MS tools into a tight loop with no cancel options.
->>
->>
->> QUESTION:
->> Where is this reference to  “Domain: ns01.Jim.com”. kept in the LDAP.
->> Totally deleting the GPO from SYSVOL AND  going into 
->> CN=Policies.CN=System. To delete any used GPO links ,  and restarting 
->> the  samba does not remove the references.
-> IIRC, these are kept in 'CN=Policies,CN=System' in ldap. I think the 
-> objectClass is 'groupPolicyContainer'. I'm just skimming through code to 
-> see these. You should be able to do a subtree search for 
-> '(objectClass=groupPolicyContainer)' to find all your GPOs.
-> 
-
-The problem is, if I understand it correctly, Samba doesn't support 
-renaming a domain in the long term.
-
-The 'rename' tool was added at the 4.9.0 release and it states this in 
-the release notes:
-
-Note that the renamed tool is currently not intended to support a 
-long-term rename of the production domain.
-
-It also says this:
-
-Currently renaming the GPOs is not supported and would need to be done 
-manually.
-
-I haven't seen anything that says differently (there might be something, 
-but I haven't seen it if there is.)
-
-It would be great if renaming a domain does work, but I wouldn't 
-recommend trying it in production.
-
-Has anyone renamed a Samba domain and if so, does it work long term ?
-
-Rowland
-
+DQpPbiAzMS8wMS8yMDIzIDE0OjQ5LCBEYXZpZCBNdWxkZXIgdmlhIHNhbWJhLXRlY2huaWNhbCB3
+cm90ZToNCj4gT24gMS8zMC8yMyAxMTo0NiBQTSwgaXRkZXB0X2hlYWQgdmlhIHNhbWJhLXRlY2hu
+aWNhbCB3cm90ZToNCj4+IFNhbWJhIDQuMTQuNA0KPj4gTWlncmF0ZWQgYSBkb21haW4uIHdpdGgg
+YSBSZW5hbWUuDQo+PiBUaGUgZG9tYWluIGlzIHVwIGFuZCByZXNvbHZpbmcgY29ycmVjdGx5IGFu
+ZCBsb2dzIGluIGV0Yy4gKHNlZW1zIHRvIA0KPj4gZnVuY3Rpb24gdG90YWxseSBjb3JyZWN0bHkp
+DQo+Pg0KPj4NCj4+DQo+Pg0KPj4gQXMgc3RhdGVkIGluIGRvY3VtZW50cyB0aGUgR1BPIHBvaW50
+IHRvIHRoZSBvbGQgZG9tYWluLg0KPj4NCj4+IE9sZDogbnMwMS5KaW0uY29tDQo+PiBOZXc6IG9y
+Zy5ib2IuY29tDQo+Pg0KPj4NCj4+IEhvd2V2ZXIgdGhpcyBoYW5ncyB0aGUgd2luZG93cyAxMCBn
+cG1jLm1zYyB0b29sLg0KPj4NCj4+IEZvcmVzdDogb3JnLmJvYi5jb20NCj4+IERvbWFpbnM6IG9y
+Zy5ib2IuY29tDQo+PiBvcmcuYm9iLmNvbQ0KPj4NCj4+IGFzIHNvb24gYXMgeW91IHNlbGVjdCB0
+aGUg4oCcb3JnLmJvYi5jb23igJ0gdG8gbWFpbnRhaW4gdGhlIHRyZWUgb2YgDQo+PiB1c2Vycy9n
+cG8gLGV0YyB5b3UgZ2V0IGludG8gYW4gZW5kbGVzcyBsb29wIHNpbmNlIOKAnG5zMDEuamltLmNv
+beKAnSANCj4+IGNhbm5vdCBiZSBmb3VuZCAoYWxzbyB5b3UgbWlnaHQgbm90IHdhbnQgaXQgcmVm
+ZXJlbmNpbmcgdGhlIG9sZCBkb21haW4pDQo+Pg0KPj4g4oCcRG9tYWluOiBuczAxLkppbS5jb23i
+gJ0NCj4+IOKAnFRoZSBzcGVjaWZpZWQgZG9tYWluIGVpdGhlciBkb2VzIG5vdCBleGlzdCBvciBj
+b3VsZCBub3QgYmUgY29udGFjdGVkLuKAnQ0KPj4gVGhpcyB0aGVuIHB1dHMgdGhlIE1TIHRvb2xz
+IGludG8gYSB0aWdodCBsb29wIHdpdGggbm8gY2FuY2VsIG9wdGlvbnMuDQo+Pg0KPj4NCj4+IFFV
+RVNUSU9OOg0KPj4gV2hlcmUgaXMgdGhpcyByZWZlcmVuY2UgdG8g4oCcRG9tYWluOiBuczAxLkpp
+bS5jb23igJ0uIGtlcHQgaW4gdGhlIExEQVAuDQo+PiBUb3RhbGx5IGRlbGV0aW5nIHRoZSBHUE8g
+ZnJvbSBTWVNWT0wgQU5EIGdvaW5nIGludG8gDQo+PiBDTj1Qb2xpY2llcy5DTj1TeXN0ZW0uIFRv
+IGRlbGV0ZSBhbnkgdXNlZCBHUE8gbGlua3MgLCBhbmQgcmVzdGFydGluZyANCj4+IHRoZSBzYW1i
+YSBkb2VzIG5vdCByZW1vdmUgdGhlIHJlZmVyZW5jZXMuDQo+IElJUkMsIHRoZXNlIGFyZSBrZXB0
+IGluICdDTj1Qb2xpY2llcyxDTj1TeXN0ZW0nIGluIGxkYXAuIEkgdGhpbmsgdGhlIA0KPiBvYmpl
+Y3RDbGFzcyBpcyAnZ3JvdXBQb2xpY3lDb250YWluZXInLiBJJ20ganVzdCBza2ltbWluZyB0aHJv
+dWdoIGNvZGUgdG8gDQo+IHNlZSB0aGVzZS4gWW91IHNob3VsZCBiZSBhYmxlIHRvIGRvIGEgc3Vi
+dHJlZSBzZWFyY2ggZm9yIA0KPiAnKG9iamVjdENsYXNzPWdyb3VwUG9saWN5Q29udGFpbmVyKScg
+dG8gZmluZCBhbGwgeW91ciBHUE9zLg0KPiANCg0KDQpUaGUgcHJvYmxlbSBpcywgaWYgSSB1bmRl
+cnN0YW5kIGl0IGNvcnJlY3RseSwgU2FtYmEgZG9lc24ndCBzdXBwb3J0IA0KcmVuYW1pbmcgYSBk
+b21haW4gaW4gdGhlIGxvbmcgdGVybS4NCg0KDQpUaGUgJ3JlbmFtZScgdG9vbCB3YXMgYWRkZWQg
+YXQgdGhlIDQuOS4wIHJlbGVhc2UgYW5kIGl0IHN0YXRlcyB0aGlzIGluIA0KdGhlIHJlbGVhc2Ug
+bm90ZXM6DQoNCg0KTm90ZSB0aGF0IHRoZSByZW5hbWVkIHRvb2wgaXMgY3VycmVudGx5IG5vdCBp
+bnRlbmRlZCB0byBzdXBwb3J0IGEgDQpsb25nLXRlcm0gcmVuYW1lIG9mIHRoZSBwcm9kdWN0aW9u
+IGRvbWFpbi4NCg0KDQpJdCBhbHNvIHNheXMgdGhpczoNCg0KDQpDdXJyZW50bHkgcmVuYW1pbmcg
+dGhlIEdQT3MgaXMgbm90IHN1cHBvcnRlZCBhbmQgd291bGQgbmVlZCB0byBiZSBkb25lIA0KbWFu
+dWFsbHkuDQoNCg0KSSBoYXZlbid0IHNlZW4gYW55dGhpbmcgdGhhdCBzYXlzIGRpZmZlcmVudGx5
+ICh0aGVyZSBtaWdodCBiZSBzb21ldGhpbmcsIA0KYnV0IEkgaGF2ZW4ndCBzZWVuIGl0IGlmIHRo
+ZXJlIGlzLikNCg0KDQpJdCB3b3VsZCBiZSBncmVhdCBpZiByZW5hbWluZyBhIGRvbWFpbiBkb2Vz
+IHdvcmssIGJ1dCBJIHdvdWxkbid0IA0KcmVjb21tZW5kIHRyeWluZyBpdCBpbiBwcm9kdWN0aW9u
+Lg0KDQoNCkhhcyBhbnlvbmUgcmVuYW1lZCBhIFNhbWJhIGRvbWFpbiBhbmQgaWYgc28sIGRvZXMg
+aXQgd29yayBsb25nIHRlcm0gPw0KDQoNClJvd2xhbmQNCg0KDQpXZSBhcmUgYWJvdXQgdG8gZmlu
+ZCBvdXQuLi4uLi4uLi4sIG5vIHBvaW50IGluIGhhdmluZyBhIHRvb2wgaWYgbm8gb25lIGlzIGdv
+aW5nIHRvIHRlc3QgaXQuDQpZZXMgeW91ciB1bmRlcnN0YW5kaW5nIGlzIGFsbW9zdCBjb3JyZWN0
+Li4uLiB0aGlzIGlzIHJlbGF0ZWQgdG8gdGhlIEdQTUMgdG9vbCBub3QgZXZlbiBnZXR0aW5nIHRv
+IHRoZSBHUE8gZmlsZXMgJiBjcmFzaGluZyBldmVuIGlmIHRoZXkgYXJlIGFsbCBkZWxldGVkIGZy
+b20gdGhlIHN5c3ZvbC4NCg0KVGhlIG1haW4gcHJvYmxlbSAgaXMgZG9jdW1lbnRhdGlvbiBzYXlp
+bmcgdGhpbmcgbGlrZSAiLCBTYW1iYSBkb2Vzbid0IHN1cHBvcnQgIHJlbmFtaW5nIGEgZG9tYWlu
+IGluIHRoZSBsb25nIHRlcm0uIiwgd2hpY2gsIHRoaXMgc3RhdGVtZW50ICBJUyBpbiB0aGUgZG9j
+dW1lbnRhdGlvbg0KQnV0IHRoZW4gbm90IHF1YWxpZnlpbmcgdGhlIHN0YXRlbWVudCwgd2l0aCBh
+IHZlcnNpb24gbnVtYmVyIG9yIHdoeS4uLi4gLCBzZXJpb3VzbHkgYW4gZXh0cmEgc2VudGVuY2Ug
+ZnJvbSB0aGUgZG9jdW1lbnRhdGlvbiB3cml0ZXIgb24gdGhlaXIgdGhvdWdodHMgd291bGQgZ28g
+YSBsb25nIHdheS4uLi4uLg0KDQpTbyBoZXJlIGlzIHdoYXQgSSBoYXZlIGZvdW5kIG91dC4NCg0K
+MS4gYXQgdGhlIExEQVAgcGF0aCAiQ049RG9tYWluLUROUyxDTj1TY2hlbWEsQ049Q29uZmlndXJh
+dGlvbixEQz0uLi4uLiIsIHRoZXJlIGlzIGEgc3RyaW5nIHZhbHVlICBjYWxsZWQgZ3BsaW5rLCB0
+aGlzIGNvbnRhaW5zIGEgcmVjb3JkICBvZiBhbGwgdGhlIEdQTydzIGluIHRoZSBkb21haW4sIGFu
+ZCBpdCBpcyB0aGlzIHRoYXQgYmxvY2tzIHRoZSBNUyB0b29scywgc2luY2UgaXQgc3RpbGwgcmVm
+ZXJzIHRvIHRoZSBvbGQgZG9tYWluLg0KDQpBcyBpbjoNCltMREFQOi8vY249e0ZFQTBFMTg3LTRD
+RjgtNDRFMy1CMzE5LTNGNzcxM0ZERUMyMX0sY249cG9saWNpZXMsY249c3lzdGVtLGRjPSB7b2xk
+IGRvbWFpbiBiZWZvcmUgcmUtbmFtZX0sIHN0aWxsIGhlcmUgQUZURVIgdGhlIHJlbmFtZS4NCg0K
+V2hlbiB0aGUgR1BNQyB0b29sIGhpdHMgdGhpcyBhbmQgY2Fubm90IHJlc29sdmUgdGhlc2Ugc3Ry
+aW5ncyBpdCBnb2VzIGludG8gYSBzb2Z0d2FyZSBsb29wIHdpdGggbW9kYWwgZGlhbG9ncywgYW5k
+IGJlaW5nIE1TIHRoZXJlIGlzIG5vICJjYW5jZWwiIG9uIHRoZSBmaW5hbCBtb2RhbCBkaWFsb2cg
+b25seSAib2siDQpBTkQgZHVlIHRvIHNvbWUgb2YgdGhlc2UgcmVjb3JkcyBOT1QgYWxsb3dpbmcg
+ZGVsZXRlLi4gaXQgZ2V0IHN0dWNrLg0KDQpTbyBhIGZpeDoNCg0KU2ltcGx5IHVzaW5nIGFuIExE
+QVAgZWRpdG9yICYgIGNoYW5naW5nIHRoZXNlIHJlZmVyZW5jZXMgdG8gdGhlIG5ldyBkb21haW4s
+IHN1ZGRlbmx5IGFsbG93IHRoZSBHUE1DICB0b29sIHRvIHN0YXJ0IHdvcmtpbmcgLCB1bnRpbCBp
+dCBoaXQgYW55IHN1YmRpdmlzaW9uIGNvbnRhaW5lciBVTkRFUiB0aGUgcmVuYW1lZCBzY2hlbWEs
+IHRoYXQgY29udGFpbnMgYSBHUE8gd2l0aCBhbiBvbGQgZG9tYWluIHJlZmVyZW5jZS4uICYgdGhl
+IE1TIHRvb2wgbG9vcHMgYWdhaW4uDQoqbm90ZS4uIHdoYXQgaXMgbWVhbnQgaXMgTk9UIGFueSBy
+ZWZlcmVuY2UgSU5TSURFIHRoZSBHUE8sIGJ1dCBpZiBBTlkgR1BPIHdhcyBhdHRhY2hlZCB0byB0
+aGlzIGNvbnRhaW5lciwgdGhlbiB0aGUgTERBUCByZWNvcmQgYXQgdGhhdCBjb250YWluZXIgV0lM
+TCBoYXZlIGEgImdwbGluayIgcmVjb3JkIHJlZmVycmluZyB0byB0aGUgb2xkIGRvbWFpbi4NCg0K
+SWYgdGhlcmUgYXJlIG5vIEdQTyB0aGVuIHRoZXJlIGlzIG5vIHByb2JsZW0gKHNhbWJhLXRvb2ws
+IGNvdWxkIGVhc2lseSAgZ28gdGhydSBlYWNoIG9mIHRoZXNlIGNvbnRhaW5lcnMgbG9va2luZyBm
+b3IgZ3BsaW5rIHJlY29yZHMgJiBwcmludCB0aGVtIG91dCwgZHVyaW5nIHRoZSBtaWdyYXRpb24u
+KQ0KDQpIb3dldmVyIHNpbmNlIHRoaXMgY29udGFpbmVyIGlzIG5lc3RlZCBhbmQgbm90IGEgY3Jp
+dGljYWwgcGFydCBvZiB0aGUgZG9tYWluIHN0cnVjdHVyZSAgdGhlIE1TIEdQTUMgdG9vbCBub3cg
+YWxsb3dzIHRoZXNlICBHUE8gbGlua3MgdG8gYmUgcmVtb3ZlZCB3aXRoIHRoZSBHUE1DIHRvb2wg
+KCBqdXN0IGl0IHdvbid0IGFsbG93IHlvdSB0byByZW1vdmUgYW55IGNyaXRpY2FsIHRvcCBsZXZl
+bCAgR1BPICBiZWNhdXNlIG9uZSBpcyB0aGUgZGVmYXVsdCBkb21haW4gJiBjb25maWcgcG9saWN5
+KQ0KDQpGdXJ0aGVybW9yZSB5b3UgY2FuIGdvIGludG8gYW55ICByZWNvcmQgdXNpbmcgYW4gTERB
+UCBlZGl0b3IgYW5kIGZpeCB0aGUgZ3BsaW5rIHJlY29yZCBhcyBwZXIgcHJldmlvdXNseSBub3Rl
+ZCwgYnkgcmVwbGFjaW5nIHRoZSBzdHJpbmcgdmFsdWVzIG9mIHRoZSBvbGQgZG9tYWluIHdpdGgg
+dGhlIG5ldyBvbmUgKHRoZSBwYXRoIEkgY2hvb3NlIHRvIGZvbGxvdykNCg0KTm93IGNsZWFybHkg
+dGhpcyBkb2VzIE5PVCBmaXggdGhlIGNvbnRlbnQgb2YgdGhlIGFjdHVhbCBHUE8gLCB0aGUgY29u
+dGVudCBvZiB3aGljaCBtYXkgIGNvbmZpZ3VyZSB0aGluZ3MgYmFzZWQgb24gdGhlIG9sZCBkb21h
+aW4gcmVjb3JkIGZvciBmaWxlIHBhdGhzL2ZvbGRlciBwYXRocyBldGMuLCBzdHVmZiB3aGljaCBz
+aXRzIGluIEdQTyBYTUwgZmlsZXMgJiBub3QgdGhlIExEQVAuLi4uJw0KDQpBcyBpbjoNCiIgW1dh
+cm5pbmddIFRoZSBhcHBsaWNhdGlvbiBkZXBsb3ltZW50IHNjcmlwdCAoLmFhcyBmaWxlKSBmb3Ig
+W1xcYWQwMS5ubjAxLnh4eC54eHgteHguY29tXFNvZnR3YXJlLVNoYXJlXDd6MjIwMS14NjQubXNp
+XSBjYW5ub3QgYmUgcmVnZW5lcmF0ZWQgYnV0IHRoZSB0YXNrIHdpbGwgY29udGludWUuDQpEZXRh
+aWxzOiBUaGlzIGluc3RhbGxhdGlvbiBwYWNrYWdlIGNvdWxkIG5vdCBiZSBvcGVuZWQuIENvbnRh
+Y3QgdGhlIGFwcGxpY2F0aW9uIHZlbmRvciB0byB2ZXJpZnkgdGhhdCB0aGlzIGlzIGEgdmFsaWQg
+V2luZG93cyBJbnN0YWxsZXIgcGFja2FnZS4iDQoNCg0KQlVUIE1TIHN1cHBseSBhIHRvb2wgdGhh
+dCB3aWxsIGdvIHRocnUgZWFjaCBHUE8gYW5kIGFsbG93IHN0cmluZyBzdWJzdGl0dXRpb24gd2l0
+aCBuZXcgdmFsdWVzLiAoYmFja3VwKSwoc2NhbikoaW1wb3J0ICYgc3Vic3RpdHV0ZSBzdHJpbmdz
+KQ0KU2luY2UgdGhleSBoYXZlIGEgZmFudGFzeSBvZiBkZXZlbG9wZXJzIHdvcmtpbmcgb24gR1BP
+J3Mgb2ZmIGxpbmUgdW5kZXIgZGlmZmVyZW50bHkgbmFtZWQgc3lzdGVtcyB0aGVuICIgYmFja3Vw
+IiAmIHJlc3RvcmUgdG8gdGhlIHByb2R1Y3Rpb24gZG9tYWluLg0KIEkgc2F5IGZhbnRhc3ksIGJl
+Y2F1c2UgZXZlbiB0aGlzIE1TIHRvb2wgaXMgYnVnZ2VkIGFuZCBtaXNzZXMgc29tZSBlbWJlZGRl
+ZCBHUE8gc3RyaW5ncyAsYnV0IHlvdSBkbyBnZXQgZXJyb3JzIHlvdSBjYW4gZml4LCBhbmQgdGhp
+cyBpcyBhIE1TIHByb2JsZW0gbm90IGEgU0FNQkEgcHJvYmxlbSBzbyB5b3UgY2FuIGdldCBNUyBz
+dXBwb3J0Lg0KDQoNCk9uY2UgeW91IGNvbXBsZXRlIHRoZXNlIGZpeCB1cHMsIHRoZSBkb21haW4g
+YWxsb3dzIGNvbXB1dGVycyB0byBqb2luIEFORCBpdCBhcHBsaWVzIHRoZSBuZXcgR1BPIGNvcnJl
+Y3RseSwgaW5mYWN0IEkgd2FzIHBsZWFzYW50bHkgc3VycHJpc2VkIGF0IGhvdyBlYXN5IGl0IHdh
+cy4NCg0KU28gYWxsIG9mIHRoaXMgaXMgZG9hYmxlIGluIGFuIGVtZXJnZW5jeSB3aXRoIHRoZSBl
+eGlzdGluZyB0b29scyAsIGFzIGxvbmcgYXMuLi4uLi4uIHRoZSAgIiBDTj1Eb21haW4tRE5TLENO
+PVNjaGVtYSxDTj1Db25maWd1cmF0aW9uLERDPS4uLiIgYmxvY2tpbmcgYnVnIGlzIGNsZWFyZWQs
+ICh3aGljaCBpcyBzb21ldGhpbmcgdGhlIHNhbWJhLXRvb2wgY291bGQgYWN0dWFsbHkgZG8uKQ0K
+Tk8gbmVlZCB0byBnbyBhcyBmYXIgYXMgY2xlYW5pbmcgdXAgYWxsIHRoZSAgY2hpbGQgY29udGFp
+bmVycyAmIEdQTywgYnV0IGNsZWFuaW5nIHRoaXMgaW5pdGlhbCByZWNvcmQgKGV2ZW4gaWYgaXQg
+aXMgemVyb2luZyBpdCBvdXQhISEhKSwgc28gdGhhdCB0aGUgZXhpc3RpbmcgTVMgdG9vbHMgY2Fu
+IHRoZW4gd29yay4NCg0KSW5mYWN0IGZpbmRpbmcgdGhlICJncGxpbmsiIGRhdGEgZmllbGQgJiBm
+aXhpbmcgdGhhdCB0b29rIGxvbmdlciB0aGFuIHNjYW5uaW5nICYgcmUtaW1wb3J0aW5nIGFsbCB0
+aGUgR1BPJ3MgZnJvbSB0aGUgb2xkIGRvbWFpbiAmIGdldHRpbmcgdGhlbSB3b3JraW5nLg0KDQoN
+Ck15IG1haW4gcXVlc3Rpb24gb2YgIndoYXQgd2FzIGJsb2NraW5nIHRoZSBHUE1DIHRvb2wiIHdh
+cyBhY3R1YWxseSBqdXN0IGFuc3dlcmVkIGJ5IG15c2VsZiwgdGhlIHJlc3Qgb2YgdGhpcyBwb3N0
+IGlzIGhlcmUgYXMgYSByZWNvcmQgZm9yIG90aGVyIHBlb3BsZSB3aXNoaW5nIHRvIGRvIGEgcmVu
+YW1lLg0KDQoNClNvLi4uIEknbSBhdCB0aGUgc3RhZ2Ugb2YgaGF2aW5nIGEgcmVuYW1lZCBkb21h
+aW4gdGhhdCBhcHBlYXJzIHRvIGJlIHRvdGFsbHkgZnVuY3Rpb25hbCBmb3Igc2V2ZXJhbCBkYXlz
+IHNvIGZhciBhZnRlciB0aGUgYWJvdmUgZml4ZXMsIGFuZCB0aGUgR1BPJ3MgYWxsIGFwcGVhciB0
+byBiZSB3b3JraW5nIHdpdGhvdXQgZXJyb3JzLih0aGV5IHNldCBkZXNrdG9wIHBpY3R1cmVzIC9j
+b25maWcgcmVnaXN0cnkgZW50cmllcyAmIHJlZmVyIHRvICBwYXRocyBjb3JyZWN0bHkpDQoNClNv
+IGl0IGFwcGVhcnMgdG8gYmUgcG9zc2libGUgdG8gZ2V0IGEgdG90YWxseSByZW5hbWVkICYgZnVu
+Y3Rpb25hbCBkb21haW4sIGluY2x1ZGluZyBHUE8sLi4uLi4gYW5kIHF1aXRlIGZhc3QgaWYgb25s
+eSBpdCB3ZXJlIGRvY3VtZW50ZWQgYmV0dGVyLg0KDQpOZXh0IHRoaW5nIGlzIHRvIHdvcmsgb24g
+cHJpbnRlcnMsIHdoaWNoIG1pZ2h0IGJlIGZhc3RlciB0byBqdXN0IGRlbGV0ZSAmIHJlLWNyZWF0
+ZS4uLg0KVGhlbiB0aGUgbWFqb3IgdGFzayBvZiBob3cgdG8gZ2V0IGV4aXN0aW5nIE5BUyB0byB1
+c2UgdGhlICB7bmV3LWRvbWFpbn0gaW5zdGVhZCBvZiB0aGUge29sZC1kb21haW59LCB3aXRob3V0
+IGRlc3Ryb3lpbmcgYWxsIHRoZSBmaWxlIHJlZmVyZW5jZXMgKCB0aGlzIG1pZ2h0IGFjdHVhbGx5
+IHdvcmtzIGFzIGEgdHJ1c3QgcmVsYXRpb25zaGlwIGJhY2sgdG8gdGhlIG9sZCBkb21haW4uKQ0K
+DQpsb25nIHRlcm0sIEkgd2lsbCByZXBvcnQgYmFjayBvbiB0aGUgZmluZGluZ3MuLi4uZWl0aGVy
+IHdheS4uLg0KDQoNCg0K
 
