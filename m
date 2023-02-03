@@ -2,68 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id E035B689E07
-	for <lists+samba-technical@lfdr.de>; Fri,  3 Feb 2023 16:23:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A43268A0D2
+	for <lists+samba-technical@lfdr.de>; Fri,  3 Feb 2023 18:51:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=LmpM7BiL3pQ0/vUxXnsNJHEATVKJP5ZAIE3J9X652ww=; b=UKGAJLXOF3rDdPjIXmc2f3s62c
-	zslp6w2L6CnceMPR+ANDvOyjjeRwy1RAmrf64n4W/VRS9+Y5SbrXo6/VYRoOhdQzWf3vDUoO7VKRk
-	xLLNcu8jVJ5g9IQ8mh2/hxXLxFfS3tR9dijn6iNSscmMlpyOjEbz+NfHv0K8bfWYZkY2MZAPn/js5
-	+9PTD3xIGViwsqc35LvCC9KvUz8SKuk/k+EWnadkFgoF34oY9YW8DskW6QwRxzIRrGNmCLPMHHl/t
-	R6FFdV3n6X+/JgVwb7cVl6WUzWBP+t8fSTUYrXDrwECOpiX8N7h4GHJMr9wknJRNvCETwz0v9pUQM
-	Q7pt7eeA==;
-Received: from ip6-localhost ([::1]:51710 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=aagg1U7KCOdBmV5KJA1EDdN+uGOyqFKMM6H0hmVSPHw=; b=NdjDMrWmfHWHBFhQTFANrhvoL/
+	nSkzLRdKy8PcigCf/JhyEmbPgo+zEYarwYRTkqvCrCzPBMQh0+tgHmqdvw+GLNXUg6y7RIrbF4ULI
+	UvPDN2kcWvnxG3F228xL+2Q6SrkYTn0E4D2Cegu72LxD4otjNloA8yx2Y1gCO9cpUY5rAeOAV+CaJ
+	yEup6c0KWoYCS1X5leewvN6QvTBZyNBxzGZO+gkksq7QztrfCN/g0Y2qSBLCbRgPV57iQt4SnqKwe
+	Z8gEqvzp+b/Sh27Wk623dVHaf2yzxjcJlyzFW5tq107Z9x3xAxE3uGWbR4uPAarVySHG/f/RV7VFF
+	E++3vS+w==;
+Received: from ip6-localhost ([::1]:48416 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pNxtP-008ZW5-4u; Fri, 03 Feb 2023 15:22:23 +0000
-Received: from mail-qk1-x736.google.com ([2607:f8b0:4864:20::736]:42750) 
+	id 1pO0D9-008cYD-Kl; Fri, 03 Feb 2023 17:50:55 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26718) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pNxtI-008ZVu-Ar
- for samba-technical@lists.samba.org; Fri, 03 Feb 2023 15:22:18 +0000
-Received: by mail-qk1-x736.google.com with SMTP id p16so2549698qki.9
- for <samba-technical@lists.samba.org>; Fri, 03 Feb 2023 07:22:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9FFerqj6Ji/6oi1pSMbQevW/lJpYSxsPxp8xSTq1mvM=;
- b=g35wndGU+LzoijkmzRVUiStekB4Nb23mvQUYTzHZr0VMxi1801SG0/FplsdApRN8sT
- YvoNxV47r2gFslBKqoooL+n4c3QmfslHBE1fzCkWLn0fyqYkFSPNk78YtmXd//L51SuW
- uDFcqJBvM+c8iQQ8jnklfw0+9+OiTVBcB2nyvBxg0Zq2i2240zaBUS0+/25l1nvbwBmj
- PbUUY3oxQo+HLjAixZYv1a//XvfxybSwHzjQNm6qOnCO2XReW4M9h3RMBWJO99i3WWrP
- /9ji6XNiDnSQYcaQzLdd41eHc9sQYsJLWS4LPvXaRNw3C86OJ544SYM0UiOIuW7PcH+f
- NjsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9FFerqj6Ji/6oi1pSMbQevW/lJpYSxsPxp8xSTq1mvM=;
- b=LCcau6Dwa5wn4De8Knj4Fwps7YMP6q2eCznMH9n2X00U6UA77kBMz5AX0ilKX9hXhl
- +p1bgY4HiiueAdYm4CX/ym5ktAfzkANMnwZJAsq/ApEthOiCu8B2f4L54i0gF9Hr/zIv
- KArNpUTyXARDwyD/MFy3gBCH0EJcsBszglwFG+x5GOyx4JYv+cEke7rBh4jC/MErWuE3
- 2KsmysvbLiKc1b4k8xh6RYp8/fKh8sIUEMyUt1XaC5frkl6kFrgHE9ebhPxINVy51I0t
- Uju9383XN4Wa7Zm/+yXH22WOVFFaNFu+0uDIZ5HG57gW5RlFgM/0mZetEn2FeFaWN0vE
- F5ag==
-X-Gm-Message-State: AO0yUKXrBNrm34n4tCifxmgzE3uuWsOG3ydcqB+HBb/JUWkhZWBzaMEc
- 0ftJ0Md4zbrr0V/xaR8fhNcwO3pmqaXbB6ttIVlbLkzpIgw=
-X-Google-Smtp-Source: AK7set+FqUwN+OhhqFYCZrHZg0qA1wEZQeYJ1vEIfDmwYrTUM/Vf3WJszRp2K+okHOQL+tbmlwkA2C/K7/Vz6ehNd6A=
-X-Received: by 2002:a37:f618:0:b0:721:b8f3:ad9f with SMTP id
- y24-20020a37f618000000b00721b8f3ad9fmr839484qkj.70.1675437734117; Fri, 03 Feb
- 2023 07:22:14 -0800 (PST)
-MIME-Version: 1.0
+ (Exim) id 1pO0D4-008cY4-Gd
+ for samba-technical@lists.samba.org; Fri, 03 Feb 2023 17:50:52 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=aagg1U7KCOdBmV5KJA1EDdN+uGOyqFKMM6H0hmVSPHw=; b=fBK7aYyA6+Ix1uEfcc31JuPQpt
+ BdJLUROGVayRGmso9/u0YhVDrfs40qrIGS965UmOUuK6kLb/JWhuz/ps5WQKSX/2YfLg7yk6HWR5W
+ xmWxoj4hzArnd1XS8qMX3KNmWta6Yq4deDdABEyLOWkR//fYNmlpPdAn4Ai/7jHv/8uRhrZDcknbV
+ GWs5hZZbaLXjEFLDsUnZuHgMM9K8H7nY0Pmwo/zU44iaEHrhLeNSdib8kOnaCOxmqtOO52VoT7pS4
+ uEi3/wjV73LF6GHOCSm4+OgySFdtKC+6GxHSU03tn4x8FaX73ntGTZbA6EXzJRxQgJgVJFK/hMXHD
+ C43vhhwljhiNlsrKLLx+gGJDT1SOSzWBr6YIvB8yffaTxHAf+qcHQhvl8IY7PxhNFg8nrs/r+BkiX
+ qtWkBHNe+nqOX5TzStqbZDpQZcvtM+WhZKl0DzIQxgpoUGxuXmZN3WZPE1C7ZM6CmiTlDo+f47sUf
+ BVWIIFC1VHNgsyin1mtHIgb/;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pO0D3-00Bd0C-2O; Fri, 03 Feb 2023 17:50:49 +0000
+Date: Fri, 3 Feb 2023 09:50:46 -0800
+To: varun mittal <vmittal05@gmail.com>
+Subject: Re: Does the CreateDisposition flag of a client depend on Server's
+ response ?
+Message-ID: <Y91JdhAtd41n9C7O@jeremy-acer>
 References: <CA+RDaRC68P7Sfa80X9Z6VFyYnrvoxvC-hLGh=X6BQuXJW9jO8w@mail.gmail.com>
  <6b9c96ed-b116-3cdc-d361-44662662626c@samba.org>
  <Y9QgJwNzUh9EQFQV@jeremy-acer>
  <CA+RDaRCMPnsbg9yH9ciO_uPErDm_pKa+_fZtLtu0JbRpPkJUnw@mail.gmail.com>
  <Y9QuBd7wf9hfbpT5@jeremy-acer>
  <CA+RDaRAxOKK9FmwOFrh=ZNkw1ZP7xZiyah=NjKjjxvs7HnK7tA@mail.gmail.com>
-In-Reply-To: <CA+RDaRAxOKK9FmwOFrh=ZNkw1ZP7xZiyah=NjKjjxvs7HnK7tA@mail.gmail.com>
-Date: Fri, 3 Feb 2023 20:51:57 +0530
-Message-ID: <CA+RDaRAY7WLbZf=8Bp=jA0X435SvoQLFv7EK-WcbFCpPy67S4w@mail.gmail.com>
-Subject: Re: Does the CreateDisposition flag of a client depend on Server's
- response ?
-To: Jeremy Allison <jra@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+ <CA+RDaRAY7WLbZf=8Bp=jA0X435SvoQLFv7EK-WcbFCpPy67S4w@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <CA+RDaRAY7WLbZf=8Bp=jA0X435SvoQLFv7EK-WcbFCpPy67S4w@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,44 +62,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: varun mittal via samba-technical <samba-technical@lists.samba.org>
-Reply-To: varun mittal <vmittal05@gmail.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
 Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-I was able to narrow it down to the "Named Streams" bit in
-"FileFSAttributeInformation" response.
-When this value is toggled from 0 to 1, as is advertised by `streams_xattr`
-VFS module, Robocopy
-switched from FILE_OPEN to FILE_OPEN_IF.
+On Fri, Feb 03, 2023 at 08:51:57PM +0530, varun mittal wrote:
+>   I was able to narrow it down to the "Named Streams" bit in
+>   "FileFSAttributeInformation" response.
+>   When this value is toggled from 0 to 1, as is advertised by
+>   `streams_xattr` VFS module, Robocopy
+>   switched from FILE_OPEN to FILE_OPEN_IF.
+>   Thanks
 
-Thanks
+Thanks for tracking that down. What strange behavior.
+I can't see why having a stream would make the open
+change to optionally creating the file, but it's good
+info to know. Thanks for posting the follow-up to
+the list !
 
-On Mon, Jan 30, 2023 at 1:33 AM varun mittal <vmittal05@gmail.com> wrote:
-
-> I made some progress on this.
-> It seems the `streams_xattr` VFS module is making the difference.
->
-> On Samba-4.9.5-Debian, which was not working earlier,
-> once I disable this module Robocopy changes the CreateDisposition flag
-> and it starts working. But I could not spot the difference in traces
-> https://tinyurl.com/robocopy-issue
->
->
-> On Sat, Jan 28, 2023 at 1:33 AM Jeremy Allison <jra@samba.org> wrote:
->
->> On Sat, Jan 28, 2023 at 01:27:36AM +0530, varun mittal wrote:
->> >   > Wireshark will be the key. Compare between Windows server and Samba.
->> >   That is what I thought and have started looking. Any suggestions on
->> which
->> >   call in particular, there are so many :)
->> >   BTW, with a Windows server, the flag is FILE_OPEN_IF
->>
->> Well that's at the point you know there's a difference,
->> so work back from that point. Try bisecting the trace
->> to see where it starts to diverge. No tools for that
->> so you'll have to do it by hand (something I unfortunately
->> have great experience with :-).
->>
->
