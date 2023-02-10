@@ -2,63 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE4EF692576
-	for <lists+samba-technical@lfdr.de>; Fri, 10 Feb 2023 19:37:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A9056925FB
+	for <lists+samba-technical@lfdr.de>; Fri, 10 Feb 2023 20:02:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=45HS3XcRsfRS5VbZ2TiXDHQBLKSDRISNQErTXQPnH+g=; b=BAeZTBgzA43XCWvlFuqWHVYiOB
-	6Aj5w/hn9wM67L91Zw/IwyF4TclgvJxM5tlBLG+ziyUjRLifbEVdIxqnAs/yW0pfLiNV0fV6dzdWB
-	YclkXEb00zoO1naidsGdkbdX19GGXmphLHAPs9GaKk1kTWDHVn+uWj7N7pFICR2onE19E0ccV/9d6
-	U12TN64AQBKeV/YlZtP+xeIaV+t/iNlfzHnazJAW/RV96nX/KSfElmv4TrnIT+K1BSbgMPhYPe+Bj
-	rP+98SFxuuCK3oBrXmWR4/z4dqddpZnQFjs9O82Wps9pnMlAv1I0++oKh/oOQkwzkZyNodCeJWnqe
-	9YXveZ+A==;
-Received: from ip6-localhost ([::1]:53248 helo=hr1.samba.org) 
+	bh=6RHw9rkmwlod8gRPY6S3ICr33ENpr4HuArkf2tXrtn4=; b=gyQqJ1RVzFzwbqmbsNPVR4v8JY
+	/dzZIa8VPhsOR12cONIPADeQFl8hdhcJOU24z1cozKlp+U5vBFScdW2FA+5tDgIMct3iLKS1He15i
+	50ScSYh7mt8w2pEh7xRIQq7jIckHWxTxccWo/j2NG/8Ewr6a9M8hRMhjN/2F00uhBdH4GYq6hbgPl
+	j8MS+KZeCYUcDhSAfdOv8BT7I4csf8lEnp+T7pRhNmKBpXyBSNqP5rFroNuK8jWq0/Z9VTg/P/8lo
+	Gk3vVgOu3PslFNHv9b0J0w3izcu3S8QxqGL52K1M/s+rbAuauL+utN1TJ1UFTuQNfkwS+RjDvP33z
+	HHq7HsJw==;
+Received: from ip6-localhost ([::1]:35334 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pQYH0-00B5t2-2L; Fri, 10 Feb 2023 18:37:26 +0000
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c]:46634) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pQYGv-00B5st-SO
- for samba-technical@lists.samba.org; Fri, 10 Feb 2023 18:37:23 +0000
-Received: by mail-wm1-x32c.google.com with SMTP id
- bg5-20020a05600c3c8500b003e00c739ce4so4699040wmb.5
- for <samba-technical@lists.samba.org>; Fri, 10 Feb 2023 10:37:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux-foundation.org; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=45HS3XcRsfRS5VbZ2TiXDHQBLKSDRISNQErTXQPnH+g=;
- b=fA28mHicQVXU0rc9eizNL3RpJL4UanQ9gfQOBZ57SNqi5RpYK6zoS094B9dEWMLQUJ
- VDR5+QKCsCoY483JdS84PYO+YawCsU7ivhQXQygIuTrEgqYgXEUqNL9o00YmCoBr4cj0
- 8loINQ8lMH5qSDzADuKONPbLiCHUOVpr3CWx4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=45HS3XcRsfRS5VbZ2TiXDHQBLKSDRISNQErTXQPnH+g=;
- b=VJdFOaDItbeW16F2WyJYWSW6FUXI1EFU8Do9FbbNnVyWdAY2dB49dzy0oYTc73n5qW
- 2KYc+aaBxNApgzPHUp0UOJTYb5KwFtGEWr9yC93e2+Yf3AoiDHWniXtOdyC1dEnAwYgM
- U89f3xPeqCvQXW351ZiqSs5JhUJPC97lWJpkDTxbrCMZHsh2AslxWPlse8Zg7VI45ku9
- K8FVUw7OrQm1Sx+3FHvn+lykTBGu3UL2iejQ6ynl1sjUuDwUIyJEVG1sKXiWslsXUVm7
- aWFDb8y4EZFaRz5+DdJCYGc5vzxaCWinA9xyShG2B71dLScwDX1f9y6sT8gFVJl1USix
- C1hw==
-X-Gm-Message-State: AO0yUKVRq/6MvC2+LHi7QWUdacYr5801iG1q+hcB7ZHGqDb0GSpfpnm1
- mq2VOMvq3OfPjVPeHlemULEf8XUHjehzZ+agPrs=
-X-Google-Smtp-Source: AK7set//1Cfo6pQqecIsd70RSq3XmV+buudz2wQh0trHDw1Z54/aQNMv9SynIXJ7vZISIYffAVEjcw==
-X-Received: by 2002:a05:600c:2e94:b0:3df:e46f:c226 with SMTP id
- p20-20020a05600c2e9400b003dfe46fc226mr13279404wmn.16.1676054240747; 
- Fri, 10 Feb 2023 10:37:20 -0800 (PST)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com.
- [209.85.208.51]) by smtp.gmail.com with ESMTPSA id
- q9-20020adff789000000b002c3f022945fsm4250800wrp.77.2023.02.10.10.37.19
- for <samba-technical@lists.samba.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Feb 2023 10:37:19 -0800 (PST)
-Received: by mail-ed1-f51.google.com with SMTP id fj20so5486519edb.1
- for <samba-technical@lists.samba.org>; Fri, 10 Feb 2023 10:37:19 -0800 (PST)
-X-Received: by 2002:a50:f61e:0:b0:4ab:168c:dbd7 with SMTP id
- c30-20020a50f61e000000b004ab168cdbd7mr1816109edn.5.1676054239147; Fri, 10 Feb
- 2023 10:37:19 -0800 (PST)
+	id 1pQYew-00B73a-4w; Fri, 10 Feb 2023 19:02:10 +0000
+Received: from dfw.source.kernel.org ([139.178.84.217]:45830) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1pQYeq-00B73Q-PW
+ for samba-technical@lists.samba.org; Fri, 10 Feb 2023 19:02:07 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 7853961E00
+ for <samba-technical@lists.samba.org>; Fri, 10 Feb 2023 19:02:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E3850C4339C
+ for <samba-technical@lists.samba.org>; Fri, 10 Feb 2023 19:01:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1676055719;
+ bh=E/qchUqCgMrqhO01lpil+Mub62mxWI4tbL+Ig99y+6M=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=p6xPn91DE7NoATNOduE0KuiOuTEkgFsg5VacKvIvDRfe/vfYfV/1bwKENb3WkvOzs
+ +hVNhsLWq3rKZQqyo5lTqFDP3tejYN/LK+Cw6PGfrfE0rhAA5Z+Z80RES1MxWMnXNq
+ hYc+9+G8xrFqY3VuFfmgl8gxGhl3D+AlBzK4MbpxudT2s3gLNossYZTRU/1d72oBTL
+ LjGpMmhmDivwCMtdnZzMGnmAnNnu/52i2zpLLV+CvV7PGPtXaBG9Y9IA3TeFJuZS58
+ zAa5qOkDoj6TIWVIIr+/37nlRlALzbaqmETaJCyf3scObdsnCBla18gVWbfHCHGzvb
+ 98z1awxhl8Vag==
+Received: by mail-ed1-f45.google.com with SMTP id u21so5551921edv.3
+ for <samba-technical@lists.samba.org>; Fri, 10 Feb 2023 11:01:59 -0800 (PST)
+X-Gm-Message-State: AO0yUKXFPPfNQSYJ51wGOqcidZ2YIIr+HpNNFmzwQY5inVEswD3f7SoJ
+ YGbsOg9RABRSVjLKcWxp0xz4jAwht1qYrNqiCaOKFw==
+X-Google-Smtp-Source: AK7set9x9pw6hgD2dW1+GN20k1m5aEU1KvaMWkyLee7gBmQ0A5OhpixKJfIx8bgUWu+TViK+cwHUCyEdTDQ4IxJllj8=
+X-Received: by 2002:a50:d595:0:b0:4ac:b481:2b7c with SMTP id
+ v21-20020a50d595000000b004acb4812b7cmr201420edi.2.1676055718121; Fri, 10 Feb
+ 2023 11:01:58 -0800 (PST)
 MIME-Version: 1.0
 References: <0cfd9f02-dea7-90e2-e932-c8129b6013c7@samba.org>
  <CAHk-=wj8rthcQ9gQbvkMzeFt0iymq+CuOzmidx3Pm29Lg+W0gg@mail.gmail.com>
@@ -69,12 +54,13 @@ References: <0cfd9f02-dea7-90e2-e932-c8129b6013c7@samba.org>
  <CALCETrWjJisipSJA7tPu+h6B2gs3m+g0yPhZ4z+Atod+WOMkZg@mail.gmail.com>
  <CAHk-=wj66F6CdJUAAjqigXMBy7gHquFMzPNAwKCgkrb2mF6U7w@mail.gmail.com>
  <CALCETrU-9Wcb_zCsVWr24V=uCA0+c6x359UkJBOBgkbq+UHAMA@mail.gmail.com>
-In-Reply-To: <CALCETrU-9Wcb_zCsVWr24V=uCA0+c6x359UkJBOBgkbq+UHAMA@mail.gmail.com>
-Date: Fri, 10 Feb 2023 10:37:01 -0800
-X-Gmail-Original-Message-ID: <CAHk-=wjQZWMeQ9OgXDNepf+TLijqj0Lm0dXWwWzDcbz6o7yy_g@mail.gmail.com>
-Message-ID: <CAHk-=wjQZWMeQ9OgXDNepf+TLijqj0Lm0dXWwWzDcbz6o7yy_g@mail.gmail.com>
+ <CAHk-=wjQZWMeQ9OgXDNepf+TLijqj0Lm0dXWwWzDcbz6o7yy_g@mail.gmail.com>
+In-Reply-To: <CAHk-=wjQZWMeQ9OgXDNepf+TLijqj0Lm0dXWwWzDcbz6o7yy_g@mail.gmail.com>
+Date: Fri, 10 Feb 2023 11:01:46 -0800
+X-Gmail-Original-Message-ID: <CALCETrWuRHWh5XFn8M8qx5z0FXAGHH=ysb+c6J+cqbYyTAHvhw@mail.gmail.com>
+Message-ID: <CALCETrWuRHWh5XFn8M8qx5z0FXAGHH=ysb+c6J+cqbYyTAHvhw@mail.gmail.com>
 Subject: Re: copy on write for splice() from file to pipe?
-To: Andy Lutomirski <luto@kernel.org>
+To: Linus Torvalds <torvalds@linux-foundation.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -89,68 +75,60 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Linus Torvalds via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Linus Torvalds <torvalds@linux-foundation.org>
+From: Andy Lutomirski via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andy Lutomirski <luto@kernel.org>
 Cc: Jens Axboe <axboe@kernel.dk>,
  Linux API Mailing List <linux-api@vger.kernel.org>,
  Dave Chinner <david@fromorbit.com>,
  "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
  Matthew Wilcox <willy@infradead.org>, Stefan Metzmacher <metze@samba.org>,
- Al Viro <viro@zeniv.linux.org.uk>,
+ Al Viro <viro@zeniv.linux.org.uk>, Andy Lutomirski <luto@kernel.org>,
  linux-fsdevel <linux-fsdevel@vger.kernel.org>,
  Samba Technical <samba-technical@lists.samba.org>,
  io-uring <io-uring@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Feb 10, 2023 at 9:57 AM Andy Lutomirski <luto@kernel.org> wrote:
+On Fri, Feb 10, 2023 at 10:37 AM Linus Torvalds
+<torvalds@linux-foundation.org> wrote:
 >
-> I am saying exactly what I meant.  Obviously mutable data exists.  I'm
-> saying that *putting it in a pipe* *while it's still mutable* is not
-> good.  Which implies that I don't think splice() is good.  No offense.
+> On Fri, Feb 10, 2023 at 9:57 AM Andy Lutomirski <luto@kernel.org> wrote:
+>
+> I'm not convinced your suggestion of extending io_uring with new
+> primitives is any better in practice, though.
 
-No offense at all. As mentioned, I have grown to detest splice over the years.
 
-That said, in defense of splice(), it really does solve a lot of
-conceptual problems.
+I don't know if I'm really suggesting new primitives.  I think I'm
+making two change suggestions that go together.
 
-And I still think that conceptually it's absolutely lovely in *theory*.
+First, let splice() and IORING_OP_SPLICE copy (or zero-copy) data from
+a file to a socket.
 
-And part of it is very much the fact that pipes are useful and have
-the infrastructure for other things. So you can mix regular read/write
-calls with splice, and it actually makes sense. One of the design
-goals was for things like static http, where you don't really send out
-just file contents, there's a whole header to it as well.
+Second, either make splice more strict or add a new "strict splice"
+variant.  Strict splice only completes when it can promise that writes
+to the source that start after strict splice's completion won't change
+what gets written to the destination.
 
-So it's not just a specialized "send file contents to network", it's a
-"you can do a write() call to start filling the pipe buffer with the
-http header, then a splice() to start filling the file data".
 
-And it was also designed to allow other sources, notably things like
-video capture cards etc. And very much multiple destinations (again,
-media accelerators).
+I think that strict splice fixes Stefan's use case.  It's also easier
+to reason about than regular splice.
 
-So it all "makes sense" conceptually as a generic pipe (sic) between
-different sources and sinks. And again, using a pipe as the mechanism
-then also makes perfect sense in a historical Unix context of
-"everything is a pipe".
 
-But.
+The major caveat here is that zero-copy strict splice is fundamentally
+a potentially long-running operation in a way that zero-copy splice()
+isn't right now.  So the combination of O_NONBLOCK and strict splice()
+(the syscall, not necessarily the io_uring operation) to something
+like a TCP socket requires complicated locking or change tracking to
+make sense.  This means that a splice() syscall providing strict
+semantics to a TCP socket may just need to do a copy, at least in many
+cases.  But maybe that's fine -- very-high-performance networking is
+moving pretty aggressively to io_uring anyway.
 
-The above just tries to make sense of the design, and excuses for it.
-I want to re-iterate that I think it's all lovely and coherent
-conceptually. But in practice, it's just a huge pain.
 
-The same way "everything is a pipeline of processes" is very much
-historical Unix and very useful for shell scripting, but isn't
-actually then normally very useful for larger problems, splice()
-really never lived up to that conceptual issue, and it's just really
-really nasty in practice.
-
-But we're stuck with it.
-
-I'm not convinced your suggestion of extending io_uring with new
-primitives is any better in practice, though.
-
-          Linus
+And my possibly-quite-out-there claim is that, if Linux implements
+strict splice, maybe non-strict splice could get replaced in a user
+ABI-compatible manner with a much simpler non-zero-copy
+implementation.  And strict splice from a file to a pipe could be
+implemented as a copy -- high performance users can, if needed, start
+strict-splicing from a file directly to a socket.
 
