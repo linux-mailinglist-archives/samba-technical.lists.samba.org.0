@@ -2,42 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6983069264F
-	for <lists+samba-technical@lfdr.de>; Fri, 10 Feb 2023 20:28:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16F61692658
+	for <lists+samba-technical@lfdr.de>; Fri, 10 Feb 2023 20:30:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=mJvEE36AdMeH3sIvvfWubmnVmU4slCx5aMtae9s80iE=; b=vefVRoPUBoGP69CRNxx7N7+VsV
-	lxzq2JoJKjs+TxkwDdcr5LINQIYPn+vVyki0qIGIVJk6kgun6zqQH/B2Dhv68kZmyxbJNpd6QRHFP
-	09A/rcTXsiiAZQFAlswdH3+Xsk17ubPHX205pM9R8w17xgQFSGkO8sa2jseDxzgw6lh+YQycHvUoZ
-	8O4XOrChqOw+Z2gdQQbPHP9nSjw/VnFE9An8CGjmCejhdMk1rtdqBLQa9lyqPGpqIEOCFHPHiqhiM
-	AYRFmvzP4IaazcmNV3X2muLz3jT5XSUmW+OBhAF7F+FYQUbN0uXmvtTJ0jyTW2/K6H+7z640uYWt2
-	qXgyfLWg==;
-Received: from ip6-localhost ([::1]:45802 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=r61/0h5NTTq+Qoz9OXQLKuxfQJmXqVpaixbdP55tAzc=; b=WmauaQXHE1SgVOkUGMFVr1am7S
+	2wkL/zw9ANlbTYm7RH4seQN8arhx69w5HOcTTGYWnp66QWi0XdiIw1OcJgZsgz9zzMNuWyIiXVzYq
+	so34jIwcb9IdU0KKy2xuTIhhk32I1UpC9/w74yc+zpWGQbDM/Z0U/lqFEGyk/iAJ8ErDn2ktOP+fA
+	aegtrHBsGgwxC5XQKqH9D/LqJGLQt3FguG2pXcaBpOfH2pSXCdhTBl/xoPV8eG90JRHASpErfCgOt
+	1qNC7lJfCKMR3upoJaUeLqekll63CjRICzCCCiuJagaM4yuQ3pglZBWJQjplFLpFms/MmEvvMAZnR
+	Oge/oYmA==;
+Received: from ip6-localhost ([::1]:28686 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pQZ3z-00B8W9-2W; Fri, 10 Feb 2023 19:28:03 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:32822) 
+	id 1pQZ5o-00B9Sp-Te; Fri, 10 Feb 2023 19:29:56 +0000
+Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533]:33551) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pQZ3t-00B8W0-Uk
- for samba-technical@lists.samba.org; Fri, 10 Feb 2023 19:28:00 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=mJvEE36AdMeH3sIvvfWubmnVmU4slCx5aMtae9s80iE=; b=LJ8QZ6feDCvHew+AkUbWfDtlfl
- 8RJc5UUKLvvifcHrKLNJbFZat0vqwYMk0bCk7Nwo6Cy43H+crmjQEw8Ape5Jq8863KK8RgysL4ESx
- muytWsRWCZj8CxUOlJTe/7xgt606cvWzuwZdDleIwAdgyflErcUJbYwIxjNNkQbRjbV+6H+6ehU+q
- LJh1BSLmMphQ90H9RTgiS3GDcdFqGoWczJKRTnQl0iQ5r2KJ+dLoD+d5e7QiTpQxG5K64GMzc9jn7
- tbIdHKP7WDLKnArjHAUdbmX4nDUasTDhtDI4GjwwQwP8CePGbLMoNIAQ2se2Dfqj24squHpcIUj9G
- IXkLS4Cd3oufwE3FRrpTSczWBdq4DfD8rj0rUU5lVqXMV/d/BdlKO4jV8qtnglT9K4opAKFtxQsdu
- kRr9aNZ2QgQMRCydDY2SO5AiWCB5suKDBd2kNlHbb0H8FSG4jecDa2mS1OHFRggws53Hro/BdBCdn
- aMjb7mbgBYd6ypqeubyWIgkz;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pQZ3r-00D3HT-6F; Fri, 10 Feb 2023 19:27:55 +0000
-Date: Fri, 10 Feb 2023 11:27:51 -0800
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Subject: Re: copy on write for splice() from file to pipe?
-Message-ID: <Y+aat8sggTtgff+A@jeremy-acer>
-References: <20230210021603.GA2825702@dread.disaster.area>
+ (Exim) id 1pQZ5j-00B9OH-1O
+ for samba-technical@lists.samba.org; Fri, 10 Feb 2023 19:29:53 +0000
+Received: by mail-ed1-x533.google.com with SMTP id l12so5686864edb.0
+ for <samba-technical@lists.samba.org>; Fri, 10 Feb 2023 11:29:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux-foundation.org; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=r61/0h5NTTq+Qoz9OXQLKuxfQJmXqVpaixbdP55tAzc=;
+ b=IAdLRQRIm/NXW+WeR+UYR2ZTsvGw0tN2PBRMeoFQUWHyntbQJr49WmKYDyvef9iYCp
+ lUUb1ydt4R7bdgKIQp1NsqwNFy5yaD5bZK5PWeSLfJdZfj2Cqzk/kag9hbbtNtbhJf4N
+ zm6LxZ2ObZ/VLq+NbgF57dtNvJBp8k5O0X+1A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=r61/0h5NTTq+Qoz9OXQLKuxfQJmXqVpaixbdP55tAzc=;
+ b=S1ameZh9r9g/AogcYNBt/grSak5WRdKRgN8RfCEq0kMW9WSSjvASAgr/rRO/0VeUSt
+ uKOH2JdDq0vzk36zaLZNQyBUNx15iwGUT4J3dj45bifwgmBl3rCHSJlpbgwfh1a6WaDk
+ elbZNc8uu8dFvFsfDI+rEeL+xE+knEtyKASZHHeaawT2OjVAjWpMnd50voUOmwUpRYpw
+ kn0pH1bKiRIJAsZKZq7B07020FaSbkejdKEM6MXUzHek5BBIGFq1uWkuwzsxxVJFQ+Uy
+ tLgiHPjLli/enuskBp0C0RqPgPXaITo+zbhRh+CoPO98VK/p5m9yvaFelKzxZDVtNXcD
+ fCJA==
+X-Gm-Message-State: AO0yUKUUNcMppu+398iHTIzDHrelASDkjiR5D3356z/mHcgzkPEIlQJ9
+ kN2c6CBlU0gZ+rdFBrTFOmn1civUfHmWH3DmklQ=
+X-Google-Smtp-Source: AK7set94Ju3xUpZSIJOAZLxqmmrDup6W0quEJn9ulV10lrQF/tS/5Z84cDfevtXhn02QWRFBNVIBkg==
+X-Received: by 2002:a50:9feb:0:b0:4ac:b3af:1e1 with SMTP id
+ c98-20020a509feb000000b004acb3af01e1mr1297952edf.13.1676057389886; 
+ Fri, 10 Feb 2023 11:29:49 -0800 (PST)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com.
+ [209.85.208.46]) by smtp.gmail.com with ESMTPSA id
+ t5-20020a508d45000000b004aaa8e65d0esm2686468edt.84.2023.02.10.11.29.49
+ for <samba-technical@lists.samba.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 10 Feb 2023 11:29:49 -0800 (PST)
+Received: by mail-ed1-f46.google.com with SMTP id l12so5686773edb.0
+ for <samba-technical@lists.samba.org>; Fri, 10 Feb 2023 11:29:49 -0800 (PST)
+X-Received: by 2002:a50:aad4:0:b0:4ab:4d34:9762 with SMTP id
+ r20-20020a50aad4000000b004ab4d349762mr582230edc.5.1676057388706; Fri, 10 Feb
+ 2023 11:29:48 -0800 (PST)
+MIME-Version: 1.0
+References: <0cfd9f02-dea7-90e2-e932-c8129b6013c7@samba.org>
+ <CAHk-=wj8rthcQ9gQbvkMzeFt0iymq+CuOzmidx3Pm29Lg+W0gg@mail.gmail.com>
+ <20230210021603.GA2825702@dread.disaster.area>
  <20230210040626.GB2825702@dread.disaster.area>
  <Y+XLuYh+kC+4wTRi@casper.infradead.org>
  <20230210065747.GD2825702@dread.disaster.area>
@@ -47,10 +71,13 @@ References: <20230210021603.GA2825702@dread.disaster.area>
  <CAHk-=wjQZWMeQ9OgXDNepf+TLijqj0Lm0dXWwWzDcbz6o7yy_g@mail.gmail.com>
  <CALCETrWuRHWh5XFn8M8qx5z0FXAGHH=ysb+c6J+cqbYyTAHvhw@mail.gmail.com>
  <CAHk-=wjuXvF1cA=gJod=-6k4ypbEmOczFFDKriUpOVKy9dTJWQ@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
 In-Reply-To: <CAHk-=wjuXvF1cA=gJod=-6k4ypbEmOczFFDKriUpOVKy9dTJWQ@mail.gmail.com>
+Date: Fri, 10 Feb 2023 11:29:31 -0800
+X-Gmail-Original-Message-ID: <CAHk-=wg2Mb4ZgRuBthw6O0KLhZNksGBQNs73386Gdg4gHny=XA@mail.gmail.com>
+Message-ID: <CAHk-=wg2Mb4ZgRuBthw6O0KLhZNksGBQNs73386Gdg4gHny=XA@mail.gmail.com>
+Subject: Re: copy on write for splice() from file to pipe?
+To: Andy Lutomirski <luto@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,60 +91,65 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
+From: Linus Torvalds via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Linus Torvalds <torvalds@linux-foundation.org>
 Cc: Jens Axboe <axboe@kernel.dk>,
  Linux API Mailing List <linux-api@vger.kernel.org>,
  Dave Chinner <david@fromorbit.com>,
  "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
  Matthew Wilcox <willy@infradead.org>, Stefan Metzmacher <metze@samba.org>,
- Al Viro <viro@zeniv.linux.org.uk>, Andy Lutomirski <luto@kernel.org>,
+ Al Viro <viro@zeniv.linux.org.uk>,
  linux-fsdevel <linux-fsdevel@vger.kernel.org>,
  Samba Technical <samba-technical@lists.samba.org>,
  io-uring <io-uring@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Feb 10, 2023 at 11:18:05AM -0800, Linus Torvalds via samba-technical wrote:
+On Fri, Feb 10, 2023 at 11:18 AM Linus Torvalds
+<torvalds@linux-foundation.org> wrote:
 >
->We should point the fingers at either the _user_ of splice - as Jeremy
->Allison has done a couple of times - or we should point it at the sink
->that cannot deal with unstable sources.
-> ....
-> - it sounds like the particular user in question (samba) already very
->much has a reasonable model for "I have exclusive access to this" that
->just wasn't used
+>  - and finally, I do think it might make sense for the networking
+> people to look at how the networking side works with 'sendpage()'.
 
-Having said that, I just had a phone discussion with Ralph Boehme
-on the Samba Team, who has been following along with this in
-read-only mode, and he did point out one case I had missed.
+Put another way: I do not believe that it is at all fundamental that
+you can't send data from an changing source over the network. That's
+likely _particularly_ true of the people who care the most, and who
+already have network cards that do a lot of the heavy lifting for you.
 
-1). Client opens file with a lease. Hurrah, we think we can use splice() !
-2). Client writes into file.
-3). Client calls SMB_FLUSH to ensure data is on disk.
-4). Client reads the data just wrtten to ensure it's good.
-5). Client overwrites the previously written data.
+So why spend a lot of effort to stabilize the data, if it's not
+needed, when the primary users of it would likely not want that
+performance hit and extra work in the first place?
 
-Now when client issues (4), the read request, if we
-zero-copy using splice() - I don't think theres a way
-we get notified when the data has finally left the
-system and the mapped splice memory in the buffer cache
-is safe to overwrite by the write (5).
+Then making that "strict mode" be the only mode going forward and just
+disallowing people from doing the simple thing sounds particularly
+wrong.
 
-So the read in (4) could potentially return the data
-written in (5), if the buffer cache mapped memory has
-not yet been sent out over the network.
+For example, it may *literally* be that the IPV4 TCP case could be
+fixed with something trivial like this
 
-That is certainly unexpected behavior for the client,
-even if the client leased the file.
+  --- a/net/ipv4/tcp.c
+  +++ b/net/ipv4/tcp.c
+  @@ -1134,7 +1134,8 @@ EXPORT_SYMBOL_GPL(do_tcp_sendpages);
+   int tcp_sendpage_locked(struct sock *sk, struct page *page, int offset,
+                        size_t size, int flags)
+   {
+  -     if (!(sk->sk_route_caps & NETIF_F_SG))
+  +     if (!(sk->sk_route_caps & NETIF_F_SG) ||
+  +         !(sk->sk_route_caps & (NETIF_F_HW_CSUM | NETIF_F_IP_CSUM)))
+                return sock_no_sendpage_locked(sk, page, offset, size, flags);
 
-If that's the case, then splice() is unusable for
-Samba even in the leased file case.
+        tcp_rate_check_app_limited(sk);  /* is sending application-limited? */
 
->   Maybe this thread raised some awareness of it for some people, but
->more realistically - maybe we can really document this whole issue
->somewhere much more clearly
+which would basically make hardware that can't deal with the data
+changing under it just fall back to the "safe and slow" model on its
+own.
 
-Complete comprehensive documentation on this would
-be extremely helpful (to say the least :-).
+But then hardware that doesn't care would "just work".
+
+See what I'm saying? The above patch may be garbage because I don't
+understand the network driver rules fully, so don't take the above as
+some kind of "last word" on this AT ALL. But I'm just saying that
+requiring stable sources doesn't necessarily make any sense at all.
+
+              Linus
 
