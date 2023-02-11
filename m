@@ -2,80 +2,81 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D057692A92
-	for <lists+samba-technical@lfdr.de>; Fri, 10 Feb 2023 23:52:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC40D693175
+	for <lists+samba-technical@lfdr.de>; Sat, 11 Feb 2023 15:14:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=R4N26B9VGGTnqC3xqOaxRLSDi0f2Dt0eKjIQvb/X62o=; b=aGgxzn+obU1lLcGcZLGgEt7XIg
-	sANHb+ZJr7+Gk60ZJ/359he0gMhppbJDZr9Df9OAjQCmPCIJutgj7DOnPb6H7XzgKnd9Y05SXNtI8
-	wgKDtx0Rc8DYi9M1o+mq4r7YFHoYls0uBcOz9n/iOO707XNl17jcOyzHbxLTSPJZjWBEJ/Jitkh/x
-	33hQqLWbDsqv5Dv7ilB/AbEJR9NAkOFONrRt7KE1ZlQJFbcCGhQw2DS/b7/MYSl+BChvh6ibeLTmd
-	LFFJXLiJ/Pi32BVEdzU7Z9P2l27/RWcraMLBfeELBMCloHcDHkkIZsmgvXvFy/zmjzvxSoTSjFSr2
-	XZfV7h6Q==;
-Received: from ip6-localhost ([::1]:28558 helo=hr1.samba.org) 
+	bh=oqGRKzSo6E4/f+woXcOCjpwjArDsyHYfDxL4HTg7iio=; b=nNS9LpWHLSRBg3Xak0nTwwlQ3J
+	KnKCNEP6uU03LxQoE9R6+cpjSsALpCz9R0jbxGo6ZHz9VCD9RXUMJemVs2hQWCc+QC0Kcdh+kEloV
+	kBntdj3VloasNUhGyNHFNaBY9M0wSkbiHRVL/xJFV+6nZZN74QHqMRi0d4GL5o0s0VVbM82dBvtTe
+	dU88hTMmNE7UctIqEIeWeKMD/Amoimokj3xb+JDH630uiOSDhHsJk0Q/+kam6V/71CZkzspePJANU
+	RkvoCL6TkIfrGtBge+tLJJmRJyVdJ4f57kQV3Z3ZOARZimecKpVv1ovNwbGjfnoGeAyT3ZZnJtHP8
+	Ppf3vJoA==;
+Received: from ip6-localhost ([::1]:48824 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pQcFL-00BO3Y-IR; Fri, 10 Feb 2023 22:51:59 +0000
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:35738) 
+	id 1pQqdX-00BUuG-OR; Sat, 11 Feb 2023 14:13:55 +0000
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f]:40596) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pQcFF-00BO3M-Fs
- for samba-technical@lists.samba.org; Fri, 10 Feb 2023 22:51:56 +0000
-Received: by mail-pj1-x1029.google.com with SMTP id
- n20-20020a17090aab9400b00229ca6a4636so11662439pjq.0
- for <samba-technical@lists.samba.org>; Fri, 10 Feb 2023 14:51:52 -0800 (PST)
+ (Exim) id 1pQqdQ-00BUu6-QO
+ for samba-technical@lists.samba.org; Sat, 11 Feb 2023 14:13:51 +0000
+Received: by mail-pl1-x62f.google.com with SMTP id be8so9419325plb.7
+ for <samba-technical@lists.samba.org>; Sat, 11 Feb 2023 06:13:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=kernel-dk.20210112.gappssmtp.com; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=R4N26B9VGGTnqC3xqOaxRLSDi0f2Dt0eKjIQvb/X62o=;
- b=u5HRO63gAcA4nfusNIOQSq65f86ZTJ3MqNvxRzAX5W+R22e0AtrfGMumqSuVrq1lF9
- NsFXM7VxYdTkvyXmirDO3xIUpW+ewcW65e2UkdwGOQJ9YYAwpFCJYyHSbkZWApVHEZGE
- trnv6AWqvv6dHFaEgCi4hVQIt+kM56QLFx8gqLW0NWJFYOuOwB8G583A//zD1Sai/c7C
- Yv8iBj0gA1lfIgrL3ID5Im4XMbfR6eu3isQI3hqYm8g51dYY/9UgnTVjXvGyKAjaFsRq
- qoIJ6191tOa8qIoM1uzUoaYGc2WROgSeZ+8ShxrfdZMyZQIyFSeReusVE5uiSq1tUukg
- zUbw==
+ bh=oqGRKzSo6E4/f+woXcOCjpwjArDsyHYfDxL4HTg7iio=;
+ b=wCNiYJcLkvEUpEZHzCL9RSSTZah20e3Vx5u3HSFTxE8bpS6ViAr7yu2nh6p7lms2yc
+ yOAKa9NxNMFxnywW9IFuGVT0q1LbIqUR9FQgUsxxKG31pWabOZ5AxPL4nn2Eak6eBUFy
+ z9kShKrMpIJtUnj5hM/0l2fqIh8uVfF/GjluWOL0mUT0gf0a49ylXOVttlcfR+bB7PC3
+ GyAHRdXjdOPP7uzT3iNyZ4YznGS5MkfCepIrwxKiMOQ+SktVrYhDDeKcrgl50xxID1bi
+ 32NrSPKIGD0eBfPDf3QV9+Hss3B8PpPqCifUU0VKfGtwDAHQrDhNqYh5ouBiCy0xt09G
+ ynvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=R4N26B9VGGTnqC3xqOaxRLSDi0f2Dt0eKjIQvb/X62o=;
- b=mmQppHU2zGTX73LHQMEue5fa9n1jRg0Su8IvlIyH15AePhjj9wPGhXhuNOgjTQqtkk
- W064DCeCu6b9NDgOjnpoRAboV8/IdZXEZYqMboT7jeh7Fp3PF8T2Hf8WT6IcV3Kjm+rS
- 7cAW99wU1Pt9lJTdPjQE1t0xf5H+94zaUFdzUTwKlLP57y/CgmeG/OG1GAcmSBDwOtZ/
- F7RmuzP6C7RDvwVbGjb1Zt6uNDRbRQ/ODKd/NU+vuWSjLqR1DSa8VCVD63PdLwpE5uA0
- I/q6pxUk06UO260h34bn7PptdebINh0fVCilf1ocf6ddk2x44sj0yQa1NLUCrOur3+2N
- v2sA==
-X-Gm-Message-State: AO0yUKWA9ppWx6Z2/2tmEtvOHT5x9xezZSGA/0iaTJ488TnyCHIuSfUW
- JpBnzhmkfp7DKrQXqrRUeo/A6Q==
-X-Google-Smtp-Source: AK7set/0HEQG/FQ9H218VpRyJjXTjhHzpcw6zsWsYqjqsJHruBzZv/lO8Nfnn1XVxrZ0jfTCujLcLQ==
-X-Received: by 2002:a05:6a20:7f8e:b0:be:cd93:66cd with SMTP id
- d14-20020a056a207f8e00b000becd9366cdmr18769759pzj.2.1676069510837; 
- Fri, 10 Feb 2023 14:51:50 -0800 (PST)
+ bh=oqGRKzSo6E4/f+woXcOCjpwjArDsyHYfDxL4HTg7iio=;
+ b=J190OqJs+bD1qC/TFqrbmZb0MOkFRzLRf6UDjTHOfQ2zA8xH5sMrZL/Qmb2dXflg8Z
+ lD7A42Q4kUMHSYwaHq3xX6HuhzEhCdsbhL7ZFoEekAYtjGikkG1uGikx+mzRuBHZFrTl
+ fBYkipkrKnkr1AT0LwERc/YgfrU4X6jhfXaKknbXbEjguf1pMdcYKpdDSLoGGZmeCCBo
+ OG8eAB41FTfL38/qA/YDQ/1ue7gCSr/UUduC90vrAYLym5cuy4VaMBi9jcPCnkjBkHB6
+ 7YYdL9tNw3LvqujaiPBqeiEK475xJRJyqtEi6x7wW0WMiuLo7U2435za+dIsRpqIVKa9
+ AYLg==
+X-Gm-Message-State: AO0yUKWJAK1Wnk86i0RTjsMztv0xK6BfXm58uBWMTioUWIzz0xxUHBYw
+ hu/X6MBNV1S45IMFwb3LphyZOA==
+X-Google-Smtp-Source: AK7set/LnVAtiy5TUkkuzhteoCRyrs4pqpY8XSDBYd/FSNwWtCjGA99X1ZzvEOtfDL0WSzAPF6ud0g==
+X-Received: by 2002:a17:902:680b:b0:199:3f82:ef62 with SMTP id
+ h11-20020a170902680b00b001993f82ef62mr15067071plk.5.1676124826228; 
+ Sat, 11 Feb 2023 06:13:46 -0800 (PST)
 Received: from [192.168.1.136] ([198.8.77.157])
  by smtp.gmail.com with ESMTPSA id
- z29-20020a63b91d000000b0047899d0d62csm3439655pge.52.2023.02.10.14.51.49
+ q10-20020a170902b10a00b00174f61a7d09sm5015531plr.247.2023.02.11.06.13.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Feb 2023 14:51:50 -0800 (PST)
-Message-ID: <c395bf68-108e-1674-1a1c-4cb26178d87c@kernel.dk>
-Date: Fri, 10 Feb 2023 15:51:49 -0700
+ Sat, 11 Feb 2023 06:13:45 -0800 (PST)
+Message-ID: <55eaac9e-0d77-1fa2-df27-4d64e123177e@kernel.dk>
+Date: Sat, 11 Feb 2023 07:13:44 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux aarch64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
+ Thunderbird/102.7.2
 Subject: Re: copy on write for splice() from file to pipe?
 Content-Language: en-US
-To: David Laight <David.Laight@ACULAB.COM>,
- 'Linus Torvalds' <torvalds@linux-foundation.org>,
- Dave Chinner <david@fromorbit.com>
-References: <0cfd9f02-dea7-90e2-e932-c8129b6013c7@samba.org>
- <CAHk-=wj8rthcQ9gQbvkMzeFt0iymq+CuOzmidx3Pm29Lg+W0gg@mail.gmail.com>
- <20230210021603.GA2825702@dread.disaster.area>
- <20230210040626.GB2825702@dread.disaster.area>
- <CAHk-=wip9xx367bfCV8xaF9Oaw4DZ6edF9Ojv10XoxJ-iUBwhA@mail.gmail.com>
- <20230210061953.GC2825702@dread.disaster.area>
- <CAHk-=wj6jd0JWtxO0JvjYUgKfnGEj4BzPVOfY+4_=-0iiGh0tw@mail.gmail.com>
- <304d5286b6364da48a2bb1125155b7e5@AcuMS.aculab.com>
-In-Reply-To: <304d5286b6364da48a2bb1125155b7e5@AcuMS.aculab.com>
+To: Ming Lei <ming.lei@redhat.com>,
+ Linus Torvalds <torvalds@linux-foundation.org>
+References: <CAHk-=wgA=rB=7M_Fe3n9UkoW_7dqdUT2D=yb94=6GiGXEuAHDA@mail.gmail.com>
+ <1dd85095-c18c-ed3e-38b7-02f4d13d9bd6@kernel.dk>
+ <CAHk-=wiszt6btMPeT5UFcS=0=EVr=0injTR75KsvN8WetwQwkA@mail.gmail.com>
+ <fe8252bd-17bd-850d-dcd0-d799443681e9@kernel.dk>
+ <CAHk-=wiJ0QKKiORkVr8n345sPp=aHbrLTLu6CQ-S0XqWJ-kJ1A@mail.gmail.com>
+ <7a2e5b7f-c213-09ff-ef35-d6c2967b31a7@kernel.dk>
+ <CALCETrVx4cj7KrhaevtFN19rf=A6kauFTr7UPzQVage0MsBLrg@mail.gmail.com>
+ <b44783e6-3da2-85dd-a482-5d9aeb018e9c@kernel.dk>
+ <2bb12591-9d24-6b26-178f-05e939bf3251@kernel.dk>
+ <CAHk-=wjzqrD5wrfeaU390bXEEBY2JF-oKmFN4fREzgyXsbQRTQ@mail.gmail.com>
+ <Y+cJDnnMuirSjO3E@T590>
+In-Reply-To: <Y+cJDnnMuirSjO3E@T590>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -94,42 +95,53 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
 From: Jens Axboe via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Jens Axboe <axboe@kernel.dk>
 Cc: Linux API Mailing List <linux-api@vger.kernel.org>,
- Samba Technical <samba-technical@lists.samba.org>,
+ Dave Chinner <david@fromorbit.com>,
  "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- Stefan Metzmacher <metze@samba.org>, Al Viro <viro@zeniv.linux.org.uk>,
+ Matthew Wilcox <willy@infradead.org>, Stefan Metzmacher <metze@samba.org>,
+ Al Viro <viro@zeniv.linux.org.uk>, Andy Lutomirski <luto@kernel.org>,
  linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ Samba Technical <samba-technical@lists.samba.org>,
  io-uring <io-uring@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 2/10/23 3:41?PM, David Laight wrote:
-> From: Linus Torvalds
->> Sent: 10 February 2023 17:24
-> ...
->> And when it comes to networking, in general things like TCP checksums
->> etc should be ok even with data that isn't stable.  When doing things
->> by hand, networking should always use the "copy-and-checksum"
->> functions that do the checksum while copying (so even if the source
->> data changes, the checksum is going to be the checksum for the data
->> that was copied).
+On 2/10/23 8:18?PM, Ming Lei wrote:
+> On Fri, Feb 10, 2023 at 02:08:35PM -0800, Linus Torvalds wrote:
+>> On Fri, Feb 10, 2023 at 1:51 PM Jens Axboe <axboe@kernel.dk> wrote:
+>>>
+>>> Speaking of splice/io_uring, Ming posted this today:
+>>>
+>>> https://lore.kernel.org/io-uring/20230210153212.733006-1-ming.lei@redhat.com/
 >>
->> And in many (most?) smarter network cards, the card itself does the
->> checksum, again on the data as it is transferred from memory.
+>> Ugh. Some of that is really ugly. Both 'ignore_sig' and
+>> 'ack_page_consuming' just look wrong. Pure random special cases.
 >>
->> So it's not like "networking needs a stable source" is some really
->> _fundamental_ requirement for things like that to work.
+>> And that 'ignore_sig' is particularly ugly, since the only thing that
+>> sets it also sets SPLICE_F_NONBLOCK.
+>>
+>> And the *only* thing that actually then checks that field is
+>> 'splice_from_pipe_next()', where there are exactly two
+>> signal_pending() checks that it adds to, and
+>>
+>>  (a) the first one is to protect from endless loops
+>>
+>>  (b) the second one is irrelevant when  SPLICE_F_NONBLOCK is set
+>>
+>> So honestly, just NAK on that series.
+>>
+>> I think that instead of 'ignore_sig' (which shouldn't exist), that
+>> first 'signal_pending()' check in splice_from_pipe_next() should just
+>> be changed into a 'fatal_signal_pending()'.
 > 
-> It is also worth remembering that TCP needs to be able
-> to retransmit the data and a much later time.
-> So the application must not change the data until it has
-> been acked by the remote system.
+> Good point, here the signal is often from task_work_add() called by
+> io_uring.
 
-This has been covered, and:
-
-> I don't think io_uring has any way to indicate anything
-> other than 'the data has been accepted by the socket'.
-
-This is wrong and has also been covered.
+Usually you'd use task_sigpending() to distinguis the two, but
+fatal_signal_pending() as Linus suggests would also work. The only
+concern here is that since you'll be potentially blocking on waiting for
+the pipe to be readable - if task does indeed have task_work pending and
+that very task_work is the one that will ensure that the pipe is now
+readable, then you're waiting condition will never be satisfied.
 
 -- 
 Jens Axboe
