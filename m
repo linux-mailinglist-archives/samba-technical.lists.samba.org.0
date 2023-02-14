@@ -2,41 +2,41 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD041696E2E
-	for <lists+samba-technical@lfdr.de>; Tue, 14 Feb 2023 20:56:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FB2D696E4F
+	for <lists+samba-technical@lfdr.de>; Tue, 14 Feb 2023 21:14:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=PYbC9WWM2OeGggpc4Q+mcgNKq6Z99bb7cLhHA8xBSig=; b=ZvPPllrg2xVvlZYmNDXaXTF7cs
-	1M1EkOEVKwScC1SYEzWXuEihuaPTivU+earJ2LJ839lUsDISyyCfXGo6cE6v8o70Q3dOPeg/JjuhQ
-	jhsva9AybP5O6O39sMajhnVF0+lRaJf7GJYa9hmHtD1FBLOMgVjT6ZmNrH2y+s4SgPTo4EEdP+JR4
-	dwTdLPK1JYVeZHKDsUoNCWRGf7GHBpP7ugP3D89Bp380DHt39N2jmuqEkstFSZ5p4rTQQG/TpRQyr
-	PxFM7khDaiuQDLFFl0r89gieZWWLKqYjr3AA4f86DFwPX2D+EkCkzod0JO1q8LIqXAe1oOyWMBS4U
-	UrYvblBA==;
-Received: from ip6-localhost ([::1]:49378 helo=hr1.samba.org) 
+	bh=1hMk5YULVJv9rOa51/ZD8awYzYhGO2kdcm06DQJtxBI=; b=gSqpuwGCWOZP0KBdnJiBgkWn9b
+	KDeiOUyPB+FuvlXTzIu0Gf0HmKMMgvzeAWBdOTSU1Vuq2aBSMW+/pidDMAiPB1HU6iZK/8RzSQOxr
+	bC5lSKhdT+MbCE6tBsRT4+kXz3o+lO8y0WYtmKFOAJja8yH3lnj7xC8zOXmIra1eOsz6W6IXk3mWM
+	TxV3RLYMeBurhKy2TDStlhORK1MlY56ssIt3UNufvUoAaB06ujBNf72la5BjA1JOs7eR0EPcUMPrW
+	hVnkoF0J2GxkoMDOmts3cxz2I4R40fLSId9vUDTfdfdbrDkO9quvbrhMKv7uYGnloECtZBHR6BUXt
+	e4zKM9FA==;
+Received: from ip6-localhost ([::1]:53194 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pS1Ok-00CBr3-Og; Tue, 14 Feb 2023 19:55:30 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:31200) 
+	id 1pS1gd-00CCDH-DD; Tue, 14 Feb 2023 20:13:59 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15810) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pS1Of-00CBqu-EZ
- for samba-technical@lists.samba.org; Tue, 14 Feb 2023 19:55:28 +0000
+ (Exim) id 1pS1gX-00CCD8-Rw
+ for samba-technical@lists.samba.org; Tue, 14 Feb 2023 20:13:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:To:From:CC;
- bh=PYbC9WWM2OeGggpc4Q+mcgNKq6Z99bb7cLhHA8xBSig=; b=X9mS1Z3WTdGn8jkyeFPHLdKObM
- Z1/1Zy4Zyn/ed8/nv6gGT7/lMd3rYMnxUTkz5fA+EauMie4Npd2OMXD9daR7q1G8ZcADM6ZlwGU8+
- 42jsVKTBFdvwb1oKEmHzbCeZNb5TOm2TKkqKtzZ3Wy5gTSWyZ9kWJ/gyKOXlhs4r3hfNn/mqAP4Gn
- CVWrDMxxuMn7QDJG7KqnUrt5VaT3CapX8eSjFTew8kIK+RrDrDMqmW7nwesrx1UOTqe0OYYtEh+MK
- KgdCjFQPODexbvipCO11x1jL3+kMF1qK3qxvUgHainvbWaHT7B6Aeyxnkdelpz/XDT1XjbcqGK6Um
- 6PvXnSfplbG9fwV1pKnTuI+KRYfaervbeBwMbsyktjnuSRRN0lbSdJwWKjDf3kjeXGSTel4yLMS0H
- xQInKp3wkgWKzwuIMPZuLAVCJeL4Wo8kRO32Psjp7GIuHizc+QJAf94Qkm70ou3xRWaZKtsead3M1
- LPlJW58K6VVH/I38puZAu4J6;
+ bh=1hMk5YULVJv9rOa51/ZD8awYzYhGO2kdcm06DQJtxBI=; b=eulV/8GoCs1lizMAmnnvhbnaX1
+ 7wUnduXj9GhwBcsOuXNeMpCFb76Tnqlsps+kLP7Y3zZPoQyKwhz+T3Y0un3PGW0ItYUnkAfyaP9dC
+ 29vJ5cCVKddod0vrSEB58n0Vr/jv8wB8U+FinLnCXZUQCVCd6HTeeBENU8UW/MPDSaiURJxAjjPuu
+ yXr+Ox++5xqHX2sO05uYN2BVSdJy2a2/RhBoGLK7MmFpB+16Xrt3AJYLAdgMETev8VbgNQjvp2s95
+ c7nB0fgmCCJ6/m/N4nRiImCJfdtYQYbwIra7dGr0bOZ3e8y5Y1NoSNwmwkY0el8Qr37h8ur4ugXFT
+ yVHHbiLulkBAKwBIBHlrcmqkTKBkqnsOBNj4ELQBWBJv++YOje2GiFo6IdlU6BFQjHJo7mmmlJeqm
+ FXXRxfIGOJn47pudSR1/oSbxInxmbgYHcU9I+Ta1rB0mhNYsTJ2cg3GMCpETCSTUSTfazJVWyJoLb
+ jEDoJAfbFdCgD01WI4E/MSgZ;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pS1Od-00DimA-Tk; Tue, 14 Feb 2023 19:55:24 +0000
+ (Exim) id 1pS1gW-00Dit0-5t; Tue, 14 Feb 2023 20:13:52 +0000
 To: samba-technical@lists.samba.org, Andrew Bartlett <abartlet@samba.org>
 Subject: Re: samba-tool domain backup with lmdb on btrfs fails
-Date: Tue, 14 Feb 2023 20:55:23 +0100
-Message-ID: <45315200.fMDQidcC6G@magrathea>
+Date: Tue, 14 Feb 2023 21:13:51 +0100
+Message-ID: <12155582.O9o76ZdvQC@magrathea>
 In-Reply-To: <ca21f1f473a1a849cdef33bf7cd14e095be090c6.camel@samba.org>
 References: <1944992.usQuhbGJ8B@magrathea> <2145228.Mh6RI2rZIc@magrathea>
  <ca21f1f473a1a849cdef33bf7cd14e095be090c6.camel@samba.org>
@@ -148,18 +148,31 @@ On Tuesday, 14 February 2023 20:26:52 CET Andrew Bartlett wrote:
 > Yikes, this certainly is a concern.  Having each file (or a rolling
 > checksum over all the files as they are added) checksummed or such
 > would be a useful feature.
-
-I created a checkum before they added to the tarball now. After unpacking the 
-checksums still match.
-
-Now I wonder if mdb_copy might be the problem.
-
+> 
 > All the best chasing this down.
 
-Thanks
+I think I found it:
+
+The issue is the lmdb mdb_copy command on btrfs
+
+
+
+     def offline_mdb_copy(self, path):
++        mdb_chksum = create_file_checksum(path)
+         mdb_copy(path, path + self.backup_ext)
++        mdb_copy_chksum = create_file_checksum(path + self.backup_ext)
++        if mdb_chksum != mdb_copy_chksum:
++            raise CommandError("FATAL: MDB checksums don't match!")
+
+
+This triggers on btrfs and works on ext4!
+
+
+I will prepare a reproducer tomorrow.
 
 
 	Andreas
+
 
 -- 
 Andreas Schneider                      asn@samba.org
