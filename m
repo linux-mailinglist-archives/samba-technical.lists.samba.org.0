@@ -2,43 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 042B86955DB
-	for <lists+samba-technical@lfdr.de>; Tue, 14 Feb 2023 02:23:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5944A696848
+	for <lists+samba-technical@lfdr.de>; Tue, 14 Feb 2023 16:40:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=noof38ztG5GXl4xAcPVkAZGPJ/TjlKQKq5fmiptHs/w=; b=TpTN8JiTmnKOt1n+agQz5199HM
-	mPO7Ln79PSq9Y0W+drp52hXHT71RbdFY5co5NjX6EJI65ngsrinS0RW3eT7Pzcfmtwqj9mVqdOFU6
-	uDEYwPnWGG4niq66KtPzicFarD4i7tGjd8VxrYHiq9NJjcy4xMavACJiEoxWVsK8fFDtmY884LM6/
-	XnXsU6nrNR2aGhkwsmWdPBYhliEtNpVIE0e0FiCK2aUDQwzikC8qHdGe/OyG5cXbNPENxK8heED4E
-	+8IPIEzuxtayI1IKYS/eBaDeJeAP+zoblRHoJyZifCwaW640AuqOkdVNbg/6Imn9cUcooR8kpi+bs
-	GE/z+iDA==;
-Received: from ip6-localhost ([::1]:26534 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=EUg6cYHgf+PgGYr77b3GYkRQms4J8bqdWFrIMT9jC1c=; b=v7keQp52RPWgrKUq0TVxVOEPeQ
+	Mk5rfb45fCGquSnBPSt1xXvuhiTHKyz+/bi9X3mzkWtnUxDOuLudTAGtfozBpsmHdX47J5vgcVs3Q
+	C40+ufaYphmwzpSyeNoAcDvTsyxLJab5QBHRQcZZ6PhBiM+oLjNS1NE7lQh5ILL5s2/JzGbxldERG
+	TL31TM6efldFHPfR4kN4OyO7S/ePNzfiBx4F5aSQoA7gMUF0ktJ/0xyRmJ2XI7ScbX2wiVS+hYGGl
+	32CQPWK7n/HRgeuAw+vGBT5neardHFiOmo13848/9CpdA1+fcqP1SEWIVqFlDrxTQ8kX4PtWhfe0x
+	8YZlZ6xQ==;
+Received: from ip6-localhost ([::1]:28534 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pRk21-00ByHP-BQ; Tue, 14 Feb 2023 01:22:53 +0000
-Received: from 167-179-156-38.a7b39c.syd.nbn.aussiebb.net
- ([167.179.156.38]:43724 helo=formenos.hmeau.com) 
+	id 1pRxPa-00C6tQ-6W; Tue, 14 Feb 2023 15:40:06 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:61244) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pRk1w-00ByHG-F4
- for samba-technical@lists.samba.org; Tue, 14 Feb 2023 01:22:51 +0000
-Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
- by formenos.hmeau.com with smtp (Exim 4.94.2 #2 (Debian))
- id 1pRk1G-00ArAi-1U; Tue, 14 Feb 2023 09:22:07 +0800
-Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation);
- Tue, 14 Feb 2023 09:22:06 +0800
-Date: Tue, 14 Feb 2023 09:22:06 +0800
-To: Andy Lutomirski <luto@kernel.org>
-Subject: Re: copy on write for splice() from file to pipe?
-Message-ID: <Y+riPviz0em9L9BQ@gondor.apana.org.au>
-References: <20230210061953.GC2825702@dread.disaster.area>
- <Y+oCBnz2nLtXrz7O@gondor.apana.org.au>
- <CALCETrXKkZw3ojpmTftur1_-dEi6BOo9Q0cems_jgabntNFYig@mail.gmail.com>
+ (Exim) id 1pRxPU-00C6tH-6e
+ for samba-technical@lists.samba.org; Tue, 14 Feb 2023 15:40:02 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=EUg6cYHgf+PgGYr77b3GYkRQms4J8bqdWFrIMT9jC1c=; b=Zqr5PQpxRza2wNvHC7iTYaScQh
+ Jvi2auqoFRw/qQaMQVws9N0/5jn/vGMNtkTft7fo308eFH/o/qd6UvR20Lfh8HtMi50u0jKqbGE14
+ UPmye6Q0B0EYO92sFsuznQ5GlRgT/594++rMZMVKrLoSd+1/XLZu94UfpQJwKjlRzV1lUgwA/YZ7K
+ K2I0mx4C1sB7ZBnl489SyfrEsAWWh3Oo87iqJwBTai5JJCu3xQREZLtvqQkk8pKZGdrHAIh2ZqdgZ
+ yIV8sL4a+7+THSOOdW2DVW4qy2VvqGAL0go0vqekNmMSRwy9VBHFmjpDKUTTORPKSQ9wcHNyEYXaz
+ ng1XcvPl6OjrrzOjuUIWeQxSzPw/x0IDYs0TDnVc5wCRlyv5xGfqtvjvQB5WfScqyJ/qiC0g8u3PZ
+ 4mtjCTIfSTDZ6jGgW960kZGY6VjZVSJ1AmZxfhgt6g9fxx7TdhYJcZ/UsV/FF5dGNVYWv27UUxKdv
+ ePAWDu16cVluCIlH2zkJHmqX;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pRxPT-00DgGH-HV
+ for samba-technical@lists.samba.org; Tue, 14 Feb 2023 15:39:59 +0000
+To: samba-technical@lists.samba.org
+Subject: samba-tool domain backup with lmdb on btrfs fails
+Date: Tue, 14 Feb 2023 16:39:59 +0100
+Message-ID: <1944992.usQuhbGJ8B@magrathea>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CALCETrXKkZw3ojpmTftur1_-dEi6BOo9Q0cems_jgabntNFYig@mail.gmail.com>
-X-Warn: EHLO/HELO not verified: Remote host 167.179.156.38
- (167-179-156-38.a7b39c.syd.nbn.aussiebb.net) incorrectly presented itself as
- formenos.hmeau.com
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -52,33 +54,49 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Herbert Xu via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Herbert Xu <herbert@gondor.apana.org.au>
-Cc: axboe@kernel.dk, linux-api@vger.kernel.org,
- Dave Chinner <david@fromorbit.com>, linux-kernel@vger.kernel.org,
- metze@samba.org, viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org,
- samba-technical@lists.samba.org, torvalds@linux-foundation.org,
- io-uring@vger.kernel.org
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, Feb 13, 2023 at 10:01:27AM -0800, Andy Lutomirski wrote:
->
-> There's a difference between "kernel speaks TCP (or whatever)
-> correctly" and "kernel does what the application needs it to do".
+Hi,
 
-Sure I get where you are coming from.  It's just that the other
-participants in the discussion were thinking of stability for the
-sake of TCP (or TLS or some other protocol the kernel implements)
-and that simply is a non-issue.
+I've discovered on my Fedora 37 system that all tests related to domain backup 
+fail. The strange thing is that I can't reliably reproduce it, I see reliably 
+two different errors:
 
-Having a better way to communicate completion to the user would be
-nice.  The only way to do it right now seems to be polling with
-SIOCOUTQ.
+lib/ldb/ldb_key_value/ldb_kv_search.c:162: Invalid data for index  
+DN=@INDEXLIST
 
-Cheers,
+or
+
+lib/ldb/ldb_mdb/ldb_mdb.c:419: MDB corrupted for key [ DN=@OPTIONS]
+
+ldb: Improve debug outout
+https://gitlab.com/samba-team/samba/-/merge_requests/2936
+
+It the tests worked just fine on my other system with openSUSE Tumbleweed. So 
+I've tried to track it down. My home directory on openSUSE Tumbleweed is ext4 
+and on Fedora 37 my home is btrfs.
+
+So I created a btrfs filesystem on Tumbleweed and could reproduce the issue. 
+The next thing I did is replace the compression algorithm for the domain 
+backup tarball to gzip and it also failed.
+
+Now the question is if lmdb or btrfs needs a fix and how to create a minimal 
+reproducer. As I never worked on this codepath, pointers and ideas would be
+really helpful!
+
+
+Best regards
+
+
+	Andreas
+
 -- 
-Email: Herbert Xu <herbert@gondor.apana.org.au>
-Home Page: http://gondor.apana.org.au/~herbert/
-PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
+
 
