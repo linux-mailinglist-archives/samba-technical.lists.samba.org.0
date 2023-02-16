@@ -2,60 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 708CE6997B8
-	for <lists+samba-technical@lfdr.de>; Thu, 16 Feb 2023 15:43:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A30B3699A7F
+	for <lists+samba-technical@lfdr.de>; Thu, 16 Feb 2023 17:51:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=XszOToe9Y36AY/B62CQ/e+lxgXzY+Ou9ed3kyrqxsx4=; b=0fQjffaBpdjXY1alrKky+vy5Aj
-	Tm91f3DItHyM3kuJ9DneUF9kVktePmW8OtI0ZR48bT1m/Sbks+uMsL7sqIvQHw/5dbqe/gNI5pn11
-	w2fURHxccQBc7Lkwz5l+cXtHcFkrUbl9BcHSEi8u71APDKhBxV1yRjGS26U9YkC1Gpv4HxSPXeVlE
-	aFblmKEIcRes5LL7e9P32eyXG+j7m4NjUeCSZdvB1uaD900SAPJTT6VEUsuoVRMWsuH8OqkEWHlAI
-	eoatXvzy0tDUyBXXzAcYCUQzz8E6IpodxHe9dGAxcJOcEx5y8F4LvP1ah3LkeTzTILQZUowPNus2f
-	IfLGkdPA==;
-Received: from ip6-localhost ([::1]:55638 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=v2k7J7gTqrUPNrrCYJwrLdsbViDM/5NuhaVqm07SvZk=; b=vcCqsJCcnb26+m6d50yv9I4c0+
+	I9+noPY/OYJtksuy/5F/ldQXwGkl/JVzCXSzg8lX2ziKH8TQtrHabw7YidG4/hgIuOucCvqxDZtDd
+	dNZOxv92a6e3N0i/KwiOGVblG2RWm1fTWU1WRUmpLY4s6/AQWNtlDHZMZml408igukoT+OUyOHjW3
+	CSBk9pPKJ6xeyGlyWcwtkQIQQoHVtrk0stvZAztCfCdZrwC8/EXshQloVf9F3EIFgMtqJ7+D9poNE
+	7G5h//pZfZkH0MxYeNpy64w7YYEvDMyXKM979fl15cVu0UIB7R2GacD8WK9EwnnpxHUCG+6LTFC0X
+	W5Q71h0Q==;
+Received: from ip6-localhost ([::1]:47408 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pSfSo-00Chiz-TF; Thu, 16 Feb 2023 14:42:22 +0000
-Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1]:59258) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1pSfSk-00Chiq-I5
- for samba-technical@lists.samba.org; Thu, 16 Feb 2023 14:42:20 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id D4346614DB
- for <samba-technical@lists.samba.org>; Thu, 16 Feb 2023 14:25:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44B5DC4339C
- for <samba-technical@lists.samba.org>; Thu, 16 Feb 2023 14:25:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1676557503;
- bh=DlaFGPI8/PtG0jbRs8yDMyRigvxWoADQdFPsFBEUvVM=;
- h=In-Reply-To:References:From:Date:Subject:To:Cc:From;
- b=jtPb9BXfoJ4ZIuteko19xvEHrh0zX9vL+hj21bb6i9YloP5XD4j0AzdYnrNw/r1cV
- irTY1qdNbSU6KHCtRGYajBsFTXo5RihWxDt6qmzyEG/tlAiIKA4VZCyuxIb8zXfcK+
- 7b2C8p1C/NXEgYNStB11TWeq4NWj4fYRYDI2TSJyarB99J32scKwyTeeNvGxYb5tbJ
- pwB/9qiPeh4iOe9T+t+ydQDl2em2wxZhNTyvrNXc3PoOlvZDWYsdN0QPZ6bXDtrNe4
- TsGw1SfbYUDD4aVR7dyDpsy2RIfLhXPdkbuVMKOZMUtNPy6n0WsQ0DpNVHD+Zyj8XL
- EEuI/zj4uTO9w==
-Received: by mail-oa1-f47.google.com with SMTP id
- 586e51a60fabf-16cc1e43244so2639400fac.12
- for <samba-technical@lists.samba.org>; Thu, 16 Feb 2023 06:25:03 -0800 (PST)
-X-Gm-Message-State: AO0yUKVUPt6E+hoqN7dxzKXyiqc1dCr+Oz9e48jJyqp9Pl/21nhucoeY
- FIPaIs0AmXiSGwfilkKyxr/JCWQO4nWCDo2Cmj0=
-X-Google-Smtp-Source: AK7set/YDnoRsXFW4kmp4obtqoSrpLbMekh5OLqyPQitghf4s397JCGpwBcy4mlMZ5KbG30FMsXw3/Lnue0SZ0ll3J0=
-X-Received: by 2002:a05:6870:b52c:b0:16a:b198:74e9 with SMTP id
- v44-20020a056870b52c00b0016ab19874e9mr194278oap.215.1676557502403; Thu, 16
- Feb 2023 06:25:02 -0800 (PST)
+	id 1pShTj-00CjC2-DG; Thu, 16 Feb 2023 16:51:27 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:15764) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1pShTY-00CjB6-Gh; Thu, 16 Feb 2023 16:51:19 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=v2k7J7gTqrUPNrrCYJwrLdsbViDM/5NuhaVqm07SvZk=; b=FgRNw1pIijOUE2MlwWILftQcdN
+ MfvyCFeAZ4jEe9dbvUE/SWkSPitWgKy9gSpSyHrrcoeXKa734txn3uNqV2VYNgVbI2huEW+1qgI/5
+ XNwl4L+QexHKymv/WcL6LveuqHXjRXCGEQlnuEAjIJwNxrk9M4As/X8pknXd/GNWEGDHAYwdmilMT
+ npcSikaksese9XkTMHJ3VWxivwtXI6gifN7bH0ODbug+TrzIh7Ss+vXWa2iH8iV20BUGsc9S2ixRH
+ 1rwBh490q+lw6TOFdvnxqHaxVi4MnlZ9WwT9MJfhV5BYcxoMuKTOlnMNoV8joVJjYCsQWIriO/m9L
+ Y3zQTtaIKntkS2rBd9egVbHLjv5bw4Ooeq0mSblOJHTQms8poHaP3rEfMHM+ZrmKq0CVrEr+91p3Y
+ 4aFCLSKIlvGUhly4wkdbDrn7yBwog3BSmj2MUWbBqqdKLBrOJ8ybbIkxSu6z17xBkKb9718ceR54W
+ kgwZs96QtruKz2W7qyLb/ZrH;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pShTY-00EB3v-1f; Thu, 16 Feb 2023 16:51:16 +0000
+Message-ID: <fb8dfb5b-7c3a-204f-0037-6496bcf291a8@samba.org>
+Date: Thu, 16 Feb 2023 17:51:15 +0100
 MIME-Version: 1.0
-Received: by 2002:a8a:355:0:b0:4a5:1048:434b with HTTP; Thu, 16 Feb 2023
- 06:25:01 -0800 (PST)
-In-Reply-To: <20230214232928.gonna.714-kees@kernel.org>
-References: <20230214232928.gonna.714-kees@kernel.org>
-Date: Thu, 16 Feb 2023 23:25:01 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd-fcukmXfdwiAxOxe+5c+Y6vvaoQ3ff-5sK+Zis0HgC5A@mail.gmail.com>
-Message-ID: <CAKYAXd-fcukmXfdwiAxOxe+5c+Y6vvaoQ3ff-5sK+Zis0HgC5A@mail.gmail.com>
-Subject: Re: [PATCH v2] smb3: Replace smb2pdu 1-element arrays with flex-arrays
-To: Kees Cook <keescook@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.16.9 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,53 +56,105 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
- linux-cifs@vger.kernel.org, Paulo Alcantara <pc@cjr.nz>,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- Ronnie Sahlberg <lsahlber@redhat.com>, Steve French <sfrench@samba.org>,
- Sergey Senozhatsky <senozhatsky@chromium.org>, linux-hardening@vger.kernel.org
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Kees,
+Release Announcements
+---------------------
 
->  /* Read flags */
-> @@ -730,7 +730,7 @@ struct smb2_read_rsp {
->  	__le32 DataLength;
->  	__le32 DataRemaining;
->  	__le32 Flags;
-> -	__u8   Buffer[1];
-> +	__u8   Buffer[];
->  } __packed;
->
+This is the latest stable release of the Samba 4.16 release series.
 
-You seem to have missed -1 removal in the code below.
 
-./fs/cifs/smb2ops.c:5632:       .read_rsp_size = sizeof(struct
-smb2_read_rsp) - 1,
-./fs/cifs/smb2ops.c:5654:       .read_rsp_size = sizeof(struct
-smb2_read_rsp) - 1,
-./fs/cifs/smb2ops.c:5675:       .read_rsp_size = sizeof(struct
-smb2_read_rsp) - 1,
-./fs/cifs/smb2ops.c:5696:       .read_rsp_size = sizeof(struct
-smb2_read_rsp) - 1,
-./fs/cifs/smb2ops.c:5717:       .read_rsp_size = sizeof(struct
-smb2_read_rsp) - 1,
-./fs/cifs/smb2ops.c:5738:       .read_rsp_size = sizeof(struct
-smb2_read_rsp) - 1,
-./fs/cifs/smb2ops.c:5759:       .read_rsp_size = sizeof(struct
-smb2_read_rsp) - 1,
+Changes since 4.16.8
+--------------------
 
-./fs/ksmbd/smb2ops.c:29:        .read_rsp_size = sizeof(struct
-smb2_read_rsp) - 1,
-./fs/ksmbd/smb2ops.c:55:        .read_rsp_size = sizeof(struct
-smb2_read_rsp) - 1,
-./fs/ksmbd/smb2ops.c:82:        .read_rsp_size = sizeof(struct
-smb2_read_rsp) - 1,
-./fs/ksmbd/smb2ops.c:109:       .read_rsp_size = sizeof(struct
-smb2_read_rsp) - 1,
+o  Jeremy Allison <jra@samba.org>
+    * BUG 14808: smbc_getxattr() return value is incorrect.
+    * BUG 15172: Compound SMB2 FLUSH+CLOSE requests from MacOSX are not 
+handled
+      correctly.
+    * BUG 15210: synthetic_pathref AFP_AfpInfo failed errors.
+    * BUG 15226: samba-tool gpo listall fails IPv6 only - finddcs() 
+fails to find
+      DC when there is only an AAAA record for the DC in DNS.
+    * BUG 15236: smbd crashes if an FSCTL request is done on a stream 
+handle.
 
-thanks.
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15299: Spotlight doesn't work with latest macOS Ventura.
+
+o  Samuel Cabrero <scabrero@suse.de>
+    * BUG 15240: CVE-2022-38023 [SECURITY] Samba should refuse RC4 (aka md5)
+      based SChannel on NETLOGON.
+
+o  Volker Lendecke <vl@samba.org>
+    * BUG 15243: %U for include directive doesn't work for share listing
+      (netshareenum).
+    * BUG 15266: Shares missing from netshareenum response in samba 4.17.4.
+    * BUG 15269: ctdb: use-after-free in run_proc.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15243: %U for include directive doesn't work for share listing
+      (netshareenum).
+    * BUG 15266: Shares missing from netshareenum response in samba 4.17.4.
+    * BUG 15280: irpc_destructor may crash during shutdown.
+    * BUG 15286: auth3_generate_session_info_pac leaks wbcAuthUserInfo.
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 15268: smbclient segfaults with use after free on an optimized 
+build.
+
+o  Andrew Walker <awalker@ixsystems.com>
+    * BUG 15164: Leak in wbcCtxPingDc2.
+    * BUG 15265: Access based share enum does not work in Samba 4.16+.
+    * BUG 15267: Crash during share enumeration.
+    * BUG 15271: rep_listxattr on FreeBSD does not properly check for 
+reads off
+      end of returned buffer.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat.
+
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.16.9.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
