@@ -2,47 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC5C3698E58
-	for <lists+samba-technical@lfdr.de>; Thu, 16 Feb 2023 09:12:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 708CE6997B8
+	for <lists+samba-technical@lfdr.de>; Thu, 16 Feb 2023 15:43:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=xf8N6DmS76FW6Ati1/qsdlA3OlqAXmtIoWBliLek0CU=; b=YSzzvmBnB89J1OZvdNjFSWog1g
-	3/aWI0MiPnlk+m1axuFhw8JZIfUfktC6rySkAMujYZ5HRvA1In/eHP47UvlcxzsErOMUwlWVpu+Ys
-	oVKuSDMUFEw6MLSUcrCYdSLLyMup1N2e5Kgal7AzmUZbYRVGF7crTACBptmN/E7PDQ/p75VCaGHJV
-	nCo6kC+0UeGlVPGEsAAOwE+bf37cFz1y1tFyI/+yKZSvYZE7FxZkKwb65YT0JtFFPp2lPoZ6EmIZy
-	PB7uMelu86x9Cq4+D7st3fd7iPuE4aToJcIbK3T8ytlZYEnNyTThohZTvc9yS9ZvT/zHMNGS7hfUU
-	3DDfc/vQ==;
-Received: from ip6-localhost ([::1]:25728 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=XszOToe9Y36AY/B62CQ/e+lxgXzY+Ou9ed3kyrqxsx4=; b=0fQjffaBpdjXY1alrKky+vy5Aj
+	Tm91f3DItHyM3kuJ9DneUF9kVktePmW8OtI0ZR48bT1m/Sbks+uMsL7sqIvQHw/5dbqe/gNI5pn11
+	w2fURHxccQBc7Lkwz5l+cXtHcFkrUbl9BcHSEi8u71APDKhBxV1yRjGS26U9YkC1Gpv4HxSPXeVlE
+	aFblmKEIcRes5LL7e9P32eyXG+j7m4NjUeCSZdvB1uaD900SAPJTT6VEUsuoVRMWsuH8OqkEWHlAI
+	eoatXvzy0tDUyBXXzAcYCUQzz8E6IpodxHe9dGAxcJOcEx5y8F4LvP1ah3LkeTzTILQZUowPNus2f
+	IfLGkdPA==;
+Received: from ip6-localhost ([::1]:55638 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pSZMv-00CgGB-El; Thu, 16 Feb 2023 08:11:53 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:21852) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pSZMq-00CgG2-Bd
- for samba-technical@lists.samba.org; Thu, 16 Feb 2023 08:11:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=xf8N6DmS76FW6Ati1/qsdlA3OlqAXmtIoWBliLek0CU=; b=wTWGzdrE9gHERA0dGsZOJCEQF8
- 3RGI8BaEWnOIafVJZLaH/yhDN4SK02KewlIcGdgMME7SPGp8vDfgwxGvht/GPI0zkLltPExV2VS0V
- 6hmfNEFV4SNGV7g6ik1xL4g1/i8JB0LODmtyp5k0MDJvUZiIDh0iFVsga3L5B5L0WhCSBsKKr7ibf
- i43dH6nTrkGDEZVN2fTi1icD7ZrNOYiR89DSbXy39qNlbNghceNu0tq7nKEyeXIftDVGOLKUf6EGk
- 8n+jO+edLnNprRrrwl7eJ+PShJLe9cc07y8AaSFJA6Br2pzSewjEM/qBqLh1LB4eoA266tkSSJqQY
- mBaChtBX3OJDyZkj9zgUzWsaTsBFQI46s1FqcmGjt6f0MMVC3yoBVhNjyk1CJqBi3gaQapUMI6KaW
- GFHPY95H2dgpXYn7CQJqStr/nH00WiyTdWN7oiqoalg73nawoPTGFYAq6EyKvdnHJJp0jptQJnXnZ
- NRTEEvhc8Vg5TE7DhBAAK+xo;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pSZMo-00E3kH-MA; Thu, 16 Feb 2023 08:11:47 +0000
-Message-ID: <3af805df2a359dcf695e91ced7ee0bfd9bba52a9.camel@samba.org>
-Subject: Re: Failing tests on Fedora
-To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
-Date: Thu, 16 Feb 2023 21:11:41 +1300
-In-Reply-To: <4782393.GXAFRqVoOG@magrathea>
-References: <4782393.GXAFRqVoOG@magrathea>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.46.3 (3.46.3-1.fc37) 
+	id 1pSfSo-00Chiz-TF; Thu, 16 Feb 2023 14:42:22 +0000
+Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1]:59258) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1pSfSk-00Chiq-I5
+ for samba-technical@lists.samba.org; Thu, 16 Feb 2023 14:42:20 +0000
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id D4346614DB
+ for <samba-technical@lists.samba.org>; Thu, 16 Feb 2023 14:25:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44B5DC4339C
+ for <samba-technical@lists.samba.org>; Thu, 16 Feb 2023 14:25:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1676557503;
+ bh=DlaFGPI8/PtG0jbRs8yDMyRigvxWoADQdFPsFBEUvVM=;
+ h=In-Reply-To:References:From:Date:Subject:To:Cc:From;
+ b=jtPb9BXfoJ4ZIuteko19xvEHrh0zX9vL+hj21bb6i9YloP5XD4j0AzdYnrNw/r1cV
+ irTY1qdNbSU6KHCtRGYajBsFTXo5RihWxDt6qmzyEG/tlAiIKA4VZCyuxIb8zXfcK+
+ 7b2C8p1C/NXEgYNStB11TWeq4NWj4fYRYDI2TSJyarB99J32scKwyTeeNvGxYb5tbJ
+ pwB/9qiPeh4iOe9T+t+ydQDl2em2wxZhNTyvrNXc3PoOlvZDWYsdN0QPZ6bXDtrNe4
+ TsGw1SfbYUDD4aVR7dyDpsy2RIfLhXPdkbuVMKOZMUtNPy6n0WsQ0DpNVHD+Zyj8XL
+ EEuI/zj4uTO9w==
+Received: by mail-oa1-f47.google.com with SMTP id
+ 586e51a60fabf-16cc1e43244so2639400fac.12
+ for <samba-technical@lists.samba.org>; Thu, 16 Feb 2023 06:25:03 -0800 (PST)
+X-Gm-Message-State: AO0yUKVUPt6E+hoqN7dxzKXyiqc1dCr+Oz9e48jJyqp9Pl/21nhucoeY
+ FIPaIs0AmXiSGwfilkKyxr/JCWQO4nWCDo2Cmj0=
+X-Google-Smtp-Source: AK7set/YDnoRsXFW4kmp4obtqoSrpLbMekh5OLqyPQitghf4s397JCGpwBcy4mlMZ5KbG30FMsXw3/Lnue0SZ0ll3J0=
+X-Received: by 2002:a05:6870:b52c:b0:16a:b198:74e9 with SMTP id
+ v44-20020a056870b52c00b0016ab19874e9mr194278oap.215.1676557502403; Thu, 16
+ Feb 2023 06:25:02 -0800 (PST)
 MIME-Version: 1.0
+Received: by 2002:a8a:355:0:b0:4a5:1048:434b with HTTP; Thu, 16 Feb 2023
+ 06:25:01 -0800 (PST)
+In-Reply-To: <20230214232928.gonna.714-kees@kernel.org>
+References: <20230214232928.gonna.714-kees@kernel.org>
+Date: Thu, 16 Feb 2023 23:25:01 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd-fcukmXfdwiAxOxe+5c+Y6vvaoQ3ff-5sK+Zis0HgC5A@mail.gmail.com>
+Message-ID: <CAKYAXd-fcukmXfdwiAxOxe+5c+Y6vvaoQ3ff-5sK+Zis0HgC5A@mail.gmail.com>
+Subject: Re: [PATCH v2] smb3: Replace smb2pdu 1-element arrays with flex-arrays
+To: Kees Cook <keescook@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,52 +69,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
+ linux-cifs@vger.kernel.org, Paulo Alcantara <pc@cjr.nz>,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ Ronnie Sahlberg <lsahlber@redhat.com>, Steve French <sfrench@samba.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>, linux-hardening@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 2023-02-16 at 09:04 +0100, Andreas Schneider via samba-
-technical wrote:
-> Hi,
->=20
-> I'm currently trying to run 'make test' as part of the RPM build process=
-=20
-> (%check). So I'm trying to get everything working, but I'm seeing strange
-> issues and I need some help to track them down.
+Hi Kees,
 
-> We create a test user with `samba-tool user add`, which succeeds! Note th=
-at=20
-> samba-tool directly operates on the database here!
->=20
-> Next we try to do an operation via ldap:// and if you look at the error a=
-bove=20
-> it tells us the user we sucessfully createa a few moments agao doesn't ex=
-ist.=20
->=20
-> It looks like the samba process didn't recognize that that the database w=
-as=20
-> modified.
->=20
-> I also see something like that with Kerberos tests, we create a user with=
-=20
-> `samba-tool add user` and then the KDC can't find it in the database =3D>=
- same=20
-> pattern.
->=20
-> I don't have deep knowledge of the AD server, so hints how to track this =
-down=20
-> are much appreciated.
+>  /* Read flags */
+> @@ -730,7 +730,7 @@ struct smb2_read_rsp {
+>  	__le32 DataLength;
+>  	__le32 DataRemaining;
+>  	__le32 Flags;
+> -	__u8   Buffer[1];
+> +	__u8   Buffer[];
+>  } __packed;
+>
 
-This is very, very strange. =C2=A0Particularly if it works for a single tes=
-t
-but not a suite of tests. =C2=A0The KDC is just another tool reading that
-same sam.ldb, there isn't any extra cache or anything involved.
+You seem to have missed -1 removal in the code below.
 
-Andrew Bartlett
---=20
-Andrew Bartlett (he/him)        https://samba.org/~abartlet/
-Samba Team Member (since 2001)  https://samba.org
-Samba Developer, Catalyst IT    https://catalyst.net.nz/services/samba
+./fs/cifs/smb2ops.c:5632:       .read_rsp_size = sizeof(struct
+smb2_read_rsp) - 1,
+./fs/cifs/smb2ops.c:5654:       .read_rsp_size = sizeof(struct
+smb2_read_rsp) - 1,
+./fs/cifs/smb2ops.c:5675:       .read_rsp_size = sizeof(struct
+smb2_read_rsp) - 1,
+./fs/cifs/smb2ops.c:5696:       .read_rsp_size = sizeof(struct
+smb2_read_rsp) - 1,
+./fs/cifs/smb2ops.c:5717:       .read_rsp_size = sizeof(struct
+smb2_read_rsp) - 1,
+./fs/cifs/smb2ops.c:5738:       .read_rsp_size = sizeof(struct
+smb2_read_rsp) - 1,
+./fs/cifs/smb2ops.c:5759:       .read_rsp_size = sizeof(struct
+smb2_read_rsp) - 1,
 
+./fs/ksmbd/smb2ops.c:29:        .read_rsp_size = sizeof(struct
+smb2_read_rsp) - 1,
+./fs/ksmbd/smb2ops.c:55:        .read_rsp_size = sizeof(struct
+smb2_read_rsp) - 1,
+./fs/ksmbd/smb2ops.c:82:        .read_rsp_size = sizeof(struct
+smb2_read_rsp) - 1,
+./fs/ksmbd/smb2ops.c:109:       .read_rsp_size = sizeof(struct
+smb2_read_rsp) - 1,
+
+thanks.
 
