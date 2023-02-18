@@ -2,61 +2,59 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3870F69B654
-	for <lists+samba-technical@lfdr.de>; Sat, 18 Feb 2023 00:14:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0580B69B7F3
+	for <lists+samba-technical@lfdr.de>; Sat, 18 Feb 2023 04:39:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=tDkW7rjBzM40kDWNlaZlCegdM5LR+LY+lS+/AL9wT4M=; b=GRhoedWlXb28KP8TJeD15ONjFI
-	VElEsoNvG8wn6dxbcbfhNzrdAur+bxtvtwiFn7ygshhf0WV7PLeIuXKVz7TuV4wm2YlMO3cL40491
-	2r6OrK5xBFSFFRLCcawVOkOH8BSn1L41xL31fRy92oZnqzRJcm7YixgJiIZKwuX8Q/hMOhaFOYfdg
-	bARj45jLz/GO3sJS4sZHFdYsmGUazY6PK4PW/ZT6GZe13cfrwDAbwWc1wlEHM1O4RCp6JMtlaEWhP
-	oo0XLz/a0w5ETcELFBpcfw7dY2vtgoTPjr44mtVC989a8MnGZl0kWWJGUvCzycHr1K9K0kfx+gy0z
-	9MtPRC9w==;
-Received: from ip6-localhost ([::1]:61650 helo=hr1.samba.org) 
+	bh=9WOQ7wLPF4Z7CzyOfCF9ZC1FvtnO+vEz6EThqvgi+9k=; b=BPrajIqIFT+2hEEWavasSIXnmQ
+	GVWWdq5AZb4PojHj19Lqaa86dVQO07ll8v5asKGbETPXZ0VcJqzlx3/FGQQduptfxIBQr6SLU6pVJ
+	IVgHedL+ryr0nK12cJkecAmpAgU2I5JVA18B85TNAe5gUDdo1nNyT1Qy7mq6RsQ4nj+fDj8TeecN0
+	Jq6QeRIv5B40TVgClhI8ts373fbcG1RHxBLv6kNCowzIRyKzn3wv9apyhRzqIjAJXl39O8k4jNBFa
+	Z1H7/nQmZfI8lhSywdDzeyWlpetRpRpbdbQbvpDOAnKlHImXql1yrf8la95XidCe1/vqQO1we8JS5
+	03KI6WEQ==;
+Received: from ip6-localhost ([::1]:56526 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pT9v9-00D6vM-K7; Fri, 17 Feb 2023 23:13:39 +0000
-Received: from dfw.source.kernel.org ([139.178.84.217]:48616) 
+	id 1pTE3h-00D8Ux-3E; Sat, 18 Feb 2023 03:38:45 +0000
+Received: from ams.source.kernel.org ([2604:1380:4601:e00::1]:52074) 
  by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1pT9v4-00D6vC-Qi
- for samba-technical@lists.samba.org; Fri, 17 Feb 2023 23:13:37 +0000
+ (Exim) id 1pTE3c-00D8Uo-Ay
+ for samba-technical@lists.samba.org; Sat, 18 Feb 2023 03:38:42 +0000
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 364C862093
- for <samba-technical@lists.samba.org>; Fri, 17 Feb 2023 23:13:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 95156C433EF
- for <samba-technical@lists.samba.org>; Fri, 17 Feb 2023 23:13:28 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 0AE65B82F30
+ for <samba-technical@lists.samba.org>; Sat, 18 Feb 2023 03:22:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AB455C433EF
+ for <samba-technical@lists.samba.org>; Sat, 18 Feb 2023 03:22:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1676675608;
- bh=007Ju5hmo469I+GLbhKmQyFOblRRKqP7+IKJhGVg3Bc=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=FVQuLHu9su+8MtuqreGX0M6eUP2draqAXJj4M0+8pCp7wP3cq/lR7ACHIf24dTWkq
- b+prnybkvEZUYcirmWUlld+/8oqr6Nlbu01GGr+WwVByKApBo1afHnsziIFQI2erWf
- EGwGBTF+S6LSfMq241TKKmHuZRPX6qF35zA6vNp9ovpCBLGLSuQb95HK4Pn/rKOk+N
- Q29erYenPL3+a3yt35AFu9AbVpoMWykSXPezSdlvTG0r5dcYRXTe3mPJC9QqOkNZ6+
- ArzBr6bVo48aEYAhQoN4OGqbh5dK+dGwwlaEtAELclY4hqR6CWmZhFUEuGC2Xr7W+S
- OAFm4QbGrDmsw==
-Received: by mail-ed1-f53.google.com with SMTP id h14so10230467edz.10
- for <samba-technical@lists.samba.org>; Fri, 17 Feb 2023 15:13:28 -0800 (PST)
-X-Gm-Message-State: AO0yUKXQSkS9Ok/n/QWiY5p54lDYyjNPrAWTDPHwsfiI/hOxNDXIhJus
- f57NAzzUDxP/LbYxkKRyWEcs5QUPBguN/N/Ti53d5Q==
-X-Google-Smtp-Source: AK7set8/bNsrYafbYm0zAE3nFVOlai7VLZ8imlSdGrFod1cdz9z2k4ibd74H3rjwb0A7aOD2eNsBGzV5MLYpkJRFYLE=
-X-Received: by 2002:a17:907:6c14:b0:8ae:cb48:3c80 with SMTP id
- rl20-20020a1709076c1400b008aecb483c80mr5175474ejc.7.1676675606807; Fri, 17
- Feb 2023 15:13:26 -0800 (PST)
+ s=k20201202; t=1676690555;
+ bh=NvM8rMX7vszmzZ13cFwLKAQaASG65dDWzi5/WCQTomE=;
+ h=In-Reply-To:References:From:Date:Subject:To:Cc:From;
+ b=CE0rrKuOS3SuJ9R0TWg2MNjvLadgNh+Bt1n2s2WGloPLG3gCtCJiTGQ/EkrGjiFuw
+ xFaGyZz2yyYe+Oh3P5OwRmAOgOIhD4ounADO0VxgTm25NAzzOlllt3Bo9YEYUH/fXJ
+ TPnCiNNygf0Rb+6p1VAffEXzontneXzsvHUWUbzULI595U8KaUvlNLeA6synTIitNA
+ BjfOkC+Lv7tvfg9gsTLrEMN1sL0pqwxPxaZmu7t6NbinQYJtksa/EDZEpJGyHitbK3
+ Bju0+w1Weke/G9vRxVpTR2COAdzB/xHUMxXbUT1X5IzT0LrUr1rtANingaqJ5z63Yp
+ YOlIIJrniQ8eA==
+Received: by mail-oi1-f169.google.com with SMTP id o11so2463985oik.7
+ for <samba-technical@lists.samba.org>; Fri, 17 Feb 2023 19:22:35 -0800 (PST)
+X-Gm-Message-State: AO0yUKVDSack5GMtWxUvOjp5dK2Ks3WMeuspoVGrxkr7SSTNlEcresgg
+ a9oOJHFGQsuzxVw1gqoBNsOmjHj4Kbz0nSWTs/c=
+X-Google-Smtp-Source: AK7set/XiooE4fdic8DHDR2MO1lKg50DpTkthOAR8RCDo+fI51RFAecJ7GKfs86cRk4RchcreGuAjfy61GhJ8UyaBkY=
+X-Received: by 2002:a05:6808:20aa:b0:37f:8c73:4218 with SMTP id
+ s42-20020a05680820aa00b0037f8c734218mr916992oiw.253.1676690554761; Fri, 17
+ Feb 2023 19:22:34 -0800 (PST)
 MIME-Version: 1.0
-References: <20230210061953.GC2825702@dread.disaster.area>
- <Y+oCBnz2nLtXrz7O@gondor.apana.org.au>
- <CALCETrXKkZw3ojpmTftur1_-dEi6BOo9Q0cems_jgabntNFYig@mail.gmail.com>
- <Y+riPviz0em9L9BQ@gondor.apana.org.au>
-In-Reply-To: <Y+riPviz0em9L9BQ@gondor.apana.org.au>
-Date: Fri, 17 Feb 2023 15:13:14 -0800
-X-Gmail-Original-Message-ID: <CALCETrXr8vRPqEjhSg7=adQcM7OfWs_+fn2xP5OQeLXAaLzHHQ@mail.gmail.com>
-Message-ID: <CALCETrXr8vRPqEjhSg7=adQcM7OfWs_+fn2xP5OQeLXAaLzHHQ@mail.gmail.com>
-Subject: Re: copy on write for splice() from file to pipe?
-To: Herbert Xu <herbert@gondor.apana.org.au>
+Received: by 2002:ac9:78d8:0:b0:49f:f8ae:2ce5 with HTTP; Fri, 17 Feb 2023
+ 19:22:34 -0800 (PST)
+In-Reply-To: <20230218002436.give.204-kees@kernel.org>
+References: <20230218002436.give.204-kees@kernel.org>
+Date: Sat, 18 Feb 2023 12:22:34 +0900
+X-Gmail-Original-Message-ID: <CAKYAXd9Y+wCbAy3a_W55fgb2Sy7M9UQUhR+XujaTKZ255YCjGg@mail.gmail.com>
+Message-ID: <CAKYAXd9Y+wCbAy3a_W55fgb2Sy7M9UQUhR+XujaTKZ255YCjGg@mail.gmail.com>
+Subject: Re: [PATCH v3] smb3: Replace smb2pdu 1-element arrays with flex-arrays
+To: Kees Cook <keescook@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,47 +68,68 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andy Lutomirski via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andy Lutomirski <luto@kernel.org>
-Cc: axboe@kernel.dk, linux-api@vger.kernel.org,
- Dave Chinner <david@fromorbit.com>, linux-kernel@vger.kernel.org,
- metze@samba.org, viro@zeniv.linux.org.uk, Andy Lutomirski <luto@kernel.org>,
- linux-fsdevel@vger.kernel.org, samba-technical@lists.samba.org,
- torvalds@linux-foundation.org, io-uring@vger.kernel.org
+From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Namjae Jeon <linkinjeon@kernel.org>
+Cc: Tom Talpey <tom@talpey.com>, Shyam Prasad N <sprasad@microsoft.com>,
+ linux-cifs@vger.kernel.org, Paulo Alcantara <pc@cjr.nz>,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ Ronnie Sahlberg <lsahlber@redhat.com>, Steve French <sfrench@samba.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>, linux-hardening@vger.kernel.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-> On Feb 13, 2023, at 5:22 PM, Herbert Xu <herbert@gondor.apana.org.au> wro=
-te:
+2023-02-18 9:24 GMT+09:00, Kees Cook <keescook@chromium.org>:
+> The kernel is globally removing the ambiguous 0-length and 1-element
+> arrays in favor of flexible arrays, so that we can gain both compile-time
+> and run-time array bounds checking[1].
 >
-> =EF=BB=BFOn Mon, Feb 13, 2023 at 10:01:27AM -0800, Andy Lutomirski wrote:
->>
->> There's a difference between "kernel speaks TCP (or whatever)
->> correctly" and "kernel does what the application needs it to do".
+> Replace the trailing 1-element array with a flexible array in the
+> following structures:
 >
-> Sure I get where you are coming from.  It's just that the other
-> participants in the discussion were thinking of stability for the
-> sake of TCP (or TLS or some other protocol the kernel implements)
-> and that simply is a non-issue.
-
-I can certainly imagine TLS or similar protocols breaking if data
-changes if the implementation is too clever and retransmission
-happens.  Suppose 2000 bytes are sent via splice using in-kernel TLS,
-and it goes out on the wire as two TCP segments.  The first segment is
-dropped but the second is received.  The kernel resends the first
-segment using different data.  This really ought to cause an integrity
-check at the far end to fail.
-
-I don't know if any existing kTLS is clever enough to regenerate
-outgoing data when it needs to retransmit a segment, but it would be
-an interesting optimization for serving static content over TLS.
-
-
-
+> 	struct smb2_err_rsp
+> 	struct smb2_tree_connect_req
+> 	struct smb2_negotiate_rsp
+> 	struct smb2_sess_setup_req
+> 	struct smb2_sess_setup_rsp
+> 	struct smb2_read_req
+> 	struct smb2_read_rsp
+> 	struct smb2_write_req
+> 	struct smb2_write_rsp
+> 	struct smb2_query_directory_req
+> 	struct smb2_query_directory_rsp
+> 	struct smb2_set_info_req
+> 	struct smb2_change_notify_rsp
+> 	struct smb2_create_rsp
+> 	struct smb2_query_info_req
+> 	struct smb2_query_info_rsp
 >
-> Having a better way to communicate completion to the user would be
-> nice.  The only way to do it right now seems to be polling with
-> SIOCOUTQ.
+> Replace the trailing 1-element array with a flexible array, but leave
+> the existing structure padding:
 >
+> 	struct smb2_file_all_info
+> 	struct smb2_lock_req
 >
+> Adjust all related size calculations to match the changes to sizeof().
+>
+> No machine code output or .data section differences are produced after
+> these changes.
+>
+> [1] For lots of details, see both:
+>
+> https://docs.kernel.org/process/deprecated.html#zero-length-and-one-element-arrays
+>     https://people.kernel.org/kees/bounded-flexible-arrays-in-c
+>
+> Cc: Steve French <sfrench@samba.org>
+> Cc: Paulo Alcantara <pc@cjr.nz>
+> Cc: Ronnie Sahlberg <lsahlber@redhat.com>
+> Cc: Shyam Prasad N <sprasad@microsoft.com>
+> Cc: Tom Talpey <tom@talpey.com>
+> Cc: Namjae Jeon <linkinjeon@kernel.org>
+> Cc: Sergey Senozhatsky <senozhatsky@chromium.org>
+> Cc: linux-cifs@vger.kernel.org
+> Cc: samba-technical@lists.samba.org
+> Signed-off-by: Kees Cook <keescook@chromium.org>
+Reviewed-by: Namjae Jeon <linkinjeon@kernel.org>
+
+Thanks!
 
