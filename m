@@ -2,63 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A58BC6A2CF0
-	for <lists+samba-technical@lfdr.de>; Sun, 26 Feb 2023 02:20:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02AF66A6CBC
+	for <lists+samba-technical@lfdr.de>; Wed,  1 Mar 2023 14:02:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=QfkU/Qg4kCYhYUL3RB8slmigJP6bQ2tXbpTfbQE4juA=; b=Fykqj87YDn9DkIkwvsniDG4kTG
-	1dtpg8G/lJLp1A15LsNGxjWvtCgpilUT4Q7l/oy5HkbaxbGBB6qTwKi2lDF0vFUS6EjzIXDdpEwBT
-	iP2AFeA+kcd471QUByWjLUCEM2AmT75PzJQU8kfsrGib3eZNfKlfriOQZhU8+x1BwnHRqVdQAWqrT
-	j+NLIK68q53k9mtUX3jcRGZDTzrTE8ToszQpJK0l4QEgL02oD56h+cDWLAJLYWDlOtEezXEb9vtYn
-	RRBOx4fXtroiPSw8Vezq4M7oo8FMiRWwwj2wnoT0lVZcUqWoS0ysVi8cUEu0ebeaVvZBf92/hcRzo
-	4m1UuLnw==;
-Received: from ip6-localhost ([::1]:63936 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=yXcB5kRyp1VHt30nUGn38zYdolfCjm8MBkGodOiwqzc=; b=pZjSsPxRgkqmfjNoZP9llZUOXU
+	J0rgOrY/zmN7yDCuC+ah2I9kC6IC+QM45FqmOTrdEb6OG6zDUwRNpi5CxWey6gH12/BOcmJQgOKjC
+	b3gXAme1EDJqfTiTVaCdD/75nt3kIIokXbR/IRJ+nvBOPgKzKJrVMQiQ5k2y/YsD4X3cJLgIBjGMN
+	rYb1MYorZmVxrgtFF1fhEqHnOXZjoxRBLosv043HiUPKbKVQdS0sHk9Iad023sE2EomAjSwRpX/g6
+	4+U00BFEW29ZCKCQGQDPNUPoDf62CzcTfifnloglG9pjoegkVGv5SNXouzh6i7GC5xAvsdtaHTDqq
+	mBFOGPOg==;
+Received: from ip6-localhost ([::1]:21432 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pW5hd-00E4bo-4x; Sun, 26 Feb 2023 01:19:49 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz
- ([2404:130:4080::4]:59192) 
+	id 1pXM5j-00Ga4i-TU; Wed, 01 Mar 2023 13:01:56 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:30702) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pW5hX-00E4bf-LB
- for samba-technical@lists.samba.org; Sun, 26 Feb 2023 01:19:47 +0000
-Received: from [192.168.1.110] (unknown [114.23.142.188])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (Client did not present a certificate)
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 99DA2819DD; 
- Sun, 26 Feb 2023 14:19:32 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1677374373;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QfkU/Qg4kCYhYUL3RB8slmigJP6bQ2tXbpTfbQE4juA=;
- b=kcmfxIDVJqgMW72iau98jFMQ/1U7qKSMQ3JMPlvqmxmmP8l9OTlvtjqfq22ml0jNa6AJ2M
- ySLj5nZdy77+Y4xwQXBpz/ttWe/HzCk2s6zw+C0dV9hGg+jk9h5o15cE8cQjnAYDsS6v6Y
- T17WrJN5F/kTd+RFRqc5IzAJm2zu+ZRLqbMzverukFkITQm2NwEKY+VXxHKF3lAn14qBQw
- bl0rt6apeA+0m0VIQjfEjLT9EcaTekYW6zwLS7gMljWYLWA7VR0v9yddFXdpYPvUnWLW2f
- TQZYlKVxsivOupkzeieeWiI7lOFolqcIYze6JSCSas2Hlp87LAqlepbj0pNQ4Q==
-Message-ID: <bb839d6c-cc00-555c-6628-925ef3c161ea@catalyst.net.nz>
-Date: Sun, 26 Feb 2023 14:19:30 +1300
+ (Exim) id 1pXM5Y-00Ga3k-RT; Wed, 01 Mar 2023 13:01:47 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=yXcB5kRyp1VHt30nUGn38zYdolfCjm8MBkGodOiwqzc=; b=xxUbqNUg/sSchzBl9YmEwcKO1/
+ aelR+Yt8s2KwVIlBtWNtvGQVUZvxL9dgb4hIgDvd1RJT76O8TFyCVMg8p2tEovHb4wDvjETn5hUQl
+ KUOzCzZHoS/uoBRj7njmgSFH76Azft7AHZEHiJLWrQJRp/thne8XAP2b1ckgTcufOAEHq5Sdwg8PQ
+ BBq6kzKG6o/HEt19oahBMDyXXCKkY2RRRuc/SwkJ5r6GHY0cC65OFel2JjIoZ8d16aRu6MSmzPAde
+ 3JrJPy6UQCcBohdrqbN+u0KK61RAGMx4u/5EephKoYDi56qpnYlQrycfoiCsP90Q7q5swlLIVgsSk
+ xfo3Jv8UC22ZRPFW7EqSGPlxy3tgFtfarZ3eiSaBPJYy4WqJwEue8oDlRQev1dbtw5qVpl59J9mSF
+ vGTw6EwwEG8Sl36+CCAXVf79IVUTO9ys8qv6o+vL1nvELwOJ01O8V39ZsPLnBzUAs9raOTw+P7+Ft
+ qeDlCCMkRasYTFlkm3c96egU;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pXM5Y-00HCGd-95; Wed, 01 Mar 2023 13:01:44 +0000
+Message-ID: <8edef4b7-548d-997c-e13a-8a1dcb903631@samba.org>
+Date: Wed, 1 Mar 2023 14:01:44 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: WHATSNEW: SMB Server performance improvements
-Content-Language: en-GB
-To: Stefan Metzmacher <metze@samba.org>, Jule Anger <janger@samba.org>
-References: <1a67acae-62b7-f1be-a23f-d5acbc838fc0@samba.org>
-In-Reply-To: <1a67acae-62b7-f1be-a23f-d5acbc838fc0@samba.org>
+ Thunderbird/102.7.1
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.18.0rc4 Available for Download
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-0.10 / 15.00]; MIME_GOOD(-0.10)[text/plain];
- ARC_NA(0.00)[]; MIME_TRACE(0.00)[0:+];
- ASN(0.00)[asn:56030, ipnet:114.23.0.0/16, country:NZ];
- DCC_FAIL(0.00)[failed to scan and retransmits exceed];
- DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
- MID_RHS_MATCH_FROM(0.00)[]
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=douglasb@catalyst.net.nz
- smtp.mailfrom=douglas.bagnall@catalyst.net.nz
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,18 +56,247 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-Cc: Samba Technical <samba-technical@lists.samba.org>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 25/02/23 03:46, Stefan Metzmacher via samba-technical wrote:
+Release Announcements
+=====================
 
-> +caused performance regressions for meta data heavy workloads.
+This is the fourth release candidate of Samba 4.18.  This is *not*
+intended for production environments and is designed for testing
+purposes only.  Please report any defects via the Samba bug reporting
+system at https://bugzilla.samba.org/.
 
-I think "metadata" should be one word. Otherwise good.
+Samba 4.18 will be the next version of the Samba suite.
 
-Douglas
 
+UPGRADING
+=========
+
+
+NEW FEATURES/CHANGES
+====================
+
+SMB Server performance improvements
+-----------------------------------
+
+The security improvements in recent releases
+(4.13, 4.14, 4.15, 4.16), mainly as protection against symlink races,
+caused performance regressions for metadata heavy workloads.
+
+While 4.17 already improved the situation quite a lot,
+with 4.18 the locking overhead for contended path based operations
+is reduced by an additional factor of ~ 3 compared to 4.17.
+It means the throughput of open/close
+operations reached the level of 4.12 again.
+
+More succinct samba-tool error messages
+---------------------------------------
+
+Historically samba-tool has reported user error or misconfiguration by
+means of a Python traceback, showing you where in its code it noticed
+something was wrong, but not always exactly what is amiss. Now it
+tries harder to identify the true cause and restrict its output to
+describing that. Particular cases include:
+
+  * a username or password is incorrect
+  * an ldb database filename is wrong (including in smb.conf)
+  * samba-tool dns: various zones or records do not exist
+  * samba-tool ntacl: certain files are missing
+  * the network seems to be down
+  * bad --realm or --debug arguments
+
+Accessing the old samba-tool messages
+-------------------------------------
+
+This is not new, but users are reminded they can get the full Python
+stack trace, along with other noise, by using the argument '-d3'.
+This may be useful when searching the web.
+
+The intention is that when samba-tool encounters an unrecognised
+problem (especially a bug), it will still output a Python traceback.
+If you encounter a problem that has been incorrectly identified by
+samba-tool, please report it on https://bugzilla.samba.org.
+
+Colour output with samba-tool --color
+-------------------------------------
+
+For some time a few samba-tool commands have had a --color=yes|no|auto
+option, which determines whether the command outputs ANSI colour
+codes. Now all samba-tool commands support this option, which now also
+accepts 'always' and 'force' for 'yes', 'never' and 'none' for 'no',
+and 'tty' and 'if-tty' for 'auto' (this more closely matches
+convention). With --color=auto, or when --color is omitted, colour
+codes are only used when output is directed to a terminal.
+
+Most commands have very little colour in any case. For those that
+already used it, the defaults have changed slightly.
+
+  * samba-tool drs showrepl: default is now 'auto', not 'no'
+
+  * samba-tool visualize: the interactions between --color-scheme,
+    --color, and --output have changed slightly. When --color-scheme is
+    set it overrides --color for the purpose of the output diagram, but
+    not for other output like error messages.
+
+New samba-tool dsacl subcommand for deleting ACES
+-------------------------------------------------
+
+The samba-tool dsacl tool can now delete entries in directory access
+control lists. The interface for 'samba-tool dsacl delete' is similar
+to that of 'samba-tool dsacl set', with the difference being that the
+ACEs described by the --sddl argument are deleted rather than added.
+
+No colour with NO_COLOR environment variable
+--------------------------------------------
+
+With both samba-tool --color=auto (see above) and some other places
+where we use ANSI colour codes, the NO_COLOR environment variable will
+disable colour output. See https://no-color.org/ for a description of
+this variable. `samba-tool --color=always` will use colour regardless
+of NO_COLOR.
+
+New wbinfo option --change-secret-at
+------------------------------------
+
+The wbinfo command has a new option, --change-secret-at=<DOMAIN CONTROLLER>
+which forces the trust account password to be changed at a specified domain
+controller. If the specified domain controller cannot be contacted the
+password change fails rather than trying other DCs.
+
+New option to change the NT ACL default location
+------------------------------------------------
+
+Usually the NT ACLs are stored in the security.NTACL extended
+attribute (xattr) of files and directories. The new
+"acl_xattr:security_acl_name" option allows to redefine the default
+location. The default "security.NTACL" is a protected location, which
+means the content of the security.NTACL attribute is not accessible
+from normal users outside of Samba. When this option is set to use a
+user-defined value, e.g. user.NTACL then any user can potentially
+access and overwrite this information. The module prevents access to
+this xattr over SMB, but the xattr may still be accessed by other
+means (eg local access, SSH, NFS). This option must only be used when
+this consequence is clearly understood and when specific precautions
+are taken to avoid compromising the ACL content.
+
+Azure Active Directory / Office365 synchronisation improvements
+--------------------------------------------------------------
+
+Use of the Azure AD Connect cloud sync tool is now supported for
+password hash synchronisation, allowing Samba AD Domains to synchronise
+passwords with this popular cloud environment.
+
+REMOVED FEATURES
+================
+
+
+smb.conf changes
+================
+
+   Parameter Name                          Description     Default
+   --------------                          -----------     -------
+   acl_xattr:security_acl_name             New security.NTACL
+   server addresses                        New
+
+
+CHANGES SINCE 4.18.0rc3
+=======================
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 15308: Avoid that tests fail because other tests didn't do 
+cleanup on
+      failure.
+
+o  baixiangcpp <baixiangcpp@gmail.com>
+    * BUG 15311: fd_load() function implicitly closes the fd where it 
+should not.
+
+
+CHANGES SINCE 4.18.0rc2
+=======================
+
+o  Jeremy Allison <jra@samba.org>
+    * BUG 15301: Improve file_modtime() and issues around smb3 unix test.
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15299: Spotlight doesn't work with latest macOS Ventura.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15298: Build failure on solaris with tevent 0.14.0 (and ldb 
+2.7.0).
+      (tevent 0.14.1 and ldb 2.7.1 are already released...)
+
+o  John Mulligan <jmulligan@redhat.com>
+    * BUG 15307: vfs_ceph incorrectly uses fsp_get_io_fd() instead of
+      fsp_get_pathref_fd() in close and fstat.
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 15291: test_chdir_cache.sh doesn't work with 
+SMBD_DONT_LOG_STDOUT=1.
+    * BUG 15301: Improve file_modtime() and issues around smb3 unix test.
+
+
+CHANGES SINCE 4.18.0rc1
+=======================
+
+o  Andrew Bartlett <abartlet@samba.org>
+    * BUG 10635: Office365 azure Password Sync not working.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15286: auth3_generate_session_info_pac leaks wbcAuthUserInfo.
+
+o  Noel Power <noel.power@suse.com>
+    * BUG 15293: With clustering enabled samba-bgqd can core dump due to use
+      after free.
+
+
+KNOWN ISSUES
+============
+
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.18#Release_blocking_bugs
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/rc/
+
+The release notes are available online at:
+
+https://download.samba.org/pub/samba/rc/samba-4.18.0rc4.WHATSNEW.txt
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
