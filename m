@@ -1,49 +1,47 @@
 Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
-Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AC296B0BE5
-	for <lists+samba-technical@lfdr.de>; Wed,  8 Mar 2023 15:53:46 +0100 (CET)
+Received: from hr1.samba.org (hr1.samba.org [144.76.82.147])
+	by mail.lfdr.de (Postfix) with ESMTPS id 93EEE6B1072
+	for <lists+samba-technical@lfdr.de>; Wed,  8 Mar 2023 18:51:41 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=zUJMn6iLeLKzNhP5fItnMlrIgqWPRWXavzZC1C7J0Hs=; b=UrDMd3f4PfnNmRwAxYVd6Qe4IB
-	oAhN+IWtKzIp47H3HNR8YIr/u7OpjsauUbJGve/HTrfa72TOHYHArtsmDQ+Z/H21DijGV9u1dSsgb
-	GNHDlosJ3dopMz4Vd+Qcwqn9UXVagZc0KIVMRbvv0FMzYvudAU3JtFYkI0QcUmvEiXS61ccqPRiH9
-	kzip++5pd8FDvcZ4kBLC+FIynGW2WVOPLWh+k+6KeluYBvfjz1Z1XyR01qlAYS/7lravsgJvqCPOi
-	CpRKaVMEwRtPy3qIYP/qe3tAzay4K1Qj2Lke+wQRGZ7rkj81xhXqC5xTCGgLo+lEXnIoqSmR/4ncI
-	OjVENB/A==;
-Received: from ip6-localhost ([::1]:61572 helo=hr1.samba.org) 
+	bh=R/ikggO1es7Jr8k+qXJjv5zsH8SlXy5S1MIRbgOMcSA=; b=QIGHhX2kF2WnPo9F0PyXBrzFeU
+	yMo+1L8xVsyDW00vjBSr1HRHuAYcLJaXmgwks+BKGvd1vNW36k8QbIUjxd46DJiAITZgOz6mWOWJW
+	Rg1L9OvYsbk2ScMYh+TXFkdVaqp9DAX6MoN2cgqMDwEA9NBx974ruorIl9Kn941UyASlDQOWHTqt+
+	rwanPPBAE/n7WO7+phkfZiqe2Yc9XJV4H4W5jiLV92rzxJVPP1EXzBTrwpHbXApWTTusugE6QQRrN
+	M/sHaz/1wVE+s/A1j4TjtNpCqSLbKdZ4GEEzgHKoaxYj5SmbvephfoanlVpTmr9Mzxrmx6dMTogpW
+	0IeP3qpw==;
+Received: from ip6-localhost ([::1]:42414 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pZvAh-000ISk-Tg; Wed, 08 Mar 2023 14:53:39 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:49664) 
+	id 1pZxro-000Ovl-3t; Wed, 08 Mar 2023 17:46:20 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:48718) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pZvAb-000ISb-7l
- for samba-technical@lists.samba.org; Wed, 08 Mar 2023 14:53:36 +0000
+ (Exim) id 1pZxrj-000Ovc-BR
+ for samba-technical@lists.samba.org; Wed, 08 Mar 2023 17:46:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Cc:From:To:Date:Message-ID;
- bh=zUJMn6iLeLKzNhP5fItnMlrIgqWPRWXavzZC1C7J0Hs=; b=C9Mkz268ZoDqL/gNdBBzYgVzxT
- npd5kuZyBR+Hok6uHrS1AyRMvZZPJFAvzfkpl6ucnCN6YRkjQQRvp9+DszZZ031dhUSMv+Ot9PZ9p
- YlnZHydIZE9vRppDLR8UA2HWANdTpOIJsgvDMFCWXaafLfqdK2Pdxnvb0+k3fURo+BzZfdbY+Wx4n
- bccAect/zEAI77vJ3WOSwGJWIa9s4G4Z3M5h82IiJ0+H0abyYgeqdaBPOn7llwksLzBAl2QTk3Lh4
- ofGzOAoFU9RNDnyFKM5UBvlF4kpZAt4Mr6Bw+Q1XnNAnsuBbY19HIQW/WsXkyZhaGgSrUgXUto9pU
- cXCImoOkWYI/xqh2qCR8fe1uWCG0NLnZZM94+MUnbOsYsXJz+uOPBDjv8MYnnF9V10gdITFHk8ibd
- F7C6ps3C7JmEbgbb2SycJiaTWi1JJdEDeShaJbh6c0BbQy6yVcX/88SvYuVlCpUj/ArtubtAQ8Izg
- dbO9y7l2yFxvuzohAi0t/nUm;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=R/ikggO1es7Jr8k+qXJjv5zsH8SlXy5S1MIRbgOMcSA=; b=3cyInyVLlacXaxzcYnuAjP+c8C
+ DBc1+/M0t4wK3HnsNye+7xdfd6Og8IORSDoSFIRiO3Sxq8rYjpdB4E28LUzzk6FVaLeEOg4AQGfO1
+ 2ItaS4qGdOOyD0xvPaMrv08gQG/Yc0muZUsN7JbwqyQ2Cfhy37sfyGKRPmAcuvkHgsJDVYlRH7Xpi
+ 2GIE2SMIfCJ0o2vrjnOvI+DFKGeam7Y9ptAgg54/giJyDntrmcdqk18nDjsdcePCMFXM23D3AHtPl
+ wDNy3Y3+4p7dmWNX0g0rBmIgfuS4xqqBxZOvAocowEaRDp2nPf4PGU2QpPHBtllgy2hwXAXIejYC/
+ e2gL683XpGgwdQU3G+FivCwWp7o5np9TqVy+ajFhxpSAgsM35Z+Q+7CWIDakLFBi72Y5bc44zrZ0c
+ cwHRc+51RFNkrb1SY56BQz6T0kCi25yVk62O0LadGvtRnTHPwNVhdVT2eq9mhrbweq4jyjKFogzEC
+ FLMlFTUFsJSpfQgJPp+azdf3;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pZvAZ-001U1i-UC; Wed, 08 Mar 2023 14:53:32 +0000
-Message-ID: <7bc0c282-e9e6-ab70-6dca-227bb9802ef3@samba.org>
-Date: Wed, 8 Mar 2023 15:53:31 +0100
+ (Exim) id 1pZxrh-001WQt-Up; Wed, 08 Mar 2023 17:46:14 +0000
+Date: Wed, 8 Mar 2023 18:47:41 +0100
+To: Ralph Boehme <slow@samba.org>
+Subject: Re: Ceph RADOS linearizable?
+Message-ID: <20230308184741.4e9f2b2b@echidna.fritz.box>
+In-Reply-To: <7bc0c282-e9e6-ab70-6dca-227bb9802ef3@samba.org>
+References: <7bc0c282-e9e6-ab70-6dca-227bb9802ef3@samba.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Content-Language: en-US
-To: David Disseldorp <ddiss@samba.org>
-Subject: Ceph RADOS linearizable?
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------b6qIviG0MytPQAkW3gikCyux"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,67 +55,46 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
 Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------b6qIviG0MytPQAkW3gikCyux
-Content-Type: multipart/mixed; boundary="------------Z1jOjXxVxl0Nu000NPvE7YtR";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: David Disseldorp <ddiss@samba.org>
-Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Message-ID: <7bc0c282-e9e6-ab70-6dca-227bb9802ef3@samba.org>
-Subject: Ceph RADOS linearizable?
+Hi Ralph!
 
---------------Z1jOjXxVxl0Nu000NPvE7YtR
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+This a question better suited to the Ceph development list, but I'll do
+my best to try to answer...
 
-SGV5IERhdmlkLA0KDQpJJ20gY3VycmVudGx5IGRvaW5nIHNvbWUgcmVzZWFyY2ggaW50byBk
-aXN0cmlidXRlZCBkYXRhYmFzZXMuIEknbSANCnRyYWNraW5nIGNhbmRpZGF0ZXMgaGVyZToN
-Cg0KaHR0cHM6Ly93aWtpLnNhbWJhLm9yZy9pbmRleC5waHAvU2FtYmFfb25fU2NhbGUNCg0K
-T25lIG9mIHRoZSB0cmlja3kgdGhpbmdzIGlzIGZpZ3VyaW5nIG91dCB0aGUgY29uc2lzdGVu
-Y3kgbGV2ZWwgWzFdIA0KcHJvdmlkZWQgYnkgdGhlIGRhdGFiYXNlLiBUaGVyZSdzIG5vIHB1
-YmxpYyBSQURPUyBkb2N1bWVudGF0aW9uIHRoYXQgDQpjbGVhcmx5IGRlc2NyaWJlcyB0aGUg
-Y29uc2lzdGVuY3kgcHJvdmlkZWQgaW4gaW5kdXN0cnkgc3RhbmRhcmQgdGVybXMsIA0KSSdt
-IHByZXR0eSBzdXJlIGl0J3MgbGluZWFyaXphYmlsZSwgYnV0IHRoZSBvbmx5IHJlYWwgcmVm
-ZXJlbmNlIA0KbWVudGlvbmluZyBsaW5lYXJpemFiaWxpdHkgSSBjb3VsZCBmaW5kIGlzIGZy
-b20gYSBSQURPUyByZWxhdGVkIHJlc2VhcmNoIA0KcGFwZXIgdGhhdCB0YWxrcyBhYm91dCBh
-ZGRpbmcgc3VwcG9ydCBmb3Igd2Vha2VyIGNvbnNpc3RlbmN5IGxldmVsczoNCg0KaHR0cDov
-L3d3dy5jcy5udGh1LmVkdS50dy9+eWNodW5nL2NvbmZlcmVuY2UvMjAxNl9JQ1BBRFMucGRm
-DQoNCkNhbiB5b3UgY29uZmlybSB3aGV0aGVyIFJBRE9TIGlzIGluZGVlZCBMaW5lYXJpemFi
-aWxlPyBJJ20gcHJldHR5IHN1cmUgDQppdCBpcywgYnV0IHdvdWxkIGxpa2UgdG8gYmUgc3Vy
-ZS4gOikNCg0KVGhhbmtzIQ0KLXNsb3cNCg0KWzFdIDxodHRwczovL2plcHNlbi5pby9jb25z
-aXN0ZW5jeT4NCg0KLS0gDQpSYWxwaCBCb2VobWUsIFNhbWJhIFRlYW0gICAgICAgICAgICAg
-ICAgIGh0dHBzOi8vc2FtYmEub3JnLw0KU2VyTmV0IFNhbWJhIFRlYW0gTGVhZCAgICAgIGh0
-dHBzOi8vc2VybmV0LmRlL2VuL3RlYW0tc2FtYmENCg==
+On Wed, 8 Mar 2023 15:53:31 +0100, Ralph Boehme wrote:
 
---------------Z1jOjXxVxl0Nu000NPvE7YtR--
+> Hey David,
+> 
+> I'm currently doing some research into distributed databases. I'm 
+> tracking candidates here:
+> 
+> https://wiki.samba.org/index.php/Samba_on_Scale
+> 
+> One of the tricky things is figuring out the consistency level [1] 
+> provided by the database. There's no public RADOS documentation that 
+> clearly describes the consistency provided in industry standard terms, 
+> I'm pretty sure it's linearizabile, but the only real reference 
+> mentioning linearizability I could find is from a RADOS related research 
+> paper that talks about adding support for weaker consistency levels:
+> 
+> http://www.cs.nthu.edu.tw/~ychung/conference/2016_ICPADS.pdf
+> 
+> Can you confirm whether RADOS is indeed Linearizabile? I'm pretty sure 
+> it is, but would like to be sure. :)
 
---------------b6qIviG0MytPQAkW3gikCyux
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+RADOS is a very broad interface when considering linearizability, but
+if you choose to focus on key/value storage accessed via the Ceph omap
+interface, then yes, my understanding is that OSD requests for a single
+object are processed in a way that provides atomic consistency from a
+RADOS client perspective. That guarantee goes out the window if multiple
+objects are involved, or the I/O is split across multiple OSD requests;
+a single OSD request can contain multiple (sequentially handled) I/O
+operations.
 
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmQIoWsFAwAAAAAACgkQqh6bcSY5nkY3
-nhAAhlJxVOxoZAwvh4GN+BzKfYBUJPPUnPtm3ZC+Ja3pbltzZM6WOqk4J1vQiAfm2hmERjKCEhBb
-toZWxrCLNc/+MBtOFNo6c9QJVXOfxrPPKmkGpnmVhpg2ABeXPlH/AiTYgfNLwmwG0vdD5t/50+4Q
-MwPr79p2Mw+eb/YlzUoSP5DbhQL9IwEdudlEMJ+7aHCkxJye3EWFzQYWBeOxq57Y/x6GSzlDan0U
-1RbxV3KzR/cq3gOz2nk8EEl3/w9HbI3Hjxcw1noM6oIwcDC6savOZ+iT2kmRbKOQIXrYaoVmw2ba
-qrtK+lWqLlW41fMOX23QO0n0j2KwU5qWm9LSNoO/e80WhiJLnZYvA5PFU5DDoEpIkeCI20BHd/a0
-phFKyofjSW+2jTEMvywkiPes4n8q7FQjM6vUYt2mV+rRWYu5jNpGch2Q0iFcezvaBgsiSk5lz5Xv
-q/2YDv8CHWYyUJVhHXj988Ig5F/zE9dETZpSK4+B9NwBBY+5+5oWjnGsFb9NU1lnFt3nBwmzKtmN
-kqPjXZ//5KroR+7CiYjyqeRkKKdMcYIkrfoTyYk+vw7NuWgYlHfKW7Rym3ZqD1qZweRW5CyEgKdT
-RJaHvz59aR2yiJSFFIGxvsN1P7R4eHhmRgorzeVEQElVdC5Mu6f0whYBe1jBgZDDSzgJKXtylt41
-BCg=
-=Soue
------END PGP SIGNATURE-----
-
---------------b6qIviG0MytPQAkW3gikCyux--
+Cheers, David
 
