@@ -2,48 +2,76 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A37456B09C3
-	for <lists+samba-technical@lfdr.de>; Wed,  8 Mar 2023 14:48:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3E046B0BCC
+	for <lists+samba-technical@lfdr.de>; Wed,  8 Mar 2023 15:47:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=10j4FXKiBISHWzGbhqUaGZ+pYlH/lZqn/pjX6moqLms=; b=UgpoMaDELfT7rg3cQM3GHa9zw7
-	lTJZPWyaBe9BHaacWBoF5DdT98CydupIaiMuNfLe4fxN64KKVIW4shh0q49iFTnxJMemvxr57zFNk
-	x6eXB+VUd9AUi4U6n/2CrOf1w6DICt3f3IjutNTIqawHzIZLXjaKgwKC8BuPs7L67ftteIyEti3+1
-	MnA6MS5iAnfeXR6NGyS9QrKOrfprIMLeM/CKqZDXfmJVrRTPFNYckQe0HBQLpQEfBmTJShSaOCRrX
-	j/Z6bVIkKsfU/0S60C+XiVAOJE9c3HAHzy61RFY49ohGGTFxqEFP9ZGmXl1ke8M33e1gdP7p7/AJC
-	7OMJ2Huw==;
-Received: from ip6-localhost ([::1]:65152 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=aZ8wXtwtKfacUTuskFUHk2le9eoctQ/jnsI5C4vqgig=; b=GsDeOvbpxV6yy4MSclojMVbskz
+	SdWr/M91uT7lwQ15QQU60qyqFgnOim7LZjUsGc9o/1FqWaLSmXpoG6+Hyen3TvIcNN/BlFlYJKZ8Z
+	aNRx/g0ut8Hq2TkS4bBpgwZGtgweBi79YkpDqlCxkPsBqmybVUXIGeA8bfZcb8/Jh+eExZh2/qWNK
+	Dkqbm4Wr6Pt6J1ILvX8E6CxRmleKel7PkMUpGifOCAJnPYzS9H6RoadKBvvyBFYdihEo07aCnLZew
+	z3g4/rgajwr9p9EFGA9B/NCC61f/jctFL2P1oi74qAOVA1s045Tjh45R9rcfR6XRo4lKo74W8B+md
+	tP9UZH/g==;
+Received: from ip6-localhost ([::1]:47034 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pZu9S-000EC4-79; Wed, 08 Mar 2023 13:48:18 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57468) 
+	id 1pZv4t-000I8D-B3; Wed, 08 Mar 2023 14:47:39 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16144) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pZu9N-000EBv-FR
- for samba-technical@lists.samba.org; Wed, 08 Mar 2023 13:48:16 +0000
+ (Exim) id 1pZv4n-000I83-Re
+ for samba-technical@lists.samba.org; Wed, 08 Mar 2023 14:47:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:Cc:To:Date:Message-ID;
- bh=10j4FXKiBISHWzGbhqUaGZ+pYlH/lZqn/pjX6moqLms=; b=yCcEta1G6o1dv7eDcGVxQWzTJ2
- RWy+EdP7pTUtIhnBjego+GZCdeMSNVbUsmqbPVyDPR9yHF4KsyI3S8DgppZwhxAcZOiEIPghU5eZK
- 12Ge2djBajjqzf0t5OVa+t2LdiqYXzWfVDitlAsPNGhBQz+KNCKoZIdjmiioNokiBHjFPB+i5pGN6
- aufPRgWpznXb7ynjPxtDIpM8F2xRhy57MXVBIJfSSLEhKN0//uesIrha0mpmohGd5qrU4azx3t7N/
- Fo65b9h3t3s/OlxaK6nC7VC9WxxLa9Lkny7WhoGPmYlmT3y9MoJHT31JkvtxtJQXYb5Lf4zI66dAS
- ezcG3583vlRsGUIN8Rc9s2i+FcWsXbm27TQYeXWtlPEwqujbwKy88VODrBgloyyYwanIw0Gw2nCCr
- Wk9PO0uwIL12QHwzZ2cpI/I7Rjsc9OSKXmcDHyQ9WN8R8PCK8KqV466dFcUITBzylXgfA85zp1n6c
- MEJrSOiyb9iUZT+vDRkXWMoe;
+ s=42; h=To:Message-ID:Date:From:CC;
+ bh=aZ8wXtwtKfacUTuskFUHk2le9eoctQ/jnsI5C4vqgig=; b=GQ4Rk3V5CkOjJjzcFbMcpVWy6K
+ AJfd6YIlsAhrGpCGzMvzSBliDfvNB9xcZ7YKSwLCnmywg4wq4TESI/PRke2L97I+bcOQg8navl51x
+ fv6r/PYBzPsX7Mce0DvdKsOYKJqGhmEar2D8Epf6cZphbz9hOdJS8fJBfRn2tk16dQS1Y1zUGiJ5I
+ 7czVHj15rbPlCJbGp5wr0vFp56oM2jmFGwubr+pRUVqAc9ijIXm38IXGgJEguF+UwpktraVhJ2xRn
+ 1RgkoXlPv6mQ0CslBTIym3sIoTI2ReBCZZJduxgHf2BXb9yWzLLgAGoTp77Ol3n3t07rnvR5JemMf
+ /fz768r3uQ3yWj7jH+ywmBEdSYdnI5ggLemYNGdULyLH+aiRjXzdDCwpzQAGq4G/G3TP7ludDFJWl
+ u42enRYu1+votBDk7P5bh6+PB3zMSj1XN4bVV4Bq1rzXRjVeMTxMv8vJfiRmhQHf7PNNQQlXdnm1Q
+ t3ubO/Kyuqp4JyvST26e8rDm;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pZu9M-001T0B-B2; Wed, 08 Mar 2023 13:48:12 +0000
-Message-ID: <ce3c72ee-b260-5913-e732-755281476aa1@samba.org>
-Date: Wed, 8 Mar 2023 14:48:11 +0100
+ (Exim) id 1pZv4n-001Ttp-6Z
+ for samba-technical@lists.samba.org; Wed, 08 Mar 2023 14:47:33 +0000
+Resent-From: Ralph Boehme <slow@samba.org>
+Resent-To: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Resent-Date: Wed, 8 Mar 2023 15:47:32 +0100
+Resent-Message-ID: <9d4f3484-bba6-70a3-a0d5-429034ba36dc@samba.org>
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429]:37638) 
+ by hr2.samba.org with esmtps
+ (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pZuQS-001TNi-Vk
+ for slow@samba.org; Wed, 08 Mar 2023 14:05:58 +0000
+Received: by mail-pf1-x429.google.com with SMTP id z11so10283828pfh.4
+ for <slow@samba.org>; Wed, 08 Mar 2023 06:05:51 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1678284350;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aZ8wXtwtKfacUTuskFUHk2le9eoctQ/jnsI5C4vqgig=;
+ b=SQ55UPjGhNouv4KQ64VxBXY8Reh2MNcDUO6TSyLBVNCZDT8axL+XOWQIFHVjqQujEm
+ ioT/CWZgZllW1S1Tp/SEFbUVkdDrK5jqxOSYep+NUz3hgzFJzc507Sy5L47z14ZmSnxS
+ D/d2HqePpHuUucrYbt5HLQeXZQ8T/9PD/9T9hSMuffoIqDzERGlIfqxZ2+nP+iHl53ki
+ +VXBGBx+LKHgfTZBTEj1Xc8LQHqgX7TNtDom6Ug7zVmkHsvwxAfGvLbrDaO/nPg3C1cC
+ +xsdAhGefegzO1lZXsyPtHwu7Q3nlRNAadIZvmO7lfc95kHotHPbmLCyzk2otzTpPrK+
+ kYVw==
+X-Gm-Message-State: AO0yUKVFy6TBCQis7PyDAICoPZbX4hJipiFPnRah8mRTNpgNqF5s4fzI
+ 1Yj287HbQ4DOAoD/xeA27Sc8B2/DOnv6TbWyxxDnvgsGidt//q97lsuwyw==
+X-Google-Smtp-Source: AK7set8FY4kidMLcJTLzqVixKSp71xozHHGz02w/bH2cKpPgLnYQcPtQ228yTXe0JnB7Z7Ny7xjW7iYRHd4Vq0VXDvo=
+X-Received: by 2002:a62:8787:0:b0:5aa:72b4:2fe1 with SMTP id
+ i129-20020a628787000000b005aa72b42fe1mr7794898pfe.1.1678284349756; Wed, 08
+ Mar 2023 06:05:49 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Content-Language: en-US
-To: Andrew Walker <awalker@ixsystems.com>
-Subject: Status of openat2() RESOLVE_NO_SYMLINKS on FreeBSD
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------aGgjOYXHyy0DLydoiDGdkKxf"
+References: <ce3c72ee-b260-5913-e732-755281476aa1@samba.org>
+In-Reply-To: <ce3c72ee-b260-5913-e732-755281476aa1@samba.org>
+Date: Wed, 8 Mar 2023 09:05:38 -0500
+Message-ID: <CAB5c7xqb3peqrnbUdqWj9ba5Dr2Whz8ZiANJKHWYZpfbvMx_JQ@mail.gmail.com>
+Subject: Re: Status of openat2() RESOLVE_NO_SYMLINKS on FreeBSD
+To: Ralph Boehme <slow@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,68 +85,46 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Ralph Boehme <slow@samba.org>
-Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Walker <awalker@ixsystems.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------aGgjOYXHyy0DLydoiDGdkKxf
-Content-Type: multipart/mixed; boundary="------------VL8cWdYrUbJyAYogShYA9Q9c";
- protected-headers="v1"
-From: Ralph Boehme <slow@samba.org>
-To: Andrew Walker <awalker@ixsystems.com>
-Cc: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
-Message-ID: <ce3c72ee-b260-5913-e732-755281476aa1@samba.org>
-Subject: Status of openat2() RESOLVE_NO_SYMLINKS on FreeBSD
+On Wed, Mar 8, 2023 at 8:48=E2=80=AFAM Ralph Boehme <slow@samba.org> wrote:
+>
+> Hi Andrew!
+>
+> Do you, or anyone else, remember the status of using an analogue to
+> Linux openat2() RESOLVE_NO_SYMLINKS on FreeBSD?
+>
+> In case you don't remember (iirc we've discussed this before) openat2()
+> RESOLVE_NO_SYMLINKS on Linux allows atomically checking a multicomponent
+> path for symlinks which avoids doing the work manually per-component in
+> Samba, which is a performance hog.
+>
+> I see FreeBSD openat() has O_RESOLVE_BENEATH and you were talking about
+> adding support here
+>
+> <https://www.truenas.com/community/threads/truenas-13-0-beta-experiences.=
+98936/page-2#post-685088>
+>
+> I see a bunch of MRs in the work from you on gitlab:
+>
+> <https://gitlab.com/samba-team/samba/-/merge_requests?scope=3Dall&state=
+=3Dopened&author_username=3Danodos325>
+>
+> But none of them seems to be about this particular issue.
+>
+> -slow
+>
+> --
+> Ralph Boehme, Samba Team                 https://samba.org/
+> SerNet Samba Team Lead      https://sernet.de/en/team-samba
+> SAMBA+ Samba packages                   https://samba.plus/
 
---------------VL8cWdYrUbJyAYogShYA9Q9c
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-
-SGkgQW5kcmV3IQ0KDQpEbyB5b3UsIG9yIGFueW9uZSBlbHNlLCByZW1lbWJlciB0aGUgc3Rh
-dHVzIG9mIHVzaW5nIGFuIGFuYWxvZ3VlIHRvIA0KTGludXggb3BlbmF0MigpIFJFU09MVkVf
-Tk9fU1lNTElOS1Mgb24gRnJlZUJTRD8NCg0KSW4gY2FzZSB5b3UgZG9uJ3QgcmVtZW1iZXIg
-KGlpcmMgd2UndmUgZGlzY3Vzc2VkIHRoaXMgYmVmb3JlKSBvcGVuYXQyKCkgDQpSRVNPTFZF
-X05PX1NZTUxJTktTIG9uIExpbnV4IGFsbG93cyBhdG9taWNhbGx5IGNoZWNraW5nIGEgbXVs
-dGljb21wb25lbnQgDQpwYXRoIGZvciBzeW1saW5rcyB3aGljaCBhdm9pZHMgZG9pbmcgdGhl
-IHdvcmsgbWFudWFsbHkgcGVyLWNvbXBvbmVudCBpbiANClNhbWJhLCB3aGljaCBpcyBhIHBl
-cmZvcm1hbmNlIGhvZy4NCg0KSSBzZWUgRnJlZUJTRCBvcGVuYXQoKSBoYXMgT19SRVNPTFZF
-X0JFTkVBVEggYW5kIHlvdSB3ZXJlIHRhbGtpbmcgYWJvdXQgDQphZGRpbmcgc3VwcG9ydCBo
-ZXJlDQoNCjxodHRwczovL3d3dy50cnVlbmFzLmNvbS9jb21tdW5pdHkvdGhyZWFkcy90cnVl
-bmFzLTEzLTAtYmV0YS1leHBlcmllbmNlcy45ODkzNi9wYWdlLTIjcG9zdC02ODUwODg+DQoN
-Ckkgc2VlIGEgYnVuY2ggb2YgTVJzIGluIHRoZSB3b3JrIGZyb20geW91IG9uIGdpdGxhYjoN
-Cg0KPGh0dHBzOi8vZ2l0bGFiLmNvbS9zYW1iYS10ZWFtL3NhbWJhLy0vbWVyZ2VfcmVxdWVz
-dHM/c2NvcGU9YWxsJnN0YXRlPW9wZW5lZCZhdXRob3JfdXNlcm5hbWU9YW5vZG9zMzI1Pg0K
-DQpCdXQgbm9uZSBvZiB0aGVtIHNlZW1zIHRvIGJlIGFib3V0IHRoaXMgcGFydGljdWxhciBp
-c3N1ZS4NCg0KLXNsb3cNCg0KLS0gDQpSYWxwaCBCb2VobWUsIFNhbWJhIFRlYW0gICAgICAg
-ICAgICAgICAgIGh0dHBzOi8vc2FtYmEub3JnLw0KU2VyTmV0IFNhbWJhIFRlYW0gTGVhZCAg
-ICAgIGh0dHBzOi8vc2VybmV0LmRlL2VuL3RlYW0tc2FtYmENClNBTUJBKyBTYW1iYSBwYWNr
-YWdlcyAgICAgICAgICAgICAgICAgICBodHRwczovL3NhbWJhLnBsdXMvDQo=
-
---------------VL8cWdYrUbJyAYogShYA9Q9c--
-
---------------aGgjOYXHyy0DLydoiDGdkKxf
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmQIkhsFAwAAAAAACgkQqh6bcSY5nkYD
-mA/7B+7KJFlXB4WAthSiS/5KPsIXTj8ulOzSlRoVceJo777tuLyJjU2HK+W0m88mUl3TMx1FVI4R
-3ePbLXIbCYFOHbgsGY8D/Jg7KYYhHUrhxuvs+HwNI7kSsplu/qMhbKGps31WlvN+XN5Z/EQti9BH
-NbVOYHW3I4wjbl/6TX7mtiuU1V7pXcnVbDQ5PwXGa6rjQaMgjCDSPnZOeh9DhUNJvAxCgn1lo/61
-UopvcwNJd/GlkG5vKKw2dHI8KyeXOxtw5cvROHD/aLE1VSpMN8/n8zeXVjzYm3HGUTrCjo23qg++
-2NZ0fC8YkKjtE9dL26BgK5Li56RWU6wK9a+wR1j52mzedz3x6AFZ7VYfgskfgeASthIlzVHFNQ65
-2GgRex/tU7McMvI35kLgZ2kwoU0losOInAgUymYCLN6knWCYFkCAIniz9idYcun5kIUqEptA/FBT
-W82at78pF0SCW64RzCFp+nzeiZrFzffUYARn2kGVuJby2/koYNxEVcR8Rt5HCGlRFonZiqi2yyGi
-CnHIdP1U4GltML0VACoR/NF8G8Cqs4LaYarPqGMejKV+mdUqdLemBDHI1fpIRnbjFnOK7KAHajff
-AqkxhdJOKQaXWoiH9qjwDp3uQVURdsRa3ajyIeGO70zj8ULiVBA2NG3HUidIdoaQQ3bH5a75xFOZ
-zpM=
-=37UR
------END PGP SIGNATURE-----
-
---------------aGgjOYXHyy0DLydoiDGdkKxf--
+I have a WIP branch to add RESOLVE_NO_SYMLINKS here:
+https://github.com/truenas/os/pull/256
+This week I'm planning to go through investigation of Samba 4.18 on
+FreeBSD and validate that the flag works as expected. Then I'll begin
+socializing it with upstream FreeBSD.
 
