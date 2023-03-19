@@ -2,61 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 379D26BFFDD
-	for <lists+samba-technical@lfdr.de>; Sun, 19 Mar 2023 08:50:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4FF46BFFE4
+	for <lists+samba-technical@lfdr.de>; Sun, 19 Mar 2023 08:52:19 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=DfCXs3jd/fVqkTus8Pi6Nu+pm+O0Dmzny6mAmb0ShWA=; b=dHwKb3fKsXF9ITH4b0ij79LguG
-	DH00ltqHWbSJ0402JxCtRMIbWs5OCt1Rjw4ffTN50hpbKa/cljcL2x0RDPU1LB4w6VowtCAAO+dDv
-	NNfXxPqXj2ZWvuGO2VhdF/n+i7zgR3WxjhQE9xVIvihIWTxkQC7foX/cQvvnf8h5uEVQaUcr192SY
-	4F1cyyOAA+JHyFqEJPZZ1lypWQRyFMDiN80KTs4dVuWpgGs0ms9ElgtJMLNBBY98f66UEKDBE2LWe
-	9SnS60+O3XQ86jkYuBUw3iduVt5pRZ0jsOFo1BPOv+2a71Li5OQymxsRM8gX3Ey3hHrJOmS8I1Q0x
-	dkQv+4aQ==;
-Received: from ip6-localhost ([::1]:26438 helo=hr1.samba.org) 
+	bh=0sxgEKl/8jxc1UO4e9g+PLQC8j3DZwT5u1Pxqmnr5Bc=; b=foFGimpjT0NIQEAFXV2sbYZVd2
+	skUkkOfyLCFBL6tfA0C3zCbiJ707tQ+wdoAlvYf5FkINtuwWlD4bo+1kXELewxpHbXuTRsxUYhFbR
+	eOm+gxIrEskS/xGBwPhG+d2p4dpQSSEWNiL+kZ4J2TolnD55/FV6trtB5idFbD6jF6NXRNXYLjrlp
+	YOb6QKwDWbGU6e66RQ4cGc2MQGYn68h4yY3fnu2+LnmMisYhb5m3/yDW/9Bnx63dkzNeiuJ8xRJWy
+	WR8Xb9C0ylUTfOUZWf3WFwf6L334TFAZv621+QcYsDi2K0i4i+Na6rfO3d9qrL4jLhuN0Q4MEcIAf
+	xr5ObAxg==;
+Received: from ip6-localhost ([::1]:57174 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pdnnQ-003M1n-9q; Sun, 19 Mar 2023 07:49:40 +0000
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531]:46860) 
+	id 1pdnpv-003MJQ-DA; Sun, 19 Mar 2023 07:52:15 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:46652) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pdnnI-003M1b-Pu; Sun, 19 Mar 2023 07:49:35 +0000
-Received: by mail-ed1-x531.google.com with SMTP id eg48so35471618edb.13;
- Sun, 19 Mar 2023 00:49:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1679212168;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DfCXs3jd/fVqkTus8Pi6Nu+pm+O0Dmzny6mAmb0ShWA=;
- b=muoSJYyfV5GAamJzIp0fdFZZ4OFafgNsM0pobqGWpzJ1aIOeN12r62toRhgEK50nQc
- D7ePG3i36ZgR/UsD+5PIVnsgvDhV/W0kU/K5V+pY1ZuXrdjP0zu7VQ4WOH0iTEKPXrVV
- KRnelOyKqxFhpD0EtaD92mh2TGOe/FYSsvdxfiJJ7mw4ZPX3PwAz+uWigj1uwhHbjTto
- r0I8HUQ83IggpdrOO9v+2+r4X/wvpaYbAuncgJ2DxEjXKnsTyrN6saBmR2MffAGgIgEG
- rP+6orssMCtzlplxvCeFf7vfTnAnYQYjmbkEQLYvc8a3K9ymWPTZKax5ivMJ3oynjClH
- msNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679212168;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DfCXs3jd/fVqkTus8Pi6Nu+pm+O0Dmzny6mAmb0ShWA=;
- b=1EVBmx3H+pwLtadmsoH1WFhCpEuWA1csLTzgDYmGD2PLr4ycrhlaqKBDyScAP7LUVK
- Rx8QE9fuqGOTVzBz8AC5qbDbMKoKKs/k/LOKdjc82JVzotXLRWzunLBWPj/uqbya0/rc
- 6ziRvGjzMqIflxNFfvlqo1eu0U+fxgxY5aTznzOtffCycBxmIo6Bj5MEFyEJ/8PVJeeD
- SXTs/LhRZsOh/HOetHog6aOKVPFn184EQp6NPGrJQdIyzC4gPTebTI6IXIuRDtvjWuc/
- AAIuY/DGekgV3uZVWD4K2cJIB5WjLzumChCC6lvRnSzuGS1rUf4wklYgJBlpJOoPlHzx
- El1w==
-X-Gm-Message-State: AO0yUKVOnAprRmkMO7gAzsABsOMN3IlpSZz6fDu6l6uT+DgvDsPQmc4o
- gz/nTsucNXaa0TxXNDwk2V56MA0YGddGrKfgeud3gT+C
-X-Google-Smtp-Source: AK7set8RiAnRLC/2XgT8lapT63WOCClL3b1uNNT1CXSyO34GbIs8+Q2CDIej4ChKTzA8wSJEl1dc/2GKuoyMKdeZovQ=
-X-Received: by 2002:a17:906:228b:b0:931:6921:bdbb with SMTP id
- p11-20020a170906228b00b009316921bdbbmr1962295eja.2.1679212168080; Sun, 19 Mar
- 2023 00:49:28 -0700 (PDT)
+ (Exim) id 1pdnpq-003MJH-74
+ for samba-technical@lists.samba.org; Sun, 19 Mar 2023 07:52:12 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=0sxgEKl/8jxc1UO4e9g+PLQC8j3DZwT5u1Pxqmnr5Bc=; b=kYPsVMIhutnhWlv/h0ErlvupaD
+ +2kYfA3yZaDohF3B6Evx0BYqZyVSOXFmyxVhR7hGp6wubivHT2naXZukkkPEGp1Ab1uhA6xx3gs9Y
+ +Cd+QtkAuH4S4MZb5jdVc0wakEBxxvvx+MCM42kq3Z5DcNvP3WGNwFPvsd5xh+Tb/AEO4R/H+pqWs
+ 8nxWVtGySpV6tVujDd8H8rmpOyYwIhaH93HanmQRj3YaWPAu4Gd1eezuWzwwFJZEbmtVjvhxmeifL
+ OzMGs5qoe2x6466IXljqhqa69GOEuLaNxbgd/X2l34fyuVrlFJmISnzCwSM5waHwWSZ7lXsT3JG5O
+ bourh/jFy8pD5FyEYHU0XJPqs37Ff3862kdAmlGi/dw7IaEkxowVU60DcJvn+c7ko4ej8tud0qyAL
+ AkjItOhgcaSOUDFLWRd9xwqoMVda04+dVqJaEpiypQK1hZ1341H5TeqlaaddDJqkZMe8xxoArN6Gp
+ +P7qSxc5se6MQ+iwsdj4vReo;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pdnpp-004AvP-LC
+ for samba-technical@lists.samba.org; Sun, 19 Mar 2023 07:52:09 +0000
+Message-ID: <31194bd0-05a5-9549-5b6c-ef37bd5d5c17@samba.org>
+Date: Sun, 19 Mar 2023 07:52:09 +0000
 MIME-Version: 1.0
-References: <c2ed6a14-6555-2f51-5bf4-c984aaa43a64@msgid.tls.msk.ru>
-In-Reply-To: <c2ed6a14-6555-2f51-5bf4-c984aaa43a64@msgid.tls.msk.ru>
-Date: Sun, 19 Mar 2023 17:49:16 +1000
-Message-ID: <CAN05THQ7YotxdgZqAtPkCbERTy_dg0qrnAL9Lqi5W7qoPX2r3Q@mail.gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
 Subject: Re: mit-krb5 and heimdal binaries
-To: Michael Tokarev <mjt@tls.msk.ru>
-Content-Type: text/plain; charset="UTF-8"
+Content-Language: en-GB
+To: samba-technical@lists.samba.org
+References: <c2ed6a14-6555-2f51-5bf4-c984aaa43a64@msgid.tls.msk.ru>
+ <ZBa55+81hGE4QF7k@pinega.vda.li>
+In-Reply-To: <ZBa55+81hGE4QF7k@pinega.vda.li>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,65 +60,104 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: samba@lists.samba.org, samba-technical <samba-technical@lists.samba.org>
+From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
+Reply-To: samba-technical@lists.samba.org
+Cc: Rowland Penny <rpenny@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Kerberos is important.
 
-I think the question is which kerberos implementation has best
-support, has best tooling, has best and prompt responses to CVEs or
-bugs
-and which one is going to be the most common uses by the target audience/users.
-I.e. which one is most mature and will cause the least maintenance
-overhead to the samba devs?
 
-On Sun, 19 Mar 2023 at 16:13, Michael Tokarev via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> Hi!
->
-> I already asked a similar question before, but it keeps popping up in different
-> contexts and forms, and the more I use samba myself, the more often it comes to
-> me too, especially in context of using various security tokens for auth.  And the
-> more I think about all this, the more sane it looks to me.
->
-> The thing is: mit-krb5 has much better user-level support than heimdal. But samba
-> does not fully support mit-krb5 as an active directory domain controller.  The
-> AD-DC thing is server-side.
->
-> I can think of providing two builds of samba for a distribution (eg debian/ubuntu), -
-> one implementing whole ad-dc, as a complete thing, using their own set of libs,
-> linked with heimdal. And a usual set of more client-side packages, with their own
-> libraries, built against mit-krb5.  Or maybe some other combination also has its
-> right to be, - for example, smbclient built with mit-krb5, the rest is heimdal.
->
-> An essential part of this is that the two sets (built against mit-krb5 and heimdal)
-> do not share any internal libraries, each has its own libraries. This way, there's
-> no "mix" of differently built samba, each build uses only its own libs, so there's
-> no clash here.  They share the same smb.conf though.
->
-> So far, I've seen requests to build two versions of the server (again, with mit-krb5
-> and with heimdal), - and I faced the same issues too.  This is because a regular AD
-> member server is also good to have mit-krb5 support to integrate nicely into the auth
-> infrastructure. While for ad-dc, it is less often used as "end-user" server.
->
-> So I can think of a separate samba-ad-dc binary package providing whole samba suite
-> built against heimdal (maybe without smbclient and some other minor things), and
-> samba "file server" binary package providing regular server not suitable to use as
-> an ad-dc, but conflicting with samba-ad-dc, so it is not possible to install one
-> together with another.
->
-> This approach also has another good side effect, to discourage usage of samba-ad-dc
-> as a regular file server.
->
-> Or maybe the whole thing is moot now, and we just can provide regular samba built
-> against mit-krb5 to work as a good AD-DC?  That would be the best solution IMHO.
->
-> Thanks,
->
-> /mjt
->
+On 19/03/2023 07:29, Alexander Bokovoy via samba-technical wrote:
+> Hi,
+> 
+> On su, 19 maalis 2023, Michael Tokarev via samba-technical wrote:
+>> Hi!
+>>
+>> I already asked a similar question before, but it keeps popping up in different
+>> contexts and forms, and the more I use samba myself, the more often it comes to
+>> me too, especially in context of using various security tokens for auth.  And the
+>> more I think about all this, the more sane it looks to me.
+>>
+>> The thing is: mit-krb5 has much better user-level support than heimdal. But samba
+>> does not fully support mit-krb5 as an active directory domain controller.  The
+>> AD-DC thing is server-side.
+>>
+>> I can think of providing two builds of samba for a distribution (eg debian/ubuntu), -
+>> one implementing whole ad-dc, as a complete thing, using their own set of libs,
+>> linked with heimdal. And a usual set of more client-side packages, with their own
+>> libraries, built against mit-krb5.  Or maybe some other combination also has its
+>> right to be, - for example, smbclient built with mit-krb5, the rest is heimdal.
+>>
+>> An essential part of this is that the two sets (built against mit-krb5 and heimdal)
+>> do not share any internal libraries, each has its own libraries. This way, there's
+>> no "mix" of differently built samba, each build uses only its own libs, so there's
+>> no clash here.  They share the same smb.conf though.
+>>
+>> So far, I've seen requests to build two versions of the server (again, with mit-krb5
+>> and with heimdal), - and I faced the same issues too.  This is because a regular AD
+>> member server is also good to have mit-krb5 support to integrate nicely into the auth
+>> infrastructure. While for ad-dc, it is less often used as "end-user" server.
+>>
+>> So I can think of a separate samba-ad-dc binary package providing whole samba suite
+>> built against heimdal (maybe without smbclient and some other minor things), and
+>> samba "file server" binary package providing regular server not suitable to use as
+>> an ad-dc, but conflicting with samba-ad-dc, so it is not possible to install one
+>> together with another.
+>>
+>> This approach also has another good side effect, to discourage usage of samba-ad-dc
+>> as a regular file server.
+>>
+>> Or maybe the whole thing is moot now, and we just can provide regular samba built
+>> against mit-krb5 to work as a good AD-DC?  That would be the best solution IMHO.
+> 
+> I would be against a blended build against both MIT Kerberos and Heimdal
+> Kerberos in a distribution. It is not going to bring you anything good,
+> support wise.
+> 
+> Andreas and I have submitted a talk to SambaXP about MIT
+> Kerberos/Heimdal Kerberos-based Samba AD DC configurations, where they
+> stand against each other and what are perspectives. In short, both have
+> unique features that do not exist in the other variant and both are
+> close to being production-ready. We want to change the status for MIT
+> Kerberos-based build from experimental to production. Effectively,
+> actual decision for a version shipped in a particular distribution would
+> need to be made by that distribution, of course.
+
+I do not think this is a good idea, Samba should use one or the other, 
+not both. If you do use both, to a certain extent you will nearly double 
+the support required.
+
+> 
+> Distributions need to take into account security releases, as Rowland
+> has pointed out as well. However, from my Fedora and RHEL experience,
+> this is not a problem with MIT Kerberos -- certainly not more than with
+> Heimdal. It is pretty much a coordination question and I believe we have
+> very good coordination on that front with MIT Kerberos and distribution
+> maintainers.
+
+That is strange, from what Andrew wrote, he appears to think the opposite.
+
+> 
+> If I was in Samba AD support for production deployments, I'd probably
+> go with deploying DCs in a containerized image way to isolate completely
+> from the rest of the OS. There are few images already that provide this
+> setup: [1] was presented at SambaXP by Michael Adam and other folks now
+> from IBM Storage, [2] is older and also active one.
+> 
+> [1] https://github.com/samba-in-kubernetes/samba-container
+> [2] https://github.com/instantlinux/docker-tools/tree/main/images/samba-dc
+> 
+
+I personally have no axe to grind over the matter, I do not care which 
+kdc is used, just as long as it is only one, if only from the support 
+point of view.
+I also only say that using MIT is experimental because other wiser (at 
+least I hope they are wiser than me) people say it is, if this changes 
+then so be it.
+
+I still do not think it is a good idea for a distro to provide two 
+versions of Samba, one using Heimdal and the other using MIT.
+
+Rowland
 
