@@ -2,40 +2,40 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E81A6C0032
-	for <lists+samba-technical@lfdr.de>; Sun, 19 Mar 2023 09:52:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AF0B6C0033
+	for <lists+samba-technical@lfdr.de>; Sun, 19 Mar 2023 09:57:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=aucNPLHy7bCpgBNQggN9GwvoO7LCqUlINNqVY7xET1M=; b=f7ZeKDLViVAN7uLT4XzSYi0iUk
-	OxtrTvCWqQMmgfqty47fCGKuvREOaXOesSgbrcFBFgbBgH74gPZithFFEPQIiOYH5c/c++8GLkwsr
-	lGuTfgowMMgPKcmmI7wja0V47STm/47H6dqz4xK4V/o1+XCDlScIw26JqjC2eN/IJpy1JeSFfyNr9
-	8RnMKPNlxZBeMfpjNYvvjmHLy6C6+1KKxMkbGJUy3BkrLYXXrIowqHqbj9UHS9v5dgFBT3qKX5/Ww
-	FeB5NmvwrCnuQC9U1uFJeKjIOF+qbee4apwYELO5esIXb+5RbRo10RZPrWKP9ts/TnG+S74cvAxA1
-	e+aIxm/g==;
-Received: from ip6-localhost ([::1]:31396 helo=hr1.samba.org) 
+	bh=uGngOeROfYnY2g6f6DWwelPjsvTJsIfpTxzX+G9E1k8=; b=UuO49NgAR6lNNZhyqflEa6Ncg9
+	GPtw8FpQwBohTbZalUORUOF483B25MdbkP64FKuPNyg2cPzFeR0J3GxeYliInZaixyraitG+kMlHj
+	hG/+cFJckcEGYgQymlt+zqQP7PPwCkLgcVXTUcdQ/a3n/Q0bPE1BLiAK9/LYRiROPmgg/jrAHGNJx
+	QrVYQjS7KB7bU3XE0pedX4U379bbS+uMse20d9vWOA476d5lE7TQFtPtMVZULOpC/M1NrdXW0C8I0
+	3Yu4svcyYRLXAr17okqTMgAOspCyHtcPFq5vnIE/fyfz2pB6U8ZVRvKDScwv2xtCh6Mf0GU2oPome
+	hFCE8N5g==;
+Received: from ip6-localhost ([::1]:56876 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pdold-003NH6-45; Sun, 19 Mar 2023 08:51:53 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62756) 
+	id 1pdoqY-003NYh-MS; Sun, 19 Mar 2023 08:56:58 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:44908) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pdolW-003NGx-4G
- for samba-technical@lists.samba.org; Sun, 19 Mar 2023 08:51:50 +0000
+ (Exim) id 1pdoqT-003NYY-Er
+ for samba-technical@lists.samba.org; Sun, 19 Mar 2023 08:56:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=aucNPLHy7bCpgBNQggN9GwvoO7LCqUlINNqVY7xET1M=; b=nuT2q4zhz62UhiVOrt8//9mZFK
- uIuNq7mQXA5wAkxuweb3V8O0w+/jZEyurHpSA84oEo+d/NI6wEweBlnIsqw9ZvpSEn7MXZTvBRRED
- ITbQdsdkmwVlVct24oaM44xqta+0wSo06j3iruXwJ2frVZEf0xSunOZ60vDZZ6ObyYHfdyUjaJJnV
- oTprxnPZQf17hj5fIRIJv3Ql7ghkOmTSJGxSDniyH82MP0VSZNFuAM3Kj6X8BCbaj1vfAQb76an4a
- ShFTKLFF1zB1DfpH5/JIdX1yDl+4Y9g2bVkKvO4FaNXnCm+SsGYcn0MbgVvPiaKrH1oaDHcGBc36A
- hD2tQElSO7v9rBga5Ve4b6A2c22ozlzd3lCHfCpxIcx4fqVUroXff5Cju/3YlcWny6mGHVxHjV8Mj
- De5VouD5CN5iqHD9BTqGwSC1z1BEEpMSdR3BVfSzSNKHyIG+DQ8kkzOIABZVLf8q7a9awClLVltuI
- tp/jWD83b0QPNkuuBIqfKV5G;
+ bh=uGngOeROfYnY2g6f6DWwelPjsvTJsIfpTxzX+G9E1k8=; b=DNuUHHnO0oUxYhU1B15MztRWCY
+ +U+nKUBWdB2w+iHtX/c8zi+78KIptUZqAwaRcUkYApKJIkeim/gUPtqZl1arM/bf7tc2aMyM/mUvb
+ beRhrYXLWtznWv0tduiYGgsb20UuUs3PxggN9cau3c+SeTl2dUgl2jajoa6eZcTLTquTnoEmNk7VX
+ d47BYjTF+2LPCSg1k0swfUKBrItiDm/Sr0cpCNFov82kk5cqQLgwGJdfB7Rh5zNVtOYEayrjkCOLM
+ mkej1gtRFII4Jj278Gapz5dGtAJPhSkzHt3LeLyoe6xy11c0o2l0oP3/giYMeIE2uG37/lFT3BZT8
+ +7BuI/69GB5Arl5pySwXaiKoEFMAZQFQn9XyPaHizNKD/p4mNbcRA4CKiNpeKf78ogAIgjeKb/UD/
+ HXrPVuFQNXSDGg1CgKO3RpNFEEvoni2rX+olh1JNTleZqRA2Hy01ZxYf9S9TPg65zVl1CfpeqYbnd
+ AUSqoGUWXcXXIhiBHOm5VuKD;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pdolV-004BNd-GA
- for samba-technical@lists.samba.org; Sun, 19 Mar 2023 08:51:45 +0000
-Message-ID: <1c92a10c-d23e-59e1-f2fe-ba4054418b67@samba.org>
-Date: Sun, 19 Mar 2023 08:51:45 +0000
+ (Exim) id 1pdoqS-004BRm-K0
+ for samba-technical@lists.samba.org; Sun, 19 Mar 2023 08:56:52 +0000
+Message-ID: <fc2818e4-cf75-1252-4d8d-8965ab2e6039@samba.org>
+Date: Sun, 19 Mar 2023 08:56:52 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
@@ -44,9 +44,9 @@ Content-Language: en-GB
 References: <c2ed6a14-6555-2f51-5bf4-c984aaa43a64@msgid.tls.msk.ru>
  <ZBa55+81hGE4QF7k@pinega.vda.li>
  <31194bd0-05a5-9549-5b6c-ef37bd5d5c17@samba.org>
- <CAN05THRpJu92-viS-kbJr1F_hoQP94VPnWTzcy3+1s4j_kup-w@mail.gmail.com>
+ <ZBbC2rDQ5eMwkBVO@pinega.vda.li>
 To: samba-technical@lists.samba.org
-In-Reply-To: <CAN05THRpJu92-viS-kbJr1F_hoQP94VPnWTzcy3+1s4j_kup-w@mail.gmail.com>
+In-Reply-To: <ZBbC2rDQ5eMwkBVO@pinega.vda.li>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
@@ -70,10 +70,8 @@ Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
 
 
-On 19/03/2023 08:04, ronnie sahlberg wrote:
-> On Sun, 19 Mar 2023 at 17:52, Rowland Penny via samba-technical
-> <samba-technical@lists.samba.org> wrote:
->>
+On 19/03/2023 08:07, Alexander Bokovoy wrote:
+> On su, 19 maalis 2023, Rowland Penny via samba-technical wrote:
 >>
 >>
 >> On 19/03/2023 07:29, Alexander Bokovoy via samba-technical wrote:
@@ -132,9 +130,13 @@ On 19/03/2023 08:04, ronnie sahlberg wrote:
 >>> actual decision for a version shipped in a particular distribution would
 >>> need to be made by that distribution, of course.
 >>
->> I do not think this is a good idea, Samba should use one or the other,
->> not both. If you do use both, to a certain extent you will nearly double
->> the support required.
+>> I do not think this is a good idea, Samba should use one or the other, not
+>> both. If you do use both, to a certain extent you will nearly double the
+>> support required.
+> 
+> I did say exactly that: I am against blended build. Not sure what made
+> you think otherwise.
+> 
 >>
 >>>
 >>> Distributions need to take into account security releases, as Rowland
@@ -145,7 +147,14 @@ On 19/03/2023 08:04, ronnie sahlberg wrote:
 >>> maintainers.
 >>
 >> That is strange, from what Andrew wrote, he appears to think the opposite.
->>
+> 
+> I am one of developers and one of maintainers for both Samba and MIT
+> Kerberos in Fedora and RHEL (as well as few other relevant projects). I
+> personally see no issues with MIT Kerberos upstream collaboration.
+> Things get discussed and fixed when needed, contributions get accepted.
+> Our willingness to move Samba AD/MIT support from experimental forward
+> to supported is based on that factor as well.
+> 
 >>>
 >>> If I was in Samba AD support for production deployments, I'd probably
 >>> go with deploying DCs in a containerized image way to isolate completely
@@ -157,25 +166,28 @@ On 19/03/2023 08:04, ronnie sahlberg wrote:
 >>> [2] https://github.com/instantlinux/docker-tools/tree/main/images/samba-dc
 >>>
 >>
->> I personally have no axe to grind over the matter, I do not care which
->> kdc is used, just as long as it is only one, if only from the support
->> point of view.
->> I also only say that using MIT is experimental because other wiser (at
->> least I hope they are wiser than me) people say it is, if this changes
->> then so be it.
+>> I personally have no axe to grind over the matter, I do not care which kdc
+>> is used, just as long as it is only one, if only from the support point of
+>> view.
+>> I also only say that using MIT is experimental because other wiser (at least
+>> I hope they are wiser than me) people say it is, if this changes then so be
+>> it.
 >>
->> I still do not think it is a good idea for a distro to provide two
->> versions of Samba, one using Heimdal and the other using MIT.
+>> I still do not think it is a good idea for a distro to provide two versions
+>> of Samba, one using Heimdal and the other using MIT.
 > 
-> Distros are always going to ship with MIT as that is the default.
-> Distros might also have to ship Heimdal but that will double the
-> support and maintenance cost
-> of Kerberos support at distros.
-> Forcing distro to ship Heimdal is not a zero-cost decision.
+> Yep. However, tools we have in most distributions allow to provide more
+> flexibility. It all needs maintainers, though. Without maintainers there
+> is just an illusion that someone could depend on a package that is in
+> reality not supported well -- whether it is built with a single scenario
+> in mind or set up to handle multiple approaches.
+> 
 
-That isn't what I said, I said that I do not think it is a good idea for 
-a distro to ship two versions of Samba.
+Alexander, as I said, I do not have an axe to grind in this, if Samba 
+decides to move to MIT, then so be it. You however, do have  an axe to 
+grind, you work for red-hat, who are on record as saying that there will 
+never be an AD DC on RHEL. Are you now saying that, if Samba moves to 
+MIT, there will be ?
 
 Rowland
-
 
