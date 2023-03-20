@@ -2,45 +2,43 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D60E16C1008
-	for <lists+samba-technical@lfdr.de>; Mon, 20 Mar 2023 11:59:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36A986C1E28
+	for <lists+samba-technical@lfdr.de>; Mon, 20 Mar 2023 18:36:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=nWtTiZ1xvvzfr/pUx2sIj03YMpxnqrfcIRY1yC8QSr4=; b=Y2UZJcGAmY8Rml7I565JrOXjqE
-	DN4jN5MpJIh7LSRfP3XZ9EAImRhm8HN+Qxtgd8t0Mp6ubbjkSc64wzqk3VH+dyAHeZu00w1h+KajE
-	n6mrVnbWmLY0SWC1yo3RxtH/9TSMXSHxsSlteR2D/B+6wEDz7onNvUJy3SyDyda4jw6L5ej7ikGKD
-	/8CDXfBJNEaCKIKdaGrBvqmBSXqaWI2OdtIoAJQ+A3dT8GQdxlAx4mvq4EUSxil49HYkPaRiDO3cO
-	UFjrYzcqtdneDYgJEwyI8xmvV0GjENA8pGjkTAY4O7WSvNgv+VuYsjFsaOTFykuPPRT4PKwq2Y019
-	44IZBnXQ==;
-Received: from ip6-localhost ([::1]:58968 helo=hr1.samba.org) 
+	bh=AfiMAQmxO8Pm+MVTNQs9amSfjK7bj2zBT5OnJinIFWY=; b=YOQ5Cgq8n9sYmub3hc2W03s5st
+	zidaXEAJtdHTVbiG7PUTbsyAkFBOLB2eNWPuywydNgg7tvth/z8HF/7wZI8hEdjeeYq/UfKqJ+Zxl
+	/Nuw+pslrYY7c4OA1ntRV8M3krzRfTe5EgJqj1S4gfsiwvtslWt276E+EJXnjNS7b1Q+7Rl9wuWzR
+	lZ+QsPzLNbKzdRtRrKKqdAp6O5C2xOOIAjZ10ZlLw+aYj64aYUzzePhzRwwG2OBUf2x1mEUXxUkMK
+	NVVl/68VTho5w/4wiOa3uHYxLVlSCoFTkeh95G3zvz1pUeTMXH+U+Jzoqsy04wHGbwAZT49SYOWDB
+	3vwP032Q==;
+Received: from ip6-localhost ([::1]:23626 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1peDEg-003Xzn-AP; Mon, 20 Mar 2023 10:59:30 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16034) 
+	id 1peJQ5-003fBu-O1; Mon, 20 Mar 2023 17:35:41 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11070) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1peDEa-003Xze-O9
- for samba-technical@lists.samba.org; Mon, 20 Mar 2023 10:59:27 +0000
+ (Exim) id 1peJPz-003fBl-OH
+ for samba-technical@lists.samba.org; Mon, 20 Mar 2023 17:35:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=Message-ID:Date:Cc:To:From;
- bh=nWtTiZ1xvvzfr/pUx2sIj03YMpxnqrfcIRY1yC8QSr4=; b=FBP6xqYkwM/0/5oD/so2x+7Hl9
- +vrCWEOvM5DoPGSUSb7sWasLl4CV7OU4yHXePlHdyfKRzri3US+i7r7fTz1aykXsKJooEcOKqafYG
- F7SHfurKAVJpAPyXGj5v/DIK8TCHBhxNpsui8fTFLoihRfSzcidWKqvKCBREXwIXRPiwJzB9eM2ZT
- oVloBmR5U314dy5inRDm3mtFw+qF8y2SQNp/UI/mrl96w1RNwhKAh/HWQGjDa8Q4TixPWzFaAqvJr
- bOarMeGFXyDb5l+uvG4tUaZB0L4XdOjTeEmhzAWajo9/8EfUH2UBDe1TW/LZZfeAyagay+LuU2Yc3
- KCwOMAc0+U1Ko/e/d3GfsA5TVHhYpzdkqJZf9X6if0yGsXvLe0MEjqPqn7y+Rqnw9/3lYPq43/gVO
- RmOijYKeTSVdFzdB28kn4BDG5Idps2P9RFiVn17sJTXttZ9GtexBH7kiSCh0vu76twZ/BZGQv0ZtG
- VwMCAh3o05cYMu6p26XhVAmI;
+ bh=AfiMAQmxO8Pm+MVTNQs9amSfjK7bj2zBT5OnJinIFWY=; b=QVoaGXKSAmMVk6If+5sE2FZImc
+ ArU0J5HJhAx3RP9twLpNa8SC98uchSVfVNqKNmxso77TenYITIMk+JpWd8Z/Rp4XYwSx08T63kJp0
+ y1xVY8QQl45ZvKQBCWuvJJwpafcTZc7m1QrlPveFofh4U/uiJQmmo2eUSoTQcjqlD1LDgpdk6MMWa
+ WWVlmwGwu1feKXenzNy+KJE938XLJ1L9vXGWFXmYP6XxhZfYw08jQ4a7ZHUE56CM01Yb3F/RYI2y5
+ Vz9FfJ2ZH1kD82kmP5Qq2/w0CY4yxeEk3H+bt1wwPuplf8CLcixQ0QDfTzf6O/MZBofcLzxZ4joyI
+ E6+nDwk80NcZbyfPlhvG6A9Srwwc8g3HTCWwbOIesmMy83aK72FiWVBljV5LJgyCr7BnHYXPscXsP
+ 2286chqyeTvRtd0n5brCiuCX9lKzxaoqQGOkK7IjsLZwT9jhgT3vglBbDy+aDStSDjjHsGQJgHtDX
+ 5Fi8bpzfy0Z0yl07uyhw8Gq1;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1peDEZ-004PR1-Gc; Mon, 20 Mar 2023 10:59:23 +0000
+ (Exim) id 1peJPy-004TVf-SR; Mon, 20 Mar 2023 17:35:34 +0000
 To: samba-technical@lists.samba.org
-Subject: Re: mit-krb5 and heimdal binaries
-Date: Mon, 20 Mar 2023 11:59:22 +0100
-Message-ID: <5673079.DvuYhMxLoT@magrathea>
-In-Reply-To: <7d339362-a3f5-f58c-ff74-15c6bf839a65@samba.org>
-References: <c2ed6a14-6555-2f51-5bf4-c984aaa43a64@msgid.tls.msk.ru>
- <ZBgbvnB76vjgkq/B@pinega.vda.li>
- <7d339362-a3f5-f58c-ff74-15c6bf839a65@samba.org>
+Subject: Re: Failing tests on Fedora
+Date: Mon, 20 Mar 2023 18:35:33 +0100
+Message-ID: <2152679.irdbgypaU6@magrathea>
+In-Reply-To: <4782393.GXAFRqVoOG@magrathea>
+References: <4782393.GXAFRqVoOG@magrathea>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
@@ -59,292 +57,62 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
+Cc: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Monday, 20 March 2023 10:30:44 CET Rowland Penny via samba-technical wrote:
-> On 20/03/2023 08:39, Alexander Bokovoy via samba-technical wrote:
-> > Hi,
-> > 
-> > On ma, 20 maalis 2023, Andrew Bartlett wrote:
-> >> On Sun, 2023-03-19 at 09:29 +0200, Alexander Bokovoy via samba-
-> >> 
-> >> technical wrote:
-> >>> Hi,
-> >>> 
-> >>> 
-> >>> I would be against a blended build against both MIT Kerberos and
-> >>> Heimdal
-> >>> Kerberos in a distribution. It is not going to bring you anything
-> >>> good,
-> >>> support wise.
-> >>> 
-> >>> Andreas and I have submitted a talk to SambaXP about MIT
-> >>> Kerberos/Heimdal Kerberos-based Samba AD DC configurations, where
-> >>> they
-> >>> stand against each other and what are perspectives. In short, both
-> >>> have
-> >>> unique features that do not exist in the other variant and both are
-> >>> close to being production-ready. We want to change the status for MIT
-> >>> Kerberos-based build from experimental to production. Effectively,
-> >>> actual decision for a version shipped in a particular distribution
-> >>> would
-> >>> need to be made by that distribution, of course.
-> >>> 
-> >>> Distributions need to take into account security releases, as Rowland
-> >>> has pointed out as well. However, from my Fedora and RHEL experience,
-> >>> this is not a problem with MIT Kerberos -- certainly not more than
-> >>> with
-> >>> Heimdal. It is pretty much a coordination question and I believe we
-> >>> have
-> >>> very good coordination on that front with MIT Kerberos and
-> >>> distribution
-> >>> maintainers.
-> >>> 
-> >>> If I was in Samba AD support for production deployments, I'd probably
-> >>> go with deploying DCs in a containerized image way to isolate
-> >>> completely
-> >>> from the rest of the OS. There are few images already that provide
-> >>> this
-> >>> setup: [1] was presented at SambaXP by Michael Adam and other folks
-> >>> now
-> >>> from IBM Storage, [2] is older and also active one.
-> >>> 
-> >>> [1]
-> >>> https://github.com/samba-in-kubernetes/samba-container
-> >>> 
-> >>> [2]
-> >>> https://github.com/instantlinux/docker-tools/tree/main/images/samba-dc
-> >> 
-> >> Regarding the support and stability of a Samba AD Deployment based on
-> >> MIT Kerberos, given the advances in testing over the past few years, I
-> >> have, in 2023, no major concerns.  The features that are provided work
-> >> and can be expected to operate in production without concern.
-> >> 
-> >> The "experimental" designation is no longer correct, but it is not
-> >> clear to me what different word we should apply instead, the closest I
-> >> can come to is "unsupported".
-> > 
-> > Thanks. It is not 'unsupported', for sure, same way as linking against
-> > system-built Heimdal Kerberos library is not considered 'unsupported'.
-> > 
-> > What should, perhaps, be defined is a matrix of features that are
-> > expected to work. If somebody files a bug against Fedora with Samba
-> > AD/MIT build or Samba upstream with a configuration that is expected to
-> > work, it will be investigated and worked on -- pretty much like we
-> > already do for years. This is definitely not an 'unsupported' state.
-> > Given that Samba Team as the upstream project does not provide
-> > commercial support in itself, this is best we do already. Commercial
-> > support is provided by separate entities and I don't see why MIT
-> > Kerberos build should be treated otherwise.
-> > 
-> > Right now we don't have this formalized in any in-tree document. The
-> > wiki page says
-> > (https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_
-> > Domain_Controller):
-> > 
-> > -----------
-> > 
-> > Samba as an AD DC only supports:
-> >   - The integrated LDAP server as AD back end. For details, see the
-> >   
-> >     frequently asked question (FAQ) Does Samba AD DCs Support OpenLDAP or
-> >     Other LDAP Servers as Back End?
-> >   
-> >   - The Heimdal Kerberos Key Distribution Center (KDC).
-> >   
-> >     Samba provides experimental support for the MIT Kerberos KDC provided
-> >     by your operating system if you run Samba 4.7 or later and has been
-> >     built using the --with-system-mitkrb5 option. In other cases Samba
-> >     uses the Heimdal KDC included in Samba. For further details about
-> >     Samba using the MIT KDC, and why it is experimental see Running a
-> >     Samba AD DC with MIT Kerberos KDC.
-> > 
-> > -----------
-> > 
-> >  From this you don't get any state for system-provided Heimdal Kerberos
-> > 
-> > build as well. There are also no guidelines for distribution maintainers.
-> > 
-> > All this being said purely because we have a space for improvement, not
-> > as a critique only. I can prepare a draft that describes guidelines to
-> > distribution maintainers.
-> > 
-> >> Just as a distribution can and will ship a pre-release version of some
-> >> software, to meet that distributions overall goals, Red Hat is free to
-> >> ship the "experimental" MIT-based Samba AD DC, and provide the security
-> >> support (in particular) for that configuration to its users.  Red Hat
-> >> has the resources and ability to coordinate the release of patched
-> >> Samba and a patched MIT Kerberos simultaneously if required, for
-> >> example.
-> > 
-> > Can we please stop assigning it all to 'Red Hat'? Same way as Canonical
-> > or Catalyst IT are not driving decisions how Debian packaging of Samba
-> > is done, Red Hat as a company is not involved in deciding Fedora's
-> > packaging of Samba. Individuals are. I would prefer if our role would
-> > be reflected in these discussions.
-> > 
-> >> However, things are different upstream.  I would suggest that, while
-> >> vendoring has well documented costs (as seen when we got stuck on 'old
-> >> Heimdal'), the choice to embed an copy of Heimdal has been a
-> >> significant advantage to upstream Samba.
-> > 
-> > So this is an entirely different discussion. You might want to create a
-> > separate thread about it.
-> > 
-> > I am not even contesting the fact that embedded Heimdal usage is there.
-> > When Tridge started Samba 4 work two decades ago, we did not have many
-> > important elements of a rapid collaboration culture we have today.  At
-> > that point it was great that we've got help from Love Astrand to make
-> > Heimdal embeddable and used that to iterate quickly Kerberos
-> > interoperability with Microsoft's Active Directory. At that point both
-> > Heimdal and MIT Kerberos were a lot less active upstreams with regards
-> > to advancing faster that goal. An irony and drama of git invention
-> > should also not be forgotten.
-> > 
-> > It is normal for many upstreams to be able to build against different
-> > versions or implementations of libraries they depend on. Sure, something
-> > is marked as the primary one -- in case of Samba AD I would argue that
-> > the primary supported variant is 'Samba AD built against an embedded
-> > Heimdal Kerberos version'. However, this does not automatically
-> > disqualify 'Samba AD built against a system-provided MIT Kerberos
-> > version' or 'Samba AD built against a system-provided Heimdal Kerberos
-> > version'. Making them supported is a task of the system provider
-> > together with upstream -- to ensure that the specific target is viable
-> > and usable. This is what we do with MIT build in Fedora since 2017 and
-> > will do have a better standing once Fedora 39 is out due to krb5 1.20+
-> > dependency.
-> > 
-> >> As a current example, this is allowing Claims support to be added, with
-> >> the KDC-side changes (to link the device and user) recorded in
-> >> lorikeet-heimdal and proposed upstream but not required to be accepted
-> >> at the time that the patches land in Samba.
-> > 
-> > Is this referencing a work being tracked in
-> > https://gitlab.com/samba-team/devel/lorikeet-heimdal/-/commits/lorikeet-he
-> > imdal-202303200103 ?
-> > 
-> >> Likewise, security releases, which have been a significant burden of
-> >> late, can be made from Samba master and directly consumed by our users.
-> > 
-> > Coordinating between upstreams is the only reasonable way going forward.
-> > There is no way we wouldn't get burned out from vendoring-in everything.
-> > It may work from time to time but a real answer is to build an ecosystem
-> > around the area and deal with it altogether.
-> > 
-> >> I'm very sorry I won't be at SambaXP this year, as I would very much
-> >> like to be part of the conversation around any changes we make here.
-> >> 
-> >> It is not that the the current situation is ideal, but it has come with
-> >> a number of significant advantages.
-> > 
-> > My aim is to not change that but rather enable what has been developed
-> > over years. Current state of claiming 'experimental' has lived itself
-> > out, in my opinion.
-> > 
-> >> In both cases the development process includes tests, and these tests
-> >> are at least initially marked as knownfail for MIT Kerberos.  This is
-> >> not as dire as it seems, because more then 50% of a Samba development
-> >> task is tests, those supporting the MIT KDC are presented with a full
-> >> set of tests and a list of know failures the address.
-> > 
-> > Indeed. For the record, current set of tests not supported by
-> > --with-system-mitkrb5 build:
-> > 
-> > ----------------------------------------
-> > $ cat selftest/skip_mit_kdc
-> > # We do not support RODC yet
-> > .*rodc
-> > .*RODC
-> > ^samba4.ntvfs.cifs.ntlm.base.unlink
-> > ^samba4.ntvfs.cifs.krb5.base.unlink
-> > 
-> > $ cat selftest/knownfail_mit_kdc_1_20
-> > ^samba.tests.krb5.compatability_tests.samba.tests.krb5.compatability_tests
-> > .SimpleKerberosTests.test_mit_pre_1_20_ticket_signature #
-> > # FAST tests
-> > # https://github.com/krb5/krb5/pull/1225#issuecomment-996418770
-> > #
-> > ^samba.tests.krb5.fast_tests.samba.tests.krb5.fast_tests.FAST_Tests.test_f
-> > ast_encrypted_challenge_as_req_self\(
-> > ^samba.tests.krb5.fast_tests.samba.tests.krb5.fast_tests.FAST_Tests.test_
-> > simple_as_req_self\(
-> > ^samba.tests.krb5.fast_tests.samba.tests.krb5.fast_tests.FAST_Tests.test_
-> > simple_as_req_self_pac_request_none\(
-> > ^samba.tests.krb5.fast_tests.samba.tests.krb5.fast_tests.FAST_Tests.test_
-> > simple_as_req_self_pac_request_true\( #
-> > # Claims tests
-> > #
-> > ^samba.tests.krb5.claims_tests.samba.tests.krb5.claims_tests.ClaimsTests.t
-> > est_claims_no_claims_to_self.ad_dc #
-> > # Group tests
-> > #
-> > ^samba.tests.krb5.group_tests.samba.tests.krb5.group_tests.GroupTests.test
-> > _group_domain_local_compression_as_req_to_service.ad_dc
-> > ^samba.tests.krb5.group_tests.samba.tests.krb5.group_tests.GroupTests.tes
-> > t_group_domain_local_no_compression_as_req_to_service.ad_dc
-> > ^samba.tests.krb5.group_tests.samba.tests.krb5.group_tests.GroupTests.tes
-> > t_group_global_as_req_to_service.ad_dc
-> > ^samba.tests.krb5.group_tests.samba.tests.krb5.group_tests.GroupTests.tes
-> > t_group_nested_domain_local_compression_as_req_to_service.ad_dc
-> > ^samba.tests.krb5.group_tests.samba.tests.krb5.group_tests.GroupTests.tes
-> > t_group_nested_domain_local_no_compression_as_req_to_service.ad_dc
-> > ^samba.tests.krb5.group_tests.samba.tests.krb5.group_tests.GroupTests.tes
-> > t_group_nested_universal_compression_as_req_to_service.ad_dc
-> > ^samba.tests.krb5.group_tests.samba.tests.krb5.group_tests.GroupTests.tes
-> > t_group_nested_universal_no_compression_as_req_to_service.ad_dc
-> > ^samba.tests.krb5.group_tests.samba.tests.krb5.group_tests.GroupTests.tes
-> > t_group_primary_domain_local_compression_as_req_to_service.ad_dc
-> > ^samba.tests.krb5.group_tests.samba.tests.krb5.group_tests.GroupTests.tes
-> > t_group_primary_domain_local_no_compression_as_req_to_service.ad_dc
-> > ^samba.tests.krb5.group_tests.samba.tests.krb5.group_tests.GroupTests.tes
-> > t_group_primary_universal_as_req_to_service.ad_dc
-> > ^samba.tests.krb5.group_tests.samba.tests.krb5.group_tests.GroupTests.tes
-> > t_group_universal_as_req_to_service.ad_dc
-> > ----------------------------------------
-> > 
-> > Out of those the FAST tests should be fixed already. This leaves us with
-> > SID compression. Claims work is being done by Joseph right now for
-> > Heimdal KDC. As with the rest, my hope we can reuse a lot of this great
-> > work, like we did in past. SID compression is something I was planning
-> > to look at for MIT Kerberos myself.
-> > 
-> >> However that knownfail listing is the limit that the developers
-> >> providing new Samba AD features and providing the security support are
-> >> expected to provide.
-> >> 
-> >> This last point is critical, as only one of these Kerberos
-> >> implementations is funded, and currently the Kerberos distribution that
-> >> the developers involved are funded to provide is Heimdal.
-> >> 
-> >> This choice may of course change in the future, but as far as I see it
-> >> it will always be one or the other.
-> > 
-> > So far, there is no real aim to drop one Kerberos implementation
-> > upstream and stick to the other one. There is a good distributed effort
-> > to cover both Heimdal and MIT Kerberos across multiple free software
-> > directory services. The most important part is that this effort is used
-> > to improve Kerberos testability and security everywhere, and this means
-> > also a better base for Samba AD users.
+On Thursday, 16 February 2023 09:04:21 CET Andreas Schneider via samba-
+technical wrote:
+> Hi,
 > 
-> I think what is being said here is, the use of MIT is no longer
-> experimental, it mainly works, but with a few exceptions when compared
-> with Heimdal. The use of MIT with a Samba AD DC is only being supported
-> by Fedora at this point in time.
+> I'm currently trying to run 'make test' as part of the RPM build process
+> (%check). So I'm trying to get everything working, but I'm seeing strange
+> issues and I need some help to track them down.
+> 
+> The errors happen only if I run a full 'make test' and I don't see them when
+> running the test individually (make test TESTS="..").
+> 
+> Lets take a look at the samba.tests.samba_tool.gpo_exts.ad_dc_ntvfs test.
+> 
+> [2583(16283)/2929 at 1h59m32s, 15 errors]
+> samba.tests.samba_tool.gpo_exts(ad_dc_ntvfs:local)
+> UNEXPECTED(failure):
+> samba.tests.samba_tool.gpo_exts.samba.tests.samba_tool.gpo_exts.GpoCmdTestCa
+> se.test_vgp_access_add(ad_dc_ntvfs:local) REASON: Exception: Exception:
+> Traceback (most recent call last):
+>   File "/builddir/build/BUILD/samba-4.18.0rc2/bin/python/samba/tests/
+> samba_tool/gpo_exts.py", line 111, in test_vgp_access_add
+>     self.assertCmdSuccess(result, out, err, 'Access add failed')
+>   File "/builddir/build/BUILD/samba-4.18.0rc2/bin/python/samba/tests/
+> samba_tool/base.py", line 97, in assertCmdSuccess
+>     self.assertIsNone(exit, msg=msg.replace("\n]\n", "\n] \n"))
+> AssertionError: -1 is not None : exit[-1] stdout[] stderr[ERROR: Unable to
+> find user or group "testuser"
+> ]: Access add failed
+> 
+> The pattern is the same with other tests failing.
 
-openSUSE also provides Samba AD DC built again MIT Kerberos.
 
-See https://build.opensuse.org/package/show/network:samba:STABLE/samba
-
-Very likely other distributions too.
+Interestingly the samba.tests.samba_tool.gpo tests fail against ad_dc_ntvfs 
+but succeed against ad_dc!
 
 
-Best regards
+
+Something is fishy with that env.
+
+UNEXPECTED(failure): 
+samba.tests.samba_tool.gpo.samba.tests.samba_tool.gpo.GpoCmdTestCase.test_admx_load(ad_dc_ntvfs:local)                                                         
+REASON: Exception: Exception: Traceback (most recent call last):                                                                                                                    
+  File "/builddir/build/BUILD/samba-4.18.0/bin/python/samba/tests/samba_tool/
+gpo.py", line 583, in test_admx_load                                                                   
+    self.assertTrue(os.path.exists(admx_path),                                                                                                                                      
+AssertionError: False is not true : PolicyDefinitions was not created
+
+The command interestingly succeeds, but then it fails to find the policy 
+definitions. Maybe we have an issue with exported variables in that env.
 
 
 	Andreas
-
 
 -- 
 Andreas Schneider                      asn@samba.org
