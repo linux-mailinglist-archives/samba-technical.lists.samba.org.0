@@ -2,50 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57EE96CA7DD
-	for <lists+samba-technical@lfdr.de>; Mon, 27 Mar 2023 16:39:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 907446CA8B6
+	for <lists+samba-technical@lfdr.de>; Mon, 27 Mar 2023 17:12:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Z5PbJL7OMdmN690qAtv/Di/hHz40X6PKlnUpfDgPBKE=; b=jPzIN+mrWP00KPY9LOSusZ2I5T
-	JucEcjHv+FZrwr/9s3VPJQMwmmSrTCthuH1p7hrflWrlsf4Alrr3nCR8cpGDUtsbMi22War8jCYNz
-	ppqK6xYLrya3kDYQQv8I1de0LhTGdzDeL+SK/FSNsz8laEbs0ymSjhZeAR+6XzP9pD20Kdjvkudcc
-	KyiDt8TQLvOWHmvdkRRYqXuZYt5WtiRaTZ5EvbmQoE9jMf0YkoFQmYxqPbF7QLi7oOQrq7+yo4m+9
-	2pNS/kLHnrfmYt+T4ZAjL4fRQIGCJIUfKHmTO4JAQgpjXFqI/xZZiSnoLw3IBDykmpkseL/v+FCHf
-	HVnoq5Nw==;
-Received: from ip6-localhost ([::1]:49722 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=bkLasVM8gncW/lwbMRQUcz4MgLnQPS23VfX1eVpI9ps=; b=NfR5lgIhT3MZK6oEWo2Drp9Xce
+	vKkQsQtE1KWRpghELG8VuLw3qACITqIWEwOAYAFdFGOwhZ2FwLJcl4nENSH2azvtDKtbmPDWpT5K+
+	yo8pYhIM3luRXmejMQQ6U7CCP6YlJQV59pqi7uGpc7YB6KmJ7Khdb/VBGf/6vyGDDbxydi96BwEQ0
+	UoM/4oQmPeybs/oIPuYRhWBFk0NEsZJaVVe2QubHfKTLygXdKn4ofDBpxOsLfahffXaxWazy45zWw
+	So7G9W1g4Sdequ0of0vJeDSbhM1Vm2rGLNvZuXmOvvmBLb/eXZftV0k0P5YhsMs8jvVpVWzXh+hqv
+	3+3Udo5A==;
+Received: from ip6-localhost ([::1]:51652 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pgo0H-004eJh-TD; Mon, 27 Mar 2023 14:39:21 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33460) 
+	id 1pgoW8-004eo9-OM; Mon, 27 Mar 2023 15:12:16 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:62752) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pgo0B-004eJN-4V
- for samba-technical@lists.samba.org; Mon, 27 Mar 2023 14:39:19 +0000
+ (Exim) id 1pgoW1-004enb-44; Mon, 27 Mar 2023 15:12:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
  s=42; h=From:To:Date:Message-ID:CC;
- bh=Z5PbJL7OMdmN690qAtv/Di/hHz40X6PKlnUpfDgPBKE=; b=crEOp9Dwhlh9FMxsc9ncI7PUTz
- 6UiD8oWyWD8zpLgpZeQLjS/usd2AqVrfzLr+OFIDFfXv2wXlfAwsDqVt7M9VsSg6ovJOXyj8wAgDw
- UueeayrSYwJ+6JhWdOBI+ZWLj8lLt1xODO9OJUXeYCj3EWaOzBf9UhPzzw+4swzGOgZ9W5EdqKqcv
- rnAs4am20iZ6JkMigPgUX+mqIlQwQvy3lWsuSdtjCJ9hhMYDNNVytieaRr9KUK088kD2EfqQDnV55
- 3/VG9F2+pxnmEBpuWWMDDHojY7wskZdiBG9MaQUZAt/aeh30fC5xnRmI6fd1QMyYKrIcDSz6LY1oa
- /AVKABjrR7R1PrGwPjDWwUTKc0ECwduUpn+XLSkPQh/q8mNb5yXSAVyg7rHfGiKeEIK0weGWHPrO9
- iEEjuUCxYxEPnCyjllZnD0YgQUpOGRB2HAiPJ5uXxnigNBt6AIF4+xhJ2IefM42uTNUHUxf12lw9D
- qwc1tAicToqakxDPdir4NO3O;
+ bh=bkLasVM8gncW/lwbMRQUcz4MgLnQPS23VfX1eVpI9ps=; b=ovKz34HAaKwVrYJ0Sj2y4W4VqP
+ At7mIQNF+AGPSFfG5oEx039s5ic0ZnCVW3MxDRYa/tqqRrZup11EULOzFJVsj0kvMgbCKMhDl6+iZ
+ p3C32n4CFE9q0TnCHxmqlzpmeYpy6DrHDdOdnAFRFxlOEDzqup3fdkGSHPxY3FT2AyavODhDPicYS
+ uvfrwTetmWwyUW0L9CV8B4Jfga7bt5A9VeFDQ0exhOcLbcYm+cxKY3S8uANq+mNS/kI+kZdkR88rB
+ MVlAE+XtnsCOxXCo47o68wrkg6OKGTUpC7BT0z73Sy8AFlqNeFtM7b4/0YMreXYi9cEAl5MaYajhs
+ Cu7BQMDzYiLj+AS6JKqI91fSKoOAdyy3ItSDYQ8A4QoCOyOW7GSS5qf+nnQsUB+S710XuO7PJRX+6
+ 7943OzNV3o6YbLy7O8wxnjsb3kUP4eLuwBRSRcnmvIy1xS8ph24QiBU6GW/SVgFVswfQ0gF4GCgmR
+ KGlmBoy28drUv7x99WXZ40fX;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pgo0A-005fLL-6p
- for samba-technical@lists.samba.org; Mon, 27 Mar 2023 14:39:14 +0000
-Message-ID: <4682ba67-7598-e424-4761-624cc962b4a5@samba.org>
-Date: Mon, 27 Mar 2023 15:39:13 +0100
+ (Exim) id 1pgoW0-005fb1-5Z; Mon, 27 Mar 2023 15:12:08 +0000
+Message-ID: <4065822a-bc92-4e79-8959-e0f71c68d100@samba.org>
+Date: Mon, 27 Mar 2023 17:12:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Subject: Re: Joining a Windows DC to a Samba AD Domain
-Content-Language: en-GB
-To: samba-technical@lists.samba.org
-References: <83053097-3abf-8fae-58e3-25c233049053@samba.org>
-In-Reply-To: <83053097-3abf-8fae-58e3-25c233049053@samba.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: Re: SambaXP '23
+Content-Language: en-US
+To: sambalist <samba@lists.samba.org>,
+ Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+References: <049e77cb-5862-a8cc-0954-7eef43234bb0@samba.org>
+In-Reply-To: <049e77cb-5862-a8cc-0954-7eef43234bb0@samba.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------UhUVk8ZpCtoXUD5V40O8jj49"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,37 +59,59 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: samba-technical@lists.samba.org
-Cc: Rowland Penny <rpenny@samba.org>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------UhUVk8ZpCtoXUD5V40O8jj49
+Content-Type: multipart/mixed; boundary="------------TWmiByIzhb4YjIzZ7ZhV1qrm";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: sambalist <samba@lists.samba.org>,
+ Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Message-ID: <4065822a-bc92-4e79-8959-e0f71c68d100@samba.org>
+Subject: Re: SambaXP '23
+References: <049e77cb-5862-a8cc-0954-7eef43234bb0@samba.org>
+In-Reply-To: <049e77cb-5862-a8cc-0954-7eef43234bb0@samba.org>
 
+--------------TWmiByIzhb4YjIzZ7ZhV1qrm
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-On 27/03/2023 14:45, Ralph Boehme via samba-technical wrote:
-> Hi folks!
-> 
->  From all I know it is generally not recommended to join Windows DCs to 
-> to a Samba AD domain, is it?
-> 
-> I've just came across the following two pages on our wiki:
-> 
-> <https://wiki.samba.org/index.php/Joining_a_Windows_Server_2008_/_2008_R2_DC_to_a_Samba_AD>
-> <https://wiki.samba.org/index.php/Joining_a_Windows_Server_2012_/_2012_R2_DC_to_a_Samba_AD>
-> 
-> To avoid giving bad guidance I've added two prominent warnings at the 
-> top of the pages. Is this sensible? Is this correct? Thoughts?
-> 
-> Thanks!
-> -slow
-> 
+T24gMy8yNy8yMyAxNDoyOSwgUmFscGggQm9laG1lIHZpYSBzYW1iYSB3cm90ZToNCj4gVGhl
+IDIybmQgSW50ZXJuYXRpb25hbCBVc2VyIGFuZCBEZXZlbG9wZXIgQ29uZmVyZW5jZSBzYW1i
+YVhQIHdpbGwgdGFrZSANCj4gcGxhY2UgZnJvbSA5dGggLSAxMXRoIG9mIE1heSAyMDIwIGlu
+IEfDtnR0aW5nZW4sIEdlcm1hbnkuDQoNCm9vcHMsIDl0aCAtIDExdGggb2YgTWF5IGlzIGNv
+cnJlY3QsIDIwMjAgb2J2aW91c2x5IG5vdC4gOikNCg0KLXNsb3cNCg0KLS0gDQpSYWxwaCBC
+b2VobWUsIFNhbWJhIFRlYW0gICAgICAgICAgICAgICAgIGh0dHBzOi8vc2FtYmEub3JnLw0K
+U2VyTmV0IFNhbWJhIFRlYW0gTGVhZCAgICAgIGh0dHBzOi8vc2VybmV0LmRlL2VuL3RlYW0t
+c2FtYmENClNBTUJBKywgU2FtYmEgcGFja2FnZXMgICAgICAgICAgICAgICAgICBodHRwczov
+L3NhbWJhLnBsdXMvDQoNCg==
 
-I didn't think things were that bad, I thought you could join a 2008R2 
-as a DC, though with the usual caveats(no sysvol replication etc) and 
-that Samba was now halfway there on the 2012R2 DC, new Heimdal, 'claims' 
-being actively worked on etc, so I think 'There be dragons' might be a 
-bit dramatic.
+--------------TWmiByIzhb4YjIzZ7ZhV1qrm--
 
-Rowland
+--------------UhUVk8ZpCtoXUD5V40O8jj49
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmQhskcFAwAAAAAACgkQqh6bcSY5nkbl
+WBAAsut55U+LPs4SQ5q5+muoxaPtDXO3dEZYIrrPxgvG56f48nuch7hSVmwvyc/bFjYMN3Owe2HY
+oxCSX+HXVMt5iCiAM8SveR6BZGzPxdsLL1PTqJCLnVUEWSNrWAsrpZeT7Z0TRzaKhKVSkMJ6jLSq
+t8p6Em3UYv9SR5BeaxFt+dvCUZsbCqyVFNxCDgnACQqT0Tug7QkFMVURtlmA6aRDBtOjfOTeIFPZ
+w5VkzAeeI2PsYjWwjAkH30rFGSnKQFul3Snul02sBQwdQKKc1jTwTT5/D7fCDF5hiIpsdrRYPOVd
+PobhD3aZrfEBGFRxeakGkgw1C8DtR4n1MznMmkhqGUZJRyh2SQPDP3ncsLrzyAS6rou7hcVDmAxi
+bW5ymJDNEsyoH4bEj7Z6cJMkRdHjPMJpD48DsaCkxaVow/nDTALn6CnYKHFLWqWwStlxU31ieLGj
+0bc+5JvBB+AP6YnSlIK3zazT1KIsXYyU2aCaoBGLwraqpuYQfy19RJQDK7fpP3iYujPeoVT8aZw8
+z2flgFp5G/J2QGo+2RZ6Fm+AWTNk+GdZktn9fc5BzSZu0lmOzEl33vAZUcKzxxALNOy/DlKBTEdQ
+hPuu4Ucv6DprTEMm4Kx4euLnUsxGx6ntfz8JzXkUwsh2FFWULUxK6DOIIPt40B4UI+VGLz2tqCVZ
+Ii8=
+=QosF
+-----END PGP SIGNATURE-----
+
+--------------UhUVk8ZpCtoXUD5V40O8jj49--
 
