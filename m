@@ -2,45 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 173346CA98E
-	for <lists+samba-technical@lfdr.de>; Mon, 27 Mar 2023 17:50:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EDAB6CA98C
+	for <lists+samba-technical@lfdr.de>; Mon, 27 Mar 2023 17:49:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=hOxRuQJEbd9qtLdPdNhfrZdWS/np4AG5EgSSW8LG8u4=; b=rYMZSryn8Io7cGsF3SpInv1gAC
-	ljfYS0/hgH46ubDz2DvIHLniy/7y3khdFH0/DWV18akLgtgXalPBURJhM2W2fa33Nin/eeN6reU83
-	fXOgcAmxzkyOjuSW+53rAWA5u3+c66/gXLBC29HiQh8PcgYarVVyRZAAMbidCUzyyWlsbLNcjw8Ki
-	e38aHrTG8QiX7psCSJLTPbTsMwvUd3lq5lrjMPsq2mfGMLqxnEb1zsI9TUAmLNZSwjTKPvhKmMBv3
-	HjjJ86Pdk/9v82V6PCb0WtjwG4o4YBfQlcvEIFEJYgpArf0qDjnI4DF8rELlN3zsQ7Lw7V61xHz5o
-	rK8ZpRow==;
-Received: from ip6-localhost ([::1]:19908 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=wQukw33VSuKX2TfpV8qtAVkB6oLpDqI9h4PnwirPHTU=; b=HIE6yiFyfIs7prAFVHL923u0MR
+	j0asLx3gL61CaJursJqt1z1raw+KUxG+3qIPLsDRkhqTgeLUAndTp96EPOpTF9VGhsR2dCzE9vxiQ
+	ZUAhNJfHMmRE2LL/CLAQgYc4XHGSW/SX6MLCUow6ZCFUFkkJ6KOgeLpjghxXi4doATJHzZgjmVc7r
+	Ch6WoPjRWGclLZkNpySzjQgcTMBKsvvZuBXj08Rke/pL2CyOVi8bV88IQfWJ00QAOx47quoJ+tHeE
+	M/Mm/Gq94VVsMmWBTuZQ2tH/3r/IXnj+FpE03pzbcdhUGD5HHqwwBbDZgaLj5NeYRc+fPcwyKvsEn
+	DWrX9DQA==;
+Received: from ip6-localhost ([::1]:27242 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pgp6k-004kNU-49; Mon, 27 Mar 2023 15:50:06 +0000
-Received: from relay3.ptmail.sapo.pt ([212.55.154.23]:38773) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1pgp6e-004kK6-Sn
- for samba-technical@lists.samba.org; Mon, 27 Mar 2023 15:50:03 +0000
-Received: (qmail 22211 invoked from network); 27 Mar 2023 15:23:18 -0000
-Received: (qmail 445719 invoked from network); 27 Mar 2023 15:23:17 -0000
-Received: from unknown (HELO Sepher3) (medalist@sapo.pt@[85.245.74.94])
- (envelope-sender <medalist@sapo.pt>)
- by ptmail-mta-auth01 (qmail-ptmail-1.0.0) with ESMTPSA;
- 27 Mar 2023 15:23:17 -0000
-X-PTMail-RemoteIP: 85.245.74.94
-X-PTMail-AllowedSender-Action: 
-X-PTMail-Service: default
-To: <samba-technical@lists.samba.org>
-References: <83053097-3abf-8fae-58e3-25c233049053@samba.org>
-In-Reply-To: <83053097-3abf-8fae-58e3-25c233049053@samba.org>
-Subject: RE: Joining a Windows DC to a Samba AD Domain
-Date: Mon, 27 Mar 2023 16:23:17 +0100
-Message-ID: <!&!AAAAAAAAAAAuAAAAAAAAABM14PwpMuJDgheI8SVrAIkBAMO2jhD3dRHOtM0AqgC7tuYAAAAAAA4AABAAAABR1/ccgIQiT6ZT6R4bY/faAQAAAAA=@sapo.pt>
+	id 1pgp5y-004k63-Pt; Mon, 27 Mar 2023 15:49:18 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12212) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1pgp5t-004k5i-U8
+ for samba-technical@lists.samba.org; Mon, 27 Mar 2023 15:49:16 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=wQukw33VSuKX2TfpV8qtAVkB6oLpDqI9h4PnwirPHTU=; b=UdgfCkvWI+Hp+TemJZ7qhB9772
+ NarANTbtHKfMkbub8guCFlpYyGjL2yrNGPu3Uh1VaBcCYPTXIS+/RZdcFSwYOoMmM2qaWYiquMHEk
+ JhGEpxCfn0dDVZu+BziXIaLjGCLD/HUE/idR83WhPmqqK/rIB7g2NzPhy+OunUJ5+eDxgKIQgg2eB
+ PxW7DfvgmxujEoHDAkkdlESqQtbfhlC3x3cFQNnrTXc2C+yTD+tOCFBmDdvJUTfjnwlPOVVAraxRd
+ YZ7wk0eZFE8YoiG64sDDRDFQZKh4C+UFTqVooR8TQh2Gfb/YZT1RNuFuhCO0mpfYIR8cfVHTe1Cch
+ VIDJ1X/rJZ9IhBHEmWOcdwwwGWXCFC/8KEvFqsDgvRDXrxozlZeB14Jn1BkwGUFM73bklelRxc3g3
+ 1eVwWfCtKIqgn2nfF5/xrBKj0MX19mvfy76BC+AzryETzHeogybJYiOOhcQD/BrdJIUO4K7u5Cn0j
+ kniovUYF9mIhQXIpnMkdVS/q;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pgp5t-005fz9-KZ; Mon, 27 Mar 2023 15:49:13 +0000
+Message-ID: <7e5451f5-e5c2-2566-f7f6-5e4bf2993cae@samba.org>
+Date: Mon, 27 Mar 2023 17:49:13 +0200
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 15.0
-Thread-Index: AQJ8LIXchQ8Oxq+K/QolqyfgZxzrGa3JJmNg
-Content-Language: pt
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Subject: Re: Joining a Windows DC to a Samba AD Domain
+Content-Language: en-US
+To: miguel medalha <medalist@sapo.pt>, samba-technical@lists.samba.org
+References: <83053097-3abf-8fae-58e3-25c233049053@samba.org>
+ <!&!AAAAAAAAAAAuAAAAAAAAABM14PwpMuJDgheI8SVrAIkBAMO2jhD3dRHOtM0AqgC7tuYAAAAAAA4AABAAAABR1/ccgIQiT6ZT6R4bY/faAQAAAAA=@sapo.pt>
+In-Reply-To: <!&!AAAAAAAAAAAuAAAAAAAAABM14PwpMuJDgheI8SVrAIkBAMO2jhD3dRHOtM0AqgC7tuYAAAAAAA4AABAAAABR1/ccgIQiT6ZT6R4bY/faAQAAAAA=@sapo.pt>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------Qd4qoDNfODWGdt0l4F0sfAPy"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -54,41 +60,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: miguel medalha via samba-technical <samba-technical@lists.samba.org>
-Reply-To: miguel medalha <medalist@sapo.pt>
+From: Ralph Boehme via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Ralph Boehme <slow@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-> I've just came across the following two pages on our wiki:
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------Qd4qoDNfODWGdt0l4F0sfAPy
+Content-Type: multipart/mixed; boundary="------------WHg0ZzJlLpDorEJz0i9O4Z1K";
+ protected-headers="v1"
+From: Ralph Boehme <slow@samba.org>
+To: miguel medalha <medalist@sapo.pt>, samba-technical@lists.samba.org
+Message-ID: <7e5451f5-e5c2-2566-f7f6-5e4bf2993cae@samba.org>
+Subject: Re: Joining a Windows DC to a Samba AD Domain
+References: <83053097-3abf-8fae-58e3-25c233049053@samba.org>
+ <!&!AAAAAAAAAAAuAAAAAAAAABM14PwpMuJDgheI8SVrAIkBAMO2jhD3dRHOtM0AqgC7tuYAAAAAAA4AABAAAABR1/ccgIQiT6ZT6R4bY/faAQAAAAA=@sapo.pt>
+In-Reply-To: <!&!AAAAAAAAAAAuAAAAAAAAABM14PwpMuJDgheI8SVrAIkBAMO2jhD3dRHOtM0AqgC7tuYAAAAAAA4AABAAAABR1/ccgIQiT6ZT6R4bY/faAQAAAAA=@sapo.pt>
 
-> =
-<https://wiki.samba.org/index.php/Joining_a_Windows_Server_2008_/_2008_R2=
-_DC_to_a_Samba_AD>
-> =
-<https://wiki.samba.org/index.php/Joining_a_Windows_Server_2012_/_2012_R2=
-_DC_to_a_Samba_AD>
+--------------WHg0ZzJlLpDorEJz0i9O4Z1K
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-> To avoid giving bad guidance I've added two prominent warnings at =
-the=3D20
-> top of the pages. Is this sensible? Is this correct? Thoughts?
+T24gMy8yNy8yMyAxNzoyMywgbWlndWVsIG1lZGFsaGEgd3JvdGU6DQo+IFRoZSBwaHJhc2lu
+ZyBvZiB0aGUgd2FybmluZ3Mgc2VlbXMgbWlzbGVhZGluZyB0byBtZS4gQXJlIHdlIHRhbGtp
+bmcNCj4gPSBhYm91dCBqb2luaW5nIGEgV2luZG93cyBTZXJ2ZXIgdG8gYSBTYW1iYSBBRCBk
+b21haW4gb3IgYWJvdXQNCj4gam9pbmluZyBhID0gV2luZG93cyBBRCBEQyB0byBhIFNhbWJh
+IEFEIGRvbWFpbj8gVGhpcyBpcyB3aGF0IHRoZQ0KPiB3YXJuaW5nIHNheXM6DQo+IA0KPiAi
+Sm9pbmluZyBhIFdpbmRvd3MgU2VydmVyIHRvIGEgU2FtYmEgQUQgZG9tYWluIGlzIGdlbmVy
+YWxseSBub3QNCj4gcmVjb21tZW5kZWQuIg0KPiANCj4gSSBndWVzcyBpdCBzaG91bGQgYmU6
+DQo+IA0KPiAiSm9pbmluZyBhIFdpbmRvd3MgQUQgREMgdG8gYSBTYW1iYSBBRCBkb21haW4g
+aXMgZ2VuZXJhbGx5IG5vdA0KPiByZWNvbW1lbmRlZCINCg0KZXhhY3RseSEgVGhhbmtzIGZv
+ciBwb2ludGluZyB0aGlzIG91dC4gSSd2ZSB1cGRhdGVkIHRoZSB3aWtpIHdoaWxlIA0KZGlz
+Y3Vzc2lvbiBoZXJlIGlzIG9uZ29pbmcgd2hldGhlciB0aGUgd2FybmluZyBpcyBhZGVxdWF0
+ZSBpbiB0aGUgZmlyc3QgDQpwbGFjZS4gOikNCg0KVGhhbmtzIQ0KLXNsb3cNCg0KLS0gDQpS
+YWxwaCBCb2VobWUsIFNhbWJhIFRlYW0gICAgICAgICAgICAgICAgIGh0dHBzOi8vc2FtYmEu
+b3JnLw0KU2VyTmV0IFNhbWJhIFRlYW0gTGVhZCAgICAgIGh0dHBzOi8vc2VybmV0LmRlL2Vu
+L3RlYW0tc2FtYmENClNBTUJBKywgU2FtYmEgcGFja2FnZXMgICAgICAgICAgICAgICAgICBo
+dHRwczovL3NhbWJhLnBsdXMvDQoNCg==
 
+--------------WHg0ZzJlLpDorEJz0i9O4Z1K--
 
-The phrasing of the warnings seems misleading to me. Are we talking =3D
-about joining a Windows Server to a Samba AD domain or about joining a =
-=3D
-Windows AD DC to a Samba AD domain? This is what the warning says:
+--------------Qd4qoDNfODWGdt0l4F0sfAPy
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-"Joining a Windows Server to a Samba AD domain is generally not =
-recommended."
+-----BEGIN PGP SIGNATURE-----
 
-I guess it should be:
+wsF5BAABCAAjFiEE+uLGCIokJSBRxVnkqh6bcSY5nkYFAmQhuvkFAwAAAAAACgkQqh6bcSY5nkbT
++w/+NUKyR3zr9hnZjXTw+It1V1IPsgPMwxsRmjmVobsikI6Qs+GkM9vu+fJxnZOl/0K6E17sL1UJ
+s357Gl4rSUVamTdZeXGV8oUy3K7nLvy/tXLtom9VyYQ5ujsBslIO9I4bZqgvHo7a4Xmf0K78QqVj
+YuNwZxneDcbrlwsvV+e8ses+KSjen0v9rG74WrWSQfexwOxjegf2dlDfzZMLSnBzghJrERJLMvBa
+9eR4G09ZryncWgxkom1ssBPqdw7w0g27H4gx6ixSS8Pg3v7EgdV6c0/naE465ROL6uWvaNx5YF65
+qMtVnvXcTDZJMnDpUzr8K10cEesK2y3VJbdw6nCqGQWo/Ag4DJX6rraqXz8F8v2Ufw01MGvbuR9R
+Xd28KcK7Rmi8vYY5XW0Ft6ouMzSUNf5DbL9+lsqVe+21c67f6Yb3sJsnrDT42hgQ2qRfu79LU724
+8nwCVLFgLutPO/cL7VtgKx8gtAYEY+vn3cxEPPHC06bz+BU0QsTROlWPiltVcuAmF7Fb0AvbFCIY
+weFHK/oobKH0m9tynsdcaWc0JlvhSDIdJ1ywHTSsdJgrmW4Up0qSQkGHqjRb2WDpWXsaNOWqOhwD
+MEtBkqSxMPgeMesdFe3J87y8r/esV1siebRxAvV0PcDsk6FY24LGJHZV8hbn51WAn1BSY/qpW6n1
+fUQ=
+=8u5h
+-----END PGP SIGNATURE-----
 
-"Joining a Windows AD DC to a Samba AD domain is generally not  =
-recommended"
-
-As it is, the warning is disheartening because what it literally says is =
-that joining a Windows Server to a Samba AD domain is not recommended, =
-which is false as far as I know.
-
-
+--------------Qd4qoDNfODWGdt0l4F0sfAPy--
 
