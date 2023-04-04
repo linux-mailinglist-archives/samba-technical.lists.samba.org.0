@@ -2,46 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC05F6CFAFB
-	for <lists+samba-technical@lfdr.de>; Thu, 30 Mar 2023 07:55:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 634F46D62BD
+	for <lists+samba-technical@lfdr.de>; Tue,  4 Apr 2023 15:25:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=JzA+blOmzyJJ3lbehykXxYoD38BaHamytNkkLNEWnXE=; b=nBT6+Vz/z4fkuvKE7HqlxwO6fv
-	S9eRjx67ZrZOF01qVKqhlRVompUIkPS0C+Tofb9/4xLtYqwmgJMAaDoPIzuKx6aLPIudULXuoTlfH
-	Mo/y1+p4n9aHAnkx2ISSkQ8c/Cwk8m6+F8VmxDf5tTvh+S+z3zjxWhadWe8whrFpjzPL7e7E6dzis
-	1VNss71p7Np8sNARKJeY4nosW1kBvk1KNCYzvIXbzVbZEVgjUXhkbu/OARnTAzUJwt/wu1BXDsWQ0
-	cFaRkwoZHiQJsFVhrT/3t+RjIfdRc5y06JUOxNgDGFLv6Mm+UoJLE+o0gOzGHG7gJ4dZYvJPKCBsr
-	5T6uVpRg==;
-Received: from ip6-localhost ([::1]:32828 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=IFU4xnjDj0COqUBii9Y8mtarIQWoyrROaPx07dWXEQY=; b=r76nl3hpUCviOY0t/amS0Amjs4
+	ggtdjcatBgF9Tc8oK+6kp+knXITtl8C5DluLqgSaYKXN1Jfm2hMcHIqn7JZUlSlIccUv3b10I2pH+
+	Aw4rErbTPYywkM/GlYaXKFtWu2fOjPn5jCSe7+eW/MO2Ze1bNXfWEsoEFh3/dC7gCwahqq4dRW48R
+	41cmnfDikoR2V9MUO+jUGAV612K1pEDbiEaMQWZf7rbuAjBDTImgIddIbjWV69IcY8P6TmVpyHrGT
+	GT4i71JAVkcRoUzUvMbVRo0U5Vj5vjaCfDWlqvDDXpoFTBScv7N+hUv0GhczuKWbhZbAyDpKfjFVL
+	E0nOt6sA==;
+Received: from ip6-localhost ([::1]:36384 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1phlF5-005lFy-4q; Thu, 30 Mar 2023 05:54:35 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55132) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1phlF0-005lFp-9g
- for samba-technical@lists.samba.org; Thu, 30 Mar 2023 05:54:32 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=JzA+blOmzyJJ3lbehykXxYoD38BaHamytNkkLNEWnXE=; b=1TD/1A9G1VoPimjyMUmYVJMgvu
- 3Z2YiutZt6TAQQCQkGt3uqd8NNAPS2ZJoYbF/Rrgp95Xaw/2ipKKYSFGpMty35g9PnrLg03/OBr5G
- AJShd3bg9u83vAVAMKU/ZafPPgZ9LxAefQ90azRcrKF3aMeuP5IaATuPBmtU9hp7XM7cjemFnrKos
- JQEjY4a1KYhlP4KRF1X5lBqXkBiKYV1HDgPQ3rTpem5vZyuucwvheMui38Wh9h3uXPTpgGpZ/nTZy
- Iluhk8MKPrTlesGjkmSFQDWN4iF6eG3uXAKRlDKIUsGDe9CFyPQ9DECM//MVqNx1zZcYY1mqavBRf
- fW/A2kY3UlwHb8CghfWVu5xYscmGv5qMGoXqHfmdnyVHLylDVgeeSgDtfWhXqgPwRU27iT8/3QDCG
- 2picBkXf9a1FexrEmddTIQ3mBi7DONTgu3XK5k6qCGVWDTPwuxgv9v2S0EerQ7ZpjpsdQVa86BBeS
- e1KuXGWL2Rdh8ZOB4vPeDbPZ;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1phlEz-006CsS-67; Thu, 30 Mar 2023 05:54:29 +0000
-To: Jeremy Allison <jra@samba.org>
-Subject: Re: smbget cmdline interface
-Date: Thu, 30 Mar 2023 07:54:28 +0200
-Message-ID: <8213814.T7Z3S40VBb@magrathea>
-In-Reply-To: <ZCRztf6+I7s3tiYw@jeremy-acer>
-References: <4486220.LvFx2qVVIh@magrathea> <ZCRztf6+I7s3tiYw@jeremy-acer>
+	id 1pjgeD-0098Me-1u; Tue, 04 Apr 2023 13:24:29 +0000
+Received: from mailserver.zkrd.de ([212.211.154.249]:4223) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1pjge8-0098MT-Jw
+ for samba-technical@lists.samba.org; Tue, 04 Apr 2023 13:24:26 +0000
+Received: from unknown (HELO ciphermail.zkrd.de) ([192.168.100.44])
+ by mailserver.zkrd.de with SMTP; 04 Apr 2023 15:08:43 +0200
+Received: from cipher22.zkrd.de (localhost [127.0.0.1])
+ by ciphermail.zkrd.de (CipherMail) with ESMTP id 4PrSkg43Yzz7X
+ for <samba-technical@lists.samba.org>; Tue,  4 Apr 2023 15:08:43 +0200 (CEST)
+Received: from mailgw.zkrd.de (mailgw.zkrd.de [192.168.100.4])
+ by ciphermail.zkrd.de (CipherMail) with ESMTP id 4PrSkg24Zhz7X
+ for <samba-technical@lists.samba.org>; Tue,  4 Apr 2023 15:08:43 +0200 (CEST)
+Received: from mailserver.zkrd.de (mailserver.zkrd.de [192.168.100.13])
+ by mailgw.zkrd.de (Postfix) with ESMTPS id 467301403E
+ for <samba-technical@lists.samba.org>; Tue,  4 Apr 2023 15:08:43 +0200 (CEST)
+Received: from [172.20.54.12] (pxe-h10-sko.zkrd-h10.de [172.20.54.12])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mailserver.zkrd.de (Postfix) with ESMTPSA id 38ED886F
+ for <samba-technical@lists.samba.org>; Tue,  4 Apr 2023 15:08:43 +0200 (CEST)
+Message-ID: <841f8a01-5e28-8321-2f59-90f8f6a13c07@zkrd.de>
+Date: Tue, 4 Apr 2023 15:08:42 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+To: samba-technical@lists.samba.org
+Content-Language: en-US
+Subject: File corruption issues related to an allegedly closed bug report
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,46 +59,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: samba-technical@lists.samba.org
+From: ZKRD IT-Services via samba-technical <samba-technical@lists.samba.org>
+Reply-To: software-infos@zkrd.de
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wednesday, 29 March 2023 19:21:57 CEST Jeremy Allison wrote:
-> On Wed, Mar 29, 2023 at 09:45:39AM +0200, Andreas Schneider via samba-
-technical wrote:
-> >Hi,
-> >
-> >our smbget utility doesn't use the the common command line parser. It
-> >implemented an interface on its own. So it wasn't able to parse UPNs or
-> >DOMAIN/user correctly.
-> >
-> >I've fixed it with:
-> >https://gitlab.com/samba-team/samba/-/merge_requests/3005
-> >
-> >However the question is if it should use the common command line parser. It
-> >would break the command line interface as several short options are already
-> >taken by the common command line parser and we could only provide the long
-> >names for those.
-> 
-> +1 from me on moving to the common command line parser
-> for future Samba releases. smbget isn't widely used,
-> so as long as we make the changes clear in the release
-> notes I'd rather move away from custom parsing code.
+Dear fellows,
 
-If nobody disagrees, then I would first fix the issue with the above MR as 
-those patches can be backported.
+In our company we used to utilize a samba server to share Windows user 
+profiles between two instances of Windows Server 2019 which we switched 
+every month after performing the latest updates.
+For more than a year we have been experiencing problems in 
+synchronization of our Windows user profiles and hence stopped switching.
 
-Then I will move it to the common command line parser for Samba next.
+What happens is that several files are getting corrupted due to 
+truncation when copied back from the Samba server to the target Windows 
+Server. Although the issue is not reproducible among users, noticeably 
+just certain files seem to be repeatedly affected.
 
+We have suspected our issue to be related to
+https://bugzilla.samba.org/show_bug.cgi?id=14928
 
-	Andreas
+Supposedly this bug should have been fixed in
+https://www.samba.org/samba/history/samba-4.15.4.html
+
+We recently upgraded our Samba version to
+2:4.15.13+dfsg-0ubuntu1 (Ubuntu LTS 22) but our issue persists.
+
+We would like to ask for access to the bugtracker in order to report our 
+issue and share details which hopefully could lead to a solution.
+
+EMail for registration: software-infos@zkrd.de
+Name for registration: "ZKRD IT-Support"
+
+Alternatively we would like to discuss this issue on this mailing list 
+if that's more appropriate.
+
+thank you kindly and best regards
+Stefan
 
 -- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
-
 
