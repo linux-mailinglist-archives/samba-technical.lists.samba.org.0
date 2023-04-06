@@ -2,65 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0C9A6D9218
-	for <lists+samba-technical@lfdr.de>; Thu,  6 Apr 2023 10:56:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A90BB6D96CE
+	for <lists+samba-technical@lfdr.de>; Thu,  6 Apr 2023 14:10:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=B9/Axgxw789vjHSKYobykbKjrh7zpjCP2oBQY/iyJas=; b=s/kKfeWeoX+AfRULOuq/l/4xXA
-	uVYbGdjxnjazWqLFFcWekNBmJQLcrA0aFcDib/PGU0HZ8+qKDakURc7bnPOLrZP282lCoepAEc58C
-	VjaR7COrr9NgDZCLKBRFjwC4RSXiqn/I9dJsvG7wB+PAFkT6W350q98YG1qfxqpktJCUWvPh0AiHw
-	3DoHa/u4CiIe15COdkK83AvojST5tZgXg/vKBlWAkYWqKBwISnlHEkYneNBpvx5zQ9RkzkNxNIP9J
-	MUc1gDydfS/1Awpecm3ZA8vaM7JU60pT+1uLvFYuBZpbbbl2nMpeDEF7Ne/i5EfYKEGxwO7SN503/
-	053EYifw==;
-Received: from ip6-localhost ([::1]:51164 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=548kDFj4gIoUugd5f3FYvuQrAA/yoYohbrORtH8xrVk=; b=ncPLveyUcNSV/0WYeUHjou9ZlT
+	CMBn9rXyvdxTOJs5Xmu0hPgQuUn8zB5bSLjgNljYL+sAccREHfEKV5ApvCAjv8bNYmnCa6znZqQom
+	hO9Vt5mtKPcu00Rs0cUfWVhBnxMBq2WlVM+O461N5O+sVPJwmQl1/ffY5o+rmSw4MpN52d9R42fXd
+	UlnqVNeKxATMRzHLciGKkNw4HO9EsAXyCQrtCMx/7pIXxNqK0VWO8X/cUUS7vv9xSOhufJU7CAgFg
+	SGLbwnprtRh9DbF5eiqid9eGEmJr14l0sO6RgUwE5+ibAQPvBbOac/pNvkwTqLA8HIj8hWFmuKRk3
+	D58xXNfA==;
+Received: from ip6-localhost ([::1]:47396 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pkLPW-009bQm-Um; Thu, 06 Apr 2023 08:56:03 +0000
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331]:43918) 
+	id 1pkOQx-009euh-5d; Thu, 06 Apr 2023 12:09:43 +0000
+Received: from mx.manguebit.com ([2a01:4f8:1c1e:a2ae::2]:55422) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pkLPR-009bQd-UB
- for samba-technical@lists.samba.org; Thu, 06 Apr 2023 08:56:00 +0000
-Received: by mail-wm1-x331.google.com with SMTP id
- n9-20020a05600c4f8900b003f05f617f3cso4208604wmq.2
- for <samba-technical@lists.samba.org>; Thu, 06 Apr 2023 01:55:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680771357; x=1683363357;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=B9/Axgxw789vjHSKYobykbKjrh7zpjCP2oBQY/iyJas=;
- b=g2Qr6/zrh6oFLeQwJDsSseiOxtP6XC12UfICsXT7C5TxfsJmqVjA5vXPfdX55N3GPn
- DAlxL19v8t0N+VL0qgHnv0J68yF5bXDL6fYpU8hVu7pFG0nF8LHfFuySXkC4pj0shrWo
- AqbL64xpw3haU35F24Rn4eng4wRzXDXoiE3gw+6JMbh+R7YyU18HxF3E3vYbsYKV3JX4
- JHKomehQAXR8Aqvz8Hl1g38JDGsnqHAm5oHTczMSzTDyjgweTN1eSeKF7108aZoOCKwX
- iBXYJVoTmUva0PG7fqGJa72oBPIsceTDgqR08my16yMl909EYZQlD+8JVDlxhw0fyVPV
- GBmQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680771357; x=1683363357;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=B9/Axgxw789vjHSKYobykbKjrh7zpjCP2oBQY/iyJas=;
- b=tWpZh1e93ZSyeL0hscxNLybeOB7fmUehXDRRZ05MeRNlDfKOIr80dVaKPGkiHP6qnB
- 6HTmvv9MVGQJbeQt3j/uOHzKFeCCwmZHFrWr0/c692j2dzWLKhYZutnQUK1qE1Mfnkp8
- jeceYSKcuO7W7qbJKI3YJW7WhLEOiDNYbXZoH64fkQO2JdqPma/bD/eXzn6BevaBjzi2
- bku+0WSa0+c+fTaR+Vq6gvy6ynx0lhr4i28V13f73nt+d0BJ+JHIA36X5fMVmpVMM8AP
- 5Arh4I+jSyi0yYd3vEydceUmZLcpaRrOIKkRbSJLYLIq9Y+MDBd6+rqJclXmGTelp3U9
- 1ETw==
-X-Gm-Message-State: AAQBX9c9Y9HOLQNYHl0o6C11MTB+6RpdDH5QYFfzSzMI2QIb5A9KRYz8
- qtOQMRBD9xX95OuEn6PoxuM=
-X-Google-Smtp-Source: AKy350ZzuCVLy75YllzgUZ6DCi3WQ+PI9bLc0iV07zUhK+fXpzHZ0SEvAy6OfQcqLb2K7iCTgd4HqA==
-X-Received: by 2002:a7b:c7c6:0:b0:3ef:6e1c:3ffa with SMTP id
- z6-20020a7bc7c6000000b003ef6e1c3ffamr6710681wmk.28.1680771356751; 
- Thu, 06 Apr 2023 01:55:56 -0700 (PDT)
-Received: from localhost ([102.36.222.112]) by smtp.gmail.com with ESMTPSA id
- 13-20020a05600c230d00b003ed2384566fsm975582wmo.21.2023.04.06.01.55.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Apr 2023 01:55:56 -0700 (PDT)
-Date: Thu, 6 Apr 2023 11:55:47 +0300
-To: Paulo Alcantara <pc@manguebit.com>
-Subject: [PATCH] cifs: double lock in cifs_reconnect_tcon()
-Message-ID: <ZC6JEx4dvWUvgcwW@kili>
+ (Exim) id 1pkOQs-009euU-Ug
+ for samba-technical@lists.samba.org; Thu, 06 Apr 2023 12:09:41 +0000
+Message-ID: <8219c3dd87179df545fb6de4b89b2bbc.pc@manguebit.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com;
+ s=dkim; t=1680782966;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=548kDFj4gIoUugd5f3FYvuQrAA/yoYohbrORtH8xrVk=;
+ b=WG6MoNIYST3leO8UG3+SBA1KImJjXJHiBms2FEDzjWadFiVyAuuFk3OicXaKSfwuZtHn3u
+ bqS6sDnzoJmjn5JhW0rXbD/1VmPPXqtSJGwLBYEuPqNq4axcIpzZw36sh/WFDlzhJcSxNl
+ 5DBcWlFdMZZTAo9zFK/HtZ8/1mLx0HKsARVyrnvd4OauNAhQTC6lS910tZYlBdXdaHuMa1
+ gFr0nW6ZCsgCQcKQkpEduGC8m9Ocac+WZqCCizZbp/PqUMhOLAMjVR1z1CTQEB1kGraWm3
+ J7YrAVLnluy6pWwh2YBBWtNIlBYWKEObedkV2SCx0XYGV92HanF4LrX4Z8Jp+w==
+ARC-Seal: i=1; s=dkim; d=manguebit.com; t=1680782966; a=rsa-sha256; cv=none;
+ b=X+L8UmhLUdRCBAw9MWHAqu6ulQyTRO1vwEhwH4nMhXOY50ydAUQbV79F8R0krcT89qEq/e
+ sAhoVpan6GKLt1OWmZpfPfXst20ouAzbbEOvzY2W+vropoxvtYaVqycd+DLBlNw64kp/zV
+ QZdn9uwYphChBpz836Hh3cKz6lV5FGtyjBgJ6738RSClmOtg2VOwMeeXQ9SBfqbc40uSP7
+ ADzqy+rEisk421OWhVmi2sQ83zxi1P3c/ggm2uj6fdwMXS6+SzBrYuF3rf/6LkJHpOhMty
+ MpISUdKw6RD8VXXq4T+DdADeAZPpPu/R8ipyq4JmOPRVATu5C8Io1ysW0RnR1Q==
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=pc@manguebit.com smtp.mailfrom=pc@manguebit.com
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com; 
+ s=dkim; t=1680782966;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=548kDFj4gIoUugd5f3FYvuQrAA/yoYohbrORtH8xrVk=;
+ b=c4FeABY1c2gOAKYwLkzF0oDm8UHzqz72Q5G9vlCPwdcvI0VsuuRFVuWcFjX5YZ1nVkV5cj
+ nGo3qoG5a0j+b1/FNnHg5M5QqXbuXAGRWVIR6KBZyEtzWOzOnSUM7Mz06nnM5HMTr7he2Z
+ e0va26ZyVMdfqLHtFrZuHzVeqAcNjnomKMg91YXDogjEJUZSVaSd2W2sIqQo3mg5Q+NZ83
+ 98MY4jfVONrbUutKxEXnpFG6H/JoSDirVmxuOk7WChTV559mSqTn8AlqGZ3gBr0KgWZtj9
+ FYCL5x6IQGqCUY2xH662o9SkyFd+xJjnGmfOzR1FI0g77YkAxRxNGgmr2k22wg==
+To: Dan Carpenter <error27@gmail.com>
+Subject: Re: [PATCH] cifs: double lock in cifs_reconnect_tcon()
+In-Reply-To: <ZC6JEx4dvWUvgcwW@kili>
+References: <ZC6JEx4dvWUvgcwW@kili>
+Date: Thu, 06 Apr 2023 09:09:16 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,37 +70,23 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Dan Carpenter via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Dan Carpenter <error27@gmail.com>
+From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Paulo Alcantara <pc@manguebit.com>
 Cc: linux-cifs@vger.kernel.org, Shyam Prasad N <sprasad@microsoft.com>,
- kernel-janitors@vger.kernel.org, Paulo Alcantara <pc@cjr.nz>,
- samba-technical@lists.samba.org, Ronnie Sahlberg <lsahlber@redhat.com>,
- Tom Talpey <tom@talpey.com>
+ samba-technical@lists.samba.org, kernel-janitors@vger.kernel.org,
+ Ronnie Sahlberg <lsahlber@redhat.com>, Tom Talpey <tom@talpey.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-This lock was supposed to be an unlock.
+Dan Carpenter <error27@gmail.com> writes:
 
-Fixes: 6cc041e90c17 ("cifs: avoid races in parallel reconnects in smb1")
-Signed-off-by: Dan Carpenter <error27@gmail.com>
----
- fs/cifs/cifssmb.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> This lock was supposed to be an unlock.
+>
+> Fixes: 6cc041e90c17 ("cifs: avoid races in parallel reconnects in smb1")
+> Signed-off-by: Dan Carpenter <error27@gmail.com>
+> ---
+>  fs/cifs/cifssmb.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/cifs/cifssmb.c b/fs/cifs/cifssmb.c
-index 0d30b17494e4..9d963caec35c 100644
---- a/fs/cifs/cifssmb.c
-+++ b/fs/cifs/cifssmb.c
-@@ -120,7 +120,7 @@ cifs_reconnect_tcon(struct cifs_tcon *tcon, int smb_command)
- 	spin_lock(&server->srv_lock);
- 	if (server->tcpStatus == CifsNeedReconnect) {
- 		spin_unlock(&server->srv_lock);
--		mutex_lock(&ses->session_mutex);
-+		mutex_unlock(&ses->session_mutex);
- 
- 		if (tcon->retry)
- 			goto again;
--- 
-2.39.1
-
+Reviewed-by: Paulo Alcantara (SUSE) <pc@manguebit.com>
 
