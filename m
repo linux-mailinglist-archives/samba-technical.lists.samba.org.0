@@ -2,65 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DC2A6DA830
-	for <lists+samba-technical@lfdr.de>; Fri,  7 Apr 2023 06:14:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6704C6DAB4B
+	for <lists+samba-technical@lfdr.de>; Fri,  7 Apr 2023 12:14:48 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=2ayCY8gnSzRVaLPlX69HunLAAxrpGlLKZnIoUUkKakI=; b=KTqV/hZ3/5D71lI2eoOXgXskdb
-	i5IfKXZoSgSiLPZmnp+hBSfi4YUQBy8/GZ9hoP1yUxKNW2EP2mFmTyvC2u/ySA5uNY5XHQbFhwmXj
-	aoHoJpHuXu2DPODiT11XXgHz3frfHMAoAvdZQTWJ8on9/yaRVBSre66NWlX0XZbSYFlk8oERMVQFz
-	E2TvKkZ2CHflHz++5mI0RpS1PfAof7Z7Mq1RZBBsEsTHnM0O/uqK+3nNzQR/kuEH+OkStW+RQ/j9T
-	adfU9DQYN1scrmgKUoBYukWxhHf5pKbqAJTB/FsDuyEWkAnTDwVSGgEM1CMYmm/wQr24qdIXOyUt0
-	pkMLATSA==;
-Received: from ip6-localhost ([::1]:38000 helo=hr1.samba.org) 
+	bh=0Dh6ojJ1aLo61oAOPLHDys23msr377LbLwQmvUkIACk=; b=LuTqkHniDRZFa5jA/Y9LsatPq6
+	cYGfqTXBidBVjGWnP2nqS5kVOIIws6dUe+yX998UR97WRDwfFY5PA4QLEYpmQj6Cbb0Jw7L1F0dwq
+	MGJLGrScC6labnsuqZ4iGp9637O9lYpA+QAPWYAV6y8Bty3h6BL6A1Qnygrs3XtCpgFhJVg8yYCjI
+	0lHybNYaPPM4xOs+dV84sYtVlkU/0qSODzWezgwMJTGfcTPOqlhkSy44frqzBOvqjvB2Jpwl27Id0
+	cKfcH4vKbcUfAIhjefzkHbQ3LGQb6crbFi8Oio3bhfRCPft2XSTD4RoagqifkrIz+uQt+sXitDczl
+	r0hG/CJQ==;
+Received: from ip6-localhost ([::1]:44010 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pkdTn-009m6f-Ie; Fri, 07 Apr 2023 04:13:39 +0000
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f]:39882) 
+	id 1pkj6s-009qYv-2z; Fri, 07 Apr 2023 10:14:22 +0000
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635]:33340) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pkdTi-009m6W-8x
- for samba-technical@lists.samba.org; Fri, 07 Apr 2023 04:13:36 +0000
-Received: by mail-lf1-x12f.google.com with SMTP id h25so53195656lfv.6
- for <samba-technical@lists.samba.org>; Thu, 06 Apr 2023 21:13:33 -0700 (PDT)
+ (Exim) id 1pkj6n-009qYm-Gs
+ for samba-technical@lists.samba.org; Fri, 07 Apr 2023 10:14:19 +0000
+Received: by mail-ej1-x635.google.com with SMTP id 11so7385093ejw.0
+ for <samba-technical@lists.samba.org>; Fri, 07 Apr 2023 03:14:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680840811; x=1683432811;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2ayCY8gnSzRVaLPlX69HunLAAxrpGlLKZnIoUUkKakI=;
- b=G3am6QtCc/ohzizao0JPiLpe5jex0BIOfdy7+tfEDRYRKwumPeM7UTmFkhxOSkS7xt
- fiHh/tLU/T+bFubDudvwLvwX5ebInUPh+PFfFdQnzlGNCfp3FelWGUSOo1nMBGY3U23s
- QHzivT99VepCzvxF8I3g1AG7d5moC/30iU4j7NjXzgz0KihLjwFJ77g5YqJc2JrK71Ld
- TGEorHKWfJrQbpbjE6r2BrsprUVghOQdT536ryiw48QGoCtjedEdwJPFnoJ5MojUhplb
- FnGFPJcGOTTxkjPXpWqgwhT2hX799lx96C/bh6Q9V4mxKt9Q4KOLJOSFSAk0HzX/cEOq
- iE/Q==
+ d=gmail.com; s=20210112; t=1680862456; x=1683454456;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0Dh6ojJ1aLo61oAOPLHDys23msr377LbLwQmvUkIACk=;
+ b=OOnBrmgkvKwMuPxuUzXeqTI54QW/7T3fDO1aYHt+nWr3jp6FFfynu1F8Jh6kNwQsmK
+ gF7cKLFDajyULHAmxiFB94h50n4oRXZJYKrhPS4SKgOsUw63SN3Wuz86CbccpA13O4qC
+ +YZEH/Bdw8vEpdi4MTcYSa5DrnUrBhfBB4rg+g5dQJZ6Iu2paM1f7uGI/oxqb8ZY2X3a
+ RNs0xqmvLHyubMv4+1XYl5DVz5fbwJqCfH4Q0bXU79PlDcPhNIXG5reRxpBZcbhb8fM7
+ bZ0NTrwR7lUQdBy5OGVLxWYOB3SvcOyzH7ieOSR9iGweOVecG00o2Zwiw1i8oOLBuj+u
+ EXHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680840811; x=1683432811;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2ayCY8gnSzRVaLPlX69HunLAAxrpGlLKZnIoUUkKakI=;
- b=VMLiy4PMDivMfy0AsmuCaU5gWoLGbX8mx8V7bgO/4+C+zRZ9rQp5Q5mnSHxUfRPnAB
- 89svVF5JA1r3+RgK6RnYhtCxXJb90TIRl+9kGApz0nuU/TKFLi4C5ajpeyYm/6YvY92J
- l+C6oCRGWPZcfmQZqWKSEe/mYFvsU/F59XDjEOxdMmUBMnebmnUNdYJXQsgwHhPI7ZhY
- HxuFrxQk6LFZtjj2r7DhvRzmkCkrsJn+0DZoFBM1Cx8GAriMlHok2aub6boeRme+5UWG
- t6ANJd2LSIjyFxtDgTGoOJGdgW+eywDCDwKpWub9H8IgCYNYeD+HMCjDCto61l6r2dZn
- tkog==
-X-Gm-Message-State: AAQBX9dPY0/UcM0HEx+S6m7WA8OjRcetjTOYEFmjziiq3bcp1XN1vO4Q
- WECSYLvdjf5Eumt5fR3MOJQQDBkQ47DgJ0LR/Ew=
-X-Google-Smtp-Source: AKy350bRswQc+Go4VLcS//oc6Km8D/aDmonvZzbB2PVC4ejAc8eEuZn7aAMOJPzFaH2SlE6OdF9KR4FpYY4fV7PFS8M=
-X-Received: by 2002:ac2:4569:0:b0:4e9:22ff:948d with SMTP id
- k9-20020ac24569000000b004e922ff948dmr327215lfm.7.1680840811172; Thu, 06 Apr
- 2023 21:13:31 -0700 (PDT)
+ d=1e100.net; s=20210112; t=1680862456; x=1683454456;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0Dh6ojJ1aLo61oAOPLHDys23msr377LbLwQmvUkIACk=;
+ b=315BC/TNPMH80QY9V5PxcC2kXavAIqRxyktoD/8+Bjfm6Xfw5pqrwcCVA5B4Y7l3lJ
+ 6mVVCPHzgWGoUMiwDtR90kUN6znWkIcOtzD8SJbANWuYF/1Nw2q9APM3xKweGD9dGCA1
+ GwndVlvtUCsr3LXVHBTbDlE4kHdZmEKNDnBZ15mdrkC1AWlqBJHAwMq3M61pJ1q5zeFt
+ Pr7FMbUKOk5oACsM71okMuWJm7GarDMmELHrTHm5rLKHmNFwQckni9GWJ+Bpg/wbYrZ9
+ UR1mWIzCkqZ4p+6U/Oj83mkoBjLhFsOkWVtJFR66FFj0N9eIZyLDpwMrFCRc4T1nT617
+ F16Q==
+X-Gm-Message-State: AAQBX9fICBI/K9+v1sl4J9oyd2En5w//+zoOrWL3lg8yQi+9MB1gfd1N
+ azC+WB++9ZKwIos5rFNyEL84jTJEHFWA4wcpp1o=
+X-Google-Smtp-Source: AKy350bbs3q+gqoTfvRGsZnf3KurJm+o/nwFKA8YK2UQxqR9LJdFgwOnS+HXqWQYQOA/e80ID2sew9Pq3HRs2NLXSBg=
+X-Received: by 2002:a17:906:802:b0:8b1:3298:c587 with SMTP id
+ e2-20020a170906080200b008b13298c587mr911297ejd.2.1680862456649; Fri, 07 Apr
+ 2023 03:14:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <6cf163fe-a974-68ab-0edc-11ebc54314ef@redhat.com>
-In-Reply-To: <6cf163fe-a974-68ab-0edc-11ebc54314ef@redhat.com>
-Date: Thu, 6 Apr 2023 23:13:20 -0500
-Message-ID: <CAH2r5msJtiGDuQcQdUkpamChTYNobUEVCax5GmHwpV0NbZOR0Q@mail.gmail.com>
-Subject: Re: [PATCH] cifs: reinstate original behavior again for
+References: <1efcd842-b6a3-353a-0bf9-3ebf890eb712@redhat.com>
+In-Reply-To: <1efcd842-b6a3-353a-0bf9-3ebf890eb712@redhat.com>
+Date: Fri, 7 Apr 2023 20:14:04 +1000
+Message-ID: <CAN05THRJb_4edm9Hne1yY3D6VvtQ=CbYn+KhVy7Xw=i4GE-c+w@mail.gmail.com>
+Subject: Re: [PATCH v2] cifs: reinstate original behavior again for
  forceuid/forcegid
 To: Takayuki Nagata <tnagata@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,31 +72,37 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
+Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
 Cc: tom@talpey.com, sprasad@microsoft.com, linux-cifs@vger.kernel.org,
  pc@cjr.nz, samba-technical@lists.samba.org, lsahlber@redhat.com,
  sfrench@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Tentatively merged into cifs-2.6.git for-next
+Looks good.
+The question arises, are there any situations where forceuid is
+meaningful without uid= argument and what would it mean?
 
-Any thoughts on priority sending it upstream soon?
-
-On Thu, Apr 6, 2023 at 7:06=E2=80=AFAM Takayuki Nagata <tnagata@redhat.com>=
- wrote:
+On Fri, 7 Apr 2023 at 15:09, Takayuki Nagata <tnagata@redhat.com> wrote:
 >
-> forceuid/forcegid should be enabled by default when uid=3D/gid=3D options=
- are
+> forceuid/forcegid should be enabled by default when uid=/gid= options are
 > specified, but commit 24e0a1eff9e2 ("cifs: switch to new mount api")
-> changed the behavior. This patch reinstates original behavior to overridi=
-ng
-> uid/gid with specified uid/gid.
+> changed the behavior. Due to the change, a mounted share does not show
+> intentional uid/gid for files and directories even though uid=/gid=
+> options are specified since forceuid/forcegid are not enabled.
+>
+> This patch reinstates original behavior that overrides uid/gid with
+> specified uid/gid by the options.
 >
 > Fixes: 24e0a1eff9e2 ("cifs: switch to new mount api")
 > Signed-off-by: Takayuki Nagata <tnagata@redhat.com>
+> Acked-by: Ronnie Sahlberg <lsahlber@redhat.com>
+> Acked-by: Tom Talpey <tom@talpey.com>
+> Signed-off-by: Steve French <stfrench@microsoft.com>
 > ---
+> V1 -> V2: Revised commit message to clarify "what breaks".
+>
 >  fs/cifs/fs_context.c | 2 ++
 >  1 file changed, 2 insertions(+)
 >
@@ -106,31 +110,23 @@ ng
 > index ace11a1a7c8a..6f7c5ca3764f 100644
 > --- a/fs/cifs/fs_context.c
 > +++ b/fs/cifs/fs_context.c
-> @@ -972,6 +972,7 @@ static int smb3_fs_context_parse_param(struct fs_cont=
-ext *fc,
+> @@ -972,6 +972,7 @@ static int smb3_fs_context_parse_param(struct fs_context *fc,
 >                         goto cifs_parse_mount_err;
->                 ctx->linux_uid =3D uid;
->                 ctx->uid_specified =3D true;
-> +               ctx->override_uid =3D 1;
+>                 ctx->linux_uid = uid;
+>                 ctx->uid_specified = true;
+> +               ctx->override_uid = 1;
 >                 break;
 >         case Opt_cruid:
->                 uid =3D make_kuid(current_user_ns(), result.uint_32);
-> @@ -1000,6 +1001,7 @@ static int smb3_fs_context_parse_param(struct fs_co=
-ntext *fc,
+>                 uid = make_kuid(current_user_ns(), result.uint_32);
+> @@ -1000,6 +1001,7 @@ static int smb3_fs_context_parse_param(struct fs_context *fc,
 >                         goto cifs_parse_mount_err;
->                 ctx->linux_gid =3D gid;
->                 ctx->gid_specified =3D true;
-> +               ctx->override_gid =3D 1;
+>                 ctx->linux_gid = gid;
+>                 ctx->gid_specified = true;
+> +               ctx->override_gid = 1;
 >                 break;
 >         case Opt_port:
->                 ctx->port =3D result.uint_32;
+>                 ctx->port = result.uint_32;
 > --
 > 2.40.0
 >
-
-
---=20
-Thanks,
-
-Steve
 
