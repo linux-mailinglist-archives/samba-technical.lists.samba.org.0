@@ -2,63 +2,51 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6704C6DAB4B
-	for <lists+samba-technical@lfdr.de>; Fri,  7 Apr 2023 12:14:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 307436DBA0D
+	for <lists+samba-technical@lfdr.de>; Sat,  8 Apr 2023 12:25:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=0Dh6ojJ1aLo61oAOPLHDys23msr377LbLwQmvUkIACk=; b=LuTqkHniDRZFa5jA/Y9LsatPq6
-	cYGfqTXBidBVjGWnP2nqS5kVOIIws6dUe+yX998UR97WRDwfFY5PA4QLEYpmQj6Cbb0Jw7L1F0dwq
-	MGJLGrScC6labnsuqZ4iGp9637O9lYpA+QAPWYAV6y8Bty3h6BL6A1Qnygrs3XtCpgFhJVg8yYCjI
-	0lHybNYaPPM4xOs+dV84sYtVlkU/0qSODzWezgwMJTGfcTPOqlhkSy44frqzBOvqjvB2Jpwl27Id0
-	cKfcH4vKbcUfAIhjefzkHbQ3LGQb6crbFi8Oio3bhfRCPft2XSTD4RoagqifkrIz+uQt+sXitDczl
-	r0hG/CJQ==;
-Received: from ip6-localhost ([::1]:44010 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=8JPFpe0KbSxrXuX+8YViGBbUVy2wRgliq0+AdmaMlDI=; b=NCowzcgAhWkuo9eYh/RD8Uzkgu
+	PtAoXeqTTu9NvXOwY78rCLJvEDnUa5/ocIZeGq3BsYGAOABpspM1XhafP+3gdGTcaGoT6QDsDcYT9
+	m6NtVzVtViqnzI1uchfQk6ME6n6tQti3Nc9NEhM+gb8ijEhckrGHFfJXjeAN/Fx1ANn/lvJ4VAFGg
+	jEiqTrNqckfwcqxYZ04T7ctCpMxEbtMsogv2iPl4+kOyUr8Ikyu/WSBv/WW9wDudDHq8Tzq8XwJL/
+	BhyQHK4IEoZdfHyh2n7xfA4WafibgWF6hbveNaChlA9N5zUIfYh8uHMkyy4bZHgCiWlLJWgHLD8LK
+	KSxLB33g==;
+Received: from ip6-localhost ([::1]:22608 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pkj6s-009qYv-2z; Fri, 07 Apr 2023 10:14:22 +0000
-Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635]:33340) 
+	id 1pl5lD-00ABzV-D5; Sat, 08 Apr 2023 10:25:31 +0000
+Received: from lounge.grep.be ([2a01:4f8:200:91e8::2]:32942) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pkj6n-009qYm-Gs
- for samba-technical@lists.samba.org; Fri, 07 Apr 2023 10:14:19 +0000
-Received: by mail-ej1-x635.google.com with SMTP id 11so7385093ejw.0
- for <samba-technical@lists.samba.org>; Fri, 07 Apr 2023 03:14:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680862456; x=1683454456;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0Dh6ojJ1aLo61oAOPLHDys23msr377LbLwQmvUkIACk=;
- b=OOnBrmgkvKwMuPxuUzXeqTI54QW/7T3fDO1aYHt+nWr3jp6FFfynu1F8Jh6kNwQsmK
- gF7cKLFDajyULHAmxiFB94h50n4oRXZJYKrhPS4SKgOsUw63SN3Wuz86CbccpA13O4qC
- +YZEH/Bdw8vEpdi4MTcYSa5DrnUrBhfBB4rg+g5dQJZ6Iu2paM1f7uGI/oxqb8ZY2X3a
- RNs0xqmvLHyubMv4+1XYl5DVz5fbwJqCfH4Q0bXU79PlDcPhNIXG5reRxpBZcbhb8fM7
- bZ0NTrwR7lUQdBy5OGVLxWYOB3SvcOyzH7ieOSR9iGweOVecG00o2Zwiw1i8oOLBuj+u
- EXHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680862456; x=1683454456;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0Dh6ojJ1aLo61oAOPLHDys23msr377LbLwQmvUkIACk=;
- b=315BC/TNPMH80QY9V5PxcC2kXavAIqRxyktoD/8+Bjfm6Xfw5pqrwcCVA5B4Y7l3lJ
- 6mVVCPHzgWGoUMiwDtR90kUN6znWkIcOtzD8SJbANWuYF/1Nw2q9APM3xKweGD9dGCA1
- GwndVlvtUCsr3LXVHBTbDlE4kHdZmEKNDnBZ15mdrkC1AWlqBJHAwMq3M61pJ1q5zeFt
- Pr7FMbUKOk5oACsM71okMuWJm7GarDMmELHrTHm5rLKHmNFwQckni9GWJ+Bpg/wbYrZ9
- UR1mWIzCkqZ4p+6U/Oj83mkoBjLhFsOkWVtJFR66FFj0N9eIZyLDpwMrFCRc4T1nT617
- F16Q==
-X-Gm-Message-State: AAQBX9fICBI/K9+v1sl4J9oyd2En5w//+zoOrWL3lg8yQi+9MB1gfd1N
- azC+WB++9ZKwIos5rFNyEL84jTJEHFWA4wcpp1o=
-X-Google-Smtp-Source: AKy350bbs3q+gqoTfvRGsZnf3KurJm+o/nwFKA8YK2UQxqR9LJdFgwOnS+HXqWQYQOA/e80ID2sew9Pq3HRs2NLXSBg=
-X-Received: by 2002:a17:906:802:b0:8b1:3298:c587 with SMTP id
- e2-20020a170906080200b008b13298c587mr911297ejd.2.1680862456649; Fri, 07 Apr
- 2023 03:14:16 -0700 (PDT)
+ (Exim) id 1pl5l7-00ABzI-QX
+ for samba-technical@lists.samba.org; Sat, 08 Apr 2023 10:25:28 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
+ s=2021.lounge; h=Content-Type:MIME-Version:Message-ID:Subject:To:From:Date:
+ Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=8JPFpe0KbSxrXuX+8YViGBbUVy2wRgliq0+AdmaMlDI=; b=DCBdcZvuOjaWdYlqpzyvXHVJSG
+ v0TGPRfPK82t7DGjw0opBuuZEgGMH7TEg/topj+p4X9fZg7mceQhS2fL4+bCudZXRWj4hf5y2cOA+
+ g4KueK+3ZzpVO4lwiZ6xMvWZQSyfkjx5xgXUViB3MAv97vY/yhQyp+DpVXSBgJ4/zFZg1Vld/OfeM
+ JCWiYtWGHeOmLwdgCsVUt0M7VD1bvMjoEyQJLJyKvbAzJcPvH6l7N6059MzNhGCNJ8SwT8i8Mf3Z4
+ 1g3eO2mjYMtpbDzw9BlIeuh13hPfnWw1ZFYu3BSEiLqeXK8ZNF1P1MTXctB8MTiL5HMKxJImIqdHx
+ MB1ko9Sw==;
+Received: from [102.39.141.34] (helo=pc220518)
+ by lounge.grep.be with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <w@uter.be>) id 1pl5l0-00E6CH-GJ
+ for samba-technical@lists.samba.org; Sat, 08 Apr 2023 12:25:18 +0200
+Received: from wouter by pc220518 with local (Exim 4.96)
+ (envelope-from <w@uter.be>) id 1pl5ks-000BGO-2p
+ for samba-technical@lists.samba.org; Sat, 08 Apr 2023 12:25:10 +0200
+Date: Sat, 8 Apr 2023 12:25:10 +0200
+To: samba-technical@lists.samba.org
+Subject: Issue with socket-wrapper socketpair()
+Message-ID: <ZCqh44RA5PzbQ20g@pc220518.home.grep.be>
 MIME-Version: 1.0
-References: <1efcd842-b6a3-353a-0bf9-3ebf890eb712@redhat.com>
-In-Reply-To: <1efcd842-b6a3-353a-0bf9-3ebf890eb712@redhat.com>
-Date: Fri, 7 Apr 2023 20:14:04 +1000
-Message-ID: <CAN05THRJb_4edm9Hne1yY3D6VvtQ=CbYn+KhVy7Xw=i4GE-c+w@mail.gmail.com>
-Subject: Re: [PATCH v2] cifs: reinstate original behavior again for
- forceuid/forcegid
-To: Takayuki Nagata <tnagata@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Organization: none
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,61 +60,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Cc: tom@talpey.com, sprasad@microsoft.com, linux-cifs@vger.kernel.org,
- pc@cjr.nz, samba-technical@lists.samba.org, lsahlber@redhat.com,
- sfrench@samba.org
+From: Wouter Verhelst via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Wouter Verhelst <w@uter.be>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Looks good.
-The question arises, are there any situations where forceuid is
-meaningful without uid= argument and what would it mean?
+Hi,
 
-On Fri, 7 Apr 2023 at 15:09, Takayuki Nagata <tnagata@redhat.com> wrote:
->
-> forceuid/forcegid should be enabled by default when uid=/gid= options are
-> specified, but commit 24e0a1eff9e2 ("cifs: switch to new mount api")
-> changed the behavior. Due to the change, a mounted share does not show
-> intentional uid/gid for files and directories even though uid=/gid=
-> options are specified since forceuid/forcegid are not enabled.
->
-> This patch reinstates original behavior that overrides uid/gid with
-> specified uid/gid by the options.
->
-> Fixes: 24e0a1eff9e2 ("cifs: switch to new mount api")
-> Signed-off-by: Takayuki Nagata <tnagata@redhat.com>
-> Acked-by: Ronnie Sahlberg <lsahlber@redhat.com>
-> Acked-by: Tom Talpey <tom@talpey.com>
-> Signed-off-by: Steve French <stfrench@microsoft.com>
-> ---
-> V1 -> V2: Revised commit message to clarify "what breaks".
->
->  fs/cifs/fs_context.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/fs/cifs/fs_context.c b/fs/cifs/fs_context.c
-> index ace11a1a7c8a..6f7c5ca3764f 100644
-> --- a/fs/cifs/fs_context.c
-> +++ b/fs/cifs/fs_context.c
-> @@ -972,6 +972,7 @@ static int smb3_fs_context_parse_param(struct fs_context *fc,
->                         goto cifs_parse_mount_err;
->                 ctx->linux_uid = uid;
->                 ctx->uid_specified = true;
-> +               ctx->override_uid = 1;
->                 break;
->         case Opt_cruid:
->                 uid = make_kuid(current_user_ns(), result.uint_32);
-> @@ -1000,6 +1001,7 @@ static int smb3_fs_context_parse_param(struct fs_context *fc,
->                         goto cifs_parse_mount_err;
->                 ctx->linux_gid = gid;
->                 ctx->gid_specified = true;
-> +               ctx->override_gid = 1;
->                 break;
->         case Opt_port:
->                 ctx->port = result.uint_32;
-> --
-> 2.40.0
->
+Currently, the NBD[1] test suite starts nbd-server with a generated
+configuration file, and then runs a special test client against that
+server. This works great, except if you are already running nbd-server
+on the machine where the test is run, in which case (obviously) the
+tester client runs its tests against the wrong server and then things go
+haywire.
+
+Someone pointed out cwrap to me a while ago, so I had a look at using
+socket-wrapper to isolate nbd-server, and it works great! except for the
+GnuTLS-using tests, and I *think* it's because of how the GnuTLS things
+are implemented in the "test" client: rather than adding an abstraction
+layer which directs a read or write to either a "plain" or a TLS-using
+write, we instead call socketpair(), then fork(), and then on one end of
+the socketpair we implement an encrypting/decrypting proxy. This keeps
+the tester client straightforward (everything continues to use regular
+reads and writes etc on a regular socket) and has no effect on the
+software under test (it's not as efficient, but for a test suite, that's
+fine).
+
+However, it looks like this setup may not work correctly with
+socket-wrapper. I see that my tester client, after a bit of back and
+forth with the server which functions correctly, loses connectivity.
+This is *not* immediately upon connection, only after a few messages
+have been sent back and forth.
+
+Does it seem likely to people here that this is a problem in
+socket-wrapper, or should I be looking at something "odd" I'm doing
+myself?
+
+(if you want to try to reproduce: check out the git repository, ensure
+that libsocket_wrapper.so can be found through pkg-config, and run
+"./configure; make check")
+
+Thanks,
+
+[1] https://github.com/NetworkBlockDevice/nbd
+
+-- 
+     w@uter.{be,co.za}
+wouter@{grep.be,fosdem.org,debian.org}
+
+I will have a Tin-Actinium-Potassium mixture, thanks.
 
