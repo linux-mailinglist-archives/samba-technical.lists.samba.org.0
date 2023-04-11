@@ -2,51 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 307436DBA0D
-	for <lists+samba-technical@lfdr.de>; Sat,  8 Apr 2023 12:25:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A5206DD61D
+	for <lists+samba-technical@lfdr.de>; Tue, 11 Apr 2023 11:02:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=8JPFpe0KbSxrXuX+8YViGBbUVy2wRgliq0+AdmaMlDI=; b=NCowzcgAhWkuo9eYh/RD8Uzkgu
-	PtAoXeqTTu9NvXOwY78rCLJvEDnUa5/ocIZeGq3BsYGAOABpspM1XhafP+3gdGTcaGoT6QDsDcYT9
-	m6NtVzVtViqnzI1uchfQk6ME6n6tQti3Nc9NEhM+gb8ijEhckrGHFfJXjeAN/Fx1ANn/lvJ4VAFGg
-	jEiqTrNqckfwcqxYZ04T7ctCpMxEbtMsogv2iPl4+kOyUr8Ikyu/WSBv/WW9wDudDHq8Tzq8XwJL/
-	BhyQHK4IEoZdfHyh2n7xfA4WafibgWF6hbveNaChlA9N5zUIfYh8uHMkyy4bZHgCiWlLJWgHLD8LK
-	KSxLB33g==;
-Received: from ip6-localhost ([::1]:22608 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=ar0Io4/X/pc8bYUqg7K/M6GUJ7YgaPbY7OP/wXUPya0=; b=d+j9Ua20EK4ft/JKBZ6cm1J1ZL
+	CJ12alsPf8XnucpzC4V8JPEQCymNxseF0t8vIeDW8iJ9gdUx1VOv+fSdOkgzLqYBc1+LKU9oVW/Xp
+	Gqu3WwuAIRvuwsRhYYJwQvHbRy0fGsQcVYAnSxiDUIGsmhV0oU2khypcljJ6b+z4nQd+CEVFqCOrt
+	9x68i36JUApVuwioYx8jpcwqPVj16wYXSPCuMsBBVMXMxszULdCG9W0Xim5MGywnzIp56k7cXoY4N
+	3aVnVLMmYM0kocs19X8CwQWbm9veD6+ri0Co3ZYMl0e7YeWOWs9qnktAEgFjjKKobDE7szcKGnhBw
+	EG/QXyTg==;
+Received: from ip6-localhost ([::1]:56646 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pl5lD-00ABzV-D5; Sat, 08 Apr 2023 10:25:31 +0000
-Received: from lounge.grep.be ([2a01:4f8:200:91e8::2]:32942) 
+	id 1pm9tI-000KDh-EL; Tue, 11 Apr 2023 09:02:16 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:12860) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pl5l7-00ABzI-QX
- for samba-technical@lists.samba.org; Sat, 08 Apr 2023 10:25:28 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=uter.be;
- s=2021.lounge; h=Content-Type:MIME-Version:Message-ID:Subject:To:From:Date:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=8JPFpe0KbSxrXuX+8YViGBbUVy2wRgliq0+AdmaMlDI=; b=DCBdcZvuOjaWdYlqpzyvXHVJSG
- v0TGPRfPK82t7DGjw0opBuuZEgGMH7TEg/topj+p4X9fZg7mceQhS2fL4+bCudZXRWj4hf5y2cOA+
- g4KueK+3ZzpVO4lwiZ6xMvWZQSyfkjx5xgXUViB3MAv97vY/yhQyp+DpVXSBgJ4/zFZg1Vld/OfeM
- JCWiYtWGHeOmLwdgCsVUt0M7VD1bvMjoEyQJLJyKvbAzJcPvH6l7N6059MzNhGCNJ8SwT8i8Mf3Z4
- 1g3eO2mjYMtpbDzw9BlIeuh13hPfnWw1ZFYu3BSEiLqeXK8ZNF1P1MTXctB8MTiL5HMKxJImIqdHx
- MB1ko9Sw==;
-Received: from [102.39.141.34] (helo=pc220518)
- by lounge.grep.be with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <w@uter.be>) id 1pl5l0-00E6CH-GJ
- for samba-technical@lists.samba.org; Sat, 08 Apr 2023 12:25:18 +0200
-Received: from wouter by pc220518 with local (Exim 4.96)
- (envelope-from <w@uter.be>) id 1pl5ks-000BGO-2p
- for samba-technical@lists.samba.org; Sat, 08 Apr 2023 12:25:10 +0200
-Date: Sat, 8 Apr 2023 12:25:10 +0200
+ (Exim) id 1pm9tD-000KDY-Bj
+ for samba-technical@lists.samba.org; Tue, 11 Apr 2023 09:02:13 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=ar0Io4/X/pc8bYUqg7K/M6GUJ7YgaPbY7OP/wXUPya0=; b=TIl8CQewwO5F0MBJSYxrtSMXAz
+ KvhJIP6nglCwrDj4/9/1s8GuvPjKX0rmzan2CyusBp4xpmyVaWQWI7qizu3bRRZNG/okYwNTn3AAM
+ 4m02CTtOCtMCOT2mcvZhknvu4Q69Y9AEH9mknMsNTDZsa+0BalscCAGPcYpPAtAep3gZyDBCJZbAG
+ pWErj6hZfqKnKE+3Dyo0rqMk51+q+U2nl3yzJd9KrfrqhmeIIe066g83eKV1OG/kyhVvI307zB571
+ YFlb11Q0PWYE/R7/nr3xX1rWZ9+OTXyQ6qH4XYcsTJWV5+SAd13pofwDGPihJj1Leq7mF6q3mDp0k
+ BXhapCbrZYkiT9aTCOZTqyubFHGIZgB7Bcak+g9pIHqKwmhIbqkS0CUy9Zgzkg2cE5VotFSFTeto7
+ f94Mcn5LVijmAKN5d/cppbzMY6puxB6PXCfk4xSiqgdi0Xp9V3EBKOUZ9PxEWSAaYFz76aMr12sqq
+ q8Q/cKGHmp77dPrt3keSX5EZ;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pm9tC-000QhY-DH; Tue, 11 Apr 2023 09:02:10 +0000
 To: samba-technical@lists.samba.org
-Subject: Issue with socket-wrapper socketpair()
-Message-ID: <ZCqh44RA5PzbQ20g@pc220518.home.grep.be>
+Subject: Re: Issue with socket-wrapper socketpair()
+Date: Tue, 11 Apr 2023 11:02:09 +0200
+Message-ID: <4825342.31r3eYUQgx@magrathea>
+In-Reply-To: <ZCqh44RA5PzbQ20g@pc220518.home.grep.be>
+References: <ZCqh44RA5PzbQ20g@pc220518.home.grep.be>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Organization: none
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,53 +55,70 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Wouter Verhelst via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Wouter Verhelst <w@uter.be>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Wouter Verhelst <w@uter.be>, jjelen@redhat.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+On Saturday, 8 April 2023 12:25:10 CEST Wouter Verhelst via samba-technical 
+wrote:
+> Hi,
 
-Currently, the NBD[1] test suite starts nbd-server with a generated
-configuration file, and then runs a special test client against that
-server. This works great, except if you are already running nbd-server
-on the machine where the test is run, in which case (obviously) the
-tester client runs its tests against the wrong server and then things go
-haywire.
+Hi Wouter,
+ 
+> Currently, the NBD[1] test suite starts nbd-server with a generated
+> configuration file, and then runs a special test client against that
+> server. This works great, except if you are already running nbd-server
+> on the machine where the test is run, in which case (obviously) the
+> tester client runs its tests against the wrong server and then things go
+> haywire.
+> 
+> Someone pointed out cwrap to me a while ago, so I had a look at using
+> socket-wrapper to isolate nbd-server, and it works great! except for the
+> GnuTLS-using tests, and I *think* it's because of how the GnuTLS things
+> are implemented in the "test" client: rather than adding an abstraction
+> layer which directs a read or write to either a "plain" or a TLS-using
+> write, we instead call socketpair(), then fork(), and then on one end of
+> the socketpair we implement an encrypting/decrypting proxy. This keeps
+> the tester client straightforward (everything continues to use regular
+> reads and writes etc on a regular socket) and has no effect on the
+> software under test (it's not as efficient, but for a test suite, that's
+> fine).
 
-Someone pointed out cwrap to me a while ago, so I had a look at using
-socket-wrapper to isolate nbd-server, and it works great! except for the
-GnuTLS-using tests, and I *think* it's because of how the GnuTLS things
-are implemented in the "test" client: rather than adding an abstraction
-layer which directs a read or write to either a "plain" or a TLS-using
-write, we instead call socketpair(), then fork(), and then on one end of
-the socketpair we implement an encrypting/decrypting proxy. This keeps
-the tester client straightforward (everything continues to use regular
-reads and writes etc on a regular socket) and has no effect on the
-software under test (it's not as efficient, but for a test suite, that's
-fine).
+I'm not aware of any issues with socketpair(). We wrap the function but only 
+to detect stale file descriptors. So the socketpair() always goes directly to 
+libc.
 
-However, it looks like this setup may not work correctly with
-socket-wrapper. I see that my tester client, after a bit of back and
-forth with the server which functions correctly, loses connectivity.
-This is *not* immediately upon connection, only after a few messages
-have been sent back and forth.
+> However, it looks like this setup may not work correctly with
+> socket-wrapper. I see that my tester client, after a bit of back and
+> forth with the server which functions correctly, loses connectivity.
+> This is *not* immediately upon connection, only after a few messages
+> have been sent back and forth.
 
-Does it seem likely to people here that this is a problem in
-socket-wrapper, or should I be looking at something "odd" I'm doing
-myself?
+This sounds like a similar issue we had with libssh. Jakub also thought the 
+issue is with SOCKET_WRAPPER's small MTU size, but it turned out to be an 
+issue in libssh polling code!
 
-(if you want to try to reproduce: check out the git repository, ensure
-that libsocket_wrapper.so can be found through pkg-config, and run
-"./configure; make check")
+https://gitlab.com/cwrap/socket_wrapper/-/merge_requests/34
 
-Thanks,
+> Does it seem likely to people here that this is a problem in
+> socket-wrapper, or should I be looking at something "odd" I'm doing
+> myself?
 
-[1] https://github.com/NetworkBlockDevice/nbd
+If it is an issue in socket_wrapper we need a test/reproducer for it. We 
+already use socketpair() in tests and those work just fine.
+
+
+Best regards
+
+
+	Andreas
 
 -- 
-     w@uter.{be,co.za}
-wouter@{grep.be,fosdem.org,debian.org}
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
-I will have a Tin-Actinium-Potassium mixture, thanks.
+
 
