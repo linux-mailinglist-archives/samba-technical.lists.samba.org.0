@@ -2,51 +2,71 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 017816DE311
-	for <lists+samba-technical@lfdr.de>; Tue, 11 Apr 2023 19:48:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D29A26DF14C
+	for <lists+samba-technical@lfdr.de>; Wed, 12 Apr 2023 11:59:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=JIjHcEVUyY5MslDLyT6tPWvgLiKq8GI/KDr04lzbDgc=; b=sLBESexhflGDC7MxG1iKp/Rxpc
-	omQjzpZscUMbKI6lnxv+U6BFqBuLUMjn/oO2GF+OezazMHEawWWzcg1rf613GAgpbKQyN9kuhreTZ
-	Lz8+Cf1kJnc6riqpeuXfoHhXgT37guiYrRo9F9m17zGJVbX4NExPWz7Kl1kLcaslkX/2ETLY0FG3Q
-	NxMfcmp37H2vJASl3rD49Ed/7cR2D2ldsdVCb9lKc0hnNb6R9wyFVEvgzVDn8MCWEyWzIRPTUw/eY
-	MGvCCEMSfKe5p9ZkwjSIXvpJXcbhdiEnEq63pgXbcT01UqGaW1qsAtU0+CB9rNzm1/DOoFIP+MaZ/
-	URK0AYMg==;
-Received: from ip6-localhost ([::1]:61296 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=RrBLSWnA7vef+Q7Zbf/FvH2E/imLXAGvsFpqUz/PQTI=; b=GyHyf0gr/pxrsqux56R1uIv7nd
+	anSwZzwa8mNwUV4KoZjyQShcjhyrRehsjBPDIPPBfnCuZZucudcc1+S0zzmTKjGln7Gj2a/V1/mVk
+	G1JXutjCt0VCcsiBLxMMznS9+8voQowRONQ67/Pl1bB2V00PNX9N+9pyDF/ruexM52tDafai03/Pa
+	HKRaEbJLLgBFj0/9pJMUEfEi2iLPDK6Wrv8P0JrfCYHNjDHaW3OSAAugX0WEndR0izccZUtAkQb/W
+	nrlhBhOwYbYlTVnFEmvevYKLlrUdkTdoCI0NssIy7EeWdtll02/UPv3a7wUioZaBm2nqmbpnGjbqd
+	jqnbDG9w==;
+Received: from ip6-localhost ([::1]:59484 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pmI5y-000PSZ-IJ; Tue, 11 Apr 2023 17:47:54 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:55976) 
+	id 1pmXFC-000dNh-Fn; Wed, 12 Apr 2023 09:58:26 +0000
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d]:44795) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pmI5r-000PSQ-Gv
- for samba-technical@lists.samba.org; Tue, 11 Apr 2023 17:47:51 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=JIjHcEVUyY5MslDLyT6tPWvgLiKq8GI/KDr04lzbDgc=; b=hZW1SJdmrv6zimcdl763LQZR2t
- kpMIjfYvnc6FOG+KuStkemQQ+8XiaVpKlrSV9xHNcdloCDGyZQ0RcdQAB4oHZUyhAoRdld6b+GG4H
- 81F6U5usVV5hPCN2MFbCSmRGlQ53scZfYHpW5grK+VJ7mEX1T3QuMZ/n6VZ8j5tmaQrpzeEobvn5j
- 4ATRzlu95mlPBAYMTme7bo3UNG6Eh3lMXqQZH+iDRfcBQWc7GOwyxvXOKLdyncVi7dsWiStYBj4m8
- viCROVDlQ4ani0t3TzQrQ+xC8ZyiSG/Eqhj7wr8/+/EKa7DQtYM4Y/+Ill0P0LeY3nzoJa37vWUDZ
- CCNd+OcVNzA2DMhj5CuH8+orzDpZrtuxz391hORfMk49MePs9o/43RXCLQoAh+J/q7qx+mRwdGY5Z
- aG89W38Kk5KbivJA2Wxwcl2VT3/xFV7o/OPcbXP0W2r76G14wAk3HDzoDyPlpVPR5F24hScgdnqJv
- fYY7oQd3MsI9xBWzkls8gmfE;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pmI5q-000VJA-KY
- for samba-technical@lists.samba.org; Tue, 11 Apr 2023 17:47:46 +0000
-Message-ID: <1d47d63c-854a-0622-c6de-3965dbeb3804@samba.org>
-Date: Tue, 11 Apr 2023 18:47:45 +0100
+ (Exim) id 1pmXF7-000dNY-3F
+ for samba-technical@lists.samba.org; Wed, 12 Apr 2023 09:58:23 +0000
+Received: by mail-wr1-x42d.google.com with SMTP id d9so10369251wrb.11
+ for <samba-technical@lists.samba.org>; Wed, 12 Apr 2023 02:58:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=comind-io.20210112.gappssmtp.com; s=20210112; t=1681293500;
+ h=content-transfer-encoding:subject:from:content-language:to
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RrBLSWnA7vef+Q7Zbf/FvH2E/imLXAGvsFpqUz/PQTI=;
+ b=HBIPje3n/CkUPzhkU1ap/k9ji90Fy6HK7g7G/lsO0C+8kWV9Wnx2K3cZdDMRV90pNk
+ GY/JB/JdlMWXdyIHTAJDoCv3X0Zw/JVx9lOos+j8LNHSGJgY/UOB/Y8rQs3CXemGGlcK
+ 9h8HrR2nEPORWNj29Gz+893PM2oPSdHFptIfmLCcpo6IMF5Nr57zrMrhQ6ANNF2mWxbt
+ UZhd410+NHCTnCSSmyfzmFGvkD7cvEBsPI835uv4Er3BZKFXLYLO/4FzsNqQQguFNfxk
+ M7N+luvEnC8bxr0PRBu0b1RNh7xW6Xke4qEs/qmtc+lxC9hDIyxViOfqyHg8oExr95VF
+ FYZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1681293500;
+ h=content-transfer-encoding:subject:from:content-language:to
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=RrBLSWnA7vef+Q7Zbf/FvH2E/imLXAGvsFpqUz/PQTI=;
+ b=gpzac9LMYqwYsCDi2eiwrG0b9zKUC8AoeKw9OGIZanDZTGQVnhKj49hxSb3ddlb4bU
+ n03bz6qtC8rkcnFitwVufp2KxDjIQ2PijbjayEY68NkCm4O3ClNhWEFdgY1qhCqImvUL
+ rxpGZ8KoXl4Zo+eeInNHItmk9szW/n8Atf1E0SvCQA87wYT3e9advB9wydrFhvheLne3
+ fsSAtynk/cHw5Wu8fd55CHKZWphLSb80mG4Dno4nUSAXZQgVKLXz2oMCIYb7opcr80rf
+ kYgzlanAQ8jDPjV01QvT5XdF0HCgfQLg+faRyJ40hUfAQ+OiiTgu47yfJWm+wDOAMcF/
+ 0xhA==
+X-Gm-Message-State: AAQBX9f+ZfZBPuLPV85/IcHDG4ThRJgZ66VmRNy6HeYyrwEd885Gt2Wa
+ cpXMAtjm4a3Dp2xOngbY6i+Ao9eFhg/sedRHkt8=
+X-Google-Smtp-Source: AKy350biGq0ZOn5p7KsbuGJXTcyvA/g45UEmoB9lDLypnsCTH5sUWnrrqx/92Smh1ZyUbKgdhwQkvQ==
+X-Received: by 2002:a5d:4581:0:b0:2ef:aeb7:5add with SMTP id
+ p1-20020a5d4581000000b002efaeb75addmr10794086wrq.68.1681293499572; 
+ Wed, 12 Apr 2023 02:58:19 -0700 (PDT)
+Received: from [192.168.50.106] (83-244-193-76.cust-83.exponential-e.net.
+ [83.244.193.76]) by smtp.gmail.com with ESMTPSA id
+ m13-20020a056000180d00b002efac42ff35sm14609221wrh.37.2023.04.12.02.58.19
+ for <samba-technical@lists.samba.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 12 Apr 2023 02:58:19 -0700 (PDT)
+Message-ID: <a8fdda06-765b-b26e-717a-76b794035cb7@comind.io>
+Date: Wed, 12 Apr 2023 10:58:19 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Subject: Re: Recent Samba (4.18.0+) winbind configuration ?
-Content-Language: en-GB
 To: samba-technical@lists.samba.org
-References: <4203dcdd-5e9b-6708-5cdf-aec961f5f6a1@oracle.com>
- <ZDWVzOaPP7SNIxOf@jeremy-acer>
-In-Reply-To: <ZDWVzOaPP7SNIxOf@jeremy-acer>
+Content-Language: en-US
+Subject: How to test samba LDAP parameters with openldap tools, eg ldapsearch?
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,49 +80,37 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: samba-technical@lists.samba.org
-Cc: Rowland Penny <rpenny@samba.org>
+From: Jan Andersen via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jan Andersen <jan@comind.io>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+I have an openLDAP service running on a debian 11 system, and Samba 4.13 
+on another Debian 11. In smb.conf I have set up the following:
 
+   # LDAP Settings
+   passdb backend = ldapsam:ldap://vogon.zombie.io
+   ldap suffix = dc=zombie,dc=io
+   ldap user suffix = ou=people
+   ldap group suffix = ou=groups
+   ldap machine suffix = ou=computers
+   ldap idmap suffix = ou=Idmap
+   ldap admin dn = cn=admin,dc=zombie,dc=io
+   ldap ssl = start tls
+   ldap passwd sync = yes
 
-On 11/04/2023 18:15, Jeremy Allison via samba-technical wrote:
-> On Tue, Apr 11, 2023 at 02:32:27PM +0200, Jiří Šašek - Solaris Prague 
-> via samba-technical wrote:
->> Story begins when Samba 4.14.0 changed its VFS so we decided to skip 
->> 4.14.x and also 4.15.x releases to bundle it on Solaris but various 
->> problems were also with later releases and we were only fixing issues 
->> in 4.13.0 . Currently (4.18.0) the situation can called be critical so 
->> I focused on recent release.
->>
->> winbindd is giving up and I think the key could be in log message:
->>
->> [2023/04/11 11:28:53.090661,  5, pid=1525, effective(0, 0), real(0, 
->> 0), class=winbind] ../../source3/winbindd/wb_lookupname.c:
->> 52(wb_lookupname_send)
->>  WB command lookupname start.
->>  Search namespace 'smbsetup' and domain 'smbsetup' for name ''.
->>
->> ...where "smbsetup" is my domain  ...and I have added core-dump here 
->> to freeze the stack:
->>
->> [2023/04/11 11:28:53.090780,  0, pid=1525, effective(0, 0), real(0, 
->> 0)] ../../source3/lib/dumpcore.c:315(dump_core)
->>  dumping core in /var/samba/log/cores/winbindd
-> 
-> Jiří, please open a bug and upload the full backtrace.
-> 
-> Thanks,
-> 
-> Jeremy.
-> 
+I have some trouble understanding why this doesn't appear to work, and I 
+would like to try to understand how these parameters map to the 
+parameters of, say, ldapsearch, so I can see if the problem lies there.
 
-Damn, I missed that, focussed on how wrong chatGPT had got it wrong, 
-anyone heard of 'autorid_compat'  ?
+I have run smbd with max debugging, and as far as I can see, it 
+successfully makes contact with the LDAP server, but then doesn't find 
+the user I'm trying to log in with. However, when I do a search with 
+ldapsearch, like this:
 
-I still think that Yura needs to post their smb.conf etc.
+ldapsearch -v -b "dc=zombie,dc=io" -H ldaps://vogon.zombie.io -D 
+"cn=admin,dc=zombie,dc=io" -W
 
-Rowland
+- I find the user in the output. So, my question is, which ldapsearch 
+command would be equivalent to what smbd is doing?
 
