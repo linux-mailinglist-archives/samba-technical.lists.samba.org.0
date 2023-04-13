@@ -2,42 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43EB66E1580
-	for <lists+samba-technical@lfdr.de>; Thu, 13 Apr 2023 21:56:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A996A6E15FB
+	for <lists+samba-technical@lfdr.de>; Thu, 13 Apr 2023 22:37:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=rZcDg3ZBOzYIW+1/Xnj+vOzTAoTLZL2AXWd2cK6C+i0=; b=3mHsaE2rOmsg2JXB8sxafI6Awh
-	nPAS/dH32xEIkxtaOUNHWDfPHcIL+/Iax609VjBP1hknj7YPZ0dYxAYxeKlX+MM3LbQXw5+/DHr0Z
-	5qSh0jNfCZW5HVrvhwj3h/n1Ixwah/HATqsCsnM/PagwWEfNETUF2tSo3Beos1y6muntAgjEBbFN5
-	TNn3ADHv7vgpQhNcvmdxIrbCMI1GsKNJe+frDfVoKX+Qr0SdrpQI94EAm3jf5uJKnOKvPdXFZGYtA
-	T6dAVHnURBN0DHOX7BGresBtVtBALfalcsjikqoBMHWH6GOgyS0xoFjkRE8Lj7vtfX6zlIsHbBs53
-	XWiJ7/Hw==;
-Received: from ip6-localhost ([::1]:23104 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=J5EHv1h/JxpDiwCE84Tlx5s+/PUWjuI5d6Uuk2uVa40=; b=wtBqP8lg2K47t4rpxh8jkQwONd
+	T1fogZ5uKxHvCpD3zu6Hk+9wslj22FVe3r1d1WjPdfFwX0vscXl5PM8JlQ8VcU+TMeHpfJqaWBpS1
+	RglA4BFxp0cwRmW9IMqOXsuXI6ogkmITqflQDCFbeKcIk7r9N/CfVvEesWMWjIXVOULArHWzuoFKE
+	GiwGifHguBP0/w85d1RTHKJ09/bRIqmvLHHYdFk/Bf2G+98HDHB9gXH+i0gGTNgejDcuE+ywDzn60
+	kXcfPECV9zRi1ULQ0i3RMXH1udSbT8AzwIH5dv91WARq7Sm12zc2xeXlaEIZnyj13XoaSDqFqi/Qk
+	M1FUh/GQ==;
+Received: from ip6-localhost ([::1]:28592 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pn33S-001GUB-SY; Thu, 13 Apr 2023 19:56:26 +0000
-Received: from isrv.corpit.ru ([86.62.121.231]:57421) 
+	id 1pn3gx-001IVQ-0O; Thu, 13 Apr 2023 20:37:15 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54362) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pn33O-001GU2-La
- for samba-technical@lists.samba.org; Thu, 13 Apr 2023 19:56:24 +0000
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 61E4C40126;
- Thu, 13 Apr 2023 22:56:20 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id EA98D95;
- Thu, 13 Apr 2023 22:56:18 +0300 (MSK)
-Message-ID: <8557dd80-7d04-f24a-69bb-d1669c47eeb0@msgid.tls.msk.ru>
-Date: Thu, 13 Apr 2023 22:56:18 +0300
+ (Exim) id 1pn3gs-001IVG-1F
+ for samba-technical@lists.samba.org; Thu, 13 Apr 2023 20:37:12 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=J5EHv1h/JxpDiwCE84Tlx5s+/PUWjuI5d6Uuk2uVa40=; b=JaWw4nexf6MJJJrnX9PNOYbXFQ
+ uP9C58Sre2o/M1PHXYgbxr+6ZoMjprUit8BYZijPYo98q4kKlp1pMEjn0zu1lfukZJcF5drnwviCg
+ DSzS5dqhR/oKCTJw5E9OItJsQgyzAptVRmar1rVzjfiKvutyjqlKqaFOjTRi0FF6Rc2VRiWrv216k
+ lFY4R0FkjpJ1oQDjg/CbQgBN8PsGfDk085dVtD15GKE4tzxphZSrRyDyEPi2Shmwqrlu55On5e8lt
+ ydox1bDZQfMUdgOqnXQu16/nGH9EQYt6bWtp0qv11VExUg7AyiF0AwNyDxX6+Cf981cdWOmPZPcAA
+ XRYVnMPvY27mjRo0sB5hGSc+2FQefTbpYDqjIsnnayLe2a6DncoGXlKaw/iQhRXsQOO0bSVz4RdqM
+ fP2aT3S/G5fHbrGu6oLQdoWH/ha+SxlcZkwSxZ505rVqfMoYIwESxbGngcmkSmZ4Dbw5ADQ29B8a0
+ u2gYWk8tD2VjHMjBEzseHkix;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pn3gr-0010jU-1m; Thu, 13 Apr 2023 20:37:09 +0000
+Date: Thu, 13 Apr 2023 22:38:52 +0200
+To: Luiz Angelo Daros de Luca via samba-technical
+ <samba-technical@lists.samba.org>
+Subject: Re: DFS mounting wrong path
+Message-ID: <20230413223852.4587e83b@echidna.fritz.box>
+In-Reply-To: <CAJq09z59X6btqEMnRvdSze_5nOq0XVfg9odE_765Ci-5Of4exQ@mail.gmail.com>
+References: <CAJq09z59X6btqEMnRvdSze_5nOq0XVfg9odE_765Ci-5Of4exQ@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: smbd tries to read ~root/* files
-Content-Language: en-US
-To: Ralph Boehme <slow@samba.org>,
- samba-technical <samba-technical@lists.samba.org>
-References: <0be5f27e-1b25-b756-66c1-9e5034920e7f@msgid.tls.msk.ru>
- <45a21c30-3f90-4fa5-f427-b5d3afc6dd68@samba.org>
-In-Reply-To: <45a21c30-3f90-4fa5-f427-b5d3afc6dd68@samba.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
@@ -52,115 +56,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Michael Tokarev <mjt@tls.msk.ru>
+From: David Disseldorp via samba-technical <samba-technical@lists.samba.org>
+Reply-To: David Disseldorp <ddiss@samba.org>
+Cc: Paulo Alcantara <pc@manguebit.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-13.04.2023 22:37, Ralph Boehme via samba-technical wrote:
-> On 4/13/23 20:56, Michael Tokarev via samba-technical wrote:
->> This might be, at the very least, quite unexpected, - once
->> there's something in root's configs, samba will do stuff not
->> configured in smb.conf?
+Hi Luiz,
+
+On Thu, 13 Apr 2023 16:41:20 -0300, Luiz Angelo Daros de Luca via samba-technical wrote:
+
+> Hello,
 > 
-> ECANTREPRODUCE
+> I have a strange situation with the kernel following DFS directories
+> to the wrong location.
+> In a share with a couple of DFS entries, sometimes the kernel follows
+> the wrong path. Something like this:
 > 
-> I start Samba, connect with smbclient, get the pid of the smbd session process with smbstatus and then run strace -v -p PID on that pid for a few 
-> seconds.
+> server: /share/dir/subdir1 -> msdfs:server\share1$
+> server: /share/dir/subdir2 -> msdfs:server\share2$
+> ...
+> server: /share/dir/subdir11 -> msdfs:server\share11$
+> server: /share/dir/subdir12 -> msdfs:server\share12$
+> 
+> And in the client, we have:
+> 
+> client: //server/dir/subdir1 on /mnt/share/dir/subdir1
+> client: //server/dir/subdir2 on /mnt/share/dir/subdir2
+> ...
+> client: //server/dir/subdir11 on /mnt/share/dir/subdir11
+> client: //server/dir/subdir12 on /mnt/share/dir/subdir11 <<< (should
+> be subdir12!)
+> 
+> It always happens with older kernels (5.14 from opensuse/sles 15.4),
+> where the first DFS is always used everywhere. However it still
+> randomly happens with newer kernels like 6.2.9-1-default from opensuse
+> tumbleweed. I can always reproduce it if I do a "ls subdir*" but it
+> does not happen if I first "ls subdir12" and then "ls subdir*". It
+> looks like a race condition, but it might be an off-by-one case as I
+> only observed that with the last DFS in the directory (12th in my real
+> case).
+> 
+> Has anyone seen this behavior?
 
-I'm sorry for not providing the details initially.  I was busy
-with another prob, all these observations (and many more) come
-by the way there.
+Yes, I've seen something like this, but didn't get a chance to look
+closer. Please raise a ticket on openSUSE / samba / kernel bugzilla
+tracker of your choice and add the reproducer details :)
 
-It is samba 4.17.7 (4.17.7-1~bpo11-1 debian package), configured
-as a domain member (with the same version of samba acting as a
-domain controller).  The client is a windows10 machine.  I don't
-know if kerberos-related stuff is used without the domain part
-(and this looks like kerberos stuff).
-
-I can't say *when* exactly this file access happens, - since I
-traced something else, and this was just background noise.  Here's
-an example of the command received from the client:
-
-recvmsg(33, {msg_name=NULL, msg_namelen=0, msg_iov=[{iov_base="\0\0\7*", iov_len=4}], msg_iovlen=1, msg_controllen=0, msg_flags=0}, 0) = 4
-recvmsg(33, {msg_name=NULL, msg_namelen=0, 
-msg_iov=[{iov_base="\376SMB@\0\1\0\1\0\0\0\1\0\0\0\20\0\0\0\0\0\0\0N\224\2\0\0\0\0\0\377\376\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
-\0\0\0\0\0\0\0\0\0\0\31\0\0\1\1\0\0\0\0\0\0\0X\0\322\6\0\0\0\0\0\0\0\0`\202\6\316\6\6+\6\1\5\5\2\240\202\6\3020\202\6\276\24000.\6\t*\206H\202\367\22\1\2\2\6\t*\206H\206\367\2
-2\1\2\2\6\n+\6\1\4\1\2027\2\2\36\6\n+\6\1\4\1\2027\2\2\n\242\202\6\210\4\202\6\204`\202\6\200\6\t*\206H\206\367\22\1\2\2\1\0n\202\6o0\202\6k\240\3\2\1\5\241\3\2\1\16\242\7\3\5
-\0 \0\0\0\243\202\4\306a\202\4\3020\202\4\276\240\3\2\1\5\241\f\33\nTLS.MSK.RU\242\0270\25\240\3\2\1\2\241\0160\f\33\4"..., iov_len=1834}], 
-msg_iovlen=1, msg_controllen=0, msg
-_flags=0}, 0) = 1834
-
-after which it becomes root and tries to open /root/.foo files.
-
-There are other similar cases, always starting with similar
-recvmsg.  I can provide more complete traces if needed.
-
-> Please post your smb.conf and explain in a bit more detail how you're connecting and what your tracing.
-
-Here's the smb.conf (as-is):
-
-[global]
-  server string = %h samba server %v
-  netbios name = TSRV
-  realm = TLS.MSK.RU
-  workgroup = TLS
-  server role = member server
-  security = ADS
-
-  idmap config TLS : backend = ad
-  idmap config TLS : range = 1000-4999
-  idmap config TLS : schema_mode = rfc2307
-  idmap config TLS : unix_primary_group = yes
-  template homedir = /home/%U
-  template shell = /bin/bash
-  idmap config * : backend = tdb
-  idmap config * : range = 5000-5099
-  winbind use default domain = yes
-
-  kerberos method = secrets and keytab
-  dedicated keytab file = /etc/krb5.keytab
-
-  allow hosts = 192.168.177.0/26 192.168.19.16/30 127.0.0.0/8
-
-  log file = /var/log/samba/log.%m
-  max log size = 1000
-  log level = 1
-  logging = file
-
-  # disable user shares (fix debian defaults idiocy)
-  usershare max shares = 0
-
-  load printers = no
-  printing = bsd
-  disable spoolss = yes
-
-  map hidden = yes
-  create mask = 0775
-  directory mask = 0775
-  acl allow execute always = true
-
-  # unix ext and wide links are incompatible. we need wide links.
-  unix extensions = no
-  wide links = yes
-
-[homes]
-  comment = Home Directories
-  browseable = no
-  writable = yes
-
-[ws]
-  comment = TLS Workspace
-  path = /ws/ws
-  writable = yes
-
-> Btw, there's also security@samba.org the next time you run into such a nice one... :)
-
-I thought about using security@, but discarded this idea in this case,
-it haven't looked like a security issue. But now after thinking a bit
-more, it well might be, and needs at least some investigation.
-
-Thanks,
-
-/mjt
+Cheers, David
 
