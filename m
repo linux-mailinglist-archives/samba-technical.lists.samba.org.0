@@ -2,53 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1F446E0A2F
-	for <lists+samba-technical@lfdr.de>; Thu, 13 Apr 2023 11:26:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6E7A6E0B9B
+	for <lists+samba-technical@lfdr.de>; Thu, 13 Apr 2023 12:42:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=b1DW6jvhT90+v7WjVmhcem1InYkvhIDIXzjmUuvmcBQ=; b=2l5r5an/hNNDCYrZ+qv+wgcpey
-	7/yxOeeie1g1BifjDNoNICGrVxQ72Hy3HdJV+YkkSeO0EM+tz9k3L6cwZwyEyVr1SQ02ikH8gupNL
-	aQFpZp0GwwYSI0Zf1Yh3pZPg13djUx5Ef5Vm+w+G3Lvv1+VcQB1BbkXj572mdXEpKd90FgFNhHI7O
-	2sO6NygxJB34ZxLYhIxaIEfR+i9MY9M4AvMzbNAoFY4b5L49uexk3mwW0R0y709deNgNRDkvyaHnK
-	YqBwMT7tlNupMVVHmTEbXPsnbSfSWmANkgSkDm+FdghPxugpuuO4ZZBZSk0Ck+hsXF87aoMwbkEEQ
-	mgFqmF0A==;
-Received: from ip6-localhost ([::1]:36238 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=AwzA+/Ypf9jj7NciPTi41FH0yJEnOci+t3e92q7Ho0I=; b=Ky8LuAevHOLV40KkfNJc1E/P4Q
+	xq86hrbKquqmFDD6wj5b0GpOYhZ9jLyDmJQKOlhZYNMkGcwsAFbCqTo+FSOCrOtdFRzafwp1T9A/s
+	WTLuzzp0Q0hXQxQxbXbALRTSrmw4hIcIBZ7O7+NEAvuRRQFvq6FZNpkvovGXZ4kuyU4NKLD7tIwq8
+	XOXfJ0zh8PFxYeSSbDNnefwzcv8PBmybb5jznuvZ+7J8sicScX7+3siTdf/1pwaa2MugEvZfGCegw
+	5GZMXjUehNdcCz1gFuf/0czwb3+59LB/SmqvR9TtPu90MEsgQcfD9xp0dicH3vd+gaD5x8aaTB4WB
+	41DyK6ZQ==;
+Received: from ip6-localhost ([::1]:53090 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pmtE2-00138b-Ng; Thu, 13 Apr 2023 09:26:42 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36108) 
+	id 1pmuPK-0013bx-5k; Thu, 13 Apr 2023 10:42:26 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz
+ ([2404:130:4080::4]:42320) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pmtDy-00138S-EG
- for samba-technical@lists.samba.org; Thu, 13 Apr 2023 09:26:40 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=b1DW6jvhT90+v7WjVmhcem1InYkvhIDIXzjmUuvmcBQ=; b=OME/iiTFS6dHLncF75+XkO6RHT
- /k2bL2NIZt3RyEK4bxR8UvbaPN6UgpkdKlH/04f5olIJxxV842ar6NaZLPx7R17gHWewyf4QRb/W8
- tYRtSDWSdSfF5eUKUnYSVH4JJlUmM4xMTOPFHQTdEW4b3m62TWpHcfOSRqTDuEL+I3VTYqKorIxbM
- 1oMwJDNnuRp0uHFv+QAX2SDGjmXcEmNOg6wSULk4IYux1MIXyWvVW+uTrPxu4iYHYGT2sERTEYBRH
- 7FASUPFKaWAk0p4rGkZalovz9k2A2wGFwuhA5Lg1RRh8hulf+1bC9nJqz89KolHz2ir3+u4OlCyKI
- bS5o4QGknwnq3WtW0Qpje6QUr5Elc9XOAMeTm74INSSsdtQSjX5invZEiP+QEwV7qQtKwDn1cAnYP
- +7I3L9a+OINt4cYGs2XWqnpVoU1o3QmwIBTXl/kqAiqJr9MQfSqJ+Uk7OvcBmn9rDywpXEdgLnjCm
- w0wJLM3gs8wTG0RnjA/9SsNv;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pmtDy-000ugU-4B
- for samba-technical@lists.samba.org; Thu, 13 Apr 2023 09:26:38 +0000
-Message-ID: <03c07605-4ba3-a60d-c11a-352beb35dc0f@samba.org>
-Date: Thu, 13 Apr 2023 10:26:37 +0100
+ (Exim) id 1pmuPD-0013XA-0z
+ for samba-technical@lists.samba.org; Thu, 13 Apr 2023 10:42:21 +0000
+Received: from [192.168.1.219] (unknown [114.23.142.188])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 9A19881993; 
+ Thu, 13 Apr 2023 22:42:07 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1681382528;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=AwzA+/Ypf9jj7NciPTi41FH0yJEnOci+t3e92q7Ho0I=;
+ b=Zf+bQqtYGhRLfnTvphrcxLBSWQJo3jVxS0h/10F9sLbGJKFI1JdTSlPVzsdMyiDPfeS/oK
+ XfB0XTKYSG8wUWF57gsZ3eel/bvzBAjpg4xG5/Pa5pXmIMD9S4TvOUZ6eOUY0UgDfFCJbk
+ J8/Q6ZCaZMGpG1ZHwHcv0X7ua8gljElQInFRjFWt/fdACgceFe1ElAGbizHOapFlUYq6Hr
+ Kasi/m56OsyU7tKpGI2pXLxSxQ0k/A+I0+h5TwnZNrbRSRSrUtISS50+pImyQntlQpG+Ar
+ ABiXugOUo7EHXtnCXs7WAXleBJXwEIvUck/rXFs/F3E1aFZlnVHK7yqAAXjaMA==
+Message-ID: <4cd5f631-f135-858c-5d9b-5913babef316@catalyst.net.nz>
+Date: Thu, 13 Apr 2023 22:42:05 +1200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: Recent Samba (4.18.0+) winbind configuration ?
-Content-Language: en-GB
-References: <4203dcdd-5e9b-6708-5cdf-aec961f5f6a1@oracle.com>
- <ZDWVzOaPP7SNIxOf@jeremy-acer>
- <1d47d63c-854a-0622-c6de-3965dbeb3804@samba.org>
- <4797373.GXAFRqVoOG@magrathea>
-To: samba-technical@lists.samba.org
-In-Reply-To: <4797373.GXAFRqVoOG@magrathea>
+ Thunderbird/102.7.1
+Subject: Re: The strange issues happening with ad_dc_ntvfs environment
+Content-Language: en-NZ
+To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
+References: <2142927.irdbgypaU6@magrathea>
+ <8c78e366-5b95-f407-3ca2-2dc561b1d2f2@catalyst.net.nz>
+ <13246326.uLZWGnKmhe@magrathea>
+In-Reply-To: <13246326.uLZWGnKmhe@magrathea>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-0.10 / 15.00]; MIME_GOOD(-0.10)[text/plain];
+ MIME_TRACE(0.00)[0:+]; ARC_NA(0.00)[];
+ ASN(0.00)[asn:56030, ipnet:114.23.0.0/16, country:NZ];
+ DCC_FAIL(0.00)[failed to scan and retransmits exceed];
+ DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
+ MID_RHS_MATCH_FROM(0.00)[]
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=douglasb@catalyst.net.nz
+ smtp.mailfrom=douglas.bagnall@catalyst.net.nz
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,60 +74,46 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Rowland Penny via samba-technical <samba-technical@lists.samba.org>
-Reply-To: samba-technical@lists.samba.org
-Cc: Rowland Penny <rpenny@samba.org>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
+On 13/04/23 20:51, Andreas Schneider wrote:
 
-
-On 13/04/2023 08:09, Andreas Schneider wrote:
-> On Tuesday, 11 April 2023 19:47:45 CEST Rowland Penny via samba-technical
-> wrote:
->> On 11/04/2023 18:15, Jeremy Allison via samba-technical wrote:
->>> On Tue, Apr 11, 2023 at 02:32:27PM +0200, Jiří Šašek - Solaris Prague
->>>
->>> via samba-technical wrote:
->>>> Story begins when Samba 4.14.0 changed its VFS so we decided to skip
->>>> 4.14.x and also 4.15.x releases to bundle it on Solaris but various
->>>> problems were also with later releases and we were only fixing issues
->>>> in 4.13.0 . Currently (4.18.0) the situation can called be critical so
->>>> I focused on recent release.
->>>>
->>>> winbindd is giving up and I think the key could be in log message:
->>>>
->>>> [2023/04/11 11:28:53.090661,  5, pid=1525, effective(0, 0), real(0,
->>>> 0), class=winbind] ../../source3/winbindd/wb_lookupname.c:
->>>> 52(wb_lookupname_send)
->>>>   WB command lookupname start.
->>>>   Search namespace 'smbsetup' and domain 'smbsetup' for name ''.
->>>>
->>>> ...where "smbsetup" is my domain  ...and I have added core-dump here
->>>> to freeze the stack:
->>>>
->>>> [2023/04/11 11:28:53.090780,  0, pid=1525, effective(0, 0), real(0,
->>>> 0)] ../../source3/lib/dumpcore.c:315(dump_core)
->>>>   dumping core in /var/samba/log/cores/winbindd
->>>
->>> Jiří, please open a bug and upload the full backtrace.
->>>
->>> Thanks,
->>>
->>> Jeremy.
->>
->> Damn, I missed that, focussed on how wrong chatGPT had got it wrong,
->> anyone heard of 'autorid_compat'  ?
->>
->> I still think that Yura needs to post their smb.conf etc.
+>> Is this with a full make test, like you were doing in February? I can
+>> have a go at that overnight on Ubuntu 22.04.
 > 
-> Not the smb.conf but the output of "testparm -s"! Always ask for testparm
-> output including the errors and warnings it prints ;-)
+> Yes, I'm still trying to get this working downstream and I think this should
+> still work even if CI/autobuild is not running a full make test anymore.
 > 
+> This seems to be a bug in some test and we should fix it.
+> 
+>> First I'll try `make test TESTS=ntvfs`, just in case that works.
+> 
+> If I run
+> 
+>    make -j8 test TESTS="ad_dc_ntvfs s4member"
+> 
+> it passes just fine :-(
 
-There are times when seeing what is on disk is helpful, you can see just 
-what, if anything, the OP has tried, I deemed that this was one of those 
-times.
+The TESTS=ntvfs passed. A full `make test` gives me these:
 
-Rowland
+failure: samba3.blackbox.smbstatus.test_json_profile(fileserver:local) [
+failure: 
+samba3.blackbox.smbclient.kerberos.smbclient.smb3.kerberos.off[//fipsdc/tmp](ad_dc_fips) 
+[
+failure: 
+samba3.blackbox.smbclient.kerberos.smbclient.smb3.kerberos.off[//FIPSADMEMBER/tmp](ad_member_fips) 
+[
+failure: samba3.blackbox.smbclient_netbios_aliases [foo].smbclient 
+(krb5)(ad_member:local) [
+failure: samba4.nbt.dgram.netlogon2(ad_dc_ntvfs) [
+failure: samba4.ntvfs.cifs.ntlm.base.unlink.unlink(rpc_proxy) [
+
+
+I'm running it again to see what changes.
+
+Douglas
+
 
