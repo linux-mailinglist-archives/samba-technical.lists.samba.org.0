@@ -2,65 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id F33F76E2B26
-	for <lists+samba-technical@lfdr.de>; Fri, 14 Apr 2023 22:34:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E54226E2BA0
+	for <lists+samba-technical@lfdr.de>; Fri, 14 Apr 2023 23:19:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=YR04VBU/zGMM/U6bSdpEHOLCFFS6w73fHXwqNZclHvs=; b=glLys502GpOZw7zoTwTvfZ7qQS
-	Fei3y8QIKb3wDitMbyjvsWzD5ks5d8GwHC/URkw+0ukWb9D1nNeGLdos/lqUHGoIVFuIsPBFM0mzB
-	OY8mYI1JKALQpIFYqRJI3afZVxtEJohyIJsAvsFJ7NFVw19iza6dd+FE6Nyz/KnXdF7OWpPDf0pF3
-	K+4xJNNOPOP/NjNEl716bB7yRUVqrrQwCjELpNO8OXUYo9hINlhc6oJZtSyQ5CNinZwyDTuCvKLVe
-	NMJZOntvpkGm8gERI4Klq3e5RD49rgCt+uwVO+ZFwmhPFBGbliygX8EupFVzCvAQoeWmM3awZrCu3
-	X9X6Urlw==;
-Received: from ip6-localhost ([::1]:30308 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=1+qRQYdbLpo2MoNmp5brxRqtl35OpeD3j4wMhdsk6W8=; b=Ne63kHzhgSkEQmagyXSTV52i/9
+	K4wyD6jMzB21MSqxpPlHQwWUQz4aQKz9prs7LUbTqrKQNe+N6YVN3mRnlKUpzTnueAGBlSEUPMCwS
+	8695z/H/GyP/yog6uGrVwl7J8VzpXnIObjKh4Oz6yatl6+CSyZ1KctFQcrHNSQ79lAP+nTx/0YQba
+	Sp+mhK1mn/VQjiYPHMGIFZVVPRPXME1CUPqtDZxizvmRu+aX2YDA9dRh8w83AIuI/hMigJ35AGlEs
+	ttsnI7hWK1a7Cbt0QWsNZrXdVYnR9XWmzx0Dr46gSFzr0uLdTQBP23djo3Zlf4WQAWGL8jq7jPqWi
+	agfBksQQ==;
+Received: from ip6-localhost ([::1]:64848 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pnQ7y-001yKB-O5; Fri, 14 Apr 2023 20:34:38 +0000
-Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233]:33775) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pnQ7t-001yK2-Hq
- for samba-technical@lists.samba.org; Fri, 14 Apr 2023 20:34:36 +0000
-Received: by mail-lj1-x233.google.com with SMTP id a29so20987047ljq.0
- for <samba-technical@lists.samba.org>; Fri, 14 Apr 2023 13:34:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1681504472; x=1684096472;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YR04VBU/zGMM/U6bSdpEHOLCFFS6w73fHXwqNZclHvs=;
- b=eTm7hV2w3IUWwinNoHMCeymEwIPM/H37vq70gfZ3UhMQyd6ysIFlRPC2RC4lNjtFdq
- tOFmGibaKP3Q1airQVWYq4sqhloQYnQL2tzgC7jVBBZ0crcgoXQh2egWjtWDgYheZE4q
- vR+BRJ8t//UB3mRMFpZodqtI06JJjdxLyXjrXT5vHswjXpAeOPO59zRc9ER93iwb0xDi
- dkCQ1XSnRKhxNV+3TFg75TCrrrZYqOqQohSnKiq0PaNhw9Dji8JifuSvPlFH1Qur8ZEn
- c2DfH6JyEX8IX6IstaSOYHrQEBeLdny+Vhp2enEZyblBuJ9ivFaJLLgJrGBUgbPQO7Tn
- tICg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681504472; x=1684096472;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YR04VBU/zGMM/U6bSdpEHOLCFFS6w73fHXwqNZclHvs=;
- b=e0fV1fzkigypNd0JCyD5hdBbTFMf3uJfyVD11YYLF8xNAAle/y2XEbgdOFhlByFBDj
- /yLxaZ1oZqIAHrczLyHmONQLkPSCuVtKGLo6F5EBB9rN3S/DMsD1xZxtK9EVRh7TbGDh
- Nz4zasxmeQukJDqe/XOPu1cfnKmoAKRUenD/IpQNql5av+T0SmDgJ0FmppAfkFMkvdK5
- LlxU34GTnyGHeaxGW/8LmthBVClyoW461rBGvcujdd2xlW0xnmrfobc6DhGb9KSEMFQk
- ogEeLKZwVqi+LNTOflnBqnyDeRsSu1D+Q4EE76kA1e/dnKW5tC69ZUpSReTZq9N8Egmj
- WMgg==
-X-Gm-Message-State: AAQBX9fL8abWeBzDQXVz52Ra+rFcyDLbIebnYzwJyo2glcj6MLUkg35k
- u0ND+mCtemw77sxmId73aC9sPa9fN578adErRTTFMKqi4S0=
-X-Google-Smtp-Source: AKy350btCesykn1J1wtde6c9JnkHy7Dv6HicI29PB0BOd1J1sn8OScoAKkQx5OIV0mI18POrdAQJWlpQhLhTvzUNoKU=
-X-Received: by 2002:a2e:9d45:0:b0:29b:ebfa:765d with SMTP id
- y5-20020a2e9d45000000b0029bebfa765dmr2368917ljj.1.1681504471744; Fri, 14 Apr
- 2023 13:34:31 -0700 (PDT)
+	id 1pnQoS-001zXF-S9; Fri, 14 Apr 2023 21:18:32 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:39443) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1pnQoO-001zX6-1W
+ for samba-technical@lists.samba.org; Fri, 14 Apr 2023 21:18:30 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1681507104;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=1+qRQYdbLpo2MoNmp5brxRqtl35OpeD3j4wMhdsk6W8=;
+ b=Rn6qyVVecDRxrKg0OtQBwODXrYPX3H6gMhENtgNo4MfzfngG5WKYFbguuE0KdRgFBGqUMZ
+ FY3leKJRdwu1cKc6vUHth8RRRw8HVu5IbXpmfIzH1u5quGhfxS4jTfdkoHjwrzbNAnLs7t
+ fhCOhz3S8ivHiCUJzoewW1DT0zd4Tfg=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1681507104;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=1+qRQYdbLpo2MoNmp5brxRqtl35OpeD3j4wMhdsk6W8=;
+ b=Rn6qyVVecDRxrKg0OtQBwODXrYPX3H6gMhENtgNo4MfzfngG5WKYFbguuE0KdRgFBGqUMZ
+ FY3leKJRdwu1cKc6vUHth8RRRw8HVu5IbXpmfIzH1u5quGhfxS4jTfdkoHjwrzbNAnLs7t
+ fhCOhz3S8ivHiCUJzoewW1DT0zd4Tfg=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-52-CThifQ9NMEahP4tX-JPctg-1; Fri, 14 Apr 2023 17:02:46 -0400
+X-MC-Unique: CThifQ9NMEahP4tX-JPctg-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A069D185A790;
+ Fri, 14 Apr 2023 21:02:46 +0000 (UTC)
+Received: from oldenburg.str.redhat.com (unknown [10.2.16.10])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 155A8C16028;
+ Fri, 14 Apr 2023 21:02:45 +0000 (UTC)
+To: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Subject: Re: talloc vs malloc speed
+References: <3161922.5fSG56mABF@magrathea>
+Date: Fri, 14 Apr 2023 23:02:43 +0200
+In-Reply-To: <3161922.5fSG56mABF@magrathea> (Andreas Schneider via
+ samba-technical's message of "Fri, 14 Apr 2023 20:11:46 +0200")
+Message-ID: <873552p47g.fsf@oldenburg.str.redhat.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
 MIME-Version: 1.0
-References: <CAJq09z59X6btqEMnRvdSze_5nOq0XVfg9odE_765Ci-5Of4exQ@mail.gmail.com>
- <20230413223852.4587e83b@echidna.fritz.box>
-In-Reply-To: <20230413223852.4587e83b@echidna.fritz.box>
-Date: Fri, 14 Apr 2023 17:34:19 -0300
-Message-ID: <CAJq09z5-w7t-chg2rKPbOXYEJ=AF84RyU3YdEU0aqjpM-4=FMw@mail.gmail.com>
-Subject: Re: DFS mounting wrong path
-To: David Disseldorp <ddiss@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,79 +77,37 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Luiz Angelo Daros de Luca via samba-technical
- <samba-technical@lists.samba.org>
-Reply-To: Luiz Angelo Daros de Luca <luizluca@gmail.com>
-Cc: Paulo Alcantara <pc@manguebit.com>,
- Luiz Angelo Daros de Luca via samba-technical
- <samba-technical@lists.samba.org>
+From: Florian Weimer via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Florian Weimer <fweimer@redhat.com>
+Cc: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi David,
+* Andreas Schneider via samba-technical:
 
-I opened it at:
+> I wonder if it would be possible to give the optimizer more hints. Maybe 
+> Florian has some ideas :-)
 
-https://bugzilla.opensuse.org/show_bug.cgi?id=3D1210470
+You need to check that with optimization, the compiler does not elide
+malloc/free calls completely.  That might give malloc an unfair
+advantage.  GCC knows that malloc/free have no observable side effect,
+so if it can see the whole program, it sometimes can turn heap
+allocations into stack allocations.  GCC also knows that memory returned
+by malloc cannot alias anything, and that writes to the object before
+free can be eliminated.  The latter might be meaningful for
+microbenchmarks.
 
-I also tried to create a simple setup with a smb server with hundreds
-of shares mounted locally but it did not trigger the issue.
-I added some wireshark messages (redacted) but I can share raw data in
-private if needed.
+Some of these behaviors can be enabled through function attributes,
+however I'm not sure how much of that would be correct for talloc.  If I
+recall correctly, it has destructor callbacks, which means that
+arbitrary code can run on free, and that rules out dead store
+elimination.
 
-It looks like the client did follow the right share the first time but
-changed its mind before actually mounting it.
+If talloc is layered on top of system malloc, using its own allocator
+geared to its particular metadata requirements could reduce memory
+overhead and make certain things go faster, but it's also a lot of work.
 
-Regards,
+Thanks,
+Florian
 
----
-     Luiz Angelo Daros de Luca
-            luizluca@gmail.com
-
-Em qui., 13 de abr. de 2023 =C3=A0s 17:37, David Disseldorp
-<ddiss@samba.org> escreveu:
->
-> Hi Luiz,
->
-> On Thu, 13 Apr 2023 16:41:20 -0300, Luiz Angelo Daros de Luca via samba-t=
-echnical wrote:
->
-> > Hello,
-> >
-> > I have a strange situation with the kernel following DFS directories
-> > to the wrong location.
-> > In a share with a couple of DFS entries, sometimes the kernel follows
-> > the wrong path. Something like this:
-> >
-> > server: /share/dir/subdir1 -> msdfs:server\share1$
-> > server: /share/dir/subdir2 -> msdfs:server\share2$
-> > ...
-> > server: /share/dir/subdir11 -> msdfs:server\share11$
-> > server: /share/dir/subdir12 -> msdfs:server\share12$
-> >
-> > And in the client, we have:
-> >
-> > client: //server/dir/subdir1 on /mnt/share/dir/subdir1
-> > client: //server/dir/subdir2 on /mnt/share/dir/subdir2
-> > ...
-> > client: //server/dir/subdir11 on /mnt/share/dir/subdir11
-> > client: //server/dir/subdir12 on /mnt/share/dir/subdir11 <<< (should
-> > be subdir12!)
-> >
-> > It always happens with older kernels (5.14 from opensuse/sles 15.4),
-> > where the first DFS is always used everywhere. However it still
-> > randomly happens with newer kernels like 6.2.9-1-default from opensuse
-> > tumbleweed. I can always reproduce it if I do a "ls subdir*" but it
-> > does not happen if I first "ls subdir12" and then "ls subdir*". It
-> > looks like a race condition, but it might be an off-by-one case as I
-> > only observed that with the last DFS in the directory (12th in my real
-> > case).
-> >
-> > Has anyone seen this behavior?
->
-> Yes, I've seen something like this, but didn't get a chance to look
-> closer. Please raise a ticket on openSUSE / samba / kernel bugzilla
-> tracker of your choice and add the reproducer details :)
->
-> Cheers, David
 
