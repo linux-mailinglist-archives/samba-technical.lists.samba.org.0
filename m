@@ -2,46 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4CA66E28AE
-	for <lists+samba-technical@lfdr.de>; Fri, 14 Apr 2023 18:48:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 278986E29D8
+	for <lists+samba-technical@lfdr.de>; Fri, 14 Apr 2023 20:12:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=HA21TjpplCmbx+IJsS09dedNfl5I2P6f7CpJElZAN+8=; b=LNu0dqWkCAbXZQSe3aty3XFHO5
-	048bPNCurJ0mdTrIzyanTxNEzsdj96d/AyhBGdY/hEnduehiqgVj4XSUbNgVLm5LZ+wYXHxcKuTFL
-	cnuz8aesmWGunzEwa5QUCW0Ue5NBykYCvalix14ZAf1Ny2srd0fmuxWwMIGlwD6B8sEfoRKaBcSY9
-	+EJgGKYQp6P+XkDQgR1fIdeWjdLbrdqH6zZy7M6Ij+C56ojTig4vjtzXVwl9abkR6/TYZ28heiKL6
-	rZsNcKyLrfwHgKtnczYcn1aVyx6pfJ6QSr21Kv2nZpjlzya7tyIO5p3e2PiYlsUvsQcx2syLsIFmR
-	fJSKuYcA==;
-Received: from ip6-localhost ([::1]:30814 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=uvP2VPFw0JMxs4qQ42ZcoEdTggOZz0cIlHbIPCsBJJo=; b=wHt9HfV3KoOurQozF0dT9uBaFP
+	+7kW8TzbaEsaFmLdXgIjUlItNkrN8qwpkOglHzhmdGtAXTtnpU3D5BpxgmjYNPceTVl0rZ1MVnRH1
+	rSRtjJWZLJ6KhrtxaajxOGlKYIjQvxxERr2wCat5GhUMF5aFoZepZGVdwoznxRHot3SMdrMhW+Sgq
+	AsGqjLaaq1YcTwCHDj5aIsUYx41gwLbQpHff41LCTH+FZSirtWCmmBi7xw6MZR13zBwwTJtXWIlHq
+	lhMkkM3baOMrs0mC/n+khAAvSkSqxNZIzNxnpZgVzM3667frBce3zTreHBM/FRQ/2d/+mR/1qwI7X
+	DrtE7nxw==;
+Received: from ip6-localhost ([::1]:32290 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pnMaO-001nDV-BD; Fri, 14 Apr 2023 16:47:44 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45334) 
+	id 1pnNto-001rkh-69; Fri, 14 Apr 2023 18:11:52 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:25706) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pnMaJ-001nDM-7M
- for samba-technical@lists.samba.org; Fri, 14 Apr 2023 16:47:41 +0000
+ (Exim) id 1pnNtj-001rkY-QZ
+ for samba-technical@lists.samba.org; Fri, 14 Apr 2023 18:11:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=HA21TjpplCmbx+IJsS09dedNfl5I2P6f7CpJElZAN+8=; b=nuCDiUKpwgdGjMBgQJ+glK03aa
- R/dG68Mxj9/RbXCjvcMU+ctDgrt4lPxHPrdWgLxcE752sVSvk3QnDhpR5yZrbX9TQw3evtJFe1t+q
- vldeVSQ5mTFozAO1cHRau8aZXLD+i4YlFsVWmugR5jIlg03HfXelMOyoISf+dBQXmguYcGTxZl4SV
- /HzYLrqj19eDU8qCBVTdQlazlZQ6vV13syWF5H1Rt8sRwFYeERho4tukKDRv2P9uAOMzefCE+66Qt
- Qqh5bgLPFJ94FlYK8nQDCw4p1upOIqhjE1GNO+KXSCspX3Ti0bzSK4auwE3zsF9oMOfbkX9jMAhLC
- c1EvmdNzGZ/q2YUZ+wjnvFH/YK0TwNzDsvFMgE3tOsT/jH5ywvCSjba2Z2t8FM9Asc6fOzpcHOXNr
- aKbSvNNOgeldgYSJLF+UXV/BIFO/LYfmF2+iU5NKRbdTSkPqRBi6VoLktHe+hh8noRfqQLQLoeOI+
- s8Bm/gKddTvCSsIsFtVP3DYn;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=uvP2VPFw0JMxs4qQ42ZcoEdTggOZz0cIlHbIPCsBJJo=; b=N08BIdNY0c3hiJk8xtpK8+B+6O
+ 0UD4t3mLP9AkYnI1CgZbzOkr4HgSasjfs87SUJDgz4rVvEABv/UrivYaiNtY2sp/6B3Ruj4D3gopo
+ 6hN98OZhOxw0voYT7ECPj9vEAiGP1h3UnAT+2NcMT33gGdSK0DS3v98aBn1IENKVc3Xoh8BEhfkVZ
+ SomhMypvWE2uh+bRH1KPHX7twqqdI6+PaFkkp2OxIxpzM2XDakrGxaF/+Tfp7NYEYfzglS2MZPJWF
+ xt2Rt4+4vHMocjgE0s93f6wEOXdVGRjD67ZNZXeg8GIOhViJRLVi2GM6bxker8s0VjL0fFWn5P2jO
+ Ku7pmJBdKlrlLmlap4MDaA1+D20H6OmM46yAGeSF1+IbdMvrRYyNSIwKl2hKIwACS+S+mG9I29NVe
+ fTiBXcYqrpRGfhBwEWf1uDprTSkKHq/Y/9pGTw8v/dBi+QEG8yqQO1YgCk7i3CZrB1CUgcBfl6j6K
+ 9togeilWukZX9vpr8+Wx1kR3;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1pnMaH-001BFy-OP; Fri, 14 Apr 2023 16:47:38 +0000
-Date: Fri, 14 Apr 2023 09:47:35 -0700
-To: Michael Tokarev <mjt@tls.msk.ru>
-Subject: Re: smbd: NotifyChangeDirectory: NETWORK_ERROR (need help)
-Message-ID: <ZDmDp83rwA13Ndan@jeremy-acer>
-References: <be86c050-570d-ccec-5a57-785edeb23793@msgid.tls.msk.ru>
+ (Exim) id 1pnNtj-001BvY-4f; Fri, 14 Apr 2023 18:11:47 +0000
+To: samba-technical@lists.samba.org
+Subject: talloc vs malloc speed
+Date: Fri, 14 Apr 2023 20:11:46 +0200
+Message-ID: <3161922.5fSG56mABF@magrathea>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <be86c050-570d-ccec-5a57-785edeb23793@msgid.tls.msk.ru>
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,48 +53,84 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: fweimer@redhat.com
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, Apr 14, 2023 at 10:15:55AM +0300, Michael Tokarev via samba-technical wrote:
->I tried to debug an interesting issue today.
->
->The thing is that some applications, for example FarManager (farmanager.com),
->will enable change notifications on the directories they keep "current",
->including the case when this directory is on a remote samba server.
->And sometimes, it ends up in list of files on the samba panel to become
->empty with the error message:
->
-> Error: Cannot read folder contents
-> 0x00000003 - The system cannot find the path specified.
->
->This happens only on samba so far, and it didn't occur with older samba
->version (I can't say which, maybe 4.16, but 4.13 for sure).  I can click
->on "Ok" and tell it to re-read the directory, which works, until after
->some more time the whole thing happens again.  What's interesting here
->is that the directory in question is *not* actually modified, not this
->one neither any file/dir inside it, so if anything, this notification
->is false.  Also, I don't see any inotify filedescriptors in lsof output
->of this smbd process.
->
->So I started from tracing far.exe, but this one gave nothing really interesting.
->Here's what ProcMon.exe (from sysinternals) shows for it:
->
-> 13.04.2023 16:09:24,2428431 Far.exe 11600 NotifyChangeDirectory \\tsrv\mjt-adm\ NETWORK ERROR \
->    Filter: FILE_NOTIFY_CHANGE_FILE_NAME, ...
->
->So system call NotifyChangeDirectory returned NETWORK ERROR.  After this,
->far.exe immediately displays the above error message without issuing other
->system calls.
+Hi,
 
-I'm guessing ProcMon.exe doesn't give you the SMB2 message id,
-which would allow you to discover exactly what packet causes
-the problem.
+Florian Weimer implemented hwcaps support in glibc. This allows you to drop 
+optimized libraries.
 
-Without that, how synchronized are the times on client and
-server ? If they're close, use the ProcMon.exe reported
-time to look at the wireshark trace around that time.
+The support for this is enabled in openSUSE Tumbleweed right now [1]. I've 
+enabled it for libtalloc as you want to to be as fast as possible.
+
+
+Here are the results from my AMD Ryzen 9 3900X 12-Core processor.
+
+talloc x86_64_v1 (testsuite compiled with -O0)
+
+test: speed
+# TALLOC VS MALLOC SPEED
+talloc:       46623469 ops/sec
+talloc_pool:  74121933 ops/sec
+malloc:       66443400 ops/sec
+success: speed
+
+=> talloc is 30% slower
+
+
+
+talloc x86_64_v3 (testsuite compiled with -O0)
+
+test: speed
+# TALLOC VS MALLOC SPEED
+talloc:       47783809 ops/sec
+talloc_pool:  75068595 ops/sec
+malloc:       68073710 ops/sec
+success: speed
+
+=> talloc is 30% slower
+
+
+
+talloc x86_64_v3 (testsuite compiled with -O2)
+test: speed
+# TALLOC VS MALLOC SPEED
+talloc:       50633005 ops/sec
+talloc_pool:  74245533 ops/sec
+malloc:      219259200 ops/sec
+success: speed
+
+=> talloc is 77% slower
+
+
+It looks like the optimizer is able to optimize the code a lot more if malloc 
+is used.
+
+I wonder if it would be possible to give the optimizer more hints. Maybe 
+Florian has some ideas :-)
+
+
+Best regards
+
+
+	Andreas
+
+
+P.S. The talloc website states it is 4% slower than malloc. This was probably 
+a long long time ago ;-)
+
+
+[1] https://www.phoronix.com/news/glibc-hwcaps-RFC
+[2] https://news.opensuse.org/2023/03/02/tw-gains-optional-optimizations/
+
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
+
 
