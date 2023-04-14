@@ -2,63 +2,46 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 26D1D6E2AC4
-	for <lists+samba-technical@lfdr.de>; Fri, 14 Apr 2023 21:50:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7ACBE6E2B12
+	for <lists+samba-technical@lfdr.de>; Fri, 14 Apr 2023 22:25:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=7AAiPZXqQd6pFzJ+J86zhEAkqMVDmMNP+uRmdENCCB4=; b=lR9pFCIiKhQn8qirs+Q3eVk18L
-	Xp5fInFCt+DcNBMOw6emTSXiYMBxR9v7eeJisaVUq39t0SHnmMs7rkZffWuyTUhM33x1Nk1vTOW+g
-	YMXEjjRMyyKlHc8OOobPHXoTV35dGBtHCBjJ3blyByagh/CTyHEn4WwfC2HjhmcSdeR7wcTR3Ey5q
-	gjMy4aALMhYzC+3RP1LscbRjtSRiBfJ+FMFeZ+1s7643DJqQOi/5D0OXb1h0i0vx91puCdDbbHfUU
-	vmGQhHGqq/sJE2U66RsDffOHeufEQZxb4gDXdjiuF1m41DtkTAzQ33jkcnsKQNiUNMWXpeduZtmyx
-	lMhwnwIg==;
-Received: from ip6-localhost ([::1]:27540 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=Ft1N9QeaH45lQAT7YqYjl5UcBNuKUniGqFxl5vMdG5Y=; b=nfknnL8FD874lkWagUzKW2O7e9
+	lEsdGNAvHGJADPHAgbFcrUlIVi+k69ddl3kYSY+ZbghPDlw/RDirW9vLJaW5FNC9rMtt0nGnE1kp6
+	5AOFcvLOlL83qyWmX7zHCS0xlRJq5RNgnNHZlISulY8qhkzbsMauqL0D6AdhAqJSPZlwNdDFcLy/A
+	7br+iIuDsH9lMYnPMrCDaeOMC3fdoBVGSyUDD3d/J6pRVBU3vOJSmbWQiz3LGvZYNHg0Uyc3TEdLB
+	kvcU/ka1E4ynt3AARTnHuxATidtfU4Lg/60ecqXQTcjQeeQ4ZZa2khPIfzLrJsSXkzgyEweZhhl1J
+	QwFCsggw==;
+Received: from ip6-localhost ([::1]:24566 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pnPQV-001tbp-HA; Fri, 14 Apr 2023 19:49:43 +0000
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630]:46595) 
+	id 1pnPz5-001y2J-K9; Fri, 14 Apr 2023 20:25:27 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16666) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pnPQQ-001tbg-8Z
- for samba-technical@lists.samba.org; Fri, 14 Apr 2023 19:49:40 +0000
-Received: by mail-pl1-x630.google.com with SMTP id w11so19376407plp.13
- for <samba-technical@lists.samba.org>; Fri, 14 Apr 2023 12:49:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ixsystems.com; s=google; t=1681501776; x=1684093776;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7AAiPZXqQd6pFzJ+J86zhEAkqMVDmMNP+uRmdENCCB4=;
- b=bGKzpodRtKLc3sLQMdgdLCLe1XLY2vprEQ0LxIH+JhspzHTkD5o07DZmJzDmyzL1yK
- 5+KpvXK6y8yxoyUHUtSdJTtLwFH77lwbBN6uUv/W3duDqmdQaH15dF+NljyIpt+AYlP0
- ArazBn7wDTwOnhmCzNg7NHA9tcHEL+V4JVEntYxHmk6Wnsp0ZhQDa16b0FpqXVmdCCEK
- tvWdWLxNaDGeAv4hAyr22Uo7o0r1nSzZ5YxWpWMsgr7DUI3ET7rXEgtejonAdRno3hEY
- cP/J9fXFX7xWpfmuPslna2JYiXJKI0alpQnERVJWECxPmzRlsPwpc+jT9dEP9jgSN90H
- EMqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681501776; x=1684093776;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7AAiPZXqQd6pFzJ+J86zhEAkqMVDmMNP+uRmdENCCB4=;
- b=LZcYC/84njOoiCGmdLttiuMAID2XEZ+rS6oz8+Z43WZ496Bxxnj092D+B/u54/cKkf
- cjGkuJ6kJUlRCB2jGVhCYpV2syNlZb9Tehzde2ebjfRGM1sWDPNbY3rqva3qQ5k6sXfy
- /EhD1FILBUnU+yZub0Zd7xWKGg6RKyYnm9GML76csp+vsGdpcdLi1QFAU08a6huar9aj
- ApxqmVR1Xlt34imx3mJHyww2AScOl4B0dR2vfLLwKesSsXkONR5lzqApTBWHgzf6iSM6
- NKt0HSD9r2as95HiHGJjdQGLSBC2tQlexx444PCwAbRaVIFfzB0J5drOjQlakf9bJ/RV
- TiXQ==
-X-Gm-Message-State: AAQBX9d1vaCZ93YW/pO98N3NkdmQWZoe1vqLRdjFdxVotqdSRMzyGaXQ
- MLSwlfu1I039B3FuQuCumgiNN0+1pc7vBqDLdgN21g==
-X-Google-Smtp-Source: AKy350bl7sZhoCA2TKTNuaVeGJMOSnfcaglCaAM5oR+CiEtg7CipxMJCk5f2gYkqX76wvCpHf7Xk53BPUzZj4lEBYlk=
-X-Received: by 2002:a17:90b:4f42:b0:247:279b:f869 with SMTP id
- pj2-20020a17090b4f4200b00247279bf869mr5675055pjb.21.1681501775775; Fri, 14
- Apr 2023 12:49:35 -0700 (PDT)
-MIME-Version: 1.0
-References: <3161922.5fSG56mABF@magrathea>
- <CAB5c7xqj=X77E6roZhfnaRewLtfdzwPx2SE4rodRFvKB75MfBg@mail.gmail.com>
-In-Reply-To: <CAB5c7xqj=X77E6roZhfnaRewLtfdzwPx2SE4rodRFvKB75MfBg@mail.gmail.com>
-Date: Fri, 14 Apr 2023 14:49:24 -0500
-Message-ID: <CAB5c7xpXCAwtms3-AgVMH+peEd2GxMRoZjfv15Hapnpj5odWJg@mail.gmail.com>
-Subject: Re: talloc vs malloc speed
+ (Exim) id 1pnPz0-001y2A-TX
+ for samba-technical@lists.samba.org; Fri, 14 Apr 2023 20:25:25 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=Ft1N9QeaH45lQAT7YqYjl5UcBNuKUniGqFxl5vMdG5Y=; b=anlVb03LYV9Jdpv/fBkLC+Mdep
+ 4gLesYi20Cv9NgajVLeVG4i6Ggow0mRWB/i3/3f+vvImcybqObz1Db3zYl6TQXqx9zW/jVgFSUZwB
+ I11WN2/EEkDAeoQp0aXyjsch0QJ4D6Qw7nS/PrwdFs4tqFpKJMyO+8hkhqaySgJ7XPfawOyAVv75M
+ KmMW7kwGEk6nKunu7ZNbKJzuuB+AzQPYUMu+rXj0sJsPX6NESQ0eUwLAGa5+P+b5i6YUys7QnHLDp
+ fR1wqpCGztmCD1Ej/WiT7vONCPST/PSpWk3GdU8ApCMZJid9drb8F0A9lzOiWdNu3y4a+5UTfucuS
+ M42HJ22Yad/5EZ3s9pvoH0Sq+n4ybIXXToRQcsZCGzGZs3oUFQQagNAjtr8uI/nY3N2Zw7JXj6HzN
+ 7ZFC6oJemiEUQDsDgEOTWDl4fH5RmxGW3ff8lN78CYNDOeABGKYiLRI4SjRshy6OUPU1B4k9ElUhd
+ S/NCl03RzA/+knty5FaFdfDG;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pnPyr-001CyV-UM; Fri, 14 Apr 2023 20:25:15 +0000
+Date: Fri, 14 Apr 2023 13:25:11 -0700
 To: Andreas Schneider <asn@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: talloc vs malloc speed
+Message-ID: <ZDm2p7Ar4Hz6XqLx@jeremy-acer>
+References: <3161922.5fSG56mABF@magrathea>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <3161922.5fSG56mABF@magrathea>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,20 +55,79 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Walker <awalker@ixsystems.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
 Cc: fweimer@redhat.com, samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Oh forgot to mention: I don't recommend brute-forcing jemalloc like
-that. It will potentially break applications using python modules that
-use talloc. Threw it here for reference for some of the minor changes
-I made (using calloc, some branch reduction, and removing memlimit
-API). Can't recall off the top of my head what % benefit it was to
-make those changes. malloc -> calloc benefit was primarily in cases
-where I was artificially calling talloc_zero() with something rather
-large (which is probably pretty obviously the case where it would
-win). I poked around on it on a sick day IIRC and haven't been sick
-since, hence no progress recently and a fuzzy memory of results. :)
+On Fri, Apr 14, 2023 at 08:11:46PM +0200, Andreas Schneider via samba-technical wrote:
+>Hi,
+>
+>Florian Weimer implemented hwcaps support in glibc. This allows you to drop
+>optimized libraries.
+>
+>The support for this is enabled in openSUSE Tumbleweed right now [1]. I've
+>enabled it for libtalloc as you want to to be as fast as possible.
+>
+>
+>Here are the results from my AMD Ryzen 9 3900X 12-Core processor.
+>
+>talloc x86_64_v1 (testsuite compiled with -O0)
+>
+>test: speed
+># TALLOC VS MALLOC SPEED
+>talloc:       46623469 ops/sec
+>talloc_pool:  74121933 ops/sec
+>malloc:       66443400 ops/sec
+>success: speed
+>
+>=> talloc is 30% slower
+>
+>
+>
+>talloc x86_64_v3 (testsuite compiled with -O0)
+>
+>test: speed
+># TALLOC VS MALLOC SPEED
+>talloc:       47783809 ops/sec
+>talloc_pool:  75068595 ops/sec
+>malloc:       68073710 ops/sec
+>success: speed
+>
+>=> talloc is 30% slower
+>
+>
+>
+>talloc x86_64_v3 (testsuite compiled with -O2)
+>test: speed
+># TALLOC VS MALLOC SPEED
+>talloc:       50633005 ops/sec
+>talloc_pool:  74245533 ops/sec
+>malloc:      219259200 ops/sec
+>success: speed
+>
+>=> talloc is 77% slower
+>
+>
+>It looks like the optimizer is able to optimize the code a lot more if malloc
+>is used.
+>
+>I wonder if it would be possible to give the optimizer more hints. Maybe
+>Florian has some ideas :-)
+>
+>
+>Best regards
+>
+>
+>	Andreas
+>
+>
+>P.S. The talloc website states it is 4% slower than malloc. This was probably
+>a long long time ago ;-)
+
+Really interesting info Andreas, thanks !
+
+Florian, is there something you can point us at to
+help us speed up talloc ?
 
