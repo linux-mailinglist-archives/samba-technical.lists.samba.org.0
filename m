@@ -2,48 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 921B66E4555
-	for <lists+samba-technical@lfdr.de>; Mon, 17 Apr 2023 12:35:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A426E6E4651
+	for <lists+samba-technical@lfdr.de>; Mon, 17 Apr 2023 13:24:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=hriI3Fie5j6D8h5rfoxnYApC3DRFFQIIQm24EDlEgaY=; b=DQBxM0qKsy9OKu9wKaXA0XPxOC
-	qo8u1MTzuYjcYtSZJKtJ/ipoTt5rvaC8D2p6K0+2LYYTtrBCU48bGWhETY4aci0eyRtb5MWXYL6il
-	yh76WMq3FwxPWUhQzEETrpYtEjrB79mOTLoic+pR7s9YdXTx3SaSoRg4SeVhwcnJYJHf2fMO6Usp4
-	DZDuT9yKHboZFmM2HwCGOKXvLUUDHjGSGaO4w45jcP5GvcJjObE2AAgVjqfY4H2Ua4xP8zdu/W5Dp
-	moRhqPMfrAWuNAnoECVWUd7CDMgb2110GsO2WlLhQOg/7/QYGyHGohZHt4PqZ2JTDG06uW2mc3fb5
-	zScEUHjg==;
-Received: from ip6-localhost ([::1]:32200 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=0hhk89nXKduhjebWjCvRNGFEEKDWBMfnwJoIzUlAQNc=; b=WwQStNyuLknbe1e5nUr7dSM8V2
+	2MH9iYtKMQIlC+HvwN005IZZIsjuYBFAbL7Xe5EO6FNS6LlCJuwRJQS1ecm/SG/lChF1iTnJzOENR
+	LQYzczb4vu/w3ZWXpYUcQ35fr1R9u/0GJWmxG9+IfusY+M8LYBZXGmUHhWzBbWNPDDK2CNLe7GKNg
+	qGK2/88Gi9oCiQBds5YL/MLpL7pTVxs9A0Jh+uvSqz8voZwDjV90eAyO5qx7VDosJqpwY5Ig9rYqR
+	tdbQZiWMyMO5z1D/I61AEVOqcVniM2IwSbEEPC1wbt4LHjFxDxgcr3f+81WIaqB/nS7CYrsmzIAHF
+	dxqTxDyQ==;
+Received: from ip6-localhost ([::1]:61664 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1poMCH-002G1o-04; Mon, 17 Apr 2023 10:34:57 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10578) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1poMCA-002G1f-3S
- for samba-technical@lists.samba.org; Mon, 17 Apr 2023 10:34:54 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:To:From:CC;
- bh=hriI3Fie5j6D8h5rfoxnYApC3DRFFQIIQm24EDlEgaY=; b=ZDlkshmr8maDrCK8nxHN7BR1NS
- 8mcoTIkfzuVq+i7MWjLIT7ojMVKRUYlVEeN8YfNhuTlEbgptn9dXqQsZQpjqgccrbdW1FjX2F7b2r
- iZwP4iDleOlQqYKXbdJmNvrZvONCj+M+7Ih8xpEDkdjn2GlO1cRSvtOw3MtBCgpvq74Vg7Ls0lw43
- vmtpEj0+NJaoUsDVAQpZVKNYKpHqdhi81lY2S9Dt+W2/R3bn3HddQ06Yn9H2fMPvz6fR51T+9JhB0
- 5xUjItNh5Tg8NL7FnxelkoATK74w0gpZUcDUcmTtBE2tmOytHDFPtMXHRIlklCIKFCZIRciPQtd3r
- sOmZjZfLebEWYqUlHkjIKNMoi+8wl7QelEICRMp7wx5Z9PIVGmkJxHH2n2PWDqCvHrzn2fcARxNsf
- xwVGt5XrWVYRajcdCe10s9ygpT8/jDM8zXHkP3BGcPXL3FR+TaN5lvHBUFn8u6gJKIt7ldFCDBfLq
- w9yUykQ/FrcL8ghAkv8dUwvm;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1poMC9-001cMN-20; Mon, 17 Apr 2023 10:34:49 +0000
-To: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>,
- Florian Weimer <fweimer@redhat.com>
+	id 1poMxu-002HRZ-H8; Mon, 17 Apr 2023 11:24:10 +0000
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:34469) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1poMxo-002HRQ-73
+ for samba-technical@lists.samba.org; Mon, 17 Apr 2023 11:24:08 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1681730641;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=0hhk89nXKduhjebWjCvRNGFEEKDWBMfnwJoIzUlAQNc=;
+ b=JN2BY1AwuqVGRWyTjucUHtfwx7XfxU5bxMwvdzoXTjNjVkNhh7phZzoJd02BjXZbIslb+4
+ 8IimM5UOfpk4d8JsnE/FPJHaXi0VvjatCfGvmetDLq0nWOgHQrrhZTLQlV/kjAhBIQA8bB
+ I/p7fNNLhMq2OYHWx+yRsH3UDNq5CoI=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1681730641;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=0hhk89nXKduhjebWjCvRNGFEEKDWBMfnwJoIzUlAQNc=;
+ b=JN2BY1AwuqVGRWyTjucUHtfwx7XfxU5bxMwvdzoXTjNjVkNhh7phZzoJd02BjXZbIslb+4
+ 8IimM5UOfpk4d8JsnE/FPJHaXi0VvjatCfGvmetDLq0nWOgHQrrhZTLQlV/kjAhBIQA8bB
+ I/p7fNNLhMq2OYHWx+yRsH3UDNq5CoI=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-658-T8g_eFPGOm6I36GidWr21w-1; Mon, 17 Apr 2023 07:08:02 -0400
+X-MC-Unique: T8g_eFPGOm6I36GidWr21w-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id AA2AF101A550;
+ Mon, 17 Apr 2023 11:08:01 +0000 (UTC)
+Received: from oldenburg.str.redhat.com (unknown [10.2.16.59])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 22A2347CD0;
+ Mon, 17 Apr 2023 11:08:01 +0000 (UTC)
+To: Andreas Schneider <asn@samba.org>
 Subject: Re: talloc vs malloc speed
-Date: Mon, 17 Apr 2023 12:34:47 +0200
-Message-ID: <4829322.31r3eYUQgx@magrathea>
-In-Reply-To: <873552p47g.fsf@oldenburg.str.redhat.com>
 References: <3161922.5fSG56mABF@magrathea>
  <873552p47g.fsf@oldenburg.str.redhat.com>
+ <4829322.31r3eYUQgx@magrathea>
+Date: Mon, 17 Apr 2023 13:07:59 +0200
+In-Reply-To: <4829322.31r3eYUQgx@magrathea> (Andreas Schneider's message of
+ "Mon, 17 Apr 2023 12:34:47 +0200")
+Message-ID: <87o7nmhils.fsf@oldenburg.str.redhat.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,52 +79,43 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Florian Weimer via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Florian Weimer <fweimer@redhat.com>
+Cc: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Friday, 14 April 2023 23:02:43 CEST Florian Weimer wrote:
-> * Andreas Schneider via samba-technical:
-> > I wonder if it would be possible to give the optimizer more hints. Maybe
-> > Florian has some ideas :-)
-> 
-> You need to check that with optimization, the compiler does not elide
-> malloc/free calls completely.  That might give malloc an unfair
-> advantage.  GCC knows that malloc/free have no observable side effect,
-> so if it can see the whole program, it sometimes can turn heap
-> allocations into stack allocations.  GCC also knows that memory returned
-> by malloc cannot alias anything, and that writes to the object before
-> free can be eliminated.  The latter might be meaningful for
-> microbenchmarks.
-> 
-> Some of these behaviors can be enabled through function attributes,
-> however I'm not sure how much of that would be correct for talloc.  If I
-> recall correctly, it has destructor callbacks, which means that
-> arbitrary code can run on free, and that rules out dead store
-> elimination.
+* Andreas Schneider:
 
-Yes, we have support for destructor callbacks. Can you point me to the 
-attributes which might help talloc?
+> Yes, we have support for destructor callbacks. Can you point me to the 
+> attributes which might help talloc?
 
-> If talloc is layered on top of system malloc, using its own allocator
-> geared to its particular metadata requirements could reduce memory
-> overhead and make certain things go faster, but it's also a lot of work.
+I think of those listed here
 
-talloc is basically a bunch of pointer arithmetic around malloc()/free() call.
+  <https://gcc.gnu.org/onlinedocs/gcc/Common-Function-Attributes.html>
 
-It has desctructors and also keeps track of the hierarchy. So you can free a 
-an allocated pointer with all its children.
+alloc_align, alloc_size, malloc, nothrow, returns_nonnull are relevant,
+but not all them might be appropriate due to the way talloc works.
 
-Interesting that those few pointer calculations make it so much slower.
+These attributes are mostly about improving diagnostics, I think, not so
+much for performance.
 
+>> If talloc is layered on top of system malloc, using its own allocator
+>> geared to its particular metadata requirements could reduce memory
+>> overhead and make certain things go faster, but it's also a lot of work.
+>
+> talloc is basically a bunch of pointer arithmetic around malloc()/free() call.
+>
+> It has desctructors and also keeps track of the hierarchy. So you can free a 
+> an allocated pointer with all its children.
+>
+> Interesting that those few pointer calculations make it so much slower.
 
-	Andreas
+That's indeed surprising (especially if talloc doesn't take locks around
+allocations and frees).  Maybe the working set size exceeds the CPU
+cache size due to the metadata size increase?
 
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
-
+Thanks,
+Florian
 
 
