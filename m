@@ -2,66 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FE4D6E3C9C
-	for <lists+samba-technical@lfdr.de>; Mon, 17 Apr 2023 00:18:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 921B66E4555
+	for <lists+samba-technical@lfdr.de>; Mon, 17 Apr 2023 12:35:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=r7L6iVfHGSEuHJnJlOSQlO0z0Y0P9E7gOSyqlRN5C+k=; b=XNe1VlhJABfMlV2gKejuK88coh
-	iJgyDoNHNvZYrabvY/ucxRqx8bm/8ZrbyfjiPgcqxmB+vpK9k1yyYbMcnDuDsVmPplw4gWMolhF8I
-	YRchlWYBme/kwphWlz4tZEiV7SnyJWI3b4YvPm0YuqFYLVI2ufRXtgoue03wwTxXWfDxcvtiS9tIL
-	4YesvlVKsO7OlRxA78U4W6Kz+lSHsVKVSxkzBdn7RmGUxxXxndXSwywmm/jHURG7eV2RLIQ2YzFI7
-	C3LesZsATrMDSzeclVQ3rVGNdWnwwom2yd2A/dTzrJzYAVa24qMZXfbkzDvfWPEh3UQX/2y6Bl8LR
-	I6F978cw==;
-Received: from ip6-localhost ([::1]:51288 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
+	bh=hriI3Fie5j6D8h5rfoxnYApC3DRFFQIIQm24EDlEgaY=; b=DQBxM0qKsy9OKu9wKaXA0XPxOC
+	qo8u1MTzuYjcYtSZJKtJ/ipoTt5rvaC8D2p6K0+2LYYTtrBCU48bGWhETY4aci0eyRtb5MWXYL6il
+	yh76WMq3FwxPWUhQzEETrpYtEjrB79mOTLoic+pR7s9YdXTx3SaSoRg4SeVhwcnJYJHf2fMO6Usp4
+	DZDuT9yKHboZFmM2HwCGOKXvLUUDHjGSGaO4w45jcP5GvcJjObE2AAgVjqfY4H2Ua4xP8zdu/W5Dp
+	moRhqPMfrAWuNAnoECVWUd7CDMgb2110GsO2WlLhQOg/7/QYGyHGohZHt4PqZ2JTDG06uW2mc3fb5
+	zScEUHjg==;
+Received: from ip6-localhost ([::1]:32200 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1poAh9-002CGu-TA; Sun, 16 Apr 2023 22:18:03 +0000
-Received: from cat-porwal-prod-mail1.catalyst.net.nz
- ([2404:130:4080::4]:56424) 
+	id 1poMCH-002G1o-04; Mon, 17 Apr 2023 10:34:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:10578) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1poAh2-002CGl-Rw
- for samba-technical@lists.samba.org; Sun, 16 Apr 2023 22:18:00 +0000
-Received: from [192.168.1.219] (unknown [114.23.142.188])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (Client did not present a certificate)
- (Authenticated sender: douglasb@catalyst.net.nz)
- by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id AEFD880CCB; 
- Mon, 17 Apr 2023 10:17:46 +1200 (NZST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
- s=default; t=1681683467;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=r7L6iVfHGSEuHJnJlOSQlO0z0Y0P9E7gOSyqlRN5C+k=;
- b=mTzmmIXolIA9PoaD47RyLEcnS9cGjkbCxnpQMg8ZzdxrBRMjzkKJTpsKc1TsaZb1JUvD+w
- HGIiKVnIsUj/f9KmlxoE5Fr/abQ1NXRy/sj+ZVuw8wO1suhYVFy7AQnIbcpCyeVLgB7r9+
- 7sK3HJeMNr+wbhEV0YOJ4HrUlDIflf3m0zBeORH4e/7d8qfxG3G2TX70q5Kczi2RI1uexz
- As9ZoTATmDP1nCX87uTofw3I0iuyvjAOANatmlHueyk3iveG5fH3pZ+G1IPgmVDrd8opZc
- 2/RTEckS6jFD94WBN8/nBLci1mJ36OxRv+mPPTywiTeyKJaLTRzxxY8serHLeA==
-Message-ID: <3ed3e207-611c-e4c7-ffd4-9fa3e7468e29@catalyst.net.nz>
-Date: Mon, 17 Apr 2023 10:17:44 +1200
+ (Exim) id 1poMCA-002G1f-3S
+ for samba-technical@lists.samba.org; Mon, 17 Apr 2023 10:34:54 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Date:To:From:CC;
+ bh=hriI3Fie5j6D8h5rfoxnYApC3DRFFQIIQm24EDlEgaY=; b=ZDlkshmr8maDrCK8nxHN7BR1NS
+ 8mcoTIkfzuVq+i7MWjLIT7ojMVKRUYlVEeN8YfNhuTlEbgptn9dXqQsZQpjqgccrbdW1FjX2F7b2r
+ iZwP4iDleOlQqYKXbdJmNvrZvONCj+M+7Ih8xpEDkdjn2GlO1cRSvtOw3MtBCgpvq74Vg7Ls0lw43
+ vmtpEj0+NJaoUsDVAQpZVKNYKpHqdhi81lY2S9Dt+W2/R3bn3HddQ06Yn9H2fMPvz6fR51T+9JhB0
+ 5xUjItNh5Tg8NL7FnxelkoATK74w0gpZUcDUcmTtBE2tmOytHDFPtMXHRIlklCIKFCZIRciPQtd3r
+ sOmZjZfLebEWYqUlHkjIKNMoi+8wl7QelEICRMp7wx5Z9PIVGmkJxHH2n2PWDqCvHrzn2fcARxNsf
+ xwVGt5XrWVYRajcdCe10s9ygpT8/jDM8zXHkP3BGcPXL3FR+TaN5lvHBUFn8u6gJKIt7ldFCDBfLq
+ w9yUykQ/FrcL8ghAkv8dUwvm;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1poMC9-001cMN-20; Mon, 17 Apr 2023 10:34:49 +0000
+To: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>,
+ Florian Weimer <fweimer@redhat.com>
+Subject: Re: talloc vs malloc speed
+Date: Mon, 17 Apr 2023 12:34:47 +0200
+Message-ID: <4829322.31r3eYUQgx@magrathea>
+In-Reply-To: <873552p47g.fsf@oldenburg.str.redhat.com>
+References: <3161922.5fSG56mABF@magrathea>
+ <873552p47g.fsf@oldenburg.str.redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: The strange issues happening with ad_dc_ntvfs environment
-Content-Language: en-NZ
-To: Andreas Schneider <asn@samba.org>, samba-technical@lists.samba.org
-References: <2142927.irdbgypaU6@magrathea>
- <8c78e366-5b95-f407-3ca2-2dc561b1d2f2@catalyst.net.nz>
- <13246326.uLZWGnKmhe@magrathea>
- <4cd5f631-f135-858c-5d9b-5913babef316@catalyst.net.nz>
-In-Reply-To: <4cd5f631-f135-858c-5d9b-5913babef316@catalyst.net.nz>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-0.10 / 15.00]; MIME_GOOD(-0.10)[text/plain];
- ARC_NA(0.00)[]; MIME_TRACE(0.00)[0:+];
- ASN(0.00)[asn:56030, ipnet:114.23.0.0/16, country:NZ];
- DCC_FAIL(0.00)[failed to scan and retransmits exceed];
- DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
- MID_RHS_MATCH_FROM(0.00)[]
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=douglasb@catalyst.net.nz
- smtp.mailfrom=douglas.bagnall@catalyst.net.nz
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,45 +57,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 13/04/23 22:42, Douglas Bagnall via samba-technical wrote:
-
+On Friday, 14 April 2023 23:02:43 CEST Florian Weimer wrote:
+> * Andreas Schneider via samba-technical:
+> > I wonder if it would be possible to give the optimizer more hints. Maybe
+> > Florian has some ideas :-)
 > 
-> I'm running it again to see what changes.
+> You need to check that with optimization, the compiler does not elide
+> malloc/free calls completely.  That might give malloc an unfair
+> advantage.  GCC knows that malloc/free have no observable side effect,
+> so if it can see the whole program, it sometimes can turn heap
+> allocations into stack allocations.  GCC also knows that memory returned
+> by malloc cannot alias anything, and that writes to the object before
+> free can be eliminated.  The latter might be meaningful for
+> microbenchmarks.
+> 
+> Some of these behaviors can be enabled through function attributes,
+> however I'm not sure how much of that would be correct for talloc.  If I
+> recall correctly, it has destructor callbacks, which means that
+> arbitrary code can run on free, and that rules out dead store
+> elimination.
 
-For the record, I left make test on master running in a loop, and this is what i 
-saw:
+Yes, we have support for destructor callbacks. Can you point me to the 
+attributes which might help talloc?
 
-      20 uxsuccess: samba4.libsmbclient.opendir.NT1.opendir(nt4_dc_smb1_done)
-      20 failure: samba4.ntvfs.cifs.ntlm.base.unlink.unlink(rpc_proxy) [
-      20 failure: samba3.smbtorture_s3.plain.XCOPY.smbtorture(fileserver_smb1) [
-      20 failure: samba3.smbtorture_s3.plain.LOCK13.smbtorture(fileserver_smb1) [
-      20 failure: samba3.smbtorture_s3.plain.LOCK10.smbtorture(fileserver_smb1) [
-      20 failure: 
-samba3.smbtorture_s3.plain.DIR-CREATETIME.smbtorture(fileserver_smb1) [
-      20 failure: samba3.smbtorture_s3.plain.CLEANUP4.smbtorture(fileserver_smb1) [
-      20 failure: samba3.smbtorture_s3.plain.CLEANUP2.smbtorture(fileserver_smb1) [
-      20 failure: samba3.smbtorture_s3.plain.CHAIN3.smbtorture(fileserver_smb1) [
-      20 failure: samba3.blackbox.smbstatus.test_json_profile(fileserver:local) [
-      20 failure: samba3.blackbox.smbclient_netbios_aliases [foo].smbclient 
-(krb5)(ad_member:local) [
-      20 failure: 
-samba3.blackbox.smbclient.kerberos.smbclient.smb3.kerberos.off[//fipsdc/tmp](ad_dc_fips) 
-[
-      20 failure: 
-samba3.blackbox.smbclient.kerberos.smbclient.smb3.kerberos.off[//FIPSADMEMBER/tmp](ad_member_fips) 
-[
-      15 failure: samba4.nbt.dgram.ntlogon(ad_dc_ntvfs) [
-       6 failure: samba4.nbt.dgram.netlogon2(ad_dc_ntvfs) [
+> If talloc is layered on top of system malloc, using its own allocator
+> geared to its particular metadata requirements could reduce memory
+> overhead and make certain things go faster, but it's also a lot of work.
 
-That's 12 always failing, 1 always unexpectedly succeeding, and 2 flapping.
+talloc is basically a bunch of pointer arithmetic around malloc()/free() call.
 
-I haven't tried with the release tarball.
+It has desctructors and also keeps track of the hierarchy. So you can free a 
+an allocated pointer with all its children.
 
-Douglas
+Interesting that those few pointer calculations make it so much slower.
+
+
+	Andreas
+
+-- 
+Andreas Schneider                      asn@samba.org
+Samba Team                             www.samba.org
+GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+
 
 
