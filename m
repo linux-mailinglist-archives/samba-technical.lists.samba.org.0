@@ -2,42 +2,44 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63B5E6E4F36
-	for <lists+samba-technical@lfdr.de>; Mon, 17 Apr 2023 19:29:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECAFB6E500B
+	for <lists+samba-technical@lfdr.de>; Mon, 17 Apr 2023 20:18:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=mKEGRGfz8IBOlnKTw1z6NbzgK12PQsHMZ/s31Gf0+c4=; b=iAaUdQ0SoOAowMlVSDcKcgVIW9
-	PndmG/QZvqPxKE+jSIzi/U1wBhjzz2vtpxl+A1FATxkg9R4cw2GTHvB7+g7sYqDUBk5ZoFLFBff2C
-	DKekIos+JGwKPCirMNAyBfaU4N2uoKND37ZxUjNvH+vJeJg7vTy8pxdPB34c8rK8+kEeDnPYOGBwW
-	jscvbqbeoyuoDsh+vewk+mWu1xwFs8LVNq19xtu2XwwHpiLr0UT4hdlmN4J/3I031bWt68+tsegti
-	m8Ra3ytaDibhdgQqrYeOwgDtG2+gQjFXIF6LFR57IBQY4nQYXfeHVtrRBUbmH//G7O2FI4tQutaC+
-	1KDKq0IA==;
-Received: from ip6-localhost ([::1]:45106 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=4nMyXpxk8vDpsjHLEFkE01KT4GYN2TCJeovA6KbO9I0=; b=P/EBWeEm7Xyu3xCDC2ifsPMbAJ
+	n49SU64BkZXVa5iH/+O5NQ6b3wqm1jdOldC/N1X8ukFoK//f767hFxltPewWyCmcbOHFwynZxi7kD
+	jvru6xH5a3un2MgeP8HyGQpu3COiHt2BCPgLyTcJKVxi+p/OdNtofLmYngrRucJRP5pGS5qzORb/M
+	2pFfWCFUK5/onse6LkCzCJitjYpYqVydC3a0YqkPnCTxj+uSOdTRDMTh8n6CC4rx1DmJzPYLw/knk
+	p5KJUTfgFC3P0ItRz3Pc88FtCCgm8tHmRF7ufXAqJeODj7tCN7/UlVmBsabd1YOvhTTeb+QpcHk/W
+	afj/eyww==;
+Received: from ip6-localhost ([::1]:38488 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1poSfS-002Ltx-NC; Mon, 17 Apr 2023 17:29:30 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:56502) 
+	id 1poTQL-002MIA-HZ; Mon, 17 Apr 2023 18:17:57 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:11272) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1poSfO-002Lto-Lu
- for samba-technical@lists.samba.org; Mon, 17 Apr 2023 17:29:28 +0000
+ (Exim) id 1poTQH-002MI1-Ad
+ for samba-technical@lists.samba.org; Mon, 17 Apr 2023 18:17:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:To:From:CC;
- bh=mKEGRGfz8IBOlnKTw1z6NbzgK12PQsHMZ/s31Gf0+c4=; b=CdQn4OMuuVtXIl6QMmm1zh+7Zp
- kmUj8y7eN/I8OF/YCNTM/6i4gWCsopSJ5g/baIyiT4gNiMzLiAs79RqNA9My505gvdNDzZKpunuhc
- jh/NRXlUfIVlZpDNI4Mm89LX3Zf29si8Va9F4e/6uM1bv1VUsyIfof6Lf08CvAZEA3UCZTkEVFi/p
- PAvtSwxEkhSi86DyQ/8I9g5IAJH1wVHFMLEf2kzmheiY8UG1u/0ZN+zBY389jhedczYRpxr/nk097
- rMh0usTxFFRK/JSmPGZzGK9GsAMVPffuHBVpVxMulhvnlxs6Rg5GrRQqxqOlEFxFm1sHvDdQksafa
- 9ZK96byBBLRN1M+F9nZKvd7BRIKRZxdCyr5IcYgF8PuJ59cKEiuXjKZSqcf0PwE3DVTjgDELaVybc
- 2vuFAez94tY2m87+gjvP/+vOLuvUkIHywkBijTVWy4diufd7EKv3pywQeDjY1wzGQPOkdUv/IkmI/
- 2qZ8c1A+O8Al+yqcZlODIRh6;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=4nMyXpxk8vDpsjHLEFkE01KT4GYN2TCJeovA6KbO9I0=; b=VUwpQs27lLHc4COKXXXyzZKM11
+ XIsQ/t1VScRc2FI/Xb6mwgHte6MXX5KxdKzXeTZG4OFvjGTo/ugcMGbn5fIwm7QSu5HjKKsmKbJXb
+ DMSoZoINZ+dVkbLQPRhg3MvtKTUa1X7hvGJRhTteVOv2iW+ULY93MERgYOS5DSy3i0cecmhUbos/y
+ QNj3EmK3JHNEEqi5Vy943CPJlBV1KZl/fV6+htdcJhXT1yiDgpsJXz3A5fXiIMGsqOLv9sQcn9ToF
+ 3qt/lcnG6EN0e5QnCmZnBBhWp4MlQUvUt5eGYL+AyUSnCJ+ZBPL96ToTaqPtF2zTuTaaPBHI+Cnem
+ VPQ7scNGeVfWn9ohueCsMUKoXQ3/ZBBuxz6DzfbeKVhgI/Oa/jQXJHVMAw06B4Gs2O9fNjaUV26sh
+ EefhMApj5gKW7a3QFZIyZ346LOoeQh+Gl5o2aQa/Yg/Wn1/FzDceg5peou11KJnFZTOXe2Usmpq2z
+ ONDxS9k2WHUDUuxd4/caGZkD;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1poSfN-001gLZ-SF
- for samba-technical@lists.samba.org; Mon, 17 Apr 2023 17:29:25 +0000
+ (Exim) id 1poTQF-001gdK-T4; Mon, 17 Apr 2023 18:17:51 +0000
 To: samba-technical@lists.samba.org
-Subject: talloc_fill
-Date: Mon, 17 Apr 2023 19:29:25 +0200
-Message-ID: <1934821.PYKUYFuaPT@magrathea>
+Subject: Re: talloc vs malloc speed
+Date: Mon, 17 Apr 2023 20:17:50 +0200
+Message-ID: <3165882.5fSG56mABF@magrathea>
+In-Reply-To: <be27d4d7-673e-d1b3-6789-a2e41899ca7d@catalyst.net.nz>
+References: <3161922.5fSG56mABF@magrathea>
+ <be27d4d7-673e-d1b3-6789-a2e41899ca7d@catalyst.net.nz>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
@@ -56,25 +58,35 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Andreas Schneider <asn@samba.org>
+Cc: fweimer@redhat.com, Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi,
+On Sunday, 16 April 2023 04:16:20 CEST Douglas Bagnall via samba-technical 
+wrote:
+> On 15/04/23 06:11, Andreas Schneider via samba-technical wrote:
+> > P.S. The talloc website states it is 4% slower than malloc. This was
+> > probably a long long time ago ;-)
+> 
+> Ha. `man talloc` has almost the same sentence saying "10%".
+> 
+> I thought serious trouble with talloc performance has to do with the
+> linked lists getting huge, making talloc_free or reparenting really slow.
+> And I thought that this talloc-doing-talloc cost outweighs the
+> talloc-as-malloc cost, which I guess is what is being measured here?
 
-we have a way to set fill memory with a given value for debugging double frees 
-using the talloc_fill feature. This was added because valgrind is slow and we 
-didn't have AddressSanitizer. However we have AddressSanitzer and other nice 
-tools now. So I think we could drop talloc_fill.
+The talloc vs malloc test only does a talloc_strdup() in a loop. There are 
+basically no childs involved and this cost doesn't show up here.
 
-Any concerns?
+I think it would be tricky to use something like a red black tree.
 
+> If that's the case (I have no evidence) then optimising talloc-as-malloc
+> might not really help. OTOH, because talloc makes it easier to keep track
+> of millions of little allocations, we do that often, so perhaps talloced
+> code is *more* sensitive to the primitive alloc cost.
 
-I someone wants to really keep it, we could at least make it not a runtime 
-option.
-
-
-	Andreas
-
+The thing is that that really simple testcase is already that slow. Getting 
+rid of talloc_fill might help a tiny bit.
 
 -- 
 Andreas Schneider                      asn@samba.org
