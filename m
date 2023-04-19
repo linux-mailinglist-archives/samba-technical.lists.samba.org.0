@@ -2,70 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B6ED6E5A19
-	for <lists+samba-technical@lfdr.de>; Tue, 18 Apr 2023 09:09:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A03016E7779
+	for <lists+samba-technical@lfdr.de>; Wed, 19 Apr 2023 12:33:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=dagRcYHUjdDUCWadoH5/3Ry1ybqxeFIzzlqg+eYBSuE=; b=ndJ5pvIry1hJJLZ5OdShmMMdLq
-	r1V8Gv9dAHFHWSWTitbTTEnG1dpFMS9qao0ZfWKe1cEzA6qYUXmt46irlJYloriwCaYVMmmD5fQ9L
-	Iu0YXfFtbyiFMnTNIYjRNevAG2bXVMt/ZVbUdQCA5j9EOmwzZwKnrkry/8Mpu6fGYEUGXPv0GGOW6
-	Pabb6LfELOSgqNWkOsdUdWVOL716RbryKtrx4whkU11P5C/95A9t5LtVd0F+du1pci7cMCZfnLB3t
-	KK0IN0Gg4XyIvrrUdY6Gh9OTxXkZnMF9vxchyTlwlXAssCBdmoWkol6kkkjOsMecT79Ksi+E9DN19
-	YNzNZIIQ==;
-Received: from ip6-localhost ([::1]:50966 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=JmTBerqrR23PrXodEbT9+L4wic24ZSjBdy2/hVjjMQA=; b=Pm58xNAG/Od9fgIasDH9MInGOR
+	XdHiHeyy/4NI36rgdRP07p4BR0685t9YqtyZ04KhAGZPsP8Ktiryl6GxVoR9MmT1/tA26mrCVBp/X
+	upHhvllRJBlpz/BSEvDSqIINcEas+leIJ/WgqB+5an3xu1+dCYYoQ917sS7861jB6pO9cltLFCFrM
+	Aqx5/c8dk5pei1qTkI/GGZ1aEkkfsC7b8tnAr4q1e5Z0sCwZbMkGMGMWlEL8VRUMlSxEglb+2QV7R
+	Gc13PGd3gHaL0fb42QRP0oYqyvf1kWx+KcUQi0J0xIjw1iInlMSM/bNqZRwMlV5LqMdkUb9FM8j4x
+	nsc1wOqg==;
+Received: from ip6-localhost ([::1]:61324 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pofS0-002PXl-T4; Tue, 18 Apr 2023 07:08:29 +0000
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:24474) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1pofRm-002PXb-FT
- for samba-technical@lists.samba.org; Tue, 18 Apr 2023 07:08:17 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1681801689;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=dagRcYHUjdDUCWadoH5/3Ry1ybqxeFIzzlqg+eYBSuE=;
- b=YIwF/BJcGQUGZ+zhIaEhc46PrXQI9tQA0SRCDN3IK08ZzxyqUJL5Vomg1Thn5UFFyrBcYg
- Qfhgi8CTG0MaziNQk46rOs5vuQqLPTmRINd8/EN3FOvQsjMcOtfhRQSxhL/t0+NbmSVhMA
- 9zriN4bi4EBD9lu0wIDxyE6QbatGHCA=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1681801689;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=dagRcYHUjdDUCWadoH5/3Ry1ybqxeFIzzlqg+eYBSuE=;
- b=YIwF/BJcGQUGZ+zhIaEhc46PrXQI9tQA0SRCDN3IK08ZzxyqUJL5Vomg1Thn5UFFyrBcYg
- Qfhgi8CTG0MaziNQk46rOs5vuQqLPTmRINd8/EN3FOvQsjMcOtfhRQSxhL/t0+NbmSVhMA
- 9zriN4bi4EBD9lu0wIDxyE6QbatGHCA=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-395-Mo6FY4BdPieN5yH5P7BP_g-1; Tue, 18 Apr 2023 03:07:38 -0400
-X-MC-Unique: Mo6FY4BdPieN5yH5P7BP_g-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 614901818E51;
- Tue, 18 Apr 2023 07:07:38 +0000 (UTC)
-Received: from oldenburg.str.redhat.com (unknown [10.2.16.41])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id A5DB62A68;
- Tue, 18 Apr 2023 07:07:37 +0000 (UTC)
-To: Andreas Schneider <asn@samba.org>
-Subject: Re: talloc vs malloc speed
-References: <3161922.5fSG56mABF@magrathea> <5829842.MhkbZ0Pkbq@magrathea>
- <871qkigw1g.fsf@oldenburg.str.redhat.com>
- <3558714.R56niFO833@magrathea>
-Date: Tue, 18 Apr 2023 09:07:35 +0200
-In-Reply-To: <3558714.R56niFO833@magrathea> (Andreas Schneider's message of
- "Tue, 18 Apr 2023 07:54:43 +0200")
-Message-ID: <875y9thdmw.fsf@oldenburg.str.redhat.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
+	id 1pp57V-002hRz-Th; Wed, 19 Apr 2023 10:33:01 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57376) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1pp57L-002hR1-4n; Wed, 19 Apr 2023 10:32:53 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=JmTBerqrR23PrXodEbT9+L4wic24ZSjBdy2/hVjjMQA=; b=INIo+dSglx3tY/e7G8pm3zIJXA
+ YVgWpyLJh6UB7tTJ2IQQynDEmYMjvJZ15bOUhArdyXUOUh6EZmXxYPKKL3X+UOOAxvr8GICdlUOl5
+ jaRASvAQMbj5xitwnj3MqKpxnodcZsZYSqiju5ifuDr5Lz3R/N02r1JRONt0zMrxGbdswx1yQgPrH
+ WZsCCp/RWpcdNCLDMdKAaERjWJjrY6rfUgvRVm9rCaKCfZ3m2RLe5vEzGW8PoOwif74+4h/mVA2Gq
+ Z2OtDZK5GKPpLqemELbLUsDkHe02RFT17uwI9PTKLZ++l7WShKz2gjU7CD/BSRxTvotNyzFB/DDHb
+ HQer3P9ET6qUs3kLE6kFoDauecgY/KZkCtP7EidqoH+RRnx1idKAg01cq00EIw/r2vSh/cPakTvl/
+ C6i0bmmgsFDRWursbT4j7lu21+F5uNOOjO91XU0l3LcIfjJ9ngxzlpOtI2phJTkic3pPq15Fm2IYl
+ 3K8AriapQg8JjbCcFGL0Z1Kb;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1pp57K-0020OH-Er; Wed, 19 Apr 2023 10:32:50 +0000
+Message-ID: <5087dd7c-cf73-1aa1-6a3f-883bd9d9af23@samba.org>
+Date: Wed, 19 Apr 2023 12:32:50 +0200
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.18.2 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,29 +56,105 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Florian Weimer via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Florian Weimer <fweimer@redhat.com>
-Cc: samba-technical@lists.samba.org
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-* Andreas Schneider:
+Release Announcements
+---------------------
 
-> On Monday, 17 April 2023 21:15:23 CEST Florian Weimer wrote:
->> > The malloc attribute can be set to a few functions, that helps. I use
->> > the attribute with the deallocator to avoid issue on free with
->> > destructors.
->> 
->> I *think* that should be safe, but I'm not entirely sure.  Maybe ask on
->> the GCC list?
->
-> Is it valid to set the the malloc attribute for talloc_strdup()?
+This is the latest stable release of the Samba 4.18 release series.
 
-It depends on how it's implemented.  If it returns a fresh pointer
-aligned like malloc would, it's appropriate.  The <string.h> header from
-glibc uses it for strdup, too.
 
-Thanks,
-Florian
+Changes since 4.18.1
+--------------------
+
+o  Jeremy Allison <jra@samba.org>
+    * BUG 15302: Log flood: smbd_calculate_access_mask_fsp: Access denied:
+      message level should be lower.
+    * BUG 15306: Floating point exception (FPE) via cli_pull_send at
+      source3/libsmb/clireadwrite.c.
+
+o  Andrew Bartlett <abartlet@samba.org>
+    * BUG 15328: test_tstream_more_tcp_user_timeout_spin fails 
+intermittently on
+      Rackspace GitLab runners.
+    * BUG 15329: Reduce flapping of ridalloc test.
+    * BUG 15351: large_ldap test is unreliable.
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15143: New filename parser doesn't check veto files smb.conf 
+parameter.
+    * BUG 15354: mdssvc may crash when initializing.
+
+o  Volker Lendecke <vl@samba.org>
+    * BUG 15313: large directory optimization broken for non-lcomp path 
+elements.
+    * BUG 15357: streams_depot fails to create streams.
+    * BUG 15358: shadow_copy2 and streams_depot don't play well together.
+
+o  Rob van der Linde <rob@catalyst.net.nz>
+    * BUG 15316: Flapping tests in samba_tool_drs_show_repl.py.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15317: winbindd idmap child contacts the domain controller 
+without a
+      need.
+    * BUG 15318: idmap_autorid may fail to map sids of trusted domains 
+for the
+      first time.
+    * BUG 15319: idmap_hash doesn't use ID_TYPE_BOTH for reverse mappings.
+    * BUG 15323: net ads search -P doesn't work against servers in other 
+domains.
+    * BUG 15353: Temporary smbXsrv_tcon_global.tdb can't be parsed.
+
+o  Joseph Sutton <josephsutton@catalyst.net.nz>
+    * BUG 15316: Flapping tests in samba_tool_drs_show_repl.py.
+    * BUG 15343: Tests use depricated and removed methods like
+      assertRegexpMatches.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.18.2.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
 
