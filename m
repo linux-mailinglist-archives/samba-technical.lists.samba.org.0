@@ -2,60 +2,65 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7AAEB6F3D3B
-	for <lists+samba-technical@lfdr.de>; Tue,  2 May 2023 08:14:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 575336F8044
+	for <lists+samba-technical@lfdr.de>; Fri,  5 May 2023 11:44:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=L5ZB4XzWn5L2O/gUmlO1lha1p9XXtRUuw21Lz1AZ3a8=; b=Q+JUxk3HLnuSUbCFcwZbLsqVTE
-	hOfspGz0GJ9V80+KxOajZjA0VByzPlnT/F+VSJGjI3nCWct9PcRgTmhTtxwX8TN79POg6NprN1THG
-	yOcMFuypQHRrbp2m1IYgfaP2OxnKjCbJHx4Qn5oIWvn3WtqtKYTrUCi91cnqa7Vmg913CmwE/oVQ/
-	YPNBWh6M6juBb8vnbND5QoFWi+itdW/9a4v1fhOsWvyE2FQy78ULIRX/z+iEisOioJi+Z8oAAFFcm
-	eM5YLHI+iKKQGKhOHYM7V1Mdj57jO8SLA2DDdNzYoZ7JY8TL0yWNGgaj9pNmG515ViJ0NK+zIXk4S
-	ji6KiOqw==;
-Received: from ip6-localhost ([::1]:52216 helo=hr1.samba.org) 
+	bh=ufubWxzKxARqUJmhZ8ARTI9/l39hZnmHjfZ3QsO10+w=; b=fUm9a25FetvVQsoS8A/9aNOedW
+	folZ4JJsdVbkkoZqtAcq84zrSD6yiFZCLAW9lV+9Mu8+8Ts+Eb735wSctaXy4CWMJginqLWcKRBFS
+	CmEcercFkMy3c0Za8MqFYN7kSwHrJ8izn+ETuicvfPyTl8ct5eWE3Xy9JXNsXxi8PQRTTedXMMAhc
+	uBKf5yTDvi5e6tPiM3YYtNTwaWYNggEBfm1mnVqrKutlNxK3qIvFt1u+N+2Fl+fnxn1Sx2pnJaBJZ
+	2XU2GEZWBe3P4CP+94k5JW4RKbAatS7EHveAyo3qJJvTkaceBStC7MeWQ5tUsvztTmAkvUjhNOiE5
+	x6hDobKA==;
+Received: from ip6-localhost ([::1]:28058 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1ptjG2-00810M-Vo; Tue, 02 May 2023 06:13:03 +0000
-Received: from dfw.source.kernel.org ([139.178.84.217]:41546) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1ptjFx-0080zc-LX
- for samba-technical@lists.samba.org; Tue, 02 May 2023 06:12:59 +0000
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8DFFE61830
- for <samba-technical@lists.samba.org>; Tue,  2 May 2023 05:56:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F37CDC433D2
- for <samba-technical@lists.samba.org>; Tue,  2 May 2023 05:56:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1683006966;
- bh=f6Fl2Ulp68fTeYXWhgX22P1f6deucPhQ1pDjoHJSGzw=;
- h=In-Reply-To:References:From:Date:Subject:To:Cc:From;
- b=WH9C/ViNwXbidTdJPEj8UAHu6lmrZCFMgSJ8HtJlL3ruBasH4m8IFDsR/o41lWhpa
- UAPwdG7uioj8lMx2/IakyNs03GrQVaXE2JvPG1XidZFRcixhQRlox6D4p+2yDd4vLD
- Pum80l0iJti300cpqSkEYFG3XpiUQ08QVo8AjanJ6/cfcwNcBVRb+ac2l/pI7XFaTv
- Co3dJlYNnWw4LbgLvyrGckYICjJXpdQ6rUcKcv9jPzqdbGvmsc9Q2iBudSN75gKOoO
- qV9NfCoKibk6MYGxY+zZWPpqfECzEMl4mCtj6BJHab1Noa69bJUahPe226BdUHU+zn
- UeQSubOlOcI5Q==
-Received: by mail-oo1-f50.google.com with SMTP id
- 006d021491bc7-546dad86345so2527668eaf.0
- for <samba-technical@lists.samba.org>; Mon, 01 May 2023 22:56:05 -0700 (PDT)
-X-Gm-Message-State: AC+VfDx9FBzImJulprmDgIIOsuYWhiqkumFNzLZHBCjG2lPjZafXzxSk
- ljKT2bASwshEZygiODwvclroiXnwSv/1dmJdrPw=
-X-Google-Smtp-Source: ACHHUZ5/bpbZ4Z8XoI0A/j81DWHIECIYiqyXxdKq043gIUtCyh+j53qTQc0MZqigQuqFVuB7R7bwIMsXP6AUIzo/g6M=
-X-Received: by 2002:a4a:ea8f:0:b0:524:a1a9:f2b3 with SMTP id
- r15-20020a4aea8f000000b00524a1a9f2b3mr7413827ooh.8.1683006965202; Mon, 01 May
- 2023 22:56:05 -0700 (PDT)
+	id 1puryG-008dM6-CW; Fri, 05 May 2023 09:43:24 +0000
+Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d]:57682) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1puryA-008dLx-6Y
+ for samba-technical@lists.samba.org; Fri, 05 May 2023 09:43:20 +0000
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2ac7c59665bso17635941fa.3
+ for <samba-technical@lists.samba.org>; Fri, 05 May 2023 02:43:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1683279796; x=1685871796;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ufubWxzKxARqUJmhZ8ARTI9/l39hZnmHjfZ3QsO10+w=;
+ b=nwjy92vk9SA7NIC1OTfFjQympVPDDZquh211pdGqe4NjCE0sTJahrMJGZI7cEs1vi/
+ +/ltpXBWXY4quIxhHQW7B0dBv0Hw8sE5qZwQ9WGNKl5EIJYJKuZM2q27bNW40LYJPQAX
+ EYsqxOpiLs+TE/Vcv8JZEFRx79HV7t/2ZZSUVSj2U9B/R3PENT4fFYmqblk6IgG16OaR
+ tjsJm8hihI9gLMVWGRSmzO0BmhZJBmVEWMqVx1p6nXF706XUWTFmnYR6zb63mEubL13d
+ G7NY1VAglT6vRCTRmRUc//mCdLfZS1D13KCIl8R86DcExnvh6SgDTgq1me2fSXXQPEiG
+ 42og==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1683279796; x=1685871796;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ufubWxzKxARqUJmhZ8ARTI9/l39hZnmHjfZ3QsO10+w=;
+ b=J31TOuZapIft0zGCMfRc9qUdqmXRuwoxVvqHPB6AqKA26nb1Ar8VYAWTJOxwhrKhZY
+ T0tAdvAIiDhjsjUva/+lQQFI5WjCjkoeKu9dnIIHW67VEv7eejrX/owGXMNYuucrji03
+ gctFe2F74ajF7XYAYQAFSHLDtuPhrI6lKAfgb8z1SeO0ZqXyjcrYvxbNfSDFSJyYIi/T
+ MGh0BaaJFSkQteSknhHLM8AutQ28OuN3AyfNuN6st4cDYFkOkCQQywBCryhyHSbwojBG
+ llOQzVmPBMBguqlwvJBrGJkrHPNYzibHOyL/x/FFHC6BzKnlLmWKiYdZFo6DQ3WP4jQQ
+ smZg==
+X-Gm-Message-State: AC+VfDzzi2qmMXgT4rDbPfrpAcCi5Pey/abXI5B8OpRKUGRrx0rvFcU3
+ R6+UOSi0y4KHrqWfK9fCop9Mxay25fWhT0cgKZo=
+X-Google-Smtp-Source: ACHHUZ71/HLECo1P1dp932YwLL95D9JhH+bQFKVksl3XgY1RO4ty14DlHH99yubfz4Mruj91cw/vHVswfuBkr5YW7EA=
+X-Received: by 2002:a2e:9596:0:b0:2a8:b076:3877 with SMTP id
+ w22-20020a2e9596000000b002a8b0763877mr280574ljh.10.1683279796416; Fri, 05 May
+ 2023 02:43:16 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a8a:1086:0:b0:4d3:d9bf:b562 with HTTP; Mon, 1 May 2023
- 22:56:04 -0700 (PDT)
-In-Reply-To: <CAH2r5msNirMEVz=B8fmZ83r7AwsMcM6hd+vSFcsVSB_=mHWHsA@mail.gmail.com>
-References: <CAH2r5msNirMEVz=B8fmZ83r7AwsMcM6hd+vSFcsVSB_=mHWHsA@mail.gmail.com>
-Date: Tue, 2 May 2023 14:56:04 +0900
-X-Gmail-Original-Message-ID: <CAKYAXd_n5F25rhVRFo0zFe0pZ2JYPqYHombDKhPASG7dMxW7Ww@mail.gmail.com>
-Message-ID: <CAKYAXd_n5F25rhVRFo0zFe0pZ2JYPqYHombDKhPASG7dMxW7Ww@mail.gmail.com>
-Subject: Re: [PATCH][SMB3] correct definitions for app instance open contexts
-To: Steve French <smfrench@gmail.com>
+References: <20230505004925.76301-1-yang.lee@linux.alibaba.com>
+In-Reply-To: <20230505004925.76301-1-yang.lee@linux.alibaba.com>
+Date: Fri, 5 May 2023 04:43:05 -0500
+Message-ID: <CAH2r5mu=r8emGeF7aYoSX=9kAox=9j4bgUU-i0DrwT8e_V8CcA@mail.gmail.com>
+Subject: Re: [PATCH -next] cifs: Remove unneeded semicolon
+To: Yang Li <yang.lee@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,29 +74,49 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Namjae Jeon via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Namjae Jeon <linkinjeon@kernel.org>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
+Cc: tom@talpey.com, sprasad@microsoft.com, linux-cifs@vger.kernel.org,
+ Abaci Robot <abaci@linux.alibaba.com>, pc@cjr.nz,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ lsahlber@redhat.com, sfrench@samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-2023-05-01 12:26 GMT+09:00, Steve French <smfrench@gmail.com>:
-> The name length was wrong for the structs:
->
->          SMB2_CREATE_APP_INSTANCE_ID
->          SMB2_CREATE_APP_INSTANCE_VERSION
->
-> See attached.  Also moves these definitions to common code
-> (fs/smbfs_common)
-Looks good to me!
-Acked-by: Namjae Jeon <linkinjeon@kernel.org>
+merged into cifs-2.6.git for-next
 
-Thanks!
+On Thu, May 4, 2023 at 8:00=E2=80=AFPM Yang Li <yang.lee@linux.alibaba.com>=
+ wrote:
 >
+> ./fs/cifs/smb2pdu.c:4140:2-3: Unneeded semicolon
+>
+> Reported-by: Abaci Robot <abaci@linux.alibaba.com>
+> Link: https://bugzilla.openanolis.cn/show_bug.cgi?id=3D4863
+> Signed-off-by: Yang Li <yang.lee@linux.alibaba.com>
+> ---
+>  fs/cifs/smb2pdu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/fs/cifs/smb2pdu.c b/fs/cifs/smb2pdu.c
+> index 8e7c15e2fd91..e33ca0d33906 100644
+> --- a/fs/cifs/smb2pdu.c
+> +++ b/fs/cifs/smb2pdu.c
+> @@ -4137,7 +4137,7 @@ smb2_readv_callback(struct mid_q_entry *mid)
+>         if (rdata->got_bytes) {
+>                 rqst.rq_iter      =3D rdata->iter;
+>                 rqst.rq_iter_size =3D iov_iter_count(&rdata->iter);
+> -       };
+> +       }
+>
+>         WARN_ONCE(rdata->server !=3D mid->server,
+>                   "rdata server %p !=3D mid server %p",
 > --
-> Thanks,
+> 2.20.1.7.g153144c
 >
-> Steve
->
+
+
+--=20
+Thanks,
+
+Steve
 
