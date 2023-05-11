@@ -2,60 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E3A16FD097
-	for <lists+samba-technical@lfdr.de>; Tue,  9 May 2023 23:15:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C03F46FECB5
+	for <lists+samba-technical@lfdr.de>; Thu, 11 May 2023 09:24:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=kyGMSnqu/87Y/wiriDnSPhdcgaTesUMAMjWZZRsVei8=; b=DnfUOIZzx0YvyBZZ3XKfIBG/O3
-	iZ8onPvPMnSH+HnyoMr3LssOy8Lodcvvhu4YRY/UGWm0cO+1RfxqkRnFl4M10+P8PpVMQz6MUmZD8
-	fhDyb5HIWvtmrGyqquIKSyz0B7Q5g4XTMjIxiJLmEsHgIaz/RQR2rfwcOj8te6E6z2kpaRYwq8HtS
-	7BA4uX50p/oko8a52R/1Q0rw/iRjqYSiKPKSDbuWRPKWeQcZCDmlxis5Fr42VTKYwg8U8JdGRhw1V
-	7RLOdDMk4yjAM0rxoOJPGCrizhy8OYHOjvtC4mtAkm6EDFkuHpio17dsIWdYoDim6YY0MpYXJgsks
-	2/FhjY/Q==;
-Received: from ip6-localhost ([::1]:61022 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=TZo0D8J8dUe9lUMr1UoFKWdGeaX5Q5zw7L0PcZXGzGo=; b=W/D+Jeq6DngPiz5XwBvtHkMxL+
+	SsJGlMx2ct3EOXnUwT4QUU+YB5wsyjdvmgFH2Cc/qk48iF1jGV1/hp5y6ukURMD0lZ8hXHa+31eMT
+	vGwYT6AE1qZkn6+vCv5o5POODKQGfQU+7/Adi1PKIMDDJNypdTKHKG8tEQYJqe2Iy3DnBFz5A8oGZ
+	R6cSvAD6P/08fx20uN7ZUh2Z9IufRGbZ8NBvggvlZY6C04vzyrzXJrCW30V7kfGy+/YARa2gUumzd
+	+JCkLvtOrUbKEqjSGg/Qpyc5BFeL4TFexWZ/Yf9HB541zIUntA8EYf30b3WeplzFGSpdXVzkClbtm
+	3RSVxt9w==;
+Received: from ip6-localhost ([::1]:58914 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pwUg5-009EUW-TO; Tue, 09 May 2023 21:15:21 +0000
-Received: from mail-lj1-x231.google.com ([2a00:1450:4864:20::231]:53660) 
+	id 1px0es-009S4k-CN; Thu, 11 May 2023 07:24:14 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:58106) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1pwUfx-009EUN-Qi
- for samba-technical@lists.samba.org; Tue, 09 May 2023 21:15:18 +0000
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2ac8cc8829fso53694411fa.3
- for <samba-technical@lists.samba.org>; Tue, 09 May 2023 14:15:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1683666910; x=1686258910;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=kyGMSnqu/87Y/wiriDnSPhdcgaTesUMAMjWZZRsVei8=;
- b=Rz+XnTQJJQ8QmExAf9gurwEIvZkpOn/5ghFg8nYV9tKww8QzPbg0H5TJ3SAoKKlpUl
- 8xJWNVOueO6r69SiMsmaHzZv1eOH2Ve1FJrmKLe0VL0QxclWHim9fx4wVrdH5J/PkDH6
- vGiXaeGQlhhwpBUh435O+Yohbmpz7X9ddi+zOWDxVJHfyFsF/1hPiTA0XTidJzeHh4/B
- di/juXNHvuEhhV3JK/tBCbC0ibzP/cr5p4InkzWiPlg3JiXHJ+XyQzPdzwe7ueRPFLwG
- mrtRwjqY2xwomeCH/hbHWu78k3cPjbotemjtY2PYjvEmsdQ5CinoDzvGZhaYZkzThVHn
- umCQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683666910; x=1686258910;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kyGMSnqu/87Y/wiriDnSPhdcgaTesUMAMjWZZRsVei8=;
- b=KZaYBAbIqFbfFJiJ48CFagHSgcoWZtTeg8ZSmcd3L/Mejy2lfrZexcX58GDUXbjbPt
- Gk5+v+U+8otu+EuLKlBfZSTamlThY3EEVikntDLdmwfsZtvy4SnJDRRmfkmsrpAbAWjV
- 7m1OoBH9uHcwpMtRGJJpx7WEmLfFzGiogVLfO0dX0WkgGpC+BuJKhgS2G9q2wSL50c1e
- 4iByFdfler8jtfqkOc8ojfvHRJ/6YDtN8VOEIAHnVAeyuDWeMeHGKE4WPT1VIcppiC4w
- 7+yjmYK4dKiQj+B/SsXb2aFFVfDUmVTPIj8na3Iv73Z4FjbS1lT+v6EXPdmyL58FELxZ
- CKvA==
-X-Gm-Message-State: AC+VfDyJVcqL9PB5HKz1GVt74tiSUbepc/Cbc0zBc9P/gnzYLZTgLJS0
- G9mIZ5Rod8C/vCJupRK2UDmsKDyFHSEms9LYmg/AN5ytC8bgpeNV
-X-Google-Smtp-Source: ACHHUZ42k5IyeAuP106a27PjwHLnqDhpQaGAxEs5Jy9NR0SST550sdokMcP6oVbF9lJxKH5i8GoCTjPcaMxqoh/+85Y=
-X-Received: by 2002:a2e:9c86:0:b0:2a7:6c78:1624 with SMTP id
- x6-20020a2e9c86000000b002a76c781624mr1287036lji.27.1683666909971; Tue, 09 May
- 2023 14:15:09 -0700 (PDT)
+ (Exim) id 1px0e6-009S1q-9n; Thu, 11 May 2023 07:23:29 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=TZo0D8J8dUe9lUMr1UoFKWdGeaX5Q5zw7L0PcZXGzGo=; b=ciYAo8xAtF1jDGgBWfn89QmCMF
+ KfTeqEk5vCkFxWW7rnqenDzZedqr0NFD6ZBstERKMNMLXWUIJsWkB2eGihJyPYT23vtCODgzXpFWX
+ tyyeV/4t6GXIMMdu+lxllGsNFcg+Jd0cYOjhgZ+Z7Kmpn0800aJxvJQ6J7mO9l5qjmZROp9nJMZcR
+ qmbQsp7hG74WtmjpHPb10by1Ks4kjMc+ba0Un1SVkgf9m2t4lHDSDsqw5bt++4oSoGkGob1PRuCRw
+ 25gp78r4u0u4NQOZkXGX+c5G559o9czRvz6RGakTSUffxhdK4S1X+DToHr9cbPiGp47sPg/D+KgrF
+ 8zhhbmPQE+qL8s7Om431L0DR2+ATDYinv+ssYzej34k0pNyRAv1g6i2711BBxHxGhB/BTC4ThloRH
+ 5B8yNp7t8jnuLSN/iTTStP2a49097x2e0DFWNQIe2oXUJqMXjR2eoXCWrbiytvR56wI0wj5t/i8mC
+ UOQwZrzgMjD3bAffDqKlRLC6;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1px0e5-007RN3-IV; Thu, 11 May 2023 07:23:25 +0000
+Message-ID: <3d63fc26-58f4-9430-4706-54c9d67f61d0@samba.org>
+Date: Thu, 11 May 2023 09:23:25 +0200
 MIME-Version: 1.0
-Date: Tue, 9 May 2023 16:14:58 -0500
-Message-ID: <CAH2r5mv57D5GD2ekA7XhfSEp-n8+nrwn00eV8D6dgiX6urU9Tg@mail.gmail.com>
-Subject: server reports incorrect file allocation size
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.17.8 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,22 +56,110 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Running xfstest generic/392 I noticed the allocation size was reported
-incorrectly by Samba (more than 4 times the file size, and not even
-close to what XFS was reporting locally for the same file).
+Release Announcements
+---------------------
 
-Was trying this with recent Samba version:
+This is the latest stable release of the Samba 4.17 release series.
 
-# /usr/local/samba/sbin/smbd -V
-Version 4.19.0pre1-GIT-3633027e49a
 
--- 
-Thanks,
+Changes since 4.17.7
+--------------------
 
-Steve
+o  Jeremy Allison <jra@samba.org>
+    * BUG 15302: log flood: smbd_calculate_access_mask_fsp: Access denied:
+      message level should be lower.
+    * BUG 15306: Floating point exception (FPE) via cli_pull_send at
+      source3/libsmb/clireadwrite.c.
+
+o  Andrew Bartlett <abartlet@samba.org>
+    * BUG 15328: test_tstream_more_tcp_user_timeout_spin fails 
+intermittently on
+      Rackspace GitLab runners.
+    * BUG 15329: Reduce flapping of ridalloc test.
+    * BUG 15351: large_ldap test is unreliable.
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15143: New filename parser doesn't check veto files smb.conf 
+parameter.
+    * BUG 15354: mdssvc may crash when initializing.
+
+o  Volker Lendecke <vl@samba.org>
+    * BUG 15313: Large directory optimization broken for non-lcomp path 
+elements.
+    * BUG 15357: streams_depot fails to create streams.
+    * BUG 15358: shadow_copy2 and streams_depot don't play well together.
+    * BUG 15366: wbinfo -u fails on ad dc with >1000 users.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15317: winbindd idmap child contacts the domain controller 
+without a
+      need.
+    * BUG 15318: idmap_autorid may fail to map sids of trusted domains 
+for the
+      first time.
+    * BUG 15319: idmap_hash doesn't use ID_TYPE_BOTH for reverse mappings.
+    * BUG 15323: net ads search -P doesn't work against servers in other 
+domains.
+    * BUG 15338: DS ACEs might be inherited to unrelated object classes.
+    * BUG 15353: Temporary smbXsrv_tcon_global.tdb can't be parsed.
+
+o  Andreas Schneider <asn@samba.org>
+    * BUG 15360: Setting veto files = /.*/ break listing directories.
+
+o  Joseph Sutton <josephsutton@catalyst.net.nz>
+    * BUG 14810: CVE-2020-25720 [SECURITY] Create Child permission 
+should not
+      allow full write to all attributes (additional changes).
+    * BUG 15329: Reduce flapping of ridalloc test.
+
+o  Nathaniel W. Turner <nturner@exagrid.com>
+    * BUG 15325: dsgetdcname: assumes local system uses IPv4.
+
+
+#######################################
+Reporting bugs & Development Discussion
+#######################################
+
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat.
+
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
+
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.17.8.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
