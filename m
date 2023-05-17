@@ -2,116 +2,61 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5681706A70
-	for <lists+samba-technical@lfdr.de>; Wed, 17 May 2023 16:01:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 76405707368
+	for <lists+samba-technical@lfdr.de>; Wed, 17 May 2023 22:57:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=B0R5HnpCLdsb/78pwozWuz39kXCHHNrRHJlfIFqRfzA=; b=SeSOH5xZGmIimttR4Eb1dwvUDL
-	XpKyfHsBAqfWzyXd/blhPXy1jguRewaDfFh+ej07FhNloYqW/lu0++C0/FKJmklmGK0nyQJ8f+p/n
-	Gvqd2KxVJyjxua4aB1rhTXM8221GGUAPHdKdWSNaWBf9B1ZkB3veGvl5+sFzdDI/fFODJqyFmWWu9
-	GgMFL98fwy3DV89as1Zfe/SGt8eHeUv7MErnSM3Fa+RPXNpFZ3brCgHQWWtbEq8d3ihSM2WkGgNb4
-	HLN4grFBoharNPXLNn7G0SkiDO4hwb5+q8Yirk9xUrWTi9puS9klHukqWJVHUBRnIlx0Mwhrv6Gju
-	Wj1as7nw==;
-Received: from ip6-localhost ([::1]:35272 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=k0U2Fq3ShImFNDxch8l92IXHWkElV47Y21SUnGd4+CU=; b=oq5eI8nvUZYGGdX5erHMwcx7m9
+	dE1MkumGX2pk7moQFqel3JrfMosSDhldWc+C6z6Ih0w8cR7c4yXHDkN92myEN66CDmrVNZKppZ6J4
+	VfmoBEJp2VA8vehusPZgyApVkwtiYYzLPkVNUEDJVANyxL4yZcSe2/aBvK3KVIC8u0U+VxxUmWjPa
+	u3ECj11kD8A8UXMhAmO6p6+U/c17tAEKe/CNt5VL69p5EqxhU7tEoRzQZdEKyVV5PI4dhXa5XDBor
+	1VXXEfVblHR+AaA6DUY0u4XECZOfsvbtMKlW7nKOjALnTNwqKXqLAoWbSsgc/5QlBZ0M40DxeBBye
+	q41g6cjQ==;
+Received: from ip6-localhost ([::1]:41446 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1pzHiX-00AW1h-Tp; Wed, 17 May 2023 14:01:25 +0000
-Received: from mail-bn1nam02on2046.outbound.protection.outlook.com
- ([40.107.212.46]:61828 helo=NAM02-BN1-obe.outbound.protection.outlook.com) 
- by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim) id 1pzHiU-00AW1D-2D
- for samba-technical@lists.samba.org; Wed, 17 May 2023 14:01:24 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Jk45MmP4D2BU61Wh0OSF3fWaodm8ntUO8rAa3w2a/UE6TdolrDoh6F8L9VVMIxQbG3/GTViPzN8r4dmD1OTXloB0q77A+F1b7/l92c+wmcqb5xgglfUid+xEmkrTyguCjbEShMzRiKVL3lkcEg5K+VLAiDOiy55Y2cyOQvI/Eb4IAMZODysWYz1uAk0muDnrpFQUGkF5cvvxI9Tlr5Rlwpl7wQFzou267YD6DEAO6wLFCtVx2xvNALzN+HbcsOvhjgl847u6/whewgP3BhLrgZsBf63F1vYA7Bfhb009LcrWkpNCWaQNO5r6buxko7Z5XQXEwUdveVr9Sl9c8bz6dw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=B0R5HnpCLdsb/78pwozWuz39kXCHHNrRHJlfIFqRfzA=;
- b=CY5ghDH0PO99jjKhAEoqyxLE0k/sn/lPW8r4vobfBYZWoa9Ayh/ROXSBu2oYTVDq83emeg63C53eL/y6nC15DAJS6QxJJvBJu1/3WkkiBj4hODepnVqn+rURP27MGDsiflVnmDcJ73JrqLZpd5IIzo10lXlWhPRaBM0dZh6OBMD/Ji3uvnBJVIgLo/rkZxQGQsAy9eIDinyx9Bus1p9pkEX+Jbnx5Vr1+O776WeU7aBThhKFdypv4y06IZxadGqlMXLNojscm0xFzfmU/qbLzSb41oU+STqSwg3oiy499/40k7TuEx3anNVptkmaOt6S6+trUEj/G1rDXcBYPhV/FA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=talpey.com; dmarc=pass action=none header.from=talpey.com;
- dkim=pass header.d=talpey.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=talpey.com;
-Received: from SN6PR01MB4445.prod.exchangelabs.com (2603:10b6:805:e2::33) by
- BN7PR01MB3794.prod.exchangelabs.com (2603:10b6:406:81::25) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6387.33; Wed, 17 May 2023 14:01:07 +0000
-Received: from SN6PR01MB4445.prod.exchangelabs.com
- ([fe80::ef26:464c:ccdf:ee6b]) by SN6PR01MB4445.prod.exchangelabs.com
- ([fe80::ef26:464c:ccdf:ee6b%6]) with mapi id 15.20.6387.029; Wed, 17 May 2023
- 14:01:07 +0000
-Message-ID: <bd2abfae-b8d8-2416-57aa-49da7a9915dd@talpey.com>
-Date: Wed, 17 May 2023 10:01:04 -0400
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH 06/12] cifs: Pass a pointer to virt_to_page() in cifsglob
-Content-Language: en-US
-To: Linus Walleij <linus.walleij@linaro.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Vineet Gupta <vgupta@kernel.org>,
- Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
- Arnd Bergmann <arnd@arndb.de>, Russell King <linux@armlinux.org.uk>,
- Greg Ungerer <gerg@linux-m68k.org>
-References: <20230503-virt-to-pfn-v6-4-rc1-v1-0-6c4698dcf9c8@linaro.org>
- <20230503-virt-to-pfn-v6-4-rc1-v1-6-6c4698dcf9c8@linaro.org>
-In-Reply-To: <20230503-virt-to-pfn-v6-4-rc1-v1-6-6c4698dcf9c8@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+	id 1pzOCU-00AYJ8-3B; Wed, 17 May 2023 20:56:46 +0000
+Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:44204) 
+ by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
+ (Exim) id 1pzOCP-00AYIz-EK
+ for samba-technical@lists.samba.org; Wed, 17 May 2023 20:56:43 +0000
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-4f27b65bbf9so1489589e87.0
+ for <samba-technical@lists.samba.org>; Wed, 17 May 2023 13:56:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1684357000; x=1686949000;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=k0U2Fq3ShImFNDxch8l92IXHWkElV47Y21SUnGd4+CU=;
+ b=Yzk1Lu3LkVgfYNXI6N1Kt6r2Gp3Ap/8v8KL59L3j/UMNKqPM5KN1oobHnSmB0DiOjl
+ C/WI7gdqGBUj4ll73F1DHyDE4JedBISWo4VXyOtoeazGXaiggEpJWKdPMkHKZB088dCM
+ MdaoQ5qYYJJzveNl9HOUT+hGh/1B+GGNqVHJiepm04ZCcgIpbY+6f4JPC1+DgyP9/DMw
+ AnoEUQoWzfeyZzcxon/Z4t2RbE/4rolIeRvrtJ+sUT4xDQYTD4kAJMUjdqLJhEEpsyvs
+ 9LzYQa7iyflk/hdAcJrOpCgCFRXap7Ctz96ynJhGAvQbDY2ngSxF9JgpMiHEA3is3ohX
+ 41pA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1684357000; x=1686949000;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=k0U2Fq3ShImFNDxch8l92IXHWkElV47Y21SUnGd4+CU=;
+ b=FrMMSjDOe61FMzfg9IUG1Y/m4P2DKtuSrqF8JZt3iMpD/iPrv5e6qBOHH/iMA1eotr
+ 6hv6xAPuMy6re1mbCMo0qdDrpiTouCFvO1a+7RWFNRcE2XfKQ6hacHSoS8GDSRnBvOFb
+ 6ypPXMDPERf6RBh789TEta3B0TjqrvsHWPPt7eo6aEFnaPkRpamytNbRyihrIrxtJQq7
+ 7PKs3cjsDHkv5m9isq7fgynsS34PYxXEUuOpPm8PRQAHXXeq2SI1iaykZczKia2AdRmS
+ z3W3sEihYFSNjFSMQDNu4bHE2hWFWHrqOBbODTcO+oi5y/yZNA9nuX4LEOUf6PLRtk1t
+ i9jQ==
+X-Gm-Message-State: AC+VfDzRw9M98aSUGXPMKyLt7k/pAbiEwx3a3G/J/+CSee6uDD2QsBB5
+ wYifh21Y39qexU963bxBE1U0TC6SVziI9RLFFl4=
+X-Google-Smtp-Source: ACHHUZ46RsRsQBP9bbTviIeir3zuRRLP3ziRt+oLhsGTqyQjZTFJ/11NrdFAZBhc4HCZoDS8pVU199FqQYlts+D2YMk=
+X-Received: by 2002:ac2:4464:0:b0:4ee:dafa:cb00 with SMTP id
+ y4-20020ac24464000000b004eedafacb00mr498061lfl.60.1684356999476; Wed, 17 May
+ 2023 13:56:39 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN6PR01MB4445:EE_|BN7PR01MB3794:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1966ef6f-3422-49e4-2146-08db56df2926
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Message-Info: LKhPNI3e+QpI7sZ0ui7e0hMC4cdKEcitEqtSzBW9RqDCcyahm6JFnXRvY7faBDQ5Ms5y0SNPmkXdMC75fQNayXHtTqE/5+sFL9Sy+yjmanXDTOFROujqPvDLu+QdTfixaO/UBgLK7ysBhnt2yJJ3QG7ob24upXbi0uCqbQMIx+TPg0hC/OyDG1sTQy9dMQyHt5D+9ItNCpANhCEgjCJl8ZOIS/2aOG6n/14VQZm6608rQCpPZI8ddkzO83Xsn38LEyS+vLF3K73OwJJzQelFKDqwDz+wm8zAhq75FMiHm2Bx+muLlGGcGY/4dTfL5HHLM8vqzAI1YT2eq+fhkUTtxiJEJ0ujyKfgAtKzzu7qLcyzhP152EUcVy/18bn83Uh+VkMz0ZrCPVFFM3EEEBZhK0VqLJI/iH0FbaIZKDtFLUETHyO5Us4hLhRApnoqMJDt6JBd9g8uxrxvUBcB7w3wcU5vd30F5Y3F8jgQYocK8vysa5YklZmlezpHqx2cr51mvXHbE4qK6yBeENbNQJjFuQ26XhYTMb+p055UB558vYDHtcjzTtW0MoHc2JRHyxUNZQHUoSCAt2G5LvANVDG9aHhJMTzUzjvBtkt9esRKShOO2RpUx+xz1GxVFQrN9EDjyjWIrs8RXtPpNaMbZ1CMdA==
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V1dtbE5IM1BxdFFMaDFLWmc3YXQ4b0tzUzhUU0N5S2dwdmRCN2lWR216R1hW?=
- =?utf-8?B?TU44WUlvVWVtYVFCWk5XUHdyVHZ4RFJ6ZTRtMloxbmQwREEwcE13UzRGb2NT?=
- =?utf-8?B?QmNzUkpxaWVxSWMxUDFMaVozZXUxQ0gzUUV3UFpXK0FJZkluU0lrRTZmQ0E2?=
- =?utf-8?B?eHpEM1h6bWhDVjA4dE5QTWViOGtFL0NsNktDQUZGTmo4R1RtU3VmUVBwYWdS?=
- =?utf-8?B?RmJBT2dwMHhIbmRiNE5pUnNNSy9JNGNxY1dsT096TlVrbytnclhjSGZGdFlH?=
- =?utf-8?B?MUYybFN6K3dmUXYvUUdmOTdVY2wzSm44RlNXQlVORTliUGpRaEVOdTQ2dzZJ?=
- =?utf-8?B?UkZIOGZkb01hYUoxdXBlclZFWDBwNHE2ckRObmdMTDkxYTF3dDdEU3d4OXBO?=
- =?utf-8?B?djJQMmh1emI3RGM2ZFZMbGJVT2tPNFpHdHVJLzhWai9mYUovek1KcHAwQ3Nt?=
- =?utf-8?B?aUtpaGx2K3NnWnQ5c2ZCelVYS3haK2pWNmpKNmI4cmg1QmhvN1J3NjFXV1F2?=
- =?utf-8?B?ZEw5YTRldWVhNktNRGZsd0FCd3ZzK3pVc0hiaElOUlpWdkd0cWp5b2VGNzlY?=
- =?utf-8?B?VTlFMzRwM0dYSEhVbWxuMTIza3Z6T2ZUZU5pZkFKSlBSdkc0TFkyVXNnMVNB?=
- =?utf-8?B?RDl6MFFuK2FDdm12SzBPT1BXaE9Xd2RFdlFUdUwvb2JGbzdPblg0QU5hSERh?=
- =?utf-8?B?blh6WDJyS0RsV1Q3enNtWVczMTVNZWtXdFZnRWMrbjRlTnA4Q2hFMnB0UGln?=
- =?utf-8?B?WnA3cUtWSkoxSURiSmJaZnJKait5bno5MWZpb1ptaDJibkt3YkZoSnlOR2x4?=
- =?utf-8?B?ekNMUEk4akdWMTh4U081ZDhkK1JtMi96VG1UaW96UUh6ZytTSGI5NXpCLy8v?=
- =?utf-8?B?RnZIZGFONU5FVk9oZ0pWYUxtczJjcmszSm5CejQwMGl1RkxZWEpFWGFvUnRs?=
- =?utf-8?B?dGdvdThEVm5qNUMxZGg1ZkJaNENTdlVQYWtVN2FKSVB6WHFHMmRkbFExVUFL?=
- =?utf-8?B?VGVMVzNPSDBhNEdlOVo3NTBiOTF1RFpUSUtESC9FbjllMkpkTkQ2TkMrSmw4?=
- =?utf-8?B?bC9Ud3VvSmdmUTQzemE5L3VFbkNRekg1dm1SSDRjU1ZaOUFNNGlqYWJOR3Rm?=
- =?utf-8?B?UFFiRHluQjZkL29mMmYyY3ZlSXFyTi9oam4zclRQbDEyTHpSRHlPSjhCaFkv?=
- =?utf-8?B?SXR1OFFPT2VTWjZxTFpyY1hmUlBYam9DQnNNbnRFNlRnd1FJY05tSnNxeTVo?=
- =?utf-8?B?N0c0OXVnd3RWV1paUXAwRXRDbW0zSS9nS1g2UEQ1MEFqRzZpMmE2VEZpT3ph?=
- =?utf-8?B?TFIrcHZmM0JjaW8wOTdhMFByclpxTnd5Z1FKbGZyV29tSkNKcHM4QUZKVWFK?=
- =?utf-8?B?c0RycE5renpicDFsSC9VQnhFVHBQVEJ6YXBKT3hMb3BUVGMzak9NZ2lNS1Jt?=
- =?utf-8?B?ZFphc0Y4SFFqNEpDU2tTK2VFaklLZDFuRzV0YzIzZ0tFSXR1RGpQeDZjT2wy?=
- =?utf-8?B?Z2EvcWFmemZXUDZDNjFMTnB3VkVtc2dTMll1WWQrOXNJK3hJS01NaTZEcTUx?=
- =?utf-8?B?RVgxVmNsMk5Yb2RuVzlsZW50ckN5eEhBUUlMT0w2Y1Y4Rm44QkQrQnZoSnV1?=
- =?utf-8?B?RDh2c0NET3dMUi93WVI2bWFpamNlbC9LUy9DSUVteVJEUVkvb0QzbENYSTNa?=
- =?utf-8?B?a3hFWjFIVEp4Q3VTUEVUM0Y3WWE0U1V0ZzJQaEs1TGlRelp1enY5a3ZNRC9B?=
- =?utf-8?B?NXVIYzUrRTgyNTRwdDhNSmdZVnFwU1FRMVJmd0ZGR2hGdU1wUEpHdXEzSjAr?=
- =?utf-8?B?dzRaYStpNXJ6YWJEZVExY2FvdENUcXArQTdiMHJBREFDNHNYSTRneW00cG9L?=
- =?utf-8?B?S0lvcGpicTlpZ2NaaUh0SUc1ZFhrWUFtWGxHald1U09menRPL3luVC9uRytR?=
- =?utf-8?B?blFVRlZjN0pJRXRlcWxVVTV2T0l0WG0wc05USUNoMmhORmZaKzVxMUNEZkNv?=
- =?utf-8?B?V3V0b1BSMVdOMnphUnFPMWl1cVFpYkoyYWNQREhDL1lLcVU5cmVVTlV6SVYw?=
- =?utf-8?B?MHdtQTZ5ekFOc1JKbzhuNG1ETFVSYThBeGdvbWdJMTRidUYwTnlZbys5YTRQ?=
- =?utf-8?Q?27qoJ/xFefoZTgyFxSv3pKhis?=
-X-OriginatorOrg: talpey.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1966ef6f-3422-49e4-2146-08db56df2926
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR01MB4445.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 2b2dcae7-2555-4add-bc80-48756da031d5
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DstVk89vSlDEmosLCcRivC/WkwdUgfAvpfm3CORTspDeG0t8KZC7NKjQUXLLFY2H
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PR01MB3794
-X-Warn: EHLO/HELO not verified: Remote host 40.107.212.46
- (mail-bn1nam02on2046.outbound.protection.outlook.com) incorrectly presented
- itself as NAM02-BN1-obe.outbound.protection.outlook.com
+Date: Wed, 17 May 2023 15:56:28 -0500
+Message-ID: <CAH2r5mt=+=Xh+aNdfcFgB-yQuU_6NkUExpkYh5M4a9Axk4V9eQ@mail.gmail.com>
+Subject: Linux client test automation improvements
+To: CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -125,48 +70,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Tom Talpey <tom@talpey.com>
-Cc: linux-arch@vger.kernel.org, linux-cifs@vger.kernel.org,
- samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
- linux-m68k@lists.linux-m68k.org, linux-fsdevel@vger.kernel.org,
- linux-snps-arc@lists.infradead.org, linux-arm-kernel@lists.infradead.org
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 5/11/2023 7:59 AM, Linus Walleij wrote:
-> Like the other calls in this function virt_to_page() expects
-> a pointer, not an integer.
-> 
-> However since many architectures implement virt_to_pfn() as
-> a macro, this function becomes polymorphic and accepts both a
-> (unsigned long) and a (void *).
-> 
-> Fix this up with an explicit cast.
-> 
-> Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+Migration of our Linux SMB3.1.1 client test automation (cifs.ko) to
+the new host is showing progress, I have added additional tests, and
+the tests run slightly faster overall.  Here is an example of a recent
+run:
 
+http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/builders/7/builds/11
 
-For fs/cifs:
+With another test group (Azure multichannel) I did see a few
+intermittent test failures although those may be related to the test
+system or network not cifs.ko (see
+http://smb311-linux-testing.southcentralus.cloudapp.azure.com/#/builders/1/builds/28
+e.g.), still investigating those.
 
-Acked-by: Tom Talpey <tom@talpey.com>
+I will be rerunning the ksmbd and samba and samba POSIX test groups
+today with the new setup (adding the additional tests which now work
+with cifs.ko) and then finish by adding the main test group (which
+crosses many server types)
 
-> ---
->   fs/cifs/cifsglob.h | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/fs/cifs/cifsglob.h b/fs/cifs/cifsglob.h
-> index 414685c5d530..3d29a4bbbc40 100644
-> --- a/fs/cifs/cifsglob.h
-> +++ b/fs/cifs/cifsglob.h
-> @@ -2218,7 +2218,7 @@ static inline void cifs_sg_set_buf(struct sg_table *sgtable,
->   		} while (buflen);
->   	} else {
->   		sg_set_page(&sgtable->sgl[sgtable->nents++],
-> -			    virt_to_page(addr), buflen, off);
-> +			    virt_to_page((void *)addr), buflen, off);
->   	}
->   }
->   
-> 
+-- 
+Thanks,
+
+Steve
 
