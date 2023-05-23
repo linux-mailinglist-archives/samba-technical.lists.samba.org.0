@@ -2,68 +2,53 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 730CD70E79F
-	for <lists+samba-technical@lfdr.de>; Tue, 23 May 2023 23:45:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3973170E91E
+	for <lists+samba-technical@lfdr.de>; Wed, 24 May 2023 00:34:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=8wIZSCQ8edYhjFZ+60ckyujMxmrvzH8jxmNqi1okaVM=; b=L62vXepZY7VGr67MC6EC3/Awa8
-	BrTLHOCWcO6mQuO+TKcryS3mP4uLw5rs6xr7idi5Q0JWHwANd0Y8tMpDNP8+SwsWDYADsJeMYGRyF
-	evmb1mUCdgdhLzEMEDNdPkKYECEFqcy+XD5JK/+Uew5/RDyCIlha4ohrfWRC1x9Dnjp7+KuLWKSKV
-	6+vYzI+Nz6+Iml7LFozw+Dhv1rYdN5WSDYbE3n/uSXicuRIFw+8GnhEEieZMThngsYTelo6tQ24wC
-	uXvw1K8w1udYz5qyWIJX8w4L0YIMyzULvKq9febImF4gjwkNWrfO2bzMDPt7c54rweuCCpYRBK2xj
-	QhEPC0rA==;
-Received: from ip6-localhost ([::1]:20746 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=+nVBZuBgcji+1j4qtgc+iB02oqboGs04iLJSwktjiJ4=; b=JBC7c2ijvWDE9abnTstvrdlKmZ
+	wK+bPmmmg+AdXlLgmiRcpQC6tdMbt2EqNVIgABA7MpJgCO/Yt8N9vaqY82xvq/6ETfkgOuSyjxJ1z
+	lpJ0ttidk2lxcmmkqsWGYMhWiEFPJ3J89puhnAlY9cyyUFcB1/ZyRthdxVESy7TBThE3Byqxn7sNZ
+	07nmlFxo0C/lGhEaJIgXXQToMwC9n+upHobINdog1L0/BaJOBj8BWuRCBYQm9xdX+bt1QQ2Ps8p+Z
+	3RKviyYcQvphaWu3BczfhvRG/s2oGCFuyrBUf9eo+ij8BZfxwyUOUTmL3vNL5RQBVZ6rpkRdpzh5x
+	s7E4Fudw==;
+Received: from ip6-localhost ([::1]:61430 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1q1ZoM-00BlGz-PE; Tue, 23 May 2023 21:44:54 +0000
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:45489) 
+	id 1q1aaF-00Blgb-Ve; Tue, 23 May 2023 22:34:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:64404) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1q1ZoH-00BlGq-RL
- for samba-technical@lists.samba.org; Tue, 23 May 2023 21:44:52 +0000
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-513fd8cc029so675923a12.3
- for <samba-technical@lists.samba.org>; Tue, 23 May 2023 14:44:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1684878289; x=1687470289;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8wIZSCQ8edYhjFZ+60ckyujMxmrvzH8jxmNqi1okaVM=;
- b=e/GdEeOEJsY//5MQ/xaJHDvgLsxvC1Q52QEdUm/n9PlkqYc158HieNZiwJSpBhOesA
- 8x2PU9LzAGrJAAmR/3Eiuug3CvNisa9MtM3EsXAOQCleQRousmpOraR1I0QGXcGRx1Kh
- eYadhC9J2RwUhlJoRSGk2gh96k8v2sTC2H1li8eP6+YpvTfwuA7i0cXcV2siOUL48Vax
- QqjtR8FUQj+Q2DvDb1ImjoGK5PLMQADiGUdl0+WzGjXMxTGfE+pRveuckZNO9vI1kNKX
- kqdTCBpDH2tZhRv/g4XvlvT/xYwxvKUsBGJvEDeZQxDeqRK1eMENwVpbo/bv85d9MQPI
- qPtw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684878289; x=1687470289;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8wIZSCQ8edYhjFZ+60ckyujMxmrvzH8jxmNqi1okaVM=;
- b=Trkwt/JmvAVsCvPKCxK2P2vQWV2Tm7kTaiJf75HMJDz2J/0aX97504tQANigXGrHeU
- Yokqe/B5TJYwP7NfUGaqMbz4qrPT2C4I8SeV3Go/v8lrAfVOQFnPgZmoGCGETTOwmQUS
- wBhl9Q8kKZPrU3ZZ1KrL0DiWvnloaGi5WCa9lBDMNFSapN/XhkUtAWuk0FTTi0BcXHj5
- yGziY3V4IaoyvGML45o+tA2+qyClqhcRJbpTLoF7PvXnRRyOME+pl1/lWapva4XtYyDB
- AetlkyW4pyUzaZu8YvMgKRAR3sjAxZGKfvDe7f12m2cy/iHseASzdd9T8ue1X6DAcWpX
- Ydwg==
-X-Gm-Message-State: AC+VfDyDGUBX9er2EAnA3BuDYtSSrtKhiI6iEM2v5gQv2sXB5ZVdb++u
- HPskYmDvk1mj7w01idjkFM/BYrrt1csEItpQCuU=
-X-Google-Smtp-Source: ACHHUZ6LFhG0r6xBndZvF+/Yf4c5IOH7uL8J6uEefVhtJqDEVnkJJytAnjWJQGt9ks8h9RiJxb7NxeUOUSRTSo7lroU=
-X-Received: by 2002:a17:907:1b24:b0:969:b2e2:4f29 with SMTP id
- mp36-20020a1709071b2400b00969b2e24f29mr17580538ejc.53.1684878288553; Tue, 23
- May 2023 14:44:48 -0700 (PDT)
-MIME-Version: 1.0
+ (Exim) id 1q1aaA-00BlgS-Pm
+ for samba-technical@lists.samba.org; Tue, 23 May 2023 22:34:21 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=+nVBZuBgcji+1j4qtgc+iB02oqboGs04iLJSwktjiJ4=; b=qj6YMUGmM50olz9FXyE55DxQtL
+ 8NDtQDKl3ZMbWSgt+RFHPLxpyXvHiy6Kalvt9wYVorEywxRva9vVCNgFyqcbL+5rELZGHgQDQ4b02
+ KnAaHggpayGzcdhzrdPnyJn9KBHrmK2ELsqjhlVazR8xFkTwq6xrkvMWk3KMdE3Vzirpo+zelL5T9
+ epKVXGgRnFGdnda6d+34gHRqcBJl1aallVKZN5GGTk6E9VvwSY5rCRs8ojTEYa6v+ZAQGX9YoWcmX
+ 4jl+a16DasbeXYY1/ytNj1fIAMT7uPTsLZ/NqvrNfIFI4zWAUfqq7GxdxUayi3t7sfaPnBCQrmJ5Q
+ QMtOepQ801+abINE5x6WIffEwQljnD/wApHDOwO8Bzy8lzTA31jP+yx7OOTaj+pvalvwYZgOpGtRf
+ al/D0vTGVmRAG0XgChcZizM2+iHW3MrxiigGXgrn98G1yqWBQqBiYDwFLJ52QgqUpOZD1j2Jv66DF
+ Hsl9x5qyvA8JVF12VCUPu+7X;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1q1aa7-00BaLM-Lv; Tue, 23 May 2023 22:34:16 +0000
+Date: Tue, 23 May 2023 15:34:11 -0700
+To: ronnie sahlberg <ronniesahlberg@gmail.com>
+Subject: Re: Displaying streams as xattrs
+Message-ID: <ZG0/YyAqqf0NqUuO@jeremy-rocky-laptop>
 References: <CAH2r5mv8nAncg-f=Z5u8LkH4o7kfJLJdtoksYQgiguF7efKZkQ@mail.gmail.com>
  <CAN05THRKq9XPD11rBWXyTL_OGSh4pP6mQyufeW+xc+J3wvkMmw@mail.gmail.com>
  <CAH2r5mtJfSiQXBRUwv6zcR5rhG2Q-pCvjH+n+_SZmVQo1pMeVg@mail.gmail.com>
  <ZGuWhzP98U9Niog+@jeremy-rocky-laptop>
  <CAN05THRnHcZtTMLxUSCYQXULVHiOXVYDU9TRy9K+_wBQQ1CFAw@mail.gmail.com>
  <ZGzo+KVlSTNk/B0r@jeremy-rocky-laptop>
-In-Reply-To: <ZGzo+KVlSTNk/B0r@jeremy-rocky-laptop>
-Date: Wed, 24 May 2023 07:44:36 +1000
-Message-ID: <CAN05THQyraiyQ9tV=iAbDiirWzPxqPq9rY4WsrnqavguJCEjgg@mail.gmail.com>
-Subject: Re: Displaying streams as xattrs
-To: Jeremy Allison <jra@samba.org>
-Content-Type: text/plain; charset="UTF-8"
+ <CAN05THQyraiyQ9tV=iAbDiirWzPxqPq9rY4WsrnqavguJCEjgg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <CAN05THQyraiyQ9tV=iAbDiirWzPxqPq9rY4WsrnqavguJCEjgg@mail.gmail.com>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,27 +62,46 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
-Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
 Cc: Steve French <smfrench@gmail.com>,
  samba-technical <samba-technical@lists.samba.org>,
  CIFS <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 24 May 2023 at 02:25, Jeremy Allison <jra@samba.org> wrote:
+On Wed, May 24, 2023 at 07:44:36AM +1000, ronnie sahlberg wrote:
+>On Wed, 24 May 2023 at 02:25, Jeremy Allison <jra@samba.org> wrote:
+>>
+>> On Tue, May 23, 2023 at 10:59:27AM +1000, ronnie sahlberg wrote:
+>>
+>> >There are really nice use-cases for ADS where one can store additional
+>> >metadata within the "file" itself.
+>>
+>> "Nice" for virus writers, yeah. A complete swamp for everyone
+>> else :-).
 >
-> On Tue, May 23, 2023 at 10:59:27AM +1000, ronnie sahlberg wrote:
->
-> >There are really nice use-cases for ADS where one can store additional
-> >metadata within the "file" itself.
->
-> "Nice" for virus writers, yeah. A complete swamp for everyone
-> else :-).
+>Viruses? I don't think they use ADS much since most tools under
+>windows understand ADS.
 
-Viruses? I don't think they use ADS much since most tools under
-windows understand ADS.
-ACE's on the other handd.
-Which reminds me I need to write that tool to store/retrieve files
-stored inside "hidden" entries in the security descriptor.
+https://insights.sei.cmu.edu/blog/using-alternate-data-streams-in-the-colle=
+ction-and-exfiltration-of-data/
+
+"Malware that takes advantage of ADSs is not new. MITRE lists over a
+dozen named malware examples that use ADSs to hide artifacts and evade
+detection. Attack tools, such as Astaroth, Bitpaymer, and PowerDuke,
+have been extensively detailed by various parties, providing insight
+into how these threats take advantage of ADS evasion on a host system.
+Authors, such as Berghel and Brajkovska, downplay the risks of ADSs. Our
+opinion, however, is that ADSs introduced the host of concealment and
+obfuscation techniques outlined above, but little has been done to
+mitigate these worries since their publication in 2004."
+
+As I also recall the published US "hacking toolset" also used
+an ADS on the root directory of a share to exfiltrate data
+=66rom the target.
+
+ADS - "Just Say No !"
+
+:-).
 
