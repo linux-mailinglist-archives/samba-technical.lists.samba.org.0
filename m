@@ -2,77 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6223670E2CC
-	for <lists+samba-technical@lfdr.de>; Tue, 23 May 2023 19:36:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 730CD70E79F
+	for <lists+samba-technical@lfdr.de>; Tue, 23 May 2023 23:45:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=WgE8ji/h7CMcJNn0UAt7kbxemzWw21WFjqqu1Nqn77o=; b=itPBNVh/bonpx7JUljZ3RZ40XK
-	VjZfv+fezXwUqoozsEGXC0tlnS4CTs5MFHUIrok8Pd9bydJVXs7O3lqmf8nQ3ftXMb8Oi4lDYWUOc
-	hvWTewOEI+Ps0/WtjpWWoc3VkR93g1VP4n1VAvSJbTLAuLYdTxgK7qu9fYrKKntVukjfFIM2IqCpW
-	bgBPlhBH/6qYPNzua0FtQOHBX27LbPxcXV3YYVDYD1LLgwFRZz3Pdx/sns8LR1XKlDM6VEvYJa527
-	FQfb11qRhPfQuVBY6BT1FLT44H5H6iNau8s4H3Fo9c42LYzv+TF92Kr6Njj90siloxcGmfL+Ig4jL
-	g+a5meQg==;
-Received: from ip6-localhost ([::1]:20128 helo=hr1.samba.org) 
+	bh=8wIZSCQ8edYhjFZ+60ckyujMxmrvzH8jxmNqi1okaVM=; b=L62vXepZY7VGr67MC6EC3/Awa8
+	BrTLHOCWcO6mQuO+TKcryS3mP4uLw5rs6xr7idi5Q0JWHwANd0Y8tMpDNP8+SwsWDYADsJeMYGRyF
+	evmb1mUCdgdhLzEMEDNdPkKYECEFqcy+XD5JK/+Uew5/RDyCIlha4ohrfWRC1x9Dnjp7+KuLWKSKV
+	6+vYzI+Nz6+Iml7LFozw+Dhv1rYdN5WSDYbE3n/uSXicuRIFw+8GnhEEieZMThngsYTelo6tQ24wC
+	uXvw1K8w1udYz5qyWIJX8w4L0YIMyzULvKq9febImF4gjwkNWrfO2bzMDPt7c54rweuCCpYRBK2xj
+	QhEPC0rA==;
+Received: from ip6-localhost ([::1]:20746 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1q1Vuj-00BjiW-FE; Tue, 23 May 2023 17:35:13 +0000
-Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c]:56830) 
+	id 1q1ZoM-00BlGz-PE; Tue, 23 May 2023 21:44:54 +0000
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:45489) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1q1Vud-00BjiN-AD
- for samba-technical@lists.samba.org; Tue, 23 May 2023 17:35:09 +0000
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-96fd3a658eeso449053466b.1
- for <samba-technical@lists.samba.org>; Tue, 23 May 2023 10:35:06 -0700 (PDT)
+ (Exim) id 1q1ZoH-00BlGq-RL
+ for samba-technical@lists.samba.org; Tue, 23 May 2023 21:44:52 +0000
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-513fd8cc029so675923a12.3
+ for <samba-technical@lists.samba.org>; Tue, 23 May 2023 14:44:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux-foundation.org; s=google; t=1684863306; x=1687455306;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WgE8ji/h7CMcJNn0UAt7kbxemzWw21WFjqqu1Nqn77o=;
- b=Vw7AS+AaFz/dbCV0lwHrLUjLV6JjQuZhqzF9BMNaNNjX6Zcflxx+AjQe3+paqQJtxR
- U0AHB5n4d398LhALQubCoAudNTHGd4tDGZ+hWZwuf+vVHZt2kdApH85vUqGhasNFnydw
- U4kljGqf63frbBV5XP9K6nh7prfXd7VOJBaNw=
+ d=gmail.com; s=20221208; t=1684878289; x=1687470289;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=8wIZSCQ8edYhjFZ+60ckyujMxmrvzH8jxmNqi1okaVM=;
+ b=e/GdEeOEJsY//5MQ/xaJHDvgLsxvC1Q52QEdUm/n9PlkqYc158HieNZiwJSpBhOesA
+ 8x2PU9LzAGrJAAmR/3Eiuug3CvNisa9MtM3EsXAOQCleQRousmpOraR1I0QGXcGRx1Kh
+ eYadhC9J2RwUhlJoRSGk2gh96k8v2sTC2H1li8eP6+YpvTfwuA7i0cXcV2siOUL48Vax
+ QqjtR8FUQj+Q2DvDb1ImjoGK5PLMQADiGUdl0+WzGjXMxTGfE+pRveuckZNO9vI1kNKX
+ kqdTCBpDH2tZhRv/g4XvlvT/xYwxvKUsBGJvEDeZQxDeqRK1eMENwVpbo/bv85d9MQPI
+ qPtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684863306; x=1687455306;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WgE8ji/h7CMcJNn0UAt7kbxemzWw21WFjqqu1Nqn77o=;
- b=UnMTMcU09Xj1ShHWU47s343yVCVmEEDiaB+X5pw8nb0SEl2M9YKKmcGI2s+40jZJna
- RtdGqmSeSKkhWnB3rDrNu/LE85UnenxCwZf9LGVMHDtV6FEtYZSdUv9BDcTPkJBVndCW
- T5AFktheT0Iwt9npX9rupz/toogVSWVNWxgJyRMEO9bPHQIsE1Dazz++B/W3kKGom8b3
- JkEBdvT3YJair6DhFrNvUb/S1CkJLnYpik+HMFlosg993tIe4MGfRoxWpPpIcm/FUFjA
- eJqjfw3rJWukUHSDyHXn3ryppLwpjIyDETJmsV69HtNDNdvKYH2qaeMpTOYPpZgBPCdh
- PWzg==
-X-Gm-Message-State: AC+VfDxeUUenilGrEweERCgh34n26uKUY23CZEisWXeLgnDmqY6QRdXA
- 7ORew7Nlx3fA/nB4W/pbLLqZCQ104pKDVZWcpQbk4qEA
-X-Google-Smtp-Source: ACHHUZ4YpCD9vpziUUycjgjcfICu0m2xNVNXjkhrrqJ4T7qyDiK2TekHI7MH21V1prMwyJeIfLbHRw==
-X-Received: by 2002:a17:907:6e22:b0:96f:baa4:cda7 with SMTP id
- sd34-20020a1709076e2200b0096fbaa4cda7mr10041006ejc.68.1684863306146; 
- Tue, 23 May 2023 10:35:06 -0700 (PDT)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com.
- [209.85.218.46]) by smtp.gmail.com with ESMTPSA id
- y25-20020a170906471900b00965ddf2e221sm4701843ejq.93.2023.05.23.10.35.05
- for <samba-technical@lists.samba.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 23 May 2023 10:35:05 -0700 (PDT)
-Received: by mail-ej1-f46.google.com with SMTP id
- a640c23a62f3a-969f90d71d4so1162498766b.3
- for <samba-technical@lists.samba.org>; Tue, 23 May 2023 10:35:05 -0700 (PDT)
-X-Received: by 2002:a17:907:9443:b0:94f:3b07:a708 with SMTP id
- dl3-20020a170907944300b0094f3b07a708mr15767293ejc.29.1684863304990; Tue, 23
- May 2023 10:35:04 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1684878289; x=1687470289;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8wIZSCQ8edYhjFZ+60ckyujMxmrvzH8jxmNqi1okaVM=;
+ b=Trkwt/JmvAVsCvPKCxK2P2vQWV2Tm7kTaiJf75HMJDz2J/0aX97504tQANigXGrHeU
+ Yokqe/B5TJYwP7NfUGaqMbz4qrPT2C4I8SeV3Go/v8lrAfVOQFnPgZmoGCGETTOwmQUS
+ wBhl9Q8kKZPrU3ZZ1KrL0DiWvnloaGi5WCa9lBDMNFSapN/XhkUtAWuk0FTTi0BcXHj5
+ yGziY3V4IaoyvGML45o+tA2+qyClqhcRJbpTLoF7PvXnRRyOME+pl1/lWapva4XtYyDB
+ AetlkyW4pyUzaZu8YvMgKRAR3sjAxZGKfvDe7f12m2cy/iHseASzdd9T8ue1X6DAcWpX
+ Ydwg==
+X-Gm-Message-State: AC+VfDyDGUBX9er2EAnA3BuDYtSSrtKhiI6iEM2v5gQv2sXB5ZVdb++u
+ HPskYmDvk1mj7w01idjkFM/BYrrt1csEItpQCuU=
+X-Google-Smtp-Source: ACHHUZ6LFhG0r6xBndZvF+/Yf4c5IOH7uL8J6uEefVhtJqDEVnkJJytAnjWJQGt9ks8h9RiJxb7NxeUOUSRTSo7lroU=
+X-Received: by 2002:a17:907:1b24:b0:969:b2e2:4f29 with SMTP id
+ mp36-20020a1709071b2400b00969b2e24f29mr17580538ejc.53.1684878288553; Tue, 23
+ May 2023 14:44:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAH2r5msVBGuRbv2tEuZWLR6_pSNNaoeihx=CjvgZ7NxwCNqZvA@mail.gmail.com>
- <CAHk-=wjuNDG-nu6eAv1vwPuZp=6FtRpK_izmH7aBkc4Cic-uGQ@mail.gmail.com>
- <CAH2r5msZ_8q1b4FHKGZVm_gbiMWuYyaF=_Mz1-gsfJPS0ryRsg@mail.gmail.com>
-In-Reply-To: <CAH2r5msZ_8q1b4FHKGZVm_gbiMWuYyaF=_Mz1-gsfJPS0ryRsg@mail.gmail.com>
-Date: Tue, 23 May 2023 10:34:48 -0700
-X-Gmail-Original-Message-ID: <CAHk-=wjYTAK4PSK23bDm_urZ49Q=5m=ScYcmK27ZJNKSBPdbgA@mail.gmail.com>
-Message-ID: <CAHk-=wjYTAK4PSK23bDm_urZ49Q=5m=ScYcmK27ZJNKSBPdbgA@mail.gmail.com>
-Subject: Re: patches to move ksmbd and cifs under new subdirectory
-To: Steve French <smfrench@gmail.com>
+References: <CAH2r5mv8nAncg-f=Z5u8LkH4o7kfJLJdtoksYQgiguF7efKZkQ@mail.gmail.com>
+ <CAN05THRKq9XPD11rBWXyTL_OGSh4pP6mQyufeW+xc+J3wvkMmw@mail.gmail.com>
+ <CAH2r5mtJfSiQXBRUwv6zcR5rhG2Q-pCvjH+n+_SZmVQo1pMeVg@mail.gmail.com>
+ <ZGuWhzP98U9Niog+@jeremy-rocky-laptop>
+ <CAN05THRnHcZtTMLxUSCYQXULVHiOXVYDU9TRy9K+_wBQQ1CFAw@mail.gmail.com>
+ <ZGzo+KVlSTNk/B0r@jeremy-rocky-laptop>
+In-Reply-To: <ZGzo+KVlSTNk/B0r@jeremy-rocky-laptop>
+Date: Wed, 24 May 2023 07:44:36 +1000
+Message-ID: <CAN05THQyraiyQ9tV=iAbDiirWzPxqPq9rY4WsrnqavguJCEjgg@mail.gmail.com>
+Subject: Re: Displaying streams as xattrs
+To: Jeremy Allison <jra@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,57 +77,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Linus Torvalds via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Linus Torvalds <torvalds@linux-foundation.org>
-Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>,
- CIFS <linux-cifs@vger.kernel.org>,
+From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
+Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+Cc: Steve French <smfrench@gmail.com>,
  samba-technical <samba-technical@lists.samba.org>,
- Namjae Jeon <linkinjeon@kernel.org>, LKML <linux-kernel@vger.kernel.org>
+ CIFS <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, May 22, 2023 at 11:39=E2=80=AFPM Steve French <smfrench@gmail.com> =
-wrote:
+On Wed, 24 May 2023 at 02:25, Jeremy Allison <jra@samba.org> wrote:
 >
-> My reason for adding CONFIG_SMB_CLIENT, enabling CONFIG_SMB_CLIENT
-> when CONFIG_CIFS was enabled, I was trying to make the Makefile more clea=
-r
-> (without changing any behavior):
+> On Tue, May 23, 2023 at 10:59:27AM +1000, ronnie sahlberg wrote:
+>
+> >There are really nice use-cases for ADS where one can store additional
+> >metadata within the "file" itself.
+>
+> "Nice" for virus writers, yeah. A complete swamp for everyone
+> else :-).
 
-That sounds ok, but I think it should be done separately from the
-move. Keep the move as a pure move/rename, not "new things".
-
-Also, when you actually do this cleanup, I think you really should just do
-
-  config SMB
-        tristate
-
-  config SMB_CLIENT
-        tristate
-
-to declare them, but *not* have that
-
-        default y if CIFS=3Dy || SMB_SERVER=3Dy
-        default m if CIFS=3Dm || SMB_SERVER=3Dm
-
-kind of noise anywhere. Not for SMBFS, not for SMB_CLIENT.
-
-Just do
-
-        select SMBFS
-        select SMB_CLIENT
-
-in the current CIFS Kconfig entry. And then SMB_SERVER can likewise do
-
-        select SMBFS
-
-and I think it will all automatically do what those much more complex
-"default" expressions currently do.
-
-But again - I think this kind of "clean things up" should be entirely
-separate from the pure code movement. Don't do new functionality when
-moving things, just do the minimal required infrastructure changes to
-make things work with the movement.
-
-              Linus
+Viruses? I don't think they use ADS much since most tools under
+windows understand ADS.
+ACE's on the other handd.
+Which reminds me I need to write that tool to store/retrieve files
+stored inside "hidden" entries in the security descriptor.
 
