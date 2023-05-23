@@ -2,73 +2,66 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D25C270C454
-	for <lists+samba-technical@lfdr.de>; Mon, 22 May 2023 19:34:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C37070CFEB
+	for <lists+samba-technical@lfdr.de>; Tue, 23 May 2023 03:00:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=Slu3gux4GuUHwh68X0h4hh6LgeEzWMQzZomXLQPnCh0=; b=wjw/iItTUJVyHuHIcOAet7JYIv
-	Mk6+1hnGt/D2VKlbM9YVVbEY6fs2eSzn/XNQxlaAWzd/CcD6BMRvRCi0vIsq/gdAaY4UsepqgrKja
-	L59oGxl7MZSmkowxyLsWtsnSz6uuWcxBoDii6+ZAN+hwkG852C96kLKLhQq5P9Y6ao6dbt085pJ4z
-	gZKroFZbQSlPXtQDi30XWXl4Z8dRBifR7bnttQb53x4k4epY2k+fdtIYjtXJ9Gr2dXnXNJyQ1TO4s
-	1i+f6lEdGvSvxr8w1+cTM4iG+QU9QrVAjYpFXVNqFN45zwkvjXKjI3GiPBiey1HZCW800oA6ET323
-	dNzo454g==;
-Received: from ip6-localhost ([::1]:50802 helo=hr1.samba.org) 
+	bh=zC8RUZgKRRIeFzEm4HicM3NMEy9A1nX6MMx3jlb5aEw=; b=XkwqtqC7XcCXs5JEHyI+13abbJ
+	38vcE9/69q0L4DD+UuJKFTDPfTpT0PLOdGCq5tP7FPNRDu+fDW3FFi9s6wc1zR8NJQnJ6/vdqkSTi
+	S3idnAgYI2RO4I4X0viFSi0OPvxb0HwDzAuUBQqTnGvmpjrEGSYTj9ldKKf2I7Cq4+ekQ/wMzKd1g
+	NrDFljC4iXyaQsUL1wE8ab4Uwy8MxJ7143NWeOLw7+7vI6OmQnJAYFjwLu5wBLlNm7rXdUkzEXOjU
+	Wd2+Jmd/yiPjMxrcdi7dujN8+TwuXQ8KuUL9hX16OfyZ3cviu46qAA72s+biVujv2D7C6ctGkvv9W
+	gANcXXJA==;
+Received: from ip6-localhost ([::1]:34010 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1q19Pu-00BP1I-KB; Mon, 22 May 2023 17:33:54 +0000
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632]:44542) 
+	id 1q1GNP-00BVu6-EF; Tue, 23 May 2023 00:59:47 +0000
+Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e]:58731) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1q19Pq-00BP0v-GH
- for samba-technical@lists.samba.org; Mon, 22 May 2023 17:33:52 +0000
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-96f7377c86aso677144466b.1
- for <samba-technical@lists.samba.org>; Mon, 22 May 2023 10:33:50 -0700 (PDT)
+ (Exim) id 1q1GNK-00BVtx-9b
+ for samba-technical@lists.samba.org; Tue, 23 May 2023 00:59:44 +0000
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-96fbc74fbf1so430189266b.1
+ for <samba-technical@lists.samba.org>; Mon, 22 May 2023 17:59:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux-foundation.org; s=google; t=1684776829; x=1687368829;
+ d=gmail.com; s=20221208; t=1684803581; x=1687395581;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Slu3gux4GuUHwh68X0h4hh6LgeEzWMQzZomXLQPnCh0=;
- b=Ljg4LOy0fHrVHwQrC6CFPRl2RBlB71H4nfxmtrAN37UAHfFvzivakgEuSCbqDA1N+4
- i9+SneFGnaWeVgwnYb9dbnOzwq8hgg370KB87G8X/9Pg+cm8yutJsa3CPJ4QGUp1mYpD
- A3AKz+Vz4rkoke6nYDDwagdl3BNnF6xBH56y4=
+ bh=zC8RUZgKRRIeFzEm4HicM3NMEy9A1nX6MMx3jlb5aEw=;
+ b=MgSu/+W7gpyExLKFQ4w1suZX0b+bub56fQ9zmpayVoSnY2H7CjEjlVI/wwPFR4SSK7
+ 3IprQ4TsMHVs/Y+aHrTU5p1Od4gvPPdwPCle1VSSKRDTC35roXn3Iyy/yIh4CH6/4Za7
+ fZGwCcx4r4uqxrFTvTHgNt0o9cEHgZjGPdYevYXdu8YMYhckmX+RAeen1o1YjynJybQj
+ KJPrdvb+M+Hv60rLPIHcqyRXL7GAaqAv7k2506t1uffdUZBUqlpwm02CB0PyrkvG9r+z
+ WGGYAYCAgOIdhwLnpWLmxngKKtFcR8ymJIk+DGdsdP5ayadgL7NttWiXP8ZuUTN3fZo2
+ VKxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684776829; x=1687368829;
+ d=1e100.net; s=20221208; t=1684803581; x=1687395581;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Slu3gux4GuUHwh68X0h4hh6LgeEzWMQzZomXLQPnCh0=;
- b=d1INAeyYULhePPFzyspw4iwkNdd17wuhPfkW6IDHB7sxb3GL2K0sJ/8It4Voz0APFf
- 8ghD46lOBWRHvSmEhKKsGmrBUCLYN5fqUFXPqbiICRPbTGcCPwjnm7Jc3ceiEajt8jWZ
- 3xDHlvBRQpKoPfmg3JGGPUTSPatdExo4LLNMIEikSwg/FhrHW9Uof7lJyiHtTpkEjCsp
- 7hhkZ1EYA8FLnRoDSEs+jV6B9nIEOdPvoPp/m5SIbORgU/86K2RTEW6dZLgByyR+NAGL
- Povhhue62lfX5jccqzFauDMx7//axHw3hfL5383uBx6VuNV3Pcy9dOdd2Lq5jG/vmR/3
- lDcA==
-X-Gm-Message-State: AC+VfDxC/wkHFIEoN+sr/kLAS01KFRM0umChT1Fs93V/SWiYizvKKSm6
- 8akc6eMNfv/+RIFS8sS9vJ8+LyMd8zgz7fCdezBNbQ==
-X-Google-Smtp-Source: ACHHUZ5r+sUohlax6Uk8VJYNJH5xVdqGHB9mwTQSK6OMQLEuHjQXKjTSbqjZ2mSWIqVLdPVjl+NDlA==
-X-Received: by 2002:a17:907:9807:b0:96f:e317:aeb7 with SMTP id
- ji7-20020a170907980700b0096fe317aeb7mr4215422ejc.54.1684776829308; 
- Mon, 22 May 2023 10:33:49 -0700 (PDT)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com.
- [209.85.218.42]) by smtp.gmail.com with ESMTPSA id
- gt24-20020a170906f21800b0096f6a910ab7sm3329420ejb.190.2023.05.22.10.33.48
- for <samba-technical@lists.samba.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 May 2023 10:33:48 -0700 (PDT)
-Received: by mail-ej1-f42.google.com with SMTP id
- a640c23a62f3a-96f0678de80so1184035966b.3
- for <samba-technical@lists.samba.org>; Mon, 22 May 2023 10:33:48 -0700 (PDT)
-X-Received: by 2002:a17:907:2d23:b0:96a:928c:d382 with SMTP id
- gs35-20020a1709072d2300b0096a928cd382mr11676946ejc.48.1684776828268; Mon, 22
- May 2023 10:33:48 -0700 (PDT)
+ bh=zC8RUZgKRRIeFzEm4HicM3NMEy9A1nX6MMx3jlb5aEw=;
+ b=Cv++EcoR4DCNm4EYn5w2EUAW9TRB8RmmoYNrcaRpozCqotiq0NSmAtgFc8agJqJAwI
+ COMGo7Xfkjb3HoRtR/5vv4nwbxO4xionGeLtPIDKn5MdFI2q/kAsa6WdblFYzzvbJEVQ
+ bkTL5W0I5ssasGmt/lqjeTjol8sg6PL3ch46Qy/6t9lNWga1bawZ4aL/Bcqsmlej3r0H
+ +dRMW3n2oh71k1Nv9mXpt57osv7PJcsUln5+vEMKuNYNgkSVBngSXAk72lzafgkl9Y+C
+ 20wmLTsWK+v0ftZJ5qD/RT07uO6AEneA3AeRTcrcvk/ad1dzfksJktZNDLabFDRbz8sG
+ o/Iw==
+X-Gm-Message-State: AC+VfDwUjfwVEZH22u5HFmbxfIcOEE7POPAT/LzOuk9kGDzAS0w1bh6c
+ YOXZAFEKYp6h1vcy9msOrkUY2XNqGHLMA7B8R9M=
+X-Google-Smtp-Source: ACHHUZ4E/Q+hF6zLfH2qPomFTnb9Boa9tvBQutstIPgyI6b5tlGfRbqVQfACikWiEb5qhe27+CbrtuwGRBLksbwQRLg=
+X-Received: by 2002:a17:907:96a1:b0:959:bbda:fa51 with SMTP id
+ hd33-20020a17090796a100b00959bbdafa51mr13297131ejc.41.1684803580650; Mon, 22
+ May 2023 17:59:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAH2r5msVBGuRbv2tEuZWLR6_pSNNaoeihx=CjvgZ7NxwCNqZvA@mail.gmail.com>
-In-Reply-To: <CAH2r5msVBGuRbv2tEuZWLR6_pSNNaoeihx=CjvgZ7NxwCNqZvA@mail.gmail.com>
-Date: Mon, 22 May 2023 10:33:30 -0700
-X-Gmail-Original-Message-ID: <CAHk-=wjuNDG-nu6eAv1vwPuZp=6FtRpK_izmH7aBkc4Cic-uGQ@mail.gmail.com>
-Message-ID: <CAHk-=wjuNDG-nu6eAv1vwPuZp=6FtRpK_izmH7aBkc4Cic-uGQ@mail.gmail.com>
-Subject: Re: patches to move ksmbd and cifs under new subdirectory
-To: Steve French <smfrench@gmail.com>
+References: <CAH2r5mv8nAncg-f=Z5u8LkH4o7kfJLJdtoksYQgiguF7efKZkQ@mail.gmail.com>
+ <CAN05THRKq9XPD11rBWXyTL_OGSh4pP6mQyufeW+xc+J3wvkMmw@mail.gmail.com>
+ <CAH2r5mtJfSiQXBRUwv6zcR5rhG2Q-pCvjH+n+_SZmVQo1pMeVg@mail.gmail.com>
+ <ZGuWhzP98U9Niog+@jeremy-rocky-laptop>
+In-Reply-To: <ZGuWhzP98U9Niog+@jeremy-rocky-laptop>
+Date: Tue, 23 May 2023 10:59:27 +1000
+Message-ID: <CAN05THRnHcZtTMLxUSCYQXULVHiOXVYDU9TRy9K+_wBQQ1CFAw@mail.gmail.com>
+Subject: Re: Displaying streams as xattrs
+To: Jeremy Allison <jra@samba.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
@@ -84,40 +77,69 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Linus Torvalds via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Linus Torvalds <torvalds@linux-foundation.org>
-Cc: linux-fsdevel <linux-fsdevel@vger.kernel.org>,
- CIFS <linux-cifs@vger.kernel.org>,
+From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
+Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+Cc: Steve French <smfrench@gmail.com>,
  samba-technical <samba-technical@lists.samba.org>,
- Namjae Jeon <linkinjeon@kernel.org>, LKML <linux-kernel@vger.kernel.org>
+ CIFS <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, May 22, 2023 at 9:33=E2=80=AFAM Steve French <smfrench@gmail.com> w=
-rote:
+Yeah, I don't think we should surface these as xattrs.
+Xattrs are already way too small for most of the usecases of ADS on
+windows (file metadata for explorer etc)
+and they are also just an atomic blob and not a proper filedescriptor.
+Since ADS is still just a file, any application that in the future
+will use ADS features should only do so via
+a proper filedescriptors, where it is possible to
+seek/read/write/truncate/...  so IMHO we shouldn't offer them an
+alternative but inferior API. Because they might mistakenly start to use it=
+. :-(
+
+There are no real applications, yet, for linux that uses ADS but there
+are many that potentially could use ADS or
+become ADS aware. GUI Filebrowsers would be a nice usecase. As would
+making 'cp', 'mv', 'tar', 'rsync', ... ADS aware.
+
+So let's not do it with xattrs.
+No one needs/asks for this right now so it would be code we will have
+to maintain but has no users.
+
+
+What we should do though is think about and talk with the NTFS folks
+so that we make sure our aims and APIs will align with the plans they
+have.
+And once we have multiple filesystems supporting it (cifs.ko and ntfs)
+then we can start thinking about how to encourage external users and
+applications to use it.
+There are really nice use-cases for ADS where one can store additional
+metadata within the "file" itself.
+
+regards
+ronnie s
+
+On Tue, 23 May 2023 at 02:21, Jeremy Allison <jra@samba.org> wrote:
 >
-> Following up on the email thread suggestion to move fs/ksmbd and
-> fs/cifs and fs/smbfs_common all under a common directory fs/smb, here
-> is an updated patchset for that (added one small patch).
-
-Looks fine to me.
-
-I wouldn't have noticed the typo that Tom Talpey mentioned (misspelled
-"common" in the commit message of the first patch), and that
-SMB_CLIENT config variable is odd.
-
-I'm actually surprised that Kconfig didn't complain about the
-
-        select SMB_CLIENT
-
-when there is no actual declaration of that Kconfig variable, just a random=
- use.
-
-That thing seems confusing and confused, and isn't related to the
-renaming, so please drop the new random SMB_CLIENT config variable. If
-you want to introduce a new Kconfig variable later for some reason,
-that's fine, but please don't mix those kinds of changes up with pure
-renames..
-
-                Linus
+> On Mon, May 22, 2023 at 01:39:50AM -0500, Steve French wrote:
+> >On Sun, May 21, 2023 at 11:33=E2=80=AFPM ronnie sahlberg
+> ><ronniesahlberg@gmail.com> wrote:
+> >>
+> >> A problem  we have with xattrs today is that we use EAs and these are
+> >> case insensitive.
+> >> Even worse I think windows may also convert the names to uppercase :-(
+> >> And there is no way to change it in the registry :-(
+> >
+> >But for alternate data streams if we allowed them to be retrieved via xa=
+ttrs,
+> >would case sensitivity matter?  Alternate data streams IIRC are already
+> >case preserving.   Presumably the more common case is for a Linux user
+> >to read (or backup) an existing alternate data stream (which are usually
+> >created by Windows so case sensitivity would not be relevant).
+>
+> Warning Will Robinson ! Mixing ADS and xattrs on the client side is a rec=
+eipe for
+> confusion and disaster IMHO.
+>
+> They really are different things. No good will come of trying to mix
+> the two into one client namespace.
 
