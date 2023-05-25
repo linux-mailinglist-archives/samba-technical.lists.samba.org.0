@@ -2,71 +2,70 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C6D9710A51
-	for <lists+samba-technical@lfdr.de>; Thu, 25 May 2023 12:50:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B729E710A69
+	for <lists+samba-technical@lfdr.de>; Thu, 25 May 2023 12:57:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=rN6ZW64ptAPiChsD8/Re4zwk3t8TAiT9Ua8kP37+Lkg=; b=SW57hcA+KaSKwcsuyPAvKqKMkp
-	w5VoRSTDEs5KskgAwQqSTzMOuF64vXst8Kyt/rKgvPHKfR5DEiyeOCVXL/K48z98mYvjfoQR6EU4J
-	k78hssbdVFnjJiT0/8ZP4oOr/4joO3L71+FReuhYV1Vco14QSMNpDxC6hH79l9DA2hB0XC+TAL/GI
-	tZMc7Qb2A9EJ7kd3EXIcxbUFPlB40SEQBn9mQaq3vkqrHKluu1lId1wYBIEZNHkJKsZzgrorzvPoQ
-	lLOznAJ4SDELo2QhqzdVIwohY/dpGAIelf7VJ0UVe81oSZQ9wDcCK2VgeWh0rGGOcoU4iHEnOqpQo
-	1bnSjxHg==;
-Received: from ip6-localhost ([::1]:58720 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=k6Pgg5MYTu3woPKV5DNXP1ipgLfX0qRf9L756ApFYd0=; b=ylLILDeGy4jpO92pixHMVVX5KN
+	RfKsaUbqKzffQzwsp+eyVTAMMTg1Oad61/0DynVWK/rRLO2yjbuNYJ/CMp75iJAmz2tKU0gn4FtTn
+	1YPYgXYV8VkJ8udakl6xmym288+PbIJixrljIxmWwgUgeKpCJujnZdK7sbrpMErl1MBLCn2n71Dvh
+	5gmu628z/izMpdZF5bqkTYI5MUSFowWAaJd9k6zXVTT8yPOxmRkpcdQiRChO7vm8dcZ/ltSQcdRnN
+	m2KN5MQcth8Vzotq/Bstc5JbTRsBGslG4/CZKPiBJK7alAjMPlhvW0L4Gy/d2R4xHnOCKsa+InbjK
+	rQrMTMRw==;
+Received: from ip6-localhost ([::1]:39022 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1q28Xn-00C8oG-IQ; Thu, 25 May 2023 10:50:07 +0000
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534]:45376) 
+	id 1q28f2-00C95w-9z; Thu, 25 May 2023 10:57:36 +0000
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c]:53647) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1q28Xh-00C8o7-U7
- for samba-technical@lists.samba.org; Thu, 25 May 2023 10:50:04 +0000
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-513fd8cc029so4098266a12.3
- for <samba-technical@lists.samba.org>; Thu, 25 May 2023 03:50:01 -0700 (PDT)
+ (Exim) id 1q28ey-00C95n-0d
+ for samba-technical@lists.samba.org; Thu, 25 May 2023 10:57:34 +0000
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-514454733b8so603868a12.3
+ for <samba-technical@lists.samba.org>; Thu, 25 May 2023 03:57:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1685011801; x=1687603801;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rN6ZW64ptAPiChsD8/Re4zwk3t8TAiT9Ua8kP37+Lkg=;
- b=lYIL3BIu+RDUZJTXSVC658u0V2Ce7+nzeTiewzSXohOPKGZFXPLYacrpYxCEgyNICh
- cXELFY1buBVTOcOxFTzMsIrxzUHOOyK4SzEESOVpfY4npWAgu6VaNhVGcvUbfIlhC/bv
- dChXosk2ecGLJZaRJaKn+MCpzi/n6fh2uP4SAdp3N+PTDEtZXS8bVMUnoVz8rReJtxhn
- hMQ4m8gRovt3M6LwBp2zTSFCP9Uur5dQqvXYV/WVT0Lv9eWdPmWs2xPn4w6JjLaPWd2X
- fvbQmkGp0osZoU4naJPlYBFrBmfT+R8pfRahdUZWLUv1rXTukY1ZpdElu8LQi1W+kugF
- +UCg==
+ d=gmail.com; s=20221208; t=1685012250; x=1687604250;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=k6Pgg5MYTu3woPKV5DNXP1ipgLfX0qRf9L756ApFYd0=;
+ b=kfoObmMZ6EzsuOH7B/fdbjB4O86L71DUQZAiD5s/4uQllBTlqc9EPooLBcUYXkgPSt
+ XcTdVs8jJPeh2T85vHarF+AwgIKp6+pbU6j1q1GWMH+GGNUDHWf5hyMaJCz7AJNvtNkP
+ d70Ssle1lL1zTAOVAZHtwx19yYfUbKmcVBIKhzlReQawiLQboEl1P2fYJF7QoviEaQwY
+ H5RFA1Pmn3hKAIqupSpaW5v7mluWWlZMeuWc1DBDQTqp4g+c3SZEjr3zf2S4WFqbsCoX
+ L7A8yrAoeH3oqPR+kUlRZ8APvGQx2fwXRJrYD0Gb2Znr84FZeG6+4NWGY0/lfzbZ0gGv
+ ShXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685011801; x=1687603801;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rN6ZW64ptAPiChsD8/Re4zwk3t8TAiT9Ua8kP37+Lkg=;
- b=iNe6VAtD9XuPuhsMG2lQlx4W0IjmQjXXamowY5M3x/s7qYkpRgBRvLs+JF+g2CUAdz
- QYVyVBIt3aVyzlaZ9xHv7CFU9vShlDSfJl7hIeiEfRaTWMQxp26BGtpx/1mvL1ucGjuI
- YgN4+pCwnSkKcdFBMTTIcCzyn4jcUQdqSEVInm76pv5YUun4Ml+YYzRlXZxXs1zdp9F+
- VgREGL90Ag4KIXHdx7pUsjm8MT01RPW6MFaEq9t2vg+HPkg63Kt129UaZlfJAO09wJ/Y
- 7nUm2Ro9slOG/rI0CsEXsX8Q34v+wb85GepuzPpyp5tRoDBNtfNtLORz0zDCH8AiaqRs
- mD6w==
-X-Gm-Message-State: AC+VfDzzHUGvZUxVC6SE/E8JqycGoC9L4NMi5VUI9nA6Q54s5kpGm0i1
- Yv1y+Hmq1Ym3N8AlUPvsD0ssQ1uhBcWBc3dg/1c=
-X-Google-Smtp-Source: ACHHUZ7/YbD1ePdaBGN21fVv2YdIqa3m3paKObfHLUcLwEzf70Hqg0dT2HXP30JPFZuIzhReriX4cscUAbJjFNLkpHM=
-X-Received: by 2002:a17:907:3689:b0:973:797b:50de with SMTP id
- bi9-20020a170907368900b00973797b50demr828239ejc.60.1685011800726; Thu, 25 May
- 2023 03:50:00 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1685012250; x=1687604250;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=k6Pgg5MYTu3woPKV5DNXP1ipgLfX0qRf9L756ApFYd0=;
+ b=KSM6pRJuLeYtAWUgOt7HMymNdz1MdhRma7lTYi7800r7LHQUzC/s+S5i/Dcb1qaAIR
+ PmyTbU26CM8v2UxPJqxQLR545xcQx8u9t6qwGcqg/S/LIRg/3FXjadVP97G+ospSjrSp
+ gXzSy7H65Kbez/Goi9Dh7zlkxWsn1MQLfnZppE9p6wLIx7QuCCbLvSUFB5ekTeykkM/U
+ QMKjd6YQhOsGsjDErel788AwNaffHWyI9CXbETitf4IyEZ0U8PCKoSKvJXM8+wVrVlgH
+ 6L8S4umz3m4JihZfPzop6KEXPpdHOH1d1oLTOo4UNCT36ibfhcxOX2Oe1HCbt5vilDUq
+ xdiw==
+X-Gm-Message-State: AC+VfDw7p3YJpH4hFMq37R28vQpVZNOYZwHytI4/4zxb3r8HzZZr331t
+ XiF2DM6Yqgzvi/LlyC69+7ChdWAC41P1OifPejk=
+X-Google-Smtp-Source: ACHHUZ4hWK7KF+x9ZbDG4tjBWYnpf2EraJ4WkN0KGTXqqMxpzsfg/aylHZUH6TALXInZHIIK4kXF9eT2fcPIFxD7DO0=
+X-Received: by 2002:a17:907:2dab:b0:96f:a0ee:114b with SMTP id
+ gt43-20020a1709072dab00b0096fa0ee114bmr1145128ejc.21.1685012250235; Thu, 25
+ May 2023 03:57:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAH2r5mv8nAncg-f=Z5u8LkH4o7kfJLJdtoksYQgiguF7efKZkQ@mail.gmail.com>
  <CAN05THRKq9XPD11rBWXyTL_OGSh4pP6mQyufeW+xc+J3wvkMmw@mail.gmail.com>
  <CAH2r5mtJfSiQXBRUwv6zcR5rhG2Q-pCvjH+n+_SZmVQo1pMeVg@mail.gmail.com>
- <ZGuWhzP98U9Niog+@jeremy-rocky-laptop> <20230525093900.GA261009@sernet.de>
-In-Reply-To: <20230525093900.GA261009@sernet.de>
-Date: Thu, 25 May 2023 20:49:47 +1000
-Message-ID: <CAN05THTi0BC_iwjXMiWn61fg3hRemi5Momwp3O0WGygyWLGomQ@mail.gmail.com>
+ <ZGuWhzP98U9Niog+@jeremy-rocky-laptop>
+ <CAN05THRnHcZtTMLxUSCYQXULVHiOXVYDU9TRy9K+_wBQQ1CFAw@mail.gmail.com>
+ <ZGzo+KVlSTNk/B0r@jeremy-rocky-laptop>
+ <CAN05THQyraiyQ9tV=iAbDiirWzPxqPq9rY4WsrnqavguJCEjgg@mail.gmail.com>
+ <ZG0/YyAqqf0NqUuO@jeremy-rocky-laptop>
+In-Reply-To: <ZG0/YyAqqf0NqUuO@jeremy-rocky-laptop>
+Date: Thu, 25 May 2023 20:57:18 +1000
+Message-ID: <CAN05THSWHq-3bJ5+tzZ==j9uGFGfbALw0FoLVa9UyucaZ92bGQ@mail.gmail.com>
 Subject: Re: Displaying streams as xattrs
-To: =?UTF-8?B?QmrDtnJuIEpBQ0tF?= <bj@sernet.de>, 
- Jeremy Allison <jra@samba.org>, Steve French <smfrench@gmail.com>,
- CIFS <linux-cifs@vger.kernel.org>, 
- samba-technical <samba-technical@lists.samba.org>
+To: Jeremy Allison <jra@samba.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,98 +81,57 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: ronnie sahlberg via samba-technical <samba-technical@lists.samba.org>
 Reply-To: ronnie sahlberg <ronniesahlberg@gmail.com>
+Cc: Steve French <smfrench@gmail.com>,
+ samba-technical <samba-technical@lists.samba.org>,
+ CIFS <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 25 May 2023 at 19:40, Bj=C3=B6rn JACKE via samba-technical
-<samba-technical@lists.samba.org> wrote:
+On Wed, 24 May 2023 at 08:34, Jeremy Allison <jra@samba.org> wrote:
 >
-> On 2023-05-22 at 09:21 -0700 Jeremy Allison via samba-technical sent off:
-> > On Mon, May 22, 2023 at 01:39:50AM -0500, Steve French wrote:
-> > > On Sun, May 21, 2023 at 11:33=E2=80=AFPM ronnie sahlberg
-> > > <ronniesahlberg@gmail.com> wrote:
-> > > >
-> > > > A problem  we have with xattrs today is that we use EAs and these a=
-re
-> > > > case insensitive.
-> > > > Even worse I think windows may also convert the names to uppercase =
-:-(
-> > > > And there is no way to change it in the registry :-(
-> > >
-> > > But for alternate data streams if we allowed them to be retrieved via=
- xattrs,
-> > > would case sensitivity matter?  Alternate data streams IIRC are alrea=
-dy
-> > > case preserving.   Presumably the more common case is for a Linux use=
-r
-> > > to read (or backup) an existing alternate data stream (which are usua=
-lly
-> > > created by Windows so case sensitivity would not be relevant).
+> On Wed, May 24, 2023 at 07:44:36AM +1000, ronnie sahlberg wrote:
+> >On Wed, 24 May 2023 at 02:25, Jeremy Allison <jra@samba.org> wrote:
+> >>
+> >> On Tue, May 23, 2023 at 10:59:27AM +1000, ronnie sahlberg wrote:
+> >>
+> >> >There are really nice use-cases for ADS where one can store additional
+> >> >metadata within the "file" itself.
+> >>
+> >> "Nice" for virus writers, yeah. A complete swamp for everyone
+> >> else :-).
 > >
-> > Warning Will Robinson ! Mixing ADS and xattrs on the client side is a r=
-eceipe for
-> > confusion and disaster IMHO.
-> >
-> > They really are different things. No good will come of trying to mix
-> > the two into one client namespace.
-> >
+> >Viruses? I don't think they use ADS much since most tools under
+> >windows understand ADS.
 >
-> just took a look at how the ntfs-3g module is handling this. It was an op=
-tion
-> streams_interface=3Dvalue, which allows "windows", which means that the
-> alternative data streams are accessable as-is like in Windows, with ":" b=
-eing
-> the separator. This might be a nice option for cifsfs also. That option w=
-ould
-> just be usable if no posix extensions are enabled of course.
+> https://insights.sei.cmu.edu/blog/using-alternate-data-streams-in-the-collection-and-exfiltration-of-data/
+>
+> "Malware that takes advantage of ADSs is not new. MITRE lists over a
+> dozen named malware examples that use ADSs to hide artifacts and evade
+> detection. Attack tools, such as Astaroth, Bitpaymer, and PowerDuke,
+> have been extensively detailed by various parties, providing insight
+> into how these threats take advantage of ADS evasion on a host system.
+> Authors, such as Berghel and Brajkovska, downplay the risks of ADSs. Our
+> opinion, however, is that ADSs introduced the host of concealment and
+> obfuscation techniques outlined above, but little has been done to
+> mitigate these worries since their publication in 2004."
+>
+> As I also recall the published US "hacking toolset" also used
+> an ADS on the root directory of a share to exfiltrate data
+> from the target.
+>
+> ADS - "Just Say No !"
 
-We could. But that is a windowism where ':' is a reserved character
-but which is not a reserved character in unixens.
-For example:
-You have the file "foo" with stream "bar" and you have another normal
-file "foo:bar"
-Which one does open("foo:bar") give you?
+I think that is a flawed argument.
+It only really means that the virus scanners are broken. So we tell
+the virus scanner folks to fix their software.
+Viruses hide inside all sort of files and metadata.
+There are viruses that hide inside JPEG files too and some of them
+even gain privilege escalations through carefully corrupted JPEG
+files.
+We fix the bugs in the parser, we don't "drop support for JPEG files".
 
-The openat/... semantics that solaris uses provides an elegant and
-unambiguous semantics for it.
-You want to open stream bar on file foo?
-1, fh =3D open("foo")
-2, sh =3D openatf(h, "bar")
-
-There are at least two non-windows related filesystems that support
-something similar to ADS,
-solaris filesystem and apples filesystem(s) so it would be nice to
-have a neutral API where an application can use the same
-code to access streams be they cifs/ntfs/solarisfs/applefs/...other...
-
-Steve, I think this would be a good discussion topic for vfs meetings.
-Is it desirable to bless an api in the vfs to do alternate data
-streams?
-There are at least 4 filesystems that provide this feature, 3 of which
-are still very popular and common today.
-
-One approach would be to mimic the interface that solaris provides
-with openatfile-fd, "stream-name")
-But that would not just be a filesystem change but also a VFS change
-since it would suddenly accept passing a file-fd as argument
-as a valid option (for those filesystems that have signalled
-alternative stream support?)
-while the vfs currently only allows openat() on a directory-fd.
-
-ADS as a concept is really powerful and could be enormously useful as
-way to attach metadata to a file object in a standardized way.
-There are very many use-cases where having a file that embedded both
-the executable as well as various other types of data but still be
-able to treat it as a single self-contained file from an end-user
-perspective.
-
-This should be discussed and we should probe the vfs folks about what
-they think about it.
-
-regards
 ronnie s
 
 >
-> Bj=C3=B6rn
->
+> :-).
 
