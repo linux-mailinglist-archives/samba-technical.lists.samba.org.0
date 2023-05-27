@@ -2,55 +2,75 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE2E8712A7D
-	for <lists+samba-technical@lfdr.de>; Fri, 26 May 2023 18:20:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C34FD713108
+	for <lists+samba-technical@lfdr.de>; Sat, 27 May 2023 02:55:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=uqIoFMIY7OEFaW6f2FGifna72te3hfXFPX4W0JI1TNs=; b=JTA/5879ekbJc9ZIckpA0yFd8H
-	CQn3Z5+IvNOGsj8I3LRuTkD4BARPE+cQcP78lte+2Loa1tBcKofMvOTPhObwNZrHh5EJXFZn87Cpm
-	KGvZjCms3Ha/xe++AyZ4qdTTAtK1pOF5HfOYERxnHIkRpN9HR/JN/flpAYW/oeppJV93hTV2Ui00P
-	b7/WFwpB+au+EIruIA5TuHonxNkGEAZ+NOgjTthO86+1Nh+FUrGLTLVcoNxwYfitaI+qSfLI6p+WD
-	e7q4KrUQIRVgNSZCb6/cpZJEmb+ZrphtLFCZ8TPmKvn0UCZBBZO+0DHiGkzXdriD0TUxFwhxB9itv
-	uhfUm0DQ==;
-Received: from ip6-localhost ([::1]:28358 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=+s5R8rU9zOtLhbGaYKNg/rKFUrWAKJ7jWTZPP6eisok=; b=IuOG6P41iLn6Ms3l49FJ9crotQ
+	hf84dM3+x6weZ4VKGCrU7Kl17eRI8bNnpBO4Nd9HDenINF7QbMeueveJY7sZaOr7wES9AkqluvwSr
+	wXp3csNjz7HCoXl4We1KOhs6g1g0u0sbp3xCj/T5g2580nwJ8O6+6A96wRbLXJTPJVCyhgoelmawF
+	QoDLX6qxjz3w5EDvzNgz0dOXuNEtxqgTOc+Gpirzs2N4zHCcdhM5FokrN43xIjnX/hBpyt/Qs8XhG
+	xq3OPzUtW+/Bb6JgyG9LnW7sHBCVFzIJemdjZFx4jflU1/gPx5p+4f10OC6MWYFc/dKKg2ZT0Ev+r
+	H2mcB0Qw==;
+Received: from ip6-localhost ([::1]:49636 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1q2aAv-00CXWl-52; Fri, 26 May 2023 16:20:21 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:17612) 
+	id 1q2iCZ-00Ca40-4U; Sat, 27 May 2023 00:54:35 +0000
+Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f]:53394) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1q2aAn-00CXWc-FQ
- for samba-technical@lists.samba.org; Fri, 26 May 2023 16:20:19 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=uqIoFMIY7OEFaW6f2FGifna72te3hfXFPX4W0JI1TNs=; b=IT/dGbUPev7uoyivskuojS8X0j
- G5bKYCmPDdX68LPholSPBzCDCGnY3GthlMcya3UAFXFYCtJHcT5+IeJDyBQkut/OTzignZDVcpGUc
- sdKY/XxfREGFxBv9ZSMB8fTqNi9tdS9B0ZH22UwoWEmslI/0uy/lvNHIc16WKCESSojgWatXB9eqS
- VCmX3DR1tmfW90v/4xQTFavzMfh8+CoXOROn75mIydTOC1opCL1ZFPyC+p0ia9FdgfDb48sk9wC82
- cD+M5XgMVUeeS134xRgxPpWIvKESMKEKFc1KatU8RqYOVrTQ3IcUgbyRK73ESWodGafdEnU0x2aFI
- YH5XxpOkIWBSNnWX6qdcrsBj+Doq4/wA2hAjhks4xPNbWjFrqiGiCYene5rIZQZslRa69FuhIDoNw
- OAUWcBzwJ3JW5LBehsjmoGwpzkd3PZaO3JnYWx68tpgkL5kF0ah/TXlcQUjIb6nCpw8fifhffdU3Y
- VqHgXpyvbN8BjABxQeyLeUL6;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1q2aAk-00CU5v-Sn; Fri, 26 May 2023 16:20:11 +0000
-Date: Fri, 26 May 2023 09:20:06 -0700
-To: ronnie sahlberg <ronniesahlberg@gmail.com>
-Subject: Re: Displaying streams as xattrs
-Message-ID: <ZHDcNrzmxYMxHzfs@jeremy-rocky-laptop>
+ (Exim) id 1q2iCU-00Ca3r-E5
+ for samba-technical@lists.samba.org; Sat, 27 May 2023 00:54:32 +0000
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2af2ef0d0daso12661231fa.2
+ for <samba-technical@lists.samba.org>; Fri, 26 May 2023 17:54:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1685148867; x=1687740867;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=PSrDAOuncnmgMKEhLTtv6pWxrit4qwtmGZ9syY10XvQ=;
+ b=RGbj/Yh5kx4pBS8VqyIkk2gKfFPHi8rzve7ZsTliXCoc91VFMPWqP2sITIBWgmT84I
+ l5EtexYBdHxRRsxsqmasPMq0G0e4UOoCmP2RsoHEea6HjROz9UBcfhXsifPgcq+sqYGf
+ oQejZ6kK3K6LT0Qz5kgFw2u7xbYdKcMLjq0JLAp0S1Qsq0RfH8GK9NmRKuEFlaQXpxtP
+ saA2CtnsIfWPbDzY5TR5zruzONcURZHpZml9qaXj5M9Njc7W8NokCfAvZ2X1Z1e/MqWh
+ C6+0SIFQp3MP4Q8gexJuUUezaBWnqrvlg8aIxBNkh5AJH0G4J7A1Ln7TIi1X1rXb0sDh
+ Yeig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1685148867; x=1687740867;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=PSrDAOuncnmgMKEhLTtv6pWxrit4qwtmGZ9syY10XvQ=;
+ b=Xg3sejQy4tRU0dc7EaA0d9JWZQA/SKVUQmus+A3X02h/Xe0Qn1wVQXYH7MVSHmRRIi
+ KvvXKv21oZM25++FDNF1aWbWKS6DxWFlW8nbSyy2HUylg0zIuhNapRy4OYiQ5pD39aXj
+ VPwDYC/4OXfoFXZ3ZI4K8LQkidoR/ZJEKqFEGf1kgokC7lWf8OrO9+svTb9uqVRHDAkp
+ gWzrKvsVYwMxAP/WONmIwUDVEt8r/pJCoysHonzwAVbx1IiZaB8PjZ5yeM7hQ9uThPPt
+ IWkBMYI9Pg0NOOQm9T9plZZ+N4MLdl1iJDAb6W67rxcbqUDAWxaLw9iPyIMu4shBotHf
+ oTBA==
+X-Gm-Message-State: AC+VfDyrsyAGuEES3XiL7BGQcLZ5kjW4JDMCAkF1RgcXvxqhhUmSnG4V
+ rLxbaywXaNYgxkSt7M8iNoMYCpU9V3LOr/Ue+f8=
+X-Google-Smtp-Source: ACHHUZ5hhqgTa5QggV3GB4CzI94V1Nah4r5B6OnySgc3JpM5BHqXnbZ3RHmihsCKRE77U+YH3K1m3H4kathW063adyM=
+X-Received: by 2002:a2e:9f14:0:b0:2ad:509a:22b8 with SMTP id
+ u20-20020a2e9f14000000b002ad509a22b8mr1089718ljk.16.1685148866941; Fri, 26
+ May 2023 17:54:26 -0700 (PDT)
+MIME-Version: 1.0
 References: <CAN05THRKq9XPD11rBWXyTL_OGSh4pP6mQyufeW+xc+J3wvkMmw@mail.gmail.com>
  <CAH2r5mtJfSiQXBRUwv6zcR5rhG2Q-pCvjH+n+_SZmVQo1pMeVg@mail.gmail.com>
- <ZGuWhzP98U9Niog+@jeremy-rocky-laptop>
- <CAN05THRnHcZtTMLxUSCYQXULVHiOXVYDU9TRy9K+_wBQQ1CFAw@mail.gmail.com>
- <ZGzo+KVlSTNk/B0r@jeremy-rocky-laptop>
- <CAN05THQyraiyQ9tV=iAbDiirWzPxqPq9rY4WsrnqavguJCEjgg@mail.gmail.com>
- <ZG0/YyAqqf0NqUuO@jeremy-rocky-laptop>
- <CAN05THSWHq-3bJ5+tzZ==j9uGFGfbALw0FoLVa9UyucaZ92bGQ@mail.gmail.com>
- <ZG+JqEwIdPHmHhVa@jeremy-rocky-laptop>
- <CAN05THQVK7O75NY8mts7J=n7V4PErWCNWkM8NfCNJTH7p=W2_w@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <CAN05THQVK7O75NY8mts7J=n7V4PErWCNWkM8NfCNJTH7p=W2_w@mail.gmail.com>
+ <ZGuWhzP98U9Niog+@jeremy-rocky-laptop> <20230525093900.GA261009@sernet.de>
+ <CAN05THTi0BC_iwjXMiWn61fg3hRemi5Momwp3O0WGygyWLGomQ@mail.gmail.com>
+ <ZG+LOKTr8B+zjQsC@jeremy-rocky-laptop>
+ <CAH2r5mv7aZ8nm30oKyYpa-bd8-MqA13EcEmQWV4mOyrV-rj8Ug@mail.gmail.com>
+ <ZG/DajG6spMO6A7v@jeremy-rocky-laptop> <20230525221449.GA9932@sernet.de>
+ <CAH2r5mvGb_e-kjLoKpwF3Eg7f7oOGGKcM7rL95SkU4q=pSE1AQ@mail.gmail.com>
+ <20230526160320.GA13176@sernet.de>
+In-Reply-To: <20230526160320.GA13176@sernet.de>
+Date: Fri, 26 May 2023 14:54:14 -1000
+Message-ID: <CAH2r5muD89QUcaqWNQy5NUwyji9CinN_5kGcfFSQAbpJP5gn+A@mail.gmail.com>
+Subject: Re: Displaying streams as xattrs
+To: Steve French <smfrench@gmail.com>, Jeremy Allison <jra@samba.org>, 
+ ronnie sahlberg <ronniesahlberg@gmail.com>, Christoph Hellwig <hch@lst.de>,
+ CIFS <linux-cifs@vger.kernel.org>, 
+ samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,86 +84,40 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: Steve French <smfrench@gmail.com>,
- samba-technical <samba-technical@lists.samba.org>,
- CIFS <linux-cifs@vger.kernel.org>
+From: Steve French via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Steve French <smfrench@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, May 26, 2023 at 12:39:34PM +1000, ronnie sahlberg wrote:
->On Fri, 26 May 2023 at 02:15, Jeremy Allison <jra@samba.org> wrote:
->>
->> On Thu, May 25, 2023 at 08:57:18PM +1000, ronnie sahlberg via samba-technical wrote:
->> >On Wed, 24 May 2023 at 08:34, Jeremy Allison <jra@samba.org> wrote:
->> >>
->> >> ADS - "Just Say No !"
->> >
->> >I think that is a flawed argument.
->> >It only really means that the virus scanners are broken. So we tell
->> >the virus scanner folks to fix their software.
->> >Viruses hide inside all sort of files and metadata.
->> >There are viruses that hide inside JPEG files too and some of them
->> >even gain privilege escalations through carefully corrupted JPEG
->> >files.
->> >We fix the bugs in the parser, we don't "drop support for JPEG files".
->>
->> What is the use-case for ADS on Linux ? And don't say "Windows
->> compatibility" - stories about your mother's advice about
->> jumping off a cliff have meaning here :-).
->>
->> Give me an actual *need* for ADS on Linux that can't
->> be satified any other way before you start plumbing
->> this horror into the internal VFS code.
+On Fri, May 26, 2023, 06:03 Bj=C3=B6rn JACKE <bj@sernet.de> wrote:
+
+> On 2023-05-25 at 18:50 -0500 Steve French via samba-technical sent off:
+> > Today the "RichACLs" can be displayed multiple ways (e.g. "getcifsacl"
+> > and various other
+> > tools and also via system xattrs).
+> > Being able to display "RichACLs" makes sense - and I am fine with
+> > mapping these (and
+> > probably would make sense to at least have a readonly mapping of the
+> > existing richacls on
+> > a file to "posixacl") and RichACLs are very important.
+> >
+> > Wouldn't it be easier to let them also be queried for cifs.ko via
+> > "system.getrichacl" (or whatever
+> > the "getrichacl" tool used in various xfstests uses)?
+> >
+> > I was also wondering how we should display (and how to retrieve via
+> > SMB3) "claims based ACLs" (presumably these are reasonably common on a
+> > few server types like Windows)?
 >
->I think it is too late to stop alternate data streams from entering
->the kernel. They, or their equivalents, are already part of the
->kernel.
-
-Where ? Yes, they're in NTFS/SMB1-2-3/HFS because they have to be
-for compatibility with other systems.
-
-I don't see any Linux native filesystem that has these
-things.
-
-Please do not add them.
-
->This discussion is more about how to unify these things and provide an
->abstracted api that is common across all filesystems than each
->filesystem having a unique way to access them.
->Filesystems that have protocol support for this is NTFS (ADS), CIFS
->(ADS), NFS4 (named attributes) and HFS (forks). there could be more, I
->have not checked.
->These four are probably the four most common filesystems in use today
->(ignoring FAT) across all platforms so support for this type of
->feature is pretty much uniquous.
+> let's stop calling them RichACLs becuase that was only the name that
+> Andreas
+> Gr=C3=BCnbacher was giving his implementation of the NFS4 ACLs
 >
->I think what we want to do is to have a discussion across maintainers
->of all these filesystems and see if there is desire to work out a
->common API and featureset and how that API would look.
->How that API would work and what it would look like is a question
->worthy to discuss.
 
-As is the question of whether this should be done at all.
+Remember that at Connectathon conferences years ago when nfs4.1 ACLS were
+explained  (fixing NFS 4 ACLS to address some missed things). The NFS ACL
+ideas were modelled after smb ACLs so NFS ACLs have many similarities to
+their predecessor SMB ACLs (although presumably do not support claims based
+ACEs/CBAC/DAC yet)
 
->Solaris surfaced this feature via openat() but that is just one of
->many possible implementations. A separate userspace library that
->provides universal access to these streams using something else would
->work just as well. The discussion should be on how probe interest and
->work together to create a unified abstraction common across all
->filesystems. Then later work on what exactly the kernel API to access
->this would look like.
 >
->For use cases? Something as trivial as storing an icon for use by
->graphical file managers would be a huge quality of life improvement.
->Even better if it would be compatible with how windows explorer stores
->those same icons.
-
-GNOME works perfectly well without alternate data streams.
-
-I don't see adding them would be a quality of life improvement,
-and an extra morass of complexity for developers.
-
-ADS is the motherlode of bad ideas for filesystems.
-
