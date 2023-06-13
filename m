@@ -2,46 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC0EA72C3DC
-	for <lists+samba-technical@lfdr.de>; Mon, 12 Jun 2023 14:19:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F67772D75A
+	for <lists+samba-technical@lfdr.de>; Tue, 13 Jun 2023 04:25:04 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=pr4Ct4nizXVLNuP9lV4fPNNu/7yYCdWL+y1OdNChHOo=; b=rSC+QYctqyB+66YhiflYWb56So
-	NsVYoq/K4x8+YwIjIxgJhU20D1BR+OE1rCPqdMuRARs54k9V+Sd0UAW4pRlzgeI7VFSCK4GDwnsrL
-	gKbYs2dPDBn0mVSoZTqZk6f9VeF9r1Ls8Mnv9/RpyEJuKTk+VoWLWFlI3duVHz2/psYFB7jeJJv4g
-	9WEUIhpNV0hArnEQTcqWwF13g/q252kyJEOvFzSHvAaKnNegDItMzXVPBqQdPyzB1of7+aBI7G7OX
-	mA0FQAnfyTLwdpv79rJuZFWv4JABPDYBOn4Zp5+/9S2F0iy9Fc81Qg2awvtfBJ8x20w06ps0/ONti
-	JrXw5BvA==;
-Received: from ip6-localhost ([::1]:28080 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=A6j1TYw4MRECG36S+arbdcA7Y2i1mlDdB+PkiHOiKyQ=; b=ZuNFAXfy+1PHyLU+hyz+A0Phui
+	MDhhWCk6nu1gpVR/qKTROpi7rfppNSJLR2DVMC/K62B+N0fsk9YX7bI7mzg+elLOV+mP6hNUaTsgy
+	GIXG+frkEOuHuL++P7SM5Q4f05iBNLzeZjqRUVhUHO3jOzvHT5TsYXsSmJ+zSkLRc3ZeH0gspwqbR
+	6K4g365NQgwxo9EEFl4e2mZkzosHFBEJM5c4A8+3EdPoO85WN27w87pYYYfGcO+ussFkdm0oENMcE
+	KBg5qB3Ps46Yjkfg6H2aRL6f3tdPYXN7uPQ2ZF+dchMXgBfxw6jqT3SCqhcVELyA86FzzZCJt0d12
+	qhIKZyeQ==;
+Received: from ip6-localhost ([::1]:29756 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1q8gW2-001QuM-05; Mon, 12 Jun 2023 12:19:22 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:59004) 
+	id 1q8thn-001kxb-No; Tue, 13 Jun 2023 02:24:23 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:45342) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1q8gVw-001QuD-Hr
- for samba-technical@lists.samba.org; Mon, 12 Jun 2023 12:19:19 +0000
+ (Exim) id 1q8thh-001kxS-Eo
+ for samba-technical@lists.samba.org; Tue, 13 Jun 2023 02:24:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=pr4Ct4nizXVLNuP9lV4fPNNu/7yYCdWL+y1OdNChHOo=; b=L/BaxF56ZXsIGiSMJFTh6I+dgA
- XWXxgSvXem/CW0Uryq6Y/TdXjVC/7vfNsEK2BNT+rrqLN+9bmxIUCa22DL8V044F8z3N3wRXHAZV0
- Xp5O+Nl2jA/z0xVEZqf0duPv9hpDgScFN5TasEDdWIvkmUuD5o6XpsVbZODBw4x2dCs/mjFNH+Grf
- O1k6QUSol5eOrqr98zf/AiuxeqCUYnjIFEnH1EbjufX7lEuBmLlYLtO6sh9il1DTYuOQiVE3AZx9I
- DqhfdHZcpE/EIdAx3uDpC6XXvISNdLyUJXkom9orkcYceQrsgqqQPnqDkxu0PKFc4lVJ/4PrY8TJa
- fYMX4l1zYv7v6nw4LPzmcwF1m4xYmL/NlJ/9x60X2By0noeQSwanCPbL+EbQ2ITGgrMmC9U4o0YZ5
- 9dVyLC1f+CrY6yLxF3b2vC+QF8CcAl950pEBEIyGkfxOF2DSPbsFMuU7ixFfeu65QGgj1jRljUfK3
- IrFYxSPEdbuOvKy6i89Ym0dc;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=A6j1TYw4MRECG36S+arbdcA7Y2i1mlDdB+PkiHOiKyQ=; b=oaMQ6IcnrvY5vyk8PB7RVEu4Yo
+ wBvVImUxM7x9vXIaUS2yVOGQcJRExRLjRoZqk3JpzsBxzhdMJv4VVmRO0HntsFAVeKTyYvMiIkEE0
+ glkwb0LS4YEw3R8A8z/4zniVnahxeJAWvkEeJraXrOX6CSMlBR275chfQ4WF7XJMvolS2u8LuGEzc
+ zgAKp6zzAJscJ8qCSG8z23ZcnpbapdndAzM2lyW1uhXd0vAACnAFqjHHCr2n5Cz5s6tWlZT5scKQN
+ yAz1eweMqreIOBckkX1P1l8eRRvdFIZZBevHIr0ajwkjQuWEHqF5YI0axgpV6qQxXsrTMp+nZGV6H
+ KIL5npV0QDKmkHlbOqqBEiwHTDqmOl7GOVSy5B22UsejiSPsr4nUwLz1+BcuYX4YNlV352XAsRtLB
+ D+nf4DXkbrR4jcsjSfOtzjY/nNdDib3CSq9SdP+bGHWO8aChKY40YKDi1fV9ysPmCFdb6omghay9z
+ hQ2AlscObBJGF8ucQvDSgbYn;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1q8gVt-001R7B-1V; Mon, 12 Jun 2023 12:19:13 +0000
-To: samba-technical@lists.samba.org
-Subject: Re: change rpcclient dfsgetinfo path syntax ?
-Date: Mon, 12 Jun 2023 14:19:12 +0200
-Message-ID: <4492335.LvFx2qVVIh@magrathea>
-In-Reply-To: <cc374358-3e49-eba0-2f69-6902f0fc156c@samba.org>
-References: <cc374358-3e49-eba0-2f69-6902f0fc156c@samba.org>
+ (Exim) id 1q8thf-001aY7-2c; Tue, 13 Jun 2023 02:24:16 +0000
+Message-ID: <5b000720e52fc5a0a06072a93376cd962ed8b293.camel@samba.org>
+Subject: Re: atomic ops in heimdal: -latomic
+To: Michael Tokarev <mjt@tls.msk.ru>, samba-technical
+ <samba-technical@lists.samba.org>
+Date: Tue, 13 Jun 2023 14:24:11 +1200
+In-Reply-To: <ee8d1fe9-f7e0-a629-715f-5e859af8fcbc@tls.msk.ru>
+References: <ee8d1fe9-f7e0-a629-715f-5e859af8fcbc@tls.msk.ru>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,57 +57,56 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Pavel =?ISO-8859-1?Q?Filipensk=FD?= <pfilipensky@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Friday, 9 June 2023 17:24:57 CEST Pavel Filipensk=FD via samba-technical=
-=20
+On Mon, 2023-06-12 at 13:06 +0300, Michael Tokarev via samba-technical
 wrote:
-> Hi,
->=20
-> with samba 4.17.5 following syntax was fine (consider that all
-> backslashes are escaped, so every backslash appears twice at the command
-> line)
->=20
-> $ rpcclient localhost -U% -c
-> 'dfsgetinfo**\\\\localhost\\samba-share\\pointA localhost pointA'
->=20
-> with samba 4.18.2 only this works:
->=20
-> $ rpcclient localhost -U% -c 'dfsgetinfo \\localhost\samba-share\pointA
-> localhost point'
->=20
-> Looking into /var/log/samba/log.rpcd_classic shows that:
-> - 4.17 is using parse_dfs_path() with trim_char(p, '/', '/')
-> - 4.18 is using parse_dfs_path_strict() that does not trim anything and
-> assumes single '\'
+> Hi!
+> 
+> Something changed - probably in Debian (where I build packages), and
+> some stuff
+> started failing, eg
+> 
+> https://buildd.debian.org/status/fetch.php?pkg=samba&arch=armel&ver=2%3A4.18.3%2Bdfsg-1&stamp=1686556171&raw=0
+> 
+> 
+> /usr/bin/ld: third_party/heimdal/lib/krb5/krcache.c.55.o: in function
+> `krcc_get_principal':
+> ./bin/default/../../third_party/heimdal/lib/krb5/krcache.c:1395:
+> undefined reference to `__atomic_load_8'
+> Apparently this now needs -latomic on the link line. I don't know yet
+> why it ended up like this,
+> but other projects which faced this same issue, just added -latomic
+> in similar cases.
 
-Looking at the commit message of 06750a96 Jeremy wrote:
+Any chance of building a configure test for waf to detect this? 
 
-  The paths sent in these calls are guaranteed to be of canonical form:=20
+How do we know if we need this?
 
-  \SERVER\share\pathname
+Once you have the test, it should just be a matter of adding a
+dependency on 'atomic' in the right spot, on platforms that don't find
+the library this will just be empty (eg ignored in the dep calcuation),
+you don't need to do string manipulation in the subsystem declarations.
 
-This means in rpcclient you need to check if the path start with \\ and rem=
-ove=20
-one before handing it down to that function.
-
-Obviously we need an rpcclient test for this ...
+Andrew Bartlett
 
 
-Best regards
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead                https://catalyst.net.nz/services/samba
+Catalyst.Net Ltd
 
+Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
+company
 
-	Andreas
+Samba Development and Support: https://catalyst.net.nz/services/samba
 
+Catalyst IT - Expert Open Source Solutions
 
-=2D-=20
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
 
 
 
