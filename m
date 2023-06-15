@@ -2,60 +2,62 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA0A9731F79
-	for <lists+samba-technical@lfdr.de>; Thu, 15 Jun 2023 19:47:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD3A673226B
+	for <lists+samba-technical@lfdr.de>; Fri, 16 Jun 2023 00:07:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=KBaAgu/PBxxc76ejCBdDwsyx4h5pSm/5Gjf6PxJ/AVI=; b=idvcEptdrI8dOpGAoBxDo1rcOM
-	3HqoZtVMqKsi73Ph2HZsY602ZyUo6IuTUVXtCzdptemMD5bN8sYY4niusqw9gtEuzw4kt4Dvh+O5w
-	tfFvHXfw0PdfMx3ZyqnRH/8/qcUJkaG/TPvPt0QVf1m7fq4yDpHlOYTaPIq6CuG5UmNRoBl7f1Jaw
-	PtWThW3kLfKRwTqiGarkXMuG8sCtG/i2mgT6eCQAXKJYYGFtkNYdAvBNPOugJrxcWy25j7mcSxxc4
-	49yog73vdiuuf0xubE/lrpfGYVlwcvXjQQDRz4fF2WwDVcD0Fq5Y43OuK1vb7Jj3dIyiZeUtB1+ZI
-	Z1o4wT2g==;
-Received: from ip6-localhost ([::1]:35026 helo=hr1.samba.org) 
+	bh=/m9j1qc2Qu/nyrQUEClnM+2tQutqZIoTfnJQDJSVVsM=; b=V0pxoFH8UiM3GebKqNs6INOkjw
+	ffoSaEe+TPwB26DXfu9oESykQIHvZV01soXH3SM2eRp1qqN8ad1q0ERGYydY5Ve5tCu6eV2xI0Ssq
+	xvT/Gkumsaippb304kki4ESdMMNopJJ9erdvt8yMrJa9Qda2O3iMLisEqD3ncgaK8UA8dbgaJKUmz
+	mneX2phYNgG0HgsSco0JsovYWtkl3wlSEVplGqJBHbrMD3CdEv/GCCaNlDkakVqCy7sR8h9U+oX4u
+	XGL3ZJiD/DtX/o81gtpEym2YAGCDWBE9X8crNybUwtuvBUByIfkcSEcSj+SoOdOM4URai5tZ0kwpo
+	CaBZsqzQ==;
+Received: from ip6-localhost ([::1]:31674 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1q9r3p-002d3G-DN; Thu, 15 Jun 2023 17:47:05 +0000
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:52488) 
+	id 1q9v71-002fZ6-R9; Thu, 15 Jun 2023 22:06:39 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz
+ ([2404:130:4080::4]:38528) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1q9r3h-002d37-7T
- for samba-technical@lists.samba.org; Thu, 15 Jun 2023 17:47:01 +0000
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-25e8b4181easo857753a91.1
- for <samba-technical@lists.samba.org>; Thu, 15 Jun 2023 10:46:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ixsystems.com; s=google; t=1686851214; x=1689443214;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=KBaAgu/PBxxc76ejCBdDwsyx4h5pSm/5Gjf6PxJ/AVI=;
- b=PuF6kE87cfebMSWn0Hnba9qo0vdACZ3P29GXCIhHmcJUVee5dx9lcd/1wuSWBSDAEu
- +9xWsjssXwill91nS4Mu+/iedVCqVGbeSbbeReHodYq7tN0C3tSyUaOp7cdhvCoTnqmx
- E4arOF5Fmd3RprsRVSO849xcftIaeJLQafvhkk+djWNNrs8dhuUmmNhppCPPg0uSme01
- xQXSUeFCvy85D3/ZLLX1te/ts66gno35YlhqAjWotzk0x8ijQW9YPxkFHo9hMhsQkSW1
- 6KWkGEuV8QeZdF5QL1I6mZPOgfQAFi0wLKCA7LdfB2SPKJEzFomJ5OMsFdSeStdfUh7o
- PwBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686851214; x=1689443214;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=KBaAgu/PBxxc76ejCBdDwsyx4h5pSm/5Gjf6PxJ/AVI=;
- b=fHsMZJsRTBErxAjrS2wIUIojMCaPJs9JiMM22pG59EH068LRpN4IC2XM0hrQ8SwJM5
- O4A6xvNED91XuPhJ3w6URi7mDhDJ8hIeFFKe+R1aHWKNlFgFc1NjOBRHn3/yq9jit3/g
- 6jX/KNljp1fDND3242eoEE3UHJxFwMcz1cGm3RKeV/NgMfFZL1f1q/KVkFBkhWKrJxwT
- HZTnVRS6vuG6wU+jwlWsiNdACjvviTsJJUQG0A3n4ETQalQfZyEpo4tn2kZE/1ISC01W
- L6masivuvVxmBdGTKiJ8er4pRZSUNJ9tVpqW0+ZrRz6Pmu9hyKnl+jQhPIwe2Rd8oQUX
- 4GRA==
-X-Gm-Message-State: AC+VfDw29F3wYYzmvn+sunmtP64+oPtc7I/cetjcpiHRgVx3ACeQq19q
- O7IGq1nHS+LAfu5prOPY/C8c0wxS+0khYOfkSMVAFaukadeHI5uFVWN9ZA==
-X-Google-Smtp-Source: ACHHUZ5LnOcIAy6H2K4sFivmOrPG1QjBMETLORZBz5jVnXq+f8pmImqGoqfqQrCRB7ebOHAyI6BxUq5OOtr6uJrFthE=
-X-Received: by 2002:a17:90a:4c81:b0:253:572f:79b2 with SMTP id
- k1-20020a17090a4c8100b00253572f79b2mr4098592pjh.36.1686851213699; Thu, 15 Jun
- 2023 10:46:53 -0700 (PDT)
+ (Exim) id 1q9v6u-002fYx-8T
+ for samba-technical@lists.samba.org; Thu, 15 Jun 2023 22:06:36 +0000
+Received: from [IPV6:2404:130:0:1000:2225:64ff:fe75:8a7f] (unknown
+ [IPv6:2404:130:0:1000:2225:64ff:fe75:8a7f])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 61272817DC; 
+ Fri, 16 Jun 2023 10:06:19 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1686866779;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/m9j1qc2Qu/nyrQUEClnM+2tQutqZIoTfnJQDJSVVsM=;
+ b=vkuR4mIm2sKPzqdE/R4ewW+9HtKciVmLrLQRA0QIdFmUVYKFam5WaSCYWrWecjIB6tL22p
+ 9JWQBfz4SkkrWqncraul3RrZQ1INaPYprS7dDWHTUsSGZ4mg1vott2CqC8rYzDhAtnAlE+
+ aUymmTg+jeSXs/udG36Mdz3KXxNdMWB4TeovZ5ZwtOhQTZN9jWBXquutr0yeGAWz56H8rW
+ BGhvYMTlnsG2W6+rQ0dQhe0Jih5otmWgeoNveSIOnmP8OIsQLDdBGdFI8HMQ1uKXxr2r8B
+ GduWYcQuV4Et1KyGEd1UeGAX5bI125mV0G4iP2LjiMGkERTQXpKCOx6s9f4D5A==
+Message-ID: <9d98b4c6-9838-9877-d657-b5cd0031fcd8@catalyst.net.nz>
+Date: Fri, 16 Jun 2023 10:06:17 +1200
 MIME-Version: 1.0
-Date: Thu, 15 Jun 2023 10:46:41 -0700
-Message-ID: <CAB5c7xoEyj7nFM-BdznG9Ysso61yv0fSJ573DZtfkM=0xJwx7Q@mail.gmail.com>
-Subject: winbindd recursion in 4.18 for local users
-To: samba-technical <samba-technical@lists.samba.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: New option for samba-tool dns zonecreate
+To: =?UTF-8?Q?Bj=c3=b6rn_Baumbach?= <bb@sernet.de>,
+ samba-technical@lists.samba.org
+References: <e6ec1cbf-a5a0-ab66-8aff-500d3a3ed444@sernet.de>
+Content-Language: en-US
+In-Reply-To: <e6ec1cbf-a5a0-ab66-8aff-500d3a3ed444@sernet.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-0.10 / 15.00]; MIME_GOOD(-0.10)[text/plain];
+ ARC_NA(0.00)[];
+ DCC_FAIL(0.00)[failed to scan and retransmits exceed];
+ MIME_TRACE(0.00)[0:+];
+ DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
+ MID_RHS_MATCH_FROM(0.00)[]
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,99 +71,35 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Walker <awalker@ixsystems.com>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hey all,
+hi Björn,
 
-When I create a username that contains an upper-case character (and
-insert into passdb.tdb), uncached lookups in winbind of name-to-sid
-for name that differs in case only basically enters into a recursive
-loop until winbind hits command timeout.
+I appreciate the thought you are putting into this, as UI decisions are 
+hard to change.
 
-username "Bob" + "Bob" -- hit, no loop
-username "Bob" + "bob" -- failure / command timeout
+> The DNS GUI in Windows 11 lets the user choose the "Active Directory 
+> Zone Replication Scope" with the options "To all DNS server running on 
+> domain controller in this forest" or "... domain".
+> 
+> In the code there are two flags DNS_DP_FOREST_DEFAULT and 
+> DNS_DP_DOMAIN_DEFAULT. So maybe something like 
+> --dns-direcory-partition=domain|forest?
 
-```
-  [python3 (46157)] Winbind external command LOOKUPNAME start.
-  [nss_winbind (45990)] Winbind external command GETPWNAM start.
-  [nss_winbind (46000)] Winbind external command GETPWNAM start.
-  [nss_winbind (46010)] Winbind external command GETPWNAM start.
-  [nss_winbind (46027)] Winbind external command GETPWNAM start.
-  [nss_winbind (46039)] Winbind external command GETPWNAM start.
-  [nss_winbind (46070)] Winbind external command GETPWNAM start.
-  [nss_winbind (46079)] Winbind external command GETPWNAM start.
-  [nss_winbind (46135)] Winbind external command GETPWNAM start.
-```
+I think that is probably OK. Another option might be 
+--dns-replication-scope, which might describe the effect more. It all 
+depends on how AD administrators think, something which I have little 
+insight into.
 
-NOTE: above is using libwbclient via python, but the same happens with wbinfo.
+In any case, in https://gitlab.com/samba-team/samba/-/merge_requests/3129
+you have the --help text as 'DNS Directory Partition', which does not 
+add much information to --dns-directory-partition. Whichever formulation 
+is used, the help should use other words.
 
-Basically we go winbind_lookupname_send() -> wb_lookupname() ->
-winbind domain child -> forked rpc client (passdb) -> getpwnam
-(lower-case "bob") -> nss_winbind -> wb_lookupname-> <repeat>
+cheers,
+Douglas
 
-
-If I make the following relatively simple change to winbind the
-recursion is prevented:
-```
-
-root@scalebuilder:/CODE/scale-build/sources/truenas_samba# git diff HEAD
-diff --git a/source3/winbindd/wb_lookupname.c b/source3/winbindd/wb_lookupname.c
-index 12dbfbef2d..bb39f01a08 100644
---- a/source3/winbindd/wb_lookupname.c
-+++ b/source3/winbindd/wb_lookupname.c
-@@ -20,6 +20,8 @@
- #include "includes.h"
- #include "winbindd.h"
- #include "librpc/gen_ndr/ndr_winbind_c.h"
-+#include "passdb/lookup_sid.h" /* only for LOOKUP flags */
-+#include "passdb/machine_sid.h"
- #include "../libcli/security/security.h"
-
- struct wb_lookupname_state {
-@@ -74,6 +76,20 @@ struct tevent_req *wb_lookupname_send(TALLOC_CTX *mem_ctx,
-                return tevent_req_post(req, ev);
-        }
-
-+       if (flags == (LOOKUP_NAME_NO_NSS | LOOKUP_NAME_REMOTE)) {
-+               if (dom_sid_compare_domain(&domain->sid,
-+                   get_global_sam_sid()) == 0) {
-+                       D_NOTICE("Domain [%s] is our local domain, "
-+                                "avoid recursive lookup\n",
-+                                dom_name);
-+
-+                       tevent_req_nterror(req, NT_STATUS_NONE_MAPPED);
-+                       return tevent_req_post(req, ev);
-+               }
-+
-+               flags &= ~LOOKUP_NAME_REMOTE;
-+       }
-+
-        subreq = dcerpc_wbint_LookupName_send(
-                state, ev, dom_child_handle(domain),
-                state->dom_name, state->name,
-diff --git a/source3/winbindd/winbindd_getpwnam.c
-b/source3/winbindd/winbindd_getpwnam.c
-index da162a4b77..f26afb505e 100644
---- a/source3/winbindd/winbindd_getpwnam.c
-+++ b/source3/winbindd/winbindd_getpwnam.c
-@@ -87,7 +87,7 @@ struct tevent_req *winbindd_getpwnam_send(TALLOC_CTX *mem_ctx,
-                                    state->namespace,
-                                    state->domname,
-                                    state->username,
--                                   LOOKUP_NAME_NO_NSS);
-+                                   LOOKUP_NAME_NO_NSS | LOOKUP_NAME_REMOTE);
-        if (tevent_req_nomem(subreq, req)) {
-                return tevent_req_post(req, ev);
-        }
-```
-
-The reasoning behind this is that nss_winbind probably shouldn't
-bother with trying to return getpwnam results for our local machine
-SID. Failure for other NSS modules to provide passwd entry should be
-authoritative, and it's better to bail on the request quickly.
-
-Andrew
 
