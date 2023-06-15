@@ -2,47 +2,113 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 896D272F003
-	for <lists+samba-technical@lfdr.de>; Wed, 14 Jun 2023 01:35:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E9B07319A6
+	for <lists+samba-technical@lfdr.de>; Thu, 15 Jun 2023 15:13:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=fXvfTZg6b7z+gzNDpU83sunvHkwgM2ODmMeyATC7lzA=; b=j3W5oVfuRFQJquhmh+0UzOUgOc
-	bALOjWGEfRjvGacBVnqQ15KLo+AO45ljs9s6l2z8m9mBgKUzQSKQrzK86w15Fveo+zA/tJlg0vHlh
-	dbSzcpCpgfLs8bhVmkV9XM7dynRyd0TtLYmZcLuMN48SKTrAK2t5v14HUSutxQu9ErUjcexHVPs99
-	o1PpMzTntEZfQjN8jOZmP1eqJSIem/Wq+/w3zc5PIxP6RmB2+/cS3N6DaTt8DEE8FprxdCiOJ5rE1
-	ZgCO0YfTHA5u6BRmbEKQxbGgsOrXhq6uE0a68RRfqDlRRJT9kQMW35uyER4WvKvyzi1a2CK1ZycaV
-	vhGvLkRg==;
-Received: from ip6-localhost ([::1]:35570 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=DR1L78tyU6KV2+zsnGbsDjNVQGgjubUtfoelPFPd7jk=; b=XdNY4K2K1UeUkgE3wOmYR1yWLa
+	ZRri0SYGKIYFpDiZ2eMQywPLoLasDSrEziu1z0UzNasd2Fa/hSspl7XCBbtWIOt3WcAPULaipmsik
+	rov/3eRy2kS4IlN7EPziLIBsGJpi8GBnYpfO5z+wwzs3cK8S5Z2aLFhIclKvFnOeYS49rtqmKo7ie
+	Gyyam8Gilq29W2jmfXY6Tg85LKq73vn1g+LwbUjr37SIbDH0vz/1X9apiBNE2+rNgYOyf7NSVQggM
+	3m5VHDR+9upzXHwY4KT5F3o1pfZ+Rmyl3OIX64lodgkCCQ9VLK8nC4aI3gn+mEIljCofvqPpkDuJ8
+	Ck0Ygmgw==;
+Received: from ip6-localhost ([::1]:28622 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1q9DXB-0029qw-OK; Tue, 13 Jun 2023 23:34:45 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33282) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1q9DX7-0029qn-0N
- for samba-technical@lists.samba.org; Tue, 13 Jun 2023 23:34:43 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=fXvfTZg6b7z+gzNDpU83sunvHkwgM2ODmMeyATC7lzA=; b=D3i56uhl8wI8HSeeawvOnPRmlg
- A9ilPacra+L1kbwooMXM4RR+Pwv0HUjjihJzgnNxVufd7VCzjN8bvEEsgCVQCr00XVq5qZ86suM8m
- akTV2cm4Walq9GoXDxDRJgS2SREyDFixD3Jf9HUREJISDM29YA9rN4xx9dy3+sTrJ/xVqOTl/PAiK
- lJVJVO6rXH0b064GvreK4Oc+2Ol3ueVJ7vo+nKynMkLiGfBqUdZhFiRJ8ykhKBF1R9oqbFv2+NTeF
- gEybUaxSH0RrzFyXvlksdIpnTOZUvysER/7Lb/aizWVpCaMCd3aS7utwCfMp7CoWbImCz8qcDsmAq
- KlIBqEM6glXpZ+cN1eeL5K5B4Oy+8ISB2lzBl5uDdqTSj43Xpjm6QFs4VWQfHYahSCpDjNCBLpNdF
- qK3qWtAXZaLkuEmWrMNp5UNDKuYBwVHjzCkkB9bKiHQFfI+3gByIgcQKSoDrcqEaKKFEX8VQ0By9Q
- L3jFDanvisSxBJssAavwV8Rz;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1q9DX5-001ngJ-1N; Tue, 13 Jun 2023 23:34:39 +0000
-Date: Tue, 13 Jun 2023 16:34:35 -0700
-To: Steve French <smfrench@gmail.com>
-Subject: Re: Samba returning mtime for multiple time stamp fields
-Message-ID: <ZIj9CwDYeT0GKb0J@jeremy-rocky-laptop>
-References: <CAH2r5muZavtKBU__Qy2s+XRG11u1HXyjC3oXF2yxY5h1b2jh1g@mail.gmail.com>
- <CAH2r5muVt+x26kMQ+OsB4WOVZ4bqeTLtG0GAVSXksSuE6YDy=Q@mail.gmail.com>
+	id 1q9mmF-002W4c-Fs; Thu, 15 Jun 2023 13:12:39 +0000
+Received: from mail-bn7nam10on2062e.outbound.protection.outlook.com
+ ([2a01:111:f400:7e8a::62e]:40865
+ helo=NAM10-BN7-obe.outbound.protection.outlook.com) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1q9mm5-002W4S-Pa
+ for samba-technical@lists.samba.org; Thu, 15 Jun 2023 13:12:33 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=UruNbhjiOCgfpxavI+a9qWaGzKtYoQ6TacwzJZ8A7Ppp8xw58+xiy5HBBVunD1nbcUN44qqYwkd66yfKguhwYXSsXGf/domNz74+g7tuufUv5Soz2GKlfPnTc4n1Zj2IOsmICc3Qa2E2mpe/jRMsb7r4FkJOkrJCW2XG3FsBSqOGLdNwPdzi1In4Yu6Bz0v2O8tCndtvUg3qYlrm2dAMQ1YaIFUfe6NRq6K8n0v4T+JxRf55xBUm7m2wWVLEIw6DsNcIWIfLtd2QrdxVplrLO1pHp+drbxk6cV562gj6XJz/0KdI2PXqzbJMzkWn4pvFTtwgqOBNMV+2oGSzbu8yug==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DR1L78tyU6KV2+zsnGbsDjNVQGgjubUtfoelPFPd7jk=;
+ b=SaZbiltsOXqCbaeXgMpmBb/GUR91bzGMdfgcTBbW2hLP1Sl40wZYa2Y0JniQsMN0wHzoYH4qepLJ9FbsoIQ0W7geVtuNTJf/P/kbexHoARpe8I4A4oQBrry76QweNQEEIp386ZT1uy1kN2pYWgEU/+s9OPFVKBCJXxmBjuKDghjeNnITvkFVt/VmT8EskuiVfX4HyVXzts0q7Olt+YApF6fKhhymPHIzGcDACGsEZpPuk85mlurphYdlONDUon7tTVKIfz+QiGhMJhjUCs7H0UO5az7LN/eV9ROjeUGh9JDF3rZka20HKi4AAi1rVfZiPB5bnqFGh8ox4Y7+E398xw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=talpey.com; dmarc=pass action=none header.from=talpey.com;
+ dkim=pass header.d=talpey.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=talpey.com;
+Received: from SN6PR01MB4445.prod.exchangelabs.com (2603:10b6:805:e2::33) by
+ SJ0PR01MB7313.prod.exchangelabs.com (2603:10b6:a03:3f3::6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6455.46; Thu, 15 Jun 2023 13:12:15 +0000
+Received: from SN6PR01MB4445.prod.exchangelabs.com
+ ([fe80::17e9:7e30:6603:23bc]) by SN6PR01MB4445.prod.exchangelabs.com
+ ([fe80::17e9:7e30:6603:23bc%5]) with mapi id 15.20.6477.037; Thu, 15 Jun 2023
+ 13:12:14 +0000
+Message-ID: <a7fd0996-ceec-54d0-b87b-09cf07bfb7fe@talpey.com>
+Date: Thu, 15 Jun 2023 09:12:11 -0400
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [PATCH v2] smb: fix a possible data race in cifs_can_echo()
+To: Tuo Li <islituo@gmail.com>, sfrench@samba.org, pc@manguebit.com,
+ lsahlber@redhat.com, sprasad@microsoft.com
+References: <20230615063853.15500-1-islituo@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20230615063853.15500-1-islituo@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <CAH2r5muVt+x26kMQ+OsB4WOVZ4bqeTLtG0GAVSXksSuE6YDy=Q@mail.gmail.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN6PR01MB4445:EE_|SJ0PR01MB7313:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9f06a3f2-8c15-4593-4758-08db6da2224d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Message-Info: uBvqXVFdYDUNfwZWm8wPwmDe+jMF9YydSC5+7vCA8J9aEhCeIJazjHwMZLQ5j8IfTRdVvVg+BipHzRpt1/Vr/wDik/o24W4VdENr6Fj++Rpy8Wdc3P0YuIMahlNqTA0y3M8yHZgl8A27BRTRAMTx6Nswmup5pdoyg7UxrI2O+iF131iBuuRgOpizenQnic6WOZpWetm/8vm98v/XC7nLoVya9BpHn82648NkX+0wACU5DBeaWm4O7U9Qq4wttJtbbuCSD3KXaXcP5+ZoeIPsVjFjMElneR7eC94zWQ9wfpNLfCFMrnQXyYrJQpfw3W0iYbJvC1kgNtQEBEZlwmahCbXId692KIF7eRzuWbI2/1V68PBRmxQhb8gWEn+21LSs8bHw8MDxfrXNCc9jbYhOaG6U2RAcsUCVKpHx0mR0nUfZmt4Cb3KmIVWAn2tIXYQE9A1K3378gyVH2BEk08cSFFMqxUWjv9vwID9YJpBBOCOn+p8mCGDRLl/v0pGBXvy6hKJKjr4Dy/X6xFB0YBU0wQXMVMAFTB8BeJjHSrOZRYNDMfv9jtBdXXA18XvYrxm8QAqWC+EIuybrbHxuTMIjJ+jAvT3H1GosxksUM6V6A8WkiFhGaEvPBPvnitKb7veIxZGpyVgk8MNOyxv5NQss5Q==
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bXBNTEM5eG5BOU1PajE3Z0pRczgzMDdWVEh0TlhocWhRRkRYSCtPQVlsWkVR?=
+ =?utf-8?B?b3BoMWgyamVQSThYcVNObEZwRGdRYUR3cUpFVjBzMkwvbFMxS3ZheG5FbWdB?=
+ =?utf-8?B?RFEyTzhqcGVDcFVvdEIxZUwwZEtEQnh0VEozTG9TWHYwWnpaYlpPWGtBR0Y3?=
+ =?utf-8?B?R3g2UmVjVGUvVmJLOTl0dHVCN2l4d1h3eWJnaVhKcldSaFJ6cmpEY2MycEVV?=
+ =?utf-8?B?SGx0b1pXNnRkcGtkaWdSbTZjL1EzNythR1RqekxnODJINlIvQWJQVFU2NGlR?=
+ =?utf-8?B?UjMxWnUxVXpGUjRXS0hmWDJVLzFGalQ1bVF4aC8xTjJxTk1VcmVaZUZNOWZI?=
+ =?utf-8?B?K1UvazUyalE3L0RUUkxYa09FdlJkeWk5Q0hGa1lTUFhGTk1QRmhnN0dkM0t4?=
+ =?utf-8?B?K2c0dkFuUjM2NnlJRnlBbEpuUTFibE5rNTFuaS9JRTFad1k2cnFRNW1XUDlI?=
+ =?utf-8?B?dnduK0M0akhZekRqZm9kTGhKdEg0TlpKSi9BV3Y5eFhHZ0sxVHZYREtmcFIy?=
+ =?utf-8?B?QzVQd0ZlR0E2YkNjTExlc0dTQmFtY3dkaUd3b2xyNndwNnpubGw4VStoOUtD?=
+ =?utf-8?B?c2wxK0h6Tk5uTWsxMVJNblZBaElENkMyRXRqa1BQTS9WYk5QZldQUVpRZFZl?=
+ =?utf-8?B?V0tvcTlDVzJ2bndvdUVNV0VQUmxXd3BpN05PWHpSS1pwb3Rod1BFK3lQTW4v?=
+ =?utf-8?B?U2ZjVVEwR1c5ZGdVSVlVMWVGRTNuSlc5bEVXTmJwd3gvRXZpYTUxczNCQ3BB?=
+ =?utf-8?B?K1hab0hNbGVMYldtcnBzVUpKKzR3L2NFMlFvNTNmbG96dDQwc1Z6QkNiWkJj?=
+ =?utf-8?B?T25ZQituSEhLSmZ3WC9CNjFObVlLdE50MDlzYU5EMXdKdjh5eUdNYy9ZajhR?=
+ =?utf-8?B?RE52emlrTFpQbHRPUWxPVUlWQ0ozVDdUbGViMG0vUCtQaVoyTEUwQStMSXUx?=
+ =?utf-8?B?QVFqTFJPd0Z5ZlMvRnJCS2tEUzFXVEt5eG5SV1ROLzIzYkxjL25ETU4zdlhB?=
+ =?utf-8?B?R2UxSTFXeGFsWC8yTlI4TWdaamkwQldhMGhUK09rTlZaRmZ3TlFJVDVUeFVC?=
+ =?utf-8?B?cGNwRW1Id054YktFT0lEcW5QczJLQ1ZRWCtIU242MmViSndQQTludUdwMVNM?=
+ =?utf-8?B?eGM3QUkrOTE5Q1dLekdjVkVVWTIxWm5mZmJrNmJBbnVGWGRTRXdXejBmcVhu?=
+ =?utf-8?B?ci9rZmpKRkFBSGw3c01YV3pIdm1OQW5leDFMeFI2TWxBYjgycEVFNWh1NlBi?=
+ =?utf-8?B?cy9iSmJFL2tLbFBNY3BrVDFTcmhPcm1nUlhlcW9CRWh5c2l0UUd1dlV5Nlgr?=
+ =?utf-8?B?d0ZnZ2NCZ1RCby9QcXNvSVFGbVdXbFNtM3lGaFJMU2Y1NHhCOEp1RUxjaUFV?=
+ =?utf-8?B?L2E2S1RDUmhRTEZERTdURUswYTNqM0hEamx6d0poeUdITHRKR2k0TlhJYmhy?=
+ =?utf-8?B?T1FkNTJ0QUh0UStqSUdOdXNDSEF2NnFPcFVtcHgyMWhCanBtLzhPRDd3VVoz?=
+ =?utf-8?B?ZEIxM0ZZR0V0TDg5V0RDRTlFZkxBOE5iK0FyVzlmcG1EdjNEQXRveEgrZHlY?=
+ =?utf-8?B?TkdWSzNUenZ6OFJLMkQrOVI4SlZSc1BpRlJmWEJmSy9RNGVJM1g4a255RnhG?=
+ =?utf-8?B?eDJwWXVNRTRoSDJraE4zU1hjaWxkeHArMVNiV2tlb3c5MXBlc1YwS1kza3Nj?=
+ =?utf-8?B?SFFOZ2Q2aFNkMUp2b0xLRUhtcXlvdUZDTTlyY1Y1bWFpS3JzbUMvY1FIQ1Q2?=
+ =?utf-8?B?VGR4akVrbG1WMFZIeXcvbmR1SmNTT3RxdXpYNmQ4WHdiNmxwdW04NHRCR2Q0?=
+ =?utf-8?B?K1MrOXpLRGhQb3E3d0JHRlM1bnhDYTJlYkJPY25VWHdoa2E5UW92QWFLQkk3?=
+ =?utf-8?B?WW4vam0xazIyUk56bmVwUVNTYS9nRG91d3ZQUExDbTVSZWlXWWVaOWZydUUv?=
+ =?utf-8?B?WmswVHlCNisrcy8zMmNCN2R4c21YSkt1RXdVZDBiQ0lpa2M2a3dIS0o5WTRV?=
+ =?utf-8?B?MFJmNko4MFNMRG5CS3FPR0M4bHhtQk5DRWZKdHBtL2xlMjM1S25iUjA2RkU1?=
+ =?utf-8?B?VmdjekhQeEJLM2RTWUROQVhYcjVSTjZnRDJQZVlhYjBZK1RqSlozWmZ6K0FY?=
+ =?utf-8?Q?8YXiJrpl1+Afe/X7qk0Ra73kX?=
+X-OriginatorOrg: talpey.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9f06a3f2-8c15-4593-4758-08db6da2224d
+X-MS-Exchange-CrossTenant-AuthSource: SN6PR01MB4445.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 2b2dcae7-2555-4add-bc80-48756da031d5
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Cksw2DEy+xE0qncVZsUFUkmWSRz2xDYNcJjdn2IPkSgpmPNNWUQP5K0mHYMOpV1r
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR01MB7313
+X-Warn: EHLO/HELO not verified: Remote host 2a01:111:f400:7e8a::62e
+ (mail-bn7nam10on2062e.outbound.protection.outlook.com) incorrectly presented
+ itself as NAM10-BN7-obe.outbound.protection.outlook.com
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,30 +122,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: CIFS <linux-cifs@vger.kernel.org>,
- samba-technical <samba-technical@lists.samba.org>
+From: Tom Talpey via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Tom Talpey <tom@talpey.com>
+Cc: linux-cifs@vger.kernel.org, baijiaju1990@outlook.com,
+ samba-technical@lists.samba.org, linux-kernel@vger.kernel.org,
+ BassCheck <bass@buaa.edu.cn>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Jun 13, 2023 at 06:17:35PM -0500, Steve French wrote:
->Samba seems to be the only server with this bug (I tried it with and
->without vfs_btrfs as well).  The test works to the other servers I
->tried including Windows.
->
->Windows server updates ctime on hardlinks, but Samba fails to update
->the timestamps in this case since it looks like it populates both
->ChangeTime (ctime) and LastWriteTime (mtime) based on mtime rather
->than setting:    ChangeTime = ctime (and LastWriteTime = mtime).
->Locally the mtime and ctime are correct on the Samba server, but
->remotely it reports it wrong.
+On 6/15/2023 2:38 AM, Tuo Li wrote:
+> The struct field TCP_Server_Info.tcpStatus is often protected by the lock
+> srv_lock when is accessed. Here is an example in __cifs_reconnect():
+> 
+>    spin_lock(&server->srv_lock);
+>    if (server->tcpStatus != CifsExiting)
+>      server->tcpStatus = CifsNeedNegotiate;
+>    spin_unlock(&server->srv_lock);
+> 
+> However, the variable server->tcpStatus is accessed without holding the
+> lock server->srv_lock in cifs_can_echo():
+> 
+>    if (server->tcpStatus == CifsGood)
+>      return true;
+> 
+> To fix this possible data race, a lock and unlock pair is added when
+> accessing the variable server->tcpStatus.
 
-Can you log a bug please and upload traces of the client
-talking to a Windows.latest server and a Samba.master
-built server.
+This is a NAK from me. The tcpStatus field is not being modified
+here, and the race is trivial because the lock you propose is
+dropped immediately either way.
 
-Thanks,
+Besides, this is SMB1, and the entirely unimportant ECHO procedure.
 
-Jeremy.
+Tom.
+
+
+> Reported-by: BassCheck <bass@buaa.edu.cn>
+> Signed-off-by: Tuo Li <islituo@gmail.com>
+> ---
+> v2:
+> * Release the lock server->srv_lock in the false branch.
+> ---
+>   fs/smb/client/smb1ops.c | 6 +++++-
+>   1 file changed, 5 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/smb/client/smb1ops.c b/fs/smb/client/smb1ops.c
+> index 7d1b3fc014d9..5120241d3c0e 100644
+> --- a/fs/smb/client/smb1ops.c
+> +++ b/fs/smb/client/smb1ops.c
+> @@ -1049,8 +1049,12 @@ cifs_dir_needs_close(struct cifsFileInfo *cfile)
+>   static bool
+>   cifs_can_echo(struct TCP_Server_Info *server)
+>   {
+> -	if (server->tcpStatus == CifsGood)
+> +	spin_lock(&server->srv_lock);
+> +	if (server->tcpStatus == CifsGood) {
+> +		spin_unlock(&server->srv_lock);
+>   		return true;
+> +	}
+> +	spin_unlock(&server->srv_lock);
+>   
+>   	return false;
+>   }
 
