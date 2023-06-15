@@ -2,63 +2,60 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40DE7731F58
-	for <lists+samba-technical@lfdr.de>; Thu, 15 Jun 2023 19:38:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA0A9731F79
+	for <lists+samba-technical@lfdr.de>; Thu, 15 Jun 2023 19:47:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
-	bh=K/mMFSBnEnl84gcL+ThXKigkhx377ekIVRKwEAtzz14=; b=RNefBol2rSjnYsb5TwGpaGVOCn
-	1kPlHWeSGbNXgVr9RDTdVNtTlqaUADzeOLmPKU5IKZa78Rj1x7UShpYbbvsAe9v/n2p6tJpetDWWp
-	lJ62LnbtDdQnsb4RkFbpyHWd+RO2ke07LxPvxu7HX8fXzV0Mhpyx21C6UhC3yONZdUw3gZqagEvah
-	C3mEnF/m216afGqT7kCgpZCMliVc/RrFbCzCP/In4hya3LjUKlmndDkZKLEr1a7Gj3zIFcPlwjniq
-	zAxX5mpLQ3x/ysuULWZ06iHLQgODQi8f3a4URw7S7o38y0/L9D4NmZnPxfU+mTZO0WVv4CNnhdcPo
-	C3PsYNdg==;
-Received: from ip6-localhost ([::1]:26712 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=KBaAgu/PBxxc76ejCBdDwsyx4h5pSm/5Gjf6PxJ/AVI=; b=idvcEptdrI8dOpGAoBxDo1rcOM
+	3HqoZtVMqKsi73Ph2HZsY602ZyUo6IuTUVXtCzdptemMD5bN8sYY4niusqw9gtEuzw4kt4Dvh+O5w
+	tfFvHXfw0PdfMx3ZyqnRH/8/qcUJkaG/TPvPt0QVf1m7fq4yDpHlOYTaPIq6CuG5UmNRoBl7f1Jaw
+	PtWThW3kLfKRwTqiGarkXMuG8sCtG/i2mgT6eCQAXKJYYGFtkNYdAvBNPOugJrxcWy25j7mcSxxc4
+	49yog73vdiuuf0xubE/lrpfGYVlwcvXjQQDRz4fF2WwDVcD0Fq5Y43OuK1vb7Jj3dIyiZeUtB1+ZI
+	Z1o4wT2g==;
+Received: from ip6-localhost ([::1]:35026 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1q9quK-002cko-7K; Thu, 15 Jun 2023 17:37:16 +0000
-Received: from mail.sernet.de ([2a0a:a3c0:0:25::217:2]:47689) 
+	id 1q9r3p-002d3G-DN; Thu, 15 Jun 2023 17:47:05 +0000
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:52488) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1q9quF-002ckf-1V
- for samba-technical@lists.samba.org; Thu, 15 Jun 2023 17:37:14 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sernet.de; 
- s=20210621-rsa;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:Subject:
- From:References:To:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID
- :Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:
- Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe
- :List-Post:List-Owner:List-Archive;
- bh=K/mMFSBnEnl84gcL+ThXKigkhx377ekIVRKwEAtzz14=; b=gfeE3zkL/+cUtniSk+oenK38SS
- T2nXOvNf9gFSl2pMPs7Ahl2p/Vw1e1ztoAdHAdihbTa6D65C6WnhMcW9iJc/nhA+0KIh1ot4tAmzB
- t0UPId8EGXYz3iygDGARlLkMC362DblDsp1Kz5oNmVbzhkA87gsk1eQsRdm1UfQjNKdAwcVQrE9JE
- tlDRRkILKsqONtGV1FyL7Rt4ZLW8tvvVPrKhf3pqc3/zmrzTzHbkgx2ceyv+k7jnROBY0H3n2nkMQ
- FO5XYZzp8pV92hStb9+TFNCX+mruXwYGMQw5zU1MP0DSpvkLTTzmRYg6tnFEeQoxHNW6Z0iZyniqX
- CDOQJnBg==;
-DKIM-Signature: v=1; a=ed25519-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sernet.de; s=20210621-ed25519; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:Subject:From:References:To:MIME-Version:Date:Message-ID:Sender:
- Reply-To:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=K/mMFSBnEnl84gcL+ThXKigkhx377ekIVRKwEAtzz14=; b=77h6dHsp7V6K5fRNTjM32F2Anu
- lo5rE52Z2DlP/B+jdxG0tU4LgfIzM+EK+feAPpcpb8VYDD7cHh1uDW8X1jBg==;
-Received: from intern.sernet.de by mail.sernet.de
- with esmtps (Exim Mail Transfer Agent)
- for samba-technical@lists.samba.org
- id 1q9quD-00D7TB-7N; Thu, 15 Jun 2023 19:37:09 +0200
-Received: by intern.sernet.de
- id 1q9quB-002MMW-K0; Thu, 15 Jun 2023 19:37:08 +0200
-Message-ID: <64f9a373-a237-8a88-0508-9a04214bf4c5@sernet.de>
-Date: Thu, 15 Jun 2023 19:37:08 +0200
+ (Exim) id 1q9r3h-002d37-7T
+ for samba-technical@lists.samba.org; Thu, 15 Jun 2023 17:47:01 +0000
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-25e8b4181easo857753a91.1
+ for <samba-technical@lists.samba.org>; Thu, 15 Jun 2023 10:46:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ixsystems.com; s=google; t=1686851214; x=1689443214;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=KBaAgu/PBxxc76ejCBdDwsyx4h5pSm/5Gjf6PxJ/AVI=;
+ b=PuF6kE87cfebMSWn0Hnba9qo0vdACZ3P29GXCIhHmcJUVee5dx9lcd/1wuSWBSDAEu
+ +9xWsjssXwill91nS4Mu+/iedVCqVGbeSbbeReHodYq7tN0C3tSyUaOp7cdhvCoTnqmx
+ E4arOF5Fmd3RprsRVSO849xcftIaeJLQafvhkk+djWNNrs8dhuUmmNhppCPPg0uSme01
+ xQXSUeFCvy85D3/ZLLX1te/ts66gno35YlhqAjWotzk0x8ijQW9YPxkFHo9hMhsQkSW1
+ 6KWkGEuV8QeZdF5QL1I6mZPOgfQAFi0wLKCA7LdfB2SPKJEzFomJ5OMsFdSeStdfUh7o
+ PwBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1686851214; x=1689443214;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=KBaAgu/PBxxc76ejCBdDwsyx4h5pSm/5Gjf6PxJ/AVI=;
+ b=fHsMZJsRTBErxAjrS2wIUIojMCaPJs9JiMM22pG59EH068LRpN4IC2XM0hrQ8SwJM5
+ O4A6xvNED91XuPhJ3w6URi7mDhDJ8hIeFFKe+R1aHWKNlFgFc1NjOBRHn3/yq9jit3/g
+ 6jX/KNljp1fDND3242eoEE3UHJxFwMcz1cGm3RKeV/NgMfFZL1f1q/KVkFBkhWKrJxwT
+ HZTnVRS6vuG6wU+jwlWsiNdACjvviTsJJUQG0A3n4ETQalQfZyEpo4tn2kZE/1ISC01W
+ L6masivuvVxmBdGTKiJ8er4pRZSUNJ9tVpqW0+ZrRz6Pmu9hyKnl+jQhPIwe2Rd8oQUX
+ 4GRA==
+X-Gm-Message-State: AC+VfDw29F3wYYzmvn+sunmtP64+oPtc7I/cetjcpiHRgVx3ACeQq19q
+ O7IGq1nHS+LAfu5prOPY/C8c0wxS+0khYOfkSMVAFaukadeHI5uFVWN9ZA==
+X-Google-Smtp-Source: ACHHUZ5LnOcIAy6H2K4sFivmOrPG1QjBMETLORZBz5jVnXq+f8pmImqGoqfqQrCRB7ebOHAyI6BxUq5OOtr6uJrFthE=
+X-Received: by 2002:a17:90a:4c81:b0:253:572f:79b2 with SMTP id
+ k1-20020a17090a4c8100b00253572f79b2mr4098592pjh.36.1686851213699; Thu, 15 Jun
+ 2023 10:46:53 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: de-DE, en-US
-To: samba-technical@lists.samba.org
-References: <e6ec1cbf-a5a0-ab66-8aff-500d3a3ed444@sernet.de>
-Organization: SerNet GmbH
-Subject: Re: New option for samba-tool dns zonecreate
-In-Reply-To: <e6ec1cbf-a5a0-ab66-8aff-500d3a3ed444@sernet.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Date: Thu, 15 Jun 2023 10:46:41 -0700
+Message-ID: <CAB5c7xoEyj7nFM-BdznG9Ysso61yv0fSJ573DZtfkM=0xJwx7Q@mail.gmail.com>
+Subject: winbindd recursion in 4.18 for local users
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,31 +69,99 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: =?utf-8?q?Bj=C3=B6rn_Baumbach_via_samba-technical?=
- <samba-technical@lists.samba.org>
-Reply-To: =?UTF-8?Q?Bj=c3=b6rn_Baumbach?= <bb@sernet.de>
+From: Andrew Walker via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Walker <awalker@ixsystems.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 6/15/23 16:38, Björn Baumbach via samba-technical wrote:
-> I'm planning to add an additional parameter to the samba-tool zonecreate 
-> command. Currently there is no option to create new zones in the forest 
-> dns directory partition via samba-tool.
+Hey all,
 
-I've created a merge request (marked as draft) with the 
---dns-direcory-partition=domain|forest option:
-https://gitlab.com/samba-team/samba/-/merge_requests/3129
+When I create a username that contains an upper-case character (and
+insert into passdb.tdb), uncached lookups in winbind of name-to-sid
+for name that differs in case only basically enters into a recursive
+loop until winbind hits command timeout.
 
-Please let me know if you have a better name for the new option.
+username "Bob" + "Bob" -- hit, no loop
+username "Bob" + "bob" -- failure / command timeout
 
-Best regards,
-Björn
+```
+  [python3 (46157)] Winbind external command LOOKUPNAME start.
+  [nss_winbind (45990)] Winbind external command GETPWNAM start.
+  [nss_winbind (46000)] Winbind external command GETPWNAM start.
+  [nss_winbind (46010)] Winbind external command GETPWNAM start.
+  [nss_winbind (46027)] Winbind external command GETPWNAM start.
+  [nss_winbind (46039)] Winbind external command GETPWNAM start.
+  [nss_winbind (46070)] Winbind external command GETPWNAM start.
+  [nss_winbind (46079)] Winbind external command GETPWNAM start.
+  [nss_winbind (46135)] Winbind external command GETPWNAM start.
+```
 
--- 
-SerNet GmbH - Bahnhofsallee 1b - 37081 Goettingen
-phone: +49.551.370000.0 - web: https://sernet.com
-http://www.sernet.com - mailto:contact@sernet.com
-AG Goettingen HRB2816, CEO: J.Loxen, CFO: R. Jung
-data privacy policy https://www.sernet.de/privacy
+NOTE: above is using libwbclient via python, but the same happens with wbinfo.
 
+Basically we go winbind_lookupname_send() -> wb_lookupname() ->
+winbind domain child -> forked rpc client (passdb) -> getpwnam
+(lower-case "bob") -> nss_winbind -> wb_lookupname-> <repeat>
+
+
+If I make the following relatively simple change to winbind the
+recursion is prevented:
+```
+
+root@scalebuilder:/CODE/scale-build/sources/truenas_samba# git diff HEAD
+diff --git a/source3/winbindd/wb_lookupname.c b/source3/winbindd/wb_lookupname.c
+index 12dbfbef2d..bb39f01a08 100644
+--- a/source3/winbindd/wb_lookupname.c
++++ b/source3/winbindd/wb_lookupname.c
+@@ -20,6 +20,8 @@
+ #include "includes.h"
+ #include "winbindd.h"
+ #include "librpc/gen_ndr/ndr_winbind_c.h"
++#include "passdb/lookup_sid.h" /* only for LOOKUP flags */
++#include "passdb/machine_sid.h"
+ #include "../libcli/security/security.h"
+
+ struct wb_lookupname_state {
+@@ -74,6 +76,20 @@ struct tevent_req *wb_lookupname_send(TALLOC_CTX *mem_ctx,
+                return tevent_req_post(req, ev);
+        }
+
++       if (flags == (LOOKUP_NAME_NO_NSS | LOOKUP_NAME_REMOTE)) {
++               if (dom_sid_compare_domain(&domain->sid,
++                   get_global_sam_sid()) == 0) {
++                       D_NOTICE("Domain [%s] is our local domain, "
++                                "avoid recursive lookup\n",
++                                dom_name);
++
++                       tevent_req_nterror(req, NT_STATUS_NONE_MAPPED);
++                       return tevent_req_post(req, ev);
++               }
++
++               flags &= ~LOOKUP_NAME_REMOTE;
++       }
++
+        subreq = dcerpc_wbint_LookupName_send(
+                state, ev, dom_child_handle(domain),
+                state->dom_name, state->name,
+diff --git a/source3/winbindd/winbindd_getpwnam.c
+b/source3/winbindd/winbindd_getpwnam.c
+index da162a4b77..f26afb505e 100644
+--- a/source3/winbindd/winbindd_getpwnam.c
++++ b/source3/winbindd/winbindd_getpwnam.c
+@@ -87,7 +87,7 @@ struct tevent_req *winbindd_getpwnam_send(TALLOC_CTX *mem_ctx,
+                                    state->namespace,
+                                    state->domname,
+                                    state->username,
+-                                   LOOKUP_NAME_NO_NSS);
++                                   LOOKUP_NAME_NO_NSS | LOOKUP_NAME_REMOTE);
+        if (tevent_req_nomem(subreq, req)) {
+                return tevent_req_post(req, ev);
+        }
+```
+
+The reasoning behind this is that nss_winbind probably shouldn't
+bother with trying to return getpwnam results for our local machine
+SID. Failure for other NSS modules to provide passwd entry should be
+authoritative, and it's better to bail on the request quickly.
+
+Andrew
 
