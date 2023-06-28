@@ -2,47 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D1D74740295
-	for <lists+samba-technical@lfdr.de>; Tue, 27 Jun 2023 19:48:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 46B3E740945
+	for <lists+samba-technical@lfdr.de>; Wed, 28 Jun 2023 07:34:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=WyXWxFIH1UoRYYS19wsiBX0/0B37P9alxoz0Y8Z5FmY=; b=qC6GlaA/VCEKkjUnCnxBhED+E/
-	geRhpwGLEhb8HJNLG7SEQUs48KYpyqqu+KypVfjHF98WrqzvO5Zi5ExzHCnSOVaChiJxi/dtKtYGR
-	pP4E8kVmhHQNg3MXdjE/Rffv7kbuwJulelQ7VrI26hAgBF3R8FsTEu1/JKtUbycPixuI7kkZI3sl2
-	ToNUspoQrhH+mCw8Oa/oNsn1KZQBukSKuObHcwloqw29PBkN54+VT1vu5mKICAYoCmCkEeW1Vdblo
-	8IotM62U5yLyMKWgeuth2rCpdRCWxzCsPoHTmm7jWreIKe/jLS+1RnXZRM6opBEe+x59IOVSB+mOZ
-	UY7v1EFg==;
-Received: from ip6-localhost ([::1]:54330 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=PUqbTYo7UL1zh1w69Rom/85ppbdMuGu9gppLrJkNyjY=; b=aYMhMJ/ToadT27lA3/gv1nL+vA
+	QVaXLCSJ72XGTotrBteIf0MtJlk7hDl0SlMeb05AuW8SduMMIBDQ2xgfc9pmtqw3GHIMgGzUpEH5+
+	PYoAXWBSVnwhH6iCgkgMC5PINZCv48JdQYs5D67+/zpFMxL5fVoIPkiKe8E4tB2UkkHXMZYvRMNV/
+	wHt/UOU9ikERLdYkG+qJMw9vSdueGfrSraj67qz7tORfbJ7+okGg4ZYv9jlygQqp+pU/c2RA5x1ei
+	3dpNtxLPt0RVEQ+oR59JlfJ58pXAaKt7N9GGl7fci0YNwkVAX5bd/lTIqcEKAXXcUJoPrVcHuqrGV
+	o48gLVSQ==;
+Received: from ip6-localhost ([::1]:64484 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qECnK-004oPU-Th; Tue, 27 Jun 2023 17:48:03 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:36742) 
+	id 1qENo0-004vIO-4C; Wed, 28 Jun 2023 05:33:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:52790) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qECnE-004oPK-UR
- for samba-technical@lists.samba.org; Tue, 27 Jun 2023 17:48:00 +0000
+ (Exim) id 1qENnt-004vIF-P0
+ for samba-technical@lists.samba.org; Wed, 28 Jun 2023 05:33:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=WyXWxFIH1UoRYYS19wsiBX0/0B37P9alxoz0Y8Z5FmY=; b=d03Piy/Fnu/f1RE8Sgl2LskU02
- wxVMUhH5r6HblSITXiZFgv1stpomrHNS7TY6Eq36tedj+ZjWL/Ptt1HNUPp5BMxnaAay62IV/Sodv
- 7GMwhsrJvt2fT5Jor18j0Yl26rhjX3wdvkM5bUoTQGDDeGJPz4krjYb5YQ7FQsAUHqXOHal09gXXZ
- SDjfcewT9tpNVtZ2Z0BCVInh9Kg1sE42tV7ZFNIR/vO5yR5+rzmJnRqDCf97hRv0UNERc6v4ozt3l
- 9hjwpwNACpbjdLNv84Qzp8v1/2zImo6yNiC9z87YQ0Eu+T5//HAk6qKDtKKyIgpLXUjVmTR/Bl92o
- x4/zM2Qs35j+RXq7icrwVrvGCJJNbTjLePkflG5zRN9JfRaLBom7zX9F3WGHJ42ZbrGiIR5Hsbixh
- zVj7qEYytqYqKMyY+G3RVnAeCjmV+Cw+E5tL3zCNgYzB/YemaChslOX18ygX2ryquS9YukteHTpbO
- k0bzS9Cjh288mpnXrqoP6xrj;
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=PUqbTYo7UL1zh1w69Rom/85ppbdMuGu9gppLrJkNyjY=; b=LMii7O78iSgzcxpX3ejjiTolae
+ fVAoB5ToRSWyWJblNePYhPWY2KLkEI8DsP3J0kV7mZko1pnfcOaS0uOvEBLWwRA997oNRzXIRTr/o
+ sx0AeowTGDFBA9a2gmEVYE2rDhpskxOm1s2njOFNdT7P8eHGUAHtmmM49/CunblrARlrgTzipNCPF
+ PKwYz12Oc19wekQXbqNtTVkI+uxIjtbXhoAymrVo9rr29giVgFS7HVXfUwkv46CdSrs3QM5olS42+
+ 4djdsQmVse/noEdg3dTAnW7sX7DSSW0NCmcuYJj3NYrP4RgYQIyZBwUM3DMUG4EB6rqIytxfS55rq
+ MDymMKnHHYJpFGEMrk5WY08PEPpyqGk3zm/0S2oJ8mIsRFCFkCa+R9LG8nP6Y6HeWrkIAgFcgsRpS
+ 06oHbtdBpx2b2tSg8npn9ofCmMBaAy/+Vu8oHR30HyEya5llqC12YDqcYTBayXFAbhm26MzojZCBk
+ Lt6p6nZiwgv64nOgit6upFPh;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qECnD-004nb5-1j; Tue, 27 Jun 2023 17:47:55 +0000
-Date: Tue, 27 Jun 2023 10:47:51 -0700
-To: Ferenc =?iso-8859-1?Q?W=E1gner?= <wferi@niif.hu>
-Subject: Re: Is this a real memory leak?
-Message-ID: <ZJsgx2j0foTkcE6m@jeremy-rocky-laptop>
-References: <87v8f9gpbo.fsf@fin.soreny>
+ (Exim) id 1qENnr-004t1Q-1N; Wed, 28 Jun 2023 05:33:20 +0000
+Message-ID: <21696bbbc739934d20fd4198682fd44b63b17d46.camel@samba.org>
+Subject: Replication USN semantics around Azure AD Connect
+To: Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Date: Wed, 28 Jun 2023 17:33:15 +1200
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <87v8f9gpbo.fsf@fin.soreny>
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,44 +54,66 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: Stefan Metzmacher <metze@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Jun 27, 2023 at 12:41:15PM +0200, Ferenc Wágner via samba-technical wrote:
->Dear Samba developers,
->
->Please take a look at the following patch, taken from
->https://github.com/balabit-deps/balabit-os-8-samba/commit/5f46ae6282db1457b8ef8bbfb4e97eb4aadd55b4:
->
->From 5f46ae6282db1457b8ef8bbfb4e97eb4aadd55b4 Mon Sep 17 00:00:00 2001
->From: Balazs Scheidler <bazsi@balabit.hu>
->Date: Wed, 22 Aug 2012 11:34:43 +0200
->Subject: [PATCH] nsswitch/libwbclient: fixed a memory leak in
-> wbcAuthenticateUserEx
->
->(cherry picked from commit zorp-os-5.0 / f0e88410bd2528517910f780d71e63f8effb91ef)
->---
-> nsswitch/libwbclient/wbc_pam.c | 1 +
-> 1 file changed, 1 insertion(+)
->
->diff --git a/nsswitch/libwbclient/wbc_pam.c b/nsswitch/libwbclient/wbc_pam.c
->index e4cd2963..b16c9424 100644
->--- a/nsswitch/libwbclient/wbc_pam.c
->+++ b/nsswitch/libwbclient/wbc_pam.c
->@@ -415,6 +415,7 @@ wbcErr wbcCtxAuthenticateUserEx(struct wbcContext *ctx,
->                                 params->domain_name,
->                                 sep_response.data.info.winbind_separator,
->                                 params->account_name);
->+                       winbindd_free_response(&sep_response);
->                } else {
->                        strncpy(request.data.auth.user,
->                                params->account_name,
->
->Do you agree that this patches an actual memory leak?  If so, would you
->please consider taking it?
+I've been working to make Azure AD connect work with Samba.
 
-Thanks Ferenc, this does look like a real memory leak to me.
+This is working for small domains, but for larger domains we hit a
+problem.
+
+Our USN handling in GetNCChanges can sometimes return the same
+tmp_hightest_usn, so we have this code:
+
+			/*
+			 * We need to make sure that we never return the
+			 * same highwatermark within the same replication
+			 * cycle more than once. Otherwise we cannot detect
+			 * when the client uses an unexptected highwatermark.
+			 *
+			 * This is a HACK which is needed because our
+			 * object ordering is wrong and set tmp_highest_usn
+			 * to a value that is higher than what we already
+			 * sent to the client (destination dsa).
+			 */
+			r->out.ctr->ctr6.new_highwatermark.reserved_usn += 1;
+
+
+To make a new higher USN for this case.
+
+However, Azure AD connect comes back only with the tmp_highest_usn, eg
+reserved_usn is always zero.  This means we declare the client-supplied 
+highwatermark as being older, and start replication from scratch.  
+
+Starting from zero then means we give the same data, end in the same
+place and the client has an infinite loop against us. 
+
+Do you have any clues, other than a revamp of our replication logic, to
+fix this both sort-term and to remember for the longer term?
+
+In the meantime I've suggested 'drs max objects sync = 100000' and 'drs
+max link sync = 100000' in the smb.conf to avoid multiple chunks.
+
+Thanks for any clues,
+
+Andrew Bartlett
+
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead                https://catalyst.net.nz/services/samba
+Catalyst.Net Ltd
+
+Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
+company
+
+Samba Development and Support: https://catalyst.net.nz/services/samba
+
+Catalyst IT - Expert Open Source Solutions
+
+
+
 
