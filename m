@@ -2,65 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0DA6745311
-	for <lists+samba-technical@lfdr.de>; Mon,  3 Jul 2023 01:37:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC27074831C
+	for <lists+samba-technical@lfdr.de>; Wed,  5 Jul 2023 13:44:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=aHFK0zYmI9rlbwJHus0Wv+AFb/pa/A+qTUs5Ldro9ys=; b=WSlTInwAcmmrTC9D32ZG4XFJ4z
-	ImIf+v6PQXNB73PBomqyYtLbt3rVJh2ayIDBeJC5+QGaNwvwLrFMXUN2XAlm90IWhodCjLstuyHUl
-	EdnZPuH5tYNsd3iVlEHdIg9K4ZFaZovC0RP3GS79RfuM68ClzAGj/8Y6oU6VcOSwvgKXUbLUvd8TK
-	DMlQAdT5z551eyqLj4ctNlqWeWUIDd4ZaIjPCOSy1LrI9ybiY6cUoClrdjgjXF45pSsbWs4K9Kodz
-	FASJQVNz87CRHeFV6e1zi7w9QSQop6vbpkEtM83UMuIinf/bRoD4S2FDlwEDNH73dyKyeq7jA+3eO
-	BCpaSPnw==;
-Received: from ip6-localhost ([::1]:64038 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=yUFfsH1hOXIEg/7Y1vC7g3niaViJiH0nuxNczQItpH0=; b=XfW2qdcHeqPmKarDeLFL2woUt+
+	FDRhz1FacGolqFpD8tFLzAJ6EvArLYDk0QxW9RmLbgexxSDOzElsliH+ULMgq4LB+u4cR+9ZsrkZf
+	3DKPhkGYOz0nQOdol7Co+f8lr01uddpgzfQdzcKRYUtcizMqtoGGQU+lYflbO01tQ7/06/AUmNjPo
+	IVZ13MrCijGLImCsgnt+56bTuXeHn/5WBtULoyR4LoTTCCjmm/5t2fa13W0Jf0/GsD9c4PIJ4EfhV
+	tVEzQC2rs8h9UmEz/fWDxfxD7FZlBTFfIK47JUHX1KvFvPSa8efiSGS9HOYqvuGPsAgGMBSN80/yK
+	CIx52Ojw==;
+Received: from ip6-localhost ([::1]:26136 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qG6cS-007PZ3-OF; Sun, 02 Jul 2023 23:36:40 +0000
-Received: from mail-lj1-x235.google.com ([2a00:1450:4864:20::235]:53525) 
+	id 1qH0vH-000HsM-V9; Wed, 05 Jul 2023 11:43:52 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19204) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qG6cN-007PYt-5H
- for samba-technical@lists.samba.org; Sun, 02 Jul 2023 23:36:37 +0000
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2b6e7d7952eso6230511fa.3
- for <samba-technical@lists.samba.org>; Sun, 02 Jul 2023 16:36:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1688340991; x=1690932991;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aHFK0zYmI9rlbwJHus0Wv+AFb/pa/A+qTUs5Ldro9ys=;
- b=PHvb5Cg8BbZDJ4YrFM5VPTFAHADQN6xV3I+4zRrZKdXeKuUeFGmiP3paqBW/qHRqU3
- eJDAMHnrU5E4y+/bBFH/Ivu2mMqcD2lcvlTa25sIX/04Dhbtio9Khh9T75r+htEUQuzK
- JKngACNRLS8BtF13CE8Inhypux4V9yA0toA8P/jou3SP028huxGXw3d4qrAOoyPtFbrC
- H0Y0kNusvB0n6bymhMEoSls7TUFGk+BUrwS01wTkjjLXtujw1f/YG1bZwTatZ+xoIMZp
- Rcuq8xp87ril7dNXgBcR3aGxObq7J9fL8xgDynNd3Yh+jqOx9RB+hTofE2CD/eL+3frR
- n9fw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688340991; x=1690932991;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aHFK0zYmI9rlbwJHus0Wv+AFb/pa/A+qTUs5Ldro9ys=;
- b=eDnk77kCFoajVk+WtwY13PIYSFErfE3Te9k3fYAoixRDmv+XeuujhIwU/q15XtQZX2
- AsrR11mNUssEkaAJY82LNlYgkewD6Bubw9x4Rxu6nmc2ahjRyjPNBg+xmZbpFSzcFygN
- +QOPflTgv7jRgtCUj2i7gKfYKGVMwIsI/N83dOw0l0gXRwYwGRxn3VXXSacJ9N1W+b5a
- 6gIgKzqBxym/2WSuPQxVZtiUYCbncvJQlC/PK8OhU7K/EXgIaE3nojI0VlycuLT82blZ
- QFI1WTbxkNCXpKkinuvafAV+2B8PaWWsttpNdyp6XT7K6ErB8tJd+8cgjoWNZr61Zo3X
- jUMw==
-X-Gm-Message-State: ABy/qLbGe1fqh/MpsBy0gViQh/KufXQLUuQJuE84yGRbyFHNQiAw25HF
- XFyfKrMBqUnC6IDtR24DzDk/nsmpbmPJI0kwc0dXFj9Y9vo=
-X-Google-Smtp-Source: APBJJlGN/fuohbhJPjsFEtjooRsxjY/wQdtV8zUm4WJTk+M+D0zxJeC/LQFxPvO+NnqdjcxdO89yJzErPM02gej3v08=
-X-Received: by 2002:a2e:80d9:0:b0:2b6:a3a0:5f7 with SMTP id
- r25-20020a2e80d9000000b002b6a3a005f7mr5158743ljg.9.1688340991083; Sun, 02 Jul
- 2023 16:36:31 -0700 (PDT)
+ (Exim) id 1qH0vC-000HsD-7h
+ for samba-technical@lists.samba.org; Wed, 05 Jul 2023 11:43:48 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=yUFfsH1hOXIEg/7Y1vC7g3niaViJiH0nuxNczQItpH0=; b=dyjL7PvT4cO7geSjRfxCDYhyox
+ bO3003IX0thLKpCg6qUaPdOaGQcXfQTGpSEKQAlpSa3VzVC+2rJKIXT6iAYtDmVFTBn16pj8tINQ0
+ 6ST5v7DA6ZLbWbsrRjZPUpsQQRFZvNd343qRCjuPhcmweEjYYp937HDWtCwVY37Rgi80RpLgRRqFS
+ vGrCmmncM6fTpEEBpr6omUvgoWXRx/88gzCwBIwQUVE5xuHNbKr1P7uof9SImB6XvKVQXjatI5kac
+ eX2HnwsvxbnureNab6sRsFr0TDa2SX/1H+OAXmnloZ6nOyH3Q/NGq0jvlGA3gQlo4FjEMU43JoZt+
+ AtP98CkfIEtBOHkPYgrLmtNRXOYNMjNZvIn0k+5HEc/SCmQN5N41hoj5DztiZJevFYh2gF8mGr8ZF
+ 24yy4cWsLIl7sCHM9MjsDwBQCbdqblwvQ+iK9oNJ0Rmw8merHPt8EbqbXleJW87Pi4xGWBVwWeLyD
+ rZULR5PplLLN2iV/UGsms07A;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1qH0vB-000EGb-2H for samba-technical@lists.samba.org;
+ Wed, 05 Jul 2023 11:43:45 +0000
+Message-ID: <09aaec5b-2eb0-deb5-1e11-ec0e5b0ce689@samba.org>
+Date: Wed, 5 Jul 2023 13:43:45 +0200
 MIME-Version: 1.0
-References: <20230702130310.3437437-1-trix@redhat.com>
-In-Reply-To: <20230702130310.3437437-1-trix@redhat.com>
-Date: Sun, 2 Jul 2023 18:36:19 -0500
-Message-ID: <CAH2r5mtuyXgfkNk65y0JjkUfaxxUuWHYOPuAXO8f_sp4_VDFAA@mail.gmail.com>
-Subject: Re: [PATCH] smb: client: remove unused variable 'server'
-To: Tom Rix <trix@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Content-Language: de-DE
+To: samba-technical@lists.samba.org
+Subject: [Release Planning 4.18] Samba 4.18.5
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,78 +57,25 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: pc@manguebit.com, tom@talpey.com, sprasad@microsoft.com,
- linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, lsahlber@redhat.com, sfrench@samba.org,
- Colin Ian King <colin.i.king@gmail.com>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Good catch - but this was removed a few days ago by Colin's patch
+Hi,
 
-smfrench@smfrench-ThinkPad-P52:~/cifs-2.6$ git log fs/smb/client/dfs.c
-commit dfbf0ee092a5d7a9301c81e815b5e50b7c0aeeda
-Author: Colin Ian King <colin.i.king@gmail.com>
-Date:   Fri Jun 30 12:33:37 2023 +0100
-
-    smb: client: remove redundant pointer 'server'
-
-    The pointer 'server' is assigned but never read, the pointer is
-    redundant and can be removed. Cleans up clang scan build warning:
-
-    fs/smb/client/dfs.c:217:3: warning: Value stored to 'server' is
-    never read [deadcode.DeadStores]
-
-    Signed-off-by: Colin Ian King <colin.i.king@gmail.com>
-    Signed-off-by: Steve French <stfrench@microsoft.com>
-
-On Sun, Jul 2, 2023 at 8:43=E2=80=AFAM Tom Rix <trix@redhat.com> wrote:
->
-> gcc with W=3D1 reports
-> fs/smb/client/dfs.c: In function =E2=80=98__dfs_mount_share=E2=80=99:
-> fs/smb/client/dfs.c:146:33: error: variable =E2=80=98server
->   set but not used [-Werror=3Dunused-but-set-variable]
->   146 |         struct TCP_Server_Info *server;
->       |                                 ^~~~~~
->
-> This variable is not used, so remove it.
->
-> Signed-off-by: Tom Rix <trix@redhat.com>
-> ---
->  fs/smb/client/dfs.c | 2 --
->  1 file changed, 2 deletions(-)
->
-> diff --git a/fs/smb/client/dfs.c b/fs/smb/client/dfs.c
-> index 26d14dd0482e..1403a2d1ab17 100644
-> --- a/fs/smb/client/dfs.c
-> +++ b/fs/smb/client/dfs.c
-> @@ -143,7 +143,6 @@ static int __dfs_mount_share(struct cifs_mount_ctx *m=
-nt_ctx)
->         struct smb3_fs_context *ctx =3D mnt_ctx->fs_ctx;
->         char *ref_path =3D NULL, *full_path =3D NULL;
->         struct dfs_cache_tgt_iterator *tit;
-> -       struct TCP_Server_Info *server;
->         struct cifs_tcon *tcon;
->         char *origin_fullpath =3D NULL;
->         char sep =3D CIFS_DIR_SEP(cifs_sb);
-> @@ -214,7 +213,6 @@ static int __dfs_mount_share(struct cifs_mount_ctx *m=
-nt_ctx)
->         } while (rc =3D=3D -EREMOTE);
->
->         if (!rc) {
-> -               server =3D mnt_ctx->server;
->                 tcon =3D mnt_ctx->tcon;
->
->                 spin_lock(&tcon->tc_lock);
-> --
-> 2.27.0
->
+Samba 4.18.5 is scheduled for Wednesday, August 16 2023.
 
 
---=20
-Thanks,
+https://wiki.samba.org/index.php/Release_Planning_for_Samba_4.18
+has been updated accordingly.
 
-Steve
+
+Jule
+
+-- 
+Jule Anger
+Release Manager Samba Team  samba.org
+SerNet Samba Team           sernet.de
+
 
