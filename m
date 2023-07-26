@@ -2,55 +2,67 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A034D762838
-	for <lists+samba-technical@lfdr.de>; Wed, 26 Jul 2023 03:39:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2239F762939
+	for <lists+samba-technical@lfdr.de>; Wed, 26 Jul 2023 05:23:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=gqPI6kZcgAcHv8iVlrc833Cr7JKN9zZqYuMRXEhUY7w=; b=a6/QwZI6lq7Rel43kWQKMCwNpU
-	Yos3Hf9Qf0X3KB1WV3j+W8TU9AYIEoZ5+wgN7hjk0eWnn4R3fP0+INlQEzQRTdkeH/SQoZsJrsDxv
-	AdDqHceVranuIQkMkk0nFQp8YuPF2bn8hDxVqb5225OlByMptw23ebghbHFacmhlO9vLpSY2VD0kz
-	m/HzM3kk5J3JprhE4Soe66bgEutwUeq7Q1srMyYrc35MDfehd7asWXkQcW1X6N36ETxojO2VYxT4R
-	aMzpBrdnswRh9alu3EGMPwBNmXA/v4lgL01+kq5bzjn//r5a7Q0rrfuffmTVzXA3C6ByuD5FbobpX
-	EnX+P6Ig==;
-Received: from ip6-localhost ([::1]:45186 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=C8FgchhL+8a00bftsgCyt38r22+1LmyLUzYrJqtdXas=; b=GY6vf0CHmaPq5NPMc3IgWxZCug
+	eISivjn9bHerkZ5ZJP/yJ8LpypkQWC9zVEDWG4OfTCgEeJhV3upmICOIaqkbwwwz7Q1ms2mlZ0Jc0
+	8d2BQrQaDnES8TKDmtTAzCawIPfqxfaZYnjxoxhL64BCDchYrkyISqmhMDX1eHGDuAvOQXSiUot4S
+	nNBCYW+k5NPCnax3/t/6A1hYDsx1lPz2oxHG+WtB5BOjUTFNQZenv7+yYLY1l8j3fYGz+cCQRELxs
+	GynRy8L4VfC91iGSGQ52qbraXH/bfUnTUsHJQaot+scGbUcQXLHYZ5GaPvj0wci56uWBCP/NgB+qY
+	QsgERPXw==;
+Received: from ip6-localhost ([::1]:35664 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qOTU2-005MV5-J4; Wed, 26 Jul 2023 01:38:34 +0000
-Received: from mail.ozlabs.org ([2404:9400:2221:ea00::3]:50353
- helo=gandalf.ozlabs.org) 
+	id 1qOV7M-005N0N-Gk; Wed, 26 Jul 2023 03:23:16 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz
+ ([2404:130:4080::4]:56088) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qOTTw-005MUv-AY
- for samba-technical@lists.samba.org; Wed, 26 Jul 2023 01:38:31 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
- s=202004; t=1690334461;
- bh=gqPI6kZcgAcHv8iVlrc833Cr7JKN9zZqYuMRXEhUY7w=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=haQfaemsNUNjpX/GYxFu+BhKSqcKUdx55iHKjTDaZnhXcTUJhPKLBBD0ST5yn5h+s
- S3WaKYmUZg5MtoJPtQwXJrxhltSWYiyCqWqieN1x6XINjyJSOHx876jtbSoCIOR2hN
- UjtLipNV4vdhODry1tmxfdBhb2WHCQWvQDVgvUp2fVJ3R41bakzXBbEshIm1axFSFh
- GtdrCfAq31xgme018UE+sux6egS7OzEeGIOHZTEmgMvSR+NHy1mV+jQOyVYpRLSal3
- aHdcwoEXjMqwq+HDaNmW58WMLhY/lGP3DLj5HsfHf8Lf4CvIkXDb/UXoKkkARcohM+
- VhK3t/zqaReug==
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
- server-digest SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4R9bgx14vxz4wxx;
- Wed, 26 Jul 2023 11:21:01 +1000 (AEST)
-Date: Wed, 26 Jul 2023 11:21:00 +1000
-To: samba-technical@lists.samba.org
-Subject: Re: increased `make test` logging in syslog with "debug syslog
- format = always"
-Message-ID: <20230726112100.0a247d68@martins.ozlabs.org>
-In-Reply-To: <a5bbc383-c781-3f94-65c1-8fc4b325e8ab@catalyst.net.nz>
+ (Exim) id 1qOV7F-005N0E-AA
+ for samba-technical@lists.samba.org; Wed, 26 Jul 2023 03:23:14 +0000
+Received: from [192.168.1.219] (unknown [114.23.142.188])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id 39D6681E24; 
+ Wed, 26 Jul 2023 15:22:58 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1690341779;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=C8FgchhL+8a00bftsgCyt38r22+1LmyLUzYrJqtdXas=;
+ b=d3O0mHwb3wNmCAs2u1StVIal7ZtnEC7PeMtNXO2k48xX1V3uj8i5QR8eYpLOO26S9iy2lv
+ 8YWFMtTZdVrX+gGXZ6lOOZ9Am6CiHpd/f09j5AZWHm3/DYihQp7JzH3Bwxvzw9WJIl2UOO
+ xVenWD1nN9LUg3wvh6f6UN4AC6r+MTKqhCHScEGj4BdQcrqq1DNV4f2W/yaJrLHAGVCdqF
+ tUsOyawRRNzh+UATBzjidn4b/lqOXdL9fqYz+BJr4cXBeJd72JPPILB4DgiCX7xivLaEwE
+ +nWU9Zp0ntQhxDmvspwCVNlRWGu8tas2DOvW7yVRkEOEetLvsJIUxs3/3qmBfQ==
+Content-Type: multipart/mixed; boundary="------------sts6gZe10Jv0bOMVixE8RaGV"
+Message-ID: <84c50a50-afd5-9c20-4d52-0f5ab6590d30@catalyst.net.nz>
+Date: Wed, 26 Jul 2023 15:22:55 +1200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: increased `make test` logging in syslog with "debug syslog format
+ = always"
+Content-Language: en-NZ
+To: Martin Schwenke <martin@meltin.net>, samba-technical@lists.samba.org
 References: <6a0d3223-321a-624d-111e-1c1a67ef4396@catalyst.net.nz>
  <d37fb34bffdc0ef6f3bae57eef17a399f46d37f6.camel@samba.org>
  <a5bbc383-c781-3f94-65c1-8fc4b325e8ab@catalyst.net.nz>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.37; x86_64-pc-linux-gnu)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Warn: EHLO/HELO not verified: Remote host 2404:9400:2221:ea00::3
- (mail.ozlabs.org) incorrectly presented itself as gandalf.ozlabs.org
+ <20230726112100.0a247d68@martins.ozlabs.org>
+In-Reply-To: <20230726112100.0a247d68@martins.ozlabs.org>
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=douglasb@catalyst.net.nz
+ smtp.mailfrom=douglas.bagnall@catalyst.net.nz
+X-Spamd-Result: default: False [1.00 / 15.00]; MIME_BASE64_TEXT_BOGUS(1.00)[];
+ MIME_GOOD(-0.10)[multipart/mixed,text/plain];
+ MIME_BASE64_TEXT(0.10)[]; MIME_TRACE(0.00)[0:+,1:+,2:+,3:+];
+ DCC_FAIL(0.00)[failed to scan and retransmits exceed];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; ARC_NA(0.00)[];
+ DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
+ ASN(0.00)[asn:56030, ipnet:114.23.0.0/16, country:NZ];
+ HAS_ATTACHMENT(0.00)[]; MID_RHS_MATCH_FROM(0.00)[]
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,66 +76,297 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 26 Jul 2023 11:13:01 +1200, Douglas Bagnall via samba-technical
-<samba-technical@lists.samba.org> wrote:
+This is a multi-part message in MIME format.
+--------------sts6gZe10Jv0bOMVixE8RaGV
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-> On 25/07/23 17:42, Andrew Bartlett wrote:
-> 
-> > My intention was only to change the output format, not the destination,
-> > so as to get more information (time and host etc) in the logs as the
-> > previous logging to 'stdout' lost a lot of information.  
-> 
-> Yeah.
-> 
-> I can get complete `make test` syslog silence with the following patch, but I 
-> don't know yet if it ruins some clever test of our logging itself.
-> 
-> cheers,
-> Douglas
-> 
-> 
-> 
-> commit 51e857217846e9555affb94b7b588d363e126128 (HEAD -> 
-> conditional-aces-the-true-story)
-> Author: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-> Date:   Wed Jul 26 11:04:53 2023 +1200
-> 
->      selftest: avoid logging to syslog in `make test`
-> 
->      Signed-off-by: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-> 
-> diff --git a/selftest/target/Samba4.pm b/selftest/target/Samba4.pm
-> index 0bd77e906d5..3eb2388e298 100755
-> --- a/selftest/target/Samba4.pm
-> +++ b/selftest/target/Samba4.pm
-> @@ -1220,6 +1220,7 @@ sub provision($$$$$$$$$$$)
->          # fruit:copyfile is a global option
->          fruit:copyfile = yes
-> 
-> +       logging = file
->          $extra_smbconf_options
-> 
->   [tmp]
-> 
-> 
+hi Martin!
 
-Yes, that is in Samba3.pm, so will work around the problem.
+>>       Signed-off-by: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+>>
+>> diff --git a/selftest/target/Samba4.pm b/selftest/target/Samba4.pm
+>> index 0bd77e906d5..3eb2388e298 100755
+>> --- a/selftest/target/Samba4.pm
+>> +++ b/selftest/target/Samba4.pm
+>> @@ -1220,6 +1220,7 @@ sub provision($$$$$$$$$$$)
+>>           # fruit:copyfile is a global option
+>>           fruit:copyfile = yes
+>>
+>> +       logging = file
+>>           $extra_smbconf_options
+>>
+>>    [tmp]
+>>
+>>
+> 
+> Yes, that is in Samba3.pm, so will work around the problem.
+> 
+> The confusing thing is that MR 3034, as per Andrew's intention, should
+> only change the logging format and not the logging destination.  If it
+> does change the destination then that's a regression, so we should hunt
+> it down and fix it.
 
-The confusing thing is that MR 3034, as per Andrew's intention, should
-only change the logging format and not the logging destination.  If it
-does change the destination then that's a regression, so we should hunt
-it down and fix it.
+Indeed, though I was already on some other well-bifurcated hunt.
 
-Are you able to post examples of lines that end up in syslog?
+Also I am not sure the lines Samba already put in syslog (some winbindd and smbd 
+copyrights) are not a bug in make test. We're not testing the lines get there -- 
+it's just kind of an accident. So squelching the lot with a shrug sort of works.
 
-Thanks...
+> Are you able to post examples of lines that end up in syslog?
 
-peace & happiness,
-martin
+There small and large attachment are `make test TESTS=auth` with and without 
+ca7b7bde3915a821b1b99 reverted, grepping out the non-samba.
+
+The messages are all at level 0. There are about 18 processes involved. I don't 
+think they are all servers. Some of the lines in syslog don't end up in 
+st/subunit or the terminal output (e.g. the "Kinit for" lines).
+
+thanks,
+Douglas
+
+--------------sts6gZe10Jv0bOMVixE8RaGV
+Content-Type: text/plain; charset=UTF-8;
+ name="origin-master-make-test-TESTS=samba.tests.auth-grep-samba.txt"
+Content-Disposition: attachment;
+ filename*0="origin-master-make-test-TESTS=samba.tests.auth-grep-samba.tx";
+ filename*1="t"
+Content-Transfer-Encoding: base64
+
+SnVsIDI2IDEzOjUwOjI0IGJveCBzYW1iYVszNDQ4ODIzXTogMjAyMy0wNy0yNlQwMTo1MDoy
+NC4yOTEwMzArMDA6MDAgbG9jYWxkYy5zYW1iYS5leGFtcGxlLmNvbSBzYW1iYVszNDQ4ODIz
+XToKSnVsIDI2IDEzOjUwOjI0IGJveCBzYW1iYVszNDQ4ODIzXTogc2FtYmEgdmVyc2lvbiA0
+LjE5LjBwcmUxLURFVkVMT1BFUkJVSUxEIHN0YXJ0ZWQuCkp1bCAyNiAxMzo1MDoyNCBib3gg
+c2FtYmFbMzQ0ODgyM106IENvcHlyaWdodCBBbmRyZXcgVHJpZGdlbGwgYW5kIHRoZSBTYW1i
+YSBUZWFtIDE5OTItMjAyMwpKdWwgMjYgMTM6NTA6MjQgYm94IHNhbWJhWzM0NDg4MjNdOiAy
+MDIzLTA3LTI2VDAxOjUwOjI0LjMxMjQ0OCswMDowMCBsb2NhbGRjLnNhbWJhLmV4YW1wbGUu
+Y29tIHNhbWJhWzM0NDg4MjNdOgpKdWwgMjYgMTM6NTA6MjQgYm94IHNhbWJhWzM0NDg4MjNd
+OiBiaW5hcnlfc21iZF9tYWluOiBzYW1iYSBQSUQgMzQ0ODgyMyB3YXMgY2FsbGVkIHdpdGgg
+bWF4cnVudGltZSAxODAwMCAtIGN1cnJlbnQgdHMgMTY5MDMzNjIyNApKdWwgMjYgMTM6NTA6
+MjQgYm94IHNhbWJhWzM0NDg4MjNdOiAyMDIzLTA3LTI2VDAxOjUwOjI0LjM4ODc1NSswMDow
+MCBsb2NhbGRjLnNhbWJhLmV4YW1wbGUuY29tIHNhbWJhWzM0NDg4MjNdOgpKdWwgMjYgMTM6
+NTA6MjQgYm94IHNhbWJhWzM0NDg4MjNdOiBiaW5hcnlfc21iZF9tYWluOiBzYW1iYTogdXNp
+bmcgJ3N0YW5kYXJkJyBwcm9jZXNzIG1vZGVsCkp1bCAyNiAxMzo1MDoyNCBib3ggc2FtYmFb
+MzQ0ODg0Ml06IDIwMjMtMDctMjZUMDE6NTA6MjQuNDUyNTA0KzAwOjAwIGxvY2FsZGMuc2Ft
+YmEuZXhhbXBsZS5jb20gc2FtYmFbMzQ0ODg0Ml06Ckp1bCAyNiAxMzo1MDoyNCBib3ggc2Ft
+YmFbMzQ0ODg0Ml06IHgvc2FtYmEvYmluL3dpbmJpbmRkOiBbMjAyMy8wNy8yNiAwMTo1MDoy
+NCwgIDBdIC4uLy4uL2xpYi91dGlsL2RlYnVnLmM6MTI2MyhyZW9wZW5fb25lX2xvZykKSnVs
+IDI2IDEzOjUwOjI0IGJveCBzYW1iYVszNDQ4ODQyXTogMjAyMy0wNy0yNlQwMTo1MDoyNC40
+NTI1ODUrMDA6MDAgbG9jYWxkYy5zYW1iYS5leGFtcGxlLmNvbSBzYW1iYVszNDQ4ODQyXToK
+SnVsIDI2IDEzOjUwOjI0IGJveCBzYW1iYVszNDQ4ODQyXTogeC9zYW1iYS9iaW4vd2luYmlu
+ZGQ6ICAgcmVvcGVuX29uZV9sb2c6IFVuYWJsZSB0byBvcGVuIG5ldyBsb2cgZmlsZSAnL3Vz
+ci9sb2NhbC9zYW1iYS92YXIvbG9nLndpbmJpbmRkJzogTm8gc3VjaCBmaWxlIG9yIGRpcmVj
+dG9yeQpKdWwgMjYgMTM6NTA6MjQgYm94IHdpbmJpbmRkWzM0NDg4NDZdOiAyMDIzLTA3LTI2
+VDAxOjUwOjI0LjQ2NDAwMSswMDowMCBsb2NhbGRjLnNhbWJhLmV4YW1wbGUuY29tIHdpbmJp
+bmRkWzM0NDg4NDZdOgpKdWwgMjYgMTM6NTA6MjQgYm94IHdpbmJpbmRkWzM0NDg4NDZdOiAg
+IHdpbmJpbmRkIHZlcnNpb24gNC4xOS4wcHJlMS1ERVZFTE9QRVJCVUlMRCBzdGFydGVkLgpK
+dWwgMjYgMTM6NTA6MjQgYm94IHdpbmJpbmRkWzM0NDg4NDZdOiAgIENvcHlyaWdodCBBbmRy
+ZXcgVHJpZGdlbGwgYW5kIHRoZSBTYW1iYSBUZWFtIDE5OTItMjAyMwpKdWwgMjYgMTM6NTA6
+NTkgYm94IHgvc2FtWzM0NDkyODZdOiB4L3NhbWJhL3NvdXJjZTQvc2NyaXB0aW5nL2Jpbi9z
+dWJ1bml0cnVuIHNhbWJhLnRlc3RzLmF1dGhfbG9nIC1VQWRtaW5pc3RyYXRvclszNDQ5Mjg2
+XTogMjAyMy0wNy0yNlQwMTo1MDo1OS4wMjc0NjIrMDA6MDAgbG9jYWxkYy5zYW1iYS5leGFt
+cGxlLmNvbSBbMzQ0OTI4Nl06Ckp1bCAyNiAxMzo1MDo1OSBib3ggeC9zYW1bMzQ0OTI4Nl06
+IHgvc2FtYmEvc291cmNlNC9zY3JpcHRpbmcvYmluL3N1YnVuaXRydW4gc2FtYmEudGVzdHMu
+YXV0aF9sb2cgLVVBZG1pbmlzdHJhdG9yWzM0NDkyODZdOiBLaW5pdCBmb3IgQWRtaW5pc3Ry
+YXRvckBTQU1CQS5FWEFNUExFLkNPTSB0byBhY2Nlc3MgbG9jYWxkYyBmYWlsZWQ6IFByZWF1
+dGhlbnRpY2F0aW9uIGZhaWxlZApKdWwgMjYgMTM6NTA6NTkgYm94IHgvc2FtWzM0NDkyODZd
+OiB4L3NhbWJhL3NvdXJjZTQvc2NyaXB0aW5nL2Jpbi9zdWJ1bml0cnVuIHNhbWJhLnRlc3Rz
+LmF1dGhfbG9nIC1VQWRtaW5pc3RyYXRvclszNDQ5Mjg2XTogMjAyMy0wNy0yNlQwMTo1MDo1
+OS4wMzk1MTIrMDA6MDAgbG9jYWxkYy5zYW1iYS5leGFtcGxlLmNvbSBbMzQ0OTI4Nl06Ckp1
+bCAyNiAxMzo1MDo1OSBib3ggeC9zYW1bMzQ0OTI4Nl06IHgvc2FtYmEvc291cmNlNC9zY3Jp
+cHRpbmcvYmluL3N1YnVuaXRydW4gc2FtYmEudGVzdHMuYXV0aF9sb2cgLVVBZG1pbmlzdHJh
+dG9yWzM0NDkyODZdOiBLaW5pdCBmb3IgYmFkVXNlckBTQU1CQS5FWEFNUExFLkNPTSB0byBh
+Y2Nlc3MgbG9jYWxkYyBmYWlsZWQ6IENsaWVudCBub3QgZm91bmQgaW4gS2VyYmVyb3MgZGF0
+YWJhc2UKSnVsIDI2IDEzOjUxOjEzIGJveCB4L3NhbVszNDQ5NTA1XTogeC9zYW1iYS9zb3Vy
+Y2U0L3NjcmlwdGluZy9iaW4vc3VidW5pdHJ1biBzYW1iYS50ZXN0cy5hdXRoX2xvZ19uZXRs
+b2dvbl9iYWRfY3JlZHMgLVVBZG1pbmlzdHJhdG9yWzM0NDk1MDVdOiAyMDIzLTA3LTI2VDAx
+OjUxOjEzLjI2ODM5MCswMDowMCBsb2NhbGRjLnNhbWJhLmV4YW1wbGUuY29tIFszNDQ5NTA1
+XToKSnVsIDI2IDEzOjUxOjEzIGJveCB4L3NhbVszNDQ5NTA1XTogeC9zYW1iYS9zb3VyY2U0
+L3NjcmlwdGluZy9iaW4vc3VidW5pdHJ1biBzYW1iYS50ZXN0cy5hdXRoX2xvZ19uZXRsb2dv
+bl9iYWRfY3JlZHMgLVVBZG1pbmlzdHJhdG9yWzM0NDk1MDVdOiBGYWlsZWQgdG8gYmluZCB0
+byB1dWlkIDEyMzQ1Njc4LTEyMzQtYWJjZC1lZjAwLTAxMjM0NTY3Y2ZmYiBmb3IgbmNhbHJw
+YzpbREVGQVVMVCxzY2hhbm5lbCxhYnN0cmFjdF9zeW50YXg9MTIzNDU2NzgtMTIzNC1hYmNk
+LWVmMDAtMDEyMzQ1NjdjZmZiLzB4MDAwMDAwMDEsbmNhbHJwY19kaXI9eC9zYW1iYS9zdC9h
+ZF9kY19udHZmcy9uY2FscnBjXSBOVF9TVEFUVVNfTk9fVFJVU1RfU0FNX0FDQ09VTlQKSnVs
+IDI2IDEzOjUxOjEzIGJveCB4L3NhbVszNDQ5NTA1XTogeC9zYW1iYS9zb3VyY2U0L3Njcmlw
+dGluZy9iaW4vc3VidW5pdHJ1biBzYW1iYS50ZXN0cy5hdXRoX2xvZ19uZXRsb2dvbl9iYWRf
+Y3JlZHMgLVVBZG1pbmlzdHJhdG9yWzM0NDk1MDVdOiAyMDIzLTA3LTI2VDAxOjUxOjEzLjM3
+Mzg5NCswMDowMCBsb2NhbGRjLnNhbWJhLmV4YW1wbGUuY29tIFszNDQ5NTA1XToKSnVsIDI2
+IDEzOjUxOjEzIGJveCB4L3NhbVszNDQ5NTA1XTogeC9zYW1iYS9zb3VyY2U0L3NjcmlwdGlu
+Zy9iaW4vc3VidW5pdHJ1biBzYW1iYS50ZXN0cy5hdXRoX2xvZ19uZXRsb2dvbl9iYWRfY3Jl
+ZHMgLVVBZG1pbmlzdHJhdG9yWzM0NDk1MDVdOiBGYWlsZWQgdG8gYmluZCB0byB1dWlkIDEy
+MzQ1Njc4LTEyMzQtYWJjZC1lZjAwLTAxMjM0NTY3Y2ZmYiBmb3IgbmNhbHJwYzpbREVGQVVM
+VCxzY2hhbm5lbCxhYnN0cmFjdF9zeW50YXg9MTIzNDU2NzgtMTIzNC1hYmNkLWVmMDAtMDEy
+MzQ1NjdjZmZiLzB4MDAwMDAwMDEsbmNhbHJwY19kaXI9eC9zYW1iYS9zdC9hZF9kY19udHZm
+cy9uY2FscnBjXSBOVF9TVEFUVVNfQUNDRVNTX0RFTklFRApKdWwgMjYgMTM6NTE6MTMgYm94
+IHNhbWJhWzM0NDg4MjddOiAyMDIzLTA3LTI2VDAxOjUxOjEzLjQ3NjY0OSswMDowMCBsb2Nh
+bGRjLnNhbWJhLmV4YW1wbGUuY29tIHNhbWJhWzM0NDg4MjddOgpKdWwgMjYgMTM6NTE6MTMg
+Ym94IHNhbWJhWzM0NDg4MjddOiBDVkUtMjAyMi0zODAyMzogY2xpZW50X2FjY291bnRbTmV0
+TG9nb25CYWRdIGNvbXB1dGVyX25hbWVbTmV0TG9nb25CYWRdIHNjaGFubmVsX3R5cGVbMl0g
+Y2xpZW50X25lZ290aWF0ZV9mbGFnc1sweDBdICBOVF9TVEFUVVNfRE9XTkdSQURFX0RFVEVD
+VEVEIHJlamVjdF9kZXNbMV0gcmVqZWN0X21kNVsxXQpKdWwgMjYgMTM6NTE6MTMgYm94IHNh
+bWJhWzM0NDg4MjddOiAyMDIzLTA3LTI2VDAxOjUxOjEzLjU4MDIyNiswMDowMCBsb2NhbGRj
+LnNhbWJhLmV4YW1wbGUuY29tIHNhbWJhWzM0NDg4MjddOgpKdWwgMjYgMTM6NTE6MTMgYm94
+IHNhbWJhWzM0NDg4MjddOiBDVkUtMjAyMi0zODAyMzogY2xpZW50X2FjY291bnRbTmV0TG9n
+b25CYWRdIGNvbXB1dGVyX25hbWVbTmV0TG9nb25CYWRdIHNjaGFubmVsX3R5cGVbMl0gY2xp
+ZW50X25lZ290aWF0ZV9mbGFnc1sweDQwMDBdICBOVF9TVEFUVVNfRE9XTkdSQURFX0RFVEVD
+VEVEIHJlamVjdF9kZXNbMF0gcmVqZWN0X21kNVsxXQpKdWwgMjYgMTM6NTE6NDIgYm94IHNh
+bWJhWzM0NDk5MzldOiAyMDIzLTA3LTI2VDAxOjUxOjQyLjkwNjc2OSswMDowMCBkYzcuc2Ft
+YmEyMDA4cjIuZXhhbXBsZS5jb20gc2FtYmFbMzQ0OTkzOV06Ckp1bCAyNiAxMzo1MTo0MiBi
+b3ggc2FtYmFbMzQ0OTkzOV06IHNhbWJhIHZlcnNpb24gNC4xOS4wcHJlMS1ERVZFTE9QRVJC
+VUlMRCBzdGFydGVkLgpKdWwgMjYgMTM6NTE6NDIgYm94IHNhbWJhWzM0NDk5MzldOiBDb3B5
+cmlnaHQgQW5kcmV3IFRyaWRnZWxsIGFuZCB0aGUgU2FtYmEgVGVhbSAxOTkyLTIwMjMKSnVs
+IDI2IDEzOjUxOjQyIGJveCBzYW1iYVszNDQ5OTM5XTogMjAyMy0wNy0yNlQwMTo1MTo0Mi45
+Mjc3NDIrMDA6MDAgZGM3LnNhbWJhMjAwOHIyLmV4YW1wbGUuY29tIHNhbWJhWzM0NDk5Mzld
+OgpKdWwgMjYgMTM6NTE6NDIgYm94IHNhbWJhWzM0NDk5MzldOiBiaW5hcnlfc21iZF9tYWlu
+OiBzYW1iYSBQSUQgMzQ0OTkzOSB3YXMgY2FsbGVkIHdpdGggbWF4cnVudGltZSAxODAwMCAt
+IGN1cnJlbnQgdHMgMTY5MDMzNjMwMgpKdWwgMjYgMTM6NTE6NDMgYm94IHNhbWJhWzM0NDk5
+MzldOiAyMDIzLTA3LTI2VDAxOjUxOjQzLjAwNTE3MSswMDowMCBkYzcuc2FtYmEyMDA4cjIu
+ZXhhbXBsZS5jb20gc2FtYmFbMzQ0OTkzOV06Ckp1bCAyNiAxMzo1MTo0MyBib3ggc2FtYmFb
+MzQ0OTkzOV06IGJpbmFyeV9zbWJkX21haW46IHNhbWJhOiB1c2luZyAnc3RhbmRhcmQnIHBy
+b2Nlc3MgbW9kZWwKSnVsIDI2IDEzOjUxOjQzIGJveCBzYW1iYVszNDQ5OTQ5XTogMjAyMy0w
+Ny0yNlQwMTo1MTo0My4wMTQwNDYrMDA6MDAgZGM3LnNhbWJhMjAwOHIyLmV4YW1wbGUuY29t
+IHNhbWJhWzM0NDk5NDldOgpKdWwgMjYgMTM6NTE6NDMgYm94IHNhbWJhWzM0NDk5NDldOiBB
+dHRlbXB0aW5nIHRvIGF1dG9nZW5lcmF0ZSBUTFMgc2VsZi1zaWduZWQga2V5cyBmb3IgaHR0
+cHMgZm9yIGhvc3RuYW1lICdEQzcuc2FtYmEyMDA4cjIuZXhhbXBsZS5jb20nCkp1bCAyNiAx
+Mzo1MTo0MyBib3ggc2FtYmFbMzQ0OTk0M106IDIwMjMtMDctMjZUMDE6NTE6NDMuMDQ2NzI4
+KzAwOjAwIGRjNy5zYW1iYTIwMDhyMi5leGFtcGxlLmNvbSBzYW1iYVszNDQ5OTQzXToKSnVs
+IDI2IDEzOjUxOjQzIGJveCBzYW1iYVszNDQ5OTQzXTogeC9zYW1iYS9iaW4vc21iZDogWzIw
+MjMvMDcvMjYgMDE6NTE6NDMsICAwXSAuLi8uLi9saWIvdXRpbC9kZWJ1Zy5jOjEyNjMocmVv
+cGVuX29uZV9sb2cpCkp1bCAyNiAxMzo1MTo0MyBib3ggc2FtYmFbMzQ0OTk0M106IDIwMjMt
+MDctMjZUMDE6NTE6NDMuMDQ2ODE1KzAwOjAwIGRjNy5zYW1iYTIwMDhyMi5leGFtcGxlLmNv
+bSBzYW1iYVszNDQ5OTQzXToKSnVsIDI2IDEzOjUxOjQzIGJveCBzYW1iYVszNDQ5OTQzXTog
+eC9zYW1iYS9iaW4vc21iZDogICByZW9wZW5fb25lX2xvZzogVW5hYmxlIHRvIG9wZW4gbmV3
+IGxvZyBmaWxlICcvdXNyL2xvY2FsL3NhbWJhL3Zhci9sb2cuc21iZCc6IE5vIHN1Y2ggZmls
+ZSBvciBkaXJlY3RvcnkKSnVsIDI2IDEzOjUxOjQzIGJveCBzYW1iYVszNDQ5OTUzXTogMjAy
+My0wNy0yNlQwMTo1MTo0My4wNjAwOTYrMDA6MDAgZGM3LnNhbWJhMjAwOHIyLmV4YW1wbGUu
+Y29tIHNhbWJhWzM0NDk5NTNdOgpKdWwgMjYgMTM6NTE6NDMgYm94IHNhbWJhWzM0NDk5NTNd
+OiB4L3NhbWJhL2Jpbi93aW5iaW5kZDogWzIwMjMvMDcvMjYgMDE6NTE6NDMsICAwXSAuLi8u
+Li9saWIvdXRpbC9kZWJ1Zy5jOjEyNjMocmVvcGVuX29uZV9sb2cpCkp1bCAyNiAxMzo1MTo0
+MyBib3ggc2FtYmFbMzQ0OTk1M106IDIwMjMtMDctMjZUMDE6NTE6NDMuMDYwMTg5KzAwOjAw
+IGRjNy5zYW1iYTIwMDhyMi5leGFtcGxlLmNvbSBzYW1iYVszNDQ5OTUzXToKSnVsIDI2IDEz
+OjUxOjQzIGJveCBzYW1iYVszNDQ5OTUzXTogeC9zYW1iYS9iaW4vd2luYmluZGQ6ICAgcmVv
+cGVuX29uZV9sb2c6IFVuYWJsZSB0byBvcGVuIG5ldyBsb2cgZmlsZSAnL3Vzci9sb2NhbC9z
+YW1iYS92YXIvbG9nLndpbmJpbmRkJzogTm8gc3VjaCBmaWxlIG9yIGRpcmVjdG9yeQpKdWwg
+MjYgMTM6NTE6NDMgYm94IHNtYmRbMzQ0OTk0N106IDIwMjMtMDctMjZUMDE6NTE6NDMuMDYy
+MjI1KzAwOjAwIGRjNy5zYW1iYTIwMDhyMi5leGFtcGxlLmNvbSBzbWJkWzM0NDk5NDddOgpK
+dWwgMjYgMTM6NTE6NDMgYm94IHNtYmRbMzQ0OTk0N106ICAgc21iZCB2ZXJzaW9uIDQuMTku
+MHByZTEtREVWRUxPUEVSQlVJTEQgc3RhcnRlZC4KSnVsIDI2IDEzOjUxOjQzIGJveCBzbWJk
+WzM0NDk5NDddOiAgIENvcHlyaWdodCBBbmRyZXcgVHJpZGdlbGwgYW5kIHRoZSBTYW1iYSBU
+ZWFtIDE5OTItMjAyMwpKdWwgMjYgMTM6NTE6NDMgYm94IHdpbmJpbmRkWzM0NDk5NTddOiAy
+MDIzLTA3LTI2VDAxOjUxOjQzLjA3MTU4NiswMDowMCBkYzcuc2FtYmEyMDA4cjIuZXhhbXBs
+ZS5jb20gd2luYmluZGRbMzQ0OTk1N106Ckp1bCAyNiAxMzo1MTo0MyBib3ggd2luYmluZGRb
+MzQ0OTk1N106ICAgd2luYmluZGQgdmVyc2lvbiA0LjE5LjBwcmUxLURFVkVMT1BFUkJVSUxE
+IHN0YXJ0ZWQuCkp1bCAyNiAxMzo1MTo0MyBib3ggd2luYmluZGRbMzQ0OTk1N106ICAgQ29w
+eXJpZ2h0IEFuZHJldyBUcmlkZ2VsbCBhbmQgdGhlIFNhbWJhIFRlYW0gMTk5Mi0yMDIzCkp1
+bCAyNiAxMzo1MTo0NSBib3ggc2FtYmFbMzQ0OTk0OV06IDIwMjMtMDctMjZUMDE6NTE6NDUu
+OTA5NjUwKzAwOjAwIGRjNy5zYW1iYTIwMDhyMi5leGFtcGxlLmNvbSBzYW1iYVszNDQ5OTQ5
+XToKSnVsIDI2IDEzOjUxOjQ1IGJveCBzYW1iYVszNDQ5OTQ5XTogVExTIHNlbGYtc2lnbmVk
+IGtleXMgZ2VuZXJhdGVkIE9LCkp1bCAyNiAxMzo1MjowMCBib3ggc2FtYmFbMzQ1MDEwOV06
+IDIwMjMtMDctMjZUMDE6NTI6MDAuMzQ3MzYyKzAwOjAwIGRjNi5zYW1iYTIwMDMuZXhhbXBs
+ZS5jb20gc2FtYmFbMzQ1MDEwOV06Ckp1bCAyNiAxMzo1MjowMCBib3ggc2FtYmFbMzQ1MDEw
+OV06IHNhbWJhIHZlcnNpb24gNC4xOS4wcHJlMS1ERVZFTE9QRVJCVUlMRCBzdGFydGVkLgpK
+dWwgMjYgMTM6NTI6MDAgYm94IHNhbWJhWzM0NTAxMDldOiBDb3B5cmlnaHQgQW5kcmV3IFRy
+aWRnZWxsIGFuZCB0aGUgU2FtYmEgVGVhbSAxOTkyLTIwMjMKSnVsIDI2IDEzOjUyOjAwIGJv
+eCBzYW1iYVszNDUwMTA5XTogMjAyMy0wNy0yNlQwMTo1MjowMC4zNjg4MTQrMDA6MDAgZGM2
+LnNhbWJhMjAwMy5leGFtcGxlLmNvbSBzYW1iYVszNDUwMTA5XToKSnVsIDI2IDEzOjUyOjAw
+IGJveCBzYW1iYVszNDUwMTA5XTogYmluYXJ5X3NtYmRfbWFpbjogc2FtYmEgUElEIDM0NTAx
+MDkgd2FzIGNhbGxlZCB3aXRoIG1heHJ1bnRpbWUgMTgwMDAgLSBjdXJyZW50IHRzIDE2OTAz
+MzYzMjAKSnVsIDI2IDEzOjUyOjAwIGJveCBzYW1iYVszNDUwMTA5XTogMjAyMy0wNy0yNlQw
+MTo1MjowMC40NDY5NDYrMDA6MDAgZGM2LnNhbWJhMjAwMy5leGFtcGxlLmNvbSBzYW1iYVsz
+NDUwMTA5XToKSnVsIDI2IDEzOjUyOjAwIGJveCBzYW1iYVszNDUwMTA5XTogYmluYXJ5X3Nt
+YmRfbWFpbjogc2FtYmE6IHVzaW5nICdzdGFuZGFyZCcgcHJvY2VzcyBtb2RlbApKdWwgMjYg
+MTM6NTI6MDAgYm94IHNhbWJhWzM0NTAxMTldOiAyMDIzLTA3LTI2VDAxOjUyOjAwLjQ1NDg1
+OCswMDowMCBkYzYuc2FtYmEyMDAzLmV4YW1wbGUuY29tIHNhbWJhWzM0NTAxMTldOgpKdWwg
+MjYgMTM6NTI6MDAgYm94IHNhbWJhWzM0NTAxMTldOiBBdHRlbXB0aW5nIHRvIGF1dG9nZW5l
+cmF0ZSBUTFMgc2VsZi1zaWduZWQga2V5cyBmb3IgaHR0cHMgZm9yIGhvc3RuYW1lICdEQzYu
+c2FtYmEyMDAzLmV4YW1wbGUuY29tJwpKdWwgMjYgMTM6NTI6MDAgYm94IHNhbWJhWzM0NTAx
+MTNdOiAyMDIzLTA3LTI2VDAxOjUyOjAwLjQ4ODQzNSswMDowMCBkYzYuc2FtYmEyMDAzLmV4
+YW1wbGUuY29tIHNhbWJhWzM0NTAxMTNdOgpKdWwgMjYgMTM6NTI6MDAgYm94IHNhbWJhWzM0
+NTAxMTNdOiB4L3NhbWJhL2Jpbi9zbWJkOiBbMjAyMy8wNy8yNiAwMTo1MjowMCwgIDBdIC4u
+Ly4uL2xpYi91dGlsL2RlYnVnLmM6MTI2MyhyZW9wZW5fb25lX2xvZykKSnVsIDI2IDEzOjUy
+OjAwIGJveCBzYW1iYVszNDUwMTEzXTogMjAyMy0wNy0yNlQwMTo1MjowMC40ODg1MjIrMDA6
+MDAgZGM2LnNhbWJhMjAwMy5leGFtcGxlLmNvbSBzYW1iYVszNDUwMTEzXToKSnVsIDI2IDEz
+OjUyOjAwIGJveCBzYW1iYVszNDUwMTEzXTogeC9zYW1iYS9iaW4vc21iZDogICByZW9wZW5f
+b25lX2xvZzogVW5hYmxlIHRvIG9wZW4gbmV3IGxvZyBmaWxlICcvdXNyL2xvY2FsL3NhbWJh
+L3Zhci9sb2cuc21iZCc6IE5vIHN1Y2ggZmlsZSBvciBkaXJlY3RvcnkKSnVsIDI2IDEzOjUy
+OjAwIGJveCBzbWJkWzM0NTAxMTddOiAyMDIzLTA3LTI2VDAxOjUyOjAwLjUwMTcwOCswMDow
+MCBkYzYuc2FtYmEyMDAzLmV4YW1wbGUuY29tIHNtYmRbMzQ1MDExN106Ckp1bCAyNiAxMzo1
+MjowMCBib3ggc21iZFszNDUwMTE3XTogICBzbWJkIHZlcnNpb24gNC4xOS4wcHJlMS1ERVZF
+TE9QRVJCVUlMRCBzdGFydGVkLgpKdWwgMjYgMTM6NTI6MDAgYm94IHNtYmRbMzQ1MDExN106
+ICAgQ29weXJpZ2h0IEFuZHJldyBUcmlkZ2VsbCBhbmQgdGhlIFNhbWJhIFRlYW0gMTk5Mi0y
+MDIzCkp1bCAyNiAxMzo1MjowMCBib3ggc2FtYmFbMzQ1MDEyM106IDIwMjMtMDctMjZUMDE6
+NTI6MDAuNTEzMjI2KzAwOjAwIGRjNi5zYW1iYTIwMDMuZXhhbXBsZS5jb20gc2FtYmFbMzQ1
+MDEyM106Ckp1bCAyNiAxMzo1MjowMCBib3ggc2FtYmFbMzQ1MDEyM106IHgvc2FtYmEvYmlu
+L3dpbmJpbmRkOiBbMjAyMy8wNy8yNiAwMTo1MjowMCwgIDBdIC4uLy4uL2xpYi91dGlsL2Rl
+YnVnLmM6MTI2MyhyZW9wZW5fb25lX2xvZykKSnVsIDI2IDEzOjUyOjAwIGJveCBzYW1iYVsz
+NDUwMTIzXTogMjAyMy0wNy0yNlQwMTo1MjowMC41MTM2OTYrMDA6MDAgZGM2LnNhbWJhMjAw
+My5leGFtcGxlLmNvbSBzYW1iYVszNDUwMTIzXToKSnVsIDI2IDEzOjUyOjAwIGJveCBzYW1i
+YVszNDUwMTIzXTogeC9zYW1iYS9iaW4vd2luYmluZGQ6ICAgcmVvcGVuX29uZV9sb2c6IFVu
+YWJsZSB0byBvcGVuIG5ldyBsb2cgZmlsZSAnL3Vzci9sb2NhbC9zYW1iYS92YXIvbG9nLndp
+bmJpbmRkJzogTm8gc3VjaCBmaWxlIG9yIGRpcmVjdG9yeQpKdWwgMjYgMTM6NTI6MDAgYm94
+IHdpbmJpbmRkWzM0NTAxMjldOiAyMDIzLTA3LTI2VDAxOjUyOjAwLjUyNzkwMyswMDowMCBk
+YzYuc2FtYmEyMDAzLmV4YW1wbGUuY29tIHdpbmJpbmRkWzM0NTAxMjldOgpKdWwgMjYgMTM6
+NTI6MDAgYm94IHdpbmJpbmRkWzM0NTAxMjldOiAgIHdpbmJpbmRkIHZlcnNpb24gNC4xOS4w
+cHJlMS1ERVZFTE9QRVJCVUlMRCBzdGFydGVkLgpKdWwgMjYgMTM6NTI6MDAgYm94IHdpbmJp
+bmRkWzM0NTAxMjldOiAgIENvcHlyaWdodCBBbmRyZXcgVHJpZGdlbGwgYW5kIHRoZSBTYW1i
+YSBUZWFtIDE5OTItMjAyMwpKdWwgMjYgMTM6NTI6MDIgYm94IHNhbWJhWzM0NTAxMTldOiAy
+MDIzLTA3LTI2VDAxOjUyOjAyLjQwNTY2MiswMDowMCBkYzYuc2FtYmEyMDAzLmV4YW1wbGUu
+Y29tIHNhbWJhWzM0NTAxMTldOgpKdWwgMjYgMTM6NTI6MDIgYm94IHNhbWJhWzM0NTAxMTld
+OiBUTFMgc2VsZi1zaWduZWQga2V5cyBnZW5lcmF0ZWQgT0sKSnVsIDI2IDEzOjUyOjIwIGJv
+eCBzYW1iYVszNDUwMTA5XTogMjAyMy0wNy0yNlQwMTo1MjoyMC42NDExMDYrMDA6MDAgZGM2
+LnNhbWJhMjAwMy5leGFtcGxlLmNvbSBzYW1iYVszNDUwMTA5XToKSnVsIDI2IDEzOjUyOjIw
+IGJveCBzYW1iYVszNDUwMTA5XTogc2VydmVyX3N0ZGluX2hhbmRsZXI6IHNhbWJhOiBFT0Yg
+b24gc3RkaW4gLSBQSUQgMzQ1MDEwOSB0ZXJtaW5hdGluZwpKdWwgMjYgMTM6NTI6MjAgYm94
+IHNhbWJhWzM0NDk5MzldOiAyMDIzLTA3LTI2VDAxOjUyOjIwLjY0MTE1OCswMDowMCBkYzcu
+c2FtYmEyMDA4cjIuZXhhbXBsZS5jb20gc2FtYmFbMzQ0OTkzOV06Ckp1bCAyNiAxMzo1Mjoy
+MCBib3ggc2FtYmFbMzQ0OTkzOV06IHNlcnZlcl9zdGRpbl9oYW5kbGVyOiBzYW1iYTogRU9G
+IG9uIHN0ZGluIC0gUElEIDM0NDk5MzkgdGVybWluYXRpbmcKSnVsIDI2IDEzOjUyOjIwIGJv
+eCBzYW1iYVszNDQ4ODIzXTogMjAyMy0wNy0yNlQwMTo1MjoyMC42NDU2NDIrMDA6MDAgbG9j
+YWxkYy5zYW1iYS5leGFtcGxlLmNvbSBzYW1iYVszNDQ4ODIzXToKSnVsIDI2IDEzOjUyOjIw
+IGJveCBzYW1iYVszNDQ4ODIzXTogc2VydmVyX3N0ZGluX2hhbmRsZXI6IHNhbWJhOiBFT0Yg
+b24gc3RkaW4gLSBQSUQgMzQ0ODgyMyB0ZXJtaW5hdGluZwo=
+--------------sts6gZe10Jv0bOMVixE8RaGV
+Content-Type: text/plain; charset=UTF-8;
+ name="origin-master-revert-ca7b7bde3915a821b1b9911a-make-test-TESTS=samba.tests.auth-grep-samba.txt"
+Content-Disposition: attachment;
+ filename*0="origin-master-revert-ca7b7bde3915a821b1b9911a-make-test-TEST";
+ filename*1="S=samba.tests.auth-grep-samba.txt"
+Content-Transfer-Encoding: base64
+
+SnVsIDI2IDEzOjU0OjA3IGJveCB3aW5iaW5kZFszNDUwNzYzXTogWzIwMjMvMDcvMjYgMDE6
+NTQ6MDcuMjU0NzQzLCAgMF0gLi4vLi4vc291cmNlMy93aW5iaW5kZC93aW5iaW5kZC5jOjE0
+NDEobWFpbikKSnVsIDI2IDEzOjU0OjA3IGJveCB3aW5iaW5kZFszNDUwNzYzXTogICB3aW5i
+aW5kZCB2ZXJzaW9uIDQuMTkuMHByZTEtREVWRUxPUEVSQlVJTEQgc3RhcnRlZC4KSnVsIDI2
+IDEzOjU0OjA3IGJveCB3aW5iaW5kZFszNDUwNzYzXTogICBDb3B5cmlnaHQgQW5kcmV3IFRy
+aWRnZWxsIGFuZCB0aGUgU2FtYmEgVGVhbSAxOTkyLTIwMjMKSnVsIDI2IDEzOjU1OjI0IGJv
+eCBzbWJkWzM0NTE4OTBdOiBbMjAyMy8wNy8yNiAwMTo1NToyNC4wOTY5MTcsICAwXSAuLi8u
+Li9zb3VyY2UzL3NtYmQvc2VydmVyLmM6MTc0NihtYWluKQpKdWwgMjYgMTM6NTU6MjQgYm94
+IHNtYmRbMzQ1MTg5MF06ICAgc21iZCB2ZXJzaW9uIDQuMTkuMHByZTEtREVWRUxPUEVSQlVJ
+TEQgc3RhcnRlZC4KSnVsIDI2IDEzOjU1OjI0IGJveCBzbWJkWzM0NTE4OTBdOiAgIENvcHly
+aWdodCBBbmRyZXcgVHJpZGdlbGwgYW5kIHRoZSBTYW1iYSBUZWFtIDE5OTItMjAyMwpKdWwg
+MjYgMTM6NTU6MjQgYm94IHdpbmJpbmRkWzM0NTE5MDBdOiBbMjAyMy8wNy8yNiAwMTo1NToy
+NC4xMjY2OTQsICAwXSAuLi8uLi9zb3VyY2UzL3dpbmJpbmRkL3dpbmJpbmRkLmM6MTQ0MSht
+YWluKQpKdWwgMjYgMTM6NTU6MjQgYm94IHdpbmJpbmRkWzM0NTE5MDBdOiAgIHdpbmJpbmRk
+IHZlcnNpb24gNC4xOS4wcHJlMS1ERVZFTE9QRVJCVUlMRCBzdGFydGVkLgpKdWwgMjYgMTM6
+NTU6MjQgYm94IHdpbmJpbmRkWzM0NTE5MDBdOiAgIENvcHlyaWdodCBBbmRyZXcgVHJpZGdl
+bGwgYW5kIHRoZSBTYW1iYSBUZWFtIDE5OTItMjAyMwpKdWwgMjYgMTM6NTU6NDEgYm94IHNt
+YmRbMzQ1MjAyN106IFsyMDIzLzA3LzI2IDAxOjU1OjQxLjU2MTc5MywgIDBdIC4uLy4uL3Nv
+dXJjZTMvc21iZC9zZXJ2ZXIuYzoxNzQ2KG1haW4pCkp1bCAyNiAxMzo1NTo0MSBib3ggc21i
+ZFszNDUyMDI3XTogICBzbWJkIHZlcnNpb24gNC4xOS4wcHJlMS1ERVZFTE9QRVJCVUlMRCBz
+dGFydGVkLgpKdWwgMjYgMTM6NTU6NDEgYm94IHNtYmRbMzQ1MjAyN106ICAgQ29weXJpZ2h0
+IEFuZHJldyBUcmlkZ2VsbCBhbmQgdGhlIFNhbWJhIFRlYW0gMTk5Mi0yMDIzCkp1bCAyNiAx
+Mzo1NTo0MSBib3ggd2luYmluZGRbMzQ1MjAzN106IFsyMDIzLzA3LzI2IDAxOjU1OjQxLjU3
+NDE5NSwgIDBdIC4uLy4uL3NvdXJjZTMvd2luYmluZGQvd2luYmluZGQuYzoxNDQxKG1haW4p
+Ckp1bCAyNiAxMzo1NTo0MSBib3ggd2luYmluZGRbMzQ1MjAzN106ICAgd2luYmluZGQgdmVy
+c2lvbiA0LjE5LjBwcmUxLURFVkVMT1BFUkJVSUxEIHN0YXJ0ZWQuCkp1bCAyNiAxMzo1NTo0
+MSBib3ggd2luYmluZGRbMzQ1MjAzN106ICAgQ29weXJpZ2h0IEFuZHJldyBUcmlkZ2VsbCBh
+bmQgdGhlIFNhbWJhIFRlYW0gMTk5Mi0yMDIzCg==
+
+--------------sts6gZe10Jv0bOMVixE8RaGV--
 
