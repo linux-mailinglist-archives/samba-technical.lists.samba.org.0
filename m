@@ -2,49 +2,39 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96CC076DFDB
-	for <lists+samba-technical@lfdr.de>; Thu,  3 Aug 2023 07:47:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B616876EF23
+	for <lists+samba-technical@lfdr.de>; Thu,  3 Aug 2023 18:10:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:Subject:To:cc;
-	bh=iMOh2nuBQXrQXxE/Sz5LF1GClsQRcH4il8gaLijbIrU=; b=lSMEGLiO64Oq/EfQsFYAX4NjP6
-	rsVTBHp0g8YcjBEPRCn62bNgVR27L17gpuY83mm8ntPtLBnFfPwTHDxzOchHEUAwTIq15QXIzxlHY
-	dltCA4HJZ32rvQ9+HtVVW5GiaRM44MG0d16kL2xGgH971tQKu4EZkYkVfupz4+avop1YFRuP+QS18
-	99XIuTKPVrDlq4QRIChxByMoAwCFVmXJ9tacxyunfTDFRXvFeG77WYSu1WhA/PQGngqRY2FeE9EQB
-	w/qeEKhCIUAKlkc5hbxe+U0/objRKVdOHRyRD+dvcRqznuHKRnclOU7CRN3OHPherHyp/31KrBdEV
-	r5dbpyJA==;
-Received: from ip6-localhost ([::1]:63066 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=JZS9K1+4Cccj7YyO8GDzS3h9Qf5x87cmslT9gQtNcfw=; b=WfbBfbPcUhlBe42AkYOx6lO41T
+	Jvjn25DcsjSXPZRFZpmtlqdjpofsMsmCXahDcsjwwk2JLNGluMZco9c6xcjVSGg46Ea/LWr/QBpxx
+	yjhE2oppQBhqe63fS7Czjra3/BKniue22sgPk/IO6KQ8xgUJGybqi6D4SGUooEZszGVONN2ebu+7V
+	T50LWqCbkbicQO69tKjeODW4hcJcgJ6fkV1psi/jZ1EH80DKanS+gEBgAzeulEui1jHKFaYtHsMNI
+	dmn9mczr+8NeRTSFke1JJw2NTUyaMbW6OHSFDg4XvY1YvwMglPn9bOs5nfrah5GJqwc1CJXatBuBF
+	4MX57cig==;
+Received: from ip6-localhost ([::1]:50114 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qRRAX-008y6a-N7; Thu, 03 Aug 2023 05:46:41 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:37114) 
+	id 1qRatl-009IOK-5I; Thu, 03 Aug 2023 16:10:01 +0000
+Received: from isrv.corpit.ru ([86.62.121.231]:53575) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qRRAR-008y6R-BO
- for samba-technical@lists.samba.org; Thu, 03 Aug 2023 05:46:38 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:To:From:CC;
- bh=iMOh2nuBQXrQXxE/Sz5LF1GClsQRcH4il8gaLijbIrU=; b=f9iOqWiSZ4hyuye3RMSo1pspa3
- BgRP/ir9a/1l/jCxmS4AATK8Q/bdKlCklv3iWIbcvj4czvxRLj1/c305P6j8/CaufQzhYwalmsvIx
- 7Nm96PaWKC7X6qGhgB+83dTLASamdZA1GYjvxlurwztj63r3XLt+Y5Y4i81VHb2Q/JMEQZ3O/UhqT
- dmlGx9BqrzT6p3KfiU/6Izgers7J1bpPAYdrRKXxiVG29YyjACXLQ+GppTuMndzjjqdU1wi8Vfn3J
- KZnS3LGZchsiRk0JxRurlFQHMBGTmlp81XVKUNsWke/BBuBxC8AVt+1n4bYFBrKLqk54Ozb6/KihQ
- 8HbCS5zQIxUPgSV2dm1Dqwlzs9DBSCMDRySbyjsrWw1tN1kqcUkbbhJvcAimvpwCXDOhDLTqC2XkJ
- DxCrXs1kGWnbDQ9EJKvuss4+OHjeIX1xvg7xMrUasiJ19auXgSclkj82eqzz/ISNfcc6rJiHdVmWI
- aVFOLoJn0Zt0heNnmjEjTrKF;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qRRAQ-005ez8-1g; Thu, 03 Aug 2023 05:46:34 +0000
-To: samba-technical@lists.samba.org, Pavel Kalugin <PKalugin@inno.tech>
-Subject: Re: What is the status of KDC resource group compression support in
- Samba?
-Date: Thu, 03 Aug 2023 07:46:33 +0200
-Message-ID: <12259767.O9o76ZdvQC@magrathea>
-In-Reply-To: <d1755029-d396-d1a9-167d-bcbe8b027021@inno.tech>
-References: <9a11b657-c387-ebe1-389a-3d91c677e8aa@inno.tech>
- <4503211.LvFx2qVVIh@magrathea>
- <d1755029-d396-d1a9-167d-bcbe8b027021@inno.tech>
+ (Exim) id 1qRatf-009IOA-2z
+ for samba-technical@lists.samba.org; Thu, 03 Aug 2023 16:09:57 +0000
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id 2830317C9F
+ for <samba-technical@lists.samba.org>; Thu,  3 Aug 2023 19:10:10 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id B9AB91B4A4
+ for <samba-technical@lists.samba.org>; Thu,  3 Aug 2023 19:09:51 +0300 (MSK)
+Message-ID: <051f35f4-c5cc-9932-6325-99f112b38f0f@tls.msk.ru>
+Date: Thu, 3 Aug 2023 19:09:51 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.1
+Content-Language: en-US
+To: samba-technical <samba-technical@lists.samba.org>
+Subject: symbol versions in public libs
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,46 +48,62 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
+From: Michael Tokarev via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Michael Tokarev <mjt@tls.msk.ru>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thursday, 3 August 2023 03:23:26 CEST Pavel Kalugin wrote:
-> On 8/2/23 10:25, Andreas Schneider wrote:
-> > On Friday, 28 July 2023 00:07:03 CEST Pavel Kalugin via samba-technical
-> > wrote:
-> > 
-> > In case you're looking into a first task. We need to replace
-> > lp_set_cmdline() with lpcfg_set_cmdline() everywhere. The reason is that
-> > lp_set_cmdline() leaks memory.
-> > 
-> > First start changing the client tools, which will be easy. The server side
-> > might be a bit trickier. However it will give you a good first entry
-> > point.
-> > 
-> > Here is an example:
-> > https://git.samba.org/?p=asn/samba.git;a=shortlog;h=refs/heads/asn-lpcfg
-> 
-> Hi Andreas!
+Hi!
 
-Hey :-)
+This is a JFYI email, to show how we have to fix samba build
+procedure to produce manageable packages for debian.
 
-> I'll definitely take a look at it, but unfortunately not before the weekend.
+During 4.17 stable series, there were a few new symbols appeared
+in libldb, versioned LDB_2.7.1 and LDB_2.7.2.  For example,
 
-No problem. You can ask questions on the samba-technical matrix channel if you 
-have some :-)
+  ldb_msg_remove_inaccessible@LDB_2.7.2
 
+However, new major version (samba 4.19, ldb 2.8.0) have these
+symbols at version 2.8.0, not 2.7.2.  The result is that all
+binaries linked with ldb-2.7.2 using these symbols does not
+work with ldb-2.8.0, even if all actual code is exactly the
+same.
 
-Best regards
+This is because symbols "backported" from the next major release
+to previous stable series are marked as belonging to this next
+major release, not to the previous stable where they backported
+to, even if no next major release has been released yet.
 
+For a downstream distribution this is unacceptable. There are
+two ways to deal with this situation:
 
-	Andreas
+  1) migrate all reverse-dependencies (users of this library)
+     to the new ABI, bumping the soname.  This will divirge from
+     upstream naming, since upstream uses libldb2, while we'll
+     have to use libldb3, libldb4 etc - bumping soname each time
+     such symbol version bump happens.
 
--- 
-Andreas Schneider                      asn@samba.org
-Samba Team                             www.samba.org
-GPG-ID:     8DFF53E18F2ABC8D8F3C92237EE0FC4DCC014E3D
+  2) provide symbols at older versions for new upstream major
+     release and keep soname.
 
+Either way means we have to patch upstream build system.
 
+I've choosen the 2) way, by providing missing ldb-2.7.1.syms
+and ldb-2.7.2.syms files for ldb-2.8.0.  I'll have to keep the
+old/missing .syms forever, they'll accumulate in debian/patches/
+with time.  This is not bad actually, since it's static contents.
+
+I'm not sure what value such versioning gives if it forces
+downstream to jump though hoops like this. But here we are.
+
+Thinking about it more, I'd just remove this @LDB_foo suffixing
+entirely, - it will be much easier to deal with.  Unfortunately
+this means we'll have to bump the soname again, or try to provide
+both versioned and unversioned symbols somehow, - which means
+patching waf which is not static target - which I'd try to avoid
+since it means constant maintenance with each waf update.
+
+JFYI, and thanks,
+
+/mjt
 
