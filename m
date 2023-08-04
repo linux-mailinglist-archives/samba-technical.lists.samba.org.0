@@ -2,48 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5CE976FE82
-	for <lists+samba-technical@lfdr.de>; Fri,  4 Aug 2023 12:30:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C20CE7702A3
+	for <lists+samba-technical@lfdr.de>; Fri,  4 Aug 2023 16:11:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=88+2w85wHcTWCQFL4GtryBQdwUuEeju9PjQFc+1oIC0=; b=pYsnvP/UtWaIxDgxJm0WkmKPBk
-	Z4e1to3lNPEb2tjPNxq9ongydJHh9gCHdNIT15La9h2uRCGaqVvGevKnSJolbABU5KphNqjf2QdMa
-	FmV5L+fUzkGgNhrPQO37TqR6ERUUVggwWKVpL4bUlRWOUiDr+x8KWRjKYmrJqwG3c0LmTuhLS4Xjb
-	7/pPgyrxzuVQtklOgPujoDqbPlNg+gYHhCuOZ0sFsoTTL8MyWsC8FDLRxgDx9dJiVpCSHFUlNR5rp
-	1FCXlcVNJF95+o4f2IFNsAgHc9Ow9W2lx5cozKh8xWHU3eJO+hLwgrgELgqiWhJtjqsW8JMOBf7gJ
-	YynlL1tw==;
-Received: from ip6-localhost ([::1]:51380 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=8qPIk8/dXSJYnJPGcTj9WjibAUYRdQLwOeudI6IoIKo=; b=ppUgyZ8VerHSuz+oLBgLX2hYN1
+	hlVOTFu/Y06ED3BM1RbsbfysE8l8hnxJiBo20R0iv/cmsFXas15Inr4p1tKbNJnEHjK4vQpPB2Ge1
+	KSieWMyT+D062IMKeaxyE+pglz0NBGt5FfcL7tGXXGv3OaBHOy22hWM3Nims40xJDqapZaLoow0r+
+	d1wn36jVHKTHN+vRTpt8u5ufht1oN26jPIhWjJDMVzbbyUCTjGgvOP8ATsxDDErxdgb4TtwxV1/CO
+	6Pe0aImE2hmSL3fs+i0RD8twvcB0dX/X2b6NqIq5l+RXvKgUlXZV9vtWzx5FnmuZcPPnvmDBX011I
+	HJb7e7cw==;
+Received: from ip6-localhost ([::1]:29564 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qRs4X-009ds8-Aa; Fri, 04 Aug 2023 10:30:18 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:33604) 
+	id 1qRvVz-009mZe-NA; Fri, 04 Aug 2023 14:10:51 +0000
+Received: from mail-oi1-x22c.google.com ([2607:f8b0:4864:20::22c]:49200) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qRs4O-009drz-B0
- for samba-technical@lists.samba.org; Fri, 04 Aug 2023 10:30:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=88+2w85wHcTWCQFL4GtryBQdwUuEeju9PjQFc+1oIC0=; b=iegskUMSssMwmBx7Sqx5uUyiAH
- BWyNK6p//U19Y1Zu6S6IeqBR0rYrNAAbwOPABl9FFbqV/LLn9UHmzObbJJfPRkK48JA5PLTozoa3/
- ZCLGbV0znPzlfpWLbTYYl4Jc0JBV33ZmHoh/INBY4AD/X49nnhxOOTh7I5JBppU8qjY2UZ6QA/fzZ
- TLI/YCY4CwQzV2XQrSk0mfK5k8pqnzLQPkSd6uby+H0x7a5WQY3GXeWKnAob6aru9UDUMz2pmmBhM
- B4HEhWRuEGBOn/F+F8cDVQBavAiJvAjScdO+gqo3AdUr5FOaMOwyCBQla5xKVVml7LwvVtWQVBKx2
- llz4s9R5TVYKLc0jOJo2lqltwKe2voXJBhdP481vElWBcIo6ht/jhPBV5GyS4/Bcy3RgDApoucfW3
- dbbYYsNYvI3qk8sf9coN7s3fZ67nJlRjpuN4wk5WX8UorPV7GbJijbMVFQ7PtMJkcNkaLK8wFs73b
- NSq//e0nd1wnC6AVA7bXUaky;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qRs4N-005x22-0C; Fri, 04 Aug 2023 10:30:07 +0000
-Message-ID: <ad9bbe2bbb1e17056dbf9c3a87dd2b1ef48b0171.camel@samba.org>
-Subject: Re: symbol versions in public libs
-To: Michael Tokarev <mjt@tls.msk.ru>, samba-technical
- <samba-technical@lists.samba.org>
-Date: Fri, 04 Aug 2023 22:30:04 +1200
-In-Reply-To: <051f35f4-c5cc-9932-6325-99f112b38f0f@tls.msk.ru>
-References: <051f35f4-c5cc-9932-6325-99f112b38f0f@tls.msk.ru>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1qRvVu-009mZU-4B
+ for samba-technical@lists.samba.org; Fri, 04 Aug 2023 14:10:48 +0000
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3a3b7f992e7so1593840b6e.2
+ for <samba-technical@lists.samba.org>; Fri, 04 Aug 2023 07:10:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1691158244; x=1691763044;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=8qPIk8/dXSJYnJPGcTj9WjibAUYRdQLwOeudI6IoIKo=;
+ b=TjXD1V70kjYEIyW5wJ09nFy9HUBCX4UaZ7z/oClzYSMZVHt/n6hIyjmuJ9HMdpjWBr
+ y1c5Wtt17cOgvGFPAmBCMfw82+o/H8QGSYCo0b5OGe786C6PZMW/jZUnQlfmn1LcJ9sA
+ N+G1oZCsa+d+q2DnDjkwk2KxH51Q9rLZ/E3PIM2R0dyARTKhZAz14MHXtMHNiH7bxuKt
+ I5XScOyuLaJWeVLM1z6x4hG7nzcABhn5uqzIqN45luVCM1ybiUs9MxdwNrM5CJGQ1OOq
+ EmQZg+L0ePqFZTh8rZiArnz8oUqZ5F1da62hsr6EQvmvtpbZpIX7FZe9GCcHrwNktVRo
+ EBRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1691158244; x=1691763044;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8qPIk8/dXSJYnJPGcTj9WjibAUYRdQLwOeudI6IoIKo=;
+ b=Gyufsx1jSgsHYccSNTghh5uuP2zQYr4vjBOIBQa7MqeLbmISse2S8e2sLKcEDiWmHU
+ vTSW9Y80iOXgXeJPHYZCOs3O83N84Y85XO7NOBzhPQoYE0meYn0y3dy8KUCk+QEq4X1f
+ CZCylv2pkfqZ4yYqNOoShbRdYAxPZ8+/WXc3NTZZgRuTFZR409vreA5trcJBFiOQD5RG
+ RaE8OTAijoGitjzgn0jP0JAYpWX7I4HJ5tHNuq3xSXVjMpfdfdj8mvz7R2zWeNGaoFdM
+ WqPcSI8iuV3bo0CI8kK1tiJBKjMITU2QWJZ0izGO6zmlbLwHtIc6CUGh9BZYjxCdSZtm
+ 4kbA==
+X-Gm-Message-State: AOJu0YxyaR6EmbhgPE9UdR7YfWXCVQMX5l0B45i8+2eA68GZtWNVGuvg
+ oNUuTGZxcaLQDufIOKqjTi2FW0y474r6PRSiIwYptRKUNYM=
+X-Google-Smtp-Source: AGHT+IHgElqvTVdZ7zdR/a+E/xyUNHY1cXUre2LKNFROkogawcOQr1O6SPsebrY/pl1IPtIIJWKPSq/wwZ0i97TZ+XI=
+X-Received: by 2002:a05:6808:b18:b0:3a5:b231:8590 with SMTP id
+ s24-20020a0568080b1800b003a5b2318590mr1902871oij.30.1691158243710; Fri, 04
+ Aug 2023 07:10:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Date: Fri, 4 Aug 2023 07:08:04 -0700
+Message-ID: <CACyXjPwLkUOSFWBNnGPnQhRTZCbF7NEr3_9kiY5keMTgaz38Og@mail.gmail.com>
+Subject: Samba master as AD seems to return 127.17.0.1 as one of its addresses
+ in DNS responses
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,95 +72,31 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 2023-08-03 at 19:09 +0300, Michael Tokarev via samba-technical
-wrote:
-> Hi!
-> 
-> This is a JFYI email, to show how we have to fix samba build
-> procedure to produce manageable packages for debian.
-> 
-> During 4.17 stable series, there were a few new symbols appeared
-> in libldb, versioned LDB_2.7.1 and LDB_2.7.2.  For example,
-> 
->   ldb_msg_remove_inaccessible@LDB_2.7.2
-> 
-> However, new major version (samba 4.19, ldb 2.8.0) have these
-> symbols at version 2.8.0, not 2.7.2.  The result is that all
-> binaries linked with ldb-2.7.2 using these symbols does not
-> work with ldb-2.8.0, even if all actual code is exactly the
-> same.
-> 
-> This is because symbols "backported" from the next major release
-> to previous stable series are marked as belonging to this next
-> major release, not to the previous stable where they backported
-> to, even if no next major release has been released yet.
-> 
-> For a downstream distribution this is unacceptable. There are
-> two ways to deal with this situation:
-> 
->   1) migrate all reverse-dependencies (users of this library)
->      to the new ABI, bumping the soname.  This will divirge from
->      upstream naming, since upstream uses libldb2, while we'll
->      have to use libldb3, libldb4 etc - bumping soname each time
->      such symbol version bump happens.
-> 
->   2) provide symbols at older versions for new upstream major
->      release and keep soname.
-> 
-> Either way means we have to patch upstream build system.
-> 
-> I've choosen the 2) way, by providing missing ldb-2.7.1.syms
-> and ldb-2.7.2.syms files for ldb-2.8.0.  I'll have to keep the
-> old/missing .syms forever, they'll accumulate in debian/patches/
-> with time.  This is not bad actually, since it's static contents.
-> 
-> I'm not sure what value such versioning gives if it forces
-> downstream to jump though hoops like this. But here we are.
-> 
-> Thinking about it more, I'd just remove this @LDB_foo suffixing
-> entirely, - it will be much easier to deal with.  Unfortunately
-> this means we'll have to bump the soname again, or try to provide
-> both versioned and unversioned symbols somehow, - which means
-> patching waf which is not static target - which I'd try to avoid
-> since it means constant maintenance with each waf update.
+Hi folks,
 
-This is very interesting, and to me just adds to the argument to un-
-version and re-bundle LDB.  Our only downstream user (sssd) uses the
-modules API which is not ABI guaranteed anyway. 
+I have built and installed Samba master from about three days ago. I
+then configured it as an AD server and started samba.
 
-If we don't do that, I don't see any good solutions.  Security releases
-are enough of a pain without coordinating ABI file updates between the
-releases, and in any case, if we have these updates:
+I now find that in the DNS responses for requests for the domain along
+with the actual address of the server there is also, as the first
+address 172.17.0.1. I have not yet figured out where this is coming
+from but it screws up CLDAP requests when trying to join that domain
+with another Samba server.
 
-ldb 2.0.1 -> ldb-2.0.2
-ldb 2.1.2 -> ldb-2.1.3
-ldb 2.2.3 -> ldb-2.2.4
+The CLDAP requests are sent to 172.17.0.1 and never leave the joining serve=
+r.
 
-The symbol won't be present in ldb 2.1.1 or 2.1.2 for example, but if
-we put in the ABI file as appearing in 2.0.2 it makes it seem like it
-was.  This comes from trying to use ABI versions as package versions,
-and having package-version in lock step with Samba major versions.
+Have I done something wrong?
 
-This is difficult.  Hmm.
-
-Andrew Bartlett
-
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead                https://catalyst.net.nz/services/samba
-Catalyst.Net Ltd
-
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-
-Samba Development and Support: https://catalyst.net.nz/services/samba
-
-Catalyst IT - Expert Open Source Solutions
-
+--=20
+Regards,
+Richard Sharpe
+(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
+=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
+=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
 
