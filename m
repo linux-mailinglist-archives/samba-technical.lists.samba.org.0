@@ -2,70 +2,67 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62A05775568
-	for <lists+samba-technical@lfdr.de>; Wed,  9 Aug 2023 10:32:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FBD4777137
+	for <lists+samba-technical@lfdr.de>; Thu, 10 Aug 2023 09:22:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=fun65h1R4diSDJnLTZ/cxzR1ILC0j7wzISUUtC+n2VQ=; b=hxeWDCp3IJqVtoQbd8a/z8Nc6q
-	TQ7w2lHCsX/jfyFSs1xlLtOPZUsYMfJmz6TVHgHh0cdnnC7Dz2N6GYxiExeyQtlUGAHzYeRXuX/0B
-	wqdWkt4xCvfqfongKwcCazMtL0KqslUwjtVnueGSTK/cLFDowL1v8pOXEGYSUt1BaWF5I+Q/iyiom
-	+sMhhZNN8LGOpYfYDJOpU3oaFtQmDynqWzwke10UjdsNpJE1vggAJ5FBVqDczOMIcCxVY/yuvTPjm
-	zFyUYmGkNTbCl5BFwyd677cawm3NYNP6+rAphrUTKHeuAZOUwUkO+3Qe0/BeTZd4g+aVCs8QUsmZ3
-	c/whaYgg==;
-Received: from ip6-localhost ([::1]:62452 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=HvH42dUlubBMm0ryqS2TOIl7aBw86JJE8vPn9bwwG24=; b=gEaQ3wpktltQzxPf4NXTabH54L
+	JkNqofdBemL2kSB8XGt6S2tieQ24UsAT2odpEwRLzStRL/1cJfWMvUDnJSBKA5OLTRyRTTUZMpca3
+	ElGK/S48YSS4pKoI86s+KYS88yJEq0+gtQgRvS4T1b6VVbcg4xxf8gWCarQif3nMZfxAbswDeKYVs
+	NbXRNmKNSL9bV9JdnHsNzA21xwbw36KphB6IUoJFtkC/LP3STiMZVoE6hGs4TtCCi7M8eUaJ8GCKd
+	XHpuM5VEpahvgWDASa0UyxPuPyuoR9PWZ9ajU6jT5S/gqg91Hd0jpZWY6hTU4il5Dv+QGCP8BORmo
+	/BLHZpzQ==;
+Received: from ip6-localhost ([::1]:50156 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qTebW-00B6p5-5g; Wed, 09 Aug 2023 08:31:42 +0000
-Received: from smtp-out2.suse.de ([2001:67c:2178:6::1d]:36374) 
+	id 1qTzzD-00BYZZ-Fp; Thu, 10 Aug 2023 07:21:35 +0000
+Received: from mail-ot1-x32a.google.com ([2607:f8b0:4864:20::32a]:44378) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qTeTB-00B5Ax-8Q
- for samba-technical@lists.samba.org; Wed, 09 Aug 2023 08:23:09 +0000
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 3A8C41F388;
- Wed,  9 Aug 2023 08:23:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1691569381; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=fun65h1R4diSDJnLTZ/cxzR1ILC0j7wzISUUtC+n2VQ=;
- b=g4FDCoxrnA/p+GYB2SAgg9FCsHDC8xx9oZ/+5lp2F0zXGltHAWDKRIOtF8gm878iBpKXUt
- roN9QLxvxxz/hruPD50xpPKd1EJgyufH1Q9BSATz9Nc8CpHpABXAhB63acjBhnT8R1dzx/
- osOyq4rFMxe4W2YvEs3BmnQMVSN/P5A=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1691569381;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=fun65h1R4diSDJnLTZ/cxzR1ILC0j7wzISUUtC+n2VQ=;
- b=YP+i5WCgxaDO0MJwnfKAGmomKqp+nrgJtNPAsBPZzyeBoI4TdjLxb1qRz8dnXxGoUZwRPp
- ye7wBZnxxnt9gbCw==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2633E13251;
- Wed,  9 Aug 2023 08:23:01 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id kWhPCeVM02RBbwAAMHmgww
- (envelope-from <jack@suse.cz>); Wed, 09 Aug 2023 08:23:01 +0000
-Received: by quack3.suse.cz (Postfix, from userid 1000)
- id 9D476A0769; Wed,  9 Aug 2023 10:23:00 +0200 (CEST)
-Date: Wed, 9 Aug 2023 10:23:00 +0200
-To: Christian Brauner <brauner@kernel.org>
-Subject: Re: [PATCH v7 06/13] ubifs: have ubifs_update_time use
- inode_update_timestamps
-Message-ID: <20230809082300.veczantamvcpinxu@quack3>
-References: <20230807-mgctime-v7-0-d1dec143a704@kernel.org>
- <20230807-mgctime-v7-6-d1dec143a704@kernel.org>
- <20230808093701.ggyj7tyqonivl7tb@quack3>
- <20230809-handreichung-umgearbeitet-951eebed4d61@brauner>
+ (Exim) id 1qTzyw-00BYZP-1B
+ for samba-technical@lists.samba.org; Thu, 10 Aug 2023 07:21:22 +0000
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-6bcd4b5ebbaso577153a34.1
+ for <samba-technical@lists.samba.org>; Thu, 10 Aug 2023 00:21:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=har.mn; s=google; t=1691652076; x=1692256876;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HvH42dUlubBMm0ryqS2TOIl7aBw86JJE8vPn9bwwG24=;
+ b=MirwHyY7kkvPWQptfoHmqteiZbK7KcIosd2/SDu5Pe1Ou7CiU/RHnVu4YpH10N8mDc
+ tmJbEMiqScOIhPeqrhjaOPyi8ugcHV0X9ZUON3gob0LqSxAyEbBsr/d+MqMrrEKxqWQL
+ sknBx4uhbvlNRVdS8w/AxkjONyn6D4SCh1EivZ+X3ue3RrV2OJPl39B6mJMOH+JAWcIh
+ //uy/Pk3DLYLbKwjcMyYamm+T0y2b5LBXpsT0BBkYTtT+eCNvgNtlOSHJbivuRWLbZLM
+ JKGoE7rFx2O79djUf1AdaYKq5hksVLLp9qop7AVXbmUNMli3mceLwyv8abWTVMyCZvcZ
+ zhUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1691652076; x=1692256876;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HvH42dUlubBMm0ryqS2TOIl7aBw86JJE8vPn9bwwG24=;
+ b=bxE683Nx2rI7csnI88eRPpS6YwoRPBmOFEmDBOdlAmtXWPux09/yUh4dkuAqP7Mc3Q
+ JxF+xFmWF2bPdOJ8sn0stQYRPHwgYaHxMU9louvDQEqAsQMrh5O43nCzGz+wBJswkLRU
+ RTlBWtNz2xr7ngsVb2YB9cKvP9yfaaxAcgYgv5BWSARjkC2u26nlFHWV8DEmkL29f63y
+ 4LLfSoP0Wr05cTv5Kbf3/gwGu9LSIlT5gyLkcem4wYBbrwy2PZOSQNYLf/bZMW8LUYue
+ ODYCWEdqEFiwBM9zAKI7hAnV1O/RLWYRRALoE2baCrAOF5S5eqBO8iWAlQ+Va5V3igab
+ S88A==
+X-Gm-Message-State: AOJu0YwizZoPdDPvng/+4SyD7x6QPxzzdMuHLX57X0xnlKHXgC6xkqk2
+ gmuqBQ83oaqR1zzcnHmkz3ThDQ==
+X-Google-Smtp-Source: AGHT+IEWudtIuZuTvRG8Jeh7+YS9QDl+hW1X+NxXO+5DqighQw2IlAJSuIZBvKoWO+I4zQxL+PErkA==
+X-Received: by 2002:aca:2818:0:b0:3a7:b5ea:f5e8 with SMTP id
+ 24-20020aca2818000000b003a7b5eaf5e8mr1609870oix.27.1691652075831; 
+ Thu, 10 Aug 2023 00:21:15 -0700 (PDT)
+Received: from localhost.localdomain ([76.132.108.20])
+ by smtp.gmail.com with ESMTPSA id
+ g5-20020a170902868500b001bb9f104333sm880561plo.12.2023.08.10.00.21.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Aug 2023 00:21:15 -0700 (PDT)
+To: sfrench@samba.org
+Subject: [PATCH v1 0/1] cifs: Release folio lock on fscache read hit.
+Date: Thu, 10 Aug 2023 00:19:21 -0700
+Message-Id: <20230810071922.30229-1-russ@har.mn>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230809-handreichung-umgearbeitet-951eebed4d61@brauner>
-X-Mailman-Approved-At: Wed, 09 Aug 2023 08:31:39 +0000
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,98 +76,32 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jan Kara via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jan Kara <jack@suse.cz>
-Cc: Latchesar Ionkov <lucho@ionkov.net>,
- Martin Brandenburg <martin@omnibond.com>,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- Jan Kara <jack@suse.cz>, linux-xfs@vger.kernel.org,
- "Darrick J. Wong" <djwong@kernel.org>,
- Dominique Martinet <asmadeus@codewreck.org>,
- Christian Schoenebeck <linux_oss@crudebyte.com>, ecryptfs@vger.kernel.org,
- linux-unionfs@vger.kernel.org, David Howells <dhowells@redhat.com>,
- Chris Mason <clm@fb.com>, Andreas Dilger <adilger.kernel@dilger.ca>,
- Hans de Goede <hdegoede@redhat.com>, Marc Dionne <marc.dionne@auristor.com>,
- samba-technical@lists.samba.org, codalist@coda.cs.cmu.edu,
- linux-afs@lists.infradead.org, linux-mtd@lists.infradead.org,
- Mike Marshall <hubcap@omnibond.com>, Paulo Alcantara <pc@manguebit.com>,
- linux-cifs@vger.kernel.org, Eric Van Hensbergen <ericvh@kernel.org>,
- Andreas Gruenbacher <agruenba@redhat.com>, Miklos Szeredi <miklos@szeredi.hu>,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- Hugh Dickins <hughd@google.com>, Benjamin Coddington <bcodding@redhat.com>,
- Tyler Hicks <code@tyhicks.com>, cluster-devel@redhat.com, coda@cs.cmu.edu,
- linux-mm@kvack.org, Ilya Dryomov <idryomov@gmail.com>,
- Iurii Zaikin <yzaikin@google.com>, Namjae Jeon <linkinjeon@kernel.org>,
- Trond Myklebust <trond.myklebust@hammerspace.com>,
- Shyam Prasad N <sprasad@microsoft.com>, Amir Goldstein <amir73il@gmail.com>,
- Kees Cook <keescook@chromium.org>, ocfs2-devel@lists.linux.dev,
- Chao Yu <chao@kernel.org>, Josef Bacik <josef@toxicpanda.com>,
- Tom Talpey <tom@talpey.com>, Tejun Heo <tj@kernel.org>,
- Yue Hu <huyue2@coolpad.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
- David Sterba <dsterba@suse.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- ceph-devel@vger.kernel.org, Xiubo Li <xiubli@redhat.com>,
- Gao Xiang <xiang@kernel.org>, OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
- Jan Harkes <jaharkes@cs.cmu.edu>, linux-nfs@vger.kernel.org,
- linux-ext4@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- Joseph Qi <joseph.qi@linux.alibaba.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, v9fs@lists.linux.dev,
- ntfs3@lists.linux.dev, Jeff Layton <jlayton@kernel.org>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- Steve French <sfrench@samba.org>,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- Luis Chamberlain <mcgrof@kernel.org>, Jeffle Xu <jefflexu@linux.alibaba.com>,
- devel@lists.orangefs.org, Anna Schumaker <anna@kernel.org>,
- Jan Kara <jack@suse.com>, Bob Peterson <rpeterso@redhat.com>,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- Sungjong Seo <sj1557.seo@samsung.com>, linux-erofs@lists.ozlabs.org,
- linux-btrfs@vger.kernel.org, Joel Becker <jlbec@evilplan.org>
+From: Russell Harmon via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Russell Harmon <russ@har.mn>
+Cc: Russell Harmon <russ@har.mn>, linux-cifs@vger.kernel.org,
+ samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed 09-08-23 09:06:34, Christian Brauner wrote:
-> On Tue, Aug 08, 2023 at 11:37:01AM +0200, Jan Kara wrote:
-> > On Mon 07-08-23 15:38:37, Jeff Layton wrote:
-> > > In later patches, we're going to drop the "now" parameter from the
-> > > update_time operation. Prepare ubifs for this, by having it use the new
-> > > inode_update_timestamps helper.
-> > > 
-> > > Signed-off-by: Jeff Layton <jlayton@kernel.org>
-> > 
-> > One comment below:
-> > 
-> > > diff --git a/fs/ubifs/file.c b/fs/ubifs/file.c
-> > > index df9086b19cd0..2d0178922e19 100644
-> > > --- a/fs/ubifs/file.c
-> > > +++ b/fs/ubifs/file.c
-> > > @@ -1397,15 +1397,9 @@ int ubifs_update_time(struct inode *inode, struct timespec64 *time,
-> > >  		return err;
-> > >  
-> > >  	mutex_lock(&ui->ui_mutex);
-> > > -	if (flags & S_ATIME)
-> > > -		inode->i_atime = *time;
-> > > -	if (flags & S_CTIME)
-> > > -		inode_set_ctime_to_ts(inode, *time);
-> > > -	if (flags & S_MTIME)
-> > > -		inode->i_mtime = *time;
-> > > -
-> > > -	release = ui->dirty;
-> > > +	inode_update_timestamps(inode, flags);
-> > >  	__mark_inode_dirty(inode, I_DIRTY_SYNC);
-> > > +	release = ui->dirty;
-> > >  	mutex_unlock(&ui->ui_mutex);
-> > 
-> > I think this is wrong. You need to keep sampling ui->dirty before calling
-> > __mark_inode_dirty(). Otherwise you could release budget for inode update
-> > you really need...
-> 
-> Fixed in-tree.
+Here's a patch that fixes what seems to be a showstopping bug in
+cifs-fscache. *Any time* that a fscache read hit occurs on a mounted
+cifs filesystem (and therefore cifs_readpage_worker is called), the page
+lock on the read page is leaked, causing subsequent accesses to the page
+to deadlock.
 
-Thanks. With that feel free to add:
+I've been running my machine for the past week with this change and it
+seems to work, but I'm a little concerned that this may mean
+cifs-fscache has no users (besides me). Up to you (maintainers) whether
+that means you should accept this patch... or delete the fscache
+support.
 
-Reviewed-by: Jan Kara <jack@suse.cz>
+Russell Harmon (1):
+  cifs: Release folio lock on fscache read hit.
 
-								Honza
+ fs/smb/client/file.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 -- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+2.34.1
+
 
