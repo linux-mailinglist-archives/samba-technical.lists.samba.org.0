@@ -2,49 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23E3477AB40
-	for <lists+samba-technical@lfdr.de>; Sun, 13 Aug 2023 22:44:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60DBD77C343
+	for <lists+samba-technical@lfdr.de>; Tue, 15 Aug 2023 00:09:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=/BVqXbuAjXk5UGuy5WlyhFW54Atl8VlPzGwSw7KEHTM=; b=ZxTdK1CfIaw5MVpCf+J1GSzdev
-	mNDvSGqSwnP9IjibHKC7ewCGRGEL3rSl2A2/Fk7VKhf+KX+Lph3q9SDwMvD/WkiymShc8+zXRasJi
-	VCq87800tFvLkaiGmzV0yxHozHwBROrU7b2t9AMq3yWVfthjF3I0xauapeFXXoP4vopS/PUIetf65
-	PrP50DABD4Y/n6sr91IXcfyNBtdCCEOW3ZStVnOuHmurrsigPwP1QwsiZQgPPA1vEf7ekNMyd/rSO
-	a21QoQ5lzs3ytbErNnd6XyeIB9TrfQSucm0mFvYUy33DYoYhPzDjMkG+IaoSmtHfQB7VAxDXgo/4N
-	YAgFkhuQ==;
-Received: from ip6-localhost ([::1]:56316 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=d+hSrL28D4qy53jfaZwStcBiY8tNgEP0kqqP8u2bebk=; b=QZuv6Zf3OXG0usRXcwddlaICnF
+	hlC2MVIfzGut79OFTNILGPUdqrgy9wM0v0PFwGLjFOkU0RpVmfIoX/ORqjKEYS5fFkViMjxIm4kJw
+	Mh5uRh6l3X//IxlYKXJmjxD/k1x78FmAKQzHf9zbXvaWSKK2OHUl4eUkQRBkRM1wkg9z1UM61Br0i
+	a6napDQ5yYIpiPzaDjKvRITX9SyYprzEHb7Za6tH7fCGw5F0Pc1z66UQTKiEkJh2K+6+pDmU3Te7j
+	6dKdi+YlVGIMQjTTgJDUXEkOUn/8LyfBrGimjB7/lFdybmx5JD0bmq2H0dizhQISTy7RTPbxLZImN
+	mSbbrHkA==;
+Received: from ip6-localhost ([::1]:36676 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qVHw1-00C7nz-4n; Sun, 13 Aug 2023 20:43:37 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:54420) 
+	id 1qVfjg-00CDtN-EJ; Mon, 14 Aug 2023 22:08:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24328) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qVHvu-00C7nq-Ft
- for samba-technical@lists.samba.org; Sun, 13 Aug 2023 20:43:34 +0000
+ (Exim) id 1qVfjY-00CDtE-LB
+ for samba-technical@lists.samba.org; Mon, 14 Aug 2023 22:08:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=aEVssHsDIW2Vd1kVSXU1pAeG5g0UTgXuucI3dhYgO0c=; b=SHP6T4JLrbw5v0SwzN9lKzi8jA
- flvCRaxcAo5RY6yWjqP1YyOxPtXKHtxE+bSD4oTyy90MZrC3ugl7JGhIjk+d9r2/TSWmvn1yVU0uQ
- 7+Gn30b3ftFMkv87GryvdkPetEDfPG1mdDPZlV1KcDF2zztGkthJAEpAiIr9lHuMiwtAFtjcw+nRl
- pu6XNK8ui2aP6mbzVl4MLZA7WV1XPRrqpwUVF09ggK4oMWdjB6rFGVG1jYrOjWfLTx6XHuK53ETto
- RdBmLZHu2x/q17THXrCNSJx4tGJo2qM0L6h2EN3bhCaEC/VviiBqGlJ6ac1uJjGT2SQJpjvPaUIOJ
- mryDGpyQQDN0Y2ZRZpD+1kh8/44KiwWj6iJNGPGy/xxJO4Ra97RTM5I/YxjLVXm8HQ9VpLSBj73NL
- YmyjOATyjmvh/dYqF1TfOUa15bHyxlHUlsOutuP73TjNR3LFj/Ch4odLaf7iGU4jrp2xKYuSqeRqR
- rtKEpdmEicUqCDdJDRYJ4rGc;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=d+hSrL28D4qy53jfaZwStcBiY8tNgEP0kqqP8u2bebk=; b=TfR2Vzz8qhD+VHlizD06s7JL31
+ Sgd5h1VHCQle2Nv0gYtBCAg8BKNUzA8yX0zNEDVIlctO6FR/1tUxxR4AUEp0WW1jHMpcCuC01Ic7N
+ zuy3B6H+SJhO8rxtH5b1/KbayfBd6q918swv8kTeO1Nith8z0TnSafnrXThnEj27boCCOv3vdLZiH
+ XNFfkN1qOWh4Ymx5hVQuzwhriSCByU34VuBi8TIumQr6TlP0SizfXocS4qRq3/XNpj5STSWsOt2dM
+ qj8krHhY0wHhsEODYxtEBa4En5c2b8xTNkIcWqRmITbUDZFsffwVV20f8bxiP9AwYYdfJ6o5DrCnv
+ QzxgbQrof8ZG+4XJCeAlMwP5m5ykhYBoJyQM8aI48K+S+jD9jYbmfcoAugvUmEwNQgFm1A9Pl0qFr
+ 9aEy8Yhu/zTRb8T5VVKuJu3b0yvGGSLNrPgiYC/mYUPhv7+kch0Q4e3zcRSM1DFMSAPa83a6PfTPa
+ u8+zQtMEnUCL3gillGXeqVsv;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qVHvs-007pjN-3A; Sun, 13 Aug 2023 20:43:29 +0000
-Message-ID: <44cfcdc452be42ee85a277c6ead6c7e06a59263a.camel@samba.org>
-Subject: Re: [Release Planning 4.19] Samba 4.19.0rc1
-To: Nico Kadel-Garcia <nkadel@gmail.com>, samba-technical@lists.samba.org
-Date: Mon, 14 Aug 2023 08:43:23 +1200
-In-Reply-To: <CAOCN9rxbcN85rbz4YcP4815-YYLFDAmpsOjxwgspVHtHsjnzsg@mail.gmail.com>
-References: <1430d5ec-f2fb-7021-0aa2-2a759a0dbefc@samba.org>
- <CAOCN9rxbcN85rbz4YcP4815-YYLFDAmpsOjxwgspVHtHsjnzsg@mail.gmail.com>
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1qVfjX-0083B7-0k; Mon, 14 Aug 2023 22:08:19 +0000
+Date: Mon, 14 Aug 2023 15:08:15 -0700
+To: Jelmer =?utf-8?Q?Vernoo=C4=B3?= <jelmer@samba.org>
+Subject: Re: Rust bindings for TDB
+Message-ID: <ZNqlz0tOaiMc2M1r@jeremy-rocky-laptop>
+References: <79BC9465-F780-4944-B996-35D7974F0DA7@samba.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+In-Reply-To: <79BC9465-F780-4944-B996-35D7974F0DA7@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,36 +56,25 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sat, 2023-08-12 at 17:59 -0400, Nico Kadel-Garcia via samba-
-technical wrote:
-> On Mon, Jul 24, 2023 at 8:29 AM Jule Anger via samba-technical<
-> samba-technical@lists.samba.org> wrote:
-> > Hi,
-> > Samba 4.19.0rc1 is scheduled for Friday, July 28 2023.
-> 
-> I've taken a shot at bringing this over to Amazon Linux 2023,
-> alongwith my RHEL 8 and 9 tools over at
-> https://github.com/nkadel/samba4repo/ . Unfortunately, the bits
-> ofmissing dependency get out of hand *really* fast. so I'm going to
-> haveto set it aside until and unless Amazon decides to port a *lot*
-> moreof the Fedora release they branched from. It's not the first time
-> I'verun into the problem. If anyone else wants to take a shot, I'm
-> happyto post my notes.
+On Tue, Aug 08, 2023 at 10:43:01AM +0000, Jelmer Vernooĳ via samba-technical wrote:
+>I've created Rust bindings for TDB. Th. Rust crate can be found at https://crates.io/crates/trivialdb (TDB was already taken :-( ). Documentation will be available on https://docs.rs/trivialdb/ at some point - it's waiting for their build image to include libtdb-dev.
+>
+>These bindings aim to provide a Rust idiomatic interface to TDB, and cover most of the existing TDB API.
+>
+>For now, this lives in its own git repository at https://github.com/jelmer/tdb-rs. I'm happy to see it shipped in the main samba repository if there's an appetite for that, but it would add another tool chain so perhaps it's better to keep it separate for now.
 
-I have greatly appreciated your work here, thanks so much for your
-continuing attention to this packaging effort.
-Your notes on Amazon Linux 2023 would be very useful.
-Thanks!
-Andrew Bartlett
+Thanks a *LOT* for doing this Jelmer !
 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-Samba Development and Support: https://catalyst.net.nz/services/samba
-Catalyst IT - Expert Open Source Solutions
+Maybe we'll be dragged, kicking and screaming
+into the post-C future sooner rather than later :-).
+
+Thanks once again !
+
+Jeremy.
+
