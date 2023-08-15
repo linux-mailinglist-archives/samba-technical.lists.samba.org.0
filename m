@@ -2,47 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60DBD77C343
-	for <lists+samba-technical@lfdr.de>; Tue, 15 Aug 2023 00:09:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8811277D213
+	for <lists+samba-technical@lfdr.de>; Tue, 15 Aug 2023 20:41:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=d+hSrL28D4qy53jfaZwStcBiY8tNgEP0kqqP8u2bebk=; b=QZuv6Zf3OXG0usRXcwddlaICnF
-	hlC2MVIfzGut79OFTNILGPUdqrgy9wM0v0PFwGLjFOkU0RpVmfIoX/ORqjKEYS5fFkViMjxIm4kJw
-	Mh5uRh6l3X//IxlYKXJmjxD/k1x78FmAKQzHf9zbXvaWSKK2OHUl4eUkQRBkRM1wkg9z1UM61Br0i
-	a6napDQ5yYIpiPzaDjKvRITX9SyYprzEHb7Za6tH7fCGw5F0Pc1z66UQTKiEkJh2K+6+pDmU3Te7j
-	6dKdi+YlVGIMQjTTgJDUXEkOUn/8LyfBrGimjB7/lFdybmx5JD0bmq2H0dizhQISTy7RTPbxLZImN
-	mSbbrHkA==;
-Received: from ip6-localhost ([::1]:36676 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=kJjeneACakyjixftgTs3skIu5CB0b3rHbi9cca9HEnA=; b=mdGeR4dl4WHuOR+ifPlHaTS8ja
+	rGVUT3yPBqbpsEfTeiCVEvwk5Ce0I+LZQjcoIaC8v58biQT9O1FF2Q+EiJEl0YbT8F0+p/1gLXdKp
+	mVRH12IqKoE+wrxpvKBKSiHpwgqJdEnk6OadU/9VjT0bw15RJV7OYWu2UPOGxencOu68sausk3HJU
+	aeLfujEc8SZWeCxmLS/yWPaKUEmlSMzIjZEsU7mWRlnnJgLtPSnwM9pmE0JFkMKUYILjqZweiFvAe
+	s2XjoGpB60dzxym4ucfDkiR5ouZ0GnJUJs99fFKXuQXumhzhEvYBQJ8Y2xQjgtUEaEgZ1sMcgpMUG
+	joNQOuFw==;
+Received: from ip6-localhost ([::1]:42656 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qVfjg-00CDtN-EJ; Mon, 14 Aug 2023 22:08:28 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:24328) 
+	id 1qVyyH-00CKhm-6W; Tue, 15 Aug 2023 18:40:49 +0000
+Received: from mx.manguebit.com ([2a01:4f8:1c1e:a2ae::2]:55082) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qVfjY-00CDtE-LB
- for samba-technical@lists.samba.org; Mon, 14 Aug 2023 22:08:24 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=d+hSrL28D4qy53jfaZwStcBiY8tNgEP0kqqP8u2bebk=; b=TfR2Vzz8qhD+VHlizD06s7JL31
- Sgd5h1VHCQle2Nv0gYtBCAg8BKNUzA8yX0zNEDVIlctO6FR/1tUxxR4AUEp0WW1jHMpcCuC01Ic7N
- zuy3B6H+SJhO8rxtH5b1/KbayfBd6q918swv8kTeO1Nith8z0TnSafnrXThnEj27boCCOv3vdLZiH
- XNFfkN1qOWh4Ymx5hVQuzwhriSCByU34VuBi8TIumQr6TlP0SizfXocS4qRq3/XNpj5STSWsOt2dM
- qj8krHhY0wHhsEODYxtEBa4En5c2b8xTNkIcWqRmITbUDZFsffwVV20f8bxiP9AwYYdfJ6o5DrCnv
- QzxgbQrof8ZG+4XJCeAlMwP5m5ykhYBoJyQM8aI48K+S+jD9jYbmfcoAugvUmEwNQgFm1A9Pl0qFr
- 9aEy8Yhu/zTRb8T5VVKuJu3b0yvGGSLNrPgiYC/mYUPhv7+kch0Q4e3zcRSM1DFMSAPa83a6PfTPa
- u8+zQtMEnUCL3gillGXeqVsv;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qVfjX-0083B7-0k; Mon, 14 Aug 2023 22:08:19 +0000
-Date: Mon, 14 Aug 2023 15:08:15 -0700
-To: Jelmer =?utf-8?Q?Vernoo=C4=B3?= <jelmer@samba.org>
-Subject: Re: Rust bindings for TDB
-Message-ID: <ZNqlz0tOaiMc2M1r@jeremy-rocky-laptop>
-References: <79BC9465-F780-4944-B996-35D7974F0DA7@samba.org>
+ (Exim) id 1qVyy6-00CKhc-HT
+ for samba-technical@lists.samba.org; Tue, 15 Aug 2023 18:40:42 +0000
+Message-ID: <2f7522c01a45f9052f423869040258ba.pc@manguebit.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com;
+ s=dkim; t=1692124835;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=kJjeneACakyjixftgTs3skIu5CB0b3rHbi9cca9HEnA=;
+ b=FJZrpg01mrmsoPHkhHAzaxo7ZZ55i2jvKk8EBea5OB1Cs9dZR1rEnUQ9wi6LPFJBGUw2UV
+ qzTNWHJefPmnrYbNk5hPeEaXR5iojvWA6SsP8lnHJRuQDlR4SIcFNv23uhmU/9EwJUcjF4
+ Yl/YfPlXTmPqco74Oy5eAu2j1Dfw/eWsnRorHz6zDU78VYQ2qLJJ0Y53glF9r8UjGa4KAw
+ xVR1qE13dfMrFBGTuEtho0moZYXkCzUraMbo8neevW1vAoWd0y8CLFKZKRRvgveP6rMjgz
+ kxRWeJ5IGB1j/ZmMFcJnlOg20RB4R+0Ip6pDTtohUZnSoThY+SdFOrc4LuCSrg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=manguebit.com; 
+ s=dkim; t=1692124835;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=kJjeneACakyjixftgTs3skIu5CB0b3rHbi9cca9HEnA=;
+ b=sgEX+zMm0KwH5JY6kJgT6JypLxG8sTkznUdSMrwnfUCaGP1xTGHOP9NCtS7QEUa9ysWs/G
+ eMkpfm+idxNpqwLrb6hswiFK5FVm3lvnil0Kqogs1VjIGy4attoobcwjdlwBI2qCvOwZog
+ wWc5c9uoG/93WxGNxPZx+heYgB/hq914XiFswmtTuttvv17i1KikCisEAPDcR8vUPMA5wc
+ N6fab/v2FGj4GEPFsTUwrK+I0XONhI7gIuLztzYtGtlz9lyur+bQCfoBl3uh3zQw87WHrG
+ t4CUhZ8VpcVfXn4a4j+xYdYfWgRI5MPSydj4o9F9JrNceITChMTc1VqqcCJ+dQ==
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=pc@manguebit.com smtp.mailfrom=pc@manguebit.com
+ARC-Seal: i=1; s=dkim; d=manguebit.com; t=1692124835; a=rsa-sha256; cv=none;
+ b=P7ahnPAeRIxx8jwOwFDl4P4LAVclIrqIsNrDQd9Dbu40taISzxiwSS3jHpGXNj63wCNqek
+ UIJoUJ+2VFcCQVxwOZEbU3Rk38rx/EFd+pcT4UCH2dxED0G8V2eQyT3GDuC8kkggJ3u+H4
+ lQi4q2Gb8n+yBz076+VBcvrk50DzminobmKIXq+yLpckXuTrRcGrZ6thDpCV5/qoE/bjux
+ NE8hYVfRAaQiVlZvYuEtlsfSEM4ZBt5/pfipOYDBSH4uyfuVgYA7qDWV7CCblzHDIRWJ6w
+ hIGtX/hFRzqQJHacVAZTu0SnspOd4/zvsBLejGAcBb3+KrDExvFZwgQTYKTXKQ==
+To: Scott Mayhew <smayhew@redhat.com>, Steve French <sfrench@samba.org>,
+ Ronnie Sahlberg <lsahlber@redhat.com>, Shyam Prasad N
+ <sprasad@microsoft.com>, Tom Talpey <tom@talpey.com>
+Subject: Re: [PATCH] smb: client: fix null auth
+In-Reply-To: <20230815-fix-cifs-null-auth-v1-1-3cb785216d97@redhat.com>
+References: <20230815-fix-cifs-null-auth-v1-1-3cb785216d97@redhat.com>
+Date: Tue, 15 Aug 2023 15:40:31 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <79BC9465-F780-4944-B996-35D7974F0DA7@samba.org>
+Content-Type: text/plain
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,25 +72,27 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Jeremy Allison <jra@samba.org>
-Cc: samba-technical@lists.samba.org
+From: Paulo Alcantara via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Paulo Alcantara <pc@manguebit.com>
+Cc: linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
+ linux-kernel@vger.kernel.org, Steve French <stfrench@microsoft.com>,
+ Scott Mayhew <smayhew@redhat.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Tue, Aug 08, 2023 at 10:43:01AM +0000, Jelmer Vernooĳ via samba-technical wrote:
->I've created Rust bindings for TDB. Th. Rust crate can be found at https://crates.io/crates/trivialdb (TDB was already taken :-( ). Documentation will be available on https://docs.rs/trivialdb/ at some point - it's waiting for their build image to include libtdb-dev.
+Scott Mayhew <smayhew@redhat.com> writes:
+
+> Commit abdb1742a312 removed code that clears ctx->username when
+> sec=none, so attempting to mount with '-o sec=none' now fails with
+> -EACCES.  Fix it by adding that logic to the parsing of the 'sec'
+> option, as well as checking if the mount is using null auth before
+> setting the username when parsing the 'user' option.
 >
->These bindings aim to provide a Rust idiomatic interface to TDB, and cover most of the existing TDB API.
->
->For now, this lives in its own git repository at https://github.com/jelmer/tdb-rs. I'm happy to see it shipped in the main samba repository if there's an appetite for that, but it would add another tool chain so perhaps it's better to keep it separate for now.
+> Fixes: abdb1742a312 ("cifs: get rid of mount options string parsing")
+> Signed-off-by: Scott Mayhew <smayhew@redhat.com>
+> ---
+>  fs/smb/client/fs_context.c | 4 ++++
+>  1 file changed, 4 insertions(+)
 
-Thanks a *LOT* for doing this Jelmer !
-
-Maybe we'll be dragged, kicking and screaming
-into the post-C future sooner rather than later :-).
-
-Thanks once again !
-
-Jeremy.
+Reviewed-by: Paulo Alcantara (SUSE) <pc@manguebit.com>
 
