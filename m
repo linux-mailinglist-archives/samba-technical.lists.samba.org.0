@@ -2,64 +2,47 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EF5277D9C2
-	for <lists+samba-technical@lfdr.de>; Wed, 16 Aug 2023 07:29:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C34777E725
+	for <lists+samba-technical@lfdr.de>; Wed, 16 Aug 2023 19:01:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=oI9EbUbdFX+RrThKFfE8bckQkP7vk+YwcykLWlRyZmc=; b=wZSU/j3DDxlOz1PBQg/VodbYAF
-	TOaVv+yeFVVAuF58RQH6/zvAhrbI3TYFaFqPfh8Tnzu3wqdTkoYuOIIGZFBG2MT2wOD3wmLACTYXU
-	gJe2SLfAeBm3H7vzLRjho+suDVdSeWSYifb+pHstMQgJ/7CyttS7zUiSiIBUY4BCGOtNDMbeJ9cY+
-	Cc5Ox557xpky0zmERTx1F29xrS30zCwlUNUIg1dz7fxQiyYm1sAKjOzFOl6yzFDi3wxnyWE5zoZJR
-	u+2MGNYbnVp2j4PArRfcd1d9Wn0N56A21WkD+oWZ+g6AjWY3IboxyRYLlq4QNbDDhgJT8tT1YvHPM
-	iskaa83Q==;
-Received: from ip6-localhost ([::1]:27118 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Subject:To:Date:cc;
+	bh=iEuBIeWH1oM6XVbbiC1eZ4EsFH8shcwIduq5YLNrMTs=; b=kb5H2aXXYcbe298A8Lr5DM5oWh
+	xbM/fQWyHJwHHc2zUyjxoh7lCzsJr8I/RS4Jx7Gol9AMOKI89cqM1b+0iYquSLICopusrX7wasyEz
+	sM8HBTRcRWsLgpgdIUDrj6Nl0pKcIXc3oQ8xft3zW4xnPQoDz2nginpyf75Tk+E8gRx2JuM2r9KXh
+	XPYih5JYt16R0XPJs1sGYBrKGK+rgc2K3RaET2ySHA5gxZhELskg53vQcRwjHieGD4ySsANeLVURx
+	EwVRpNs5Mf90+il7YpChB+CMdzBRFJOq5wyYI0STTpg6Hr5VAaWrgYEvAxhYaIlD3/hPopoo9r2cn
+	BpgvVDIw==;
+Received: from ip6-localhost ([::1]:33472 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qW95Z-00CMJb-21; Wed, 16 Aug 2023 05:29:01 +0000
-Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a]:61910) 
+	id 1qWJtV-00CYTw-CX; Wed, 16 Aug 2023 17:01:17 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43370) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qW95R-00CMJS-I7
- for samba-technical@lists.samba.org; Wed, 16 Aug 2023 05:28:58 +0000
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-52340d9187aso7988492a12.3
- for <samba-technical@lists.samba.org>; Tue, 15 Aug 2023 22:28:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692163729; x=1692768529;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oI9EbUbdFX+RrThKFfE8bckQkP7vk+YwcykLWlRyZmc=;
- b=pVHILuPrelt8olO6J3x6t/JNyuP+8amxy7PYit2QNk6GKT26n4acrJxjECq9+khi+n
- 6r6y9zU8Y1KgZF3Pg/SLchBo04Ia9kd+/goffo1ag0frUlBD9WAehmnn8/Nk9uf8H0Op
- g5gVHsf2/RhSfwkfwgWF/rGKxyhlzJghbagqEm4yE5bAomBKCsP6FxJuYd1HwHQnFJgO
- kKW9o0qUVVy+ljmlqdYGjh31Z4XyuoDKQMP9hu5ILLFk9FOfMkCiZUy1yYzhSElHO9uR
- UeIqSDy4FzGyHCVDLLCRyF6aoqkq4v+9Ov1tw+uREDnUJybAqlXvOudp5JBvqJu1vQiu
- L4pA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692163729; x=1692768529;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oI9EbUbdFX+RrThKFfE8bckQkP7vk+YwcykLWlRyZmc=;
- b=OhYgIvQkFdBBofouG8tXPBCzKNTrUOkCgDc35KJbkUSdxO9l+IsGHA/1+KTCE4NW/v
- GgvYitZK8dE3GcDoGW2O2r3qX4KKcowfmc5xAmKMIxZwlST3o6JgD3m3jUIHukJBuJH5
- 6klvDQmMAZdya6Eb0fHXe86mXEeipudW9POr5e9794415ghpejVthv1buhkv1ql9o9bU
- KDSCBi4Pd9eZfSc4oWCs2FXERoOIFtY6htrIeDVZmSu3H7AsAdPbuXu9IuKi6uiDTtu+
- bgH+9FRV0sws6A5WKHrA2Eni4DprIHN75b73WZs8MxnwA9w5UHyAfaJL/emPfaiK4kth
- r7Sw==
-X-Gm-Message-State: AOJu0Yw/A68YR2B/KcIIbiVBpX6hjqp8qD9XjoEmEnOVkbpjNLtjz7tx
- dI5evN7m03XoTYyfvuTxJa5peKToJ/2UifcCVVs=
-X-Google-Smtp-Source: AGHT+IHSF+TLanoCC/zz7iEYIVfKfhNYq8rVc5R2wapF465iYq1NHWQsc0WUGyq7xOotb7ciDMOqbS1Diw9kIuc+dZY=
-X-Received: by 2002:a17:907:1de0:b0:99d:f2dc:97e3 with SMTP id
- og32-20020a1709071de000b0099df2dc97e3mr307243ejc.20.1692163728394; Tue, 15
- Aug 2023 22:28:48 -0700 (PDT)
+ (Exim) id 1qWJtJ-00CYSz-6X; Wed, 16 Aug 2023 17:01:09 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=From:To:Date:Message-ID:CC;
+ bh=iEuBIeWH1oM6XVbbiC1eZ4EsFH8shcwIduq5YLNrMTs=; b=CC+989dvVjW7cExxK7o0fAIxb8
+ hmX0nJxqDNWcFAUiYhw201JUa+tPj8Gar8kSrrs+7jwaxU8lrOZIG0IkMdvdd8wU7Pxois6CM8wGi
+ OkZCeej2p5U20+awHjLBmaotatlBhyZhIPOa9VKoOaC/wNZXeaPWseNFs2rUSbzRr9WRr4JmPMvwB
+ 5qlqv+2GAi43D9WABSHQBlWT0HsMHW1r221ctqtzJv5ylxoM1ACsMPSPu9cxOil2pj1KJU4So6iGL
+ 1gElzNIWNfdNafvIVM5YDuDJ61+L5YGGPT6DspLP1hNbesx/elTNRTEBnM9HDDqa8jzXEdcA1mhf+
+ FFyIiuJtbajqpFTO8ezl+o2aDv3nuuEXCbOfcGTIt+OteQ62KDwD2LzSUTCmnvtcwLKMwyFIo/eiL
+ pNwcnbMuPycTAbX1oAPigSrylPJqHALM7anKnG69lJNLWNBIAzttEGNhWOLGEQWc/uW8IxhxX58aZ
+ 9AJVhy1l/l9dmjrOaM1Cc0eP;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1qWJtI-008QBC-20; Wed, 16 Aug 2023 17:01:04 +0000
+Message-ID: <1b733a1f-8262-0e21-cb84-48b85e106b94@samba.org>
+Date: Wed, 16 Aug 2023 19:01:04 +0200
 MIME-Version: 1.0
-References: <20230815-fix-cifs-null-auth-v1-1-3cb785216d97@redhat.com>
- <2f7522c01a45f9052f423869040258ba.pc@manguebit.com>
-In-Reply-To: <2f7522c01a45f9052f423869040258ba.pc@manguebit.com>
-Date: Wed, 16 Aug 2023 00:28:36 -0500
-Message-ID: <CAH2r5msYemdM+J_ETsrHOkxmm4qeDnA8cLYOHVA9LhfjoBnYuQ@mail.gmail.com>
-Subject: Re: [PATCH] smb: client: fix null auth
-To: Paulo Alcantara <pc@manguebit.com>
-Content-Type: multipart/mixed; boundary="000000000000eee10a060303917c"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Content-Language: de-DE
+To: samba-announce@lists.samba.org, samba@lists.samba.org,
+ samba-technical@lists.samba.org
+Subject: [Announce] Samba 4.18.6 Available for Download
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,86 +56,112 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Steve French via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Steve French <smfrench@gmail.com>
-Cc: Scott Mayhew <smayhew@redhat.com>, Shyam Prasad N <sprasad@microsoft.com>,
- linux-cifs@vger.kernel.org, samba-technical@lists.samba.org,
- linux-kernel@vger.kernel.org, Ronnie Sahlberg <lsahlber@redhat.com>,
- Steve French <sfrench@samba.org>, Tom Talpey <tom@talpey.com>,
- Steve French <stfrench@microsoft.com>
+From: Jule Anger via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jule Anger <janger@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
---000000000000eee10a060303917c
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Release Announcements
+---------------------
 
-Fixed some checkpatch warnings and added Paulo's RB, and updated
-cifs-2.6.git for-next
+This is the latest stable release of the Samba 4.18 release series.
 
 
-On Tue, Aug 15, 2023 at 1:42=E2=80=AFPM Paulo Alcantara via samba-technical
-<samba-technical@lists.samba.org> wrote:
->
-> Scott Mayhew <smayhew@redhat.com> writes:
->
-> > Commit abdb1742a312 removed code that clears ctx->username when
-> > sec=3Dnone, so attempting to mount with '-o sec=3Dnone' now fails with
-> > -EACCES.  Fix it by adding that logic to the parsing of the 'sec'
-> > option, as well as checking if the mount is using null auth before
-> > setting the username when parsing the 'user' option.
-> >
-> > Fixes: abdb1742a312 ("cifs: get rid of mount options string parsing")
-> > Signed-off-by: Scott Mayhew <smayhew@redhat.com>
-> > ---
-> >  fs/smb/client/fs_context.c | 4 ++++
-> >  1 file changed, 4 insertions(+)
->
-> Reviewed-by: Paulo Alcantara (SUSE) <pc@manguebit.com>
->
+Changes since 4.18.5
+--------------------
+
+o  Jeremy Allison <jra@samba.org>
+    * BUG 15420: reply_sesssetup_and_X() can dereference uninitialized tmp
+      pointer.
+    * BUG 15430: Missing return in reply_exit_done().
+
+o  Andrew Bartlett <abartlet@samba.org>
+    * BUG 15289: post-exec password redaction for samba-tool is more 
+reliable for
+      fully random passwords as it no longer uses regular expressions
+      containing the password value itself.
+    * BUG 9959: Windows client join fails if a second container 
+CN=System exists
+      somewhere.
+
+o  Ralph Boehme <slow@samba.org>
+    * BUG 15342: Spotlight sometimes returns no results on latest macOS.
+    * BUG 15417: Renaming results in NT_STATUS_SHARING_VIOLATION if 
+previously
+      attempted to remove the destination.
+    * BUG 15427: Spotlight results return wrong date in result list.
+
+o  Günther Deschner <gd@samba.org>
+    * BUG 15414: "net offlinejoin provision" does not work as non-root user.
+
+o  Pavel Filipenský <pfilipensky@samba.org>
+    * BUG 15400: rpcserver no longer accepts double backslash in dfs 
+pathname.
+    * BUG 15433: cm_prepare_connection() calls close(fd) for the second 
+time.
+
+o  Stefan Metzmacher <metze@samba.org>
+    * BUG 15346: 2-3min delays at reconnect with 
+smb2_validate_sequence_number:
+      bad message_id 2.
+    * BUG 15441: samba-tool ntacl get segfault if aio_pthread appended.
+    * BUG 15446: DCERPC_PKT_CO_CANCEL and DCERPC_PKT_ORPHANED can't be 
+parsed.
+
+o  Noel Power <noel.power@suse.com>
+    * BUG 15390: Python tarfile extraction needs change to avoid a warning
+      (CVE-2007-4559 mitigation).
+    * BUG 15435: Regression DFS not working with widelinks = true.
+
+o  Arvid Requate <requate@univention.de>
+    * BUG 9959: Windows client join fails if a second container 
+CN=System exists
+     somewhere.
+
+o  Jones Syue <jonessyue@qnap.com>
+    * BUG 15441: samba-tool ntacl get segfault if aio_pthread appended.
+    * BUG 15449: mdssvc: Do an early talloc_free() in _mdssvc_open().
 
 
---=20
-Thanks,
+#######################################
+Reporting bugs & Development Discussion
+#######################################
 
-Steve
+Please discuss this release on the samba-technical mailing list or by
+joining the #samba-technical:matrix.org matrix room, or
+#samba-technical IRC channel on irc.libera.chat.
 
---000000000000eee10a060303917c
-Content-Type: text/x-patch; charset="US-ASCII"; name="0001-smb-client-fix-null-auth.patch"
-Content-Disposition: attachment; 
-	filename="0001-smb-client-fix-null-auth.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_lldakw8n0>
-X-Attachment-Id: f_lldakw8n0
+If you do report problems then please try to send high quality
+feedback. If you don't provide vital information to help us track down
+the problem then you will probably be ignored.  All bug reports should
+be filed under the Samba 4.1 and newer product in the project's Bugzilla
+database (https://bugzilla.samba.org/).
 
-RnJvbSAyNzBkNzNlNjUwN2Y5YzdmZmY0Mzg0NGQ3NGY4NjM2NWRmMDAwYjM2IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTY290dCBNYXloZXcgPHNtYXloZXdAcmVkaGF0LmNvbT4KRGF0
-ZTogV2VkLCAxNiBBdWcgMjAyMyAwMDoyMzo1NiAtMDUwMApTdWJqZWN0OiBbUEFUQ0hdIHNtYjog
-Y2xpZW50OiBmaXggbnVsbCBhdXRoCgpDb21taXQgYWJkYjE3NDJhMzEyIHJlbW92ZWQgY29kZSB0
-aGF0IGNsZWFycyBjdHgtPnVzZXJuYW1lIHdoZW4gc2VjPW5vbmUsIHNvIGF0dGVtcHRpbmcKdG8g
-bW91bnQgd2l0aCAnLW8gc2VjPW5vbmUnIG5vdyBmYWlscyB3aXRoIC1FQUNDRVMuICBGaXggaXQg
-YnkgYWRkaW5nIHRoYXQgbG9naWMgdG8gdGhlCnBhcnNpbmcgb2YgdGhlICdzZWMnIG9wdGlvbiwg
-YXMgd2VsbCBhcyBjaGVja2luZyBpZiB0aGUgbW91bnQgaXMgdXNpbmcgbnVsbCBhdXRoIGJlZm9y
-ZQpzZXR0aW5nIHRoZSB1c2VybmFtZSB3aGVuIHBhcnNpbmcgdGhlICd1c2VyJyBvcHRpb24uCgpG
-aXhlczogYWJkYjE3NDJhMzEyICgiY2lmczogZ2V0IHJpZCBvZiBtb3VudCBvcHRpb25zIHN0cmlu
-ZyBwYXJzaW5nIikKQ2M6IHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmcKU2lnbmVkLW9mZi1ieTogU2Nv
-dHQgTWF5aGV3IDxzbWF5aGV3QHJlZGhhdC5jb20+ClJldmlld2VkLWJ5OiBQYXVsbyBBbGNhbnRh
-cmEgKFNVU0UpIDxwY0BtYW5ndWViaXQuY29tPgpTaWduZWQtb2ZmLWJ5OiBTdGV2ZSBGcmVuY2gg
-PHN0ZnJlbmNoQG1pY3Jvc29mdC5jb20+Ci0tLQogZnMvc21iL2NsaWVudC9mc19jb250ZXh0LmMg
-fCA0ICsrKysKIDEgZmlsZSBjaGFuZ2VkLCA0IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9m
-cy9zbWIvY2xpZW50L2ZzX2NvbnRleHQuYyBiL2ZzL3NtYi9jbGllbnQvZnNfY29udGV4dC5jCmlu
-ZGV4IDQ5NDZhMGM1OTYwMC4uNjdlMTZjMmFjOTBlIDEwMDY0NAotLS0gYS9mcy9zbWIvY2xpZW50
-L2ZzX2NvbnRleHQuYworKysgYi9mcy9zbWIvY2xpZW50L2ZzX2NvbnRleHQuYwpAQCAtMjMxLDYg
-KzIzMSw4IEBAIGNpZnNfcGFyc2Vfc2VjdXJpdHlfZmxhdm9ycyhzdHJ1Y3QgZnNfY29udGV4dCAq
-ZmMsIGNoYXIgKnZhbHVlLCBzdHJ1Y3Qgc21iM19mc19jCiAJCWJyZWFrOwogCWNhc2UgT3B0X3Nl
-Y19ub25lOgogCQljdHgtPm51bGxhdXRoID0gMTsKKwkJa2ZyZWUoY3R4LT51c2VybmFtZSk7CisJ
-CWN0eC0+dXNlcm5hbWUgPSBOVUxMOwogCQlicmVhazsKIAlkZWZhdWx0OgogCQljaWZzX2Vycm9y
-ZihmYywgImJhZCBzZWN1cml0eSBvcHRpb246ICVzXG4iLCB2YWx1ZSk7CkBAIC0xMjAxLDYgKzEy
-MDMsOCBAQCBzdGF0aWMgaW50IHNtYjNfZnNfY29udGV4dF9wYXJzZV9wYXJhbShzdHJ1Y3QgZnNf
-Y29udGV4dCAqZmMsCiAJY2FzZSBPcHRfdXNlcjoKIAkJa2ZyZWUoY3R4LT51c2VybmFtZSk7CiAJ
-CWN0eC0+dXNlcm5hbWUgPSBOVUxMOworCQlpZiAoY3R4LT5udWxsYXV0aCkKKwkJCWJyZWFrOwog
-CQlpZiAoc3RybGVuKHBhcmFtLT5zdHJpbmcpID09IDApIHsKIAkJCS8qIG51bGwgdXNlciwgaWUu
-IGFub255bW91cyBhdXRoZW50aWNhdGlvbiAqLwogCQkJY3R4LT5udWxsYXV0aCA9IDE7Ci0tIAoy
-LjM0LjEKCg==
---000000000000eee10a060303917c--
+
+======================================================================
+== Our Code, Our Bugs, Our Responsibility.
+== The Samba Team
+======================================================================
+
+
+
+================
+Download Details
+================
+
+The uncompressed tarballs and patch files have been signed
+using GnuPG (ID AA99442FB680B620).  The source code can be downloaded
+from:
+
+         https://download.samba.org/pub/samba/stable/
+
+The release notes are available online at:
+
+         https://www.samba.org/samba/history/samba-4.18.6.html
+
+Our Code, Our Bugs, Our Responsibility.
+(https://bugzilla.samba.org/)
+
+                         --Enjoy
+                         The Samba Team
 
