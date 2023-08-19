@@ -2,49 +2,49 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A1757813D8
-	for <lists+samba-technical@lfdr.de>; Fri, 18 Aug 2023 21:48:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45BCB781AC0
+	for <lists+samba-technical@lfdr.de>; Sat, 19 Aug 2023 20:07:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=215IqiKHM/5U0F/FVTo5wQDDYfN4K+fDZ8ZBSs80Jvg=; b=dKFqagAKxW61DJAuVwOIWC2ihU
-	/ptv1BhqML7EZGe8ZYGwtRSf8L9E255A9eLVaTgZkW/ywFjciOkw7Qw05R3WcfZuHE1MSxc2hsmZ4
-	GME3kOUtwJCrNS2Auhc3+MDQtzCyNt39PRCr/pI0l4Fm5zYg008BVGtwVKV4OZVb9pEDL50jvbpH4
-	heL3sbZfOTkES9jigv8//bCQjK8xPgiNPSwRPXLpa4IbPRCBXjNME4oqAwz6B4y8AvJKETm9eGh6h
-	vfLd1hPnj6KMS7OkdDxy4coIIBlt5rZm4STYifimcPAMqhzXoyI+LrtRGXzhagf2hkkjLa/oArITT
-	DaId51aA==;
-Received: from ip6-localhost ([::1]:62338 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
+	bh=u0iKvVL+W+B9Bq7SLOgIxPI/tAbfK/PwQcTNhpMzVWQ=; b=szQSCVmc6xGXDqzoeQzHGafY+X
+	CGuWYNhqoYJVBYaSkA9rhNCcxECdz8nE79sEukJS0PGvQxSSzfv6nO6PwfupOjsW9Spo0seXj6HuR
+	pfyYi3xa7R/TQtrftEVMYnD2TyOnFQVgx9JchP4K0Y+W4mDqkOwdosiYxlPD/IU1nRCXYWygJDLko
+	qXlONz4jzoe0fVVyAY0M4d7kHcmxWLKQ/FjSAugVXIXd4FuqDlPZjNN6zdTFPEo+Ux66NO6QsofJU
+	xOXsazFlUAtE6PLhgAbyD2/VH/Lh+2WsCAqU2df8x4TZSzADwmNOk1lIxDhCafKNghLBQSijKxT5b
+	UI7WJBKw==;
+Received: from ip6-localhost ([::1]:51626 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qX5RN-00DAl4-F9; Fri, 18 Aug 2023 19:47:25 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:16380) 
+	id 1qXQLW-00DKpA-0u; Sat, 19 Aug 2023 18:06:46 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:22336) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qX5RG-00DAkv-6S
- for samba-technical@lists.samba.org; Fri, 18 Aug 2023 19:47:22 +0000
+ (Exim) id 1qXQLM-00DKp1-5P
+ for samba-technical@lists.samba.org; Sat, 19 Aug 2023 18:06:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=x/NeP5AeZTp79QRVdbjzTEGSYZZG4/WLWuM1G5KE/1o=; b=kfFZ6y09wHD0lVynIpixGBEGQS
- Cb+OUcQ620P1yqPMByVLIFebEuwTo2yx0OH42Vki1CIYhyYBl3t7dDXxwoKpcVDemgRsym4Jcehx9
- TWhlVDPXmAnViur/bkZ/fAEB0CW+knciomY1W0mbDbtrX9OWeQhUO0YVStUM+2ieXcDGDuoQSacg0
- q7XSP4ecn3iNVzOOJO3Ozy2aEEcobtFW8PaQ6hZHNSAsjtLyj4RQSkIeAn6kPuOWudRdXHx3su402
- M1HfacNJcyEKPrQUftAkfZxawSkLSGnS80Vrq0TgdGGJwG0AYGgnJR3VdT+Tk0/bhtc9obbAU2Z26
- /RnhK3112kgtxb/K+zUsYdA1nMmlRxVX3/Nx9rGSNToejy37CXPCmwZNlNdgSajr468xGZ4znpmBF
- W37HME74/eRXVBYEgoYrTeRgBo+in+LTviM0eM9zL35pEOOm0FTdY9GonyRV1ef/eCAdlhFJttH1I
- Bm+yrYLERs5fJlsUGDcWfMxu;
+ s=42; h=Message-ID:Date:Cc:To:From;
+ bh=u0iKvVL+W+B9Bq7SLOgIxPI/tAbfK/PwQcTNhpMzVWQ=; b=p5MEvLS2rIKTccYRYxdhHfy8Ph
+ RljE1Y01ldNu8maZFFjoBX5WEi3j3odr8rI976Q6KtnAJFRrEDO0i23FVLd/uwIgheWJoUL1o5gTu
+ /QT5qN5GTFjLt5CYNzsysdNBFvvmavWBgwr+/uJclub3s7+GvIusVxWMHitu9BOzS1NPoZ3FZ8dM9
+ jJKTx73ArE6JSAmTAh5Bsy4AZb3933DbJpEIhe0pFuvIKMP7XDXs5KqndexF9kgbfm52YtMzj/B7m
+ dGxjL6fuD6+m/wLbZnn9jc0pF/b/bETHvaOilzWWhy8RQD5GzYRiVF0vgBYXq/cx20q+MsMJQLg0w
+ d517Jz6SGl/5Yidqg/8uYhPwS72Kt1g8DYyECI1ADVbR91WcO+D4Q03YktpZHX0rEJ4o7qpwIAIB/
+ KUiZHbKLe8vrSyr/Xlf1OwkjEJHLNRtA+i9huk20ttOCr3ql6XJoCkcdvL481ewLxMXbHCNTKriJZ
+ 7sxXPTBS74AnCAnvKpBzX6W5;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qX5RE-008n3D-27; Fri, 18 Aug 2023 19:47:17 +0000
-Message-ID: <5634843935b5cc2cbb01b466a2794c531d3494b6.camel@samba.org>
-Subject: Re: Loading users into a Samba AD DC using LDIF?
-To: Richard Sharpe <realrichardsharpe@gmail.com>, samba-technical
- <samba-technical@lists.samba.org>
-Date: Sat, 19 Aug 2023 07:47:11 +1200
-In-Reply-To: <CACyXjPwRaW=Nn6XOeMbpNj5YeLHhVnxiLeu42huE2JnSKeEKmA@mail.gmail.com>
-References: <CACyXjPwRaW=Nn6XOeMbpNj5YeLHhVnxiLeu42huE2JnSKeEKmA@mail.gmail.com>
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1qXQLJ-008vBK-12; Sat, 19 Aug 2023 18:06:33 +0000
+To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
+ Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+Subject: Re: Drop RHEL 7 / CentOS 7 support and move to Python 3.8 minimum?
+Date: Sat, 19 Aug 2023 20:06:32 +0200
+Message-ID: <14854277.O9o76ZdvQC@krikkit>
+In-Reply-To: <c1da83c30cca9c9e0d85fa6b1dbdd52e014ca918.camel@samba.org>
+References: <6725d25bf9dbbfebd0b1ad248fc6b397f89165c8.camel@samba.org>
+ <4db84791-6dbc-4f8e-f1d7-7582451d19c4@catalyst.net.nz>
+ <c1da83c30cca9c9e0d85fa6b1dbdd52e014ca918.camel@samba.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,49 +58,26 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andreas Schneider <asn@samba.org>
+Cc: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Fri, 2023-08-18 at 08:59 -0700, Richard Sharpe via samba-technical
+On Friday, 18 August 2023 02:08:00 CEST Andrew Bartlett via samba-technical 
 wrote:
-> Hi Folks,
-> In testing user creation with samba-tool, I found it takes around
-> tenminutes to create 10,000 users. This was with a VM but with
-> realhardware we might only expect a small factor of improvement.
-> Is there a way to use LDIF to load large numbers of users and
-> groupsinto Samba as an AD controller?
-> Of course, that might not be faster, but I am hoping.
+> I would note that times when we didn't line up the CI version and
+> Python 'supported' version, it kept breaking.
+> I note that RHEL7 ends 'maintenance' in June 2024, just after the 4.20
+> release March 2024
+> https://www.redhat.com/en/blog/end-maintenance-red-hat-enterprise-linux-7-al
+> most-here Those dates I think give good cause to drop CentOS 7, but other
+> views still welcome.
 
-Yes, to to avoiding the python startup overhead and being a single
-transaction (matters less on SSD, the fsync() was a real cost 'back in
-the day').  
-The minimum attributes in AD are smaller than you might expect:
-from an example in testprogs/blackbox/dbcheck-links.sh
-dn: CN=missingsidu1,CN=users,DC=release-4-5-0-
-pre1,DC=samba,DC=corpobjectclass: usersamaccountname: missingsidu1
-Setting passwords is more of a pain, by default unicodePwd takes the
-password as UTF-16-encoded("password") with the " chars really being in
-the string set!
-Or you can enable userPassword support, and just set "userPassword:
-password" just like any other attribute.
-samba-tool forest directory_service dsheuristics 000000001
-eg:(tested against a ad_dc testenv)
-bin/samba-tool forest directory_service dsheuristics 000000001 -s
-st/ad_dc/etc/smb.conf
-bin/ldbadd -H st/ad_dc/private/sam.ldbCan't load
-/usr/local/samba/etc/smb.conf - run testparm to debug itdn:
-CN=missingsidu1,CN=users,DC=addom,dc=samba,dc=example,dc=com           
-      objectclass: usersamaccountname: missingsidu1userPassword: 
-p@ssw0rd
-Added 1 records successfully
-I hope this helps!
-Andrew Bartlett
+I'm fine with dropping Python 3.6 support for Samba 4.20.
 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-Samba Development and Support: https://catalyst.net.nz/services/samba
-Catalyst IT - Expert Open Source Solutions
+
+	Andreas
+
+
+
