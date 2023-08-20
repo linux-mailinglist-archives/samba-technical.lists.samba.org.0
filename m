@@ -2,49 +2,52 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45BCB781AC0
-	for <lists+samba-technical@lfdr.de>; Sat, 19 Aug 2023 20:07:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D0807820C0
+	for <lists+samba-technical@lfdr.de>; Mon, 21 Aug 2023 01:53:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:Subject:To;
-	bh=u0iKvVL+W+B9Bq7SLOgIxPI/tAbfK/PwQcTNhpMzVWQ=; b=szQSCVmc6xGXDqzoeQzHGafY+X
-	CGuWYNhqoYJVBYaSkA9rhNCcxECdz8nE79sEukJS0PGvQxSSzfv6nO6PwfupOjsW9Spo0seXj6HuR
-	pfyYi3xa7R/TQtrftEVMYnD2TyOnFQVgx9JchP4K0Y+W4mDqkOwdosiYxlPD/IU1nRCXYWygJDLko
-	qXlONz4jzoe0fVVyAY0M4d7kHcmxWLKQ/FjSAugVXIXd4FuqDlPZjNN6zdTFPEo+Ux66NO6QsofJU
-	xOXsazFlUAtE6PLhgAbyD2/VH/Lh+2WsCAqU2df8x4TZSzADwmNOk1lIxDhCafKNghLBQSijKxT5b
-	UI7WJBKw==;
-Received: from ip6-localhost ([::1]:51626 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=6ShT9yJVoBlEQUjanj/aN0qI6sWt+4usyA98MJYsrY0=; b=FyNUdi6UcZiDlb/XXCIaXYascO
+	7dxsAz4FaljBn9ZqQGcoETrkzNw/6NNAt/IwwMKkEskaYgF9PgJ5k6u8ksMnnRpwDtDtvXN7X1kVX
+	TwmJza7BbAGh9XycQKN7c3jxx5ZBS79FieA/dH8OoY9ajt0/4EgSHSGopZFwvQTCCrPaFJtumRFpf
+	dfSSttOhpB1riNAcLqVO2wkWCwWFoAMWLddXuUB7ZOqZtdMX6nfrB3JCNulzrE0jSa7n4lmNDKgCL
+	m8CtvhpLMrZOXYaM5q15KocjVYgynK12yjrSxKvY1oQZBuDmF/nmgTMFTvpgvMmqPjFmIG96nUEYc
+	QG8SI+KA==;
+Received: from ip6-localhost ([::1]:47934 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qXQLW-00DKpA-0u; Sat, 19 Aug 2023 18:06:46 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:22336) 
+	id 1qXsDc-00DV5k-Db; Sun, 20 Aug 2023 23:52:28 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:26652) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qXQLM-00DKp1-5P
- for samba-technical@lists.samba.org; Sat, 19 Aug 2023 18:06:40 +0000
+ (Exim) id 1qXsDU-00DV5b-KF
+ for samba-technical@lists.samba.org; Sun, 20 Aug 2023 23:52:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Date:Cc:To:From;
- bh=u0iKvVL+W+B9Bq7SLOgIxPI/tAbfK/PwQcTNhpMzVWQ=; b=p5MEvLS2rIKTccYRYxdhHfy8Ph
- RljE1Y01ldNu8maZFFjoBX5WEi3j3odr8rI976Q6KtnAJFRrEDO0i23FVLd/uwIgheWJoUL1o5gTu
- /QT5qN5GTFjLt5CYNzsysdNBFvvmavWBgwr+/uJclub3s7+GvIusVxWMHitu9BOzS1NPoZ3FZ8dM9
- jJKTx73ArE6JSAmTAh5Bsy4AZb3933DbJpEIhe0pFuvIKMP7XDXs5KqndexF9kgbfm52YtMzj/B7m
- dGxjL6fuD6+m/wLbZnn9jc0pF/b/bETHvaOilzWWhy8RQD5GzYRiVF0vgBYXq/cx20q+MsMJQLg0w
- d517Jz6SGl/5Yidqg/8uYhPwS72Kt1g8DYyECI1ADVbR91WcO+D4Q03YktpZHX0rEJ4o7qpwIAIB/
- KUiZHbKLe8vrSyr/Xlf1OwkjEJHLNRtA+i9huk20ttOCr3ql6XJoCkcdvL481ewLxMXbHCNTKriJZ
- 7sxXPTBS74AnCAnvKpBzX6W5;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=6ShT9yJVoBlEQUjanj/aN0qI6sWt+4usyA98MJYsrY0=; b=xKA39e/OtNGoWEEswuwmaXPD9M
+ 6gbWaUibBktjbe8AJpSaYVstR1DbdfmP9n/48w9EVSpdZfjo08NRcCT2YHdtiqZGYbUP4EQpSsOZb
+ BuRXgI0ZDb7M6wbplNF+VGFxuEmtHG4Fnzc/RdBFefhgEwUQuWoe24adVP2ZueCC2RmJ8uE1ElV0M
+ ixZcGbPL5u08kpQ+VxQcVYa68o8d2aZlTmEHhWGk1BBbZbKAxfOGf+3IdJ7z54G4D2wIOhKDqbIWQ
+ PFIHq7fxg27KHT2XKqCU9W6ndIu6THblpHkcpyRLmovZF2ojyvJe5yHBXZ5fU1MH1vW64woWOsfcm
+ +TD3ZQdRu5DhA+N5DDmQOiz/E3i6E1L77FsZFXnXUg0QjIbMTLpUflCdwV+FB6ohMfBBhQ02GH8ti
+ SAsDcW3bcUMZOquspleJ7cOdeLdVEJKxmzdElN7IxAlRGfc0rINx+ZsL1IkJLxHMsNhquhVJ9vogJ
+ xrUgeMVmFqDyowXQd2uRV9C9;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qXQLJ-008vBK-12; Sat, 19 Aug 2023 18:06:33 +0000
-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+ (Exim) id 1qXsDS-0094uJ-0M; Sun, 20 Aug 2023 23:52:18 +0000
+Message-ID: <8373bd2101510ccf1af3b2fc005c6fe9673504af.camel@samba.org>
 Subject: Re: Drop RHEL 7 / CentOS 7 support and move to Python 3.8 minimum?
-Date: Sat, 19 Aug 2023 20:06:32 +0200
-Message-ID: <14854277.O9o76ZdvQC@krikkit>
-In-Reply-To: <c1da83c30cca9c9e0d85fa6b1dbdd52e014ca918.camel@samba.org>
+To: Andreas Schneider <asn@samba.org>, Douglas Bagnall
+ <douglas.bagnall@catalyst.net.nz>, Upstream Samba Technical Mailing list
+ <samba-technical@lists.samba.org>
+Date: Mon, 21 Aug 2023 11:52:11 +1200
+In-Reply-To: <14854277.O9o76ZdvQC@krikkit>
 References: <6725d25bf9dbbfebd0b1ad248fc6b397f89165c8.camel@samba.org>
  <4db84791-6dbc-4f8e-f1d7-7582451d19c4@catalyst.net.nz>
  <c1da83c30cca9c9e0d85fa6b1dbdd52e014ca918.camel@samba.org>
+ <14854277.O9o76ZdvQC@krikkit>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,26 +61,53 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andreas Schneider via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andreas Schneider <asn@samba.org>
-Cc: Andrew Bartlett <abartlet@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Friday, 18 August 2023 02:08:00 CEST Andrew Bartlett via samba-technical 
-wrote:
-> I would note that times when we didn't line up the CI version and
-> Python 'supported' version, it kept breaking.
-> I note that RHEL7 ends 'maintenance' in June 2024, just after the 4.20
-> release March 2024
-> https://www.redhat.com/en/blog/end-maintenance-red-hat-enterprise-linux-7-al
-> most-here Those dates I think give good cause to drop CentOS 7, but other
-> views still welcome.
+On Sat, 2023-08-19 at 20:06 +0200, Andreas Schneider wrote:
+> On Friday, 18 August 2023 02:08:00 CEST Andrew Bartlett via samba-
+> technical 
+> wrote:
+> > I would note that times when we didn't line up the CI version and
+> > Python 'supported' version, it kept breaking.
+> > I note that RHEL7 ends 'maintenance' in June 2024, just after the
+> > 4.20
+> > release March 2024
+> > https://www.redhat.com/en/blog/end-maintenance-red-hat-enterprise-linux-7-al
+> > 
+> > most-here Those dates I think give good cause to drop CentOS 7, but
+> > other
+> > views still welcome.
+> 
+> I'm fine with dropping Python 3.6 support for Samba 4.20.
 
-I'm fine with dropping Python 3.6 support for Samba 4.20.
+Thanks.  
+
+So far we seem to be missing the markdown and dns packages for Python
+3.8 on Centos8 Stream.  Do you know where I might find these packages,
+or how we might get them to become packaged?
+
+The other important but not totally vital packages I couldn't find for
+Python 3.8 was setproctitle and gpg.
+
+https://gitlab.com/samba-team/samba/-/merge_requests/3231
+
+Andrew Bartlett
 
 
-	Andreas
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead                https://catalyst.net.nz/services/samba
+Catalyst.Net Ltd
 
+Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
+company
+
+Samba Development and Support: https://catalyst.net.nz/services/samba
+
+Catalyst IT - Expert Open Source Solutions
 
 
