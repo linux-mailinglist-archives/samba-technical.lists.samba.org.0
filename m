@@ -2,51 +2,71 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C7FF7821EF
-	for <lists+samba-technical@lfdr.de>; Mon, 21 Aug 2023 05:37:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6604378234F
+	for <lists+samba-technical@lfdr.de>; Mon, 21 Aug 2023 07:48:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=6iEhC/EwPcnswq0Z/ACaMfqnOakbGeVKz2D3ntXy9o8=; b=BUpgZDVXNx1DxIXUfLETEOUP+M
-	GQ5tPLmtEOQs8f+YCZFG9/ZDpI4acdJKkV5yRUvxWgcxKqS01FUU/TyFPPqxSyjjTh5BlS5xJRXiV
-	3pYMxfJDdp0q95vZXj3yQ145S159L9MYoO2fIWc7HeH5FAEbEO9UOHH3cVACqEDWhE4wpScC61iSh
-	WIH9XV1Th5y8MQHPX6HDSfVMMDD8R34rMOO4hF47WtV+a53Ed5W0cqozjNB5YBKmVCvm3UneLYukg
-	qRMbAj8gQCslqRUiWYQc63Y70NRGgUR+sU5l0UgVViurd8R3wRpnsqXqPOt4yJiJJQi1bnfp9AaA7
-	7EA04bSg==;
-Received: from ip6-localhost ([::1]:57428 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=GirqtqJibvF2EeyAKA9kys3RH6cBsYmMdFkck5DztCg=; b=FvJ0tLftLds43/DgFfuzXaq/J6
+	tWVTqdqXjTZEyUkLQS+Yt4BATG6jAXEpWpLBFdVfopdefdlrltcAipj9YcspUqvB/Czw5N1Caacxo
+	Jj9FCVxeCCE6Eh4ngUuDLaS2KcoGE9q/liiVHhqpYf7EOrzwDTMWWzq8Dfrp22qrt975k7RbF2/xA
+	X9t4oQpGVhF/8aRC52qSpo2LqlNxUVavXgHev0ul0Kaz7kke0ybGHi3+S7BysG5i6gdGxDkBATgCu
+	2qBGp73a2F3fSwTLYRP9nQB39fKuZmeZAuOvvFKW704O47KSkqP7o4vriIdZq4z9XpDstNam/G1+F
+	uZ7IKf6A==;
+Received: from ip6-localhost ([::1]:56462 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qXviq-00DY8P-4I; Mon, 21 Aug 2023 03:36:56 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:63530) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qXvij-00DY8F-AT
- for samba-technical@lists.samba.org; Mon, 21 Aug 2023 03:36:53 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=jvYn1sWORNR2/Y1mJnlZc7LWTEuS8l426KYgBkt9rEo=; b=wIkx2lkQK4+XFwLziMp+bIFMhj
- ZD5zxggPj8yEa0zxMoM4KHhyjFdjgNn7nmNovUEq69In06MI/XQG9cINB2d7FSbAgTy+W2XVEDOcC
- Nutqs3EEKZukDVKZcl/o1pphDbKl3cNrQ3WTrumdtG8wbjC/mZN5zvoI47s4r1Vjruym/nCDa0YtI
- xURc6dNFG6uuXAfcQ3ZtFANVp3BKlFq3SDgjxYD+CQBKzKe+m+tVJ5e/GW0u5O/9EFJ3mHibLtyXN
- YO9i/nLt/fwKCaKhpTXqOckGidDboAEfbkY0tdyct4hH0sI0zw1SvWV480CJXa1JQw0B+hv7xqEtb
- rBOWGmLkjHvcJxaeNdMd3EDq23Qull1ltVtG0vTdYlavBayn2uXbnnMXbIsgsmQiwH2YB53mR+Kyd
- s/Zc79oDKizfbp7uOnk6N4YS83HuIEDU1YBjtNUd0M5Wx/O3XzW4tZMeAC5E9T71fsgFnQSARgFp3
- lh5xUp/VSVyQ6RlMlyjAqE+i;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qXvih-0096Eu-2l; Mon, 21 Aug 2023 03:36:48 +0000
-Message-ID: <8acd38a4d8bad00d88dad338c26732384f8dd19d.camel@samba.org>
-Subject: Re: Building Samba master from a few days ago on CentOS 8.5 runs
- into a weird Python problem
-To: Richard Sharpe <realrichardsharpe@gmail.com>
-Date: Mon, 21 Aug 2023 15:36:43 +1200
-In-Reply-To: <CACyXjPw2uB5cCERsytg8SDK+3f-69QeZgD81SP22O=1D+byJUA@mail.gmail.com>
-References: <CACyXjPzjJTfpx7ad2BQS0CiN0SRazz_7tdSwDnX7+qZR9VFfYg@mail.gmail.com>
- <dd2f4ba33c19cae2271c23c9bfb5e90d5d3172c1.camel@samba.org>
- <CACyXjPw2uB5cCERsytg8SDK+3f-69QeZgD81SP22O=1D+byJUA@mail.gmail.com>
-User-Agent: Evolution 3.36.5-0ubuntu1 
+	id 1qXxlt-00DYsS-0L; Mon, 21 Aug 2023 05:48:13 +0000
+Received: from mx.inno.tech ([185.228.49.205]:32270) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1qXxlm-00DYsJ-7P
+ for samba-technical@lists.samba.org; Mon, 21 Aug 2023 05:48:10 +0000
+Received: from ksmg3 (localhost [127.0.0.1])
+ by mx.inno.tech (Postfix) with ESMTP id B93FE8000B
+ for <samba-technical@lists.samba.org>; Mon, 21 Aug 2023 08:48:02 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx.inno.tech B93FE8000B
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=inno.tech; s=s1;
+ t=1692596882; bh=GirqtqJibvF2EeyAKA9kys3RH6cBsYmMdFkck5DztCg=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=nFxLDSqbX1Sc/Zb4445qJUeYutapVhe/mT1pSf8NApxYP96wPHa3+LYt9X8RPemyu
+ /YCPRAeuGfegEo6i87PjzSXVOB2l+1sE6EQMTOi4s294Wq/QnjqOo6FpwQHwNVzmHW
+ gaj/Nzp0mDIutovINIJcF0DP8bK+0ybQZwlFCSFeV+uNFs7Cc0w6z1pLDidsY2mVCL
+ 3Eqba2fmRty4dIMdzYSO5lOf37IXGCojZnA26vQLpbOmmRGOf8AE2zxhKej4Yns93c
+ rXyGIPcgp3yeCHFsSsitecsfLVo262QNwUQuyW3Ttf8j18G+mtccErdq2hPg2dLXJd
+ YVpN4EexHh+ow==
+Received: from SEC-DLP-QRNT (unknown [10.0.0.117])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mx.inno.tech (Postfix) with ESMTPS
+ for <samba-technical@lists.samba.org>; Mon, 21 Aug 2023 08:48:02 +0300 (MSK)
+X-CHECKED: 1
+X-CHECKED-RELAY-ID: 3c279d7389fa9528e53a55e18b8e1fb6328980c7
+X-Cache: 20230821_084758837_00003395
+X-MS-Exchange-Organization-AuthAs: Partner
+Received: from [172.28.103.174] (172.28.103.174) by MAIL-DC2.inno.local
+ (10.12.115.10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.30; Mon, 21 Aug
+ 2023 08:48:00 +0300
+Message-ID: <62eadda8-c6d3-4086-8f64-c37a33824fa0@inno.tech>
+Date: Mon, 21 Aug 2023 08:48:00 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.29
+User-Agent: Mozilla Thunderbird
+Subject: Re: Drop RHEL 7 / CentOS 7 support and move to Python 3.8 minimum?
+To: <samba-technical@lists.samba.org>
+References: <6725d25bf9dbbfebd0b1ad248fc6b397f89165c8.camel@samba.org>
+ <4db84791-6dbc-4f8e-f1d7-7582451d19c4@catalyst.net.nz>
+ <c1da83c30cca9c9e0d85fa6b1dbdd52e014ca918.camel@samba.org>
+ <14854277.O9o76ZdvQC@krikkit>
+Content-Language: en-US
+In-Reply-To: <14854277.O9o76ZdvQC@krikkit>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.28.103.174]
+X-KSMG-Rule-ID: 5
+X-KSMG-Message-Action: skipped
+X-KSMG-AntiSpam-Status: not scanned, allowlist
+X-KSMG-AntiPhishing: not scanned, allowlist
+X-KSMG-LinksScanning: not scanned, allowlist
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ not scanned, allowlist
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,80 +80,30 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
+From: Pavel Kalugin via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Kalugin <PKalugin@inno.tech>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Sun, 2023-08-20 at 20:08 -0700, Richard Sharpe wrote:
-> On Sun, Aug 20, 2023 at 7:44 PM Andrew Bartlett <abartlet@samba.org>
-> wrote:
-> > On Wed, 2023-08-16 at 18:50 -0700, Richard Sharpe via samba-
-> > technical wrote:
-> > Hi folks,
-> > 
-> > I am trying to configure Samba master from a few days ago on a
-> > CentOS
-> > 8.5 system.
-> > 
-> > I ran the bootstrap script and it only complained about lmdb-devel
-> > ...
-> > 
-> > Then when I ran configure --enable-debug, I got this error:
-> > 
-> > --------------------------------------
-> > # ./configure --enable-debug
-> > Setting top to                           : /root/src/samba-ad-
-> > error-injection
-> > Setting out to                           :
-> > /root/src/samba-ad-error-injection/bin
-> > Checking for 'gcc' (C compiler)          : Traceback (most recent
-> > call last):
-> >   File "/root/src/samba-ad-error-
-> > injection/third_party/waf/waflib/Utils.py",
-> > line 833, in wrap
-> >     return cache[k]
-> > KeyError: (<samba_waf18.ConfigurationContext object at
-> > 0x7fb83837d8e0>,)
-> > 
-> > During handling of the above exception, another exception occurred:
-> > 
-> > Traceback (most recent call last):
-> >   File "/root/src/samba-ad-error-
-> > injection/third_party/waf/waflib/Utils.py",
-> > line 833, in wrap
-> >     return cache[k]
-> > KeyError: (<samba_waf18.ConfigurationContext object at
-> > 0x7fb83837d8e0>,)
-> > ---------------------------------------
-> > 
-> > In looking at the Python code it seems like there is an issue with
-> > the
-> > except KeyError clause in the code.
-> > 
-> > Has anyone seen this issue before?
-> > 
-> > Richard,
-> > 
-> > Just checking if you managed to work it out?
-> 
-> Yes, I did thank you. The bootstrap script had not actually run
-> andall I had to do from memory was to remove lmdb-devel from the list
-> ofRPMs installed.
-> It was confusing at first because I first built it on one of
-> ourstandard build VMs and did not have to run the bootstrap script.
 
-We really should fix that error handling.  It is in waf, I wonder if a
-newer version handles it better?  Otherwise we should tell upstream.
-See also:https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1011163
-Which might be unrelated (mjt assures me it is) but better error
-handling would reduce head scratching. 
-Andrew,
+
+On 8/19/23 21:06, Andreas Schneider via samba-technical wrote:
+> On Friday, 18 August 2023 02:08:00 CEST Andrew Bartlett via samba-technical
+> wrote:
+>> I would note that times when we didn't line up the CI version and
+>> Python 'supported' version, it kept breaking.
+>> I note that RHEL7 ends 'maintenance' in June 2024, just after the 4.20
+>> release March 2024
+>> https://www.redhat.com/en/blog/end-maintenance-red-hat-enterprise-linux-7-al
+>> most-here Those dates I think give good cause to drop CentOS 7, but other
+>> views still welcome.
+> 
+> I'm fine with dropping Python 3.6 support for Samba 4.20.
+
+How will this affect OpenSUSE Leap users, where official python3 is 
+still python3.6?
 
 -- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/Samba Team Member (since 2001) https://samba.orgSamba Team Lead                https://catalyst.net.nz/services/sambaCatalyst.Net Ltd
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-Samba Development and Support: https://catalyst.net.nz/services/samba
-Catalyst IT - Expert Open Source Solutions
+Pavel Kalugin
+inno.tech
+
