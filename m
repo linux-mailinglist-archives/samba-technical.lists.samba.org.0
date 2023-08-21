@@ -2,51 +2,73 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D48897823B1
-	for <lists+samba-technical@lfdr.de>; Mon, 21 Aug 2023 08:28:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 253CE782405
+	for <lists+samba-technical@lfdr.de>; Mon, 21 Aug 2023 08:51:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
-	bh=g9XIsdymZtIYScMKoP1khuLAGTXAvar2p7vK/JS0UAM=; b=5yYdp0OJzvrHxX8uX4ZyJK6+bU
-	dGmyeoiw+Xffa55tlN99avF/evimEFVnvEBuQBuTEWb7aQbw+U4Y5Ky99A214dUqqGOC6FrSMa2pZ
-	+MKJrYae6PoElY9rwBYQjpkNwy3cEmaJcW6+r0OYh8jO/1PHKEXre65KYi9RCNfQGoxmSGluLREK7
-	LV3vmdMXHxrSHL10PqpJQ6pa5Rmzmnw9TRKaK0ARMg0XjY/KPXsQPgfyIZGy/y0stuM/Y8J5lhvEa
-	oBLZjP5bxf61eW74BPU0xHqek/ZPoRIJSblr5LtJrlJiJoA4oho50NM+A9Byod4YFNQR78L461tP9
-	rnKTy9pw==;
-Received: from ip6-localhost ([::1]:30104 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=Sb1z3SRFREqitmtGrSbvSDrzfHAqdr6e22ufQj8xBVc=; b=dzUaVPnpZ6z/jpq768ZdnQXCXD
+	p2tx6G6I6r9cZgPrbUY7efuD79BUSv+h+xSiVAQM00tLzrc4Y0qA6NEdiznGSfOWcYAm9faM6FqI5
+	HfeVLUJfF8tr9pbcGSc1UFdEwjqJAHNTih5sM4p0w6GZhTS+dkcnTcj+ffwcAuX0S2+Ze2c16yLjN
+	n2gKUN4yj4Jst7qx7cY17fQ42znDkgH/7uSxzXVeLZU0753mAq18HE7iu13zbsANOkPszJX4vKoMx
+	9ACldHQkZ/stb0A+jVpgjYdgVbmNHpaqEgzuU6EyLr55XH4o9QC6SYMUIg2m1BHDehKZaBrE/qlAv
+	jzwafOew==;
+Received: from ip6-localhost ([::1]:47238 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qXyOE-00DZdy-Us; Mon, 21 Aug 2023 06:27:51 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:41544) 
- by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qXyO4-00DZdp-GV
- for samba-technical@lists.samba.org; Mon, 21 Aug 2023 06:27:47 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:To:From:Message-ID:CC;
- bh=g9XIsdymZtIYScMKoP1khuLAGTXAvar2p7vK/JS0UAM=; b=kpMF1VP4BKore8c4MtA/fOI/1f
- q7uBjMBlKRHYQwyYGq915HKlCS9K5OF/14G+Fvvzm3tAKW2l0TuXuld1FcRw297TQ9JVXhzjhfC23
- 2ou3IO/APbVApiDWU0tH/cOpOMopaov+k48RfJnD0qI1DiSTn1/HJmuh1FLeSItrmqfn0C+FS8fFj
- KMepaIPLmOF55GdSnG6oQHDIto3cjPfl/sXyujbxG8cNyLr2bjD1s7JKHh9txlKfg344LiTFbMk9y
- pE6axHc5zoEwsBgNOnmSwE96JqIIctg5xvUNOFuyGQfoy8b1kZBZLjyZAkfiKWYcAUopbT8hAYUPT
- OdfTp/E/L8iheQrPW/rl0naUhlIHMxXnbxm75+NQPtWELL+sjaJP9mHcAvPBLrifKRtEpZ5zq/oYu
- Q+c8n6jQKihXAfL5VpE/ku6w0SApe9ZLYKHW6FRqgP/Epl5uRKQZIMQawYg8Lr6VIlUCwUTj8g0Lj
- lgOn262OUNJDvM5PtiKjG7dQ;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qXyO2-0098ks-0z; Mon, 21 Aug 2023 06:27:39 +0000
-Message-ID: <72f992f5fc7615140a90629521f284b096578959.camel@samba.org>
+	id 1qXykt-00DZws-Lh; Mon, 21 Aug 2023 06:51:15 +0000
+Received: from mx.inno.tech ([185.228.49.205]:6385) 
+ by hr1.samba.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim) id 1qXykj-00DZwh-HO
+ for samba-technical@lists.samba.org; Mon, 21 Aug 2023 06:51:09 +0000
+Received: from ksmg3 (localhost [127.0.0.1])
+ by mx.inno.tech (Postfix) with ESMTP id E059A8000F;
+ Mon, 21 Aug 2023 09:51:01 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx.inno.tech E059A8000F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=inno.tech; s=s1;
+ t=1692600661; bh=Sb1z3SRFREqitmtGrSbvSDrzfHAqdr6e22ufQj8xBVc=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=YaJC4l0Y93aQoL7mFwvoG5dzuvHnyVluDCTosdy7i0Q0CqJJKxv9a3prW4Ue3+z2v
+ Q/cMDNzQPj3/K8SnRIGWmGhzgDe8bwh5Y9DYK/kjkhDsyhNKarNxP+1B7LNwQHlDYJ
+ Kh2P4CSGNH+5jK3E4I34AZ9O7p6AqGqEhbTu9dNGj4zZiZvUyJECa39Vo3NDwa4qDT
+ uKVXOMpb/O5tjjeTOIP18BMPgmacH4S15oFn9893TF14Vgb05Aawjk18DMpGaiJRJm
+ 8L3xcyeNd82oU6KJ3qNPg4RXUj1I1FOySigomRwxX9w/0nYk2L599d9B214UEuv9LM
+ ne1bnTTfe+JEg==
+Received: from SEC-DLP-QRNT (unknown [10.0.0.117])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mx.inno.tech (Postfix) with ESMTPS;
+ Mon, 21 Aug 2023 09:51:01 +0300 (MSK)
+X-CHECKED: 1
+X-CHECKED-RELAY-ID: 3c279d7389fa9528e53a55e18b8e1fb6328980c7
+X-Cache: 20230821_095058070_00005642
+X-MS-Exchange-Organization-AuthAs: Partner
+Received: from [172.28.103.174] (172.28.103.174) by MAIL-DC2.inno.local
+ (10.12.115.2) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.30; Mon, 21 Aug
+ 2023 09:51:00 +0300
+Message-ID: <b68aa160-97b8-4bdc-a487-e3b1561c5a1d@inno.tech>
+Date: Mon, 21 Aug 2023 09:50:59 +0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: Drop RHEL 7 / CentOS 7 support and move to Python 3.8 minimum?
-To: Pavel Kalugin <PKalugin@inno.tech>, samba-technical@lists.samba.org
-Date: Mon, 21 Aug 2023 18:27:32 +1200
-In-Reply-To: <62eadda8-c6d3-4086-8f64-c37a33824fa0@inno.tech>
+To: Michael Tokarev <mjt@tls.msk.ru>, <samba-technical@lists.samba.org>
 References: <6725d25bf9dbbfebd0b1ad248fc6b397f89165c8.camel@samba.org>
  <4db84791-6dbc-4f8e-f1d7-7582451d19c4@catalyst.net.nz>
  <c1da83c30cca9c9e0d85fa6b1dbdd52e014ca918.camel@samba.org>
  <14854277.O9o76ZdvQC@krikkit>
  <62eadda8-c6d3-4086-8f64-c37a33824fa0@inno.tech>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
-MIME-Version: 1.0
+ <15345bf3-9d57-af3b-1926-8fc2fd2cd130@tls.msk.ru>
+Content-Language: en-US
+In-Reply-To: <15345bf3-9d57-af3b-1926-8fc2fd2cd130@tls.msk.ru>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.28.103.174]
+X-KSMG-Rule-ID: 5
+X-KSMG-Message-Action: skipped
+X-KSMG-AntiSpam-Status: not scanned, allowlist
+X-KSMG-AntiPhishing: not scanned, allowlist
+X-KSMG-LinksScanning: not scanned, allowlist
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ not scanned, allowlist
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,81 +82,25 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
+From: Pavel Kalugin via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Pavel Kalugin <PKalugin@inno.tech>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Mon, 2023-08-21 at 08:48 +0300, Pavel Kalugin via samba-technical
-wrote:
-> On 8/19/23 21:06, Andreas Schneider via samba-technical wrote:
-> > On Friday, 18 August 2023 02:08:00 CEST Andrew Bartlett via samba-
-> > technical
-> > wrote:
-> > > I would note that times when we didn't line up the CI version and
-> > > Python 'supported' version, it kept breaking.
-> > > I note that RHEL7 ends 'maintenance' in June 2024, just after the
-> > > 4.20
-> > > release March 2024
-> > > https://www.redhat.com/en/blog/end-maintenance-red-hat-enterprise-linux-7-al
-> > > 
-> > > most-here Those dates I think give good cause to drop CentOS 7,
-> > > but other
-> > > views still welcome.
-> > 
-> > I'm fine with dropping Python 3.6 support for Samba 4.20.
+
+On 8/21/23 09:04, Michael Tokarev wrote:
+> 21.08.2023 08:48, Pavel Kalugin via samba-technical wrote:
+> ..
+>>> I'm fine with dropping Python 3.6 support for Samba 4.20.
+>>
+>> How will this affect OpenSUSE Leap users, where official python3 is 
+>> still python3.6?
 > 
-> How will this affect OpenSUSE Leap users, where official python3 is 
-> still python3.6?
+> Does Leap have recent enough gnutls?
 
-This https://news.opensuse.org/2023/06/06/leap-modern-python-stack/
-suggests that there is a python311 to install and the packages we need would be built for Python 3.11
-
-Sadly that does not seem to be the case: 
-
-sudo zypper --non-interactive install python311   python311-
-Markdown     python311-cryptography     python311-devel     python311-
-dnspython     python311-gpg     python311-
-policycoreutils     python311-pyasn1     python311-python-
-dateutil     python311-requests     python311-semanage     python311-
-setproctitle
-Loading repository data...
-Reading installed packages...
-Package 'python311-Markdown' not found.
-Package 'python311-cryptography' not found.
-Package 'python311-dnspython' not found.
-Package 'python311-gpg' not found.
-Package 'python311-policycoreutils' not found.
-Package 'python311-pyasn1' not found.
-Package 'python311-python-dateutil' not found.
-Package 'python311-requests' not found.
-Package 'python311-semanage' not found.
-Package 'python311-setproctitle' not found.
-
-
-This is much more troubling than the few (but critical) missing packages on CentOS 8 Stream:
-
-https://gitlab.com/samba-team/samba/-/merge_requests/3231
-
-So, and I am being over-dramatic here, this may be a case of Python 3.6 forever: as two major distributions blocking the upgrade.  
-
-(I would naturally appreciate assistance in finding a solution here).
-
-This is unfortunate.
-
-Andrew,
+gnutls is of version 3.7.3 in Leap 15.5.
 
 -- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead                https://catalyst.net.nz/services/samba
-Catalyst.Net Ltd
-
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-
-Samba Development and Support: https://catalyst.net.nz/services/samba
-
-Catalyst IT - Expert Open Source Solutions
-
+Pavel Kalugin
+inno.tech
 
