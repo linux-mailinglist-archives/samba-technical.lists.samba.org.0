@@ -2,50 +2,48 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8823978375B
-	for <lists+samba-technical@lfdr.de>; Tue, 22 Aug 2023 03:30:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60F25784D60
+	for <lists+samba-technical@lfdr.de>; Wed, 23 Aug 2023 01:34:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=9K9hA1r7SgBuHAj2D/5jIzPt9pozJ+Zyshk33uN2O4o=; b=k/a5l874+YyQ1lAe/UVucK/uFq
-	BZHQoEvDGaywqOGgpeZKlN/4mgKJJAx4CRNZoRVF9NwFQb6St10z05KKthLkuIdZxVsM2PrI7DjtM
-	nPzmgyVm413nuatfjNxXT8n8vP3B6aSp2ROBFtueRQADZ1Aagnl/EgcZS4OJ6rCYZj6YhN7KGiI47
-	BMIyijM17Flh1YoovQ6TlPeKSNn0Xl8og0i+3IB98IwluGuhicHrKKOrlj1UVldVcWtk2zasGQgtW
-	ODoSENQNeVPhgRXEEBST0qfZ2Tq76CO91BFhTatl3kBDmdzSdBlUoXnikau32mh/k017jAqXLtvHw
-	Igq/dgqg==;
-Received: from ip6-localhost ([::1]:29340 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
+	bh=+tCPkHp+YBUmbMrqpbllANfy8ELVykQMBIWn/DNGp9k=; b=XBMdVl3Y4bEydqybBhKdpDPnK7
+	aAuz7yWGbMLrevPoPNFug9OTziNtPEp4YHly/FY7EFZ64OkXDk0+PsMOJP8sMFBxJWfEEGJ9mDgN7
+	A7K+VAR19qZ0c5ftra/eqc3cwrU6oxUAl3bPyUtaTUULwlj5eSVil+SAxGD+feq4RTAwqJ/n+tbeI
+	Kw1DJytFlPxC6cpUtFZ9zF5GFzd/X9lKOHXzzF20Jlf2h2NSxJGzdt9ybS9mNkxmdMYU26zw0XClG
+	GD55pfWSx42rMIn6SJcimLuFcoskZTK8HEj61JWKZX+5FH1+H3B5AzxsE162kmX3BQ33F2HVNLNhO
+	BZaECcOw==;
+Received: from ip6-localhost ([::1]:57356 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qYGDL-00DqSC-8f; Tue, 22 Aug 2023 01:29:47 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:23284) 
+	id 1qYasG-00E6em-Hu; Tue, 22 Aug 2023 23:33:24 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:22628) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qYGDD-00DqS3-H7
- for samba-technical@lists.samba.org; Tue, 22 Aug 2023 01:29:43 +0000
+ (Exim) id 1qYas9-00E6ed-RK
+ for samba-technical@lists.samba.org; Tue, 22 Aug 2023 23:33:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=9K9hA1r7SgBuHAj2D/5jIzPt9pozJ+Zyshk33uN2O4o=; b=VTuaiTW5V/yk8CuYEgMslAo1iP
- RHpFIrDGQDFBtuEnAUrrzVKSoYkdFqN8OXZc7O9xDBTbKkmIBF8kB67mWzc9QAhNb7hisoh78RYxx
- ahXzWNk2zzJd6mFoD8Otk7OGCcnrJtVnZmS0dS8R11waBlXAXr5cBbcI50hAcxsP4H4UX5o4TUhwA
- yFgV2YeRgk//OwcyB34VJf2OmWglWtM3iPsYxV/2KVFXak+hQcnai2KtV8bJHHRqWUt16LWXiYUJC
- t8Fjt+fKp8jyDwzuwwJ5KmEjk6etrLb0FCooTyEIJUMSGnw5r0k1nkxl0wx7bLDhddTv59e3GiEpR
- IrVRNng8/sCC1uPr28uZF5NgUhDNoX+F3Z38Uc96+U6/nDF0AYQJs5gBUi/rr+X7qfzMT6OoKqFb+
- FbzHEsJ6+eNG1kXbWl9HSmmdIQOQRV+58KZ7oV/+hWxQOK7junkn9/NOqYqSvuEooQRRD7jObifOJ
- 9uaLuqd+l7UV90kjjWtJ2AXf;
+ s=42; h=Message-ID:Cc:To:From:Date;
+ bh=+tCPkHp+YBUmbMrqpbllANfy8ELVykQMBIWn/DNGp9k=; b=InM8KhCVLdqSG3EVOYBvxRU1FH
+ kZuRpYjyMl95tJi0k0BxRlcFJXJ8fMzR4BNbDU/9aAxvUrETtGee4Qv6d3W30ljwUdwm0HinqE7dg
+ 3C+nX1G186YYjjG8Dfxk2O0lvflr0SKZqfSvWqbD+SUJLQq5yjknfjANsdRYCzWbqiTd7V3j6frDi
+ LQgZfwEWu8EOz83SWG84PNYxIp7vDo0lJmKnqaJFif1xcopTsn5PbHj5PkR7346hpIqS+tGxiDY4U
+ qCXbCepNQ05Mfo7GwPivUPMcTfRUfD3b+7P1TL+lmhtCN/AA7M1HvP5+1kDFKVRz6qxgwPRUits4w
+ boeo6wEZ882oHKWOdGZha2+n6fGdTgu9HajTrssN1epDk5OqCfhVzHTF2ZAw4eB63tvfTV8hBvdHg
+ yYGbVWAy7t4Zqt3jVAkUlOKWBpkiXqGH+EtcJs3vm9LPhV7cHf2XV9SBldKGVoAJpA3QPm34hXpXN
+ NYNmmAFpA7AjMZlVrCpez2+q;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qYGDC-009I5j-1l for samba-technical@lists.samba.org;
- Tue, 22 Aug 2023 01:29:39 +0000
-Message-ID: <47072be0-982f-d844-8868-aa3b255fc8ea@samba.org>
-Date: Tue, 22 Aug 2023 13:29:30 +1200
+ (Exim) id 1qYas7-009UCm-1D; Tue, 22 Aug 2023 23:33:15 +0000
+Date: Tue, 22 Aug 2023 16:33:12 -0700
+To: Steven French <sfrench@samba.org>
+Subject: Re: where to get the patches for samba over quic support
+Message-ID: <ZOVFuPKFu67gbhwd@jeremy-acer>
+References: <CADvbK_eHYFJWL3xaZeciUMPjWXqkP_Kp3DrpP-3XPyopY1yZmg@mail.gmail.com>
+ <1c535816-0a9c-6924-642f-508e82cd0237@samba.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: codespell mysteries explained
-Content-Language: en-GB
-To: samba-technical@lists.samba.org
-References: <9a667dfb-0f7f-71e9-c5b8-885bc7570d8f@catalyst.net.nz>
-In-Reply-To: <9a667dfb-0f7f-71e9-c5b8-885bc7570d8f@catalyst.net.nz>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <1c535816-0a9c-6924-642f-508e82cd0237@samba.org>
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,60 +57,48 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Joseph Sutton via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Joseph Sutton <jsutton@samba.org>
+From: Jeremy Allison via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Jeremy Allison <jra@samba.org>
+Cc: samba-technical@lists.samba.org, Xin Long <lucien.xin@gmail.com>,
+ wedsonaf@gmail.com, jra@samba.org, CIFS <linux-cifs@vger.kernel.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 22/08/23 12:58 pm, Douglas Bagnall via samba-technical wrote:
-> I was trying to run
-> 
->   codespell $(git diff origin/master --name-only)
-> 
-> to catch my typos before CI does, but they seem to find completely 
-> disjoint sets of complaints. That is, *none* of the local codespell 
-> issues were raised by CI, and vice versa.
-> 
-> Locally I have "codespell 2.1.0" on Ubuntu 22.04. It doesn't care when I 
-> write "secuirty" in a C comment, while CI does. And it does say a lot of
-> 
->   python/samba/tests/sddl.py:193: BA ==> BY, BE
-> 
-> which CI doesn't mention.
-> 
-> Adding "ba" to .codespellignore makes the "BA" complaints disappear. I 
-> would prefer to just ignore uppercase "BA", but when the manpage says
-> 
->    Words are case sensitive based on how they are written in
->    the dictionary file
-> 
-> it is saying you *can't* ignore uppercase only if the codespell 
-> dictionary[1] doesn't contain a "BA->..." line. It doesn't.
-> 
-> [1]/usr/lib/python3/dist-packages/codespell_lib/data/dictionary.txt
-> 
-> The local dictionary also doesn't contain "secuirty". The upstream 
-> version does, and it doesn't have the "ba". So that explains everything.
-> 
-> When I started this email, it was going to be along the lines of "WTF am 
-> I missing", but it turns out to be quite simple. If you have an ancient 
-> OS (from, say, last year) don't expect to be able to replicate codespell 
-> CI locally.
-> 
-> Douglas
-> 
+On Tue, Aug 22, 2023 at 05:02:26PM -0500, Steven French wrote:
+>I was very interested in this as well and there seems to be a logical 
+>use case for SMB3.1.1 mounts from the kernel client (cifs.ko) since 
+>multiple servers already support QUIC for SMB3.1.1 mounts (e.g. 
+>Windows and apparently also an embedded server that demoed at Storage 
+>Developer Conference last year).� Key question remains how much of the 
+>code can stay in userspace (so only the key socket read/write code 
+>must be in kernel, not necessarily the connection setup).�� There are 
+>also some interesting points that the Microsoft QUIC (open source 
+>project in github) project guys mentioned including that for testing 
+>you can often do "unencrypted QUIC" as a first step (which also has 
+>performance benefits over TCP)
+>
+>We can discuss more details if you want, but Wedson had some great 
+>ideas about doing some of this in Rust (and looks there are already 3 
+>work in progress user space opensource QUIC implementations in Rust - 
+>so some of the code could be reused)
+>
+>
+>On 8/21/23 09:55, Xin Long wrote:
+>>Hi, Samba Team,
+>>
+>>I'm currently working on QUIC implementation in Linux Kernel, and thinking
+>>of applying it to fs/smb for SMB over QUIC in kernel. For interoperability
+>>testing, I'm looking for an existing userspace implementation for SMB over
+>>QUIC in Linux.
+>>
+>>I heard there are already some internal patches in samba for SMB over QUIC
+>>support, anyone knows where I can get it for this testing?
 
-It seems that there is a way to get a more recent dictionary for those 
-of us who are stuck on an older version of codespell:
+I just did some research, and this engine (in C) appears to be easiest
+to use for Samba.
 
-https://github.com/codespell-project/codespell#updating-the-dictionaries
+https://github.com/litespeedtech/lsquic/blob/master/docs/tutorial.rst
 
-I’m not sure exactly which dictionary the CI will be using, but the 
-latest version should at least be closer to it than whatever Ubuntu has.
-
-It might be a good idea to use the ‘-D’ option in codespell.sh to 
-specify a particular local dictionary (or dictionaries), so that 
-spelling is enforced consistently for everyone.
-
-Joseph
+The tutorial shows an example being used with libevent, we could
+adapt this to libtevent.
 
