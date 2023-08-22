@@ -2,51 +2,57 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id A86CB7824C9
-	for <lists+samba-technical@lfdr.de>; Mon, 21 Aug 2023 09:46:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37823783728
+	for <lists+samba-technical@lfdr.de>; Tue, 22 Aug 2023 02:59:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=hmxR1wkCSk4Z+hTyCBZivJgzLEFv//eDHsxI7wZeNFE=; b=3nkXjoralEVN1SWEXOinCmVx7K
-	kEzTdJ0IynkZCy7yaeL4Brl+yW595BkfYgVewdLxYGddFxoqycSoBgMkluAOttSYeeqEgevvxtuA3
-	U05ZmfUjUZYUbi7iMrYTkdQiV7GcIbfr/3Bi/yCo9eGnWVsTrIe/tZj1G5f5ts3kj4aYOHgdQjUuK
-	RVk3G3kAd7oj7R/Gwpt1jZa7mABTMLgYuHNGb20SgfBEWWWO5B+hoMQq5zOYVQmPicSytJ7biMnCV
-	vqJg9WP2NAQzHQfSJ70zU/3loH3PrDbHSX4in8SkhMkf9cwg24t1yZMxdYBmfayTrV1mkicf6/HIV
-	PE8H7VlA==;
-Received: from ip6-localhost ([::1]:56720 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=zVlR+QHseCj7KHZZEG/DJIyWADL56cwAPSseq7XIXjw=; b=z5iJDKnOMNBaOOYHqbJRmKc72B
+	qtaVYDXZ59GuSvLjTwCgJzTuri+/JzKP0Y6G9zrY3YO/mgGNFQnS/SJVrx9zYnM7m6x1aF7rZVaZQ
+	Icch50fEez0wyCvMo1tCgmKR5JhjQ7V6NjWxj3aUjqJPcDGdcYTSdIPaHSY0sbWl9/Y9gm4iVNuLX
+	pql1q6zk5tjbTBUFc6aODO/pvoTyikDXAzhLRGrhPlB0bmJch5JEwvOZ2gpmjQoag0a7fwygQmPVf
+	S+t/1HOam08N4RKLxSBwk5UAq0caWRrUylRrWnF+iJ6ss1kpfWAbtDPAcVPww0lP3zXBc8JDHLqFh
+	C1TdLs0g==;
+Received: from ip6-localhost ([::1]:62222 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qXzbd-00DaQP-Sd; Mon, 21 Aug 2023 07:45:46 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:60770) 
+	id 1qYFj3-00Dq8m-IU; Tue, 22 Aug 2023 00:58:29 +0000
+Received: from cat-porwal-prod-mail1.catalyst.net.nz
+ ([2404:130:4080::4]:59932) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qXzbF-00DaQF-Jn
- for samba-technical@lists.samba.org; Mon, 21 Aug 2023 07:45:28 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Message-ID:Cc:To:From:Date;
- bh=hmxR1wkCSk4Z+hTyCBZivJgzLEFv//eDHsxI7wZeNFE=; b=t9+oJ22zx0IBqUz4mK8MRZ4fEZ
- 0jXNA30I+B3QTiCGz3kOW88NGdxLXGpMY4Au2MukXT3TjOTwiThR6xeyURv0BOIZ+nH6OSfCI2Zfd
- 7O/sItUaMG+VuDM3mVs+nE0RHliIesg2Cy1Ph4/EWLV45lOT5ElG+9t1ecuWf0jzlYM7XpupNztx+
- PvPYN4VnmDSCeOHWtUi2JSoxWEuWuWVIkMxc7N4hIshTcdeYu3W+umYgEmcczIx9lW2NnMlYvSR/L
- jc011y8r5PeXE7uomMM9zUKxa6Dk3aZcr3XC1flS1c7KWR3cV6PeBoLrsEq1wHglb/WuIGLyLZoOZ
- hQx9LhI5hMXrrLV0PiHW7Z84gr+lwqEU6zwpfBJZqiyrCkzR4eqQtZV4jbpqISz+cVz+Kz8O5IQR1
- BAQf3i9ynCtGn57y6PjCe/SIPb3UwhHXjavnGefYuRXYFTSJtN8pFdhxlvh0326KHU8eUFU+yGEFu
- u6Z78QISolJxMqEyEezY8+y0;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qXzb0-0099R1-2W; Mon, 21 Aug 2023 07:45:06 +0000
-Date: Mon, 21 Aug 2023 10:44:39 +0300
-To: Andrew Bartlett <abartlet@samba.org>
-Subject: Re: Drop RHEL 7 / CentOS 7 support and move to Python 3.8 minimum?
-Message-ID: <ZOMV5z7GeqXe98o9@toolbox>
-References: <6725d25bf9dbbfebd0b1ad248fc6b397f89165c8.camel@samba.org>
- <4db84791-6dbc-4f8e-f1d7-7582451d19c4@catalyst.net.nz>
- <c1da83c30cca9c9e0d85fa6b1dbdd52e014ca918.camel@samba.org>
- <14854277.O9o76ZdvQC@krikkit>
- <8373bd2101510ccf1af3b2fc005c6fe9673504af.camel@samba.org>
+ (Exim) id 1qYFit-00Dq8d-UW
+ for samba-technical@lists.samba.org; Tue, 22 Aug 2023 00:58:25 +0000
+Received: from [IPV6:2404:130:0:1000:2225:64ff:fe75:8a7f] (unknown
+ [IPv6:2404:130:0:1000:2225:64ff:fe75:8a7f])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (Client did not present a certificate)
+ (Authenticated sender: douglasb@catalyst.net.nz)
+ by cat-porwal-prod-mail1.catalyst.net.nz (Postfix) with ESMTPSA id B000F819A2
+ for <samba-technical@lists.samba.org>; Tue, 22 Aug 2023 12:58:10 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=catalyst.net.nz;
+ s=default; t=1692665890;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=zVlR+QHseCj7KHZZEG/DJIyWADL56cwAPSseq7XIXjw=;
+ b=Za2AQyPnxOhu5ZZQZ9Dx8l2wXK+fkWAUYmnoBvfQJ1VkQhAeKGQElP3phohbQvBBjZi1/S
+ vkmON95Fsmxv/yy5qd1Wl1w6kv2JufHwGThXDRYAOrhW3XsBTKQsWvdezEGsdBJ2B6IOZf
+ cFsQsUmEjuxd1XzN32AT9n415qwee8KSNe07JSm8mFkvfJlXr/H38hLadIg2/ZPZLkzNGc
+ 3XRlKPDe8tUx5eWsUUXYZKH3AnRk/daingjrYU0nz9Phu2H0gkoEWf60MtSArJEbzyIrRS
+ /EIxL9P33E/7DngqyA8UNKhAT+3/8NGXSnU/69vQ5hglMp/lLcrg00sMJI3jQA==
+Message-ID: <9a667dfb-0f7f-71e9-c5b8-885bc7570d8f@catalyst.net.nz>
+Date: Tue, 22 Aug 2023 12:58:08 +1200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <8373bd2101510ccf1af3b2fc005c6fe9673504af.camel@samba.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: codespell mysteries explained
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-0.10 / 15.00]; MIME_GOOD(-0.10)[text/plain];
+ DCC_FAIL(0.00)[failed to scan and retransmits exceed];
+ MIME_TRACE(0.00)[0:+]; ARC_NA(0.00)[];
+ DKIM_SIGNED(0.00)[catalyst.net.nz:s=default];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; MID_RHS_MATCH_FROM(0.00)[]
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,92 +66,44 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Alexander Bokovoy via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Alexander Bokovoy <ab@samba.org>
-Cc: Andreas Schneider <asn@samba.org>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>,
- Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
+From: Douglas Bagnall via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Пан, 21 жні 2023, Andrew Bartlett via samba-technical wrote:
-> On Sat, 2023-08-19 at 20:06 +0200, Andreas Schneider wrote:
-> > On Friday, 18 August 2023 02:08:00 CEST Andrew Bartlett via samba-
-> > technical 
-> > wrote:
-> > > I would note that times when we didn't line up the CI version and
-> > > Python 'supported' version, it kept breaking.
-> > > I note that RHEL7 ends 'maintenance' in June 2024, just after the
-> > > 4.20
-> > > release March 2024
-> > > https://www.redhat.com/en/blog/end-maintenance-red-hat-enterprise-linux-7-al
-> > > 
-> > > most-here Those dates I think give good cause to drop CentOS 7, but
-> > > other
-> > > views still welcome.
-> > 
-> > I'm fine with dropping Python 3.6 support for Samba 4.20.
-> 
-> Thanks.  
-> 
-> So far we seem to be missing the markdown and dns packages for Python
-> 3.8 on Centos8 Stream.  Do you know where I might find these packages,
-> or how we might get them to become packaged?
-> 
-> The other important but not totally vital packages I couldn't find for
-> Python 3.8 was setproctitle and gpg.
-> 
-> https://gitlab.com/samba-team/samba/-/merge_requests/3231
-> 
+I was trying to run
 
-The reason why we stuck with Python 3.6 on RHEL 8 (and therefore on
-CentOS 8 Stream) is because packages in the distribution, when installed
-in the default configuration, can only depend on the packages available
-in non-modular or in default modular streams. Python 3.6 is the one
-available by default. All other Python builds are separate modular
-streams not enabled by default.
+  codespell $(git diff origin/master --name-only)
 
-This is why FreeIPA (which is packaged as a module in RHEL 8 and is
-available in two streams, one enabled by default and one not enabled by
-default) and Samba (which is packaged as a normal package) only depend
-on the content that is enabled by default, e.g. Python 3.6. FreeIPA use
-case is important here because it is the primary user of Samba Python
-modules in RHEL.
+to catch my typos before CI does, but they seem to find completely 
+disjoint sets of complaints. That is, *none* of the local codespell 
+issues were raised by CI, and vice versa.
 
-We cannot change this situation in RHEL 8, so we stuck with Python 3.6
-support in RHEL 8 until its retirement. If Samba drops Python 3.6
-support, we cannot rebase to this new version of Samba in RHEL 8. It is
-probably OK as RHEL 8 is already reaching 8.9 minor version after which
-rebases will become hard to impossible (RHEL 7.9 is the last RHEL 7
-minor release already). We also cannot migrate to python3.11 there at
-this point.
+Locally I have "codespell 2.1.0" on Ubuntu 22.04. It doesn't care when I 
+write "secuirty" in a C comment, while CI does. And it does say a lot of
 
-In RHEL 9 both Samba and FreeIPA are packaged as normal packages, the
-modularity support is removed. Both continue to use the same default
-Python version which is already Python 3.9. 
+  python/samba/tests/sddl.py:193: BA ==> BY, BE
 
+which CI doesn't mention.
 
+Adding "ba" to .codespellignore makes the "BA" complaints disappear. I 
+would prefer to just ignore uppercase "BA", but when the manpage says
 
+   Words are case sensitive based on how they are written in
+   the dictionary file
 
+it is saying you *can't* ignore uppercase only if the codespell 
+dictionary[1] doesn't contain a "BA->..." line. It doesn't.
 
-> Andrew Bartlett
-> 
-> 
-> -- 
-> Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-> Samba Team Member (since 2001) https://samba.org
-> Samba Team Lead                https://catalyst.net.nz/services/samba
-> Catalyst.Net Ltd
-> 
-> Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-> company
-> 
-> Samba Development and Support: https://catalyst.net.nz/services/samba
-> 
-> Catalyst IT - Expert Open Source Solutions
-> 
-> 
+[1]/usr/lib/python3/dist-packages/codespell_lib/data/dictionary.txt
 
--- 
-/ Alexander Bokovoy
+The local dictionary also doesn't contain "secuirty". The upstream 
+version does, and it doesn't have the "ba". So that explains everything.
+
+When I started this email, it was going to be along the lines of "WTF am 
+I missing", but it turns out to be quite simple. If you have an ancient 
+OS (from, say, last year) don't expect to be able to replicate codespell 
+CI locally.
+
+Douglas
 
