@@ -2,63 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB3D6786732
-	for <lists+samba-technical@lfdr.de>; Thu, 24 Aug 2023 07:32:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EF2C7867DA
+	for <lists+samba-technical@lfdr.de>; Thu, 24 Aug 2023 08:52:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=QkcdoFUn4jKzNSRO5UB+OKVKEVDO4MnKdmb68VJ4A7o=; b=STAyuImCEhxJ1E4V6UrL9fC8Wl
-	aEAe+iVeAb+/UkA272Gl33mypESqPeQxnXREpVn0XwFT6tpW8C/lOyK08sgIdU5Lvedrz22AFfCyQ
-	YcumCET8GwIk6JXg6UWN82xdlImFQPD1RTPqVdShDkR1ZnH/XHMuCBZ5RD6vbx0MShYH2EZ1LhJ+r
-	unefaYtsF3JHnF9cfjLv6ysccr8fOI/Oj7UYAEGD6fVHumj70y7hgJSHtmOnqzxfEUtmIm/B6jM5m
-	ipVwAqVhEt5woFNBbKDWzs2g8E5lpylJiH1WwhbaoQTNrrjNuKgXwIbCNHSxB++CF/3yFn0fWt+2F
-	C4uHH+iw==;
-Received: from ip6-localhost ([::1]:54922 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=GIffYgZMu2leErS9okeZByia2hW4PNyy2WQJrmADjIY=; b=S2Nm6I5ZqKYs+1Fa0LAEdRk9YB
+	DGif6ccK4y8YeDBRrmXBmnHZACpSjX0X4pUhpGIlhRxAfj2YfHgNAQN9svCmZ8d/c+n177u/GFuxb
+	JP54Ct0gsry7Kilg8JcZblLQB/ZYjPtHkN3q615Yili3WMg3Uqdf24lA3GT05ThT88PMP5awS8M51
+	J4XPEcw9E6PtXmjS0RfY7F0n+l0pEy3VOqOhDVpk51af6O4C6M2W/lm9tDtJEgr20S7nRBlS2StPn
+	FsHGfBhrOazvIzNWkjjqMNdh3OAqlU4cSHYsbj0JXmeThLy2yh75VMNInkyCd/ADptvU0HTsBbHAk
+	3Ns9YktA==;
+Received: from ip6-localhost ([::1]:33746 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qZ2wJ-00EDDT-Mn; Thu, 24 Aug 2023 05:31:27 +0000
-Received: from mail-qv1-xf29.google.com ([2607:f8b0:4864:20::f29]:55536) 
+	id 1qZ4CG-00EDlk-70; Thu, 24 Aug 2023 06:52:00 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:57782) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qZ2wC-00EDDK-1C
- for samba-technical@lists.samba.org; Thu, 24 Aug 2023 05:31:24 +0000
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-64b3504144cso36389176d6.2
- for <samba-technical@lists.samba.org>; Wed, 23 Aug 2023 22:31:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692855077; x=1693459877;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QkcdoFUn4jKzNSRO5UB+OKVKEVDO4MnKdmb68VJ4A7o=;
- b=Lg77Eh/fiOU/Faddrr5NIpGUU9NK3pHWaB67LpHR3Nk2JIQowmGrkUIp/Dtf2NrCPC
- DGjE1IsnAlJP4t9NIACQtjtdCZ7r7lONQPjdNS+/eQvWDHIYyVuThFI04wXHNopNCuVW
- S1U270EwyHB4PBJ6XKDsNbp+xC4aDJG/Dh0iHgoo+pVeJdu6YweEgeSpf/0LQY+4HIwb
- 4eewPWav4FAkq1jUCY4Re0sMV+msDyAZzVoQhVYwmXxdNRA+M8uac0PPY9NM5ygtW5Go
- ZpO20MG8zDC/zfs1EkNs7lgjuGCM2W9Lk97nqpdeqCAVms8QnyX3UGWwz/VnIQay6GCp
- VwtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692855077; x=1693459877;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QkcdoFUn4jKzNSRO5UB+OKVKEVDO4MnKdmb68VJ4A7o=;
- b=Ua+xuAwnwO3PkYbFpQSrOsPgMPWphimJ/LO9hfO/DiuzT+ICaJ2VD75NUGAJ6kcgh0
- QXoIPCaCz8UUj9rT8fAwGhGhb8kv7UW4Tpnl7EOkwiBx+sGUAs0xRiPRjKf7eqNr5M4g
- uoXMtLtxRvO7ujOt7hBckW0jc6CqDFHQmdzjImu+sXpQx/RVGBSnv8QbWDVO7xWuC0wq
- HuQBnFpDROc7Q5r9I/SEH6FgI2jmdzJrbBZxAniPrBqeqjClx5Cpri11DCEuYIa54p93
- wyhkrQG3BQFyJXnmH+oj7mx2NpsZ668LSfULFXU89hCL01gQ4fPqi4wLFgUcIrW2ix8j
- WFvQ==
-X-Gm-Message-State: AOJu0Yzh5j/pZSNkmSdM2R4vwe6BsOI3gcy6Xbb8abyUj8u0hH+Ivssy
- 6FqhDkRlTQ4mEzkY7moa5HD8uVjm0mTuWXI74vQfneWV
-X-Google-Smtp-Source: AGHT+IENXLEhzwI6Izi2R1CT9tePJuRfM0r4FqukLWsMpvstPGVkm5NGooQxJ4HbykvBHo0Zj6Bfwmipiwe/1Mkq5uE=
-X-Received: by 2002:a0c:f0c4:0:b0:63d:2a59:e446 with SMTP id
- d4-20020a0cf0c4000000b0063d2a59e446mr15316751qvl.22.1692855076692; Wed, 23
- Aug 2023 22:31:16 -0700 (PDT)
+ (Exim) id 1qZ4C2-00EDla-HP
+ for samba-technical@lists.samba.org; Thu, 24 Aug 2023 06:51:51 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=04+0++++N1pTG8gt3MIt/nGSHX6cFQ4eGjOrE4OOVP0=; b=3/ugEVBML6VrOdMiR52I8TKsd5
+ qwqqrwYdDvRy+nMGX3NCgBbRC3Vh0SX76KoXnuy/Yl8IfFWkawPk4i0TXY7JHMZsCx+AhY4YckQ7p
+ CmGiOW2uxmEG4bPwquaGD7iHGTl9/32M0k7cgb8SdHA7Bog5bHCj6yOOW1ElTYUsU7QydCswDNWRE
+ Z4I95Hxu0ljYi5DxuM5ApYNbinzZXC6lEm/6L9sbtQd5BG2UUPbY8pa+MwtGAR72FSNO2cl1ix+Co
+ yLAGfdMtJQnqVVsKjVq4kwIQmIv5B68fDie8q+thIVuirz5KmRegKvoU2BFLH8D7ObA7/vxjUnyn5
+ Rn6dLmf9j+beOR+GV5S74KJPJwP0rpumpU6kGuEt+KjLo5EBaXS5qqbXK8ExP0iIKkaWGe72b1ych
+ ntsu4cAeexab3+Z+8qsJsmKZGZ7V9Eva62gy3DcNg1ldEXGUT5EqUBnu4+FN9ZF/AnfF7WWH4cFLo
+ Z6rBA8RNxbDuoFGVOdgoORLx;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1qZ4By-009jVf-0n; Thu, 24 Aug 2023 06:51:44 +0000
+Message-ID: <cf543da39afc8785f1ad3ccef17097868548c039.camel@samba.org>
+Subject: Re: Does the Samba AD functionality support setting up a Samba
+ server as a DC in a subdomain to an existing forest?
+To: Richard Sharpe <realrichardsharpe@gmail.com>, samba-technical
+ <samba-technical@lists.samba.org>
+Date: Thu, 24 Aug 2023 18:51:39 +1200
+In-Reply-To: <CACyXjPycDO5qNT=ibbS=4Wqvua+tDVtn3dhQ-dw1gJaktMOj6w@mail.gmail.com>
+References: <CACyXjPycDO5qNT=ibbS=4Wqvua+tDVtn3dhQ-dw1gJaktMOj6w@mail.gmail.com>
+User-Agent: Evolution 3.46.4 (3.46.4-1.fc37) 
 MIME-Version: 1.0
-Date: Wed, 23 Aug 2023 22:28:02 -0700
-Message-ID: <CACyXjPycDO5qNT=ibbS=4Wqvua+tDVtn3dhQ-dw1gJaktMOj6w@mail.gmail.com>
-Subject: Does the Samba AD functionality support setting up a Samba server as
- a DC in a subdomain to an existing forest?
-To: samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.29
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,26 +59,34 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi folks,
+On Wed, 2023-08-23 at 22:28 -0700, Richard Sharpe via samba-technical
+wrote:
+> Hi folks,
+>=20
+> I want to set up one (or two) Samba DCs in, say test.qa as dc1 and
+> dc2. There seems to be clear documentation on how to do this.
+>=20
+> Then I want to set up another Samba DC in subdom.test.qa as dc1.subdom.te=
+st.qa.
+>=20
+> Is this supported by Samba 4.19 and how would I go about doing it?
+>=20
 
-I want to set up one (or two) Samba DCs in, say test.qa as dc1 and
-dc2. There seems to be clear documentation on how to do this.
+Not as a subdomain in an existing forest. =C2=A0Only as a distinct forest.=
+=C2=A0
 
-Then I want to set up another Samba DC in subdom.test.qa as dc1.subdom.test=
-.qa.
+I started the work but never finished it.
 
-Is this supported by Samba 4.19 and how would I go about doing it?
+Sorry,
 
-
+Andrew
 --=20
-Regards,
-Richard Sharpe
-(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
-=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
-=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
+Andrew Bartlett (he/him) https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Developer, Catalyst IT https://catalyst.net.nz/services/samba
 
