@@ -2,50 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3804278612D
-	for <lists+samba-technical@lfdr.de>; Wed, 23 Aug 2023 22:08:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB3D6786732
+	for <lists+samba-technical@lfdr.de>; Thu, 24 Aug 2023 07:32:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=9dgLhjBJT4J3cfDvzJO+6KdYiY1UYqQ4K/vt2lX1sww=; b=qb+G1xPKn7Vfe4LKA+SR9ZWILk
-	EAheXdJIKzFd+OjEsDeUFlfNp52+xrQQPnNK1zadjanatkMeQ71W4xPw+C2eqZBP12LEbZ5NDFnYa
-	NbDAfdWAiO+xt405PJsZu+uwtkxdayGpYcRRluy2Lpmljkj0WVBAWlESC9pweEU84cSwYA3ykYALa
-	pX4YWOfv7Gq9eyj7OinlCVobjerKecZ5A0UKvVsFFAMu3EY3eXrx9ac3bjz2gsEyNQR8GzM8tMxYo
-	Gn/Hj7UK7iS8ay75Dj8PMxrs9k2+PrlHN0/k4+LTpErZMlSzBI+sg55od+RgFrk//4mIrk8Oq5svQ
-	vOLtcWKA==;
-Received: from ip6-localhost ([::1]:61844 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=QkcdoFUn4jKzNSRO5UB+OKVKEVDO4MnKdmb68VJ4A7o=; b=STAyuImCEhxJ1E4V6UrL9fC8Wl
+	aEAe+iVeAb+/UkA272Gl33mypESqPeQxnXREpVn0XwFT6tpW8C/lOyK08sgIdU5Lvedrz22AFfCyQ
+	YcumCET8GwIk6JXg6UWN82xdlImFQPD1RTPqVdShDkR1ZnH/XHMuCBZ5RD6vbx0MShYH2EZ1LhJ+r
+	unefaYtsF3JHnF9cfjLv6ysccr8fOI/Oj7UYAEGD6fVHumj70y7hgJSHtmOnqzxfEUtmIm/B6jM5m
+	ipVwAqVhEt5woFNBbKDWzs2g8E5lpylJiH1WwhbaoQTNrrjNuKgXwIbCNHSxB++CF/3yFn0fWt+2F
+	C4uHH+iw==;
+Received: from ip6-localhost ([::1]:54922 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qYu8X-00EBhp-Fl; Wed, 23 Aug 2023 20:07:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:19192) 
+	id 1qZ2wJ-00EDDT-Mn; Thu, 24 Aug 2023 05:31:27 +0000
+Received: from mail-qv1-xf29.google.com ([2607:f8b0:4864:20::f29]:55536) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qYu8Q-00EBhf-C3
- for samba-technical@lists.samba.org; Wed, 23 Aug 2023 20:07:27 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=9dgLhjBJT4J3cfDvzJO+6KdYiY1UYqQ4K/vt2lX1sww=; b=Ec/8r0UmiwOOkmt/oZaKlYZgiB
- CH+5F6wlih0L6IyRfxO2kGxRTH7xEXqCyQvAdujRqQY+S9kMqMgGwcZ/kttfqZ3wGtCueDyO6mkt+
- Y8E4/fB55WRdrgcNYtWWl1N/WIhBQ0HQkxi8Wd4lFfDRtk8DA7HH4YNcoEGUR5w/ie1B7YJ76ED80
- XxTQWM9RyhgpCUr0FJUwfr6cpw9EViKng3ohrFf1HTKRcM7jDBOze7DBkbGMvvMZ1Sy6WuBKFqYAk
- RL0s6wDNHEhge7dVcjAYdyq4iA690H3KhBgWYZbgLAgh47UM7Y1qxFtoHNM7ZaDyo42SGFohQrst4
- s5Qi4357y5xVLCCSEmP3uOmsXBKUeOKyHGZvnn6G2alfg6YIAQRtjDI/R4s//y5HBc9tSfvmzj4FG
- ld4x9Mdy+ekZUPNyFSRUQNJ9+N6h/bLq5SJ1o3lJbKhytDrpuoSxTtljfgf8YuyRcSwBIzO154lsL
- b/a9SJsHeqJcdyqaIn00KviN;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qYu8N-009eQd-1p; Wed, 23 Aug 2023 20:07:20 +0000
-Message-ID: <708bf1c53d7086c78f52747b2b85e7dec3451bd4.camel@samba.org>
-Subject: Re: Drop RHEL 7 / CentOS 7 support and move to Python 3.8 minimum?
-To: Christof Schmitt <cs@samba.org>
-Date: Thu, 24 Aug 2023 08:07:14 +1200
-In-Reply-To: <ZOZYVWXwm8yL4z4V@samba.org>
-References: <6725d25bf9dbbfebd0b1ad248fc6b397f89165c8.camel@samba.org>
- <4db84791-6dbc-4f8e-f1d7-7582451d19c4@catalyst.net.nz>
- <c1da83c30cca9c9e0d85fa6b1dbdd52e014ca918.camel@samba.org>
- <ZOZYVWXwm8yL4z4V@samba.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ (Exim) id 1qZ2wC-00EDDK-1C
+ for samba-technical@lists.samba.org; Thu, 24 Aug 2023 05:31:24 +0000
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-64b3504144cso36389176d6.2
+ for <samba-technical@lists.samba.org>; Wed, 23 Aug 2023 22:31:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1692855077; x=1693459877;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QkcdoFUn4jKzNSRO5UB+OKVKEVDO4MnKdmb68VJ4A7o=;
+ b=Lg77Eh/fiOU/Faddrr5NIpGUU9NK3pHWaB67LpHR3Nk2JIQowmGrkUIp/Dtf2NrCPC
+ DGjE1IsnAlJP4t9NIACQtjtdCZ7r7lONQPjdNS+/eQvWDHIYyVuThFI04wXHNopNCuVW
+ S1U270EwyHB4PBJ6XKDsNbp+xC4aDJG/Dh0iHgoo+pVeJdu6YweEgeSpf/0LQY+4HIwb
+ 4eewPWav4FAkq1jUCY4Re0sMV+msDyAZzVoQhVYwmXxdNRA+M8uac0PPY9NM5ygtW5Go
+ ZpO20MG8zDC/zfs1EkNs7lgjuGCM2W9Lk97nqpdeqCAVms8QnyX3UGWwz/VnIQay6GCp
+ VwtA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692855077; x=1693459877;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QkcdoFUn4jKzNSRO5UB+OKVKEVDO4MnKdmb68VJ4A7o=;
+ b=Ua+xuAwnwO3PkYbFpQSrOsPgMPWphimJ/LO9hfO/DiuzT+ICaJ2VD75NUGAJ6kcgh0
+ QXoIPCaCz8UUj9rT8fAwGhGhb8kv7UW4Tpnl7EOkwiBx+sGUAs0xRiPRjKf7eqNr5M4g
+ uoXMtLtxRvO7ujOt7hBckW0jc6CqDFHQmdzjImu+sXpQx/RVGBSnv8QbWDVO7xWuC0wq
+ HuQBnFpDROc7Q5r9I/SEH6FgI2jmdzJrbBZxAniPrBqeqjClx5Cpri11DCEuYIa54p93
+ wyhkrQG3BQFyJXnmH+oj7mx2NpsZ668LSfULFXU89hCL01gQ4fPqi4wLFgUcIrW2ix8j
+ WFvQ==
+X-Gm-Message-State: AOJu0Yzh5j/pZSNkmSdM2R4vwe6BsOI3gcy6Xbb8abyUj8u0hH+Ivssy
+ 6FqhDkRlTQ4mEzkY7moa5HD8uVjm0mTuWXI74vQfneWV
+X-Google-Smtp-Source: AGHT+IENXLEhzwI6Izi2R1CT9tePJuRfM0r4FqukLWsMpvstPGVkm5NGooQxJ4HbykvBHo0Zj6Bfwmipiwe/1Mkq5uE=
+X-Received: by 2002:a0c:f0c4:0:b0:63d:2a59:e446 with SMTP id
+ d4-20020a0cf0c4000000b0063d2a59e446mr15316751qvl.22.1692855076692; Wed, 23
+ Aug 2023 22:31:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Date: Wed, 23 Aug 2023 22:28:02 -0700
+Message-ID: <CACyXjPycDO5qNT=ibbS=4Wqvua+tDVtn3dhQ-dw1gJaktMOj6w@mail.gmail.com>
+Subject: Does the Samba AD functionality support setting up a Samba server as
+ a DC in a subdomain to an existing forest?
+To: samba-technical <samba-technical@lists.samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,96 +72,26 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>,
- Upstream Samba Technical Mailing list <samba-technical@lists.samba.org>
+From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Wed, 2023-08-23 at 12:04 -0700, Christof Schmitt wrote:
-> On Fri, Aug 18, 2023 at 12:08:00PM +1200, Andrew Bartlett via samba-
-> technical wrote:
-> > On Fri, 2023-08-18 at 11:52 +1200, Douglas Bagnall wrote:
-> > > On 18/08/23 11:20, Andrew Bartlett via samba-technical wrote:
-> > > > We need to reduce our CI time, and one way to do that is to
-> > > > reuseobjects as much as possible, creating read-only objects
-> > > > once
-> > > > per class,not per test.
-> > > > This is much cleaner if with the addCleanup() and
-> > > > addClassCleanup()methods, so I would like to be able to do
-> > > > that.
-> > > > To do that we need Python 3.8.  The primary blocker for this is
-> > > > theCentOS 7 build which uses Python 3.6 from EPEL, and a newer
-> > > > Python isnot in that repo.
-> > > 
-> > > I had a look at the Python 3.8 git history for Lib/unittest to
-> > > see if
-> > > it would be simple to backport/recreate the ClassCleanup code
-> > > into
-> > > our TestCase wrappers (like we used to do for various assert
-> > > methods), and the answer is NO. Thankfully.
-> > > I have no opinions about Centos 7, but I do agree that the
-> > > supported
-> > > Python versions need to be exactly determined by CI.
-> > > Douglas
-> > 
-> > I would note that times when we didn't line up the CI version and
-> > Python 'supported' version, it kept breaking. 
-> > I note that RHEL7 ends 'maintenance' in June 2024, just after the
-> > 4.20
-> > release March 2024
-> > https://www.redhat.com/en/blog/end-maintenance-red-hat-enterprise-linux-7-almost-here
-> > 
-> > Those dates I think give good cause to drop CentOS 7, but other
-> > views
-> > still welcome.
-> 
-> Maybe based on the comments in this thread, dropping CentOS 7 and
-> requiring a newer Python version could be takes as two separate
-> steps?
-> Whoever is running something based on CentOS 7 might not be upgrading
-> to
-> the latest Samba?
-> 
-> And what are the Python dependencies? That obviously affects ADDC and
-> testcases, but maybe not the file server and AD member parts?
+Hi folks,
 
-I would rather leave this until we can move for a more significant
-reason.  
+I want to set up one (or two) Samba DCs in, say test.qa as dc1 and
+dc2. There seems to be clear documentation on how to do this.
 
-As an example, I and others put a lot of effort into getting off Ubuntu
-18.04 because we could remove a pile of in-tree cryptography, and a lot
-of #ifdefs around a GnuTLS feature.  That was a useful gain. 
+Then I want to set up another Samba DC in subdom.test.qa as dc1.subdom.test=
+.qa.
 
-Getting Python 3.8 features would have been handy, but without that,
-and given the work folks have done to get us a GnuTLS backport, the
-reasons to drop CentOS become less compelling (essentially just the CI
-cost). 
-
-I note that SerNet is still building Samba for CentOS 7: 
-https://samba.plus/centos
-
-If we break the AD DC testcases, and worse still the AD DC
-provisioning, we also break the fileserver tests, as most of those need
-the AD DC operating. 
-
-I'll close off the MR.  It was worth a try.
-
-Andrew Bartlett
+Is this supported by Samba 4.19 and how would I go about doing it?
 
 
--- 
-Andrew Bartlett (he/him)       https://samba.org/~abartlet/
-Samba Team Member (since 2001) https://samba.org
-Samba Team Lead                https://catalyst.net.nz/services/samba
-Catalyst.Net Ltd
-
-Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
-company
-
-Samba Development and Support: https://catalyst.net.nz/services/samba
-
-Catalyst IT - Expert Open Source Solutions
-
+--=20
+Regards,
+Richard Sharpe
+(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
+=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
+=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
 
