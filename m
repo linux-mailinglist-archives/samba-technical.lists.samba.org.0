@@ -2,46 +2,45 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEA5B78A1C9
-	for <lists+samba-technical@lfdr.de>; Sun, 27 Aug 2023 23:16:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0887678A34B
+	for <lists+samba-technical@lfdr.de>; Mon, 28 Aug 2023 01:07:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
-	bh=1ohQPdowGLmLEs6QMA3XDeI9DdHpNx2YFCxJjfYt6JQ=; b=TDei7FEevvyOX+ebaOi0kC52pZ
-	2mov/EFdgYziMGkArUg+4g953Z+xiVuAuDd30bPPpEI7/bOrMVx5NrLetPlAFHNdXeKwUVEBZ9NBq
-	TgRPLwy5IrtkMwlkXC22tncQSHWlCntpJ+cSwI6P6FeA3nGxHDVQcZo6YARQaNm+YFlDsK49QZqSH
-	LxnKc4T5+OCS+eaI44PiFQT6QTuM6ESL0lMKZiOwS7FRRdLP4OYL8rOOYad9zdJTQMbdXJRvIW6UR
-	GDyZ1wfTfUloLcG3cJSa+DpbyqFiYO3+8t7QfJJBFZgoFaT7aPkiVSBvfRK2TvQvcpw8qIkjfspo/
-	Smf/gXZQ==;
-Received: from ip6-localhost ([::1]:61396 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:Date:To:Subject:cc;
+	bh=tykSuDPV40DpeTFDFs3ZJIuvC5bt8yl5Y5GMhzO2Tuc=; b=fO3IKjw7D/Z9fjHOCNfdbtgtuJ
+	4hGQYlHiyiUjW2nHrMABvbkDE3Iwxl8C8iUu24r1/PIDC4v1O988EY5tJKV0Wxh7XQBgaMq3kclOm
+	Y1uWb4m7I7KCy9E0FJqvJcf31mvgb510xhZTemIKqcZNhcQkQVEkgF631ySQGncOUCGO8f9Eeoglc
+	HfwYGwvEMXDCKf1sok43e5nSJ85P7eX75mVRLIlmtsOjvPsGbZBtEwPYQOa5C+Ygi+8mtzmXrJ4AD
+	yo7l6sNud0EQrEDZ5nAa5sdFDQX8yl+F0t4ZKitiHjm/KcOPl4TcF6bFIIEsZLjwG4xRA3cPlXOU/
+	pLm7Ue8w==;
+Received: from ip6-localhost ([::1]:28782 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qaN6X-00EuRS-Bv; Sun, 27 Aug 2023 21:15:29 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43764) 
+	id 1qaOqR-00Evki-BV; Sun, 27 Aug 2023 23:06:59 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:51240) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qaN6P-00EuRJ-Jj
- for samba-technical@lists.samba.org; Sun, 27 Aug 2023 21:15:25 +0000
+ (Exim) id 1qaOqL-00EvkY-73
+ for samba-technical@lists.samba.org; Sun, 27 Aug 2023 23:06:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=Date:Cc:To:From:Message-ID;
- bh=1ohQPdowGLmLEs6QMA3XDeI9DdHpNx2YFCxJjfYt6JQ=; b=kzyH4lyspBSkijuhadO4QXbeUS
- BpLb9gP/hl6BR7chRSSQr+RsuPMk9iHShjnxtDeCxUGO6bI2BLg2wNlug7CPtO/ZtbUwd/DbdzuNe
- LQooI5TbDtXGc39GYp+j2AVrq/N25ENhP/ls2vYYcBjEltL9J36jdGQVCC8Qe4YTEIlU88T+LBxJu
- GXwJNZIR0n6KChcS+3Jzhn8AarrfRGnyzZNYwgkNf2E2AlgTV2mWqVujIi2Et512K+GRMS+7sO6vT
- yQQ5dms01InJWlBBfeJfznp4mrPoo38jYTcQxst1DR+tAfggxuSa8xcy7iwYfzG25sEYcvgA3+1lN
- 3UAzzjl2alj990jZyKUFG/F7EwQfvkCUEr1Jj4hiP2n+wwgMH59TTFoz1RyJM2IT0MoLndJAQK+N2
- pl7JEqBFoWvSYFN58ssJi2C0YSaQNfA6KzMWmSHlD263RAPTkgmPINbFktYt1bFnfcDQF6462wIP0
- V3NWtnXI2Nja2AwbZDajbOAD;
+ s=42; h=Date:To:From:Message-ID:CC;
+ bh=tykSuDPV40DpeTFDFs3ZJIuvC5bt8yl5Y5GMhzO2Tuc=; b=DYbwv2E5DRdGIT64H83EWh3sQQ
+ 8XbB0DeYjeOMpiENLNlYH8x30pmLZPKQSQWcKfaCPBvQNl1Ls5/7Hz5ZrS2iAOap1ZKNZB7SM3Waj
+ LugdpHV8oY8VzY22s6EVEG82NpWzgWPuUFhihQKOWzNxzRx4K80g6HbY5UrtfkAoFWPLGniJ9ieuo
+ RNhJ2uAQ3aRV8OonHWrjewCqSZiuyHQCeZVuPabBhwCr6AfwqBxbQG4euw1kTCfhyqSPKpKcnqsrk
+ w82Uq+YkoHEStzF8bXLkZX0AkpE9yNiMsqFR1VkQCIwyHADZFt3Jd+LRoa443IjNTsoySe+BeYieP
+ xEcd6MFDeLOETW2Zh9hCBDNUStHVEl79vknc9s85FEOQW0YKQbUL39P/8cCp1OtYjSGboZfYPArkY
+ H8LygJkZrRtADHn0QFttT3RkFIPQ0pcDLYRdLE88uuL4hgY3j8eUpFyJkkb+0UoNwIXGYI4Ye8NB9
+ JEfklMkBIp04JwVtLtXpfx9Z;
 Received: from [127.0.0.2] (localhost [127.0.0.1])
  by hr2.samba.org with esmtpsa
  (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qaN6O-00AEKW-0p; Sun, 27 Aug 2023 21:15:20 +0000
-Message-ID: <26d2e0d49f039519491e1c1f85697c2da587894c.camel@samba.org>
-Subject: Re: Does the Samba AD functionality support setting up a Samba
- server as a DC in a subdomain to an existing forest?
-To: Richard Sharpe <realrichardsharpe@gmail.com>
-Date: Mon, 28 Aug 2023 09:15:17 +1200
-In-Reply-To: <CACyXjPwqcrMmevR3__EDXVSUzJkKd6TBxGcOB5FE=94FcjPUsw@mail.gmail.com>
-References: <CACyXjPycDO5qNT=ibbS=4Wqvua+tDVtn3dhQ-dw1gJaktMOj6w@mail.gmail.com>
- <cf543da39afc8785f1ad3ccef17097868548c039.camel@samba.org>
- <CACyXjPwqcrMmevR3__EDXVSUzJkKd6TBxGcOB5FE=94FcjPUsw@mail.gmail.com>
+ (Exim) id 1qaOqI-00AEqq-1O; Sun, 27 Aug 2023 23:06:52 +0000
+Message-ID: <0e661725920d0ba58d5302d68354271cd5f929e8.camel@samba.org>
+Subject: samba4repo for Amazon linux 2023: Any notes?
+To: Nico Kadel-Garcia <nkadel@gmail.com>, samba-technical@lists.samba.org
+Date: Mon, 28 Aug 2023 11:06:46 +1200
+In-Reply-To: <44cfcdc452be42ee85a277c6ead6c7e06a59263a.camel@samba.org>
+References: <1430d5ec-f2fb-7021-0aa2-2a759a0dbefc@samba.org>
+ <CAOCN9rxbcN85rbz4YcP4815-YYLFDAmpsOjxwgspVHtHsjnzsg@mail.gmail.com>
+ <44cfcdc452be42ee85a277c6ead6c7e06a59263a.camel@samba.org>
 Content-Type: text/plain; charset="UTF-8"
 User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
@@ -61,64 +60,47 @@ List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
 From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
 Reply-To: Andrew Bartlett <abartlet@samba.org>
-Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On Thu, 2023-08-24 at 07:35 -0700, Richard Sharpe via samba-technical
+On Mon, 2023-08-14 at 08:43 +1200, Andrew Bartlett via samba-technical
 wrote:
-> On Wed, Aug 23, 2023 at 11:51 PM Andrew Bartlett <
-> abartlet@samba.org
-> > wrote:
-> > On Wed, 2023-08-23 at 22:28 -0700, Richard Sharpe via samba-
-> > technical wrote:
+> On Sat, 2023-08-12 at 17:59 -0400, Nico Kadel-Garcia via samba-
+> technical wrote:
+> > On Mon, Jul 24, 2023 at 8:29 AM Jule Anger via samba-technical<
+> > samba-technical@lists.samba.org
+> > > wrote:
+> > > Hi,
+> > > Samba 4.19.0rc1 is scheduled for Friday, July 28 2023.
 > > 
-> > Hi folks,
-> > 
-> > 
-> > I want to set up one (or two) Samba DCs in, say test.qa as dc1 and
-> > 
-> > dc2. There seems to be clear documentation on how to do this.
-> > 
-> > 
-> > Then I want to set up another Samba DC in subdom.test.qa as
-> > dc1.subdom.test.qa.
-> > 
-> > 
-> > Is this supported by Samba 4.19 and how would I go about doing it?
-> > 
-> > 
-> > 
-> > Not as a subdomain in an existing forest.  Only as a distinct
-> > forest.
-> > 
-> > I started the work but never finished it.
-> > 
-> > Sorry,
+> > I've taken a shot at bringing this over to Amazon Linux 2023,
+> > alongwith my RHEL 8 and 9 tools over at
+> > https://github.com/nkadel/samba4repo/
+> >  . Unfortunately, the bits
+> > ofmissing dependency get out of hand *really* fast. so I'm going to
+> > haveto set it aside until and unless Amazon decides to port a *lot*
+> > moreof the Fedora release they branched from. It's not the first
+> > time
+> > I'verun into the problem. If anyone else wants to take a shot, I'm
+> > happyto post my notes.
 > 
-> What would it take to complete that work? Not that I have lots of
-> spare time, but ...
+> I have greatly appreciated your work here, thanks so much for your
+> continuing attention to this packaging effort.
+> Your notes on Amazon Linux 2023 would be very useful.
+> Thanks!
+> Andrew Bartlett
 
-To finish it would take a lot of time, but to get something to a state
-where you could use it for error injection and basic tests might be
-simpler.  And I love having more developers on the AD code.
+Nico,
 
-5583208aed0e4647269e48aa1d3c5c48a73001ac removed the ability to access
-the code that is in master, we deliberately didn't remove the
-underlying code, just the point of access that was confusing to our
-users.
+Any chance you can post those Amazon Linux 2023 notes?
 
-There are some branches here that might have bits you need:
- https://git.samba.org/abartlet/samba.git/?p=abartlet/samba.git/.git;a=heads
+As you know I did some work in that area in the past. 
 
-Metze might also have some patches in his tree, I'm sure he will
-mention a reference if he has one.
-
-His repo is here: https://git.samba.org/?p=metze/samba/wip.git;a=heads
+Amazon Linux keeps on being just on the outside of Samba's easily-
+supported and CI-tested distribution set and it would be very useful to
+keep track of the details and requirements there. 
 
 Andrew Bartlett
-
-
 -- 
 Andrew Bartlett (he/him)       https://samba.org/~abartlet/
 Samba Team Member (since 2001) https://samba.org
