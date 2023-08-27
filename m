@@ -2,57 +2,50 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 446D97893B2
-	for <lists+samba-technical@lfdr.de>; Sat, 26 Aug 2023 05:44:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CEA5B78A1C9
+	for <lists+samba-technical@lfdr.de>; Sun, 27 Aug 2023 23:16:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Subject:To:Date;
-	bh=pvrkTtsmm5GdNisINCysW+cT3Wq806c5HaeOFtu9a/c=; b=dJmKhxYHyxYrinPapiKJ3g5jkp
-	Cd4comwXWLZxv5JfgVyLKNZ2DXiwn2USQPNdoEmys6AkYU8k9TeuAz3jURITSWZBfTk2fm3VjWrLU
-	Iw535yrh3J3jiSAUOrsEphxD0UY21PlQ0l5WikR3RTWo0uRv/xzQDqbiOMp7LA+sHzdhG5OVMW4YZ
-	BOsbFFeCZmj3l74pLJbN9coS6pCz8yVHaMcx8N6vI++OXUd1Nlsw+y34dT4oJM0l1M/0o9AxTwSGI
-	rzZhifNvnluVeFHgyACgjQXkkuHnia5ulFO/JOUwnlb23Q6FPz+BlOxyxqSjy1PUvFsDcrfckKkcN
-	W8n/VfXw==;
-Received: from ip6-localhost ([::1]:38682 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:Date:To:Subject;
+	bh=1ohQPdowGLmLEs6QMA3XDeI9DdHpNx2YFCxJjfYt6JQ=; b=TDei7FEevvyOX+ebaOi0kC52pZ
+	2mov/EFdgYziMGkArUg+4g953Z+xiVuAuDd30bPPpEI7/bOrMVx5NrLetPlAFHNdXeKwUVEBZ9NBq
+	TgRPLwy5IrtkMwlkXC22tncQSHWlCntpJ+cSwI6P6FeA3nGxHDVQcZo6YARQaNm+YFlDsK49QZqSH
+	LxnKc4T5+OCS+eaI44PiFQT6QTuM6ESL0lMKZiOwS7FRRdLP4OYL8rOOYad9zdJTQMbdXJRvIW6UR
+	GDyZ1wfTfUloLcG3cJSa+DpbyqFiYO3+8t7QfJJBFZgoFaT7aPkiVSBvfRK2TvQvcpw8qIkjfspo/
+	Smf/gXZQ==;
+Received: from ip6-localhost ([::1]:61396 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qZkDS-00EXcA-QH; Sat, 26 Aug 2023 03:44:02 +0000
-Received: from mail.ozlabs.org ([2404:9400:2221:ea00::3]:37905
- helo=gandalf.ozlabs.org) 
+	id 1qaN6X-00EuRS-Bv; Sun, 27 Aug 2023 21:15:29 +0000
+Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:43764) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qZkDL-00EXc0-HN
- for samba-technical@lists.samba.org; Sat, 26 Aug 2023 03:44:00 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meltin.net;
- s=202004; t=1693021408;
- bh=pvrkTtsmm5GdNisINCysW+cT3Wq806c5HaeOFtu9a/c=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=XdTWqWZmgL2tzZxrgYsWDq5LYfSahTIzVQS9mZ+kaMuBBHRcAZJk3TCwHFr4305/e
- qKfOZia4yXkX+6XWGvAGXcbq7sNiDhwuS2LL4QxA/trFhTqEBxZcPI2XBn2CPgegr/
- EHuemFy/vRUds1zflep0dAA+Btyk0MWl2fK9ARJqtf+1qysnbUnv0oCom3r6tXWqH9
- am8GkwirNaGy1gyfmH63DTNntJmeZ9PwBmnkbrgY5nJ99iXKWw92foaJZ9aPyHzdPd
- qjFAJ4ZeOilnK+lEVeqsl6jWPrLngea+JLASQprmqcWUbdQjDF529Rn+/tu5kOqvL1
- IowOSj1kKDVEw==
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
- server-digest SHA256) (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4RXjN007B3z4wy6;
- Sat, 26 Aug 2023 13:43:26 +1000 (AEST)
-Date: Sat, 26 Aug 2023 13:43:25 +1000
-To: Douglas Bagnall <douglas.bagnall@catalyst.net.nz>
-Subject: Re: increased `make test` logging in syslog with "debug syslog
- format = always"
-Message-ID: <20230826134325.1e7a11f4@martins.ozlabs.org>
-In-Reply-To: <0b6e0b93-ac34-da36-287d-7581a177ba54@catalyst.net.nz>
-References: <6a0d3223-321a-624d-111e-1c1a67ef4396@catalyst.net.nz>
- <d37fb34bffdc0ef6f3bae57eef17a399f46d37f6.camel@samba.org>
- <bb9223b0-ec58-83ff-bad8-a241fa003ec6@catalyst.net.nz>
- <20230726203352.6c6cfa15@martins.ozlabs.org>
- <0b6e0b93-ac34-da36-287d-7581a177ba54@catalyst.net.nz>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.37; x86_64-pc-linux-gnu)
+ (Exim) id 1qaN6P-00EuRJ-Jj
+ for samba-technical@lists.samba.org; Sun, 27 Aug 2023 21:15:25 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
+ s=42; h=Date:Cc:To:From:Message-ID;
+ bh=1ohQPdowGLmLEs6QMA3XDeI9DdHpNx2YFCxJjfYt6JQ=; b=kzyH4lyspBSkijuhadO4QXbeUS
+ BpLb9gP/hl6BR7chRSSQr+RsuPMk9iHShjnxtDeCxUGO6bI2BLg2wNlug7CPtO/ZtbUwd/DbdzuNe
+ LQooI5TbDtXGc39GYp+j2AVrq/N25ENhP/ls2vYYcBjEltL9J36jdGQVCC8Qe4YTEIlU88T+LBxJu
+ GXwJNZIR0n6KChcS+3Jzhn8AarrfRGnyzZNYwgkNf2E2AlgTV2mWqVujIi2Et512K+GRMS+7sO6vT
+ yQQ5dms01InJWlBBfeJfznp4mrPoo38jYTcQxst1DR+tAfggxuSa8xcy7iwYfzG25sEYcvgA3+1lN
+ 3UAzzjl2alj990jZyKUFG/F7EwQfvkCUEr1Jj4hiP2n+wwgMH59TTFoz1RyJM2IT0MoLndJAQK+N2
+ pl7JEqBFoWvSYFN58ssJi2C0YSaQNfA6KzMWmSHlD263RAPTkgmPINbFktYt1bFnfcDQF6462wIP0
+ V3NWtnXI2Nja2AwbZDajbOAD;
+Received: from [127.0.0.2] (localhost [127.0.0.1])
+ by hr2.samba.org with esmtpsa
+ (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
+ (Exim) id 1qaN6O-00AEKW-0p; Sun, 27 Aug 2023 21:15:20 +0000
+Message-ID: <26d2e0d49f039519491e1c1f85697c2da587894c.camel@samba.org>
+Subject: Re: Does the Samba AD functionality support setting up a Samba
+ server as a DC in a subdomain to an existing forest?
+To: Richard Sharpe <realrichardsharpe@gmail.com>
+Date: Mon, 28 Aug 2023 09:15:17 +1200
+In-Reply-To: <CACyXjPwqcrMmevR3__EDXVSUzJkKd6TBxGcOB5FE=94FcjPUsw@mail.gmail.com>
+References: <CACyXjPycDO5qNT=ibbS=4Wqvua+tDVtn3dhQ-dw1gJaktMOj6w@mail.gmail.com>
+ <cf543da39afc8785f1ad3ccef17097868548c039.camel@samba.org>
+ <CACyXjPwqcrMmevR3__EDXVSUzJkKd6TBxGcOB5FE=94FcjPUsw@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Warn: EHLO/HELO not verified: Remote host 2404:9400:2221:ea00::3
- (mail.ozlabs.org) incorrectly presented itself as gandalf.ozlabs.org
+Content-Transfer-Encoding: 8bit
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,61 +59,77 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Martin Schwenke via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Martin Schwenke <martin@meltin.net>
-Cc: samba-technical <samba-technical@lists.samba.org>,
- Andrew Bartlett <abartlet@samba.org>
+From: Andrew Bartlett via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Andrew Bartlett <abartlet@samba.org>
+Cc: samba-technical <samba-technical@lists.samba.org>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi Douglas,
-
-On Fri, 25 Aug 2023 15:15:59 +1200, Douglas Bagnall
-<douglas.bagnall@catalyst.net.nz> wrote:
-
-> On 26/07/23 22:33, Martin Schwenke wrote:
+On Thu, 2023-08-24 at 07:35 -0700, Richard Sharpe via samba-technical
+wrote:
+> On Wed, Aug 23, 2023 at 11:51 PM Andrew Bartlett <
+> abartlet@samba.org
+> > wrote:
+> > On Wed, 2023-08-23 at 22:28 -0700, Richard Sharpe via samba-
+> > technical wrote:
 > > 
-> > Can we just call debug_file_log() directly when necessary, like this?
-> >  
+> > Hi folks,
+> > 
+> > 
+> > I want to set up one (or two) Samba DCs in, say test.qa as dc1 and
+> > 
+> > dc2. There seems to be clear documentation on how to do this.
+> > 
+> > 
+> > Then I want to set up another Samba DC in subdom.test.qa as
+> > dc1.subdom.test.qa.
+> > 
+> > 
+> > Is this supported by Samba 4.19 and how would I go about doing it?
+> > 
+> > 
+> > 
+> > Not as a subdomain in an existing forest.  Only as a distinct
+> > forest.
+> > 
+> > I started the work but never finished it.
+> > 
+> > Sorry,
 > 
-> The answer is yes.
+> What would it take to complete that work? Not that I have lots of
+> spare time, but ...
 
-Yippity!  :-)
+To finish it would take a lot of time, but to get something to a state
+where you could use it for error injection and basic tests might be
+simpler.  And I love having more developers on the AD code.
 
-> > [...]
-> > I haven't tested this.  
-> 
-> I did. It worked -- or at least it returned things to where they were at 
-> some point in the past when syslog would get just the copyright lines 
-> from every make test.
+5583208aed0e4647269e48aa1d3c5c48a73001ac removed the ability to access
+the code that is in master, we deliberately didn't remove the
+underlying code, just the point of access that was confusing to our
+users.
 
-Thanks for testing it!
+There are some branches here that might have bits you need:
+ https://git.samba.org/abartlet/samba.git/?p=abartlet/samba.git/.git;a=heads
 
-> I forgot about this all because I had `logging = file` in my working 
-> tree's selftest/target/Samba4.pm, which made even the copyrights shut up.
+Metze might also have some patches in his tree, I'm sure he will
+mention a reference if he has one.
 
-I also forgot about it.  Thanks for remembering...
+His repo is here: https://git.samba.org/?p=metze/samba/wip.git;a=heads
 
-> > If it is OK, I think we could also revert the changes to
-> > dbghdrclass(), though we would be generating a header for no
-> > reason... but I think we did that before.  
+Andrew Bartlett
 
-I ended up leaving those changes.  I can't remember why I thought they
-could be reverted.  Looking again, I think they're all necessary to
-force the syslog-style header for stdout/stderr and to handle the
-switch from bool to enum.
 
-I'd be happy to hear an an alternative explanation that says we don't
-need those changes.  :-)
+-- 
+Andrew Bartlett (he/him)       https://samba.org/~abartlet/
+Samba Team Member (since 2001) https://samba.org
+Samba Team Lead                https://catalyst.net.nz/services/samba
+Catalyst.Net Ltd
 
-> Yeah. I will make an MR in a few days unless you do first.
+Proudly developing Samba for Catalyst.Net Ltd - a Catalyst IT group
+company
 
-I decided it was my turn to do the next part of this...
+Samba Development and Support: https://catalyst.net.nz/services/samba
 
-https://gitlab.com/samba-team/samba/-/merge_requests/3239
+Catalyst IT - Expert Open Source Solutions
 
-It is still going through CI, but I thought I'd create the MR.
-
-peace & happiness,
-martin
 
