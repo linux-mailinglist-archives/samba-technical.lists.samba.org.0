@@ -2,50 +2,68 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3726A78D2E0
-	for <lists+samba-technical@lfdr.de>; Wed, 30 Aug 2023 06:58:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 01F5D78E24D
+	for <lists+samba-technical@lfdr.de>; Thu, 31 Aug 2023 00:24:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=wQEDDSZO3z43SKQdVRMonTqL842Q19PQY2gBP2QYJeE=; b=ZebISB9ECMhkREY5NkUr9TeUaM
-	YKeRophl0QWNzPb9gZOkks21M1QfsaSex6DPRtgIGF4UU4a+1VZMyuLI8BCXlTQBt3nGqBHzpY3M+
-	6zD6LYaVmSrrZ7ZttrvWqQCmgLZls1+EgftSCRFWn1J5yxMWCNnLrJGLtts0AAEBKXGDmRyXyqkfR
-	2QXCO7ybKyoelpTsu8KE7fFLFyF3boiseyt6CB0a+u1XWlEJjMcF0jKeDtMAbdyM4GWc64wIY1DAz
-	8Oy230ZgAFj8dazHc0tCqvJRBcS55LsaIns3NzX7WEp23j/HhsW6EpmonrJMJ2MF8gpR1Voak9Ajy
-	WVJ3m18w==;
-Received: from ip6-localhost ([::1]:30574 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
+	bh=BLq31Tpnd5qlW9M9NhfL6hS9AavLYf4X3Zo+mAbpJfc=; b=cxdUC7VYmCeLzVRbPm+SwrBWvd
+	Kj6QZZv4fKVQEIcWghKOBjU0TMho6mZz32nXWf5YGiZ4eeRVlfD9laUNGU1sEt6e/zAQldfD5Ov6u
+	6E5nhq75J/9H17bndP1w5VuivnOYVsvjHXGJEvdCwwaMWcX+893XCGPgGkm0m0Bar070wWeCIMcRF
+	SY+mj6VejQtfpDldYKT4wdbjjTKmGqwcOXWf7Oj9Ak6lxMMmzRgvRFHxIbuNEUlSubimdBSYHYVrU
+	MKUaWMta22Rq2VCmDwZFXbagbN8tHU/XnSt3+NlqiDSGzv7anGWptJu35HKzlVsZS1+k8MM95lQJR
+	Qrsy2obw==;
+Received: from ip6-localhost ([::1]:50940 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qbDGf-00FSos-1R; Wed, 30 Aug 2023 04:57:25 +0000
-Received: from hr2.samba.org ([2a01:4f8:192:486::2:0]:39328) 
+	id 1qbTbL-00FeOx-Li; Wed, 30 Aug 2023 22:23:51 +0000
+Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b]:54338) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qbDGW-00FSoj-8F
- for samba-technical@lists.samba.org; Wed, 30 Aug 2023 04:57:22 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=samba.org; 
- s=42; h=From:To:Date:Message-ID:CC;
- bh=wQEDDSZO3z43SKQdVRMonTqL842Q19PQY2gBP2QYJeE=; b=Fzccp+jauXXCUkLafitjygDiGU
- PaLLBFAYfinXfUtzLM2zL4mk9F8t4rSyWyxEc+EEoDvXxH8z22j8oOHplZjfinS2rPNKIhGHR/TP4
- upcGZm0YuxKDBYyZik4EFUPervB+9wchgeS3y756zlzvCQFjjnjVGEe5e6dxhLXyC8f/ij1gb88Ol
- jf5inZlxf3EbopgyIr8fNUVDTTMwI1Mb8h5m+MaelFlHrt2oW8XQE2zpfTRzMpPYPYGynbWKqHCZj
- I9Wu2blVUNyQtN92rFjmnzfr87MbzSCddea6eNHZrRJknqDsgb9DplE3cAvNGApKPoS6zXqiUiy2h
- wH8yMBvRZgA0vSP+1DyOzGBjZSPtgreZyRD4+yiSVT+nJk1DOfkPbw0Ys21P2yFDlMosDY7QaiYUZ
- TlYBQ8yYdleUFHKiOU96IGDv5Zeeh6+KePblG0JFUW1/DQvDTmzXcHtVLWZLwKBsLj0Jxv+yzktc8
- R35JjGx6WqMms4o1F1qf25Xi;
-Received: from [127.0.0.2] (localhost [127.0.0.1])
- by hr2.samba.org with esmtpsa
- (TLS1.3:ECDHE_SECP256R1__ECDSA_SECP256R1_SHA256__CHACHA20_POLY1305:256)
- (Exim) id 1qbDGR-00Ahux-2X for samba-technical@lists.samba.org;
- Wed, 30 Aug 2023 04:57:13 +0000
-Message-ID: <0ba84cb6-1752-fe35-6d17-def18674d9f6@samba.org>
-Date: Wed, 30 Aug 2023 16:57:03 +1200
+ (Exim) id 1qbTbE-00FeOm-BN
+ for samba-technical@lists.samba.org; Wed, 30 Aug 2023 22:23:48 +0000
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2bd0a5a5abbso5102641fa.0
+ for <samba-technical@lists.samba.org>; Wed, 30 Aug 2023 15:23:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693434222; x=1694039022; darn=lists.samba.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BLq31Tpnd5qlW9M9NhfL6hS9AavLYf4X3Zo+mAbpJfc=;
+ b=QCArnHTmyv2/TaVyHW/XuC8gVoLmOxQss06vE5r8TQ8vGyOzzpmNb9w8W2A+uA1Nzq
+ RoE9lSZHh16an8x/uFIpTF/vLHfTr5kiU2F4PmnfHSbNCVQ8rfLBkrus4NyyVC+RVoBJ
+ uBH/T2y8G8VEHEAaFjYCExeOrqXodDJklrjWR3Nos/qlvpZhvmPMS7zRkXD3TqdLDgP6
+ MHXqQnCY3033NyOyt6kd3uLRgqmuuFJw8fDjIY+mhDfxWhMqBEXV4QIS0TKermG57G2h
+ F9AshppVW6PovdOlPLyr1gLFdy24JJZHkmL8OqK8zVGye9pIyNIxmlDB/VV/vojk6Cam
+ Cm8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693434222; x=1694039022;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BLq31Tpnd5qlW9M9NhfL6hS9AavLYf4X3Zo+mAbpJfc=;
+ b=ZgOGfLa7muLuzUuuZR1VboCOl6ZPdsAbqhmz2SxSB6Y9vWSi3DDsFwFNojnfK5WxuK
+ 4iFKkn7p0Zvjj3n9Oygj/Q1BdSwkr4v4jp+xAC9rJ6Utgh+wFIS0FIOMdU8/CG6AqCjG
+ P3+a58Dr4PUMjJ3syKg1wLT79q7UZdLttZ/zw9qhAlUFUxFvHyaCwvxIjRWVIu3gY484
+ Q36yAwNxMm953zt3FF44fi9KVC2Sh1jZAwrs991//qqKW9enhtqmV3xA5NSAE9XOTlyD
+ kut/kBLOb9SCLbPEWEfL0VMYyCKQZL5K0qJCPXqIOJhVQXGQdZBabGYdpIsZsqswElBL
+ zC4A==
+X-Gm-Message-State: AOJu0Yx4+EfN92cm+C1bxTccIKAPmnkoPIJpHw42XTJ6ytVdD+2vhxfo
+ AhoXr9A4kxAvYedooQCK2oI6mLp5UzCrfBWC75cNj+26mRY=
+X-Google-Smtp-Source: AGHT+IF/NqWpM5wmMPpyZ1JHCdYa5ugk/qHdyvVkXo6CS6hQUIopF6q4v3jsyR9dkFdkZb8TPSV7j4BSPyL0bRTDy0c=
+X-Received: by 2002:a2e:9795:0:b0:2bc:daa2:7838 with SMTP id
+ y21-20020a2e9795000000b002bcdaa27838mr3075234lji.19.1693434221862; Wed, 30
+ Aug 2023 15:23:41 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: The changes for error injection in Samba AD-DC MSRPC requests
-To: samba-technical@lists.samba.org
-References: <CACyXjPx2EDb_w=MecJ=s-TP0bTCL02nFHM83KNG52JaNNVtdUw@mail.gmail.com>
-Content-Language: en-GB
-In-Reply-To: <CACyXjPx2EDb_w=MecJ=s-TP0bTCL02nFHM83KNG52JaNNVtdUw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <1430d5ec-f2fb-7021-0aa2-2a759a0dbefc@samba.org>
+ <CAOCN9rxbcN85rbz4YcP4815-YYLFDAmpsOjxwgspVHtHsjnzsg@mail.gmail.com>
+ <44cfcdc452be42ee85a277c6ead6c7e06a59263a.camel@samba.org>
+ <0e661725920d0ba58d5302d68354271cd5f929e8.camel@samba.org>
+In-Reply-To: <0e661725920d0ba58d5302d68354271cd5f929e8.camel@samba.org>
+Date: Wed, 30 Aug 2023 18:23:31 -0400
+Message-ID: <CAOCN9rznGkBr8_Q4J4LXfam4RTN=O7y0Vh1hoNQac+m6EvwvJw@mail.gmail.com>
+Subject: Re: samba4repo for Amazon linux 2023: Any notes?
+To: Andrew Bartlett <abartlet@samba.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,122 +77,64 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Joseph Sutton via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Joseph Sutton <jsutton@samba.org>
+From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
+Cc: samba-technical@lists.samba.org
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-On 30/08/23 4:48 am, Richard Sharpe via samba-technical wrote:
-> Hi folks,
-> 
-> Attached are two patches to provide early access and solicit feedback
-> on the error injection changes I have made so far. I suspect there are
-> mistakes I have made and there may be better ways to do this, so I
-> would appreciate feedback.
-> 
-> Since the code is under the GPL these patches must also be regarded as being so.
-> 
-> The changes allow you to add things like the following to the smb.conf:
-> 
-> "lsarpc error inject = lsa_LookupSids error NT_STATUS_RPC_CALL_FAILED
-> 5; lsa_LookupSids delay 3000 5"
-> 
-> The meaning of this is inject the specified error into LookupSids
-> responses very five requests and also delay them for 2 seconds.
-> 
-> The changes modify Pidl to generate code to:
-> 
-> 1. Parse the error injection parameter. This has to handle multiple
-> RPC requests etc and may be an issue in that there may be a limit to
-> the amount of text you can include. This is handled when the RPC
-> interface is initialized.
-> 2. Check and inject the errors when needed.
-> 
-> The potential problems I see:
-> 
-> 1. If I have not defined an smb.conf parameter for an MSRPC interface
-> you cannot inject errors for it. I see that during domain join LSA and
-> SAMR are used, but I have only enabled error injection for LSA. This
-> is easy to fix but requires a rebuild.
-> 2. I have done really ugly things in generate_param.py
-> 3. The code changes in librpc/rpc/dcesrv_core.c needs to be looked at carefully.
-> 
-> The good news is that it seems to work and is now async. The second
-> change was to ensure that if more than one client was calling MSRPC
-> requests and the first one required a delay the others would also not
-> hit a delay. In that respect you need to apply both changes.
-> 
-> The changes are based on 4.19.0rc1 but probably will apply cleanly to
-> other builds. I started with mainline but then dropped back to 4.19.0.
-> Also, there is an RPM SPEC file in the patch that you can possibly
-> ignore.
-> 
-> Any feedback at all is welcome.
-> 
+On Sun, Aug 27, 2023 at 7:06=E2=80=AFPM Andrew Bartlett <abartlet@samba.org=
+> wrote:
+>
+> On Mon, 2023-08-14 at 08:43 +1200, Andrew Bartlett via samba-technical
+> wrote:
+> > On Sat, 2023-08-12 at 17:59 -0400, Nico Kadel-Garcia via samba-
+> > technical wrote:
+> > > On Mon, Jul 24, 2023 at 8:29=E2=80=AFAM Jule Anger via samba-technica=
+l<
+> > > samba-technical@lists.samba.org
+> > > > wrote:
+> > > > Hi,
+> > > > Samba 4.19.0rc1 is scheduled for Friday, July 28 2023.
+> > >
+> > > I've taken a shot at bringing this over to Amazon Linux 2023,
+> > > alongwith my RHEL 8 and 9 tools over at
+> > > https://github.com/nkadel/samba4repo/
+> > >  . Unfortunately, the bits
+> > > of missing dependency get out of hand *really* fast. so I'm going to
+> > > have to set it aside until and unless Amazon decides to port a *lot*
+> > > more of the Fedora release they branched from. It's not the first
+> > > time
+> > > I've run into the problem. If anyone else wants to take a shot, I'm
+> > > happyto post my notes.
+> >
+> > I have greatly appreciated your work here, thanks so much for your
+> > continuing attention to this packaging effort.
+> > Your notes on Amazon Linux 2023 would be very useful.
+> > Thanks!
+> > Andrew Bartlett
+>
+> Nico,
+>
+> Any chance you can post those Amazon Linux 2023 notes?
+>
+> As you know I did some work in that area in the past.
 
-Looks interesting! I just have a few small pieces of feedback.
+I've been publishing a branch in my git repo with. It's messy, but
+the Makefile shows most of the problem by listing the required
+components of the dependency tree which I've encountered so far.
 
-diff --git a/docs-xml/smbdotconf/error_inject/lsa_inject.xml 
-b/docs-xml/smbdotconf/error_inject/lsa_inject.xml
-index 8c478cb8bb7..ec8758f30d1 100644
---- a/docs-xml/smbdotconf/error_inject/lsa_inject.xml
-+++ b/docs-xml/smbdotconf/error_inject/lsa_inject.xml
-@@ -11,7 +11,7 @@
-  	</para>
+    https://github.com/nkadel/samba4repo/blob/nkadel-amazon2023/Makefile
 
-  	<para>
--		This paremeter is meant for error injection.
-+		This parameter is meant for error injection.
-  	</para>
-  </description>
-  <value type="default">empty string</value>
+> Amazon Linux keeps on being just on the outside of Samba's easily-
+> supported and CI-tested distribution set and it would be very useful to
+> keep track of the details and requirements there.
 
-A small typo in the documentation (paremeter → parameter).
-
-
-
-diff --git a/pidl/lib/Parse/Pidl/Samba4/NDR/Server.pm 
-b/pidl/lib/Parse/Pidl/Samba4/NDR/Server.pm
-index e4474400a76..f32317d4ccd 100644
---- a/pidl/lib/Parse/Pidl/Samba4/NDR/Server.pm
-+++ b/pidl/lib/Parse/Pidl/Samba4/NDR/Server.pm
-@@ -147,7 +147,7 @@ static void $name\__op_unbind(struct 
-dcesrv_connection_context *context, const s
-  #endif
-  }
-
--struct rpc_err_inject err_inj_table_$name\[$num_calls] = {{0}};
-+static struct rpc_err_inject err_inj_table_$name\[$num_calls] = {{0}};
-
-  static NTSTATUS $name\__op_ndr_pull(struct dcesrv_call_state 
-*dce_call, TALLOC_CTX *mem_ctx, struct ndr_pull *pull, void **r)
-  {
-
-I think the err_inj_table_$name array can be made static.
-
-
-
-@@ -268,6 +268,7 @@ sub Boilerplate_Ep_Server($)
-
-
-  	pidl "
-+#ifdef LIB_PARAM_$uname\_ERROR_INJECT
-  static int find_$name\_function(const struct ndr_interface_table *table,
-  			     char *name)
-  {	int i;
-@@ -280,7 +281,6 @@ static int find_$name\_function(const struct 
-ndr_interface_table *table,
-  	return -1;
-  }
-
--#ifdef LIB_PARAM_$uname\_ERROR_INJECT
-  /* Process one error injection entry */
-  static NTSTATUS $name\_process_one_err_inj(const char *err_inj_param)
-  {
-
-The LIB_PARAM_$uname\_ERROR_INJECT #ifdef could be moved up to encompass 
-find_$name\_function() and avoid a build error.
-
-Regards,
-Joseph
+The recent "mock" enabled support for Amazon Linux  2023, makes simple
+build validation *so much easier*. But it's exposed the dependency
+quagmire, of components that Amazon has not elected to provide. But
+firebird? glusterfs? qt5? I personally do *not* want to take on
+importing qt5 to Amazon Linux 2023. And it's not availalbe, at first
+glance, for use on Amazon Linux 2023 itself. I've tried to port it,
+and it is also missing a lot of dependencies.
 
