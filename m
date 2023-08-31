@@ -2,60 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id D04FE78EE6F
-	for <lists+samba-technical@lfdr.de>; Thu, 31 Aug 2023 15:19:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3151E78EFE8
+	for <lists+samba-technical@lfdr.de>; Thu, 31 Aug 2023 17:03:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
-	bh=YwktsFBv/jfpfY7fPImIjgehtG3hEcmn6ipFzo+MHk8=; b=idFzI3xp82l5vWOPfGirurhYS6
-	EYtmOIECYPp0s4Kg2siueNMvqNmwOHGkSQmhU+WTzucwaWLi9iGGef8XCKXCVWSCQmbWRM1SPK1s4
-	C1+2+/U1j2u7HD5D0pqwSk2IE2TTt0RHEt8h4k1l5vhcvcY+KL9/sFcR3IvY2tBstCLRxMTi/2MUh
-	8ifkguYEVL+DXOQmYfyx3hZIibu2G+MatjGl8vu4oxM8ABT2qDdn0HL1RCTJiN+cF8BEITB/WYsHf
-	D16LDnTY2F7sUxlFgSFOAuD4AeKjasdBI2h5K8YGVyjUtL1oBZOZaGttJTLjt4BREwZBLEk/fpMg3
-	uuNbxClA==;
-Received: from ip6-localhost ([::1]:37578 helo=hr1.samba.org) 
+	bh=lnyb8N6q2eVDENybHNG9YWrciXpeQ1UoDqpye/cpjhc=; b=QIPpS7BknEWAObbrl7Epl2oHZv
+	n3i5iijEvq5Yjvb4xYIoWLXLMRzeykoKPQ6odU9n4JUvD+kiT3eMAFixtL54BZ1yEXGevIqQZo63S
+	A1HpC/ONhcCexKWFx/tRnFLspYYNAgcL1qOCDeWDO2DnjZokQIdo8QlrSsd4hrzwvJeYUzw7UCPmo
+	hNhmOYhKxbWFeZNmCvnmsY2ruXJ+1iNHVYT+zUXOkR3ushkY9Z17y4gsHvAuwOnoHg+goeYfgawKT
+	Gywnkxm1jac0VI/44Igvfc5qVCqy4+rW/N6PJeJKioBjMf42XhvtmvrD7CUSQgj4QayPfrFo7sR6k
+	pKA4UVYg==;
+Received: from ip6-localhost ([::1]:60844 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qbhZH-00FhJf-2M; Thu, 31 Aug 2023 13:18:39 +0000
-Received: from mail-qv1-xf36.google.com ([2607:f8b0:4864:20::f36]:57699) 
+	id 1qbjBq-00Fhji-MG; Thu, 31 Aug 2023 15:02:34 +0000
+Received: from mail-qk1-x733.google.com ([2607:f8b0:4864:20::733]:52696) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qbhZ9-00FhJW-29
- for samba-technical@lists.samba.org; Thu, 31 Aug 2023 13:18:35 +0000
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-64f387094ddso4546166d6.3
- for <samba-technical@lists.samba.org>; Thu, 31 Aug 2023 06:18:30 -0700 (PDT)
+ (Exim) id 1qbjBj-00FhjZ-GD
+ for samba-technical@lists.samba.org; Thu, 31 Aug 2023 15:02:31 +0000
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-76da0ed3b7aso55018985a.1
+ for <samba-technical@lists.samba.org>; Thu, 31 Aug 2023 08:02:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693487908; x=1694092708; darn=lists.samba.org;
+ d=gmail.com; s=20221208; t=1693494145; x=1694098945; darn=lists.samba.org;
  h=content-transfer-encoding:to:subject:message-id:date:from
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YwktsFBv/jfpfY7fPImIjgehtG3hEcmn6ipFzo+MHk8=;
- b=IpYZOzDk97tqoKzNc0qVZAtQRQGpXr71tgzRlkpdn2Ap3MHpPZBJoc/Oy+SWDmGvKg
- mfXxWNA+1L8yGQBey4ppeAsx4TQF/CjvqtmX5Gkj0EiFKiY7doqL1i1apcpe7ZdZMbRC
- sgRXzMv11dymnHs8zTQ97Xx0tO4gYTBQuZQIL6hnRAoBKMjLc3XpjGklMu4zQDRReDJI
- frGe/Z3TuNUOC0z2swvaRaCaDqZH2zi2voXKuHMFSQ8pDcJR/aaX2Y0bDR8Nk6fe14rk
- OqFTwseIiQOBtmETYhJFRN7H1JMfnXZMZI5Xe1yHNq0LnMA7wshuQz0LM6y9aVibMe0I
- S/QQ==
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lnyb8N6q2eVDENybHNG9YWrciXpeQ1UoDqpye/cpjhc=;
+ b=p3fT0QXHdXdWXtI6SeasTK9GwfSMEjlYkcDHg3BQvzPwy995WQogcQLGRbNk0AKOAs
+ rZ+r2TSoxarKw3SfefoVakph9pK4ymZhDMGlmgF80jsBmhddZdqOJTWysFso/Ekfp8Av
+ bOv7oYEDMAgeMq5Li9pweZF7tc2z5lS0zWw97RzvO+D0N1wSjl0BWyLJxojOEDO1EJqZ
+ 19+yD4i+VjUGpIFcSNHuftURbT9Q07fFjE8xQ4qipSSKepVNGjDyrAlRIZfoc8C7ma6Y
+ ATigPJv+lrIliZikj2yOQ0nNKjxopQ304664aNn3w+w7336Qb3su38XSHURcKazIG0tu
+ OfHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693487908; x=1694092708;
+ d=1e100.net; s=20221208; t=1693494145; x=1694098945;
  h=content-transfer-encoding:to:subject:message-id:date:from
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YwktsFBv/jfpfY7fPImIjgehtG3hEcmn6ipFzo+MHk8=;
- b=fSRLJLGxw7moGWy7tIGjI+fuq+9pjTvYkhTBpIuwW/5P8oKOfBM3W6ooEdzLqE9eiK
- 8PDon2TP14ItSkQijF1eYMfI5bGF2U8pmyY49tBceBkp+KSnWvXv3ORlIq47qze4yrUY
- Xbj1THmAGKKRUcGugWgKk5UyMlxbNY84GODxA1zoBhN6XZebEiwMKmht5IBnQuoIRv5D
- 3pxiddRcGhoESRlzfvWjXJaDVPHgmeHt6ecoST5YYHeEOE2tXEQnEdPpqqfVmiLfJdlF
- N7aQK8Txovc3/OS8Tj8+vN3oWp2y+n9cVlnbkUrb9BEA2OYRt+gCmfmPD2d8pbT0hXDR
- 9l8Q==
-X-Gm-Message-State: AOJu0YzU8eev+hB5VIdTLA+V0FyL3sl/+KMkpx1Ol4vENxQx7jWpsMEQ
- rjRQWx4Nj4O5xe9BGEUi1bXxftGu5hSCRkb5ta8tdV85cc0=
-X-Google-Smtp-Source: AGHT+IEIz6Jy0UScw/+LpuNjlwo6cSDBsJDEAdf+Ub+JlijjT+v5cnVKf+fSUSdUvuXfkRp2hsn5o5zo094+5vCX6S8=
-X-Received: by 2002:a05:6214:4602:b0:64f:3c68:98ea with SMTP id
- oq2-20020a056214460200b0064f3c6898eamr2596804qvb.2.1693487908554; Thu, 31 Aug
- 2023 06:18:28 -0700 (PDT)
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lnyb8N6q2eVDENybHNG9YWrciXpeQ1UoDqpye/cpjhc=;
+ b=evVfVcUmtUmL9vQOsWQGKkAdgWukMU2sT/Orjou3e+EAjqFtxytgi4MiX8bVhErW5i
+ q8gPZENMyjX2QmICarYQl2PgYAQFFjHCGj8e/WBdP2qZLbvu9MbBDs5L6REsw5ACMTcH
+ agFv+7oHq+CEVrZLFlzf66qFXU+C/3DezlhyWUxgBOzFAUn4oVjBz6Xk5oI4kH2lMtdq
+ HgoPH1Zdue2WMRKrHBAav7BhtlFfF7m3ZFIIhdDShwTMEfoeFisQidvsAiyu135zpK9v
+ mn8YoE/5lw4wNDUp4q3S7tZyfcwoSweIqiHx1nSXkqryL7LIwwYO9oiU1KzFPpfCMV0H
+ IOjw==
+X-Gm-Message-State: AOJu0Yyzf/JTjeioVbzHG4tAERwS7L3zOjh7U7uf9FhD2FK94t+BvQ9w
+ cCVqGa2T/OoKAnVtPkkqdiEO6Ofz1Y2HyCpjoApx0QfzQyE=
+X-Google-Smtp-Source: AGHT+IHSuivCbCE/zY4Xz35K4TkS8tdP9YRCQw4/kHzgXXYI6SakUaaO9IA/vuqDMWEU3t6Yqc1bvFUsi2cLyUYagpY=
+X-Received: by 2002:a0c:cc07:0:b0:649:8baa:2986 with SMTP id
+ r7-20020a0ccc07000000b006498baa2986mr3106018qvk.2.1693494145255; Thu, 31 Aug
+ 2023 08:02:25 -0700 (PDT)
 MIME-Version: 1.0
-Date: Thu, 31 Aug 2023 06:15:12 -0700
-Message-ID: <CACyXjPwWBuAu0PkYz=5XrDH1R087QsSWFt-izTqdiu4YEPaW0w@mail.gmail.com>
-Subject: I used --enable-developer and all I got was this lousy build failure
- ...
+References: <CACyXjPwWBuAu0PkYz=5XrDH1R087QsSWFt-izTqdiu4YEPaW0w@mail.gmail.com>
+In-Reply-To: <CACyXjPwWBuAu0PkYz=5XrDH1R087QsSWFt-izTqdiu4YEPaW0w@mail.gmail.com>
+Date: Thu, 31 Aug 2023 07:59:09 -0700
+Message-ID: <CACyXjPxk4O9uTeqSrpCG5m1uXNnzD4ydpqz5xuSh0hVsAe_qcA@mail.gmail.com>
+Subject: Re: I used --enable-developer and all I got was this lousy build
+ failure ...
 To: samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -77,42 +80,61 @@ Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-Hi folks,
+On Thu, Aug 31, 2023 at 6:15=E2=80=AFAM Richard Sharpe
+<realrichardsharpe@gmail.com> wrote:
+>
+> Hi folks,
+>
+> I user --enable-developer on configure and then built and got this:
+>
+> --------------------
+> ../../third_party/heimdal/lib/hcrypto/rsa-ltm.c: In function
+> =E2=80=98ltm_rsa_public_decrypt=E2=80=99:
+> ../../third_party/heimdal/lib/hcrypto/rsa-ltm.c:261:9: error: =E2=80=98si=
+ze=E2=80=99
+> may be used uninitialized in this function
+> [-Werror=3Dmaybe-uninitialized]
+>      size--; p++;
+>      ~~~~^~
+> ../../third_party/heimdal/lib/hcrypto/rsa-ltm.c:262:20: error: =E2=80=98p=
+=E2=80=99 may
+> be used uninitialized in this function [-Werror=3Dmaybe-uninitialized]
+>      while (size && *p =3D=3D 0xff) {
+>                     ^~
+> cc1: all warnings being treated as errors
+>
+> ../../third_party/heimdal/lib/hcrypto/bn.c: In function =E2=80=98hc_BN_is=
+_bit_set=E2=80=99:
+> ../../third_party/heimdal/lib/hcrypto/bn.c:238:24: warning: cast
+> discards =E2=80=98const=E2=80=99 qualifier from pointer target type [-Wca=
+st-qual]
+>      heim_integer *hi =3D (heim_integer *)bn;
+>                         ^
+> ../../third_party/heimdal/lib/hcrypto/bn.c: In function =E2=80=98hc_BN_ge=
+t_word=E2=80=99:
+> ../../third_party/heimdal/lib/hcrypto/bn.c:309:24: warning: cast
+> discards =E2=80=98const=E2=80=99 qualifier from pointer target type [-Wca=
+st-qual]
+>      heim_integer *hi =3D (heim_integer *)bn;
+> -----------------
+>
+> How do I fix this?
 
-I user --enable-developer on configure and then built and got this:
+Well, I solved this by just using --address-sanitizer and not using
+--developer, but now I get this:
 
 --------------------
-../../third_party/heimdal/lib/hcrypto/rsa-ltm.c: In function
-=E2=80=98ltm_rsa_public_decrypt=E2=80=99:
-../../third_party/heimdal/lib/hcrypto/rsa-ltm.c:261:9: error: =E2=80=98size=
-=E2=80=99
-may be used uninitialized in this function
-[-Werror=3Dmaybe-uninitialized]
-     size--; p++;
-     ~~~~^~
-../../third_party/heimdal/lib/hcrypto/rsa-ltm.c:262:20: error: =E2=80=98p=
-=E2=80=99 may
-be used uninitialized in this function [-Werror=3Dmaybe-uninitialized]
-     while (size && *p =3D=3D 0xff) {
-                    ^~
-cc1: all warnings being treated as errors
+=3D=3D22284=3D=3DYou are trying to dlopen a /usr/lib64/ldb/modules/ldb/asq.=
+so
+shared library with RTLD_DEEPBIND flag which is incompatibe with
+sanitizer runtime (see https://github.com/google/sanitizers/issues/611
+for details). If you want to run /usr/lib64/ldb/modules/ldb/asq.so
+library under sanitizers please remove RTLD_DEEPBIND from dlopen
+flags.
+--------------------
 
-../../third_party/heimdal/lib/hcrypto/bn.c: In function =E2=80=98hc_BN_is_b=
-it_set=E2=80=99:
-../../third_party/heimdal/lib/hcrypto/bn.c:238:24: warning: cast
-discards =E2=80=98const=E2=80=99 qualifier from pointer target type [-Wcast=
--qual]
-     heim_integer *hi =3D (heim_integer *)bn;
-                        ^
-../../third_party/heimdal/lib/hcrypto/bn.c: In function =E2=80=98hc_BN_get_=
-word=E2=80=99:
-../../third_party/heimdal/lib/hcrypto/bn.c:309:24: warning: cast
-discards =E2=80=98const=E2=80=99 qualifier from pointer target type [-Wcast=
--qual]
-     heim_integer *hi =3D (heim_integer *)bn;
------------------
+Can I safely remove RTLD_DEEPBIND?
 
-How do I fix this?
 
 --=20
 Regards,
