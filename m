@@ -2,67 +2,63 @@ Return-Path: <samba-technical-bounces@lists.samba.org>
 X-Original-To: lists+samba-technical@lfdr.de
 Delivered-To: lists+samba-technical@lfdr.de
 Received: from hr1.samba.org (hr1.samba.org [IPv6:2a01:4f8:192:486::1:0])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E67B78E24F
-	for <lists+samba-technical@lfdr.de>; Thu, 31 Aug 2023 00:29:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D04FE78EE6F
+	for <lists+samba-technical@lfdr.de>; Thu, 31 Aug 2023 15:19:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.samba.org; s=2954282; h=Cc:From:List-Id:To:Subject:Date;
-	bh=ZvEkz9FLSpvAhQSNY0kZhCILeZEEmYe1PS2jc/K2t/8=; b=GrjzNHX+vM2/AoGRoa1zB0mLCY
-	OFVs5yl8J2aFnUbd4oIlXY75Y4J0cOeJirLAJJ4uJl2q9oV954CLV1e/chIBR46srt5IAxk5mBoTk
-	diEPhTUrf+FATV5NyyOuFWa0gNYWdsnhoNFVr10GT9luIrtuzLATxzYAD2Fvy9ibv3zJ50hFZJgta
-	d1VogZKvjOVpYn2PUumz2SSIceLn0awQT4+ztlDq3oz8bBOKPD4l3oKjhsiNVrWk7b3bJFzj9At5T
-	Pgjq/R58DjG4oDEf/AYzmRF0UTkKQ7DwdbquwibfJxokHZTaeUpZAU8Tw6MHsye+TNQHADLouiqaB
-	vJQD1vOA==;
-Received: from ip6-localhost ([::1]:59090 helo=hr1.samba.org) 
+	d=lists.samba.org; s=2954282; h=From:List-Id:To:Subject:Date:cc;
+	bh=YwktsFBv/jfpfY7fPImIjgehtG3hEcmn6ipFzo+MHk8=; b=idFzI3xp82l5vWOPfGirurhYS6
+	EYtmOIECYPp0s4Kg2siueNMvqNmwOHGkSQmhU+WTzucwaWLi9iGGef8XCKXCVWSCQmbWRM1SPK1s4
+	C1+2+/U1j2u7HD5D0pqwSk2IE2TTt0RHEt8h4k1l5vhcvcY+KL9/sFcR3IvY2tBstCLRxMTi/2MUh
+	8ifkguYEVL+DXOQmYfyx3hZIibu2G+MatjGl8vu4oxM8ABT2qDdn0HL1RCTJiN+cF8BEITB/WYsHf
+	D16LDnTY2F7sUxlFgSFOAuD4AeKjasdBI2h5K8YGVyjUtL1oBZOZaGttJTLjt4BREwZBLEk/fpMg3
+	uuNbxClA==;
+Received: from ip6-localhost ([::1]:37578 helo=hr1.samba.org) 
 	by hr1.samba.org with esmtp (Exim)
-	id 1qbTgG-00FehI-5R; Wed, 30 Aug 2023 22:28:56 +0000
-Received: from mail-lj1-x22e.google.com ([2a00:1450:4864:20::22e]:60527) 
+	id 1qbhZH-00FhJf-2M; Thu, 31 Aug 2023 13:18:39 +0000
+Received: from mail-qv1-xf36.google.com ([2607:f8b0:4864:20::f36]:57699) 
  by hr1.samba.org with esmtps (TLS1.3:ECDHE_RSA_CHACHA20_POLY1305:256)
- (Exim) id 1qbTg6-00Feh8-2N
- for samba-technical@lists.samba.org; Wed, 30 Aug 2023 22:28:49 +0000
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2bbad32bc79so5587561fa.0
- for <samba-technical@lists.samba.org>; Wed, 30 Aug 2023 15:28:45 -0700 (PDT)
+ (Exim) id 1qbhZ9-00FhJW-29
+ for samba-technical@lists.samba.org; Thu, 31 Aug 2023 13:18:35 +0000
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-64f387094ddso4546166d6.3
+ for <samba-technical@lists.samba.org>; Thu, 31 Aug 2023 06:18:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693434525; x=1694039325; darn=lists.samba.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=gmail.com; s=20221208; t=1693487908; x=1694092708; darn=lists.samba.org;
+ h=content-transfer-encoding:to:subject:message-id:date:from
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZvEkz9FLSpvAhQSNY0kZhCILeZEEmYe1PS2jc/K2t/8=;
- b=DRn3D5j/TD4Az0BCYAow8WBIDFolfgjEee0VTylDG/hVzoqwaItXjxb+tWlOSvvWC5
- Crz7pdeFsEmHmUm5zPMnEjyD1IhqavSjdUJ+qF0OJsEdEgWmsr1L6F9zSh3pPs82xPUI
- rh9U/PurhP1qUkjwomRwiY+M3p0N3NFoHhpKxh9LVMig2cb6uZI45PZSMKxTOUgQK0kF
- KvEl6vUxr1ZsHkK8taDhauhVTYwPgXLYUemjkbH4Q8t/aL6seRYPafjmzDy1KNYK9cU/
- zMuyh7LLnlFf3d87af7kal8HPvWgDBx8oVk1oqdppLnyy72xwE3RAKYMQPjAQb1ogpVy
- CXaw==
+ bh=YwktsFBv/jfpfY7fPImIjgehtG3hEcmn6ipFzo+MHk8=;
+ b=IpYZOzDk97tqoKzNc0qVZAtQRQGpXr71tgzRlkpdn2Ap3MHpPZBJoc/Oy+SWDmGvKg
+ mfXxWNA+1L8yGQBey4ppeAsx4TQF/CjvqtmX5Gkj0EiFKiY7doqL1i1apcpe7ZdZMbRC
+ sgRXzMv11dymnHs8zTQ97Xx0tO4gYTBQuZQIL6hnRAoBKMjLc3XpjGklMu4zQDRReDJI
+ frGe/Z3TuNUOC0z2swvaRaCaDqZH2zi2voXKuHMFSQ8pDcJR/aaX2Y0bDR8Nk6fe14rk
+ OqFTwseIiQOBtmETYhJFRN7H1JMfnXZMZI5Xe1yHNq0LnMA7wshuQz0LM6y9aVibMe0I
+ S/QQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693434525; x=1694039325;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=1e100.net; s=20221208; t=1693487908; x=1694092708;
+ h=content-transfer-encoding:to:subject:message-id:date:from
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZvEkz9FLSpvAhQSNY0kZhCILeZEEmYe1PS2jc/K2t/8=;
- b=RYMe1zH4OqQVdjH2mIG3ZbQg4vB99lb5CelmWXTFmjjg8vnHtOpD1hxPoWuAetEjWb
- ke9hdlpyWpHSAeuyYJsWbrMab50Pcjbyzl9NmPxmpc19+xaRMZHcGU2siLRR1OTYLH1+
- Kha+Me5N6hKkFw/HHVGPbziW9l9fuhBQ9jVBTp7ODDwQplOve+eIFOylK/X6GH0Fdw6r
- MXw2MqArtMhW99VG3FTk66+VZQcEVK9SueNr/ZcpK0KkwRDut0DySv6VmFfvGybGSrOP
- dpqxfrK9S1bFFiGgoYroX3AsMt1cbK5OzU+NGRFeu/gfuwjXCkfN8Ypg6rmZ7dvcd+w8
- ymBA==
-X-Gm-Message-State: AOJu0YzKxGrn4o0EPP6QhQl0EfSegDKvAVgzvko2Z2x5cx+lhIPMdlbI
- OHbjI7/sL2OybImOzOrEG3gLXp2IxeCaipueiaan/yxM
-X-Google-Smtp-Source: AGHT+IHix3kUeW5jOQ6wbczkqSPsoYWLiDspTvN9hKe3S07u1tMmI3pMl4YmR3StvAmrGCsSwUv3K/ihruoRKeuKLX4=
-X-Received: by 2002:a2e:2c0f:0:b0:2b6:df71:cff1 with SMTP id
- s15-20020a2e2c0f000000b002b6df71cff1mr2442027ljs.52.1693434524643; Wed, 30
- Aug 2023 15:28:44 -0700 (PDT)
+ bh=YwktsFBv/jfpfY7fPImIjgehtG3hEcmn6ipFzo+MHk8=;
+ b=fSRLJLGxw7moGWy7tIGjI+fuq+9pjTvYkhTBpIuwW/5P8oKOfBM3W6ooEdzLqE9eiK
+ 8PDon2TP14ItSkQijF1eYMfI5bGF2U8pmyY49tBceBkp+KSnWvXv3ORlIq47qze4yrUY
+ Xbj1THmAGKKRUcGugWgKk5UyMlxbNY84GODxA1zoBhN6XZebEiwMKmht5IBnQuoIRv5D
+ 3pxiddRcGhoESRlzfvWjXJaDVPHgmeHt6ecoST5YYHeEOE2tXEQnEdPpqqfVmiLfJdlF
+ N7aQK8Txovc3/OS8Tj8+vN3oWp2y+n9cVlnbkUrb9BEA2OYRt+gCmfmPD2d8pbT0hXDR
+ 9l8Q==
+X-Gm-Message-State: AOJu0YzU8eev+hB5VIdTLA+V0FyL3sl/+KMkpx1Ol4vENxQx7jWpsMEQ
+ rjRQWx4Nj4O5xe9BGEUi1bXxftGu5hSCRkb5ta8tdV85cc0=
+X-Google-Smtp-Source: AGHT+IEIz6Jy0UScw/+LpuNjlwo6cSDBsJDEAdf+Ub+JlijjT+v5cnVKf+fSUSdUvuXfkRp2hsn5o5zo094+5vCX6S8=
+X-Received: by 2002:a05:6214:4602:b0:64f:3c68:98ea with SMTP id
+ oq2-20020a056214460200b0064f3c6898eamr2596804qvb.2.1693487908554; Thu, 31 Aug
+ 2023 06:18:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <1430d5ec-f2fb-7021-0aa2-2a759a0dbefc@samba.org>
- <CAOCN9rxbcN85rbz4YcP4815-YYLFDAmpsOjxwgspVHtHsjnzsg@mail.gmail.com>
- <44cfcdc452be42ee85a277c6ead6c7e06a59263a.camel@samba.org>
- <0e661725920d0ba58d5302d68354271cd5f929e8.camel@samba.org>
- <CAOCN9rznGkBr8_Q4J4LXfam4RTN=O7y0Vh1hoNQac+m6EvwvJw@mail.gmail.com>
-In-Reply-To: <CAOCN9rznGkBr8_Q4J4LXfam4RTN=O7y0Vh1hoNQac+m6EvwvJw@mail.gmail.com>
-Date: Wed, 30 Aug 2023 18:28:34 -0400
-Message-ID: <CAOCN9rzRvmu5ZZHHuRSDMzUEtWObP61gH68izzVZnAeCx37=uA@mail.gmail.com>
-Subject: Re: samba4repo for Amazon linux 2023: Any notes?
-To: Andrew Bartlett <abartlet@samba.org>
+Date: Thu, 31 Aug 2023 06:15:12 -0700
+Message-ID: <CACyXjPwWBuAu0PkYz=5XrDH1R087QsSWFt-izTqdiu4YEPaW0w@mail.gmail.com>
+Subject: I used --enable-developer and all I got was this lousy build failure
+ ...
+To: samba-technical <samba-technical@lists.samba.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: samba-technical@lists.samba.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,15 +72,52 @@ List-Post: <mailto:samba-technical@lists.samba.org>
 List-Help: <mailto:samba-technical-request@lists.samba.org?subject=help>
 List-Subscribe: <https://lists.samba.org/mailman/listinfo/samba-technical>,
  <mailto:samba-technical-request@lists.samba.org?subject=subscribe>
-From: Nico Kadel-Garcia via samba-technical <samba-technical@lists.samba.org>
-Reply-To: Nico Kadel-Garcia <nkadel@gmail.com>
-Cc: samba-technical@lists.samba.org
+From: Richard Sharpe via samba-technical <samba-technical@lists.samba.org>
+Reply-To: Richard Sharpe <realrichardsharpe@gmail.com>
 Errors-To: samba-technical-bounces@lists.samba.org
 Sender: "samba-technical" <samba-technical-bounces@lists.samba.org>
 
-In case i wasn't clear bout it: "mock" is not available, as best I can
-tell right now, for Amazon Linux 2023. There used to be an out-of-date
-one for Amazon linux 2, but I don't have access to those hosts right
-now to see if it's been kept up to date. It is one of *my* favorite
-tools for getting these builds compiling at all.
+Hi folks,
+
+I user --enable-developer on configure and then built and got this:
+
+--------------------
+../../third_party/heimdal/lib/hcrypto/rsa-ltm.c: In function
+=E2=80=98ltm_rsa_public_decrypt=E2=80=99:
+../../third_party/heimdal/lib/hcrypto/rsa-ltm.c:261:9: error: =E2=80=98size=
+=E2=80=99
+may be used uninitialized in this function
+[-Werror=3Dmaybe-uninitialized]
+     size--; p++;
+     ~~~~^~
+../../third_party/heimdal/lib/hcrypto/rsa-ltm.c:262:20: error: =E2=80=98p=
+=E2=80=99 may
+be used uninitialized in this function [-Werror=3Dmaybe-uninitialized]
+     while (size && *p =3D=3D 0xff) {
+                    ^~
+cc1: all warnings being treated as errors
+
+../../third_party/heimdal/lib/hcrypto/bn.c: In function =E2=80=98hc_BN_is_b=
+it_set=E2=80=99:
+../../third_party/heimdal/lib/hcrypto/bn.c:238:24: warning: cast
+discards =E2=80=98const=E2=80=99 qualifier from pointer target type [-Wcast=
+-qual]
+     heim_integer *hi =3D (heim_integer *)bn;
+                        ^
+../../third_party/heimdal/lib/hcrypto/bn.c: In function =E2=80=98hc_BN_get_=
+word=E2=80=99:
+../../third_party/heimdal/lib/hcrypto/bn.c:309:24: warning: cast
+discards =E2=80=98const=E2=80=99 qualifier from pointer target type [-Wcast=
+-qual]
+     heim_integer *hi =3D (heim_integer *)bn;
+-----------------
+
+How do I fix this?
+
+--=20
+Regards,
+Richard Sharpe
+(=E4=BD=95=E4=BB=A5=E8=A7=A3=E6=86=82=EF=BC=9F=E5=94=AF=E6=9C=89=E6=9D=9C=
+=E5=BA=B7=E3=80=82--=E6=9B=B9=E6=93=8D)(=E4=BC=A0=E8=AF=B4=E6=9D=9C=E5=BA=
+=B7=E6=98=AF=E9=85=92=E7=9A=84=E5=8F=91=E6=98=8E=E8=80=85)
 
